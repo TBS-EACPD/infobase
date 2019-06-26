@@ -75,3 +75,15 @@ a11y_end_added:
 a11y_end_removed:
   en: End removed
   fr: Fin des mots enlevés
+
+list_of_indicators:
+  en: List of indicators
+  fr: Liste des indicateurs
+
+indicator_counts_text:
+  transform: [handlebars,markdown]
+  en: |
+    In {{doc_year_1}} and/or {{doc_year_2}}, **{{infograph_res_link subject name}}** planned to measure **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicator" "indicators"}}.
+  fr: |
+    En {{doc_year_1}} et/ou {{doc_year_2}}, **{{infograph_res_link subject name}}** prévoyait mesurer **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicateur" "indicateurs"}}.
+    

@@ -81,18 +81,20 @@ const format_target_string = (indicator) => {
   return target + (indicator.measure ? `(${indicator.measure})` : '');
 };
 
-const process_indicators = (subject) => {
-  const matched_indicators = _.chain(Result.get_all())
+const get_indicators = (subject) => {
+  return  _.chain(Result.get_all())
     .filter(res => {
       const res_subject = Program.lookup(res.subject_id) || CRSO.lookup(res.subject_id);
-      return subject.level === 'dept' ? res_subject.dept === subject : res_subject === subject;
+      return subject.level === 'dept' ? res_subject.dept === subject : res_subject === subject || res_subject.crso === subject;
     })
     .map(res => res.indicators)
     .flatten()
     .groupBy("stable_id")
     .map(pair => _.sortBy(pair, "doc"))
     .value();
+};
 
+const process_indicators = (matched_indicators) => {
   const processed_indicators = _.map(matched_indicators, (indicator_pair) => {
     if (indicator_pair.length===2){
       return {
@@ -117,6 +119,7 @@ const process_indicators = (subject) => {
   return processed_indicators;
 };
 
+
 export default class TextDiffApp extends React.Component {
   constructor(props) {
     super(props);
@@ -133,18 +136,18 @@ export default class TextDiffApp extends React.Component {
       subject,
     } = this.state;
 
-
     ensure_loaded({
       subject,
       results: true,
       result_docs: _.chain(result_docs).keys().filter( doc => /^dp[0-9]+/ ).takeRight(2).value(),
     })
       .then( () => {
-        const processed_indicators = process_indicators(subject);
-        this.setState({first_load: false, subject: subject, loading: false, processed_indicators: processed_indicators});
-      });
+        const matched_indicators = get_indicators(subject);
+        const processed_indicators = process_indicators(matched_indicators);
+        
+        this.setState({first_load: false, subject: subject, loading: false, matched_indicators: matched_indicators, processed_indicators: processed_indicators});
+      });  }
 
-  }
 
   static getDerivedStateFromProps(props, state){
     const {
@@ -163,7 +166,6 @@ export default class TextDiffApp extends React.Component {
       subject,
     } = this.state;
 
-
     if(loading){
       ensure_loaded({
         subject,
@@ -171,10 +173,11 @@ export default class TextDiffApp extends React.Component {
         result_docs: _.chain(result_docs).keys().filter( doc => /^dp[0-9]+/ ).takeRight(2).value(),
       })
         .then( () => {
-          const processed_indicators = process_indicators(subject);
-          this.setState({subject: subject, loading: false, processed_indicators: processed_indicators});
-        });
-    }
+          const matched_indicators = get_indicators(subject);
+          const processed_indicators = process_indicators(matched_indicators);
+          
+          this.setState({first_load: false, subject: subject, loading: false, matched_indicators: matched_indicators, processed_indicators: processed_indicators});
+        });    }
   }
 
   render() {
@@ -182,6 +185,7 @@ export default class TextDiffApp extends React.Component {
       loading,
       subject,
       processed_indicators,
+      matched_indicators,
     } = this.state;
 
     const { 
@@ -193,7 +197,12 @@ export default class TextDiffApp extends React.Component {
 
     const current_dept = subject.level === 'dept' ? subject : subject.dept;
 
-    const years = _.chain(result_docs).keys().filter( doc => /^dp[0-9]+/ ).takeRight(2).value();
+    // TODO: allow this to change
+    const years = _.chain(result_docs)
+      .keys()
+      .filter( doc => /^dp[0-9]+/ )
+      .takeRight(2)
+      .value();
 
     return (
       <StandardRouteContainer
@@ -204,10 +213,10 @@ export default class TextDiffApp extends React.Component {
         beta={true}
       >
         <TM k="diff_title" el="h1" />
-        <div className="text-diff__instructions">
+        <div className={classNames("medium_panel_text","text-diff__instructions")}>
           <TM k="diff_intro_text"/>
         </div>
-        <div>
+        <div className={classNames("medium_panel_text")}>
           <label htmlFor='select_dept'>
             <TM k="select_dept" />
           </label>
@@ -222,7 +231,7 @@ export default class TextDiffApp extends React.Component {
             options={ _.map(all_depts, dept => ({id: dept.id, display: dept.fancy_name}) )}
           />
         </div>
-        <div>
+        <div className={classNames("medium_panel_text")}>
           <label htmlFor='select_cr'>
             <TM k="select_cr" />
           </label>
@@ -240,16 +249,14 @@ export default class TextDiffApp extends React.Component {
 
         {loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
           <div>
+            <h3>{text_maker("list_of_indicators")}</h3>
+            <div>{subject_intro(subject, matched_indicators.length, years)}</div>
             {_.map(processed_indicators, processed_indicator => indicator_report(processed_indicator, years) )}
           </div>}
       </StandardRouteContainer>
     );
   }
 }
-
-TextDiffApp.defaultProps = {
-  subject: Dept.lookup(326),
-};
 
 const get_subject_from_props = (props) => {
   const {
@@ -265,6 +272,24 @@ const get_subject_from_props = (props) => {
   }
   return props.subject; // default
 };
+
+TextDiffApp.defaultProps = {
+  subject: Dept.lookup(326),
+};
+
+const subject_intro = (subject, num_indicators, years) =>
+  <div className="medium_panel_text">
+    <TM 
+      k={"indicator_counts_text"}
+      args={{
+        subject: subject,
+        name: subject.name,
+        doc_year_1: result_docs[years[0]].year,
+        doc_year_2: result_docs[years[1]].year,
+        num_indicators: num_indicators,
+      }}
+    />
+  </div>;
 
 
 const get_status_flag = (indicator_status, num_texts, years) => {

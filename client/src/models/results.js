@@ -168,7 +168,6 @@ class Result {
     return entity_indexed_results[id] || [];
   }
   static create_and_register(def){
-
     const { 
       id,
       subject_id,
@@ -210,10 +209,6 @@ class Result {
   }
   get indicators(){
     return Indicator.lookup_by_result_id(this.id);
-  }
-  //HACKY: this implies an internal service but not does catch all internal services
-  isInternalService(){
-    return parseInt(this.id.split('-')[1]) > 9000;
   }
   singular(){
     return trivial_text_maker('result');

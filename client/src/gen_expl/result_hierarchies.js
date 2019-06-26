@@ -9,7 +9,7 @@ import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './
 
 const { Dept, Program } = Subject;
 
-const indicator_date_sorter = _.identity(); //FIXE: sort indicators by their date!
+const indicator_date_sorter = _.identity(); //FIXME: sort indicators by their date!
 function result_to_node(result, parent_id, doc){
   return {
     data: {
