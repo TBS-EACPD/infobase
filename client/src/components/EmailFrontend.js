@@ -34,7 +34,6 @@ const get_values_for_automatic_fields = (automatic_fields) => {
   );
 };
 
-
 class EmailFrontend extends React.Component {
   constructor(props){
     super(props);
@@ -91,12 +90,87 @@ class EmailFrontend extends React.Component {
     const user_fields = _.omitBy(template, ({form_type}, key) => key === "meta" || !form_type);
 
     const all_required_user_fields_filled = _.chain(user_fields)
-      .filter( _.property("required") )
+      .omitBy( (field) => !field.required )
       .keys()
-      .every( (required_field_key) => !_.isUndefined(completed_template[required_field_key]) )
+      .every( (required_field_key) => 
+        (
+          !_.isUndefined(completed_template[required_field_key]) && 
+          !_.isEmpty(completed_template[required_field_key]) 
+        )
+      )
       .value();
     const ready_to_send = all_required_user_fields_filled && privacy_acknowledged;
 
+    const diable_forms = sent_to_backend || awaiting_backend_response;
+
+    const get_form_for_user_field = (field_info, field_key) => {
+
+      const EnumCheckbox = (label, key, is_checked) => (
+        <div key={`${key}_check`} className="checkbox">
+          <label htmlFor={`emailFrontend${key}`}>
+            <input 
+              id={`emailFrontend${key}`} 
+              type="checkbox" 
+              checked={is_checked} 
+              disabled={diable_forms}
+              onChange={
+                () => {
+                  this.setState({
+                    completed_template: {
+                      ...completed_template,
+                      [field_key]: _.chain(completed_template[field_key])
+                        .xor([key])
+                        .sort()
+                        .value(),
+                    },
+                  })
+                }
+              }
+            />
+            {label}
+          </label>
+        </div>
+      );
+
+      switch(field_info.form_type){
+        case 'checkbox':
+          return (
+            <div>
+              <b>{field_info.form_label[window.lang]}</b>
+              {
+                _.map(
+                  field_info.enum_values,
+                  (label_by_lang, key) => EnumCheckbox(
+                    label_by_lang[window.lang],
+                    key,
+                    _.includes(completed_template[field_key], key)
+                  )
+                )
+              }
+            </div>
+          );
+        case 'textarea':
+          return (
+            <Fragment>
+              <label htmlFor={`emailFrontend${field_key}`}>
+                {field_info.form_label[window.lang]}
+              </label>
+              <textarea
+                id={`emailFrontend${field_key}`}
+                disabled={diable_forms}
+                rows="5"
+                cols="33"
+                onChange={
+                  () => {
+                    // TODO
+                  }
+                }
+              />
+            </Fragment>
+          );
+      }
+    };
+ 
     return (
       <div className="email-backend-form">
         { loading && 
@@ -108,67 +182,14 @@ class EmailFrontend extends React.Component {
           <form>
             <fieldset>
               {
-              //  _.map(
-              //    fields,
-              //    (field) => (
-              //      <Fragment key={`${field.key}`}>
-              //        <div key={`${field.key}_check`} className="checkbox">
-              //          <label htmlFor={field.text_key}>
-              //            <input 
-              //              id={field.text_key} 
-              //              type="checkbox" 
-              //              checked={field.is_checked} 
-              //              disabled={sent_to_backend || awaiting_backend_response}
-              //              onChange={
-              //                () => {
-              //                  const current_field = field;
-              //                  this.setState({
-              //                    fields: _.map(
-              //                      fields,
-              //                      (field) => field.key !== current_field.key ?
-              //                        field :
-              //                        {
-              //                          ...field,
-              //                          is_checked: !field.is_checked,
-              //                        }
-              //                    ),
-              //                  })
-              //                }
-              //              }
-              //            />
-              //            {field.label}
-              //          </label>
-              //        </div>
-              //        { field.is_checked &&
-              //          <label key={`${field.key}_text`} className="email-backend-form__text-label">
-              //            {text_maker("email_frontend_details")}
-              //            <textarea
-              //              className="form-control"
-              //              maxLength="125"
-              //              value={field.additional_detail_input}
-              //              disabled={sent_to_backend || awaiting_backend_response}
-              //              onChange={
-              //                (event) => {
-              //                  const current_field = field;
-              //                  this.setState({
-              //                    fields: _.map(
-              //                      fields,
-              //                      (field) => field.key !== current_field.key ?
-              //                        field :
-              //                        {
-              //                          ...field,
-              //                          additional_detail_input: event.target.value,
-              //                        }
-              //                    ),
-              //                  });
-              //                }
-              //              }
-              //            />
-              //          </label>
-              //        }
-              //      </Fragment>
-              //    )
-              //  )
+                _.map(
+                  user_fields,
+                  (field_info, key) => (
+                    <div key={`${`${key}_form`}`} className={`email-backend-form__${field_info.form_type}`}>
+                      { get_form_for_user_field(field_info, key) }
+                    </div>
+                  )
+                )
               }
               <div className="email-backend-form__privacy-note">
                 <TM k="email_frontend_privacy_note" />
@@ -178,7 +199,7 @@ class EmailFrontend extends React.Component {
                       id={"email_frontend_privacy"} 
                       type="checkbox" 
                       checked={privacy_acknowledged} 
-                      disabled={sent_to_backend || awaiting_backend_response}
+                      disabled={diable_forms}
                       onChange={ () => this.setState({privacy_acknowledged: !privacy_acknowledged }) }
                     />
                     {text_maker("email_frontend_privacy_ack")}

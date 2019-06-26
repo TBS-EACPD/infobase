@@ -19,17 +19,17 @@ const get_email_template = (template_name) => fetch(
 ).then( (resp) => resp.json() );
 
 const send_completed_email_template = (template_name, completed_template) => fetch(
-  `${email_backend_url}/send_email`,
+  `${email_backend_url}/submit_email`,
   {
     method: 'POST',
     mode: "cors",
     headers: {'Content-Type': 'application/json'},
-    body: {
+    body: JSON.stringify({
       template_name,
       completed_template,
-    },
+    }),
   }
-).then( resp => {debugger;} );
+).then( ({status}) => /2[0-9][0-9]/.test(status) );
 
 export {
   get_email_template_names,

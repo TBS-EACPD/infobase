@@ -15,6 +15,11 @@
   }
 }
 
+.email-backend-form__textarea {
+  display: flex;
+  flex-direction: column;
+}
+
 .email-backend-form__privacy-note {
   border: 1px solid $highlightColor;
   margin: 5px;
