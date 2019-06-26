@@ -29,7 +29,7 @@ export class ShareModal extends React.Component {
     var currentTarget = e.currentTarget;
     setTimeout(() => {
       if (!currentTarget.contains(document.activeElement)) {
-        this.props.modalOff();
+        this.props.toggleModal(false);
       }
     }, 0);
   } ;
@@ -37,7 +37,7 @@ export class ShareModal extends React.Component {
   render() {
     const {
       subject,
-      modalOff,
+      toggleModal,
       title,
       url,
       show,
@@ -47,7 +47,7 @@ export class ShareModal extends React.Component {
     acronym = acronym == '' ? subject.name : acronym.toUpperCase();
 
     return (
-      <Modal show={show} onHide={modalOff}>
+      <Modal show={show} onHide={() => toggleModal(false)}>
         <div onBlur={this.onBlur}>
           <Modal.Header>
             <Modal.Title style={{fontSize: '130%'}}><img src='./svg/shareGrey.svg'/> {text_maker("share")}</Modal.Title>
@@ -73,8 +73,9 @@ export class ShareModal extends React.Component {
           </Modal.Body>
 
           <Modal.Footer>
-            <Button bsStyle="primary" onClick={modalOff}>Cancel</Button>
+            <Button bsStyle="primary" onClick={() => toggleModal(false)}>Cancel</Button>
           </Modal.Footer>
+          <div tabIndex='0' onFocus={() => toggleModal(false)} />
         </div>
       </Modal>
     )
