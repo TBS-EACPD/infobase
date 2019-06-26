@@ -29,7 +29,8 @@ const send_completed_email_template = (template_name, completed_template) => fet
       completed_template,
     }),
   }
-).then( ({status}) => /2[0-9][0-9]/.test(status) );
+).then( ({status}) => /2[0-9][0-9]/.test(status) ) // CORS preflight
+  .then( ({status}) => /2[0-9][0-9]/.test(status) ); // actually ending the email
 
 export {
   get_email_template_names,

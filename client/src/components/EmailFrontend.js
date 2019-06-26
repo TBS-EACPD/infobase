@@ -38,7 +38,7 @@ class EmailFrontend extends React.Component {
   constructor(props){
     super(props);
 
-    this.initial_state = {
+    this.state = {
       template_name: props.template_name,
       loading: true,
       privacy_acknowledged: false,
@@ -47,8 +47,6 @@ class EmailFrontend extends React.Component {
       template: {},
       completed_template: {},
     };
-
-    this.state = this.initial_state;
   }
   componentDidMount(){
     get_email_template(this.props.template_name)
@@ -233,7 +231,12 @@ class EmailFrontend extends React.Component {
                     style={{float: "right"}}
                     onClick={ (event) => {
                       event.preventDefault();
-                      this.setState(this.initial_state);
+                      this.setState({
+                        ...this.state,
+                        sent_to_backend: false,
+                        awaiting_backend_response: false,
+                        completed_template: {},
+                      });
                     }}
                   >
                     {text_maker("email_frontend_reset")}
