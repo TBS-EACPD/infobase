@@ -43,20 +43,22 @@ single_change:
   fr: Un seul changement
 
 words_changed:
-  en: 1 or more words changed
-  fr: Un ou plusieurs mots ont changés
+  en: One or more words changed
+  fr: Un ou plusieurs mots ont changés 
 
 no_diff:
   en: No change
   fr: Aucun changement
 
 indicator-added:
-  en: Indicator added
-  fr: Indicateur ajouté
+  transform: [handlebars]
+  en: Indicator added in {{second_year}}
+  fr: Indicateur ajouté pour {{second_year}}
 
 indicator-removed:
-  en: Indicator removed
-  fr: Indicateur enlevé
+  transform: [handlebars]
+  en: Indicator removed in {{second_year}}
+  fr: Indicateur enlevé pour {{second_year}}
 
 a11y_begin_added:
   en: Added

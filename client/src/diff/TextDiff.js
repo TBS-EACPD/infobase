@@ -15,6 +15,7 @@ import * as Diff from 'diff';
 import { Fragment } from 'react';
 import { formats } from '../core/format.js';
 import { result_docs } from '../models/results.js';
+import classNames from 'classnames';
 
 const { Dept, CRSO, Program } = Subject;
 
@@ -192,6 +193,8 @@ export default class TextDiffApp extends React.Component {
 
     const current_dept = subject.level === 'dept' ? subject : subject.dept;
 
+    const years = _.chain(result_docs).keys().filter( doc => /^dp[0-9]+/ ).takeRight(2).value();
+
     return (
       <StandardRouteContainer
         title={text_maker("diff_title")}
@@ -237,7 +240,7 @@ export default class TextDiffApp extends React.Component {
 
         {loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
           <div>
-            {_.map(processed_indicators, processed_indicator => indicator_report(processed_indicator) )}
+            {_.map(processed_indicators, processed_indicator => indicator_report(processed_indicator, years) )}
           </div>}
       </StandardRouteContainer>
     );
@@ -264,7 +267,7 @@ const get_subject_from_props = (props) => {
 };
 
 
-const get_status_flag = (indicator_status, num_texts) => {
+const get_status_flag = (indicator_status, num_texts, years) => {
   if(num_texts > 1){
     return (
       <div className="text-diff__indicator-status--change">
@@ -282,57 +285,67 @@ const get_status_flag = (indicator_status, num_texts) => {
   if(indicator_status === 'dp18'){
     return (
       <div className="text-diff__indicator-status--removed">
-        {text_maker("indicator-removed")}
+        {text_maker("indicator-removed", {second_year: result_docs[years[1]].year})}
       </div>
     );
   }
   if(indicator_status === 'dp19'){
     return (
       <div className="text-diff__indicator-status--added">
-        {text_maker("indicator-added")}
+        {text_maker("indicator-added", {second_year: result_docs[years[1]].year})}
       </div>
     );
   }
   return "";
 };
 
-const indicator_report = (processed_indicator) => {
-  return (
-    <div key={processed_indicator.indicator1.stable_id} className="text-diff__indicator-report" >
-      <h4>
-        {processed_indicator.indicator2.name}
-      </h4>
-      {get_status_flag(processed_indicator.status, _.max([processed_indicator.name_diff.length, processed_indicator.methodology_diff.length, processed_indicator.target_diff.length]))}
+const indicator_report = (processed_indicator, years) => 
+  <div key={processed_indicator.indicator1.stable_id} className="text-diff__indicator-report" >
+    <div className="text-diff__indicator-report__header">
+      <h4>{processed_indicator.indicator2.name}</h4>
+    </div>
+    <div className="text-diff__indicator-report__body">
+      {get_status_flag(processed_indicator.status,
+        _.max([processed_indicator.name_diff.length, processed_indicator.methodology_diff.length, processed_indicator.target_diff.length]),
+        years)}
       { processed_indicator.name_diff.length > 1 ?
-        difference_report(processed_indicator.name_diff, "indicator_name") :
+        difference_report(processed_indicator.name_diff, "indicator_name", years) :
         no_difference(processed_indicator.indicator1.name, "indicator_name") }
       { processed_indicator.methodology_diff.length > 1 ?
-        difference_report(processed_indicator.methodology_diff, "indicator_methodology") :
+        difference_report(processed_indicator.methodology_diff, "indicator_methodology", years) :
         no_difference(processed_indicator.indicator1.methodology, "indicator_methodology") }
       { processed_indicator.target_diff.length > 1 ?
-        difference_report(processed_indicator.target_diff, "indicator_target") :
+        difference_report(processed_indicator.target_diff, "indicator_target", years) :
         no_difference(get_target_from_indicator(processed_indicator.indicator1), "indicator_target") }
       <div className="text-diff__id-tag">{`ID: ${processed_indicator.indicator1.stable_id}`}</div>
     </div>
-  );
-};
+  </div>;
+
 
 const no_difference = (text, key) =>
   <Fragment>
-    <h5>
-      {`${text_maker(key)} (${text_maker("no_diff")})`}
-    </h5>
-    <div>
+    <div className="text-diff__indicator-report__subheader" >
+      <h5>{`${text_maker(key)} (${text_maker("no_diff")})`}</h5>
+    </div>
+    <div className="text-diff__indicator-report__row">
       <div>{text}</div>
     </div>
   </Fragment>;
 
-const difference_report = (diff, key) =>
+const difference_report = (diff, key, years) => 
   <Fragment>
-    <h5>
-      {text_maker(key)}
-    </h5>
-    <div className="row">
+    <div className="text-diff__indicator-report__subheader" >
+      <h5>{text_maker(key)}</h5>
+    </div>
+    <div className={classNames("row","text-diff__indicator-report__row")}>
+      <div className="col-md-6" >
+        <h6>{result_docs[years[0]].year}</h6>
+      </div>
+      <div className="col-md-6" >
+        <h6>{result_docs[years[1]].year}</h6>
+      </div>
+    </div>
+    <div className={classNames("row","text-diff__indicator-report__row")}>
       <div className="col-md-6" >
         {_.map(diff, (part,iix) =>
           <Fragment key={iix}>
