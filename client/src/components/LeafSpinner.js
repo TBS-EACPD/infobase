@@ -21,6 +21,7 @@ export const LeafSpinner = ({config_name}) => {
       spinner_container_style: {
         transform: `scale(1)`,
         position: 'absolute',
+        top: '50%',
       },
       svg_modifier: _.identity,
     },
