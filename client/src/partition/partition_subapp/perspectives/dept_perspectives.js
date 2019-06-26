@@ -1,12 +1,7 @@
 import { Subject } from '../../../models/subject.js';
 import { text_maker } from '../partition_text_provider.js';
 import { PartitionPerspective } from './PartitionPerspective.js';
-
-import {
-  absolute_value_sort,
-  post_traversal_value_set,
-  post_traversal_search_string_set,
-} from './data_hierarchy_utils.js';
+import { get_org_hierarchy } from '../../../core/hierarchies.js'
 
 import { 
   get_common_popup_options, 
@@ -58,7 +53,6 @@ const dept_data_wrapper_node_rules = (node) => {
   }
 };
 
-
 const dept_perspective_popup_template = function(d){
   const common_popup_options = get_common_popup_options(d);
   if (d.data.is("program")) {
@@ -86,7 +80,7 @@ const dept_perspective_factory = (data_type) => new PartitionPerspective({
   name: text_maker("ministries"),
   data_type: data_type,
   formatter: node_data => wrap_in_brackets(formats_by_data_type[data_type](node_data[data_type])),
-  hierarchy_factory: () => create_ministry_hierarchy(data_type),
+  hierarchy_factory: () => get_org_hierarchy(Subject.Gov, data_type),
   data_wrapper_node_rules: dept_data_wrapper_node_rules,
   level_headers: {
     "1": text_maker("ministry"),
