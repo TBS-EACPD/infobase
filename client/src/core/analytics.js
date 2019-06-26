@@ -20,6 +20,15 @@ const dimensions = {
   SHA: "dimension16",
 };
 
+let client_id;
+const get_client_id = () => {
+  if ( _.isUndefined(client_id) ){
+    throw "Error: Google Analytics has not been initialized";
+  } else {
+    return client_id;
+  }
+};
+
 
 function initialize_analytics(){
   const is_dev = String(window.location.hostname).indexOf("tbs-sct.gc.ca") === -1;
@@ -29,7 +38,7 @@ function initialize_analytics(){
 
   ga(tracker => {
 
-    const client_id = tracker.get("clientId");   
+    client_id = tracker.get("clientId");   
     tracker.set(dimensions.CLIENT_ID, client_id);
     tracker.set(dimensions.DEV, String(is_dev));
     tracker.set(dimensions.SHA, window.sha);
@@ -100,5 +109,6 @@ export {
   log_standard_event,
   log_page_view,
   initialize_analytics,
+  get_client_id,
   dimensions,
 };
