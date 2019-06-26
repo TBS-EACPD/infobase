@@ -101,13 +101,14 @@ class EmailFrontend extends React.Component {
 
     const diable_forms = sent_to_backend || awaiting_backend_response;
 
+    const get_field_id = (field_key) => `emailFrontend${field_key}`;
     const get_form_for_user_field = (field_info, field_key) => {
 
       const EnumCheckbox = (label, key, is_checked) => (
         <div key={`${key}_check`} className="checkbox">
-          <label htmlFor={`emailFrontend${key}`}>
+          <label htmlFor={get_field_id(key)}>
             <input 
-              id={`emailFrontend${key}`} 
+              id={get_field_id(key)} 
               type="checkbox" 
               checked={is_checked} 
               disabled={diable_forms}
@@ -150,18 +151,24 @@ class EmailFrontend extends React.Component {
         case 'textarea':
           return (
             <Fragment>
-              <label htmlFor={`emailFrontend${field_key}`}>
+              <label htmlFor={get_field_id(field_key)}>
                 {field_info.form_label[window.lang]}
               </label>
               <textarea
-                id={`emailFrontend${field_key}`}
+                id={get_field_id(field_key)}
                 disabled={diable_forms}
                 rows="5"
                 cols="33"
+                defaultValue={completed_template[field_key] || ''}
                 onChange={
-                  () => {
-                    // TODO
-                  }
+                  _.debounce(
+                    () => this.setState({
+                      completed_template: {
+                        [field_key]: document.getElementById(`#${get_field_id(field_key)}`).value,
+                      },
+                    }),
+                    500
+                  )
                 }
               />
             </Fragment>
@@ -231,6 +238,12 @@ class EmailFrontend extends React.Component {
                     style={{float: "right"}}
                     onClick={ (event) => {
                       event.preventDefault();
+
+                      _.chain(user_fields)
+                        .pickBy( ({form_type}) => form_type === "textarea")
+                        .forEach( (field_info, key) => document.getElementById( get_field_id(key) ).value = '' )
+                        .value();
+
                       this.setState({
                         ...this.state,
                         sent_to_backend: false,
