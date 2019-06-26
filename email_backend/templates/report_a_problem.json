@@ -67,8 +67,8 @@
     "value_type": "string",
     "form_type": false
   },
-  "session_id": {
-    "required": false,
+  "client_id": {
+    "required": true,
     "value_type": "string",
     "form_type": false
   },

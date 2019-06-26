@@ -17,13 +17,31 @@ import './EmailFrontend.scss';
 
 const { TM, text_maker } = create_text_maker_component(text);
 
+
+const get_values_for_automatic_fields = (automatic_fields) => {
+  const automatic_field_getters = {
+    sha: () => window.sha,
+    route: () => window.location.hash.replace('#',''),
+    lang: () => window.lang,
+    app_version: () => window.is_a11y_mode ? "a11y" : "standard",
+    client_id: () => get_client_id(),
+    additional: () => ({}),
+  };
+
+  return _.mapValues(
+    automatic_fields,
+    (value, key) => _.isFunction(automatic_field_getters[key]) && automatic_field_getters[key]()
+  );
+};
+
+
 class EmailFrontend extends React.Component {
   constructor(props){
     super(props);
 
     this.initial_state = {
       template_name: props.template_name,
-      is_loading: true,
+      loading: true,
       privacy_acknowledged: false,
       sent_to_backend: false,
       awaiting_backend_response: false,
@@ -35,7 +53,7 @@ class EmailFrontend extends React.Component {
   }
   componentDidMount(){
     get_email_template(this.props.template_name)
-      .then( (template) => this.setState({is_loading: false, template: template}) );
+      .then( (template) => this.setState({loading: false, template: template}) );
   }
   componentDidUpdate(){
     const {
@@ -43,18 +61,26 @@ class EmailFrontend extends React.Component {
       awaiting_backend_response,
 
       template_name,
+      template,
       completed_template,
     } = this.state;
 
     if (awaiting_backend_response && !sent_to_backend){
-      send_completed_email_template(template_name, completed_template)
-        .then( () => this.setState({awaiting_backend_response: false}) );
+      const automatic_fields = _.omitBy(template, ({form_type}, key) => key === "meta" || form_type);
+
+      const values_for_automatic_fields = get_values_for_automatic_fields(automatic_fields);
+
+      send_completed_email_template(
+        template_name, 
+        {...completed_template, ...values_for_automatic_fields },
+      ).then( () => this.setState({awaiting_backend_response: false}) );
+
       this.setState({sent_to_backend: true});
     }
   }
   render(){
     const {
-      is_loading,
+      loading,
       privacy_acknowledged,
       sent_to_backend,
       awaiting_backend_response,
@@ -62,22 +88,23 @@ class EmailFrontend extends React.Component {
       completed_template,
     } = this.state;
 
-    const all_required_fields_filled = _.chain(template)
+    const user_fields = _.omitBy(template, ({form_type}, key) => key === "meta" || !form_type);
+
+    const all_required_user_fields_filled = _.chain(user_fields)
       .filter( _.property("required") )
       .keys()
       .every( (required_field_key) => !_.isUndefined(completed_template[required_field_key]) )
       .value();
-    const ready_to_send = all_required_fields_filled && privacy_acknowledged;
-
+    const ready_to_send = all_required_user_fields_filled && privacy_acknowledged;
 
     return (
       <div className="email-backend-form">
-        { is_loading && 
+        { loading && 
           <div style={{height: "50px"}}>
             <SpinnerWrapper config_name="medium_inline" />
           </div>
         }
-        { !is_loading &&
+        { !loading &&
           <form>
             <fieldset>
               {
