@@ -2,61 +2,6 @@ report_a_problem:
   en: Report a problem or mistake on this page
   fr: Signaler un problème ou une erreur sur cette page
 
-report_a_problem_legend:
-  en: |
-    Please select all that apply:
-  fr: |
-    Veuillez sélectionner toutes les cases qui s'appliquent :
-
-report_a_problem_details:
-  en: |
-    Provide more details (optional, maximum 125 characters):
-  fr: |
-    Fournissez plus de détails (optionnel, maximum 125 caractères) :
-
-
-report_a_problem_option_1:
-  en: A link, button or video is not working
-  fr: Un lien, un bouton ou une vidéo ne fonctionne pas
-report_a_problem_option_2:
-  en: It has a spelling mistake
-  fr: Il y a une erreur d'orthographe ou de grammaire
-report_a_problem_option_3:
-  en: Information is missing
-  fr: Les renseignements sont incomplets
-report_a_problem_option_4:
-  en: Information is outdated or wrong
-  fr: L'information n'est plus à jour ou est erronée
-report_a_problem_option_5:
-  en: I can't find what I'm looking for
-  fr: Je n'arrive pas à trouver ce que je cherche
-report_a_problem_option_6:
-  en: Other issue not in this list
-  fr: Autre problème qui ne figure pas sur cette liste
-
-report_a_problem_privacy_note:
-  en: |
-    Do not submit personal or identifying information when providing additional details.
-    These reports are temporarily stored on Google servers alongside anonymously collected analytics data.
-    Any personal information submitted here could serve to de-anonymize these analytics.
-  fr: |
-    TODO
-
-report_a_problem_privacy_ack:
-  en: I acknowledge
-  fr: TODO
-
-report_a_problem_send:
-  en: Submit
-  fr: TODO
-report_a_problem_has_sent:
-  en: Your report has been submitted. Thank you! To submit another report, reset this form with the following button.
-  fr: TODO
-report_a_problem_reset:
-  en: Reset
-  fr: TODO
-
-
 infobase_version_number:
   en: |
     Version number:

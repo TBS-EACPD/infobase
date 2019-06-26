@@ -40,37 +40,3 @@
     }
   }
 }
-
-.report-a-problem-menu {
-  margin-top: 3px;
-  border-top: 1px solid $separatorColor;
-  padding-top: 8px;
-}
-
-.report-a-problem-menu__text-label {
-  padding-left: 35px;
-  width: 100%;
-
-  & > textarea {
-    width: 100%;
-  }
-}
-
-.report-a-problem-menu__privacy-note {
-  border: 1px solid $highlightColor;
-  margin: 5px;
-  padding: 5px;
-
-  & > p {
-    margin: 0px;
-  }
-
-  & > .checkbox {
-    margin: 0px;
-    text-align: center;
-
-    & > label {
-      font-weight: $heavyFontWeight;
-    }
-  }
-}
