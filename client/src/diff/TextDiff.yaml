@@ -46,6 +46,10 @@ words_changed:
   en: One or more words changed
   fr: Un ou plusieurs mots ont changés 
 
+target_changed:
+  en: Target changed
+  fr: Cible changée
+
 no_diff:
   en: No change
   fr: Aucun changement

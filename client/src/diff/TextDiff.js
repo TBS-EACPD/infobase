@@ -292,13 +292,20 @@ const subject_intro = (subject, num_indicators, years) =>
   </div>;
 
 
-const get_status_flag = (indicator_status, num_texts, years) => {
+const get_status_flag = (indicator_status, num_texts, target_changed, years) => {
   if(num_texts > 1){
-    return (
+    return target_changed ?
+      <Fragment>
+        <div className="text-diff__indicator-status--change">
+          {text_maker("words_changed")}
+        </div>
+        <div className="text-diff__indicator-status--change">
+          {text_maker("target_changed")}
+        </div>
+      </Fragment> :
       <div className="text-diff__indicator-status--change">
         {text_maker("words_changed")}
-      </div>
-    );
+      </div>;
   }
   if (indicator_status === 'both'){
     return (
@@ -332,6 +339,7 @@ const indicator_report = (processed_indicator, years) =>
     <div className="text-diff__indicator-report__body">
       {get_status_flag(processed_indicator.status,
         _.max([processed_indicator.name_diff.length, processed_indicator.methodology_diff.length, processed_indicator.target_diff.length]),
+        processed_indicator.target_diff.length > 1,
         years)}
       { processed_indicator.name_diff.length > 1 ?
         difference_report(processed_indicator.name_diff, "indicator_name", years) :
