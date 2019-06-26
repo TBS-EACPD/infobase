@@ -44,7 +44,7 @@ single_change:
 
 words_changed:
   en: 1 or more words changed
-  fr: Un ou plusieurs mots changés
+  fr: Un ou plusieurs mots ont changés
 
 no_diff:
   en: No change
