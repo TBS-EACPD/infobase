@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import { create_text_maker } from '../models/text.js';
+import { create_text_maker_component } from '../util_components.js';
 import { SpinnerWrapper } from './SpinnerWrapper';
 
 import { 
@@ -15,7 +15,7 @@ import {
 import text from './EmailFrontend.yaml';
 import './EmailFrontend.scss';
 
-const text_maker = create_text_maker(text);
+const { TM, text_maker } = create_text_maker_component(text);
 
 class EmailFrontend extends React.Component {
   constructor(props){
@@ -45,7 +45,7 @@ class EmailFrontend extends React.Component {
       template_name,
       completed_template,
     } = this.state;
-    
+
     if (awaiting_backend_response && !sent_to_backend){
       send_completed_email_template(template_name, completed_template)
         .then( () => this.setState({awaiting_backend_response: false}) );
@@ -68,6 +68,7 @@ class EmailFrontend extends React.Component {
       .every( (required_field_key) => !_.isUndefined(completed_template[required_field_key]) )
       .value();
     const ready_to_send = all_required_fields_filled && privacy_acknowledged;
+
 
     return (
       <div className="email-backend-form">
@@ -141,30 +142,21 @@ class EmailFrontend extends React.Component {
               //      </Fragment>
               //    )
               //  )
-              //}
-              //{ any_active_additional_detail_input &&
-              //  <div className="email-backend-form__privacy-note">
-              //    <p>{text_maker("email_frontend_privacy_note")}</p>
-              //    <div className="checkbox">
-              //      { any_active_additional_detail_input &&
-              //        <label htmlFor={"email_frontend_privacy"}>
-              //          <input 
-              //            id={"email_frontend_privacy"} 
-              //            type="checkbox" 
-              //            checked={privacy_acknowledged} 
-              //            disabled={sent_to_backend || awaiting_backend_response}
-              //            onChange={ () => this.setState({privacy_acknowledged: !privacy_acknowledged }) }
-              //          />
-              //          {text_maker("email_frontend_privacy_ack")}
-              //        </label>
-              //      }
-              //    </div>
-              //  </div>
               }
-              <div>
-                <a href="#privacy" target="_blank" rel="noopener noreferrer">
-                  {text_maker("privacy_title")}
-                </a>
+              <div className="email-backend-form__privacy-note">
+                <TM k="email_frontend_privacy_note" />
+                <div className="checkbox">
+                  <label htmlFor={"email_frontend_privacy"}>
+                    <input 
+                      id={"email_frontend_privacy"} 
+                      type="checkbox" 
+                      checked={privacy_acknowledged} 
+                      disabled={sent_to_backend || awaiting_backend_response}
+                      onChange={ () => this.setState({privacy_acknowledged: !privacy_acknowledged }) }
+                    />
+                    {text_maker("email_frontend_privacy_ack")}
+                  </label>
+                </div>
               </div>
               { !sent_to_backend && !awaiting_backend_response &&
                 <button 
