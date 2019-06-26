@@ -5,30 +5,31 @@ const email_backend_url = window.is_dev ?
 const get_email_template_names = () => fetch(
   `${email_backend_url}/email_template_names`,
   {
-    method: 'GET',  
+    method: 'GET',
     mode: "cors",
   }
-).then( resp => resp.body );
+).then( resp => resp.text() );
 
 const get_email_template = (template_name) => fetch(
   `${email_backend_url}/email_template?template_name=${template_name}`,
   {
-    method: 'GET',  
+    method: 'GET',
     mode: "cors",
   }
-).then( resp => resp.body );
+).then( (resp) => resp.json() );
 
 const send_completed_email_template = (template_name, completed_template) => fetch(
   `${email_backend_url}/send_email`,
   {
-    method: 'POST',  
+    method: 'POST',
     mode: "cors",
+    headers: {'Content-Type': 'application/json'},
     body: {
       template_name,
       completed_template,
     },
   }
-).then( resp => resp.body );
+).then( resp => {debugger;} );
 
 export {
   get_email_template_names,

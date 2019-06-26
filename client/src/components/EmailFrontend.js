@@ -18,26 +18,46 @@ import './EmailFrontend.scss';
 const text_maker = create_text_maker(text);
 
 class EmailFrontend extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
 
     this.initial_state = {
+      template_name: props.template_name,
       is_loading: true,
       privacy_acknowledged: false,
-      sending: false,
-      has_been_sent: false,
+      sent_to_backend: false,
+      awaiting_backend_response: false,
       template: {},
       completed_template: {},
     };
 
     this.state = this.initial_state;
   }
+  componentDidMount(){
+    get_email_template(this.props.template_name)
+      .then( (template) => this.setState({is_loading: false, template: template}) );
+  }
+  componentDidUpdate(){
+    const {
+      sent_to_backend,
+      awaiting_backend_response,
+
+      template_name,
+      completed_template,
+    } = this.state;
+    
+    if (awaiting_backend_response && !sent_to_backend){
+      send_completed_email_template(template_name, completed_template)
+        .then( () => this.setState({awaiting_backend_response: false}) );
+      this.setState({sent_to_backend: true});
+    }
+  }
   render(){
     const {
       is_loading,
       privacy_acknowledged,
-      sending,
-      has_been_sent,
+      sent_to_backend,
+      awaiting_backend_response,
       template,
       completed_template,
     } = this.state;
@@ -70,7 +90,7 @@ class EmailFrontend extends React.Component {
               //              id={field.text_key} 
               //              type="checkbox" 
               //              checked={field.is_checked} 
-              //              disabled={has_been_sent || sending}
+              //              disabled={sent_to_backend || awaiting_backend_response}
               //              onChange={
               //                () => {
               //                  const current_field = field;
@@ -98,7 +118,7 @@ class EmailFrontend extends React.Component {
               //              className="form-control"
               //              maxLength="125"
               //              value={field.additional_detail_input}
-              //              disabled={has_been_sent || sending}
+              //              disabled={sent_to_backend || awaiting_backend_response}
               //              onChange={
               //                (event) => {
               //                  const current_field = field;
@@ -132,7 +152,7 @@ class EmailFrontend extends React.Component {
               //            id={"email_frontend_privacy"} 
               //            type="checkbox" 
               //            checked={privacy_acknowledged} 
-              //            disabled={has_been_sent || sending}
+              //            disabled={sent_to_backend || awaiting_backend_response}
               //            onChange={ () => this.setState({privacy_acknowledged: !privacy_acknowledged }) }
               //          />
               //          {text_maker("email_frontend_privacy_ack")}
@@ -146,24 +166,24 @@ class EmailFrontend extends React.Component {
                   {text_maker("privacy_title")}
                 </a>
               </div>
-              { !has_been_sent && !sending &&
+              { !sent_to_backend && !awaiting_backend_response &&
                 <button 
                   className="btn-sm btn btn-ib-primary"
-                  disabled={ !ready_to_send || sending }
+                  disabled={ !ready_to_send || awaiting_backend_response }
                   onClick={ (event) => {
                     event.preventDefault();
                     log_standard_event({
                       SUBAPP: window.location.hash.replace('#',''),
                       MISC1: "REPORT_A_PROBLEM",
                     });
-                    this.setState({sending: true});
+                    this.setState({awaiting_backend_response: true});
                   }}
                 >
-                  { !sending && text_maker("email_frontend_send")}
-                  { sending && <SpinnerWrapper config_name="small_inline" />}
+                  { !awaiting_backend_response && text_maker("email_frontend_send")}
+                  { awaiting_backend_response && <SpinnerWrapper config_name="small_inline" />}
                 </button>
               }
-              { has_been_sent &&
+              { sent_to_backend &&
                 <Fragment>
                   <span tabIndex="0">
                     {text_maker("email_frontend_has_sent")}
