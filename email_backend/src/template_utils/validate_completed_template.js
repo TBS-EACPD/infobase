@@ -9,7 +9,7 @@ const validate_completed_template = (original_template, completed_template) => {
   const required_fields_present = verify_required_fields_present(field_templates, completed_fields);
 
   const values_are_expected_and_match_value_types = verify_values_are_expected_and_match_value_types(field_templates, completed_fields);
-
+  
   return required_fields_present && values_are_expected_and_match_value_types;
 };
 
@@ -24,6 +24,7 @@ const verify_values_are_expected_and_match_value_types = (field_templates, compl
   .map(
     (field_value, field_key) => {
       const expected_type = _.get(field_templates, `${field_key}.value_type`);
+      const is_required = _.get(field_templates, `${field_key}.required`);
 
       if (expected_type){
         switch (expected_type){
@@ -34,13 +35,17 @@ const verify_values_are_expected_and_match_value_types = (field_templates, compl
           case "json":
             return _.isObject(field_value);
           case "enums":
-            return _.every(
-              field_value,
-              (enum_key) => _.chain(field_templates)
-                .get(`${field_key}.enum_values`)
-                .has(enum_key)
-                .value()
-            );
+            return _.chain(field_templates)
+              .get(`${field_key}.enum_values`)
+              .keys()
+              .thru(
+                (enum_values) => {
+                  const some_submitted_keys_are_not_enum_options = _.without(field_value, ...enum_values).length > 0;
+                  const required_field_but_no_valid_values = is_required && _.intersection(field_value, enum_values).length === 0;
+                  return !some_submitted_keys_are_not_enum_options && !required_field_but_no_valid_values;
+                }
+              )
+              .value();
           default:
             return false; //unexpected type in the json itself
         }

@@ -85,6 +85,13 @@ describe("validate_completed_template", () => {
     sha: "fenef8723hhf2h9jdj2j3d92093",
     bonus: "Free real estate",
   };
+  const invalid_completed_test_fields_empty_required_enums = {
+    enums: [],
+    issue: "I don't think the line graphs should always start at 0",
+    sha: "fenef8723hhf2h9jdj2j3d92093",
+    id: '1234qwert',
+    additional: { bleh: "blah", bluh: { blagh: "blargh" } },
+  };
 
   const test_completed_fields = [
     valid_completed_test_fields_complete,
@@ -92,6 +99,7 @@ describe("validate_completed_template", () => {
     invalid_completed_test_fields_missing_required,
     invalid_completed_test_fields_bad_value_type,
     invalid_completed_test_fields_bad_extra_field,
+    invalid_completed_test_fields_empty_required_enums,
   ];
 
   it("verify_required_fields_present checks that all fields marked required in the template are in the completed fields", () => {
@@ -104,6 +112,7 @@ describe("validate_completed_template", () => {
       true,
       true,
       false,
+      true,
       true,
       true,
     ]);
@@ -121,6 +130,7 @@ describe("validate_completed_template", () => {
       true,
       false,
       false,
+      false,
     ]);
   });
 
@@ -133,6 +143,7 @@ describe("validate_completed_template", () => {
     ).toEqual([
       true,
       true,
+      false,
       false,
       false,
       false,
