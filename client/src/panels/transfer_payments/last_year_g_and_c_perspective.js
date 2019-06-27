@@ -72,7 +72,7 @@ new PanelGraph({
                 title={subject.fancy_name}
                 totalValue={dept_exp_pa_last_year}
                 value={dept_tp_exp_pa_last_year}
-                descriptiveTextValue={`${fmt_dept_exp_pa_last_year} ${text_maker("of")} ${fmt_dept_tp_exp_pa_last_year}`}
+                descriptiveTextValue={`${fmt_dept_tp_exp_pa_last_year} ${text_maker("of")} ${fmt_dept_exp_pa_last_year}`}
               />
             </Col>
           </Fragment>
