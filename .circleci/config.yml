@@ -10,7 +10,6 @@ deploy_filter: &deploy_filter
     branches:
       only:
         - master
-        - text_diff
 
 version: 2
 jobs:
