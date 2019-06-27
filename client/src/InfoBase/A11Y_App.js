@@ -64,7 +64,7 @@ export class App extends React.Component {
               <Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />
               <Route path="/compare_estimates/:h7y_layout?" component={EstimatesComparison} />
               <Route path="/privacy" component={PrivacyStatement} />
-              <Route path="/diff/:org_id?/:crso_id?" component={TextDiff} />
+              <Route path="/diff/:org_id?/:crso_id?/:program_id?" component={TextDiff} />
               <Route path="/lab" component={Lab} />
               <Route path="/start/:no_basic_equiv?" component={Home} />
               <Route path="/" component={Home} />
