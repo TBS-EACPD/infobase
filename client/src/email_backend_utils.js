@@ -1,4 +1,4 @@
-const email_backend_url = window.is_dev ? 
+const email_backend_url = window.is_dev && !window.is_ci ? 
   `http://${ window.local_ip || "127.0.0.1" }:7331` :
   "https://us-central1-report-a-problem-email-244220.cloudfunctions.net/prod-email-backend";
 
