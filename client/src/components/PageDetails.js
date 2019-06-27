@@ -33,6 +33,7 @@ export class PageDetails extends React.Component {
           <Details
             summary_content={text_maker("report_a_problem")}
             content={<EmailFrontend template_name="report_a_problem" />}
+            persist_content={true}
           />
         </div>
         <div className="pagedetails__version-number fcol-md-4 fcol-sm-6">

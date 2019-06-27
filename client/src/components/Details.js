@@ -9,7 +9,7 @@ export class Details extends React.Component {
     };
   }
   render(){
-    const { summary_content, content } = this.props;
+    const { summary_content, content, persist_content } = this.props;
     const { isOpen } = this.state;
 
     const aria_labels = {
@@ -41,8 +41,8 @@ export class Details extends React.Component {
           </span>
         </span>
       </button>
-      <div className="IBDetails__Content">
-        { isOpen && content}
+      <div className={classNames("IBDetails__content", `IBDetails__content--${isOpen ? "open" : "closed"}`)}>
+        { (isOpen || persist_content) && content }
       </div>
     </div>;
   }
