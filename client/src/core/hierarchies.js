@@ -45,7 +45,16 @@ const set_default_values = (node, data_type) => {
 }
 
 
-const get_org_hierarchy = (root = Subject.gov, data_type = "exp", skip_crsos = true, post_traversal_function = set_default_values) => {
+const get_org_hierarchy = (options) => {
+  const defaults = {
+    root: Subject.gov,
+    data_type: "exp",
+    skip_crsos: true,
+    post_traversal_function: set_default_values,
+  }
+  const {
+    root, data_type, skip_crsos, post_traversal_function,
+  } = {...defaults, ...options};
   return d3.hierarchy(root,
     node => {
       if (node.is("gov")){

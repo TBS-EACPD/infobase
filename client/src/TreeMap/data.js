@@ -1,14 +1,13 @@
 import { Table } from '../core/TableClass.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import treemap_text from './TreeMap.yaml';
-import { create_text_maker } from '../models/text.js';
+import { get_org_hierarchy } from '../core/hierarchies.js'
 
+import { create_text_maker } from '../models/text.js';
 const tm = create_text_maker([treemap_text]);
 export const smaller_items_text = tm("smaller_items_text");
 
 import { Subject } from '../models/subject.js';
-
-
 const { Dept } = Subject;
 
 function has_non_zero_or_non_zero_children(node, perspective = "drf") {
@@ -400,6 +399,9 @@ export function get_data(perspective, year, filter_var, get_changes) {
   }
 
   if (perspective === "drf" || perspective === "drf_ftes") {
+    if(!get_changes){
+      return get_org_hierarchy({root: Subject.Gov, data_type: perspective, year: year, skip_crsos: false} )
+    }
     return get_data_drf(perspective, year, year_1, year_2, filter_var, get_changes);
   } else if (perspective === "so") {
     return get_data_so(perspective, year, year_1, year_2, filter_var, get_changes);

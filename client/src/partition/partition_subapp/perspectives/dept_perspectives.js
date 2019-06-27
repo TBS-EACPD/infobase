@@ -80,7 +80,7 @@ const dept_perspective_factory = (data_type) => new PartitionPerspective({
   name: text_maker("ministries"),
   data_type: data_type,
   formatter: node_data => wrap_in_brackets(formats_by_data_type[data_type](node_data[data_type])),
-  hierarchy_factory: () => get_org_hierarchy(Subject.Gov, data_type),
+  hierarchy_factory: () => get_org_hierarchy({root: Subject.Gov, data_type}),
   data_wrapper_node_rules: dept_data_wrapper_node_rules,
   level_headers: {
     "1": text_maker("ministry"),
