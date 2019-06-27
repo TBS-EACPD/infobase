@@ -1,17 +1,17 @@
 email_frontend_privacy_note:
   transform: [handlebars]
   en: Do not submit personal or identifying information through these forms. Read our privacy policy {{ext_link "here" "#privacy"}}.
-  fr: TODO
+  fr: Ne soumettez pas d'informations personnelles ou d'identification à l'aide de ces formulaires. Lisez notre déclaration de protection des renseignements personnels {{ext_link "ici" "#privacy"}}.
 email_frontend_privacy_ack:
-  en: I acknowledge
-  fr: TODO
+  en: I accept
+  fr: J'accepte
 
 email_frontend_send:
   en: Submit
-  fr: TODO
+  fr: Soumettre
 email_frontend_has_sent:
   en: Your report has been submitted. Thank you! To submit another report, reset this form with the following button.
-  fr: TODO
+  fr: Votre rapport a été soumis. Merci! Pour soumettre un autre rapport, réinitialiser cette formulaire en sélectionnant l’option « Réinitialiser ».
 email_frontend_reset:
   en: Reset
-  fr: TODO
+  fr: Réinitialiser
