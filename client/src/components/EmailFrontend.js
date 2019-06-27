@@ -173,6 +173,12 @@ class EmailFrontend extends React.Component {
               />
             </Fragment>
           );
+        case 'error':
+          return (
+            <label>
+              {field_info.form_label[window.lang]}
+            </label>
+          );
       }
     };
  
