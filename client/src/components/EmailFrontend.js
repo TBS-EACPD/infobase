@@ -21,7 +21,7 @@ const { TM, text_maker } = create_text_maker_component(text);
 const get_values_for_automatic_fields = (automatic_fields) => {
   const automatic_field_getters = {
     sha: () => window.sha,
-    route: () => window.location.hash.replace('#',''),
+    route: () => window.location.hash.replace('#','') || "start",
     lang: () => window.lang,
     app_version: () => window.is_a11y_mode ? "a11y" : "standard",
     client_id: () => get_client_id(),
