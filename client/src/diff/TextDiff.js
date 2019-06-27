@@ -119,6 +119,16 @@ const process_indicators = (matched_indicators) => {
   return processed_indicators;
 };
 
+const get_new_url = (subject) => {
+  if(subject.level === 'dept'){
+    return `/diff/${subject.id}`;
+  } else if(subject.level === 'crso'){
+    return `/diff/${subject.dept.id}/${subject.id}`;
+  } else {
+    return `/diff/${subject.dept.id}/${subject.crso.id}/${subject.id}`;
+  }
+}
+
 
 export default class TextDiffApp extends React.Component {
   constructor(props) {
@@ -225,7 +235,7 @@ export default class TextDiffApp extends React.Component {
             name='select_dept'
             selected={current_dept.id}
             onSelect={id => {
-              const new_url = `/diff/${id}/all`;
+              const new_url = get_new_url(Dept.lookup(id));
               history.push(new_url);
             }}
             options={ _.map(all_depts, dept => ({id: dept.id, display: dept.fancy_name}) )}
@@ -238,15 +248,41 @@ export default class TextDiffApp extends React.Component {
           <Select
             className='text-diff__selector'
             name='select_cr'
-            selected={subject.level === 'crso' ? subject.id : 'all'}
+            selected={subject.level === 'program' ?
+              subject.crso.id :
+              subject.level === 'crso' ? subject.id : 'all'}
             onSelect={id => {
-              const new_url = `/diff/${subject.level === 'dept' ? subject.id : subject.dept.id}/${id}`;
+              const new_url = get_new_url(CRSO.lookup(id));
               history.push(new_url);
             }}
             options={_.chain(crs_without_internal).map(cr => ({id: cr.id, display: cr.name})).concat([{id: 'all', display: text_maker('all_crs')}]).value() }
           />
         </div>
-
+        <div className={classNames("medium_panel_text")}>
+          <label htmlFor='select_program'>
+            <TM k="select_program" />
+          </label>
+          <Select
+            className='text-diff__selector'
+            name='select_program'
+            selected={subject.level === 'program' ? subject.id : 'all'}
+            onSelect={id => {
+              const new_url = get_new_url(Program.lookup(id));
+              history.push(new_url);
+            }}
+            options={_.chain(
+              subject.level === 'dept' ?
+                crs_without_internal :
+                subject.level === 'crso' ? [subject] : [subject.crso])
+              .map('programs')
+              .flatten()
+              .compact()
+              .map(prog => ({id: prog.id, display: prog.name}))
+              .concat([{id: 'all', display: text_maker('all_programs')}])
+              .value()
+            }
+          />
+        </div>
         {loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
           <div>
             <h3>{text_maker("list_of_indicators")}</h3>
@@ -261,9 +297,12 @@ export default class TextDiffApp extends React.Component {
 const get_subject_from_props = (props) => {
   const {
     match: {
-      params: { org_id, crso_id },
+      params: { org_id, crso_id, program_id },
     },
   } = props;
+  if(program_id && Program.lookup(program_id)){
+    return Program.lookup(program_id);
+  }
   if(crso_id && CRSO.lookup(crso_id)){
     return CRSO.lookup(crso_id);
   }

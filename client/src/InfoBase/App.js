@@ -72,7 +72,7 @@ export class App extends React.Component {
               <Route path="/compare_estimates/:h7y_layout?" component={EstimatesComparison} />
               <Route path="/privacy" component={PrivacyStatement} />
               <Route path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?" component={TreeMap} />
-              <Route path="/diff/:org_id?/:crso_id?" component={TextDiff} />
+              <Route path="/diff/:org_id?/:crso_id?/:program_id?" component={TextDiff} />
               <Route path="/lab" component={Lab} />
               <Route path="/" component={Home} />
             </Switch>

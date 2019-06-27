@@ -4,13 +4,14 @@
 
 .text-diff__text-part--added{
   color: $textColor;
-  background-color: rgba($successDarkColor,0.3)
+  background-color: rgba($successDarkColor,0.3);
 }
 
 
 .text-diff__text-part--removed{
   color: $textColor;
-  background-color: rgba($failDarkColor,0.3)
+  background-color: rgba($failDarkColor,0.3);
+  text-decoration: line-through;
 }
 
 .text-diff__id-tag {

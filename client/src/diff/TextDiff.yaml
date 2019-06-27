@@ -18,9 +18,19 @@ select_cr:
   fr: |
     Filtrer par responsabilité essentielle (optionnel):
 
+select_program:
+  en: |
+    Filter by program (optional):
+  fr: |
+    Filtrer par programme (optionnel):
+
 all_crs:
   en: All core responsibilities
   fr: Toutes les responsabilités essentielles
+
+all_programs:
+  en: All programs
+  fr: Toutes les programmes
 
 indicator_name:
   en: Indicator
