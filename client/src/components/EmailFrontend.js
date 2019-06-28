@@ -235,7 +235,7 @@ class EmailFrontend extends React.Component {
                       SUBAPP: window.location.hash.replace('#',''),
                       MISC1: "REPORT_A_PROBLEM",
                     });
-                    this.setState({awaiting_backend_response: true});
+                    this.setState({awaiting_backend_response: true, backend_response: {}});
                   }}
                 >
                   { !awaiting_backend_response && text_maker("email_frontend_send")}
