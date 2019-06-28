@@ -38,6 +38,13 @@ class EmailFrontend extends React.Component {
   constructor(props){
     super(props);
 
+    this.mergeIntoCompletedTemplateState = (key, value) => this.setState({
+      completed_template: {
+        ...this.state.completed_template,
+        [key]: value,
+      },
+    });
+
     this.state = {
       template_name: props.template_name,
       loading: true,
@@ -109,7 +116,7 @@ class EmailFrontend extends React.Component {
 
     const diable_forms = (sent_to_backend && backend_response.success) || awaiting_backend_response;
 
-    const get_field_id = (field_key) => `emailFrontend${field_key}`;
+    const get_field_id = (field_key) => `email_frontend_${field_key}`;
     const get_form_for_user_field = (field_info, field_key) => {
 
       const EnumCheckbox = (label, key, is_checked) => (
@@ -122,15 +129,13 @@ class EmailFrontend extends React.Component {
               disabled={diable_forms}
               onChange={
                 () => {
-                  this.setState({
-                    completed_template: {
-                      ...completed_template,
-                      [field_key]: _.chain(completed_template[field_key])
-                        .xor([key])
-                        .sort()
-                        .value(),
-                    },
-                  })
+                  this.mergeIntoCompletedTemplateState(
+                    field_key,
+                    _.chain(completed_template[field_key])
+                      .xor([key])
+                      .sort()
+                      .value()
+                  );
                 }
               }
             />
@@ -170,12 +175,11 @@ class EmailFrontend extends React.Component {
                 defaultValue={completed_template[field_key] || ''}
                 onChange={
                   _.debounce(
-                    () => this.setState({
-                      completed_template: {
-                        [field_key]: document.getElementById(`#${get_field_id(field_key)}`).value,
-                      },
-                    }),
-                    500
+                    () => this.mergeIntoCompletedTemplateState(
+                      field_key,
+                      document.getElementById(`${get_field_id(field_key)}`).value
+                    ),
+                    250
                   )
                 }
               />
