@@ -4,26 +4,26 @@ import { Table } from './TableClass.js';
 
 const absolute_value_sort = (a,b) => - ( Math.abs(a.value) - Math.abs(b.value) );
 
-const last_year_spending = (node) => {
+const last_year_spending = (node, year) => {
   const programSpending = Table.lookup('programSpending');
   if ( !programSpending.programs.has(node) ){  
     return false;
   }
-  return _.first(programSpending.programs.get(node))["{{pa_last_year}}exp"];
+  return _.first(programSpending.programs.get(node))[`{{${year}}}exp`];
 };
 
-const last_year_fte = (node) => {
+const last_year_fte = (node, year) => {
   const programFtes = Table.lookup('programFtes');
   if ( !programFtes.programs.has(node) ){  
     return false;
   }
-  return _.first(programFtes.programs.get(node))["{{pa_last_year}}"];
+  return _.first(programFtes.programs.get(node))[`{{${year}}}`];
 };
 
-const set_default_values = (node, data_type) => {
+const set_default_values = (node, data_type, year) => {
   if (node.data.is("program")){
-    node.exp = last_year_spending(node.data);
-    node.fte = last_year_fte(node.data);
+    node.exp = last_year_spending(node.data, year);
+    node.fte = last_year_fte(node.data, year);
     node.value = node[data_type];
   } else if (_.isUndefined(node.children)){
     node.value = false;
@@ -51,9 +51,10 @@ const get_org_hierarchy = (options) => {
     data_type: "exp",
     skip_crsos: true,
     post_traversal_function: set_default_values,
+    year: "pa_last_year",
   };
   const {
-    root, data_type, skip_crsos, post_traversal_function,
+    root, data_type, skip_crsos, post_traversal_function, year,
   } = {...defaults, ...options};
   return d3.hierarchy(root,
     node => {
@@ -72,7 +73,7 @@ const get_org_hierarchy = (options) => {
       } 
     })
     .eachAfter(node => {
-      post_traversal_function(node, data_type);
+      post_traversal_function(node, data_type, year);
     })
     .sort(absolute_value_sort);
 };
