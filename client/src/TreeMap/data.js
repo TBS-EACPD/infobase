@@ -142,6 +142,11 @@ function spending_change_year_split(year_string) {
 }
 
 
+const post_traversal_function = () => {
+  //prep nodes
+  //group smallest
+}
+
 function get_data_drf(perspective, year, year_1, year_2, filter_var, get_changes) {
   const program_ftes_table = Table.lookup('programFtes');
   const program_spending_table = Table.lookup('programSpending');
