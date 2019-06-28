@@ -44,6 +44,7 @@ class EmailFrontend extends React.Component {
       privacy_acknowledged: false,
       sent_to_backend: false,
       awaiting_backend_response: false,
+      backend_response: {},
       template: {},
       completed_template: {},
     };
@@ -68,9 +69,12 @@ class EmailFrontend extends React.Component {
       const values_for_automatic_fields = get_values_for_automatic_fields(automatic_fields);
 
       send_completed_email_template(
-        template_name, 
+        template_name,
         {...completed_template, ...values_for_automatic_fields },
-      ).then( () => this.setState({awaiting_backend_response: false}) );
+      ).then( (backend_response) => this.setState({
+        awaiting_backend_response: false,
+        backend_response,
+      }) );
 
       this.setState({sent_to_backend: true});
     }
@@ -81,6 +85,7 @@ class EmailFrontend extends React.Component {
       privacy_acknowledged,
       sent_to_backend,
       awaiting_backend_response,
+      backend_response,
       template,
       completed_template,
     } = this.state;
@@ -97,9 +102,12 @@ class EmailFrontend extends React.Component {
         )
       )
       .value();
-    const ready_to_send = all_required_user_fields_filled && privacy_acknowledged;
+    const ready_to_send = all_required_user_fields_filled && privacy_acknowledged && (
+      !sent_to_backend ||
+      sent_to_backend && !_.isEmpty(backend_response) && !backend_response.success
+    );
 
-    const diable_forms = sent_to_backend || awaiting_backend_response;
+    const diable_forms = (sent_to_backend && backend_response.success) || awaiting_backend_response;
 
     const get_field_id = (field_key) => `emailFrontend${field_key}`;
     const get_form_for_user_field = (field_info, field_key) => {
@@ -217,10 +225,10 @@ class EmailFrontend extends React.Component {
                   </label>
                 </div>
               </div>
-              { !sent_to_backend && !awaiting_backend_response &&
+              {
                 <button 
                   className="btn-sm btn btn-ib-primary"
-                  disabled={ !ready_to_send || awaiting_backend_response }
+                  disabled={ !ready_to_send }
                   onClick={ (event) => {
                     event.preventDefault();
                     log_standard_event({
@@ -234,32 +242,44 @@ class EmailFrontend extends React.Component {
                   { awaiting_backend_response && <SpinnerWrapper config_name="small_inline" />}
                 </button>
               }
-              { sent_to_backend &&
+              { sent_to_backend && !awaiting_backend_response &&
                 <Fragment>
-                  <span tabIndex="0">
-                    {text_maker("email_frontend_has_sent")}
-                  </span>
-                  <button 
-                    className="btn-sm btn btn-ib-primary"
-                    style={{float: "right"}}
-                    onClick={ (event) => {
-                      event.preventDefault();
+                  { backend_response.success &&
+                    <Fragment>
+                      <p>
+                        {text_maker("email_frontend_has_sent_success")}
+                      </p>
+                      <button
+                        className="btn-sm btn btn-ib-primary"
+                        style={{float: "right"}}
+                        onClick={ (event) => {
+                          event.preventDefault();
 
-                      _.chain(user_fields)
-                        .pickBy( ({form_type}) => form_type === "textarea")
-                        .forEach( (field_info, key) => document.getElementById( get_field_id(key) ).value = '' )
-                        .value();
+                          _.chain(user_fields)
+                            .pickBy( ({form_type}) => form_type === "textarea")
+                            .forEach( (field_info, key) => document.getElementById( get_field_id(key) ).value = '' )
+                            .value();
 
-                      this.setState({
-                        ...this.state,
-                        sent_to_backend: false,
-                        awaiting_backend_response: false,
-                        completed_template: {},
-                      });
-                    }}
-                  >
-                    {text_maker("email_frontend_reset")}
-                  </button>
+                          this.setState({
+                            ...this.state,
+                            sent_to_backend: false,
+                            awaiting_backend_response: false,
+                            backend_response: {},
+                            completed_template: {},
+                          });
+                        }}
+                      >
+                        {text_maker("email_frontend_reset")}
+                      </button>
+                    </Fragment>
+                  }
+                  { !backend_response.success &&
+                    <Fragment>
+                      <p>
+                        {text_maker("email_frontend_has_sent_failed", {error_message: backend_response.error_message})}
+                      </p>
+                    </Fragment>
+                  }
                 </Fragment>
               }
             </fieldset>

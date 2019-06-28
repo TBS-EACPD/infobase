@@ -53,8 +53,13 @@ const send_completed_email_template = (template_name, completed_template) => fet
     }),
   }
 )
-  .then( ({status}) => /2[0-9][0-9]/.test(status) ) // CORS preflight
-  .then( ({status}) => {debugger; /2[0-9][0-9]/.test(status)} ); // actually sending the email
+  .then( 
+    (resp) => resp.text()
+      .then( error_message => ({
+        success: /2[0-9][0-9]/.test(resp.status),
+        error_message: error_message,
+      }) )
+  );
 
 export {
   get_email_template_names,
