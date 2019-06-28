@@ -73,7 +73,7 @@ export class ShareModal extends React.Component {
           </Modal.Body>
 
           <Modal.Footer>
-            <Button bsStyle="primary" onClick={() => toggleModal(false)}>Cancel</Button>
+            <Button className="btn btn-ib-primary" onClick={() => toggleModal(false)}>{text_maker("cancel")}</Button>
           </Modal.Footer>
           <div tabIndex='0' onFocus={() => toggleModal(false)} />
         </div>
