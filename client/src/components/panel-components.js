@@ -5,7 +5,6 @@ import { Fragment } from 'react';
 import { 
   FootnoteList, 
   create_text_maker_component,
-  SpinnerWrapper,
 } from '../util_components.js';
 import { Details } from '../components/Details.js';
 import { get_static_url } from '../request_utils.js';
@@ -92,9 +91,6 @@ class Panel_ extends React.Component {
                 link={panel_link}
                 download_button_class_name={"panel-heading-utils panel-heading-btn"}
               />
-            }
-            {context && !window.feature_detection.is_IE() && generating_pdf &&
-              <SpinnerWrapper config_name={"small_inline"} />
             }
             { context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
               <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>

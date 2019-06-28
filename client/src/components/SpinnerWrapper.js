@@ -30,4 +30,4 @@ export class SpinnerWrapper extends React.Component {
 SpinnerWrapper.defaultProps = {
   scale: 2,
   use_leaf_spinner: true,
-}
+};
