@@ -10,7 +10,7 @@ const last_year_spending = (node) => {
     return false;
   }
   return _.first(programSpending.programs.get(node))["{{pa_last_year}}exp"];
-}
+};
 
 const last_year_fte = (node) => {
   const programFtes = Table.lookup('programFtes');
@@ -18,7 +18,7 @@ const last_year_fte = (node) => {
     return false;
   }
   return _.first(programFtes.programs.get(node))["{{pa_last_year}}"];
-}
+};
 
 const set_default_values = (node, data_type) => {
   if (node.data.is("program")){
@@ -42,7 +42,7 @@ const set_default_values = (node, data_type) => {
     node.data.search_string += _.deburr(node.data.description.replace(/<(?:.|\n)*?>/gm, '').toLowerCase());
   }
 
-}
+};
 
 
 const get_org_hierarchy = (options) => {
@@ -51,7 +51,7 @@ const get_org_hierarchy = (options) => {
     data_type: "exp",
     skip_crsos: true,
     post_traversal_function: set_default_values,
-  }
+  };
   const {
     root, data_type, skip_crsos, post_traversal_function,
   } = {...defaults, ...options};
@@ -75,9 +75,9 @@ const get_org_hierarchy = (options) => {
       post_traversal_function(node, data_type);
     })
     .sort(absolute_value_sort);
-}
+};
 
 export { 
   get_org_hierarchy,
   set_default_values,
-}
+};
