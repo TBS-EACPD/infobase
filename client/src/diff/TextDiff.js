@@ -82,7 +82,7 @@ const format_target_string = (indicator) => {
 };
 
 const get_indicators = (subject) => {
-  return  _.chain(Result.get_all())
+  return _.chain(Result.get_all())
     .filter(res => {
       const res_subject = Program.lookup(res.subject_id) || CRSO.lookup(res.subject_id);
       return subject.level === 'dept' ? res_subject.dept === subject : res_subject === subject || res_subject.crso === subject;
@@ -127,7 +127,7 @@ const get_new_url = (subject) => {
   } else {
     return `/diff/${subject.dept.id}/${subject.crso.id}/${subject.id}`;
   }
-}
+};
 
 
 export default class TextDiffApp extends React.Component {
@@ -156,7 +156,8 @@ export default class TextDiffApp extends React.Component {
         const processed_indicators = process_indicators(matched_indicators);
         
         this.setState({first_load: false, subject: subject, loading: false, matched_indicators: matched_indicators, processed_indicators: processed_indicators});
-      });  }
+      });
+  }
 
 
   static getDerivedStateFromProps(props, state){
@@ -187,7 +188,8 @@ export default class TextDiffApp extends React.Component {
           const processed_indicators = process_indicators(matched_indicators);
           
           this.setState({first_load: false, subject: subject, loading: false, matched_indicators: matched_indicators, processed_indicators: processed_indicators});
-        });    }
+        });    
+    }
   }
 
   render() {
