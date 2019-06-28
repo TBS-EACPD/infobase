@@ -128,24 +128,7 @@
   border-top: 1px solid rgba($separatorColor, 0.5);
 }
 
-<<<<<<< HEAD
-  .panel-heading-utils-container {
-    margin-left: auto;
-  }
-  .panel-heading-a{
-    position: absolute;
-  }
-
-  .panel-heading-utils img{
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 0;
-  }
-=======
   a.panel-heading-utils {
     position: absolute;
+    display: inline;
   }
->>>>>>> Various tweaks

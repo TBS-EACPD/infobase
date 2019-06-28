@@ -5,7 +5,7 @@ import { Fragment } from 'react';
 import { 
   FootnoteList, 
   create_text_maker_component,
-  ShareModal,
+  ShareButton,
 } from '../util_components.js';
 import { Details } from '../components/Details.js';
 import { get_static_url } from '../request_utils.js';
@@ -83,15 +83,18 @@ class Panel_ extends React.Component {
       <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
         {title && <header className='panel-heading'>
           <header className="panel-title"> {title} </header>
-          <div style={{marginLeft: 'auto'}}>
+          <div style={{marginLeft: 'auto', marginRight: '20px'}}>
             { context && 
               <PDFGenerator 
                 target_id={context.graph_key}
                 file_name={file_name}
                 title={title}
                 link={panel_link}
-                download_button_class_name={"panel-heading-utils panel-heading-btn"}
+                download_button_class_name={"panel-heading-utils"}
               />
+            }
+            {context && panel_href_template(context.subject, context.bubble, context.graph_key) && 
+              <ShareButton context={context} button_class_name={'panel-heading-utils'} title={title}/> 
             }
             { context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
               <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
