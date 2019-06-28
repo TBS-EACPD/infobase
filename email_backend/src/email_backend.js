@@ -106,11 +106,11 @@ const make_email_backend = (templates) => {
 
       if ( _.isUndefined(original_template) || !validate_completed_template(original_template, completed_template) ){
         const error_message = "Bad Request: submitted email content either doesn't correspond to any templates, " + 
-          "or does not validate aginst its corresponding template";
+          "or does not validate against its corresponding template";
         response.status("400").send(error_message);
         log_email_request(request, error_message);
       } else {
-        const this_client_is_in_timeout = throttle_requests_by_client(completed_template.client_id || request.ip);
+        const this_client_is_in_timeout = throttle_requests_by_client(`${request.ip}${completed_template.client_id || ''}`);
         if (process.env.IS_PROD_SERVER && this_client_is_in_timeout){
           const error_message = "Bad Request: too many recent requests from your IP, try again later.";
           response.status("400").send(error_message);

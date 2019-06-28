@@ -1,6 +1,6 @@
 # Email Server
 
-Google Cloud Function email backend. More user-friendly and secure/configurable than a mail-to link. Acts as a source of email templates for use in the front end, validates completed email templates received from the front-end, and sends valid, formatted, emails on to recipient email accouts. The backend sending/receiving emails remain unknown to the clien submitting the email, to protect both the client's identity and our inboxes from spam. Also has mitigations in place for attempts to spam the receiving address through the send email API.
+Google Cloud Function email backend. More user-friendly and secure/configurable than a mail-to link. Acts as a source of email templates for use in the front end, validates completed email templates received from the front-end, and sends valid, formatted, emails on to recipient email accounts. The backend sending/receiving emails remain unknown to the client submitting the email, to protect both the client's identity and our inboxes from spam. Also has mitigations in place for attempts to spam the receiving address through the send email API.
 
 ## Table of contents
   - [Development](#Development)
@@ -52,6 +52,8 @@ A completed template is just a set of key-value pairs corresponding to all the f
 
 ## Spam mitigation
 In deploy_scripts/prod_deploy_email_backend_function.sh, sets a max-instance of 1 (see Google Cloud docs on max-instances, it's in beta and has caveats). One Google Cloud Function is sufficient for our current needs, makes it easier for the backend to have a memory of who's recently sent email through it, and in the worst case acts as a capacity-based throttle on any attempt to seriously spam us.
-Additionally, before sending a valid email out, /submit_email checks wether the client IP has already sent three emails within the last minute. If an IP has sent more than three emails in the last minute, it get's put "in timeout" and can't send further email for a minute. For the remaining lifetime of the Google Cloud Function instance, this IP is limited to one email a minute.
+Additionally, before sending a valid email out, /submit_email checks wether the client has already sent three emails within the last minute. If a client has sent more than three emails in the last minute, it gets put "in timeout" and can't send further email for a minute. For the remaining lifetime of the Google Cloud Function instance, this client is limited to one email a minute.
 
-If you want clients to be able to send more frequent emails, adjust `TIMEOUT_WINDOW` or `REQUESTS_IN_WINDOW_BEFORE_TIMEOUT` in `src/throttle_requests_by_ip.js`. If you receive sustained spikes in requests and require more than 1 instance of the GCF then adjust/remove `--max-instances` in the deploy script. Note that setting a hire number of max-instances compromises the abbility to throttle by IP as the memory of who made what requests is transient and specific to each GCF.
+Clients are identified by IP and, if it exists in the completed template, a special template field with key `"client_id"`.
+
+If you want clients to be able to send more frequent emails, adjust `TIMEOUT_WINDOW` or `REQUESTS_IN_WINDOW_BEFORE_TIMEOUT` in `src/throttle_requests_by_ip.js`. If you receive sustained spikes in requests and require more than 1 instance of the GCF then adjust/remove `--max-instances` in the deploy script. Note that setting a hire number of max-instances compromises the ability to throttle by IP as the memory of who made what requests is transient and specific to each GCF.
