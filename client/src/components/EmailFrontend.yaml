@@ -16,11 +16,7 @@ email_frontend_has_sent_success:
   en: Your report has been submitted. Thank you! To submit another report, reset this form with the following button.
   fr: Votre rapport a été soumis. Merci! Pour soumettre un autre rapport, réinitialiser cette formulaire en sélectionnant l’option « Réinitialiser ».
 email_frontend_has_sent_failed:
-  transform: [handlebars]
-  en: |
-    Something has gone wrong, your report could not be submitted. To try again, resend this form with the above button.  
-    
-    {{error_message}}
+  en: Something has gone wrong, your report could not be submitted. To try again, resend this form with the above button.  
   fr: TODO
 email_frontend_reset:
   en: Reset

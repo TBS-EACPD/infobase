@@ -250,9 +250,7 @@ class EmailFrontend extends React.Component {
                 <Fragment>
                   { backend_response.success &&
                     <Fragment>
-                      <p>
-                        {text_maker("email_frontend_has_sent_success")}
-                      </p>
+                      <TM k="email_frontend_has_sent_success" el="p"/>
                       <button
                         className="btn-sm btn btn-ib-primary"
                         style={{float: "right"}}
@@ -279,9 +277,8 @@ class EmailFrontend extends React.Component {
                   }
                   { !backend_response.success &&
                     <Fragment>
-                      <p>
-                        {text_maker("email_frontend_has_sent_failed", {error_message: backend_response.error_message})}
-                      </p>
+                      <TM k="email_frontend_has_sent_failed" el="p"/>
+                      {backend_response.error_message}
                     </Fragment>
                   }
                 </Fragment>
