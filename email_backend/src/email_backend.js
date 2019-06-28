@@ -16,7 +16,7 @@ import {
   make_email_body_from_completed_template,
 } from './template_utils';
 
-import { throttle_requests_by_ip } from './throttle_requests_by_ip.js';
+import { throttle_requests_by_client } from './throttle_requests_by_client.js';
 
 const get_request_content = (request) => (!_.isEmpty(request.body) && request.body) || (!_.isEmpty(request.query) && request.query);
 
@@ -110,8 +110,8 @@ const make_email_backend = (templates) => {
         response.status("400").send(error_message);
         log_email_request(request, error_message);
       } else {
-        const this_ip_is_in_timeout = throttle_requests_by_ip(request.ip);
-        if (process.env.IS_PROD_SERVER && this_ip_is_in_timeout){
+        const this_client_is_in_timeout = throttle_requests_by_client(completed_template.client_id || request.ip);
+        if (process.env.IS_PROD_SERVER && this_client_is_in_timeout){
           const error_message = "Bad Request: too many recent requests from your IP, try again later.";
           response.status("400").send(error_message);
           log_email_request(request, error_message);
