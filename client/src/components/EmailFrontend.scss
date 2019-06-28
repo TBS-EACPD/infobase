@@ -38,3 +38,13 @@
     }
   }
 }
+
+.email-backend-form__send-btn--sending {
+  background-color: $secondaryColor;
+
+  &  > div > .leaf-spinner-container {
+    top: 0px!important;
+    left: 6px!important;
+    transform: scale(0.3)!important;
+  }
+}

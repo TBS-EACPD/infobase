@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import classNames from 'classnames';
 
 import { create_text_maker_component } from '../util_components.js';
 import { SpinnerWrapper } from './SpinnerWrapper';
@@ -198,7 +199,7 @@ class EmailFrontend extends React.Component {
       <div className="email-backend-form">
         { loading && 
           <div style={{height: "50px"}}>
-            <SpinnerWrapper config_name="medium_inline" />
+            <SpinnerWrapper config_name="small_inline" />
           </div>
         }
         { !loading &&
@@ -231,7 +232,7 @@ class EmailFrontend extends React.Component {
               </div>
               {
                 <button 
-                  className="btn-sm btn btn-ib-primary"
+                  className={classNames("btn-sm btn btn-ib-primary", awaiting_backend_response && "email-backend-form__send-btn--sending")}
                   disabled={ !ready_to_send }
                   onClick={ (event) => {
                     event.preventDefault();
@@ -241,6 +242,7 @@ class EmailFrontend extends React.Component {
                     });
                     this.setState({awaiting_backend_response: true, backend_response: {}});
                   }}
+                  aria-label={text_maker("loading")}
                 >
                   { !awaiting_backend_response && text_maker("email_frontend_send")}
                   { awaiting_backend_response && <SpinnerWrapper config_name="small_inline" />}
