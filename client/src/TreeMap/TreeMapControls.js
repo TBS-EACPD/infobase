@@ -40,31 +40,31 @@ const year_to_year_changes = {
 };
 
 const year_changes = {
-  "drf": all_year_changes,
-  "drf_ftes": all_year_changes,
+  "exp": all_year_changes,
+  "fte": all_year_changes,
   "tp": all_year_changes,
   "vote_stat": all_year_changes.slice(0, 4),
   "so": all_year_changes.slice(2, 4),
 };
 
 const years = {
-  "drf": all_years,
-  "drf_ftes": all_years,
+  "exp": all_years,
+  "fte": all_years,
   "tp": all_years.slice(0, 5),
   "vote_stat": all_years.slice(0, 5),
   "so": all_years.slice(2, 5),
 };
 
 const size_controls = [
-  { id: "drf", display: text_maker("DRF_spending") },
-  { id: "drf_ftes", display: text_maker("treemap_fte") },
+  { id: "exp", display: text_maker("DRF_spending") },
+  { id: "fte", display: text_maker("treemap_fte") },
   { id: "tp", display: text_maker("TP") },
   { id: "vote_stat", display: text_maker("EVS") },
   { id: "so", display: text_maker("SO") },
 ];
 const color_controls = [
   { id: "spending", display: text_maker("spending") },
-  { id: "ftes", display: text_maker("fte") },
+  { id: "fte", display: text_maker("fte") },
 ];
 
 const gc_type_controls = [
@@ -106,8 +106,8 @@ function create_new_path(cur_params, new_param, new_val) {
     case("perspective"):
       new_perspective = new_val;
       new_filter_var = "All";
-      if(new_val === "drf_ftes") new_color_var = "ftes";
-      if(new_val !== "drf" && new_val !== "drf_ftes") new_color_var = "spending";
+      if(new_val === "fte") new_color_var = "fte";
+      if(new_val !== "exp" && new_val !== "fte") new_color_var = "spending";
       break;
     case("color_var"):
       new_color_var = new_val; break;
@@ -226,7 +226,7 @@ export class TreeMapControls extends React.Component {
             }
           />
         }
-        {(perspective === "drf" || perspective === "drf_ftes" ) &&
+        {(perspective === "exo" || perspective === "fte" ) &&
           <TreeMapLabeledBox
             label={text_maker("treemap_color_by_label")}
             content={

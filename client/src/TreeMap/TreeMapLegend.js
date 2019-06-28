@@ -8,8 +8,8 @@ const text_maker = create_text_maker([treemap_text]);
 
 
 const size_controls = {
-  "drf": text_maker("expenditures_lower"),
-  "drf_ftes": text_maker("fte"),
+  "exp": text_maker("expenditures_lower"),
+  "fte": text_maker("fte"),
   "tp": text_maker("SOBJ10_lower"),
   "vote_stat": text_maker("expenditures_lower"),
   "so": text_maker("expenditures_lower"),
