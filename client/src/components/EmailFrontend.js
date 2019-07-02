@@ -65,6 +65,7 @@ class EmailFrontend extends React.Component {
     const {
       sent_to_backend,
       awaiting_backend_response,
+      backend_response,
 
       template_name,
       template,
@@ -85,6 +86,14 @@ class EmailFrontend extends React.Component {
       }) );
 
       this.setState({sent_to_backend: true});
+    }
+
+    if (!awaiting_backend_response && sent_to_backend){
+      log_standard_event({
+        SUBAPP: window.location.hash.replace('#',''),
+        MISC1: "EmailFronted",
+        MISC2: `${template_name}: ${backend_response.error_message}`,
+      });
     }
   }
   render(){
@@ -237,10 +246,6 @@ class EmailFrontend extends React.Component {
                   disabled={ !ready_to_send }
                   onClick={ (event) => {
                     event.preventDefault();
-                    log_standard_event({
-                      SUBAPP: window.location.hash.replace('#',''),
-                      MISC1: "REPORT_A_PROBLEM",
-                    });
                     this.setState({awaiting_backend_response: true, backend_response: {}});
                   }}
                   aria-label={ 
