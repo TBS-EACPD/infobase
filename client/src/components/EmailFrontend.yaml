@@ -9,6 +9,12 @@ email_frontend_privacy_ack:
 email_frontend_send:
   en: Submit
   fr: Soumettre
+email_frontend_sending:
+  en: Sending
+  fr: Envoi
+email_frontend_sent:
+  en: Sent
+  fr: Envoyé
 email_frontend_resend:
   en: Resubmit
   fr: Soumettre à nouveau

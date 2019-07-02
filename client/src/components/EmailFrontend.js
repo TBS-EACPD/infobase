@@ -242,7 +242,13 @@ class EmailFrontend extends React.Component {
                     });
                     this.setState({awaiting_backend_response: true, backend_response: {}});
                   }}
-                  aria-label={text_maker("loading")}
+                  aria-label={ 
+                    sent_to_backend && (
+                      awaiting_backend_response ?
+                        text_maker("email_frontend_sending") :
+                        text_maker("email_frontend_sent")
+                    ) || text_maker("email_frontend_send")
+                  }
                 >
                   { !awaiting_backend_response && text_maker("email_frontend_send")}
                   { awaiting_backend_response && <SpinnerWrapper config_name="small_inline" />}
