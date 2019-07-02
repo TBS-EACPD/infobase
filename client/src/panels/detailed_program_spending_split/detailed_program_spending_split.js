@@ -339,6 +339,7 @@ class DetailedProgramSplit extends React.Component {
     } = this.props;
     const { so_label_list } = this.state;
     let graph_ready_data = [];
+    const tick_map = {};
     const colors = infobase_colors();
     const formatter = formats.compact1_raw;
     let legend_items;
@@ -373,8 +374,9 @@ class DetailedProgramSplit extends React.Component {
       .map(group => {
         const prog = _.first(group).program;
         const obj = {label: prog.name};
+        tick_map[`${prog.name}`] = prog;
         _.forEach(group, (row) => {
-          obj[`${row.so_label}`] = row.value;
+          obj[`${row.so_label}`] = obj[`${row.so_label}`] ? obj[`${row.so_label}`] + row.value : row.value;
         });
         return obj;
       })
@@ -453,7 +455,7 @@ class DetailedProgramSplit extends React.Component {
         <div className="fcol-md-8" style={{ width: "100%" }}>
           <div 
             style={{
-              height: '450px',
+              height: '500px',
             }}
           >
             <NivoResponsiveHBar
@@ -464,7 +466,7 @@ class DetailedProgramSplit extends React.Component {
                 top: 10,
                 right: 20,
                 bottom: 30,
-                left: 240,
+                left: 170,
               }}
               colorBy = {d => colors(d.id)}
               bttm_axis = {{
@@ -476,7 +478,24 @@ class DetailedProgramSplit extends React.Component {
               left_axis = {{
                 tickSize: 5,
                 tickPadding: 5,
-                format: (d) => wrap(d, 40),
+                renderTick: tick => (
+                  <g key={tick.key} transform={`translate(${tick.x-70},${tick.y})`}>
+                    <a
+                      href={infograph_href_template(tick_map[tick.value])}
+                      target="_blank" rel="noopener noreferrer"
+                    >
+                      <text
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                        style={{
+                          ...tick.theme.axis.ticks.text,
+                        }}
+                      >
+                        {wrap(tick.value, 25)}                        
+                      </text>
+                    </a>
+                  </g>
+                ),
               }}
               padding = {0.05}
             />
