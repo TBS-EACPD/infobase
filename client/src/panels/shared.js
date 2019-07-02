@@ -22,6 +22,7 @@ import { Statistics } from '../core/Statistics.js';
 import classNames from 'classnames';
 import { get_source_links } from '../metadata/data_sources.js';
 import { NivoResponsiveBar, NivoResponsiveHBar, NivoResponsiveLine, NivoResponsivePie } from '../charts/NivoCharts.js';
+import { Fragment } from 'react';
 
 const {
   TabularPercentLegend,
@@ -422,6 +423,31 @@ LineBarToggleGraph.defaultProps = {
   graph_col_class: false,
   get_colors: () => infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) ),
   initial_graph_mode: "bar_stacked",
+};
+
+export const wrap = (text, width) => {
+  const words = text.split(/\s+/).reverse();
+  let word;
+  let line = [];
+  let lineHeight = 1; // em
+  const x = 0;
+  const y = 0;
+  const dy = 0;
+  const lines = [];
+  word = words.pop();
+  while (word) {
+    line.push(word);
+    const line_str = line.join(" ");
+    if ( line_str.length > width ){
+      line.pop();
+      lines.push(line.join(" "));
+      line = [word];
+    }
+    word = words.pop();
+  }
+  lines.push(line.join(" "));
+  const tspans = _.map(lines, (line,ix) => <tspan key={ix} x={x} y={y} dy={ix > 0 ? lineHeight*ix + dy + "em" : "0em"}>{line}</tspan> );
+  return <Fragment>{ tspans }</Fragment>;
 };
 
 export const HeightClippedGraph = ({children}) => (

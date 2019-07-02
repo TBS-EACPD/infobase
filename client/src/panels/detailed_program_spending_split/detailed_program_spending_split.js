@@ -1,6 +1,7 @@
 import text from './detailed_program_spending_split.yaml';
 import {
   NivoResponsiveBar,
+  NivoResponsiveHBar,
   Subject,
   formats,
   run_template,
@@ -14,6 +15,7 @@ import {
   FootNote,
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
+  wrap,
 } from "../shared";
 
 const { std_years } = years; 
@@ -99,7 +101,6 @@ const footnote_topics = [ 'PROG', 'SOBJ' ];
         } else {
           return text_maker('other_sos');
         }
-        
       };
 
       const exp_cols = _.map(std_years, yr=>yr+"exp");
@@ -326,7 +327,7 @@ class DetailedProgramSplit extends React.Component {
   constructor(){
     super();
     this.state = {
-      selected_arrangement: text_maker('all'),
+      so_label_list: [text_maker('all')],
     };
   }
   
@@ -336,55 +337,48 @@ class DetailedProgramSplit extends React.Component {
       arrangements,
       top_3_so_nums,
     } = this.props;
-
-    const { selected_arrangement } = this.state;
-
-    const { mapping } = _.find(arrangements, {id: selected_arrangement} );
-
+    const { so_label_list } = this.state;
+    let graph_ready_data = [];
     const colors = infobase_colors();
-
+    const formatter = formats.compact1_raw;
     let legend_items;
 
-    if(selected_arrangement === text_maker('all')){
+    const { mapping } = _.find(arrangements, {id: so_label_list[0]} );
+
+    if(so_label_list[0] === text_maker('all')){
       legend_items = [ //the order of this array will determine the colors for each sobj.
         ... _.map(top_3_so_nums, num => sos[num].text),
         text_maker('other_sos'),
         text_maker('revenues'),
-      ].map( label => ({
-        active: true,
-        label,
-        id: label,
-        color: colors(label),
-      }));
+      ].map( label => {
+        return {
+          active: true,
+          label,
+          id: label,
+          color: colors(label),
+        };
+      }
+      );
       //make sure 'other standard objects' comes last 
       legend_items = _.sortBy(legend_items, ({label}) => label === text_maker('other_sos') );
+      _.map(legend_items, ({label}) => {so_label_list.push(label);});
     }
-        
-    const graph_ready_data = _.chain(flat_data)
-      .groupBy(row => row.program.id)
+
+    graph_ready_data = _.chain(flat_data)
+      .filter(row => {
+        row.so_label = mapping(row.so_num);
+        return row.value!=0 && _.includes(so_label_list, row.so_label);
+      })
+      .groupBy(row => row.program.name)
       .map(group => {
         const prog = _.first(group).program;
-        return {
-          key: prog.id, 
-          label: prog.name,
-          href: infograph_href_template(prog),
-          data: _.chain(group)
-            //the mapping take so_num and produces new so_labels, 
-            .map( obj => ({
-              ...obj,
-              so_label: mapping(obj.so_num),
-            }))
-            .filter('so_label') //the mapping assigns falsey values in order to throw things out.
-            .groupBy('so_label')
-            .map((group, label) => ({
-              label,
-              data: d3.sum(group, _.property('value')),
-            }))
-            .sortBy('data')
-            .reverse()
-            .value(),
-        };
+        const obj = {label: prog.name};
+        _.forEach(group, (row) => {
+          obj[`${row.so_label}`] = row.value;
+        });
+        return obj;
       })
+      .sortBy(so_label_list)
       .value();
 
     if(window.is_a11y_mode){
@@ -430,14 +424,17 @@ class DetailedProgramSplit extends React.Component {
         <div className="fcol-md-4" style={{ width: "100%" }}>
           <label>
             <TM k="filter_by_so" />
-            <Select
-              id="select_arrangement"
-              selected={selected_arrangement}
+            <Select 
+              selected={so_label_list[0]}
               options={_.map(arrangements, ({id, label}) => ({ 
                 id,
                 display: label,
               }))}
-              onSelect={id=> this.setState({selected_arrangement: id}) }
+              onSelect={id=> {
+                this.setState({
+                  so_label_list: [id],
+                });
+              }}
               style={{
                 display: 'block',
                 margin: '10px auto',
@@ -448,7 +445,7 @@ class DetailedProgramSplit extends React.Component {
           { !_.isEmpty(legend_items) &&
             <div className="legend-container">
               <GraphLegend
-                items={legend_items}  
+                items={legend_items}
               />
             </div>
           }
@@ -456,17 +453,32 @@ class DetailedProgramSplit extends React.Component {
         <div className="fcol-md-8" style={{ width: "100%" }}>
           <div 
             style={{
-              maxHeight: '500px',
-              overflowY: 'auto',
-              overflowX: 'hidden',
+              height: '450px',
             }}
           >
-            <StackedHbarChart
-              font_size="12px"
-              bar_height={60} 
+            <NivoResponsiveHBar
               data={graph_ready_data}
-              formatter={formats.compact1}
-              colors={colors}
+              indexBy="label"
+              keys={so_label_list}
+              margin = {{
+                top: 10,
+                right: 20,
+                bottom: 30,
+                left: 240,
+              }}
+              colorBy = {d => colors(d.id)}
+              bttm_axis = {{
+                tickSize: 5,
+                tickPadding: 5,
+                tickValues: 6,
+                format: (d) => formatter(d),
+              }}
+              left_axis = {{
+                tickSize: 5,
+                tickPadding: 5,
+                format: (d) => wrap(d, 40),
+              }}
+              padding = {0.05}
             />
           </div>
         </div>
