@@ -97,7 +97,7 @@ class Panel_ extends React.Component {
               <ShareButton context={context} button_class_name={'panel-heading-utils'} title={title}/> 
             }
             { context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
-              <a href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
+              <a className='panel-heading-utils' href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
                 <img src={get_static_url("svg/permalink.svg")}
                   alt={text_maker("a11y_permalink")}
                   className='panel-heading-utils'
