@@ -233,6 +233,7 @@ class EmailFrontend extends React.Component {
               {
                 <button 
                   className={classNames("btn-sm btn btn-ib-primary", awaiting_backend_response && "email-backend-form__send-btn--sending")}
+                  style={{width: "100%"}}
                   disabled={ !ready_to_send }
                   onClick={ (event) => {
                     event.preventDefault();
