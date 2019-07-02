@@ -1,18 +1,13 @@
 import './home.scss';
 import home_text_bundle from "./home.yaml";
-import { featured_content_items } from './home-data.js';
-import { log_standard_event } from '../core/analytics.js';
 import MediaQuery from 'react-responsive';
 
 import { 
-  EverythingSearch,
   create_text_maker_component,
   CardTopImage,
-  CardLeftImage,
   ContainerEscapeHatch,
 } from '../util_components.js';
 
-import { general_href_for_item } from '../link_utils.js';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { get_static_url } from '../request_utils.js';
 

@@ -76,7 +76,9 @@ const HomeLayout = props => (
         </div>
       </div>
     </div>
+
     <div className="container">
+    
       <div className="home-trinity-container">
         <div className="frow">
           <TrinityItem
@@ -96,72 +98,73 @@ const HomeLayout = props => (
           />
         </div>
       </div>
-    </div>
+      <div className="home-search-container">
+        <EverythingSearch 
+          include_gov={false} 
+          placeholder={home_tm('everything_search_placeholder')}
+          large={true}
+          include_tags={true}
+          include_programs={true}
+          include_crsos={true}
+          include_tables={true} 
+          include_glossary={true}
+          org_scope="all_orgs_with_gov"
+          href_template={ general_href_for_item }
+          onNewQuery={ query => { 
+            log_standard_event({
+              SUBAPP: "home",
+              SUBJECT_GUID: null, 
+              MISC1: "home_search",
+              MISC2: query,
+            });
+          }}
+        />
+      </div>
+      <div className="frow home-cols">
+        <div className="fcol-md-7">
+          <div className="col-content featured-col-content">
+            <CardLeftImage
+              tmf={home_tm}
+              img_src={get_static_url("svg/partition-budget.svg")}
+              title_key="budget_home_title"
+              text_key="budget_home_text"
+              link_key="check_home_link"
+              link_href="#budget-tracker/budget-measure/overview"
+            />
+          </div> 
+          <div className="col-content featured-col-content">
+            <CardLeftImage
+              tmf={home_tm}
+              img_src={get_static_url("svg/DPs.svg")}
+              title_key="mains_dps_home_title"
+              text_key="mains_dps_home_text"
+              link_key="check_home_link"
+              link_href="#orgs/gov/gov/infograph/results"
+            />
+          </div>       
+        </div>
+        <div className="fcol-md-5">
 
-    <div className="container">
-      <div className="home-body">
-        <div className="frow home-cols">
-          <div className="fcol-md-7">
-            <div className="col-content featured-col-content">
-              <CardLeftImage
-                tmf={home_tm}
-                img_src={get_static_url("svg/partition-budget.svg")}
-                title_key="budget_home_title"
-                text_key="budget_home_text"
-                link_key="check_home_link"
-                link_href="#budget-tracker/budget-measure/overview"
-              />
-            </div> 
-            <div className="col-content featured-col-content">
-              <CardLeftImage
-                tmf={home_tm}
-                img_src={get_static_url("svg/DPs.svg")}
-                title_key="mains_dps_home_title"
-                text_key="mains_dps_home_text"
-                link_key="check_home_link"
-                link_href="#orgs/gov/gov/infograph/results"
-              />
-            </div>       
+          <div className="subapps-link__container">
+            <CardTopImage
+              tmf={home_tm}
+              img_src={get_static_url("svg/tools.svg")}
+              title_key="subapps_title"
+              text_key="subapps_text"
+              link_href="#subapps"
+            />
           </div>
-          <div className="fcol-md-5">
-            <header className="h3 home-search-header">
-              <TM k="home_search_bar_title" />
-            </header> 
-            <div className="search-box">
-              <div className="search-container home-search-container">
-                <EverythingSearch 
-                  include_gov={false} 
-                  placeholder={home_tm('everything_search_placeholder')}
-                  large={true}
-                  include_tags={true}
-                  include_programs={true}
-                  include_crsos={true}
-                  include_tables={true} 
-                  include_glossary={true}
-                  org_scope="all_orgs_with_gov"
-                  href_template={ general_href_for_item }
-                  onNewQuery={ query => { 
-                    log_standard_event({
-                      SUBAPP: "home",
-                      SUBJECT_GUID: null, 
-                      MISC1: "home_search",
-                      MISC2: query,
-                    });
-                  }}
-                />
-              </div>
-            </div>
 
-            <header className="h3 home-featured-data-header">
-              <TM k="featured_data_title" />
-            </header>
-            <div>
-              <ul className="list-group list-group--quick-links">
-                { _.map( props.featured_content_items, item => <FeaturedContentItem key={item.text_key} {...item} /> ) }
-              </ul>
-            </div>
-  
+          <header className="h3">
+            <TM k="featured_data_title" />
+          </header>
+          <div>
+            <ul className="list-group list-group--quick-links">
+              { _.map( props.featured_content_items, item => <FeaturedContentItem key={item.text_key} {...item} /> ) }
+            </ul>
           </div>
+
+
         </div>
       </div>
     </div>
