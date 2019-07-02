@@ -126,7 +126,7 @@ class EmailFrontend extends React.Component {
       sent_to_backend && !_.isEmpty(backend_response) && !backend_response.success
     );
 
-    const diable_forms = (sent_to_backend && backend_response.success) || awaiting_backend_response;
+    const disable_forms = (sent_to_backend && backend_response.success) || awaiting_backend_response;
 
 
     const get_field_id = (field_key) => `email_frontend_${field_key}`;
@@ -137,7 +137,7 @@ class EmailFrontend extends React.Component {
             id={get_field_id(key)} 
             type="checkbox" 
             checked={is_checked} 
-            disabled={diable_forms}
+            disabled={disable_forms}
             onChange={
               () => {
                 this.mergeIntoCompletedTemplateState(
@@ -181,7 +181,7 @@ class EmailFrontend extends React.Component {
               </label>
               <textarea
                 id={get_field_id(field_key)}
-                disabled={diable_forms}
+                disabled={disable_forms}
                 rows="5"
                 cols="33"
                 defaultValue={completed_template[field_key] || ''}
@@ -235,7 +235,7 @@ class EmailFrontend extends React.Component {
                       id={"email_frontend_privacy"} 
                       type="checkbox" 
                       checked={privacy_acknowledged} 
-                      disabled={diable_forms}
+                      disabled={disable_forms}
                       onChange={ () => this.setState({privacy_acknowledged: !privacy_acknowledged }) }
                     />
                     {text_maker("email_frontend_privacy_ack")}
