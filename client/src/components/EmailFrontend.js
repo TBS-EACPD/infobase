@@ -130,11 +130,11 @@ class EmailFrontend extends React.Component {
 
 
     const get_field_id = (field_key) => `email_frontend_${field_key}`;
-    const EnumCheckbox = (label, key, field_key, is_checked) => (
-      <div key={`${key}_check`} className="checkbox">
-        <label htmlFor={get_field_id(key)}>
+    const EnumCheckbox = ({label, enum_key, field_key, is_checked}) => (
+      <div className="checkbox">
+        <label htmlFor={get_field_id(enum_key)}>
           <input 
-            id={get_field_id(key)} 
+            id={get_field_id(enum_key)} 
             type="checkbox" 
             checked={is_checked} 
             disabled={disable_forms}
@@ -143,7 +143,7 @@ class EmailFrontend extends React.Component {
                 this.mergeIntoCompletedTemplateState(
                   field_key,
                   _.chain(completed_template[field_key])
-                    .xor([key])
+                    .xor([enum_key])
                     .sort()
                     .value()
                 );
@@ -163,12 +163,14 @@ class EmailFrontend extends React.Component {
               {
                 _.map(
                   field_info.enum_values,
-                  (label_by_lang, key) => EnumCheckbox(
-                    label_by_lang[window.lang],
-                    key,
-                    field_key,
-                    _.includes(completed_template[field_key], key)
-                  )
+                  (label_by_lang, key) => <EnumCheckbox
+                    key={`${key}_check`}
+
+                    label={label_by_lang[window.lang]}
+                    enum_key={key}
+                    field_key={field_key}
+                    is_checked={_.includes(completed_template[field_key], key)}
+                  />
                 )
               }
             </div>
