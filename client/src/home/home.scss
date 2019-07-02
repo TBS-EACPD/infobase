@@ -1,9 +1,9 @@
 @import '../common_css/common-variables';
 
 
-.home-search-container > div.rbt > div.rbt-input-hint-container > input {
-  //search bar isn't wide enough to contain all placeholder text
-  font-size: 1em;
+.home-search-container {
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .intro-box {
@@ -42,7 +42,7 @@
   color: $textColor !important;
   background-color: $secondaryColor;
   border-radius: 10px;
-  margin-top: 40px;
+  margin-bottom: 40px;
   height: auto;
   width: 100%;
 
@@ -52,12 +52,12 @@
 }
 
 .frow.home-cols > .fcol-md-5 {
-  margin-top: 40px;
   @media(max-width:1200px) {
     margin-top: 5px;
   }
 
   & > .h3.home-search-header {
+    display: flex;
     @media(min-width:1201px) {
       margin-top: 0px;
     }
@@ -175,11 +175,6 @@ li.list-group-item--home {
   }
 }
 
-.home-body > .frow.home-cols {
-  justify-content: space-between;
-  margin-bottom: 40px;
-}
-
 .home-bg {
   background-color: $primaryColor;
   position: relative;
@@ -215,3 +210,32 @@ li.list-group-item--home {
   }
 }
 
+
+.subapps-link__container {
+  background-color: darken( $tertiaryColor, 10% );
+  border-radius: 10px;
+  color: white;
+
+  &:hover, &:focus {
+    background-color: $tertiaryColor;
+  }
+
+  & > a > .top-img-card {
+    min-height: 0px;
+    & > .top-img-card__top {
+      padding: 10px;
+      & > .top-img-card__img {
+        height: 60px;
+      }
+    }
+    & > .top-img-card__bottom {
+      & > .top-img-card__title {
+        text-transform: uppercase;
+        padding: 0px;
+      }
+      & > .top-img-card__text {
+        color: white;
+      }
+    }
+  }
+}

@@ -1,4 +1,3 @@
-import { rpb_link } from '../rpb/rpb_link.js';
 
 const featured_content_items = _.compact([
   {
