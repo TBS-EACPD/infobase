@@ -263,6 +263,11 @@ class EmailFrontend extends React.Component {
                   { awaiting_backend_response && <SpinnerWrapper config_name="small_inline" /> }
                 </button>
               }
+              { sent_to_backend && awaiting_backend_response &&
+                <p aria-live="polite" className="sr-only">
+                  {text_maker("email_frontend_sending")}
+                </p>
+              }
               { sent_to_backend && !awaiting_backend_response &&
                 <Fragment>
                   { backend_response.success &&
