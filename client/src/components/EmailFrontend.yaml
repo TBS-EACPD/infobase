@@ -1,7 +1,7 @@
 email_frontend_privacy_note:
   transform: [handlebars]
-  en: Do not submit personal or identifying information through these forms. Read our privacy policy {{ext_link "here" "#privacy"}}.
-  fr: Ne soumettez pas d'informations personnelles ou d'identification à l'aide de ces formulaires. Lisez notre déclaration de protection des renseignements personnels {{ext_link "ici" "#privacy"}}.
+  en: Do not submit personal or identifying information through these forms. {{ext_link "Read our privacy policy here." "#privacy"}}
+  fr: Ne soumettez pas d'informations personnelles ou d'identification à l'aide de ces formulaires. {{ext_link "Lisez notre déclaration de protection des renseignements personnels ici." "#privacy"}}
 email_frontend_privacy_ack:
   en: I accept
   fr: J'accepte
