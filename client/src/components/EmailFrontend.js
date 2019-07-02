@@ -58,7 +58,7 @@ class EmailFrontend extends React.Component {
     };
   }
   componentDidMount(){
-    get_email_template(this.props.template_name)
+    get_email_template(this.state.template_name)
       .then( (template) => this.setState({loading: false, template: template}) );
   }
   componentDidUpdate(){
@@ -72,6 +72,7 @@ class EmailFrontend extends React.Component {
       completed_template,
     } = this.state;
 
+    // complete automatic fields and send completed tempalte to backend after submit button is clicked
     if (awaiting_backend_response && !sent_to_backend){
       const automatic_fields = _.omitBy(template, ({form_type}, key) => key === "meta" || form_type);
 
@@ -88,10 +89,11 @@ class EmailFrontend extends React.Component {
       this.setState({sent_to_backend: true});
     }
 
+    // log server response to submitted completed template
     if (!awaiting_backend_response && sent_to_backend){
       log_standard_event({
         SUBAPP: window.location.hash.replace('#',''),
-        MISC1: "EmailFronted",
+        MISC1: "EmailFrontend",
         MISC2: `${template_name}: ${backend_response.error_message}`,
       });
     }
@@ -109,7 +111,7 @@ class EmailFrontend extends React.Component {
 
     const user_fields = _.omitBy(template, ({form_type}, key) => key === "meta" || !form_type);
 
-    const all_required_user_fields_filled = _.chain(user_fields)
+    const all_required_user_fields_are_filled = _.chain(user_fields)
       .omitBy( (field) => !field.required )
       .keys()
       .every( (required_field_key) => 
@@ -119,41 +121,40 @@ class EmailFrontend extends React.Component {
         )
       )
       .value();
-    const ready_to_send = all_required_user_fields_filled && privacy_acknowledged && (
+    const ready_to_send = all_required_user_fields_are_filled && privacy_acknowledged && (
       !sent_to_backend ||
       sent_to_backend && !_.isEmpty(backend_response) && !backend_response.success
     );
 
     const diable_forms = (sent_to_backend && backend_response.success) || awaiting_backend_response;
 
+
     const get_field_id = (field_key) => `email_frontend_${field_key}`;
-    const get_form_for_user_field = (field_info, field_key) => {
-
-      const EnumCheckbox = (label, key, is_checked) => (
-        <div key={`${key}_check`} className="checkbox">
-          <label htmlFor={get_field_id(key)}>
-            <input 
-              id={get_field_id(key)} 
-              type="checkbox" 
-              checked={is_checked} 
-              disabled={diable_forms}
-              onChange={
-                () => {
-                  this.mergeIntoCompletedTemplateState(
-                    field_key,
-                    _.chain(completed_template[field_key])
-                      .xor([key])
-                      .sort()
-                      .value()
-                  );
-                }
+    const EnumCheckbox = (label, key, field_key, is_checked) => (
+      <div key={`${key}_check`} className="checkbox">
+        <label htmlFor={get_field_id(key)}>
+          <input 
+            id={get_field_id(key)} 
+            type="checkbox" 
+            checked={is_checked} 
+            disabled={diable_forms}
+            onChange={
+              () => {
+                this.mergeIntoCompletedTemplateState(
+                  field_key,
+                  _.chain(completed_template[field_key])
+                    .xor([key])
+                    .sort()
+                    .value()
+                );
               }
-            />
-            {label}
-          </label>
-        </div>
-      );
-
+            }
+          />
+          {label}
+        </label>
+      </div>
+    );
+    const get_form_for_user_field = (field_info, field_key) => {
       switch(field_info.form_type){
         case 'checkbox':
           return (
@@ -165,6 +166,7 @@ class EmailFrontend extends React.Component {
                   (label_by_lang, key) => EnumCheckbox(
                     label_by_lang[window.lang],
                     key,
+                    field_key,
                     _.includes(completed_template[field_key], key)
                   )
                 )
@@ -203,6 +205,7 @@ class EmailFrontend extends React.Component {
           );
       }
     };
+ 
  
     return (
       <div className="email-backend-form">
@@ -244,11 +247,11 @@ class EmailFrontend extends React.Component {
                   className={classNames("btn-sm btn btn-ib-primary", awaiting_backend_response && "email-backend-form__send-btn--sending")}
                   style={{width: "100%"}}
                   disabled={ !ready_to_send }
-                  onClick={ (event) => {
+                  onClick={(event) => {
                     event.preventDefault();
-                    this.setState({awaiting_backend_response: true, backend_response: {}});
+                    this.setState({ awaiting_backend_response: true, backend_response: {} });
                   }}
-                  aria-label={ 
+                  aria-label={
                     sent_to_backend && (
                       awaiting_backend_response ?
                         text_maker("email_frontend_sending") :
@@ -270,7 +273,7 @@ class EmailFrontend extends React.Component {
                       <button
                         className="btn-sm btn btn-ib-primary"
                         style={{float: "right"}}
-                        onClick={ (event) => {
+                        onClick={(event) => {
                           event.preventDefault();
 
                           _.chain(user_fields)
