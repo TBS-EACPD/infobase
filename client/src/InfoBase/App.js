@@ -22,6 +22,7 @@ import { PageDetails } from '../components/PageDetails.js';
 
 const Home = retrying_react_lazy( () => import('../home/home.js') );
 const A11yHome = retrying_react_lazy( () => import('../home/a11y_home.js') );
+const SubApps = retrying_react_lazy( () => import('../home/subapps.js') );
 const GraphInventory = retrying_react_lazy( () => import('../graph_route/GraphInventory.js') );
 const PartitionRoute = retrying_react_lazy( () => import('../partition/partition_subapp/PartitionRoute.js') );
 const BudgetMeasuresRoute = retrying_react_lazy( () => import('../partition/budget_measures_subapp/BudgetMeasuresRoute.js') );
