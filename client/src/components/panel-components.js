@@ -83,7 +83,7 @@ class Panel_ extends React.Component {
       <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
         {title && <header className='panel-heading'>
           <header className="panel-title"> {title} </header>
-          <div style={{marginLeft: 'auto', marginRight: '20px'}}>
+          <div style={{marginLeft: 'auto'}}>
             { context && 
               <PDFGenerator 
                 target_id={context.graph_key}
@@ -96,14 +96,16 @@ class Panel_ extends React.Component {
             {context && panel_href_template(context.subject, context.bubble, context.graph_key) && 
               <ShareButton context={context} button_class_name={'panel-heading-utils'} title={title}/> 
             }
-            { context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) && 
-              <a className='panel-heading-utils' href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
-                <img src={get_static_url("svg/permalink.svg")}
-                  alt={text_maker("a11y_permalink")}
-                  className='panel-heading-utils'
-                  title={text_maker("a11y_permalink")}
-                />
-              </a>
+            { context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) &&
+              <div style={{display: 'inline'}}> 
+                <a className='panel-heading-utils' href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
+                  <img src={get_static_url("svg/permalink.svg")}
+                    alt={text_maker("a11y_permalink")}
+                    className='panel-heading-utils'
+                    title={text_maker("a11y_permalink")}
+                  />
+                </a>
+              </div>
             }
           </div>
         </header>
