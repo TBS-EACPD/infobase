@@ -251,8 +251,8 @@ class EmailFrontend extends React.Component {
                     ) || text_maker("email_frontend_send")
                   }
                 >
-                  { !awaiting_backend_response && text_maker("email_frontend_send")}
-                  { awaiting_backend_response && <SpinnerWrapper config_name="small_inline" />}
+                  { !awaiting_backend_response && text_maker("email_frontend_send") }
+                  { awaiting_backend_response && <SpinnerWrapper config_name="small_inline" /> }
                 </button>
               }
               { sent_to_backend && !awaiting_backend_response &&
