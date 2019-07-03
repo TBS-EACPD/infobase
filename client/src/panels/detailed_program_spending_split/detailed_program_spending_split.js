@@ -374,13 +374,14 @@ class DetailedProgramSplit extends React.Component {
       .map(group => {
         const prog = _.first(group).program;
         const obj = {label: prog.name};
-        tick_map[`${prog.name}`] = prog;
+        tick_map[`${prog.name}`] = prog;        
         _.forEach(group, (row) => {
           obj[`${row.so_label}`] = obj[`${row.so_label}`] ? obj[`${row.so_label}`] + row.value : row.value;
+          obj['total'] = obj['total'] ? obj['total'] + row.value : row.value;
         });
         return obj;
       })
-      .sortBy(so_label_list)
+      .sortBy(obj => obj.total)
       .value();
 
     if(window.is_a11y_mode){
@@ -481,7 +482,7 @@ class DetailedProgramSplit extends React.Component {
                 renderTick: tick => (
                   <g key={tick.key} transform={`translate(${tick.x-70},${tick.y})`}>
                     <a
-                      href={infograph_href_template(tick_map[tick.value])}
+                      href={tick_map[tick.value] ? infograph_href_template(tick_map[tick.value]) : null}
                       target="_blank" rel="noopener noreferrer"
                     >
                       <text
