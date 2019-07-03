@@ -1,4 +1,4 @@
-import './ShareModal.scss' ;
+import './ShareModal.scss';
 import { Button, Modal } from 'react-bootstrap';
 import {
   TwitterShareButton,
@@ -12,29 +12,29 @@ import {
   RedditShareButton,
   RedditIcon,
 } from 'react-share';
-import text from "./ShareModal.yaml" ;
-import { create_text_maker } from '../models/text.js' ;
+import text from "./ShareModal.yaml";
+import { create_text_maker } from '../models/text.js';
 
 const text_maker = create_text_maker(text);
 
 export class ShareModal extends React.Component {
 
-  constructor(props) {
+  constructor(props){
     super(props);
 
     this.onBlur = this.onBlur.bind(this);
   }
 
-  onBlur(e) {
+  onBlur(e){
     var currentTarget = e.currentTarget;
     setTimeout(() => {
       if (!currentTarget.contains(document.activeElement)) {
         this.props.toggleModal(false);
       }
     }, 0);
-  } ;
+  }
 
-  render() {
+  render(){
     const {
       subject,
       toggleModal,
@@ -78,6 +78,6 @@ export class ShareModal extends React.Component {
           <div tabIndex='0' onFocus={() => toggleModal(false)} />
         </div>
       </Modal>
-    )
+    );
   }
 }

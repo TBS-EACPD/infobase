@@ -1,6 +1,6 @@
 import { ShareModal } from './ShareModal.js';
-import text from './panel_base_text.yaml'
-import { create_text_maker } from '../models/text.js' ;
+import text from './panel_base_text.yaml';
+import { create_text_maker } from '../models/text.js';
 import { get_static_url } from '../request_utils.js';
 import { panel_href_template } from '../infographic/routes.js';
 
