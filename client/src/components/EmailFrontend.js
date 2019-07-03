@@ -122,8 +122,8 @@ class EmailFrontend extends React.Component {
       )
       .value();
     const ready_to_send = all_required_user_fields_are_filled && privacy_acknowledged && (
-      !sent_to_backend ||
-      sent_to_backend && !_.isEmpty(backend_response) && !backend_response.success
+      !sent_to_backend || // hasn't been submitted yet
+      (sent_to_backend && !_.isEmpty(backend_response) && !backend_response.success) // submitted, but received a failing response, allow for retrys
     );
 
     const disable_forms = (sent_to_backend && backend_response.success) || awaiting_backend_response;
