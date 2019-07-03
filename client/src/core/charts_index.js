@@ -10,7 +10,6 @@ import * as FORMAT from './format.js';
 import common_charts_utils from '../charts/common_charts_utils.js';
 import { trivial_text_maker } from '../models/text.js';
 import { HBar } from '../charts/hbar.js';
-import { CirclePieChart as CirclePieChart } from '../charts/circle_chart.js';
 import { Canada } from '../charts/canada.js';
 import { Arrow } from '../charts/arrow.js';
 import { heatmap } from '../charts/heatmap.js';
@@ -119,7 +118,6 @@ export {
   templates,
   formats,
   HBar, 
-  CirclePieChart, 
   Canada, 
   Arrow, 
   heatmap, 

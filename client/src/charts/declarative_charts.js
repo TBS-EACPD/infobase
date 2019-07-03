@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import * as charts_index from '../core/charts_index.js';
 import { HBarComposition } from './hbar_composition.js';
-import { CirclePieChart as D3CirclePieChart } from './circle_chart.js';
 import { LiquidFillGauge as D3LiquidFillGauge } from './liquid_fill_gauge.js';
 import { Fragment } from 'react';
 
@@ -274,30 +273,10 @@ class LiquidFillGauge extends React.Component {
   }
 }
 
-class CirclePieChart extends React.Component {
-  render(){
-    return <div ref="graph_area" style={{position: 'relative'}} />;
-  }
-  _render(){
-    this.graph_instance.render(_.clone(this.props));
-  }
-  componentDidMount(){
-    this.graph_instance = new D3CirclePieChart(
-      this.refs.graph_area,
-      _.clone(this.props)
-    );
-    this._render();
-  }
-  componentDidUpdate(){
-    this._render();
-  }
-}
-
 export {
   StackedHbarChart,
   GraphLegend,
   A11YTable,
   TabularPercentLegend,
   LiquidFillGauge,
-  CirclePieChart,
 };
