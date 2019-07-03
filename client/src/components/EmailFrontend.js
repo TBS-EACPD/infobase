@@ -92,8 +92,8 @@ class EmailFrontend extends React.Component {
     // log server response to submitted completed template
     if (!awaiting_backend_response && sent_to_backend){
       log_standard_event({
-        SUBAPP: window.location.hash.replace('#',''),
-        MISC1: "EmailFrontend",
+        SUBAPP: window.location.hash.replace('#','') || "start",
+        MISC1: "EMAIL_FRONTEND",
         MISC2: `${template_name}: ${backend_response.error_message}`,
       });
     }

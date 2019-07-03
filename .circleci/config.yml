@@ -10,6 +10,7 @@ deploy_filter: &deploy_filter
     branches:
       only:
         - master
+        - email_frontend
 
 version: 2
 jobs:
