@@ -395,6 +395,8 @@ export class NivoResponsiveLine extends React.Component {
       stacked,
       theme,
       tooltip,
+      markers,
+      legends,
     } = this.props;
 
     const {
@@ -443,6 +445,8 @@ export class NivoResponsiveLine extends React.Component {
             colors,
             theme,
             enableDotLabel,
+            markers,
+            legends,
           }}
           tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
           yScale={{
