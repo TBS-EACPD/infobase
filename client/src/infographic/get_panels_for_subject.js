@@ -43,6 +43,7 @@ import "../panels/detailed_program_spending_split/detailed_program_spending_spli
 
 
 import '../panels/historical_auth_exp/historical_auth_exp.js';
+import '../panels/historical_auth_exp/auth_exp_prog_spending.js';
 
 
 //tag-only panels
@@ -85,6 +86,7 @@ const get_gov_panels = subject => ({
     "financial_intro", 
     "welcome_mat",
     "budget_measures_panel",
+    "auth_exp_prog_spending",
     //"in_year_estimates_split",//turned off until supps A
     "in_year_voted_stat_split",
     "in_year_stat_breakdown",
@@ -115,6 +117,7 @@ const get_dept_panels = subject => ({
     "financial_intro",
     "welcome_mat",
     "budget_measures_panel",
+    "auth_exp_prog_spending",
     "estimates_in_perspective",
     //"in_year_estimates_split",//turned off until supps A
     "in_year_voted_stat_split",
