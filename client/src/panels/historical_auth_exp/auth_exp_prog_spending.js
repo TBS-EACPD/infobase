@@ -3,7 +3,6 @@ import {
   run_template,
   PanelGraph,
   years,
-  util_components,
   declarative_charts,
   StdPanel,
   Col,
@@ -18,13 +17,11 @@ const {
 } = declarative_charts;
 
 const { std_years, planning_years } = years;
-const { Format } = util_components;
-
 const { text_maker, TM } = create_text_maker_component(text);
 
 const auth_cols = _.map(std_years, yr=>`${yr}auth`);
 const exp_cols = _.map(std_years, yr=>`${yr}exp`);
-const progSpending_cols = _.map(planning_years, yr=>`${yr}_gross`);
+const progSpending_cols = _.map(planning_years, yr=>yr);
 
 const text_keys_by_level = {
   dept: "dept_historical_auth_exp_text",
@@ -61,6 +58,8 @@ const render = function({calculations, footnotes, sources}) {
   const plan_ticks = _.map(planning_years, run_template);
   const year1 = _.parseInt((_.first(_.split(_.last(history_ticks), '-'))));
   const year2 = _.parseInt((_.first(_.split(_.first(plan_ticks), '-'))));
+  const gap_year = year2 - year1 === 2 ? `${year1+1}-${(year1+2).toString().substring(2)}` : null;
+  const marker_year = gap_year ? gap_year : _.first(plan_ticks);
   const {exp, auth, progSpending} = graph_args;
   const colors = d3.scaleOrdinal().range(_.concat(newIBCategoryColors));
   
@@ -90,17 +89,14 @@ const render = function({calculations, footnotes, sources}) {
         data={data}
       />
     );*/
-
-
   } else {
     const graph_data = _.map(series_labels, (label) => {
       return {
         id: label,
         data: [],
       };
-    }
-    );
-    exp.map((exp_value,year_index) => {
+    });
+    _.forEach(exp, (exp_value,year_index) => {
       graph_data[0].data.push({
         "x": history_ticks[year_index],
         "y": exp_value,
@@ -110,19 +106,18 @@ const render = function({calculations, footnotes, sources}) {
         "y": auth[year_index],
       });
     });
-    if(year2 - year1 == 2){
+    if(gap_year){
       graph_data[2].data.push({
-        "x": `${year1+1}-${(year1+2).toString().substring(2)}`,
+        "x": gap_year,
         "y": null,
       });
     }
-    progSpending.map((progSpending_value, year_index) => {
+    _.forEach(progSpending, (progSpending_value, year_index) => {
       graph_data[2].data.push({
         "x": plan_ticks[year_index],
         "y": progSpending_value,
       });
     });
-
     graph_content = 
       <div style={{height: 400}} aria-hidden = {true}>
         {
@@ -133,9 +128,12 @@ const render = function({calculations, footnotes, sources}) {
             markers={[
               {
                 axis: 'x',
-                value: "2018-19",
-                lineStyle: { stroke: '#b0413e', strokeWidth: 2 },
-                //legend: 'x marker',
+                value: marker_year,
+                lineStyle: { 
+                  stroke: window.infobase_color_constants.tertiaryColor, 
+                  strokeWidth: 2,
+                  strokeDasharray: ("3, 3"),
+                },
               },
             ]}
             margin= {{
@@ -168,7 +166,6 @@ const render = function({calculations, footnotes, sources}) {
                 ],
               },
             ]}
-  
           />
         }
       </div>;
