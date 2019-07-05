@@ -7,6 +7,6 @@ The GC InfoBase is an interactive data-visualization tool, transforming complex 
 This repository contains the following projects: 
   1) the InfoBase single page application ([/client](https://github.com/TBS-EACPD/InfoBase/blob/master/client))
   2) the InfoBase data API ([/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server))
-  2) the InfoBase email backend ([/server](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend)).
+  2) the InfoBase email backend ([/email_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend)).
   
 See the README.md files in those respective directories for more details on each project.
