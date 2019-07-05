@@ -155,7 +155,6 @@ new PanelGraph({
 
 
 const late_dp_departments = [
-  128, // Employment and Social Development Canada
   237, // Infrastructure Canada
 ];
 _.each(['dept','crso','program'], lvl => {
