@@ -219,7 +219,6 @@ class SingleSubjExplorer extends React.Component {
     const {
       docs_with_data,
 
-      base_hierarchy, 
       flat_nodes,
       is_filtering,
 
@@ -296,37 +295,35 @@ class SingleSubjExplorer extends React.Component {
               }
             />
           }
-          { _.get(base_hierarchy, "length") > 30 && 
-            <div style={{marginTop: '15px'}}>
-              <form
-                style={{marginBottom: "15px"}}
-                onSubmit={evt => {
-                  evt.preventDefault();
-                  evt.stopPropagation();
-                  set_query(evt.target.querySelector('input').value);
-                  this.refs.focus_mount.focus();
-                }}
-              >
+          <div style={{marginTop: '15px'}}>
+            <form
+              style={{marginBottom: "15px"}}
+              onSubmit={evt => {
+                evt.preventDefault();
+                evt.stopPropagation();
+                set_query(evt.target.querySelector('input').value);
+                this.refs.focus_mount.focus();
+              }}
+            >
+              <input 
+                aria-label={text_maker("explorer_search_is_optional")}
+                className="form-control input-lg"
+                type="text"
+                style={{width: "100%"}}
+                placeholder={text_maker("filter_results")}
+                onChange={evt => this.handleQueryChange(evt.target.value)}
+                value={query}
+              />
+              {
+                window.is_a11y_mode &&
                 <input 
-                  aria-label={text_maker("explorer_search_is_optional")}
-                  className="form-control input-lg"
-                  type="text"
-                  style={{width: "100%"}}
-                  placeholder={text_maker("filter_results")}
-                  onChange={evt => this.handleQueryChange(evt.target.value)}
-                  value={query}
+                  type="submit"
+                  name="search"
+                  value={text_maker("explorer_search")}
                 />
-                {
-                  window.is_a11y_mode &&
-                  <input 
-                    type="submit"
-                    name="search"
-                    value={text_maker("explorer_search")}
-                  />
-                }
-              </form>
-            </div>
-          }
+              }
+            </form>
+          </div>
           <div 
             tabIndex={-1}
             className="explorer-focus-mount"
