@@ -16,6 +16,59 @@ const { Format } = util_components;
 
 const main_col = "{{est_in_year}}_estimates";
 
+
+const text_func = (vs, d, break_str) => {
+  if (vs == 'voted') {
+    return d.dept ? `${Subject.Dept.lookup(d.dept).fancy_name} ${break_str}  ${d.desc}` : d.desc;
+  } else {
+    return d.dept ? `${d.desc} ${break_str} ${Subject.Dept.lookup(d.dept).fancy_name}` : d.desc;
+  }
+};
+
+
+
+const node_render = vs => function (foreign_sel) {
+  foreign_sel.html(function (node) {
+    if (this.offsetHeight <= 30 || this.offsetWidth <= 50) { return; }
+
+    const ret = `
+      <div class="FlatTreeMap__TextBox">
+        <div class="FlatTreeMap__ContentTitle">
+          ${text_func(vs, node.data, "-")}
+        </div>
+        ${ this.offsetHeight > 50 ?
+          `<div class="FlatTreeMap__ContentText">
+            ${formats.compact1(node.data["{{est_in_year}}_estimates"])}
+          </div>` : ""}
+      </div>
+      `;
+    return ret;
+  });
+};
+
+const tooltip_render = vs => function (d) {
+  const sel = d3.select(this);
+  sel.attrs({
+    className: "link-unstyled",
+    tabIndex: "0",
+    "aria-hidden": "true",
+    // this can't be called "title" (what tooltip.js uses) because of some other hover effects that fire on titles.
+    "data-ibtt-text": ` 
+      <div class="FlatTreeMap__ToolTip">
+        ${text_func(vs, d.data, "<br/>", true)} <br/>
+        ${formats.compact1(d.data["{{est_in_year}}_estimates"])} (${formats.percentage(d.data["{{est_in_year}}_estimates"]/d.data.total)} ${text_maker("of")} ${d.data.total_of})
+      </div>`,
+    "data-toggle": "tooltip",
+    "data-ibtt-html": "true",
+    "data-container": "body",
+  });
+};
+
+const d3_scale = d3.scaleOrdinal( newIBLightCategoryColors );
+const color_scale = vs => function (d) {
+  return d3_scale(text_func(vs, d, ""));
+};
+
 const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, sources }) {
   const { info, graph_args } = calculations;
   const isVoted = vs === "voted";
@@ -96,56 +149,7 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
 
 
 
-const node_render = vs => function (foreign_sel) {
-  foreign_sel.html(function (node) {
-    if (this.offsetHeight <= 30 || this.offsetWidth <= 50) { return; }
 
-    const ret = `
-      <div class="FlatTreeMap__TextBox">
-        <div class="FlatTreeMap__ContentTitle">
-          ${text_func(vs, node.data, "-")}
-        </div>
-        ${ this.offsetHeight > 50 ?
-          `<div class="FlatTreeMap__ContentText">
-            ${formats.compact1(node.data["{{est_in_year}}_estimates"])}
-          </div>` : ""}
-      </div>
-      `;
-    return ret;
-  });
-};
-
-const tooltip_render = vs => function (d) {
-  const sel = d3.select(this);
-  sel.attrs({
-    className: "link-unstyled",
-    tabIndex: "0",
-    "aria-hidden": "true",
-    // this can't be called "title" (what tooltip.js uses) because of some other hover effects that fire on titles.
-    "data-ibtt-text": ` 
-      <div class="FlatTreeMap__ToolTip">
-        ${text_func(vs, d.data, "<br/>", true)} <br/>
-        ${formats.compact1(d.data["{{est_in_year}}_estimates"])} (${formats.percentage(d.data["{{est_in_year}}_estimates"]/d.data.total)} ${text_maker("of")} ${d.data.total_of})
-      </div>`,
-    "data-toggle": "tooltip",
-    "data-ibtt-html": "true",
-    "data-container": "body",
-  });
-};
-
-const d3_scale = d3.scaleOrdinal( newIBLightCategoryColors );
-const color_scale = vs => function (d) {
-  return d3_scale(text_func(vs, d, ""));
-};
-
-
-const text_func = (vs, d, break_str) => {
-  if (vs == 'voted') {
-    return d.dept ? `${Subject.Dept.lookup(d.dept).fancy_name} ${break_str}  ${d.desc}` : d.desc;
-  } else {
-    return d.dept ? `${d.desc} ${break_str} ${Subject.Dept.lookup(d.dept).fancy_name}` : d.desc;
-  }
-};
 
 const planned_vote_or_stat_calculate = vs => function (subject, info) {
   const { orgVoteStatEstimates } = this.tables;
@@ -190,6 +194,30 @@ const planned_vote_or_stat_calculate = vs => function (subject, info) {
 });
 
 
+const row_cells = ({ name, rpb_link, voted_stat, amount }) => (
+  <Fragment>
+    { rpb_link ? 
+      <td className="left-text_plain">
+        <a href={rpb_link}>
+          {name}
+        </a>
+      </td> :
+      <td className="left-text_plain">
+        {name}
+      </td>
+    }
+    <td className="left-text_plain">
+      {voted_stat}
+    </td>
+    <td className="right_number">
+      <Format
+        type="compact1"
+        content={amount}
+      />
+    </td>
+  </Fragment>
+);
+
 const TopTenTable = ({ rows, total_amt, complement_amt, isVoted }) => (
   <table
     className="table infobase-table table-striped border table-condensed table-blue"
@@ -232,28 +260,4 @@ const TopTenTable = ({ rows, total_amt, complement_amt, isVoted }) => (
       </tr>
     </tbody>
   </table>
-);
-
-const row_cells = ({ name, rpb_link, voted_stat, amount }) => (
-  <Fragment>
-    { rpb_link ? 
-      <td className="left-text_plain">
-        <a href={rpb_link}>
-          {name}
-        </a>
-      </td> :
-      <td className="left-text_plain">
-        {name}
-      </td>
-    }
-    <td className="left-text_plain">
-      {voted_stat}
-    </td>
-    <td className="right_number">
-      <Format
-        type="compact1"
-        content={amount}
-      />
-    </td>
-  </Fragment>
 );
