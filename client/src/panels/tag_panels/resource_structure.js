@@ -30,6 +30,17 @@ import {
 
 const { text_maker, TM } = create_text_maker_component(text);
 
+const children_grouper = (node, children) => {
+  //this one only has one depth, so the root must group its children
+  return _.chain(children)
+    .groupBy(child => child.data.header )
+    .map( (node_group,header) => ({
+      display: header,
+      node_group,
+    }))
+    .value();
+};
+
 const get_non_col_content = ({node}) => { 
   const {
     data: {
@@ -152,18 +163,6 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
     ...get_scheme_props(state),
   });
 };
-
-const children_grouper = (node, children) => {
-  //this one only has one depth, so the root must group its children
-  return _.chain(children)
-    .groupBy(child => child.data.header )
-    .map( (node_group,header) => ({
-      display: header,
-      node_group,
-    }))
-    .value();
-};
-
   
 
 

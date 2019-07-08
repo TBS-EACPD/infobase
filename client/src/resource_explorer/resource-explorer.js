@@ -43,6 +43,32 @@ const { text_maker, TM } = create_text_maker_component(explorer_text);
 const dp_only_schemes = ["MLT"];
 
 
+
+const get_image_glossary_tooltip = (id) => {
+  const glossary_link = glossary_href(id);
+
+  const img = <img
+    style={{marginLeft: "10px", width: "24px"}}
+    aria-hidden="true"
+    src={get_static_url('svg/not-available.svg')} 
+    tabIndex="0"
+    data-toggle="tooltip"
+    data-ibtt-glossary-key={id}
+    data-ibtt-html="true"
+  />;
+
+  return glossary_link && (
+    window.feature_detection.is_mobile() ? 
+      img :
+      <a 
+        href={glossary_link} 
+        style={{lineHeight: 1.5}}
+      >
+        {img}
+      </a>
+  );
+};
+
 const children_grouper = (node, children) => {
   if(node.root){
     return [{node_group: children}];
@@ -463,28 +489,3 @@ export default class ResourceExplorer extends React.Component {
 
   }
 }
-
-const get_image_glossary_tooltip = (id) => {
-  const glossary_link = glossary_href(id);
-
-  const img = <img
-    style={{marginLeft: "10px", width: "24px"}}
-    aria-hidden="true"
-    src={get_static_url('svg/not-available.svg')} 
-    tabIndex="0"
-    data-toggle="tooltip"
-    data-ibtt-glossary-key={id}
-    data-ibtt-html="true"
-  />;
-
-  return glossary_link && (
-    window.feature_detection.is_mobile() ? 
-      img :
-      <a 
-        href={glossary_link} 
-        style={{lineHeight: 1.5}}
-      >
-        {img}
-      </a>
-  );
-};
