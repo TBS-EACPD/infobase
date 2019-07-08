@@ -21,6 +21,36 @@ const initial_state = {
   subject: 'gov_gov',
 };
 
+function get_all_data_columns_for_table(table){
+  return _.chain(table.unique_headers)
+    .map( nick => table.col_from_nick(nick) )
+    .filter(col => !col.hidden && !col.key && col.not_for_display !== true)
+    .value();
+}
+
+function get_default_cols_for_table(table){
+  return _.filter(get_all_data_columns_for_table(table), 'simple_default');
+}
+
+function get_default_dimension_for_table(table){
+  return table.dimensions[0].title_key;
+}
+
+//returns a the proposed new slice of state that will change when a new table is selected
+function get_default_state_for_new_table(table_id){
+  const table = Table.lookup(table_id);
+  const columns = _.map(get_default_cols_for_table(table), 'nick');
+  return {
+    table: table_id,
+    columns,
+    dimension: get_default_dimension_for_table(table),
+    filter: text_maker('all'),
+    page_num: 0,
+    sort_col: 'dept',
+    descending: false, 
+  };
+}
+
 function naive_to_real_state(naive_state){
   const {
     preferTable,
@@ -43,26 +73,12 @@ function naive_to_real_state(naive_state){
 
 }
 
-function get_all_data_columns_for_table(table){
-  return _.chain(table.unique_headers)
-    .map( nick => table.col_from_nick(nick) )
-    .filter(col => !col.hidden && !col.key && col.not_for_display !== true)
-    .value();
-}
-
-function get_default_cols_for_table(table){
-  return _.filter(get_all_data_columns_for_table(table), 'simple_default');
-}
 
 function get_key_columns_for_table(table){ 
   return _.chain(table.unique_headers)
     .map(nick => table.col_from_nick(nick))
     .filter(col => (col.key && !col.hidden) || col.nick === 'dept')
     .value();
-}
-
-function get_default_dimension_for_table(table){
-  return table.dimensions[0].title_key;
 }
 
 //Note that this will cause a memory leak as this closure will never get GC'd
@@ -73,21 +89,6 @@ const get_filters_for_dim = _.memoize(
   ]), 
   (table,dim_key)=> `${table.id}-${dim_key}`
 );
-
-//returns a the proposed new slice of state that will change when a new table is selected
-function get_default_state_for_new_table(table_id){
-  const table = Table.lookup(table_id);
-  const columns = _.map(get_default_cols_for_table(table), 'nick');
-  return {
-    table: table_id,
-    columns,
-    dimension: get_default_dimension_for_table(table),
-    filter: text_maker('all'),
-    page_num: 0,
-    sort_col: 'dept',
-    descending: false, 
-  };
-}
 
 const reducer = (state=initial_state, action) => {
 

@@ -9,6 +9,30 @@ const { std_years } = years;
 const voted_label = trivial_text_maker("voted");
 const stat_label = trivial_text_maker("stat");
 
+const vote_stat_query = function(vote_or_stat, cut_off){
+  var total=0;
+  var cut_off_counter=0;
+  var dept = this.dept || true;
+
+  return _.chain(this.table.voted_stat(undefined,dept, false)[vote_or_stat])
+    .map(_.clone)
+    .flatten()
+    .sortBy(function(d){
+      d.total = d3.sum(_.map(std_years, function(year){return d[year+"auth"];}));
+      total += d.total;
+      return -d.total;
+    })
+    .each(function(d){
+      d.percent = d.total / total;
+    })
+    .each(function(d){
+      if (!cut_off){return;}
+      cut_off_counter += d.percent;
+      d.cut_off = cut_off_counter >= cut_off ? true : false;
+    })
+    .value();
+};
+
 export default {
   text,
   id: "orgVoteStatPa",
@@ -167,31 +191,6 @@ export default {
     }
     return row;
   },
-};
-
-
-const vote_stat_query = function(vote_or_stat, cut_off){
-  var total=0;
-  var cut_off_counter=0;
-  var dept = this.dept || true;
-
-  return _.chain(this.table.voted_stat(undefined,dept, false)[vote_or_stat])
-    .map(_.clone)
-    .flatten()
-    .sortBy(function(d){
-      d.total = d3.sum(_.map(std_years, function(year){return d[year+"auth"];}));
-      total += d.total;
-      return -d.total;
-    })
-    .each(function(d){
-      d.percent = d.total / total;
-    })
-    .each(function(d){
-      if (!cut_off){return;}
-      cut_off_counter += d.percent;
-      d.cut_off = cut_off_counter >= cut_off ? true : false;
-    })
-    .value();
 };
 
 
