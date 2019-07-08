@@ -212,6 +212,23 @@ class AnalyticsSynchronizer extends React.Component {
   }
 }
 
+
+const synchronize_link = (target_el_selector, link_modifier_func) => {
+  //TODO: probabbly being too defensive here
+  const el_to_update = document.querySelector(target_el_selector);
+  let newHash = _.isFunction(link_modifier_func) ? 
+    link_modifier_func(document.location.hash) : 
+    document.location.hash;
+  newHash = newHash.split("#")[1] || "";
+
+  if ( _.get(el_to_update, "href") ){
+    const link = _.first( el_to_update.href.split("#") );
+    if (link){
+      el_to_update.href = `${link}#${newHash}`;
+    }
+  }
+};
+
 export const LangSynchronizer = withRouter(
   class LangSynchronizer extends React.Component {
     render(){ return null; }
@@ -242,21 +259,6 @@ export const A11yLinkSynchronizer = withRouter(
   }
 );
 
-const synchronize_link = (target_el_selector, link_modifier_func) => {
-  //TODO: probabbly being too defensive here
-  const el_to_update = document.querySelector(target_el_selector);
-  let newHash = _.isFunction(link_modifier_func) ? 
-    link_modifier_func(document.location.hash) : 
-    document.location.hash;
-  newHash = newHash.split("#")[1] || "";
-
-  if ( _.get(el_to_update, "href") ){
-    const link = _.first( el_to_update.href.split("#") );
-    if (link){
-      el_to_update.href = `${link}#${newHash}`;
-    }
-  }
-};
 
 export const ReactUnmounter = withRouter(
   class ReactUnmounter_ extends React.Component {

@@ -130,6 +130,18 @@ const example_data = {
   ],
 };
 
+
+function get_mod_class(node, sibling_index, explorer_context){
+  if(node.is_search_match){
+    return "ExplorerNode--search-match";
+  } else if(explorer_context.zebra_stripe && sibling_index%2){
+    return "ExplorerNode--secondary-color";
+  }
+
+  return null;
+}
+
+
 export const ExplorerHeader = ({column_defs, is_sortable, sort_col, is_descending, computed_col_styles, col_click}) => {
 
   return (
@@ -322,16 +334,6 @@ export const ExplorerNode = ({
   </div>
 );
 
-
-function get_mod_class(node, sibling_index, explorer_context){
-  if(node.is_search_match){
-    return "ExplorerNode--search-match";
-  } else if(explorer_context.zebra_stripe && sibling_index%2){
-    return "ExplorerNode--secondary-color";
-  }
-
-  return null;
-}
 
 const ExplorerRoot = ({root, explorer_context}) => (
   <div>
