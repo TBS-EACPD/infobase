@@ -37,7 +37,8 @@
     "eslint-plugin-node": "^6.0.0",
     "eslint-plugin-react": "^7.4.0",
     "jest": "^24",
-    "jest-cli": "^24"
+    "jest-cli": "^24",
+    "nodemon": "^1.19.1"
   },
   "scripts": {
     "pretest": "(export USE_TEST_DATA='true' && npm run populate_db)",
@@ -46,8 +47,8 @@
     "preci_test": "(export USE_TEST_DATA='true' && npm run transpiled_populate_db)",
     "ci_test": "jest --coverage --forceExit",
     "test:watch": "jest --watch",
-    "debug": "babel-node --inspect src/server.js",
-    "start": "babel-node src/server.js",
+    "debug": "nodemon --exec babel-node --inspect ./src/server.js",
+    "start": "nodemon --exec babel-node src/server.js",
     "transpiled_start": "babel-node transpiled_build/server.js",
     "debug-brk": "babel-node --inspect-brk src/server.js",
     "populate_db": "babel-node src/populate_db.js",
