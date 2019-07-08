@@ -14,6 +14,24 @@ const get_formatter = (is_money, formatter, raw = true) => (
     ((value) => raw ? formatter(value, {raw: true}) : formatter(value))
 );
 
+
+const get_scale_bounds = (stacked, raw_data, zoomed) => {
+  const min = _.min(raw_data);
+  const max = _.max(raw_data);
+  const scaled_min = min < 0 ? min * 1.1 : min * 0.9;
+  const scaled_max = max < 0 ? max * 0.9 : max * 1.1;
+  if(stacked){
+    return {
+      min: min < 0 ? scaled_min : 0,
+      max: 'auto',
+    };
+  }
+  return {
+    min: zoomed || min < 0 ? scaled_min : 0,
+    max: !zoomed && max < 0 ? 0 : scaled_max,
+  };
+};
+
 const default_tooltip = (tooltip_items, formatter) => (
   <div style={{color: window.infobase_color_constants.textColor}}>
     <table style={{width: '100%', borderCollapse: 'collapse'}}>
@@ -464,21 +482,4 @@ NivoResponsiveLine.defaultProps = {
     zoomed: false,
     toggle: false,
   },
-};
-
-const get_scale_bounds = (stacked, raw_data, zoomed) => {
-  const min = _.min(raw_data);
-  const max = _.max(raw_data);
-  const scaled_min = min < 0 ? min * 1.1 : min * 0.9;
-  const scaled_max = max < 0 ? max * 0.9 : max * 1.1;
-  if(stacked){
-    return {
-      min: min < 0 ? scaled_min : 0,
-      max: 'auto',
-    };
-  }
-  return {
-    min: zoomed || min < 0 ? scaled_min : 0,
-    max: !zoomed && max < 0 ? 0 : scaled_max,
-  };
 };

@@ -34,23 +34,18 @@ const format_display_number = (value, is_fte = false, raw = false) =>
     is_fte ? `${formats.big_int_real_raw(Math.round(value))} ${text_maker("fte")}` : formats.compact1_raw(value) :
     is_fte ? `${formats.big_int_real(Math.round(value))} ${text_maker("fte")}` : formats.compact1(value);
 
-/* NODE RENDERING FUNCTIONS */
 
-function std_node_render(is_fte, foreign_sel) {
-  foreign_sel.html(function (node) {
-    const node_size = get_node_size.bind(this)();
-    if (node_size === "tiny") { return; } //no contents on tiny nodes
-    const text_size = node_size === "medium" ? "" : `--${node_size}`;
-    const display_name = node_name(node, this.offsetWidth);
-    const display_number = this.offsetHeight > 50 ?
-      is_fte ?
-        format_display_number(node.data.ftes, true) :
-        format_display_number(node.data.amount) :
-      '';
-    return node_html(node, display_name, text_size, display_number);
-  });
+function generate_infograph_href(d, data_area) {
+  if (d.data.subject) {
+    return `
+    <div style="padding-top: 10px">
+      <a class="TM_Tooltip__link" href=${infograph_href_template(d.data.subject, data_area)} >
+        ${text_maker("see_the_infographic")}
+      </a>
+    </div>
+    `;
+  } else { return ''; }
 }
-const curried_node_render = _.curry(std_node_render);
 
 
 function node_html(node, display_name, text_size, display_number) {
@@ -81,6 +76,24 @@ function get_node_size(node) {
   else if (this.offsetHeight > 150 && this.offsetWidth > 300) { return "large"; }
   else { return "medium"; }
 }
+
+function std_node_render(is_fte, foreign_sel) {
+  foreign_sel.html(function (node) {
+    const node_size = get_node_size.bind(this)();
+    if (node_size === "tiny") { return; } //no contents on tiny nodes
+    const text_size = node_size === "medium" ? "" : `--${node_size}`;
+    const display_name = node_name(node, this.offsetWidth);
+    const display_number = this.offsetHeight > 50 ?
+      is_fte ?
+        format_display_number(node.data.ftes, true) :
+        format_display_number(node.data.amount) :
+      '';
+    return node_html(node, display_name, text_size, display_number);
+  });
+}
+const curried_node_render = _.curry(std_node_render);
+
+
 
 
 /* COLOUR SCALES */
@@ -306,17 +319,6 @@ function mobile_tooltip_render_changes(tooltip_sel) {
 
 
 
-function generate_infograph_href(d, data_area) {
-  if (d.data.subject) {
-    return `
-    <div style="padding-top: 10px">
-      <a class="TM_Tooltip__link" href=${infograph_href_template(d.data.subject, data_area)} >
-        ${text_maker("see_the_infographic")}
-      </a>
-    </div>
-    `;
-  } else { return ''; }
-}
 
 function check_props(props) {
   props.match.params.perspective = props.match.params.perspective || "drf";

@@ -31,6 +31,13 @@ function header_col(perspective, year) {
   return;
 }
 
+
+function recurse_adjust_size(node, parent_ratio) {
+  const new_size = node.size * parent_ratio;
+  _.set(node, 'size', new_size);
+  _.each(node.children, child => { recurse_adjust_size(child, new_size / node.amount); });
+}
+
 function group_smallest(node_list, node_creator, should_recurse = true, perc_cutoff = 0.02, should_adjust_size = true) {
   if (_.isEmpty(node_list)) {
     return node_list;
@@ -87,11 +94,6 @@ function group_smallest(node_list, node_creator, should_recurse = true, perc_cut
   }
 }
 
-function recurse_adjust_size(node, parent_ratio) {
-  const new_size = node.size * parent_ratio;
-  _.set(node, 'size', new_size);
-  _.each(node.children, child => { recurse_adjust_size(child, new_size / node.amount); });
-}
 
 
 function prep_nodes(node, perspective, get_changes) {
@@ -140,29 +142,6 @@ function spending_change_year_split(year_string) {
   return year_string.split(":");
 }
 
-export function get_data(perspective, year, filter_var, get_changes) {
-  // abandon all hope, ye you enter here
-  let data = [],
-    year_1, year_2;
-  // check the year format
-  if (!year || year === "undefined" || (get_changes && spending_change_year_split(year).length !== 2) || (!get_changes && spending_change_year_split(year).length !== 1)) {
-    return data;
-  }
-  if (get_changes) {
-    year_1 = spending_change_year_split(year)[0];
-    year_2 = spending_change_year_split(year)[1];
-  }
-
-  if (perspective === "drf" || perspective === "drf_ftes") {
-    return get_data_drf(perspective, year, year_1, year_2, filter_var, get_changes);
-  } else if (perspective === "so") {
-    return get_data_so(perspective, year, year_1, year_2, filter_var, get_changes);
-  } else if (perspective === "tp") {
-    return get_data_tp(perspective, year, year_1, year_2, filter_var, get_changes);
-  } else if (perspective === "vote_stat") {
-    return get_data_vs(perspective, year, year_1, year_2, filter_var, get_changes);
-  }
-}
 
 function get_data_drf(perspective, year, year_1, year_2, filter_var, get_changes) {
   const program_ftes_table = Table.lookup('programFtes');
@@ -404,4 +383,29 @@ function get_data_vs(perspective, year, year_1, year_2, filter_var, get_changes)
     0.01,
   );
   return root;
+}
+
+
+export function get_data(perspective, year, filter_var, get_changes) {
+  // abandon all hope, ye you enter here
+  let data = [],
+    year_1, year_2;
+  // check the year format
+  if (!year || year === "undefined" || (get_changes && spending_change_year_split(year).length !== 2) || (!get_changes && spending_change_year_split(year).length !== 1)) {
+    return data;
+  }
+  if (get_changes) {
+    year_1 = spending_change_year_split(year)[0];
+    year_2 = spending_change_year_split(year)[1];
+  }
+
+  if (perspective === "drf" || perspective === "drf_ftes") {
+    return get_data_drf(perspective, year, year_1, year_2, filter_var, get_changes);
+  } else if (perspective === "so") {
+    return get_data_so(perspective, year, year_1, year_2, filter_var, get_changes);
+  } else if (perspective === "tp") {
+    return get_data_tp(perspective, year, year_1, year_2, filter_var, get_changes);
+  } else if (perspective === "vote_stat") {
+    return get_data_vs(perspective, year, year_1, year_2, filter_var, get_changes);
+  }
 }

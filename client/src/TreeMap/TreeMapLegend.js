@@ -15,6 +15,30 @@ const size_controls = {
   "so": text_maker("expenditures_lower"),
 };
 
+
+const proportional_block = () =>
+  <svg width="70" height="70">
+    <g transform="translate(5,5)">
+      <rect className="mutLegendBG" fill="white" stroke="black" strokeWidth="2" width="60" height="60" />
+      <rect className="mutLegendBG" fill="white" stroke="black" strokeWidth="2" width="30" height="30" />
+      <text className="breakLabels" x="25" y="25" style={{ textAnchor: "end", display: "block" }} >
+        {`${formats.big_int_real_raw(25)}`}
+      </text>
+      <text className="breakLabels" x="55" y="55" style={{ textAnchor: "end", display: "block" }} >
+        {`${formats.big_int_real_raw(100)}`}
+      </text>
+    </g>
+  </svg>;
+
+const legend_block = (val, col, ix) =>
+  <g key={ix} className="legendCells" transform={`translate(${ix * 60 + 10},5)`}>
+    <rect className="breakRect" height="25" width="60" fill={col} stroke="black" />
+    {val &&
+      <text className="breakLabels" x="0" y="40" style={{ textAnchor: "middle", display: "block" }} >
+        {val}
+      </text>}
+  </g>;
+
 export class TreeMapLegend extends React.Component {
   constructor() {
     super();
@@ -61,26 +85,3 @@ export class TreeMapLegend extends React.Component {
     );
   }
 }
-
-const proportional_block = () =>
-  <svg width="70" height="70">
-    <g transform="translate(5,5)">
-      <rect className="mutLegendBG" fill="white" stroke="black" strokeWidth="2" width="60" height="60" />
-      <rect className="mutLegendBG" fill="white" stroke="black" strokeWidth="2" width="30" height="30" />
-      <text className="breakLabels" x="25" y="25" style={{ textAnchor: "end", display: "block" }} >
-        {`${formats.big_int_real_raw(25)}`}
-      </text>
-      <text className="breakLabels" x="55" y="55" style={{ textAnchor: "end", display: "block" }} >
-        {`${formats.big_int_real_raw(100)}`}
-      </text>
-    </g>
-  </svg>;
-
-const legend_block = (val, col, ix) =>
-  <g key={ix} className="legendCells" transform={`translate(${ix * 60 + 10},5)`}>
-    <rect className="breakRect" height="25" width="60" fill={col} stroke="black" />
-    {val &&
-      <text className="breakLabels" x="0" y="40" style={{ textAnchor: "middle", display: "block" }} >
-        {val}
-      </text>}
-  </g>;

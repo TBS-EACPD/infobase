@@ -61,6 +61,26 @@ export class FlatTreeMapViz extends React.Component {
       })
     );
 
+    function treemap_node_content_container(sel) {
+      sel.styles(
+        d => ({
+          left: `${(d.x0)}px`,
+          top: `${(d.y0)}px`,
+          width: `${(d.x1) - (d.x0)}px`,
+          height: `${(d.y1) - (d.y0)}px`,
+        })
+      );
+    }
+
+    function treemap_node_text_container(sel) {
+      sel.styles(
+        d => ({
+          width: `${(d.x1) - (d.x0)}px`,
+          height: `${(d.y1) - (d.y0)}px`,
+        })
+      );
+    }
+
     const html_root = d3.select(el).select('div');
 
     const items = html_root
@@ -83,25 +103,7 @@ export class FlatTreeMapViz extends React.Component {
 
     items.each(tooltip_render);
 
-    function treemap_node_content_container(sel) {
-      sel.styles(
-        d => ({
-          left: `${(d.x0)}px`,
-          top: `${(d.y0)}px`,
-          width: `${(d.x1) - (d.x0)}px`,
-          height: `${(d.y1) - (d.y0)}px`,
-        })
-      );
-    }
 
-    function treemap_node_text_container(sel) {
-      sel.styles(
-        d => ({
-          width: `${(d.x1) - (d.x0)}px`,
-          height: `${(d.y1) - (d.y0)}px`,
-        })
-      );
-    }
 
     return html_root;
   }

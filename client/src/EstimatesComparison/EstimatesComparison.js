@@ -82,6 +82,7 @@ export default class EstimatesComparison extends React.Component {
   }
 }
 
+
 const map_state_to_props_from_memoized_funcs = memoized_funcs => {
 
   const { get_scheme_props } = memoized_funcs;
@@ -93,48 +94,6 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
   );
 };
 
-class ExplorerContainer extends React.Component {
-  constructor(props){
-    super();
-
-    const { route_h7y_layout } = props;
-
-    const scheme = estimates_diff_scheme;
-    const scheme_key = estimates_diff_scheme.key;
-
-    const reducer = combineReducers({
-      root: root_reducer, 
-      [scheme_key]: scheme.reducer,
-    });
-
-    const mapStateToProps = map_state_to_props_from_memoized_funcs( get_memoized_funcs([scheme]) );
-
-    const mapDispatchToProps = dispatch => _.immutate(
-      map_dispatch_to_root_props(dispatch),
-      scheme.dispatch_to_props(dispatch)
-    );
-
-    const initialState = {
-      root: _.immutate(initial_root_state, {scheme_key}),
-      [scheme_key]: get_initial_scheme_state(route_h7y_layout),
-    };
-
-    const connecter = connect(mapStateToProps, mapDispatchToProps);
-    const Container = connecter(EstimatesExplorer);
-    const store = createStore(reducer, initialState);
-
-    this.Container = Container;
-    this.store = store;
-  }
-  render(){
-    const { store, Container } = this;
-    return (
-      <Provider store={store}>
-        <Container {...this.props}/>
-      </Provider>
-    );
-  }
-}
 
 const DetailedAmountsByDoc = ({amounts_by_doc}) => {
 
@@ -221,6 +180,7 @@ const get_non_col_content = ({node}) => {
     </div>
   );
 };
+
 
 class EstimatesExplorer extends React.Component {
   constructor(){
@@ -429,6 +389,50 @@ class EstimatesExplorer extends React.Component {
           />
         </div>
       </div>
+    );
+  }
+}
+
+
+class ExplorerContainer extends React.Component {
+  constructor(props){
+    super();
+
+    const { route_h7y_layout } = props;
+
+    const scheme = estimates_diff_scheme;
+    const scheme_key = estimates_diff_scheme.key;
+
+    const reducer = combineReducers({
+      root: root_reducer, 
+      [scheme_key]: scheme.reducer,
+    });
+
+    const mapStateToProps = map_state_to_props_from_memoized_funcs( get_memoized_funcs([scheme]) );
+
+    const mapDispatchToProps = dispatch => _.immutate(
+      map_dispatch_to_root_props(dispatch),
+      scheme.dispatch_to_props(dispatch)
+    );
+
+    const initialState = {
+      root: _.immutate(initial_root_state, {scheme_key}),
+      [scheme_key]: get_initial_scheme_state(route_h7y_layout),
+    };
+
+    const connecter = connect(mapStateToProps, mapDispatchToProps);
+    const Container = connecter(EstimatesExplorer);
+    const store = createStore(reducer, initialState);
+
+    this.Container = Container;
+    this.store = store;
+  }
+  render(){
+    const { store, Container } = this;
+    return (
+      <Provider store={store}>
+        <Container {...this.props}/>
+      </Provider>
     );
   }
 }

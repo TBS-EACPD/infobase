@@ -22,6 +22,36 @@ export const current_sups_letter = ""; // Update this on each new sups release!
 const current_doc_code = current_doc_is_mains ? "MAINS" : `SE${current_sups_letter}`;
 const ordered_est_docs = ["MAINS", "VA", "SA", "SEA", "SEB", "SEC"];
 
+function footnote_from_glossary_item(key){
+  return () => GlossaryEntry.lookup(key).definition;
+}
+
+const central_vote_footnotes = [
+  [5 , footnote_from_glossary_item("TB5")],
+  [10, footnote_from_glossary_item("TB10")],
+  [15, footnote_from_glossary_item("TB15")],
+  [25, footnote_from_glossary_item("TB25")],
+  [30, footnote_from_glossary_item("TB30")],
+  [35, footnote_from_glossary_item("TB33")], //33 has become 35
+  [40, _.constant(biv_footnote)],
+];
+
+function get_footnotes_for_votestat_item({desc, org_id, votenum}){
+  if(+org_id === 326){
+    const central_vote_footnote = _.find(
+      central_vote_footnotes, 
+      ([num]) => votenum === num
+    );
+    if(central_vote_footnote){
+      return [{
+        text: central_vote_footnote[1](),
+      }];
+    }
+    
+  }
+  return ;
+}
+
 const prior_in_year_doc_filter = (item) => _.chain(ordered_est_docs)
   .takeWhile( est_doc => est_doc !== current_doc_code)
   .includes( item.est_doc_code )
@@ -333,35 +363,6 @@ export const col_defs = [
     },
   },
 ];
-
-function footnote_from_glossary_item(key){
-  return () => GlossaryEntry.lookup(key).definition;
-}
-const central_vote_footnotes = [
-  [5 , footnote_from_glossary_item("TB5")],
-  [10, footnote_from_glossary_item("TB10")],
-  [15, footnote_from_glossary_item("TB15")],
-  [25, footnote_from_glossary_item("TB25")],
-  [30, footnote_from_glossary_item("TB30")],
-  [35, footnote_from_glossary_item("TB33")], //33 has become 35
-  [40, _.constant(biv_footnote)],
-];
-
-function get_footnotes_for_votestat_item({desc, org_id, votenum}){
-  if(+org_id === 326){
-    const central_vote_footnote = _.find(
-      central_vote_footnotes, 
-      ([num]) => votenum === num
-    );
-    if(central_vote_footnote){
-      return [{
-        text: central_vote_footnote[1](),
-      }];
-    }
-    
-  }
-  return ;
-}
 
 
 const scheme_key = "estimates_diff";

@@ -141,14 +141,81 @@ export class TreeMap extends React.Component {
         return b.value - a.value || b.height - a.height;
       })
     );
+    // Draw the coloured rectangles
+    function rectan(sel) {
+      sel.styles(d => ({
+        left: `${x(d.x0)}px`,
+        top: `${y(d.y0)}px`,
+        width: `${x(d.x1) - x(d.x0)}px`,
+        height: `${y(d.y1) - y(d.y0)}px`,
+        "background-color": colorScale(d),
+      }));
+    }
+
+    // Draw the invisible text rectangles
+    function treemap_node_content_container(sel) {
+      sel
+        .styles(d => ({
+          left: `${x(d.x0)}px`,
+          top: `${y(d.y0)}px`,
+          width: `${x(d.x1) - x(d.x0)}px`,
+          height: `${y(d.y1) - y(d.y0)}px`,
+        }));
+    }
 
     const display = d => {
-      if (!d.children) {
-        return;
-      }
       const main_group = viz_root.insert('div')
         .datum(d)
         .attr('class', 'depth');
+      
+      function transition(d) {
+        if (transitioning || !d) return;
+        transitioning = true;
+
+        // Remove all tooltips when transitioning
+        // TODO: will this actually work? this is never set
+        d3.select(this)
+          .select('.TM_TooltipContainer')
+          .remove();
+
+        const zoomed_group = display(d);
+        const main_trans = main_group.transition().duration(650);
+        const zoomed_trans = zoomed_group.transition().duration(650);
+
+        x.domain([d.x0, d.x1]);
+        y.domain([d.y0, d.y1]);
+
+        // Hide overflow while transitioning
+        viz_root.style('overflow', "hidden");
+
+        // Draw child nodes on top of parent nodes.
+        viz_root.selectAll('.depth').sort((a, b) => a.depth - b.depth);
+
+        // Transition to the new view.
+        main_trans.selectAll('.TreeMap__Rectangle').call(rectan);
+        zoomed_trans.selectAll('.TreeMap__Rectangle').call(rectan);
+
+        // Remove text when transitioning, then display again
+        main_trans.selectAll('.TreeMapNode__ContentBox').style('display', 'none');
+        main_trans.selectAll('.TreeMapNode__ContentBoxContainer').call(treemap_node_content_container);
+        zoomed_trans.selectAll('.TreeMapNode__ContentBox').style('display', 'block');
+        zoomed_trans.selectAll('.TreeMapNode__ContentBoxContainer').call(treemap_node_content_container);
+
+        zoomed_trans.selectAll('.TreeMapNode__ContentBoxContainer').call(treemap_node_content_container); // TODO: why is this here?
+
+        // Remove the old node when the transition is finished.
+        main_trans.on('end.remove', function () {
+          this.remove();
+          transitioning = false;
+          viz_root.style("overflow", "visible");
+          zoomed_group.selectAll('.TreeMapNode__ContentBoxContainer').call(node_render);
+        });
+      }
+
+      if (!d.children) {
+        return;
+      }
+
 
       main_group.html("");
       const main = main_group.selectAll('.TreeMap__Division')
@@ -255,73 +322,10 @@ export class TreeMap extends React.Component {
           .call(treemap_node_content_container);
       }
 
-      function transition(d) {
-        if (transitioning || !d) return;
-        transitioning = true;
 
-        // Remove all tooltips when transitioning
-        // TODO: will this actually work? this is never set
-        d3.select(this)
-          .select('.TM_TooltipContainer')
-          .remove();
-
-        const zoomed_group = display(d);
-        const main_trans = main_group.transition().duration(650);
-        const zoomed_trans = zoomed_group.transition().duration(650);
-
-        x.domain([d.x0, d.x1]);
-        y.domain([d.y0, d.y1]);
-
-        // Hide overflow while transitioning
-        viz_root.style('overflow', "hidden");
-
-        // Draw child nodes on top of parent nodes.
-        viz_root.selectAll('.depth').sort((a, b) => a.depth - b.depth);
-
-        // Transition to the new view.
-        main_trans.selectAll('.TreeMap__Rectangle').call(rectan);
-        zoomed_trans.selectAll('.TreeMap__Rectangle').call(rectan);
-
-        // Remove text when transitioning, then display again
-        main_trans.selectAll('.TreeMapNode__ContentBox').style('display', 'none');
-        main_trans.selectAll('.TreeMapNode__ContentBoxContainer').call(treemap_node_content_container);
-        zoomed_trans.selectAll('.TreeMapNode__ContentBox').style('display', 'block');
-        zoomed_trans.selectAll('.TreeMapNode__ContentBoxContainer').call(treemap_node_content_container);
-
-        zoomed_trans.selectAll('.TreeMapNode__ContentBoxContainer').call(treemap_node_content_container); // TODO: why is this here?
-
-        // Remove the old node when the transition is finished.
-        main_trans.on('end.remove', function () {
-          this.remove();
-          transitioning = false;
-          viz_root.style("overflow", "visible");
-          zoomed_group.selectAll('.TreeMapNode__ContentBoxContainer').call(node_render);
-        });
-      }
       return main;
     };
 
-    // Draw the coloured rectangles
-    function rectan(sel) {
-      sel.styles(d => ({
-        left: `${x(d.x0)}px`,
-        top: `${y(d.y0)}px`,
-        width: `${x(d.x1) - x(d.x0)}px`,
-        height: `${y(d.y1) - y(d.y0)}px`,
-        "background-color": colorScale(d),
-      }));
-    }
-
-    // Draw the invisible text rectangles
-    function treemap_node_content_container(sel) {
-      sel
-        .styles(d => ({
-          left: `${x(d.x0)}px`,
-          top: `${y(d.y0)}px`,
-          width: `${x(d.x1) - x(d.x0)}px`,
-          height: `${y(d.y1) - y(d.y0)}px`,
-        }));
-    }
 
     const main = display(root);
     //node_render is special, we call it once on first render (here) 
