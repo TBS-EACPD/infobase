@@ -15,14 +15,14 @@ import {
   Indicator,
   ResultCounts,
   ordered_status_keys,
-  get_results_doc_keys,
+  get_result_doc_keys,
 } from './results_common.js';
 import { TM, text_maker } from './drr_summary_text.js';
 
 const { A11YTable } = declarative_charts;
 const { result_simple_statuses } = businessConstants;
 
-const latest_drr_doc_key = _.last( get_results_doc_keys("drr") );
+const latest_drr_doc_key = _.last( get_result_doc_keys("drr") );
 
 const grid_colors = {
   met: "results-icon-array-pass",
