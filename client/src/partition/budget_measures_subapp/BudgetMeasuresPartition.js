@@ -89,6 +89,7 @@ const root_text_func = (displayed_measure_count, selected_value, year_value, roo
   );
 };
 
+
 const popup_template = (year_value, node) => {
   const dept_is_first_column = (node.depth === 1 && node.data.type === "dept") || 
     (node.depth === 2 && node.parent.data.type === "dept") || 
@@ -175,6 +176,30 @@ const popup_template = (year_value, node) => {
   return text_maker("budget_measure_popup_template", popup_options);
 };
 
+const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade) => {
+  const displayed_measure_count = _.filter(
+    BudgetMeasure.get_all(), 
+    measure => {
+      const measure_is_filtered_out_for_year = props.year_value !== measure.year;
+      const measure_is_filtered_out_for_value = props.selected_value !== "funding" && !_.some(measure.data, (row) => row[props.selected_value] !== 0);
+      return !measure_is_filtered_out_for_year && !measure_is_filtered_out_for_value;
+    }
+  ).length;
+
+  diagram.configure_then_render({
+    data,
+    formatter,
+    level_headers: get_level_headers(props.first_column, props.selected_value),
+    root_text_func: _.curry(root_text_func)(displayed_measure_count, props.selected_value, props.year_value),
+    popup_template: _.curry(popup_template)(props.year_value),
+    data_wrapper_node_rules,
+    dont_fade,
+    colors: newIBLightCategoryColors,
+    background_color: color_defs.primaryColor,
+  });
+};
+
+
 const data_wrapper_node_rules_to_be_curried = (is_funding_overview, node) => {
   const root_value = _.last( node.ancestors() ).value;
   node.__value__ = node.value;
@@ -196,14 +221,6 @@ const data_wrapper_node_rules_to_be_curried = (is_funding_overview, node) => {
     );
     return [show.concat(unhide), _.difference(hide, unhide)];
   };
-};
-
-const update_diagram = (diagram, props) => {
-  if (props.filter_string){
-    update_with_search(diagram, props);
-  } else {
-    standard_update(diagram, props);
-  }
 };
 
 const standard_update = (diagram, props) => {
@@ -263,27 +280,12 @@ const update_with_search = (diagram, props) => {
   render_diagram(diagram, props, search_tree, search_data_wrapper_node_rules, dont_fade);
 };
 
-const render_diagram = (diagram, props, data, data_wrapper_node_rules, dont_fade) => {
-  const displayed_measure_count = _.filter(
-    BudgetMeasure.get_all(), 
-    measure => {
-      const measure_is_filtered_out_for_year = props.year_value !== measure.year;
-      const measure_is_filtered_out_for_value = props.selected_value !== "funding" && !_.some(measure.data, (row) => row[props.selected_value] !== 0);
-      return !measure_is_filtered_out_for_year && !measure_is_filtered_out_for_value;
-    }
-  ).length;
-
-  diagram.configure_then_render({
-    data,
-    formatter,
-    level_headers: get_level_headers(props.first_column, props.selected_value),
-    root_text_func: _.curry(root_text_func)(displayed_measure_count, props.selected_value, props.year_value),
-    popup_template: _.curry(popup_template)(props.year_value),
-    data_wrapper_node_rules,
-    dont_fade,
-    colors: newIBLightCategoryColors,
-    background_color: color_defs.primaryColor,
-  });
+const update_diagram = (diagram, props) => {
+  if (props.filter_string){
+    update_with_search(diagram, props);
+  } else {
+    standard_update(diagram, props);
+  }
 };
 
 

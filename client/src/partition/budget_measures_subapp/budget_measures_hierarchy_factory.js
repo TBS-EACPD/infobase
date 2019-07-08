@@ -30,20 +30,6 @@ const get_total_budget_measure_funds = (year_value, selected_value) => {
     .value();
 };
 
-const post_traversal_modifications = (node, year_value, selected_value) => {
-  node.value_type = selected_value;
-
-  if ( _.isNaN(node.value) && node.children && node.children.length > 0 ){
-    node.value = roll_up_children_values(node);
-  }
-
-  if (node.depth > 1 || node.data.id === "net_adjust"){
-    node.submeasures = get_node_submeasures(node, year_value, selected_value);
-  }
-
-  post_traversal_children_filter(node);
-  post_traversal_search_string_set(node);
-};
 
 const roll_up_children_values = (node) => {
   return _.reduce(node.children, (sum, child_node) => sum + child_node.value, 0);
@@ -96,6 +82,8 @@ const get_node_submeasures = (node, year_value, selected_value) => {
   return node_submeasures;
 };
 
+
+
 const post_traversal_children_filter = (node) => {
   if (node.value_type === "funding"){
     return; // Don't filter anything when Budget 2018 Funding selected, want to show 0$ items in this case only
@@ -111,6 +99,7 @@ const post_traversal_children_filter = (node) => {
   }
 };
 
+
 const post_traversal_search_string_set = (node) => {
   node.data.search_string = "";
   if (node.data.name){
@@ -119,6 +108,22 @@ const post_traversal_search_string_set = (node) => {
   if (node.data.description){
     node.data.search_string += _.deburr(node.data.description.replace(/<(?:.|\n)*?>/gm, '').toLowerCase());
   }
+};
+
+
+const post_traversal_modifications = (node, year_value, selected_value) => {
+  node.value_type = selected_value;
+
+  if ( _.isNaN(node.value) && node.children && node.children.length > 0 ){
+    node.value = roll_up_children_values(node);
+  }
+
+  if (node.depth > 1 || node.data.id === "net_adjust"){
+    node.submeasures = get_node_submeasures(node, year_value, selected_value);
+  }
+
+  post_traversal_children_filter(node);
+  post_traversal_search_string_set(node);
 };
 
 const make_program_allocation_nodes = (year_value, measure_id, org_id) => {
