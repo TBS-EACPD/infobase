@@ -8,10 +8,10 @@ import {
   PI_DR_Links, 
   ResultCounts,
   GranularResultCounts,
-  result_docs,
+  get_result_doc_keys,
 } from './results.js';
 
-const result_doc_keys = _.keys(result_docs);
+const result_doc_keys = get_result_doc_keys();
 
 const has_results_query = (level, id_key) => gql`
 query($lang: String!, $id: String) {

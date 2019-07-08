@@ -15,11 +15,14 @@ import {
   Indicator,
   ResultCounts,
   ordered_status_keys,
+  get_results_doc_keys,
 } from './results_common.js';
 import { TM, text_maker } from './drr_summary_text.js';
 
 const { A11YTable } = declarative_charts;
 const { result_simple_statuses } = businessConstants;
+
+const latest_drr_doc_key = _.last( get_results_doc_keys("drr") );
 
 const grid_colors = {
   met: "results-icon-array-pass",
@@ -189,7 +192,7 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
       </div>
     </div>
     <div className="frow middle-xs between-md" style={{marginBottom: "30px"}} >
-      { summary_text_args.drr17_past_total !== 0 &&
+      { summary_text_args[`${latest_drr_doc_key}_past_total`] !== 0 &&
         <div className="fcol-md-6 fcol-xs-12 medium_panel_text" >
           <TM
             k="drr_summary_text_summary_left"
@@ -197,7 +200,7 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
           />
         </div>
       }
-      <div className={`fcol-md-${ summary_text_args.drr17_past_total !== 0 ? 6 : 12 } fcol-xs-12 medium_panel_text`} >
+      <div className={`fcol-md-${ summary_text_args[`${latest_drr_doc_key}_past_total`] !== 0 ? 6 : 12 } fcol-xs-12 medium_panel_text`} >
         <StatusGrid {...counts} />
       </div>
     </div>
@@ -230,7 +233,7 @@ new PanelGraph({
     const verbose_counts = ResultCounts.get_dept_counts(subject.id);
     const counts = row_to_drr_status_counts(verbose_counts);
 
-    if(verbose_counts.drr17_total < 1){
+    if(verbose_counts[`${latest_drr_doc_key}_total`] < 1){
       return false;
     }
 
@@ -245,7 +248,7 @@ new PanelGraph({
 new PanelGraph({
   level: 'program',
   requires_results: true,
-  required_result_docs: ["drr17"],
+  required_result_docs: [latest_drr_doc_key],
   key: "drr_summary",
   footnotes: ["RESULTS_COUNTS", "RESULTS"],
   source: (subject) => get_source_links(["DRR"]),
@@ -253,7 +256,7 @@ new PanelGraph({
     const all_results = Result.get_flat_results(subject);
     const all_indicators = Indicator.get_flat_indicators(subject);
 
-    if( !_.find(all_indicators, {doc: 'drr17'}) ){
+    if( !_.find(all_indicators, {doc: latest_drr_doc_key}) ){
       return false;
     }
 

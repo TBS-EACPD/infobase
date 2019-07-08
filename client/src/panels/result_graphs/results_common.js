@@ -9,6 +9,7 @@ import {
   status_key_to_svg_name,
   ordered_status_keys,
   result_docs,
+  get_result_doc_keys,
 } from '../../models/results.js';
 import { compute_counts_from_set } from '../../models/result_counts.js';
 import { infograph_href_template } from '../../link_utils.js';
@@ -121,6 +122,7 @@ export {
   status_key_to_svg_name,
   ordered_status_keys,
   result_docs,
+  get_result_doc_keys,
 
   compute_counts_from_set,
 

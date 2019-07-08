@@ -6,20 +6,14 @@ import {
   status_key_to_glossary_key,
   status_key_to_svg_name,
   ordered_status_keys,
-  result_docs,
+  get_result_doc_keys,
   link_to_results_infograph,
   result_statuses,
   result_simple_statuses,
 } from './results_common.js';
 
-const dp_docs = _.chain(result_docs)
-  .keys()
-  .filter( doc => /dp/.test(doc) )
-  .value();
-const drr_docs = _.chain(result_docs)
-  .keys()
-  .filter( doc => /drr/.test(doc) )
-  .value();
+const dp_docs = get_result_doc_keys("dp");
+const drr_docs = get_result_doc_keys("drr");
 
 const { 
   Format,

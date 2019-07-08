@@ -496,6 +496,21 @@ const result_docs = {
   },
 };
 
+const get_result_doc_keys = (doc) => _.chain(result_docs)
+  .keys()
+  .filter( (doc_key) => {
+    switch(doc){
+      case 'dp':
+        return /dp/.test(doc_key);
+      case 'drr':
+        return /drr/.test(doc_key);
+      default:
+        return true;
+    }
+  })
+  .last()
+  .value();
+
 export {
   Result,
   Indicator,
@@ -507,6 +522,7 @@ export {
   status_key_to_svg_name,
   ordered_status_keys,
   result_docs,
+  get_result_doc_keys,
 };
 
 Object.assign(window._DEV_HELPERS, {

@@ -13,7 +13,7 @@ import {
 
 import {
   ResultCounts,
-  result_docs,
+  get_result_doc_keys,
 } from './results_common.js';
 import { HorizontalStatusTable } from './result_components.js';
 
@@ -35,11 +35,7 @@ const get_dp_rpb_links = () => ({
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const latests_dp_doc = _.chain(result_docs)
-  .keys()
-  .filter( doc_key => /dp/.test(doc_key) )
-  .last()
-  .value();
+const latest_dp_doc_key = _.last( get_result_doc_keys('dp') );
 
 const ResultsIntroPanel = ({counts, verbose_gov_counts, counts_by_dept}) => <Fragment>
   <div className="frow middle-xs">
@@ -68,10 +64,10 @@ const ResultsIntroPanel = ({counts, verbose_gov_counts, counts_by_dept}) => <Fra
     counts_by_dept={counts_by_dept}
     gov_counts={verbose_gov_counts}
     status_columns={{
-      [`${latests_dp_doc}_results`]: text_maker("results"),
-      [`${latests_dp_doc}_indicators`]: text_maker("indicators"),
+      [`${latest_dp_doc_key}_results`]: text_maker("results"),
+      [`${latest_dp_doc_key}_indicators`]: text_maker("indicators"),
     }}
-    doc={latests_dp_doc}
+    doc={latest_dp_doc_key}
   />
 </Fragment>;
   
@@ -83,7 +79,7 @@ new PanelGraph({
   calculate: () => {
     const verbose_gov_counts = ResultCounts.get_gov_counts();
     
-    const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${latests_dp_doc}_results`] > 0 );
+    const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${latest_dp_doc_key}_results`] > 0 );
     const counts_by_dept = _.chain(dept_counts)
       .map( row => ({ 
         subject: Dept.lookup(row.id),

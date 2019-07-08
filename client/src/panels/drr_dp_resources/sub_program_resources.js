@@ -44,6 +44,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 const {
   SubProgramEntity,
   ResultCounts,
+  get_result_doc_keys,
 } = Results;
 
 const { 
@@ -51,19 +52,21 @@ const {
   sanitized_dangerous_inner_html,
 } = general_utils;
 
+const latest_drr_doc_key = _.last( get_result_doc_keys('drr') );
+const latest_dp_doc_key = _.last( get_result_doc_keys('dp') );
 
 const sub_to_node = (sub,doc) => ({
   id: sub.id,
   data: {
     name: sub.name,
     resources: {
-      ftes: (doc === 'drr17' ? sub.fte_pa_last_year : sub.fte_planning_year_1) || 0,
-      spending: (doc === 'drr17' ? sub.spend_pa_last_year : sub.spend_planning_year_1) || 0,
+      ftes: (doc === latest_drr_doc_key ? sub.fte_pa_last_year : sub.fte_planning_year_1) || 0,
+      spending: (doc === latest_drr_doc_key ? sub.spend_pa_last_year : sub.spend_planning_year_1) || 0,
     },
     description: sub.description,
     notes: sub.resource_notes(doc),
     subject: sub,
-    resource_table_props: doc === "drr17" && {
+    resource_table_props: doc === latest_drr_doc_key && {
       actual_spend: sub.spend_pa_last_year,
       planned_spend: sub.planned_spend_pa_last_year,
       diff_spend: sub.spend_pa_last_year - sub.planned_spend_pa_last_year,
@@ -126,7 +129,7 @@ const get_non_col_renderer = ({doc}) => ({node}) => {
       <div style={{padding: "10px 20px 10px 0", borderTop: `1px solid ${window.infobase_color_constants.separatorColor}`}}>
         { description } 
       </div>
-      { doc==='drr17' && 
+      { doc === latest_drr_doc_key && 
         <div style={{padding: "10px 20px 10px 0", borderTop: `1px solid ${window.infobase_color_constants.separatorColor}`}}>
           <PlannedActualTable {...resource_table_props} />
         </div>
@@ -152,7 +155,7 @@ const get_non_col_renderer = ({doc}) => ({node}) => {
 const initial_sub_program_state = {
   sort_col: 'spending',
   is_descending: true,
-  doc: 'drr17',
+  doc: latest_drr_doc_key,
 };
 
 const sub_program_resource_scheme = {
@@ -259,14 +262,14 @@ class SubProgramResourceTree extends React.Component {
             tab_callback = { tab_on_click }
             tab_options = {[
               {
-                key: "drr17", 
+                key: latest_drr_doc_key, 
                 label: <TM k="sub_program_DRR_title" />,
-                is_open: doc === "drr17",
+                is_open: doc === latest_drr_doc_key,
               },
               {
-                key: "dp19", 
+                key: latest_dp_doc_key, 
                 label: <TM k="sub_program_DP_title" />,
-                is_open: doc === "dp19",
+                is_open: doc === latest_dp_doc_key,
               },
             ]}
           />
@@ -298,7 +301,7 @@ const SubProgramResourceTreeContainer = ({
 }) => {
 
   const initial_scheme_state_slice = {
-    doc: has_dp_data ? 'dp19' : 'drr17',
+    doc: has_dp_data ? latest_dp_doc_key : latest_drr_doc_key,
     subj_guid: subject.guid, 
   };
 
@@ -344,7 +347,7 @@ new PanelGraph({
   key: "sub_program_resources",
   level: 'program',
   requires_results: true,
-  required_result_docs: ['drr17','dp19'],
+  required_result_docs: [latest_drr_doc_key,latest_dp_doc_key],
   requires_result_counts: true,
   footnotes: false,
   depends_on: ['programFtes'],
@@ -370,7 +373,7 @@ new PanelGraph({
     }
 
     const counts = ResultCounts.get_dept_counts(subject.dept.id);
-    const has_drr_data = counts && counts.drr17_total > 0 && _.nonEmpty(drr_subs);
+    const has_drr_data = counts && counts[`${latest_drr_doc_key}_total`] > 0 && _.nonEmpty(drr_subs);
     const has_dp_data = _.nonEmpty(dp_subs) && !subject.dead_program;
 
     return {

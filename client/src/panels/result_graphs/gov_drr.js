@@ -8,19 +8,15 @@ import {
 import {
   row_to_drr_status_counts,
   ResultCounts,
-  result_docs,
   result_statuses,
+  get_result_doc_keys,
 } from './results_common.js';
 import { DrrSummary } from './drr_summary.js';
 import { HorizontalStatusTable } from './result_components.js';
 
 const { Gov, Dept } = Subject;
 
-const latest_drr_doc = _.chain(result_docs)
-  .keys()
-  .filter( doc_key => /drr/.test(doc_key) )
-  .last()
-  .value();
+const latest_drr_doc_key = _.last( get_result_doc_keys("drr") );
 
 
 new PanelGraph({
@@ -35,7 +31,7 @@ new PanelGraph({
     const gov_counts = row_to_drr_status_counts(verbose_gov_counts);
 
     
-    const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${latest_drr_doc}_total`] > 0 );
+    const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${latest_drr_doc_key}_total`] > 0 );
     const num_depts = dept_counts.length;
 
     const counts_by_dept = _.chain(dept_counts)
@@ -98,13 +94,13 @@ class GovDRR extends React.Component {
             gov_counts={verbose_gov_counts}
             status_columns={_.chain(result_statuses)
               .map( (status_text, status_key) => [
-                `${latest_drr_doc}_indicators_${status_key}`,
+                `${latest_drr_doc_key}_indicators_${status_key}`,
                 status_text.text,
               ])
               .fromPairs()
               .value()
             }
-            doc={latest_drr_doc}
+            doc={latest_drr_doc_key}
           />
         </div>
       </div>
