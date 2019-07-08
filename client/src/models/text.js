@@ -222,9 +222,13 @@ const _create_text_maker = (deps=template_store) => (key, context={}) => {
     context.__text_maker_func__ = trivial_text_maker;
   }
 
-
   const text_obj = deps[key];
-  if( _.isString(text_obj) ) { 
+  
+  if ( _.isUndefined(text_obj) ){
+    throw `ERROR: undefined text_maker key "${key}"`;
+  }
+  
+  if ( _.isString(text_obj) ){ 
     return text_obj;
   }
 
