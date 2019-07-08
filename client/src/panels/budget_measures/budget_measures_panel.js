@@ -51,6 +51,48 @@ const { text_maker, TM } = create_text_maker_component([text1,text2]);
 const TOP_TO_SHOW = 25;
 
 
+const treatAsProgram = (subject) => _.indexOf(["program", "crso"], subject.level) !== -1;
+
+
+const get_grouping_options = (subject, data) =>{
+  const common_options = [
+    {
+      name: text_maker('budget_measures'),
+      id: 'measures',
+    },
+  ];
+
+  if (subject.level === "gov"){
+    return [
+      ...common_options,
+      {
+        name: text_maker('orgs'),
+        id: 'orgs',
+      },
+    ];
+  } else if (subject.level === "dept"){
+    const has_allocation_data = _.chain(data)
+      .flatMap(budget_measure => budget_measure.measure_data)
+      .filter(data => +data.org_id === subject.id)
+      .some(data => data.allocated !== 0)
+      .value();
+
+    if (has_allocation_data){
+      return [
+        ...common_options,
+        {
+          name: text_maker('programs'),
+          id: 'programs',
+        },
+      ];
+    } else {
+      return common_options;
+    }
+  } else {
+    return common_options;
+  }
+};
+
 const calculate_stats_common = (data, subject) => {
   const total_funding = _.reduce(data,
     (total, budget_measure) => total + budget_measure.measure_data.funding, 
@@ -858,43 +900,3 @@ function wrap(text, width) {
   return <Fragment>{ tspans }</Fragment>;
 }
 
-
-const treatAsProgram = (subject) => _.indexOf(["program", "crso"], subject.level) !== -1;
-const get_grouping_options = (subject, data) =>{
-  const common_options = [
-    {
-      name: text_maker('budget_measures'),
-      id: 'measures',
-    },
-  ];
-
-  if (subject.level === "gov"){
-    return [
-      ...common_options,
-      {
-        name: text_maker('orgs'),
-        id: 'orgs',
-      },
-    ];
-  } else if (subject.level === "dept"){
-    const has_allocation_data = _.chain(data)
-      .flatMap(budget_measure => budget_measure.measure_data)
-      .filter(data => +data.org_id === subject.id)
-      .some(data => data.allocated !== 0)
-      .value();
-
-    if (has_allocation_data){
-      return [
-        ...common_options,
-        {
-          name: text_maker('programs'),
-          id: 'programs',
-        },
-      ];
-    } else {
-      return common_options;
-    }
-  } else {
-    return common_options;
-  }
-};
