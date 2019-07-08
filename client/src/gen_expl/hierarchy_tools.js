@@ -11,6 +11,34 @@ function get_leaves(flat_nodes){
 }
 
 
+function flat_descendants(node){
+  let currentWave = [node];
+  const flat_nodes = [];
+  while( _.some(currentWave, node => !_.isEmpty(node.children)) ){
+    _.each(currentWave, node => {
+      if(!_.isEmpty(node.children)){
+        flat_nodes.push(...node.children);
+      }
+    });
+    currentWave = _.chain(currentWave).map('children').flatten().compact().value();
+  }
+  return flat_nodes;
+}
+
+
+function _create_children_links(node, nodes_by_parent_id){
+  node.children = nodes_by_parent_id[node.id] || null;
+  _.each(node.children, child => _create_children_links(child, nodes_by_parent_id) );
+}
+
+//mutates a node to write its children prop according to a collection of nodes indexed by parent IDs
+//will also recurse over children
+function create_children_links(flat_nodes){
+  const root = get_root(flat_nodes);
+  const nodes_by_parent_id = _.groupBy(flat_nodes,'parent_id');
+  _create_children_links(root, nodes_by_parent_id);
+}
+
 
 function filter_hierarchy(flat_nodes, filter_func, { leaves_only=false, markSearchResults=false }){
   //filters flat-nodes or just the leaves then assembles the tree from positive search results, 
@@ -88,32 +116,7 @@ function ensureVisibility(nodes, shouldNodeBeVisible){
 
 }
 
-//mutates a node to write its children prop according to a collection of nodes indexed by parent IDs
-//will also recurse over children
-function create_children_links(flat_nodes){
-  const root = get_root(flat_nodes);
-  const nodes_by_parent_id = _.groupBy(flat_nodes,'parent_id');
-  _create_children_links(root, nodes_by_parent_id);
-}
 
-function _create_children_links(node, nodes_by_parent_id){
-  node.children = nodes_by_parent_id[node.id] || null;
-  _.each(node.children, child => _create_children_links(child, nodes_by_parent_id) );
-}
-
-function flat_descendants(node){
-  let currentWave = [node];
-  const flat_nodes = [];
-  while( _.some(currentWave, node => !_.isEmpty(node.children)) ){
-    _.each(currentWave, node => {
-      if(!_.isEmpty(node.children)){
-        flat_nodes.push(...node.children);
-      }
-    });
-    currentWave = _.chain(currentWave).map('children').flatten().compact().value();
-  }
-  return flat_nodes;
-}
 
 
 
@@ -279,13 +282,6 @@ function simplify_hierarchy(flat_nodes, is_simple_parent, bottom_layer_filter){
 
 }
 
-//children_transform: [ ...node, ] => [ ...node, ] without modifying individual nodes
-function sort_hierarchy(flat_nodes, children_transform){
-  const old_root = get_root(flat_nodes);
-  const new_root = _sort_hierarchy(old_root, children_transform);
-
-  return [ new_root, ...flat_descendants(new_root) ];
-}
 
 function _sort_hierarchy(node, children_transform){
   const new_children = _.chain(node.children)
@@ -297,6 +293,14 @@ function _sort_hierarchy(node, children_transform){
     ...node,
     children: new_children,
   };
+}
+
+//children_transform: [ ...node, ] => [ ...node, ] without modifying individual nodes
+function sort_hierarchy(flat_nodes, children_transform){
+  const old_root = get_root(flat_nodes);
+  const new_root = _sort_hierarchy(old_root, children_transform);
+
+  return [ new_root, ...flat_descendants(new_root) ];
 }
 
 export {
