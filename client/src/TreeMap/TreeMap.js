@@ -382,7 +382,9 @@ export default class TreeMapper extends React.Component {
         },
       },
     } = props;
+    const data_old = get_data(perspective, "pa_last_year_5:pa_last_year_4", filter_var, true);
     const data = get_data(perspective, year, filter_var, get_changes);
+    //debugger;
     this.setState({
       data: data,
       org_route: [],

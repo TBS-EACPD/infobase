@@ -418,7 +418,14 @@ function get_data_vs(perspective, year, year_1, year_2, filter_var, get_changes)
 }
 
 
-const post_traversal_function = () => {
+const post_traversal_function = (root, perspective, get_changes) => {
   //prep nodes
   //group smallest
+  prep_nodes(root, perspective, get_changes);
+  root.children = group_smallest(
+    root.children,
+    children => ({ name: smaller_items_text, children }),
+    true,
+    0.01,
+  );
 };

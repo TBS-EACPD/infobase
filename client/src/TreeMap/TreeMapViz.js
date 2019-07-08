@@ -100,20 +100,20 @@ export class TreeMap extends React.Component {
     let transitioning;
 
     // d3 creating the treemap using the data
-    let data_root = data;
+    let root = data;
 
     if (!_.isEmpty(org_route)) {
       const route_length = org_route.length;
       for (let i = 0; i < route_length; i++) {
         const next_name = org_route[i];
-        const next_item = _.filter(data_root.children, d => d.name === next_name);
+        const next_item = _.filter(root.children, d => d.name === next_name);
         if (!_.isEmpty(next_item)) {
-          data_root = next_item[0];
+          root = next_item[0];
         }
       }
     }
 
-    const root = d3.hierarchy(data_root);
+    //const root = d3.hierarchy(data_root);
 
     // set up the node values to be the size, and adjust for cases where the size != sum of children's sizes
     // this avoids having to call d3's sum()
