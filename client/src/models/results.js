@@ -508,7 +508,6 @@ const get_result_doc_keys = (doc) => _.chain(result_docs)
         return true;
     }
   })
-  .last()
   .value();
 
 export {
