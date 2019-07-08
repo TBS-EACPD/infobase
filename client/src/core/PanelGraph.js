@@ -133,6 +133,7 @@ class PanelGraph {
     if(_.isFunction(this.source)){
       return this.source(subject);
     } else { //if it's undefined we'll make one
+      /* eslint-disable-next-line no-use-before-define */
       return _.chain(tables_for_graph(this.key, subject.level))
         .map( table => Table.lookup(table))
         .map( table => {

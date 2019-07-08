@@ -14,20 +14,11 @@ const some_constants = {
   est_next_year: run_template("{{est_next_year}}"),
   est_in_year: run_template("{{est_in_year}}"),
 };
-//this is the part of the module that gets consumed by those who want info, ie. core/graphs.js
-function get_info(subject, infokeys){
-  const computed_separate = _.map( infokeys, key => get_single_info(key, subject));
-  const computed = Object.assign.apply(null,[{}].concat(computed_separate));
-  return {
-    subject, dept: subject.constructor.type_name === 'dept' ? subject : undefined,
-    ...computed,
-    ...some_constants,
-  };
-}
 
 // TODO   readd memoize once debugged 
 const get_single_info = _.memoize( 
   (stats_key,subject) => {
+    /* eslint-disable-next-line no-use-before-define */
     const stats = Statistics.lookup(stats_key);
     if (_.isUndefined(stats)){ 
       return undefined; 
@@ -44,6 +35,17 @@ const get_single_info = _.memoize(
   }, 
   (stats_key, subject) => `${stats_key}_${subject.guid}`
 );
+
+//this is the part of the module that gets consumed by those who want info, ie. core/graphs.js
+function get_info(subject, infokeys){
+  const computed_separate = _.map( infokeys, key => get_single_info(key, subject));
+  const computed = Object.assign.apply(null,[{}].concat(computed_separate));
+  return {
+    subject, dept: subject.constructor.type_name === 'dept' ? subject : undefined,
+    ...computed,
+    ...some_constants,
+  };
+}
 
 //  //gov infos should only run once, no matter the subject
 //  (stats_key, subject) => {
