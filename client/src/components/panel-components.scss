@@ -123,6 +123,10 @@
   border-top: 1px solid rgba($separatorColor, 0.5);
 }
 
+.panel-heading-utils:active {
+  transform: scale(1.15);
+}
+
 @media (hover: none){
   .panel-heading-utils:hover, .panel-heading-utils:active {
     transform: scale(1.15);
