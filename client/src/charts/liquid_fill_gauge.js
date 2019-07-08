@@ -87,6 +87,48 @@ export class LiquidFillGauge{
     // A bit of viz lie: fill upto 1% if it's any lower and make wave animation faster
     fillPercent = fillPercent<0.01 ? 0.01 : fillPercent;
     waveAnimateTime = waveAnimateTime - (10/fillPercent);
+    const waveGroupXPosition = fillCircleMargin+fillCircleRadius*2-waveClipWidth;
+    const waveRiseScale = d3.scaleLinear()
+      .range([fillCircleMargin+fillCircleRadius*2+waveHeightValue,fillCircleMargin-waveHeightValue])
+      .domain([0,1]);
+    
+    const waveAnimateScale = d3.scaleLinear()
+      .range([0, waveClipWidth-fillCircleRadius*2])
+      .domain([0,1]);
+
+
+    const textTween = () =>{
+      const interpolate_text = d3.interpolate(waveDirection, textValue);
+      return function(t) { this.textContent = `${parseFloat(interpolate_text(t)).toFixed(1)}%`; };
+    };
+    
+    const animateWaveRiseFall = () => {
+      this.waveGroup.interrupt();
+      this.waveGroup.attr('transform',`translate(${waveGroupXPosition},${waveRiseScale(waveIsFall)})`)
+        .transition()
+        .duration(waveRiseFallTime)
+        .attr('transform',`translate(${waveGroupXPosition},${waveRiseScale(fillPercent)})`);
+      this.percentText.transition()
+        .duration(waveRiseFallTime)
+        .tween("text", textTween);
+      this.waveText.transition()
+        .duration(waveRiseFallTime)
+        .tween("text", textTween);
+      this.descriptiveText
+        .attr("font-size", `0px`)
+        .transition()
+        .delay(waveRiseFallTime-waveRiseFallTime/5)
+        .transition()
+        .duration(descriptiveTextAnimateTime)
+        .attr("font-size", `${textPixels/4}px`);
+      this.waveDescriptiveText
+        .attr("font-size", `0px`)
+        .transition()
+        .delay(waveRiseFallTime-waveRiseFallTime/5)
+        .transition()
+        .duration(descriptiveTextAnimateTime)
+        .attr("font-size", `${textPixels/4}px`);
+    };
 
     if(this.options.title){
       locationY = locationY + titleGap;
@@ -131,10 +173,6 @@ export class LiquidFillGauge{
     const textRiseScaleY = d3.scaleLinear()
       .range([fillCircleMargin+fillCircleRadius*2,(fillCircleMargin+textPixels*0.7)])
       .domain([0,1]);
-    const textTween = () =>{
-      const interpolate_text = d3.interpolate(waveDirection, textValue);
-      return function(t) { this.textContent = `${parseFloat(interpolate_text(t)).toFixed(1)}%`; };
-    };
   
     this.percentText
       .text(`${textValue}%`)
@@ -189,42 +227,8 @@ export class LiquidFillGauge{
       .style("fill", waveTextColor)
       .attr('transform',`translate(${radius},${textRiseScaleY(textVertPosition-0.15)})`);
 
-    const waveGroupXPosition = fillCircleMargin+fillCircleRadius*2-waveClipWidth;
-    const waveRiseScale = d3.scaleLinear()
-      .range([fillCircleMargin+fillCircleRadius*2+waveHeightValue,fillCircleMargin-waveHeightValue])
-      .domain([0,1]);
-    
-    const waveAnimateScale = d3.scaleLinear()
-      .range([0, waveClipWidth-fillCircleRadius*2])
-      .domain([0,1]);
 
-    const animateWaveRiseFall = () => {
-      this.waveGroup.interrupt();
-      this.waveGroup.attr('transform',`translate(${waveGroupXPosition},${waveRiseScale(waveIsFall)})`)
-        .transition()
-        .duration(waveRiseFallTime)
-        .attr('transform',`translate(${waveGroupXPosition},${waveRiseScale(fillPercent)})`);
-      this.percentText.transition()
-        .duration(waveRiseFallTime)
-        .tween("text", textTween);
-      this.waveText.transition()
-        .duration(waveRiseFallTime)
-        .tween("text", textTween);
-      this.descriptiveText
-        .attr("font-size", `0px`)
-        .transition()
-        .delay(waveRiseFallTime-waveRiseFallTime/5)
-        .transition()
-        .duration(descriptiveTextAnimateTime)
-        .attr("font-size", `${textPixels/4}px`);
-      this.waveDescriptiveText
-        .attr("font-size", `0px`)
-        .transition()
-        .delay(waveRiseFallTime-waveRiseFallTime/5)
-        .transition()
-        .duration(descriptiveTextAnimateTime)
-        .attr("font-size", `${textPixels/4}px`);
-    };
+
 
     const animateWave = () => {
       this.wave.attr('transform',`translate(${waveAnimateScale(this.wave.attr('T'))},0)`);
