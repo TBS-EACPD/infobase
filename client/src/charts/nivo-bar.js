@@ -5,6 +5,9 @@ Changes Made:
 Line 354 & 456 -> bar height >= 0 then the value will be pushed onto the array 
 (rather than the previous situation where it was bar height > 0)
 */
+
+/* eslint-disable no-use-before-define */
+
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
