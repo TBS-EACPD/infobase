@@ -16,6 +16,6 @@ else
     send-keys 'cd server && npm ci && npm start' C-m \; \
     split-window -v \; \
     send-keys 'cd server && mongod' C-m \; \
-    selectp -t 0 \; \
-    send-keys 'cd server && npm run populate_db && cd ..' C-m \;
+    split-window -h \; \
+    send-keys 'cd server && while true; do npm run populate_db; done' C-m \;
 fi
