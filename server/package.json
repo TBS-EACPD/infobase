@@ -41,9 +41,9 @@
     "nodemon": "^1.19.1"
   },
   "scripts": {
-    "pretest": "(export USE_TEST_DATA='true' && npm run populate_db)",
+    "pretest": "(export USE_TEST_DATA='true' && babel-node src/populate_db.js)",
     "test": "jest --coverage --forceExit",
-    "posttest": "npm run populate_db",
+    "posttest": "babel-node src/populate_db.js",
     "preci_test": "(export USE_TEST_DATA='true' && npm run transpiled_populate_db)",
     "ci_test": "jest --coverage --forceExit",
     "test:watch": "jest --watch",
