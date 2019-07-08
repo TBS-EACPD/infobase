@@ -194,12 +194,6 @@ function get_memoized_funcs(schemes){
     .value();
 
 
-  const get_scheme_props = state => {
-    const query_filtered_hierarchy = get_query_filtered_hierarchy(state);
-    const base_hierarchy = get_base_hierarchy(state);
-
-    return scheme_props_generators[state.root.scheme_key]({...state, query_filtered_hierarchy, base_hierarchy });
-  }; 
 
   const scheme_filter_func_selectors = _.chain(schemes)
     .map(scheme => [ scheme.key, scheme.get_filter_func_selector() ] )
@@ -238,6 +232,14 @@ function get_memoized_funcs(schemes){
       }
     }
   );
+
+
+  const get_scheme_props = state => {
+    const query_filtered_hierarchy = get_query_filtered_hierarchy(state);
+    const base_hierarchy = get_base_hierarchy(state);
+
+    return scheme_props_generators[state.root.scheme_key]({...state, query_filtered_hierarchy, base_hierarchy });
+  }; 
 
   const get_fully_filtered_hierarchy = createSelector(
     [ get_query_filtered_hierarchy, get_scheme_filter_func ],

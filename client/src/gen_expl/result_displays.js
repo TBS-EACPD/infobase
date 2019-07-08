@@ -6,6 +6,24 @@ import { Indicator, result_docs } from '../models/results.js';
 import { IndicatorDisplay } from '../panels/result_graphs/result_components.js';
 
 
+
+const type_text_keys = {
+  dept: "orgs",
+  cr: "core_responsibilities",
+  so: "strategic_outcomes",
+  program: "programs",
+  sub_program: "sub_programs",
+  sub_sub_program: "sub_sub_programs",
+  dr: "dept_results",
+  result: "results",
+};
+
+
+export const get_type_name = type_key => {
+  const text_key = type_text_keys[type_key];
+  return text_key ? text_maker(text_key) : null;
+};
+
 export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
 
   const indicators = _.filter(Indicator.get_flat_indicators(subject), {doc} );
@@ -104,22 +122,6 @@ export const fte_header = createSelector(
   doc => <TM k={/dp/.test(doc) ? "dp_ftes" : "drr_ftes"} />
 );
 
-
-const type_text_keys = {
-  dept: "orgs",
-  cr: "core_responsibilities",
-  so: "strategic_outcomes",
-  program: "programs",
-  sub_program: "sub_programs",
-  sub_sub_program: "sub_sub_programs",
-  dr: "dept_results",
-  result: "results",
-};
-
-export const get_type_name = type_key => {
-  const text_key = type_text_keys[type_key];
-  return text_key ? text_maker(text_key) : null;
-};
 
 export const ResultNodeContent = ({ 
   node: {

@@ -10,6 +10,7 @@ class GlossaryEntry extends mix().with(staticStoreMixin) {
     this._def_text = def_text;
   }
   get definition(){ 
+    /* eslint-disable-next-line no-use-before-define */
     return compiled_definitions(this.id);
   }
   static query(query){
