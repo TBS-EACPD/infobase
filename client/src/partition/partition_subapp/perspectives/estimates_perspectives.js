@@ -22,6 +22,30 @@ const TextMaker = props => <StandardTextMaker text_maker_func={text_maker} {...p
 
 let year;
 
+const get_year = (presentation_scheme) => {
+  switch (presentation_scheme){
+    case "est_doc_mains" : return "{{est_in_year}}";
+    default : return "{{est_last_year}}";
+  }
+};
+
+const year_text_fragment = (presentation_scheme) => {
+  return `(${run_template( get_year(presentation_scheme) )})`;
+};
+
+const get_name_text_fragment = (presentation_scheme) => {
+  switch (presentation_scheme){
+    case "org_estimates" : return text_maker("orgs");
+    case "est_type" : return text_maker("partition_est_type_perspective");
+    case "vs_type" : return text_maker("partition_vote_stat_perspective");
+    case "est_doc_mains" : return text_maker("est_doc_mains");
+    case "est_doc_sea" : return text_maker("est_doc_sea");
+    case "est_doc_seb" : return text_maker("est_doc_seb");
+    case "est_doc_sec" : return text_maker("est_doc_sec");
+    case "est_doc_ie" : return text_maker("est_doc_ie");
+  }
+};
+
 const set_year_by_presentation_scheme = (presentation_scheme) => {
   year = get_year(presentation_scheme) + "_estimates";
 };
@@ -70,21 +94,6 @@ const vs_type_node_mapping_common_options = {
   glossary_entry_by_id_func: get_glossary_entry_by_vs_type,
 };
 
-const subject_to_vs_type_nodes = (node) => {
-  const orgVoteStatEstimates = Table.lookup('orgVoteStatEstimates');
-  const estimates_data = orgVoteStatEstimates.q(node).data;
-  return subject_to_vs_type_nodes_common(estimates_data);
-};
-
-const subject_to_vs_type_nodes_filtered_by_est_doc_code = (node, est_doc_code) => {
-  const orgVoteStatEstimates = Table.lookup('orgVoteStatEstimates');
-  const estimates_data = _.chain(orgVoteStatEstimates.q(node).data)
-    .filter( row => row.est_doc_code === est_doc_code)
-    .value();
-
-  return estimates_data.length === 0 ? false : subject_to_vs_type_nodes_common(estimates_data);
-};
-
 const subject_to_vs_type_nodes_common = (estimates_data) => {
   const data_for_node_mapping = _.map(estimates_data, row => {
     return {
@@ -103,6 +112,22 @@ const subject_to_vs_type_nodes_common = (estimates_data) => {
     )
   );
 };
+
+const subject_to_vs_type_nodes = (node) => {
+  const orgVoteStatEstimates = Table.lookup('orgVoteStatEstimates');
+  const estimates_data = orgVoteStatEstimates.q(node).data;
+  return subject_to_vs_type_nodes_common(estimates_data);
+};
+
+const subject_to_vs_type_nodes_filtered_by_est_doc_code = (node, est_doc_code) => {
+  const orgVoteStatEstimates = Table.lookup('orgVoteStatEstimates');
+  const estimates_data = _.chain(orgVoteStatEstimates.q(node).data)
+    .filter( row => row.est_doc_code === est_doc_code)
+    .value();
+
+  return estimates_data.length === 0 ? false : subject_to_vs_type_nodes_common(estimates_data);
+};
+
 
 const est_doc_code_to_glossary_key_dictionary = {
   MAINS: "MAINS",
@@ -359,29 +384,6 @@ const estimates_popup_template = function(presentation_scheme, d){
   }
 };
 
-const get_year = (presentation_scheme) => {
-  switch (presentation_scheme){
-    case "est_doc_mains" : return "{{est_in_year}}";
-    default : return "{{est_last_year}}";
-  }
-};
-
-const year_text_fragment = (presentation_scheme) => {
-  return `(${run_template( get_year(presentation_scheme) )})`;
-};
-
-const get_name_text_fragment = (presentation_scheme) => {
-  switch (presentation_scheme){
-    case "org_estimates" : return text_maker("orgs");
-    case "est_type" : return text_maker("partition_est_type_perspective");
-    case "vs_type" : return text_maker("partition_vote_stat_perspective");
-    case "est_doc_mains" : return text_maker("est_doc_mains");
-    case "est_doc_sea" : return text_maker("est_doc_sea");
-    case "est_doc_seb" : return text_maker("est_doc_seb");
-    case "est_doc_sec" : return text_maker("est_doc_sec");
-    case "est_doc_ie" : return text_maker("est_doc_ie");
-  }
-};
 
 const get_name = (presentation_scheme) => {
   return get_name_text_fragment(presentation_scheme) + " " + year_text_fragment(presentation_scheme);
