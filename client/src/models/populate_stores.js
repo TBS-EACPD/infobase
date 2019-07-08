@@ -7,51 +7,7 @@ import { trivial_text_maker } from './text';
 
 const { Ministry, Program, Dept, Tag, CRSO, Minister, InstForm } = Subject;
 
-export const populate_stores = function(){
-  return make_request(get_static_url(`lookups_${window.lang}.json.js`))
-    .then( text => {
-      process_lookups(JSON.parse(text));
-    });
-};
 
-function process_lookups(data){
-  
-  //convert the csv's to rows and drop their headers
-  _.chain(data)
-    .omit('global_footnotes') //global footnotes already has its header dropped
-    .each( (csv_str,key) => {
-      data[key] = d3.csvParseRows(_.trim(csv_str));
-      data[key].shift(); // drop the header
-    })
-    .value();
-
- 
-  //TODO: stop referring to data by the names of its csv, design an interface with copy_static_assets.js
-  populate_igoc_models({
-    dept_to_table_id: _.map(
-      data['dept_code_to_csv_name.csv'], 
-      row => [ row[0], _.camelCase(row[1]) ]
-    ),
-    org_to_minister: data['org_to_minister.csv'],
-    inst_forms: data['inst_forms.csv'],
-    ministers: data['ministers.csv'],
-    ministries: data['ministries.csv'],
-    urls: data['url_lookups.csv'],
-    igoc_rows: data['igoc.csv'],
-  });
-
-  populate_glossary(data[`glossary.csv`]);
-
-  create_tag_branches( data["program_tag_types.csv"] );
-  populate_program_tags( data["program_tags.csv"] );
-  populate_crso_tags(data["crso.csv"]);
-  populate_programs(data["program.csv"]);
-
-  //once all programs and tags are created, link them 
-  populate_program_tag_linkages( data["tags_to_programs.csv"] );
-
-  populate_global_footnotes(data.global_footnotes);
-};
 
 const url_id = num => `_${num}`; //make sure the regular keys from the pipeline aren't interpreted as array indices
 function populate_igoc_models({
@@ -319,4 +275,51 @@ function populate_program_tag_linkages(programs_m2m_tags){
     program.tags.push(tag);
     tag.programs.push(program);
   }); 
+};
+
+
+function process_lookups(data){
+  
+  //convert the csv's to rows and drop their headers
+  _.chain(data)
+    .omit('global_footnotes') //global footnotes already has its header dropped
+    .each( (csv_str,key) => {
+      data[key] = d3.csvParseRows(_.trim(csv_str));
+      data[key].shift(); // drop the header
+    })
+    .value();
+
+ 
+  //TODO: stop referring to data by the names of its csv, design an interface with copy_static_assets.js
+  populate_igoc_models({
+    dept_to_table_id: _.map(
+      data['dept_code_to_csv_name.csv'], 
+      row => [ row[0], _.camelCase(row[1]) ]
+    ),
+    org_to_minister: data['org_to_minister.csv'],
+    inst_forms: data['inst_forms.csv'],
+    ministers: data['ministers.csv'],
+    ministries: data['ministries.csv'],
+    urls: data['url_lookups.csv'],
+    igoc_rows: data['igoc.csv'],
+  });
+
+  populate_glossary(data[`glossary.csv`]);
+
+  create_tag_branches( data["program_tag_types.csv"] );
+  populate_program_tags( data["program_tags.csv"] );
+  populate_crso_tags(data["crso.csv"]);
+  populate_programs(data["program.csv"]);
+
+  //once all programs and tags are created, link them 
+  populate_program_tag_linkages( data["tags_to_programs.csv"] );
+
+  populate_global_footnotes(data.global_footnotes);
+};
+
+export const populate_stores = function(){
+  return make_request(get_static_url(`lookups_${window.lang}.json.js`))
+    .then( text => {
+      process_lookups(JSON.parse(text));
+    });
 };
