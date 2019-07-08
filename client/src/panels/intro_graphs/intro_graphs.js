@@ -18,6 +18,8 @@ const {
   KeyConceptList,
 } = util_components;
 
+const shouldAddOrgNameItem = subject => subject.is('dept') && subject.applied_title && subject.name !== subject.applied_title;
+
 const curried_render = ({ q_a_keys, omit_name_item }) => function ({ calculations: { subject } }) {
   let rendered_q_a_keys = _.clone(q_a_keys);
   if (!omit_name_item) {
@@ -58,7 +60,6 @@ const curried_render = ({ q_a_keys, omit_name_item }) => function ({ calculation
   </MediaQuery>;
 };
 
-const shouldAddOrgNameItem = subject => subject.is('dept') && subject.applied_title && subject.name !== subject.applied_title;
 
 _.each(['gov', 'dept', 'program', 'tag', 'crso'], lvl => {
   new PanelGraph({

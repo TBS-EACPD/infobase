@@ -84,15 +84,6 @@ const reset_highlight = function(d){
 };
 
 
-new PanelGraph({
-  key: 'gocographic',
-  level: 'gov',
-  depends_on: ['programSpending', 'programFtes'],
-  footnotes: ["GOCO"],
-  calculate: _.constant(true),
-  render,
-});
-
 class Goco {
   constructor(container, history){
     this.history = history;
@@ -326,3 +317,12 @@ class GocoDiagram extends React.Component {
   }
 }
 
+
+new PanelGraph({
+  key: 'gocographic',
+  level: 'gov',
+  depends_on: ['programSpending', 'programFtes'],
+  footnotes: ["GOCO"],
+  calculate: _.constant(true),
+  render,
+});
