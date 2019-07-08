@@ -25,6 +25,38 @@ const text_maker = create_text_maker([diff_text, result_text]);
 
 
 
+const get_subject_from_props = (props) => {
+  const {
+    match: {
+      params: { org_id, crso_id, program_id },
+    },
+  } = props;
+  if(program_id && Program.lookup(program_id)){
+    return Program.lookup(program_id);
+  }
+  if(crso_id && CRSO.lookup(crso_id)){
+    return CRSO.lookup(crso_id);
+  }
+  if (org_id && Dept.lookup(org_id)) {
+    return Dept.lookup(org_id);
+  }
+  return props.subject; // default
+};
+
+const subject_intro = (subject, num_indicators, years) =>
+  <div className="medium_panel_text">
+    <TM 
+      k={"indicator_counts_text"}
+      args={{
+        subject: subject,
+        name: subject.name,
+        doc_year_1: result_docs[years[0]].year,
+        doc_year_2: result_docs[years[1]].year,
+        num_indicators: num_indicators,
+      }}
+    />
+  </div>;
+
 const get_target_from_indicator = (indicator) => {
   const {
     target_type,
@@ -128,6 +160,127 @@ const get_new_url = (subject) => {
     return `/diff/${subject.dept.id}/${subject.crso.id}/${subject.id}`;
   }
 };
+
+
+const no_difference = (text, key) =>
+  <Fragment>
+    <div className="text-diff__indicator-report__subheader" >
+      <h5>{`${text_maker(key)} (${text_maker("no_diff")})`}</h5>
+    </div>
+    <div className="text-diff__indicator-report__row">
+      <div>{text}</div>
+    </div>
+  </Fragment>;
+
+const difference_report = (diff, key, years) => 
+  <Fragment>
+    <div className="text-diff__indicator-report__subheader" >
+      <h5>{text_maker(key)}</h5>
+    </div>
+    <div className={classNames("row","text-diff__indicator-report__row")}>
+      <div className="col-md-6" >
+        <h6>{result_docs[years[0]].year}</h6>
+      </div>
+      <div className="col-md-6" >
+        <h6>{result_docs[years[1]].year}</h6>
+      </div>
+    </div>
+    <div className={classNames("row","text-diff__indicator-report__row")}>
+      <div className="col-md-6" >
+        {_.map(diff, (part,iix) =>
+          <Fragment key={iix}>
+            {window.is_a11y_mode && part.removed && <span className='text-diff__text-part--removed'> [{text_maker("a11y_begin_removed")}]</span>}
+            <span
+              className={part.removed ? 'text-diff__text-part--removed' : ''}
+              style={{display: part.added ? "none" : "inline"}}
+            >
+              {part.value}
+            </span>
+            {window.is_a11y_mode && part.removed && <span className='text-diff__text-part--removed'> [{text_maker("a11y_end_removed")}]</span>}
+          </Fragment>
+        )}
+      </div>
+      <div className="col-md-6" >
+        {_.map(diff, (part,iix) =>
+          <Fragment key={iix}>
+            {window.is_a11y_mode && part.added && <span className='text-diff__text-part--added'> [{text_maker("a11y_begin_added")}]</span>}
+            <span
+              className={ part.added ? 'text-diff__text-part--added' : ''}
+              style={{display: part.removed ? "none" : "inline"}}
+            >
+              {part.value}
+            </span>
+            {window.is_a11y_mode && part.added && <span className='text-diff__text-part--added'> [{text_maker("a11y_end_added")}]</span>}
+          </Fragment>
+        )}
+      </div>
+    </div>
+  </Fragment>;
+
+
+
+const get_status_flag = (indicator_status, num_texts, target_changed, years) => {
+  if(num_texts > 1){
+    return target_changed ?
+      <Fragment>
+        <div className="text-diff__indicator-status--change">
+          {text_maker("words_changed")}
+        </div>
+        <div className="text-diff__indicator-status--change">
+          {text_maker("target_changed")}
+        </div>
+      </Fragment> :
+      <div className="text-diff__indicator-status--change">
+        {text_maker("words_changed")}
+      </div>;
+  }
+  if (indicator_status === 'both'){
+    return (
+      <div className="text-diff__indicator-status--nochange">
+        {text_maker("no_diff")}
+      </div>
+    );
+  }
+  if(indicator_status === 'dp18'){
+    return (
+      <div className="text-diff__indicator-status--removed">
+        {text_maker("indicator-removed", {second_year: result_docs[years[1]].year})}
+      </div>
+    );
+  }
+  if(indicator_status === 'dp19'){
+    return (
+      <div className="text-diff__indicator-status--added">
+        {text_maker("indicator-added", {second_year: result_docs[years[1]].year})}
+      </div>
+    );
+  }
+  return "";
+};
+
+
+const indicator_report = (processed_indicator, years) => 
+  <div key={processed_indicator.indicator1.stable_id} className="text-diff__indicator-report" >
+    <div className="text-diff__indicator-report__header">
+      <h4>{processed_indicator.indicator2.name}</h4>
+    </div>
+    <div className="text-diff__indicator-report__body">
+      {get_status_flag(processed_indicator.status,
+        _.max([processed_indicator.name_diff.length, processed_indicator.methodology_diff.length, processed_indicator.target_diff.length]),
+        processed_indicator.target_diff.length > 1,
+        years)}
+      { processed_indicator.name_diff.length > 1 ?
+        difference_report(processed_indicator.name_diff, "indicator_name", years) :
+        no_difference(processed_indicator.indicator1.name, "indicator_name") }
+      { processed_indicator.methodology_diff.length > 1 ?
+        difference_report(processed_indicator.methodology_diff, "indicator_methodology", years) :
+        no_difference(processed_indicator.indicator1.methodology, "indicator_methodology") }
+      { processed_indicator.target_diff.length > 1 ?
+        difference_report(processed_indicator.target_diff, "indicator_target", years) :
+        no_difference(get_target_from_indicator(processed_indicator.indicator1), "indicator_target") }
+      <div className="text-diff__id-tag">{`ID: ${processed_indicator.indicator1.stable_id}`}</div>
+    </div>
+  </div>;
 
 
 export default class TextDiffApp extends React.Component {
@@ -296,157 +449,9 @@ export default class TextDiffApp extends React.Component {
   }
 }
 
-const get_subject_from_props = (props) => {
-  const {
-    match: {
-      params: { org_id, crso_id, program_id },
-    },
-  } = props;
-  if(program_id && Program.lookup(program_id)){
-    return Program.lookup(program_id);
-  }
-  if(crso_id && CRSO.lookup(crso_id)){
-    return CRSO.lookup(crso_id);
-  }
-  if (org_id && Dept.lookup(org_id)) {
-    return Dept.lookup(org_id);
-  }
-  return props.subject; // default
-};
-
 TextDiffApp.defaultProps = {
   subject: Dept.lookup(326),
 };
 
-const subject_intro = (subject, num_indicators, years) =>
-  <div className="medium_panel_text">
-    <TM 
-      k={"indicator_counts_text"}
-      args={{
-        subject: subject,
-        name: subject.name,
-        doc_year_1: result_docs[years[0]].year,
-        doc_year_2: result_docs[years[1]].year,
-        num_indicators: num_indicators,
-      }}
-    />
-  </div>;
 
 
-const get_status_flag = (indicator_status, num_texts, target_changed, years) => {
-  if(num_texts > 1){
-    return target_changed ?
-      <Fragment>
-        <div className="text-diff__indicator-status--change">
-          {text_maker("words_changed")}
-        </div>
-        <div className="text-diff__indicator-status--change">
-          {text_maker("target_changed")}
-        </div>
-      </Fragment> :
-      <div className="text-diff__indicator-status--change">
-        {text_maker("words_changed")}
-      </div>;
-  }
-  if (indicator_status === 'both'){
-    return (
-      <div className="text-diff__indicator-status--nochange">
-        {text_maker("no_diff")}
-      </div>
-    );
-  }
-  if(indicator_status === 'dp18'){
-    return (
-      <div className="text-diff__indicator-status--removed">
-        {text_maker("indicator-removed", {second_year: result_docs[years[1]].year})}
-      </div>
-    );
-  }
-  if(indicator_status === 'dp19'){
-    return (
-      <div className="text-diff__indicator-status--added">
-        {text_maker("indicator-added", {second_year: result_docs[years[1]].year})}
-      </div>
-    );
-  }
-  return "";
-};
-
-const indicator_report = (processed_indicator, years) => 
-  <div key={processed_indicator.indicator1.stable_id} className="text-diff__indicator-report" >
-    <div className="text-diff__indicator-report__header">
-      <h4>{processed_indicator.indicator2.name}</h4>
-    </div>
-    <div className="text-diff__indicator-report__body">
-      {get_status_flag(processed_indicator.status,
-        _.max([processed_indicator.name_diff.length, processed_indicator.methodology_diff.length, processed_indicator.target_diff.length]),
-        processed_indicator.target_diff.length > 1,
-        years)}
-      { processed_indicator.name_diff.length > 1 ?
-        difference_report(processed_indicator.name_diff, "indicator_name", years) :
-        no_difference(processed_indicator.indicator1.name, "indicator_name") }
-      { processed_indicator.methodology_diff.length > 1 ?
-        difference_report(processed_indicator.methodology_diff, "indicator_methodology", years) :
-        no_difference(processed_indicator.indicator1.methodology, "indicator_methodology") }
-      { processed_indicator.target_diff.length > 1 ?
-        difference_report(processed_indicator.target_diff, "indicator_target", years) :
-        no_difference(get_target_from_indicator(processed_indicator.indicator1), "indicator_target") }
-      <div className="text-diff__id-tag">{`ID: ${processed_indicator.indicator1.stable_id}`}</div>
-    </div>
-  </div>;
-
-
-const no_difference = (text, key) =>
-  <Fragment>
-    <div className="text-diff__indicator-report__subheader" >
-      <h5>{`${text_maker(key)} (${text_maker("no_diff")})`}</h5>
-    </div>
-    <div className="text-diff__indicator-report__row">
-      <div>{text}</div>
-    </div>
-  </Fragment>;
-
-const difference_report = (diff, key, years) => 
-  <Fragment>
-    <div className="text-diff__indicator-report__subheader" >
-      <h5>{text_maker(key)}</h5>
-    </div>
-    <div className={classNames("row","text-diff__indicator-report__row")}>
-      <div className="col-md-6" >
-        <h6>{result_docs[years[0]].year}</h6>
-      </div>
-      <div className="col-md-6" >
-        <h6>{result_docs[years[1]].year}</h6>
-      </div>
-    </div>
-    <div className={classNames("row","text-diff__indicator-report__row")}>
-      <div className="col-md-6" >
-        {_.map(diff, (part,iix) =>
-          <Fragment key={iix}>
-            {window.is_a11y_mode && part.removed && <span className='text-diff__text-part--removed'> [{text_maker("a11y_begin_removed")}]</span>}
-            <span
-              className={part.removed ? 'text-diff__text-part--removed' : ''}
-              style={{display: part.added ? "none" : "inline"}}
-            >
-              {part.value}
-            </span>
-            {window.is_a11y_mode && part.removed && <span className='text-diff__text-part--removed'> [{text_maker("a11y_end_removed")}]</span>}
-          </Fragment>
-        )}
-      </div>
-      <div className="col-md-6" >
-        {_.map(diff, (part,iix) =>
-          <Fragment key={iix}>
-            {window.is_a11y_mode && part.added && <span className='text-diff__text-part--added'> [{text_maker("a11y_begin_added")}]</span>}
-            <span
-              className={ part.added ? 'text-diff__text-part--added' : ''}
-              style={{display: part.removed ? "none" : "inline"}}
-            >
-              {part.value}
-            </span>
-            {window.is_a11y_mode && part.added && <span className='text-diff__text-part--added'> [{text_maker("a11y_end_added")}]</span>}
-          </Fragment>
-        )}
-      </div>
-    </div>
-  </Fragment>;
