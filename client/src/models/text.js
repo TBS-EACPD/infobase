@@ -190,24 +190,6 @@ const combine_bundles = bundles => {
 
 const combined_global_bundle = combine_bundles(global_bundles);
 
-
-const create_text_maker = bundles => {
-  if(_.isEmpty(bundles)){ //called without args -> only global text  
-    return trivial_text_maker;
-  }
-  if(!_.isArray(bundles)){ //single el
-    bundles = [bundles];
-  }
-
-  const combined = combine_bundles(bundles);
-  _.extend(combined, combined_global_bundle);
-  const func = _create_text_maker(combined);
-  combined.__text_maker_func__ = func;
-  
-  return func;
-};
-
-
 const _create_text_maker = (deps=template_store) => (key, context={}) => {
 
   // 1. lookup the key to get the text object
@@ -219,7 +201,7 @@ const _create_text_maker = (deps=template_store) => (key, context={}) => {
   if(deps.__text_maker_func__){
     context.__text_maker_func__ = deps.__text_maker_func__;
   } else {
-    context.__text_maker_func__ = trivial_text_maker;
+    context.__text_maker_func__ = trivial_text_maker; /* eslint-disable-line no-use-before-define */
   }
 
   const text_obj = deps[key];
@@ -269,6 +251,24 @@ const _create_text_maker = (deps=template_store) => (key, context={}) => {
   }
   return rtn;
 };
+
+
+const create_text_maker = bundles => {
+  if(_.isEmpty(bundles)){ //called without args -> only global text  
+    return trivial_text_maker; /* eslint-disable-line no-use-before-define */
+  }
+  if(!_.isArray(bundles)){ //single el
+    bundles = [bundles];
+  }
+
+  const combined = combine_bundles(bundles);
+  _.extend(combined, combined_global_bundle);
+  const func = _create_text_maker(combined);
+  combined.__text_maker_func__ = func;
+  
+  return func;
+};
+
 
 const trivial_text_maker = _create_text_maker(combined_global_bundle);
 

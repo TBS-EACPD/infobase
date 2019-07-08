@@ -221,6 +221,121 @@ query($lang: String!) {
   }
 }
 `;
+
+
+function extract_flat_data_from_results_hierarchies(hierarchical_response_data){
+  const sub_programs = [],
+    results = [],
+    indicators = [],
+    pi_dr_links = [];
+
+  const crawl_hierachy_level = (subject_node) => _.each(
+    subject_node,
+    subject => {
+      _.each(
+        _.chain(subject)
+          .pickBy( (value, key) => /(drr|dp)[0-9][0-9]_results/.test(key) )
+          .reduce( 
+            (memo, doc_results) => [ ...memo, ...doc_results],
+            []
+          )
+          .value(),
+        (result) => {
+          results.push({
+            id: result.id,
+            subject_id: subject.id,
+            name: result.name,
+            doc: result.doc,
+          });
+
+          _.each(
+            result.indicators,
+            (indicator) => {
+              indicator.target_year = _.isEmpty(indicator.target_year) ? null : parseInt(indicator.target_year);
+              indicator.target_month = _.isEmpty(indicator.target_month) ? null : parseInt(indicator.target_month);
+
+              indicators.push( _.omit(indicator, "__typename") );
+            }
+          );
+        }
+      );
+      
+      if ( !_.isEmpty(subject.pidrlinks) ){
+        _.each(
+          subject.pidrlinks,
+          (pidrlink) => pi_dr_links.push(pidrlink)
+        );
+      }
+
+      if ( !_.isEmpty(subject.sub_programs) ){
+        _.each(
+          subject.sub_programs,
+          (sub_program) => {
+
+            const cleaned_sub_program = _.chain(sub_program)
+              .cloneDeep()
+              .omit("__typename")
+              .thru( sub_program => {
+                _.each(
+                  [
+                    "spend_planning_year_1",
+                    "spend_planning_year_2",
+                    "spend_planning_year_3",
+                    "fte_planning_year_1",
+                    "fte_planning_year_2",
+                    "fte_planning_year_3",
+                    "spend_pa_last_year",
+                    "fte_pa_last_year",
+                    "planned_spend_pa_last_year",
+                    "planned_fte_pa_last_year",
+                  ], 
+                  key => {
+                    sub_program[key] = _.isNaN(sub_program[key]) ? null : +sub_program[key];
+                  }
+                );
+
+                return {
+                  ...sub_program,
+                  parent_id: subject.id,
+                };
+              })
+              .value();
+
+            sub_programs.push(cleaned_sub_program);
+          }
+        );
+
+        crawl_hierachy_level(subject.sub_programs);
+      }
+    }
+  );
+
+  _.each(
+    hierarchical_response_data,
+    response => {
+      switch(response.__typename){
+        case 'Program':
+          crawl_hierachy_level([ response ]);
+          break;
+        case 'Crso':
+          crawl_hierachy_level([ response ]);
+          crawl_hierachy_level(response.programs);
+          break;
+        default:
+          crawl_hierachy_level(response.crsos);
+          crawl_hierachy_level(response.programs);
+      }
+    }
+  );
+
+  return {
+    sub_programs,
+    results,
+    indicators,
+    pi_dr_links,
+  };
+}
+
 export function api_load_results_bundle(subject, result_docs){
   const docs_to_load = !_.isEmpty(result_docs) ? result_docs : result_doc_keys;
 
@@ -340,119 +455,6 @@ export function api_load_results_bundle(subject, result_docs){
       });
       throw error;
     });
-}
-
-function extract_flat_data_from_results_hierarchies(hierarchical_response_data){
-  const sub_programs = [],
-    results = [],
-    indicators = [],
-    pi_dr_links = [];
-
-  const crawl_hierachy_level = (subject_node) => _.each(
-    subject_node,
-    subject => {
-      _.each(
-        _.chain(subject)
-          .pickBy( (value, key) => /(drr|dp)[0-9][0-9]_results/.test(key) )
-          .reduce( 
-            (memo, doc_results) => [ ...memo, ...doc_results],
-            []
-          )
-          .value(),
-        (result) => {
-          results.push({
-            id: result.id,
-            subject_id: subject.id,
-            name: result.name,
-            doc: result.doc,
-          });
-
-          _.each(
-            result.indicators,
-            (indicator) => {
-              indicator.target_year = _.isEmpty(indicator.target_year) ? null : parseInt(indicator.target_year);
-              indicator.target_month = _.isEmpty(indicator.target_month) ? null : parseInt(indicator.target_month);
-
-              indicators.push( _.omit(indicator, "__typename") );
-            }
-          );
-        }
-      );
-      
-      if ( !_.isEmpty(subject.pidrlinks) ){
-        _.each(
-          subject.pidrlinks,
-          (pidrlink) => pi_dr_links.push(pidrlink)
-        );
-      }
-
-      if ( !_.isEmpty(subject.sub_programs) ){
-        _.each(
-          subject.sub_programs,
-          (sub_program) => {
-
-            const cleaned_sub_program = _.chain(sub_program)
-              .cloneDeep()
-              .omit("__typename")
-              .thru( sub_program => {
-                _.each(
-                  [
-                    "spend_planning_year_1",
-                    "spend_planning_year_2",
-                    "spend_planning_year_3",
-                    "fte_planning_year_1",
-                    "fte_planning_year_2",
-                    "fte_planning_year_3",
-                    "spend_pa_last_year",
-                    "fte_pa_last_year",
-                    "planned_spend_pa_last_year",
-                    "planned_fte_pa_last_year",
-                  ], 
-                  key => {
-                    sub_program[key] = _.isNaN(sub_program[key]) ? null : +sub_program[key];
-                  }
-                );
-
-                return {
-                  ...sub_program,
-                  parent_id: subject.id,
-                };
-              })
-              .value();
-
-            sub_programs.push(cleaned_sub_program);
-          }
-        );
-
-        crawl_hierachy_level(subject.sub_programs);
-      }
-    }
-  );
-
-  _.each(
-    hierarchical_response_data,
-    response => {
-      switch(response.__typename){
-        case 'Program':
-          crawl_hierachy_level([ response ]);
-          break;
-        case 'Crso':
-          crawl_hierachy_level([ response ]);
-          crawl_hierachy_level(response.programs);
-          break;
-        default:
-          crawl_hierachy_level(response.crsos);
-          crawl_hierachy_level(response.programs);
-      }
-    }
-  );
-
-  return {
-    sub_programs,
-    results,
-    indicators,
-    pi_dr_links,
-  };
 }
 
 

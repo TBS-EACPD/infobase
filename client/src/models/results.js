@@ -6,6 +6,9 @@ import { trivial_text_maker, run_template } from './text.js';
 const { Program, CRSO } = Subject;
 const { months } = businessConstants;
 
+// dependencies are tangled up too much here, disable it for the whole file
+/* eslint-disable no-use-before-define */
+
 const parent_indexed_sub_program_entities = {};
 const sub_program_entities_by_id = {};
 class SubProgramEntity {
@@ -149,6 +152,44 @@ class SubProgramEntity {
 }
 
 
+//currently only supports dept, crso, programs, subs and sub-subs
+function _get_flat_results(subject){
+  switch(subject.level){
+    case 'sub_sub_program':
+      return Result.get_entity_results(subject.id);
+
+    case 'sub_program':
+    case 'program':
+      return _.chain( SubProgramEntity.sub_programs(subject.id) )
+        .map( _get_flat_results )
+        .flatten()
+        .concat( Result.get_entity_results(subject.id) )
+        .uniqBy('id')
+        .compact()
+        .value();
+          
+    case 'crso':
+      return _.chain(subject.programs)
+        .map(_get_flat_results)
+        .flatten()
+        .concat( Result.get_entity_results(subject.id) )
+        .compact()
+        .value();
+      
+    case 'dept':
+      return _.chain(subject.crsos)
+        .map(_get_flat_results)
+        .flatten()
+        .compact()
+        .value();
+
+    default:
+      return [];
+
+  }
+}
+
+
 
 //critical assumption: ids are unique accross programs, CRs, sub-programs and sub-sub-programs
 //FIXME data issue:
@@ -251,44 +292,6 @@ class Result {
     return _get_flat_results(subject);
   }
 }
-
-//currently only supports dept, crso, programs, subs and sub-subs
-function _get_flat_results(subject){
-  switch(subject.level){
-    case 'sub_sub_program':
-      return Result.get_entity_results(subject.id);
-
-    case 'sub_program':
-    case 'program':
-      return _.chain( SubProgramEntity.sub_programs(subject.id) )
-        .map( _get_flat_results )
-        .flatten()
-        .concat( Result.get_entity_results(subject.id) )
-        .uniqBy('id')
-        .compact()
-        .value();
-          
-    case 'crso':
-      return _.chain(subject.programs)
-        .map(_get_flat_results)
-        .flatten()
-        .concat( Result.get_entity_results(subject.id) )
-        .compact()
-        .value();
-      
-    case 'dept':
-      return _.chain(subject.crsos)
-        .map(_get_flat_results)
-        .flatten()
-        .compact()
-        .value();
-
-    default:
-      return [];
-
-  }
-}
-
 
 const result_indexed_indicators = {};
 const id_indexed_indicators = {};
