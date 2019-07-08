@@ -22,6 +22,75 @@ import {
 const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;
 const { Dept } = Subject;
 
+function all_children_hidden(header){
+  if (header.children){
+    return _.every(header.children, all_children_hidden);
+  }
+  return header.hidden;
+}
+
+function calc_col_span(header){
+  if (header.children){
+    return _.chain(header.children)
+      .map(calc_col_span)
+      .reduce((x,y) => x+y)
+      .value();
+  }
+  if (header.hidden){
+    return 0;
+  } else {
+    return 1;
+  }
+};
+
+// some helper functions
+function add_child(x){
+  // this === a column parent
+  if (!_.isArray(x)){
+    x = [x];
+  }
+  _.each(x, col => {
+    if (_.isString(col)){
+      col = {header: {en: col, fr: col}};
+    }
+    col.parent = this;
+    this.table.add_col(col);
+    col.wcag = col.parent.table.column_counter();
+    col.level = col.parent.level +1;
+    col.table = col.parent.table;
+  });
+  this.children = (this.children || []).concat(x);
+  return this;
+}
+
+class Mapper {
+  constructor(def){
+    this.def = def;
+    if(def.dept_is_not_index_0) {
+      //certain tables don't report at the department level, this hack accomodates them
+      this.map = this._non_default_map;
+    }
+  }
+  get key(){ return this.def.id; }
+  get mapper(){ return this.def.mapper; }
+  get sort(){ return this.def.sort || _.identity; }
+  get lang(){ //mappers deal with data entry, they need to know about language.
+    return window.lang;
+  }
+  map(row){
+    // remap to orgIDs
+    if (row[0] !== 'ZGOC') {
+      row[0] = Dept.lookup(row[0]).unique_id;
+    }
+    // row.slice creates a copy of an array
+    return this.mapper(row.slice());
+  }
+  _non_default_map(row){
+    return this.mapper(row.slice());
+  }
+
+}
+
 export class Table extends mix().with(staticStoreMixin){
 
   static create_and_register(def){
@@ -371,73 +440,6 @@ export class Table extends mix().with(staticStoreMixin){
   }
 }
 
-// some helper functions
-function add_child(x){
-// this === a column parent
-  if (!_.isArray(x)){
-    x = [x];
-  }
-  _.each(x, col => {
-    if (_.isString(col)){
-      col = {header: {en: col, fr: col}};
-    }
-    col.parent = this;
-    this.table.add_col(col);
-    col.wcag = col.parent.table.column_counter();
-    col.level = col.parent.level +1;
-    col.table = col.parent.table;
-  });
-  this.children = (this.children || []).concat(x);
-  return this;
-}
-
-function all_children_hidden(header){
-  if (header.children){
-    return _.every(header.children, all_children_hidden);
-  }
-  return header.hidden;
-}
-function calc_col_span(header){
-  if (header.children){
-    return _.chain(header.children)
-      .map(calc_col_span)
-      .reduce((x,y) => x+y)
-      .value();
-  }
-  if (header.hidden){
-    return 0;
-  } else {
-    return 1;
-  }
-};
-
-class Mapper {
-  constructor(def){
-    this.def = def;
-    if(def.dept_is_not_index_0) {
-      //certain tables don't report at the department level, this hack accomodates them
-      this.map = this._non_default_map;
-    }
-  }
-  get key(){ return this.def.id; }
-  get mapper(){ return this.def.mapper; }
-  get sort(){ return this.def.sort || _.identity; }
-  get lang(){ //mappers deal with data entry, they need to know about language.
-    return window.lang;
-  }
-  map(row){
-    // remap to orgIDs
-    if (row[0] !== 'ZGOC') {
-      row[0] = Dept.lookup(row[0]).unique_id;
-    }
-    // row.slice creates a copy of an array
-    return this.mapper(row.slice());
-  }
-  _non_default_map(row){
-    return this.mapper(row.slice());
-  }
-
-}
 
 window._DEV_HELPERS.Table = Table;
 
