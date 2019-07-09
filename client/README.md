@@ -26,16 +26,16 @@ Client-side code and content for the GC InfoBase.
 ### Building the InfoBase
 0. Go to the client directory of your InfoBase repo in a terminal, e.g. `cd ~/Documents/infobase/client`
 1. `npm ci` to get node modules
-2. `npm run IB_base` to gather and bundle static files (csv's, svg's, extended bootstrap css). Can be left running to watch for changes
+2. `npm run IB_base_watch` to gather and bundle static files (csv's, svg's, extended bootstrap css). Can be left running to watch for changes
 3. `npm run IB_q` to webpack the source code (`IB_q` builds quickly, requires a browser with ES6 support) or `npm run IB_dev` (transpiles and polyfills for testing in IE11/safari/mobile)\*
 
 \* `IB_q` and `IB_dev` are not the only flavours of build. See package.json for a list of all build comands
 
 ### Visiting a local build
-1. prerequisites: 1) follow the build steps above, 2) follow the steps up through spinning up a local InfoBase API from the [server README](https://github.com/TBS-EACPD/InfoBase/blob/master/server/README.md)
-2. Go to the client directory of your InfoBase repo in a terminal, e.g. `cd ~/Documents/infobase/client`
-3. `npm run serve-loopback` to start a server in the InfoBase directory, localhost only
-4. open a browser and paste `localhost:8080/build/InfoBase/index-eng.html` in the address bar
+0. prerequisites: 1) follow the build steps above, 2) follow the steps up through spinning up a local InfoBase API from the [server README](https://github.com/TBS-EACPD/InfoBase/blob/master/server/README.md)
+1. Go to the client directory of your InfoBase repo in a terminal, e.g. `cd ~/Documents/infobase/client`
+2. `npm run serve-loopback` to start a server in the InfoBase directory, localhost only
+3. open a browser and paste `localhost:8080/build/InfoBase/index-eng.html` in the address bar
 
 Note: if you use `npm run serve` you can connect from other devices on your local network (e.g. test from mobile) by visiting `<your IP>:8080/build/InfoBase/index-eng.html`. Note that your IP will change when you move networks/disconnect a network. IB_q, or equivalent, needs to be restarted to update the IP env var, so if you have issues connecting to a local build from another device that's a good first step to try.
 
