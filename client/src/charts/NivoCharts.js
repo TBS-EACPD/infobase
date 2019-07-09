@@ -277,6 +277,7 @@ export class NivoResponsiveHBar extends React.Component{
       padding,
       label,
       labelSkipWidth,
+      markers,
     } = this.props;
     return (
       //have to have an empty string in key to make sure
@@ -296,6 +297,7 @@ export class NivoResponsiveHBar extends React.Component{
           legends,
           isInteractive,
           labelSkipWidth,
+          markers,
         }}
         layout = 'horizontal'
         keys = {_.union([''],keys)}

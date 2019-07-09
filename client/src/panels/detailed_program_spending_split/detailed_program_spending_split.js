@@ -339,7 +339,9 @@ class DetailedProgramSplit extends React.Component {
     } = this.props;
     const { so_label_list } = this.state;
     let graph_ready_data = [];
+    const markers = [];
     const tick_map = {};
+    const divHeight = 500;
     const colors = infobase_colors();
     const formatter = formats.compact1_raw;
     let legend_items;
@@ -364,7 +366,7 @@ class DetailedProgramSplit extends React.Component {
       legend_items = _.sortBy(legend_items, ({label}) => label === text_maker('other_sos') );
       _.map(legend_items, ({label}) => {so_label_list.push(label);});
     }
-
+    
     graph_ready_data = _.chain(flat_data)
       .filter(row => {
         row.so_label = mapping(row.so_num);
@@ -374,16 +376,28 @@ class DetailedProgramSplit extends React.Component {
       .map(group => {
         const prog = _.first(group).program;
         const obj = {label: prog.name};
-        tick_map[`${prog.name}`] = prog;        
+        tick_map[`${prog.name}`] = prog;
         _.forEach(group, (row) => {
           obj[`${row.so_label}`] = obj[`${row.so_label}`] ? obj[`${row.so_label}`] + row.value : row.value;
           obj['total'] = obj['total'] ? obj['total'] + row.value : row.value;
         });
+        markers.push({
+          axis: 'y',
+          value: obj.label,
+          lineStyle: {strokeWidth: 0},
+          legend: formatter(obj.total),
+          legendOffsetX: -70,
+        },
+        );
         return obj;
       })
       .sortBy(obj => obj.total)
       .value();
-
+    
+    _.forEach(markers, (marker) => {
+      marker.legendOffsetY = -(divHeight / (markers.length * 2));
+    });
+    
     if(window.is_a11y_mode){
       return (
         <div className="row">
@@ -456,7 +470,7 @@ class DetailedProgramSplit extends React.Component {
         <div className="fcol-md-8" style={{ width: "100%" }}>
           <div 
             style={{
-              height: '500px',
+              height: divHeight,
             }}
           >
             <NivoResponsiveHBar
@@ -465,7 +479,7 @@ class DetailedProgramSplit extends React.Component {
               keys={so_label_list}
               margin = {{
                 top: 10,
-                right: 20,
+                right: 80,
                 bottom: 30,
                 left: 170,
               }}
@@ -498,6 +512,7 @@ class DetailedProgramSplit extends React.Component {
                   </g>
                 ),
               }}
+              markers = {markers}
               padding = {0.05}
             />
           </div>
