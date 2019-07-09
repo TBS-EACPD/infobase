@@ -1,35 +1,5 @@
 import { formats } from '../core/format.js';
 
-const add_grid_lines = function(direction, grid_line_area, axis, tick_size){
-  const axis_clone = _.cloneDeep(axis);
-  const tick_size_orientation = direction === "vertical" ? 1 : -1;
-
-  grid_line_area
-    .selectAll(".grid"+direction)
-    .remove();
-
-  grid_line_area
-    .call(axis_clone
-      .tickSize(tick_size_orientation*tick_size)
-      .tickFormat("")
-    )
-    .selectAll("g.tick")
-    .attr("class", "grid"+direction)
-    .selectAll("line")
-    .attrs({
-      "fill": "none",
-      "shape-rendering": "auto",
-    })
-    .styles({
-      "stroke": "steelblue",
-      "stroke-opacity": 0.3,
-      "stroke-width": "1px",
-    });
-
-  grid_line_area
-    .selectAll("path.domain")
-    .remove();
-};
 
 
 let window_width_last_updated_at = window.innerWidth;
@@ -140,7 +110,6 @@ window._DEV_HELPERS.graph_registry = graph_registry;
 
 export default {
   formats,
-  add_grid_lines,
   graph_registry,
   setup_graph_instance,
 };
