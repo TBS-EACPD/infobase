@@ -7,7 +7,7 @@ const CDN_URL = process.env.CDN_URL || ".";
 const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
 const IS_PROD_RELEASE = process.env.IS_PROD_RELEASE || false;
 
-const get_rules = ({ 
+const get_rules = ({
   should_use_babel,
   language,
   is_prod_build,
@@ -97,7 +97,7 @@ const prod_plugins = [
     },
   }),
   new webpack.optimize.ModuleConcatenationPlugin(),
-]
+];
 
 function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_ip, is_ci }){
   

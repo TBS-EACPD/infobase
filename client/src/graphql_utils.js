@@ -5,21 +5,35 @@ import { graphql as apollo_connect } from 'react-apollo';
 import string_hash from 'string-hash';
 import { compressToBase64 } from 'lz-string';
 
+const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${window.sha}/graphql`;
+
 let api_url;
-if(window.is_ci){
-  api_url = `hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls`;
-} else if (window.is_dev){
-  api_url = `http://${ window.local_ip || "127.0.0.1" }:1337/graphql`;
-} else {
-  api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${window.sha}/graphql`;
-}
+const get_api_url = async () => {
+  if (!api_url){
+    if(window.is_ci){
+      api_url = `hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls`;
+    } else if (window.is_dev){
+      api_url = `http://${window.local_ip}:1337/graphql`;
+
+      // need to be careful if local IP's changed since the local_ip env var was set (last time
+      // webpack process was restarted), if it has then fall back to using local host
+      api_url = await fetch(`${api_url}?query={ root(lang: "en") { gov { id } } }`)
+        .then( (response ) => api_url )
+        .catch( (error) => "http://127.0.0.1:1337/graphql" );
+    } else {
+      api_url = prod_api_url;
+    }
+  }
+  
+  return api_url;
+};
 
 // Makes our GET requests tolerant of long queries, sufficient but may not work for arbitrarily long queries
-const query_length_tolerant_fetch = (uri, options) => {
+const query_length_tolerant_fetch = async (uri, options) => {
   const url_encoded_query = uri.split("?query=")[1];
   const query_string_hash = string_hash(url_encoded_query);
 
-  const short_uri = `${api_url}?v=${window.sha}&queryHash=${query_string_hash}`;
+  const short_uri = `${await get_api_url()}?v=${window.sha}&queryHash=${query_string_hash}`;
 
   const new_options = {
     ...options,
@@ -37,7 +51,7 @@ export function get_client(){
   if(!client){
     client = new ApolloClient({
       link: createHttpLink({
-        uri: api_url,
+        uri: prod_api_url, // query_length_tolerant_fetch replaces the uri on the fly, switches to appropriate local uri in dev
         fetchOptions: { method: "GET" },
         fetch: query_length_tolerant_fetch,
       }),
