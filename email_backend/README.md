@@ -15,7 +15,7 @@ Google Cloud Function email backend. More user-friendly and secure/configurable 
   0. Install node, npm, git. Clone the InfoBase repo 
   1. `cd` to the `InfoBase/email_backend` dir
   2. Run `npm ci`
-  3. Run `npm start` to start a local server on port 7331. Note: you'll need to restart this server whenever you want it to reflect changes to made in `src`
+  3. Run `npm start` to start a local server on port 7331. Watches for changes in `src` or `templates`
   4. In a separate window run `npm test` to run unit tests in `src` as well as end-to-end test agaist the local server
 
 ## Endpoints

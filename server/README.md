@@ -6,17 +6,17 @@ InfoBase API
 GraphQL API for InfoBase data.
 
 ## Table of Contents
-- [InfoBase API](#infobase-api)
-  - [Table of Contents](#table-of-contents)
-  - [Getting started](#getting-started)
-    - [Running the API server locally](#running-the-api-server-locally)
-  - [Tests](#tests)
-    - [Snapshot tests](#snapshot-tests)
-  - [File structure](#file-structure)
+- [InfoBase API](#InfoBase-API)
+  - [Table of Contents](#Table-of-Contents)
+  - [Getting started](#Getting-started)
+    - [Running the API server locally](#Running-the-API-server-locally)
+  - [Tests](#Tests)
+    - [Snapshot tests](#Snapshot-tests)
+  - [File structure](#File-structure)
     - [models/](#models)
-  - [Cloud stuff](#cloud-stuff)
-    - [Mongodb Atlas](#mongodb-atlas)
-    - [Google Cloud Function](#google-cloud-function)
+  - [Cloud stuff](#Cloud-stuff)
+    - [Mongodb Atlas](#Mongodb-Atlas)
+    - [Google Cloud Function](#Google-Cloud-Function)
 
 
 ## Getting started
@@ -26,8 +26,8 @@ GraphQL API for InfoBase data.
 1. run `mongod` in the background/a spare shell
 2. open a shell in `/server`
 3. `npm ci` to load the required node_modules
-4. `npm run populate_db` to populate a local mongo database (named `infobase`)
-5. `npm start` to start the express/GraphQL server listening on `localhost:1337`
+4. `npm run populate_db` to populate a local mongo database (named `infobase`). Can be left running to watch for changes in `../data`
+5. `npm start` to start the express/GraphQL server listening on `localhost:1337`. Watches for changes in `src`
 6. Optional: visit `http://localhost:1337` for a GraphiQL instance, test some queries
 
 ## Tests
