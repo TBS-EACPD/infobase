@@ -318,7 +318,7 @@ export class NivoResponsiveHBar extends React.Component{
         borderColor="inherit:darker(1.6)"
         motionDamping={motion_damping}
         motionStiffness={motion_stiffness}
-        labelTextColor={"black"} // TODO: use infobase colour constant
+        labelTextColor={window.infobase_color_constants.textColor}
         labelSkipWidth={labelSkipWidth}
       />
     );
