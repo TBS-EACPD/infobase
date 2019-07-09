@@ -327,7 +327,7 @@ class DetailedProgramSplit extends React.Component {
   constructor(){
     super();
     this.state = {
-      so_label_list: [text_maker('all')],
+      selected_program: text_maker('all'),
     };
   }
   
@@ -337,8 +337,9 @@ class DetailedProgramSplit extends React.Component {
       arrangements,
       top_3_so_nums,
     } = this.props;
-    const { so_label_list } = this.state;
+    const { selected_program } = this.state;
     let graph_ready_data = [];
+    const so_label_list = [text_maker('all')];
     const markers = [];
     const tick_map = {};
     const divHeight = 500;
@@ -346,9 +347,9 @@ class DetailedProgramSplit extends React.Component {
     const formatter = formats.compact1_raw;
     let legend_items;
 
-    const { mapping } = _.find(arrangements, {id: so_label_list[0]} );
+    const { mapping } = _.find(arrangements, {id: selected_program} );
 
-    if(so_label_list[0] === text_maker('all')){
+    if(selected_program === text_maker('all')){
       legend_items = [ //the order of this array will determine the colors for each sobj.
         ... _.map(top_3_so_nums, num => sos[num].text),
         text_maker('other_sos'),
@@ -364,13 +365,15 @@ class DetailedProgramSplit extends React.Component {
       );
       //make sure 'other standard objects' comes last 
       legend_items = _.sortBy(legend_items, ({label}) => label === text_maker('other_sos') );
-      _.map(legend_items, ({label}) => {so_label_list.push(label);});
+      _.forEach(legend_items, ({label}) => {so_label_list.push(label);});
+    } else{
+      so_label_list.push(selected_program);
     }
     
     graph_ready_data = _.chain(flat_data)
       .filter(row => {
         row.so_label = mapping(row.so_num);
-        return row.value!=0 && _.includes(so_label_list, row.so_label);
+        return row.value!==0 && _.includes(so_label_list, row.so_label);
       })
       .groupBy(row => row.program.name)
       .map(group => {
@@ -378,8 +381,8 @@ class DetailedProgramSplit extends React.Component {
         const obj = {label: prog.name};
         tick_map[`${prog.name}`] = prog;
         _.forEach(group, (row) => {
-          obj[`${row.so_label}`] = obj[`${row.so_label}`] ? obj[`${row.so_label}`] + row.value : row.value;
-          obj['total'] = obj['total'] ? obj['total'] + row.value : row.value;
+          obj[`${row.so_label}`] = (obj[`${row.so_label}`] || 0) + row.value;
+          obj['total'] = (obj['total'] || 0) + row.value;
         });
         markers.push({
           axis: 'y',
@@ -442,14 +445,14 @@ class DetailedProgramSplit extends React.Component {
           <label>
             <TM k="filter_by_so" />
             <Select 
-              selected={so_label_list[0]}
+              selected={selected_program}
               options={_.map(arrangements, ({id, label}) => ({ 
                 id,
                 display: label,
               }))}
               onSelect={id=> {
                 this.setState({
-                  so_label_list: [id],
+                  selected_program: id,
                 });
               }}
               style={{
