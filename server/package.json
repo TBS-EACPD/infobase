@@ -23,8 +23,7 @@
     "graphql-tools": "^2.11.0",
     "lodash": "^4.17.11",
     "lz-string": "^1.4.4",
-    "mongoose": "^5.5.8",
-    "port-pid": "0.0.7"
+    "mongoose": "^5.5.8"
   },
   "devDependencies": {
     "@babel/cli": "^7",
@@ -39,6 +38,7 @@
     "eslint-plugin-react": "^7.4.0",
     "jest": "^24",
     "jest-cli": "^24",
+    "kill-port": "^1.5.1",
     "nodemon": "^1.19.1"
   },
   "scripts": {
