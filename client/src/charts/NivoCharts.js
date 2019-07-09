@@ -73,11 +73,32 @@ const percent_value_tooltip = (tooltip_items, formatter, total) => (
 const general_default_props = {
   tooltip: (d, tooltip_formatter) => default_tooltip(d, tooltip_formatter),
   is_money: true,
+  remove_bottom_axis: false,
+  remove_left_axis: false,
+  add_top_axis: false,
+  enableLabel: false,
+  enableGridX: true,
+  enableGridY: true,
   margin: {
     top: 50,
     right: 40,
     bottom: 50,
     left: 70,
+  },
+  theme: {
+    axis: {
+      ticks: {
+        text: { 
+          fontSize: 12,
+          fill: window.infobase_color_constants.textColor,
+        },
+      },
+    },
+    legends: {
+      text: {
+        fontSize: 12,
+      },
+    },
   },
 };
 
@@ -135,9 +156,7 @@ NivoResponsivePie.defaultProps = {
     bottom: 60,
     left: 50,
   },
-
   include_percent: true,
-
   enableRadialLabels: false,
   enableSlicesLabels: false,
 };
@@ -221,27 +240,7 @@ NivoResponsiveBar.defaultProps = {
     tickSize: 7,
     tickPadding: 10,
   },
-  theme: {
-    axis: {
-      ticks: {
-        text: { 
-          fontSize: 12,
-          fill: window.infobase_color_constants.textColor,
-        },
-      },
-    },
-    legends: {
-      text: {
-        fontSize: 12,
-      },
-    },
-  },
   isInteractive: true,
-  remove_bottom_axis: false,
-  remove_left_axis: false,
-  enableLabel: false,
-  enableGridX: true,
-  enableGridY: true,
 };
 
 
@@ -332,16 +331,7 @@ NivoResponsiveHBar.defaultProps = {
     tickSize: 7,
     tickPadding: 10,
   },
-  top_axis: null,
   theme: {
-    axis: {
-      ticks: {
-        text: {
-          fontSize: 12,
-          fill: window.infobase_color_constants.textColor,
-        },
-      },
-    },
     legends: {
       text: {
         fontSize: 14,
@@ -354,12 +344,6 @@ NivoResponsiveHBar.defaultProps = {
     },
   },
   isInteractive: true,
-  remove_bottom_axis: false,
-  remove_left_axis: false,
-  add_top_axis: false,
-  enableLabel: false,
-  enableGridX: true,
-  enableGridY: true,
   max: "auto",
   min: "auto",
 };
@@ -454,27 +438,12 @@ NivoResponsiveLine.defaultProps = {
     ), 
     tooltip_formatter,
   ),
-
   colors: window.infobase_color_constants.textColor,
   bttm_axis: {
     tickSize: 7,
     tickPadding: 12,
   },
-  theme: {
-    axis: {
-      ticks: {
-        text: { 
-          fontSize: 12,
-          fill: window.infobase_color_constants.textColor,
-        },
-      },
-    },
-  },
-  remove_bottom_axis: false,
   enableDotLabel: false,
-  enable_label: false,
-  enableGridX: true,
-  enableGridY: true,
   enableArea: false,
   stacked: false,
   yScale: {
