@@ -442,7 +442,7 @@ export const TspanLineWrapper = ({text, width, line_height=1}) => <Fragment>
         [""],
       )
       .map(
-        (line, ix) => // isn't dy undefined here, and at the same line in the current code?
+        (line, ix) =>
           <tspan key={ix} x={0} y={0} dy={ix > 0 ? line_height*ix + "em" : "0em"}>
             {line}
           </tspan> 
