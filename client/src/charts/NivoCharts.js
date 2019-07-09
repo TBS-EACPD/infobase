@@ -227,8 +227,6 @@ export class NivoResponsiveBar extends React.Component{
         padding={0.3}
         borderColor="inherit:darker(1.6)"
         labelTextColor="inherit:darker(1.6)"
-        motionDamping={motion_damping || 15}
-        motionStiffness={motion_stiffness || 95}
       />
     );
   }
@@ -241,6 +239,8 @@ NivoResponsiveBar.defaultProps = {
     tickPadding: 10,
   },
   isInteractive: true,
+  motion_damping: 15,
+  motion_stiffness: 95,
 };
 
 
@@ -314,12 +314,12 @@ export class NivoResponsiveHBar extends React.Component{
               ...(left_axis || {}),
             }
         }
-        padding={padding || 0.3}
+        padding={padding}
         borderColor="inherit:darker(1.6)"
-        motionDamping={motion_damping || 15}
-        motionStiffness={motion_stiffness || 95}
+        motionDamping={motion_damping}
+        motionStiffness={motion_stiffness}
         labelTextColor={"black"} // TODO: use infobase colour constant
-        labelSkipWidth={labelSkipWidth || 10}
+        labelSkipWidth={labelSkipWidth}
       />
     );
   }
@@ -346,6 +346,10 @@ NivoResponsiveHBar.defaultProps = {
   isInteractive: true,
   max: "auto",
   min: "auto",
+  padding: 0.3,
+  motion_damping: 15,
+  motion_stiffness: 95,
+  labelSkipWidth: 10,
 };
 
 export class NivoResponsiveLine extends React.Component {
@@ -415,8 +419,8 @@ export class NivoResponsiveLine extends React.Component {
           axisRight={null}
           xScale={{ type: "point" }}
           animate={true}
-          motionStiffness={motion_stiffness || 100}
-          motionDamping={motion_damping || 19}
+          motionStiffness={motion_stiffness}
+          motionDamping={motion_damping}
           dotSize={stacked ? 0 : 10}
           areaOpacity={stacked ? 1 : 0}
         />
@@ -451,4 +455,6 @@ NivoResponsiveLine.defaultProps = {
     zoomed: false,
     toggle: false,
   },
+  motion_damping: 19,
+  motion_stiffness: 100,
 };
