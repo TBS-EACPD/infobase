@@ -28,7 +28,6 @@ const {
 
 const {
   GraphLegend,
-  StackedHbarChart,
   A11YTable,
 } = declarative_charts;
 
