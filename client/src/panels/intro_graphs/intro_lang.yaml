@@ -29,6 +29,13 @@ portfolio_structure_related_title:
   en: Program Structure
   fr: Structure de Programmes
 
+dept_is_tagged_with_following:
+  transform: [handlebars,markdown]
+  en: |
+    Programs in **{{subj_name subject}}** are tagged with the following areas of interest
+  fr: |
+    Les Programmes dans **{{subj_name subject}}** sont étiquetés aux domaines d'intérêt suivants
+
 # /Dept related panels 
 
 
@@ -38,9 +45,9 @@ portfolio_structure_related_title:
 program_is_tagged_with_following:
   transform: [handlebars,markdown]
   en: |
-    **{{name}}** supports the following areas of interest (tags)
+    **{{subj_name subject}}** is tagged with the following areas of interest
   fr: |
-    Le Programme **{{name}}** est lié aux domaines d'intérêt (étiquettes) suivants
+    Le Programme **{{subj_name subject}}** est étiqueté aux domaines d'intérêt suivants
 
 program_desc_title:
   en: Program Description
@@ -51,8 +58,8 @@ program_fed_structure_title:
   fr: Où s'inscrit ce Programme dans la structure gouvernementale?
 
 program_tags_title:
-  en: Supported areas of interest (tags)
-  fr: Domaines d'intérêt (étiquettes) liés
+  en: Tags for this Program
+  fr: Étiquettes pour ce programme
 
 related_program_structure_title:
   en: Programs under the same organization
@@ -104,10 +111,6 @@ tag_progs_by_dept_title:
   en: Which organizations have programs under this tag? 
   fr: Quelles sont les organisations qui ont des programmes associés à cette étiquette?
 
-
-
-
-
 m2m_warning_title:
   en: |
     How to use tags?
@@ -116,7 +119,6 @@ m2m_warning_title:
 
 
 # / Tag text 
-
 
 org_is_tagged_with_following:
   transform: [handlebars,markdown]
@@ -165,17 +167,16 @@ crso_links_to_prg_title:
   en: Programs under this Core Responsibility
   fr: Programmes sous cette responsabilité essentielle
 
-tags_of_interest_sentence:
+crso_is_tagged_with_following:
   transform: [handlebars,markdown]
   en: |
-    **{{subj_name subject}}** supports the following areas of interest (tags)
+    Programs in **{{subj_name subject}}** are tagged with the following areas of interest
   fr: |
-    **{{subj_name subject}}** est lié aux domaines d'intérêt (étiquettes) suivants
+    Les Programmes dans **{{subj_name subject}}** sont étiquetés aux domaines d'intérêt suivants
 
 crso_tags_title:
-  transform: [handlebars]
-  en: Under which areas of interest (tags) does this Core Responsibility fall? 
-  fr: Sous quels domaines d'intérêt (étiquettes) cette responsabilité essentielle se retrouve-t-elle?
+  en: Tags for this Core Responsibility
+  fr: Étiquettes pour cette responsabilité essentielle 
 
 crso_in_gov_title:
   transform: [handlebars]

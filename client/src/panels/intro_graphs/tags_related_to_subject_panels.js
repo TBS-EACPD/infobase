@@ -96,7 +96,7 @@ _.each(['dept','crso','program'], level => {
         <TextPanel
           title={text_maker(title_by_level[level])}
         >
-          <TM k="tags_of_interest_sentence" args={{subject}} /> 
+          <TM k={`${subject.level}_is_tagged_with_following`} args={{subject}} /> 
           <WellList elements={tags_by_root} />
         </TextPanel>
       );
