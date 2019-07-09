@@ -271,14 +271,6 @@ Statistics.create_and_register({
     const table = tables.programSpending;
     const q = table.q(Gov);
 
-    //var all_years_outcomes = _.map(table.horizontal(exp_cols,false),function(vals, key){ 
-    //  return [key].concat(vals);
-    //});
-    //var all_years_spend_areas = _.map( table.gov_goco(exp_cols,false),function(vals, key){ 
-    //  return [key].concat(vals);
-    //});
-    //stats.year_over_year_multi_stats(add,"prgm_exp_outcomes",all_years_outcomes);
-    //stats.year_over_year_multi_stats(add,"prgm_exp_spend_areas",all_years_spend_areas);
     stats.add_all_years(add,"exp",planning_years, (year,i) => q.sum(year) );
     const planned_exp_avg = c.gov_exp_average;
     add("planned_exp_average", planned_exp_avg);

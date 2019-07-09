@@ -219,61 +219,8 @@ Statistics.create_and_register({
     stats.add_all_years(add,"fte",std_years, (year,i) => q.sum(year) );
     const hist_fte_avg = c.dept_fte_average;
     add("hist_fte_average", hist_fte_avg);
-
-
-    //const all_years_outcomes = _.chain( table.horizontal(years_exp,c.dept,true) )
-    //                           .map(function(vals, key){ return [key].concat(vals);})
-    //                           .value();
-    //const all_years_spend_areas = _.chain( table.gov_goco(years_exp,c.dept,true) )
-    //                            .map(function(vals, key){ return [key].concat(vals);})
-    //                            .value();
-    //var all_programs = q.sorted_programs(years_exp);
-    //stats.year_over_year_multi_stats(add, "planed_exp_prgm", all_programs);
-    //stats.year_over_year_multi_stats(add,"planned_exp_outcomes",all_years_outcomes);
-    //stats.year_over_year_multi_stats(add,"planned_exp_spend_areas",all_years_spend_areas);
-    //stats.add_all_years(add,"planned_exp",years_exp,function(year,i){ return  q.sum(year); });
-    //
-    //// FTE
-    //var _add = add;
-    //add = function(key,value){
-    //  if (_.isString(key)){
-    //    _add({ key : key, value : value, type : "big_int_real" });
-    //  } else {
-    //    _add(key);
-    //  }
-    //};
-    //const all_years_outcomes_ftes = _.chain( table.horizontal(years_fte,c.dept,true) )
-    //                           .map(function(vals, key){ return [key].concat(vals);})
-    //                           .value();
-    //const all_years_spend_areas_ftes = _.chain( table.gov_goco(years_fte,c.dept,true) )
-    //                            .map(function(vals, key){ return [key].concat(vals);})
-    //                            .value();
-    //all_programs = q.sorted_programs(years_fte);
-    //add("planned_fte_avg", d3.sum(q.sum(years_fte, {as_object: false}))/years_fte.length );
-    //stats.year_over_year_multi_stats(add, "planed_fte_prgm", all_programs);
-    //stats.year_over_year_multi_stats(add,"planned_fte_outcomes",all_years_outcomes_ftes);
-    //stats.year_over_year_multi_stats(add,"planned_fte_spend_areas",all_years_spend_areas_ftes);
   },
 });
-
-
-Statistics.create_and_register({
-  id: 'programFtes_tag_info', 
-  table_deps: [ 'programFtes'],
-  level: 'tag',
-  compute: (subject, tables, infos, add, c) => {
-    const table = tables.programFtes;
-    const q = table.q(subject);
-    stats.add_all_years(add,"fte",std_years, (year,i) => q.sum(year));
-    const hist_fte_avg = c.tag_fte_average;
-    add("hist_fte_average", hist_fte_avg);
-
-    stats.add_all_years(add,"fte",planning_years, (year,i) => q.sum(year) );
-    const planned_fte_avg = c.tag_fte_average;
-    add("planned_fte_average", planned_fte_avg);
-  },
-});
-
 
 Statistics.create_and_register({
   id: 'programFtes_gov_info', 
@@ -290,91 +237,6 @@ Statistics.create_and_register({
     stats.add_all_years(add,"fte",std_years, (year,i) => q.sum(year) );
     const hist_fte_avg = c.gov_fte_average;
     add("hist_fte_average", hist_fte_avg);
-
-    //const all_years_outcomes = (
-    //  _.chain( table.goco_id(years_exp,false) )
-    //    .map( (vals, goco_id) => {
-    //      const stub = planned_spending_stubs_by_outcome[goco_id];
-    //      return (
-    //        stub ? 
-    //        [
-    //          goco_id,
-    //          //vals: [ 1,2,3 ] , stub: [4,5,6] => [5,7,9]
-    //          ...(_.chain(vals)
-    //            .zip(stub)
-    //            .map( ([old_vals, stub_vals]) => old_vals + stub_vals )
-    //            .value()
-    //          )
-    //        ] : 
-    //        [ goco_id, ...vals ]
-    //      )
-    //    }).value()
-    //)
-    //.concat([ 
-    //  [
-    //    crown_outcome_id, 
-    //    ...( planned_spending_stubs_by_outcome[crown_outcome_id] )
-    //  ]
-    //]);
-
-    //const all_years_spend_areas = (
-    //  _.chain( all_years_outcomes )
-    //    .map(arr => ({ goco_id: arr[0], vals: _.tail(arr) }) )
-    //     //TODO we need a bilingual spendarea key to groupBy 
-    //    .groupBy(({goco_id})=> Tag.lookup(goco_id).sub_type.replace(" ","") ) 
-    //    .map( (group ,spend_area_key ) => [ 
-    //      spend_area_key,  
-    //      ...(
-    //        _.zip.apply(null,_.pluck(group,'vals')) 
-    //        .map(d => d3.sum(d))
-    //      )
-    //    ])
-    //    .value()
-    //);
-      
-    
-    //stats.add_all_years(add,"",years_exp,function(year,i){ 
-    //  return  q.sum(year) + planned_spending_stub_total[i]; 
-    //});
-    //stats.year_over_year_multi_stats(add,"planned_exp_outcomes",all_years_outcomes);
-    //stats.year_over_year_multi_stats(add,"planned_exp_spend_areas",all_years_spend_areas);
-    //const all_years_spend_areas_obj = (
-    //  _.chain(all_years_spend_areas)
-    //    .map(row => [_.head(row),_.tail(row)] )
-    //    .object()
-    //    .value()
-    //);
-    //const all_years_outcomes_obj = (
-    //   _.chain(all_years_outcomes)
-    //     .map(row => [_.head(row),_.tail(row)] )
-    //    .object()
-    //    .value()
-    //);
-
-    //add({key:'all_years_outcomes_obj',value:all_years_outcomes_obj});
-    //add({key:'all_years_spend_areas_obj',value:all_years_spend_areas_obj});
-
-    // FTE
-    //var _add = add;
-    //add = function(key,value){
-    //  if (_.isString(key)){
-    //    _add({ key : key, value : value, type : "big_int_real" });
-    //  } else {
-    //    _add(key);
-    //  }
-    //};
-    //const all_years_outcomes_ftes = _.chain( table.horizontal(years_fte,false) )
-    //                           .map(function(vals, key){ return [key].concat(vals);})
-    //                           .value();
-    //const all_years_spend_areas_ftes = _.chain( table.gov_goco(years_fte,false) )
-    //                            .map(function(vals, key){ return [key].concat(vals);})
-    //                            .value();
-    //stats.add_all_years(add,"planned_fte",years_fte,function(year,i){
-    //add("planned_fte_avg", d3.sum(q.sum(years_fte, {as_object: false}))/years_fte.length );
-    //  return  q.sum(year);
-    //});
-    //stats.year_over_year_multi_stats(add,"planned_fte_outcomes",all_years_outcomes_ftes);
-    //stats.year_over_year_multi_stats(add,"planned_fte_spend_areas",all_years_spend_areas_ftes);
   },
 });
 

@@ -4,7 +4,6 @@ import { run_template } from '../../models/text.js';
 // into the provided context object
 const stats = {
 
-  
   add_all_years(add,context_prefix, years, amounts){
     let total = 0;
     let prefix = context_prefix === '' ? "" : context_prefix + '_';
@@ -248,20 +247,6 @@ const stats = {
     add(context_prefix+"_top_num", counter);
   },
   
-  one_year_top2_bottom1(add,context_prefix,amounts ){
-    // * `context` is an object which will have the calculated values added
-    // * `context_prefix` is a string which will be used to created the keys
-    //    in `context`
-    // * `amounts` is a **sorted** array of numbers (not percentage figures)
-    if (amounts.length >2){
-      add(context_prefix+"_top1", amounts[0][0]);
-      add(context_prefix+"_top2", amounts[1][0]);
-      add(context_prefix+"_bottom1", _.last(amounts)[0]);
-      add(context_prefix+"_top1_amnt", amounts[0][1]);
-      add(context_prefix+"_top2_amnt", amounts[1][1]);
-      add(context_prefix+"_bottom1_amnt", _.last(amounts)[1]);
-    }
-  },
 };
 
 export { stats };
