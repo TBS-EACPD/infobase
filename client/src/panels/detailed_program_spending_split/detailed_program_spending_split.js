@@ -15,7 +15,7 @@ import {
   FootNote,
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
-  wrap,
+  TspanLineWrapper,
 } from "../shared";
 
 const { std_years } = years; 
@@ -510,7 +510,7 @@ class DetailedProgramSplit extends React.Component {
                           ...tick.theme.axis.ticks.text,
                         }}
                       >
-                        {wrap(tick.value, 25)}                        
+                        <TspanLineWrapper text={tick.value} width={25}/>                        
                       </text>
                     </a>
                   </g>

@@ -12,6 +12,7 @@ import {
   Panel,
   NivoResponsiveHBar,
   newIBLightCategoryColors,
+  TspanLineWrapper,
 } from "../shared";
 import MediaQuery from 'react-responsive';
 
@@ -800,7 +801,7 @@ class BudgetMeasureHBars extends React.Component {
         left_axis: {
           tickSize: 5,
           tickPadding: 5,
-          format: (d) => wrap(d, 50),
+          format: (d) => <TspanLineWrapper text={d} width={50}/>,
         },
         padding: 0.1,
         is_money: true,
@@ -831,7 +832,7 @@ class BudgetMeasureHBars extends React.Component {
       nivo_mobile_props.margin.left = 175;
       nivo_mobile_props.margin.top = 80;
       nivo_mobile_props.bttm_axis.tickValues = 3;
-      nivo_mobile_props.left_axis.format = (d) => wrap(d, 28);
+      nivo_mobile_props.left_axis.format = (d) => <TspanLineWrapper text={d} width={28}/>;
       nivo_mobile_props.legends[0].direction = "column",
       nivo_mobile_props.legends[0].translateX = -100;
       nivo_mobile_props.legends[0].translateY = -70;

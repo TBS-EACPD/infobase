@@ -425,31 +425,31 @@ LineBarToggleGraph.defaultProps = {
   initial_graph_mode: "bar_stacked",
 };
 
-export const wrap = (text, width) => {
-  const words = text.split(/\s+/).reverse();
-  let word;
-  let line = [];
-  let lineHeight = 1; // em
-  const x = 0;
-  const y = 0;
-  const dy = 0;
-  const lines = [];
-  word = words.pop();
-  while (word) {
-    line.push(word);
-    const line_str = line.join(" ");
-    if ( line_str.length > width ){
-      line.pop();
-      lines.push(line.join(" "));
-      line = [word];
-    }
-    word = words.pop();
+export const TspanLineWrapper = ({text, width, line_height=1}) => <Fragment>
+  {
+    _.chain(text)
+      .thru( text => text.split(/\s+/) )
+      .reduce(
+        (lines, word) => {
+          const [current_line, ...finished_lines] = _.reverse(lines);
+          const potential_new_line = `${current_line} ${word}`;
+          if (potential_new_line.length < width) {
+            return [...finished_lines, potential_new_line];
+          } else {
+            return [...finished_lines, current_line, word];
+          }
+        },
+        [""],
+      )
+      .map(
+        (line, ix) => // isn't dy undefined here, and at the same line in the current code?
+          <tspan key={ix} x={0} y={0} dy={ix > 0 ? line_height*ix + "em" : "0em"}>
+            {line}
+          </tspan> 
+      )
+      .value()
   }
-  lines.push(line.join(" "));
-  const tspans = _.map(lines, (line,ix) => <tspan key={ix} x={x} y={y} dy={ix > 0 ? lineHeight*ix + dy + "em" : "0em"}>{line}</tspan> );
-  return <Fragment>{ tspans }</Fragment>;
-};
-
+</Fragment>;
 export const HeightClippedGraph = ({children}) => (
   <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
     {children}
