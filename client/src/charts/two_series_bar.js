@@ -251,18 +251,24 @@ export class TwoSeriesBar {
       .append("div")
       .attr("class", "tick center-text")
       .styles({
-        "transform": `rotate(${x_axis_rotate})`,
+        "transform": window.innerWidth < 991 ? 'rotate(-90deg)' : `rotate(${x_axis_rotate})`,
         "position": "absolute",
         "opacity": 1,
         "top": height + this.margin.top + 10 + "px",
         "left": d => x0(d) + this.margin.left + "px",
         "cursor": this.options.has_callback ? "pointer" : "default",
-        "width": x0.bandwidth() + "px",
-        "height": "65px",
+        "width": window.innerWidth < 991 ? '70px' : x0.bandwidth() + "px",
+        "height": window.innerWidth < 991 ? x0.bandwidth() + "px" : "65px",
         "overflow": window.innerWidth < 991 ? "scroll" : "hidden",
+        "line-height": '65px',
       })
       .append("a")
       .attr("tabindex", 0)
+      .styles({
+        'display' : 'inline-block',
+        'vertical-align' : window.innerWidth < 991 ? 'middle' : 'top',
+        'line-height' : window.innerWidth < 991 ? '100%' : 'normal',
+      })
       .on("click", d => {
         this.dispatch.call("dataClick", "render", d),
         this.dispatch.call("dataClick", "fade_out", d);

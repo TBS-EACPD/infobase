@@ -307,7 +307,7 @@ class GocoDiagram extends React.Component {
     d3.select(el)
       .append("div")
       .attr("id", "goco_mount")
-      .html(text_maker("goco_t"));
+      .html(text_maker("goco_t"));   
 
     new Goco(
       d3.select( el.querySelector("#goco_mount") ), 
