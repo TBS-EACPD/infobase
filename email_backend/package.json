@@ -26,14 +26,15 @@
     "eslint-plugin-node": "^6.0.0",
     "eslint-plugin-react": "^7.4.0",
     "jest": "^24",
-    "jest-cli": "^24"
+    "jest-cli": "^24",
+    "nodemon": "^1.19.1"
   },
   "scripts": {
     "prebuild": "rm -rf transpiled_build",
     "build": "babel src/ --out-dir transpiled_build --copy-files --ignore node_modules",
     "prestart": "npm run build",
-    "start": "babel-node transpiled_build/index.js",
-    "debug": "babel-node --inspect-brk src/index.js",
+    "start": "nodemon --watch src --watch package-lock.json --watch templates -e js,json --exec babel-node transpiled_build/index.js",
+    "debug": "nodemon --watch src --watch package-lock.json --watch templates -e js.json --exec babel-node --inspect-brk src/index.js",
     "test": "jest --coverage"
   },
   "authors": [
