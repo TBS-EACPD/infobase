@@ -23,7 +23,8 @@
     "graphql-tools": "^2.11.0",
     "lodash": "^4.17.11",
     "lz-string": "^1.4.4",
-    "mongoose": "^5.5.8"
+    "mongoose": "^5.5.8",
+    "port-pid": "0.0.7"
   },
   "devDependencies": {
     "@babel/cli": "^7",
