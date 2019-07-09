@@ -32,9 +32,9 @@ portfolio_structure_related_title:
 dept_is_tagged_with_following:
   transform: [handlebars,markdown]
   en: |
-    Programs in **{{subj_name subject}}** are {{gl_tt "tagged" "TAG"}} with the following areas of interest
+    Programs under **{{subj_name subject}}** have been {{gl_tt "tagged" "TAG"}} under the following areas of interest
   fr: |
-    Les Programmes dans **{{subj_name subject}}** sont {{gl_tt "étiquetés" "TAG"}} aux domaines d'intérêt suivants
+    Les Programmes sous **{{subj_name subject}}** ont été {{gl_tt "étiquetés" "TAG"}} comme relevant des sujets suivants
 
 # /Dept related panels 
 
@@ -45,9 +45,9 @@ dept_is_tagged_with_following:
 program_is_tagged_with_following:
   transform: [handlebars,markdown]
   en: |
-    **{{subj_name subject}}** is {{gl_tt "tagged" "TAG"}} with the following areas of interest
+    **{{subj_name subject}}** has been {{gl_tt "tagged" "TAG"}} with the following areas of interest
   fr: |
-    Le Programme **{{subj_name subject}}** est {{gl_tt "étiqueté" "TAG"}} aux domaines d'intérêt suivants
+    Le Programme **{{subj_name subject}}** a été {{gl_tt "étiqueté" "TAG"}} aux domaines d'intérêt suivants
 
 program_desc_title:
   en: Program Description
@@ -120,13 +120,6 @@ m2m_warning_title:
 
 # / Tag text 
 
-org_is_tagged_with_following:
-  transform: [handlebars,markdown]
-  en: |
-    Programs under **{{subj_name subject}}** have been tagged under the following areas of interest
-  fr: |
-    Les Programmes sous **{{subj_name subject}}** ont été étiquetés comme relevant des sujets suivants
-
 hierarchy_dead_element_icon_alt_text:
   transform: [handlebars]
   en:  |
@@ -170,9 +163,9 @@ crso_links_to_prg_title:
 crso_is_tagged_with_following:
   transform: [handlebars,markdown]
   en: |
-    Programs in **{{subj_name subject}}** are {{gl_tt "tagged" "TAG"}} with the following areas of interest
+    Programs under **{{subj_name subject}}** have been {{gl_tt "tagged" "TAG"}} under the following areas of interest
   fr: |
-    Les Programmes dans **{{subj_name subject}}** sont {{gl_tt "étiquetés" "TAG"}} aux domaines d'intérêt suivants
+    Les Programmes sous **{{subj_name subject}}** ont été {{gl_tt "étiquetés" "TAG"}} comme relevant des sujets suivants
 
 crso_tags_title:
   en: Tags for this Core Responsibility
