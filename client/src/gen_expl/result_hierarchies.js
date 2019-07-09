@@ -121,7 +121,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
             const node_id = `${parent_id}-${org.guid}`;
             return {
               id: node_id,
-              isExpanded: true,
+              isExpanded: false,
               data: {
                 name: org.name,
                 subject: org,
@@ -150,7 +150,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
           // for PAA structures, the SO adds an annoying layer of drilling down for no reason
           return subject.programs.map(prog => ({
             id: prog.guid,
-            isExpanded: true,
+            isExpanded: false,
             data: {
               subject: prog,
               type: 'program',
@@ -165,7 +165,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
             .filter('is_cr')
             .map(crso => ({
               id: crso.guid,
-              isExpanded: true,
+              isExpanded: false,
               data: {
                 subject: crso,
                 type: 'cr',
