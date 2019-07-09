@@ -196,7 +196,7 @@ function build_proj(PROJ){
   _.each(
     [build_dir_name, dir, app_dir, footnotes_dir], 
     name => make_dir_if_exists(name)
-  )
+  );
 
   const bilingual_model_files = {
     depts: "igoc.csv",
