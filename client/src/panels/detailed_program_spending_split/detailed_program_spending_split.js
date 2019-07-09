@@ -388,6 +388,7 @@ class DetailedProgramSplit extends React.Component {
           axis: 'y',
           value: obj.label,
           lineStyle: {strokeWidth: 0},
+          textStyle: {fill: obj.total < 0 ? "red" : "black"},
           legend: formatter(obj.total),
           legendOffsetX: -70,
         },
