@@ -269,8 +269,10 @@ export const StandardLinkSynchronizer = withRouter(
     componentDidMount(){ this._update(); }
     _update(){
       let { standard_link_modifier } = this.props;
+
+      const default_standard_link_modifier = (hash) => hash === "start/no_basic_equiv" ? "start" : hash;
       
-      synchronize_link('#footer-standard-link', standard_link_modifier);
+      synchronize_link('#footer-standard-link', standard_link_modifier || default_standard_link_modifier);
     }
   }
 );
