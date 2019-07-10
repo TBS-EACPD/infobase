@@ -114,7 +114,7 @@ const index_lang_lookups = {
   },
   standard_version_text: {
     en: "Standard version",
-    fr: "TODO",
+    fr: "Version standard",
   },
 };
 

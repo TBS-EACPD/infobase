@@ -27,5 +27,10 @@ home_a11y_subject_section_title:
   fr: Recherchez et comparer des organisations et des programmes
 
 home_a11y_non_a11y_redirect_warning:
-  en: TODO
-  fr: TODO
+  transform: [markdown]
+  en: |
+    You have been redirect to the text based InfoBase from a page with no text-only equivalent. 
+    Pages with no text-only equivalent are purely for visualization purposes and are not the sole presentation of any data in the InfoBase.
+    Any information which was presented on the page you were redirected from can be found in the [report builder](#rpb).
+  fr: |
+    TODO

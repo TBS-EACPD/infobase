@@ -1,5 +1,5 @@
 import home_text1 from "./home.yaml";
-import home_text2 from "./home-a11y.yaml";
+import home_text2 from "./a11y-home.yaml";
 
 import { featured_content_items } from './home-data.js';
 
@@ -21,13 +21,10 @@ const Home = (props) => {
   return (
     <StandardRouteContainer route_key="start">
       <h1> <TM k="title" /> </h1>
-      { no_basic_equiv === "no_basic_equiv" && false
-        // TODO: write home_a11y_non_a11y_redirect_warning text
-        //<div
-        //  className={"alert alert-no-symbol alert-warning alert--is-bordered large_panel_text"}
-        //>
-        //  <TM k="home_a11y_non_a11y_redirect_warning" />
-        //</div>
+      { no_basic_equiv === "no_basic_equiv" &&
+        <div className={"alert alert-no-symbol alert-warning alert--is-bordered large_panel_text"}>
+          <TM k="home_a11y_non_a11y_redirect_warning" />
+        </div>
       }
       <section>
         <h2> <TM k="home_a11y_gov_infograph" /> </h2>
