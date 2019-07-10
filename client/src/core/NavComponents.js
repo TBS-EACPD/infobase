@@ -163,6 +163,9 @@ export class StandardRouteContainer extends React.Component {
         { !window.is_a11y_mode && 
           <A11yLinkSynchronizer non_a11y_route={non_a11y_route}/>
         }
+        { window.is_a11y_mode && 
+          <StandardLinkSynchronizer />
+        }
         <div>
           {children}
         </div>
@@ -259,6 +262,18 @@ export const A11yLinkSynchronizer = withRouter(
   }
 );
 
+export const StandardLinkSynchronizer = withRouter(
+  class LangSynchronizer extends React.Component {
+    render(){ return null; }
+    componentDidUpdate(){ this._update(); }
+    componentDidMount(){ this._update(); }
+    _update(){
+      let { standard_link_modifier } = this.props;
+      
+      synchronize_link('#footer-standard-link', standard_link_modifier);
+    }
+  }
+);
 
 export const ReactUnmounter = withRouter(
   class ReactUnmounter_ extends React.Component {

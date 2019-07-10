@@ -108,7 +108,14 @@ const index_lang_lookups = {
     en: "Text based version",
     fr: "Version basé en texte",
   },
-
+  standard_version_url: {
+    en: "index-eng.html",
+    fr: "index-fra.html",
+  },
+  standard_version_text: {
+    en: "Standard version",
+    fr: "TODO",
+  },
 };
 
 // Used by copy_static_asset, node only supports commonjs syntax
