@@ -25,7 +25,7 @@ export default class About extends React.Component {
       <StandardRouteContainer
         title={text_maker("about_title")}
         breadcrumbs={[text_maker("about_title")]}
-        //description={} TODO
+        description={text_maker("about_intro_section")}
         route_key="_about"
       >
         <div className="medium_panel_text text-only-page-root">

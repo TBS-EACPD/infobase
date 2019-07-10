@@ -11,7 +11,7 @@ export default class PrivacyStatement extends React.Component {
       <StandardRouteContainer
         title={text_maker("privacy_title")}
         breadcrumbs={[text_maker("privacy_title")]}
-        //description={} TODO  
+        description={text_maker("privacy_body_text")}
         route_key="_privacy"
       >
         <div className="medium_panel_text text-only-page-root">

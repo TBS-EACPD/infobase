@@ -23,7 +23,7 @@ export default class InfoLab extends React.Component {
       <StandardRouteContainer
         title={text_maker("lab_title")}
         breadcrumbs={[text_maker("lab_title")]}
-        //description={} TODO
+        description={text_maker("lab_intro_text")}
         route_key="_lab"
         beta={true}
       >

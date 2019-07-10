@@ -373,7 +373,7 @@ export default class TextDiffApp extends React.Component {
       <StandardRouteContainer
         title={text_maker("diff_title")}
         breadcrumbs={[text_maker("diff_title")]}
-        //description={} TODO
+        description={text_maker("diff_intro_text")}
         route_key="_diff"
         beta={true}
       >

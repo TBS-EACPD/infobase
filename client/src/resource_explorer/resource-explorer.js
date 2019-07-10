@@ -444,6 +444,7 @@ export default class ResourceExplorer extends React.Component {
     const route_container_args = {
       title: text_maker("tag_nav"),
       breadcrumbs: [text_maker("tag_nav")],
+      description: text_maker("tag_nav_intro_text"),
       route_key: "_resource-explorer",
     };
     const header = <h1><TM k="tag_nav" /></h1>;

@@ -19,7 +19,10 @@ const Home = (props) => {
   } = props;
 
   return (
-    <StandardRouteContainer route_key="start">
+    <StandardRouteContainer
+      route_key="start"
+      description={text_maker("home_a11y_desc")}
+    >
       <h1> <TM k="title" /> </h1>
       { no_basic_equiv === "no_basic_equiv" &&
         <div className={"alert alert-no-symbol alert-warning alert--is-bordered large_panel_text"}>
