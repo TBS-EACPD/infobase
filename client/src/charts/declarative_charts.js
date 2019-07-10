@@ -1,10 +1,9 @@
 import classNames from 'classnames';
-import * as charts_index from '../core/charts_index.js';
-import { HBarComposition } from './hbar_composition.js';
-import { LiquidFillGauge as D3LiquidFillGauge } from './liquid_fill_gauge.js';
 import { Fragment } from 'react';
 
-const { create_a11y_table } = charts_index;
+import { HBarComposition } from './hbar_composition.js';
+import { LiquidFillGauge as D3LiquidFillGauge } from './liquid_fill_gauge.js';
+import { A11YTable } from './A11yTable.js';
 
 /* 
   data : [{ 
@@ -230,28 +229,6 @@ const TabularPercentLegend = ({
     )}
   </ul>
 );
-
-
-class A11YTable extends React.PureComponent {
-  render(){
-    return <div ref="main" />;
-  }
-  componentDidMount(){
-    this._render();
-  }
-  componentDidUpdate(){
-    this._render();
-  }
-  _render(){
-    const { main } = this.refs;
-    main.innerHTML = "";
-    create_a11y_table({
-      container: main,
-      ...this.props,
-    });
-  }
-
-}
 
 class LiquidFillGauge extends React.Component {
   render(){

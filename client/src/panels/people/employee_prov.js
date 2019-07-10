@@ -5,13 +5,13 @@ import {
   PanelGraph,
   years,
   businessConstants,
-  charts_index,
   create_text_maker_component,
   StdPanel,
   Col,
   declarative_charts,
   NivoResponsiveHBar,
   hex_to_rgb,
+  Canada,
 } from "../shared"; 
 import { Fragment } from 'react';
 
@@ -126,7 +126,7 @@ class CanadaGraph extends React.Component {
     const formatter = formats["big_int_real_raw"];
     const ticks = _.map(people_years, y => `${run_template(y)}`);
     
-    const canada_graph = new charts_index.Canada(graph_area_sel.node(), {
+    const canada_graph = new Canada(graph_area_sel.node(), {
       color: get_graph_color(1),
       data: years_by_province,
       ticks: ticks,

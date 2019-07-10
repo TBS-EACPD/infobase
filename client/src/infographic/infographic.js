@@ -169,25 +169,8 @@ class InfoGraph_ extends React.Component {
       <AnalyticsSynchronizer {...this.props} />
       {
         window.is_a11y_mode ? 
-        <div>
-          <TM k="a11y_search_other_infographs" />
-          <EverythingSearch 
-            include_gov={false} 
-            href_template={subj => infograph_href_template(subj, bubble, true)}
-            search_text={text_maker('subject_search_placeholder')}
-            large={true}
-            include_tags={true}
-            include_programs={true}
-            include_glossary={false}
-            include_crsos={true}
-            include_tables={false}
-            org_scope="all_orgs_with_gov"
-          />
-        </div> :
-        <div className="row mrgn-bttm-md infographic-search-container"> 
-          <div 
-            className="col-md-8" 
-          >
+          <div>
+            <TM k="a11y_search_other_infographs" />
             <EverythingSearch 
               include_gov={false} 
               href_template={subj => infograph_href_template(subj, bubble, true)}
@@ -200,26 +183,45 @@ class InfoGraph_ extends React.Component {
               include_tables={false}
               org_scope="all_orgs_with_gov"
             />
+          </div> :
+          <div className="row mrgn-bttm-md infographic-search-container"> 
+            <div 
+              className="col-md-8" 
+            >
+              <EverythingSearch 
+                include_gov={false} 
+                href_template={subj => infograph_href_template(subj, bubble, true)}
+                search_text={text_maker('subject_search_placeholder')}
+                large={true}
+                include_tags={true}
+                include_programs={true}
+                include_glossary={false}
+                include_crsos={true}
+                include_tables={false}
+                org_scope="all_orgs_with_gov"
+              />
+            </div>
+            <div 
+              className="col-md-4" 
+            >
+              <a 
+                href="#resource-explorer" 
+                className="btn-lg btn btn-ib-primary btn-block"
+              > 
+                <TM k="infograph_explorer_link" />
+              </a>
+            </div>
           </div>
-          <div 
-            className="col-md-4" 
-          >
-            <a 
-              href="#resource-explorer" 
-              className="btn-lg btn btn-ib-primary btn-block"
-            > 
-              <TM k="infograph_explorer_link" />
-            </a>
-          </div>
-        </div>
       }
       <div>
         <div style={{position: 'relative'}}>
           { loading && <SpinnerWrapper config_name={"route"} /> }
           {
-            !loading && window.is_a11y_mode ? 
-              <AccessibleBubbleMenu items={sorted_bubbles} /> : 
-              <BubbleMenu items={sorted_bubbles} />
+            !loading && (
+              window.is_a11y_mode ? 
+                <AccessibleBubbleMenu items={sorted_bubbles} /> : 
+                <BubbleMenu items={sorted_bubbles} />
+            )
           }
         </div>
       </div>
@@ -227,17 +229,16 @@ class InfoGraph_ extends React.Component {
         { window.is_a11y_mode &&
           <p
             id="infographic-explanation-focus"
-            tabIndex={0}
-            aria-live="polite"        
+            tabIndex={0}     
           >
             { 
               loading ? 
-              "Loading..." :
-              text_maker("a11y_infograph_description")
+                "Loading..." :
+                text_maker("a11y_infograph_description")
             }
           </p>
         }
-        { loading ? null : 
+        { !loading &&
           _.map(panel_keys, graph_key => 
             <ReactPanelGraph 
               graph_key={graph_key}

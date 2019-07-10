@@ -2,7 +2,6 @@ import './shared.scss';
 import * as general_utils from '../general_utils.js';
 import * as util_components from '../util_components.js';
 import * as declarative_charts from '../charts/declarative_charts.js';
-import * as charts_index from '../core/charts_index';
 import * as Results from '../models/results.js';
 import { create_text_maker, trivial_text_maker, run_template } from '../models/text.js';
 import { formats, dollar_formats, formatter } from '../core/format.js';
@@ -19,9 +18,12 @@ import FootNote from '../models/footnotes';
 import { infograph_href_template as infograph_href_template } from '../infographic/routes.js';
 import { glossary_href } from '../link_utils.js';
 import { Statistics } from '../core/Statistics.js';
-import classNames from 'classnames';
 import { get_source_links } from '../metadata/data_sources.js';
 import { NivoResponsiveBar, NivoResponsiveHBar, NivoResponsiveLine, NivoResponsivePie } from '../charts/NivoCharts.js';
+import { Canada } from '../charts/canada.js';
+import { TwoSeriesBar } from '../charts/two_series_bar.js';
+
+import classNames from 'classnames';
 import { Fragment } from 'react';
 
 const {
@@ -567,7 +569,6 @@ const hex_to_rgb = (hex) => {
 };
 
 export {
-  charts_index, 
   Table, 
   rpb_link,
   get_appropriate_rpb_subject,
@@ -610,4 +611,6 @@ export {
   NivoResponsiveLine,
   NivoResponsivePie,
   hex_to_rgb,
+  Canada,
+  TwoSeriesBar,
 };

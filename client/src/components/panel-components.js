@@ -76,8 +76,12 @@ class Panel_ extends React.Component {
 
     const file_name_context = context ? context.subject.level === 'dept' ? context.subject.acronym: context.subject.id : "";
     const file_name = `${file_name_context}_${title}.pdf`;
-    const panel_link = context ? window.location.href.replace(window.location.hash,
-      panel_href_template(context.subject, context.bubble, context.graph_key)) : null;  
+    const panel_link = context ? 
+      window.location.href.replace(
+        window.location.hash,
+        panel_href_template(context.subject, context.bubble, context.graph_key)
+      ) :
+      null;  
 
     return (
       <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>

@@ -8,13 +8,13 @@ import {
   formats,
   declarative_charts,
   util_components,
-  charts_index,
   Panel,
   Table,
   newIBCategoryColors,
+  TwoSeriesBar,
 } from '../shared.js';
 
-const { GraphLegend } = declarative_charts;
+const { GraphLegend, A11YTable } = declarative_charts;
 const { Format } = util_components;
 const { Tag } = Subject;
 
@@ -138,13 +138,15 @@ class Goco {
         ],
       }));
 
-      charts_index.create_a11y_table({
-        label_col_header: [ text_maker("spend_area")],
-        data_col_headers: [text_maker("dp_spending"), text_maker("dp_ftes")],
-        data: table_data,
-        container: container.select(".a11y_area"),
-      });
-
+      reactAdapter.render(
+        <A11YTable
+          label_col_header={[ text_maker("spend_area")]}
+          data_col_headers={[text_maker("dp_spending"), text_maker("dp_ftes")]}
+          data={table_data}
+        />,
+        container.select(".a11y_area").node()
+      );
+      
       return; 
 
     } else {
@@ -177,7 +179,7 @@ class Goco {
       legend_area.node()
     );
 
-    const graph = new charts_index.TwoSeriesBar(
+    const graph = new TwoSeriesBar(
       this.container.select('.sa-diagram').node(),
       {
         title_font_size,
@@ -212,7 +214,7 @@ class Goco {
     this.goco_data = _.find(this.data, d => d.tick === sa_name).children;
     this.container.select('.goco-diagram').html("");
 
-    const graph = new charts_index.TwoSeriesBar(
+    const graph = new TwoSeriesBar(
       this.container.select('.goco-diagram').node(),
       {
         title: sa_name,
