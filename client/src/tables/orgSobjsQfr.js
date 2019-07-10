@@ -1,12 +1,8 @@
 import text from './orgSobjsQfr.yaml';
-import { Statistics } from '../core/Statistics';
 import { businessConstants } from '../models/businessConstants';
 
 const { sos } = businessConstants;
 
-// see [here](../table_definition.html) for description
-// of the table spec
-import { stats } from '../core/tables/stats';
 import { trivial_text_maker } from '../models/text';
 
 export default {

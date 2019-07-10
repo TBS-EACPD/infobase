@@ -2,7 +2,6 @@ import text from './orgVoteStatQfr.yaml';
 
 import { vote_stat_dimension, major_vote_stat } from './table_common';
 
-import { Statistics } from '../core/Statistics';
 import * as FORMAT from '../core/format';
 
 
