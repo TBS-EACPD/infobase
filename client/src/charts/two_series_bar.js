@@ -17,10 +17,11 @@ export class TwoSeriesBar {
   }
 
   render(options) {
+    const mobile = window.innerWidth < 991;
     this.options = _.extend(this.options, options);
-    if (window.innerWidth < 991) {
+    if (mobile) {
       this.margin = this.options.margin || {
-        top: 25,
+        top: 60,
         right: 20,
         bottom: 60,
         left: 20,
@@ -254,31 +255,31 @@ export class TwoSeriesBar {
 
     // replace the removed text elements with html divs
     // these allow for text wrapping
+    
     this.html.selectAll("div.tick")
       .data(ticks)
       .enter()
       .append("div")
       .attr("class", "tick center-text")
       .styles({
-        //"transform": window.innerWidth < 991 ? 'rotate(-90deg)' : `rotate(${x_axis_rotate})`,
         "position": "absolute",
         "opacity": 1,
         "top": height + this.margin.top + 10 + "px",
         "left": d => x0(d) + this.margin.left + "px",
         "cursor": this.options.has_callback ? "pointer" : "default",
         "width": x0.bandwidth() + "px",
-        "height": window.innerWidth < 991 ? '90px' : '65px',
-        "overflow-y": window.innerWidth < 991 ? "scroll" : "hidden",
+        "height": mobile ? '90px' : '65px',
+        "overflow-y": mobile ? "scroll" : "hidden",
       })
       .append("a")
       .attr("tabindex", 0)
       .styles({
         'display': 'inline-block',
-        'line-height': window.innerWidth < 991 ? '100%' : 'normal',
-        'position': window.innerWidth < 991 ? 'absolute': 'relative',
-        'top': window.innerWidth < 991 ? '50%' : null,
-        'left': window.innerWidth < 991 ? '50%' : null,
-        "transform": window.innerWidth < 991 ? 'translateX(-50%) translateY(-50%) rotate(-90deg)' : `translateX(0%) translateY(0%) rotate(${x_axis_rotate})`,    
+        'line-height': mobile ? '100%' : 'normal',
+        'position': mobile ? 'absolute': 'relative',
+        'top': mobile ? '50%' : null,
+        'left': mobile ? '50%' : null,
+        "transform": mobile ? 'translateX(-50%) translateY(-50%) rotate(-90deg)' : `translateX(0%) translateY(0%) rotate(${x_axis_rotate})`,    
       })
       .on("click", d => {
         this.dispatch.call("dataClick", "render", d),
@@ -336,16 +337,18 @@ export class TwoSeriesBar {
           let left_position = x1(d.label) + (x1.bandwidth() - bar_width) / 2;
           if (labels_should_be_rotated) {
             // labels are rotated for small bars, in which case the position of the left bar's label is adjusted to accomodate
-            left_position += (ix === 0 ? -0.5 : 0) * (bar_width + d.labelSize.height);
+            left_position = x1(d.label) - 10;
           }
           return left_position + "px";
         },
-        "transform": d => labels_should_be_rotated ? "rotate(-45deg) translate3d(0,0,0)" : "rotate(0deg)",
+        "transform": d => labels_should_be_rotated ? "rotate(-90deg)" : "rotate(0deg)",
       });
-
+      
     this.html.selectAll("div.labels")
       .data(data)
       .exit()
       .remove();
+    
   }
+  
 };
