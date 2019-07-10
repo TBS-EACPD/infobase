@@ -9,6 +9,7 @@ import {
   create_text_maker_component,
   NivoResponsiveLine,
   newIBCategoryColors,
+  formatter,
 } from "../shared";
 
 
@@ -24,8 +25,8 @@ const exp_cols = _.map(std_years, yr=>`${yr}exp`);
 const progSpending_cols = _.map(planning_years, yr=>yr);
 
 const text_keys_by_level = {
-  dept: "dept_historical_auth_exp_text",
-  gov: "gov_historical_auth_exp_text",
+  dept: "dept_auth_exp_prog_spending_body",
+  gov: "gov_auth_exp_prog_spending_body",
 };
 
 
@@ -69,26 +70,25 @@ const render = function({calculations, footnotes, sources}) {
 
   let graph_content;
   if(window.is_a11y_mode){
-    /*
-    const data = _.zip(
-      history_ticks,
-      (
-        stacked ? 
-        _.zip(exp, auth) :
-        _.zip(auth,exp)
-      )
-    ).map( ([label,data ])=>({
-      label,
-      /* eslint-disable react/jsx-key 
-      data: data.map( amt => <Format type="compact1" content={amt} /> ),
-    }));
+    const data = _.map(exp, (exp_value,year_index) => {
+      return {
+        label: history_ticks[year_index],
+        data: [formatter("compact2", exp_value, {raw: true}), formatter("compact2", auth[year_index], {raw: true}), null],
+      };
+    });
+    _.forEach(progSpending, (progSpending_value, year_index) => {
+      data.push({
+        label: plan_ticks[year_index],
+        data: [null, null, formatter("compact2", progSpending_value, {raw: true})],
+      });
+    });
 
     graph_content = (
       <A11YTable
         data_col_headers={series_labels}
         data={data}
       />
-    );*/
+    );
   } else {
     const graph_data = _.map(series_labels, (label) => {
       return {
@@ -173,7 +173,7 @@ const render = function({calculations, footnotes, sources}) {
 
   return (
     <StdPanel
-      title={text_maker("historical_auth_exp_title")}
+      title={text_maker("auth_exp_prog_spending_title")}
       {...{footnotes,sources}}
     >
       <Col size={6} isText>
