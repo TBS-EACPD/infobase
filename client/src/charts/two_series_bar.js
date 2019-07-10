@@ -24,6 +24,14 @@ export class TwoSeriesBar {
       bottom: 30,
       left: 20,
     };
+    if (window.innerWidth < 991) {
+      this.margin = this.options.margin || {
+        top: 25,
+        right: 20,
+        bottom: 60,
+        left: 20,
+      }; 
+    } 
     const height = this.outside_height - this.margin.top - this.margin.bottom;
     const width = this.outside_width - this.margin.left - this.margin.right;
     const x_axis_rotate = this.options.x_axis_rotate || "0deg";
@@ -251,23 +259,25 @@ export class TwoSeriesBar {
       .append("div")
       .attr("class", "tick center-text")
       .styles({
-        "transform": window.innerWidth < 991 ? 'rotate(-90deg)' : `rotate(${x_axis_rotate})`,
+        //"transform": window.innerWidth < 991 ? 'rotate(-90deg)' : `rotate(${x_axis_rotate})`,
         "position": "absolute",
         "opacity": 1,
         "top": height + this.margin.top + 10 + "px",
         "left": d => x0(d) + this.margin.left + "px",
         "cursor": this.options.has_callback ? "pointer" : "default",
-        "width": window.innerWidth < 991 ? '70px' : x0.bandwidth() + "px",
-        "height": window.innerWidth < 991 ? x0.bandwidth() + "px" : "65px",
-        "overflow": window.innerWidth < 991 ? "scroll" : "hidden",
-        "line-height": '65px',
+        "width": x0.bandwidth() + "px",
+        "height": window.innerWidth < 991 ? '90px' : '65px',
+        "overflow-y": window.innerWidth < 991 ? "scroll" : "hidden",
       })
       .append("a")
       .attr("tabindex", 0)
       .styles({
-        'display' : 'inline-block',
-        'vertical-align' : window.innerWidth < 991 ? 'middle' : 'top',
-        'line-height' : window.innerWidth < 991 ? '100%' : 'normal',
+        'display': 'inline-block',
+        'line-height': window.innerWidth < 991 ? '100%' : 'normal',
+        'position': window.innerWidth < 991 ? 'absolute': 'relative',
+        'top': window.innerWidth < 991 ? '50%' : null,
+        'left': window.innerWidth < 991 ? '50%' : null,
+        "transform": window.innerWidth < 991 ? 'translateX(-50%) translateY(-50%) rotate(-90deg)' : `translateX(0%) translateY(0%) rotate(${x_axis_rotate})`,    
       })
       .on("click", d => {
         this.dispatch.call("dataClick", "render", d),
