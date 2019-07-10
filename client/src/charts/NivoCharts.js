@@ -208,6 +208,8 @@ export class NivoResponsiveBar extends React.Component{
           enableLabel, 
           legends,
           isInteractive,
+          motion_damping,
+          motion_stiffness,
         }}
         keys = {_.union([''],keys)}
         labelFormat={_.isUndefined(label_format) ? null : label_format}
