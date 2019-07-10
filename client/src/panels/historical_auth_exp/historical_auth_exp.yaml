@@ -3,6 +3,22 @@ historical_auth_exp_title:
   en: Authorities and Expenditures ({{pa_last_year_5}} to {{pa_last_year}})
   fr: Autorisations et dépenses ({{pa_last_year_5}} à {{pa_last_year}})
   
+auth_exp_prog_spending_title:
+  transform: [handlebars]
+  en: Authorities and Expenditures Vs. Planned Spending
+  fr: NEEDS TRANSLATION
+
+gov_auth_exp_prog_spending_body:
+  transform: [handlebars, markdown]
+  en: |
+    They spend this amount less and on average, next 3 years of planned spending is % of last 5 years of authorities
+  fr: NEEDS TRANSLATION
+
+dept_auth_exp_prog_spending_body:
+  transform: [handlebars, markdown]
+  en: |
+    They spend this amount less and on average, next 3 years of planned spending is % of last 5 years of authorities
+  fr: NEEDS TRANSLATION
 
 gov_historical_auth_exp_text:
   transform: [handlebars,markdown]
