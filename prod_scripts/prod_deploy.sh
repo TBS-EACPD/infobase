@@ -2,8 +2,8 @@
 set -e # will exit if any command has non-zero exit value
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-while [ '$CURRENT_BRANCH' != 'master' ]; do
-    read -p 'You are not on master, do you really mean to deploy from ${CURRENT_BRANCH}? [YES/oops]' yn
+while [ $CURRENT_BRANCH != 'master' ]; do
+    read -p "You are not on master, do you really mean to deploy from $CURRENT_BRANCH? [YES/oops]" yn
     case $yn in
         [YES]* ) break;;
         [oops]* ) exit;;
