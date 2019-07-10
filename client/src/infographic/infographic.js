@@ -146,7 +146,7 @@ class InfoGraph_ extends React.Component {
       }
       const options = JSURL.parse(this.props.options);
       const panel_keys = this.state.bubble_menu_loading || panels_for_subj_bubble({subject: this.state.subject, bubble: this.state.bubble});
-
+      
       const linked_to_panel = ( options && options.panel_key && _.includes(panel_keys, options.panel_key) ) && document.querySelector(`#${options.panel_key}`);
       if ( linked_to_panel ){
         linked_to_panel.scrollIntoView();
@@ -229,7 +229,8 @@ class InfoGraph_ extends React.Component {
         { window.is_a11y_mode &&
           <p
             id="infographic-explanation-focus"
-            tabIndex={0}     
+            aria-live="polite"
+            tabIndex={0}
           >
             { 
               loading ? 
