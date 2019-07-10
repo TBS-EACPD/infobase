@@ -8,7 +8,6 @@ import { formats, dollar_formats, formatter } from '../core/format.js';
 import { PanelGraph, layout_types } from '../core/PanelGraph.js';
 import { newIBCategoryColors, newIBLightCategoryColors, newIBDarkCategoryColors, NA_color } from '../core/color_schemes.js';
 import { Panel, StdPanel, TextPanel, Col } from '../components/panel-components.js';
-import { reactAdapter } from '../core/reactAdapter';
 import { Table } from '../core/TableClass.js';
 import { rpb_link, get_appropriate_rpb_subject } from '../rpb/rpb_link.js';
 import { Subject } from '../models/subject';
@@ -576,8 +575,7 @@ export {
   years, 
   businessConstants, 
   general_utils, 
-  FootNote, 
-  reactAdapter, 
+  FootNote,
   util_components, 
   infograph_href_template,
   glossary_href,

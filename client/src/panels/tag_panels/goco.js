@@ -4,7 +4,6 @@ import {
   create_text_maker_component,
   PanelGraph,
   Subject,
-  reactAdapter,
   formats,
   declarative_charts,
   util_components,
@@ -13,6 +12,8 @@ import {
   newIBCategoryColors,
   TwoSeriesBar,
 } from '../shared.js';
+
+import { reactAdapter } from '../../core/reactAdapter';
 
 const { GraphLegend, A11YTable } = declarative_charts;
 const { Format } = util_components;
