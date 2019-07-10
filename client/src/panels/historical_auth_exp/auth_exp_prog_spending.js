@@ -57,8 +57,18 @@ const render = function({calculations, footnotes, sources}) {
   const { info, graph_args, subject } = calculations;
   const history_ticks = _.map(std_years, run_template);
   const plan_ticks = _.map(planning_years, run_template);
-  const year1 = _.parseInt((_.first(_.split(_.last(history_ticks), '-'))));
-  const year2 = _.parseInt((_.first(_.split(_.first(plan_ticks), '-'))));
+  const year1 = _.chain(history_ticks)
+    .last()
+    .split('-')
+    .first()
+    .parseInt()
+    .value();
+  const year2 = _.chain(plan_ticks)
+    .first()
+    .split('-')
+    .first()
+    .parseInt()
+    .value();
   const gap_year = year2 - year1 === 2 ? `${year1+1}-${(year1+2).toString().substring(2)}` : null;
   const marker_year = gap_year ? gap_year : _.first(plan_ticks);
   const {exp, auth, progSpending} = graph_args;
