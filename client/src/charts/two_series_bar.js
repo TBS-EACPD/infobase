@@ -18,12 +18,6 @@ export class TwoSeriesBar {
 
   render(options) {
     this.options = _.extend(this.options, options);
-    this.margin = this.options.margin || {
-      top: 25,
-      right: 20,
-      bottom: 30,
-      left: 20,
-    };
     if (window.innerWidth < 991) {
       this.margin = this.options.margin || {
         top: 25,
@@ -31,7 +25,14 @@ export class TwoSeriesBar {
         bottom: 60,
         left: 20,
       }; 
-    } 
+    } else {
+      this.margin = this.options.margin || {
+        top: 25,
+        right: 20,
+        bottom: 30,
+        left: 20,
+      };
+    }
     const height = this.outside_height - this.margin.top - this.margin.bottom;
     const width = this.outside_width - this.margin.left - this.margin.right;
     const x_axis_rotate = this.options.x_axis_rotate || "0deg";
