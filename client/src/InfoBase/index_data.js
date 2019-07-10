@@ -113,8 +113,8 @@ const index_lang_lookups = {
     fr: "index-fra.html",
   },
   standard_version_text: {
-    en: "Standard version",
-    fr: "Version standard",
+    en: "Graphical version",
+    fr: "Version graphique",
   },
 };
 
