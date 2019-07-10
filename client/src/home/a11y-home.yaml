@@ -33,4 +33,6 @@ home_a11y_non_a11y_redirect_warning:
     Pages with no text-only equivalent are purely for visualization purposes and are not the sole presentation of any data in the InfoBase.
     Any information which was presented on the page you were redirected from can be found in the [report builder](#rpb).
   fr: |
-    TODO
+    Vous avez été redirigé vers une version d'InfoBase textuel à partir d'une page sans équivalent textuel.
+    Les pages sans équivalent textuel servent à visualiser des donées et ne constituent pas la seule présentation de ces données dans l'InfoBase.
+    Toute information présentée sur la page à partir de laquelle vous avez été redirigé se trouve dans le [générateur de rapports](#rpb).
