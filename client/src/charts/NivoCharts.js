@@ -215,6 +215,7 @@ export class NivoResponsiveBar extends React.Component{
           isInteractive,
           motion_damping,
           motion_stiffness,
+          bttm_axis,
         }}
         keys = {_.union([''],keys)}
         labelFormat={_.isUndefined(label_format) ? null : label_format}
@@ -244,6 +245,7 @@ NivoResponsiveBar.defaultProps = {
   bttm_axis: {
     tickSize: 7,
     tickPadding: 10,
+    tickRotation: 0,
   },
   isInteractive: true,
   motion_damping: 15,
