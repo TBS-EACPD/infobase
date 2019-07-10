@@ -5,12 +5,16 @@ import { formats, dollar_formats } from "../core/format.js";
 import { Fragment } from 'react';
 
 const get_formatter = (is_money, formatter, raw = true) => (
-  _.isUndefined(formatter)?
-    (!is_money ? 
-      (value) => formats.big_int_real(value, {raw}) :
-      raw ? 
-        (value) => dollar_formats.compact2_raw(value) : 
-        (value) => formats.compact2(value)) :
+  _.isUndefined(formatter) ?
+    ( 
+      !is_money ? 
+        (value) => formats.big_int_real(value, {raw}) :
+        (
+          raw ? 
+            (value) => dollar_formats.compact2_raw(value) : 
+            (value) => formats.compact2(value)
+        )
+    ) :
     ((value) => raw ? formatter(value, {raw: true}) : formatter(value))
 );
 
