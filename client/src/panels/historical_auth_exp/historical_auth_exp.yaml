@@ -11,13 +11,13 @@ auth_exp_prog_spending_title:
 gov_auth_exp_prog_spending_body:
   transform: [handlebars, markdown]
   en: |
-    They spend this amount less and on average, next 3 years of planned spending is % of last 5 years of authorities
+    In the past 5 years, the government has spent an average of **{{fmt_compact1_written gov_five_year_exp_average}}** of the authorized **{{fmt_compact1_written gov_five_year_auth_average}}**. On average, **{{fmt_compact1_written gov_planned_exp_average}}** of planned spending is **{{fmt_percentage1 gov_avg_planned_exp_hist_exp_pct}}** **{{gov_avg_pct_change_text}}** from the last 5 years of expenditures
   fr: NEEDS TRANSLATION
 
 dept_auth_exp_prog_spending_body:
   transform: [handlebars, markdown]
   en: |
-    They spend this amount less and on average, next 3 years of planned spending is % of last 5 years of authorities
+    In the past 5 years, **{{subj_name dept}}** has spent an average of **{{fmt_compact1_written dept_five_year_exp_average}}** of the authorized **{{fmt_compact1_written dept_five_year_auth_average}}**. On average, **{{fmt_compact1_written dept_planned_exp_average}}** of planned spending is **{{fmt_percentage1 dept_avg_planned_exp_hist_exp_pct}}** **{{dept_avg_pct_change_text}}** from the last 5 years of expenditures
   fr: NEEDS TRANSLATION
 
 gov_historical_auth_exp_text:
