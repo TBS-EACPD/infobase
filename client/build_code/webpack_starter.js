@@ -28,7 +28,7 @@ const common_entry = [ "@babel/polyfill" ];
 
 const options_by_app = {
   a11y_client: {
-    entry: common_entry.concat(['./src/InfoBase/a11y_root.js']),
+    entry: common_entry.concat(['./src/InfoBase/root.js']),
     get_output: language =>({
       path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
       filename: `app-a11y-${language}.min.js`,

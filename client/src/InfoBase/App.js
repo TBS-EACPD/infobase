@@ -1,4 +1,4 @@
-import './non-a11y-styles.scss';
+import './App.scss';
 
 import { Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router';
@@ -46,13 +46,13 @@ export class App extends React.Component {
   }
   render(){
     return (
-      <div tabIndex={-1} id="app-focus-root">
+      <div tabIndex={-1} id="app-focus-root" className={`app-focus-root--${ window.is_a11y_mode ? "a11y" : "standard" }`}>
         <ErrorBoundary>
           <DevFip />
-          <TooltipActivator />
           <ReactUnmounter />
           <InsertRuntimeFooterLinks />
           <EasyAccess />
+          { !window.is_a11y_mode && <TooltipActivator /> }
           <Suspense fallback={<SpinnerWrapper config_name={"route"} />}>
             <Switch>
               <Route path="/metadata/:data_source?" component={MetaData}/>
@@ -60,7 +60,6 @@ export class App extends React.Component {
               <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
               <Route path="/orgs/:level/:subject_id/infograph/:bubble?/:options?/" component={InfoGraph} />
               <Route path="/glossary/:active_key?" component={Glossary} />
-              <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} />
               <Redirect 
                 from="/budget-measures/:first_column?/:selected_value?/:budget_year?" 
                 to="/budget-tracker/:first_column?/:selected_value?/:budget_year?"
@@ -71,9 +70,11 @@ export class App extends React.Component {
               <Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />
               <Route path="/compare_estimates/:h7y_layout?" component={EstimatesComparison} />
               <Route path="/privacy" component={PrivacyStatement} />
-              <Route path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?" component={TreeMap} />
               <Route path="/diff/:org_id?/:crso_id?/:program_id?" component={TextDiff} />
               <Route path="/lab" component={Lab} />
+              { !window.is_a11y_mode && <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} /> }
+              { !window.is_a11y_mode && <Route path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?" component={TreeMap} /> }
+              <Route path="/start/:no_basic_equiv?" component={Home} /> 
               <Route path="/" component={Home} />
             </Switch>
             <PageDetails />
