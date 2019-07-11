@@ -1,3 +1,5 @@
+*(le Français suit)*
+
 InfoBase API
 ========
 
@@ -57,3 +59,24 @@ In production, we use a MongoDB Atlas hosted database. This has little relevance
 
 ### Google Cloud Function
 The production environment for the express/GraphQL server is a Google Cloud Function. Again, this hasn't had much of a lock-in effect on the source code, although a few optimizations and decisions were made with a serverless environment in mind. We currently transpile with a traget of Node 6 because that is what GCFs run (TODO: update to Node 8 GCFs).
+
+
+L'interface de programmation d'applications (API) de l'InfoBase
+========
+
+[![CircleCI](https://circleci.com/gh/TBS-EACPD/InfoBase.svg?style=svg&circle-token=a99b6b8309e5edd904b0386c4a92c10bf5f43e29)](https://circleci.com/gh/TBS-EACPD/InfoBase)
+
+Une interface de programmation d'applications GraphQL pour les données.
+
+## Table des matières
+- [l'interface de programmation d'applications (API) de l'InfoBase](#L'interface-de-programmation-d'applications-(API)-de l'InfoBase)
+  - [Table des matières](#Table-des-matières)
+  - [Commencer](#Commencer)
+    - [Lancer le serveur de l'API](#Lancer-le-serveur-de-l'API)
+  - [Tests](#Tests)
+    - [Tests «Snapshot»](#Tests-Snapshot)
+  - [Structure des fichiers](#Structure-des-fichiers)
+    - [fichier models/](#fichier-models)
+  - [Outils infonuagiques](#Outils-infonuagiques)
+    - [Mongodb Atlas](#Mongodb-Atlas)
+    - [Fonction Google Cloud](#Fonction-Google-Cloud)
