@@ -3,9 +3,9 @@ GC InfoBase
 
 [![CircleCI](https://circleci.com/gh/TBS-EACPD/InfoBase.svg?style=svg&circle-token=a99b6b8309e5edd904b0386c4a92c10bf5f43e29)](https://circleci.com/gh/TBS-EACPD/InfoBase)
 
-*(Le Français suit)*
+Client-side code and content for the GC InfoBase. / Code et contenu pour le côté client de l'InfoBase du GC.
 
-Client-side code and content for the GC InfoBase.
+*(Le Français suit)*
 
 ## Table of Contents
 - [GC InfoBase](#GC-InfoBase)
@@ -58,7 +58,6 @@ New route load tests can be added in `browser-tests/route-load-tests-config.js`.
 InfoBase du GC
 ========
 
-**Code** et contenu pour le côté client de l'InfoBase du GC.
 
 ## Table des matières 
 
@@ -83,7 +82,7 @@ InfoBase du GC
 0. Avec un commande d'exécution, naviguez au chemin d’accès au répertoire de l'InfoBase, p. ex. `cd ~/Documents/infobase/client`
 1. `npm ci` pour télécharger les modules node.
 2. `npm run IB_base_watch` pour recueillir et empaqueter les fichiers statiques (les fichiers csv, svg, et css élargies de bootstrap). Ce processus peut être laissé en cours d'exécution pour regarder les changements.
-3. `npm run IB_q` pour empaqueter le code source (La commande `IB_q` compile rapidement mais elle requise un navigateur qui soutient ES6) ou `npm run IB_dev` (appliquer les «correctifs» pour résoudre les problèmes de soutien pour les navigateurs mobiles/IE11/safari)\*
+3. `npm run IB_q` pour empaqueter le code source (La commande `IB_q` compile rapidement mais elle requise un navigateur qui soutient ES6) ou `npm run IB_dev` (appliquer les « correctifs » pour résoudre les problèmes de soutien pour les navigateurs mobiles/IE11/safari)\*
 
 ### Visitez une copie locale
 
@@ -92,11 +91,19 @@ InfoBase du GC
 2. `npm run serve-loopback` pour démarrer un serveur local
 3. Démarrez un navigateur web et coller `localhost:8080/build/InfoBase/index-eng.html` dans la barre d'adresse
 
-Notez: si vous utilisez la commande `npm run serve` vous pouvez relier à l'InfoBase en utilisant les autres appareils sur votre réseau local (p. ex. pour tester le site mobile) par visiter `<votre IP>:8080/build/InfoBase/index-eng.html`. Notez que, si vous changez our débranchez le réseau, votre addresse IP changerait. Vous devez redémarrer la commande `IB_q` ou l'équivalent pour mettre à jour la variable d'environnement de l'addresse IP. Se vous avez des problèmes de connexion ça c'est la première chose à essayer.
+Notez: si vous utilisez la commande `npm run serve` vous pouvez relier à l'InfoBase en utilisant les autres appareils sur votre réseau local (p. ex. pour tester le site mobile) par visiter `<votre IP>:8080/build/InfoBase/index-eng.html`. Notez que, si vous changez our débranchez le réseau, votre addresse IP changerait. Vous devez redémarrer la commande `IB_q` ou l'équivalent pour mettre à jour la variable d'environnement de l'addresse IP. Ça c'est la première chose à essayer si vous avez des problèmes de connexion .
 
 ## Tests
 
 ### Tests de navigateur
 
 #### Tests de chargement
+
+Les tests de chargement fournissent une couverture de test du forme « quick-and-dirty ». Ils vous assurent que tous les routes chargent sans générer d'erreur.
+
+1. Construire une version complète (Exécutez `IB_prod` et `a11y_prod`)
+2. Assurez-vous qu'une processus `npm run serve-loopback` est active
+3. `npm run headless_route_load_tests`
+
+Vous pouvez ajouter les tests additionnels dans le fichier `browser-tests/route-load-tests-config.js`.
 
