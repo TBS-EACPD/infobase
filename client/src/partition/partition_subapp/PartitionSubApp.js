@@ -207,43 +207,36 @@ export class PartitionSubApp {
     }
   }
   // Where the actual search happens
-  search_actual(query) {
-    this.dont_fade = [];
-    this.search_matching = [];
-    
+  search_actual(query){
     const search_tree = this.current_perspective.hierarchy_factory();
     const deburred_query = _.deburr(query).toLowerCase();
 
-    search_tree.each(node => {
-      if (!_.isNull(node.parent)){
-        if (
-          _.deburr(node.data.name.toLowerCase()) === deburred_query ||
-          (node.data.is("dept") && 
-            (
-              _.deburr(node.data.acronym.toLowerCase()) === deburred_query ||
-              _.deburr(node.data.fancy_acronym.toLowerCase()) === deburred_query ||
-              _.deburr(node.data.applied_title.toLowerCase()) === deburred_query
-            )
-          )
-        ) {
-          this.search_matching.push(node);
-          this.dont_fade.push(node);
-          _.each(node.children, children => {
-            this.search_matching.push(children);
-            this.dont_fade.push(children);
-          });
-        } else if (node.data.search_string.indexOf(deburred_query) !== -1){
-          this.search_matching.push(node);
-          this.dont_fade.push(node);
+    const search_matching = [];
+    let nonunique_dont_fade_arrays = [];
+    search_tree.each(
+      node => {
+        if (!_.isNull(node.parent)){
+          if ( node.data.search_string.indexOf(deburred_query) !== -1 ){
+            search_matching.push(node);
+
+            nonunique_dont_fade_arrays = [
+              nonunique_dont_fade_arrays,
+              node,
+              node.descendants(),
+              node.ancestors(),
+            ];
+          }
         }
       }
-    });
+    );
 
-    const to_open = _.chain(this.search_matching)
-      .map(n => n.ancestors())
-      .flatten(true)
+    this.search_matching = search_matching;
+    this.dont_fade = _.chain(nonunique_dont_fade_arrays)
+      .flattenDeep()
       .uniq()
       .value();
+
+    const to_open = this.dont_fade;
     const how_many_to_be_shown = node => {
       const partition = _.partition(node.children, child => _.includes(to_open, child));
       return partition;
