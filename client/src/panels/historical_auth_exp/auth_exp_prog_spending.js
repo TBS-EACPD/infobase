@@ -1,4 +1,5 @@
 import text from './historical_auth_exp.yaml';
+import text2 from '../../common_text/common_lang.yaml';
 import {
   run_template,
   PanelGraph,
@@ -18,7 +19,7 @@ const {
 } = declarative_charts;
 
 const { std_years, planning_years } = years;
-const { text_maker, TM } = create_text_maker_component(text);
+const { text_maker, TM } = create_text_maker_component([text, text2]);
 
 const auth_cols = _.map(std_years, yr=>`${yr}auth`);
 const exp_cols = _.map(std_years, yr=>`${yr}exp`);
@@ -77,6 +78,26 @@ const render = function({calculations, footnotes, sources}) {
   const series_labels = (
     [text_maker("expenditures"), text_maker("authorities"), text_maker("planned_spending")]
   );
+
+  if( subject.is("gov") ){
+    const gov_avg_planned_exp_hist_exp_pct = info.gov_planned_exp_average / info.gov_five_year_exp_average;
+    if(gov_avg_planned_exp_hist_exp_pct > 1){
+      info['gov_avg_pct_change_text'] = text_maker("increase");
+      info['gov_avg_planned_exp_hist_exp_pct'] = gov_avg_planned_exp_hist_exp_pct - 1;
+    } else{
+      info['gov_avg_pct_change_text'] = text_maker("decrease");
+      info['gov_avg_planned_exp_hist_exp_pct'] = 1 - gov_avg_planned_exp_hist_exp_pct;
+    }  
+  } else if( subject.is("dept") ){
+    const dept_avg_planned_exp_hist_exp_pct = info.dept_planned_exp_average / info.dept_five_year_exp_average;
+    if(dept_avg_planned_exp_hist_exp_pct > 1){
+      info['dept_avg_pct_change_text'] = text_maker("increase");
+      info['dept_avg_planned_exp_hist_exp_pct'] = dept_avg_planned_exp_hist_exp_pct - 1;
+    } else{
+      info['dept_avg_pct_change_text'] = text_maker("decrease");
+      info['dept_avg_planned_exp_hist_exp_pct'] = 1 - dept_avg_planned_exp_hist_exp_pct;
+    }  
+  }
 
   let graph_content;
   if(window.is_a11y_mode){
@@ -201,7 +222,7 @@ new PanelGraph({
   level: "gov",
   key: "auth_exp_prog_spending",
   depends_on: ["orgVoteStatPa", "programSpending"],
-  info_deps: ["orgVoteStatPa_gov_info"],
+  info_deps: ["orgVoteStatPa_gov_info", "programSpending_gov_info"],
   calculate,
   render,
 });
@@ -210,7 +231,7 @@ new PanelGraph({
   level: "dept",
   key: "auth_exp_prog_spending",
   depends_on: ["orgVoteStatPa", "programSpending"],
-  info_deps: ["orgVoteStatPa_dept_info"],
+  info_deps: ["orgVoteStatPa_dept_info", "programSpending_dept_info"],
   calculate,
   render,
 });

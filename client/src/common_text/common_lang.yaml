@@ -2,6 +2,12 @@
 ##################################
 # General Section
 ##################################
+increase:
+  en: increase
+  fr: augmenter
+decrease:
+  en: decrease
+  fr: diminution
 new:
   en: New
   fr: Nouveau
