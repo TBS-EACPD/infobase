@@ -15,7 +15,7 @@ This repository contains the following projects:
   
 See the README.md files in those respective directories for more details on each project.
 
-# Mono-Repo de l'InfoBase du GC
+# « Mono-Dépôt » de l'InfoBase du GC
 
 [![CircleCI](https://circleci.com/gh/TBS-EACPD/InfoBase.svg?style=svg&circle-token=a99b6b8309e5edd904b0386c4a92c10bf5f43e29)](https://circleci.com/gh/TBS-EACPD/InfoBase)
 
@@ -26,5 +26,5 @@ Le site en direct est [ici](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-fra.
 Ce dépôt est divisé en trois:
 
 1) l'outil InfoBase (dans le fichier [/client](https://github.com/TBS-EACPD/InfoBase/blob/master/client))
-2) l'interface de programmation d'applications (dans le fichier [/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server))
+2) l'interface de programmation d'applications (API) (dans le fichier [/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server))
 3) l'application dorsale pour lancer des courriels (dans le fichier [/email_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend))
