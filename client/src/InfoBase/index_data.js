@@ -1,4 +1,24 @@
 const index_lang_lookups = {
+  open_data_text: {
+    en: "If you wish to leave Javascript turned off, the following are the link to the open data sources.",
+    fr: "NEEDS TRANSLATION",
+  },
+  open_data_title: {
+    en: "For Financial, Results and Budget data: ",
+    fr: "NEEDS TRANSLATION",
+  },
+  open_data_HR_title: {
+    en: "For HR data: ",
+    fr: "NEEDS TRANSLATION",
+  },
+  open_data_link: {
+    en: "https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
+    fr: "https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
+  },
+  open_data_HR_link: {
+    en: "https://www.canada.ca/en/treasury-board-secretariat/services/innovation/human-resources-statistics.html",
+    fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/innovation/statistiques-ressources-humaines.html",
+  },
   page_title: {
     en: "GC InfoBase",
     fr: "L'InfoBase du GC",
