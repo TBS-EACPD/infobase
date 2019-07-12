@@ -2,14 +2,17 @@ import { rpb_link } from '../rpb/rpb_link.js';
 
 const featured_content_items = _.compact([
   {
+    text_key: 'quick_link_people_2019',
+    href: '#orgs/gov/gov/infograph/people',
+    is_new: true,
+  },
+  {
     text_key: 'quick_link_budget_2019',
     href: '#budget-tracker/budget-measure/overview/budget-2019',
-    is_new: true,
   },
   {
     text_key: 'quick_link_hi_tags',
     href: '#resource-explorer/HI/dp19',
-    is_new: true,
   },
   {
     text_key: "quick_link_main_estimates",
