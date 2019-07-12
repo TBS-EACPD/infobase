@@ -1,6 +1,6 @@
 import { StandardRouteContainer, LangSynchronizer } from '../core/NavComponents';
 import { createSelector } from 'reselect';
-import withRouter from 'react-router/withRouter';
+import { withRouter } from 'react-router';
 import { log_standard_event } from '../core/analytics.js';
 import { Fragment } from 'react';
 import { TextMaker, text_maker } from './rpb_text_provider.js';

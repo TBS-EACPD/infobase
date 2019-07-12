@@ -1,7 +1,7 @@
 import './App.scss';
 
 import { Suspense } from 'react';
-import { Route, Switch, Redirect } from 'react-router';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { initialize_analytics } from '../core/analytics.js';
 
 import { ensure_linked_stylesheets_load, retrying_react_lazy } from './common_app_component_utils.js';
@@ -49,9 +49,9 @@ export class App extends React.Component {
       <div tabIndex={-1} id="app-focus-root" className={`app-focus-root--${ window.is_a11y_mode ? "a11y" : "standard" }`}>
         <ErrorBoundary>
           <DevFip />
-          <ReactUnmounter />
           <InsertRuntimeFooterLinks />
           <EasyAccess />
+          <ReactUnmounter />
           { !window.is_a11y_mode && <TooltipActivator /> }
           <Suspense fallback={<SpinnerWrapper config_name={"route"} />}>
             <Switch>

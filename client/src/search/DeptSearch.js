@@ -1,4 +1,4 @@
-import { default as withRouter } from 'react-router/withRouter';
+import { withRouter } from 'react-router';
 
 import { BaseTypeahead } from './BaseTypeahead.js';
 import { 

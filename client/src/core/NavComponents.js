@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import withRouter from 'react-router/withRouter';
+import { withRouter } from 'react-router';
 import { reactAdapter } from './reactAdapter.js';
 import { log_page_view } from './analytics.js';
 import { index_lang_lookups } from '../InfoBase/index_data.js';

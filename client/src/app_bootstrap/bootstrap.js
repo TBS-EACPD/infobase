@@ -13,10 +13,9 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { 
   ConnectedRouter,
-  routerReducer,
-  routerMiddleware,
-  /*push,*/
-} from 'react-router-redux';
+  routerMiddleware, 
+  connectRouter,
+} from 'connected-react-router';
 import { default as createHistory } from 'history/createHashHistory';
 import { populate_stores } from '../models/populate_stores.js';
 import { Table } from '../core/TableClass.js';
@@ -90,7 +89,7 @@ function bootstrap(App, app_reducer, done){
     const store = createStore(
       combineReducers({
         app: app_reducer,
-        router: routerReducer,
+        router: connectRouter(history),
       }),
       applyMiddleware(middleware)
     );

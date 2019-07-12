@@ -1,4 +1,4 @@
-import withRouter from 'react-router/withRouter';
+import { withRouter } from 'react-router';
 
 import { shallowEqualObjectsOverKeys } from '../general_utils.js';
 import { PanelGraph } from '../core/PanelGraph.js';
