@@ -107,6 +107,7 @@ const Chart = ({
     <NivoResponsiveLine
       data = {welcome_data_line(data, has_planned, has_hist)}
       yScale = {{zoomed: false}}
+      show_yaxis_zoom = {false}
       max = {_.max(data)*1.05}
       enableGridX = {false}
       enableGridY = {false}

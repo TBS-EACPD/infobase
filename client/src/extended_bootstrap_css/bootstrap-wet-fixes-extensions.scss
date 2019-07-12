@@ -288,14 +288,17 @@ a.btn-ib-light {
 
 .btn-ib-zoom { 
   background-color: $backgroundColor;
-  border: 2px solid $buttonPrimaryColor;
-  color: $buttonPrimaryColor !important;
+  border: 2px solid $backgroundColor;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  color: $tertiaryColor !important;
   border-radius: 13px;
 }
 .btn-ib-zoom:hover,
 .btn-ib-zoom:active {
- background-color: $buttonPrimaryColor;
- color: $backgroundColor !important;
+  background-color: $backgroundColor;
+  border: 2px solid $tertiaryColor;
+  color: $tertiaryColor !important;
 }
 
 .list-group {
