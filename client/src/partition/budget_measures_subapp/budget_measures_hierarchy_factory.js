@@ -108,6 +108,11 @@ const post_traversal_search_string_set = (node) => {
   if (node.data.description){
     node.data.search_string += _.deburr(node.data.description.replace(/<(?:.|\n)*?>/gm, '').toLowerCase());
   }
+  if ( node.data.type === "dept" && node.data.id !== 9999 ){
+    node.data.search_string += _.deburr(
+      `${node.data.acronym} ${node.data.fancy_acronym} ${node.data.applied_title}`.toLowerCase()
+    );
+  }
 };
 
 

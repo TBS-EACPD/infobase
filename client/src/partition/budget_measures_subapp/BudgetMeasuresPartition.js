@@ -231,41 +231,33 @@ const standard_update = (diagram, props) => {
 };
 
 const update_with_search = (diagram, props) => {
-  const dont_fade = [];
-  const search_matching = [];
-    
   const search_tree = budget_measures_hierarchy_factory(props.year_value, props.selected_value, props.first_column);
   const deburred_query = _.deburr(props.filter_string).toLowerCase();
 
-  search_tree.each(node => {
-    if ( !_.isNull(node.parent) ){
-      if (
-        _.deburr( node.data.name.toLowerCase() ) === deburred_query ||
-        (node.data.type === "dept" && node.data.id !== 9999) && 
-           (
-             _.deburr( node.data.acronym.toLowerCase() ) === deburred_query ||
-             _.deburr( node.data.fancy_acronym.toLowerCase() ) === deburred_query ||
-             _.deburr( node.data.applied_title.toLowerCase() ) === deburred_query
-           )
-      ) {
-        search_matching.push(node);
-        dont_fade.push(node);
-        _.each(node.children, children => {
-          search_matching.push(children);
-          dont_fade.push(children);
-        });
-      } else if (node.data.search_string.indexOf(deburred_query) !== -1){
-        search_matching.push(node);
-        dont_fade.push(node);
+  const search_matching = [];
+  let nonunique_dont_fade_arrays = [];
+  search_tree.each(
+    node => {
+      if (!_.isNull(node.parent)){
+        if ( node.data.search_string.indexOf(deburred_query) !== -1 ){
+          search_matching.push(node);
+          nonunique_dont_fade_arrays = [
+            nonunique_dont_fade_arrays,
+            node,
+            node.descendants(),
+            node.ancestors(),
+          ];
+        }
       }
     }
-  });
+  );
 
-  const to_open = _.chain(search_matching)
-    .map( n => n.ancestors() )
-    .flatten(true)
+  const dont_fade = _.chain(nonunique_dont_fade_arrays)
+    .flattenDeep()
     .uniq()
     .value();
+    
+  const to_open = dont_fade;
   const how_many_to_be_shown = node => {
     const partition = _.partition( node.children, child => _.includes(to_open, child) );
     return partition;
