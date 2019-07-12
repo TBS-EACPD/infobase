@@ -180,6 +180,55 @@ function people_five_year_percentage_formula(col_name,col_names_to_be_averaged){
   };
 }
 
+
+const is_revenue = so_num => +so_num > 19;
+const last_year_col = "{{pa_last_year}}";
+
+const sum_last_year_exp = rows => (
+  _.chain(rows)
+    .map( row => row[last_year_col] )
+    .filter( _.isNumber )
+    .reduce( (acc,item)=> acc+item , 0 )
+    .value()
+);
+
+//given rows of std-obj-expenditure rows,  sums it up to return gross expenditures, net expenditures and revenue
+const rows_to_rev_split = rows => {
+  const [neg_exp, gross_exp] = _.chain( rows)
+    .filter(x => x) //TODO remove this
+    .partition( row => is_revenue(row.so_num) ) 
+    .map(sum_last_year_exp)
+    .value();  
+  const net_exp = gross_exp + neg_exp;
+  if (neg_exp === 0) { return false ;}
+  return { neg_exp, gross_exp, net_exp };
+};
+
+
+const collapse_by_so = function(programs,table,filter){
+  // common calculation for organizing program/so row data by so
+  // and summing up all the programs for the last year of spending 
+  // then sorting by largest to smallest
+  
+  return _.chain(programs)
+    .map(prog => table.programs.get(prog))
+    .compact()
+    .flatten()
+    .compact()
+    .groupBy("so")
+    .toPairs()
+    .map(key_value => ({
+      label: key_value[0], 
+      so_num: key_value[1][0].so_num,
+      value: d3.sum(key_value[1], d => d["{{pa_last_year}}"]),
+    }))
+    .filter(filter || (() => true))
+    .sortBy(d => -d.value)
+    .value();
+};
+
+const is_non_revenue = d => +(d.so_num) < 19;
+
 export { 
   vote_stat_dimension, 
   sobj_dimension, 
@@ -198,4 +247,7 @@ export {
   Statistics,
   format,
   years,
+  rows_to_rev_split,
+  is_non_revenue,
+  collapse_by_so,
 };

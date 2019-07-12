@@ -47,12 +47,6 @@ function get_info(subject, infokeys){
   };
 }
 
-//  //gov infos should only run once, no matter the subject
-//  (stats_key, subject) => {
-//    return Statistics.lookup(stats_key).level === 'gov' ? stats_key : stats_key+subject.id  ;
-//  }
-//);
-
 class Statistics extends mix().with(staticStoreMixin){
   constructor(def){
     super();
@@ -111,6 +105,9 @@ class Statistics extends mix().with(staticStoreMixin){
     if( _.some(infos, info => info.missing_values ) ){ 
       stats.missing_values = true; 
     }
+    // if(_.isEmpty(infos)){
+    //   stats.missing_values = true;
+    // }
 
     const prefix = this.level+'_';
     //add has two API, add({ key: ... , val: ... }) or add('key', val)
@@ -123,12 +120,11 @@ class Statistics extends mix().with(staticStoreMixin){
       this.compute.call(null, subject, tables, infos, add, stats);
     } catch (e){ 
       if(window.is_dev){
-        /* eslint-disable no-console */
+        /* eslint-disable-next-line no-console */
         console.error(`missing values for ${subject.name}`);
       }
       stats.missing_values = true;
     }
-       
     return stats;
   }
 }

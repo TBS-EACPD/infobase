@@ -3,10 +3,8 @@ import text from './top_spending_areas.yaml';
 import {
   util_components,
   PanelGraph, 
-  collapse_by_so,
   run_template,
   years,
-  Statistics,
   StdPanel,
   Col,
   declarative_charts,
@@ -14,13 +12,17 @@ import {
   CommonDonut,
 } from "../shared";
 
+import {
+  is_non_revenue,
+  collapse_by_so,
+} from '../../tables/table_common.js';
+
 const { std_years } = years;
 const { Format } = util_components;
 const { A11YTable } = declarative_charts;
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const is_non_revenue = d => +(d.so_num) < 19;
 
 const common_cal = (programs,programSobjs) => {
 
@@ -42,53 +44,6 @@ const common_cal = (programs,programSobjs) => {
   return top_3_sos.concat(remainder);
 };
 
-Statistics.create_and_register({
-  id: 'program_std_obj', 
-  table_deps: ['programSobjs'],
-  level: 'program',
-  compute: (subject, tables, infos, add, c) => {
-    const {programSobjs} = tables;
-
-    const rows_by_so = collapse_by_so([subject], programSobjs, is_non_revenue);
-    const { 
-      label: top_so_name, 
-      value: top_so_amount,
-    } = _.first(rows_by_so);
-
-    const total_spent = d3.sum( rows_by_so, _.property('value') );
-    const top_so_pct = top_so_amount/total_spent;
-
-    add("top_so_name", top_so_name);
-    add("total_spent", total_spent);
-    add("top_so_spent", top_so_amount);
-    add("top_so_pct", top_so_pct);
-  },
-});
-
-
-Statistics.create_and_register({
-  id: 'tag_std_obj', 
-  table_deps: ['programSobjs'],
-  level: 'tag',
-  compute: (subject, tables, infos, add, c) => {
-    const {programSobjs} = tables;
-
-    const rows_by_so = collapse_by_so(subject.programs, programSobjs, is_non_revenue);
-    const { 
-      label: top_so_name, 
-      value: top_so_amount,
-    } = _.first(rows_by_so);
-
-    const total_spent = d3.sum(rows_by_so, _.property('value'));
-
-    const top_so_pct = top_so_amount/total_spent;
-
-    add("top_so_name", top_so_name);
-    add("total_spent", total_spent);
-    add("top_so_spent", top_so_amount);
-    add("top_so_pct", top_so_pct);
-  },
-});
 
 const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) => {
   const { graph_args, info } = calculations;

@@ -1,6 +1,5 @@
 import text from './spend_rev_split.yaml';
 import {
-  Statistics,
   formats,
   create_text_maker_component,
   PanelGraph,
@@ -9,32 +8,13 @@ import {
   NivoResponsiveBar,
 } from "../shared";
 
+import {
+  rows_to_rev_split,
+} from '../../tables/table_common.js';
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const is_revenue = so_num => +so_num > 19;
-const last_year_col = "{{pa_last_year}}";
 
-const sum_last_year_exp = rows => (
-  _.chain(rows)
-    .map( row => row[last_year_col] )
-    .filter( _.isNumber )
-    .reduce( (acc,item)=> acc+item , 0 )
-    .value()
-);
-
-
-//given rows of std-obj-expenditure rows,  sums it up to return gross expenditures, net expenditures and revenue
-const rows_to_rev_split = rows => {
-  const [neg_exp, gross_exp] = _.chain( rows)
-    .filter(x => x) //TODO remove this
-    .partition( row => is_revenue(row.so_num) ) 
-    .map(sum_last_year_exp)
-    .value();  
-  const net_exp = gross_exp + neg_exp;
-  if (neg_exp === 0) { return false ;}
-  return { neg_exp, gross_exp, net_exp };
-};
 
 
 const text_keys_by_level = {
@@ -127,72 +107,6 @@ new PanelGraph({
 
 
 
-Statistics.create_and_register({
-  id: 'tag_revenue', 
-  table_deps: [ 'programSobjs'],
-  level: 'tag',
-  compute: (subject, tables, infos, add, c) => {
-    const {programSobjs} = tables;
-    const prog_rows = programSobjs.q(subject).data;
-    const exp_rev_results = rows_to_rev_split(prog_rows);
-
-    add({
-      key: "exp_rev_gross", 
-      value: exp_rev_results.gross_exp,
-    });
-
-    add({
-      key: "exp_rev_neg", 
-      value: exp_rev_results.neg_exp,
-    });
-
-    add({
-      key: "exp_rev_neg_minus", 
-      value: -exp_rev_results.neg_exp,
-    });
-
-    add({
-      key: "exp_rev_net", 
-      value: exp_rev_results.net_exp,
-    });
-
-  },
-
-});
-
-
-Statistics.create_and_register({
-  id: 'program_revenue', 
-  table_deps: [ 'programSobjs'],
-  level: 'program',
-  compute: (subject, tables, infos, add, c) => {
-    const programSobjs = tables.programSobjs;
-    const prog_rows = programSobjs.programs.get(subject);
-    const exp_rev_results = rows_to_rev_split(prog_rows);
-
-    add({
-      key: "exp_rev_gross", 
-      value: exp_rev_results.gross_exp,
-    });
-
-    add({
-      key: "exp_rev_neg", 
-      value: exp_rev_results.neg_exp,
-    });
-
-    add({
-      key: "exp_rev_neg_minus", 
-      value: -exp_rev_results.neg_exp,
-    });
-
-    add({
-      key: "exp_rev_net", 
-      value: exp_rev_results.net_exp,
-    });
-
-  },
-
-});
 
 new PanelGraph({
   key,

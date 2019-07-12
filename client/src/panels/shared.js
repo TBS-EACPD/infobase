@@ -457,27 +457,6 @@ export const HeightClippedGraph = ({children}) => (
   </HeightClipper>
 );
 
-export const collapse_by_so = function(programs,table,filter){
-  // common calculation for organizing program/so row data by so
-  // and summing up all the programs for the last year of spending 
-  // then sorting by largest to smallest
-  
-  return _.chain(programs)
-    .map(prog => table.programs.get(prog))
-    .compact()
-    .flatten()
-    .compact()
-    .groupBy("so")
-    .toPairs()
-    .map(key_value => ({
-      label: key_value[0], 
-      so_num: key_value[1][0].so_num,
-      value: d3.sum(key_value[1], d => d["{{pa_last_year}}"]),
-    }))
-    .filter(filter || (() => true))
-    .sortBy(d => -d.value)
-    .value();
-};
 
 export const sum_a_tag_col = function sum_tag_col(tag, table, col){
   return _.chain(tag.programs)
