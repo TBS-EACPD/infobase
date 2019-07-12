@@ -1,5 +1,7 @@
+import './auth_exp_prog_spending.scss';
 import text from './historical_auth_exp.yaml';
 import text2 from '../../common_text/common_lang.yaml';
+import { Details } from '../../components/Details.js';
 import {
   run_template,
   PanelGraph,
@@ -70,11 +72,11 @@ const render = function({calculations, footnotes, sources}) {
     .first()
     .parseInt()
     .value();
-  const gap_year = year2 - year1 === 2 ? `${year1+1}-${(year1+2).toString().substring(2)}` : null;
-  const marker_year = gap_year ? gap_year : _.first(plan_ticks);
+  let gap_year = year2 - year1 === 2 ? `${year1+1}-${(year1+2).toString().substring(2)}` : null;
+  const marker_year = gap_year || _.first(plan_ticks);
   const {exp, auth, progSpending} = graph_args;
   const colors = d3.scaleOrdinal().range(_.concat(newIBCategoryColors));
-  
+
   const series_labels = (
     [text_maker("expenditures"), text_maker("authorities"), text_maker("planned_spending")]
   );
@@ -87,7 +89,7 @@ const render = function({calculations, footnotes, sources}) {
     } else{
       info['gov_avg_pct_change_text'] = text_maker("decrease");
       info['gov_avg_planned_exp_hist_exp_pct'] = 1 - gov_avg_planned_exp_hist_exp_pct;
-    }  
+    }
   } else if( subject.is("dept") ){
     const dept_avg_planned_exp_hist_exp_pct = info.dept_planned_exp_average / info.dept_five_year_exp_average;
     if(dept_avg_planned_exp_hist_exp_pct > 1){
@@ -96,7 +98,13 @@ const render = function({calculations, footnotes, sources}) {
     } else{
       info['dept_avg_pct_change_text'] = text_maker("decrease");
       info['dept_avg_planned_exp_hist_exp_pct'] = 1 - dept_avg_planned_exp_hist_exp_pct;
-    }  
+    }
+  }
+
+  if(gap_year){
+    info['last_history_year'] = _.last(history_ticks);
+    info['last_planned_year'] = _.last(plan_ticks);
+    info['gap_year'] = gap_year;
   }
 
   let graph_content;
@@ -168,17 +176,17 @@ const render = function({calculations, footnotes, sources}) {
               },
             ]}
             margin= {{
-              top: 50,
+              top: 70,
               right: 25,
-              bottom: 50,
+              bottom: 30,
               left: 120,
             }}
             legends={[
               {
-                anchor: 'bottom-left',
+                anchor: 'top-left',
                 direction: 'column',
-                translateX: -120,
-                translateY: 35,
+                translateX: -100,
+                translateY: -70,
                 itemDirection: 'left-to-right',
                 itemWidth: 10,
                 itemHeight: 20,
@@ -209,6 +217,17 @@ const render = function({calculations, footnotes, sources}) {
     >
       <Col size={6} isText>
         <TM k={text_keys_by_level[subject.level]} args={info} />
+        {
+          gap_year && 
+          <div className="pagedetails">
+            <div className="pagedetails__gap_explain">
+              <Details
+                summary_content={<TM k={"gap_explain_title"} args={info}/>}
+                content={<TM k={"gap_explain_body"} args={info}/>}
+              />
+            </div>
+          </div>
+        }
       </Col>
       <Col size={6} isGraph>
         {graph_content}
