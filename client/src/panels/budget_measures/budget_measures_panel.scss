@@ -1,8 +1,10 @@
+@import '../../common_css/common-variables';
+
 .budget-panel-controls-and-graph {
   width: 100%;
 
   & > .centerer {
-    @media(max-width: 599px){
+    @media(max-width: $smallDevice){
       flex-direction: column;
     }
 

@@ -71,14 +71,14 @@
     font-size: 0.8em;
     border: none; 
     
-    @media (min-width: 1200px) { 
+    @media (min-width: $largeDevice) { 
       width: 550px;
     }
-    @media (min-width: 900px) and (max-width: 1200px) { 
+    @media (min-width: $mediumDevice) and (max-width: $largeDevice) { 
       width: 70vw;
       right: 0vw;
     }
-    @media (max-width: 900px) { 
+    @media (max-width: $mediumDevice) { 
       width: 80vw;
       right: 0vw;
     }
@@ -142,7 +142,7 @@
   margin-right: -5px;
 }
 
-@media (min-width: 992px) { 
+@media (min-width: $mediumDevice) { 
   .item-cloud-col {
     padding-left: 6px;
     padding-right: 6px;
@@ -152,7 +152,7 @@
   }
 }
 
-@media (max-width: 992px) { 
+@media (max-width: $mediumDevice) { 
   .item-cloud-col > div {
     margin: 10px;
   }

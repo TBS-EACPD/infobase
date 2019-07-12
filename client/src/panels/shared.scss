@@ -1,3 +1,5 @@
+@import '../common_css/common-variables';
+
 /* Styles for height clipped bar graphs */
 
 .gradient.gradient-strong {
@@ -15,7 +17,7 @@
   text-align: right;
   font-weight: bold;
 }
-@media (min-width:992px){
+@media (min-width:$mediumDevice){
   div.ppl-share-pie-area{
     display: flex;
     justify-content: space-around;
@@ -38,7 +40,7 @@
 }
 
 /* styles from simplographic */
-@media (max-width: 1100px){
+@media (max-width: $largeDevice){
   .canada-intro-grid {
     margin: 0px !important;
   }

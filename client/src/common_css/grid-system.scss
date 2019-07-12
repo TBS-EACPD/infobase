@@ -36,7 +36,7 @@
   font-size: 2em;
 }
 
-@media (min-width: 900px){
+@media (min-width: $mediumDevice){
   .lg-hide {
      width: 0px;
      height: 0px;
@@ -121,12 +121,12 @@
   }
 
 }
-@media (max-width: 1100px){
+@media (max-width: $largeDevice){
   .inner-grid > .large {
     font-size: 1.5em;
   }
 }
-@media (max-width: 900px){
+@media (max-width: $mediumDevice){
   .sm-grid-panel {
     width : 100%;
     padding: 5px;
@@ -152,7 +152,7 @@
 
 .lg-grid-panel30.key_concept_term {
   max-width: 29%;
-  @media (max-width:900px){
+  @media (max-width:$mediumDevice){
     max-width: none;
     width: 100%;
     border: none;
@@ -173,7 +173,7 @@
 /* .lg-grid > .grid-row > lg-grid-panel70.key_concept_def */
 .lg-grid-panel70.key_concept_def {
   max-width: 69%;
-  @media (max-width:900px){
+  @media (max-width:$mediumDevice){
     max-width: none;
     width: 100%;
   }

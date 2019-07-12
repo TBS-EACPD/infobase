@@ -1,13 +1,15 @@
+@import "../common_css/common-variables";
+
 .icon-block {
     font-size: 1.8em;
   
-    @media(min-width: 992px){
+    @media(min-width: $mediumDevice){
       float: right;
       padding-left: 1.2em;
       max-width: 5em;
     }
   
-    @media(max-width:991px){
+    @media(max-width:$mediumDevice){
       margin: 1.2em auto;
       text-align: center;
     }

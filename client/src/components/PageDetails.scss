@@ -9,7 +9,7 @@
   align-items: baseline;
   justify-content: space-between;
 
-  @media (max-width: 767px) {
+  @media (max-width: $smallDevice) {
     flex-direction: column;
   }
 
@@ -19,11 +19,11 @@
     border: 2px solid $primaryColor;
     padding: 5px 15px;
 
-    @media (min-width: 420px) {
+    @media (min-width: $smallDevice) {
       max-width: 50%;
       min-width: 390px;
     }
-    @media (max-width: 420px) {
+    @media (max-width: $smallDevice) {
       min-width: 100%;
     }
 
@@ -35,7 +35,7 @@
     background-color: $backgroundColor;
     border-radius: 11px;
     padding: 3px;
-    @media (min-width: 1024px) {
+    @media (min-width: $largeDevice) {
       text-align: center;
     }
   }

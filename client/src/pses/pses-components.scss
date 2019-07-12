@@ -9,13 +9,13 @@
   border-bottom: 1px solid $separatorColor;
   display: flex;
 
-  @media(min-width: 992px){
+  @media(min-width: $mediumDevice){
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
 
-  @media(max-width: 991px){
+  @media(max-width: $mediumDevice){
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;

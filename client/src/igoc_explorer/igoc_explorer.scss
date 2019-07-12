@@ -1,8 +1,10 @@
+@import '../common_css/common-variables';
+
 .igoc-checkbox-and-count-row {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  @media (max-width: 715px){
+  @media (max-width: $mediumDevice){
     flex-direction: column;
   }
 }
