@@ -36,3 +36,7 @@ home_a11y_non_a11y_redirect_warning:
     Vous avez été redirigé vers une version d'InfoBase textuel à partir d'une page sans équivalent textuel.
     Les pages sans équivalent textuel servent à visualiser des donées et ne constituent pas la seule présentation de ces données dans l'InfoBase.
     Toute information présentée sur la page à partir de laquelle vous avez été redirigé se trouve dans le [générateur de rapports](#rpb).
+
+home_a11y_desc:
+  en: Text based Infobase home for improved accessibility
+  fr: Version texte de l’Infobase pour meilleure accessibilité
