@@ -1,15 +1,15 @@
 const index_lang_lookups = {
   open_data_text: {
     en: "If you wish to leave Javascript turned off, the following are the link to the open data sources.",
-    fr: "NEEDS TRANSLATION",
+    fr: "Si vous souhaitez laisser Javascript désactivé, vous trouveriez les liens vers les données ouvertes ci-dessous.",
   },
   open_data_title: {
-    en: "For Financial, Results and Budget data: ",
-    fr: "NEEDS TRANSLATION",
+    en: "Financial, Results and Budget data: ",
+    fr: "Les données financières et les données relatives aux résultats et au budget : ",
   },
   open_data_HR_title: {
-    en: "For HR data: ",
-    fr: "NEEDS TRANSLATION",
+    en: "People Management Data: ",
+    fr: "Données relatives à la gestion des personnes : ",
   },
   open_data_link: {
     en: "https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
