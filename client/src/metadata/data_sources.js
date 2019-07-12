@@ -177,6 +177,7 @@ const sources = _.mapValues({
       return [{
         id: 'igoc',
         text: tm("igoc_item_name"),
+        inline_link: "#igoc",
       }];
     },
   },
