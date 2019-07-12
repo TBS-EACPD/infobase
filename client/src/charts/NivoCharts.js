@@ -412,7 +412,7 @@ export class NivoResponsiveLine extends React.Component {
             zIndex: 999,
             padding: "0px",
           }}
-          className="btn-ib-primary"
+          className="btn-ib-zoom"
           onClick={ 
             () => {
               this.setState({
@@ -422,7 +422,7 @@ export class NivoResponsiveLine extends React.Component {
           }
         >
           <img 
-            src={get_static_url("svg/zoom_in.svg")} 
+            src={get_static_url(this.state.y_scale_zoomed ? "svg/zoom_out.svg" : "svg/zoom_in.svg" )} 
             style={{ 
               width: "20px", 
               height: "20px",
