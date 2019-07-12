@@ -76,7 +76,7 @@
   border-bottom: 1px solid $primaryColor;
 }
 
-@media(min-width:992px){
+@media(min-width:$mediumDevice){
   .hierarchy-selection-item {
     display: flex;
     align-items: stretch;
@@ -108,7 +108,7 @@
 }
 
 
-@media(max-width:992px){
+@media(max-width:$mediumDevice){
   .hierarchy-selection-items {
     display: flex;
     flex-direction: column;

@@ -167,6 +167,7 @@ NivoResponsivePie.defaultProps = {
 };
 
 export class NivoResponsiveBar extends React.Component{
+
   render(){
     const{
       data,

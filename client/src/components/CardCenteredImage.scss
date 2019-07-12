@@ -84,7 +84,7 @@
   max-width: 190px;
   margin-right: 25px;
 
-  @media(max-width:610px){
+  @media(max-width:$smallDevice){
     padding: 15px 0 15px 0;
   }
 

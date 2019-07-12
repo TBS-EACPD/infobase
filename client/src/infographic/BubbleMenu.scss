@@ -61,7 +61,7 @@
   }
 }
 
-@media (min-width: 992px){
+@media (min-width: $mediumDevice){
   .bubble-menu {
     display: flex;
     flex-direction:row;
@@ -91,7 +91,7 @@
 }
 
 
-@media (max-width: 991px){
+@media (max-width: $mediumDevice){
   .bubble-menu {
     display: flex;
     flex-direction: column;

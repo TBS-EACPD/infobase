@@ -9,7 +9,7 @@
   padding: 1.15rem;
   line-height: 0;
 }
-@media(max-width: 767px){
+@media(max-width: $smallDevice){
   #ib-site-header {
     padding: 20px 0 0 0;
     line-height: normal;
@@ -21,7 +21,7 @@
   height: auto;
   max-height: 25px;
 }
-@media(min-width: 479px){
+@media(min-width: $smallDevice){
   .canada-logo {
     max-height: 40px;
     max-width: 50vw;

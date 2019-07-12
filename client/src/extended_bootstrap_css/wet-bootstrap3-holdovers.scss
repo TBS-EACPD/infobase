@@ -45,7 +45,7 @@
   display: table; }
 .dl-horizontal dd:after {
   clear: both; }
-@media (min-width: 768px) {
+@media (min-width: $smallDevice) {
   .dl-horizontal dt {
     float: left;
     width: 160px;
@@ -56,7 +56,7 @@
     white-space: nowrap; }
   .dl-horizontal dd {
     margin-left: 180px; } }
-@media (min-width: 768px) {
+@media (min-width: $smallDevice) {
   .dl-horizontal dt {
     border-top: 1px solid #ccc;
     padding: 10px 10px 10px 0;

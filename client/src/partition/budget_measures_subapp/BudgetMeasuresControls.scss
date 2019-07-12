@@ -55,7 +55,7 @@
       }
 
       & > .filter-table__components {
-        @media(min-width:1201px){
+        @media(min-width:$largeDevice){
           margin-bottom: 20px;
         }
 
@@ -82,10 +82,10 @@
 
   & > .form-control.search {
     width: 100%;
-    @media(min-width:1200px){
+    @media(min-width:$largeDevice){
       border: 2px solid $controlsColorLighter;
     }
-    @media(max-width:1200px){
+    @media(max-width:$largeDevice){
       border: 1px solid $controlsColor, 25%;
     }
   }

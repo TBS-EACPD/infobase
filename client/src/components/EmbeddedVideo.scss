@@ -1,13 +1,15 @@
+@import "../common_css/common-variables";
+
 .embedded-video-container {
   margin: auto;
 
-  @media(min-width: 992px){
+  @media(min-width: $mediumDevice){
     width: 60%;
   }
-  @media(min-width: 767px) and (max-width: 991px){
+  @media(min-width: $smallDevice) and (max-width: $mediumDevice){
     width: 80%;
   }
-  @media(max-width: 766px){
+  @media(max-width: $mediumDevice){
     width: 100%;
   }
 }

@@ -2,7 +2,7 @@
 
 .rbt-input-hint-container > .form-control {
   width: 100%;
-  @media(max-width:991px){
+  @media(max-width:$mediumDevice){
       font-size: 14px;
   }
 }

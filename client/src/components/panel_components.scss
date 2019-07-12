@@ -33,20 +33,20 @@
     Only needed on larger screens. 
   */
   .panel-body {
-    @media (min-width:1000px){
+    @media (min-width:$largeDevice){
       content: none!important;
     }
   
-    @media (max-width:1000px){
+    @media (max-width:$largeDevice){
       padding: 1rem; /* on mobile, we need way less padding */
     }
   }
   
   .panel-heading {
-    @media (min-width:1000px){
+    @media (min-width:$largeDevice){
       padding: 15px 15px; /* bootstrap default is 10 15 */
     }
-    @media (max-width:1000px){
+    @media (max-width:$largeDevice){
       /* on mobile, we need way less padding */
       padding-top: 10px;
       padding-bottom: 10px;

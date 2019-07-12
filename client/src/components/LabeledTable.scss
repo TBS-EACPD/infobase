@@ -39,7 +39,7 @@
     border-bottom: 1px solid $primaryColor;
   }
   
-  @media(min-width:992px){
+  @media(min-width:$mediumDevice){
     .displayTable__item {
       display: flex;
       align-items: stretch;
@@ -72,7 +72,7 @@
   
   .displayTable__items { }
 
-  @media(max-width:992px){
+  @media(max-width:$mediumDevice){
     .displayTable__items {
       display: flex;
       flex-direction: column;
