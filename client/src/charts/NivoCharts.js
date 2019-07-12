@@ -383,6 +383,7 @@ export class NivoResponsiveLine extends React.Component {
       enableGridX,
       enableGridY,
       left_axis,
+      show_yaxis_zoom,
       yScale,
       motion_damping,
       motion_stiffness,
@@ -402,33 +403,35 @@ export class NivoResponsiveLine extends React.Component {
 
     return (
       <Fragment>
-        <button
-          style={{
-            position: "absolute",
-            left: margin.left,
-            top: margin.top,
-            marginLeft: "-7px",
-            marginTop: "-30px",
-            zIndex: 999,
-            padding: "0px",
-          }}
-          className="btn-ib-zoom"
-          onClick={ 
-            () => {
-              this.setState({
-                y_scale_zoomed: !y_scale_zoomed,
-              });
+        {show_yaxis_zoom &&
+          <button
+            style={{
+              position: "absolute",
+              left: margin.left,
+              top: margin.top,
+              marginLeft: "-7px",
+              marginTop: "-30px",
+              zIndex: 999,
+              padding: "0px",
+            }}
+            className="btn-ib-zoom"
+            onClick={ 
+              () => {
+                this.setState({
+                  y_scale_zoomed: !y_scale_zoomed,
+                });
+              }
             }
-          }
-        >
-          <img 
-            src={get_static_url(this.state.y_scale_zoomed ? "svg/zoom_out.svg" : "svg/zoom_in.svg" )} 
-            style={{ 
-              width: "20px", 
-              height: "20px",
-            }} 
-          />
-        </button>
+          >
+            <img 
+              src={get_static_url(this.state.y_scale_zoomed ? "svg/zoom_out.svg" : "svg/zoom_in.svg" )} 
+              style={{ 
+                width: "20px", 
+                height: "20px",
+              }} 
+            />
+          </button>
+        }
         <ResponsiveLine
           {...{
             data,
@@ -494,6 +497,7 @@ NivoResponsiveLine.defaultProps = {
   enableDotLabel: false,
   enableArea: false,
   stacked: false,
+  show_yaxis_zoom: true,
   yScale: {
     type: "linear",
     zoomed: false,
