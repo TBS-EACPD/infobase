@@ -3,6 +3,7 @@ import { ResponsiveBar } from './nivo-bar.js';
 import { ResponsivePie } from '@nivo/pie';
 import { formats, dollar_formats } from "../core/format.js";
 import { Fragment } from 'react';
+import { get_static_url } from '../request_utils.js';
 
 const get_formatter = (is_money, formatter, raw = true) => (
   _.isUndefined(formatter) ?
@@ -363,6 +364,9 @@ NivoResponsiveHBar.defaultProps = {
 export class NivoResponsiveLine extends React.Component {
   constructor(props){
     super(props);
+    this.state = {
+      y_scale_zoomed: false,
+    };
   }
   render(){
     const { 
@@ -391,8 +395,40 @@ export class NivoResponsiveLine extends React.Component {
       theme,
       tooltip,
     } = this.props;
+
+    const {
+      y_scale_zoomed,
+    } = this.state;
+
     return (
       <Fragment>
+        <button
+          style={{
+            position: "absolute",
+            left: margin.left,
+            top: margin.top,
+            marginLeft: "-7px",
+            marginTop: "-30px",
+            zIndex: 999,
+            padding: "0px",
+          }}
+          className="btn-ib-primary"
+          onClick={ 
+            () => {
+              this.setState({
+                y_scale_zoomed: !y_scale_zoomed,
+              });
+            }
+          }
+        >
+          <img 
+            src={get_static_url("svg/zoom_in.svg")} 
+            style={{ 
+              width: "20px", 
+              height: "20px",
+            }} 
+          />
+        </button>
         <ResponsiveLine
           {...{
             data,
@@ -409,8 +445,8 @@ export class NivoResponsiveLine extends React.Component {
           yScale={{
             stacked: !!stacked,
             type: "linear",
-            min: min || get_scale_bounds(stacked, raw_data, yScale.zoomed).min,
-            max: max || get_scale_bounds(stacked, raw_data, yScale.zoomed).max,
+            min: min || get_scale_bounds(stacked, raw_data, y_scale_zoomed).min,
+            max: max || get_scale_bounds(stacked, raw_data, y_scale_zoomed).max,
             ...(yScale || {}),
           }}
           axisBottom={remove_bottom_axis ? null : bttm_axis}
