@@ -403,7 +403,7 @@ export class NivoResponsiveLine extends React.Component {
 
     return (
       <Fragment>
-        {show_yaxis_zoom &&
+        {show_yaxis_zoom && !enableArea &&
           <button
             style={{
               position: "absolute",
