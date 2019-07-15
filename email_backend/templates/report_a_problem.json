@@ -39,12 +39,12 @@
     }
   },
   "issue_details": {
-    "required": false,
+    "required": true,
     "value_type": "string",
     "form_type": "textarea",
     "form_label": {
-      "en": "Details (optional)",
-      "fr": "Détails (optionnel)"
+      "en": "Details (required)",
+      "fr": "Détails (obligatoire)"
     }
   },
   "sha": {
