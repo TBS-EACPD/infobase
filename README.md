@@ -15,6 +15,8 @@ This repository contains the following projects:
   
 See the README.md files in those respective directories for more details on each project.
 
+This project is licensed under the terms of the MIT license.
+
 # « Mono-Dépôt » de l'InfoBase du GC
 
 [![CircleCI](https://circleci.com/gh/TBS-EACPD/InfoBase.svg?style=svg&circle-token=a99b6b8309e5edd904b0386c4a92c10bf5f43e29)](https://circleci.com/gh/TBS-EACPD/InfoBase)
@@ -30,3 +32,5 @@ Ce dépôt est divisé en trois:
 3) l'application dorsale pour lancer des courriels (dans le fichier [/email_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend))
 
 Veuillez liser le fichier « README.md » dans chancune de ces fichiers pour connaisser plus de détails.
+
+Ce projet est distribué sous licence MIT.
