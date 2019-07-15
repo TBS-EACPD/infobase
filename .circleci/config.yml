@@ -197,7 +197,7 @@ jobs:
       - run: ./ci_scripts/create_envs.sh
       - run: ./ci_scripts/create_deploy_envs.sh
 
-      - run: ./ci_scripts/authenticate-server-gcloud.sh > /dev/null && echo "**REDACTED**"
+      - run: ./ci_scripts/authenticate-server-gcloud.sh
 
       # Checksum all JS files in transpiled_build, used to determine if the function needs to be redeployed
       - run: find ./server/transpiled_build -name "*.js" | xargs cksum > server-checksums.txt
@@ -208,7 +208,7 @@ jobs:
             - ib-api-is-deployed-{{ .Branch }}-{{ checksum "./server-checksums.txt" }}-{{ checksum "./server/package-lock.json" }}
       - run:
           command: |
-            [ -f "./this-api-is-deployed.txt" ] || (cd server && ./deploy_scripts/ci_deploy_function.sh) > /dev/null && echo "**REDACTED**"
+            [ -f "./this-api-is-deployed.txt" ] || (cd server && ./deploy_scripts/ci_deploy_function.sh)
       - run: touch ./this-api-is-deployed.txt
       - save_cache:
           paths:
@@ -225,9 +225,9 @@ jobs:
       - attach_workspace:
           at: ./
       - run: ./ci_scripts/create_envs.sh
-      - run: ./ci_scripts/authenticate-client-gcloud.sh > /dev/null && echo "**REDACTED**"
+      - run: ./ci_scripts/authenticate-client-gcloud.sh
       - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH/graphql#g" ./client/build/InfoBase/app/*.js # Replace Replace CI API URL placeholder with branch specific API URL
-      - run: (cd client && ./deploy_scripts/push_to_gcloud_bucket.sh) > /dev/null && echo "**REDACTED**"
+      - run: (cd client && ./deploy_scripts/push_to_gcloud_bucket.sh)
 
 
 # One workflow that runs all three jobs (build -> test -> deploy_data/server/client), each requiring the previous to have passed
