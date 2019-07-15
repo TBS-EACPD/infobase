@@ -2,6 +2,7 @@ import './auth_exp_prog_spending.scss';
 import text from './historical_auth_exp.yaml';
 import text2 from '../../common_text/common_lang.yaml';
 import { Details } from '../../components/Details.js';
+import MediaQuery from 'react-responsive';
 import {
   run_template,
   PanelGraph,
@@ -25,7 +26,6 @@ const { text_maker, TM } = create_text_maker_component([text, text2]);
 
 const auth_cols = _.map(std_years, yr=>`${yr}auth`);
 const exp_cols = _.map(std_years, yr=>`${yr}exp`);
-const progSpending_cols = _.map(planning_years, yr=>yr);
 
 const text_keys_by_level = {
   dept: "dept_auth_exp_prog_spending_body",
@@ -35,24 +35,15 @@ const text_keys_by_level = {
 
 const calculate = function(subject) {
   const { orgVoteStatPa, programSpending } = this.tables;
-  let auth, exp, progSpending;
 
-  if ( subject.is("gov") ){
-    const qAuthExp = orgVoteStatPa.q();
-    auth = qAuthExp.sum(auth_cols, {as_object: false});
-    exp = qAuthExp.sum(exp_cols, {as_object: false});
+  const query_subject = subject.is("gov") ? undefined : subject;
+  const qAuthExp = orgVoteStatPa.q(query_subject);
+  const auth = qAuthExp.sum(auth_cols, {as_object: false});
+  const exp = qAuthExp.sum(exp_cols, {as_object: false});
 
-    const qProgSpending = programSpending.q();
-    progSpending = qProgSpending.sum(progSpending_cols, {as_object: false});
+  const qProgSpending = programSpending.q(query_subject);
+  const progSpending = qProgSpending.sum(planning_years, {as_object: false});
 
-  } else if ( subject.is("dept") ) {
-    const qAuthExp = orgVoteStatPa.q(subject);
-    auth = qAuthExp.sum(auth_cols, {as_object: false});
-    exp = qAuthExp.sum(exp_cols, {as_object: false});
-
-    const qProgSpending = programSpending.q(subject);
-    progSpending = qProgSpending.sum(progSpending_cols, {as_object: false});
-  }
   return {exp, auth, progSpending};
 };
 
@@ -60,6 +51,7 @@ const render = function({calculations, footnotes, sources}) {
   const { info, graph_args, subject } = calculations;
   const history_ticks = _.map(std_years, run_template);
   const plan_ticks = _.map(planning_years, run_template);
+  const additional_info = {};
   const year1 = _.chain(history_ticks)
     .last()
     .split('-')
@@ -72,11 +64,11 @@ const render = function({calculations, footnotes, sources}) {
     .first()
     .parseInt()
     .value();
-  let gap_year = year2 - year1 === 2 ? `${year1+1}-${(year1+2).toString().substring(2)}` : null;
+  const gap_year = year2 - year1 === 2 ? `${year1+1}-${(year1+2).toString().substring(2)}` : null;
   const marker_year = gap_year || _.first(plan_ticks);
   const {exp, auth, progSpending} = graph_args;
-  const colors = d3.scaleOrdinal().range(_.concat(newIBCategoryColors));
-
+  const colors = d3.scaleOrdinal().range(newIBCategoryColors);
+  
   const series_labels = (
     [text_maker("expenditures"), text_maker("authorities"), text_maker("planned_spending")]
   );
@@ -84,27 +76,27 @@ const render = function({calculations, footnotes, sources}) {
   if( subject.is("gov") ){
     const gov_avg_planned_exp_hist_exp_pct = info.gov_planned_exp_average / info.gov_five_year_exp_average;
     if(gov_avg_planned_exp_hist_exp_pct > 1){
-      info['gov_avg_pct_change_text'] = text_maker("increase");
-      info['gov_avg_planned_exp_hist_exp_pct'] = gov_avg_planned_exp_hist_exp_pct - 1;
+      additional_info['gov_avg_pct_change_text'] = text_maker("increase");
+      additional_info['gov_avg_planned_exp_hist_exp_pct'] = gov_avg_planned_exp_hist_exp_pct - 1;
     } else{
-      info['gov_avg_pct_change_text'] = text_maker("decrease");
-      info['gov_avg_planned_exp_hist_exp_pct'] = 1 - gov_avg_planned_exp_hist_exp_pct;
+      additional_info['gov_avg_pct_change_text'] = text_maker("decrease");
+      additional_info['gov_avg_planned_exp_hist_exp_pct'] = 1 - gov_avg_planned_exp_hist_exp_pct;
     }
   } else if( subject.is("dept") ){
     const dept_avg_planned_exp_hist_exp_pct = info.dept_planned_exp_average / info.dept_five_year_exp_average;
     if(dept_avg_planned_exp_hist_exp_pct > 1){
-      info['dept_avg_pct_change_text'] = text_maker("increase");
-      info['dept_avg_planned_exp_hist_exp_pct'] = dept_avg_planned_exp_hist_exp_pct - 1;
+      additional_info['dept_avg_pct_change_text'] = text_maker("increase");
+      additional_info['dept_avg_planned_exp_hist_exp_pct'] = dept_avg_planned_exp_hist_exp_pct - 1;
     } else{
-      info['dept_avg_pct_change_text'] = text_maker("decrease");
-      info['dept_avg_planned_exp_hist_exp_pct'] = 1 - dept_avg_planned_exp_hist_exp_pct;
+      additional_info['dept_avg_pct_change_text'] = text_maker("decrease");
+      additional_info['dept_avg_planned_exp_hist_exp_pct'] = 1 - dept_avg_planned_exp_hist_exp_pct;
     }
   }
 
   if(gap_year){
-    info['last_history_year'] = _.last(history_ticks);
-    info['last_planned_year'] = _.last(plan_ticks);
-    info['gap_year'] = gap_year;
+    additional_info['last_history_year'] = _.last(history_ticks);
+    additional_info['last_planned_year'] = _.last(plan_ticks);
+    additional_info['gap_year'] = gap_year;
   }
 
   let graph_content;
@@ -129,104 +121,118 @@ const render = function({calculations, footnotes, sources}) {
       />
     );
   } else {
-    const graph_data = _.map(series_labels, (label) => {
-      return {
-        id: label,
-        data: [],
-      };
-    });
-    _.forEach(exp, (exp_value,year_index) => {
-      graph_data[0].data.push({
-        "x": history_ticks[year_index],
-        "y": exp_value,
-      });
-      graph_data[1].data.push({
-        "x": history_ticks[year_index],
-        "y": auth[year_index],
-      });
-    });
-    if(gap_year){
-      graph_data[2].data.push({
-        "x": gap_year,
-        "y": null,
-      });
-    }
-    _.forEach(progSpending, (progSpending_value, year_index) => {
-      graph_data[2].data.push({
-        "x": plan_ticks[year_index],
-        "y": progSpending_value,
-      });
-    });
+    const zip_years_and_data = (years, data) => _.map(
+      years,
+      (year, year_ix) => ({
+        x: year,
+        y: data[year_ix],
+      })
+    );
+    
+    const graph_data = _.chain(series_labels)
+      .zip([
+        zip_years_and_data(history_ticks, exp),
+        zip_years_and_data(history_ticks, auth),
+        _.compact([
+          gap_year && {
+            x: gap_year,
+            y: null,
+          },
+          ...zip_years_and_data(plan_ticks, progSpending),
+        ]),
+      ])
+      .map( ([id, data]) => ({id, data}) )
+      .value();
+
+    const nivo_default_props = {
+      data: graph_data,
+      colorBy: d => colors(d.id),
+      yScale: { type: 'linear', min: 'auto', max: 'auto' },
+      markers: [
+        {
+          axis: 'x',
+          value: marker_year,
+          lineStyle: { 
+            stroke: window.infobase_color_constants.tertiaryColor, 
+            strokeWidth: 2,
+            strokeDasharray: ("3, 3"),
+          },
+        },
+      ],
+      margin: {
+        top: 27,
+        right: 25,
+        bottom: 30,
+        left: 100,
+      },
+      legends: [
+        {
+          anchor: 'top-left',
+          direction: 'row',
+          translateX: -50,
+          translateY: -30,
+          itemDirection: 'left-to-right',
+          itemWidth: 1,
+          itemHeight: 20,
+          itemsSpacing: 120,
+          itemOpacity: 0.75,
+          symbolSize: 12,
+          symbolShape: 'circle',
+          effects: [
+            {
+              on: 'hover',
+              style: {
+                itemBackground: 'rgba(0, 0, 0, .03)',
+                itemOpacity: 1,
+              },
+            },
+          ],
+        },
+      ],
+    };
+    const nivo_mobile_props = _.cloneDeep(nivo_default_props);
+    nivo_mobile_props.margin.top = 60;
+    nivo_mobile_props.legends[0].translateY = -60;
+    nivo_mobile_props.legends[0].direction = "column";
+    nivo_mobile_props.legends[0].itemsSpacing = 1;
+
     graph_content = 
       <div style={{height: 400}} aria-hidden = {true}>
         {
-          <NivoResponsiveLine
-            data={graph_data}
-            colorBy={d => colors(d.id)}
-            yScale={{ type: 'linear', min: 'auto', max: 'auto' }}
-            markers={[
-              {
-                axis: 'x',
-                value: marker_year,
-                lineStyle: { 
-                  stroke: window.infobase_color_constants.tertiaryColor, 
-                  strokeWidth: 2,
-                  strokeDasharray: ("3, 3"),
-                },
-              },
-            ]}
-            margin= {{
-              top: 70,
-              right: 25,
-              bottom: 30,
-              left: 120,
-            }}
-            legends={[
-              {
-                anchor: 'top-left',
-                direction: 'column',
-                translateX: -100,
-                translateY: -70,
-                itemDirection: 'left-to-right',
-                itemWidth: 10,
-                itemHeight: 20,
-                itemOpacity: 0.75,
-                symbolSize: 12,
-                symbolShape: 'circle',
-                symbolBorderColor: 'rgba(0, 0, 0, .5)',
-                effects: [
-                  {
-                    on: 'hover',
-                    style: {
-                      itemBackground: 'rgba(0, 0, 0, .03)',
-                      itemOpacity: 1,
-                    },
-                  },
-                ],
-              },
-            ]}
-          />
+          <MediaQuery minWidth={992}>
+            <NivoResponsiveLine
+              {...nivo_default_props}
+            />
+          </MediaQuery>
+        }
+        {
+          <MediaQuery maxWidth={992}>
+            <NivoResponsiveLine
+              {...nivo_mobile_props}
+            />
+          </MediaQuery>
         }
       </div>;
   }
 
   return (
     <StdPanel
+      containerAlign="top"
       title={text_maker("auth_exp_prog_spending_title")}
       {...{footnotes,sources}}
     >
       <Col size={6} isText>
-        <TM k={text_keys_by_level[subject.level]} args={info} />
+        <TM k={text_keys_by_level[subject.level]} args={{...info, ...additional_info}} />
         {
           gap_year && 
-          <div className="pagedetails">
-            <div className="pagedetails__gap_explain">
-              <Details
-                summary_content={<TM k={"gap_explain_title"} args={info}/>}
-                content={<TM k={"gap_explain_body"} args={info}/>}
-              />
+            <div className="pagedetails">
+              <div className="pagedetails__gap_explain">
+                <Details
+                  summary_content={<TM k={"gap_explain_title"} args={{...info, ...additional_info}}/>}
+                  content={<TM k={`${subject.level}_gap_explain_body`} args={{...info, ...additional_info}}/>}
+                />
+              </div>
             </div>
-          </div>
         }
       </Col>
       <Col size={6} isGraph>
