@@ -56,4 +56,4 @@ Additionally, before sending a valid email out, /submit_email checks wether the 
 
 Clients are identified by IP and, if it exists in the completed template, a special template field with key `"client_id"`.
 
-If you want clients to be able to send more frequent emails, adjust `TIMEOUT_WINDOW` or `REQUESTS_IN_WINDOW_BEFORE_TIMEOUT` in `src/throttle_requests_by_ip.js`. If you receive sustained spikes in requests and require more than 1 instance of the GCF then adjust/remove `--max-instances` in the deploy script. Note that setting a hire number of max-instances compromises the ability to throttle by IP as the memory of who made what requests is transient and specific to each GCF.
+If you want clients to be able to send more frequent emails, adjust `TIMEOUT_WINDOW` or `REQUESTS_IN_WINDOW_BEFORE_TIMEOUT` in `src/throttle_requests_by_ip.js`. If you receive sustained spikes in requests and require more than 1 instance of the GCF then adjust/remove `--max-instances` in the deploy script. Note that setting a higher number of max-instances compromises the ability to throttle by IP as the memory of who made what requests is transient and specific to each GCF.
