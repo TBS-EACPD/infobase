@@ -28,3 +28,5 @@ Ce dépôt est divisé en trois:
 1) l'outil InfoBase (dans le fichier [/client](https://github.com/TBS-EACPD/InfoBase/blob/master/client))
 2) l'interface de programmation d'applications (API) (dans le fichier [/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server))
 3) l'application dorsale pour lancer des courriels (dans le fichier [/email_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend))
+
+Veuillez liser le fichier « README.md » dans chancune de ces fichiers pour connaisser plus de détails.
