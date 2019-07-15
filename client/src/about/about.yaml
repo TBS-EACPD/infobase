@@ -199,17 +199,21 @@ behind_scenes_sub_text_2:
     davantage les visualisations de données, au moyen de ressources comme la {{ext_link "galerie D3" "https://github.com/d3/d3/wiki/Gallery"}}.
 
 behind_scenes_sub_title_3:
-  en: Credits
-  fr: Crédits
+  en: License / Credits
+  fr: Licence / Crédits
 
 behind_scenes_sub_text_3:
   transform: [handlebars, markdown]
   en: |
+    This project is licensed under the terms of the MIT license. You can find the source code {{ext_link "on GitHub" "https://github.com/TBS-EACPD/InfoBase"}}.
+
     Certain icons are © {{ext_link "Font Awesome" "https://github.com/FortAwesome/Font-Awesome"}}, licensed under 
     {{ext_link "CC BY 4.0 License" "https://creativecommons.org/licenses/by/4.0/"}}. Others are from {{ext_link "Material Design" "https://material.io/"}} © Google Inc, licensed under
     {{ext_link "Apache license version 2.0" "https://www.apache.org/licenses/LICENSE-2.0"}}, or © {{ext_link "The Wikimedia Foundation, Inc" "https://commons.wikimedia.org/wiki/Main_Page"}}, licensed 
     under the {{ext_link "MIT license" "https://opensource.org/licenses/MIT"}}. All svg images used under license indicate the copyright holder and license terms in the svg source code.
   fr: |
+    Ce projet est distribué sous licence MIT. Vous pouvez trouver le code source à {{ext_link "GitHub" "https://github.com/TBS-EACPD/InfoBase"}}.
+    
     Certaines icônes sont © {{ext_link "Font Awesome" "https://github.com/FortAwesome/Font-Awesome"}}, sous license {{ext_link "CC BY 4.0" "https://creativecommons.org/licenses/by/4.0/"}}.
     D'autres proviennent de {{ext_link "Material Design" "https://material.io/"}} © Google Inc, sous license {{ext_link "Apache version 2.0" "https://www.apache.org/licenses/LICENSE-2.0"}},
     ou © {{ext_link "Wikimedia Foundation, Inc" "https://commons.wikimedia.org/wiki/Main_Page"}}, sous license {{ext_link "MIT" "https://opensource.org/licenses/MIT"}}. Toutes les images svg
