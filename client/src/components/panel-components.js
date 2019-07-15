@@ -173,7 +173,7 @@ Col.propTypes = {
 
 //Dummy component that will be remapped to flexboxgrid columns 
 
-const StdPanel = ({ title, sources, footnotes, children }) => {
+const StdPanel = ({ title, sources, footnotes, children, containerAlign }) => {
   const mapped_children = _.chain(children)
     .flatMap( child => {
       if ( child.type && child.type === Fragment ){
@@ -207,7 +207,7 @@ const StdPanel = ({ title, sources, footnotes, children }) => {
 
   return (
     <Panel {...{title, sources, footnotes}}>
-      <div className="frow middle-xs">
+      <div className={`frow ${containerAlign || 'middle'}-xs`}>
         {mapped_children}
       </div>
     </Panel>

@@ -3,12 +3,23 @@ gap_explain_title:
   en: Why is there a break in spending between {{last_history_year}} and {{est_in_year}}?
   fr: Pourquoi y a-t-il une interruption entre les dépenses de {{last_history_year}} et {{est_in_year}}?
 
-gap_explain_body:
+gov_gap_explain_body:
   transform: [handlebars]
   en: |
     Actual expenditures for all organizations are sourced from the {{gl_tt "Public Accounts of Canada" "PA"}}. Planned expenditures for most organizations are sourced from {{gl_tt "Departmental Plans" "DP"}}.
 
-    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in Agriculture and Agrifood Canada’s latest Departmental Plan, but the {{gap_year}} the {{gl_tt "Public Accounts of Canada" "PA"}} are not yet available.
+    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in government’s latest Departmental Plan, but the {{gap_year}} the {{gl_tt "Public Accounts of Canada" "PA"}} are not yet available.
+  fr: |
+    Les dépenses réelles de toutes les organisations correspondent à celle publiées dans les {{gl_tt "Comptes publics du Canada" "PA"}}. Les dépenses prévues pour la plupart des organisations proviennent des {{gl_tt "plans ministériels" "DP"}}.
+
+    Les dépenses prévues pour {{est_in_year}} à {{last_planned_year}} ont été publiés dans le plan ministériel de <department name> le plus récent, mais les {gl_tt "Comptes publics du Canada" "PA"}} de {{gap_year}} ne sont pas encore disponibles.
+
+dept_gap_explain_body:
+  transform: [handlebars]
+  en: |
+    Actual expenditures for all organizations are sourced from the {{gl_tt "Public Accounts of Canada" "PA"}}. Planned expenditures for most organizations are sourced from {{gl_tt "Departmental Plans" "DP"}}.
+
+    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in {{subj_name dept}}’s latest Departmental Plan, but the {{gap_year}} the {{gl_tt "Public Accounts of Canada" "PA"}} are not yet available.
   fr: |
     Les dépenses réelles de toutes les organisations correspondent à celle publiées dans les {{gl_tt "Comptes publics du Canada" "PA"}}. Les dépenses prévues pour la plupart des organisations proviennent des {{gl_tt "plans ministériels" "DP"}}.
 
@@ -22,13 +33,17 @@ auth_exp_prog_spending_title:
 gov_auth_exp_prog_spending_body:
   transform: [handlebars, markdown]
   en: |
-    In the past 5 years, the government has spent an average of **{{fmt_compact1_written gov_five_year_exp_average}}** of the authorized **{{fmt_compact1_written gov_five_year_auth_average}}**. On average, **{{fmt_compact1_written gov_planned_exp_average}}** of planned spending is **{{fmt_percentage1 gov_avg_planned_exp_hist_exp_pct}}** **{{gov_avg_pct_change_text}}** from the last 5 years of expenditures
+    In the past 5 years, the government has spent an average of **{{fmt_compact1_written gov_five_year_exp_average}}** of the authorized **{{fmt_compact1_written gov_five_year_auth_average}}**.
+    On average, next 3 years of planned spending will **{{two_value_change_to gov_five_year_exp_average gov_planned_exp_average "fmt_compact1_written" "to" "present"}}** over the last 5 years of expenditures
+    #On average, **{{fmt_compact1_written gov_planned_exp_average}}** of planned spending is **{{fmt_percentage1 gov_avg_planned_exp_hist_exp_pct}}** **{{gov_avg_pct_change_text}}** from the last 5 years of expenditures
   fr: NEEDS TRANSLATION
 
 dept_auth_exp_prog_spending_body:
   transform: [handlebars, markdown]
   en: |
-    In the past 5 years, **{{subj_name dept}}** has spent an average of **{{fmt_compact1_written dept_five_year_exp_average}}** of the authorized **{{fmt_compact1_written dept_five_year_auth_average}}**. On average, **{{fmt_compact1_written dept_planned_exp_average}}** of planned spending is **{{fmt_percentage1 dept_avg_planned_exp_hist_exp_pct}}** **{{dept_avg_pct_change_text}}** from the last 5 years of expenditures
+    In the past 5 years, **{{subj_name dept}}** has spent an average of **{{fmt_compact1_written dept_five_year_exp_average}}** of the authorized **{{fmt_compact1_written dept_five_year_auth_average}}**.
+    On average, next 3 years of planned spending will **{{two_value_change_to dept_five_year_exp_average dept_planned_exp_average "fmt_compact1_written" "to" "present"}}** over the last 5 years of expenditures
+    #On average, **{{fmt_compact1_written dept_planned_exp_average}}** of planned spending is **{{fmt_percentage1 dept_avg_planned_exp_hist_exp_pct}}** **{{dept_avg_pct_change_text}}** from the last 5 years of expenditures
   fr: NEEDS TRANSLATION
 
 historical_auth_exp_title:
