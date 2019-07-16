@@ -33,7 +33,7 @@ budget_home_title:
 budget_home_text:
   transform: [markdown]
   en: Explore a breakout of the Budget Implementation Votes which are being funded through Estimates
-  fr: Découvrir une visualisation des crédits d’exécution du budget 2018 qui seront financées par le Budget des dépenses
+  fr: Découvrir une visualisation des crédits d’exécution du budget qui seront financées par le Budget des dépenses
 
 mains_dps_home_title:
   en: 2019-20 Departmental Plans
@@ -172,11 +172,11 @@ quick_link_budget_2019:
 
 quick_link_main_estimates:
   en: 2019-20 Main Estimates
-  fr: Budget principal des dépenses 2018-2019
+  fr: Budget principal des dépenses 2019-2020
 
 quick_link_hi_tags:
   en: 2019-20 Horizontal Initiatives
-  fr: Initiatives horizontals de 2019-2020
+  fr: Initiatives horizontales de 2019-2020
 
 quick_link_DP_1920:
   en: 2019-20 Departmental Plans
