@@ -614,6 +614,10 @@ class BudgetMeasureHBars extends React.Component {
       budget_data_source_date: budget_data_source_dates[selected_year],
       main_estimates_budget_link: main_estimates_budget_links[selected_year],
     };
+    const tick_map = {};
+    _.forEach(data, (budget_measure) => {
+      tick_map[`${budget_measure.name}`] = budget_measure.chapter_key && BudgetMeasure.make_budget_link(budget_measure.chapter_key, budget_measure.ref_id);
+    });
 
     const text_area = <div className = "frow" >
       <div className = "fcol-md-12 fcol-xs-12 medium_panel_text text">
@@ -781,7 +785,24 @@ class BudgetMeasureHBars extends React.Component {
         left_axis: {
           tickSize: 5,
           tickPadding: 5,
-          format: (d) => <TspanLineWrapper text={d} width={50}/>,
+          renderTick: tick => (
+            <g key={tick.key} transform={`translate(${tick.x-10},${tick.y})`}>
+              <a
+                href={tick_map[tick.value]}
+                target="_blank" rel="noopener noreferrer"
+              >
+                <text
+                  textAnchor="end"
+                  dominantBaseline="end"
+                  style={{
+                    ...tick.theme.axis.ticks.text,
+                  }}
+                >
+                  <TspanLineWrapper text={tick.value} width={50}/>
+                </text>
+              </a>
+            </g>
+          ),
         },
         padding: 0.1,
         is_money: true,
@@ -809,7 +830,7 @@ class BudgetMeasureHBars extends React.Component {
       const nivo_mobile_props = _.cloneDeep(nivo_default_props);
       nivo_mobile_props.margin.right = 10;
       nivo_mobile_props.margin.bottom = 25;
-      nivo_mobile_props.margin.left = 175;
+      nivo_mobile_props.margin.left = 250;
       nivo_mobile_props.margin.top = 80;
       nivo_mobile_props.bttm_axis.tickValues = 3;
       nivo_mobile_props.left_axis.format = (d) => <TspanLineWrapper text={d} width={28}/>;
