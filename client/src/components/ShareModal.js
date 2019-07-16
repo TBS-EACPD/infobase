@@ -14,6 +14,7 @@ import {
 } from 'react-share';
 import text from "./ShareModal.yaml";
 import { create_text_maker } from '../models/text.js';
+import { get_static_url } from '../request_utils.js';
 
 const text_maker = create_text_maker(text);
 
@@ -50,7 +51,7 @@ export class ShareModal extends React.Component {
       <Modal show={show} onHide={() => toggleModal(false)}>
         <div onBlur={this.onBlur}>
           <Modal.Header>
-            <Modal.Title style={{fontSize: '130%'}}><img src='./svg/shareGrey.svg'/> {text_maker("share")}</Modal.Title>
+            <Modal.Title style={{fontSize: '130%'}}><img src={get_static_url('./svg/shareGrey.svg')}/> {text_maker("share")}</Modal.Title>
             <Modal.Title style={{fontSize: '100%', marginTop: '7px'}}>{acronym} — {title}</Modal.Title>
           </Modal.Header>
 
