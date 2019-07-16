@@ -68,7 +68,8 @@ const render = function({calculations, footnotes, sources}) {
   const marker_year = gap_year || _.first(plan_ticks);
   const {exp, auth, progSpending} = graph_args;
   const colors = d3.scaleOrdinal().range(newIBCategoryColors);
-  
+  const raw_data = _.concat(exp, auth, progSpending);
+
   const series_labels = (
     [text_maker("expenditures"), text_maker("authorities"), text_maker("planned_spending")]
   );
@@ -146,8 +147,9 @@ const render = function({calculations, footnotes, sources}) {
 
     const nivo_default_props = {
       data: graph_data,
+      raw_data: raw_data,
       colorBy: d => colors(d.id),
-      yScale: { type: 'linear', min: 'auto', max: 'auto' },
+      magnify_glass_translateX: 80,
       markers: [
         {
           axis: 'x',
