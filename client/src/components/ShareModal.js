@@ -44,8 +44,8 @@ export class ShareModal extends React.Component {
       show,
     } = this.props;
     const subject_string = subject.level === 'tag' ?
-      subject.level === 'dept' ? subject.acronym : `${subject.dept.acronym} - ${subject.name}` :
-      subject.name;
+      subject.name :
+      subject.level === 'dept' ? subject.acronym : `${subject.dept.acronym} - ${subject.name}` ;
 
     return (
       <Modal show={show} onHide={() => toggleModal(false)}>
