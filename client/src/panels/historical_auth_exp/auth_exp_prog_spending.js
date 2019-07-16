@@ -169,7 +169,6 @@ const render = function({calculations, footnotes, sources}) {
         {
           anchor: 'top-left',
           direction: 'row',
-          translateX: -50,
           translateY: -30,
           itemDirection: 'left-to-right',
           itemWidth: 1,
