@@ -441,7 +441,7 @@ class DetailedProgramSplit extends React.Component {
         <strong><TM k="so_spend_by_prog" /></strong>
       </div>
       <div className="frow">
-        <div className="fcol-md-4" style={{ width: "100%" }}>
+        <div className="fcol-md-3" style={{ width: "100%" }}>
           <label>
             <TM k="filter_by_so" />
             <Select 
@@ -470,7 +470,7 @@ class DetailedProgramSplit extends React.Component {
             </div>
           }
         </div> 
-        <div className="fcol-md-8" style={{ width: "100%" }}>
+        <div className="fcol-md-9" style={{ width: "100%" }}>
           <div 
             style={{
               height: divHeight,
@@ -482,9 +482,9 @@ class DetailedProgramSplit extends React.Component {
               keys={so_label_list}
               margin = {{
                 top: 10,
-                right: 80,
+                right: 70,
                 bottom: 30,
-                left: 170,
+                left: 210,
               }}
               colorBy = {d => colors(d.id)}
               bttm_axis = {{
@@ -497,7 +497,7 @@ class DetailedProgramSplit extends React.Component {
                 tickSize: 5,
                 tickPadding: 5,
                 renderTick: tick => (
-                  <g key={tick.key} transform={`translate(${tick.x-70},${tick.y})`}>
+                  <g key={tick.key} transform={`translate(${tick.x-95},${tick.y})`}>
                     <a
                       href={tick_map[tick.value] ? infograph_href_template(tick_map[tick.value]) : null}
                       target="_blank" rel="noopener noreferrer"
@@ -509,7 +509,7 @@ class DetailedProgramSplit extends React.Component {
                           ...tick.theme.axis.ticks.text,
                         }}
                       >
-                        <TspanLineWrapper text={tick.value} width={25}/>                        
+                        <TspanLineWrapper text={tick.value} width={40}/>                        
                       </text>
                     </a>
                   </g>
