@@ -43,7 +43,7 @@ export class ShareModal extends React.Component {
       url,
       show,
     } = this.props;
-    const subject_string = subject.level === 'tag' ?
+    const subject_string = subject.level === 'tag' || subject.level === 'gov' ?
       subject.name :
       subject.level === 'dept' ? subject.acronym : `${subject.dept.acronym} - ${subject.name}` ;
 
