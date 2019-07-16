@@ -43,20 +43,20 @@ export class ShareModal extends React.Component {
       url,
       show,
     } = this.props;
-    
-    let acronym = subject.level === 'dept' ? subject.acronym : subject.id;
-    acronym = acronym == '' ? subject.name : acronym.toUpperCase();
+    const subject_string = subject.level === 'tag' ?
+      subject.level === 'dept' ? subject.acronym : `${subject.dept.acronym} - ${subject.name}` :
+      subject.name;
 
     return (
       <Modal show={show} onHide={() => toggleModal(false)}>
         <div onBlur={this.onBlur}>
           <Modal.Header>
             <Modal.Title style={{fontSize: '130%'}}><img src={get_static_url('./svg/shareGrey.svg')}/> {text_maker("share")}</Modal.Title>
-            <Modal.Title style={{fontSize: '100%', marginTop: '7px'}}>{acronym} — {title}</Modal.Title>
+            <Modal.Title style={{fontSize: '100%', marginTop: '7px'}}>{subject_string} — {title}</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
-            <FacebookShareButton className='share-icons' url={url} >
+            <FacebookShareButton className='share-icons' url={url}>
               <FacebookIcon size={32}></FacebookIcon>
             </FacebookShareButton> 
             <TwitterShareButton className='share-icons' url={url}>
