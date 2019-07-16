@@ -369,7 +369,7 @@ export class NivoResponsiveLine extends React.Component {
     };
   }
   render(){
-    const { 
+    const {
       data,
       is_money,
       raw_data,
@@ -397,6 +397,8 @@ export class NivoResponsiveLine extends React.Component {
       tooltip,
       markers,
       legends,
+      magnify_glass_translateX,
+      magnify_glass_translateY,
     } = this.props;
 
     const {
@@ -409,8 +411,8 @@ export class NivoResponsiveLine extends React.Component {
           <button
             style={{
               position: "absolute",
-              left: margin.left,
-              top: margin.top,
+              left: magnify_glass_translateX || margin.left,
+              top: magnify_glass_translateY || margin.top,
               marginLeft: "-7px",
               marginTop: "-30px",
               zIndex: 999,
