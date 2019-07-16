@@ -341,7 +341,7 @@ class DetailedProgramSplit extends React.Component {
     const so_label_list = [text_maker('all')];
     const markers = [];
     const tick_map = {};
-    const divHeight = 500;
+    const divHeight = 650;
     const colors = infobase_colors();
     const formatter = formats.compact1_raw;
     let legend_items;
@@ -387,9 +387,12 @@ class DetailedProgramSplit extends React.Component {
           axis: 'y',
           value: obj.label,
           lineStyle: {strokeWidth: 0},
-          textStyle: {fill: obj.total < 0 ? "red" : "black"},
+          textStyle: {
+            fill: obj.total < 0 ? "red" : "rgb(51,51,51)",
+            fontSize: '11px',
+          },
           legend: formatter(obj.total),
-          legendOffsetX: -70,
+          legendOffsetX: -60,
         },
         );
         return obj;
@@ -484,7 +487,7 @@ class DetailedProgramSplit extends React.Component {
                 top: 10,
                 right: 70,
                 bottom: 30,
-                left: 210,
+                left: 215,
               }}
               colorBy = {d => colors(d.id)}
               bttm_axis = {{
@@ -497,19 +500,19 @@ class DetailedProgramSplit extends React.Component {
                 tickSize: 5,
                 tickPadding: 5,
                 renderTick: tick => (
-                  <g key={tick.key} transform={`translate(${tick.x-95},${tick.y})`}>
+                  <g key={tick.key} transform={`translate(${tick.x-5},${tick.y+1.5})`}>
                     <a
                       href={tick_map[tick.value] ? infograph_href_template(tick_map[tick.value]) : null}
                       target="_blank" rel="noopener noreferrer"
                     >
                       <text
-                        textAnchor="middle"
-                        dominantBaseline="middle"
+                        textAnchor="end"
+                        dominantBaseline="end"
                         style={{
                           ...tick.theme.axis.ticks.text,
                         }}
                       >
-                        <TspanLineWrapper text={tick.value} width={40}/>                        
+                        <TspanLineWrapper text={tick.value} width={40}/>
                       </text>
                     </a>
                   </g>
