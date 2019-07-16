@@ -603,7 +603,8 @@ class BudgetMeasureHBars extends React.Component {
       selected_value;
 
     const breakdown_keys = _.chain(budget_values).keys().filter(k => k !== 'funding').value();
-    const keys_to_show = effective_selected_value === "funding_overview" ? breakdown_keys : [effective_selected_value];
+    const keys_to_show = effective_selected_value === "funding_overview" ? _.map(breakdown_keys, key => budget_values[key].text) : [budget_values[effective_selected_value].text];
+
 
     // text stuff
     const panel_text_args = {
@@ -753,9 +754,13 @@ class BudgetMeasureHBars extends React.Component {
       </div>;
     } else {
       const biv_value_colors = d3.scaleOrdinal().range(_.at(newIBLightCategoryColors, [0,2,4]));
-
       const nivo_default_props = {
-        data: data,
+        data: _.map(data,
+          measure => _.chain(measure)
+            .pick([... _.keys(budget_values), "name"])
+            .mapKeys((v,k) => k === "name" ? k : budget_values[k].text)
+            .value()
+        ),
         indexBy: "name",
         keys: keys_to_show,
         enableLabel: true,
@@ -793,7 +798,7 @@ class BudgetMeasureHBars extends React.Component {
             translateX: 0,
             translateY: -10,
             itemsSpacing: 2,
-            itemWidth: 100,
+            itemWidth: 200,
             itemHeight: 0,
             itemDirection: "left-to-right",
             symbolSize: 20,
