@@ -1,3 +1,5 @@
+#!/bin/bash
+set -e
 
 touch ./envs.yaml
 echo "SHOULD_USE_REMOTE_DB: '$SHOULD_USE_REMOTE_DB'" >> ./envs.yaml

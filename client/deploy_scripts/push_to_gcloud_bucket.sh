@@ -3,7 +3,7 @@
 
 set -e # will exit if any command has non-zero exit value
 
-source ../ci_scripts/redact_env_vars_from_logging.sh "redact-end"
+source ../ci_scripts/redact_env_vars_from_logging.sh "redact-start"
 
 # Prefering parallel processes over parallel threads, as per docs on usage of -j (bottle-necks on some un-thredable Python)
 # also set super short cache max-age values on everything, so we don't get stale content stuck in GCloud edge caches
