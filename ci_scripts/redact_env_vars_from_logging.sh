@@ -15,17 +15,21 @@ elif [[ ($1 == "unmute") ]] ; then
     env_names_file=$(mktemp -t env_names.XXXXXXXXXX)
     env_vals_file=$(mktemp -t env_vals.XXXXXXXXXX)
     env_map_file=$(mktemp -t env_vals.XXXXXXXXXX)
+    sorted_env_map_file=$(mktemp -t sorted_env_vals.XXXXXXXXXX)
 
     env | sed 's/=.*$//' > $env_names_file
     env | sed 's/^[^=]*=//' > $env_vals_file
 
     paste $env_vals_file $env_names_file > $env_map_file
 
-    env_map_length=$( cat $env_map_file | wc -l )
+    # sort the maping file by the length of the env var value, don't want to redact a sub-string of a longer env var by coincidence
+    awk -F $'\t' '{print $0" "length($2)}' $env_map_file | sort -k5,5rn | sed -e 's/ [0-9]*$//' > $sorted_env_map_file
+    
+    env_map_length=$( cat $sorted_env_map_file | wc -l )
 
     redacted_file=$(mktemp -t redacted_file.XXXXXXXXXX)
 
-    gawk -v map_length="${env_map_length}" -F $'\t' '
+    awk -v map_length="${env_map_length}" -F $'\t' '
       BEGIN {
         redacted_target_file = ""
       }
@@ -44,7 +48,7 @@ elif [[ ($1 == "unmute") ]] ; then
       END {
         print redacted_target_file
       }
-    ' $env_map_file $file_to_redact > $redacted_file
+    ' $sorted_env_map_file $file_to_redact > $redacted_file
 
     echo $redacted_file
   }
