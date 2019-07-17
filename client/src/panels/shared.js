@@ -451,12 +451,14 @@ export const TspanLineWrapper = ({text, width, line_height=1}) => <Fragment>
       .value()
   }
 </Fragment>;
-export const HeightClippedGraph = ({children}) => (
-  <HeightClipper clipHeight={185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
-    {children}
-  </HeightClipper>
-);
 
+export const HeightClippedGraph = ({clipHeight, children}) => {
+  return (
+    <HeightClipper clipHeight={clipHeight || 185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient gradient-strong"}>
+      {children}
+    </HeightClipper>
+  );
+};
 
 export const sum_a_tag_col = function sum_tag_col(tag, table, col){
   return _.chain(tag.programs)

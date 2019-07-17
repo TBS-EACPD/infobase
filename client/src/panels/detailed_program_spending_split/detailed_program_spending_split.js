@@ -16,6 +16,7 @@ import {
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
   TspanLineWrapper,
+  HeightClippedGraph,
 } from "../shared";
 
 const { std_years } = years; 
@@ -201,13 +202,15 @@ const footnote_topics = [ 'PROG', 'SOBJ' ];
               />
             </div>
             <div>
-              <HistoricalProgramBars
-                data={_.map(programSpending_data, ({label,data},ix) => ({
-                  label,
-                  data,
-                  id: `${ix}-${label}`, //need unique id, program names don't always work!
-                }))}
-              />
+              <HeightClippedGraph clipHeight={300}>
+                <HistoricalProgramBars
+                  data={_.map(programSpending_data, ({label,data},ix) => ({
+                    label,
+                    data,
+                    id: `${ix}-${label}`, //need unique id, program names don't always work!
+                  }))}
+                />
+              </HeightClippedGraph>
             </div>
           </div>
         </Panel>
@@ -388,7 +391,7 @@ class DetailedProgramSplit extends React.Component {
           value: obj.label,
           lineStyle: {strokeWidth: 0},
           textStyle: {
-            fill: obj.total < 0 ? "red" : "rgb(51,51,51)",
+            fill: obj.total < 0 ? window.infobase_color_constants.highlightColor : window.infobase_color_constants.textColor,
             fontSize: '11px',
           },
           legend: formatter(obj.total),
