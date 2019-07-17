@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 echo $GCLOUD_JSON_AUTH > ${HOME}/gcloud-service-key.json
 
 source ci_scripts/redact_env_vars_from_logging.sh "redact-start"
