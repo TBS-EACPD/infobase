@@ -621,7 +621,7 @@ class BudgetMeasureHBars extends React.Component {
           row.name,
           (row.__typename === "BudgetMeasure" ?
           row.chapter_key && BudgetMeasure.make_budget_link(row.chapter_key, row.ref_id) :
-          row.__typename === "dept" ? row.href : null
+          row.href
           ),
         ]
       )
