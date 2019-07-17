@@ -1,0 +1,54 @@
+#if [[ $CIRCLECI && $REDACT_LOGS && ($1 == "mute") ]] ; then
+if [[ ($1 == "mute") ]] ; then
+  stdout_file=$(mktemp -t stdout.XXXXXXXXXX)
+  stderr_file=$(mktemp -t stderr.XXXXXXXXXX)
+
+  exec 8>&1 9>&2 # save stdout and stderr by assigning them to 8 9
+  exec 1>$stdout_file 2>$stderr_file # redirect stdout and stderr to temp files
+#elif [[ $CIRCLECI && $REDACT_LOGS && ($1 == "unmute") ]] ; then
+elif [[ ($1 == "unmute") ]] ; then
+  exec 1>&8 2>&9 # restore stdout and stderr
+
+  redact_env_vars_from_file(){
+    file_to_redact=$1
+
+    env_names_file=$(mktemp -t env_names.XXXXXXXXXX)
+    env_vals_file=$(mktemp -t env_vals.XXXXXXXXXX)
+    env_map_file=$(mktemp -t env_vals.XXXXXXXXXX)
+
+    env | sed 's/=.*$//' > $env_names_file
+    env | sed 's/^[^=]*=//' > $env_vals_file
+
+    paste $env_vals_file $env_names_file > $env_map_file
+
+    env_map_length=$( cat $env_map_file | wc -l )
+
+    redacted_file=$(mktemp -t redacted_file.XXXXXXXXXX)
+
+    gawk -v map_length="${env_map_length}" -F $'\t' '
+      BEGIN {
+        redacted_target_file = ""
+      }
+      NR <= map_length {
+        patern_map[NR] = $1
+        replace_map[NR] = "**$"$2"**"
+      }
+     
+      NR > map_length {
+        for (i = 1; i <= map_length; i++){
+          gsub(patern_map[i], replace_map[i], $0) 
+        }
+        redacted_target_file = redacted_target_file"\n"$0
+      }
+     
+      END {
+        print redacted_target_file
+      }
+    ' $env_map_file $file_to_redact > $redacted_file
+
+    echo $redacted_file
+  }
+
+  cat $(redact_env_vars_from_file $stdout_file) >&1
+  cat $(redact_env_vars_from_file $stderr_file) >&2
+fi
