@@ -1,0 +1,98 @@
+@import "../common_css/common-variables";
+
+
+.advanced-search-panel {
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+}
+
+/* Panel extensions */
+.panel {
+    box-shadow: 0 0 transparent;
+  }
+  .panel.panel-overflow {
+    overflow: visible;
+  
+    & > .panel-body {
+      /* .panel has a border radius of 10px, if the overflow is visible we need to correct the the white rectangle that starts popping out */ 
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+  }
+  .panel-body > .row > .source {
+    opacity: 0.8;
+  }
+  
+  .panel-title {
+    margin: -0.25em 0 !important;
+    font-size: 18px;
+  }
+  
+  .panel-sub-title {
+    margin-top: 3px;
+    font-weight: 400;
+    opacity: 0.8;
+  }
+  
+  /* 
+    Fixes Safari-specific bug, does nothing on other browsers. 
+    Only needed on larger screens. 
+  */
+  .panel-body {
+    @media (min-width:1000px){
+      content: none!important;
+    }
+  
+    @media (max-width:1000px){
+      padding: 1rem; /* on mobile, we need way less padding */
+    }
+  }
+  
+  .panel-heading {
+    @media (min-width:1000px){
+      padding: 15px 15px; /* bootstrap default is 10 15 */
+    }
+    @media (max-width:1000px){
+      /* on mobile, we need way less padding */
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+  }
+  
+  .panel.panel-info.panel-flat {
+    margin-bottom: 23px;
+    background-color: $backgroundColor;
+    border-radius: 10px;
+    border: 2px solid $primaryColor;
+  }
+
+  .panel.panel-info.panel-flat > .panel-heading {
+    color: $backgroundColor;
+    background-color: $primaryColor;
+  }
+  
+  section.advanced-search-panel {
+    background-color: $secondaryColor;
+    border-radius: 10px;
+    border: 2px solid $secondaryColor;
+    overflow:hidden
+  }
+  
+  section.advanced-search-panel  > .advanced-search-panel-heading {
+    color: $backgroundColor;
+    background-color: inherit;
+    border: none;
+    display: inline-flex;
+    width: 100%;
+  }
+  
+  section.advanced-search-panel > .advanced-search-panel-body {
+    background-color: $backgroundColor;
+  }
+
+.panel-separator {
+  margin: 20px 60px 20px 60px;
+  border-top: 1px solid rgba($separatorColor, 0.5);
+}

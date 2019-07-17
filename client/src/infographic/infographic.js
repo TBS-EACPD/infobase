@@ -20,6 +20,7 @@ import {
   SpinnerWrapper,
   EverythingSearch,
 } from '../util_components.js';
+import { AdvancedSearch } from '../components/AdvancedSearch.js';
 
 import { infograph_href_template } from './routes.js';
 
@@ -117,8 +118,15 @@ class InfoGraph_ extends React.Component {
       subject: props.subject,
       bubble: props.bubble,
       level: props.level,
+      include_programs: true,
+      include_crsos: true,
+      include_tags: true,
     };
+    this.props = props;
+
+    this.handleCheckBox = this.handleCheckBox.bind(this);
   }
+
   static getDerivedStateFromProps(nextProps, prevState){
     if ( !shallowEqualObjectsOverKeys(nextProps, prevState, ['subject','bubble','level']) ){
       return {
@@ -154,6 +162,21 @@ class InfoGraph_ extends React.Component {
       }
     }
   }
+
+  handleCheckBox(bool, name){
+    switch (name) {
+      case 'programs': 
+        this.setState({include_programs: bool});
+        break;
+      case 'crsos': 
+        this.setState({include_crsos: bool});
+        break;
+      case 'tags': 
+        this.setState({include_tags: bool});
+        break;
+    }      
+  }
+
   render(){
     const { subject, bubble } = this.props;
     const { bubble_menu_loading, infographic_loading } = this.state;
@@ -176,10 +199,10 @@ class InfoGraph_ extends React.Component {
               href_template={subj => infograph_href_template(subj, bubble, true)}
               search_text={text_maker('subject_search_placeholder')}
               large={true}
-              include_tags={true}
-              include_programs={true}
+              include_tags={this.state.include_tags}
+              include_programs={this.state.include_programs}
               include_glossary={false}
-              include_crsos={true}
+              include_crsos={this.state.include_crsos}
               include_tables={false}
               org_scope="all_orgs_with_gov"
             />
@@ -212,6 +235,10 @@ class InfoGraph_ extends React.Component {
               </a>
             </div>
           </div>
+          
+          <AdvancedSearch handleCheckBox={this.handleCheckBox} />
+          
+        </div>
       }
       <div>
         <div style={{position: 'relative'}}>
