@@ -37,13 +37,13 @@ elif [[ $CIRCLECI && $REDACT_LOGS && ($1 == "redact-end") ]] ; then
         redacted_target_file = ""
       }
       NR <= map_length {
-        patern_map[NR] = $1
+        pattern_map[NR] = $1
         replace_map[NR] = "**$"$2"**"
       }
-     
+
       NR > map_length {
         for (i = 1; i <= map_length; i++){
-          gsub(patern_map[i], replace_map[i], $0) 
+          gsub(pattern_map[i], replace_map[i], $0) 
         }
         redacted_target_file = redacted_target_file"\n"$0
       }
