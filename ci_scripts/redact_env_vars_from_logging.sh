@@ -2,9 +2,15 @@ if [[ $CIRCLECI && $REDACT_LOGS && ($1 == "redact-start") ]] ; then
   stdout_file=$(mktemp -t stdout.XXXXXXXXXX)
   stderr_file=$(mktemp -t stderr.XXXXXXXXXX)
 
+  # if the shell as errexit set, turn it off temporarily (but remember it did so it can be re-set later)
+  # otherwise we'd be exiting without a chance to print anything, let alone something redacted
   if [[ $- =~ e ]]; then
     errexit_was_set=true
     set +e
+
+    # also, if errors should have exited, remember if anyone occured while we'd turned errexit off
+    an_error_occured=0
+    trap "an_error_occured=true" ERR
   else
     errexit_was_set=false
   fi
@@ -14,7 +20,7 @@ if [[ $CIRCLECI && $REDACT_LOGS && ($1 == "redact-start") ]] ; then
 elif [[ $CIRCLECI && $REDACT_LOGS && ($1 == "redact-end") ]] ; then
   exec 1>&8 2>&9 # restore stdout and stderr
 
-  redact_env_vars_from_file(){
+  function redact_env_vars_from_file(){
     file_to_redact=$1
 
     env_names_file=$(mktemp -t env_names.XXXXXXXXXX)
@@ -64,7 +70,7 @@ elif [[ $CIRCLECI && $REDACT_LOGS && ($1 == "redact-end") ]] ; then
   if [[ $errexit_was_set ]]; then
     set -e
 
-    if [[ -s $stderr_file ]]; then
+    if [[ $an_error_occured ]]; then
       exit 1
     fi
   fi
