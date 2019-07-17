@@ -615,15 +615,19 @@ class BudgetMeasureHBars extends React.Component {
       budget_data_source_date: budget_data_source_dates[selected_year],
       main_estimates_budget_link: main_estimates_budget_links[selected_year],
     };
-    const tick_map = {};
-    _.forEach(data, (row) => {
-      if(row.__typename === "BudgetMeasure"){
-        tick_map[row.name] = row.chapter_key && BudgetMeasure.make_budget_link(row.chapter_key, row.ref_id);
-      } else if(row.__typename === "dept"){
-        tick_map[row.name] = row.href;
-      }
-    });
-
+    const tick_map = _.chain(data)
+      .map(
+        (row) => [
+          row.name,
+          (row.__typename === "BudgetMeasure" ?
+          row.chapter_key && BudgetMeasure.make_budget_link(row.chapter_key, row.ref_id) :
+          row.__typename === "dept" ? row.href : null
+          ),
+        ]
+      )
+      .fromPairs()
+      .value();
+  
     const text_area = <div className = "frow" >
       <div className = "fcol-md-12 fcol-xs-12 medium_panel_text text">
         { subject.level === "gov" &&
