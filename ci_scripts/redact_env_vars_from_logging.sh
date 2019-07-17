@@ -1,12 +1,10 @@
-#if [[ $CIRCLECI && $REDACT_LOGS && ($1 == "mute") ]] ; then
-if [[ ($1 == "mute") ]] ; then
+if [[ $CIRCLECI && $REDACT_LOGS && ($1 == "redact-start") ]] ; then
   stdout_file=$(mktemp -t stdout.XXXXXXXXXX)
   stderr_file=$(mktemp -t stderr.XXXXXXXXXX)
 
   exec 8>&1 9>&2 # save stdout and stderr by assigning them to 8 9
   exec 1>$stdout_file 2>$stderr_file # redirect stdout and stderr to temp files
-#elif [[ $CIRCLECI && $REDACT_LOGS && ($1 == "unmute") ]] ; then
-elif [[ ($1 == "unmute") ]] ; then
+elif [[ $CIRCLECI && $REDACT_LOGS && ($1 == "redact-end") ]] ; then
   exec 1>&8 2>&9 # restore stdout and stderr
 
   redact_env_vars_from_file(){
