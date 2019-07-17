@@ -6,13 +6,16 @@ detailed_program_spending_split_title:
 
 so_spend_by_prog:
   transform: [handlebars]
-  en: Standard Object Spending by Program ({{pa_last_year}})
-  fr: Dépenses par article courant, par programmes ({{pa_last_year}})
+  en: |
+    {{gl_tt "Standard Object" "SOBJ"}} Spending by Program ({{pa_last_year}})
+  fr: |
+    Dépenses par {{gl_tt "article courant" "SOBJ"}}, par programmes ({{pa_last_year}})
 
 
 filter_by_so:
-  en: Filter by Standard Object
-  fr: Filtrer par article courant
+  transform: [handlebars]
+  en: Filter by {{gl_tt "Standard Object" "SOBJ"}}
+  fr: Filtrer par {{gl_tt "article courant" "SOBJ"}}
 
 other_sos:
   en: All Other Standard Objects

@@ -195,20 +195,20 @@ const footnote_topics = [ 'PROG', 'SOBJ' ];
           </div>
           <div>
             <div>
-              <DetailedProgramSplit
-                flat_data={flat_data}
-                arrangements={arrangements}
-                top_3_so_nums={top_3_so_nums}
+              <HistoricalProgramBars
+                data={_.map(programSpending_data, ({label,data},ix) => ({
+                  label,
+                  data,
+                  id: `${ix}-${label}`, //need unique id, program names don't always work!
+                }))}
               />
             </div>
             <div>
               <HeightClippedGraph clipHeight={300}>
-                <HistoricalProgramBars
-                  data={_.map(programSpending_data, ({label,data},ix) => ({
-                    label,
-                    data,
-                    id: `${ix}-${label}`, //need unique id, program names don't always work!
-                  }))}
+                <DetailedProgramSplit
+                  flat_data={flat_data}
+                  arrangements={arrangements}
+                  top_3_so_nums={top_3_so_nums}
                 />
               </HeightClippedGraph>
             </div>
