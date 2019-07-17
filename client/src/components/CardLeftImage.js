@@ -39,23 +39,6 @@ const CardLeftImage = ({
           }
         </div>
       </div>
-      <div className="left-img-card__right-container">
-        <div className="left-img-card__right">
-          <header className="left-img-card__title">
-            <TM k={title_key} tmf={tmf} args={text_args} />
-          </header>
-          <div className="left-img-card__text">
-            <TM k={text_key} tmf={tmf} args={text_args} />
-          </div>
-          <div className="left-img-card__bottom-right">
-            <a className="link-unstyled" href={link_href}>
-              <div tabIndex={0} className="left-img-card__badge">
-                <TM k={button_text_key} tmf={tmf} args={text_args} />
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
     </div>
   </a>
 );

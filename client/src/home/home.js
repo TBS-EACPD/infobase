@@ -78,7 +78,6 @@ const HomeLayout = props => (
     </div>
 
     <div className="container">
-    
       <div className="home-trinity-container">
         <div className="frow">
           <TrinityItem
@@ -97,28 +96,6 @@ const HomeLayout = props => (
             title={<TM k="home_results_title" />}
           />
         </div>
-      </div>
-      <div className="home-search-container">
-        <EverythingSearch 
-          include_gov={false} 
-          placeholder={home_tm('everything_search_placeholder')}
-          large={true}
-          include_tags={true}
-          include_programs={true}
-          include_crsos={true}
-          include_tables={true} 
-          include_glossary={true}
-          org_scope="all_orgs_with_gov"
-          href_template={ general_href_for_item }
-          onNewQuery={ query => { 
-            log_standard_event({
-              SUBAPP: "home",
-              SUBJECT_GUID: null, 
-              MISC1: "home_search",
-              MISC2: query,
-            });
-          }}
-        />
       </div>
       <div className="frow home-cols">
         <div className="fcol-md-7">
@@ -144,15 +121,32 @@ const HomeLayout = props => (
           </div>       
         </div>
         <div className="fcol-md-5">
-
-          <div className="subapps-link__container">
-            <CardTopImage
-              tmf={home_tm}
-              img_src={get_static_url("svg/tools.svg")}
-              title_key="subapps_title"
-              text_key="subapps_text"
-              link_href="#subapps"
-            />
+          <header className="h3 home-search-header">
+            <TM k="home_search_bar_title" />
+          </header> 
+          <div className="search-box">
+            <div className="search-container home-search-container">
+              <EverythingSearch 
+                include_gov={false} 
+                search_text={home_tm('everything_search_placeholder')}
+                large={true}
+                include_tags={true}
+                include_programs={true}
+                include_crsos={true}
+                include_tables={true} 
+                include_glossary={true}
+                org_scope="all_orgs_with_gov"
+                href_template={ general_href_for_item }
+                onNewQuery={ query => { 
+                  log_standard_event({
+                    SUBAPP: "home",
+                    SUBJECT_GUID: null, 
+                    MISC1: "home_search",
+                    MISC2: query,
+                  });
+                }}
+              />
+            </div>
           </div>
 
           <header className="h3">
@@ -163,12 +157,113 @@ const HomeLayout = props => (
               { _.map( props.featured_content_items, item => <FeaturedContentItem key={item.text_key} {...item} /> ) }
             </ul>
           </div>
-
-
         </div>
+      </div>
+    </div>
+
+    <div 
+      className="intro-box break-box" 
+      style={{
+        backgroundImage: `URL(${get_static_url("svg/backbanner.svg")})`,
+        paddingTop: "10px",
+        paddingBottom: "10px",
+        borderBottom: "0px",
+        borderTop: `10px solid ${window.infobase_color_constants.highlightColor}`,
+      }}
+    >
+      <div className="container">
+        <h1> <TM k="subapps_title" /> </h1>
+        <h2> <TM k="subapps_text" /> </h2>
+      </div>
+    </div>
+
+    <div className="container">
+      <div className="frow">
+        <SubAppLayout />
       </div>
     </div>
   </div>
 );
 
-
+const SubAppLayout = props => (
+  <div className="home-root">  
+    <div className="container">
+      <div className="xtralinks">
+        <div className='frow'>
+          <div className="fcol-md-3 linkcard">
+            <CardTopImage
+              tmf={home_tm}
+              img_src={get_static_url("svg/partition-icon.svg")}
+              title_key="partition_home_title"
+              text_key="partition_home_text"
+              link_href="#partition"
+            />
+          </div>
+          <div className="fcol-md-3 linkcard">
+            <CardTopImage
+              tmf={home_tm}
+              img_src={get_static_url("svg/partition-icon-budget.svg")}
+              title_key="budget_home_title"
+              text_key="budget_home_text"
+              link_href="#budget-tracker"
+            />
+          </div>
+          <div className="fcol-md-3 linkcard">
+            <CardTopImage
+              tmf={home_tm}
+              img_src={get_static_url("svg/compare-estimates.svg")}
+              title_key="estimates_comp_home_title"
+              text_key="estimates_comp_home_text"
+              link_href="#compare_estimates"
+            />
+          </div>
+          <div className="fcol-md-3 linkcard">
+            <CardTopImage
+              tmf={home_tm}
+              img_src={get_static_url("svg/structure.svg")}
+              title_key="igoc_home_title"
+              text_key="igoc_home_desc"
+              link_href="#igoc"
+            />
+          </div>
+          <div className="fcol-md-3 linkcard">
+            <CardTopImage
+              tmf={home_tm}
+              img_src={get_static_url("svg/treemap.svg")}
+              title_key="treemap_home_title"
+              text_key="treemap_home_text"
+              link_href="#treemap"
+            />
+          </div>
+          <div className="fcol-md-3 linkcard">
+            <CardTopImage
+              tmf={home_tm}
+              img_src={get_static_url("svg/explorer.svg")}
+              title_key="explorer_home_title"
+              text_key="explorer_home_text"
+              link_href="#resource-explorer"
+            />
+          </div>
+          <div className="fcol-md-3 linkcard">
+            <CardTopImage
+              tmf={home_tm}
+              img_src={get_static_url("svg/builder.svg")}
+              title_key="home_build_a_report"
+              text_key="report_builder_home_desc"
+              link_href="#rpb"
+            />
+          </div>
+          <div className="fcol-md-3 linkcard">
+            <CardTopImage
+              tmf={home_tm}
+              img_src={get_static_url("svg/lab.svg")}
+              title_key="lab_home_title"
+              text_key="lab_home_text"
+              link_href="#lab"
+            />
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+);
