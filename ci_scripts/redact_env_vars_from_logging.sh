@@ -2,9 +2,11 @@ if [[ $CIRCLECI && $REDACT_LOGS && ($1 == "redact-start") ]] ; then
   stdout_file=$(mktemp -t stdout.XXXXXXXXXX)
   stderr_file=$(mktemp -t stderr.XXXXXXXXXX)
 
-  errexit_was_set=$([[ $- =~ e ]])
-  if $errexit_was_set; then
+  if [[ $- =~ e ]]; then
+    errexit_was_set=true
     set +e
+  else
+    errexit_was_set=false
   fi
 
   exec 8>&1 9>&2 # save stdout and stderr by assigning them to 8 9
@@ -56,10 +58,10 @@ elif [[ $CIRCLECI && $REDACT_LOGS && ($1 == "redact-end") ]] ; then
     echo $redacted_file
   }
 
-  cat $(redact_env_vars_from_file $stdout_file) >&1
-  cat $(redact_env_vars_from_file $stderr_file) >&2
+  wait $(cat $(redact_env_vars_from_file $stdout_file) >&1)
+  wait $(cat $(redact_env_vars_from_file $stderr_file) >&2)
 
-  if [[ errexit_was_set ]]; then
+  if [[ $errexit_was_set ]]; then
     set -e
 
     if [[ -s $stderr_file ]]; then
