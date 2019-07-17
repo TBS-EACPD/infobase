@@ -12,10 +12,8 @@ import {
   LabeledBox, 
 } from '../util_components.js';
 import { Details } from '../components/Details.js';
-import { StackedHbarChart, GraphLegend } from '../charts/declarative_charts.js';
 import { rpb_link } from './rpb_link.js';
 import { Subject } from '../models/subject.js';
-import { formats } from '../core/format.js';
 
 const { Gov, Dept } = Subject;
 
@@ -35,8 +33,6 @@ class SimpleView extends React.Component {
       columns,
 
       flat_data,
-      canGraph,
-      shouldGraph,
       all_data_columns,
       deptBreakoutMode,
       dimensions, 
@@ -45,7 +41,6 @@ class SimpleView extends React.Component {
       on_set_dimension,
       on_set_filter,
       on_toggle_col_nick,
-      on_toggle_preferTable,
       on_toggle_deptBreakout,
     } = this.props;
     return (
@@ -77,23 +72,6 @@ class SimpleView extends React.Component {
                         disabled={subject!==Gov}
                         checked={deptBreakoutMode}
                         onChange={on_toggle_deptBreakout}
-                        style={{ marginLeft: '15px' }}
-                      />
-                    </label>
-                  </div>
-                }
-                {!window.is_a11y_mode &&
-                  <div className="rpb-config-item">
-                    <label 
-                      className="rpb-config-header" 
-                      htmlFor='display_as' 
-                    > 
-                      <TextMaker text_key="display_as_table" />
-                      <input 
-                        type="checkbox"
-                        disabled={!canGraph}
-                        checked={!shouldGraph}
-                        onChange={on_toggle_preferTable}
                         style={{ marginLeft: '15px' }}
                       />
                     </label>
@@ -171,14 +149,6 @@ class SimpleView extends React.Component {
             _.isEmpty(flat_data) ? 
             <NoDataMessage />
             : ( 
-              shouldGraph ?
-              <div 
-                className="graph_report"
-                tabIndex={0}
-                aria-label={text_maker('please_use_table_option_a11y')}
-              >
-                { this.get_graph_content() }
-              </div> :
               this.get_table_content()
             )
           }
@@ -188,7 +158,6 @@ class SimpleView extends React.Component {
   } 
   get_table_content(){
     const {
-      table,
       dimension,   
       columns,
       sort_col,
@@ -281,111 +250,6 @@ class SimpleView extends React.Component {
         </tbody>
       </table>
     );
-    
-
-  }
-  get_graph_content(){
-    const {
-      filter,
-      deptBreakoutMode,
-      columns,
-      flat_data,
-      graph_data: data,
-      table,
-    } = this.props;
-
-
-    const [ column ] = columns;
-
-
-    const shouldShowLegend = deptBreakoutMode && filter === text_maker('all');
-
-    const colors = ( 
-      shouldShowLegend ? 
-      infobase_colors() : 
-      _.constant(window.infobase_color_constants.primaryColor)
-    );
-
-    const total = column.formula(flat_data);
-    const num_format_type = column.type;
-
-    const data_with_links = _.map(data, record => ({
-      href: (
-        deptBreakoutMode ? 
-        granular_rpb_link_for_org(this.props, record.subject ) :
-        granular_rpb_link_for_filter(this.props, record.label )
-      ), 
-      ...record,
-    }));
-
-    return (
-      <div className="fcontainer">
-        <div className="mrgn-tp-md frow">
-          <div className="fcol-md-6 fcol-xs-12">
-            <div className="graph_total_and_col_expl legend-container well">
-              <dl> 
-                <dt className="rpb-separator"> 
-                  <div className="rpb-config-header">
-                    <TextMaker text_key="showing_numbers_for_col" /> 
-                  </div>
-                </dt> 
-                <dd>
-                  <strong> {column.fully_qualified_name} </strong> (<span dangerouslySetInnerHTML={{__html: table.column_description(column.nick)}} />)
-                </dd>
-
-                <dt className="rpb-separator"> 
-                  <div className="rpb-config-header">
-                    <TextMaker text_key="graph_total" el="span" /> 
-                  </div>
-                </dt> 
-                <dd>
-                  <strong><Format type={num_format_type} content={total} /></strong>
-                </dd>
-              </dl>
-            </div>
-          </div>
-          <div className="fcol-md-6 fcol-xs-12">
-            { shouldShowLegend && 
-            <div id="rpb_graph_legend">
-              <div className="legend-container">
-                <div className="mrgn-bttm-0 mrgn-tp-0 nav-header">
-                  <TextMaker text_key='legend' />
-                </div>
-                <GraphLegend 
-                  items={
-                    _.chain(data)
-                      .map( _.property('data') )
-                      .flatten()
-                      .map(_.property('label'))
-                      .uniqBy()
-                      .map( label => ({
-                        id: label,
-                        label,
-                        color: colors(label),
-                        active: true,
-                      }))
-                      .value()
-                  }
-                  isHorizontal={false}
-                />
-              </div>
-            </div>
-            }
-          </div>
-        </div>
-
-        <div style={{position: 'relative'}}>
-          <StackedHbarChart
-            font_size="14px"
-            bar_height={50} 
-            data={data_with_links}
-            formatter={formats[num_format_type]}
-            colors={colors}
-          />
-        </div>
-      </div>
-    );
-
   }
 }
 

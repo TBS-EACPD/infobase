@@ -82,10 +82,6 @@ show_dept_breakout:
   en: Show a breakdown by organization
   fr: Afficher une répartition par organisation
 
-display_as_table:
-  en: Display as table
-  fr: Présenté comme un tableau
-
 dimension:
   en: Dimension
   fr: Dimension
@@ -123,27 +119,9 @@ see_all_data:
   en: All Government of Canada {{#if selected}} (selected) {{/if}}
   fr: Tout le gouvernement {{#if selected}} (sélectionné) {{/if}}
 
-display_a11y_table:
-  en: Display Plain Table
-  fr: Montrer une table
-
-display_as_grid:
-  en: Display as Grid
-  fr: Montrer une grille
-
-showing_numbers_for_col:
-  en: Currently presented column 
-  fr: Colonne présentement affichée
-
-graph_total:
-  en: Graph total
-  fr: Total du graphique
-
 export:
   en: Export
   fr: Exporter
-
-
 
 ### Table Picker text
 
