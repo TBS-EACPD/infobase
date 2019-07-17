@@ -499,6 +499,7 @@ class BudgetMeasureHBars extends React.Component {
               return false; // fake dept code case, "to be allocated" funds etc.
             } else {
               const summed = {
+                __typename: dept.level,
                 key: org_id,
                 name: dept.name,
                 href: infograph_href_template(dept, "financial"),
@@ -615,8 +616,12 @@ class BudgetMeasureHBars extends React.Component {
       main_estimates_budget_link: main_estimates_budget_links[selected_year],
     };
     const tick_map = {};
-    _.forEach(data, (budget_measure) => {
-      tick_map[`${budget_measure.name}`] = budget_measure.chapter_key && BudgetMeasure.make_budget_link(budget_measure.chapter_key, budget_measure.ref_id);
+    _.forEach(data, (row) => {
+      if(row.__typename === "BudgetMeasure"){
+        tick_map[row.name] = row.chapter_key && BudgetMeasure.make_budget_link(row.chapter_key, row.ref_id);
+      } else if(row.__typename === "dept"){
+        tick_map[row.name] = row.href;
+      }
     });
 
     const text_area = <div className = "frow" >
