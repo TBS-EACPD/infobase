@@ -5,14 +5,14 @@ if [[ $CIRCLECI && $REDACT_LOGS && ($1 == "redact-start") ]] ; then
   # if the shell as errexit set, turn it off temporarily (but remember it did so it can be re-set later)
   # otherwise we'd be exiting without a chance to print anything, let alone something redacted
   if [[ $- =~ e ]]; then
-    errexit_was_set=true
+    errexit_was_set=1
     set +e
 
     # also, if errors should have exited, remember if anyone occured while we'd turned errexit off
     an_error_occured=0
-    trap "an_error_occured=true" ERR
+    trap "an_error_occured=1" ERR
   else
-    errexit_was_set=false
+    errexit_was_set=0
   fi
 
   exec 8>&1 9>&2 # save stdout and stderr by assigning them to 8 9
@@ -67,10 +67,10 @@ elif [[ $CIRCLECI && $REDACT_LOGS && ($1 == "redact-end") ]] ; then
   wait $(cat $(redact_env_vars_from_file $stdout_file) >&1)
   wait $(cat $(redact_env_vars_from_file $stderr_file) >&2)
 
-  if [[ $errexit_was_set ]]; then
+  if [[ $errexit_was_set == 1 ]]; then
     set -e
 
-    if [[ $an_error_occured ]]; then
+    if [[ $an_error_occured == 1 ]]; then
       exit 1
     fi
   fi
