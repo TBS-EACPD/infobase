@@ -6,6 +6,11 @@ const featured_content_items = _.compact([
     is_new: true,
   },
   {
+    text_key: 'quick_link_infolab',
+    href: '#lab',
+    is_new: true,
+  },
+  {
     text_key: 'quick_link_budget_2019',
     href: '#budget-tracker/budget-measure/overview/budget-2019',
   },
