@@ -22,7 +22,9 @@ const EverythingSearch = withRouter(
       const {
         href_template,
         onNewQuery,
-        include_tags,
+        include_tags_goco,
+        include_tags_hwh,
+        include_tags_hi,
         include_tables,
         include_programs,
         include_glossary,
@@ -48,15 +50,16 @@ const EverythingSearch = withRouter(
     
       const search_configs = _.compact([
         org_search_config,
-        include_tags ? goco_search_config : null, 
-        include_tags ? hwh_search_config : null,
-        include_tags ? horizontal_initiative_config : null,
+        include_tags_goco ? goco_search_config : null, 
+        include_tags_hwh ? hwh_search_config : null,
+        include_tags_hi ? horizontal_initiative_config : null,
         include_crsos ? crso_search_config : null,
         include_programs ? program_search_config : null, 
         include_tables ? table_search_config : null,
         include_glossary ? glossary_lite_search_config : null,
       ]);
       
+      console.log(search_configs);
       return <BaseTypeahead
         onNewQuery = { onNewQuery }
         placeholder = { this.props.placeholder || trivial_text_maker('everything_search_placeholder') }
@@ -67,5 +70,11 @@ const EverythingSearch = withRouter(
     }
   }
 );
+
+EverythingSearch.defaultProps = {
+  include_tags_goco: true,
+  include_tags_hwh: true,
+  include_tags_hi: true,
+};
 
 export { EverythingSearch };
