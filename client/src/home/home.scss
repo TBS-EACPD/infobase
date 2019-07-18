@@ -57,6 +57,10 @@
   @media(min-width:1024px) {
     width: 95%;
   }
+
+  &:hover, &:focus {
+    background-color: lighten( $secondaryColor, 10% )
+  }
 }
 
 .frow.home-cols > .fcol-md-5 {

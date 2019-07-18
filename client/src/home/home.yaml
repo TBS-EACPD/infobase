@@ -80,8 +80,8 @@ estimates_comp_home_text:
   fr: Voir comment le plan de dépenses supplémentaire du gouvernement compare à leur plan principal
 
 featured_data_title:
-  en: Quick links
-  fr: Liens directs
+  en: Featured Content
+  fr: Contenu en vedette
 
 explorer_home_title: 
   en: Tag Explorer
@@ -176,6 +176,10 @@ lab_home_text:
   fr: Outils de version "beta" et jouets de données amusants
 
 ## Featured content titles
+
+quick_link_infolab:
+  en: InfoLab
+  fr: InfoLab
 
 quick_link_people_2019:
   en: March 2019 Employee Headcounts and Demographics
