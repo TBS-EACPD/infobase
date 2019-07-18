@@ -120,7 +120,9 @@ class InfoGraph_ extends React.Component {
       level: props.level,
       include_programs: true,
       include_crsos: true,
-      include_tags: true,
+      include_tags_goco: true,
+      include_tags_hwh: true,
+      include_tags_hi: true,
     };
     this.props = props;
 
@@ -172,7 +174,20 @@ class InfoGraph_ extends React.Component {
         this.setState({include_crsos: bool});
         break;
       case 'tags': 
-        this.setState({include_tags: bool});
+        this.setState({
+          include_tags_goco: bool,
+          include_tags_hwh: bool,
+          include_tags_hi: bool,
+        });
+        break;
+      case 'goco':
+        this.setState({include_tags_goco: bool});
+        break;
+      case 'hwh':
+        this.setState({include_tags_hwh: bool});
+        break;
+      case 'hi':
+        this.setState({include_tags_hi: bool});
         break;
     }      
   }
@@ -199,7 +214,9 @@ class InfoGraph_ extends React.Component {
               href_template={subj => infograph_href_template(subj, bubble, true)}
               search_text={text_maker('subject_search_placeholder')}
               large={true}
-              include_tags={this.state.include_tags}
+              include_tags_goco={this.state.include_tags_goco}
+              include_tags_hwh={this.state.include_tags_hwh}
+              include_tags_hi={this.state.include_tags_hi}
               include_programs={this.state.include_programs}
               include_glossary={false}
               include_crsos={this.state.include_crsos}
