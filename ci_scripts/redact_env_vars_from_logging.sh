@@ -23,18 +23,22 @@ elif [[ $CIRCLECI && $REDACT_LOGS && ($1 == "redact-end") ]] ; then
   function redact_env_vars_from_file(){
     file_to_redact=$1
 
+    filtered_env_file=$(mktemp -t env.XXXXXXXXXX)
     env_names_file=$(mktemp -t env_names.XXXXXXXXXX)
     env_vals_file=$(mktemp -t env_vals.XXXXXXXXXX)
     env_map_file=$(mktemp -t env_vals.XXXXXXXXXX)
     sorted_env_map_file=$(mktemp -t sorted_env_vals.XXXXXXXXXX)
 
-    env | sed 's/=.*$//' > $env_names_file
-    env | sed 's/^[^=]*=//' > $env_vals_file
+    env_whitelist_pattern="(CI|CIRCLECI|CIRCLE_BRANCH|CIRCLE_BUILD_NUM|CIRCLE_BUILD_URL|CIRCLE_COMPARE_URL|CIRCLE_JOB|CIRCLE_NODE_INDEX|CIRCLE_NODE_TOTAL|CIRCLE_PREVIOUS_BUILD_NUM|CIRCLE_PROJECT_REPONAME|CIRCLE_PROJECT_USERNAME|CIRCLE_REPOSITORY_URL|CIRCLE_SHA1|CIRCLE_SHELL_ENV|CIRCLE_STAGE|CIRCLE_USERNAME|CIRCLE_WORKFLOW_ID|CIRCLE_WORKFLOW_JOB_ID|CIRCLE_WORKFLOW_UPSTREAM_JOB_IDS|CIRCLE_WORKFLOW_WORKSPACE_ID|CIRCLE_WORKING_DIRECTORY|SHLVL)"
+    env | grep -Eov "^[^$env_whitelist_pattern]=" > $filtered_env_file
+
+    cat $filtered_env_file | sed 's/=.*$//' > $env_names_file
+    cat $filtered_env_file | sed 's/^[^=]*=//' > $env_vals_file
 
     paste $env_vals_file $env_names_file > $env_map_file
 
     # sort the maping file by the length of the env var value, don't want to redact a sub-string of a longer env var by coincidence
-    awk -F $'\t' '{print $0""$'\t'""length($2)}' $env_map_file | sort -k3rn | sed -e 's/ [0-9]*$//' > $sorted_env_map_file
+    awk -F $'\t' '{print $0"\t"length($2)}' $env_map_file | sort -k3rn | sed -e 's/ [0-9]*$//' > $sorted_env_map_file
     
     env_map_length=$( cat $sorted_env_map_file | wc -l )
 
@@ -44,6 +48,7 @@ elif [[ $CIRCLECI && $REDACT_LOGS && ($1 == "redact-end") ]] ; then
       BEGIN {
         redacted_target_file = ""
       }
+
       NR <= map_length {
         pattern_map[NR] = $1
         replace_map[NR] = "**$"$2"**"
