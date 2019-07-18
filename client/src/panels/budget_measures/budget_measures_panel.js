@@ -865,12 +865,7 @@ class BudgetMeasureHBars extends React.Component {
                     display: name,
                   })
                 )}
-                onSelect = { id => {
-                  this.setState({
-                    selected_grouping: id,
-                    selected_value: value_options[0],
-                  });
-                } }
+                onSelect = { id => this.setState({selected_grouping: id}) }
                 className = "form-control"
                 style = {{padding: "5px"}}
               />
@@ -913,3 +908,4 @@ class BudgetMeasureHBars extends React.Component {
     }
   }
 }
+ 
