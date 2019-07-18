@@ -433,9 +433,7 @@ class BudgetMeasureHBars extends React.Component {
         ])
         .value();
 
-    const valid_selected_value = valid_selected_grouping === "programs" ?
-      value_options[0].id : // don't update value state when switching to programs grouping, so that value isn't forced to allocated when users switch back to other groupings
-      _.filter(value_options, value_option => value_option.id === selected_value).length === 1 ?
+    const valid_selected_value = _.filter(value_options, value_option => value_option.id === selected_value).length === 1 ?
         selected_value :
         value_options[0].id;
 
@@ -599,13 +597,8 @@ class BudgetMeasureHBars extends React.Component {
     // graph stuff
     const formatter = formats.compact1_raw;
 
-    const effective_selected_value = selected_grouping === "programs" ?
-      'allocated' :
-      selected_value;
-
     const breakdown_keys = _.chain(budget_values).keys().filter(k => k !== 'funding').value();
-    const keys_to_show = effective_selected_value === "funding_overview" ? _.map(breakdown_keys, key => budget_values[key].text) : [budget_values[effective_selected_value].text];
-
+    const keys_to_show = selected_value === "funding_overview" ? breakdown_keys : [selected_value];
 
     // text stuff
     const panel_text_args = {
@@ -876,7 +869,7 @@ class BudgetMeasureHBars extends React.Component {
               </label>
               <Select 
                 name = 'select_value'
-                selected = {effective_selected_value}
+                selected = {selected_value}
                 options = {_.map(value_options, 
                   ({name, id}) => ({ 
                     id,
