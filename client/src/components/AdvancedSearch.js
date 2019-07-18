@@ -16,25 +16,31 @@ export class AdvancedSearch extends React.Component {
       loading: true,
       checkedItems: new Map(),
     };
-
-    this.divRef = React.createRef();
-    
   }
 
   componentDidMount(){
     this.setState({loading: false});
   }
 
-  toggleOpen() {
-    let content = this.panelRef;
-    content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + 'px';
+  hnadleSubTag(e) {
+    this.handleChange(e);
+    const checkedCount = document.querySelectorAll('input.sub-tag-checkbox:checked').length;
+    this.setState(prevState => ({checkedItems: prevState.checkedItems.set('tags', checkedCount > 0)}));
   }
 
   handleChange(e) {
     const item = e.target.name;
     const isChecked = e.target.checked;
     this.setState(prevState => ({ checkedItems: prevState.checkedItems.set(item, isChecked) }));
-    this.props.handleCheckBox(e.target.checked, e.target.name);
+    this.props.handleCheckBox(isChecked, item);
+
+
+    if (item === 'tags') {
+      const subTags = document.querySelectorAll('input.sub-tag-checkbox');
+      subTags.forEach((subTags) => {
+        this.setState(prevState => ({checkedItems: prevState.checkedItems.set(subTags.name, isChecked)}));
+      });
+    }
   }
 
   render() {
@@ -56,10 +62,31 @@ export class AdvancedSearch extends React.Component {
       },
     ];
 
-    const Checkbox = ({label, name, onChange, checked = true}) => (
+    const subTags = [
+      {
+        name: 'goco',
+        key: 'checkBox1',
+        label: ' GOCO',
+        className: 'sub-tag-checkbox',
+      },
+      {
+        name: 'hwh',
+        key: 'checkBox2',
+        label: ' How We Help',
+        className: 'sub-tag-checkbox',
+      },
+      {
+        name: 'hi',
+        key: 'checkBox3',
+        label: ' Horizontal Iniatives',
+        className: 'sub-tag-checkbox',
+      },
+    ];
+
+    const Checkbox = ({label, name, onChange, checked = true, className}) => (
       <div className="checkbox">
         <label>
-          <input type={'checkbox'} name={name} checked={checked} onChange={onChange} />
+          <input type={'checkbox'} name={name} checked={checked} onChange={onChange} className={className} />
           {label}
         </label>
       </div>
@@ -70,13 +97,13 @@ export class AdvancedSearch extends React.Component {
         <div className='col-md-4' >
           <button 
             className="btn-lg btn btn-ib-primary btn-block"
-            onClick={() => this.toggleOpen()}>
+            onClick={() => this.setState({open: !this.state.open})}>
           Advanced Search
           </button>
           <br />
         </div>
-        <div className='col-md-12' >
-          <section className='panel advanced-search-panel panel-info mrgn-bttm-md' ref={e => this.panelRef = e}>
+        <div className="col-md-12">
+          <section className={`panel panel-info mrgn-bttm-md advanced-search-panel advanced-search-panel-open--${this.state.open}`}>
             <header className='panel-heading'>
               <header className="panel-title"> Advanced Search </header>
             </header>
@@ -88,14 +115,30 @@ export class AdvancedSearch extends React.Component {
                   {
                     checkboxes.map(item => (
                       <Checkbox
-                        key = {item.key} 
+                        key={item.key}
                         name={item.name} 
                         label={item.label}
                         checked={this.state.checkedItems.get(item.name)}
                         onChange={(e) => this.handleChange(e)}
-                      />    
+                      />  
                     ))
                   }
+                  <ul style={{listStyle: 'none'}}>
+                    {
+                      subTags.map(item => (
+                        <li key={item.key}>
+                          <Checkbox
+                            key={item.key}
+                            name={item.name} 
+                            label={item.label}
+                            checked={this.state.checkedItems.get(item.name)}
+                            onChange={(e) => this.hnadleSubTag(e)}
+                            className={item.className}
+                          /> 
+                        </li>
+                      ))
+                    }
+                  </ul>
                 </Fragment>
               </div>
             </div>
