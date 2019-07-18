@@ -1,0 +1,16 @@
+@import "../common_css/common-variables";
+
+
+a.nav-item {
+    color: $textColor !important;
+    &:hover {
+      color: $tertiaryColor !important;
+    }
+  }
+
+a.nav-item > svg path.svg-fill {
+    fill: $textColor;
+}
+a.nav-item:hover > svg path.svg-fill {
+    fill: $tertiaryColor;
+}

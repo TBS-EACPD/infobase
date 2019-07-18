@@ -6,6 +6,8 @@ import { index_lang_lookups } from '../InfoBase/index_data.js';
 import classNames from 'classnames';
 import { trivial_text_maker } from '../models/text.js';
 import { get_static_url } from '../request_utils.js';
+import { IconHome } from '../icons/icons.js';
+import './NavComponents.scss';
 
 
 const { page_title: default_title, meta_description: default_description } = index_lang_lookups;
@@ -62,13 +64,8 @@ class BreadCrumbs extends React.Component {
     const content = (
       <ol className="breadcrumb">
         <li className="infobase-home-breadcrumb-link">
-          <a href="#start">
-            <img
-              className="mrgn-rght-sm"
-              title="InfoBase"
-              style={{width: "20px", height: "20px", verticalAlign: "-4px"}}
-              src={get_static_url("svg/home-icon.svg")} 
-            />
+          <a href="#start" className="nav-item">
+            <IconHome title={trivial_text_maker("title")} class_name="nav-item"/>
             InfoBase 
           </a>
         </li>

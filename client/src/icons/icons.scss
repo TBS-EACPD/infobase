@@ -1,0 +1,17 @@
+
+
+.icon--svg-inline {
+  display: inline-block;
+  font-size: inherit;
+  height: 1.2em;
+  overflow: visible;
+  vertical-align: -.125em;
+}
+
+.icon--dark-icon {
+  fill: red;
+
+  &:hover {
+    fill: blue;
+  }
+}
