@@ -39,7 +39,7 @@ elif [[ $CIRCLECI && $REDACT_LOGS && ($1 == "redact-end") ]] ; then
     paste $env_vals_file $env_names_file > $env_map_file
 
     # sort the maping file by the length of the env var values, don't want to only redact a sub-string of a longer env var by coincidence
-    awk -F $'\t' '{print $0"\t"length($2)}' $env_map_file | sort -k3rn | sed -E 's/\t[0-9]*$//' > $sorted_env_map_file
+    awk -F $'\t' '{print $0"\t"length($1)}' $env_map_file | sort -k3rn | sed -E 's/\t[0-9]*$//' > $sorted_env_map_file
     
     env_map_length=$( cat $sorted_env_map_file | wc -l )
 
