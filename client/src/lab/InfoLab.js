@@ -28,7 +28,7 @@ export default class InfoLab extends React.Component {
         beta={true}
       >
         <TM k="lab_title" el="h1" />
-        <div>
+        <div className="medium_panel_text">
           <TM k="lab_intro_text"/>
         </div>
         <div>
