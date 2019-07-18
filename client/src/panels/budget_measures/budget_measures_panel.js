@@ -390,7 +390,7 @@ class BudgetMeasureHBars extends React.Component {
     const {
       selected_grouping,
       selected_value,
-    } = state; 
+    } = state;
 
     const data = get_data(selected_year);
     const info = get_info(data, subject); 
@@ -434,7 +434,7 @@ class BudgetMeasureHBars extends React.Component {
         .value();
 
     const valid_selected_value = valid_selected_grouping === "programs" ?
-      selected_value : // don't update value state when switching to programs grouping, so that value isn't forced to allocated when users switch back to other groupings
+      value_options[0].id : // don't update value state when switching to programs grouping, so that value isn't forced to allocated when users switch back to other groupings
       _.filter(value_options, value_option => value_option.id === selected_value).length === 1 ?
         selected_value :
         value_options[0].id;
@@ -847,7 +847,7 @@ class BudgetMeasureHBars extends React.Component {
       nivo_mobile_props.legends[0].translateX = -100;
       nivo_mobile_props.legends[0].translateY = -70;
       nivo_mobile_props.legends[0].itemHeight = 20;
-      
+
       return (
         <Fragment>
           {text_area}
@@ -865,7 +865,12 @@ class BudgetMeasureHBars extends React.Component {
                     display: name,
                   })
                 )}
-                onSelect = { id => this.setState({selected_grouping: id}) }
+                onSelect = { id => {
+                  this.setState({
+                    selected_grouping: id,
+                    selected_value: value_options[0],
+                  });
+                } }
                 className = "form-control"
                 style = {{padding: "5px"}}
               />
