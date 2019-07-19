@@ -175,9 +175,6 @@ approp_by_auth:
 authorities:
   en: Authorities
   fr: Autorisations
-unused_authorities:
-  en: Unused Authorities
-  fr: Autorisations non-dépensées
 item:
   en: Item
   fr: Poste
