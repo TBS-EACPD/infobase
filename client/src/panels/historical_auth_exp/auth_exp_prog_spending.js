@@ -74,26 +74,6 @@ const render = function({calculations, footnotes, sources}) {
     [text_maker("expenditures"), text_maker("authorities"), text_maker("planned_spending")]
   );
 
-  if( subject.is("gov") ){
-    const gov_avg_planned_exp_hist_exp_pct = info.gov_planned_exp_average / info.gov_five_year_exp_average;
-    if(gov_avg_planned_exp_hist_exp_pct > 1){
-      additional_info['gov_avg_pct_change_text'] = text_maker("increase");
-      additional_info['gov_avg_planned_exp_hist_exp_pct'] = gov_avg_planned_exp_hist_exp_pct - 1;
-    } else{
-      additional_info['gov_avg_pct_change_text'] = text_maker("decrease");
-      additional_info['gov_avg_planned_exp_hist_exp_pct'] = 1 - gov_avg_planned_exp_hist_exp_pct;
-    }
-  } else if( subject.is("dept") ){
-    const dept_avg_planned_exp_hist_exp_pct = info.dept_planned_exp_average / info.dept_five_year_exp_average;
-    if(dept_avg_planned_exp_hist_exp_pct > 1){
-      additional_info['dept_avg_pct_change_text'] = text_maker("increase");
-      additional_info['dept_avg_planned_exp_hist_exp_pct'] = dept_avg_planned_exp_hist_exp_pct - 1;
-    } else{
-      additional_info['dept_avg_pct_change_text'] = text_maker("decrease");
-      additional_info['dept_avg_planned_exp_hist_exp_pct'] = 1 - dept_avg_planned_exp_hist_exp_pct;
-    }
-  }
-
   if(gap_year){
     additional_info['last_history_year'] = _.last(history_ticks);
     additional_info['last_planned_year'] = _.last(plan_ticks);

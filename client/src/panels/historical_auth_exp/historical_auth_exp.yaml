@@ -33,15 +33,17 @@ auth_exp_prog_spending_title:
 gov_auth_exp_prog_spending_body:
   transform: [handlebars, markdown]
   en: |
-    In the past 5 years, the government has spent an average of **{{fmt_compact1_written gov_five_year_exp_average}}** of the authorized **{{fmt_compact1_written gov_five_year_auth_average}}**.
-    On average, next 3 years of planned spending will **{{two_value_change_to gov_five_year_exp_average gov_planned_exp_average "fmt_compact1_written" "to" "present"}}** over the last 5 years of expenditures
+    Over the last 5 years, the government has authorized an average spending of **{{fmt_compact1_written gov_five_year_auth_average}}** while actually spending an average of **{{fmt_compact1_written gov_five_year_exp_average}}**.
+
+    As compared to the average spending over the last five years, the average planned spending over the next 3 years is planned to **{{two_value_change_to gov_five_year_exp_average gov_planned_exp_average "fmt_compact1_written" "to" "present"}}**.
   fr: NEEDS TRANSLATION
 
 dept_auth_exp_prog_spending_body:
   transform: [handlebars, markdown]
   en: |
-    In the past 5 years, **{{subj_name dept}}** has spent an average of **{{fmt_compact1_written dept_five_year_exp_average}}** of the authorized **{{fmt_compact1_written dept_five_year_auth_average}}**.
-    On average, next 3 years of planned spending will **{{two_value_change_to dept_five_year_exp_average dept_planned_exp_average "fmt_compact1_written" "to" "present"}}** over the last 5 years of expenditures
+    Over the last 5 years, **{{subj_name dept}}** has authorized an average spending of **{{fmt_compact1_written dept_five_year_auth_average}}** while actually spending an average of **{{fmt_compact1_written dept_five_year_exp_average}}**.
+    
+    As compared to the average spending over the last five years, the average planned spending over the next 3 years is planned to **{{two_value_change_to dept_five_year_exp_average dept_planned_exp_average "fmt_compact1_written" "to" "present"}}**.
   fr: NEEDS TRANSLATION
 
 historical_auth_exp_title:
