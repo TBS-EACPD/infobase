@@ -33,17 +33,17 @@ auth_exp_prog_spending_title:
 gov_auth_exp_prog_spending_body:
   transform: [handlebars, markdown]
   en: |
-    Over the last 5 years, the government has authorized an average spending of **{{fmt_compact1_written gov_five_year_auth_average}}** while actually spending an average of **{{fmt_compact1_written gov_five_year_exp_average}}**.
+    Over the last 5 years, the government has authorized an average spending of **{{fmt_compact1_written gov_five_year_auth_average}}** while actually spending an average of **{{fmt_compact1_written gov_five_year_exp_average}}**. On average, unused authorities represented **{{fmt_percentage1 gov_hist_avg_tot_pct}}** of approved authorities.
 
-    As compared to the average spending over the last five years, the average planned spending over the next 3 years is planned to **{{two_value_change_to gov_five_year_exp_average gov_planned_exp_average "fmt_compact1_written" "to" "present"}}**.
+    {{#if subject.has_planned_spending}}As compared to the average spending over the last five years, the average planned spending over the next 3 years is planned to **{{two_value_change_to gov_five_year_exp_average gov_planned_exp_average "fmt_compact1_written" "to" "present"}}**.{{/if}}
   fr: NEEDS TRANSLATION
 
 dept_auth_exp_prog_spending_body:
   transform: [handlebars, markdown]
   en: |
-    Over the last 5 years, **{{subj_name dept}}** has authorized an average spending of **{{fmt_compact1_written dept_five_year_auth_average}}** while actually spending an average of **{{fmt_compact1_written dept_five_year_exp_average}}**.
+    Over the last 5 years, **{{subj_name dept}}** has authorized an average spending of **{{fmt_compact1_written dept_five_year_auth_average}}** while actually spending an average of **{{fmt_compact1_written dept_five_year_exp_average}}**. On average, unused authorities represented **{{fmt_percentage1 dept_hist_avg_tot_pct}}** of approved authorities.
     
-    As compared to the average spending over the last five years, the average planned spending over the next 3 years is planned to **{{two_value_change_to dept_five_year_exp_average dept_planned_exp_average "fmt_compact1_written" "to" "present"}}**.
+    {{#if subject.has_planned_spending}}As compared to the average spending over the last five years, the average planned spending over the next 3 years is planned to **{{two_value_change_to dept_five_year_exp_average dept_planned_exp_average "fmt_compact1_written" "to" "present"}}**.{{/if}}
   fr: NEEDS TRANSLATION
 
 historical_auth_exp_title:
