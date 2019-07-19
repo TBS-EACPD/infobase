@@ -6,12 +6,12 @@
 remote="$1"
 url="$2"
 
-IFS=' '
+IFS=' ' # set field seperator to space, needed to properly read in the supplied args from stdin below (see git docs)
 read local_ref local_sha remote_ref remote_sha
 
 local_branch_name=$(echo "$local_ref" | sed "s/refs\/heads\///")
 
 if [[ $local_branch_name =~ ^__ && $remote != "archive" ]]; then
-  echo "Dunderscore branches can only be pushed to the archive (private) remote!"
+  echo "Double underscore branches can only be pushed to the archive (private) remote!"
   exit 1
 fi
