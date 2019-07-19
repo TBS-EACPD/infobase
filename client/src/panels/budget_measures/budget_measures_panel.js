@@ -597,9 +597,6 @@ class BudgetMeasureHBars extends React.Component {
     // graph stuff
     const formatter = formats.compact1_raw;
 
-    const breakdown_keys = _.chain(budget_values).keys().filter(k => k !== 'funding').value();
-    const keys_to_show = selected_value === "funding_overview" ? breakdown_keys : [selected_value];
-
     // text stuff
     const panel_text_args = {
       subject,
@@ -760,15 +757,24 @@ class BudgetMeasureHBars extends React.Component {
       </div>;
     } else {
       const biv_value_colors = d3.scaleOrdinal().range(_.at(newIBLightCategoryColors, [0,2,4]));
+
       const nivo_default_props = {
-        data: _.map(data,
+        data: _.map(
+          data,
           measure => _.chain(measure)
-            .pick([... _.keys(budget_values), "name"])
+            .pick([..._.keys(budget_values), "name"])
             .mapKeys((v,k) => k === "name" ? k : budget_values[k].text)
             .value()
         ),
         indexBy: "name",
-        keys: keys_to_show,
+        keys: _.chain(selected_value)
+          .thru(
+            selected_value => selected_value === "funding_overview" ? 
+              _.chain(budget_values).keys().without('funding').value() :
+              [selected_value]
+          )
+          .map(key => budget_values[key].text)
+          .value(),
         enableLabel: true,
         label: d => formatter(d.value),
         colorBy: d => biv_value_colors(d.id),
@@ -829,18 +835,33 @@ class BudgetMeasureHBars extends React.Component {
         ],
       };
 
-      const nivo_mobile_props = _.cloneDeep(nivo_default_props);
-      nivo_mobile_props.margin.right = 10;
-      nivo_mobile_props.margin.bottom = 25;
-      nivo_mobile_props.margin.left = 250;
-      nivo_mobile_props.margin.top = 80;
-      nivo_mobile_props.bttm_axis.tickValues = 3;
-      nivo_mobile_props.left_axis.format = (d) => <TspanLineWrapper text={d} width={28}/>;
-      nivo_mobile_props.legends[0].direction = "column",
-      nivo_mobile_props.legends[0].translateX = -100;
-      nivo_mobile_props.legends[0].translateY = -70;
-      nivo_mobile_props.legends[0].itemHeight = 20;
-
+      const nivo_mobile_props = {
+        ...nivo_default_props,
+        margin: {
+          right: 10,
+          left: 250,
+          top: 80,
+          bottom: 25,
+        },
+        bttm_axis: {
+          ...nivo_default_props.bttm_axis,
+          tickValues: 3,
+        },
+        left_axis: {
+          ...nivo_default_props.left_axis,
+          format: (d) => <TspanLineWrapper text={d} width={28}/>,
+        },
+        legends: [
+          {
+            ...nivo_default_props.legends[0],
+            direction: "column",
+            translateX: -100,
+            translateY: -70,
+            itemHeight: 20,
+          },
+        ],
+      };
+      
       return (
         <Fragment>
           {text_area}
