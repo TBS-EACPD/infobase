@@ -16,7 +16,6 @@ import {
   formatter,
 } from "../shared";
 
-
 const { 
   A11YTable,
 } = declarative_charts;
@@ -42,7 +41,7 @@ const calculate = function(subject) {
   const exp = qAuthExp.sum(exp_cols, {as_object: false});
 
   const qProgSpending = programSpending.q(query_subject);
-  const progSpending = qProgSpending.sum(planning_years, {as_object: false});
+  const progSpending = subject.has_planned_spending ? qProgSpending.sum(planning_years, {as_object: false}) : null;
 
   return {exp, auth, progSpending};
 };
@@ -64,14 +63,14 @@ const render = function({calculations, footnotes, sources}) {
     .first()
     .parseInt()
     .value();
-  const gap_year = year2 - year1 === 2 ? `${year1+1}-${(year1+2).toString().substring(2)}` : null;
-  const marker_year = gap_year || _.first(plan_ticks);
+  const gap_year = year2 - year1 === 2 && subject.has_planned_spending ? `${year1+1}-${(year1+2).toString().substring(2)}` : null;
+  const marker_year = subject.has_planned_spending ? (gap_year || _.first(plan_ticks)) : null;
   const {exp, auth, progSpending} = graph_args;
   const colors = d3.scaleOrdinal().range(newIBCategoryColors);
   const raw_data = _.concat(exp, auth, progSpending);
 
   const series_labels = (
-    [text_maker("expenditures"), text_maker("authorities"), text_maker("planned_spending")]
+    [text_maker("expenditures"), text_maker("authorities"), subject.has_planned_spending ? text_maker("planned_spending") : null]
   );
 
   if(gap_year){
@@ -104,10 +103,14 @@ const render = function({calculations, footnotes, sources}) {
   } else {
     const zip_years_and_data = (years, data) => _.map(
       years,
-      (year, year_ix) => ({
-        x: year,
-        y: data[year_ix],
-      })
+      (year, year_ix) => {
+        if(data){
+          return {
+            x: year,
+            y: data[year_ix],
+          };
+        }
+      }
     );
     
     const graph_data = _.chain(series_labels)
@@ -122,6 +125,7 @@ const render = function({calculations, footnotes, sources}) {
           ...zip_years_and_data(plan_ticks, progSpending),
         ]),
       ])
+      .filter(row => row[0]!==null)
       .map( ([id, data]) => ({id, data}) )
       .value();
 
@@ -130,17 +134,6 @@ const render = function({calculations, footnotes, sources}) {
       raw_data: raw_data,
       colorBy: d => colors(d.id),
       magnify_glass_translateX: 80,
-      markers: [
-        {
-          axis: 'x',
-          value: marker_year,
-          lineStyle: { 
-            stroke: window.infobase_color_constants.tertiaryColor, 
-            strokeWidth: 2,
-            strokeDasharray: ("3, 3"),
-          },
-        },
-      ],
       margin: {
         top: 27,
         right: 25,
@@ -171,6 +164,20 @@ const render = function({calculations, footnotes, sources}) {
         },
       ],
     };
+    if(marker_year){
+      nivo_default_props["markers"] = [
+        {
+          axis: 'x',
+          value: marker_year,
+          lineStyle: { 
+            stroke: window.infobase_color_constants.tertiaryColor, 
+            strokeWidth: 2,
+            strokeDasharray: ("3, 3"),
+          },
+        },
+      ];  
+    }
+
     const nivo_mobile_props = _.cloneDeep(nivo_default_props);
     nivo_mobile_props.margin.top = 60;
     nivo_mobile_props.legends[0].translateY = -60;
@@ -198,7 +205,7 @@ const render = function({calculations, footnotes, sources}) {
 
   return (
     <StdPanel
-      containerAlign="top"
+      containerAlign={subject.has_planned_spending ? "top" : "middle"}
       title={text_maker("auth_exp_prog_spending_title")}
       {...{footnotes,sources}}
     >
@@ -221,7 +228,6 @@ const render = function({calculations, footnotes, sources}) {
       </Col>
     </StdPanel>
   );
-  
 };
 
 new PanelGraph({
