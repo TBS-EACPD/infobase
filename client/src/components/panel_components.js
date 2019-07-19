@@ -140,7 +140,7 @@ class Panel_ extends React.Component {
                     </a>
                   }
                   { copy_to_clipboard &&
-                    <WriteToClipboard
+                    <WriteToClipboard 
                       text_to_copy={panel_link}
                       button_class_name={'panel-heading-utils'} 
                       button_description={text_maker("copy_panel_link")}
@@ -297,5 +297,24 @@ export const TextPanel = props => {
     <Panel {...filtered_props}>
       {new_children}
     </Panel>
+  );
+};
+
+const PermalinkButton = (props) => {
+  const {
+    context,
+    title,
+  } = props;
+
+  return (
+    <div style={{display: 'inline'}}> 
+      <a className='panel-heading-utils' href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
+        <img src={get_static_url("svg/permalink.svg")}
+          alt={title}
+          className='panel-heading-utils'
+          title={title}
+        />
+      </a>
+    </div>
   );
 };

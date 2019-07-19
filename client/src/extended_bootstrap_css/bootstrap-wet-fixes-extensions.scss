@@ -523,10 +523,16 @@ ol.breadcrumb > li:last-child > :last-child {
 }
 
 
-#app, #wb-bc, #breadcrumb-trail, .app-font, .easy-access, wb-lng {
+#app, .app-font {
+  font-family: 'Roboto', sans-serif;
+  font-weight: $mediumFontWeight;
+}
+
+#wb-bc, #breadcrumb-trail, .easy-access, #wb-lng {
   font-family: 'Roboto', sans-serif;
   font-weight: $lightFontWeight;
 }
+
 
 .form-control {
   max-width: 100%;
