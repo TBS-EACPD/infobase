@@ -57,6 +57,12 @@ new PanelGraph({
               value={dept_emp_value}
               totalValue = {gov_emp_value}
               descriptiveTextValue={`${dept_emp_fmt} ${text_maker("of")} ${gov_emp_fmt}`}
+              margin = {{
+                top: 10,
+                right: 0,
+                bottom: 10,
+                left: 0,          
+              }}
             />
           </Col>
         </StdPanel>

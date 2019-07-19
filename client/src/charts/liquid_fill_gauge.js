@@ -80,7 +80,7 @@ export class LiquidFillGauge{
     const textVertPosition = this.options.textVertPosition || 0.5;
     const waveIsFall = this.options.waveIsFall || 1;
     const waveDirection = waveIsFall ? 100: 0;
-    const waveRiseFallTime = this.options.waveRiseFallTime || 2200;
+    const waveRiseFallTime = this.options.waveRiseFallTime || 3600;
     const descriptiveTextAnimateTime = this.options.descriptiveTextAnimateTime || 1000;
     let waveAnimateTime = this.options.waveAnimateTime || 2000;
 
