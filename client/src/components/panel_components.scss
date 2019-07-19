@@ -126,5 +126,23 @@
   .panel-heading-utils:hover, .panel-heading-utils:active {
     transform: scale(1.15);
   }
-  
 }
+
+.panel-heading-utils > svg{
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.panel-heading-utils > svg .svg-fill{
+  fill: #fff;
+}
+.panel-heading-utils:hover > svg .svg-fill {
+  fill: $secondaryColor;
+}
+
+.panel-heading-utils > svg .svg-stroke {
+  stroke: #fff;
+}
+.panel-heading-utils:hover > svg .svg-stroke {
+  stroke: $secondaryColor;
+} 

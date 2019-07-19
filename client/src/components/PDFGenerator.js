@@ -10,6 +10,7 @@ import * as qrcode from 'qrcode-generator';
 import * as html2canvas from 'html2canvas';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { IconDownload } from '../icons/icons.js';
 
 const { text_maker } = create_text_maker_component(text);
 
@@ -227,9 +228,7 @@ export class PDFGenerator extends React.Component{
             onClick={ () => this.setState({generating_pdf: true}) }
             className={button_class_name}
           >
-            <img
-              src={get_static_url('svg/download.svg')}
-              alt={text_maker("download_pdf")}
+            <IconDownload
               title={text_maker("download_pdf")}
             />
           </button>

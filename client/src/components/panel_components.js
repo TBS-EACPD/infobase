@@ -300,21 +300,3 @@ export const TextPanel = props => {
   );
 };
 
-const PermalinkButton = (props) => {
-  const {
-    context,
-    title,
-  } = props;
-
-  return (
-    <div style={{display: 'inline'}}> 
-      <a className='panel-heading-utils' href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
-        <img src={get_static_url("svg/permalink.svg")}
-          alt={title}
-          className='panel-heading-utils'
-          title={title}
-        />
-      </a>
-    </div>
-  );
-};
