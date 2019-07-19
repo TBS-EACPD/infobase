@@ -209,7 +209,7 @@ const render = function({calculations, footnotes, sources}) {
       title={text_maker("auth_exp_prog_spending_title")}
       {...{footnotes,sources}}
     >
-      <Col size={6} isText>
+      <Col size={4} isText>
         <TM k={text_keys_by_level[subject.level]} args={{...info, ...additional_info}} />
         {
           gap_year && 
@@ -223,7 +223,7 @@ const render = function({calculations, footnotes, sources}) {
             </div>
         }
       </Col>
-      <Col size={6} isGraph>
+      <Col size={8} isGraph>
         {graph_content}
       </Col>
     </StdPanel>
