@@ -41,10 +41,7 @@ import '../panels/internal_services/isc.js';
 
 import "../panels/detailed_program_spending_split/detailed_program_spending_split.js";
 
-
-import '../panels/historical_auth_exp/historical_auth_exp.js';
 import '../panels/historical_auth_exp/auth_exp_prog_spending.js';
-
 
 //tag-only panels
 import '../panels/tag_panels/resource_structure.js';
@@ -92,7 +89,6 @@ const get_gov_panels = subject => ({
     "in_year_stat_breakdown",
     "in_year_voted_breakdown",
     'gocographic',
-    "historical_auth_exp",
     "historical_g_and_c",
     "personnel_spend",
   ],
@@ -121,7 +117,6 @@ const get_dept_panels = subject => ({
     "estimates_in_perspective",
     //"in_year_estimates_split",//turned off until supps A
     "in_year_voted_stat_split",
-    "historical_auth_exp",
     "spend_by_so_hist",
     "last_year_g_and_c_perspective",
     "historical_g_and_c",
