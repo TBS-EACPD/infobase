@@ -8,9 +8,19 @@ a.nav-item {
     }
   }
 
-a.nav-item > svg path.svg-fill {
+a.nav-item > svg .svg-fill {
     fill: $textColor;
 }
-a.nav-item:hover > svg path.svg-fill {
+a.nav-item:hover > svg .svg-fill {
     fill: $tertiaryColor;
+}
+
+a.nav-item > svg .svg-stroke {
+  stroke: $textColor;
+}
+a.nav-item:hover > svg .svg-stroke {
+  stroke: $tertiaryColor;
+}
+
+ul.nav-item {
 }
