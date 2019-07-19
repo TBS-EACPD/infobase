@@ -151,7 +151,7 @@ const render = function({calculations, footnotes, sources}) {
         {
           anchor: 'top-left',
           direction: 'row',
-          translateY: -30,
+          translateY: -27,
           itemDirection: 'left-to-right',
           itemWidth: 1,
           itemHeight: 20,
