@@ -835,32 +835,31 @@ class BudgetMeasureHBars extends React.Component {
         ],
       };
 
-      const nivo_mobile_props = {
-        ...nivo_default_props,
-        margin: {
-          right: 10,
-          left: 250,
-          top: 80,
-          bottom: 25,
-        },
-        bttm_axis: {
-          ...nivo_default_props.bttm_axis,
-          tickValues: 3,
-        },
-        left_axis: {
-          ...nivo_default_props.left_axis,
-          format: (d) => <TspanLineWrapper text={d} width={28}/>,
-        },
-        legends: [
-          {
-            ...nivo_default_props.legends[0],
-            direction: "column",
-            translateX: -100,
-            translateY: -70,
-            itemHeight: 20,
+      const nivo_mobile_props = _.merge(
+        nivo_default_props,
+        {
+          margin: {
+            right: 10,
+            left: 250,
+            top: 80,
+            bottom: 25,
           },
-        ],
-      };
+          bttm_axis: {
+            tickValues: 3,
+          },
+          left_axis: {
+            format: (d) => <TspanLineWrapper text={d} width={28}/>,
+          },
+          legends: [
+            {
+              direction: "column",
+              translateX: -100,
+              translateY: -70,
+              itemHeight: 20,
+            },
+          ],
+        }
+      );
       
       return (
         <Fragment>
