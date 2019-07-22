@@ -2,14 +2,14 @@
 
 existing_IB_session=$(tmux list-sessions 2> /dev/null | grep -oh ^IB-[0-9] | head -1)
 
-cd $HOME/*/InfoBase
+cd $HOME/*/infobase || cd $HOME/*/InfoBase
 
 if [[ -n $existing_IB_session ]]; then
  tmux attach-session -t "$existing_IB_session"
 else
 
   # to avoid client webpack and base build race condition, make sure the build dir exists in advance
-  [[ -d build ]] || mkdir build && mkdir build/InfoBase
+  $(cd client && [[ -d build ]] || mkdir build && mkdir build/InfoBase)
   
   # steps:
   #  - split, with working window to the left, area for watch scripts on the right
