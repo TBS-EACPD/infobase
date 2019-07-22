@@ -146,12 +146,11 @@ const render = function({calculations, footnotes, sources}) {
           direction: 'row',
           translateY: -27,
           itemDirection: 'left-to-right',
-          itemWidth: 1,
+          itemWidth: 160,
           itemHeight: 20,
-          itemsSpacing: 120,
+          itemsSpacing: 2,
           itemOpacity: 0.75,
           symbolSize: 12,
-          symbolShape: 'circle',
           effects: [
             {
               on: 'hover',
