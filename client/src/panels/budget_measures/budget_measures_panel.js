@@ -836,6 +836,7 @@ class BudgetMeasureHBars extends React.Component {
       };
 
       const nivo_mobile_props = _.merge(
+        {},
         nivo_default_props,
         {
           margin: {
