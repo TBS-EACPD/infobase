@@ -94,7 +94,7 @@ ochro_includes_excludes_en:
        FTEs are calculated as a ratio of assigned hours of work to scheduled hours of work, as set out in collective agreements. Adjustments are 
        made to the calculation for term and seasonal workers to reflect the proportion of paid weeks in year. 
     
-    {{#if table_level}}2. The information for the following separate agencies are not included for comparison because their employee information is not available in the Regional Pay System: the 
+    {{#if table_level}}2. The information for the following separate agencies are not included for comparison because their employee information is not available in the Regional or Phoenix Pay Systems: the 
         Canadian Security Intelligence Service, the National Capital Commission, Canada Investment and Savings, and the Canadian Forces Non-Public Funds. 
 
     To assist in your analysis of Federal Public Service human resources data,
@@ -137,7 +137,7 @@ ochro_includes_excludes_fr:
      Les ETP sont calculés en fonction du coefficient des heures de travail assignées et des heures de travail prescrites établies dans les conventions collectives. 
      Le calcul des ETP est ajusté pour les employés nommés pour une période déterminée et les employés saisonniers en fonction de la proportion des semaines payées dans une année.
     {{#if table_level}}
-    2.       Les données pour les organismes distincts suivants ne sont pas inclues dans la comparaison parce que les renseignements au sujet de leurs employés ne sont pas disponibles dans le système régional de paye : le Service canadien du renseignement de sécurité, la Commission de la capitale nationale, Placements Épargne Canada, et le Centre d’analyse des opérations et déclarations financières du Canada.
+    2.       Les données pour les organismes distincts suivants ne sont pas inclues dans la comparaison parce que les renseignements au sujet de leurs employés ne sont pas disponibles dans les systèmes de paye régional ou Phénix : le Service canadien du renseignement de sécurité, la Commission de la capitale nationale, Placements Épargne Canada, et le Centre d’analyse des opérations et déclarations financières du Canada.
 
 
     Afin de faciliter votre analyse des données sur les ressources humaines de la fonction publique fédérale, le Bureau du dirigeant principal des ressources humaines 
