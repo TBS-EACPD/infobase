@@ -8,9 +8,18 @@ if [[ -n $existing_IB_session ]]; then
  tmux attach-session -t "$existing_IB_session"
 else
 
-  # to avoid client webpack and base build race condition, make sure the build dir exists in advance
-  $(cd client && [[ -d build ]] || mkdir build && mkdir build/InfoBase)
+  if curl -f https://registry.npmjs.org/; then
+    can_reach_npm='true'
+  else
+    can_reach_npm='false'
+  fi
   
+
+  # to avoid client webpack and base build race condition, make sure the build dir exists in advance
+  if [[ ! -d client/build ]]; then 
+    mkdir client/build && mkdir client/build/InfoBase 
+  fi
+
   # steps:
   #  - split, with working window to the left, area for watch scripts on the right
   #  - start installing client packages in window that will run client webpack
@@ -23,11 +32,11 @@ else
   #  - to the right of mongod, open window for API populate_db process, keep trying to start it as the API packages may still be installing
   tmux new-session -t "IB" \; \
     split-window -h \; \
-    send-keys 'cd client && npm ci && npm run IB_q' C-m \; \
+    send-keys "cd client && $can_reach_npm && npm ci || true && npm run IB_q" C-m \; \
     split-window -v \; \
     send-keys 'cd client && while true; do npm run serve-loopback; sleep 30; done' C-m \; \
     split-window -v \; \
-    send-keys 'cd server && npm ci && npm start' C-m \; \
+    send-keys "cd server && $can_reach_npm && npm ci || true && npm start" C-m \; \
     selectp -t 2 \; \
     split-window -h \; \
     send-keys 'cd client && while true; do npm run IB_base_watch; sleep 30; done' C-m \; \
