@@ -214,6 +214,25 @@ class InfoGraph_ extends React.Component {
               href_template={subj => infograph_href_template(subj, bubble, true)}
               search_text={text_maker('subject_search_placeholder')}
               large={true}
+              include_tags_goco={true}
+              include_tags_hwh={true}
+              include_tags_hi={true}
+              include_programs={true}
+              include_glossary={false}
+              include_crsos={true}
+              include_tables={false}
+              org_scope="all_orgs_with_gov"
+            />
+          </div> :
+        <div className="row mrgn-bttm-md infographic-search-container"> 
+          <div 
+            className="col-md-8" 
+          >
+            <EverythingSearch 
+              include_gov={false} 
+              href_template={subj => infograph_href_template(subj, bubble, true)}
+              search_text={text_maker('subject_search_placeholder')}
+              large={true}
               include_tags_goco={this.state.include_tags_goco}
               include_tags_hwh={this.state.include_tags_hwh}
               include_tags_hi={this.state.include_tags_hi}
@@ -223,34 +242,6 @@ class InfoGraph_ extends React.Component {
               include_tables={false}
               org_scope="all_orgs_with_gov"
             />
-          </div> :
-          <div className="row mrgn-bttm-md infographic-search-container"> 
-            <div 
-              className="col-md-8" 
-            >
-              <EverythingSearch 
-                include_gov={false} 
-                href_template={subj => infograph_href_template(subj, bubble, true)}
-                search_text={text_maker('subject_search_placeholder')}
-                large={true}
-                include_tags={true}
-                include_programs={true}
-                include_glossary={false}
-                include_crsos={true}
-                include_tables={false}
-                org_scope="all_orgs_with_gov"
-              />
-            </div>
-            <div 
-              className="col-md-4" 
-            >
-              <a 
-                href="#resource-explorer" 
-                className="btn-lg btn btn-ib-primary btn-block"
-              > 
-                <TM k="infograph_explorer_link" />
-              </a>
-            </div>
           </div>
           
           <AdvancedSearch handleCheckBox={this.handleCheckBox} />
