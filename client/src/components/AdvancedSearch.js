@@ -13,13 +13,8 @@ export class AdvancedSearch extends React.Component {
 
     this.state = {
       open: false,
-      loading: true,
       checkedItems: new Map(),
     };
-  }
-
-  componentDidMount(){
-    this.setState({loading: false});
   }
 
   hnadleSubTag(e) {
