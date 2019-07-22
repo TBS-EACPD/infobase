@@ -1,7 +1,9 @@
+*(le Français suit)*
+
 GC InfoBase
 ========
 
-[![CircleCI](https://circleci.com/gh/TBS-EACPD/InfoBase.svg?style=svg&circle-token=a99b6b8309e5edd904b0386c4a92c10bf5f43e29)](https://circleci.com/gh/TBS-EACPD/InfoBase)
+[![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=svg)](https://circleci.com/gh/TBS-EACPD/infobase)
 
 Client-side code and content for the GC InfoBase. / Code et contenu pour le côté client de l'InfoBase du GC.
 

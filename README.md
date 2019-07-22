@@ -1,8 +1,8 @@
 *(Le Français suit)*
 
-# InfoBase Mono-Repo
+[![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=svg)](https://circleci.com/gh/TBS-EACPD/infobase)
 
-[![CircleCI](https://circleci.com/gh/TBS-EACPD/InfoBase.svg?style=svg&circle-token=a99b6b8309e5edd904b0386c4a92c10bf5f43e29)](https://circleci.com/gh/TBS-EACPD/InfoBase)
+# InfoBase Mono-Repo
 
 The GC InfoBase is an interactive data-visualization tool, transforming complex federal data into simple visual stories for Canadians. Since its creation in 2013, the GC InfoBase has been recognized as the authoritative source of Government expenditure information by the Parliamentary Budget Officer (PBO) and was identified as a public sector innovation by the Organisation for Economic Co-operation and Development (OECD) Observatory of Public Sector Innovation (OPSI). The tool contains years’ worth of federal government data, bringing together information previously scattered across over 500 government reports.
 
@@ -18,8 +18,6 @@ See the README.md files in those respective directories for more details on each
 This project is licensed under the terms of the MIT license.
 
 # « Mono-Dépôt » de l'InfoBase du GC
-
-[![CircleCI](https://circleci.com/gh/TBS-EACPD/InfoBase.svg?style=svg&circle-token=a99b6b8309e5edd904b0386c4a92c10bf5f43e29)](https://circleci.com/gh/TBS-EACPD/InfoBase)
 
 L’InfoBase du GC est un outil interactif de visualisation de données, qui traduit en termes simples l’information complexe du gouvernement fédéral au profit des Canadiens. Depuis sa création en 2013, l’InfoBase du GC a été reconnue par le directeur parlementaire du budget (DPB) comme étant la source d’information faisant autorité en matière de dépenses gouvernementales et est considérée comme une innovation dans le secteur public par l’Observatoire sur l’innovation dans le secteur public (OISP) de l’Organisation de coopération et de développement économiques (OCDE). L’outil contient plusieurs années de renseignements gouvernementaux, auparavant éparpillés dans plus de 500 rapports à l’échelle de la fonction publique fédérale.
 
