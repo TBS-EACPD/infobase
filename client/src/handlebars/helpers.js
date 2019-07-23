@@ -229,18 +229,6 @@ const two_value_change_map = {
       },
     },
   },
-  present: {
-    to: {
-      en: {
-        increase: ["increase from", "to"],
-        decrease: ["decrease from", "to"],
-        constant: "remain unchanged at",
-      },
-      fr: {
-        //TODO
-      },
-    },
-  },
 };
 
 const two_value_calc_direction = function(val1,val2,formatter){
@@ -295,9 +283,6 @@ Handlebars.registerHelper("two_value_changed_to",function(val1,val2,formatter,co
 });
 Handlebars.registerHelper("fr_two_value_changed_to",function(val1,val2,genre,nombre,formatter,context){
   return fr_master_two_value_change(val1,val2,formatter,"to","past",genre,nombre);
-});
-Handlebars.registerHelper("two_value_change_to",function(val1,val2,formatter,context){
-  return en_master_two_value_change(val1,val2,formatter,"to","present");
 });
 
 // Helper to expand positive negative values to "[+/-]abs(value)"
