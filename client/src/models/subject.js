@@ -543,8 +543,8 @@ Subject.BudgetMeasure = class BudgetMeasure extends static_subject_store(){
         fr: "31 mars 2019",
       }[window.lang],
       2019: {
-        en: "May 31, 2019",
-        fr: "31 mai 2019",
+        en: "June 30, 2019",
+        fr: "30 juin 2019",
       }[window.lang],
     };
   }
