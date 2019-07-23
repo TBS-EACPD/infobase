@@ -5,7 +5,7 @@
   "scripts": {
     "prod_deploy": "sh prod_scripts/prod_deploy.sh",
     "prod_rollback": "sh prod_scripts/prod_rollback.sh",
-    "refresh_pipeline_data": "(cd ../pipeline && git checkout master && git pull origin master && cp -f outputs/Infobase/* ../infobase/data)"
+    "refresh_pipeline_data": "(repo_path=$(pwd); cd ../pipeline && git checkout master && git pull origin master && cp -f outputs/Infobase/* $repo_path/data)"
   },
   "authors": [
     "Alex Cousineau-Leduc",
