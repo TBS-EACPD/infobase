@@ -77,6 +77,7 @@ const render = function({calculations, footnotes, sources}) {
     additional_info['last_history_year'] = _.last(history_ticks);
     additional_info['last_planned_year'] = _.last(plan_ticks);
     additional_info['gap_year'] = gap_year;
+    additional_info['plan_change'] = info[`${subject.level}_exp_planning_year_3`] - info['dept_auth_average'];
   }
 
   let graph_content;
