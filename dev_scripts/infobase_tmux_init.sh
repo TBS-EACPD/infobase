@@ -8,6 +8,8 @@ if [[ -n $existing_IB_session ]]; then
  tmux attach-session -t "$existing_IB_session"
 else
 
+  # ping the main npm registry. Will only npm ci if we can reach it, because npm ci itself deletes all local modules first before
+  # it checks if it's going to be able to replace them...
   if curl -f https://registry.npmjs.org/; then
     can_reach_npm='true'
   else
