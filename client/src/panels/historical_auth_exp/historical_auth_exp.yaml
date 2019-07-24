@@ -8,11 +8,11 @@ gov_gap_explain_body:
   en: |
     Actual expenditures for all organizations are sourced from the {{gl_tt "Public Accounts of Canada" "PA"}}. Planned expenditures for most organizations are sourced from {{gl_tt "Departmental Plans" "DP"}}.
 
-    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in government’s latest Departmental Plan, but the {{gap_year}} the {{gl_tt "Public Accounts of Canada" "PA"}} are not yet available.
+    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in the latest Departmental Plans, but the {{gap_year}} the {{gl_tt "Public Accounts of Canada" "PA"}} are not yet available.
   fr: |
     Les dépenses réelles de toutes les organisations correspondent à celle publiées dans les {{gl_tt "Comptes publics du Canada" "PA"}}. Les dépenses prévues pour la plupart des organisations proviennent des {{gl_tt "plans ministériels" "DP"}}.
 
-    Les dépenses prévues pour {{est_in_year}} à {{last_planned_year}} ont été publiés dans le plan ministériel de <department name> le plus récent, mais les {gl_tt "Comptes publics du Canada" "PA"}} de {{gap_year}} ne sont pas encore disponibles.
+    Les dépenses prévues pour {{est_in_year}} à {{last_planned_year}} ont été publiés dans les plan ministériels les plus récents, mais les {gl_tt "Comptes publics du Canada" "PA"}} de {{gap_year}} ne sont pas encore disponibles.
 
 dept_gap_explain_body:
   transform: [handlebars]
@@ -23,12 +23,16 @@ dept_gap_explain_body:
   fr: |
     Les dépenses réelles de toutes les organisations correspondent à celle publiées dans les {{gl_tt "Comptes publics du Canada" "PA"}}. Les dépenses prévues pour la plupart des organisations proviennent des {{gl_tt "plans ministériels" "DP"}}.
 
-    Les dépenses prévues pour {{est_in_year}} à {{last_planned_year}} ont été publiés dans le plan ministériel de <department name> le plus récent, mais les {gl_tt "Comptes publics du Canada" "PA"}} de {{gap_year}} ne sont pas encore disponibles.
+    Les dépenses prévues pour {{est_in_year}} à {{last_planned_year}} ont été publiés dans le plan ministériel de {{subj_name dept}} le plus récent, mais les {{gl_tt "Comptes publics du Canada" "PA"}} de {{gap_year}} ne sont pas encore disponibles.
 
 auth_exp_prog_spending_title:
   transform: [handlebars]
-  en: Authorities and Expenditures Vs. Planned Spending
-  fr: Autorisations et dépenses Vs. Dépenses prévues
+  en: |
+    {{#if subject.has_planned_spending}}Authorities, Expenditures and Planned Spending
+    {{else}} Authorities and Expenditures {{/if}}
+  fr: |
+    {{#if subject.has_planned_spending}}Autorisations, dépenses et Dépenses prévues
+    {{else}} Autorisations et dépenses {{/if}}
 
 gov_auth_exp_prog_spending_body:
   transform: [handlebars, markdown]
@@ -39,7 +43,7 @@ gov_auth_exp_prog_spending_body:
   fr: |
     Au cours des cinq dernières années, le gouvernement a autorisé des dépenses moyennes de **{{fmt_compact1_written gov_five_year_auth_average}}** ({{gl_tt "autorisation" "AUTH"}}) alors que les dépenses réelles s'élevaient en moyenne à **{{fmt_compact1_written gov_five_year_exp_average}}** ({{gl_tt "dépenses" "EXP"}}). En moyenne, les autorisations non utilisées représentaient **{{fmt_percentage1 gov_hist_avg_tot_pct}}** des autorisations approuvées.
     
-    {{#if subject.has_planned_spending}}Les dépenses {{fr_will_change_to plan_change "f" "p" ""}} **{{fmt_compact1_written gov_exp_planning_year_3}}** d'ici {{last_planned_year}}. {{/if}}
+    {{#if subject.has_planned_spending}}Les dépenses {{fr_will_change_to plan_change "f" "p" ""}} **{{fmt_compact1_written gov_exp_planning_year_3}}** d'ici à {{last_planned_year}}. {{/if}}
 
 dept_auth_exp_prog_spending_body:
   transform: [handlebars, markdown]
@@ -50,4 +54,4 @@ dept_auth_exp_prog_spending_body:
   fr: |
     Au cours des cinq dernières années, **{{subj_name dept}}** a autorisé des dépenses moyennes de **{{fmt_compact2_written dept_five_year_auth_average}}** ({{gl_tt "autorisations" "AUTH"}}) alors que les dépenses réelles s'élevaient en moyenne à **{{fmt_compact2_written dept_five_year_exp_average}}** ({{gl_tt "dépenses" "EXP"}}). En moyenne, les autorisations non utilisées représentaient **{{fmt_percentage1 dept_hist_avg_tot_pct}}** des autorisations approuvées.
     
-    {{#if subject.has_planned_spending}}Les dépenses {{fr_will_change_to plan_change "f" "p" ""}} **{{fmt_compact2_written dept_exp_planning_year_3}}** d'ici {{last_planned_year}}. {{/if}}
+    {{#if subject.has_planned_spending}}Les dépenses {{fr_will_change_to plan_change "f" "p" ""}} **{{fmt_compact2_written dept_exp_planning_year_3}}** d'ici à {{last_planned_year}}. {{/if}}

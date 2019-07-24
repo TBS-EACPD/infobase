@@ -69,9 +69,12 @@ const render = function({calculations, footnotes, sources}) {
   const colors = d3.scaleOrdinal().range(newIBCategoryColors);
   const raw_data = _.concat(exp, auth, progSpending);
 
-  const series_labels = (
-    [text_maker("expenditures"), text_maker("authorities"), subject.has_planned_spending ? text_maker("planned_spending") : null]
-  );
+  const series_labels = 
+    [
+      text_maker("expenditures"),
+      text_maker("authorities"),
+      subject.has_planned_spending ? text_maker("planned_spending") : null,
+    ];
 
   if(gap_year){
     additional_info['last_history_year'] = _.last(history_ticks);
@@ -85,13 +88,21 @@ const render = function({calculations, footnotes, sources}) {
     const data = _.map(exp, (exp_value,year_index) => {
       return {
         label: history_ticks[year_index],
-        data: [formatter("compact2", exp_value, {raw: true}), formatter("compact2", auth[year_index], {raw: true}), null],
+        data: [
+          formatter("compact2", exp_value, {raw: true}),
+          formatter("compact2", auth[year_index], {raw: true}),
+          null,
+        ],
       };
     });
     _.forEach(progSpending, (progSpending_value, year_index) => {
       data.push({
         label: plan_ticks[year_index],
-        data: [null, null, formatter("compact2", progSpending_value, {raw: true})],
+        data: [
+          null,
+          null,
+          formatter("compact2", progSpending_value, {raw: true}),
+        ],
       });
     });
 
@@ -129,7 +140,7 @@ const render = function({calculations, footnotes, sources}) {
       .filter(row => row[0]!==null)
       .map( ([id, data]) => ({id, data}) )
       .value();
-    
+
     const get_auth_exp_diff = (slice_data) => Math.abs(slice_data[0].data.y - slice_data[1].data.y);
 
     const nivo_default_props = {
@@ -166,7 +177,7 @@ const render = function({calculations, footnotes, sources}) {
       ),
       margin: {
         top: 27,
-        right: 25,
+        right: 30,
         bottom: 30,
         left: 100,
       },
@@ -235,7 +246,7 @@ const render = function({calculations, footnotes, sources}) {
   return (
     <StdPanel
       containerAlign={subject.has_planned_spending ? "top" : "middle"}
-      title={text_maker("auth_exp_prog_spending_title")}
+      title={text_maker("auth_exp_prog_spending_title", {...info, ...additional_info})}
       {...{footnotes,sources}}
     >
       <Col size={4} isText>
