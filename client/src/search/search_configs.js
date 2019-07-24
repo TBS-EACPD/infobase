@@ -115,6 +115,12 @@ const orgs_with_data_with_gov = {
   filter: (query, datum) => memoized_re_matchers(query, org_attributes_to_match, "orgs_with_data_with_gov")(datum),
 };
 
+const orgs_without_data_with_gov = {
+  ...org_templates,
+  get_data: () => [Gov].concat( Dept.depts_without_data() ),
+  filter: (query, datum) => memoized_re_matchers(query, org_attributes_to_match, "orgs_without_data_with_gov")(datum),
+};
+
 const all_orgs_without_gov = {
   ...org_templates,
   get_data: () => Dept.get_all(),
@@ -270,6 +276,7 @@ export {
 
   all_orgs_without_gov,
   orgs_with_data_with_gov,
+  orgs_without_data_with_gov,
   all_orgs_with_gov,
   glossary,
   glossary_lite,

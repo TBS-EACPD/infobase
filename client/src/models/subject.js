@@ -93,6 +93,16 @@ Subject.Dept = class Dept extends static_subject_store_with_API_data(){
     }
     return this._depts_with_data;
   }
+  static depts_without_data(){ 
+    //lazy initialized
+    if(!this._depts_without_data){ 
+      this._depts_without_data = _.filter(
+        this.get_all(),
+        dept => _.isEmpty(dept.table_ids)
+      );
+    }
+    return this._depts_without_data;
+  }
   static create_and_register(def){
     const inst = new Dept(def);
     this.register(inst.id,inst);
