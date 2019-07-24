@@ -5,17 +5,23 @@ lab_title:
 lab_intro_text:
   transform: [handlebars,markdown]
   en: |
-    Welcome to InfoLab! Here you will find "beta" version tools and fun (we hope) data toys. This is a place for us to test new features before they are integrated
-    into the main site. Pages linked here may contain bugs, may be incompletely documented or may disappear at any time.
+    Welcome to InfoLab - a "beta" version of GC InfoBase. Here you will find new tools and cool new data visualizations. This is a place where we will be testing new features before integrating
+    them into the main site.
     
-    Questions? Comments? We welcome your feedback! Please take a few minutes to complete our
-    <a href="{{{survey_link}}}" target="_blank" rel="noopener noreferrer">online survey</a>.
+    This is a work in progress and changes are being made on a regular basis. Your experience may vary depending on the device and/or the browser used. You may also see some bugs, and some pages may not
+    have complete instructions. Please note that some features may disappear at any time. If you find a bug or encounter a problem, please report it in the form below.
+    
+    You can participate in the InfoLab development by sharing your comments via our
+    <a href="{{{survey_link}}}" target="_blank" rel="noopener noreferrer">Feedback survey</a>.
   fr: |
-    Bienvenue à l'InfoLab. Ici vous trouverez des outils de version "beta" et jouets de données amusants (nous esperons). Ici c'est un lieu pour que nous pouvons
-    tester les outils et fonctionalités nouveaux avant qu'ils sont integrés au site principale. Les sites liés ici peut contenir des bugs, peut avoir la documentation
-    incomplète, ou pourrait disparaître à tout moment.
+    Bienvenue à l'InfoLab - une version "beta" de l'InfoBase du GC. Ici vous trouverez des outils nouveaux et des nouvelles visualizations intéressantes. Ici c'est un lieu pour que nous pouvons
+    tester les nouvelles fonctionalités avant qu'ils sont integrés au site principale.
     
-    Questions? Rétroaction? La parole est à vous! Veuillez prendre quelques minutes pour remplir notre
+    Ceci est un travail en cours et on fera des changements régulièrement. Votre expérience peut varier en fonction de l'appareil ou du navigateur utilisé. Vous pouvez aussi voir quelques bugs, et quelques
+    pages peut avoir les instructions incomplètes. Veuillez noter que certaines fonctionalités pourrait disparaître à tout moment. Si vous trouvez un bug ou rencontrez un problème, signalez-le dans le
+    formulaire ci-dessous.
+    
+    Vous pouvez participer à le développement de l'InfoLab par fournissez vos commentaires en utilisant notre
     <a href="{{{survey_link}}}" target="_blank" rel="noopener noreferrer">sondage en ligne</a>.
 
 text_diff_lab_title:
