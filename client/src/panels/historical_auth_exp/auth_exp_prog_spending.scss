@@ -11,6 +11,7 @@
   justify-content: space-between;
 
   & > .pagedetails__gap_explain {
+    width: 100%;
     background-color: $backgroundColor;
     border-radius: 10px;
     border: 2px solid $primaryColor;
