@@ -120,9 +120,13 @@ class InfoGraph_ extends React.Component {
       level: props.level,
       include_programs: true,
       include_crsos: true,
-      include_tags_goco: true,
-      include_tags_hwh: true,
-      include_tags_hi: true,
+      include_goco: true,
+      include_hwh: true,
+      include_hi: true,
+      include_orgs: true,
+      include_limited: true,
+      include_extensive: true,
+      org_scope: "all_orgs_with_gov",
     };
     this.props = props;
 
@@ -165,31 +169,10 @@ class InfoGraph_ extends React.Component {
     }
   }
 
-  handleCheckBox(bool, name){
-    switch (name) {
-      case 'programs': 
-        this.setState({include_programs: bool});
-        break;
-      case 'crsos': 
-        this.setState({include_crsos: bool});
-        break;
-      case 'tags': 
-        this.setState({
-          include_tags_goco: bool,
-          include_tags_hwh: bool,
-          include_tags_hi: bool,
-        });
-        break;
-      case 'goco':
-        this.setState({include_tags_goco: bool});
-        break;
-      case 'hwh':
-        this.setState({include_tags_hwh: bool});
-        break;
-      case 'hi':
-        this.setState({include_tags_hi: bool});
-        break;
-    }      
+  handleCheckBox(e, include_configs){
+    Object.keys(include_configs).forEach(key => {
+      this.setState({[key]: include_configs[key]});
+    });
   }
 
   render(){
@@ -221,7 +204,7 @@ class InfoGraph_ extends React.Component {
               include_glossary={false}
               include_crsos={true}
               include_tables={false}
-              org_scope="all_orgs_with_gov"
+              org_scope={"all_orgs_with_gov"}
             />
           </div> :
         <div className="row mrgn-bttm-md infographic-search-container"> 
@@ -233,18 +216,20 @@ class InfoGraph_ extends React.Component {
               href_template={subj => infograph_href_template(subj, bubble, true)}
               search_text={text_maker('subject_search_placeholder')}
               large={true}
-              include_tags_goco={this.state.include_tags_goco}
-              include_tags_hwh={this.state.include_tags_hwh}
-              include_tags_hi={this.state.include_tags_hi}
+              include_tags_goco={this.state.include_goco}
+              include_tags_hwh={this.state.include_hwh}
+              include_tags_hi={this.state.include_hi}
               include_programs={this.state.include_programs}
               include_glossary={false}
               include_crsos={this.state.include_crsos}
               include_tables={false}
-              org_scope="all_orgs_with_gov"
+              include_orgs_limited={this.state.include_limited}
+              include_orgs_extensive={this.state.include_extensive}
+              org_scope={this.state.org_scope}
             />
           </div>
           
-          <AdvancedSearch handleCheckBox={this.handleCheckBox} />
+          <AdvancedSearch handleCheckBox={this.handleCheckBox} {...this.state}/>
           
         </div>
       }
