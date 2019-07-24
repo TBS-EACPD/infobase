@@ -16,72 +16,119 @@ export class AdvancedSearch extends React.Component {
       checkedItems: new Map(),
     };
   }
+  
 
-  hnadleSubTag(e) {
-    this.handleChange(e);
-    const checkedCount = document.querySelectorAll('input.sub-tag-checkbox:checked').length;
-    this.setState(prevState => ({checkedItems: prevState.checkedItems.set('tags', checkedCount > 0)}));
+  handleSubBox(e, include_configs) {
+    e.persist();
+    this.handleChange(e, include_configs);
+    const checkedCount = document.querySelectorAll('input.'+e.target.className+':checked').length;
+    this.setState(prevState => ({checkedItems: prevState.checkedItems.set(e.target.getAttribute('parent'), checkedCount > 0)}));
   }
 
-  handleChange(e) {
+  handleChange(e, include_configs) {
     const item = e.target.name;
     const isChecked = e.target.checked;
     this.setState(prevState => ({ checkedItems: prevState.checkedItems.set(item, isChecked) }));
-    this.props.handleCheckBox(isChecked, item);
+    include_configs[item] = isChecked;
 
+    const subBoxes = document.querySelectorAll('input.'+e.target.getAttribute('child'));
+    subBoxes.forEach(subBoxes =>{
+      this.setState(prevState => ({ checkedItems: prevState.checkedItems.set(subBoxes.name, isChecked) }));
+      include_configs[subBoxes.name] = isChecked;
+    });
 
-    if (item === 'tags') {
-      const subTags = document.querySelectorAll('input.sub-tag-checkbox');
-      subTags.forEach((subTags) => {
-        this.setState(prevState => ({checkedItems: prevState.checkedItems.set(subTags.name, isChecked)}));
-      });
-    }
+    this.props.handleCheckBox(e, include_configs);
   }
 
   render() {
+
+    const {
+      include_programs,
+      include_crsos,
+      include_goco,
+      include_hwh,
+      include_hi,
+      include_limited,
+      include_extensive,
+    } = this.props;
+
+    const include_configs = {
+      include_programs,
+      include_crsos,
+      include_goco,
+      include_hwh,
+      include_hi,
+      include_limited,
+      include_extensive,
+    }; 
+
     const checkboxes = [
       {
-        name: 'programs',
+        name: 'include_orgs',
+        key: 'checkBox0',
+        label: ' Departments',
+        child: 'sub-orgs-checkbox',
+      },
+      {
+        name: 'include_programs',
         key: 'checkBox1',
         label: ' Programs',
       },
       {
-        name: 'crsos',
+        name: 'include_crsos',
         key: 'checkBox2',
         label: ' CRSOs',
       },
       {
-        name: 'tags',
+        name: 'include_tags',
         key: 'checkBox3',
         label: ' Tags',
+        child: 'sub-tags-checkbox',
       },
     ];
 
-    const subTags = [
+    const subBoxes = [
       {
-        name: 'goco',
+        parent: 'include_orgs',
+        name: 'include_limited',
+        key: 'checkBox0',
+        label: ' Limited data',
+        className: 'sub-orgs-checkbox',
+      },
+      {
+        parent: 'include_orgs',
+        name: 'include_extensive',
         key: 'checkBox1',
-        label: ' GOCO',
-        className: 'sub-tag-checkbox',
+        label: ' Extensive data',
+        className: 'sub-orgs-checkbox',
       },
       {
-        name: 'hwh',
+        parent: 'include_tags',
+        name: 'include_goco',
         key: 'checkBox2',
-        label: ' How We Help',
-        className: 'sub-tag-checkbox',
+        label: ' GOCO',
+        className: 'sub-tags-checkbox',
       },
       {
-        name: 'hi',
+        parent: 'include_tags',
+        name: 'include_hwh',
         key: 'checkBox3',
+        label: ' How We Help',
+        className: 'sub-tags-checkbox',
+      },
+      {
+        parent: 'include_tags',
+        name: 'include_hi',
+        key: 'checkBox4',
         label: ' Horizontal Iniatives',
-        className: 'sub-tag-checkbox',
+        className: 'sub-tags-checkbox',
       },
     ];
 
-    const Checkbox = ({label, name, onChange, checked = true, className}) => (
+    const Checkbox = ({label, name, onChange, checked = true, className, parent, child}) => (
       <div className="checkbox">
         <label>
-          <input type={'checkbox'} name={name} checked={checked} onChange={onChange} className={className} />
+          <input type={'checkbox'} name={name} checked={checked} onChange={onChange} className={className} parent={parent} child={child}/>
           {label}
         </label>
       </div>
@@ -109,31 +156,34 @@ export class AdvancedSearch extends React.Component {
                 <Fragment>
                   {
                     checkboxes.map(item => (
-                      <Checkbox
-                        key={item.key}
-                        name={item.name} 
-                        label={item.label}
-                        checked={this.state.checkedItems.get(item.name)}
-                        onChange={(e) => this.handleChange(e)}
-                      />  
+                      <div key={item.key}>
+                        <Checkbox
+                          key={item.key}
+                          name={item.name} 
+                          label={item.label}
+                          checked={this.state.checkedItems.get(item.name)}
+                          onChange={(e) => this.handleChange(e, include_configs)}
+                          child={item.child}
+                        />  
+                        <ul style={{listStyle: 'none'}}>
+                          { subBoxes.map(sub => { return item.name === sub.parent ?
+                            <li key={sub.key}>
+                              <Checkbox
+                                key={sub.key}
+                                name={sub.name} 
+                                label={sub.label}
+                                checked={this.state.checkedItems.get(sub.name)}
+                                onChange={(e) => this.handleSubBox(e, include_configs)}
+                                className={sub.className}
+                                parent={sub.parent}
+                              /> 
+                            </li> : null;
+                          })
+                          }
+                        </ul>
+                      </div>
                     ))
                   }
-                  <ul style={{listStyle: 'none'}}>
-                    {
-                      subTags.map(item => (
-                        <li key={item.key}>
-                          <Checkbox
-                            key={item.key}
-                            name={item.name} 
-                            label={item.label}
-                            checked={this.state.checkedItems.get(item.name)}
-                            onChange={(e) => this.hnadleSubTag(e)}
-                            className={item.className}
-                          /> 
-                        </li>
-                      ))
-                    }
-                  </ul>
                 </Fragment>
               </div>
             </div>
