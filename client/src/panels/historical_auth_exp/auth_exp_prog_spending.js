@@ -1,4 +1,4 @@
-import './auth_exp_prog_spending.scss';
+import '../../components/PageDetails.scss';
 import text from './historical_auth_exp.yaml';
 import text2 from '../../common_text/common_lang.yaml';
 import { Details } from '../../components/Details.js';
@@ -216,7 +216,7 @@ const render = function({calculations, footnotes, sources}) {
     graph_content = 
       <div style={{height: 400}} aria-hidden = {true}>
         {
-          <MediaQuery minWidth={992}>
+          <MediaQuery minWidth={991}>
             <NivoResponsiveLine
               {...nivo_default_props}
             />
