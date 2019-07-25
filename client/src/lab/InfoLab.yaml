@@ -21,7 +21,7 @@ lab_intro_text:
     et les instructions pourraient être incomplètes dans certaines pages. Prière de retenir que certaines fonctions peuvent disparaître à tout moment. Si vous trouvez un bogue ou un problème,
     veuillez le signaler dans le formulaire ci-dessous.
     
-    Vous pouvez participer au développement de l'InfoLab en nous faisant part de vos commentaires le.
+    Vous pouvez participer au développement de l'InfoLab en nous faisant part de vos commentaires le
     <a href="{{{survey_link}}}" target="_blank" rel="noopener noreferrer">sondage en ligne</a>.
 
 text_diff_lab_title:
@@ -38,5 +38,5 @@ coming_soon_title:
   fr: À venir
 
 coming_soon_text:
-  en: More to come! Check back here soon
-  fr: Autres nouvelles à venir! Revenez nous voir bientôt
+  en: More to come! Check back here soon.
+  fr: Autres nouvelles à venir! Revenez nous voir bientôt.
