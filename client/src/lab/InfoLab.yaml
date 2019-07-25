@@ -14,14 +14,14 @@ lab_intro_text:
     You can participate in the InfoLab development by sharing your comments via our
     <a href="{{{survey_link}}}" target="_blank" rel="noopener noreferrer">Feedback survey</a>.
   fr: |
-    Bienvenue à l'InfoLab - une version "beta" de l'InfoBase du GC. Ici vous trouverez des outils nouveaux et des nouvelles visualizations intéressantes. Ici c'est un lieu pour que nous pouvons
-    tester les nouvelles fonctionalités avant qu'ils sont integrés au site principale.
+    Bienvenue à l'InfoLab - une version « beta » de l'InfoBase du GC. Vous trouverez ici de nouveaux outils et de superbes nouvelles visualisations de données. C'est un endroit où nous allons
+    tester de nouvelles fonctionnalités avant de les intégrer dans le site principal.
     
-    Ceci est un travail en cours et on fera des changements régulièrement. Votre expérience peut varier en fonction de l'appareil ou du navigateur utilisé. Vous pouvez aussi voir quelques bugs, et quelques
-    pages peut avoir les instructions incomplètes. Veuillez noter que certaines fonctionalités pourrait disparaître à tout moment. Si vous trouvez un bug ou rencontrez un problème, signalez-le dans le
-    formulaire ci-dessous.
+    Ces travaux sont en cours et des changements sont apportés régulièrement. Votre expérience peut varier selon l'appareil ou le navigateur utilisé. Il est possible que vous trouviez des bogues
+    et les instructions pourraient être incomplètes dans certaines pages. Prière de retenir que certaines fonctions peuvent disparaître à tout moment. Si vous trouvez un bogue ou un problème,
+    veuillez le signaler dans le formulaire ci-dessous.
     
-    Vous pouvez participer à le développement de l'InfoLab par fournissez vos commentaires en utilisant notre
+    Vous pouvez participer au développement de l'InfoLab en nous faisant part de vos commentaires le.
     <a href="{{{survey_link}}}" target="_blank" rel="noopener noreferrer">sondage en ligne</a>.
 
 text_diff_lab_title:
@@ -30,7 +30,8 @@ text_diff_lab_title:
 
 text_diff_lab_text:
   en: A tool to compare text portions of indicators between the 2018-19 and 2019-20 departmental plans.
-  fr: Un outil en permettant comparer des portions d'indicateurs textuelles entre les plans ministériels 2018-2019 et 2019-2020.
+  fr: Cet outil  permet de comparer entre elles des portions de texte d’indicateurs dans les plans ministériels de 2018-2019 et de 2019-2020.
+
 
 coming_soon_title:
   en: Coming soon
@@ -38,4 +39,4 @@ coming_soon_title:
 
 coming_soon_text:
   en: More to come! Check back here soon
-  fr: Plus à venir! Revenez ici bientôt
+  fr: Autres nouvelles à venir! Revenez nous voir bientôt
