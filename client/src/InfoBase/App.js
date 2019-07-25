@@ -76,8 +76,8 @@ export class App extends React.Component {
               { !window.is_a11y_mode && <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} /> }
               { !window.is_a11y_mode && <Route path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?" component={TreeMap} /> }
               { window.is_a11y_mode && <Route path="/start/:no_basic_equiv?" component={A11yHome} /> }
-              { window.is_a11y_mode ? <Route path="/start" component={A11yHome} /> : <Route path="/" component={Home} /> }
-              { window.is_a11y_mode ? <Route path="/" component={A11yHome} /> : <Route path="/" component={Home} /> }
+              <Route path="/start" component={window.is_a11y_mode ? A11yHome : Home} />
+              <Route path="/" component={window.is_a11y_mode ? A11yHome : Home} />
             </Switch>
             <PageDetails />
           </Suspense>
