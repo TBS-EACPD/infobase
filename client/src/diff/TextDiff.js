@@ -368,7 +368,7 @@ export default class TextDiffApp extends React.Component {
       .filter( doc => /^dp[0-9]+/ )
       .takeRight(2)
       .value();
-
+      
     return (
       <StandardRouteContainer
         title={text_maker("diff_title")}
