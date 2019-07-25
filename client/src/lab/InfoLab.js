@@ -31,24 +31,28 @@ export default class InfoLab extends React.Component {
         <div className="medium_panel_text">
           <TM k="lab_intro_text"/>
         </div>
-        <div>
-          <div className="lab-content">
-            <CardLeftImage
-              tmf={text_maker}
-              img_src={get_static_url("svg/DPs.svg")}
-              title_key="text_diff_lab_title"
-              text_key="text_diff_lab_text"
-              link_key="link_text"
-              link_href="#diff"
-            />
+        <div className="frow">
+          <div className="fcol-md-6 fcol-sm-12">
+            <div className="lab-content">
+              <CardLeftImage
+                tmf={text_maker}
+                img_src={get_static_url("svg/DPs.svg")}
+                title_key="text_diff_lab_title"
+                text_key="text_diff_lab_text"
+                link_key="link_text"
+                link_href="#diff"
+              />
+            </div>
           </div>
-          <div className="lab-content">
-            <CardLeftImage
-              tmf={text_maker}
-              img_src={get_static_url("svg/time.svg")}
-              title_key="coming_soon_title"
-              text_key="coming_soon_text"
-            />
+          <div className="fcol-md-6 fcol-sm-12">
+            <div className="lab-content">
+              <CardLeftImage
+                tmf={text_maker}
+                img_src={get_static_url("svg/time.svg")}
+                title_key="coming_soon_title"
+                text_key="coming_soon_text"
+              />
+            </div>
           </div>
         </div>
       </StandardRouteContainer>
