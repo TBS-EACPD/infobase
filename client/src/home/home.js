@@ -190,7 +190,7 @@ const SubAppLayout = props => (
     <div className="container">
       <div className="xtralinks">
         <div className='frow'>
-          <div className="fcol-md-3 linkcard">
+          <div className="fcol-md-3 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               img_src={get_static_url("svg/partition-icon.svg")}
@@ -199,7 +199,7 @@ const SubAppLayout = props => (
               link_href="#partition"
             />
           </div>
-          <div className="fcol-md-3 linkcard">
+          <div className="fcol-md-3 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               img_src={get_static_url("svg/partition-icon-budget.svg")}
@@ -208,7 +208,7 @@ const SubAppLayout = props => (
               link_href="#budget-tracker"
             />
           </div>
-          <div className="fcol-md-3 linkcard">
+          <div className="fcol-md-3 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               img_src={get_static_url("svg/compare-estimates.svg")}
@@ -217,7 +217,7 @@ const SubAppLayout = props => (
               link_href="#compare_estimates"
             />
           </div>
-          <div className="fcol-md-3 linkcard">
+          <div className="fcol-md-3 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               img_src={get_static_url("svg/structure.svg")}
@@ -226,7 +226,9 @@ const SubAppLayout = props => (
               link_href="#igoc"
             />
           </div>
-          <div className="fcol-md-3 linkcard">
+        </div>
+        <div className='frow'>
+          <div className="fcol-md-3 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               img_src={get_static_url("svg/treemap.svg")}
@@ -235,7 +237,7 @@ const SubAppLayout = props => (
               link_href="#treemap"
             />
           </div>
-          <div className="fcol-md-3 linkcard">
+          <div className="fcol-md-3 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               img_src={get_static_url("svg/explorer.svg")}
@@ -244,7 +246,7 @@ const SubAppLayout = props => (
               link_href="#resource-explorer"
             />
           </div>
-          <div className="fcol-md-3 linkcard">
+          <div className="fcol-md-3 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               img_src={get_static_url("svg/builder.svg")}
@@ -253,7 +255,7 @@ const SubAppLayout = props => (
               link_href="#rpb"
             />
           </div>
-          <div className="fcol-md-3 linkcard">
+          <div className="fcol-md-3 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               img_src={get_static_url("svg/lab.svg")}
