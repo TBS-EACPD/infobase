@@ -34,7 +34,7 @@ else
   #  - to the right of mongod, open window for API populate_db process, keep trying to start it as the API packages may still be installing
   tmux new-session -t "IB" \; \
     split-window -h \; \
-    send-keys "cd client && $can_reach_npm && npm ci || true && npm run IB_q" C-m \; \
+    send-keys "cd client && $can_reach_npm && npm ci || true && npm run IB_q_both" C-m \; \
     split-window -v \; \
     send-keys 'cd client && while true; do npm run serve-loopback; sleep 30; done' C-m \; \
     split-window -v \; \
