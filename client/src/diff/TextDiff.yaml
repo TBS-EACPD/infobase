@@ -20,22 +20,22 @@ select_dept:
 
 select_cr:
   en: |
-    Filter by core responsibility:
+    Filter by Core Responsibility:
   fr: |
     Filtrer par responsabilité essentielle (facultatif) :
 
 select_program:
   en: |
-    Filter by program (optional):
+    Filter by Program (optional):
   fr: |
     Filtrer par programme (facultatif) :
 
 all_crs:
-  en: All core responsibilities
+  en: All Core Responsibilities
   fr: Toutes les responsabilités essentielles
 
 all_programs:
-  en: All programs
+  en: All Programs
   fr: Toutes les programmes
 
 indicator_name:
