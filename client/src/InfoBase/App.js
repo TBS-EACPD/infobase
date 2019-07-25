@@ -21,6 +21,7 @@ import { SpinnerWrapper } from '../components/SpinnerWrapper.js';
 import { PageDetails } from '../components/PageDetails.js';
 
 const Home = retrying_react_lazy( () => import('../home/home.js') );
+const A11yHome = retrying_react_lazy( () => import('../home/a11y_home.js') );
 const GraphInventory = retrying_react_lazy( () => import('../graph_route/GraphInventory.js') );
 const PartitionRoute = retrying_react_lazy( () => import('../partition/partition_subapp/PartitionRoute.js') );
 const BudgetMeasuresRoute = retrying_react_lazy( () => import('../partition/budget_measures_subapp/BudgetMeasuresRoute.js') );
@@ -74,8 +75,8 @@ export class App extends React.Component {
               <Route path="/lab" component={Lab} />
               { !window.is_a11y_mode && <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} /> }
               { !window.is_a11y_mode && <Route path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?" component={TreeMap} /> }
-              <Route path="/start/:no_basic_equiv?" component={Home} /> 
-              <Route path="/" component={Home} />
+              <Route path="/start/:no_basic_equiv?" component={A11yHome} /> 
+              { window.is_a11y_mode ? <Route path="/" component={A11yHome} /> : <Route path="/" component={Home} /> }
             </Switch>
             <PageDetails />
           </Suspense>
