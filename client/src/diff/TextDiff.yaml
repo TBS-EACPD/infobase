@@ -8,22 +8,21 @@ diff_intro_text:
     Text shaded in red on the left was deleted and text in green on the right was added.
     Please note that because of limitations of the difference highlighting algorithm, some formatting may show as raw markdown (e.g. '**').
   fr: |
-    Ceci est un outil en permettant comparer des portions d'indicateurs textuelles entre les plans ministériels 2018-2019 et 2019-2020.
-    Le texte coloré en rouge à gauche a été enlevé et le texte coloré en vert à droite a été ajouté.
-    Notez qu'il peut avoir quelques exemples de mise en forme qui s'affiche comme markdown brut (p. ex. '**'),
-    en raison des limitations de l'algorithme de mise en évidence des différences.
+    Cet outil permet de comparer entre elles des portions de texte d’indicateurs dans les plans ministériels de 2018-2019 et de 2019-2020.
+    Le texte en rouge sur la gauche a été supprimé et le texte en vert sur la droite a été ajouté. En raison des limites de l'algorithme
+    de mise en surbrillance des différences, certains formats peuvent figurer comme un code de démarquage brut (p. ex. '**').
 
 select_dept:
   en: |
     Select an organization:
   fr: |
-    Sélectionner un organisme:
+    Sélectionnez une organisation :
 
 select_cr:
   en: |
-    Filter by core responsibility (optional):
+    Filtrer par responsabilité essentielle (facultatif) :
   fr: |
-    Filtrer par responsabilité essentielle (optionnel):
+    Filtrer par programme (facultatif) :
 
 select_program:
   en: |
@@ -106,5 +105,5 @@ indicator_counts_text:
   en: |
     In {{doc_year_1}} and/or {{doc_year_2}}, **{{infograph_res_link subject name}}** planned to measure **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicator" "indicators"}}.
   fr: |
-    En {{doc_year_1}} et/ou {{doc_year_2}}, **{{infograph_res_link subject name}}** prévoyait mesurer **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicateur" "indicateurs"}}.
+    Pour les exercices {{doc_year_1}} et {{doc_year_2}}, le **{{infograph_res_link subject name}}** a prévu de mesurer **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicateur" "indicateurs"}}.
     
