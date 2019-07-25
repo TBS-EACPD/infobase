@@ -103,7 +103,7 @@ list_of_indicators:
 indicator_counts_text:
   transform: [handlebars,markdown]
   en: |
-    In {{doc_year_1}} and/or {{doc_year_2}}, **{{infograph_res_link subject name}}** planned to measure **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicator" "indicators"}}.
+    In {{doc_year_1}} and {{doc_year_2}}, **{{infograph_res_link subject name}}** planned to measure **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicator" "indicators"}}.
   fr: |
     Pour les exercices {{doc_year_1}} et {{doc_year_2}}, le **{{infograph_res_link subject name}}** a prévu de mesurer **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicateur" "indicateurs"}}.
     
