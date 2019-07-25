@@ -43,7 +43,7 @@ Snapshot tests can be run by following the steps in "Running the API server loca
 ## File structure
 
 ### models/
-* models are organized by area in `src/models/`
+* models are organized by topic (e.g. finance) in `src/models/`
 * each `src/models/<model_name>/` will contain 
   1. The model definitions (`models.js`)
   2. Code to populate the models, usually fetching csv strings from `../data/` (`populate.js`)
@@ -58,8 +58,7 @@ Snapshot tests can be run by following the steps in "Running the API server loca
 In production, we use a MongoDB Atlas hosted database. This has little relevance to the source code, outside of `src/db_utils.js`.
 
 ### Google Cloud Function
-The production environment for the express/GraphQL server is a Google Cloud Function. Again, this hasn't had much of a lock-in effect on the source code, although a few optimizations and decisions were made with a serverless environment in mind. We currently transpile with a traget of Node 6 because that is what GCFs run (TODO: update to Node 8 GCFs).
-
+The production environment for the express/GraphQL server is a Google Cloud Function. This hasn't affected much in the code, although a few optimizations and decisions were made with a serverless environment in mind. We currently transpile with a traget of Node 8 because that is what GCFs run.
 
 L'interface de programmation d'applications (API) de l'InfoBase
 ========
@@ -100,3 +99,28 @@ Une interface de programmation d'applications GraphQL pour les données.
 Cette type de test n'est pas la meilleure, mais c'est plus que rien. Ces tests lancent des requêtes GraphQL préconfigurées sous le serveur local GraphQL et ils s'assurent que le réponse est identique à un réponse snapshot qui a été archivé dans le dépôt. Notez que ces snapshots utilisent un ensemble séparé de données de test qui se trouve à `../test-data`, donc les mises à jour de données n'invalident pas ces tests. Par contre, on doit mettre à jour les données de tests périodiquement pour s'assurer ils contiennent tous les cas de bord importants. Après, les snapshots doivent être régénérés (et on devrait vérifier les snapshots à main pour vérifier leur exactitude).
 
 Vous pouvez lancer les test snapshot par suivre les étapes au-dessus et ensuite lancer `npm test`.
+
+## Structure des fichiers
+
+### fichier models/
+
+* les modèles sont organisés par sujet dans le fichier `src/models/`
+* chaque fichier `src/models/<nom de modèle>/` contient
+  i. Les définitions des modèles (`models.js`)
+  ii. Code qui se populent les modèles par aller chercher des chaînes en forme csv dans le fichier `../data/` (`populate.js`)
+  iii. Les définitions du schéma (la chaînes du schéma et les résolveurs) (`schema.js`)
+    * Ceci est le part le plus compliqué. Les chaînes du schéma peut utiliser le mot-clé `extend` pour ajouter des champs aux autres types
+    * Les résolveurs sont fusionnés de façon profond, on n'a pas besoin d'utiliser le mot-clé `extend`
+
+## Outils infonuagiques
+
+### Mongodb Atlas
+
+Dans l'environnement de production, on utilise une base de données MongoDB Atlas. Ceci a peu de pertinence à l'exception de `src/db_utils.js`.
+
+### Fonction Google Cloud
+
+L'environnement de production pour le serveur express/GraphQL est une fonction Google Cloud. Celui n'affectait pas beaucoup dans le code, mais quelques optimisations ont été faites et décisions ont été prises avec une environnement sans serveur à l'esprit.
+
+This hasn't affected much in the code, although a few optimizations and decisions were made with a serverless environment in mind. We currently transpile with a traget of Node 8 because that is what GCFs run.
+ 
