@@ -1,4 +1,4 @@
-*(le Français suit)*
+*(le Français suit. Notez que la traduction Française est un brouillon et peut contenir des er)*
 
 InfoBase API
 ========
@@ -35,7 +35,7 @@ GraphQL API for InfoBase data.
 ## Tests
 
 ### Snapshot tests
-Not great, but better than nothing. These tests largely run preconfigured GraphQL queries against the local GraphQL server and ensure that the reponse matches a response snapshot committed in to the repo along side the relevant model. Note that these snapshots use a separate set of testing data found in `../test-data`, meaning that snapshots aren't made stale by generic data updates. On the other hand, the test data must be updated periodically to ensure it contains all important edge cases, after which the testing snapshots need to be reproduced (and sampled to manually confirm correctness, when they're first produced).
+Not great, but better than nothing. These tests largely run preconfigured GraphQL queries against the local GraphQL server and ensure that the reponse matches a response snapshot committed in to the repo along side the relevant model. Note that these snapshots use a separate set of testing data found in `../test-data`, meaning that snapshots aren't made stale by generic data updates. On the other hand, the test data must be updated periodically to ensure it contains all important edge cases, after which the testing snapshots need to be regenerated (and the test snapshots should be checked manually to confirm correctness).
 
 Snapshot tests can be run by following the steps in "Running the API server locally" followed by running `npm test`.
 
@@ -69,7 +69,7 @@ L'interface de programmation d'applications (API) de l'InfoBase
 Une interface de programmation d'applications GraphQL pour les données.
 
 ## Table des matières
-- [l'interface de programmation d'applications (API) de l'InfoBase](#L'interface-de-programmation-d'applications-(API)-de l'InfoBase)
+- [l'interface de programmation d'applications (API) de l'InfoBase](#Linterface-de-programmation-d'applications-(API)-de l'InfoBase)
   - [Table des matières](#Table-des-matières)
   - [Commencer](#Commencer)
     - [Lancer le serveur de l'API](#Lancer-le-serveur-de-l'API)
@@ -80,3 +80,23 @@ Une interface de programmation d'applications GraphQL pour les données.
   - [Outils infonuagiques](#Outils-infonuagiques)
     - [Mongodb Atlas](#Mongodb-Atlas)
     - [Fonction Google Cloud](#Fonction-Google-Cloud)
+    
+## Commencer
+
+### Lancer le serveur de l'API
+
+0. Installez node ^9.0.0, npm ^5.7.1, et mongo
+1. Lancez `mongod` avec un commande d'exécution supplémentaire ou en arrière-plan
+2. Lancez un commande d'exécution à le fichier `/server`
+3. `npm ci` pour charger les node_modules réquises
+4. `npm run populate_db` pour peupler une base de données mongo (au nom `infobase`). Peut être laissé regardant aux changements dans le fichier `../data`
+5. `npm start` pour lancer le serveur express/GraphQL qui entend à `localhost:1337`. Ce processus regarde pour les changements au fichier `src`
+6. Facultatif: visitez `http://localhost:1337`, où se trouve une instance GraphiQL, pour tester quelques requêtes
+
+## Tests
+
+### Tests « Snapshot »
+
+Cette type de test n'est pas la meilleure, mais c'est plus que rien. Ces tests lancent des requêtes GraphQL préconfigurées sous le serveur local GraphQL et ils s'assurent que le réponse est identique à un réponse snapshot qui a été archivé dans le dépôt. Notez que ces snapshots utilisent un ensemble séparé de données de test qui se trouve à `../test-data`, donc les mises à jour de données n'invalident pas ces tests. Par contre, on doit mettre à jour les données de tests périodiquement pour s'assurer ils contiennent tous les cas de bord importants. Après, les snapshots doivent être régénérés (et on devrait vérifier les snapshots à main pour vérifier leur exactitude).
+
+Vous pouvez lancer les test snapshot par suivre les étapes au-dessus et ensuite lancer `npm test`.
