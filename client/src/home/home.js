@@ -167,8 +167,7 @@ const HomeLayout = props => (
         backgroundImage: `URL(${get_static_url("svg/backbanner.svg")})`,
         paddingTop: "10px",
         paddingBottom: "10px",
-        borderBottom: "0px",
-        borderTop: `10px solid ${window.infobase_color_constants.highlightColor}`,
+        borderBottom: `5px solid ${window.infobase_color_constants.highlightColor}`,
       }}
     >
       <div className="container">
