@@ -20,15 +20,15 @@ select_dept:
 
 select_cr:
   en: |
-    Filtrer par responsabilité essentielle (facultatif) :
+    Filter by core responsibility:
   fr: |
-    Filtrer par programme (facultatif) :
+    Filtrer par responsabilité essentielle (facultatif) :
 
 select_program:
   en: |
     Filter by program (optional):
   fr: |
-    Filtrer par programme (optionnel):
+    Filtrer par programme (facultatif) :
 
 all_crs:
   en: All core responsibilities
