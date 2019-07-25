@@ -62,10 +62,7 @@ class BreadCrumbs extends React.Component {
     const content = (
       <ol className="breadcrumb">
         <li className="infobase-home-breadcrumb-link">
-          <a 
-            href="#start"
-            disabled={false}
-          >
+          <a href="#start">
             <img
               className="mrgn-rght-sm"
               title="InfoBase"
