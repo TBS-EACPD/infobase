@@ -4,11 +4,13 @@ diff_title:
 
 diff_intro_text:
   en: |
-    This is a tool to compare text portions of indicators between the 2018-19 and 2019-20 departmental plans.
+    The indicator comparison tool compares indicators and their data attributes such as methodology and targets and highlights portions
+    that have changed between the 2018-19 and 2019-20 departmental plans.
     Text shaded in red on the left was deleted and text in green on the right was added.
-    Please note that because of limitations of the difference highlighting algorithm, some formatting may show as raw markdown (e.g. '**').
+    Please note that limitations of the difference highlighting algorithm may cause some formatting to show as raw markdown (e.g. '**').
   fr: |
-    Cet outil permet de comparer entre elles des portions de texte d’indicateurs dans les plans ministériels de 2018-2019 et de 2019-2020.
+    Cet outil permet de comparer entre les indicateurs et leurs données tel que leurs méthodologies et leurs cibles, et surligne les
+    portions qui ont changé entre les plans ministériels de 2018-2019 et de 2019-2020.
     Le texte en rouge sur la gauche a été supprimé et le texte en vert sur la droite a été ajouté. En raison des limites de l'algorithme
     de mise en surbrillance des différences, certains formats peuvent figurer comme un code de démarquage brut (p. ex. '**').
 
