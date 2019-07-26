@@ -118,15 +118,16 @@ class InfoGraph_ extends React.Component {
       subject: props.subject,
       bubble: props.bubble,
       level: props.level,
-      include_programs: true,
-      include_crsos: true,
-      include_goco: true,
-      include_hwh: true,
-      include_hi: true,
-      include_orgs: true,
-      include_limited: true,
+      
       include_extensive: true,
-      org_scope: "all_orgs_with_gov",
+      include_limited: true,
+      
+      include_crsos: true,
+      include_programs: true,
+
+      include_goco: true,
+      include_hi: true,
+      include_hwh: true,
     };
     this.props = props;
 
@@ -186,124 +187,127 @@ class InfoGraph_ extends React.Component {
     const panel_keys = bubble_menu_loading || panels_for_subj_bubble({subject, bubble});
     const { prev, next } = bubble_menu_loading || this.get_previous_and_next_bubbles();
 
-    return <div>
-      <AnalyticsSynchronizer {...this.props} />
-      {
-        window.is_a11y_mode ? 
+    return (
+      <div>
+        <AnalyticsSynchronizer {...this.props} />
+        { window.is_a11y_mode &&
           <div>
             <TM k="a11y_search_other_infographs" />
             <EverythingSearch 
-              include_gov={false} 
               href_template={subj => infograph_href_template(subj, bubble, true)}
               search_text={text_maker('subject_search_placeholder')}
               large={true}
-              include_tags_goco={true}
-              include_tags_hwh={true}
-              include_tags_hi={true}
-              include_programs={true}
-              include_glossary={false}
-              include_crsos={true}
-              include_tables={false}
-              org_scope={"all_orgs_with_gov"}
-            />
-          </div> :
-        <div className="row mrgn-bttm-md infographic-search-container"> 
-          <div 
-            className="col-md-8" 
-          >
-            <EverythingSearch 
-              include_gov={false} 
-              href_template={subj => infograph_href_template(subj, bubble, true)}
-              search_text={text_maker('subject_search_placeholder')}
-              large={true}
-              include_tags_goco={this.state.include_goco}
-              include_tags_hwh={this.state.include_hwh}
-              include_tags_hi={this.state.include_hi}
-              include_programs={this.state.include_programs}
-              include_glossary={false}
-              include_crsos={this.state.include_crsos}
-              include_tables={false}
-              include_orgs_limited={this.state.include_limited}
+
               include_orgs_extensive={this.state.include_extensive}
-              org_scope={this.state.org_scope}
+              include_orgs_limited={this.state.include_limited}
+
+              include_crsos={this.state.include_crsos}
+              include_programs={this.state.include_programs}
+
+              include_tags_goco={this.state.include_goco}
+              include_tags_hi={this.state.include_hi}
+              include_tags_hwh={this.state.include_hwh}
+
+              include_glossary={false}
+              include_tables={false}
             />
           </div>
-          
-          <AdvancedSearch handleCheckBox={this.handleCheckBox} {...this.state}/>
-          
-        </div>
-      }
-      <div>
-        <div style={{position: 'relative'}}>
-          { loading && <SpinnerWrapper config_name={"route"} /> }
-          {
-            !loading && (
+        }
+        { !window.is_a11y_mode &&
+          <div className="row mrgn-bttm-md infographic-search-container"> 
+            <div className="col-md-8">
+              <EverythingSearch 
+                href_template={subj => infograph_href_template(subj, bubble, true)}
+                search_text={text_maker('subject_search_placeholder')}
+                large={true}
+
+                include_orgs_extensive={this.state.include_extensive}
+                include_orgs_limited={this.state.include_limited}
+
+                include_crsos={this.state.include_crsos}
+                include_programs={this.state.include_programs}
+
+                include_tags_goco={this.state.include_goco}
+                include_tags_hi={this.state.include_hi}
+                include_tags_hwh={this.state.include_hwh}
+
+                include_glossary={false}
+                include_tables={false}
+              />
+            </div>
+            <AdvancedSearch handleCheckBox={this.handleCheckBox} {...this.state}/>
+          </div>
+        }
+        <div>
+          <div style={{position: 'relative'}}>
+            { loading && <SpinnerWrapper config_name={"route"} /> }
+            { !loading && (
               window.is_a11y_mode ? 
                 <AccessibleBubbleMenu items={sorted_bubbles} /> : 
                 <BubbleMenu items={sorted_bubbles} />
-            )
+            )}
+          </div>
+        </div>
+        <div>
+          { window.is_a11y_mode &&
+            <p
+              id="infographic-explanation-focus"
+              aria-live="polite"
+              tabIndex={0}
+            >
+              { 
+                loading ? 
+                  "Loading..." :
+                  text_maker("a11y_infograph_description")
+              }
+            </p>
+          }
+          { !loading &&
+            _.map(panel_keys, graph_key => 
+              <ReactPanelGraph 
+                graph_key={graph_key}
+                subject={subject}
+                bubble={bubble}
+                key={graph_key + subject.guid}
+              />
+            )  
           }
         </div>
-      </div>
-      <div>
-        { window.is_a11y_mode &&
-          <p
-            id="infographic-explanation-focus"
-            aria-live="polite"
-            tabIndex={0}
-          >
-            { 
-              loading ? 
-                "Loading..." :
-                text_maker("a11y_infograph_description")
-            }
-          </p>
-        }
-        { !loading &&
-          _.map(panel_keys, graph_key => 
-            <ReactPanelGraph 
-              graph_key={graph_key}
-              subject={subject}
-              bubble={bubble}
-              key={graph_key + subject.guid}
-            />
-          )  
-        }
-      </div>
-      { !_.isEmpty(bubble) && 
-        <div className="row medium_panel_text">
-          <div className="previous_and_next_bubble_link_row">
-            { prev ? 
-              (
-                <a 
-                  className="previous_bubble_link btn-lg btn-ib-primary" 
-                  href={infograph_href_template(subject, prev.id)}
-                  onClick={reset_scroll}
-                  style={{textDecoration: "none"}}
-                >
-                  {`←  ${prev.title}`}
-                </a>
-              ) :
-              (<a style={{visibility: "hidden"}}></a>)
-            }
-            { next ? 
-              (
-                <a 
-                  className="next_bubble_link btn-lg btn-ib-primary" 
-                  href={infograph_href_template(subject, next.id)}
-                  onClick={reset_scroll}
-                  style={{textDecoration: "none"}}
-                > 
-                  {`${next.title}  →`}
-                </a>
-              ) :
-              (<a style={{visibility: "hidden"}}></a>)
-            }
+        { !_.isEmpty(bubble) && 
+          <div className="row medium_panel_text">
+            <div className="previous_and_next_bubble_link_row">
+              { prev ? 
+                (
+                  <a 
+                    className="previous_bubble_link btn-lg btn-ib-primary" 
+                    href={infograph_href_template(subject, prev.id)}
+                    onClick={reset_scroll}
+                    style={{textDecoration: "none"}}
+                  >
+                    {`←  ${prev.title}`}
+                  </a>
+                ) :
+                (<a style={{visibility: "hidden"}}></a>)
+              }
+              { next ? 
+                (
+                  <a 
+                    className="next_bubble_link btn-lg btn-ib-primary" 
+                    href={infograph_href_template(subject, next.id)}
+                    onClick={reset_scroll}
+                    style={{textDecoration: "none"}}
+                  > 
+                    {`${next.title}  →`}
+                  </a>
+                ) :
+                (<a style={{visibility: "hidden"}}></a>)
+              }
+            </div>
+            <div className="clearfix" />
           </div>
-          <div className="clearfix" />
-        </div>
-      }
-    </div>;
+        }
+      </div>
+    );
   }
 
   get_previous_and_next_bubbles(bubble_areas){
@@ -401,6 +405,4 @@ const InfoGraph = ({
 };
 
 
-
 export { InfoGraph as default };
-
