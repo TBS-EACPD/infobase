@@ -1,4 +1,4 @@
-import '../../components/PageDetails.scss';
+import './auth_exp_prog_spending.scss';
 import text from './historical_auth_exp.yaml';
 import text2 from '../../common_text/common_lang.yaml';
 import { Details } from '../../components/Details.js';
@@ -251,16 +251,13 @@ const render = function({calculations, footnotes, sources}) {
     >
       <Col size={4} isText>
         <TM k={text_keys_by_level[subject.level]} args={{...info, ...additional_info}} />
-        {
-          gap_year && 
-            <div className="pagedetails">
-              <div className="pagedetails__gap_explain">
-                <Details
-                  summary_content={<TM k={"gap_explain_title"} args={{...info, ...additional_info}}/>}
-                  content={<TM k={`${subject.level}_gap_explain_body`} args={{...info, ...additional_info}}/>}
-                />
-              </div>
-            </div>
+        { gap_year &&
+          <div className="auth-gap-details">
+            <Details
+              summary_content={<TM k={"gap_explain_title"} args={{...info, ...additional_info}}/>}
+              content={<TM k={`${subject.level}_gap_explain_body`} args={{...info, ...additional_info}}/>}
+            />
+          </div>
         }
       </Col>
       <Col size={8} isGraph>
