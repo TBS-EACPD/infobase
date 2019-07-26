@@ -1,5 +1,5 @@
 import './auth_exp_prog_spending.scss';
-import text from './historical_auth_exp.yaml';
+import text from './auth_exp_prog_spending.yaml';
 import text2 from '../../common_text/common_lang.yaml';
 import { Details } from '../../components/Details.js';
 import MediaQuery from 'react-responsive';
@@ -14,7 +14,7 @@ import {
   NivoResponsiveLine,
   newIBCategoryColors,
   formatter,
-} from "../shared";
+} from "../shared.js";
 
 const { 
   A11YTable,
@@ -48,63 +48,72 @@ const calculate = function(subject) {
 
 const render = function({calculations, footnotes, sources}) {
   const { info, graph_args, subject } = calculations;
+  const {exp, auth, progSpending} = graph_args;
+
+  const colors = d3.scaleOrdinal().range(newIBCategoryColors);
+  const raw_data = _.concat(exp, auth, progSpending);
+
   const history_ticks = _.map(std_years, run_template);
   const plan_ticks = _.map(planning_years, run_template);
-  const additional_info = {};
-  const year1 = _.chain(history_ticks)
+
+  const latest_historical_year = _.chain(history_ticks)
     .last()
     .split('-')
     .first()
     .parseInt()
     .value();
-  const year2 = _.chain(plan_ticks)
+  const first_planning_year = _.chain(plan_ticks)
     .first()
     .split('-')
     .first()
     .parseInt()
     .value();
-  const gap_year = year2 - year1 === 2 && subject.has_planned_spending ? `${year1+1}-${(year1+2).toString().substring(2)}` : null;
+  const gap_year = first_planning_year - latest_historical_year === 2 && subject.has_planned_spending ? 
+    `${latest_historical_year+1}-${(latest_historical_year+2).toString().substring(2)}` :
+    null;
+
   const marker_year = subject.has_planned_spending ? (gap_year || _.first(plan_ticks)) : null;
-  const {exp, auth, progSpending} = graph_args;
-  const colors = d3.scaleOrdinal().range(newIBCategoryColors);
-  const raw_data = _.concat(exp, auth, progSpending);
 
-  const series_labels = 
-    [
-      text_maker("expenditures"),
-      text_maker("authorities"),
-      subject.has_planned_spending ? text_maker("planned_spending") : null,
-    ];
+  const series_labels = [
+    text_maker("expenditures"),
+    text_maker("authorities"),
+    subject.has_planned_spending ? text_maker("planned_spending") : null,
+  ];
 
-  if(gap_year){
-    additional_info['last_history_year'] = _.last(history_ticks);
-    additional_info['last_planned_year'] = _.last(plan_ticks);
-    additional_info['gap_year'] = gap_year;
-    additional_info['plan_change'] = info[`${subject.level}_exp_planning_year_3`] - info['dept_auth_average'];
-  }
+  const additional_info = {
+    last_history_year: _.last(history_ticks),
+    last_planned_year: _.last(plan_ticks),
+    gap_year: gap_year,
+    plan_change: info[`${subject.level}_exp_planning_year_3`] - info['dept_auth_average'],
+  };
 
   let graph_content;
   if(window.is_a11y_mode){
-    const data = _.map(exp, (exp_value,year_index) => {
-      return {
+    const historical_data = _.map(
+      exp, 
+      (exp_value,year_index) => ({
         label: history_ticks[year_index],
         data: [
           formatter("compact2", exp_value, {raw: true}),
           formatter("compact2", auth[year_index], {raw: true}),
           null,
         ],
-      };
-    });
-    _.forEach(progSpending, (progSpending_value, year_index) => {
-      data.push({
+      })
+    );
+    
+    const planning_data = _.map(
+      progSpending, 
+      (progSpending_value, year_index) => ({
         label: plan_ticks[year_index],
         data: [
           null,
           null,
           formatter("compact2", progSpending_value, {raw: true}),
         ],
-      });
-    });
+      })
+    );
+
+    const data = _.concat(historical_data, planning_data);
 
     graph_content = (
       <A11YTable
@@ -137,7 +146,7 @@ const render = function({calculations, footnotes, sources}) {
           ...zip_years_and_data(plan_ticks, progSpending),
         ]),
       ])
-      .filter(row => row[0]!==null)
+      .filter( row => !_.isNull(row[0]) )
       .map( ([id, data]) => ({id, data}) )
       .value();
 
@@ -163,13 +172,16 @@ const render = function({calculations, footnotes, sources}) {
                   </tr>
                 )
               )}
-              {slice.data.length > 1 ? 
-              <tr>
-                <td style= {{height: '12px', width: '12px', padding: '3px 5px'}}/>
-                <td style={{padding: '3px 5px'}}> {text_maker('difference')} </td>
-                <td style={{padding: '3px 5px', color: window.infobase_color_constants.highlightColor}} dangerouslySetInnerHTML={{__html: tooltip_formatter(get_auth_exp_diff(slice.data))}}/>
-              </tr>
-              : null
+              { slice.data.length > 1 ? 
+                <tr>
+                  <td style= {{height: '12px', width: '12px', padding: '3px 5px'}}/>
+                  <td style={{padding: '3px 5px'}}> {text_maker('difference')} </td>
+                  <td 
+                    style={{padding: '3px 5px', color: window.infobase_color_constants.highlightColor}} 
+                    dangerouslySetInnerHTML={{__html: tooltip_formatter(get_auth_exp_diff(slice.data))}}
+                  />
+                </tr> :
+                null
               }
             </tbody>
           </table>
@@ -218,13 +230,22 @@ const render = function({calculations, footnotes, sources}) {
       ];  
     }
 
-    const nivo_mobile_props = _.cloneDeep(nivo_default_props);
-    nivo_mobile_props.margin.top = 60;
-    nivo_mobile_props.legends[0].translateY = -60;
-    nivo_mobile_props.legends[0].direction = "column";
-    nivo_mobile_props.legends[0].itemsSpacing = 1;
+    const nivo_mobile_props = _.merge(
+      {},
+      nivo_default_props,
+      {
+        margin: {top: 60},
+        legends: [
+          {
+            translateY: -60,
+            directio: "column",
+            itemsSpacing: 1,
+          },
+        ],
+      }
+    );
 
-    graph_content = 
+    graph_content = (
       <div style={{height: 400}} aria-hidden = {true}>
         {
           <MediaQuery minWidth={991}>
@@ -240,7 +261,8 @@ const render = function({calculations, footnotes, sources}) {
             />
           </MediaQuery>
         }
-      </div>;
+      </div>
+    );
   }
 
   return (
