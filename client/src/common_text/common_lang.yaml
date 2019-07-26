@@ -1029,9 +1029,9 @@ temp_qfr_late_depts_note:
 
 beta_banner_content:
   en: |
-    You're visiting a 'beta' version of GC InfoBase. Testing and improvement of this page will be continual, and it may not work for everyone at all times.
+    You're visiting a "beta" version of GC InfoBase. This is a work in progress and changes are being made on a regular basis. Your experience may vary depending on the device and/or the browser used
   fr: |
-    Vous visitez une version « beta » de l'InfoBase du GC. Cette page sera continuellement testée et améliorée, et il se peut qu'elle ne fonctionne pas tout le temps pour tout le monde.
+    Vous visitez une version « beta » de l'InfoBase du GC. Ces travaux sont en cours et des changements sont apportés régulièrement. Votre expérience peut varier selon l'appareil ou le navigateur utilisé.
 
 SOBJ1: 
     text: Personnel
