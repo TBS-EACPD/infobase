@@ -1,10 +1,9 @@
 import { withRouter } from 'react-router';
 
 import { BaseTypeahead } from './BaseTypeahead.js';
-import { 
-  all_dp_orgs, 
-  all_orgs_without_gov,
-  orgs_with_data_with_gov, 
+import {
+  make_orgs_search_config,
+  all_dp_orgs,
 } from './search_configs.js';
 
 class DeptSearchWithoutRouter extends React.Component {
@@ -26,13 +25,11 @@ class DeptSearchWithoutRouter extends React.Component {
       };
     }
   
-    let search_config = orgs_with_data_with_gov;
-    if(include_orgs_without_data){
-      search_config = all_orgs_without_gov;
-    }
-    if(only_include_dp){
-      search_config = all_dp_orgs;
-    }
+    const search_config = only_include_dp ?
+      all_dp_orgs :
+      make_orgs_search_config({
+        orgs_to_include: !include_orgs_without_data ? "all" : "with_data",
+      });
     
     return <BaseTypeahead
       onNewQuery = { onNewQuery }

@@ -131,15 +131,8 @@ const HomeLayout = props => (
             <div className="search-box">
               <div className="search-container home-search-container">
                 <EverythingSearch 
-                  include_gov={false} 
                   search_text={home_tm('everything_search_placeholder')}
                   large={true}
-                  include_tags={true}
-                  include_programs={true}
-                  include_crsos={true}
-                  include_tables={true} 
-                  include_glossary={true}
-                  org_scope="all_orgs_with_gov"
                   href_template={ general_href_for_item }
                   onNewQuery={ query => { 
                     log_standard_event({
