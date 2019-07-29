@@ -65,7 +65,7 @@ L'interface de programmation d'applications (API) de l'InfoBase
 
 [![CircleCI](https://circleci.com/gh/TBS-EACPD/InfoBase.svg?style=svg&circle-token=a99b6b8309e5edd904b0386c4a92c10bf5f43e29)](https://circleci.com/gh/TBS-EACPD/InfoBase)
 
-Une interface de programmation d'applications GraphQL pour les données.
+Une interface de programmation d'applications GraphQL pour les données de l'InfoBase.
 
 ## Table des matières
 - [l'interface de programmation d'applications (API) de l'InfoBase](#Linterface-de-programmation-d'applications-(API)-de l'InfoBase)
