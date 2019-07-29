@@ -1,4 +1,4 @@
-*(le Français suit. Notez que la traduction Française est un brouillon et peut contenir des er)*
+*(le Français suit)*
 
 InfoBase API
 ========
