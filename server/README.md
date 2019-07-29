@@ -68,17 +68,17 @@ L'interface de programmation d'applications (API) de l'InfoBase
 Une interface de programmation d'applications GraphQL pour les données de l'InfoBase.
 
 ## Table des matières
-- [l'interface de programmation d'applications (API) de l'InfoBase](#Linterface-de-programmation-d'applications-(API)-de l'InfoBase)
-  - [Table des matières](#Table-des-matières)
-  - [Commencer](#Commencer)
-    - [Lancer le serveur de l'API](#Lancer-le-serveur-de-l'API)
-  - [Tests](#Tests)
-    - [Tests «Snapshot»](#Tests-Snapshot)
-  - [Structure des fichiers](#Structure-des-fichiers)
+- [l'interface de programmation d'applications (API) de l'InfoBase](#linterface-de-programmation-dapplications-api-de-linfobase)
+  - [Table des matières](#table-des-matières)
+  - [Commencer](#commencer)
+    - [Lancer le serveur de l'API](#lancer-le-serveur-de-lapi)
+  - [Tests](#tests-1)
+    - [Tests «Snapshot»](#tests--snapshot-)
+  - [Structure des fichiers](#structure-des-fichiers)
     - [fichier models/](#fichier-models)
-  - [Outils infonuagiques](#Outils-infonuagiques)
-    - [Mongodb Atlas](#Mongodb-Atlas)
-    - [Fonction Google Cloud](#Fonction-Google-Cloud)
+  - [Outils infonuagiques](#outils-infonuagiques)
+    - [Mongodb Atlas](#mongodb-atlas-1)
+    - [Fonction Google Cloud](#fonction-google-cloud)
     
 ## Commencer
 
