@@ -18,9 +18,8 @@ import { ReactPanelGraph } from '../core/PanelCollectionView.js';
 import {
   create_text_maker_component,
   SpinnerWrapper,
-  EverythingSearch,
+  AdvancedSearch,
 } from '../util_components.js';
-import { AdvancedSearch } from '../components/AdvancedSearch.js';
 
 import { infograph_href_template } from './routes.js';
 
@@ -118,22 +117,8 @@ class InfoGraph_ extends React.Component {
       subject: props.subject,
       bubble: props.bubble,
       level: props.level,
-      
-      include_extensive: true,
-      include_limited: true,
-      
-      include_crsos: true,
-      include_programs: true,
-
-      include_goco: true,
-      include_hi: true,
-      include_hwh: true,
     };
-    this.props = props;
-
-    this.handleCheckBox = this.handleCheckBox.bind(this);
   }
-
   static getDerivedStateFromProps(nextProps, prevState){
     if ( !shallowEqualObjectsOverKeys(nextProps, prevState, ['subject','bubble','level']) ){
       return {
@@ -169,13 +154,6 @@ class InfoGraph_ extends React.Component {
       }
     }
   }
-
-  handleCheckBox(e, include_configs){
-    Object.keys(include_configs).forEach(key => {
-      this.setState({[key]: include_configs[key]});
-    });
-  }
-
   render(){
     const { subject, bubble } = this.props;
     const { bubble_menu_loading, infographic_loading } = this.state;
@@ -187,55 +165,43 @@ class InfoGraph_ extends React.Component {
     const panel_keys = bubble_menu_loading || panels_for_subj_bubble({subject, bubble});
     const { prev, next } = bubble_menu_loading || this.get_previous_and_next_bubbles();
 
+    const search_component = <AdvancedSearch
+      everything_search_config={{
+        href_template: subj => infograph_href_template(subj, bubble, true),
+        search_text: text_maker('subject_search_placeholder'),
+        large: true,
+      }}
+      
+      initial_configs={{
+        include_orgs_normal_data: true,
+        include_orgs_limited_data: true,
+
+        include_crsos: true,
+        include_programs: true,
+
+        include_tags_goco: true,
+        include_tags_hi: true,
+        include_tags_hwh: true,
+      }}
+
+      invariant_configs={{
+        include_glossary: false,
+        include_tables: false,
+      }}
+    />;
+
     return (
       <div>
         <AnalyticsSynchronizer {...this.props} />
         { window.is_a11y_mode &&
           <div>
             <TM k="a11y_search_other_infographs" />
-            <EverythingSearch 
-              href_template={subj => infograph_href_template(subj, bubble, true)}
-              search_text={text_maker('subject_search_placeholder')}
-              large={true}
-
-              include_orgs_extensive={this.state.include_extensive}
-              include_orgs_limited={this.state.include_limited}
-
-              include_crsos={this.state.include_crsos}
-              include_programs={this.state.include_programs}
-
-              include_tags_goco={this.state.include_goco}
-              include_tags_hi={this.state.include_hi}
-              include_tags_hwh={this.state.include_hwh}
-
-              include_glossary={false}
-              include_tables={false}
-            />
+            {search_component}
           </div>
         }
         { !window.is_a11y_mode &&
           <div className="row mrgn-bttm-md infographic-search-container"> 
-            <div className="col-md-8">
-              <EverythingSearch 
-                href_template={subj => infograph_href_template(subj, bubble, true)}
-                search_text={text_maker('subject_search_placeholder')}
-                large={true}
-
-                include_orgs_extensive={this.state.include_extensive}
-                include_orgs_limited={this.state.include_limited}
-
-                include_crsos={this.state.include_crsos}
-                include_programs={this.state.include_programs}
-
-                include_tags_goco={this.state.include_goco}
-                include_tags_hi={this.state.include_hi}
-                include_tags_hwh={this.state.include_hwh}
-
-                include_glossary={false}
-                include_tables={false}
-              />
-            </div>
-            <AdvancedSearch handleCheckBox={this.handleCheckBox} {...this.state}/>
+            {search_component}
           </div>
         }
         <div>
