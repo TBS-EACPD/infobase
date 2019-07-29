@@ -32,8 +32,10 @@ import {
 
 
 import { DeptSearch, DeptSearchWithoutRouter } from './search/DeptSearch.js';
-import { EverythingSearch } from './search/EverythingSearch.js';
 import { GlossarySearch } from './search/GlossarySearch.js';
+import { EverythingSearch } from './search/EverythingSearch.js';
+import { AdvancedSearch } from './search/AdvancedSearch.js';
+
 import { ShareButton } from './components/ShareButton.js';
 
 import { 
@@ -115,8 +117,9 @@ export {
   FancyUL,
   DeptSearch,
   DeptSearchWithoutRouter,
-  EverythingSearch,
   GlossarySearch,
+  EverythingSearch,
+  AdvancedSearch,
   TextMaker,
   TM,
   TrivialTextMaker,
