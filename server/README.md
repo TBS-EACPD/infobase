@@ -87,9 +87,9 @@ Une interface de programmation d'applications GraphQL pour les données.
 0. Installez node ^9.0.0, npm ^5.7.1, et mongo
 1. Lancez `mongod` avec un commande d'exécution supplémentaire ou en arrière-plan
 2. Lancez un commande d'exécution à le fichier `/server`
-3. `npm ci` pour charger les node_modules réquises
+3. `npm ci` pour installer les node_modules nécessitées
 4. `npm run populate_db` pour peupler une base de données mongo (au nom `infobase`). Peut être laissé regardant aux changements dans le fichier `../data`
-5. `npm start` pour lancer le serveur express/GraphQL qui entend à `localhost:1337`. Ce processus regarde pour les changements au fichier `src`
+5. `npm start` pour lancer le serveur express/GraphQL qui entend à `localhost:1337`. Ce processus détecte les changements au fichier `src`
 6. Facultatif: visitez `http://localhost:1337`, où se trouve une instance GraphiQL, pour tester quelques requêtes
 
 ## Tests
