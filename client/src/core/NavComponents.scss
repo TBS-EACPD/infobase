@@ -5,6 +5,7 @@ a.nav-item {
     color: $textColor !important;
     &:hover {
       color: $tertiaryColor !important;
+      text-decoration: none;
     }
   }
 
