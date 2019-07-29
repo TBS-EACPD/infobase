@@ -109,7 +109,7 @@ Vous pouvez lancer les test snapshot par suivre les étapes au-dessus et ensuite
   i. Les définitions des modèles (`models.js`)
   ii. Code qui se populent les modèles par aller chercher des chaînes en forme csv dans le fichier `../data/` (`populate.js`)
   iii. Les définitions du schéma (la chaînes du schéma et les résolveurs) (`schema.js`)
-    * Ceci est le part le plus compliqué. Les chaînes du schéma peut utiliser le mot-clé `extend` pour ajouter des champs aux autres types
+    * Ceci est la partie le plus compliqué. Les chaînes du schéma peut utiliser le mot-clé `extend` pour ajouter des champs aux autres types
     * Les résolveurs sont fusionnés de façon profond, on n'a pas besoin d'utiliser le mot-clé `extend`
 
 ## Outils infonuagiques
