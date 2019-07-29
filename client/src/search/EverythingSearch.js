@@ -2,10 +2,7 @@ import { withRouter } from 'react-router';
 
 import { BaseTypeahead } from './BaseTypeahead.js';
 import {
-  all_orgs_with_gov, 
-  all_orgs_without_gov,
-  orgs_with_data_with_gov,
-  orgs_without_data_with_gov, 
+  make_orgs_search_config,
 
   crsos as crso_search_config,
   programs as program_search_config,
@@ -20,16 +17,6 @@ import {
 
 import { trivial_text_maker } from '../models/text.js';
 
-
-const get_org_search_config = (include_gov, include_orgs_extensive, include_orgs_limited) => {
-  if (include_orgs_extensive && include_orgs_limited){
-    return include_gov ? all_orgs_with_gov : all_orgs_without_gov;
-  } else if (include_orgs_extensive){
-    return orgs_with_data_with_gov;
-  } else if (include_orgs_limited){
-    return orgs_without_data_with_gov;
-  }
-};
 
 const get_tag_search_configs = (include_tags_goco, include_tags_hi, include_tags_hwh) => _.compact([
   include_tags_goco && gocos,
@@ -48,6 +35,7 @@ const EverythingSearch = withRouter(
         include_gov,
         include_orgs_extensive,
         include_orgs_limited,
+        reject_dead_orgs,
 
         include_crsos,
         include_programs,
@@ -68,8 +56,16 @@ const EverythingSearch = withRouter(
         };
       }
 
+      const orgs_to_include = include_orgs_extensive && include_orgs_limited ?
+        "all" :
+        include_orgs_limited ?
+          "without_data" :
+          include_orgs_extensive ?
+            "with_data":
+            false;
+
       const search_configs = _.compact([
-        get_org_search_config(include_gov, include_orgs_extensive, include_orgs_limited),
+        orgs_to_include && make_orgs_search_config({include_gov, orgs_to_include, reject_dead_orgs}),
         
         include_crsos ? crso_search_config : null,
         include_programs ? program_search_config : null,
@@ -95,6 +91,7 @@ EverythingSearch.defaultProps = {
   include_gov: true,
   include_orgs_extensive: true,
   include_orgs_limited: true,
+  reject_dead_orgs: true,
 
   include_crsos: true,
   include_programs: true,
