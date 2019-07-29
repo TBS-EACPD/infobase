@@ -258,9 +258,7 @@ export default class GraphInventory extends React.Component {
         <div className="mrgn-bttm-lg">
           <EverythingSearch
             placeholder="See this graph with another subject"
-            org_scope="all_orgs_with_gov"
-            include_tags={true}
-            include_programs={true}
+            reject_dead_orgs={false}
             href_template={ subj => url_template(subj, panel) }
           />
         </div>

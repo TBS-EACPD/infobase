@@ -49,6 +49,7 @@ const memoized_re_matchers = _.memoize(
   (query, accessors, config_name) => query + config_name
 );
 
+
 const org_attributes_to_match = [ 
   'legal_name', 
   'applied_title',
@@ -109,36 +110,54 @@ const org_templates = {
   },
 };
 
-const orgs_with_data_with_gov = {
-  ...org_templates,
-  get_data: () => [Gov].concat( Dept.depts_with_data() ),
-  filter: (query, datum) => memoized_re_matchers(query, org_attributes_to_match, "orgs_with_data_with_gov")(datum),
+const org_search_config_option_defaults = {
+  orgs_to_include: "all",
+  include_gov: true,
+  reject_dead_orgs: true,
 };
+const make_orgs_search_config = (options) => {
+  const {
+    orgs_to_include,
+    include_gov,
+    reject_dead_orgs,
+  } = {
+    ...org_search_config_option_defaults,
+    ...options,
+  };
 
-const orgs_without_data_with_gov = {
-  ...org_templates,
-  get_data: () => [Gov].concat( Dept.depts_without_data() ),
-  filter: (query, datum) => memoized_re_matchers(query, org_attributes_to_match, "orgs_without_data_with_gov")(datum),
+  const org_data = (() => {
+    switch(orgs_to_include){
+      case "all":
+        return Dept.get_all();
+      case "with_data":
+        return Dept.depts_with_data();
+      case "without_data":
+        return Dept.depts_without_data();
+      default: 
+        throw `Error: make_orgs_search_config option orgs_to_include is an enum, {"all", "with_data", "without_data"}. Given value of "${orgs_to_include}" is invalid.`;
+    }
+  })();
+  const get_data = () => _.chain(org_data)
+    .thru( data => include_gov ? [Gov].concat(data) : data)
+    .thru( data => reject_dead_orgs ? _.reject(data, "is_dead") : data)
+    .value();
+
+  const with_or_without = (boolean) => boolean ? "with" : "without"; 
+  const config_name = `orgs_${orgs_to_include}_${with_or_without(include_gov)}_gov_${with_or_without(!reject_dead_orgs)}_dead`;
+
+  return {
+    ...org_templates,
+    get_data,
+    filter: (query, datum) => memoized_re_matchers(query, org_attributes_to_match, config_name)(datum),
+  };
 };
-
-const all_orgs_without_gov = {
-  ...org_templates,
-  get_data: () => Dept.get_all(),
-  filter: (query, datum) => memoized_re_matchers(query, org_attributes_to_match, "all_orgs_without_gov")(datum),
-};
-
-const all_orgs_with_gov = {
-  ...org_templates,
-  get_data: () => [ Gov ].concat( _.reject(Dept.get_all(), "is_dead") ),
-  filter: (query, datum) => memoized_re_matchers(query, org_attributes_to_match, "all_orgs_with_gov")(datum),
-};
-
 
 const all_dp_orgs = {
   ...org_templates,
   get_data: () => _.filter(Dept.get_all(), 'dp_status'),
   filter: (query, datum) => memoized_re_matchers(query, org_attributes_to_match, "all_dp_orgs")(datum),
 };
+
 
 const glossary_attributes_to_match = [
   'definition', 
@@ -224,6 +243,7 @@ const datasets = {
   filter: (query, datum) => memoized_re_matchers(query, ['name', 'flat_tag_titles'], "datasets")(datum),
 };
 
+
 const programs = {
   header_function: () => trivial_text_maker('programs'),
   name_function: program => `${program.name} (${program.dept.fancy_name})`,
@@ -271,20 +291,21 @@ const crsos = {
   filter: (query, datum) => memoized_re_matchers(query, ['name', 'activity_code'], "crsos")(datum),
 };
 
+
 export {
   highlight_search_match,
 
-  all_orgs_without_gov,
-  orgs_with_data_with_gov,
-  orgs_without_data_with_gov,
-  all_orgs_with_gov,
-  glossary,
-  glossary_lite,
-  how_we_help,
+  make_orgs_search_config,
+  all_dp_orgs,
+  
+  crsos,
+  programs,
+  
   gocos,
   horizontal_initiative,
+  how_we_help,
+  
   datasets,
-  programs,
-  crsos,
-  all_dp_orgs,
+  glossary,
+  glossary_lite,
 };
