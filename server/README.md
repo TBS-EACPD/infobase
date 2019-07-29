@@ -120,7 +120,4 @@ Dans l'environnement de production, on utilise une base de données MongoDB Atla
 
 ### Fonction Google Cloud
 
-L'environnement de production pour le serveur express/GraphQL est une fonction Google Cloud. Celui n'affectait pas beaucoup dans le code, mais quelques optimisations ont été faites et décisions ont été prises avec une environnement sans serveur à l'esprit.
-
-This hasn't affected much in the code, although a few optimizations and decisions were made with a serverless environment in mind. We currently transpile with a traget of Node 8 because that is what GCFs run.
- 
+L'environnement de production pour le serveur express/GraphQL est une fonction Google Cloud. Celui n'affectait pas beaucoup dans le code, mais quelques optimisations ont été faites et décisions ont été prises avec une environnement sans serveur à l'esprit. 
