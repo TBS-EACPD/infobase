@@ -33,8 +33,8 @@ const EverythingSearch = withRouter(
         history,
 
         include_gov,
-        include_orgs_extensive,
-        include_orgs_limited,
+        include_orgs_normal_data,
+        include_orgs_limited_data,
         reject_dead_orgs,
 
         include_crsos,
@@ -56,11 +56,11 @@ const EverythingSearch = withRouter(
         };
       }
 
-      const orgs_to_include = include_orgs_extensive && include_orgs_limited ?
+      const orgs_to_include = include_orgs_normal_data && include_orgs_limited_data ?
         "all" :
-        include_orgs_limited ?
+        include_orgs_limited_data ?
           "without_data" :
-          include_orgs_extensive ?
+          include_orgs_normal_data ?
             "with_data":
             false;
 
@@ -89,8 +89,8 @@ const EverythingSearch = withRouter(
 
 EverythingSearch.defaultProps = {
   include_gov: true,
-  include_orgs_extensive: true,
-  include_orgs_limited: true,
+  include_orgs_normal_data: true,
+  include_orgs_limited_data: true,
   reject_dead_orgs: true,
 
   include_crsos: true,
