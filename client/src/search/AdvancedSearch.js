@@ -115,6 +115,11 @@ export class AdvancedSearch extends React.Component {
           .some()
           .value();
 
+        const has_children_to_display = !(
+          _.size(option_node.child_options) === 1 &&
+          _.chain(option_node.child_options).map("label").first().value() === option_node.label
+        );
+
         return (
           <div key={option_key}>
             <Checkbox
@@ -128,13 +133,15 @@ export class AdvancedSearch extends React.Component {
                     .value()
                 )
               }
-            />  
-            <ul style={{listStyle: 'none'}}>
-              { _.map(
-                option_node.child_options,
-                (option_node, option_key) => option_node_to_component(option_node, option_key)
-              )}
-            </ul>
+            />
+            { has_children_to_display &&
+              <ul style={{listStyle: 'none'}}>
+                { _.map(
+                  option_node.child_options,
+                  (option_node, option_key) => option_node_to_component(option_node, option_key)
+                )}
+              </ul>
+            }
           </div>
         );
       } else {
