@@ -99,18 +99,20 @@ export class AdvancedSearch extends React.Component {
 
         return (
           <div key={option_key}>
-            <Checkbox
-              label={option_node.label}
-              checked={has_checked_child_option}
-              onChange={
-                () => this.setState(
-                  _.chain(option_node.child_options)
-                    .map( (child_node, child_key) => [child_key, !has_checked_child_option] )
-                    .fromPairs()
-                    .value()
-                )
-              }
-            />
+            { ( !window.is_a11y_mode || (window.is_a11y_mode && !has_children_to_display) ) &&
+              <Checkbox
+                label={option_node.label}
+                checked={has_checked_child_option}
+                onChange={
+                  () => this.setState(
+                    _.chain(option_node.child_options)
+                      .map( (child_node, child_key) => [child_key, !has_checked_child_option] )
+                      .fromPairs()
+                      .value()
+                  )
+                }
+              />
+            }
             { has_children_to_display &&
               <ul style={{listStyle: 'none'}}>
                 { _.map(
