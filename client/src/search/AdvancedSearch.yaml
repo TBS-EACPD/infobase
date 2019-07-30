@@ -13,3 +13,7 @@ include_orgs_normal_data_label:
 include_orgs_limited_data_label:
   en: Oranizations with limited data
   fr: TODO
+
+crso_and_prog_label:
+  en: Core responsibilities and programs
+  fr: TODO
