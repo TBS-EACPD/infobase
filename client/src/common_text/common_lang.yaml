@@ -540,10 +540,23 @@ gov_goco:
 crso_dual:
   en: Government of Canada Spending Areas
   fr: Secteurs de dépenses du gouvernment du Canada
+
+goco_tag:
+  en: What we do
+  fr: Ce que nous faisons
+hwh_tag:
+  en: How we help
+  fr: Comment nous aidons
+wwh_tag:
+  en: Who we help
+  fr: Qui aidons-nous
+hi_tag:
+  en: Horizontal Initiatives
+  fr: Initiatives horizontales
+
 departmental_results:
   en: Departmental Results
   fr: Résultat ministériel
-
 spending_area:
   en: Spending Area
   fr: Secteurs de dépenses
