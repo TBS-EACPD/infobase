@@ -27,7 +27,7 @@ subapps_text:
   fr: Outils et sous-applications supplémentaires en permettant explorer les données selon diverses optiques
 
 partition_home_title:
-  en: The government at a glance
+  en: The Government at a Glance
   fr: Panorama de l'administration publique
 
 partition_home_text:
@@ -108,7 +108,7 @@ report_builder_home_desc:
   fr: Créer un rapport adapté et exportable sur les données que vous voulez analyser
 
 igoc_home_title:
-  en: List of organizations (A to Z)
+  en: List of Organizations (A to Z)
   fr: Liste des organisations (A à Z)
 
 igoc_home_desc:
@@ -172,7 +172,7 @@ lab_home_title:
   fr: InfoLab
 
 lab_home_text:
-  en: Beta version tools and data toys
+  en: Beta versions of tools and data toys
   fr: Outils de version "beta" et jouets de données amusants
 
 ## Featured content titles
