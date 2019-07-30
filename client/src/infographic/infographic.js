@@ -201,12 +201,12 @@ class InfoGraph_ extends React.Component {
           </div>
         }
         { !window.is_a11y_mode &&
-          <div className="row mrgn-bttm-md infographic-search-container"> 
+          <div className="row infographic-search-container"> 
             {search_component}
           </div>
         }
         <div>
-          <div style={{position: 'relative'}}>
+          <div>
             { loading && <SpinnerWrapper config_name={"route"} /> }
             { !loading && (
               window.is_a11y_mode ? 
