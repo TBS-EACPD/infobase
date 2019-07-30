@@ -32,19 +32,19 @@ const complete_option_hierarchy = {
     label: text_maker("tag_categories"),
 
     child_options: {
-      include_tags_goco: {label: text_maker("gocos")},
-      include_tags_hi: {label: "TODO"},
-      include_tags_hwh: {label: "TODO"},
-      //TODO: WWH tag
+      include_tags_goco: {label: text_maker("goco_tag")},
+      include_tags_hi: {label: text_maker("hi_tag")},
+      include_tags_hwh: {label: text_maker("hwh_tag")},
+      include_tags_wwh: {label: text_maker("wwh_tag")},
     },
   },
 
   other_options: {
-    label: "TODO",
+    label: text_maker("other_options_label"),
 
     child_options: {
-      include_glossary: {label: "TODO"},
-      include_tables: {label: "TODO"},
+      include_glossary: {label: text_maker("glossary")},
+      include_tables: {label: text_maker("metadata")},
     },
   },
 };
@@ -151,7 +151,7 @@ export class AdvancedSearch extends React.Component {
             persist_content={true}
             content={
               <div>
-                <p>{text_maker("select_filtering_options")}:</p>
+                <p>{text_maker("advanced_search_description")}:</p>
                 <div className="advanced-search-options">
                   { _.map(
                     complete_option_hierarchy,
