@@ -26,7 +26,7 @@ const EasyAccess_ = () =>
     <a
       href='#glossary'
       className="link-unstyled nav-item">
-      <IconGlossary title={trivial_text_maker("glossary")} class_name="nav-item"/>
+      <IconGlossary title={trivial_text_maker("glossary")} />
       <span className="mrgn-lft-sm">
         <TM k="glossary" />
       </span>
@@ -35,7 +35,7 @@ const EasyAccess_ = () =>
       href="#metadata"
       className="mrgn-lft-md link-unstyled nav-item"
     >
-      <IconDataset title={trivial_text_maker("metadata")} class_name="nav-item"/>
+      <IconDataset title={trivial_text_maker("metadata")} />
       <span className="mrgn-lft-sm">
         <TM k="metadata" />
       </span>
@@ -44,7 +44,7 @@ const EasyAccess_ = () =>
       href="#about"
       className="mrgn-lft-md link-unstyled nav-item"
     >
-      <IconAbout title={trivial_text_maker("about_title")} class_name="nav-item"/>
+      <IconAbout title={trivial_text_maker("about_title")} />
       <span className="mrgn-lft-sm">
         <TM k="about_title" />
       </span>
@@ -53,7 +53,7 @@ const EasyAccess_ = () =>
       href={trivial_text_maker("survey_link_href")}
       className="mrgn-lft-md link-unstyled nav-item"
     >
-      <IconFeedback title={trivial_text_maker("survey_link_text")} class_name="nav-item"/>
+      <IconFeedback title={trivial_text_maker("survey_link_text")} />
       <span className="mrgn-lft-sm">
         <TM k="survey_link_text" />
       </span>
