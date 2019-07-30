@@ -9,7 +9,8 @@ import {
 
   gocos, 
   horizontal_initiative,
-  how_we_help, 
+  how_we_help,
+  who_we_help,
 
   datasets as table_search_config, 
   glossary_lite as glossary_lite_search_config, 
@@ -18,10 +19,11 @@ import {
 import { trivial_text_maker } from '../models/text.js';
 
 
-const get_tag_search_configs = (include_tags_goco, include_tags_hi, include_tags_hwh) => _.compact([
+const get_tag_search_configs = (include_tags_goco, include_tags_hi, include_tags_hwh, include_tags_wwh) => _.compact([
   include_tags_goco && gocos,
   include_tags_hi && horizontal_initiative,
   include_tags_hwh && how_we_help,
+  include_tags_wwh && who_we_help,
 ]);
 
 const EverythingSearch = withRouter(
@@ -43,6 +45,7 @@ const EverythingSearch = withRouter(
         include_tags_goco,
         include_tags_hi,
         include_tags_hwh,
+        include_tags_wwh,
 
         include_tables,
         include_glossary,
@@ -70,7 +73,7 @@ const EverythingSearch = withRouter(
         include_crsos ? crso_search_config : null,
         include_programs ? program_search_config : null,
         
-        ...get_tag_search_configs(include_tags_goco, include_tags_hi, include_tags_hwh),
+        ...get_tag_search_configs(include_tags_goco, include_tags_hi, include_tags_hwh, include_tags_wwh),
 
         include_tables ? table_search_config : null,
         include_glossary ? glossary_lite_search_config : null,
@@ -99,6 +102,7 @@ EverythingSearch.defaultProps = {
   include_tags_goco: true,
   include_tags_hi: true,
   include_tags_hwh: true,
+  include_tags_wwh: true,
 
   include_tables: true,
   include_glossary: true,

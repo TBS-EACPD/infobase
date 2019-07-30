@@ -211,6 +211,16 @@ const how_we_help = {
   filter: (query, datum) => memoized_re_matchers(query, ['name'], "how_we_help")(datum),
 };
 
+const who_we_help = {
+  header_function: () => `${Tag.plural} - ${Tag.tag_roots.WWH.name}`,
+  name_function: _.property('name'),
+  get_data: () => _.chain(Tag.get_all())
+    .filter( tag => tag.root.id === "WWH")
+    .filter('is_lowest_level_tag')
+    .value(),
+  filter: (query, datum) => memoized_re_matchers(query, ['name'], "who_we_help")(datum),
+};
+
 const horizontal_initiative = {
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.HI.name}`,
   name_function: _.property('name'),
@@ -304,6 +314,7 @@ export {
   gocos,
   horizontal_initiative,
   how_we_help,
+  who_we_help,
   
   datasets,
   glossary,
