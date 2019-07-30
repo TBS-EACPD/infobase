@@ -14,31 +14,17 @@ const complete_option_hierarchy = {
     label: text_maker("orgs"),
 
     child_options: {
-      include_orgs_normal_data: {
-        label: text_maker("include_orgs_normal_data_label"),
-      },
-      include_orgs_limited_data: {
-        label: text_maker("include_orgs_limited_data_label"),
-      },
+      include_orgs_normal_data: {label: text_maker("include_orgs_normal_data_label")},
+      include_orgs_limited_data: {label: text_maker("include_orgs_limited_data_label")},
     },
   },
 
-  crso_options: {
-    label: text_maker("core_resps"),
+  crso_and_program_options: {
+    label: text_maker("crso_and_prog_label"),
 
     child_options: {
-      include_crsos: {
-        label: text_maker("core_resps"),
-      },
-    },
-  },
-  program_options: {
-    label: text_maker("programs"),
-    
-    child_options: {
-      include_programs: {
-        label: text_maker("programs"),
-      },
+      include_crsos: {label: text_maker("core_resps")},
+      include_programs: {label: text_maker("programs")},
     },
   },
 
@@ -46,28 +32,19 @@ const complete_option_hierarchy = {
     label: text_maker("tag_categories"),
 
     child_options: {
-      include_tags_goco: {
-        label: text_maker("gocos"),
-      },
-      include_tags_hi: {
-        label: "TODO",//text_maker(""),
-      },
-      include_tags_hwh: {
-        label: "TODO",//text_maker(""),
-      },
+      include_tags_goco: {label: text_maker("gocos")},
+      include_tags_hi: {label: "TODO"},
+      include_tags_hwh: {label: "TODO"},
+      //TODO: WWH tag
     },
   },
 
   other_options: {
-    label: "TODO",//text_maker(""),
+    label: "TODO",
 
     child_options: {
-      include_glossary: {
-        label: "TODO",//text_maker(""),
-      },
-      include_tables: {
-        label: "TODO",//text_maker(""),
-      },
+      include_glossary: {label: "TODO"},
+      include_tables: {label: "TODO"},
     },
   },
 };
@@ -175,10 +152,12 @@ export class AdvancedSearch extends React.Component {
             content={
               <div>
                 <p>{text_maker("select_filtering_options")}:</p>
-                { _.map(
-                  complete_option_hierarchy,
-                  option_node_to_component
-                )}
+                <div className="advanced-search-options">
+                  { _.map(
+                    complete_option_hierarchy,
+                    option_node_to_component
+                  )}
+                </div>
               </div>
             }
           />

@@ -1,23 +1,9 @@
 @import "../common_css/common-variables";
 
 
-.advanced-search-panel {
-    transition: max-height 0.5s ease-out;
+.advanced-search-options {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
-
-.advanced-search-panel-open--true {
-  max-height: 100%;
-}
-
-.advanced-search-panel-open--false {
-  max-height: 0;
-}
-  
-  section.advanced-search-panel {
-    background-color: $secondaryColor;
-    border-radius: 10px;
-    border: 2px solid $secondaryColor;
-    overflow:hidden
-  }
-  
-
