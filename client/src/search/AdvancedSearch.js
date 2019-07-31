@@ -8,7 +8,14 @@ import { Details } from '../components/Details.js';
 import { create_text_maker } from '../models/text.js';
 const text_maker = create_text_maker(text);
 
-
+// Maintenance alert: this will need to be kept in sync with the search config options available on the EverythingSearch
+//  - Leaf nodes should have a key corresponding to an EverythingSearch search prop. Parent nodes should not, they're just grouping categories
+//  - Root nodes must be grouping categories.
+//    - Exception: if you really want a root item to represent an EverythingSearch prop and want it to have no children, give it
+//      a different key a single child_option with a) the key of the EverythingSearch prop and b) the same label as the parent option.
+//      In this special case, the child option is hidden but it has the same behaviour as all other cases otherwise (toggling the displayed
+//      root option toggles the sole, hidden, child option)
+//  - the hierarchy can have arbitrary depth (correspnding to deeper nested option lists), given that the above rules are followed
 const complete_option_hierarchy = {
   org_options: {
     label: text_maker("orgs"),

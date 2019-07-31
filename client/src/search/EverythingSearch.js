@@ -29,6 +29,8 @@ const get_tag_search_configs = (include_tags_goco, include_tags_hi, include_tags
 const EverythingSearch = withRouter(
   class EverythingSearch extends React.Component {
     render(){
+      // Maintenance alert: any new search config props on the EverythingSearch must be manually synced with the AdvancedSearch 
+      // complete_option_hierarchy representation
       const {
         href_template,
         onNewQuery,
@@ -49,7 +51,7 @@ const EverythingSearch = withRouter(
 
         include_tables,
         include_glossary,
-      } = this.props;
+      } = this.props; 
     
       let { onSelect } = this.props;
 
