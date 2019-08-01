@@ -6,7 +6,7 @@ const IconHome = (props) => {
   } = props;
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="icon--svg-inline" aria-labelledby={title}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="icon--svg-inline" title={title}>
       <path fill="none" d="M0 0h24v24H0V0z"/>
       <path className="svg-fill" d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
     </svg>
@@ -17,11 +17,12 @@ const IconHome = (props) => {
 const IconFeedback = (props) => {
   const {
     title,
+    transform,
   } = props;
   
   return (
-    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 600 600" className="icon--svg-inline" aria-labelledby={title}>
-      <path className="svg-stroke" fill="none" strokeWidth="50" strokeMiterlimit="10" d="M549.9,503.3c2.3-0.5-8.6-13.2-10.8-17.7
+    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 600 600" className="icon--svg-inline" title={title}>
+      <path transform={transform} className="svg-stroke" fill="none" strokeWidth="50" strokeMiterlimit="10" d="M549.9,503.3c2.3-0.5-8.6-13.2-10.8-17.7
         l-42.3-68.5c20.8-17.4,54.2-67.8,52.3-113.1c-4.2-100.9-112-182.8-250.2-182.8S48.7,203,48.7,304s112,182.9,250.2,182.9
         c45.4,0,81.3-4.8,118-20.2C520.2,497.5,536.1,506.3,549.9,503.3z"/>
     </svg>
@@ -35,7 +36,7 @@ const IconAbout = (props) => {
   } = props;
   
   return (
-    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 600 600" className="icon--svg-inline" aria-labelledby={title}>
+    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 600 600" className="icon--svg-inline" title={title}>
       <path className="svg-stroke" fill="none" strokeWidth="50" d="M300,46C159.7,46,46,159.7,46,300
         s113.7,254,254,254s254-113.7,254-254S440.3,46,300,46z"/>
       <path className="svg-fill" d="M365.9,417c-23,46.4-53.9,69.5-72.4,73.1c-17.4,3.5-26.2-12.3-24.3-53.9c1.9-50.1,3.4-82,4.6-126.9
@@ -53,7 +54,7 @@ const IconGlossary = (props) => {
   } = props;
   
   return (
-    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 600 600" className="icon--svg-inline" aria-labelledby={title}>
+    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 600 600" className="icon--svg-inline" title={title}>
       <g>
         <path fill="none" className="svg-stroke" strokeWidth="50" strokeLinecap="round" strokeMiterlimit="50" d="M138.5,57h322.9
           c18.7,0,33.8,15.1,33.8,33.8v418.4c0,18.7-15.1,33.8-33.8,33.8H138.5c-18.7,0-33.8-15.1-33.8-33.8V90.8
@@ -80,7 +81,7 @@ const IconDataset = (props) => {
   } = props;
   
   return (
-    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 600 600" className="icon--svg-inline" aria-labelledby={title}>
+    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 600 600" className="icon--svg-inline" title={title}>
       <path fill="none" className="svg-stroke" strokeWidth="50" strokeLinecap="round" strokeLinejoin="round" d="M116.5,98.5h367
         c6.6,0,12,5.4,12,12v394c0,6.6-5.4,12-12,12h-367c-6.6,0-12-5.4-12-12v-394C104.5,103.9,109.9,98.5,116.5,98.5z"/>
       <line fill="none" className="svg-stroke" strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="190.5" x2="494.5" y2="190.5"/>
@@ -99,7 +100,7 @@ const IconShare = (props) => {
   } = props;
   
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="icon--svg-inline" aria-labelledby={title}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="icon--svg-inline" title={title}>
       <path d="M0 0h24v24H0z" fill="none"/>
       <path className="svg-fill" d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34
         3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65
@@ -114,7 +115,7 @@ const IconPermalink = (props) => {
   } = props;
   
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30" height="30" className="icon--svg-inline" aria-labelledby={title}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30" height="30" className="icon--svg-inline" title={title}>
       {/* 
       Copyright Wikimedia
       
@@ -143,12 +144,28 @@ const IconDownload = (props) => {
   } = props;
   
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="icon--svg-inline" aria-labelledby={title}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="icon--svg-inline" title={title}>
       <path className="svg-fill" d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
       <path d="M0 0h24v24H0z" fill="none" />
     </svg>
   );
 };
+
+const IconChevron = (props) => {
+  const {
+    title,
+    rotated,
+  } = props;
+
+  const rotation = rotated ? "rotate(180 250 250)" : "rotate(0)";
+
+  return (
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 500 500" className="icon--svg-inline" title={title}>
+      <polygon transform={rotation} className="svg-fill" points="469.7,189.8 377.9,103.2 377.9,103.2 250.1,223.8 122.1,103.1 30.3,189.7 249.8,396.8 249.9,396.7 
+        250.2,396.9 "/>
+    </svg>
+  );
+}
 
 
 
@@ -161,5 +178,6 @@ export {
   IconShare,
   IconPermalink,
   IconDownload,
+  IconChevron,
 };
   
