@@ -39,5 +39,9 @@
 }
 .pull-down-accordion-expander:focus,
 .pull-down-accordion-expander:active {
-  border: 1.5px solid $backgroundColor;
+  border: 1.5px solid $backgroundColor;;
+}
+
+.pull-down-accordion-expander > span > svg.icon--svg-inline > .svg-fill{
+  fill: white;
 }
