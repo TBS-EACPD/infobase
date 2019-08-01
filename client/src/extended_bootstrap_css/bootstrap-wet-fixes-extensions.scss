@@ -310,11 +310,11 @@ a.btn-ib-light {
   color: $tertiaryColor !important;
   border-radius: 13px;
 }
-.btn-ib-zoom:hover,
-.btn-ib-zoom:active {
-  background-color: $backgroundColor;
-  border: 2px solid $tertiaryColor;
-  color: $tertiaryColor !important;
+.btn-ib-zoom > svg.icon--svg-inline > .svg-fill {
+  fill: $tertiaryColor;
+}
+.btn-ib-zoom:hover > svg.icon--svg-inline > .svg-fill {
+  fill: $primaryColor;
 }
 
 .list-group {

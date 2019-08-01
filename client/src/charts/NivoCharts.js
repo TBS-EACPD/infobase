@@ -4,6 +4,10 @@ import { ResponsivePie } from '@nivo/pie';
 import { formats, dollar_formats } from "../core/format.js";
 import { Fragment } from 'react';
 import { get_static_url } from '../request_utils.js';
+import {
+  IconZoomIn,
+  IconZoomOut,
+} from '../icons/icons.js';
 
 const get_formatter = (is_money, formatter, raw = true) => (
   _.isUndefined(formatter) ?
@@ -431,13 +435,7 @@ export class NivoResponsiveLine extends React.Component {
               }
             }
           >
-            <img 
-              src={get_static_url(this.state.y_scale_zoomed ? "svg/zoom_out.svg" : "svg/zoom_in.svg" )} 
-              style={{ 
-                width: "20px", 
-                height: "20px",
-              }} 
-            />
+            {this.state.y_scale_zoomed ? <IconZoomOut/> : <IconZoomIn/>}
           </button>
         }
         <ResponsiveLine
