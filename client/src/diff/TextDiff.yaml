@@ -9,10 +9,10 @@ diff_intro_text:
     Text shaded in red on the left was deleted and text in green on the right was added.
     Please note that limitations of the difference highlighting algorithm may cause some formatting to show as raw markdown (e.g. '**').
   fr: |
-    Cet outil permet de comparer entre les indicateurs et leurs données tel que leurs méthodologies et leurs cibles, et surligne les
+    Cet outil permet la comparaison entre les indicateurs et leurs données tel que leurs méthodologies et leurs cibles, et surligne les
     portions qui ont changé entre les plans ministériels de 2018-2019 et de 2019-2020.
     Le texte en rouge sur la gauche a été supprimé et le texte en vert sur la droite a été ajouté. En raison des limites de l'algorithme
-    de mise en surbrillance des différences, certains formats peuvent figurer comme un code de démarquage brut (p. ex. '**').
+    de mise en surbrillance des différences, certains formats peuvent se lire comme un code de démarquage brut (p. ex. '**').
 
 select_dept:
   en: |
