@@ -25,8 +25,6 @@ const { std_years, planning_years } = years;
 
 const render = function({calculations, footnotes, sources}) {
   const { info, subject } = calculations;
-  console.log(info);
-  console.log(subject);
 
   const colors = d3.scaleOrdinal().range(newIBCategoryColors);
   const series_labels = [text_maker("actual_ftes"), text_maker("planned_ftes")];
