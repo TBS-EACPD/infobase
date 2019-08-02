@@ -4,19 +4,20 @@ advaced_search_title:
 
 advanced_search_description:
   en: Select categories to search over
-  fr: TODO
+  fr: Sélectionnez les catégories à rechercher
 
 include_orgs_normal_data_label:
-  en: Oranizations with Data
-  fr: TODO
+  en: Organizations with Data
+  fr: Organisations avec données
+
 include_orgs_limited_data_label:
-  en: Oranizations with Limited Data
-  fr: TODO
+  en: Organizations with Limited Data
+  fr: Organisations avec données limitées
 
 crso_and_prog_label:
   en: Core Responsibilities and Programs
-  fr: TODO
+  fr: Responsabilités Essentielles et Programmes
 
 other_options_label:
   en: Other Search Options
-  fr: TODO
+  fr: Autres options de recherche
