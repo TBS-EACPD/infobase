@@ -85,6 +85,7 @@ const render = function({calculations, footnotes, sources}) {
     last_planned_year: _.last(plan_ticks),
     gap_year: gap_year,
     plan_change: info[`${subject.level}_exp_planning_year_3`] - info['dept_auth_average'],
+    hist_avg_tot_pct: _.isEqual(exp, auth) ? 0 : info[`${subject.level}_hist_avg_tot_pct`],
   };
 
   let graph_content;
@@ -133,11 +134,14 @@ const render = function({calculations, footnotes, sources}) {
         }
       }
     );
+    // offset and new_auth is fake data to visually show the two overlapping lines, when auth is equal to exp
+    const offset = _.round(_.max(auth) * 0.02, 2);
+    const new_auth = _.map(auth, (value) => (value + offset));
     
     const graph_data = _.chain(series_labels)
       .zip([
         zip_years_and_data(history_ticks, exp),
-        zip_years_and_data(history_ticks, auth),
+        zip_years_and_data(history_ticks, _.isEqual(exp, auth) ? new_auth : auth),
         _.compact([
           gap_year && {
             x: gap_year,
@@ -149,9 +153,11 @@ const render = function({calculations, footnotes, sources}) {
       .filter( row => !_.isNull(row[0]) )
       .map( ([id, data]) => ({id, data}) )
       .value();
-
-    const get_auth_exp_diff = (slice_data) => Math.abs(slice_data[0].data.y - slice_data[1].data.y);
-
+    
+    const get_auth_exp_diff = (slice_data) => {
+      const difference = _.round(Math.abs(slice_data[0].data.y - slice_data[1].data.y), 2);
+      return difference === offset && _.isEqual(exp, auth) ? 0 : difference;
+    };
     const nivo_default_props = {
       data: graph_data,
       raw_data: raw_data,
@@ -162,15 +168,21 @@ const render = function({calculations, footnotes, sources}) {
           <table style={{width: '100%', borderCollapse: 'collapse'}}>
             <tbody>
               { slice.data.map(
-                tooltip_item => (
-                  <tr key = {tooltip_item.serie.id}>
+                tooltip_item => {
+                  return <tr key = {tooltip_item.serie.id}>
                     <td style= {{padding: '3px 5px'}}>
                       <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.serie.color}} />
                     </td>
                     <td style={{padding: '3px 5px'}}> {tooltip_item.serie.id} </td>
-                    <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: tooltip_formatter(tooltip_item.data.y)}} />
-                  </tr>
-                )
+                    <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{
+                      __html: tooltip_formatter(
+                        _.isEqual(exp, auth) && tooltip_item.serie.id === text_maker("authorities") ?
+                        tooltip_item.data.y - offset
+                        : tooltip_item.data.y
+                      ),
+                    }} />
+                  </tr>;
+                }
               )}
               { slice.data.length > 1 ? 
                 <tr>
