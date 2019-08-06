@@ -57,6 +57,11 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   font-size: 3em; 
 }
 
+.filter-table__components > svg {
+  width: 30px;
+  height: 30px;
+}
+
 
 @media(min-width: $minLargeDevice){
   .filter-table {
