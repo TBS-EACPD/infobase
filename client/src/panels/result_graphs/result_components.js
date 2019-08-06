@@ -479,10 +479,10 @@ const QuadrantDefList = ({defs} ) => (
 
 
 const result_status_components = {
-  met: <IconCheck/>,
-  not_met: <IconAttention/>,
-  not_available: <IconNA/>,
-  future: <IconClock/>,
+  met: <IconCheck width="48px" height="48px"/>,
+  not_met: <IconAttention width="48px" height="48px"/>,
+  not_available: <IconNA width="48px" height="48px"/>,
+  future: <IconClock width="48px" height="48px"/>,
 };
 
 const make_status_icons = (width) => {
@@ -491,7 +491,6 @@ const make_status_icons = (width) => {
     .map(status_key => [
       status_key,
       result_status_components[status_key],
-      //<img key={status_key} src={get_svg_url(status_key)} style={status_icon_style} />,
     ])
     .fromPairs()
     .value();
