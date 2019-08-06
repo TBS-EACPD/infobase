@@ -50,7 +50,6 @@ export class FilterTable extends React.Component {
     } = this.props;
 
     const nothing_is_filtered = _.reduce(items, (memo, item) => memo && item.active, true);
-
     return (
       <div className="filter-table">
         {
@@ -65,14 +64,7 @@ export class FilterTable extends React.Component {
                     { item.count }
                   </span>
                 </div>,
-              icon: !_.isUndefined(item.icon) &&
-                <span 
-                  className="filter-table__icon"
-                  key="icon"
-                  aria-hidden="true"
-                >
-                  { item.icon }
-                </span>,
+              icon: !_.isUndefined(item.icon) && item.icon,
               text: !_.isUndefined(item.text) &&
                 <div 
                   className="filter-table__text"
