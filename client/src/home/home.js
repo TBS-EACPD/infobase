@@ -148,29 +148,6 @@ const HomeLayout = props => (
               />
             </div>       
           </div>
-          <div className="fcol-md-5">
-            <header className="h3 home-search-header">
-              <TM k="home_search_bar_title" />
-            </header> 
-            <div className="search-box">
-              <div className="search-container home-search-container">
-                <EverythingSearch 
-                  search_text={home_tm('everything_search_placeholder')}
-                  large={true}
-                  href_template={ general_href_for_item }
-                  onNewQuery={ query => { 
-                    log_standard_event({
-                      SUBAPP: "home",
-                      SUBJECT_GUID: null, 
-                      MISC1: "home_search",
-                      MISC2: query,
-                    });
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-
           <header className="h3">
             <TM k="featured_data_title" />
           </header>
