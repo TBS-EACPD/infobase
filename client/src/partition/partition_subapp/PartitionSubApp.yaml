@@ -1,11 +1,11 @@
 partition_controls:
   transform: [handlebars]
   text: |
-    <form class="form-horizontal">
-       <div id="partition-control-info-button" class="partition-control-element" style="width:65px;">
-         <img class="info-icon" src="{{info_icon_src}}" tabindex="0"/>     
+    <form class="partition-controls--form-horizontal">
+       <div id="partition-control-info-button" class="partition-controls--control" style="width:65px;">
+         <img class="partition-info-icon" src="{{info_icon_src}}" tabindex="0"/>     
        </div>
-       <div class="partition-control-element">
+       <div class="partition-controls--control">
          <text>
            {{gt "partition_select_data"}}
          </text>
@@ -15,7 +15,7 @@ partition_controls:
            {{/each}}
          </select>
        </div>
-       <div class="partition-control-element">
+       <div class="partition-controls--control">
          <text>
            {{gt "partition_select_context"}}
          </text>
@@ -27,7 +27,7 @@ partition_controls:
        </div>
        {{#if search}}
        <div
-         class="partition-control-element"
+         class="partition-controls--control"
          style="flex-grow:1;">
          <text>
            {{gt "partition_search_filter"}}

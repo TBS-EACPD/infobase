@@ -21,7 +21,7 @@ export class PartitionDiagram {
     this.options = options;
     this.outer_html = container;
     this.outer_html.html(`
-      <div class='__partition__' aria-hidden='true'>
+      <div class='partition-diagram-outer-area' aria-hidden='true'>
          <div class='partition-diagram'></div>
       </div>
     `);
@@ -115,7 +115,7 @@ export class PartitionDiagram {
       assign_colors_recursively( node, cycle_colors(i) );
     });
 
-    this.outer_html.select(".__partition__")
+    this.outer_html.select(".partition-diagram-outer-area")
       .style("width", total_width + "px");
 
     this.svg.attr("width", total_width);
@@ -148,7 +148,7 @@ export class PartitionDiagram {
 
     const html_func = this.options.html_func;
 
-    const html_content_join = this.html.selectAll("div.partition-content")
+    const html_content_join = this.html.selectAll("div.partition-item")
       .data(
         this.data.root.descendants().filter(d => d.open), 
         content_key
@@ -156,8 +156,8 @@ export class PartitionDiagram {
       .style("height", "")
       .each(function(d){
         d3.select(this)
-          .select("div.partition-content-title")
-          .classed("fat", false)
+          .select("div.partition-item--title")
+          .classed("partition-item--title__overflowing", false)
           .classed("right", d.data.type === "compressed")
           .html(html_func);
       }); //reset the calculated heights 
@@ -170,28 +170,31 @@ export class PartitionDiagram {
         let sel = d3.select(this);
         
         if ( ( d.data.type === "compressed" && window.feature_detection.is_IE() ) || d.value < 0 ){
-          // partition-right-ie-fix: IE css for flex box and align-item are inconsistent, need an extra div
-          // between the .content div and the .partition-content-title div to (partially) fix vertical alignment
+          // partition-item--negative-title-backing__right_ie_fix: IE css for flex box and align-item are inconsistent, need an extra div
+          // between the .content div and the .partition-item--title div to (partially) fix vertical alignment
 
-          // partition-negative-title-backing: Used in blanking out the striped negative value background consistently
-          // (for both fat and non-fat titles),improves readability
+          // partition-item--negative-title-backing: Used in blanking out the striped negative value background consistently
+          // (for both partition-item--title__overflowing and non-partition-item--title__overflowing titles),improves readability
 
           sel = sel
             .append("div")
-            .classed("partition-right-ie-fix", d.data.type === "compressed" && window.feature_detection.is_IE())
-            .classed("partition-negative-title-backing", d.value < 0);
+            .classed("partition-item--negative-title-backing", d.value < 0)
+            .classed(
+              "partition-item--negative-title-backing__right_ie_fix", 
+              d.data.type === "compressed" && window.feature_detection.is_IE()
+            );
         }
           
         sel
           .append("div")
           .attr("tabindex", 0)
-          .classed("partition-content-title", true)
+          .classed("partition-item--title", true)
           .classed("right", d.data.type === "compressed")
           .style("background-color", this.background_color)
           .html(html_func);
       })
       .attr("class", d => {
-        let cls = 'partition-content';
+        let cls = 'partition-item';
         if (d === this.data.root){
           cls += " root";
         }
@@ -222,44 +225,35 @@ export class PartitionDiagram {
         d.scaled_height = yscale(Math.abs(d.value) || 1);
         d.polygon_links = new Map();
       })
-      .classed("negative-value", d => d.value < 0)
+      .classed("partition-item__negative-value", d => d.value < 0)
       .style("left", (d, i) => horizontal_placement_counters[d.depth]+"px") 
       .style("height", d => {
         d.rendered_height = Math.floor(d.scaled_height)+1;
         return d.rendered_height + "px";
       })
       .each( d => {
-        const d_node = d3.select(d.DOM);
-        const title = d_node.select(".partition-content-title").node();
-        d.more_than_fair_space = title.offsetHeight > d.scaled_height+4;
-        d_node
-          .select(".partition-content-title")
-          .classed("fat", d => d.more_than_fair_space)
-          .classed("negative-value", d => d.value < 0)
-          .style("background-color", null);
-        
-        d_node
-          .select(".partition-content-title.fat")
-          .style("background-color", this.background_color);
+        const item_node = d3.select(d.DOM);
+        const title = item_node.select(".partition-item--title").node();
 
-        d_node
-          .select(".partition-negative-title-backing")
-          .classed("fat", d => d.more_than_fair_space)
-          .style("background-color", null);
-        
-        d_node
-          .select(".partition-negative-title-backing:not(.fat)")
-          .style("background-color", this.background_color);
+        const text_is_bigger_then_item = title.offsetHeight > d.scaled_height+2;
+        item_node.classed("partition-item__overflowing", text_is_bigger_then_item);
+
+        item_node
+          .select(".partition-item--title")
+          .style("background-color", text_is_bigger_then_item ? this.background_color : null);
+
+        item_node
+          .select(".partition-item--negative-title-backing")
+          .style("background-color", text_is_bigger_then_item ? null: this.background_color);
 
         // IE fixes:
-        d_node
-          .select(".partition-right-ie-fix")
-          .classed("fat", d.more_than_fair_space )
+        item_node
+          .select("partition-item--negative-title-backing__right_ie_fix")
           .style("margin-top", function(d){
             // use margin-top to fix vertical placement of +/-
             const content_height = this.parentElement.style.pixelHeight;
             const font_size = 12;
-            if (d.more_than_fair_space && (content_height - font_size) < 0 ){
+            if (text_is_bigger_then_item && (content_height - font_size) < 0 ){
               return (content_height - font_size) + "px";
             } else {
               return "0px";
@@ -269,7 +263,7 @@ export class PartitionDiagram {
             // use padding-top to fix vertical placement of +/-
             const content_height = this.parentElement.style.pixelHeight;
             const font_size = 12;
-            if (!d.more_than_fair_space){
+            if (!text_is_bigger_then_item){
               return (content_height*0.5 - font_size*0.75) + "px";
             } else {
               return "0px";
@@ -281,7 +275,7 @@ export class PartitionDiagram {
       })
       .each(function(d){
         const level = d.depth;
-        const title = d3.select(d.DOM).select(".partition-content-title").node();
+        const title = d3.select(d.DOM).select(".partition-item--title").node();
         const current_top = vertical_placement_counters[level];
         const parent_top = d.parent ? d.parent.top : 0;
         const diff = (title.offsetHeight-d.DOM.offsetHeight)/2;
@@ -321,7 +315,7 @@ export class PartitionDiagram {
         d.source.polygon_links.set( d.target, d3.select(this) );
       });
 
-    this.html.selectAll("div.partition-content")
+    this.html.selectAll("div.partition-item")
       .transition()
       .duration(1000)
       .style("top", function(d){ 
@@ -422,7 +416,7 @@ export class PartitionDiagram {
       .filter(d => _.includes(to_fade, d.target))
       .classed("faded", true)
       .classed("highlighted", false);
-    this.html.selectAll("div.partition-content")
+    this.html.selectAll("div.partition-item")
       .filter(d => _.includes(to_fade, d))
       .classed("faded", true);
   }
@@ -452,7 +446,7 @@ export class PartitionDiagram {
         .classed("highlighted", false);
     }
 
-    this.html.selectAll("div.partition-content")
+    this.html.selectAll("div.partition-item")
       .data(data, content_key)
       .filter(d => data.length > 0 ? _.includes(data, d) : true)
       .classed("faded", false);
@@ -502,7 +496,7 @@ export class PartitionDiagram {
     unfade_parent_polygons("polygon.partition-svg-link.root-polygon");
     unfade_parent_polygons("polygon.partition-svg-link");
 
-    this.html.selectAll("div.partition-content")
+    this.html.selectAll("div.partition-item")
       .data(data,content_key)
       .filter(d => data.length > 0 ? _.includes(data,d) : true)
       .classed("faded", false);
@@ -574,7 +568,7 @@ export class PartitionDiagram {
     // hold a reference to the current target
     const target = d3.select(d3.event.target);
     // get a reference to the content 
-    let content = d3.event.target.closest(".partition-content");
+    let content = d3.event.target.closest(".partition-item");
     if ( _.isNull(content) ) {
       if ( target.classed("unmagnify-all") ) {
         this.unmagnify_all();

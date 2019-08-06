@@ -14,7 +14,7 @@ import {
   formats_by_data_type,
 } from './perspective_utils.js';
 
-// Would like to change the use of dept in this perspective to "ministry", but the use of dept is grandfathered in to the route itself...
+// Would like to change the use of dept in this perspective to "ministry", but the use of dept is grandparented in to the route itself...
 
 const create_ministry_hierarchy = function(data_type, skip_crsos = true){
   return d3.hierarchy(Subject.gov,
