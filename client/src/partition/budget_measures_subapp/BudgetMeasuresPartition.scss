@@ -1,7 +1,7 @@
 @import '../../common_css/common-variables';
 
 // Partition diagram Style overwrites
-.budget-measure-partiton-area > .__partition__ > .partition-diagram {
+.budget-measure-partiton-area > .partition-diagram-outer-area > .partition-diagram {
   border-radius: 10px;
 
   & > .header {
@@ -11,23 +11,26 @@
     margin-top: 10px;
   }
 
-  & > .partition-content {
+  & > .partition-item {
     color: $textColor;
-    & > .fat {
+
+    &.partition-item__overflowing > .partition-item--title {
       color: $textLightColor;
-      font-weight: $mediumFontWeight !important ;
+      font-weight: $mediumFontWeight;
     }
-    & > .partition-content-title,
-    & > .partition-right-ie-fix > .partition-content-title {
+    
+    &:not(.partition-item__overflowing) > .partition-item--title {
       font-weight: $heavyFontWeight;
     }
-    & > .partition-content-title.negative-value,
-    & > .partition-negative-title-backing > .negative-value {
+
+    &.partition-item__negative_value > .partition-item--negative-title-backing > .partition-item--title {
       color: $failLightColor;
+      font-weight: $mediumFontWeight;
     }
-    &.root { 
+    
+    &.root {
       background-color: rgba(0, 0, 0, 0.3);
-      & > .partition-content-title {
+      & > .partition-item--title {
         font-weight: $heavyFontWeight;
         color: $textLightColor;
         & > .root-sub-note {

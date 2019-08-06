@@ -9,7 +9,7 @@ $partitionPopupColour: $secondaryColor;
   margin-bottom: -50px; //counter-act .mrgn-bttm-xl on main
   background-color: $partitionBackgroundColour;
 
-  & > .__partition__ {
+  & > .partition-diagram-outer-area {
     margin-left: 20px;
     margin-right: 100%;
   }
@@ -32,7 +32,7 @@ $partitionPopupColour: $secondaryColor;
   }
 }
 
-.__partition__ > .partition-diagram-fader {
+.partition-diagram-outer-area > .partition-fader {
   height: 100%;
   width: inherit;
   position: absolute;
@@ -41,66 +41,57 @@ $partitionPopupColour: $secondaryColor;
   z-index: 101;
 }
 
-.__partition__ > .partition-notes {
+
+.partition-diagram-outer-area > .partition-notes {
   margin-bottom: 10px;
   overflow-y: hidden;
 }
 
-.__partition__ > .partition-controls {
+
+.partition-diagram-outer-area > .partition-controls {
   width: inherit;
   min-width: inherit;
   background-color: $partitionBackgroundColour;
-}
 
-.__partition__ > .partition-controls > .form-horizontal {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  padding: 15px;
-  padding-top: 9px;
-}
+  & > .partition-controls--form-horizontal {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    padding: 15px;
+    padding-top: 9px;
 
-
-.partition-control-element {
-  display: flex;
-  flex-direction: column;
-  padding-right: 9px;
-}
-
-.partition-control-element > .info-icon {
-  width: 70px;
-  margin-left: -10px;
-  z-index: 101;
-}
-
-.partition-control-element > text {
-  color: $textLightColor;
-  font-size: 20px;
-  font-weight: $lightFontWeight;
-}
-
-.partition-control-element > input.form-control.search {
-  &:disabled {
-    cursor: default;
-  }
-  &::-ms-clear {
-    width: 0;
-    height: 0;
-  }
-}
-
-/* Over-ride bootstrap .form-control width style */
-.partition-control-element > select.form-control {
-  font-weight: $mediumFontWeight;
-}
-
-ul.partition-intro-two-col-list {
-  width: 100%;
-  display: inline-block;
-  & > li {
-    float: left;
-    width: 50%;
-    padding-right: 20px;
+    & > .partition-controls--control {
+      display: flex;
+      flex-direction: column;
+      padding-right: 9px;
+    
+      & > .partition-info-icon {
+        width: 70px;
+        margin-left: -10px;
+        z-index: 101;
+      }
+      
+      & > text {
+        color: $textLightColor;
+        font-size: 20px;
+        font-weight: $lightFontWeight;
+      }
+      
+      & > input.form-control.search {
+        &:disabled {
+          cursor: default;
+        }
+        &::-ms-clear {
+          width: 0;
+          height: 0;
+        }
+      }
+      
+      /* Over-ride bootstrap .form-control width style */
+      & > select.form-control {
+        font-weight: $mediumFontWeight;
+      }
+    }
   }
 }
 
@@ -110,21 +101,32 @@ ul.partition-intro-two-col-list {
   top: 100px; 
   left: 0px;
   width: 800px;
-}
-.partition-popup.partition-intro > .intro-popup-color { 
-  color: $partitionPopupColour;
-}
-.partition-popup.partition-intro > .popup-intro-text {
-  line-height:1; 
-  text-align:left; 
-}
-.partition-popup.partition-intro > .popup-pointer-up {
-  top: -40px;
-  left: 12px;
-  position: absolute;
-	width: 0;
-	height: 0;
-	border-left: 25px solid transparent;
-	border-bottom: 40px solid lighten($tertiaryColor, 40%);
-	border-right: 25px solid transparent;
+
+  & > .intro-popup-color { 
+    color: $partitionPopupColour;
+  }
+  & > .popup-intro-text {
+    line-height:1; 
+    text-align:left;
+
+    & > ul.partition-intro-two-col-list {
+      width: 100%;
+      display: inline-block;
+      & > li {
+        float: left;
+        width: 50%;
+        padding-right: 20px;
+      }
+    }
+  }
+  & > .popup-pointer-up {
+    top: -40px;
+    left: 12px;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-bottom: 40px solid lighten($tertiaryColor, 40%);
+    border-right: 25px solid transparent;
+  }
 }

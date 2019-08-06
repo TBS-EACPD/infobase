@@ -4,6 +4,7 @@ import { PartitionNotes } from "./PartitionNotes.js";
 import { PartitionDiagram } from "../partition_diagram/PartitionDiagram.js";
 import { reactAdapter } from '../../core/reactAdapter';
 import { get_static_url } from '../../request_utils.js';
+import { primaryColor } from '../../core/color_defs.js';
 import { newIBDarkCategoryColors } from '../../core/color_schemes.js';
 
 export class PartitionSubApp {
@@ -35,7 +36,7 @@ export class PartitionSubApp {
 
     const sorted_data_types_options = _.sortBy(this.all_data_types, data_type => data_type.id === initial_data_type_id ? -Infinity : Infinity);
 
-    this.container.select(".__partition__")
+    this.container.select(".partition-diagram-outer-area")
       .insert("div", ":first-child")
       .classed("partition-controls", true)
       .html(
@@ -67,8 +68,8 @@ export class PartitionSubApp {
 
     this.container.select(".select_data_type").on("change", this.change_data_type.bind(this));
     this.container.select(".select_perspective").on("change", this.change_perspective.bind(this));
-    this.container.select(".partition-control-element > .info-icon").on("click", this.add_intro_popup.bind(this));
-    this.container.select(".partition-control-element > .info-icon").on("keydown", () => {
+    this.container.select(".partition-controls--control > .partition-info-icon").on("click", this.add_intro_popup.bind(this));
+    this.container.select(".partition-controls--control > .partition-info-icon").on("keydown", () => {
       if(d3.event.which == 13){
         this.add_intro_popup.call(this);
       }
@@ -164,11 +165,12 @@ export class PartitionSubApp {
       root_text_func: this.current_perspective.root_text_func,
       popup_template: this.current_perspective.popup_template,
       colors: newIBDarkCategoryColors,
+      background_color: primaryColor,
     });
   }
   enable_search_bar(){
     const partition_control_search_block = this.container
-      .selectAll(".partition-control-element")
+      .selectAll(".partition-controls--control")
       .filter(function(){
         return this.querySelectorAll(".form-control.search").length;
       });
@@ -187,7 +189,7 @@ export class PartitionSubApp {
   }
   disable_search_bar(){
     const partition_control_search_block = this.container
-      .selectAll(".partition-control-element")
+      .selectAll(".partition-controls--control")
       .filter(function(){
         return this.querySelectorAll(".form-control.search").length;
       });
@@ -298,14 +300,14 @@ export class PartitionSubApp {
         .attr("id", "tab-catch-before")
         .attr("tabindex", 0);
 
-      const tab_catch_after = partition_control_info.insert("a", ".info-icon")
+      const tab_catch_after = partition_control_info.insert("a", ".partition-info-icon")
         .attr("id", "tab-catch-after")
         .attr("tabindex", 0);
 
 
-      const intro_popup_fader = this.container.select(".__partition__")
+      const intro_popup_fader = this.container.select(".partition-diagram")
         .insert("div", ".partition-controls")
-        .classed("partition-diagram-fader", true);
+        .classed("partition-fader", true);
 
       const intro_popup_cleanup = function(){
         intro_popup.remove();
@@ -318,7 +320,7 @@ export class PartitionSubApp {
       tab_catch_after.on("focusout", intro_popup_cleanup);
     } else {
       partition_control_info.select("div.partition-popup.partition-intro").remove();
-      this.container.select("div.partition-diagram-fader").remove();
+      this.container.select("div.partition-fader").remove();
       partition_control_info.select("a.tab-catch-after").remove();
     }
   }
