@@ -247,12 +247,12 @@ export class PartitionDiagram {
           .style("background-color", text_is_bigger_then_item ? null: this.background_color);
 
         // IE fixes:
+        const font_size = 12;
         item_node
-          .select("partition-item--negative-title-backing__right_ie_fix")
+          .select(".partition-item--negative-title-backing__right_ie_fix")
           .style("margin-top", function(d){
             // use margin-top to fix vertical placement of +/-
             const content_height = this.parentElement.style.pixelHeight;
-            const font_size = 12;
             if (text_is_bigger_then_item && (content_height - font_size) < 0 ){
               return (content_height - font_size) + "px";
             } else {
@@ -262,7 +262,6 @@ export class PartitionDiagram {
           .style("padding-top", function(d){
             // use padding-top to fix vertical placement of +/-
             const content_height = this.parentElement.style.pixelHeight;
-            const font_size = 12;
             if (!text_is_bigger_then_item){
               return (content_height*0.5 - font_size*0.75) + "px";
             } else {
