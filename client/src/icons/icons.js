@@ -1,6 +1,9 @@
 import './icons.scss';
 import { trivial_text_maker } from '../models/text.js';
+import { businessConstants } from '../models/businessConstants.js';
 
+
+const { result_simple_statuses } = businessConstants;
 
 const IconHome = (props) => {
   const {
@@ -49,7 +52,6 @@ const IconAbout = (props) => {
         c-1.4,41-2.9,81.9-4.4,122.3c-0.8,16,2.9,20.3,7.8,19.3c3.8-0.8,13.1-7.7,26-28.3L365.9,417z M323.9,144.2
         c3.7,18.5-4.8,38.2-23.3,41.9c-15.2,3-27-5.3-30.5-22.7c-3.1-15.8,3.8-37.5,25-41.7C310.9,118.5,321.1,130,323.9,144.2z"/>
     </svg>
-
   );
 };
 
@@ -216,6 +218,90 @@ IconZoomOut.defaultProps = {
   title: trivial_text_maker("zoom_out"),
 };
 
+const IconCheck = (props) => {
+  const {
+    title,
+  } = props;
+
+  return (
+    <svg version="1.1" className="icon--svg-inline" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 500 500">
+      <title>{title}</title>
+      <path className="svg-fill" d="M250,68.2c100.4,0,181.7,81.4,181.7,181.8s-81.4,181.7-181.8,181.7S68.2,350.4,68.2,250
+        c0-48.2,19.1-94.4,53.2-128.5C155.5,87.3,201.8,68.1,250,68.2 M250,37.2C132.5,37.2,37.2,132.5,37.2,250S132.5,462.8,250,462.8
+        S462.8,367.5,462.8,250S367.5,37.2,250,37.2z"/>
+      <path className="svg-fill" d="M234.9,354.7l127.9-186.2c3.7-5.5,3-13.1-1.6-17.1L347,139.2c-1.7-1.5-3.9-2.3-6.1-2.3l0,0
+        c-3.7,0.1-7.1,2-9.1,5.1L218.5,307l-57.7-48.5c-1.9-1.7-4.2-2.6-6.7-2.8l0,0c-1.8-0.1-3.5,0.8-4.6,2.2l-13.9,20.7
+        c-2.1,3.2-0.5,8.6,3.6,12l80.9,68.1c1.9,1.7,4.2,2.6,6.7,2.8c1.8,0.1,3.5-0.8,4.6-2.2"/>
+    </svg>
+  );
+};
+IconCheck.defaultProps = {
+  title: result_simple_statuses.met.text,
+};
+
+const IconAttention = (props) => {
+  const {
+    title,
+  } = props;
+
+  return (
+    <svg version="1.1" className="icon--svg-inline" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 500 500">
+      <title>{title}</title>
+      <path className="svg-fill" d="M250,68.2c100.4,0,181.7,81.4,181.7,181.8c0,100.4-81.4,181.7-181.8,181.7S68.2,350.4,68.2,250
+        c0-48.2,19.1-94.4,53.2-128.5C155.5,87.3,201.8,68.1,250,68.2 M250,37.2C132.5,37.2,37.2,132.5,37.2,250S132.5,462.8,250,462.8
+        S462.8,367.5,462.8,250S367.5,37.2,250,37.2z"/>
+      <g>
+        <path className="svg-fill" d="M276.6,126.3L276.6,126.3l-53.1,0c-5.8,0-10.3,9-9.6,19.2l9.5,147.8c0.6,8.7,4.7,15.3,9.6,15.3h32.2
+          c4.8,0,8.9-6.4,9.6-14.9l11.5-147.8C286.9,135.5,282.4,126.3,276.6,126.3z"/>
+        <path className="svg-fill" d="M250,326.3c-13.1,0.1-23.6,10.8-23.5,23.9c0.1,13.1,10.8,23.6,23.9,23.5c13-0.1,23.5-10.7,23.5-23.7
+          C273.8,336.9,263.1,326.3,250,326.3z"/>
+      </g>
+    </svg>
+  );
+};
+IconAttention.defaultProps = {
+  title: result_simple_statuses.not_met.text,
+};
+
+const IconNA = (props) => {
+  const {
+    title,
+  } = props;
+
+  return (
+    <svg version="1.1" className="icon--svg-inline" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 500 500">
+      <title>{title}</title>
+      <path className="svg-fill" d="M250,68.2c100.4,0,181.8,81.4,181.8,181.8S350.4,431.8,250,431.8S68.3,350.4,68.3,250
+        c0-48.2,19.1-94.4,53.2-128.5C155.5,87.3,201.8,68.1,250,68.2 M250,37.2C132.5,37.2,37.2,132.5,37.2,250S132.5,462.8,250,462.8
+        S462.8,367.5,462.8,250S367.5,37.2,250,37.2z"/>
+      <path className="svg-fill" d="M168.4,225.5h163.3c4.9,0,8.9,4,8.9,8.9v31.3c0,4.9-4,8.9-8.9,8.9H168.4c-4.9,0-8.9-4-8.9-8.9v-31.3
+        C159.5,229.5,163.5,225.5,168.4,225.5z"/>
+    </svg>
+  );
+};
+IconNA.defaultProps = {
+  title: result_simple_statuses.not_available.text,
+};
+
+const IconClock = (props) => {
+  const {
+    title,
+  } = props;
+
+  return (
+    <svg version="1.1" className="icon--svg-inline" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 500 500">
+      <title>{title}</title>
+      <path className="svg-fill" d="M250,68.2c100.4,0,181.7,81.4,181.7,181.8s-81.4,181.7-181.8,181.7S68.2,350.4,68.2,250
+        c0-48.2,19.1-94.4,53.2-128.5C155.5,87.3,201.8,68.1,250,68.2 M250,37.2C132.5,37.2,37.2,132.5,37.2,250S132.5,462.8,250,462.8
+        S462.8,367.5,462.8,250S367.5,37.2,250,37.2z"/>
+      <path className="svg-fill" d="M226.8,267.3c0.6,1.5,1.8,2.6,2.9,3.8l82.9,82.9c3,3,7.8,3,10.7,0l0,0l15.6-15.6c3-3,3-7.8,0-10.7l0,0
+        l-75.5-75.5v-135c0-4.6-3.7-8.3-8.3-8.3l0,0h-20.7c-4.6,0-8.3,3.7-8.3,8.3v147.1c0,0,0,0,0,0.1C226.1,265.2,226.5,266.5,226.8,267.3"/>
+    </svg>
+  );
+};
+IconClock.defaultProps = {
+  title: result_simple_statuses.future.text,
+};
 
 export {
   IconHome,
@@ -229,5 +315,9 @@ export {
   IconChevron,
   IconZoomIn,
   IconZoomOut,
+  IconCheck,
+  IconAttention,
+  IconNA,
+  IconClock,
 };
   

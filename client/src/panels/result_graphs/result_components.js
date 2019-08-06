@@ -11,6 +11,12 @@ import {
   result_statuses,
   result_simple_statuses,
 } from './results_common.js';
+import {
+  IconCheck,
+  IconAttention,
+  IconNA,
+  IconClock,
+} from '../../icons/icons.js';
 
 const dp_docs = get_result_doc_keys("dp");
 const drr_docs = get_result_doc_keys("drr");
@@ -472,12 +478,20 @@ const QuadrantDefList = ({defs} ) => (
 );
 
 
+const result_status_components = {
+  met: <IconCheck/>,
+  not_met: <IconAttention/>,
+  not_available: <IconNA/>,
+  future: <IconClock/>,
+};
+
 const make_status_icons = (width) => {
   const status_icon_style = {width: width, height: width};
   return _.chain(ordered_status_keys)
     .map(status_key => [
       status_key,
-      <img key={status_key} src={get_svg_url(status_key)} style={status_icon_style} />,
+      result_status_components[status_key],
+      //<img key={status_key} src={get_svg_url(status_key)} style={status_icon_style} />,
     ])
     .fromPairs()
     .value();
