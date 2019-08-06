@@ -157,7 +157,6 @@ export class PartitionDiagram {
       .each(function(d){
         d3.select(this)
           .select("div.partition-item--title")
-          .classed("partition-item--title__overflowing", false)
           .classed("right", d.data.type === "compressed")
           .html(html_func);
       }); //reset the calculated heights 
@@ -173,9 +172,7 @@ export class PartitionDiagram {
           // partition-item--negative-title-backing__right_ie_fix: IE css for flex box and align-item are inconsistent, need an extra div
           // between the .content div and the .partition-item--title div to (partially) fix vertical alignment
 
-          // partition-item--negative-title-backing: Used in blanking out the striped negative value background consistently
-          // (for both partition-item--title__overflowing and non-partition-item--title__overflowing titles),improves readability
-
+          // partition-item--negative-title-backing: Used in blanking out the striped negative value background, improves readability
           sel = sel
             .append("div")
             .classed("partition-item--negative-title-backing", d.value < 0)
@@ -246,7 +243,7 @@ export class PartitionDiagram {
           .select(".partition-item--negative-title-backing")
           .style("background-color", text_is_bigger_then_item ? null: this.background_color);
 
-        // IE fixes:
+        // IE fixes, a bit hacky but that's how it is:
         const font_size = 12;
         item_node
           .select(".partition-item--negative-title-backing__right_ie_fix")
@@ -254,7 +251,7 @@ export class PartitionDiagram {
             // use margin-top to fix vertical placement of +/-
             const content_height = this.parentElement.style.pixelHeight;
             if (text_is_bigger_then_item && (content_height - font_size) < 0 ){
-              return (content_height - font_size) + "px";
+              return (content_height - font_size) - 4 + "px";
             } else {
               return "0px";
             }
