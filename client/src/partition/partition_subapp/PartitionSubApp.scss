@@ -6,7 +6,7 @@ $partitionPopupColour: $secondaryColor;
 .partition-container {
   padding-top: 10px;
   padding-bottom: 110px;
-  margin-bottom: -50px; //counter-act .mrgn-bttm-xl on main
+  margin-bottom: -90px; //counter-act .mrgn-bttm-xl on main, get .pagedetails content over top the background colour
   background-color: $partitionBackgroundColour;
 
   & > .partition-diagram-outer-area {
