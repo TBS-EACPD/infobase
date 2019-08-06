@@ -56,33 +56,63 @@ const render = function({calculations, footnotes, sources}) {
   if(window.is_a11y_mode){
     const history_a11y_data = _.zipWith(history_ticks, history_data_index, (year, idx) => ({
       label: year,
-      data: [info[idx], null],
+      data: info[idx],
     }));
     const planned_a11y_data = _.zipWith(plan_ticks, planned_data_index, (year, idx) => ({
       label: year,
-      data: [null, info[idx]],
+      data: info[idx],
     }));
 
+    const filter_a11y_data = (a11y_data, null_index) => _.chain(a11y_data)
+      .map( (d) => {
+        const filtered_data = _.chain(d)
+          .filter((value, key) => {
+            if(key==="data"){
+              return value > 0;
+            }
+          })
+          .flatten()
+          .value();
+        const formatted_data = formatter("big_int_real", filtered_data, {raw: true});
+        formatted_data.length > 0 ? formatted_data.splice(null_index, 0, null) : null;
+        return {
+          label: d.label,
+          data: formatted_data,
+        };
+      })
+      .filter((row) => row.data.length > 0)
+      .value();
+
+    const filtered_history_a11y_data = filter_a11y_data(history_a11y_data, 1);
+    const filtered_planned_a11y_data = filter_a11y_data(planned_a11y_data, 0);
     graph_content = (
       <A11YTable
         data_col_headers={series_labels}
-        data={_.concat(history_a11y_data, planned_a11y_data)}
+        data={_.concat(filtered_history_a11y_data, filtered_planned_a11y_data)}
       />
     );
   } else{
-    const prepare_raw_data = (data, data_index) => _.map(data_index, (idx) => data[idx]);
+    const prepare_raw_data = (data, data_index) => _.chain(data_index)
+      .map((idx) => data[idx])
+      .filter((d) => d > 0)
+      .value();
     const raw_data = _.concat(
       prepare_raw_data(info, history_data_index), prepare_raw_data(info, planned_data_index)
     );
   
     const prepare_graph_data = (data, data_index, years) => (
-      _.zipWith(years, data_index, (year, idx) => (
-        {
-          x: year,
-          y: data[idx],
-        }
-      ))
+      _.chain(data_index)
+        .zipWith(years, data_index, (idx, year) => (
+          {
+            x: year,
+            y: data[idx],
+          }
+        ))
+        .pickBy((d) => d.y > 0)
+        .map((d) => d)
+        .value()
     );
+
     const graph_data = _.chain(series_labels)
       .zip([
         prepare_graph_data(info, history_data_index, history_ticks),
@@ -94,8 +124,16 @@ const render = function({calculations, footnotes, sources}) {
           ...prepare_graph_data(info, planned_data_index, plan_ticks),
         ]),
       ])
+      .filter( ([d,y]) => y.length > 0)
       .map( ([id, data]) => ({id, data}) )
       .value();
+    
+    const all_ftes_exists = graph_data.length > 1;
+    if(!all_ftes_exists){
+      const planned_fte = _.find(graph_data, (fte) => fte.id === text_maker("planned_ftes"));
+      _.remove(planned_fte.data, (row) => (row.x === gap_year));
+    }
+
     const nivo_default_props = {
       data: graph_data,
       raw_data: raw_data,
@@ -122,7 +160,7 @@ const render = function({calculations, footnotes, sources}) {
         },
       ],
     };
-    if(marker_year){
+    if(marker_year && all_ftes_exists){
       nivo_default_props["markers"] = [
         {
           axis: 'x',
