@@ -37,21 +37,21 @@ auth_exp_prog_spending_title:
 gov_auth_exp_prog_spending_body:
   transform: [handlebars, markdown]
   en: |
-    Over the last 5 years, the government has authorized an average spending of **{{fmt_compact1_written gov_five_year_auth_average}}** ({{gl_tt "Authorities" "AUTH"}}) while actually spending an average of **{{fmt_compact1_written gov_five_year_exp_average}}** ({{gl_tt "Expenditures" "EXP"}}). On average, unused authorities represented **{{fmt_percentage1 gov_hist_avg_tot_pct}}** of approved authorities.
+    Over the last 5 years, the government has authorized an average spending of **{{fmt_compact1_written gov_five_year_auth_average}}** ({{gl_tt "Authorities" "AUTH"}}) while actually spending an average of **{{fmt_compact1_written gov_five_year_exp_average}}** ({{gl_tt "Expenditures" "EXP"}}). On average, unused authorities represented **{{fmt_percentage1 hist_avg_tot_pct}}** of approved authorities.
     
     {{#if subject.has_planned_spending}}Spending is {{will_change_to plan_change ""}} **{{fmt_compact1_written gov_exp_planning_year_3}}** by {{last_planned_year}}. {{/if}}
   fr: |
-    Au cours des cinq dernières années, le gouvernement a autorisé des dépenses moyennes de **{{fmt_compact1_written gov_five_year_auth_average}}** ({{gl_tt "autorisation" "AUTH"}}) alors que les dépenses réelles s'élevaient en moyenne à **{{fmt_compact1_written gov_five_year_exp_average}}** ({{gl_tt "dépenses" "EXP"}}). En moyenne, les autorisations non utilisées représentaient **{{fmt_percentage1 gov_hist_avg_tot_pct}}** des autorisations approuvées.
+    Au cours des cinq dernières années, le gouvernement a autorisé des dépenses moyennes de **{{fmt_compact1_written gov_five_year_auth_average}}** ({{gl_tt "autorisation" "AUTH"}}) alors que les dépenses réelles s'élevaient en moyenne à **{{fmt_compact1_written gov_five_year_exp_average}}** ({{gl_tt "dépenses" "EXP"}}). En moyenne, les autorisations non utilisées représentaient **{{fmt_percentage1 hist_avg_tot_pct}}** des autorisations approuvées.
     
     {{#if subject.has_planned_spending}}Les dépenses {{fr_will_change_to plan_change "f" "p" ""}} **{{fmt_compact1_written gov_exp_planning_year_3}}** d'ici à {{last_planned_year}}. {{/if}}
 
 dept_auth_exp_prog_spending_body:
   transform: [handlebars, markdown]
   en: |
-    Over the last 5 years, **{{subj_name dept}}** has authorized an average spending of **{{fmt_compact2_written dept_five_year_auth_average}}** ({{gl_tt "Authorities" "AUTH"}}) while actually spending an average of **{{fmt_compact2_written dept_five_year_exp_average}}** ({{gl_tt "Expenditures" "EXP"}}). On average, unused authorities represented **{{fmt_percentage1 dept_hist_avg_tot_pct}}** of approved authorities.
+    Over the last 5 years, **{{subj_name dept}}** has authorized an average spending of **{{fmt_compact2_written dept_five_year_auth_average}}** ({{gl_tt "Authorities" "AUTH"}}) while actually spending an average of **{{fmt_compact2_written dept_five_year_exp_average}}** ({{gl_tt "Expenditures" "EXP"}}). On average, unused authorities represented **{{fmt_percentage1 hist_avg_tot_pct}}** of approved authorities.
     
     {{#if subject.has_planned_spending}}Spending is {{will_change_to plan_change ""}} **{{fmt_compact2_written dept_exp_planning_year_3}}** by {{last_planned_year}}. {{/if}}
   fr: |
-    Au cours des cinq dernières années, **{{subj_name dept}}** a autorisé des dépenses moyennes de **{{fmt_compact2_written dept_five_year_auth_average}}** ({{gl_tt "autorisations" "AUTH"}}) alors que les dépenses réelles s'élevaient en moyenne à **{{fmt_compact2_written dept_five_year_exp_average}}** ({{gl_tt "dépenses" "EXP"}}). En moyenne, les autorisations non utilisées représentaient **{{fmt_percentage1 dept_hist_avg_tot_pct}}** des autorisations approuvées.
+    Au cours des cinq dernières années, **{{subj_name dept}}** a autorisé des dépenses moyennes de **{{fmt_compact2_written dept_five_year_auth_average}}** ({{gl_tt "autorisations" "AUTH"}}) alors que les dépenses réelles s'élevaient en moyenne à **{{fmt_compact2_written dept_five_year_exp_average}}** ({{gl_tt "dépenses" "EXP"}}). En moyenne, les autorisations non utilisées représentaient **{{fmt_percentage1 hist_avg_tot_pct}}** des autorisations approuvées.
     
     {{#if subject.has_planned_spending}}Les dépenses {{fr_will_change_to plan_change "f" "p" ""}} **{{fmt_compact2_written dept_exp_planning_year_3}}** d'ici à {{last_planned_year}}. {{/if}}
