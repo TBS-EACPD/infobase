@@ -1,11 +1,11 @@
-import GraphRegistry from './GraphRegistry.js';
+import graphRegistry from './graphRegistry.js';
 import webkitLineClamp from 'webkit-line-clamp';
 import { get_static_url } from '../request_utils.js';
 
 // Based on http://bl.ocks.org/brattonc/5e5ce9beee483220e2f6
 export class LiquidFillGauge{
   constructor(container, options){
-    GraphRegistry.setup_graph_instance(this, d3.select(container), options);
+    graphRegistry.setup_graph_instance(this, d3.select(container), options);
     this.initElements();
   };
   

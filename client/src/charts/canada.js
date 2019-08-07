@@ -10,7 +10,7 @@
 //  with the array ordered by fiscal year
 //
 
-import GraphRegistry from "./GraphRegistry.js";
+import graphRegistry from "./graphRegistry.js";
 import { businessConstants } from '../models/businessConstants.js';
 import { canada_svg } from "./canada.yaml";
 
@@ -42,7 +42,7 @@ export class Canada {
 
     options.alternative_svg = canada_svg_text;
   
-    GraphRegistry.setup_graph_instance(this, d3.select(container), options);
+    graphRegistry.setup_graph_instance(this, d3.select(container), options);
   };
 
   render(options){
