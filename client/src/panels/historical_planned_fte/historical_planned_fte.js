@@ -64,8 +64,8 @@ const render = function({calculations, footnotes, sources}) {
     }));
 
     const filter_a11y_data = (a11y_data, null_index) => _.chain(a11y_data)
-      .map( (d) => {
-        const filtered_data = _.chain(d)
+      .map( (raw_row) => {
+        const filtered_data = _.chain(raw_row)
           .filter((value, key) => {
             if(key==="data"){
               return value > 0;
@@ -76,11 +76,11 @@ const render = function({calculations, footnotes, sources}) {
         const formatted_data = formatter("big_int_real", filtered_data, {raw: true});
         formatted_data.length > 0 ? formatted_data.splice(null_index, 0, null) : null;
         return {
-          label: d.label,
+          label: raw_row.label,
           data: formatted_data,
         };
       })
-      .filter((row) => row.data.length > 0)
+      .filter( (formatted_and_filtered_row) => formatted_and_filtered_row.data.length > 0)
       .value();
 
     const filtered_history_a11y_data = filter_a11y_data(history_a11y_data, 1);
@@ -93,8 +93,8 @@ const render = function({calculations, footnotes, sources}) {
     );
   } else{
     const prepare_raw_data = (data, data_index) => _.chain(data_index)
-      .map((idx) => data[idx])
-      .filter((d) => d > 0)
+      .map( (idx) => data[idx] )
+      .filter( (prepared_raw_data) => prepared_raw_data > 0 )
       .value();
     const raw_data = _.concat(
       prepare_raw_data(info, history_data_index), prepare_raw_data(info, planned_data_index)
@@ -108,32 +108,28 @@ const render = function({calculations, footnotes, sources}) {
             y: data[idx],
           }
         ))
-        .pickBy((d) => d.y > 0)
-        .map((d) => d)
+        .pickBy( (prepared_row) => prepared_row.y > 0 )
+        .map( (filtered_row) => filtered_row )
         .value()
     );
-
+    
+    const historical_graph_data = prepare_graph_data(info, history_data_index, history_ticks);
+    const planned_graph_data = _.compact([
+      gap_year && historical_graph_data.length > 0 && {
+        x: gap_year,
+        y: null,
+      },
+      ...prepare_graph_data(info, planned_data_index, plan_ticks),
+    ]);
     const graph_data = _.chain(series_labels)
       .zip([
-        prepare_graph_data(info, history_data_index, history_ticks),
-        _.compact([
-          gap_year && {
-            x: gap_year,
-            y: null,
-          },
-          ...prepare_graph_data(info, planned_data_index, plan_ticks),
-        ]),
+        historical_graph_data,
+        planned_graph_data,
       ])
-      .filter( ([d,y]) => y.length > 0)
+      .filter( ([id,formatted_data_array]) => formatted_data_array.length > 0)
       .map( ([id, data]) => ({id, data}) )
       .value();
     
-    const all_ftes_exists = graph_data.length > 1;
-    if(!all_ftes_exists){
-      const planned_fte = _.find(graph_data, (fte) => fte.id === text_maker("planned_ftes"));
-      _.remove(planned_fte.data, (row) => (row.x === gap_year));
-    }
-
     const nivo_default_props = {
       data: graph_data,
       raw_data: raw_data,
@@ -159,20 +155,20 @@ const render = function({calculations, footnotes, sources}) {
           symbolSize: 12,
         },
       ],
-    };
-    if(marker_year && all_ftes_exists){
-      nivo_default_props["markers"] = [
-        {
-          axis: 'x',
-          value: marker_year,
-          lineStyle: { 
-            stroke: window.infobase_color_constants.tertiaryColor, 
-            strokeWidth: 2,
-            strokeDasharray: ("3, 3"),
+      ...(marker_year && graph_data.length > 1 && {
+        markers: [
+          {
+            axis: 'x',
+            value: marker_year,
+            lineStyle: { 
+              stroke: window.infobase_color_constants.tertiaryColor, 
+              strokeWidth: 2,
+              strokeDasharray: ("3, 3"),
+            },
           },
-        },
-      ];  
-    }
+        ],
+      }),
+    };
     const nivo_mobile_props = _.merge(
       {},
       nivo_default_props,
@@ -205,7 +201,7 @@ const render = function({calculations, footnotes, sources}) {
           </MediaQuery>
         }
       </div>
-    );  
+    );
   }
 
   return (
