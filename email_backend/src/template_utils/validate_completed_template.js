@@ -1,7 +1,5 @@
 import _ from "lodash";
 
-// TODO: would be more useful if this threw descriptive errors
-
 const validate_completed_template = (original_template, completed_template) => {  
   const field_templates = _.omit(original_template, "meta");
   const completed_fields = _.omit(completed_template, "meta");
