@@ -1,8 +1,12 @@
 import './auth_exp_prog_spending.scss';
 import { Fragment } from 'react';
 import text from './auth_exp_prog_spending.yaml';
+<<<<<<< HEAD
 import text2 from '../../common_text/common_lang.yaml';
 import { Details } from '../../components/Details.js';
+=======
+import MediaQuery from 'react-responsive';
+>>>>>>> removed common_lang and applied some similar changes to auth_exp_prog_spending
 import {
   run_template,
   PanelGraph,
@@ -22,7 +26,7 @@ const {
 } = declarative_charts;
 
 const { std_years, planning_years } = years;
-const { text_maker, TM } = create_text_maker_component([text, text2]);
+const { text_maker, TM } = create_text_maker_component(text);
 
 const auth_cols = _.map(std_years, yr=>`${yr}auth`);
 const exp_cols = _.map(std_years, yr=>`${yr}exp`);

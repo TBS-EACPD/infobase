@@ -1,7 +1,6 @@
 import '../../components/Details.scss';
 import { Details } from '../../components/Details.js';
 import text from './historical_planned_fte.yaml';
-import text2 from '../../common_text/common_lang.yaml';
 import MediaQuery from 'react-responsive';
 import {
   run_template,
@@ -20,7 +19,7 @@ const {
   A11YTable,
 } = declarative_charts;
 
-const { text_maker, TM } = create_text_maker_component([text, text2]);
+const { text_maker, TM } = create_text_maker_component(text);
 const { std_years, planning_years } = years;
 
 const render = function({calculations, footnotes, sources}) {
