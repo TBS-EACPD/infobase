@@ -1,4 +1,4 @@
-import common_charts_utils from './common_charts_utils';
+import GraphRegistry from './GraphRegistry.js';
 
 export class TwoSeriesBar {
   constructor(container, options) {
@@ -9,7 +9,7 @@ export class TwoSeriesBar {
     // ticks = ["tick1","tick2"."tick3"]
     // ```
 
-    common_charts_utils.setup_graph_instance(this, d3.select(container), options);
+    GraphRegistry.setup_graph_instance(this, d3.select(container), options);
 
     const _graph_area = this.svg.append("g").attr("class", "_graph_area");
     this.grid_line_area = _graph_area.append("g").attr("class", "grid_lines");

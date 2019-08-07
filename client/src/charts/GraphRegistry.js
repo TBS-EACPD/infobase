@@ -1,9 +1,6 @@
-import { formats } from '../core/format.js';
-
-
-
 let window_width_last_updated_at = window.innerWidth;
-const graph_registry = {
+
+const GraphRegistry = {
   registry: [],
   
   add(instance){ 
@@ -50,15 +47,15 @@ const should_graphs_update = () => window.innerWidth !== window_width_last_updat
 window.addEventListener(
   "hashchange", 
   _.debounce(function(){ 
-    graph_registry.update_registry();
+    GraphRegistry.update_registry();
   }, 250)
 );
 window.addEventListener(
   "resize", 
   _.debounce(function(){
     if ( should_graphs_update() ){
-      graph_registry.update_registry();
-      graph_registry.update_graphs();
+      GraphRegistry.update_registry();
+      GraphRegistry.update_graphs();
     }
   }, 250)
 );
@@ -101,15 +98,12 @@ const setup_graph_instance = function(instance, container, options = {}) {
     base_dispatch_events.concat(options.events || [])
   );
 
-  graph_registry.add(instance);
+  GraphRegistry.add(instance);
 };
 
+GraphRegistry.setup_graph_instance = setup_graph_instance;
 
-window._DEV_HELPERS.graph_registry = graph_registry;
+window._DEV_HELPERS.GraphRegistry = GraphRegistry;
 
 
-export default {
-  formats,
-  graph_registry,
-  setup_graph_instance,
-};
+export default GraphRegistry;
