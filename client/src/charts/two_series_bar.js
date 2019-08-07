@@ -1,4 +1,4 @@
-import GraphRegistry from './GraphRegistry.js';
+import graphRegistry from './graphRegistry.js';
 
 export class TwoSeriesBar {
   constructor(container, options) {
@@ -9,7 +9,7 @@ export class TwoSeriesBar {
     // ticks = ["tick1","tick2"."tick3"]
     // ```
 
-    GraphRegistry.setup_graph_instance(this, d3.select(container), options);
+    graphRegistry.setup_graph_instance(this, d3.select(container), options);
 
     const _graph_area = this.svg.append("g").attr("class", "_graph_area");
     this.grid_line_area = _graph_area.append("g").attr("class", "grid_lines");
