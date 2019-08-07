@@ -1,5 +1,15 @@
 import _ from 'lodash';
 
+const indent_new_lines = (string, indenting_spaces=4) => _.replace(
+  string,
+  /\n[^\n]/g,
+  (match) => _.replace(
+    match,
+    /^\n/, 
+    "\n" + " ".repeat(indenting_spaces)
+  )
+);
+
 const make_email_body_from_completed_template = (original_template, completed_template) => {
   const field_templates = _.omit(original_template, "meta");
   const completed_fields = _.omit(completed_template, "meta");
@@ -23,7 +33,7 @@ const make_email_body_from_completed_template = (original_template, completed_te
           }
         )();
 
-        return `${field_key}:\n${value}`;
+        return `${field_key}:\n    ${indent_new_lines(value)}`;
       }
     )
     .join("\n\n")
