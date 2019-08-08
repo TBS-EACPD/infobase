@@ -399,6 +399,7 @@ export class NivoResponsiveLine extends React.Component {
       legends,
       magnify_glass_translateX,
       magnify_glass_translateY,
+      layers,
     } = this.props;
 
     const {
@@ -449,6 +450,7 @@ export class NivoResponsiveLine extends React.Component {
             enableDotLabel,
             markers,
             legends,
+            layers,
           }}
           tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
           yScale={{
