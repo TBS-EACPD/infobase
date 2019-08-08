@@ -1,9 +1,13 @@
+import './panel-components.scss';
 import text from './panel_base_text.yaml';
+
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Fragment } from 'react';
-import { 
-  FootnoteList, 
+import * as clipboard from 'clipboard-polyfill';
+
+import {
+  FootnoteList,
   create_text_maker_component,
   ShareButton,
 } from '../util_components.js';
@@ -11,7 +15,6 @@ import { Details } from '../components/Details.js';
 import { get_static_url } from '../request_utils.js';
 import { panel_href_template } from '../infographic/routes.js';
 import { panel_context } from '../infographic/context.js';
-import './panel-components.scss';
 import { create_text_maker } from '../models/text.js';
 import { PDFGenerator } from './PDFGenerator.js';
 
@@ -99,14 +102,30 @@ class Panel_ extends React.Component {
               <ShareButton context={context} button_class_name={'panel-heading-utils'} title={title}/> 
             }
             { context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) &&
-              <div style={{display: 'inline'}}> 
-                <a className='panel-heading-utils' href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
+              <div style={{display: 'inline'}}>
+                <button
+                  className='panel-heading-utils'
+                  onClick={
+                    () => clipboard
+                      .writeText(
+                        window.location.href.replace(
+                          /#.+/,
+                          panel_href_template(context.subject, context.bubble, context.graph_key)
+                        )
+                      ).then(
+                        () => this.setState() //TODO
+                      )
+                      .catch(
+                        () => this.setState() //TODO
+                      )
+                  }
+                >
                   <img src={get_static_url("svg/permalink.svg")}
                     alt={text_maker("a11y_permalink")}
                     className='panel-heading-utils'
                     title={text_maker("a11y_permalink")}
                   />
-                </a>
+                </button>
               </div>
             }
           </div>

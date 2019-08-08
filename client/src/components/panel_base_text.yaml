@@ -9,9 +9,9 @@ a11y_source_expl:
   fr: Pour voir les donées en forme tabulaire, veuillez voir les liens suivants
 
 a11y_permalink:
-  en: Permalink to this panel
-  fr: Lien direct à ce graphique
+  en: Copy panel link to clipboard
+  fr: Copier le lien du graphique dans le presse-papier
 
 a11y_share_button:
-  en: Share panel URL
+  en: Share panel link
   fr: Partager le lien du graphique
