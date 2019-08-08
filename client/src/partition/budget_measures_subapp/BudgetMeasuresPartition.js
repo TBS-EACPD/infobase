@@ -232,7 +232,11 @@ const standard_update = (diagram, props) => {
 
 const update_with_search = (diagram, props) => {
   const search_tree = budget_measures_hierarchy_factory(props.year_value, props.selected_value, props.first_column);
-  const deburred_query = _.deburr(props.filter_string).toLowerCase();
+  const deburred_query = _.chain(props.filter_string)
+    .trim()
+    .deburr()
+    .lowerCase()
+    .value();
 
   const search_matching = [];
   let nonunique_dont_fade_arrays = [];

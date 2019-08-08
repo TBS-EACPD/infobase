@@ -211,7 +211,11 @@ export class PartitionSubApp {
   // Where the actual search happens
   search_actual(query){
     const search_tree = this.current_perspective.hierarchy_factory();
-    const deburred_query = _.deburr(query).toLowerCase();
+    const deburred_query = _.chain(query)
+      .trim()
+      .deburr()
+      .lowerCase()
+      .value();
 
     const search_matching = [];
     let nonunique_dont_fade_arrays = [];
