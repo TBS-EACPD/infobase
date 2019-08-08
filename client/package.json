@@ -26,6 +26,7 @@
     "bootstrap": "^3.4.1",
     "circular-dependency-plugin": "^5.0.2",
     "classnames": "^2.2.6",
+    "clipboard-polyfill": "^2.8.1",
     "connected-react-router": "^6.5.0",
     "core-js": "^2.5.7",
     "css-loader": "^2.1.1",
