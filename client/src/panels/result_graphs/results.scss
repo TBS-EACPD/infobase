@@ -144,3 +144,25 @@ dl.indicator-item__dl dt+dd {
   padding-right:10px;
   padding-top:10px;
 }
+
+.status-icon-table--met-icon, .status-icon-table--not-met-icon, .status-icon-table--na-icon, .status-icon-table--future-icon {
+  height: 60px;
+  width: 60px;
+  margin: 0px;
+}
+
+.status-icon-table--met-icon {
+  fill: #ff0000;
+}
+
+.status-icon-table--not-met-icon {
+  fill: #00ff00;
+}
+
+.status-icon-table--na-icon {
+  fill: #0000ff;
+}
+
+.status-icon-table--future-icon {
+  fill: #ff00ff;
+}
