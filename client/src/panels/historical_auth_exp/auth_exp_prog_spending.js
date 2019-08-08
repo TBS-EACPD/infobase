@@ -196,15 +196,15 @@ const render = function({calculations, footnotes, sources}) {
           <table style={{width: '100%', borderCollapse: 'collapse'}}>
             <tbody>
               { slice.data.map(
-                tooltip_item => {
-                  return <tr key = {tooltip_item.serie.id}>
+                tooltip_item => (
+                  <tr key = {tooltip_item.serie.id}>
                     <td style= {{padding: '3px 5px'}}>
                       <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.serie.color}} />
                     </td>
                     <td style={{padding: '3px 5px'}}> {tooltip_item.serie.id} </td>
                     <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: tooltip_formatter(tooltip_item.data.y)}} />
-                  </tr>;
-                }
+                  </tr>
+                )
               )}
               { slice.data.length > 1 ? 
                 <tr>
