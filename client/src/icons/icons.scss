@@ -1,9 +1,15 @@
 
+.icon--svg-inline, icon--svg {
+  display: inline-block;
+  overflow: visible;
+  shape-rendering: geometricPrecision;
+}
+
 
 .icon--svg-inline {
-  display: inline-block;
   font-size: inherit;
   height: 1.2em;
   overflow: visible;
   vertical-align: -.2em;
 }
+
