@@ -124,7 +124,11 @@ export class AdvancedSearch extends React.Component {
               <ul style={{listStyle: 'none'}}>
                 { _.map(
                   option_node.child_options,
-                  (option_node, option_key) => <li>{option_node_to_component(option_node, option_key)}</li>
+                  (option_node, option_key) => (
+                    <li key={option_key}>
+                      {option_node_to_component(option_node, option_key)}
+                    </li>
+                  )
                 )}
               </ul>
             }
