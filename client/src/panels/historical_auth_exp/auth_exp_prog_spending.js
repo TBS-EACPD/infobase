@@ -134,14 +134,10 @@ const render = function({calculations, footnotes, sources}) {
         }
       }
     );
-    // offset and new_auth is fake data to visually show the two overlapping lines, when auth is equal to exp
-    const offset = _.round(_.max(auth) * 0.02, 2);
-    const new_auth = _.map(auth, (value) => (value + offset));
-    
     const graph_data = _.chain(series_labels)
       .zip([
         zip_years_and_data(history_ticks, exp),
-        zip_years_and_data(history_ticks, _.isEqual(exp, auth) ? new_auth : auth),
+        zip_years_and_data(history_ticks, auth),
         _.compact([
           gap_year && {
             x: gap_year,
@@ -154,10 +150,42 @@ const render = function({calculations, footnotes, sources}) {
       .map( ([id, data]) => ({id, data}) )
       .value();
     
-    const get_auth_exp_diff = (slice_data) => {
-      const difference = _.round(Math.abs(slice_data[0].data.y - slice_data[1].data.y), 2);
-      return difference === offset && _.isEqual(exp, auth) ? 0 : difference;
+    const get_auth_exp_diff = (slice_data) => Math.abs(slice_data[0].data.y - slice_data[1].data.y);
+    
+    const styleById = {
+      [series_labels[0]]: {
+        stroke: colors(series_labels[0]),
+        strokeWidth: 2.5,
+      },
+      [series_labels[1]]: {
+        strokeDasharray: '56',
+        stroke: colors(series_labels[1]),
+        strokeWidth: 2.5,
+      },
+      [series_labels[2]]: {
+        stroke: colors(series_labels[2]),
+        strokeWidth: 2.5,
+      },
     };
+    
+    const DashedLine = ({ lineGenerator, xScale, yScale }) => {
+      return graph_data.map(({ id, data }) => {
+        return (
+          <path
+            key={id}
+            d={lineGenerator(
+              data.map(d => ({
+                x: xScale(d.x),
+                y: yScale(d.y),
+              }))
+            )}
+            fill="none"
+            style={styleById[id]}
+          />
+        );
+      });
+    };
+
     const nivo_default_props = {
       data: graph_data,
       raw_data: raw_data,
@@ -174,13 +202,7 @@ const render = function({calculations, footnotes, sources}) {
                       <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.serie.color}} />
                     </td>
                     <td style={{padding: '3px 5px'}}> {tooltip_item.serie.id} </td>
-                    <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{
-                      __html: tooltip_formatter(
-                        _.isEqual(exp, auth) && tooltip_item.serie.id === text_maker("authorities") ?
-                        tooltip_item.data.y - offset
-                        : tooltip_item.data.y
-                      ),
-                    }} />
+                    <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: tooltip_formatter(tooltip_item.data.y)}} />
                   </tr>;
                 }
               )}
@@ -188,7 +210,7 @@ const render = function({calculations, footnotes, sources}) {
                 <tr>
                   <td style= {{height: '12px', width: '12px', padding: '3px 5px'}}/>
                   <td style={{padding: '3px 5px'}}> {text_maker('difference')} </td>
-                  <td 
+                  <td
                     style={{padding: '3px 5px', color: window.infobase_color_constants.highlightColor}} 
                     dangerouslySetInnerHTML={{__html: tooltip_formatter(get_auth_exp_diff(slice.data))}}
                   />
@@ -227,6 +249,9 @@ const render = function({calculations, footnotes, sources}) {
           ],
         },
       ],
+      ...(_.isEqual(exp, auth) && {
+        layers: ['grid', 'markers', 'areas', DashedLine, 'slices', 'dots', 'axes', 'legends'],
+      }),
     };
     if(marker_year){
       nivo_default_props["markers"] = [
