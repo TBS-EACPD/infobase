@@ -479,10 +479,22 @@ const QuadrantDefList = ({defs} ) => (
 
 
 const result_status_components = {
-  met: <IconCheck width="48px" height="48px"/>,
-  not_met: <IconAttention width="48px" height="48px"/>,
-  not_available: <IconNA width="48px" height="48px"/>,
-  future: <IconClock width="48px" height="48px"/>,
+  met:
+    <div className="status-icon-table--met-icon">
+      <IconCheck width="48px" height="48px"/>
+    </div>,
+  not_met:
+    <div className="status-icon-table--not-met-icon">
+      <IconAttention width="48px" height="48px"/>
+    </div>,
+  not_available:
+    <div className="status-icon-table--na-icon">
+      <IconNA width="48px" height="48px"/>
+    </div>,
+  future:
+    <div className="status-icon-table--future-icon">
+      <IconClock width="48px" height="48px"/>
+    </div>,
 };
 
 const make_status_icons = (width) => {
