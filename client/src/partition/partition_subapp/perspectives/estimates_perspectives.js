@@ -1,7 +1,7 @@
 import { Subject } from '../../../models/subject';
 import { Table } from '../../../core/TableClass.js';
 import { text_maker } from '../partition_text_provider.js';
-import { TextMaker as StandardTextMaker } from '../../../util_components';
+import { TextMaker as StandardTextMaker } from '../../../components/index.js';
 import { rpb_link } from '../../../link_utils.js';
 import { PartitionPerspective } from './PartitionPerspective.js';
 import { run_template } from '../../../models/text.js';

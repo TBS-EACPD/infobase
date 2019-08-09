@@ -13,7 +13,7 @@ import {
   Format,
   RadioButtons,
   LabeledBox,
-} from '../util_components.js';
+} from '../components/index.js';
 import { 
   get_root,
 } from '../gen_expl/hierarchy_tools.js';

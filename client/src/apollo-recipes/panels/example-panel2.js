@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { Panel } from '../panel-components.js';
+import { Panel } from '../panel_components.js';
 
 const Component = ({ data: { programs } }) => (
   <Panel title="example panel 1">

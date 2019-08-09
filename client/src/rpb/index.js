@@ -25,7 +25,7 @@ import {
   SpinnerWrapper,
   RadioButtons, 
   LabeledBox,
-} from '../util_components.js';
+} from '../components/index.js';
 import AriaModal from 'react-aria-modal';
 
 //specific view stuff

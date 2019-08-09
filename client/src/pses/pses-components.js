@@ -1,5 +1,5 @@
 
-import { Format } from '../util_components.js';
+import { Format } from '../components/index.js';
 import './pses-components.scss';
 import gql from 'graphql-tag';
 import { Fragment } from 'react';

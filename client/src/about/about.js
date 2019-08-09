@@ -5,7 +5,7 @@ import { StandardRouteContainer } from '../core/NavComponents.js';
 import { 
   TM,
   EmbeddedVideo,
-} from '../util_components.js';
+} from '../components/index.js';
 import { create_text_maker } from '../models/text.js';
 import { LabeledTable } from '../components/LabeledTable.js';
 import { IconGrid } from '../components/IconGrid.js';

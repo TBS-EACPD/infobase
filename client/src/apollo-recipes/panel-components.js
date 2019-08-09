@@ -1,7 +1,7 @@
 import { Children } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { FootnoteList, TM } from '../util_components.js';
+import { FootnoteList, TM } from '../components/index.js';
 import { Details } from '../components/Details.js';
 
 export const Panel = ({ title, sources, footnotes, children }) => (

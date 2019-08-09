@@ -10,7 +10,7 @@ import {
   CardTopImage,
   CardLeftImage,
   ContainerEscapeHatch,
-} from '../util_components.js';
+} from '../components/index.js';
 
 import { general_href_for_item } from '../link_utils.js';
 import { StandardRouteContainer } from '../core/NavComponents.js';

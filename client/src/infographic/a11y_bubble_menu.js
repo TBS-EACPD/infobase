@@ -1,4 +1,4 @@
-import { TM } from '../util_components.js';
+import { TM } from '../components/index.js';
 
 export default class AccessibleBubbleMenu extends React.Component {
 

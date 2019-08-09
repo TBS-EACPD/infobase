@@ -2,12 +2,11 @@ import './ExplorerComponents.scss';
 import classNames from 'classnames';
 import { TransitionGroup } from 'react-transition-group';
 import FlipMove from 'react-flip-move';
-import {
-  FirstChild,
-  AccordionEnterExit,
-  SortIndicators,
-} from '../util_components.js';
 import { createSelector } from 'reselect';
+
+import { FirstChild, AccordionEnterExit } from './Accordions.js';
+import { SortIndicators } from './SortIndicators.js';
+
 import { trivial_text_maker } from '../models/text.js';
 
 const INDENT_SIZE = 24;

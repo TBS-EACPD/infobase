@@ -10,7 +10,7 @@ import {
   TwoLevelSelect, 
   SortIndicators, 
   LabeledBox,
-} from '../util_components.js';
+} from '../components/index.js';
 import { Details } from '../components/Details.js';
 import classNames from 'classnames';
 import { Subject } from '../models/subject.js';

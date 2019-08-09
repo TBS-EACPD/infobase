@@ -1,13 +1,13 @@
 import './shared.scss';
 import * as general_utils from '../general_utils.js';
-import * as util_components from '../util_components.js';
+import * as util_components from '../components/index.js';
 import * as declarative_charts from '../charts/declarative_charts.js';
 import * as Results from '../models/results.js';
 import { create_text_maker, trivial_text_maker, run_template } from '../models/text.js';
 import { formats, dollar_formats, formatter } from '../core/format.js';
 import { PanelGraph, layout_types } from '../core/PanelGraph.js';
 import { newIBCategoryColors, newIBLightCategoryColors, newIBDarkCategoryColors, NA_color } from '../core/color_schemes.js';
-import { Panel, StdPanel, TextPanel, Col } from '../components/panel-components.js';
+import { Panel, StdPanel, TextPanel, Col } from '../components/panel_components.js';
 import { Table } from '../core/TableClass.js';
 import { rpb_link, get_appropriate_rpb_subject } from '../rpb/rpb_link.js';
 import { Subject } from '../models/subject';

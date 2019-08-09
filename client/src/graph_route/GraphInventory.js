@@ -20,7 +20,7 @@ const {
   CRSO,
 } = Subject;
 import { ensure_loaded } from '../core/lazy_loader';
-import { EverythingSearch, SpinnerWrapper } from '../util_components';
+import { EverythingSearch, SpinnerWrapper } from '../components/index.js';
 import { PanelGraph } from '../core/PanelGraph';
 
 

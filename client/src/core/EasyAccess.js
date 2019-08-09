@@ -1,4 +1,4 @@
-import { TrivialTM } from '../util_components.js';
+import { TrivialTM } from '../components/index.js';
 import { trivial_text_maker } from '../models/text.js';
 import { get_static_url } from '../request_utils.js';
 import { Fragment } from 'react';

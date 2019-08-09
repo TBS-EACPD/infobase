@@ -1,8 +1,8 @@
 import metadata_text from './metadata.yaml';
 import { StandardRouteContainer, ScrollToTargetContainer } from '../core/NavComponents.js';
-import { create_text_maker_component, FancyUL } from '../util_components.js';
+import { create_text_maker_component, FancyUL } from '../components/index.js';
 import { sources } from './data_sources.js';
-import { Panel } from '../components/panel-components.js';
+import { Panel } from '../components/panel_components.js';
 
 const { text_maker, TM } = create_text_maker_component(metadata_text);
 

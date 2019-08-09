@@ -1,6 +1,6 @@
 import privacy_text_bundle from "./PrivacyStatement.yaml";
 import { StandardRouteContainer } from '../core/NavComponents.js';
-import { TextMaker } from '../util_components.js';
+import { TextMaker } from '../components/index.js';
 import { create_text_maker } from '../models/text.js';
 
 const text_maker = create_text_maker(privacy_text_bundle);

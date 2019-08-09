@@ -1,4 +1,4 @@
-import { TextMaker } from '../util_components.js';
+import { TextMaker } from '../components/index.js';
 
 export class A11YTable extends React.PureComponent {
   render(){

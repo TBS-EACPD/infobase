@@ -12,10 +12,7 @@ import {
   create_text_maker_component,
 } from "../shared";
 
-const { 
-  Format,
-
-} = util_components;
+const { Format } = util_components;
 
 const {
   GraphLegend,

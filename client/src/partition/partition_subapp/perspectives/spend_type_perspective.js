@@ -1,6 +1,6 @@
 import { Subject } from '../../../models/subject.js';
 import { text_maker } from '../partition_text_provider.js';
-import { TextMaker as StandardTextMaker } from '../../../util_components';
+import { TextMaker as StandardTextMaker } from '../../../components/index.js';
 import { Table } from '../../../core/TableClass.js';
 import { PartitionPerspective } from './PartitionPerspective.js';
 import { businessConstants } from '../../../models/businessConstants';

@@ -18,7 +18,7 @@ import {
   create_text_maker_component,
   SpinnerWrapper,
   AdvancedSearch,
-} from '../util_components.js';
+} from '../components/index.js';
 
 import { infograph_href_template } from './routes.js';
 

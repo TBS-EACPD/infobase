@@ -1,7 +1,7 @@
-import { Format } from '../../util_components.js';
+import { Format } from '../../components/index.js';
 import '../../pses/pses-components.scss';
 import gql from 'graphql-tag';
-import { Panel } from '../panel-components.js';
+import { Panel } from '../panel_components.js';
 import { Fragment } from 'react';
 
 

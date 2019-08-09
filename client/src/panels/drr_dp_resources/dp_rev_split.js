@@ -14,9 +14,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const { planning_years } = years;
 
-const { 
-  Format,
-} = util_components;
+const { Format } = util_components;
 
 const special_cols = _.flatMap(planning_years, year => [ `${year}_gross`, `${year}_rev`, `${year}_spa`]);
 const dp_cols = [...planning_years, ...special_cols];

@@ -1,25 +1,27 @@
-import './panel-components.scss';
-import text from './panel-components.yaml';
+import './panel_components.scss';
+import text from './panel_components.yaml';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Fragment } from 'react';
-import * as clipboard from 'clipboard-polyfill';
 
 import {
+  Details,
   FootnoteList,
   create_text_maker_component,
   ShareButton,
-} from '../util_components.js';
-import { Details } from '../components/Details.js';
-import { get_static_url } from '../request_utils.js';
+  WriteToClipboard,
+  PDFGenerator,
+} from './index.js';
+
 import { panel_href_template } from '../infographic/routes.js';
 import { panel_context } from '../infographic/context.js';
+
 import { create_text_maker } from '../models/text.js';
-import { PDFGenerator } from './PDFGenerator.js';
 
 const { TM } = create_text_maker_component(text);
 const text_maker = create_text_maker(text);
+
 
 const PanelSource = ({links}) => {
   if(_.isEmpty(links)){
@@ -52,7 +54,6 @@ const PanelSource = ({links}) => {
 };
 
 export const Panel = props => {
-
   const { Consumer } = panel_context;
   return (
     <Consumer>
@@ -125,25 +126,11 @@ class Panel_ extends React.Component {
             }
             { context && !context.no_permalink && panel_link &&
               <div style={{display: 'inline'}}>
-                <button
-                  className='panel-heading-utils'
-                  onClick={
-                    () => clipboard
-                      .writeText(panel_link)
-                      .then(
-                        () => this.setState() //TODO
-                      )
-                      .catch(
-                        () => this.setState() //TODO
-                      )
-                  }
-                >
-                  <img 
-                    src={get_static_url("svg/permalink.svg")}
-                    alt={text_maker("a11y_permalink")}
-                    title={text_maker("a11y_permalink")}
-                  />
-                </button>
+                <WriteToClipboard
+                  text_to_copy={panel_link}
+                  button_class_name={'panel-heading-utils'} 
+                  button_description={text_maker("a11y_permalink")}
+                />
               </div>
             }
           </div>
