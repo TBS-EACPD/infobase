@@ -101,36 +101,36 @@ class Panel_ extends React.Component {
         {title && <header className='panel-heading'>
           <header className="panel-title"> {title} </header>
           <div style={{marginLeft: 'auto'}}>
-            { context && 
-              <PDFGenerator 
-                target_id={context.graph_key}
-                file_name={file_name}
-                title={title}
-                link={panel_link}
-                download_button_class_name={"panel-heading-utils"}
-              />
+            { context &&
+              <div style={{display: 'inline'}}>
+                <PDFGenerator 
+                  target_id={context.graph_key}
+                  file_name={file_name}
+                  title={title}
+                  link={panel_link}
+                  button_class_name={"panel-heading-utils"}
+                />
+              </div>
             }
-            {context && panel_link && 
-              <ShareButton
-                url={panel_link}
-                button_class_name={'panel-heading-utils'} 
-                title={share_modal_title}
-                button_description={text_maker("panel_share_button")}
-                subject={subject}
-              /> 
+            { context && panel_link &&
+              <div style={{display: 'inline'}}>
+                <ShareButton
+                  url={panel_link}
+                  title={share_modal_title}
+                  button_class_name={'panel-heading-utils'} 
+                  button_description={text_maker("panel_share_button")}
+                  subject={subject}
+                />
+              </div>
             }
-            { context && !context.no_permalink && panel_href_template(subject, context.bubble, context.graph_key) &&
+            { context && !context.no_permalink && panel_link &&
               <div style={{display: 'inline'}}>
                 <button
                   className='panel-heading-utils'
                   onClick={
                     () => clipboard
-                      .writeText(
-                        window.location.href.replace(
-                          /#.+/,
-                          panel_href_template(subject, context.bubble, context.graph_key)
-                        )
-                      ).then(
+                      .writeText(panel_link)
+                      .then(
                         () => this.setState() //TODO
                       )
                       .catch(
@@ -138,9 +138,9 @@ class Panel_ extends React.Component {
                       )
                   }
                 >
-                  <img src={get_static_url("svg/permalink.svg")}
+                  <img 
+                    src={get_static_url("svg/permalink.svg")}
                     alt={text_maker("a11y_permalink")}
-                    className='panel-heading-utils'
                     title={text_maker("a11y_permalink")}
                   />
                 </button>
@@ -161,11 +161,7 @@ class Panel_ extends React.Component {
             <div className="mrgn-tp-md">
               <Details
                 summary_content={ <TM k="footnotes" /> }
-                content={
-                  <FootnoteList
-                    footnotes={footnotes}
-                  />
-                }
+                content={ <FootnoteList footnotes={footnotes} /> }
               />
             </div>
           }
