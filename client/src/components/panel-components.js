@@ -1,5 +1,5 @@
 import './panel-components.scss';
-import text from './panel_base_text.yaml';
+import text from './panel-components.yaml';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
