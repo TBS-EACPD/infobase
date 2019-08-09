@@ -99,7 +99,18 @@ class Panel_ extends React.Component {
               />
             }
             {context && panel_href_template(context.subject, context.bubble, context.graph_key) && 
-              <ShareButton context={context} button_class_name={'panel-heading-utils'} title={title}/> 
+              <ShareButton
+                url={
+                  window.location.href.replace(
+                    window.location.hash,
+                    panel_href_template(context.subject, context.bubble, context.graph_key).replace(/~/g, '%7E')
+                  )
+                }
+                button_class_name={'panel-heading-utils'} 
+                title={title}
+                button_description={text_maker("panel_share_button")}
+                subject={context.subject}
+              /> 
             }
             { context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) &&
               <div style={{display: 'inline'}}>
