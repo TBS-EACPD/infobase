@@ -78,7 +78,7 @@ class Panel_ extends React.Component {
       allowOverflow,
     } = this.props;
 
-    const { subject } = context;
+    const subject = context && context.subject;
 
     const file_name_context = subject ? subject.level === 'dept' ? subject.acronym: subject.id : "";
     const file_name = `${file_name_context}_${title}.pdf`;
@@ -101,39 +101,41 @@ class Panel_ extends React.Component {
       <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
         {title && <header className='panel-heading'>
           <header className="panel-title"> {title} </header>
-          <div style={{marginLeft: 'auto'}}>
-            { context &&
-              <div style={{display: 'inline'}}>
-                <PDFGenerator 
-                  target_id={context.graph_key}
-                  file_name={file_name}
-                  title={title}
-                  link={panel_link}
-                  button_class_name={"panel-heading-utils"}
-                />
-              </div>
-            }
-            { context && panel_link &&
-              <div style={{display: 'inline'}}>
-                <ShareButton
-                  url={panel_link}
-                  title={share_modal_title}
-                  button_class_name={'panel-heading-utils'} 
-                  button_description={text_maker("panel_share_button")}
-                  subject={subject}
-                />
-              </div>
-            }
-            { context && !context.no_permalink && panel_link &&
-              <div style={{display: 'inline'}}>
-                <WriteToClipboard
-                  text_to_copy={panel_link}
-                  button_class_name={'panel-heading-utils'} 
-                  button_description={text_maker("a11y_permalink")}
-                />
-              </div>
-            }
-          </div>
+          { context &&
+            <div style={{marginLeft: 'auto'}}>
+              { context.graph_key &&
+                <div style={{display: 'inline'}}>
+                  <PDFGenerator 
+                    target_id={context.graph_key}
+                    file_name={file_name}
+                    title={title}
+                    link={panel_link}
+                    button_class_name={"panel-heading-utils"}
+                  />
+                </div>
+              }
+              { panel_link &&
+                <div style={{display: 'inline'}}>
+                  <ShareButton
+                    url={panel_link}
+                    title={share_modal_title}
+                    button_class_name={'panel-heading-utils'} 
+                    button_description={text_maker("panel_share_button")}
+                    subject={subject}
+                  />
+                </div>
+              }
+              { !context.no_permalink && panel_link &&
+                <div style={{display: 'inline'}}>
+                  <WriteToClipboard
+                    text_to_copy={panel_link}
+                    button_class_name={'panel-heading-utils'} 
+                    button_description={text_maker("a11y_permalink")}
+                  />
+                </div>
+              }
+            </div>
+          }
         </header>
         }
         <div className='panel-body'>
