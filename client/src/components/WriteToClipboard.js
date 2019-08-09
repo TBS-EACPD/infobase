@@ -1,6 +1,11 @@
+import text from './WriteToClipboard.yaml';
+
 import * as clipboard from 'clipboard-polyfill';
 
+import { create_text_maker } from '../models/text.js';
 import { get_static_url } from '../request_utils.js';
+
+const text_maker = create_text_maker(text);
 
 export class WriteToClipboard extends React.Component {
   render(){
@@ -33,3 +38,4 @@ export class WriteToClipboard extends React.Component {
     );
   }
 }
+WriteToClipboard.defaultProps = { button_description: text_maker("copy_to_clipboard") };

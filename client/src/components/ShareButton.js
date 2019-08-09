@@ -1,9 +1,14 @@
+import text from "./ShareButton.yaml";
+
 import { ShareModal } from './ShareModal.js';
 
-import { trivial_text_maker } from '../models/text.js';
+import { create_text_maker } from '../models/text.js';
 import { get_static_url } from '../request_utils.js';
 
 import { Fragment } from 'react';
+
+const text_maker = create_text_maker(text);
+
 
 export class ShareButton extends React.Component {
   constructor(props){
@@ -46,4 +51,4 @@ export class ShareButton extends React.Component {
   }
 }
 
-ShareButton.defaultProps = { button_description: trivial_text_maker("share") };
+ShareButton.defaultProps = { button_description: text_maker("share") };

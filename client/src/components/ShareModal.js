@@ -1,4 +1,7 @@
 import './ShareModal.scss';
+import text1 from "./ShareModal.yaml";
+import text2 from "./ShareButton.yaml";
+
 import { Button, Modal } from 'react-bootstrap';
 import {
   TwitterShareButton,
@@ -12,11 +15,10 @@ import {
   RedditShareButton,
   RedditIcon,
 } from 'react-share';
-import text from "./ShareModal.yaml";
 import { create_text_maker } from '../models/text.js';
 import { get_static_url } from '../request_utils.js';
 
-const text_maker = create_text_maker(text);
+const text_maker = create_text_maker([text1, text2]);
 
 export class ShareModal extends React.Component {
 
@@ -47,7 +49,7 @@ export class ShareModal extends React.Component {
       <Modal show={show} onHide={closeModal}>
         <div onBlur={this.onBlur}>
           <Modal.Header>
-            <Modal.Title style={{fontSize: '130%'}}><img src={get_static_url('./svg/shareGrey.svg')}/> {text_maker("share")}</Modal.Title>
+            <Modal.Title style={{fontSize: '130%'}}><img src={get_static_url('./svg/shareGrey.svg')}/>{text_maker("share")}</Modal.Title>
             <Modal.Title style={{fontSize: '100%', marginTop: '7px'}}>{title}</Modal.Title>
           </Modal.Header>
 
