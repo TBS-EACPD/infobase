@@ -101,7 +101,7 @@ DP_results_option_title:
 DRR_results_option_title:
   transform: [handlebars]
   en: Actual Results for {{doc_year}}
-  fr: Résultats actuels pour {{doc_year}}
+  fr: Résultats réels pour {{doc_year}}
 
   
 
