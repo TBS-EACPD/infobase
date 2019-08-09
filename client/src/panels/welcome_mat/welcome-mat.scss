@@ -80,9 +80,11 @@
   }
 }
 
+.mat-grid__lg-panel15 { @include lg-panel(15%); }
 .mat-grid__lg-panel20 { @include lg-panel(20%); }
 .mat-grid__lg-panel40 { @include lg-panel(40%); }
 .mat-grid__lg-panel50 { @include lg-panel(50%); }
+.mat-grid__lg-panel55 { @include lg-panel(55%); }
 .mat-grid__lg-panel80 { @include lg-panel(80%); }
 .mat-grid__lg-panel100 { @include lg-panel(100%); }
 
@@ -115,7 +117,9 @@
   &.mat-grid__inner-panel--small {
     font-size: 1em;
   }
-
+  &.mat-grid__inner-panel--medium {
+    font-size: 1.6em;
+  }
   &.mat-grid__inner-panel--large {
     font-size: 2em;
     @media (max-width: $maxLargeDevice){
