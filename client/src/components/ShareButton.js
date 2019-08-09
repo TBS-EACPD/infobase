@@ -3,6 +3,8 @@ import { ShareModal } from './ShareModal.js';
 import { trivial_text_maker } from '../models/text.js';
 import { get_static_url } from '../request_utils.js';
 
+import { Fragment } from 'react';
+
 export class ShareButton extends React.Component {
   constructor(props){
     super();
@@ -25,9 +27,10 @@ export class ShareButton extends React.Component {
     } = this.props;
 
     return(
-      <div style={{display: 'inline'}}>
+      <Fragment>
         <button onClick={() => this.toggleModal(true)} className={button_class_name}>
-          <img src={get_static_url("svg/share.svg")} 
+          <img 
+            src={get_static_url("svg/share.svg")} 
             alt={button_description}
             title={button_description}
           />
@@ -38,7 +41,7 @@ export class ShareButton extends React.Component {
           url={url}
           title={title}
         />
-      </div>
+      </Fragment>
     );
   }
 }

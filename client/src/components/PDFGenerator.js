@@ -6,6 +6,7 @@ import {
   SpinnerWrapper,
 } from '../util_components.js';
 
+import { Fragment } from 'react';
 import * as qrcode from 'qrcode-generator';
 import * as html2canvas from 'html2canvas';
 import * as jsPDF from 'jspdf';
@@ -219,29 +220,29 @@ export class PDFGenerator extends React.Component{
 
   render(){
     const { generating_pdf } = this.state;
-    const { download_button_class_name } = this.props;
-    return(
-      <div style={{display: 'inline'}}>
-        {!window.feature_detection.is_IE() && !generating_pdf &&
+    const { button_class_name } = this.props;
+    return !window.feature_detection.is_IE() && (
+      <Fragment>
+        { !generating_pdf &&
           <button
             onClick={ () => this.setState({generating_pdf: true}) }
-            className={download_button_class_name}
+            className={button_class_name}
           >
             <img
               src={get_static_url('svg/download.svg')}
-              className='button-img'
               alt={text_maker("download_pdf")}
-              title={text_maker("download_pdf")}/>
+              title={text_maker("download_pdf")}
+            />
           </button>
         } 
-        {!window.feature_detection.is_IE() && generating_pdf &&
+        { generating_pdf &&
           <SpinnerWrapper
             config_name={"small_inline"}
             title={text_maker("downloading_pdf")}
             alt={text_maker("downloading_pdf")}
           />
         }
-      </div>
+      </Fragment>
     );
   }
 
