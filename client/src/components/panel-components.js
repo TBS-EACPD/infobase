@@ -77,12 +77,24 @@ class Panel_ extends React.Component {
       allowOverflow,
     } = this.props;
 
-    const file_name_context = context ? context.subject.level === 'dept' ? context.subject.acronym: context.subject.id : "";
+    const { subject } = context;
+
+    const file_name_context = subject ? subject.level === 'dept' ? subject.acronym: subject.id : "";
     const file_name = `${file_name_context}_${title}.pdf`;
-    const panel_link = context && window.location.href.replace(
-      window.location.hash, 
-      panel_href_template(context.subject, context.bubble, context.graph_key)
+    const panel_link = context && panel_href_template(subject, context.bubble, context.graph_key) && 
+      window.location.href.replace(
+        window.location.hash, 
+        panel_href_template(subject, context.bubble, context.graph_key)
+      );
+
+    const share_modal_subject_fragment = subject && (
+      subject.level === 'tag' || subject.level === 'gov' ?
+        subject.name :
+        subject.level === 'dept' ? 
+          subject.acronym : 
+          `${subject.dept.acronym} - ${subject.name}`
     );
+    const share_modal_title = `${share_modal_subject_fragment && `${share_modal_subject_fragment} — ` || ""}${title}`;
 
     return (
       <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
@@ -98,21 +110,16 @@ class Panel_ extends React.Component {
                 download_button_class_name={"panel-heading-utils"}
               />
             }
-            {context && panel_href_template(context.subject, context.bubble, context.graph_key) && 
+            {context && panel_link && 
               <ShareButton
-                url={
-                  window.location.href.replace(
-                    window.location.hash,
-                    panel_href_template(context.subject, context.bubble, context.graph_key).replace(/~/g, '%7E')
-                  )
-                }
+                url={panel_link}
                 button_class_name={'panel-heading-utils'} 
-                title={title}
+                title={share_modal_title}
                 button_description={text_maker("panel_share_button")}
-                subject={context.subject}
+                subject={subject}
               /> 
             }
-            { context && !context.no_permalink && panel_href_template(context.subject, context.bubble, context.graph_key) &&
+            { context && !context.no_permalink && panel_href_template(subject, context.bubble, context.graph_key) &&
               <div style={{display: 'inline'}}>
                 <button
                   className='panel-heading-utils'
@@ -121,7 +128,7 @@ class Panel_ extends React.Component {
                       .writeText(
                         window.location.href.replace(
                           /#.+/,
-                          panel_href_template(context.subject, context.bubble, context.graph_key)
+                          panel_href_template(subject, context.bubble, context.graph_key)
                         )
                       ).then(
                         () => this.setState() //TODO

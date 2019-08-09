@@ -22,7 +22,6 @@ export class ShareButton extends React.Component {
       button_class_name,
       title,
       button_description,
-      subject,
     } = this.props;
 
     return(
@@ -38,7 +37,6 @@ export class ShareButton extends React.Component {
           closeModal={() => this.toggleModal(false)} 
           url={url}
           title={title}
-          subject={subject}
         />
       </div>
     );
