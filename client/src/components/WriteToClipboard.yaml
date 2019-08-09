@@ -1,3 +1,11 @@
 copy_to_clipboard:
   en: Copy to clipboard
   fr: Copier dans le presse-papier
+
+copy_success:
+  en: Copied successfully
+  fr: Copié avec succès
+
+copy_fail:
+  en: Copying unsuccesful, URL available in address bar
+  fr: Copie non réussie, URL disponible dans la barre d'adresse
