@@ -644,43 +644,48 @@ const WelcomeMat = (props) => {
       spend_summary_key = false;
       fte_summary_key = false;
     }
-    const { nivo_default_props } = format_and_get_nivo_graph(info, subject);
-    const welcome_mat_fte_line_props = {
-      ...nivo_default_props,
-      //enableGridX: false,
-      enableGridY: false,
-      remove_left_axis: true,
-      show_yaxis_zoom: false,
-      min: _.min(nivo_default_props.raw_data) * 0.9,
-      max: _.max(nivo_default_props.raw_data) * 1.1,
-      margin: {
-        top: 10,
-        right: 30,
-        bottom: 70,
-        left: 30,
-      },
-      legends: [
-        {
-          anchor: 'bottom-right',
-          direction: 'row',
-          translateX: 97,
-          translateY: 60,
-          itemDirection: 'left-to-right',
-          itemWidth: 160,
-          itemHeight: 20,
-          itemsSpacing: 2,
-          itemOpacity: 0.75,
-          symbolSize: 12,
+    let welcome_matt_fte_graph;
+    const { graph_content, nivo_default_props } = format_and_get_nivo_graph(info, subject);
+    if(!window.is_a11y_mode){
+      const welcome_mat_fte_graph_props = {
+        ...nivo_default_props,
+        //enableGridX: false,
+        enableGridY: false,
+        remove_left_axis: true,
+        show_yaxis_zoom: false,
+        min: _.min(nivo_default_props.raw_data) * 0.9,
+        max: _.max(nivo_default_props.raw_data) * 1.1,
+        margin: {
+          top: 10,
+          right: 30,
+          bottom: 70,
+          left: 30,
         },
-      ],
-    };
-    const graph_content = (
-      <div style={{height: 230}} aria-hidden = {true}>
-        <NivoResponsiveLine
-          {...welcome_mat_fte_line_props}
-        />
-      </div>
-    );
+        legends: [
+          {
+            anchor: 'bottom-right',
+            direction: 'row',
+            translateX: 97,
+            translateY: 60,
+            itemDirection: 'left-to-right',
+            itemWidth: 160,
+            itemHeight: 20,
+            itemsSpacing: 2,
+            itemOpacity: 0.75,
+            symbolSize: 12,
+          },
+        ],
+      };
+      welcome_matt_fte_graph = (
+        <div style={{height: 230}} aria-hidden = {true}>
+          <NivoResponsiveLine
+            {...welcome_mat_fte_graph_props}
+          />
+        </div>
+      );  
+    } else{
+      welcome_matt_fte_graph = graph_content;
+    }
   
     return (
       <WelcomeMatShell
@@ -783,7 +788,7 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane noPadding key="d" size={55}>
-            {graph_content}
+            {welcome_matt_fte_graph}
           </Pane>,
         ]}
         text_row={[
@@ -1102,6 +1107,7 @@ new PanelGraph({
   level: "tag",
   key: 'welcome_mat',
   footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+  info_deps: ["programFtes_program_info"],
   depends_on: ['programSpending','programFtes'],
   missing_info: "ok",
   calculate (subject, info, options){
@@ -1113,6 +1119,7 @@ new PanelGraph({
 
     return {
       type: "hist_planned",
+      info,
       calcs,
       is_m2m: subject.root.cardinality === "MtoM",
     };
