@@ -10,7 +10,7 @@ import {
   create_text_maker_component,
   GlossarySearch,
   BackToTop,
-} from '../util_components.js';
+} from '../components/index.js';
 
 const { text_maker, TM } = create_text_maker_component(glossary_text);
 

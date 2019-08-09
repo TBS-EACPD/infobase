@@ -5,7 +5,7 @@ import { StandardRouteContainer } from '../../core/NavComponents.js';
 import { 
   SpinnerWrapper,
   ContainerEscapeHatch,
-} from '../../util_components';
+} from '../../components/index.js';
 import { text_maker } from './partition_text_provider.js';
 
 export default class PartitionRoute extends React.Component {

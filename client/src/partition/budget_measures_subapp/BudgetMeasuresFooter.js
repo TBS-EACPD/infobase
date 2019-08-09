@@ -5,7 +5,7 @@ import { TextMaker } from './budget_measure_text_provider.js';
 import { 
   LabeledBox, 
   FancyUL,
-} from '../../util_components.js';
+} from '../../components/index.js';
 
 import { sources } from '../../metadata/data_sources.js';
 

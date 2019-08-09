@@ -4,7 +4,7 @@ import home_text2 from "./a11y-home.yaml";
 import { featured_content_items } from './home-data.js';
 
 import { StandardRouteContainer } from '../core/NavComponents.js';
-import { create_text_maker_component } from '../util_components.js';
+import { create_text_maker_component } from '../components/index.js';
 
 const { text_maker, TM } = create_text_maker_component([home_text1, home_text2]);
 

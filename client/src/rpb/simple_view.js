@@ -10,7 +10,7 @@ import {
   Format, 
   SortIndicators, 
   LabeledBox, 
-} from '../util_components.js';
+} from '../components/index.js';
 import { Details } from '../components/Details.js';
 import { rpb_link } from './rpb_link.js';
 import { Subject } from '../models/subject.js';

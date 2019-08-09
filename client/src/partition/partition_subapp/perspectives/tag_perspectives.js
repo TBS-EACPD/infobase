@@ -1,6 +1,6 @@
 import { Subject } from '../../../models/subject.js';
 import { text_maker } from '../partition_text_provider.js';
-import { TM, KeyConceptList } from '../../../util_components';
+import { TM, KeyConceptList } from '../../../components/index.js';
 import { Table } from '../../../core/TableClass.js';
 import { PartitionPerspective } from './PartitionPerspective.js';
 

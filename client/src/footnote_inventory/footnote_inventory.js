@@ -6,7 +6,7 @@ import {
   Select, 
   TwoLevelSelect, 
   FancyUL,
-} from '../util_components.js';
+} from '../components/index.js';
 import classNames from 'classnames';
 
 const link_to_graph_inventory = ( graph_key, level ) => `#graph/${level}/${graph_key}`;

@@ -1,7 +1,7 @@
 import { 
   TrivialTM as TM,
   Format,
-} from '../util_components.js';
+} from '../components/index.js';
 import { createSelector } from 'reselect';
 
 

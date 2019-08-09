@@ -1,7 +1,7 @@
 //https://gist.github.com/guglielmo/16d880a6615da7f502116220cb551498
 
 import { StandardRouteContainer } from '../core/NavComponents.js';
-import { SpinnerWrapper } from '../util_components.js';
+import { SpinnerWrapper } from '../components/index.js';
 import {
   get_data,
   load_data,

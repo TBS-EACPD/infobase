@@ -7,25 +7,20 @@ import classNames from 'classnames';
 import * as Diff from 'diff';
 
 import { StandardRouteContainer } from '../core/NavComponents.js';
-import { create_text_maker_component } from '../util_components.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
+import { result_docs } from '../models/results.js';
+import { formats } from '../core/format.js';
 import { Result } from '../panels/result_graphs/results_common.js';
 import { Subject } from '../models/subject.js';
 import { Select } from '../components/Select.js';
-import { SpinnerWrapper } from '../components/SpinnerWrapper.js';
-import { Panel } from '../components/panel-components.js';
+import { Panel } from '../components/panel_components.js';
 import { create_text_maker } from '../models/text.js';
-
-import { result_docs } from '../models/results.js';
-import { formats } from '../core/format.js';
+import { create_text_maker_component, SpinnerWrapper } from '../components/index.js';
 
 const { Dept, CRSO, Program } = Subject;
 
-
 const { TM } = create_text_maker_component([diff_text, result_text]);
 const text_maker = create_text_maker([diff_text, result_text]);
-
-
 
 const get_subject_from_props = (props) => {
   const {

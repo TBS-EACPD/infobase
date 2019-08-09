@@ -16,7 +16,7 @@ import {
   KeyConceptList,
   TabbedControls,
   Details,
-} from '../util_components.js';
+} from '../components/index.js';
 
 
 const { Tag } = Subject;

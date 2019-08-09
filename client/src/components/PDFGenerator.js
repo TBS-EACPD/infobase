@@ -1,10 +1,9 @@
 import text from './PDFGenerator.yaml';
 import { get_static_url } from '../request_utils.js';
 import { log_standard_event } from '../core/analytics.js';
-import { 
-  create_text_maker_component,
-  SpinnerWrapper,
-} from '../util_components.js';
+
+import { create_text_maker_component } from './misc_util_components.js';
+import { SpinnerWrapper } from './SpinnerWrapper.js';
 
 import { Fragment } from 'react';
 import * as qrcode from 'qrcode-generator';

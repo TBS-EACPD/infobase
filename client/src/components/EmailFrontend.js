@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import classNames from 'classnames';
 
-import { create_text_maker_component } from '../util_components.js';
+import { create_text_maker_component } from './misc_util_components.js';
 import { SpinnerWrapper } from './SpinnerWrapper';
 
 import { 

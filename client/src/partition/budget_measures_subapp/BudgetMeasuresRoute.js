@@ -9,7 +9,7 @@ import {
   SpinnerWrapper,
   Details,
   TabbedControls,
-} from '../../util_components';
+} from '../../components/index.js';
 
 import {
   text_maker,

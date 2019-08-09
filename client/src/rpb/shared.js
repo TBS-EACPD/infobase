@@ -1,7 +1,7 @@
 import { TextMaker, text_maker } from './rpb_text_provider.js';
 import { sources as all_sources } from '../metadata/data_sources.js';
 import { sanitized_dangerous_inner_html } from '../general_utils.js';
-import { DeptSearch, FancyUL } from '../util_components.js';
+import { DeptSearch, FancyUL } from '../components/index.js';
 import classNames from 'classnames';
 import { Subject } from '../models/subject';
 

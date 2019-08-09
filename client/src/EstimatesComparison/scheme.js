@@ -1,6 +1,6 @@
 import { text_maker, TM } from './text-provider';
 import { createSelector } from 'reselect';
-import { Format } from '../util_components.js';
+import { Format } from '../components/index.js';
 import { Table } from '../core/TableClass.js';
 import FootNote from '../models/footnotes.js';
 import {GlossaryEntry} from '../models/glossary.js';

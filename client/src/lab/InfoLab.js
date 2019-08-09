@@ -4,7 +4,7 @@ import { create_text_maker } from '../models/text.js';
 import { 
   create_text_maker_component,
   CardLeftImage,
-} from '../util_components.js';
+} from '../components/index.js';
 import lab_text from './InfoLab.yaml';
 import { get_static_url } from '../request_utils.js';
 

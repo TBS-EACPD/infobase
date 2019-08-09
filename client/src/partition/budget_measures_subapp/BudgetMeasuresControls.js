@@ -8,7 +8,7 @@ import {
   LabeledBox,
   RadioButtons,
   DebouncedTextInput,
-} from '../../util_components.js';
+} from '../../components/index.js';
 
 import { businessConstants } from '../../models/businessConstants.js';
 
