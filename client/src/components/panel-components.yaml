@@ -12,6 +12,6 @@ a11y_permalink:
   en: Copy panel link to clipboard
   fr: Copier le lien du graphique dans le presse-papier
 
-a11y_share_button:
+panel_share_button:
   en: Share panel link
   fr: Partager le lien du graphique
