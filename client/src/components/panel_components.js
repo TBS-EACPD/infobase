@@ -127,11 +127,13 @@ class Panel_ extends React.Component {
               }
               { !context.no_permalink && panel_link &&
                 <div style={{display: 'inline'}}>
-                  <WriteToClipboard
-                    text_to_copy={panel_link}
-                    button_class_name={'panel-heading-utils'} 
-                    button_description={text_maker("copy_panel_link")}
-                  />
+                  <a href={panel_link}>
+                    <WriteToClipboard
+                      text_to_copy={panel_link}
+                      button_class_name={'panel-heading-utils'} 
+                      button_description={text_maker("copy_panel_link")}
+                    />
+                  </a>
                 </div>
               }
             </div>
