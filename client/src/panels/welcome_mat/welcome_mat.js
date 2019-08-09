@@ -18,6 +18,7 @@ import {
   formats,
 } from "../shared.js"; 
 import { run_template } from "../../models/text";
+import { format_and_get_nivo_graph } from "../historical_planned_fte/historical_planned_fte.js";
 
 const { Format } = util_components;
 
@@ -247,10 +248,10 @@ const WelcomeMatShell = ({ header_row, spend_row, fte_row, text_row }) => (
 */
 
 const WelcomeMat = (props) => {
-
   const { 
     type,
     subject,
+    info,
     calcs,
     is_m2m,
   } = props;
@@ -643,23 +644,60 @@ const WelcomeMat = (props) => {
       spend_summary_key = false;
       fte_summary_key = false;
     }
-
+    const { nivo_default_props } = format_and_get_nivo_graph(info, subject);
+    const welcome_mat_fte_line_props = {
+      ...nivo_default_props,
+      //enableGridX: false,
+      enableGridY: false,
+      remove_left_axis: true,
+      show_yaxis_zoom: false,
+      min: _.min(nivo_default_props.raw_data) * 0.9,
+      max: _.max(nivo_default_props.raw_data) * 1.1,
+      margin: {
+        top: 10,
+        right: 30,
+        bottom: 70,
+        left: 30,
+      },
+      legends: [
+        {
+          anchor: 'bottom-right',
+          direction: 'row',
+          translateX: 97,
+          translateY: 60,
+          itemDirection: 'left-to-right',
+          itemWidth: 160,
+          itemHeight: 20,
+          itemsSpacing: 2,
+          itemOpacity: 0.75,
+          symbolSize: 12,
+        },
+      ],
+    };
+    const graph_content = (
+      <div style={{height: 230}} aria-hidden = {true}>
+        <NivoResponsiveLine
+          {...welcome_mat_fte_line_props}
+        />
+      </div>
+    );
+  
     return (
       <WelcomeMatShell
         header_row={[
-          <HeaderPane key="a" size={20} children={five_years_ago} />,
-          <HeaderPane key="b" size={20} children={last_year} />,
-          <HeaderPane key="c" size={20} children={in_three_years} />,
-          <HeaderPane key="d" size={40} children={long_term_trend} />,
+          <HeaderPane key="a" size={15} children={five_years_ago} />,
+          <HeaderPane key="b" size={15} children={last_year} />,
+          <HeaderPane key="c" size={15} children={in_three_years} />,
+          <HeaderPane key="d" size={55} children={long_term_trend} />,
         ]}
         spend_row={[
 
-          <Pane key="a" size={20}>
+          <Pane key="a" size={15}>
             <MobileOrA11YContent children={five_years_ago} />
             <PaneItem textSize="small">
               <TM k="spending_was__new" />
             </PaneItem>
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <SpendFormat amt={spend_last_year_5} />
             </PaneItem>
             {is_m2m && 
@@ -667,12 +705,12 @@ const WelcomeMat = (props) => {
             }
           </Pane>,
 
-          <Pane key="b" size={20}>
+          <Pane key="b" size={15}>
             <MobileOrA11YContent children={last_year} />
             <PaneItem textSize="small">
               <TM k="spending_change_was__new" args={{hist_change: hist_spend_diff}}/>
             </PaneItem>
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <SpendFormat amt={spend_last_year} />
             </PaneItem>
             {is_m2m && 
@@ -680,12 +718,12 @@ const WelcomeMat = (props) => {
             }
           </Pane>,
 
-          <Pane key="c" size={20}>
+          <Pane key="c" size={15}>
             <MobileOrA11YContent children={in_three_years} />
             <PaneItem textSize="small">
               <TM k="spending_change_will__new" args={{plan_change: planned_spend_diff}} />
             </PaneItem>
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <SpendFormat amt={spend_plan_3} />
             </PaneItem>
             {is_m2m && 
@@ -693,7 +731,7 @@ const WelcomeMat = (props) => {
             }
           </Pane>,
 
-          <Pane noPadding key="d" size={40}>
+          <Pane noPadding key="d" size={55}>
             <Chart 
               use_line 
               data={spend_data}
@@ -705,9 +743,9 @@ const WelcomeMat = (props) => {
         ]}
         fte_row={fte_data && [
 
-          <Pane key="a" size={20}>
+          <Pane key="a" size={15}>
             <MobileOrA11YContent children={five_years_ago} />
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <FteFormat amt={fte_last_year_5} />
             </PaneItem>
             <PaneItem textSize="small">
@@ -718,12 +756,12 @@ const WelcomeMat = (props) => {
             }
           </Pane>,
 
-          <Pane key="b" size={20}>
+          <Pane key="b" size={15}>
             <MobileOrA11YContent children={last_year} />
             <PaneItem textSize="small">
               <TM k="fte_change_was__new" args={{hist_change: hist_fte_diff}}/>
             </PaneItem>
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <FteFormat amt={fte_last_year} />
             </PaneItem>
             {is_m2m && 
@@ -731,12 +769,12 @@ const WelcomeMat = (props) => {
             }
           </Pane>,
 
-          <Pane key="c" size={20}>
+          <Pane key="c" size={15}>
             <MobileOrA11YContent children={in_three_years} />
             <PaneItem textSize="small">
               <TM k="fte_change_will__new" args={{plan_change: planned_fte_diff}} />
             </PaneItem>
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <FteFormat amt={fte_plan_3} />
             </PaneItem>
             {is_m2m && 
@@ -744,13 +782,8 @@ const WelcomeMat = (props) => {
             }
           </Pane>,
 
-          <Pane noPadding key="d" size={40}>
-            <Chart 
-              use_line 
-              data={fte_data}
-              has_hist={calcs.has_hist}
-              has_planned={calcs.has_planned}
-            />
+          <Pane noPadding key="d" size={55}>
+            {graph_content}
           </Pane>,
         ]}
         text_row={[
@@ -957,13 +990,14 @@ const common_program_crso_calculate = function(subject, info, options){
     return false;
   }
 
-  return {type, calcs};
+  return {type, info, calcs};
 };
 
 new PanelGraph({
   level: "program",
   key: 'welcome_mat',
   footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+  info_deps: ["programFtes_program_info"],
   depends_on: ['table6', 'table12'],
   missing_info: "ok",
   calculate: common_program_crso_calculate,
@@ -974,6 +1008,7 @@ new PanelGraph({
   level: "crso",
   key: 'welcome_mat',
   footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+  info_deps: ["programFtes_crso_info"],
   depends_on: ['table6', 'table12'],
   missing_info: "ok",
   calculate: common_program_crso_calculate,
@@ -984,6 +1019,7 @@ new PanelGraph({
   level: "dept",
   key: 'welcome_mat',
   footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+  info_deps: ["programFtes_dept_info"],
   depends_on: ['programSpending','programFtes', 'orgVoteStatEstimates'],
   missing_info: "ok",
   calculate (subject, info, options){
@@ -1015,6 +1051,7 @@ new PanelGraph({
       );
       return {
         type: "hist_estimates",
+        info,
         calcs: proper_calcs,
       };
     } else {
@@ -1023,11 +1060,13 @@ new PanelGraph({
       if(has_planned){
         return {
           type: "hist_planned",
+          info,
           calcs,
         };
       } else {
         return {
           type: "hist",
+          info,
           calcs,
         };
       }
@@ -1040,6 +1079,7 @@ new PanelGraph({
   level: "gov",
   key: 'welcome_mat',
   footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+  info_deps: ["programFtes_gov_info"],
   depends_on: ['programSpending','programFtes'],
   missing_info: "ok",
   calculate (subject, info, options){
@@ -1051,6 +1091,7 @@ new PanelGraph({
 
     return {
       type: "hist_planned",
+      info,
       calcs,
     };
   },

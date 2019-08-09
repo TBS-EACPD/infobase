@@ -22,9 +22,7 @@ const {
 const { text_maker, TM } = create_text_maker_component(text);
 const { std_years, planning_years } = years;
 
-const render = function({calculations, footnotes, sources}) {
-  const { info, subject } = calculations;
-
+export const format_and_get_nivo_graph = (info, subject) => {
   const colors = d3.scaleOrdinal().range(newIBCategoryColors);
   const series_labels = [text_maker("actual_ftes"), text_maker("planned_ftes")];
   const history_ticks = _.map(std_years, run_template);
@@ -201,7 +199,13 @@ const render = function({calculations, footnotes, sources}) {
         }
       </div>
     );
-  }
+    return { gap_year, graph_content, nivo_default_props };
+  }};
+
+const render = function({calculations, footnotes, sources}) {
+  const { info, subject } = calculations;
+
+  const { gap_year, graph_content } = format_and_get_nivo_graph(info, subject);
 
   return (
     <StdPanel
