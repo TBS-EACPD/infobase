@@ -49,6 +49,7 @@ export const format_and_get_nivo_graph = (info, subject) => {
   const planned_data_index = _.map(planning_years, (planned_year) => `${subject.level}_fte_${planned_year.replace(/{|}/g, "")}`);
   
   let graph_content;
+  let nivo_default_props;
 
   if(window.is_a11y_mode){
     const history_a11y_data = _.zipWith(history_ticks, history_data_index, (year, idx) => ({
@@ -127,7 +128,7 @@ export const format_and_get_nivo_graph = (info, subject) => {
       .map( ([id, data]) => ({id, data}) )
       .value();
     
-    const nivo_default_props = {
+    nivo_default_props = {
       data: graph_data,
       raw_data: raw_data,
       is_money: false,
@@ -199,8 +200,9 @@ export const format_and_get_nivo_graph = (info, subject) => {
         }
       </div>
     );
-    return { gap_year, graph_content, nivo_default_props };
-  }};
+  }
+  return { gap_year, graph_content, nivo_default_props };
+};
 
 const render = function({calculations, footnotes, sources}) {
   const { info, subject } = calculations;
