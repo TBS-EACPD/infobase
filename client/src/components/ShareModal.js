@@ -41,25 +41,14 @@ export class ShareModal extends React.Component {
       url,
       title,
       show,
-      subject,
     } = this.props;
-
-    const subject_string = subject && (
-      subject.level === 'tag' || subject.level === 'gov' ?
-        subject.name :
-        subject.level === 'dept' ? 
-          subject.acronym : 
-          `${subject.dept.acronym} - ${subject.name}`
-    );
-
-    const display_title = `${subject_string && `${subject_string} — ` || ""}${title}`;
 
     return (
       <Modal show={show} onHide={closeModal}>
         <div onBlur={this.onBlur}>
           <Modal.Header>
             <Modal.Title style={{fontSize: '130%'}}><img src={get_static_url('./svg/shareGrey.svg')}/> {text_maker("share")}</Modal.Title>
-            <Modal.Title style={{fontSize: '100%', marginTop: '7px'}}>{display_title}</Modal.Title>
+            <Modal.Title style={{fontSize: '100%', marginTop: '7px'}}>{title}</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
