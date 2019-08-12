@@ -478,31 +478,33 @@ const QuadrantDefList = ({defs} ) => (
 );
 
 
-const result_status_components = {
-  met:
-    <div className="status-icon-table--met-icon">
-      <IconCheck width="48px" height="48px"/>
-    </div>,
-  not_met:
-    <div className="status-icon-table--not-met-icon">
-      <IconAttention width="48px" height="48px"/>
-    </div>,
-  not_available:
-    <div className="status-icon-table--na-icon">
-      <IconNA width="48px" height="48px"/>
-    </div>,
-  future:
-    <div className="status-icon-table--future-icon">
-      <IconClock width="48px" height="48px"/>
-    </div>,
+const result_status_components = (status, width) => {
+  const icons = {
+    met:
+      <span className="status-icon-table--met-icon">
+        <IconCheck width={width} height={width}/>
+      </span>,
+    not_met:
+      <span className="status-icon-table--not-met-icon">
+        <IconAttention width={width} height={width}/>
+      </span>,
+    not_available:
+      <span className="status-icon-table--na-icon">
+        <IconNA width={width} height={width}/>
+      </span>,
+    future:
+      <span className="status-icon-table--future-icon">
+        <IconClock width={width} height={width}/>
+      </span>,
+  };
+  return icons[status];
 };
 
 const make_status_icons = (width) => {
-  const status_icon_style = {width: width, height: width};
   return _.chain(ordered_status_keys)
     .map(status_key => [
       status_key,
-      result_status_components[status_key],
+      result_status_components(status_key, width),
     ])
     .fromPairs()
     .value();
@@ -592,7 +594,6 @@ const InlineStatusIconList = ({indicators}) => {
     .map( ({ status_key, count }) =>
       <span
         key={status_key} 
-        className="inline-status-icon"
       >
         {status_icons[status_key]}
         {
