@@ -42,7 +42,7 @@ export class WriteToClipboard extends React.Component {
           }
         >
           <img 
-            src={get_static_url("svg/permalink.svg")}
+            src={get_static_url("svg/copy-to-clipboard.svg")}
             alt={button_description}
             title={button_description}
           />
@@ -52,7 +52,11 @@ export class WriteToClipboard extends React.Component {
           on_close_callback={() => this.setState({copy_status_message: false})}
           title={
             <Fragment>
-              <img src={get_static_url('svg/permalinkGrey.svg')} aria-hidden="true" />
+              <img
+                style={{width: "30px", height: "30px", marginTop: "-5px"}}
+                src={get_static_url('svg/copy-to-clipboard-grey.svg')} 
+                aria-hidden="true" 
+              />
               {copy_status_message}
             </Fragment>
           }
