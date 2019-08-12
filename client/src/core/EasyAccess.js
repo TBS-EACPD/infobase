@@ -33,7 +33,7 @@ const EasyAccess_ = () =>
     </a>
     <a
       href="#metadata"
-      className="mrgn-lft-md link-unstyled nav-item"
+      className="link-unstyled nav-item"
     >
       <IconDataset title={trivial_text_maker("metadata")} />
       <span className="mrgn-lft-sm">
@@ -42,7 +42,7 @@ const EasyAccess_ = () =>
     </a>
     <a
       href="#about"
-      className="mrgn-lft-md link-unstyled nav-item"
+      className="link-unstyled nav-item"
     >
       <IconAbout title={trivial_text_maker("about_title")} />
       <span className="mrgn-lft-sm">
@@ -51,7 +51,7 @@ const EasyAccess_ = () =>
     </a>
     <a
       href={trivial_text_maker("survey_link_href")}
-      className="mrgn-lft-md link-unstyled nav-item"
+      className="link-unstyled nav-item"
     >
       <IconFeedback title={trivial_text_maker("survey_link_text")} />
       <span className="mrgn-lft-sm">
