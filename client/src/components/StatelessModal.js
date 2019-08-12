@@ -14,7 +14,7 @@ export class StatelessModal extends React.Component {
     var currentTarget = e.currentTarget;
     setTimeout(() => {
       if (!currentTarget.contains(document.activeElement)) {
-        this.props.closeModal();
+        this.props.on_close_callback();
       }
     }, 0);
   }
@@ -51,5 +51,5 @@ export class StatelessModal extends React.Component {
   }
 }
 StatelessModal.defaultProps = {
-  close_text: trivial_text_maker("cancel"),
+  close_text: _.upperFirst( trivial_text_maker("close") ),
 };

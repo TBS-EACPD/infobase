@@ -1,8 +1,10 @@
 import text from './WriteToClipboard.yaml';
 
 import * as clipboard from 'clipboard-polyfill';
-import { Overlay, Popover } from 'react-bootstrap';
 import { Fragment } from 'react';
+
+
+import { StatelessModal } from './StatelessModal.js';
 
 import { create_text_maker } from '../models/text.js';
 import { get_static_url } from '../request_utils.js';
@@ -24,26 +26,8 @@ export class WriteToClipboard extends React.Component {
 
     const { copy_status_message } = this.state;
 
-    const placement = "left";
-
     return (
       <Fragment>
-        <Overlay
-          show={!!copy_status_message}
-          target={this.state.target}
-          placement={placement}
-          positionLeft={100}
-          container={this}
-          containerPadding={20}
-        >
-          <Popover
-            id="popover-contained"
-            placement={placement}
-            title={button_description}
-          >
-            {copy_status_message}
-          </Popover>
-        </Overlay>
         <button
           className={button_class_name}
           onClick={
@@ -63,6 +47,17 @@ export class WriteToClipboard extends React.Component {
             title={button_description}
           />
         </button>
+        <StatelessModal 
+          show={copy_status_message} 
+          on_close_callback={() => this.setState({copy_status_message: false})}
+          title={
+            <Fragment>
+              <img src={get_static_url('svg/permalinkGrey.svg')} aria-hidden="true" />
+              {copy_status_message}
+            </Fragment>
+          }
+          body={<div tabIndex="0">{text_to_copy}</div>}
+        />
       </Fragment>
     );
   }
