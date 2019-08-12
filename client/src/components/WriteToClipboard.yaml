@@ -3,9 +3,9 @@ copy_to_clipboard:
   fr: Copier dans le presse-papier
 
 copy_success:
-  en: Copied successfully
-  fr: Copié avec succès
+  en: The following has been copied to your clipboard
+  fr: Ce qui suit a été copié dans votre presse-papiers
 
 copy_fail:
-  en: Copying unsuccesful, URL available in address bar
-  fr: Copie non réussie, URL disponible dans la barre d'adresse
+  en: Unable to automatically copy, please manually copy the following
+  fr: Échec de la copie automatique, veuillez copier manuellement les éléments suivants

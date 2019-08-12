@@ -80,6 +80,7 @@ export class ShareButton extends React.Component {
               </RedditShareButton>
             </Fragment>
           }
+          close_text={text_maker("cancel")}
         />
       </Fragment>
     );

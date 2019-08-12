@@ -127,13 +127,11 @@ class Panel_ extends React.Component {
               }
               { !context.no_permalink && panel_link &&
                 <div style={{display: 'inline'}}>
-                  <a href={panel_link}>
-                    <WriteToClipboard
-                      text_to_copy={panel_link}
-                      button_class_name={'panel-heading-utils'} 
-                      button_description={text_maker("copy_panel_link")}
-                    />
-                  </a>
+                  <WriteToClipboard
+                    text_to_copy={panel_link}
+                    button_class_name={'panel-heading-utils'} 
+                    button_description={text_maker("copy_panel_link")}
+                  />
                 </div>
               }
             </div>
@@ -143,12 +141,12 @@ class Panel_ extends React.Component {
         <div className='panel-body'>
           { children }
           <div className="mrgn-tp-md" />
-          {_.nonEmpty(sources) && 
+          { _.nonEmpty(sources) && 
             <div>
               <PanelSource links={sources} />
             </div>
           }
-          {_.nonEmpty(footnotes) && 
+          { _.nonEmpty(footnotes) && 
             <div className="mrgn-tp-md">
               <Details
                 summary_content={ <TM k="footnotes" /> }
