@@ -48,7 +48,7 @@ export class WriteToClipboard extends React.Component {
           />
         </button>
         <StatelessModal 
-          show={copy_status_message} 
+          show={!!copy_status_message} 
           on_close_callback={() => this.setState({copy_status_message: false})}
           title={
             <Fragment>
