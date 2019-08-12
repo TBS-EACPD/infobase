@@ -1,5 +1,6 @@
 import { IconPermalink } from '../icons/icons.js';
 import { panel_href_template } from '../infographic/routes.js';
+import './panel-components.scss';
 
 export const PermalinkButton = (props) => {
   const {
