@@ -56,7 +56,7 @@ export class ShareButton extends React.Component {
           on_close_callback={() => this.toggleModal(false)}
           title={
             <Fragment>
-              <img src={get_static_url('./svg/shareGrey.svg')} aria-hidden="true"/>
+              <img src={get_static_url('./svg/share-grey.svg')} aria-hidden="true"/>
               {text_maker("share")}
             </Fragment>
           }
