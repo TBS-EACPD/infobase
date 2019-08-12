@@ -7,12 +7,12 @@ advanced_search_description:
   fr: Sélectionnez les catégories à rechercher
 
 include_orgs_normal_data_label:
-  en: Organizations with Data
-  fr: Organisations avec données
+  en: Organizations with full data
+  fr: Organisations avec toutes les données
 
 include_orgs_limited_data_label:
-  en: Organizations with Limited Data
-  fr: Organisations avec données limitées
+  en: Organizations with limited or no data
+  fr: Organisations avec données limitées ou aucunes données
 
 crso_and_prog_label:
   en: Core Responsibilities and Programs
