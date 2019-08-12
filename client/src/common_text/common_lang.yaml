@@ -732,6 +732,10 @@ error:
   en: error
   fr: erreur
 
+cancel:
+  en: Cancel
+  fr: Annuler
+
 did_you_know_share:
   en: To share your customized display, simply copy the contents of the current URL bar and paste it in an email
   fr: Partager votre contenu personnalisé en copiant l'adresse URL actuel du navigateur

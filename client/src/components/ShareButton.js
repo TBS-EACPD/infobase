@@ -1,14 +1,25 @@
+import './ShareButton.scss';
 import text from "./ShareButton.yaml";
 
-import { ShareModal } from './ShareModal.js';
+import { Fragment } from 'react';
+import {
+  TwitterShareButton,
+  TwitterIcon,
+  FacebookShareButton,
+  FacebookIcon,
+  EmailShareButton,
+  EmailIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+  RedditShareButton,
+  RedditIcon,
+} from 'react-share';
 
+import { StatelessModal } from './StatelessModal.js';
 import { create_text_maker } from '../models/text.js';
 import { get_static_url } from '../request_utils.js';
 
-import { Fragment } from 'react';
-
 const text_maker = create_text_maker(text);
-
 
 export class ShareButton extends React.Component {
   constructor(props){
@@ -40,11 +51,35 @@ export class ShareButton extends React.Component {
             title={button_description}
           />
         </button>
-        <ShareModal 
+        <StatelessModal 
           show={this.state.showModal} 
-          closeModal={() => this.toggleModal(false)} 
-          url={url}
-          title={title}
+          on_close_callback={() => this.toggleModal(false)}
+          title={
+            <Fragment>
+              <img src={get_static_url('./svg/shareGrey.svg')} aria-hidden="true"/>
+              {text_maker("share")}
+            </Fragment>
+          }
+          subtitle={title}
+          body={
+            <Fragment>
+              <FacebookShareButton className='share-icons' url={url}>
+                <FacebookIcon size={32} />
+              </FacebookShareButton> 
+              <TwitterShareButton className='share-icons' url={url}>
+                <TwitterIcon size={32} />
+              </TwitterShareButton> 
+              <EmailShareButton className='share-icons' url={url}> 
+                <EmailIcon size={32} />
+              </EmailShareButton>
+              <LinkedinShareButton className='share-icons' url={url}>
+                <LinkedinIcon size={32} />
+              </LinkedinShareButton> 
+              <RedditShareButton className='share-icons' url={url} title={title}>
+                <RedditIcon size={32} />
+              </RedditShareButton>
+            </Fragment>
+          }
         />
       </Fragment>
     );
