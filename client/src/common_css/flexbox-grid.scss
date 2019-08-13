@@ -1,3 +1,5 @@
+@import './common-variables';
+
 /* 
   IMPORTANT: This is a modified version of https://github.com/kristoferjoseph/flexboxgrid
   how modified is it?
@@ -6,6 +8,7 @@
   * renamed row to frow, all col-*-* to fcol 
   * fcontainer only centers itself and fixes the .frow negative horizontal margins. It doesn't have a max-width
   * added a utility .frow.no-container to counter .frow's negative horizontal margins
+  * replaced breakpoints with our app break points
   
 */
 
@@ -300,7 +303,7 @@
   order: 1;
 }
 
-@media only screen and (min-width: 48em) {
+@media only screen and (min-width: $minSmallDevice) {
 
   .fcol-sm,
   .fcol-sm-1,
@@ -528,7 +531,7 @@
   }
 }
 
-@media only screen and (min-width: 64em) {
+@media only screen and (min-width: $minMediumDevice) {
 
   .fcol-md,
   .fcol-md-1,
@@ -756,7 +759,7 @@
   }
 }
 
-@media only screen and (min-width: 75em) {
+@media only screen and (min-width: $minLargeDevice) {
 
   .fcol-lg,
   .fcol-lg-1,
