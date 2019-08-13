@@ -4,7 +4,7 @@
  * set o classes for grid-base text 
 */
 .grid-row {
-  display : flex;
+  display: flex;
   justify-content: center;
   align-items: stretch;
 }
@@ -14,17 +14,17 @@
   font-weight: $heavyFontWeight;
 }
 .inner-grid { 
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .inner-grid > .small,
 .inner-grid > .tiny,
 .inner-grid > .large{
-  align-self:center;
+  align-self: center;
   text-align: center;
   padding: 5px;
-  width: 100%
+  width: 100%;
 }
 .inner-grid > .small {
   font-size: 1em;
@@ -33,7 +33,7 @@
   font-size: 0.7em;
 }
 .inner-grid > .large {
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 @media (min-width: $minMediumDevice){
@@ -121,9 +121,9 @@
   }
 
 }
-@media (max-width: $largeDevice){
+@media (min-width: $minLargeDevice){
   .inner-grid > .large {
-    font-size: 1.5em;
+    font-size: 2em;
   }
 }
 @media (max-width: $mediumDevice){
@@ -132,7 +132,7 @@
     padding: 5px;
   }
   .grid-row {
-    flex-direction:column;
+    flex-direction: column;
   }
   .lg-hide {
      display: show;
@@ -140,7 +140,7 @@
   .sm-hide {
      display: none;
   }
-  .md-clearfix{
+  .md-clearfix {
     clear: both;
   }
   .sm-full {
@@ -151,12 +151,12 @@
 /* .lg-grid > .grid-row > lg-grid-panel30.key_concept_term */
 
 .lg-grid-panel30.key_concept_term {
-  max-width: 29%;
-  @media (max-width:$mediumDevice){
-    max-width: none;
-    width: 100%;
-    border: none;
-    padding-top: 20px;
+  width: 100%;
+  padding-top: 20px;
+
+  @media (min-width: $minMediumDevice){
+    max-width: 29%;
+    padding-top: none;
   }
 }
 
@@ -172,10 +172,9 @@
 
 /* .lg-grid > .grid-row > lg-grid-panel70.key_concept_def */
 .lg-grid-panel70.key_concept_def {
-  max-width: 69%;
-  @media (max-width:$mediumDevice){
-    max-width: none;
-    width: 100%;
+  width: 100%;
+  @media (max-width: $minMediumDevice){
+    max-width: 69%;
   }
 }
 
