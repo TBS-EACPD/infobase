@@ -54,25 +54,14 @@
 
 .text-diff__indicator-report {
   margin-bottom: 10px;
-  border: 2px solid $secondaryColor;
-  border-radius: 10px;
+
+  & > section > .panel-body {
+    padding: 0px;
+  }
 }
 
 .text-diff__selector {
   margin: 10px;
-}
-
-
-.text-diff__indicator-report__header {
-  width: 100%;
-  background-color: $secondaryColor;
-  color: white;
-  font-weight: $mediumFontWeight;
-  padding: 10px;
-}
-
-.text-diff__indicator-report__body {
-  width: 100%;
 }
 
 .text-diff__indicator-report__row {

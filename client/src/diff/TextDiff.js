@@ -1,21 +1,23 @@
 import './TextDiff.scss';
-import { StandardRouteContainer } from '../core/NavComponents.js';
-import { create_text_maker } from '../models/text.js';
-import { 
-  create_text_maker_component,
-} from '../util_components.js';
 import diff_text from './TextDiff.yaml';
 import result_text from '../panels/result_graphs/result_components.yaml';
+
+import { Fragment } from 'react';
+import classNames from 'classnames';
+import * as Diff from 'diff';
+
+import { StandardRouteContainer } from '../core/NavComponents.js';
+import { create_text_maker_component } from '../util_components.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { Result } from '../panels/result_graphs/results_common.js';
 import { Subject } from '../models/subject.js';
 import { Select } from '../components/Select.js';
 import { SpinnerWrapper } from '../components/SpinnerWrapper.js';
-import * as Diff from 'diff';
-import { Fragment } from 'react';
-import { formats } from '../core/format.js';
+import { Panel } from '../components/panel-components.js';
+import { create_text_maker } from '../models/text.js';
+
 import { result_docs } from '../models/results.js';
-import classNames from 'classnames';
+import { formats } from '../core/format.js';
 
 const { Dept, CRSO, Program } = Subject;
 
@@ -259,28 +261,28 @@ const get_status_flag = (indicator_status, num_texts, target_changed, years) => 
 };
 
 
-const indicator_report = (processed_indicator, years) => 
-  <div key={processed_indicator.indicator1.stable_id} className="text-diff__indicator-report" >
-    <div className="text-diff__indicator-report__header">
-      <h4>{processed_indicator.indicator2.name}</h4>
-    </div>
-    <div className="text-diff__indicator-report__body">
-      {get_status_flag(processed_indicator.status,
-        _.max([processed_indicator.name_diff.length, processed_indicator.methodology_diff.length, processed_indicator.target_diff.length]),
-        processed_indicator.target_diff.length > 1,
-        years)}
-      { processed_indicator.name_diff.length > 1 ?
-        difference_report(processed_indicator.name_diff, "indicator_name", years) :
-        no_difference(processed_indicator.indicator1.name, "indicator_name") }
-      { processed_indicator.methodology_diff.length > 1 ?
-        difference_report(processed_indicator.methodology_diff, "indicator_methodology", years) :
-        no_difference(processed_indicator.indicator1.methodology, "indicator_methodology") }
-      { processed_indicator.target_diff.length > 1 ?
-        difference_report(processed_indicator.target_diff, "indicator_target", years) :
-        no_difference(get_target_from_indicator(processed_indicator.indicator1), "indicator_target") }
-      <div className="text-diff__id-tag">{`ID: ${processed_indicator.indicator1.stable_id}`}</div>
-    </div>
-  </div>;
+const indicator_report = (processed_indicator, years) => (
+  <div className="text-diff__indicator-report">
+    <Panel title={processed_indicator.indicator2.name} key={processed_indicator.indicator1.stable_id}>
+      <Fragment>
+        {get_status_flag(processed_indicator.status,
+          _.max([processed_indicator.name_diff.length, processed_indicator.methodology_diff.length, processed_indicator.target_diff.length]),
+          processed_indicator.target_diff.length > 1,
+          years)}
+        { processed_indicator.name_diff.length > 1 ?
+          difference_report(processed_indicator.name_diff, "indicator_name", years) :
+          no_difference(processed_indicator.indicator1.name, "indicator_name") }
+        { processed_indicator.methodology_diff.length > 1 ?
+          difference_report(processed_indicator.methodology_diff, "indicator_methodology", years) :
+          no_difference(processed_indicator.indicator1.methodology, "indicator_methodology") }
+        { processed_indicator.target_diff.length > 1 ?
+          difference_report(processed_indicator.target_diff, "indicator_target", years) :
+          no_difference(get_target_from_indicator(processed_indicator.indicator1), "indicator_target") }
+        <div className="text-diff__id-tag">{`ID: ${processed_indicator.indicator1.stable_id}`}</div>
+      </Fragment>
+    </Panel>
+  </div>
+);
 
 
 export default class TextDiffApp extends React.Component {
