@@ -10,7 +10,6 @@ deploy_filter: &deploy_filter
     branches:
       only:
         - master
-        - viz_lie_planned_spending
 
 version: 2
 jobs:
