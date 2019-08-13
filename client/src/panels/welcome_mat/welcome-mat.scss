@@ -26,7 +26,7 @@
 
 // Mixins
 @mixin lg-panel($percent) {
-  @media (min-width: $mediumDevice){
+  @media (min-width: $minMediumDevice){
     padding: 5px;
     /* nested flex containers for cross browser (safari doesn't let children of flex use height:100% properly) support */
     display: flex;
@@ -40,7 +40,7 @@
 }
 
 @mixin lg-hide {
-  @media (min-width: $mediumDevice){
+  @media (min-width: $minMediumDevice){
     width: 0px;
     height: 0px;
     overflow: hidden;

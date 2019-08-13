@@ -84,7 +84,7 @@ div.d3-list {
   justify-content: space-around;
 }
 
-@media(min-width: $smallDevice){
+@media(min-width: $minSmallDevice){
   .legend-list-inline.horizontal {
     flex-direction: row;
   }

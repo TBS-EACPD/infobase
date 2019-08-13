@@ -11,7 +11,7 @@ li.select-list-item {
   margin: 5px 0;
 }
 
-@media(min-width: $mediumDevice){
+@media(min-width: $minMediumDevice){
   .rpb-config-item.col-selection.simple {
     max-height: 500px;
     overflow-y: auto; 
@@ -86,7 +86,7 @@ li.select-list-item {
 }
 
 /* allows bootstrap columns to stick together */
-@media(min-width: $mediumDevice){
+@media(min-width: $minMediumDevice){
   .md-no-right-gutter {
     padding-right: 0;
   }

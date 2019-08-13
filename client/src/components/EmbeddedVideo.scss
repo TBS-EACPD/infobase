@@ -3,10 +3,10 @@
 .embedded-video-container {
   margin: auto;
 
-  @media(min-width: $mediumDevice){
+  @media(min-width: $minMediumDevice){
     width: 60%;
   }
-  @media(min-width: $smallDevice) and (max-width: $mediumDevice){
+  @media(min-width: $minSmallDevice) and (max-width: $mediumDevice){
     width: 80%;
   }
   @media(max-width: $mediumDevice){

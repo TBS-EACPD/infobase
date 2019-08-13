@@ -17,7 +17,7 @@
   text-align: right;
   font-weight: bold;
 }
-@media (min-width:$mediumDevice){
+@media (min-width:$minMediumDevice){
   div.ppl-share-pie-area{
     display: flex;
     justify-content: space-around;

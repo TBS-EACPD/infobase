@@ -33,7 +33,7 @@
     Only needed on larger screens. 
   */
   .panel-body {
-    @media (min-width:$largeDevice){
+    @media (min-width:$minLargeDevice){
       content: none!important;
     }
   
@@ -43,7 +43,7 @@
   }
   
   .panel-heading {
-    @media (min-width:$largeDevice){
+    @media (min-width:$minLargeDevice){
       padding: 15px 15px; /* bootstrap default is 10 15 */
     }
     @media (max-width:$largeDevice){

@@ -43,7 +43,7 @@
 }
 
 %pseduo-separator-common {
-  @media(min-width:$smallDevice){
+  @media(min-width:$minSmallDevice){
     content: "";
     border: solid $buttonPrimaryColor;
     position: absolute;

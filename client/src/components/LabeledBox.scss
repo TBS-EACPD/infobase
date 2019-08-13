@@ -38,7 +38,7 @@
 .labeled-box-content > div {
   width: 100%;
 }
-@media (min-width: $mediumDevice){
+@media (min-width: $minMediumDevice){
   .labeled-box-label {
     width:18%;
     border-radius: 10px 0px 0px 10px;
