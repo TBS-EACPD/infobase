@@ -1,21 +1,44 @@
 import './icons.scss';
 import { trivial_text_maker } from '../models/text.js';
 import { businessConstants } from '../models/businessConstants.js';
+import { Fragment } from 'react';
 
 
 const { result_simple_statuses } = businessConstants;
 
-const IconHome = (props) => {
+const Icon = (props) => {
   const {
     title,
+    viewbox_size,
+    icon_class,
+    color_set_by_css,
+    color,
+    ChildIcon,
   } = props;
-
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="icon--svg-inline">
+    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width={viewbox_size} height={viewbox_size} viewBox={`0 0 ${viewbox_size} ${viewbox_size}`} className={icon_class}>
       <title>{title}</title>
-      <path fill="none" d="M0 0h24v24H0V0z"/>
-      <path className="svg-fill" d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
+      <ChildIcon color_set_by_css={color_set_by_css} color={color}/>
     </svg>
+  );
+};
+Icon.defaultProps = {
+  viewbox_size: 24,
+  icon_class: "icon--svg-inline",
+  color_set_by_css: true,
+};
+
+const IconHome = (props) => {
+  const {
+    color_set_by_css,
+    color,
+  } = props;
+  return (
+    <Fragment>
+      <path fill="none" d="M0 0h24v24H0V0z"/>
+      <path className={color_set_by_css && "svg-fill"} style={color_set_by_css ? undefined :  {fill: color}}
+        d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
+    </Fragment>
   );
 };
 
@@ -311,6 +334,7 @@ IconClock.defaultProps = {
 };
 
 export {
+  Icon,
   IconHome,
   IconFeedback,
   IconAbout,
