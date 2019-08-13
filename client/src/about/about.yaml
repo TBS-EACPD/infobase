@@ -217,7 +217,7 @@ behind_scenes_sub_text_3:
     Certain icons are © {{ext_link "Font Awesome" "https://github.com/FortAwesome/Font-Awesome"}}, licensed under 
     {{ext_link "CC BY 4.0 License" "https://creativecommons.org/licenses/by/4.0/"}}. Others are from {{ext_link "Material Design" "https://material.io/"}} © Google Inc, licensed under
     {{ext_link "Apache license version 2.0" "https://www.apache.org/licenses/LICENSE-2.0"}}, or © {{ext_link "The Wikimedia Foundation, Inc" "https://commons.wikimedia.org/wiki/Main_Page"}}, licensed 
-    under the {{ext_link "MIT license" "https://opensource.org/licenses/MIT"}}. All svg images used under license indicate the copyright holder and license terms in the svg source code.
+    under the {{ext_link "MIT license" "https://opensource.org/licenses/MIT"}}.
   fr: |
     {{#if false}}Vous pouvez trouver le code source à {{ext_link "GitHub" "https://github.com/TBS-EACPD/infobase"}}.
     
@@ -231,8 +231,7 @@ behind_scenes_sub_text_3:
     
     Certaines icônes sont © {{ext_link "Font Awesome" "https://github.com/FortAwesome/Font-Awesome"}}, sous license {{ext_link "CC BY 4.0" "https://creativecommons.org/licenses/by/4.0/"}}.
     D'autres proviennent de {{ext_link "Material Design" "https://material.io/"}} © Google Inc, sous license {{ext_link "Apache version 2.0" "https://www.apache.org/licenses/LICENSE-2.0"}},
-    ou © {{ext_link "Wikimedia Foundation, Inc" "https://commons.wikimedia.org/wiki/Main_Page"}}, sous license {{ext_link "MIT" "https://opensource.org/licenses/MIT"}}. Toutes les images svg
-    utilisées sous licence indiquent le détenteur des droits d'auteur et les conditions de la licence dans le code source svg.
+    ou © {{ext_link "Wikimedia Foundation, Inc" "https://commons.wikimedia.org/wiki/Main_Page"}}, sous license {{ext_link "MIT" "https://opensource.org/licenses/MIT"}}.
 
 feedback_title:
   en: We want to hear from you!
