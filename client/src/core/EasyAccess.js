@@ -2,6 +2,7 @@ import { TrivialTM } from '../components/index.js';
 import { trivial_text_maker } from '../models/text.js';
 import { Fragment } from 'react';
 import {
+  Icon,
   IconFeedback,
   IconAbout,
   IconGlossary,
@@ -53,7 +54,7 @@ const EasyAccess_ = () =>
       href={trivial_text_maker("survey_link_href")}
       className="link-unstyled nav-item"
     >
-      <IconFeedback title={trivial_text_maker("survey_link_text")} />
+      <Icon title={trivial_text_maker("title")} color_set_by_css={true} ChildIcon={IconFeedback} />
       <span className="mrgn-lft-sm">
         <TM k="survey_link_text" />
       </span>
