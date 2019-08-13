@@ -58,7 +58,7 @@ $controlsColorLighter: lighten($controlsColor, 20%);
 }
 
 
-@media(min-width:$largeDevice){
+@media(min-width:$minLargeDevice){
   .filter-table {
     width: 100%;
     margin: 0 auto;

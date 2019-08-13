@@ -61,7 +61,7 @@
   }
 }
 
-@media (min-width: $mediumDevice){
+@media (min-width: $minMediumDevice){
   .bubble-menu {
     display: flex;
     flex-direction:row;

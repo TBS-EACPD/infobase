@@ -36,7 +36,7 @@
   font-size: 2em;
 }
 
-@media (min-width: $mediumDevice){
+@media (min-width: $minMediumDevice){
   .lg-hide {
      width: 0px;
      height: 0px;

@@ -3,7 +3,7 @@
 .icon-block {
     font-size: 1.8em;
   
-    @media(min-width: $mediumDevice){
+    @media(min-width: $minMediumDevice){
       float: right;
       padding-left: 1.2em;
       max-width: 5em;

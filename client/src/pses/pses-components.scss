@@ -9,7 +9,7 @@
   border-bottom: 1px solid $separatorColor;
   display: flex;
 
-  @media(min-width: $mediumDevice){
+  @media(min-width: $minMediumDevice){
     flex-direction: row;
     justify-content: space-between;
     align-items: center;

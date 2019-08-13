@@ -24,6 +24,11 @@ $smallDevice: 768px;
 $mediumDevice: 992px;
 $largeDevice: 1200px; 
 
+/*media breakpoints +1 for min-width*/
+$minSmallDevice: 769px;
+$minMediumDevice: 993px;
+$minLargeDevice: 1201px; 
+
 
 /* dark and light colours don't have enough contrast between them for text, so don't use them that way! Use black text on light, or (check contrast) white text on dark*/
 $successLightColor: #cbedbd;

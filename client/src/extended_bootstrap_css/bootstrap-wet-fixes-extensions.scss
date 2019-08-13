@@ -56,11 +56,11 @@ hr {
   padding: 1px 20px;
   border-radius: 5px;
 
-  @media (min-width:$largeDevice){
+  @media (min-width:$minLargeDevice){
     max-width: 600px !important;
     line-height: 1.6em;
   }
-  @media (min-width:$mediumDevice) and (max-width: $largeDevice) { max-width: 60vw !important }
+  @media (min-width:$minMediumDevice) and (max-width: $largeDevice) { max-width: 60vw !important }
   @media (max-width:$mediumDevice){ max-width: 90vw !important }
 }
 
@@ -393,7 +393,7 @@ ol.breadcrumb {
 }
 
 dl.dl-horizontal.dl-long-terms {
-  @media(min-width:$smallDevice){
+  @media(min-width:$minSmallDevice){
     > dt {
       // default set by bootstrap is 160px
       width: 250px;
@@ -406,7 +406,7 @@ dl.dl-horizontal.dl-long-terms {
 }
 
 dl.dl-horizontal.dl-really-long-terms {
-  @media(min-width:$smallDevice){
+  @media(min-width:$minSmallDevice){
     > dt {
       // default set by bootstrap is 160px
       width: 300px;
@@ -565,7 +565,7 @@ ol.breadcrumb > li:last-child > :last-child {
   text-align: center;
   padding-bottom: 1rem;
 }
-@media (min-width: $smallDevice) {
+@media (min-width: $minSmallDevice) {
   #wb-lng > a.lang-switcher {
     font-weight: 200;
     font-size: 1.5rem;

@@ -42,7 +42,7 @@ of the advanced search for mobile */
 }
 
 
-@media(min-width: $largeDevice){
+@media(min-width: $minLargeDevice){
   .super-wide-container-parent{
     display:flex; 
     flex-direction:column; 
@@ -50,7 +50,7 @@ of the advanced search for mobile */
   }
 }
 
-@media(min-width: $largeDevice){
+@media(min-width: $minLargeDevice){
   .super-wide-container {
     width: 90vw; 
     overflow-x: visible;
