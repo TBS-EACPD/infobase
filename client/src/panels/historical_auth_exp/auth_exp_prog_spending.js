@@ -1,12 +1,6 @@
-import './auth_exp_prog_spending.scss';
 import { Fragment } from 'react';
 import text from './auth_exp_prog_spending.yaml';
-<<<<<<< HEAD
-import text2 from '../../common_text/common_lang.yaml';
 import { Details } from '../../components/Details.js';
-=======
-import MediaQuery from 'react-responsive';
->>>>>>> removed common_lang and applied some similar changes to auth_exp_prog_spending
 import {
   run_template,
   PanelGraph,
