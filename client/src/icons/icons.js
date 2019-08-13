@@ -23,13 +23,12 @@ const IconHome = (props) => {
 const IconFeedback = (props) => {
   const {
     title,
-    transform,
   } = props;
   
   return (
     <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 600 600" className="icon--svg-inline">
       <title>{title}</title>
-      <path transform={transform} className="svg-stroke" fill="none" strokeWidth="50" strokeMiterlimit="10" d="M549.9,503.3c2.3-0.5-8.6-13.2-10.8-17.7
+      <path className="svg-stroke" fill="none" strokeWidth="50" strokeMiterlimit="10" d="M549.9,503.3c2.3-0.5-8.6-13.2-10.8-17.7
         l-42.3-68.5c20.8-17.4,54.2-67.8,52.3-113.1c-4.2-100.9-112-182.8-250.2-182.8S48.7,203,48.7,304s112,182.9,250.2,182.9
         c45.4,0,81.3-4.8,118-20.2C520.2,497.5,536.1,506.3,549.9,503.3z"/>
     </svg>
