@@ -1,5 +1,4 @@
 import { Redirect } from 'react-router';
-import JSURL from 'jsurl';
 
 import './infographic.scss';
 import text from "./infographic.yaml";
@@ -20,6 +19,8 @@ import {
   SpinnerWrapper,
   AdvancedSearch,
 } from '../util_components.js';
+
+import { SafeJSURL } from '../link_utils.js';
 
 import { infograph_href_template } from './routes.js';
 
@@ -144,7 +145,7 @@ class InfoGraph_ extends React.Component {
       if (this.props.subject !== prevProps.subject){
         reset_scroll();
       }
-      const options = JSURL.parse(this.props.options);
+      const options = SafeJSURL.parse(this.props.options);
       const panel_keys = this.state.bubble_menu_loading || panels_for_subj_bubble({subject: this.state.subject, bubble: this.state.bubble});
       
       const linked_to_panel = ( options && options.panel_key && _.includes(panel_keys, options.panel_key) ) && document.querySelector(`#${options.panel_key}`);

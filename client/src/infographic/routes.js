@@ -1,4 +1,4 @@
-import JSURL from 'jsurl';
+import { SafeJSURL } from '../link_utils.js';
 
 const infograph_href_template = (subj, data_area, useRouterFormat) => {
   const str = `#orgs/${subj.level}/${subj.id}/infograph/${data_area ? data_area : 'intro'}`;
@@ -9,7 +9,7 @@ const infograph_href_template = (subj, data_area, useRouterFormat) => {
 };
 
 const panel_href_template = (subj, data_area, panel_key, useRouterFormat) => {
-  const str = `#orgs/${subj.level}/${subj.id}/infograph/${data_area ? data_area : ''}/${panel_key ? JSURL.stringify({panel_key: panel_key}) : ''}`;
+  const str = `#orgs/${subj.level}/${subj.id}/infograph/${data_area ? data_area : ''}/${panel_key ? SafeJSURL.stringify({panel_key: panel_key}) : ''}`;
   if(useRouterFormat){
     return str.replace("#","/");
   }
