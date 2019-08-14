@@ -29,11 +29,11 @@ const general_href_for_item = item => {
 };
 
 // JSURL's use of ~'s is problematic in a number of cases (users pasting links in to rich text editors supporting extended markdown for instance)
-// This wraps JSURL and replaces ~'s with _.-._.-, but is also backwards compatible with old ~ using JSURL's
+// This wraps JSURL and replaces ~'s with .-.-, but is also backwards compatible with old ~ using JSURL's
 const SafeJSURL = {
-  parse: (safe_jsurl_string) => _.isString(safe_jsurl_string) && JSURL.parse( safe_jsurl_string.replace(/_.-._.-/g, "~") ),
-  stringify: (json) => JSURL.stringify(json).replace(/~/g, "_.-._.-"),
-  tryParse: (safe_jsurl_string) => _.isString(safe_jsurl_string) && JSURL.tryParse( safe_jsurl_string.replace(/_.-._.-/g, "~") ),
+  parse: (safe_jsurl_string) => _.isString(safe_jsurl_string) && JSURL.parse( safe_jsurl_string.replace(/.-.-/g, "~") ),
+  stringify: (json) => JSURL.stringify(json).replace(/~/g, ".-.-"),
+  tryParse: (safe_jsurl_string) => _.isString(safe_jsurl_string) && JSURL.tryParse( safe_jsurl_string.replace(/.-.-/g, "~") ),
 };
 
 export {
