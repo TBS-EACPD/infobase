@@ -13,12 +13,9 @@ import {
   get_planned_spending_source_link,
   rpb_link,
   get_appropriate_rpb_subject,
-  NivoResponsiveBar,
-  NivoResponsiveLine,
-  formats,
-} from "../shared.js"; 
-import { run_template } from "../../models/text";
-import { format_and_get_nivo_graph } from "../historical_planned_fte/historical_planned_fte.js";
+} from "../shared.js";
+import { format_and_get_exp_program_spending } from "./welcome_mat_exp_program_spending.js";
+import { format_and_get_fte } from "./welcome_mat_fte.js";
 
 const { Format } = util_components;
 
@@ -69,107 +66,6 @@ const get_historical_fte_source_link = subject => {
     }),
   };
 };
-
-const ticks = (has_planned, has_hist) => _.chain(has_hist ? std_years : null)
-  .union(has_planned ? planning_years : null)
-  .map(run_template)
-  .value();
-
-const welcome_data_line = (data, has_planned, has_hist) => (
-  [{
-    id: '0',
-    "data": data.map(
-      (value,year_index) => ({
-        x: ticks(has_planned,has_hist)[year_index],
-        y: value,
-      })
-    ),
-  }]
-);
-
-const welcome_data_bar = (data, has_planned, has_hist) => data.map( 
-  (value, year_index) => ({
-    "year": ticks(has_planned, has_hist)[year_index],
-    "0": value,
-  })
-);
-
-const format_value = (value, is_money) => is_money ? formats.compact2(value) : formats.big_int_real(value);
-
-const Chart = ({
-  data,
-  is_money = false,
-  use_line = false,
-  is_light,
-  has_hist,
-  has_planned,
-}) => use_line ? (
-  <div style ={{height: '230px'}} aria-hidden = {true}>
-    <NivoResponsiveLine
-      data = {welcome_data_line(data, has_planned, has_hist)}
-      yScale = {{zoomed: false}}
-      show_yaxis_zoom = {false}
-      max = {_.max(data)*1.05}
-      enableGridX = {false}
-      enableGridY = {false}
-      raw_data = {data}
-      is_money={is_money}
-      tick_amount={5}
-      remove_bottom_axis = {true}
-      remove_left_axis = {true}
-      margin={{
-        "top": 10,
-        "right": 30,
-        "bottom": 10,
-        "left": 30,
-      }}
-      tooltip={
-        slice => {
-          return (
-            <div>
-              {slice.data.map((e,i) => (
-                <div key={i} style={{margin: '0'}}> 
-                  <div style={{backgroundColor: e.serie["color"], height: '12px', width: '12px', display: 'inline-block'}}></div>&nbsp;&nbsp;&nbsp; 
-                  {slice.id}: <div style = {{display: 'inline-block'}} dangerouslySetInnerHTML = {{__html: format_value(e.data['y'], is_money)}}></div>
-                </div>
-              ))}
-            </div>
-          );
-        }
-      }
-    />
-  </div>
-) : (
-//keys have to have the empty key in the array 
-//or else it won't display the bar for negative values
-<div style = {{height: '230px'}} aria-hidden = {true}>
-  <NivoResponsiveBar
-    data = {welcome_data_bar(data, has_planned, has_hist)}
-    keys = {["0"]}
-    indexBy = {"year"}
-    margin={{
-      top: 20,
-      right: 30,
-      bottom: 20,
-      left: 80,
-    }}
-    enableGridX = {false}
-    enableGridY = {false}
-    remove_bottom_axis={true}
-    is_money = {is_money}
-    tooltip = { d => (
-      <div>
-        <div style={{margin: '0'}}>
-          <div style ={{backgroundColor: d[0].color, height: '12px', width: '12px', display: 'inline-block'}} />&nbsp;&nbsp;&nbsp;
-          {d[0].indexValue}: <div style = {{display: 'inline-block'}} dangerouslySetInnerHTML = {{__html: format_value(d[0].value, is_money)}}></div>
-        </div>
-      </div>
-    )}
-    colors = {is_light ? window.infobase_color_constants.primaryColor : window.infobase_color_constants.textColor }
-    tick_value = {4}
-  />
-</div>
-);
 
 const Pane = ({ size, children, is_header, noPadding }) => (
   <div className={`mat-grid__lg-panel${size} mat-grid__sm-panel`}>
@@ -269,6 +165,9 @@ const WelcomeMat = (props) => {
   // const no_hist_ftes = <TM k="no_historical_fte__new" />;
   const spending_auths_are = <TM k="spending_authorities_are" />;
 
+  const fte_graph = format_and_get_fte(info, subject);
+  const exp_program_spending_graph = format_and_get_exp_program_spending(type, subject);
+
   if(type==="hist"){
     //hist-only, old program or org
     //may or may not have FTEs
@@ -280,12 +179,10 @@ const WelcomeMat = (props) => {
     const { 
       spend_last_year_5,
       spend_last_year,
-      spend_data,
       hist_spend_diff,
       
       fte_last_year_5,
       fte_last_year,
-      fte_data,
       hist_fte_diff,
     } = calcs;
 
@@ -321,16 +218,10 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane noPadding key="d" size={40}>
-            <Chart 
-              use_line
-              data={_.take(spend_data,5)}
-              is_money
-              has_hist={calcs.has_hist}
-              has_planned={calcs.has_planned}
-            />
+            {exp_program_spending_graph}
           </Pane>,
         ]}
-        fte_row={ fte_data && [
+        fte_row={ fte_graph && [
           <Pane key="a" size={20}>
             <MobileOrA11YContent children={five_years_ago} />
             <PaneItem textSize="large">
@@ -352,13 +243,7 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane noPadding key="d" size={40}>
-            <Chart 
-              use_line
-              data={_.take(fte_data,5)}
-              has_hist={calcs.has_hist}
-              has_planned={calcs.has_planned}
-
-            />
+            {fte_graph}
           </Pane>,
         
         ]}
@@ -378,10 +263,8 @@ const WelcomeMat = (props) => {
     const {
       spend_plan_1,
       spend_plan_3,
-      spend_data,
       fte_plan_1,
       fte_plan_3,
-      fte_data,
     } = calcs;
 
     const planned_spend_diff = spend_plan_3 && ( (spend_plan_3-spend_plan_1)/spend_plan_1);
@@ -417,17 +300,10 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane noPadding key="c" size={40}>
-            <Chart 
-              data={_.takeRight(spend_data, 3)}
-              is_light
-              is_money
-              has_hist={calcs.has_hist}
-              has_planned={calcs.has_planned}
-            />
+            {exp_program_spending_graph}
           </Pane>,
         ]}
-        fte_row={fte_data && [
-
+        fte_row={fte_graph && [
           <Pane key="a" size={20}>
             <MobileOrA11YContent children={in_this_year} />
             <PaneItem textSize="large">
@@ -449,12 +325,7 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane noPadding key="c" size={40}>
-            <Chart  
-              data={_.takeRight(fte_data,3)}
-              is_light
-              has_hist={calcs.has_hist}
-              has_planned={calcs.has_planned}
-            />
+            {fte_graph}
           </Pane>,
         ]}
       />
@@ -519,7 +390,6 @@ const WelcomeMat = (props) => {
       spend_plan_1,
       spend_last_year,
       spend_last_year_5,
-      spend_data,
     } = calcs;
 
     const hist_spend_diff = spend_last_year_5 && ( (spend_last_year-spend_last_year_5)/spend_last_year_5);
@@ -573,13 +443,7 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane noPadding key="d" size={40}>
-            <Chart 
-              use_line
-              data={_.take(spend_data,5)}
-              is_money
-              has_hist={calcs.has_hist}
-              has_planned={calcs.has_planned}
-            />
+            {exp_program_spending_graph}
           </Pane>,
         ]}
         text_row={[
@@ -616,14 +480,11 @@ const WelcomeMat = (props) => {
       hist_spend_diff,
       planned_spend_diff,
 
-      spend_data,
-
       fte_last_year_5,
       fte_last_year,
       fte_plan_3,
       hist_fte_diff,
       planned_fte_diff,
-      fte_data,
     } = calcs;
 
     const { level } = subject;
@@ -643,48 +504,6 @@ const WelcomeMat = (props) => {
     } else {
       spend_summary_key = false;
       fte_summary_key = false;
-    }
-    let welcome_matt_fte_graph;
-    const { graph_content, nivo_default_props } = format_and_get_nivo_graph(info, subject);
-    if(!window.is_a11y_mode){
-      const welcome_mat_fte_graph_props = {
-        ...nivo_default_props,
-        //enableGridX: false,
-        enableGridY: false,
-        remove_left_axis: true,
-        show_yaxis_zoom: false,
-        min: _.min(nivo_default_props.raw_data) * 0.9,
-        max: _.max(nivo_default_props.raw_data) * 1.1,
-        margin: {
-          top: 10,
-          right: 30,
-          bottom: 70,
-          left: 30,
-        },
-        legends: [
-          {
-            anchor: 'bottom-right',
-            direction: 'row',
-            translateX: 97,
-            translateY: 60,
-            itemDirection: 'left-to-right',
-            itemWidth: 160,
-            itemHeight: 20,
-            itemsSpacing: 2,
-            itemOpacity: 0.75,
-            symbolSize: 12,
-          },
-        ],
-      };
-      welcome_matt_fte_graph = (
-        <div style={{height: 230}} aria-hidden = {true}>
-          <NivoResponsiveLine
-            {...welcome_mat_fte_graph_props}
-          />
-        </div>
-      );  
-    } else{
-      welcome_matt_fte_graph = graph_content;
     }
   
     return (
@@ -737,16 +556,10 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane noPadding key="d" size={55}>
-            <Chart 
-              use_line 
-              data={spend_data}
-              has_hist={calcs.has_hist}
-              has_planned={calcs.has_planned}
-              is_money
-            />
+            {exp_program_spending_graph}
           </Pane>,
         ]}
-        fte_row={fte_data && [
+        fte_row={fte_graph && [
 
           <Pane key="a" size={15}>
             <MobileOrA11YContent children={five_years_ago} />
@@ -788,7 +601,7 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane noPadding key="d" size={55}>
-            {welcome_matt_fte_graph}
+            {fte_graph}
           </Pane>,
         ]}
         text_row={[
@@ -909,28 +722,7 @@ function get_calcs(subject, q6, q12){
   
   const hist_fte_data = _.map(std_years, col => q12.sum(col) || 0);
   const planned_fte_data = _.map(planning_years, col => q12.sum(col) || 0);
-
-
-  let spend_data;
-  if(_.some(hist_spend_data) && _.some(planned_spend_data)){
-    spend_data = [...hist_spend_data, ...planned_spend_data];
-  }
-  if(_.some(hist_spend_data) && !_.some(planned_spend_data)){
-    spend_data = hist_spend_data;
-  }
-  if(!_.some(hist_spend_data) && _.some(planned_spend_data)){
-    spend_data = planned_spend_data;
-  }
-
-
-  let fte_data;
-  if(_.some(hist_fte_data) && _.some(planned_fte_data)){
-    fte_data = [...hist_fte_data, ...planned_fte_data];
-  } else if(_.some(hist_fte_data) && !_.some(planned_fte_data)){
-    fte_data = hist_fte_data;
-  } else if(!_.some(hist_fte_data) && _.some(planned_fte_data)){
-    fte_data = planned_fte_data;
-  }
+  const fte_data = _.concat(hist_fte_data, planned_fte_data);
 
   const spend_last_year_5 = _.first(hist_spend_data);
   const spend_last_year = _.last(hist_spend_data);
@@ -957,9 +749,6 @@ function get_calcs(subject, q6, q12){
     spend_plan_3,
     hist_spend_diff,
     planned_spend_diff,
-
-    spend_data,
-
 
     fte_last_year_5,
     fte_last_year,
