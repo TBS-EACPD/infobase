@@ -1,4 +1,4 @@
-import { SafeJSURL } from '../link_utils.js';
+import { SafeJSURL } from '../general_utils.js';
 
 const infograph_href_template = (subj, data_area, useRouterFormat) => {
   const str = `#orgs/${subj.level}/${subj.id}/infograph/${data_area ? data_area : 'intro'}`;
