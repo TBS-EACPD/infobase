@@ -9,7 +9,7 @@
   @media(min-width: $minSmallDevice) and (max-width: $mediumDevice){
     width: 80%;
   }
-  @media(max-width: $mediumDevice){
+  @media(max-width: $smallDevice){
     width: 100%;
   }
 }

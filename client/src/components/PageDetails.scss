@@ -35,7 +35,7 @@
     background-color: $backgroundColor;
     border-radius: 11px;
     padding: 3px;
-    @media (min-width: $largeDevice) {
+    @media (min-width: $minLargeDevice) {
       text-align: center;
     }
   }
