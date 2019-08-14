@@ -37,7 +37,7 @@ import { Table } from '../core/TableClass.js';
 
 //misc app stuff
 import { rpb_link } from './rpb_link.js';
-import JSURL from 'jsurl';
+import { SafeJSURL } from '../link_utils.js';
 
 const sub_app_name = "_rpb";
 
@@ -46,7 +46,7 @@ const url_state_selector = createSelector(_.identity, str => {
   let state = {};
   if(_.nonEmpty(str)){
     state = _.chain(str)
-      .pipe(str => JSURL.parse(str) )
+      .pipe(str => SafeJSURL.parse(str) )
       .pipe(naive=> naive_to_real_state(naive) )
       .value();
   } else {

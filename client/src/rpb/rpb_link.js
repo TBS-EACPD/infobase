@@ -1,6 +1,6 @@
 
 import { Subject } from '../models/subject.js';
-import JSURL from 'jsurl';
+import { SafeJSURL } from '../link_utils.js';
 
 const base_url = "#rpb/";
 const rpb_link = (naive_state, useRouterFormat) => _.chain(naive_state)
@@ -37,7 +37,7 @@ const rpb_link = (naive_state, useRouterFormat) => _.chain(naive_state)
     'descending',
     'filter',
   ])
-  .pipe(obj => JSURL.stringify(obj))
+  .pipe(obj => SafeJSURL.stringify(obj))
   .pipe( str => base_url+str )
   .pipe(str => useRouterFormat ? str.replace("#","/") : str )
   .value();
