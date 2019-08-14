@@ -42,7 +42,6 @@ import '../panels/internal_services/isc.js';
 import "../panels/detailed_program_spending_split/detailed_program_spending_split.js";
 
 import '../panels/historical_auth_exp/auth_exp_prog_spending.js';
-import "../panels/historical_planned_fte/historical_planned_fte.js";
 
 //tag-only panels
 import '../panels/tag_panels/resource_structure.js';
@@ -87,7 +86,6 @@ const get_gov_panels = subject => ({
     "auth_exp_prog_spending",
     //"in_year_estimates_split",//turned off until supps A
     "in_year_voted_stat_split",
-    "historical_planned_fte",
     "in_year_stat_breakdown",
     "in_year_voted_breakdown",
     'gocographic',
@@ -119,7 +117,6 @@ const get_dept_panels = subject => ({
     "estimates_in_perspective",
     //"in_year_estimates_split",//turned off until supps A
     "in_year_voted_stat_split",
-    "historical_planned_fte",
     "spend_by_so_hist",
     "last_year_g_and_c_perspective",
     "historical_g_and_c",
@@ -157,7 +154,6 @@ const get_program_panels = subject => ({
     "budget_measures_panel",
     'vote_stat_split',
     'spend_rev_split',
-    "historical_planned_fte",
     'top_spending_areas',
     "spending_in_tag_perspective",
     'drr_planned_actual',
@@ -190,7 +186,6 @@ const get_crso_panels = subject => ({
     'drr_planned_actual',
     'crso_by_prog_exp',
     'crso_by_prog_fte',
-    "historical_planned_fte",
     "dp_rev_split",
   ],
   results: !subject.is_internal_service && subject.has_data('results_data') && [

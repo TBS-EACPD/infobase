@@ -1,14 +1,8 @@
-import '../../components/Details.scss';
-import { Details } from '../../components/Details.js';
-import text from './historical_planned_fte.yaml';
-import MediaQuery from 'react-responsive';
+import text from '../../common_text/common_lang.yaml';
 import {
   run_template,
-  PanelGraph,
   years,
   declarative_charts,
-  StdPanel,
-  Col,
   create_text_maker_component,
   NivoResponsiveLine,
   newIBCategoryColors,
@@ -19,10 +13,10 @@ const {
   A11YTable,
 } = declarative_charts;
 
-const { text_maker, TM } = create_text_maker_component(text);
+const { text_maker } = create_text_maker_component(text);
 const { std_years, planning_years } = years;
 
-export const format_and_get_nivo_graph = (info, subject) => {
+export const format_and_get_fte = (info, subject) => {
   const colors = d3.scaleOrdinal().range(newIBCategoryColors);
   const series_labels = [text_maker("actual_ftes"), text_maker("planned_ftes")];
   const history_ticks = _.map(std_years, run_template);
@@ -48,8 +42,10 @@ export const format_and_get_nivo_graph = (info, subject) => {
   const history_data_index = _.map(std_years, (std_year) => `${subject.level}_fte_${std_year.replace(/{|}/g, "")}`);
   const planned_data_index = _.map(planning_years, (planned_year) => `${subject.level}_fte_${planned_year.replace(/{|}/g, "")}`);
   
-  let graph_content;
-  let nivo_default_props;
+  const planned_fte_exists = 0 != _.reduce(planned_data_index, (fte_sum, index) => 
+    fte_sum + info[index], 0);
+
+  let fte_graph;
 
   if(window.is_a11y_mode){
     const history_a11y_data = _.zipWith(history_ticks, history_data_index, (year, idx) => ({
@@ -83,7 +79,7 @@ export const format_and_get_nivo_graph = (info, subject) => {
 
     const filtered_history_a11y_data = filter_a11y_data(history_a11y_data, 1);
     const filtered_planned_a11y_data = filter_a11y_data(planned_a11y_data, 0);
-    graph_content = (
+    fte_graph = (
       <A11YTable
         data_col_headers={series_labels}
         data={_.concat(filtered_history_a11y_data, filtered_planned_a11y_data)}
@@ -110,9 +106,9 @@ export const format_and_get_nivo_graph = (info, subject) => {
         .map( (filtered_row) => filtered_row )
         .value()
     );
-    
+
     const historical_graph_data = prepare_graph_data(info, history_data_index, history_ticks);
-    const planned_graph_data = _.compact([
+    const planned_graph_data = planned_fte_exists && _.compact([
       gap_year && historical_graph_data.length > 0 && {
         x: gap_year,
         y: null,
@@ -128,23 +124,28 @@ export const format_and_get_nivo_graph = (info, subject) => {
       .map( ([id, data]) => ({id, data}) )
       .value();
     
-    nivo_default_props = {
+    const nivo_fte_props = {
       data: graph_data,
       raw_data: raw_data,
+      min: _.min(raw_data) * 0.9,
+      max: _.max(raw_data) * 1.1,
       is_money: false,
       colorBy: d => colors(d.id),
-      magnify_glass_translateX: 80,
+      enableGridY: false,
+      remove_left_axis: true,
+      show_yaxis_zoom: false,
       margin: {
-        top: 27,
+        top: 10,
         right: 30,
-        bottom: 30,
-        left: 100,
+        bottom: 70,
+        left: 30,
       },
       legends: [
         {
-          anchor: 'top-left',
+          anchor: 'bottom-right',
           direction: 'row',
-          translateY: -27,
+          translateX: 97,
+          translateY: 60,
           itemDirection: 'left-to-right',
           itemWidth: 160,
           itemHeight: 20,
@@ -167,96 +168,14 @@ export const format_and_get_nivo_graph = (info, subject) => {
         ],
       }),
     };
-    const nivo_mobile_props = _.merge(
-      {},
-      nivo_default_props,
-      {
-        margin: {top: 60},
-        legends: [
-          {
-            translateY: -60,
-            directio: "column",
-            itemsSpacing: 1,
-          },
-        ],
-      }
-    );
   
-    graph_content = (
-      <div style={{height: 400}} aria-hidden = {true}>
-        {
-          <MediaQuery minWidth={991}>
-            <NivoResponsiveLine
-              {...nivo_default_props}
-            />
-          </MediaQuery>
-        }
-        {
-          <MediaQuery maxWidth={992}>
-            <NivoResponsiveLine
-              {...nivo_mobile_props}
-            />
-          </MediaQuery>
-        }
+    fte_graph = (
+      <div style={{height: 230}} aria-hidden = {true}>
+        <NivoResponsiveLine
+          {...nivo_fte_props}
+        />
       </div>
     );
   }
-  return { gap_year, graph_content, nivo_default_props };
+  return fte_graph;
 };
-
-const render = function({calculations, footnotes, sources}) {
-  const { info, subject } = calculations;
-
-  const { gap_year, graph_content } = format_and_get_nivo_graph(info, subject);
-
-  return (
-    <StdPanel
-      containerAlign={gap_year ? "top" : "middle"}
-      title={"example title"}
-      {...{footnotes,sources}}
-    >
-      <Col size={4} isText>
-        { gap_year &&
-          <div className="IBDetails__container">
-            <Details
-              summary_content={<TM k={"gap_explain_title"} args={{...info}}/>}
-              content={<TM k={`${subject.level}_gap_explain_body`} args={{...info}}/>}
-            />
-          </div>
-        }
-      </Col>
-      <Col size={8} isGraph>
-        {graph_content}
-      </Col>
-    </StdPanel>
-  );
-};
-
-new PanelGraph({
-  level: "gov",
-  key: "historical_planned_fte",
-  info_deps: ["programFtes_gov_info"],
-  render,
-});
-
-new PanelGraph({
-  level: "dept",
-  key: "historical_planned_fte",
-  info_deps: ["programFtes_dept_info"],
-  render,
-});
-
-new PanelGraph({
-  level: "program",
-  key: "historical_planned_fte",
-  info_deps: ["programFtes_program_info"],
-  render,
-});
-
-new PanelGraph({
-  level: "crso",
-  key: "historical_planned_fte",
-  info_deps: ["programFtes_crso_info"],
-  render,
-});
-
