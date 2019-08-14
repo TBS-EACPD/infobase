@@ -1,5 +1,6 @@
 import marked from 'marked';
 import DOMPurify from 'dompurify';
+import JSURL from 'jsurl';
 
 export const sanitized_marked = (markdown) => DOMPurify.sanitize(
   marked(
@@ -125,3 +126,11 @@ export function completeAssign(target, ...sources) {
   });
   return target;
 }
+
+// JSURL's use of ~'s is problematic in a number of cases (users pasting links in to rich text editors supporting extended markdown for instance)
+// This wraps JSURL and replaces ~'s with .-.-, but is also backwards compatible with old ~ using JSURL's
+export const SafeJSURL = {
+  parse: (safe_jsurl_string) => _.isString(safe_jsurl_string) && JSURL.parse( safe_jsurl_string.replace(/.-.-/g, "~") ),
+  stringify: (json) => JSURL.stringify(json).replace(/~/g, ".-.-"),
+  tryParse: (safe_jsurl_string) => _.isString(safe_jsurl_string) && JSURL.tryParse( safe_jsurl_string.replace(/.-.-/g, "~") ),
+};

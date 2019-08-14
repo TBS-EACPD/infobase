@@ -37,7 +37,7 @@ import { Table } from '../core/TableClass.js';
 
 //misc app stuff
 import { rpb_link } from './rpb_link.js';
-import { SafeJSURL } from '../link_utils.js';
+import { SafeJSURL } from '../general_utils.js';
 
 const sub_app_name = "_rpb";
 

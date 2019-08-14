@@ -1,6 +1,6 @@
 
 import { Subject } from '../models/subject.js';
-import { SafeJSURL } from '../link_utils.js';
+import { SafeJSURL } from '../general_utils.js';
 
 const base_url = "#rpb/";
 const rpb_link = (naive_state, useRouterFormat) => _.chain(naive_state)
