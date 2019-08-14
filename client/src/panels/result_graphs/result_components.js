@@ -396,10 +396,10 @@ const SingleIndicatorDisplay = ({indicator}) => {
           </Fragment>
         }
 
-        { !_.isEmpty(indicator.explanation) && 
+        { !_.isEmpty(indicator.explanation) && // DRR_TODO: this will become target_explanation, and we'll have a separate result_explanation to display
           <Fragment>
             <dt>
-              <TM k="notes" />
+              <TM k="target_explanation" />
             </dt>
             <dd>
               <div dangerouslySetInnerHTML={{ __html: sanitized_marked(indicator.explanation) }} /> 
