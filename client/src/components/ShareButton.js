@@ -39,7 +39,7 @@ export class ShareButton extends React.Component {
           url={
             window.location.href.replace(
               window.location.hash,
-              panel_href_template(context.subject, context.bubble, context.graph_key).replace(/~/g, '%7E')
+              panel_href_template(context.subject, context.bubble, context.graph_key)
             )
           } 
           title={title}
