@@ -80,7 +80,7 @@ class Panel_ extends React.Component {
       allowOverflow,
     } = this.props;
 
-    const copy_to_clipboard = false; // feature flag for copy to clipboard vs permalink
+    const copy_to_clipboard = true; // feature flag for copy to clipboard vs permalink
 
     const subject = context && context.subject;
 
