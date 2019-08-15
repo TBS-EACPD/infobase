@@ -117,7 +117,7 @@ export class TwoSeriesBar {
     const get_label_size_actual = (label) => {
       var canvas = get_label_size_actual.canvas || (get_label_size_actual.canvas = document.createElement("canvas"));
       var context = canvas.getContext("2d");
-      context.font = `bold ${label_font_size}pt Helvetica,Arial,sans-serif`;
+      context.font = `bold ${label_font_size}px Helvetica,Arial,sans-serif`;
       var metrics = context.measureText(label);
       return {
         width: metrics.width,
@@ -191,6 +191,9 @@ export class TwoSeriesBar {
       .flatMap(data_item => data_item.data)
       .some(data_item_data => data_item_data.labelSize.width >= bar_width * 1.25)
       .value();
+    
+    const labels_should_be_vertical = labels_should_be_rotated && breakpoint_queries.minExtraSmallDevice(window.innerWidth);
+
 
     // create the grouped bars
     const bars = new_groups
@@ -320,29 +323,32 @@ export class TwoSeriesBar {
         "font-size": label_font_size + "px",
         "height": "10px",
         "top": (d, ix) => {
-          if (d.value === 0) {
-            return larger.y(d.value) + "px";
+          let top_position = this.margin.top - 16 + larger.y(d.value) - 5;
+          if (labels_should_be_rotated) {
+            // labels are rotated for small bars, in which case the vertical position is adjusted (relative to bar_width) to accomodate
+            top_position -= 0.15 * bar_width;
           }
-          else if (d.value > 0) {
-            let top_position = this.margin.top - 16 + larger.y(d.value) - 5;
-            if (labels_should_be_rotated) {
-              // labels are rotated for small bars, in which case the vertical position is adjusted (relative to bar_width) to accomodate
-              top_position -= 0.15 * bar_width;
-            }
-            return top_position + "px";
-          } else {
-            return larger.y(d.value) + 20 + "px";
-          }
+          return top_position + "px";
         },
         "left": (d, ix) => {
           let left_position = x1(d.label) + (x1.bandwidth() - bar_width) / 2;
-          if (labels_should_be_rotated) {
-            // labels are rotated for small bars, in which case the position of the left bar's label is adjusted to accomodate
+          // labels are rotated for small bars, in which case the position of the left bar's label is adjusted to accomodate
+          if (labels_should_be_vertical) {
             left_position = x1(d.label) - 10;
+          } else if (labels_should_be_rotated) {
+            left_position += (ix === 0 ? -0.5 : 0) * (bar_width + d.labelSize.height);
           }
           return left_position + "px";
         },
-        "transform": d => labels_should_be_rotated ? "rotate(-90deg)" : "rotate(0deg)",
+        "transform": d => {
+          if (labels_should_be_vertical){
+            return "rotate(-90deg)";
+          } else if(labels_should_be_rotated){
+            return "rotate(-45deg) translate3d(0,0,0)";
+          } else {
+            return "rotate(0deg)";
+          }
+        },
       });
       
     this.html.selectAll("div.labels")
