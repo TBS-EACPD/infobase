@@ -45,7 +45,7 @@ const EasyAccess_ = () =>
       href="#about"
       className="link-unstyled nav-item"
     >
-      <IconAbout title={trivial_text_maker("about_title")} />
+      <Icon title={trivial_text_maker("about_title")} color_set_by_css={true} ChildIcon={IconAbout} />
       <span className="mrgn-lft-sm">
         <TM k="about_title" />
       </span>
@@ -54,7 +54,7 @@ const EasyAccess_ = () =>
       href={trivial_text_maker("survey_link_href")}
       className="link-unstyled nav-item"
     >
-      <Icon title={trivial_text_maker("title")} color_set_by_css={true} ChildIcon={IconFeedback} />
+      <Icon title={trivial_text_maker("survey_link_text")} color_set_by_css={true} ChildIcon={IconFeedback} />
       <span className="mrgn-lft-sm">
         <TM k="survey_link_text" />
       </span>

@@ -16,7 +16,7 @@ const Icon = (props) => {
     ChildIcon,
   } = props;
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width={`${width}px`} height={`${width}px`} className={icon_class}>
+    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 24 24" className={icon_class}>
       <title>{title}</title>
       <ChildIcon color_set_by_css={color_set_by_css} color={color}/>
     </svg>
@@ -48,28 +48,29 @@ const IconFeedback = (props) => {
     color_set_by_css,
     color,
   } = props;
+
   return (
-    <path className={color_set_by_css && "svg-stroke"} fill="none" style={color_set_by_css ? undefined : {stroke: color}} strokeWidth="1.4" strokeMiterlimit="1"
-      d="M21.8,17.6c0.1,0-0.3-0.5-0.4-0.7l-1.7-2.7c0.8-0.7,2.2-2.7,2.1-4.5c-0.2-4-4.5-7.3-10-7.3s-10,3.3-10,7.3
-      s4.5,7.3,10,7.3c1.8,0,3.3-0.2,4.7-0.8C20.6,17.4,21.2,17.7,21.8,17.6z"/>
+    <path className={color_set_by_css && "svg-stroke"} fill="none" style={color_set_by_css ? undefined : {stroke: color}} strokeWidth="2" strokeMiterlimit="1"
+      d="M21.8,19.2c0.1,0-0.3-0.5-0.4-0.7l-1.7-2.7c0.8-0.7,2.2-2.7,2.1-4.5c-0.2-4-4.5-7.3-10-7.3s-10,3.3-10,7.3
+      s4.5,7.3,10,7.3c1.8,0,3.3-0.2,4.7-0.8C20.6,19,21.2,19.3,21.8,19.2z"/>
   );
 };
 
 const IconAbout = (props) => {
   const {
-    title,
+    color_set_by_css,
+    color,
   } = props;
   
   return (
-    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 600 600" className="icon--svg-inline">
-      <title>{title}</title>
-      <path className="svg-stroke" fill="none" strokeWidth="50" d="M300,46C159.7,46,46,159.7,46,300
-        s113.7,254,254,254s254-113.7,254-254S440.3,46,300,46z"/>
-      <path className="svg-fill" d="M365.9,417c-23,46.4-53.9,69.5-72.4,73.1c-17.4,3.5-26.2-12.3-24.3-53.9c1.9-50.1,3.4-82,4.6-126.9
-        c0.3-18.1-0.9-24.1-7.4-22.8c-7.6,1.5-18.6,14.4-26.3,26.7l-6.4-6.6c19.1-34.3,53.7-67.7,74.3-71.8c19-3.8,23,13.5,22.1,62.8
-        c-1.4,41-2.9,81.9-4.4,122.3c-0.8,16,2.9,20.3,7.8,19.3c3.8-0.8,13.1-7.7,26-28.3L365.9,417z M323.9,144.2
-        c3.7,18.5-4.8,38.2-23.3,41.9c-15.2,3-27-5.3-30.5-22.7c-3.1-15.8,3.8-37.5,25-41.7C310.9,118.5,321.1,130,323.9,144.2z"/>
-    </svg>
+    <Fragment>
+      <path className={color_set_by_css && "svg-stroke"} fill="none" style={color_set_by_css ? undefined : {stroke: color}} d="M12,2.8c5.1,0,9.2,4.1,9.2,9.2s-4.1,9.2-9.2,9.2c-5.1,0-9.2-4.1-9.2-9.2c0-3.7,2.2-7,5.6-8.5
+	C9.5,3,10.8,2.8,12,2.8 M12,1.8C6.4,1.8,1.8,6.4,1.8,12S6.4,22.2,12,22.2S22.2,17.6,22.2,12S17.6,1.8,12,1.8z"/>
+      <path className={color_set_by_css && "svg-fill"} style={color_set_by_css ? undefined : {fill: color}} d="M14.6,16.7c-0.9,1.9-2.2,2.8-2.9,2.9c-0.7,0.1-1-0.5-1-2.2c0.1-2,0.1-3.3,0.2-5.1c0-0.7,0-1-0.3-0.9
+	c-0.3,0.1-0.7,0.6-1.1,1.1l-0.3-0.3c0.8-1.4,2.1-2.7,3-2.9c0.8-0.2,0.9,0.5,0.9,2.5c-0.1,1.6-0.1,3.3-0.2,4.9c0,0.6,0.1,0.8,0.3,0.8
+	c0.2,0,0.5-0.3,1-1.1L14.6,16.7z M13,5.8c0.1,0.7-0.2,1.5-0.9,1.7c-0.6,0.1-1.1-0.2-1.2-0.9c-0.1-0.6,0.2-1.5,1-1.7
+	C12.4,4.7,12.8,5.2,13,5.8z"/>
+    </Fragment>
   );
 };
 
