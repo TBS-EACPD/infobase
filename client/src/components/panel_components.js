@@ -79,6 +79,8 @@ class Panel_ extends React.Component {
       allowOverflow,
     } = this.props;
 
+    const copy_to_clipboard = false; // feature flag for copy to clipboard vs permalink
+
     const subject = context && context.subject;
 
     const file_name_context = subject ? subject.level === 'dept' ? subject.acronym: subject.id : "";
@@ -128,12 +130,23 @@ class Panel_ extends React.Component {
               }
               { !context.no_permalink && panel_link &&
                 <div style={{display: 'inline'}}>
-                  <WriteToClipboard
-                    text_to_copy={panel_link}
-                    button_class_name={'panel-heading-utils'} 
-                    button_description={text_maker("copy_panel_link")}
-                    icon_src={get_static_url("svg/copy-link-to-clipboard.svg")}
-                  />
+                  { !copy_to_clipboard &&
+                    <a className='panel-heading-utils' href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
+                      <img src={get_static_url("svg/permalink.svg")}
+                        alt={text_maker("panel_permalink")}
+                        className='panel-heading-utils'
+                        title={text_maker("panel_permalink")}
+                      />
+                    </a>
+                  }
+                  { copy_to_clipboard &&
+                    <WriteToClipboard
+                      text_to_copy={panel_link}
+                      button_class_name={'panel-heading-utils'} 
+                      button_description={text_maker("copy_panel_link")}
+                      icon_src={get_static_url("svg/copy-link-to-clipboard.svg")}
+                    />
+                  }
                 </div>
               }
             </div>
