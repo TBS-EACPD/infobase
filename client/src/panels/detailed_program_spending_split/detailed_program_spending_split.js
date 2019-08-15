@@ -340,73 +340,13 @@ class DetailedProgramSplit extends React.Component {
       top_3_so_nums,
     } = this.props;
     const { selected_program } = this.state;
-    let graph_ready_data = [];
-    const so_label_list = [text_maker('all')];
-    const markers = [];
-    const tick_map = {};
+
     const divHeight = 650;
     const colors = infobase_colors();
     const formatter = formats.compact1_raw;
-    let legend_items;
 
     const { mapping } = _.find(arrangements, {id: selected_program} );
 
-    if(selected_program === text_maker('all')){
-      legend_items = [ //the order of this array will determine the colors for each sobj.
-        ... _.map(top_3_so_nums, num => sos[num].text),
-        text_maker('other_sos'),
-        text_maker('revenues'),
-      ].map( label => {
-        return {
-          active: true,
-          label,
-          id: label,
-          color: colors(label),
-        };
-      }
-      );
-      //make sure 'other standard objects' comes last 
-      legend_items = _.sortBy(legend_items, ({label}) => label === text_maker('other_sos') );
-      _.forEach(legend_items, ({label}) => {so_label_list.push(label);});
-    } else{
-      so_label_list.push(selected_program);
-    }
-    
-    graph_ready_data = _.chain(flat_data)
-      .filter(row => {
-        row.so_label = mapping(row.so_num);
-        return row.value!==0 && _.includes(so_label_list, row.so_label);
-      })
-      .groupBy(row => row.program.name)
-      .map(group => {
-        const prog = _.first(group).program;
-        const obj = {label: prog.name};
-        tick_map[`${prog.name}`] = prog;
-        _.forEach(group, (row) => {
-          obj[`${row.so_label}`] = (obj[`${row.so_label}`] || 0) + row.value;
-          obj['total'] = (obj['total'] || 0) + row.value;
-        });
-        markers.push({
-          axis: 'y',
-          value: obj.label,
-          lineStyle: {strokeWidth: 0},
-          textStyle: {
-            fill: obj.total < 0 ? window.infobase_color_constants.highlightColor : window.infobase_color_constants.textColor,
-            fontSize: '11px',
-          },
-          legend: formatter(obj.total),
-          legendOffsetX: -60,
-        },
-        );
-        return obj;
-      })
-      .sortBy(obj => obj.total)
-      .value();
-    
-    _.forEach(markers, (marker) => {
-      marker.legendOffsetY = -(divHeight / (markers.length * 2));
-    });
-    
     if(window.is_a11y_mode){
       return (
         <div className="row">
@@ -441,6 +381,77 @@ class DetailedProgramSplit extends React.Component {
       );
     }
 
+    const legend_items = selected_program === text_maker('all') && 
+      _.chain([
+        ... _.map(top_3_so_nums, num => sos[num].text),
+        text_maker('other_sos'),
+        text_maker('revenues'),
+      ])
+        .map(
+          (label) => ({
+            label,
+            active: true,
+            id: label,
+            color: colors(label),
+          }) 
+        )
+        .sortBy( ({label}) => label === text_maker('other_sos') )
+        .value();
+
+    const so_label_list = selected_program === text_maker('all') ? 
+      _.map(legend_items, "label") :
+      [selected_program];
+
+    const graph_ready_data = _.chain(flat_data)
+      .mapValues( (row) => ({...row, so_label: mapping(row.so_num)}) )
+      .filter( (row) => row.value !== 0 && _.includes(so_label_list, row.so_label) )
+      .groupBy( (row) => row.program.name )
+      .map(
+        (group) => ({
+          label: _.first(group).program.name,
+
+          ...(
+            _.chain(group)
+              .groupBy("so_label")
+              .map( (so_label_rows, so_label) => [
+                so_label,
+                _.reduce(
+                  so_label_rows,
+                  (memo, row) => memo + row.value,
+                  0,
+                ),
+              ])
+              .fromPairs()
+              .value()
+          ),
+
+          total: _.reduce(group, (memo, row) => memo + row.value, 0),
+        })
+      )
+      .sortBy("total")
+      .value();
+
+    const markers = _.map(
+      graph_ready_data,
+      ({label, total}) => ({
+        axis: 'y',
+        value: label,
+        lineStyle: {strokeWidth: 0},
+        textStyle: {
+          fill: total < 0 ? window.infobase_color_constants.highlightColor : window.infobase_color_constants.textColor,
+          fontSize: '11px',
+        },
+        legend: formatter(total),
+        legendOffsetX: -60,
+        legendOffsetY: -(divHeight / (graph_ready_data.length * 2)),
+      })
+    );
+
+    const programs_by_name = _.chain(flat_data)
+      .map( ({program}) => [program.name, program] )
+      .fromPairs()
+      .value();
+
     return <div>
       <div className="panel-separator" />
       <div style={{paddingBottom: '10px'}} className='center-text font-xlarge'>
@@ -468,7 +479,7 @@ class DetailedProgramSplit extends React.Component {
               className="form-control"
             />
           </label>
-          { !_.isEmpty(legend_items) &&
+          { legend_items &&
             <div className="legend-container">
               <GraphLegend
                 items={legend_items}
@@ -505,7 +516,7 @@ class DetailedProgramSplit extends React.Component {
                 renderTick: tick => (
                   <g key={tick.key} transform={`translate(${tick.x-5},${tick.y+1.5})`}>
                     <a
-                      href={tick_map[tick.value] ? infograph_href_template(tick_map[tick.value]) : null}
+                      href={programs_by_name[tick.value] ? infograph_href_template(programs_by_name[tick.value]) : null}
                       target="_blank" rel="noopener noreferrer"
                     >
                       <text
