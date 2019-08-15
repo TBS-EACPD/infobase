@@ -20,7 +20,7 @@ const get_api_url = async () => {
       // Only give the query 1 second to respond before going to fallback.
       const controller = new AbortController();
       const id_for_test_timeout = setTimeout(() => controller.abort(), 1000);
-      api_url = await fetch(`${api_url}?query={ root(lang: "en") { gov { id } } }`, {signal: controller.signal})
+      api_url = await fetch(`${api_url}?query={ root(lang: "en") { non_field } }`, {signal: controller.signal})
         .then( (response ) => {
           clearTimeout(id_for_test_timeout);
           return api_url;
