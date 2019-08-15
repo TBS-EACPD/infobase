@@ -18,7 +18,7 @@ export class TwoSeriesBar {
   }
 
   render(options) {
-    const is_mobile = breakpoint_queries.minMediumDevice(window.innerWidth);
+    const is_mobile = breakpoint_queries.maxMediumDevice(window.innerWidth);
     this.options = _.extend(this.options, options);
     if (is_mobile) {
       this.margin = this.options.margin || {
@@ -192,7 +192,7 @@ export class TwoSeriesBar {
       .some(data_item_data => data_item_data.labelSize.width >= bar_width * 1.25)
       .value();
     
-    const labels_should_be_vertical = labels_should_be_rotated && breakpoint_queries.minExtraSmallDevice(window.innerWidth);
+    const labels_should_be_vertical = labels_should_be_rotated && breakpoint_queries.maxExtraSmallDevice(window.innerWidth);
 
 
     // create the grouped bars
