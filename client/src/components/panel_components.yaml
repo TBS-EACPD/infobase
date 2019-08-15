@@ -12,6 +12,10 @@ copy_panel_link:
   en: Copy panel link to clipboard
   fr: Copier le lien du graphique dans le presse-papier
 
+panel_permalink:
+  en: Permalink to this panel
+  fr: Lien direct à ce graphique
+
 panel_share_button:
   en: Share panel link
   fr: Partager le lien du graphique
