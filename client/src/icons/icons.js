@@ -7,7 +7,7 @@ import classNames from 'classnames';
 
 const { result_simple_statuses } = businessConstants;
 
-const Icon = (props) => {
+const _IconWrapper = (props) => {
   const {
     title,
     width,
@@ -23,13 +23,13 @@ const Icon = (props) => {
     </svg>
   );
 };
-Icon.defaultProps = {
+_IconWrapper.defaultProps = {
   width: 24,
   icon_class: "icon--svg-inline",
   color_set_by_css: true,
 };
 
-const IconHome = (props) => {
+const SVGHome = (props) => {
   const {
     color_set_by_css,
     color,
@@ -42,6 +42,18 @@ const IconHome = (props) => {
     </Fragment>
   );
 };
+
+const IconHome = (props) => {
+  const {
+    title,
+    icon_class,
+    color_set_by_css,
+    color,
+  } = props;
+  return (
+    <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGHome}/>
+  )
+}
 
 
 const IconFeedback = (props) => {
