@@ -2,6 +2,7 @@ import './icons.scss';
 import { trivial_text_maker } from '../models/text.js';
 import { businessConstants } from '../models/businessConstants.js';
 import { Fragment } from 'react';
+import classNames from 'classnames';
 
 
 const { result_simple_statuses } = businessConstants;
@@ -16,7 +17,7 @@ const Icon = (props) => {
     ChildIcon,
   } = props;
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 24 24" className={icon_class}>
+    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox={`0 0 ${width} ${width}`} className={icon_class}>
       <title>{title}</title>
       <ChildIcon color_set_by_css={color_set_by_css} color={color}/>
     </svg>
@@ -76,49 +77,49 @@ const IconAbout = (props) => {
 
 const IconGlossary = (props) => {
   const {
-    title,
+    color_set_by_css,
+    color,
   } = props;
   
   return (
-    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 600 600" className="icon--svg-inline">
-      <title>{title}</title>
+    <Fragment>
       <g>
-        <path fill="none" className="svg-stroke" strokeWidth="50" strokeLinecap="round" strokeMiterlimit="50" d="M138.5,57h322.9
-          c18.7,0,33.8,15.1,33.8,33.8v418.4c0,18.7-15.1,33.8-33.8,33.8H138.5c-18.7,0-33.8-15.1-33.8-33.8V90.8
-          C104.8,72.1,119.9,57,138.5,57z"/>
-        
-        <line fill="none" className="svg-stroke" strokeWidth="25" x1="178" y1="63.5" x2="178" y2="542.5"/>
+        <path className={color_set_by_css && "svg-stroke"} style={color_set_by_css ? {fill: "none"} : {stroke: color, fill: "none"}}
+          d="M5.5,2.3h12.9c0.7,0,1.4,0.6,1.4,1.4v16.7c0,0.7-0.6,1.4-1.4,1.4H5.5c-0.7,0-1.4-0.6-1.4-1.4V3.6
+          C4.2,2.9,4.8,2.3,5.5,2.3z"/>
+        <line className={color_set_by_css && "svg-stroke"} style={color_set_by_css ? undefined : {stroke: color}}
+          x1="6.7" y1="2.5" x2="6.7" y2="21.7"/>
       </g>
-      <path className="svg-fill" d="M303.1,466c0-1.9,0.7-3.8,2-5.3
-        l105.8-125.9v-0.7h-89.5c-5.1,0-9.2-3.8-9.2-8.6l0,0c0-4.7,4.1-8.6,9.2-8.6h112.9c5.1,0,9.2,3.8,9.2,8.6v0.9c0,1.9-0.7,3.8-2,5.3
-        L336.2,457.2v0.7h99.5c5.1,0,9.2,3.8,9.2,8.6l0,0c0,4.7-4.1,8.6-9.2,8.6H312.2c-5.1,0-9.2-3.8-9.2-8.6L303.1,466z"/>
-      <path className="svg-fill" d="M257.4,253.4l-15.3,40.3
-        c-1.5,3.9-5.2,6.5-9.4,6.5h-4.4c-5.5,0-10-4.5-10-10c0-1.2,0.2-2.5,0.7-3.7l58.2-149.3c1.5-3.8,5.2-6.4,9.3-6.4h16.6
-        c4.1,0,7.8,2.5,9.3,6.4L371,286.6c2,5.1-0.5,10.9-5.7,13c-1.2,0.5-2.4,0.7-3.6,0.7h-5.3c-4.1,0-7.8-2.5-9.3-6.4l-15.8-40.5
-        c-1.5-3.8-5.2-6.4-9.3-6.4h-55.2C262.6,247,258.9,249.5,257.4,253.4z M308.9,229.9c5.5,0,10-4.5,10-10c0-1.2-0.2-2.5-0.7-3.6
-        l-13.7-35.1c-4.3-11-7.2-21.1-10.1-30.9h-0.6c-2.9,10.1-6.1,20.3-9.8,30.6l-13.7,35.4c-2,5.1,0.6,10.9,5.7,12.9
-        c1.2,0.4,2.4,0.7,3.6,0.7L308.9,229.9L308.9,229.9z"/>
-    </svg>
+      <path className={color_set_by_css && classNames("svg-fill","svg-stroke")} style={color_set_by_css ? undefined : {stroke: color, fill: color}}
+        d="M12.1,18.6c0-0.1,0-0.2,0.1-0.2l4.2-5v0h-3.6c-0.2,0-0.4-0.2-0.4-0.3l0,0c0-0.2,0.2-0.3,0.4-0.3h4.5
+        c0.2,0,0.4,0.2,0.4,0.3v0c0,0.1,0,0.2-0.1,0.2l-4.2,5v0h4c0.2,0,0.4,0.2,0.4,0.3l0,0c0,0.2-0.2,0.3-0.4,0.3h-4.9
+        C12.3,19,12.1,18.8,12.1,18.6L12.1,18.6z"/>
+      <path className={color_set_by_css && classNames("svg-fill","svg-stroke")} style={color_set_by_css ? undefined : {stroke: color, fill: color}}
+        d="M10.3,10.1l-0.6,1.6C9.6,11.9,9.5,12,9.3,12H9.1c-0.2,0-0.4-0.2-0.4-0.4c0,0,0-0.1,0-0.1l2.3-6
+        c0.1-0.2,0.2-0.3,0.4-0.3h0.7c0.2,0,0.3,0.1,0.4,0.3l2.3,6c0.1,0.2,0,0.4-0.2,0.5c0,0-0.1,0-0.1,0h-0.2c-0.2,0-0.3-0.1-0.4-0.3
+        l-0.6-1.6C13.2,10,13,9.9,12.9,9.9h-2.2C10.5,9.9,10.4,10,10.3,10.1z M12.4,9.2c0.2,0,0.4-0.2,0.4-0.4c0,0,0-0.1,0-0.1l-0.5-1.4
+        C12,6.8,11.9,6.4,11.8,6h0c-0.1,0.4-0.2,0.8-0.4,1.2l-0.5,1.4c-0.1,0.2,0,0.4,0.2,0.5c0,0,0.1,0,0.1,0H12.4z"/>
+    </Fragment>
   );
 };
 
 const IconDataset = (props) => {
   const {
-    title,
+    color_set_by_css,
+    color,
   } = props;
   
   return (
-    <svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 600 600" className="icon--svg-inline">
-      <title>{title}</title>
-      <path fill="none" className="svg-stroke" strokeWidth="50" strokeLinecap="round" strokeLinejoin="round" d="M116.5,98.5h367
+    <Fragment>
+      <path fill="none" className={color_set_by_css && "svg-stroke"} style={color_set_by_css ? undefined : {stroke: color}} strokeWidth="50" strokeLinecap="round" strokeLinejoin="round" d="M116.5,98.5h367
         c6.6,0,12,5.4,12,12v394c0,6.6-5.4,12-12,12h-367c-6.6,0-12-5.4-12-12v-394C104.5,103.9,109.9,98.5,116.5,98.5z"/>
-      <line fill="none" className="svg-stroke" strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="190.5" x2="494.5" y2="190.5"/>
-      <line fill="none" className="svg-stroke" strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="272.5" x2="495.5" y2="272.5"/>
-      <line fill="none" className="svg-stroke" strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="354.5" x2="495.5" y2="354.5"/>
-      <line fill="none" className="svg-stroke" strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="434.5" x2="495.5" y2="434.5"/>
-      <line fill="none" className="svg-stroke" strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="234.5" y1="197.5" x2="234.5" y2="515.5"/>
-      <line fill="none" className="svg-stroke" strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="365.5" y1="194.5" x2="365.5" y2="515.5"/>
-    </svg>
+      <line fill="none" className={color_set_by_css && "svg-stroke"} style={color_set_by_css ? undefined : {stroke: color}} strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="190.5" x2="494.5" y2="190.5"/>
+      <line fill="none" className={color_set_by_css && "svg-stroke"} style={color_set_by_css ? undefined : {stroke: color}} strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="272.5" x2="495.5" y2="272.5"/>
+      <line fill="none" className={color_set_by_css && "svg-stroke"} style={color_set_by_css ? undefined : {stroke: color}} strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="354.5" x2="495.5" y2="354.5"/>
+      <line fill="none" className={color_set_by_css && "svg-stroke"} style={color_set_by_css ? undefined : {stroke: color}} strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="434.5" x2="495.5" y2="434.5"/>
+      <line fill="none" className={color_set_by_css && "svg-stroke"} style={color_set_by_css ? undefined : {stroke: color}} strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="234.5" y1="197.5" x2="234.5" y2="515.5"/>
+      <line fill="none" className={color_set_by_css && "svg-stroke"} style={color_set_by_css ? undefined : {stroke: color}} strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="365.5" y1="194.5" x2="365.5" y2="515.5"/>
+    </Fragment>
   );
 };
 

@@ -27,7 +27,7 @@ const EasyAccess_ = () =>
     <a
       href='#glossary'
       className="link-unstyled nav-item">
-      <IconGlossary title={trivial_text_maker("glossary")} />
+      <Icon title={trivial_text_maker("glossary")} color_set_by_css={true} ChildIcon={IconGlossary} />
       <span className="mrgn-lft-sm">
         <TM k="glossary" />
       </span>
@@ -36,7 +36,7 @@ const EasyAccess_ = () =>
       href="#metadata"
       className="link-unstyled nav-item"
     >
-      <IconDataset title={trivial_text_maker("metadata")} />
+      <Icon title={trivial_text_maker("metadata")} width={600} color_set_by_css={true} ChildIcon={IconDataset} />
       <span className="mrgn-lft-sm">
         <TM k="metadata" />
       </span>
