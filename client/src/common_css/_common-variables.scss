@@ -24,10 +24,12 @@ $linkVisitedColor: #7834bc;
 
 /*media breakpoints, default to min-width queries whenever possible*/
 /*keep ../core/breakpoint_defs.js in sync with these*/
+$minExtraSmallDevice: 576px;
 $minSmallDevice: 768px;
 $minMediumDevice: 992px;
 $minLargeDevice: 1200px;
 /*media breakpoints -1 for max-width queries*/
+$maxExtraSmallDevice: 575px;
 $maxSmallDevice: 767px;
 $maxMediumDevice: 991px;
 $maxLargeDevice: 1199px;

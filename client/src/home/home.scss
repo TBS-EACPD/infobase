@@ -126,17 +126,17 @@ li.list-group-item--home {
   & > .frow {
     justify-content: space-between;
     
-    @media(max-width:$maxSmallDevice) {
+    @media(max-width: $maxExtraSmallDevice) {
       flex-direction: column;
     }
 
     & > .fcol-md-4 {
 
-      @media(max-width:$maxSmallDevice) {
+      @media(max-width: $maxExtraSmallDevice) {
         padding: 3% 2% 3% 2%;
       }
 
-      @media(min-width:$minSmallDevice) {
+      @media(min-width: $minExtraSmallDevice) {
         flex-basis: 30%;
         max-width: 30%;
       }

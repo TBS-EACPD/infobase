@@ -4,6 +4,7 @@
 
 // base breakpoints
 const base_breakpoints = {
+  extraSmallDevice: 576,
   smallDevice: 768,
   mediumDevice: 992,
   largeDevice: 1200,
