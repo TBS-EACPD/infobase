@@ -74,11 +74,11 @@
     @media (min-width: $minLargeDevice) { 
       width: 550px;
     }
-    @media (min-width: $minMediumDevice) and (max-width: $largeDevice) { 
+    @media (min-width: $minMediumDevice) and (max-width: $maxLargeDevice) { 
       width: 70vw;
       right: 0vw;
     }
-    @media (max-width: $mediumDevice) { 
+    @media (max-width: $maxMediumDevice) { 
       width: 80vw;
       right: 0vw;
     }
@@ -122,14 +122,12 @@
 .tag-cloud-main > li:hover > button,
 .tag-cloud-main > li > button:focus,
 .tag-cloud-main > li:hover > span,
-.tag-cloud-main > li > span:focus,
-{
+.tag-cloud-main > li > span:focus {
   background-color: $buttonSecondaryColor;
 }
 
 .tag-cloud-main > li.active > button,
-.tag-cloud-main > li.active > span,
-{
+.tag-cloud-main > li.active > span {
   background-color: $primaryColor;
 }
 
@@ -152,7 +150,7 @@
   }
 }
 
-@media (max-width: $mediumDevice) { 
+@media (max-width: $maxMediumDevice) { 
   .item-cloud-col > div {
     margin: 10px;
   }

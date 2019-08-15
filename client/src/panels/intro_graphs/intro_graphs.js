@@ -1,4 +1,4 @@
-import { PanelGraph, util_components, Subject } from '../shared';
+import { PanelGraph, util_components, Subject, breakpoints } from '../shared';
 import { text_maker, TM } from './intro_graph_text_provider.js';
 import './simplographic.js';
 import './gov_related.js';
@@ -38,7 +38,7 @@ const curried_render = ({ q_a_keys, omit_name_item }) => function ({ calculation
     }
   }
 
-  return <MediaQuery maxWidth={991}>
+  return <MediaQuery maxWidth={breakpoints.maxMediumDevice}>
     {(matches) => <div className={classNames("mrgn-bttm-md", matches && "mrgn-tp-md")}>
       <AutoAccordion title={text_maker("some_things_to_keep_in_mind")}>
         <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>

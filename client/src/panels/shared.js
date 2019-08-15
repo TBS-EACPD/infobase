@@ -7,6 +7,7 @@ import { create_text_maker, trivial_text_maker, run_template } from '../models/t
 import { formats, dollar_formats, formatter } from '../core/format.js';
 import { PanelGraph, layout_types } from '../core/PanelGraph.js';
 import { newIBCategoryColors, newIBLightCategoryColors, newIBDarkCategoryColors, NA_color } from '../core/color_schemes.js';
+import { breakpoints, breakpoint_queries } from '../core/breakpoint_defs.js';
 import { Panel, StdPanel, TextPanel, Col } from '../components/panel_components.js';
 import { Table } from '../core/TableClass.js';
 import { rpb_link, get_appropriate_rpb_subject } from '../rpb/rpb_link.js';
@@ -592,4 +593,6 @@ export {
   hex_to_rgb,
   Canada,
   TwoSeriesBar,
+  breakpoints,
+  breakpoint_queries,
 };

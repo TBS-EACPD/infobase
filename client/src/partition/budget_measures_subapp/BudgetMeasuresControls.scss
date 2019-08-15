@@ -85,7 +85,7 @@
     @media(min-width:$minLargeDevice){
       border: 2px solid $controlsColorLighter;
     }
-    @media(max-width:$largeDevice){
+    @media(max-width:$maxLargeDevice){
       border: 1px solid $controlsColor, 25%;
     }
   }

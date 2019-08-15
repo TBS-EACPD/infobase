@@ -31,7 +31,7 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   height: 40px;
   width: 40px;
 
-  @media(max-width:$mediumDevice) and (min-width:$smallDevice){
+  @media(max-width:$maxMediumDevice) and (min-width:$maxSmallDevice){
     left: -57px;
   }
 }
@@ -89,7 +89,7 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   }
 }
 
-@media(max-width:$largeDevice){
+@media(max-width:$maxLargeDevice){
   .filter-table {
     flex-direction: column;
   }
@@ -128,7 +128,7 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   }
 }
 
-@media(max-width:$smallDevice){
+@media(max-width:$maxSmallDevice){
   .filter-table__item {
     padding: 0px !important;
   }

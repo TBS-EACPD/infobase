@@ -15,7 +15,7 @@
     align-items: center;
   }
 
-  @media(max-width: $mediumDevice){
+  @media(max-width: $maxMediumDevice){
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
