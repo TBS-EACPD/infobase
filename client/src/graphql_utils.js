@@ -15,11 +15,20 @@ const get_api_url = async () => {
     } else if (window.is_dev){
       api_url = `http://${window.local_ip}:1337/graphql`;
 
-      // need to be careful if local IP's changed since the local_ip env var was set (last time
-      // webpack process was restarted), if it has then fall back to using local host
-      api_url = await fetch(`${api_url}?query={ root(lang: "en") { gov { id } } }`)
-        .then( (response ) => api_url )
-        .catch( (error) => "http://127.0.0.1:1337/graphql" );
+      // Need to be careful if local IP's changed since the local_ip env var was set (last time
+      // webpack process was restarted), if it has then fall back to using local host.
+      // Only give the query 1 second to respond before going to fallback.
+      const controller = new AbortController();
+      const id_for_test_timeout = setTimeout(() => controller.abort(), 1000);
+      api_url = await fetch(`${api_url}?query={ root(lang: "en") { gov { id } } }`, {signal: controller.signal})
+        .then( (response ) => {
+          clearTimeout(id_for_test_timeout);
+          return api_url;
+        })
+        .catch( (error) => {
+          clearTimeout(id_for_test_timeout);
+          return "http://127.0.0.1:1337/graphql";
+        });
     } else {
       api_url = prod_api_url;
     }
