@@ -10,7 +10,6 @@ deploy_filter: &deploy_filter
     branches:
       only:
         - master
-        - mobile-graph-tweaks
 
 version: 2
 jobs:
