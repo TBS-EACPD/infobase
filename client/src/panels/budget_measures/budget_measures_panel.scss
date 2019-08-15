@@ -4,7 +4,7 @@
   width: 100%;
 
   & > .centerer {
-    @media(max-width: $maxSmallDevice){
+    @media(max-width: $maxExtraSmallDevice){
       flex-direction: column;
     }
 

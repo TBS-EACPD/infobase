@@ -74,7 +74,7 @@
   min-width: 85px;
   max-width: 190px;
 
-  @media(max-width:$maxSmallDevice){
+  @media(max-width: $maxExtraSmallDevice){
     padding: 10px 0 10px 0;
   }
 
