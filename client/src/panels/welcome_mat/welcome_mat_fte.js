@@ -1,4 +1,6 @@
 import text from '../../common_text/common_lang.yaml';
+import { Fragment } from 'react';
+import MediaQuery from 'react-responsive';
 import {
   run_template,
   years,
@@ -123,6 +125,10 @@ export const format_and_get_fte = (info, subject) => {
       .filter( ([id,formatted_data_array]) => formatted_data_array.length > 0)
       .map( ([id, data]) => ({id, data}) )
       .value();
+
+    const shouldTickRender = (tick) => {
+      return tick === gap_year || tick === _.first(history_ticks) || tick === _.last(plan_ticks);
+    };
     
     const nivo_fte_props = {
       data: graph_data,
@@ -136,20 +142,20 @@ export const format_and_get_fte = (info, subject) => {
       show_yaxis_zoom: false,
       margin: {
         top: 10,
-        right: 30,
-        bottom: 70,
-        left: 30,
+        right: 40,
+        bottom: 67,
+        left: 40,
       },
       legends: [
         {
           anchor: 'bottom-right',
           direction: 'row',
-          translateX: 97,
+          translateX: -67,
           translateY: 60,
           itemDirection: 'left-to-right',
-          itemWidth: 160,
+          itemWidth: 2,
           itemHeight: 20,
-          itemsSpacing: 2,
+          itemsSpacing: 120,
           itemOpacity: 0.75,
           symbolSize: 12,
         },
@@ -168,13 +174,28 @@ export const format_and_get_fte = (info, subject) => {
         ],
       }),
     };
-  
+    const nivo_mobile_fte_props = {
+      ...nivo_fte_props,
+      bttm_axis: { format: tick => (shouldTickRender(tick) ? tick : '') },
+    };
+
     fte_graph = (
-      <div style={{height: 230}} aria-hidden = {true}>
-        <NivoResponsiveLine
-          {...nivo_fte_props}
-        />
-      </div>
+      <Fragment>
+        <MediaQuery minWidth={1199}>
+          <div style={{height: 230}} aria-hidden = {true}>
+            <NivoResponsiveLine
+              {...nivo_fte_props}
+            />
+          </div>
+        </MediaQuery>
+        <MediaQuery maxWidth={1198}>
+          <div style={{height: 230}} aria-hidden = {true}>
+            <NivoResponsiveLine
+              {...nivo_mobile_fte_props}
+            />
+          </div>
+        </MediaQuery>
+      </Fragment>
     );
   }
   return fte_graph;

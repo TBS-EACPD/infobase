@@ -1,4 +1,6 @@
 import { Table } from '../../core/TableClass.js';
+import { Fragment } from 'react';
+import MediaQuery from 'react-responsive';
 import text from '../../common_text/common_lang.yaml';
 import {
   run_template,
@@ -123,7 +125,11 @@ export const format_and_get_exp_program_spending = (type, subject) => {
       .filter( row => !_.isNull(row[0]) )
       .map( ([id, data]) => ({id, data}) )
       .value();
-
+      
+    const shouldTickRender = (tick) => {
+      return tick === gap_year || tick === _.first(history_ticks) || tick === _.last(plan_ticks);
+    };
+  
     const nivo_exp_program_spending_props = {
       raw_data: raw_data,
       data: graph_data,
@@ -137,21 +143,21 @@ export const format_and_get_exp_program_spending = (type, subject) => {
         {
           anchor: 'bottom-right',
           direction: 'row',
-          translateX: 97,
+          translateX: -70,
           translateY: 60,
           itemDirection: 'left-to-right',
-          itemWidth: 160,
+          itemWidth: 2,
           itemHeight: 20,
-          itemsSpacing: 2,
+          itemsSpacing: 140,
           itemOpacity: 0.75,
           symbolSize: 12,
         },
       ],
       margin: {
         top: 10,
-        right: 30,
+        right: 40,
         bottom: 70,
-        left: 30,
+        left: 40,
       },  
       ...(marker_year && both_exists && _.includes(series_labels, text_maker("planned_spending")) && {
         markers: [
@@ -167,12 +173,28 @@ export const format_and_get_exp_program_spending = (type, subject) => {
         ],
       }),
     };
+    const nivo_mobile_exp_program_spending_props = {
+      ...nivo_exp_program_spending_props,
+      bttm_axis: { format: tick => (shouldTickRender(tick) ? tick : '') },
+    };
+    
     exp_program_spending_graph = (
-      <div style={{height: 230}} aria-hidden = {true}>
-        <NivoResponsiveLine
-          {...nivo_exp_program_spending_props}
-        />
-      </div>
+      <Fragment>
+        <MediaQuery minWidth={1199}>
+          <div style={{height: 230}} aria-hidden = {true}>
+            <NivoResponsiveLine
+              {...nivo_exp_program_spending_props}
+            />
+          </div>
+        </MediaQuery>
+        <MediaQuery maxWidth={1198}>
+          <div style={{height: 230}} aria-hidden = {true}>
+            <NivoResponsiveLine
+              {...nivo_mobile_exp_program_spending_props}
+            />
+          </div>
+        </MediaQuery>
+      </Fragment>
     );
   }
   return exp_program_spending_graph;
