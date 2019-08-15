@@ -136,7 +136,7 @@
 }
 
 // Grid systems should all be based off min-width breakpoints, for consistency. These are just some minor misc. exceptions to that
-@media (max-width: $mediumDevice){
+@media (max-width: $maxMediumDevice){
   .sm-grid-panel {
     width: 100%;
     padding: 5px;

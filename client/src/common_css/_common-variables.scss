@@ -21,15 +21,16 @@ $linkColor: #2b4380;
 $linkFocusColor: #0535d2;
 $linkVisitedColor: #7834bc;
 
-/*media breakpoints*/
-$smallDevice: 768px;
-$mediumDevice: 992px;
-$largeDevice: 1200px; 
 
-/*media breakpoints +1 for min-width*/
-$minSmallDevice: 769px;
-$minMediumDevice: 993px;
-$minLargeDevice: 1201px; 
+/*media breakpoints, default to min-width queries whenever possible*/
+/*keep ../core/breakpoint_defs.js in sync with these*/
+$minSmallDevice: 768px;
+$minMediumDevice: 992px;
+$minLargeDevice: 1200px;
+/*media breakpoints -1 for max-width queries*/
+$maxSmallDevice: 767px;
+$maxMediumDevice: 991px;
+$maxLargeDevice: 1199px;
 
 
 /* dark and light colours don't have enough contrast between them for text, so don't use them that way! Use black text on light, or (check contrast) white text on dark*/
@@ -42,10 +43,12 @@ $warnDarkColor: #fdb84c;
 $infoLightColor: #f2f6fc;
 $infoDarkColor: $buttonPrimaryColor; // setting these to so we don't have too many shades of blue, if the buttons change colour this should be set to a nice "info" blue
 
+
 $fontFamily: 'Roboto', sans-serif;
 $lightFontWeight: 300;
 $mediumFontWeight: 400;
 $heavyFontWeight: 700;
+
 
 @mixin unstyled-button {
   text-align: left;

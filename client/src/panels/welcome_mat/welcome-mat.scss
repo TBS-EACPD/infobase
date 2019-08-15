@@ -46,13 +46,13 @@
     overflow: hidden;
     visibility: hidden;
   }
-  @media (max-width: $mediumDevice){
+  @media (max-width: $maxMediumDevice){
     display: show;
   }
 }
 
 @mixin sm-hide {
-  @media (max-width: $mediumDevice){
+  @media (max-width: $maxMediumDevice){
     display: none;
   }
 }
@@ -66,7 +66,7 @@
   display: flex;
   justify-content: center;
   align-items: stretch;
-  @media (max-width: $mediumDevice){
+  @media (max-width: $maxMediumDevice){
     flex-direction:column;
   }
 }
@@ -74,7 +74,7 @@
 .mat-grid__row--sm-hide { @include sm-hide; }
 
 .mat-grid__sm-panel {
-  @media (max-width: $mediumDevice){
+  @media (max-width: $maxMediumDevice){
     width : 100%;
     padding: 5px;
   }
@@ -118,7 +118,7 @@
 
   &.mat-grid__inner-panel--large {
     font-size: 2em;
-    @media (max-width: $largeDevice){
+    @media (max-width: $maxLargeDevice){
       font-size: 1.5em;
     }
   }

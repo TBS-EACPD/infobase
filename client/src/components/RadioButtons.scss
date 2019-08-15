@@ -9,7 +9,7 @@
   font-weight: $mediumFontWeight;
   background-color: inherit;
 
-  @media(max-width:$smallDevice){
+  @media(max-width:$maxSmallDevice){
     flex-direction: column;
   }
 }

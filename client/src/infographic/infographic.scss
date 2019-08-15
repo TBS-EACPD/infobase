@@ -4,7 +4,7 @@ of the advanced search for mobile */
 @import '../common_css/common-variables';
 
 .infographic-search-container > div > a.btn {
-  @media(max-width:$mediumDevice){
+  @media(max-width:$maxMediumDevice){
       display: inline-block;
       width: auto;
       padding: 10px;

@@ -44,9 +44,6 @@
   font-size: 1.4em;
   text-align: center;
 }
-.hierarchy-selection-items {
-
-}
 
 .hierarchy-selection-item:focus,
 .hierarchy-selection-item:active {
@@ -108,7 +105,7 @@
 }
 
 
-@media(max-width:$mediumDevice){
+@media(max-width:$maxMediumDevice){
   .hierarchy-selection-items {
     display: flex;
     flex-direction: column;

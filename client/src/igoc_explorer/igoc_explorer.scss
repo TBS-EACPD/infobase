@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  @media (max-width: $mediumDevice){
+  @media (max-width: $maxMediumDevice){
     flex-direction: column;
   }
 }

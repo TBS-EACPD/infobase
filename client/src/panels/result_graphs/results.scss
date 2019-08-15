@@ -101,7 +101,7 @@ dl.indicator-item__dl dt+dd {
 }
 
 .status-icon-array {
-  @media(max-width: $smallDevice){
+  @media(max-width: $maxSmallDevice){
     display: flex;
     flex-wrap: wrap;
   }

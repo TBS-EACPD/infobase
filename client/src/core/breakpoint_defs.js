@@ -1,21 +1,39 @@
 // Media breakpoint constants for use in the infobase. Should be kept in sync with _common-variables.scss
-// These are global variables throughout the infobase. Modify with caution!!!
+// These are global variables throughout the infobase. Modify with caution and keep in sync with ../common_css/_common-variables.scss!
+// Media queries and other logic should default to min-width breakpoints for consistency with grid systems
 
-/*media breakpoints*/
-const smallDevice = '768px';
-const mediumDevice = '992px';
-const largeDevice = '1200px'; 
+// base breakpoints
+const base_breakpoints = {
+  smallDevice: 768,
+  mediumDevice: 992,
+  largeDevice: 1200,
+};
 
-/*media breakpoints +1 for min-width*/
-const minSmallDevice = '769px';
-const minMediumDevice = '993px';
-const minLargeDevice = '1201px'; 
+// Note min breakpoints are -1
+const breakpoints = {
+  ..._.chain(base_breakpoints)
+    .mapKeys( (value, key) => `min${_.upperFirst(key)}`)
+    .value(),
+
+  ..._.chain(base_breakpoints)
+    .mapKeys( (value, key) => `max${_.upperFirst(key)}`)
+    .mapValues( (value) => value-1)
+    .value(),
+};
+
+const breakpoint_queries = {
+  ..._.chain(base_breakpoints)
+    .mapKeys( (value, key) => `min${_.upperFirst(key)}`)
+    .mapValues( (value) => ((screen_width) => screen_width <= value) )
+    .value(),
+
+  ..._.chain(base_breakpoints)
+    .mapKeys( (value, key) => `max${_.upperFirst(key)}`)
+    .mapValues( (value) => ((screen_width) => screen_width >= value-1) )
+    .value(),
+};
 
 export {
-  smallDevice,
-  mediumDevice,
-  largeDevice,
-  minSmallDevice,
-  minMediumDevice,
-  minLargeDevice,
+  breakpoints,
+  breakpoint_queries,
 };

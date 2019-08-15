@@ -59,7 +59,7 @@
 }
 
 .frow.home-cols > .fcol-md-5 {
-  @media(max-width:$largeDevice) {
+  @media(max-width:$maxLargeDevice) {
     margin-top: 5px;
   }
 
@@ -68,10 +68,10 @@
     @media(min-width:$minLargeDevice) {
       margin-top: 0px;
     }
-    @media(max-width:$largeDevice) {
+    @media(max-width:$maxLargeDevice) {
       margin-top: 35px;
     }
-    @media(max-width:$mediumDevice) {
+    @media(max-width:$maxMediumDevice) {
       margin-top: 10px;
     }
   }
@@ -80,7 +80,7 @@
     @media(min-width:$minLargeDevice) {
       margin-top: 40px;
     }
-    @media(max-width:$largeDevice) {
+    @media(max-width:$maxLargeDevice) {
       margin-top: 10px;
     }
   }
@@ -126,13 +126,13 @@ li.list-group-item--home {
   & > .frow {
     justify-content: space-between;
     
-    @media(max-width:$smallDevice) {
+    @media(max-width:$maxSmallDevice) {
       flex-direction: column;
     }
 
     & > .fcol-md-4 {
 
-      @media(max-width:$smallDevice) {
+      @media(max-width:$maxSmallDevice) {
         padding: 3% 2% 3% 2%;
       }
 

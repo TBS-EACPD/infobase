@@ -1,4 +1,5 @@
 import graphRegistry from './graphRegistry.js';
+import { breakpoint_queries } from '../core/breakpoint_defs.js';
 
 export class TwoSeriesBar {
   constructor(container, options) {
@@ -17,9 +18,9 @@ export class TwoSeriesBar {
   }
 
   render(options) {
-    const mobile = window.innerWidth < 991;
+    const is_mobile = breakpoint_queries.minMediumDevice(window.innerWidth);
     this.options = _.extend(this.options, options);
-    if (mobile) {
+    if (is_mobile) {
       this.margin = this.options.margin || {
         top: 60,
         right: 20,
@@ -268,18 +269,18 @@ export class TwoSeriesBar {
         "left": d => x0(d) + this.margin.left + "px",
         "cursor": this.options.has_callback ? "pointer" : "default",
         "width": x0.bandwidth() + "px",
-        "height": mobile ? '90px' : '65px',
-        "overflow-y": mobile ? "scroll" : "hidden",
+        "height": is_mobile ? '90px' : '65px',
+        "overflow-y": is_mobile ? "scroll" : "hidden",
       })
       .append("a")
       .attr("tabindex", 0)
       .styles({
         'display': 'inline-block',
-        'line-height': mobile ? '100%' : 'normal',
-        'position': mobile ? 'absolute': 'relative',
-        'top': mobile ? '50%' : null,
-        'left': mobile ? '50%' : null,
-        "transform": mobile ? 'translateX(-50%) translateY(-50%) rotate(-90deg)' : `translateX(0%) translateY(0%) rotate(${x_axis_rotate})`,    
+        'line-height': is_mobile ? '100%' : 'normal',
+        'position': is_mobile ? 'absolute': 'relative',
+        'top': is_mobile ? '50%' : null,
+        'left': is_mobile ? '50%' : null,
+        "transform": is_mobile ? 'translateX(-50%) translateY(-50%) rotate(-90deg)' : `translateX(0%) translateY(0%) rotate(${x_axis_rotate})`,    
       })
       .on("click", d => {
         this.dispatch.call("dataClick", "render", d),

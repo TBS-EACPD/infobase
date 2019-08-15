@@ -69,10 +69,8 @@
       justify-content: center;
     }
   }
-  
-  .displayTable__items { }
 
-  @media(max-width:$mediumDevice){
+  @media(max-width:$maxMediumDevice){
     .displayTable__items {
       display: flex;
       flex-direction: column;

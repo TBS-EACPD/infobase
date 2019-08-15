@@ -9,7 +9,7 @@
   align-items: baseline;
   justify-content: space-between;
 
-  @media (max-width: $smallDevice) {
+  @media (max-width: $maxSmallDevice) {
     flex-direction: column;
   }
 
@@ -23,7 +23,7 @@
       max-width: 50%;
       min-width: 390px;
     }
-    @media (max-width: $smallDevice) {
+    @media (max-width: $maxSmallDevice) {
       min-width: 100%;
     }
 

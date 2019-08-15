@@ -68,7 +68,7 @@ div.ordinal {
   margin-left: auto;
   min-width: 150px;
   align-self: center;
-  @media (max-width:$smallDevice) {
+  @media (max-width:$maxSmallDevice) {
     max-width: 150px;
   }
 }

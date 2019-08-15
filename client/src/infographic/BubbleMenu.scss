@@ -91,7 +91,7 @@
 }
 
 
-@media (max-width: $mediumDevice){
+@media (max-width: $maxMediumDevice){
   .bubble-menu {
     display: flex;
     flex-direction: column;
