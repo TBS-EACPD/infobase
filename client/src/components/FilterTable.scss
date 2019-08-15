@@ -31,7 +31,7 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   height: 40px;
   width: 40px;
 
-  @media(max-width: $maxMediumDevice) and (min-width: $maxSmallDevice){
+  @media(max-width: $maxMediumDevice) and (min-width: $minSmallDevice){
     left: -57px;
   }
 }
