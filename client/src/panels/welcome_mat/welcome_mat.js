@@ -425,10 +425,10 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane key="c" size={20}>
-            <MobileOrA11YContent children={spending_auths_are} />
             {
               spend_plan_1 ? 
               <Fragment>
+                <MobileOrA11YContent children={spending_auths_are} />
                 <PaneItem textSize="small">
                   <TM k="spending_authorities_are" />
                 </PaneItem>
