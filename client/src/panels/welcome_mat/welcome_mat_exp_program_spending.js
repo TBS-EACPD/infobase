@@ -38,11 +38,16 @@ export const format_and_get_exp_program_spending = (type, subject) => {
   const { exp, progSpending } = calculate(type, subject);
   const raw_data = _.concat(exp, progSpending);
 
+  const exp_exists = exp && 0 != _.reduce(exp, (exp_sum, value) => 
+    exp_sum + value, 0);
+  const program_spending_exists = progSpending && 0 != _.reduce(progSpending, (progSpending_sum, value) => 
+    progSpending_sum + value, 0);
+  const both_exists = exp_exists && program_spending_exists;
+
   const series_labels = [
-    exp ? text_maker("expenditures") : null,
-    progSpending ? text_maker("planned_spending") : null,
+    exp_exists ? text_maker("expenditures") : null,
+    program_spending_exists ? text_maker("planned_spending") : null,
   ];
-  const both_exists = exp && progSpending;
 
   const history_ticks = _.map(std_years, run_template);
   const plan_ticks = _.map(planning_years, run_template);
@@ -64,7 +69,6 @@ export const format_and_get_exp_program_spending = (type, subject) => {
       null;
   
   const marker_year = subject.has_planned_spending ? (gap_year || _.first(plan_ticks)) : null;
-
 
   let exp_program_spending_graph;
   if(window.is_a11y_mode){
@@ -100,17 +104,17 @@ export const format_and_get_exp_program_spending = (type, subject) => {
       />
     );
   } else {
-    const zip_years_and_data = (years, data) => _.map(
-      years,
-      (year, year_ix) => {
+    const zip_years_and_data = (years, data) => _.chain(years)
+      .map( (year, year_ix) => {
         if(data){
           return {
             x: year,
             y: data[year_ix],
           };
         }
-      }
-    );
+      })
+      .filter( (row) => row && row.y > 0 )
+      .value();
     const graph_data = _.chain(series_labels)
       .zip([
         zip_years_and_data(history_ticks, exp),
@@ -127,7 +131,13 @@ export const format_and_get_exp_program_spending = (type, subject) => {
       .value();
       
     const shouldTickRender = (tick) => {
-      return tick === gap_year || tick === _.first(history_ticks) || tick === _.last(plan_ticks);
+      if(type === "hist" || type === "hist_estimates"){
+        return tick === _.first(history_ticks) || tick === _.last(history_ticks);
+      } else if(type === "planned"){
+        return tick === _.first(plan_ticks) || tick === _.last(plan_ticks);
+      } else{
+        return tick === gap_year || tick === _.first(history_ticks) || tick === _.last(plan_ticks);
+      }
     };
   
     const nivo_exp_program_spending_props = {

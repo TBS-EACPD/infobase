@@ -18,7 +18,7 @@ const {
 const { text_maker } = create_text_maker_component(text);
 const { std_years, planning_years } = years;
 
-export const format_and_get_fte = (info, subject) => {
+export const format_and_get_fte = (type, info, subject) => {
   const colors = d3.scaleOrdinal().range(newIBCategoryColors);
   const series_labels = [text_maker("actual_ftes"), text_maker("planned_ftes")];
   const history_ticks = _.map(std_years, run_template);
@@ -127,9 +127,15 @@ export const format_and_get_fte = (info, subject) => {
       .value();
 
     const shouldTickRender = (tick) => {
-      return tick === gap_year || tick === _.first(history_ticks) || tick === _.last(plan_ticks);
+      if(type === "hist" || type === "hist_estimates"){
+        return tick === _.first(history_ticks) || tick === _.last(history_ticks);
+      } else if(type === "planned"){
+        return tick === _.first(plan_ticks) || tick === _.last(plan_ticks);
+      } else{
+        return tick === gap_year || tick === _.first(history_ticks) || tick === _.last(plan_ticks);
+      }
     };
-    
+      
     const nivo_fte_props = {
       data: graph_data,
       raw_data: raw_data,
