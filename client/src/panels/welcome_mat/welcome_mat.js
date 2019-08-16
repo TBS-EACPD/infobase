@@ -19,7 +19,7 @@ import { format_and_get_fte } from "./welcome_mat_fte.js";
 
 const { Format } = util_components;
 
-const {std_years, planning_years} = years;
+const { std_years, planning_years } = years;
 const exp_cols = _.map(std_years, yr => `${yr}exp`);
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -165,7 +165,7 @@ const WelcomeMat = (props) => {
   // const no_hist_ftes = <TM k="no_historical_fte__new" />;
   const spending_auths_are = <TM k="spending_authorities_are" />;
 
-  const fte_graph = format_and_get_fte(info, subject);
+  const fte_graph = format_and_get_fte(type, info, subject);
   const exp_program_spending_graph = format_and_get_exp_program_spending(type, subject);
 
   if(type==="hist"){
@@ -202,7 +202,7 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="small">
               <TM k="spending_was__new" />
             </PaneItem>
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <SpendFormat amt={spend_last_year_5} />
             </PaneItem>
           </Pane>,
@@ -212,7 +212,7 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="small">
               <TM k="spending_change_was__new" args={{hist_change: hist_spend_diff}}/>
             </PaneItem>
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <SpendFormat amt={spend_last_year} />
             </PaneItem>
           </Pane>,
@@ -224,7 +224,7 @@ const WelcomeMat = (props) => {
         fte_row={ fte_graph && [
           <Pane key="a" size={20}>
             <MobileOrA11YContent children={five_years_ago} />
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <FteFormat amt={fte_last_year_5} />
             </PaneItem>
             <PaneItem textSize="small">
@@ -237,7 +237,7 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="small">
               <TM k="fte_change_was__new" args={{hist_change: hist_fte_diff}}/>
             </PaneItem>
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <FteFormat amt={fte_last_year} />
             </PaneItem>
           </Pane>,
@@ -284,7 +284,7 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="small">
               <TM k="spending_will_be_1__new"/>
             </PaneItem>
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <SpendFormat amt={spend_plan_1} />
             </PaneItem>
           </Pane>,
@@ -294,7 +294,7 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="small">
               <TM k="spending_change_will__new" args={{plan_change: planned_spend_diff}} />
             </PaneItem>
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <SpendFormat amt={spend_plan_3} />
             </PaneItem>
           </Pane>,
@@ -306,7 +306,7 @@ const WelcomeMat = (props) => {
         fte_row={fte_graph && [
           <Pane key="a" size={20}>
             <MobileOrA11YContent children={in_this_year} />
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <FteFormat amt={fte_plan_1} />
             </PaneItem>
             <PaneItem textSize="small">
@@ -319,7 +319,7 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="small">
               <TM k="fte_change_will__new" args={{plan_change: planned_fte_diff}} />
             </PaneItem>
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <FteFormat amt={fte_plan_3} />
             </PaneItem>
           </Pane>,
@@ -363,7 +363,7 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="small">
               <TM k="spending_authorities_are" />
             </PaneItem>
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <SpendFormat amt={spend_plan_1} />
             </PaneItem>
           </Pane>,
@@ -409,7 +409,7 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="small">
               <TM k="spending_was__new" />
             </PaneItem>
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <SpendFormat amt={spend_last_year_5} />
             </PaneItem>
           </Pane>,
@@ -419,7 +419,7 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="small">
               <TM k="spending_change_was__new" args={{hist_change: hist_spend_diff}}/>
             </PaneItem>
-            <PaneItem textSize="large">
+            <PaneItem textSize="medium">
               <SpendFormat amt={spend_last_year} />
             </PaneItem>
           </Pane>,
@@ -432,7 +432,7 @@ const WelcomeMat = (props) => {
                 <PaneItem textSize="small">
                   <TM k="spending_authorities_are" />
                 </PaneItem>
-                <PaneItem textSize="large">
+                <PaneItem textSize="medium">
                   <SpendFormat amt={spend_plan_1} />
                 </PaneItem>
               </Fragment> :
