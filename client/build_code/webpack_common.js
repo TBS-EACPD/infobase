@@ -105,7 +105,7 @@ function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_i
     new webpack.DefinePlugin({
       CDN_URL: JSON.stringify(CDN_URL),
       SHA: JSON.stringify(commit_sha),
-      BUILD_DATE: JSON.stringify( new Date().toISOString().replace(/T.+/, '') ),
+      BUILD_DATE: JSON.stringify( new Date().toLocaleString("en-CA", {timeZone: "America/Toronto"}).replace(/,.+/, '') ),
       APPLICATION_LANGUAGE: JSON.stringify(language),
       IS_A11Y_MODE: !!a11y_client,
       IS_DEV: !IS_PROD_RELEASE,
