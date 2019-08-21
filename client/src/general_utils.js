@@ -127,14 +127,13 @@ export function completeAssign(target, ...sources) {
   return target;
 }
 
-// JSURL's use of ~'s is problematic in some cases, also saw instances in the logs of apostrophes being replaced
-// with their raw encoding and the trailing ')' being dropped. Account for these common JSURL issues.
+// JSURL's use of ~'s is problematic in some cases, use ".-.-" pattern instead. Also handle a bunch of weird JSURL issues seen in logs
 const make_jsurl_safe = (jsurl_string) => _.replace(jsurl_string, /~/g, ".-.-");
 const pre_parse_safe_jsurl = (safe_jsurl_string) => !_.isEmpty(safe_jsurl_string) &&
   _.chain(safe_jsurl_string)
     .replace(/.-.-/g, "~")
-    .replace(/~&#39;/g, "~'")
-    .thru( (jsurl_string) => /\)$/.test(jsurl_string) ? jsurl_string : `${jsurl_string})`)
+    .replace(/~(&#39;|%E2%80%98|‘)/g, "~'") // seen apostrophes replaced by their raw encoding and even by single quotation marks, possibly formatting applied by email programs etc.
+    .thru( (jsurl_string) => /\)$/.test(jsurl_string) ? jsurl_string : `${jsurl_string})` ) // closing paren often dropped for some reason, again might be url detection in email clients
     .value();
 export const SafeJSURL = {
   parse: (safe_jsurl_string) => JSURL.parse( pre_parse_safe_jsurl(safe_jsurl_string) ),
