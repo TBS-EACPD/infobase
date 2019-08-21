@@ -130,6 +130,8 @@ jobs:
         <<: *gcloud_auth
     working_directory: "~/InfoBase"
     steps:
+      - checkout:
+          path: "~/InfoBase"
       - run: chmod +x ./scripts/ci_scripts/chmod_scripts.sh
       - run: ./scripts/ci_scripts/chmod_scripts.sh
       - run: ./scripts/ci_scripts/clean_up_dev_dbs.sh
