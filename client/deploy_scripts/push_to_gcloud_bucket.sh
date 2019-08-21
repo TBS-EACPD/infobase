@@ -3,7 +3,7 @@
 
 set -e # will exit if any command has non-zero exit value
 
-source ../ci_scripts/redact_env_vars_from_logging.sh "redact-start"
+source ../scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-start"
 
 # Prefering parallel processes over parallel threads, as per docs on usage of -j (bottle-necks on some un-thredable Python)
 # also set super short cache max-age values on everything, so we don't get stale content stuck in GCloud edge caches
@@ -16,4 +16,4 @@ gsutil -o "GSUtil:parallel_process_count=8" -o "GSUtil:parallel_thread_count=1" 
 gsutil setmeta -h "Cache-Control:no-cache" $GCLOUD_BUCKET_URL/index-*.html
 gsutil setmeta -h "Cache-Control:no-cache" $GCLOUD_BUCKET_URL/app/a*-[ef][nr].min.js
 
-source ../ci_scripts/redact_env_vars_from_logging.sh "redact-end"
+source ../scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-end"

@@ -3,8 +3,12 @@
   "private": true,
   "description": "",
   "scripts": {
-    "prod_deploy": "sh prod_scripts/prod_deploy.sh",
-    "prod_rollback": "sh prod_scripts/prod_rollback.sh",
+    "prod_deploy": "sh scripts/prod_scripts/prod_deploy.sh",
+    "prod_rollback": "sh scripts/prod_scripts/prod_rollback.sh",
+
+    "init_hooks": "sh scripts/dev_scripts/init_hooks.sh",
+    "infobase_tmux_init": "sh scripts/dev_scripts/infobase_tmux_init.sh",
+
     "refresh_pipeline_data": "(repo_path=$(pwd); cd ../pipeline && git checkout master && git pull origin master && cp -f outputs/Infobase/* $repo_path/data)"
   },
   "authors": [
