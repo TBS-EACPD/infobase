@@ -23,9 +23,9 @@ jobs:
     steps:
       - checkout:
           path: "~/InfoBase"
-      - run: chmod +x ./ci_scripts/chmod_scripts.sh
-      - run: ./ci_scripts/chmod_scripts.sh
-      - run: ./ci_scripts/create_envs.sh
+      - run: chmod +x ./scripts/ci_scripts/chmod_scripts.sh
+      - run: ./scripts/ci_scripts/chmod_scripts.sh
+      - run: ./scripts/ci_scripts/create_envs.sh
 
       - restore_cache:
           keys:
@@ -73,7 +73,7 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - ./ci_scripts
+            - ./scripts/ci_scripts
 
             - ./data
             - ./test-data
@@ -132,7 +132,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - run: ./ci_scripts/create_envs.sh
+      - run: ./scripts/ci_scripts/create_envs.sh
 
       - run: 
           name: mongod
@@ -165,8 +165,8 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - run: ./ci_scripts/create_envs.sh
-      - run: ./ci_scripts/create_deploy_envs.sh
+      - run: ./scripts/ci_scripts/create_envs.sh
+      - run: ./scripts/ci_scripts/create_deploy_envs.sh
 
       # Checksum all files in data dir, used to determine if the database needs to be populated
       - run: cksum ./data/* > data-checksums.txt
@@ -193,10 +193,10 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - run: ./ci_scripts/create_envs.sh
-      - run: ./ci_scripts/create_deploy_envs.sh
+      - run: ./scripts/ci_scripts/create_envs.sh
+      - run: ./scripts/ci_scripts/create_deploy_envs.sh
 
-      - run: ./ci_scripts/authenticate-server-gcloud.sh
+      - run: ./scripts/ci_scripts/authenticate-server-gcloud.sh
 
       # Checksum all JS files in transpiled_build, used to determine if the function needs to be redeployed
       - run: find ./server/transpiled_build -name "*.js" | xargs cksum > server-checksums.txt
@@ -223,8 +223,8 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - run: ./ci_scripts/create_envs.sh
-      - run: ./ci_scripts/authenticate-client-gcloud.sh
+      - run: ./scripts/ci_scripts/create_envs.sh
+      - run: ./scripts/ci_scripts/authenticate-client-gcloud.sh
       - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH/graphql#g" ./client/build/InfoBase/app/*.js # Replace Replace CI API URL placeholder with branch specific API URL
       - run: (cd client && ./deploy_scripts/push_to_gcloud_bucket.sh)
 
