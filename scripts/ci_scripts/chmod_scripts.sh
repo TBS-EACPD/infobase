@@ -8,8 +8,8 @@ chmod +x scripts/ci_scripts/deploy_server.sh
 chmod +x scripts/ci_scripts/redact_env_vars_from_logging.sh.sh
 
 # Client scripts
-chmod +x scripts/client/deploy_scripts/build_all.sh
-chmod +x scripts/client/deploy_scripts/push_to_gcloud_bucket.sh
+chmod +x client/deploy_scripts/build_all.sh
+chmod +x client/deploy_scripts/push_to_gcloud_bucket.sh
 
 # Server scripts
-chmod +x scripts/server/deploy_scripts/ci_deploy_function.sh
+chmod +x server/deploy_scripts/ci_deploy_function.sh
