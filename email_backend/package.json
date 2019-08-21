@@ -35,7 +35,8 @@
     "prestart": "npm run build",
     "start": "nodemon --watch src --watch package-lock.json --watch templates -e js,json --exec babel-node transpiled_build/index.js",
     "debug": "nodemon --watch src --watch package-lock.json --watch templates -e js.json --exec babel-node --inspect-brk src/index.js",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "prod_deploy": "sh deploy_scripts/prod_deploy_email_backend_function.sh"
   },
   "authors": [
     "Stephen O'Neil"
