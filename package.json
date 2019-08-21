@@ -9,7 +9,7 @@
     "init_hooks": "sh scripts/dev_scripts/init_hooks.sh",
     "infobase_tmux_init": "sh scripts/dev_scripts/infobase_tmux_init.sh",
 
-    "refresh_pipeline_data": "(repo_path=$(pwd); cd ../pipeline && git checkout master && git pull origin master && cp -f outputs/Infobase/* $repo_path/data)"
+    "refresh_pipeline_data": "sh scripts/dev_scripts/refresh_pipeline_data.sh"
   },
   "authors": [
     "Alex Cousineau-Leduc",

@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# Deploy the current server and client in to production. Requires the LastPass CLI.
+
 set -e # will exit if any command has non-zero exit value
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
