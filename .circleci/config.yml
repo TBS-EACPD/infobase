@@ -124,9 +124,9 @@ jobs:
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
-  clean_up_dev_dbs:
+  cleanup_dev_dbs:
     docker:
-      - image: gcr.io/ib-static-content/ib-client-ci-build:latest
+      - image: gcr.io/ib-static-content/ib-client-ci-test:latest
         <<: *gcloud_auth
     working_directory: "~/InfoBase"
     steps:
@@ -134,7 +134,7 @@ jobs:
           path: "~/InfoBase"
       - run: chmod +x ./scripts/ci_scripts/chmod_scripts.sh
       - run: ./scripts/ci_scripts/chmod_scripts.sh
-      - run: ./scripts/ci_scripts/clean_up_dev_dbs.sh
+      - run: ./scripts/ci_scripts/cleanup_dev_dbs.sh
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
@@ -251,7 +251,7 @@ workflows:
     jobs:
       - build
       - test_email_backend
-      - clean_up_dev_dbs
+      - cleanup_dev_dbs
       - test:
           requires:
             - build
