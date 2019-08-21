@@ -17,7 +17,7 @@ const get_prod_auth = async () => {
   );
   oauth2Client.setCredentials({refresh_token});
 
-  const tokens = await oauth2Client.refreshAccessToken();
+  const accessToken = await oauth2Client.getAccessToken();
 
   return {
     type: "OAuth2",
@@ -25,7 +25,7 @@ const get_prod_auth = async () => {
     clientId: client_id,
     clientSecret: client_secret,
     refreshToken: refresh_token,
-    accessToken: tokens.credentials.access_token,
+    accessToken,
   };
 };
 
