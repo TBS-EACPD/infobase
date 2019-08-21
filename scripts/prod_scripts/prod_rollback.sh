@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# Rolls back the currently deployed client (effectively rolling back the server google cloud function as well.
+# Only one roll back version, the version deployed prior to the current, is available at any given time.
+# On rollback, the current deployed version becomes the new rollback version.
+# Requires the LastPass CLI.
+
 set -e # will exit if any command has non-zero exit value
 
 # Functions don't die automatically, and the previous db and bucket deploys are available for rollback

@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Start a tmux session and runs all client and server project dev build and serve scripts.
+# End result is 7 tmux panes, one for working and 6 running various watching dev scripts.
+# If an IB tmux session already exists, just connects to it instead.
+# Requires tmux.
+
 existing_IB_session=$(tmux list-sessions 2> /dev/null | grep -oh ^IB-[0-9] | head -1)
 
 cd $HOME/*/infobase || cd $HOME/*/InfoBase
