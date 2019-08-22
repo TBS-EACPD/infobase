@@ -10,7 +10,8 @@ if (all_dev_db_names.length === 0){
 } else {
   for (i=0; i < all_dev_db_names.length; i++){
     const db_name = all_dev_db_names[i].name;
-    if ( !dbs_to_retain.includes(db_name) ){
+    // Double underscore branch names are exempt from automatic clean up
+    if ( !dbs_to_retain.includes(db_name) && !/^__/.test(db_name) ){
       print(`Droping stale dev DB "${db_name}"`);
       db.getSiblingDB(db_name).dropDatabase();
     }
