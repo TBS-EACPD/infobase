@@ -107,7 +107,6 @@ const get_dept_panels = subject => ({
   intro: [
     'igoc_fields',
     'portfolio_structure_intro',
-    'igoc_links',
   ],
   financial: _.includes(subject.tables, 'programSpending') && [
     "financial_intro",

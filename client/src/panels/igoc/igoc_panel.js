@@ -7,7 +7,6 @@ import {
 } from '../shared';
 
 const {
-  UnlabeledTombstone,
   LabeledTombstone,
   ExternalLink,
 } = util_components;
@@ -33,6 +32,7 @@ new PanelGraph({
         ["incorp_yr", subject.incorp_yr],
         ["type", subject.type],
         ["website", !subject.is_dead && subject.website_url && <ExternalLink href={`https://${subject.website_url}`} display={subject.website_url} />],
+        ["eval_links", !subject.is_dead && subject.eval_url && <ExternalLink href={`https://${subject.eval_url}`} display={subject.eval_url} />],
         ["minister", !_.isEmpty(subject.minister) && _.chain(subject.minister).flatMap( (minister, ix) => [minister, <br key={ix} />]).dropRight().value()],
         ["mandate", subject.mandate && <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.mandate)}/>],
         ["legislation", subject.legislation && <ExternalLink href={`https://google.com/search?q=${encodeURI(subject.legislation)}`} display={subject.legislation} />],
@@ -61,51 +61,6 @@ new PanelGraph({
     return (
       <TextPanel title={trivial_text_maker("org_profile")}>
         <LabeledTombstone labels_and_items={labels_and_items} />
-      </TextPanel>
-    );
-  },
-});
-
-
-new PanelGraph({
-  level: 'dept',
-  key: "igoc_links",
-  calculate(subject){
-    if(subject.status !== 'Active'){
-      return false;
-    }
-    return _.chain(subject)
-      .pick([
-        'eval_url',
-        'qfr_url',
-        'dp_url',
-      ])
-      .values()
-      .some(url => _.nonEmpty(url))
-      .value();
-  },
-
-  render({calculations}){
-    const { subject } = calculations;
-
-    const links = _.filter(
-      [
-        subject.dp_url && <ExternalLink href={subject.dp_url} display={trivial_text_maker("rpp_links")} />,
-        subject.dp_url && <ExternalLink href={trivial_text_maker("drr_global_link")} display={trivial_text_maker("drr_links")} />,
-        subject.eval_url && <ExternalLink href={subject.eval_url} display={trivial_text_maker("eval_links")} />,
-        subject.qfr_url && <ExternalLink href={subject.qfr_url} display={trivial_text_maker("qfr_links")} />,
-      ]
-    );
-
-    return (
-      <TextPanel
-        title={trivial_text_maker("org_links")}
-      >
-        <div className='col-sm-12' style={{margin: '0px'}}>
-          <div>
-            <UnlabeledTombstone items={links} />
-          </div>
-        </div>
       </TextPanel>
     );
   },
