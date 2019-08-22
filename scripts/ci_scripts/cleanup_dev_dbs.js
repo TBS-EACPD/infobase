@@ -1,4 +1,4 @@
-const active_db_names = active_branches.replace(/^origin\//g, "").replace(/\norigin\//g, ",").split(",");
+const active_db_names = active_branches.replace(/origin\//g, "").split(" ");
 
 print(active_branches);
 

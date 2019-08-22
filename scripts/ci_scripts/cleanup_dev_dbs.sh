@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-active_branches=(git branch -r)
+active_branches=$(git branch -r)
 
 echo "Starting dev link MongoDB cleanup..."
 
