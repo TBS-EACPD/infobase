@@ -8,29 +8,42 @@ export class StatelessModal extends React.Component {
     super(props);
 
     this.onBlur = this.onBlur.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
-
+  closeModal(){
+    this.auto_close_timeout && clearTimeout(this.auto_close_timeout);
+    this.props.on_close_callback();
+  }
   onBlur(e){
-    var currentTarget = e.currentTarget;
+    const currentTarget = e.currentTarget;
     setTimeout(() => {
       if (!currentTarget.contains(document.activeElement)) {
-        this.props.on_close_callback();
+        this.closeModal();
       }
     }, 0);
   }
+  componentWillUnmount(){
+    this.closeModal();
+  }
+  componentDidUpdate(){
+    const { auto_close_time } = this.props;
 
+    if ( _.isNumber(auto_close_time) ){
+      this.auto_close_timeout = setTimeout(this.closeModal, auto_close_time);
+    }
+  }
   render(){
     const {
       show,
-      on_close_callback,
       title,
       subtitle,
       body,
       close_text,
+      auto_close_time
     } = this.props;
 
     return (
-      <Modal show={show} onHide={on_close_callback}>
+      <Modal show={show} onHide={this.closeModal}>
         <div onBlur={this.onBlur}>
           <Modal.Header>
             {title && <Modal.Title style={{fontSize: '130%'}}>{title}</Modal.Title>}
@@ -42,9 +55,11 @@ export class StatelessModal extends React.Component {
           </Modal.Body>
 
           <Modal.Footer>
-            <button className="btn btn-ib-primary" onClick={on_close_callback}>{close_text}</button>
+            <button className="btn btn-ib-primary" onClick={this.closeModal}>
+              {close_text}
+            </button>
           </Modal.Footer>
-          <div tabIndex='0' onFocus={on_close_callback} />
+          <div tabIndex='0' onFocus={this.closeModal} />
         </div>
       </Modal>
     );
