@@ -199,7 +199,7 @@ class Goco extends React.Component {
         />
       </div>
       { child_graph &&
-          <div style={{height: 500}}>
+          <div style={{height: 300, paddingBottom: 30}}>
             { child_graph }
           </div>
       }
