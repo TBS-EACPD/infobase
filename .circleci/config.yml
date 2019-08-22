@@ -134,7 +134,22 @@ jobs:
           path: "~/InfoBase"
       - run: chmod +x ./scripts/ci_scripts/chmod_scripts.sh
       - run: ./scripts/ci_scripts/chmod_scripts.sh
-      - run: ./scripts/ci_scripts/cleanup_dev_dbs.sh
+
+      - run:
+          command: git branch -r > ./active-branches.txt
+
+      # Use checksum of branch list to tell if the dev DBs need to be cleaned up
+      - restore_cache:
+          keys:
+            - ib-dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}
+      - run:
+          command: |
+            [ -f "./ib-dev-dbs-clean-for-these-branches.txt" ] || (./scripts/ci_scripts/cleanup_dev_dbs.sh)
+      - run: touch ./ib-dev-dbs-clean-for-these-branches.txt
+      - save_cache:
+          paths:
+            - ./ib-dev-dbs-clean-for-these-branches.txt
+          key: ib-dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
