@@ -301,7 +301,6 @@ export const ExplorerNode = ({
         <TransitionGroup component={FirstChild}>
           { isExpanded && 
             <AccordionEnterExit
-              component="div"
               expandDuration={500}
               collapseDuration={300}
             >
@@ -316,7 +315,6 @@ export const ExplorerNode = ({
     <TransitionGroup component={FirstChild}>
       { isExpanded && 
         <AccordionEnterExit
-          component="div"
           expandDuration={500}
           collapseDuration={300}
         >
