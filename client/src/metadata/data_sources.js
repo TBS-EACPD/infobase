@@ -146,6 +146,7 @@ const sources = _.mapValues({
       ).concat([{
         id: 'dp_results',
         text: tm("dp_results_item_name"),
+        inline_link: "#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_dp)",
       }]);
     },
   },
@@ -165,6 +166,7 @@ const sources = _.mapValues({
       ).concat([{
         id: 'drr_results',
         text: tm("drr_results_item_name"),
+        inline_link: "#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_drr)",
       }]);
     },
   }, 
