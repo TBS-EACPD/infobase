@@ -1,5 +1,5 @@
 import './Accordions.scss';
-import { TransitionGroup } from 'react-transition-group';
+import { TransitionGroup, Transition } from 'react-transition-group';
 import { get_static_url } from '../request_utils.js';
 
 function FirstChild(props) {
@@ -9,11 +9,16 @@ function FirstChild(props) {
 
 const defaultMaxHeight = "300px";
 class AccordionEnterExit extends React.Component {
-  componentWillLeave(done){
-    const node = ReactDOM.findDOMNode(this);
+  constructor(){
+    super();
+
+    this.onExiting = this.onExiting.bind(this);
+    this.onEntering = this.onEntering.bind(this);
+  }
+  onExiting(component){
+    const node = ReactDOM.findDOMNode(component);
     const initialHeight = node.offsetHeight;
-    const that = this;
-  
+
     d3.select(node)
       .style('opacity', 1 )
       .style('max-height', initialHeight+'px')
@@ -21,17 +26,11 @@ class AccordionEnterExit extends React.Component {
       .ease(d3.easeLinear)
       .duration(this.props.collapseDuration)
       .style('opacity', 1e-6 )
-      .style('max-height', '1px')
-      .on('end',function(){
-        if(!that.props.cancel && document.body.contains(node)){
-          done();
-        }
-      });
-
+      .style('max-height', '1px');
   }
-  componentWillEnter(done){
-    const node = ReactDOM.findDOMNode(this);
-    const that = this;
+  onEntering(component){
+    const node = ReactDOM.findDOMNode(component);
+
     d3.select(node)
       .style('max-height', "0px")
       .style('opacity', 1e-6)
@@ -41,15 +40,43 @@ class AccordionEnterExit extends React.Component {
       .style( 'max-height', this.props.maxHeight || defaultMaxHeight )
       .style('opacity', '1')
       .on('end',function(){
-        d3.select(node).style('max-height', 'none' );
-        if(!that.props.cancel && document.body.contains(node)){
-          done();
-        }
+        d3.select(node).style('max-height', 'none');
       });
-
   }
   render(){
-    return <this.props.component {...(_.omit(this.props, ['component', 'expandDuration', 'expandDuration', 'collapseDuration', 'cancel']))} />;
+    const {
+      expandDuration,
+      collapseDuration,
+      onExited,
+      enter,
+      exit,
+      in: in_prop,
+
+      className,
+      style,
+      children,
+    } = this.props;
+
+    return (
+      <Transition
+        {...{
+          timeout: { enter: expandDuration, exit: collapseDuration },
+          onExited,
+          enter,
+          exit,
+          in: in_prop,
+        }}
+        onEntering={this.onEntering}
+        onExiting={this.onExiting}
+      >
+        <div 
+          className={className}
+          style={style}
+        >
+          {children}
+        </div>
+      </Transition>
+    );
   }
 }
 
@@ -60,9 +87,8 @@ const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) =
       { title }
     </div> 
     <TransitionGroup component={FirstChild}>
-      { isExpanded && 
+      { isExpanded &&
         <AccordionEnterExit
-          component="div"
           className="pull-down-accordion-body"
           style={{paddingTop: "5px"}}
           expandDuration={600}
@@ -87,7 +113,6 @@ const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) =
             }} 
           />
         </span>
-
       </button>
     </div> 
   </div>
