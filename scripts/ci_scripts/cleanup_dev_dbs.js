@@ -8,8 +8,8 @@ const all_dev_db_names = db.adminCommand( { listDatabases: 1, nameOnly: true} ).
 
 for (i=0; i < all_dev_db_names.length; i++){
   const db_name = all_dev_db_names[i].name;
+  print(db_name);
   if ( !active_db_names.includes(db_name) ){
-    print(db_name);
     //db.getSiblingDB(db_name).dropDatabase();
   }
 }
