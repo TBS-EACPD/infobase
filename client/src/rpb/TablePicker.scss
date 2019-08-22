@@ -145,13 +145,13 @@
     padding-left: 6px;
     padding-right: 6px;
   }
-  .item-cloud-col > div {
+  .item-cloud-col > div > div {
     margin: 10px 0;
   }
 }
 
 @media (max-width: $maxMediumDevice) { 
-  .item-cloud-col > div {
+  .item-cloud-col > div > div {
     margin: 10px;
   }
 }
@@ -265,13 +265,13 @@
   transition: max-height 500ms ease-in, opacity 500ms ease-in;
 }
 
-.transi-height-leave {
+.transi-height-exit {
   max-height: 500px;
   opacity: 1;
   transition: max-height 500ms ease-in, opacity 500ms ease-in;
 }
 
-.transi-height-leave-active {
+.transi-height-exit-active {
   max-height: 1px;
   opacity: 0.01;
   transition: max-height 500ms ease-out, opacity 500ms ease-out;

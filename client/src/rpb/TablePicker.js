@@ -1,10 +1,10 @@
-import './table_picker.scss';
+import './TablePicker.scss';
 import '../components/LabeledBox.scss';
 import { Table } from '../core/TableClass.js';
 import { 
   GlossaryEntry,
 } from '../models/glossary.js';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import classNames from 'classnames';
 import { 
   categories,
@@ -210,10 +210,22 @@ class TaggedItemCloud extends React.Component {
       </div>
     ));
 
+    const item_column_count = 3;
     const items_split = _.chain(flat_items)
       .map( (item,ix) => ({item,ix}) )
-      .groupBy( ({item,ix})=> ix%3 )
+      .groupBy( ({item,ix})=> ix%item_column_count )
       .map( group => _.map(group, 'item') )
+      // placeholder groups containing empty divs added so that exiting groups' columns will transition out
+      .thru( (item_split) => _.chain()
+        .range(item_column_count)
+        .fill([<div key="placeholder" />])
+        .map( 
+          (placeholder_group, group_index) => group_index >= item_split.length ? 
+            placeholder_group :
+            item_split[group_index]
+        )
+        .value()
+      )
       .value();
     
 
@@ -280,33 +292,29 @@ class TaggedItemCloud extends React.Component {
         </div> :
         <div>
           <div className="row item-cloud-row">
-            <CSSTransitionGroup 
-              className="col-md-4 item-cloud-col" 
-              component="div"
-              transitionName="transi-height"
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={500}
-            >
-              {items_split[0]}
-            </CSSTransitionGroup>
-            <CSSTransitionGroup 
-              className="col-md-4 item-cloud-col"
-              component="div"
-              transitionName="transi-height"
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={500}
-            >
-              {items_split[1]}
-            </CSSTransitionGroup>
-            <CSSTransitionGroup 
-              className="col-md-4 item-cloud-col"
-              component="div"
-              transitionName="transi-height"
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={500}
-            >
-              {items_split[2]}
-            </CSSTransitionGroup>
+            { _.map(
+              items_split,
+              (item_group, group_index) => (
+                <div key={group_index} className="col-md-4 item-cloud-col">
+                  <TransitionGroup>
+                    { _.map(
+                      item_group,
+                      (item, item_index) => (
+                        <CSSTransition
+                          key={item_index}
+                          classNames="transi-height"
+                          timeout={500}
+                        >
+                          <div>
+                            {item}
+                          </div>
+                        </CSSTransition>
+                      )
+                    )}
+                  </TransitionGroup>
+                </div>
+              )
+            )}
             <div className="clearfix" />
           </div>
         </div>
