@@ -1,4 +1,4 @@
-const active_db_names = active_branches.replace(/^[ ]?origin\//g, "").replace(/\n[ ]?origin\//g, ",").split(",");
+const active_db_names = active_branches.replace(/^[ ]*origin\//g, "").replace(/\n[ ]*origin\//g, ",").split(",");
 
 const all_dev_db_names = db.adminCommand( { listDatabases: 1, nameOnly: true} ).databases;
 
