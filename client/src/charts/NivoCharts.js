@@ -185,6 +185,7 @@ export class NivoResponsiveBar extends React.Component{
       remove_bottom_axis,
       remove_left_axis,
       enableLabel,
+      label,
       is_money,
       legends,
       tick_value,
@@ -199,6 +200,10 @@ export class NivoResponsiveBar extends React.Component{
       enableGridX,
       groupMode,
       enableGridY,
+      onMouseEnter,
+      onMouseLeave,
+      onClick,
+      padding,
     } = this.props;
 
     return (
@@ -219,7 +224,12 @@ export class NivoResponsiveBar extends React.Component{
           isInteractive,
           motion_damping,
           motion_stiffness,
-          bttm_axis,
+          onMouseEnter,
+          onMouseLeave,
+          onClick,
+          padding,
+          tooltip,
+          label,
         }}
         keys = {_.union([''],keys)}
         labelFormat={_.isUndefined(label_format) ? null : label_format}
@@ -236,16 +246,15 @@ export class NivoResponsiveBar extends React.Component{
               ...(left_axis || {}),
             }
         }
-        padding={0.3}
         borderColor="inherit:darker(1.6)"
-        labelTextColor="inherit:darker(1.6)"
+        labelTextColor="inherit:darker(2)"
       />
     );
   }
 };
 NivoResponsiveBar.defaultProps = {
   ...general_default_props,
-
+  padding: 0.3,
   bttm_axis: {
     tickSize: 7,
     tickPadding: 10,

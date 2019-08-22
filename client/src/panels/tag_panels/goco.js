@@ -1,5 +1,5 @@
 import text from "./goco.yaml";
-
+import { Fragment } from 'react';
 import {
   create_text_maker_component,
   declare_panel,
@@ -10,10 +10,9 @@ import {
   Panel,
   Table,
   newIBCategoryColors,
-  TwoSeriesBar,
+  NivoResponsiveBar,
+  TspanLineWrapper,
 } from '../shared.js';
-
-import { reactAdapter } from '../../core/reactAdapter';
 
 const { GraphLegend, A11YTable } = declarative_charts;
 const { Format } = util_components;
@@ -21,232 +20,194 @@ const { Tag } = Subject;
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const state = {active_spend_area: null};
-const title_font_size = "1.5em";
+class Goco extends React.Component {
+  constructor(props){
+    super(props);
 
-const fade_out = function(d){
-
-  this.svg.selectAll("g.tick-group")
-    .filter(dd => d !== dd)
-    .selectAll("rect")
-    .transition()
-    .duration(1000)
-    .style("fill-opacity", 0.2);
-
-  this.svg.selectAll("g.tick-group")
-    .filter(dd => d === dd)
-    .selectAll("rect")
-    .transition()
-    .duration(1000)
-    .style("fill-opacity", 1);
-
-  this.html.selectAll("div.tick")
-    .filter(dd => d !== dd)
-    .styles({
-      "opacity": 0.4,
-      "font-weight": "300",
-    });
-
-  this.html.selectAll("div.tick")
-    .filter(dd => d === dd)
-    .styles({
-      "opacity": 1,
-      "font-weight": "500",
-    });
-
-
-  this.svg.selectAll("g.tick-group")
-    .filter(dd => d !== dd)
-    .classed("tick-group-selected", false);
-
-  this.svg.selectAll("g.tick-group")
-    .filter(dd => d === dd)
-    .classed("tick-group-selected", true);
-};
-
-const highlight = function(d){
-  const goco_is_open = d3.select('.goco-diagram').selectAll("rect").data().length > 0;
-  this.svg.selectAll("g.tick-group:not(.tick-group-selected)")
-    .filter(dd => d === dd)
-    .selectAll("rect")
-    .transition()
-    .duration(10)
-    .style("fill-opacity", goco_is_open ? 1 : 0.2 ); 
-};
-
-const reset_highlight = function(d){
-  const goco_is_open = d3.select('.goco-diagram').selectAll("rect").data().length > 0;
-  this.svg.selectAll("g.tick-group:not(.tick-group-selected)")
-    .filter(dd => d === dd)
-    .selectAll("rect")
-    .transition()
-    .duration(10)
-    .style("fill-opacity", goco_is_open ? 0.2 : 1 ); 
-};
-
-
-class Goco {
-  constructor(container, history){
-    this.history = history;
-    this.container = container;
+    this.state = {
+      child_graph: false,
+      clicked_spending: false,
+      clicked_fte: false,
+    };
+  }
+  render(){
+    const { child_graph, clicked_spending, clicked_fte } = this.state;
     const programSpending = Table.lookup("programSpending");
     const programFtes = Table.lookup("programFtes");
     const spend_col = "{{pa_last_year}}exp";
     const fte_col = "{{pa_last_year}}";
-    const legend_area = this.container.select(".legend_area");
 
-    this.colors = d3.scaleOrdinal(newIBCategoryColors);
-    const that = this;
+    const fte_factor = 500000;
+    const colors = d3.scaleOrdinal().range(newIBCategoryColors);
+    const tick_map = {};
 
-    this.data = _.chain(Tag.gocos_by_spendarea)
+    const data = _.chain(Tag.gocos_by_spendarea)
       .map(sa=> {
         const children = _.map(sa.children_tags, goco => {
-          const spending = d3.sum(goco.programs, p => {
-            return programSpending.programs.get(p) ? _.first(programSpending.programs.get(p))[spend_col] : 0;
-          });
-          const ftes = d3.sum(goco.programs, p => {
-            return programFtes.programs.get(p) ? _.first(programFtes.programs.get(p))[fte_col] : 0;
-          });
+          const Spending = programSpending.q(goco).sum(spend_col);
+          const FTEs = programFtes.q(goco).sum(fte_col) * fte_factor;
+          tick_map[`${goco.name}`] = `#orgs/tag/${goco.id}/infograph`;
           return {
-            href: `#orgs/tag/${goco.id}/infograph`,
-            tick: goco.name,
-            spending,
-            ftes,
+            id: goco.name,
+            Spending,
+            FTEs,
           };
         });
-        const spending = d3.sum(children, c => c.spending);
-        const ftes = d3.sum(children, c => c.ftes);
+        const Spending = d3.sum(children, c => c.Spending);
+        const FTEs = d3.sum(children, c => c.FTEs);
         return {
-          tick: sa.name,
-          spending,
-          ftes,
+          id: sa.name,
+          Spending,
+          FTEs,
           children: _.sortBy(children, d => -d.spending),
         };
       })
       .sortBy(d => -d.spending)
       .value();
-
     
-    if(window.is_a11y_mode){
-      container.select(".graph_area").remove();
+    const format_item = (item) => item.id === text_maker("ftes") ? formats.big_int_real_raw(item.value / fte_factor)
+      : formats.compact1_raw(item.value);
 
-      const table_data = _.map(this.data, ({tick, spending, ftes}) => ({
-        label: tick,
-        /* eslint-disable react/jsx-key */
-        data: [
-          <Format type="compact1" content={spending} />,
-          <Format type="big_int_real" content={ftes} />,
-        ],
-      }));
-
-      reactAdapter.render(
-        <A11YTable
-          label_col_header={[ text_maker("spend_area")]}
-          data_col_headers={[text_maker("dp_spending"), text_maker("dp_ftes")]}
-          data={table_data}
-        />,
-        container.select(".a11y_area").node()
-      );
-      
-      return; 
-
-    } else {
-      container.select(".a11y_area").remove();
-    }
-
-    const series1 = {
-      label: text_maker("spending"), 
-      data: _.map(this.data,"spending"),
-      formatter: formats.compact1,
+    const nivo_default_props = {
+      data: data,
+      remove_left_axis: true,
+      enableLabel: true,
+      enableGridX: false,
+      enableGridY: false,
+      label: d => format_item(d),
+      tooltip: (slice) =>
+        (<div style={{color: window.infobase_color_constants.textColor}}>
+          <table style={{width: '100%', borderCollapse: 'collapse'}}>
+            <tbody>
+              { slice.map(
+                tooltip_item => ( 
+                  <tr key = {tooltip_item.id}>
+                    <td style= {{padding: '3px 5px'}}>
+                      <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.color}} />
+                    </td>
+                    <td style={{padding: '3px 5px'}}> {tooltip_item.id} </td>
+                    <td 
+                      style={{padding: '3px 5px'}}
+                      dangerouslySetInnerHTML={{ __html: format_item(tooltip_item) }}
+                    />
+                  </tr>
+                )
+              )}
+            </tbody>
+          </table>
+        </div>),
+      padding: 0.1,
+      colorBy: d => colors(d.id),
+      keys: [text_maker("spending"), text_maker("ftes")],
+      groupMode: "grouped",
+      width: 200,
+      height: 400,
     };
-    const series2 = {
-      label: text_maker("ftes") , 
-      data: _.map(this.data,"ftes"),
-      formatter: formats.big_int_real,
+  
+    const toggleOpacity = (element) => {
+      const current_opacity = element.style.opacity;
+      element.style.opacity = current_opacity === '1' || !current_opacity ? 0.4 : 1;
     };
-
-    reactAdapter.render(
-      <GraphLegend
-        isHorizontal={true} 
-        items={ 
-          _.map([series1, series2], ({label}) => ({
-            active: true,
-            label,
-            id: label,
-            color: this.colors(label),
-          }))
-        }
-      />,
-      legend_area.node()
-    );
-
-    const graph = new TwoSeriesBar(
-      this.container.select('.sa-diagram').node(),
-      {
-        title_font_size,
-        title: text_maker("gov_goco"),
-        colors: this.colors,
-        height: 380,
-        ticks: _.map(this.data, "tick"),
-        series1,
-        series2,
-        has_callback: true,
+  
+    const handleHover = (node, targetElement) => {
+      const allGroupedElements = targetElement.parentElement.parentElement;
+      const target_spending = allGroupedElements.children.item(node.index);
+      const target_fte = allGroupedElements.children.item(node.index + data.length);
+      if(!_.isEqual(target_spending, clicked_spending) && !_.isEqual(target_fte, clicked_fte)){
+        if(target_spending) { toggleOpacity(target_spending); }
+        if(target_fte) { toggleOpacity(target_fte); }
+        _.forEach(allGroupedElements.parentElement.querySelectorAll("text"),
+          (textElement) => {
+            if(textElement.textContent === node.indexValue){
+              toggleOpacity(textElement);
+              return;
+            }
+          });
       }
-    );
+    };
 
-    graph.dispatch.on( "dataClick.fade_out", fade_out.bind(graph) );
-    graph.dispatch.on( "dataClick.render", this.render_goco.bind(this) );
-    graph.dispatch.on( "dataHover", highlight.bind(graph) );
-    graph.dispatch.on( "dataHoverOut", reset_highlight.bind(graph) );
-
-    graph.render();
-    if (state.active_spend_area) {
-      graph.dispatch.on("renderEnd", () => {
-        that.render_goco( state.active_spend_area);
-        fade_out.call(graph, state.active_spend_area);
-        graph.dispatch.on("renderEnd", null);
+    const handleClick = (node, targetElement) => {
+      const allGroupedElements = targetElement.parentElement.parentElement;
+      const target_spending = allGroupedElements.children.item(node.index);
+      const target_fte = allGroupedElements.children.item(node.index + data.length);
+      _.forEach(allGroupedElements.children, (bar_element) => {
+        bar_element.style.opacity = bar_element === target_spending || bar_element === target_fte ? 1 : 0.4;
       });
-    }
-  }
+      _.forEach(allGroupedElements.parentElement.querySelectorAll("text"),
+        (textElement) => {
+          textElement.style.opacity = textElement.textContent === node.indexValue ? 1 : 0.4;
+        });
 
-  render_goco(sa_name){
-    
-    state.active_spend_area = sa_name;
-    this.goco_data = _.find(this.data, d => d.tick === sa_name).children;
-    this.container.select('.goco-diagram').html("");
+      nivo_default_props.data = node.data.children;
+      const child_graph = (
+        <Fragment>
+          <h4 style={{textAlign: "center"}}> { node.indexValue } </h4>
+          <NivoResponsiveBar
+            {...nivo_default_props}
+            bttm_axis={{
+              renderTick: tick => {
+                return <g key={tick.key} transform={`translate(${tick.x + 60},${tick.y + 16})`}>
+                  <a
+                    href={tick_map[tick.value]}
+                    target="_blank" rel="noopener noreferrer"
+                  >
+                    <text
+                      textAnchor="end"
+                      dominantBaseline="end"
+                      style={{
+                        ...tick.theme.axis.ticks.text,
+                      }}
+                    >
+                      <TspanLineWrapper text={tick.value} width={20}/>
+                    </text>
+                  </a>
+                </g>;
+              },
+            }}
+          />
+        </Fragment>
+      );
+      this.setState({
+        child_graph: child_graph,
+        clicked_spending: target_spending,
+        clicked_fte: target_fte,
+      });
+    };
 
-    const graph = new TwoSeriesBar(
-      this.container.select('.goco-diagram').node(),
-      {
-        title: sa_name,
-        colors: this.colors,
-        title_font_size,
-        height: 380,
-        ticks: _.map(this.goco_data, "tick"),
-        series1: {
-          label: text_maker("spending"), 
-          data: _.map(this.goco_data, "spending"),
-          formatter: formats.compact1,
-        },
-        series2: {
-          label: text_maker("ftes"), 
-          data: _.map(this.goco_data,"ftes"),
-          formatter: formats.big_int_real,
-        },
-        has_callback: true,
+    return <Fragment>
+      <div style={{height: 400}}>
+        <NivoResponsiveBar
+          {...nivo_default_props}
+          onMouseEnter={(node, e) => handleHover(node, e.target) }
+          onMouseLeave={(node, e) => handleHover(node, e.target) }
+          onClick={(node, e) => handleClick(node, e.target)}
+          bttm_axis={{
+            renderTick: tick => {
+              return <g key={tick.key} transform={`translate(${tick.x + 40},${tick.y + 16})`}>
+                <text
+                  textAnchor="end"
+                  dominantBaseline="end"
+                  style={{
+                    ...tick.theme.axis.ticks.text,
+                  }}
+                >
+                  <TspanLineWrapper text={tick.value} width={15}/>
+                </text>
+              </g>;
+            },
+          }}
+        />
+      </div>
+      { child_graph &&
+          <div style={{height: 500}}>
+            { child_graph }
+          </div>
       }
-    );
-    graph.render();
-    graph.dispatch.on( "dataClick", this.nav_to_dashboard.bind(this) );
-  }
-  nav_to_dashboard(goco_name){
-    const goco = _.find(this.goco_data, d => d.tick === goco_name);
-    const href = goco.href.replace("#", "/");
-    this.history.push(href);
+    </Fragment>;
   }
 }
 
-function render({calculations, footnotes, sources }, { history }){
+function render({ footnotes, sources }){
 
   const programSpending = Table.lookup("programSpending");
   const programFtes = Table.lookup("programFtes");
@@ -290,44 +251,18 @@ function render({calculations, footnotes, sources }, { history }){
       title={text_maker("gocographic_title")}
       {...{sources,footnotes}}
     >
+      <Goco/>
       <div className="medium_panel_text">
         <TM k="goco_intro_text" args={total_fte_spend}/>
       </div>
-      <GocoDiagram 
-        history={history}
-      />
     </Panel>
   );
 }
 
-class GocoDiagram extends React.Component {
-  componentDidMount(){
-    const { el } = this;
-    const { history } = this.props;
-    d3.select(el)
-      .append("div")
-      .attr("id", "goco_mount")
-      .html(text_maker("goco_t"));
-      
-    new Goco(
-      d3.select( el.querySelector("#goco_mount") ), 
-      history
-    );
-  }
-
-  render(){
-    return <div ref={el=> this.el = el} />;
-  }
-}
-
-
-export const declare_gocographic_panel = () => declare_panel({
-  panel_key: "gocographic",
-  levels: ["gov"],
-  panel_config_func: (level, panel_key) => ({
-    depends_on: ['programSpending', 'programFtes'],
-    footnotes: ["GOCO"],
-    calculate: _.constant(true),
-    render,
-  }),
+new PanelGraph({
+  key: 'gocographic',
+  level: 'gov',
+  depends_on: ['programSpending', 'programFtes'],
+  footnotes: ["GOCO"],
+  render,
 });
