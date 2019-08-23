@@ -299,7 +299,7 @@ const TreeMapRadioButtons = ({ options, onChange }) => <div className="treemap-o
   {options.map(({ display, id, active }) =>
     <button
       key={id}
-      aria-pressed={active}
+      aria-pressed={!!active}
       className={classNames("treemap-options__option", active && "treemap-options__option--active")}
       onClick={() => { onChange(id); }}
     >
