@@ -14,6 +14,7 @@ const schema = `
     gov: Gov
     crso(id: String): Crso
     subject(level : Level!, id: String!): SubjectI
+    org_search(query: String!): [Org]
   }
   # sometimes we want a subject to just display a name or a infograph-URL
   interface SubjectI {
@@ -119,7 +120,7 @@ const schema = `
 `;
 
 
-export default function({models,loaders}){
+export default function({models,loaders, search_orgs}){
 
   const { Org, Program, Crso } = models;
 
@@ -157,6 +158,13 @@ export default function({models,loaders}){
       name: bilingual_field("name"),
     },
     Root: {
+      org_search: async (_x, { query }, {lang} ) => {
+        const orgs = await search_orgs(query);
+        return _.chain(orgs)
+          .sortBy('score')
+          .map('record')
+          .value();
+      },
       all_orgs: () => Org.find({}),
       orgs: ()=> Org.find({}),
       org: (_x, {dept_code, org_id}) => {
