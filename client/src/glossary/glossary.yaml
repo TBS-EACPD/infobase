@@ -5,3 +5,8 @@ glossary_meta_desc:
 jump_to_letter_glossary_entries:
   en: Jump to glossary entires for the letter
   fr: Aller aux entrées du glossaire pour la lettre
+  
+glossary_translation:
+  en: 'Translation:'
+  fr: 'Traduction :'
+

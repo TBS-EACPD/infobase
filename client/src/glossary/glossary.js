@@ -40,7 +40,6 @@ function get_glossary_items_by_letter(){
 
 
 
-
 //id tag is there for legacy styles 
 const Glossary_ = ({ active_key, items_by_letter }) => (
   <div id="#glossary-key">
@@ -107,6 +106,9 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
                 <div 
                   dangerouslySetInnerHTML={{__html: item.definition}}
                 />
+                <div>
+                  <p>{text_maker("glossary_translation")} {item.translation}</p>
+                </div>
                 
                 <div className='glossary-top-link-container'>
                   <a className="glossary-top-link"
