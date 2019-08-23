@@ -64,9 +64,13 @@ const index_lang_lookups = {
     en: "Top of page",
     fr: "Haut de la page",
   },
-  about_this_site: {
-    en: "About this site",
-    fr: "À propos de ce site",
+  canada_ca_footer_nav: {
+    en: "Other government websites",
+    fr: "Autres sites Web gouvernementaux",
+  },
+  footer_nav: {
+    en: "Additional navigation links",
+    fr: "Additional navigation links",
   },
   skip_to_main_content: {
     en: "Skip to main content",
