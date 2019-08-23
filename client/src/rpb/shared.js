@@ -15,7 +15,6 @@ const SelectList = ({
   onSelect, //(id)=> { ... }
   display,
 }) => {
-  const name = "a"+_.uniqueId();
   return (
     <ul 
       className="list-unstyled" 
@@ -31,7 +30,6 @@ const SelectList = ({
             >
               <input 
                 onChange={()=>onSelect(id)}
-                name={name} 
                 type={ is_multi_select ? 'checkbox' : 'radio' }
                 checked={isSelected}
               /> 
