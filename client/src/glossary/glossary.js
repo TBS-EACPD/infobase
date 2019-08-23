@@ -46,8 +46,7 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
   <div id="#glossary-key">
     <div className="col-sm-12 col-md-8 col-md-offset-2 font-large">
       { !window.is_a11y_mode &&
-        <div 
-          aria-hidden={true}
+        <div
           id="glossary_search"
           className='org_list font-xlarge mrgn-bttm-lg'
         >
@@ -55,7 +54,6 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
         </div>
       }
       <div
-        aria-hidden={true}
         className="glossary-letters mrgn-bttm-xl"
         style={{ textAlign: "center" }}
       >
@@ -69,6 +67,7 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
           {_.map(items_by_letter, ({ letter }) => 
             <li key={letter}> 
               <a
+                aria-label={`${text_maker("jump_to_letter_glossary_entries")} ${letter}`}
                 href={`#__${letter}`}
                 className="glossary-letter-link"
                 onClick={evt => {

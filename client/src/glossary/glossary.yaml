@@ -1,6 +1,7 @@
 glossary_meta_desc:
-  transform:
   en: A searchable list of definitions for terms used in the InfoBase
   fr: Liste interrogeable des définitions pour les termes employés dans l'InfoBase
 
-
+jump_to_letter_glossary_entries:
+  en: Jump to glossary entires for the letter
+  fr: Aller aux entrées du glossaire pour la lettre
