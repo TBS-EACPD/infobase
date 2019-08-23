@@ -66,6 +66,21 @@ class Goco extends React.Component {
       .sortBy(d => -d.spending)
       .value();
     
+    const total_fte_spend = _.reduce(data, (result, row) => {
+      result.total_spending = result.total_spending + row.Spending;
+      result.total_ftes = result.total_ftes + row.FTEs / fte_factor;
+      return result;
+    }, {
+      total_spending: 0,
+      total_ftes: 0,
+    });
+    const maxSpending = _.maxBy(data, 'Spending');
+    const spend_fte_text_data = {
+      ...total_fte_spend,
+      max_sa: maxSpending.label,
+      max_sa_share: maxSpending.Spending / total_fte_spend.total_spending,
+    };
+    
     if(window.is_a11y_mode){
       const a11y_data = _.chain(data)
         .map(row => {
@@ -95,7 +110,6 @@ class Goco extends React.Component {
         : formats.compact1_raw(item.value);
   
       const nivo_default_props = {
-        data: data,
         indexBy: "label",
         animate: false,
         remove_left_axis: true,
@@ -200,12 +214,12 @@ class Goco extends React.Component {
               textElement.textContent.replace(/\s+/g, '') === node.indexValue.replace(/\s+/g, '') ? 1 : 0.4;
           });
   
-        nivo_default_props.data = node.data.children;
         const child_graph = (
           <Fragment>
             <h4 style={{textAlign: "center"}}> { node.indexValue } </h4>
             <NivoResponsiveBar
-              {...nivo_default_props}
+              { ...nivo_default_props }
+              data={ node.data.children }
               onMouseEnter={(child_node, e) => handleHover(child_node, e.target) }
               onMouseLeave={(child_node, e) => handleHover(child_node, e.target) }  
               onClick={(child_node, e) => window.open(tick_map[child_node.indexValue], '_blank')}
@@ -238,6 +252,7 @@ class Goco extends React.Component {
           clicked_fte: target_fte,
         });
       };
+
       graph_content = <Fragment>
         <div style={{padding: '10px 25px 10px 25px'}}>
           <div className="legend-container">
@@ -249,7 +264,8 @@ class Goco extends React.Component {
         </div>
         <div style={{height: 400}}>
           <NivoResponsiveBar
-            {...nivo_default_props}
+            { ...nivo_default_props }
+            data={ data }
             onMouseEnter={(node, e) => handleHover(node, e.target) }
             onMouseLeave={(node, e) => handleHover(node, e.target) }
             onClick={(node, e) => handleClick(node, e.target)}
@@ -273,6 +289,9 @@ class Goco extends React.Component {
       </Fragment>;  
     }
     return <Fragment>
+      <div className="medium_panel_text">
+        <TM k="goco_intro_text" args={ spend_fte_text_data }/>
+      </div>
       { graph_content }
       { child_graph &&
           <div style={{height: 300, paddingBottom: 30}}>
@@ -284,53 +303,12 @@ class Goco extends React.Component {
 }
 
 function render({ footnotes, sources }){
-
-  const programSpending = Table.lookup("programSpending");
-  const programFtes = Table.lookup("programFtes");
-
-  const spend_yr = "{{pa_last_year}}exp";
-  const fte_yr = "{{pa_last_year}}";
-
-  const fte_spend_data = _.chain(Tag.gocos_by_spendarea)
-    .map(sa => {
-      const children = _.map(sa.children_tags, goco => {
-        const spending = d3.sum(goco.programs, p => {
-          return programSpending.programs.get(p) ? _.first(programSpending.programs.get(p))[spend_yr] : 0;
-        });
-        const ftes = d3.sum(goco.programs, p => {
-          return programFtes.programs.get(p) ? _.first(programFtes.programs.get(p))[fte_yr] : 0;
-        });
-        return {
-          spending,
-          ftes,
-        };
-      });
-      const spending = d3.sum(children, c=>c.spending);
-      const ftes = d3.sum(children, c=>c.ftes);
-      return {
-        sa_name: sa.name,
-        spending,
-        ftes,
-      };
-    })
-    .sortBy(d=>-d.spending)
-    .value();
-
-  const total_fte_spend = {
-    max_sa: _.first(_.map(fte_spend_data,"sa_name")),
-    max_sa_share: (_.first(_.map(fte_spend_data,"spending")) / d3.sum(_.map(fte_spend_data, "spending"))),
-    spending: d3.sum(_.map(fte_spend_data, "spending")),
-    ftes: d3.sum(_.map(fte_spend_data, "ftes")),
-  };
   return (
     <Panel
       title={text_maker("gocographic_title")}
       {...{sources,footnotes}}
     >
       <Goco/>
-      <div className="medium_panel_text">
-        <TM k="goco_intro_text" args={total_fte_spend}/>
-      </div>
     </Panel>
   );
 }
