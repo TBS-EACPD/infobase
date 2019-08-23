@@ -172,7 +172,7 @@ function populate_igoc_models({
 
 
 function populate_glossary(lines){
-  const [key, term, markdown_def ] = [0,1,2];
+  const [key, term, markdown_def, translation] = [0,1,2,3];
   
   _.chain(lines)
     .filter( line => !_.isEmpty(line[markdown_def]) )
@@ -182,7 +182,8 @@ function populate_glossary(lines){
         new GlossaryEntry(
           line[key], 
           line[term],
-          line[markdown_def]
+          line[markdown_def],
+          line[translation],
         )
       );
     })

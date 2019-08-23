@@ -3,15 +3,18 @@ import { mix, staticStoreMixin } from './storeMixins.js';
 import { trivial_text_maker } from './text.js';
 
 class GlossaryEntry extends mix().with(staticStoreMixin) {
-  constructor(id,title,def_text){
+  constructor(id,title,def_text,translation){
     super();
     this.id = id;
     this.title = title;
     this._def_text = def_text;
+    this.translation = translation;
+    
   }
   get definition(){ 
     /* eslint-disable-next-line no-use-before-define */
     return compiled_definitions(this.id);
+    
   }
   static query(query){
     return super.query(query);
