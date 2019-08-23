@@ -105,14 +105,10 @@ const raw_fte_limit = 1000;
 
 // need this slightly tricky formulation because we only want to use part of the scale
 // (darkest colours are too dark for good contrast with the text)
-const blue_scale = d3.scaleSequential(d3.interpolateRgbBasis(sequentialBlues.slice(0,4)));
-blue_scale.clamp(true);
-const red_scale = d3.scaleSequential(d3.interpolateRgbBasis(sequentialReds.slice(0,4)));
-red_scale.clamp(true);
-const green_scale = d3.scaleSequential(d3.interpolateRgbBasis(sequentialGreens.slice(0,4)));
-green_scale.clamp(true);
-const purple_scale = d3.scaleSequential(d3.interpolateRgbBasis(sequentialPurples.slice(0,3)));
-purple_scale.clamp(true);
+const blue_scale = d3.scaleSequential(d3.interpolateRgbBasis(sequentialBlues.slice(0,3))).clamp(true);
+const red_scale = d3.scaleSequential(d3.interpolateRgbBasis(sequentialReds.slice(0,3))).clamp(true);
+const green_scale = d3.scaleSequential(d3.interpolateRgbBasis(sequentialGreens.slice(0,4))).clamp(true);
+const purple_scale = d3.scaleSequential(d3.interpolateRgbBasis(sequentialPurples.slice(0,3))).clamp(true);
 
 
 // spending % of parent -- 30% is enough for the colour to be maxed out
