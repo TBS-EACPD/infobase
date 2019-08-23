@@ -8,6 +8,7 @@ Object {
         "article_1": null,
         "article_2": "de",
         "auditor": null,
+        "description": "On behalf of the people of Canada, the Canadian Armed Forces (CAF) and the Department of National Defence (DND) stand ready to perform three key roles:Protecting Canada and defending our sovereignty;Defending North America in cooperation with the United States, Canada's closest ally; andContributing to international peace and security through operations around the world, most often in partnership with allies from other countries.",
         "enabling_instrument": "National Defence Act, R.S.C. 1985, c. N-5",
         "faa_schedule_institutional": null,
         "incorp_yr": null,
@@ -48,7 +49,7 @@ Object {
       },
       "program": Object {
         "activity_code": "ATT00",
-        "description": null,
+        "description": "This program provides the Government of Canada with critical scientific knowledge and innovation to address defence & security challenges and needs. The S&T Program includes direction setting, program planning, program management, and capability management, execution and assessment. The Program comprises multi-year projects with activities in research, technology development, analysis and experimentation applied to inform, enable and respond to Canada's defence and security priorities over multiple time horizons extending up to a 20-year outlook. The scientific knowledge and innovation generated from these activities informs decisions on Defence capability acquisitions, readiness preparation and the conduct of operations in response to Government priorities. Activities under this program draw on internal capability and make extensive use of partnerships with Canadian industry and academia as well as international organizations.",
         "id": "ND-ATT00",
         "is_internal_service": false,
       },
@@ -61,9 +62,38 @@ exports[`subject linkage crso root, up and down linkage 1`] = `
 Object {
   "data": Object {
     "root": Object {
-      "crso": null,
+      "crso": Object {
+        "description": "Detect, deter and defend against threats to or attacks on Canada. Assist civil authorities and law enforcement, including counter-terrorism, in support of national security, domestic disasters or major emergencies, and conduct search and rescue operations. Detect, deter and defend against threats to or attacks on North America in partnership with the United States, including through NORAD. Lead and/or contribute forces to NATO and coalition efforts to deter and defeat adversaries, including terrorists, to support global stability. Lead and/or contribute to international peace operations and stabilization missions with the United Nations, NATO and other multilateral partners. Engage in capacity building to support the security of other nations and their ability to contribute to security and the security of Canadians abroad. Assist civil authorities and non-governmental partners in responding to international and domestic disasters or major emergencies.",
+        "name": "Operations",
+        "org": Object {
+          "id": "133",
+        },
+        "programs": Array [
+          Object {
+            "id": "ND-BUN01",
+          },
+          Object {
+            "id": "ND-BUN02",
+          },
+          Object {
+            "id": "ND-BUN03",
+          },
+          Object {
+            "id": "ND-BUN04",
+          },
+          Object {
+            "id": "ND-BUN05",
+          },
+          Object {
+            "id": "ND-BUN06",
+          },
+          Object {
+            "id": "ND-BUN07",
+          },
+        ],
+      },
       "org": Object {
-        "acronym": null,
+        "acronym": "DND",
         "crsos": Array [
           Object {
             "id": "ND-BUN00",
@@ -109,7 +139,11 @@ Object {
           },
         ],
       },
-      "program": null,
+      "program": Object {
+        "crso": Object {
+          "id": "ND-BUN00",
+        },
+      },
     },
   },
 }
