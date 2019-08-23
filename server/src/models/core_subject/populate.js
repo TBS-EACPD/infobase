@@ -15,7 +15,6 @@ export default async function({models}){
       ...obj,
       name_en: obj.applied_title_en || obj.legal_title_en,
       name_fr: obj.applied_title_fr || obj.legal_title_fr,
-      ...bilingual_remap(obj, "description", "mandate"),
       ...bilingual_remap(obj, "acronym", "abbr"),
       ...bilingual_remap(url_lookups[obj.dp_url_id], "dp_url", "url"),
       ...bilingual_remap(url_lookups[obj.qfr_url_id], "qfr_url", "url"),
