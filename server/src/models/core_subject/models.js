@@ -78,6 +78,18 @@ export default function define_core_subjects(model_singleton){
     ...bilingual("old_name", str_type),
     ...bilingual("description", str_type),
   });
+  ProgramSchema.index({
+    ...bilingual('name','text'),
+    ...bilingual('description','text'),
+    ...bilingual('old_name','text'),
+  },{
+    name:"program_search_ix",
+    weights: {
+      ...bilingual('name',5),
+      ...bilingual('old_name',4),
+      ...bilingual('description',2),
+    },
+  });
   
   
   // "id","dept_code","name_en","name_fr","desc_en","desc_fr","is_active"
@@ -88,6 +100,16 @@ export default function define_core_subjects(model_singleton){
     ...bilingual("name", str_type),
     ...bilingual("description", str_type),
     is_active: { type: Boolean },
+  });
+  CrsoSchema.index({
+    ...bilingual('name','text'),
+    ...bilingual('description','text'),
+  },{
+    name:"crso_search_ix",
+    weights: {
+      ...bilingual('name',5),
+      ...bilingual('description',2),
+    },
   });
 
   //TODO: 
@@ -115,24 +137,53 @@ export default function define_core_subjects(model_singleton){
   _.each(loaders, (val,key) =>  model_singleton.define_loader(key,val) )
 
 
-  //TODO add search hooks to add these  
-  model_singleton.search_orgs = async (query,lang) => {
-    const records =  await Org.find(
-      { 
-        $text: {
-          $search: query,
-          $language: lang=="en" ? "english" : "french",
-          $caseSensitive: false,
-          $diacriticSensitive: false,
-        },
-      },
-      { score:{ $meta: 'textScore' } }
-    );
+  const search_orgs = create_searcher(Org);
+  const search_programs = create_searcher(Program);
+  const search_crsos = create_searcher(Crso);
 
-    return _.map(records, row => ({
-      record: row,
-      score: row._doc.score,
-    }));
+
+  const search_subjects = async (query,lang) => {
+    //This one is just for example sake
+    const [orgs, crsos, programs] = await Promise.all([
+      search_orgs(query,lang),
+      search_crsos(query,lang),
+      search_programs(query,lang),
+    ]);
+
+    return _.chain([ ...orgs, ...crsos, ...programs ])
+      .sortBy('score')
+      .reverse()
+      .value()
 
   }
+
+  model_singleton.define_service('search_orgs',search_orgs);
+  model_singleton.define_service('search_programs',search_programs);
+  model_singleton.define_service('search_crsos',search_crsos);
+  model_singleton.define_service('search_subjects',search_subjects);
+}
+
+
+const create_searcher = model => async (query,lang) => {
+  const records =  await model.find(
+    { 
+      $text: {
+        $search: query,
+        $language: lang=="en" ? "english" : "french",
+        $caseSensitive: false,
+        $diacriticSensitive: false,
+      },
+    },
+    { score:{ $meta: 'textScore' } }
+  );
+
+  return _.chain(records)
+    .map(row => ({
+      record: row,
+      score: row._doc.score,
+    }))
+    .sortBy('score')
+    .reverse()
+    .value()
+
 }

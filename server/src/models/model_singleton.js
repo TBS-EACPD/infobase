@@ -16,6 +16,10 @@ const model_singleton = {
   define_loader(name, loader){
     this.loaders[name] = loader;
   },
+  services:{},
+  define_service(name,service){
+    this.services[name] = service;
+  },
 };
 
 export default model_singleton;
