@@ -22,19 +22,6 @@ const breakpoints = {
     .value(),
 };
 
-const breakpoint_queries = {
-  ..._.chain(base_breakpoints)
-    .mapKeys( (value, key) => `min${_.upperFirst(key)}`)
-    .mapValues( (value) => ((screen_width) => screen_width >= value) )
-    .value(),
-
-  ..._.chain(base_breakpoints)
-    .mapKeys( (value, key) => `max${_.upperFirst(key)}`)
-    .mapValues( (value) => ((screen_width) => screen_width <= value-1) )
-    .value(),
-};
-
 export {
   breakpoints,
-  breakpoint_queries,
 };

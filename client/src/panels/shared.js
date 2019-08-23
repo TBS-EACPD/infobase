@@ -7,7 +7,7 @@ import { create_text_maker, trivial_text_maker, run_template } from '../models/t
 import { formats, dollar_formats, formatter } from '../core/format.js';
 import { PanelGraph, layout_types } from '../core/PanelGraph.js';
 import { newIBCategoryColors, newIBLightCategoryColors, newIBDarkCategoryColors, NA_color } from '../core/color_schemes.js';
-import { breakpoints, breakpoint_queries } from '../core/breakpoint_defs.js';
+import { breakpoints } from '../core/breakpoint_defs.js';
 import { Panel, StdPanel, TextPanel, Col } from '../components/panel_components.js';
 import { Table } from '../core/TableClass.js';
 import { rpb_link, get_appropriate_rpb_subject } from '../rpb/rpb_link.js';
@@ -21,7 +21,6 @@ import { Statistics } from '../core/Statistics.js';
 import { get_source_links } from '../metadata/data_sources.js';
 import { NivoResponsiveBar, NivoResponsiveHBar, NivoResponsiveLine, NivoResponsivePie } from '../charts/NivoCharts.js';
 import { Canada } from '../charts/canada.js';
-import { TwoSeriesBar } from '../charts/two_series_bar.js';
 
 import classNames from 'classnames';
 import { Fragment } from 'react';
@@ -609,7 +608,6 @@ export {
   NivoResponsivePie,
   hex_to_rgb,
   Canada,
-  TwoSeriesBar,
   breakpoints,
   breakpoint_queries,
   SpinnerWrapper,
