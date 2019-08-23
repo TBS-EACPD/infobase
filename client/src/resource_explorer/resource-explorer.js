@@ -326,10 +326,10 @@ class ExplorerPage extends React.Component {
               )}
             </ul>
           </div>
-          <h4 style={{marginBottom: "10px"}}>
+          <h2 style={{marginBottom: "10px"}}>
             { current_category && current_category.text }
             { current_category && get_image_glossary_tooltip(current_category.id) }
-          </h4>
+          </h2>
           { is_m2m &&
             <div className='alert alert-no-symbol alert--is-bordered alert-danger'>
               <KeyConceptList 
