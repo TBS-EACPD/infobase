@@ -205,7 +205,7 @@ export default function({models,loaders}){
     },
     Program: {
       name: bilingual_field("name"),
-      description: bilingual_field("desc"),
+      description: bilingual_field("description"),
       org: prog => org_deptcode_loader.load(prog.dept_code),
       crso: prog => crso_id_loader.load(prog.crso_id),
       id: _.property('program_id'),
@@ -213,7 +213,7 @@ export default function({models,loaders}){
     },
     Crso: {
       name: bilingual_field("name"),
-      description: bilingual_field("desc"),
+      description: bilingual_field("description"),
       programs: ({crso_id}) => prog_crso_id_loader.load(crso_id),
       org: ({ dept_code }) => org_deptcode_loader.load(dept_code),  
       id: _.property('crso_id'),

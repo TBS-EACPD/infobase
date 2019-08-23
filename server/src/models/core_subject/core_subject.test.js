@@ -10,8 +10,9 @@ query CRSOTestQuery ($lang: String!){
         id
       }
     }
-    crso(id:"ND-SO00227"){
+    crso(id:"ND-BUN00"){
       name
+      description
       programs {
         id
       }
@@ -19,7 +20,7 @@ query CRSOTestQuery ($lang: String!){
         id
       }
     }
-    program(id:"ND-SO00224"){
+    program(id:"ND-BUN05"){
       crso {
         id
       }
@@ -45,6 +46,7 @@ query IgocTestQuery ($lang: String!){
   root(lang: $lang){
     
     org(org_id:"133"){
+      description
       inst_form {
         id
       }
