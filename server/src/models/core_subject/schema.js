@@ -185,10 +185,10 @@ export default function({models,loaders}){
     },
     Org: {
       name: bilingual_field("name"),
-      description: bilingual_field("mandate"),
-      mandate:  bilingual_field("mandate"),
+      description: bilingual_field("description"),
+      mandate:  bilingual_field("description"),
       id: _.property("org_id"),
-      acronym: bilingual_field("abbr"),
+      acronym: bilingual_field("acronym"),
       enabling_instrument: bilingual_field("enabling_instrument"),
       notes: bilingual_field("notes"),
       fed_ownership: bilingual_field("notes"),
