@@ -68,7 +68,7 @@ class Goco extends React.Component {
     
     const total_fte_spend = _.reduce(data, (result, row) => {
       result.total_spending = result.total_spending + row.Spending;
-      result.total_ftes = result.total_ftes + row.FTEs / fte_factor;
+      result.total_ftes = result.total_ftes + (row.FTEs / fte_factor);
       return result;
     }, {
       total_spending: 0,
@@ -118,7 +118,7 @@ class Goco extends React.Component {
         enableGridY: false,
         label: d => format_item(d),
         tooltip: (slice) =>
-          (<div style={{color: window.infobase_color_constants.textColor}}>
+          <div style={{color: window.infobase_color_constants.textColor}}>
             <table style={{width: '100%', borderCollapse: 'collapse'}}>
               <tbody>
                 { slice.map(
@@ -137,7 +137,7 @@ class Goco extends React.Component {
                 )}
               </tbody>
             </table>
-          </div>),
+          </div>,
         padding: 0.1,
         colorBy: d => colors(d.id),
         keys: series_labels,
@@ -220,12 +220,12 @@ class Goco extends React.Component {
             <NivoResponsiveBar
               { ...nivo_default_props }
               data={ node.data.children }
-              onMouseEnter={(child_node, e) => handleHover(child_node, e.target) }
-              onMouseLeave={(child_node, e) => handleHover(child_node, e.target) }  
-              onClick={(child_node, e) => window.open(tick_map[child_node.indexValue], '_blank')}
+              onMouseEnter={ (child_node, e) => handleHover(child_node, e.target) }
+              onMouseLeave={ (child_node, e) => handleHover(child_node, e.target) }  
+              onClick={ (child_node, e) => window.open(tick_map[child_node.indexValue], '_blank') }
               bttm_axis={{
                 renderTick: tick => {
-                  return <g key={tick.key} transform={`translate(${tick.x + 60},${tick.y + 16})`}>
+                  return <g key={tick.key} transform={ `translate(${tick.x + 60},${tick.y + 16})` }>
                     <a
                       href={ tick_map[tick.value] }
                       target="_blank" rel="noopener noreferrer"
@@ -252,9 +252,10 @@ class Goco extends React.Component {
           clicked_fte: target_fte,
         });
       };
-
+      console.log(data);
+      console.log(spend_fte_text_data);
       graph_content = <Fragment>
-        <div style={{padding: '10px 25px 10px 25px'}}>
+        <div style={ {padding: '10px 25px 10px 25px'} }>
           <div className="legend-container">
             <GraphLegend
               isHorizontal
@@ -266,12 +267,12 @@ class Goco extends React.Component {
           <NivoResponsiveBar
             { ...nivo_default_props }
             data={ data }
-            onMouseEnter={(node, e) => handleHover(node, e.target) }
-            onMouseLeave={(node, e) => handleHover(node, e.target) }
-            onClick={(node, e) => handleClick(node, e.target)}
+            onMouseEnter={ (node, e) => handleHover(node, e.target) }
+            onMouseLeave={ (node, e) => handleHover(node, e.target) }
+            onClick={ (node, e) => handleClick(node, e.target) }
             bttm_axis={{
               renderTick: tick => {
-                return <g key={tick.key} transform={`translate(${tick.x + 40},${tick.y + 16})`}>
+                return <g key={tick.key} transform={ `translate(${tick.x + 40},${tick.y + 16})` }>
                   <text
                     textAnchor="end"
                     dominantBaseline="end"
@@ -294,7 +295,7 @@ class Goco extends React.Component {
       </div>
       { graph_content }
       { child_graph &&
-          <div style={{height: 300, paddingBottom: 30}}>
+          <div style={ {height: 300, paddingBottom: 30} }>
             { child_graph }
           </div>
       }
@@ -305,8 +306,8 @@ class Goco extends React.Component {
 function render({ footnotes, sources }){
   return (
     <Panel
-      title={text_maker("gocographic_title")}
-      {...{sources,footnotes}}
+      title={ text_maker("gocographic_title") }
+      { ...{sources,footnotes} }
     >
       <Goco/>
     </Panel>
