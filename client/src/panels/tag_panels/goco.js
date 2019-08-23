@@ -97,6 +97,7 @@ class Goco extends React.Component {
       const nivo_default_props = {
         data: data,
         indexBy: "label",
+        animate: false,
         remove_left_axis: true,
         enableLabel: true,
         enableGridX: false,
@@ -144,31 +145,59 @@ class Goco extends React.Component {
     
       const handleHover = (node, targetElement) => {
         const allGroupedElements = targetElement.parentElement.parentElement;
-        const target_spending = allGroupedElements.children.item(node.index);
-        const target_fte = allGroupedElements.children.item(node.index + data.length);
+        const childrenGroupedElements = _.map( _.drop(allGroupedElements.children, 2), _.identity );
+        const idx_factor = childrenGroupedElements.length / 2;
+
+        let targetElement_idx;
+        _.forEach(childrenGroupedElements, (element, index) => {
+          if(targetElement.parentElement === element){
+            targetElement_idx = index;
+            return;
+          }
+        });
+        const is_target_spending = idx_factor > targetElement_idx ? true : false;
+        const target_spending = childrenGroupedElements[is_target_spending ?
+          targetElement_idx : _.floor(targetElement_idx - idx_factor)];
+        const target_fte = childrenGroupedElements[is_target_spending ?
+          _.ceil(targetElement_idx + idx_factor) : targetElement_idx];
         if(!_.isEqual(target_spending, clicked_spending) && !_.isEqual(target_fte, clicked_fte)){
           if(target_spending) { toggleOpacity(target_spending); }
           if(target_fte) { toggleOpacity(target_fte); }
           _.forEach(allGroupedElements.parentElement.querySelectorAll("text"),
             (textElement) => {
-              if(textElement.textContent === node.indexValue){
+              if(textElement.textContent.replace(/\s+/g, '') === node.indexValue.replace(/\s+/g, '')){
                 toggleOpacity(textElement);
                 return;
               }
-            });
+            });  
         }
       };
   
       const handleClick = (node, targetElement) => {
         const allGroupedElements = targetElement.parentElement.parentElement;
-        const target_spending = allGroupedElements.children.item(node.index);
-        const target_fte = allGroupedElements.children.item(node.index + data.length);
-        _.forEach(allGroupedElements.children, (bar_element) => {
-          bar_element.style.opacity = bar_element === target_spending || bar_element === target_fte ? 1 : 0.4;
+        const childrenGroupedElements = _.map( _.drop(allGroupedElements.children, 2), _.identity );
+        const idx_factor = childrenGroupedElements.length / 2;
+
+        let target_spending;
+        let target_fte;
+        _.forEach(childrenGroupedElements, (element, targetElement_idx) => {
+          if(targetElement.parentElement === element){
+            const is_target_spending = idx_factor > targetElement_idx ? true : false;
+            target_spending = childrenGroupedElements[is_target_spending ?
+              targetElement_idx : _.floor(targetElement_idx - idx_factor)];
+            target_fte = childrenGroupedElements[is_target_spending ?
+              _.ceil(targetElement_idx + idx_factor) : targetElement_idx];
+
+            if(target_spending) { target_spending.style.opacity = 1; }
+            if(target_fte) { target_fte.style.opacity = 1; }
+          } else if(target_spending != element && target_fte != element){
+            element.style.opacity = 0.4;
+          }
         });
         _.forEach(allGroupedElements.parentElement.querySelectorAll("text"),
           (textElement) => {
-            textElement.style.opacity = textElement.textContent === node.indexValue ? 1 : 0.4;
+            textElement.style.opacity = 
+              textElement.textContent.replace(/\s+/g, '') === node.indexValue.replace(/\s+/g, '') ? 1 : 0.4;
           });
   
         nivo_default_props.data = node.data.children;
@@ -177,11 +206,14 @@ class Goco extends React.Component {
             <h4 style={{textAlign: "center"}}> { node.indexValue } </h4>
             <NivoResponsiveBar
               {...nivo_default_props}
+              onMouseEnter={(child_node, e) => handleHover(child_node, e.target) }
+              onMouseLeave={(child_node, e) => handleHover(child_node, e.target) }  
+              onClick={(child_node, e) => window.open(tick_map[child_node.indexValue], '_blank')}
               bttm_axis={{
                 renderTick: tick => {
                   return <g key={tick.key} transform={`translate(${tick.x + 60},${tick.y + 16})`}>
                     <a
-                      href={tick_map[tick.value]}
+                      href={ tick_map[tick.value] }
                       target="_blank" rel="noopener noreferrer"
                     >
                       <text

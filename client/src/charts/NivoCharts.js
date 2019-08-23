@@ -204,6 +204,7 @@ export class NivoResponsiveBar extends React.Component{
       onMouseLeave,
       onClick,
       padding,
+      animate,
     } = this.props;
 
     return (
@@ -230,6 +231,7 @@ export class NivoResponsiveBar extends React.Component{
           padding,
           tooltip,
           label,
+          animate,
         }}
         keys = {_.union([''],keys)}
         labelFormat={_.isUndefined(label_format) ? null : label_format}
