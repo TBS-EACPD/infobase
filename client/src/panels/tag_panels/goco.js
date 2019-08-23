@@ -252,8 +252,7 @@ class Goco extends React.Component {
           clicked_fte: target_fte,
         });
       };
-      console.log(data);
-      console.log(spend_fte_text_data);
+
       graph_content = <Fragment>
         <div style={ {padding: '10px 25px 10px 25px'} }>
           <div className="legend-container">
