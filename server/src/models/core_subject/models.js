@@ -46,6 +46,22 @@ export default function define_core_subjects(model_singleton){
     article_2: str_type,
 
   });
+  OrgSchema.index({
+    ...bilingual('name','text'),
+    ...bilingual('applied_title','text'),
+    ...bilingual('acronym','text'),
+    ...bilingual('description','text'),
+    ...bilingual('legal_title','text'),
+  },{
+    name: "org_search_ix",
+    weights: {
+      ...bilingual('name', 5),
+      ...bilingual('applied_title', 5),
+      ...bilingual('legal_title', 5),
+      ...bilingual('description', 2),
+      ...bilingual('acronym', 1),
+    },
+  });
 
   const ProgramSchema = new mongoose.Schema({
     dept_code: parent_fkey_type(),
@@ -87,7 +103,6 @@ export default function define_core_subjects(model_singleton){
 
   const { Org, Program, Crso } = model_singleton.models;
 
-  
   const loaders = {
     org_deptcode_loader: create_resource_by_id_attr_dataloader(Org, 'dept_code'),
     org_id_loader: create_resource_by_id_attr_dataloader(Org, 'org_id'),
@@ -97,5 +112,27 @@ export default function define_core_subjects(model_singleton){
     crso_from_deptcode_loader: create_resource_by_foreignkey_attr_dataloader(Crso, 'dept_code'),
     crso_id_loader: create_resource_by_id_attr_dataloader(Crso, 'crso_id'), 
   };
-  _.each( loaders, (val, key) =>  model_singleton.define_loader(key, val) )
+  _.each(loaders, (val,key) =>  model_singleton.define_loader(key,val) )
+
+
+  //TODO add search hooks to add these  
+  model_singleton.search_orgs = async (query,lang) => {
+    const records =  await Org.find(
+      { 
+        $text: {
+          $search: query,
+          $language: lang=="en" ? "english" : "french",
+          $caseSensitive: false,
+          $diacriticSensitive: false,
+        },
+      },
+      { score:{ $meta: 'textScore' } }
+    );
+
+    return _.map(records, row => ({
+      record: row,
+      score: row._doc.score,
+    }));
+
+  }
 }
