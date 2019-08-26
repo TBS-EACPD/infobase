@@ -6,31 +6,31 @@ import '../panels/result_graphs/result_graphs.js';
 import '../panels/igoc/igoc_panel.js';
 
 //transfer payments
-import "../panels/transfer_payments/last_year_g_and_c_perspective";
-import "../panels/transfer_payments/historical_g_and_c";
+import "../panels/transfer_payments/last_year_g_and_c_perspective.js";
+import "../panels/transfer_payments/historical_g_and_c.js";
 
 //ppl panels
-import "../panels/people/employee_last_year_totals";
-import "../panels/people/employee_totals";
-import "../panels/people/employee_type";
-import "../panels/people/employee_prov";
-import "../panels/people/employee_age";
-import "../panels/people/employee_executive_level";
-import "../panels/people/employee_gender";
-import "../panels/people/employee_fol";
+import "../panels/people/employee_last_year_totals.js";
+import "../panels/people/employee_totals.js";
+import "../panels/people/employee_type.js";
+import "../panels/people/employee_prov.js";
+import "../panels/people/employee_age.js";
+import "../panels/people/employee_executive_level.js";
+import "../panels/people/employee_gender.js";
+import "../panels/people/employee_fol.js";
 
 //vote-stat
-import "../panels/vote-stat/in_year_estimates";
+import "../panels/vote-stat/in_year_estimates.js";
 //turned off until supps A
 //import "../panels/vote-stat/in_year_estimates_split";
-import "../panels/vote-stat/in_year_vote_stat_split";
-import "../panels/vote-stat/in_year_vote-stat_breakdown";
-import "../panels/vote-stat/last_year_vote_stat_split";
+import "../panels/vote-stat/in_year_vote_stat_split.js";
+import "../panels/vote-stat/in_year_vote-stat_breakdown.js";
+import "../panels/vote-stat/last_year_vote_stat_split.js";
 
 //standard object
-import "../panels/sobj/spend_rev_split";
-import "../panels/sobj/top_spending_areas";
-import "../panels/sobj/spend_by_so_hist";
+import "../panels/sobj/spend_rev_split.js";
+import "../panels/sobj/top_spending_areas.js";
+import "../panels/sobj/spend_by_so_hist.js";
 import "../panels/sobj/top_spending_areas.js";
 import "../panels/sobj/personel_spend.js";
 import "../panels/sobj/spend_rev_split.js";

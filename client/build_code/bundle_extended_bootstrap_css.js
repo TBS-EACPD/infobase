@@ -10,7 +10,7 @@ function bundle_extended_bootstrap_css(app_dir){
   const config = {
     name: 'container page css bundle',
     mode: 'production',
-    entry: ['./src/extended_bootstrap_css/extended-bootstrap-index.js'],
+    entry: ['./src/extended_bootstrap_css/extended_bootstrap_index.js'],
     output: {
       path: path.resolve(__dirname, `../${app_dir}`),
     },
