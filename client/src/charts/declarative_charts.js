@@ -11,8 +11,6 @@ const GraphLegend = ({
     {_.map(items, ({ color, label, id, active }) => 
       <li
         key={id}
-        role={ onClick ? "checkbox" : null}
-        aria-checked={onClick ? active : null}
         className="legend-list-el"
       >
         <span 
@@ -26,7 +24,8 @@ const GraphLegend = ({
         />
         { onClick ?
           <span
-            role="button"
+            role="checkbox"
+            aria-checked={active}
             tabIndex={0}
             className="link-styled"
             onClick={()=> onClick(id)}
