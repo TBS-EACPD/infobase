@@ -29,8 +29,8 @@ $treeMapTooltipColor: $primaryColor;
 
 .TreeMap__SideBar {
   background-color: $treeMapBackgroundColor;
-  border: 2px solid white;
-  color: white;
+  border: 2px solid $backgroundColor;
+  color: $textLightColor;
   text-align: center;
 }
 .TreeMap_SideBar__Title {

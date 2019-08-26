@@ -18,7 +18,7 @@ const buttonPrimaryColor = "#176dde";
 const buttonSecondaryColor = "#76a4df";
 
 const textColor = "#333";
-const textLightColor = "#f0f8ff";
+const textLightColor = "#fff";
 
 const linkColor = "#2b4380";
 const linkFocusColor = "#0535d2";

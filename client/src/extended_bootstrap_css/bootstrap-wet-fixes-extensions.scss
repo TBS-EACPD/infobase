@@ -65,7 +65,7 @@ hr {
 }
 
 .tooltip-inner a {
-  color: #fff;
+  color: $textLightColor;
   text-decoration: none;
 }
 
@@ -250,7 +250,7 @@ div.label {
 /* our app-wide a:visited: black is overriding all the bootstrap white on dark blue styles...  */
 .nav-pills > li.active > a {
   background-color: $primaryColor !important;
-  color: white !important;
+  color: $textLightColor !important;
 }
 
 /* to be used with light-background */

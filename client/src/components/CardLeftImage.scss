@@ -36,7 +36,7 @@
 
 .left-img-card__left { 
   flex: 0 0 30%;
-  color: white;
+  color: $textLightColor;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -63,7 +63,7 @@
   display: flex;
   width: 100%;
   max-width: 100%;
-  color: white;
+  color: $textLightColor;
 }
 
 .left-img-card__right {
@@ -106,7 +106,7 @@
 }
 
 .left-img-card__badge {
-  color: white;
+  color: $textLightColor;
   text-align: center;
   font-size: 1em;
   padding: 15px 0 15px 0;

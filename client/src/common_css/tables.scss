@@ -4,7 +4,7 @@
   background-color: $secondaryColor;
 }
 .table-dark-blue > thead > tr > th {
-  color: white;
+  color: $textLightColor;
 }
 .table-dark-blue > thead > tr > td,
 .table-dark-blue > thead > tr > th {
@@ -28,7 +28,7 @@
 }
 
 .table-dark-blue:not(.no-total-row) > tbody > tr:last-child > td {
-  color: white;
+  color: $textLightColor;
 }
 
 .table-dark-blue:not(.no-total-row) > tbody > tr:last-child > td:not(:last-child) {

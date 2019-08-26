@@ -35,7 +35,7 @@
 .centered-img-card__left { 
   padding: 5px;
   min-height: 1px; /* IE11 image bug */
-  color: white;
+  color: $textLightColor;
 }
 
 .centered-img-card__title {
@@ -73,7 +73,7 @@
 }
 
 .centered-img-card__badge {
-  color: white;
+  color: $textLightColor;
   text-align: center;
   font-size: 1em;
   padding: 20px 0 20px 0;
