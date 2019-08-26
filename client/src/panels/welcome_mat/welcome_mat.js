@@ -606,7 +606,7 @@ const WelcomeMat = (props) => {
         ]}
         text_row={[
           spend_summary_key &&
-            <Pane key="a" size={50}>
+            <Pane key="a" size={45}>
               <PaneItem textSize="small">
                 <TM
                   k={spend_summary_key}
@@ -619,7 +619,7 @@ const WelcomeMat = (props) => {
               </PaneItem>
             </Pane>,
           fte_summary_key &&
-            <Pane key="b" size={50}>
+            <Pane key="b" size={55}>
               <PaneItem textSize="small">
                 <TM
                   k={fte_summary_key}
