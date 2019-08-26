@@ -14,10 +14,10 @@ while [ $CURRENT_BRANCH != 'master' ]; do
     esac
 done
 
-(cd server && sh scripts/deploy_scripts/prod_deploy_data.sh)
-(cd server && sh scripts/deploy_scripts/prod_deploy_function.sh)
+(cd server && sh deploy_scripts/prod_deploy_data.sh)
+(cd server && sh deploy_scripts/prod_deploy_function.sh)
 
-(cd client && sh scripts/deploy_scripts/prod_deploy_client.sh)
+(cd client && sh deploy_scripts/prod_deploy_client.sh)
 
 # prod db name convention is "prod-db-{short sha}", this is assumed/relied on in a few places so
 # be careful if you ever want to change that convention
