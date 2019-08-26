@@ -13,6 +13,7 @@ export const SortIndicator = ({ sortDirection, active }) => (
       "a11y_sort_asc" :
       "a11y_sort_desc"  
     )}
+    aria-selected={active}
   >
     { 
       active ? (
