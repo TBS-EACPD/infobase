@@ -35,14 +35,16 @@ class Goco extends React.Component {
     const spend_col = "{{pa_last_year}}exp";
     const fte_col = "{{pa_last_year}}";
     const series_labels = [text_maker("spending"), text_maker("ftes")];
+    const spending_text = text_maker("spending");
+    const ftes_text = text_maker("ftes");
 
     let graph_content;
 
     const tick_map = {};
-    const fte_factor = 500000;
+    const fte_factor = 400000;
     const colors = d3.scaleOrdinal().range(newIBCategoryColors);
 
-    const data = _.chain(Tag.gocos_by_spendarea)
+    const graph_data = _.chain(Tag.gocos_by_spendarea)
       .map(sa=> {
         const children = _.map(sa.children_tags, goco => {
           const spending = programSpending.q(goco).sum(spend_col);
@@ -50,39 +52,39 @@ class Goco extends React.Component {
           tick_map[`${goco.name}`] = `#orgs/tag/${goco.id}/infograph`;
           return {
             label: goco.name,
-            [text_maker("spending")]: spending,
-            [text_maker("ftes")]: ftes,
+            [spending_text]: spending,
+            [ftes_text]: ftes,
           };
         });
-        const spending = d3.sum(children, c => c[text_maker("spending")]);
-        const ftes = d3.sum(children, c => c[text_maker("ftes")]);
+        const spending = d3.sum(children, c => c[spending_text]);
+        const ftes = d3.sum(children, c => c[ftes_text]);
         return {
           label: sa.name,
-          [text_maker("spending")]: spending,
-          [text_maker("ftes")]: ftes,
-          children: _.sortBy(children, d => -d[text_maker("spending")]),
+          [spending_text]: spending,
+          [ftes_text]: ftes,
+          children: _.sortBy(children, d => -d[spending_text]),
         };
       })
-      .sortBy(d => -d[text_maker("spending")])
+      .sortBy(d => -d[spending_text])
       .value();
     
-    const total_fte_spend = _.reduce(data, (result, row) => {
-      result.total_spending = result.total_spending + row[text_maker("spending")];
-      result.total_ftes = result.total_ftes + (row[text_maker("ftes")] / fte_factor);
+    const total_fte_spend = _.reduce(graph_data, (result, row) => {
+      result.total_spending = result.total_spending + row[spending_text];
+      result.total_ftes = result.total_ftes + (row[ftes_text] / fte_factor);
       return result;
     }, {
       total_spending: 0,
       total_ftes: 0,
     });
-    const maxSpending = _.maxBy(data, text_maker("spending"));
+    const maxSpending = _.maxBy(graph_data, spending_text);
     const spend_fte_text_data = {
       ...total_fte_spend,
       max_sa: maxSpending.label,
-      max_sa_share: maxSpending[text_maker("spending")] / total_fte_spend.total_spending,
+      max_sa_share: maxSpending[spending_text] / total_fte_spend.total_spending,
     };
     
     if(window.is_a11y_mode){
-      const a11y_data = _.chain(data)
+      const a11y_data = _.chain(graph_data)
         .map(row => {
           return {
             label: row.label,
@@ -106,7 +108,7 @@ class Goco extends React.Component {
         };
       });
       
-      const format_item = (item) => item.id === text_maker("ftes") ? formats.big_int_real_raw(item.value / fte_factor)
+      const format_item = (item) => item.id === ftes_text ? formats.big_int_real_raw(item.value / fte_factor)
         : formats.compact1_raw(item.value);
   
       const nivo_default_props = {
@@ -151,32 +153,37 @@ class Goco extends React.Component {
           left: 0,
         },
       };
-    
+
       const toggleOpacity = (element) => {
         const current_opacity = element.style.opacity;
         element.style.opacity = current_opacity === '1' || !current_opacity ? 0.4 : 1;
       };
-    
-      const handleHover = (node, targetElement) => {
-        const allGroupedElements = targetElement.parentElement.parentElement;
-        const childrenGroupedElements = _.map( _.drop(allGroupedElements.children, 2), _.identity );
-        const idx_factor = childrenGroupedElements.length / 2;
 
-        let targetElement_idx;
-        _.forEach(childrenGroupedElements, (element, index) => {
-          if(targetElement.parentElement === element){
-            targetElement_idx = index;
-            return;
+      const generate_index_map = (data) => {
+        let hoverIndex = 0;
+        const hover_index_spending = _.map(data, (row) => {
+          if(row[spending_text] > 0) {
+            return hoverIndex++;
           }
         });
-        const is_target_spending = idx_factor > targetElement_idx ? true : false;
-        const target_spending = childrenGroupedElements[is_target_spending ?
-          targetElement_idx : _.floor(targetElement_idx - idx_factor)];
-        const target_fte = childrenGroupedElements[is_target_spending ?
-          _.ceil(targetElement_idx + idx_factor) : targetElement_idx];
+        const hover_index_ftes = _.map(data, (row) => {
+          if(row[ftes_text] > 0) {
+            return hoverIndex++;
+          }
+        });
+        return _.zipObject( _.map(data, 'label'), _.zip(hover_index_spending, hover_index_ftes) );
+      };
+      
+      const handleHover = (node, targetElement, data) => {
+        const allGroupedElements = targetElement.parentElement.parentElement;
+        const childrenGroupedElements = _.map( _.drop(allGroupedElements.children, 2), _.identity );
+        const hover_index_map = generate_index_map(data);
+        const target_spending = childrenGroupedElements[hover_index_map[node.indexValue][0]];
+        const target_fte = childrenGroupedElements[hover_index_map[node.indexValue][1]];
+
         if(!_.isEqual(target_spending, clicked_spending) && !_.isEqual(target_fte, clicked_fte)){
-          if(target_spending) { toggleOpacity(target_spending); }
-          if(target_fte) { toggleOpacity(target_fte); }
+          target_spending && toggleOpacity(target_spending);
+          target_fte && toggleOpacity(target_fte);
           _.forEach(allGroupedElements.parentElement.querySelectorAll("text"),
             (textElement) => {
               if(textElement.textContent.replace(/\s+/g, '') === node.indexValue.replace(/\s+/g, '')){
@@ -187,27 +194,20 @@ class Goco extends React.Component {
         }
       };
   
-      const handleClick = (node, targetElement) => {
+      const handleClick = (node, targetElement, data) => {
         const allGroupedElements = targetElement.parentElement.parentElement;
         const childrenGroupedElements = _.map( _.drop(allGroupedElements.children, 2), _.identity );
-        const idx_factor = childrenGroupedElements.length / 2;
 
-        let target_spending;
-        let target_fte;
-        _.forEach(childrenGroupedElements, (element, targetElement_idx) => {
-          if(targetElement.parentElement === element){
-            const is_target_spending = idx_factor > targetElement_idx ? true : false;
-            target_spending = childrenGroupedElements[is_target_spending ?
-              targetElement_idx : _.floor(targetElement_idx - idx_factor)];
-            target_fte = childrenGroupedElements[is_target_spending ?
-              _.ceil(targetElement_idx + idx_factor) : targetElement_idx];
+        const click_index_map = generate_index_map(data);
+        const target_spending = childrenGroupedElements[click_index_map[node.indexValue][0]];
+        const target_fte = childrenGroupedElements[click_index_map[node.indexValue][1]];
 
-            if(target_spending) { target_spending.style.opacity = 1; }
-            if(target_fte) { target_fte.style.opacity = 1; }
-          } else if(target_spending != element && target_fte != element){
-            element.style.opacity = 0.4;
-          }
+        _.forEach(childrenGroupedElements, (element) => {
+          element.style.opacity = 0.4;
         });
+        target_spending && toggleOpacity(target_spending);
+        target_fte && toggleOpacity(target_fte);
+        
         _.forEach(allGroupedElements.parentElement.querySelectorAll("text"),
           (textElement) => {
             textElement.style.opacity = 
@@ -220,8 +220,8 @@ class Goco extends React.Component {
             <NivoResponsiveBar
               { ...nivo_default_props }
               data={ node.data.children }
-              onMouseEnter={ (child_node, e) => handleHover(child_node, e.target) }
-              onMouseLeave={ (child_node, e) => handleHover(child_node, e.target) }  
+              onMouseEnter={ (child_node, e) => handleHover(child_node, e.target, node.data.children) }
+              onMouseLeave={ (child_node, e) => handleHover(child_node, e.target, node.data.children) }  
               onClick={ (child_node, e) => window.open(tick_map[child_node.indexValue], '_blank') }
               bttm_axis={{
                 renderTick: tick => {
@@ -265,10 +265,10 @@ class Goco extends React.Component {
         <div style={{height: 400}}>
           <NivoResponsiveBar
             { ...nivo_default_props }
-            data={ data }
-            onMouseEnter={ (node, e) => handleHover(node, e.target) }
-            onMouseLeave={ (node, e) => handleHover(node, e.target) }
-            onClick={ (node, e) => handleClick(node, e.target) }
+            data={ graph_data }
+            onMouseEnter={ (node, e) => handleHover(node, e.target, graph_data) }
+            onMouseLeave={ (node, e) => handleHover(node, e.target, graph_data) }
+            onClick={ (node, e) => handleClick(node, e.target, graph_data) }
             bttm_axis={{
               renderTick: tick => {
                 return <g key={tick.key} transform={ `translate(${tick.x + 40},${tick.y + 16})` }>
@@ -294,7 +294,7 @@ class Goco extends React.Component {
       </div>
       { graph_content }
       { child_graph &&
-          <div style={ {height: 300, paddingBottom: 30} }>
+          <div style={ {height: 500, paddingBottom: 30} }>
             { child_graph }
           </div>
       }
