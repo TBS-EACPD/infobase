@@ -666,8 +666,7 @@ class HorizontalStatusTable extends React.Component {
           <thead>
             <tr className="table-header">
               <th 
-                className="center-text" 
-                role="col"
+                className="center-text"
                 onClick={ () => this.header_click("subject") }
               >
                 <TM k="org" />
@@ -681,8 +680,7 @@ class HorizontalStatusTable extends React.Component {
                   return (
                     <th 
                       key={column_key} 
-                      className="center-text" 
-                      role="col"
+                      className="center-text"
                       onClick={ () => this.header_click(column_key) }
                     >
                       { column_header }
