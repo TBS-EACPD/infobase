@@ -19,7 +19,7 @@
   
   &.active, &.active:focus, &:active {
     transform: scale(1.03);
-    color: white;
+    color: $textLightColor;
     background-color: $primaryColor;
 
     & > .bub-item > .bub-svg > svg {
