@@ -10,4 +10,4 @@ cd ../pipeline
 git checkout master
 git pull origin master
 
-cp -f outputs/Infobase/* $repo_path/data)
+cp -f outputs/Infobase/* $repo_path/data
