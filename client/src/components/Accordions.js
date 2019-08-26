@@ -104,7 +104,8 @@ const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) =
         aria-label={isExpanded ? "collapse above" : "expand above"}
       >
         <span>
-          <img 
+          <img
+            aria-hidden={true}
             src={get_static_url("svg/chevron.svg")} 
             style={{ 
               width: "20px", 
