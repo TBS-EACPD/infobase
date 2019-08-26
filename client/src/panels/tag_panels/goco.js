@@ -45,40 +45,40 @@ class Goco extends React.Component {
     const data = _.chain(Tag.gocos_by_spendarea)
       .map(sa=> {
         const children = _.map(sa.children_tags, goco => {
-          const Spending = programSpending.q(goco).sum(spend_col);
-          const FTEs = programFtes.q(goco).sum(fte_col) * fte_factor;
+          const spending = programSpending.q(goco).sum(spend_col);
+          const ftes = programFtes.q(goco).sum(fte_col) * fte_factor;
           tick_map[`${goco.name}`] = `#orgs/tag/${goco.id}/infograph`;
           return {
             label: goco.name,
-            Spending,
-            FTEs,
+            [text_maker("spending")]: spending,
+            [text_maker("ftes")]: ftes,
           };
         });
-        const Spending = d3.sum(children, c => c.Spending);
-        const FTEs = d3.sum(children, c => c.FTEs);
+        const spending = d3.sum(children, c => c[text_maker("spending")]);
+        const ftes = d3.sum(children, c => c[text_maker("ftes")]);
         return {
           label: sa.name,
-          Spending,
-          FTEs,
-          children: _.sortBy(children, d => -d.spending),
+          [text_maker("spending")]: spending,
+          [text_maker("ftes")]: ftes,
+          children: _.sortBy(children, d => -d[text_maker("spending")]),
         };
       })
-      .sortBy(d => -d.spending)
+      .sortBy(d => -d[text_maker("spending")])
       .value();
     
     const total_fte_spend = _.reduce(data, (result, row) => {
-      result.total_spending = result.total_spending + row.Spending;
-      result.total_ftes = result.total_ftes + (row.FTEs / fte_factor);
+      result.total_spending = result.total_spending + row[text_maker("spending")];
+      result.total_ftes = result.total_ftes + (row[text_maker("ftes")] / fte_factor);
       return result;
     }, {
       total_spending: 0,
       total_ftes: 0,
     });
-    const maxSpending = _.maxBy(data, 'Spending');
+    const maxSpending = _.maxBy(data, text_maker("spending"));
     const spend_fte_text_data = {
       ...total_fte_spend,
       max_sa: maxSpending.label,
-      max_sa_share: maxSpending.Spending / total_fte_spend.total_spending,
+      max_sa_share: maxSpending[text_maker("spending")] / total_fte_spend.total_spending,
     };
     
     if(window.is_a11y_mode){
