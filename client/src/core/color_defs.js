@@ -6,7 +6,7 @@ const secondaryColor = "#2C70C9";
 const tertiaryColor = "#8c949e"; /* this one is used lots at varying alpha/darkness levels, should stay grey */
 
 const backgroundColor = "#fff";
-const highlightColor = "#da3a38";
+const highlightColor = "#d72a28";
 const separatorColor = "#bbc1c9";
 
 const highlightPale = "#ffa8a8";
