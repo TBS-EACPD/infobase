@@ -871,7 +871,7 @@ class BudgetMeasureHBars extends React.Component {
                 {text_maker('budget_panel_group_by')}
               </label>
               <Select 
-                name = 'select_grouping'
+                id = 'select_grouping'
                 selected = {selected_grouping}
                 options = {_.map(grouping_options, 
                   ({name, id}) => ({
@@ -889,7 +889,7 @@ class BudgetMeasureHBars extends React.Component {
                 {text_maker('budget_panel_select_value')}
               </label>
               <Select 
-                name = 'select_value'
+                id = 'select_value'
                 selected = {selected_value}
                 options = {_.map(value_options, 
                   ({name, id}) => ({ 
