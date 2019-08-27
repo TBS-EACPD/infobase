@@ -9,7 +9,6 @@ import {
   Panel,
   Table,
   newIBCategoryColors,
-  newIBLightCategoryColors,
   NivoResponsiveBar,
   TspanLineWrapper,
 } from '../shared.js';
@@ -120,7 +119,7 @@ class Goco extends React.Component {
         enableGridX: false,
         enableGridY: false,
         label: d => format_item(d),
-        labelTextColor: newIBLightCategoryColors[4],
+        labelTextColor: newIBCategoryColors[4],
         tooltip: (slice) =>
           <div style={{color: window.infobase_color_constants.textColor}}>
             <table style={{width: '100%', borderCollapse: 'collapse'}}>
