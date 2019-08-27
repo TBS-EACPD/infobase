@@ -5,7 +5,7 @@ import { log_page_view } from './analytics.js';
 import { index_lang_lookups } from '../InfoBase/index_data.js';
 import classNames from 'classnames';
 import { trivial_text_maker } from '../models/text.js';
-import { Icon, IconHome } from '../icons/icons.js';
+import { IconHome } from '../icons/icons.js';
 import './NavComponents.scss';
 
 
@@ -63,7 +63,7 @@ class BreadCrumbs extends React.Component {
       <ol className="breadcrumb">
         <li className="infobase-home-breadcrumb-link">
           <a href="#start" className="nav-item">
-            <Icon title={trivial_text_maker("title")} color_set_by_css={true} ChildIcon={IconHome} />
+            <IconHome title={trivial_text_maker("title")} color_set_by_css={true} />
             InfoBase 
           </a>
         </li>
