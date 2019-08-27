@@ -119,7 +119,7 @@ class Goco extends React.Component {
         enableGridX: false,
         enableGridY: false,
         label: d => format_item(d),
-        label_format: d => <tspan y={ -3 }>{ d }</tspan>,
+        label_format: d => <tspan y={-3}> { d } </tspan>,
         tooltip: (slice) =>
           <div style={{color: window.infobase_color_constants.textColor}}>
             <table style={{width: '100%', borderCollapse: 'collapse'}}>
