@@ -82,20 +82,44 @@ class Goco extends React.Component {
     };
     
     if(window.is_a11y_mode){
-      const a11y_data = _.chain(graph_data)
-        .map(row => {
-          return {
-            label: row.label,
-            data: [formats.compact1_raw(row.Spending), formats.big_int_real_raw(row.FTEs / fte_factor)],
-          };
-        })
-        .value();
+      const a11y_data = _.map(graph_data, row => {
+        return {
+          label: row.label,
+          data: [formats.compact1_raw(row.Spending), formats.big_int_real_raw(row.FTEs / fte_factor)],
+        };
+      });
       
+      const a11y_children = _.reduce( graph_data, (result, row) => {
+        result.push(
+          {
+            parent_label: row.label,
+            child_data: _.map(row.children, (child) => {
+              return {
+                label: child.label,
+                data: [formats.compact1_raw(child.Spending), formats.big_int_real_raw(child.FTEs / fte_factor)],
+              };
+            }),
+          }
+        );
+        return result;
+      }, [] );
+
       graph_content = (
-        <A11YTable
-          data_col_headers={series_labels}
-          data={a11y_data}
-        />
+        <Fragment>
+          <A11YTable
+            label_col_header={text_maker("spend_area")}
+            data_col_headers={series_labels}
+            data={a11y_data}
+          />
+          { _.map( a11y_children, (child, i) =>
+            <A11YTable
+              key={i}
+              table_name={child.parent_label}
+              data_col_headers={series_labels}
+              data={child.child_data}
+            /> )
+          }
+        </Fragment>
       );
     } else {
       const legend_items = _.map(series_labels, (label) => {
