@@ -52,11 +52,11 @@ const IconHome = (props) => {
   } = props;
   return (
     <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGHome}/>
-  )
-}
+  );
+};
 
 
-const IconFeedback = (props) => {
+const SVGFeedback = (props) => {
   const {
     color_set_by_css,
     color,
@@ -69,7 +69,20 @@ const IconFeedback = (props) => {
   );
 };
 
-const IconAbout = (props) => {
+const IconFeedback = (props) => {
+  const {
+    title,
+    icon_class,
+    color_set_by_css,
+    color,
+  } = props;
+
+  return (
+    <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGFeedback}/>
+  );
+};
+
+const SVGAbout = (props) => {
   const {
     color_set_by_css,
     color,
@@ -87,7 +100,20 @@ const IconAbout = (props) => {
   );
 };
 
-const IconGlossary = (props) => {
+const IconAbout = (props) => {
+  const {
+    title,
+    icon_class,
+    color_set_by_css,
+    color,
+  } = props;
+  
+  return (
+    <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGAbout}/>
+  );
+};
+
+const SVGGlossary = (props) => {
   const {
     color_set_by_css,
     color,
@@ -115,7 +141,20 @@ const IconGlossary = (props) => {
   );
 };
 
-const IconDataset = (props) => {
+const IconGlossary = (props) => {
+  const {
+    title,
+    icon_class,
+    color_set_by_css,
+    color,
+  } = props;
+  
+  return (
+    <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGGlossary}/>
+  );
+};
+
+const SVGDataset = (props) => {
   const {
     color_set_by_css,
     color,
@@ -132,6 +171,19 @@ const IconDataset = (props) => {
       <line fill="none" className={color_set_by_css && "svg-stroke"} style={color_set_by_css ? undefined : {stroke: color}} strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="234.5" y1="197.5" x2="234.5" y2="515.5"/>
       <line fill="none" className={color_set_by_css && "svg-stroke"} style={color_set_by_css ? undefined : {stroke: color}} strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="365.5" y1="194.5" x2="365.5" y2="515.5"/>
     </Fragment>
+  );
+};
+
+const IconDataset = (props) => {
+  const {
+    title,
+    icon_class,
+    color_set_by_css,
+    color,
+  } = props;
+  
+  return (
+    <_IconWrapper title={title} width={600} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGDataset}/>
   );
 };
 
