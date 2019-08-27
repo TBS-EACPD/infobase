@@ -172,8 +172,13 @@ function populate_igoc_models({
 
 
 function populate_glossary(lines){
-  const [key, term, markdown_def, translation] = [0,1,2,3];
-  
+  let [term_en, def_en, translation_fr] = [1,3,2];
+  if (window.lang === 'fr') {
+    term_en++;
+    def_en++;
+    translation_fr--;
+  }
+  const [key, term, markdown_def, translation] = [0,term_en,def_en,translation_fr];
   _.chain(lines)
     .filter( line => !_.isEmpty(line[markdown_def]) )
     .each( line => {
