@@ -114,13 +114,13 @@
   "devDependencies": {},
   "sideEffects": [
     "src/app_bootstrap/*",
+    "src/panels/**/*.js",
+    "src/infographic/get_panels_for_subject/*.js",
+    "src/**/*.css",
+    "src/**/*.scss",
     "src/extended_bootsrap_css/extended_bootstrap_index.js",
     "src/common_css/common_css_index.js",
-    "src/handlebars/helpers.js",
-    "src/infographic/get_panels_for_subject.js",
-    "src/panels/**/*",
-    "**/*.css",
-    "**/*.scss"
+    "src/handlebars/helpers.js"
   ],
   "scripts": {
     "IB_base": "node build_code/copy_static_assets.js",
