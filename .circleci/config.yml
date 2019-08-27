@@ -10,7 +10,6 @@ deploy_filter: &deploy_filter
     branches:
       only:
         - master
-        - glossary-entry-translation
 
 version: 2
 jobs:
