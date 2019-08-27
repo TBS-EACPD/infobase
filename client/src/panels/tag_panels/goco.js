@@ -9,6 +9,7 @@ import {
   Panel,
   Table,
   newIBCategoryColors,
+  newIBLightCategoryColors,
   NivoResponsiveBar,
   TspanLineWrapper,
 } from '../shared.js';
@@ -40,7 +41,6 @@ class Goco extends React.Component {
 
     let graph_content;
 
-    const tick_map = {};
     const fte_factor = 400000;
     const colors = d3.scaleOrdinal().range(newIBCategoryColors);
 
@@ -49,7 +49,6 @@ class Goco extends React.Component {
         const children = _.map(sa.children_tags, goco => {
           const spending = programSpending.q(goco).sum(spend_col);
           const ftes = programFtes.q(goco).sum(fte_col) * fte_factor;
-          tick_map[`${goco.name}`] = `#orgs/tag/${goco.id}/infograph`;
           return {
             label: goco.name,
             [spending_text]: spending,
@@ -108,10 +107,12 @@ class Goco extends React.Component {
         };
       });
       
-      const format_item = (item) => item.id === ftes_text ? formats.big_int_real_raw(item.value / fte_factor)
+      const format_item = (item) => item.id === ftes_text
+        ? formats.big_int_real_raw(item.value / fte_factor)
         : formats.compact1_raw(item.value);
   
       const nivo_default_props = {
+        borderWidth: 1,
         indexBy: "label",
         animate: false,
         remove_left_axis: true,
@@ -119,6 +120,7 @@ class Goco extends React.Component {
         enableGridX: false,
         enableGridY: false,
         label: d => format_item(d),
+        labelTextColor: newIBLightCategoryColors[4],
         tooltip: (slice) =>
           <div style={{color: window.infobase_color_constants.textColor}}>
             <table style={{width: '100%', borderCollapse: 'collapse'}}>
@@ -186,14 +188,26 @@ class Goco extends React.Component {
           target_fte && toggleOpacity(target_fte);
           _.forEach(allGroupedElements.parentElement.querySelectorAll("text"),
             (textElement) => {
-              if(textElement.textContent.replace(/\s+/g, '') === node.indexValue.replace(/\s+/g, '')){
+              const target_text = textElement.textContent.replace(/\s+/g, '');
+              if(target_text === node.indexValue.replace(/\s+/g, '') ||
+                target_text === (target_spending && target_spending.getElementsByTagName("text")[0].textContent.replace(/\s+/g, '')) ||
+                target_text === (target_fte && target_fte.getElementsByTagName("text")[0].textContent.replace(/\s+/g, ''))
+              ){
                 toggleOpacity(textElement);
                 return;
               }
             });  
         }
       };
-  
+
+      const tick_map = _.reduce(Tag.gocos_by_spendarea, (final_result, sa) => {
+        const sa_href_result = _.reduce(sa.children_tags, (child_result, goco) => {
+          child_result[`${goco.name}`] = `#orgs/tag/${goco.id}/infograph`;
+          return child_result;
+        }, {});
+        return _.assignIn(sa_href_result, final_result);
+      }, {});
+
       const handleClick = (node, targetElement, data) => {
         const allGroupedElements = targetElement.parentElement.parentElement;
         const childrenGroupedElements = _.map( _.drop(allGroupedElements.children, 2), _.identity );
@@ -205,14 +219,17 @@ class Goco extends React.Component {
         _.forEach(childrenGroupedElements, (element) => {
           element.style.opacity = 0.4;
         });
-        target_spending && toggleOpacity(target_spending);
-        target_fte && toggleOpacity(target_fte);
-        
         _.forEach(allGroupedElements.parentElement.querySelectorAll("text"),
           (textElement) => {
+            const target_text = textElement.textContent.replace(/\s+/g, '');
             textElement.style.opacity = 
-              textElement.textContent.replace(/\s+/g, '') === node.indexValue.replace(/\s+/g, '') ? 1 : 0.4;
+              target_text === node.indexValue.replace(/\s+/g, '') ||
+              target_text === (target_spending && target_spending.getElementsByTagName("text")[0].textContent.replace(/\s+/g, '')) ||
+              target_text === (target_fte && target_fte.getElementsByTagName("text")[0].textContent.replace(/\s+/g, ''))
+              ? 1 : 0.4;
           });
+        target_spending && toggleOpacity(target_spending);
+        target_fte && toggleOpacity(target_fte);
   
         const child_graph = (
           <Fragment>
@@ -225,14 +242,14 @@ class Goco extends React.Component {
               onClick={ (child_node, e) => window.open(tick_map[child_node.indexValue], '_blank') }
               bttm_axis={{
                 renderTick: tick => {
-                  return <g key={tick.key} transform={ `translate(${tick.x + 60},${tick.y + 16})` }>
+                  return <g key={tick.key} transform={ `translate(${tick.x + 25},${tick.y + 16})` }>
                     <a
                       href={ tick_map[tick.value] }
                       target="_blank" rel="noopener noreferrer"
                     >
                       <text
-                        textAnchor="end"
-                        dominantBaseline="end"
+                        textAnchor="middle"
+                        dominantBaseline="middle"
                         style={{
                           ...tick.theme.axis.ticks.text,
                         }}
@@ -271,10 +288,10 @@ class Goco extends React.Component {
             onClick={ (node, e) => handleClick(node, e.target, graph_data) }
             bttm_axis={{
               renderTick: tick => {
-                return <g key={tick.key} transform={ `translate(${tick.x + 40},${tick.y + 16})` }>
+                return <g key={tick.key} transform={ `translate(${tick.x + 25},${tick.y + 16})` }>
                   <text
-                    textAnchor="end"
-                    dominantBaseline="end"
+                    textAnchor="middle"
+                    dominantBaseline="middle"
                     style={{
                       ...tick.theme.axis.ticks.text,
                     }}
