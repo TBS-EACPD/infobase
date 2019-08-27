@@ -205,6 +205,8 @@ export class NivoResponsiveBar extends React.Component{
       onClick,
       padding,
       animate,
+      labelTextColor,
+      borderWidth,
     } = this.props;
 
     return (
@@ -232,6 +234,8 @@ export class NivoResponsiveBar extends React.Component{
           tooltip,
           label,
           animate,
+          labelTextColor,
+          borderWidth,
         }}
         keys = {_.union([''],keys)}
         labelFormat={_.isUndefined(label_format) ? null : label_format}
@@ -249,7 +253,6 @@ export class NivoResponsiveBar extends React.Component{
             }
         }
         borderColor="inherit:darker(1.6)"
-        labelTextColor="inherit:darker(2)"
       />
     );
   }
@@ -262,6 +265,7 @@ NivoResponsiveBar.defaultProps = {
     tickPadding: 10,
     tickRotation: 0,
   },
+  labelTextColor: "inherit:darker(2)",
   isInteractive: true,
   motion_damping: 15,
   motion_stiffness: 95,
