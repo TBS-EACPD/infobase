@@ -2,7 +2,6 @@ import { TrivialTM } from '../components/index.js';
 import { trivial_text_maker } from '../models/text.js';
 import { Fragment } from 'react';
 import {
-  Icon,
   IconFeedback,
   IconAbout,
   IconGlossary,
@@ -27,7 +26,7 @@ const EasyAccess_ = () =>
     <a
       href='#glossary'
       className="link-unstyled nav-item">
-      <Icon title={trivial_text_maker("glossary")} color_set_by_css={true} ChildIcon={IconGlossary} />
+      <IconGlossary title={trivial_text_maker("glossary")} color_set_by_css={true} />
       <span className="mrgn-lft-sm">
         <TM k="glossary" />
       </span>
@@ -36,7 +35,7 @@ const EasyAccess_ = () =>
       href="#metadata"
       className="link-unstyled nav-item"
     >
-      <Icon title={trivial_text_maker("metadata")} width={600} color_set_by_css={true} ChildIcon={IconDataset} />
+      <IconDataset title={trivial_text_maker("metadata")} width={600} color_set_by_css={true} />
       <span className="mrgn-lft-sm">
         <TM k="metadata" />
       </span>
@@ -45,7 +44,7 @@ const EasyAccess_ = () =>
       href="#about"
       className="link-unstyled nav-item"
     >
-      <Icon title={trivial_text_maker("about_title")} color_set_by_css={true} ChildIcon={IconAbout} />
+      <IconAbout title={trivial_text_maker("about_title")} color_set_by_css={true} />
       <span className="mrgn-lft-sm">
         <TM k="about_title" />
       </span>
@@ -54,7 +53,7 @@ const EasyAccess_ = () =>
       href={trivial_text_maker("survey_link_href")}
       className="link-unstyled nav-item"
     >
-      <Icon title={trivial_text_maker("survey_link_text")} color_set_by_css={true} ChildIcon={IconFeedback} />
+      <IconFeedback title={trivial_text_maker("survey_link_text")} color_set_by_css={true} />
       <span className="mrgn-lft-sm">
         <TM k="survey_link_text" />
       </span>

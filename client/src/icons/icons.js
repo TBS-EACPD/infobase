@@ -344,7 +344,6 @@ IconClock.defaultProps = {
 };
 
 export {
-  Icon,
   IconHome,
   IconFeedback,
   IconAbout,
