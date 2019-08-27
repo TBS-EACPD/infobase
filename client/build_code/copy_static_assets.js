@@ -52,6 +52,8 @@ const common_lookups = _.map(
     'ministries.csv',
     'inst_forms.csv',
     'url_lookups.csv',
+
+    'glossary.csv',
   ], 
   public_dir_prefixer 
 );
@@ -61,7 +63,6 @@ const common_lookups = _.map(
 const lang_specific_lookups = lang => [
   "program",
   "crso",
-  "glossary",
   "igoc",
 ].map( name => `${name}_${lang}.csv`);
 
