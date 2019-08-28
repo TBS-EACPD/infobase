@@ -38,41 +38,6 @@
 }
 
 
-// Overwrite some default styles from the FilterTable component
-.chapter-key-table {
-  & > .filter-table {
-    padding: 10px 0px 10px 0px;
-
-    & > .filter-table__item {
-      border-color: $controlsColorLighter;
-      color: $controlsColorLighter;
-
-      & > .filter-table__eye > .eye-open {
-        color: $controlsColorLighter;
-      }
-      & > .filter-table > .eye-close {
-        color: $controlsColor;
-      }
-
-      & > .filter-table__components {
-        @media(min-width:$minLargeDevice){
-          margin-bottom: 20px;
-        }
-
-        & > .filter-table__text {
-          font-size: 20px;
-        }
-        & > .filter-table__count_area {
-          text-align: center;
-
-          & > .filter-table__count {
-            font-size: 19px; 
-          }
-        }
-      }
-    }
-  }
-}
 
 
 .budget-measures-search-box {
