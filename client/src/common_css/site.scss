@@ -181,6 +181,13 @@ header, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   }
 }
 
+.span-hover {
+  cursor: pointer;
+  &:focus, &:hover {
+    opacity: 0.5;
+  }
+}
+
 .text-only-page-root {
   h2, h3, h4 {
     text-transform: uppercase;

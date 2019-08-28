@@ -20,7 +20,8 @@ const GraphLegend = ({
             { backgroundColor: color, border: "1px solid " + color } : 
             { border: "1px solid " + color }
           }
-          className="legend-color-checkbox"
+          className={ onClick ? "legend-color-checkbox span-hover" : "legend-color-checkbox" }
+          onClick={ () => onClick && onClick(id) }
         />
         { onClick ?
           <span
@@ -28,8 +29,8 @@ const GraphLegend = ({
             aria-checked={active}
             tabIndex={0}
             className="link-styled"
-            onClick={()=> onClick(id)}
-            onKeyDown={(e)=> (e.keyCode===13 || e.keyCode===32) && onClick(id)}
+            onClick={ () => onClick(id) }
+            onKeyDown={ (e) => (e.keyCode===13 || e.keyCode===32) && onClick(id) }
           > 
             { label }
           </span> : 
