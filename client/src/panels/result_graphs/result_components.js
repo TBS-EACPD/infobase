@@ -17,6 +17,7 @@ import {
   IconNotApplicable,
   IconClock,
 } from '../../icons/icons.js';
+import * as color_defs from '../../core/color_defs.js';
 
 const dp_docs = get_result_doc_keys("dp");
 const drr_docs = get_result_doc_keys("drr");
@@ -480,22 +481,10 @@ const QuadrantDefList = ({defs} ) => (
 
 const result_status_components = (status, width) => {
   const icons = {
-    met:
-      <span className="status-icon-table--met-icon">
-        <IconCheck width={width} height={width}/>
-      </span>,
-    not_met:
-      <span className="status-icon-table--not-met-icon">
-        <IconAttention width={width} height={width}/>
-      </span>,
-    not_available:
-      <span className="status-icon-table--na-icon">
-        <IconNotApplicable width={width} height={width}/>
-      </span>,
-    future:
-      <span className="status-icon-table--future-icon">
-        <IconClock width={width} height={width}/>
-      </span>,
+    met: <IconCheck width={width} height={width} color_set_by_css={false} color={color_defs.successDarkColor}/>,
+    not_met: <IconAttention width={width} height={width} color_set_by_css={false} color={color_defs.failDarkColor}/>,
+    not_available: <IconNotApplicable width={width} height={width} color_set_by_css={false} color={color_defs.warnDarkColor}/>,
+    future: <IconClock width={width} height={width} color_set_by_css={false} color={color_defs.infoDarkColor}/>,
   };
   return icons[status];
 };
