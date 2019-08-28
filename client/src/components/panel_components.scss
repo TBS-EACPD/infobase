@@ -136,7 +136,7 @@
 .panel-heading-utils > svg .svg-fill{
   fill: #fff;
 }
-.panel-heading-utils:hover > svg .svg-fill {
+.panel-heading-utils:hover, > svg .svg-fill {
   fill: $secondaryColor;
 }
 
