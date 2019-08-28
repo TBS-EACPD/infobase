@@ -14,7 +14,7 @@ import {
 import {
   IconCheck,
   IconAttention,
-  IconNA,
+  IconNotApplicable,
   IconClock,
 } from '../../icons/icons.js';
 
@@ -490,7 +490,7 @@ const result_status_components = (status, width) => {
       </span>,
     not_available:
       <span className="status-icon-table--na-icon">
-        <IconNA width={width} height={width}/>
+        <IconNotApplicable width={width} height={width}/>
       </span>,
     future:
       <span className="status-icon-table--future-icon">
