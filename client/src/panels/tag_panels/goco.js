@@ -211,10 +211,13 @@ class Goco extends React.Component {
           target_fte && toggleOpacity(target_fte);
           _.forEach(allGroupedElements.parentElement.querySelectorAll("text"),
             (textElement) => {
-              const target_text = textElement.textContent.replace(/\s+/g, '');
-              if(target_text === node.indexValue.replace(/\s+/g, '') ||
-                target_text === (target_spending && target_spending.getElementsByTagName("text")[0].textContent.replace(/\s+/g, '')) ||
-                target_text === (target_fte && target_fte.getElementsByTagName("text")[0].textContent.replace(/\s+/g, ''))
+              const currentText = textElement.textContent.replace(/\s+/g, '');
+              const target_text = node.indexValue.replace(/\s+/g, '');
+              const spending_text = target_spending && target_spending.getElementsByTagName("text")[0].textContent.replace(/\s+/g, '');
+              const fte_text = target_fte && target_fte.getElementsByTagName("text")[0].textContent.replace(/\s+/g, '');
+              if( currentText === target_text ||
+                  currentText === spending_text ||
+                  currentText === fte_text
               ){
                 toggleOpacity(textElement);
                 return;
@@ -244,12 +247,14 @@ class Goco extends React.Component {
         });
         _.forEach(allGroupedElements.parentElement.querySelectorAll("text"),
           (textElement) => {
-            const target_text = textElement.textContent.replace(/\s+/g, '');
-            textElement.style.opacity = 
-              target_text === node.indexValue.replace(/\s+/g, '') ||
-              target_text === (target_spending && target_spending.getElementsByTagName("text")[0].textContent.replace(/\s+/g, '')) ||
-              target_text === (target_fte && target_fte.getElementsByTagName("text")[0].textContent.replace(/\s+/g, ''))
-              ? 1 : 0.4;
+            const currentText = textElement.textContent.replace(/\s+/g, '');
+            const target_text = node.indexValue.replace(/\s+/g, '');
+            const spending_text = target_spending && target_spending.getElementsByTagName("text")[0].textContent.replace(/\s+/g, '');
+            const fte_text = target_fte && target_fte.getElementsByTagName("text")[0].textContent.replace(/\s+/g, '');
+            textElement.style.opacity = ( currentText === target_text ||
+                                          currentText === spending_text ||
+                                          currentText === fte_text )
+                                          ? 1 : 0.4;
           });
         target_spending && toggleOpacity(target_spending);
         target_fte && toggleOpacity(target_fte);
