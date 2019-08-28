@@ -135,7 +135,6 @@ class Goco extends React.Component {
         : formats.compact1_raw(item.value);
   
       const nivo_default_props = {
-        borderWidth: 1,
         indexBy: "label",
         animate: false,
         remove_left_axis: true,
@@ -200,6 +199,7 @@ class Goco extends React.Component {
       };
       
       const handleHover = (node, targetElement, data) => {
+        targetElement.style.cursor = 'pointer';
         const allGroupedElements = targetElement.parentElement.parentElement;
         const childrenGroupedElements = _.map( _.drop(allGroupedElements.children, 2), _.identity );
         const hover_index_map = generate_index_map(data);
@@ -294,7 +294,7 @@ class Goco extends React.Component {
       };
 
       graph_content = <Fragment>
-        <div style={ {padding: '10px 25px 10px 25px'} }>
+        <div className="centerer mrgn-bttm-md" style={ {padding: '10px 25px 10px 25px'} }>
           <div className="legend-container">
             <GraphLegend
               isHorizontal
