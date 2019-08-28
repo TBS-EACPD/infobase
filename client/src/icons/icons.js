@@ -10,7 +10,9 @@ const { result_simple_statuses } = businessConstants;
 const _IconWrapper = (props) => {
   const {
     title,
+    viewbox_width, // the original coordinate system the svg was created in, assume square
     width,
+    height,
     icon_class,
     color_set_by_css,
     color,
@@ -18,14 +20,14 @@ const _IconWrapper = (props) => {
     ChildIcon,
   } = props;
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox={`0 0 ${width} ${width}`} className={icon_class}>
+    <svg className={icon_class} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox={`0 0 ${viewbox_width} ${viewbox_width}`} width={width} height={height} >
       <title>{title}</title>
       <ChildIcon color_set_by_css={color_set_by_css} color={color} rotation={rotation}/>
     </svg>
   );
 };
 _IconWrapper.defaultProps = {
-  width: 24,
+  viewbox_width: 24,
   icon_class: "icon--svg-inline",
   color_set_by_css: true,
 };
@@ -52,7 +54,7 @@ const IconHome = (props) => {
     color,
   } = props;
   return (
-    <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGHome}/>
+    <_IconWrapper title={title} viewbox_width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGHome}/>
   );
 };
 
@@ -79,7 +81,7 @@ const IconFeedback = (props) => {
   } = props;
 
   return (
-    <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGFeedback}/>
+    <_IconWrapper title={title} viewbox_width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGFeedback}/>
   );
 };
 
@@ -110,7 +112,7 @@ const IconAbout = (props) => {
   } = props;
   
   return (
-    <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGAbout}/>
+    <_IconWrapper title={title} viewbox_width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGAbout}/>
   );
 };
 
@@ -151,7 +153,7 @@ const IconGlossary = (props) => {
   } = props;
   
   return (
-    <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGGlossary}/>
+    <_IconWrapper title={title} viewbox_width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGGlossary}/>
   );
 };
 
@@ -184,7 +186,7 @@ const IconDataset = (props) => {
   } = props;
   
   return (
-    <_IconWrapper title={title} width={600} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGDataset}/>
+    <_IconWrapper title={title} viewbox_width={600} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGDataset}/>
   );
 };
 
@@ -214,7 +216,7 @@ const IconShare = (props) => {
   } = props;
   
   return (
-    <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGShare}/>
+    <_IconWrapper title={title} viewbox_width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGShare}/>
   );
 };
 
@@ -257,7 +259,7 @@ const IconPermalink = (props) => {
   } = props;
   
   return (
-    <_IconWrapper title={title} width={30} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGPermalink}/>
+    <_IconWrapper title={title} viewbox_width={30} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGPermalink}/>
   );
 };
 
@@ -286,7 +288,7 @@ const IconDownload = (props) => {
   } = props;
   
   return (
-    <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGDownload}/>
+    <_IconWrapper title={title} viewbox_width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGDownload}/>
   );
 };
 
@@ -313,7 +315,7 @@ const IconChevron = (props) => {
   const rotation = rotated ? "rotate(180 250 250)" : "rotate(0)";
 
   return (
-    <_IconWrapper title={title} width={600} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGChevron} rotation={rotation}/>
+    <_IconWrapper title={title} viewbox_width={600} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGChevron} rotation={rotation}/>
   );
 };
 IconChevron.defaultProps = {
@@ -343,7 +345,7 @@ const IconZoomIn = (props) => {
   } = props;
 
   return (
-    <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGZoomIn}/>
+    <_IconWrapper title={title} viewbox_width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGZoomIn}/>
   );
 };
 IconZoomIn.defaultProps = {
@@ -374,7 +376,7 @@ const IconZoomOut = (props) => {
   } = props;
 
   return (
-    <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGZoomOut}/>
+    <_IconWrapper title={title} viewbox_width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGZoomOut}/>
   );
 };
 IconZoomOut.defaultProps = {
@@ -408,14 +410,17 @@ const IconCheck = (props) => {
     icon_class,
     color_set_by_css,
     color,
+    width,
+    height,
   } = props;
 
   return (
-    <_IconWrapper title={title} width={500} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGCheck}/>
+    <_IconWrapper title={title} width={width} height={height} viewbox_width={500} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGCheck}/>
   );
 };
 IconCheck.defaultProps = {
   title: result_simple_statuses.met.text,
+  icon_class: "icon--svg",
 };
 
 const SVGAttention = (props) => {
@@ -448,12 +453,15 @@ const IconAttention = (props) => {
     icon_class,
     color_set_by_css,
     color,
+    width,
+    height,
   } = props;
 
-  return <_IconWrapper title={title} width={500} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGAttention}/>;
+  return <_IconWrapper title={title} width={width} height={height} viewbox_width={500} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGAttention}/>;
 };
 IconAttention.defaultProps = {
   title: result_simple_statuses.not_met.text,
+  icon_class: "icon--svg",
 };
 
 const SVGNotApplicable = (props) => {
@@ -481,12 +489,15 @@ const IconNotApplicable = (props) => {
     icon_class,
     color_set_by_css,
     color,
+    width,
+    height,
   } = props;
 
-  return <_IconWrapper title={title} width={500} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGNotApplicable}/>;
+  return <_IconWrapper title={title} width={width} height={height} viewbox_width={500} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGNotApplicable}/>;
 };
 IconNotApplicable.defaultProps = {
   title: result_simple_statuses.not_available.text,
+  icon_class: "icon--svg",
 };
 
 const SVGClock = (props) => {
@@ -514,12 +525,15 @@ const IconClock = (props) => {
     icon_class,
     color_set_by_css,
     color,
+    width,
+    height,
   } = props;
 
-  return <_IconWrapper title={title} width={500} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGClock}/>;
+  return <_IconWrapper title={title} viewbox_width={500} width={width} height={height} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGClock}/>;
 };
 IconClock.defaultProps = {
   title: result_simple_statuses.future.text,
+  icon_class: "icon--svg",
 };
 
 export {
