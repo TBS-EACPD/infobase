@@ -188,30 +188,45 @@ const IconDataset = (props) => {
   );
 };
 
-const IconShare = (props) => {
+const SVGShare = (props) => {
   const {
-    title,
+    color_set_by_css,
+    color,
   } = props;
   
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="icon--svg-inline">
-      <title>{title}</title>
+    <Fragment>
       <path d="M0 0h24v24H0z" fill="none"/>
-      <path className="svg-fill" d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34
+      <path className={color_set_by_css && "svg-fill"} style={color_set_by_css ? undefined : {fill: color}}
+        d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34
         3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65
         0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
-    </svg>
+    </Fragment>
   );
 };
 
-const IconPermalink = (props) => {
+const IconShare = (props) => {
   const {
     title,
+    icon_class,
+    color_set_by_css,
+    color,
   } = props;
   
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30" height="30" className="icon--svg-inline">
-      <title>{title}</title> 
+    <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGShare}/>
+  );
+};
+
+
+const SVGPermalink = (props) => {
+  const {
+    color_set_by_css,
+    color,
+  } = props;
+  
+  return (
+    <g className={color_set_by_css && "svg-fill"} style={color_set_by_css ? undefined : {fill: color}} >
       {/* 
       Copyright Wikimedia
       
@@ -226,13 +241,26 @@ const IconPermalink = (props) => {
       liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the Software or the use or other dealings
       in the Software.
       */}
-      <g className="svg-fill" >
-        <path d="M20.437 2.69c-3.37 0-5.778 3.05-8.186 5.297.322 0 .804-.16 1.285-.16.803 0 1.605.16 2.408.48 1.284-1.283 2.568-2.727 4.494-2.727.963 0 2.087.48 2.89 1.123 1.605 1.605 1.605 4.174 0 5.78l-4.174 4.172c-.642.642-1.926 1.124-2.89 1.124-2.246 0-3.37-1.446-4.172-3.212l-2.086 2.087c1.284 2.408 3.21 4.173 6.1 4.173 1.926 0 3.69-.802 4.815-2.086l4.172-4.174c1.445-1.444 2.408-3.21 2.408-5.297-.32-3.53-3.53-6.58-7.063-6.58z"/>
-        <path d="M13.535 22.113l-1.444 1.444c-.64.642-1.925 1.124-2.89 1.124-.962 0-2.085-.48-2.888-1.123-1.605-1.605-1.605-4.334 0-5.778l4.174-4.175c.642-.642 1.926-1.123 2.89-1.123 2.246 0 3.37 1.605 4.172 3.21l2.087-2.087c-1.284-2.407-3.21-4.173-6.1-4.173-1.926 0-3.692.803-4.815 2.087L4.547 15.69c-2.73 2.73-2.73 7.063 0 9.63 2.568 2.57 7.062 2.73 9.47 0l3.05-3.05c-.482.162-.963.162-1.445.162-.803 0-1.445 0-2.087-.32z"/>
-      </g>
-    </svg>
+      <path d="M20.437 2.69c-3.37 0-5.778 3.05-8.186 5.297.322 0 .804-.16 1.285-.16.803 0 1.605.16 2.408.48 1.284-1.283 2.568-2.727 4.494-2.727.963 0 2.087.48 2.89 1.123 1.605 1.605 1.605 4.174 0 5.78l-4.174 4.172c-.642.642-1.926 1.124-2.89 1.124-2.246 0-3.37-1.446-4.172-3.212l-2.086 2.087c1.284 2.408 3.21 4.173 6.1 4.173 1.926 0 3.69-.802 4.815-2.086l4.172-4.174c1.445-1.444 2.408-3.21 2.408-5.297-.32-3.53-3.53-6.58-7.063-6.58z"/>
+      <path d="M13.535 22.113l-1.444 1.444c-.64.642-1.925 1.124-2.89 1.124-.962 0-2.085-.48-2.888-1.123-1.605-1.605-1.605-4.334 0-5.778l4.174-4.175c.642-.642 1.926-1.123 2.89-1.123 2.246 0 3.37 1.605 4.172 3.21l2.087-2.087c-1.284-2.407-3.21-4.173-6.1-4.173-1.926 0-3.692.803-4.815 2.087L4.547 15.69c-2.73 2.73-2.73 7.063 0 9.63 2.568 2.57 7.062 2.73 9.47 0l3.05-3.05c-.482.162-.963.162-1.445.162-.803 0-1.445 0-2.087-.32z"/>
+    </g>
   );
 };
+
+
+const IconPermalink = (props) => {
+  const {
+    title,
+    icon_class,
+    color_set_by_css,
+    color,
+  } = props;
+  
+  return (
+    <_IconWrapper title={title} width={30} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGPermalink}/>
+  );
+};
+
 
 const IconDownload = (props) => {
   const {
