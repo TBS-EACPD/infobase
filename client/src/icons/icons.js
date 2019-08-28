@@ -262,17 +262,31 @@ const IconPermalink = (props) => {
 };
 
 
-const IconDownload = (props) => {
+const SVGDownload = (props) => {
   const {
-    title,
+    color_set_by_css,
+    color,
   } = props;
   
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="icon--svg-inline">
-      <title>{title}</title>
-      <path className="svg-fill" d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+    <Fragment>
+      <path className={color_set_by_css && "svg-fill"} style={color_set_by_css ? undefined : {fill: color}}
+        d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
       <path d="M0 0h24v24H0z" fill="none" />
-    </svg>
+    </Fragment>
+  );
+};
+
+const IconDownload = (props) => {
+  const {
+    title,
+    icon_class,
+    color_set_by_css,
+    color,
+  } = props;
+  
+  return (
+    <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGDownload}/>
   );
 };
 
