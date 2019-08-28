@@ -1,7 +1,6 @@
 import './Accordions.scss';
 import { TransitionGroup, Transition } from 'react-transition-group';
 import { IconChevron } from '../icons/icons.js';
-import { get_static_url } from '../request_utils.js';
 
 function FirstChild(props) {
   const childrenArray = React.Children.toArray(props.children);
