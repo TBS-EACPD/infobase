@@ -14,12 +14,13 @@ const _IconWrapper = (props) => {
     icon_class,
     color_set_by_css,
     color,
+    rotation,
     ChildIcon,
   } = props;
   return (
     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox={`0 0 ${width} ${width}`} className={icon_class}>
       <title>{title}</title>
-      <ChildIcon color_set_by_css={color_set_by_css} color={color}/>
+      <ChildIcon color_set_by_css={color_set_by_css} color={color} rotation={rotation}/>
     </svg>
   );
 };
@@ -247,59 +248,96 @@ const IconDownload = (props) => {
   );
 };
 
+const SVGChevron = (props) => {
+  const {
+    rotation,
+  } = props;
+
+  return (
+    <polygon transform={rotation} className="svg-fill" points="469.7,189.8 377.9,103.2 377.9,103.2 250.1,223.8 122.1,103.1 30.3,189.7 249.8,396.8 249.9,396.7 
+      250.2,396.9 "/>
+  );
+};
+
 const IconChevron = (props) => {
   const {
     title,
     rotated,
+    icon_class,
+    color_set_by_css,
+    color,
   } = props;
 
   const rotation = rotated ? "rotate(180 250 250)" : "rotate(0)";
 
   return (
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 500 500" className="icon--svg-inline">
-      <title>{title}</title>
-      <polygon transform={rotation} className="svg-fill" points="469.7,189.8 377.9,103.2 377.9,103.2 250.1,223.8 122.1,103.1 30.3,189.7 249.8,396.8 249.9,396.7 
-        250.2,396.9 "/>
-    </svg>
+    <_IconWrapper title={title} width={600} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGChevron} rotation={rotation}/>
   );
 };
+IconChevron.defaultProps = {
+  icon_class: "icon--svg",
+};
 
+const SVGZoomIn = (props) => {
+  const {
+    color_set_by_css,
+    color,
+  } = props;
+
+  return (
+    <Fragment>
+      <path className={color_set_by_css && "svg-fill"} style={color_set_by_css ? undefined : {fill: color}} d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+      <path fill="none" d="M0 0h24v24H0V0z"/>
+      <path className={color_set_by_css && "svg-fill"} style={color_set_by_css ? undefined : {fill: color}} d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/>
+    </Fragment>
+  );
+};
 const IconZoomIn = (props) => {
   const {
     title,
+    icon_class,
+    color_set_by_css,
+    color,
   } = props;
 
-
   return (
-    <svg className="icon--svg-inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-      <title>{title}</title>
-      <path className="svg-fill" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-      <path fill="none" d="M0 0h24v24H0V0z"/>
-      <path className="svg-fill" d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/>
-    </svg>
+    <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGZoomIn}/>
   );
 };
 IconZoomIn.defaultProps = {
   title: trivial_text_maker("zoom_in"),
+  icon_class: "icon--svg",
 };
 
 
+const SVGZoomOut = (props) => {
+  const {
+    color_set_by_css,
+    color,
+  } = props;
+
+  return (
+    <Fragment>
+      <path fill="none" d="M0 0h24v24H0V0z"/>
+      <path className={color_set_by_css && "svg-fill"} style={color_set_by_css ? undefined : {fill: color}} d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7z"/>
+    </Fragment>
+  );
+};
 const IconZoomOut = (props) => {
   const {
     title,
+    icon_class,
+    color_set_by_css,
+    color,
   } = props;
 
-
   return (
-    <svg className="icon--svg-inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-      <title>{title}</title>
-      <path fill="none" d="M0 0h24v24H0V0z"/>
-      <path className="svg-fill" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7z"/>
-    </svg>
+    <_IconWrapper title={title} width={24} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildIcon={SVGZoomOut}/>
   );
 };
 IconZoomOut.defaultProps = {
-  title: trivial_text_maker("zoom_out"),
+  title: trivial_text_maker("zoom_in"),
+  icon_class: "icon--svg",
 };
 
 const IconCheck = (props) => {

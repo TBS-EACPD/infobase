@@ -9,6 +9,7 @@ import {
   IconZoomOut,
 } from '../icons/icons.js';
 
+
 const get_formatter = (is_money, formatter, raw = true) => (
   _.isUndefined(formatter) ?
     ( 
