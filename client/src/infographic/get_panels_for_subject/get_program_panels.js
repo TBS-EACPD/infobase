@@ -1,3 +1,5 @@
+import { ensure_loaded } from '../../core/lazy_loader.js';
+
 // shared all
 import '../../panels/welcome_mat/welcome_mat.js';
 import '../../panels/intro_graphs/intro_graphs.js';
@@ -24,7 +26,11 @@ import "../../panels/sobj/top_spending_areas.js";
 import "../../panels/drr_dp_resources/sub_program_resources.js";
 import "../../panels/drr_dp_resources/spending_in_perspective.js";
 
-export const get_program_panels = subject => ({
+// To be safe, ensure all used has_<data> checks are loaded
+export const get_program_panels = subject => ensure_loaded({
+  subject: subject,
+  has_results: true,
+}).then( () => ({
   intro: [
     "dead_program_warning",
     'profile',
@@ -53,4 +59,4 @@ export const get_program_panels = subject => ({
     "related_program_structure",
     'tags_of_interest',
   ],
-});
+}) );

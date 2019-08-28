@@ -9,8 +9,11 @@ const tm = create_text_maker(graph_text);
 
 /* eslint-disable no-unused-vars */
 import { get_panels_for_subject } from '../infographic/get_panels_for_subject';
-
 import { Subject } from '../models/subject';
+import { EverythingSearch, SpinnerWrapper } from '../components/index.js';
+import { ensure_loaded } from '../core/lazy_loader';
+import { PanelGraph } from '../core/PanelGraph';
+
 const {
   Dept, 
   Program, 
@@ -19,11 +22,6 @@ const {
   Gov,
   CRSO,
 } = Subject;
-import { ensure_loaded } from '../core/lazy_loader';
-import { EverythingSearch, SpinnerWrapper } from '../components/index.js';
-import { PanelGraph } from '../core/PanelGraph';
-
-
 
 function url_template(subject, graph){
   return `/graph/${subject.level}/${graph.key}/${subject.id}`;
@@ -205,6 +203,7 @@ export default class GraphInventory extends React.Component {
   constructor(){
     super();
     this.state = {
+      initial_loading: true,
       loading: true,
       derived_props: {},
     };
@@ -220,19 +219,25 @@ export default class GraphInventory extends React.Component {
     });
   }
   static getDerivedStateFromProps(nextProps, prevState){
-    const old_derived_props = prevState.derived_props;
-    const new_derived_props = get_derived_props(nextProps);
-    if(!_.isEqual(old_derived_props, new_derived_props)){
-      return {
-        loading: true,
-        derived_props: new_derived_props,
-      };
-    } else {
-      return null;
+    if (!prevState.initial_loading){
+      const old_derived_props = prevState.derived_props;
+      const new_derived_props = get_derived_props(nextProps);
+      if(!_.isEqual(old_derived_props, new_derived_props)){
+        return {
+          loading: true,
+          derived_props: new_derived_props,
+        };
+      }
     }
+    return null;
   }
   componentDidMount(){
-    this.loadDeps(this.state.derived_props);
+    Promise.all(
+      _.chain(["gov", "dept", "crso", "program", "tag"])
+        .map(getSubj)
+        .map(get_panels_for_subject)
+        .value()
+    ).then( () => this.setState({initial_loading: false}) );
   }
   componentDidUpdate(){
     if(this.state.loading){
@@ -241,18 +246,18 @@ export default class GraphInventory extends React.Component {
   }
 
   render(){
-
-    const { 
-      subject,
-      panel,
-      related_graphs,
-    } = get_derived_props(this.props);
-    const { loading } = this.state; 
+    const { initial_loading, loading } = this.state; 
 
     let content;
-    if(loading){
+    if(initial_loading || loading){
       content = <SpinnerWrapper config_name={"sub_route"} />;
     } else {
+      const { 
+        subject,
+        panel,
+        related_graphs,
+      } = get_derived_props(this.props);
+
       content = <div>
         <h1> {tm("graph_inventory")} </h1>
         <div className="mrgn-bttm-lg">
