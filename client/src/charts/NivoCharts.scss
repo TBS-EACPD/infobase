@@ -1,0 +1,20 @@
+@import "../common_css/common-variables";
+
+.btn-ib-zoom { 
+    background-color: $backgroundColor;
+    border: 2px solid $backgroundColor;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    color: $tertiaryColor !important;
+    border-radius: 13px;
+  }
+  .btn-ib-zoom > svg.icon--svg {
+    height: 1.5em;
+    vertical-align: -.5em;
+  }
+  .btn-ib-zoom > svg.icon--svg > .svg-fill {
+    fill: $tertiaryColor;
+  }
+  .btn-ib-zoom:hover > svg.icon--svg > .svg-fill {
+    fill: $primaryColor;
+  }
