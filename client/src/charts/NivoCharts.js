@@ -8,6 +8,7 @@ import {
   IconZoomIn,
   IconZoomOut,
 } from '../icons/icons.js';
+import './NivoCharts.scss';
 
 
 const get_formatter = (is_money, formatter, raw = true) => (
