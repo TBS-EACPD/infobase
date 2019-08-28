@@ -1,4 +1,5 @@
 import { get_people_panels } from './get_people_panels.js';
+import { ensure_loaded } from '../../core/lazy_loader.js';
 
 // shared all
 import '../../panels/welcome_mat/welcome_mat.js';
@@ -33,7 +34,11 @@ import "../../panels/transfer_payments/last_year_g_and_c_perspective.js";
 import "../../panels/sobj/spend_by_so_hist.js";
 //import '../../panels/internal_services/isc.js';
 
-export const get_dept_panels = subject => ({
+// To be safe, ensure all used has_<data> checks are loaded
+export const get_dept_panels = subject => ensure_loaded({
+  subject: subject,
+  has_results: true,
+}).then( () => ({
   intro: [
     'igoc_fields',
     'portfolio_structure_intro',
@@ -68,4 +73,4 @@ export const get_dept_panels = subject => ({
   all_data: _.nonEmpty(subject.tables) && [
     "links_to_rpb",
   ],
-});
+}) );
