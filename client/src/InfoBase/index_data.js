@@ -48,9 +48,17 @@ const index_lang_lookups = {
     fr: "English",
   },
 
-  you_are_here: {
-    en: "You are here",
-    fr: "Vous êtes ici",
+  breadcrub_and_qucik_links: {
+    en: "Breadcrumb and quick links",
+    fr: "Fil d'ariane et liens rapides",
+  },
+  breadcrumb: {
+    en: "Breadcrumb",
+    fr: "Fil d'ariane",
+  },
+  quick_links: {
+    en: "Quick links",
+    fr: "Liens rapides",
   },
   please_enable_js: {
     en: "Please enable javascript",
