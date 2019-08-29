@@ -18,22 +18,22 @@ const { provinces, provinces_short } = businessConstants;
 const canada_svg_text = canada_svg.text;
 
 const ordering = {
-  yt: 1,
-  nt: 2,
-  nu: 3,
-  nl: 4,
-  bc: 5,
-  ab: 6,
-  sk: 7,
-  mb: 8,
-  on: 9,
-  qc: 10,
-  ncr: 11,
-  nb: 12,
-  ns: 13,
-  pe: 14,
-  abroad: 15,
-  na: 15,
+  abroad: 1,
+  na: 2,
+  yt: 3,
+  nt: 4,
+  nu: 5,
+  bc: 6,
+  ab: 7,
+  sk: 8,
+  mb: 9,
+  on: 10,
+  qc: 11,
+  nl: 12,
+  ncr: 13,
+  nb: 14,
+  ns: 15,
+  pe: 16,
 };
 
 export class Canada {
