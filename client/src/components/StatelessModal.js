@@ -33,7 +33,7 @@ export class StatelessModal extends React.Component {
       <Modal show={show} onHide={on_close_callback}>
         <div onBlur={this.onBlur}>
           <Modal.Header>
-            {title && <Modal.Title style={{fontSize: '130%'}}>{title}</Modal.Title> }
+            {title && <Modal.Title style={{fontSize: '130%'}}>{title}</Modal.Title>}
             {subtitle && <Modal.Title style={{fontSize: '100%', marginTop: '7px'}}>{subtitle}</Modal.Title>}
           </Modal.Header>
 

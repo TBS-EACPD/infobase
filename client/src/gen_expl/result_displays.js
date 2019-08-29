@@ -141,9 +141,9 @@ export const ResultNodeContent = ({
     </div>
     { !_.isEmpty(contributing_programs) && 
       <div>
-        <header className="agnostic-header">
+        <div className="agnostic-header">
           <TM k="programs_tagged_as_dr_contributors" />
-        </header>
+        </div>
         <ul>
           {_.map(contributing_programs, prog => 
             <li key={prog.id}>
