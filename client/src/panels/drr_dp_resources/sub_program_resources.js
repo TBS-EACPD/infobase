@@ -136,7 +136,7 @@ const get_non_col_renderer = ({doc}) => ({node}) => {
       }
       { !_.isEmpty(notes) &&
         <div style={{padding: "10px 20px 10px 0", borderTop: `1px solid ${window.infobase_color_constants.separatorColor}`}}>
-          <header className="agnostic-header"> <TM k="notes" /> </header>
+          <div className="agnostic-header"> <TM k="notes" /> </div>
           <ul>
             {_.map(notes, note => 
               <li key={note}>
