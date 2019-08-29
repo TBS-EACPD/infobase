@@ -1,7 +1,7 @@
 const index_lang_lookups = {
   open_data_text: {
-    en: "If you wish to leave Javascript turned off, the following are the link to the open data sources.",
-    fr: "Si vous souhaitez laisser Javascript désactivé, vous trouveriez les liens vers les données ouvertes ci-dessous.",
+    en: "If you wish to leave JavaScript turned off, you can find all of the GC InfoBase's data on open data through the following links.",
+    fr: "Si vous souhaitez laisser JavaScript désactivé, vous trouveriez les liens vers les données ouvertes ci-dessous.",
   },
   open_data_title: {
     en: "Financial, Results and Budget data: ",
