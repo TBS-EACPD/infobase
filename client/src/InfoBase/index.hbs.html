@@ -33,23 +33,23 @@
     <header id="ib-site-header-area">
       <div id="ib-site-header">
         <div class="container">
-            {{#unless is_a11y_mode}}
-              <div style='margin:0 auto; text-align: center'>
-                <a class="a11y-version-link" href={{a11y_version_url}}>{{a11y_version_text}}</a>
-              </div>
-            {{/unless}}
-            <div class="row">
-                <div class="col-md-4 col-xs-8">
-                  <a href="{{logo_link}}" class="ib-site-header-logo gl-FIP" aria-label="{{logo_a11y_label}}">
-                    <object type="image/svg+xml" tabindex="-1" role="img" data="{{CDN_URL}}/svg/sig-blk-{{lang}}.svg" aria-label="{{logo_a11y_label_2}}" class="canada-logo"></object>
-                  </a>
-                </div>
-                <div class="col-md-8 col-xs-4">
-                    <div id="wb-lng">
-                      <a class="lang-switcher" lang="fr" href="{{other_lang_href}}">{{other_lang_name}}</a>
-                    </div>
-                </div>
+          {{#unless is_a11y_mode}}
+            <div style='margin:0 auto; text-align: center'>
+              <a class="a11y-version-link" href={{a11y_version_url}}>{{a11y_version_text}}</a>
             </div>
+          {{/unless}}
+          <div class="row">
+            <div class="col-md-4 col-xs-8">
+              <a href="{{logo_link}}" class="ib-site-header-logo gl-FIP" aria-label="{{logo_a11y_label}}">
+                <object type="image/svg+xml" tabindex="-1" role="img" data="{{CDN_URL}}/svg/sig-blk-{{lang}}.svg" aria-label="{{logo_a11y_label_2}}" class="canada-logo"></object>
+              </a>
+            </div>
+            <div class="col-md-8 col-xs-4">
+              <div id="wb-lng">
+                <a class="lang-switcher" lang="fr" href="{{other_lang_href}}">{{other_lang_name}}</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <nav id="wb-bc" property="breadcrumb" aria-label="{{breadcrub_and_qucik_links}}">

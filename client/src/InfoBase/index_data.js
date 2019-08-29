@@ -50,11 +50,11 @@ const index_lang_lookups = {
 
   breadcrub_and_qucik_links: {
     en: "Breadcrumb and quick links",
-    fr: "Fil d'ariane et liens rapides",
+    fr: "Fil d'Ariane et liens rapides",
   },
   breadcrumb: {
     en: "Breadcrumb",
-    fr: "Fil d'ariane",
+    fr: "Fil d'Ariane",
   },
   quick_links: {
     en: "Quick links",
