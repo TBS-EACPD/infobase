@@ -10,6 +10,7 @@ deploy_filter: &deploy_filter
     branches:
       only:
         - master
+        - csv-compression
 
 version: 2
 jobs:
