@@ -12,8 +12,7 @@ gsutil -o "GSUtil:parallel_process_count=8" -o "GSUtil:parallel_thread_count=1" 
   -h "Cache-Control:public, max-age=1" \
   rsync -j html,css,js,json,xml,svg,txt,csv -d -a public-read -c -r ./$BUILD_DIR/InfoBase $GCLOUD_BUCKET_URL
 
-# Cloudflare doesn't compress csv files, so giving our csv's a content type it WILL compress and telling it not to sniff to double check the type
-gsutil setmeta -h "X-Content-Type-Options:nosniff" $GCLOUD_BUCKET_URL/csv/*.csv
+# Cloudflare doesn't compress csv files, so giving our csv's a content type it WILL compress
 gsutil setmeta -h "Content-Type:text/plain" $GCLOUD_BUCKET_URL/csv/*.csv
 
 # set no-cache on html and js entry files, always needs to be fresh to guarantee the rest of the cache-busting will work as intended
