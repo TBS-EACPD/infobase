@@ -227,7 +227,7 @@ function build_proj(PROJ){
     } = get_footnote_file_defs(parsed_bilingual_models, lang);
 
     _.each( _.merge(dept_footnotes, tag_footnotes), (file_str, subj_id) => {
-      // reminder: the fucky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
+      // reminder: the funky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
       fs.writeFileSync(
         `${footnotes_dir}/fn_${lang}_${subj_id}.json.js`,
         file_str

@@ -324,7 +324,7 @@ function process_lookups(data){
 };
 
 export const populate_stores = function(){
-  // reminder: the fucky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
+  // reminder: the funky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
   return make_request(get_static_url(`lookups_${window.lang}.json.js`))
     .then( text => {
       process_lookups(JSON.parse(text));
