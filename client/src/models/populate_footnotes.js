@@ -94,6 +94,7 @@ function load_footnotes_bundle(subject){
     return Promise.resolve();
   }
 
+  // reminder: the fucky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
   return make_request(get_static_url(`footnotes/fn_${lang}_${subject_code}.json.js`))
     .then( csv_str => {
       populate_footnotes_info(csv_str);
