@@ -24,7 +24,7 @@ class GlossaryEntry extends mix().with(staticStoreMixin) {
 const compiled_definitions = _.memoize( glossary_id => sanitized_marked(GlossaryEntry.lookup(glossary_id)._def_text) );
 
 const glossary_display = item => `<div>
-  <div class="agnostic-header agnostic-header--medium-weight"> ${trivial_text_maker('definition')} : ${item.title} </div>
+  <div class="h6 medium-weight"> ${trivial_text_maker('definition')} : ${item.title} </div>
   <div>${item.definition}</div>
 </div>`;
 
