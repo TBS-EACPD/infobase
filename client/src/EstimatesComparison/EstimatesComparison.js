@@ -101,7 +101,7 @@ const DetailedAmountsByDoc = ({amounts_by_doc}) => {
 
   return (
     <section className="LastYearEstimatesSection"><div>
-      <div className="agnostic-header">
+      <div className="h6 heavy-weight">
         <TM k="doc_breakout_details" />
       </div>
       <table className="table table-condensed">
@@ -161,7 +161,7 @@ const get_non_col_content = ({node}) => {
             allowReclip={true} 
             clipHeight={150}
           >
-            <div className="agnostic-header">
+            <div className="h6 heavy-weight">
               <TM k="notes" />
             </div>
             <FootnoteList

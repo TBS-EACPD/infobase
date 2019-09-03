@@ -141,7 +141,7 @@ export const ResultNodeContent = ({
     </div>
     { !_.isEmpty(contributing_programs) && 
       <div>
-        <div className="agnostic-header">
+        <div className="h6 heavy-weight">
           <TM k="programs_tagged_as_dr_contributors" />
         </div>
         <ul>
