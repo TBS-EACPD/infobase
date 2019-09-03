@@ -14,9 +14,9 @@ const CardCenteredImage = ({
 }) => (
   <div className="centered-img-card">
     <div className="centered-img-card__left">
-      <header className="centered-img-card__title">
+      <div className="centered-img-card__title">
         <TM k={title_key} tmf={tmf} args={text_args} />
-      </header>
+      </div>
       <div className="centered-img-card__text">
         <TM k={text_key} tmf={tmf} args={text_args} />
       </div>

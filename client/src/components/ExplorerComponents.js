@@ -204,14 +204,14 @@ const get_children_content = ({
       className="ExplorerNodeContainer__ChildrenContainer"
     >
       {display && 
-        <header 
+        <div 
           className="ExplorerNodeContainer__ChildrenGroupHeader"
           style={{
             marginLeft: depth && `${INDENT_SIZE}px`,
           }}
         >
           {display}
-        </header>
+        </div>
       }
       { node_group &&
         <FlipMove

@@ -58,11 +58,11 @@ const ReportDetails = ({
 
   return (
     <section>
-      <header>
+      <div>
         <strong>
           {table_title}
         </strong>
-      </header>
+      </div>
       <div className="mrgn-tp-md">
         <p dangerouslySetInnerHTML={{__html: table_description}} />
       </div>

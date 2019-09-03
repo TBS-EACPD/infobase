@@ -87,7 +87,7 @@ const sorted_bubbles_for_subj = createSelector(
         id: key,
         title: obj.title(subject),
         description: `
-          <header>${obj.title(subject)}</header>
+          <div>${obj.title(subject)}</div>
           <p>${obj.description(subject)}</p>
         `,
         a11y_description: `<p>${obj.description(subject)}</p>`,

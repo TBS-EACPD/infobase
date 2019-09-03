@@ -24,9 +24,9 @@ const CardTopImage = ({
         </div>
       }
       <div className="top-img-card__bottom">
-        <header className="top-img-card__title">
+        <div className="top-img-card__title">
           <TM k={title_key} tmf={tmf} args={text_args} />
-        </header>
+        </div>
         <div className="top-img-card__text">
           <TM k={text_key} tmf={tmf} args={text_args} />
         </div>

@@ -17,9 +17,9 @@ const CardBackgroundImage = ({
       style={{ backgroundImage: img_src && `URL(${img_src})`}}
     >
       <div className="background-img-card__top-left">
-        <header className="background-img-card__title">
+        <div className="background-img-card__title">
           <TM k={title_key} tmf={tmf} args={text_args} />
-        </header>
+        </div>
         <div className="background-img-card__text">
           <TM k={text_key} tmf={tmf} args={text_args} />
         </div>

@@ -290,9 +290,9 @@ class DetailedHistTPItems extends React.Component {
       })
     );
 
-    const title_el = <header className="h3">
+    const title_el = <div className="h3">
       <TM k="historical_g_and_c_detailed_title" />
-    </header>;
+    </div>;
 
     if(window.is_a11y_mode){
       let a11y_data = _.map(prepped_rows, record => {

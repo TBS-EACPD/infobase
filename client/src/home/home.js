@@ -68,13 +68,13 @@ const HomeLayout = props => (
       className="intro-box" 
       style={{ backgroundImage: `URL(${get_static_url("svg/backbanner.svg")})` }}
     >
-      <div className="container">
+      <header className="container">
         <h1> <TM k="welcome" /> </h1>
-        <h2> <TM k="home_sub_title" /> </h2>
+        <h3> <TM k="home_sub_title" /> </h3>
         <div className="flag">
           <img aria-hidden="true" src={get_static_url("svg/flagline.svg")}/>
         </div>
-      </div>
+      </header>
     </div>
 
     <div className="container">
@@ -121,9 +121,9 @@ const HomeLayout = props => (
           </div>       
         </div>
         <div className="fcol-md-5">
-          <header className="h3 home-search-header">
+          <h2 className="home-search-header">
             <TM k="home_search_bar_title" />
-          </header> 
+          </h2> 
           <div className="search-box">
             <div className="search-container home-search-container">
               <EverythingSearch 
@@ -148,9 +148,9 @@ const HomeLayout = props => (
               />
             </div>       
           </div>
-          <header className="h3">
+          <h2 className="home-search-header">
             <TM k="featured_data_title" />
-          </header>
+          </h2>
           <div>
             <ul className="list-group list-group--quick-links">
               { _.map( props.featured_content_items, item => <FeaturedContentItem key={item.text_key} {...item} /> ) }
@@ -169,10 +169,10 @@ const HomeLayout = props => (
         borderBottom: `5px solid ${window.infobase_color_constants.highlightColor}`,
       }}
     >
-      <div className="container">
-        <h1> <TM k="subapps_title" /> </h1>
-        <h2> <TM k="subapps_text" /> </h2>
-      </div>
+      <header className="container">
+        <h2 className="h1"> <TM k="subapps_title" /> </h2>
+        <h3 className="h2"> <TM k="subapps_text" /> </h3>
+      </header>
     </div>
 
     <div className="container">
