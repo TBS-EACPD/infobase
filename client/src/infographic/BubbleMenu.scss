@@ -27,11 +27,6 @@
       stroke: $backgroundColor;
     }
   }
-
-  //turn off WET (or is it chrome's ?) annoying outline 
-  &.active, &:focus, &:active, &:hover { 
-    outline: none;
-  }
 }
 
 .bub-item {
