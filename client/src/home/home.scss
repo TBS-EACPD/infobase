@@ -53,7 +53,8 @@
     width: 95%;
   }
 
-  &:hover, &:focus {
+  & > a:hover > .left-img-card, & > a:focus > .left-img-card {
+    border-radius: 10px;
     background-color: lighten( $secondaryColor, 10% )
   }
 }
