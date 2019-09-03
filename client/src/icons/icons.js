@@ -18,9 +18,10 @@ const _IconWrapper = (props) => {
     color,
     rotation,
     ChildSVG,
+    aria_hide,
   } = props;
   return (
-    <svg className={icon_class} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox={`0 0 ${viewbox_width} ${viewbox_width}`} width={width} height={height} >
+    <svg className={icon_class} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox={`0 0 ${viewbox_width} ${viewbox_width}`} width={width} height={height} aria-hidden={aria_hide}>
       <title>{title}</title>
       <ChildSVG color_set_by_css={color_set_by_css} color={color} rotation={rotation}/>
     </svg>
@@ -30,6 +31,7 @@ _IconWrapper.defaultProps = {
   viewbox_width: 24,
   icon_class: "icon--svg-inline",
   color_set_by_css: true,
+  aria_hide: false,
 };
 
 const SVGHome = (props) => {
