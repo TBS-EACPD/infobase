@@ -102,8 +102,8 @@ class Panel_ extends React.Component {
 
     return (
       <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
-        {title && <header className='panel-heading'>
-          <header className="panel-title"> {title} </header>
+        { title && <header className='panel-heading'>
+          <h3 className="panel-title"> {title} </h3>
           { context &&
             <div style={{marginLeft: 'auto'}}>
               { context.graph_key &&

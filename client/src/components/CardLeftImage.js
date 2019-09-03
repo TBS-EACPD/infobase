@@ -24,9 +24,9 @@ const CardLeftImage = ({
       }
       <div className="left-img-card__right-container">
         <div className="left-img-card__right">
-          <header className="left-img-card__title">
+          <div className="left-img-card__title">
             <TM k={title_key} tmf={tmf} args={text_args} />
-          </header>
+          </div>
           <div className="left-img-card__text">
             <TM k={text_key} tmf={tmf} args={text_args} />
           </div>

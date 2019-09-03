@@ -3,13 +3,8 @@
 .LastYearEstimatesSection {
     border-top: 1px solid $separatorColor;
     font-size: 0.8em;
-  &>div {
+  & > div {
     max-width: 650px;
-    &>header {
-      margin: 15px 0 10px;
-      font-weight: 700;
-      font-size: 1.2em;
-    }
   }
 }
 

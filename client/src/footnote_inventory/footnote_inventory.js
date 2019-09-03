@@ -279,7 +279,7 @@ class FootnoteInspector extends React.Component {
             .groupBy('level')
             .map( ( group, level) => 
               <div key={level}>
-                <header> {level} </header>
+                <div> {level} </div>
                 <ul>
                   { group.map(graph_obj => 
                     <li key={graph_obj.key}>

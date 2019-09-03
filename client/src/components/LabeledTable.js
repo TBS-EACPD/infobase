@@ -10,7 +10,9 @@ export class LabeledTable extends React.Component {
     } = this.props;
     return (
       <div className="displayTable">
-        <header className="displayTable__header">{title}</header>
+        <div className="displayTable__header">
+          {title}
+        </div>
         <div className="displayTable__items">
           {_.map(content, item =>
           item.href ?

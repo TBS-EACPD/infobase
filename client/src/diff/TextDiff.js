@@ -439,7 +439,7 @@ export default class TextDiffApp extends React.Component {
         </div>
         {loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
           <div>
-            <h3>{text_maker("list_of_indicators")}</h3>
+            <h2>{text_maker("list_of_indicators")}</h2>
             <div>{subject_intro(subject, matched_indicators.length, years)}</div>
             {_.map(processed_indicators, processed_indicator => indicator_report(processed_indicator, years) )}
           </div>}
