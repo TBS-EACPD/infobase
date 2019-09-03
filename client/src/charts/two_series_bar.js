@@ -291,7 +291,8 @@ export class TwoSeriesBar {
       })
       .on("keydown", (d) => {
         if (d3.event.keyCode === 13) {
-          this.dispatch.call("dataClick", d);
+          this.dispatch.call("dataClick", "render", d),
+          this.dispatch.call("dataClick", "fade_out", d);
         }
       })
       .html(ticks_formatter);
