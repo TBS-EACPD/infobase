@@ -155,9 +155,7 @@ new PanelGraph({
 
 
 
-const late_dp_departments = [
-  237, // Infrastructure Canada
-];
+const late_dp_departments = [];
 _.each(['dept','crso','program'], lvl => {
   new PanelGraph({
     level: lvl,
