@@ -5,7 +5,7 @@ const featured_content_items = _.compact([
     href: '#orgs/gov/gov/infograph/people',
     is_new: true,
   },
-  {
+  !window.is_a11y_mode && {
     text_key: 'quick_link_infolab',
     href: '#lab',
     is_new: true,
