@@ -684,7 +684,7 @@ const IconCopy = (props) => {
 
   return <_IconWrapper title={title} viewbox_width={170} viewbox_height={165} width={width} height={height} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildSVG={SVGCopy}/>;
 };
-IconArrow.defaultProps = {
+IconCopy.defaultProps = {
   title: trivial_text_maker("copy"),
   icon_class: "icon--svg",
 };
@@ -720,7 +720,7 @@ const SVGCopyLink = (props) => {
       </g>
     </Fragment>
   );
-}
+};
 
 const IconCopyLink = (props) => {
   const {
@@ -734,11 +734,44 @@ const IconCopyLink = (props) => {
 
   return <_IconWrapper title={title} viewbox_width={170} viewbox_height={165} width={width} height={height} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildSVG={SVGCopyLink}/>;
 };
-IconArrow.defaultProps = {
+IconCopyLink.defaultProps = {
   title: trivial_text_maker("copy"),
   icon_class: "icon--svg",
 };
 
+
+const SVGAttentionTriangle = (props) => {
+  const {
+    color_set_by_css,
+    color,
+  } = props;
+
+  return (
+    <path className={color_set_by_css && "svg-fill"} style={color_set_by_css ? undefined : {fill: color}}
+      d="M482.6,444.2l-222-404.5c-4.7-4.7-12.3-4.7-17,0L19.5,444.2c-4.7,4.7-4.7,12.3,0,17h463.1
+      C487.3,456.5,487.3,448.9,482.6,444.2z M252.2,435.5c-18.5,0.1-33.6-14.7-33.8-33.2s14.7-33.6,33.2-33.8c18.5,0,33.6,15,33.8,33.5
+      C285.4,420.4,270.6,435.4,252.2,435.5z M288.1,185.1l-11.5,147.7c-0.7,8.5-4.8,14.9-9.6,14.9h-32.2c-4.9,0-9-6.6-9.6-15.3
+      l-9.5-147.7c-0.7-10.2,3.8-19.2,9.6-19.2h53.1C284.2,165.5,288.7,174.7,288.1,185.1z"/>
+  );
+};
+
+const IconAttentionTriangle = (props) => {
+  const {
+    title,
+    icon_class,
+    color_set_by_css,
+    color,
+    width,
+    height,
+  } = props;
+
+  return <_IconWrapper title={title} viewbox_width={500} width={width} height={height} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildSVG={SVGAttentionTriangle}/>;
+};
+IconAttentionTriangle.defaultProps = {
+  icon_class: "icon--svg-inline",
+  color_set_by_css: false,
+  color: window.infobase_color_constants.highlightColor,
+};
 
 
 
@@ -763,5 +796,6 @@ export {
   IconArrow,
   IconCopy,
   IconCopyLink,
+  IconAttentionTriangle,
 };
   
