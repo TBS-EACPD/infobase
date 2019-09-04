@@ -3,10 +3,9 @@ import text from './WriteToClipboard.yaml';
 import * as clipboard from 'clipboard-polyfill';
 import { Fragment } from 'react';
 
-
 import { StatelessModal } from './StatelessModal.js';
+import { IconCopy } from '../icons/icons.js';
 
-import { get_static_url } from '../request_utils.js';
 import { create_text_maker } from '../models/text.js';
 
 const text_maker = create_text_maker(text);
@@ -22,7 +21,7 @@ export class WriteToClipboard extends React.Component {
       text_to_copy,
       button_class_name,
       button_description,
-      icon_src,
+      IconComponent,
     } = this.props;
 
     const { copy_status_message } = this.state;
@@ -42,10 +41,10 @@ export class WriteToClipboard extends React.Component {
               )
           }
         >
-          <img 
-            src={icon_src}
-            alt={button_description}
+          <IconComponent
             title={button_description}
+            color_set_by_css={false}
+            color={window.infobase_color_constants.textLightColor}
           />
         </button>
         <StatelessModal 
@@ -53,10 +52,10 @@ export class WriteToClipboard extends React.Component {
           on_close_callback={() => this.setState({copy_status_message: false})}
           title={
             <Fragment>
-              <img
-                style={{width: "30px", height: "30px", marginTop: "-5px"}}
-                src={get_static_url('svg/copy-to-clipboard-grey.svg')} 
-                aria-hidden="true" 
+              <IconComponent
+                title={button_description}
+                color_set_by_css={false}
+                color={window.infobase_color_constants.tertiaryColor}
               />
               {copy_status_message}
             </Fragment>
@@ -69,5 +68,5 @@ export class WriteToClipboard extends React.Component {
 }
 WriteToClipboard.defaultProps = {
   button_description: text_maker("copy_to_clipboard"),
-  icon_src: get_static_url("svg/copy-to-clipboard.svg"),
+  IconComponent: IconCopy,
 };

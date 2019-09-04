@@ -1109,5 +1109,9 @@ zoom_out:
   fr: Dézoomer
 
 arrow:
-  en: arrow
-  fr: flèche
+  en: Arrow
+  fr: Flèche
+
+copy:
+  en: Copy
+  fr: Copier
