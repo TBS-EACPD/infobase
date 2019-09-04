@@ -615,6 +615,41 @@ IconEyeOpen.defaultProps = {
 
 
 
+const SVGArrow = (props) => {
+  const {
+    color_set_by_css,
+    color,
+  } = props;
+
+  return (
+    <path className={color_set_by_css && "svg-fill"} style={color_set_by_css ? undefined : {fill: color}}
+      d="M407.9,248c-0.1-0.2-0.3-0.3-0.5-0.5l-142.8-115c-0.6-0.5-1.3-0.7-2-0.7l0,0c-1.8,0-3.2,1.4-3.2,3.2l0,0v67.7H93.7
+      c-1.3,0-2.4,1.1-2.4,2.4v99.7c0,1.3,1.1,2.4,2.4,2.4l0,0h165.7v58c0,1.8,1.4,3.2,3.2,3.2l0,0c0.7,0,1.4-0.3,2-0.7l142.8-115
+      C408.8,251.4,409,249.4,407.9,248z"/>
+  );
+}
+
+const IconArrow = (props) => {
+  const {
+    title,
+    icon_class,
+    color_set_by_css,
+    color,
+    width,
+    height,
+  } = props;
+
+  return <_IconWrapper title={title} viewbox_width={500} width={width} height={height} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildSVG={SVGArrow}/>;
+};
+IconArrow.defaultProps = {
+  title: trivial_text_maker("arrow"),
+  icon_class: "icon--svg",
+};
+
+
+
+
+
 export {
   IconHome,
   IconFeedback,
@@ -633,5 +668,6 @@ export {
   IconClock,
   IconEyeOpen,
   IconEyeClosed,
+  IconArrow,
 };
   
