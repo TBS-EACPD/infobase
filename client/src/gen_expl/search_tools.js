@@ -16,7 +16,7 @@ function node_to_match_tokens(node){
   if(_.includes(["result", "dr"], type)){
     return _.chain(node.children)
       .map('data.indicator')
-      .map( indicator => [ indicator.name, indicator.explanation, indicator.narrative, indicator.measure ] )
+      .map( indicator => [ indicator.name, indicator.target_explanation, indicator.narrative, indicator.measure ] )
       .flatten()
       .compact()
       .concat([name])

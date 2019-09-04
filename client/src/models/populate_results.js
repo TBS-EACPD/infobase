@@ -122,6 +122,8 @@ ${doc}_results: results(doc: "${doc}") {
     target_year
     target_month
 
+    is_reporting_discontinued
+
     target_type
     target_min
     target_max
@@ -134,7 +136,8 @@ ${doc}_results: results(doc: "${doc}") {
     previous_year_target_narrative
     previous_year_measure
 
-    explanation
+    target_explanation
+    result_explanation
 
     actual_datatype
     actual_result
