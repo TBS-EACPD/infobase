@@ -127,7 +127,7 @@ class InfoGraph_ extends React.Component {
       this.loadBubbleMenuDeps(this.props);
     } else if(this.state.infographic_loading){
       this.loadGraphDeps({...this.state, ...this.props});
-    } else {
+    } else if( !_.isNull(this.state.bubble) ){
       if (this.props.subject !== prevProps.subject){
         reset_scroll();
       }
