@@ -2,7 +2,14 @@ import { get_people_panels } from './get_people_panels.js';
 
 // shared all
 import '../../panels/welcome_mat/welcome_mat.js';
-import '../../panels/intro_graphs/intro_graphs.js';
+import {
+  declare_simplographic_panel,
+  declare_gov_related_info_panel,
+  declare_links_to_rpb_panel,
+  declare_financial_intro_panel,
+  declare_results_intro_panel,
+  declare_late_dps_warning_panel,
+} from '../../panels/intro_graphs/index.js';
 
 // shared gov, dept, crso, program
 import '../../panels/result_graphs/result_graphs.js';
@@ -21,10 +28,10 @@ import '../../panels/tag_panels/goco.js';
 
 export const get_gov_panels = subject => ({
   intro: [
-    "simplographic",
+    declare_simplographic_panel(),
   ],
   financial: [
-    "financial_intro", 
+    declare_financial_intro_panel(),
     "welcome_mat",
     declare_budget_measures_panel(),
     "auth_exp_prog_spending",
@@ -38,11 +45,11 @@ export const get_gov_panels = subject => ({
   ],
   people: get_people_panels(subject),
   results: [
-    "results_intro",
-    'late_dps_warning',
+    declare_results_intro_panel(),
+    declare_late_dps_warning_panel(),
     "gov_dp",
     "gov_drr",
   ],
-  related: [ "gov_related_info" ],
-  all_data: ["links_to_rpb" ],
+  related: [ declare_gov_related_info_panel() ],
+  all_data: [ declare_links_to_rpb_panel() ],
 });

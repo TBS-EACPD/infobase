@@ -35,7 +35,7 @@ class PanelGraph {
     return _.chain(graphs)
       .keys(graphs)
       .join()
-      .thru( all_graph_keys => RegExp(`,${test_key}:.+,`).test(all_graph_keys) )
+      .thru( all_graph_keys => RegExp(`,${test_key}:.+,`).test(`,${all_graph_keys},`) )
       .value();
   }
 

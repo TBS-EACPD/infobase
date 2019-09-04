@@ -3,7 +3,7 @@ import {
   formats,
   run_template,
   Subject,
-  PanelGraph,
+  declare_panel,
   businessConstants,
   years,
   TabbedContent,
@@ -112,9 +112,12 @@ const calculate_funcs_by_level = {
   },
 };
 
-["gov", "dept"].map(
-  level => new PanelGraph({
-    key: "employee_age",
+
+export const declare_employee_age_panel = () => declare_panel({
+  panel_key: "employee_age",
+  levels: ["gov", "dept"],
+  panel_config_func: (level, panel_key) => ({
+    key: panel_key,
     level: level,
     depends_on: [
       'orgEmployeeAgeGroup', 
@@ -210,5 +213,5 @@ const calculate_funcs_by_level = {
         </StdPanel>
       );
     },
-  })
-);
+  }),
+});
