@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { Fragment } from 'react';
 import { text_maker, TM } from './intro_graph_text_provider.js';
 import { Subject } from '../shared.js';
-import { get_static_url } from '../../request_utils.js';
+import { IconAttentionTriangle } from '../../icons/icons.js';
 
 const { Gov } = Subject;
 
@@ -35,11 +35,7 @@ const activeStyle = {
 
 const get_style = ({ active, dead}) => active ? activeStyle : null;
 
-export const HierarchyDeadElementIcon = () => <img 
-  src={get_static_url("svg/attention-triangle.svg")}
-  style={{ height: "1.8em", width: "1.8em", paddingBottom: "0.2em"}}
-  alt={text_maker("hierarchy_dead_element_icon_alt_text")}
-/>;
+export const HierarchyDeadElementIcon = () => <IconAttentionTriangle title={text_maker("hierarchy_dead_element_icon_alt_text")} />;
 
 const hierarchical_some = (node, predicate) => {
   const predicate_func = _.isFunction(predicate) ?
