@@ -6,7 +6,7 @@ import '../../panels/intro_graphs/intro_graphs.js';
 
 // shared gov, dept, crso, program
 import '../../panels/result_graphs/result_graphs.js';
-import { instantiate_budget_measures_panel } from '../../panels/budget_measures/budget_measures_panel.js';
+import { declare_budget_measures_panel } from '../../panels/budget_measures/budget_measures_panel.js';
 
 // shared dept, crso, program, tag
 import '../../panels/tag_panels/resource_structure.js';
@@ -35,7 +35,7 @@ export const get_crso_panels = subject => ensure_loaded({
     'dead_crso_warning',
     'financial_intro',
     'welcome_mat',
-    instantiate_budget_measures_panel(),
+    declare_budget_measures_panel(),
     'drr_planned_actual',
     'crso_by_prog_exp',
     'crso_by_prog_fte',

@@ -549,7 +549,17 @@ const hex_to_rgb = (hex) => {
   } : null;
 };
 
+
+const declare_panel = ({panel_key, levels, panel_config_func}) => {
+  if ( !PanelGraph.is_registered_graph_key(panel_key) ){
+    levels.forEach( level => new PanelGraph(panel_config_func(level, panel_key)) );
+  }
+
+  return panel_key;
+};
+
 export {
+  declare_panel,
   Table, 
   rpb_link,
   get_appropriate_rpb_subject,

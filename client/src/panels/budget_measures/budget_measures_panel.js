@@ -2,8 +2,8 @@ import "./budget_measures_panel.scss";
 import text1 from "./budget_measures_panel.yaml";
 import text2 from "../../partition/budget_measures_subapp/BudgetMeasuresRoute.yaml";
 import {
+  declare_panel,
   formats,
-  PanelGraph,
   Subject,
   businessConstants,
   util_components,
@@ -893,40 +893,34 @@ class BudgetMeasureHBars extends React.Component {
 }
 
 
-export const instantiate_budget_measures_panel = () => {
-  const budget_measures_panel_key = "budget_measures_panel";
-
-  if ( !PanelGraph.is_registered_graph_key(budget_measures_panel_key) ){
-    ['gov', 'dept', 'program', 'crso'].forEach( level_name => new PanelGraph(
+export const declare_budget_measures_panel = () => declare_panel({
+  panel_key: "budget_measures_panel",
+  levels: ['gov', 'dept', 'program', 'crso'],
+  panel_config_func: (level_name, panel_key) => ({
+    level: level_name,
+    key: panel_key,
+    requires_has_budget_measures: true,
+    footnotes: false,
+    source: (subject) => [
       {
-        level: level_name,
-        key: budget_measures_panel_key,
-        requires_has_budget_measures: true,
-        footnotes: false,
-        source: (subject) => [
-          {
-            html: text_maker("budget_route_title"),
-            href: "#budget-tracker/budget-measure/overview",
-          },
-          {
-            html: "Budget",
-            href: "#metadata/BUDGET",
-          },
-        ],
-        calculate: (subject, info, options) => {
-          const years_with_data = level_name === "gov" ?
-            budget_years :
-            _.filter(
-              budget_years,
-              year => subject.has_data(`budget${year}_data`)
-            );
-    
-          return !_.isEmpty(years_with_data) && calculate_functions[level_name](subject, info, options, years_with_data);
-        },
-        render: budget_measure_render,
-      }
-    ));
-  }
-
-  return budget_measures_panel_key;
-};
+        html: text_maker("budget_route_title"),
+        href: "#budget-tracker/budget-measure/overview",
+      },
+      {
+        html: "Budget",
+        href: "#metadata/BUDGET",
+      },
+    ],
+    calculate: (subject, info, options) => {
+      const years_with_data = level_name === "gov" ?
+        budget_years :
+        _.filter(
+          budget_years,
+          year => subject.has_data(`budget${year}_data`)
+        );
+  
+      return !_.isEmpty(years_with_data) && calculate_functions[level_name](subject, info, options, years_with_data);
+    },
+    render: budget_measure_render,
+  }),
+});
