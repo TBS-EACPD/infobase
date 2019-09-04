@@ -1,6 +1,14 @@
 // shared all
 import '../../panels/welcome_mat/welcome_mat.js';
-import '../../panels/intro_graphs/intro_graphs.js';
+import {
+  declare_m2m_warning_panel,
+  declare_tag_fed_structure_panel,
+  declare_sibling_tags_panel,
+  declare_tag_progs_by_dept_panel,
+  declare_related_tags_panel,
+  declare_description_panel,
+  declare_tagging_key_concepts_panel,
+} from '../../panels/intro_graphs/index.js';
 
 // shared dept, crso, program, tag
 import '../../panels/tag_panels/resource_structure.js';
@@ -21,20 +29,20 @@ import '../../panels/tag_panels/horizontal_initiative_profile.js';
 
 export const get_tag_panels = subject => ({
   intro: [
-    'tagging_key_concepts',
-    'description',
+    declare_tagging_key_concepts_panel(),
+    declare_description_panel(),
     'horizontal_initiative_profile',
-    'tag_fed_structure',
-    'tag_progs_by_dept',
+    declare_tag_fed_structure_panel(),
+    declare_tag_progs_by_dept_panel(),
   ],
   structure: [ 
-    'm2m_warning',
+    declare_m2m_warning_panel(),
     'resource_structure',
   ],
   //Financial turned off indefinitely
   // financial: [
-  //   'm2m_warning',
-  //   "financial_intro", 
+  //   declare_m2m_warning_panel(),
+  //   declare_financial_intro_panel(), 
   //   "welcome_mat",
   //   'tag_top_3_depts',
   //   "vote_stat_split",
@@ -43,7 +51,7 @@ export const get_tag_panels = subject => ({
   //   'detailed_program_spending_split',
   // ],
   related: [
-    'related_tags',
-    'sibling_tags',
+    declare_related_tags_panel(),
+    declare_sibling_tags_panel(),
   ],
 });

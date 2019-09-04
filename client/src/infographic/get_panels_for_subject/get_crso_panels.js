@@ -2,7 +2,17 @@ import { ensure_loaded } from '../../core/lazy_loader.js';
 
 // shared all
 import '../../panels/welcome_mat/welcome_mat.js';
-import '../../panels/intro_graphs/intro_graphs.js';
+import {
+  declare_dead_crso_warning_panel,
+  declare_crso_in_gov_panel,
+  declare_crso_links_to_other_crso_panel,
+
+  declare_tags_of_interest_panel,
+  declare_profile_panel,
+  declare_financial_intro_panel,
+  declare_results_intro_panel,
+  declare_late_dps_warning_panel,
+} from '../../panels/intro_graphs/index.js';
 
 // shared gov, dept, crso, program
 import '../../panels/result_graphs/result_graphs.js';
@@ -27,13 +37,13 @@ export const get_crso_panels = subject => ensure_loaded({
   has_results: true,
 }).then( () => ({
   intro: [
-    "dead_crso_warning",
-    'profile',
-    'crso_in_gov',
+    declare_dead_crso_warning_panel(),
+    declare_profile_panel(),
+    declare_crso_in_gov_panel(),
   ],
   financial: [
-    'dead_crso_warning',
-    'financial_intro',
+    declare_dead_crso_warning_panel(),
+    declare_financial_intro_panel(),
     'welcome_mat',
     declare_budget_measures_panel(),
     'drr_planned_actual',
@@ -42,12 +52,12 @@ export const get_crso_panels = subject => ensure_loaded({
     "dp_rev_split",
   ],
   results: !subject.is_internal_service && subject.has_data('results_data') && [
-    "results_intro",
-    'late_dps_warning',
+    declare_results_intro_panel(),
+    declare_late_dps_warning_panel(),
     "explore_results",
   ],
   related: [
-    'crso_links_to_other_crso',
-    'tags_of_interest',
+    declare_crso_links_to_other_crso_panel(),
+    declare_tags_of_interest_panel(),
   ],
 }) );

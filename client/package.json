@@ -119,8 +119,6 @@
     "src/panels/historical_auth_exp/*.js",
     "src/panels/igoc/*.js",
     "src/panels/internal_services/*.js",
-    "src/panels/intro_graphs/*.js",
-    "src/panels/people/*.js",
     "src/panels/result_graphs/*.js",
     "src/panels/sobj/*.js",
     "src/panels/tag_panels/*.js",

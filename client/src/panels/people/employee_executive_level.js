@@ -2,7 +2,7 @@ import text from "./employee_executive_level.yaml";
 import {
   formats,
   run_template,
-  PanelGraph,
+  declare_panel,
   businessConstants,
   years,
   create_text_maker_component,
@@ -67,9 +67,12 @@ const calculate_funcs_by_level = {
   },
 };
 
-["gov", "dept"].map(
-  level => new PanelGraph({
-    key: "employee_executive_level",
+
+export const declare_employee_executive_level_panel = () => declare_panel({
+  panel_key: "employee_executive_level",
+  levels: ["gov", "dept"],
+  panel_config_func: (level, panel_key) => ({
+    key: panel_key,
     level: level,
     depends_on: ['orgEmployeeExLvl'],
     info_deps: info_deps_by_level[level],
@@ -121,5 +124,5 @@ const calculate_funcs_by_level = {
         </StdPanel>
       );
     },
-  })
-);
+  }),
+});

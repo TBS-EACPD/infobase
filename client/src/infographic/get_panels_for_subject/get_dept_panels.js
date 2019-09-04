@@ -3,7 +3,15 @@ import { ensure_loaded } from '../../core/lazy_loader.js';
 
 // shared all
 import '../../panels/welcome_mat/welcome_mat.js';
-import '../../panels/intro_graphs/intro_graphs.js';
+import {
+  declare_links_to_rpb_panel,  
+  declare_portfolio_structure_intro_panel,
+  declare_portfolio_structure_related_panel,
+  declare_tags_of_interest_panel,
+  declare_financial_intro_panel,
+  declare_results_intro_panel,
+  declare_late_dps_warning_panel,
+} from '../../panels/intro_graphs/index.js';
 
 // shared gov, dept, crso, program
 import '../../panels/result_graphs/result_graphs.js';
@@ -41,10 +49,10 @@ export const get_dept_panels = subject => ensure_loaded({
 }).then( () => ({
   intro: [
     'igoc_fields',
-    'portfolio_structure_intro',
+    declare_portfolio_structure_intro_panel(),
   ],
   financial: _.includes(subject.tables, 'programSpending') && [
-    "financial_intro",
+    declare_financial_intro_panel(),
     "welcome_mat",
     declare_budget_measures_panel(),
     "auth_exp_prog_spending",
@@ -61,16 +69,16 @@ export const get_dept_panels = subject => ensure_loaded({
   ],
   people: _.includes(subject.tables, 'orgEmployeeType') && get_people_panels(subject),
   results: subject.has_data('results_data') && [
-    "results_intro",
-    'late_dps_warning',
+    declare_results_intro_panel(),
+    declare_late_dps_warning_panel(),
     "drr_summary",
     "explore_results",
   ],
   related: _.nonEmpty(subject.programs) && [
-    "portfolio_structure_related",
-    "tags_of_interest",
+    declare_portfolio_structure_related_panel(),
+    declare_tags_of_interest_panel(),
   ],
   all_data: _.nonEmpty(subject.tables) && [
-    "links_to_rpb",
+    declare_links_to_rpb_panel(),
   ],
 }) );
