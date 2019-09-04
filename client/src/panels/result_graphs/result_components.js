@@ -396,7 +396,7 @@ const SingleIndicatorDisplay = ({indicator}) => {
           </Fragment>
         }
 
-        { !_.isEmpty(indicator.target_explanation) && // DRR_TODO: this will become target_explanation, and we'll have a separate result_explanation to display
+        { !_.isEmpty(indicator.target_explanation) &&
           <Fragment>
             <dt>
               <TM k="target_explanation" />
