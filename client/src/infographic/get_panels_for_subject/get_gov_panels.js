@@ -6,7 +6,7 @@ import '../../panels/intro_graphs/intro_graphs.js';
 
 // shared gov, dept, crso, program
 import '../../panels/result_graphs/result_graphs.js';
-import '../../panels/budget_measures/budget_measures_panel.js';
+import { instantiate_budget_measures_panel } from '../../panels/budget_measures/budget_measures_panel.js';
 
 // shared gov, dept
 import "../../panels/transfer_payments/historical_g_and_c.js";
@@ -26,7 +26,7 @@ export const get_gov_panels = subject => ({
   financial: [
     "financial_intro", 
     "welcome_mat",
-    "budget_measures_panel",
+    instantiate_budget_measures_panel(),
     "auth_exp_prog_spending",
     //"in_year_estimates_split",//turned off until supps A
     "in_year_voted_stat_split",

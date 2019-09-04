@@ -25,7 +25,7 @@ export function get_panels_for_subject(subject){
             .compact() //the above functions create null elements to ease using conditionals, filter them out.
             .map(key => {
               const panel_obj = PanelGraph.lookup(key, subject.level);
-    
+
               if(!panel_obj && window.is_dev){
                 throw `${key} is not a valid graph`;
               }

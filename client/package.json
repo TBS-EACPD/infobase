@@ -114,7 +114,6 @@
   "devDependencies": {},
   "sideEffects": [
     "src/app_bootstrap/*",
-    "src/panels/budget_measures/*.js",
     "src/panels/detailed_program_spending_split/*.js",
     "src/panels/drr_dp_resources/*.js",
     "src/panels/historical_auth_exp/*.js",

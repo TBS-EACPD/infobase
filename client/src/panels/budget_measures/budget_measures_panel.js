@@ -219,38 +219,6 @@ const budget_measure_render = function({calculations, footnotes, sources}){
 };
 
 
-['gov', 'dept', 'program', 'crso'].forEach( level_name => new PanelGraph(
-  {
-    level: level_name,
-    key: "budget_measures_panel",
-    requires_has_budget_measures: true,
-    footnotes: false,
-    source: (subject) => [
-      {
-        html: text_maker("budget_route_title"),
-        href: "#budget-tracker/budget-measure/overview",
-      },
-      {
-        html: "Budget",
-        href: "#metadata/BUDGET",
-      },
-    ],
-    calculate: (subject, info, options) => {
-      const years_with_data = level_name === "gov" ?
-        budget_years :
-        _.filter(
-          budget_years,
-          year => subject.has_data(`budget${year}_data`)
-        );
-
-      return !_.isEmpty(years_with_data) && calculate_functions[level_name](subject, info, options, years_with_data);
-    },
-    render: budget_measure_render,
-  }
-));
-
-
-
 class BudgetMeasurePanel extends React.Component {
   constructor(props){
     super(props);
@@ -357,6 +325,7 @@ class BudgetMeasurePanel extends React.Component {
     );
   }
 }
+
 
 class BudgetMeasureHBars extends React.Component {
   constructor(props){
@@ -922,4 +891,42 @@ class BudgetMeasureHBars extends React.Component {
     }
   }
 }
- 
+
+
+export const instantiate_budget_measures_panel = () => {
+  const budget_measures_panel_key = "budget_measures_panel";
+
+  if ( !PanelGraph.is_registered_graph_key(budget_measures_panel_key) ){
+    ['gov', 'dept', 'program', 'crso'].forEach( level_name => new PanelGraph(
+      {
+        level: level_name,
+        key: budget_measures_panel_key,
+        requires_has_budget_measures: true,
+        footnotes: false,
+        source: (subject) => [
+          {
+            html: text_maker("budget_route_title"),
+            href: "#budget-tracker/budget-measure/overview",
+          },
+          {
+            html: "Budget",
+            href: "#metadata/BUDGET",
+          },
+        ],
+        calculate: (subject, info, options) => {
+          const years_with_data = level_name === "gov" ?
+            budget_years :
+            _.filter(
+              budget_years,
+              year => subject.has_data(`budget${year}_data`)
+            );
+    
+          return !_.isEmpty(years_with_data) && calculate_functions[level_name](subject, info, options, years_with_data);
+        },
+        render: budget_measure_render,
+      }
+    ));
+  }
+
+  return budget_measures_panel_key;
+};
