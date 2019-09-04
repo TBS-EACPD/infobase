@@ -774,6 +774,41 @@ IconAttentionTriangle.defaultProps = {
 };
 
 
+const SVGSearch = (props) => {
+  const {
+    color_set_by_css,
+    color,
+  } = props;
+
+  return (
+    <path className={color_set_by_css && "svg-fill"} style={color_set_by_css ? undefined : {fill: color}}
+      d="M432.9,408.7C432.9,408.7,432.9,408.7,432.9,408.7L320.4,296.2c20.8-25.5,33.2-58.1,33.2-93.6c0,0,0,0,0,0
+      c0-82-66.5-148.5-148.5-148.5S56.7,120.6,56.7,202.6s66.5,148.5,148.5,148.5c28.3,0,54.7-7.9,77.2-21.7l114.9,114.9
+      c3.7,3.7,9.6,3.7,13.3,0c0,0,0,0,0,0l22.3-22.3C436.6,418.3,436.6,412.3,432.9,408.7z M205.2,320.1c-64.9,0-117.5-52.6-117.5-117.5
+      c0-31.2,12.4-61,34.4-83.1c22-22.1,51.9-34.5,83-34.4c64.9,0,117.5,52.6,117.5,117.5S270,320.1,205.2,320.1z"/>
+  );
+};
+
+const IconSearch = (props) => {
+  const {
+    title,
+    icon_class,
+    color_set_by_css,
+    color,
+    width,
+    height,
+    aria_hide,
+  } = props;
+
+  return <_IconWrapper title={title} viewbox_width={500} width={width} height={height} icon_class={icon_class} color_set_by_css={color_set_by_css} color={color} ChildSVG={SVGSearch} aria_hide={aria_hide} />;
+};
+IconSearch.defaultProps = {
+  title: trivial_text_maker("search"),
+  icon_class: "icon--svg-inline",
+};
+
+
+
 
 export {
   IconHome,
@@ -797,5 +832,6 @@ export {
   IconCopy,
   IconCopyLink,
   IconAttentionTriangle,
+  IconSearch,
 };
   
