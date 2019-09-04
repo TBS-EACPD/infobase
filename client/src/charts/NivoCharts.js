@@ -3,7 +3,6 @@ import { ResponsiveBar } from './nivo-bar.js';
 import { ResponsivePie } from '@nivo/pie';
 import { formats, dollar_formats } from "../core/format.js";
 import { Fragment } from 'react';
-import { get_static_url } from '../request_utils.js';
 import {
   IconZoomIn,
   IconZoomOut,

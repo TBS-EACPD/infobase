@@ -596,7 +596,7 @@ const SVGEyeClosed = (props) => {
       />
     </Fragment>
   );
-}
+};
 
 const IconEyeClosed = (props) => {
   const {
@@ -628,7 +628,7 @@ const SVGArrow = (props) => {
       c-1.3,0-2.4,1.1-2.4,2.4v99.7c0,1.3,1.1,2.4,2.4,2.4l0,0h165.7v58c0,1.8,1.4,3.2,3.2,3.2l0,0c0.7,0,1.4-0.3,2-0.7l142.8-115
       C408.8,251.4,409,249.4,407.9,248z"/>
   );
-}
+};
 
 const IconArrow = (props) => {
   const {
@@ -670,7 +670,7 @@ const SVGCopy = (props) => {
         c8.8,0,20.8,1.9,24.1,5.5c0.5,0.5,0.9,1.1,1.2,1.7V33.9z"/>
     </g>
   );
-}
+};
 
 const IconCopy = (props) => {
   const {
@@ -832,6 +832,6 @@ export {
   IconCopy,
   IconCopyLink,
   IconAttentionTriangle,
-  IconSearch,
+  IconSearch, 
 };
   
