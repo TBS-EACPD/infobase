@@ -1,6 +1,6 @@
 import { text_maker } from './intro_graph_text_provider.js';
 import {
-  PanelGraph,
+  declare_panel,
   TextPanel,
   general_utils,
   util_components,
@@ -9,10 +9,13 @@ import {
 const { sanitized_dangerous_inner_html } = general_utils;
 const { LabeledTombstone } = util_components;
 
-_.each(['crso','program'], level => {
-  new PanelGraph({
+
+export const declare_profile_panel = () => declare_panel({
+  panel_key: "profile",
+  levels: ['crso', 'program'],
+  panel_config_func: (level, panel_key) => ({
     level: level,
-    key: `profile`,
+    key: panel_key,
     calculate: (subject) =>_.nonEmpty([subject.old_name, subject.description]),
     render({calculations}){
       const { subject } = calculations;
@@ -39,23 +42,26 @@ _.each(['crso','program'], level => {
         </TextPanel>
       );
     },
-  });
+  }),
 });
 
 
-new PanelGraph({
-  level: 'tag',
-  key: "description",
-  footnotes: false,
-  calculate: subject => _.nonEmpty(subject.description),
-  render({calculations}){
-    const {subject} = calculations;
-
-    return (
-      <TextPanel title={text_maker('tag_desc_title')}>
-        <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.description)} />
-      </TextPanel>
-    );
-  },
+export const declare_description_panel = () => declare_panel({
+  panel_key: "description",
+  levels: ["tag"],
+  panel_config_func: (level, panel_key) => ({
+    level: level,
+    key: panel_key,
+    footnotes: false,
+    calculate: subject => _.nonEmpty(subject.description),
+    render({calculations}){
+      const {subject} = calculations;
+  
+      return (
+        <TextPanel title={text_maker('tag_desc_title')}>
+          <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.description)} />
+        </TextPanel>
+      );
+    },
+  }),
 });
-

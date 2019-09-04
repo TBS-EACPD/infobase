@@ -2,7 +2,7 @@ import text from "./employee_prov.yaml";
 import {
   formats,
   run_template,
-  PanelGraph,
+  declare_panel,
   years,
   businessConstants,
   create_text_maker_component,
@@ -306,9 +306,12 @@ const calculate_funcs_by_level = {
   },
 };
 
-["gov", "dept"].map(
-  level => new PanelGraph({
-    key: "employee_prov",
+
+export const declare_employee_prov_panel = () => declare_panel({
+  panel_key: "employee_prov",
+  levels: ["gov", "dept"],
+  panel_config_func: (level, panel_key) => ({
+    key: panel_key,
     level: level,
     depends_on: ['orgEmployeeRegion'],
     info_deps: info_deps_by_level[level],
@@ -317,6 +320,5 @@ const calculate_funcs_by_level = {
     render(render_args){
       return <ProvPanel render_args={{...render_args, level}}/>;
     },
-  })
-);
-
+  }),
+});

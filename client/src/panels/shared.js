@@ -551,6 +551,7 @@ const hex_to_rgb = (hex) => {
 
 
 const declare_panel = ({panel_key, levels, panel_config_func}) => {
+
   if ( !PanelGraph.is_registered_graph_key(panel_key) ){
     levels.forEach( level => new PanelGraph(panel_config_func(level, panel_key)) );
   }

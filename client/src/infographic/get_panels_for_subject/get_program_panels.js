@@ -2,7 +2,16 @@ import { ensure_loaded } from '../../core/lazy_loader.js';
 
 // shared all
 import '../../panels/welcome_mat/welcome_mat.js';
-import '../../panels/intro_graphs/intro_graphs.js';
+import {
+  declare_dead_program_warning_panel,
+  declare_program_fed_structure_panel,
+  declare_related_program_structure_panel,
+  declare_tags_of_interest_panel,
+  declare_profile_panel,
+  declare_financial_intro_panel,
+  declare_results_intro_panel,
+  declare_late_dps_warning_panel,
+} from '../../panels/intro_graphs/index.js';
 
 // shared gov, dept, crso, program
 import '../../panels/result_graphs/result_graphs.js';
@@ -32,13 +41,13 @@ export const get_program_panels = subject => ensure_loaded({
   has_results: true,
 }).then( () => ({
   intro: [
-    "dead_program_warning",
-    'profile',
-    'program_fed_structure',
+    declare_dead_program_warning_panel(),
+    declare_profile_panel(),
+    declare_program_fed_structure_panel(),
   ],
   financial: [
     'dead_program_warning',
-    "financial_intro",
+    declare_financial_intro_panel(),
     "welcome_mat",
     declare_budget_measures_panel(),
     'vote_stat_split',
@@ -50,13 +59,13 @@ export const get_program_panels = subject => ensure_loaded({
     "dp_rev_split",
   ],
   results: !subject.is_internal_service && subject.has_data('results_data') && [
-    "results_intro",
-    'late_dps_warning',
+    declare_results_intro_panel(),
+    declare_late_dps_warning_panel(),
     "drr_summary",
     "explore_results",
   ],
   related: [
-    "related_program_structure",
-    'tags_of_interest',
+    declare_related_program_structure_panel(),
+    declare_tags_of_interest_panel(),
   ],
 }) );

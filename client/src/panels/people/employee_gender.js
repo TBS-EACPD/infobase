@@ -2,7 +2,7 @@ import text from "./employee_gender.yaml";
 import {
   formats,
   run_template,
-  PanelGraph,
+  declare_panel,
   PplSharePie,
   HeightClippedGraph,
   LineBarToggleGraph,
@@ -68,9 +68,12 @@ const calculate_funcs_by_level = {
   },
 };
 
-["gov", "dept"].map(
-  level => new PanelGraph({
-    key: "employee_gender",
+
+export const declare_employee_gender_panel = () => declare_panel({
+  panel_key: "employee_gender",
+  levels: ["gov", "dept"],
+  panel_config_func: (level, panel_key) => ({
+    key: panel_key,
     level: level,
     depends_on: ['orgEmployeeGender'],
     info_deps: info_deps_by_level[level],
@@ -141,5 +144,5 @@ const calculate_funcs_by_level = {
         </StdPanel>
       );
     },
-  })
-);
+  }),
+});

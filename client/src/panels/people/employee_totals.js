@@ -2,7 +2,7 @@ import text from "./employee_totals.yaml";
 import {
   formats,
   run_template,
-  PanelGraph, 
+  declare_panel, 
   years,
   create_text_maker_component,
   declarative_charts,
@@ -34,9 +34,12 @@ const info_deps_by_level = {
   ],
 };
 
-["gov", "dept"].map(
-  level => new PanelGraph({
-    key: "employee_totals",
+
+export const declare_employee_totals_panel = () => declare_panel({
+  panel_key: "employee_totals",
+  levels: ["gov", "dept"],
+  panel_config_func: (level, panel_key) => ({
+    key: panel_key,
     level: level,
     depends_on: ['orgEmployeeType'],
     info_deps: info_deps_by_level[level],
@@ -62,7 +65,6 @@ const info_deps_by_level = {
         })),
       }]);
       
-
       return (
         <StdPanel
           title={text_maker(level+"_employee_totals_title")}
@@ -118,5 +120,5 @@ const info_deps_by_level = {
         </StdPanel>
       );
     },
-  })
-);
+  }),
+});
