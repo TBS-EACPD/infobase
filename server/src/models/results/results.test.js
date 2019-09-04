@@ -37,6 +37,8 @@ fragment result_and_indicator_fields on Result {
     target_year
     target_month
 
+    is_reporting_discontinued
+
     target_type
     target_min
     target_max
@@ -49,7 +51,8 @@ fragment result_and_indicator_fields on Result {
     previous_year_target_narrative
     previous_year_measure
 
-    explanation
+    target_explanation
+    result_explanation
     
     actual_result
     actual_datatype

@@ -44,6 +44,7 @@ export default async function({models}){
     const { 
       target_year, 
       target_month,
+      is_reporting_discontinued,
       doc,
       stable_id,
     } = indicator;
@@ -52,6 +53,7 @@ export default async function({models}){
     indicator.id = null;
     indicator.target_year = _.isNaN(parseInt(target_year)) ? null : parseInt(target_year);
     indicator.target_month = _.isEmpty(target_month) ? null : +target_month;
+    indicator.is_reporting_discontinued = !!is_reporting_discontinued;
     if (!indicator.status_key){
       indicator.status_key = "dp";
     }
