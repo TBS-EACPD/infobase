@@ -7,7 +7,7 @@ import '../../panels/intro_graphs/intro_graphs.js';
 
 // shared gov, dept, crso, program
 import '../../panels/result_graphs/result_graphs.js';
-import { instantiate_budget_measures_panel } from '../../panels/budget_measures/budget_measures_panel.js';
+import { declare_budget_measures_panel } from '../../panels/budget_measures/budget_measures_panel.js';
 
 // shared dept, crso, program, tag
 import '../../panels/tag_panels/resource_structure.js';
@@ -46,7 +46,7 @@ export const get_dept_panels = subject => ensure_loaded({
   financial: _.includes(subject.tables, 'programSpending') && [
     "financial_intro",
     "welcome_mat",
-    instantiate_budget_measures_panel(),
+    declare_budget_measures_panel(),
     "auth_exp_prog_spending",
     "estimates_in_perspective",
     //"in_year_estimates_split",//turned off until supps A
