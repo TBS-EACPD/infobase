@@ -90,6 +90,15 @@ const Home = (props) => {
 
         <section>
           <h3>
+            <a href={"#lab/"}>
+              <TM k="quick_link_infolab" />
+            </a>
+          </h3>
+          <TM k="lab_home_texts" />
+        </section>
+
+        <section>
+          <h3>
             <a href={text_maker("survey_link_href")} target="_blank" rel="noopener noreferrer">
               <TM k="survey_link_text" />
             </a>
