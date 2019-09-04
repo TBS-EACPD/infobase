@@ -1,10 +1,8 @@
 import { Fragment } from 'react';
 import { util_components, general_utils } from '../shared.js';
-import { get_static_url } from '../../request_utils.js';
 import { glossary_href } from '../../link_utils.js';
 import {
   status_key_to_glossary_key,
-  status_key_to_svg_name,
   ordered_status_keys,
   get_result_doc_keys,
   link_to_results_infograph,
@@ -31,8 +29,6 @@ const {
 const { sanitized_marked } = general_utils;
 
 import { TM, text_maker } from './result_text_provider.js';
-
-const get_svg_url = (status_key) => get_static_url(`svg/${status_key_to_svg_name[status_key]}.svg`);
 
 
 const IndicatorResultDisplay = ({

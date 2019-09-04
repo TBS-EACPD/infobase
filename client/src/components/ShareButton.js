@@ -17,7 +17,6 @@ import {
 
 import { StatelessModal } from './StatelessModal.js';
 import { create_text_maker } from '../models/text.js';
-import { get_static_url } from '../request_utils.js';
 import { IconShare } from '../icons/icons.js';
 
 const text_maker = create_text_maker(text);
