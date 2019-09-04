@@ -151,7 +151,7 @@ const process_indicators = (matched_indicators) => {
 const no_difference = (text, key) =>
   <Fragment>
     <div className="text-diff__indicator-report__subheader" >
-      <h5>{`${text_maker(key)} (${text_maker("no_diff")})`}</h5>
+      <h4>{`${text_maker(key)} (${text_maker("no_diff")})`}</h4>
     </div>
     <div className="text-diff__indicator-report__row">
       <div>{text}</div>
@@ -161,14 +161,14 @@ const no_difference = (text, key) =>
 const difference_report = (diff, key, years) => 
   <Fragment>
     <div className="text-diff__indicator-report__subheader" >
-      <h5>{text_maker(key)}</h5>
+      <h4>{text_maker(key)}</h4>
     </div>
     <div className={classNames("row","text-diff__indicator-report__row")}>
       <div className="col-md-6" >
-        <h6>{result_docs[years[0]].year}</h6>
+        <h5>{result_docs[years[0]].year}</h5>
       </div>
       <div className="col-md-6" >
-        <h6>{result_docs[years[1]].year}</h6>
+        <h5>{result_docs[years[1]].year}</h5>
       </div>
     </div>
     <div className={classNames("row","text-diff__indicator-report__row")}>
@@ -386,7 +386,7 @@ export default class TextDiffApp extends React.Component {
           </label>
           <Select
             className='text-diff__selector'
-            name='select_dept'
+            id='select_dept'
             selected={current_dept.id}
             onSelect={id => {
               const new_url = this.get_new_url(Dept.lookup(id));
@@ -401,7 +401,7 @@ export default class TextDiffApp extends React.Component {
           </label>
           <Select
             className='text-diff__selector'
-            name='select_cr'
+            id='select_cr'
             selected={subject.level === 'program' ?
               subject.crso.id :
               subject.level === 'crso' ? subject.id : 'all'}
@@ -418,7 +418,7 @@ export default class TextDiffApp extends React.Component {
           </label>
           <Select
             className='text-diff__selector'
-            name='select_program'
+            id='select_program'
             selected={subject.level === 'program' ? subject.id : 'all'}
             onSelect={id => {
               const new_url = this.get_new_url(Program.lookup(id) || id);
