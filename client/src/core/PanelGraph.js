@@ -31,6 +31,14 @@ class PanelGraph {
     return graphs[lookup];
   }
 
+  static is_registered_graph_key(test_key){
+    return _.chain(graphs)
+      .keys(graphs)
+      .join()
+      .thru( all_graph_keys => RegExp(`,${test_key}:.+,`).test(all_graph_keys) )
+      .value();
+  }
+
   static graphs_for_table(table_id){
     return _.filter(graphs, graph_obj => {
       const tables_from_info_deps = _.chain(graph_obj.info_deps)
