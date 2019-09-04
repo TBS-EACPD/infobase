@@ -2,7 +2,7 @@ import './TreeMap.scss';
 import treemap_text from './TreeMap.yaml';
 import { create_text_maker } from '../models/text.js';
 import { Fragment } from 'react';
-import { get_static_url } from '../request_utils.js';
+import { IconArrow } from '../icons/icons.js';
 
 
 const text_maker = create_text_maker([treemap_text]);
@@ -49,13 +49,9 @@ export class TreeMapTopbar extends React.Component {
           {_.map(org_route.slice(0, -1), (display, ix) =>
             <Fragment key={ix} >
               <li aria-hidden="true">
-                <img
-                  src={get_static_url("svg/arrow.svg")}
-                  style={{
-                    width: "20px",
-                    height: "20px",
-                    margin: "-12px 2px 0px 3px",
-                  }}
+                <IconArrow
+                  width = "20px"
+                  height = "20px"
                 />
               </li>
               <li className="TreeMap__ZoomControl--has-zoom-out">
@@ -76,13 +72,9 @@ export class TreeMapTopbar extends React.Component {
           {!_.isEmpty(org_route) &&
             <Fragment>
               <li aria-hidden="true">
-                <img
-                  src={get_static_url("svg/arrow.svg")}
-                  style={{
-                    width: "20px",
-                    height: "20px",
-                    margin: "-12px 2px 0px 3px",
-                  }}
+                <IconArrow
+                  width = "20px"
+                  height = "20px"
                 />
               </li>
               <li className="TreeMap__ZoomControl--no-zoom-out">
