@@ -94,7 +94,7 @@ const Home = (props) => {
               <TM k="quick_link_infolab" />
             </a>
           </h3>
-          <TM k="lab_home_texts" />
+          <TM k="lab_home_text" />
         </section>
 
         <section>
