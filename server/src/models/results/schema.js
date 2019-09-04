@@ -127,6 +127,8 @@ ${
     target_year: String
     target_month: String
 
+    is_reporting_discontinued: Boolean
+
     target_type: String
     target_min: String
     target_max: String
@@ -139,7 +141,8 @@ ${
     previous_year_target_narrative: String
     previous_year_measure: String
 
-    explanation: String
+    target_explanation: String
+    result_explanation: String
 
     actual_datatype: String
     actual_result: String
@@ -362,7 +365,8 @@ export default function({models,loaders}){
     Indicator: {
       id: _.property('indicator_id'),
       name: bilingual_field("name"),
-      explanation:bilingual_field("explanation"),
+      target_explanation: bilingual_field("target_explanation"),
+      result_explanation: bilingual_field("result_explanation"),
       target_narrative: bilingual_field("target_narrative"),
       previous_year_target_narrative: bilingual_field("previous_year_target_narrative"),
       actual_result: bilingual_field("actual_result"),
