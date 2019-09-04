@@ -246,8 +246,8 @@ const get_status_flag = (indicator_status, num_texts, target_changed, years) => 
 
 
 const indicator_report = (processed_indicator, years) => (
-  <div className="text-diff__indicator-report">
-    <Panel title={processed_indicator.indicator2.name} key={processed_indicator.indicator1.stable_id}>
+  <div className="text-diff__indicator-report" key={processed_indicator.indicator1.stable_id}>
+    <Panel title={processed_indicator.indicator2.name}>
       <Fragment>
         {get_status_flag(processed_indicator.status,
           _.max([processed_indicator.name_diff.length, processed_indicator.methodology_diff.length, processed_indicator.target_diff.length]),
