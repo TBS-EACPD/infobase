@@ -6,8 +6,7 @@
 //import { declare_spend_rev_split_panel } from "../../panels/sobj/spend_rev_split.js";
 
 // shared dept, tag
-//import "../../panels/detailed_program_spending_split/detailed_program_spending_split.js";
-//import "../../panels/sobj/top_spending_areas.js";
+//import { declare_detailed_program_spending_split_panel } from "../../panels/detailed_program_spending_split/detailed_program_spending_split.js";
 
 // shared program, tag
 //import { declare_vote_stat_split_panel } from "../../panels/vote_stat/last_year_vote_stat_split.js";
@@ -25,7 +24,6 @@ import {
 } from '../../panels/intro_graphs/index.js';
 import { declare_horizontal_initiative_profile_panel } from '../../panels/tag_panels/horizontal_initiative_profile.js';
 import { declare_resource_structure_panel } from '../../panels/tag_panels/resource_structure.js';
-//import '../../panels/tag_panels/top_3_dept_graph.js';
 
 export const get_tag_panels = subject => ({
   intro: [
@@ -44,11 +42,10 @@ export const get_tag_panels = subject => ({
   //   declare_m2m_warning_panel(),
   //   declare_financial_intro_panel(), 
   //   declare_welcome_mat_panel(),
-  //   'tag_top_3_depts',
   //   declare_vote_stat_split_panel(),
   //   declare_spend_rev_split_panel(),
   //   declare_top_spending_areas_panel(),
-  //   'detailed_program_spending_split',
+  //   declare_detailed_program_spending_split_panel(),
   // ],
   related: [
     declare_related_tags_panel(),

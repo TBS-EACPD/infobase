@@ -5,7 +5,7 @@ import {
   Subject,
   formats,
   run_template,
-  PanelGraph,
+  declare_panel,
   util_components,
   infograph_href_template,
   years,
@@ -49,175 +49,6 @@ const info_deps_by_level = {
 
 const footnote_topics = [ 'PROG', 'SOBJ' ];
 
-['dept', 'tag'].forEach( level_name => {
-
-  new PanelGraph({
-    level: level_name,
-    key: "detailed_program_spending_split",
-    info_deps: info_deps_by_level[level_name],
-    depends_on: ['programSobjs', "programSpending"],
-
-    footnotes: footnote_topics,
-    calculate(subject,info,options){
-
-      const is_tag = subject.level === "tag";
-  
-      const {programSobjs, programSpending} = this.tables;
-
-      const table_data = programSobjs.q(subject).data;
-
-      if(_.isEmpty(table_data)){
-        return false;
-      }
-
-      const flat_data = _.map(table_data, row => ({
-        program: Subject.Program.get_from_activity_code(row.dept, row.activity_code),
-        so_num: row.so_num,
-        so_label: row.so,
-        value: row["{{pa_last_year}}"],
-      }));
-
-      const top_3_so_nums = _.chain(flat_data)
-        .compact()
-        .groupBy('so_num')
-        .toPairs()
-        .map( ([so_num, group]) => ({
-          so_num: +so_num, 
-          sum: d3.sum(group, _.property('value')),
-        }))
-        .sortBy('sum')
-        .reverse()
-        .map('so_num')
-        .take(3)
-        .value();
-
-
-      //maps so_nums to new so_labels
-      const higher_level_mapping = so_num => {
-        if(+so_num > 19){
-          return text_maker('revenues');
-        } else if(_.includes(top_3_so_nums, +so_num)){
-          return sos[+so_num].text;
-        } else {
-          return text_maker('other_sos');
-        }
-      };
-
-      const exp_cols = _.map(std_years, yr=>yr+"exp");
-      const programSpending_data = _.chain(programSpending.q(subject).data)
-        .filter(row => {
-          return d3.sum(exp_cols, col=> row[col]) !== 0;
-        })
-        .map(row => 
-          ({
-            label: is_tag ? `${row.prgm} (${Subject.Dept.lookup(row.dept).acronym})` : row.prgm,
-            data: exp_cols.map(col => row[col]),
-            active: false,
-          })
-        )
-        .sortBy(x => -d3.sum(x.data))
-        .value();
-
-      const program_footnotes = _.chain(flat_data)
-        .map( ({program}) => program)
-        .uniqBy( program => program.activity_code)
-        .flatMap( program => _.chain(
-          FootNote.get_for_subject(
-            program,
-            [ 
-              ...footnote_topics,
-              "EXP",
-            ]
-          ) )
-          .map( footnote => ({
-            ...footnote,
-            text: `<strong>${footnote.subject.name}: </strong>${footnote.text}`,
-          }) )
-          .value()
-        )
-        .filter()
-        .value();
-
-      return {
-        top_3_so_nums,
-        flat_data,
-        higher_level_mapping,
-        programSpending_data,
-        program_footnotes,
-      };
-
-    },
-
-    render({calculations, footnotes, sources}){
-      const {
-        graph_args: {
-          flat_data,
-          higher_level_mapping,
-          top_3_so_nums,
-          programSpending_data,
-          program_footnotes,
-        },
-        info,
-      } = calculations;
-
-      const filter_to_specific_so = so_num => test_so_num => (
-        test_so_num === so_num ? 
-        sos[+so_num].text : 
-        null
-      );
-
-      const arrangements = [ 
-        {
-          label: text_maker('all'),
-          id: text_maker('all'),
-          mapping: so_num => higher_level_mapping(so_num),
-        },
-      ].concat( _.chain(flat_data)
-        .map('so_num')
-        .uniqBy()
-        .map(so_num => ({
-          id: sos[so_num].text,
-          label: sos[so_num].text,
-          mapping: filter_to_specific_so(so_num),
-        }))
-        .sortBy('label')
-        .value()
-      );
-
-
-      return (
-        <Panel
-          title={text_maker("detailed_program_spending_split_title")}
-          {...{sources, footnotes: [...footnotes, ...program_footnotes]}}
-        >
-          <div className="medium_panel_text">
-            <TM k={text_keys[level_name]} args={info} />
-          </div>
-          <div>
-            <div>
-              <HistoricalProgramBars
-                data={_.map(programSpending_data, ({label,data},ix) => ({
-                  label,
-                  data,
-                  id: `${ix}-${label}`, //need unique id, program names don't always work!
-                }))}
-              />
-            </div>
-            <div>
-              <HeightClippedGraph clipHeight={300}>
-                <DetailedProgramSplit
-                  flat_data={flat_data}
-                  arrangements={arrangements}
-                  top_3_so_nums={top_3_so_nums}
-                />
-              </HeightClippedGraph>
-            </div>
-          </div>
-        </Panel>
-      );
-    },
-  });
-});
 
 class HistoricalProgramBars extends React.Component {
   constructor(props){
@@ -543,3 +374,172 @@ class DetailedProgramSplit extends React.Component {
   }
 
 }
+
+
+export const declare_detailed_program_spending_split_panel = () => declare_panel({
+  panel_key: "detailed_program_spending_split",
+  levels: ["dept", "tag"],
+  panel_config_func: (level, panel_key) => ({
+    info_deps: info_deps_by_level[level],
+    depends_on: ['programSobjs', "programSpending"],
+
+    footnotes: footnote_topics,
+    calculate(subject,info,options){
+
+      const is_tag = subject.level === "tag";
+  
+      const {programSobjs, programSpending} = this.tables;
+
+      const table_data = programSobjs.q(subject).data;
+
+      if(_.isEmpty(table_data)){
+        return false;
+      }
+
+      const flat_data = _.map(table_data, row => ({
+        program: Subject.Program.get_from_activity_code(row.dept, row.activity_code),
+        so_num: row.so_num,
+        so_label: row.so,
+        value: row["{{pa_last_year}}"],
+      }));
+
+      const top_3_so_nums = _.chain(flat_data)
+        .compact()
+        .groupBy('so_num')
+        .toPairs()
+        .map( ([so_num, group]) => ({
+          so_num: +so_num, 
+          sum: d3.sum(group, _.property('value')),
+        }))
+        .sortBy('sum')
+        .reverse()
+        .map('so_num')
+        .take(3)
+        .value();
+
+
+      //maps so_nums to new so_labels
+      const higher_level_mapping = so_num => {
+        if(+so_num > 19){
+          return text_maker('revenues');
+        } else if(_.includes(top_3_so_nums, +so_num)){
+          return sos[+so_num].text;
+        } else {
+          return text_maker('other_sos');
+        }
+      };
+
+      const exp_cols = _.map(std_years, yr=>yr+"exp");
+      const programSpending_data = _.chain(programSpending.q(subject).data)
+        .filter(row => {
+          return d3.sum(exp_cols, col=> row[col]) !== 0;
+        })
+        .map(row => 
+          ({
+            label: is_tag ? `${row.prgm} (${Subject.Dept.lookup(row.dept).acronym})` : row.prgm,
+            data: exp_cols.map(col => row[col]),
+            active: false,
+          })
+        )
+        .sortBy(x => -d3.sum(x.data))
+        .value();
+
+      const program_footnotes = _.chain(flat_data)
+        .map( ({program}) => program)
+        .uniqBy( program => program.activity_code)
+        .flatMap( program => _.chain(
+          FootNote.get_for_subject(
+            program,
+            [ 
+              ...footnote_topics,
+              "EXP",
+            ]
+          ) )
+          .map( footnote => ({
+            ...footnote,
+            text: `<strong>${footnote.subject.name}: </strong>${footnote.text}`,
+          }) )
+          .value()
+        )
+        .filter()
+        .value();
+
+      return {
+        top_3_so_nums,
+        flat_data,
+        higher_level_mapping,
+        programSpending_data,
+        program_footnotes,
+      };
+
+    },
+
+    render({calculations, footnotes, sources}){
+      const {
+        graph_args: {
+          flat_data,
+          higher_level_mapping,
+          top_3_so_nums,
+          programSpending_data,
+          program_footnotes,
+        },
+        info,
+      } = calculations;
+
+      const filter_to_specific_so = so_num => test_so_num => (
+        test_so_num === so_num ? 
+        sos[+so_num].text : 
+        null
+      );
+
+      const arrangements = [ 
+        {
+          label: text_maker('all'),
+          id: text_maker('all'),
+          mapping: so_num => higher_level_mapping(so_num),
+        },
+      ].concat( _.chain(flat_data)
+        .map('so_num')
+        .uniqBy()
+        .map(so_num => ({
+          id: sos[so_num].text,
+          label: sos[so_num].text,
+          mapping: filter_to_specific_so(so_num),
+        }))
+        .sortBy('label')
+        .value()
+      );
+
+      return (
+        <Panel
+          title={text_maker("detailed_program_spending_split_title")}
+          {...{sources, footnotes: [...footnotes, ...program_footnotes]}}
+        >
+          <div className="medium_panel_text">
+            <TM k={text_keys[level]} args={info} />
+          </div>
+          <div>
+            <div>
+              <HistoricalProgramBars
+                data={_.map(programSpending_data, ({label,data},ix) => ({
+                  label,
+                  data,
+                  id: `${ix}-${label}`, //need unique id, program names don't always work!
+                }))}
+              />
+            </div>
+            <div>
+              <HeightClippedGraph clipHeight={300}>
+                <DetailedProgramSplit
+                  flat_data={flat_data}
+                  arrangements={arrangements}
+                  top_3_so_nums={top_3_so_nums}
+                />
+              </HeightClippedGraph>
+            </div>
+          </div>
+        </Panel>
+      );
+    },
+  }),
+});
