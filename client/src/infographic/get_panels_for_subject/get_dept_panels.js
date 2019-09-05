@@ -13,13 +13,13 @@ import {
 import { declare_explore_results_panel } from '../../panels/result_graphs/index.js';
 import { declare_budget_measures_panel } from '../../panels/budget_measures/budget_measures_panel.js';
 
-// shared dept, program, crso
+// shared dept, crso, program
 import { declare_tags_of_interest_panel } from '../../panels/intro_graphs/index.js';
-import "../../panels/drr_dp_resources/drr_planned_actual.js";
-import "../../panels/drr_dp_resources/dp_rev_split.js";
+import { declare_drr_planned_actual_panel } from "../../panels/drr_dp_resources/drr_planned_actual.js";
+import { declare_dp_rev_split_panel } from "../../panels/drr_dp_resources/dp_rev_split.js";
 
 // shared dept, program, tag
-import "../../panels/sobj/spend_rev_split.js";
+import { declare_spend_rev_split_panel } from "../../panels/sobj/spend_rev_split.js";
 
 // shared gov, dept
 import { declare_links_to_rpb_panel } from '../../panels/intro_graphs/index.js';
@@ -40,9 +40,9 @@ import {
   declare_portfolio_structure_related_panel,
 } from '../../panels/intro_graphs/index.js';
 import { declare_estimates_in_perspective_panel } from "../../panels/vote_stat/estimates_in_perspective.js";
+import { declare_spend_by_so_hist_panel } from "../../panels/sobj/spend_by_so_hist.js";
 import '../../panels/igoc/igoc_panel.js';
 import "../../panels/transfer_payments/last_year_g_and_c_perspective.js";
-import "../../panels/sobj/spend_by_so_hist.js";
 //import '../../panels/internal_services/isc.js';
 
 // To be safe, ensure all used has_<data> checks are loaded
@@ -62,13 +62,13 @@ export const get_dept_panels = subject => ensure_loaded({
     declare_estimates_in_perspective_panel(),
     //declare_in_year_estimates_split_panel(),//turned off until supps A
     declare_in_year_voted_stat_split_panel(),
-    "spend_by_so_hist",
+    declare_spend_by_so_hist_panel(),
     "last_year_g_and_c_perspective",
     "historical_g_and_c",
-    "spend_rev_split",
+    declare_spend_rev_split_panel(),
     'detailed_program_spending_split',
-    'drr_planned_actual',
-    "dp_rev_split",
+    declare_drr_planned_actual_panel(),
+    declare_dp_rev_split_panel(),
   ],
   people: _.includes(subject.tables, 'orgEmployeeType') && get_people_panels(subject),
   results: subject.has_data('results_data') && [

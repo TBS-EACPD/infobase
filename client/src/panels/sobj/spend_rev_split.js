@@ -2,7 +2,7 @@ import text from './spend_rev_split.yaml';
 import {
   formats,
   create_text_maker_component,
-  PanelGraph,
+  declare_panel,
   StdPanel,
   Col,
   NivoResponsiveBar,
@@ -13,9 +13,6 @@ import {
 } from '../../tables/table_common.js';
 
 const { text_maker, TM } = create_text_maker_component(text);
-
-
-
 
 const text_keys_by_level = {
   dept: "dept_spend_rev_split_text",
@@ -83,65 +80,65 @@ function render({calculations, footnotes, sources}) {
   );
 }
 
-const key = "spend_rev_split";
 
-new PanelGraph({
-  key,
-  depends_on: ["orgVoteStatPa","orgSobjs"],
-  footnotes: ["SOBJ_REV"],
-  level: "dept",
-  info_deps: ["orgSobjs_dept_info","orgVoteStatPa_dept_info"],
-
-  calculate(subject,info,options){
-    if ( info.dept_pa_last_year_rev === 0 ){
-      return false;
+export const declare_spend_rev_split_panel = () => declare_panel({
+  panel_key: "spend_rev_split",
+  levels: ["dept", "program", "tag"],
+  panel_config_func: (level, panel_key) => {
+    switch (level){
+      case "dept":
+        return {
+          level,
+          key: panel_key,
+          depends_on: ["orgVoteStatPa","orgSobjs"],
+          footnotes: ["SOBJ_REV"],
+          info_deps: ["orgSobjs_dept_info","orgVoteStatPa_dept_info"],
+        
+          calculate(subject,info,options){
+            if ( info.dept_pa_last_year_rev === 0 ){
+              return false;
+            }
+            return { neg_exp: info.dept_pa_last_year_rev,
+              gross_exp: info.dept_pa_last_year_gross_exp,
+              net_exp: info.dept_exp_pa_last_year,
+            };
+          },
+          render,
+        };
+      case "program":
+        return {
+          level,
+          key: panel_key,
+          depends_on: ["programSobjs"],
+          info_deps: ["program_revenue"],
+          calculate(subject,info,options){ 
+            const {programSobjs} = this.tables;
+            const prog_rows = programSobjs.programs.get(subject);
+            const rev_split = rows_to_rev_split(prog_rows);
+            if(rev_split.neg_exp === 0){
+              return false;
+            }
+            return rev_split;
+          },
+          render,
+        };
+      case "tag":
+        return {
+          level,
+          key: panel_key,
+          depends_on: ["programSobjs"],
+          info_deps: ["tag_revenue"],
+          calculate(subject,info,options){
+            const {programSobjs} = this.tables;
+            const prog_rows = programSobjs.q(subject).data;
+            const rev_split = rows_to_rev_split(prog_rows);
+            if(rev_split.neg_exp === 0){
+              return false;
+            }
+            return rev_split;
+          },
+          render,
+        };
     }
-    return { neg_exp: info.dept_pa_last_year_rev,
-      gross_exp: info.dept_pa_last_year_gross_exp,
-      net_exp: info.dept_exp_pa_last_year,
-    };
   },
-
-  render,
 });
-
-
-
-
-new PanelGraph({
-  key,
-  depends_on: ["programSobjs"],
-  info_deps: ["program_revenue"],
-  level: "program",
-  calculate(subject,info,options){ 
-    const {programSobjs} = this.tables;
-    const prog_rows = programSobjs.programs.get(subject);
-    const rev_split = rows_to_rev_split(prog_rows);
-    if(rev_split.neg_exp === 0){
-      return false;
-    }
-    return rev_split;
-  },
-
-  render,
-});
-
-new PanelGraph({
-  key,
-  depends_on: ["programSobjs"],
-  level: "tag",
-  info_deps: ["tag_revenue"],
-  calculate(subject,info,options){
-    const {programSobjs} = this.tables;
-    const prog_rows = programSobjs.q(subject).data;
-    const rev_split = rows_to_rev_split(prog_rows);
-    if(rev_split.neg_exp === 0){
-      return false;
-    }
-    return rev_split;
-  },
-
-  render,
-});
-
-

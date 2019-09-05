@@ -3,7 +3,7 @@
 //import { declare_financial_intro_panel } from '../../panels/intro_graphs/index.js';
 
 // shared dept, program, tag
-//import "../../panels/sobj/spend_rev_split.js";
+//import { declare_spend_rev_split_panel } from "../../panels/sobj/spend_rev_split.js";
 
 // shared dept, tag
 //import "../../panels/detailed_program_spending_split/detailed_program_spending_split.js";
@@ -11,6 +11,7 @@
 
 // shared program, tag
 //import { declare_vote_stat_split_panel } from "../../panels/vote_stat/last_year_vote_stat_split.js";
+//import { declare_top_spending_areas_panel } from "../../panels/sobj/top_spending_areas.js";
 
 // tag only panels
 import {
@@ -45,8 +46,8 @@ export const get_tag_panels = subject => ({
   //   declare_welcome_mat_panel(),
   //   'tag_top_3_depts',
   //   declare_vote_stat_split_panel(),
-  //   'spend_rev_split',
-  //   'top_spending_areas',
+  //   declare_spend_rev_split_panel(),
+  //   declare_top_spending_areas_panel(),
   //   'detailed_program_spending_split',
   // ],
   related: [

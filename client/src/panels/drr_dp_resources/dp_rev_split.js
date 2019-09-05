@@ -1,7 +1,7 @@
 import text from './dp_rev_split.yaml';
 import { GlossaryEntry } from '../../models/glossary.js';
 import {
-  PanelGraph,
+  declare_panel,
   util_components,
   years,
   run_template,
@@ -19,11 +19,12 @@ const { Format } = util_components;
 const special_cols = _.flatMap(planning_years, year => [ `${year}_gross`, `${year}_rev`, `${year}_spa`]);
 const dp_cols = [...planning_years, ...special_cols];
 
-_.each(["dept","crso","program"], level => {
-
-  new PanelGraph({
+export const declare_dp_rev_split_panel = () => declare_panel({
+  panel_key: "dp_rev_split",
+  levels: ["dept", "crso", "program"],
+  panel_config_func: (level, panel_key) => ({
     level,
-    key: 'dp_rev_split',
+    key: panel_key,
     depends_on: ['programSpending'],
     machinery_footnotes: false,
     footnotes: ["PLANNED_GROSS", "PLANNED_EXP", "PLANNED_FTE"],
@@ -107,10 +108,8 @@ _.each(["dept","crso","program"], level => {
           </div>
         </Panel>
       );
-      
-
     },
-  });
+  }),
 });
 
 

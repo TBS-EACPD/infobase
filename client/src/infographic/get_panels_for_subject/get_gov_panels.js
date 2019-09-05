@@ -32,7 +32,7 @@ import {
   declare_in_year_stat_breakdown_panel,
 } from "../../panels/vote_stat/in_year_vote_stat_breakdown.js";
 import { declare_gocographic_panel } from '../../panels/tag_panels/goco.js';
-import "../../panels/sobj/personel_spend.js";
+import { declare_personnel_spend_panel } from "../../panels/sobj/personel_spend.js";
 
 export const get_gov_panels = subject => ({
   intro: [
@@ -49,7 +49,7 @@ export const get_gov_panels = subject => ({
     declare_in_year_voted_breakdown_panel(),
     declare_gocographic_panel(),
     "historical_g_and_c",
-    "personnel_spend",
+    declare_personnel_spend_panel(),
   ],
   people: get_people_panels(subject),
   results: [
