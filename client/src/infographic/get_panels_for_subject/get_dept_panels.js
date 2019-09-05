@@ -13,9 +13,6 @@ import {
 import { declare_explore_results_panel } from '../../panels/result_graphs/index.js';
 import { declare_budget_measures_panel } from '../../panels/budget_measures/budget_measures_panel.js';
 
-// shared dept, crso, program, tag
-import '../../panels/tag_panels/resource_structure.js';
-
 // shared dept, program, crso
 import { declare_tags_of_interest_panel } from '../../panels/intro_graphs/index.js';
 import "../../panels/drr_dp_resources/drr_planned_actual.js";
@@ -26,9 +23,9 @@ import "../../panels/sobj/spend_rev_split.js";
 
 // shared gov, dept
 import { declare_links_to_rpb_panel } from '../../panels/intro_graphs/index.js';
+import { declare_in_year_voted_stat_split_panel } from "../../panels/vote_stat/in_year_vote_stat_split.js";
+//import { declare_in_year_estimates_split_panel } from "../../panels/vote_stat/in_year_estimates_split.js";
 import "../../panels/transfer_payments/historical_g_and_c.js";
-import "../../panels/vote-stat/in_year_estimates.js";
-import "../../panels/vote-stat/in_year_vote_stat_split.js";
 import '../../panels/historical_auth_exp/auth_exp_prog_spending.js';
 
 // shared dept, program
@@ -42,6 +39,7 @@ import {
   declare_portfolio_structure_intro_panel,
   declare_portfolio_structure_related_panel,
 } from '../../panels/intro_graphs/index.js';
+import { declare_estimates_in_perspective_panel } from "../../panels/vote_stat/estimates_in_perspective.js";
 import '../../panels/igoc/igoc_panel.js';
 import "../../panels/transfer_payments/last_year_g_and_c_perspective.js";
 import "../../panels/sobj/spend_by_so_hist.js";
@@ -61,9 +59,9 @@ export const get_dept_panels = subject => ensure_loaded({
     declare_welcome_mat_panel(),
     declare_budget_measures_panel(),
     "auth_exp_prog_spending",
-    "estimates_in_perspective",
-    //"in_year_estimates_split",//turned off until supps A
-    "in_year_voted_stat_split",
+    declare_estimates_in_perspective_panel(),
+    //declare_in_year_estimates_split_panel(),//turned off until supps A
+    declare_in_year_voted_stat_split_panel(),
     "spend_by_so_hist",
     "last_year_g_and_c_perspective",
     "historical_g_and_c",
