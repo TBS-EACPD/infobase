@@ -1,9 +1,9 @@
-import { text_maker, TM } from './vote-stat-text-provider.js';
+import { text_maker, TM } from './vote_stat_text_provider.js';
 import { Fragment } from 'react';
 import {
   Subject,
   formats,
-  PanelGraph,
+  declare_panel,
   util_components,
   infograph_href_template,
   StdPanel,
@@ -148,9 +148,6 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
 };
 
 
-
-
-
 const planned_vote_or_stat_calculate = vs => function (subject, info) {
   const { orgVoteStatEstimates } = this.tables;
 
@@ -175,23 +172,6 @@ const planned_vote_or_stat_calculate = vs => function (subject, info) {
 
   return ret;
 };
-
-["voted", "stat"].forEach(vs => {
-  new PanelGraph({
-    level: "gov",
-
-    key: (
-      vs === "voted" ?
-        "in_year_voted_breakdown" :
-        "in_year_stat_breakdown"
-    ),
-
-    depends_on: ['orgVoteStatEstimates'],
-    info_deps: ['orgVoteStatEstimates_gov_info'],
-    calculate: planned_vote_or_stat_calculate(vs),
-    render: planned_vote_or_stat_render(vs),
-  });
-});
 
 
 const row_cells = ({ name, rpb_link, voted_stat, amount }) => (
@@ -261,3 +241,34 @@ const TopTenTable = ({ rows, total_amt, complement_amt, isVoted }) => (
     </tbody>
   </table>
 );
+
+
+const declare_in_year_voted_breakdown_panel = () => declare_panel({
+  panel_key: "in_year_voted_breakdown",
+  levels: ["gov"],
+  panel_config_func: (level, panel_key) => ({
+    level,
+    key: panel_key,
+    depends_on: ['orgVoteStatEstimates'],
+    info_deps: ['orgVoteStatEstimates_gov_info'],
+    calculate: planned_vote_or_stat_calculate("voted"),
+    render: planned_vote_or_stat_render("voted"),
+  }),
+});
+const declare_in_year_stat_breakdown_panel = () => declare_panel({
+  panel_key: "in_year_stat_breakdown",
+  levels: ["gov"],
+  panel_config_func: (level, panel_key) => ({
+    level,
+    key: panel_key,
+    depends_on: ['orgVoteStatEstimates'],
+    info_deps: ['orgVoteStatEstimates_gov_info'],
+    calculate: planned_vote_or_stat_calculate("stat"),
+    render: planned_vote_or_stat_render("stat"),
+  }),
+});
+
+export {
+  declare_in_year_voted_breakdown_panel,
+  declare_in_year_stat_breakdown_panel,
+};

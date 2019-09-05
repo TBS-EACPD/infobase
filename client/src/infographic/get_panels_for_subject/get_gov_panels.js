@@ -13,9 +13,9 @@ import { declare_budget_measures_panel } from '../../panels/budget_measures/budg
 
 // shared gov, dept
 import { declare_links_to_rpb_panel } from '../../panels/intro_graphs/index.js';
+import { declare_in_year_voted_stat_split_panel } from "../../panels/vote_stat/in_year_vote_stat_split.js";
+//import { declare_in_year_estimates_split_panel } from "../../panels/vote_stat/in_year_estimates_split.js";
 import "../../panels/transfer_payments/historical_g_and_c.js";
-import "../../panels/vote-stat/in_year_estimates.js";
-import "../../panels/vote-stat/in_year_vote_stat_split.js";
 import '../../panels/historical_auth_exp/auth_exp_prog_spending.js';
 
 // gov only panels
@@ -27,9 +27,12 @@ import {
   declare_gov_drr_panel,
   declare_gov_dp_panel,
 } from '../../panels/result_graphs/index.js';
-import "../../panels/vote-stat/in_year_vote-stat_breakdown.js";
+import {
+  declare_in_year_voted_breakdown_panel,
+  declare_in_year_stat_breakdown_panel,
+} from "../../panels/vote_stat/in_year_vote_stat_breakdown.js";
+import { declare_gocographic_panel } from '../../panels/tag_panels/goco.js';
 import "../../panels/sobj/personel_spend.js";
-import '../../panels/tag_panels/goco.js';
 
 export const get_gov_panels = subject => ({
   intro: [
@@ -40,11 +43,11 @@ export const get_gov_panels = subject => ({
     declare_welcome_mat_panel(),
     declare_budget_measures_panel(),
     "auth_exp_prog_spending",
-    //"in_year_estimates_split",//turned off until supps A
-    "in_year_voted_stat_split",
-    "in_year_stat_breakdown",
-    "in_year_voted_breakdown",
-    'gocographic',
+    //declare_in_year_estimates_split_panel(),//turned off until supps A
+    declare_in_year_voted_stat_split_panel(),
+    declare_in_year_stat_breakdown_panel(),
+    declare_in_year_voted_breakdown_panel(),
+    declare_gocographic_panel(),
     "historical_g_and_c",
     "personnel_spend",
   ],

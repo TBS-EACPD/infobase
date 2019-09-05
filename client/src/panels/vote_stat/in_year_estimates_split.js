@@ -1,6 +1,6 @@
-import { text_maker, TM } from './vote-stat-text-provider.js';
+import { text_maker, TM } from './vote_stat_text_provider.js';
 import {
-  PanelGraph,
+  declare_panel,
   util_components,
   run_template,
   declarative_charts,
@@ -129,27 +129,36 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
     </StdPanel>
   );
 };
-new PanelGraph({
-  level: "dept",
-  machinery_footnotes: false,
-  depends_on: ["orgVoteStatEstimates"],
 
-  info_deps: [
-    'orgVoteStatEstimates_gov_info', 
-    'orgVoteStatEstimates_dept_info', 
-  ],
-  key: "in_year_estimates_split",
 
-  calculate: estimates_split_calculate,
-  render: estimates_split_render_w_text_key("dept_in_year_estimates_split_text"),
-});
-
-new PanelGraph({
-  level: "gov",
-  machinery_footnotes: false,
-  depends_on: ["orgVoteStatEstimates"],
-  info_deps: ["orgVoteStatEstimates_gov_info"],
-  key: "in_year_estimates_split",
-  calculate: estimates_split_calculate,
-  render: estimates_split_render_w_text_key("gov_in_year_estimates_split_text"),
+export const declare_in_year_estimates_split_panel = () => declare_panel({
+  panel_key: "in_year_estimates_split",
+  levels: ["gov", "dept"],
+  panel_config_func: (level, panel_key) => {
+    switch (level){
+      case "gov":
+        return {
+          level,
+          key: panel_key,
+          machinery_footnotes: false,
+          depends_on: ["orgVoteStatEstimates"],
+          info_deps: ["orgVoteStatEstimates_gov_info"],
+          calculate: estimates_split_calculate,
+          render: estimates_split_render_w_text_key("gov_in_year_estimates_split_text"),
+        };
+      case "dept":
+        return {
+          level,
+          key: panel_key,
+          machinery_footnotes: false,
+          depends_on: ["orgVoteStatEstimates"],
+          info_deps: [
+            'orgVoteStatEstimates_gov_info', 
+            'orgVoteStatEstimates_dept_info', 
+          ],
+          calculate: estimates_split_calculate,
+          render: estimates_split_render_w_text_key("dept_in_year_estimates_split_text"),
+        };
+    }
+  },
 });
