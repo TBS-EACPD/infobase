@@ -1,9 +1,11 @@
+import './results.scss';
+
 import { TM, text_maker } from './result_text_provider.js';
 import { createSelector } from 'reselect';
 import classNames from 'classnames';
 import { Explorer } from '../../components/ExplorerComponents';
 import { 
-  PanelGraph, 
+  declare_panel, 
   util_components, 
   infograph_href_template, 
   Panel,
@@ -468,18 +470,20 @@ class SingleSubjResultsContainer extends React.Component {
   }
 }
 
-_.each(['program','dept','crso'], lvl => {
 
-  new PanelGraph({
-    level: lvl,
+export const declare_explore_results_panel = () => declare_panel({
+  panel_key: "explore_results",
+  levels: ["dept", "crso", "program"],
+  panel_config_func: (level, panel_key) => ({
+    level,
+    key: panel_key,
     footnotes: false,
     depends_on: ["programSpending", "programFtes"],
     source: (subject) => get_source_links(["DP","DRR"]),
-    requires_result_counts: lvl === 'dept',
-    requires_granular_result_counts: lvl !== 'dept',
-    key: "explore_results",
+    requires_result_counts: level === 'dept',
+    requires_granular_result_counts: level !== 'dept',
     calculate(subject){
-      const subject_result_counts = lvl === 'dept' ?
+      const subject_result_counts = level === 'dept' ?
         ResultCounts.get_dept_counts(subject.id) :
         GranularResultCounts.get_subject_counts(subject.id);
 
@@ -534,6 +538,5 @@ _.each(['program','dept','crso'], lvl => {
       );
 
     },
-  });
-
+  }),
 });

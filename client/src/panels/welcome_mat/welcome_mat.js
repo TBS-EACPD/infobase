@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import {
   Table,
   Panel,
-  PanelGraph,
+  declare_panel,
   years,
   create_text_maker_component,
   util_components,
@@ -787,131 +787,141 @@ const common_program_crso_calculate = function(subject, info, options){
   return {type, info, calcs};
 };
 
-new PanelGraph({
-  level: "program",
-  key: 'welcome_mat',
-  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  info_deps: ["programFtes_program_info"],
-  depends_on: ['table6', 'table12'],
-  missing_info: "ok",
-  calculate: common_program_crso_calculate,
-  render,
-});
 
-new PanelGraph({
-  level: "crso",
-  key: 'welcome_mat',
-  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  info_deps: ["programFtes_crso_info"],
-  depends_on: ['table6', 'table12'],
-  missing_info: "ok",
-  calculate: common_program_crso_calculate,
-  render,
-});
-
-new PanelGraph({
-  level: "dept",
-  key: 'welcome_mat',
-  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  info_deps: ["programFtes_dept_info"],
-  depends_on: ['programSpending','programFtes', 'orgVoteStatEstimates'],
-  missing_info: "ok",
-  calculate (subject, info, options){
-    const { programSpending, programFtes, orgVoteStatEstimates } = this.tables; 
-    const q6 = programSpending.q(subject);
-    const q12 = programFtes.q(subject);
-
-    const has_planned = has_planning_data(subject, q6);
-    const has_hist = has_hist_data(subject, q6);
-    const estimates_amt = orgVoteStatEstimates.q(subject).sum("{{est_in_year}}_estimates");
-    const calcs = get_calcs(subject, q6, q12);
-
-    if( !(has_planned || has_hist) ){
-      if(estimates_amt){
+export const declare_welcome_mat_panel = () => declare_panel({
+  panel_key: "welcome_mat",
+  levels: ["gov", "dept", "program", "crso", "tag"],
+  panel_config_func: (level, panel_key) => {
+    switch (level){
+      case "gov":
         return {
-          type: "estimates",
-          calcs: _.immutate(calcs, { spend_plan_1: estimates_amt }),
+          level,
+          key: panel_key,
+          footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+          info_deps: ["programFtes_gov_info"],
+          depends_on: ['programSpending','programFtes'],
+          missing_info: "ok",
+          calculate (subject, info, options){
+            const { programSpending, programFtes } = this.tables; 
+            const q6 = programSpending.q(subject);
+            const q12 = programFtes.q(subject);
+        
+            const calcs = get_calcs(subject, q6, q12);
+        
+            return {
+              type: "hist_planned",
+              info,
+              calcs,
+            };
+          },
+          render,
         };
-      } else {
-        return false;
-      }
+      case "dept":
+        return {
+          level,
+          key: panel_key,
+          footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+          info_deps: ["programFtes_dept_info"],
+          depends_on: ['programSpending','programFtes', 'orgVoteStatEstimates'],
+          missing_info: "ok",
+          calculate (subject, info, options){
+            const { programSpending, programFtes, orgVoteStatEstimates } = this.tables; 
+            const q6 = programSpending.q(subject);
+            const q12 = programFtes.q(subject);
+        
+            const has_planned = has_planning_data(subject, q6);
+            const has_hist = has_hist_data(subject, q6);
+            const estimates_amt = orgVoteStatEstimates.q(subject).sum("{{est_in_year}}_estimates");
+            const calcs = get_calcs(subject, q6, q12);
+        
+            if( !(has_planned || has_hist) ){
+              if(estimates_amt){
+                return {
+                  type: "estimates",
+                  calcs: _.immutate(calcs, { spend_plan_1: estimates_amt }),
+                };
+              } else {
+                return false;
+              }
+            }
+        
+            if(!subject.dp_status){
+              //for non-dp orgs, we refer to estimate authorities. Must use orgVoteStatEstimates to get amounts
+              const proper_calcs = _.immutate(
+                calcs,
+                { spend_plan_1: orgVoteStatEstimates.q(subject).sum("{{est_in_year}}_estimates") }
+              );
+              return {
+                type: "hist_estimates",
+                info,
+                calcs: proper_calcs,
+              };
+            } else {
+              //org with DP, we have everything! 
+        
+              if(has_planned){
+                return {
+                  type: "hist_planned",
+                  info,
+                  calcs,
+                };
+              } else {
+                return {
+                  type: "hist",
+                  info,
+                  calcs,
+                };
+              }
+            }
+          },
+          render,
+        };
+      case "program":
+        return {
+          level,
+          key: panel_key,
+          footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+          info_deps: ["programFtes_program_info"],
+          depends_on: ['table6', 'table12'],
+          missing_info: "ok",
+          calculate: common_program_crso_calculate,
+          render,
+        };
+      case "crso":
+        return {
+          level,
+          key: panel_key,
+          footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+          info_deps: ["programFtes_crso_info"],
+          depends_on: ['table6', 'table12'],
+          missing_info: "ok",
+          calculate: common_program_crso_calculate,
+          render,
+        };
+      case "tag":
+        return {
+          level,
+          key: panel_key,
+          footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+          info_deps: ["programFtes_program_info"],
+          depends_on: ['programSpending','programFtes'],
+          missing_info: "ok",
+          calculate (subject, info, options){
+            const { programSpending, programFtes } = this.tables; 
+            const q6 = programSpending.q(subject);
+            const q12 = programFtes.q(subject);
+        
+            const calcs = get_calcs(subject, q6, q12);
+        
+            return {
+              type: "hist_planned",
+              info,
+              calcs,
+              is_m2m: subject.root.cardinality === "MtoM",
+            };
+          },
+          render,
+        };
     }
-
-    if(!subject.dp_status){
-      //for non-dp orgs, we refer to estimate authorities. Must use orgVoteStatEstimates to get amounts
-      const proper_calcs = _.immutate(
-        calcs,
-        { spend_plan_1: orgVoteStatEstimates.q(subject).sum("{{est_in_year}}_estimates") }
-      );
-      return {
-        type: "hist_estimates",
-        info,
-        calcs: proper_calcs,
-      };
-    } else {
-      //org with DP, we have everything! 
-
-      if(has_planned){
-        return {
-          type: "hist_planned",
-          info,
-          calcs,
-        };
-      } else {
-        return {
-          type: "hist",
-          info,
-          calcs,
-        };
-      }
-    }
   },
-  render,
-});
-
-new PanelGraph({
-  level: "gov",
-  key: 'welcome_mat',
-  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  info_deps: ["programFtes_gov_info"],
-  depends_on: ['programSpending','programFtes'],
-  missing_info: "ok",
-  calculate (subject, info, options){
-    const { programSpending, programFtes } = this.tables; 
-    const q6 = programSpending.q(subject);
-    const q12 = programFtes.q(subject);
-
-    const calcs = get_calcs(subject, q6, q12);
-
-    return {
-      type: "hist_planned",
-      info,
-      calcs,
-    };
-  },
-  render,
-});
-
-new PanelGraph({
-  level: "tag",
-  key: 'welcome_mat',
-  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-  info_deps: ["programFtes_program_info"],
-  depends_on: ['programSpending','programFtes'],
-  missing_info: "ok",
-  calculate (subject, info, options){
-    const { programSpending, programFtes } = this.tables; 
-    const q6 = programSpending.q(subject);
-    const q12 = programFtes.q(subject);
-
-    const calcs = get_calcs(subject, q6, q12);
-
-    return {
-      type: "hist_planned",
-      info,
-      calcs,
-      is_m2m: subject.root.cardinality === "MtoM",
-    };
-  },
-  render,
 });
