@@ -113,15 +113,9 @@
   },
   "devDependencies": {},
   "sideEffects": [
-    "src/app_bootstrap/*",
-    "src/panels/detailed_program_spending_split/*.js",
-    "src/panels/historical_auth_exp/*.js",
-    "src/panels/igoc/*.js",
-    "src/panels/internal_services/*.js",
-    "src/panels/transfer_payments/*.js",
-    "src/infographic/get_panels_for_subject/*.js",
     "src/**/*.css",
     "src/**/*.scss",
+    "src/app_bootstrap/*",
     "src/extended_bootsrap_css/extended_bootstrap_index.js",
     "src/common_css/common_css_index.js",
     "src/handlebars/helpers.js"

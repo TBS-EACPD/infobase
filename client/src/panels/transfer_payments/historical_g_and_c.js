@@ -5,7 +5,7 @@ import {
 } from './gnc_text_provider.js';
 import {
   run_template,
-  PanelGraph,
+  declare_panel,
   years,
   businessConstants,
   declarative_charts,
@@ -26,99 +26,6 @@ const {
 const exp_years = std_years.map(year=> year+'exp');
 
 const text_years = _.map(std_years, run_template);
-
-new PanelGraph({
-  level: "gov",
-  key: "historical_g_and_c",
-  info_deps: [
-    'orgTransferPayments_gov_info',
-  ],
-
-  depends_on: ['orgTransferPayments'],
-  calculate(subject){
-    const {orgTransferPayments} = this.tables;
-    return orgTransferPayments.payment_type_ids(exp_years, false);
-  },
-  render({calculations, footnotes, sources}){
-    const { 
-      info,
-      graph_args: series,
-    } = calculations;
-    return (
-      <Panel
-        title={text_maker("historical_g_and_c_title")}
-        {...{footnotes, sources}}
-      >
-        <HistTPTypes
-          text={
-            <TM k="gov_historical_g_and_c_text" args={info} />
-          }
-          text_split={4}
-          series={series}
-        />
-      </Panel>
-    );
-  },
-});
-
-new PanelGraph({
-  level: "dept",
-  depends_on: ['orgTransferPayments'],
-
-  info_deps: [
-    'orgTransferPayments_gov_info',
-    'orgTransferPayments_dept_info',
-  ],
-
-  key: "historical_g_and_c",
-  footnotes: ['SOBJ10'],
-  calculate(dept){
-    const {orgTransferPayments} = this.tables;
-  
-    const rolled_up_transfer_payments = orgTransferPayments.payment_type_ids(exp_years, dept.unique_id);
-
-    const has_transfer_payments = _.chain(rolled_up_transfer_payments)
-      .values()
-      .flatten()
-      .some( value => value !== 0)
-      .value();
-
-    return has_transfer_payments && {
-      rolled_up: rolled_up_transfer_payments,
-      rows: _.chain(orgTransferPayments.q(dept).data)
-        .sortBy("{{pa_last_year}}exp")
-        .reverse()
-        .value(),
-    };
-  },
-  render({calculations,footnotes, sources}){
-    const { 
-      info, 
-      graph_args: {
-        rows,
-        rolled_up,
-      } } = calculations;
-    const text_content= <TM k="dept_historical_g_and_c_text" args={info} />; 
-
-    return (
-      <Panel
-        title={text_maker("historical_g_and_c_title")}
-        {...{sources, footnotes}}
-      >
-        <HistTPTypes
-          text={text_content}
-          text_split={6}
-          series={rolled_up}
-        />
-        <div className="panel-separator" />
-        <DetailedHistTPItems
-          rows={rows}
-        />
-      </Panel>
-    );
-  },
-});
-
 
 //gov: this is the content of the entire panel
 //dept: this is the top part of the panel
@@ -383,3 +290,99 @@ class DetailedHistTPItems extends React.Component {
 }
 
 
+export const declare_historical_g_and_c_panel = () => declare_panel({
+  panel_key: "historical_g_and_c",
+  levels: ["gov", "dept"],
+  panel_config_func: (level, panel_key) => {
+    switch (level){
+      case "gov":
+        return {
+          info_deps: [
+            'orgTransferPayments_gov_info',
+          ],
+        
+          depends_on: ['orgTransferPayments'],
+          calculate(subject){
+            const {orgTransferPayments} = this.tables;
+            return orgTransferPayments.payment_type_ids(exp_years, false);
+          },
+          render({calculations, footnotes, sources}){
+            const { 
+              info,
+              graph_args: series,
+            } = calculations;
+            return (
+              <Panel
+                title={text_maker("historical_g_and_c_title")}
+                {...{footnotes, sources}}
+              >
+                <HistTPTypes
+                  text={
+                    <TM k="gov_historical_g_and_c_text" args={info} />
+                  }
+                  text_split={4}
+                  series={series}
+                />
+              </Panel>
+            );
+          },
+        };
+      case "dept":
+        return {
+          info_deps: [
+            'orgTransferPayments_gov_info',
+            'orgTransferPayments_dept_info',
+          ],
+        
+          depends_on: ['orgTransferPayments'],
+          key: "historical_g_and_c",
+          footnotes: ['SOBJ10'],
+          calculate(dept){
+            const {orgTransferPayments} = this.tables;
+
+            const rolled_up_transfer_payments = orgTransferPayments.payment_type_ids(exp_years, dept.unique_id);
+        
+            const has_transfer_payments = _.chain(rolled_up_transfer_payments)
+              .values()
+              .flatten()
+              .some( value => value !== 0)
+              .value();
+        
+            return has_transfer_payments && {
+              rolled_up: rolled_up_transfer_payments,
+              rows: _.chain(orgTransferPayments.q(dept).data)
+                .sortBy("{{pa_last_year}}exp")
+                .reverse()
+                .value(),
+            };
+          },
+          render({calculations,footnotes, sources}){
+            const { 
+              info, 
+              graph_args: {
+                rows,
+                rolled_up,
+              } } = calculations;
+            const text_content= <TM k="dept_historical_g_and_c_text" args={info} />; 
+        
+            return (
+              <Panel
+                title={text_maker("historical_g_and_c_title")}
+                {...{sources, footnotes}}
+              >
+                <HistTPTypes
+                  text={text_content}
+                  text_split={6}
+                  series={rolled_up}
+                />
+                <div className="panel-separator" />
+                <DetailedHistTPItems
+                  rows={rows}
+                />
+              </Panel>
+            );
+          },
+        };
+    }
+  },
+});

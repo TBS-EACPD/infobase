@@ -3,7 +3,7 @@ import text from './auth_exp_prog_spending.yaml';
 import { Details } from '../../components/Details.js';
 import {
   run_template,
-  PanelGraph,
+  declare_panel,
   years,
   declarative_charts,
   StdPanel,
@@ -335,21 +335,14 @@ const render = function({calculations, footnotes, sources}) {
   );
 };
 
-new PanelGraph({
-  level: "gov",
-  key: "auth_exp_prog_spending",
-  depends_on: ["orgVoteStatPa", "programSpending"],
-  info_deps: ["orgVoteStatPa_gov_info", "programSpending_gov_info"],
-  calculate,
-  render,
-});
 
-new PanelGraph({
-  level: "dept",
-  key: "auth_exp_prog_spending",
-  depends_on: ["orgVoteStatPa", "programSpending"],
-  info_deps: ["orgVoteStatPa_dept_info", "programSpending_dept_info"],
-  calculate,
-  render,
+export const declare_auth_exp_prog_spending_panel = () => declare_panel({
+  panel_key: "auth_exp_prog_spending",
+  levels: ["gov", "dept"],
+  panel_config_func: (level, panel_key) => ({
+    depends_on: ["orgVoteStatPa", "programSpending"],
+    info_deps: [`orgVoteStatPa_${level}_info`, `programSpending_${level}_info`],
+    calculate,
+    render,
+  }),
 });
-
