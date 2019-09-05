@@ -15,8 +15,8 @@ import { declare_budget_measures_panel } from '../../panels/budget_measures/budg
 import { declare_links_to_rpb_panel } from '../../panels/intro_graphs/index.js';
 import { declare_in_year_voted_stat_split_panel } from "../../panels/vote_stat/in_year_vote_stat_split.js";
 //import { declare_in_year_estimates_split_panel } from "../../panels/vote_stat/in_year_estimates_split.js";
-import "../../panels/transfer_payments/historical_g_and_c.js";
-import '../../panels/historical_auth_exp/auth_exp_prog_spending.js';
+import { declare_historical_g_and_c_panel } from "../../panels/transfer_payments/historical_g_and_c.js";
+import { declare_auth_exp_prog_spending_panel } from '../../panels/historical_auth_exp/auth_exp_prog_spending.js';
 
 // gov only panels
 import {
@@ -42,13 +42,13 @@ export const get_gov_panels = subject => ({
     declare_financial_intro_panel(),
     declare_welcome_mat_panel(),
     declare_budget_measures_panel(),
-    "auth_exp_prog_spending",
+    declare_auth_exp_prog_spending_panel(),
     //declare_in_year_estimates_split_panel(),//turned off until supps A
     declare_in_year_voted_stat_split_panel(),
     declare_in_year_stat_breakdown_panel(),
     declare_in_year_voted_breakdown_panel(),
     declare_gocographic_panel(),
-    "historical_g_and_c",
+    declare_historical_g_and_c_panel(),
     declare_personnel_spend_panel(),
   ],
   people: get_people_panels(subject),
