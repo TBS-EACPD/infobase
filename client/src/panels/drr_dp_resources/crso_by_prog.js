@@ -1,6 +1,6 @@
 import text from './crso_by_prog.yaml';
 import {
-  PanelGraph,
+  declare_panel,
   NivoResponsiveBar,
   years,
   declarative_charts,
@@ -218,18 +218,29 @@ const get_calculate_func = (is_fte) => {
   };
 };
 
-_.each([true,false], is_fte => {
-  new PanelGraph({
-    level: "crso",
+export const declare_crso_by_prog_fte_panel = () => declare_panel({
+  panel_key: "crso_by_prog_fte",
+  levels: ["crso"],
+  panel_config_func: (level, panel_key) => ({
+    level,
+    key: panel_key,
     footnotes: ["PLANNED_EXP"],
-    key: (
-      is_fte ?
-      "crso_by_prog_fte" : 
-      "crso_by_prog_exp"
-    ),
     depends_on: ['programSpending', 'programFtes'],
     info_deps: ['programSpending_crso_info','programFtes_crso_info'],
-    calculate: get_calculate_func(is_fte),
-    render: render_resource_type(is_fte),
-  });
+    calculate: get_calculate_func(true),
+    render: render_resource_type(true),
+  }),
+});
+export const declare_crso_by_prog_exp_panel = () => declare_panel({
+  panel_key: "crso_by_prog_exp",
+  levels: ["crso"],
+  panel_config_func: (level, panel_key) => ({
+    level,
+    key: panel_key,
+    footnotes: ["PLANNED_EXP"],
+    depends_on: ['programSpending', 'programFtes'],
+    info_deps: ['programSpending_crso_info','programFtes_crso_info'],
+    calculate: get_calculate_func(false),
+    render: render_resource_type(false),
+  }),
 });

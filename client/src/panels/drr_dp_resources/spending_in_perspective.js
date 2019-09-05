@@ -1,6 +1,6 @@
 import text from './perspective_text.yaml';
 import {
-  PanelGraph, 
+  declare_panel, 
   sum_a_tag_col,
   util_components,
   declarative_charts,
@@ -140,54 +140,59 @@ class SpendInTagPerspective extends React.Component {
   }
 }
 
+
 //spending in tag perspective also included
-new PanelGraph({
-  level: "program",
-  key: "spending_in_tag_perspective",
-  depends_on: ['programSpending'],
-  info_deps: ["programSpending_program_info"],
-  calculate(subject,info,options){
-    if(window.is_a11y_mode){
-      //turn off this panel in a11y mode
-      return false;
-    }
-    if(subject.dead_program){
-      return false;
-    }
-    const {programSpending} = this.tables;
-    //analysis: as of writing this (oct 2016) the max number of tags encountered is 13.
-    const prog_row = _.first(programSpending.programs.get(subject));
-
-    if(!(prog_row[col] > 0)){
-      return false;
-    }
-    const tags = subject.tags;
-
-    const tag_exps = _.map(tags,tag => ({ 
-      tag,
-      amount: sum_a_tag_col(tag, programSpending, col),
-    }));
-    return { tag_exps };
-  },
-
-  render({calculations, footnotes, sources}){
-    const { graph_args, subject, info } = calculations;
-
-    const { tag_exps } = graph_args;
-    const prog_exp = info.program_exp_planning_year_1;
-
-    return (
-      <Panel
-        title={text_maker("program_spending_in_tag_perspective_title")}
-        {...{footnotes, sources}}
-      >
-        <SpendInTagPerspective
-          tag_exps={tag_exps}
-          subject={subject}
-          prog_exp={prog_exp} 
-        />
-      </Panel>
-    );
-    
-  },
+export const declare_spending_in_tag_perspective_panel = () => declare_panel({
+  panel_key: "spending_in_tag_perspective",
+  levels: ["program"],
+  panel_config_func: (level, panel_key) => ({
+    level,
+    key: panel_key,
+    depends_on: ['programSpending'],
+    info_deps: ["programSpending_program_info"],
+    calculate(subject,info,options){
+      if(window.is_a11y_mode){
+        //turn off this panel in a11y mode
+        return false;
+      }
+      if(subject.dead_program){
+        return false;
+      }
+      const {programSpending} = this.tables;
+      //analysis: as of writing this (oct 2016) the max number of tags encountered is 13.
+      const prog_row = _.first(programSpending.programs.get(subject));
+  
+      if(!(prog_row[col] > 0)){
+        return false;
+      }
+      const tags = subject.tags;
+  
+      const tag_exps = _.map(tags,tag => ({ 
+        tag,
+        amount: sum_a_tag_col(tag, programSpending, col),
+      }));
+      return { tag_exps };
+    },
+  
+    render({calculations, footnotes, sources}){
+      const { graph_args, subject, info } = calculations;
+  
+      const { tag_exps } = graph_args;
+      const prog_exp = info.program_exp_planning_year_1;
+  
+      return (
+        <Panel
+          title={text_maker("program_spending_in_tag_perspective_title")}
+          {...{footnotes, sources}}
+        >
+          <SpendInTagPerspective
+            tag_exps={tag_exps}
+            subject={subject}
+            prog_exp={prog_exp} 
+          />
+        </Panel>
+      );
+      
+    },
+  }),
 });

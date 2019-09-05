@@ -11,7 +11,7 @@ import {
 } from '../../gen_expl/resource-explorer-common.js';
 
 import {
-  PanelGraph,
+  declare_panel,
   Subject,
   PlannedActualTable,
   Results,
@@ -343,113 +343,117 @@ const SubProgramResourceTreeContainer = ({
 };
 
 
-new PanelGraph({
-  key: "sub_program_resources",
-  level: 'program',
-  requires_results: true,
-  required_result_docs: [latest_drr_doc_key,latest_dp_doc_key],
-  requires_result_counts: true,
-  footnotes: false,
-  depends_on: ['programFtes'],
-  source: false,
-  calculate(subject){
-    
-    const program_ftes_q = this.tables.programFtes.q(subject);
-
-    const dp_ftes = program_ftes_q.sum("{{planning_year_1}}");
-    const drr_ftes = program_ftes_q.sum("{{pa_last_year}}");
-
-    const subs = SubProgramEntity.sub_programs(subject.id);
-
-    const drr_subs = _.filter(subs, 'has_drr_resources');
-    const drr_sub_subs = _.chain(drr_subs).map( ({id}) => SubProgramEntity.sub_programs(id) ).flatten().filter('has_drr_resources').value();
-
-    const dp_subs = _.filter(subs, 'has_dp_resources');
-    const dp_sub_subs = _.chain(drr_subs).map( ({id}) => SubProgramEntity.sub_programs(id) ).flatten().filter('has_dp_resources').value();
-
-
-    if(_.isEmpty( dp_subs.concat(drr_subs) ) ){
-      return false;
-    }
-
-    const counts = ResultCounts.get_dept_counts(subject.dept.id);
-    const has_drr_data = counts && counts[`${latest_drr_doc_key}_total`] > 0 && _.nonEmpty(drr_subs);
-    const has_dp_data = _.nonEmpty(dp_subs) && !subject.dead_program;
-
-    return {
-      dp_subs,
-      dp_sub_subs,
-      dp_ftes,
-      has_dp_data,
-
-      drr_subs,
-      drr_sub_subs,
-      drr_ftes, 
-      has_drr_data,
-    };
-  },
-
-  render({calculations, footnotes, sources}){
-    const { 
-      subject, 
-      graph_args: {
-        dp_ftes,
+export const declare_sub_program_resources_panel = () => declare_panel({
+  panel_key: "sub_program_resources",
+  levels: ["program"],
+  panel_config_func: (level, panel_key) => ({
+    level,
+    key: panel_key,
+    requires_results: true,
+    required_result_docs: [latest_drr_doc_key,latest_dp_doc_key],
+    requires_result_counts: true,
+    footnotes: false,
+    depends_on: ['programFtes'],
+    source: false,
+    calculate(subject){
+      
+      const program_ftes_q = this.tables.programFtes.q(subject);
+  
+      const dp_ftes = program_ftes_q.sum("{{planning_year_1}}");
+      const drr_ftes = program_ftes_q.sum("{{pa_last_year}}");
+  
+      const subs = SubProgramEntity.sub_programs(subject.id);
+  
+      const drr_subs = _.filter(subs, 'has_drr_resources');
+      const drr_sub_subs = _.chain(drr_subs).map( ({id}) => SubProgramEntity.sub_programs(id) ).flatten().filter('has_drr_resources').value();
+  
+      const dp_subs = _.filter(subs, 'has_dp_resources');
+      const dp_sub_subs = _.chain(drr_subs).map( ({id}) => SubProgramEntity.sub_programs(id) ).flatten().filter('has_dp_resources').value();
+  
+  
+      if(_.isEmpty( dp_subs.concat(drr_subs) ) ){
+        return false;
+      }
+  
+      const counts = ResultCounts.get_dept_counts(subject.dept.id);
+      const has_drr_data = counts && counts[`${latest_drr_doc_key}_total`] > 0 && _.nonEmpty(drr_subs);
+      const has_dp_data = _.nonEmpty(dp_subs) && !subject.dead_program;
+  
+      return {
         dp_subs,
         dp_sub_subs,
+        dp_ftes,
         has_dp_data,
-
-        drr_ftes, 
+  
         drr_subs,
         drr_sub_subs,
+        drr_ftes, 
         has_drr_data,
-      },
-    } = calculations;
-
-
-    let title_key = "sub_program_resources_title__both";
-    if(!has_dp_data){
-      title_key = "sub_program_resources_title__drr";
-    } else if(!has_drr_data){
-      title_key = "sub_program_resources_title__dp";
-    }
- 
-    return (
-      <Panel
-        title={text_maker(title_key)}
-        {...{footnotes,sources}}
-      >
-        <SubProgramResourceTreeContainer 
-          subject={subject} 
-          has_dp_data={has_dp_data}
-          has_drr_data={has_drr_data}
-          get_text={doc => 
-            <TM
-              k={
-                /drr/.test(doc) ? 
-                  "sub_program_resources_drr_text" : 
-                  "sub_program_resources_dp_text" 
-              }
-              args={
-                /drr/.test(doc) ?
-                {
-                  subject,
-                  num_subs: drr_subs.length,
-                  has_sub_subs: _.nonEmpty(drr_sub_subs),
-                  num_sub_subs: drr_sub_subs.length,
-                  ftes: drr_ftes,
-                } :
-                {
-                  subject,
-                  num_subs: dp_subs.length,
-                  has_sub_subs: _.nonEmpty(dp_sub_subs),
-                  num_sub_subs: dp_sub_subs.length,
-                  ftes: dp_ftes,
+      };
+    },
+  
+    render({calculations, footnotes, sources}){
+      const { 
+        subject, 
+        graph_args: {
+          dp_ftes,
+          dp_subs,
+          dp_sub_subs,
+          has_dp_data,
+  
+          drr_ftes, 
+          drr_subs,
+          drr_sub_subs,
+          has_drr_data,
+        },
+      } = calculations;
+  
+  
+      let title_key = "sub_program_resources_title__both";
+      if(!has_dp_data){
+        title_key = "sub_program_resources_title__drr";
+      } else if(!has_drr_data){
+        title_key = "sub_program_resources_title__dp";
+      }
+   
+      return (
+        <Panel
+          title={text_maker(title_key)}
+          {...{footnotes,sources}}
+        >
+          <SubProgramResourceTreeContainer 
+            subject={subject} 
+            has_dp_data={has_dp_data}
+            has_drr_data={has_drr_data}
+            get_text={doc => 
+              <TM
+                k={
+                  /drr/.test(doc) ? 
+                    "sub_program_resources_drr_text" : 
+                    "sub_program_resources_dp_text" 
                 }
-              }
-            />
-          }
-        />
-      </Panel>
-    );
-  },
+                args={
+                  /drr/.test(doc) ?
+                  {
+                    subject,
+                    num_subs: drr_subs.length,
+                    has_sub_subs: _.nonEmpty(drr_sub_subs),
+                    num_sub_subs: drr_sub_subs.length,
+                    ftes: drr_ftes,
+                  } :
+                  {
+                    subject,
+                    num_subs: dp_subs.length,
+                    has_sub_subs: _.nonEmpty(dp_sub_subs),
+                    num_sub_subs: dp_sub_subs.length,
+                    ftes: dp_ftes,
+                  }
+                }
+              />
+            }
+          />
+        </Panel>
+      );
+    },
+  }),
 });
