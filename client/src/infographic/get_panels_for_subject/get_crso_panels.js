@@ -12,9 +12,6 @@ import {
 import { declare_explore_results_panel } from '../../panels/result_graphs/index.js';
 import { declare_budget_measures_panel } from '../../panels/budget_measures/budget_measures_panel.js';
 
-// shared dept, crso, program, tag
-import '../../panels/tag_panels/resource_structure.js';
-
 // shared dept, program, crso
 import { declare_tags_of_interest_panel } from '../../panels/intro_graphs/index.js';
 import "../../panels/drr_dp_resources/drr_planned_actual.js";

@@ -12,9 +12,6 @@ import {
 import { declare_explore_results_panel } from '../../panels/result_graphs/index.js';
 import { declare_budget_measures_panel } from '../../panels/budget_measures/budget_measures_panel.js';
 
-// shared dept, crso, program, tag
-import '../../panels/tag_panels/resource_structure.js';
-
 // shared dept, program, crso
 import { declare_tags_of_interest_panel } from '../../panels/intro_graphs/index.js';
 import "../../panels/drr_dp_resources/drr_planned_actual.js";
@@ -30,7 +27,7 @@ import { declare_drr_summary_panel } from '../../panels/result_graphs/index.js';
 import { declare_profile_panel } from '../../panels/intro_graphs/index.js';
 
 // shared program, tag
-import "../../panels/vote-stat/last_year_vote_stat_split.js";
+import { declare_vote_stat_split_panel } from "../../panels/vote_stat/last_year_vote_stat_split.js";
 import "../../panels/sobj/top_spending_areas.js";
 
 // program only panels
@@ -53,11 +50,11 @@ export const get_program_panels = subject => ensure_loaded({
     declare_program_fed_structure_panel(),
   ],
   financial: [
-    'dead_program_warning',
+    declare_dead_program_warning_panel(),
     declare_financial_intro_panel(),
     declare_welcome_mat_panel(),
     declare_budget_measures_panel(),
-    'vote_stat_split',
+    declare_vote_stat_split_panel(),
     'spend_rev_split',
     'top_spending_areas',
     "spending_in_tag_perspective",

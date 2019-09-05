@@ -2,7 +2,7 @@ import text from "./goco.yaml";
 
 import {
   create_text_maker_component,
-  PanelGraph,
+  declare_panel,
   Subject,
   formats,
   declarative_charts,
@@ -321,11 +321,15 @@ class GocoDiagram extends React.Component {
 }
 
 
-new PanelGraph({
-  key: 'gocographic',
-  level: 'gov',
-  depends_on: ['programSpending', 'programFtes'],
-  footnotes: ["GOCO"],
-  calculate: _.constant(true),
-  render,
+export const declare_gocographic_panel = () => declare_panel({
+  panel_key: "gocographic",
+  levels: ["gov"],
+  panel_config_func: (level, panel_key) => ({
+    level,
+    key: panel_key,
+    depends_on: ['programSpending', 'programFtes'],
+    footnotes: ["GOCO"],
+    calculate: _.constant(true),
+    render,
+  }),
 });
