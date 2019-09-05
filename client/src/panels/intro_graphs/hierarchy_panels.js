@@ -73,7 +73,7 @@ export const declare_portfolio_structure_related_panel = () => declare_panel({
 
 
 export const declare_program_fed_structure_panel = () => declare_panel({
-  panel_key: "portfolio_structure_related",
+  panel_key: "program_fed_structure",
   levels: ['program'],
   panel_config_func: (level, panel_key) => ({
     footnotes: false,
