@@ -1,7 +1,9 @@
+import './results.scss';
+
 import classNames from 'classnames';
 import { Fragment } from 'react';
 import {
-  PanelGraph,
+  declare_panel,
   declarative_charts,
   Panel,
   businessConstants,
@@ -223,50 +225,60 @@ const render = ({calculations, footnotes, sources}) => {
   );
 };
 
-new PanelGraph({
-  level: 'dept',
-  requires_result_counts: true,
-  key: "drr_summary",
-  footnotes: ["RESULTS_COUNTS", "RESULTS"],
-  source: (subject) => get_source_links(["DRR"]),
-  calculate(subject){
-    const verbose_counts = ResultCounts.get_dept_counts(subject.id);
-    const counts = row_to_drr_status_counts(verbose_counts);
 
-    if(verbose_counts[`${latest_drr_doc_key}_total`] < 1){
-      return false;
+export const declare_drr_summary_panel = () => declare_panel({
+  panel_key: "drr_summary",
+  levels: ["dept", "program"],
+  panel_config_func: (level, panel_key) => {
+    switch (level){
+      case "dept":
+        return {
+          level,
+          key: panel_key,
+          requires_result_counts: true,
+          footnotes: ["RESULTS_COUNTS", "RESULTS"],
+          source: (subject) => get_source_links(["DRR"]),
+          calculate(subject){
+            const verbose_counts = ResultCounts.get_dept_counts(subject.id);
+            const counts = row_to_drr_status_counts(verbose_counts);
+        
+            if(verbose_counts[`${latest_drr_doc_key}_total`] < 1){
+              return false;
+            }
+        
+            return {
+              verbose_counts,
+              counts,
+            };
+          },
+          render,
+        };
+      case "program":
+        return {
+          level,
+          key: panel_key,
+          requires_results: true,
+          required_result_docs: [latest_drr_doc_key],
+          footnotes: ["RESULTS_COUNTS", "RESULTS"],
+          source: (subject) => get_source_links(["DRR"]),
+          calculate(subject){
+            const all_results = Result.get_flat_results(subject);
+            const all_indicators = Indicator.get_flat_indicators(subject);
+        
+            if( !_.find(all_indicators, {doc: latest_drr_doc_key}) ){
+              return false;
+            }
+        
+            const verbose_counts = compute_counts_from_set({results: all_results, indicators: all_indicators });
+            const counts = row_to_drr_status_counts(verbose_counts);
+            
+            return {
+              verbose_counts,
+              counts,
+            };
+          },
+          render,
+        };
     }
-
-    return {
-      verbose_counts,
-      counts,
-    };
   },
-  render,
-});
-
-new PanelGraph({
-  level: 'program',
-  requires_results: true,
-  required_result_docs: [latest_drr_doc_key],
-  key: "drr_summary",
-  footnotes: ["RESULTS_COUNTS", "RESULTS"],
-  source: (subject) => get_source_links(["DRR"]),
-  calculate(subject){
-    const all_results = Result.get_flat_results(subject);
-    const all_indicators = Indicator.get_flat_indicators(subject);
-
-    if( !_.find(all_indicators, {doc: latest_drr_doc_key}) ){
-      return false;
-    }
-
-    const verbose_counts = compute_counts_from_set({results: all_results, indicators: all_indicators });
-    const counts = row_to_drr_status_counts(verbose_counts);
-    
-    return {
-      verbose_counts,
-      counts,
-    };
-  },
-  render,
 });

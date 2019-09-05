@@ -1,7 +1,7 @@
 import { TM, text_maker } from './drr_summary_text.js';
 import {
   Subject,
-  PanelGraph,
+  declare_panel,
   Panel,
   get_source_links,
 } from "../shared.js";
@@ -17,55 +17,6 @@ import { HorizontalStatusTable } from './result_components.js';
 const { Gov, Dept } = Subject;
 
 const latest_drr_doc_key = _.last( get_result_doc_keys("drr") );
-
-
-new PanelGraph({
-  level: 'gov',
-  requires_result_counts: true,
-  key: "gov_drr",
-  footnotes: ["RESULTS_COUNTS"],
-  source: (subject) => get_source_links(["DRR"]),
-
-  calculate(){
-    const verbose_gov_counts = ResultCounts.get_gov_counts();
-    const gov_counts = row_to_drr_status_counts(verbose_gov_counts);
-
-    
-    const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${latest_drr_doc_key}_total`] > 0 );
-    const num_depts = dept_counts.length;
-
-    const counts_by_dept = _.chain(dept_counts)
-      .map( row => ({ 
-        subject: Dept.lookup(row.id),
-        counts: row,
-      }))
-      .map( obj => ({...obj, total: d3.sum(_.values(obj.counts)) } ) )
-      .value();
-
-
-    return {
-      gov_counts,
-      counts_by_dept,
-      verbose_gov_counts,
-      num_depts,
-    };
-  },
-
-  render({calculations, footnotes, sources}){
-    const {
-      graph_args,
-    } = calculations;
-
-    return (
-      <Panel
-        title={text_maker("drr_summary_title")}
-        { ...{footnotes, sources} }
-      >
-        <GovDRR {...graph_args} />
-      </Panel>
-    );
-  },
-});
 
 class GovDRR extends React.Component {
   render(){
@@ -107,3 +58,56 @@ class GovDRR extends React.Component {
     );
   }
 }
+
+
+export const declare_gov_drr_panel = () => declare_panel({
+  panel_key: "gov_drr",
+  levels: ["gov"],
+  panel_config_func: (level, panel_key) => ({
+    level,
+    key: panel_key,
+    requires_result_counts: true,
+    footnotes: ["RESULTS_COUNTS"],
+    source: (subject) => get_source_links(["DRR"]),
+  
+    calculate(){
+      const verbose_gov_counts = ResultCounts.get_gov_counts();
+      const gov_counts = row_to_drr_status_counts(verbose_gov_counts);
+  
+      
+      const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${latest_drr_doc_key}_total`] > 0 );
+      const num_depts = dept_counts.length;
+  
+      const counts_by_dept = _.chain(dept_counts)
+        .map( row => ({ 
+          subject: Dept.lookup(row.id),
+          counts: row,
+        }))
+        .map( obj => ({...obj, total: d3.sum(_.values(obj.counts)) } ) )
+        .value();
+  
+  
+      return {
+        gov_counts,
+        counts_by_dept,
+        verbose_gov_counts,
+        num_depts,
+      };
+    },
+  
+    render({calculations, footnotes, sources}){
+      const {
+        graph_args,
+      } = calculations;
+  
+      return (
+        <Panel
+          title={text_maker("drr_summary_title")}
+          { ...{footnotes, sources} }
+        >
+          <GovDRR {...graph_args} />
+        </Panel>
+      );
+    },
+  }),
+});
