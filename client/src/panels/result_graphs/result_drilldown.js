@@ -475,8 +475,6 @@ export const declare_explore_results_panel = () => declare_panel({
   panel_key: "explore_results",
   levels: ["dept", "crso", "program"],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     footnotes: false,
     depends_on: ["programSpending", "programFtes"],
     source: (subject) => get_source_links(["DP","DRR"]),

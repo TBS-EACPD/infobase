@@ -233,8 +233,6 @@ export const declare_drr_summary_panel = () => declare_panel({
     switch (level){
       case "dept":
         return {
-          level,
-          key: panel_key,
           requires_result_counts: true,
           footnotes: ["RESULTS_COUNTS", "RESULTS"],
           source: (subject) => get_source_links(["DRR"]),
@@ -255,8 +253,6 @@ export const declare_drr_summary_panel = () => declare_panel({
         };
       case "program":
         return {
-          level,
-          key: panel_key,
           requires_results: true,
           required_result_docs: [latest_drr_doc_key],
           footnotes: ["RESULTS_COUNTS", "RESULTS"],

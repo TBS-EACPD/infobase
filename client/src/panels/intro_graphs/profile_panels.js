@@ -14,8 +14,6 @@ export const declare_profile_panel = () => declare_panel({
   panel_key: "profile",
   levels: ['crso', 'program'],
   panel_config_func: (level, panel_key) => ({
-    level: level,
-    key: panel_key,
     calculate: (subject) =>_.nonEmpty([subject.old_name, subject.description]),
     render({calculations}){
       const { subject } = calculations;
@@ -50,8 +48,6 @@ export const declare_description_panel = () => declare_panel({
   panel_key: "description",
   levels: ["tag"],
   panel_config_func: (level, panel_key) => ({
-    level: level,
-    key: panel_key,
     footnotes: false,
     calculate: subject => _.nonEmpty(subject.description),
     render({calculations}){

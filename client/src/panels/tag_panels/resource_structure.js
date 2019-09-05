@@ -216,8 +216,6 @@ export const declare_resource_structure_panel = () => declare_panel({
   panel_key: "resource_structure",
   levels: ["tag"],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     footnotes: false,
     depends_on: ['programSpending','programFtes'],
   

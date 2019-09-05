@@ -23,8 +23,6 @@ export const declare_estimates_in_perspective_panel = () => declare_panel({
   panel_key: "estimates_in_perspective",
   levels: ["dept"],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     depends_on: ["orgVoteStatEstimates"],
     machinery_footnotes: false,
   

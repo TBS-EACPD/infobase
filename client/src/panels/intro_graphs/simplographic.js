@@ -18,8 +18,6 @@ export const declare_simplographic_panel = () => declare_panel({
   panel_key: "simplographic",
   levels: ['gov'],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     footnotes: false,
     requires_result_counts: true,
   

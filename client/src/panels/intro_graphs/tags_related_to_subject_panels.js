@@ -77,8 +77,6 @@ export const declare_tags_of_interest_panel = () => declare_panel({
   panel_key: "tags_of_interest",
   levels: ['dept', 'crso', 'program'],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     footnotes: false,
     calculate(subject){
       const tags_by_root = get_related_tag_list_args(subject);
@@ -113,8 +111,6 @@ export const declare_tag_progs_by_dept_panel = () => declare_panel({
   panel_key: "tag_progs_by_dept",
   levels: ['tag'],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     footnotes: false,
     calculate: _.constant(true),
   
@@ -174,8 +170,6 @@ export const declare_related_tags_panel = () => declare_panel({
   panel_key: "related_tags",
   levels: ['tag'],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     footnotes: false,
   
     calculate(subject){

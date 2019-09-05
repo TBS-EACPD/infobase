@@ -7,8 +7,6 @@ export const declare_m2m_warning_panel = () => declare_panel({
   panel_key: "m2m_warning",
   levels: ['tag'],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     footnotes: false,
     calculate(subject){
       return subject.is_m2m;

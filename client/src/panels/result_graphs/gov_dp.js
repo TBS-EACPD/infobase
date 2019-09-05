@@ -76,8 +76,6 @@ export const declare_gov_dp_panel = () => declare_panel({
   panel_key: "gov_dp",
   levels: ["gov"],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     requires_result_counts: true,
     calculate: () => {
       const verbose_gov_counts = ResultCounts.get_gov_counts();
