@@ -5,7 +5,7 @@ import text from './gov_dp_text.yaml';
 import {
   Subject,
   create_text_maker_component,
-  PanelGraph,
+  declare_panel,
   Panel,
   rpb_link,
   get_source_links,
@@ -72,53 +72,57 @@ const ResultsIntroPanel = ({counts, verbose_gov_counts, counts_by_dept}) => <Fra
 </Fragment>;
   
 
-new PanelGraph({
-  level: 'gov',
-  requires_result_counts: true,
-  key: "gov_dp",
-  calculate: () => {
-    const verbose_gov_counts = ResultCounts.get_gov_counts();
-    
-    const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${latest_dp_doc_key}_results`] > 0 );
-    const counts_by_dept = _.chain(dept_counts)
-      .map( row => ({ 
-        subject: Dept.lookup(row.id),
-        counts: row,
-      }))
-      .map( obj => ({...obj, total: d3.sum(_.values(obj.counts)) } ) )
-      .value();
-
-    return { 
-      verbose_gov_counts,
-      counts_by_dept,
-    };
-  },
-  footnotes: false,
-  source: (subject) => get_source_links(["DP"]),
-  render({ calculations, sources}){
-    const {
-      graph_args: {
+export const declare_gov_dp_panel = () => declare_panel({
+  panel_key: "gov_dp",
+  levels: ["gov"],
+  panel_config_func: (level, panel_key) => ({
+    level,
+    key: panel_key,
+    requires_result_counts: true,
+    calculate: () => {
+      const verbose_gov_counts = ResultCounts.get_gov_counts();
+      
+      const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${latest_dp_doc_key}_results`] > 0 );
+      const counts_by_dept = _.chain(dept_counts)
+        .map( row => ({ 
+          subject: Dept.lookup(row.id),
+          counts: row,
+        }))
+        .map( obj => ({...obj, total: d3.sum(_.values(obj.counts)) } ) )
+        .value();
+  
+      return { 
         verbose_gov_counts,
         counts_by_dept,
-      },
-    } = calculations;
-    const counts = ResultCounts.get_gov_counts();
-    const { spend, ftes } = get_dp_rpb_links();
-
-    return (
-      <Panel
-        title={text_maker("gov_dp_summary_title")}
-        sources={sources}
-        allowOverflow
-      >
-        <ResultsIntroPanel 
-          counts={counts}
-          verbose_gov_counts={verbose_gov_counts}
-          counts_by_dept={counts_by_dept}
-          spend_link={spend}
-          fte_link={ftes}
-        />
-      </Panel>
-    ); 
-  },
+      };
+    },
+    footnotes: false,
+    source: (subject) => get_source_links(["DP"]),
+    render({ calculations, sources}){
+      const {
+        graph_args: {
+          verbose_gov_counts,
+          counts_by_dept,
+        },
+      } = calculations;
+      const counts = ResultCounts.get_gov_counts();
+      const { spend, ftes } = get_dp_rpb_links();
+  
+      return (
+        <Panel
+          title={text_maker("gov_dp_summary_title")}
+          sources={sources}
+          allowOverflow
+        >
+          <ResultsIntroPanel 
+            counts={counts}
+            verbose_gov_counts={verbose_gov_counts}
+            counts_by_dept={counts_by_dept}
+            spend_link={spend}
+            fte_link={ftes}
+          />
+        </Panel>
+      ); 
+    },
+  }),
 });
