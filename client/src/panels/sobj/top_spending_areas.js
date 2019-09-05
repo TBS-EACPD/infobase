@@ -2,7 +2,7 @@ import text from './top_spending_areas.yaml';
 
 import {
   util_components,
-  PanelGraph, 
+  declare_panel, 
   run_template,
   years,
   StdPanel,
@@ -89,33 +89,39 @@ const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) =>
   );
 };
 
-new PanelGraph({
-  key: 'top_spending_areas',
-  depends_on: ['programSobjs'],
-  info_deps: ["program_std_obj"],
-  level: "program",
-  footnotes: ["SOBJ"],
 
-  calculate(subject,info,options){ 
-    if ( _.isEmpty( this.tables.programSobjs.programs.get(subject) ) ){
-      return false;
+export const declare_top_spending_areas_panel = () => declare_panel({
+  panel_key: "top_spending_areas",
+  levels: ["program", "tag"],
+  panel_config_func: (level, panel_key) => {
+    switch (level){
+      case "program":
+        return {
+          level,
+          key: panel_key,
+          depends_on: ['programSobjs'],
+          info_deps: ["program_std_obj"],
+          footnotes: ["SOBJ"],
+          calculate(subject,info,options){ 
+            if ( _.isEmpty( this.tables.programSobjs.programs.get(subject) ) ){
+              return false;
+            }
+            return common_cal([subject], this.tables.programSobjs);
+          },
+          render: render_w_options({text_key: "program_top_spending_areas_text"}),
+        };
+      case "tag":
+        return {
+          level,
+          key: panel_key,
+          info_deps: ["tag_std_obj"],
+          depends_on: ['programSobjs'],
+          footnotes: ["SOBJ"],
+          calculate(subject,info,options){ 
+            return common_cal(subject.programs, this.tables.programSobjs);
+          },
+          render: render_w_options({text_key: "tag_top_spending_areas_text"}),
+        };
     }
-    return common_cal([subject], this.tables.programSobjs);
   },
-
-  render: render_w_options({text_key: "program_top_spending_areas_text"}),
-});
-
-new PanelGraph({
-  key: 'top_spending_areas',
-  info_deps: ["tag_std_obj"],
-  depends_on: ['programSobjs'],
-  level: "tag",
-  footnotes: ["SOBJ"],
-
-  calculate(subject,info,options){ 
-    return common_cal(subject.programs, this.tables.programSobjs);
-  },
-
-  render: render_w_options({text_key: "tag_top_spending_areas_text"}),
 });

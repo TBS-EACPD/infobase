@@ -1,7 +1,7 @@
 import text from "./drr_planned_actual.yaml";
 
 import {
-  PanelGraph,
+  declare_panel,
   FootNote,
   PlannedActualTable,
   create_text_maker_component,
@@ -13,14 +13,16 @@ import { ResultCounts } from '../result_graphs/results_common.js';
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-_.each(['dept','program','crso'], level => {
-  new PanelGraph({
+export const declare_drr_planned_actual_panel = () => declare_panel({
+  panel_key: "drr_planned_actual",
+  levels: ["dept", "crso", "program"],
+  panel_config_func: (level, panel_key) => ({
+    level,
+    key: panel_key,
     depends_on: ['programSpending', 'programFtes'],
     info_deps: level === 'crso' ? ['programSpending_crso_info','programFtes_crso_info'] : [],
-    key: 'drr_planned_actual',
     //used as as a fail mechanism. If result counts aren't present, bail
     requires_result_counts: true,
-    level,
     source: (subject) => get_source_links(["DP","DRR"]),
     title: "drr_planned_actual_title",
     calculate(subject, info){
@@ -114,5 +116,5 @@ _.each(['dept','program','crso'], level => {
       );
 
     },
-  });
+  }),
 });

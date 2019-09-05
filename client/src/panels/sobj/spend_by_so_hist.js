@@ -1,5 +1,5 @@
 import {
-  PanelGraph,
+  declare_panel,
   businessConstants,
   years,
   util_components,
@@ -18,72 +18,6 @@ const {
 const { sos } = businessConstants;
 const { std_years } = years;
 const { Format } = util_components;
-
-new PanelGraph({
-  level: "dept",
-  key: "spend_by_so_hist",
-  depends_on: ['orgSobjs'],
-  footnotes: [ "SOBJ", "EXP"],
-  info_deps: [ 'orgSobjs_dept_info', 'orgSobjs_gov_info' ],
-  calculate (subject,info){
-    const {orgSobjs} = this.tables;
-    return {
-      data: (
-        _.chain(sos)
-          .sortBy(sobj => sobj.so_num )
-          .map(sobj => 
-            ({
-              "label": sobj.text,
-              "data": std_years.map( year => orgSobjs.so_num(year,subject)[sobj.so_num]),
-            })
-          )
-          .filter(d => d3.sum(d.data) )
-          .value()
-      ),
-      ticks: info.last_years,
-    };
-  },
-  render({calculations, footnotes, sources}){
-    const { graph_args, info } = calculations;
-    const {ticks, data} = graph_args;
-  
-    let graph_content;
-    if(window.is_a11y_mode){
-      graph_content = (
-        <A11YTable
-          data={
-            _.map(data, ({label, data}) => ({
-              label,
-              /* eslint-disable react/jsx-key */
-              data: data.map(amt => <Format type="compact1" content={amt} />),
-            }))
-          }
-          label_col_header={text_maker("so")}
-          data_col_headers={ticks} 
-        />
-      );
-    } else {
-      graph_content = (
-        <SobjLine data={data} />
-      );
-    }
-
-    return (
-      <Panel
-        title={text_maker("dept_fin_spend_by_so_hist_title")}
-        {...{sources, footnotes}}
-      >
-        <div className="medium_panel_text">
-          <TM k="dept_fin_spend_by_so_hist_text" args={info}/>
-        </div>
-        <div>
-          {graph_content}
-        </div>
-      </Panel>
-    );
-  },   
-  
-});
 
 class SobjLine extends React.Component {
   constructor(props){
@@ -161,3 +95,74 @@ class SobjLine extends React.Component {
     );
   }
 }
+
+
+export const declare_spend_by_so_hist_panel = () => declare_panel({
+  panel_key: "spend_by_so_hist",
+  levels: ["dept"],
+  panel_config_func: (level, panel_key) => ({
+    level,
+    key: panel_key,
+    depends_on: ['orgSobjs'],
+    footnotes: [ "SOBJ", "EXP"],
+    info_deps: [ 'orgSobjs_dept_info', 'orgSobjs_gov_info' ],
+    calculate (subject,info){
+      const {orgSobjs} = this.tables;
+      return {
+        data: (
+          _.chain(sos)
+            .sortBy(sobj => sobj.so_num )
+            .map(sobj => 
+              ({
+                "label": sobj.text,
+                "data": std_years.map( year => orgSobjs.so_num(year,subject)[sobj.so_num]),
+              })
+            )
+            .filter(d => d3.sum(d.data) )
+            .value()
+        ),
+        ticks: info.last_years,
+      };
+    },
+    render({calculations, footnotes, sources}){
+      const { graph_args, info } = calculations;
+      const {ticks, data} = graph_args;
+    
+      let graph_content;
+      if(window.is_a11y_mode){
+        graph_content = (
+          <A11YTable
+            data={
+              _.map(data, ({label, data}) => ({
+                label,
+                /* eslint-disable react/jsx-key */
+                data: data.map(amt => <Format type="compact1" content={amt} />),
+              }))
+            }
+            label_col_header={text_maker("so")}
+            data_col_headers={ticks} 
+          />
+        );
+      } else {
+        graph_content = (
+          <SobjLine data={data} />
+        );
+      }
+  
+      return (
+        <Panel
+          title={text_maker("dept_fin_spend_by_so_hist_title")}
+          {...{sources, footnotes}}
+        >
+          <div className="medium_panel_text">
+            <TM k="dept_fin_spend_by_so_hist_text" args={info}/>
+          </div>
+          <div>
+            {graph_content}
+          </div>
+        </Panel>
+      );
+    },   
+    
+  }),
+});
