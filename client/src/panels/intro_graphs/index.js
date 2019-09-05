@@ -81,11 +81,9 @@ const curried_render = ({ q_a_keys, omit_name_item }) => function ({ calculation
 
 
 const declare_financial_intro_panel = () => declare_panel({
-  panel_key: "results_intro",
+  panel_key: "financial_intro",
   levels: ['gov', 'dept', 'crso', 'program', 'tag'],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: 'financial_intro',
     static: true,
     footnotes: false,
     info_deps: [],
@@ -111,8 +109,6 @@ const declare_results_intro_panel = () => declare_panel({
   panel_key: "results_intro",
   levels: ['gov', 'dept', 'crso', 'program'],
   panel_config_func: (level, panel_key) => ({
-    level: level,
-    key: panel_key,
     static: true,
     footnotes: false,
     info_deps: [],
@@ -135,8 +131,6 @@ const declare_people_intro_panel = () => declare_panel({
   panel_key: "people_intro",
   levels: ["gov", "dept"],
   panel_config_func: (level, panel_key) => ({
-    key: panel_key,
-    level: level,
     static: true,
     footnotes: false,
     info_deps: [],
@@ -162,8 +156,6 @@ const declare_tagging_key_concepts_panel = () => declare_panel({
   panel_key: "tagging_key_concepts",
   levels: ['tag'],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     static: true,
     footnotes: false,
     info_deps: [],
@@ -192,8 +184,6 @@ const declare_late_dps_warning_panel = () => declare_panel({
     switch (level){
       case "gov":
         return {
-          level,
-          key: panel_key,
           static: true,
           footnotes: false,
           source: false,
@@ -214,8 +204,6 @@ const declare_late_dps_warning_panel = () => declare_panel({
         };
       default:
         return {
-          level,
-          key: panel_key,
           static: true,
           footnotes: false,
           source: false,

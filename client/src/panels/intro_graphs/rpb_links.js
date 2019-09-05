@@ -29,8 +29,6 @@ export const declare_links_to_rpb_panel = () => declare_panel({
     switch (level){
       case "gov":
         return {
-          level,
-          key: panel_key,
           footnotes: false,
           calculate: _.constant(true),
         
@@ -60,8 +58,6 @@ export const declare_links_to_rpb_panel = () => declare_panel({
         };
       case "dept":
         return {
-          level,
-          key: panel_key,
           footnotes: false,
         
           calculate(subject){

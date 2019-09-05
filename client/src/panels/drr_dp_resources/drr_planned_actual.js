@@ -17,8 +17,6 @@ export const declare_drr_planned_actual_panel = () => declare_panel({
   panel_key: "drr_planned_actual",
   levels: ["dept", "crso", "program"],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     depends_on: ['programSpending', 'programFtes'],
     info_deps: level === 'crso' ? ['programSpending_crso_info','programFtes_crso_info'] : [],
     //used as as a fail mechanism. If result counts aren't present, bail

@@ -897,8 +897,6 @@ export const declare_budget_measures_panel = () => declare_panel({
   panel_key: "budget_measures_panel",
   levels: ['gov', 'dept', 'program', 'crso'],
   panel_config_func: (level_name, panel_key) => ({
-    level: level_name,
-    key: panel_key,
     requires_has_budget_measures: true,
     footnotes: false,
     source: (subject) => [

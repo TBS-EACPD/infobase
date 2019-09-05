@@ -97,8 +97,6 @@ export const declare_top_spending_areas_panel = () => declare_panel({
     switch (level){
       case "program":
         return {
-          level,
-          key: panel_key,
           depends_on: ['programSobjs'],
           info_deps: ["program_std_obj"],
           footnotes: ["SOBJ"],
@@ -112,8 +110,6 @@ export const declare_top_spending_areas_panel = () => declare_panel({
         };
       case "tag":
         return {
-          level,
-          key: panel_key,
           info_deps: ["tag_std_obj"],
           depends_on: ['programSobjs'],
           footnotes: ["SOBJ"],

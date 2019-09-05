@@ -347,8 +347,6 @@ export const declare_sub_program_resources_panel = () => declare_panel({
   panel_key: "sub_program_resources",
   levels: ["program"],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     requires_results: true,
     required_result_docs: [latest_drr_doc_key,latest_dp_doc_key],
     requires_result_counts: true,

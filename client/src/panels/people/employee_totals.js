@@ -39,8 +39,6 @@ export const declare_employee_totals_panel = () => declare_panel({
   panel_key: "employee_totals",
   levels: ["gov", "dept"],
   panel_config_func: (level, panel_key) => ({
-    key: panel_key,
-    level: level,
     depends_on: ['orgEmployeeType'],
     info_deps: info_deps_by_level[level],
 

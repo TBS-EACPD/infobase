@@ -46,8 +46,6 @@ export const declare_vote_stat_split_panel = () => declare_panel({
     switch (level){
       case "program":
         return {
-          level,
-          key: panel_key,
           depends_on: ['programVoteStat'],
           info_deps: ["programVoteStat_program_info"],
           footnotes: ["VOTED", "STAT"],
@@ -77,8 +75,6 @@ export const declare_vote_stat_split_panel = () => declare_panel({
         };
       case "tag":
         return {
-          level,
-          key: panel_key,
           depends_on: ['programVoteStat'],
           info_deps: ["programVoteStat_tag_info"],
           footnotes: ["VOTED", "STAT"],

@@ -20,8 +20,6 @@ export const declare_personnel_spend_panel = () => declare_panel({
   panel_key: "personnel_spend",
   levels: ["gov"],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     depends_on: ['orgSobjs'],
   
     info_deps: [

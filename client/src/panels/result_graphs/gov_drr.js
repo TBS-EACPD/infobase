@@ -64,8 +64,6 @@ export const declare_gov_drr_panel = () => declare_panel({
   panel_key: "gov_drr",
   levels: ["gov"],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     requires_result_counts: true,
     footnotes: ["RESULTS_COUNTS"],
     source: (subject) => get_source_links(["DRR"]),

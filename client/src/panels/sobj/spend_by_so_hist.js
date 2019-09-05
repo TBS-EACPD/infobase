@@ -101,8 +101,6 @@ export const declare_spend_by_so_hist_panel = () => declare_panel({
   panel_key: "spend_by_so_hist",
   levels: ["dept"],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     depends_on: ['orgSobjs'],
     footnotes: [ "SOBJ", "EXP"],
     info_deps: [ 'orgSobjs_dept_info', 'orgSobjs_gov_info' ],

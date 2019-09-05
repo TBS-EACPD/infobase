@@ -23,8 +23,6 @@ export const declare_dp_rev_split_panel = () => declare_panel({
   panel_key: "dp_rev_split",
   levels: ["dept", "crso", "program"],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     depends_on: ['programSpending'],
     machinery_footnotes: false,
     footnotes: ["PLANNED_GROSS", "PLANNED_EXP", "PLANNED_FTE"],
