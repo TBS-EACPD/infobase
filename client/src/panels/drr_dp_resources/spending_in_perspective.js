@@ -146,8 +146,6 @@ export const declare_spending_in_tag_perspective_panel = () => declare_panel({
   panel_key: "spending_in_tag_perspective",
   levels: ["program"],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     depends_on: ['programSpending'],
     info_deps: ["programSpending_program_info"],
     calculate(subject,info,options){

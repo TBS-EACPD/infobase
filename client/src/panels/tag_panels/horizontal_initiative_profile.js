@@ -23,8 +23,6 @@ export const declare_horizontal_initiative_profile_panel = () => declare_panel({
   panel_key: "horizontal_initiative_profile",
   levels: ["tag"],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     title: "horizontal_initiative_profile",
     calculate: subject => subject.root.id === "HI" && !_.isUndefined(subject.lookups) && !_.isEmpty(subject.lookups),
     render({calculations}){

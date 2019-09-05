@@ -88,8 +88,6 @@ export const declare_spend_rev_split_panel = () => declare_panel({
     switch (level){
       case "dept":
         return {
-          level,
-          key: panel_key,
           depends_on: ["orgVoteStatPa","orgSobjs"],
           footnotes: ["SOBJ_REV"],
           info_deps: ["orgSobjs_dept_info","orgVoteStatPa_dept_info"],
@@ -107,8 +105,6 @@ export const declare_spend_rev_split_panel = () => declare_panel({
         };
       case "program":
         return {
-          level,
-          key: panel_key,
           depends_on: ["programSobjs"],
           info_deps: ["program_revenue"],
           calculate(subject,info,options){ 
@@ -124,8 +120,6 @@ export const declare_spend_rev_split_panel = () => declare_panel({
         };
       case "tag":
         return {
-          level,
-          key: panel_key,
           depends_on: ["programSobjs"],
           info_deps: ["tag_revenue"],
           calculate(subject,info,options){

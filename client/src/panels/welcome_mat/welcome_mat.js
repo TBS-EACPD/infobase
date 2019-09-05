@@ -795,8 +795,6 @@ export const declare_welcome_mat_panel = () => declare_panel({
     switch (level){
       case "gov":
         return {
-          level,
-          key: panel_key,
           footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
           info_deps: ["programFtes_gov_info"],
           depends_on: ['programSpending','programFtes'],
@@ -818,8 +816,6 @@ export const declare_welcome_mat_panel = () => declare_panel({
         };
       case "dept":
         return {
-          level,
-          key: panel_key,
           footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
           info_deps: ["programFtes_dept_info"],
           depends_on: ['programSpending','programFtes', 'orgVoteStatEstimates'],
@@ -878,8 +874,6 @@ export const declare_welcome_mat_panel = () => declare_panel({
         };
       case "program":
         return {
-          level,
-          key: panel_key,
           footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
           info_deps: ["programFtes_program_info"],
           depends_on: ['table6', 'table12'],
@@ -889,8 +883,6 @@ export const declare_welcome_mat_panel = () => declare_panel({
         };
       case "crso":
         return {
-          level,
-          key: panel_key,
           footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
           info_deps: ["programFtes_crso_info"],
           depends_on: ['table6', 'table12'],
@@ -900,8 +892,6 @@ export const declare_welcome_mat_panel = () => declare_panel({
         };
       case "tag":
         return {
-          level,
-          key: panel_key,
           footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
           info_deps: ["programFtes_program_info"],
           depends_on: ['programSpending','programFtes'],

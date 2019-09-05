@@ -18,8 +18,6 @@ export const declare_employee_last_year_totals_panel = () => declare_panel({
   panel_key: "employee_last_year_totals",
   levels: ["dept"],
   panel_config_func: (level, panel_key) => ({
-    key: panel_key,
-    level: level,
     depends_on: ['orgEmployeeType'],
   
     info_deps: [

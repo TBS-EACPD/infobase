@@ -50,8 +50,6 @@ export const declare_in_year_voted_stat_split_panel = () => declare_panel({
     switch (level){
       case "gov":
         return {
-          level,
-          key: panel_key,
           depends_on: ['orgVoteStatEstimates'],
           machinery_footnotes: false,
           info_deps: ['orgVoteStatEstimates_gov_info'],
@@ -70,8 +68,6 @@ export const declare_in_year_voted_stat_split_panel = () => declare_panel({
         };
       case "dept":
         return {
-          level,
-          key: panel_key,
           depends_on: ['orgVoteStatEstimates'],
           info_deps: ['orgVoteStatEstimates_dept_info', 'orgVoteStatEstimates_gov_info' ],
           machinery_footnotes: false,

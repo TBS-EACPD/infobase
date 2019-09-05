@@ -311,8 +311,6 @@ export const declare_employee_prov_panel = () => declare_panel({
   panel_key: "employee_prov",
   levels: ["gov", "dept"],
   panel_config_func: (level, panel_key) => ({
-    key: panel_key,
-    level: level,
     depends_on: ['orgEmployeeRegion'],
     info_deps: info_deps_by_level[level],
     calculate: calculate_funcs_by_level[level],

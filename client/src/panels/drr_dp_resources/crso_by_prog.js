@@ -222,8 +222,6 @@ export const declare_crso_by_prog_fte_panel = () => declare_panel({
   panel_key: "crso_by_prog_fte",
   levels: ["crso"],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     footnotes: ["PLANNED_EXP"],
     depends_on: ['programSpending', 'programFtes'],
     info_deps: ['programSpending_crso_info','programFtes_crso_info'],
@@ -235,8 +233,6 @@ export const declare_crso_by_prog_exp_panel = () => declare_panel({
   panel_key: "crso_by_prog_exp",
   levels: ["crso"],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     footnotes: ["PLANNED_EXP"],
     depends_on: ['programSpending', 'programFtes'],
     info_deps: ['programSpending_crso_info','programFtes_crso_info'],

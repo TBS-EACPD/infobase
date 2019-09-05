@@ -5,8 +5,6 @@ export const declare_dead_program_warning_panel = () => declare_panel({
   panel_key: "dead_program_warning",
   levels: ['program'],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     footnotes: false,
     calculate: _.property("dead_program"),
     render(){
@@ -27,8 +25,6 @@ export const declare_dead_crso_warning_panel = () => declare_panel({
   panel_key: "dead_crso_warning",
   levels: ['crso'],
   panel_config_func: (level, panel_key) => ({
-    level,
-    key: panel_key,
     footnotes: false,
     calculate: _.property("dead_so"),
     render(){
