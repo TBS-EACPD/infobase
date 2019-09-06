@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Table } from '../../core/TableClass.js';
 import { 
   Result, 
@@ -15,6 +16,8 @@ import { compute_counts_from_set } from '../../models/result_counts.js';
 import { infograph_href_template } from '../../link_utils.js';
 const link_to_results_infograph = subj => infograph_href_template(subj, 'results');
 import { businessConstants } from '../../models/businessConstants';
+import { util_components } from '../shared.js';
+const { Format } = util_components;
 
 const {
   result_statuses,
