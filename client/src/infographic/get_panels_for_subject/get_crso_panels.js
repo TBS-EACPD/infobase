@@ -9,10 +9,10 @@ import {
   declare_results_intro_panel,
   declare_late_dps_warning_panel,
 } from '../../panels/intro_graphs/index.js';
-import { declare_explore_results_panel } from '../../panels/result_graphs/index.js';
 import { declare_budget_measures_panel } from '../../panels/budget_measures/budget_measures_panel.js';
 
 // shared dept, crso, program
+import { declare_explore_results_panel } from '../../panels/result_graphs/index.js';
 import { declare_tags_of_interest_panel } from '../../panels/intro_graphs/index.js';
 import { declare_drr_planned_actual_panel } from "../../panels/drr_dp_resources/drr_planned_actual.js";
 import { declare_dp_rev_split_panel } from "../../panels/drr_dp_resources/dp_rev_split.js";
