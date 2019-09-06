@@ -10,7 +10,7 @@ deploy_filter: &deploy_filter
     branches:
       only:
         - master
-        - webpack-sideEffect-optimization
+        - webpack-sideEffect-optimization-bonus
 
 version: 2
 jobs:
