@@ -20,7 +20,7 @@ const default_args = {
 
 class PanelGraph {
   static get graphs() { return graphs; }
-
+  
   static lookup(key,level){
     const lookup = create_graph_key(key,level);
     if (window.is_dev && !graphs[lookup]) {
