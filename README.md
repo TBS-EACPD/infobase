@@ -21,6 +21,7 @@ Unless otherwise noted, the source code of this project is covered under Crown C
 
 The Canada wordmark and related graphics associated with this distribution are protected under trademark law and copyright law. No permission is granted to use them outside the parameters of the Government of Canada's corporate identity program. For more information, see [Federal identity requirements](https://www.canada.ca/en/treasury-board-secretariat/topics/government-communications/federal-identity-requirements.html).
 
+All data in `data/` is released under the terms of the [Open Government Licence – Canada](https://open.canada.ca/en/open-government-licence-canada). See the [Datasets](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html#metadata) page for links to the individual open data pages for each dataset.
 
 # « Mono-Dépôt » de l'InfoBase du GC
 
@@ -41,3 +42,6 @@ Veuillez liser le fichier « README.md » dans chancune de ces fichiers pour con
 Sauf indication contraire, le code source de ce projet est protégé par le droit d'auteur de la Couronne du gouvernement du Canada et distribué sous la [licence MIT](LICENSE).
 
 Le mot-symbole « Canada » et les éléments graphiques connexes liés à cette distribution sont protégés en vertu des lois portant sur les marques de commerce et le droit d'auteur. Aucune autorisation n'est accordée pour leur utilisation à l'extérieur des paramètres du programme de coordination de l'image de marque du gouvernement du Canada. Pour obtenir davantage de renseignements à ce sujet, veuillez consulter les [Exigences pour l'image de marque](https://www.canada.ca/fr/secretariat-conseil-tresor/sujets/communications-gouvernementales/exigences-image-marque.html).
+
+Tous les données dans `data/` sont visées par la [Licence du gouvernement ouvert – Canada](https://ouvert.canada.ca/fr/licence-du-gouvernement-ouvert-canada). Veuillez consulter le site [Données](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-fra.html#metadata) pour trouver les liens vers les données ouvertes.
+
