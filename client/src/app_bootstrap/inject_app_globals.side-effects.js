@@ -40,7 +40,7 @@ window.ReactDOM = ReactDOM;
 
 import _ from 'lodash';
 window._ = _;
-import './lodash-extensions';
+import './lodash-extensions.side-effects.js';
 
 import d3 from './d3-bundle.js';
 window.d3 = d3;

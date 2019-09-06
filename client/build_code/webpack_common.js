@@ -7,87 +7,100 @@ const CDN_URL = process.env.CDN_URL || ".";
 const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
 const IS_PROD_RELEASE = process.env.IS_PROD_RELEASE || false;
 
+
 const get_rules = ({
   should_use_babel,
   language,
   is_prod_build,
-}) => [
-  {
-    test: /\.js$/, 
-    exclude: /node_modules/,
-    use: [
-      {
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: true,
-          sourceType: "unambiguous", // needed if we've still got CommonJS modules being shared by src and build_code
-          plugins: ["@babel/plugin-proposal-object-rest-spread", "@babel/plugin-syntax-dynamic-import"],
-          presets: [
-            ["@babel/preset-env", {
-              useBuiltIns: false,
-              modules: false,
-              targets: should_use_babel ? 
-                {
-                  Safari: "7",
-                  ie: "11",
-                } : 
-                {
-                  Chrome: "66",
-                },
-              forceAllTransforms: is_prod_build, // need to forceAllTransforms when uglifying
-            }],
-            "@babel/preset-react",
-          ],
+}) => {
+  const js_module_loader_rules = [
+    {
+      loader: 'babel-loader',
+      options: {
+        cacheDirectory: true,
+        sourceType: "unambiguous", // needed if we've still got CommonJS modules being shared by src and build_code
+        plugins: ["@babel/plugin-proposal-object-rest-spread", "@babel/plugin-syntax-dynamic-import"],
+        presets: [
+          ["@babel/preset-env", {
+            useBuiltIns: false,
+            modules: false,
+            targets: should_use_babel ? 
+              {
+                Safari: "7",
+                ie: "11",
+              } : 
+              {
+                Chrome: "66",
+              },
+            forceAllTransforms: is_prod_build, // need to forceAllTransforms when uglifying
+          }],
+          "@babel/preset-react",
+        ],
+      },
+    },
+    {
+      loader: 'eslint-loader',
+    },
+  ];
+
+  return [
+    {
+      test: (module_name) => /\.js$/.test(module_name) && !/\.side-effects\.js$/.test(module_name),
+      exclude: /node_modules/,
+      use: js_module_loader_rules,
+    },
+    {
+      test: /\.side-effects\.js$/, 
+      exclude: /node_modules/,
+      use: js_module_loader_rules,
+      sideEffects: true,
+    },
+    {
+      test: /\.css$/,
+      use: [
+        { loader: "style-loader" },
+        { 
+          loader: "css-loader",
+          options: { 
+            url: false,
+          },
         },
-      },
-      {
-        loader: 'eslint-loader',
-      },
-    ],
-  },
-  {
-    test: /\.css$/,
-    use: [
-      { loader: "style-loader" },
-      { 
-        loader: "css-loader",
-        options: { 
-          url: false,
+      ],
+      sideEffects: true,
+    },
+    {
+      test: /\.scss$/,
+      use: [
+        { loader: "style-loader" }, // creates style nodes from JS strings }, 
+        { loader: "css-loader" }, // translates CSS into CommonJS
+        { loader: "sass-loader"}, // compiles Sass to CSS 
+      ],
+      sideEffects: true,
+    },
+    {
+      test: /\.yaml$/,
+      use: [
+        { loader: "json-loader" },
+        { 
+          loader: "./node_loaders/yaml-lang-loader.js",
+          options: {lang: language},
         },
-      },
-    ],
-  },
-  {
-    test: /\.scss$/,
-    use: [
-      { loader: "style-loader" }, // creates style nodes from JS strings }, 
-      { loader: "css-loader" }, // translates CSS into CommonJS
-      { loader: "sass-loader"}, // compiles Sass to CSS 
-    ],
-  },
-  {
-    test: /\.yaml$/,
-    use: [
-      { loader: "json-loader" },
-      { 
-        loader: "./node_loaders/yaml-lang-loader.js",
-        options: {lang: language},
-      },
-    ],
-  },
-  { 
-    test: /\.csv$/,
-    use: [ { loader: 'raw-loader' } ],
-  },
-  {
-    test: /\.json$/,
-    use: [{loader: 'json-loader'}],
-  },
-  {
-    test: /\.svg$/,
-    loader: 'svg-inline-loader',
-  },
-];
+      ],
+    },
+    { 
+      test: /\.csv$/,
+      use: [ { loader: 'raw-loader' } ],
+    },
+    {
+      test: /\.json$/,
+      use: [{loader: 'json-loader'}],
+    },
+    {
+      test: /\.svg$/,
+      loader: 'svg-inline-loader',
+    },
+  ];
+};
 
 
 const prod_plugins = [
@@ -192,9 +205,9 @@ function create_config({
         false : 
         'inline-source-map'
     ),
-  }
+  };
 }
 
 module.exports = exports = {
   create_config,
-}
+};

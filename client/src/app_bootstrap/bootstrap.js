@@ -1,12 +1,12 @@
 import 'dom4';
 import 'whatwg-fetch';
 
-import './inject_app_globals.js';
+import './inject_app_globals.side-effects.js';
 
 // Extend Handlebars global with additional helpers
-import '../handlebars/helpers.js';
+import '../handlebars/helpers.side-effects.js';
 
-import '../common_css/common_css_index.js';
+import '../common_css/common_css_index.side-effects.js';
 
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
