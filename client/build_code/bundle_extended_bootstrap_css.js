@@ -15,13 +15,14 @@ function bundle_extended_bootstrap_css(app_dir){
       path: path.resolve(__dirname, `../${app_dir}`),
     },
     optimization: {
-      minimizer: [ 
+      minimizer: [
         new OptimizeCSSAssetsPlugin({
           cssProcessorPluginOptions: {
             preset: ['default'],
           },
         }), 
       ],
+      sideEffects: false,
     },
     module: {
       rules: [
