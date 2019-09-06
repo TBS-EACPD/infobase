@@ -16,7 +16,7 @@ import {
   GranularResultCounts,
   result_docs,
 } from './results_common.js';
-import { StatusIconTable, InlineStatusIconList } from './result_components.js';
+import { StatusIconTable, InlineStatusIconList, Drr17IndicatorResultDisplay, IndicatorResultDisplay } from './result_components.js';
 import { create_full_results_hierarchy } from '../../gen_expl/result_hierarchies.js'
 import { single_subj_results_scheme, get_initial_single_subj_results_state } from '../../gen_expl/results_scheme.js';
 const { SpinnerWrapper, Format, TextAbbrev } = util_components;
@@ -44,9 +44,33 @@ const get_indicators = (subject, doc) => {
     .value();
 };
 
-const indicator_table_from_list = (indicator_list) => {
-  const table_data_headers = ["indicator"];
-  const table_data = _.map(indicator_list, ind => ({label: ind.parent_subject.data.name, data: ind.indicator.name}));
+const indicator_table_from_list = (indicator_list, is_drr17) => {
+  const table_data_headers = ["indicator", "target", "actual result", "status"];
+  const FormattedIndicator = is_drr17 ? IndicatorResultDisplay : Drr17IndicatorResultDisplay;
+  const table_data = _.map(indicator_list, ind => ({label: ind.parent_subject.data.name, data: 
+    [
+      ind.indicator.name,
+      <FormattedIndicator
+        key={ind.indicator.id}
+        doc={ind.indicator.doc}
+        data_type={ind.indicator.target_type}
+        min={ind.indicator.target_min}
+        max={ind.indicator.target_max}
+        narrative={ind.indicator.target_narrative}
+        measure={ind.indicator.measure}
+      />,
+      <FormattedIndicator
+        key={ind.indicator.id}
+        doc={ind.indicator.doc}
+        data_type={ind.indicator.actual_datatype}
+        min={ind.indicator.actual_result}
+        max={ind.indicator.actual_result}
+        narrative={ind.indicator.actual_result}
+        measure={ind.indicator.measure}
+      />,
+      ind.indicator.status_key,
+    ],
+  }) );
   return <A11YTable data={table_data} label_col_header="subject" data_col_headers={table_data_headers}/>;
 };
 
@@ -94,7 +118,7 @@ class ResultsTable extends React.Component {
 
       return (
         <div>
-          {indicator_table_from_list(flat_indicators)}
+          {indicator_table_from_list(flat_indicators, doc==="drr17")}
         </div>
       )
     }

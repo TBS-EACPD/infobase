@@ -818,4 +818,6 @@ export {
   InlineStatusIconList,
   HorizontalStatusTable,
   NewBadge,
+  Drr17IndicatorResultDisplay,
+  IndicatorResultDisplay,
 }; 
