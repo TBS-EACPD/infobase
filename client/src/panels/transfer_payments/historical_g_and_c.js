@@ -160,6 +160,7 @@ class DetailedHistTPItems extends React.Component {
     const { active_indices, active_type } = this.state;
     const { color_scale } = this;
 
+    const order_type_id = _.uniq( _.map(rows, "type_id") );
     const prepped_rows = _.chain(rows)
       .filter({ type_id: active_type })
       .sortBy(row => row["{{pa_last_year}}exp"])
@@ -245,8 +246,7 @@ class DetailedHistTPItems extends React.Component {
             });
           }}
         >
-          {_.map(["c","o","g"], type_id =>
-            _.find(rows, {type_id}) && 
+          {_.map(order_type_id, type_id =>
             <option
               value={type_id}
               key={type_id}
