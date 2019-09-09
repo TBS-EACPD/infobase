@@ -47,11 +47,12 @@ const get_indicators = (subject, doc) => {
 const indicator_table_from_list = (indicator_list, is_drr17) => {
   const table_data_headers = ["indicator", "target", "actual result", "status"];
   const FormattedIndicator = is_drr17 ? IndicatorResultDisplay : Drr17IndicatorResultDisplay;
-  const table_data = _.map(indicator_list, ind => ({label: ind.parent_subject.data.name, data: 
-    [
+  const table_data = _.map(indicator_list, ind => ({
+    label: `${ind.parent_subject.data.name} (${ind.parent_subject.data.subject.level})`,
+    data: [
       ind.indicator.name,
       <FormattedIndicator
-        key={ind.indicator.id}
+        key={`${ind.indicator.id}_target`}
         doc={ind.indicator.doc}
         data_type={ind.indicator.target_type}
         min={ind.indicator.target_min}
@@ -60,7 +61,7 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
         measure={ind.indicator.measure}
       />,
       <FormattedIndicator
-        key={ind.indicator.id}
+        key={`${ind.indicator.id}_actual`}
         doc={ind.indicator.doc}
         data_type={ind.indicator.actual_datatype}
         min={ind.indicator.actual_result}
