@@ -30,10 +30,16 @@ const { Dept, CRSO, Program } = Subject;
 
 const get_actual_parent = (indicator_node, full_results_hierarchy) => {
   const parent = _.find(full_results_hierarchy, {id: indicator_node.parent_id});
-  if(parent.data.type === "program" || parent.data.type === "sub_program" || parent.data.type === "sub_sub_program") {
+  if(parent.data.type === "cr" || parent.data.type === "program" || parent.data.type === "sub_program" || parent.data.type === "sub_sub_program") {
+    //console.log(`found parent: ${parent.data.name}`);
     return parent;
+  } else if(parent.data.type === "dr" || parent.data.type === "result"){
+    //console.log(`parent not found yet, recursing`);
+    return get_actual_parent(parent, full_results_hierarchy);
+  } else {
+    //console.log("error, couldn't find parent");
+    return;
   }
-  return get_actual_parent(parent, full_results_hierarchy);
 };
 
 const get_indicators = (subject, doc) => {
