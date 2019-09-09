@@ -38,8 +38,8 @@ export class A11YTable extends React.PureComponent {
             </tr>
           </thead>
           <tbody>
-            {_.map(data, ({label, data}) => 
-              <tr key={label}>
+            {_.map(data, ({label, data},i) => 
+              <tr key={i}>
                 <th 
                   scope={
                     !label_col_header ?
@@ -51,7 +51,7 @@ export class A11YTable extends React.PureComponent {
                 </th>
                 {
                   _.isArray(data) ? 
-                  _.map(data, (d,i) => <td key={i}> {d} </td> ) :
+                  _.map(data, (d,j) => <td key={j}> {d} </td> ) :
                   <td> {data} </td>
                 }
               </tr>
