@@ -48,7 +48,7 @@ const index_lang_lookups = {
     fr: "English",
   },
 
-  breadcrub_and_qucik_links: {
+  breadcrub_and_quick_links: {
     en: "Breadcrumb and quick links",
     fr: "Fil d'Ariane et liens rapides",
   },
