@@ -320,7 +320,6 @@ const SingleIndicatorDisplay = ({indicator}) => {
             />
           }
         </dd>
-
         { is_drr && indicator.actual_result &&
           <Fragment>
             <dt>

@@ -9,11 +9,13 @@ import {
   DlItem,
   get_source_links,
 } from '../shared.js';
+import { get_static_url } from '../../request_utils.js';
 import { Details } from '../../components/Details.js';
 import { 
   Indicator,
   ResultCounts,
   GranularResultCounts,
+  status_key_to_svg_name,
   result_docs,
 } from './results_common.js';
 import { StatusIconTable, InlineStatusIconList, Drr17IndicatorResultDisplay, IndicatorResultDisplay } from './result_components.js';
@@ -23,8 +25,9 @@ const { SpinnerWrapper, Format, TextAbbrev } = util_components;
 import { ensure_loaded } from '../../core/lazy_loader.js';
 import { Result } from './results_common.js';
 import { Subject } from '../../models/subject.js';
-import { A11YTable } from '../../charts/A11yTable.js';
+import { A11YTable } from '../../charts/A11YTable.js';
 
+const get_svg_url = (status_key) => get_static_url(`svg/${status_key_to_svg_name[status_key]}.svg`);
 
 const { Dept, CRSO, Program } = Subject;
 
@@ -50,35 +53,84 @@ const get_indicators = (subject, doc) => {
     .value();
 };
 
+const formatted_target = (indicator, is_drr17) => {
+  return is_drr17 ?
+    <Drr17IndicatorResultDisplay  
+      data_type={indicator.target_type}
+      min={indicator.target_min}
+      max={indicator.target_max}
+      narrative={indicator.target_narrative}
+      measure={indicator.measure}
+    /> :
+    <IndicatorResultDisplay
+      doc={indicator.doc}
+
+      data_type={indicator.target_type}
+      min={indicator.target_min}
+      max={indicator.target_max}
+      narrative={indicator.target_narrative}
+      measure={indicator.measure}
+    />;
+};
+
+const formatted_actual = (indicator, is_drr17) => {
+  return is_drr17 ?
+    <Drr17IndicatorResultDisplay
+      data_type={indicator.actual_datatype}
+      min={indicator.actual_result}
+      max={indicator.actual_result}
+      narrative={indicator.actual_result}
+      measure={indicator.measure}
+    /> :
+    <IndicatorResultDisplay
+      doc={indicator.doc}
+
+      data_type={indicator.actual_datatype}
+      min={indicator.actual_result}
+      max={indicator.actual_result}
+      narrative={indicator.actual_result}
+      measure={indicator.measure}
+    />;
+};
+
+
+
+const status_icon_style = {width: "41px", height: "41px"};
+
+const subject_link = (subject) => {
+  if (subject.data.subject.level === "sub_program" || subject.data.subject.level === "sub_sub_program"){
+    return <span>
+      <a href={`#orgs/program/${subject.data.subject.parent_id}/infograph/results`}>{subject.data.name}</a>
+      {` (${text_maker(subject.data.subject.level)}`}
+      <span className="tag-glossary-item">
+        <img className="tag-glossary-icon"
+          width={18}
+          aria-hidden="true"
+          src={get_static_url('svg/not-available-white.svg')} 
+          tabIndex="0"
+          data-toggle="tooltip"
+          data-ibtt-glossary-key={"SSP"}
+          data-ibtt-html="true"
+        />
+      </span>)
+    </span>;
+  } else {
+    return <span><a href={`#orgs/program/${subject.data.subject.id}/infograph/results`}>{subject.data.name}</a> ({text_maker(subject.data.subject.level)})</span>;
+  }
+};
+
 const indicator_table_from_list = (indicator_list, is_drr17) => {
-  const table_data_headers = ["indicator", "target", "actual result", "status"];
-  const FormattedIndicator = is_drr17 ? IndicatorResultDisplay : Drr17IndicatorResultDisplay;
+  const table_data_headers = [text_maker("indicator"), text_maker("target"), text_maker("target_result"), text_maker("status")];
   const table_data = _.map(indicator_list, ind => ({
-    label: `${ind.parent_subject.data.name} (${ind.parent_subject.data.subject.level})`,
+    label: subject_link(ind.parent_subject),
     data: [
       ind.indicator.name,
-      <FormattedIndicator
-        key={`${ind.indicator.id}_target`}
-        doc={ind.indicator.doc}
-        data_type={ind.indicator.target_type}
-        min={ind.indicator.target_min}
-        max={ind.indicator.target_max}
-        narrative={ind.indicator.target_narrative}
-        measure={ind.indicator.measure}
-      />,
-      <FormattedIndicator
-        key={`${ind.indicator.id}_actual`}
-        doc={ind.indicator.doc}
-        data_type={ind.indicator.actual_datatype}
-        min={ind.indicator.actual_result}
-        max={ind.indicator.actual_result}
-        narrative={ind.indicator.actual_result}
-        measure={ind.indicator.measure}
-      />,
-      ind.indicator.status_key,
+      formatted_target(ind.indicator, is_drr17),
+      formatted_actual(ind.indicator, is_drr17),
+      <img key={ind.indicator.status_key} src={get_svg_url(ind.indicator.status_key)} style={status_icon_style} />,
     ],
   }) );
-  return <A11YTable data={table_data} label_col_header="subject" data_col_headers={table_data_headers}/>;
+  return <A11YTable data={table_data} label_col_header="" data_col_headers={table_data_headers}/>;
 };
 
 
