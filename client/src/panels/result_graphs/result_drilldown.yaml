@@ -103,6 +103,10 @@ DRR_results_option_title:
   en: Actual Results for {{doc_year}}
   fr: Résultats réels pour {{doc_year}}
 
+generic_explanation:
+  en: Explanation
+  fr: Explication
+
 target_explanation:
   en: Target explanation
   fr: Explication de la cible

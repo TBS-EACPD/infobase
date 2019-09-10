@@ -347,6 +347,55 @@ const SingleIndicatorDisplay = ({indicator}) => {
           </Fragment>
         }
 
+        { is_drr && 
+          <Fragment>
+            <dt>
+              <TM k="status" />
+            </dt>
+            <dd>
+              <StatusDisplay indicator={indicator} /> 
+            </dd>
+          </Fragment>
+        }
+
+        { !_.isEmpty(indicator.target_explanation) &&
+          <Fragment>
+            <dt>
+              <TM k={indicator.doc === "drr17" ? "generic_explanation" : "target_explanation"} />
+            </dt>
+            <dd>
+              <div dangerouslySetInnerHTML={{ __html: sanitized_marked(indicator.target_explanation) }} /> 
+            </dd>
+          </Fragment>
+        }
+
+        { is_drr && !_.isEmpty(indicator.result_explanation) &&
+          <Fragment>
+            <dt>
+              <TM k={"result_explanation"} />
+            </dt>
+            <dd>
+              <div dangerouslySetInnerHTML={{ __html: sanitized_marked(indicator.result_explanation) }} /> 
+            </dd>
+          </Fragment>
+        }
+
+        { !_.isEmpty(indicator.methodology) && 
+          <Fragment>
+            <dt>
+              <TM k="methodology" />
+            </dt>
+            <dd>
+              { window.is_a11y_mode ? 
+                <div dangerouslySetInnerHTML={{ __html: sanitized_marked(indicator.methodology) }} /> : 
+                <HeightClipper clipHeight={100}>
+                  <div dangerouslySetInnerHTML={{ __html: sanitized_marked(indicator.methodology) }} /> 
+                </HeightClipper>
+              }
+            </dd>
+          </Fragment>
+        }
+
         { has_previous_year_target &&
           <Fragment>
             <dt>
@@ -366,7 +415,7 @@ const SingleIndicatorDisplay = ({indicator}) => {
           </Fragment>
         }
 
-        { is_drr && has_previous_year_result &&
+        { has_previous_year_result &&
           <Fragment>
             <dt>
               <TM k="previous_year_target_result"/>
@@ -381,44 +430,6 @@ const SingleIndicatorDisplay = ({indicator}) => {
                 narrative={indicator.previous_year_actual_result}
                 measure={indicator.previous_year_measure}
               />
-            </dd>
-          </Fragment>
-        }
-
-        { is_drr && 
-          <Fragment>
-            <dt>
-              <TM k="status" />
-            </dt>
-            <dd>
-              <StatusDisplay indicator={indicator} /> 
-            </dd>
-          </Fragment>
-        }
-
-        { !_.isEmpty(indicator.target_explanation) &&
-          <Fragment>
-            <dt>
-              <TM k="target_explanation" />
-            </dt>
-            <dd>
-              <div dangerouslySetInnerHTML={{ __html: sanitized_marked(indicator.target_explanation) }} /> 
-            </dd>
-          </Fragment>
-        }
-
-        { !_.isEmpty(indicator.methodology) && 
-          <Fragment>
-            <dt>
-              <TM k="methodology" />
-            </dt>
-            <dd>
-              { window.is_a11y_mode ? 
-                <div dangerouslySetInnerHTML={{ __html: sanitized_marked(indicator.methodology) }} /> : 
-                <HeightClipper clipHeight={100}>
-                  <div dangerouslySetInnerHTML={{ __html: sanitized_marked(indicator.methodology) }} /> 
-                </HeightClipper>
-              }
             </dd>
           </Fragment>
         }
