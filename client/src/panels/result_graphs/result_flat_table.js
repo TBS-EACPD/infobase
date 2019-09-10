@@ -25,7 +25,7 @@ const { SpinnerWrapper, Format, TextAbbrev } = util_components;
 import { ensure_loaded } from '../../core/lazy_loader.js';
 import { Result } from './results_common.js';
 import { Subject } from '../../models/subject.js';
-import { A11YTable } from '../../charts/A11YTable.js';
+import { A11YTable } from '../../charts/A11yTable.js';
 
 const get_svg_url = (status_key) => get_static_url(`svg/${status_key_to_svg_name[status_key]}.svg`);
 
