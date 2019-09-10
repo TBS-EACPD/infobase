@@ -38,6 +38,7 @@ const {
   TabbedContent,
   TM, 
   create_text_maker_component,
+  SpinnerWrapper,
   DlItem,
 } = util_components;
 
@@ -611,4 +612,5 @@ export {
   TwoSeriesBar,
   breakpoints,
   breakpoint_queries,
+  SpinnerWrapper,
 };

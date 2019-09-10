@@ -9,13 +9,22 @@ import * as Diff from 'diff';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { result_docs } from '../models/results.js';
-import { formats } from '../core/format.js';
 import { Result } from '../panels/result_graphs/results_common.js';
-import { Subject } from '../models/subject.js';
 import { Select } from '../components/Select.js';
-import { Panel } from '../components/panel_components.js';
-import { create_text_maker } from '../models/text.js';
-import { create_text_maker_component, SpinnerWrapper } from '../components/index.js';
+import {
+  Panel,
+  Subject,
+  create_text_maker,
+  formats,
+  create_text_maker_component,
+  SpinnerWrapper,
+  declarative_charts,
+  newIBCategoryColors,
+} from '../panels/shared.js';
+
+const { 
+  GraphLegend,
+} = declarative_charts;
 
 const { Dept, CRSO, Program } = Subject;
 
@@ -122,29 +131,44 @@ const get_indicators = (subject) => {
     .map(pair => _.sortBy(pair, "doc"))
     .value();
 };
-
-const process_indicators = (matched_indicators) => {
-  const processed_indicators = _.map(matched_indicators, (indicator_pair) => {
-    if (indicator_pair.length===2){
+const process_indicators = (matched_indicators, indicator_status) => {
+  const processed_indicators = _.chain(matched_indicators)
+    .map(indicator_pair => {
+      if (indicator_pair.length === 2){
+        const name_diff = Diff.diffWords(indicator_pair[0].name, indicator_pair[1].name);
+        const methodology_diff = window.is_a11y_mode ? Diff.diffSentences(indicator_pair[0].methodology, indicator_pair[1].methodology) : Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology);
+        const target_diff = Diff.diffWords(format_target_string(indicator_pair[0]), format_target_string(indicator_pair[1]));
+        const status = _.max([name_diff.length, methodology_diff.length, target_diff.length]) > 1 ?
+                        target_diff.length > 1 ?
+                          "Target changed"
+                          : "Indicator description changed"
+                        : "No change";
+        return {
+          status: status,
+          indicator1: indicator_pair[0],
+          indicator2: indicator_pair[1],
+          name_diff: name_diff,
+          methodology_diff: methodology_diff,
+          target_diff: target_diff,
+        };
+      }
+      const indicator = indicator_pair[0];
+      const status = indicator.doc === "dp18" ?
+        "Indicator removed" :
+          indicator.doc === "dp19" ? "Indicator added" : indicator.doc;
       return {
-        status: 'both',
-        indicator1: indicator_pair[0],
-        indicator2: indicator_pair[1],
-        name_diff: Diff.diffWords(indicator_pair[0].name, indicator_pair[1].name),
-        methodology_diff: window.is_a11y_mode ? Diff.diffSentences(indicator_pair[0].methodology, indicator_pair[1].methodology) : Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology),
-        target_diff: Diff.diffWords(format_target_string(indicator_pair[0]), format_target_string(indicator_pair[1])),
+        status: status,
+        indicator1: indicator,
+        indicator2: indicator,
+        name_diff: [indicator.name],
+        methodology_diff: [indicator.methodology],
+        target_diff: [format_target_string(indicator)],
       };
-    }
-    const indicator = indicator_pair[0];
-    return {
-      status: indicator.doc,
-      indicator1: indicator,
-      indicator2: indicator,
-      name_diff: [indicator.name],
-      methodology_diff: [indicator.methodology],
-      target_diff: [format_target_string(indicator)],
-    };
-  });
+    })
+    .filter(row => {
+      return indicator_status[row.status].active;
+    })
+    .value();
   return processed_indicators;
 };
 
@@ -204,10 +228,9 @@ const difference_report = (diff, key, years) =>
   </Fragment>;
 
 
-
-const get_status_flag = (indicator_status, num_texts, target_changed, years) => {
-  if(num_texts > 1){
-    return target_changed ?
+const get_status_flag = (indicator_status, years) => {
+  if(indicator_status === "Target changed"){
+    return (
       <Fragment>
         <div className="text-diff__indicator-status--change">
           {text_maker("words_changed")}
@@ -215,26 +238,31 @@ const get_status_flag = (indicator_status, num_texts, target_changed, years) => 
         <div className="text-diff__indicator-status--change">
           {text_maker("target_changed")}
         </div>
-      </Fragment> :
+      </Fragment>
+    );
+  }
+  if(indicator_status === "Indicator description changed"){
+    return (
       <div className="text-diff__indicator-status--change">
         {text_maker("words_changed")}
-      </div>;
+      </div>
+    );
   }
-  if (indicator_status === 'both'){
+  if (indicator_status === 'No change'){
     return (
       <div className="text-diff__indicator-status--nochange">
         {text_maker("no_diff")}
       </div>
     );
   }
-  if(indicator_status === 'dp18'){
+  if(indicator_status === 'Indicator removed'){
     return (
       <div className="text-diff__indicator-status--removed">
         {text_maker("indicator-removed", {second_year: result_docs[years[1]].year})}
       </div>
     );
   }
-  if(indicator_status === 'dp19'){
+  if(indicator_status === 'Indicator added'){
     return (
       <div className="text-diff__indicator-status--added">
         {text_maker("indicator-added", {second_year: result_docs[years[1]].year})}
@@ -249,10 +277,7 @@ const indicator_report = (processed_indicator, years) => (
   <div className="text-diff__indicator-report" key={processed_indicator.indicator1.stable_id}>
     <Panel title={processed_indicator.indicator2.name}>
       <Fragment>
-        {get_status_flag(processed_indicator.status,
-          _.max([processed_indicator.name_diff.length, processed_indicator.methodology_diff.length, processed_indicator.target_diff.length]),
-          processed_indicator.target_diff.length > 1,
-          years)}
+        { get_status_flag(processed_indicator.status, years) }
         { processed_indicator.name_diff.length > 1 ?
           difference_report(processed_indicator.name_diff, "indicator_name", years) :
           no_difference(processed_indicator.indicator1.name, "indicator_name") }
@@ -272,11 +297,23 @@ const indicator_report = (processed_indicator, years) => (
 export default class TextDiffApp extends React.Component {
   constructor(props) {
     super(props);
+    const colors = d3.scaleOrdinal().range(newIBCategoryColors);
 
     this.state = {
       first_load: true,
       loading: true,
       subject: get_subject_from_props(props),
+      indicator_status_changed: false,
+      indicator_status: _.reduce(["Indicator description changed", "Target changed", "Indicator added", "Indicator removed", "No change"],
+        (result, status) => {
+          result[status] = {
+            active: true,
+            label: status,
+            id: status,
+            color: colors(status),
+          };
+          return result;
+        }, {}),
     };
   }
 
@@ -296,8 +333,8 @@ export default class TextDiffApp extends React.Component {
   componentDidMount(){
     const {
       subject,
+      indicator_status,
     } = this.state;
-
     ensure_loaded({
       subject,
       results: true,
@@ -305,9 +342,15 @@ export default class TextDiffApp extends React.Component {
     })
       .then( () => {
         const matched_indicators = get_indicators(subject);
-        const processed_indicators = process_indicators(matched_indicators);
+        const processed_indicators = process_indicators(matched_indicators, indicator_status);
         
-        this.setState({first_load: false, subject: subject, loading: false, matched_indicators: matched_indicators, processed_indicators: processed_indicators});
+        this.setState({
+          first_load: false,
+          subject: subject,
+          loading: false,
+          matched_indicators: matched_indicators,
+          processed_indicators: processed_indicators,
+        });
       });
   }
 
@@ -316,17 +359,22 @@ export default class TextDiffApp extends React.Component {
     const {
       first_load,
       subject,
+      indicator_status_changed,
     } = state;
-
-    const should_load = first_load || get_subject_from_props(props) !== subject;
+    const should_load = first_load || get_subject_from_props(props) !== subject || indicator_status_changed;
     const new_subject = should_load ? get_subject_from_props(props) : subject;
-    return {loading: should_load, subject: new_subject};
+    return {
+      loading: should_load,
+      subject: new_subject,
+      indicator_status_changed: false,
+    };
   }
 
   componentDidUpdate(){
     const {
       loading,
       subject,
+      indicator_status,
     } = this.state;
 
     if(loading){
@@ -337,10 +385,16 @@ export default class TextDiffApp extends React.Component {
       })
         .then( () => {
           const matched_indicators = get_indicators(subject);
-          const processed_indicators = process_indicators(matched_indicators);
+          const processed_indicators = process_indicators(matched_indicators, indicator_status);
           
-          this.setState({first_load: false, subject: subject, loading: false, matched_indicators: matched_indicators, processed_indicators: processed_indicators});
-        });    
+          this.setState({
+            first_load: false,
+            subject: subject,
+            loading: false,
+            matched_indicators: matched_indicators,
+            processed_indicators: processed_indicators,
+          });
+        });
     }
   }
 
@@ -350,9 +404,10 @@ export default class TextDiffApp extends React.Component {
       subject,
       processed_indicators,
       matched_indicators,
+      indicator_status,
     } = this.state;
 
-    const { 
+    const {
       history,
     } = this.props;
 
@@ -367,7 +422,7 @@ export default class TextDiffApp extends React.Component {
       .filter( doc => /^dp[0-9]+/ )
       .takeRight(2)
       .value();
-      
+    
     return (
       <StandardRouteContainer
         title={text_maker("diff_title")}
@@ -436,6 +491,20 @@ export default class TextDiffApp extends React.Component {
               .value()
             }
           />
+        </div>
+        <div className="legend-container">
+          <div className={classNames("medium_panel_text")}>
+            <GraphLegend
+              items={indicator_status}
+              onClick={ id => {
+                indicator_status[id].active = !indicator_status[id].active;
+                this.setState({
+                  indicator_status: indicator_status,
+                  indicator_status_changed: true,
+                });
+              }}
+            />
+          </div>
         </div>
         {loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
           <div>
