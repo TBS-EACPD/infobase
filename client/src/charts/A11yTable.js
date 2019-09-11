@@ -34,7 +34,13 @@ export class A11YTable extends React.PureComponent {
               >
                 {label_col_header || ""}
               </th>
-              {_.map(data_col_headers, (tick,i) => <th key={i}> <span dangerouslySetInnerHTML={{__html: tick}} /> </th>)} 
+              {_.map(data_col_headers, (tick,i) => {
+                return (
+                  <th key={i}>
+                    <span dangerouslySetInnerHTML={{__html: tick}} />
+                  </th>
+                );
+              })} 
             </tr>
           </thead>
           <tbody>
