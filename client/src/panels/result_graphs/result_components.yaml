@@ -17,3 +17,7 @@ result_exact_text:
 tbd_result_text:
   en: Target to be determined
   fr: Cible à déterminer
+
+result_is_retired:
+  en: DRR_TODO
+  fr: DRR_TODO

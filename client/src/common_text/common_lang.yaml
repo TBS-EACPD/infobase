@@ -477,6 +477,12 @@ horizontal_footnotes:
 footnotes:
   en: Footnote(s)
   fr: Note(s) de bas de page
+note:
+  text: Note
+notes:
+  text: Notes
+note(s):
+  text: Note(s)
 internal_services:
   en: Internal Services
   fr: Services internes
