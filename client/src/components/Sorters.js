@@ -1,7 +1,7 @@
-import './SortIndicators.scss';
+import './Sorters.scss';
 import { trivial_text_maker } from '../models/text.js';
 
-export const SortIndicator = ({ sortDirection, active }) => (
+export const Sorter = ({ sortDirection, active }) => (
   <button
     className="SortIndicator"
     style={{ 
@@ -29,7 +29,7 @@ export const SortIndicator = ({ sortDirection, active }) => (
   </button>
 );
 
-export const SortIndicators = ({ asc, desc }) => <div className="text-nowrap">
-  <SortIndicator sortDirection="ASC" active={asc} />
-  <SortIndicator sortDirection="DESC" active={desc} />
+export const Sorters = ({ asc, desc }) => <div className="text-nowrap">
+  <Sorter sortDirection="ASC" active={asc} />
+  <Sorter sortDirection="DESC" active={desc} />
 </div>;

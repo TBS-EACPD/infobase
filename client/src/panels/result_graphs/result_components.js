@@ -19,19 +19,121 @@ import * as color_defs from '../../core/color_defs.js';
 
 const dp_docs = get_result_doc_keys("dp");
 const drr_docs = get_result_doc_keys("drr");
+import { formats } from '../../core/format.js';
 
 const { 
   Format,
   HeightClipper,
   FilterTable,
-  SortIndicators,
+  Sorters,
 } = util_components;
 const { sanitized_marked } = general_utils;
 
 import { TM, text_maker } from './result_text_provider.js';
 
 
+const IndicatorResultText = ({
+  doc,
+
+  data_type,
+  min, 
+  max,
+  narrative,
+  measure,
+
+  is_new,
+}) => {
+  const target_unspecified_display = <TM k="unspecified_target"/>;
+  
+  const measure_display = (measure) => !_.isEmpty(measure) && <span> ( {measure} )</span>;
+
+  const display_type_by_data_type = {
+    num: "result_num",
+    num_range: "result_num",
+    dollar: "dollar",
+    dollar_range: "dollar",
+    percent: "result_percentage",
+    percent_range: "result_percentage",
+  };
+
+  const upper_target_display = (data_type, measure, max) => (
+    `${text_maker("result_upper_target_text")} ${formats[display_type_by_data_type[data_type]](+max)}`
+  );
+  const lower_target_display = (data_type, measure, min) => (
+    `${text_maker("result_lower_target_text")} ${formats[display_type_by_data_type[data_type]](+min)}`
+  );
+  const exact_display = (data_type, measure, exact) => (
+    `${text_maker("result_exact_text")} ${formats[display_type_by_data_type[data_type]](+exact)}`
+  );
+  const range_display = (data_type, measure, min, max) => (
+    `${text_maker("result_range_text")} ${formats[display_type_by_data_type[data_type]](+min)} ${text_maker("and")} ${formats[display_type_by_data_type[data_type]](+max)}` 
+  );
+
+  const get_display_case = (data_type, min, max, narrative, measure) => {
+    switch(data_type){
+      case 'num':
+      case 'num_range':
+      case 'dollar':
+      case 'dollar_range':
+      case 'percent':
+      case 'percent_range': {
+        if ( /range/.test(data_type) && (min && max) ){
+          return range_display(data_type, measure, min, max);
+        } else if (min && max && min === max){
+          return exact_display(data_type, measure, min);
+        } else if (min && !max){
+          return lower_target_display(data_type, measure, min);
+        } else if (!min && max){
+          return upper_target_display(data_type, measure, max);
+        } else {
+          return target_unspecified_display; 
+        }
+      }
+  
+      case 'text': {
+        if ( _.isEmpty(narrative) ){ return target_unspecified_display; }
+        return narrative
+      }
+  
+      case 'tbd': {
+        return text_maker("tbd_result_text");
+      }
+  
+      default: {
+        //certain indicators have no targets
+        return null;
+      }
+    }
+  };
+}
+
 const IndicatorResultDisplay = ({
+  doc,
+
+  data_type,
+  min, 
+  max,
+  narrative,
+  measure,
+
+  is_new,
+}) => {
+  return (
+    <span>
+      {IndicatorResultText({
+        doc,
+        data_type,
+        min, 
+        max,
+        narrative,
+        measure,
+        is_new,
+      })}
+    </span>
+  )
+};
+
+const OldIndicatorResultDisplay = ({
   doc,
 
   data_type,
@@ -724,7 +826,7 @@ class HorizontalStatusTable extends React.Component {
                 onClick={ () => this.header_click("subject") }
               >
                 <TM k="org" />
-                <SortIndicators 
+                <Sorters 
                   asc={!descending && sort_by === "subject"} 
                   desc={descending && sort_by === "subject"}
                 />
@@ -738,7 +840,7 @@ class HorizontalStatusTable extends React.Component {
                       onClick={ () => this.header_click(column_key) }
                     >
                       { column_header }
-                      <SortIndicators 
+                      <Sorters 
                         asc={!descending && sort_by === column_key} 
                         desc={descending && sort_by === column_key}
                       />

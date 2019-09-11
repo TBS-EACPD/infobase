@@ -11,6 +11,7 @@ import {
 } from '../shared.js';
 import { get_static_url } from '../../request_utils.js';
 import { Details } from '../../components/Details.js';
+import { DisplayTable } from '../../components/DisplayTable.js';
 import { 
   Indicator,
   ResultCounts,
@@ -26,6 +27,7 @@ import { ensure_loaded } from '../../core/lazy_loader.js';
 import { Result } from './results_common.js';
 import { Subject } from '../../models/subject.js';
 import { A11YTable } from '../../charts/A11yTable.js';
+
 
 const get_svg_url = (status_key) => get_static_url(`svg/${status_key_to_svg_name[status_key]}.svg`);
 
@@ -120,17 +122,18 @@ const subject_link = (subject) => {
 };
 
 const indicator_table_from_list = (indicator_list, is_drr17) => {
+  const column_keys = ["indicator","target","target_result","status"];
   const table_data_headers = [text_maker("indicator"), text_maker("target"), text_maker("target_result"), text_maker("status")];
   const table_data = _.map(indicator_list, ind => ({
     label: subject_link(ind.parent_subject),
-    data: [
-      ind.indicator.name,
-      formatted_target(ind.indicator, is_drr17),
-      formatted_actual(ind.indicator, is_drr17),
-      <img key={ind.indicator.status_key} src={get_svg_url(ind.indicator.status_key)} style={status_icon_style} />,
-    ],
+    col_data: {
+      indicator: ind.indicator.name,
+      target: formatted_target(ind.indicator, is_drr17),
+      target_result: formatted_actual(ind.indicator, is_drr17),
+      status: <img key={ind.indicator.status_key} src={get_svg_url(ind.indicator.status_key)} style={status_icon_style} />,
+    },
   }) );
-  return <A11YTable data={table_data} label_col_header="" data_col_headers={table_data_headers}/>;
+  return <DisplayTable data={table_data} label_col_header="" column_keys={column_keys} table_name="TODO"/>;
 };
 
 
@@ -179,7 +182,7 @@ class ResultsTable extends React.Component {
         <div>
           {indicator_table_from_list(flat_indicators, doc==="drr17")}
         </div>
-      )
+      );
     }
 
   }

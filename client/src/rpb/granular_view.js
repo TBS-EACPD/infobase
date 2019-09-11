@@ -8,7 +8,7 @@ import {
 import { 
   Format, 
   TwoLevelSelect, 
-  SortIndicators, 
+  Sorters, 
   LabeledBox,
   AlertBanner,
 } from '../components/index.js';
@@ -373,7 +373,7 @@ class PlainTableHeader extends React.PureComponent {
       {display}
       {!disabled && 
         <span aria-hidden={true}>
-          <SortIndicators 
+          <Sorters 
             asc={active ==="ASC" }
             desc={active ==="DESC" }
           />
