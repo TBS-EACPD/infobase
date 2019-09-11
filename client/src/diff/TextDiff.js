@@ -19,10 +19,9 @@ import {
   create_text_maker_component,
   SpinnerWrapper,
   declarative_charts,
-  newIBCategoryColors,
 } from '../panels/shared.js';
 
-const { 
+const {
   GraphLegend,
 } = declarative_charts;
 
@@ -297,7 +296,13 @@ const indicator_report = (processed_indicator, years) => (
 export default class TextDiffApp extends React.Component {
   constructor(props) {
     super(props);
-    const colors = d3.scaleOrdinal().range(newIBCategoryColors);
+    const colors = d3.scaleOrdinal().range([
+      window.infobase_color_constants.primaryColor,
+      window.infobase_color_constants.warnDarkColor,
+      window.infobase_color_constants.successDarkColor,
+      window.infobase_color_constants.failDarkColor,
+      window.infobase_color_constants.infoDarkColor,
+    ]);
 
     this.state = {
       first_load: true,
