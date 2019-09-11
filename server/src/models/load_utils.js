@@ -18,8 +18,21 @@ export const empties_to_nulls = (obj) => _.mapValues(
 
 function get_standard_csv_file_rows(file_name){
   const file = get_file_from_data_dir(file_name);
-  const rows = csvParse(file);
-  return rows.map( obj => empties_to_nulls(obj) ); 
+
+  // Not using _.snakeCase because we don't want it's behaviour of adding new _'s on case changes
+  const file_with_snake_case_headers = _.replace(
+    file,
+    /^.+\n/,
+    (header_row) => _.chain(header_row)
+      .replace(" ", "_")
+      .toLower()
+      .value()
+  );
+
+  const rows = csvParse(file_with_snake_case_headers)
+    .map( row => empties_to_nulls(row) );
+
+  return rows;
 }
 
 const create_program_id = ({ dept_code, activity_code }) => `${dept_code}-${activity_code}`;

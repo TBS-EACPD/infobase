@@ -1,6 +1,3 @@
-const _ = require("lodash");
-
-
 const crso_query  = `
 query CRSOTestQuery ($lang: String!){
   root(lang: $lang){
