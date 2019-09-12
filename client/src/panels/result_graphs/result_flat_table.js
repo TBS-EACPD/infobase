@@ -18,8 +18,9 @@ import {
   GranularResultCounts,
   status_key_to_svg_name,
   result_docs,
+  ordered_status_keys,
 } from './results_common.js';
-import { StatusIconTable, InlineStatusIconList, Drr17IndicatorResultDisplay, IndicatorResultDisplay } from './result_components.js';
+import { StatusIconTable, InlineStatusIconList, Drr17IndicatorResultText, IndicatorResultText } from './result_components.js';
 import { create_full_results_hierarchy } from '../../gen_expl/result_hierarchies.js'
 import { single_subj_results_scheme, get_initial_single_subj_results_state } from '../../gen_expl/results_scheme.js';
 const { SpinnerWrapper, Format, TextAbbrev } = util_components;
@@ -57,42 +58,41 @@ const get_indicators = (subject, doc) => {
 
 const formatted_target = (indicator, is_drr17) => {
   return is_drr17 ?
-    <Drr17IndicatorResultDisplay  
-      data_type={indicator.target_type}
-      min={indicator.target_min}
-      max={indicator.target_max}
-      narrative={indicator.target_narrative}
-      measure={indicator.measure}
-    /> :
-    <IndicatorResultDisplay
-      doc={indicator.doc}
+    Drr17IndicatorResultText({ // these need to be called because they will be sorted on
+      data_type: indicator.target_type,
+      min: indicator.target_min,
+      max: indicator.target_max,
+      narrative: indicator.target_narrative,
+      measure: indicator.measure,
+    }) :
+    IndicatorResultText({
+      doc: indicator.doc,
 
-      data_type={indicator.target_type}
-      min={indicator.target_min}
-      max={indicator.target_max}
-      narrative={indicator.target_narrative}
-      measure={indicator.measure}
-    />;
+      data_type: indicator.target_type,
+      min: indicator.target_min,
+      max: indicator.target_max,
+      narrative: indicator.target_narrative,
+      measure: indicator.measure,
+    });
 };
 
 const formatted_actual = (indicator, is_drr17) => {
   return is_drr17 ?
-    <Drr17IndicatorResultDisplay
-      data_type={indicator.actual_datatype}
-      min={indicator.actual_result}
-      max={indicator.actual_result}
-      narrative={indicator.actual_result}
-      measure={indicator.measure}
-    /> :
-    <IndicatorResultDisplay
-      doc={indicator.doc}
-
-      data_type={indicator.actual_datatype}
-      min={indicator.actual_result}
-      max={indicator.actual_result}
-      narrative={indicator.actual_result}
-      measure={indicator.measure}
-    />;
+    Drr17IndicatorResultText({
+      data_type: indicator.actual_datatype,
+      min: indicator.actual_result,
+      max: indicator.actual_result,
+      narrative: indicator.actual_result,
+      measure: indicator.measure,
+    }) :
+    IndicatorResultText({ // TODO: probably should be DRR17
+      doc: indicator.doc,
+      data_type: indicator.actual_datatype,
+      min: indicator.actual_result,
+      max: indicator.actual_result,
+      narrative: indicator.actual_result,
+      measure: indicator.measure,
+    });
 };
 
 
@@ -121,19 +121,28 @@ const subject_link = (subject) => {
   }
 };
 
+
+
 const indicator_table_from_list = (indicator_list, is_drr17) => {
-  const column_keys = ["indicator","target","target_result","status"];
-  const table_data_headers = [text_maker("indicator"), text_maker("target"), text_maker("target_result"), text_maker("status")];
+  const column_keys = ["indicator","result_data_type","target","target_result","status"];
+  const sort_keys = ["indicator", "result_data_type", "status"];
+  const table_data_headers = _.map(column_keys, k => text_maker(k));
   const table_data = _.map(indicator_list, ind => ({
     label: subject_link(ind.parent_subject),
     col_data: {
       indicator: ind.indicator.name,
+      result_data_type: ind.indicator.target_type,
       target: formatted_target(ind.indicator, is_drr17),
       target_result: formatted_actual(ind.indicator, is_drr17),
       status: <img key={ind.indicator.status_key} src={get_svg_url(ind.indicator.status_key)} style={status_icon_style} />,
     },
+    sort_keys: {
+      indicator: ind.indicator.name,
+      result_data_type: ind.indicator.target_type,
+      status:  _.indexOf(ordered_status_keys, ind.indicator.status_key),
+    },
   }) );
-  return <DisplayTable data={table_data} label_col_header="" column_keys={column_keys} table_name="TODO"/>;
+  return <DisplayTable data={table_data} label_col_header="" column_keys={column_keys} table_data_headers={table_data_headers} sort_keys={sort_keys} table_name="TODO"/>;
 };
 
 
