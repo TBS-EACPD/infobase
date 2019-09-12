@@ -43,9 +43,9 @@ const IndicatorResultText = ({
 
   is_new,
 }) => {
-  const target_unspecified_display = <TM k="unspecified_target"/>;
+  const target_unspecified_display = text_maker("unspecified_target");
   
-  const measure_display = (measure) => !_.isEmpty(measure) && <span> ( {measure} )</span>;
+  const measure_display = (measure) => !_.isEmpty(measure) && `( ${measure} )`;
 
   const display_type_by_data_type = {
     num: "result_num",
@@ -57,16 +57,16 @@ const IndicatorResultText = ({
   };
 
   const upper_target_display = (data_type, measure, max) => (
-    `${text_maker("result_upper_target_text")} ${formats[display_type_by_data_type[data_type]](+max)}`
+    `${text_maker("result_upper_target_text")} ${formats[display_type_by_data_type[data_type]](+max)}` + (measure_display(measure) || "")
   );
   const lower_target_display = (data_type, measure, min) => (
-    `${text_maker("result_lower_target_text")} ${formats[display_type_by_data_type[data_type]](+min)}`
+    `${text_maker("result_lower_target_text")} ${formats[display_type_by_data_type[data_type]](+min)}` + (measure_display(measure) || "")
   );
   const exact_display = (data_type, measure, exact) => (
-    `${text_maker("result_exact_text")} ${formats[display_type_by_data_type[data_type]](+exact)}`
+    `${text_maker("result_exact_text")} ${formats[display_type_by_data_type[data_type]](+exact)}` + (measure_display(measure) || "")
   );
   const range_display = (data_type, measure, min, max) => (
-    `${text_maker("result_range_text")} ${formats[display_type_by_data_type[data_type]](+min)} ${text_maker("and")} ${formats[display_type_by_data_type[data_type]](+max)}` 
+    `${text_maker("result_range_text")} ${formats[display_type_by_data_type[data_type]](+min)} ${text_maker("and")} ${formats[display_type_by_data_type[data_type]](+max)}` + (measure_display(measure) || "")
   );
 
   const get_display_case = (data_type, min, max, narrative, measure) => {
@@ -92,7 +92,7 @@ const IndicatorResultText = ({
   
       case 'text': {
         if ( _.isEmpty(narrative) ){ return target_unspecified_display; }
-        return narrative
+        return narrative;
       }
   
       case 'tbd': {
@@ -105,7 +105,9 @@ const IndicatorResultText = ({
       }
     }
   };
-}
+
+  return get_display_case(data_type, min, max, narrative, measure);
+};
 
 const IndicatorResultDisplay = ({
   doc,
@@ -241,7 +243,8 @@ const OldIndicatorResultDisplay = ({
   return get_display_case(data_type, min, max, narrative, measure);
 };
 
-const Drr17IndicatorResultDisplay = ({
+
+const OldDrr17IndicatorResultDisplay = ({
   data_type,
   min, 
   max,
@@ -327,7 +330,7 @@ const Drr17IndicatorResultDisplay = ({
           <span> 
             <Format type="dollar" content={+min} />  
             <span>{` ${text_maker("to")} `}</span>
-            <Format type="dollar" content={+min} />
+            <Format type="dollar" content={+max} />
           </span> 
           {measure_display}
         </Fragment>
@@ -350,6 +353,77 @@ const Drr17IndicatorResultDisplay = ({
       return null;
     }
   }
+};
+
+const Drr17IndicatorResultText = ({
+  data_type,
+  min, 
+  max,
+  narrative,
+  measure,
+}) => {
+  const target_unspecified_display = text_maker("unspecified_target");
+  
+  const measure_display = (measure) => !_.isEmpty(measure) && `( ${measure} )`;
+  switch(data_type){
+    case 'exact_num':
+    case 'num': {
+      const num = min || max;
+      if( !num ){ return target_unspecified_display; }
+      return formats["result_num"](+num) + (measure_display(measure) || "");
+    }
+    case 'dollar': {
+      const num = min || max;
+      if( !num ){ return target_unspecified_display; }
+      return formats["dollar_raw"](+num) + (measure_display(measure) || "");
+    }
+    case 'percent': {
+      const num = min || max;
+      if( !num ){ return target_unspecified_display; }
+      return formats["result_percentage"](+num) + (measure_display(measure) || "");
+    }
+    case 'num_range': {
+      if( !min && !max){ return target_unspecified_display; }
+      return formats["result_num"](+min) + ` ${text_maker("to")} ` + formats["result_num"](+max) + (measure_display(measure) || "");
+    }
+    case 'percent_range': {
+      if( !min && !max){ return target_unspecified_display; }
+      return formats["result_percentage"](+min) + ` ${text_maker("to")} ` + formats["result_percentage"](+max) + (measure_display(measure) || "");
+    }
+    case 'dollar_range': {
+      if( !min && !max){ return target_unspecified_display; }
+      return formats["dollar_raw"](+min) + ` ${text_maker("to")} ` + formats["dollar"](+max) + (measure_display(measure) || "");
+    }
+    case 'text': {
+      if( _.isEmpty(narrative) ){ 
+        return target_unspecified_display; 
+      }
+      return narrative;
+    }
+    default: {
+      return null;
+    }
+  }
+};
+
+const Drr17IndicatorResultDisplay = ({
+  data_type,
+  min, 
+  max,
+  narrative,
+  measure,
+}) => {
+  return (
+    <span>
+      {Drr17IndicatorResultText({
+        data_type,
+        min, 
+        max,
+        narrative,
+        measure,
+      })}
+    </span>
+  );
 };
 
 const IndicatorList = ({ indicators }) => (
@@ -920,5 +994,7 @@ export {
   HorizontalStatusTable,
   NewBadge,
   Drr17IndicatorResultDisplay,
+  Drr17IndicatorResultText,
   IndicatorResultDisplay,
+  IndicatorResultText,
 }; 

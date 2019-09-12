@@ -1,5 +1,7 @@
 import { util_components, general_utils } from '../panels/shared.js';
-const { Sorters } = util_components;
+const {
+  Sorters,
+} = util_components;
 
 import { TM } from './TextMaker.js';
 
@@ -7,7 +9,7 @@ export class DisplayTable extends React.Component {
   constructor(props){
     super();
     this.state = {
-      sort_by: _.keys(props.status_columns)[0],
+      sort_by: "label",
       descending: true,
       show_all: false,
     };
@@ -30,16 +32,22 @@ export class DisplayTable extends React.Component {
       data,
       table_name,
       label_col_header,
+      sort_keys,
+      table_data_headers,
     } = this.props;
-    const { sort_by, descending, show_all } = this.state;
-
+    const {
+      sort_by,
+      descending,
+      show_all
+    } = this.state;
+  
 
     // TODO: implement filtering
     const sorted_filtered_data = _.chain(data)
       .sortBy(
         sort_by==='label' ? 
           row => row["label"] :
-          row => row["col_data"][sort_by]["sort_key"]
+          row => row["sort_keys"][sort_by]
       )
       .tap(descending ? _.noop : _.reverse)
       .value();
@@ -74,13 +82,15 @@ export class DisplayTable extends React.Component {
                     <th 
                       key={i} 
                       className="center-text"
-                      onClick={ () => this.header_click(tick) }
+                      onClick={ () => _.includes(sort_keys,tick) && this.header_click(tick) }
                     >
-                      <TM k={tick} />
-                      <Sorters 
-                        asc={!descending && sort_by === i} 
-                        desc={descending && sort_by === i}
-                      />
+                      {table_data_headers[i]}
+                      {_.includes(sort_keys,tick) && 
+                        <Sorters 
+                          asc={!descending && sort_by === tick} 
+                          desc={descending && sort_by === tick}
+                        />
+                      }
                     </th>
                   );
                 })

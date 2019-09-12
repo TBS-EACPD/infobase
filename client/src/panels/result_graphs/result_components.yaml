@@ -21,3 +21,7 @@ tbd_result_text:
 result_is_retired:
   en: DRR_TODO
   fr: DRR_TODO
+
+result_data_type:
+  en: Target type
+  fr: Target type en francais
