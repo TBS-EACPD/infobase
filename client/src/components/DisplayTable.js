@@ -1,3 +1,5 @@
+import './DisplayTable.scss';
+import classNames from 'classnames';
 import { util_components, general_utils } from '../panels/shared.js';
 const {
   Sorters,
@@ -61,7 +63,7 @@ export class DisplayTable extends React.Component {
         >
         </div>
         <div style={{overflowX: "auto"}}>
-          <table className="table table-dark-blue table-dark-bordered no-total-row">
+          <table className="table display-table table-dark-blue table-dark-bordered no-total-row">
             <caption className="sr-only">
               <div>
                 { 
@@ -86,19 +88,24 @@ export class DisplayTable extends React.Component {
                 {
                   _.map(column_keys, (tick, i) => {
                     return (
-                      <th 
-                        key={i} 
-                        className="center-text"
-                        onClick={ () => _.includes(sort_keys,tick) && this.header_click(tick) }
-                      >
-                        {table_data_headers[i]}
-                        {_.includes(sort_keys,tick) && 
+                      _.includes(sort_keys,tick) ?
+                        <th 
+                          key={i} 
+                          className={classNames("center-text", "display-table__sortable")}
+                          onClick={ () => _.includes(sort_keys,tick) && this.header_click(tick) }
+                        >
+                          {table_data_headers[i]}
                           <Sorters 
                             asc={!descending && sort_by === tick} 
                             desc={descending && sort_by === tick}
                           />
-                        }
-                      </th>
+                        </th> :
+                        <th 
+                          key={i} 
+                          className={"center-text"}
+                        >
+                          {table_data_headers[i]}
+                        </th>
                     );
                   })
                 }
