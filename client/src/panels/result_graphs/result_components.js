@@ -392,7 +392,7 @@ const Drr17IndicatorResultText = ({
     }
     case 'dollar_range': {
       if( !min && !max){ return target_unspecified_display; }
-      return formats["dollar_raw"](+min) + ` ${text_maker("to")} ` + formats["dollar"](+max) + (measure_display(measure) || "");
+      return formats["dollar_raw"](+min) + ` ${text_maker("to")} ` + formats["dollar_raw"](+max) + (measure_display(measure) || "");
     }
     case 'text': {
       if( _.isEmpty(narrative) ){ 
