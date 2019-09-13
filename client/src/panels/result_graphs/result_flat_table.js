@@ -27,6 +27,7 @@ const { SpinnerWrapper, Format, TextAbbrev } = util_components;
 import { ensure_loaded } from '../../core/lazy_loader.js';
 import { Result } from './results_common.js';
 import { Subject } from '../../models/subject.js';
+import { SubProgramEntity } from '../../models/results.js';
 import { A11YTable } from '../../charts/A11yTable.js';
 
 
@@ -101,8 +102,11 @@ const status_icon_style = {width: "41px", height: "41px"};
 
 const subject_link = (subject) => {
   if (subject.data.subject.level === "sub_program" || subject.data.subject.level === "sub_sub_program"){
+    const href_subject_id = subject.data.subject.level === "sub_program" ?
+      subject.data.subject.parent_id :
+      SubProgramEntity.lookup(subject.data.subject.parent_id).parent_id;
     return <span>
-      <a href={`#orgs/program/${subject.data.subject.parent_id}/infograph/results`}>{subject.data.name}</a>
+      <a href={`#orgs/program/${href_subject_id}/infograph/results`}>{subject.data.name}</a>
       {` (${text_maker(subject.data.subject.level)}`}
       <span className="tag-glossary-item">
         <img className="tag-glossary-icon"

@@ -11,6 +11,8 @@ export class DisplayTable extends React.Component {
     this.state = {
       sort_by: "label",
       descending: true,
+      filter_by: undefined,
+      filter: undefined,
       show_all: false,
     };
   }
@@ -53,74 +55,84 @@ export class DisplayTable extends React.Component {
       .value();
 
     return (
-      <div style={{overflowX: "auto"}}>
-        <table className="table table-dark-blue table-dark-bordered no-total-row">
-          <caption className="sr-only">
-            <div>
-              { 
-                !_.isEmpty(table_name) ? 
-                table_name : 
-                <TM k="a11y_table_title_default" />
-              }
-            </div>
-          </caption>
-          <thead>
-            <tr className="table-header">
-              <th 
-                className="center-text"
-                onClick={ () => this.header_click("label") }
-              >
-                <TM k="org" />
-                <Sorters 
-                  asc={!descending && sort_by === "label"} 
-                  desc={descending && sort_by === "label"}
-                />
-              </th>
-              {
-                _.map(column_keys, (tick, i) => {
-                  return (
-                    <th 
-                      key={i} 
-                      className="center-text"
-                      onClick={ () => _.includes(sort_keys,tick) && this.header_click(tick) }
-                    >
-                      {table_data_headers[i]}
-                      {_.includes(sort_keys,tick) && 
-                        <Sorters 
-                          asc={!descending && sort_by === tick} 
-                          desc={descending && sort_by === tick}
-                        />
-                      }
-                    </th>
-                  );
-                })
-              }
-            </tr>
-          </thead>
-          <tbody>
-            {_.map(sorted_filtered_data, ({ label, col_data }, i) => 
-              <tr key={i}>
+      <div>
+        <div 
+          style={{
+            padding: '10px 10px',
+            marginTop: "20px",
+            marginBottom: "20px",
+          }}
+        >
+        </div>
+        <div style={{overflowX: "auto"}}>
+          <table className="table table-dark-blue table-dark-bordered no-total-row">
+            <caption className="sr-only">
+              <div>
+                { 
+                  !_.isEmpty(table_name) ? 
+                  table_name : 
+                  <TM k="a11y_table_title_default" />
+                }
+              </div>
+            </caption>
+            <thead>
+              <tr className="table-header">
                 <th 
-                  scope={
-                    !label_col_header ?
-                    "row" :
-                    null
-                  }
+                  className="center-text"
+                  onClick={ () => this.header_click("label") }
                 >
-                  { label }
-                </th> 
-                {_.map(
-                  column_keys, 
-                  col => (
-                    <td key={col}>
-                      {col_data[col]}
-                    </td>
-                  )
-                )}
+                  <TM k="org" />
+                  <Sorters 
+                    asc={!descending && sort_by === "label"} 
+                    desc={descending && sort_by === "label"}
+                  />
+                </th>
+                {
+                  _.map(column_keys, (tick, i) => {
+                    return (
+                      <th 
+                        key={i} 
+                        className="center-text"
+                        onClick={ () => _.includes(sort_keys,tick) && this.header_click(tick) }
+                      >
+                        {table_data_headers[i]}
+                        {_.includes(sort_keys,tick) && 
+                          <Sorters 
+                            asc={!descending && sort_by === tick} 
+                            desc={descending && sort_by === tick}
+                          />
+                        }
+                      </th>
+                    );
+                  })
+                }
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {_.map(sorted_filtered_data, ({ label, col_data }, i) => 
+                <tr key={i}>
+                  <th 
+                    scope={
+                      !label_col_header ?
+                      "row" :
+                      null
+                    }
+                  >
+                    { label }
+                  </th> 
+                  {_.map(
+                    column_keys, 
+                    col => (
+                      <td key={col}>
+                        {col_data[col]}
+                      </td>
+                    )
+                  )}
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }
