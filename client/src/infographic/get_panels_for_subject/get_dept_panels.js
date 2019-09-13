@@ -15,6 +15,7 @@ import { declare_year_warning_panel } from '../../panels/intro_graphs/index.js';
 
 // shared dept, crso, program
 import { declare_explore_results_panel } from '../../panels/result_graphs/index.js';
+import { declare_results_table_panel } from '../../panels/result_graphs/index.js';
 import { declare_tags_of_interest_panel } from '../../panels/intro_graphs/index.js';
 import { declare_drr_planned_actual_panel } from "../../panels/drr_dp_resources/drr_planned_actual.js";
 import { declare_dp_rev_split_panel } from "../../panels/drr_dp_resources/dp_rev_split.js";
@@ -78,6 +79,7 @@ export const get_dept_panels = subject => ensure_loaded({
     declare_late_dps_warning_panel(),
     declare_drr_summary_panel(),
     declare_explore_results_panel(),
+    declare_results_table_panel(),
   ],
   related: _.nonEmpty(subject.programs) && [
     declare_portfolio_structure_related_panel(),

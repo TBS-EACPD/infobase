@@ -1,6 +1,5 @@
 import { text_maker } from './result_text_provider.js';
 import { 
-  PanelGraph, 
   util_components, 
   Panel,
 } from '../shared.js';
@@ -18,7 +17,10 @@ import { create_full_results_hierarchy } from '../../gen_expl/result_hierarchies
 const { SpinnerWrapper } = util_components;
 import { ensure_loaded } from '../../core/lazy_loader.js';
 import { SubProgramEntity } from '../../models/results.js';
-import { get_source_links } from '../shared.js';
+import {
+  get_source_links, 
+  declare_panel,
+} from '../shared.js';
 
 
 const get_svg_url = (status_key) => get_static_url(`svg/${status_key_to_svg_name[status_key]}.svg`);
@@ -216,23 +218,24 @@ class ResultsTable extends React.Component {
   }
 }
 
-_.each(['program','dept','crso'], lvl => {
-  new PanelGraph({
-    level: lvl,
+export const declare_results_table_panel = () => declare_panel({
+  panel_key: "results_flat_table",
+  levels: ["dept", "crso", "program"],
+  panel_config_func: (level, panel_key) => ({
     footnotes: false,
     depends_on: ["programSpending", "programFtes"],
     source: (subject) => get_source_links(["DP","DRR"]),
-    requires_result_counts: lvl === 'dept',
-    requires_granular_result_counts: lvl !== 'dept',
-    key: "results_flat_table",
+    requires_result_counts: level === 'dept',
+    requires_granular_result_counts: level !== 'dept',
     calculate(subject){
-      const subject_result_counts = lvl === 'dept' ?
+      const subject_result_counts = level === 'dept' ?
         ResultCounts.get_dept_counts(subject.id) :
         GranularResultCounts.get_subject_counts(subject.id);
 
       const had_doc_data = (doc) => {
-        const count_key = /drr/.test(doc) ? `${doc}_total` : `${doc}_indicators`;
+        const count_key = `${doc}_total`;
         return (
+          /drr/.test(doc) &&
           !_.isUndefined(subject_result_counts) && 
           !_.isNull(subject_result_counts[count_key]) && 
           subject_result_counts[count_key] > 0
@@ -281,6 +284,5 @@ _.each(['program','dept','crso'], lvl => {
       );
 
     },
-  });
-
+  }),
 });
