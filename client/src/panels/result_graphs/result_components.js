@@ -4,7 +4,6 @@ import { glossary_href } from '../../link_utils.js';
 import {
   status_key_to_glossary_key,
   ordered_status_keys,
-  get_result_doc_keys,
   link_to_results_infograph,
   result_statuses,
   result_simple_statuses,
@@ -17,12 +16,9 @@ import {
 } from '../../icons/icons.js';
 import * as color_defs from '../../core/color_defs.js';
 
-const dp_docs = get_result_doc_keys("dp");
-const drr_docs = get_result_doc_keys("drr");
 import { formats } from '../../core/format.js';
 
 const { 
-  Format,
   HeightClipper,
   FilterTable,
   Sorters,
@@ -241,118 +237,6 @@ const OldIndicatorResultDisplay = ({
   };
 
   return get_display_case(data_type, min, max, narrative, measure);
-};
-
-
-const OldDrr17IndicatorResultDisplay = ({
-  data_type,
-  min, 
-  max,
-  narrative,
-  measure,
-}) => {
-
-  const target_unspecified_display = <TM k="unspecified_target"/>;
-  
-  const measure_display = !_.isEmpty(measure) && <span> ( {measure} )</span>;
-
-  switch(data_type){
-    case 'exact_num':
-    case 'num': {
-      const num = min || max;
-      if( !num ){ return target_unspecified_display; }
-      return (
-        <Fragment>
-          <span> 
-            <Format type="result_num" content={+num} /> 
-          </span> 
-          {measure_display}
-        </Fragment>
-      );
-    }
-
-    case 'dollar': {
-      if( !min && !max){ return target_unspecified_display; }
-      return (
-        <Fragment>
-          <span> 
-            <Format type="dollar" content={+min || +max} />
-          </span> 
-          {measure_display}
-        </Fragment>
-      );
-    }
-
-    case 'percent': {
-      if( !min && !max){ return target_unspecified_display; }
-      return (
-        <Fragment>
-          <span> 
-            <Format type="result_percentage" content={min || max} />
-          </span> 
-          {measure_display}
-        </Fragment>
-      );
-    }
-
-    case 'num_range': {
-      if( !min && !max){ return target_unspecified_display; }
-      return (
-        <Fragment>
-          <span> 
-            <Format type="result_num" content={+min} />
-            <span>{` ${text_maker("to")} `}</span>
-            <Format type="result_num" content={+max} />
-          </span> 
-          {measure_display}
-        </Fragment>
-      );
-    }
-
-    case 'percent_range': {
-      if( !min && !max){ return target_unspecified_display; }
-      return (
-        <Fragment>
-          <span> 
-            <Format type="result_percentage" content={+min} />
-            <span>{` ${text_maker("to")} `}</span>
-            <Format type="result_percentage" content={+max} />
-          </span> 
-          {measure_display}
-        </Fragment>
-      );
-    }
-
-    case 'dollar_range': {
-      if( !min && !max){ return target_unspecified_display; }
-      return (
-        <Fragment>
-          <span> 
-            <Format type="dollar" content={+min} />  
-            <span>{` ${text_maker("to")} `}</span>
-            <Format type="dollar" content={+max} />
-          </span> 
-          {measure_display}
-        </Fragment>
-      );
-    }
-
-    case 'text' : {
-      if( _.isEmpty(narrative) ){ 
-        return target_unspecified_display; 
-      }
-      return (
-        <span>
-          {narrative}
-        </span>
-      );
-    }
-
-    default: {
-      //certain indicators have no targets
-      return null;
-    }
-  }
 };
 
 const Drr17IndicatorResultText = ({
