@@ -46,11 +46,7 @@ export class DisplayTable extends React.Component {
 
     // TODO: implement filtering
     const sorted_filtered_data = _.chain(data)
-      .sortBy(
-        sort_by==='label' ? 
-          row => row["label"] :
-          row => row["sort_keys"][sort_by]
-      )
+      .sortBy(row => _.has(row["sort_keys"],sort_by) ? row["sort_keys"][sort_by] : row["label"]) // for status the sort_key could be 0
       .tap(descending ? _.noop : _.reverse)
       .value();
 
