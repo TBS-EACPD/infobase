@@ -139,7 +139,7 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
       indicator: ind.indicator.name,
       result_data_type: ind.indicator.target_type,
       target: formatted_target(ind.indicator, is_drr17),
-      target_result: formatted_actual(ind.indicator, is_drr17),
+      target_result: formatted_actual(ind.indicator, true),
       status: <img key={ind.indicator.status_key} src={get_svg_url(ind.indicator.status_key)} style={status_icon_style} />,
     },
     sort_keys: {
@@ -191,12 +191,12 @@ class ResultsTable extends React.Component {
     } else {
 
       const doc = 'drr17';
-      const flat_indicators = _.filter(get_indicators(subject, doc), ind => !status_filtered[ind.indicator.status_key]);
+      const flat_indicators = get_indicators(subject, doc);
       const icon_counts = _.zipObject(ordered_status_keys,
         _.map(ordered_status_keys,
           key => _.reduce(flat_indicators, (sum,ind) => sum + (ind.indicator.status_key === key) || 0, 0)
         ));
-
+      const filtered_indicators =  _.filter(flat_indicators, ind => !status_filtered[ind.indicator.status_key]);
       const toggle_status_status_key = (status_key) => {
         const current_status_filtered = _.clone(status_filtered);
         current_status_filtered[status_key] = !current_status_filtered[status_key];
@@ -212,7 +212,7 @@ class ResultsTable extends React.Component {
             icon_counts={icon_counts} 
             onIconClick={toggle_status_status_key}
           />
-          {indicator_table_from_list(flat_indicators, doc==="drr17")}
+          {indicator_table_from_list(filtered_indicators, !subject.is_first_wave && doc === 'drr17')}
         </div>
       );
     }
