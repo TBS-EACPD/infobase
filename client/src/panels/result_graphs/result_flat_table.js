@@ -94,21 +94,27 @@ const subject_link = (subject) => {
     const href_subject_id = subject.data.subject.level === "sub_program" ?
       subject.data.subject.parent_id :
       SubProgramEntity.lookup(subject.data.subject.parent_id).parent_id;
-    return <span>
-      <a href={`#orgs/program/${href_subject_id}/infograph/results`}>{subject.data.name}</a>
-      {` (${text_maker(subject.data.subject.level)}`}
-      <span className="tag-glossary-item">
-        <img className="tag-glossary-icon"
-          width={18}
-          aria-hidden="true"
-          src={get_static_url('svg/not-available-white.svg')} 
-          tabIndex="0"
-          data-toggle="tooltip"
-          data-ibtt-glossary-key={"SSP"}
-          data-ibtt-html="true"
-        />
-      </span>)
-    </span>;
+    return (
+      <span>
+        <a href={`#orgs/program/${href_subject_id}/infograph/results`}>{subject.data.name}</a>
+        <span className='text-nowrap'>
+          {" "}(
+          {text_maker(subject.data.subject.level)}
+          <span className="tag-glossary-item">
+            <img className="tag-glossary-icon"
+              width={18}
+              aria-hidden="true"
+              src={get_static_url('svg/not-available-white.svg')} 
+              tabIndex="0"
+              data-toggle="tooltip"
+              data-ibtt-glossary-key={"SSP"}
+              data-ibtt-html="true"
+            />
+          </span>
+          )
+        </span>
+      </span>
+    );
   } else {
     return <span><a href={`#orgs/program/${subject.data.subject.id}/infograph/results`}>{subject.data.name}</a> ({text_maker(subject.data.subject.level === "program" ? subject.data.subject.level : "core_resp")})</span>;
   }
