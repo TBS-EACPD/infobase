@@ -1,6 +1,6 @@
 import './DisplayTable.scss';
 import classNames from 'classnames';
-import { util_components, general_utils } from '../panels/shared.js';
+import { util_components } from '../panels/shared.js';
 const {
   Sorters,
 } = util_components;
@@ -42,7 +42,6 @@ export class DisplayTable extends React.Component {
     const {
       sort_by,
       descending,
-      show_all
     } = this.state;
   
 

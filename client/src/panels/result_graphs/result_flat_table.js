@@ -1,39 +1,28 @@
-import { TM, text_maker } from './result_text_provider.js';
-import classNames from 'classnames';
+import { text_maker } from './result_text_provider.js';
 import { 
   PanelGraph, 
   util_components, 
-  infograph_href_template, 
   Panel,
-  TabbedControls,
-  DlItem,
-  get_source_links,
 } from '../shared.js';
 import { get_static_url } from '../../request_utils.js';
-import { Details } from '../../components/Details.js';
 import { DisplayTable } from '../../components/DisplayTable.js';
 import { 
-  Indicator,
   ResultCounts,
   GranularResultCounts,
   status_key_to_svg_name,
   result_docs,
   ordered_status_keys,
 } from './results_common.js';
-import { StatusIconTable, InlineStatusIconList, Drr17IndicatorResultText, IndicatorResultText } from './result_components.js';
-import { create_full_results_hierarchy } from '../../gen_expl/result_hierarchies.js'
-import { single_subj_results_scheme, get_initial_single_subj_results_state } from '../../gen_expl/results_scheme.js';
-const { SpinnerWrapper, Format, TextAbbrev } = util_components;
+import { StatusIconTable, Drr17IndicatorResultText, IndicatorResultText } from './result_components.js';
+import { create_full_results_hierarchy } from '../../gen_expl/result_hierarchies.js';
+const { SpinnerWrapper } = util_components;
 import { ensure_loaded } from '../../core/lazy_loader.js';
-import { Result } from './results_common.js';
-import { Subject } from '../../models/subject.js';
 import { SubProgramEntity } from '../../models/results.js';
-import { A11YTable } from '../../charts/A11yTable.js';
+import { get_source_links } from '../shared.js';
 
 
 const get_svg_url = (status_key) => get_static_url(`svg/${status_key_to_svg_name[status_key]}.svg`);
 
-const { Dept, CRSO, Program } = Subject;
 
 const get_actual_parent = (indicator_node, full_results_hierarchy) => {
   const parent = _.find(full_results_hierarchy, {id: indicator_node.parent_id});
@@ -178,7 +167,6 @@ class ResultsTable extends React.Component {
   render(){
     const { 
       subject,
-      docs_with_data,
     } = this.props;
     const { loading, status_filtered } = this.state;
     
@@ -196,7 +184,7 @@ class ResultsTable extends React.Component {
         _.map(ordered_status_keys,
           key => _.reduce(flat_indicators, (sum,ind) => sum + (ind.indicator.status_key === key) || 0, 0)
         ));
-      const filtered_indicators =  _.filter(flat_indicators, ind => !status_filtered[ind.indicator.status_key]);
+      const filtered_indicators = _.filter(flat_indicators, ind => !status_filtered[ind.indicator.status_key]);
       const toggle_status_status_key = (status_key) => {
         const current_status_filtered = _.clone(status_filtered);
         current_status_filtered[status_key] = !current_status_filtered[status_key];
