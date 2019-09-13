@@ -127,6 +127,8 @@ const subject_link = (subject) => {
 
 
 
+
+
 const indicator_table_from_list = (indicator_list, is_drr17) => {
   const column_keys = ["indicator","result_data_type","target","target_result","status"];
   const sort_keys = ["indicator", "result_data_type", "status"];
@@ -141,9 +143,10 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
       status: <img key={ind.indicator.status_key} src={get_svg_url(ind.indicator.status_key)} style={status_icon_style} />,
     },
     sort_keys: {
+      label: ind.parent_subject.data.name,
       indicator: ind.indicator.name,
       result_data_type: ind.indicator.target_type,
-      status:  _.indexOf(ordered_status_keys, ind.indicator.status_key),
+      status: _.indexOf(ordered_status_keys, ind.indicator.status_key),
     },
   }) );
   return <DisplayTable data={table_data} label_col_header="" column_keys={column_keys} table_data_headers={table_data_headers} sort_keys={sort_keys} table_name="TODO"/>;
