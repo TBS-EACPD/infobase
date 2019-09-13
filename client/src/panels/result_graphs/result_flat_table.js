@@ -121,7 +121,7 @@ const subject_link = (subject) => {
       </span>)
     </span>;
   } else {
-    return <span><a href={`#orgs/program/${subject.data.subject.id}/infograph/results`}>{subject.data.name}</a> ({text_maker(subject.data.subject.level)})</span>;
+    return <span><a href={`#orgs/program/${subject.data.subject.id}/infograph/results`}>{subject.data.name}</a> ({text_maker(subject.data.subject.level === "program" ? subject.data.subject.level : "core_resp")})</span>;
   }
 };
 
