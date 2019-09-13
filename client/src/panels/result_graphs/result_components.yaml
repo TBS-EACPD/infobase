@@ -25,3 +25,16 @@ result_is_retired:
 result_data_type:
   en: Target type
   fr: Target type en francais
+
+result_datatype_percent:
+  en: Percentage
+  fr: Pourcentage
+  
+result_datatype_num:
+  en: Number
+  fr: Quantité
+
+result_datatype_text:
+  en: Text
+  fr: Texte
+
