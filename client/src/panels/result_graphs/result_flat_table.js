@@ -137,7 +137,7 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
     label: subject_link(ind.parent_subject),
     col_data: {
       indicator: ind.indicator.name,
-      result_data_type: ind.indicator.target_type,
+      result_data_type: text_maker(`result_datatype_${ind.indicator.target_type}`),
       target: formatted_target(ind.indicator, is_drr17),
       target_result: formatted_actual(ind.indicator, true),
       status: <img key={ind.indicator.status_key} src={get_svg_url(ind.indicator.status_key)} style={status_icon_style} />,
@@ -145,7 +145,7 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
     sort_keys: {
       label: ind.parent_subject.data.name,
       indicator: ind.indicator.name,
-      result_data_type: ind.indicator.target_type,
+      result_data_type: text_maker(`result_datatype_${ind.indicator.target_type}`),
       status: _.indexOf(ordered_status_keys, ind.indicator.status_key),
     },
   }) );
