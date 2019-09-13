@@ -159,6 +159,7 @@ class ResultsTable extends React.Component {
 
     this.state = {
       loading: true,
+      status_filtered: _.zipObject(ordered_status_keys, _.map(ordered_status_keys, ()=>false)),
     };
   }
   componentDidMount(){
@@ -179,8 +180,8 @@ class ResultsTable extends React.Component {
       subject,
       docs_with_data,
     } = this.props;
-    const { loading } = this.state;
-
+    const { loading, status_filtered } = this.state;
+    
     if (loading) {
       return (
         <div style={{position: "relative", height: "80px", marginBottom: "-10px"}}>
@@ -190,12 +191,27 @@ class ResultsTable extends React.Component {
     } else {
 
       const doc = 'drr17';
+      const flat_indicators = _.filter(get_indicators(subject, doc), ind => !status_filtered[ind.indicator.status_key]);
+      const icon_counts = _.zipObject(ordered_status_keys,
+        _.map(ordered_status_keys,
+          key => _.reduce(flat_indicators, (sum,ind) => sum + (ind.indicator.status_key === key) || 0, 0)
+        ));
 
-      const flat_indicators = get_indicators(subject, doc);
+      const toggle_status_status_key = (status_key) => {
+        const current_status_filtered = _.clone(status_filtered);
+        current_status_filtered[status_key] = !current_status_filtered[status_key];
+        this.setState({status_filtered: current_status_filtered});
+      };
 
+      const active_list = _.filter(ordered_status_keys, key => !status_filtered[key]);
 
       return (
         <div>
+          <StatusIconTable 
+            active_list={active_list}
+            icon_counts={icon_counts} 
+            onIconClick={toggle_status_status_key}
+          />
           {indicator_table_from_list(flat_indicators, doc==="drr17")}
         </div>
       );
