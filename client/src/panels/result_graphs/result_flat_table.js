@@ -212,7 +212,9 @@ class ResultsTable extends React.Component {
             icon_counts={icon_counts} 
             onIconClick={toggle_status_status_key}
           />
-          {indicator_table_from_list(filtered_indicators, !subject.is_first_wave && doc === 'drr17')}
+          <div className="results-flat-table">
+            {indicator_table_from_list(filtered_indicators, !subject.is_first_wave && doc === 'drr17')}
+          </div>
         </div>
       );
     }
