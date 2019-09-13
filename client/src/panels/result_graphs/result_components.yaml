@@ -37,4 +37,11 @@ result_datatype_num:
 result_datatype_text:
   en: Text
   fr: Texte
+result_datatype_dollar:
+  en: Dollar
+  fr: Argent
+result_datatype_percent_range:
+  en: Percentage range
+  fr: Gamme de pourcentages
+
 
