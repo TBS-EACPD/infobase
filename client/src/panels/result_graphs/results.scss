@@ -142,10 +142,34 @@ dl.indicator-item__dl dt+dd {
   padding-top:10px;
 }
 
+.results-flat-table > div > div > table {
+  width: 100%;
+  position: relative;
+  & > tbody > tr > td:first-child { // subject
+    width: 28%;
+  }
+  & > tbody > tr > td:nth-child(2) { // indicator
+    width: 30%;
+  }
+  & > tbody > tr > td:nth-child(3) { // target data type
+    width: 10%;
+  }
+  & > tbody > tr > td:nth-child(4) { // target
+    width: 15%;
+  }
+  & > tbody > tr > td:nth-child(5) { // actual result
+    width: 15%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  & > tbody > tr > td:nth-child(6) { // status icon
+    min-width: 60px;
+    width: 2%;
+  }
+}
 .status-icon-table--met-icon, .status-icon-table--not-met-icon, .status-icon-table--na-icon, .status-icon-table--future-icon {
   margin: 0px;
 }
-
 .badge.badge--is-new-indicator {
   font-size: 12px;
   margin-left: 5px;
