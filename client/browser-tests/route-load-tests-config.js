@@ -1,7 +1,7 @@
 module.exports.route_load_tests_config = [
   {
-    name: "Always failing route, to test error boundary itself",
-    route: "orgs/dept/qwrqwerqwer/infograph/people",
+    name: "Always failing route, to test error boundary",
+    route: "error-boundary-test",
     test_on: ["eng", "fra", "basic-eng", "basic-fra"],
     expect_to_fail: true,
   },
