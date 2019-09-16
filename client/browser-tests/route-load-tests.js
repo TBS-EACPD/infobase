@@ -29,13 +29,12 @@ const get_options_from_args = (args) => {
 const test_configs_from_route_config = (route_config) => _.map(
   route_config.test_on,
   app => ({
-    name: route_config.name,
-    route: route_config.route,
     app,
+    ...route_config,
   })
 );
-const test_config_to_test_file_object = ({app, name, route}) => ({
-  file_name: `${app}-${_.kebabCase(name)}-test.js`,
+const test_config_to_test_file_object = ({app, name, route, expect_to_fail}) => ({
+  file_name: `${app}-${_.kebabCase(name)}-test-expect-${expect_to_fail ? "failure" : "success"}.js`,
   js_string: `
 import { Selector } from 'testcafe';
 
@@ -48,9 +47,9 @@ test(
     // Checks that the route loads anying (appends any children to the #app element), that the spinner eventually ends, and that the post-spinner page isn't the error page
     await test_controller.expect( Selector('#app').childElementCount ).notEql( 0, {timeout: 20000} )
       .expect( Selector('.spinner').exists ).notOk( {timeout: 20000} )
-      .expect( Selector('#error-boundary-icon').exists ).notOk()
+      .expect( Selector('#error-boundary-icon').exists ).${ expect_to_fail ? "ok" : "notOk" }()
       .wait(1000) // a few errors, such as a missing glossary key, can occur slightly after the page's initial loading appears to have passed, wait and double check for better coverage
-      .expect( Selector('#error-boundary-icon').exists ).notOk();
+      .expect( Selector('#error-boundary-icon').exists ).${ expect_to_fail ? "ok" : "notOk" }()
   }
 );`,
 });
@@ -72,23 +71,45 @@ const run_tests = (test_dir, options) => {
           .readdirSync(test_dir)
           .map( file_name => `${test_dir}/${file_name}`);
 
+        const {
+          negative_tests,
+          positive_tests,
+        } = _.groupBy(
+          test_files,
+          (file_name) => /expect-failure.js$/.test(file_name) ? "negative_tests" : "positive_tests"
+        );
+
         const browser_options = `${options.headless ? ':headless' : ''}${options.no_sandbox ? ' --no-sandbox' : ''}`;
 
-        return runner
-          .src(test_files)
-          .browsers( 
-            _.filter([
-              options.chrome && `chrome${browser_options}`, 
-              options.chromium && `chromium${browser_options}`,
-            ])
-          )
+        const browsers = _.filter([
+          options.chrome && `chrome${browser_options}`, 
+          options.chromium && `chromium${browser_options}`,
+        ]);
+
+        // First test that an erroring page actually hits the error boundary, else the other tests will fail positive
+        const test_negative_routes = () => runner
+          .src(negative_tests)
+          .browsers(browsers)
           .concurrency(2)
           .reporter('spec') // the default testcafe reporter, sending to stdout by default
+          .run({"skipJsErrors": true}); // ignore JS errors when testing that failing routes fail, they're expected
+
+        const test_positive_routes = () => runner
+          .src(positive_tests)
+          .browsers(browsers)
+          .concurrency(2)
+          .reporter('spec')
           .run();
+
+        return test_negative_routes()
+          .then( (negative_failing_count) => 
+            test_positive_routes()
+              .then( (positive_failing_count) => negative_failing_count + positive_failing_count )
+          );
       }
     )
     .then( (failed_count) => {
-      if (failed_count){
+      if (failed_count > 0){
         // Just setting an error exit code here was flaky in CI, so this event forces the exit code to be an error when any test have failed
         // Using an on exit event handler to allow node to, otherwise, exit gracefully ( explicitly calling exit here could stomp stdout logging, etc.)
         process.on( 'exit', () => process.exit(1) );
