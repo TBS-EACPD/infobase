@@ -140,9 +140,9 @@ const process_indicators = (matched_indicators, indicator_status) => {
         const target_diff = Diff.diffWords(format_target_string(indicator_pair[0]), format_target_string(indicator_pair[1]));
         const status = _.max([name_diff.length, methodology_diff.length, target_diff.length]) > 1 ?
                         target_diff.length > 1 ?
-                          text_maker("target_changed")
-                          : text_maker("indicator_desc_changed")
-                        : text_maker("no_diff");
+                          "target_changed"
+                          : "indicator_desc_changed"
+                        : "no_diff";
         return {
           status: status,
           indicator1: indicator_pair[0],
@@ -154,8 +154,8 @@ const process_indicators = (matched_indicators, indicator_status) => {
       }
       const indicator = indicator_pair[0];
       const status = indicator.doc === "dp18" ?
-        text_maker("indicator_removed") :
-          indicator.doc === "dp19" ? text_maker("indicator_added") : indicator.doc;
+        "indicator_removed":
+          indicator.doc === "dp19" ? "indicator_added": indicator.doc;
       return {
         status: status,
         indicator1: indicator,
@@ -165,9 +165,7 @@ const process_indicators = (matched_indicators, indicator_status) => {
         target_diff: [format_target_string(indicator)],
       };
     })
-    .filter(row => {
-      return indicator_status[row.status].active;
-    })
+    .filter(row => indicator_status[row.status].active)
     .value();
   return processed_indicators;
 };
@@ -262,7 +260,7 @@ const difference_report = (diff, key, years) => {
 
 
 const get_status_flag = (indicator_status, years) => {
-  if(indicator_status === text_maker("target_changed")){
+  if(indicator_status === "target_changed"){
     return (
       <Fragment>
         <div className="text-diff__indicator-status--change">
@@ -274,28 +272,28 @@ const get_status_flag = (indicator_status, years) => {
       </Fragment>
     );
   }
-  if(indicator_status === text_maker("indicator_desc_changed")){
+  if(indicator_status === "indicator_desc_changed"){
     return (
       <div className="text-diff__indicator-status--change">
         {text_maker("words_changed")}
       </div>
     );
   }
-  if (indicator_status === text_maker("no_diff")){
+  if (indicator_status === "no_diff"){
     return (
       <div className="text-diff__indicator-status--nochange">
         {text_maker("no_diff")}
       </div>
     );
   }
-  if(indicator_status === text_maker("indicator_removed")){
+  if(indicator_status === "indicator_removed"){
     return (
       <div className="text-diff__indicator-status--removed">
         {text_maker("indicator-removed", {second_year: result_docs[years[1]].year})}
       </div>
     );
   }
-  if(indicator_status === text_maker("indicator_added")){
+  if(indicator_status === "indicator_added"){
     return (
       <div className="text-diff__indicator-status--added">
         {text_maker("indicator-added", {second_year: result_docs[years[1]].year})}
@@ -343,17 +341,16 @@ export default class TextDiffApp extends React.Component {
       loading: true,
       subject: get_subject_from_props(props),
       indicator_status_changed: false,
-      indicator_status: _.reduce([ text_maker("indicator_desc_changed"), text_maker("target_changed"), text_maker("indicator_added"), 
-        text_maker("indicator_removed"), text_maker("no_diff") ],
-      (result, status) => {
-        result[status] = {
-          active: true,
-          label: status,
-          id: status,
-          color: colors(status),
-        };
-        return result;
-      }, {}),
+      indicator_status: _.reduce( ["indicator_desc_changed", "target_changed", "indicator_added", "indicator_removed", "no_diff"],
+        (result, status) => {
+          result[status] = {
+            active: true,
+            label: status,
+            id: status,
+            color: colors(status),
+          };
+          return result;
+        }, {} ),
     };
   }
 
@@ -554,7 +551,7 @@ export default class TextDiffApp extends React.Component {
         {loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
           <div>
             <h2>{text_maker("list_of_indicators")}</h2>
-            <div>{subject_intro(subject, matched_indicators.length, years)}</div>
+            <div>{subject_intro(subject, processed_indicators.length, years)}</div>
             {_.map(processed_indicators, processed_indicator => indicator_report(processed_indicator, years) )}
           </div>}
       </StandardRouteContainer>
