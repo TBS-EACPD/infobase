@@ -6,6 +6,101 @@ const rimraf = require("rimraf");
 
 const { route_load_tests_config } = require('./route-load-tests-config.js');
 
+const choose = (args, arg_name) => (args.indexOf(arg_name) > -1) && arg_name;
+const get_options_from_args = (args) => {
+  const arg_options = {
+    chrome: !!choose(args, 'CHROME'),
+    chromium: !!choose(args, 'CHROMIUM'),
+    no_sandbox: !!choose(args, 'NO_SANDBOX'),
+    headless: !!choose(args, 'HEADLESS'),
+  };
+
+  // If neither browser option passed, defaults to chrome
+  if ( !arg_options.chrome && !arg_options.chromium ){
+    return {
+      ...arg_options,
+      chrome: true,
+    };
+  } else {
+    return arg_options;
+  }
+};
+
+const test_configs_from_route_config = (route_config) => _.map(
+  route_config.test_on,
+  app => ({
+    name: route_config.name,
+    route: route_config.route,
+    app,
+  })
+);
+const test_config_to_test_file_object = ({app, name, route}) => ({
+  file_name: `${app}-${_.kebabCase(name)}-test.js`,
+  js_string: `
+import { Selector } from 'testcafe';
+
+fixture \`${app}\`
+  .page \`http://localhost:8080/build/InfoBase/index-${app}.html#${route}\`;
+
+test(
+  "${name} route loads without error (route: index-${app}.html#${route})", 
+  async test_controller => {
+    // Checks that the route loads anying (appends any children to the #app element), that the spinner eventually ends, and that the post-spinner page isn't the error page
+    await test_controller.expect( Selector('#app').childElementCount ).notEql( 0, {timeout: 20000} )
+      .expect( Selector('.spinner').exists ).notOk( {timeout: 20000} )
+      .expect( Selector('#error-boundary-icon').exists ).notOk()
+      .wait(1000) // a few errors, such as a missing glossary key, can occur slightly after the page's initial loading appears to have passed, wait and double check for better coverage
+      .expect( Selector('#error-boundary-icon').exists ).notOk();
+  }
+);`,
+});
+
+const handle_error = (e) => {
+  process.exitCode = 1;
+  console.log(e);
+};
+
+const run_tests = (test_dir, options) => {
+  let testcafe = null;
+  return createTestCafe()
+    .then(
+      tc => {
+        testcafe = tc;
+        const runner = testcafe.createRunner();
+
+        const test_files = fs
+          .readdirSync(test_dir)
+          .map( file_name => `${test_dir}/${file_name}`);
+
+        const browser_options = `${options.headless ? ':headless' : ''}${options.no_sandbox ? ' --no-sandbox' : ''}`;
+
+        return runner
+          .src(test_files)
+          .browsers( 
+            _.filter([
+              options.chrome && `chrome${browser_options}`, 
+              options.chromium && `chromium${browser_options}`,
+            ])
+          )
+          .concurrency(2)
+          .reporter('spec') // the default testcafe reporter, sending to stdout by default
+          .run();
+      }
+    )
+    .then( (failed_count) => {
+      if (failed_count){
+        // Just setting an error exit code here was flaky in CI, so this event forces the exit code to be an error when any test have failed
+        // Using an on exit event handler to allow node to, otherwise, exit gracefully ( explicitly calling exit here could stomp stdout logging, etc.)
+        process.on( 'exit', () => process.exit(1) );
+      }
+    })
+    .catch( handle_error )
+    .finally( () => {
+      !_.isNull(testcafe) && testcafe.close();
+      test_dir && rimraf.sync(test_dir);
+    });
+};
+
 
 const route_load_tests = (config) => {
   const args = process.argv;
@@ -62,103 +157,6 @@ const route_load_tests = (config) => {
     )
     .catch( handle_error );
 };
-
-
-const get_options_from_args = (args) => {
-  const arg_options = {
-    chrome: !!choose(args, 'CHROME'),
-    chromium: !!choose(args, 'CHROMIUM'),
-    no_sandbox: !!choose(args, 'NO_SANDBOX'),
-    headless: !!choose(args, 'HEADLESS'),
-  };
-
-  // If neither browser option passed, defaults to chrome
-  if ( !arg_options.chrome && !arg_options.chromium ){
-    return {
-      ...arg_options,
-      chrome: true,
-    };
-  } else {
-    return arg_options;
-  }
-};
-const choose = (args, arg_name) => (args.indexOf(arg_name) > -1) && arg_name;
-
-const test_configs_from_route_config = (route_config) => _.map(
-  route_config.test_on,
-  app => ({
-    name: route_config.name,
-    route: route_config.route,
-    app,
-  })
-);
-
-const test_config_to_test_file_object = ({app, name, route}) => ({
-  file_name: `${app}-${_.kebabCase(name)}-test.js`,
-  js_string: `
-import { Selector } from 'testcafe';
-
-fixture \`${app}\`
-  .page \`http://localhost:8080/build/InfoBase/index-${app}.html#${route}\`;
-
-test(
-  "${name} route loads without error (route: index-${app}.html#${route})", 
-  async test_controller => {
-    // Checks that the route loads anying (appends any children to the #app element), that the spinner eventually ends, and that the post-spinner page isn't the error page
-    await test_controller.expect( Selector('#app').childElementCount ).notEql( 0, {timeout: 20000} )
-      .expect( Selector('.spinner').exists ).notOk( {timeout: 20000} )
-      .expect( Selector('#error-boundary-icon').exists ).notOk()
-      .wait(1000) // a few errors, such as a missing glossary key, can occur slightly after the page's initial loading appears to have passed, wait and double check for better coverage
-      .expect( Selector('#error-boundary-icon').exists ).notOk();
-  }
-);`,
-});
-
-const run_tests = (test_dir, options) => {
-  let testcafe = null;
-  return createTestCafe()
-    .then(
-      tc => {
-        testcafe = tc;
-        const runner = testcafe.createRunner();
-
-        const test_files = fs
-          .readdirSync(test_dir)
-          .map( file_name => `${test_dir}/${file_name}`);
-
-        const browser_options = `${options.headless ? ':headless' : ''}${options.no_sandbox ? ' --no-sandbox' : ''}`;
-
-        return runner
-          .src(test_files)
-          .browsers( 
-            _.filter([
-              options.chrome && `chrome${browser_options}`, 
-              options.chromium && `chromium${browser_options}`,
-            ])
-          )
-          .concurrency(2)
-          .reporter('spec') // the default testcafe reporter, sending to stdout by default
-          .run();
-      }
-    )
-    .then( (failed_count) => {
-      if (failed_count){
-        // Just setting an error exit code here was flaky in CI, so this event forces the exit code to be an error when any test have failed
-        // Using an on exit event handler to allow node to, otherwise, exit gracefully ( explicitly calling exit here could stomp stdout logging, etc.)
-        process.on( 'exit', () => process.exit(1) );
-      }
-    })
-    .catch( handle_error )
-    .finally( () => {
-      !_.isNull(testcafe) && testcafe.close();
-      test_dir && rimraf.sync(test_dir);
-    });
-};
-
-const handle_error = (e) => {
-  process.exitCode = 1;
-  console.log(e);
-}
 
 
 try {
