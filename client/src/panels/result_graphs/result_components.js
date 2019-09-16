@@ -480,7 +480,7 @@ const result_status_components = (status, width) => {
     met: <IconCheck width={width} height={width} color_set_by_css={false} color={color_defs.successDarkColor}/>,
     not_met: <IconAttention width={width} height={width} color_set_by_css={false} color={color_defs.failDarkColor}/>,
     not_available: <IconNotApplicable width={width} height={width} color_set_by_css={false} color={color_defs.warnDarkColor}/>,
-    future: <IconClock width={width} height={width} color_set_by_css={false} color={color_defs.infoDarkColor}/>,
+    future: <IconClock width={width} height={width} color_set_by_css={false} color={color_defs.tertiaryColor}/>,
   };
   return icons[status];
 };
