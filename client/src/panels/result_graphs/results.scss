@@ -133,7 +133,7 @@ dl.indicator-item__dl dt+dd {
 }
 
 .results-icon-array-neutral {
-  background-color: $tertiaryColor;
+  background-color: $infoDarkColor;
 }
 
 //used in results-explorer 
@@ -144,20 +144,4 @@ dl.indicator-item__dl dt+dd {
 
 .status-icon-table--met-icon, .status-icon-table--not-met-icon, .status-icon-table--na-icon, .status-icon-table--future-icon {
   margin: 0px;
-}
-
-.status-icon-table--met-icon {
-  fill: $successDarkColor;
-}
-
-.status-icon-table--not-met-icon {
-  fill: $failDarkColor;
-}
-
-.status-icon-table--na-icon {
-  fill: $warnDarkColor;
-}
-
-.status-icon-table--future-icon {
-  fill: $tertiaryColor;
 }
