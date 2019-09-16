@@ -47,7 +47,7 @@ test(
     // Checks that the route loads anying (appends any children to the #app element), that the spinner eventually ends, and that the post-spinner page isn't the error page
     await test_controller.expect( Selector('#app').childElementCount ).notEql( 0, {timeout: 20000} )
       .expect( Selector('.spinner').exists ).notOk( {timeout: 20000} )
-      .expect( Selector('#error-boundary-icon').exists ).${ expect_to_fail ? "ok" : "notOk" }()
+      ${ !expect_to_fail && ".expect( Selector('#error-boundary-icon').exists ).notOk()" || "" }
       .wait(1000) // a few errors, such as a missing glossary key, can occur slightly after the page's initial loading appears to have passed, wait and double check for better coverage
       .expect( Selector('#error-boundary-icon').exists ).${ expect_to_fail ? "ok" : "notOk" }()
   }
