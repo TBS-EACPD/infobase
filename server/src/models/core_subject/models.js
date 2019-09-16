@@ -135,7 +135,7 @@ export default function define_core_subjects(model_singleton){
     crso_from_deptcode_loader: create_resource_by_foreignkey_attr_dataloader(Crso, 'dept_code'),
     crso_id_loader: create_resource_by_id_attr_dataloader(Crso, 'crso_id'), 
   };
-  _.each(loaders, (val,key) =>  model_singleton.define_loader(key,val) )
+  _.each(loaders, (val,key) =>  model_singleton.define_loader(key,val) );
 
 
   const search_orgs = create_searcher(Org);
@@ -143,7 +143,7 @@ export default function define_core_subjects(model_singleton){
   const search_crsos = create_searcher(Crso);
 
 
-  const search_subjects = async (query,lang) => {
+  const search_subjects = async (query, lang) => {
     //This one is just for example sake
     const [orgs, crsos, programs] = await Promise.all([
       search_orgs(query,lang),
@@ -154,9 +154,8 @@ export default function define_core_subjects(model_singleton){
     return _.chain([ ...orgs, ...crsos, ...programs ])
       .sortBy('score')
       .reverse()
-      .value()
-
-  }
+      .value();
+  };
 
   model_singleton.define_service('search_orgs',search_orgs);
   model_singleton.define_service('search_programs',search_programs);
@@ -165,12 +164,12 @@ export default function define_core_subjects(model_singleton){
 }
 
 
-const create_searcher = model => async (query,lang) => {
+const create_searcher = model => async (query, lang) => {
   const records =  await model.find(
     { 
       $text: {
         $search: query,
-        $language: lang==="en" ? "english" : "french",
+        $language: lang === "en" ? "english" : "french",
         $caseSensitive: false,
         $diacriticSensitive: false,
       },
@@ -185,6 +184,5 @@ const create_searcher = model => async (query,lang) => {
     }))
     .sortBy('score')
     .reverse()
-    .value()
-
-}
+    .value();
+};
