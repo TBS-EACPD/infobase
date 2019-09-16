@@ -115,7 +115,6 @@ export default function define_core_subjects(model_singleton){
   });
 
   //TODO: 
-  // UrlLookups,
   // InstForm,
   // Ministry,
   // Minister,  

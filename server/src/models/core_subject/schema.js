@@ -60,12 +60,12 @@ const schema = `
     faa_schedule_hr_status: String
     auditor: String
     incorp_yr: String
-    fed_ownership: String
+    federal_ownership: String
     end_yr: String
-    notes:String
+    notes: String
     dp_status: String
-    article_1: String
-    article_2: String
+    article1_fr: String
+    article2_fr: String
   }
   type Program implements SubjectI {
     id: String
@@ -218,18 +218,23 @@ export default function({models,loaders,services}){
       acronym: bilingual_field("acronym"),
       enabling_instrument: bilingual_field("enabling_instrument"),
       notes: bilingual_field("notes"),
-      fed_ownership: bilingual_field("notes"),
+      federal_ownership: bilingual_field("federal_ownership"),
       auditor: bilingual_field("auditor"),
 
-      dp_url: (org, _args, {lang}) => org.dp_url(lang),
-      qfr_url: (org, _args, {lang}) => org.qfr_url(lang),
-      eval_url: (org, _args, {lang}) => org.eval_url(lang),
-      website_url: (org, _args, {lang}) => org.website_url(lang),
+      pas_code: (org) => org.pas,
+
+      ministry: () => "TODO",
+      ministers: () => ["TODO"],
+      inst_form: () => "TODO",
+
+      dp_url: (org, _args, {lang}) => org[`dp_url_${lang}`],
+      qfr_url: (org, _args, {lang}) => org[`qfr_url_${lang}`],
+      eval_url: (org, _args, {lang}) => org[`dp_url_${lang}`],
+      website_url: (org, _args, {lang}) => org[`dept_website_url_${lang}`],
 
       programs: org => org.dept_code && prog_dept_code_loader.load(org.dept_code),
       crsos: ({dept_code}) => dept_code && crso_from_deptcode_loader.load(dept_code),
       level:_.constant('Org'),
-      
     },
     Program: {
       name: bilingual_field("name"),

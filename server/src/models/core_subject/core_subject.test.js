@@ -43,19 +43,39 @@ query IgocTestQuery ($lang: String!){
   root(lang: $lang){
     
     org(org_id:"133"){
+      id
+      org_id
+      dept_code
+      level
+      name
+      legal_title
+      applied_title
+      old_applied_title
+      acronym
+      mandate
       description
+    
+      dp_url
+      qfr_url
+      eval_url
+      website_url
+  
+      enabling_instrument
+      pas_code
+      faa_schedule_institutional
+      faa_schedule_hr_status
+      auditor
+      incorp_yr
+      federal_ownership
+      end_yr
+      notes
+      dp_status
+      article1_fr
+      article2_fr
+
       inst_form {
         id
       }
-      article_1
-      article_2
-      enabling_instrument
-      auditor
-      notes
-      faa_schedule_institutional
-      incorp_yr
-      
-      
       ministry {
         name
         id
@@ -66,6 +86,13 @@ query IgocTestQuery ($lang: String!){
       ministers {
         id
         name
+      }
+
+      programs {
+        id
+      }
+      crsos {
+        id
       }
     }
     org_with_notes: org(org_id: "326"){
@@ -80,8 +107,8 @@ query IgocTestQuery ($lang: String!){
     org_with_faa_hr: org(org_id:"552"){
       faa_schedule_hr_status
     }
-    org_with_fed_ownership: org(org_id: "326"){
-      fed_ownership
+    org_with_fed_ownership: org(org_id: "321"){
+      federal_ownership
     }
   }
 }
