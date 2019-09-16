@@ -22,7 +22,7 @@ select_dept:
 
 select_cr:
   en: |
-    Filter by Core Responsibility:
+    Filter by Core Responsibility (optional):
   fr: |
     Filtrer par responsabilité essentielle (facultatif) :
 
@@ -34,9 +34,9 @@ select_program:
 
 filter_by_status:
   en: |
-    Filter by Indicator status (optional):
+    Filter by indicator status (optional):
   fr: |
-    Filtrer par Indicateur statut (facultatif) :
+    Filtrer par indicateur statut (facultatif) :
 
 all_crs:
   en: All Core Responsibilities
@@ -71,8 +71,8 @@ words_changed:
   fr: Un ou plusieurs mots ont changés
 
 indicator_desc_changed:
-  en: Indicator description changed
-  fr: Need translation
+  en: Indicator or methodology
+  fr: Indicateur ou méthodologie
 
 indicator_added:
   en: Indicator added
@@ -123,7 +123,7 @@ list_of_indicators:
 indicator_counts_text:
   transform: [handlebars,markdown]
   en: |
-    In {{doc_year_1}} and {{doc_year_2}}, **{{infograph_res_link subject name}}** planned to measure **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicator" "indicators"}}.
+    In {{doc_year_1}} and {{doc_year_2}}, **{{infograph_res_link subject name}}** planned to measure **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicator" "indicators"}} that match the current filters.
   fr: |
     Pour les exercices {{doc_year_1}} et {{doc_year_2}}, le **{{infograph_res_link subject name}}** a prévu de mesurer **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicateur" "indicateurs"}}.
     
