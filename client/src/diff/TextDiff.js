@@ -139,9 +139,9 @@ const process_indicators = (matched_indicators, indicator_status) => {
         const target_diff = Diff.diffWords(format_target_string(indicator_pair[0]), format_target_string(indicator_pair[1]));
         const status = _.max([name_diff.length, methodology_diff.length, target_diff.length]) > 1 ?
                         target_diff.length > 1 ?
-                          "Target changed"
-                          : "Indicator description changed"
-                        : "No change";
+                          text_maker("target_changed")
+                          : text_maker("indicator_desc_changed")
+                        : text_maker("no_diff");
         return {
           status: status,
           indicator1: indicator_pair[0],
@@ -153,8 +153,8 @@ const process_indicators = (matched_indicators, indicator_status) => {
       }
       const indicator = indicator_pair[0];
       const status = indicator.doc === "dp18" ?
-        "Indicator removed" :
-          indicator.doc === "dp19" ? "Indicator added" : indicator.doc;
+        text_maker("indicator_removed") :
+          indicator.doc === "dp19" ? text_maker("indicator_added") : indicator.doc;
       return {
         status: status,
         indicator1: indicator,
@@ -228,7 +228,7 @@ const difference_report = (diff, key, years) =>
 
 
 const get_status_flag = (indicator_status, years) => {
-  if(indicator_status === "Target changed"){
+  if(indicator_status === text_maker("target_changed")){
     return (
       <Fragment>
         <div className="text-diff__indicator-status--change">
@@ -240,28 +240,28 @@ const get_status_flag = (indicator_status, years) => {
       </Fragment>
     );
   }
-  if(indicator_status === "Indicator description changed"){
+  if(indicator_status === text_maker("indicator_desc_changed")){
     return (
       <div className="text-diff__indicator-status--change">
         {text_maker("words_changed")}
       </div>
     );
   }
-  if (indicator_status === 'No change'){
+  if (indicator_status === text_maker("no_diff")){
     return (
       <div className="text-diff__indicator-status--nochange">
         {text_maker("no_diff")}
       </div>
     );
   }
-  if(indicator_status === 'Indicator removed'){
+  if(indicator_status === text_maker("indicator_removed")){
     return (
       <div className="text-diff__indicator-status--removed">
         {text_maker("indicator-removed", {second_year: result_docs[years[1]].year})}
       </div>
     );
   }
-  if(indicator_status === 'Indicator added'){
+  if(indicator_status === text_maker("indicator_added")){
     return (
       <div className="text-diff__indicator-status--added">
         {text_maker("indicator-added", {second_year: result_docs[years[1]].year})}
@@ -309,16 +309,17 @@ export default class TextDiffApp extends React.Component {
       loading: true,
       subject: get_subject_from_props(props),
       indicator_status_changed: false,
-      indicator_status: _.reduce(["Indicator description changed", "Target changed", "Indicator added", "Indicator removed", "No change"],
-        (result, status) => {
-          result[status] = {
-            active: true,
-            label: status,
-            id: status,
-            color: colors(status),
-          };
-          return result;
-        }, {}),
+      indicator_status: _.reduce([ text_maker("indicator_desc_changed"), text_maker("target_changed"), text_maker("indicator_added"), 
+        text_maker("indicator_removed"), text_maker("no_diff") ],
+      (result, status) => {
+        result[status] = {
+          active: true,
+          label: status,
+          id: status,
+          color: colors(status),
+        };
+        return result;
+      }, {}),
     };
   }
 
@@ -497,18 +498,23 @@ export default class TextDiffApp extends React.Component {
             }
           />
         </div>
-        <div className="legend-container">
-          <div className={classNames("medium_panel_text")}>
-            <GraphLegend
-              items={indicator_status}
-              onClick={ id => {
-                indicator_status[id].active = !indicator_status[id].active;
-                this.setState({
-                  indicator_status: indicator_status,
-                  indicator_status_changed: true,
-                });
-              }}
-            />
+        <div className={classNames("medium_panel_text")}>
+          <label htmlFor='filter_by_status'>
+            <TM k="filter_by_status" />
+          </label>
+          <div style={{padding: '0px 550px 20px 0px'}}>
+            <div className="legend-container">
+              <GraphLegend
+                items={indicator_status}
+                onClick={ id => {
+                  indicator_status[id].active = !indicator_status[id].active;
+                  this.setState({
+                    indicator_status: indicator_status,
+                    indicator_status_changed: true,
+                  });
+                }}
+              />
+            </div>
           </div>
         </div>
         {loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
