@@ -35,10 +35,10 @@ $controlsColorLighter: lighten($controlsColor, 20%);
     left: -57px;
   }
 }
-.filter-table__eye-open > svg > .svg-fill {
+.filter-table__eye__open > svg > .svg-fill {
   fill: $primaryColor;
 }
-.filter-table__eye-closed > svg > .svg-fill {
+.filter-table__eye__closed > svg > .svg-fill {
   fill: $secondaryColor;
 }
 
@@ -57,8 +57,8 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   font-size: 3em; 
 }
 
-.filter-table__components > svg.eye-open,
-.filter-table__components > svg.eye-close {
+.filter-table__components > svg,
+.filter-table__components > svg {
   width: 30px;
   height: 30px;
 }
