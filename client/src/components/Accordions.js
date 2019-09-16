@@ -106,7 +106,7 @@ const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) =
         <span>
           <IconChevron
             title="chevron"
-            rotated={isExpanded}
+            rotation={isExpanded && 180}
           />
         </span>
       </button>
