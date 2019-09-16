@@ -56,6 +56,7 @@ export class App extends React.Component {
           { !window.is_a11y_mode && <TooltipActivator /> }
           <Suspense fallback={<SpinnerWrapper config_name={"route"} />}>
             <Switch>
+              <Route path="/error-boundary-test" component={ () => {throw "This route throws errors!";} }/>
               <Route path="/metadata/:data_source?" component={MetaData}/>
               <Route path="/igoc/:grouping?" component={IgocExplorer} />
               <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
