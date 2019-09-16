@@ -24,10 +24,12 @@ export default function define_core_subjects(model_singleton){
     },
     ministry_id: str_type,
     inst_form_id: str_type,
+    faa_schedule_institutional: str_type,
+    faa_schedule_hr_status: str_type,
     status: str_type,
-    incorp_year: str_type,
+    incorp_yr: str_type,
     end_yr: str_type,
-    PAS: str_type,
+    pas: str_type,
     dp_status: str_type,
     ...bilingual("name", { ...str_type, required: true }),
     ...bilingual("legal_title", { ...str_type, required: true }),
@@ -36,15 +38,15 @@ export default function define_core_subjects(model_singleton){
     ...bilingual("acronym", str_type),
     ...bilingual("description", str_type),
     ...bilingual("notes", str_type),
-    ...bilingual("fed_ownership", str_type),
+    ...bilingual("federal_ownership", str_type),
     ...bilingual("enabling_instrument", str_type),
     ...bilingual("auditor", str_type),
     ...bilingual("dp_url",str_type),
     ...bilingual("qfr_url",str_type),
     ...bilingual("eval_url",str_type),
-    article_1: str_type,
-    article_2: str_type,
-
+    ...bilingual("dept_website_url",str_type),
+    article1_fr: str_type,
+    article2_fr: str_type,
   });
   OrgSchema.index({
     ...bilingual('name','text'),
@@ -114,7 +116,6 @@ export default function define_core_subjects(model_singleton){
 
   //TODO: 
   // UrlLookups,
-  // Crso,
   // InstForm,
   // Ministry,
   // Minister,  
@@ -169,7 +170,7 @@ const create_searcher = model => async (query,lang) => {
     { 
       $text: {
         $search: query,
-        $language: lang=="en" ? "english" : "french",
+        $language: lang==="en" ? "english" : "french",
         $caseSensitive: false,
         $diacriticSensitive: false,
       },
