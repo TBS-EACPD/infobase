@@ -32,6 +32,12 @@ select_program:
   fr: |
     Filtrer par programme (facultatif) :
 
+filter_by_status:
+  en: |
+    Filter by Indicator status (optional):
+  fr: |
+    Filtrer par Indicateur statut (facultatif) :
+
 all_crs:
   en: All Core Responsibilities
   fr: Toutes les responsabilités essentielles
@@ -62,7 +68,19 @@ single_change:
 
 words_changed:
   en: One or more words changed
-  fr: Un ou plusieurs mots ont changés 
+  fr: Un ou plusieurs mots ont changés
+
+indicator_desc_changed:
+  en: Indicator description changed
+  fr: Need translation
+
+indicator_added:
+  en: Indicator added
+  fr: Indicateur ajouté
+
+indicator_removed:
+  en: Indicator removed
+  fr: Indicateur enlevé
 
 target_changed:
   en: Target changed
