@@ -3,6 +3,7 @@ import diff_text from './TextDiff.yaml';
 import result_text from '../panels/result_graphs/result_components.yaml';
 
 import { Fragment } from 'react';
+import MediaQuery from 'react-responsive';
 import classNames from 'classnames';
 import * as Diff from 'diff';
 
@@ -181,50 +182,83 @@ const no_difference = (text, key) =>
     </div>
   </Fragment>;
 
-const difference_report = (diff, key, years) => 
-  <Fragment>
-    <div className="text-diff__indicator-report__subheader" >
-      <h4>{text_maker(key)}</h4>
+const difference_report = (diff, key, years) => {
+  const year1 = (
+    <div className="col-md-6" >
+      <h5>{result_docs[years[0]].year}</h5>
     </div>
-    <div className={classNames("row","text-diff__indicator-report__row")}>
-      <div className="col-md-6" >
-        <h5>{result_docs[years[0]].year}</h5>
-      </div>
-      <div className="col-md-6" >
-        <h5>{result_docs[years[1]].year}</h5>
-      </div>
+  );
+  const year2 = (
+    <div className="col-md-6" >
+      <h5>{result_docs[years[1]].year}</h5>
     </div>
-    <div className={classNames("row","text-diff__indicator-report__row")}>
-      <div className="col-md-6" >
-        {_.map(diff, (part,iix) =>
-          <Fragment key={iix}>
-            {window.is_a11y_mode && part.removed && <span className='text-diff__text-part--removed'> [{text_maker("a11y_begin_removed")}]</span>}
-            <span
-              className={part.removed ? 'text-diff__text-part--removed' : ''}
-              style={{display: part.added ? "none" : "inline"}}
-            >
-              {part.value}
-            </span>
-            {window.is_a11y_mode && part.removed && <span className='text-diff__text-part--removed'> [{text_maker("a11y_end_removed")}]</span>}
-          </Fragment>
-        )}
-      </div>
-      <div className="col-md-6" >
-        {_.map(diff, (part,iix) =>
-          <Fragment key={iix}>
-            {window.is_a11y_mode && part.added && <span className='text-diff__text-part--added'> [{text_maker("a11y_begin_added")}]</span>}
-            <span
-              className={ part.added ? 'text-diff__text-part--added' : ''}
-              style={{display: part.removed ? "none" : "inline"}}
-            >
-              {part.value}
-            </span>
-            {window.is_a11y_mode && part.added && <span className='text-diff__text-part--added'> [{text_maker("a11y_end_added")}]</span>}
-          </Fragment>
-        )}
-      </div>
+  );
+
+  const removed_part = (
+    <div className="col-md-6" >
+      {_.map(diff, (part,iix) =>
+        <Fragment key={iix}>
+          {window.is_a11y_mode && part.removed && <span className='text-diff__text-part--removed'> [{text_maker("a11y_begin_removed")}]</span>}
+          <span
+            className={part.removed ? 'text-diff__text-part--removed' : ''}
+            style={{display: part.added ? "none" : "inline"}}
+          >
+            {part.value}
+          </span>
+          {window.is_a11y_mode && part.removed && <span className='text-diff__text-part--removed'> [{text_maker("a11y_end_removed")}]</span>}
+        </Fragment>
+      )}
     </div>
-  </Fragment>;
+  );
+  const added_part = (
+    <div className="col-md-6" >
+      {_.map(diff, (part,iix) =>
+        <Fragment key={iix}>
+          {window.is_a11y_mode && part.added && <span className='text-diff__text-part--added'> [{text_maker("a11y_begin_added")}]</span>}
+          <span
+            className={ part.added ? 'text-diff__text-part--added' : ''}
+            style={{display: part.removed ? "none" : "inline"}}
+          >
+            {part.value}
+          </span>
+          {window.is_a11y_mode && part.added && <span className='text-diff__text-part--added'> [{text_maker("a11y_end_added")}]</span>}
+        </Fragment>
+      )}
+    </div>
+  );
+
+  return (
+    <Fragment>
+      <div className="text-diff__indicator-report__subheader" >
+        <h4> { text_maker(key) } </h4>
+      </div>
+      <MediaQuery minWidth={992}>
+        <div className={classNames("row", "text-diff__indicator-report__row")}>
+          { year1 }
+          { year2 }
+        </div>
+        <div className={classNames("row", "text-diff__indicator-report__row")}>
+          { removed_part }
+          { added_part }
+        </div>
+      </MediaQuery>
+      <MediaQuery maxWidth={991}>
+        <div className={classNames("row", "text-diff__indicator-report__row")}>
+          { year1 }
+        </div>
+        <div className={classNames("row", "text-diff__indicator-report__row")}>
+          { removed_part }
+        </div>
+        <div className={classNames("row", "text-diff__indicator-report__row")}>
+          { year2 }
+        </div>
+        <div className={classNames("row", "text-diff__indicator-report__row")}>
+          { added_part }
+        </div>
+      </MediaQuery>
+    </Fragment>
+  );
+};
 
 
 const get_status_flag = (indicator_status, years) => {
@@ -502,7 +536,7 @@ export default class TextDiffApp extends React.Component {
           <label htmlFor='filter_by_status'>
             <TM k="filter_by_status" />
           </label>
-          <div style={{padding: '0px 550px 20px 0px'}}>
+          <div style={{padding: '0px 0px 20px 0px'}}>
             <div className="legend-container">
               <GraphLegend
                 items={indicator_status}
