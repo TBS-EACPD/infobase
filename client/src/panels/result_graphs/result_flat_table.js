@@ -218,9 +218,7 @@ class ResultsTable extends React.Component {
             <TM k="result_flat_table_text" args={{subject, ...subject_result_counts}}/>
           </div>
           <HeightClippedGraph clipHeight={700}>
-            <div style={{
-              padding: '10px 10px',
-            }}>
+            <div style={{padding: '10px 10px'}}>
               <StatusIconTable 
                 active_list={status_active_list}
                 icon_counts={icon_counts} 
