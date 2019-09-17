@@ -609,6 +609,5 @@ export {
   hex_to_rgb,
   Canada,
   breakpoints,
-  breakpoint_queries,
   SpinnerWrapper,
 };
