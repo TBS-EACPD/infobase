@@ -69,8 +69,8 @@ export const get_program_panels = subject => ensure_loaded({
     declare_results_intro_panel(),
     declare_late_dps_warning_panel(),
     declare_drr_summary_panel(),
-    declare_explore_results_panel(),
     declare_results_table_panel(),
+    declare_explore_results_panel(),
   ],
   related: [
     declare_related_program_structure_panel(),

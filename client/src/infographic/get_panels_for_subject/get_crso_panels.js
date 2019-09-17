@@ -57,8 +57,8 @@ export const get_crso_panels = subject => ensure_loaded({
   results: !subject.is_internal_service && subject.has_data('results_data') && [
     declare_results_intro_panel(),
     declare_late_dps_warning_panel(),
-    declare_explore_results_panel(),
     declare_results_table_panel(),
+    declare_explore_results_panel(),
   ],
   related: [
     declare_crso_links_to_other_crso_panel(),

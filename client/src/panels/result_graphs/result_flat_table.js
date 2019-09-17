@@ -31,13 +31,10 @@ const get_svg_url = (status_key) => get_static_url(`svg/${status_key_to_svg_name
 const get_actual_parent = (indicator_node, full_results_hierarchy) => {
   const parent = _.find(full_results_hierarchy, {id: indicator_node.parent_id});
   if(parent.data.type === "cr" || parent.data.type === "program" || parent.data.type === "sub_program" || parent.data.type === "sub_sub_program") {
-    //console.log(`found parent: ${parent.data.name}`);
     return parent;
   } else if(parent.data.type === "dr" || parent.data.type === "result"){
-    //console.log(`parent not found yet, recursing`);
     return get_actual_parent(parent, full_results_hierarchy);
   } else {
-    //console.log("error, couldn't find parent");
     return;
   }
 };
@@ -174,7 +171,7 @@ class ResultsTable extends React.Component {
 
     this.state = {
       loading: true,
-      status_filtered: _.zipObject(ordered_status_keys, _.map(ordered_status_keys, ()=>false)),
+      status_active_list: [],
     };
   }
   componentDidMount(){
@@ -196,7 +193,7 @@ class ResultsTable extends React.Component {
       subject_result_counts,
       drr_doc,
     } = this.props;
-    const { loading, status_filtered } = this.state;
+    const { loading, status_active_list } = this.state;
     
     if (loading) {
       return (
@@ -210,15 +207,10 @@ class ResultsTable extends React.Component {
         _.map(ordered_status_keys,
           key => _.reduce(flat_indicators, (sum,ind) => sum + (ind.indicator.status_key === key) || 0, 0)
         ));
-      const filtered_indicators = _.filter(flat_indicators, ind => !status_filtered[ind.indicator.status_key]);
-      const toggle_status_status_key = (status_key) => {
-        const current_status_filtered = _.clone(status_filtered);
-        current_status_filtered[status_key] = !current_status_filtered[status_key];
-        this.setState({status_filtered: current_status_filtered});
-      };
-
-      const active_list = _.filter(ordered_status_keys, key => !status_filtered[key]);
-
+      const filtered_indicators = _.filter(flat_indicators, ind => _.isEmpty(status_active_list) || _.includes(status_active_list,ind.indicator.status_key));
+      const toggle_status_status_key = (status_key) => this.setState({status_active_list: _.toggle_list(status_active_list, status_key)});
+      const clear_status_filter = () => this.setState({status_active_list: []});
+      
       return (
         <div>
           <div className="medium_panel_text">
@@ -229,9 +221,10 @@ class ResultsTable extends React.Component {
             margin: '20px',
           }}>
             <StatusIconTable 
-              active_list={active_list}
+              active_list={status_active_list}
               icon_counts={icon_counts} 
               onIconClick={toggle_status_status_key}
+              onClearClick={clear_status_filter}
             />
           </div>
           <div className="results-flat-table">
