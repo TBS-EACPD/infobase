@@ -47,6 +47,7 @@ export class ShareButton extends React.Component {
         <button onClick={() => this.toggleModal(true)} className={button_class_name}>
           <IconShare
             title={button_description}
+            color={window.infobase_color_constants.textLightColor}
           />
         </button>
         <StatelessModal 
@@ -56,6 +57,7 @@ export class ShareButton extends React.Component {
             <Fragment>
               <IconShare
                 title={text_maker("share")}
+                color={window.infobase_color_constants.textLightColor}
               />
               {text_maker("share")}
             </Fragment>

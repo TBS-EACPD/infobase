@@ -136,6 +136,7 @@ class Panel_ extends React.Component {
                       <IconPermalink 
                         alt={text_maker("panel_permalink")}
                         className='panel-heading-utils'
+                        color={window.infobase_color_constants.textLightColor}
                         title={text_maker("panel_permalink")}/>
                     </a>
                   }
