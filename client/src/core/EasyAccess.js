@@ -28,7 +28,6 @@ const EasyAccess_ = () =>
       className="link-unstyled nav-item">
       <IconGlossary
         title={trivial_text_maker("glossary")}
-        color_set_by_css={true}
         aria_hide={true}
       />
       <span className="mrgn-lft-sm">
@@ -41,7 +40,6 @@ const EasyAccess_ = () =>
     >
       <IconDataset
         title={trivial_text_maker("metadata")}
-        color_set_by_css={true}
         aria_hide={true}
       />
       <span className="mrgn-lft-sm">
@@ -54,7 +52,6 @@ const EasyAccess_ = () =>
     >
       <IconAbout
         title={trivial_text_maker("about_title")}
-        color_set_by_css={true}
         aria_hide={true}
       />
       <span className="mrgn-lft-sm">
@@ -67,7 +64,6 @@ const EasyAccess_ = () =>
     >
       <IconFeedback
         title={trivial_text_maker("survey_link_text")}
-        color_set_by_css={true}
         aria_hide={true}
       />
       <span className="mrgn-lft-sm">

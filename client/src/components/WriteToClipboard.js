@@ -43,7 +43,6 @@ export class WriteToClipboard extends React.Component {
         >
           <IconComponent
             title={button_description}
-            color_set_by_css={false}
             color={window.infobase_color_constants.textLightColor}
           />
         </button>
@@ -54,7 +53,6 @@ export class WriteToClipboard extends React.Component {
             <Fragment>
               <IconComponent
                 title={button_description}
-                color_set_by_css={false}
                 color={window.infobase_color_constants.tertiaryColor}
               />
               {copy_status_message}
