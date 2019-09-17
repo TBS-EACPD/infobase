@@ -25,7 +25,12 @@ const _IconWrapper = (props) => {
   return (
     <svg className={icon_class} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox={`0 0 ${viewbox_width} ${viewbox_height || viewbox_width}`} width={width} height={height} aria-hidden={aria_hide}>
       <title>{title}</title>
-      {ChildSVG({color, rotation})}
+      <g 
+        transform={rotation && `rotate(${rotation} 250 250)`} 
+        style={color && {fill: color, stroke: color}}
+      >
+        <ChildSVG />
+      </g>
     </svg>
   );
 };
@@ -37,15 +42,12 @@ _IconWrapper.defaultProps = {
 
 
 const IconHome = (props) => {
-  const SVGHome = ({color}) => {
-    return (
-      <Fragment>
-        <path fill="none" d="M0 0h24v24H0V0z"/>
-        <path className={!color && "svg-fill"} style={color && {fill: color}}
-          d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
-      </Fragment>
-    );
-  };
+  const SVGHome = () => (
+    <Fragment>
+      <path className={"icon-fill"}
+        d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
+    </Fragment>
+  );
 
   return (
     <_IconWrapper {...props} viewbox_width={24} ChildSVG={SVGHome}/>
@@ -140,17 +142,12 @@ const IconDataset = (props) => {
 
 
 const IconShare = (props) => {
-  const SVGShare = ({color}) => {
-    return (
-      <Fragment>
-        <path d="M0 0h24v24H0z" fill="none"/>
-        <path className={!color && "svg-fill"} style={color && {fill: color}}
-          d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34
-          3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65
-          0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
-      </Fragment>
-    );
-  };
+  const SVGShare = () => (
+    <path className={"icon-fill"} 
+      d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34
+      3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65
+      0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+  );
 
   return (
     <_IconWrapper {...props} viewbox_width={24} ChildSVG={SVGShare}/>
@@ -191,15 +188,9 @@ const IconPermalink = (props) => {
 
 
 const IconDownload = (props) => {
-  const SVGDownload = ({color}) => {
-    return (
-      <Fragment>
-        <path className={!color && "svg-fill"} style={color && {fill: color}}
-          d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
-        <path d="M0 0h24v24H0z" fill="none" />
-      </Fragment>
-    );
-  };
+  const SVGDownload = () => (
+    <path className={"icon-fill"} d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+  );
 
   return (
     <_IconWrapper {...props} viewbox_width={24} ChildSVG={SVGDownload}/>
@@ -224,15 +215,12 @@ IconChevron.defaultProps = {
 };
 
 const IconZoomIn = (props) => {
-  const SVGZoomIn = ({color}) => {
-    return (
-      <Fragment>
-        <path className={!color && "svg-fill"} style={color && {fill: color}} d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-        <path fill="none" d="M0 0h24v24H0V0z"/>
-        <path className={!color && "svg-fill"} style={color && {fill: color}} d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/>
-      </Fragment>
-    );
-  };
+  const SVGZoomIn = () => (
+    <Fragment>
+      <path className={"icon-fill"} d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+      <path className={"icon-fill"} d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/>
+    </Fragment>
+  );
   
   return (
     <_IconWrapper {...props} viewbox_width={24} ChildSVG={SVGZoomIn}/>
@@ -246,14 +234,11 @@ IconZoomIn.defaultProps = {
 
 
 const IconZoomOut = (props) => {
-  const SVGZoomOut = ({color}) => {
-    return (
-      <Fragment>
-        <path fill="none" d="M0 0h24v24H0V0z"/>
-        <path className={!color && "svg-fill"} style={color && {fill: color}} d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7z"/>
-      </Fragment>
-    );
-  };
+  const SVGZoomOut = () => (
+    <Fragment>
+      <path className={"icon-fill"} d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7z"/>
+    </Fragment>
+  );
 
   return (
     <_IconWrapper {...props} viewbox_width={24} ChildSVG={SVGZoomOut}/>
