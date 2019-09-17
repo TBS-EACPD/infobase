@@ -606,7 +606,14 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
                   {result_simple_statuses[status_key].text}
                 </span>
               ) :
-              result_simple_statuses[status_key].text,
+              (
+                <a 
+                  href={glossary_href(status_key_to_glossary_key[status_key])} 
+                  title={text_maker("glossary_link_title")}
+                >
+                  {result_simple_statuses[status_key].text}
+                </a>
+              ),
             icon: large_status_icons[status_key],
           }) )
         }
