@@ -47,7 +47,8 @@ class _IconWrapper extends React.Component {
               stroke: ${color};
             }
             *:hover > svg > #${svg_instance_id}, 
-            *:focus > svg > #${svg_instance_id} {
+            *:focus > svg > #${svg_instance_id},
+            *:active > svg > #${svg_instance_id} {
               fill: ${alternate_color};
               stroke: ${alternate_color};
             }
