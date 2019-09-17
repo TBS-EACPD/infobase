@@ -14,12 +14,14 @@
   & > .partition-item {
     color: $textColor;
 
-    &.partition-item__overflowing > .partition-item--title {
+    &.partition-item__overflowing > .partition-item--title,
+    &.partition-item__overflowing > .partition-item--negative-title-backing__right_ie_fix > .partition-item--title {
       color: $textLightColor;
       font-weight: $mediumFontWeight;
     }
     
-    &:not(.partition-item__overflowing) > .partition-item--title {
+    &:not(.partition-item__overflowing) > .partition-item--title,
+    &:not(.partition-item__overflowing) > .partition-item--negative-title-backing__right_ie_fix > .partition-item--title {
       font-weight: $heavyFontWeight;
     }
 
