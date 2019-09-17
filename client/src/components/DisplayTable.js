@@ -78,7 +78,7 @@ export class DisplayTable extends React.Component {
                   className="center-text"
                   onClick={ () => this.header_click("label") }
                 >
-                  <TM k="org" />
+                  {label_col_header || ""}
                   <Sorters 
                     asc={!descending && sort_by === "label"} 
                     desc={descending && sort_by === "label"}

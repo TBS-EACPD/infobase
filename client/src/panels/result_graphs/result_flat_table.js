@@ -98,7 +98,7 @@ const subject_link = (subject) => {
       SubProgramEntity.lookup(subject.data.subject.parent_id).parent_id;
     return (
       <span>
-        <a href={`#orgs/subject.data.subject.level/${href_subject_id}/infograph/results`}>{subject.data.name}</a>
+        <a href={`#orgs/program/${href_subject_id}/infograph/results`}>{subject.data.name}</a>
         <span className='text-nowrap'>
           {" "}(
           {text_maker(subject.data.subject.level)}
@@ -118,7 +118,7 @@ const subject_link = (subject) => {
       </span>
     );
   } else {
-    return <span><a href={`#orgs/program/${subject.data.subject.id}/infograph/results`}>{subject.data.name}</a> ({text_maker(subject.data.subject.level === "program" ? subject.data.subject.level : "core_resp")})</span>;
+    return <span><a href={`#orgs/${subject.data.subject.level}/${subject.data.subject.id}/infograph/results`}>{subject.data.name}</a> ({text_maker(subject.data.subject.level === "program" ? subject.data.subject.level : "core_resp")})</span>;
   }
 };
 
@@ -127,26 +127,26 @@ const subject_link = (subject) => {
 
 
 const indicator_table_from_list = (indicator_list, is_drr17) => {
-  const column_keys = ["indicator","result_data_type","target","target_result","status"];
-  const sort_keys = ["indicator", "result_data_type", "status"];
+  const column_keys = ["indicator","target","target_result","date_to_achieve","status"];
+  const sort_keys = ["indicator","date_to_achieve", "status"];
   const table_data_headers = _.map(column_keys, k => text_maker(k));
   const table_data = _.map(indicator_list, ind => ({
     label: subject_link(ind.parent_subject),
     col_data: {
       indicator: ind.indicator.name,
-      result_data_type: text_maker(`result_datatype_${ind.indicator.target_type}`),
       target: formatted_target(ind.indicator, is_drr17),
       target_result: formatted_actual(ind.indicator, true),
+      date_to_achieve: ind.indicator.target_date,
       status: <img key={ind.indicator.status_key} src={get_svg_url(ind.indicator.status_key)} style={status_icon_style} />,
     },
     sort_keys: {
       label: ind.parent_subject.data.name,
       indicator: ind.indicator.name,
-      result_data_type: text_maker(`result_datatype_${ind.indicator.target_type}`),
+      date_to_achieve: ind.indicator.target_year ? ind.indicator.target_year + ind.indicator.target_month/12 : 9999999,
       status: _.indexOf(ordered_status_keys, ind.indicator.status_key),
     },
   }) );
-  return <DisplayTable data={table_data} label_col_header="" column_keys={column_keys} table_data_headers={table_data_headers} sort_keys={sort_keys} table_name="TODO"/>;
+  return <DisplayTable data={table_data} label_col_header={text_maker("activity")} column_keys={column_keys} table_data_headers={table_data_headers} sort_keys={sort_keys} table_name="TODO"/>;
 };
 
 

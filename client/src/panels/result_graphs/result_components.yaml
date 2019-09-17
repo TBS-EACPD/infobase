@@ -22,26 +22,4 @@ result_is_retired:
   en: DRR_TODO
   fr: DRR_TODO
 
-result_data_type:
-  en: Target type
-  fr: Target type en francais
-
-result_datatype_percent:
-  en: Percentage
-  fr: Pourcentage
-  
-result_datatype_num:
-  en: Number
-  fr: Quantité
-
-result_datatype_text:
-  en: Text
-  fr: Texte
-result_datatype_dollar:
-  en: Dollar
-  fr: Argent
-result_datatype_percent_range:
-  en: Percentage range
-  fr: Gamme de pourcentages
-
 

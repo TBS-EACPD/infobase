@@ -1,3 +1,7 @@
 show_all_orgs:
   en: Show all organizations
   fr: Montrer toutes les organisations
+
+activity:
+  en: Activity
+  fr: Activité
