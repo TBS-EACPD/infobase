@@ -2,23 +2,26 @@
 
 
 a.nav-item {
-    color: $textColor !important;
-    &:hover, &:focus {
-      color: $tertiaryColor !important;
-      text-decoration: none;
-    }
+  color: $textColor !important;
+  &:hover, &:focus {
+    color: $tertiaryColor !important;
+    text-decoration: none;
   }
+}
 
-a.nav-item > svg .svg-fill {
+a.nav-item > svg {
+  & .icon-stroke {
+    stroke: $textColor;
+  }
+  & .icon-fill {
     fill: $textColor;
+  }
 }
-a.nav-item:hover > svg .svg-fill, a.nav-item:focus > svg .svg-fill {
+a.nav-item:hover > svg, a.nav-item:focus > svg {
+  & .icon-stroke {
+    stroke: $tertiaryColor;
+  }
+  & .icon-fill {
     fill: $tertiaryColor;
-}
-
-a.nav-item > svg .svg-stroke {
-  stroke: $textColor;
-}
-a.nav-item:hover > svg .svg-stroke, a.nav-item:focus > svg .svg-fill  {
-  stroke: $tertiaryColor;
+  }
 }
