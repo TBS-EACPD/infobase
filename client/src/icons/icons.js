@@ -29,7 +29,7 @@ const _IconWrapper = (props) => {
 };
 _IconWrapper.defaultProps = {
   viewbox_width: 24,
-  icon_class: "icon--svg-inline",
+  icon_class: "icon-svg icon-svg--inline",
   color: window.infobase_color_constants.textColor,
   aria_hide: false,
 };
@@ -653,7 +653,6 @@ const IconAttentionTriangle = (props) => {
   return <_IconWrapper title={title} viewbox_width={500} width={width} height={height} icon_class={icon_class} color={color} ChildSVG={SVGAttentionTriangle}/>;
 };
 IconAttentionTriangle.defaultProps = {
-  icon_class: "icon--svg-inline",
   color: window.infobase_color_constants.highlightColor,
 };
 
@@ -683,10 +682,7 @@ const IconSearch = (props) => {
 };
 IconSearch.defaultProps = {
   title: trivial_text_maker("search"),
-  icon_class: "icon--svg-inline",
 };
-
-
 
 
 export {
