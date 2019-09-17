@@ -98,7 +98,7 @@ const subject_link = (subject) => {
       SubProgramEntity.lookup(subject.data.subject.parent_id).parent_id;
     return (
       <span>
-        <a href={`#orgs/program/${href_subject_id}/infograph/results`}>{subject.data.name}</a>
+        <a href={`#orgs/subject.data.subject.level/${href_subject_id}/infograph/results`}>{subject.data.name}</a>
         <span className='text-nowrap'>
           {" "}(
           {text_maker(subject.data.subject.level)}
