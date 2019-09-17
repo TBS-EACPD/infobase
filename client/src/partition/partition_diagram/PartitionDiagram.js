@@ -156,7 +156,7 @@ export class PartitionDiagram {
       .style("height", "")
       .each(function(d){
         d3.select(this)
-          .select("div.partition-item--title")
+          .select("div.partition-item__title")
           .classed("right", d.data.type === "compressed")
           .html(html_func);
       }); //reset the calculated heights 
@@ -169,15 +169,15 @@ export class PartitionDiagram {
         let sel = d3.select(this);
         
         if ( ( d.data.type === "compressed" && window.feature_detection.is_IE() ) || d.value < 0 ){
-          // partition-item--negative-title-backing__right_ie_fix: IE css for flex box and align-item are inconsistent, need an extra div
-          // between the .content div and the .partition-item--title div to (partially) fix vertical alignment
+          // partition-item__right-ie-fix: IE css for flex box and align-item are inconsistent, need an extra div
+          // between the .content div and the .partition-item__title div to (partially) fix vertical alignment
 
-          // partition-item--negative-title-backing: Used in blanking out the striped negative value background, improves readability
+          // partition-item__negative-title-backing: Used in blanking out the striped negative value background, improves readability
           sel = sel
             .append("div")
-            .classed("partition-item--negative-title-backing", d.value < 0)
+            .classed("partition-item__negative-title-backing", d.value < 0)
             .classed(
-              "partition-item--negative-title-backing__right_ie_fix", 
+              "partition-item__right-ie-fix", 
               d.data.type === "compressed" && window.feature_detection.is_IE()
             );
         }
@@ -185,7 +185,7 @@ export class PartitionDiagram {
         sel
           .append("div")
           .attr("tabindex", 0)
-          .classed("partition-item--title", true)
+          .classed("partition-item__title", true)
           .classed("right", d.data.type === "compressed")
           .style("background-color", this.background_color)
           .html(html_func);
@@ -222,7 +222,7 @@ export class PartitionDiagram {
         d.scaled_height = yscale(Math.abs(d.value) || 1);
         d.polygon_links = new Map();
       })
-      .classed("partition-item__negative-value", d => d.value < 0)
+      .classed("partition-item--negative_value", d => d.value < 0)
       .style("left", (d, i) => horizontal_placement_counters[d.depth]+"px") 
       .style("height", d => {
         d.rendered_height = Math.floor(d.scaled_height)+1;
@@ -230,23 +230,23 @@ export class PartitionDiagram {
       })
       .each( d => {
         const item_node = d3.select(d.DOM);
-        const title = item_node.select(".partition-item--title").node();
+        const title = item_node.select(".partition-item__title").node();
 
         const text_is_bigger_then_item = title.offsetHeight > d.scaled_height+2;
-        item_node.classed("partition-item__overflowing", text_is_bigger_then_item);
+        item_node.classed("partition-item--overflowing", text_is_bigger_then_item);
 
         item_node
-          .select(".partition-item--title")
+          .select(".partition-item__title")
           .style("background-color", text_is_bigger_then_item ? this.background_color : null);
 
         item_node
-          .select(".partition-item--negative-title-backing")
+          .select(".partition-item__negative-title-backing")
           .style("background-color", text_is_bigger_then_item ? null: this.background_color);
 
         // IE fixes, a bit hacky but that's how it is:
         const font_size = 12;
         item_node
-          .select(".partition-item--negative-title-backing__right_ie_fix")
+          .select(".partition-item__right-ie-fix")
           .style("margin-top", function(d){
             // use margin-top to fix vertical placement of +/-
             const content_height = this.parentElement.style.pixelHeight;
@@ -271,7 +271,7 @@ export class PartitionDiagram {
       })
       .each(function(d){
         const level = d.depth;
-        const title = d3.select(d.DOM).select(".partition-item--title").node();
+        const title = d3.select(d.DOM).select(".partition-item__title").node();
         const current_top = vertical_placement_counters[level];
         const parent_top = d.parent ? d.parent.top : 0;
         const diff = (title.offsetHeight-d.DOM.offsetHeight)/2;

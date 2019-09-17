@@ -14,25 +14,25 @@
   & > .partition-item {
     color: $textColor;
 
-    &.partition-item__overflowing > .partition-item--title,
-    &.partition-item__overflowing > .partition-item--negative-title-backing__right_ie_fix > .partition-item--title {
+    &.partition-item--overflowing > .partition-item__title,
+    &.partition-item--overflowing > .partition-item__right-ie-fix > .partition-item__title {
       color: $textLightColor;
       font-weight: $mediumFontWeight;
     }
     
-    &:not(.partition-item__overflowing) > .partition-item--title,
-    &:not(.partition-item__overflowing) > .partition-item--negative-title-backing__right_ie_fix > .partition-item--title {
+    &:not(.partition-item--overflowing) > .partition-item__title,
+    &:not(.partition-item--overflowing) > .partition-item__right-ie-fix > .partition-item__title {
       font-weight: $heavyFontWeight;
     }
 
-    &.partition-item__negative_value > .partition-item--negative-title-backing > .partition-item--title {
+    &.partition-item--negative_value > .partition-item__negative-title-backing > .partition-item__title {
       color: $failLightColor;
       font-weight: $mediumFontWeight;
     }
     
     &.root {
       background-color: rgba(0, 0, 0, 0.3);
-      & > .partition-item--title {
+      & > .partition-item__title {
         font-weight: $heavyFontWeight;
         color: $textLightColor;
         & > .root-sub-note {
