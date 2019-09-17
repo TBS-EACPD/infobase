@@ -5,3 +5,21 @@ show_all_orgs:
 activity:
   en: Activity
   fr: Activité
+
+result_flat_table_title:
+  transform: [handlebars]
+  en: |
+    {{pa_last_year}} Indicator Table
+  fr: |
+    Tableau des indicateurs de {{pa_last_year}}
+
+result_flat_table_text:
+  transform: [handlebars,markdown]
+  en: |
+    In {{pa_last_year}}, {{subj_name subject}} measured **{{fmt_big_int_real drr17_total}}** {{gl_tt "indicators" "IND_RESULT"}}.
+
+    You can filter the table of indicators by clicking on the result status icons below.
+  fr: |
+    En {{pa_last_year}}, {{subj_name subject}} a mesuré **{{fmt_big_int_real drr17_total}}** {{gl_tt "indicateurs" "IND_RESULT"}}.
+
+    Vous pouvez filtrer le tableau d'indicateurs par cliquez sur les icônes illustrent l'état des resultats ci-dessous.
