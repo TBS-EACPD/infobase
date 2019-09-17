@@ -165,7 +165,9 @@ const process_indicators = (matched_indicators, indicator_status) => {
         target_diff: [format_target_string(indicator)],
       };
     })
-    .filter(row => indicator_status[row.status].active)
+    // target_changed is subset of indicator_desc_changed so it must be included
+    .filter(row => indicator_status["indicator_desc_changed"].active && row.status === "target_changed" ?
+            true : indicator_status[row.status].active)
     .value();
   return processed_indicators;
 };
@@ -440,7 +442,6 @@ export default class TextDiffApp extends React.Component {
       loading,
       subject,
       processed_indicators,
-      matched_indicators,
       indicator_status,
     } = this.state;
 
