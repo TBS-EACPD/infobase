@@ -10,12 +10,8 @@ const { result_simple_statuses } = businessConstants;
 class _IconWrapper extends React.Component {
   constructor(){
     super();
-
-    this.setUseAlternateColor.bind(this);
-
-    this.state = { use_alternate_color: false };
+    this.state = { svg_instance_id: _.uniqueId("svg-instance-") };
   }
-  setUseAlternateColor(use_alternate_color){ this.setState({use_alternate_color}); }
   render(){
     const {
       // icon component API props
@@ -34,29 +30,30 @@ class _IconWrapper extends React.Component {
       viewbox_height, // if undefined will assume square
     } = this.props;
 
-    const { use_alternate_color } = this.state;
+    const { svg_instance_id } = this.state;
 
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" 
-        className={classNames(icon_class)}
+        className={classNames("icon-svg", icon_class)}
         viewBox={`0 0 ${viewbox_width} ${viewbox_height || viewbox_width}`} 
         width={width} height={height} aria-hidden={aria_hide}
-
-        onMouseEnter={() => alternate_color && this.setUseAlternateColor(true)}
-        onMouseLeave={() => alternate_color && this.setUseAlternateColor(false)}
-        onFocus={() => alternate_color && this.setUseAlternateColor(true)}
-        onBlur={() => alternate_color && this.setUseAlternateColor(false)}
       >
         <title>{title}</title>
-        <g 
-          transform={rotation && `rotate(${rotation} 250 250)`} 
-          style={
-            use_alternate_color ?
-              {fill: alternate_color, stroke: alternate_color} :
-              {fill: color, stroke: color}
-          }
-        >
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            #${svg_instance_id} {
+              fill: ${color};
+              stroke: ${color};
+            }
+            *:hover > svg > #${svg_instance_id}, 
+            *:focus > svg > #${svg_instance_id} {
+              fill: ${alternate_color};
+              stroke: ${alternate_color};
+            }
+          `,
+        }} />
+        <g id={svg_instance_id} transform={rotation && `rotate(${rotation} 250 250)`}>
           <ChildSVG />
         </g>
       </svg>
@@ -65,7 +62,7 @@ class _IconWrapper extends React.Component {
 }
 _IconWrapper.defaultProps = {
   viewbox_width: 24,
-  icon_class: "icon-svg icon-svg--inline",
+  icon_class: "icon-svg--inline",
   aria_hide: false,
 };
 
