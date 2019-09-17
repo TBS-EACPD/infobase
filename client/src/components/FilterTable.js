@@ -53,7 +53,7 @@ export class FilterTable extends React.Component {
                 }
               >
                 <div 
-                  className={ classNames("filter-table__eye", item.active ? "filter-table__eye__open" : "filter-table__eye__closed") }
+                  className={ classNames("filter-table__eye", item.active ? "filter-table__eye--open" : "filter-table__eye--closed") }
                   aria-hidden="true"
                   style={{
                     visibility: !nothing_is_filtered || show_eyes_override ? "visible" : "hidden",

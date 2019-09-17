@@ -436,7 +436,7 @@ export class NivoResponsiveLine extends React.Component {
               }
             }
           >
-            {this.state.y_scale_zoomed ? <IconZoomOut/> : <IconZoomIn/>}
+            {this.state.y_scale_zoomed ? <IconZoomOut color={window.infobase_color_constants.tertiaryColor}/> : <IconZoomIn color={window.infobase_color_constants.tertiaryColor}/>}
           </button>
         }
         <ResponsiveLine
