@@ -343,16 +343,22 @@ export default class TextDiffApp extends React.Component {
       loading: true,
       subject: get_subject_from_props(props),
       indicator_status_changed: false,
-      indicator_status: _.reduce( ["indicator_desc_changed", "target_changed", "indicator_added", "indicator_removed", "no_diff"],
-        (result, status) => {
-          result[status] = {
-            active: true,
-            label: status,
-            id: status,
-            color: colors(status),
-          };
-          return result;
-        }, {} ),
+      indicator_status: _.reduce([
+        { label: text_maker("indicator_desc_changed"), id: "indicator_desc_changed" }, 
+        { label: text_maker("target_changed"), id: "target_changed" },
+        { label: text_maker("indicator_added"), id: "indicator_added" }, 
+        { label: text_maker("indicator_removed"), id: "indicator_removed" },
+        { label: text_maker("no_diff"), id: "no_diff" },
+      ],
+      (result, status) => {
+        result[status.id] = {
+          active: true,
+          label: status.label,
+          id: status.id,
+          color: colors(status.id),
+        };
+        return result;
+      }, {} ),
     };
   }
 
