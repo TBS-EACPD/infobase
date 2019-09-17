@@ -29,53 +29,53 @@
   cursor: pointer;
   font-size: 12px;
 }
-.partition-item--title { 
+.partition-item__title { 
   margin-left: 20px;
   padding: 0px 5px;
   font-weight: $mediumFontWeight;
 }
 
-.partition-item__overflowing > .partition-item--title,
-.partition-item--negative-title-backing > .partition-item--title { 
+.partition-item--overflowing > .partition-item__title,
+.partition-item__negative-title-backing > .partition-item__title { 
   padding: 0px 15px;
   max-width: 85%;
   min-width: 10%;
   line-height: 1;
 }
-.partition-item__overflowing > .partition-item--title {
+.partition-item--overflowing > .partition-item__title {
   min-height: 100%;
 }
 
 
-.partition-item__negative-value {
+.partition-item--negative_value {
   background-image: repeating-linear-gradient(-45deg, transparent, transparent 1px, rgba(8, 40, 86,.5) 1px, rgba(8, 40, 86,.5) 5px);
 }
-.partition-item--negative-title-backing {
+.partition-item__negative-title-backing {
   align-items: center;
   display: flex;
   margin-left: 20px;
 
-  & > .partition-item--title {
+  & > .partition-item__title {
     margin-left: 0px;
   }
 
-  & > .partition-item--title {
+  & > .partition-item__title {
     color: $failLightColor;
   }
-  &:not(.partition-item--negative-title-backing__right_ie_fix) {
+  &:not(.partition-item__right-ie-fix) {
     display: inherit !important;
     align-items: inherit !important;
   }
 }
 
 
-.partition-item--title.right {
+.partition-item__title.right {
   position: absolute;
   right: 5px;
   padding: 0px 15px;
   text-align: right;
 }
-.partition-item--negative-title-backing__right_ie_fix {
+.partition-item__right-ie-fix {
   height: 100%;
 }
 
@@ -87,12 +87,12 @@
   color: $textLightColor;
   background-color: rgba(255, 255, 255, 0.1);
 
-  & > .partition-item--title {
+  & > .partition-item__title {
     width: inherit;
     margin-left: 0px;
   }
   
-  & > .partition-item--title > .amount {
+  & > .partition-item__title > .amount {
     font-size: 48px;
     margin: 0px;
     & > a {
