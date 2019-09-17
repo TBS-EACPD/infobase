@@ -36,13 +36,15 @@
 }
 
 .partition-item--overflowing > .partition-item__title,
+.partition-item--overflowing > .partition-item__right-ie-fix > .partition-item__title, 
 .partition-item__negative-title-backing > .partition-item__title { 
   padding: 0px 15px;
   max-width: 85%;
   min-width: 10%;
   line-height: 1;
 }
-.partition-item--overflowing > .partition-item__title {
+.partition-item--overflowing > .partition-item__title,
+.partition-item--overflowing > .partition-item__right-ie-fix > .partition-item__title {
   min-height: 100%;
 }
 
@@ -50,11 +52,13 @@
 .partition-item--negative_value {
   background-image: repeating-linear-gradient(-45deg, transparent, transparent 1px, rgba(8, 40, 86,.5) 1px, rgba(8, 40, 86,.5) 5px);
 }
-.partition-item__negative-title-backing {
-  align-items: center;
-  display: flex;
-  margin-left: 20px;
-
+.partition-item__negative-title-backing:not(.partition-item__right-ie-fix) {
+  &:not(.partition-item__right-ie-fix) {
+    align-items: center;
+    display: flex;
+    margin-left: 20px;
+  }
+  
   & > .partition-item__title {
     margin-left: 0px;
   }
@@ -62,10 +66,7 @@
   & > .partition-item__title {
     color: $failLightColor;
   }
-  &:not(.partition-item__right-ie-fix) {
-    display: inherit !important;
-    align-items: inherit !important;
-  }
+  
 }
 
 
