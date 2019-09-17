@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { text_maker } from './result_text_provider.js';
+import { TM, text_maker } from './result_text_provider.js';
 import { 
   util_components, 
   Panel,
@@ -193,6 +193,7 @@ class ResultsTable extends React.Component {
   render(){
     const { 
       subject,
+      subject_result_counts,
     } = this.props;
     const { loading, status_filtered } = this.state;
     
@@ -203,7 +204,6 @@ class ResultsTable extends React.Component {
         </div>
       );
     } else {
-
       const doc = 'drr17';
       const flat_indicators = get_indicators(subject, doc);
       const icon_counts = _.zipObject(ordered_status_keys,
@@ -221,11 +221,20 @@ class ResultsTable extends React.Component {
 
       return (
         <div>
-          <StatusIconTable 
-            active_list={active_list}
-            icon_counts={icon_counts} 
-            onIconClick={toggle_status_status_key}
-          />
+          <div className="medium_panel_text">
+            <TM k="result_flat_table_text" args={{subject, ...subject_result_counts}}/>
+          </div>
+          <div style={{
+            padding: '10px 10px',
+            marginTop: "20px",
+            marginBottom: "20px",
+          }}>
+            <StatusIconTable 
+              active_list={active_list}
+              icon_counts={icon_counts} 
+              onIconClick={toggle_status_status_key}
+            />
+          </div>
           <div className="results-flat-table">
             {indicator_table_from_list(filtered_indicators, !subject.is_first_wave && doc === 'drr17')}
           </div>
@@ -265,11 +274,12 @@ export const declare_results_table_panel = () => declare_panel({
         .filter( had_doc_data )
         .value();
 
+
       if( _.isEmpty(docs_with_data) ){
         return false;
       }
 
-      return { docs_with_data };
+      return { docs_with_data, subject_result_counts };
     },
 
     render({calculations, sources}){
@@ -277,6 +287,7 @@ export const declare_results_table_panel = () => declare_panel({
         subject, 
         graph_args: {
           docs_with_data,
+          subject_result_counts,
         },
       } = calculations;
 
@@ -290,12 +301,14 @@ export const declare_results_table_panel = () => declare_panel({
         )
         .value();
 
+
       return (
-        <Panel title={text_maker("result_drilldown_title", { ...year_range_with_data })} sources={sources}>
+        <Panel title={text_maker("result_flat_table_title")} sources={sources}>
           <ResultsTable
             {...{
               subject,
               docs_with_data,
+              subject_result_counts,
             }}
           />
         </Panel>
