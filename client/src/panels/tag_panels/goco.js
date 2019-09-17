@@ -2,7 +2,6 @@ import text from "./goco.yaml";
 import { Fragment } from 'react';
 import {
   create_text_maker_component,
-  declare_panel,
   Subject,
   formats,
   declarative_charts,
