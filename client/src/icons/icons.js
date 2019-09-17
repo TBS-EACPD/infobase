@@ -9,16 +9,18 @@ const { result_simple_statuses } = businessConstants;
 
 const _IconWrapper = (props) => {
   const {
-    color,
+    // user-settable props
+    color, // if undefined, will allow colour to be set via css
     rotation,
-    ChildSVG,
     title,
-    viewbox_width, // the original coordinate system the svg was created in
-    viewbox_height, // if undefined will assume square
-    width, // the width you want it to be
+    width,
     height,
     icon_class,
-    aria_hide,
+    aria_hide, // for icons that are displayed next to text that repeats what the icon represents
+
+    ChildSVG,
+    viewbox_width, // the original coordinate system the svg was created in
+    viewbox_height, // if undefined will assume square
   } = props;
   return (
     <svg className={icon_class} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox={`0 0 ${viewbox_width} ${viewbox_height || viewbox_width}`} width={width} height={height} aria-hidden={aria_hide}>
