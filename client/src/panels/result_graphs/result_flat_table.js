@@ -194,6 +194,7 @@ class ResultsTable extends React.Component {
     const { 
       subject,
       subject_result_counts,
+      drr_doc,
     } = this.props;
     const { loading, status_filtered } = this.state;
     
@@ -204,8 +205,7 @@ class ResultsTable extends React.Component {
         </div>
       );
     } else {
-      const doc = 'drr17';
-      const flat_indicators = get_indicators(subject, doc);
+      const flat_indicators = get_indicators(subject, drr_doc);
       const icon_counts = _.zipObject(ordered_status_keys,
         _.map(ordered_status_keys,
           key => _.reduce(flat_indicators, (sum,ind) => sum + (ind.indicator.status_key === key) || 0, 0)
@@ -226,8 +226,7 @@ class ResultsTable extends React.Component {
           </div>
           <div style={{
             padding: '10px 10px',
-            marginTop: "20px",
-            marginBottom: "20px",
+            margin: '20px',
           }}>
             <StatusIconTable 
               active_list={active_list}
@@ -236,7 +235,7 @@ class ResultsTable extends React.Component {
             />
           </div>
           <div className="results-flat-table">
-            {indicator_table_from_list(filtered_indicators, !subject.is_first_wave && doc === 'drr17')}
+            {indicator_table_from_list(filtered_indicators, !subject.is_first_wave && drr_doc === 'drr17')}
           </div>
         </div>
       );
@@ -274,12 +273,17 @@ export const declare_results_table_panel = () => declare_panel({
         .filter( had_doc_data )
         .value();
 
+      const drr_doc = _.chain(docs_with_data)
+        .filter(doc => /drr/.test(doc))
+        .sort()
+        .last()
+        .value(); // TODO: make sure this works properly for drr18
 
       if( _.isEmpty(docs_with_data) ){
         return false;
       }
 
-      return { docs_with_data, subject_result_counts };
+      return { docs_with_data, subject_result_counts, drr_doc };
     },
 
     render({calculations, sources}){
@@ -287,20 +291,10 @@ export const declare_results_table_panel = () => declare_panel({
         subject, 
         graph_args: {
           docs_with_data,
+          drr_doc,
           subject_result_counts,
         },
       } = calculations;
-
-      const year_range_with_data = _.chain(docs_with_data)
-        .map( doc => result_docs[doc].year)
-        .thru( 
-          years_with_data => ({
-            first_year: years_with_data[0],
-            last_year: years_with_data.length > 1 && _.last(years_with_data),
-          })
-        )
-        .value();
-
 
       return (
         <Panel title={text_maker("result_flat_table_title")} sources={sources}>
@@ -308,6 +302,7 @@ export const declare_results_table_panel = () => declare_panel({
             {...{
               subject,
               docs_with_data,
+              drr_doc,
               subject_result_counts,
             }}
           />
