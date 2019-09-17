@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { text_maker } from './result_text_provider.js';
 import { 
   util_components, 
@@ -11,6 +12,7 @@ import {
   status_key_to_svg_name,
   result_docs,
   ordered_status_keys,
+  result_statuses,
 } from './results_common.js';
 import { StatusIconTable, Drr17IndicatorResultText, IndicatorResultText } from './result_components.js';
 import { create_full_results_hierarchy } from '../../gen_expl/result_hierarchies.js';
@@ -98,9 +100,12 @@ const subject_link = (subject) => {
       SubProgramEntity.lookup(subject.data.subject.parent_id).parent_id;
     return (
       <span>
-        <a href={`#orgs/program/${href_subject_id}/infograph/results`}>{subject.data.name}</a>
+        <a href={`#orgs/program/${href_subject_id}/infograph/results`}>
+          {subject.data.name}
+        </a>
+        {" "}
         <span className='text-nowrap'>
-          {" "}(
+          (
           {text_maker(subject.data.subject.level)}
           <span className="tag-glossary-item">
             <img className="tag-glossary-icon"
@@ -118,7 +123,17 @@ const subject_link = (subject) => {
       </span>
     );
   } else {
-    return <span><a href={`#orgs/${subject.data.subject.level}/${subject.data.subject.id}/infograph/results`}>{subject.data.name}</a> ({text_maker(subject.data.subject.level === "program" ? subject.data.subject.level : "core_resp")})</span>;
+    return (
+      <span>
+        <a href={`#orgs/${subject.data.subject.level}/${subject.data.subject.id}/infograph/results`}>
+          {subject.data.name}
+        </a>
+        {" "}
+        <span className='text-nowrap'>
+          ({text_maker(subject.data.subject.level === "program" ? subject.data.subject.level : "core_resp")})
+        </span>
+      </span>
+    );
   }
 };
 
@@ -137,7 +152,10 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
       target: formatted_target(ind.indicator, is_drr17),
       target_result: formatted_actual(ind.indicator, true),
       date_to_achieve: ind.indicator.target_date,
-      status: <img key={ind.indicator.status_key} src={get_svg_url(ind.indicator.status_key)} style={status_icon_style} />,
+      status: <Fragment>
+        <span aria-hidden="true" style={{position: "absolute", left: "-999em"}}>{result_statuses[ind.indicator.status_key].text}</span>
+        <img key={ind.indicator.status_key} src={get_svg_url(ind.indicator.status_key)} style={status_icon_style} />
+      </Fragment>,
     },
     sort_keys: {
       label: ind.parent_subject.data.name,

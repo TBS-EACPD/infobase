@@ -62,7 +62,7 @@ export class DisplayTable extends React.Component {
         >
         </div>
         <div style={{overflowX: "auto"}}>
-          <table className="table display-table table-dark-blue table-dark-bordered no-total-row">
+          <table className="table display-table no-total-row">
             <caption className="sr-only">
               <div>
                 { 
