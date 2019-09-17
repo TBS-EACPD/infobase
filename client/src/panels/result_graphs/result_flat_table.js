@@ -3,6 +3,7 @@ import { TM, text_maker } from './result_text_provider.js';
 import { 
   util_components, 
   Panel,
+  HeightClippedGraph,
 } from '../shared.js';
 import { get_static_url } from '../../request_utils.js';
 import { DisplayTable } from '../../components/DisplayTable.js';
@@ -216,20 +217,21 @@ class ResultsTable extends React.Component {
           <div className="medium_panel_text">
             <TM k="result_flat_table_text" args={{subject, ...subject_result_counts}}/>
           </div>
-          <div style={{
-            padding: '10px 10px',
-            margin: '20px',
-          }}>
-            <StatusIconTable 
-              active_list={status_active_list}
-              icon_counts={icon_counts} 
-              onIconClick={toggle_status_status_key}
-              onClearClick={clear_status_filter}
-            />
-          </div>
-          <div className="results-flat-table">
-            {indicator_table_from_list(filtered_indicators, !subject.is_first_wave && drr_doc === 'drr17')}
-          </div>
+          <HeightClippedGraph clipHeight={700}>
+            <div style={{
+              padding: '10px 10px',
+            }}>
+              <StatusIconTable 
+                active_list={status_active_list}
+                icon_counts={icon_counts} 
+                onIconClick={toggle_status_status_key}
+                onClearClick={clear_status_filter}
+              />
+            </div>
+            <div className="results-flat-table">
+              {indicator_table_from_list(filtered_indicators, !subject.is_first_wave && drr_doc === 'drr17')}
+            </div>
+          </HeightClippedGraph>
         </div>
       );
     }
