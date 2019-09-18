@@ -59,6 +59,10 @@ $partitionPopupColour: $secondaryColor;
     position: relative;
     padding: 15px;
     padding-top: 9px;
+    
+    & > #partition-control-info-button {
+      cursor: pointer;
+    }
 
     & > .partition-controls--control {
       display: flex;
