@@ -61,12 +61,12 @@ export class FilterTable extends React.Component {
                 >
                   { item.active ? 
                     <IconEyeOpen
-                      color={window.infobase_color_constants.primaryColor}
+                      color={window.infobase_color_constants.secondaryColor}
                       alternate_color={false}
                       width={"40px"}
                     /> : 
                     <IconEyeClosed
-                      color={window.infobase_color_constants.secondaryColor}
+                      color={window.infobase_color_constants.tertiaryColor}
                       alternate_color={false}
                       width={"40px"}
                     /> 
