@@ -40,6 +40,10 @@ export class ShareButton extends React.Component {
       button_class_name,
       title,
       button_description,
+
+      icon_color,
+      icon_alternate_color,
+      icon_size,
     } = this.props;
 
     return(
@@ -47,7 +51,10 @@ export class ShareButton extends React.Component {
         <button onClick={() => this.toggleModal(true)} className={button_class_name}>
           <IconShare
             title={button_description}
-            color={window.infobase_color_constants.textLightColor}
+            color={icon_color}
+            alternate_color={icon_alternate_color}
+            width={icon_size}
+            height={icon_size}
           />
         </button>
         <StatelessModal 
@@ -57,7 +64,8 @@ export class ShareButton extends React.Component {
             <Fragment>
               <IconShare
                 title={text_maker("share")}
-                color={window.infobase_color_constants.textLightColor}
+                color={window.infobase_color_constants.tertiaryColor}
+                alternate_color={false}
               />
               {text_maker("share")}
             </Fragment>
@@ -89,4 +97,8 @@ export class ShareButton extends React.Component {
   }
 }
 
-ShareButton.defaultProps = { button_description: text_maker("share") };
+ShareButton.defaultProps = {
+  button_description: text_maker("share"),
+  icon_color: window.infobase_color_constants.textLightColor,
+  icon_alternate_color: false,
+};

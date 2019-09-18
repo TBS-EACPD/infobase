@@ -37,37 +37,3 @@
   color: $backgroundColor;
   background-color: transparent;
 }
-.pull-down-accordion-expander:focus,
-.pull-down-accordion-expander:active {
-  border: 1.5px solid $backgroundColor;;
-}
-
-
-.pull-down-accordion-expander {
-  color: $textColor !important;
-  &:hover, &:focus {
-    color: $tertiaryColor !important;
-    text-decoration: none;
-  }
-}
-
-.pull-down-accordion-expander > span > svg.icon--svg {
-  height: 1.5em;
-  vertical-align: -.5em;
-}
-
-.pull-down-accordion-expander > span > svg.icon--svg .svg-fill {
-  fill: $textLightColor;
-}
-.pull-down-accordion-expander:hover > span > svg.icon--svg .svg-fill,
-.pull-down-accordion-expander:focus > span > svg.icon--svg .svg-fill {
-  fill: $primaryColor;
-}
-
-.pull-down-accordion-expander > span > svg.icon--svg .svg-stroke {
-  stroke: $textLightColor;
-}
-.pull-down-accordion-expander:hover > span > svg.icon--svg .svg-stroke,
-.pull-down-accordion-expander:focus > span > svg.icon--svg .svg-stroke {
-  stroke: $primaryColor;
-}

@@ -22,6 +22,7 @@ import { KeyConceptList } from './KeyConceptList.js';
 import { BackToTop } from './BackToTop.js';
 import { UnlabeledTombstone, LabeledTombstone } from './Tombstones.js';
 import { ShareButton } from './ShareButton.js';
+import { PermalinkButton } from './PermalinkButton.js';
 import { WriteToClipboard } from './WriteToClipboard.js';
 import { PDFGenerator } from './PDFGenerator.js';
 
@@ -74,6 +75,7 @@ export {
   LabeledTombstone,
   BackToTop,
   ShareButton,
+  PermalinkButton,
   WriteToClipboard,
   PDFGenerator,
 

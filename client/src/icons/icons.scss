@@ -3,11 +3,16 @@ svg.icon-svg {
   display: inline-block;
   overflow: visible;
   shape-rendering: geometricPrecision;
+
+  &.icon-svg--inline {
+    font-size: inherit;
+    overflow: visible;
+  }
 }
 
-svg.icon-svg--inline {
-  font-size: inherit;
-  height: 1.2em;
-  overflow: visible;
-  vertical-align: -.2em;
+.icon-stroke:not(.icon-fill){
+  fill: none;
+}
+.icon-fill:not(.icon-stroke){
+  stroke: none;
 }

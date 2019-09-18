@@ -44,6 +44,7 @@ export class WriteToClipboard extends React.Component {
           <IconComponent
             title={button_description}
             color={window.infobase_color_constants.textLightColor}
+            alternate_color={false}
           />
         </button>
         <StatelessModal 
@@ -54,6 +55,7 @@ export class WriteToClipboard extends React.Component {
               <IconComponent
                 title={button_description}
                 color={window.infobase_color_constants.tertiaryColor}
+                alternate_color={false}
               />
               {copy_status_message}
             </Fragment>

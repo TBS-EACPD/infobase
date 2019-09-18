@@ -3,10 +3,8 @@ import { ResponsiveBar } from './nivo-bar.js';
 import { ResponsivePie } from '@nivo/pie';
 import { formats, dollar_formats } from "../core/format.js";
 import { Fragment } from 'react';
-import {
-  IconZoomIn,
-  IconZoomOut,
-} from '../icons/icons.js';
+import { IconZoomIn, IconZoomOut } from '../icons/icons.js';
+import { trivial_text_maker } from '../models/text.js';
 import './NivoCharts.scss';
 
 
@@ -259,7 +257,6 @@ NivoResponsiveBar.defaultProps = {
 };
 
 
-
 export class NivoResponsiveHBar extends React.Component{
   render(){
     const{
@@ -437,11 +434,13 @@ export class NivoResponsiveLine extends React.Component {
             }
           >
             { this.state.y_scale_zoomed ? 
-                <IconZoomOut 
+                <IconZoomOut
+                  title={trivial_text_maker("zoom_out")}
                   color={window.infobase_color_constants.tertiaryColor}
                   alternate_color={window.infobase_color_constants.primaryColor}
                 /> : 
                 <IconZoomIn 
+                  title={trivial_text_maker("zoom_in")}
                   color={window.infobase_color_constants.tertiaryColor}
                   alternate_color={window.infobase_color_constants.primaryColor}
                 />

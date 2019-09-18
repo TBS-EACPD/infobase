@@ -43,6 +43,7 @@ export class PDFGenerator extends React.Component{
       title,
       file_name,
     } = this.props;
+
     const element_to_print = (!dom_element && target_id) ? 
       document.getElementById(target_id).getElementsByClassName("panel-body")[0] :
       dom_element;
@@ -220,7 +221,13 @@ export class PDFGenerator extends React.Component{
 
   render(){
     const { generating_pdf } = this.state;
-    const { button_class_name } = this.props;
+    const { 
+      button_class_name,
+      icon_color,
+      icon_alternate_color,
+      icon_size,
+    } = this.props;
+
     return !window.feature_detection.is_IE() && (
       <Fragment>
         { !generating_pdf &&
@@ -230,7 +237,10 @@ export class PDFGenerator extends React.Component{
           >
             <IconDownload
               title={text_maker("download_pdf")}
-              color={window.infobase_color_constants.textLightColor}
+              color={icon_color}
+              alternate_color={icon_alternate_color}
+              width={icon_size}
+              height={icon_size}
             />
           </button>
         } 
@@ -244,6 +254,8 @@ export class PDFGenerator extends React.Component{
       </Fragment>
     );
   }
-
-
 }
+PDFGenerator.defaultProps = {
+  icon_color: window.infobase_color_constants.textLightColor,
+  icon_alternate_color: false,
+};
