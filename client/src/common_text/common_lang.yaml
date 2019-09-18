@@ -50,12 +50,18 @@ will_be_spending_spend:
 planned_spending_of:
   en: Planned spending of
   fr: Dépenses prévues de
+expand:
+  en: Expand
+  fr: Afficher
+collapse:
+  en: Collapse
+  fr: Réduire
 expand_all:
   en: Expand all
   fr: Afficher tout
 collapse_all:
   en: Collapse all
-  fr: Réduire tout 
+  fr: Réduire tout
 goco:
   en: Government of Canada Activity
   fr: Secteur d'activités du gouvernement du Canada

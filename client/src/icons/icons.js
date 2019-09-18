@@ -72,7 +72,7 @@ class _IconWrapper extends React.Component {
         <g 
           id={icon_instance_id}
           style={!alternate_color ? {fill: color, stroke: color} : {}}
-          transform={rotation && `rotate(${rotation} 250 250)`}
+          transform={rotation ? `rotate(${rotation} 250 250)` : ""}
         >
           <ChildSVG />
         </g>
