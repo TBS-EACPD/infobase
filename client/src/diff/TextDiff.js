@@ -320,6 +320,26 @@ const indicator_report = (processed_indicator, years) => (
         { processed_indicator.target_diff.length > 1 ?
           difference_report(processed_indicator.target_diff, "indicator_target", years) :
           no_difference(get_target_from_indicator(processed_indicator.indicator1), "indicator_target") }
+        { !_.isEmpty(processed_indicator.indicator1.target_explanation) &&
+          <Fragment>
+            <div className="text-diff__indicator-report__subheader" >
+              <h4>OMGWTF</h4>
+            </div>
+            <div className="text-diff__indicator-report__row">
+              <div>{processed_indicator.indicator1.target_explanation}</div>
+            </div>
+          </Fragment>
+        }
+        { !_.isEmpty(processed_indicator.indicator2.target_explanation) &&
+          <Fragment>
+            <div className="text-diff__indicator-report__subheader" >
+              <h4>HAHALOL</h4>
+            </div>
+            <div className="text-diff__indicator-report__row">
+              <div>{processed_indicator.indicator2.target_explanation}</div>
+            </div>
+          </Fragment>
+        }
         <div className="text-diff__id-tag">{`ID: ${processed_indicator.indicator1.stable_id}`}</div>
       </Fragment>
     </Panel>
