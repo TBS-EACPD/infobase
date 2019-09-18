@@ -23,3 +23,7 @@ result_flat_table_text:
     En **{{pa_last_year}}**, {{subj_name subject}} a mesuré **{{fmt_big_int_real drr17_total}}** {{gl_tt "indicateurs" "IND_RESULT"}}.
 
     Vous pouvez filtrer le tableau d'indicateurs par cliquez sur les états des resultats ci-dessous.
+
+see:
+  en: "see"
+  fr: "voir"

@@ -3,6 +3,7 @@ import { businessConstants } from './businessConstants.js';
 import { Subject } from '../models/subject.js';
 import { trivial_text_maker, run_template } from './text.js';
 
+
 const { Program, CRSO } = Subject;
 const { months } = businessConstants;
 
@@ -471,12 +472,6 @@ const status_key_to_glossary_key = {
   not_available: "RESULTS_NOT_AVAILABLE",
   future: "RESULTS_ONGOING",
 };
-const status_key_to_svg_name = {
-  met: "met",
-  not_met: "attention-req",
-  not_available: "not-applicable",
-  future: "on-track",
-};
 
 const result_docs = {
   drr17: {
@@ -518,7 +513,6 @@ export {
   ResultCounts,
   GranularResultCounts,
   status_key_to_glossary_key,
-  status_key_to_svg_name,
   ordered_status_keys,
   result_docs,
   get_result_doc_keys,

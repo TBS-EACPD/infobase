@@ -10,23 +10,26 @@ import { DisplayTable } from '../../components/DisplayTable.js';
 import { 
   ResultCounts,
   GranularResultCounts,
-  status_key_to_svg_name,
   result_docs,
   ordered_status_keys,
   result_statuses,
 } from './results_common.js';
-import { StatusIconTable, Drr17IndicatorResultText, IndicatorResultText } from './result_components.js';
+import {
+  StatusIconTable,
+  Drr17IndicatorResultText,
+  IndicatorResultText,
+  large_status_icons,
+} from './result_components.js';
 import { create_full_results_hierarchy } from '../../gen_expl/result_hierarchies.js';
 const { SpinnerWrapper } = util_components;
 import { ensure_loaded } from '../../core/lazy_loader.js';
 import { SubProgramEntity } from '../../models/results.js';
+import { Subject } from '../../models/subject.js';
+const { Program } = Subject;
 import {
   get_source_links, 
   declare_panel,
 } from '../shared.js';
-
-
-const get_svg_url = (status_key) => get_static_url(`svg/${status_key_to_svg_name[status_key]}.svg`);
 
 
 const get_actual_parent = (indicator_node, full_results_hierarchy) => {
@@ -89,35 +92,33 @@ const formatted_actual = (indicator, is_drr17) => {
 
 
 
-const status_icon_style = {width: "41px", height: "41px"};
 
 const subject_link = (subject) => {
   if (subject.data.subject.level === "sub_program" || subject.data.subject.level === "sub_sub_program"){
-    const href_subject_id = subject.data.subject.level === "sub_program" ?
+    const program_id = subject.data.subject.level === "sub_program" ?
       subject.data.subject.parent_id :
       SubProgramEntity.lookup(subject.data.subject.parent_id).parent_id;
+    const program_name = Program.lookup(program_id).name;
     return (
       <span>
-        <a href={`#orgs/program/${href_subject_id}/infograph/results`}>
-          {subject.data.name}
-        </a>
-        {" "}
-        <span className='text-nowrap'>
-          (
+        {subject.data.name}
+        {" ("}
+        <span
+          className="link-unstyled"
+          tabIndex={0}
+          aria-hidden="true"
+          data-toggle="tooltip"
+          data-ibtt-glossary-key="SSP"
+          data-ibtt-html="true"
+          data-ibtt-container="body"
+        >
           {text_maker(subject.data.subject.level)}
-          <span className="tag-glossary-item">
-            <img className="tag-glossary-icon"
-              width={18}
-              aria-hidden="true"
-              src={get_static_url('svg/not-available-white.svg')} 
-              tabIndex="0"
-              data-toggle="tooltip"
-              data-ibtt-glossary-key={"SSP"}
-              data-ibtt-html="true"
-            />
-          </span>
-          )
         </span>
+        {`, ${text_maker("see")} `}
+        <a href={`#orgs/program/${program_id}/infograph/results`}>
+          {program_name}
+        </a>
+        )
       </span>
     );
   } else {
@@ -152,7 +153,7 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
       date_to_achieve: ind.indicator.target_date,
       status: <Fragment>
         <span aria-hidden="true" style={{position: "absolute", left: "-999em"}}>{result_statuses[ind.indicator.status_key].text}</span>
-        <img key={ind.indicator.status_key} src={get_svg_url(ind.indicator.status_key)} style={status_icon_style} />
+        {large_status_icons[ind.indicator.status_key]}
       </Fragment>,
     },
     sort_keys: {
