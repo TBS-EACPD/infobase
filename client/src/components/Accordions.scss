@@ -18,6 +18,14 @@
   padding: 10px;
   cursor: pointer;
   border-radius: 5px 5px 0px 0px;
+
+  & > button {
+    @include unstyled-button;
+
+    &:hover, &:focus {
+      color: $tertiaryColor;
+    }
+  }
 }
 
 .pull-down-accordion-body {
@@ -33,7 +41,6 @@
 }
 
 .pull-down-accordion-expander {
-  @include unstyled-button;
   color: $backgroundColor;
   background-color: transparent;
 }

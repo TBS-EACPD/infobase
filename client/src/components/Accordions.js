@@ -2,6 +2,13 @@ import './Accordions.scss';
 import { TransitionGroup, Transition } from 'react-transition-group';
 import { IconChevron } from '../icons/icons.js';
 
+import { trivial_text_maker } from '../models/text.js';
+
+const get_accordion_label = (isExpanded) => ({
+  true: trivial_text_maker("collapse"),
+  false: trivial_text_maker("expand"),
+})[!!isExpanded];
+
 function FirstChild(props) {
   const childrenArray = React.Children.toArray(props.children);
   return childrenArray[0] || null;
@@ -84,7 +91,9 @@ class AccordionEnterExit extends React.Component {
 const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) => (
   <div className="pull-down-accordion">
     <div className="pull-down-accordion-header" onClick={onToggle}>
-      { title }
+      <button aria-label={get_accordion_label(isExpanded)}>
+        { title }
+      </button>
     </div> 
     <TransitionGroup component={FirstChild}>
       { isExpanded &&
@@ -99,16 +108,13 @@ const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) =
       }
     </TransitionGroup>
     <div className="pull-down-accordion-footer" onClick={onToggle}>
-      <button 
-        className="pull-down-accordion-expander"
-        aria-label={isExpanded ? "collapse above" : "expand above"}
-      >
+      <div className="pull-down-accordion-expander">
         <IconChevron
-          title="chevron"
+          title={get_accordion_label(isExpanded)}
           color={window.infobase_color_constants.textLightColor}
           rotation={isExpanded && 180}
         />
-      </button>
+      </div>
     </div> 
   </div>
 );
