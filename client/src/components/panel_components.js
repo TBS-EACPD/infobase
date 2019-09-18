@@ -86,10 +86,10 @@ class Panel_ extends React.Component {
 
     const file_name_context = subject ? subject.level === 'dept' ? subject.acronym: subject.id : "";
     const file_name = `${file_name_context}_${title}.pdf`;
-    const panel_link = context && panel_href_template(subject, context.bubble, context.graph_key) && 
+    const panel_link = context && panel_href_template(subject, context.active_bubble_id, context.graph_key) && 
       window.location.href.replace(
         window.location.hash, 
-        panel_href_template(subject, context.bubble, context.graph_key)
+        panel_href_template(subject, context.active_bubble_id, context.graph_key)
       );
 
     const share_modal_subject_fragment = subject && (
@@ -133,7 +133,7 @@ class Panel_ extends React.Component {
                 <div style={{display: 'inline'}}>
                   { !copy_to_clipboard &&
                     <PermalinkButton
-                      url={panel_href_template(context.subject, context.bubble, context.graph_key)}
+                      url={panel_href_template(context.subject, context.active_bubble_id, context.graph_key)}
                       button_class_name={'panel-heading-utils'}
                       title={text_maker("panel_permalink")}
                     />

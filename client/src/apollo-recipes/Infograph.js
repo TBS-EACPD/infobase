@@ -46,13 +46,13 @@ const bubbles = [
   },
 ];
 
-function get_panel_definitions(level, bubble){
+function get_panel_definitions(level, active_bubble_id){
   if(level === "org"){
-    if(bubble==="intro"){
+    if(active_bubble_id==="intro"){
       return [ panel1_def, panel2_def ];
-    } else if(bubble==="fin"){
+    } else if(active_bubble_id==="fin"){
       return [ panel3_def, panel4_def, pses_panel ];
-    } else if(bubble==="ppl"){
+    } else if(active_bubble_id==="ppl"){
       return [ panel5_def, static_panel_def ];
     }
   }
@@ -78,7 +78,7 @@ class Infograph_ extends React.Component {
   render(){
     const {
       match: {
-        params: { level, id, bubble },
+        params: { level, id, active_bubble_id },
       },
       history,
 
@@ -91,7 +91,7 @@ class Infograph_ extends React.Component {
     const bubbles_menu_args = bubbles.map( ({name, key}) => ({
       name,
       key,
-      isActive: key === bubble,
+      isActive: key === active_bubble_id,
     }));
 
     return <div>
@@ -118,7 +118,7 @@ class Infograph_ extends React.Component {
           id,
           level,
         }}
-        panel_defs={get_panel_definitions(level,bubble)}
+        panel_defs={get_panel_definitions(level, active_bubble_id)}
       />
       
     </div>;
@@ -136,7 +136,7 @@ export const Infograph = graphql(
   {
     options: ({ 
       match: {
-        params: { level, id, bubble },
+        params: { level, id, active_bubble_id },
       },
     }) => ({
       variables: {

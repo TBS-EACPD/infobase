@@ -60,7 +60,7 @@ export class App extends React.Component {
               <Route path="/metadata/:data_source?" component={MetaData}/>
               <Route path="/igoc/:grouping?" component={IgocExplorer} />
               <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
-              <Route path="/orgs/:level/:subject_id/infograph/:bubble?/:options?/" component={InfoGraph} />
+              <Route path="/orgs/:level/:subject_id/infograph/:active_bubble_id?/:options?/" component={InfoGraph} />
               <Route path="/glossary/:active_key?" component={Glossary} />
               <Redirect 
                 from="/budget-measures/:first_column?/:selected_value?/:budget_year?" 
