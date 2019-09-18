@@ -123,16 +123,23 @@ class InfoGraph_ extends React.Component {
     this.loadBubbleMenuDeps(this.props);
   }
   componentDidUpdate(prevProps){
-    if (this.state.bubble_menu_loading){
+    const {
+      bubble_menu_loading,
+      infographic_loading,
+      bubble,
+      bubbles_for_subject,
+    } = this.state;
+
+    if (bubble_menu_loading){
       this.loadBubbleMenuDeps(this.props);
-    } else if(this.state.infographic_loading){
+    } else if(infographic_loading){
       this.loadGraphDeps({...this.state, ...this.props});
-    } else if( !_.isNull(this.state.bubble) ){
+    } else if( !_.isNull(bubble) ){
       if (this.props.subject !== prevProps.subject){
         reset_scroll();
       }
       const options = SafeJSURL.parse(this.props.options);
-      const panel_keys = this.state.bubble_menu_loading || get_panels_for_subj_bubble(this.state.subject, this.state.bubble.id);
+      const panel_keys = bubble_menu_loading || get_panels_for_subj_bubble(bubbles_for_subject, bubble);
       
       const linked_to_panel = ( options && options.panel_key && _.includes(panel_keys, options.panel_key) ) && document.querySelector(`#${options.panel_key}`);
       if ( linked_to_panel ){
