@@ -25,7 +25,7 @@ class _IconWrapper extends React.Component {
       rotation,
       title,
       width,
-      height, // if undefined will assume square
+      height, // if falsey will assume square using width
       vertical_align,
       inline,
       aria_hide, // for icons that are displayed next to text that repeats what the icon represents
@@ -33,7 +33,7 @@ class _IconWrapper extends React.Component {
       // internal props
       ChildSVG,
       viewbox_width, // the original coordinate system the svg was created in
-      viewbox_height, // if undefined will assume square
+      viewbox_height, // if falsey will assume square using viewbox_width
     } = this.props;
 
     const { icon_instance_id } = this.state;
