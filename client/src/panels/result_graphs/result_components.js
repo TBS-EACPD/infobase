@@ -524,7 +524,7 @@ const QuadrantDefList = ({defs} ) => (
 );
 
 
-const result_status_components = (status, width) => {
+const result_status_icon_components = (status, width) => {
   const icons = {
     met: <IconCheck
       key="met"
@@ -570,7 +570,7 @@ const make_status_icons = (width) => {
   return _.chain(ordered_status_keys)
     .map(status_key => [
       status_key,
-      result_status_components(status_key, width),
+      result_status_icon_components(status_key, width),
     ])
     .fromPairs()
     .value();
@@ -872,6 +872,7 @@ export {
   IndicatorDisplay,
   QuadrantDefList,
   status_icons,
+  large_status_icons,
   indicators_period_span_str,
   StatusIconTable,
   InlineStatusIconList,
