@@ -138,18 +138,20 @@ const process_indicators = (matched_indicators, indicator_status) => {
         const name_diff = Diff.diffWords(indicator_pair[0].name, indicator_pair[1].name);
         const methodology_diff = window.is_a11y_mode ? Diff.diffSentences(indicator_pair[0].methodology, indicator_pair[1].methodology) : Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology);
         const target_diff = Diff.diffWords(format_target_string(indicator_pair[0]), format_target_string(indicator_pair[1]));
-        const status = _.max([name_diff.length, methodology_diff.length, target_diff.length]) > 1 ?
-                        target_diff.length > 1 ?
+        const target_explanation_diff = Diff.diffWords(indicator_pair[0].target_explanation || "", indicator_pair[1].target_explanation || "");
+        const status = _.max([name_diff.length, methodology_diff.length, target_diff.length, target_explanation_diff.length]) > 1 ?
+                        (target_diff.length > 1 || target_explanation_diff.length > 1) ?
                           "target_changed"
                           : "indicator_desc_changed"
                         : "no_diff";
         return {
-          status: status,
+          status,
           indicator1: indicator_pair[0],
           indicator2: indicator_pair[1],
-          name_diff: name_diff,
-          methodology_diff: methodology_diff,
-          target_diff: target_diff,
+          name_diff,
+          methodology_diff,
+          target_diff,
+          target_explanation_diff,
         };
       }
       const indicator = indicator_pair[0];
@@ -163,6 +165,7 @@ const process_indicators = (matched_indicators, indicator_status) => {
         name_diff: [indicator.name],
         methodology_diff: [indicator.methodology],
         target_diff: [format_target_string(indicator)],
+        target_explanation_diff: [indicator.target_explanation],
       };
     })
     // target_changed is subset of indicator_desc_changed so it must be included
@@ -320,26 +323,9 @@ const indicator_report = (processed_indicator, years) => (
         { processed_indicator.target_diff.length > 1 ?
           difference_report(processed_indicator.target_diff, "indicator_target", years) :
           no_difference(get_target_from_indicator(processed_indicator.indicator1), "indicator_target") }
-        { !_.isEmpty(processed_indicator.indicator1.target_explanation) &&
-          <Fragment>
-            <div className="text-diff__indicator-report__subheader" >
-              <h4>OMGWTF</h4>
-            </div>
-            <div className="text-diff__indicator-report__row">
-              <div>{processed_indicator.indicator1.target_explanation}</div>
-            </div>
-          </Fragment>
-        }
-        { !_.isEmpty(processed_indicator.indicator2.target_explanation) &&
-          <Fragment>
-            <div className="text-diff__indicator-report__subheader" >
-              <h4>HAHALOL</h4>
-            </div>
-            <div className="text-diff__indicator-report__row">
-              <div>{processed_indicator.indicator2.target_explanation}</div>
-            </div>
-          </Fragment>
-        }
+        { processed_indicator.target_explanation_diff.length > 1 ?
+            difference_report(processed_indicator.target_explanation_diff, "indicator_target_explanation", years) :
+            no_difference(processed_indicator.indicator1.target_explanation, "indicator_target_explanation") }
         <div className="text-diff__id-tag">{`ID: ${processed_indicator.indicator1.stable_id}`}</div>
       </Fragment>
     </Panel>
