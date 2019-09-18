@@ -58,6 +58,10 @@ indicator_target:
   en: Target
   fr: Cible
 
+indicator_target_explanation:
+  en: Target Explanation
+  fr: Explication de la cible
+
 multiple_changes:
   en: Multiple changes
   fr: Plusieurs changements
