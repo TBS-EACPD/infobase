@@ -44,13 +44,13 @@ class AnalyticsSynchronizer extends React.Component {
     return !shallowEqualObjectsOverKeys(
       this.props,
       nextProps,
-      ['subject','bubble','level']
+      ['subject','active_bubble_id','level']
     );
   }
 
   _logAnalytics(){
     const { 
-      bubble,
+      active_bubble_id,
       level,
       subject: {
         guid,
@@ -63,7 +63,7 @@ class AnalyticsSynchronizer extends React.Component {
       SUBAPP: sub_app_name,
       SUBJECT_GUID: guid, 
       MISC1: level,
-      MISC2: bubble,
+      MISC2: active_bubble_id,
     });
   }
 }
@@ -101,18 +101,18 @@ class InfoGraph_ extends React.Component {
       infographic_loading: true,
       subject: props.subject,
       bubbles_for_subject: {},
-      bubble: props.bubble,
+      active_bubble_id: props.active_bubble_id,
       level: props.level,
     };
   }
   static getDerivedStateFromProps(nextProps, prevState){
-    if ( !shallowEqualObjectsOverKeys(nextProps, prevState, ['subject','bubble','level']) ){
+    if ( !shallowEqualObjectsOverKeys(nextProps, prevState, ['subject','active_bubble_id','level']) ){
       return {
         bubble_menu_loading: true,
         infographic_loading: true,
         subject: nextProps.subject,
         bubbles_for_subject: {},
-        bubble: nextProps.bubble,
+        active_bubble_id: nextProps.active_bubble_id,
         level: nextProps.level,
       };
     } else {
@@ -126,7 +126,7 @@ class InfoGraph_ extends React.Component {
     const {
       bubble_menu_loading,
       infographic_loading,
-      bubble,
+      active_bubble_id,
       bubbles_for_subject,
     } = this.state;
 
@@ -134,12 +134,12 @@ class InfoGraph_ extends React.Component {
       this.loadBubbleMenuDeps(this.props);
     } else if(infographic_loading){
       this.loadGraphDeps({...this.state, ...this.props});
-    } else if( !_.isNull(bubble) ){
+    } else if( !_.isNull(active_bubble_id) ){
       if (this.props.subject !== prevProps.subject){
         reset_scroll();
       }
       const options = SafeJSURL.parse(this.props.options);
-      const panel_keys = bubble_menu_loading || get_panels_for_subj_bubble(bubbles_for_subject, bubble);
+      const panel_keys = bubble_menu_loading || get_panels_for_subj_bubble(bubbles_for_subject, active_bubble_id);
       
       const linked_to_panel = ( options && options.panel_key && _.includes(panel_keys, options.panel_key) ) && document.querySelector(`#${options.panel_key}`);
       if ( linked_to_panel ){
@@ -149,7 +149,7 @@ class InfoGraph_ extends React.Component {
     }
   }
   render(){
-    const { subject, bubble: active_bubble_id } = this.props;
+    const { subject, active_bubble_id } = this.props;
     const { 
       bubble_menu_loading,
       infographic_loading,
@@ -232,7 +232,7 @@ class InfoGraph_ extends React.Component {
               <ReactPanelGraph 
                 graph_key={graph_key}
                 subject={subject}
-                bubble={active_bubble_id}
+                active_bubble_id={active_bubble_id}
                 key={graph_key + subject.guid}
               />
             )  
@@ -276,7 +276,7 @@ class InfoGraph_ extends React.Component {
   }
 
   get_previous_and_next_bubbles(bubble_areas){
-    const { subject, bubble: active_bubble_id } = this.props;
+    const { subject, active_bubble_id } = this.props;
     const { bubbles_for_subject } = this.state;
 
     const bubbles = get_sorted_bubbles_for_subj(bubbles_for_subject, subject, active_bubble_id);
@@ -296,7 +296,7 @@ class InfoGraph_ extends React.Component {
       (bubbles_for_subject) => this.setState({ bubble_menu_loading: false, bubbles_for_subject })
     ) );
   }
-  loadGraphDeps({bubbles_for_subject, bubble: active_bubble_id, subject, level}){
+  loadGraphDeps({bubbles_for_subject, active_bubble_id, subject, level}){
     const panel_keys = get_panels_for_subj_bubble(bubbles_for_subject, active_bubble_id);
 
     ensure_loaded({
@@ -305,7 +305,7 @@ class InfoGraph_ extends React.Component {
       subject: subject,
       footnotes_for: subject,
     }).then( () => {
-      if ( shallowEqualObjectsOverKeys({bubble: active_bubble_id, subject, level}, this.state, ['subject','bubble','level']) ){
+      if ( shallowEqualObjectsOverKeys({active_bubble_id, subject, level}, this.state, ['subject','active_bubble_id','level']) ){
         this.setState({
           infographic_loading: false,
         });
@@ -320,14 +320,14 @@ const InfoGraph = ({
     params: {
       level, 
       subject_id, 
-      bubble,
+      active_bubble_id,
       options,
     },
   },
 }) => {
   const SubjectModel = Subject[level];
   const subject = SubjectModel.lookup(subject_id);
-  const bubble_id = bubble_defs[bubble] ? bubble : null;
+  const bubble_id = bubble_defs[active_bubble_id] ? active_bubble_id : null;
 
   if ( is_fake_infographic(subject) ){
     const subject_parent = (
@@ -362,7 +362,7 @@ const InfoGraph = ({
       <InfoGraph_
         level={level}
         subject={subject}
-        bubble={bubble_id}
+        active_bubble_id={bubble_id}
         options={options}
       />
     </StandardRouteContainer>
