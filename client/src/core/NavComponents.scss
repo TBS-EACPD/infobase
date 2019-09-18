@@ -8,20 +8,3 @@ a.nav-item {
     text-decoration: none;
   }
 }
-
-a.nav-item > svg {
-  & .icon-stroke {
-    stroke: $textColor;
-  }
-  & .icon-fill {
-    fill: $textColor;
-  }
-}
-a.nav-item:hover > svg, a.nav-item:focus > svg {
-  & .icon-stroke {
-    stroke: $tertiaryColor;
-  }
-  & .icon-fill {
-    fill: $tertiaryColor;
-  }
-}

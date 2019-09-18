@@ -1,16 +1,21 @@
 import './icons.scss';
-import { trivial_text_maker } from '../models/text.js';
-import { businessConstants } from '../models/businessConstants.js';
+
 import { Fragment } from 'react';
 import classNames from 'classnames';
 
 
-const { result_simple_statuses } = businessConstants;
-
+const svg_default_styles = {
+  width: "1.5em",
+  verticalAlign: "-0.5em",
+};
+const inline_svg_default_styles = {
+  width: "1.2em",
+  verticalAlign: "-0.2em",
+};
 class _IconWrapper extends React.Component {
   constructor(){
     super();
-    this.state = { svg_instance_id: _.uniqueId("svg-instance-") };
+    this.state = { icon_instance_id: _.uniqueId("icon-svg-instance-") };
   }
   render(){
     const {
@@ -20,8 +25,9 @@ class _IconWrapper extends React.Component {
       rotation,
       title,
       width,
-      height,
-      icon_class,
+      height, // if undefined will assume square
+      vertical_align,
+      inline,
       aria_hide, // for icons that are displayed next to text that repeats what the icon represents
   
       // internal props
@@ -30,31 +36,44 @@ class _IconWrapper extends React.Component {
       viewbox_height, // if undefined will assume square
     } = this.props;
 
-    const { svg_instance_id } = this.state;
+    const { icon_instance_id } = this.state;
+
+    const svg_styles = {
+      ...(!inline && svg_default_styles),
+      ...(inline && inline_svg_default_styles),
+      ..._.pickBy({width, height: height || width, verticalAlign: vertical_align}),
+    };
 
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" 
-        className={classNames("icon-svg", icon_class)}
+        className={classNames("icon-svg", inline && "icon-svg--inline")}
+        style={svg_styles}
         viewBox={`0 0 ${viewbox_width} ${viewbox_height || viewbox_width}`} 
-        width={width} height={height} aria-hidden={aria_hide}
+        aria-hidden={aria_hide}
       >
         <title>{title}</title>
-        <style dangerouslySetInnerHTML={{
-          __html: `
-            #${svg_instance_id} {
-              fill: ${color};
-              stroke: ${color};
-            }
-            *:hover > svg > #${svg_instance_id}, 
-            *:focus > svg > #${svg_instance_id},
-            *:active > svg > #${svg_instance_id} {
-              fill: ${alternate_color};
-              stroke: ${alternate_color};
-            }
-          `,
-        }} />
-        <g id={svg_instance_id} transform={rotation && `rotate(${rotation} 250 250)`}>
+        { alternate_color &&
+          <style dangerouslySetInnerHTML={{
+            __html: `
+              #${icon_instance_id} {
+                fill: ${color};
+                stroke: ${color};
+              }
+              *:hover > svg > #${icon_instance_id}, 
+              *:focus > svg > #${icon_instance_id},
+              *:active > svg > #${icon_instance_id} {
+                fill: ${alternate_color};
+                stroke: ${alternate_color};
+              }
+            `,
+          }} />
+        }
+        <g 
+          id={icon_instance_id}
+          style={!alternate_color ? {fill: color, stroke: color} : {}}
+          transform={rotation && `rotate(${rotation} 250 250)`}
+        >
           <ChildSVG />
         </g>
       </svg>
@@ -62,9 +81,12 @@ class _IconWrapper extends React.Component {
   }
 }
 _IconWrapper.defaultProps = {
-  viewbox_width: 24,
-  icon_class: "icon-svg--inline",
+  color: window.infobase_color_constants.textColor,
+  alternate_color: window.infobase_color_constants.tertiaryColor,
+  inline: false,
   aria_hide: false,
+
+  viewbox_width: 24,
 };
 
 
@@ -182,7 +204,6 @@ const IconShare = (props) => {
 };
 
 
-
 const IconPermalink = (props) => {
   const SVGPermalink = ({color}) => {
     return (
@@ -213,7 +234,6 @@ const IconPermalink = (props) => {
 };
 
 
-
 const IconDownload = (props) => {
   const SVGDownload = () => (
     <path className={"icon-fill"} d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
@@ -237,9 +257,7 @@ const IconChevron = (props) => {
     <_IconWrapper {...props} viewbox_width={600} ChildSVG={SVGChevron}/>
   );
 };
-IconChevron.defaultProps = {
-  icon_class: "icon--svg",
-};
+
 
 const IconZoomIn = (props) => {
   const SVGZoomIn = () => (
@@ -253,11 +271,6 @@ const IconZoomIn = (props) => {
     <_IconWrapper {...props} viewbox_width={24} ChildSVG={SVGZoomIn}/>
   );
 };
-IconZoomIn.defaultProps = {
-  title: trivial_text_maker("zoom_in"),
-  icon_class: "icon--svg",
-};
-
 
 
 const IconZoomOut = (props) => {
@@ -271,10 +284,7 @@ const IconZoomOut = (props) => {
     <_IconWrapper {...props} viewbox_width={24} ChildSVG={SVGZoomOut}/>
   );
 };
-IconZoomOut.defaultProps = {
-  title: trivial_text_maker("zoom_in"),
-  icon_class: "icon--svg",
-};
+
 
 const IconCheck = (props) => {
   const SVGCheck = ({color}) => {
@@ -295,10 +305,6 @@ const IconCheck = (props) => {
   return (
     <_IconWrapper {...props} viewbox_width={500} ChildSVG={SVGCheck}/>
   );
-};
-IconCheck.defaultProps = {
-  title: result_simple_statuses.met.text,
-  icon_class: "icon--svg",
 };
 
 
@@ -323,10 +329,6 @@ const IconAttention = (props) => {
   };
   return <_IconWrapper {...props} viewbox_width={500} ChildSVG={SVGAttention}/>;
 };
-IconAttention.defaultProps = {
-  title: result_simple_statuses.not_met.text,
-  icon_class: "icon--svg",
-};
 
 const IconNotApplicable = (props) => {
   const SVGNotApplicable = ({color}) => {
@@ -344,10 +346,6 @@ const IconNotApplicable = (props) => {
   };
   
   return <_IconWrapper {...props} viewbox_width={500} ChildSVG={SVGNotApplicable}/>;
-};
-IconNotApplicable.defaultProps = {
-  title: result_simple_statuses.not_available.text,
-  icon_class: "icon--svg",
 };
 
 const IconClock = (props) => {
@@ -367,10 +365,6 @@ const IconClock = (props) => {
   
   return <_IconWrapper {...props} viewbox_width={500} ChildSVG={SVGClock}/>;
 };
-IconClock.defaultProps = {
-  title: result_simple_statuses.future.text,
-  icon_class: "icon--svg",
-};
 
 
 const IconEyeOpen = (props) => {
@@ -388,9 +382,6 @@ const IconEyeOpen = (props) => {
   };
   
   return <_IconWrapper {...props} viewbox_width={500} ChildSVG={SVGEyeOpen}/>;
-};
-IconEyeOpen.defaultProps = {
-  icon_class: "icon--svg",
 };
 
 
@@ -416,10 +407,6 @@ const IconEyeClosed = (props) => {
 
   return <_IconWrapper {...props} viewbox_width={500} ChildSVG={SVGEyeClosed}/>;
 };
-IconEyeOpen.defaultProps = {
-  icon_class: "icon--svg",
-};
-
 
 
 const IconArrow = (props) => {
@@ -432,10 +419,6 @@ const IconArrow = (props) => {
     );
   };
   return <_IconWrapper {...props} viewbox_width={500} ChildSVG={SVGArrow}/>;
-};
-IconArrow.defaultProps = {
-  title: trivial_text_maker("arrow"),
-  icon_class: "icon--svg",
 };
 
 
@@ -460,10 +443,6 @@ const IconCopy = (props) => {
   };
 
   return <_IconWrapper {...props} viewbox_width={170} viewbox_height={165} ChildSVG={SVGCopy}/>;
-};
-IconCopy.defaultProps = {
-  title: trivial_text_maker("copy"),
-  icon_class: "icon--svg",
 };
 
 
@@ -498,10 +477,6 @@ const IconCopyLink = (props) => {
 
   return <_IconWrapper {...props} viewbox_width={24} ChildSVG={SVGCopyLink}/>;
 };
-IconCopyLink.defaultProps = {
-  title: trivial_text_maker("copy"),
-  icon_class: "icon--svg",
-};
 
 
 const IconAttentionTriangle = (props) => {
@@ -517,9 +492,7 @@ const IconAttentionTriangle = (props) => {
 
   return <_IconWrapper {...props} viewbox_width={500} ChildSVG={SVGAttentionTriangle}/>;
 };
-IconAttentionTriangle.defaultProps = {
-  color: window.infobase_color_constants.highlightColor,
-};
+
 
 const IconSearch = (props) => {
   const SVGSearch = ({color}) => {
@@ -533,9 +506,6 @@ const IconSearch = (props) => {
   };
 
   return <_IconWrapper {...props} viewbox_width={500} ChildSVG={SVGSearch} />;
-};
-IconSearch.defaultProps = {
-  title: trivial_text_maker("search"),
 };
 
 
@@ -563,4 +533,3 @@ export {
   IconAttentionTriangle,
   IconSearch, 
 };
-  

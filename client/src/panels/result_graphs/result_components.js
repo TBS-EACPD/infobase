@@ -477,10 +477,42 @@ const QuadrantDefList = ({defs} ) => (
 
 const result_status_components = (status, width) => {
   const icons = {
-    met: <IconCheck width={width} height={width} color={color_defs.successDarkColor}/>,
-    not_met: <IconAttention width={width} height={width} color={color_defs.failDarkColor}/>,
-    not_available: <IconNotApplicable width={width} height={width} color={color_defs.warnDarkColor}/>,
-    future: <IconClock width={width} height={width} color={color_defs.tertiaryColor}/>,
+    met: <IconCheck
+      key="met"
+      title={result_simple_statuses.met.text}
+      color={color_defs.successDarkColor}
+      width={width}
+      vertical_align={"0em"}
+      alternate_color={false}
+      inline={false}
+    />,
+    not_met: <IconAttention
+      key="not_met"
+      title={result_simple_statuses.not_met.text}
+      color={color_defs.failDarkColor}
+      width={width}
+      vertical_align={"0em"}
+      alternate_color={false}
+      inline={false}
+    />,
+    not_available: <IconNotApplicable
+      key="not_available"
+      title={result_simple_statuses.not_available.text}
+      color={color_defs.warnDarkColor}
+      width={width}
+      vertical_align={"0em"}
+      alternate_color={false}
+      inline={false}
+    />,
+    future: <IconClock
+      key="future"
+      title={result_simple_statuses.future.text}
+      color={color_defs.tertiaryColor}
+      width={width}
+      vertical_align={"0em"}
+      alternate_color={false}
+      inline={false}
+    />,
   };
   return icons[status];
 };

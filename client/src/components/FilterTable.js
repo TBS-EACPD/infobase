@@ -59,7 +59,18 @@ export class FilterTable extends React.Component {
                     visibility: !nothing_is_filtered || show_eyes_override ? "visible" : "hidden",
                   }}
                 >
-                  { item.active ? <IconEyeOpen/> : <IconEyeClosed/> }
+                  { item.active ? 
+                    <IconEyeOpen
+                      color={window.infobase_color_constants.primaryColor}
+                      alternate_color={false}
+                      width={"40px"}
+                    /> : 
+                    <IconEyeClosed
+                      color={window.infobase_color_constants.secondaryColor}
+                      alternate_color={false}
+                      width={"40px"}
+                    /> 
+                  }
                 </div>
                 <div className="filter-table__components">
                   {

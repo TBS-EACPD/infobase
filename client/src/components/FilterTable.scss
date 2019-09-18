@@ -35,13 +35,6 @@ $controlsColorLighter: lighten($controlsColor, 20%);
     left: -57px;
   }
 }
-.filter-table__eye--open > svg > .svg-fill {
-  fill: $primaryColor;
-}
-.filter-table__eye--closed > svg > .svg-fill {
-  fill: $secondaryColor;
-}
-
 
 .filter-table__components {
   display: flex;

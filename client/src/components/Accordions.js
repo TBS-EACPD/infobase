@@ -103,12 +103,11 @@ const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) =
         className="pull-down-accordion-expander"
         aria-label={isExpanded ? "collapse above" : "expand above"}
       >
-        <span>
-          <IconChevron
-            title="chevron"
-            rotation={isExpanded && 180}
-          />
-        </span>
+        <IconChevron
+          title="chevron"
+          color={window.infobase_color_constants.textLightColor}
+          rotation={isExpanded && 180}
+        />
       </button>
     </div> 
   </div>

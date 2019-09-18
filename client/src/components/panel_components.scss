@@ -54,16 +54,6 @@
       padding-left: 1rem;
     }
   }
-
-  .panel-heading-utils {
-    width: 30px;
-    height: 20px;
-
-    & > img {
-        width: 20px;
-        height: 20px;
-    }
-  }
   
   .panel.panel-info.panel-flat {
     margin-bottom: 23px;
@@ -99,11 +89,6 @@
   .panel-heading-utils {
     width: 20px;
     height: 20px;
-
-    & > img {
-      width: 20px;
-      height: 20px;
-    }
   }
 
   button.panel-heading-utils {
@@ -127,22 +112,3 @@
     transform: scale(1.15);
   }
 }
-
-.panel-heading-utils > svg{
-  width: 1.5em;
-  height: 1.5em;
-}
-
-.panel-heading-utils > svg .svg-fill{
-  fill: #fff;
-}
-.panel-heading-utils:hover, > svg .svg-fill {
-  fill: $secondaryColor;
-}
-
-.panel-heading-utils > svg .svg-stroke {
-  stroke: #fff;
-}
-.panel-heading-utils:hover > svg .svg-stroke {
-  stroke: $secondaryColor;
-} 

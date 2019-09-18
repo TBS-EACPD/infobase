@@ -35,7 +35,12 @@ const activeStyle = {
 
 const get_style = ({ active, dead}) => active ? activeStyle : null;
 
-export const HierarchyDeadElementIcon = () => <IconAttentionTriangle title={text_maker("hierarchy_dead_element_icon_alt_text")} />;
+export const HierarchyDeadElementIcon = () => <IconAttentionTriangle
+  title={text_maker("hierarchy_dead_element_icon_alt_text")}
+  color={window.infobase_color_constants.highlightColor}
+  inline={true}
+  alternate_color={false}
+/>;
 
 const hierarchical_some = (node, predicate) => {
   const predicate_func = _.isFunction(predicate) ?

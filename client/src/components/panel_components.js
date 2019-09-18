@@ -10,6 +10,7 @@ import {
   FootnoteList,
   create_text_maker_component,
   ShareButton,
+  PermalinkButton,
   WriteToClipboard,
   PDFGenerator,
 } from './index.js';
@@ -19,7 +20,6 @@ import { panel_context } from '../infographic/context.js';
 
 import { get_static_url } from '../request_utils.js';
 import { create_text_maker } from '../models/text.js';
-import { IconPermalink } from '../icons/icons';
 
 const { TM } = create_text_maker_component(text);
 const text_maker = create_text_maker(text);
@@ -132,13 +132,11 @@ class Panel_ extends React.Component {
               { !context.no_permalink && panel_link &&
                 <div style={{display: 'inline'}}>
                   { !copy_to_clipboard &&
-                    <a className='panel-heading-utils' href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
-                      <IconPermalink 
-                        alt={text_maker("panel_permalink")}
-                        className='panel-heading-utils'
-                        color={window.infobase_color_constants.textLightColor}
-                        title={text_maker("panel_permalink")}/>
-                    </a>
+                    <PermalinkButton
+                      url={panel_href_template(context.subject, context.bubble, context.graph_key)}
+                      button_class_name={'panel-heading-utils'}
+                      title={text_maker("panel_permalink")}
+                    />
                   }
                   { copy_to_clipboard &&
                     <WriteToClipboard 

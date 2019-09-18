@@ -1,17 +1,30 @@
 import { IconPermalink } from '../icons/icons.js';
-import { panel_href_template } from '../infographic/routes.js';
-import './panel-components.scss';
+
+const default_props = {
+  icon_color: window.infobase_color_constants.textLightColor,
+  icon_alternate_color: false,
+};
 
 export const PermalinkButton = (props) => {
+
   const {
-    context,
+    button_class_name,
+    url,
     title,
-  } = props;
+
+    icon_color,
+    icon_alternate_color,
+    icon_size,
+  } = {...default_props, ...props};
 
   return (
     <div style={{display: 'inline'}}> 
-      <a className='panel-heading-utils' href={panel_href_template(context.subject, context.bubble, context.graph_key)}>
+      <a className={button_class_name} href={url}>
         <IconPermalink
+          color={icon_color}
+          alternate_color={icon_alternate_color}
+          width={icon_size}
+          height={icon_size}
           title={title}
         />
       </a>
