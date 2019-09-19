@@ -39,7 +39,6 @@ export class StatelessModal extends React.Component {
       subtitle,
       body,
       close_text,
-      auto_close_time
     } = this.props;
 
     return (

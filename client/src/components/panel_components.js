@@ -20,7 +20,6 @@ import { IconCopyLink } from '../icons/icons.js';
 import { panel_href_template } from '../infographic/routes.js';
 import { panel_context } from '../infographic/context.js';
 
-import { get_static_url } from '../request_utils.js';
 import { create_text_maker } from '../models/text.js';
 
 const { TM } = create_text_maker_component(text);
