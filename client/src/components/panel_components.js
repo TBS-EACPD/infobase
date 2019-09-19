@@ -15,6 +15,8 @@ import {
   PDFGenerator,
 } from './index.js';
 
+import { IconCopyLink } from '../icons/icons.js';
+
 import { panel_href_template } from '../infographic/routes.js';
 import { panel_context } from '../infographic/context.js';
 
@@ -143,7 +145,7 @@ class Panel_ extends React.Component {
                       text_to_copy={panel_link}
                       button_class_name={'panel-heading-utils'} 
                       button_description={text_maker("copy_panel_link")}
-                      icon_src={get_static_url("svg/copy-link-to-clipboard.svg")}
+                      IconComponent={IconCopyLink}
                     />
                   }
                 </div>

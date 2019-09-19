@@ -53,7 +53,7 @@ export class WriteToClipboard extends React.Component {
           auto_close_time={copy_status_message === text_maker("copy_success") && 3000}
           title={
             <Fragment>
-              <IconComponent
+              <IconCopy
                 title={button_description}
                 color={window.infobase_color_constants.tertiaryColor}
                 alternate_color={false}
