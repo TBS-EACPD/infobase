@@ -9,11 +9,13 @@ export class StatelessModal extends React.Component {
   constructor(props){
     super(props);
 
+    this.auto_close_timeouts = [];
     this.onBlur = this.onBlur.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
   closeModal(){
-    this.auto_close_timeout && clearTimeout(this.auto_close_timeout);
+    this.auto_close_timeouts.forEach( (auto_close_timeout) => clearTimeout(auto_close_timeout) );
+
     this.props.on_close_callback();
   }
   onBlur(e){
@@ -31,7 +33,7 @@ export class StatelessModal extends React.Component {
     const { auto_close_time } = this.props;
 
     if ( _.isNumber(auto_close_time) ){
-      this.auto_close_timeout = setTimeout(this.closeModal, auto_close_time);
+      this.auto_close_timeouts.push( setTimeout(this.closeModal, auto_close_time) );
     }
   }
   render(){
