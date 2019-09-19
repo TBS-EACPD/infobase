@@ -64,11 +64,7 @@ export class StatelessModal extends React.Component {
             }}
           >
             { auto_close_time && 
-              <CountdownCircle
-                time={auto_close_time}
-                size="3em"
-                color={window.infobase_color_constants.buttonPrimaryColor}
-              />
+              <CountdownCircle time={auto_close_time} show_numbers={true} />
             }
             { close_text &&
               <button className="btn btn-ib-primary" onClick={this.closeModal}>
