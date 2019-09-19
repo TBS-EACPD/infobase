@@ -1,5 +1,7 @@
 import './CountdownCircle.scss';
 
+import { Countdown } from "./Countdown.js";
+
 const split_value_and_units = (size) => {
   const unit = /[a-z]+$/.exec(size);
   const value = size.replace(unit, "");
@@ -43,7 +45,7 @@ export class CountdownCircle extends React.Component {
             className="countdown-circle__number"
             style={{lineHeight: size, color}}
           >
-            {time_in_seconds}
+            <Countdown time={time_in_seconds} />
           </div>
         }
         <svg 
