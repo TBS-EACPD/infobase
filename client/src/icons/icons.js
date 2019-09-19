@@ -107,9 +107,9 @@ const IconHome = (props) => {
 
 
 const IconFeedback = (props) => {
-  const SVGFeedback = ({color}) => {
+  const SVGFeedback = () => {
     return (
-      <path className={!color && "icon-stroke"} fill="none" style={color && {stroke: color}} strokeWidth="2" strokeMiterlimit="1"
+      <path className="icon-stroke" strokeWidth="2" strokeMiterlimit="1"
         d="M21.8,19.2c0.1,0-0.3-0.5-0.4-0.7l-1.7-2.7c0.8-0.7,2.2-2.7,2.1-4.5c-0.2-4-4.5-7.3-10-7.3s-10,3.3-10,7.3
         s4.5,7.3,10,7.3c1.8,0,3.3-0.2,4.7-0.8C20.6,19,21.2,19.3,21.8,19.2z"/>
     );
@@ -122,15 +122,17 @@ const IconFeedback = (props) => {
 
 
 const IconAbout = (props) => {
-  const SVGAbout = ({color}) => {
+  const SVGAbout = () => {
     return (
       <Fragment>
-        <path className={!color && "icon-stroke"} fill="none" style={color && {stroke: color}} d="M12,2.8c5.1,0,9.2,4.1,9.2,9.2s-4.1,9.2-9.2,9.2c-5.1,0-9.2-4.1-9.2-9.2c0-3.7,2.2-7,5.6-8.5
-    C9.5,3,10.8,2.8,12,2.8 M12,1.8C6.4,1.8,1.8,6.4,1.8,12S6.4,22.2,12,22.2S22.2,17.6,22.2,12S17.6,1.8,12,1.8z"/>
-        <path className={!color && "icon-fill"} style={color && {fill: color}} d="M14.6,16.7c-0.9,1.9-2.2,2.8-2.9,2.9c-0.7,0.1-1-0.5-1-2.2c0.1-2,0.1-3.3,0.2-5.1c0-0.7,0-1-0.3-0.9
-    c-0.3,0.1-0.7,0.6-1.1,1.1l-0.3-0.3c0.8-1.4,2.1-2.7,3-2.9c0.8-0.2,0.9,0.5,0.9,2.5c-0.1,1.6-0.1,3.3-0.2,4.9c0,0.6,0.1,0.8,0.3,0.8
-    c0.2,0,0.5-0.3,1-1.1L14.6,16.7z M13,5.8c0.1,0.7-0.2,1.5-0.9,1.7c-0.6,0.1-1.1-0.2-1.2-0.9c-0.1-0.6,0.2-1.5,1-1.7
-    C12.4,4.7,12.8,5.2,13,5.8z"/>
+        <path className="icon-stroke"
+          d="M12,2.8c5.1,0,9.2,4.1,9.2,9.2s-4.1,9.2-9.2,9.2c-5.1,0-9.2-4.1-9.2-9.2c0-3.7,2.2-7,5.6-8.5
+          C9.5,3,10.8,2.8,12,2.8 M12,1.8C6.4,1.8,1.8,6.4,1.8,12S6.4,22.2,12,22.2S22.2,17.6,22.2,12S17.6,1.8,12,1.8z"/>
+        <path className="icon-fill"
+          d="M14.6,16.7c-0.9,1.9-2.2,2.8-2.9,2.9c-0.7,0.1-1-0.5-1-2.2c0.1-2,0.1-3.3,0.2-5.1c0-0.7,0-1-0.3-0.9
+          c-0.3,0.1-0.7,0.6-1.1,1.1l-0.3-0.3c0.8-1.4,2.1-2.7,3-2.9c0.8-0.2,0.9,0.5,0.9,2.5c-0.1,1.6-0.1,3.3-0.2,4.9c0,0.6,0.1,0.8,0.3,0.8
+          c0.2,0,0.5-0.3,1-1.1L14.6,16.7z M13,5.8c0.1,0.7-0.2,1.5-0.9,1.7c-0.6,0.1-1.1-0.2-1.2-0.9c-0.1-0.6,0.2-1.5,1-1.7
+          C12.4,4.7,12.8,5.2,13,5.8z"/>
       </Fragment>
     );
   };
@@ -142,21 +144,20 @@ const IconAbout = (props) => {
 
 
 const IconGlossary = (props) => {
-  const SVGGlossary = ({color}) => {
+  const SVGGlossary = () => {
     return (
       <Fragment>
         <g>
-          <path className={!color && "icon-stroke"} style={!color ? {fill: "none"} : {stroke: color, fill: "none"}}
+          <path className="icon-stroke"
             d="M5.5,2.3h12.9c0.7,0,1.4,0.6,1.4,1.4v16.7c0,0.7-0.6,1.4-1.4,1.4H5.5c-0.7,0-1.4-0.6-1.4-1.4V3.6
             C4.2,2.9,4.8,2.3,5.5,2.3z"/>
-          <line className={!color && "icon-stroke"} style={color && {stroke: color}}
-            x1="6.7" y1="2.5" x2="6.7" y2="21.7"/>
+          <line className="icon-stroke" x1="6.7" y1="2.5" x2="6.7" y2="21.7"/>
         </g>
-        <path className={!color && classNames("icon-fill","icon-stroke")} style={!color ? undefined : {stroke: color, fill: color}}
+        <path className="icon-fill icon-stroke"
           d="M12.1,18.6c0-0.1,0-0.2,0.1-0.2l4.2-5v0h-3.6c-0.2,0-0.4-0.2-0.4-0.3l0,0c0-0.2,0.2-0.3,0.4-0.3h4.5
           c0.2,0,0.4,0.2,0.4,0.3v0c0,0.1,0,0.2-0.1,0.2l-4.2,5v0h4c0.2,0,0.4,0.2,0.4,0.3l0,0c0,0.2-0.2,0.3-0.4,0.3h-4.9
           C12.3,19,12.1,18.8,12.1,18.6L12.1,18.6z"/>
-        <path className={!color && classNames("icon-fill","icon-stroke")} style={!color ? undefined : {stroke: color, fill: color}}
+        <path className="icon-fill icon-stroke"
           d="M10.3,10.1l-0.6,1.6C9.6,11.9,9.5,12,9.3,12H9.1c-0.2,0-0.4-0.2-0.4-0.4c0,0,0-0.1,0-0.1l2.3-6
           c0.1-0.2,0.2-0.3,0.4-0.3h0.7c0.2,0,0.3,0.1,0.4,0.3l2.3,6c0.1,0.2,0,0.4-0.2,0.5c0,0-0.1,0-0.1,0h-0.2c-0.2,0-0.3-0.1-0.4-0.3
           l-0.6-1.6C13.2,10,13,9.9,12.9,9.9h-2.2C10.5,9.9,10.4,10,10.3,10.1z M12.4,9.2c0.2,0,0.4-0.2,0.4-0.4c0,0,0-0.1,0-0.1l-0.5-1.4
@@ -171,17 +172,17 @@ const IconGlossary = (props) => {
 };
 
 const IconDataset = (props) => {
-  const SVGDataset = ({color}) => {
+  const SVGDataset = () => {
     return (
       <Fragment>
-        <path fill="none" className={!color && "icon-stroke"} style={color && {stroke: color}} strokeWidth="50" strokeLinecap="round" strokeLinejoin="round" d="M116.5,98.5h367
+        <path className="icon-stroke" strokeWidth="50" strokeLinecap="round" strokeLinejoin="round" d="M116.5,98.5h367
           c6.6,0,12,5.4,12,12v394c0,6.6-5.4,12-12,12h-367c-6.6,0-12-5.4-12-12v-394C104.5,103.9,109.9,98.5,116.5,98.5z"/>
-        <line fill="none" className={!color && "icon-stroke"} style={color && {stroke: color}} strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="190.5" x2="494.5" y2="190.5"/>
-        <line fill="none" className={!color && "icon-stroke"} style={color && {stroke: color}} strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="272.5" x2="495.5" y2="272.5"/>
-        <line fill="none" className={!color && "icon-stroke"} style={color && {stroke: color}} strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="354.5" x2="495.5" y2="354.5"/>
-        <line fill="none" className={!color && "icon-stroke"} style={color && {stroke: color}} strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="434.5" x2="495.5" y2="434.5"/>
-        <line fill="none" className={!color && "icon-stroke"} style={color && {stroke: color}} strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="234.5" y1="197.5" x2="234.5" y2="515.5"/>
-        <line fill="none" className={!color && "icon-stroke"} style={color && {stroke: color}} strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="365.5" y1="194.5" x2="365.5" y2="515.5"/>
+        <line className="icon-stroke" strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="190.5" x2="494.5" y2="190.5"/>
+        <line className="icon-stroke" strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="272.5" x2="495.5" y2="272.5"/>
+        <line className="icon-stroke" strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="354.5" x2="495.5" y2="354.5"/>
+        <line className="icon-stroke" strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="104.5" y1="434.5" x2="495.5" y2="434.5"/>
+        <line className="icon-stroke" strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="234.5" y1="197.5" x2="234.5" y2="515.5"/>
+        <line className="icon-stroke" strokeWidth="25" strokeLinecap="round" strokeLinejoin="round" x1="365.5" y1="194.5" x2="365.5" y2="515.5"/>
       </Fragment>
     );
   };
@@ -194,7 +195,7 @@ const IconDataset = (props) => {
 
 const IconShare = (props) => {
   const SVGShare = () => (
-    <path className={"icon-fill"} 
+    <path className="icon-fill"
       d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34
       3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65
       0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
@@ -207,9 +208,9 @@ const IconShare = (props) => {
 
 
 const IconPermalink = (props) => {
-  const SVGPermalink = ({color}) => {
+  const SVGPermalink = () => {
     return (
-      <g className={!color && "icon-fill"} style={color && {fill: color}} >
+      <g className="icon-fill">
         {/* 
         Copyright Wikimedia
         
@@ -238,7 +239,7 @@ const IconPermalink = (props) => {
 
 const IconDownload = (props) => {
   const SVGDownload = () => (
-    <path className={"icon-fill"} d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+    <path className="icon-fill" d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
   );
 
   return (
@@ -264,8 +265,8 @@ const IconChevron = (props) => {
 const IconZoomIn = (props) => {
   const SVGZoomIn = () => (
     <Fragment>
-      <path className={"icon-fill"} d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-      <path className={"icon-fill"} d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/>
+      <path className="icon-fill" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+      <path className="icon-fill" d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/>
     </Fragment>
   );
   
@@ -278,7 +279,7 @@ const IconZoomIn = (props) => {
 const IconZoomOut = (props) => {
   const SVGZoomOut = () => (
     <Fragment>
-      <path className={"icon-fill"} d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7z"/>
+      <path className="icon-fill" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7z"/>
     </Fragment>
   );
 
@@ -289,14 +290,14 @@ const IconZoomOut = (props) => {
 
 
 const IconCheck = (props) => {
-  const SVGCheck = ({color}) => {
+  const SVGCheck = () => {
     return (
       <Fragment>
-        <path className={!color && "icon-fill"} style={color && {fill: color}}
+        <path className="icon-fill"
           d="M250,68.2c100.4,0,181.7,81.4,181.7,181.8s-81.4,181.7-181.8,181.7S68.2,350.4,68.2,250
           c0-48.2,19.1-94.4,53.2-128.5C155.5,87.3,201.8,68.1,250,68.2 M250,37.2C132.5,37.2,37.2,132.5,37.2,250S132.5,462.8,250,462.8
           S462.8,367.5,462.8,250S367.5,37.2,250,37.2z"/>
-        <path className={!color && "icon-fill"} style={color && {fill: color}}
+        <path className="icon-fill"
           d="M234.9,354.7l127.9-186.2c3.7-5.5,3-13.1-1.6-17.1L347,139.2c-1.7-1.5-3.9-2.3-6.1-2.3l0,0
           c-3.7,0.1-7.1,2-9.1,5.1L218.5,307l-57.7-48.5c-1.9-1.7-4.2-2.6-6.7-2.8l0,0c-1.8-0.1-3.5,0.8-4.6,2.2l-13.9,20.7
           c-2.1,3.2-0.5,8.6,3.6,12l80.9,68.1c1.9,1.7,4.2,2.6,6.7,2.8c1.8,0.1,3.5-0.8,4.6-2.2"/>
@@ -311,18 +312,18 @@ const IconCheck = (props) => {
 
 
 const IconAttention = (props) => {
-  const SVGAttention = ({color}) => {
+  const SVGAttention = () => {
     return (
       <Fragment>
-        <path className={!color && "icon-fill"} style={color && {fill: color}}
+        <path className="icon-fill"
           d="M250,68.2c100.4,0,181.7,81.4,181.7,181.8c0,100.4-81.4,181.7-181.8,181.7S68.2,350.4,68.2,250
           c0-48.2,19.1-94.4,53.2-128.5C155.5,87.3,201.8,68.1,250,68.2 M250,37.2C132.5,37.2,37.2,132.5,37.2,250S132.5,462.8,250,462.8
           S462.8,367.5,462.8,250S367.5,37.2,250,37.2z"/>
         <g>
-          <path className={!color && "icon-fill"} style={color && {fill: color}}
+          <path className="icon-fill"
             d="M276.6,126.3L276.6,126.3l-53.1,0c-5.8,0-10.3,9-9.6,19.2l9.5,147.8c0.6,8.7,4.7,15.3,9.6,15.3h32.2
             c4.8,0,8.9-6.4,9.6-14.9l11.5-147.8C286.9,135.5,282.4,126.3,276.6,126.3z"/>
-          <path className={!color && "icon-fill"} style={color && {fill: color}}
+          <path className="icon-fill"
             d="M250,326.3c-13.1,0.1-23.6,10.8-23.5,23.9c0.1,13.1,10.8,23.6,23.9,23.5c13-0.1,23.5-10.7,23.5-23.7
             C273.8,336.9,263.1,326.3,250,326.3z"/>
         </g>
@@ -333,14 +334,14 @@ const IconAttention = (props) => {
 };
 
 const IconNotApplicable = (props) => {
-  const SVGNotApplicable = ({color}) => {
+  const SVGNotApplicable = () => {
     return (
       <Fragment>
-        <path className={!color && "icon-fill"} style={color && {fill: color}}
+        <path className="icon-fill"
           d="M250,68.2c100.4,0,181.8,81.4,181.8,181.8S350.4,431.8,250,431.8S68.3,350.4,68.3,250
           c0-48.2,19.1-94.4,53.2-128.5C155.5,87.3,201.8,68.1,250,68.2 M250,37.2C132.5,37.2,37.2,132.5,37.2,250S132.5,462.8,250,462.8
           S462.8,367.5,462.8,250S367.5,37.2,250,37.2z"/>
-        <path className={!color && "icon-fill"} style={color && {fill: color}}
+        <path className="icon-fill"
           d="M168.4,225.5h163.3c4.9,0,8.9,4,8.9,8.9v31.3c0,4.9-4,8.9-8.9,8.9H168.4c-4.9,0-8.9-4-8.9-8.9v-31.3
           C159.5,229.5,163.5,225.5,168.4,225.5z"/>
       </Fragment>
@@ -351,14 +352,14 @@ const IconNotApplicable = (props) => {
 };
 
 const IconClock = (props) => {
-  const SVGClock = ({color}) => {
+  const SVGClock = () => {
     return (
       <Fragment>
-        <path className={!color && "icon-fill"} style={color && {fill: color}}
+        <path className="icon-fill"
           d="M250,68.2c100.4,0,181.7,81.4,181.7,181.8s-81.4,181.7-181.8,181.7S68.2,350.4,68.2,250
           c0-48.2,19.1-94.4,53.2-128.5C155.5,87.3,201.8,68.1,250,68.2 M250,37.2C132.5,37.2,37.2,132.5,37.2,250S132.5,462.8,250,462.8
           S462.8,367.5,462.8,250S367.5,37.2,250,37.2z"/>
-        <path className={!color && "icon-fill"} style={color && {fill: color}}
+        <path className="icon-fill"
           d="M226.8,267.3c0.6,1.5,1.8,2.6,2.9,3.8l82.9,82.9c3,3,7.8,3,10.7,0l0,0l15.6-15.6c3-3,3-7.8,0-10.7l0,0
           l-75.5-75.5v-135c0-4.6-3.7-8.3-8.3-8.3l0,0h-20.7c-4.6,0-8.3,3.7-8.3,8.3v147.1c0,0,0,0,0,0.1C226.1,265.2,226.5,266.5,226.8,267.3"/>
       </Fragment>
@@ -370,9 +371,9 @@ const IconClock = (props) => {
 
 
 const IconEyeOpen = (props) => {
-  const SVGEyeOpen = ({color}) => {
+  const SVGEyeOpen = () => {
     return(
-      <path className={!color && "icon-fill"} style={color && {fill: color}}
+      <path className="icon-fill"
         d="M250,125.4 M247.3,125.4c-95.5,1.9-169.7,101.1-172.9,105.4l-6.2,8.4l5.5,8.9c3.2,5.2,79.5,126.4,177,126.4
         c97.6,0,172.5-121.4,175.6-126.5l5.4-8.9l-6.2-8.4c-3.1-4.3-77.4-103.6-173-105.4 M182.1,233.3l70,49.8c-6.8,9.6-28,6.2-47.3-7.5
         C185.5,261.8,175.3,242.9,182.1,233.3z M354.6,288.7c-24.7,25.1-62.8,54.9-103.9,54.9c-41,0-79.3-29.7-104.2-54.6
@@ -388,14 +389,14 @@ const IconEyeOpen = (props) => {
 
 
 const IconEyeClosed = (props) => {
-  const SVGEyeClosed = ({color}) => {
+  const SVGEyeClosed = () => {
     return (
       <Fragment>
-        <path className={!color && "icon-fill"} style={color && {fill: color}}
+        <path className="icon-fill"
           d="M381.9,227.9c4.1,4.3,8,8.7,11.8,13.2c-11.7,17-24.9,33-39.3,47.8c-15,15.2-35,32.2-57.6,43.2l0,0l0,0
           l-18.5,39.5c83.7-19.3,145-118.7,147.8-123.3l5.4-8.9l-6-8.3c-16-20.7-34.4-39.6-54.8-56L357,204.2"
         />
-        <path className={!color && "icon-fill"} style={color && {fill: color}}
+        <path className="icon-fill"
           d="M362.7,71.1l-35.3,75.2c-18.1-9.5-38-16.7-59.2-19.4c-12-2.5-24.4-2.5-36.4,0
           C143.9,138.2,77.4,227.1,74.5,231.1l-6.2,8.4l5.5,8.9c2.9,4.6,64.6,103.1,147.9,123l-25.4,54.1l23.9,9.7L386.5,80.9h0.1v-0.1
           L362.7,71.1z M182.1,232.9L182.1,232.9L182.1,232.9l70,49.8c-2.6,3.6-7.1,5.4-12.9,5.4c-9.6,0.1-22.4-4.4-34.5-13
@@ -412,9 +413,9 @@ const IconEyeClosed = (props) => {
 
 
 const IconArrow = (props) => {
-  const SVGArrow = ({color}) => {
+  const SVGArrow = () => {
     return (
-      <path className={!color && "icon-fill"} style={color && {fill: color}}
+      <path className="icon-fill"
         d="M407.9,248c-0.1-0.2-0.3-0.3-0.5-0.5l-142.8-115c-0.6-0.5-1.3-0.7-2-0.7l0,0c-1.8,0-3.2,1.4-3.2,3.2l0,0v67.7H93.7
         c-1.3,0-2.4,1.1-2.4,2.4v99.7c0,1.3,1.1,2.4,2.4,2.4l0,0h165.7v58c0,1.8,1.4,3.2,3.2,3.2l0,0c0.7,0,1.4-0.3,2-0.7l142.8-115
         C408.8,251.4,409,249.4,407.9,248z"/>
@@ -425,15 +426,15 @@ const IconArrow = (props) => {
 
 
 const IconCopy = (props) => {
-  const SVGCopy = ({color}) => {
+  const SVGCopy = () => {
     return (
       <g>
-        <path className={!color && "icon-fill"} style={color && {fill: color}}
+        <path className="icon-fill"
           d="M52.3,62.6H22.1h-8.6h-2.1c-4.8,0-8.7,3.9-8.7,8.7v84.9c0,4.8,3.9,8.7,8.7,8.7l9.3,0l56.7,0
           c3.9,0,7.2-2.5,8.3-6c0.3-0.8,0.4-1.7,0.4-2.7l-0.2-56.1L52.3,62.6z M72.5,102H49V76L72.5,102z M72.5,150.1c0,2.2-1.8,3.9-3.9,3.9
           H19.4c-2.2,0-3.9-1.8-3.9-3.9V79.9c0-2.2,1.8-3.9,3.9-3.9h17.3c2.2,0,3.9,1.8,3.9,3.9l0.2,26.1c0,2.2,1.8,3.9,3.9,3.9l23.7,0.1
           c2.2,0,3.9,1.8,3.9,3.9V150.1z"/>
-        <path className={!color && "icon-fill"} style={color && {fill: color}}
+        <path className="icon-fill"
           d="M141.4,22.4l-18.2,0l0-5c-0.1-2.4-2.1-4.2-4.5-4h-4c-0.4-0.9-0.9-1.8-1.5-2.6C109.1,4.9,94.1,2,83.1,2
           c-10.9,0-26,2.9-30.2,8.8c-0.6,0.8-1.1,1.7-1.5,2.6h-3.8c-2.3-0.1-4.3,1.7-4.5,4l-0.1,5l-18.2,0c-7.8,0-14.1,5.7-14.1,12.7v36.5
           l12.8,0l0-27c0-2.9,2.7-5.2,6-5.2h3.9c0,0,4.1,8.6,9.1,8.6l81-0.2c5,0,9.1-8.6,9.1-8.6l3.9,0c3.3,0,6,2.3,6,5.2l-0.3,103
@@ -449,11 +450,11 @@ const IconCopy = (props) => {
 
 
 const IconCopyLink = (props) => {
-  const SVGCopyLink = ({color}) => {
+  const SVGCopyLink = () => {
     return (
       <Fragment>
         <g>
-          <path className={!color && "icon-fill"} style={color && {fill: color}}
+          <path className="icon-fill"
             d="M142.4,22.4l-18.2,0l0-5c-0.1-2.4-2.1-4.2-4.5-4h-4c-0.4-0.9-0.9-1.8-1.5-2.6C110.1,4.9,95.1,2,84.1,2
             c-10.9,0-26,2.9-30.2,8.8c-0.6,0.8-1.1,1.7-1.5,2.6h-3.8c-2.3-0.1-4.3,1.7-4.5,4l-0.1,5l-18.2,0c-7.8,0-14.1,5.7-14.1,12.7v55.7
             l12.8,0l0-46.1c0-2.9,2.7-5.2,6-5.2h3.9c0,0,4.1,8.6,9.1,8.6l81-0.2c5,0,9.1-8.6,9.1-8.6l3.9,0c3.3,0,6,2.3,6,5.2l-0.3,103
@@ -462,12 +463,12 @@ const IconCopyLink = (props) => {
             c8.8,0,20.8,1.9,24.1,5.5c0.5,0.5,0.9,1.1,1.2,1.7V33.9z"/>
         </g>
         <g>
-          <path className={!color && "icon-fill"} style={color && {fill: color}}
+          <path className="icon-fill"
             d="M90.5,51.8c-15.5,0-26.6,14-37.7,24.4c1.5,0,3.7-0.7,5.9-0.7c3.7,0,7.4,0.7,11.1,2.2
             c5.9-5.9,11.8-12.5,20.7-12.5c4.4,0,9.6,2.2,13.3,5.2c7.4,7.4,7.4,19.2,0,26.6L84.6,116c-3,3-8.9,5.2-13.3,5.2
             c-10.3,0-15.5-6.7-19.2-14.8l-9.6,9.6c5.9,11.1,14.8,19.2,28.1,19.2c8.9,0,17-3.7,22.1-9.6l19.2-19.2C118.6,99.8,123,91.6,123,82
             C121.5,65.8,106.8,51.8,90.5,51.8L90.5,51.8z"/>
-          <path className={!color && "icon-fill"} style={color && {fill: color}}
+          <path className="icon-fill"
             d="M58.8,141.1l-6.6,6.6c-2.9,3-8.9,5.2-13.3,5.2c-4.4,0-9.6-2.2-13.3-5.2c-7.4-7.4-7.4-19.9,0-26.6L44.7,102
             c3-3,8.9-5.2,13.3-5.2c10.3,0,15.5,7.4,19.2,14.8l9.6-9.6c-5.9-11.1-14.8-19.2-28.1-19.2c-8.9,0-17,3.7-22.1,9.6l-19.2,19.2
             c-12.6,12.6-12.6,32.5,0,44.3c11.8,11.8,32.5,12.6,43.6,0l14-14c-2.2,0.7-4.4,0.7-6.6,0.7C64.7,142.6,61.7,142.6,58.8,141.1
@@ -482,9 +483,9 @@ const IconCopyLink = (props) => {
 
 
 const IconAttentionTriangle = (props) => {
-  const SVGAttentionTriangle = ({color}) => {
+  const SVGAttentionTriangle = () => {
     return (
-      <path className={!color && "icon-fill"} style={color && {fill: color}}
+      <path className="icon-fill"
         d="M482.6,444.2l-222-404.5c-4.7-4.7-12.3-4.7-17,0L19.5,444.2c-4.7,4.7-4.7,12.3,0,17h463.1
         C487.3,456.5,487.3,448.9,482.6,444.2z M252.2,435.5c-18.5,0.1-33.6-14.7-33.8-33.2s14.7-33.6,33.2-33.8c18.5,0,33.6,15,33.8,33.5
         C285.4,420.4,270.6,435.4,252.2,435.5z M288.1,185.1l-11.5,147.7c-0.7,8.5-4.8,14.9-9.6,14.9h-32.2c-4.9,0-9-6.6-9.6-15.3
@@ -497,9 +498,9 @@ const IconAttentionTriangle = (props) => {
 
 
 const IconSearch = (props) => {
-  const SVGSearch = ({color}) => {
+  const SVGSearch = () => {
     return (
-      <path className={!color && "icon-fill"} style={color && {fill: color}}
+      <path className="icon-fill"
         d="M432.9,408.7C432.9,408.7,432.9,408.7,432.9,408.7L320.4,296.2c20.8-25.5,33.2-58.1,33.2-93.6c0,0,0,0,0,0
         c0-82-66.5-148.5-148.5-148.5S56.7,120.6,56.7,202.6s66.5,148.5,148.5,148.5c28.3,0,54.7-7.9,77.2-21.7l114.9,114.9
         c3.7,3.7,9.6,3.7,13.3,0c0,0,0,0,0,0l22.3-22.3C436.6,418.3,436.6,412.3,432.9,408.7z M205.2,320.1c-64.9,0-117.5-52.6-117.5-117.5
