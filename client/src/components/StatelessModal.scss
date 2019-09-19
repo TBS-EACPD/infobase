@@ -1,3 +1,18 @@
+body.modal-open.modal-open--allow-scroll {
+  overflow-y: scroll !important;
+  padding-right: 0px !important;
+}
+
 .modal-backdrop {
   background-color: rgba(0,0,0,.3);
+}
+
+.modal-dialog {
+  margin-top: 30px;
+}
+.modal-dialog--left {
+  margin-left: 30px;
+}
+.modal-dialog--right {
+  margin-right: 30px;
 }
