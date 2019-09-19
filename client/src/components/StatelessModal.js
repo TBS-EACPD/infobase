@@ -52,7 +52,7 @@ export class StatelessModal extends React.Component {
           <Modal.Body>
             {body}
           </Modal.Body>
-
+          
           <Modal.Footer>
             <button className="btn btn-ib-primary" onClick={this.closeModal}>
               {close_text}
@@ -65,5 +65,6 @@ export class StatelessModal extends React.Component {
   }
 }
 StatelessModal.defaultProps = {
+  auto_close_time: false,
   close_text: _.upperFirst( trivial_text_maker("close") ),
 };

@@ -50,7 +50,7 @@ export class WriteToClipboard extends React.Component {
         <StatelessModal
           show={!!copy_status_message} 
           on_close_callback={() => this.setState({copy_status_message: false})}
-          auto_close_time={copy_status_message === text_maker("copy_success") && 3000}
+          auto_close_time={!window.is_a11y_mode && copy_status_message === text_maker("copy_success") && 3000}
           title={
             <Fragment>
               <IconCopy
