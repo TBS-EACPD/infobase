@@ -1,0 +1,22 @@
+.countdown-circle {
+  text-align: center;
+}
+
+.countdown-circle__number {
+  display: inline-block;
+}
+
+.countdown-circle__display {
+  width: inherit;
+  height: inherit;
+  top: 0;
+  right: 0;
+  transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+.countdown-circle__display > circle {
+  stroke-dashoffset: 0px;
+  stroke-linecap: round;
+  stroke-width: 2px;
+  fill: none;
+}
