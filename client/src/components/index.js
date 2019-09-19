@@ -25,6 +25,7 @@ import { ShareButton } from './ShareButton.js';
 import { PermalinkButton } from './PermalinkButton.js';
 import { WriteToClipboard } from './WriteToClipboard.js';
 import { PDFGenerator } from './PDFGenerator.js';
+import { CountdownCircle } from './CountdownCircle.js';
 
 import {
   Format,
@@ -78,6 +79,7 @@ export {
   PermalinkButton,
   WriteToClipboard,
   PDFGenerator,
+  CountdownCircle,
 
   Format,
   FancyUL,

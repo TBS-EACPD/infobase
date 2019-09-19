@@ -1,6 +1,8 @@
 import './StatelessModal.scss';
 
 import { Modal } from 'react-bootstrap';
+
+import { CountdownCircle } from './CountdownCircle.js';
 import { trivial_text_maker } from '../models/text.js';
 
 export class StatelessModal extends React.Component {
@@ -39,12 +41,13 @@ export class StatelessModal extends React.Component {
       subtitle,
       body,
       close_text,
+      auto_close_time,
     } = this.props;
 
     return (
       <Modal show={show} onHide={this.closeModal}>
         <div onBlur={this.onBlur}>
-          <Modal.Header>
+          <Modal.Header closeButton={!close_text}>
             {title && <Modal.Title style={{fontSize: '130%'}}>{title}</Modal.Title>}
             {subtitle && <Modal.Title style={{fontSize: '100%', marginTop: '7px'}}>{subtitle}</Modal.Title>}
           </Modal.Header>
@@ -53,10 +56,25 @@ export class StatelessModal extends React.Component {
             {body}
           </Modal.Body>
           
-          <Modal.Footer>
-            <button className="btn btn-ib-primary" onClick={this.closeModal}>
-              {close_text}
-            </button>
+          <Modal.Footer
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+            }}
+          >
+            { auto_close_time && 
+              <CountdownCircle
+                time={auto_close_time}
+                size="3em"
+                color={window.infobase_color_constants.buttonPrimaryColor}
+              />
+            }
+            { close_text &&
+              <button className="btn btn-ib-primary" onClick={this.closeModal}>
+                {close_text}
+              </button>
+            }
           </Modal.Footer>
           <div tabIndex='0' onFocus={this.closeModal} />
         </div>
