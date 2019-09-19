@@ -6,10 +6,12 @@ import classNames from 'classnames';
 
 const svg_default_styles = {
   width: "1.5em",
+  height: "1.5em",
   verticalAlign: "-0.5em",
 };
 const inline_svg_default_styles = {
   width: "1.2em",
+  height: "1.2em",
   verticalAlign: "-0.2em",
 };
 class _IconWrapper extends React.Component {
