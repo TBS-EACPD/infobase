@@ -16,6 +16,8 @@ export class CountdownCircle extends React.Component {
       time,
       size,
       color,
+      stroke_width,
+      show_numbers,
     } = this.props;
 
     const { countdown_circle_instance_id } = this.state;
@@ -36,17 +38,24 @@ export class CountdownCircle extends React.Component {
           height: size,
         }}
       >
-        <div 
-          className="countdown-circle__number"
-          style={{lineHeight: size, color}}
+        { show_numbers &&
+          <div 
+            className="countdown-circle__number"
+            style={{lineHeight: size, color}}
+          >
+            {time_in_seconds}
+          </div>
+        }
+        <svg 
+          className="countdown-circle__display"
+          style={show_numbers ? {top: `-${size}`} : {}}
         >
-        </div>
-        <svg className="countdown-circle__display">
           <style 
             dangerouslySetInnerHTML={{__html: `
               #${countdown_circle_instance_id} {
                 stroke-dasharray: ${circle_circumference};
                 stroke: ${color};
+                stroke-width: ${stroke_width};
                 animation: ${countdown_circle_instance_id} ${time_in_seconds}s linear infinite forwards;
               }
               @keyframes ${countdown_circle_instance_id} {
@@ -70,3 +79,9 @@ export class CountdownCircle extends React.Component {
     );
   }
 }
+CountdownCircle.defaultProps = {
+  size: "3em",
+  color: window.infobase_color_constants.buttonPrimaryColor,
+  stroke_width: "2px",
+  show_numbers: false,
+};
