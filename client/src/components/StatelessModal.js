@@ -1,6 +1,5 @@
 import './StatelessModal.scss';
 
-import { Fragment } from 'react';
 import { Modal } from 'react-bootstrap';
 import classNames from 'classnames';
 
@@ -120,6 +119,7 @@ export class StatelessModal extends React.Component {
       <Modal 
         show={show}
         backdrop={backdrop}
+        bsPrefix={!backdrop ? "modal-without-backdrop" : undefined}
         dialogClassName={classNames(`modal-dialog--${dialog_position}`, additional_dialog_class)}
         onHide={this.closeModal}
         restoreFocus={
