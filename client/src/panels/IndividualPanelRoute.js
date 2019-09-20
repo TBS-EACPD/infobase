@@ -91,7 +91,7 @@ export default class IsolatedPanel extends React.Component {
           description={undefined}
           route_key={"panel"}
         >
-          <div id="main">
+          <div id="main" style={{marginTop: "10px"}}>
             {panel_key &&
               <ReactPanelGraph 
                 graph_key={panel_key}
