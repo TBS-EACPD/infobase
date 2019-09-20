@@ -2,10 +2,8 @@ import { StandardRouteContainer } from '../core/NavComponents';
 
 import { get_panels_for_subject } from '../infographic/get_panels_for_subject/index.js';
 import { Subject } from '../models/subject';
-import { EverythingSearch, SpinnerWrapper } from '../components/index.js';
+import { SpinnerWrapper } from '../components/index.js';
 import { ensure_loaded } from '../core/lazy_loader';
-import { PanelGraph } from '../core/PanelGraph';
-import { Indicator } from '../models/results.js';
 import { ReactPanelGraph } from '../core/PanelCollectionView';
 import { create_text_maker } from '../models/text.js';
 import text from './individual_panel.yaml';
@@ -18,13 +16,6 @@ const {
   Gov,
   CRSO,
 } = Subject;
-
-const defaultSubjectKeys = {
-  dept: '1',
-  program: 'AGR-AAA00', //business risk management
-  tag: 'GOC001',
-  crso: "TBC-BXA00",
-};
 
 const get_subject = (level, id) => {
   let subject;
@@ -56,12 +47,11 @@ export default class IsolatedPanel extends React.Component {
     };
   }
   loadDeps(props){
-    render(){
-      const {
-        match: {
-          params: { level, subject_id, panel_key },
-        },
-      } = this.props;
+    const {
+      match: {
+        params: { level, subject_id, panel_key },
+      },
+    } = this.props;
   
     if(!(level && subject_id && panel_key)){
       this.setState({loading: false, panel_key: undefined});
@@ -76,7 +66,7 @@ export default class IsolatedPanel extends React.Component {
           subject_level: subject.level,
           footnotes_for: subject,
         })
-          .then( () => this.setState({loading: false, subject, level, panel_key}) )
+          .then( () => this.setState({loading: false, subject, panel_key}) )
       );
     }
   }
@@ -90,15 +80,15 @@ export default class IsolatedPanel extends React.Component {
   }
 
   render(){
-    const { loading, subject, level, panel_key } = this.state; 
+    const { loading, subject, panel_key } = this.state; 
     if(loading){
-      return <SpinnerWrapper config_name={"sub_route"} />
+      return <SpinnerWrapper config_name={"sub_route"} />;
     } else {
       return (
         <StandardRouteContainer 
           title={text_maker("individual_panel_title")}
           breadcrumbs={[text_maker("individual_panel_title")]}
-          description={text_maker("individual_panel_description")}
+          description={undefined}
           route_key={"panel"}
         >
           <div id="main">
