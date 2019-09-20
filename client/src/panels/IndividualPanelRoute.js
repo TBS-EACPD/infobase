@@ -30,16 +30,16 @@ const get_subject = (level, id) => {
   let subject;
   switch(level){
     case 'dept':
-      subject = Dept.lookup(id) || Dept.lookup(defaultSubjectKeys.dept);
+      subject = Dept.lookup(id);
       break;
     case 'tag':
-      subject = Tag.lookup(id) || Tag.lookup(defaultSubjectKeys.tag);
+      subject = Tag.lookup(id);
       break;
     case 'program':
-      subject = Program.lookup(id) || Program.lookup(defaultSubjectKeys.program);
+      subject = Program.lookup(id);
       break;
     case 'crso':
-      subject = CRSO.lookup(id) || CRSO.lookup( defaultSubjectKeys.crso );
+      subject = CRSO.lookup(id);
       break;
     default:
       subject = Gov;
@@ -56,10 +56,13 @@ export default class IsolatedPanel extends React.Component {
     };
   }
   loadDeps(props){
-    const level = props.match.params.level;
-    const subject_id = props.match.params.subject_id;
-    const panel_key = props.match.params.panel_key;
-
+    render(){
+      const {
+        match: {
+          params: { level, subject_id, panel_key },
+        },
+      } = this.props;
+  
     if(!(level && subject_id && panel_key)){
       this.setState({loading: false, panel_key: undefined});
     } else {
@@ -94,8 +97,8 @@ export default class IsolatedPanel extends React.Component {
       return (
         <StandardRouteContainer 
           title={text_maker("individual_panel_title")}
-          breadcrumbs={"TODO"}
-          description={null}
+          breadcrumbs={[text_maker("individual_panel_title")]}
+          description={text_maker("individual_panel_description")}
           route_key={"panel"}
         >
           <div id="main">
@@ -112,8 +115,3 @@ export default class IsolatedPanel extends React.Component {
     }
   }
 }
-IsolatedPanel.defaultProps = {
-  level: 'dept',
-  panel_key: 'drr_summary',
-  subject_id: '1',
-};
