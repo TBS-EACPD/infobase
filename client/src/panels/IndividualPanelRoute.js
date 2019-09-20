@@ -7,6 +7,9 @@ import { ensure_loaded } from '../core/lazy_loader';
 import { PanelGraph } from '../core/PanelGraph';
 import { Indicator } from '../models/results.js';
 import { ReactPanelGraph } from '../core/PanelCollectionView';
+import { create_text_maker } from '../models/text.js';
+import text from './individual_panel.yaml';
+const text_maker = create_text_maker(text);
 
 const {
   Dept, 
@@ -15,11 +18,6 @@ const {
   Gov,
   CRSO,
 } = Subject;
-  
-function url_template(subject, panel){
-  return `/panel/${subject.level}/${subject.id}/${panel.key}`;
-}
-
 
 const defaultSubjectKeys = {
   dept: '1',
@@ -58,22 +56,26 @@ export default class IsolatedPanel extends React.Component {
     };
   }
   loadDeps(props){
-    const level = props.match.params.level || 'dept';
-    const subject_id = props.match.params.subject_id || '1';
-    const panel_key = props.match.params.panel_key || 'welcome_mat';
+    const level = props.match.params.level;
+    const subject_id = props.match.params.subject_id;
+    const panel_key = props.match.params.panel_key;
 
-    const subject = get_subject(level, subject_id);
+    if(!(level && subject_id && panel_key)){
+      this.setState({loading: false, panel_key: undefined});
+    } else {
+      const subject = get_subject(level, subject_id);
 
-    get_panels_for_subject(subject).then( () =>
-      ensure_loaded({
-        subject: subject,
-        has_results: true,
-        graph_keys: [ panel_key ],
-        subject_level: subject.level,
-        footnotes_for: subject,
-      })
-        .then( () => this.setState({loading: false, subject, level, panel_key}) )
-    );
+      get_panels_for_subject(subject).then( () =>
+        ensure_loaded({
+          subject: subject,
+          has_results: true,
+          graph_keys: [ panel_key ],
+          subject_level: subject.level,
+          footnotes_for: subject,
+        })
+          .then( () => this.setState({loading: false, subject, level, panel_key}) )
+      );
+    }
   }
   componentDidMount(){
     this.loadDeps({...this.props});
@@ -91,17 +93,19 @@ export default class IsolatedPanel extends React.Component {
     } else {
       return (
         <StandardRouteContainer 
-          title={"TODO"}
+          title={text_maker("individual_panel_title")}
           breadcrumbs={"TODO"}
           description={null}
           route_key={"panel"}
         >
           <div id="main">
-            <ReactPanelGraph 
-              graph_key={panel_key}
-              subject={subject}
-              key={`${panel_key}-${subject.guid}`}
-            />
+            {panel_key &&
+              <ReactPanelGraph 
+                graph_key={panel_key}
+                subject={subject}
+                key={`${panel_key}-${subject.guid}`}
+              />
+            }
           </div>
         </StandardRouteContainer>
       );
