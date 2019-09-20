@@ -818,7 +818,7 @@ export const declare_welcome_mat_panel = () => declare_panel({
         return {
           footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
           info_deps: ["programFtes_dept_info"],
-          depends_on: ['programSpending','programFtes', 'orgVoteStatEstimates'],
+          depends_on: ['programSpending','programFtes', 'orgVoteStatEstimates', 'orgVoteStatPa'],
           missing_info: "ok",
           calculate (subject, info, options){
             const { programSpending, programFtes, orgVoteStatEstimates } = this.tables; 
