@@ -32,7 +32,7 @@ export class StatelessModal extends React.Component {
       document.body.classList.add('modal-open--allow-scroll');
     }
 
-    if ( _.isNumber(auto_close_time) && !timeout_stopped ){
+    if ( _.isNumber(auto_close_time) && show && !timeout_stopped ){
       this.auto_close_timeouts.push( setTimeout(this.closeModal, auto_close_time) );
     }
   }
@@ -66,6 +66,7 @@ export class StatelessModal extends React.Component {
   }
   clearAutoCloseTimeouts(){
     this.auto_close_timeouts.forEach( (auto_close_timeout) => clearTimeout(auto_close_timeout) );
+    this.auto_close_timeouts = [];
   }
   render(){
     const {
@@ -85,8 +86,6 @@ export class StatelessModal extends React.Component {
 
     const { timeout_stopped } = this.state;
 
-    const let_window_scroll = !backdrop;
-    
     const default_header = (
       <div style={{display: "inline-block"}}>
         {title && <Modal.Title style={{fontSize: '130%'}}>{title}</Modal.Title>}
@@ -138,7 +137,7 @@ export class StatelessModal extends React.Component {
         restoreFocus={
           // don't want to restore focus if the window could scroll, since it will (unexpectedly for the user) jump the window back
           // when focus returns. Always restore focus in a11y mode
-          !let_window_scroll || window.is_a11y_mode
+          backdrop || window.is_a11y_mode
         }
       >
         <div onFocus={this.stopAutoCloseTimeouts} onMouseOver={this.stopAutoCloseTimeouts}>
