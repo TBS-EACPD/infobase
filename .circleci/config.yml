@@ -10,6 +10,7 @@ deploy_filter: &deploy_filter
     branches:
       only:
         - master
+        - ind_ind
 
 version: 2
 jobs:
