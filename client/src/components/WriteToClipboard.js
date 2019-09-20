@@ -54,17 +54,19 @@ export class WriteToClipboard extends React.Component {
           title={
             <Fragment>
               <IconCopy
-                title={button_description}
                 color={window.infobase_color_constants.tertiaryColor}
                 alternate_color={false}
+                aria_hide={true}
               />
-              {copy_status_message}
+              {text_maker("copy")}
             </Fragment>
           }
+          subtitle={copy_status_message}
           body={<div tabIndex="0">{text_to_copy}</div>}
           backdrop={false}
-          dialog_position="right"
-          auto_close_time={!window.is_a11y_mode && copy_status_message === text_maker("copy_success") && 3000}
+          dialog_position="left"
+          auto_close_time={!window.is_a11y_mode && copy_status_message === text_maker("copy_success") && 4000}
+          close_button_in_header={true}
         />
       </Fragment>
     );

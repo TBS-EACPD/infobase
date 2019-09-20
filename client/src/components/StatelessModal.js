@@ -1,5 +1,6 @@
 import './StatelessModal.scss';
 
+import { Fragment } from 'react';
 import { Modal } from 'react-bootstrap';
 import classNames from 'classnames';
 
@@ -63,13 +64,57 @@ export class StatelessModal extends React.Component {
       let_window_scroll,
       title,
       subtitle,
+      header,
       body,
+      footer,
       backdrop,
       dialog_position,
       additional_dialog_class,
       auto_close_time,
       close_text,
+      close_button_in_header,
     } = this.props;
+
+    const default_header = (
+      <div style={{display: "inline-block"}}>
+        {title && <Modal.Title style={{fontSize: '130%'}}>{title}</Modal.Title>}
+        {subtitle && <Modal.Title style={{fontSize: '100%', marginTop: '7px'}}>{subtitle}</Modal.Title>}
+      </div>
+    );
+
+    const close_button_and_timer = (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          height: "3em",
+        }}
+      >
+        { auto_close_time && 
+          <CountdownCircle time={auto_close_time} show_numbers={true} size="3em" />
+        }
+        { close_text &&
+          <button className="btn btn-ib-primary" onClick={this.closeModal}>
+            {close_text}
+          </button>
+        }
+      </div>
+    );
+
+    const common_layout = (content, include_close_button) => (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        {content || <div /> /* empty div fallback so that space-between justification consistently positions the close button */} 
+        {include_close_button && close_button_and_timer}
+      </div>
+    );
+    const header_content = common_layout(header || default_header, close_button_in_header);
+    const footer_content = footer || !close_button_in_header && common_layout(footer || <div/>, !close_button_in_header);
 
     return (
       <Modal 
@@ -85,28 +130,16 @@ export class StatelessModal extends React.Component {
       >
         <div onBlur={this.onBlur}>
           <Modal.Header closeButton={!close_text}>
-            {title && <Modal.Title style={{fontSize: '130%'}}>{title}</Modal.Title>}
-            {subtitle && <Modal.Title style={{fontSize: '100%', marginTop: '7px'}}>{subtitle}</Modal.Title>}
+            {header_content}
           </Modal.Header>
           <Modal.Body>
             {body}
           </Modal.Body>
-          <Modal.Footer
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-end",
-            }}
-          >
-            { auto_close_time && 
-              <CountdownCircle time={auto_close_time} show_numbers={true} />
-            }
-            { close_text &&
-              <button className="btn btn-ib-primary" onClick={this.closeModal}>
-                {close_text}
-              </button>
-            }
-          </Modal.Footer>
+          { footer_content &&
+            <Modal.Footer>
+              {footer_content}
+            </Modal.Footer>
+          }
           <div tabIndex='0' onFocus={this.closeModal} />
         </div>
       </Modal>
@@ -119,4 +152,5 @@ StatelessModal.defaultProps = {
   dialog_position: "center",
   auto_close_time: false,
   close_text: _.upperFirst( trivial_text_maker("close") ),
+  close_button_in_header: false,
 };
