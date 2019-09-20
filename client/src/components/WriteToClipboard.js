@@ -64,8 +64,8 @@ export class WriteToClipboard extends React.Component {
           body={<div tabIndex="0">{text_to_copy}</div>}
           backdrop={false}
           dialog_position="left"
-          auto_close_time={!window.is_a11y_mode && copy_status_message === text_maker("copy_success") && 4000}
-          close_button_in_header={true}
+          auto_close_time={!window.is_a11y_mode && copy_status_message === text_maker("copy_success") && 3000}
+          close_button_in_header={!window.is_a11y_mode}
         />
       </Fragment>
     );
