@@ -60,7 +60,6 @@ export class StatelessModal extends React.Component {
   render(){
     const {
       show,
-      let_window_scroll,
       title,
       subtitle,
       header,
@@ -74,6 +73,8 @@ export class StatelessModal extends React.Component {
       close_button_in_header,
     } = this.props;
 
+    const let_window_scroll = !backdrop;
+    
     const default_header = (
       <div style={{display: "inline-block"}}>
         {title && <Modal.Title style={{fontSize: '130%'}}>{title}</Modal.Title>}
@@ -147,7 +148,6 @@ export class StatelessModal extends React.Component {
   }
 }
 StatelessModal.defaultProps = {
-  let_window_scroll: false,
   backdrop: true,
   dialog_position: "center",
   auto_close_time: false,
