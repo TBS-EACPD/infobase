@@ -12,50 +12,60 @@ export class StatelessModal extends React.Component {
     super(props);
 
     this.auto_close_timeouts = [];
-    this.onBlur = this.onBlur.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.stopAutoCloseTimeouts = this.stopAutoCloseTimeouts.bind(this);
+    this.clearAutoCloseTimeouts = this.clearAutoCloseTimeouts.bind(this);
+
+    this.state = { timeout_stopped: false };
+  }
+  componentDidUpdate(){
+    const { 
+      auto_close_time,
+      show,
+      backdrop,
+    } = this.props;
+
+    const { timeout_stopped } = this.state;
+
+    if (show && !backdrop){
+      // Bootstrap modals prevent scrolling by temporarily adding the 'modal-open' class to <body>
+      document.body.classList.add('modal-open--allow-scroll');
+    }
+
+    if ( _.isNumber(auto_close_time) && !timeout_stopped ){
+      this.auto_close_timeouts.push( setTimeout(this.closeModal, auto_close_time) );
+    }
+  }
+  componentWillUnmount(){
+    this.closeModal();
   }
   closeModal(){
     const {
       on_close_callback,
-      let_window_scroll,
+      backdrop,
     } = this.props;
 
-    this.auto_close_timeouts.forEach( (auto_close_timeout) => clearTimeout(auto_close_timeout) );
+    this.clearAutoCloseTimeouts();
+    this.setState({ timeout_stopped: false });
 
-    if (let_window_scroll){
+    if (!backdrop){
       // Bootstrap modals prevent scrolling by temporarily adding the 'modal-open' class to <body>
       document.body.classList.remove('modal-open--allow-scroll');
     }
 
     on_close_callback();
   }
-  onBlur(e){
-    const currentTarget = e.currentTarget;
-    setTimeout(() => {
-      if (!currentTarget.contains(document.activeElement)) {
-        this.closeModal();
-      }
-    }, 0);
-  }
-  componentWillUnmount(){
-    this.closeModal();
-  }
-  componentDidUpdate(){
-    const { 
-      auto_close_time,
-      show,
-      let_window_scroll,
-    } = this.props;
-
-    if (show && let_window_scroll){
-      // Bootstrap modals prevent scrolling by temporarily adding the 'modal-open' class to <body>
-      document.body.classList.add('modal-open--allow-scroll');
+  stopAutoCloseTimeouts(){
+    // With all the timeouts floating around, despite clearing them carefully, this occasionally gets 
+    // called after the modal's closed, which could make it start with timeout_stopped true the next
+    // time it was opened. So, don't try to stop the timeout if the modal's not being shown
+    if (this.props.show && !this.state.timeout_stopped){
+      this.clearAutoCloseTimeouts();
+      this.setState({ timeout_stopped: true });
     }
-
-    if ( _.isNumber(auto_close_time) ){
-      this.auto_close_timeouts.push( setTimeout(this.closeModal, auto_close_time) );
-    }
+  }
+  clearAutoCloseTimeouts(){
+    this.auto_close_timeouts.forEach( (auto_close_timeout) => clearTimeout(auto_close_timeout) );
   }
   render(){
     const {
@@ -72,6 +82,8 @@ export class StatelessModal extends React.Component {
       close_text,
       close_button_in_header,
     } = this.props;
+
+    const { timeout_stopped } = this.state;
 
     const let_window_scroll = !backdrop;
     
@@ -90,7 +102,7 @@ export class StatelessModal extends React.Component {
           height: "3em",
         }}
       >
-        { auto_close_time && 
+        { auto_close_time && !timeout_stopped &&
           <CountdownCircle time={auto_close_time} show_numbers={true} size="3em" />
         }
         { close_text &&
@@ -120,7 +132,7 @@ export class StatelessModal extends React.Component {
       <Modal 
         show={show}
         backdrop={backdrop}
-        bsPrefix={!backdrop ? "modal-without-backdrop" : undefined}
+        modal-without-backdrop={(!backdrop).toString()}
         dialogClassName={classNames(`modal-dialog--${dialog_position}`, additional_dialog_class)}
         onHide={this.closeModal}
         restoreFocus={
@@ -129,7 +141,7 @@ export class StatelessModal extends React.Component {
           !let_window_scroll || window.is_a11y_mode
         }
       >
-        <div onBlur={this.onBlur}>
+        <div onFocus={this.stopAutoCloseTimeouts} onMouseOver={this.stopAutoCloseTimeouts}>
           <Modal.Header closeButton={!close_text}>
             {header_content}
           </Modal.Header>
