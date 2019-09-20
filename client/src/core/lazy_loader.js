@@ -48,7 +48,6 @@ function ensure_loaded({
     .uniqBy()
     .map( table_key => Table.lookup(table_key) )
     .value();
-
   //results can be required explicitly, or be a dependency of a graph/statistic
   const should_load_results = (
     results || 
@@ -184,7 +183,6 @@ function ensure_loaded({
       Promise.resolve()
   );
 
-  
   return Promise.all([
     load(table_set),
     results_prom,

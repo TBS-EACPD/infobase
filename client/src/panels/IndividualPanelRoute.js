@@ -1,6 +1,6 @@
 import { StandardRouteContainer } from '../core/NavComponents';
 
-import { get_panels_for_subject } from '../infographic/get_panels_for_subject';
+import { get_panels_for_subject } from '../infographic/get_panels_for_subject/index.js';
 import { Subject } from '../models/subject';
 import { EverythingSearch, SpinnerWrapper } from '../components/index.js';
 import { ensure_loaded } from '../core/lazy_loader';
@@ -57,44 +57,38 @@ export default class IsolatedPanel extends React.Component {
       loading: true,
     };
   }
-  loadDeps(subject_id,level,panel_key){
+  loadDeps(props){
+    const level = props.match.params.level || 'dept';
+    const subject_id = props.match.params.subject_id || '1';
+    const panel_key = props.match.params.panel_key || 'welcome_mat';
+
     const subject = get_subject(level, subject_id);
-    ensure_loaded({
-      graph_keys: [ panel_key ],
-      subject_level: subject.level,
-      subject,
-      footnotes_for: subject,
-    }).then(()=>{
-      this.setState({loading: false});
-    });
+
+    get_panels_for_subject(subject).then( () =>
+      ensure_loaded({
+        subject: subject,
+        has_results: true,
+        graph_keys: [ panel_key ],
+        subject_level: subject.level,
+        footnotes_for: subject,
+      })
+        .then( () => this.setState({loading: false, subject, level, panel_key}) )
+    );
   }
   componentDidMount(){
-    const { panel_key, subject_id, level } = this.props;
-    Promise.all(
-      _.chain(["gov", "dept", "crso", "program", "tag"])
-        .map(level => get_subject(level))
-        .map(get_panels_for_subject)
-        .value(),
-      this.loadDeps(subject_id,level,panel_key),
-    ).then( () => this.setState({loading: false}) );
+    this.loadDeps({...this.props});
   }
   componentDidUpdate(){
     if(this.state.loading){
-      const { panel_key, subject_id, level } = this.props;
-      const subject = get_subject(level, subject_id);
-      this.loadDeps(subject,panel_key);
+      this.loadDeps({...this.props});
     }
   }
 
   render(){
-    const { loading } = this.state; 
+    const { loading, subject, level, panel_key } = this.state; 
     if(loading){
       return <SpinnerWrapper config_name={"sub_route"} />
     } else {
-      const { panel_key, subject_id, level } = this.props;
-      const subject = get_subject(level, subject_id);
-      const graph_obj = PanelGraph.lookup(panel_key, subject.level);
-      debugger;
       return (
         <StandardRouteContainer 
           title={"TODO"}
