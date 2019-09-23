@@ -12,9 +12,11 @@ export class StatelessModal extends React.Component {
     super(props);
 
     this.closeModal = this.closeModal.bind(this);
-    this.stopAutoCloseTimeouts = this.stopAutoCloseTimeouts.bind(this);
 
-    this.state = { timeout_stopped: false };
+    this.state = {
+      keyboard_navigation_detected: false,
+      timeout_stopped: false,
+    };
   }
   componentDidUpdate(){
     const { 
@@ -36,17 +38,14 @@ export class StatelessModal extends React.Component {
       backdrop,
     } = this.props;
 
-    this.setState({ timeout_stopped: false });
-
     if (!backdrop){
       // Bootstrap modals prevent scrolling by temporarily adding the 'modal-open' class to <body>
       document.body.classList.remove('modal-open--allow-scroll');
     }
 
+    this.setState({ timeout_stopped: false });
+
     on_close_callback();
-  }
-  stopAutoCloseTimeouts(){
-    (this.props.show && !this.state.timeout_stopped) && this.setState({ timeout_stopped: true });
   }
   render(){
     const {
@@ -64,7 +63,10 @@ export class StatelessModal extends React.Component {
       close_button_in_header,
     } = this.props;
 
-    const { timeout_stopped } = this.state;
+    const {
+      keyboard_navigation_detected,
+      timeout_stopped,
+    } = this.state;
 
     const default_header = (
       <div style={{display: "inline-block"}}>
@@ -122,10 +124,14 @@ export class StatelessModal extends React.Component {
         restoreFocus={
           // don't want to restore focus if the window could scroll, since it will (unexpectedly for the user) jump the window back
           // when focus returns. Always restore focus in a11y mode
-          backdrop || window.is_a11y_mode
+          backdrop || keyboard_navigation_detected || window.is_a11y_mode
         }
       >
-        <div onFocus={this.stopAutoCloseTimeouts} onMouseOver={this.stopAutoCloseTimeouts}>
+        <div
+          onFocus={() => this.setState({ timeout_stopped: show })}
+          onMouseOver={() => this.setState({ timeout_stopped: show })}
+          onKeyDown={() => this.setState({ keyboard_navigation_detected: show })}
+        >
           <Modal.Header closeButton={!close_text}>
             {header_content}
           </Modal.Header>
@@ -139,8 +145,8 @@ export class StatelessModal extends React.Component {
               {footer_content}
             </Modal.Footer>
           }
-          <div tabIndex='0' onFocus={this.closeModal} />
         </div>
+        <div tabIndex='0' onFocus={this.closeModal} />
       </Modal>
     );
   }
