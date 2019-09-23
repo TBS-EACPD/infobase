@@ -20,6 +20,7 @@ export class CountdownCircle extends React.Component {
       color,
       stroke_width,
       show_numbers,
+      on_end_callback,
     } = this.props;
 
     const { countdown_circle_instance_id } = this.state;
@@ -58,7 +59,7 @@ export class CountdownCircle extends React.Component {
                 stroke-dasharray: ${circle_circumference};
                 stroke: ${color};
                 stroke-width: ${stroke_width};
-                animation: ${countdown_circle_instance_id} ${time_in_seconds}s linear infinite forwards;
+                animation: ${countdown_circle_instance_id} ${time}ms linear 1 forwards;
               }
               @keyframes ${countdown_circle_instance_id} {
                 from {
@@ -75,6 +76,7 @@ export class CountdownCircle extends React.Component {
             r={circle_radius}
             cx={circle_position}
             cy={circle_position}
+            onAnimationEnd={on_end_callback}
           />
         </svg>
       </div>
