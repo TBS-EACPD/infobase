@@ -5,7 +5,7 @@ import {
   Panel,
   HeightClippedGraph,
 } from '../shared.js';
-import { get_static_url } from '../../request_utils.js';
+import { infograph_href_template } from '../../link_utils.js';
 import { DisplayTable } from '../../components/DisplayTable.js';
 import { 
   ResultCounts,
@@ -119,7 +119,7 @@ const subject_link = (subject) => {
           {text_maker(subject.data.subject.level)}
         </span>
         {` ${text_maker("of")} `}
-        <a href={`#orgs/program/${program_id}/infograph/results`}>
+        <a href={infograph_href_template(subject,"results")}>
           {program_name}
         </a>
         )
@@ -128,7 +128,7 @@ const subject_link = (subject) => {
   } else {
     return (
       <span>
-        <a href={`#orgs/${subject.data.subject.level}/${subject.data.subject.id}/infograph/results`}>
+        <a href={infograph_href_template(subject,"results")}>
           {subject.data.name}
         </a>
         {" "}
