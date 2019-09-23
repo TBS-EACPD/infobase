@@ -36,7 +36,7 @@ filter_by_status:
   en: |
     Filter by indicator status (optional):
   fr: |
-    Filtrer par indicateur statut (facultatif) :
+    Filtrer selon le statut de l'indicateur (facultatif) :
 
 all_crs:
   en: All Core Responsibilities
@@ -102,7 +102,7 @@ indicator-added:
 indicator-removed:
   transform: [handlebars]
   en: Indicator removed in {{second_year}}
-  fr: Indicateur enlevé pour {{second_year}}
+  fr: Indicateur enlevé en {{second_year}}
 
 a11y_begin_added:
   en: Added
@@ -129,4 +129,4 @@ indicator_counts_text:
   en: |
     **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicator" "indicators"}} match the current filters.
   fr: |
-    **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicateur" "indicateurs"}} sont en conformité avec les paramètres de filtrage courantes.    
+    **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicateur" "indicateurs"}} correspondent aux paramétres de filtrages choisis.    
