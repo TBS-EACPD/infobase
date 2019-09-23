@@ -57,7 +57,7 @@ const get_indicators = (subject, doc) => {
 
 const formatted_target = (indicator, is_drr17) => {
   return is_drr17 ?
-    drr17_indicator_result_text({ // these need to be called because they will be sorted on
+    drr17_indicator_result_text({
       data_type: indicator.target_type,
       min: indicator.target_min,
       max: indicator.target_max,
