@@ -11,29 +11,20 @@ export class StatelessModal extends React.Component {
   constructor(props){
     super(props);
 
-    this.auto_close_timeouts = [];
     this.closeModal = this.closeModal.bind(this);
     this.stopAutoCloseTimeouts = this.stopAutoCloseTimeouts.bind(this);
-    this.clearAutoCloseTimeouts = this.clearAutoCloseTimeouts.bind(this);
 
     this.state = { timeout_stopped: false };
   }
   componentDidUpdate(){
     const { 
-      auto_close_time,
       show,
       backdrop,
     } = this.props;
 
-    const { timeout_stopped } = this.state;
-
     if (show && !backdrop){
       // Bootstrap modals prevent scrolling by temporarily adding the 'modal-open' class to <body>
       document.body.classList.add('modal-open--allow-scroll');
-    }
-
-    if ( _.isNumber(auto_close_time) && show && !timeout_stopped ){
-      this.auto_close_timeouts.push( setTimeout(this.closeModal, auto_close_time) );
     }
   }
   componentWillUnmount(){
@@ -45,7 +36,6 @@ export class StatelessModal extends React.Component {
       backdrop,
     } = this.props;
 
-    this.clearAutoCloseTimeouts();
     this.setState({ timeout_stopped: false });
 
     if (!backdrop){
@@ -56,17 +46,7 @@ export class StatelessModal extends React.Component {
     on_close_callback();
   }
   stopAutoCloseTimeouts(){
-    // With all the timeouts floating around, despite clearing them carefully, this occasionally gets 
-    // called after the modal's closed, which could make it start with timeout_stopped true the next
-    // time it was opened. So, don't try to stop the timeout if the modal's not being shown
-    if (this.props.show && !this.state.timeout_stopped){
-      this.clearAutoCloseTimeouts();
-      this.setState({ timeout_stopped: true });
-    }
-  }
-  clearAutoCloseTimeouts(){
-    this.auto_close_timeouts.forEach( (auto_close_timeout) => clearTimeout(auto_close_timeout) );
-    this.auto_close_timeouts = [];
+    (this.props.show && !this.state.timeout_stopped) && this.setState({ timeout_stopped: true });
   }
   render(){
     const {
@@ -102,7 +82,12 @@ export class StatelessModal extends React.Component {
         }}
       >
         { auto_close_time && !timeout_stopped &&
-          <CountdownCircle time={auto_close_time} show_numbers={auto_close_time >= 2000} size="3em" />
+          <CountdownCircle 
+            time={auto_close_time}
+            show_numbers={auto_close_time >= 2000}
+            size="3em"
+            on_end_callback={this.closeModal}
+          />
         }
         { close_text &&
           <button className="btn btn-ib-primary" onClick={this.closeModal}>
