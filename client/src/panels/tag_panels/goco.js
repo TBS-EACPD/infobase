@@ -5,6 +5,7 @@ import {
   Subject,
   formats,
   declarative_charts,
+  declare_panel,
   Panel,
   Table,
   newIBCategoryColors,
@@ -269,7 +270,7 @@ class Goco extends React.Component {
               onClick={ (child_node, e) => window.open(tick_map[child_node.indexValue], '_blank') }
               bttm_axis={{
                 renderTick: tick => {
-                  return <g key={tick.key} transform={ `translate(${tick.x + 25},${tick.y + 16})` }>
+                  return <g key={tick.key} transform={ `translate(${tick.x},${tick.y + 16})` }>
                     <a
                       href={ tick_map[tick.value] }
                       target="_blank" rel="noopener noreferrer"
@@ -315,7 +316,7 @@ class Goco extends React.Component {
             onClick={ (node, e) => handleClick(node, e.target, graph_data) }
             bttm_axis={{
               renderTick: tick => {
-                return <g key={tick.key} transform={ `translate(${tick.x + 25},${tick.y + 16})` }>
+                return <g key={tick.key} transform={ `translate(${tick.x},${tick.y + 16})` }>
                   <text
                     textAnchor="middle"
                     dominantBaseline="middle"
@@ -357,10 +358,12 @@ function render({ footnotes, sources }){
   );
 }
 
-new PanelGraph({
-  key: 'gocographic',
-  level: 'gov',
-  depends_on: ['programSpending', 'programFtes'],
-  footnotes: ["GOCO"],
-  render,
+export const declare_gocographic_panel = () => declare_panel({
+  panel_key: "gocographic",
+  levels: ["gov"],
+  panel_config_func: (level, panel_key) => ({
+    depends_on: ["programSpending", "programFtes"],
+    footnotes: ["GOCO"],
+    render,
+  }),
 });
