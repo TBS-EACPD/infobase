@@ -102,9 +102,9 @@ const subject_link = (subject) => {
     return (
       <span>
         {subject.data.name}
-        {" ("}
+        {" (a "}
         <span
-          className="link-unstyled"
+          className="nowrap glossary-tooltip-link"
           tabIndex={0}
           aria-hidden="true"
           data-toggle="tooltip"
@@ -114,7 +114,7 @@ const subject_link = (subject) => {
         >
           {text_maker(subject.data.subject.level)}
         </span>
-        {`, ${text_maker("see")} `}
+        {` ${text_maker("of")} `}
         <a href={`#orgs/program/${program_id}/infograph/results`}>
           {program_name}
         </a>
