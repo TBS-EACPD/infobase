@@ -102,7 +102,7 @@ export class StatelessModal extends React.Component {
         }}
       >
         { auto_close_time && !timeout_stopped &&
-          <CountdownCircle time={auto_close_time} show_numbers={true} size="3em" />
+          <CountdownCircle time={auto_close_time} show_numbers={auto_close_time >= 2000} size="3em" />
         }
         { close_text &&
           <button className="btn btn-ib-primary" onClick={this.closeModal}>
@@ -144,9 +144,11 @@ export class StatelessModal extends React.Component {
           <Modal.Header closeButton={!close_text}>
             {header_content}
           </Modal.Header>
-          <Modal.Body>
-            {body}
-          </Modal.Body>
+          { body &&
+            <Modal.Body>
+              {body}
+            </Modal.Body>
+          }
           { footer_content &&
             <Modal.Footer>
               {footer_content}

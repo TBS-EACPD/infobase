@@ -3,8 +3,8 @@ copy_to_clipboard:
   fr: Copier dans le presse-papier
 
 copy_success:
-  en: The following has been copied to your clipboard
-  fr: Ce qui suit a été copié dans votre presse-papiers
+  en: Content has been copied to your clipboard!
+  fr: Le contenu a été copié dans votre presse-papiers
 
 copy_fail:
   en: Unable to automatically copy, please manually copy the following

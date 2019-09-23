@@ -26,6 +26,9 @@ export class WriteToClipboard extends React.Component {
 
     const { copy_status_message } = this.state;
 
+    const modal_active = _.isString(copy_status_message);
+    const copy_success = copy_status_message === text_maker("copy_success");
+
     return (
       <Fragment>
         <button
@@ -49,7 +52,7 @@ export class WriteToClipboard extends React.Component {
         </button>
         <StatelessModal
           on_close_callback={() => this.setState({copy_status_message: false})}
-          show={!!copy_status_message}
+          show={modal_active}
           title={
             <Fragment>
               <IconCopy
@@ -57,14 +60,14 @@ export class WriteToClipboard extends React.Component {
                 alternate_color={false}
                 aria_hide={true}
               />
-              {text_maker("copy")}
+              {text_maker("copy_to_clipboard")}
             </Fragment>
           }
           subtitle={copy_status_message}
-          body={<div tabIndex="0">{text_to_copy}</div>}
-          backdrop={window.is_a11y_mode || (!!copy_status_message && copy_status_message !== text_maker("copy_success"))}
+          body={modal_active && !copy_success && <div tabIndex="0">{text_to_copy}</div>}
+          backdrop={window.is_a11y_mode || (modal_active && !copy_success)}
           dialog_position="left"
-          auto_close_time={!window.is_a11y_mode && (!!copy_status_message && copy_status_message === text_maker("copy_success")) && 3000}
+          auto_close_time={!window.is_a11y_mode && (modal_active && copy_success) && 1750}
           close_button_in_header={!window.is_a11y_mode}
         />
       </Fragment>
