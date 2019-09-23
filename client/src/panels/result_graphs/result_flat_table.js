@@ -167,7 +167,7 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
       status: _.indexOf(ordered_status_keys, ind.indicator.status_key),
     },
   }) );
-  return <DisplayTable data={table_data} label_col_header={text_maker("activity")} column_keys={column_keys} table_data_headers={table_data_headers} sort_keys={sort_keys} table_name="TODO"/>;
+  return <DisplayTable data={table_data} label_col_header={text_maker("activity")} column_keys={column_keys} table_data_headers={table_data_headers} sort_keys={sort_keys} table_name={text_maker("result_flat_table_title")}/>;
 };
 
 
