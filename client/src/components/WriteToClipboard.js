@@ -67,14 +67,20 @@ export class WriteToClipboard extends React.Component {
                 alternate_color={false}
                 aria_hide={true}
               />
-              {text_maker("copy_to_clipboard")}
+              { modal_active ? 
+                ( copy_success ?
+                  copy_status_message :
+                  text_maker("copy_to_clipboard") 
+                ) :
+                "" 
+              }
             </Fragment>
           }
-          subtitle={copy_status_message}
+          subtitle={modal_active && !copy_success && copy_status_message}
           body={modal_active && !copy_success && <div tabIndex="0">{text_to_copy}</div>}
           backdrop={window.is_a11y_mode || (modal_active && !copy_success)}
           dialog_position="left"
-          auto_close_time={!window.is_a11y_mode && (modal_active && copy_success) && 1750}
+          auto_close_time={!window.is_a11y_mode && (modal_active && copy_success) && 1900}
           close_button_in_header={!window.is_a11y_mode}
           restore_focus={keyboard_navigation_detected}
         />
