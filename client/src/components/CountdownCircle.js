@@ -15,7 +15,7 @@ export class CountdownCircle extends React.Component {
   }
   render(){
     const {
-      time,
+      time, // in ms
       size,
       color,
       stroke_width,
