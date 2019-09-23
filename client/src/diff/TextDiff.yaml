@@ -129,4 +129,4 @@ indicator_counts_text:
   en: |
     **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicator" "indicators"}} match the current filters.
   fr: |
-    **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicateur" "indicateurs"}} correspondent aux paramétres de filtrages choisis.    
+    **{{fmt_big_int_real num_indicators}}** {{plural_branch num_indicators "indicateur" "indicateurs"}} correspondent aux paramètres de filtrages choisis.    
