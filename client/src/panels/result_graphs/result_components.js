@@ -28,7 +28,7 @@ const { sanitized_marked } = general_utils;
 import { TM, text_maker } from './result_text_provider.js';
 
 
-const IndicatorResultText = ({
+const indicator_result_text = ({
   doc,
 
   data_type,
@@ -118,7 +118,7 @@ const IndicatorResultDisplay = ({
 }) => {
   return (
     <span>
-      {IndicatorResultText({
+      {indicator_result_text({
         doc,
         data_type,
         min, 
@@ -239,7 +239,7 @@ const OldIndicatorResultDisplay = ({
   return get_display_case(data_type, min, max, narrative, measure);
 };
 
-const Drr17IndicatorResultText = ({
+const drr17_indicator_result_text = ({
   data_type,
   min, 
   max,
@@ -299,7 +299,7 @@ const Drr17IndicatorResultDisplay = ({
 }) => {
   return (
     <span>
-      {Drr17IndicatorResultText({
+      {drr17_indicator_result_text({
         data_type,
         min, 
         max,
@@ -879,7 +879,7 @@ export {
   HorizontalStatusTable,
   NewBadge,
   Drr17IndicatorResultDisplay,
-  Drr17IndicatorResultText,
+  drr17_indicator_result_text,
   IndicatorResultDisplay,
-  IndicatorResultText,
+  indicator_result_text,
 }; 

@@ -16,8 +16,8 @@ import {
 } from './results_common.js';
 import {
   StatusIconTable,
-  Drr17IndicatorResultText,
-  IndicatorResultText,
+  drr17_indicator_result_text,
+  indicator_result_text,
   large_status_icons,
 } from './result_components.js';
 import { create_full_results_hierarchy } from '../../gen_expl/result_hierarchies.js';
@@ -53,14 +53,14 @@ const get_indicators = (subject, doc) => {
 
 const formatted_target = (indicator, is_drr17) => {
   return is_drr17 ?
-    Drr17IndicatorResultText({ // these need to be called because they will be sorted on
+    drr17_indicator_result_text({ // these need to be called because they will be sorted on
       data_type: indicator.target_type,
       min: indicator.target_min,
       max: indicator.target_max,
       narrative: indicator.target_narrative,
       measure: indicator.measure,
     }) :
-    IndicatorResultText({
+    indicator_result_text({
       doc: indicator.doc,
 
       data_type: indicator.target_type,
@@ -73,14 +73,14 @@ const formatted_target = (indicator, is_drr17) => {
 
 const formatted_actual = (indicator, is_drr17) => {
   return is_drr17 ?
-    Drr17IndicatorResultText({
+    drr17_indicator_result_text({
       data_type: indicator.actual_datatype,
       min: indicator.actual_result,
       max: indicator.actual_result,
       narrative: indicator.actual_result,
       measure: indicator.measure,
     }) :
-    IndicatorResultText({ // TODO: probably should be DRR17
+    indicator_result_text({ // TODO: probably should be DRR17
       doc: indicator.doc,
       data_type: indicator.actual_datatype,
       min: indicator.actual_result,
