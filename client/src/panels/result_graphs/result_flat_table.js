@@ -39,6 +39,10 @@ const get_actual_parent = (indicator_node, full_results_hierarchy) => {
   } else if(parent.data.type === "dr" || parent.data.type === "result"){
     return get_actual_parent(parent, full_results_hierarchy);
   } else {
+    if (window.is_dev) {
+      /* eslint-disable no-console */
+      console.error(`result component ${indicator_node} with no parent`);
+    }
     return;
   }
 };
