@@ -13,10 +13,7 @@ export class StatelessModal extends React.Component {
 
     this.closeModal = this.closeModal.bind(this);
 
-    this.state = {
-      keyboard_navigation_detected: false,
-      timeout_stopped: false,
-    };
+    this.state = { timeout_stopped: false };
   }
   componentDidUpdate(){
     const { 
@@ -61,12 +58,10 @@ export class StatelessModal extends React.Component {
       auto_close_time,
       close_text,
       close_button_in_header,
+      restore_focus,
     } = this.props;
 
-    const {
-      keyboard_navigation_detected,
-      timeout_stopped,
-    } = this.state;
+    const { timeout_stopped } = this.state;
 
     const default_header = (
       <div style={{display: "inline-block"}}>
@@ -122,15 +117,16 @@ export class StatelessModal extends React.Component {
         dialogClassName={classNames(`modal-dialog--${dialog_position}`, additional_dialog_class)}
         onHide={this.closeModal}
         restoreFocus={
-          // don't want to restore focus if the window could scroll, since it will (unexpectedly for the user) jump the window back
-          // when focus returns. Always restore focus in a11y mode
-          backdrop || keyboard_navigation_detected || window.is_a11y_mode
+          !_.isUndefined(restore_focus) ? 
+            restore_focus :
+            // don't want to restore focus if the window could scroll, since it will (unexpectedly for the user)
+            // jump the window back when focus returns. Always restore focus in a11y mode
+            (backdrop || window.is_a11y_mode)
         }
       >
         <div
           onFocus={() => this.setState({ timeout_stopped: show })}
-          onMouseOver={() => this.setState({ timeout_stopped: show })}
-          onKeyDown={() => this.setState({ keyboard_navigation_detected: show })}
+          onMouseOver={() => this.setState({ timeout_stopped: show})}
         >
           <Modal.Header closeButton={!close_text}>
             {header_content}

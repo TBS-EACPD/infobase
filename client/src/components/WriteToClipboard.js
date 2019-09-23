@@ -14,7 +14,10 @@ export class WriteToClipboard extends React.Component {
   constructor(){
     super();
 
-    this.state = { copy_status_message: false };
+    this.state = {
+      copy_status_message: false,
+      keyboard_navigation_detected: false,
+    };
   }
   render(){
     const {
@@ -24,7 +27,10 @@ export class WriteToClipboard extends React.Component {
       IconComponent,
     } = this.props;
 
-    const { copy_status_message } = this.state;
+    const {
+      copy_status_message,
+      keyboard_navigation_detected,
+    } = this.state;
 
     const modal_active = _.isString(copy_status_message);
     const copy_success = copy_status_message === text_maker("copy_success");
@@ -43,6 +49,7 @@ export class WriteToClipboard extends React.Component {
                 () => this.setState({copy_status_message: text_maker("copy_fail")})
               )
           }
+          onKeyDown={() => this.setState({ keyboard_navigation_detected: true })}
         >
           <IconComponent
             title={button_description}
@@ -69,6 +76,7 @@ export class WriteToClipboard extends React.Component {
           dialog_position="left"
           auto_close_time={!window.is_a11y_mode && (modal_active && copy_success) && 1750}
           close_button_in_header={!window.is_a11y_mode}
+          restore_focus={keyboard_navigation_detected}
         />
       </Fragment>
     );
