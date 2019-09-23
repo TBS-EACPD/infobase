@@ -163,7 +163,7 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
     sort_keys: {
       label: ind.parent_subject.data.name,
       indicator: ind.indicator.name,
-      date_to_achieve: ind.indicator.target_year ? ind.indicator.target_year + ind.indicator.target_month/12 : 9999999,
+      date_to_achieve: ind.indicator.target_year ? ind.indicator.target_year + ind.indicator.target_month/12 : Infinity,
       status: _.indexOf(ordered_status_keys, ind.indicator.status_key),
     },
   }) );
