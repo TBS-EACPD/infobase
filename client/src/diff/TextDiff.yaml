@@ -34,9 +34,9 @@ select_program:
 
 filter_by_status:
   en: |
-    Filter by indicator status (optional):
+    Filter by the type of change (optional):
   fr: |
-    Filtrer selon le statut de l'indicateur (facultatif) :
+    Filtrer selon le type de changement (facultatif) :
 
 all_crs:
   en: All Core Responsibilities
@@ -75,8 +75,8 @@ words_changed:
   fr: Un ou plusieurs mots ont changés
 
 indicator_desc_changed:
-  en: Indicator or methodology
-  fr: Indicateur ou méthodologie
+  en: Indicator and/or methodology changed
+  fr: Indicateur et/ou méthodologie changé
 
 indicator_added:
   en: Indicator added
