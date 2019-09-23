@@ -18,25 +18,18 @@ const {
 } = Subject;
 
 const get_subject = (level, id) => {
-  let subject;
   switch(level){
     case 'dept':
-      subject = Dept.lookup(id);
-      break;
+      return Dept.lookup(id);
     case 'tag':
-      subject = Tag.lookup(id);
-      break;
+      return Tag.lookup(id);
     case 'program':
-      subject = Program.lookup(id);
-      break;
+      return Program.lookup(id);
     case 'crso':
-      subject = CRSO.lookup(id);
-      break;
+      return CRSO.lookup(id);
     default:
-      subject = Gov;
+      return Gov;
   }
-  return subject;
-
 };
 
 export default class IsolatedPanel extends React.Component {
