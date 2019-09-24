@@ -140,7 +140,7 @@ Subject.Dept = class Dept extends static_subject_store_with_API_data(){
   get has_planned_spending(){
     return !(
       _.includes([
-        "NSICP", //new org that first appeared in Supps B 17-18
+        //"NSICP", //new org that first appeared in Supps B 17-18
         "CSEC", 
         "CSIS",
         "FCAC",
