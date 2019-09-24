@@ -88,14 +88,10 @@ export const format_and_get_fte = (type, info, subject) => {
       />
     );
   } else{
-    const prepare_raw_data = (data, data_index) => _.chain(data_index)
-      .map( (idx) => data[idx] )
-      .filter( (prepared_raw_data) => prepared_raw_data > 0 )
-      .value();
     const raw_data = _.concat(
-      prepare_raw_data(info, history_data_index), prepare_raw_data(info, planned_data_index)
+      _.map(history_data_index, (idx) => info[idx]), _.map(planned_data_index, (idx) => info[idx])
     );
-  
+
     const prepare_graph_data = (data, data_index, years) => (
       _.chain(data_index)
         .zipWith(years, data_index, (idx, year) => (
@@ -104,7 +100,13 @@ export const format_and_get_fte = (type, info, subject) => {
             y: data[idx],
           }
         ))
-        .pickBy( (prepared_row) => prepared_row.y > 0 )
+        .pickBy( (prepared_row) => {
+          if(years===history_ticks){
+            return prepared_row.y > 0;
+          } else{
+            return true;
+          }
+        })
         .map( (filtered_row) => filtered_row )
         .value()
     );

@@ -267,9 +267,8 @@ const WelcomeMat = (props) => {
       fte_plan_3,
     } = calcs;
 
-    const planned_spend_diff = spend_plan_3 && ( (spend_plan_3-spend_plan_1)/spend_plan_1);
-    const planned_fte_diff = fte_plan_3 && ( (fte_plan_3-fte_plan_1)/fte_plan_1);
-
+    const planned_spend_diff = (spend_plan_3-spend_plan_1)/spend_plan_1;
+    const planned_fte_diff = (fte_plan_3-fte_plan_1)/fte_plan_1;
     return (
       <WelcomeMatShell
         header_row={[
@@ -500,7 +499,7 @@ const WelcomeMat = (props) => {
       } else if(level === "tag"){
         spend_summary_key = "tag_welcome_mat_spending_summary";
         fte_summary_key = "tag_welcome_mat_fte_summary";
-      } 
+      }
     } else {
       spend_summary_key = false;
       fte_summary_key = false;
@@ -729,16 +728,16 @@ function get_calcs(subject, q6, q12){
   const spend_plan_1= _.first(planned_spend_data);
   const spend_plan_3= _.last(planned_spend_data);
 
-  const hist_spend_diff = spend_last_year_5 && ( (spend_last_year-spend_last_year_5)/spend_last_year_5);
-  const planned_spend_diff = spend_plan_3 && ( (spend_plan_3-spend_last_year)/spend_last_year);
+  const hist_spend_diff = (spend_last_year-spend_last_year_5)/spend_last_year_5;
+  const planned_spend_diff = (spend_plan_3-spend_last_year)/spend_last_year;
 
   const fte_last_year_5= _.first(hist_fte_data);
   const fte_last_year= _.last(hist_fte_data);
   const fte_plan_1= _.first(planned_fte_data);
   const fte_plan_3= _.last(planned_fte_data);
 
-  const hist_fte_diff = fte_last_year_5 && ( (fte_last_year-fte_last_year_5)/fte_last_year_5);
-  const planned_fte_diff = fte_plan_3 && ( (fte_plan_3-fte_last_year)/fte_last_year);
+  const hist_fte_diff = (fte_last_year-fte_last_year_5)/fte_last_year_5;
+  const planned_fte_diff = (fte_plan_3-fte_last_year)/fte_last_year;
 
   return {
     has_hist,
