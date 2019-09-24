@@ -9,9 +9,9 @@ activity:
 result_flat_table_title:
   transform: [handlebars]
   en: |
-    {{pa_last_year}} Indicator Table
+    {{pa_last_year}} Actual Results by Indicator
   fr: |
-    Tableau des indicateurs de {{pa_last_year}}
+    TODO TODO
 
 result_flat_table_text:
   transform: [handlebars,markdown]
