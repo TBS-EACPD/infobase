@@ -43,37 +43,48 @@ class Goco extends React.Component {
     const fte_factor = 400000;
     const colors = d3.scaleOrdinal().range(newIBCategoryColors);
 
-    const graph_data = _.chain(Tag.gocos_by_spendarea)
-      .map(sa=> {
-        const children = _.map(sa.children_tags, goco => {
-          const spending = programSpending.q(goco).sum(spend_col);
-          const ftes = programFtes.q(goco).sum(fte_col) * fte_factor;
-          return {
-            label: goco.name,
-            [spending_text]: spending,
-            [ftes_text]: ftes,
-          };
-        });
-        const spending = d3.sum(children, c => c[spending_text]);
-        const ftes = d3.sum(children, c => c[ftes_text]);
-        return {
-          label: sa.name,
-          [spending_text]: spending,
-          [ftes_text]: ftes,
-          children: _.sortBy(children, d => -d[spending_text]),
-        };
-      })
-      .sortBy(d => -d[spending_text])
-      .value();
-    
-    const total_fte_spend = _.reduce(graph_data, (result, row) => {
-      result.total_spending = result.total_spending + row[spending_text];
-      result.total_ftes = result.total_ftes + (row[ftes_text] / fte_factor);
+    const total_fte_spend = _.reduce(Tag.gocos_by_spendarea, (result, sa) => {
+      result[sa.id] = _.reduce(sa.children_tags, (child_result, goco) => {
+        child_result.total_child_spending = child_result.total_child_spending + programSpending.q(goco).sum(spend_col);
+        child_result.total_child_ftes = child_result.total_child_ftes + programFtes.q(goco).sum(fte_col);
+        return child_result;
+      }, {
+        total_child_spending: 0,
+        total_child_ftes: 0,
+      });
+      result.total_spending = result.total_spending + result[sa.id].total_child_spending;
+      result.total_ftes = result.total_ftes + result[sa.id].total_child_ftes;
       return result;
     }, {
       total_spending: 0,
       total_ftes: 0,
     });
+
+    const graph_data = _.chain(Tag.gocos_by_spendarea)
+      .map(sa=> {
+        const children = _.map(sa.children_tags, goco => {
+          const actual_spending = programSpending.q(goco).sum(spend_col);
+          const actual_ftes = programFtes.q(goco).sum(fte_col);
+          return {
+            label: goco.name,
+            actual_spending: actual_spending,
+            actual_ftes: actual_ftes,
+            [spending_text]: actual_spending / total_fte_spend[sa.id].total_child_spending,
+            [ftes_text]: actual_ftes / total_fte_spend[sa.id].total_child_ftes,
+          };
+        });
+        return {
+          label: sa.name,
+          actual_spending: total_fte_spend[sa.id].total_child_spending,
+          actual_ftes: total_fte_spend[sa.id].total_child_ftes,
+          [spending_text]: total_fte_spend[sa.id].total_child_spending / total_fte_spend.total_spending,
+          [ftes_text]: total_fte_spend[sa.id].total_child_ftes / total_fte_spend.total_ftes,
+          children: _.sortBy(children, d => -d[spending_text]),
+        };
+      })
+      .sortBy(d => -d[spending_text])
+      .value();
+
     const maxSpending = _.maxBy(graph_data, spending_text);
     const spend_fte_text_data = {
       ...total_fte_spend,
@@ -129,10 +140,6 @@ class Goco extends React.Component {
           color: colors(label),
         };
       });
-      
-      const format_item = (item) => item.id === ftes_text
-        ? formats.big_int_real_raw(item.value / fte_factor)
-        : formats.compact1_raw(item.value);
   
       const nivo_default_props = {
         indexBy: "label",
@@ -141,9 +148,9 @@ class Goco extends React.Component {
         enableLabel: true,
         enableGridX: false,
         enableGridY: false,
-        label: d => format_item(d),
+        label: d => formats.percentage1_raw(d.value),
         label_format: d => <tspan y={-3}> { d } </tspan>,
-        tooltip: (slice) =>
+        tooltip: (slice) => (
           <div style={{color: window.infobase_color_constants.textColor}}>
             <table style={{width: '100%', borderCollapse: 'collapse'}}>
               <tbody>
@@ -156,14 +163,15 @@ class Goco extends React.Component {
                       <td style={{padding: '3px 5px'}}> {tooltip_item.id} </td>
                       <td
                         style={{padding: '3px 5px'}}
-                        dangerouslySetInnerHTML={{ __html: format_item(tooltip_item) }}
+                        dangerouslySetInnerHTML={{ __html: formats.compact1_raw(tooltip_item.data[`actual_${_.toLower(tooltip_item.id)}`]) }}
                       />
                     </tr>
                   )
                 )}
               </tbody>
             </table>
-          </div>,
+          </div>
+        ),
         padding: 0.1,
         colorBy: d => colors(d.id),
         keys: series_labels,
