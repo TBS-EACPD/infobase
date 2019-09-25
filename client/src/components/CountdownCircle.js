@@ -1,5 +1,6 @@
 import './CountdownCircle.scss';
 
+import { Fragment } from 'react';
 import { Countdown } from "./Countdown.js";
 
 const split_value_and_units = (size) => {
@@ -8,34 +9,39 @@ const split_value_and_units = (size) => {
   return [value, unit];
 };
 
+const get_gradient_id = (circle_id, frame) => `${circle_id}-frame-${frame}`;
+const get_gradient_defs = (frame_count, circle_id, color) => {
+  const frame_size = 100/frame_count;
 
-const get_animation_steps = (step_count, circle_circumference) => {
-  if ( window.feature_detection.is_IE() ){
-    // IE can't interpolate stroke-dashoffset in animations, so we need to explicitly define each frame
-    const [circumference_value, unit] = split_value_and_units(circle_circumference);
+  return _.chain()
+    .range(frame_count+1)
+    .map(
+      (frame) => (
+        <linearGradient
+          key={get_gradient_id(circle_id, frame)}
+          id={get_gradient_id(circle_id, frame)}
 
-    const step_size = 100/step_count;
-    const dashoffset_per_step = circumference_value/step_count;
-  
-    return _.chain()
-      .range(step_count-1)
-      .map(step_minus_1 => step_minus_1+1)
-      .reduce(
-        (animation_stages, step) => animation_stages +
-          `\n ${step*step_size}% { stroke-dashoffset: ${step*dashoffset_per_step}${unit}; }`,
-        `0% { stroke-dashoffset: 0${unit}; }`
+        >
+          <stop offset="0%" style={{stopColor: color, stopOpacity: 0}} />
+          <stop offset={`${(frame*frame_size)-1}%`} style={{stopColor: color, stopOpacity: 0}} />
+          <stop offset={`${frame*frame_size}%`} style={{stopColor: color, stopOpacity: 1}} />
+          <stop offset="100%" style={{stopColor: color, stopOpacity: 1}} />
+        </linearGradient>
       )
-      .value();
-  } else {
-    return `
-      from {
-        stroke-dashoffset: 0px;
-      }
-      to {
-        stroke-dashoffset: ${circle_circumference};
-      }
-    `;
-  }
+    )
+    .value();
+};
+const get_animation_frames = (frame_count, circle_id) => {
+  const frame_size = 100/frame_count;
+
+  return _.chain()
+    .range(frame_count+1)
+    .reduce(
+      (animation_stages, frame) => animation_stages +
+        `\n ${frame*frame_size}% { stroke: url(#${get_gradient_id(circle_id, frame)}); }`,
+      ""
+    )
+    .value();
 };
 
 
@@ -57,6 +63,7 @@ export class CountdownCircle extends React.Component {
     const { countdown_circle_instance_id } = this.state;
 
     const time_in_seconds = time/1000;
+    const frame_count = Math.ceil(15*time_in_seconds);
 
     const [size_value, size_unit] = split_value_and_units(size);
     const circle_position = `${size_value/2}${size_unit}`;
@@ -64,8 +71,6 @@ export class CountdownCircle extends React.Component {
     const circle_radius = `${circle_radius_value}${size_unit}`;
     const circle_circumference = `${2*Math.PI*circle_radius_value}${size_unit}`;
 
-    // Note that the animation is on the svg tag, not the circle
-    // IE11 can't animate elements inside of an svg tag but can animate the whole tag
     return (
       <div 
         className="countdown-circle"
@@ -88,19 +93,45 @@ export class CountdownCircle extends React.Component {
           id={countdown_circle_instance_id}
           onAnimationEnd={on_end_callback}
         >
-          <style 
-            dangerouslySetInnerHTML={{__html: `
-              #${countdown_circle_instance_id} {
-                stroke-dasharray: ${circle_circumference};
-                stroke: ${color};
-                stroke-width: ${stroke_width};
-                animation: ${countdown_circle_instance_id} ${time}ms linear 1 forwards;
-              }
-              @keyframes ${countdown_circle_instance_id} {
-                ${get_animation_steps(60, circle_circumference)}
-              }
-            `}} 
-          />
+          { // IE can't animate stroke-dashoffset, this is its fallback
+            window.feature_detection.is_IE() &&
+            <Fragment>
+              <defs>
+                {get_gradient_defs(frame_count, countdown_circle_instance_id, color)}
+              </defs>
+              <style
+                dangerouslySetInnerHTML={{__html: `
+                  #${countdown_circle_instance_id} {
+                    stroke-width: ${stroke_width};
+                    animation: ${countdown_circle_instance_id} ${time}ms linear 1 forwards;
+                  }
+                  @keyframes ${countdown_circle_instance_id} {
+                    ${get_animation_frames(frame_count, countdown_circle_instance_id, circle_circumference)}
+                  }
+                `}} 
+              />
+            </Fragment>
+          }
+          { !window.feature_detection.is_IE() &&
+            <style 
+              dangerouslySetInnerHTML={{__html: `
+                #${countdown_circle_instance_id} {
+                  stroke-dasharray: ${circle_circumference};
+                  stroke: ${color};
+                  stroke-width: ${stroke_width};
+                  animation: ${countdown_circle_instance_id} ${time}ms linear 1 forwards;
+                }
+                @keyframes ${countdown_circle_instance_id} {
+                  from {
+                    stroke-dashoffset: 0px;
+                  }
+                  to {
+                    stroke-dashoffset: ${circle_circumference};
+                  }
+                }
+              `}} 
+            />
+          }
           <circle
             r={circle_radius}
             cx={circle_position}
