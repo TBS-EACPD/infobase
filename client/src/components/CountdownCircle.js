@@ -33,6 +33,8 @@ export class CountdownCircle extends React.Component {
     const circle_radius = `${circle_radius_value}${size_unit}`;
     const circle_circumference = `${2*Math.PI*circle_radius_value}${size_unit}`;
 
+    // Note that the animation is on the svg tag, not the circle
+    // IE11 can't animate elements inside of an svg tag but can animate the whole tag
     return (
       <div 
         className="countdown-circle"
@@ -52,6 +54,8 @@ export class CountdownCircle extends React.Component {
         <svg 
           className="countdown-circle__display"
           style={show_numbers ? {top: `-${size}`} : {}}
+          id={countdown_circle_instance_id}
+          onAnimationEnd={on_end_callback}
         >
           <style 
             dangerouslySetInnerHTML={{__html: `
@@ -72,11 +76,9 @@ export class CountdownCircle extends React.Component {
             `}} 
           />
           <circle
-            id={countdown_circle_instance_id}
             r={circle_radius}
             cx={circle_position}
             cy={circle_position}
-            onAnimationEnd={on_end_callback}
           />
         </svg>
       </div>
