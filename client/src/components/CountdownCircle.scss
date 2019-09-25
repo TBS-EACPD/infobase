@@ -3,21 +3,12 @@
   display: inline-block;
 }
 
-.countdown-circle__sweep {
+.countdown-circle__display {
   position: relative;
-  border-radius: 50%;
   width: inherit;
   height: inherit;
-}
-
-.countdown-circle__hole {
-  position: absolute;
-  border-radius: 50%;
-  width: 80%;
-  height: 80%;
-  margin: 10%;
-}
-
-.countdown-circle__number {
-  position: relative;
+  transform: rotateY(-180deg) rotateZ(-90deg);
+  stroke-dashoffset: 0px;
+  stroke-linecap: round;
+  fill: none;
 }
