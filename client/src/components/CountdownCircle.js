@@ -1,54 +1,21 @@
 import './CountdownCircle.scss';
 
 import { Fragment } from 'react';
-import { Countdown } from "./Countdown.js";
+import { is_IE } from '../core/feature_detection.js';
+import { Countdown } from './Countdown.js';
+
 
 const split_value_and_units = (size) => {
   const unit = /[a-z]+$/.exec(size);
-  const value = size.replace(unit, "");
+  const value = size.replace(unit, '');
   return [value, unit];
-};
-
-const get_gradient_id = (circle_id, frame) => `${circle_id}-frame-${frame}`;
-const get_gradient_defs = (frame_count, circle_id, color) => {
-  const frame_size = 100/frame_count;
-
-  return _.chain()
-    .range(frame_count+1)
-    .map(
-      (frame) => (
-        <linearGradient
-          key={get_gradient_id(circle_id, frame)}
-          id={get_gradient_id(circle_id, frame)}
-
-        >
-          <stop offset="0%" style={{stopColor: color, stopOpacity: 0}} />
-          <stop offset={`${(frame*frame_size)-1}%`} style={{stopColor: color, stopOpacity: 0}} />
-          <stop offset={`${frame*frame_size}%`} style={{stopColor: color, stopOpacity: 1}} />
-          <stop offset="100%" style={{stopColor: color, stopOpacity: 1}} />
-        </linearGradient>
-      )
-    )
-    .value();
-};
-const get_animation_frames = (frame_count, circle_id) => {
-  const frame_size = 100/frame_count;
-
-  return _.chain()
-    .range(frame_count+1)
-    .reduce(
-      (animation_stages, frame) => animation_stages +
-        `\n ${frame*frame_size}% { stroke: url(#${get_gradient_id(circle_id, frame)}); }`,
-      ""
-    )
-    .value();
 };
 
 
 export class CountdownCircle extends React.Component {
   constructor(){
     super();
-    this.state = { countdown_circle_instance_id: _.uniqueId("countdown-circle-instance-") };
+    this.state = { countdown_circle_instance_id: _.uniqueId('countdown-circle-instance-') };
   }
   render(){
     const {
@@ -63,7 +30,8 @@ export class CountdownCircle extends React.Component {
     const { countdown_circle_instance_id } = this.state;
 
     const time_in_seconds = time/1000;
-    const frame_count = Math.ceil(15*time_in_seconds);
+
+    const [stroke_value, stroke_unit] = split_value_and_units(stroke_width);
 
     const [size_value, size_unit] = split_value_and_units(size);
     const circle_position = `${size_value/2}${size_unit}`;
@@ -73,7 +41,7 @@ export class CountdownCircle extends React.Component {
 
     return (
       <div 
-        className="countdown-circle"
+        className='countdown-circle'
         style={{
           width: size,
           height: size,
@@ -81,70 +49,60 @@ export class CountdownCircle extends React.Component {
       >
         { show_numbers &&
           <div 
-            className="countdown-circle__number"
+            className='countdown-circle__number'
             style={{lineHeight: size, color}}
           >
             <Countdown time={time_in_seconds} />
           </div>
         }
         <svg 
-          className="countdown-circle__display"
-          style={show_numbers ? {top: `-${size}`} : {}}
-          id={countdown_circle_instance_id}
+          className={'countdown-circle__display'}
           onAnimationEnd={on_end_callback}
+          style={{
+            ...(show_numbers ? {top: `-${size}`} : {}),
+            strokeDasharray: circle_circumference,
+            stroke: color,
+            strokeWidth: stroke_width,
+            animation: `${!is_IE() ? countdown_circle_instance_id : 'countdown-circle-animation-ie-fallback'} ${time}ms linear 1 forwards`,
+          }}
         >
-          { // IE can't animate stroke-dashoffset, this is its fallback
-            window.feature_detection.is_IE() &&
+          { !is_IE() &&
             <Fragment>
-              <defs>
-                {get_gradient_defs(frame_count, countdown_circle_instance_id, color)}
-              </defs>
-              <style
+              <style 
                 dangerouslySetInnerHTML={{__html: `
-                  #${countdown_circle_instance_id} {
-                    stroke-width: ${stroke_width};
-                    animation: ${countdown_circle_instance_id} ${time}ms linear 1 forwards;
-                  }
                   @keyframes ${countdown_circle_instance_id} {
-                    ${get_animation_frames(frame_count, countdown_circle_instance_id, circle_circumference)}
+                    from {
+                      stroke-dashoffset: 0px;
+                    }
+                    to {
+                      stroke-dashoffset: ${circle_circumference};
+                    }
                   }
-                `}} 
+                `}}
+              />
+              <circle
+                r={circle_radius}
+                cx={circle_position}
+                cy={circle_position}
               />
             </Fragment>
           }
-          { !window.feature_detection.is_IE() &&
-            <style 
-              dangerouslySetInnerHTML={{__html: `
-                #${countdown_circle_instance_id} {
-                  stroke-dasharray: ${circle_circumference};
-                  stroke: ${color};
-                  stroke-width: ${stroke_width};
-                  animation: ${countdown_circle_instance_id} ${time}ms linear 1 forwards;
-                }
-                @keyframes ${countdown_circle_instance_id} {
-                  from {
-                    stroke-dashoffset: 0px;
-                  }
-                  to {
-                    stroke-dashoffset: ${circle_circumference};
-                  }
-                }
-              `}} 
+          { is_IE() &&
+            <circle
+              r={stroke_width}
+              cx={circle_position}
+              cy={`${2*stroke_value}${stroke_unit}`}
+              fill={color}
             />
           }
-          <circle
-            r={circle_radius}
-            cx={circle_position}
-            cy={circle_position}
-          />
         </svg>
       </div>
     );
   }
 }
 CountdownCircle.defaultProps = {
-  size: "3em",
+  size: '3em',
   color: window.infobase_color_constants.buttonPrimaryColor,
-  stroke_width: "2px",
+  stroke_width: '2px',
   show_numbers: false,
 };
