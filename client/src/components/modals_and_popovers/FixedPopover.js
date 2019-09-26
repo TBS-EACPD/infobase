@@ -1,13 +1,14 @@
-import './StatelessModal.scss';
+import './bootstrap_modal_exstension.scss';
+import './FixedPopover.scss';
 
 import { Modal } from 'react-bootstrap';
 import classNames from 'classnames';
 
-import { CountdownCircle } from './CountdownCircle.js';
-import { trivial_text_maker } from '../models/text.js';
+import { CountdownCircle } from '../CountdownCircle.js';
+import { trivial_text_maker } from '../../models/text.js';
 
 
-export class StatelessModal extends React.Component {
+export class FixedPopover extends React.Component {
   constructor(props){
     super(props);
 
@@ -16,12 +17,9 @@ export class StatelessModal extends React.Component {
     this.state = { timeout_stopped: false };
   }
   componentDidUpdate(){
-    const { 
-      show,
-      backdrop,
-    } = this.props;
+    const { show } = this.props;
 
-    if (show && !backdrop){
+    if (show){
       // Bootstrap modals prevent scrolling by temporarily adding the 'modal-open' class to <body>
       document.body.classList.add('modal-open--allow-scroll');
     }
@@ -30,19 +28,12 @@ export class StatelessModal extends React.Component {
     this.closeModal();
   }
   closeModal(){
-    const {
-      on_close_callback,
-      backdrop,
-    } = this.props;
-
-    if (!backdrop){
-      // Bootstrap modals prevent scrolling by temporarily adding the 'modal-open' class to <body>
-      document.body.classList.remove('modal-open--allow-scroll');
-    }
+    // Bootstrap modals prevent scrolling by temporarily adding the 'modal-open' class to <body>
+    document.body.classList.remove('modal-open--allow-scroll');
 
     this.setState({ timeout_stopped: false });
 
-    on_close_callback();
+    this.props.on_close_callback();
   }
   render(){
     const {
@@ -52,7 +43,6 @@ export class StatelessModal extends React.Component {
       header,
       body,
       footer,
-      backdrop,
       dialog_position,
       additional_dialog_class,
       auto_close_time,
@@ -112,8 +102,8 @@ export class StatelessModal extends React.Component {
     return (
       <Modal 
         show={show}
-        backdrop={backdrop}
-        modal-without-backdrop={(!backdrop).toString()}
+        modal-without-backdrop={"true"}
+        backdrop={false}
         dialogClassName={classNames(`modal-dialog--${dialog_position}`, additional_dialog_class)}
         onHide={this.closeModal}
         restoreFocus={
@@ -121,7 +111,7 @@ export class StatelessModal extends React.Component {
             restore_focus :
             // don't want to restore focus if the window could scroll, since it will (unexpectedly for the user)
             // jump the window back when focus returns. Always restore focus in a11y mode
-            (backdrop || window.is_a11y_mode)
+            (window.is_a11y_mode)
         }
       >
         <div
@@ -147,9 +137,8 @@ export class StatelessModal extends React.Component {
     );
   }
 }
-StatelessModal.defaultProps = {
-  backdrop: true,
-  dialog_position: "center",
+FixedPopover.defaultProps = {
+  dialog_position: "left",
   auto_close_time: false,
   close_text: _.upperFirst( trivial_text_maker("close") ),
   close_button_in_header: false,

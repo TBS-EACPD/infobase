@@ -15,7 +15,7 @@ import {
   RedditIcon,
 } from 'react-share';
 
-import { StatelessModal } from './StatelessModal.js';
+import { StatelessModal } from './modals_and_popovers';
 import { create_text_maker } from '../models/text.js';
 import { IconShare } from '../icons/icons.js';
 

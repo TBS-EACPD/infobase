@@ -27,6 +27,7 @@ import { WriteToClipboard } from './WriteToClipboard.js';
 import { PDFGenerator } from './PDFGenerator.js';
 import { CountdownCircle } from './CountdownCircle.js';
 import { Countdown } from './Countdown.js';
+import { StatelessModal, FixedPopover } from './modals_and_popovers';
 
 import {
   Format,
@@ -82,6 +83,8 @@ export {
   PDFGenerator,
   CountdownCircle,
   Countdown,
+  StatelessModal,
+  FixedPopover,
 
   Format,
   FancyUL,
