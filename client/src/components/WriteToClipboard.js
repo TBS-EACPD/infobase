@@ -3,7 +3,7 @@ import text from './WriteToClipboard.yaml';
 import * as clipboard from 'clipboard-polyfill';
 import { Fragment } from 'react';
 
-import { StatelessModal } from './StatelessModal.js';
+import { FixedPopover } from './modals_and_popovers';
 import { IconCopy } from '../icons/icons.js';
 
 import { create_text_maker } from '../models/text.js';
@@ -57,7 +57,7 @@ export class WriteToClipboard extends React.Component {
             alternate_color={false}
           />
         </button>
-        <StatelessModal
+        <FixedPopover
           on_close_callback={() => this.setState({copy_status_message: false})}
           show={modal_active}
           title={
@@ -78,11 +78,10 @@ export class WriteToClipboard extends React.Component {
           }
           subtitle={modal_active && !copy_success && copy_status_message}
           body={modal_active && !copy_success && <div tabIndex="0">{text_to_copy}</div>}
-          backdrop={window.is_a11y_mode || (modal_active && !copy_success)}
           dialog_position="left"
           auto_close_time={!window.is_a11y_mode && (modal_active && copy_success) && 1900}
           close_button_in_header={!window.is_a11y_mode}
-          restore_focus={keyboard_navigation_detected}
+          restore_focus={window.is_a11y_mode || keyboard_navigation_detected}
         />
       </Fragment>
     );
