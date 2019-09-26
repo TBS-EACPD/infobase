@@ -7,6 +7,13 @@ import classNames from 'classnames';
 import { CountdownCircle } from '../CountdownCircle.js';
 import { trivial_text_maker } from '../../models/text.js';
 
+// Lots of StatlessModal DNA in here, but conciously not DRYed against it! Don't want to couple 
+// them, I actually want to encourage them to diverge further in the future to the point that
+// they should eventually not be grouped in the same directory.
+// They've got totally different behaviour and use cases, they shouldn't feel interchangeable! 
+
+// FixedPopover should stop hacking over top of Bootstrap's Modal sooner rather than later too.
+// (TODO, but likely only after we've updated to Bootstrap 4)
 
 export class FixedPopover extends React.Component {
   constructor(props){
@@ -21,6 +28,7 @@ export class FixedPopover extends React.Component {
 
     if (show){
       // Bootstrap modals prevent scrolling by temporarily adding the 'modal-open' class to <body>
+      // Add our own alongside it to override that
       document.body.classList.add('modal-open--allow-scroll');
     }
   }
@@ -28,9 +36,8 @@ export class FixedPopover extends React.Component {
     this.closeModal();
   }
   closeModal(){
-    // Bootstrap modals prevent scrolling by temporarily adding the 'modal-open' class to <body>
+    // Reset
     document.body.classList.remove('modal-open--allow-scroll');
-
     this.setState({ timeout_stopped: false });
 
     this.props.on_close_callback();
@@ -85,13 +92,7 @@ export class FixedPopover extends React.Component {
     );
 
     const common_layout = (content, include_close_button) => (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
+      <div className="modal-dialog__header-footer-layout">
         {content || <div /> /* empty div fallback so that space-between justification consistently positions the close button */} 
         {include_close_button && close_button_and_timer}
       </div>

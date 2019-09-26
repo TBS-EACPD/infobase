@@ -1,12 +1,20 @@
 @import '../../common_css/common-variables';
 
+$margin: 30px;
+
+// Overwrites
 .modal-backdrop {
   background-color: rgba(0,0,0,.3);
 }
-
-$margin: 30px;
 .modal-dialog {
   margin-top: $margin;
+}
+
+// Additional
+.modal-dialog__header-footer-layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 @media(min-width: $minSmallDevice){
   .modal-dialog--left {
