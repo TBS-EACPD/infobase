@@ -37,13 +37,7 @@ export class StatelessModal extends React.Component {
     );
 
     const common_layout = (content, include_close_button) => (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
+      <div className="modal-dialog__header-footer-layout">
         {content || <div /> /* empty div fallback so that space-between justification consistently positions the close button */} 
         { include_close_button && 
           <button className="btn btn-ib-primary" onClick={this.closeModal}>
