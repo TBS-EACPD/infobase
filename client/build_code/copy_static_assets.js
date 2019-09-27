@@ -80,6 +80,8 @@ const svg_path = 'src/svg';
 
 const png_path = 'src/png';
 
+const font_path = 'src/font';
+
 const table_csvs = _.map(
   [
     'org_employee_age_group',
@@ -125,6 +127,7 @@ var IB = {
   lookups_fr: common_lookups.concat(common_lookups_fr),
   svg: svg_path,
   png: png_path,
+  font: font_path,
   csv: table_csvs.concat(other_csvs),
   well_known: ['src/InfoBase/security.txt'],
   other: [
@@ -264,6 +267,7 @@ function build_proj(PROJ){
 
   copy_file_to_target_dir(svg_path, dir);
   copy_file_to_target_dir(png_path, dir);
+  copy_file_to_target_dir(font_path, dir);
 
   ['csv'].forEach(function(type){
     var this_dir = dir+'/'+type;

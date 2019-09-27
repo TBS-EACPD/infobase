@@ -19,7 +19,6 @@ import {
 import { default as createHistory } from 'history/createHashHistory';
 import { populate_stores } from '../models/populate_stores.js';
 import { Table } from '../core/TableClass.js';
-import WebFont from 'webfontloader';
 
 import orgVoteStatQfr from "../tables/orgVoteStatQfr.js";
 import orgSobjsQfr from "../tables/orgSobjsQfr.js";
@@ -62,17 +61,7 @@ const table_defs = [
 ];
 
 
-const load_fonts = () => (
-  WebFont.load({
-    google: {
-      families: ["Roboto:300,300i,400,400i,700,700i"],
-    },
-  })
-);
-
 function bootstrap(App, app_reducer, done){
-  
-  load_fonts();
 
   populate_stores().then(()=>{
 
