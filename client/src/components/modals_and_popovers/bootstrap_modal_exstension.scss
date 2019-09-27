@@ -11,16 +11,28 @@ $margin: 30px;
 }
 
 // Additional
-.modal-dialog__header-footer-layout {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
 @media(min-width: $minSmallDevice){
   .modal-dialog--left {
     margin-left: $margin;
   }
   .modal-dialog--right {
     margin-right: $margin;
+  }
+}
+.modal-dialog__header-footer-layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.modal-dialog__title-layout {
+  align-self: center;
+}
+.modal-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  & > svg {
+    margin-right: 0.5em
   }
 }

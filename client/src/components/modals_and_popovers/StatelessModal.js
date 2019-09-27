@@ -30,7 +30,7 @@ export class StatelessModal extends React.Component {
     } = this.props;
 
     const default_header = (
-      <div style={{display: "inline-block"}}>
+      <div className="modal-dialog__title-layout">
         {title && <Modal.Title style={{fontSize: '130%'}}>{title}</Modal.Title>}
         {subtitle && <Modal.Title style={{fontSize: '100%', marginTop: '7px'}}>{subtitle}</Modal.Title>}
       </div>
