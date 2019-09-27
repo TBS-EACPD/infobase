@@ -25,6 +25,7 @@ import { declare_drr_summary_panel } from '../../panels/result_graphs/index.js';
 
 // shared crso, program
 import { declare_profile_panel } from '../../panels/intro_graphs/index.js';
+import { declare_indicator_fields_panel } from '../../panels/result_graphs/index.js';
 
 // shared program, tag
 import { declare_vote_stat_split_panel } from "../../panels/vote_stat/last_year_vote_stat_split.js";
@@ -67,6 +68,7 @@ export const get_program_panels = subject => ensure_loaded({
     declare_late_dps_warning_panel(),
     declare_drr_summary_panel(),
     declare_explore_results_panel(),
+    declare_indicator_fields_panel(),
   ],
   related: [
     declare_related_program_structure_panel(),

@@ -75,7 +75,7 @@ export class App extends React.Component {
               <Route path="/privacy" component={PrivacyStatement} />
               <Route path="/diff/:org_id?/:crso_id?/:program_id?" component={TextDiff} />
               <Route path="/lab" component={Lab} />
-              <Route path="/panel/:level?/:subject_id?/:panel_key?" component={IsolatedPanel} />
+              <Route path="/panel/:level?/:subject_id?/:panel_key?/:options?" component={IsolatedPanel} />
               { !window.is_a11y_mode && <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} /> }
               { !window.is_a11y_mode && <Route path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?" component={TreeMap} /> }
               { window.is_a11y_mode && <Route path="/start/:no_basic_equiv?" component={A11yHome} /> }

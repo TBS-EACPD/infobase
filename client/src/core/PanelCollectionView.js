@@ -12,11 +12,12 @@ export const ReactPanelGraph = withRouter(
         graph_key,
         history,
         active_bubble_id,
+        options,
       } = this.props;  
 
       const graph_obj = PanelGraph.lookup(graph_key, subject.level);
 
-      const graph_options = {history};
+      const graph_options = {history, options};
 
       const { Provider } = panel_context;
       

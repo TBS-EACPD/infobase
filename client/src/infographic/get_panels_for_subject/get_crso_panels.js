@@ -19,6 +19,7 @@ import { declare_dp_rev_split_panel } from "../../panels/drr_dp_resources/dp_rev
 
 // shared crso, program
 import { declare_profile_panel } from '../../panels/intro_graphs/index.js';
+import { declare_indicator_fields_panel } from '../../panels/result_graphs/index.js';
 
 // crso only panels
 import {
@@ -55,6 +56,7 @@ export const get_crso_panels = subject => ensure_loaded({
     declare_results_intro_panel(),
     declare_late_dps_warning_panel(),
     declare_explore_results_panel(),
+    declare_indicator_fields_panel(),
   ],
   related: [
     declare_crso_links_to_other_crso_panel(),
