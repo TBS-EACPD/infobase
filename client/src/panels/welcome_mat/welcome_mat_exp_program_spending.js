@@ -89,13 +89,13 @@ export const format_and_get_exp_program_spending = (type, subject) => {
         label: plan_ticks[year_index],
         data: [
           null,
-          null,
           formatter("compact2", progSpending_value, {raw: true}),
         ],
       })
     );
 
     const data = _.concat(historical_data, planning_data);
+    console.log(data);
 
     exp_program_spending_graph = (
       <A11YTable
