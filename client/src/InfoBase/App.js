@@ -29,13 +29,13 @@ const About = retrying_react_lazy( () => import(/* webpackChunkName: "About" */ 
 const MetaData = retrying_react_lazy( () => import(/* webpackChunkName: "Metadata" */ '../metadata/metadata.js') );
 const IgocExplorer = retrying_react_lazy( () => import(/* webpackChunkName: "igoc_explorer" */ '../igoc_explorer/igoc_explorer.js') );
 const ResourceExplorer = retrying_react_lazy( () => import(/* webpackChunkName: "ResourceExplorer" */ '../resource_explorer/resource-explorer.js') );
-const Glossary = retrying_react_lazy( () => import(/* webpackChunkName: "Glossary" */'../glossary/glossary.js') );
-const ReportBuilder = retrying_react_lazy( () => import(/* webpackChunkName: "ReportBuilder" */'../rpb/index.js') );
+const Glossary = retrying_react_lazy( () => import(/* webpackChunkName: "Glossary" */ '../glossary/glossary.js') );
+const ReportBuilder = retrying_react_lazy( () => import(/* webpackChunkName: "ReportBuilder" */ '../rpb/index.js') );
 const InfoGraph = retrying_react_lazy( () => import(/* webpackChunkName: "Infographic" */ '../infographic/infographic.js') );
-const EstimatesComparison = retrying_react_lazy( () => import(/* webpackChunkName: "EstimatesComparison" */'../EstimatesComparison/EstimatesComparison.js') );
-const PrivacyStatement = retrying_react_lazy( () => import(/* webpackChunkName: "PrivacyStatement" */'../PrivacyStatement/PrivacyStatement.js') );
-const TreeMap = retrying_react_lazy( () => import(/* webpackChunkName: "TreeMap" */'../TreeMap/TreeMap.js') ); 
-const TextDiff = retrying_react_lazy( () => import(/* webpackChunkName: "TextDiff" */'../diff/TextDiff.js') ); 
+const EstimatesComparison = retrying_react_lazy( () => import(/* webpackChunkName: "EstimatesComparison" */ '../EstimatesComparison/EstimatesComparison.js') );
+const PrivacyStatement = retrying_react_lazy( () => import(/* webpackChunkName: "PrivacyStatement" */ '../PrivacyStatement/PrivacyStatement.js') );
+const TreeMap = retrying_react_lazy( () => import(/* webpackChunkName: "TreeMap" */ '../TreeMap/TreeMap.js') ); 
+const TextDiff = retrying_react_lazy( () => import(/* webpackChunkName: "TextDiff" */ '../diff/TextDiff.js') ); 
 const Lab = retrying_react_lazy( () => import(/* webpackChunkName: "InfoLab" */ '../lab/InfoLab.js') ); 
 const IsolatedPanel = retrying_react_lazy( () => import(/* webpackChunkName: "IsolatedPanel" */ '../panels/IndividualPanelRoute.js') ); 
 
