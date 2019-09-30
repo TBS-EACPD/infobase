@@ -51,7 +51,7 @@ export class TreeMapTopbar extends React.Component {
           {_.map(org_route.slice(0, -1), (display, ix) =>
             <Fragment key={ix} >
               <li aria-hidden="true">
-                <BreadcrumbArrow />
+                {BreadcrumbArrow}
               </li>
               <li className="TreeMap__ZoomControl--has-zoom-out">
                 {
@@ -71,7 +71,7 @@ export class TreeMapTopbar extends React.Component {
           {!_.isEmpty(org_route) &&
             <Fragment>
               <li aria-hidden="true">
-                <BreadcrumbArrow />
+                {BreadcrumbArrow}
               </li>
               <li className="TreeMap__ZoomControl--no-zoom-out">
                 {
