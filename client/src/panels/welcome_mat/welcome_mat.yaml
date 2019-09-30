@@ -7,12 +7,12 @@ no_wrap_year:
   transform: [handlebars]
   handlebars_partial : true
   text: <span class='text-nowrap'>({{year}})</span>
-five_years_ago:
+years_ago:
   transform: [handlebars]
   en: |
-    Five years ago {{> no_wrap_year year=pa_last_year_5}}
+    {{actual_hist_years_apart}} years ago ({{oldest_hist_spend_year}})
   fr: |
-    Il y a cinq ans {{> no_wrap_year year=pa_last_year_5}}
+    Il y a {{actual_hist_years_apart}} ans ({{oldest_hist_spend_year}})
 last_year:
   transform: [handlebars]
   en: |
@@ -32,14 +32,14 @@ in_this_year:
   fr: |
     Cette année {{> no_wrap_year year=est_in_year}}
 
-8_year_trend:
+long_term_trend:
   transform: [handlebars]
-  en: Long term trend ({{pa_last_year_5}} to {{planning_year_3}})
-  fr: Tendance à long terme ({{pa_last_year_5}} à {{planning_year_3}})
-5_year_trend:
+  en: Long term trend ({{oldest_hist_spend_year}} to {{planning_year_3}})
+  fr: Tendance à long terme ({{oldest_hist_spend_year}} à {{planning_year_3}})
+hist_trend:
   transform: [handlebars]
-  en: Historical trend ({{pa_last_year_5}} to {{pa_last_year}})
-  fr: Tendance historique ({{pa_last_year_5}} à {{pa_last_year}})
+  en: Historical trend ({{oldest_hist_spend_year}} to {{latest_hist_spend_year}})
+  fr: Tendance historique ({{oldest_hist_spend_year}} à {{latest_hist_spend_year}})
 3_year_trend:
   transform: [handlebars]
   en: Long term Trend ({{planning_year_1}} to {{planning_year_3}})
@@ -256,7 +256,7 @@ dept1_welcome_mat_spending_summary:
   transform: [handlebars, markdown]
   en: |
    Total spending for {{subj_name subject}}
-   {{changed_by  exp_hist_change "fmt_percentage1"  }} between {{pa_last_year_5}} and {{pa_last_year}} 
+   {{changed_by  exp_hist_change "fmt_percentage1"  }} between {{oldest_hist_spend_year}} and {{latest_hist_spend_year}} 
    and is
    {{will_change_by  exp_plan_change "fmt_percentage1"}} 
    by {{planning_year_3}}.
@@ -268,36 +268,22 @@ dept1_welcome_mat_spending_summary:
 dept2_welcome_mat_spending_summary:
   transform: [handlebars, markdown]
   en: |
-   In the last five years, total spending for {{subj_name subject}}
+   In the last {{actual_hist_years_apart}} years, total spending for {{subj_name subject}}
    {{changed_by  exp_hist_change "fmt_percentage1"  }}.
   fr: |
-   Au cours des cinq dernières années, les {{gl_tt "dépenses" "EXP"}} totales pour {{subj_name subject}}      
+   Au cours des {{actual_hist_years_apart}} dernières années, les {{gl_tt "dépenses" "EXP"}} totales pour {{subj_name subject}}      
    {{fr_changed_by  exp_hist_change  "f" "p" "fmt_percentage1"  }}.
-
-program_welcome_mat_spending_summary:
-  transform: [handlebars, markdown]
-  en: |
-   In the last five years, total spending on "**{{subj_name subject}}**"
-   {{changed_by  exp_hist_change "fmt_percentage1"}}
-   and is
-   {{will_change_by  exp_plan_change "fmt_percentage1"}}
-   by {{planning_year_3}}.
-  fr: |
-   Au cours des cinq dernières années, les dépenses totales pour « **{{subj_name subject}}** » 
-   {{fr_changed_by  exp_hist_change  "f" "p" "fmt_percentage1"  }}.
-   D'ici à {{planning_year_3}}, les dépenses prévues
-   {{fr_will_change_by  exp_plan_change "f" "p"  "fmt_percentage1"  }}.
                                                                
 tag_welcome_mat_spending_summary:
   transform: [handlebars, markdown]
   en: |
-   In the last five years, the {{#if subject.is_m2m}}maximum{{/if}} total spending on the tag "**{{subj_name subject}}**"
+   In the last {{actual_hist_years_apart}} years, the {{#if subject.is_m2m}}maximum{{/if}} total spending on the tag "**{{subj_name subject}}**"
    {{changed_by  exp_hist_change "fmt_percentage1"  }} 
    and is
    {{will_change_by  exp_plan_change "fmt_percentage1"  }}
    by {{planning_year_3}}.
   fr: |
-   Au cours des cinq derniers exercices, le montant {{#if subject.is_m2m}}maximal{{/if}} des dépenses relatives à l'étiquette **«{{subj_name subject}}»**
+   Au cours des {{actual_hist_years_apart}} derniers exercices, le montant {{#if subject.is_m2m}}maximal{{/if}} des dépenses relatives à l'étiquette **«{{subj_name subject}}»**
    {{fr_changed_by  exp_hist_change "m" "p" "fmt_percentage1"  }}. 
    D'ici {{planning_year_3}}, les dépenses prévues
    {{fr_will_change_by  exp_plan_change "f" "p" "fmt_percentage1"  }} 
