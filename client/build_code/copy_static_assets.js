@@ -121,6 +121,15 @@ const other_csvs = _.map(
   public_dir_prefixer
 );
 
+const preload_polyfill_scripts = _.map(
+  [
+    'preload-polyfill.min.js',
+    'preload-polyfill-invoke.min.js',
+    'preload-polyfill-inline.min.js',
+  ],
+  (script) => `node_modules/@digitalkaoz/preload-polyfill/${script}`
+);
+
 var IB = {
   name: 'InfoBase',
   lookups_en: common_lookups.concat(common_lookups_en),
@@ -130,6 +139,7 @@ var IB = {
   font: font_path,
   csv: table_csvs.concat(other_csvs),
   well_known: ['src/InfoBase/security.txt'],
+  external_modules: [ ...preload_polyfill_scripts ],
   other: [
     'src/robots/robots.txt',
     'src/InfoBase/favicon.ico',
@@ -196,9 +206,10 @@ function build_proj(PROJ){
   const app_dir = `${dir}/app`;
   const footnotes_dir = `${dir}/footnotes`;
   const well_known_dir = `${dir}/.well-known`;
+  const external_modules_dir = `${dir}/external_modules`;
 
   _.each(
-    [build_dir_name, dir, app_dir, footnotes_dir], 
+    [build_dir_name, dir, app_dir, footnotes_dir, external_modules_dir], 
     name => make_dir_if_exists(name)
   );
 
@@ -286,6 +297,17 @@ function build_proj(PROJ){
       fr
     );
   });
+
+  PROJ.external_modules.forEach(
+    (external_script_path) => {
+      const script_name = _.last(external_script_path.split('/'))
+
+      fs.writeFileSync(
+        `${external_modules_dir}/${script_name}`,
+        external_script_path
+      );
+    }
+  );
 
   console.log("\n done copying static assets \n");
 
