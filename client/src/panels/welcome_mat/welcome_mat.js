@@ -23,7 +23,6 @@ const { Format } = util_components;
 const { std_years, planning_years } = years;
 const exp_cols = _.map(std_years, yr => `${yr}exp`);
 const actual_history_years = _.map(std_years, run_template);
-const actual_plan_years = _.map(planning_years, run_template);
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -155,12 +154,29 @@ const WelcomeMat = (props) => {
     calcs,
     is_m2m,
   } = props;
-  
+  const {
+    latest_hist_spend_data,
+    oldest_hist_spend_data,
+  } = calcs;
+
+  const actual_hist_years_apart = _.parseInt( _.split(latest_hist_spend_data.year, '-') ) - _.parseInt( _.split(oldest_hist_spend_data.year, '-') ) + 1;
+  const latest_equals_oldest_hist = oldest_hist_spend_data.year === latest_hist_spend_data.year;
+
   //vars used multiple times accross multiple cases
+  const years_ago = <TM k="years_ago" args={{
+    actual_hist_years_apart: actual_hist_years_apart,
+    oldest_hist_spend_year: oldest_hist_spend_data.year,
+  }} />;  
+  const hist_trend = <TM k="hist_trend" args={{
+    oldest_hist_spend_year: oldest_hist_spend_data.year,
+    latest_hist_spend_year: latest_hist_spend_data.year,
+  }} />;
+  
   const last_year = <TM k="last_year" />;
   const in_three_years = <TM k="in_three_years" />;
   const in_this_year = <TM k="in_this_year" />;
 
+  const long_term_trend = <TM k="long_term_trend" args={{oldest_hist_spend_year: oldest_hist_spend_data.year}} />;
   const planned_trend = <TM k="3_year_trend" />;
   const no_hist_spending = <TM k="no_historical_spending__new" />;
   // const no_hist_ftes = <TM k="no_historical_fte__new" />;
@@ -180,24 +196,12 @@ const WelcomeMat = (props) => {
     //note that it may or may not have FTEs...
     const {
       spend_last_year,
-      latest_hist_spend_data,
-      oldest_hist_spend_data,
       last_year_hist_spend_diff,
 
       last_year_hist_fte_diff,
       oldest_hist_fte_data,
       fte_last_year,
     } = calcs;
-
-    const actual_hist_years_apart = _.parseInt( _.split(latest_hist_spend_data.year, '-') ) - _.parseInt( _.split(oldest_hist_spend_data.year, '-') ) + 1;
-    const years_ago = <TM k="years_ago" args={{
-      actual_hist_years_apart: actual_hist_years_apart,
-      oldest_hist_spend_year: oldest_hist_spend_data.year,
-    }} />;  
-    const hist_trend = <TM k="hist_trend" args={{
-      oldest_hist_spend_year: oldest_hist_spend_data.year,
-      latest_hist_spend_year: latest_hist_spend_data.year,
-    }} />;
 
     return (
       <WelcomeMatShell
@@ -345,20 +349,8 @@ const WelcomeMat = (props) => {
     //new, non-DP org, CR or program
 
     const { 
-      latest_hist_spend_data,
-      oldest_hist_spend_data,
       spend_plan_1,
     } = calcs;
-
-    const actual_hist_years_apart = _.parseInt( _.split(latest_hist_spend_data.year, '-') ) - _.parseInt( _.split(oldest_hist_spend_data.year, '-') ) + 1;
-    const years_ago = <TM k="years_ago" args={{
-      actual_hist_years_apart: actual_hist_years_apart,
-      oldest_hist_spend_year: oldest_hist_spend_data.year,
-    }} />;
-    const hist_trend = <TM k="hist_trend" args={{
-      oldest_hist_spend_year: oldest_hist_spend_data.year,
-      latest_hist_spend_year: latest_hist_spend_data.year,
-    }} />;
 
     return (
       <WelcomeMatShell
@@ -411,22 +403,11 @@ const WelcomeMat = (props) => {
     const {
       spend_plan_1,
       spend_last_year,
-      latest_hist_spend_data,
-      oldest_hist_spend_data,
       last_year_hist_spend_diff,
       latest_year_hist_spend_diff,
     } = calcs;
 
     const actual_hist_years_apart = _.parseInt( _.split(latest_hist_spend_data.year, '-') ) - _.parseInt( _.split(oldest_hist_spend_data.year, '-') ) + 1;
-    const latest_equals_oldest_hist = oldest_hist_spend_data.year === latest_hist_spend_data.year;
-    const years_ago = <TM k="years_ago" args={{
-      actual_hist_years_apart: actual_hist_years_apart,
-      oldest_hist_spend_year: oldest_hist_spend_data.year,
-    }} />;
-    const hist_trend = <TM k="hist_trend" args={{
-      oldest_hist_spend_year: oldest_hist_spend_data.year,
-      latest_hist_spend_year: latest_hist_spend_data.year,
-    }} />;
 
     return (
       <WelcomeMatShell
@@ -518,22 +499,12 @@ const WelcomeMat = (props) => {
       latest_year_hist_spend_diff,
       latest_year_hist_fte_diff,
       planned_spend_diff,
-      latest_hist_spend_data,
-      oldest_hist_spend_data,
 
       fte_last_year,
       oldest_hist_fte_data,
       fte_plan_3,
       planned_fte_diff,
     } = calcs;
-
-    const actual_hist_years_apart = _.parseInt( _.split(latest_hist_spend_data.year, '-') ) - _.parseInt( _.split(oldest_hist_spend_data.year, '-') ) + 1;
-    const latest_equals_oldest_hist = oldest_hist_spend_data.year === latest_hist_spend_data.year;
-    const years_ago = <TM k="years_ago" args={{
-      actual_hist_years_apart: actual_hist_years_apart,
-      oldest_hist_spend_year: oldest_hist_spend_data.year,
-    }} />;  
-    const long_term_trend = <TM k="long_term_trend" args={{oldest_hist_spend_year: oldest_hist_spend_data.year}} />;
 
     const { level } = subject;
     let spend_summary_key;
@@ -778,8 +749,8 @@ function get_calcs(subject, q6, q12){
   const planned_fte_data = _.map(planning_years, col => q12.sum(col) || 0);
   const fte_data = _.concat(hist_fte_data, planned_fte_data);
 
-  const get_non_zero_data_year = (data, years, loop) => {
-    loop = loop ? loop : _.forEach;
+  const get_non_zero_data_year = (data, years, reverse) => {
+    const loop = reverse ? _.forEachRight : _.forEach;
     let matched_data;
     loop(data, (value, key) => {
       if(value > 0){
@@ -790,26 +761,27 @@ function get_calcs(subject, q6, q12){
         return false;
       }
     });
+    matched_data = matched_data ? matched_data
+      : {
+        year: reverse ? _.last(years) : _.first(years),
+        value: 0,
+      };
     return matched_data;
   };
 
   const oldest_hist_spend_data = get_non_zero_data_year(hist_spend_data, actual_history_years);
-  const latest_hist_spend_data = get_non_zero_data_year(hist_spend_data, actual_history_years, _.forEachRight);
-  const oldest_planned_spend_data = get_non_zero_data_year(planned_spend_data, actual_plan_years);
-  const latest_planned_spend_data = get_non_zero_data_year(planned_spend_data, actual_plan_years, _.forEachRight);
+  const latest_hist_spend_data = get_non_zero_data_year(hist_spend_data, actual_history_years, true);
   
   const oldest_hist_fte_data = get_non_zero_data_year(hist_fte_data, actual_history_years);
-  const latest_hist_fte_data = get_non_zero_data_year(hist_fte_data, actual_history_years, _.forEachRight);
-  const oldest_planned_fte_data = get_non_zero_data_year(planned_fte_data, actual_plan_years);
-  const latest_planned_fte_data = get_non_zero_data_year(planned_fte_data, actual_plan_years, _.forEachRight);
+  const latest_hist_fte_data = get_non_zero_data_year(hist_fte_data, actual_history_years, true);
 
   const spend_last_year_5 = _.first(hist_spend_data);
   const spend_last_year = _.last(hist_spend_data);
   const spend_plan_1= _.first(planned_spend_data);
   const spend_plan_3= _.last(planned_spend_data);
   
-  const latest_year_hist_spend_diff = latest_hist_spend_data && oldest_hist_spend_data && (latest_hist_spend_data.value-oldest_hist_spend_data.value)/oldest_hist_spend_data.value;
-  const last_year_hist_spend_diff = oldest_hist_spend_data && (spend_last_year-oldest_hist_spend_data.value)/oldest_hist_spend_data.value;
+  const latest_year_hist_spend_diff = (latest_hist_spend_data.value-oldest_hist_spend_data.value)/oldest_hist_spend_data.value;
+  const last_year_hist_spend_diff = (spend_last_year-oldest_hist_spend_data.value)/oldest_hist_spend_data.value;
   const planned_spend_diff = (spend_plan_3-spend_last_year)/spend_last_year;
 
   const fte_last_year_5= _.first(hist_fte_data);
@@ -817,15 +789,13 @@ function get_calcs(subject, q6, q12){
   const fte_plan_1= _.first(planned_fte_data);
   const fte_plan_3= _.last(planned_fte_data);
 
-  const latest_year_hist_fte_diff = latest_hist_fte_data && oldest_hist_fte_data && (latest_hist_fte_data.value-oldest_hist_fte_data.value)/oldest_hist_fte_data.value;
-  const last_year_hist_fte_diff = oldest_hist_fte_data && (fte_last_year-oldest_hist_fte_data.value)/oldest_hist_fte_data.value;
+  const latest_year_hist_fte_diff = (latest_hist_fte_data.value-oldest_hist_fte_data.value)/oldest_hist_fte_data.value;
+  const last_year_hist_fte_diff = (fte_last_year-oldest_hist_fte_data.value)/oldest_hist_fte_data.value;
   const planned_fte_diff = (fte_plan_3-fte_last_year)/fte_last_year;
 
   return {
     oldest_hist_spend_data,
     latest_hist_spend_data,
-    oldest_planned_spend_data,
-    latest_planned_spend_data,
     oldest_hist_fte_data,
     has_hist,
     has_planned,

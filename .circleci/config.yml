@@ -8,8 +8,9 @@ gcloud_auth: &gcloud_auth
 deploy_filter: &deploy_filter 
   filters:
     branches:
-      ignore:
-        - /__.*/
+      only:
+        - master
+        - welcome_matt_bug
 
 version: 2
 jobs:
