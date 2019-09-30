@@ -20,24 +20,24 @@ import { EasyAccess } from '../core/EasyAccess';
 import { SpinnerWrapper } from '../components/SpinnerWrapper.js';
 import { PageDetails } from '../components/PageDetails.js';
 
-const Home = retrying_react_lazy( () => import('../home/home.js') );
-const A11yHome = retrying_react_lazy( () => import('../home/a11y_home.js') );
-const GraphInventory = retrying_react_lazy( () => import('../graph_route/GraphInventory.js') );
-const PartitionRoute = retrying_react_lazy( () => import('../partition/partition_subapp/PartitionRoute.js') );
-const BudgetMeasuresRoute = retrying_react_lazy( () => import('../partition/budget_measures_subapp/BudgetMeasuresRoute.js') );
-const About = retrying_react_lazy( () => import('../about/about.js') );
-const MetaData = retrying_react_lazy( () => import('../metadata/metadata.js') );
-const IgocExplorer = retrying_react_lazy( () => import('../igoc_explorer/igoc_explorer.js') );
-const ResourceExplorer = retrying_react_lazy( () => import('../resource_explorer/resource-explorer.js') );
-const Glossary = retrying_react_lazy( () => import('../glossary/glossary.js') );
-const ReportBuilder = retrying_react_lazy( () => import('../rpb/index.js') );
-const InfoGraph = retrying_react_lazy( () => import('../infographic/infographic.js') );
-const EstimatesComparison = retrying_react_lazy( () => import('../EstimatesComparison/EstimatesComparison.js') );
-const PrivacyStatement = retrying_react_lazy( () => import('../PrivacyStatement/PrivacyStatement.js') );
-const TreeMap = retrying_react_lazy( () => import('../TreeMap/TreeMap.js') ); 
-const TextDiff = retrying_react_lazy( () => import('../diff/TextDiff.js') ); 
-const Lab = retrying_react_lazy( () => import('../lab/InfoLab.js') ); 
-const IsolatedPanel = retrying_react_lazy( () => import('../panels/IndividualPanelRoute.js') ); 
+const Home = retrying_react_lazy( () => import(/* webpackChunkName: "Home" */ '../home/home.js') );
+const A11yHome = retrying_react_lazy( () => import(/* webpackChunkName: "A11yHome" */ '../home/a11y_home.js') );
+const GraphInventory = retrying_react_lazy( () => import(/* webpackChunkName: "GraphInventory" */ '../graph_route/GraphInventory.js') );
+const PartitionRoute = retrying_react_lazy( () => import(/* webpackChunkName: "PartitionRoute" */ '../partition/partition_subapp/PartitionRoute.js') );
+const BudgetMeasuresRoute = retrying_react_lazy( () => import(/* webpackChunkName: "BudgetMeasuresRoute" */ '../partition/budget_measures_subapp/BudgetMeasuresRoute.js') );
+const About = retrying_react_lazy( () => import(/* webpackChunkName: "About" */ '../about/about.js') );
+const MetaData = retrying_react_lazy( () => import(/* webpackChunkName: "Metadata" */ '../metadata/metadata.js') );
+const IgocExplorer = retrying_react_lazy( () => import(/* webpackChunkName: "igoc_explorer" */ '../igoc_explorer/igoc_explorer.js') );
+const ResourceExplorer = retrying_react_lazy( () => import(/* webpackChunkName: "ResourceExplorer" */ '../resource_explorer/resource-explorer.js') );
+const Glossary = retrying_react_lazy( () => import(/* webpackChunkName: "Glossary" */'../glossary/glossary.js') );
+const ReportBuilder = retrying_react_lazy( () => import(/* webpackChunkName: "ReportBuilder" */'../rpb/index.js') );
+const InfoGraph = retrying_react_lazy( () => import(/* webpackChunkName: "Infographic" */ '../infographic/infographic.js') );
+const EstimatesComparison = retrying_react_lazy( () => import(/* webpackChunkName: "EstimatesComparison" */'../EstimatesComparison/EstimatesComparison.js') );
+const PrivacyStatement = retrying_react_lazy( () => import(/* webpackChunkName: "PrivacyStatement" */'../PrivacyStatement/PrivacyStatement.js') );
+const TreeMap = retrying_react_lazy( () => import(/* webpackChunkName: "TreeMap" */'../TreeMap/TreeMap.js') ); 
+const TextDiff = retrying_react_lazy( () => import(/* webpackChunkName: "TextDiff" */'../diff/TextDiff.js') ); 
+const Lab = retrying_react_lazy( () => import(/* webpackChunkName: "InfoLab" */ '../lab/InfoLab.js') ); 
+const IsolatedPanel = retrying_react_lazy( () => import(/* webpackChunkName: "IsolatedPanel" */ '../panels/IndividualPanelRoute.js') ); 
 
 export class App extends React.Component {
   constructor(){
