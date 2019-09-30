@@ -127,7 +127,7 @@ const preload_polyfill_scripts = _.map(
     'preload-polyfill-invoke.min.js',
     'preload-polyfill-inline.min.js',
   ],
-  (script) => `node_modules/@digitalkaoz/preload-polyfill/${script}`
+  (script) => `node_modules/@digitalkaoz/preload-polyfill/dist/${script}`
 );
 
 var IB = {
@@ -300,11 +300,12 @@ function build_proj(PROJ){
 
   PROJ.external_modules.forEach(
     (external_script_path) => {
-      const script_name = _.last(external_script_path.split('/'))
+      const script_name = _.last( external_script_path.split('/') );
 
-      fs.writeFileSync(
+      fse.copySync(
+        external_script_path,
         `${external_modules_dir}/${script_name}`,
-        external_script_path
+        {clobber: true}
       );
     }
   );
