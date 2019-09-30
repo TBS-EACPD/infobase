@@ -246,7 +246,6 @@ function build_proj(PROJ){
     fs.writeFileSync(est_fn_url, estimate_footnotes);
 
     // combine all the lookups into one big JSON blob
-    // also, create a compressed version for modern browsers
     const lookup_json_str = JSON.stringify(
       _.chain(PROJ["lookups_"+lang])
         .map(file_name => [ get_lookup_name(file_name), file_to_str(file_name) ])
