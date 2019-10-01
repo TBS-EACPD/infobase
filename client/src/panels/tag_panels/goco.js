@@ -41,7 +41,6 @@ class Goco extends React.Component {
 
     let graph_content;
 
-    const fte_factor = 400000;
     const colors = d3.scaleOrdinal().range(newIBCategoryColors);
 
     const total_fte_spend = _.reduce(Tag.gocos_by_spendarea, (result, sa) => {
@@ -115,9 +114,6 @@ class Goco extends React.Component {
         );
         return result;
       }, [] );
-
-      console.log(a11y_data);
-      console.log(a11y_children);
 
       graph_content = (
         <Fragment>
