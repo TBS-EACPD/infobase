@@ -11,6 +11,7 @@ import {
   newIBCategoryColors,
   NivoResponsiveBar,
   TspanLineWrapper,
+  get_formatter,
 } from '../shared.js';
 
 const { GraphLegend, A11YTable } = declarative_charts;
@@ -63,20 +64,20 @@ class Goco extends React.Component {
     const graph_data = _.chain(Tag.gocos_by_spendarea)
       .map(sa=> {
         const children = _.map(sa.children_tags, goco => {
-          const actual_spending = programSpending.q(goco).sum(spend_col);
-          const actual_ftes = programFtes.q(goco).sum(fte_col);
+          const actual_Spending = programSpending.q(goco).sum(spend_col);
+          const actual_FTEs = programFtes.q(goco).sum(fte_col);
           return {
             label: goco.name,
-            actual_spending: actual_spending,
-            actual_ftes: actual_ftes,
-            [spending_text]: actual_spending / total_fte_spend[sa.id].total_child_spending,
-            [ftes_text]: actual_ftes / total_fte_spend[sa.id].total_child_ftes,
+            actual_Spending: actual_Spending,
+            actual_FTEs: actual_FTEs,
+            [spending_text]: actual_Spending / total_fte_spend[sa.id].total_child_spending,
+            [ftes_text]: actual_FTEs / total_fte_spend[sa.id].total_child_ftes,
           };
         });
         return {
           label: sa.name,
-          actual_spending: total_fte_spend[sa.id].total_child_spending,
-          actual_ftes: total_fte_spend[sa.id].total_child_ftes,
+          actual_Spending: total_fte_spend[sa.id].total_child_spending,
+          actual_FTEs: total_fte_spend[sa.id].total_child_ftes,
           [spending_text]: total_fte_spend[sa.id].total_child_spending / total_fte_spend.total_spending,
           [ftes_text]: total_fte_spend[sa.id].total_child_ftes / total_fte_spend.total_ftes,
           children: _.sortBy(children, d => -d[spending_text]),
@@ -140,7 +141,9 @@ class Goco extends React.Component {
           color: colors(label),
         };
       });
-  
+
+      const format_value = (d) => get_formatter(d.id==="Spending")(d.data[`actual_${d.id}`]);
+
       const nivo_default_props = {
         indexBy: "label",
         animate: false,
@@ -148,7 +151,7 @@ class Goco extends React.Component {
         enableLabel: true,
         enableGridX: false,
         enableGridY: false,
-        label: d => formats.percentage1_raw(d.value),
+        label: d => format_value(d),
         label_format: d => <tspan y={-3}> { d } </tspan>,
         tooltip: (slice) => (
           <div style={{color: window.infobase_color_constants.textColor}}>
@@ -163,7 +166,7 @@ class Goco extends React.Component {
                       <td style={{padding: '3px 5px'}}> {tooltip_item.id} </td>
                       <td
                         style={{padding: '3px 5px'}}
-                        dangerouslySetInnerHTML={{ __html: formats.compact1_raw(tooltip_item.data[`actual_${_.toLower(tooltip_item.id)}`]) }}
+                        dangerouslySetInnerHTML={{ __html: format_value(tooltip_item) }}
                       />
                     </tr>
                   )

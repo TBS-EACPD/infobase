@@ -19,7 +19,7 @@ import { infograph_href_template as infograph_href_template } from '../infograph
 import { glossary_href } from '../link_utils.js';
 import { Statistics } from '../core/Statistics.js';
 import { get_source_links } from '../metadata/data_sources.js';
-import { NivoResponsiveBar, NivoResponsiveHBar, NivoResponsiveLine, NivoResponsivePie } from '../charts/NivoCharts.js';
+import { NivoResponsiveBar, NivoResponsiveHBar, NivoResponsiveLine, NivoResponsivePie, get_formatter } from '../charts/NivoCharts.js';
 import { Canada } from '../charts/canada.js';
 
 import classNames from 'classnames';
@@ -610,4 +610,5 @@ export {
   Canada,
   breakpoints,
   SpinnerWrapper,
+  get_formatter,
 };
