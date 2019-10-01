@@ -152,7 +152,6 @@ function get_index_pages(CDN_URL){
   const get_extended_a11y_args = (lang_lookups) => ({
     ...lang_lookups,
     script_url: lang_lookups.a11y_script_url,
-    rel_preload_links_url: lang_lookups.a11y_rel_preload_links_url, 
     other_lang_href: lang_lookups.a11y_other_lang_href,
     is_a11y_mode: true,
     CDN_URL,
@@ -179,20 +178,11 @@ function get_files_to_preload_configs(CDN_URL){
   const en_lang_lookups = _.mapValues(index_lang_lookups, 'en');
   const fr_lang_lookups = _.mapValues(index_lang_lookups, 'fr');
 
-  const get_extended_lookups = (lookups, is_a11y_mode) => ({...lookups, is_a11y_mode, CDN_URL});
-
-  return [
-    {
-      file_prefix: "files_to_preload_config",
-      en: template_func( get_extended_lookups(en_lang_lookups, false) ),
-      fr: template_func( get_extended_lookups(fr_lang_lookups, false) ),
-    },
-    {
-      file_prefix: "a11y_files_to_preload_config",
-      en: template_func( get_extended_lookups(en_lang_lookups, true) ),
-      fr: template_func( get_extended_lookups(fr_lang_lookups, true) ),
-    },
-  ];
+  return [{
+    file_prefix: "files_to_preload_config",
+    en: template_func({...en_lang_lookups, CDN_URL}),
+    fr: template_func({...fr_lang_lookups, CDN_URL}),
+  }];
 }
 
 function make_dir_if_exists(dir_name){

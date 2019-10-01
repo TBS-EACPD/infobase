@@ -152,10 +152,6 @@ const index_lang_lookups = {
     en: "files_to_preload_config_eng.json.js",
     fr: "files_to_preload_config_fre.json.js",
   },
-  a11y_files_to_preload_config_url: {
-    en: "a11y_files_to_preload_config_eng.json.js",
-    fr: "a11y_files_to_preload_config_fre.json.js",
-  },
 };
 
 // Used by copy_static_asset, node only supports commonjs syntax
