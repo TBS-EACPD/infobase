@@ -5,9 +5,10 @@ import { declare_gov_related_info_panel } from './gov_related.js';
 import { declare_links_to_rpb_panel } from './rpb_links.js';
 import { declare_m2m_warning_panel } from './tag_intro_graphs.js';
 import {
+  declare_year_warning_panel,
   declare_dead_program_warning_panel,
   declare_dead_crso_warning_panel,
-} from './program_meta_graphs.js';
+} from './meta_graphs.js';
 import {
   declare_portfolio_structure_intro_panel,
   declare_portfolio_structure_related_panel,
@@ -237,6 +238,7 @@ export {
 
   declare_m2m_warning_panel,
 
+  declare_year_warning_panel,
   declare_dead_program_warning_panel,
   declare_dead_crso_warning_panel,
   

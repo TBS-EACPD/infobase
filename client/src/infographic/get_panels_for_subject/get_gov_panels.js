@@ -10,6 +10,7 @@ import {
   declare_late_dps_warning_panel,
 } from '../../panels/intro_graphs/index.js';
 import { declare_budget_measures_panel } from '../../panels/budget_measures/budget_measures_panel.js';
+import { declare_year_warning_panel } from '../../panels/intro_graphs/index.js';
 
 // shared gov, dept
 import { declare_links_to_rpb_panel } from '../../panels/intro_graphs/index.js';
@@ -40,6 +41,7 @@ export const get_gov_panels = subject => ({
   ],
   financial: [
     declare_financial_intro_panel(),
+    declare_year_warning_panel(),
     declare_welcome_mat_panel(),
     declare_budget_measures_panel(),
     declare_auth_exp_prog_spending_panel(),
