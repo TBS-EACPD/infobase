@@ -97,7 +97,7 @@ class Goco extends React.Component {
       const a11y_data = _.map(graph_data, row => {
         return {
           label: row.label,
-          data: [formats.compact1_raw(row.Spending), formats.big_int_real_raw(row.FTEs / fte_factor)],
+          data: [formats.compact1_raw(row.actual_Spending), formats.big_int_real_raw(row.actual_FTEs)],
         };
       });
       
@@ -108,13 +108,16 @@ class Goco extends React.Component {
             child_data: _.map(row.children, (child) => {
               return {
                 label: child.label,
-                data: [formats.compact1_raw(child.Spending), formats.big_int_real_raw(child.FTEs / fte_factor)],
+                data: [formats.compact1_raw(child.actual_Spending), formats.big_int_real_raw(child.actual_FTEs)],
               };
             }),
           }
         );
         return result;
       }, [] );
+
+      console.log(a11y_data);
+      console.log(a11y_children);
 
       graph_content = (
         <Fragment>
