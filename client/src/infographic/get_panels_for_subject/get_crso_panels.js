@@ -10,6 +10,7 @@ import {
   declare_late_dps_warning_panel,
 } from '../../panels/intro_graphs/index.js';
 import { declare_budget_measures_panel } from '../../panels/budget_measures/budget_measures_panel.js';
+import { declare_year_warning_panel } from '../../panels/intro_graphs/index.js';
 
 // shared dept, crso, program
 import { declare_explore_results_panel } from '../../panels/result_graphs/index.js';
@@ -43,6 +44,7 @@ export const get_crso_panels = subject => ensure_loaded({
   ],
   financial: [
     declare_dead_crso_warning_panel(),
+    declare_year_warning_panel(),
     declare_financial_intro_panel(),
     declare_welcome_mat_panel(),
     declare_budget_measures_panel(),

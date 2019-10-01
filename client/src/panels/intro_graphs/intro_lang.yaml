@@ -84,7 +84,8 @@ dead_program_warning:
   transform: [handlebars, markdown]
   en: This Program is no longer active; only limited information is available
   fr: Ce programme n'est plus actif; les renseignements disponibles sont limités
-    
+
+
 
 
 #/ Program panel text
@@ -186,6 +187,15 @@ different_org_names_static_q:
     Why does the InfoBase sometimes use different names for the same organization? 
   fr: |
     Pourquoi une seule organisation a parfois deux noms dans l’InfoBase ?
+
+
+## warning for missing data prior to PAs
+
+year_warning:
+  transform: [handlebars, markdown]
+  en: The {{year}} actual spending data will only be available once the {{year}} Public Accounts are tabled.
+  fr: Les données pour les dépenses réelles de {{year}} seront seulement disponible lorsque les Comptes publics de {{year}} seront déposés.
+    
 
 
 

@@ -9,6 +9,7 @@ const { Gov } = Subject;
 const some_constants = {
   lang: window.lang,
   last_years: _.map(years.std_years, e => run_template(e)),
+  current_year: run_template("{{pa_in_year}}"),
   people_years: _.map(years.people_years, e => run_template(e)),
   planning_years: _.map(years.planning_years, e => run_template(e)),
   est_next_year: run_template("{{est_next_year}}"),
