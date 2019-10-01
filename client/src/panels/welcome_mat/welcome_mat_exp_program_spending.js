@@ -72,17 +72,17 @@ export const format_and_get_exp_program_spending = (type, subject) => {
 
   let exp_program_spending_graph;
   if(window.is_a11y_mode){
-    const historical_data = _.map(
-      exp,
-      (exp_value,year_index) => ({
+    const historical_data = _.chain(exp)
+      .map((exp_value, year_index) => ({
         label: history_ticks[year_index],
         data: [
           formatter("compact2", exp_value, {raw: true}),
           null,
         ],
-      })
-    );
-    
+      }))
+      .filter(d => d.data[0] != "0")
+      .value();
+
     const planning_data = _.map(
       progSpending,
       (progSpending_value, year_index) => ({
