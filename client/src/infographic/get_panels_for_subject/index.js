@@ -3,19 +3,19 @@ import { PanelGraph } from '../../core/PanelGraph.js';
 const panel_loading_promises = (subject) => {
   switch(subject.level){
     case 'gov':
-      return import(/* webpackChunkName: "gov_panels" */ './get_gov_panels.js')
+      return import(/* webpackChunkName: "gov_panels", webpackPreload: true */ './get_gov_panels.js')
         .then( ({get_gov_panels}) => get_gov_panels(subject) );
     case 'dept':
-      return import(/* webpackChunkName: "dept_panels" */ './get_dept_panels.js')
+      return import(/* webpackChunkName: "dept_panels", webpackPreload: true */ './get_dept_panels.js')
         .then( ({get_dept_panels}) => get_dept_panels(subject) );
     case 'crso':
-      return import(/* webpackChunkName: "crso_panels" */ './get_crso_panels.js')
+      return import(/* webpackChunkName: "crso_panels", webpackPreload: true */ './get_crso_panels.js')
         .then( ({get_crso_panels}) => get_crso_panels(subject) );
     case 'tag':
-      return import(/* webpackChunkName: "tag_panels" */ './get_tag_panels.js')
+      return import(/* webpackChunkName: "tag_panels", webpackPreload: true */ './get_tag_panels.js')
         .then( ({get_tag_panels}) => get_tag_panels(subject) );
     case 'program':
-      return import(/* webpackChunkName: "program_panels" */ './get_program_panels.js')
+      return import(/* webpackChunkName: "program_panels", webpackPreload: true */ './get_program_panels.js')
         .then( ({get_program_panels}) => get_program_panels(subject) );
   }
 };
