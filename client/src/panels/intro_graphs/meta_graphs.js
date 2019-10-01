@@ -28,7 +28,7 @@ export const declare_dead_crso_warning_panel = () => declare_panel({
   levels: ['crso'],
   panel_config_func: (level, panel_key) => ({
     footnotes: false,
-    calculate: _.property("dead_csro"),
+    calculate: _.property("dead_so"),
     render(){
       
       return (
