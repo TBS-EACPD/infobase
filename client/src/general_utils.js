@@ -28,7 +28,6 @@ export const make_unique_func = function(){
   };
 };
 
-
 // <div id='make_unique'></div>
 // consider replacing with _.uniqueId
 export const make_unique = make_unique_func();
@@ -140,3 +139,5 @@ export const SafeJSURL = {
   stringify: (json) => make_jsurl_safe( JSURL.stringify(json) ),
   tryParse: (safe_jsurl_string) => JSURL.tryParse( pre_parse_safe_jsurl(safe_jsurl_string) ),
 };
+
+export const generate_href = (url) => url.startsWith('http') ? url : `https://${url}`;
