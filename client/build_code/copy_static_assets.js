@@ -211,10 +211,11 @@ function get_lookup_name(file_name){
 
 function write_gitsha_files(dir){
   gitsha(function(err, sha){
-    fs.writeFileSync(`${dir}/build_sha`, sha);
+    fs.writeFileSync(`${dir}/build_sha`, sha, {clobber: true});
     fs.writeFileSync(
       `${dir}/set_static_content_deploy_sha.js`,
-      `window.static_content_deploy_sha = "${sha}";`
+      `window.static_content_deploy_sha = "${sha}";`,
+      {clobber: true}
     );
   });
 }
@@ -262,17 +263,19 @@ function build_proj(PROJ){
       // reminder: the funky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
       fs.writeFileSync(
         `${footnotes_dir}/fn_${lang}_${subj_id}.json.js`,
-        file_str
+        file_str,
+        {clobber: true}
       );
     });
 
     fs.writeFileSync(
       `${footnotes_dir}/fn_${lang}_all.json.js`,
-      all_footnotes
+      all_footnotes,
+      {clobber: true}
     );
 
     const est_fn_url = `${footnotes_dir}/fn_${lang}_estimates.json.js`;
-    fs.writeFileSync(est_fn_url, estimate_footnotes);
+    fs.writeFileSync(est_fn_url, estimate_footnotes, {clobber: true});
 
     // combine all the lookups into one big JSON blob
     const lookup_json_str = JSON.stringify(
@@ -283,7 +286,7 @@ function build_proj(PROJ){
         .value()
     ).toString("utf8");
 
-    fs.writeFileSync(`${dir}/lookups_${lang}.json.js`,lookup_json_str);
+    fs.writeFileSync(`${dir}/lookups_${lang}.json.js`, lookup_json_str, {clobber: true});
 
   });
 
