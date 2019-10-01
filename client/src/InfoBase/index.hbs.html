@@ -37,7 +37,7 @@
               var preload_links = "";
               for (var i = 0; i < files_to_preload.length; i++){
                 if (files_to_preload[i].non_a11y === "{{is_a11y_mode}}"){
-                  preload_links += '<link rel="preload" href="'+files_to_preload[i].path+'?v='+sha+'" as="'+files_to_preload[i].as+'">';
+                  preload_links += '<link rel="preload" href="'+files_to_preload[i].path+'?v='+sha+'" as="'+files_to_preload[i].as+'" crossorigin>';
                 }
               }
               preload_link_container.innerHTML = preload_links;
@@ -45,7 +45,7 @@
             }
           }
         );
-        files_to_preload_request.open("GET", "{{CDN_URL}}/{{files_to_preload_config_url}}?v="+sha);
+        files_to_preload_request.open("GET", "{{CDN_URL}}/{{files_to_preload_config_url}}?v="+sha, true);
         files_to_preload_request.send();
       })();
     </script>
