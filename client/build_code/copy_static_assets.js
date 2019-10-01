@@ -80,8 +80,6 @@ const svg_path = 'src/svg';
 
 const png_path = 'src/png';
 
-const font_path = 'src/font';
-
 const table_csvs = _.map(
   [
     'org_employee_age_group',
@@ -121,25 +119,14 @@ const other_csvs = _.map(
   public_dir_prefixer
 );
 
-const preload_polyfill_scripts = _.map(
-  [
-    'preload-polyfill.min.js',
-    'preload-polyfill-invoke.min.js',
-    'preload-polyfill-inline.min.js',
-  ],
-  (script) => `node_modules/@digitalkaoz/preload-polyfill/dist/${script}`
-);
-
 var IB = {
   name: 'InfoBase',
   lookups_en: common_lookups.concat(common_lookups_en),
   lookups_fr: common_lookups.concat(common_lookups_fr),
   svg: svg_path,
   png: png_path,
-  font: font_path,
   csv: table_csvs.concat(other_csvs),
   well_known: ['src/InfoBase/security.txt'],
-  external_modules: [ ...preload_polyfill_scripts ],
   other: [
     'src/robots/robots.txt',
     'src/InfoBase/favicon.ico',
@@ -206,10 +193,9 @@ function build_proj(PROJ){
   const app_dir = `${dir}/app`;
   const footnotes_dir = `${dir}/footnotes`;
   const well_known_dir = `${dir}/.well-known`;
-  const external_modules_dir = `${dir}/external_modules`;
 
   _.each(
-    [build_dir_name, dir, app_dir, footnotes_dir, external_modules_dir], 
+    [build_dir_name, dir, app_dir, footnotes_dir], 
     name => make_dir_if_exists(name)
   );
 
@@ -277,7 +263,6 @@ function build_proj(PROJ){
 
   copy_file_to_target_dir(svg_path, dir);
   copy_file_to_target_dir(png_path, dir);
-  copy_file_to_target_dir(font_path, dir);
 
   ['csv'].forEach(function(type){
     var this_dir = dir+'/'+type;
@@ -297,18 +282,6 @@ function build_proj(PROJ){
       fr
     );
   });
-
-  PROJ.external_modules.forEach(
-    (external_script_path) => {
-      const script_name = _.last( external_script_path.split('/') );
-
-      fse.copySync(
-        external_script_path,
-        `${external_modules_dir}/${script_name}`,
-        {clobber: true}
-      );
-    }
-  );
 
   console.log("\n done copying static assets \n");
 
