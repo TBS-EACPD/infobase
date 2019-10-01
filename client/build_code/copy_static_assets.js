@@ -137,26 +137,32 @@ function get_index_pages(CDN_URL){
   const template = file_to_str("./src/InfoBase/index.hbs.html");
   const template_func = Handlebars.compile(template);
 
-  const en_lang_lookups = _.mapValues(index_lang_lookups, 'en');
-  const fr_lang_lookups = _.mapValues(index_lang_lookups, 'fr');
-  _.each([en_lang_lookups, fr_lang_lookups], lookups => lookups.CDN_URL = CDN_URL );
-
   const a11y_template = file_to_str("./src/InfoBase/index.hbs.html");
   const a11y_template_func = Handlebars.compile(a11y_template);
-  
+
+  const en_lang_lookups = _.mapValues(index_lang_lookups, 'en');
+  const fr_lang_lookups = _.mapValues(index_lang_lookups, 'fr');
+
+  const get_extended_args = (lang_lookups) => ({
+    ...lang_lookups,
+    is_a11y_mode: false,
+    CDN_URL,
+  });
+
   const get_extended_a11y_args = (lang_lookups) => ({
     ...lang_lookups,
     script_url: lang_lookups.a11y_script_url,
     rel_preload_links_url: lang_lookups.a11y_rel_preload_links_url, 
     other_lang_href: lang_lookups.a11y_other_lang_href,
     is_a11y_mode: true,
+    CDN_URL,
   });
 
   return [
     {
       file_prefix: "index",
-      en: template_func(en_lang_lookups),
-      fr: template_func(fr_lang_lookups),
+      en: template_func( get_extended_args(en_lang_lookups) ),
+      fr: template_func( get_extended_args(fr_lang_lookups) ),
     },
     {
       file_prefix: "index-basic",
@@ -166,8 +172,8 @@ function get_index_pages(CDN_URL){
   ];
 }
 
-function get_rel_preload_links_scripts(CDN_URL){
-  const template = file_to_str("./src/InfoBase/rel_preload_links.hbs.js");
+function get_files_to_preload_configs(CDN_URL){
+  const template = file_to_str("./src/InfoBase/files_to_preload_config.hbs.json");
   const template_func = Handlebars.compile(template);
 
   const en_lang_lookups = _.mapValues(index_lang_lookups, 'en');
@@ -177,12 +183,12 @@ function get_rel_preload_links_scripts(CDN_URL){
 
   return [
     {
-      file_prefix: "rel_preload_links",
+      file_prefix: "files_to_preload_config",
       en: template_func( get_extended_lookups(en_lang_lookups, false) ),
       fr: template_func( get_extended_lookups(fr_lang_lookups, false) ),
     },
     {
-      file_prefix: "a11y_rel_preload_links",
+      file_prefix: "a11y_files_to_preload_config",
       en: template_func( get_extended_lookups(en_lang_lookups, true) ),
       fr: template_func( get_extended_lookups(fr_lang_lookups, true) ),
     },
@@ -203,9 +209,13 @@ function get_lookup_name(file_name){
   return _.last(str.split('/'));
 }
 
-function write_gitsha_file(dir){
+function write_gitsha_files(dir){
   gitsha(function(err, sha){
     fs.writeFileSync(`${dir}/build_sha`, sha);
+    fs.writeFileSync(
+      `${dir}/set_static_content_deploy_sha.js`,
+      `window.static_content_deploy_sha = "${sha}";`
+    );
   });
 }
 
@@ -236,7 +246,7 @@ function build_proj(PROJ){
     )
   ));
 
-  write_gitsha_file(dir);
+  write_gitsha_files(dir);
 
   _.each(["en", "fr"], lang => {
 
@@ -308,14 +318,14 @@ function build_proj(PROJ){
       {clobber: true}
     );
   });
-  _.each(get_rel_preload_links_scripts(CDN_URL), ({file_prefix, en, fr }) => {
+  _.each(get_files_to_preload_configs(CDN_URL), ({file_prefix, en, fr }) => {
     fs.writeFileSync(
-      `${dir}/${file_prefix}_eng.js`,
+      `${dir}/${file_prefix}_eng.json.js`,
       en,
       {clobber: true}
     );
     fs.writeFileSync(
-      `${dir}/${file_prefix}_fra.js`,
+      `${dir}/${file_prefix}_fra.json.js`,
       fr,
       {clobber: true}
     );

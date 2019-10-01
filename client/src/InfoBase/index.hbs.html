@@ -21,7 +21,34 @@
     <link href="{{CDN_URL}}/favicon.ico" rel="icon" type="image/x-icon">
     <link rel="stylesheet" href="{{CDN_URL}}/app/extended-bootstrap.css">
     
-    <script src="{{CDN_URL}}/{{rel_preload_links_url}}"></script>
+    <script src="{{CDN_URL}}/set_static_content_deploy_sha.js"></script>
+    <script>
+      (function(){
+        // For browsers with both fetch and rel="preload" support (near enough to union), 
+        var sha = (window.static_content_deploy_sha && window.static_content_deploy_sha.substring(0,7)) || Math.random();
+        var files_to_preload_request = new XMLHttpRequest();
+        files_to_preload_request.addEventListener(
+          "load",
+          function(){
+            var has_preload_support = (function() { try { return document.createElement("link").relList.supports('preload'); } catch(e) { return false; }}());
+            if (has_preload_support){
+              var files_to_preload = JSON.parse(this.responseText);
+              var preload_link_container = document.createElement("div");
+              var preload_links = "";
+              for (var i = 0; i < files_to_preload.length; i++){
+                if (files_to_preload[i].non_a11y === "{{is_a11y_mode}}"){
+                  preload_links += '<link rel="preload" href="'+files_to_preload[i].path+'?v='+sha+'" as="'+files_to_preload[i].as+'">';
+                }
+              }
+              preload_link_container.innerHTML = preload_links;
+              document.head.appendChild(preload_link_container);
+            }
+          }
+        );
+        files_to_preload_request.open("GET", "{{CDN_URL}}/{{files_to_preload_config_url}}?v="+sha);
+        files_to_preload_request.send();
+      })();
+    </script>
 
     <!-- Google Tag Manager DO NOT REMOVE OR MODIFY - NE PAS SUPPRIMER OU MODIFIER -->
     <script>dataLayer1 = [];</script>

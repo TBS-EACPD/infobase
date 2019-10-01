@@ -1,0 +1,7 @@
+[
+  {
+    "path": "{{CDN_URL}}/lookups_{{lang}}.json.js",
+    "as": "fetch",
+    "non_a11y": "false"
+  }
+]

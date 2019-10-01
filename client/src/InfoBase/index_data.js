@@ -148,13 +148,13 @@ const index_lang_lookups = {
     en: "Graphical version",
     fr: "Version graphique",
   },
-  rel_preload_links_url: {
-    en: "rel_preload_links_eng.js",
-    fr: "rel_preload_links_fre.js",
+  files_to_preload_config_url: {
+    en: "files_to_preload_config_eng.json.js",
+    fr: "files_to_preload_config_fre.json.js",
   },
-  a11y_rel_preload_links_url: {
-    en: "a11y_rel_preload_links_eng.js",
-    fr: "a11y_rel_preload_links_fre.js",
+  a11y_files_to_preload_config_url: {
+    en: "a11y_files_to_preload_config_eng.json.js",
+    fr: "a11y_files_to_preload_config_fre.json.js",
   },
 };
 
