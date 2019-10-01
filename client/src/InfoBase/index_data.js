@@ -148,6 +148,14 @@ const index_lang_lookups = {
     en: "Graphical version",
     fr: "Version graphique",
   },
+  rel_preload_links_url: {
+    en: "rel_preload_links_eng.js",
+    fr: "rel_preload_links_fre.js",
+  },
+  a11y_rel_preload_links_url: {
+    en: "a11y_rel_preload_links_eng.js",
+    fr: "a11y_rel_preload_links_fre.js",
+  },
 };
 
 // Used by copy_static_asset, node only supports commonjs syntax

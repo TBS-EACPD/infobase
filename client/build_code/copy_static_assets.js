@@ -133,9 +133,7 @@ var IB = {
   ],
 };
 
-function get_index_pages(){
-  const CDN_URL = process.env.CDN_URL || "."; 
-  console.log(`CDN_URL: ${CDN_URL}`);
+function get_index_pages(CDN_URL){
   const template = file_to_str("./src/InfoBase/index.hbs.html");
   const template_func = Handlebars.compile(template);
 
@@ -148,7 +146,8 @@ function get_index_pages(){
   
   const get_extended_a11y_args = (lang_lookups) => ({
     ...lang_lookups,
-    script_url: lang_lookups.a11y_script_url, 
+    script_url: lang_lookups.a11y_script_url,
+    rel_preload_links_url: lang_lookups.a11y_rel_preload_links_url, 
     other_lang_href: lang_lookups.a11y_other_lang_href,
     is_a11y_mode: true,
   });
@@ -163,6 +162,29 @@ function get_index_pages(){
       file_prefix: "index-basic",
       en: a11y_template_func( get_extended_a11y_args(en_lang_lookups) ),
       fr: a11y_template_func( get_extended_a11y_args(fr_lang_lookups) ),
+    },
+  ];
+}
+
+function get_rel_preload_links_scripts(CDN_URL){
+  const template = file_to_str("./src/InfoBase/rel_preload_links.hbs.js");
+  const template_func = Handlebars.compile(template);
+
+  const en_lang_lookups = _.mapValues(index_lang_lookups, 'en');
+  const fr_lang_lookups = _.mapValues(index_lang_lookups, 'fr');
+
+  const get_extended_lookups = (lookups, is_a11y_mode) => ({...lookups, is_a11y_mode, CDN_URL});
+
+  return [
+    {
+      file_prefix: "rel_preload_links",
+      en: template_func( get_extended_lookups(en_lang_lookups, false) ),
+      fr: template_func( get_extended_lookups(fr_lang_lookups, false) ),
+    },
+    {
+      file_prefix: "a11y_rel_preload_links",
+      en: template_func( get_extended_lookups(en_lang_lookups, true) ),
+      fr: template_func( get_extended_lookups(fr_lang_lookups, true) ),
     },
   ];
 }
@@ -271,15 +293,31 @@ function build_proj(PROJ){
   });
   PROJ.well_known.forEach( f_name => copy_file_to_target_dir(f_name, well_known_dir) );
   PROJ.other.forEach( f_name => copy_file_to_target_dir(f_name, dir) );
-
-  _.each(get_index_pages(), ({file_prefix, en, fr }) => {
+  
+  const CDN_URL = process.env.CDN_URL || ".";
+  console.log(`CDN_URL: ${CDN_URL}`);
+  _.each(get_index_pages(CDN_URL), ({file_prefix, en, fr }) => {
     fs.writeFileSync(
       `${dir}/${file_prefix}-eng.html`,
-      en
+      en,
+      {clobber: true}
     );
     fs.writeFileSync(
       `${dir}/${file_prefix}-fra.html`,
-      fr
+      fr,
+      {clobber: true}
+    );
+  });
+  _.each(get_rel_preload_links_scripts(CDN_URL), ({file_prefix, en, fr }) => {
+    fs.writeFileSync(
+      `${dir}/${file_prefix}_eng.js`,
+      en,
+      {clobber: true}
+    );
+    fs.writeFileSync(
+      `${dir}/${file_prefix}_fra.js`,
+      fr,
+      {clobber: true}
     );
   });
 
