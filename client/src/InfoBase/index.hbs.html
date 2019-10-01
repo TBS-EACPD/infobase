@@ -41,7 +41,7 @@
                 }
               }
               preload_link_container.innerHTML = preload_links;
-              document.head.appendChild(preload_link_container);
+              document.body.appendChild(preload_link_container); // Appending to body so primary JS entry point retains priority
             }
           }
         );
