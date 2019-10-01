@@ -539,3 +539,7 @@ NivoResponsiveLine.defaultProps = {
   motion_damping: 19,
   motion_stiffness: 100,
 };
+
+export {
+  get_formatter,
+};
