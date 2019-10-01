@@ -11,7 +11,10 @@ const {
   ExternalLink,
 } = util_components;
 
-const { sanitized_dangerous_inner_html } = general_utils;
+const {
+  sanitized_dangerous_inner_html,
+  generate_href,
+} = general_utils;
 
 
 export const declare_igoc_fields_panel = () => declare_panel({
@@ -33,8 +36,8 @@ export const declare_igoc_fields_panel = () => declare_panel({
           ["previously_named", subject.old_name],
           ["incorp_yr", subject.incorp_yr],
           ["type", subject.type],
-          ["website", !subject.is_dead && subject.website_url && <ExternalLink href={`https://${subject.website_url}`} display={subject.website_url} />],
-          ["eval_links", !subject.is_dead && subject.eval_url && <ExternalLink href={`https://${subject.eval_url}`} display={subject.eval_url} />],
+          ["website", !subject.is_dead && subject.website_url && <ExternalLink href={generate_href(subject.website_url)} display={subject.website_url} />],
+          ["eval_links", !subject.is_dead && subject.eval_url && <ExternalLink href={generate_href(subject.eval_url)} display={subject.eval_url} />],
           ["minister", !_.isEmpty(subject.minister) && _.chain(subject.minister).flatMap( (minister, ix) => [minister, <br key={ix} />]).dropRight().value()],
           ["mandate", subject.mandate && <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.mandate)}/>],
           ["legislation", subject.legislation && <ExternalLink href={`https://google.com/search?q=${encodeURI(subject.legislation)}`} display={subject.legislation} />],
