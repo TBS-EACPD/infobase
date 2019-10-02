@@ -13,7 +13,7 @@ import { formats } from '../core/format.js';
 import { Subject } from '../models/subject';
 import { result_docs } from '../models/results.js';
 
-import { Result } from '../panels/result_graphs/results_common.js';
+import { Result, indicator_text } from '../panels/result_graphs/results_common.js';
 import result_text from '../panels/result_graphs/result_components.yaml';
 
 import * as declarative_charts from '../charts/declarative_charts.js';
@@ -21,8 +21,8 @@ import * as declarative_charts from '../charts/declarative_charts.js';
 import {
   Select,
   PresentationalPanel,
-  SpinnerWrapper,
   create_text_maker_component,
+  SpinnerWrapper,
 } from '../components';
 
 const {
@@ -65,62 +65,6 @@ const subject_intro = (subject, num_indicators, years) =>
     />
   </div>;
 
-const get_target_from_indicator = (indicator) => {
-  const {
-    target_type,
-    target_min,
-    target_max,
-    target_narrative,
-  } = indicator;
-
-  const display_type_by_data_type = {
-    num: "result_num",
-    num_range: "result_num",
-    dollar: "dollar",
-    dollar_range: "dollar",
-    percent: "result_percentage",
-    percent_range: "result_percentage",
-  };
-  switch(target_type){
-    case 'num':
-    case 'num_range':
-    case 'dollar':
-    case 'dollar_range':
-    case 'percent':
-    case 'percent_range': {
-      if ( /range/.test(target_type) && (target_min && target_max) ){
-        return `${text_maker("result_range_text")} ${formats[display_type_by_data_type[target_type]](target_min, {raw: true})} ${text_maker("and")} ${formats[display_type_by_data_type[target_type]](target_max, {raw: true})}`;
-      } else if (target_min && target_max && target_min === target_max){
-        return formats[display_type_by_data_type[target_type]](target_min, {raw: true});
-      } else if (target_min && !target_max){
-        return `${text_maker("result_lower_target_text")} ${formats[display_type_by_data_type[target_type]](target_min, {raw: true})}`; 
-      } else if (!target_min && target_max){
-        return `${text_maker("result_upper_target_text")} ${formats[display_type_by_data_type[target_type]](target_max, {raw: true})}`; 
-      } else {
-        return text_maker('unspecified_target');
-      }
-    }
-    case 'text': {
-      if ( _.isEmpty(target_narrative) ){
-        return text_maker('unspecified_target');
-      } else {
-        return target_narrative;
-      }
-    }
-    case 'tbd': {
-      return text_maker('tbd_result_text');
-    }
-    default: {
-      return text_maker('unspecified_target');
-    }
-  }
-};
-
-const format_target_string = (indicator) => {
-  const target = get_target_from_indicator(indicator);
-  return target + (indicator.measure ? `(${indicator.measure})` : '');
-};
-
 const get_indicators = (subject) => {
   return _.chain(Result.get_all())
     .filter(res => {
@@ -139,10 +83,10 @@ const process_indicators = (matched_indicators, indicator_status) => {
       if (indicator_pair.length === 2){
         const name_diff = Diff.diffWords(indicator_pair[0].name, indicator_pair[1].name);
         const methodology_diff = window.is_a11y_mode ? Diff.diffSentences(indicator_pair[0].methodology, indicator_pair[1].methodology) : Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology);
-        const target_diff = Diff.diffWords(format_target_string(indicator_pair[0]), format_target_string(indicator_pair[1]));
+        const target_diff = Diff.diffWords(indicator_text(indicator_pair[0], false), indicator_text(indicator_pair[1], false));
         const target_explanation_diff = Diff.diffWords(indicator_pair[0].target_explanation || "", indicator_pair[1].target_explanation || "");
-        const status = _.max([name_diff.length, methodology_diff.length, target_diff.length, target_explanation_diff.length]) > 1 ?
-                        (target_diff.length > 1 || target_explanation_diff.length > 1) ?
+        const status = _.max([name_diff.length, methodology_diff.length, target_diff.length]) > 1 ?
+                        target_diff.length > 1 ?
                           "target_changed"
                           : "indicator_desc_changed"
                         : "no_diff";
@@ -166,7 +110,7 @@ const process_indicators = (matched_indicators, indicator_status) => {
         indicator2: indicator,
         name_diff: [indicator.name],
         methodology_diff: [indicator.methodology],
-        target_diff: [format_target_string(indicator)],
+        target_diff: [indicator_text(indicator, false)],
         target_explanation_diff: [indicator.target_explanation],
       };
     })
@@ -324,7 +268,7 @@ const indicator_report = (processed_indicator, years) => (
           no_difference(processed_indicator.indicator1.methodology, "indicator_methodology") }
         { processed_indicator.target_diff.length > 1 ?
           difference_report(processed_indicator.target_diff, "indicator_target", years) :
-          no_difference(get_target_from_indicator(processed_indicator.indicator1), "indicator_target") }
+          no_difference(indicator_text(processed_indicator.indicator1, false), "indicator_target") }
         { processed_indicator.target_explanation_diff.length > 1 ?
             difference_report(processed_indicator.target_explanation_diff, "indicator_target_explanation", years) :
             no_difference(processed_indicator.indicator1.target_explanation, "indicator_target_explanation") }
