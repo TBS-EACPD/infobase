@@ -1,0 +1,6 @@
+# this is a sample yaml file to test our jest transform is working properly
+
+some_key:
+  en: some value
+  fr: |
+    le multiline vàlûe

@@ -1,12 +1,14 @@
 {
   "plugins": [
-    "react"
+    "react",
+    "jest"
   ],
   "extends": [ "../.eslintrc.json", "plugin:react/recommended" ],
   "env": {
       "browser": true,
       "commonjs": true,
-      "es6": true
+      "es6": true,
+      "jest/globals": true
   },
   "rules": {
     "react/jsx-uses-vars": 1,
