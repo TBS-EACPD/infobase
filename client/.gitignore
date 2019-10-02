@@ -37,4 +37,4 @@ gruntdocs
 npm-debug*
 /storybook-static
 yarn.lock
- 
+coverage/

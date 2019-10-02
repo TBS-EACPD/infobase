@@ -2,6 +2,7 @@
   "plugins": [
     "react",
     "@typescript-eslint"
+    "jest"
   ],
   "extends": [ 
     "../.eslintrc.json", 
@@ -11,7 +12,8 @@
 "env": {
   "browser": true,
   "commonjs": true,
-  "es6": true
+  "es6": true,
+  "jest/globals": true
   },
   "rules": {
     "no-prototype-builtins":"off", //common TS pattern

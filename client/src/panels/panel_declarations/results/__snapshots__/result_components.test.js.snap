@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`result_components renders correctly 1`] = `
+"IndicatorThe current year producers’ net market income plus Business Risk Management program payments as a percent of the previous five year averageNewReport2019-20 Departmental Results ReportDate to achieve targetTargetTarget not specifiedActual result121%StatusMetTarget metTarget explanationStrong sector income growth has lead to this indicator exceeding its targets.
+"
+`;
