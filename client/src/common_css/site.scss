@@ -176,6 +176,11 @@ b, strong, .heavy-weight {
   }
 }
 
+.span__copyable-hidden {
+  position: "absolute";
+  left: -999em;
+}
+
 .text-only-page-root {
   h2, h3, h4 {
     text-transform: uppercase;
@@ -208,4 +213,5 @@ b, strong, .heavy-weight {
   padding: 0px 20px 20px 20px;
   color: $textColor;
 }
+
 

@@ -39,10 +39,8 @@ const get_actual_parent = (indicator_node, full_results_hierarchy) => {
   } else if(parent.data.type === "dr" || parent.data.type === "result"){
     return get_actual_parent(parent, full_results_hierarchy);
   } else {
-    if (window.is_dev) {
-      /* eslint-disable no-console */
-      console.error(`result component ${indicator_node} with no parent`);
-    }
+    /* eslint-disable no-console */
+    console.error(`Result component ${indicator_node} has no (sub)program or CR parent`);
     return;
   }
 };
@@ -84,7 +82,7 @@ const formatted_actual = (indicator, is_drr17) => {
       narrative: indicator.actual_result,
       measure: indicator.measure,
     }) :
-    indicator_result_text({ // TODO: probably should be DRR17
+    indicator_result_text({ // DRR_TODO: check that this format is correct
       doc: indicator.doc,
       data_type: indicator.actual_datatype,
       min: indicator.actual_result,
@@ -156,7 +154,7 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
       target_result: formatted_actual(ind.indicator, true),
       date_to_achieve: ind.indicator.target_date,
       status: <Fragment>
-        <span aria-hidden="true" style={{position: "absolute", left: "-999em"}}>{result_statuses[ind.indicator.status_key].text}</span>
+        <span aria-hidden="true" className="span__copyable-hidden">{result_statuses[ind.indicator.status_key].text}</span>
         {large_status_icons[ind.indicator.status_key]}
       </Fragment>,
     },
@@ -275,7 +273,7 @@ export const declare_results_table_panel = () => declare_panel({
         .filter(doc => /drr/.test(doc))
         .sort()
         .last()
-        .value(); // TODO: make sure this works properly for drr18
+        .value(); // DRR_TODO: make sure this works properly for drr18
 
       if( _.isEmpty(docs_with_data) ){
         return false;
