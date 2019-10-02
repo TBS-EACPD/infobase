@@ -36,29 +36,22 @@ if(typeof IS_CI !== "undefined"){
 /* eslint-enable no-undef */
 
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-window.React = React;
+window.React = require('react');
+window.ReactDOM = require('react-dom');
 window.ReactDOM = ReactDOM;
 
-import _ from 'lodash';
-window._ = _;
-import './lodash-extensions.side-effects.js';
+window._ = require('lodash');
+require('./lodash-extensions.side-effects.js');
 
-import d3 from './d3-bundle.js';
-window.d3 = d3;
-
-import Handlebars from 'handlebars/dist/cjs/handlebars.js';
-window.Handlebars = Handlebars;
+window.d3 = require('./d3-bundle.js').default;
+window.Handlebars = require('handlebars/dist/cjs/handlebars.js');
 
 
-import * as feature_detection from '../core/feature_detection.js';
-window.feature_detection = feature_detection;
+window.feature_detection = require('../core/feature_detection.js')
 
-import * as ib_colors from '../core/color_defs.js';
-window.infobase_color_constants = ib_colors;
+window.infobase_color_constants = require('../core/color_defs.js');
 
-import { newIBCategoryColors } from '../core/color_schemes.js';
+const { newIBCategoryColors } = require('../core/color_schemes.js');
 window.infobase_colors = (options) => d3.scaleOrdinal().range(newIBCategoryColors);
 
 window._DEV_HELPERS = {};
