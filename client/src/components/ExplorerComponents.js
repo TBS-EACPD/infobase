@@ -5,7 +5,7 @@ import FlipMove from 'react-flip-move';
 import { createSelector } from 'reselect';
 
 import { FirstChild, AccordionEnterExit } from './Accordions.js';
-import { SortDirections } from './SortDirections.js';
+import { SortDirections } from './SortDirection.js';
 
 import { trivial_text_maker } from '../models/text.js';
 
