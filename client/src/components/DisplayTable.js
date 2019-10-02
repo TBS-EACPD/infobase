@@ -2,7 +2,7 @@ import './DisplayTable.scss';
 import classNames from 'classnames';
 import { util_components } from '../panels/shared.js';
 const {
-  Sorters,
+  SortDirections,
 } = util_components;
 
 import { TM } from './TextMaker.js';
@@ -79,7 +79,7 @@ export class DisplayTable extends React.Component {
                   onClick={ () => this.header_click("label") }
                 >
                   {label_col_header || ""}
-                  <Sorters 
+                  <SortDirections 
                     asc={!descending && sort_by === "label"} 
                     desc={descending && sort_by === "label"}
                   />
@@ -94,7 +94,7 @@ export class DisplayTable extends React.Component {
                           onClick={ () => _.includes(sort_keys,tick) && this.header_click(tick) }
                         >
                           {table_data_headers[i]}
-                          <Sorters 
+                          <SortDirections 
                             asc={!descending && sort_by === tick} 
                             desc={descending && sort_by === tick}
                           />

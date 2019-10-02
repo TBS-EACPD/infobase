@@ -12,6 +12,7 @@ import {
   LabeledBox,
   AlertBanner,
   Sorters, 
+  SortDirections, 
 } from '../components/index.js';
 import { Details } from '../components/Details.js';
 import { rpb_link } from './rpb_link.js';
@@ -194,7 +195,7 @@ class SimpleView extends React.Component {
                 scope="col"
               >
                 {display}
-                <Sorters 
+                <SortDirections 
                   asc={!descending && sort_col === nick }
                   desc={descending && sort_col === nick }
                 />

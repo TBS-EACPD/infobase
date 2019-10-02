@@ -5,7 +5,7 @@ import FlipMove from 'react-flip-move';
 import { createSelector } from 'reselect';
 
 import { FirstChild, AccordionEnterExit } from './Accordions.js';
-import { Sorters } from './Sorters.js';
+import { SortDirections } from './SortDirections.js';
 
 import { trivial_text_maker } from '../models/text.js';
 
@@ -161,7 +161,7 @@ export const ExplorerHeader = ({column_defs, is_sortable, sort_col, is_descendin
           >
             {header_display}
             {is_sortable && 
-              <Sorters 
+              <SortDirections 
                 asc={!is_descending && sort_col === id }
                 desc={is_descending && sort_col === id }
               />
