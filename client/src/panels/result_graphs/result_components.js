@@ -21,7 +21,7 @@ import { formats } from '../../core/format.js';
 const { 
   HeightClipper,
   FilterTable,
-  Sorters,
+  SortDirections,
 } = util_components;
 const { sanitized_marked } = general_utils;
 
@@ -784,7 +784,7 @@ class HorizontalStatusTable extends React.Component {
                 onClick={ () => this.header_click("subject") }
               >
                 <TM k="org" />
-                <Sorters 
+                <SortDirections 
                   asc={!descending && sort_by === "subject"} 
                   desc={descending && sort_by === "subject"}
                 />
@@ -798,7 +798,7 @@ class HorizontalStatusTable extends React.Component {
                       onClick={ () => this.header_click(column_key) }
                     >
                       { column_header }
-                      <Sorters 
+                      <SortDirections 
                         asc={!descending && sort_by === column_key} 
                         desc={descending && sort_by === column_key}
                       />
