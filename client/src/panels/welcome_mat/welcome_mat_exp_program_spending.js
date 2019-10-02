@@ -17,7 +17,7 @@ const {
 } = declarative_charts;
 
 const { text_maker } = create_text_maker_component(text);
-const { std_years, planning_years, current_year } = years;
+const { std_years, planning_years, public_accounts_year } = years;
 const exp_cols = _.map(std_years, yr=>`${yr}exp`);
 
 const calculate = (type, subject) => {
@@ -65,7 +65,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
     .parseInt()
     .value();
   const gap_year = first_planning_year - latest_historical_year === 2 && subject.has_planned_spending ?
-      run_template(current_year) :
+      run_template(public_accounts_year) :
       null;
 
   const marker_year = subject.has_planned_spending ? (gap_year || _.first(plan_ticks)) : null;

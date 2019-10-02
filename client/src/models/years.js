@@ -6,7 +6,7 @@ const years = {
     "{{pa_last_year_2}}",
     '{{pa_last_year}}',
   ],
-  current_year: "{{pa_in_year}}",
+  public_accounts_year: "{{pa_in_year}}",
   in_year_years: [
     "{{est_in_year}}",
   ],
