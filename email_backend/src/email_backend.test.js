@@ -58,7 +58,7 @@ describe("End-to-end tests for email_backend endpoints", () => {
 
     const template_is_valid = template && _.isObject(template) && !_.isEmpty(template);
 
-    return expect(false).toBe(true);
+    return expect(template_is_valid).toBe(true);
   });
 
   it("/submit_email returns status 400 when a non-existant or invalid template is submitted", async () => {
