@@ -94,65 +94,6 @@ jobs:
             - ./server/package-lock.json
 
 
-  # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
-  test_email_backend:
-    docker:
-      - image: gcr.io/ib-static-content/ib-client-ci-build:latest
-        <<: *gcloud_auth
-    working_directory: "~/InfoBase"
-    steps:
-      - checkout:
-          path: "~/InfoBase"
-      - restore_cache:
-          keys:
-            - ib-email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}
-      - run: 
-          command: |
-            [ -e "email_backend/node_modules" ] || (cd email_backend && npm ci)
-      - save_cache:
-          paths:
-            - node_modules
-          key: ib-email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}
-      - run:
-          name: start_email_backend
-          command: (cd email_backend && npm start)
-          background: true
-      - run:
-          command: |
-            sleep 10 # Give server time to start before running tests
-      - run: (cd email_backend && npm test)
-      - run: circleci step halt
-
-
-  # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
-  cleanup_dev_dbs:
-    docker:
-      - image: gcr.io/ib-static-content/ib-client-ci-test:latest
-        <<: *gcloud_auth
-    working_directory: "~/InfoBase"
-    steps:
-      - checkout:
-          path: "~/InfoBase"
-      - run: chmod +x ./scripts/ci_scripts/chmod_scripts.sh
-      - run: ./scripts/ci_scripts/chmod_scripts.sh
-
-      - run:
-          command: git branch -r > ./active-branches.txt
-
-      # Use checksum of branch list to tell if the dev DBs need to be cleaned up
-      - restore_cache:
-          keys:
-            - ib-dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}
-      - run:
-          command: |
-            [ -f "./ib-dev-dbs-clean-for-these-branches.txt" ] || (./scripts/ci_scripts/cleanup_dev_dbs.sh)
-      - run: touch ./ib-dev-dbs-clean-for-these-branches.txt
-      - save_cache:
-          paths:
-            - ./ib-dev-dbs-clean-for-these-branches.txt
-          key: ib-dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}
-
-
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test:
     docker:
@@ -259,6 +200,66 @@ jobs:
       - run: (cd client && ./deploy_scripts/push_to_gcloud_bucket.sh)
 
 
+  # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
+  test_email_backend:
+    docker:
+      - image: gcr.io/ib-static-content/ib-client-ci-build:latest
+        <<: *gcloud_auth
+    working_directory: "~/InfoBase"
+    steps:
+      - checkout:
+          path: "~/InfoBase"
+      - restore_cache:
+          keys:
+            - ib-email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}
+      - run: 
+          command: |
+            [ -e "email_backend/node_modules" ] || (cd email_backend && npm ci)
+      - save_cache:
+          paths:
+            - node_modules
+          key: ib-email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}
+      - run:
+          name: start_email_backend
+          command: (cd email_backend && npm start)
+          background: true
+      - run:
+          command: |
+            sleep 10 # Give server time to start before running tests
+      - run: (cd email_backend && npm test)
+      - run: circleci step halt
+
+
+  # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
+  cleanup_dev_dbs:
+    docker:
+      - image: gcr.io/ib-static-content/ib-client-ci-test:latest
+        <<: *gcloud_auth
+    working_directory: "~/InfoBase"
+    steps:
+      - checkout:
+          path: "~/InfoBase"
+      - run: chmod +x ./scripts/ci_scripts/chmod_scripts.sh
+      - run: ./scripts/ci_scripts/chmod_scripts.sh
+
+      - run:
+          command: git branch -r > ./active-branches.txt
+
+      # Use checksum of branch list to tell if the dev DBs need to be cleaned up
+      - restore_cache:
+          keys:
+            - ib-dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}
+      - run:
+          command: |
+            [ -f "./ib-dev-dbs-clean-for-these-branches.txt" ] || (./scripts/ci_scripts/cleanup_dev_dbs.sh)
+      - run: touch ./ib-dev-dbs-clean-for-these-branches.txt
+      - save_cache:
+          paths:
+            - ./ib-dev-dbs-clean-for-these-branches.txt
+          key: ib-dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}
+
+
+
 # One workflow that runs all three jobs (build -> test -> deploy_data/server/client), each requiring the previous to have passed
 # Note that deploy steps are filtered by branch to only run on master
 workflows:
@@ -266,8 +267,6 @@ workflows:
   build_test_deploy:
     jobs:
       - build
-      - test_email_backend
-      - cleanup_dev_dbs
       - test:
           requires:
             - build
@@ -283,4 +282,9 @@ workflows:
           requires:
             - deploy_server
           <<: *deploy_filter
-          
+  test_email_backend:
+    jobs:
+      - test_email_backend
+  cleanup_dev_dbs:
+    jobs:
+      - cleanup_dev_dbs
