@@ -133,7 +133,7 @@ function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_i
         }
       },
     }),
-    is_prod_build && (language === "en") &&
+    is_prod_build && (language === "en") && !a11y_client && 
       new BundleStatsWebpackPlugin({
         compare: false,
         json: true,
