@@ -7,6 +7,7 @@ chmod +x scripts/ci_scripts/authenticate-server-gcloud.sh
 chmod +x scripts/ci_scripts/redact_env_vars_from_logging.sh
 chmod +x scripts/ci_scripts/cleanup_dev_dbs.sh
 chmod +x scripts/ci_scripts/store_bundle_stats.sh
+chmod +x scripts/ci_scripts/get_master_head_bundle_stats.sh
 
 # Client scripts
 chmod +x client/deploy_scripts/build_all.sh

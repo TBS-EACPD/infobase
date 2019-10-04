@@ -5,10 +5,9 @@ set -e # will exit if any command has non-zero exit value
 
 source ./scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-start"
 
-# save a copy for trend analysis purposes
-gsutil cp ./client/$BUILD_DIR/InfoBase/bundle-stats.json $GCLOUD_BUNDLE_STATS_BUCKET_URL/$CIRCLE_BRANCH-$(echo "$CIRCLE_SHA1" | cut -c 1-7).json
+# make the build dir path if it doesn't exist yet
+mkdir -p ./client/$BUILD_DIR/InfoBase/
 
-# save a copy as <branch>-head for easy reference when making comparisons
-gsutil cp ./client/$BUILD_DIR/InfoBase/bundle-stats.json $GCLOUD_BUNDLE_STATS_BUCKET_URL/$CIRCLE_BRANCH-head.json
+curl https://storage.googleapis.com/$GCLOUD_BUNDLE_STATS_BUCKET_NAME/master-head.json --output ./client/$BUILD_DIR/InfoBase/bundle-stats.json
 
 source ./scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-end"

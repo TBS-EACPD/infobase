@@ -102,6 +102,7 @@ jobs:
       - restore_cache:
           keys:
             - ib-prod-build-{{ .Branch }}-{{ .Revision }}
+      - run: ./scripts/ci_scripts/get_master_head_bundle_stats.sh # get master's bundle-stats.json to use as the comparison baseline
       - run:
           command: |
             [ -f "client/build/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh)
@@ -258,21 +259,8 @@ jobs:
       - run: ./scripts/ci_scripts/authenticate-client-gcloud.sh
       - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH/graphql#g" ./client/build/InfoBase/app/*.js # Replace Replace CI API URL placeholder with branch specific API URL
       - run: (cd client && ./deploy_scripts/push_to_gcloud_bucket.sh)
-      - run: ./scripts/ci_scripts/store_bundle_stats.sh
-
-  # Note: the image used for this job is provided by google
-  deploy_client:
-    working_directory: "~/InfoBase"
-    docker:
-      - image: google/cloud-sdk:slim
-    steps:
-      - attach_workspace:
-          at: ./
-      - run: ./scripts/ci_scripts/create_envs.sh
-      - run: ./scripts/ci_scripts/authenticate-client-gcloud.sh
-      - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH/graphql#g" ./client/build/InfoBase/app/*.js # Replace Replace CI API URL placeholder with branch specific API URL
-      - run: (cd client && ./deploy_scripts/push_to_gcloud_bucket.sh)
       - run: test $CIRCLE_BRANCH = master && ./scripts/ci_scripts/store_bundle_stats.sh # only saving master stats since they're somewhat large files
+
 
 
 workflows:
@@ -283,6 +271,7 @@ workflows:
   cleanup_dev_dbs:
     jobs:
       - cleanup_dev_dbs
+  # One workflow that runs all three job stages (build -> test -> deploy_data/server/client), each stage requiring
   build_test_deploy:
     jobs:
       - build

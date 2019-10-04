@@ -135,12 +135,9 @@ function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_i
     }),
     is_prod_build && (language === "en") && !a11y_client && 
       new BundleStatsWebpackPlugin({
-        compare: false,
+        compare: true,
         json: true,
-        outDir: '../', // note: stats are saved in the build dir and deployed for easy access to bundle-stats.html through the cdn/dev links 
-        stats: {
-          builtAt: true,
-        },
+        outDir: '../', // note: stats are saved in the build dir and deployed for easy access to bundle-stats.html through the cdn/dev links
       }),
     is_prod_build && new webpack.DefinePlugin({
       'process.env': {

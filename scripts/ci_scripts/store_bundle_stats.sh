@@ -1,5 +1,5 @@
 #!/bin/bash
-# used in CI after the client has been built, stores the bundle-stats json output in 
+# used after the client has been built, stores the bundle-stats json output in a google cloud bucket
 
 set -e # will exit if any command has non-zero exit value
 
