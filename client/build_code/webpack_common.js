@@ -2,6 +2,7 @@ const _ = require('lodash');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
+const { BundleStatsWebpackPlugin } = require('bundle-stats');
 
 const CDN_URL = process.env.CDN_URL || ".";
 const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
@@ -102,19 +103,8 @@ const get_rules = ({
   ];
 };
 
-
-const prod_plugins = [
-  new webpack.DefinePlugin({
-    'process.env': {
-      'NODE_ENV': JSON.stringify('production'),
-    },
-  }),
-  new webpack.optimize.ModuleConcatenationPlugin(),
-];
-
 function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_ip, is_ci }){
-  
-  const plugins = [
+  return _.filter([
     new webpack.DefinePlugin({
       CDN_URL: JSON.stringify(CDN_URL),
       SHA: JSON.stringify(commit_sha),
@@ -143,13 +133,17 @@ function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_i
         }
       },
     }),
-  ];
-
-  if(is_prod_build){
-    return plugins.concat(prod_plugins);
-  }
-
-  return plugins;
+    new BundleStatsWebpackPlugin({
+      json: true,
+      outDir: '../../webpack_stats',
+    }),
+    is_prod_build && new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production'),
+      },
+    }),
+    is_prod_build && new webpack.optimize.ModuleConcatenationPlugin(),
+  ]);
 };
 
 function get_optimizations(is_prod_build){
