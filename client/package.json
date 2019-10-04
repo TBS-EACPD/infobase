@@ -24,6 +24,7 @@
     "babel-eslint": "^8.2.6",
     "babel-loader": "^8.0.5",
     "bootstrap": "^3.4.1",
+    "bundle-stats": "^1.10.1",
     "circular-dependency-plugin": "^5.0.2",
     "classnames": "^2.2.6",
     "clipboard-polyfill": "^2.8.1",
