@@ -7,8 +7,8 @@ import {
   link_to_results_infograph,
   result_statuses,
   result_simple_statuses,
-  indicator_result_text,
-  drr17_indicator_result_text,
+  indicator_text_functions,
+  result_docs,
 } from './results_common.js';
 import {
   IconCheck,
@@ -18,6 +18,13 @@ import {
 } from '../../icons/icons.js';
 import * as color_defs from '../../core/color_defs.js';
 
+const {
+  indicator_target_text,
+  indicator_actual_text,
+  indicator_previous_target_text,
+  indicator_previous_actual_text,
+  drr17_indicator_target_text,
+} = indicator_text_functions;
 
 const { 
   HeightClipper,
@@ -28,140 +35,15 @@ const { sanitized_marked } = general_utils;
 
 import { TM, text_maker } from './result_text_provider.js';
 
-
-
-const IndicatorResultDisplay = ({
-  doc,
-
-  data_type,
-  min, 
-  max,
-  narrative,
-  measure,
-
-  is_new,
-}) => {
-  return (
-    <span>
-      {indicator_result_text({
-        doc,
-        data_type,
-        min, 
-        max,
-        narrative,
-        measure,
-        is_new,
-      })}
-    </span>
-  )
-};
-
-const OldIndicatorResultDisplay = ({
-  doc,
-
-  data_type,
-  min, 
-  max,
-  narrative,
-  measure,
-
-  is_new,
-}) => {
-
-  const target_unspecified_display = <TM k="unspecified_target"/>;
-  
-  const measure_display = (measure) => !_.isEmpty(measure) && <span> ( {measure} )</span>;
-
-  const display_type_by_data_type = {
-    num: "result_num",
-    num_range: "result_num",
-    dollar: "dollar",
-    dollar_range: "dollar",
-    percent: "result_percentage",
-    percent_range: "result_percentage",
-  };
-
-  const upper_target_display = (data_type, measure, max) => (
-    <Fragment>
-      <span>
-        <span>{`${text_maker("result_upper_target_text")} `}</span>
-        <Format type={display_type_by_data_type[data_type]} content={+max} /> 
-      </span> 
-      {measure_display(measure)}
-    </Fragment>
-  );
-  const lower_target_display = (data_type, measure, min) => (
-    <Fragment>
-      <span>
-        <span>{`${text_maker("result_lower_target_text")} `}</span>
-        <Format type={display_type_by_data_type[data_type]} content={+min} /> 
-      </span> 
-      {measure_display(measure)}
-    </Fragment>
-  );
-  const exact_display = (data_type, measure, exact) => (
-    <Fragment>
-      <span>
-        <span>{`${text_maker("result_exact_text")} `}</span>
-        <Format type={display_type_by_data_type[data_type]} content={+exact} /> 
-      </span> 
-      {measure_display(measure)}
-    </Fragment>
-  );
-  const range_display = (data_type, measure, min, max) => (
-    <Fragment>
-      <span> 
-        <span>{`${text_maker("result_range_text")} `}</span>
-        <Format type={display_type_by_data_type[data_type]} content={+min} />
-        <span>{` ${text_maker("and")} `}</span>
-        <Format type={display_type_by_data_type[data_type]} content={+max} />
-      </span> 
-      {measure_display(measure)}
-    </Fragment>
-  );
-
-  const get_display_case = (data_type, min, max, narrative, measure) => {
-    switch(data_type){
-      case 'num':
-      case 'num_range':
-      case 'dollar':
-      case 'dollar_range':
-      case 'percent':
-      case 'percent_range': {
-        if ( /range/.test(data_type) && (min && max) ){
-          return range_display(data_type, measure, min, max);
-        } else if (min && max && min === max){
-          return exact_display(data_type, measure, min);
-        } else if (min && !max){
-          return lower_target_display(data_type, measure, min);
-        } else if (!min && max){
-          return upper_target_display(data_type, measure, max);
-        } else {
-          return target_unspecified_display; 
-        }
-      }
-  
-      case 'text': {
-        if ( _.isEmpty(narrative) ){ return target_unspecified_display; }
-        return (
-          <span>
-            {narrative}
-          </span>
-        );
-      }
-  
-      case 'tbd': {
-        return <TM k="tbd_result_text" />;
-      }
-  
-      default: {
-        //certain indicators have no targets
-        return null;
-      }
-    }
-  };
-
-  return get_display_case(data_type, min, max, narrative, measure);
+const IndicatorResultDisplay = (props) => {
+  const {indicator, is_actual, is_drr17, is_previous} = props;
+  if(is_actual){
+    return is_previous ? <span>{indicator_previous_actual_text(indicator)}</span> : <span>{indicator_actual_text(indicator)}</span> ;
+  }
+  if(!is_drr17){
+    return is_previous ? <span>{indicator_previous_target_text(indicator)}</span> : <span>{indicator_target_text(indicator)}</span> ;
+  }
+  return <span>{drr17_indicator_target_text(indicator)}</span> ;
 };
 
 
@@ -174,7 +56,7 @@ const Drr17IndicatorResultDisplay = ({
 }) => {
   return (
     <span>
-      {drr17_indicator_result_text({
+      {drr17_indicator_target_text({
         data_type,
         min, 
         max,
@@ -197,6 +79,7 @@ const IndicatorList = ({ indicators }) => (
 
 const SingleIndicatorDisplay = ({indicator}) => {
   const is_drr = /drr/.test(indicator.doc);
+  const could_have_previous_year_target = result_docs[indicator.doc].could_have_previous;
   const has_previous_year_target = !_.isNull(indicator.previous_year_target_type);
   const has_previous_year_result = false; // DRR_TODO: previous year results aren't in the API right now, but they probably will be for DRR18 (if not, clean this out)
   const should_display_new_status = _.indexOf(dp_docs, indicator.doc) > 0 || _.indexOf(drr_docs, indicator.doc) > 0;
@@ -234,7 +117,12 @@ const SingleIndicatorDisplay = ({indicator}) => {
           <TM k="target" />
         </dt>
         <dd>
-          { indicator.doc === "drr17" ?
+          <IndicatorResultDisplay
+            indicator={indicator}
+            is_actual={false}
+            is_drr17={indicator.doc === "drr17"}
+          />
+          {/* { indicator.doc === "drr17" ?
             <Drr17IndicatorResultDisplay
               data_type={indicator.target_type}
               min={indicator.target_min}
@@ -253,7 +141,7 @@ const SingleIndicatorDisplay = ({indicator}) => {
 
               is_new={!has_previous_year_target}
             />
-          }
+          } */}
         </dd>
         { is_drr && indicator.actual_result &&
           <Fragment>
@@ -261,26 +149,7 @@ const SingleIndicatorDisplay = ({indicator}) => {
               {indicator.status_key === "future" ? <TM k="target_result_interim"/> : <TM k="target_result"/>}
             </dt>
             <dd>
-              { indicator.doc === "drr17" ?
-                <Drr17IndicatorResultDisplay
-                  data_type={indicator.actual_datatype}
-                  min={indicator.actual_result}
-                  max={indicator.actual_result}
-                  narrative={indicator.actual_result}
-                  measure={indicator.measure}
-                /> :
-                <IndicatorResultDisplay
-                  doc={indicator.doc}
-
-                  data_type={indicator.actual_datatype}
-                  min={indicator.actual_result}
-                  max={indicator.actual_result}
-                  narrative={indicator.actual_result}
-                  measure={indicator.measure}
-
-                  is_new={has_previous_year_result}
-                />
-              }
+              <IndicatorResultDisplay indicator={indicator} is_actual={true} is_drr17={indicator.doc === "drr17"}/>
             </dd>
           </Fragment>
         }
@@ -334,21 +203,16 @@ const SingleIndicatorDisplay = ({indicator}) => {
           </Fragment>
         }
 
-        { has_previous_year_target &&
+        { could_have_previous_year_target &&
           <Fragment>
             <dt>
               <TM k="previous_year_target"/>
             </dt>
             <dd>
-              <IndicatorResultDisplay
-                doc={indicator.doc}
-      
-                data_type={indicator.previous_year_target_type}
-                min={indicator.previous_year_target_min}
-                max={indicator.previous_year_target_max}
-                narrative={indicator.previous_year_target_narrative}
-                measure={indicator.previous_year_measure}
-              />
+              {has_previous_year_target ?
+                <IndicatorResultDisplay indicator={indicator} is_actual={false} is_drr17={indicator.doc === "drr17"} is_previous={true} /> :
+                <TM k="new_indicator" el="strong" />
+              }
             </dd>
           </Fragment>
         }
@@ -359,15 +223,7 @@ const SingleIndicatorDisplay = ({indicator}) => {
               <TM k="previous_year_target_result"/>
             </dt>
             <dd>
-              <IndicatorResultDisplay
-                doc={indicator.doc}
-      
-                data_type={indicator.previous_year_actual_result}
-                min={indicator.previous_year_actual_result}
-                max={indicator.previous_year_actual_result}
-                narrative={indicator.previous_year_actual_result}
-                measure={indicator.previous_year_measure}
-              />
+              <IndicatorResultDisplay indicator={indicator} is_actual={true} is_drr17={indicator.doc === "drr17"} is_previous={true} />
             </dd>
           </Fragment>
         }
@@ -754,7 +610,5 @@ export {
   HorizontalStatusTable,
   NewBadge,
   Drr17IndicatorResultDisplay,
-  drr17_indicator_result_text,
   IndicatorResultDisplay,
-  indicator_result_text,
 }; 

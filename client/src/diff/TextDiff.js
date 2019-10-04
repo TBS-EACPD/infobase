@@ -8,12 +8,11 @@ import * as Diff from 'diff';
 
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
-import { formats } from '../core/format.js';
 
 import { Subject } from '../models/subject';
 import { result_docs } from '../models/results.js';
 
-import { Result, indicator_text } from '../panels/result_graphs/results_common.js';
+import { Result, indicator_target_text } from '../panels/result_graphs/results_common.js';
 import result_text from '../panels/result_graphs/result_components.yaml';
 
 import * as declarative_charts from '../charts/declarative_charts.js';
@@ -83,7 +82,7 @@ const process_indicators = (matched_indicators, indicator_status) => {
       if (indicator_pair.length === 2){
         const name_diff = Diff.diffWords(indicator_pair[0].name, indicator_pair[1].name);
         const methodology_diff = window.is_a11y_mode ? Diff.diffSentences(indicator_pair[0].methodology, indicator_pair[1].methodology) : Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology);
-        const target_diff = Diff.diffWords(indicator_text(indicator_pair[0], false), indicator_text(indicator_pair[1], false));
+        const target_diff = Diff.diffWords(indicator_target_text(indicator_pair[0], false), indicator_target_text(indicator_pair[1], false));
         const target_explanation_diff = Diff.diffWords(indicator_pair[0].target_explanation || "", indicator_pair[1].target_explanation || "");
         const status = _.max([name_diff.length, methodology_diff.length, target_diff.length]) > 1 ?
                         target_diff.length > 1 ?
@@ -110,7 +109,7 @@ const process_indicators = (matched_indicators, indicator_status) => {
         indicator2: indicator,
         name_diff: [indicator.name],
         methodology_diff: [indicator.methodology],
-        target_diff: [indicator_text(indicator, false)],
+        target_diff: [indicator_target_text(indicator, false)],
         target_explanation_diff: [indicator.target_explanation],
       };
     })
@@ -268,7 +267,7 @@ const indicator_report = (processed_indicator, years) => (
           no_difference(processed_indicator.indicator1.methodology, "indicator_methodology") }
         { processed_indicator.target_diff.length > 1 ?
           difference_report(processed_indicator.target_diff, "indicator_target", years) :
-          no_difference(indicator_text(processed_indicator.indicator1, false), "indicator_target") }
+          no_difference(indicator_target_text(processed_indicator.indicator1, false), "indicator_target") }
         { processed_indicator.target_explanation_diff.length > 1 ?
             difference_report(processed_indicator.target_explanation_diff, "indicator_target_explanation", years) :
             no_difference(processed_indicator.indicator1.target_explanation, "indicator_target_explanation") }
