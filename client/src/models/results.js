@@ -347,7 +347,7 @@ class Indicator {
     } else if( _.nonEmpty(target_year) ){
       return trivial_text_maker(target_year);
     } else {
-      return trivial_text_maker("unspecified_date_to_achieve");
+      return trivial_text_maker("unspecified");
     }
   }
   static get_flat_indicators(subject){
@@ -478,16 +478,19 @@ const result_docs = {
     year: run_template('{{pa_last_year}}'),
     year_short: run_template('{{pa_last_year_short_second}}'),
     has_resources: true,
+    could_have_previous: false,
   },
   dp18: {
     year: run_template('{{planning_last_year_1}}'),
     year_short: run_template('{{planning_last_year_1_short_second}}'),
     has_resources: false,
+    could_have_previous: false,
   },
   dp19: {
     year: run_template('{{planning_year_1}}'),
     year_short: run_template('{{planning_year_1_short_second}}'),
     has_resources: true,
+    could_have_previous: true,
   },
 };
 

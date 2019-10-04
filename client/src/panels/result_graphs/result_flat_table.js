@@ -13,11 +13,10 @@ import {
   result_docs,
   ordered_status_keys,
   result_statuses,
+  indicator_text_functions,
 } from './results_common.js';
 import {
   StatusIconTable,
-  drr17_indicator_result_text,
-  indicator_result_text,
   large_status_icons,
 } from './result_components.js';
 import { create_full_results_hierarchy } from '../../gen_expl/result_hierarchies.js';
@@ -30,6 +29,12 @@ import {
   get_source_links, 
   declare_panel,
 } from '../shared.js';
+
+const {
+  drr17_indicator_target_text,
+  indicator_target_text,
+  indicator_actual_text,
+} = indicator_text_functions;
 
 
 const get_actual_parent = (indicator_node, full_results_hierarchy) => {
@@ -52,48 +57,6 @@ const get_indicators = (subject, doc) => {
     .map( indicator_node => ({ ...indicator_node.data, parent_subject: get_actual_parent(indicator_node, full_results_hierarchy) }) )
     .value();
 };
-
-const formatted_target = (indicator, is_drr17) => {
-  return is_drr17 ?
-    drr17_indicator_result_text({
-      data_type: indicator.target_type,
-      min: indicator.target_min,
-      max: indicator.target_max,
-      narrative: indicator.target_narrative,
-      measure: indicator.measure,
-    }) :
-    indicator_result_text({
-      doc: indicator.doc,
-
-      data_type: indicator.target_type,
-      min: indicator.target_min,
-      max: indicator.target_max,
-      narrative: indicator.target_narrative,
-      measure: indicator.measure,
-    });
-};
-
-const formatted_actual = (indicator, is_drr17) => {
-  return is_drr17 ?
-    drr17_indicator_result_text({
-      data_type: indicator.actual_datatype,
-      min: indicator.actual_result,
-      max: indicator.actual_result,
-      narrative: indicator.actual_result,
-      measure: indicator.measure,
-    }) :
-    indicator_result_text({ // DRR_TODO: check that this format is correct
-      doc: indicator.doc,
-      data_type: indicator.actual_datatype,
-      min: indicator.actual_result,
-      max: indicator.actual_result,
-      narrative: indicator.actual_result,
-      measure: indicator.measure,
-    });
-};
-
-
-
 
 const subject_link = (subject) => {
   if (subject.data.subject.level === "sub_program" || subject.data.subject.level === "sub_sub_program"){
@@ -150,8 +113,8 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
     label: subject_link(ind.parent_subject),
     col_data: {
       indicator: ind.indicator.name,
-      target: formatted_target(ind.indicator, is_drr17),
-      target_result: formatted_actual(ind.indicator, true),
+      target: is_drr17 ? drr17_indicator_target_text(ind.indicator) : indicator_target_text(ind.indicator),
+      target_result: indicator_actual_text(ind.indicator),
       date_to_achieve: ind.indicator.target_date,
       status: <Fragment>
         <span aria-hidden="true" className="span__copyable-hidden">{result_statuses[ind.indicator.status_key].text}</span>
