@@ -7,7 +7,7 @@ const { BundleStatsWebpackPlugin } = require('bundle-stats');
 const CDN_URL = process.env.CDN_URL || ".";
 const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
 const IS_PROD_RELEASE = process.env.IS_PROD_RELEASE || false;
-
+const CI_AND_MASTER = process.env.CIRCLE_BRANCH === "master";
 
 const get_rules = ({
   should_use_babel,
@@ -135,7 +135,8 @@ function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_i
     }),
     is_prod_build && (language === "en") && !a11y_client && 
       new BundleStatsWebpackPlugin({
-        compare: true,
+        compare: is_ci ? !CI_AND_MASTER : true,
+        baseline: is_ci ? CI_AND_MASTER : false,
         json: true,
         outDir: '../', // note: stats are saved in the build dir and deployed for easy access to bundle-stats.html through the cdn/dev links
       }),
