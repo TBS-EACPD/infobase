@@ -138,7 +138,7 @@ function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_i
         compare: is_ci ? !CI_AND_MASTER : true,
         baseline: is_ci ? CI_AND_MASTER : false,
         json: true,
-        outDir: '../', // note: stats are saved in the build dir and deployed for easy access to bundle-stats.html through the cdn/dev links
+        outDir: '../..',
       }),
     is_prod_build && new webpack.DefinePlugin({
       'process.env': {
