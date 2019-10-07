@@ -104,12 +104,10 @@ jobs:
             - ib-prod-build-{{ .Branch }}-{{ .Revision }}
       - run:
           command: | # get master's latest bundle-stats.json to use as the comparison baseline when IB_prod runs, but not if restored from a cache since it won't be used if build_all.sh doesn't run
-            [ -f "client/build/InfoBase/app/app-a11y-en.min.js" ] || ./scripts/ci_scripts/get_master_head_bundle_stats.sh
-      - run: ls client/build
-      - run: cat client/build/bundle-stats.json
+            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || ./scripts/ci_scripts/get_master_head_bundle_stats.sh
       - run:
           command: |
-            [ -f "client/build/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh)
+            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh)
       - save_cache:
           paths:
             - client/build
@@ -181,9 +179,9 @@ jobs:
       - run: sed -i "s#src#transpiled_build#g" ./server/jest.config.js # Switch the jest config from testing src to testing transpiled_build
       - run: (cd server && npm run ci_test)
 
-      - run: sed -i "s#${CDN_URL}#.#g" ./client/build/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
-      - run: sed -i "s#${CDN_URL}#.#g" ./client/build/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
-      - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#http://127.0.0.1:1337/graphql#g" ./client/build/InfoBase/app/*.js # Replace CI API URL placeholder with local URL so these tests use the local server
+      - run: sed -i "s#${CDN_URL}#.#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
+      - run: sed -i "s#${CDN_URL}#.#g" ./client/$BUILD_DIR/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
+      - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#http://127.0.0.1:1337/graphql#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace CI API URL placeholder with local URL so these tests use the local server
       - run: 
           name: start_http_server
           command: (cd client && npm run ci_serve)
@@ -261,7 +259,7 @@ jobs:
           at: ./
       - run: ./scripts/ci_scripts/create_envs.sh
       - run: ./scripts/ci_scripts/authenticate-client-gcloud.sh
-      - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH/graphql#g" ./client/build/InfoBase/app/*.js # Replace Replace CI API URL placeholder with branch specific API URL
+      - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH/graphql#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace Replace CI API URL placeholder with branch specific API URL
       - run: cp ./client/$BUILD_DIR/bundle-stats.html ./client/$BUILD_DIR/InfoBase/bundle-stats.html # copy bundle-stats html report in to build dir so it deploys alongside the dev links for easy reference
       - run: (cd client && ./deploy_scripts/push_to_gcloud_bucket.sh)
       - run: test $CIRCLE_BRANCH = master && ./scripts/ci_scripts/store_bundle_stats.sh || true # only saving master stats right now since they're somewhat large files (~1 mb each)
