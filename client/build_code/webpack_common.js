@@ -135,13 +135,13 @@ function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_i
     }),
     is_prod_build && (language === "en") && !a11y_client && // only produce bundle stats for standard english build
       new BundleStatsWebpackPlugin({
-        // bit fiddly here, want to save snapshots from master in CI to use as a baseline for comparison in bundle-stats.html output
-        // on other branches. That means master needs baseline true, but other branches need compare true and baseline false. If not in CI,
-        // fall back to hard coded default (if you want a local baseline, temporarily switch the values around and re-build)
+        // bit fiddly here, want to save clean snapshots from master in CI to use as a baseline for comparison in bundle-stats.html output
+        // on other branches. That means master needs compare false and baseline true while other branches need compare true and baseline false.
+        // If not in CI, fall back to hard coded default (if you want to generate a local baseline, temporarily switch the values around and re-build)
         compare: is_ci ? !CI_AND_MASTER : true,
         baseline: is_ci ? CI_AND_MASTER : false,
         json: true,
-        outDir: '../..', // this path is relative to the weback output dir, eg. client/build/InfoBase/app
+        outDir: '../..', // this path is relative to the weback output dir (client/build/InfoBase/app usually)
       }),
     is_prod_build && new webpack.DefinePlugin({
       'process.env': {
