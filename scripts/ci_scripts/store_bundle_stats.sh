@@ -8,7 +8,9 @@ source ./scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-start"
 # save a copy for trend analysis purposes
 gsutil cp ./client/$BUILD_DIR/bundle-stats.json $GCLOUD_BUNDLE_STATS_BUCKET_URL/$CIRCLE_BRANCH-$(echo "$CIRCLE_SHA1" | cut 1-7).json
 
-# save a copy as <branch>-head for easy reference when making comparisons between branches
-gsutil cp ./client/$BUILD_DIR/bundle-stats.json $GCLOUD_BUNDLE_STATS_BUCKET_URL/$CIRCLE_BRANCH-head.json
+if [[ $CIRCLE_BRANCH == "master" ]]; then
+  # ... the baseline stats lives in a weird place, node_modules/.cache. No options in the API for controling this, pain to manage
+  gsutil cp ./client/node_modules/.cache/bundle-stats/baseline.json $GCLOUD_BUNDLE_STATS_BUCKET_URL/baseline.json
+fi
 
 source ./scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-end"
