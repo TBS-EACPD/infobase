@@ -1,60 +1,25 @@
-import './panel_components.scss';
-import text from './panel_components.yaml';
+import text from './Panel.yaml';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Fragment } from 'react';
 
-import {
-  Details,
-  FootnoteList,
+import { 
+  PresentationalPanel,
   create_text_maker_component,
   ShareButton,
   PermalinkButton,
   WriteToClipboard,
   PDFGenerator,
-} from './index.js';
+} from '../components';
 
 import { IconCopyLink } from '../icons/icons.js';
 
 import { panel_href_template } from '../infographic/routes.js';
 import { panel_context } from '../infographic/context.js';
 
-import { create_text_maker } from '../models/text.js';
 
-const { TM } = create_text_maker_component(text);
-const text_maker = create_text_maker(text);
-
-
-const PanelSource = ({links}) => {
-  if(_.isEmpty(links)){
-    return null;
-  }
-  const last_ix = links.length -1;
-  return (
-    <span>
-      <span aria-hidden> 
-        <TM k="source_link_text" />
-      </span>
-      <span className="sr-only"> <TM k="a11y_source_expl"/> </span>
-      <ul
-        className="list-unstyled list-inline"
-        style={{display: "inline"}}
-      >
-        {_.map(links, ({href, html},ix) =>
-          <li key={ix}>
-            <a
-              className="source-link"
-              href={href}
-            >
-              <span dangerouslySetInnerHTML={{__html: html}} />
-            </a>{ix !== last_ix && ", "}
-          </li>
-        )}
-      </ul>
-    </span>
-  );
-};
+const { text_maker } = create_text_maker_component(text);
 
 export const Panel = props => {
   const { Consumer } = panel_context;
@@ -69,7 +34,6 @@ export const Panel = props => {
     </Consumer>
   );
 };
-
 class Panel_ extends React.Component {
   render(){
     const {
@@ -102,78 +66,82 @@ class Panel_ extends React.Component {
     );
     const share_modal_title = `${share_modal_subject_fragment && `${share_modal_subject_fragment} — ` || ""}${title}`;
 
-    return (
-      <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
-        { title && <header className='panel-heading'>
-          <h3 className="panel-title"> {title} </h3>
-          { context &&
-            <div style={{marginLeft: 'auto'}}>
-              { context.graph_key &&
-                <div style={{display: 'inline'}}>
-                  <PDFGenerator 
-                    target_id={context.graph_key}
-                    file_name={file_name}
-                    title={title}
-                    link={panel_link}
-                    button_class_name={"panel-heading-utils"}
-                  />
-                </div>
-              }
-              { panel_link &&
-                <div style={{display: 'inline'}}>
-                  <ShareButton
-                    url={panel_link}
-                    title={share_modal_title}
-                    button_class_name={'panel-heading-utils'} 
-                    button_description={text_maker("panel_share_button")}
-                    subject={subject}
-                  />
-                </div>
-              }
-              { !context.no_permalink && panel_link &&
-                <div style={{display: 'inline'}}>
-                  { !copy_to_clipboard &&
-                    <PermalinkButton
-                      url={panel_href_template(context.subject, context.active_bubble_id, context.graph_key)}
-                      button_class_name={'panel-heading-utils'}
-                      title={text_maker("panel_permalink")}
-                    />
-                  }
-                  { copy_to_clipboard &&
-                    <WriteToClipboard 
-                      text_to_copy={panel_link}
-                      button_class_name={'panel-heading-utils'} 
-                      button_description={text_maker("copy_panel_link")}
-                      IconComponent={IconCopyLink}
-                    />
-                  }
-                </div>
-              }
-            </div>
-          }
-        </header>
+    const header_utils = context && (
+      <div style={{marginLeft: 'auto'}}>
+        { context.graph_key &&
+          <div style={{display: 'inline'}}>
+            <PDFGenerator 
+              target_id={context.graph_key}
+              file_name={file_name}
+              title={title}
+              link={panel_link}
+              button_class_name={"panel-heading-utils"}
+            />
+          </div>
         }
-        <div className='panel-body'>
-          { children }
-          <div className="mrgn-tp-md" />
-          { _.nonEmpty(sources) && 
-            <div>
-              <PanelSource links={sources} />
-            </div>
-          }
-          { _.nonEmpty(footnotes) && 
-            <div className="mrgn-tp-md">
-              <Details
-                summary_content={ <TM k="footnotes" /> }
-                content={ <FootnoteList footnotes={footnotes} /> }
+        { panel_link &&
+          <div style={{display: 'inline'}}>
+            <ShareButton
+              url={panel_link}
+              title={share_modal_title}
+              button_class_name={'panel-heading-utils'} 
+              button_description={text_maker("panel_share_button")}
+              subject={subject}
+            />
+          </div>
+        }
+        { !context.no_permalink && panel_link &&
+          <div style={{display: 'inline'}}>
+            { !copy_to_clipboard &&
+              <PermalinkButton
+                url={panel_href_template(context.subject, context.active_bubble_id, context.graph_key)}
+                button_class_name={'panel-heading-utils'}
+                title={text_maker("panel_permalink")}
               />
-            </div>
-          }
-        </div>
-      </section>
+            }
+            { copy_to_clipboard &&
+              <WriteToClipboard 
+                text_to_copy={panel_link}
+                button_class_name={'panel-heading-utils'} 
+                button_description={text_maker("copy_panel_link")}
+                IconComponent={IconCopyLink}
+              />
+            }
+          </div>
+        }
+      </div>
     );
+
+    return PresentationalPanel({
+      allowOverflow,
+      title,
+      otherHeaderContent: header_utils,
+      children,
+      sources,
+      footnotes,
+    });
   }
 }
+
+
+/*
+  shorthand for 
+    <Panel>
+      <div className="medium_panel_text">
+        {children}
+      </div>
+    </Panel>
+*/
+export const TextPanel = props => {
+  const { children } = props;
+  const filtered_props = _.omit(props, "children");
+  const new_children = <div className="medium_panel_text"> {children} </div>;
+  return (
+    <Panel {...filtered_props}>
+      {new_children}
+    </Panel>
+  );
+};
 
 
 /* 
@@ -278,25 +246,3 @@ StdPanel.propTypes = {
 };
 
 export { Col, StdPanel};
-
-
-
-/*
-  shorthand for 
-    <Panel>
-      <div className="medium_panel_text">
-        {children}
-      </div>
-    </Panel>
-*/
-export const TextPanel = props => {
-  const { children } = props;
-  const filtered_props = _.omit(props, "children");
-  const new_children = <div className="medium_panel_text"> {children} </div>;
-  return (
-    <Panel {...filtered_props}>
-      {new_children}
-    </Panel>
-  );
-};
-

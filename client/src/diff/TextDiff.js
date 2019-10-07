@@ -1,6 +1,5 @@
 import './TextDiff.scss';
 import diff_text from './TextDiff.yaml';
-import result_text from '../panels/result_graphs/result_components.yaml';
 
 import { Fragment } from 'react';
 import MediaQuery from 'react-responsive';
@@ -9,18 +8,22 @@ import * as Diff from 'diff';
 
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
+import { formats } from '../core/format.js';
+
+import { Subject } from '../models/subject';
 import { result_docs } from '../models/results.js';
+
 import { Result } from '../panels/result_graphs/results_common.js';
-import { Select } from '../components/Select.js';
+import result_text from '../panels/result_graphs/result_components.yaml';
+
+import * as declarative_charts from '../charts/declarative_charts.js';
+
 import {
-  Panel,
-  Subject,
-  create_text_maker,
-  formats,
-  create_text_maker_component,
+  Select,
+  PresentationalPanel,
   SpinnerWrapper,
-  declarative_charts,
-} from '../panels/shared.js';
+  create_text_maker_component,
+} from '../components';
 
 const {
   GraphLegend,
@@ -28,8 +31,7 @@ const {
 
 const { Dept, CRSO, Program } = Subject;
 
-const { TM } = create_text_maker_component([diff_text, result_text]);
-const text_maker = create_text_maker([diff_text, result_text]);
+const { TM, text_maker } = create_text_maker_component([diff_text, result_text]);
 
 const get_subject_from_props = (props) => {
   const {
@@ -311,7 +313,7 @@ const get_status_flag = (indicator_status, years) => {
 
 const indicator_report = (processed_indicator, years) => (
   <div className="text-diff__indicator-report" key={processed_indicator.indicator1.stable_id}>
-    <Panel title={processed_indicator.indicator2.name}>
+    <PresentationalPanel title={processed_indicator.indicator2.name}>
       <Fragment>
         { get_status_flag(processed_indicator.status, years) }
         { processed_indicator.name_diff.length > 1 ?
@@ -328,7 +330,7 @@ const indicator_report = (processed_indicator, years) => (
             no_difference(processed_indicator.indicator1.target_explanation, "indicator_target_explanation") }
         <div className="text-diff__id-tag">{`ID: ${processed_indicator.indicator1.stable_id}`}</div>
       </Fragment>
-    </Panel>
+    </PresentationalPanel>
   </div>
 );
 
