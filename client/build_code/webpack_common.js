@@ -9,8 +9,6 @@ const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
 const IS_PROD_RELEASE = process.env.IS_PROD_RELEASE || false;
 const CI_AND_MASTER = process.env.CIRCLE_BRANCH === "master";
 
-console.log(`\n\nCI_AND_MASTER = ${CI_AND_MASTER}\n${process.env.CIRCLE_BRANCH}\n\n`)
-
 const get_rules = ({
   should_use_babel,
   language,
