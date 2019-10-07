@@ -154,6 +154,8 @@ function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_i
 function get_optimizations(is_prod_build){
   if(is_prod_build){
     return {
+      chunkIds: 'named',
+      moduleIds: 'named',
       minimizer: [
         new UglifyJSPlugin({ sourceMap: false }),
       ],
