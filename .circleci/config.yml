@@ -105,6 +105,8 @@ jobs:
       - run:
           command: | # get master's latest bundle-stats.json to use as the comparison baseline when IB_prod runs, but not if restored from a cache since it won't be used if build_all.sh doesn't run
             [ -f "client/build/InfoBase/app/app-a11y-en.min.js" ] || ./scripts/ci_scripts/get_master_head_bundle_stats.sh
+      - run: ls client/build
+      - run: cat client/build/bundle-stats.json
       - run:
           command: |
             [ -f "client/build/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh)
