@@ -16,7 +16,7 @@ gsutil -o "GSUtil:parallel_process_count=8" -o "GSUtil:parallel_thread_count=1" 
 gsutil setmeta -h "Content-Type:text/plain" $GCLOUD_BUCKET_URL/csv/*.csv
 
 # set no-cache on html and js entry files, always needs to be fresh to guarantee the rest of the cache-busting will work as intended
-gsutil setmeta -h "Cache-Control:no-cache" $GCLOUD_BUCKET_URL/index-*.html
+gsutil setmeta -h "Cache-Control:no-cache" $GCLOUD_BUCKET_URL/*.html
 gsutil setmeta -h "Cache-Control:no-cache" $GCLOUD_BUCKET_URL/app/a*-[ef][nr].min.js
 
 source ../scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-end"
