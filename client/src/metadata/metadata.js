@@ -1,8 +1,12 @@
 import metadata_text from './metadata.yaml';
 import { StandardRouteContainer, ScrollToTargetContainer } from '../core/NavComponents.js';
-import { create_text_maker_component, FancyUL } from '../components/index.js';
+import {
+  create_text_maker_component,
+  FancyUL,
+  PresentationalPanel,
+} from '../components';
+
 import { sources } from './data_sources.js';
-import { Panel } from '../components/panel_components.js';
 
 const { text_maker, TM } = create_text_maker_component(metadata_text);
 
@@ -32,7 +36,7 @@ export default class MetaData extends React.Component {
         <ScrollToTargetContainer target_id={data_source}>
           {_.map(sorted_sources, (source) => (
             <div key={source.key} id={source.key}>
-              <Panel
+              <PresentationalPanel
                 title={source.title()}
               >
                 <div>
@@ -87,7 +91,7 @@ export default class MetaData extends React.Component {
                     </a>
                   }
                 </div>
-              </Panel>
+              </PresentationalPanel>
             </div>
           ))}
         </ScrollToTargetContainer>
