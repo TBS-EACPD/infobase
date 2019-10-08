@@ -10,6 +10,7 @@ import {
   TwoLevelSelect, 
   SortIndicators, 
   LabeledBox,
+  AlertBanner,
 } from '../components/index.js';
 import { Details } from '../components/Details.js';
 import classNames from 'classnames';
@@ -117,6 +118,7 @@ class GranularView extends React.Component {
           label={ <TextMaker text_key="blue_text_report_data_sources" /> }
           content={ <ReportDatasets {...this.props} /> }
         />
+        { table.rpb_banner && <AlertBanner>{table.rpb_banner}</AlertBanner> }
         <div id="rpb-main-content" >
           { 
           _.isEmpty(flat_data) ? 
