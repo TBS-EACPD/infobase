@@ -170,6 +170,10 @@ function get_optimizations(is_prod_build, bundle_stats){
       minimizer: [
         new UglifyJSPlugin({ sourceMap: false }),
       ],
+      splitChunks: {
+        maxAsyncRequests: 10,
+        maxInitialRequests: 6,
+      },
     };
   } else {
     return {};
