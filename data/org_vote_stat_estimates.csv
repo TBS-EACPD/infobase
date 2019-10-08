@@ -26,8 +26,8 @@
 "AECL",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",0,0,300001.00,0,0
 "AECL",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",52283692,0,0.00,0,0
 "AECL",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",232800000,0,0.00,0,0
-"AECL","S",0,"Pursuant to section 2146 of the Jobs and Economic Growth Act, for the divestiture of Atomic Energy of Canada Limited","Conformément à l'article 2146 de la Loi sur l'emploi et la croissance, pour la dissolution d'Énergie atomique du Canada limitée","ME",17000000,,,,
-"AECL","S",0,"Pursuant to section 2146 of the Jobs and Economic Growth Act, for the divestiture of Atomic Energy of Canada Limited","Conformément à l'article 2146 de la Loi sur l'emploi et la croissance, pour la dissolution d'Énergie atomique du Canada limitée","SA",-17000000,,,,
+"AECL","S",0,"Payments to Atomic Energy of Canada Limited","Paiements à Énergie atomique du Canada Limitée","ME",17000000,,,,
+"AECL","S",0,"Payments to Atomic Energy of Canada Limited","Paiements à Énergie atomique du Canada Limitée","SA",-17000000,,,,
 "AGR",1,1,"Operating and Program","Fonctionnement and Programme","ME",548177880,534827658,535624241.00,568453709,571622434
 "AGR",1,1,"Operating and Program","Fonctionnement and Programme","SEA",-7400000,2127657,6175775.00,23863536,0
 "AGR",1,1,"Operating and Program","Fonctionnement and Programme","SEB",0,1993716,1270503.00,0,0
@@ -240,7 +240,7 @@
 "CFGB",1,1,"Operating and Program","Fonctionnement and Programme","VA",309033,326473,428673.00,0,0
 "CFGB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",598307,612859,562442.00,611361,620694
 "CFGB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",57992,-10607,-16896.00,0,0
-"CFGB","S",0,"Establishment of a Canadian Securities Regulation Regime and Canadian Regulatory Authority (Budget Implementation Act, 2009)","Mise sur pied d'un régime canadien et d'un organisme national de réglementation des valeurs mobilières (Loi d'exécution du budget de 2009)","SA",,,1093.00,,
+"CFGB","S",0,"Payments to the Canadian Securities regulation Regime Transition Office","Paiements au Bureau de transition vers un régime canadien de réglementation des valeurs mobilières","SA",,,1093.00,,
 "CFIA",1,1,"Operating and Program","Fonctionnement and Programme","ME",537749431,512042839,525744799.00,535823238,516330207
 "CFIA",1,1,"Operating and Program","Fonctionnement and Programme","SEA",7400001,32107561,30858352.00,832704,0
 "CFIA",1,1,"Operating and Program","Fonctionnement and Programme","SEB",0,22648704,6901001.00,2064708,0
@@ -1046,8 +1046,8 @@
 "IPC",1,1,"Operating and Program","Fonctionnement and Programme","ME",9927361,9927361,9946659.00,10127084,10209556
 "IPC",1,1,"Operating and Program","Fonctionnement and Programme","SEB",0,3131113,1804207.00,0,0
 "IPC",1,1,"Operating and Program","Fonctionnement and Programme","VA",149040,515666,883175.00,0,0
-"IPC",10,7,"Support for Access to Information","Soutien de l'accès à l'information","ME",,,,,5100000
-"IPC",15,7,"Protecting the Privacy of Canadians","Protection de la vie privée des Canadiens","ME",,,,,3032615
+"IPC",10,7,"Support for Access to Information","Soutien de l'accès à l'information","ME",,,,,3032615
+"IPC",15,7,"Protecting the Privacy of Canadians","Protection de la vie privée des Canadiens","ME",,,,,5100000
 "IPC",5,1,"Operating and Program","Fonctionnement and Programme","ME",21908457,22036920,22075133.00,22693992,21968802
 "IPC",5,1,"Operating and Program","Fonctionnement and Programme","VA",662619,873703,1804545.00,0,0
 "IPC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",3750848,3845049,3517184.00,3526663,4002329
@@ -1098,9 +1098,9 @@
 "ISC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",51006,451349,0.00,44000,0
 "ISC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,288999,1505781.00,156712,0
 "ISC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,218839,48153.00,0,0
+"ISC","S",0,"Contributions to the Canadian Institute for Advanced Research - Pan Canadian Artificial Intelligence","Contributions à l'Institut canadien de recherches avancées pour la stratégie pancanadienne en matière d'intelligence artificielle","SA",,,7500000.00,,
 "ISC","S",0,"Grant and Contribution to Genome Canada","Subventions et Contributions à Génome Canada","ME",70800000,68000000,33100000.00,24700000,11400000
 "ISC","S",0,"Grant and Contribution to Genome Canada","Subventions et Contributions à Génome Canada","SA",-10900000,-6100000,-9400000.00,0,0
-"ISC","S",0,"Grant to CANARIE Inc. to operate and develop the generation of Canada's Advanced Research Network","Contributions à la Fondation canadienne des jeunes entrepreneurs","SA",,,7500000.00,,
 "ISC","S",0,"Grant to Sustainable Development Technology Canada (SDTC) for the NextGen Biofuels Fund","Subvention à Technologies du développement durable Canada (TDDC) pour le Fonds de biocarburants ProGen","ME",,,800000.00,0,0
 "ISC","S",0,"Grant to Sustainable Development Technology Canada (SDTC) for the NextGen Biofuels Fund","Subvention à Technologies du développement durable Canada (TDDC) pour le Fonds de biocarburants ProGen","SA",,,-800000.00,0,0
 "ISC","S",0,"Liabilities under the Canada Small Business Financing Act","Obligations contractées en vertu de la Loi sur le financement des petites entreprises du Canada","ME",73454000,77908000,69029621.00,64946634,62173084

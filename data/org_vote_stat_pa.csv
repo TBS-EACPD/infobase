@@ -12,7 +12,7 @@
 "AECB","S",999,"Spending of the revenues pursuant to section 21(3) of the Nuclear Safety and Control Act","Dépense des recettes conformément à l'article 21(3) de la Loi sur la sûreté et la réglementation nucléaires",85973334,83655382,86936223,84410163,89967267,84740022,93887126,86026695,98923804,94591668
 "AECL",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",,,332428000,325643000,552126692,491064000,968615589,784133000,971355163,826595000
 "AECL",15,5,"Payments to Crown Corps","Paiement aux sociétés d'État",378062900,351762900,,,,,,,,
-"AECL","S",999,"Pursuant to section 2146 of the Jobs and Economic Growth Act, for the divestiture of Atomic Energy of Canada Limited","Conformément à l'article 2146 de la Loi sur l'emploi et la croissance, pour la dissolution d'Énergie atomique du Canada limitée",33700000,33700000,1100000,1100000,,,,,,
+"AECL","S",999,"Payments to Atomic Energy of Canada Limited","Paiements à Énergie atomique du Canada Limitée",33700000,33700000,1100000,1100000,,,,,,
 "AGR",1,1,"Operating/Program","Fonctionnement/Programme",730683812,703004588,585461462,577712678,577702019,546207488,913242023,889616909,606696605,591991077
 "AGR",5,2,"Capital","Capital",34848685,30768006,33375973,25835661,55489423,49307846,97479066,91107007,80136193,56866815
 "AGR",10,3,"Grants & Contributions","Subventions et Contributions",447925111,324354015,408014022,345165608,435756388,382607834,373326850,336496052,394757984,362448384
@@ -119,7 +119,7 @@
 "CFGB",1,1,"Operating/Program","Fonctionnement/Programme",,,6482571,5621968,6452536,5595299,6467559,5383550,7183457,6179818
 "CFGB",15,1,"Operating/Program","Fonctionnement/Programme",6436749,5356375,,,,,,,,
 "CFGB","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",624630,624630,627937,627937,656299,656299,602252,602252,545546,545546
-"CFGB","S",999,"Establishment of a Canadian Securities Regulation Regime and Canadian Regulatory Authority (Budget Implementation Act, 2009)","Mise sur pied d'un régime canadien et d'un organisme national de réglementation des valeurs mobilières (Loi d'exécution du budget de 2009)",,,,,,,,,1093,1093
+"CFGB","S",999,"Payments to the Canadian Securities regulation Regime Transition Office","Paiements au Bureau de transition vers un régime canadien de réglementation des valeurs mobilières",,,,,,,,,1093,1093
 "CFIA",1,1,"Operating/Program","Fonctionnement/Programme",,,660582170,646617028,567540946,560358513,596002535,576458091,611123508,594596763
 "CFIA",5,2,"Capital","Capital",,,27959173,20608538,62008979,34773727,102169049,47948394,63655679,43874129
 "CFIA",11,1,"Operating/Program","Fonctionnement/Programme",600051819,590256209,,,,,,,,
@@ -291,7 +291,7 @@
 "ECBC",10,5,"Payments to Crown Corps","Paiement aux sociétés d'État",52848000,50844000,,,,,,,,
 "EDC","S",999,"Administrative fees","Frais administratif",5533174,5533174,2597096,2597096,3699980,3699980,8210494,8210494,5588461,5588461
 "EDC","S",999,"Losses on Foreign Exchange","Pertes d'opérations de change",,,,,,,,,45610229,45610229
-"EDC","S",999,"Payments to Export Development Canada to discharge obligations incurred pursuant to Section 23 of the Export Development Act (Canada Account) for the purpose of facilitating and developing trade between Canada and other countries (S.C., 2001, c. 33) - Transfer from non-budgetary authority related to section 24","Versements à Exportation et développement Canada pour acquitter ses obligations encourues en vertu de l'article 23 de la Loi sur le développement des exportations (Compte du Canada) afin de faciliter et d'accroître les échanges commerciaux entre le Canada et les autres pays (L.C. (2001), ch.33) - Virement de l'autorisation non budgétaire reliée à l'article 24",116862707,116862707,,,,,,,,
+"EDC","S",999,"Payments of concessional loans to facilitate and develop trade between Canada and foreign countries","Versement de prêts à des conditions de faveur pour faciliter et développer le commerce entre le Canada et les pays étrangers",116862707,116862707,,,,,,,,
 "ERC",1,1,"Operating/Program","Fonctionnement/Programme",,,1610094,1430085,1491043,1363839,1490040,1368145,1722980,1443436
 "ERC",60,1,"Operating/Program","Fonctionnement/Programme",1639562,1445271,,,,,,,,
 "ERC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",160657,160657,154521,154521,154130,154130,156133,156133,132988,132988
@@ -323,7 +323,6 @@
 "FIN","S",999,"Canadian Securities Regulation Regime Transition Office (Canadian Securities Regulation Regime Transition Office Act)","Bureau de transition vers un régime canadien de réglementation des valeurs mobilières (Loi sur le Bureau de transition vers un régime canadien de réglementation des valeurs mobilières)",10000000,10000000,53100000,53100000,,,,,,
 "FIN","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",12081486,12081486,11630383,11630383,11025974,11025974,10488783,10488783,10846345,10846344
 "FIN","S",999,"Debt payments on behalf of poor countries to International Organizations pursuant to section 18(1) of the Economic Recovery Act","Paiements de dettes à des organisations internationales au nom des pays pauvres en vertu du paragraphe 18(1) de la Loi sur la reprise économique",51200000,51200000,51200000,51200000,51200000,51200000,51200000,51200000,51200000,51200000
-"FIN","S",999,"Establishment of a Canadian Securities Regulation Regime and Canadian Regulatory Authority (Budget Implementation Act, 2009)","Mise sur pied d'un régime canadien et d'un organisme national de réglementation des valeurs mobilières (Loi d'exécution du budget de 2009)",55806000,55806000,169000000,169000000,,,,,,
 "FIN","S",999,"Fiscal Equalization (Part I - Federal-Provincial Fiscal Arrangements Act)","Péréquation fiscale (Partie I - Loi sur les arrangements fiscaux entre le gouvernement fédéral et les provinces)",16105194000,16105194000,16669278000,16669278000,17341310000,17341310000,17880415000,17880415000,18253657000,18253657000
 "FIN","S",999,"Fiscal Stabilization (Part II — Federal-Provincial Fiscal Arrangements Act)","Stabilisation fiscale (Partie II — Loi sur les arrangements fiscaux entre le gouvernement fédéral et les provinces)",,,103400000,103400000,283059600,283059600,,,,
 "FIN","S",999,"Funding for Home Care Services and Mental Health Services","Financement des services de soins à domicile et de santé mentale",,,,,,,,,300000000,300000000
@@ -338,6 +337,7 @@
 "FIN","S",999,"Payments to International Development Association","Paiements à l'Association internationale de développement",441610000,441610000,883220000,883220000,441610000,441610000,441620000,441620000,441610000,441610000
 "FIN","S",999,"Payments to depositors of Canadian Commercial Bank, CCB Mortgage Investment Corporation and Northland Bank pursuant to the Financial Institutions Depositors Compensation Act","Paiements aux déposants de la Banque Commerciale du Canada, de la Compagnie de placements hypothécaires CCB et de la Norbanque conformément à la Loi sur l'indemnité aux déposants de certaines institutions financières",68571831,0,68571831,0,68571831,0,68571831,,68571831,
 "FIN","S",999,"Payments to provinces regarding sales tax harmonization (Part III,I -Federal-Provincial Fiscal Arrangements Act)","Paiements aux provinces relatifs à l'harmonisation des taxes de vente (partie III.I - Loi sur les arrangements fiscaux entre le gouvernement fédéral et les provinces)",1161200000,1161200000,-319800000,-319800000,-319800000,-319800000,,,,
+"FIN","S",999,"Payments to the Canadian Securities regulation Regime Transition Office","Paiements au Bureau de transition vers un régime canadien de réglementation des valeurs mobilières",55806000,55806000,169000000,169000000,,,,,,
 "FIN","S",999,"Purchase of Domestic Coinage","Achat de la monnaie canadienne",106075973,106075973,105671550,105671550,90547116,90547116,93554938,93554938,94082968,94082968
 "FIN","S",999,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs",155,155,155612,155612,,,,,,
 "FIN","S",999,"Salary and Motor Car Allowance","Traitement et allocation pour automobile",80706,80706,82133,82133,83517,83517,83500,83500,84600,84600
@@ -485,8 +485,8 @@
 "ISC","S",999,"Canadian Intellectual Property Office Revolving Fund","Fonds renouvelable de l'Office de la propriété intellectuelle du Canada",173593925,1452901,172141024,-265146,172406170,-3583979,175990149,6501630,169488519,18990174
 "ISC","S",999,"Canadian Youth Business Foundation","Fondation canadienne des jeunes entrepreneurs",9000000,9000000,9000000,9000000,,,,,,
 "ISC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",55261823,55261823,53050791,53050791,51683374,51683374,50056005,50056005,53354962,53354962
+"ISC","S",999,"Contributions to the Canadian Institute for Advanced Research - Pan Canadian Artificial Intelligence","Contributions à l'Institut canadien de recherches avancées pour la stratégie pancanadienne en matière d'intelligence artificielle",,,,,,,,,7500000,7500000
 "ISC","S",999,"Grant and Contribution to Genome Canada","Subventions et Contributions à Génome Canada",35400000,35400000,47300000,47300000,59900000,59900000,61900000,61900000,23700000,23700000
-"ISC","S",999,"Grant to CANARIE Inc. to operate and develop the generation of Canada's Advanced Research Network","Contributions à la Fondation canadienne des jeunes entrepreneurs",,,,,,,,,7500000,7500000
 "ISC","S",999,"Liabilities under the Canada Small Business Financing Act","Obligations contractées en vertu de la Loi sur le financement des petites entreprises du Canada",59184724,59184724,66374591,66374591,62699806,62699806,63079578,63079578,51300219,51300219
 "ISC","S",999,"Liabilities under the Small Business Loan Act","Obligations contractées en vertu de la Loi sur le financement des petites entreprises du Canada",,,,,,,10644,10644,,
 "ISC","S",999,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs",388371,388371,358031,358031,1021245,1021245,690349,690349,316337,316338
