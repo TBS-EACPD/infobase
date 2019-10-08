@@ -171,8 +171,8 @@ function get_optimizations(is_prod_build, bundle_stats){
         new UglifyJSPlugin({ sourceMap: false }),
       ],
       splitChunks: {
+        // default is 5, but that left us with insufficient granularity in chunks and duplication of code between certain bundles
         maxAsyncRequests: 10,
-        maxInitialRequests: 6,
       },
     };
   } else {
