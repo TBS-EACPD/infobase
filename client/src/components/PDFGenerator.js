@@ -6,35 +6,47 @@ import { create_text_maker_component } from './misc_util_components.js';
 import { SpinnerWrapper } from './SpinnerWrapper.js';
 
 import { Fragment } from 'react';
-import * as qrcode from 'qrcode-generator';
-import * as html2canvas from 'html2canvas';
-import * as jsPDF from 'jspdf';
-import 'jspdf-autotable';
 import { IconDownload } from '../icons/icons.js';
 
 const { text_maker } = create_text_maker_component(text);
-
 
 // USAGE NOTE:
 // This component is somewhat generalized, but was developed primarily for printing panels and is untested elsewhere.
 // Use with caution, and note that it already contains a lot of code for handling secial cases that occur in panels.
 // If you need to cover further special cases, do it carefully.
-export class PDFGenerator extends React.Component{
+export class PDFGenerator extends React.Component {
   constructor(props){
     super();
     this.props = props;
     this.current_height = 0;
 
     this.state = {
+      dependencies: false,
       generating_pdf: false,
     };
   }
 
   componentDidUpdate(){
-    this.state.generating_pdf && this.generate_and_download_pdf();
+    const {
+      generating_pdf,
+      dependencies,
+    } = this.state;
+    
+    if (generating_pdf){
+      if (dependencies){
+        this.generate_and_download_pdf(dependencies);
+      } else {
+        this.lazy_load_heavy_dependencies();
+      }
+    }
   }
 
-  generate_and_download_pdf(){
+  lazy_load_heavy_dependencies(){
+    import(/* webpackChunkName: "PDFGenerator_lazy_loaded_dependencies" */'./PDFGenerator_lazy_loaded_dependencies.side-effects.js')
+      .then( (dependencies) => this.setState({dependencies}) );
+  }
+
+  generate_and_download_pdf({jsPDF, qrcode, html2canvas}){
     const {
       dom_element,
       target_id,
@@ -184,7 +196,7 @@ export class PDFGenerator extends React.Component{
         parentNode.appendChild(canvas);
       });
 
-      html2canvas(element_to_print)
+      html2canvas(element_to_print, {logging: false})
         .then( (canvas) => {
           const imgData = canvas.toDataURL('image/png');
           const ratio = canvas.height/canvas.width;
