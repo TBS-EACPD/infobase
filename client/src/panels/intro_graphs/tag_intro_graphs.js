@@ -1,7 +1,10 @@
 import { TM } from './intro_graph_text_provider.js';
 import { declare_panel, util_components } from "../shared";
 
-const { KeyConceptList } = util_components;
+const {
+  KeyConceptList,
+  AlertBanner,
+} = util_components;
 
 export const declare_m2m_warning_panel = () => declare_panel({
   panel_key: "m2m_warning",
@@ -13,7 +16,7 @@ export const declare_m2m_warning_panel = () => declare_panel({
     },
   
     render: () => (
-      <div className='alert alert-no-symbol alert--is-bordered alert-danger'>
+      <AlertBanner banner_class="alert-danger">
         <KeyConceptList 
           question_answer_pairs={
             _.map( 
@@ -29,7 +32,7 @@ export const declare_m2m_warning_panel = () => declare_panel({
             )
           }
         />
-      </div>
+      </AlertBanner>
     ),
   }),
 });

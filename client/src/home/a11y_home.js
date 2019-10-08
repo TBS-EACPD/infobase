@@ -4,7 +4,10 @@ import home_text2 from "./a11y-home.yaml";
 import { featured_content_items } from './home-data.js';
 
 import { StandardRouteContainer } from '../core/NavComponents.js';
-import { create_text_maker_component } from '../components/index.js';
+import { 
+  create_text_maker_component,
+  AlertBanner,
+} from '../components/index.js';
 
 const { text_maker, TM } = create_text_maker_component([home_text1, home_text2]);
 
@@ -25,9 +28,9 @@ const Home = (props) => {
     >
       <h1> <TM k="title" /> </h1>
       { no_basic_equiv === "no_basic_equiv" &&
-        <div className={"alert alert-no-symbol alert-warning alert--is-bordered large_panel_text"}>
+        <AlertBanner banner_class={'alert-warning'}>
           <TM k="home_a11y_non_a11y_redirect_warning" />
-        </div>
+        </AlertBanner> 
       }
       <section>
         <h2> <TM k="home_a11y_gov_infograph" /> </h2>
