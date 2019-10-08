@@ -42,6 +42,7 @@ export class PDFGenerator extends React.Component {
   }
 
   lazy_load_heavy_dependencies(){
+    // these node modules are huge and ony needed if/when a user actually goes to download a panel. Lazy loaded to save ~700KiB until needed
     import(/* webpackChunkName: "PDFGenerator_lazy_loaded_dependencies" */'./PDFGenerator_lazy_loaded_dependencies.side-effects.js')
       .then( (dependencies) => this.setState({dependencies}) );
   }
