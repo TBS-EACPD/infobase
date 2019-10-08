@@ -6,6 +6,8 @@ import { index_lang_lookups } from '../InfoBase/index_data.js';
 import classNames from 'classnames';
 import { trivial_text_maker } from '../models/text.js';
 import { IconHome } from '../icons/icons.js';
+import { AlertBanner } from '../components/index.js';
+
 import './NavComponents.scss';
 
 
@@ -115,12 +117,12 @@ const HeaderBanner = withRouter(
 
       if (banner_container){
         return ReactDOM.createPortal(
-          <div
-            className = { `alert alert-no-symbol alert--is-bordered large_panel_text ${banner_class || 'alert-info'}` }
-            style = { should_show_banner ? {} : { display: "none" } }
+          <AlertBanner
+            banner_class={banner_class}
+            style={should_show_banner ? {} : { display: "none" }}
           >
-            { banner_content }
-          </div>,
+            {banner_content}
+          </AlertBanner>,
           banner_container
         );
       }

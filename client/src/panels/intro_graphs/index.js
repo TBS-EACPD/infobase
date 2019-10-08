@@ -35,6 +35,7 @@ const { Dept } = Subject;
 const {
   AutoAccordion,
   KeyConceptList,
+  AlertBanner,
 } = util_components;
 
 const shouldAddOrgNameItem = subject => subject.is('dept') && subject.applied_title && subject.name !== subject.applied_title;
@@ -196,9 +197,9 @@ const declare_late_dps_warning_panel = () => declare_panel({
           },
           render({ calculations: { graph_args: late_dp_department_names } }) {
             return (
-              <div className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text">
+              <AlertBanner>
                 <TM k="late_dps_warning_gov" args={{late_dp_department_names}}/>
-              </div>
+              </AlertBanner>
             );
           },
         };
@@ -216,9 +217,9 @@ const declare_late_dps_warning_panel = () => declare_panel({
           ),
           render() {
             return (
-              <div className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text">
+              <AlertBanner>
                 <TM k={`late_dps_warning_${level}`} />
-              </div>
+              </AlertBanner>
             );
           },
         };

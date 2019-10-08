@@ -1,5 +1,7 @@
 import { TM } from './intro_graph_text_provider.js';
-import { declare_panel } from "../shared";
+import { declare_panel, util_components } from "../shared";
+
+const { AlertBanner } = util_components;
 
 export const declare_dead_program_warning_panel = () => declare_panel({
   panel_key: "dead_program_warning",
@@ -9,12 +11,12 @@ export const declare_dead_program_warning_panel = () => declare_panel({
     calculate: _.property("dead_program"),
     render(){
       return (
-        <div 
-          className="alert alert-danger alert-no-symbol alert--is-bordered large_panel_text"
+        <AlertBanner
+          banner_class="alert-danger"
           style={{textAlign: "center"}}
         >
           <TM k="dead_program_warning" />
-        </div>
+        </AlertBanner>
       );
     },
   }),
@@ -30,12 +32,12 @@ export const declare_dead_crso_warning_panel = () => declare_panel({
     render(){
       
       return (
-        <div 
-          className="alert alert-no-symbol alert-danger alert--is-bordered large_panel_text"
+        <AlertBanner
+          banner_class="alert-danger"
           style={{textAlign: "center"}}
         >
           <TM k="dead_crso_warning" />
-        </div>
+        </AlertBanner>
       );
     },
   }),

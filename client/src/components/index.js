@@ -41,6 +41,7 @@ import {
   lang,
   create_text_maker_component,
   DlItem,
+  AlertBanner,
 } from './misc_util_components.js';
 
 import { DeptSearch, DeptSearchWithoutRouter } from '../search/DeptSearch.js';
@@ -97,6 +98,7 @@ export {
   create_text_maker_component,
   lang,
   DlItem,
+  AlertBanner,
 
   DeptSearch,
   DeptSearchWithoutRouter,
