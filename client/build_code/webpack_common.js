@@ -172,7 +172,7 @@ function get_optimizations(is_prod_build, bundle_stats){
       ],
       splitChunks: {
         // default is 5, but that left us with insufficient granularity in chunks and duplication of code between certain bundles
-        maxAsyncRequests: 10,
+        maxAsyncRequests: 20,
       },
     };
   } else {
