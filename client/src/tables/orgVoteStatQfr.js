@@ -4,6 +4,7 @@ import { vote_stat_dimension, major_vote_stat } from './table_common';
 
 import * as FORMAT from '../core/format';
 
+import { trivial_text_maker } from '../models/text';
 
 export default {
   text,
@@ -34,6 +35,8 @@ export default {
     en: "Authorities and Expenditures (QFR) ($000)",
     fr: "Autorisations et dépenses (RFT) (en milliers de dollars)",
   },
+
+  rpb_banner: trivial_text_maker("temp_qfr_late_depts_note"),
 
   add_cols: function(){
     this.add_col({

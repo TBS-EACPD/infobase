@@ -9,7 +9,8 @@ import {
   Select, 
   Format, 
   SortIndicators, 
-  LabeledBox, 
+  LabeledBox,
+  AlertBanner,
 } from '../components/index.js';
 import { Details } from '../components/Details.js';
 import { rpb_link } from './rpb_link.js';
@@ -144,6 +145,7 @@ class SimpleView extends React.Component {
           label={ <TextMaker text_key="blue_text_report_data_sources" args={{table_name: table.name}} /> }
           content={ <ReportDatasets {...this.props} /> }
         />
+        { table.rpb_banner && <AlertBanner>{table.rpb_banner}</AlertBanner> }
         <div id="rpb-main-content" >
           { 
             _.isEmpty(flat_data) ? 

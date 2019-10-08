@@ -33,6 +33,8 @@ export default {
     "fr": "Dépenses par article courant (RFT) (en milliers de dollars)",
   },
 
+  rpb_banner: trivial_text_maker("temp_qfr_late_depts_note"),
+
   "add_cols": function(){
     this.add_col("")
       .add_child([
