@@ -40,8 +40,8 @@ export const get_gov_panels = subject => ({
     declare_simplographic_panel(),
   ],
   financial: [
-    declare_financial_intro_panel(),
     declare_year_warning_panel(),
+    declare_financial_intro_panel(),
     declare_welcome_mat_panel(),
     declare_budget_measures_panel(),
     declare_auth_exp_prog_spending_panel(),
