@@ -103,7 +103,7 @@ const get_rules = ({
   ];
 };
 
-function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_ip, is_ci }){
+function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_ip, is_ci, bundle_stats }){
   return _.filter([
     new webpack.DefinePlugin({
       CDN_URL: JSON.stringify(CDN_URL),
@@ -133,7 +133,7 @@ function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_i
         }
       },
     }),
-    is_prod_build && (language === "en") && !a11y_client && // only produce bundle stats for standard english build
+    bundle_stats &&
       new BundleStatsWebpackPlugin({
         // In CI, only save baseline stats if on master.
         // If not in CI, fall back to hard coded false (if you want to generate a local baseline, temporarily change that and re-build)
@@ -151,11 +151,13 @@ function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_i
   ]);
 };
 
-function get_optimizations(is_prod_build){
+function get_optimizations(is_prod_build, bundle_stats){
   if(is_prod_build){
     return {
-      chunkIds: 'named',
-      moduleIds: 'named',
+      // using names as ids required for comparison between builds in stats, but adds weight to output (particularily to entry point),
+      // so not desired in prod builds for deploy puposes
+      chunkIds: bundle_stats ? 'named' : 'size',
+      moduleIds: bundle_stats ? 'named' : 'size',
       minimizer: [
         new UglifyJSPlugin({ sourceMap: false }),
       ],
@@ -175,6 +177,7 @@ function create_config({
   local_ip,
   is_ci,
   should_use_babel,
+  produce_stats,
 }){
 
   const new_output = _.clone(output);
@@ -182,6 +185,9 @@ function create_config({
     new_output.crossOriginLoading = "anonymous";
   }
   new_output.publicPath = `${CDN_URL}/app/`;
+
+  // bundle stats only output for standard english build, for comparison consistency
+  const bundle_stats = (produce_stats || (is_prod_build && is_ci)) && (language === "en") && !a11y_client;
 
   return {
     name: language,
@@ -199,8 +205,9 @@ function create_config({
       commit_sha,
       local_ip,
       is_ci,
+      bundle_stats,
     }),
-    optimization: get_optimizations(is_prod_build),
+    optimization: get_optimizations(is_prod_build, bundle_stats),
     devtool: (
       is_prod_build ? 
         false : 

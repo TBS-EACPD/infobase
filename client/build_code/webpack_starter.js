@@ -17,7 +17,8 @@ function choose(name){
 const prod = !!choose('PROD');
 const babel = !choose('NO-BABEL');
 const both = !!choose('BOTH');
-const NO_WATCH = !!choose("NO-WATCH");
+const no_watch = !!choose("NO-WATCH");
+const stats = !!choose("STATS");
 
 const a11y_client = choose('a11y_client');
 const main_client = choose('main_client');
@@ -67,11 +68,12 @@ gitsha(function(err, commit_sha){
     local_ip: ip.address(),
     is_ci,
     should_use_babel: babel,
+    produce_stats: stats,
     entry: app_options.entry,
     output: app_options.get_output(lang),
   }));
 
-  if(NO_WATCH){
+  if(no_watch){
     webpack(config, function(err, stats){
       console.log( stats.toString({cached: true, modules: true}) );
       if( err || stats.hasErrors() ){ process.exitCode = 1; } 
