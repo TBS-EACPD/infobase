@@ -27,9 +27,18 @@ const convert_get_with_compressed_query_to_post_request = (req) => {
 
 const log_query = (req) => {
   const request_content = (!_.isEmpty(req.body) && req.body) || (!_.isEmpty(req.query) && req.query);
+  const request_method = req.method === "POST" ? 
+    ( _.has(req.headers, 'encoded-compressed-query') ? 
+      "GET with encoded-compressed-query header, treated as POST" : 
+      "POST"
+    ) :
+    req.method;
+  
   request_content && 
     console.log( /* eslint-disable-line no-console */
-      `query: ${
+      `request_method: ${
+        request_method
+      } \nquery: ${
         request_content.query
       }${
         !_.isEmpty(request_content.variables) ? 
