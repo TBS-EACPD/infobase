@@ -19,6 +19,8 @@ const babel = !choose('NO-BABEL');
 const both = !!choose('BOTH');
 const no_watch = !!choose("NO-WATCH");
 const stats = !!choose("STATS");
+const stats_baseline = !!choose("STATS-BASELINE");
+const stats_no_compare = !!choose("STATS-NO-COMPARE");
 
 const a11y_client = choose('a11y_client');
 const main_client = choose('main_client');
@@ -69,6 +71,8 @@ gitsha(function(err, commit_sha){
     is_ci,
     should_use_babel: babel,
     produce_stats: stats,
+    stats_baseline,
+    stats_no_compare,
     entry: app_options.entry,
     output: app_options.get_output(lang),
   }));

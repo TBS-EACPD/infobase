@@ -103,7 +103,17 @@ const get_rules = ({
   ];
 };
 
-function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_ip, is_ci, bundle_stats }){
+function get_plugins({
+  is_prod_build,
+  language,
+  a11y_client,
+  commit_sha,
+  local_ip,
+  is_ci,
+  bundle_stats,
+  stats_baseline,
+  stats_no_compare, 
+}){
   return _.filter([
     new webpack.DefinePlugin({
       CDN_URL: JSON.stringify(CDN_URL),
@@ -135,10 +145,9 @@ function get_plugins({ is_prod_build, language, a11y_client, commit_sha, local_i
     }),
     bundle_stats &&
       new BundleStatsWebpackPlugin({
-        // In CI, only save baseline stats if on master.
-        // If not in CI, fall back to hard coded false (if you want to generate a local baseline, temporarily change that and re-build)
-        baseline: is_ci ? CI_AND_MASTER : false,
-        compare: true,
+        // In CI, always save baseline stats if on master, otherwise defer to argument
+        baseline: is_ci ? CI_AND_MASTER : stats_baseline,
+        compare: !stats_no_compare,
         json: true,
         outDir: '../..', // this path is relative to the weback output dir (client/build/InfoBase/app usually)
       }),
@@ -156,8 +165,8 @@ function get_optimizations(is_prod_build, bundle_stats){
     return {
       // using names as ids required for comparison between builds in stats, but adds weight to output (particularily to entry point),
       // so not desired in prod builds for deploy puposes
-      chunkIds: bundle_stats ? 'named' : 'size',
       moduleIds: bundle_stats ? 'named' : 'size',
+      chunkIds: bundle_stats ? 'named' : 'size',
       minimizer: [
         new UglifyJSPlugin({ sourceMap: false }),
       ],
@@ -178,6 +187,8 @@ function create_config({
   is_ci,
   should_use_babel,
   produce_stats,
+  stats_baseline,
+  stats_no_compare,
 }){
 
   const new_output = _.clone(output);
@@ -206,6 +217,8 @@ function create_config({
       local_ip,
       is_ci,
       bundle_stats,
+      stats_baseline,
+      stats_no_compare,
     }),
     optimization: get_optimizations(is_prod_build, bundle_stats),
     devtool: (

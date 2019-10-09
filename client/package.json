@@ -124,6 +124,8 @@
     "IB_prod": "node build_code/webpack_starter.js PROD BOTH main_client",
     "IB_prod_no_watch": "node build_code/webpack_starter.js PROD BOTH NO-WATCH main_client",
     "IB_prod_stats": "node build_code/webpack_starter.js PROD NO-WATCH STATS main_client",
+    "IB_prod_stats_save_baseline": "node build_code/webpack_starter.js PROD NO-WATCH STATS STATS-BASELINE main_client",
+    "IB_prod_stats_no_compare": "node build_code/webpack_starter.js PROD NO-WATCH STATS NO-COMPARE main_client",
     "a11y_q": "node build_code/webpack_starter.js NO-BABEL a11y_client",
     "a11y_q_both": "node build_code/webpack_starter.js NO-BABEL BOTH a11y_client",
     "a11y_dev": "node build_code/webpack_starter.js BOTH a11y_client",
