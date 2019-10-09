@@ -36,7 +36,9 @@ const log_query = (req) => {
   
   request_content && 
     console.log( /* eslint-disable-line no-console */
-      `request_method: ${
+      `origin: ${
+        req.headers.origin
+      } \nrequest_method: ${
         request_method
       } \nquery: ${
         request_content.query
