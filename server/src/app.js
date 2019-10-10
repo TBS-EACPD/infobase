@@ -5,6 +5,7 @@ import compression from 'compression';
 import cors from 'cors';
 import depthLimit from 'graphql-depth-limit';
 import { decompressFromBase64 } from 'lz-string';
+import md5 from 'md5';
 
 import {
   create_models,
@@ -40,12 +41,14 @@ const log_query = (req) => {
         req.headers.origin
       } \nrequest_method: ${
         request_method
-      } \nquery: ${
-        request_content.query
-      }${
+      } ${
         !_.isEmpty(request_content.variables) ? 
           `\nvariables: ${JSON.stringify(request_content.variables)}` : 
           ''
+      } \nquery_hash: ${ // Include a hash because the query itself can be longer than the (undocumented?) stackdriver textPayload limit
+        md5(request_content.query)
+      } \nquery: ${ // put the query at the bottom of the textPayload so it doesn't push anything else out if its length causes a cut-off
+        request_content.query
       }`
     );
 };
