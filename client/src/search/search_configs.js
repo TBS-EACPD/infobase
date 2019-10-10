@@ -273,7 +273,7 @@ const programs = {
       }
     }
 
-    if ( program.dead_program ){
+    if ( program.is_dead ){
       return (
         <span className="search-grayed-out-hint">
           <InfoBaseHighlighter 

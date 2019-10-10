@@ -375,7 +375,7 @@ export const declare_sub_program_resources_panel = () => declare_panel({
   
       const counts = ResultCounts.get_dept_counts(subject.dept.id);
       const has_drr_data = counts && counts[`${latest_drr_doc_key}_total`] > 0 && _.nonEmpty(drr_subs);
-      const has_dp_data = _.nonEmpty(dp_subs) && !subject.dead_program;
+      const has_dp_data = _.nonEmpty(dp_subs) && !subject.is_dead;
   
       return {
         dp_subs,
