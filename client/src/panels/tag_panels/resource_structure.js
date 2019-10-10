@@ -236,7 +236,7 @@ export const declare_resource_structure_panel = () => declare_panel({
       }
   
       if(subject.level === 'crso'){
-        has_dp_data = !subject.dead_so;
+        has_dp_data = !subject.is_dead;
         //there are some cases where an SO that died before pa_last_year can crash this graph...
         has_drr_data = _.some(subject.programs, prog => {
           const rows = programSpending.programs.get(prog);
