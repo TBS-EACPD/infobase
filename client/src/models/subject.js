@@ -424,9 +424,6 @@ Subject.CRSO = class CRSO extends static_subject_store_with_API_data(){
   get is_first_wave(){
     return this.dept.is_first_wave;
   }
-  get dead_so(){
-    return !this.is_active;
-  }
   get is_dead(){ // to match dept nomenclature
     return !this.is_active;
   }
