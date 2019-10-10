@@ -28,7 +28,7 @@ const Home = (props) => {
     >
       <h1> <TM k="title" /> </h1>
       { no_basic_equiv === "no_basic_equiv" &&
-        <AlertBanner banner_class={'alert-warning'}>
+        <AlertBanner banner_class={'alert-warning large_panel_text'}>
           <TM k="home_a11y_non_a11y_redirect_warning" />
         </AlertBanner> 
       }
