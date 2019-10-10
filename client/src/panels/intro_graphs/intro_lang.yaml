@@ -189,15 +189,6 @@ different_org_names_static_q:
     Pourquoi une seule organisation a parfois deux noms dans l’InfoBase ?
 
 
-## warning for missing data prior to PAs
-
-year_warning:
-  transform: [handlebars, markdown]
-  en: The {{year}} actual spending data will be available once the {{year}} Public Accounts are tabled.
-  fr: Les données pour les dépenses réelles de {{year}} seront disponibles lorsque les Comptes publics de {{year}} seront déposés.
-    
-
-
 
 ## Common key terms and concepts
 different_org_names_static_a:

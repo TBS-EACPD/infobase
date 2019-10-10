@@ -15,19 +15,17 @@ import { TreeMapTopbar } from './TreeMapTopBar.js';
 import { TreeMapInstructions } from './TreeMapInstructions.js';
 import { TreeMapLegend } from './TreeMapLegend.js';
 import { infograph_href_template } from '../infographic/routes.js';
-import {
-  create_text_maker,
-  run_template,
-} from '../models/text.js';
+import { run_template } from '../models/text.js';
+import { create_text_maker_component } from '../components/index.js';
 import { 
   sequentialBlues,
   sequentialReds,
   sequentialGreens,
   sequentialPurples,
 } from '../core/color_schemes.js';
+import { year_constants } from '../core/Statistics.js';
 
-
-const text_maker = create_text_maker([treemap_text]);
+const { TM, text_maker } = create_text_maker_component([treemap_text]);
 
 const format_display_number = (value, is_fte = false, raw = false) =>
   raw ?
@@ -47,6 +45,19 @@ function generate_infograph_href(d, data_area) {
   } else { return ''; }
 }
 
+
+const YearWarning = () => {
+  if (_.last(year_constants.last_years) !== _.first(year_constants.planning_years)){
+    return (
+      <div 
+        className="alert alert-info alert-no-symbol alert--is-bordered medium_panel_text"
+        style={{textAlign: "center"}}
+      >
+        <TM k="year_warning" args={{year: year_constants.public_accounts_year}}/>
+      </div>
+    );
+  }
+};
 
 function node_html(node, display_name, text_size, display_number) {
   return `
@@ -432,6 +443,7 @@ export default class TreeMapper extends React.Component {
               <h1> {text_maker("treemap_title")} </h1>
               <button className="TreeMap__SkipLink button-unstyled a11y-version-link" tabIndex="0" onClick={skip}>{text_maker("skip_to_main_content")}</button>
               <TreeMapInstructions />
+              <YearWarning />
               <div className="row">
                 <div className="col-md-10">
                   <div className="row">

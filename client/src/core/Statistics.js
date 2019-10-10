@@ -6,7 +6,7 @@ import { run_template } from '../models/text.js'; //just needed for a few consta
 
 const { Gov } = Subject;
 
-const some_constants = {
+const year_constants = {
   lang: window.lang,
   last_years: _.map(years.std_years, e => run_template(e)),
   public_accounts_year: run_template("{{pa_in_year}}"),
@@ -44,7 +44,7 @@ function get_info(subject, infokeys){
   return {
     subject, dept: subject.constructor.type_name === 'dept' ? subject : undefined,
     ...computed,
-    ...some_constants,
+    ...year_constants,
   };
 }
 
@@ -146,4 +146,5 @@ export {
   Statistics, 
   get_info,
   tables_for_statistics,
+  year_constants,
 };
