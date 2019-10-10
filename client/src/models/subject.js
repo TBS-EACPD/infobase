@@ -427,6 +427,9 @@ Subject.CRSO = class CRSO extends static_subject_store_with_API_data(){
   get dead_so(){
     return !this.is_active;
   }
+  get is_dead(){ // to match dept nomenclature
+    return !this.is_active;
+  }
 };
 
 Subject.Program = class Program extends static_subject_store_with_API_data(){
@@ -472,6 +475,9 @@ Subject.Program = class Program extends static_subject_store_with_API_data(){
     return this.crso.is_cr;
   }
   get dead_program(){
+    return !this.is_active;
+  }
+  get is_dead(){ // to match dept nomenclature
     return !this.is_active;
   }
 };
