@@ -424,7 +424,7 @@ Subject.CRSO = class CRSO extends static_subject_store_with_API_data(){
   get is_first_wave(){
     return this.dept.is_first_wave;
   }
-  get is_dead(){ // to match dept nomenclature
+  get is_dead(){
     return !this.is_active;
   }
 };
@@ -471,7 +471,7 @@ Subject.Program = class Program extends static_subject_store_with_API_data(){
   get is_first_wave(){
     return this.crso.is_cr;
   }
-  get is_dead(){ // to match dept nomenclature
+  get is_dead(){
     return !this.is_active;
   }
 };
