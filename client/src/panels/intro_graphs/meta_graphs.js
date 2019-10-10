@@ -51,7 +51,7 @@ export const declare_year_warning_panel = () => declare_panel({
   panel_config_func: (level, panel_key) => ({
     footnotes: false,
     calculate: (subject, info, options) => {
-      return _.last(info.last_years) !== _.first(info.planning_years);
+      return !subject.is_dead && _.last(info.last_years) !== _.first(info.planning_years);
     },
     render({calculations}){
       const { info } = calculations;
