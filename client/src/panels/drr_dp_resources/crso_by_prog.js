@@ -183,7 +183,7 @@ class PlannedProgramResources extends React.Component {
 
 const get_calculate_func = (is_fte) => {
   return function(subject,info){
-    if(subject.dead_so){
+    if(subject.is_dead){
       return false;
     }
   
