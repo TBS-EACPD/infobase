@@ -332,7 +332,7 @@ class ExplorerPage extends React.Component {
             { current_category && get_image_glossary_tooltip(current_category.id) }
           </h2>
           { is_m2m &&
-            <AlertBanner banner_class="alert-danger">
+            <AlertBanner banner_class="danger">
               <KeyConceptList 
                 question_answer_pairs={
                   _.map( 

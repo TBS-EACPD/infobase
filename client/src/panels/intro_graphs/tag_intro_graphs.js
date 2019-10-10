@@ -16,7 +16,7 @@ export const declare_m2m_warning_panel = () => declare_panel({
     },
   
     render: () => (
-      <AlertBanner banner_class="alert-danger">
+      <AlertBanner banner_class="danger">
         <KeyConceptList 
           question_answer_pairs={
             _.map( 
