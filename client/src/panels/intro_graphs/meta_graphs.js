@@ -12,7 +12,7 @@ export const declare_dead_program_warning_panel = () => declare_panel({
     render(){
       return (
         <AlertBanner
-          banner_class="alert-danger"
+          banner_class="alert-danger large_panel_text"
           style={{textAlign: "center"}}
         >
           <TM k="dead_program_warning" />
@@ -33,7 +33,7 @@ export const declare_dead_crso_warning_panel = () => declare_panel({
       
       return (
         <AlertBanner
-          banner_class="alert-danger"
+          banner_class="alert-danger large_panel_text"
           style={{textAlign: "center"}}
         >
           <TM k="dead_crso_warning" />

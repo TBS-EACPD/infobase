@@ -73,7 +73,7 @@ const DlItem = ({ term, def }) => (
 );
 
 const AlertBanner = ({children, banner_class, style}) => (
-  <div className={ `alert alert-no-symbol alert--is-bordered large_panel_text ${banner_class || 'alert-info'}` } style={style}>
+  <div className={ `alert alert-no-symbol alert--is-bordered ${banner_class || 'alert-info large_panel_text'}` } style={style}>
     { children }
   </div>
 );
