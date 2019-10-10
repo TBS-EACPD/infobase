@@ -471,9 +471,6 @@ Subject.Program = class Program extends static_subject_store_with_API_data(){
   get is_first_wave(){
     return this.crso.is_cr;
   }
-  get dead_program(){
-    return !this.is_active;
-  }
   get is_dead(){ // to match dept nomenclature
     return !this.is_active;
   }

@@ -153,7 +153,7 @@ export const declare_spending_in_tag_perspective_panel = () => declare_panel({
         //turn off this panel in a11y mode
         return false;
       }
-      if(subject.dead_program){
+      if(subject.is_dead){
         return false;
       }
       const {programSpending} = this.tables;

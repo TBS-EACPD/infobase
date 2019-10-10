@@ -369,7 +369,7 @@ export const crso_hierarchy = ({subject, href_generator, show_siblings, show_unc
                         level: prg.level,
                         name: prg.name,
                         href: href_generator(prg),
-                        dead: prg.dead_program,
+                        dead: prg.is_dead,
                       })
                     )
                     .sortBy('dead')

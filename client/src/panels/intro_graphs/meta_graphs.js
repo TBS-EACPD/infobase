@@ -8,7 +8,7 @@ export const declare_dead_program_warning_panel = () => declare_panel({
   levels: ['program'],
   panel_config_func: (level, panel_key) => ({
     footnotes: false,
-    calculate: _.property("dead_program"),
+    calculate: _.property("is_dead"),
     render(){
       return (
         <AlertBanner

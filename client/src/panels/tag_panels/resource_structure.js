@@ -226,12 +226,12 @@ export const declare_resource_structure_panel = () => declare_panel({
       let has_drr_data = true;
   
       if(subject.level === 'tag'){
-        has_dp_data = _.some( subject.programs, program => !program.dead_program );
+        has_dp_data = _.some( subject.programs, program => !program.is_dead );
         has_drr_data = _.some( subject.programs, program => !program.crso.is_cr );
       }
   
       if(subject.level === 'program'){
-        has_dp_data = !subject.dead_program;
+        has_dp_data = !subject.is_dead;
         has_drr_data = !subject.crso.is_cr;
       }
   

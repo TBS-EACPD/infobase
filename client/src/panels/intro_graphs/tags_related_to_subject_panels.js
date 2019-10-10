@@ -123,12 +123,12 @@ export const declare_tag_progs_by_dept_panel = () => declare_panel({
           display: <div>{Dept.lookup(dept_id).name}</div>,
           href: infograph_href_template(Dept.lookup(dept_id)),
           children: _.chain(prog_group)
-            .sortBy('dead_program')
+            .sortBy('is_dead')
             .map(prog => ({
               display: (
                 <Fragment>
-                  { prog.dead_program && <HierarchyDeadElementIcon /> }
-                  <span className={classNames(prog.dead_program && 'dead-element')}>
+                  { prog.is_dead && <HierarchyDeadElementIcon /> }
+                  <span className={classNames(prog.is_dead && 'dead-element')}>
                     <a 
                       href={infograph_href_template(prog)}
                     > 
@@ -149,7 +149,7 @@ export const declare_tag_progs_by_dept_panel = () => declare_panel({
           <div className="col-md-10 col-md-offset-1">
             <HeightClipper clipHeight={250} allowReclip={true}>
               <WellList elements={list_args} />
-              { _.some(subject.programs, 'dead_program') &&
+              { _.some(subject.programs, 'is_dead') &&
                 <Fragment>
                   <HierarchyDeadElementIcon />
                   <TM k="hierarchy_contains_dead_elements" />
