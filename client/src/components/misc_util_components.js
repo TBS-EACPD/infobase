@@ -72,11 +72,21 @@ const DlItem = ({ term, def }) => (
   </Fragment>
 );
 
-const AlertBanner = ({children, banner_class, style}) => (
-  <div className={ `alert alert-no-symbol alert--is-bordered ${banner_class || 'alert-info large_panel_text'}` } style={style}>
-    { children }
-  </div>
-);
+const banner_classes = ['info', 'success', 'warning', 'danger'];
+const AlertBanner = ({children, banner_class, additional_class_names, style}) => {
+  if ( banner_class && !_.includes(banner_classes, banner_class) ){
+    throw `AlertBanner received invalid banner_class prop of ${banner_class}`;
+  }
+
+  const banner_class_name = `alert-${banner_class || 'info'}`;
+
+  return (
+    <div className={ `alert alert-no-symbol alert--is-bordered ${banner_class_name} ${additional_class_names}` } style={style}>
+      { children }
+    </div>
+  );
+};
+
 
 export {
   Format,
