@@ -1,5 +1,85 @@
 const { execQuery } = global;
 
+const org_vote_stat_pa_field = `
+org_vote_stat_pa{
+  dept_code
+  vote_num
+  vs_type
+  name
+
+  pa_last_year_5_auth
+  pa_last_year_4_auth
+  pa_last_year_3_auth
+  pa_last_year_2_auth
+  pa_last_year_auth
+
+  pa_last_year_5_exp
+  pa_last_year_4_exp
+  pa_last_year_3_exp
+  pa_last_year_2_exp
+  pa_last_year_exp
+}`;
+const org_vote_stat_qfr_field = `
+org_vote_stat_qfr{
+  dept_code
+  vote_num
+  vs_type
+  name
+
+  in_year_auth
+  in_year_quarter_exp
+  in_year_cumul_exp
+  last_year_auth
+  last_year_quarter_exp
+  last_year_cumul_exp
+}`;
+const org_vote_stat_estimates_field = `
+org_vote_stat_estimates{
+  dept_code
+  vote_num
+  vs_type
+  name
+  doc
+
+  est_last_year_4
+  est_last_year_3
+  est_last_year_2
+  est_last_year
+  est_in_year
+}`;
+const org_transfer_payments_field = `
+org_transfer_payments{
+  dept_code
+  type
+  name
+
+  pa_last_year_5_auth
+  pa_last_year_4_auth
+  pa_last_year_3_auth
+  pa_last_year_2_auth
+  pa_last_year_1_auth
+
+  pa_last_year_5_exp
+  pa_last_year_4_exp
+  pa_last_year_3_exp
+  pa_last_year_2_exp
+  pa_last_year_1_exp
+}`;
+const program_sobjs_field = `
+program_sobjs{
+  program_id
+  so_num
+  pa_last_year_3
+  pa_last_year_2
+  pa_last_year
+}`;
+const program_vote_stat_field = `
+program_vote_stat{
+  program_vs_id
+  pa_last_year_3
+  pa_last_year_2
+  pa_last_year
+}`;
 const program_spending_field = `
 program_spending{
   program_id
@@ -25,7 +105,6 @@ program_spending{
   planning_year_3_spa
   planning_year_3_gross
 }`;
-
 const program_fte_field = `
 program_fte{
   program_id
@@ -40,6 +119,54 @@ program_fte{
   planning_year_3
 }`;
 
+const org_vote_stat_pa_query = `
+query ($lang: String = "en") {
+  root(lang: $lang) {
+    org(dept_code: "ACOA") {
+      ${org_vote_stat_pa_field}
+    }
+  }
+}`;
+const org_vote_stat_qfr_query = `
+query ($lang: String = "en") {
+  root(lang: $lang) {
+    org(dept_code: "ACOA") {
+      ${org_vote_stat_qfr_field}
+    }
+  }
+}`;
+const org_vote_stat_estimates_query = `
+query ($lang: String = "en") {
+  root(lang: $lang) {
+    org(dept_code: "ACOA") {
+      ${org_vote_stat_estimates_field}
+    }
+  }
+}`;
+const org_transfer_payments_query = `
+query ($lang: String = "en") {
+  root(lang: $lang) {
+    org(dept_code: "ACOA") {
+      ${org_transfer_payments_field}
+    }
+  }
+}`;
+const program_sobjs_query =`
+query ($lang: String = "en") {
+  root(lang: $lang) {
+    program(id: "ACOA-ABH00") {
+      ${program_sobjs_field}
+    }
+  }
+}`;
+const program_vote_stat_query =`
+query ($lang: String = "en") {
+  root(lang: $lang) {
+    program(id: "ACOA-ABH00") {
+      ${program_vote_stat_field}
+    }
+  }
+}`;
 const program_spending_query =`
 query ($lang: String = "en") {
   root(lang: $lang) {
@@ -48,7 +175,6 @@ query ($lang: String = "en") {
     }
   }
 }`;
-
 const program_fte_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
@@ -60,11 +186,34 @@ query ($lang: String = "en") {
 
 
 describe('finance data', () => {
+  it("org vote stat pa snapshot", async () => {
+    const data = await execQuery(program_spending_query, {});
+    return expect(data).toMatchSnapshot();
+  });
+  it("org vote stat qfr snapshot", async () => {
+    const data = await execQuery(program_spending_query, {});
+    return expect(data).toMatchSnapshot();
+  });
+  it("org vote stat estimates snapshot", async () => {
+    const data = await execQuery(program_spending_query, {});
+    return expect(data).toMatchSnapshot();
+  });
+  it("org transfer payments snapshot", async () => {
+    const data = await execQuery(program_spending_query, {});
+    return expect(data).toMatchSnapshot();
+  });
+  it("program sobjs snapshot", async () => {
+    const data = await execQuery(program_spending_query, {});
+    return expect(data).toMatchSnapshot();
+  });
+  it("program vote stat snapshot", async () => {
+    const data = await execQuery(program_spending_query, {});
+    return expect(data).toMatchSnapshot();
+  });
   it("program spending snapshot", async () => {
     const data = await execQuery(program_spending_query, {});
     return expect(data).toMatchSnapshot();
   });
-
   it("program fte snapshot", async () => {
     const data = await execQuery(program_fte_query, {});
     return expect(data).toMatchSnapshot();

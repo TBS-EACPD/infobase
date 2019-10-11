@@ -1,5 +1,574 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
-
+exports[`finance data org vote stat pa snapshot 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "org": Object {
+        "org_vote_stat_pa": Array [
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "1",
+            "vs_type": 1,
+            "name": "Operating/Program",
+            "pa_last_year_5_auth": 74725659,
+            "pa_last_year_4_auth": 68604382,
+            "pa_last_year_3_auth": 67652575,
+            "pa_last_year_2_auth": 67442115,
+            "pa_last_year_auth": 69938738,
+            "pa_last_year_5_exp": 69058793,
+            "pa_last_year_4_exp": 65978345,
+            "pa_last_year_3_exp": 63025130,
+            "pa_last_year_2_exp": 61978440,
+            "pa_last_year_exp": 67005669
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "5",
+            "vs_type": 3,
+            "name": "Grants & Contributions",
+            "pa_last_year_5_auth": 236733470,
+            "pa_last_year_4_auth": 232078550,
+            "pa_last_year_3_auth": 230745973,
+            "pa_last_year_2_auth": 262479240,
+            "pa_last_year_auth": 283971202,
+            "pa_last_year_5_exp": 236733461,
+            "pa_last_year_4_exp": 231078546,
+            "pa_last_year_3_exp": 230745966,
+            "pa_last_year_2_exp": 262479231,
+            "pa_last_year_exp": 283971197
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "S",
+            "vs_type": 999,
+            "name": "Contributions to employee benefit plans",
+            "pa_last_year_5_auth": 8346591,
+            "pa_last_year_4_auth": 8208478,
+            "pa_last_year_3_auth": 7809399,
+            "pa_last_year_2_auth": 7900191,
+            "pa_last_year_auth": 8008731,
+            "pa_last_year_5_exp": 8346591,
+            "pa_last_year_4_exp": 8208478,
+            "pa_last_year_3_exp": 7809399,
+            "pa_last_year_2_exp": 7900191,
+            "pa_last_year_exp": 8008731
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "S",
+            "vs_type": 999,
+            "name": "Refunds of amounts credited to revenues in previous years",
+            "pa_last_year_5_auth": 0,
+            "pa_last_year_4_auth": 20,
+            "pa_last_year_3_auth": 0,
+            "pa_last_year_2_auth": 0,
+            "pa_last_year_auth": 0,
+            "pa_last_year_5_exp": 0,
+            "pa_last_year_4_exp": 20,
+            "pa_last_year_3_exp": 0,
+            "pa_last_year_2_exp": 0,
+            "pa_last_year_exp": 0
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "S",
+            "vs_type": 999,
+            "name": "Salary and Motor Car Allowance",
+            "pa_last_year_5_auth": 1425,
+            "pa_last_year_4_auth": 2000,
+            "pa_last_year_3_auth": 1189,
+            "pa_last_year_2_auth": 0,
+            "pa_last_year_auth": 0,
+            "pa_last_year_5_exp": 1425,
+            "pa_last_year_4_exp": 2000,
+            "pa_last_year_3_exp": 1189,
+            "pa_last_year_2_exp": 0,
+            "pa_last_year_exp": 0
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "S",
+            "vs_type": 999,
+            "name": "Spending of proceeds from the disposal of surplus Crown assets",
+            "pa_last_year_5_auth": 28877,
+            "pa_last_year_4_auth": 22847,
+            "pa_last_year_3_auth": 31149,
+            "pa_last_year_2_auth": 28013,
+            "pa_last_year_auth": 26694,
+            "pa_last_year_5_exp": 17838,
+            "pa_last_year_4_exp": 5702,
+            "pa_last_year_3_exp": 27284,
+            "pa_last_year_2_exp": 7640,
+            "pa_last_year_exp": 0
+          }
+        ]
+      },
+    },
+  },
+}
+`;
+exports[`finance data org vote stat qfr snapshot 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "org": Object {
+        "org_vote_stat_qfr": Array [
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "1",
+            "vs_type": 1,
+            "name": "Operating and Program",
+            "in_year_auth": 69306000,
+            "in_year_quarter_exp": 14959000,
+            "in_year_cumul_exp": 30300000,
+            "last_year_auth": 66530000,
+            "last_year_quarter_exp": 19693000,
+            "last_year_cumul_exp": 35579000
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "5",
+            "vs_type": 3,
+            "name": "Grants & Contributions",
+            "in_year_auth": 251097000,
+            "in_year_quarter_exp": 42782000,
+            "in_year_cumul_exp": 70586000,
+            "last_year_auth": 240223000,
+            "last_year_quarter_exp": 46579000,
+            "last_year_cumul_exp": 69432000
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "S",
+            "vs_type": 999,
+            "name": "Statutory Authorities",
+            "in_year_auth": 8201000,
+            "in_year_quarter_exp": 2042000,
+            "in_year_cumul_exp": 4084000,
+            "last_year_auth": 7991000,
+            "last_year_quarter_exp": 1993000,
+            "last_year_cumul_exp": 3985000
+          }
+        ]
+      },
+    },
+  },
+}
+`;
+exports[`finance data org vote stat estimates snapshot 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "org": Object {
+        "org_vote_stat_estimates": Array [
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "1",
+            "vs_type": 1,
+            "name": "Operating and Program",
+            "doc": "ME",
+            "est_last_year_4": 64399896,
+            "est_last_year_3": 64222120,
+            "est_last_year_2": 63351960,
+            "est_last_year": 66292642,
+            "est_in_year": 65905491
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "1",
+            "vs_type": 1,
+            "name": "Operating and Program",
+            "doc": "VA",
+            "est_last_year_4": 3252679,
+            "est_last_year_3": 3219995,
+            "est_last_year_2": 6586778,
+            "est_last_year": 0,
+            "est_in_year": 0
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "10",
+            "vs_type": 7,
+            "name": "Launching a Federal Strategy on Jobs and Tourism",
+            "doc": "ME",
+            "est_last_year_4": null,
+            "est_last_year_3": null,
+            "est_last_year_2": null,
+            "est_last_year": null,
+            "est_in_year": 2091224
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "15",
+            "vs_type": 7,
+            "name": "Increased Funding for the Regional Development Agencies",
+            "doc": "ME",
+            "est_last_year_4": null,
+            "est_last_year_3": null,
+            "est_last_year_2": null,
+            "est_last_year": null,
+            "est_in_year": 24900000
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "5",
+            "vs_type": 3,
+            "name": "Grants & Contributions",
+            "doc": "ME",
+            "est_last_year_4": 225573493,
+            "est_last_year_3": 235160493,
+            "est_last_year_2": 240222493,
+            "est_last_year": 252896893,
+            "est_in_year": 241163563
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "5",
+            "vs_type": 3,
+            "name": "Grants & Contributions",
+            "doc": "SEA",
+            "est_last_year_4": 0,
+            "est_last_year_3": 8300000,
+            "est_last_year_2": 0,
+            "est_last_year": 25587539,
+            "est_in_year": 0
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "5",
+            "vs_type": 3,
+            "name": "Grants & Contributions",
+            "doc": "SEB",
+            "est_last_year_4": 0,
+            "est_last_year_3": 1678001,
+            "est_last_year_2": 43594308,
+            "est_last_year": 3100000,
+            "est_in_year": 0
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "5",
+            "vs_type": 3,
+            "name": "Grants & Contributions",
+            "doc": "SEC",
+            "est_last_year_4": 5172480,
+            "est_last_year_3": 17340746,
+            "est_last_year_2": 154401,
+            "est_last_year": 0,
+            "est_in_year": 0
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "S",
+            "vs_type": 0,
+            "name": "Contributions to employee benefit plans",
+            "doc": "ME",
+            "est_last_year_4": 8609600,
+            "est_last_year_3": 8814591,
+            "est_last_year_2": 7970491,
+            "est_last_year": 8168627,
+            "est_in_year": 8547893
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "S",
+            "vs_type": 0,
+            "name": "Contributions to employee benefit plans",
+            "doc": "SA",
+            "est_last_year_4": -800201,
+            "est_last_year_3": -914400,
+            "est_last_year_2": 38240,
+            "est_last_year": 0,
+            "est_in_year": 0
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "S",
+            "vs_type": 0,
+            "name": "Salary and Motor Car Allowance",
+            "doc": "ME",
+            "est_last_year_4": 2000,
+            "est_last_year_3": 0,
+            "est_last_year_2": 0,
+            "est_last_year": null,
+            "est_in_year": null
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "S",
+            "vs_type": 0,
+            "name": "Salary and Motor Car Allowance",
+            "doc": "SA",
+            "est_last_year_4": -811,
+            "est_last_year_3": 0,
+            "est_last_year_2": 0,
+            "est_last_year": null,
+            "est_in_year": null
+          },
+          Object {
+            "dept_code": "ACOA",
+            "vote_num": "S",
+            "vs_type": 0,
+            "name": "Spending of proceeds from the disposal of surplus Crown assets",
+            "doc": "SA",
+            "est_last_year_4": 31149,
+            "est_last_year_3": 28013,
+            "est_last_year_2": 26694,
+            "est_last_year": null,
+            "est_in_year": null
+          }
+        ]
+      },
+    },
+  },
+}
+`;
+exports[`finance data org transfer payments snapshot 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "org": Object {
+        "org_transfer_payments": Array [
+          Object {
+            "dept_code": "ACOA",
+            "type": "c",
+            "name": "Canada 150 Community Infrastructure Program",
+            "pa_last_year_5_auth": 0,
+            "pa_last_year_4_auth": 0,
+            "pa_last_year_3_auth": 3481221,
+            "pa_last_year_2_auth": 12535250,
+            "pa_last_year_1_auth": 16600000,
+            "pa_last_year_5_exp": 0,
+            "pa_last_year_4_exp": 0,
+            "pa_last_year_3_exp": 3481221,
+            "pa_last_year_2_exp": 12535250,
+            "pa_last_year_1_exp": 17168340
+          },
+          Object {
+            "dept_code": "ACOA",
+            "type": "c",
+            "name": "Contributions to promote and coordinate economic development throughout Cape Breton Island",
+            "pa_last_year_5_auth": 0,
+            "pa_last_year_4_auth": 4093435,
+            "pa_last_year_3_auth": 2557053,
+            "pa_last_year_2_auth": 992752,
+            "pa_last_year_1_auth": 126793,
+            "pa_last_year_5_exp": 0,
+            "pa_last_year_4_exp": 4093435,
+            "pa_last_year_3_exp": 2557053,
+            "pa_last_year_2_exp": 992752,
+            "pa_last_year_1_exp": 13381
+          },
+          Object {
+            "dept_code": "ACOA",
+            "type": "c",
+            "name": "Contributions for the Community Infrastructure Improvement Fund",
+            "pa_last_year_5_auth": 12319305,
+            "pa_last_year_4_auth": 0,
+            "pa_last_year_3_auth": 0,
+            "pa_last_year_2_auth": 0,
+            "pa_last_year_1_auth": 0,
+            "pa_last_year_5_exp": 12319305,
+            "pa_last_year_4_exp": 0,
+            "pa_last_year_3_exp": 0,
+            "pa_last_year_2_exp": 0,
+            "pa_last_year_1_exp": 0
+          },
+          Object {
+            "dept_code": "ACOA",
+            "type": "c",
+            "name": "Contributions under the Community Futures program",
+            "pa_last_year_5_auth": 12614168,
+            "pa_last_year_4_auth": 12664849,
+            "pa_last_year_3_auth": 12604443,
+            "pa_last_year_2_auth": 12627869,
+            "pa_last_year_1_auth": 12642000,
+            "pa_last_year_5_exp": 12614168,
+            "pa_last_year_4_exp": 12664849,
+            "pa_last_year_3_exp": 12604443,
+            "pa_last_year_2_exp": 12627869,
+            "pa_last_year_1_exp": 12641998
+          },
+          Object {
+            "dept_code": "ACOA",
+            "type": "c",
+            "name": "Contributions under the Business Development Program",
+            "pa_last_year_5_auth": 128584363,
+            "pa_last_year_4_auth": 127625645,
+            "pa_last_year_3_auth": 133140191,
+            "pa_last_year_2_auth": 157272405,
+            "pa_last_year_1_auth": 168290246,
+            "pa_last_year_5_exp": 128584359,
+            "pa_last_year_4_exp": 126625641,
+            "pa_last_year_3_exp": 133140184,
+            "pa_last_year_2_exp": 157272396,
+            "pa_last_year_1_exp": 174809155
+          },
+          Object {
+            "dept_code": "ACOA",
+            "type": "c",
+            "name": "Contribution for the Innovative Communities Fund",
+            "pa_last_year_5_auth": 34508394,
+            "pa_last_year_4_auth": 41646990,
+            "pa_last_year_3_auth": 40951128,
+            "pa_last_year_2_auth": 47669438,
+            "pa_last_year_1_auth": 38657762,
+            "pa_last_year_5_exp": 34508394,
+            "pa_last_year_4_exp": 41646990,
+            "pa_last_year_3_exp": 40951128,
+            "pa_last_year_2_exp": 47669438,
+            "pa_last_year_1_exp": 41687697
+          },
+          Object {
+            "dept_code": "ACOA",
+            "type": "c",
+            "name": "Contributions under the Atlantic Policy Research Initiatives",
+            "pa_last_year_5_auth": 456848,
+            "pa_last_year_4_auth": 577558,
+            "pa_last_year_3_auth": 420170,
+            "pa_last_year_2_auth": 525445,
+            "pa_last_year_1_auth": 600000,
+            "pa_last_year_5_exp": 456848,
+            "pa_last_year_4_exp": 577558,
+            "pa_last_year_3_exp": 420170,
+            "pa_last_year_2_exp": 525445,
+            "pa_last_year_1_exp": 768842
+          },
+          Object {
+            "dept_code": "ACOA",
+            "type": "c",
+            "name": "Contributions for the Atlantic Innovation Fund",
+            "pa_last_year_5_auth": 47766112,
+            "pa_last_year_4_auth": 45027132,
+            "pa_last_year_3_auth": 37241006,
+            "pa_last_year_2_auth": 30653122,
+            "pa_last_year_1_auth": 44900000,
+            "pa_last_year_5_exp": 47766112,
+            "pa_last_year_4_exp": 45027132,
+            "pa_last_year_3_exp": 37241006,
+            "pa_last_year_2_exp": 30653122,
+            "pa_last_year_1_exp": 36274360
+          },
+          Object {
+            "dept_code": "ACOA",
+            "type": "g",
+            "name": "Grants to organizations to promote economic cooperation and development",
+            "pa_last_year_5_auth": 484280,
+            "pa_last_year_4_auth": 442941,
+            "pa_last_year_3_auth": 350761,
+            "pa_last_year_2_auth": 202959,
+            "pa_last_year_1_auth": 2154401,
+            "pa_last_year_5_exp": 484275,
+            "pa_last_year_4_exp": 442941,
+            "pa_last_year_3_exp": 350761,
+            "pa_last_year_2_exp": 202959,
+            "pa_last_year_1_exp": 607424
+          }
+        ]
+      },
+    },
+  },
+}
+`;
+exports[`finance data program sobjs snapshot 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "program": Object {
+        "program_sobjs": Array [
+          Object {
+            "program_id": "ACOA-ABH00",
+            "so_num": 1,
+            "pa_last_year_3": 22014314,
+            "pa_last_year_2": 22521735.71,
+            "pa_last_year": 24848787.95
+          },
+          Object {
+            "program_id": "ACOA-ABH00",
+            "so_num": 2,
+            "pa_last_year_3": 1111886.46,
+            "pa_last_year_2": 936006.81,
+            "pa_last_year": 1156699.59
+          },
+          Object {
+            "program_id": "ACOA-ABH00",
+            "so_num": 3,
+            "pa_last_year_3": 17223.31,
+            "pa_last_year_2": 82591.79,
+            "pa_last_year": 93670.55
+          },
+          Object {
+            "program_id": "ACOA-ABH00",
+            "so_num": 4,
+            "pa_last_year_3": 659653.05,
+            "pa_last_year_2": 691433.6,
+            "pa_last_year": 1115940.56
+          },
+          Object {
+            "program_id": "ACOA-ABH00",
+            "so_num": 5,
+            "pa_last_year_3": 52553.26,
+            "pa_last_year_2": 44766.48,
+            "pa_last_year": 75333.81
+          },
+          Object {
+            "program_id": "ACOA-ABH00",
+            "so_num": 7,
+            "pa_last_year_3": 13774.15,
+            "pa_last_year_2": 9046.31,
+            "pa_last_year": 11585.54
+          },
+          Object {
+            "program_id": "ACOA-ABH00",
+            "so_num": 9,
+            "pa_last_year_3": null,
+            "pa_last_year_2": 1408.94,
+            "pa_last_year": 2273.93
+          },
+          Object {
+            "program_id": "ACOA-ABH00",
+            "so_num": 10,
+            "pa_last_year_3": 148090995.57,
+            "pa_last_year_2": 161918821.04,
+            "pa_last_year": 174145533.66
+          },
+          Object {
+            "program_id": "ACOA-ABH00",
+            "so_num": 12,
+            "pa_last_year_3": 3803.47,
+            "pa_last_year_2": 26059.81,
+            "pa_last_year": -230443.6
+          }
+        ]
+      },
+    },
+  },
+}
+`;
+exports[`finance data program vote stat snapshot 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "program": Object {
+        "program_vote_stat": Array [
+          Object {
+            "program_id": "ACOA-ABH00",
+            "pa_last_year_3": 2992431.3,
+            "pa_last_year_2": 2869105.3,
+            "pa_last_year": 3023527.19
+          },
+          Object {
+            "program_id": "ACOA-ABH00",
+            "pa_last_year_3": 168971771.97,
+            "pa_last_year_2": 183362765.19,
+            "pa_last_year": 198195854.8
+          },
+        ]
+      },
+    },
+  },
+}
+`;
 exports[`finance data program fte snapshot 1`] = `
 Object {
   "data": Object {

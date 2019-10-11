@@ -86,7 +86,7 @@ const schema = `
     pa_last_year: Float
   }
   type ProgramVoteStat{
-    program_vs_id: String
+    program_id: String
     pa_last_year_3: Float
     pa_last_year_2: Float
     pa_last_year: Float
