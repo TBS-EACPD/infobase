@@ -1,0 +1,14 @@
+﻿"dept_code","vote_num","vs_type","name_en","name_fr","pa_last_year_5_auth","pa_last_year_5_exp","pa_last_year_4_auth","pa_last_year_4_exp","pa_last_year_3_auth","pa_last_year_3_exp","pa_last_year_2_auth","pa_last_year_2_exp","pa_last_year_auth","pa_last_year_exp"
+"ACOA",1,1,"Operating/Program","Fonctionnement/Programme",74725659,69058793,68604382,65978345,67652575,63025130,67442115,61978440,69938738,67005669
+"ACOA",5,3,"Grants & Contributions","Subventions et Contributions",236733470,236733461,232078550,231078546,230745973,230745966,262479240,262479231,283971202,283971197
+"ACOA","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",8346591,8346591,8208478,8208478,7809399,7809399,7900191,7900191,8008731,8008731
+"ACOA","S",999,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs",,,20,20,,,,,,
+"ACOA","S",999,"Salary and Motor Car Allowance","Traitement et allocation pour automobile",1425,1425,2000,2000,1189,1189,,,,
+"ACOA","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",28877,17838,22847,5702,31149,27284,28013,7640,26694,
+"WDO",1,1,"Operating/Program","Fonctionnement/Programme",42799950,40153739,39107069,36056455,38841639,35329465,36720314,33928250,38617715,37029259
+"WDO",5,3,"Grants & Contributions","Subventions et Contributions",147133550,143006398,122232026,121697675,122248119,116332625,163559924,152743516,189690082,186283470
+"WDO","S",999,"Collection Agency Fees","Honoraires - Agence de recouvrement",,,3802,3802,,,,,,
+"WDO","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",5166000,5166000,4241334,4241334,4024851,4024851,3809268,3809268,3739442,3739442
+"WDO","S",999,"Salary and Motor Car Allowance","Contributions aux régimes d'avantages sociaux des employés",2000,2000,2000,2000,1522,1189,,,,
+"WDO","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",835,154,1270,1270,3244,3244,2240,2240,15948,15948
+
