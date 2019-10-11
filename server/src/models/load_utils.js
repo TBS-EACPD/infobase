@@ -42,6 +42,8 @@ const bilingual_remap = (obj, dest_key, source_key) => ({
   [`${dest_key}_fr`]: obj ? obj[`${source_key}_fr`] : null,
 });
 
+const check_ngtive_nan = (value) => _.isNaN(+value) ? null : +value;
+
 module.exports = exports = {
   get_file_from_data_dir,
   empties_to_nulls,
@@ -52,4 +54,5 @@ module.exports = exports = {
 
   create_program_id,
   bilingual_remap,
+  check_ngtive_nan,
 };
