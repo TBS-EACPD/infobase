@@ -11,8 +11,8 @@ import { ensure_loaded } from '../core/lazy_loader.js';
 
 import { Subject } from '../models/subject';
 import { result_docs } from '../models/results.js';
-
-import { Result, indicator_target_text } from '../panels/result_graphs/results_common.js';
+import { Result, indicator_text_functions } from '../panels/result_graphs/results_common.js';
+const { indicator_target_text } = indicator_text_functions;
 import result_text from '../panels/result_graphs/result_components.yaml';
 
 import * as declarative_charts from '../charts/declarative_charts.js';
