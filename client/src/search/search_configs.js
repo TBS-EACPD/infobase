@@ -149,6 +149,7 @@ const make_orgs_search_config = (options) => {
     ...org_templates,
     get_data,
     filter: (query, datum) => memoized_re_matchers(query, org_attributes_to_match, config_name)(datum),
+    config_name,
   };
 };
 
@@ -165,6 +166,7 @@ const glossary_attributes_to_match = [
 ];
 
 const glossary = {
+  config_name: 'glossary',
   header_function: ()=> trivial_text_maker('glossary'),
   name_function: _.property('title'),
   menu_content_function: (glossaryItem, search) => (
@@ -184,6 +186,7 @@ const glossary = {
 };
 
 const glossary_lite = {
+  config_name: 'glossary_lite',
   header_function: () => trivial_text_maker('glossary'),
   name_function: _.property('title'),
   get_data: () => GlossaryEntry.get_all(),
@@ -192,6 +195,7 @@ const glossary_lite = {
 
 
 const gocos = {
+  config_name: 'gocos',
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.GOCO.name}`,
   name_function: _.property('name'),
   get_data: () => _.chain(Tag.get_all())
@@ -202,6 +206,7 @@ const gocos = {
 };
 
 const how_we_help = {
+  config_name: 'how_we_help',
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.HWH.name}`,
   name_function: _.property('name'),
   get_data: () => _.chain(Tag.get_all())
@@ -212,6 +217,7 @@ const how_we_help = {
 };
 
 const who_we_help = {
+  config_name: 'who_we_help',
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.WWH.name}`,
   name_function: _.property('name'),
   get_data: () => _.chain(Tag.get_all())
@@ -222,6 +228,7 @@ const who_we_help = {
 };
 
 const horizontal_initiative = {
+  config_name: 'horizontal_initiative',
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.HI.name}`,
   name_function: _.property('name'),
   get_data: () => _.chain(Tag.get_all())
@@ -233,6 +240,7 @@ const horizontal_initiative = {
 
 
 const datasets = {
+  config_name: 'datasets',
   header_function: () => trivial_text_maker('build_a_report'),
   name_function: table => table.title,
   get_data: () => _.chain(Table.get_all())
@@ -255,6 +263,7 @@ const datasets = {
 
 
 const programs = {
+  config_name: 'programs',
   header_function: () => trivial_text_maker('programs'),
   name_function: program => `${program.name} (${program.dept.fancy_name})`,
   get_data: () => Program.get_all(),
@@ -295,6 +304,7 @@ const programs = {
 
 //only include CRs because SO's have really really long names
 const crsos = {
+  config_name: 'crsos',
   header_function: () => trivial_text_maker('core_resps'),
   name_function: crso => `${crso.name} (${crso.dept.fancy_name})`,
   get_data: () => _.filter(CRSO.get_all(), 'is_cr'),

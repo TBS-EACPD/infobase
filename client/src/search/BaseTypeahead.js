@@ -9,6 +9,7 @@ import {
   MenuItem,
 } from 'react-bootstrap-typeahead';
 
+import { log_standard_event } from '../core/analytics.js';
 import { get_static_url } from '../request_utils.js';
 
 import text from "./BaseTypeahead.yaml";
@@ -66,7 +67,17 @@ export class BaseTypeahead extends React.Component {
     
     const bootstrapSize = large ? "large" : "small";
 
-    const debounceOnNewQuery = _.debounce(onNewQuery, 500);
+    const debounceOnNewQuery = _.debounce(
+      (query) => {
+        onNewQuery();
+        log_standard_event({
+          SUBAPP: window.location.hash.replace('#',''),
+          MISC1: `Typeahead search`,
+          MISC2: `query: ${query}, search_configs: ${_.map(search_configs, 'config_name')}`,
+        });
+      },
+      500,
+    );
 
     const config_groups = _.map(
       search_configs,
