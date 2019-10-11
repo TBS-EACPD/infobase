@@ -286,7 +286,7 @@ const indicator_text_functions = {
   indicator_previous_target_text,
   indicator_previous_actual_text,
   drr17_indicator_target_text,
-}
+};
 
 export {
   Result,
@@ -308,5 +308,5 @@ export {
   result_statuses,
   result_simple_statuses,
 
-  indicator_text_functions
+  indicator_text_functions,
 };
