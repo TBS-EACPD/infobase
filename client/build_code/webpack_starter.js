@@ -88,6 +88,7 @@ gitsha(function(err, commit_sha){
         //uncomment these lines if watch isn't working properly
         //aggregateTimeout:300, 
         //poll:true
+        ignored: /node_modules/,
       },function(err, stats){
         console.log( stats.toString({cached: true, modules: true}) );
       });
