@@ -72,7 +72,7 @@ export class BaseTypeahead extends React.Component {
         onNewQuery();
         log_standard_event({
           SUBAPP: window.location.hash.replace('#',''),
-          MISC1: `Typeahead search`,
+          MISC1: `TYPEAHEAD_SEARCH_QUERY`,
           MISC2: `query: ${query}, search_configs: ${_.map(search_configs, 'config_name')}`,
         });
       },
@@ -178,6 +178,12 @@ export class BaseTypeahead extends React.Component {
               if ( _.isFunction(onSelect) ){
                 onSelect(selected[0].data);
               }
+
+              log_standard_event({
+                SUBAPP: window.location.hash.replace('#',''),
+                MISC1: `TYPEAHEAD_SEARCH_SELECT`,
+                MISC2: `selected: ${selected[0].name}`,
+              });
             }
           }
         } 
