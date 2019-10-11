@@ -187,27 +187,27 @@ query ($lang: String = "en") {
 
 describe('finance data', () => {
   it("org vote stat pa snapshot", async () => {
-    const data = await execQuery(program_spending_query, {});
+    const data = await execQuery(org_vote_stat_pa_query, {});
     return expect(data).toMatchSnapshot();
   });
   it("org vote stat qfr snapshot", async () => {
-    const data = await execQuery(program_spending_query, {});
+    const data = await execQuery(org_vote_stat_qfr_query, {});
     return expect(data).toMatchSnapshot();
   });
   it("org vote stat estimates snapshot", async () => {
-    const data = await execQuery(program_spending_query, {});
+    const data = await execQuery(org_vote_stat_estimates_query, {});
     return expect(data).toMatchSnapshot();
   });
   it("org transfer payments snapshot", async () => {
-    const data = await execQuery(program_spending_query, {});
+    const data = await execQuery(org_transfer_payments_query, {});
     return expect(data).toMatchSnapshot();
   });
   it("program sobjs snapshot", async () => {
-    const data = await execQuery(program_spending_query, {});
+    const data = await execQuery(program_sobjs_query, {});
     return expect(data).toMatchSnapshot();
   });
   it("program vote stat snapshot", async () => {
-    const data = await execQuery(program_spending_query, {});
+    const data = await execQuery(program_vote_stat_query, {});
     return expect(data).toMatchSnapshot();
   });
   it("program spending snapshot", async () => {
