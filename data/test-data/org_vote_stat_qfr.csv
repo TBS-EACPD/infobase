@@ -1,0 +1,9 @@
+﻿"dept_code","vote_num","vs_type","name_en","name_fr","in_year_auth","in_year_quarter_exp","in_year_cumul_exp","last_year_auth","last_year_quarter_exp","last_year_cumul_exp"
+"ACOA",1,1,"Operating and Program","Fonctionnement et Programme",69306000,14959000,30300000,66530000,19693000,35579000
+"ACOA",5,3,"Grants & Contributions","Subventions et Contributions",251097000,42782000,70586000,240223000,46579000,69432000
+"ACOA","S",999,"Statutory Authorities","Autorisations législatives",8201000,2042000,4084000,7991000,1993000,3985000
+"WDO",1,1,"Operating and Program","Fonctionnement et Programme",37601000,8757000,17236000,37472000,8828000,17335000
+"WDO",5,3,"Grants & Contributions","Subventions et Contributions",117773000,72416000,92406000,173158000,18614000,39073000
+"WDO","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",11000,0,0,16000,0,0
+"WDO","S",999,"Statutory Authorities","Autorisations législatives",3825000,956000,1913000,3751000,925000,1850000
+
