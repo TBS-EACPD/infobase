@@ -117,7 +117,7 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
       target_result: indicator_actual_text(ind.indicator),
       date_to_achieve: ind.indicator.target_date,
       status: <Fragment>
-        <span aria-hidden="true" className="span__copyable-hidden">{result_statuses[ind.indicator.status_key].text}</span>
+        <span aria-hidden="true" className="copyable-hidden">{result_statuses[ind.indicator.status_key].text}</span>
         {large_status_icons[ind.indicator.status_key]}
       </Fragment>,
     },
