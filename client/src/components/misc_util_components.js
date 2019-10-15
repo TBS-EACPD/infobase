@@ -13,7 +13,7 @@ import { TextMaker, TM } from './TextMaker.js';
 
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
 
-const ExternalLink = ({display, href}) => <a target="_blank" rel="noopener noreferrer" href={href}>{display}</a>;
+const ExternalLink = ({children, href}) => <a target="_blank" rel="noopener noreferrer" href={href}>{children}</a>;
 
 function lang(obj){ return obj[window.lang] || obj.text || ""; }
 

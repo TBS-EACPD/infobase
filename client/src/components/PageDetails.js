@@ -8,8 +8,6 @@ import { create_text_maker } from '../models/text.js';
 import { IconGitHub } from '../icons/icons.js';
 import { EmailFrontend } from './EmailFrontend.js';
 
-import { Fragment } from 'react';
-
 const text_maker = create_text_maker(text);
 
 const github_link = `https://github.com/TBS-EACPD/infobase/${
@@ -23,15 +21,10 @@ class VersionNumber extends React.Component {
     return (
       <span>
         { text_maker("infobase_version_number") }
-        <ExternalLink
-          href={github_link}
-          display={
-            <Fragment>
-              { ` ${window.sha} ` }
-              <IconGitHub inline={true} />
-            </Fragment>
-          }
-        />
+        <ExternalLink href={github_link}>
+          { ` ${window.sha} ` }
+          <IconGitHub inline={true} />
+        </ExternalLink>
         { window.build_date ? ` ${text_maker("infobase_build_date", {build_date: window.build_date})}` : '' }
       </span>
     );

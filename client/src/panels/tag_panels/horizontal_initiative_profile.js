@@ -45,8 +45,8 @@ export const declare_horizontal_initiative_profile_panel = () => declare_panel({
           ["hi_start_year", hi_lookups.start_year],
           ["hi_end_year", hi_lookups.end_year],
           ["hi_total_allocated_amount", hi_lookups.total_allocated_amount && formats.compact_raw(hi_lookups.total_allocated_amount, {precision: 2})],
-          ["hi_website", hi_lookups.website_url && <ExternalLink href={hi_lookups.website_url} display={hi_lookups.website_url}/>],
-          ["hi_dr_link", hi_lookups.dr_url && <ExternalLink href={hi_lookups.dr_url} display={hi_lookups.dr_url}/>],
+          ["hi_website", hi_lookups.website_url && <ExternalLink href={hi_lookups.website_url}>{hi_lookups.website_url}</ExternalLink>],
+          ["hi_dr_link", hi_lookups.dr_url && <ExternalLink href={hi_lookups.dr_url}>{hi_lookups.dr_url}</ExternalLink>],
         ]
       )
         .map( ([label_key, item]) => [text_maker(label_key), item] )
