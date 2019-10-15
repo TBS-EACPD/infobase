@@ -121,7 +121,7 @@ const type_by_data_type = {
   percent_range: "result_percentage",
 };
 
-const indicator_target_text = (indicator) => { // TOOD: show previous?
+const indicator_target_text = (indicator) => {
   const {
     target_type,
     target_min, 
