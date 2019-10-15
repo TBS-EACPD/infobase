@@ -2,7 +2,7 @@ export { FirstChild, AccordionEnterExit, StatelessPullDownAccordion, AutoAccordi
 export { HeightClipper } from './HeightClipper.js';
 export { RadioButtons } from './RadioButtons.js';
 export { Select } from './Select.js';
-export { SortIndicators } from './SortIndicators.js';
+export { SortDirections } from './SortDirection.js';
 export { TabbedControls, TabbedContent } from './TabbedContent.js';
 export { LabeledBox } from './LabeledBox.js';
 export { TextMaker, TM } from './TextMaker.js';
