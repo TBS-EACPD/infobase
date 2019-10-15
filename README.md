@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=svg)](https://circleci.com/gh/TBS-EACPD/infobase)
+[![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=shield](https://circleci.com/gh/TBS-EACPD/infobase)
 
 *(Le Français suit)*
 
