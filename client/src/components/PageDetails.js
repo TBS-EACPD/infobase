@@ -12,13 +12,19 @@ import { Fragment } from 'react';
 
 const text_maker = create_text_maker(text);
 
+const github_link = `https://github.com/TBS-EACPD/infobase/${
+  window.previous_sha ?
+    `compare/${window.previous_sha}...${window.sha}` :
+    `commit/${window.sha}`
+}`;
+
 class VersionNumber extends React.Component {
   render(){
     return (
       <span>
         { text_maker("infobase_version_number") }
         <ExternalLink
-          href={`https://github.com/TBS-EACPD/infobase/commit/${window.sha}`}
+          href={github_link}
           display={
             <Fragment>
               { ` ${window.sha} ` }

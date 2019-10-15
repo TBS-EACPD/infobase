@@ -8,6 +8,7 @@ const CDN_URL = process.env.CDN_URL || ".";
 const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
 const IS_PROD_RELEASE = process.env.IS_PROD_RELEASE || false;
 const CI_AND_MASTER = process.env.CIRCLE_BRANCH === "master";
+const PREVIOUS_DEPLOY_SHA = process.env.PREVIOUS_DEPLOY_SHA || false;
 
 const get_rules = ({
   should_use_babel,
@@ -118,6 +119,7 @@ function get_plugins({
     new webpack.DefinePlugin({
       CDN_URL: JSON.stringify(CDN_URL),
       SHA: JSON.stringify(commit_sha),
+      PREVIOUS_DEPLOY_SHA: JSON.stringify(PREVIOUS_DEPLOY_SHA || commit_sha),
       BUILD_DATE: JSON.stringify( new Date().toLocaleString("en-CA", {timeZone: "America/Toronto"}).replace(/,.+/, '') ),
       APPLICATION_LANGUAGE: JSON.stringify(language),
       IS_A11Y_MODE: !!a11y_client,
