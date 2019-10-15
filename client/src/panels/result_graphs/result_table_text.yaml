@@ -12,7 +12,7 @@ result_flat_table_title:
   en: |
     {{pa_last_year}} Actual Results by Indicator
   fr: |
-    TODO TODO
+    {{pa_last_year}} résultats réels par indicateur
 
 result_flat_table_text:
   transform: [handlebars,markdown]
