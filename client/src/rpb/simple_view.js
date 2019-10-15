@@ -8,10 +8,8 @@ import {
 import { 
   Select, 
   Format, 
-  SortIndicators, 
   LabeledBox,
   AlertBanner,
-  Sorters, 
   SortDirections, 
 } from '../components/index.js';
 import { Details } from '../components/Details.js';
