@@ -29,7 +29,7 @@
     "classnames": "^2.2.6",
     "clipboard-polyfill": "^2.8.1",
     "connected-react-router": "^6.5.0",
-    "core-js": "^2.5.7",
+    "core-js": "^3",
     "css-loader": "^2.1.1",
     "d3-array": "^1.2.4",
     "d3-axis": "^1.0.12",
