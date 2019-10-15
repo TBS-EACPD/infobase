@@ -1,8 +1,14 @@
 import './PageDetails.scss';
 import text from './PageDetails.yaml';
+
 import { Details } from './Details.js';
+import { ExternalLink } from './misc_util_components.js';
+
 import { create_text_maker } from '../models/text.js';
+import { IconGitHub } from '../icons/icons.js';
 import { EmailFrontend } from './EmailFrontend.js';
+
+import { Fragment } from 'react';
 
 const text_maker = create_text_maker(text);
 
@@ -10,15 +16,17 @@ class VersionNumber extends React.Component {
   render(){
     return (
       <span>
-        {
-          `${
-            text_maker("infobase_version_number")
-          } ${
-            window.sha
-          } ${
-            window.build_date && text_maker("infobase_build_date", {build_date: window.build_date}) || ''
-          }`
-        }
+        { text_maker("infobase_version_number") }
+        <ExternalLink
+          href={`https://github.com/TBS-EACPD/infobase/commit/${window.sha}`}
+          display={
+            <Fragment>
+              { ` ${window.sha} ` }
+              <IconGitHub inline={true} />
+            </Fragment>
+          }
+        />
+        { window.build_date ? ` ${text_maker("infobase_build_date", {build_date: window.build_date})}` : '' }
       </span>
     );
   }
