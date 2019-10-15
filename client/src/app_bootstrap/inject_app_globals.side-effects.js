@@ -9,6 +9,9 @@ if(typeof SHA !== "undefined"){
   window.long_sha = SHA;
   window.sha = SHA.substr(0,7);
 }
+if(typeof PREVIOUS_DEPLOY_SHA !== "undefined"){
+  window.previous_sha = PREVIOUS_DEPLOY_SHA.substr(0,7);
+}
 if(typeof BUILD_DATE !== "undefined"){
   window.build_date = BUILD_DATE;
 }
