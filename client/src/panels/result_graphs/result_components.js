@@ -122,26 +122,6 @@ const SingleIndicatorDisplay = ({indicator}) => {
             is_actual={false}
             is_drr17={indicator.doc === "drr17"}
           />
-          {/* { indicator.doc === "drr17" ?
-            <Drr17IndicatorResultDisplay
-              data_type={indicator.target_type}
-              min={indicator.target_min}
-              max={indicator.target_max}
-              narrative={indicator.target_narrative}
-              measure={indicator.measure}
-            /> :
-            <IndicatorResultDisplay
-              doc={indicator.doc}
-
-              data_type={indicator.target_type}
-              min={indicator.target_min}
-              max={indicator.target_max}
-              narrative={indicator.target_narrative}
-              measure={indicator.measure}
-
-              is_new={!has_previous_year_target}
-            />
-          } */}
         </dd>
         { is_drr && indicator.actual_result &&
           <Fragment>
