@@ -65,7 +65,7 @@ const subject_link = (subject) => {
     return (
       <span>
         {subject.data.name}
-        {" (a "}
+        {` (${text_maker("a_masc")} `}
         <span
           className="nowrap glossary-tooltip-link"
           tabIndex={0}
