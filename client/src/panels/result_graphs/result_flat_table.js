@@ -168,10 +168,7 @@ class ResultsTable extends React.Component {
       );
     } else {
       const flat_indicators = get_indicators(subject, drr_doc);
-      const icon_counts = _.zipObject(ordered_status_keys,
-        _.map(ordered_status_keys,
-          key => _.reduce(flat_indicators, (sum,ind) => sum + (ind.indicator.status_key === key) || 0, 0)
-        ));
+      const icon_counts = _.countBy(flat_indicators, ({indicator}) => indicator.status_key);
       const filtered_indicators = _.filter(flat_indicators, ind => _.isEmpty(status_active_list) || _.includes(status_active_list,ind.indicator.status_key));
       const toggle_status_status_key = (status_key) => this.setState({status_active_list: _.toggle_list(status_active_list, status_key)});
       const clear_status_filter = () => this.setState({status_active_list: []});
