@@ -24,8 +24,9 @@ result_flat_table_text:
   fr: |
     En **{{pa_last_year}}**, {{subj_name subject}} a mesuré **{{fmt_big_int_real drr17_total}}** {{gl_tt "indicateurs" "IND_RESULT"}}.
 
-    Vous pouvez filtrer le tableau d'indicateurs par cliquez sur les états des resultats ci-dessous (vous pouvez selectionnez plusieurs états). 
-    Pour trouver tous les données sur un indicateur (tel que explications), cherchez-le dans le tableau "Résultats Détaillés" sur cette page.
+    Vous pouvez filtrer les données en sélectionnant l'état du résultat à analyser (plusieurs états peuvent être sélectionnés).
+    Pour trouver les données sur un indicateur (tel que  les explications), faites une recherche dans le tableau « Résultats détaillés » sur cette page.
+
 
 of:
   en: of
