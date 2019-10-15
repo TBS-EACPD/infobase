@@ -178,15 +178,15 @@ class ResultsTable extends React.Component {
           <div className="medium_panel_text">
             <TM k="result_flat_table_text" args={{subject, ...subject_result_counts}}/>
           </div>
-          <HeightClippedGraph clipHeight={700}>
-            <div style={{padding: '10px 10px'}}>
-              <StatusIconTable 
-                active_list={status_active_list}
-                icon_counts={icon_counts} 
-                onIconClick={toggle_status_status_key}
-                onClearClick={clear_status_filter}
-              />
-            </div>
+          <div style={{padding: '10px 10px'}}>
+            <StatusIconTable 
+              active_list={status_active_list}
+              icon_counts={icon_counts} 
+              onIconClick={toggle_status_status_key}
+              onClearClick={clear_status_filter}
+            />
+          </div>
+          <HeightClippedGraph clipHeight={200}>
             <div className="results-flat-table">
               {indicator_table_from_list(filtered_indicators, !subject.is_first_wave && drr_doc === 'drr17')}
             </div>
