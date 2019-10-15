@@ -45,8 +45,7 @@ export class DisplayTable extends React.Component {
     } = this.state;
   
 
-    // TODO: implement filtering
-    const sorted_filtered_data = _.chain(data)
+    const sorted_data = _.chain(data)
       .sortBy(row => _.has(row["sort_keys"],sort_by) ? row["sort_keys"][sort_by] : row["label"]) // for status the sort_key could be 0
       .tap(descending ? _.noop : _.reverse)
       .value();
@@ -111,7 +110,7 @@ export class DisplayTable extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {_.map(sorted_filtered_data, ({ label, col_data }, i) => 
+              {_.map(sorted_data, ({ label, col_data }, i) => 
                 <tr key={i}>
                   <th 
                     scope={
