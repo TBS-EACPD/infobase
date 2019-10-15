@@ -1,6 +1,6 @@
-*(Le Français suit)*
-
 [![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=svg)](https://circleci.com/gh/TBS-EACPD/infobase)
+
+*(Le Français suit)*
 
 # InfoBase Mono-Repo
 

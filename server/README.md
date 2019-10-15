@@ -1,36 +1,35 @@
+[![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=svg)](https://circleci.com/gh/TBS-EACPD/infobase)
+
 *(le Français suit)*
 
 InfoBase API
 ========
 
-[![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=svg)](https://circleci.com/gh/TBS-EACPD/infobase)
-
 GraphQL API for InfoBase data.
 
 ## Table of Contents
-- [InfoBase API](#InfoBase-API)
-  - [Table of Contents](#Table-of-Contents)
-  - [Getting started](#Getting-started)
-    - [Running the API server locally](#Running-the-API-server-locally)
-  - [Tests](#Tests)
-    - [Snapshot tests](#Snapshot-tests)
-  - [File structure](#File-structure)
+- [InfoBase API](#infobase-api)
+  - [Getting started](#getting-started)
+    - [Running the API server locally](#running-the-api-server-locally)
+  - [Tests](#tests)
+    - [Snapshot tests](#snapshot-tests)
+  - [File structure](#file-structure)
     - [models/](#models)
-  - [Cloud stuff](#Cloud-stuff)
-    - [Mongodb Atlas](#Mongodb-Atlas)
-    - [Google Cloud Function](#Google-Cloud-Function)
+  - [Cloud stuff](#cloud-stuff)
+    - [Mongodb Atlas](#mongodb-atlas)
+    - [Google Cloud Function](#google-cloud-function)
 
 
 ## Getting started
 
 ### Running the API server locally
-0. Install node ^9.0.0, npm ^5.7.1, and mongo
-1. run `mongod` in the background/a spare shell
-2. open a shell in `/server`
-3. `npm ci` to load the required node_modules
-4. `npm run populate_db` to populate a local mongo database (named `infobase`). Can be left running to watch for changes in `../data`
-5. `npm start` to start the express/GraphQL server listening on `localhost:1337`. Watches for changes in `src`
-6. Optional: visit `http://localhost:1337` for a GraphiQL instance, test some queries
+1. Install node ^9.0.0, npm ^5.7.1, and mongo
+2. run `mongod` in the background/a spare shell
+3. open a shell in `/server`
+4. `npm ci` to load the required node_modules
+5. `npm run populate_db` to populate a local mongo database (named `infobase`). Can be left running to watch for changes in `../data`
+6. `npm start` to start the express/GraphQL server listening on `localhost:1337`. Watches for changes in `src`
+7. Optional: visit `http://localhost:1337` for a GraphiQL instance, test some queries
 
 ## Tests
 
@@ -63,17 +62,14 @@ The production environment for the express/GraphQL server is a Google Cloud Func
 L'interface de programmation d'applications (API) de l'InfoBase
 ========
 
-[![CircleCI](https://circleci.com/gh/TBS-EACPD/InfoBase.svg?style=svg&circle-token=a99b6b8309e5edd904b0386c4a92c10bf5f43e29)](https://circleci.com/gh/TBS-EACPD/InfoBase)
-
 Une interface de programmation d'applications GraphQL pour les données de l'InfoBase.
 
 ## Table des matières
-- [l'interface de programmation d'applications (API) de l'InfoBase](#linterface-de-programmation-dapplications-api-de-linfobase)
-  - [Table des matières](#table-des-matières)
+- [L'interface de programmation d'applications (API) de l'InfoBase](#linterface-de-programmation-dapplications-api-de-linfobase)
   - [Commencer](#commencer)
     - [Lancer le serveur de l'API](#lancer-le-serveur-de-lapi)
   - [Tests](#tests-1)
-    - [Tests «Snapshot»](#tests--snapshot-)
+    - [Tests « Snapshot »](#tests-%c2%ab-snapshot-%c2%bb)
   - [Structure des fichiers](#structure-des-fichiers)
     - [fichier models/](#fichier-models)
   - [Outils infonuagiques](#outils-infonuagiques)
@@ -84,13 +80,13 @@ Une interface de programmation d'applications GraphQL pour les données de l'Inf
 
 ### Lancer le serveur de l'API
 
-0. Installez node ^9.0.0, npm ^5.7.1, et mongo
-1. Lancez `mongod` avec un commande d'exécution supplémentaire ou en arrière-plan
-2. Lancez un commande d'exécution à le fichier `/server`
-3. `npm ci` pour installer les node_modules nécessitées
-4. `npm run populate_db` pour peupler une base de données mongo (au nom `infobase`). Peut être laissé regardant aux changements dans le fichier `../data`
-5. `npm start` pour lancer le serveur express/GraphQL qui entend à `localhost:1337`. Ce processus détecte les changements au fichier `src`
-6. Facultatif: visitez `http://localhost:1337`, où se trouve une instance GraphiQL, pour tester quelques requêtes
+1. Installez node ^9.0.0, npm ^5.7.1, et mongo
+2. Lancez `mongod` avec un commande d'exécution supplémentaire ou en arrière-plan
+3. Lancez un commande d'exécution à le fichier `/server`
+4. `npm ci` pour installer les node_modules nécessitées
+5. `npm run populate_db` pour peupler une base de données mongo (au nom `infobase`). Peut être laissé regardant aux changements dans le fichier `../data`
+6. `npm start` pour lancer le serveur express/GraphQL qui entend à `localhost:1337`. Ce processus détecte les changements au fichier `src`
+7. Facultatif: visitez `http://localhost:1337`, où se trouve une instance GraphiQL, pour tester quelques requêtes
 
 ## Tests
 

@@ -1,25 +1,23 @@
+[![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=svg)](https://circleci.com/gh/TBS-EACPD/infobase)
+
 *(le Français suit)*
 
 GC InfoBase
 ========
-
-[![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=svg)](https://circleci.com/gh/TBS-EACPD/infobase)
 
 Client-side code and content for the GC InfoBase. / Code et contenu pour le côté client de l'InfoBase du GC.
 
 *(Le Français suit)*
 
 ## Table of Contents
-- [GC InfoBase](#GC-InfoBase)
-  - [Table of Contents](#Table-of-Contents)
-  - [Getting Started](#Getting-Started)
-    - [First time setup](#First-time-setup)
-    - [Building the InfoBase](#Building-the-InfoBase)
-    - [Visiting a local build](#Visiting-a-local-build)
-  - [Tests](#Tests)
-    - [Browser tests](#Browser-tests)
-      - [Route load tests](#Route-load-tests)
-
+- [GC InfoBase](#gc-infobase)
+  - [Getting Started](#getting-started)
+    - [First time setup](#first-time-setup)
+    - [Building the InfoBase](#building-the-infobase)
+    - [Visiting a local build](#visiting-a-local-build)
+  - [Tests](#tests)
+    - [Browser tests](#browser-tests)
+      - [Route load tests](#route-load-tests)
 
 ## Getting Started
 
@@ -64,15 +62,14 @@ InfoBase du GC
 
 ## Table des matières 
 
-- [InfoBase du GC](#InfoBase-du-GC)
-  - [Table des matières](#Table-des-matières)
-  - [Commencer](#Commencer)
-    - [Première installation](#Première-installation)
-    - [Lancez la compilation de l'InfoBase](#Lancez-la-compilation-de-lInfoBase)
-    - [Visitez une copie locale](#Visitez-une-copie-locale)
-  - [Tests](#Tests-1)
-    - [Tests de navigateur](#Tests-de-navigateur)
-      - [Tests de chargement](#Tests-de-chargement)
+- [InfoBase du GC](#infobase-du-gc)
+  - [Commencer](#commencer)
+    - [Première installation](#premi%c3%a8re-installation)
+    - [Lancez la compilation de l'InfoBase](#lancez-la-compilation-de-linfobase)
+    - [Visitez une copie locale](#visitez-une-copie-locale)
+  - [Tests](#tests-1)
+    - [Tests de navigateur](#tests-de-navigateur)
+      - [Tests de chargement](#tests-de-chargement)
 
 ## Commencer
 
