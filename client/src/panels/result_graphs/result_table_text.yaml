@@ -30,3 +30,7 @@ result_flat_table_text:
 of:
   en: of
   fr: de
+
+a_masc:
+  en: a
+  fr: un
