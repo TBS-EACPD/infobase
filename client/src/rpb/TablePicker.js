@@ -12,7 +12,7 @@ import {
   concept_filter,
 } from './table_picker_concept_filter.js';
 import { TextMaker } from './rpb_text_provider.js';
-import { get_static_url } from '../request_utils.js';
+import { IconQuestion } from '../icons/icons.js';
 
 
 function toggleArrayElement(arr,el){
@@ -236,17 +236,20 @@ class TaggedItemCloud extends React.Component {
         .value()]));
     
     const generate_glossary_tooltip = (concept_id, container) => (
-      <div className="tag-glossary-item">
-        <img className="tag-glossary-icon"
-          width={18}
-          aria-hidden="true"
-          src={get_static_url('svg/not-available-white.svg')} 
-          tabIndex="0"
-          data-toggle="tooltip"
-          data-ibtt-glossary-key={concept_id}
-          data-ibtt-html="true"
-          data-ibtt-arrowselector="TablePicker__tooltip-arrow"
-          data-ibtt-innerselector="TablePicker__tooltip-inner"
+      <div
+        className="tag-glossary-item"
+        aria-hidden="true"
+        tabIndex="0"
+        data-toggle="tooltip"
+        data-ibtt-glossary-key={concept_id}
+        data-ibtt-html="true"
+        data-ibtt-arrowselector="TablePicker__tooltip-arrow"
+        data-ibtt-innerselector="TablePicker__tooltip-inner"
+      >
+        <IconQuestion
+          color={window.infobase_color_constants.backgroundColor}
+          alternate_color={window.infobase_color_constants.primaryColor}
+          vertical_align={"-0.6em"}
         />
       </div>
     );
