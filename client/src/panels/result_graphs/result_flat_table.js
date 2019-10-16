@@ -4,6 +4,7 @@ import {
   util_components, 
   Panel,
   HeightClippedGraph,
+  breakpoints,
 } from '../shared.js';
 import { infograph_href_template } from '../../link_utils.js';
 import { DisplayTable } from '../../components/DisplayTable.js';
@@ -17,6 +18,7 @@ import {
 } from './results_common.js';
 import {
   StatusIconTable,
+  status_icons,
   large_status_icons,
 } from './result_components.js';
 import { create_full_results_hierarchy } from '../../gen_expl/result_hierarchies.js';
@@ -116,7 +118,7 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
       date_to_achieve: ind.indicator.target_date,
       status: <Fragment>
         <span aria-hidden="true" className="copyable-hidden">{result_statuses[ind.indicator.status_key].text}</span>
-        {large_status_icons[ind.indicator.status_key]}
+        {window.innerWidth < breakpoints.mediumDevice ? status_icons[ind.indicator.status_key] : large_status_icons[ind.indicator.status_key]}
       </Fragment>,
     },
     sort_keys: {
