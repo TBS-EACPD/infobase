@@ -11,9 +11,6 @@ indicator:
   en: Indicator
   fr: Indicateur
 
-new_indicator:
-  en: New indicator
-  fr: Nouvel indicateur
 
 indicators:
   en: Indicators
