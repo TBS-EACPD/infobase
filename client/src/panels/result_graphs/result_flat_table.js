@@ -41,7 +41,7 @@ const {
 
 const get_actual_parent = (indicator_node, full_results_hierarchy) => {
   const parent = _.find(full_results_hierarchy, {id: indicator_node.parent_id});
-  if(parent.data.type === "cr" || parent.data.type === "program" || parent.data.type === "sub_program" || parent.data.type === "sub_sub_program") {
+  if(_.includes(["cr", "program", "sub_program", "sub_sub_program"], parent.data.type)) {
     return parent;
   } else if(parent.data.type === "dr" || parent.data.type === "result"){
     return get_actual_parent(parent, full_results_hierarchy);
