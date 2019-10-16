@@ -46,7 +46,7 @@ export class DisplayTable extends React.Component {
   
 
     const sorted_data = _.chain(data)
-      .sortBy(row => _.has(row["sort_keys"],sort_by) ? row["sort_keys"][sort_by] : row["label"]) // for status the sort_key could be 0
+      .sortBy(row => _.has(row["sort_keys"],sort_by) ? row["sort_keys"][sort_by] : row["label"]) // careful with sorting, sort keys could be zero/falsey
       .tap(descending ? _.noop : _.reverse)
       .value();
 
