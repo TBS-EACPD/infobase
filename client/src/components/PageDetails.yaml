@@ -8,6 +8,10 @@ infobase_version_number:
   fr: |
     Numéro de version:
 
+infobase_release_link_title:
+  en: Change log for current release
+  fr: TODO
+
 infobase_build_date:
   transform: [handlebars]
   en: (built {{build_date}})
