@@ -115,8 +115,8 @@ const row_to_drr_status_counts = ({
 const type_by_data_type = {
   num: "result_num",
   num_range: "result_num",
-  dollar: "dollar",
-  dollar_range: "dollar",
+  dollar: "dollar_raw",
+  dollar_range: "dollar_raw",
   percent: "result_percentage",
   percent_range: "result_percentage",
 };
