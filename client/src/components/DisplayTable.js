@@ -51,89 +51,79 @@ export class DisplayTable extends React.Component {
       .value();
 
     return (
-      <div>
-        <div 
-          style={{
-            padding: '10px 10px',
-            marginTop: "20px",
-            marginBottom: "20px",
-          }}
-        >
-        </div>
-        <div style={{overflowX: "auto"}}>
-          <table className="table display-table no-total-row">
-            <caption className="sr-only">
-              <div>
-                { 
-                  !_.isEmpty(table_name) ? 
-                  table_name : 
-                  <TM k="a11y_table_title_default" />
-                }
-              </div>
-            </caption>
-            <thead>
-              <tr className="table-header">
+      <div style={{overflowX: "auto", marginTop: "20px", marginBottom: "20px"}}>
+        <table className="table display-table no-total-row">
+          <caption className="sr-only">
+            <div>
+              { 
+                !_.isEmpty(table_name) ? 
+                table_name : 
+                <TM k="a11y_table_title_default" />
+              }
+            </div>
+          </caption>
+          <thead>
+            <tr className="table-header">
+              <th 
+                className="center-text"
+                onClick={ () => this.header_click("label") }
+              >
+                {label_col_header || ""}
+                <SortDirections 
+                  asc={!descending && sort_by === "label"} 
+                  desc={descending && sort_by === "label"}
+                />
+              </th>
+              {
+                _.map(column_keys, (tick, i) => {
+                  return (
+                    _.includes(sort_keys,tick) ?
+                      <th 
+                        key={i} 
+                        className={classNames("center-text", "display-table__sortable")}
+                        onClick={ () => _.includes(sort_keys,tick) && this.header_click(tick) }
+                      >
+                        {table_data_headers[i]}
+                        <SortDirections 
+                          asc={!descending && sort_by === tick} 
+                          desc={descending && sort_by === tick}
+                        />
+                      </th> :
+                      <th 
+                        key={i} 
+                        className={"center-text"}
+                      >
+                        {table_data_headers[i]}
+                      </th>
+                  );
+                })
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {_.map(sorted_data, ({ label, col_data }, i) => 
+              <tr key={i}>
                 <th 
-                  className="center-text"
-                  onClick={ () => this.header_click("label") }
+                  scope={
+                    !label_col_header ?
+                    "row" :
+                    null
+                  }
                 >
-                  {label_col_header || ""}
-                  <SortDirections 
-                    asc={!descending && sort_by === "label"} 
-                    desc={descending && sort_by === "label"}
-                  />
-                </th>
-                {
-                  _.map(column_keys, (tick, i) => {
-                    return (
-                      _.includes(sort_keys,tick) ?
-                        <th 
-                          key={i} 
-                          className={classNames("center-text", "display-table__sortable")}
-                          onClick={ () => _.includes(sort_keys,tick) && this.header_click(tick) }
-                        >
-                          {table_data_headers[i]}
-                          <SortDirections 
-                            asc={!descending && sort_by === tick} 
-                            desc={descending && sort_by === tick}
-                          />
-                        </th> :
-                        <th 
-                          key={i} 
-                          className={"center-text"}
-                        >
-                          {table_data_headers[i]}
-                        </th>
-                    );
-                  })
-                }
+                  { label }
+                </th> 
+                {_.map(
+                  column_keys, 
+                  col => (
+                    <td key={col}>
+                      {col_data[col]}
+                    </td>
+                  )
+                )}
               </tr>
-            </thead>
-            <tbody>
-              {_.map(sorted_data, ({ label, col_data }, i) => 
-                <tr key={i}>
-                  <th 
-                    scope={
-                      !label_col_header ?
-                      "row" :
-                      null
-                    }
-                  >
-                    { label }
-                  </th> 
-                  {_.map(
-                    column_keys, 
-                    col => (
-                      <td key={col}>
-                        {col_data[col]}
-                      </td>
-                    )
-                  )}
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+            )}
+          </tbody>
+        </table>
       </div>
     );
   }
