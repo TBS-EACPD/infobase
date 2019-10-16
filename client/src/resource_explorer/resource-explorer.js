@@ -37,6 +37,7 @@ import {
 } from '../gen_expl/state_and_memoizing';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { Explorer } from '../components/ExplorerComponents.js';
+import { IconQuestion } from '../icons/icons';
 
 const INCLUDE_OTHER_TAGS = true;
 const { text_maker, TM } = create_text_maker_component(explorer_text);
@@ -48,15 +49,20 @@ const dp_only_schemes = ["MLT"];
 const get_image_glossary_tooltip = (id) => {
   const glossary_link = glossary_href(id);
 
-  const img = <img
-    style={{marginLeft: "10px", width: "24px"}}
+  const img = <span
+    style={{marginLeft: "10px"}}
     aria-hidden="true"
-    src={get_static_url('svg/not-available.svg')} 
     tabIndex="0"
     data-toggle="tooltip"
     data-ibtt-glossary-key={id}
     data-ibtt-html="true"
-  />;
+  >
+    <IconQuestion
+      inline={true}
+      color={window.infobase_color_constants.tertiaryColor}
+      alternate_color={window.infobase_color_constants.primaryColor}
+    />
+  </span>;
 
   return glossary_link && (
     window.feature_detection.is_mobile() ? 
