@@ -142,13 +142,13 @@ class ResultsTable extends React.Component {
   componentDidMount(){
     const { 
       subject,
-      docs_with_data,
+      last_drr_doc,
     } = this.props;
 
     ensure_loaded({
       subject,
       results: true,
-      result_docs: docs_with_data,
+      result_docs: [last_drr_doc],
     })
       .then( () => this.setState({loading: false}) );
   }
@@ -156,7 +156,7 @@ class ResultsTable extends React.Component {
     const { 
       subject,
       subject_result_counts,
-      drr_doc,
+      last_drr_doc,
     } = this.props;
     const { loading, status_active_list } = this.state;
     
@@ -167,7 +167,7 @@ class ResultsTable extends React.Component {
         </div>
       );
     } else {
-      const flat_indicators = get_indicators(subject, drr_doc);
+      const flat_indicators = get_indicators(subject, last_drr_doc);
       const icon_counts = _.countBy(flat_indicators, ({indicator}) => indicator.status_key);
       const filtered_indicators = _.filter(flat_indicators, ind => _.isEmpty(status_active_list) || _.includes(status_active_list,ind.indicator.status_key));
       const toggle_status_status_key = (status_key) => this.setState({status_active_list: _.toggle_list(status_active_list, status_key)});
@@ -188,7 +188,7 @@ class ResultsTable extends React.Component {
           </div>
           <HeightClippedGraph clipHeight={200}>
             <div className="results-flat-table">
-              {indicator_table_from_list(filtered_indicators, !subject.is_first_wave && drr_doc === 'drr17')}
+              {indicator_table_from_list(filtered_indicators, !subject.is_first_wave && last_drr_doc === 'drr17')}
             </div>
           </HeightClippedGraph>
         </div>
@@ -227,8 +227,7 @@ export const declare_results_table_panel = () => declare_panel({
         .filter( had_doc_data )
         .value();
 
-      const drr_doc = _.chain(docs_with_data)
-        .filter(doc => /drr/.test(doc))
+      const last_drr_doc = _.chain(docs_with_data)
         .sort()
         .last()
         .value(); // DRR_TODO: make sure this works properly for drr18
@@ -237,7 +236,7 @@ export const declare_results_table_panel = () => declare_panel({
         return false;
       }
 
-      return { docs_with_data, subject_result_counts, drr_doc };
+      return { docs_with_data, subject_result_counts, last_drr_doc };
     },
 
     render({calculations, sources}){
@@ -245,7 +244,7 @@ export const declare_results_table_panel = () => declare_panel({
         subject, 
         graph_args: {
           docs_with_data,
-          drr_doc,
+          last_drr_doc,
           subject_result_counts,
         },
       } = calculations;
@@ -256,7 +255,7 @@ export const declare_results_table_panel = () => declare_panel({
             {...{
               subject,
               docs_with_data,
-              drr_doc,
+              last_drr_doc,
               subject_result_counts,
             }}
           />
