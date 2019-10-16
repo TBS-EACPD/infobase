@@ -136,19 +136,7 @@ const IndicatorResultDisplay = ({
     }
   };
 
-  const should_display_new_status = _.indexOf(dp_docs, doc) > 0 || _.indexOf(drr_docs, doc) > 0;
-  return (
-    <Fragment>
-      { get_display_case(data_type, min, max, narrative, measure) }
-      { should_display_new_status && is_new &&
-        <Fragment>
-          {" ("}
-          <TM k="new_indicator" el="strong" />
-          {")"}
-        </Fragment>
-      }
-    </Fragment>
-  );
+  return get_display_case(data_type, min, max, narrative, measure);
 };
 
 const Drr17IndicatorResultDisplay = ({
@@ -276,6 +264,7 @@ const SingleIndicatorDisplay = ({indicator}) => {
   const is_drr = /drr/.test(indicator.doc);
   const has_previous_year_target = !_.isNull(indicator.previous_year_target_type);
   const has_previous_year_result = false; // DRR_TODO: previous year results aren't in the API right now, but they probably will be for DRR18 (if not, clean this out)
+  const should_display_new_status = _.indexOf(dp_docs, indicator.doc) > 0 || _.indexOf(drr_docs, indicator.doc) > 0;
   return (
     <div className="indicator-item">
       <dl className="dl-horizontal indicator-item__dl">
@@ -296,7 +285,7 @@ const SingleIndicatorDisplay = ({indicator}) => {
         </dt>
         <dd>
           {indicator.name}
-          {!_.includes(["drr17", "dp18"],indicator.doc) && _.isNull(indicator.previous_year_target_type) && <NewBadge/>}
+          {should_display_new_status && _.isNull(indicator.previous_year_target_type) && <NewBadge/>}
         </dd>
 
         <dt>
