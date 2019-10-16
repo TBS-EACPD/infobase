@@ -21,6 +21,9 @@ $linkColor: #2b4380;
 $linkFocusColor: #0535d2;
 $linkVisitedColor: #7834bc;
 
+$highlightPaleColor: #ffa8a8;
+$highlightDarkColor: #B12320;
+
 
 /*media breakpoints, default to min-width queries whenever possible*/
 /*keep ../core/breakpoint_defs.js in sync with these*/
@@ -38,7 +41,7 @@ $maxLargeDevice: 1199px;
 /* dark and light colours don't have enough contrast between them for text, so don't use them that way! Use black text on light, or (check contrast) white text on dark*/
 $successLightColor: #cbedbd;
 $successDarkColor: #45a64d;
-$failLightColor: #ffa8a8;
+$failLightColor: $highlightPaleColor;
 $failDarkColor: $highlightColor;
 $warnLightColor: #ffecce;
 $warnDarkColor: #fdb84c;

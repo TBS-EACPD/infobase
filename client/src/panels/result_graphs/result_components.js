@@ -275,7 +275,7 @@ const IndicatorList = ({ indicators }) => (
 const SingleIndicatorDisplay = ({indicator}) => {
   const is_drr = /drr/.test(indicator.doc);
   const has_previous_year_target = !_.isNull(indicator.previous_year_target_type);
-  const has_previous_year_result = false; // previous year results aren't in the API right now, but they probably will be for DRR18 (if not, clean this out)
+  const has_previous_year_result = false; // DRR_TODO: previous year results aren't in the API right now, but they probably will be for DRR18 (if not, clean this out)
   return (
     <div className="indicator-item">
       <dl className="dl-horizontal indicator-item__dl">
@@ -296,6 +296,7 @@ const SingleIndicatorDisplay = ({indicator}) => {
         </dt>
         <dd>
           {indicator.name}
+          {!_.includes(["drr17", "dp18"],indicator.doc) && _.isNull(indicator.previous_year_target_type) && <NewBadge/>}
         </dd>
 
         <dt>
@@ -811,6 +812,14 @@ class HorizontalStatusTable extends React.Component {
   }
 }
 
+const NewBadge = () => {
+  return (
+    <span className="results-new-badge">
+      {text_maker("new")}
+    </span>
+  );
+}
+
 export {
   IndicatorDisplay,
   QuadrantDefList,
@@ -819,4 +828,5 @@ export {
   StatusIconTable,
   InlineStatusIconList,
   HorizontalStatusTable,
+  NewBadge,
 }; 
