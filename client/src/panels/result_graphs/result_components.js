@@ -803,7 +803,7 @@ class HorizontalStatusTable extends React.Component {
 
 const NewBadge = () => {
   return (
-    <span className="results-new-badge">
+    <span className="badge badge--is-new-indicator">
       {text_maker("new")}
     </span>
   );
