@@ -20,8 +20,8 @@ class VersionNumber extends React.Component {
   render(){
     return (
       <span>
-        { text_maker("infobase_version_number") }
-        <ExternalLink href={github_link} title={text_maker("infobase_release_link_title")}>
+        { text_maker("infobase_version") }
+        <ExternalLink href={github_link} title={text_maker("infobase_version_link_title")}>
           { ` ${window.sha} ` }
           <IconGitHub inline={true} />
         </ExternalLink>
