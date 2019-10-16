@@ -10,7 +10,7 @@ infobase_version:
 
 infobase_version_link_title:
   en: Change log for the current version
-  fr: TODO
+  fr: Journal des modifications pour la version actuelle
 
 infobase_build_date:
   transform: [handlebars]
