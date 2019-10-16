@@ -190,4 +190,14 @@ module.exports.route_load_tests_config = [
     route: "resource-explorer",
     test_on: ["eng", "basic-eng"],
   },
+  {
+    name: "Data Lab landing page",
+    route: "lab",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Indicator text comparison - TBS",
+    route: "diff/326",
+    test_on: ["eng", "basic-eng"],
+  },
 ];
