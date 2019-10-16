@@ -146,16 +146,9 @@ dl.indicator-item__dl dt+dd {
   margin: 0px;
 }
 
-.results-new-badge {
-  border-radius: 10px;
-  background-color: $highlightColor;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin-left: 5px;
-  vertical-align: 2px;
+.badge.badge--is-new-indicator {
   font-size: 9pt;
+  margin-left: 5px;
+  background-color: $highlightColor;
   color: $backgroundColor;
-  font-weight: 400;
 }
