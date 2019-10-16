@@ -191,7 +191,7 @@ module.exports.route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
-    name: "Data Lab landing page",
+    name: "InfoLab landing page",
     route: "lab",
     test_on: ["eng", "basic-eng"],
   },
