@@ -32,6 +32,9 @@ target_result:
   en: Actual result 
   fr: Résultat réel
 
+target_result_interim:
+  en: Actual result (interim)
+  fr: Résultat réel (provisoire)
 
 previous_year_target_result:
   en: Last year's actual result 
