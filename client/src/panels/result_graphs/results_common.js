@@ -13,7 +13,6 @@ import {
   get_result_doc_keys,
   current_drr_key,
 } from '../../models/results.js';
-import { compute_counts_from_set } from '../../models/result_counts.js';
 import { infograph_href_template } from '../../link_utils.js';
 const link_to_results_infograph = subj => infograph_href_template(subj, 'results');
 import { businessConstants } from '../../models/businessConstants';
@@ -300,8 +299,6 @@ export {
   ordered_status_keys,
   result_docs,
   get_result_doc_keys,
-
-  compute_counts_from_set,
 
   planned_resource_fragment,
   link_to_results_infograph,
