@@ -324,7 +324,7 @@ const SingleIndicatorDisplay = ({indicator}) => {
         { is_drr && indicator.actual_result &&
           <Fragment>
             <dt>
-              <TM k="target_result" />
+              {indicator.status_key === "future" ? <TM k="target_result_interim"/> : <TM k="target_result"/>}
             </dt>
             <dd>
               { indicator.doc === "drr17" ?
