@@ -807,7 +807,7 @@ const NewBadge = () => {
       {text_maker("new")}
     </span>
   );
-}
+};
 
 export {
   IndicatorDisplay,
