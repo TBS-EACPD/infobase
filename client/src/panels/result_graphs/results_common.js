@@ -288,6 +288,7 @@ const indicator_text_functions = {
   drr17_indicator_target_text,
 };
 
+
 export {
   Result,
   Indicator,

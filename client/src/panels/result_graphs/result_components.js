@@ -9,6 +9,7 @@ import {
   result_simple_statuses,
   indicator_text_functions,
   result_docs,
+  get_result_doc_keys,
 } from './results_common.js';
 import {
   IconCheck,
@@ -77,11 +78,15 @@ const IndicatorList = ({ indicators }) => (
   </ul>
 );
 
+
+
 const SingleIndicatorDisplay = ({indicator}) => {
   const is_drr = /drr/.test(indicator.doc);
   const could_have_previous_year_target = result_docs[indicator.doc].could_have_previous;
   const has_previous_year_target = !_.isNull(indicator.previous_year_target_type);
   const has_previous_year_result = false; // DRR_TODO: previous year results aren't in the API right now, but they probably will be for DRR18 (if not, clean this out)
+  const dp_docs = get_result_doc_keys('dp');
+  const drr_docs = get_result_doc_keys('drr');
   const should_display_new_status = _.indexOf(dp_docs, indicator.doc) > 0 || _.indexOf(drr_docs, indicator.doc) > 0;
   return (
     <div className="indicator-item">
