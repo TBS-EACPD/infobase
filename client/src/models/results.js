@@ -10,6 +10,7 @@ const { months } = businessConstants;
 // dependencies are tangled up too much here, disable it for the whole file
 /* eslint-disable no-use-before-define */
 
+// vv delete on drr17 exit
 const parent_indexed_sub_program_entities = {};
 const sub_program_entities_by_id = {};
 class SubProgramEntity {
@@ -151,15 +152,15 @@ class SubProgramEntity {
       .value();
   }
 }
-
+// ^^ delete on drr17 exit
 
 //currently only supports dept, crso, programs, subs and sub-subs
 function _get_flat_results(subject){
   switch(subject.level){
-    case 'sub_sub_program':
+    case 'sub_sub_program': // delete on drr17 exit
       return Result.get_entity_results(subject.id);
 
-    case 'sub_program':
+    case 'sub_program': // delete on drr17 exit
     case 'program':
       return _.chain( SubProgramEntity.sub_programs(subject.id) )
         .map( _get_flat_results )
@@ -268,7 +269,7 @@ class Result {
     const { subject_id } = this;
     let program = Program.lookup(subject_id);
     let crso = CRSO.lookup(subject_id);
-    let sub_prog = SubProgramEntity.lookup(subject_id);
+    let sub_prog = SubProgramEntity.lookup(subject_id); // delete on drr17 exit
 
     return program || crso || sub_prog;
   }
@@ -465,6 +466,7 @@ const GranularResultCounts = {
   },
 };
 
+
 const ordered_status_keys = ['met', 'not_met', 'not_available', 'future'];
 const status_key_to_glossary_key = {
   met: "RESULTS_MET",
@@ -472,6 +474,7 @@ const status_key_to_glossary_key = {
   not_available: "RESULTS_NOT_AVAILABLE",
   future: "RESULTS_ONGOING",
 };
+
 
 const result_docs = {
   drr17: {
@@ -508,6 +511,10 @@ const get_result_doc_keys = (doc) => _.chain(result_docs)
   })
   .value();
 
+const current_drr_key = _.chain( get_result_doc_keys('drr') ).sortBy().last().value();
+const current_dp_key = _.chain( get_result_doc_keys('dp') ).sortBy().last().value();
+
+
 export {
   Result,
   Indicator,
@@ -519,6 +526,8 @@ export {
   ordered_status_keys,
   result_docs,
   get_result_doc_keys,
+  current_drr_key,
+  current_dp_key,
 };
 
 Object.assign(window._DEV_HELPERS, {

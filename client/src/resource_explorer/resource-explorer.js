@@ -1,7 +1,9 @@
 import '../gen_expl/explorer-styles.scss';
+
 import explorer_text from './explorer.yaml';
 import { Fragment } from 'react';
 import classNames from 'classnames';
+
 import { 
   infograph_href_template,
   glossary_href,
@@ -9,6 +11,7 @@ import {
 import { StandardRouteContainer } from '../core/NavComponents';
 import { get_col_defs } from '../gen_expl/resource-explorer-common.js';
 import { Subject } from '../models/subject.js';
+import { current_drr_key, current_dp_key } from '../models/results.js';
 import { 
   create_text_maker_component,
   SpinnerWrapper,
@@ -304,8 +307,8 @@ class ExplorerPage extends React.Component {
               const route_base = window.location.href.split('#')[0];
 
               const new_route = {
-                drr17: `#resource-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/drr17`,
-                dp19: `#resource-explorer/${hierarchy_scheme}/dp19`,
+                [current_drr_key]: `#resource-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/${current_drr_key}`,
+                [current_dp_key]: `#resource-explorer/${hierarchy_scheme}/${current_dp_key}`,
               }[key];
 
               window.location.href = `${route_base}${new_route}`;
@@ -313,14 +316,14 @@ class ExplorerPage extends React.Component {
           }
           tab_options = {[
             {
-              key: "drr17", 
+              key: current_drr_key, 
               label: <TM k="DRR_resources" />,
-              is_open: doc === "drr17",
+              is_open: doc === current_drr_key,
             },
             {
-              key: "dp19", 
+              key: current_dp_key, 
               label: <TM k="DP_resources" />,
-              is_open: doc === "dp19",
+              is_open: doc === current_dp_key,
             },
           ]}
         />
@@ -477,15 +480,17 @@ export default class ResourceExplorer extends React.Component {
     );
 
     doc = (
-      _.includes(['drr17','dp19'], doc) ? 
+      _.includes([current_drr_key, current_drr_key], doc) ? 
         doc :
-        'dp19'
+        current_dp_key
     );
 
+    // vv delete on drr17 exit, GIVEN that the new DRR is fully tagged, which is should be
     //additional validation
     if(doc == "drr17" && !_.includes(['min','dept','GOCO','HWH'], hierarchy_scheme) ){
       hierarchy_scheme = "min";
     }
+    // ^^ delete on drr17 exit
     
     return (
       <StandardRouteContainer {...route_container_args}>

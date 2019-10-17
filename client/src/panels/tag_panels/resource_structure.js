@@ -1,19 +1,24 @@
 import '../../gen_expl/explorer-styles.scss';
 import text from './resource_structure.yaml';
+
 import { combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
+import { Fragment } from 'react';
+import { Explorer } from '../../components/ExplorerComponents.js';
+
 import { infograph_href_template } from '../../link_utils.js';
 import { get_root } from '../../gen_expl/hierarchy_tools.js';
 import { get_col_defs } from '../../gen_expl/resource-explorer-common.js';
-import { Fragment } from 'react';
-import { Explorer } from '../../components/ExplorerComponents.js';
 
 import {
   declare_panel,
   Panel,
   create_text_maker_component,
   TabbedControls,
+  Results,
 } from "../shared";
+
+const { current_drr_key, current_dp_key } = Results;
 
 import { 
   create_rooted_resource_scheme,
@@ -134,13 +139,13 @@ class RootedResourceExplorer extends React.Component {
           tab_options={ _.compact([
             has_drr_data && {
               label: <TM k="DRR_resources" />,
-              key: "drr17", 
-              is_open: doc === "drr17",
+              key: current_drr_key, 
+              is_open: doc === current_drr_key,
             },
             has_dp_data && {
-              key: "dp19", 
+              key: current_dp_key, 
               label: <TM k="DP_resources" />,
-              is_open: doc === "dp19",
+              is_open: doc === current_dp_key,
             },
           ])}
         />
