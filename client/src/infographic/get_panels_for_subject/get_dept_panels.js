@@ -19,6 +19,7 @@ import { declare_results_table_panel } from '../../panels/result_graphs/index.js
 import { declare_tags_of_interest_panel } from '../../panels/intro_graphs/index.js';
 import { declare_drr_planned_actual_panel } from "../../panels/drr_dp_resources/drr_planned_actual.js";
 import { declare_dp_rev_split_panel } from "../../panels/drr_dp_resources/dp_rev_split.js";
+import { declare_drr_summary_panel } from '../../panels/result_graphs/index.js';
 
 // shared dept, program, tag
 import { declare_spend_rev_split_panel } from "../../panels/sobj/spend_rev_split.js";
@@ -29,9 +30,6 @@ import { declare_in_year_voted_stat_split_panel } from "../../panels/vote_stat/i
 //import { declare_in_year_estimates_split_panel } from "../../panels/vote_stat/in_year_estimates_split.js";
 import { declare_historical_g_and_c_panel } from "../../panels/transfer_payments/historical_g_and_c.js";
 import { declare_auth_exp_prog_spending_panel } from '../../panels/historical_auth_exp/auth_exp_prog_spending.js';
-
-// shared dept, program
-import { declare_drr_summary_panel } from '../../panels/result_graphs/index.js';
 
 // shared dept, tag
 import { declare_detailed_program_spending_split_panel } from "../../panels/detailed_program_spending_split/detailed_program_spending_split.js";
