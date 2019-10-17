@@ -476,13 +476,15 @@ const status_key_to_glossary_key = {
 };
 
 
-const result_docs = {
+const drr_docs = {
   drr17: {
     year: run_template('{{pa_last_year}}'),
     year_short: run_template('{{pa_last_year_short_second}}'),
     has_resources: true,
     could_have_previous: false,
   },
+};
+const dp_docs = {
   dp18: {
     year: run_template('{{planning_last_year_1}}'),
     year_short: run_template('{{planning_last_year_1_short_second}}'),
@@ -496,23 +498,30 @@ const result_docs = {
     could_have_previous: true,
   },
 };
+const result_docs = {
+  ...drr_docs,
+  ...dp_docs,
+};
 
-const get_result_doc_keys = (doc) => _.chain(result_docs)
-  .keys()
-  .filter( (doc_key) => {
-    switch(doc){
-      case 'dp':
-        return /dp/.test(doc_key);
+const get_result_doc_keys = (doc_type) => _.chain([drr_docs, dp_docs])
+  .map( (docs) => _.chain(docs)
+    .keys()
+    .sortBy()
+    .value()
+  )
+  .thru( ([drr_doc_keys, dp_doc_keys]) => {
+    switch(doc_type){
       case 'drr':
-        return /drr/.test(doc_key);
+        return drr_doc_keys;
+      case 'dp':
+        return dp_doc_keys;
       default:
-        return true;
+        return [...drr_doc_keys, ...dp_doc_keys];
     }
   })
   .value();
-
-const current_drr_key = _.chain( get_result_doc_keys('drr') ).sortBy().last().value();
-const current_dp_key = _.chain( get_result_doc_keys('dp') ).sortBy().last().value();
+const current_drr_key = _.last( get_result_doc_keys('drr') );
+const current_dp_key = _.last( get_result_doc_keys('dp') );
 
 
 export {
