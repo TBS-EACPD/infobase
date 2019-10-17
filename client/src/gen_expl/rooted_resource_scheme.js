@@ -3,6 +3,7 @@ import { shallowEqualObjectsOverKeys, sanitized_dangerous_inner_html } from '../
 import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './hierarchy_tools.js';
 import { get_resources_for_subject } from './resource_utils.js';
 import { provide_sort_func_selector } from './resource-explorer-common.js';
+import { current_drr_key, current_dp_key } from '../models/results';
 import { trivial_text_maker } from '../models/text.js';
 
 function create_rooted_resource_hierarchy({doc,root_subject}){
@@ -124,7 +125,7 @@ function create_rooted_resource_hierarchy({doc,root_subject}){
 const get_initial_resource_state = ({subject, has_drr_data, has_dp_data }) => ({
   sort_col: 'spending',
   is_descending: true,
-  doc: has_dp_data ? 'dp19' : 'drr17',
+  doc: has_dp_data ? current_dp_key : current_drr_key,
 });
 
 const partial_scheme = {

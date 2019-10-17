@@ -11,6 +11,7 @@ import {
   ordered_status_keys,
   result_docs,
   get_result_doc_keys,
+  current_drr_key,
 } from '../../models/results.js';
 import { compute_counts_from_set } from '../../models/result_counts.js';
 import { infograph_href_template } from '../../link_utils.js';
@@ -73,9 +74,9 @@ const get_planning_data_for_subject_from_table = (subject, type, doc) => {
   const table = pick_table(subject,type,doc);
 
   let col;
-  if(doc === "drr17"){
+  if(doc === current_drr_key){
     col = "{{pa_last_year}}";
-    if(type==="spending"){
+    if(type === "spending"){
       col = "{{pa_last_year}}exp";
     }
   } else {
