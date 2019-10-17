@@ -18,6 +18,7 @@ import { declare_results_table_panel } from '../../panels/result_graphs/index.js
 import { declare_tags_of_interest_panel } from '../../panels/intro_graphs/index.js';
 import { declare_drr_planned_actual_panel } from "../../panels/drr_dp_resources/drr_planned_actual.js";
 import { declare_dp_rev_split_panel } from "../../panels/drr_dp_resources/dp_rev_split.js";
+import { declare_drr_summary_panel } from '../../panels/result_graphs/index.js';
 
 // shared crso, program
 import { declare_profile_panel } from '../../panels/intro_graphs/index.js';
@@ -57,6 +58,7 @@ export const get_crso_panels = subject => ensure_loaded({
   results: !subject.is_internal_service && subject.has_data('results_data') && [
     declare_results_intro_panel(),
     declare_late_dps_warning_panel(),
+    declare_drr_summary_panel(),
     declare_results_table_panel(),
     declare_explore_results_panel(),
   ],

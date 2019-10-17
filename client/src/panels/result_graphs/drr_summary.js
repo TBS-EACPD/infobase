@@ -226,16 +226,33 @@ const render = ({calculations, footnotes, sources}) => {
 
 export const declare_drr_summary_panel = () => declare_panel({
   panel_key: "drr_summary",
-  levels: ["dept", "program"],
+  levels: ["dept", "crso", "program"],
   panel_config_func: (level, panel_key) => ({
     requires_result_counts: level === "dept",
-    require_granular_result_counts: level === "program",
+    require_granular_result_counts: level !== "dept",
     footnotes: ["RESULTS_COUNTS", "RESULTS"],
     source: (subject) => get_source_links(["DRR"]),
     calculate(subject){
-      const verbose_counts = level === "dept" ? 
-        ResultCounts.get_dept_counts(subject.id) : 
-        GranularResultCounts.get_subject_counts(subject.id);
+      const verbose_counts = (() => {
+        switch (level){
+          case 'dept':
+            return ResultCounts.get_dept_counts(subject.id);
+          case 'crso':
+            return _.chain([
+              subject.id, 
+              ..._.map(subject.programs, 'id'),
+            ])
+              .map( (id) => GranularResultCounts.get_subject_counts(id) )
+              .reduce(
+                (accumulator, counts) => _.mergeWith(accumulator, counts, _.add),
+                {}
+              )
+              .value();
+          case 'program':
+            return GranularResultCounts.get_subject_counts(subject.id);
+        }
+      })();
+
       const counts = row_to_drr_status_counts(verbose_counts);
     
       if(verbose_counts[`${latest_drr_doc_key}_total`] < 1){
