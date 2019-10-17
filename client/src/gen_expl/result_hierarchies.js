@@ -21,6 +21,7 @@ function result_to_node(result, parent_id, doc){
   };
 }
 
+// vv delete on drr17 exit
 const get_sub_program_resources = (sub_program, doc) => ({
   spending: (
     doc === "drr17" ?
@@ -33,6 +34,7 @@ const get_sub_program_resources = (sub_program, doc) => ({
       sub_program.fte_planning_year_1
   ),
 });
+// ^^ delete on drr17 exit
 
 
 export function create_full_results_hierarchy({subject_guid, doc, allow_no_result_branches}){
@@ -142,7 +144,8 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
       }
       case 'dept': {
 
-        if (!subject.is_first_wave && doc === 'drr17'){
+        // vv delete on drr17 exit
+        if (doc === 'drr17' && !subject.is_first_wave){
           // for PAA structures, the SO adds an annoying layer of drilling down for no reason
           return subject.programs.map(prog => ({
             id: prog.guid,
@@ -154,26 +157,22 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
               resources: get_resources(prog),
             }, 
           }));
+        }
+        // ^^ delete on drr17 exit
 
-        } else if ( (subject.is_first_wave && doc === 'drr17') || /dp/.test(doc) ){
-
-          return _.chain(subject.crsos)
-            .filter('is_cr')
-            .map(crso => ({
-              id: crso.guid,
-              isExpanded: false,
-              data: {
-                subject: crso,
-                type: 'cr',
-                name: crso.name,
-                resources: get_resources(crso),
-              }, 
-            }))
-            .value();
-
-        } 
-
-        break;
+        return _.chain(subject.crsos)
+          .filter('is_cr')
+          .map(crso => ({
+            id: crso.guid,
+            isExpanded: false,
+            data: {
+              subject: crso,
+              type: 'cr',
+              name: crso.name,
+              resources: get_resources(crso),
+            }, 
+          }))
+          .value();
       }
 
       case 'cr': {
@@ -195,8 +194,8 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
     
         return results.concat(programs);
 
-
       }
+
       case 'so' : {
         const programs = subject.programs.map(prog => ({
           id: `${parent_id}-${prog.guid}`,
@@ -218,11 +217,12 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
       }
 
       case 'program': {
-
-        const subs = SubProgramEntity.sub_programs(subject.id);
-
         const program_results = Result.get_entity_results(subject.id);
 
+        const result_nodes = _.map(program_results, result => result_to_node(result, parent_id, doc) );
+
+        // vv delete on drr17 exit
+        const subs = SubProgramEntity.sub_programs(subject.id);
         const sub_program_nodes = _.map(subs, sub => ({
           id: `${parent_id}-${sub.guid}`,
           data: {
@@ -233,13 +233,12 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
             description: sub.description,
           },
         }));
-
-        const result_nodes = _.map(program_results, result => result_to_node(result, parent_id, doc) );
+        // ^^ delete on drr17 exit
 
         return result_nodes.concat(sub_program_nodes);
-
       }
 
+      // vv delete on drr17 exit
       case 'sub_program': {
         const results = _.map(
           Result.get_entity_results(subject.id),
@@ -269,6 +268,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
         );
 
       }
+      // ^^ delete on drr17 exit
 
       case 'result':
       case 'dr':
@@ -287,8 +287,6 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
       default:
         return null;
     }
-
-
   });
 
   const unfiltered_flat_nodes = convert_d3_hierarchy_to_explorer_hierarchy(d3_hierarchy);
