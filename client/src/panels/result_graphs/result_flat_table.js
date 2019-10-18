@@ -63,7 +63,7 @@ const subject_link = (subject) => {
     const program_id = subject.data.subject.level === "sub_program" ?
       subject.data.subject.parent_id :
       SubProgramEntity.lookup(subject.data.subject.parent_id).parent_id;
-    const program_name = Program.lookup(program_id).name;
+    const parent_program = Program.lookup(program_id);
     return (
       <span>
         {subject.data.name}
@@ -80,8 +80,8 @@ const subject_link = (subject) => {
           {text_maker(subject.data.subject.level)}
         </span>
         {` ${text_maker("of")} `}
-        <a href={infograph_href_template(subject,"results")}>
-          {program_name}
+        <a href={infograph_href_template(parent_program,"results")}>
+          {parent_program.name}
         </a>
         )
       </span>
