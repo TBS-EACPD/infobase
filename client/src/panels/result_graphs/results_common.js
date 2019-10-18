@@ -178,6 +178,7 @@ const indicator_previous_target_text = (indicator) => {
   return indicator_target_text(fake_previous);
 };
 
+// vv delete on drr17 exit
 const drr17_indicator_target_text = (indicator) => {
   const {
     target_type,
@@ -228,6 +229,7 @@ const drr17_indicator_target_text = (indicator) => {
   };
   return get_display_case(target_type, target_min, target_max, target_narrative, measure);
 };
+// ^^ delete on drr17 exit
 
 const indicator_actual_text = (indicator) => {
   const {
@@ -279,7 +281,7 @@ const indicator_text_functions = {
   indicator_actual_text,
   indicator_previous_target_text,
   indicator_previous_actual_text,
-  drr17_indicator_target_text,
+  drr17_indicator_target_text, // delete on drr17 exit
 };
 
 
