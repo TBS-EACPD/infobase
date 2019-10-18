@@ -10,7 +10,7 @@ import { StandardRouteContainer } from '../core/NavComponents.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
 
 import { Subject } from '../models/subject';
-import { result_docs } from '../models/results.js';
+import { result_docs, get_result_doc_keys } from '../models/results.js';
 import { Result, indicator_text_functions } from '../panels/result_graphs/results_common.js';
 const { indicator_target_text } = indicator_text_functions;
 import result_text from '../panels/result_graphs/result_components.yaml';
@@ -32,6 +32,8 @@ const { Dept, CRSO, Program } = Subject;
 
 const { TM, text_maker } = create_text_maker_component([diff_text, result_text]);
 
+const [previous_dp_key, current_dp_key] = _.takeRight(get_result_doc_keys('dp'), 2);
+
 const get_subject_from_props = (props) => {
   const {
     match: {
@@ -50,15 +52,15 @@ const get_subject_from_props = (props) => {
   return props.subject; // default
 };
 
-const subject_intro = (subject, num_indicators, years) =>
+const subject_intro = (subject, num_indicators) =>
   <div className="medium_panel_text">
     <TM 
       k={"indicator_counts_text"}
       args={{
         subject: subject,
         name: subject.name,
-        doc_year_1: result_docs[years[0]].year,
-        doc_year_2: result_docs[years[1]].year,
+        doc_year_1: result_docs[previous_dp_key].year,
+        doc_year_2: result_docs[current_dp_key].year,
         num_indicators: num_indicators,
       }}
     />
@@ -85,10 +87,10 @@ const process_indicators = (matched_indicators, indicator_status) => {
         const target_diff = Diff.diffWords(indicator_target_text(indicator_pair[0], false), indicator_target_text(indicator_pair[1], false));
         const target_explanation_diff = Diff.diffWords(indicator_pair[0].target_explanation || "", indicator_pair[1].target_explanation || "");
         const status = _.max([name_diff.length, methodology_diff.length, target_diff.length]) > 1 ?
-                        target_diff.length > 1 ?
-                          "target_changed"
-                          : "indicator_desc_changed"
-                        : "no_diff";
+          (target_diff.length > 1 ?
+            "target_changed" :
+            "indicator_desc_changed") :
+          "no_diff";
         return {
           status,
           indicator1: indicator_pair[0],
@@ -100,9 +102,13 @@ const process_indicators = (matched_indicators, indicator_status) => {
         };
       }
       const indicator = indicator_pair[0];
-      const status = indicator.doc === "dp18" ?
-        "indicator_removed":
-          indicator.doc === "dp19" ? "indicator_added": indicator.doc;
+      const status = indicator.doc === previous_dp_key ?
+        "indicator_removed" :
+        (
+          indicator.doc === current_dp_key ? 
+            "indicator_added" : 
+            indicator.doc
+        );
       return {
         status: status,
         indicator1: indicator,
@@ -114,13 +120,17 @@ const process_indicators = (matched_indicators, indicator_status) => {
       };
     })
     // target_changed is subset of indicator_desc_changed so it must be included
-    .filter(row => indicator_status["indicator_desc_changed"].active && row.status === "target_changed" ?
-            true : indicator_status[row.status].active)
+    .filter(
+      row => indicator_status["indicator_desc_changed"].active && 
+        row.status === "target_changed" ?
+          true :
+          indicator_status[row.status].active
+    )
     .value();
   return processed_indicators;
 };
 
-const no_difference = (text, key) =>
+const no_difference = (text, key) => (
   <Fragment>
     <div className="text-diff__indicator-report__subheader" >
       <h4>{`${text_maker(key)} (${text_maker("no_diff")})`}</h4>
@@ -128,17 +138,18 @@ const no_difference = (text, key) =>
     <div className="text-diff__indicator-report__row">
       <div>{text}</div>
     </div>
-  </Fragment>;
+  </Fragment>
+);
 
-const difference_report = (diff, key, years) => {
+const difference_report = (diff, key) => {
   const year1 = (
     <div className="col-md-6" >
-      <h5>{result_docs[years[0]].year}</h5>
+      <h5>{result_docs[previous_dp_key].year}</h5>
     </div>
   );
   const year2 = (
     <div className="col-md-6" >
-      <h5>{result_docs[years[1]].year}</h5>
+      <h5>{result_docs[current_dp_key].year}</h5>
     </div>
   );
 
@@ -209,7 +220,7 @@ const difference_report = (diff, key, years) => {
 };
 
 
-const get_status_flag = (indicator_status, years) => {
+const get_status_flag = (indicator_status) => {
   if(indicator_status === "target_changed"){
     return (
       <Fragment>
@@ -239,14 +250,14 @@ const get_status_flag = (indicator_status, years) => {
   if(indicator_status === "indicator_removed"){
     return (
       <div className="text-diff__indicator-status--removed">
-        {text_maker("indicator-removed", {second_year: result_docs[years[1]].year})}
+        {text_maker("indicator-removed", {second_year: result_docs[current_dp_key].year})}
       </div>
     );
   }
   if(indicator_status === "indicator_added"){
     return (
       <div className="text-diff__indicator-status--added">
-        {text_maker("indicator-added", {second_year: result_docs[years[1]].year})}
+        {text_maker("indicator-added", {second_year: result_docs[current_dp_key].year})}
       </div>
     );
   }
@@ -254,23 +265,27 @@ const get_status_flag = (indicator_status, years) => {
 };
 
 
-const indicator_report = (processed_indicator, years) => (
+const indicator_report = (processed_indicator) => (
   <div className="text-diff__indicator-report" key={processed_indicator.indicator1.stable_id}>
     <PresentationalPanel title={processed_indicator.indicator2.name}>
       <Fragment>
-        { get_status_flag(processed_indicator.status, years) }
+        { get_status_flag(processed_indicator.status) }
         { processed_indicator.name_diff.length > 1 ?
-          difference_report(processed_indicator.name_diff, "indicator_name", years) :
-          no_difference(processed_indicator.indicator1.name, "indicator_name") }
+          difference_report(processed_indicator.name_diff, "indicator_name") :
+          no_difference(processed_indicator.indicator1.name, "indicator_name")
+        }
         { processed_indicator.methodology_diff.length > 1 ?
-          difference_report(processed_indicator.methodology_diff, "indicator_methodology", years) :
-          no_difference(processed_indicator.indicator1.methodology, "indicator_methodology") }
+          difference_report(processed_indicator.methodology_diff, "indicator_methodology") :
+          no_difference(processed_indicator.indicator1.methodology, "indicator_methodology")
+        }
         { processed_indicator.target_diff.length > 1 ?
-          difference_report(processed_indicator.target_diff, "indicator_target", years) :
-          no_difference(indicator_target_text(processed_indicator.indicator1, false), "indicator_target") }
+          difference_report(processed_indicator.target_diff, "indicator_target") :
+          no_difference(indicator_target_text(processed_indicator.indicator1, false), "indicator_target")
+        }
         { processed_indicator.target_explanation_diff.length > 1 ?
-            difference_report(processed_indicator.target_explanation_diff, "indicator_target_explanation", years) :
-            no_difference(processed_indicator.indicator1.target_explanation, "indicator_target_explanation") }
+          difference_report(processed_indicator.target_explanation_diff, "indicator_target_explanation") :
+          no_difference(processed_indicator.indicator1.target_explanation, "indicator_target_explanation")
+        }
         <div className="text-diff__id-tag">{`ID: ${processed_indicator.indicator1.stable_id}`}</div>
       </Fragment>
     </PresentationalPanel>
@@ -410,13 +425,6 @@ export default class TextDiffApp extends React.Component {
     const crs_without_internal = _.filter(subject.level === 'dept' ? subject.crsos : subject.dept.crsos, cr => cr.is_cr && !(cr.is_internal_service));
 
     const current_dept = subject.level === 'dept' ? subject : subject.dept;
-
-    // TODO: allow this to change
-    const years = _.chain(result_docs)
-      .keys()
-      .filter( doc => /^dp[0-9]+/ )
-      .takeRight(2)
-      .value();
     
     return (
       <StandardRouteContainer
@@ -509,8 +517,8 @@ export default class TextDiffApp extends React.Component {
         {loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
           <div>
             <h2>{text_maker("list_of_indicators")}</h2>
-            <div>{subject_intro(subject, processed_indicators.length, years)}</div>
-            {_.map(processed_indicators, processed_indicator => indicator_report(processed_indicator, years) )}
+            <div>{subject_intro(subject, processed_indicators.length)}</div>
+            {_.map(processed_indicators, processed_indicator => indicator_report(processed_indicator) )}
           </div>}
       </StandardRouteContainer>
     );
