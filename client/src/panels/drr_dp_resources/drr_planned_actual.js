@@ -9,7 +9,7 @@ import {
   get_source_links,
 } from '../shared.js';
 
-import { ResultCounts } from '../result_graphs/results_common.js';
+import { ResultCounts, current_drr_key } from '../result_graphs/results_common.js';
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -38,7 +38,7 @@ export const declare_drr_planned_actual_panel = () => declare_panel({
       } else {
         counts = ResultCounts.get_dept_counts(subject.dept.id);
       }
-      if(!counts || counts.drr17_total < 1){
+      if(!counts || counts[`${current_drr_key}_total`] < 1){
         return false;
       }
 

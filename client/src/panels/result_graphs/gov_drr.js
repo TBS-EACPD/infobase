@@ -70,7 +70,7 @@ export const declare_gov_drr_panel = () => declare_panel({
   
     calculate(){
       const verbose_gov_counts = ResultCounts.get_gov_counts();
-      const gov_counts = row_to_drr_status_counts(verbose_gov_counts);
+      const gov_counts = row_to_drr_status_counts(verbose_gov_counts, latest_drr_doc_key);
   
       
       const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${latest_drr_doc_key}_total`] > 0 );
