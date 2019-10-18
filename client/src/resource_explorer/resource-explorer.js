@@ -289,6 +289,7 @@ class ExplorerPage extends React.Component {
       </div>
     </div>;
     
+    // DRR_TODO: all refine the check for including other tags, drr18 has all the tags dp19 does
     const all_category_props = [ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props, hi_props] : []) ];
     const current_category = _.find(all_category_props, props => props.active);
 

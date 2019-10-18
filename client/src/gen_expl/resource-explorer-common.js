@@ -21,9 +21,9 @@ export const get_col_defs = ({doc}) => [
     header_display: (
       <TM 
         k={ 
-          doc === 'dp19' ? 
-          "dp_spending" : 
-          'drr_spending' 
+          /dp/.test(doc) ? 
+            "dp_spending" : 
+            'drr_spending' 
         } 
       />
     ),
@@ -37,9 +37,9 @@ export const get_col_defs = ({doc}) => [
     header_display: (
       <TM 
         k={ 
-          doc === 'dp19' ? 
-          "dp_ftes" : 
-          'drr_ftes' 
+          /dp/.test(doc) ? 
+            "dp_ftes" : 
+            'drr_ftes' 
         } 
       />
     ),
