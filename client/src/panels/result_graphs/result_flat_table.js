@@ -24,7 +24,7 @@ import {
 import { create_full_results_hierarchy } from '../../gen_expl/result_hierarchies.js';
 const { SpinnerWrapper } = util_components;
 import { ensure_loaded } from '../../core/lazy_loader.js';
-import { SubProgramEntity } from '../../models/results.js';
+import { SubProgramEntity, current_drr_key } from '../../models/results.js';
 import { Subject } from '../../models/subject.js';
 const { Program } = Subject;
 import {
@@ -178,7 +178,7 @@ class ResultsTable extends React.Component {
       return (
         <div>
           <div className="medium_panel_text">
-            <TM k="result_flat_table_text" args={{subject, ...subject_result_counts}}/>
+            <TM k="result_flat_table_text" args={{ subject, drr_total: subject_result_counts[`${current_drr_key}_total`] }}/>
           </div>
           <div style={{padding: '10px 10px'}}>
             <StatusIconTable 
