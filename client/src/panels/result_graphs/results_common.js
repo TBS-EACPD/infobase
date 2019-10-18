@@ -284,6 +284,18 @@ const indicator_text_functions = {
   drr17_indicator_target_text, // delete on drr17 exit
 };
 
+const filter_and_genericize_doc_counts = (counts, doc_key) => {
+  const doc_type = /drr/.test(doc_key) ? 'drr' : 'dp';
+
+  const count_key_regexp = new RegExp(`^${doc_key}`);
+
+  const doc_counts_with_generic_keys = _.chain(counts)
+    .pickBy( (value, key) => count_key_regexp.test(key) )
+    .mapKeys( (value, key) => key.replace(count_key_regexp, doc_type) )
+    .value();
+
+  return doc_counts_with_generic_keys;
+};
 
 export {
   Result,
@@ -306,4 +318,6 @@ export {
   result_simple_statuses,
 
   indicator_text_functions,
+
+  filter_and_genericize_doc_counts,
 };

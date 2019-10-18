@@ -14,6 +14,8 @@ import {
 import {
   ResultCounts,
   get_result_doc_keys,
+  current_dp_key,
+  filter_and_genericize_doc_counts,
 } from './results_common.js';
 import { HorizontalStatusTable } from './result_components.js';
 
@@ -37,39 +39,45 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const latest_dp_doc_key = _.last( get_result_doc_keys('dp') );
 
-const ResultsIntroPanel = ({counts, verbose_gov_counts, counts_by_dept}) => <Fragment>
-  <div className="frow middle-xs">
-    <div className="fcol-md-7 medium_panel_text">
-      <TM k="gov_dp_text" args={{...counts, depts_with_dps: counts_by_dept.length}} />
-    </div>
-    {!window.is_a11y_mode &&
-      <div className="fcol-md-5">
-        <div
-          style={{
-            padding: "20px",
-          }}
-        >
-          <img
-            src={get_static_url(`png/result-taxonomy-${window.lang}.png`)} 
-            style={{
-              width: "100%",
-              maxHeight: "500px",
-            }}
-          />
+const ResultsIntroPanel = ({counts, verbose_gov_counts, counts_by_dept}) => {
+  const current_dp_counts_with_generic_keys = filter_and_genericize_doc_counts(counts, current_dp_key);
+
+  return (
+    <Fragment>
+      <div className="frow middle-xs">
+        <div className="fcol-md-7 medium_panel_text">
+          <TM k="gov_dp_text" args={{...current_dp_counts_with_generic_keys, depts_with_dps: counts_by_dept.length}} />
         </div>
+        {!window.is_a11y_mode &&
+          <div className="fcol-md-5">
+            <div
+              style={{
+                padding: "20px",
+              }}
+            >
+              <img
+                src={get_static_url(`png/result-taxonomy-${window.lang}.png`)} 
+                style={{
+                  width: "100%",
+                  maxHeight: "500px",
+                }}
+              />
+            </div>
+          </div>
+        }
       </div>
-    }
-  </div>
-  <HorizontalStatusTable 
-    counts_by_dept={counts_by_dept}
-    gov_counts={verbose_gov_counts}
-    status_columns={{
-      [`${latest_dp_doc_key}_results`]: text_maker("results"),
-      [`${latest_dp_doc_key}_indicators`]: text_maker("indicators"),
-    }}
-    doc={latest_dp_doc_key}
-  />
-</Fragment>;
+      <HorizontalStatusTable 
+        counts_by_dept={counts_by_dept}
+        gov_counts={verbose_gov_counts}
+        status_columns={{
+          [`${latest_dp_doc_key}_results`]: text_maker("results"),
+          [`${latest_dp_doc_key}_indicators`]: text_maker("indicators"),
+        }}
+        doc={latest_dp_doc_key}
+      />
+    </Fragment>
+  );
+};
   
 
 export const declare_gov_dp_panel = () => declare_panel({

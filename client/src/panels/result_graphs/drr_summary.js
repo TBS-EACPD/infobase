@@ -16,6 +16,7 @@ import {
   GranularResultCounts,
   ordered_status_keys,
   get_result_doc_keys,
+  filter_and_genericize_doc_counts,
 } from './results_common.js';
 import { TM, text_maker } from './drr_summary_text.js';
 import { current_drr_key } from '../../models/results';
@@ -176,17 +177,13 @@ const StatusGrid = props => {
 
 
 export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts }) => {
-  const count_key_regexp = new RegExp(`^${current_drr_key}`);
-  const counts_with_generic_keys = _.chain(verbose_counts)
-    .pickBy( (value, key) => count_key_regexp.test(key) )
-    .mapKeys( (value, key) => key.replace(count_key_regexp, 'drr') )
-    .value();
+  const current_drr_counts_with_generic_keys = filter_and_genericize_doc_counts(verbose_counts, current_drr_key);
 
   const summary_text_args = { 
     subject, 
     num_depts, 
     is_gov, 
-    ...counts_with_generic_keys,
+    ...current_drr_counts_with_generic_keys,
   };
 
   return <Fragment>

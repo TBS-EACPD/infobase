@@ -7,6 +7,7 @@ import { get_resources_for_subject } from './resource_utils.js';
 import { Subject } from '../models/subject.js';
 import { trivial_text_maker as text_maker } from '../models/text.js';
 import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './hierarchy_tools.js';
+import { current_dp_key } from '../models/results.js';
 
 const { 
   Tag,
@@ -240,7 +241,7 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
 
 const get_initial_resource_state = ({hierarchy_scheme, doc}) => ({
   hierarchy_scheme: hierarchy_scheme || "min",
-  doc: doc || 'dp19',
+  doc: doc || current_dp_key,
   sort_col: _.includes(non_rolling_up_schemes, hierarchy_scheme) ? 'name' : 'spending',
   is_descending: !_.includes(non_rolling_up_schemes, hierarchy_scheme),
 });
