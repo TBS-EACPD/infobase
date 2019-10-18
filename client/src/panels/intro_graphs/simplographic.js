@@ -6,7 +6,7 @@ import {
   Panel,
 } from '../shared';
 import { infograph_href_template, rpb_link } from '../../link_utils.js';
-import { ResultCounts } from '../../models/results.js';
+import { ResultCounts, current_drr_key } from '../../models/results.js';
 import { get_static_url } from '../../request_utils.js';
 
 const { Gov, Dept } = Subject;
@@ -78,13 +78,10 @@ export const declare_simplographic_panel = () => declare_panel({
   
       const results_link = infograph_href_template(Gov, 'results');
   
-      const { 
-        drr17_indicators_met, 
-        drr17_total: num_indicators,
-        drr17_results: num_results,
-      } = gov_counts;
-  
-      const num_met = drr17_indicators_met;
+      const num_results = gov_counts[`${current_drr_key}_results`];
+      const num_indicators = gov_counts[`${current_drr_key}_total`];
+      const num_met = gov_counts[`${current_drr_key}_indicators_met`];
+
       const pct_met = num_met/num_indicators;
   
       return {
