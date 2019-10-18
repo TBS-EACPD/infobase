@@ -3,12 +3,10 @@ const featured_content_items = _.compact([
   {
     text_key: 'quick_link_people_2019',
     href: '#orgs/gov/gov/infograph/people',
-    is_new: true,
   },
   {
     text_key: 'quick_link_infolab',
     href: '#lab',
-    is_new: true,
   },
   {
     text_key: 'quick_link_budget_2019',
