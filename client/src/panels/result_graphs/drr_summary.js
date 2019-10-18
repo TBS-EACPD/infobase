@@ -18,6 +18,7 @@ import {
   get_result_doc_keys,
 } from './results_common.js';
 import { TM, text_maker } from './drr_summary_text.js';
+import { current_drr_key } from '../../models/results';
 
 const { A11YTable } = declarative_charts;
 const { result_simple_statuses } = businessConstants;
@@ -175,11 +176,17 @@ const StatusGrid = props => {
 
 
 export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts }) => {
+  const count_key_regexp = new RegExp(`^${current_drr_key}`);
+  const counts_with_generic_keys = _.chain(verbose_counts)
+    .pickBy( (value, key) => count_key_regexp.test(key) )
+    .mapKeys( (value, key) => key.replace(count_key_regexp, 'drr') )
+    .value();
+
   const summary_text_args = { 
     subject, 
     num_depts, 
     is_gov, 
-    ...verbose_counts,
+    ...counts_with_generic_keys,
   };
 
   return <Fragment>
