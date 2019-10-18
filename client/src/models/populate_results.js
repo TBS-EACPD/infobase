@@ -527,12 +527,36 @@ export function api_load_results_counts(level = "summary"){
           response_rows,
           row => {
             const null_zeroed_row = _.mapValues(row, (value) => _.isNull(value) ? 0 : value );
+
+            const calculated_drr_counts = _.chain( get_result_doc_keys('drr') )
+              .flatMap(
+                (doc_key) => [
+                  [
+                    `${doc_key}_past_total`,
+                    null_zeroed_row[`${doc_key}_indicators_met`] + 
+                      null_zeroed_row[`${doc_key}_indicators_not_met`] + 
+                      null_zeroed_row[`${doc_key}_indicators_not_available`],
+                  ],
+                  [
+                    `${doc_key}_future_total`,
+                    null_zeroed_row[`${doc_key}_indicators_future`],
+                  ],
+                  [
+                    `${doc_key}_total`,
+                    null_zeroed_row[`${doc_key}_indicators_met`] + 
+                      null_zeroed_row[`${doc_key}_indicators_not_met`] + 
+                      null_zeroed_row[`${doc_key}_indicators_not_available`] + 
+                      null_zeroed_row[`${doc_key}_indicators_future`],
+                  ],
+                ]
+              ) 
+              .fromPairs()
+              .value();
+
             return {
               ...null_zeroed_row,
               id: null_zeroed_row.subject_id,
-              drr17_past_total: null_zeroed_row.drr17_indicators_met + null_zeroed_row.drr17_indicators_not_met + null_zeroed_row.drr17_indicators_not_available,
-              drr17_future_total: null_zeroed_row.drr17_indicators_future,
-              drr17_total: null_zeroed_row.drr17_indicators_met + null_zeroed_row.drr17_indicators_not_met + null_zeroed_row.drr17_indicators_not_available + null_zeroed_row.drr17_indicators_future,
+              ...calculated_drr_counts,
             };
           }
         );
