@@ -39,15 +39,18 @@ import { TM, text_maker } from './result_text_provider.js';
 const IndicatorResultDisplay = (props) => {
   const {indicator, is_actual, is_drr17, is_previous} = props;
   if(is_actual){
-    return is_previous ? <span>{indicator_previous_actual_text(indicator)}</span> : <span>{indicator_actual_text(indicator)}</span> ;
+    return is_previous ? <span>{indicator_previous_actual_text(indicator)}</span> : <span>{indicator_actual_text(indicator)}</span>;
   }
+  // vv delete on drr17 exit
   if(!is_drr17){
-    return is_previous ? <span>{indicator_previous_target_text(indicator)}</span> : <span>{indicator_target_text(indicator)}</span> ;
+    return is_previous ? <span>{indicator_previous_target_text(indicator)}</span> : <span>{indicator_target_text(indicator)}</span>;
   }
-  return <span>{drr17_indicator_target_text(indicator)}</span> ;
+  return <span>{drr17_indicator_target_text(indicator)}</span>;
+  // ^^ delete on drr17 exit
 };
 
 
+// vv delete on drr17 exit
 const Drr17IndicatorResultDisplay = ({
   data_type,
   min, 
@@ -67,6 +70,7 @@ const Drr17IndicatorResultDisplay = ({
     </span>
   );
 };
+// ^^ delete on drr17 exit
 
 const IndicatorList = ({ indicators }) => (
   <ul className="indicator-list">
