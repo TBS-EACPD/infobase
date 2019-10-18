@@ -253,7 +253,7 @@ export const declare_drr_summary_panel = () => declare_panel({
         }
       })();
 
-      const counts = row_to_drr_status_counts(verbose_counts);
+      const counts = row_to_drr_status_counts(verbose_counts, latest_drr_doc_key);
     
       if(verbose_counts[`${latest_drr_doc_key}_total`] < 1){
         return false;

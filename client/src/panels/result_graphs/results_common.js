@@ -12,6 +12,7 @@ import {
   result_docs,
   get_result_doc_keys,
   current_drr_key,
+  current_dp_key,
 } from '../../models/results.js';
 import { infograph_href_template } from '../../link_utils.js';
 const link_to_results_infograph = subj => infograph_href_template(subj, 'results');
@@ -100,17 +101,10 @@ const isDeptWithoutResults = (subject) => _.chain(subject.programs)
   .every()
   .value();
 
-const row_to_drr_status_counts = ({
-  drr17_indicators_met: met,
-  drr17_indicators_not_met: not_met,
-  drr17_indicators_not_available: not_available,
-  drr17_indicators_future: future,
-}) => ({
-  met,
-  not_met,
-  not_available,
-  future,
-});
+const row_to_drr_status_counts = (counts_row, drr_key) => _.chain(ordered_status_keys)
+  .map( (status_key) => [ status_key, counts_row[`${drr_key}_indicators_${status_key}`] ] )
+  .fromPairs()
+  .value();
 
 const type_by_data_type = {
   num: "result_num",
@@ -299,6 +293,8 @@ export {
   ordered_status_keys,
   result_docs,
   get_result_doc_keys,
+  current_drr_key,
+  current_dp_key,
 
   planned_resource_fragment,
   link_to_results_infograph,
