@@ -32,7 +32,12 @@ const { Dept, CRSO, Program } = Subject;
 
 const { TM, text_maker } = create_text_maker_component([diff_text, result_text]);
 
-const [previous_dp_key, current_dp_key] = _.takeRight(get_result_doc_keys('dp'), 2);
+const dp_keys_to_compare = _.takeRight(get_result_doc_keys('dp'), 2);
+const [previous_dp_key, current_dp_key] = dp_keys_to_compare;
+const [previous_dp_year, current_dp_year] = _.map(
+  dp_keys_to_compare,
+  (dp_key) => result_docs[dp_key].year
+);
 
 const get_subject_from_props = (props) => {
   const {
@@ -54,16 +59,7 @@ const get_subject_from_props = (props) => {
 
 const subject_intro = (subject, num_indicators) =>
   <div className="medium_panel_text">
-    <TM 
-      k={"indicator_counts_text"}
-      args={{
-        subject: subject,
-        name: subject.name,
-        doc_year_1: result_docs[previous_dp_key].year,
-        doc_year_2: result_docs[current_dp_key].year,
-        num_indicators: num_indicators,
-      }}
-    />
+    <TM k={"indicator_counts_text"} args={{num_indicators: num_indicators}} />
   </div>;
 
 const get_indicators = (subject) => {
@@ -144,12 +140,12 @@ const no_difference = (text, key) => (
 const difference_report = (diff, key) => {
   const year1 = (
     <div className="col-md-6" >
-      <h5>{result_docs[previous_dp_key].year}</h5>
+      <h5>{previous_dp_year}</h5>
     </div>
   );
   const year2 = (
     <div className="col-md-6" >
-      <h5>{result_docs[current_dp_key].year}</h5>
+      <h5>{current_dp_year}</h5>
     </div>
   );
 
@@ -250,14 +246,14 @@ const get_status_flag = (indicator_status) => {
   if(indicator_status === "indicator_removed"){
     return (
       <div className="text-diff__indicator-status--removed">
-        {text_maker("indicator-removed", {second_year: result_docs[current_dp_key].year})}
+        {text_maker("indicator-removed", {second_year: current_dp_year})}
       </div>
     );
   }
   if(indicator_status === "indicator_added"){
     return (
       <div className="text-diff__indicator-status--added">
-        {text_maker("indicator-added", {second_year: result_docs[current_dp_key].year})}
+        {text_maker("indicator-added", {second_year: current_dp_year})}
       </div>
     );
   }
@@ -349,7 +345,7 @@ export default class TextDiffApp extends React.Component {
     ensure_loaded({
       subject,
       results: true,
-      result_docs: _.chain(result_docs).keys().filter( doc => /^dp[0-9]+/ ).takeRight(2).value(),
+      result_docs: dp_keys_to_compare,
     })
       .then( () => {
         const matched_indicators = get_indicators(subject);
@@ -430,13 +426,13 @@ export default class TextDiffApp extends React.Component {
       <StandardRouteContainer
         title={text_maker("diff_title")}
         breadcrumbs={[text_maker("diff_title")]}
-        description={text_maker("diff_intro_text")}
+        description={text_maker("diff_intro_text", {previous_dp_year, current_dp_year})}
         route_key="_diff"
         beta={true}
       >
         <TM k="diff_title" el="h1" />
         <div className={classNames("medium_panel_text","text-diff__instructions")}>
-          <TM k="diff_intro_text"/>
+          <TM k="diff_intro_text" args={{previous_dp_year, current_dp_year}}/>
         </div>
         <div className={classNames("medium_panel_text")}>
           <label htmlFor='select_dept'>
