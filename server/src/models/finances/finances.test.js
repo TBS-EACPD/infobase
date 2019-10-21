@@ -2,7 +2,6 @@ const { execQuery } = global;
 
 const org_vote_stat_pa_field = `
 org_vote_stat_pa{
-  dept_code
   vote_num
   vs_type
   name
@@ -21,7 +20,6 @@ org_vote_stat_pa{
 }`;
 const org_vote_stat_qfr_field = `
 org_vote_stat_qfr{
-  dept_code
   vote_num
   vs_type
   name
@@ -35,7 +33,6 @@ org_vote_stat_qfr{
 }`;
 const org_vote_stat_estimates_field = `
 org_vote_stat_estimates{
-  dept_code
   vote_num
   vs_type
   name
@@ -49,7 +46,6 @@ org_vote_stat_estimates{
 }`;
 const org_transfer_payments_field = `
 org_transfer_payments{
-  dept_code
   type
   name
 
@@ -67,7 +63,6 @@ org_transfer_payments{
 }`;
 const program_sobjs_field = `
 program_sobjs{
-  program_id
   so_num
   pa_last_year_3
   pa_last_year_2
@@ -75,15 +70,13 @@ program_sobjs{
 }`;
 const program_vote_stat_field = `
 program_vote_stat{
-  program_id
+  vs_type
   pa_last_year_3
   pa_last_year_2
   pa_last_year
 }`;
 const program_spending_field = `
 program_spending{
-  program_id
-
   pa_last_year_5_exp
   pa_last_year_4_exp
   pa_last_year_3_exp
@@ -107,7 +100,6 @@ program_spending{
 }`;
 const program_fte_field = `
 program_fte{
-  program_id
   pa_last_year_5
   pa_last_year_4
   pa_last_year_3

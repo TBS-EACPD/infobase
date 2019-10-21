@@ -18,7 +18,6 @@ const schema = `
   }
 
   type OrgVoteStatPa{
-    dept_code: String
     vote_num: String
     vs_type: Float
     name: String
@@ -36,7 +35,6 @@ const schema = `
     pa_last_year_exp: Float,
   }
   type OrgVoteStatQfr{
-    dept_code: String
     vote_num: String
     vs_type: Float
     name: String
@@ -49,7 +47,6 @@ const schema = `
     last_year_cumul_exp: Float,
   }
   type OrgVoteStatEstimates{
-    dept_code: String
     vote_num: String
     vs_type: Float
     name: String
@@ -62,7 +59,6 @@ const schema = `
     est_in_year: Float,
   }
   type OrgTransferPayments{
-    dept_code: String,
     type: String,
     name: String
   
@@ -79,21 +75,18 @@ const schema = `
     pa_last_year_1_exp: Float,
   }
   type ProgramSobjs{
-    program_id: String
     so_num: Float
     pa_last_year_3: Float
     pa_last_year_2: Float
     pa_last_year: Float
   }
   type ProgramVoteStat{
-    program_id: String
+    vs_type: String
     pa_last_year_3: Float
     pa_last_year_2: Float
     pa_last_year: Float
   }
   type ProgramSpending{
-    program_id: String
-
     pa_last_year_5_exp: Float
     pa_last_year_4_exp: Float
     pa_last_year_3_exp: Float
@@ -116,7 +109,6 @@ const schema = `
     planning_year_3_gross: Float
   }
   type ProgramFte{
-    program_id: String,
     pa_last_year_5: Float,
     pa_last_year_4: Float,
     pa_last_year_3: Float,

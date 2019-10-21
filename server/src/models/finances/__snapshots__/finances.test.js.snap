@@ -7,7 +7,6 @@ Object {
       "org": Object {
         "org_transfer_payments": Array [
           Object {
-            "dept_code": "CPCC",
             "name": "Contributions to support the advancement of Northern Science and Technology",
             "pa_last_year_1_auth": 9500621,
             "pa_last_year_1_exp": 9152366,
@@ -22,7 +21,6 @@ Object {
             "type": "c",
           },
           Object {
-            "dept_code": "CPCC",
             "name": "Grants to support the advancement of Northern Science and Technology",
             "pa_last_year_1_auth": 10000,
             "pa_last_year_1_exp": 10000,
@@ -37,7 +35,6 @@ Object {
             "type": "g",
           },
           Object {
-            "dept_code": "CPCC",
             "name": "Grants to individuals, organizations, associations and institutions to support research and activities relating to the polar regions",
             "pa_last_year_1_auth": 1546000,
             "pa_last_year_1_exp": 1545984,
@@ -52,7 +49,6 @@ Object {
             "type": "g",
           },
           Object {
-            "dept_code": "CPCC",
             "name": "Contributions to individuals, organizations, associations and institutions to support research and activities relating to the polar regions",
             "pa_last_year_1_auth": 0,
             "pa_last_year_1_exp": 0,
@@ -80,7 +76,6 @@ Object {
       "org": Object {
         "org_vote_stat_estimates": Array [
           Object {
-            "dept_code": "CPCC",
             "doc": "ME",
             "est_in_year": 31704049,
             "est_last_year": 28089505,
@@ -92,7 +87,6 @@ Object {
             "vs_type": 1,
           },
           Object {
-            "dept_code": "CPCC",
             "doc": "SEA",
             "est_in_year": 0,
             "est_last_year": -1704000,
@@ -104,7 +98,6 @@ Object {
             "vs_type": 1,
           },
           Object {
-            "dept_code": "CPCC",
             "doc": "SEB",
             "est_in_year": 0,
             "est_last_year": 1,
@@ -116,7 +109,6 @@ Object {
             "vs_type": 1,
           },
           Object {
-            "dept_code": "CPCC",
             "doc": "SEC",
             "est_in_year": 0,
             "est_last_year": 0,
@@ -128,7 +120,6 @@ Object {
             "vs_type": 1,
           },
           Object {
-            "dept_code": "CPCC",
             "doc": "VA",
             "est_in_year": 0,
             "est_last_year": 0,
@@ -140,7 +131,6 @@ Object {
             "vs_type": 1,
           },
           Object {
-            "dept_code": "CPCC",
             "doc": "SEC",
             "est_in_year": null,
             "est_last_year": null,
@@ -152,7 +142,6 @@ Object {
             "vs_type": 2,
           },
           Object {
-            "dept_code": "CPCC",
             "doc": "VA",
             "est_in_year": null,
             "est_last_year": null,
@@ -164,7 +153,6 @@ Object {
             "vs_type": 2,
           },
           Object {
-            "dept_code": "CPCC",
             "doc": "SEC",
             "est_in_year": null,
             "est_last_year": null,
@@ -176,7 +164,6 @@ Object {
             "vs_type": 3,
           },
           Object {
-            "dept_code": "CPCC",
             "doc": "VA",
             "est_in_year": null,
             "est_last_year": null,
@@ -188,7 +175,6 @@ Object {
             "vs_type": 3,
           },
           Object {
-            "dept_code": "CPCC",
             "doc": "ME",
             "est_in_year": 1097559,
             "est_last_year": 1017101,
@@ -200,7 +186,6 @@ Object {
             "vs_type": 0,
           },
           Object {
-            "dept_code": "CPCC",
             "doc": "SA",
             "est_in_year": 0,
             "est_last_year": 0,
@@ -225,7 +210,6 @@ Object {
       "org": Object {
         "org_vote_stat_pa": Array [
           Object {
-            "dept_code": "CPCC",
             "name": "Operating/Program",
             "pa_last_year_2_auth": 19215842,
             "pa_last_year_2_exp": 15363078,
@@ -241,7 +225,6 @@ Object {
             "vs_type": 1,
           },
           Object {
-            "dept_code": "CPCC",
             "name": "Operating/Program",
             "pa_last_year_2_auth": 0,
             "pa_last_year_2_exp": 0,
@@ -257,7 +240,6 @@ Object {
             "vs_type": 1,
           },
           Object {
-            "dept_code": "CPCC",
             "name": "Capital",
             "pa_last_year_2_auth": 0,
             "pa_last_year_2_exp": 0,
@@ -273,7 +255,6 @@ Object {
             "vs_type": 2,
           },
           Object {
-            "dept_code": "CPCC",
             "name": "Grants & Contributions",
             "pa_last_year_2_auth": 0,
             "pa_last_year_2_exp": 0,
@@ -289,7 +270,6 @@ Object {
             "vs_type": 3,
           },
           Object {
-            "dept_code": "CPCC",
             "name": "Operating/Program",
             "pa_last_year_2_auth": 0,
             "pa_last_year_2_exp": 0,
@@ -305,7 +285,6 @@ Object {
             "vs_type": 1,
           },
           Object {
-            "dept_code": "CPCC",
             "name": "Contributions to employee benefit plans",
             "pa_last_year_2_auth": 503400,
             "pa_last_year_2_exp": 503400,
@@ -334,7 +313,6 @@ Object {
       "org": Object {
         "org_vote_stat_qfr": Array [
           Object {
-            "dept_code": "CPCC",
             "in_year_auth": 28638000,
             "in_year_cumul_exp": 10321000,
             "in_year_quarter_exp": 3868000,
@@ -346,7 +324,6 @@ Object {
             "vs_type": 1,
           },
           Object {
-            "dept_code": "CPCC",
             "in_year_auth": 1017000,
             "in_year_cumul_exp": 509000,
             "in_year_quarter_exp": 254000,
@@ -380,7 +357,6 @@ Object {
             "planning_year_1": null,
             "planning_year_2": null,
             "planning_year_3": null,
-            "program_id": "ND-ISC00",
           },
         ],
       },
@@ -399,70 +375,60 @@ Object {
             "pa_last_year": 2681685.4,
             "pa_last_year_2": 1462582.51,
             "pa_last_year_3": 846130.61,
-            "program_id": "CPCC-ISC00",
             "so_num": 1,
           },
           Object {
             "pa_last_year": 433955.53,
             "pa_last_year_2": 637989.25,
             "pa_last_year_3": 269075.96,
-            "program_id": "CPCC-ISC00",
             "so_num": 2,
           },
           Object {
             "pa_last_year": 22559.45,
             "pa_last_year_2": 32660.43,
             "pa_last_year_3": 32159.21,
-            "program_id": "CPCC-ISC00",
             "so_num": 3,
           },
           Object {
             "pa_last_year": 534006.79,
             "pa_last_year_2": 756756.13,
             "pa_last_year_3": 420617.99,
-            "program_id": "CPCC-ISC00",
             "so_num": 4,
           },
           Object {
             "pa_last_year": 1044006.95,
             "pa_last_year_2": 639710.32,
             "pa_last_year_3": 216099.23,
-            "program_id": "CPCC-ISC00",
             "so_num": 5,
           },
           Object {
             "pa_last_year": 5176.8,
             "pa_last_year_2": 15078.78,
             "pa_last_year_3": 2161,
-            "program_id": "CPCC-ISC00",
             "so_num": 6,
           },
           Object {
             "pa_last_year": 242665.09,
             "pa_last_year_2": 165902.85,
             "pa_last_year_3": 34223.83,
-            "program_id": "CPCC-ISC00",
             "so_num": 7,
           },
           Object {
             "pa_last_year": null,
             "pa_last_year_2": 540689.82,
             "pa_last_year_3": null,
-            "program_id": "CPCC-ISC00",
             "so_num": 8,
           },
           Object {
             "pa_last_year": 39230.35,
             "pa_last_year_2": 56318.91,
             "pa_last_year_3": 86965.04,
-            "program_id": "CPCC-ISC00",
             "so_num": 9,
           },
           Object {
             "pa_last_year": 518.27,
             "pa_last_year_2": -11087.66,
             "pa_last_year_3": 564,
-            "program_id": "CPCC-ISC00",
             "so_num": 12,
           },
         ],
@@ -496,7 +462,6 @@ Object {
             "planning_year_3_gross": null,
             "planning_year_3_rev": null,
             "planning_year_3_spa": null,
-            "program_id": "CPCC-ISC00",
           },
         ],
       },
@@ -515,13 +480,13 @@ Object {
             "pa_last_year": 325642.67,
             "pa_last_year_2": 181727.57,
             "pa_last_year_3": 108394.94,
-            "program_id": "CPCC-ISC00",
+            "vs_type": "S",
           },
           Object {
             "pa_last_year": 4678161.96,
             "pa_last_year_2": 4114873.77,
             "pa_last_year_3": 1799601.93,
-            "program_id": "CPCC-ISC00",
+            "vs_type": "V",
           },
         ],
       },

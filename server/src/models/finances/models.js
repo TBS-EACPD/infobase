@@ -80,6 +80,7 @@ export default function(model_singleton){
   });
   const ProgramVoteStatSchema = mongoose.Schema({
     program_id: parent_fkey_type(),
+    vs_type: str_type,
     pa_last_year_3: number_type,
     pa_last_year_2: number_type,
     pa_last_year: number_type,
