@@ -51,7 +51,6 @@ const get_actual_parent = (indicator_node, full_results_hierarchy) => {
 };
 
 const get_indicators = (subject, doc) => {
-  debugger;
   const full_results_hierarchy = create_full_results_hierarchy({subject_guid: subject.guid, doc, allow_no_result_branches: false});
   return _.chain(full_results_hierarchy)
     .filter(node => node.data.type==="indicator")
