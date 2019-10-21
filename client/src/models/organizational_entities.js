@@ -42,13 +42,6 @@ const Gov = {
 };
 
 
-//TODO: MandateItem class
-//class MandateItem extends static_subject_store() {
-//  static get type_name() { return 'mandate_item'; }
-//  static get singular(){ return trivial_text_maker("mandate_commitment");}
-//  static get plural(){ return trivial_text_maker("mandate_commitments");}
-//};
-
 const Ministry = class Ministry extends static_subject_store(){
   static get type_name() { return 'ministry'; }
   static get singular(){ return trivial_text_maker("ministry"); }
