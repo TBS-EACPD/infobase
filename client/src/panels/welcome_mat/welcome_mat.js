@@ -158,8 +158,8 @@ const WelcomeMat = (props) => {
     latest_hist_spend_data,
     oldest_hist_spend_data,
   } = calcs;
-
-  const actual_hist_years_apart = _.parseInt( _.split(latest_hist_spend_data.year, '-') ) - _.parseInt( _.split(oldest_hist_spend_data.year, '-') ) + 1;
+  const current_year = _.parseInt( _.split( _.last(actual_history_years), '-') ) + 1;
+  const actual_hist_years_apart = current_year - _.parseInt( _.split(oldest_hist_spend_data.year, '-') );
   const latest_equals_oldest_hist = oldest_hist_spend_data.year === latest_hist_spend_data.year;
 
   //vars used multiple times accross multiple cases
