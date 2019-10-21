@@ -179,7 +179,6 @@ const types_to_format = {
     return`${year_int}-${ window.lang === "en" ? year_int-2000+1 : year_int+1}`;
   },
   "fiscal_year_to_year": (fiscal_year) => _.chain(fiscal_year).split("-").head().value(),
-  "year_plural_text": (year_num) => year_num > 1 ? "years" : "year",
 };
 
 

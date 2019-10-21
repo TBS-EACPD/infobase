@@ -158,12 +158,18 @@ const WelcomeMat = (props) => {
     latest_hist_spend_data,
     oldest_hist_spend_data,
   } = calcs;
-  const current_year = _.parseInt( _.split( _.last(actual_history_years), '-') ) + 1;
-  const actual_hist_years_apart = current_year - _.parseInt( _.split(oldest_hist_spend_data.year, '-') );
+  const current_year = _.parseInt( run_template('{{pa_in_year_short_first}}') );
+  const oldest_hist_year = _.chain(oldest_hist_spend_data.year)
+    .split('-')
+    .head()
+    .parseInt()
+    .value();
+  const actual_hist_years_apart = current_year - oldest_hist_year;
   const latest_equals_oldest_hist = oldest_hist_spend_data.year === latest_hist_spend_data.year;
 
   //vars used multiple times accross multiple cases
   const years_ago = <TM k="years_ago" args={{
+    plural_years: actual_hist_years_apart > 1,
     actual_hist_years_apart: actual_hist_years_apart,
     oldest_hist_spend_year: oldest_hist_spend_data.year,
   }} />;  
