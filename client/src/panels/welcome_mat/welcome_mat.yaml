@@ -10,9 +10,9 @@ no_wrap_year:
 years_ago:
   transform: [handlebars, markdown]
   en: |
-    {{actual_hist_years_apart}} {{fmt_year_plural_text actual_hist_years_apart}} ago ({{oldest_hist_spend_year}})
+    {{actual_hist_years_apart}} year{{#if plural_years}}s{{/if}} ago ({{oldest_hist_spend_year}})
   fr: |
-    Il y a {{actual_hist_years_apart}} ans ({{oldest_hist_spend_year}})
+    Il y a {{actual_hist_years_apart}} an{{#if plural_years}}s{{/if}} ({{oldest_hist_spend_year}})
 last_year:
   transform: [handlebars]
   en: |
