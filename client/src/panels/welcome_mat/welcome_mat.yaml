@@ -8,9 +8,9 @@ no_wrap_year:
   handlebars_partial : true
   text: <span class='text-nowrap'>({{year}})</span>
 years_ago:
-  transform: [handlebars]
+  transform: [handlebars, markdown]
   en: |
-    {{actual_hist_years_apart}} years ago ({{oldest_hist_spend_year}})
+    {{actual_hist_years_apart}} {{fmt_year_plural_text actual_hist_years_apart}} ago ({{oldest_hist_spend_year}})
   fr: |
     Il y a {{actual_hist_years_apart}} ans ({{oldest_hist_spend_year}})
 last_year:
