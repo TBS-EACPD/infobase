@@ -1,10 +1,8 @@
 import { sanitized_marked } from '../general_utils.js';
 import { businessConstants } from './businessConstants.js';
-import { Subject } from '../models/subject.js';
 import { trivial_text_maker, run_template } from './text.js';
+import { Program, CRSO } from './organizational_entities.js';
 
-
-const { Program, CRSO } = Subject;
 const { months } = businessConstants;
 
 // dependencies are tangled up too much here, disable it for the whole file
