@@ -1,9 +1,20 @@
-﻿"dept_code","vote_num","vs_type","name_en","name_fr","in_year_auth","in_year_quarter_exp","in_year_cumul_exp","last_year_auth","last_year_quarter_exp","last_year_cumul_exp"
-"ACOA",1,1,"Operating and Program","Fonctionnement et Programme",69306000,14959000,30300000,66530000,19693000,35579000
-"ACOA",5,3,"Grants & Contributions","Subventions et Contributions",251097000,42782000,70586000,240223000,46579000,69432000
-"ACOA","S",999,"Statutory Authorities","Autorisations législatives",8201000,2042000,4084000,7991000,1993000,3985000
-"WDO",1,1,"Operating and Program","Fonctionnement et Programme",37601000,8757000,17236000,37472000,8828000,17335000
-"WDO",5,3,"Grants & Contributions","Subventions et Contributions",117773000,72416000,92406000,173158000,18614000,39073000
-"WDO","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",11000,0,0,16000,0,0
-"WDO","S",999,"Statutory Authorities","Autorisations législatives",3825000,956000,1913000,3751000,925000,1850000
-
+dept_code,vote_num,vs_type,name_en,name_fr,in_year_auth,in_year_quarter_exp,in_year_cumul_exp,last_year_auth,last_year_quarter_exp,last_year_cumul_exp
+CPCC,1,1,Operating and Program,Fonctionnement et Programme,28638000,3868000,10321000,21419000,5871000,7432000
+CPCC,S,999,Statutory Authorities,Autorisations législatives,1017000,254000,509000,631000,158000,316000
+ND,1,1,Operating and Program,Fonctionnement et Programme,15630417000,3905829000,6996465000,14509645000,3648910000,7002588000
+ND,5,2,Capital,Capital,3761024000,810408000,1312041000,3182746000,788328000,1286304000
+ND,10,3,Grants & Contributions,Subventions et Contributions,176719000,4393000,40949000,164695000,12610000,17042000
+ND,S,999,Spending of proceeds from the disposal of surplus Crown assets,Dépenses des produits de la vente de biens excédentaires de l'État,33497000,203000,338000,27040000,557000,907000
+ND,S,999,"Payments under Parts I to IV of the Defence Services Pension Continuation Act (R.S.C., 1970, c. D-3)","Versements en vertu des parties I à IV de la Loi sur la continuation de la pension des services de défense (L.R.C. (1970), ch. D-3)",400000,72000,123000,500000,82000,133000
+ND,S,999,Payments under the Supplementary Retirement Benefits Act,Versement en vertu de la Loi sur les prestations de retraite supplémentaires,1700000,336000,571000,2100000,377000,640000
+ND,S,999,"Payments to dependants of certain members of the Royal Canadian Air Force killed while serving as instructors under the British Commonwealth Air Training Plan (Appropriation Act No. 4, 1968)",Versements aux ayants droit de certains membres de l’Aviation royale du Canada tués dans l’exercice de leurs fonctions alors qu’ils servaient à titre d’instructeurs dans le cadre du Plan d’entraînement des aviateurs du Commonwealth britannique (Loi nº4 de 1968 portant affectation de crédits),26000,6000,12000,26000,6000,10000
+ND,S,999,Minister's Salary and Motor Car Allowance,Traitement et allocation pour automobile du ministre,86000,21000,43000,84000,21000,42000
+ND,S,999,Contributions to Employee Benefit Plans - Members of the Military,Contributions aux régimes d'avantages sociaux des employés - Membres militaires,924055000,273298000,496224000,916558000,326424000,562857000
+ND,S,999,Contributions to Employee Benefit Plans,Contributions aux régimes d'avantages sociaux des employés,276016000,69029000,138055000,273777000,68473000,136938000
+TBC,1,1,Operating and Program,Fonctionnement et Programme,254807787,55735762,116095334,260482035,67400126,118193830
+TBC,20,6,Treasury Board Central,Crédit du Conseil du Trésor,2952919397,630304687,1299721941,2398570604,601545239,1222213178
+TBC,S,999,A681 - Payments under the Public Service Pension Adjustment Act,A681 - Versements en vertu de la Loi sur la mise au point des pensions du service public,0,13,26,0,40,107
+TBC,S,999,A145 - Unallocated employer contributions made under the PSSA and other retirement acts and the Employment Act (EI),"A145 - Contributions de l’employeur non affectées et versées en vertu de la LPFP, d’autres lois concernant la retraite et la Loi sur l’assurance-emploi",340000000,-104450741,-101525955,340000000,-104623227,-186362752
+TBC,S,999,Contributions to Employee Benefit Plans,Contributions aux régimes d'avantages sociaux des employés,28589290,6974326,13948652,27342934,6775186,13550372
+TBC,S,999,Minister's Salary and Motor Car Allowance,Traitement et allocation pour automobile du ministre,86000,21500,43000,84400,21150,42300
+,,,,,,,,,,
