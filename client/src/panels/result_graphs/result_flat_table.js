@@ -51,23 +51,24 @@ const get_actual_parent = (indicator_node, full_results_hierarchy) => {
 };
 
 const get_indicators = (subject, doc) => {
+  debugger;
   const full_results_hierarchy = create_full_results_hierarchy({subject_guid: subject.guid, doc, allow_no_result_branches: false});
   return _.chain(full_results_hierarchy)
     .filter(node => node.data.type==="indicator")
-    .map( indicator_node => ({ ...indicator_node.data, parent_subject: get_actual_parent(indicator_node, full_results_hierarchy) }) )
+    .map( indicator_node => ({ ...indicator_node.data, parent_node: get_actual_parent(indicator_node, full_results_hierarchy) }) )
     .value();
 };
 
-const subject_link = (subject) => {
-  if (subject.data.subject.level === "sub_program" || subject.data.subject.level === "sub_sub_program"){
-    const program_id = subject.data.subject.level === "sub_program" ?
-      subject.data.subject.parent_id :
-      SubProgramEntity.lookup(subject.data.subject.parent_id).parent_id;
+const subject_link = (node) => {
+  if (node.data.subject.level === "sub_program" || node.data.subject.level === "sub_sub_program"){
+    const program_id = node.data.subject.level === "sub_program" ?
+    node.data.subject.parent_id :
+      SubProgramEntity.lookup(node.data.subject.parent_id).parent_id;
     const program = Program.lookup(program_id);
     const program_name = program.name;
     return (
       <span>
-        {subject.data.name}
+        {node.data.name}
         {` (${text_maker("a_masc")} `}
         <span
           className="nowrap glossary-tooltip-link"
@@ -78,7 +79,7 @@ const subject_link = (subject) => {
           data-ibtt-html="true"
           data-ibtt-container="body"
         >
-          {text_maker(subject.data.subject.level)}
+          {text_maker(node.data.subject.level)}
         </span>
         {` ${text_maker("of")} `}
         <a href={infograph_href_template(program,"results")}>
@@ -90,12 +91,12 @@ const subject_link = (subject) => {
   } else {
     return (
       <span>
-        <a href={infograph_href_template(subject.data.subject,"results")}>
-          {subject.data.name}
+        <a href={infograph_href_template(node.data.subject,"results")}>
+          {node.data.name}
         </a>
         {" "}
         <span className='text-nowrap'>
-          ({text_maker(subject.data.subject.level === "program" ? subject.data.subject.level : "core_resp")})
+          ({text_maker(node.data.subject.level === "program" ? node.data.subject.level : "core_resp")})
         </span>
       </span>
     );
@@ -111,7 +112,7 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
   const sort_keys = ["indicator","date_to_achieve", "status"];
   const table_data_headers = _.map(column_keys, k => text_maker(k));
   const table_data = _.map(indicator_list, ind => ({
-    label: subject_link(ind.parent_subject),
+    label: subject_link(ind.parent_node),
     col_data: {
       indicator: ind.indicator.name,
       target: is_drr17 ? drr17_indicator_target_text(ind.indicator) : indicator_target_text(ind.indicator),
@@ -123,7 +124,7 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
       </Fragment>,
     },
     sort_keys: {
-      label: ind.parent_subject.data.name,
+      label: ind.parent_node.data.name,
       indicator: ind.indicator.name,
       date_to_achieve: ind.indicator.target_year ? ind.indicator.target_year + ind.indicator.target_month/12 : Infinity,
       status: _.indexOf(ordered_status_keys, ind.indicator.status_key),
