@@ -1,6 +1,7 @@
 {
   "plugins": [
-    "react"
+    "react",
+    "jest"
   ],
   "parser": "babel-eslint",
   "parserOptions": {
@@ -15,7 +16,8 @@
   "env": {
       "browser": true,
       "commonjs": true,
-      "es6": true
+      "es6": true,
+      "jest/globals": true
   },
   "rules": {
       "no-use-before-define": ["error", { "functions": true, "classes": true }],

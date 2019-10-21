@@ -1,9 +1,12 @@
 {
   "env":{
     "test": {
+      "presets": [
+        "@babel/preset-react"
+      ],
       "plugins": [
         "@babel/plugin-transform-modules-commonjs",
-        "syntax-dynamic-import",
+        "syntax-dynamic-import"
       ]
     }
   }

@@ -1,7 +1,14 @@
 module.exports = {
-  // setupTestFrameworkScriptFile: "./src/set_up_tests.js",
-  setupFilesAfterEnv: ["./src/set_up_tests.js"],
-  // setupFiles: ["./src/set_up_tests.js"],
+  setupFilesAfterEnv: ["./src/testing/set_up_tests.js"],
   testRegex: "src\\/.+\\.test\\.js?$",
-  // testEnvironment: "jsdom",
+  moduleNameMapper: {
+    "\\.(css|scss)$": "<rootDir>/src/testing/styleMock.js",
+  },
+  transform: {
+    "^.+\\.yaml$": "./src/testing/yaml-lang-transform.js",
+    "^.+\\.js$": "babel-jest",
+    "^.+\\.csv$": "./src/testing/raw-transform.js",
+    //Note that webpack's svg-inline-loader applies minor transformations, let's hope they don't matter to tests, though
+    "^.+\\.(csv|svg)$": "./src/testing/raw-transform.js",
+  },
 };

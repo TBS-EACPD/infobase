@@ -3,7 +3,6 @@ import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './
 
 
 test("test d3 hierarchy",()=>{
-  debugger;
   const d3_h7y = hierarchy({
     name: "root",
     children: [
