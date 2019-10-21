@@ -75,7 +75,7 @@ program_sobjs{
 }`;
 const program_vote_stat_field = `
 program_vote_stat{
-  program_vs_id
+  program_id
   pa_last_year_3
   pa_last_year_2
   pa_last_year
