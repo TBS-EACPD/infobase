@@ -1,14 +1,35 @@
-﻿"dept_code","vote_num","vs_type","name_en","name_fr","pa_last_year_5_auth","pa_last_year_5_exp","pa_last_year_4_auth","pa_last_year_4_exp","pa_last_year_3_auth","pa_last_year_3_exp","pa_last_year_2_auth","pa_last_year_2_exp","pa_last_year_auth","pa_last_year_exp"
-"ACOA",1,1,"Operating/Program","Fonctionnement/Programme",74725659,69058793,68604382,65978345,67652575,63025130,67442115,61978440,69938738,67005669
-"ACOA",5,3,"Grants & Contributions","Subventions et Contributions",236733470,236733461,232078550,231078546,230745973,230745966,262479240,262479231,283971202,283971197
-"ACOA","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",8346591,8346591,8208478,8208478,7809399,7809399,7900191,7900191,8008731,8008731
-"ACOA","S",999,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs",,,20,20,,,,,,
-"ACOA","S",999,"Salary and Motor Car Allowance","Traitement et allocation pour automobile",1425,1425,2000,2000,1189,1189,,,,
-"ACOA","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",28877,17838,22847,5702,31149,27284,28013,7640,26694,
-"WDO",1,1,"Operating/Program","Fonctionnement/Programme",42799950,40153739,39107069,36056455,38841639,35329465,36720314,33928250,38617715,37029259
-"WDO",5,3,"Grants & Contributions","Subventions et Contributions",147133550,143006398,122232026,121697675,122248119,116332625,163559924,152743516,189690082,186283470
-"WDO","S",999,"Collection Agency Fees","Honoraires - Agence de recouvrement",,,3802,3802,,,,,,
-"WDO","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",5166000,5166000,4241334,4241334,4024851,4024851,3809268,3809268,3739442,3739442
-"WDO","S",999,"Salary and Motor Car Allowance","Contributions aux régimes d'avantages sociaux des employés",2000,2000,2000,2000,1522,1189,,,,
-"WDO","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",835,154,1270,1270,3244,3244,2240,2240,15948,15948
-
+dept_code,vote_num,vs_type,name_en,name_fr,pa_last_year_5_auth,pa_last_year_5_exp,pa_last_year_4_auth,pa_last_year_4_exp,pa_last_year_3_auth,pa_last_year_3_exp,pa_last_year_2_auth,pa_last_year_2_exp,pa_last_year_auth,pa_last_year_exp
+CPCC,1,1,Operating/Program,Fonctionnement/Programme,,,2469953,2236843,1264603,1264603,19215842,15363078,22086483,20769053
+CPCC,3,1,Operating/Program,Fonctionnement/Programme,,,,,9476139,7896157,,,,
+CPCC,7,2,Capital,Capital,,,,,0,0,,,,
+CPCC,9,3,Grants & Contributions,Subventions et Contributions,,,,,0,0,,,,
+CPCC,25,1,Operating/Program,Fonctionnement/Programme,2449626,2445699,,,,,,,,
+CPCC,S,999,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,144310,144310,118424,118424,413878,413878,503400,503400,759074,759074
+ND,1,1,Operating/Program,Fonctionnement/Programme,14135439177,13992664687,13817379847,13396436118,14164551726,13775156234,14304175878,13919219357,16050430318,15560133719
+ND,5,2,Capital,Capital,3618939713,2855755116,4835557782,3316468475,4105468232,3182342740,3504237773,3055226195,3885528229,3722931316
+ND,10,3,Grants & Contributions,Subventions et Contributions,184691220,164625402,178764886,134877030,165552299,150998684,162992820,150784806,177003422,152820308
+ND,S,999,Collection Agency Fees,Honoraires - Agence de recouvrement,1950,1950,28,28,,,,,,
+ND,S,999,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,295814687,295814687,266488168,266488168,258992443,258992443,255678012,255678012,269776368,269776368
+ND,S,999,Contributions to employee benefit plans (Members of the Military),Contributions aux régimes d'avantages sociaux des employés - Membres militaires,1407654310,1407654310,1326612708,1326612708,1269394356,1269394356,1216089514,1216089514,3150988816,3150988816
+ND,S,999,Court Awards,Montants adjugés par une cour,,,,,,,59763,59763,,
+ND,S,999,Losses on Foreign Exchange,Pertes d'opérations de change,79723,79723,1892331,1892331,2739996,2739996,2349366,2349366,492327,492327
+ND,S,999,"Payments to dependants of certain members of the Royal Canadian Air Force killed while serving as instructors under British Commonwealth Air Training Plan (Appropriation Act No. 4, 1968)",Versements aux ayants droit de certains membres de l'Aviation royale du Canada tués dans l'exercice de leurs fonctions alors qu'ils servaient à titre d'instructeurs dans le cadre du Plan d'entraînement des aviateurs du Commonwealth britannique (Loi nº4 de 1968 portant affectation de crédits),23392,23392,23656,23656,24046,24046,26397,26397,22684,22684
+ND,S,999,Payments under Parts I-IV of the Defence Services Pension Continuation Act,Versements en vertu des parties I à IV de la Loi sur la continuation de la pension des services de défense,611356,611356,529008,529008,437876,437876,370923,370923,316101,316101
+ND,S,999,Payments under the Supplementary Retirement Benefits Act,Versements en vertu de la Loi sur les prestations de retraite supplémentaires,3014547,3014547,2586516,2586516,2115165,2115165,1763782,1763782,1485401,1485401
+ND,S,999,Salary and Motor Car Allowance,Traitement et allocation pour automobile,104933,104933,100375,100375,131132,131132,83500,83500,84600,84600
+ND,S,999,Spending of proceeds from the disposal of surplus Crown assets,Dépenses des produits de la vente de biens excédentaires de l'État,50100025,44024103,23220748,7924048,28003109,23740571,22536721,4501914,41808529,18035081
+TBC,1,1,Operating/Program,Fonctionnement/Programme,246327900,234224053,321758616,295850911,303094237,248942508,366807216,290703748,309299504,272955611
+TBC,5,6,Treasury Board Central,Crédit du Conseil du Trésor,749998884,0,750000000,0,750000000,0,635642771,0,530274898,0
+TBC,10,6,Treasury Board Central,Crédit du Conseil du Trésor,2093000,0,103000,0,2090470,0,693000,0,693000,0
+TBC,15,6,Treasury Board Central,Crédit du Conseil du Trésor,0,0,0,0,,,0,0,0,0
+TBC,20,6,Treasury Board Central,Crédit du Conseil du Trésor,2268179661,2186132708,2506134407,2454311704,2719270604,2690624377,2460070604,2406697551,3274680578,3164665468
+TBC,25,6,Treasury Board Central,Crédit du Conseil du Trésor,173453875,0,460111826,0,451599384,0,504827064,0,222997692,0
+TBC,30,6,Treasury Board Central,Crédit du Conseil du Trésor,487698916,0,608191976,0,747466679,0,922128220,0,249426761,0
+TBC,33,6,Treasury Board Central,Crédit du Conseil du Trésor,0,0,137334311,0,108778145,0,73858716,0,42220019,0
+TBC,S,999,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,28996563,28996563,27397562,27397562,26233735,26233735,27019489,27019489,27932725,27932725
+TBC,S,999,Employer contributions made under the Public Service Superannuation Act and other retirement acts and the Employment Insurance Act,Contributions aux régimes d'avantages sociaux des employés,443000000,443000000,444043497,444043497,1162000000,1162000000,339743644,339743644,341250848,341250848
+TBC,S,999,Payments for the Pay Equity Settlement,Paiements au titre de l'entente sur la parité salariale,84322,84322,,,2556,2556,-39653,-39653,-3072,-3072
+TBC,S,999,Payments under the Public Service Pension Adjustment Act,Versements en vertu de la Loi sur la mise au point des pensions du service public,4603,4603,5708,5708,3238,3238,355,355,15823,15823
+TBC,S,999,Salary and Motor Car Allowance,Traitement et allocation pour automobile,78700,78700,80300,80300,82328,82328,83500,83500,84600,84600
+TBC,S,999,Spending of proceeds from the disposal of surplus Crown assets,Dépenses des produits de la vente de biens excédentaires de l'État,3100,0,14852,0,46535,0,41394,,8141,
+,,,,,,,,,,,,,,

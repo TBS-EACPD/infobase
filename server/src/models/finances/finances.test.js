@@ -122,7 +122,7 @@ program_fte{
 const org_vote_stat_pa_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
-    org(dept_code: "ACOA") {
+    org(dept_code: "CPCC") {
       ${org_vote_stat_pa_field}
     }
   }
@@ -130,7 +130,7 @@ query ($lang: String = "en") {
 const org_vote_stat_qfr_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
-    org(dept_code: "ACOA") {
+    org(dept_code: "CPCC") {
       ${org_vote_stat_qfr_field}
     }
   }
@@ -138,7 +138,7 @@ query ($lang: String = "en") {
 const org_vote_stat_estimates_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
-    org(dept_code: "ACOA") {
+    org(dept_code: "CPCC") {
       ${org_vote_stat_estimates_field}
     }
   }
@@ -146,7 +146,7 @@ query ($lang: String = "en") {
 const org_transfer_payments_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
-    org(dept_code: "ACOA") {
+    org(dept_code: "CPCC") {
       ${org_transfer_payments_field}
     }
   }
@@ -154,7 +154,7 @@ query ($lang: String = "en") {
 const program_sobjs_query =`
 query ($lang: String = "en") {
   root(lang: $lang) {
-    program(id: "ACOA-ABH00") {
+    program(id: "CPCC-ISC00") {
       ${program_sobjs_field}
     }
   }
@@ -162,7 +162,7 @@ query ($lang: String = "en") {
 const program_vote_stat_query =`
 query ($lang: String = "en") {
   root(lang: $lang) {
-    program(id: "ACOA-ABH00") {
+    program(id: "CPCC-ISC00") {
       ${program_vote_stat_field}
     }
   }
