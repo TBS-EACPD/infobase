@@ -42,7 +42,7 @@ export const declare_igoc_fields_panel = () => declare_panel({
           ["mandate", subject.mandate && <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.mandate)}/>],
           ["legislation", subject.legislation && <ExternalLink href={`https://google.com/search?q=${encodeURI(subject.legislation)}`}>{subject.legislation}</ExternalLink>],
           ["fiscal_end_yr", subject.fiscal_end_yr],
-          ["auditor", !_.isEmpty(subject.auditor) && _.chain(subject.auditor).flatMap( (auditor, ix) => [auditor, <br key={ix} />]).dropRight().value()],
+          ["auditor", subject.auditor],
           ["fed_ownership", subject.fed_ownership],
           ["board_comp", subject.board_comp],
           ["inst_faa", subject.schedule],
