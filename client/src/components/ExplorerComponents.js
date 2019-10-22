@@ -70,65 +70,6 @@ const example_col_defs = [
   },
 ];
 
-const example_data = {
-  id: "root",
-  data: {},
-  children: [
-    {
-      id: 'a',
-      data: {
-        name: "node 1",
-        spend: "20000",
-        ftes: "25",
-      },
-      isExpanded: true,
-      children: [
-        {
-          id: 'a1',
-          data: {
-            name: "node 1.1",
-            spend: "2000",
-            ftes: "5",
-          },
-          is_search_match: true,
-        },
-      ],
-    },
-    {
-      id: 'b',
-      data: {
-        name: "node 2",
-        spend: "23530",
-        ftes: "42",
-        type: "cr",
-      },
-      isExpanded: true,
-      children: [
-        {
-          id: 'a1eee',
-          data: {
-            name: "node 1.1",
-            spend: "2000",
-            ftes: "5",
-            type: "result",
-          },
-          is_search_match: true,
-        },
-        {
-          id: 'b-results-1',
-          data: {
-            name: "b-results-1",
-            spend: "2000",
-            ftes: "5",
-            type: "program",
-          },
-          is_search_match: true,
-        },
-      ],
-    },
-  ],
-};
-
 
 function get_mod_class(node, sibling_index, explorer_context){
   if(node.is_search_match){
