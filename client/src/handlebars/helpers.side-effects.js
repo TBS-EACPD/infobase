@@ -390,13 +390,6 @@ function subject_name(subject){
 
 Handlebars.registerHelper('subj_name', subject_name);
 
-
-Handlebars.registerHelper('cr_or_so', subject => {
-
-  return subject.singular();
-
-});
-
 Handlebars.registerHelper('ce_crso', crso => {
   if(crso.is_cr){
     return `cette ${trivial_text_maker('core_resp')}`;

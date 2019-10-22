@@ -115,7 +115,7 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
       def
     );
   }
-  get is_first_wave(){
+  get is_first_wave(){ // delete on drr17 exit
     return this.dp_status === 'fw';
   }
 
@@ -272,7 +272,7 @@ const CRSO = class CRSO extends static_subject_store_with_API_data(){
   get is_cr(){
     return this.is_drf;
   }
-  get is_first_wave(){
+  get is_first_wave(){ // delete on drr17 exit
     return this.dept.is_first_wave;
   }
   get is_dead(){
@@ -319,7 +319,7 @@ const Program = class Program extends static_subject_store_with_API_data(){
   get fancy_name(){
     return this.name;
   }
-  get is_first_wave(){
+  get is_first_wave(){ // delete on drr17 exit
     return this.crso.is_cr;
   }
   get is_dead(){
