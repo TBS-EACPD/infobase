@@ -126,7 +126,8 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
       .compact()
       .value();
   }
-  //TODO: has planned spending should be renamed is_rpp_org
+  // TODO: pipeline will change to set programs has_planned_spending to 0/1 (based on whether they have a stamped DP, and CRs and depts will roll this up (using _.some()))
+  // wait on has_planned_spending and dp_status cleanup until then
   get has_planned_spending(){
     return !(
       _.includes([
@@ -147,7 +148,7 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
   get is_rpp_org(){
     return this.dp_status !== false;
   }
-  get dp_status(){
+  get dp_status(){ 
     const val = this._dp_status;
     if(val === 1){ 
       return "fw";
