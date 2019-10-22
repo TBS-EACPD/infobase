@@ -43,7 +43,11 @@ export function subject_has_results(subject){
 
     const id_key = level === "org" ? "org_id" : "id";
 
-    return client.query({ query: has_results_query(level, id_key), variables: {lang: window.lang, id: id} })
+    return client.query({ 
+      query_name: `has_results`,
+      query: has_results_query(level, id_key), 
+      variables: {lang: window.lang, id: id},
+    })
       .then( (response) => {
         const resp_time = Date.now() - time_at_request;
 
@@ -399,6 +403,7 @@ export function api_load_results_bundle(subject, result_docs){
   const time_at_request = Date.now();
   const client = get_client();
   return client.query({ 
+    query_name: 'results_bundle',
     query,
     variables: {
       lang: window.lang, 
@@ -502,7 +507,11 @@ export function api_load_results_counts(level = "summary"){
   } else {
     const time_at_request = Date.now();
     const client = get_client();
-    return client.query({ query: load_results_counts_query(level), variables: {lang: window.lang} })
+    return client.query({
+      query_name: 'results_counts',
+      query: load_results_counts_query(level), 
+      variables: {lang: window.lang},
+    })
       .then( (response) => {
         const resp_time = Date.now() - time_at_request;
 
