@@ -72,7 +72,7 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
   static get type_name() { return 'dept'; }
   static get singular(){ return trivial_text_maker("org"); }
   static get plural(){ return trivial_text_maker("orgs");}
-  static get dept_code(){ return this.acronym; } //TODO: replace all .acronym with dept_code
+  static get dept_code(){ return this.acronym; }
   static depts_with_data(){ 
     //lazy initialized
     if(!this._depts_with_data){ 
