@@ -2,7 +2,7 @@ import _ from "lodash";
 import {
   get_standard_csv_file_rows,
   create_program_id,
-  check_ngtive_nan,
+  null_preserving_to_number,
 } from '../load_utils.js';
 
 export default async function({models}){
@@ -20,17 +20,17 @@ export default async function({models}){
   const orgVoteStatPa_records = _.chain(get_standard_csv_file_rows("org_vote_stat_pa.csv"))
     .map(obj => ({
       ...obj,
-      pa_last_year_5_auth: check_ngtive_nan(obj.pa_last_year_5_auth),
-      pa_last_year_4_auth: check_ngtive_nan(obj.pa_last_year_4_auth),
-      pa_last_year_3_auth: check_ngtive_nan(obj.pa_last_year_3_auth),
-      pa_last_year_2_auth: check_ngtive_nan(obj.pa_last_year_2_auth),
-      pa_last_year_auth: check_ngtive_nan(obj.pa_last_year_auth),
+      pa_last_year_5_auth: null_preserving_to_number(obj.pa_last_year_5_auth),
+      pa_last_year_4_auth: null_preserving_to_number(obj.pa_last_year_4_auth),
+      pa_last_year_3_auth: null_preserving_to_number(obj.pa_last_year_3_auth),
+      pa_last_year_2_auth: null_preserving_to_number(obj.pa_last_year_2_auth),
+      pa_last_year_auth: null_preserving_to_number(obj.pa_last_year_auth),
     
-      pa_last_year_5_exp: check_ngtive_nan(obj.pa_last_year_5_exp),
-      pa_last_year_4_exp: check_ngtive_nan(obj.pa_last_year_4_exp),
-      pa_last_year_3_exp: check_ngtive_nan(obj.pa_last_year_3_exp),
-      pa_last_year_2_exp: check_ngtive_nan(obj.pa_last_year_2_exp),
-      pa_last_year_exp: check_ngtive_nan(obj.pa_last_year_exp),
+      pa_last_year_5_exp: null_preserving_to_number(obj.pa_last_year_5_exp),
+      pa_last_year_4_exp: null_preserving_to_number(obj.pa_last_year_4_exp),
+      pa_last_year_3_exp: null_preserving_to_number(obj.pa_last_year_3_exp),
+      pa_last_year_2_exp: null_preserving_to_number(obj.pa_last_year_2_exp),
+      pa_last_year_exp: null_preserving_to_number(obj.pa_last_year_exp),
     }))
     .map(obj => new OrgVoteStatPa(obj))
     .value();
@@ -46,17 +46,17 @@ export default async function({models}){
   const orgTransferPayments_records = _.chain(get_standard_csv_file_rows("org_transfer_payments.csv"))
     .map(obj => ({
       ...obj,
-      pa_last_year_5_auth: check_ngtive_nan(obj.pa_last_year_5_auth),
-      pa_last_year_4_auth: check_ngtive_nan(obj.pa_last_year_4_auth),
-      pa_last_year_3_auth: check_ngtive_nan(obj.pa_last_year_3_auth),
-      pa_last_year_2_auth: check_ngtive_nan(obj.pa_last_year_2_auth),
-      pa_last_year_1_auth: check_ngtive_nan(obj.pa_last_year_1_auth),
+      pa_last_year_5_auth: null_preserving_to_number(obj.pa_last_year_5_auth),
+      pa_last_year_4_auth: null_preserving_to_number(obj.pa_last_year_4_auth),
+      pa_last_year_3_auth: null_preserving_to_number(obj.pa_last_year_3_auth),
+      pa_last_year_2_auth: null_preserving_to_number(obj.pa_last_year_2_auth),
+      pa_last_year_1_auth: null_preserving_to_number(obj.pa_last_year_1_auth),
     
-      pa_last_year_5_exp: check_ngtive_nan(obj.pa_last_year_5_exp),
-      pa_last_year_4_exp: check_ngtive_nan(obj.pa_last_year_4_exp),
-      pa_last_year_3_exp: check_ngtive_nan(obj.pa_last_year_3_exp),
-      pa_last_year_2_exp: check_ngtive_nan(obj.pa_last_year_2_exp),
-      pa_last_year_1_exp: check_ngtive_nan(obj.pa_last_year_1_exp),
+      pa_last_year_5_exp: null_preserving_to_number(obj.pa_last_year_5_exp),
+      pa_last_year_4_exp: null_preserving_to_number(obj.pa_last_year_4_exp),
+      pa_last_year_3_exp: null_preserving_to_number(obj.pa_last_year_3_exp),
+      pa_last_year_2_exp: null_preserving_to_number(obj.pa_last_year_2_exp),
+      pa_last_year_1_exp: null_preserving_to_number(obj.pa_last_year_1_exp),
     }))
     .map(obj => new OrgTransferPayments(obj))
     .value();
