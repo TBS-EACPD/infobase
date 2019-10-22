@@ -34,10 +34,10 @@ const Gov = {
   get has_planned_spending(){ return true;},
   lookup(){ return this; },
   name: gov_name,
-  description: gov_name,
   // the following name-like fields are for compatibility with old APIs and to ensure it's searchable in org-searches
+  description: gov_name,
   title: gov_name,
-  legal_name: gov_name, //hacky thing to include gov in the search
+  legal_name: gov_name,
   fancy_name: gov_name,
 };
 
