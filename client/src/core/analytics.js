@@ -33,7 +33,7 @@ const get_client_id = () => {
 function initialize_analytics(){
   const is_dev = String(window.location.hostname).indexOf("tbs-sct.gc.ca") === -1;
   
-  ga('create', 'UA-97024958-1', 'auto');
+  ga('create', 'UA-97024958-1', 'auto', {Secure: true, SameSite: 'None'});
   ga('set', 'anonymizeIp', true);
 
   ga(tracker => {
