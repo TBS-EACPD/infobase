@@ -1,0 +1,18 @@
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 6px;
+  border: 1px solid gray;
+}
+
+.checkbox--label {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.checkbox--is-checked {
+  background-color: #ddd;
+}
