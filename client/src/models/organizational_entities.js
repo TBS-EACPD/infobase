@@ -172,12 +172,6 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
   get type(){
     return this.inst_form.name;
   }
-  get inst_p_group(){
-    return this.inst_form.parent_form.name;
-  }
-  get inst_gp_group(){
-    return this.inst_form.parent_form.parent_form.name;
-  }
   get min(){
     return this.ministry.name;
   }
