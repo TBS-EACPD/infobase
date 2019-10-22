@@ -179,11 +179,7 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
     return _.map(this.ministers, 'name');
   }
   get auditor(){
-    return (
-      _.isEmpty(this.auditor_str) ?
-      [] :
-      [ this.auditor_str ]
-    );
+    return this.auditor_str;
   }
   get legislation(){
     return (
