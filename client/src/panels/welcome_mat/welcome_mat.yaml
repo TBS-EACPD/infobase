@@ -22,9 +22,9 @@ last_year:
 in_three_years:
   transform: [handlebars]
   en: |
-    In three years' time {{> no_wrap_year year=planning_year_3}}
+    In 3 years' time {{> no_wrap_year year=planning_year_3}}
   fr: |
-    Dans trois ans {{> no_wrap_year year=planning_year_3}}
+    Dans 3 ans {{> no_wrap_year year=planning_year_3}}
 in_this_year:
   transform: [handlebars]
   en: |
@@ -226,13 +226,13 @@ no_spend_auth_this_year:
 gov_welcome_mat_spending_summary:
   transform: [handlebars, markdown]
   en: |
-   In the last five years, overall government {{gl_tt "spending" "EXP"}} has
+   In the last 5 years, overall government {{gl_tt "spending" "EXP"}} has
    {{changed_by  exp_hist_change "fmt_percentage1"}}
    and is
    {{will_change_by  exp_plan_change "fmt_percentage1"}} 
    by {{planning_year_3}}.
   fr: |
-   Au cours des cinq dernières années, les {{gl_tt "dépenses" "EXP"}} totales du gouvernement
+   Au cours des 5 dernières années, les {{gl_tt "dépenses" "EXP"}} totales du gouvernement
    {{fr_changed_by  exp_hist_change "f" "p" "fmt_percentage1" }}.
    D'ici {{planning_year_3}}, les dépenses prévues
    {{fr_will_change_by  exp_plan_change "f" "p" "fmt_percentage1"}}.
@@ -304,17 +304,17 @@ CR_exp_ftes_fte_summary:
   transform: [handlebars,markdown]
   en: |
    {{#if no_change}}
-   Over the next three years, the total spending and the number of [Full-Time Equivalents (FTEs)]{{gl "FTE"}} 
+   Over the next 3 years, the total spending and the number of [Full-Time Equivalents (FTEs)]{{gl "FTE"}} 
    are {{will_change_by  exp_calcs.exp_plan_change "fmt_percentage1"}}.
    {{else}}
-   Over the next three years, total spending is {{will_change_by  exp_calcs.exp_plan_change "fmt_percentage1"}} and 
+   Over the next 3 years, total spending is {{will_change_by  exp_calcs.exp_plan_change "fmt_percentage1"}} and 
    the number of [Full-Time Equivalents (FTEs)]{{gl "FTE"}} is {{will_change_by fte_calcs.fte_plan_change "fmt_percentage1"}}.   
    {{/if}}
   fr: |
    {{#if no_change}}
-   Au cours des trois prochaines années, le total des dépenses et le nombre d'[équivalents temps plein prévus (ETPs)]{{gl "FTE"}} 
+   Au cours des 3 prochaines années, le total des dépenses et le nombre d'[équivalents temps plein prévus (ETPs)]{{gl "FTE"}} 
    {{fr_will_change_by fte_calcs.fte_plan_change "m" "p" "fmt_percentage1"}}.
    {{else}}
-   Au cours des trois prochaines années, le total des dépenses {{fr_will_change_by  exp_calcs.exp_plan_change "m" "s" "fmt_percentage1"}} et 
+   Au cours des 3 prochaines années, le total des dépenses {{fr_will_change_by  exp_calcs.exp_plan_change "m" "s" "fmt_percentage1"}} et 
    le nombre d'[équivalents temps plein (ETPs)]{{gl "FTE"}} {{fr_will_change_by fte_calcs.fte_plan_change "m" "s" "fmt_percentage1"}}.
    {{/if}}
