@@ -45,6 +45,8 @@ const log_query = (req) => {
         !_.isEmpty(request_content.variables) ? 
           `\nvariables: ${JSON.stringify(request_content.variables)}` : 
           ''
+      } \nquery_name: ${
+        request_content.query_name
       } \nquery_hash: ${ // Include a hash because the query itself can be longer than the (undocumented?) stackdriver textPayload limit
         md5(request_content.query)
       } \nquery: ${ // put the query at the bottom of the textPayload so it doesn't push anything else out if its length causes a cut-off
