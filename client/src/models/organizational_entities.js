@@ -166,9 +166,6 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
   get tables(){
     return this.table_ids; 
   }
-  get inst_form(){
-    return this.inst_form.name;
-  }
   get min(){
     return this.ministry.name;
   }
