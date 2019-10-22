@@ -298,7 +298,6 @@ class InfoGraph_ extends React.Component {
   }
   loadGraphDeps({bubbles_for_subject, active_bubble_id, subject, level}){
     const panel_keys = get_panels_for_subj_bubble(bubbles_for_subject, active_bubble_id);
-
     ensure_loaded({
       graph_keys: panel_keys,
       subject_level: level,
