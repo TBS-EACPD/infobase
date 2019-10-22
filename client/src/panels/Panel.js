@@ -49,7 +49,7 @@ class Panel_ extends React.Component {
 
     const subject = context && context.subject;
 
-    const file_name_context = subject ? subject.level === 'dept' ? subject.acronym: subject.id : "";
+    const file_name_context = subject ? subject.level === 'dept' ? subject.dept_code: subject.id : "";
     const file_name = `${file_name_context}_${title}.pdf`;
     const panel_link = context && panel_href_template(subject, context.active_bubble_id, context.graph_key) && 
       window.location.href.replace(
@@ -61,8 +61,8 @@ class Panel_ extends React.Component {
       subject.level === 'tag' || subject.level === 'gov' ?
         subject.name :
         subject.level === 'dept' ? 
-          subject.acronym : 
-          `${subject.dept.acronym} - ${subject.name}`
+          subject.dept_code : 
+          `${subject.dept.dept_code} - ${subject.name}`
     );
     const share_modal_title = `${share_modal_subject_fragment && `${share_modal_subject_fragment} — ` || ""}${title}`;
 

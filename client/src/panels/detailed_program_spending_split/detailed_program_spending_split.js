@@ -436,7 +436,7 @@ export const declare_detailed_program_spending_split_panel = () => declare_panel
         })
         .map(row => 
           ({
-            label: is_tag ? `${row.prgm} (${Subject.Dept.lookup(row.dept).acronym})` : row.prgm,
+            label: is_tag ? `${row.prgm} (${Subject.Dept.lookup(row.dept).dept_code})` : row.prgm,
             data: exp_cols.map(col => row[col]),
             active: false,
           })

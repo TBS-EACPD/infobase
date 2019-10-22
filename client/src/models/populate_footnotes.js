@@ -65,13 +65,13 @@ function load_footnotes_bundle(subject){
       case 'gov':
         return Promise.resolve();
       case 'dept':
-        subject_code = subject.acronym;
+        subject_code = subject.dept_code;
         break;
       case 'program':
-        subject_code = subject.dept.acronym;
+        subject_code = subject.dept.dept_code;
         break;
       case 'crso':
-        subject_code = subject.dept.acronym;
+        subject_code = subject.dept.dept_code;
         break;
       case 'tag':
         subject_code = subject.id;
