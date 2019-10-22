@@ -141,7 +141,7 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
         "Sociétés d'État", 
         "Parliamentary Entities",
         "Entités Parlementaires",
-      ],this.type)
+      ],this.inst_form)
     );
   }
   get is_rpp_org(){
@@ -166,10 +166,7 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
   get tables(){
     return this.table_ids; 
   }
-  //...LEGACY API
-  //TODO: fix external code 
-  //(igoc.js, igoc profile and hierarchies are the biggest offenders) 
-  get type(){
+  get inst_form(){
     return this.inst_form.name;
   }
   get min(){
@@ -191,9 +188,6 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
   get is_dead(){
     return _.nonEmpty(this.end_yr) || this.status !== trivial_text_maker("active");
   }
-
-
-
   /*
     POPULATION GROUPS:
 

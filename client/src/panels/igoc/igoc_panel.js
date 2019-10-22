@@ -35,7 +35,7 @@ export const declare_igoc_fields_panel = () => declare_panel({
           ["acronym", subject.fancy_acronym],
           ["previously_named", subject.old_name],
           ["incorp_yr", subject.incorp_yr],
-          ["type", subject.type],
+          ["type", subject.inst_form],
           ["website", !subject.is_dead && subject.website_url && <ExternalLink href={generate_href(subject.website_url)}>{subject.website_url}</ExternalLink>],
           ["eval_links", !subject.is_dead && subject.eval_url && <ExternalLink href={generate_href(subject.eval_url)}>{subject.eval_url}</ExternalLink>],
           ["minister", !_.isEmpty(subject.minister) && _.chain(subject.minister).flatMap( (minister, ix) => [minister, <br key={ix} />]).dropRight().value()],
