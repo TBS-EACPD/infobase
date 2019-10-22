@@ -84,11 +84,11 @@ export function api_load_subject_has_measures(subject, years){
   const time_at_request = Date.now();
   const client = get_client();
   return client.query({
-    query_name: 'subject_has_measures',
     query,
     variables: {
       lang: window.lang,
       id,
+      _query_name: 'subject_has_measures',
     },
   })
     .then( (response) => {
@@ -252,11 +252,11 @@ export function api_load_budget_measures(subject, years){
   const time_at_request = Date.now();
   const client = get_client();
   return client.query({
-    query_name: 'budget_measures',
     query,
     variables: {
       lang: window.lang, 
       id,
+      _query_name: 'budget_measures',
     },
   })
     .then( (response) => {
