@@ -5,14 +5,10 @@
   display: inline-block;
   vertical-align: middle;
   border-radius: 6px;
-  border: 1px solid gray;
+  margin: 2px;
 }
 
 .checkbox--label {
   display: inline-block;
   vertical-align: middle;
-}
-
-.checkbox--is-checked {
-  background-color: #ddd;
 }

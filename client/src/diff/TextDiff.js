@@ -24,6 +24,8 @@ import {
   SpinnerWrapper,
 } from '../components';
 
+import { CheckboxSelector } from '../components/CheckboxSelector.js';
+
 const {
   GraphLegend,
 } = declarative_charts;
@@ -430,6 +432,13 @@ export default class TextDiffApp extends React.Component {
         route_key="_diff"
         beta={true}
       >
+        <CheckboxSelector
+          checkboxes={[
+            {label: "one", defaultChecked: false, color: window.infobase_color_constants.highlightColor},
+            {label: "two", defaultChecked: false, color: window.infobase_color_constants.secondaryColor},
+          ]}
+          handleToggle={() => console.log("toggled")}
+        />
         <TM k="diff_title" el="h1" />
         <div className={classNames("medium_panel_text","text-diff__instructions")}>
           <TM k="diff_intro_text" args={{previous_dp_year, current_dp_year}}/>

@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import './CheckboxSelector.scss';
 
 export class CheckboxSelector extends React.Component {
   constructor(props){
@@ -9,8 +10,8 @@ export class CheckboxSelector extends React.Component {
   render(){
     const { checkboxes, handleToggle } = this.props;
     return (
-      _.map(checkboxes, ({label, defaultChecked}, index) =>
-        <Checkbox id={index} toggleHandler={handleToggle} label={label} defaultChecked={defaultChecked}/>
+      _.map(checkboxes, (checkbox, index) =>
+        <Checkbox key={index} id={index} toggleHandler={handleToggle} {...checkbox}/>
       )
     );
   }
@@ -23,32 +24,33 @@ export class Checkbox extends React.Component {
       checked: props.defaultChecked,
     };
   }
-  onClickHandler(){
-    const newChecked = !this.state.checked;
-    this.props.toggleHandler(this.props.id,newChecked);
-    this.setState({checked: newChecked});
-  }
   render(){
-    const {id, label} = this.props;
+    const {id, label, color} = this.props;
     const checked = this.state.checked;
+    const onClickHandler = () => {
+      const newChecked = !this.state.checked;
+      this.props.toggleHandler(this.props.id,newChecked);
+      this.setState({checked: newChecked});
+    };
+    const borderStyle = {border: `2px solid ${color}`}
     return (
-      <Fragment>
-        <span
-          className="checkbox"
-          tabIndex={id}
-          role="checkbox"
-          aria-checked={checked}
+      <div>
+        <button
+          className={checked ? "checkbox checkbox--is-checked" : "checkbox"}
+          style={checked ? { backgroundColor: color, ...borderStyle} : borderStyle }
+          tabIndex={1}
+          aria-pressed={checked}
           aria-labelledby={"checkboxLabel"+id}
-          onClick={this.onClickHandler}
+          onClick={onClickHandler}
         />
         <label
           className="checkbox--label"
           id={"checkboxLabel"+id}
-          onClick={this.onClickHandler}
+          onClick={onClickHandler}
         >
           {label}
         </label>
-      </Fragment>
+      </div>
     );
   }
 }
