@@ -75,8 +75,8 @@ function node_html(node, display_name, text_size, display_number) {
 }
 
 function node_name(node, width) {
-  if (node.data.subject && node.data.subject.fancy_acronym && width < 150) {
-    return node.data.subject.fancy_acronym;
+  if (node.data.subject && node.data.subject.abbrev && width < 150) {
+    return node.data.subject.abbrev;
   }
   return node.data.name;
 }
