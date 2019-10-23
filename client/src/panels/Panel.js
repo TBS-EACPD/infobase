@@ -73,6 +73,9 @@ class Panel_ extends React.Component {
               title={title}
               link={panel_link}
               button_class_name={"panel-heading-utils"}
+
+              analytics_logging={true}
+              analytics_event_value={title}
             />
           </div>
         }
@@ -84,6 +87,9 @@ class Panel_ extends React.Component {
               button_class_name={'panel-heading-utils'} 
               button_description={text_maker("panel_share_button")}
               subject={subject}
+
+              analytics_logging={true}
+              analytics_event_value={title}
             />
           </div>
         }
@@ -94,6 +100,9 @@ class Panel_ extends React.Component {
               button_class_name={'panel-heading-utils'} 
               button_description={text_maker("copy_panel_link")}
               IconComponent={IconCopyLink}
+
+              analytics_logging={true}
+              analytics_event_value={title}
             />
           </div>
         }

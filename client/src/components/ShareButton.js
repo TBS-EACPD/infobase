@@ -45,13 +45,20 @@ export class ShareButton extends React.Component {
       icon_color,
       icon_alternate_color,
       icon_size,
+
+      analytics_logging,
+      analytics_event_value,
     } = this.props;
 
-    const log_share_event = () => log_standard_event({
-      SUBAPP: window.location.hash.replace('#',''),
-      MISC1: "SHARE_CONTENT",
-      MISC2: `{shared_url: ${url}, shared_to: ${document.activeElement.getAttribute('aria-label')}}`,
-    });
+    const log_share_event = () => {
+      const site_shared_to = document.activeElement.getAttribute('aria-label');
+
+      analytics_logging && log_standard_event({
+        SUBAPP: window.location.hash.replace('#',''),
+        MISC1: `SHARE_CONTENT--${site_shared_to}`,
+        MISC2: analytics_event_value || url,
+      });
+    };
 
     return(
       <Fragment>
