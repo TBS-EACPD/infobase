@@ -133,12 +133,14 @@ ${doc}_results: results(doc: "${doc}") {
     target_max
     target_narrative
     measure
+    seeking_to
 
     previous_year_target_type
     previous_year_target_min
     previous_year_target_max
     previous_year_target_narrative
     previous_year_measure
+    previous_year_seeking_to
 
     target_explanation
     result_explanation
