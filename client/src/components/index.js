@@ -22,7 +22,6 @@ export { BackToTop } from './BackToTop.js';
 export { UnlabeledTombstone, LabeledTombstone } from './Tombstones.js';
 export { PresentationalPanel } from './PresentationalPanel.js';
 export { ShareButton } from './ShareButton.js';
-export { PermalinkButton } from './PermalinkButton.js';
 export { WriteToClipboard } from './WriteToClipboard.js';
 export { PDFGenerator } from './PDFGenerator.js';
 export { CountdownCircle } from './CountdownCircle.js';

@@ -8,7 +8,6 @@ import {
   PresentationalPanel,
   create_text_maker_component,
   ShareButton,
-  PermalinkButton,
   WriteToClipboard,
   PDFGenerator,
 } from '../components';
@@ -44,8 +43,6 @@ class Panel_ extends React.Component {
       children,
       allowOverflow,
     } = this.props;
-
-    const copy_to_clipboard = true; // feature flag for copy to clipboard vs permalink
 
     const subject = context && context.subject;
 
@@ -92,21 +89,12 @@ class Panel_ extends React.Component {
         }
         { !context.no_permalink && panel_link &&
           <div style={{display: 'inline'}}>
-            { !copy_to_clipboard &&
-              <PermalinkButton
-                url={panel_href_template(context.subject, context.active_bubble_id, context.graph_key)}
-                button_class_name={'panel-heading-utils'}
-                title={text_maker("panel_permalink")}
-              />
-            }
-            { copy_to_clipboard &&
-              <WriteToClipboard 
-                text_to_copy={panel_link}
-                button_class_name={'panel-heading-utils'} 
-                button_description={text_maker("copy_panel_link")}
-                IconComponent={IconCopyLink}
-              />
-            }
+            <WriteToClipboard 
+              text_to_copy={panel_link}
+              button_class_name={'panel-heading-utils'} 
+              button_description={text_maker("copy_panel_link")}
+              IconComponent={IconCopyLink}
+            />
           </div>
         }
       </div>
