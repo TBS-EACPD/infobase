@@ -44,12 +44,16 @@ fragment result_and_indicator_fields on Result {
     target_max
     target_narrative
     measure
+    seeking_to
+    target_change
 
     previous_year_target_type
     previous_year_target_min
     previous_year_target_max
     previous_year_target_narrative
     previous_year_measure
+    previous_year_seeking_to
+    previous_year_target_change
 
     target_explanation
     result_explanation
@@ -61,9 +65,6 @@ fragment result_and_indicator_fields on Result {
     status_key
     
     methodology
-
-    target_change
-    seeking_to
   }
 }
 fragment everything on Org {

@@ -71,9 +71,10 @@ export default async function({models}){
         _.assign(
           indicator,
           {
-            previous_year_target_type: previous_year_indicator_instance.target_type,
-            previous_year_target_min: previous_year_indicator_instance.target_min,
-            previous_year_target_max: previous_year_indicator_instance.target_max,
+            ..._.chain(["target_type", "target_min", "target_max", "seeking_to", "target_change"])
+              .map(field_key => [ `previous_year_${field_key}`, previous_year_indicator_instance[`${field_key}`] ])
+              .fromPairs()
+              .value(),
             ..._.chain(["target_narrative", "measure"])
               .flatMap( 
                 billingual_field_key => [
