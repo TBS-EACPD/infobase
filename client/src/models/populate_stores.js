@@ -122,7 +122,6 @@ function populate_igoc_models({
       pas_code,
       schedule,
       faa_hr,
-      //note auditor is no longer an array, it's either comma separated or 'and' separated
       auditor_str, 
       incorp_yr,
       fed_ownership,
