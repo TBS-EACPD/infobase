@@ -150,6 +150,9 @@ ${
     status_key: String
 
     methodology: String
+
+    target_change: String
+    seeking_to: String
   }
 
   # this is a graphql anti-pattern but fits in the existing client stores nicely
