@@ -27,6 +27,9 @@ export class WriteToClipboard extends React.Component {
       button_class_name,
       button_description,
       IconComponent,
+
+      analytics_logging,
+      analytics_event_value,
     } = this.props;
 
     const {
@@ -52,10 +55,10 @@ export class WriteToClipboard extends React.Component {
                   () => this.setState({copy_status_message: text_maker("copy_fail")})
                 );
 
-              log_standard_event({
+              analytics_logging && log_standard_event({
                 SUBAPP: window.location.hash.replace('#',''),
                 MISC1: "COPY_TO_CLIPBOARD",
-                MISC2: text_to_copy,
+                MISC2: analytics_event_value || text_to_copy,
               });
             }
           }

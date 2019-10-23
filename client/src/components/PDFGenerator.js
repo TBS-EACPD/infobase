@@ -55,6 +55,9 @@ export class PDFGenerator extends React.Component {
       include_footer,
       title,
       file_name,
+
+      analytics_logging,
+      analytics_event_value,
     } = this.props;
 
     const element_to_print = (!dom_element && target_id) ? 
@@ -122,11 +125,11 @@ export class PDFGenerator extends React.Component {
         pdf.textWithLink(`canada.ca/${langUrl}`, 2.5, this.current_height, {url: link});
       }
     };
-    const pdf_end_util = (name) => {
-      log_standard_event({
+    const pdf_end_util = (title) => {
+      analytics_logging && log_standard_event({
         SUBAPP: window.location.hash.replace('#',''),
         MISC1: "PDF_DOWNLOAD",
-        MISC2: name,
+        MISC2: analytics_event_value || title,
       });
       this.setState({generating_pdf: false});
     };
