@@ -18,6 +18,7 @@ import {
 import { StatelessModal } from './modals_and_popovers';
 import { create_text_maker } from '../models/text.js';
 import { IconShare } from '../icons/icons.js';
+import { log_standard_event } from '../core/analytics.js';
 
 const text_maker = create_text_maker(text);
 
@@ -46,6 +47,12 @@ export class ShareButton extends React.Component {
       icon_size,
     } = this.props;
 
+    const log_share_event = () => log_standard_event({
+      SUBAPP: window.location.hash.replace('#',''),
+      MISC1: "SHARE_CONTENT",
+      MISC2: `{shared_url: ${url}, shared_to: ${document.activeElement.getAttribute('aria-label')}}`,
+    });
+
     return(
       <Fragment>
         <button onClick={() => this.toggleModal(true)} className={button_class_name}>
@@ -72,7 +79,10 @@ export class ShareButton extends React.Component {
           }
           subtitle={title}
           body={
-            <Fragment>
+            <div 
+              onClick={log_share_event}
+              onKeyDown={({keyCode}) => _.includes([13,32], keyCode) && log_share_event()}
+            >
               <FacebookShareButton className='share-icons' url={url}>
                 <FacebookIcon size={32} />
               </FacebookShareButton> 
@@ -88,7 +98,7 @@ export class ShareButton extends React.Component {
               <RedditShareButton className='share-icons' url={url} title={title}>
                 <RedditIcon size={32} />
               </RedditShareButton>
-            </Fragment>
+            </div>
           }
           close_text={text_maker("cancel")}
         />
