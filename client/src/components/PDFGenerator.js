@@ -1,6 +1,5 @@
 import text from './PDFGenerator.yaml';
 import { get_static_url } from '../request_utils.js';
-import { log_standard_event } from '../core/analytics.js';
 
 import { create_text_maker_component } from './misc_util_components.js';
 import { SpinnerWrapper } from './SpinnerWrapper.js';
@@ -55,9 +54,6 @@ export class PDFGenerator extends React.Component {
       include_footer,
       title,
       file_name,
-
-      analytics_logging,
-      analytics_event_value,
     } = this.props;
 
     const element_to_print = (!dom_element && target_id) ? 
@@ -125,12 +121,7 @@ export class PDFGenerator extends React.Component {
         pdf.textWithLink(`canada.ca/${langUrl}`, 2.5, this.current_height, {url: link});
       }
     };
-    const pdf_end_util = (title) => {
-      analytics_logging && log_standard_event({
-        SUBAPP: window.location.hash.replace('#',''),
-        MISC1: "PDF_DOWNLOAD",
-        MISC2: analytics_event_value || title,
-      });
+    const pdf_end_util = () => {
       this.setState({generating_pdf: false});
     };
   
@@ -167,7 +158,7 @@ export class PDFGenerator extends React.Component {
         setup_pdf_footer(pdf, width);
       };
       pdf.save(pdf_file_name);
-      pdf_end_util(title);
+      pdf_end_util();
     } else {
       // When the list of legend items are too long such that the items don't all fit into the defined max height, scroll is created to contain them.
       // Screenshotting that will cause items to overflow, hence below sets max height to a big arbitrary number which later gets set back to original.
@@ -230,7 +221,7 @@ export class PDFGenerator extends React.Component {
             (legend_container, index) => legend_container.style.maxHeight = oldMaxHeights[index]
           );
 
-          pdf_end_util(title);
+          pdf_end_util();
         });
     };
   };

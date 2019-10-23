@@ -6,8 +6,6 @@ import { Fragment } from 'react';
 import { FixedPopover } from './modals_and_popovers';
 import { IconCopy } from '../icons/icons.js';
 
-import { log_standard_event } from '../core/analytics.js';
-
 import { create_text_maker } from '../models/text.js';
 
 const text_maker = create_text_maker(text);
@@ -27,9 +25,6 @@ export class WriteToClipboard extends React.Component {
       button_class_name,
       button_description,
       IconComponent,
-
-      analytics_logging,
-      analytics_event_value,
     } = this.props;
 
     const {
@@ -45,22 +40,14 @@ export class WriteToClipboard extends React.Component {
         <button
           className={button_class_name}
           onClick={
-            () => {
-              clipboard
-                .writeText(text_to_copy)
-                .then(
-                  () => this.setState({copy_status_message: text_maker("copy_success")})
-                )
-                .catch(
-                  () => this.setState({copy_status_message: text_maker("copy_fail")})
-                );
-
-              analytics_logging && log_standard_event({
-                SUBAPP: window.location.hash.replace('#',''),
-                MISC1: "COPY_TO_CLIPBOARD",
-                MISC2: analytics_event_value || text_to_copy,
-              });
-            }
+            () => clipboard
+              .writeText(text_to_copy)
+              .then(
+                () => this.setState({copy_status_message: text_maker("copy_success")})
+              )
+              .catch(
+                () => this.setState({copy_status_message: text_maker("copy_fail")})
+              )
           }
           onKeyDown={() => this.setState({ keyboard_navigation_detected: true })}
         >
