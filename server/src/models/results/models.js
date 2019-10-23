@@ -69,6 +69,8 @@ export default function(model_singleton){
     ...bilingual_str("actual_result"),
     status_key: str_type,
     ...bilingual_str("methodology"),
+    target_change: str_type,
+    seeking_to: str_type,
     // Want to populate certain indicator fields with their previous year value as available
     // Could use stable_id's to query for this from reducers, but embedding at populate time's much more efficient
     ..._.reduce(

@@ -61,6 +61,9 @@ fragment result_and_indicator_fields on Result {
     status_key
     
     methodology
+
+    target_change
+    seeking_to
   }
 }
 fragment everything on Org {
