@@ -54,8 +54,8 @@ const org_attributes_to_match = [
   'legal_name', 
   'applied_title',
   'old_name',
-  'fancy_acronym',
-  'other_lang_fancy_acronym',
+  'abbrev',
+  'other_lang_abbrev',
   'other_lang_applied_title',
 ];
 const LimitedDataDisplay = (search, name) => (

@@ -142,7 +142,7 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
               prog => ({
                 id: `${parent_id}-${prog.guid}`,
                 data: {
-                  name: `${prog.name} (${prog.dept.fancy_acronym || prog.dept.name})`,
+                  name: `${prog.name} (${prog.dept.abbrev || prog.dept.name})`,
                   subject: prog,
                   resources: get_resources(prog),
                   defs: _.compact([

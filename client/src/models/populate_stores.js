@@ -68,7 +68,7 @@ function populate_igoc_models({
     const [
       org_id,
       dept_code,
-      fancy_acronym,
+      abbrev,
       legal_name,
       applied_title,
       old_applied_title,
@@ -92,7 +92,7 @@ function populate_igoc_models({
       website_url_id,
       article1,
       article2,
-      other_lang_fancy_acronym,
+      other_lang_abbrev,
       other_lang_applied_title, 
     ] = row;
 
@@ -111,7 +111,7 @@ function populate_igoc_models({
     const def_obj = {
       unique_id: +org_id,
       dept_code,
-      fancy_acronym,
+      abbrev,
       legal_name,
       applied_title,
       old_applied_title,
@@ -134,7 +134,7 @@ function populate_igoc_models({
       website_url,
       le_la: article1 || "",
       du_de_la: article2 || "",
-      other_lang_fancy_acronym,
+      other_lang_abbrev,
       other_lang_applied_title, 
     };
 
