@@ -10,6 +10,7 @@ import {
   ShareButton,
   WriteToClipboard,
   PDFGenerator,
+  LogInteractionEvents,
 } from '../components';
 
 import { IconCopyLink } from '../icons/icons.js';
@@ -66,45 +67,48 @@ class Panel_ extends React.Component {
     const header_utils = context && (
       <div style={{marginLeft: 'auto'}}>
         { context.graph_key &&
-          <div style={{display: 'inline'}}>
+          <LogInteractionEvents
+            event_type={"PANEL_PDF_DOWNLOADED"}
+            event_details={title}
+            style={{display: 'inline'}}
+          >
             <PDFGenerator 
               target_id={context.graph_key}
               file_name={file_name}
               title={title}
               link={panel_link}
               button_class_name={"panel-heading-utils"}
-
-              analytics_logging={true}
-              analytics_event_value={title}
             />
-          </div>
+          </LogInteractionEvents>
         }
         { panel_link &&
-          <div style={{display: 'inline'}}>
+          <LogInteractionEvents
+            event_type={"PANEL_LINK_SHARED"}
+            event_details={title}
+            style={{display: 'inline'}}
+          >
             <ShareButton
               url={panel_link}
               title={share_modal_title}
               button_class_name={'panel-heading-utils'} 
               button_description={text_maker("panel_share_button")}
               subject={subject}
-
-              analytics_logging={true}
-              analytics_event_value={title}
             />
-          </div>
+          </LogInteractionEvents>
         }
         { !context.no_permalink && panel_link &&
-          <div style={{display: 'inline'}}>
+          <LogInteractionEvents
+            event_type={"PANEL_LINK_COPIED"}
+            event_details={title}
+            style={{display: 'inline'}}
+          >
             <WriteToClipboard 
               text_to_copy={panel_link}
               button_class_name={'panel-heading-utils'} 
               button_description={text_maker("copy_panel_link")}
               IconComponent={IconCopyLink}
-
-              analytics_logging={true}
-              analytics_event_value={title}
             />
-          </div>
+          </LogInteractionEvents>
         }
       </div>
     );
