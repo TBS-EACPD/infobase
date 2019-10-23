@@ -72,7 +72,6 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
   static get type_name() { return 'dept'; }
   static get singular(){ return trivial_text_maker("org"); }
   static get plural(){ return trivial_text_maker("orgs");}
-  static get dept_code(){ return this.acronym; }
   static depts_with_data(){ 
     //lazy initialized
     if(!this._depts_with_data){ 
@@ -96,8 +95,8 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
   static create_and_register(def){
     const inst = new Dept(def);
     this.register(inst.id,inst);
-    if(!_.isEmpty(inst.acronym)){
-      this.register(inst.acronym,inst);
+    if(!_.isEmpty(inst.dept_code)){
+      this.register(inst.dept_code,inst);
     }
     return inst;
   }
@@ -136,7 +135,7 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
         "FCAC",
         "IJC",
         "GG",
-      ],this.acronym) ||
+      ],this.dept_code) ||
       _.includes([ 
         "Crown Corporations", 
         "Sociétés d'État", 
@@ -284,9 +283,9 @@ const Program = class Program extends static_subject_store_with_API_data(){
   static get type_name(){ return 'program'; }
   static get singular(){ return trivial_text_maker("program"); }
   static get plural(){ return trivial_text_maker("programs"); }
-  static unique_id(dept, activity_code) { //dept can be an object, an acronym or a dept unique_id.
-    const dept_acr = _.isObject(dept) ? dept.acronym : Dept.lookup(dept).acronym;
-    return `${dept_acr}-${activity_code}`;
+  static unique_id(dept, activity_code) { //dept can be an object, a dept_code or a dept unique_id.
+    const dc = _.isObject(dept) ? dept.dept_code : Dept.lookup(dept).dept_code;
+    return `${dc}-${activity_code}`;
   }
   static get_from_activity_code(dept_code , activity_code){
     return this.lookup(this.unique_id(dept_code,activity_code));

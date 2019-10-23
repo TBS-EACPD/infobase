@@ -110,7 +110,7 @@ function populate_igoc_models({
 
     const def_obj = {
       unique_id: +org_id,
-      acronym: dept_code,
+      dept_code,
       fancy_acronym,
       legal_name,
       applied_title,

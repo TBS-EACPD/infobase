@@ -29,7 +29,7 @@ function node_to_match_tokens(node){
         'old_name',
         'legal_name',
         'applied_title',
-        'acronym',
+        'dept_code',
         'fancy_acronym',
         'description',
         'mandate',
