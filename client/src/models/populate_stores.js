@@ -73,7 +73,7 @@ function populate_igoc_models({
       applied_title,
       old_applied_title,
       status,
-      _legislation,
+      legislation,
       mandate,
       pas_code,
       schedule,
@@ -116,7 +116,7 @@ function populate_igoc_models({
       applied_title,
       old_applied_title,
       status: statuses[status],
-      _legislation, //no longer array based
+      legislation,
       raw_mandate: mandate,
       mandate: sanitized_marked( _.trim(mandate) ),
       pas_code,
