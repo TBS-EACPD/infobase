@@ -495,7 +495,7 @@ export default class TextDiffApp extends React.Component {
             <div className="legend-container">
               <FancyCheckboxSelector
                 items={indicator_status}
-                handleToggle={ id => {
+                callbackToggle={ id => {
                   indicator_status[id].active = !indicator_status[id].active;
                   this.setState({
                     indicator_status: indicator_status,
