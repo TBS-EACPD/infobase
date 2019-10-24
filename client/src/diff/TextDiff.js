@@ -22,7 +22,7 @@ import {
   SpinnerWrapper,
 } from '../components';
 
-import { CheckboxSelector } from '../components/CheckboxSelector.js';
+import { FancyCheckboxSelector } from '../components/CheckboxSelector.js';
 
 const { Dept, CRSO, Program } = Subject;
 
@@ -493,7 +493,7 @@ export default class TextDiffApp extends React.Component {
           </label>
           <div style={{padding: '0px 0px 20px 0px'}}>
             <div className="legend-container">
-              <CheckboxSelector
+              <FancyCheckboxSelector
                 items={indicator_status}
                 handleToggle={ id => {
                   indicator_status[id].active = !indicator_status[id].active;
