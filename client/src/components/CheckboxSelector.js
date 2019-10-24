@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import './CheckboxSelector.scss';
 
 export class CheckboxSelector extends React.Component {
@@ -8,10 +7,10 @@ export class CheckboxSelector extends React.Component {
   componentDidUpdate(){
   }
   render(){
-    const { checkboxes, handleToggle } = this.props;
+    const { items, handleToggle } = this.props;
     return (
-      _.map(checkboxes, (checkbox, index) =>
-        <Checkbox key={index} id={index} toggleHandler={handleToggle} {...checkbox}/>
+      _.map(items, (item, key) =>
+        <Checkbox key={key} toggleHandler={handleToggle} {...item}/>
       )
     );
   }
@@ -21,7 +20,7 @@ export class Checkbox extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      checked: props.defaultChecked,
+      checked: props.active,
     };
   }
   render(){
@@ -32,19 +31,19 @@ export class Checkbox extends React.Component {
       this.props.toggleHandler(this.props.id,newChecked);
       this.setState({checked: newChecked});
     };
-    const borderStyle = {border: `2px solid ${color}`}
+    const borderStyle = {borderColor: color};
     return (
-      <div>
+      <div className="checkbox-selector">
         <button
-          className={checked ? "checkbox checkbox--is-checked" : "checkbox"}
+          className={"checkbox-selector--box"}
           style={checked ? { backgroundColor: color, ...borderStyle} : borderStyle }
-          tabIndex={1}
+          tabIndex={0}
           aria-pressed={checked}
-          aria-labelledby={"checkboxLabel"+id}
+          aria-labelledby={"checkboxLabel_"+id}
           onClick={onClickHandler}
         />
         <label
-          className="checkbox--label"
+          className="checkbox-selector--label"
           id={"checkboxLabel"+id}
           onClick={onClickHandler}
         >

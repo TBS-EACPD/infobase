@@ -1,14 +1,29 @@
+@import '../common_css/_common-variables.scss';
 
-.checkbox {
+.checkbox-selector {
+  &:hover, &:focus {
+    cursor: pointer; 
+    opacity: 0.5;
+  }
+}
+
+.checkbox-selector--box {
   width: 20px;
   height: 20px;
   display: inline-block;
-  vertical-align: middle;
+  border-width: 2px;
+  border-style: solid;
   border-radius: 6px;
   margin: 2px;
 }
 
-.checkbox--label {
+.checkbox-selector--label {
   display: inline-block;
+  padding-left: 10px;
   vertical-align: middle;
+  font-weight: $mediumFontWeight;
+  &:hover, &:focus {
+    cursor: pointer; 
+  }
 }
+
