@@ -6,7 +6,7 @@ import {
   HeightClippedGraph,
   breakpoints,
 } from '../shared.js';
-import { infograph_href_template } from '../../link_utils.js';
+import { infograph_href_template, glossary_href } from '../../link_utils.js';
 import { DisplayTable } from '../../components/DisplayTable.js';
 import { 
   ResultCounts,
@@ -69,7 +69,8 @@ const subject_link = (node) => {
       <span>
         {node.data.name}
         {` (${text_maker("a_masc")} `}
-        <span
+        <a
+          href={ (window.is_a11y_mode || window.feature_detection.is_mobile()) && glossary_href("SSP")}
           className="nowrap glossary-tooltip-link"
           tabIndex={0}
           aria-hidden="true"
@@ -79,7 +80,7 @@ const subject_link = (node) => {
           data-ibtt-container="body"
         >
           {text_maker(node.data.subject.level)}
-        </span>
+        </a>
         {` ${text_maker("of")} `}
         <a href={infograph_href_template(program,"results")}>
           {program_name}
