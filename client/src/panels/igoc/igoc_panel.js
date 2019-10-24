@@ -32,7 +32,7 @@ export const declare_igoc_fields_panel = () => declare_panel({
           ["end_yr", subject.end_yr],
           ["notes", subject.notes],
           ["applied_title", subject.applied_title],
-          ["acronym", subject.abbrev],
+          ["acronym", subject.abbr],
           ["previously_named", subject.old_name],
           ["incorp_yr", subject.incorp_yr],
           ["type", subject.inst_form.name],
