@@ -37,10 +37,6 @@ export const escapeRegExp = function(str) {
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 };
 
-export const escapeSingleQuotes = function(str){
-  return str.replace(/'/g, "&#39;");
-};
-
 export const shallowEqualObjectsOverKeys = (obj1, obj2, keys_to_compare) => _.reduce(keys_to_compare, (memo, key) => ( memo && (obj1[key] === obj2[key]) ), true);
 
 export const retry_promise = (promise_to_try, retries = 2, interval = 500) => {
