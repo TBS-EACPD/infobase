@@ -7,10 +7,10 @@ export class FancyCheckboxSelector extends React.Component {
   componentDidUpdate(){
   }
   render(){
-    const { items, handleToggle } = this.props;
+    const { items, callbackToggle } = this.props;
     return (
       _.map(items, (item, key) =>
-        <FancyCheckbox key={key} toggleHandler={handleToggle} {...item}/>
+        <FancyCheckbox key={key} callbackToggle={callbackToggle} {...item}/>
       )
     );
   }
@@ -22,7 +22,7 @@ export class FancyCheckbox extends React.Component {
   }
   render(){
     const {id, label, color, active} = this.props;
-    const onClickHandler = () => this.props.toggleHandler(this.props.id,!active);
+    const onClickHandler = () => this.props.callbackToggle(this.props.id,!active);
     const borderStyle = {borderColor: color};
     return (
       <div className="checkbox-selector">
@@ -30,7 +30,7 @@ export class FancyCheckbox extends React.Component {
           className={"checkbox-selector--box"}
           style={active ? { backgroundColor: color, ...borderStyle} : borderStyle }
           tabIndex={0}
-          aria-pressed={active}
+          aria-role={"checkbox"}
           aria-labelledby={"checkboxLabel_"+id}
           onClick={onClickHandler}
         />
