@@ -1,20 +1,9 @@
 import './CheckboxSelector.scss';
 
-export class FancyCheckboxSelector extends React.Component {
-  constructor(props){
-    super(props);
-  }
-  componentDidUpdate(){
-  }
-  render(){
-    const { items, callbackToggle } = this.props;
-    return (
-      _.map(items, (item, key) =>
-        <FancyCheckbox key={key} callbackToggle={callbackToggle} {...item}/>
-      )
-    );
-  }
-}
+export const FancyCheckboxSelector = (items, callbackToggle ) =>
+  _.map(items,
+    (item, key) => <FancyCheckbox key={key} callbackToggle={callbackToggle} {...item}/>
+  );
 
 export class FancyCheckbox extends React.Component {
   constructor(props){
@@ -31,6 +20,7 @@ export class FancyCheckbox extends React.Component {
           style={active ? { backgroundColor: color, ...borderStyle} : borderStyle }
           tabIndex={0}
           aria-role={"checkbox"}
+          aria-checked={active}
           aria-labelledby={"checkboxLabel_"+id}
           onClick={onClickHandler}
         />
