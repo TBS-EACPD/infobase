@@ -175,13 +175,6 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
   get auditor(){
     return this.auditor_str;
   }
-  get legislation(){
-    return (
-      _.isEmpty(this._legislation) ?
-      [] :
-      [ this._legislation ]
-    );
-  }
   get is_dead(){
     return _.nonEmpty(this.end_yr) || this.status !== trivial_text_maker("active");
   }
