@@ -38,7 +38,7 @@ export const declare_horizontal_initiative_profile_panel = () => declare_panel({
           ["hi_lead_dept", 
             lead_dept && (
               <a href={infograph_href_template(lead_dept)}>
-                {`${lead_dept.name} (${lead_dept.abbrev})`}
+                {`${lead_dept.name} (${lead_dept.abbr})`}
               </a>
             ),
           ],

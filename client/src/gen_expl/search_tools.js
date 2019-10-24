@@ -30,7 +30,7 @@ function node_to_match_tokens(node){
         'legal_name',
         'applied_title',
         'dept_code',
-        'abbrev',
+        'abbr',
         'description',
         'mandate',
       ])

@@ -26,8 +26,8 @@ const sub_app_name = "infographic_org";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const name_for_title = subject => {
-  if(subject.level === 'program' && !_.isEmpty(subject.dept.abbrev)){
-    return `${subject.name} (${subject.dept.abbrev})`;
+  if(subject.level === 'program' && !_.isEmpty(subject.dept.abbr)){
+    return `${subject.name} (${subject.dept.abbr})`;
   } else if(subject.level === 'org'){
     return subject.legal_name;
   } else {
