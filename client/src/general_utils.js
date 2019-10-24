@@ -32,49 +32,6 @@ export const make_unique_func = function(){
 // consider replacing with _.uniqueId
 export const make_unique = make_unique_func();
 
-//simple, re-usable select tag component
-//should probably be moved elsewhere
-//if container is a select tag, uses that, if not, appends a child <select>
-//data can be of many form 
-//array/hash of strings (kinda kills the point of having this component)
-//array/hash of objects with a text or display property
-//note that onSelect will be called with the data associated to the key, not the key itself
-export class Select {
-  constructor(options){
-    const { 
-      container, 
-      data, 
-      onSelect, 
-      display_func, //required, unless the items have a display or text field
-      selected, //optional
-      selected_key, //optional
-      disabled_key, //optional
-    } = options;
-
-    container.innerHTML = "";
-    let node = container;
-    if(container.nodeName !== 'SELECT'){
-      node = document.createElement('select');
-      node.classList.add('form-control');
-      container.appendChild(node);
-    }
-    node.innerHTML = (
-      _.map(
-        data, 
-        (val,key)=> `
-          <option 
-            ${ disabled_key === key ? 'disabled' : ''}
-            ${ (selected_key === key || selected === val) ? 'selected' : ''}
-            value='${key}'
-          >
-            ${ display_func ? display_func(val) : (val.text || val.display || val) }
-          </option>`
-      ).join("")
-    );
-    node.onchange = () => { onSelect(data[node.value]); };
-  }
-}
-
 export const escapeRegExp = function(str) {
   /* eslint-disable no-useless-escape */
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
