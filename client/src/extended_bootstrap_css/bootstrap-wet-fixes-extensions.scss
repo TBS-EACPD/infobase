@@ -102,12 +102,17 @@ hr {
   border-radius: 0;
 }
 
-.legend-unstyled {
+legend {
+  /* reset bootstrap styles */
   width: unset;
   margin-bottom: 0px;
   font-size: inherit;
   color: inherit;
   border-bottom: none;
+
+  /* InfoBase styles */
+  margin-bottom: 5px;
+  font-weight: 700;
 }
 
 .breadcrumb-external-link {

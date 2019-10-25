@@ -52,7 +52,7 @@ class SimpleView extends React.Component {
             <div className="rpb-config rpb-simple row">
               <div className="col-md-6">
                 <fieldset className="rpb-config-item col-selection simple">
-                  <legend className="legend-unstyled rpb-config-header" > <TextMaker text_key="select_columns" /> </legend>
+                  <legend className="rpb-config-header"> <TextMaker text_key="select_columns" /> </legend>
                   <SelectList 
                     items={_.map(all_data_columns, obj => ({id: obj.nick, display: obj.fully_qualified_name }) ) }
                     selected={ _.map(columns,'nick') }

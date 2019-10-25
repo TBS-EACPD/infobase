@@ -164,7 +164,7 @@ export class AdvancedSearch extends React.Component {
             persist_content={true}
             content={
               <fieldset>
-                <legend className="legend-unstyled">{text_maker("advanced_search_description")}:</legend>
+                <legend>{text_maker("advanced_search_description")}:</legend>
                 <div className="advanced-search-options">
                   { _.map(
                     complete_option_hierarchy,
