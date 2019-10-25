@@ -158,8 +158,10 @@ class EmailFrontend extends React.Component {
       switch(field_info.form_type){
         case 'checkbox':
           return (
-            <div>
-              <b>{field_info.form_label[window.lang]}</b>
+            <fieldset>
+              <legend className="legend-unstyled">
+                <b>{field_info.form_label[window.lang]}</b>
+              </legend>
               {
                 _.map(
                   field_info.enum_values,
@@ -173,7 +175,7 @@ class EmailFrontend extends React.Component {
                   />
                 )
               }
-            </div>
+            </fieldset>
           );
         case 'textarea':
           return (
