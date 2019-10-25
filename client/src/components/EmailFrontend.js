@@ -159,9 +159,7 @@ class EmailFrontend extends React.Component {
         case 'checkbox':
           return (
             <fieldset>
-              <legend className="legend-unstyled">
-                <b>{field_info.form_label[window.lang]}</b>
-              </legend>
+              <legend>{field_info.form_label[window.lang]}</legend>
               {
                 _.map(
                   field_info.enum_values,

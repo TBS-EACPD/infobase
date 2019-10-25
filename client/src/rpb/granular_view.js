@@ -45,7 +45,7 @@ class GranularView extends React.Component {
             <div className="row">
               <div className='col-md-6'>
                 <fieldset className="rpb-config-item col-selection simple">
-                  <legend className="legend-unstyled rpb-config-header" > <TextMaker text_key="select_columns" /> </legend>
+                  <legend className="rpb-config-header"> <TextMaker text_key="select_columns" /> </legend>
                   <SelectList 
                     items={ _.map(
                       all_data_columns, 

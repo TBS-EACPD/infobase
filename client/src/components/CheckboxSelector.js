@@ -3,15 +3,7 @@ import './CheckboxSelector.scss';
 export const FancyCheckboxSelector = ({items, legend, callbackToggle}) =>
   <div className="legend-container">
     <fieldset>
-      <legend 
-        className="legend-unstyled"
-        style={{
-          marginBottom: "5px",
-          fontWeight: 700,
-        }}
-      >
-        {legend}
-      </legend>
+      <legend> {legend} </legend>
       { _.map(
         items,
         (item, key) => <FancyCheckbox key={key} callbackToggle={callbackToggle} {...item}/>
