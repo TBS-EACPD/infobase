@@ -1,18 +1,13 @@
 @import '../common_css/_common-variables.scss';
 
-.checkbox-selector {
+.fancy-checkbox {
   &:hover, &:focus {
     cursor: pointer; 
     opacity: 0.5;
   }
 }
 
-.checkbox-selector__legend {
-  margin-bottom: 5px;
-  font-weight: 700;
-}
-
-.checkbox-selector__box {
+.fancy-checkbox__box {
   width: 20px;
   height: 20px;
   display: inline-block;
@@ -22,7 +17,7 @@
   margin: 2px;
 }
 
-.checkbox-selector__label {
+.fancy-checkbox__label {
   display: inline-block;
   padding-left: 10px;
   vertical-align: middle;
