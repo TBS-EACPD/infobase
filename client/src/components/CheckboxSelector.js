@@ -19,7 +19,7 @@ export class FancyCheckbox extends React.Component {
           className={"checkbox-selector--box"}
           style={active ? { backgroundColor: color, ...borderStyle} : borderStyle }
           tabIndex={0}
-          aria-role={"checkbox"}
+          role={"checkbox"}
           aria-checked={active}
           aria-labelledby={"checkboxLabel_"+id}
           onClick={onClickHandler}
