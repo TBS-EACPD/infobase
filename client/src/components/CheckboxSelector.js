@@ -1,9 +1,15 @@
 import './CheckboxSelector.scss';
 
-export const FancyCheckboxSelector = ({items, callbackToggle}) =>
-  _.map(items,
-    (item, key) => <FancyCheckbox key={key} callbackToggle={callbackToggle} {...item}/>
-  );
+export const FancyCheckboxSelector = ({items, legend, callbackToggle}) =>
+  <div className="legend-container">
+    <fieldset>
+      <legend className="checkbox-selector__legend">{legend}</legend>
+      { _.map(
+        items,
+        (item, key) => <FancyCheckbox key={key} callbackToggle={callbackToggle} {...item}/>
+      ) }
+    </fieldset>  
+  </div>;
 
 export class FancyCheckbox extends React.Component {
   constructor(props){
@@ -16,7 +22,7 @@ export class FancyCheckbox extends React.Component {
     return (
       <div className="checkbox-selector">
         <button
-          className={"checkbox-selector--box"}
+          className={"checkbox-selector__box"}
           style={active ? { backgroundColor: color, ...borderStyle} : borderStyle }
           tabIndex={0}
           role={"checkbox"}
@@ -25,7 +31,7 @@ export class FancyCheckbox extends React.Component {
           onClick={onClickHandler}
         />
         <label
-          className="checkbox-selector--label"
+          className="checkbox-selector__label"
           id={"checkboxLabel_"+id}
           onClick={onClickHandler}
         >
