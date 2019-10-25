@@ -102,6 +102,14 @@ hr {
   border-radius: 0;
 }
 
+.legend-unstyled {
+  width: unset;
+  margin-bottom: 0px;
+  font-size: inherit;
+  color: inherit;
+  border-bottom: none;
+}
+
 .breadcrumb-external-link {
   opacity: 0.7;
 }
