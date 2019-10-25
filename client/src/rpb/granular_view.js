@@ -44,8 +44,8 @@ class GranularView extends React.Component {
           content={
             <div className="row">
               <div className='col-md-6'>
-                <div className="rpb-config-item col-selection granular">
-                  <label className="rpb-config-header" > <TextMaker text_key="select_columns" /> </label>
+                <fieldset className="rpb-config-item col-selection simple">
+                  <legend className="legend-unstyled rpb-config-header" > <TextMaker text_key="select_columns" /> </legend>
                   <SelectList 
                     items={ _.map(
                       all_data_columns, 
@@ -58,7 +58,7 @@ class GranularView extends React.Component {
                     is_multi_select={true}
                     onSelect={id=> on_toggle_col_nick(id) }
                   />
-                </div>
+                </fieldset>
               </div>
               <div className="col-md-6">
                 <label className='rpb-config-header' htmlFor='filt_select'> Filter </label>

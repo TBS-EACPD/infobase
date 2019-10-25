@@ -51,15 +51,15 @@ class SimpleView extends React.Component {
           content={
             <div className="rpb-config rpb-simple row">
               <div className="col-md-6">
-                <div className="rpb-config-item col-selection simple">
-                  <label className="rpb-config-header" > <TextMaker text_key="select_columns" /> </label>
+                <fieldset className="rpb-config-item col-selection simple">
+                  <legend className="legend-unstyled rpb-config-header" > <TextMaker text_key="select_columns" /> </legend>
                   <SelectList 
                     items={_.map(all_data_columns, obj => ({id: obj.nick, display: obj.fully_qualified_name }) ) }
                     selected={ _.map(columns,'nick') }
                     is_multi_select={true}
                     onSelect={id=> on_toggle_col_nick(id) }
                   />
-                </div>
+                </fieldset>
               </div>
               <div className="col-md-6">
                 { subject === Gov && 
