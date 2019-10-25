@@ -1,6 +1,6 @@
 import './CheckboxSelector.scss';
 
-export const FancyCheckboxSelector = (items, callbackToggle ) =>
+export const FancyCheckboxSelector = ({items, callbackToggle}) =>
   _.map(items,
     (item, key) => <FancyCheckbox key={key} callbackToggle={callbackToggle} {...item}/>
   );
