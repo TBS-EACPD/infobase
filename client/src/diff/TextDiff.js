@@ -487,23 +487,19 @@ export default class TextDiffApp extends React.Component {
             }
           />
         </div>
-        <div className={classNames("medium_panel_text")}>
-          <label htmlFor='filter_by_status'>
-            <TM k="filter_by_status" />
-          </label>
-          <div style={{padding: '0px 0px 20px 0px'}}>
-            <div className="legend-container">
-              <FancyCheckboxSelector
-                items={indicator_status}
-                callbackToggle={ id => {
-                  indicator_status[id].active = !indicator_status[id].active;
-                  this.setState({
-                    indicator_status: indicator_status,
-                    indicator_status_changed: true,
-                  });
-                }}
-              />
-            </div>
+        <div style={{padding: '0px 0px 20px 0px'}}>
+          <div className="medium_panel_text">
+            <FancyCheckboxSelector
+              items={indicator_status}
+              callbackToggle={ id => {
+                indicator_status[id].active = !indicator_status[id].active;
+                this.setState({
+                  indicator_status: indicator_status,
+                  indicator_status_changed: true,
+                });
+              }}
+              legend={text_maker("filter_by_status")}
+            />
           </div>
         </div>
         {loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
