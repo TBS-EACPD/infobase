@@ -85,6 +85,12 @@ const StatusGrid = props => {
   const total = met + not_met + not_available + future;
   const shouldFactorDown = total > max_size;
   const icon_array_size_class = classNames("IconArrayItem", total > 200 && "IconArrayItem__Small", total < 100 && "IconArrayItem__Large");
+  const icon_array_shape_class = {
+    met: "IconArrayItem--circle",
+    not_met: "IconArrayItem--triangle-up",
+    not_available: "IconArrayItem--square",
+    future: "IconArrayItem--diamond",
+  };
 
   const data = _.chain(props)
     .pickBy( (val, key) => key && val > 0 )
@@ -163,7 +169,7 @@ const StatusGrid = props => {
                   items={group}
                   render_item={ ({status_key}) => 
                     <div 
-                      className={classNames(icon_array_size_class, grid_colors[status_key])} 
+                      className={classNames(icon_array_size_class, grid_colors[status_key], icon_array_shape_class[status_key])} 
                     />
                   }
                 />

@@ -122,18 +122,24 @@ dl.indicator-item__dl dt+dd {
 /* color classes for icon-array viz */
 .results-icon-array-pass {
   background-color: $successDarkColor;
+  border-color: $successDarkColor;
+  border-radius: 30px;
 }
 
 .results-icon-array-fail {
-  background-color: $failDarkColor;
+  background-color: transparent;
+  border: 3px solid $failDarkColor;
 }
 
 .results-icon-array-na {
   background-color: $warnDarkColor;
+  border-color: $warnDarkColor;
+	transform: rotate(45deg) scale(0.7);
 }
 
 .results-icon-array-neutral {
   background-color: $tertiaryColor;
+  border-color: $tertiaryColor;
 }
 
 //used in results-explorer 
