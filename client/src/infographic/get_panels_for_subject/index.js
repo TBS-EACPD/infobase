@@ -12,6 +12,8 @@ const panel_loading_promises = (subject) => {
       return import(/* webpackChunkName: "tag_panels" */ './get_tag_panels.js').then( ({get_tag_panels}) => get_tag_panels(subject) );
     case 'program':
       return import(/* webpackChunkName: "program_panels" */ './get_program_panels.js').then( ({get_program_panels}) => get_program_panels(subject) );
+    case 'indicator':
+      return import(/* webpackChunkName: "indicator_panels" */ './get_indicator_panels.js').then( ({get_indicator_panels}) => get_indicator_panels(subject) );
   }
 };
 
