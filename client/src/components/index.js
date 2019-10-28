@@ -27,6 +27,7 @@ export { PDFGenerator } from './PDFGenerator.js';
 export { CountdownCircle } from './CountdownCircle.js';
 export { Countdown } from './Countdown.js';
 export { LogInteractionEvents } from './LogInteractionEvents.js';
+export { FancyCheckboxSelector } from './CheckboxSelector.js';
 
 export { StatelessModal, FixedPopover } from './modals_and_popovers';
 

@@ -10,6 +10,7 @@ import {
   indicator_text_functions,
   result_docs,
   get_result_doc_keys,
+  result_status_colors,
 } from './results_common.js';
 import {
   IconCheck,
@@ -31,6 +32,7 @@ const {
   HeightClipper,
   FilterTable,
   SortDirections,
+  FancyCheckboxSelector,
 } = util_components;
 const { sanitized_marked } = general_utils;
 
@@ -301,6 +303,19 @@ const status_icons = make_status_icons('25px');
 
 
 const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }) => (
+  <FancyCheckboxSelector
+    items={
+      _.map(ordered_status_keys, status_key => ({
+        id: status_key,
+        label: result_simple_statuses[status_key].text,
+        active: active_list.length === 0 || _.indexOf(active_list, status_key) !== -1,
+        color: result_status_colors[status_key],
+      }))}
+    callbackToggle={(status_key) => onIconClick(status_key)}
+  />
+);
+
+const StatusIconTable2 = ({ icon_counts, onIconClick, onClearClick, active_list }) => (
   <div>
     <div 
       aria-hidden={true}

@@ -31,6 +31,14 @@ function pick_table(subject,type,doc){
   );
 }
 
+const result_status_colors = {
+  met: window.infobase_color_constants.successDarkColor,
+  not_met: window.infobase_color_constants.failDarkColor,
+  not_available: window.infobase_color_constants.warnDarkColor,
+  future: window.infobase_color_constants.tertiaryColor,
+};
+
+
 const get_rows_for_subject_from_table = _.memoize( (subject, type,doc) => {
   const table = pick_table(subject, type,doc);
   if( subject.level === 'program'){
@@ -312,6 +320,7 @@ export {
   row_to_drr_status_counts,
   result_statuses,
   result_simple_statuses,
+  result_status_colors,
 
   indicator_text_functions,
 
