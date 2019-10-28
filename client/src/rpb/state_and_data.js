@@ -5,7 +5,6 @@ import { createSelector } from 'reselect';
 import { Subject } from '../models/subject.js';
 
 const {
-  Gov,
   Program,
   Dept,
 } = Subject;
@@ -329,28 +328,6 @@ function create_mapStateToProps(){
     )
   );
 
-  const get_canGraph = createSelector(
-    [get_table, get_subject, get_sorted_columns, _.property('preferDeptBreakout'), _.property('filter') ],
-    (table, subject, columns, preferDeptBreakout, filter ) => {
-      if(columns.length > 1){
-        return false;
-      } else {
-        // the only case we can't graph a single column is when we're trying to 
-        //  show a dept breakout with no filters on a non-linearly lined column 
-        //(e.g. lapse % column)
-        const col = _.first(columns);
-        return !(
-          preferDeptBreakout && 
-          subject === Gov && 
-          filter === text_maker('all') && 
-          ( !col.formula || !col.formula.default )
-        );
-      }
-    }
-  );
-
-  const get_shouldGraph = state => !window.is_a11y_mode && !state.preferTable && get_canGraph(state);
-
   const get_deptBreakoutMode = state => state.subject === 'gov_gov' && state.preferDeptBreakout;
 
   const reverse_array = arr => _.clone(arr).reverse();
@@ -519,8 +496,6 @@ function create_mapStateToProps(){
 
       //simple view props,
       deptBreakoutMode: get_deptBreakoutMode(state),
-      canGraph: !window.is_a11y_mode && state.table && get_canGraph(state),
-      shouldGraph: state.table && get_shouldGraph(state),
       graph_data: state.table && state.mode === 'simple' && get_graph_split_data(state),
       simple_table_rows: state.table && state.mode === 'simple' && get_simple_table_rows(state),
 
