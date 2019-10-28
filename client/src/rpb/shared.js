@@ -1,9 +1,17 @@
 import { TextMaker, text_maker } from './rpb_text_provider.js';
 import { sources as all_sources } from '../metadata/data_sources.js';
 import { sanitized_dangerous_inner_html } from '../general_utils.js';
-import { DeptSearch, FancyUL } from '../components/index.js';
-import classNames from 'classnames';
 import { Subject } from '../models/subject';
+import {
+  DeptSearch,
+  FancyUL,
+  ShareButton,
+  WriteToClipboard,
+} from '../components/index.js';
+import { IconCopyLink } from '../icons/icons.js';
+
+import { Fragment } from 'react';
+import classNames from 'classnames';
 
 const { Gov } = Subject;
 
@@ -168,6 +176,19 @@ const ReportDatasets = ({
   );
 };
 
+const ShareReport = () => (
+  <Fragment>
+    <ShareButton
+      url={window.location}
+    />
+    <WriteToClipboard 
+      text_to_copy={window.location}
+      IconComponent={IconCopyLink}
+    />
+  </Fragment>
+);
+
+
 //the parent flexbox styling screws stuff up and makes it impossible to center vertically,
 // a padding of 6px at the top seems to fix it ¯\_(ツ)_/¯
 const SubjectFilterPicker = ({ subject, onSelect })=> <div style={{paddingTop: '10px'}}>
@@ -215,6 +236,7 @@ export {
   SelectList,
   ReportDetails,
   ReportDatasets,
+  ShareReport,
   SubjectFilterPicker,
   NoDataMessage,
 };

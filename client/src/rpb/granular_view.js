@@ -1,9 +1,10 @@
 import { TextMaker, text_maker } from './rpb_text_provider.js';
 import { 
-  SelectList, 
-  ReportDetails, 
-  ReportDatasets, 
-  NoDataMessage, 
+  SelectList,
+  ReportDetails,
+  ReportDatasets,
+  ShareReport,
+  NoDataMessage,
 } from './shared.js';
 import { 
   Format, 
@@ -13,15 +14,16 @@ import {
   AlertBanner,
 } from '../components/index.js';
 import { Details } from '../components/Details.js';
-import classNames from 'classnames';
+import { rpb_link } from './rpb_link.js';
 import { Subject } from '../models/subject.js';
+
+import classNames from 'classnames';
 
 const { Dept } = Subject;
 const PAGE_SIZE = 600;
 
 class GranularView extends React.Component {
-
-  render() {
+  render(){
     const {
       subject,
       table,
@@ -110,6 +112,9 @@ class GranularView extends React.Component {
         </LabeledBox>
         <LabeledBox label={<TextMaker text_key="blue_text_report_data_sources" />}>
           <ReportDatasets {...this.props} /> 
+        </LabeledBox>
+        <LabeledBox label={<TextMaker text_key="share_report"/>}>
+          <ShareReport /> 
         </LabeledBox>
         { table.rpb_banner && <AlertBanner>{table.rpb_banner}</AlertBanner> }
         <div id="rpb-main-content" >

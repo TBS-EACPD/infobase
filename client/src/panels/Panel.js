@@ -92,7 +92,6 @@ class Panel_ extends React.Component {
               title={share_modal_title}
               button_class_name={'panel-heading-utils'} 
               button_description={text_maker("panel_share_button")}
-              subject={subject}
             />
           </LogInteractionEvents>
         }
