@@ -113,3 +113,17 @@ li.select-list-item {
 .rpb-separator {
   border-bottom: 1px solid $separatorColor;
 }
+
+.rpb-share-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  & > button {
+    background-color: Transparent;
+    border: none;  
+    &:active {
+      transform: scale(1.15);
+    }
+  }
+}

@@ -3,6 +3,7 @@ import {
   SelectList,
   ReportDetails,
   ReportDatasets,
+  ExportButton,
   ShareReport,
   NoDataMessage,
 } from './shared.js';
@@ -14,7 +15,6 @@ import {
   AlertBanner,
 } from '../components/index.js';
 import { Details } from '../components/Details.js';
-import { rpb_link } from './rpb_link.js';
 import { Subject } from '../models/subject.js';
 
 import classNames from 'classnames';
@@ -61,27 +61,29 @@ class GranularView extends React.Component {
               </fieldset>
             </div>
             <div className="col-md-6">
-              <label className='rpb-config-header' htmlFor='filt_select'> Filter </label>
-              <TwoLevelSelect
-                className="form-control form-control-ib"
-                id="filt_select"
-                onSelect={ id=> {
-                  const [ dim_key, filt_key ] = id.split('__');
-                  on_set_filter({filter: filt_key, dimension: dim_key});
-                }}
-                selected={dimension+'__'+filter}
-                grouped_options={ 
-                  _.mapValues(filters_by_dimension, 
-                    filter_by_dim => (
-                      {
-                        ...filter_by_dim, 
-                        children: _.sortBy(filter_by_dim.children, "display"),
-                      }
-                    ) 
-                  )
-                }
-              />
-              <div className="mrgn-tp-lg">
+              <div className="rpb-config-item">
+                <label className='rpb-config-header' htmlFor='filt_select'> Filter </label>
+                <TwoLevelSelect
+                  className="form-control form-control-ib"
+                  id="filt_select"
+                  onSelect={ id=> {
+                    const [ dim_key, filt_key ] = id.split('__');
+                    on_set_filter({filter: filt_key, dimension: dim_key});
+                  }}
+                  selected={dimension+'__'+filter}
+                  grouped_options={ 
+                    _.mapValues(filters_by_dimension, 
+                      filter_by_dim => (
+                        {
+                          ...filter_by_dim, 
+                          children: _.sortBy(filter_by_dim.children, "display"),
+                        }
+                      ) 
+                    )
+                  }
+                />
+              </div>
+              <div className="rpb-config-item">
                 <ExportButton 
                   id="export_button"
                   get_csv_string={ ()=> this.get_csv_string() }
@@ -94,6 +96,7 @@ class GranularView extends React.Component {
                   }}
                 />
               </div>
+              <ShareReport />
             </div>
             <div className='clearfix'/>
           </div>
@@ -112,9 +115,6 @@ class GranularView extends React.Component {
         </LabeledBox>
         <LabeledBox label={<TextMaker text_key="blue_text_report_data_sources" />}>
           <ReportDatasets {...this.props} /> 
-        </LabeledBox>
-        <LabeledBox label={<TextMaker text_key="share_report"/>}>
-          <ShareReport /> 
         </LabeledBox>
         { table.rpb_banner && <AlertBanner>{table.rpb_banner}</AlertBanner> }
         <div id="rpb-main-content" >
@@ -380,98 +380,6 @@ class PlainTableHeader extends React.PureComponent {
     </div>;
   }
 }
-
-class ExportButton extends React.Component {
-  //note that though props may not have changed, this method doesn't get trigerred from this.setState 
-  constructor(){
-    super();
-    this.state = { 
-      success: null,
-    }; 
-  }
-  static getDerivedStateFromProps(nextProps, prevState){
-    return { 
-      success: null,
-    };
-  }
-  render(){
-    const {
-      id,
-    } = this.props;
-    const { 
-      success,
-    } = this.state;
-
-
-    if( window.feature_detection.download_attr ){
-      return <div>
-        <button 
-          id={id}
-          className="btn btn-ib-primary btn-block"
-          onClick={ ()=> { this.triggerDownload(); } }
-        >
-          <TextMaker text_key="export_table" />
-        </button>
-      </div>;
-    } else if(window.feature_detection.clipboard_access){
-      const buttonText = (
-        success === false ? 
-        <TextMaker text_key="error" /> :
-        ( 
-          success === true ?
-          <TextMaker text_key="finished_export_table_to_clipboard" /> :
-          <TextMaker text_key="export_table_to_clipboard" />
-        )
-      );
-      
-      return <div>
-        <button 
-          id={id}
-          className="btn btn-ib-primary btn-block"
-          onClick={ ()=>{ this.clipBoardClickHandler(); } }
-        >
-          { buttonText }
-        </button>
-      </div>;
-
-    } else {
-      return null;
-    }
-
-  }
-  triggerDownload(){
-    const csv_str = this.props.get_csv_string();
-    const uri = "data:text/csv;charset=UTF-8," + encodeURIComponent(csv_str);
-    
-    const temporary_anchor = document.createElement('a');
-    temporary_anchor.setAttribute("download", 'table.csv');
-    temporary_anchor.setAttribute("href", uri);
-    temporary_anchor.dispatchEvent( new MouseEvent('click') );
-  }
-   
-
-  clipBoardClickHandler(){
-    const {
-      get_excel_string,
-    } = this.props;
-
-
-    try {
-
-      window.clipboardData.setData('Text', get_excel_string());
-      this.setState({success: true});
-
-    } catch(e){
-      this.setState({success: false});
-    }
-
-    setTimeout(()=>{
-      this.setState({success: null});
-    },3000);
-
-  }
-}
-
 
 export {
   GranularView,

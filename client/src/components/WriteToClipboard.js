@@ -25,6 +25,7 @@ export class WriteToClipboard extends React.Component {
       button_class_name,
       button_description,
       IconComponent,
+      icon_color,
     } = this.props;
 
     const {
@@ -53,7 +54,7 @@ export class WriteToClipboard extends React.Component {
         >
           <IconComponent
             title={button_description}
-            color={window.infobase_color_constants.textLightColor}
+            color={icon_color}
             alternate_color={false}
           />
         </button>
@@ -90,4 +91,5 @@ export class WriteToClipboard extends React.Component {
 WriteToClipboard.defaultProps = {
   button_description: text_maker("copy_to_clipboard"),
   IconComponent: IconCopy,
+  icon_color: window.infobase_color_constants.textLightColor,
 };
