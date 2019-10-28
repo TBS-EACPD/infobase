@@ -274,28 +274,25 @@ class EstimatesExplorer extends React.Component {
             marginBottom: "15px",
           }}
         >
-          <LabeledBox
-            label={ <TM k="choose_grouping_scheme"/> }
-            content={
-              <div className="centerer">
-                <RadioButtons
-                  options={[
-                    {
-                      id: "org",
-                      active: h7y_layout === "org",
-                      display: <TM k="by_org" />,
-                    },
-                    {
-                      id: "item_type",
-                      active: h7y_layout === "item_type",
-                      display: <TM k="by_item_type" />,
-                    },
-                  ]}
-                  onChange={ id => history.push(`/compare_estimates/${id}`) }
-                />
-              </div>
-            }
-          />
+          <LabeledBox label={<TM k="choose_grouping_scheme"/>}>
+            <div className="centerer">
+              <RadioButtons
+                options={[
+                  {
+                    id: "org",
+                    active: h7y_layout === "org",
+                    display: <TM k="by_org" />,
+                  },
+                  {
+                    id: "item_type",
+                    active: h7y_layout === "item_type",
+                    display: <TM k="by_item_type" />,
+                  },
+                ]}
+                onChange={ id => history.push(`/compare_estimates/${id}`) }
+              />
+            </div>
+          </LabeledBox>
         </div>
         <div>
           <form
