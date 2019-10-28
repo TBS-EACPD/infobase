@@ -15,11 +15,13 @@ blue_text_pick_org:
   fr: Sélectionnez une organisation
 
 
+table_picker_broken_link_warning:
+  en: TODO
+  fr: TODO
+
 table_picker_none_selected_summary:
-  en: |
-    To see data, select a table
-  fr: |
-    Pour voir des données, veuillez choisir un tableau 
+  en: To see data, select a table
+  fr: Pour voir des données, veuillez choisir un tableau 
 
 
 select_table_button:

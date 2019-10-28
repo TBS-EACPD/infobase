@@ -47,6 +47,7 @@ function get_default_state_for_new_table(table_id){
     page_num: 0,
     sort_col: 'dept',
     descending: false,
+    broken_url: false,
   };
 }
 

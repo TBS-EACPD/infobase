@@ -29,7 +29,7 @@ import {
 import AriaModal from 'react-aria-modal';
 
 //specific view stuff
-import { TablePicker } from './TablePicker.js';
+import { AccessibleTablePicker, TablePicker } from './TablePicker.js';
 import { SimpleView } from './simple_view.js';
 import { GranularView } from './granular_view.js';
 import { SubjectFilterPicker } from './shared.js';
@@ -56,7 +56,7 @@ const url_state_selector = createSelector(
               .pipe( naive=> naive_to_real_state(naive) )
               .value();
           } catch(e){
-            return naive_to_real_state();
+            return naive_to_real_state({broken_url: true});
           }
         }
       }
@@ -178,6 +178,7 @@ class RPB extends React.Component {
       table,
       mode, 
       subject,
+      broken_url,
 
       on_switch_mode,
       on_set_subject,
@@ -224,6 +225,7 @@ class RPB extends React.Component {
                       onSelect={id => this.pickTable(id)}
                       tables={_.reject(Table.get_all(), 'reference_table')}
                       selected={_.get(table, 'id')}
+                      broken_url={broken_url}
                     /> :
                     <button 
                       className="btn btn-ib-primary"
@@ -272,7 +274,10 @@ class RPB extends React.Component {
                     fontWeight: 400,
                   }}
                 >
-                  <TablePicker onSelect={id=> this.pickTable(id)} />
+                  <TablePicker
+                    onSelect={id=> this.pickTable(id)} 
+                    broken_url={broken_url}
+                  />
                 </div>
               </AriaModal>
             }
@@ -457,20 +462,3 @@ export default class ReportBuilder extends React.Component {
     );
   }
 }
-
-
-
-const AccessibleTablePicker = ({ tables, onSelect, selected }) => (
-  <select 
-    aria-labelledby="picker-label"
-    className="form-control form-control-ib rpb-simple-select"
-    value={selected}
-    onChange={evt => onSelect(evt.target.value)}
-  >
-    {_.map(tables, ({id, name}) =>
-      <option key={id} value={id}>
-        {name}
-      </option>
-    )}
-  </select>
-);
