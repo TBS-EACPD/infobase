@@ -42,18 +42,29 @@ import { SafeJSURL } from '../general_utils.js';
 const sub_app_name = "_rpb";
 
 
-const url_state_selector = createSelector(_.identity, str => {
-  let state = {};
-  if(_.nonEmpty(str)){
-    state = _.chain(str)
-      .pipe(str => SafeJSURL.parse(str) )
-      .pipe(naive=> naive_to_real_state(naive) )
-      .value();
-  } else {
-    state = naive_to_real_state({});
+const url_state_selector = createSelector(
+  _.identity, 
+  str => {
+    const state = (
+      () => {
+        if( _.isEmpty(str) ){
+          return naive_to_real_state({});
+        } else {
+          try {
+            return _.chain(str)
+              .pipe( str => SafeJSURL.parse(str) )
+              .pipe( naive=> naive_to_real_state(naive) )
+              .value();
+          } catch(e){
+            return naive_to_real_state();
+          }
+        }
+      }
+    )();
+
+    return state;
   }
-  return state;
-});
+);
 
 const RPBTitle = ({ table_name, subject_name }) => {
   const title_prefix = text_maker("report_builder_title"); 
