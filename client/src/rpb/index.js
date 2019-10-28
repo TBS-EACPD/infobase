@@ -56,6 +56,12 @@ const url_state_selector = createSelector(
               .pipe( naive=> naive_to_real_state(naive) )
               .value();
           } catch(e){
+            log_standard_event({
+              SUBAPP: sub_app_name,
+              MISC1: 'BROKEN_RPB_URL',
+              MISC2: str,
+            });
+
             return naive_to_real_state({broken_url: true});
           }
         }
