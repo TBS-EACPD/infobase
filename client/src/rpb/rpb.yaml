@@ -16,7 +16,7 @@ blue_text_pick_org:
 
 
 table_picker_broken_link_warning:
-  en: TODO
+  en: You were brought here by a report builder link which could not be properly parsed. If you know what data you were looking for, please select the appropriate table below.
   fr: TODO
 
 table_picker_none_selected_summary:
