@@ -1,18 +1,45 @@
 import './TablePicker.scss';
 import '../components/LabeledBox.scss';
 import { Table } from '../core/TableClass.js';
-import { 
-  GlossaryEntry,
-} from '../models/glossary.js';
+import { GlossaryEntry } from '../models/glossary.js';
+import { Fragment } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import classNames from 'classnames';
+import { IconQuestion } from '../icons/icons.js';
+import { AlertBanner } from '../components';
+
 import { 
   categories,
   concepts_by_category,
   concept_filter,
 } from './table_picker_concept_filter.js';
 import { TextMaker } from './rpb_text_provider.js';
-import { IconQuestion } from '../icons/icons.js';
+
+
+const BrokenLinkBanner = () => (
+  <AlertBanner banner_class={'warning'}>
+    <TextMaker text_key="table_picker_broken_link_warning" />
+  </AlertBanner>
+);
+
+
+export const AccessibleTablePicker = ({ tables, onSelect, selected, broken_url }) => (
+  <Fragment>
+    {broken_url && <BrokenLinkBanner />}
+    <select
+      aria-labelledby="picker-label"
+      className="form-control form-control-ib rpb-simple-select"
+      value={selected}
+      onChange={evt => onSelect(evt.target.value)}
+    >
+      {_.map(tables, ({id, name}) =>
+        <option key={id} value={id}>
+          {name}
+        </option>
+      )}
+    </select>
+  </Fragment>
+);
 
 
 function toggleArrayElement(arr,el){
@@ -21,11 +48,11 @@ function toggleArrayElement(arr,el){
   arr.concat(el);
 }
 
-
 /* 
   props:
     onSelect : table_id =>  
 */
+
 
 class TablePicker extends React.Component {
   constructor(props){
@@ -72,9 +99,9 @@ class TablePicker extends React.Component {
 
   }
   render(){
-    const { 
-      active_concepts, 
-    } = this.state;
+    const { broken_url } = this.props;
+
+    const { active_concepts } = this.state;
 
     const { 
       linkage, 
@@ -122,6 +149,7 @@ class TablePicker extends React.Component {
 
     return <div ref="main" id="tbp-main">
       <h2 id="tbp-title"> <TextMaker text_key="table_picker_title" /> </h2>
+      {broken_url && <BrokenLinkBanner />}
       <p className="medium_panel_text"><TextMaker text_key="table_picker_top_instructions" /></p>
       <div>
         <TaggedItemCloud 

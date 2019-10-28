@@ -25,19 +25,25 @@ const rpb_link = (naive_state, useRouterFormat) => _.chain(naive_state)
       ),
     };
   })
-  .pick([
-    'columns',
-    'subject',
-    'mode',
-    'dimension',
-    'table',
-    'preferDeptBreakout',
-    'preferTable',
-    'sort_col',
-    'descending',
-    'filter',
-  ])
-  .pipe(obj => SafeJSURL.stringify(obj))
+  .pickBy(
+    (value, key) => _.includes(
+      [
+        'columns',
+        'subject',
+        'mode',
+        'dimension',
+        'table',
+        'preferDeptBreakout',
+        'preferTable',
+        'sort_col',
+        'descending',
+        'filter',
+      ],
+      key
+    ) ||
+    key === "broken_url" && value // need to store broken_url in route state while true so it isn't lost, fine to drop it once it has been cleared (becomes false) to keep the URL clean
+  )
+  .pipe( obj => SafeJSURL.stringify(obj) )
   .pipe( str => base_url+str )
   .pipe(str => useRouterFormat ? str.replace("#","/") : str )
   .value();
