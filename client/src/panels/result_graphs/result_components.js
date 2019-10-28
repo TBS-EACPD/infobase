@@ -192,16 +192,13 @@ const SingleIndicatorDisplay = ({indicator}) => {
           </Fragment>
         }
 
-        { could_have_previous_year_target &&
+        { has_previous_year_target &&
           <Fragment>
             <dt>
               <TM k="previous_year_target"/>
             </dt>
             <dd>
-              {has_previous_year_target ?
-                <IndicatorResultDisplay indicator={indicator} is_actual={false} is_drr17={indicator.doc === "drr17"} is_previous={true} /> :
-                <TM k="new_indicator" el="strong" />
-              }
+              <IndicatorResultDisplay indicator={indicator} is_actual={false} is_drr17={indicator.doc === "drr17"} is_previous={true} />
             </dd>
           </Fragment>
         }
