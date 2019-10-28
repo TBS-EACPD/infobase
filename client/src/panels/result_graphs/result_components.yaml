@@ -22,4 +22,6 @@ result_is_retired:
   en: DRR_TODO
   fr: DRR_TODO
 
-
+status_filter_instructions:
+  en: Filter the data by selecting the result status you want to explore (you may select multiple statuses)
+  fr: Filtrer les données en sélectionnant l'état du résultat à analyser (plusieurs états peuvent être sélectionnés)

@@ -301,15 +301,22 @@ const make_status_icons = (width) => {
 const large_status_icons = make_status_icons('41px');
 const status_icons = make_status_icons('25px');
 
-
+const status_label = (status_key, icon_count) => `${result_simple_statuses[status_key].text} (${icon_count} ${text_maker("indicators")})`;
+const status_icon_component = (status_key) => ( (props) => (
+  <span {...props}>
+    {status_icons[status_key]}
+  </span>
+));
 const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }) => (
   <FancyCheckboxSelector
+    legend={text_maker("status_filter_instructions")}
     items={
       _.map(ordered_status_keys, status_key => ({
         id: status_key,
-        label: result_simple_statuses[status_key].text,
+        label: status_label(status_key, icon_counts[status_key]),
         active: active_list.length === 0 || _.indexOf(active_list, status_key) !== -1,
         color: result_status_colors[status_key],
+        boxElement: status_icon_component(status_key),
       }))}
     callbackToggle={(status_key) => onIconClick(status_key)}
   />

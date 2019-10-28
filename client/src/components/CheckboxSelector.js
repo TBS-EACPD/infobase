@@ -16,20 +16,30 @@ export class FancyCheckbox extends React.Component {
     super(props);
   }
   render(){
-    const {id, label, color, active} = this.props;
+    const {id, label, color, active, boxElement} = this.props;
     const onClickHandler = () => this.props.callbackToggle(this.props.id,!active);
     const borderStyle = {borderColor: color};
     return (
       <div className="fancy-checkbox">
-        <button
-          className={"fancy-checkbox__box"}
-          style={active ? { backgroundColor: color, ...borderStyle} : borderStyle }
-          tabIndex={0}
-          role={"checkbox"}
-          aria-checked={active}
-          aria-labelledby={"checkboxLabel_"+id}
-          onClick={onClickHandler}
-        />
+        { boxElement ?
+          boxElement({
+            tabIndex: 0,
+            role: "checkbox",
+            ariaChecked: active,
+            ariaLabelledby: "checkboxLabel_"+id,
+            onClick: onClickHandler,
+          })
+          :
+          <button
+            className={"fancy-checkbox__box"}
+            style={active ? { backgroundColor: color, ...borderStyle} : borderStyle }
+            tabIndex={0}
+            role={"checkbox"}
+            aria-checked={active}
+            aria-labelledby={"checkboxLabel_"+id}
+            onClick={onClickHandler}
+          />
+        }
         <label
           className="fancy-checkbox__label"
           id={"checkboxLabel_"+id}
