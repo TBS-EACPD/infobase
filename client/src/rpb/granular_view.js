@@ -39,85 +39,78 @@ class GranularView extends React.Component {
 
     return (
       <div>
-        <LabeledBox
-          label={ <TextMaker text_key="blue_text_table_controls" /> }
-          content={
-            <div className="row">
-              <div className='col-md-6'>
-                <fieldset className="rpb-config-item col-selection simple">
-                  <legend className="rpb-config-header"> <TextMaker text_key="select_columns" /> </legend>
-                  <SelectList 
-                    items={ _.map(
-                      all_data_columns, 
-                      ({nick, fully_qualified_name}) => ({
-                        id: nick, 
-                        display: fully_qualified_name, 
-                      }) 
-                    )}
-                    selected={ _.map(columns,'nick') }
-                    is_multi_select={true}
-                    onSelect={id=> on_toggle_col_nick(id) }
-                  />
-                </fieldset>
-              </div>
-              <div className="col-md-6">
-                <label className='rpb-config-header' htmlFor='filt_select'> Filter </label>
-                <TwoLevelSelect
-                  className="form-control form-control-ib"
-                  id="filt_select"
-                  onSelect={ id=> {
-                    const [ dim_key, filt_key ] = id.split('__');
-                    on_set_filter({filter: filt_key, dimension: dim_key});
-                  }}
-                  selected={dimension+'__'+filter}
-                  grouped_options={ 
-                    _.mapValues(filters_by_dimension, 
-                      filter_by_dim => (
-                        {
-                          ...filter_by_dim, 
-                          children: _.sortBy(filter_by_dim.children, "display"),
-                        }
-                      ) 
-                    )
-                  }
+        <LabeledBox label={<TextMaker text_key="blue_text_table_controls" />}>
+          <div className="row">
+            <div className='col-md-6'>
+              <fieldset className="rpb-config-item col-selection simple">
+                <legend className="rpb-config-header"> <TextMaker text_key="select_columns" /> </legend>
+                <SelectList 
+                  items={ _.map(
+                    all_data_columns, 
+                    ({nick, fully_qualified_name}) => ({
+                      id: nick, 
+                      display: fully_qualified_name, 
+                    }) 
+                  )}
+                  selected={ _.map(columns,'nick') }
+                  is_multi_select={true}
+                  onSelect={id=> on_toggle_col_nick(id) }
                 />
-                <div className="mrgn-tp-lg">
-                  <ExportButton 
-                    id="export_button"
-                    get_csv_string={ ()=> this.get_csv_string() }
-                    get_excel_string={ ()=> {
-                      const el = document.createElement('div');
-                      ReactDOM.render(this.get_plain_table_content(true), el);
-                      const excel_str= el.querySelector('table').outerHTML;
-                      ReactDOM.unmountComponentAtNode(el);
-                      return excel_str;
-                    }}
-                  />
-                </div>
-              </div>
-              <div className='clearfix'/>
+              </fieldset>
             </div>
-          }
-        />
-        <LabeledBox
-          label={ <TextMaker text_key="blue_text_report_details" args={{table_name: table.name}} /> }
-          content={
-            <Details
-              summary_content={
-                <div>
-                  { table.title } : {subject.name}  
-                </div>
-              }
-              content={
-                <ReportDetails {...this.props} />
-              }
-            />
-          }
-        />
-        <LabeledBox
-          label={ <TextMaker text_key="blue_text_report_data_sources" /> }
-          content={ <ReportDatasets {...this.props} /> }
-        />
+            <div className="col-md-6">
+              <label className='rpb-config-header' htmlFor='filt_select'> Filter </label>
+              <TwoLevelSelect
+                className="form-control form-control-ib"
+                id="filt_select"
+                onSelect={ id=> {
+                  const [ dim_key, filt_key ] = id.split('__');
+                  on_set_filter({filter: filt_key, dimension: dim_key});
+                }}
+                selected={dimension+'__'+filter}
+                grouped_options={ 
+                  _.mapValues(filters_by_dimension, 
+                    filter_by_dim => (
+                      {
+                        ...filter_by_dim, 
+                        children: _.sortBy(filter_by_dim.children, "display"),
+                      }
+                    ) 
+                  )
+                }
+              />
+              <div className="mrgn-tp-lg">
+                <ExportButton 
+                  id="export_button"
+                  get_csv_string={ ()=> this.get_csv_string() }
+                  get_excel_string={ ()=> {
+                    const el = document.createElement('div');
+                    ReactDOM.render(this.get_plain_table_content(true), el);
+                    const excel_str= el.querySelector('table').outerHTML;
+                    ReactDOM.unmountComponentAtNode(el);
+                    return excel_str;
+                  }}
+                />
+              </div>
+            </div>
+            <div className='clearfix'/>
+          </div>
+        </LabeledBox>
+        <LabeledBox label={<TextMaker text_key="blue_text_report_details" args={{table_name: table.name}} />}>
+          <Details
+            summary_content={
+              <div>
+                { table.title } : {subject.name}  
+              </div>
+            }
+            content={
+              <ReportDetails {...this.props} />
+            }
+          />
+        </LabeledBox>
+        <LabeledBox label={<TextMaker text_key="blue_text_report_data_sources" />}>
+          <ReportDatasets {...this.props} /> 
+        </LabeledBox>
         { table.rpb_banner && <AlertBanner>{table.rpb_banner}</AlertBanner> }
         <div id="rpb-main-content" >
           { 

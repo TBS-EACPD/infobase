@@ -32,21 +32,18 @@ export class BudgetMeasuresFooter extends React.Component {
     
     return (
       <div className="budget-measures-partition-footer">
-        <LabeledBox 
-          label = { <TextMaker text_key="data_sources" /> }
-          content = {
-            <div className="budget-measure-fancy-ul-container">
-              <FancyUL>
-                {
-                  _.map(
-                    budget_source.items(),
-                    (source_item) => FancyULBudgetSourceRow(source_item, open_data_link)
-                  )
-                }
-              </FancyUL>
-            </div>
-          }
-        />
+        <LabeledBox label={<TextMaker text_key="data_sources" />}>
+          <div className="budget-measure-fancy-ul-container">
+            <FancyUL>
+              {
+                _.map(
+                  budget_source.items(),
+                  (source_item) => FancyULBudgetSourceRow(source_item, open_data_link)
+                )
+              }
+            </FancyUL>
+          </div>
+        </LabeledBox>
       </div>
     );
   }

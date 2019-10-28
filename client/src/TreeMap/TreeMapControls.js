@@ -158,114 +158,93 @@ export class TreeMapControls extends React.Component {
     } = this.props;
     return (
       <div className="treemap-controls">
-        <TreeMapLabeledBox
-          label={text_maker("treemap_display_value_label")}
-          content={
-            <div className="cent">
-              <TreeMapRadioButtons
-                options={_.map(size_controls, ({ id, display }) => ({ id, display, active: id === perspective }))}
-                onChange={id => {this.handle_click("perspective",id);}}
-              />
-            </div>
-          }
-        />
-        <TreeMapLabeledBox
-          label={text_maker("year_format")}
-          content={
-            <div className="cent">
-              <TreeMapRadioButtons
-                options={[
-                  {
-                    id: "single_year",
-                    active: !get_changes,
-                    display: text_maker("single_year"),
-                  },
-                  {
-                    id: "year_changes",
-                    active: get_changes,
-                    display: text_maker("year_changes"),
-                  },
-                ]}
-                onChange={id => {this.handle_click("get_changes",id==="year_changes");}}
-              />
-            </div>
-          }
-        />
-        <TreeMapLabeledBox
-          label={text_maker("year")}
-          content={
-            <div className="cent">
-              <TreeMapRadioButtons
-                options={get_changes ?
-                  _.map(year_changes[perspective], (id => ({ 
-                    id, 
-                    display: `${run_template("{{" + id.split(":")[0] + "}}")} ${text_maker("to")} ${run_template("{{" + id.split(":")[1] + "}}")}`,
-                    active: id === year,
-                  }))) :
-                  _.map(years[perspective], (id => ({
-                    id,
-                    display: run_template("{{" + id + "}}"),
-                    active: id === year,
-                  })))
-                }
-                onChange={id => {this.handle_click("year",id);}}
-              />
-            </div>
-          }
-        />
+        <TreeMapLabeledBox label={text_maker("treemap_display_value_label")}>
+          <div className="cent">
+            <TreeMapRadioButtons
+              options={_.map(size_controls, ({ id, display }) => ({ id, display, active: id === perspective }))}
+              onChange={id => {this.handle_click("perspective",id);}}
+            />
+          </div>
+        </TreeMapLabeledBox>
+        <TreeMapLabeledBox label={text_maker("year_format")}>
+          <div className="cent">
+            <TreeMapRadioButtons
+              options={[
+                {
+                  id: "single_year",
+                  active: !get_changes,
+                  display: text_maker("single_year"),
+                },
+                {
+                  id: "year_changes",
+                  active: get_changes,
+                  display: text_maker("year_changes"),
+                },
+              ]}
+              onChange={id => {this.handle_click("get_changes",id==="year_changes");}}
+            />
+          </div>
+        </TreeMapLabeledBox>
+        <TreeMapLabeledBox label={text_maker("year")}>
+          <div className="cent">
+            <TreeMapRadioButtons
+              options={get_changes ?
+                _.map(year_changes[perspective], (id => ({ 
+                  id, 
+                  display: `${run_template("{{" + id.split(":")[0] + "}}")} ${text_maker("to")} ${run_template("{{" + id.split(":")[1] + "}}")}`,
+                  active: id === year,
+                }))) :
+                _.map(years[perspective], (id => ({
+                  id,
+                  display: run_template("{{" + id + "}}"),
+                  active: id === year,
+                })))
+              }
+              onChange={id => {this.handle_click("year",id);}}
+            />
+          </div>
+        </TreeMapLabeledBox>
         {perspective === "tp" &&
-          <TreeMapLabeledBox
-            label={text_maker("treemap_gc_type_filter")}
-            content={
-              <div className="cent">
-                <TreeMapRadioButtons
-                  options={_.map(gc_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
-                  onChange={id => {this.handle_click("filter_var",id);}}
-                />
-              </div>
-            }
-          />
+          <TreeMapLabeledBox label={text_maker("treemap_gc_type_filter")}>
+            <div className="cent">
+              <TreeMapRadioButtons
+                options={_.map(gc_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
+                onChange={id => {this.handle_click("filter_var",id);}}
+              />
+            </div>
+          </TreeMapLabeledBox>
         }
         {(perspective === "drf" || perspective === "drf_ftes" ) &&
-          <TreeMapLabeledBox
-            label={text_maker("treemap_color_by_label")}
-            content={
-              <div className="cent">
-                <TreeMapRadioButtons
-                  options={_.map(color_controls, ({ id, display }) => ({ id, display, active: id === color_var }))}
-                  onChange={id => {this.handle_click("color_var",id);}}
-                />
-              </div>
-            }
-          />
+          <TreeMapLabeledBox label={text_maker("treemap_color_by_label")}>
+            <div className="cent">
+              <TreeMapRadioButtons
+                options={_.map(color_controls, ({ id, display }) => ({ id, display, active: id === color_var }))}
+                onChange={id => {this.handle_click("color_var",id);}}
+              />
+            </div>
+          </TreeMapLabeledBox>
         }
         {perspective === "vote_stat" &&
-          <TreeMapLabeledBox
-            label={text_maker("treemap_vstype_filter")}
-            content={
-              <div className="cent">
-                <Fragment>
-                  <TreeMapRadioButtons
-                    options={_.map(vs_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
-                    onChange={id => {this.handle_click("filter_var",id);}}
-                  />
-                </Fragment>
-              </div>
-            }
-          />
-        }
-        {perspective === "so" &&
-          <TreeMapLabeledBox
-            label={text_maker("treemap_so_filter")}
-            content={
-              <div className="cent">
+          <TreeMapLabeledBox label={text_maker("treemap_vstype_filter")}>
+            <div className="cent">
+              <Fragment>
                 <TreeMapRadioButtons
-                  options={_.map(so_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
+                  options={_.map(vs_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
                   onChange={id => {this.handle_click("filter_var",id);}}
                 />
-              </div>
-            }
-          />
+              </Fragment>
+            </div>
+          </TreeMapLabeledBox>
+        }
+        {perspective === "so" &&
+          <TreeMapLabeledBox label={text_maker("treemap_so_filter")}>
+            <div className="cent">
+              <TreeMapRadioButtons
+                options={_.map(so_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
+                onChange={id => {this.handle_click("filter_var",id);}}
+              />
+            </div>
+          </TreeMapLabeledBox>
         }
       </div>
     );
@@ -276,7 +255,7 @@ class TreeMapLabeledBox extends React.Component {
   render() {
     const {
       label,
-      content,
+      children,
     } = this.props;
 
     return (
@@ -287,7 +266,7 @@ class TreeMapLabeledBox extends React.Component {
           </div>
         </div>
         <div className="treemap-labeled-box-content">
-          {content}
+          {children}
         </div>
       </div>
     );

@@ -46,105 +46,98 @@ class SimpleView extends React.Component {
     } = this.props;
     return (
       <div> 
-        <LabeledBox
-          label={ <TextMaker text_key="blue_text_table_controls" /> }
-          content={
-            <div className="rpb-config rpb-simple row">
-              <div className="col-md-6">
-                <fieldset className="rpb-config-item col-selection simple">
-                  <legend className="rpb-config-header"> <TextMaker text_key="select_columns" /> </legend>
-                  <SelectList 
-                    items={_.map(all_data_columns, obj => ({id: obj.nick, display: obj.fully_qualified_name }) ) }
-                    selected={ _.map(columns,'nick') }
-                    is_multi_select={true}
-                    onSelect={id=> on_toggle_col_nick(id) }
-                  />
-                </fieldset>
-              </div>
-              <div className="col-md-6">
-                { subject === Gov && 
-                  <div className="rpb-config-item">
-                    <label 
-                      className="rpb-config-header" 
-                    > 
-                      <TextMaker text_key="show_dept_breakout" />
-                      <input 
-                        type="checkbox"
-                        disabled={subject!==Gov}
-                        checked={deptBreakoutMode}
-                        onChange={on_toggle_deptBreakout}
-                        style={{ marginLeft: '15px' }}
-                      />
+        <LabeledBox label={<TextMaker text_key="blue_text_table_controls" />}>
+          <div className="rpb-config rpb-simple row">
+            <div className="col-md-6">
+              <fieldset className="rpb-config-item col-selection simple">
+                <legend className="rpb-config-header"> <TextMaker text_key="select_columns" /> </legend>
+                <SelectList 
+                  items={_.map(all_data_columns, obj => ({id: obj.nick, display: obj.fully_qualified_name }) ) }
+                  selected={ _.map(columns,'nick') }
+                  is_multi_select={true}
+                  onSelect={id=> on_toggle_col_nick(id) }
+                />
+              </fieldset>
+            </div>
+            <div className="col-md-6">
+              { subject === Gov && 
+                <div className="rpb-config-item">
+                  <label 
+                    className="rpb-config-header" 
+                  > 
+                    <TextMaker text_key="show_dept_breakout" />
+                    <input 
+                      type="checkbox"
+                      disabled={subject!==Gov}
+                      checked={deptBreakoutMode}
+                      onChange={on_toggle_deptBreakout}
+                      style={{ marginLeft: '15px' }}
+                    />
+                  </label>
+                </div>
+              }
+              <div className="rpb-config-item">
+                <div className="row">
+                  <div className="col-md-2" style={{paddingLeft: "0px"}}>
+                    <label className="rpb-config-header" htmlFor="dim-select"> 
+                      <span className="nowrap">
+                        <TextMaker text_key="group_by" />
+                      </span>
                     </label>
                   </div>
-                }
+                  <div className="col-md-10">
+                    <Select
+                      id="dim_select"
+                      className="form-control form-control-ib rpb-simple-select"
+                      options={dimensions}
+                      selected={dimension}
+                      onSelect={id => on_set_dimension(id)}
+                    />
+                  </div>
+                  <div className="clearfix" />
+                </div>
+              </div>
+              { deptBreakoutMode &&
                 <div className="rpb-config-item">
                   <div className="row">
                     <div className="col-md-2" style={{paddingLeft: "0px"}}>
-                      <label className="rpb-config-header" htmlFor="dim-select"> 
-                        <span className="nowrap">
-                          <TextMaker text_key="group_by" />
-                        </span>
-                      </label>
+                      <label className="rpb-config-header" htmlFor="filt-select"> <TextMaker text_key="filter" /> </label>
                     </div>
                     <div className="col-md-10">
                       <Select
-                        id="dim_select"
+                        id="filt_select"
                         className="form-control form-control-ib rpb-simple-select"
-                        options={dimensions}
-                        selected={dimension}
-                        onSelect={id => on_set_dimension(id)}
+                        options={filters.sort().map( filter => ({ id: filter, display: filter }) )}
+                        selected={filter}
+                        onSelect={id => on_set_filter({
+                          dimension: dimension, 
+                          filter: id,
+                        })}
                       />
                     </div>
                     <div className="clearfix" />
                   </div>
                 </div>
-                { deptBreakoutMode &&
-                  <div className="rpb-config-item">
-                    <div className="row">
-                      <div className="col-md-2" style={{paddingLeft: "0px"}}>
-                        <label className="rpb-config-header" htmlFor="filt-select"> <TextMaker text_key="filter" /> </label>
-                      </div>
-                      <div className="col-md-10">
-                        <Select
-                          id="filt_select"
-                          className="form-control form-control-ib rpb-simple-select"
-                          options={filters.sort().map( filter => ({ id: filter, display: filter }) )}
-                          selected={filter}
-                          onSelect={id => on_set_filter({
-                            dimension: dimension, 
-                            filter: id,
-                          })}
-                        />
-                      </div>
-                      <div className="clearfix" />
-                    </div>
-                  </div>
-                }
-              </div>
-              <div className="clearfix" />
+              }
             </div>
-          }
-        />
-        <LabeledBox
-          label={ <TextMaker text_key="blue_text_report_details" args={{table_name: table.name}} /> }
-          content={
-            <Details
-              summary_content={
-                <div>
-                  { table.title } : {subject.name}  
-                </div>
-              }
-              content={
-                <ReportDetails {...this.props} />
-              }
-            />
-          }
-        />
-        <LabeledBox
-          label={ <TextMaker text_key="blue_text_report_data_sources" args={{table_name: table.name}} /> }
-          content={ <ReportDatasets {...this.props} /> }
-        />
+            <div className="clearfix" />
+          </div>
+        </LabeledBox>
+        <LabeledBox label={<TextMaker text_key="blue_text_report_details" args={{table_name: table.name}} />}>
+          <Details
+            summary_content={
+              <div>
+                { table.title } : {subject.name}  
+              </div>
+            }
+            content={
+              <ReportDetails {...this.props} />
+            }
+          />
+        </LabeledBox>
+        <LabeledBox label={<TextMaker text_key="blue_text_report_data_sources" args={{table_name: table.name}} />}>
+          <ReportDatasets {...this.props} /> 
+        </LabeledBox>
         { table.rpb_banner && <AlertBanner>{table.rpb_banner}</AlertBanner> }
         <div id="rpb-main-content" >
           { 

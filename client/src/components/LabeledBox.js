@@ -4,7 +4,7 @@ export class LabeledBox extends React.Component {
   render(){
     const {
       label,
-      content,
+      children,
     } = this.props;
 
     return (
@@ -15,7 +15,7 @@ export class LabeledBox extends React.Component {
           </div>
         </div>
         <div className="labeled-box-content">
-          { content }
+          { children }
         </div>
       </div>
     );

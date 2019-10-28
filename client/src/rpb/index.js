@@ -209,116 +209,107 @@ class RPB extends React.Component {
         subject_name={subject !== Gov && subject && subject.name}
         table_name={table && table.name}
       />
-      <LabeledBox
-        label={ <TextMaker text_key="blue_text_pick_data" /> }
-        content={
-          <div>
-            <div className="centerer">
-              <p 
-                id="picker-label"
-                className="md-half-width md-gutter-right"
-                style={{margin: 0}}
-              >
-                { table ? 
-                  <TextMaker text_key="table_picker_select_different_summary" args={{name: table.name}} /> :
-                  <TextMaker text_key="table_picker_none_selected_summary" /> 
-                } 
-              </p>
-              <div className="md-half-width md-gutter-left">
-                { 
-                  window.is_a11y_mode ?
-                    <AccessibleTablePicker
-                      onSelect={id => this.pickTable(id)}
-                      tables={_.reject(Table.get_all(), 'reference_table')}
-                      selected={_.get(table, 'id')}
-                      broken_url={broken_url}
-                    /> :
-                    <button 
-                      className="btn btn-ib-primary"
-                      style={{width: '100%'}}
-                      onClick={()=>{ this.setState({table_picking: true});}}
-                    >
-                      <TextMaker text_key={table ? 'select_another_table_button' : 'select_table_button'} /> 
-                    </button>
-                }
-              </div>
-            </div>
-            {!window.is_a11y_mode &&
-              <AriaModal
-                mounted={this.state.table_picking}
-                onExit={()=>{ 
-                  if( this.state.table_picking ){
-                    this.setState({ table_picking: false }); 
-                    setTimeout(()=>{
-                      slowScrollDown();
-                      const sub_app_node = document.querySelector('#'+sub_app_name);
-                      if(sub_app_node !== null){
-                        sub_app_node.focus();
-                      }
-                    },200);
-                  }
-                }}
-                titleId="tbp-title"
-                getApplicationNode={()=>document.getElementById('app')}
-                verticallyCenter={true}
-                underlayStyle={{
-                  paddingTop: "50px",
-                  paddingBottom: "50px",
-                }}
-                focusDialog={true}
-              >
-                <div 
-                  tabIndex={-1}
-                  id="modal-child"
-                  className="container app-font"
-                  style={{
-                    backgroundColor: 'white',
-                    overflow: 'auto',
-                    lineHeight: 1.5,
-                    padding: "0px 20px 0px 20px",
-                    borderRadius: "5px",
-                    fontWeight: 400,
-                  }}
-                >
-                  <TablePicker
-                    onSelect={id=> this.pickTable(id)} 
+      <LabeledBox label={ <TextMaker text_key="blue_text_pick_data" /> }>
+        <div>
+          <div className="centerer">
+            <p 
+              id="picker-label"
+              className="md-half-width md-gutter-right"
+              style={{margin: 0}}
+            >
+              { table ? 
+                <TextMaker text_key="table_picker_select_different_summary" args={{name: table.name}} /> :
+                <TextMaker text_key="table_picker_none_selected_summary" /> 
+              } 
+            </p>
+            <div className="md-half-width md-gutter-left">
+              { 
+                window.is_a11y_mode ?
+                  <AccessibleTablePicker
+                    onSelect={id => this.pickTable(id)}
+                    tables={_.reject(Table.get_all(), 'reference_table')}
+                    selected={_.get(table, 'id')}
                     broken_url={broken_url}
-                  />
-                </div>
-              </AriaModal>
-            }
+                  /> :
+                  <button 
+                    className="btn btn-ib-primary"
+                    style={{width: '100%'}}
+                    onClick={()=>{ this.setState({table_picking: true});}}
+                  >
+                    <TextMaker text_key={table ? 'select_another_table_button' : 'select_table_button'} /> 
+                  </button>
+              }
+            </div>
           </div>
-        }
-      />
+          {!window.is_a11y_mode &&
+            <AriaModal
+              mounted={this.state.table_picking}
+              onExit={()=>{ 
+                if( this.state.table_picking ){
+                  this.setState({ table_picking: false }); 
+                  setTimeout(()=>{
+                    slowScrollDown();
+                    const sub_app_node = document.querySelector('#'+sub_app_name);
+                    if(sub_app_node !== null){
+                      sub_app_node.focus();
+                    }
+                  },200);
+                }
+              }}
+              titleId="tbp-title"
+              getApplicationNode={()=>document.getElementById('app')}
+              verticallyCenter={true}
+              underlayStyle={{
+                paddingTop: "50px",
+                paddingBottom: "50px",
+              }}
+              focusDialog={true}
+            >
+              <div 
+                tabIndex={-1}
+                id="modal-child"
+                className="container app-font"
+                style={{
+                  backgroundColor: 'white',
+                  overflow: 'auto',
+                  lineHeight: 1.5,
+                  padding: "0px 20px 0px 20px",
+                  borderRadius: "5px",
+                  fontWeight: 400,
+                }}
+              >
+                <TablePicker
+                  onSelect={id=> this.pickTable(id)} 
+                  broken_url={broken_url}
+                />
+              </div>
+            </AriaModal>
+          }
+        </div>
+      </LabeledBox>
       {
         this.state.loading ? 
           <SpinnerWrapper config_name={"route"} /> :
           <Fragment>
-            <LabeledBox
-              label={ <TextMaker text_key="blue_text_pick_org" /> }
-              content={
-                <SubjectFilterPicker 
-                  subject={subject}  
-                  onSelect={ subj=> on_set_subject(subj) }
+            <LabeledBox label={<TextMaker text_key="blue_text_pick_org" />}>
+              <SubjectFilterPicker 
+                subject={subject}  
+                onSelect={ subj=> on_set_subject(subj) }
+              />
+            </LabeledBox>
+            <LabeledBox label={<TextMaker text_key="blue_text_select_mode" />}>
+              <div className="centerer">
+                <RadioButtons
+                  options = {[
+                    {id: 'simple', display: <TextMaker text_key="simple_view_title" />, active: mode==='simple'},
+                    {id: 'details', display: <TextMaker text_key="granular_view_title" />, active: mode==='details'}]}
+                  
+                  onChange={ id =>{
+                    on_switch_mode(id);} 
+                  }
                 />
-              }
-            />
-            <LabeledBox
-              label={ <TextMaker text_key="blue_text_select_mode" /> }
-              content={
-                <div className="centerer">
-                  <RadioButtons
-                    options = {[
-                      {id: 'simple', display: <TextMaker text_key="simple_view_title" />, active: mode==='simple'},
-                      {id: 'details', display: <TextMaker text_key="granular_view_title" />, active: mode==='details'}]}
-                    
-                    onChange={ id =>{
-                      on_switch_mode(id);} 
-                    }
-                  />
-                </div>
-              }
-            />
+              </div>
+            </LabeledBox>
             {
               table ? 
               (
