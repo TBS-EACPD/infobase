@@ -47,7 +47,7 @@ function get_default_state_for_new_table(table_id){
     filter: text_maker('all'),
     page_num: 0,
     sort_col: 'dept',
-    descending: false, 
+    descending: false,
   };
 }
 
@@ -106,7 +106,8 @@ const reducer = (state=initial_state, action) => {
       if(state.sort_col === col_nick){
         return {...state, descending: !state.descending };
       } else {
-        return {...state,
+        return {
+          ...state,
           sort_col: col_nick,
           descending: true, 
           page_num: 0,
@@ -117,10 +118,11 @@ const reducer = (state=initial_state, action) => {
 
     case 'toggle_col_nick': {
       const col_nick = payload;
-      if(state.columns.length < 2 && _.includes(state.columns, col_nick ) ){ 
+      if( state.columns.length < 2 && _.includes(state.columns, col_nick) ){ 
         return state; 
       }
-      return {...state,
+      return {
+        ...state,
         columns: _.toggle_list(state.columns, col_nick),
         page_num: 0,
       };
@@ -134,7 +136,8 @@ const reducer = (state=initial_state, action) => {
 
     case 'set_filter': {
       const { dimension, filter} = payload;
-      return {...state,
+      return {
+        ...state,
         dimension,
         filter,
         page_num: 0,
@@ -142,7 +145,8 @@ const reducer = (state=initial_state, action) => {
     }
 
     case 'set_dimension': {
-      return {...state,
+      return {
+        ...state,
         dimension: payload,
         filter: text_maker('all'),
         page_num: 0,
@@ -152,7 +156,8 @@ const reducer = (state=initial_state, action) => {
 
     case 'set_subject': {
       const { guid } = payload;
-      return {...state,
+      return {
+        ...state,
         subject: guid,
         filter: text_maker('all'),
         page_num: 0,
@@ -160,7 +165,8 @@ const reducer = (state=initial_state, action) => {
     }
 
     case 'toggle_deptBreakout': {
-      return {...state,
+      return {
+        ...state,
         preferDeptBreakout: !state.preferDeptBreakout,
         filter: text_maker('all'),
         page_num: 0,
@@ -168,14 +174,16 @@ const reducer = (state=initial_state, action) => {
     }
 
     case 'toggle_preferTable': {
-      return {...state,
+      return {
+        ...state,
         preferTable: !state.preferTable,
         page_num: 0,
       };
     }
 
     case 'switch_mode': {
-      return {...state,
+      return {
+        ...state,
         mode: payload,
         page_num: 0,
       };
@@ -183,7 +191,8 @@ const reducer = (state=initial_state, action) => {
     }
 
     case 'set_page': {
-      return {...state,
+      return {
+        ...state,
         page_num: payload,
       };
 
