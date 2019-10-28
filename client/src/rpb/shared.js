@@ -10,7 +10,6 @@ import {
 } from '../components/index.js';
 import { IconCopyLink } from '../icons/icons.js';
 
-import { Fragment } from 'react';
 import classNames from 'classnames';
 
 const { Gov } = Subject;
@@ -177,17 +176,110 @@ const ReportDatasets = ({
 };
 
 const ShareReport = () => (
-  <Fragment>
+  <div className="rpb-config-item rpb-share-options">
     <ShareButton
       url={window.location}
+      icon_color={window.infobase_color_constants.secondaryColor}
     />
     <WriteToClipboard 
       text_to_copy={window.location}
+      icon_color={window.infobase_color_constants.secondaryColor}
       IconComponent={IconCopyLink}
     />
-  </Fragment>
+  </div>
 );
 
+
+class ExportButton extends React.Component {
+  //note that though props may not have changed, this method doesn't get trigerred from this.setState 
+  constructor(){
+    super();
+    this.state = { 
+      success: null,
+    }; 
+  }
+  static getDerivedStateFromProps(nextProps, prevState){
+    return { 
+      success: null,
+    };
+  }
+  render(){
+    const {
+      id,
+    } = this.props;
+    const { 
+      success,
+    } = this.state;
+
+
+    if( window.feature_detection.download_attr ){
+      return <div>
+        <button 
+          id={id}
+          className="btn btn-ib-primary btn-block"
+          onClick={ ()=> { this.triggerDownload(); } }
+        >
+          <TextMaker text_key="export_table" />
+        </button>
+      </div>;
+    } else if(window.feature_detection.clipboard_access){
+      const buttonText = (
+        success === false ? 
+        <TextMaker text_key="error" /> :
+        ( 
+          success === true ?
+          <TextMaker text_key="finished_export_table_to_clipboard" /> :
+          <TextMaker text_key="export_table_to_clipboard" />
+        )
+      );
+      
+      return <div>
+        <button 
+          id={id}
+          className="btn btn-ib-primary btn-block"
+          onClick={ ()=>{ this.clipBoardClickHandler(); } }
+        >
+          { buttonText }
+        </button>
+      </div>;
+
+    } else {
+      return null;
+    }
+
+  }
+  triggerDownload(){
+    const csv_str = this.props.get_csv_string();
+    const uri = "data:text/csv;charset=UTF-8," + encodeURIComponent(csv_str);
+    
+    const temporary_anchor = document.createElement('a');
+    temporary_anchor.setAttribute("download", 'table.csv');
+    temporary_anchor.setAttribute("href", uri);
+    temporary_anchor.dispatchEvent( new MouseEvent('click') );
+  }
+   
+
+  clipBoardClickHandler(){
+    const {
+      get_excel_string,
+    } = this.props;
+
+
+    try {
+
+      window.clipboardData.setData('Text', get_excel_string());
+      this.setState({success: true});
+
+    } catch(e){
+      this.setState({success: false});
+    }
+
+    setTimeout(()=>{
+      this.setState({success: null});
+    },3000);
+
+  }
+}
 
 //the parent flexbox styling screws stuff up and makes it impossible to center vertically,
 // a padding of 6px at the top seems to fix it ¯\_(ツ)_/¯
@@ -237,6 +329,7 @@ export {
   ReportDetails,
   ReportDatasets,
   ShareReport,
+  ExportButton,
   SubjectFilterPicker,
   NoDataMessage,
 };
