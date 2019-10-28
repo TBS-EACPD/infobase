@@ -125,6 +125,10 @@ export:
   en: Export
   fr: Exporter
 
+share_report:
+  en: Share
+  fr: Partager
+
 ### Table Picker text
 
 select_table:

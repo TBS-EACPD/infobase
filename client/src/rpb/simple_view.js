@@ -1,9 +1,10 @@
 import { TextMaker, text_maker } from './rpb_text_provider.js';
 import { 
   SelectList,
-  ReportDetails, 
-  ReportDatasets, 
-  NoDataMessage, 
+  ReportDetails,
+  ReportDatasets,
+  ShareReport,
+  NoDataMessage,
 } from './shared.js';
 import { 
   Select, 
@@ -24,8 +25,7 @@ const granular_rpb_link_for_filter = (currentProps, filter) => rpb_link({ ...cur
 
 
 class SimpleView extends React.Component {
-
-  render() {
+  render(){
     const {
       subject,
       table,
@@ -44,6 +44,7 @@ class SimpleView extends React.Component {
       on_toggle_col_nick,
       on_toggle_deptBreakout,
     } = this.props;
+
     return (
       <div> 
         <LabeledBox label={<TextMaker text_key="blue_text_table_controls" />}>
@@ -137,6 +138,9 @@ class SimpleView extends React.Component {
         </LabeledBox>
         <LabeledBox label={<TextMaker text_key="blue_text_report_data_sources" args={{table_name: table.name}} />}>
           <ReportDatasets {...this.props} /> 
+        </LabeledBox>
+        <LabeledBox label={<TextMaker text_key="share_report"/>}>
+          <ShareReport /> 
         </LabeledBox>
         { table.rpb_banner && <AlertBanner>{table.rpb_banner}</AlertBanner> }
         <div id="rpb-main-content" >
