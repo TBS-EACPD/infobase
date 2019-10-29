@@ -177,3 +177,9 @@ dl.indicator-item__dl dt+dd {
   color: $backgroundColor;
   vertical-align: 0.1em;
 }
+
+.button.status-icon {
+  &:focus, &:hover {
+    border-width: 1px;
+  }
+}

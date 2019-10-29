@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { util_components, general_utils } from '../shared.js';
 import { glossary_href } from '../../link_utils.js';
+import './results.scss';
 import {
   status_key_to_glossary_key,
   ordered_status_keys,
@@ -246,12 +247,12 @@ const QuadrantDefList = ({defs} ) => (
 );
 
 
-const result_status_icon_components = (status, width) => {
+const result_status_icon_components = (status, width, light) => {
   const icons = {
     met: <IconCheck
       key="met"
       title={result_simple_statuses.met.text}
-      color={color_defs.successDarkColor}
+      color={light ? color_defs.successLightColor : color_defs.successDarkColor}
       width={width}
       vertical_align={"0em"}
       alternate_color={false}
@@ -260,7 +261,7 @@ const result_status_icon_components = (status, width) => {
     not_met: <IconAttention
       key="not_met"
       title={result_simple_statuses.not_met.text}
-      color={color_defs.failDarkColor}
+      color={light ? color_defs.failLightColor : color_defs.failDarkColor}
       width={width}
       vertical_align={"0em"}
       alternate_color={false}
@@ -269,7 +270,7 @@ const result_status_icon_components = (status, width) => {
     not_available: <IconNotApplicable
       key="not_available"
       title={result_simple_statuses.not_available.text}
-      color={color_defs.warnDarkColor}
+      color={light ? color_defs.warnLightColor : color_defs.warnDarkColor}
       width={width}
       vertical_align={"0em"}
       alternate_color={false}
@@ -278,7 +279,7 @@ const result_status_icon_components = (status, width) => {
     future: <IconClock
       key="future"
       title={result_simple_statuses.future.text}
-      color={color_defs.tertiaryColor}
+      color={light ? color_defs.disabledLightColor : color_defs.disabledDarkColor}
       width={width}
       vertical_align={"0em"}
       alternate_color={false}
@@ -288,24 +289,25 @@ const result_status_icon_components = (status, width) => {
   return icons[status];
 };
 
-const make_status_icons = (width) => {
+const make_status_icons = (width, light) => {
   return _.chain(ordered_status_keys)
     .map(status_key => [
       status_key,
-      result_status_icon_components(status_key, width),
+      result_status_icon_components(status_key, width, light),
     ])
     .fromPairs()
     .value();
 };
 
-const large_status_icons = make_status_icons('41px');
-const status_icons = make_status_icons('25px');
+const large_status_icons = make_status_icons('41px', false);
+const status_icons = make_status_icons('25px', false);
+const status_icons_light = make_status_icons('25px', true);
 
 const status_label = (status_key, icon_count) => `${result_simple_statuses[status_key].text} (${icon_count} ${text_maker("indicators")})`;
 const status_icon_component = (status_key) => ( (props) => (
-  <span {...props}>
-    {status_icons[status_key]}
-  </span>
+  <button className="button-unstyled status-icon" {...props}>
+    {props["aria-checked"] ? status_icons[status_key] : status_icons_light[status_key]}
+  </button>
 ));
 const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }) => (
   <FancyCheckboxSelector

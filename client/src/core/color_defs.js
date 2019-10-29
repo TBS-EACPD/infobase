@@ -28,12 +28,14 @@ const linkVisitedColor = "#7834bc";
 /* dark and light colours don't have enough contrast between them for text, so don't use them that way! Use black text on light, or (check contrast) white text on dark*/
 const successLightColor = "#cbedbd";
 const successDarkColor = "#45a64d";
-const failLightColor = highlightDark;
+const failLightColor = highlightPale;
 const failDarkColor = highlightColor; // setting this to so we don't have too many shades of red, if the buttons change colour this should be changed
 const warnLightColor = "#ffecce";
 const warnDarkColor = "#fdb84c";
 const infoLightColor = "#f2f6fc";
 const infoDarkColor = buttonPrimaryColor; // setting this to so we don't have too many shades of blue, if the buttons change colour this should be set to a nice "info" blue
+const disabledDarkColor = tertiaryColor;
+const disabledLightColor = "#b9bcc1";
 
 export {
   primaryColor,
@@ -60,4 +62,6 @@ export {
   warnDarkColor,
   infoLightColor,
   infoDarkColor,
+  disabledDarkColor,
+  disabledLightColor,
 };

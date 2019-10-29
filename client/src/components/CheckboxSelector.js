@@ -25,8 +25,8 @@ export class FancyCheckbox extends React.Component {
           boxElement({
             tabIndex: 0,
             role: "checkbox",
-            ariaChecked: active,
-            ariaLabelledby: "checkboxLabel_"+id,
+            "aria-checked": active,
+            "aria-labelledby": "checkboxLabel_"+id,
             onClick: onClickHandler,
           })
           :
