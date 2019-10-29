@@ -1,8 +1,5 @@
 import _ from "lodash";
-import {
-  get_standard_csv_file_rows,
-  null_preserving_to_number,
-} from '../load_utils.js';
+import { get_standard_csv_file_rows } from '../load_utils.js';
 
 import { dp_docs } from './results_common.js';
 
@@ -30,7 +27,7 @@ export default async function({models}){
       "planned_spend_pa_last_year",
       "planned_fte_pa_last_year",
     ], key => {
-      sub_program[key] = null_preserving_to_number(sub_program[key]);
+      sub_program[key] = _.isNaN(sub_program[key]) ? null : +sub_program[key];
     });
 
     sub_program.sub_program_id = sub_program.id;
@@ -53,7 +50,7 @@ export default async function({models}){
 
     indicator.indicator_id = indicator.id;
     indicator.id = null;
-    indicator.target_year = null_preserving_to_number( _.parseInt(target_year) );
+    indicator.target_year = _.isNaN(parseInt(target_year)) ? null : parseInt(target_year);
     indicator.target_month = _.isEmpty(target_month) ? null : +target_month;
     indicator.is_reporting_discontinued = is_reporting_discontinued === "1";
     if (!indicator.status_key){
