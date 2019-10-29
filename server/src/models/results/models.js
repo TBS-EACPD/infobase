@@ -15,7 +15,10 @@ import {
   dp_docs,
 } from './results_common.js';
 
-import { create_resource_by_foreignkey_attr_dataloader } from '../loader_utils.js';
+import {
+  create_resource_by_foreignkey_attr_dataloader,
+  create_resource_by_id_attr_dataloader,
+} from '../loader_utils.js';
 
 
 export default function(model_singleton){
@@ -120,12 +123,14 @@ export default function(model_singleton){
   const indicator_by_result_loader = create_resource_by_foreignkey_attr_dataloader(Indicator, 'result_id');
   const program_link_loader = create_resource_by_foreignkey_attr_dataloader(PIDRLink, "program_id");
   const sub_program_loader = create_resource_by_foreignkey_attr_dataloader(SubProgram, "parent_id");
+  const indicator_id_loader = create_resource_by_id_attr_dataloader(Indicator, 'indicator_id');
   _.each(
     { 
       result_by_subj_loader,
       indicator_by_result_loader,
       program_link_loader,
       sub_program_loader,
+      indicator_id_loader,
     }, 
     (val,key) =>  model_singleton.define_loader(key,val)
   )

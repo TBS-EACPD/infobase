@@ -8,6 +8,10 @@ import {
 } from './results_common.js';
 
 const schema = `
+  extend type Root {
+    indicator(id: String): Indicator
+  }
+  
   extend type Gov {
     all_target_counts_summary: [AllDocResultCount]
     all_target_counts_granular: [AllDocResultCount]
@@ -186,6 +190,7 @@ export default function({models,loaders}){
     indicator_by_result_loader,
     program_link_loader,
     sub_program_loader,
+    indicator_id_loader,
   } = loaders;
 
 
@@ -311,6 +316,9 @@ export default function({models,loaders}){
   };
 
   const resolvers = {
+    Root: {
+      indicator: (_x, {id}) => indicator_id_loader.load(id),
+    },
     Gov: {
       all_target_counts_summary: () => get_all_target_counts(['all','dept']),
       all_target_counts_granular: () => get_all_target_counts(['crso_or_program']),

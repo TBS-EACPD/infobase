@@ -177,6 +177,16 @@ const crso_load_results_bundle_fragment = (docs_to_load) => `
 id
 ${results_fields_fragment(docs_to_load)}
 `;
+const get_indicator_load_results_bundle_query = (docs_to_load) => gql`
+query($lang: String!, $id: String) {
+  root(lang: $lang) {
+    indicator(id: $id) {
+      id
+      ${results_fields_fragment(docs_to_load)}
+    }
+  }
+}
+`;
 const get_program_load_results_bundle_query = (docs_to_load) => gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
@@ -367,6 +377,13 @@ export function api_load_results_bundle(subject, result_docs){
     const program_is_loaded = (program) => crso_is_loaded(program.crso) || subject_is_loaded(program);
 
     switch(level){
+      case 'indicator':
+        return {
+          is_loaded: program_is_loaded(subject.program),
+          id: subject.id,
+          query: get_indicator_load_results_bundle_query(docs_to_load),
+          response_data_accessor: (response) => [ response.data.root.program ],
+        };
       case 'program':
         return {
           is_loaded: program_is_loaded(subject),

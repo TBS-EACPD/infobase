@@ -300,6 +300,7 @@ class Indicator {
     return _.map(id_indexed_indicators, _.identity);
   }
   static lookup(id){
+    debugger;
     return id_indexed_indicators[id];
   }
   static lookup_by_result_id(result_id){
