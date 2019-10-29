@@ -3,7 +3,7 @@ import {
   businessConstants,
   years,
   util_components,
-  Panel,
+  InfographicPanel,
   declarative_charts,
   run_template,
   NivoResponsiveLine,
@@ -148,7 +148,7 @@ export const declare_spend_by_so_hist_panel = () => declare_panel({
       }
   
       return (
-        <Panel
+        <InfographicPanel
           title={text_maker("dept_fin_spend_by_so_hist_title")}
           {...{sources, footnotes}}
         >
@@ -158,7 +158,7 @@ export const declare_spend_by_so_hist_panel = () => declare_panel({
           <div>
             {graph_content}
           </div>
-        </Panel>
+        </InfographicPanel>
       );
     },   
     

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import {
   run_template,
   Table,
-  Panel,
+  InfographicPanel,
   declare_panel,
   years,
   create_text_maker_component,
@@ -705,13 +705,13 @@ function render({calculations, footnotes, sources}){
   }
 
   return (
-    <Panel
+    <InfographicPanel
       title={text_maker("welcome_mat_title")}
       sources={sources_override}
       footnotes={footnotes}
     >
       <WelcomeMat subject={subject} {...graph_args} />
-    </Panel>
+    </InfographicPanel>
   );
 }
 

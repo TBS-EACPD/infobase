@@ -2,7 +2,7 @@ import { TM, text_maker } from './drr_summary_text.js';
 import {
   Subject,
   declare_panel,
-  Panel,
+  InfographicPanel,
   get_source_links,
 } from "../shared.js";
 import {
@@ -99,12 +99,12 @@ export const declare_gov_drr_panel = () => declare_panel({
       } = calculations;
   
       return (
-        <Panel
+        <InfographicPanel
           title={text_maker("drr_summary_title")}
           { ...{footnotes, sources} }
         >
           <GovDRR {...graph_args} />
-        </Panel>
+        </InfographicPanel>
       );
     },
   }),

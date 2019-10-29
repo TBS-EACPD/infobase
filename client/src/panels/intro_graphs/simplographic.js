@@ -3,7 +3,7 @@ import {
   Subject, 
   declare_panel, 
   util_components, 
-  Panel,
+  InfographicPanel,
 } from '../shared';
 import { infograph_href_template, rpb_link } from '../../link_utils.js';
 import { ResultCounts, current_drr_key } from '../../models/results.js';
@@ -135,14 +135,14 @@ export const declare_simplographic_panel = () => declare_panel({
       };
   
       return (
-        <Panel>
+        <InfographicPanel>
           <div className="medium_panel_text">
             <Row top_border img_src="money.svg" title_key="simplographic_spending_title" text_key="simplographic_spending_text"/> 
             <Row img_src="employees.svg" title_key="simplographic_people_title" text_key="simplographic_people_text"/> 
             <Row img_src="graph.svg" title_key="simplographic_struct_title" text_key="simplographic_struct_text"/> 
             <Row img_src="check.svg" title_key="simplographic_results_title" text_key="simplographic_results_text"/> 
           </div>
-        </Panel>
+        </InfographicPanel>
       );
     },
   }),

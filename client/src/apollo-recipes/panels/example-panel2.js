@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
-import { Panel } from '../panel_components.js';
+import { InfographicPanel } from '../panel_components.js';
 
 const Component = ({ data: { programs } }) => (
-  <Panel title="example panel 1">
+  <InfographicPanel title="example panel 1">
     <ul>
       {_.map(programs, ({is_internal_service},ix) =>
         <li key={ix}>
@@ -10,7 +10,7 @@ const Component = ({ data: { programs } }) => (
         </li>
       )}
     </ul>
-  </Panel>
+  </InfographicPanel>
 );
 
 

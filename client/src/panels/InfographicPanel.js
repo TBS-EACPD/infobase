@@ -1,4 +1,4 @@
-import text from './Panel.yaml';
+import text from './InfographicPanel.yaml';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -21,7 +21,7 @@ import { panel_context } from '../infographic/context.js';
 
 const { text_maker } = create_text_maker_component(text);
 
-export const Panel = props => {
+export const InfographicPanel = props => {
   const { Consumer } = panel_context;
   return (
     <Consumer>
@@ -126,20 +126,20 @@ class Panel_ extends React.Component {
 
 /*
   shorthand for 
-    <Panel>
+    <InfographicPanel>
       <div className="medium_panel_text">
         {children}
       </div>
-    </Panel>
+    </InfographicPanel>
 */
 export const TextPanel = props => {
   const { children } = props;
   const filtered_props = _.omit(props, "children");
   const new_children = <div className="medium_panel_text"> {children} </div>;
   return (
-    <Panel {...filtered_props}>
+    <InfographicPanel {...filtered_props}>
       {new_children}
-    </Panel>
+    </InfographicPanel>
   );
 };
 
@@ -211,11 +211,11 @@ const StdPanel = ({ title, sources, footnotes, children, containerAlign }) => {
     .value();
 
   return (
-    <Panel {...{title, sources, footnotes}}>
+    <InfographicPanel {...{title, sources, footnotes}}>
       <div className={`frow ${containerAlign || 'middle'}-xs`}>
         {mapped_children}
       </div>
-    </Panel>
+    </InfographicPanel>
   );
 
 };

@@ -6,7 +6,7 @@ import {
   formats,
   declarative_charts,
   declare_panel,
-  Panel,
+  InfographicPanel,
   Table,
   newIBCategoryColors,
   NivoResponsiveBar,
@@ -359,12 +359,12 @@ class Goco extends React.Component {
 
 function render({ footnotes, sources }){
   return (
-    <Panel
+    <InfographicPanel
       title={ text_maker("gocographic_title") }
       { ...{sources,footnotes} }
     >
       <Goco/>
-    </Panel>
+    </InfographicPanel>
   );
 }
 

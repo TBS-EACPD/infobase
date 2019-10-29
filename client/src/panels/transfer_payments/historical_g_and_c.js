@@ -9,7 +9,7 @@ import {
   years,
   businessConstants,
   declarative_charts,
-  Panel,
+  InfographicPanel,
   util_components,
   NivoResponsiveLine,
 } from "../shared.js";
@@ -312,7 +312,7 @@ export const declare_historical_g_and_c_panel = () => declare_panel({
               graph_args: series,
             } = calculations;
             return (
-              <Panel
+              <InfographicPanel
                 title={text_maker("historical_g_and_c_title")}
                 {...{footnotes, sources}}
               >
@@ -323,7 +323,7 @@ export const declare_historical_g_and_c_panel = () => declare_panel({
                   text_split={4}
                   series={series}
                 />
-              </Panel>
+              </InfographicPanel>
             );
           },
         };
@@ -366,7 +366,7 @@ export const declare_historical_g_and_c_panel = () => declare_panel({
             const text_content= <TM k="dept_historical_g_and_c_text" args={info} />; 
         
             return (
-              <Panel
+              <InfographicPanel
                 title={text_maker("historical_g_and_c_title")}
                 {...{sources, footnotes}}
               >
@@ -379,7 +379,7 @@ export const declare_historical_g_and_c_panel = () => declare_panel({
                 <DetailedHistTPItems
                   rows={rows}
                 />
-              </Panel>
+              </InfographicPanel>
             );
           },
         };
