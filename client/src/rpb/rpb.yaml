@@ -16,8 +16,8 @@ rpb_pick_org:
 
 
 table_picker_broken_link_warning:
-  en: The link that brought you here contained errors and your report could not be generated. If you know what data you were looking for, please select it from the tables below.
-  fr: TODO
+  en: The link that brought you here contains errors and your report could not be generated. If you know what data you were looking for, please select it from the options below.
+  fr: Le lien qui vous a amené ici est erroné. C'est pourquoi votre rapport n'a pas pu être généré. Si vous connaissez les données que vous recherchez, sélectionnez-les parmi les options ci-dessous.
 
 table_picker_none_selected_summary:
   en: To see data, select a table
