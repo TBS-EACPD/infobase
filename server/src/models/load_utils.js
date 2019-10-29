@@ -42,11 +42,6 @@ const bilingual_remap = (obj, dest_key, source_key) => ({
   [`${dest_key}_fr`]: obj ? obj[`${source_key}_fr`] : null,
 });
 
-// Populate time validation will choke on either the string representation of a negative number or a value of NaN
-// Need to parse strings to numbers ourselves to handle negatives, but take care to preserve nulls which we assume are csv blanks (trying to convert a null gives a NaN)
-// Preserving nulls instead of defaulting to nulls because we still want validation errors to surface when any other data issue produces a NaN!
-const null_preserving_to_number = (value) => _.isNaN( _.toNumber(value) ) ? null : _.toNumber(value);
-
 module.exports = exports = {
   get_file_from_data_dir,
   empties_to_nulls,
@@ -57,5 +52,4 @@ module.exports = exports = {
 
   create_program_id,
   bilingual_remap,
-  null_preserving_to_number,
 };
