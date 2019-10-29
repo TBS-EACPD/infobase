@@ -146,13 +146,12 @@ export const format_and_get_fte = (type, info, subject) => {
       is_money: false,
       colorBy: d => colors(d.id),
       enableGridY: false,
-      remove_left_axis: true,
       show_yaxis_zoom: false,
       margin: {
         top: 10,
         right: 40,
         bottom: 67,
-        left: 40,
+        left: 75,
       },
       legends: [
         {

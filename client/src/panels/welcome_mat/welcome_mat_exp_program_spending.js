@@ -150,7 +150,6 @@ export const format_and_get_exp_program_spending = (type, subject) => {
       data: graph_data,
       colorBy: d => colors(d.id),
       enableGridY: false,
-      remove_left_axis: true,
       show_yaxis_zoom: false,
       min: _.min(raw_data) * 0.9,
       max: _.max(raw_data) * 1.1,
@@ -172,7 +171,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
         top: 10,
         right: 40,
         bottom: 70,
-        left: 40,
+        left: 75,
       },  
       ...(marker_year && both_exists && _.includes(series_labels, text_maker("planned_spending")) && {
         markers: [
