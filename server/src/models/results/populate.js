@@ -27,7 +27,7 @@ export default async function({models}){
       "planned_spend_pa_last_year",
       "planned_fte_pa_last_year",
     ], key => {
-      sub_program[key] = _.isNaN(sub_program[key]) ? null : +sub_program[key];
+      sub_program[key] = _.isNaN(+sub_program[key]) ? null : +sub_program[key];
     });
 
     sub_program.sub_program_id = sub_program.id;
