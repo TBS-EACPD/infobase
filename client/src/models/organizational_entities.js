@@ -172,6 +172,9 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
   get minister(){
     return _.map(this.ministers, 'name');
   }
+  get type(){ // not a great variable name, but too hard to fix all the instances that could exist
+    return this.inst_form.name;
+  }
   get auditor(){
     return this.auditor_str;
   }
