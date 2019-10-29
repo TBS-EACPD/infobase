@@ -1,5 +1,5 @@
-import './PresentationalPanel.scss';
-import text from './PresentationalPanel.yaml';
+import './Panel.scss';
+import text from './Panel.yaml';
 
 import classNames from 'classnames';
 
@@ -42,7 +42,7 @@ const PanelSource = ({links}) => {
   );
 };
 
-export const PresentationalPanel = ({allowOverflow, title, otherHeaderContent, children, sources, footnotes }) => (
+export const Panel = ({allowOverflow, title, otherHeaderContent, children, sources, footnotes }) => (
   <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
     { (title || otherHeaderContent) &&
       <header className='panel-heading'>

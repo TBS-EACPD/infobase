@@ -3,7 +3,7 @@ import { StandardRouteContainer, ScrollToTargetContainer } from '../core/NavComp
 import {
   create_text_maker_component,
   FancyUL,
-  PresentationalPanel,
+  Panel,
 } from '../components';
 
 import { sources } from './data_sources.js';
@@ -36,7 +36,7 @@ export default class MetaData extends React.Component {
         <ScrollToTargetContainer target_id={data_source}>
           {_.map(sorted_sources, (source) => (
             <div key={source.key} id={source.key}>
-              <PresentationalPanel
+              <Panel
                 title={source.title()}
               >
                 <div>
@@ -91,7 +91,7 @@ export default class MetaData extends React.Component {
                     </a>
                   }
                 </div>
-              </PresentationalPanel>
+              </Panel>
             </div>
           ))}
         </ScrollToTargetContainer>

@@ -17,7 +17,7 @@ import result_text from '../panels/result_graphs/result_components.yaml';
 
 import {
   Select,
-  PresentationalPanel,
+  Panel,
   create_text_maker_component,
   SpinnerWrapper,
 } from '../components';
@@ -259,7 +259,7 @@ const get_status_flag = (indicator_status) => {
 
 const indicator_report = (processed_indicator) => (
   <div className="text-diff__indicator-report" key={processed_indicator.indicator1.stable_id}>
-    <PresentationalPanel title={processed_indicator.indicator2.name}>
+    <Panel title={processed_indicator.indicator2.name}>
       <Fragment>
         { get_status_flag(processed_indicator.status) }
         { processed_indicator.name_diff.length > 1 ?
@@ -280,7 +280,7 @@ const indicator_report = (processed_indicator) => (
         }
         <div className="text-diff__id-tag">{`ID: ${processed_indicator.indicator1.stable_id}`}</div>
       </Fragment>
-    </PresentationalPanel>
+    </Panel>
   </div>
 );
 
