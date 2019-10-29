@@ -76,13 +76,16 @@ const process_indicators = (matched_indicators, indicator_status) => {
       if (indicator_pair.length === 2){
         const name_diff = Diff.diffWords(indicator_pair[0].name, indicator_pair[1].name);
         const methodology_diff = window.is_a11y_mode ? Diff.diffSentences(indicator_pair[0].methodology, indicator_pair[1].methodology) : Diff.diffWords(indicator_pair[0].methodology, indicator_pair[1].methodology);
-        const target_diff = Diff.diffWords(indicator_target_text(indicator_pair[0], false), indicator_target_text(indicator_pair[1], false));
+        const target_diff = Diff.diffWords(indicator_target_text(indicator_pair[0], false), indicator_target_text(indicator_pair[1], false));        
         const target_explanation_diff = Diff.diffWords(indicator_pair[0].target_explanation || "", indicator_pair[1].target_explanation || "");
-        const status = _.max([name_diff.length, methodology_diff.length, target_diff.length]) > 1 ?
-          (target_diff.length > 1 ?
+
+        const status = _.max([target_diff.length, target_explanation_diff.length]) > 1 && _.max([name_diff.length, methodology_diff.length]) > 1 ?
+            "indicator_desc_and_target_changed" :
+            _.max([target_diff.length, target_explanation_diff.length]) > 1 ?
             "target_changed" :
-            "indicator_desc_changed") :
-          "no_diff";
+            _.max([name_diff.length, methodology_diff.length]) > 1 ?
+            "indicator_desc_changed" :
+            "no_diff";
         return {
           status,
           indicator1: indicator_pair[0],
@@ -213,11 +216,11 @@ const difference_report = (diff, key) => {
 
 
 const get_status_flag = (indicator_status) => {
-  if(indicator_status === "target_changed"){
+  if(indicator_status === "indicator_desc_and_target_changed"){
     return (
       <Fragment>
         <div className="text-diff__indicator-status--change">
-          {text_maker("words_changed")}
+          {text_maker("indicator_desc_changed")}
         </div>
         <div className="text-diff__indicator-status--change">
           {text_maker("target_changed")}
@@ -225,10 +228,17 @@ const get_status_flag = (indicator_status) => {
       </Fragment>
     );
   }
+  if(indicator_status === "target_changed"){
+    return (
+      <div className="text-diff__indicator-status--change">
+        {text_maker("target_changed")}
+      </div>
+    );
+  }
   if(indicator_status === "indicator_desc_changed"){
     return (
       <div className="text-diff__indicator-status--change">
-        {text_maker("words_changed")}
+        {text_maker("indicator_desc_changed")}
       </div>
     );
   }
@@ -290,6 +300,7 @@ export default class TextDiffApp extends React.Component {
     super(props);
     const colors = d3.scaleOrdinal().range([
       window.infobase_color_constants.primaryColor,
+      window.infobase_color_constants.primaryColor,
       window.infobase_color_constants.warnDarkColor,
       window.infobase_color_constants.successDarkColor,
       window.infobase_color_constants.failDarkColor,
@@ -302,6 +313,7 @@ export default class TextDiffApp extends React.Component {
       subject: get_subject_from_props(props),
       indicator_status_changed: false,
       indicator_status: _.reduce([
+        { id: "indicator_desc_and_target_changed" }, 
         { label: text_maker("indicator_desc_changed"), id: "indicator_desc_changed" }, 
         { label: text_maker("target_changed"), id: "target_changed" },
         { label: text_maker("indicator_added"), id: "indicator_added" }, 
@@ -490,7 +502,7 @@ export default class TextDiffApp extends React.Component {
         <div style={{padding: '0px 0px 20px 0px'}}>
           <div className="medium_panel_text">
             <FancyCheckboxSelector
-              items={indicator_status}
+              items={ _.filter(indicator_status, (status) => status.id!="indicator_desc_and_target_changed")}
               callbackToggle={ id => {
                 indicator_status[id].active = !indicator_status[id].active;
                 this.setState({

@@ -71,10 +71,6 @@ single_change:
   en: Single change
   fr: Un seul changement
 
-words_changed:
-  en: One or more words changed
-  fr: Un ou plusieurs mots ont changés
-
 indicator_desc_changed:
   en: Indicator and/or methodology changed
   fr: Indicateur et/ou méthodologie changé
