@@ -20,7 +20,7 @@ export { SpinnerWrapper } from './SpinnerWrapper.js';
 export { KeyConceptList } from './KeyConceptList.js';
 export { BackToTop } from './BackToTop.js';
 export { UnlabeledTombstone, LabeledTombstone } from './Tombstones.js';
-export { PresentationalPanel } from './PresentationalPanel.js';
+export { Panel } from './Panel.js';
 export { ShareButton } from './ShareButton.js';
 export { WriteToClipboard } from './WriteToClipboard.js';
 export { PDFGenerator } from './PDFGenerator.js';

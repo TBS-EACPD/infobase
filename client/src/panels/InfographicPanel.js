@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { Fragment } from 'react';
 
 import { 
-  PresentationalPanel,
+  Panel,
   create_text_maker_component,
   ShareButton,
   WriteToClipboard,
@@ -112,7 +112,7 @@ class Panel_ extends React.Component {
       </div>
     );
 
-    return PresentationalPanel({
+    return Panel({
       allowOverflow,
       title,
       otherHeaderContent: header_utils,
