@@ -11,7 +11,7 @@ import {
   years,
   declarative_charts,
   businessConstants,
-  Panel,
+  InfographicPanel,
   FootNote,
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
@@ -511,7 +511,7 @@ export const declare_detailed_program_spending_split_panel = () => declare_panel
       );
 
       return (
-        <Panel
+        <InfographicPanel
           title={text_maker("detailed_program_spending_split_title")}
           {...{sources, footnotes: [...footnotes, ...program_footnotes]}}
         >
@@ -538,7 +538,7 @@ export const declare_detailed_program_spending_split_panel = () => declare_panel
               </HeightClippedGraph>
             </div>
           </div>
-        </Panel>
+        </InfographicPanel>
       );
     },
   }),

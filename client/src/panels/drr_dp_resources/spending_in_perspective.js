@@ -4,7 +4,7 @@ import {
   sum_a_tag_col,
   util_components,
   declarative_charts,
-  Panel,
+  InfographicPanel,
   create_text_maker_component,
   NivoResponsivePie,
 } from "../shared";
@@ -179,7 +179,7 @@ export const declare_spending_in_tag_perspective_panel = () => declare_panel({
       const prog_exp = info.program_exp_planning_year_1;
   
       return (
-        <Panel
+        <InfographicPanel
           title={text_maker("program_spending_in_tag_perspective_title")}
           {...{footnotes, sources}}
         >
@@ -188,7 +188,7 @@ export const declare_spending_in_tag_perspective_panel = () => declare_panel({
             subject={subject}
             prog_exp={prog_exp} 
           />
-        </Panel>
+        </InfographicPanel>
       );
       
     },

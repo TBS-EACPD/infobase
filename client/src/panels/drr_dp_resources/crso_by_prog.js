@@ -6,7 +6,7 @@ import {
   declarative_charts,
   util_components,
   run_template,
-  Panel,
+  InfographicPanel,
   get_planned_fte_source_link,
   get_planned_spending_source_link,
   create_text_maker_component,
@@ -55,7 +55,7 @@ const render_resource_type = (is_fte) => ({calculations, footnotes}) => {
   );
 
   return (
-    <Panel
+    <InfographicPanel
       title={text_maker(
         is_fte ? 
         "crso_by_prog_fte_title" : 
@@ -74,7 +74,7 @@ const render_resource_type = (is_fte) => ({calculations, footnotes}) => {
         text={text}
         is_fte={is_fte}
       />
-    </Panel>
+    </InfographicPanel>
   );
 };
 

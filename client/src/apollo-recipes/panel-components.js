@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { FootnoteList, TM } from '../components/index.js';
 import { Details } from '../components/Details.js';
 
-export const Panel = ({ title, sources, footnotes, children }) => (
+export const InfographicPanel = ({ title, sources, footnotes, children }) => (
   <section className='panel panel-info mrgn-bttm-md'>
     <header className='panel-heading'>
       <div className='panel-title'>
@@ -91,11 +91,11 @@ const StdPanel = ({ title, sources, footnotes, children }) => {
   });
 
   return (
-    <Panel {...{title, sources, footnotes}}>
+    <InfographicPanel {...{title, sources, footnotes}}>
       <div className="frow middle-xs">
         {mapped_children}
       </div>
-    </Panel>
+    </InfographicPanel>
   );
 
 };

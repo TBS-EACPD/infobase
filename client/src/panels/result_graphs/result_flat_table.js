@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { TM, text_maker } from './result_text_provider.js';
 import { 
   util_components, 
-  Panel,
+  InfographicPanel,
   HeightClippedGraph,
   breakpoints,
 } from '../shared.js';
@@ -254,7 +254,7 @@ export const declare_results_table_panel = () => declare_panel({
       } = calculations;
 
       return (
-        <Panel title={text_maker("result_flat_table_title")} sources={sources}>
+        <InfographicPanel title={text_maker("result_flat_table_title")} sources={sources}>
           <ResultsTable
             {...{
               subject,
@@ -263,7 +263,7 @@ export const declare_results_table_panel = () => declare_panel({
               subject_result_counts,
             }}
           />
-        </Panel>
+        </InfographicPanel>
       );
 
     },

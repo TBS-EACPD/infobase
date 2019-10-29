@@ -1,7 +1,7 @@
 import { Format } from '../../components/index.js';
 import '../../pses/pses-components.scss';
 import gql from 'graphql-tag';
-import { Panel } from '../panel_components.js';
+import { InfographicPanel } from '../panel_components.js';
 import { Fragment } from 'react';
 
 
@@ -136,7 +136,7 @@ const QuestionDef = ({ name, id }) => (
 
 
 const Component = ({ data: { questions, acronym } }) => 
-  <Panel title="PSES 2017">
+  <InfographicPanel title="PSES 2017">
     <div className="question-grid">
       {_.map(questions, ({ name, id, org_data, gov_data }) => 
         <div key={id} className="question-row">
@@ -154,7 +154,7 @@ const Component = ({ data: { questions, acronym } }) =>
         </div>
       )}
     </div>
-  </Panel>;
+  </InfographicPanel>;
 
 
 

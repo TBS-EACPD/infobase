@@ -15,7 +15,7 @@ import { GlossaryEntry } from '../../models/glossary.js';
 
 */
 import { 
-  Panel, 
+  InfographicPanel, 
   Subject, 
   run_template, 
   declare_panel, 
@@ -164,12 +164,12 @@ export const declare_internal_services_panel = () => declare_panel({
       </div>;
   
       return (
-        <Panel
+        <InfographicPanel
           title={text_maker("internal_service_panel_title")}
           {...{sources,footnotes: more_footnotes}}
         >
           {to_render}
-        </Panel>
+        </InfographicPanel>
       );
   
     },

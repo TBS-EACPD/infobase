@@ -8,7 +8,7 @@ import {
   declare_panel, 
   util_components, 
   infograph_href_template, 
-  Panel,
+  InfographicPanel,
   TabbedControls,
   DlItem,
   get_source_links,
@@ -525,14 +525,14 @@ export const declare_explore_results_panel = () => declare_panel({
         .value();
 
       return (
-        <Panel title={text_maker("result_drilldown_title", { ...year_range_with_data })} sources={sources}>
+        <InfographicPanel title={text_maker("result_drilldown_title", { ...year_range_with_data })} sources={sources}>
           <SingleSubjResultsContainer
             {...{
               subject,
               docs_with_data,
             }}
           />
-        </Panel>
+        </InfographicPanel>
       );
 
     },

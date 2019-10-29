@@ -16,7 +16,7 @@ import {
   PlannedActualTable,
   Results,
   general_utils,
-  Panel,
+  InfographicPanel,
   create_text_maker_component,
   TabbedControls,
 } from "../shared";
@@ -415,7 +415,7 @@ export const declare_sub_program_resources_panel = () => declare_panel({
       }
    
       return (
-        <Panel
+        <InfographicPanel
           title={text_maker(title_key)}
           {...{footnotes,sources}}
         >
@@ -450,7 +450,7 @@ export const declare_sub_program_resources_panel = () => declare_panel({
               />
             }
           />
-        </Panel>
+        </InfographicPanel>
       );
     },
   }),

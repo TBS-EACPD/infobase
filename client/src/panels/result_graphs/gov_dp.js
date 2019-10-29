@@ -6,7 +6,7 @@ import {
   Subject,
   create_text_maker_component,
   declare_panel,
-  Panel,
+  InfographicPanel,
   rpb_link,
   get_source_links,
 } from "../shared";
@@ -115,7 +115,7 @@ export const declare_gov_dp_panel = () => declare_panel({
       const { spend, ftes } = get_dp_rpb_links();
   
       return (
-        <Panel
+        <InfographicPanel
           title={text_maker("gov_dp_summary_title")}
           sources={sources}
           allowOverflow
@@ -127,7 +127,7 @@ export const declare_gov_dp_panel = () => declare_panel({
             spend_link={spend}
             fte_link={ftes}
           />
-        </Panel>
+        </InfographicPanel>
       ); 
     },
   }),

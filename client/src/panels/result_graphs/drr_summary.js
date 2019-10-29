@@ -5,7 +5,7 @@ import { Fragment } from 'react';
 import {
   declare_panel,
   declarative_charts,
-  Panel,
+  InfographicPanel,
   businessConstants,
   get_source_links,
 } from "../shared.js";
@@ -218,12 +218,12 @@ const render = ({calculations, footnotes, sources}) => {
   } = calculations;
 
   return (
-    <Panel title={text_maker("drr_summary_title")} footnotes={footnotes} sources={sources}>
+    <InfographicPanel title={text_maker("drr_summary_title")} footnotes={footnotes} sources={sources}>
       <DrrSummary
         subject={subject}
         {...graph_args}
       />
-    </Panel>
+    </InfographicPanel>
   );
 };
 

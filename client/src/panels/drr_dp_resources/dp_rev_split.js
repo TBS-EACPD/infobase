@@ -5,7 +5,7 @@ import {
   util_components,
   years,
   run_template,
-  Panel,
+  InfographicPanel,
   create_text_maker_component,
   get_source_links,
 } from "../shared.js";
@@ -69,7 +69,7 @@ export const declare_dp_rev_split_panel = () => declare_panel({
       ]);
 
       return (
-        <Panel
+        <InfographicPanel
           title={text_maker("dp_rev_split_title")}
           footnotes={new_footnotes}
           sources={sources}
@@ -104,7 +104,7 @@ export const declare_dp_rev_split_panel = () => declare_panel({
 
             </table>
           </div>
-        </Panel>
+        </InfographicPanel>
       );
     },
   }),

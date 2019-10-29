@@ -12,7 +12,7 @@ import { get_col_defs } from '../../gen_expl/resource-explorer-common.js';
 
 import {
   declare_panel,
-  Panel,
+  InfographicPanel,
   create_text_maker_component,
   TabbedControls,
   Results,
@@ -272,7 +272,7 @@ export const declare_resource_structure_panel = () => declare_panel({
       const scheme = create_rooted_resource_scheme({subject});
       
       return (
-        <Panel 
+        <InfographicPanel 
           title={text_maker("resource_structure_title")}
         >
           <RootedResourceExplorerContainer 
@@ -282,7 +282,7 @@ export const declare_resource_structure_panel = () => declare_panel({
             rooted_resource_scheme={scheme}
             initial_rooted_resource_state={get_initial_resource_state({subject, has_dp_data, has_drr_data})}
           />
-        </Panel>
+        </InfographicPanel>
       );
   
     },

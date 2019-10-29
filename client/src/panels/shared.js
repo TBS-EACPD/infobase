@@ -1,5 +1,5 @@
 import './shared.scss';
-import { Panel, StdPanel, TextPanel, Col } from './Panel.js';
+import { InfographicPanel, StdPanel, TextPanel, Col } from './InfographicPanel.js';
 
 import { formats, dollar_formats, formatter } from '../core/format.js';
 import { PanelGraph, layout_types } from '../core/PanelGraph.js';
@@ -594,7 +594,7 @@ export {
   run_template,
   StdPanel,
   TextPanel,
-  Panel,
+  InfographicPanel,
   Col,
   layout_types,
   TabbedControls,

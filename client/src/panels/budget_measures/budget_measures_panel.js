@@ -9,7 +9,7 @@ import {
   util_components,
   declarative_charts,
   create_text_maker_component,
-  Panel,
+  InfographicPanel,
   NivoResponsiveHBar,
   newIBLightCategoryColors,
   TspanLineWrapper,
@@ -203,7 +203,7 @@ const budget_measure_render = function({calculations, footnotes, sources}){
   const { graph_args } = calculations;
 
   return (
-    <Panel
+    <InfographicPanel
       title={text_maker("budget_measures_panel_title")}
       {...{
         sources, 
@@ -214,7 +214,7 @@ const budget_measure_render = function({calculations, footnotes, sources}){
       }}
     >
       <BudgetMeasurePanel graph_args = { graph_args } />
-    </Panel>
+    </InfographicPanel>
   );
 };
 
