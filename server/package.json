@@ -24,7 +24,7 @@
     "lodash": "^4.17.15",
     "lz-string": "^1.4.4",
     "md5": "^2.2.1",
-    "mongoose": "^5.7.1"
+    "mongoose": "^5.7.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
