@@ -8,7 +8,6 @@ import {
   result_statuses,
   result_simple_statuses,
   indicator_text_functions,
-  result_docs,
   get_result_doc_keys,
 } from './results_common.js';
 import {
@@ -86,7 +85,6 @@ const IndicatorList = ({ indicators }) => (
 
 const SingleIndicatorDisplay = ({indicator}) => {
   const is_drr = /drr/.test(indicator.doc);
-  const could_have_previous_year_target = result_docs[indicator.doc].could_have_previous;
   const has_previous_year_target = !_.isNull(indicator.previous_year_target_type);
   const has_previous_year_result = false; // DRR_TODO: previous year results aren't in the API right now, but they probably will be for DRR18 (if not, clean this out)
   const dp_docs = get_result_doc_keys('dp');
