@@ -161,7 +161,6 @@ const _HierarchyPeek = ({root}) => (
 export const org_external_hierarchy = ({ subject, href_generator }) => {
 
   const is_subject = subj => subj === subject;
-
   return {
     name: Gov.name,
     href: href_generator(Gov),
