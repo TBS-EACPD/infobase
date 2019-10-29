@@ -25,7 +25,7 @@ const BrokenLinkBanner = () => (
 
 export const AccessibleTablePicker = ({ tables, onSelect, selected, broken_url }) => (
   <Fragment>
-    {false && broken_url && <BrokenLinkBanner /> /* disabled while table_picker_broken_link_warning is translated*/}
+    {broken_url && <BrokenLinkBanner />}
     <select
       aria-labelledby="picker-label"
       className="form-control form-control-ib rpb-simple-select"
