@@ -15,6 +15,7 @@ const {
   Tag,
   Gov,
   CRSO,
+  Indicator,
 } = Subject;
 
 const get_subject = (level, id) => {
@@ -27,6 +28,11 @@ const get_subject = (level, id) => {
       return Program.lookup(id);
     case 'crso':
       return CRSO.lookup(id);
+    case 'indicator':
+      { const asdf = Indicator.lookup(id);
+        debugger;
+        return Indicator.lookup(id);
+      }
     default:
       return Gov;
   }

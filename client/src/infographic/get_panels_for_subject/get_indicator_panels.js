@@ -1,4 +1,4 @@
-import { declare_result_info_panel } from '../../panels/result_graphs/result_info.js/index.js';
+import { declare_result_info_panel } from '../../panels/result_graphs/result_info.js';
   
 export const get_tag_panels = subject => ({
   results: [
