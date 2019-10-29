@@ -209,7 +209,7 @@ class RPB extends React.Component {
         subject_name={subject !== Gov && subject && subject.name}
         table_name={table && table.name}
       />
-      <LabeledBox label={ <TextMaker text_key="blue_text_pick_data" /> }>
+      <LabeledBox label={ <TextMaker text_key="rpb_pick_data" /> }>
         <div>
           <div className="centerer">
             <p 
@@ -291,13 +291,13 @@ class RPB extends React.Component {
         this.state.loading ? 
           <SpinnerWrapper config_name={"route"} /> :
           <Fragment>
-            <LabeledBox label={<TextMaker text_key="blue_text_pick_org" />}>
+            <LabeledBox label={<TextMaker text_key="rpb_pick_org" />}>
               <SubjectFilterPicker 
                 subject={subject}  
                 onSelect={ subj=> on_set_subject(subj) }
               />
             </LabeledBox>
-            <LabeledBox label={<TextMaker text_key="blue_text_select_mode" />}>
+            <LabeledBox label={<TextMaker text_key="rpb_select_mode" />}>
               <div className="centerer">
                 <RadioButtons
                   options = {[

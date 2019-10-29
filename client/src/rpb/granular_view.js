@@ -41,7 +41,7 @@ class GranularView extends React.Component {
 
     return (
       <div>
-        <LabeledBox label={<TextMaker text_key="blue_text_table_controls" />}>
+        <LabeledBox label={<TextMaker text_key="rpb_table_controls" />}>
           <div className="row">
             <div className='col-md-6'>
               <fieldset className="rpb-config-item col-selection simple">
@@ -101,7 +101,7 @@ class GranularView extends React.Component {
             <div className='clearfix'/>
           </div>
         </LabeledBox>
-        <LabeledBox label={<TextMaker text_key="blue_text_report_details" args={{table_name: table.name}} />}>
+        <LabeledBox label={<TextMaker text_key="rpb_report_details" args={{table_name: table.name}} />}>
           <Details
             summary_content={
               <div>
@@ -113,7 +113,7 @@ class GranularView extends React.Component {
             }
           />
         </LabeledBox>
-        <LabeledBox label={<TextMaker text_key="blue_text_report_data_sources" />}>
+        <LabeledBox label={<TextMaker text_key="rpb_report_data_sources" />}>
           <ReportDatasets {...this.props} /> 
         </LabeledBox>
         { table.rpb_banner && <AlertBanner>{table.rpb_banner}</AlertBanner> }
