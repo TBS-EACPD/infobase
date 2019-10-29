@@ -6,11 +6,11 @@ report_builder_meta_desc:
   en: Create a customized and exportable report on the data you want to analyze
   fr: Créer un rapport adapté et exportable sur les données que vous voulez analyser
 
-blue_text_pick_data:
+rpb_pick_data:
   en: Select your data
   fr: Sélectionnez vos données
 
-blue_text_pick_org:
+rpb_pick_org:
   en: Select organization
   fr: Sélectionnez une organisation
 
@@ -39,7 +39,7 @@ table_picker_select_different_summary:
   fr: |
     Tableau présentement sélectionné: {{name}}
 
-blue_text_select_mode:
+rpb_select_mode:
   en: Select the type of report you want 
   fr: Sélectionner le type de rapport que vous voulez 
 
@@ -51,15 +51,15 @@ granular_view_title:
   en: Build a detailed report 
   fr: Créer un rapport détaillé
 
-blue_text_report_details:
+rpb_report_details:
   en: See your report details
   fr: Voir les détails de votre rapport
 
-blue_text_report_data_sources:
+rpb_report_data_sources:
  en: Datasets and data sources
  fr: Données et sources des données
 
-blue_text_table_controls:
+rpb_table_controls:
   en: Sort and filter your report
   fr: Trier et filtrer votre rapport
 

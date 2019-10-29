@@ -191,7 +191,7 @@ const ShareReport = () => (
 
 
 class ExportButton extends React.Component {
-  //note that though props may not have changed, this method doesn't get trigerred from this.setState 
+  //note that though props may not have changed, this method doesn't get triggered from this.setState 
   constructor(){
     super();
     this.state = { 
@@ -281,8 +281,7 @@ class ExportButton extends React.Component {
   }
 }
 
-//the parent flexbox styling screws stuff up and makes it impossible to center vertically,
-// a padding of 6px at the top seems to fix it ¯\_(ツ)_/¯
+//the parent flexbox styling screws stuff up and makes it impossible to center vertically, top padding tweaked to correct
 const SubjectFilterPicker = ({ subject, onSelect })=> <div style={{paddingTop: '10px'}}>
   <div className="md-half-width md-gutter-right">
     <button 
