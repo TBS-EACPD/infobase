@@ -70,7 +70,7 @@ const subject_link = (node) => {
         {node.data.name}
         {` (${text_maker("a_masc")} `}
         <a
-          href={window.is_a11y_mode && glossary_href("SSP")}
+          href={window.is_a11y_mode ? glossary_href("SSP") : undefined}
           className="nowrap glossary-tooltip-link"
           tabIndex={0}
           aria-hidden="true"
