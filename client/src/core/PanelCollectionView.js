@@ -19,7 +19,7 @@ export const ReactPanelGraph = withRouter(
       const graph_options = {history};
 
       const { Provider } = panel_context;
-      
+      debugger;
       const calculations = graph_obj.calculate(subject, graph_options);
       
       if(!calculations){
