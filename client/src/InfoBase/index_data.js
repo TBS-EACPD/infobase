@@ -138,11 +138,11 @@ const index_lang_lookups = {
   },
   a11y_version_title: {
     en: "Text-only version",
-    fr: "Version texte seulement",
+    fr: "Version texte",
   },
   a11y_version_text: {
     en: "recommended for screen reader users",
-    fr: "recommandé pour les utilisateurs de lecteur d'écran",
+    fr: "recommandée pour les utilisateurs de lecteur d'écran",
   },
   standard_version_url: {
     en: "index-eng.html",
