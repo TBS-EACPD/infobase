@@ -11,7 +11,7 @@ import {
 } from './models/index.js';
 import { connect_db } from "./db_utils.js";
 import {
-  convert_get_with_compressed_query_to_post_request,
+  convert_GET_with_compressed_query_to_POST,
   log_query,
 } from './server_utils.js'
 
@@ -34,7 +34,7 @@ app.use("/", function (req, res, next) {
     res.sendStatus(200);
   } else {
     if ( req.method === "GET" && !_.isEmpty(req.headers['encoded-compressed-query']) ){
-      convert_get_with_compressed_query_to_post_request(req);
+      convert_GET_with_compressed_query_to_POST(req); // mutates req, changes persist to subsequent middleware
     }
 
     !global.IS_DEV_SERVER && log_query(req);

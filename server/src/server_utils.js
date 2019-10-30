@@ -1,11 +1,13 @@
 import { decompressFromBase64 } from 'lz-string';
 import md5 from 'md5';
 
-export const convert_get_with_compressed_query_to_post_request = (req) => {
+// Side effect alert: this function mutates the suplied request object so that the conversion persists to subsequent server midleware
+// ... bit of a hack, and I'm not just talking about a function having side effects
+export const convert_GET_with_compressed_query_to_POST = (req) => {
   const decoded_decompressed_query = decompressFromBase64(req.headers['encoded-compressed-query']);
   const [query, mixed_variables] = decoded_decompressed_query.split("&variables=");
   
-  // Client should be throwing an additional variable, _query_name, in with the actual variables. Grab that out
+  // Client should be including an additional variable, _query_name, along with the query's actual variables. Grab that out, it's just for logging
   const { _query_name, ...query_variables } = JSON.parse(mixed_variables);
 
   req.method = "POST";
