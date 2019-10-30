@@ -7,7 +7,7 @@ describe("first_true_promise", function(){
     var test_first_true_promise = test_values => first_true_promise(
       test_values.map(
         (test_value) => new Promise((resolve) => {
-          setTimeout(() => resolve(test_value), Math.round(Math.random() * 1000));
+          setTimeout(() => resolve(test_value), Math.round(Math.random() * 10));
         })
       )
     );
