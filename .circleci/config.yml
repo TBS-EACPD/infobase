@@ -152,6 +152,7 @@ jobs:
             - ./server/deploy_scripts
             - ./server/.gcloudignore
             - ./server/snapshot_tests.config.js
+            - ./server/jest.config.js
             - ./server/node_modules
             - ./server/package.json
             - ./server/package-lock.json
@@ -167,6 +168,8 @@ jobs:
       - attach_workspace:
           at: ./
       - run: ./scripts/ci_scripts/create_envs.sh
+
+      - run: (cd server && npm run ci_test)
 
       - run: 
           name: mongod
