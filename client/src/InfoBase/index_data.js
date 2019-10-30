@@ -142,7 +142,7 @@ const index_lang_lookups = {
   },
   a11y_version_text: {
     en: "recommended for screen reader users",
-    fr: "TODO",
+    fr: "recommandé pour les utilisateurs de lecteur d'écran",
   },
   standard_version_url: {
     en: "index-eng.html",
