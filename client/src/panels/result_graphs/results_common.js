@@ -128,6 +128,10 @@ const indicator_target_text = (indicator) => {
       case 'dollar_range':
       case 'percent':
       case 'percent_range': {
+        if ( _.isNull(target_min) && _.isNull(target_max) ){
+          // the case where target_type and seeking_to are set but no target exists shouldn't happen anymore, but exists in 2018-19 DPs
+          return target_unspecified_display;
+        }
         switch(seeking_to){
           case 'target':
             return `${text_maker("result_exact_text")} ${formats[type_by_data_type[target_type]](+target_min)}` + (measure_display(measure) || "");
