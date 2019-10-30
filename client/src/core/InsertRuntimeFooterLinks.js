@@ -9,12 +9,12 @@ const footer_link_items = _.compact([
   !window.is_a11y_mode && {
     id: "footer-a11y-link",
     href: index_lang_lookups.a11y_version_url[window.lang],
-    text: index_lang_lookups.a11y_version_text[window.lang],
+    text: index_lang_lookups.a11y_version_title[window.lang],
   },
   window.is_a11y_mode && {
     id: "footer-standard-link",
     href: index_lang_lookups.standard_version_url[window.lang],
-    text: index_lang_lookups.standard_version_text[window.lang],
+    text: index_lang_lookups.standard_version_titile[window.lang],
   },
 ]);
 
