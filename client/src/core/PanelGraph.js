@@ -26,6 +26,7 @@ class PanelGraph {
     if (window.is_dev && !graphs[lookup]) {
       /* eslint-disable no-console */
       console.error(`bad graph key - ${lookup} for level ${level}`);
+      debugger;
       return null;
     }
     return graphs[lookup];
