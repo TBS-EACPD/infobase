@@ -3,7 +3,7 @@ const reporters = !process.env.DO_NOT_PRINT_COVERAGE ? ["json", "text"] : ['json
 
 module.exports = {
   rootDir: `../${test_target}`,
-  testRegex: `\\.test\\.js$`,
+  testRegex: `\\.unit-test\\.js$`,
   testEnvironment: 'node',
   coverageDirectory: "../coverage/unit_test_coverage",
   coverageReporters: reporters,

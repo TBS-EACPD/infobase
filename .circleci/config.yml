@@ -169,7 +169,7 @@ jobs:
           at: ./
       - run: ./scripts/ci_scripts/create_envs.sh
 
-      - run: (cd server && npm run ci_test)
+      - run: (cd server && npm run ci_unit_tests)
 
       - run: 
           name: mongod
