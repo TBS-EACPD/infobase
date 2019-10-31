@@ -6,5 +6,6 @@
 .vscode/
 npm-debug*
 coverage/
+.nyc_output
 *credentials*.json
 transpiled_build/
