@@ -56,7 +56,6 @@ export default class IsolatedPanel extends React.Component {
       if(level === "indicator"){
         ensure_loaded({
           subject: subject,
-          results: true,
         })
           .then( () => this.setState({loading: false, subject, panel_key}) )
       } else {
