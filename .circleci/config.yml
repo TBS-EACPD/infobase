@@ -151,8 +151,7 @@ jobs:
             - ./server/transpiled_build
             - ./server/deploy_scripts
             - ./server/.gcloudignore
-            - ./server/snapshot_tests.config.js
-            - ./server/jest.config.js
+            - ./server/jest_configs
             - ./server/node_modules
             - ./server/package.json
             - ./server/package-lock.json
