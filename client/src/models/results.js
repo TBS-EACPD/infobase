@@ -311,10 +311,10 @@ class Indicator {
   static create_and_register(def){
     const { id, result_id } = def;
 
-    if(this.lookup(id)){
+    if(this.lookup(id).doc){
       return;
     }
-
+    
     const inst = new Indicator(def);
 
     id_indexed_indicators[id] = inst;

@@ -57,7 +57,7 @@ export default class IsolatedPanel extends React.Component {
         ensure_loaded({
           subject: subject,
         })
-          .then( () => this.setState({loading: false, subject, panel_key}) )
+          .then( () => this.setState({loading: false, subject, panel_key}) );
       } else {
         get_panels_for_subject(subject).then( () =>
           ensure_loaded({

@@ -7,10 +7,12 @@ import { TM, text_maker } from './result_text_provider.js';
 import {
   Panel,
   SpinnerWrapper,
-  LabeledTombstone,
 } from '../../components';
 
-export class IndicatorDisplay extends React.Component {
+import { Indicator } from '../../models/results.js';
+import { SingleIndicatorDisplay } from './result_components.js';
+
+export default class IndicatorDisplay extends React.Component {
   constructor(props) {
     super(props);
     this.state = { loading: true };
@@ -19,22 +21,28 @@ export class IndicatorDisplay extends React.Component {
   componentDidMount(){
     const {
       match: {
-        params: { indicator_id },
+        params: { id },
       },
     } = this.props;
     ensure_loaded({
-      subject: {id: indicator_id, level: "indicator"},
+      subject: {id: id, level: "indicator"},
       results: true,
     })
-      .then(
-        this.setState({loading: false})
-      );
+      .then( () => this.setState({loading: false}) );
   }
 
   render(){
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
+
     const { 
       loading,
     } = this.state;
+
+    const indicator = Indicator.lookup(id);
 
     return (
       <StandardRouteContainer
@@ -45,10 +53,8 @@ export class IndicatorDisplay extends React.Component {
       >
         <TM k="indicator_display_title" el="h1" />
         {loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
-          <Panel title={"TODO"}>
-            <LabeledTombstone 
-              labels_and_items={[["one","omg"],["two","wtf"]]}
-            />
+          <Panel title={indicator.name}>
+            <SingleIndicatorDisplay indicator={indicator} />
           </Panel>
         }
       </StandardRouteContainer>
