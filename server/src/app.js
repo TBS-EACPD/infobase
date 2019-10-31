@@ -33,8 +33,12 @@ app.use("/", function (req, res, next) {
   if (req.method === 'OPTIONS') {
     res.sendStatus(200);
   } else {
+
+    // Often want to use GET to leverage http caching, but some of out longer queries are too long for a query parameter
+    // Instead, the client makes a GET with a header containing a compressed and base 64 encoded copy of the query (the query parameter becomes a hash, for cache busting)
+    // In that case, we mutate the request here to recover the query and let the server pretend it received a normal POST
     if ( req.method === "GET" && !_.isEmpty(req.headers['encoded-compressed-query']) ){
-      convert_GET_with_compressed_query_to_POST(req); // mutates req, changes persist to subsequent middleware
+      convert_GET_with_compressed_query_to_POST(req); // mutates req, changes made persist to subsequent middleware
     }
 
     // eslint-disable-next-line no-console
