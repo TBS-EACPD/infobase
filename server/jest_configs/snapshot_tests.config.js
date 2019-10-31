@@ -1,4 +1,5 @@
 const test_target = !process.env.TEST_AGAINST_TRANSPILIED ? 'src' : 'transpiled_build';
+const reporters = !process.env.DO_NOT_PRINT_COVERAGE ? ["json", "text"] : ['json'];
 
 module.exports = {
   rootDir: `../${test_target}`,
@@ -6,5 +7,5 @@ module.exports = {
   testRegex: `\\.snapshot_tests\\.js$`,
   testEnvironment: 'node',
   coverageDirectory: "../coverage/snapshot_test_coverage",
-  coverageReporters: ["json", "text"],
+  coverageReporters: reporters,
 };
