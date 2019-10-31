@@ -7,16 +7,12 @@ import _ from 'lodash';
 // ... bit of a hack, and I'm not just talking about a function having side effects
 export const convert_GET_with_compressed_query_to_POST = (req) => {
   const decoded_decompressed_query = decompressFromBase64(req.headers['encoded-compressed-query']);
-  const [query, mixed_variables] = decoded_decompressed_query.split("&variables=");
-  
-  // Client should be including an additional variable, _query_name, along with the query's actual variables. Grab that out, it's just for logging
-  const { _query_name, ...query_variables } = JSON.parse(mixed_variables);
+  const [query, variables] = decoded_decompressed_query.split("&variables=");
 
   req.method = "POST";
   req.body = {
-    query_name: _query_name,
     query,
-    variables: query_variables,
+    variables,
     operationName: null,
   };
 };
@@ -30,6 +26,8 @@ export const get_log_for_request = (req) => {
     ) :
     req.method;
   
+  const {_query_name, ...query_variables} = request_content.variables || {};
+
   return request_content && 
     `origin: ${
       req.headers.origin
@@ -38,10 +36,10 @@ export const get_log_for_request = (req) => {
     },\nquery_hash: ${ // Include a hash because the query itself can be longer than the (undocumented?) stackdriver textPayload limit
       md5(request_content.query)
     },\nquery_name: ${
-      request_content.query_name
+      _query_name
     } ${
-      !_.isEmpty(request_content.variables) ? 
-        `,\nvariables: ${JSON.stringify(request_content.variables)}` : 
+      !_.isEmpty(query_variables) ? 
+        `,\nvariables: ${JSON.stringify(query_variables)}` : 
         ''
     },\nquery: ${ // put the query at the bottom of the textPayload so it doesn't push anything else out if its length causes a cut-off
       request_content.query
@@ -59,16 +57,17 @@ export const get_log_for_request = (req) => {
 //    ) :
 //    req.method;
 //  
+//  const {_query_name, ...variables} = request_content.variables || {};
+//
 //  const log_object = _.pickBy(
 //    {
 //      origin: req.headers.origin,
 //      request_method,
-//      non_query: !request_content && "normally, this shouldn't happen",
+//      non_query: !request_content && "Has no body or query string. Normally, this shouldn't happen",
 //      query_hash: request_content && md5(request_content.query),
-//      ..._.pick(
-//        request_content,
-//        ["query_name", "variables", "query"]
-//      ),
+//      query_name: _query_name, 
+//      variables,
+//      query: request_content && request_content.query,
 //    },
 //    _.identity,
 //  )
