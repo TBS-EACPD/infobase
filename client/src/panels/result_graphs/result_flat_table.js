@@ -58,6 +58,8 @@ const get_indicators = (subject, doc) => {
     .value();
 };
 
+
+
 const subject_link = (node) => {
   if (node.data.subject.level === "sub_program" || node.data.subject.level === "sub_sub_program"){
     const program_id = node.data.subject.level === "sub_program" ?
@@ -114,7 +116,7 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
   const table_data = _.map(indicator_list, ind => ({
     label: subject_link(ind.parent_node),
     col_data: {
-      indicator: ind.indicator.name,
+      indicator: <a href={`#indicator/${ind.indicator.id}`}>{ind.indicator.name}</a>,
       target: is_drr17 ? drr17_indicator_target_text(ind.indicator) : indicator_target_text(ind.indicator),
       target_result: indicator_actual_text(ind.indicator),
       date_to_achieve: ind.indicator.target_date,
