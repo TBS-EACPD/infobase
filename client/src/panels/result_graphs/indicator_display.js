@@ -43,9 +43,7 @@ export default class IndicatorPanel extends React.Component {
     } = this.state;
 
     const indicator = Indicator.lookup(id);
-    if(!loading){
-      debugger;
-    }
+    
     return (
       <StandardRouteContainer
         title={text_maker("indicator_display_title")}
