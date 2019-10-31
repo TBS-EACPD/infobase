@@ -584,6 +584,7 @@ const NewBadge = () => {
 };
 
 export {
+  SingleIndicatorDisplay,
   IndicatorDisplay,
   QuadrantDefList,
   status_icons,
