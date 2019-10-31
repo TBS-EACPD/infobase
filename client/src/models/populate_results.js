@@ -382,7 +382,7 @@ export function api_load_results_bundle(subject, result_docs){
     switch(level){
       case 'indicator':
         return {
-          is_loaded: false,//program_is_loaded(subject.program),
+          is_loaded: subject_is_loaded(subject),
           id: subject.id,
           query: get_indicator_load_results_bundle_query(docs_to_load),
           response_data_accessor: (response) => [ response.data.root.indicator ],
