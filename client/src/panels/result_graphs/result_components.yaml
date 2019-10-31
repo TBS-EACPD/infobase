@@ -29,3 +29,7 @@ indicator_display_title:
 indicator_display_desc:
   en: Name, target, and notes for a single indicator
   fr: Nom, cible, et notes pour un seul indicator
+
+report:
+  en: Report
+  fr: Rapport

@@ -52,6 +52,10 @@ drr_report:
   en: Departmental Results Report 
   fr: Rapport sur les résultats ministériels
 
+dp_report:
+  en: Departmental Plan 
+  fr: Plan ministériel
+
 drr_links:
   en: Departmental Results Report (DRR)
   fr: Rapport sur les résultats ministériels (RRM)
