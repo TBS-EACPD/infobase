@@ -55,6 +55,11 @@
   margin-bottom: 0px;
 }
 
+ul.indicator-list {
+  margin: 0px;
+  padding: 0px;
+}
+
 ul.indicator-list > li {
   @include unstyled-list;
   padding: 10px;
