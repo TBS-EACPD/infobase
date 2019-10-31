@@ -20,12 +20,15 @@ export const convert_GET_with_compressed_query_to_POST = (req) => {
 const get_query_and_variables_from_request = (req) => {
   if ( !_.isEmpty(req.body) ){
     const {query, variables} = req.body;
-
     return {query, variables};
-  } else if( !_.isEmpty(req.query) ){
-    const [query, variables_string] = query.split("&variables=");
+  } else if( req.query ){
+    const [query, variables_string] = req.query.split("&variables=");
 
-    return {query, variables: JSON.parse(variables_string)};
+    const confirmed_query = /^query/.test(query) && query
+
+    const variables = JSON.parse(variables_string);
+
+    return {query: confirmed_query, variables};
   } else {
     return {};
   }
@@ -34,7 +37,7 @@ export const get_log_object_for_request = (req) => {
   const {query, variables} = get_query_and_variables_from_request(req);
   const {_query_name, ...query_variables} = variables || {};
 
-  const request_method = req.method === "POST" ? 
+  const method = req.method === "POST" ? 
     ( _.has(req.headers, 'encoded-compressed-query') ? 
       "GET with encoded-compressed-query header, treated as POST" : 
       "POST"
@@ -43,12 +46,12 @@ export const get_log_object_for_request = (req) => {
 
   return _.pickBy(
     {
-      origin: req.headers.origin,
-      request_method,
-      non_query: !query && "Has no query. Normally, this shouldn't happen!",
+      origin: req.headers && req.headers.origin,
+      method,
+      non_query: !query && "Apparently not a GraphQL query! Normally, this shouldn't happen!",
       query_name: _query_name, 
-      query_hash: md5(query),
       variables: query_variables,
+      query_hash: query && md5(query),
       query,
     },
     _.identity,
