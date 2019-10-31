@@ -6,15 +6,18 @@ import {
 } from './server_utils.js';
 
 
-describe("convert_GET_with_compressed_query_to_POST", function(){
-  it("Mutates a GET with a encoded-compressed-query header in to a standard POST with the query in its body", () => {
-    // original query 
-    const encoded_compressed_query = "I4VwpgTgngBAFAEgDYEMB2BzAXDAygFwgEtMBCAShgG8AoGGCAe0fzlUx2XQ0tvvoyMAbtTr96RACZjxAfVn4oABzBoUAWzAyYAX23zFKtZrF69AMiEpiKAEZIwAZwC8VAETsMbrG9VudQA=";
+const query_string = 'query ($lang: String!) {\n  root(lang: $lang) {\n    gov {\n      id\n      __typename\n    }\n    __typename\n  }\n}';
+const variable_string = '{"lang":"en","_query_name":"test"}';
+const uncompressed_query = `${query_string}&variables=${variable_string}`;
+const compressed_query = "I4VwpgTgngBAFAEgDYEMB2BzAXDAygFwgEtMBCAShgG8AoGGCAe0fzlUx2XQ0tvvoyMAbtTr96RACZjxAfVn4oABzBoUAWzAyYAX23zFKtZrF6dAMiEpiKAEZIwAZwC8VAETsMbrG9VuANG6yoJBQssZg3m74TvhuOkA";
 
+
+describe("convert_GET_with_compressed_query_to_POST", function(){
+  it("Mutates a GET with an encoded-compressed-query header in to a standard POST with the uncompressed query in its body", () => {
     const GET_with_compressed_query = {
       method: "GET",
       headers: {
-        "encoded-compressed-query": encoded_compressed_query,
+        "encoded-compressed-query": compressed_query,
       },
     };
 
@@ -24,11 +27,11 @@ describe("convert_GET_with_compressed_query_to_POST", function(){
     const expected_POST = {
       method: "POST",
       headers: {
-        "encoded-compressed-query": encoded_compressed_query,
+        "encoded-compressed-query": compressed_query,
       },
       body: { 
-        query: "query ($lang: String!) {\n  root(lang: $lang) {\n    gov {\n      id\n      __typename\n    }\n    __typename\n  }\n}\n",
-        variables: '{"lang":"en"}',
+        query: query_string,
+        variables: variable_string,
         operationName: null,
       },
     };
@@ -44,7 +47,7 @@ describe("get_log_object_for_request", function(){
       headers: {
         origin: "test",
       },
-      query: 'query ($lang: String!) {\n  root(lang: $lang) {\n    gov {\n      id\n      __typename\n    }\n    __typename\n  }\n}&variables={"lang":"en","_query_name":"test"}',
+      query: uncompressed_query,
     };
 
     const log_object = get_log_object_for_request(GET_request);
@@ -55,7 +58,7 @@ describe("get_log_object_for_request", function(){
     expect(log_object.query_name).toEqual("test");
     expect(log_object.variables).toEqual({lang: "en"});
     expect(log_object.query_hash).toEqual( expect.stringMatching(/.?/) );
-    expect(log_object.query).toEqual("query ($lang: String!) {\n  root(lang: $lang) {\n    gov {\n      id\n      __typename\n    }\n    __typename\n  }\n}");
+    expect(log_object.query).toEqual(query_string);
   });
 
   it("Builds log as expected for a normal POST request", () => {
@@ -65,8 +68,8 @@ describe("get_log_object_for_request", function(){
         origin: "test",
       },
       body: {
-        query: "query ($lang: String!) {\n  root(lang: $lang) {\n    gov {\n      id\n      __typename\n    }\n    __typename\n  }\n}",
-        variables: {lang: "en", _query_name: "test"},
+        query: query_string,
+        variables: JSON.parse(variable_string),
       },
     };
 
@@ -78,7 +81,7 @@ describe("get_log_object_for_request", function(){
     expect(log_object.query_name).toEqual("test");
     expect(log_object.variables).toEqual({lang: "en"});
     expect(log_object.query_hash).toEqual( expect.stringMatching(/.?/) );
-    expect(log_object.query).toEqual("query ($lang: String!) {\n  root(lang: $lang) {\n    gov {\n      id\n      __typename\n    }\n    __typename\n  }\n}");
+    expect(log_object.query).toEqual(query_string);
   });
 
   it("Builds log as expected for a GET request with encoded-compressed-query that has been converted to a POST", () => {
@@ -89,8 +92,8 @@ describe("get_log_object_for_request", function(){
         "encoded-compressed-query": "sdfsdfas",
       },
       body: {
-        query: "query ($lang: String!) {\n  root(lang: $lang) {\n    gov {\n      id\n      __typename\n    }\n    __typename\n  }\n}",
-        variables: {lang: "en", _query_name: "test"},
+        query: query_string,
+        variables: JSON.parse(variable_string),
       },
     };
 
