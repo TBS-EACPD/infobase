@@ -35,6 +35,8 @@ const { sanitized_marked } = general_utils;
 
 import { TM, text_maker } from './result_text_provider.js';
 
+import './results.scss';
+
 const IndicatorResultDisplay = (props) => {
   const {indicator, is_actual, is_drr17, is_previous} = props;
   if(is_actual){
