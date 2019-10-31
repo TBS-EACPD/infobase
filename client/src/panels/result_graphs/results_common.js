@@ -162,6 +162,7 @@ const indicator_target_text = (indicator) => {
       }
     }
   };
+  
   return get_display_case(indicator);
 };
 

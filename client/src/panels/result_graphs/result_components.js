@@ -90,8 +90,6 @@ const SingleIndicatorDisplay = ({indicator}) => {
   const dp_docs = get_result_doc_keys('dp');
   const drr_docs = get_result_doc_keys('drr');
   const should_display_new_status = _.indexOf(dp_docs, indicator.doc) > 0 || _.indexOf(drr_docs, indicator.doc) > 0;
-  const asdf = indicator_target_text;
-  debugger;
   return (
     <div className="indicator-item">
       <dl className="dl-horizontal indicator-item__dl">
