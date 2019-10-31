@@ -23,9 +23,9 @@ result_is_retired:
   fr: DRR_TODO
 
 indicator_display_title:
-  en: Single Indicator display
-  fr: TODO
+  en: Single Indicator details
+  fr: Détails pour un seul Indicateur
 
 indicator_display_desc:
-  en: TODO
-  fr: TODO
+  en: Name, target, and notes for a single indicator
+  fr: Nom, cible, et notes pour un seul indicator
