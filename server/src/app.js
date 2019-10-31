@@ -12,7 +12,7 @@ import {
 import { connect_db } from "./db_utils.js";
 import {
   convert_GET_with_compressed_query_to_POST,
-  get_log_for_request,
+  get_log_object_for_request,
 } from './server_utils.js'
 
 
@@ -42,7 +42,7 @@ app.use("/", function (req, res, next) {
     }
 
     // eslint-disable-next-line no-console
-    !global.IS_DEV_SERVER && console.log( get_log_for_request(req) );
+    !global.IS_DEV_SERVER && console.log( JSON.stringify(get_log_object_for_request(req), null, 2) );
 
     next();
   }
