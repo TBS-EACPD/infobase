@@ -9,6 +9,7 @@ import {
   result_simple_statuses,
   indicator_text_functions,
   get_result_doc_keys,
+  result_docs,
 } from './results_common.js';
 import {
   IconCheck,
@@ -85,7 +86,7 @@ const IndicatorList = ({ indicators }) => (
 
 
 
-const SingleIndicatorDisplay = ({indicator}) => {
+const SingleIndicatorDisplay = ({indicator}, show_doc) => {
   const is_drr = /drr/.test(indicator.doc);
   const has_previous_year_target = !_.isNull(indicator.previous_year_target_type);
   const has_previous_year_result = false; // DRR_TODO: previous year results aren't in the API right now, but they probably will be for DRR18 (if not, clean this out)
@@ -114,6 +115,17 @@ const SingleIndicatorDisplay = ({indicator}) => {
           {indicator.name}
           {should_display_new_status && _.isNull(indicator.previous_year_target_type) && <NewBadge/>}
         </dd>
+
+        {show_doc &&
+          <Fragment>
+            <dt>
+              <TM k="report" />
+            </dt>
+            <dd>
+              {`${result_docs[indicator.doc].year} ${(is_drr ? text_maker("drr_report") : text_maker("dp_report") )}`}
+            </dd>
+          </Fragment>
+        }
 
         <dt>
           <TM k="date_to_achieve" />
@@ -586,6 +598,7 @@ const NewBadge = () => {
 };
 
 export {
+  SingleIndicatorDisplay,
   IndicatorDisplay,
   QuadrantDefList,
   status_icons,

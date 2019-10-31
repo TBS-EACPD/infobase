@@ -300,7 +300,7 @@ class Indicator {
     return _.map(id_indexed_indicators, _.identity);
   }
   static lookup(id){
-    return id_indexed_indicators[id] || {id, level: "indicator"};
+    return id_indexed_indicators[id] || {id, level: "indicator"}; // hack to allow indicators as subjects before they're loaded
   }
   static lookup_by_result_id(result_id){
     return result_indexed_indicators[result_id] || [];
@@ -311,7 +311,7 @@ class Indicator {
   static create_and_register(def){
     const { id, result_id } = def;
 
-    if(this.lookup(id).doc){
+    if(this.lookup(id).doc){ // hack to allow indicators as subjects before they're loaded
       return;
     }
     

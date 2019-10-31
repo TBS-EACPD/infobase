@@ -10,7 +10,7 @@ import {
 } from '../../components';
 
 import { Indicator } from '../../models/results.js';
-import { IndicatorDisplay } from './result_components.js';
+import { SingleIndicatorDisplay } from './result_components.js';
 
 export default class IndicatorPanel extends React.Component {
   constructor(props) {
@@ -54,7 +54,7 @@ export default class IndicatorPanel extends React.Component {
         <TM k="indicator_display_title" el="h1" />
         {loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
           <Panel title={indicator.name}>
-            <IndicatorDisplay indicators={[indicator]} />
+            <SingleIndicatorDisplay indicator={indicator} show_doc={true}/>
           </Panel>
         }
       </StandardRouteContainer>

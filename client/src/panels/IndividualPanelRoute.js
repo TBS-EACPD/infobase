@@ -15,7 +15,6 @@ const {
   Tag,
   Gov,
   CRSO,
-  Indicator,
 } = Subject;
 
 const get_subject = (level, id) => {
@@ -28,8 +27,6 @@ const get_subject = (level, id) => {
       return Program.lookup(id);
     case 'crso':
       return CRSO.lookup(id);
-    case 'indicator':
-      return Indicator.lookup(id);
     default:
       return Gov;
   }
@@ -53,23 +50,16 @@ export default class IsolatedPanel extends React.Component {
       this.setState({loading: false, panel_key: undefined});
     } else {
       const subject = get_subject(level, subject_id);
-      if(level === "indicator"){
+      get_panels_for_subject(subject).then( () =>
         ensure_loaded({
           subject: subject,
+          has_results: true,
+          graph_keys: [ panel_key ],
+          subject_level: subject.level,
+          footnotes_for: subject,
         })
-          .then( () => this.setState({loading: false, subject, panel_key}) );
-      } else {
-        get_panels_for_subject(subject).then( () =>
-          ensure_loaded({
-            subject: subject,
-            has_results: true,
-            graph_keys: [ panel_key ],
-            subject_level: subject.level,
-            footnotes_for: subject,
-          })
-            .then( () => this.setState({loading: false, subject, panel_key}) )
-        );
-      }
+          .then( () => this.setState({loading: false, subject, panel_key}) )
+      );
     }
   }
   componentDidMount(){
