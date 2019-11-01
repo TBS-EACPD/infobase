@@ -8,6 +8,7 @@ chmod +x scripts/ci_scripts/redact_env_vars_from_logging.sh
 chmod +x scripts/ci_scripts/cleanup_dev_dbs.sh
 chmod +x scripts/ci_scripts/store_bundle_stats.sh
 chmod +x scripts/ci_scripts/get_bundle_stats_baseline.sh
+chmod +x scripts/ci_scripts/store_server_coverage.sh
 
 # Client scripts
 chmod +x client/deploy_scripts/build_all.sh

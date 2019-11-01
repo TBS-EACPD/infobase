@@ -56,7 +56,7 @@
     "unit_tests": "jest --coverage --forceExit  --config jest_configs/unit_tests.config.js",
     "unit_tests:watch": "jest --watch --config jest_configs/unit_tests.config.js",
     "ci_unit_tests": "(export TEST_AGAINST_TRANSPILIED='true' && jest --coverage --forceExit --config jest_configs/unit_tests.config.js)",
-    "combine_coverage_reports": "babel-node ./jest_configs/mapCoverage.js --report ./coverage/*/coverage-final.json --reporters json text",
+    "combine_coverage_reports": "babel-node ./jest_configs/mapCoverage.js --report ./coverage/*/coverage-final.json",
     "test": "(export DO_NOT_PRINT_COVERAGE=true && npm run unit_tests && npm run snapshot_tests && npm run combine_coverage_reports)",
     "test:ci": "(export DO_NOT_PRINT_COVERAGE=true && npm run ci_unit_tests && npm run ci_snapshot_tests && npm run combine_coverage_reports)",
     "start": "nodemon --config nodemon_start_config.json --watch src --watch package-lock.json --watch ../data -e csv,json,js --exec babel-node src/server.js",
