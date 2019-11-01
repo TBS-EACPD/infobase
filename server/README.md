@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=shield)](https://circleci.com/gh/TBS-EACPD/infobase)
+![Test coverage status badge](https://storage.cloud.google.com/api-test-coverage/server-coverage-badge.svg)
 
 *(le Français suit)*
 
@@ -9,6 +10,7 @@ GraphQL API for InfoBase data.
 
 ## Table of Contents
 - [InfoBase API](#infobase-api)
+  - [Table of Contents](#table-of-contents)
   - [Getting started](#getting-started)
     - [Running the API server locally](#running-the-api-server-locally)
   - [Tests](#tests)
@@ -18,6 +20,17 @@ GraphQL API for InfoBase data.
   - [Cloud stuff](#cloud-stuff)
     - [Mongodb Atlas](#mongodb-atlas)
     - [Google Cloud Function](#google-cloud-function)
+- [L'interface de programmation d'applications (API) de l'InfoBase](#linterface-de-programmation-dapplications-api-de-linfobase)
+  - [Table des matières](#table-des-mati%c3%a8res)
+  - [Commencer](#commencer)
+    - [Lancer le serveur de l'API](#lancer-le-serveur-de-lapi)
+  - [Tests](#tests-1)
+    - [Tests « Snapshot »](#tests-%c2%ab-snapshot-%c2%bb)
+  - [Structure des fichiers](#structure-des-fichiers)
+    - [fichier models/](#fichier-models)
+  - [Outils infonuagiques](#outils-infonuagiques)
+    - [Mongodb Atlas](#mongodb-atlas-1)
+    - [Fonction Google Cloud](#fonction-google-cloud)
 
 
 ## Getting started
@@ -65,7 +78,19 @@ L'interface de programmation d'applications (API) de l'InfoBase
 Une interface de programmation d'applications GraphQL pour les données de l'InfoBase.
 
 ## Table des matières
+- [InfoBase API](#infobase-api)
+  - [Table of Contents](#table-of-contents)
+  - [Getting started](#getting-started)
+    - [Running the API server locally](#running-the-api-server-locally)
+  - [Tests](#tests)
+    - [Snapshot tests](#snapshot-tests)
+  - [File structure](#file-structure)
+    - [models/](#models)
+  - [Cloud stuff](#cloud-stuff)
+    - [Mongodb Atlas](#mongodb-atlas)
+    - [Google Cloud Function](#google-cloud-function)
 - [L'interface de programmation d'applications (API) de l'InfoBase](#linterface-de-programmation-dapplications-api-de-linfobase)
+  - [Table des matières](#table-des-mati%c3%a8res)
   - [Commencer](#commencer)
     - [Lancer le serveur de l'API](#lancer-le-serveur-de-lapi)
   - [Tests](#tests-1)
