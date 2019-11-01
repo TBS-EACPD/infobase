@@ -160,7 +160,7 @@ jobs:
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
-  test: 
+  test: # faster but less in-depth than then test_end_to_end job. Good to move ahead with data and server deploy if these pass
     docker:
       - image: gcr.io/ib-static-content/ib-client-ci-test:latest
         <<: *gcloud_auth
@@ -190,7 +190,7 @@ jobs:
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
-  test_end_to_end:
+  test_end_to_end: # slower but more in-depth than the test job. Wait until these have passed before deploying the client
     docker:
       - image: gcr.io/ib-static-content/ib-client-ci-test:latest
         <<: *gcloud_auth
@@ -322,7 +322,6 @@ workflows:
             - build
       - deploy_data:
           requires:
-            - test_end_to_end
             - test
           <<: *deploy_filter
       - deploy_server:
@@ -331,5 +330,6 @@ workflows:
           <<: *deploy_filter
       - deploy_client:
           requires:
+            - test_end_to_end
             - deploy_server
           <<: *deploy_filter
