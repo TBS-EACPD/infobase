@@ -87,7 +87,7 @@ const query_api = (id) => {
       log_standard_event({
         SUBAPP: window.location.hash.replace('#',''),
         MISC1: "API_QUERY_FAILURE",
-        MISC2: `Results, took  ${resp_time} ms - ${error.toString()}`,
+        MISC2: `Single indicator, took  ${resp_time} ms - ${error.toString()}`,
       });
       throw error;
     });
