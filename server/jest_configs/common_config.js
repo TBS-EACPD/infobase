@@ -9,6 +9,8 @@ module.exports = {
     '\\.unit-test\\.js$',
     '\\.snapshot-test\\.js$',
     '-donttest\\.js$',
+    'index\\.js',
+    'snapshot_tests_setup.js',
   ],
   testEnvironment: 'node',
 };
