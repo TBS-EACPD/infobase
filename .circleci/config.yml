@@ -160,7 +160,32 @@ jobs:
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
-  test:
+  test: 
+    docker:
+      - image: gcr.io/ib-static-content/ib-client-ci-test:latest
+        <<: *gcloud_auth
+    working_directory: "~/InfoBase"
+    steps:
+      - attach_workspace:
+          at: ./
+      - run: ./scripts/ci_scripts/create_envs.sh
+
+      - run: (cd server && npm run unit_tests)
+      - run: 
+          name: start_api_server
+          command: (cd server && npm run start)
+          background: true
+      - run: (cd server && npm run snapshot_tests) # the end to end snapshot tests, run again un-transpiled src for more useful coverage stats
+      
+      - run: (cd server && npm run combine_coverage_reports)
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - ./server/coverage # save coverage output for later
+
+
+  # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
+  test_end_to_end:
     docker:
       - image: gcr.io/ib-static-content/ib-client-ci-test:latest
         <<: *gcloud_auth
@@ -176,19 +201,11 @@ jobs:
           name: mongod
           command: mongod
           background: true
-
-      - run: (cd server && npm run transpiled_start & \cd server && npm run snapshot_tests:transpiled && kill -9 `lsof -t -i:1337`)
-
       - run: 
           name: start_api_server
-          command: (cd server && npm run start)
+          command: (cd server && npm run transpiled_start) # run server end to end tests against the transpiled src, to be closer to production
           background: true
-      - run: (cd server && npm run snapshot_tests) # end to end tests run un-transpiled for more accurate coverage stats
-      - run: (cd server && npm run combine_coverage_reports)
-      - persist_to_workspace:
-          root: ./
-          paths:
-            - ./server/coverage # save coverage output for later
+      - run: (cd server && export TEST_AGAINST_TRANSPILIED='true' && npm run snapshot_tests)
 
       - run: sed -i "s#${CDN_URL}#.#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#${CDN_URL}#.#g" ./client/$BUILD_DIR/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
@@ -199,6 +216,7 @@ jobs:
           background: true
       - run: (cd client && npm run ci_route_load_tests)
       - run: circleci step halt # stops and returns successful, once route load tests end, since the mongod and api otherwise hold this job open a couple minutes long
+
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   deploy_data:
@@ -291,11 +309,15 @@ workflows:
   build_test_deploy:
     jobs:
       - build
+      - test_end_to_end:
+          requires:
+            - build
       - test:
           requires:
             - build
       - deploy_data:
           requires:
+            - test_end_to_end
             - test
           <<: *deploy_filter
       - deploy_server:

@@ -47,13 +47,10 @@
     "yargs": "^14.2.0"
   },
   "scripts": {
-    "populate_with_test_data": "(export USE_TEST_DATA='true' && babel-node src/populate_db.js)",
-    "presnapshot_tests": "npm run populate_with_test_data",
+    "presnapshot_tests": "(export USE_TEST_DATA='true' && babel-node src/populate_db.js)",
     "snapshot_tests": "jest --coverage --forceExit --config jest_configs/snapshot_tests.config.js",
     "postsnapshot_tests": "babel-node src/populate_db.js",
     "snapshot_tests:watch": "jest --watch --config jest_configs/snapshot_tests.config.js",
-    "presnapshot_tests:transpiled": "npm run populate_with_test_data",
-    "snapshot_tests:transpiled": "(export TEST_AGAINST_TRANSPILIED='true' && jest --coverage --forceExit --config jest_configs/snapshot_tests.config.js)",
     "unit_tests": "jest --coverage --forceExit  --config jest_configs/unit_tests.config.js",
     "unit_tests:watch": "jest --watch --config jest_configs/unit_tests.config.js",
     "combine_coverage_reports": "babel-node ./jest_configs/mapCoverage.js --report ./coverage/*/coverage-final.json",
