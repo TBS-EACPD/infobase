@@ -149,6 +149,7 @@ jobs:
             - ./client/package.json
 
             - ./server/transpiled_build
+            - ./server/src
             - ./server/deploy_scripts
             - ./server/.gcloudignore
             - ./server/jest_configs
@@ -169,7 +170,7 @@ jobs:
           at: ./
       - run: ./scripts/ci_scripts/create_envs.sh
 
-      - run: (cd server && npm run ci_unit_tests)
+      - run: (cd server && npm run unit_tests)
 
       - run: 
           name: mongod
@@ -177,9 +178,9 @@ jobs:
           background: true
       - run: 
           name: start_api_server
-          command: (cd server && npm run transpiled_start)
+          command: (cd server && npm run start)
           background: true
-      - run: (cd server && npm run ci_snapshot_tests)
+      - run: (cd server && npm run snapshot_tests)
 
       - run: (cd server && npm run combine_coverage_reports)
 
