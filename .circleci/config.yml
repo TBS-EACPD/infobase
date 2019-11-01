@@ -171,6 +171,11 @@ jobs:
       - run: ./scripts/ci_scripts/create_envs.sh
 
       - run: (cd server && npm run unit_tests)
+
+      - run: 
+          name: mongod
+          command: mongod
+          background: true
       - run: 
           name: start_api_server
           command: (cd server && npm run start)
