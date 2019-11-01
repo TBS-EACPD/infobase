@@ -62,31 +62,31 @@ async function main(){
   fs.writeFileSync(
     './coverage/coverage-shield-badge.svg',
     `
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="138" height="20">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="108" height="20">
   <linearGradient id="b" x2="0" y2="100%">
     <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
     <stop offset="1" stop-opacity=".1"/>
   </linearGradient>
   <clipPath id="a">
-    <rect width="138" height="20" rx="3" fill="#fff"/>
+    <rect width="108" height="20" rx="3" fill="#fff"/>
   </clipPath>
   <g clip-path="url(#a)">
-    <path fill="#555" d="M0 0h95v20H0z"/>
-    <path fill="${coverage_status_color}" d="M95 0h43v20H95z"/>
-    <path fill="url(#b)" d="M0 0h138v20H0z"/>
+    <path fill="#555" d="M0 0h73v20H0z"/>
+    <path fill="${coverage_status_color}" d="M73 0h35v20H73z"/>
+    <path fill="url(#b)" d="M0 0h108v20H0z"/>
   </g>
   <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="110">
-    <text x="485" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="850">
+    <text x="350" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="600">
       Coverage
     </text>
-    <text x="485" y="140" transform="scale(.1)" textLength="850">
+    <text x="350" y="140" transform="scale(.1)" textLength="600">
       Coverage
     </text>
-    <text x="1155" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="330">
-      ${coverage_percent}%
+    <text x="900" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="275">
+    ${coverage_percent}%
     </text>
-    <text x="1155" y="140" transform="scale(.1)" textLength="330">
-      ${coverage_percent}%
+    <text x="900" y="140" transform="scale(.1)" textLength="275">
+    ${coverage_percent}%
     </text>
   </g>
 </svg>`
