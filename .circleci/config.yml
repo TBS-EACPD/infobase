@@ -266,7 +266,7 @@ jobs:
       - run: ./scripts/ci_scripts/authenticate-server-gcloud.sh
 
       # if on master, store the coverage stats and coverage badge created by the test job
-      - run: ./scripts/ci_scripts/store_server_coverage.sh || true
+      - run: test $CIRCLE_BRANCH = master && ./scripts/ci_scripts/store_server_coverage.sh || true
 
       # Checksum all JS files in transpiled_build, used to determine if the function needs to be redeployed
       - run: find ./server/transpiled_build -name "*.js" | xargs cksum > server-checksums.txt
