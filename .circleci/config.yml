@@ -177,12 +177,7 @@ jobs:
           command: mongod
           background: true
 
-      - run: 
-          name: start_transpiled_api_server
-          command: (cd server && npm run transpiled_start)
-          background: true
-      - run: (cd server && npm run snapshot_tests:transpiled) # end to end tests run transpiled to catch any issues that may only occur when transpiled
-      - run: kill -9 `lsof -t -i:1337` # kill the transpiled server
+      - run: (cd server && npm run transpiled_start & \cd server && npm run snapshot_tests:transpiled && kill -9 `lsof -t -i:1337`)
 
       - run: 
           name: start_api_server
