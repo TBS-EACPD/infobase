@@ -180,6 +180,8 @@ jobs:
           background: true
       - run: (cd server && npm run ci_snapshot_tests)
 
+      - run: (cd server && npm run combine_coverage_reports)
+
       - run: sed -i "s#${CDN_URL}#.#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#${CDN_URL}#.#g" ./client/$BUILD_DIR/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#http://127.0.0.1:1337/graphql#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace CI API URL placeholder with local URL so these tests use the local server
