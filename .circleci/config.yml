@@ -208,7 +208,7 @@ jobs:
           background: true
       - run: 
           name: start_api_server
-          command: (cd server && npm run transpiled_start) # run server end to end tests against the transpiled src, to be closer to production
+          command: (cd server && npm run start:transpiled) # run server end to end tests against the transpiled src, to be closer to production
           background: true
       - run: (cd server && export TEST_AGAINST_TRANSPILIED='true' && npm run snapshot_tests)
 
@@ -244,7 +244,7 @@ jobs:
             - ib-data-is-deployed-{{ .Branch }}-{{ checksum "./data-checksums.txt" }}
       - run:
           command: |
-            [ -f "./this-data-is-deployed.txt" ] || (cd server && npm run populate_db)
+            [ -f "./this-data-is-deployed.txt" ] || (cd server && npm run populate_db:no_watch)
       - run: touch ./this-data-is-deployed.txt
       - save_cache:
           paths:

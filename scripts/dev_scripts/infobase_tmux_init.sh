@@ -51,5 +51,5 @@ else
     split-window -v \; \
     send-keys 'cd server && mongod' C-m \; \
     split-window -h \; \
-    send-keys 'cd server && while true; do npm run populate_db_exitcrash; sleep 30; done' C-m \;
+    send-keys 'cd server && while true; do npm run populate_db:exitcrash; sleep 30; done' C-m \;
 fi
