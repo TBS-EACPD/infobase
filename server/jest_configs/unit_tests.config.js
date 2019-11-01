@@ -1,10 +1,8 @@
-const test_target = !process.env.TEST_AGAINST_TRANSPILIED ? 'src' : 'transpiled_build';
-const reporters = !process.env.DO_NOT_PRINT_COVERAGE ? ["json", "text"] : ['json'];
+const common_config_rules = require('./common_config.js');
 
 module.exports = {
-  rootDir: `../${test_target}`,
-  testRegex: `\\.unit-test\\.js$`,
-  testEnvironment: 'node',
-  coverageDirectory: "../coverage/unit_test_coverage",
-  coverageReporters: reporters,
+  ...common_config_rules,
+
+  testRegex: '\\.unit-test\\.js$',
+  coverageDirectory: '../coverage/unit_test_coverage',
 };
