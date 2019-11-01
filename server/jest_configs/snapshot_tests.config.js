@@ -1,11 +1,9 @@
-const test_target = !process.env.TEST_AGAINST_TRANSPILIED ? 'src' : 'transpiled_build';
-const reporters = !process.env.DO_NOT_PRINT_COVERAGE ? ["json", "text"] : ['json'];
+const common_config_rules = require('./common_config.js');
 
 module.exports = {
-  rootDir: `../${test_target}`,
+  ...common_config_rules,
+
+  testRegex: '\\.snapshot-test\\.js$',
+  coverageDirectory: '../coverage/snapshot_test_coverage',
   setupTestFrameworkScriptFile: './snapshot_tests_setup.js',
-  testRegex: `\\.snapshot-test\\.js$`,
-  testEnvironment: 'node',
-  coverageDirectory: "../coverage/snapshot_test_coverage",
-  coverageReporters: reporters,
 };
