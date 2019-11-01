@@ -61,8 +61,8 @@ query($lang: String!, $id: String) {
 `;
 
 const process_indicator = (indicator) => {
-  indicator.target_year = _.isEmpty(indicator.target_year) ? null : parseInt(indicator.target_year);
-  indicator.target_month = _.isEmpty(indicator.target_month) ? null : parseInt(indicator.target_month);
+  indicator.target_year = _.isNull(indicator.target_year) ? null : parseInt(indicator.target_year);
+  indicator.target_month = _.isNull(indicator.target_month) ? null : parseInt(indicator.target_month);
   return indicator;
 };
 
