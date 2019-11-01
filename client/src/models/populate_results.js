@@ -107,41 +107,6 @@ planned_fte_pa_last_year
 drr_spend_expl
 drr_fte_expl
 `;
-const indicators_fields_fragment = `  id
-  stable_id
-  result_id
-  name
-  doc
-
-  target_year
-  target_month
-
-  is_reporting_discontinued
-
-  target_type
-  target_min
-  target_max
-  target_narrative
-  measure
-  seeking_to
-
-  previous_year_target_type
-  previous_year_target_min
-  previous_year_target_max
-  previous_year_target_narrative
-  previous_year_measure
-  previous_year_seeking_to
-
-  target_explanation
-  result_explanation
-
-  actual_datatype
-  actual_result
-  
-  status_key
-
-  methodology
-`;
 const results_fields_fragment = (docs_to_load) => _.chain(docs_to_load)
   .map(doc =>`
 ${doc}_results: results(doc: "${doc}") {
@@ -152,7 +117,40 @@ ${doc}_results: results(doc: "${doc}") {
   doc
 
   indicators {
-    ${indicators_fields_fragment}
+    id
+    stable_id
+    result_id
+    name
+    doc
+
+    target_year
+    target_month
+
+    is_reporting_discontinued
+
+    target_type
+    target_min
+    target_max
+    target_narrative
+    measure
+    seeking_to
+
+    previous_year_target_type
+    previous_year_target_min
+    previous_year_target_max
+    previous_year_target_narrative
+    previous_year_measure
+    previous_year_seeking_to
+
+    target_explanation
+    result_explanation
+
+    actual_datatype
+    actual_result
+    
+    status_key
+
+    methodology
   }
 }`)
   .reduce( (memo, fragment) => `
@@ -178,15 +176,6 @@ sub_programs {
 const crso_load_results_bundle_fragment = (docs_to_load) => `
 id
 ${results_fields_fragment(docs_to_load)}
-`;
-const get_indicator_load_results_bundle_query = (docs_to_load) => gql`
-  query($lang: String!, $id: String) {
-    root(lang: $lang) {
-      indicator(id: $id) {
-        ${indicators_fields_fragment}
-      }
-    }
-  }
 `;
 const get_program_load_results_bundle_query = (docs_to_load) => gql`
 query($lang: String!, $id: String) {
@@ -249,13 +238,6 @@ function extract_flat_data_from_results_hierarchies(hierarchical_response_data){
     indicators = [],
     pi_dr_links = [];
 
-  const process_indicator = (indicator) => {
-    indicator.target_year = _.isEmpty(indicator.target_year) ? null : parseInt(indicator.target_year);
-    indicator.target_month = _.isEmpty(indicator.target_month) ? null : parseInt(indicator.target_month);
-
-    indicators.push( _.omit(indicator, "__typename") );
-  };
-
   const crawl_hierachy_level = (subject_node) => _.each(
     subject_node,
     subject => {
@@ -275,7 +257,15 @@ function extract_flat_data_from_results_hierarchies(hierarchical_response_data){
             doc: result.doc,
           });
 
-          _.each(result.indicators, process_indicator);
+          _.each(
+            result.indicators,
+            (indicator) => {
+              indicator.target_year = _.isEmpty(indicator.target_year) ? null : parseInt(indicator.target_year);
+              indicator.target_month = _.isEmpty(indicator.target_month) ? null : parseInt(indicator.target_month);
+
+              indicators.push( _.omit(indicator, "__typename") );
+            }
+          );
         }
       );
       
@@ -333,9 +323,6 @@ function extract_flat_data_from_results_hierarchies(hierarchical_response_data){
     hierarchical_response_data,
     response => {
       switch(response.__typename){
-        case 'Indicator':
-          process_indicator(response);
-          break;
         case 'Program':
           crawl_hierachy_level([ response ]);
           break;
@@ -349,7 +336,7 @@ function extract_flat_data_from_results_hierarchies(hierarchical_response_data){
       }
     }
   );
-  
+
   return {
     sub_programs,
     results,
@@ -380,13 +367,6 @@ export function api_load_results_bundle(subject, result_docs){
     const program_is_loaded = (program) => crso_is_loaded(program.crso) || subject_is_loaded(program);
 
     switch(level){
-      case 'indicator':
-        return {
-          is_loaded: subject_is_loaded(subject),
-          id: subject.id,
-          query: get_indicator_load_results_bundle_query(docs_to_load),
-          response_data_accessor: (response) => [ response.data.root.indicator ],
-        };
       case 'program':
         return {
           is_loaded: program_is_loaded(subject),
@@ -434,7 +414,7 @@ export function api_load_results_bundle(subject, result_docs){
   })
     .then( (response) => {
       const hierarchical_response_data = response_data_accessor(response);
-      
+
       const resp_time = Date.now() - time_at_request; 
       if( !_.isEmpty(hierarchical_response_data) ){
         // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
@@ -457,7 +437,7 @@ export function api_load_results_bundle(subject, result_docs){
         indicators,
         pi_dr_links,
       } = extract_flat_data_from_results_hierarchies(hierarchical_response_data);
-      
+
       _.each( sub_programs, obj => SubProgramEntity.create_and_register(obj) );
       _.each( results, obj => Result.create_and_register(obj) );
       _.each( indicators, obj => Indicator.create_and_register(obj) );
