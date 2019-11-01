@@ -20,7 +20,7 @@ async function main(){
       },
       reporters: {
         type: 'array',
-        default: ['json', 'lcov'],
+        default: ['json', 'text'],
       },
     })
     .argv;
