@@ -47,7 +47,7 @@ async function main(){
     summary.merge(coverage_summary);
   });
 
-  const coverage_percent = summary.data.lines.pct;
+  const coverage_percent = Math.round(summary.data.lines.pct);
 
   const coverage_status_color = ( () => {
     if (coverage_percent >= 80) {
