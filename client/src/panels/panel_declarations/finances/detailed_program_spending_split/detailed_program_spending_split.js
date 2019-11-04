@@ -347,7 +347,7 @@ class DetailedProgramSplit extends React.Component {
                 tickSize: 5,
                 tickPadding: 5,
                 renderTick: tick => (
-                  <g key={tick.key} transform={`translate(${tick.x-5},${tick.y+1.5})`}>
+                  <g key={tick.value} transform={`translate(${tick.x-5},${tick.y+1.5})`}>
                     <a
                       href={programs_by_name[tick.value] ? infograph_href_template(programs_by_name[tick.value]) : null}
                       target="_blank" rel="noopener noreferrer"
@@ -355,9 +355,7 @@ class DetailedProgramSplit extends React.Component {
                       <text
                         textAnchor="end"
                         dominantBaseline="end"
-                        style={{
-                          ...tick.theme.axis.ticks.text,
-                        }}
+                        style={{fill: "rgb(51, 51, 51)", fontSize: "11px"}}
                       >
                         <TspanLineWrapper text={tick.value} width={40}/>
                       </text>

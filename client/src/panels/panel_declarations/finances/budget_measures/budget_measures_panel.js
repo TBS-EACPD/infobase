@@ -765,7 +765,7 @@ class BudgetMeasureHBars extends React.Component {
           tickSize: 5,
           tickPadding: 5,
           renderTick: tick => (
-            <g key={tick.key} transform={`translate(${tick.x-10},${tick.y})`}>
+            <g key={tick.value} transform={`translate(${tick.x-10},${tick.y})`}>
               <a
                 href={tick_map[tick.value]}
                 target="_blank" rel="noopener noreferrer"
@@ -773,9 +773,7 @@ class BudgetMeasureHBars extends React.Component {
                 <text
                   textAnchor="end"
                   dominantBaseline="end"
-                  style={{
-                    ...tick.theme.axis.ticks.text,
-                  }}
+                  style={{fill: "rgb(51, 51, 51)", fontSize: "11px"}}
                 >
                   <TspanLineWrapper text={tick.value} width={50}/>
                 </text>

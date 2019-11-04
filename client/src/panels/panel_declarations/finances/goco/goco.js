@@ -281,8 +281,8 @@ class Goco extends React.Component {
               onMouseLeave={ (child_node, e) => handleHover(child_node, e.target, node.data.children) }  
               onClick={ (child_node, e) => window.open(tick_map[child_node.indexValue], '_blank') }
               bttm_axis={{
-                renderTick: tick => {
-                  return <g key={tick.key} transform={ `translate(${tick.x},${tick.y + 16})` }>
+                renderTick: tick => (
+                  <g key={tick.value} transform={ `translate(${tick.x},${tick.y + 16})` }>
                     <a
                       href={ tick_map[tick.value] }
                       target="_blank" rel="noopener noreferrer"
@@ -290,15 +290,13 @@ class Goco extends React.Component {
                       <text
                         textAnchor="middle"
                         dominantBaseline="middle"
-                        style={{
-                          ...tick.theme.axis.ticks.text,
-                        }}
+                        style={{fill: "rgb(51, 51, 51)", fontSize: "12px"}}
                       >
                         <TspanLineWrapper text={tick.value} width={20}/>
                       </text>
                     </a>
-                  </g>;
-                },
+                  </g>
+                ),
               }}
             />
           </Fragment>
@@ -327,19 +325,17 @@ class Goco extends React.Component {
             onMouseLeave={ (node, e) => handleHover(node, e.target, graph_data) }
             onClick={ (node, e) => handleClick(node, e.target, graph_data) }
             bttm_axis={{
-              renderTick: tick => {
-                return <g key={tick.key} transform={ `translate(${tick.x},${tick.y + 16})` }>
+              renderTick: (tick,) => (
+                <g key={tick.value} transform={ `translate(${tick.x},${tick.y + 16})` }>
                   <text
                     textAnchor="middle"
                     dominantBaseline="middle"
-                    style={{
-                      ...tick.theme.axis.ticks.text,
-                    }}
+                    style={{fill: "rgb(51, 51, 51)", fontSize: "12px"}}
                   >
                     <TspanLineWrapper text={tick.value} width={15}/>
                   </text>
-                </g>;
-              },
+                </g>
+              ),
             }}
           />
         </div>
