@@ -427,7 +427,7 @@ export class NivoResponsiveLine extends React.Component {
       yScale,
       motion_damping,
       motion_stiffness,
-      enableDotLabel,
+      enablePointLabel,
       remove_bottom_axis,
       remove_left_axis,
       bttm_axis,
@@ -493,7 +493,7 @@ export class NivoResponsiveLine extends React.Component {
             colorBy,
             colors,
             theme,
-            enableDotLabel,
+            enablePointLabel,
             markers,
             legends,
             layers,
@@ -522,15 +522,13 @@ export class NivoResponsiveLine extends React.Component {
           animate={true}
           motionStiffness={motion_stiffness}
           motionDamping={motion_damping}
-          dotSize={stacked ? 0 : 10}
+          pointSize={stacked ? 0 : 10}
           areaOpacity={stacked ? 1 : 0}
         />
       </Fragment>
     );
   }
 }
-
-
 NivoResponsiveLine.defaultProps = {
   ...general_default_props,
   tooltip: (slice, tooltip_formatter) => default_tooltip(
@@ -548,7 +546,7 @@ NivoResponsiveLine.defaultProps = {
     tickSize: 7,
     tickPadding: 12,
   },
-  enableDotLabel: false,
+  enablePointLabel: false,
   enableArea: false,
   stacked: false,
   show_yaxis_zoom: true,
