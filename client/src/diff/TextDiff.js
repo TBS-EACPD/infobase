@@ -454,7 +454,7 @@ export default class TextDiffApp extends React.Component {
         <div style={{padding: '0px 0px 20px 0px'}}>
           <div className="medium_panel_text">
             <FancyCheckboxSelector
-              items={ _.filter(indicator_status, (status) => status.id!="indicator_desc_and_target_changed")}
+              items={indicator_status}
               callbackToggle={ id => {
                 indicator_status[id].active = !indicator_status[id].active;
                 this.setState({
