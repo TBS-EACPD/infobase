@@ -436,6 +436,7 @@ export class NivoResponsiveLine extends React.Component {
       stacked,
       theme,
       tooltip,
+      sliceTooltip,
       markers,
       legends,
       magnify_glass_translateX,
@@ -500,7 +501,8 @@ export class NivoResponsiveLine extends React.Component {
             legends,
             layers,
           }}
-          tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
+          tooltip={ (point) => tooltip( point, get_formatter(is_money, text_formatter, false) ) }
+          sliceTooltip={ ({slice}) => sliceTooltip( slice, get_formatter(is_money, text_formatter, false) ) }
           yScale={{
             stacked: !!stacked,
             type: "linear",
@@ -533,15 +535,24 @@ export class NivoResponsiveLine extends React.Component {
 }
 NivoResponsiveLine.defaultProps = {
   ...general_default_props,
-  tooltip: (slice, tooltip_formatter) => default_tooltip(
-    slice.data.map( 
-      (d) => ({
-        id: d.serie.id,
-        color: d.serie.color,
-        value: d.data.y,
-      })
-    ), 
-    tooltip_formatter,
+  tooltip: default_tooltip,
+  sliceTooltip: (slice, tooltip_formatter) => (
+    /*
+      Ugh, sliceTooltip doesn't put returned items inside the same containing element as tooltip, thanks nivo. 
+      Eyeball matched its style here, hacky and we'll have to keep an eye for the default changing out from underneath this
+    */
+    <div style={{backgroundColor: window.infobase_color_constants.backgroundColor, padding: '10px', fontSize: "14px"}}>
+      {default_tooltip(
+        slice.points.map( 
+          ({serieId, color, data}) => ({
+            id: serieId,
+            color: color,
+            value: data.y,
+          })
+        ), 
+        tooltip_formatter
+      )}
+    </div>
   ),
   colors: () => window.infobase_color_constants.textColor,
   bttm_axis: {
