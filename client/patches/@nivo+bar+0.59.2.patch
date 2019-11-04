@@ -1,0 +1,28 @@
+diff --git a/node_modules/@nivo/bar/dist/nivo-bar.esm.js b/node_modules/@nivo/bar/dist/nivo-bar.esm.js
+index cb2e370..13dea00 100644
+--- a/node_modules/@nivo/bar/dist/nivo-bar.esm.js
++++ b/node_modules/@nivo/bar/dist/nivo-bar.esm.js
+@@ -1,3 +1,5 @@
++// Patched to fix https://github.com/plouc/nivo/issues/448
++
+ import React, { Fragment, Component } from 'react';
+ import { TransitionMotion, spring } from 'react-motion';
+ import { defsPropTypes, noop, withTheme, withDimensions, withMotion, getAccessorFor, getLabelGenerator, bindDefs, Container, CartesianMarkers, SvgWrapper, getRelativeCursor, isCursorInRect, ResponsiveWrapper } from '@nivo/core';
+@@ -240,7 +242,7 @@ var generateVerticalStackedBars = function generateVerticalStackedBars(_ref) {
+           y += innerPadding * 0.5;
+           barHeight -= innerPadding;
+         }
+-        if (barHeight > 0) {
++        if (barHeight >= 0) {
+           var barData = {
+             id: stackedDataItem.key,
+             value: d.data[stackedDataItem.key],
+@@ -319,7 +321,7 @@ var generateHorizontalStackedBars = function generateHorizontalStackedBars(_ref2
+           x += innerPadding * 0.5;
+           barWidth -= innerPadding;
+         }
+-        if (barWidth > 0) {
++        if (barWidth >= 0) {
+           bars.push({
+             key: "".concat(stackedDataItem.key, ".").concat(index),
+             data: barData,

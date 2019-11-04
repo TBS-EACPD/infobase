@@ -78,6 +78,7 @@
     "nodemon": "^1.19.1",
     "null-loader": "^0.1.1",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "patch-package": "^6.2.0",
     "popper.js": "^1.14.6",
     "prop-types": "^15.6.2",
     "qrcode-generator": "^1.4.3",
@@ -137,7 +138,9 @@
     "ci_route_load_tests": "node browser-tests/route-load-tests.js --browser chromium --sandbox false --concurrency 8",
     "ci_serve": "http-server -s -a 127.0.0.1",
     "serve-loopback": "http-server -a 127.0.0.1",
-    "serve": "http-server"
+    "serve": "http-server",
+    "postinstall": "patch-package",
+    "postci": "patch-package"
   },
   "authors": [
     "Alex Cousineau-Leduc",

@@ -1,5 +1,5 @@
 import { ResponsiveLine } from '@nivo/line';
-import { ResponsiveBar } from './nivo-bar.js';
+import { ResponsiveBar } from '@nivo/bar';
 import { ResponsivePie } from '@nivo/pie';
 import { formats, dollar_formats } from "../core/format.js";
 import { Fragment } from 'react';
@@ -420,6 +420,7 @@ export class NivoResponsiveLine extends React.Component {
       max,
       min,
       enableArea,
+      enableSlices,
       enableGridX,
       enableGridY,
       left_axis,
@@ -490,6 +491,7 @@ export class NivoResponsiveLine extends React.Component {
             enableGridX,
             enableGridY,
             enableArea,
+            enableSlices,
             colorBy,
             colors,
             theme,
@@ -548,6 +550,7 @@ NivoResponsiveLine.defaultProps = {
   },
   enablePointLabel: false,
   enableArea: false,
+  enableSlices: "x",
   stacked: false,
   show_yaxis_zoom: true,
   yScale: {
