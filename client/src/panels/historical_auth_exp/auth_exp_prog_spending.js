@@ -187,7 +187,7 @@ class AuthExpProgSpending extends React.Component {
               d={lineGenerator(
                 data.map(d => ({
                   x: xScale(d.x),
-                  y: yScale(d.y),
+                  y: d.y != null ? yScale(d.y) : null,
                 }))
               )}
               fill="none"
