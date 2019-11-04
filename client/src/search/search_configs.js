@@ -57,6 +57,7 @@ const org_attributes_to_match = [
   'abbr',
   'other_lang_abbr',
   'other_lang_applied_title',
+  'pas_code',
 ];
 const LimitedDataDisplay = (search, name) => (
   <span className="search-grayed-out-hint">
