@@ -56,7 +56,7 @@ function render({calculations, footnotes, sources}) {
           indexBy = "title"
           enableLabel = {true}
           isInteractive = {false}
-          label_format = { d=><tspan y={-4}> {formats.compact1(d, {raw: true})} </tspan>}
+          label_format = { d => <tspan y={-6}> {formats.compact1(d, {raw: true})} </tspan>}
           colors = {({data, id}) => data[id] < 0 ? window.infobase_color_constants.highlightColor : window.infobase_color_constants.secondaryColor}
           enableGridX={false}
         />
