@@ -87,7 +87,7 @@ target_changed:
   en: Target changed
   fr: Cible changée
 
-no_diff:
+indicator_no_diff:
   en: No change
   fr: Aucun changement
 

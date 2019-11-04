@@ -24,7 +24,7 @@
   margin-bottom: 10px;
 }
 
-.text-diff__indicator-status--nochange, .text-diff__indicator-status--change, .text-diff__indicator-status--removed, .text-diff__indicator-status--added {
+.text-diff__indicator_no_diff, .text-diff__indicator_desc_changed, .text-diff__indicator_removed, .text-diff__indicator_added {
   border-width: 2px 2px 2px 4px;
   border-style: solid;
   padding: 2px 2px 2px 4px;
@@ -32,22 +32,22 @@
   margin: 10px;
 }
 
-.text-diff__indicator-status--nochange {
+.text-diff__indicator_no_diff {
   border-color: $infoDarkColor;
   background-color: $infoLightColor;
 }
 
-.text-diff__indicator-status--change {
+.text-diff__indicator_desc_changed {
   border-color: $warnDarkColor;
   background-color: $warnLightColor;
 }
 
-.text-diff__indicator-status--removed {
+.text-diff__indicator_removed {
   border-color: $failDarkColor;
   background-color: $failLightColor;
 }
 
-.text-diff__indicator-status--added {
+.text-diff__indicator_added {
   border-color: $successDarkColor;
   background-color: $successLightColor;
 }

@@ -79,13 +79,11 @@ const process_indicators = (matched_indicators, indicator_status) => {
         const target_diff = Diff.diffWords(indicator_target_text(indicator_pair[0], false), indicator_target_text(indicator_pair[1], false));        
         const target_explanation_diff = Diff.diffWords(indicator_pair[0].target_explanation || "", indicator_pair[1].target_explanation || "");
 
-        const status = _.max([target_diff.length, target_explanation_diff.length]) > 1 && _.max([name_diff.length, methodology_diff.length]) > 1 ?
-            "indicator_desc_and_target_changed" :
-            _.max([target_diff.length, target_explanation_diff.length]) > 1 ?
-            "target_changed" :
-            _.max([name_diff.length, methodology_diff.length]) > 1 ?
-            "indicator_desc_changed" :
-            "no_diff";
+        const status = _.compact([
+          _.max([target_diff.length, target_explanation_diff.length]) > 1 && "target_changed",
+          _.max([name_diff.length, methodology_diff.length]) > 1 && "indicator_desc_changed",
+          !(_.max([name_diff.length, methodology_diff.length, target_diff.length, target_explanation_diff.length]) > 1) && "indicator_no_diff",
+        ]);
         return {
           status,
           indicator1: indicator_pair[0],
@@ -97,13 +95,10 @@ const process_indicators = (matched_indicators, indicator_status) => {
         };
       }
       const indicator = indicator_pair[0];
-      const status = indicator.doc === previous_dp_key ?
-        "indicator_removed" :
-        (
-          indicator.doc === current_dp_key ? 
-            "indicator_added" : 
-            indicator.doc
-        );
+      const status = _.compact([
+        indicator.doc === previous_dp_key && "indicator_removed",
+        indicator.doc === current_dp_key && "indicator_added",
+      ]);
       return {
         status: status,
         indicator1: indicator,
@@ -114,12 +109,13 @@ const process_indicators = (matched_indicators, indicator_status) => {
         target_explanation_diff: [indicator.target_explanation],
       };
     })
-    // target_changed is subset of indicator_desc_changed so it must be included
     .filter(
-      row => indicator_status["indicator_desc_changed"].active && 
-        row.status === "target_changed" ?
-          true :
-          indicator_status[row.status].active
+      (row) => !_.chain(indicator_status)
+        .pickBy('active')
+        .keys()
+        .intersection(row.status)
+        .isEmpty()
+        .value()
     )
     .value();
   return processed_indicators;
@@ -128,7 +124,7 @@ const process_indicators = (matched_indicators, indicator_status) => {
 const no_difference = (text, key) => (
   <Fragment>
     <div className="text-diff__indicator-report__subheader" >
-      <h4>{`${text_maker(key)} (${text_maker("no_diff")})`}</h4>
+      <h4>{`${text_maker(key)} (${text_maker("indicator_no_diff")})`}</h4>
     </div>
     <div className="text-diff__indicator-report__row">
       <div>{text}</div>
@@ -215,56 +211,14 @@ const difference_report = (diff, key) => {
 };
 
 
-const get_status_flag = (indicator_status) => {
-  if(indicator_status === "indicator_desc_and_target_changed"){
-    return (
-      <Fragment>
-        <div className="text-diff__indicator-status--change">
-          {text_maker("indicator_desc_changed")}
-        </div>
-        <div className="text-diff__indicator-status--change">
-          {text_maker("target_changed")}
-        </div>
-      </Fragment>
-    );
-  }
-  if(indicator_status === "target_changed"){
-    return (
-      <div className="text-diff__indicator-status--change">
-        {text_maker("target_changed")}
-      </div>
-    );
-  }
-  if(indicator_status === "indicator_desc_changed"){
-    return (
-      <div className="text-diff__indicator-status--change">
-        {text_maker("indicator_desc_changed")}
-      </div>
-    );
-  }
-  if (indicator_status === "no_diff"){
-    return (
-      <div className="text-diff__indicator-status--nochange">
-        {text_maker("no_diff")}
-      </div>
-    );
-  }
-  if(indicator_status === "indicator_removed"){
-    return (
-      <div className="text-diff__indicator-status--removed">
-        {text_maker("indicator-removed", {second_year: current_dp_year})}
-      </div>
-    );
-  }
-  if(indicator_status === "indicator_added"){
-    return (
-      <div className="text-diff__indicator-status--added">
-        {text_maker("indicator-added", {second_year: current_dp_year})}
-      </div>
-    );
-  }
-  return "";
-};
+const get_status_flag = (indicator_status) => _.map(
+  indicator_status,
+  (status_key) => (
+    <div key={status_key} className={`text-diff__${status_key === "target_changed" ? "indicator_desc_changed" : status_key}`}>
+      {text_maker(status_key)}
+    </div>
+  )
+);
 
 
 const indicator_report = (processed_indicator) => (
@@ -300,7 +254,6 @@ export default class TextDiffApp extends React.Component {
     super(props);
     const colors = d3.scaleOrdinal().range([
       window.infobase_color_constants.primaryColor,
-      window.infobase_color_constants.primaryColor,
       window.infobase_color_constants.warnDarkColor,
       window.infobase_color_constants.successDarkColor,
       window.infobase_color_constants.failDarkColor,
@@ -313,12 +266,11 @@ export default class TextDiffApp extends React.Component {
       subject: get_subject_from_props(props),
       indicator_status_changed: false,
       indicator_status: _.reduce([
-        { id: "indicator_desc_and_target_changed" }, 
         { label: text_maker("indicator_desc_changed"), id: "indicator_desc_changed" }, 
         { label: text_maker("target_changed"), id: "target_changed" },
         { label: text_maker("indicator_added"), id: "indicator_added" }, 
         { label: text_maker("indicator_removed"), id: "indicator_removed" },
-        { label: text_maker("no_diff"), id: "no_diff" },
+        { label: text_maker("indicator_no_diff"), id: "indicator_no_diff" },
       ],
       (result, status) => {
         result[status.id] = {
