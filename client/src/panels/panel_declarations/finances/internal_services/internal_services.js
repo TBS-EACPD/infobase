@@ -126,7 +126,7 @@ export const declare_internal_services_panel = () => declare_panel({
             <NivoResponsiveBar
               data = {bar_data}
               indexBy = "date"
-              colorBy = {d => colors(d.id)}
+              colors = {({id}) => colors(id)}
               keys = {label_keys}
               is_money = {false}
               margin = {{

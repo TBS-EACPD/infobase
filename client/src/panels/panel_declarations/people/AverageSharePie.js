@@ -45,7 +45,7 @@ export const AverageSharePie = ({panel_args, sort_func}) => {
       <div className="average-share-pie__graph" style = {{height: '350px'}}>
         <NivoResponsivePie
           data = {data}
-          colorBy = {d => color_scale(d.id)}
+          colors = {({id}) => color_scale(id)}
           margin = {{
             'top': 30,
             'right': 40,

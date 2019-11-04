@@ -144,7 +144,7 @@ class HistoricalProgramBars extends React.Component {
             data = {data_formatter}
             keys = {Object.keys(graph_data)}
             indexBy = "year"
-            colorBy ={d => colors(d.id)}
+            colors = {({id}) => colors(id)}
             margin = {{
               top: 50,
               right: 20,
@@ -336,7 +336,7 @@ class DetailedProgramSplit extends React.Component {
                 bottom: 30,
                 left: 215,
               }}
-              colorBy = {d => colors(d.id)}
+              colors = {({id}) => colors(id)}
               bttm_axis = {{
                 tickSize: 5,
                 tickPadding: 5,

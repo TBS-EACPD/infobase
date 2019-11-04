@@ -177,7 +177,7 @@ class Goco extends React.Component {
           </div>
         ),
         padding: 0.1,
-        colorBy: d => colors(d.id),
+        colors: ({id}) => colors(id),
         keys: series_labels,
         groupMode: "grouped",
         width: 200,

@@ -748,7 +748,7 @@ class BudgetMeasureHBars extends React.Component {
           .value(),
         enableLabel: true,
         label: d => formatter(d.value),
-        colorBy: d => biv_value_colors(d.id),
+        colors: ({id}) => biv_value_colors(id),
         margin: {
           top: 20,
           right: 20,

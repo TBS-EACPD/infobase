@@ -125,7 +125,7 @@ class HistTPTypes extends React.Component {
             enableArea = {true}
             show_yaxis_zoom = {false}
             data = {expenditure_data}
-            colorBy={d => colors(d.id)}
+            colors = {({id}) => colors(id)}
             stacked = {true}
           />
         </div>
@@ -282,7 +282,7 @@ class DetailedHistTPItems extends React.Component {
               "bottom": 50,
               "left": 70,
             }}
-            colorBy={d=>color_scale(d.id)}
+            colors = {({id}) => color_scale(id)}
           />
         </div>
       </div>

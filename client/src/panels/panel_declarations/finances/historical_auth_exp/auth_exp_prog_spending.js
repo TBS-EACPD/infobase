@@ -205,7 +205,7 @@ class AuthExpProgSpending extends React.Component {
       const nivo_default_props = {
         data: graph_data,
         raw_data: raw_data,
-        colorBy: d => colors(d.id),
+        colors: ({id}) => colors(id),
         magnify_glass_translateX: 80,
         magnify_glass_translateY: 70,
         tooltip: (slice, tooltip_formatter) => (

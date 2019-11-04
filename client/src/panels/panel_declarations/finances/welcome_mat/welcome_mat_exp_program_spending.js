@@ -146,7 +146,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
     const nivo_exp_program_spending_props = {
       raw_data: raw_data,
       data: graph_data,
-      colorBy: d => colors(d.id),
+      colors: ({id}) => colors(id),
       enableGridY: false,
       remove_left_axis: true,
       show_yaxis_zoom: false,

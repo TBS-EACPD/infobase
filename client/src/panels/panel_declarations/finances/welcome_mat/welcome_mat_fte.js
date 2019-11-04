@@ -144,7 +144,7 @@ export const format_and_get_fte = (type, info, subject) => {
       min: _.min(raw_data) * 0.9,
       max: _.max(raw_data) * 1.1,
       is_money: false,
-      colorBy: d => colors(d.id),
+      colors: ({id}) => colors(id),
       enableGridY: false,
       remove_left_axis: true,
       show_yaxis_zoom: false,

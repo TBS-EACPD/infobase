@@ -90,7 +90,7 @@ class SobjLine extends React.Component {
               bottom: 90,
               left: 70,
             }}
-            colorBy={d => colors(d.id)}
+            colors = {(id) => colors(id)}
           />
         </div>
       </div>

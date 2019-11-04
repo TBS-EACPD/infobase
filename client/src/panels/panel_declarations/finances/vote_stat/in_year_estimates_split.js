@@ -85,7 +85,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
           isInteractive = {false}
           enableLabel = {true}
           indexBy = "label"
-          colorBy = {d => d.data[d.id] < 0 ? window.infobase_color_constants.highlightColor : window.infobase_color_constants.secondaryColor}
+          colors = {({data, id}) => data[id] < 0 ? window.infobase_color_constants.highlightColor : window.infobase_color_constants.secondaryColor}
           margin = {{            
             top: 50,
             right: 40,

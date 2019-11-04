@@ -126,7 +126,7 @@ const CommonDonut = function({graph_data, legend_data, graph_height}){
       <div style = {{height: graph_height}}>
         <NivoResponsivePie
           data = {graph_data}
-          colorBy = {d=>color_scale(d.label)}
+          colors = {({label}) => color_scale(label)}
           total = {total}
         />
       </div>
@@ -294,9 +294,9 @@ class LineBarToggleGraph extends React.Component {
     const extended_graph_options_bar = {
       keys: Object.keys(series),
       data: extra_graph_options.normalized ? 
-       data_formatter_bar(normalize(data_bar)) : 
-       data_formatter_bar(data_bar),
-      colorBy: d => colors(d.id),
+        data_formatter_bar(normalize(data_bar)) : 
+        data_formatter_bar(data_bar),
+      colors: ({id}) => colors(id),
       text_formatter: formatter || extra_graph_options.formatter,
       indexBy: extra_graph_options.index,
       is_money: !!extra_graph_options.is_money,
@@ -317,7 +317,7 @@ class LineBarToggleGraph extends React.Component {
 
     const extended_graph_options_line = {
       data: data_formatter_line,
-      colorBy: d => colors(d.id),
+      colors: ({id}) => colors(id),
       raw_data,
       yScale: { 
         type: "linear",

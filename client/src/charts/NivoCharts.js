@@ -543,7 +543,7 @@ NivoResponsiveLine.defaultProps = {
     ), 
     tooltip_formatter,
   ),
-  colors: window.infobase_color_constants.textColor,
+  colors: () => window.infobase_color_constants.textColor,
   bttm_axis: {
     tickSize: 7,
     tickPadding: 12,
