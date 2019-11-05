@@ -139,8 +139,8 @@
     "ci_serve": "http-server -s -a 127.0.0.1",
     "serve-loopback": "http-server -a 127.0.0.1",
     "serve": "http-server",
-    "postinstall": "patch-package",
-    "postci": "patch-package"
+    "postinstall": "npx patch-package",
+    "postci": "npx patch-package"
   },
   "authors": [
     "Alex Cousineau-Leduc",
