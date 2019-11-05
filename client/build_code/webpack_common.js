@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const { BundleStatsWebpackPlugin } = require('bundle-stats');
+const path = require('path');
 
 const CDN_URL = process.env.CDN_URL || ".";
 const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
@@ -56,6 +57,11 @@ const get_rules = ({
       exclude: /node_modules/,
       use: js_module_loader_rules,
       sideEffects: true,
+    },
+    { // these wretched modules have the gaul to throw modern JS in our face. Have to respect dropping IE11 support, but we aren't there yet ourselves. Transpile 'em!
+      include: /node_modules\/(d3-.*|delaunator)/,
+      test: /\.js$/,
+      use: js_module_loader_rules,
     },
     {
       test: /\.css$/,
