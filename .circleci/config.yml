@@ -24,8 +24,8 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   test_email_backend:
     docker:
-      - image: docker.io/eaad/ib-ci-build:latest
-        <<: *gcloud_auth
+      - image: docker.io/eaadtbs/ib-ci-build:latest
+        <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
       - checkout:
@@ -55,6 +55,7 @@ jobs:
   cleanup_dev_dbs:
     docker:
       - image: gcr.io/ib-static-content/ib-client-ci-test:latest
+        <<: *gcloud_auth
     working_directory: "~/InfoBase"
     steps:
       - checkout:
@@ -82,8 +83,8 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   build:
     docker:
-      - image: docker.io/eaad/ib-ci-build:latest
-        <<: *gcloud_auth
+      - image: docker.io/eaadtbs/ib-ci-build:latest
+        <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
       - checkout:
