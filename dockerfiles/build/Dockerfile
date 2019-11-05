@@ -3,7 +3,7 @@ FROM mhart/alpine-node:latest
 ENV SERVICE_USER build-image-user
 ENV SERVICE_HOME /home/${SERVICE_USER}
 
-# commom
+# common
 RUN adduser -h ${SERVICE_HOME} -s /sbin/nologin -u 1000 -D ${SERVICE_USER} && \
   apk update && apk upgrade && \
   apk add --no-cache \
