@@ -134,7 +134,7 @@
     "a11y_prod": "node build_code/webpack_starter.js PROD BOTH a11y_client",
     "a11y_prod_no_watch": "node build_code/webpack_starter.js PROD BOTH NO-WATCH a11y_client",
     "route_load_tests": "node browser-tests/route-load-tests.js --browser chrome",
-    "ci_route_load_tests": "node browser-tests/route-load-tests.js --browser chromium --sandbox false --concurrency 8",
+    "ci_route_load_tests": "node browser-tests/route-load-tests.js --browser chromium --sandbox false --concurrency 6",
     "ci_serve": "http-server -s -a 127.0.0.1",
     "serve-loopback": "http-server -a 127.0.0.1",
     "serve": "http-server"
