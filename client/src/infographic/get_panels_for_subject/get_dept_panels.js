@@ -43,7 +43,7 @@ import { declare_estimates_in_perspective_panel } from "../../panels/vote_stat/e
 import { declare_spend_by_so_hist_panel } from "../../panels/sobj/spend_by_so_hist.js";
 import { declare_igoc_fields_panel } from '../../panels/igoc/igoc_panel.js';
 import { declare_last_year_g_and_c_perspective_panel } from "../../panels/transfer_payments/last_year_g_and_c_perspective.js";
-//import { declare_internal_services_panel } from '../../panels/internal_services/isc.js';
+import { declare_internal_services_panel } from '../../panels/internal_services/isc.js';
 
 // To be safe, ensure all used has_<data> checks are loaded
 export const get_dept_panels = subject => ensure_loaded({
@@ -70,6 +70,7 @@ export const get_dept_panels = subject => ensure_loaded({
     declare_detailed_program_spending_split_panel(),
     declare_drr_planned_actual_panel(),
     declare_dp_rev_split_panel(),
+    declare_internal_services_panel(),
   ],
   people: _.includes(subject.tables, 'orgEmployeeType') && get_people_panels(subject),
   results: subject.has_data('results_data') && [

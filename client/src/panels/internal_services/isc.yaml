@@ -7,7 +7,7 @@ internal_service_panel_text:
   en: |
     Last year ({{pa_last_year}}), **{{fmt_percentage1 isc_fte_pct}}** of {{gl_tt "employees" "FTE"}} in {{subj_name subject}} worked for internal service programs. In comparison, government as a whole uses **{{fmt_percentage1 gov_isc_fte_pct}}** of its workforce for internal services.
   fr: |
-    L'an dernier ({{pa_last_year}}), **{{fmt_percentage1 isc_fte_pct}}** des {{gl_tt "FTE" "employés"}} dans l'organisation {{subj_name subject}} travaillaient pour des programmes de services internes.
+    L'an dernier ({{pa_last_year}}), **{{fmt_percentage1 isc_fte_pct}}** des {{gl_tt "employés" "FTE"}} dans l'organisation {{subj_name subject}} travaillaient pour des programmes de services internes.
 
 other_programs:
   en: Other programs
