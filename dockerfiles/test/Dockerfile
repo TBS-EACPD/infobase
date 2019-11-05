@@ -1,11 +1,21 @@
 FROM mhart/alpine-node:latest
-RUN apk update && apk upgrade && \
-    apk add --no-cache \
+
+ENV SERVICE_USER test-image-user
+ENV SERVICE_HOME /home/${SERVICE_USER}
+
+RUN adduser -h ${SERVICE_HOME} -s /sbin/nologin -u 1000 -D ${SERVICE_USER} && \
+  apk update && apk upgrade && \
+  apk add --no-cache \
     udev \
     xvfb \
     chromium \
     ca-certificates \ 
     mongodb \
-    git
+    git \
+    bash
+
 RUN mkdir -p /data/db # create default mongodb data directory
-RUN apk add --no-cache bash
+
+USER    ${SERVICE_USER}
+WORKDIR ${SERVICE_HOME}
+VOLUME  ${SERVICE_HOME}
