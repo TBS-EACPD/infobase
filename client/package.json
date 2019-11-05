@@ -111,7 +111,8 @@
     "webfontloader": "^1.6.28",
     "webkit-line-clamp": "^1.2.0",
     "webpack": "^4.41.0",
-    "whatwg-fetch": "^2.0.4"
+    "whatwg-fetch": "^2.0.4",
+    "yargs": "^14.2.0"
   },
   "sideEffects": false,
   "devDependencies": {},
@@ -132,9 +133,8 @@
     "a11y_dev": "node build_code/webpack_starter.js BOTH a11y_client",
     "a11y_prod": "node build_code/webpack_starter.js PROD BOTH a11y_client",
     "a11y_prod_no_watch": "node build_code/webpack_starter.js PROD BOTH NO-WATCH a11y_client",
-    "browser_route_load_tests": "node browser-tests/route-load-tests.js CHROME",
-    "headless_route_load_tests": "node browser-tests/route-load-tests.js CHROME HEADLESS",
-    "ci_route_load_tests": "node browser-tests/route-load-tests.js CHROMIUM HEADLESS NO_SANDBOX",
+    "route_load_tests": "node browser-tests/route-load-tests.js --browser chrome",
+    "ci_route_load_tests": "node browser-tests/route-load-tests.js --browser chromium --sandbox false",
     "ci_serve": "http-server -s -a 127.0.0.1",
     "serve-loopback": "http-server -a 127.0.0.1",
     "serve": "http-server"
