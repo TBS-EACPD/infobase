@@ -1,19 +1,5 @@
 import text from './isc.yaml';
 import { GlossaryEntry } from '../../models/glossary.js';
-
-/*
-  snippet to get orgs sorted by isc fte % 
-
-  _.chain(_Subject.Dept.get_all())
-    .map(org => ({ 
-      org: org.name, 
-      pct: (_.get(_Table.lookup('programFtes').horizontal("{{pa_last_year}}"), `Internal Services.${org.id}`) ||0) / (_Table.lookup('programFtes').q(org).sum("{{pa_last_year}}")) 
-    })).reject( ({pct}) => _.isNaN(pct) )
-    .sortBy('pct')
-    .reverse()
-    .value()
-
-*/
 import { 
   InfographicPanel, 
   Subject, 
@@ -38,7 +24,7 @@ export const declare_internal_services_panel = () => declare_panel({
   panel_config_func: (level, panel_key) => ({
     depends_on: ['programFtes', "programSpending"],
     title: "internal_service_panel_title",
-    calculate(subject,info){
+    calculate(subject, info){
       const { programFtes } = this.tables;
   
       const isc_crsos = _.filter(subject.crsos, "is_internal_service");
@@ -52,12 +38,14 @@ export const declare_internal_services_panel = () => declare_panel({
       const last_year_fte_col = "{{pa_last_year}}";
       const gov_fte_total = programFtes.q(Gov).sum(last_year_fte_col);
       const gov_isc_fte = programFtes.q(isc_tag).sum(last_year_fte_col);
-  
+
+      const isc = text_maker("internal_services");
+      const non_isc = text_maker("other_programs");
       const series = _.map(std_years, yr => {
         const isc_amt = _.sum( _.map(isc_crsos, crso => programFtes.q(crso).sum(yr) ) );
         return {
-          isc: isc_amt,
-          non_isc: programFtes.q(subject).sum(yr) - isc_amt,
+          [isc]: isc_amt,
+          [non_isc]: programFtes.q(subject).sum(yr) - isc_amt,
         };
       });
   
@@ -65,7 +53,7 @@ export const declare_internal_services_panel = () => declare_panel({
       if(total_fte === 0){
         return false;
       }
-      const isc_fte = _.last(series).isc;
+      const isc_fte = _.last(series)[isc];
   
       return {
         gov_fte_total,
@@ -81,27 +69,26 @@ export const declare_internal_services_panel = () => declare_panel({
       const {
         subject,
         graph_args: {
-  
           gov_fte_total,
           gov_isc_fte,
           total_fte,
           isc_fte,
-  
           series,
         },
       } = calculations;
-  
+
       const more_footnotes = [{
         text: GlossaryEntry.lookup("INT_SERVICES").definition,
       }].concat(footnotes);
       const years = _.map(std_years, yr => run_template(yr));
-      const isc_label=text_maker("internal_services");
-      const other_label = text_maker("other_programs");
-      const bar_series = _.fromPairs([
-        [ isc_label, _.map(series, 'isc') ],
-        [ other_label, _.map(series, "non_isc") ],
-      ]);
-  
+      const label_keys = [text_maker("internal_services"), text_maker("other_programs")];
+      const colors = infobase_colors();
+
+      const bar_series = _.reduce(label_keys, (result, label_value) => {
+        _.assign( result, _.fromPairs([[label_value, _.map(series, label_value)]]) );
+        return result;
+      }, {});
+
       const bar_data = _.map(
         years,
         (date, date_index) =>({
@@ -112,17 +99,24 @@ export const declare_internal_services_panel = () => declare_panel({
             .value(),
         })
       );
-    
-      const colors = infobase_colors();
-  
+
+      const legend_items = _.reduce(label_keys, (result, label_value) => {
+        result.push({
+          id: label_value,
+          label: label_value,
+          color: colors(label_value),
+        });
+        return result;
+      }, []);
+
       const to_render = <div>
         <div className="medium_panel_text" style={{marginBottom: "15px"}}>
           <TM
             k="internal_service_panel_text"
             args={{
               subject,
-              isc_fte_pct: isc_fte/total_fte,
-              gov_isc_fte_pct: gov_isc_fte/gov_fte_total,
+              isc_fte_pct: isc_fte / total_fte,
+              gov_isc_fte_pct: gov_isc_fte / gov_fte_total,
             }}
           />
         </div>
@@ -130,18 +124,7 @@ export const declare_internal_services_panel = () => declare_panel({
           <div className="fcol-md-3">
             <div className="well legend-container">
               <GraphLegend
-                items={[
-                  {
-                    color: colors(isc_label),
-                    label: isc_label,
-                    id: isc_label,
-                  },
-                  {
-                    id: other_label,
-                    label: other_label,
-                    color: colors(other_label),
-                  },
-                ]}
+                items={legend_items}
               />
             </div>
           </div>
@@ -150,7 +133,7 @@ export const declare_internal_services_panel = () => declare_panel({
               data = {bar_data}
               indexBy = "date"
               colorBy = {d => colors(d.id)}
-              keys = {[isc_label, other_label]}
+              keys = {label_keys}
               is_money = {false}
               margin = {{
                 top: 15,
