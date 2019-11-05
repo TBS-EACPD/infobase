@@ -250,7 +250,7 @@ class AuthExpProgSpending extends React.Component {
           && _.includes(active_series, text_maker("authorities")
           )
         && {
-          layers: ['grid', 'markers', 'areas', DashedLine, 'slices', 'dots', 'axes', 'legends'],
+          layers: ['grid', 'markers', 'areas', DashedLine, 'slices', 'points', 'axes', 'legends'],
         }),
         ...(marker_year && _.includes(active_series, text_maker("planned_spending")) && {
           markers: [
