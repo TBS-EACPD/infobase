@@ -27,6 +27,12 @@ const get_options_from_args = () => {
       type: 'boolean',
       default: true,
     })
+    .option('concurrency', {
+      alias: 'c',
+      description: 'Testcafe browser concurrency',
+      type: 'number',
+      default: 2,
+    })
     .help()
     .alias('help', 'h')
     .argv;
@@ -36,6 +42,7 @@ const get_options_from_args = () => {
     chromium: _.includes(argv.browser, 'chromium'),
     no_sandbox: !argv.sandbox,
     headless: argv.headless,
+    concurrency: argv.concurrency,
   };
 };
 
@@ -103,14 +110,14 @@ const run_tests = (test_dir, options) => {
         const test_negative_routes = () => runner
           .src(negative_tests)
           .browsers(browsers)
-          .concurrency(2)
+          .concurrency(options.concurrency)
           .reporter('spec') // the default testcafe reporter, sending to stdout by default
           .run({"skipJsErrors": true}); // ignore JS errors when testing that failing routes fail, they're expected
 
         const test_positive_routes = () => runner
           .src(positive_tests)
           .browsers(browsers)
-          .concurrency(4)
+          .concurrency(options.concurrency)
           .reporter('spec')
           .run();
 
