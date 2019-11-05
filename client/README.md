@@ -11,7 +11,6 @@ Client-side code and content for the GC InfoBase. / Code et contenu pour le côt
 
 ## Table of Contents
 - [GC InfoBase](#gc-infobase)
-  - [Table of Contents](#table-of-contents)
   - [Getting Started](#getting-started)
     - [First time setup](#first-time-setup)
     - [Building the InfoBase](#building-the-infobase)
@@ -19,15 +18,6 @@ Client-side code and content for the GC InfoBase. / Code et contenu pour le côt
   - [Tests](#tests)
     - [Browser tests](#browser-tests)
       - [Route load tests](#route-load-tests)
-- [InfoBase du GC](#infobase-du-gc)
-  - [Table des matières](#table-des-mati%c3%a8res)
-  - [Commencer](#commencer)
-    - [Première installation](#premi%c3%a8re-installation)
-    - [Lancez la compilation de l'InfoBase](#lancez-la-compilation-de-linfobase)
-    - [Visitez une copie locale](#visitez-une-copie-locale)
-  - [Tests](#tests-1)
-    - [Tests de navigateur](#tests-de-navigateur)
-      - [Tests de chargement](#tests-de-chargement)
 
 ## Getting Started
 
@@ -72,17 +62,7 @@ InfoBase du GC
 
 ## Table des matières 
 
-- [GC InfoBase](#gc-infobase)
-  - [Table of Contents](#table-of-contents)
-  - [Getting Started](#getting-started)
-    - [First time setup](#first-time-setup)
-    - [Building the InfoBase](#building-the-infobase)
-    - [Visiting a local build](#visiting-a-local-build)
-  - [Tests](#tests)
-    - [Browser tests](#browser-tests)
-      - [Route load tests](#route-load-tests)
 - [InfoBase du GC](#infobase-du-gc)
-  - [Table des matières](#table-des-mati%c3%a8res)
   - [Commencer](#commencer)
     - [Première installation](#premi%c3%a8re-installation)
     - [Lancez la compilation de l'InfoBase](#lancez-la-compilation-de-linfobase)
