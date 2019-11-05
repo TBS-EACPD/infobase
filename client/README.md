@@ -11,6 +11,7 @@ Client-side code and content for the GC InfoBase. / Code et contenu pour le côt
 
 ## Table of Contents
 - [GC InfoBase](#gc-infobase)
+  - [Table of Contents](#table-of-contents)
   - [Getting Started](#getting-started)
     - [First time setup](#first-time-setup)
     - [Building the InfoBase](#building-the-infobase)
@@ -18,6 +19,15 @@ Client-side code and content for the GC InfoBase. / Code et contenu pour le côt
   - [Tests](#tests)
     - [Browser tests](#browser-tests)
       - [Route load tests](#route-load-tests)
+- [InfoBase du GC](#infobase-du-gc)
+  - [Table des matières](#table-des-mati%c3%a8res)
+  - [Commencer](#commencer)
+    - [Première installation](#premi%c3%a8re-installation)
+    - [Lancez la compilation de l'InfoBase](#lancez-la-compilation-de-linfobase)
+    - [Visitez une copie locale](#visitez-une-copie-locale)
+  - [Tests](#tests-1)
+    - [Tests de navigateur](#tests-de-navigateur)
+      - [Tests de chargement](#tests-de-chargement)
 
 ## Getting Started
 
@@ -50,7 +60,7 @@ Note: if you use `npm run serve` you can connect from other devices on your loca
 Route load tests are a quick and dirty form of fairly basic coverage. They just ensure that all routes are able to load without throwing an error. 
 1. Do a full prod build (run both `IB_prod` and `a11y_prod`)
 2. Have an active `npm run serve-loopback` process
-3. `npm run headless_route_load_tests`
+3. `npm run route_load_tests`
 
 New route load tests can be added in `browser-tests/route-load-tests-config.js`.
 
@@ -62,7 +72,17 @@ InfoBase du GC
 
 ## Table des matières 
 
+- [GC InfoBase](#gc-infobase)
+  - [Table of Contents](#table-of-contents)
+  - [Getting Started](#getting-started)
+    - [First time setup](#first-time-setup)
+    - [Building the InfoBase](#building-the-infobase)
+    - [Visiting a local build](#visiting-a-local-build)
+  - [Tests](#tests)
+    - [Browser tests](#browser-tests)
+      - [Route load tests](#route-load-tests)
 - [InfoBase du GC](#infobase-du-gc)
+  - [Table des matières](#table-des-mati%c3%a8res)
   - [Commencer](#commencer)
     - [Première installation](#premi%c3%a8re-installation)
     - [Lancez la compilation de l'InfoBase](#lancez-la-compilation-de-linfobase)
@@ -103,7 +123,7 @@ Les tests de chargement fournissent une couverture de test de la forme « quick-
 
 1. Construire une version complète (Exécutez `IB_prod` et `a11y_prod`)
 2. Assurez-vous qu'un processus `npm run serve-loopback` est active
-3. `npm run headless_route_load_tests`
+3. `npm run route_load_tests`
 
 Vous pouvez ajouter les tests additionnels dans le fichier `browser-tests/route-load-tests-config.js`.
 

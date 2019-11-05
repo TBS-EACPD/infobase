@@ -3,27 +3,40 @@ const _ = require("lodash");
 const fs = require("fs");
 const createTestCafe = require('testcafe');
 const rimraf = require("rimraf");
+const yargs = require("yargs");
 
 const { route_load_tests_config } = require('./route-load-tests-config.js');
 
-const choose = (args, arg_name) => (args.indexOf(arg_name) > -1) && arg_name;
-const get_options_from_args = (args) => {
-  const arg_options = {
-    chrome: !!choose(args, 'CHROME'),
-    chromium: !!choose(args, 'CHROMIUM'),
-    no_sandbox: !!choose(args, 'NO_SANDBOX'),
-    headless: !!choose(args, 'HEADLESS'),
-  };
+const get_options_from_args = () => {
+  const argv = yargs
+    .options('browser', {
+      alias: 'b',
+      description: 'Browsers to test with. Options are {chrome, chromium}',
+      type: 'array',
+      default: ['chrome'],
+    })
+    .option('sandbox', {
+      alias: 's',
+      description: 'Sandbox browser',
+      type: 'boolean',
+      default: true,
+    })
+    .option('headless', {
+      alias: 'hl',
+      description: 'Run browser in headless mode',
+      type: 'boolean',
+      default: true,
+    })
+    .help()
+    .alias('help', 'h')
+    .argv;
 
-  // If neither browser option passed, defaults to chrome
-  if ( !arg_options.chrome && !arg_options.chromium ){
-    return {
-      ...arg_options,
-      chrome: true,
-    };
-  } else {
-    return arg_options;
-  }
+  return {
+    chrome: _.includes(argv.browser, 'chrome'),
+    chromium: _.includes(argv.browser, 'chromium'),
+    no_sandbox: !argv.sandbox,
+    headless: argv.headless,
+  };
 };
 
 const test_configs_from_route_config = (route_config) => _.map(
@@ -124,13 +137,12 @@ const run_tests = (test_dir, options) => {
 
 
 const route_load_tests = (config) => {
-  const args = process.argv;
-  const options = get_options_from_args(args);
+  const options = get_options_from_args();
 
   // Make a temp directory to hold the test files to be generated from the config 
   const temp_dir = fs.mkdtempSync('browser-tests/temp-route-tests-');
 
-  console.log('\n  Generating route test files from config...\n');
+  //console.log('\n  Generating route test files from config...\n');
 
   // Could have a lot of files to write, so doing it async while the config's being parsed
   const test_file_write_promises = _.flatMap(
@@ -153,7 +165,7 @@ const route_load_tests = (config) => {
                 if (err){
                   reject(err);
                 } else {
-                  console.log(`    ${test_file_object.file_name}`);
+                  //console.log(`    ${test_file_object.file_name}`);
                   resolve();
                 }
               }
