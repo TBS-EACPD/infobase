@@ -97,7 +97,7 @@ const run_tests = (test_dir, options) => {
         const test_positive_routes = () => runner
           .src(positive_tests)
           .browsers(browsers)
-          .concurrency(2)
+          .concurrency(4)
           .reporter('spec')
           .run();
 
