@@ -4,6 +4,11 @@ gcloud_auth: &gcloud_auth
     username: _json_key
     password: $GCLOUD_JSON_AUTH
 
+dockerhub_auth: &dockerhub_auth
+  auth:
+    username: $DOCKERHUB_USERNAME
+    password: $DOCKERHUB_PASSWORD
+
 # yaml fragment for deploy filters
 deploy_filter: &deploy_filter 
   filters:
@@ -20,6 +25,7 @@ jobs:
   test_email_backend:
     docker:
       - image: docker.io/eaad/ib-ci-build:latest
+        <<: *gcloud_auth
     working_directory: "~/InfoBase"
     steps:
       - checkout:
