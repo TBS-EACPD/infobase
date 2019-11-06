@@ -12,7 +12,7 @@ import { sanitized_dangerous_inner_html } from '../../general_utils.js';
 const { budget_values } = businessConstants;
 const { BudgetMeasure } = Subject;
 
-const value_formatter = value => formats.compact1(value, {raw: true});
+const value_formatter = value => formats.compact1_written(value, {raw: true});
 
 const name_and_value_cell_formatter = node => {
   if (node.data.type === "budget_measure" || node.data.type === "net_adjust"){
