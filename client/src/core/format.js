@@ -143,11 +143,7 @@ const types_to_format = {
   "decimal2": (val, lang, options) => number_formatter[lang][2].format(val),
   "decimal": (val, lang, options) => number_formatter[lang][3].format(val),
   "big_int": (val, lang, options) => {
-    const value = _.isArray(val) ?
-      _.map(val, x => x/1000) :
-      val/1000;
-    
-    const rtn = number_formatter[lang][0].format(value);
+    const rtn = number_formatter[lang][0].format(val);
 
     if (options.raw){
       return rtn;
@@ -155,7 +151,6 @@ const types_to_format = {
       return `<span class='text-nowrap'>${rtn}</span>`;
     }
   },
-  "big_int_real": (val, lang, options) => types_to_format["big_int"](val*1000, lang, options),
   "int": (val) => val,
   "ordinal": (val) => val,
   "str": (val) => val,
