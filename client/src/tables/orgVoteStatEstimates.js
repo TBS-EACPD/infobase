@@ -114,7 +114,7 @@ export default {
     _.each(estimates_years, (yr, ix) => { 
       this.add_col({
         "simple_default": ix === 4,
-        type: "big_int_real",
+        type: "big_int",
         nick: yr+"_estimates",
         description: {
           en: "Tabled Amounts for "+yr,

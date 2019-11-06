@@ -98,7 +98,7 @@ export const declare_employee_executive_level_panel = () => declare_panel({
                   graph_options: {
                     y_axis: text_maker("employees"),
                     ticks: ticks,
-                    formatter: formats.big_int_real_raw,
+                    formatter: formats.big_int_raw,
                   },
                   initial_graph_mode: "bar_stacked",
                   data: graph_args,

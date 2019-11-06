@@ -74,7 +74,7 @@ export default {
     });
     _.each(std_years, (header, ix) => {
       this.add_col(
-        { "type": "big_int_real",
+        { "type": "big_int",
           "simple_default": ix===4,
           "nick": header,
           "header": {
@@ -89,7 +89,7 @@ export default {
     });
 
     this.add_col({ 
-      "type": "big_int_real",
+      "type": "big_int",
       "nick": "drr_last_year" ,
       "hidden": true,
       "header": {
@@ -103,7 +103,7 @@ export default {
     });
     _.each(planning_years, (header)=>{
       this.add_col({ 
-        "type": "big_int_real",
+        "type": "big_int",
         "nick": header,
         "header": {
           "en": header + "  " + m("Planned FTEs"),

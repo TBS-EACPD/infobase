@@ -92,7 +92,7 @@ export const declare_employee_totals_panel = () => declare_panel({
                                  </td>
                                  <td style={{padding: '3px 5px'}}> {tooltip_item.serie.id} </td>
                                  <td style = {{padding: '3px 5px'}}> {tooltip_item.data.x}</td>
-                                 <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: formats.big_int_real(tooltip_item.data.y)}} />
+                                 <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: formats.big_int(tooltip_item.data.y)}} />
                                </tr>
                              )
                            )}

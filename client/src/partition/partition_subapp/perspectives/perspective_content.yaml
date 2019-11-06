@@ -83,7 +83,7 @@ partition_popup_fte_value_split:
         {{gt "employed"}}
       {{/if}}
       </br> 
-      {{fmt_big_int_real fte}} {{gt "ftes"}}
+      {{fmt_big_int fte}} {{gt "ftes"}}
     </span>
 partition_popup_name:
   handlebars_partial: true
@@ -141,7 +141,7 @@ partition_popup_org_info_child_org_count:
   text: |
     <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
         {{gt "contains"}}
-        {{fmt_big_int_real org_info}}
+        {{fmt_big_int org_info}}
         {{#if plural_child_orgs}}
           {{gt "orgs"}}
         {{else}}
@@ -314,31 +314,31 @@ partition_org_info_was:
   transform: [handlebars]
   en: |
     We have
-    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int x}}</a></p>
     Federal Organizations and Interests
   fr: |
     Nous avons
-    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int x}}</a></p>
     organisations et intérêts fédéraux
 partition_org_info_federal_orgs_by_inst_form_was:
   transform: [handlebars]
   en: |
     We have
-    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int x}}</a></p>
     Federal Organizations
   fr: |
     Nous avons
-    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int x}}</a></p>
     organisations fédérales
 partition_org_info_interests_by_inst_form_was:
   transform: [handlebars]
   en: |
     We have
-    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int x}}</a></p>
     Interests
   fr: |
     Nous avons
-    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#igoc'>{{rawfmt_big_int x}}</a></p>
     intérêts
 partition_spending_was:
   transform: [handlebars]
@@ -356,12 +356,12 @@ partition_fte_was:
   transform: [handlebars]
   en: |
     We employed  
-    <p class='amount'><a class='partition-link-out' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int x}}</a></p>
     FTEs in
     <span class='text-nowrap'>{{pa_last_year}}</span> 
   fr: |
     Nous avons employé  
-    <p class='amount'><a class='partition-link-out' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int x}}</a></p>
     ETP en
     <span class='text-nowrap'>{{pa_last_year}}</span>
 partiton_default_was_root:
@@ -371,12 +371,12 @@ partition_fte_will_be:
   transform: [handlebars]
   en: |
     We will be employing   
-    <p class='amount'><a class='partition-link-out' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int x}}</a></p>
     in
     <span class='text-nowrap'>{{planning_year_1}}</span> 
   fr: |
     Nous emploieront   
-    <p class='amount'><a class='partition-link-out' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int_real x}}</a></p>
+    <p class='amount'><a class='partition-link-out' href='#orgs/gov/gov/infograph/financial'>{{rawfmt_big_int x}}</a></p>
     ETP en
     <span class='text-nowrap'>{{planning_year_1}}</span>
 

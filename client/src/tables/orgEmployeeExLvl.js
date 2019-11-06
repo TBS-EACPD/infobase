@@ -64,7 +64,7 @@ export default {
     _.each(people_years, (header,ix)=>{
       this.add_col({
         "simple_default": ix === 4,
-        "type": "big_int_real",
+        "type": "big_int",
         "nick": header,
         "header": m("{{mar_31}}") + ", " + people_years_short_second[ix],
         "description": {

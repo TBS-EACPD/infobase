@@ -22,13 +22,13 @@ const get_common_popup_options = d => {
 
 const wrap_in_brackets = (text) => " (" + text + ")";
 
-const { compact1, big_int_real } = formats; 
+const { compact1, big_int } = formats; 
 
 const formats_by_data_type = {
   "exp": compact1,
-  "fte": big_int_real,
+  "fte": big_int,
   "estimates": compact1,
-  "org_info": big_int_real,
+  "org_info": big_int,
 };
 
 const data_types = [

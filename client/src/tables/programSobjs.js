@@ -83,7 +83,7 @@ export default {
     const years = _.takeRight(std_years, 3);
     years.forEach(yr=> {
       this.add_col({ 
-        "type": "big_int_real",
+        "type": "big_int",
         "nick": yr,
         "simple_default": true,
         "header": yr,
