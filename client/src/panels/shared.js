@@ -502,9 +502,9 @@ export const PlannedActualTable = ({
       </tr>
       <tr>
         <th scope="row"> <TM k="ftes"/> </th>
-        <td> <Format type="big_int_real" content={planned_ftes} /> </td>
-        <td> <Format type="big_int_real" content={actual_ftes} /> </td>
-        <td> <Format type="big_int_real" content={diff_ftes} /> </td>
+        <td> <Format type="big_int" content={planned_ftes} /> </td>
+        <td> <Format type="big_int" content={actual_ftes} /> </td>
+        <td> <Format type="big_int" content={diff_ftes} /> </td>
       </tr>
     </tbody> 
   </table>

@@ -60,7 +60,7 @@ class CanadaGraphBarLegend extends React.Component {
     };
 
     const formatted_data = format_prov_data(prov,years_by_province);
-    const formatter = formats["big_int_real_raw"];
+    const formatter = formats["big_int_raw"];
     return (
       <Fragment>
         <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
@@ -122,7 +122,7 @@ class CanadaGraph extends React.Component {
 
     const graph_area_sel = d3.select( ReactDOM.findDOMNode(this.graph_area.current) );
 
-    const formatter = formats["big_int_real_raw"];
+    const formatter = formats["big_int_raw"];
     const ticks = _.map(people_years, y => `${run_template(y)}`);
     
     const canada_graph = new Canada(graph_area_sel.node(), {
@@ -215,7 +215,7 @@ class ProvPanel extends React.Component {
     };
 
     const legend_items = _.map( color_scale.ticks(5).reverse(), (tick) => ({
-      label: `${formats["big_int_real_raw"](tick)}+`,
+      label: `${formats["big_int_raw"](tick)}+`,
       active: true,
       id: tick,
       color: get_graph_color( color_scale(tick) ),

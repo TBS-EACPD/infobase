@@ -69,7 +69,7 @@ export const format_and_get_fte = (type, info, subject) => {
           })
           .flatten()
           .value();
-        const formatted_data = formatter("big_int_real", filtered_data, {raw: true});
+        const formatted_data = formatter("big_int", filtered_data, {raw: true});
         formatted_data.length > 0 ? formatted_data.splice(null_index, 0, null) : null;
         return {
           label: raw_row.label,

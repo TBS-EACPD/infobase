@@ -69,7 +69,7 @@ export default {
     _.each(people_years,(header,ix)=>{
       this.add_col({
         "simple_default": ix === 4,
-        "type": "big_int_real",
+        "type": "big_int",
         "nick": header,
         "header": m("{{mar_31}}") + ", " + people_years_short_second[ix],
         "description": {
@@ -129,7 +129,7 @@ export default {
       });
     },
     "high_level_rows_with_percentage": function(year) {
-      var fm1 = formats["big_int_real"];
+      var fm1 = formats["big_int"];
       var fm2 = formats.percentage;
       var column = _.map(this.data, year);
       var dept_total = d3.sum(column);

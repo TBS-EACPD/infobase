@@ -29,8 +29,8 @@ const { TM, text_maker } = create_text_maker_component([treemap_text]);
 
 const format_display_number = (value, is_fte = false, raw = false) =>
   raw ?
-    is_fte ? `${formats.big_int_real_raw(Math.round(value))} ${text_maker("fte")}` : formats.compact1_raw(value) :
-    is_fte ? `${formats.big_int_real(Math.round(value))} ${text_maker("fte")}` : formats.compact1(value);
+    is_fte ? `${formats.big_int_raw(Math.round(value))} ${text_maker("fte")}` : formats.compact1_raw(value) :
+    is_fte ? `${formats.big_int(Math.round(value))} ${text_maker("fte")}` : formats.compact1(value);
 
 
 function generate_infograph_href(d, data_area) {

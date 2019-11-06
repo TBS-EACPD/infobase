@@ -105,7 +105,7 @@ export const declare_employee_type_panel = () => declare_panel({
                     graph_options: {
                       ticks: ticks,
                       y_axis: text_maker("employees"),
-                      formatter: formats.big_int_real_raw,
+                      formatter: formats.big_int_raw,
                     },
                     initial_graph_mode: "bar_stacked",
                     data: graph_args,

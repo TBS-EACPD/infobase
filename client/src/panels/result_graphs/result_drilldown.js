@@ -80,7 +80,7 @@ const get_non_col_content_func = createSelector(
           <DlItem
             key={2}
             term={<span className="nowrap">{fte_header(doc) }</span>}
-            def={<Format type="big_int_real" content={resources ? resources.ftes : 0} />}
+            def={<Format type="big_int" content={resources ? resources.ftes : 0} />}
           />
         ),
         _.nonEmpty(subject.old_name) && (

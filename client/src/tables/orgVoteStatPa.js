@@ -103,7 +103,7 @@ export default {
       this.add_col(header)
         .add_child([
           {
-            "type": "big_int_real",
+            "type": "big_int",
             "nick": header + "auth",
             "header": {
               "en": "Total budgetary authority available for use",
@@ -115,7 +115,7 @@ export default {
             },
           },{
             "simple_default": i === 4,
-            "type": "big_int_real",
+            "type": "big_int",
             "nick": header + "exp",
             "header": {
               "en": "Expenditures",

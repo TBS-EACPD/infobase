@@ -12,7 +12,7 @@ const get_formatter = (is_money, formatter, raw = true) => (
   _.isUndefined(formatter) ?
     ( 
       !is_money ? 
-        (value) => formats.big_int_real(value, {raw}) :
+        (value) => formats.big_int(value, {raw}) :
         (
           raw ? 
             (value) => dollar_formats.compact2_raw(value) : 

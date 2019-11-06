@@ -22,10 +22,10 @@ const proportional_block = () =>
       <rect className="mutLegendBG" fill="white" stroke="black" strokeWidth="2" width="60" height="60" />
       <rect className="mutLegendBG" fill="white" stroke="black" strokeWidth="2" width="30" height="30" />
       <text className="breakLabels" x="25" y="25" style={{ textAnchor: "end", display: "block" }} >
-        {`${formats.big_int_real_raw(25)}`}
+        {`${formats.big_int_raw(25)}`}
       </text>
       <text className="breakLabels" x="55" y="55" style={{ textAnchor: "end", display: "block" }} >
-        {`${formats.big_int_real_raw(100)}`}
+        {`${formats.big_int_raw(100)}`}
       </text>
     </g>
   </svg>;

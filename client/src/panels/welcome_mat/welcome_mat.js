@@ -27,7 +27,7 @@ const actual_history_years = _.map(std_years, run_template);
 const { text_maker, TM } = create_text_maker_component(text);
 
 const SpendFormat = ({amt}) => <Format type="compact1" content={amt} />;
-const FteFormat = ({amt}) => <Format type="big_int_real" content={amt} />;
+const FteFormat = ({amt}) => <Format type="big_int" content={amt} />;
 
 const get_estimates_source_link = subject => {
   const table = Table.lookup('orgVoteStatEstimates');

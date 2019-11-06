@@ -44,7 +44,7 @@ export const get_col_defs = ({doc}) => [
       />
     ),
     get_val: node => _.get(node, "data.resources.ftes"),
-    val_display: val => _.isNumber(val) ? <Format type="big_int_real" content={val} /> : null,
+    val_display: val => _.isNumber(val) ? <Format type="big_int" content={val} /> : null,
   },
 ];
 

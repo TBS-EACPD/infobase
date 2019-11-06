@@ -77,7 +77,7 @@ export default {
       this.add_col(header)
         .add_child([
           {
-            "type": "big_int_real",
+            "type": "big_int",
             "simple_default": ix === 4,
             "nick": `${header}exp`,
             "header": {
@@ -92,7 +92,7 @@ export default {
         ]);
     });
     this.add_col({
-      "type": "big_int_real",
+      "type": "big_int",
       "nick": "drr_last_year",
       "hidden": true,
       "header": {
@@ -108,7 +108,7 @@ export default {
       this.add_col(header)
         .add_child([
           {
-            "type": "big_int_real",
+            "type": "big_int",
             "nick": header,
             "header": {
               "en": "Planned Spending",
@@ -120,17 +120,17 @@ export default {
             },
           },
           {
-            "type": "big_int_real",
+            "type": "big_int",
             "nick": `${header}_rev`,
             hidden: true,
           },
           {
-            "type": "big_int_real",
+            "type": "big_int",
             "nick": `${header}_spa`,
             hidden: true,
           },
           {
-            "type": "big_int_real",
+            "type": "big_int",
             "nick": `${header}_gross`,
             hidden: true,
           },

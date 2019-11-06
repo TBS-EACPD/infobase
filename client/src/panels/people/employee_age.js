@@ -136,7 +136,7 @@ export const declare_employee_age_panel = () => declare_panel({
         graph_options: {
           ticks: ticks,
           y_axis: text_maker("employees"),
-          formatter: formats.big_int_real_raw,
+          formatter: formats.big_int_raw,
         },
         initial_graph_mode: "bar_grouped",
         data: graph_args.age_group,

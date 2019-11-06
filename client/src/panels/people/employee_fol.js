@@ -119,7 +119,7 @@ export const declare_employee_fol_panel = () => declare_panel({
                     graph_options: {
                       y_axis: text_maker("employees"),
                       ticks: ticks,
-                      formatter: formats.big_int_real_raw,
+                      formatter: formats.big_int_raw,
                     },
                     initial_graph_mode: "bar_grouped",
                     data: graph_args,

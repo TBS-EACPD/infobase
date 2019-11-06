@@ -68,10 +68,10 @@ spending_will_be_1:
 fte_will_be_1:
   transform: [handlebars]
   en: |
-    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int_real will_be_1}}</div>
+    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int will_be_1}}</div>
     <div class="mat-grid__inner-panel mat-grid__inner-panel--small">FTEs will be employed</div>
   fr: |
-    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int_real will_be_1}}</div>
+    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int will_be_1}}</div>
     <div class="mat-grid__inner-panel mat-grid__inner-panel--small">ETP seront employés</div>
 
 spending_will_be_3:
@@ -86,10 +86,10 @@ fte_will_be_3:
   transform: [handlebars]
   en: |
     <div class="mat-grid__inner-panel mat-grid__inner-panel--small">number of FTEs is {{will_change_to plan_change ""}}</div>
-    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int_real will_be}}</div>
+    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int will_be}}</div>
   fr: |
     <div class="mat-grid__inner-panel mat-grid__inner-panel--small">le nombre d'ETP prévus {{fr_will_change_to plan_change "m" "s" ""}}</div>
-    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int_real will_be}}</div>
+    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int will_be}}</div>
 
 spending_was:
   transform: [handlebars]
@@ -169,10 +169,10 @@ fte_will_be_1__new:
 fte_was:
   transform: [handlebars]
   en: |
-    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int_real was}}</div>
+    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int was}}</div>
     <div class="mat-grid__inner-panel mat-grid__inner-panel--small">FTEs were employed</div>
   fr: |
-    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int_real was}}</div>
+    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int was}}</div>
     <div class="mat-grid__inner-panel mat-grid__inner-panel--small">ETP étaient employés</div>
 spending_change_was:
   transform: [handlebars]
@@ -186,10 +186,10 @@ fte_change_was:
   transform: [handlebars]
   en: | 
     <div class="mat-grid__inner-panel mat-grid__inner-panel--small">number of FTEs {{changed_to hist_change ""}}</div>
-    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int_real changed_to}}</div>
+    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int changed_to}}</div>
   fr: | 
     <div class="mat-grid__inner-panel mat-grid__inner-panel--small">le nombre d'ETP {{fr_changed_to hist_change "m" "s" ""}}</div>
-    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int_real changed_to}}</div>
+    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int changed_to}}</div>
 spending_change_will:
   transform: [handlebars]
   en: | 
@@ -202,10 +202,10 @@ fte_change_will:
   transform: [handlebars]
   en: | 
     <div class="mat-grid__inner-panel mat-grid__inner-panel--small">number of FTEs is {{will_change_to plan_change ""}}</div>
-    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int_real will_be}}</div>
+    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int will_be}}</div>
   fr: | 
     <div class="mat-grid__inner-panel mat-grid__inner-panel--small">le nombre d'ETP prévus {{fr_will_change_to plan_change "m" "s" ""}}</div>
-    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int_real will_be}}</div>
+    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int will_be}}</div>
 spending_authority_this_year:
   transform: [handlebars]
   en: | 
