@@ -408,7 +408,7 @@ export class Table extends mix().with(staticStoreMixin){
         // need to handle special cases of '.', '', and '-'
         if ( _.includes(['percentage', 'decimal', 'decimal1', 'percentage1', 'percentage2'], type) && !_.isNaN(parseFloat(val)) ){
           row_obj[key]=parseFloat(val);
-        } else if ( (type === 'big_int' || type === "big_int" || type === 'int') && !_.isNaN(parseInt(val,10))){
+        } else if ( (type === 'big_int' || type === 'int') && !_.isNaN(parseInt(val,10))){
           row_obj[key]=parseInt(val,10);
         } else if (_.includes(['.','','-'], val) && _.includes(['percentage', 'decimal', 'decimal1', 'percentage1', 'percentage2', 'big_int', 'big_int', 'int'], type) ){
           row_obj[key]=0;
