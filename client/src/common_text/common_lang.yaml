@@ -756,10 +756,6 @@ results_overview:
   en: Results at a glance 
   fr: Aperçu sur les résultats
 
-in_thousands:
-  en: "($000)"
-  fr: "(en milliers de dollars)"
-
 difference:
   en: Difference
   fr: Différence
