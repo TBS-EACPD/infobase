@@ -35,7 +35,7 @@ export default {
   },
 
   "title": {
-    "en": "Tabled Estimates by Core Responsibility ($000)",
+    "en": "Tabled Estimates by Core Responsibility",
     "fr": "Budgets déposés par responsabilité essentielle (en milliers de dollars)",
   },
 

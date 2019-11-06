@@ -32,8 +32,8 @@ export default {
   },
 
   "title": { 
-    "en": "Expenditures by Standard Object from {{pa_last_year_5}} to {{pa_last_year}} ($000)",
-    "fr": "Dépenses par article courant de {{pa_last_year_5}} à {{pa_last_year}} (en milliers de dollars)",
+    "en": "Expenditures by Standard Object from {{pa_last_year_5}} to {{pa_last_year}} ($)",
+    "fr": "Dépenses par article courant de {{pa_last_year_5}} à {{pa_last_year}} (en dollars)",
   },
 
 
@@ -66,7 +66,7 @@ export default {
     });
     _.each(std_years, (header, i) => {
       this.add_col({ 
-        "type": "big_int_real",
+        "type": "big_int",
         "simple_default": i === 4,
         "nick": header,
         "header": header,

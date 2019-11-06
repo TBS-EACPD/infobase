@@ -39,8 +39,8 @@ export default {
     "fr": "Dépenses de programmes par article courant",
   },
   "title": { 
-    "en": "Program Expenditures by Standard Object {{pa_last_year}} ($000)",
-    "fr": "Dépenses de programmes par article courant {{pa_last_year}} (en milliers de dollars)",
+    "en": "Program Expenditures by Standard Object {{pa_last_year}} ($)",
+    "fr": "Dépenses de programmes par article courant {{pa_last_year}} (en dollars)",
   },
   add_cols () {
     this.add_col( {

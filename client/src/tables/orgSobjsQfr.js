@@ -29,8 +29,8 @@ export default {
   },
 
   "title": { 
-    "en": "Expenditures by Standard Object (QFR) ($000)",
-    "fr": "Dépenses par article courant (RFT) (en milliers de dollars)",
+    "en": "Expenditures by Standard Object (QFR) ($)",
+    "fr": "Dépenses par article courant (RFT) (en dollars)",
   },
 
   rpb_banner: trivial_text_maker("temp_qfr_late_depts_note"),

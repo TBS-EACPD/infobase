@@ -32,8 +32,8 @@ export default {
   },
 
   title: { 
-    en: "Authorities and Expenditures (QFR) ($000)",
-    fr: "Autorisations et dépenses (RFT) (en milliers de dollars)",
+    en: "Authorities and Expenditures (QFR) ($)",
+    fr: "Autorisations et dépenses (RFT) (en dollars)",
   },
 
   rpb_banner: trivial_text_maker("temp_qfr_late_depts_note"),
