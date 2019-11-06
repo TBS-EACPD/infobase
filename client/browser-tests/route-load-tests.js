@@ -149,7 +149,7 @@ const route_load_tests = (config) => {
   // Make a temp directory to hold the test files to be generated from the config 
   const temp_dir = fs.mkdtempSync('browser-tests/temp-route-tests-');
 
-  //console.log('\n  Generating route test files from config...\n');
+  console.log('\n  Generating route test files from config...\n');
 
   // Could have a lot of files to write, so doing it async while the config's being parsed
   const test_file_write_promises = _.flatMap(
@@ -172,7 +172,7 @@ const route_load_tests = (config) => {
                 if (err){
                   reject(err);
                 } else {
-                  //console.log(`    ${test_file_object.file_name}`);
+                  console.log(`    ${test_file_object.file_name}`);
                   resolve();
                 }
               }
