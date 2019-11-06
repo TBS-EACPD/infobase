@@ -1,6 +1,6 @@
 import { IconQuestion } from '../icons/icons.js';
 import { GlossaryEntry } from '../models/glossary.js';
-import { glossary_href } from '../link_utils.js'
+import { glossary_href } from '../link_utils.js';
 
 export const GlossaryIcon = ({id, alternate_text, arrow_selector, inner_selector, icon_color, icon_alt_color}) => (
   ( window.is_a11y_mode || window.feature_detection.is_mobile() ) ?
