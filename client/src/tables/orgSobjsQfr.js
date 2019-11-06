@@ -68,7 +68,7 @@ export default {
     this.add_col("{{qfr_in_year}}")
       .add_child([
         {
-          "type": "big_int",
+          "type": "big_int_real",
           "nick": "plannedexp",
           "header": {
             "en": "Planned expenditures for the year ending {{qfr_in_year_end}}",
@@ -80,7 +80,7 @@ export default {
           },
         },
         {
-          "type": "big_int",
+          "type": "big_int_real",
           "nick": 'thisyear_quarterexpenditures',
           "header": {
             "en": "Expended during the quarter ended {{qfr_month_name}}, {{qfr_in_year_short_first}}",
@@ -92,7 +92,7 @@ export default {
           },
         },
         {
-          "type": "big_int",
+          "type": "big_int_real",
           "simple_default": true,
           "nick": "in_year_ytd-exp",
           "header": {
@@ -108,7 +108,7 @@ export default {
     this.add_col("{{qfr_last_year}}")
       .add_child([
         {
-          "type": "big_int",
+          "type": "big_int_real",
           "nick": "last_year_plannedexp",
           "header": {
             "en": "Planned expenditures for the year ending {{qfr_last_year_end}}",
@@ -120,7 +120,7 @@ export default {
           },
         },
         {
-          "type": "big_int",
+          "type": "big_int_real",
           "nick": 'lastyear_quarterexpenditures',
           "header": {
             "en": "Expended during the quarter ended {{qfr_month_name}}, {{qfr_last_year_short_first}}",
@@ -132,7 +132,7 @@ export default {
           },
         },
         {
-          "type": "big_int",
+          "type": "big_int_real",
           "nick": "last_year_ytd-exp",
           "header": {
             "en": "Year to date used at quarter-end",

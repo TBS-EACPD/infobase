@@ -83,7 +83,7 @@ export default {
     this.add_col("{{qfr_in_year}}")
       .add_child([
         {
-          "type": "big_int",
+          "type": "big_int_real",
           "nick": 'thisyearauthorities',
           "header": {
             "en": "Total available for use for the year ending {{qfr_in_year_end}}",
@@ -94,7 +94,7 @@ export default {
             "fr": "Correspondent aux autorisations accordées par le Parlement, y compris les virements d'autres organisations, les crédits centraux ou les rajustements disponibles pour emploi à la fin du trimestre. Ceci ne comprend que les autorisations disponibles et octroyées par le Parlement à la fin du trimestre.",
           },
         }, {
-          "type": "big_int",
+          "type": "big_int_real",
           "nick": 'thisyear_quarterexpenditures',
           "header": {
             "en": "Used during the quarter ended {{qfr_month_name}}, {{qfr_in_year_short_first}}",
@@ -105,7 +105,7 @@ export default {
             "fr": "Correspondent aux dépenses faites à partir des autorisations disponibles pour le trimestre sélectionné.",
           },
         }, {
-          "type": "big_int",
+          "type": "big_int_real",
           "simple_default": true,
           "nick": 'thisyearexpenditures',
           "header": {
@@ -120,7 +120,7 @@ export default {
       ]);
     this.add_col("{{qfr_last_year}}")
       .add_child([{
-        "type": "big_int",
+        "type": "big_int_real",
         "nick": 'lastyearauthorities',
         "header": {
           "en": "Total available for use for the year ending {{qfr_last_year_end}}",
@@ -132,7 +132,7 @@ export default {
         },
       },
       {
-        "type": "big_int",
+        "type": "big_int_real",
         "nick": 'lastyear_quarterexpenditures',
         "header": {
           "en": "Used during the quarter ended {{qfr_month_name}}, {{qfr_last_year_short_first}} ",
@@ -144,7 +144,7 @@ export default {
         },
       },
       {
-        "type": "big_int",
+        "type": "big_int_real",
         "nick": 'lastyearexpenditures',
         "header": {
           "en": "Year to date used at quarter-end",
@@ -168,7 +168,7 @@ export default {
       if (!format){
         return data;
       }
-      return FORMAT.list_formatter(['big_int','big_int',"percentage"], data);
+      return FORMAT.list_formatter(['big_int_real','big_int_real',"percentage"], data);
     },
     "exp_change": function(format) {
       // returns last year, this year, and change
@@ -180,7 +180,7 @@ export default {
       if (!format){
         return data;
       }
-      return FORMAT.list_formatter(['big_int','big_int',"percentage"], data);
+      return FORMAT.list_formatter(['big_int_real','big_int_real',"percentage"], data);
     },
   },
 
