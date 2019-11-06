@@ -25,7 +25,7 @@ dept_employee_age_text:
    De **{{fmt_big_int_real dept_head_count_age_first_active_year}}** à **{{fmt_big_int_real dept_head_count_age_last_active_year}}**, les personnes âgées de **{{fmt_big_int_real dept_head_count_age_top}}** constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 dept_head_count_age_top_avg_percent}}**) d’employés **{{de_dept dept}}**.
 
    Au cours de cette période, **l’âge moyen** des employés **{{de_dept dept}}** **{{fr_two_value_changed_to dept_avgage_first_active_value dept_avgage_last_active_value "m" "s" "fmt_decimal1"}}**.
-   Aux fins de comparaison, l’âge moyen des employés de la **fonction publique fédérale** **{{fr_two_value_changed_to gov_avgage_last_year_5 gov_avgage_last_year "m" "s" "fmt_decimal1"}}**.
+   Aux fins de comparaison, l’âge moyen de tous les employés de la **fonction publique fédérale** **{{fr_two_value_changed_to gov_avgage_last_year_5 gov_avgage_last_year "m" "s" "fmt_decimal1"}}**.
 
 gov_employee_age_text_temporary_no_avg_age:
   transform: [handlebars,markdown]
