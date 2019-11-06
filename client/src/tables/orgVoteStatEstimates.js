@@ -49,8 +49,8 @@ export default {
   },
 
   "title": {
-    "en": "Tabled Estimates ($000)",
-    "fr": "Budgets déposés (en milliers de dollars)",
+    "en": "Tabled Estimates ($)",
+    "fr": "Budgets déposés (en dollars)",
   },
 
   "footnote-topics": {

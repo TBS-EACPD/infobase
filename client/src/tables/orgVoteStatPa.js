@@ -53,8 +53,8 @@ export default {
   },
 
   title: { 
-    en: "Authorities and Actual Expenditures from {{pa_last_year_5}} to {{pa_last_year}} ($000)",
-    fr: "Autorisations et dépenses réelles {{pa_last_year_5}} à {{pa_last_year}} (en milliers de dollars)",
+    en: "Authorities and Actual Expenditures from {{pa_last_year_5}} to {{pa_last_year}} ($)",
+    fr: "Autorisations et dépenses réelles {{pa_last_year_5}} à {{pa_last_year}} (en dollars)",
   },
 
 

@@ -26,8 +26,8 @@ export default {
     fr: "Dépenses de programme par type d'autorisation",
   },
   title: { 
-    en: "Program Expenditures by Authority Type {{pa_last_year}} ($000)",
-    fr: "Dépenses de programme par type d'autorisation {{last_year}} (en milliers de dollars)",
+    en: "Program Expenditures by Authority Type {{pa_last_year}} ($)",
+    fr: "Dépenses de programme par type d'autorisation {{last_year}} (en dollars)",
   },
   add_cols: function(){
     this.add_col( {
