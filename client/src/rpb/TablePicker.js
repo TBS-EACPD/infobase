@@ -5,8 +5,7 @@ import { GlossaryEntry } from '../models/glossary.js';
 import { Fragment } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import classNames from 'classnames';
-import { IconQuestion } from '../icons/icons.js';
-import { AlertBanner } from '../components';
+import { AlertBanner, GlossaryIcon } from '../components';
 
 import { 
   categories,
@@ -262,25 +261,6 @@ class TaggedItemCloud extends React.Component {
         .map(c => _.filter(tags,{ "id": c }))
         .flatten()
         .value()]));
-    
-    const generate_glossary_tooltip = (concept_id, container) => (
-      <div
-        className="tag-glossary-item"
-        aria-hidden="true"
-        tabIndex="0"
-        data-toggle="tooltip"
-        data-ibtt-glossary-key={concept_id}
-        data-ibtt-html="true"
-        data-ibtt-arrowselector="TablePicker__tooltip-arrow"
-        data-ibtt-innerselector="TablePicker__tooltip-inner"
-      >
-        <IconQuestion
-          color={window.infobase_color_constants.backgroundColor}
-          alternate_color={window.infobase_color_constants.primaryColor}
-          vertical_align={"-0.6em"}
-        />
-      </div>
-    );
 
     return <div>
       <div style={{padding: '0px'}}>
@@ -307,7 +287,11 @@ class TaggedItemCloud extends React.Component {
                     </button>
                     { GlossaryEntry.lookup(id) &&
                       <span className="tag-button-helper" tabIndex="0" >
-                        {generate_glossary_tooltip(id, document.getElementById("tbp-main"))}
+                        <GlossaryIcon
+                          id={id}
+                          inner_selector={"TablePicker__tooltip-inner"}
+                          arrow_selector={"TablePicker__tooltip-arrow"}
+                        />
                       </span>
                     }
                   </li>
