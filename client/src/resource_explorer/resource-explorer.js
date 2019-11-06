@@ -6,11 +6,11 @@ import classNames from 'classnames';
 
 import { 
   infograph_href_template,
-  glossary_href,
 } from '../link_utils.js';
 import { StandardRouteContainer } from '../core/NavComponents';
 import { get_col_defs } from '../gen_expl/resource-explorer-common.js';
 import { Subject } from '../models/subject.js';
+import { GlossaryEntry } from '../models/glossary.js';
 import { current_drr_key, current_dp_key } from '../models/results.js';
 import { 
   create_text_maker_component,
@@ -19,6 +19,7 @@ import {
   TabbedControls,
   Details,
   AlertBanner,
+  GlossaryIcon,
 } from '../components/index.js';
 
 
@@ -39,44 +40,11 @@ import {
 } from '../gen_expl/state_and_memoizing';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { Explorer } from '../components/ExplorerComponents.js';
-import { IconQuestion } from '../icons/icons';
 
 const INCLUDE_OTHER_TAGS = true;
 const { text_maker, TM } = create_text_maker_component(explorer_text);
 
 const dp_only_schemes = ["MLT"];
-
-
-
-const get_image_glossary_tooltip = (id) => {
-  const glossary_link = glossary_href(id);
-
-  const img = <span
-    style={{marginLeft: "10px"}}
-    aria-hidden="true"
-    tabIndex="0"
-    data-toggle="tooltip"
-    data-ibtt-glossary-key={id}
-    data-ibtt-html="true"
-  >
-    <IconQuestion
-      inline={true}
-      color={window.infobase_color_constants.tertiaryColor}
-      alternate_color={window.infobase_color_constants.primaryColor}
-    />
-  </span>;
-
-  return glossary_link && (
-    window.feature_detection.is_mobile() ? 
-      img :
-      <a 
-        href={glossary_link} 
-        style={{lineHeight: 1.5}}
-      >
-        {img}
-      </a>
-  );
-};
 
 const children_grouper = (node, children) => {
   if(node.root){
@@ -292,7 +260,6 @@ class ExplorerPage extends React.Component {
     // DRR_TODO: all refine the check for including other tags, drr18 has all the tags dp19 does
     const all_category_props = [ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props, hi_props] : []) ];
     const current_category = _.find(all_category_props, props => props.active);
-
     return <div>
       <div style={{marginBottom: '35px'}}>
         <TM k="tag_nav_intro_text" el="div" />
@@ -338,7 +305,13 @@ class ExplorerPage extends React.Component {
           </div>
           <h2 style={{marginBottom: "10px"}}>
             { current_category && current_category.text }
-            { current_category && get_image_glossary_tooltip(current_category.id) }
+            { current_category && GlossaryEntry.lookup(current_category.id) && 
+              <GlossaryIcon
+                id={current_category.id}
+                icon_color={window.infobase_color_constants.tertiaryColor}
+                icon_alt_color={window.infobase_color_constants.primaryColor}
+              />
+            }
           </h2>
           { is_m2m &&
             <AlertBanner banner_class="danger">
