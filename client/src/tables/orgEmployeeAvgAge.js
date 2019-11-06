@@ -144,33 +144,6 @@ Statistics.create_and_register({
     add("avgage_first_active_value",dept_data[first_active]);
     add("avgage_last_active_year",m(people_years[last_active]));
     add("avgage_last_active_value",dept_data[last_active]);
-    
-    const dept_avg_change = _.chain(dept_data)
-      .filter((d,i) => ((i>= first_active) && (i <= last_active)))
-      .reduce((memo, val, i, dept_data) => {
-        if ((i+1) < dept_data.length) {
-          return (memo*i + (dept_data[i+1]-val))/(i+1);
-        } else {
-          return memo;
-        }
-      },0)
-      .value();
-    
-    add("avgage_avg_change",dept_avg_change);
-    
-    const gov_avg_change = _.chain(people_years)
-      .filter((d,i) => ((i>= first_active) && (i <= last_active)))
-      .map(y => table.GOC[0][y])
-      .reduce((memo, val, i, dept_data) => {
-        if ((i+1) < dept_data.length) {
-          return (memo*i + (dept_data[i+1]-val))/(i+1);
-        } else {
-          return memo;
-        }
-      },0)
-      .value();
-    
-    add("gov_avgage_avg_change",gov_avg_change);
   },
 });
 
