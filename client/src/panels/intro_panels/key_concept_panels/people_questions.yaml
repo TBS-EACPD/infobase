@@ -1,7 +1,6 @@
 who_is_fps_q: 
   en: Who is the Federal Public Service?
   fr: Qu’est-ce que la fonction publique fédérale?
-
 who_is_fps_a:
   transform: [handlebars, markdown]
   en: |
@@ -10,38 +9,9 @@ who_is_fps_a:
     La fonction publique fédérale comprend les organisations incluses dans l'administration publique centrale (ministères et organismes mentionnés aux annexes I et IV de la _Loi sur la gestion des finances publiques (LGFP)_, pour lesquels le Conseil du Trésor est l'employeur) et les organismes distincts (les organisations citées à l'annexe V de la LGFP).
 
 
-what_are_emp_tenures_q:
-  en: What are "employment tenures"?
-  fr: Quels sont les types d’employés?
-
-
-what_are_emp_tenures_a:
-  transform: [handlebars, markdown]
-  en: |
-    Employment tenure relates to the duration of an employment contract
-      * Indeterminate or Permanent employees are persons appointed to the Public Service whose contract is of an unspecified duration.
-      * Term employees are persons appointed for a specified period of time in accordance with Section 58 of the _Public Service Employment Act (PSEA)_.
-      * Casual employees are hired for specified periods that may not exceed 90 working days in one calendar year, in a department or in an agency to which the Public Service Commission has exclusive authority to make appointments. The period of casual employment may be for one or more than one term, but is not to exceed 90 working days in a department or agency in a calendar year. Casual employees can either work on a part-time or full-time basis and are not covered by collective agreements.
-      * Student employees are hired under one of the government’s student employment programs. They must be: 
-        * registered as a full-time secondary or post-secondary student in an accredited institution; 
-        * currently recognized as having full-time status by the academic institution; and, 
-        * returning to full-time studies in the next academic term.   
-  fr: |
-    Par type d'employé, on entend la nature de la nomination à la fonction publique. Il y a quatre types d'employé :
-      * Par employé permanent ou nommé pour une période indéterminée, on entend toute personne nommée à un poste de la fonction publique pour une période indéfinie.
-      * Par employé nommé pour une période déterminée, on entend une personne nommée pour une période définie aux termes de l'article 58 de la _Loi sur l'emploi dans la fonction publique (LEFP)_.
-      * Les employés occasionnels sont des travailleurs embauchés pour une période déterminée ne dépassant pas 90 jours ouvrables par année civile dans un ministère ou organisme pour lequel la Commission de la fonction publique (CFP) a le pouvoir exclusif de faire des nominations. La période d'emploi temporaire peut être pour une ou plusieurs périodes déterminées, mais elle ne doit pas dépasser 90 jours ouvrables dans un ministère ou organisme par année civile. Les employés occasionnels peuvent travailler à temps plein ou à temps partiel et ne sont pas couverts par les conventions collectives.
-      * Par étudiant, on entend une personne admissible à un emploi dans la fonction publique fédérale dans le cadre de l'un des programmes d'emploi pour les étudiants. La personne doit :
-        * être inscrite à temps plein dans une institution reconnue d'enseignement secondaire ou postsecondaire; 
-        * être présentement considérée comme étudiant à temps plein par l'établissement d'enseignement; et,
-        * reprendre ses études à temps plein au semestre suivant.
-
-
 what_ppl_are_included_q:
   en: Which employees are included in the InfoBase?
   fr: Quels employés sont inclus dans l’InfoBase? 
-
-
 what_ppl_are_included_a:
   transform: [handlebars, markdown]
   en: |
@@ -53,8 +23,6 @@ what_ppl_are_included_a:
 what_ppl_arent_included_q:
   en: Which employees are NOT included in the InfoBase?
   fr: Quel employés ne sont PAS inclus dans l’InfoBase?
-
-
 what_ppl_arent_included_a:
   transform: [handlebars, markdown]
   en: |
@@ -79,10 +47,10 @@ what_ppl_arent_included_a:
 
     De plus, les données pour les organismes distincts suivants ne sont pas inclues car les renseignements au sujet de leurs employés ne sont pas disponibles dans les systèmes de paye régional ou Phénix : le Service canadien du renseignement de sécurité, la Commission de la capitale nationale, Placements Épargne Canada, et le Centre d’analyse des opérations et déclarations financières du Canada.
 
+    
 where_is_data_q:
   en: Where can I find data for previous years?
   fr: Où puis-je trouver de données pour les années precedentes?
-
 where_is_data_a:
   transform: [handlebars, markdown]
   en: |
