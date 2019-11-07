@@ -96,7 +96,7 @@ class AuthExpProgSpending extends React.Component {
       last_history_year: _.last(history_ticks),
       last_planned_year: _.last(plan_ticks),
       gap_year: gap_year,
-      plan_change: info[`${subject.level}_exp_planning_year_3`] - info['dept_auth_average'],
+      plan_change: info[`${subject.level}_exp_planning_year_3`] - info[`${subject.level}_auth_average`],
       hist_avg_tot_pct: _.isEqual(exp, auth) ? 0 : info[`${subject.level}_hist_avg_tot_pct`],
       last_year_lapse_amt: info[`${subject.level}_auth_pa_last_year`] - info[`${subject.level}_exp_pa_last_year`] || 0,
       last_year_lapse_pct: (info[`${subject.level}_auth_pa_last_year`] - info[`${subject.level}_exp_pa_last_year`] || 0)/info[`${subject.level}_auth_pa_last_year`],
