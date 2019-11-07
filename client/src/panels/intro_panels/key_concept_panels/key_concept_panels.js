@@ -114,8 +114,6 @@ export const declare_people_key_concepts_panel = () => declare_panel({
     render: curried_render({
       q_a_keys: [
         'who_is_fps',
-        'what_are_ftes',
-        'what_are_headcounts',
         'what_are_emp_tenures',
         'what_ppl_are_included',
         'what_ppl_arent_included',
