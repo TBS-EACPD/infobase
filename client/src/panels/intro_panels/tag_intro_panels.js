@@ -1,5 +1,5 @@
 import { TM } from './intro_panel_text_provider.js';
-import { declare_panel, util_components } from "../shared";
+import { declare_panel, util_components } from "../shared.js";
 
 const {
   KeyConceptList,

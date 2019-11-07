@@ -1,22 +1,4 @@
-# Common text 
-  
-links_to_rpb_title:
-  en: Detailed reports by subject
-  fr: Rapports détaillés par sujets
-
-links_to_rpb_text:
-  transform: [ handlebars, markdown ]
-  en: |
-    Select from one of the following tables to see the data behind the infographic and build your own report. 
-  fr: |
-    Choisissez parmi l'un des tableaux ci-dessous pour voir les données qui supportent les infographies et construire votre propre rapport.
-
-# /Common text
-
-
 # Dept related panels 
-
-
 portfolio_structure_intro_title:
   en: Where does this organization fit in the government structure?
   fr: Où s'inscrit cette organisation dans la structure gouvernementale?
@@ -36,12 +18,8 @@ dept_is_tagged_with_following:
   fr: |
     Les Programmes sous **{{subj_name subject}}** ont été {{gl_tt "étiquetés" "TAG"}} comme relevant des sujets suivants
 
-# /Dept related panels 
-
-
 
 # Program panel text 
-
 program_is_tagged_with_following:
   transform: [handlebars,markdown]
   en: |
@@ -87,11 +65,7 @@ dead_program_warning:
 
 
 
-
-#/ Program panel text
-
 # Tag text 
-
 intro_to_graphs_title:
   en: Introduction to Program Tags
   fr: Introduction aux étiquettes de Programmes
@@ -119,8 +93,7 @@ m2m_warning_title:
     Comment utiliser les étiquettes?
 
 
-# / Tag text 
-
+# Hierarchy text
 hierarchy_dead_element_icon_alt_text:
   transform: [handlebars]
   en:  |
@@ -142,8 +115,8 @@ hierarchy_contains_elements_with_limited_data:
     : Corresponds aux organisations pour lesquels l'InfoBase n'a pas de données.
 
 
-# CRSO text
 
+# CRSO text
 crso_desc_title:
   transform: [handlebars]
   en: |
@@ -178,71 +151,15 @@ crso_in_gov_title:
   fr: Où s'inscrit cette responsabilité essentielle dans la structure de rapport du gouvernement ?
 
 
-additional_links:
-  en: Additional links
-  fr: Des liens vers l'information supplémentaire
-
-different_org_names_static_q:
-  en: |
-    Why does the InfoBase sometimes use different names for the same organization? 
-  fr: |
-    Pourquoi une seule organisation a parfois deux noms dans l’InfoBase ?
-
-
-
-## Common key terms and concepts
-different_org_names_static_a:
-  transform: [handlebars, markdown]
-  en: |
-    In some cases, the InfoBase will display two names for an organization—a legal title and an applied title. An organization’s legal title is the name that appears in its enabling legislation (act), proclamation, order in council, or other instrument used to create a branch of government. The applied name is used in communications and is therefore the title that most people associate with the organization.
-  fr: |
-    Dans certain cas l’InfoBase utilise deux noms pour une seule organisation—l’appellation légale et le titre d’usage. L’appellation légale est le nom figurant dans la loi d’habilitation, la proclamation, le décret ou tout autre instrument utilisé pour créer un organisme gouvernemental. Le titre d’usage est utilisé pour toutes les communications et il est donc plus souvent associé à l’organisation.
-
-
-what_are_SOut_q:
-  en: What are Strategic Outcomes?
-  fr: Qu’est-ce qu’un Résultat Stratégique ?
-
-what_are_SOut_a:
-  transform: [handlebars, markdown]
-  en: |
-    A Strategic Outcome is a long-term and enduring benefit to Canadians that stems from a department's mandate and vision. 
-    It represents the difference a department intends to make for Canadians and should be measurable and within the department's sphere of influence.
-  fr: |
-    Un Résultat Stratégique est un avantage durable à long terme pour les Canadiens qui découle du mandat et de la vision d'un ministère. Il représente un résultat qu’un ministère entend obtenir au profit de la population canadienne, qui devrait être mesurable et devrait s’inscrire dans la sphère d’influence du ministère en question.
-what_are_CR_q:
-  en: What are Core Responsibilities?
-  fr: Qu’est-ce qu’une responsabilité essentielle ?
-  
-what_are_CR_a:
-  transform: [handlebars, markdown]
-  en: |
-    An enduring function or role performed by a department. 
-    The intentions of the department with respect to a Core Responsibility are reflected in one or more related 
-    Departmental Results that the department seeks to contribute to or influence.
-  fr: |
-    Fonction ou rôle permanent exercé par un ministère. Les intentions du ministère concernant une 
-    responsabilité essentielle se traduisent par un ou plusieurs Résultats Ministériels auxquels le ministère cherche à 
-    contribuer ou sur lesquels il veut avoir une influence.
-
-
-what_are_ftes_q:
-  en: What are Full-time Equivalents (FTEs)?
-  fr: Qu’est-ce qu’un équivalent temps plein (ETP)?
-  
-what_are_ftes_a:
-  transform: [handlebars, markdown]
-  en: |
-    Full-time equivalent (FTE) measures the extent to which an employee represents a full person-year charge against a departmental budget. FTEs are calculated as a ratio of assigned hours of work to scheduled hours of work, as set out in collective agreements. For term and seasonal employees, the FTE calculation is also adjusted for the proportion of paid weeks in a year.
-  fr: |
-    Les équivalents temps plein (ETP) sont la mesure utilisée pour représenter une année-personne complète d'un employé dans le budget ministériel. Les ETP sont calculés en fonction du coefficient des heures de travail assignées et des heures de travail prescrites, tel que stipulé dans les conventions collectives. Dans le cas des employés nommés pour une période déterminée et des employés saisonniers, le calcul des ETP est rajusté en fonction de la proportion des semaines payées dans une année.
-
+# Late banners
 late_dps_warning_dept:
   en: The 2019-20 Departmental Plan data is not available for this organization. Information will be updated as soon as the data is submitted.
   fr: L'information des plans ministériel 2019-2020 n’est pas disponible pour cette organisation. L’information sera mise-à-jour dès que les données auront été soumises.
+
 late_dps_warning_program:
   en: The 2019-20 Departmental Plan data is not available for this Program. Information will be updated as soon as the data is submitted.
   fr: L'information des plans ministériel 2019-2020 n’est pas disponible pour ce programme. L’information sera mise-à-jour dès que les données auront été soumises.
+
 late_dps_warning_crso:
   en: The 2019-20 Departmental Plan data is not available for this Core Responsibility. Information will be updated as soon as the data is submitted.
   fr: L'information des plans ministériel 2019-2020 n’est pas disponible pour cette responsabilité essentielle. L’information sera mise-à-jour dès que les données auront été soumises.
@@ -251,3 +168,19 @@ late_dps_warning_gov:
   transform: [handlebars]
   en: The count of results and indicators does not include indicators for {{array_to_grammatical_list late_dp_department_names}}. Information will be updated as soon as the data is submitted.
   fr: Le nombre de résultats et d’indicateurs n’inclus pas les indicateurs pour {{array_to_grammatical_list late_dp_department_names}}. L’information sera mise-à-jour dès que les données auront été soumises.
+
+
+# Misc.
+links_to_rpb_title:
+  en: Detailed reports by subject
+  fr: Rapports détaillés par sujets
+
+links_to_rpb_text:
+  transform: [ handlebars, markdown ]
+  en: |
+    Select from one of the following tables to see the data behind the infographic and build your own report. 
+  fr: |
+    Choisissez parmi l'un des tableaux ci-dessous pour voir les données qui supportent les infographies et construire votre propre rapport.
+additional_links:
+  en: Additional links
+  fr: Des liens vers l'information supplémentaire
