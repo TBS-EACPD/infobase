@@ -40,8 +40,8 @@ gov_auth_exp_prog_spending_body:
     Over the last 5 years, the government has authorized an average spending of **{{fmt_compact1_written gov_five_year_auth_average}}** ({{gl_tt "Authorities" "AUTH"}}) while actually
     spending an average of **{{fmt_compact1_written gov_five_year_exp_average}}** ({{gl_tt "Expenditures" "EXP"}}).
     
-    In **{{last_history_year}}**, the government {{gl_tt "lapsed"  "LAPSE"}} **{{fmt_compact1_written last_year_lapse_amt}}**, or **{{fmt_percentage1 last_year_lapse_pct}}** of approved
-    authorities. On average, unused authorities represented **{{fmt_percentage1 hist_avg_tot_pct}}** of authorities.
+    In **{{last_history_year}}**, **{{fmt_compact1_written last_year_lapse_amt}}** or **{{fmt_percentage1 last_year_lapse_pct}}** of approved
+    authorities were unspent at the end of the year. On average, unused authorities represented **{{fmt_percentage1 hist_avg_tot_pct}}** of authorities.
     
     {{#if subject.has_planned_spending}}Spending is {{will_change_to plan_change ""}} **{{fmt_compact1_written gov_exp_planning_year_3}}** by {{last_planned_year}}. {{/if}}
   fr: |
@@ -57,8 +57,8 @@ dept_auth_exp_prog_spending_body:
     Over the last 5 years, **{{subj_name dept}}** has authorized an average spending of **{{fmt_compact2_written dept_five_year_auth_average}}** ({{gl_tt "Authorities" "AUTH"}}) while actually
     spending an average of **{{fmt_compact2_written dept_five_year_exp_average}}** ({{gl_tt "Expenditures" "EXP"}}).
     
-    In **{{last_history_year}}**, **{{subj_name dept}}** {{gl_tt "lapsed"  "LAPSE"}} **{{fmt_compact1_written last_year_lapse_amt}}**, or **{{fmt_percentage1 last_year_lapse_pct}}** of approved
-    authorities. On average, unused authorities represented **{{fmt_percentage1 hist_avg_tot_pct}}** of authorities.
+    In **{{last_history_year}}**, **{{fmt_compact1_written last_year_lapse_amt}}** or **{{fmt_percentage1 last_year_lapse_pct}}** of approved
+    authorities were unspent at the end of the year. On average, unused authorities represented **{{fmt_percentage1 hist_avg_tot_pct}}** of authorities.
     
     {{#if subject.has_planned_spending}}Spending is {{will_change_to plan_change ""}} **{{fmt_compact2_written dept_exp_planning_year_3}}** by {{last_planned_year}}. {{/if}}
   fr: |
