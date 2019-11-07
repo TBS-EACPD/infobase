@@ -2,11 +2,11 @@ import { ensure_loaded } from '../../core/lazy_loader.js';
 
 // shared all
 import { declare_welcome_mat_panel } from '../../panels/welcome_mat/welcome_mat.js';
-import { declare_financial_intro_panel } from '../../panels/intro_panels/index.js';
+import { declare_financial_key_concepts_panel } from '../../panels/intro_panels/index.js';
 
 // shared gov, dept, crso, program
 import {
-  declare_results_intro_panel,
+  declare_results_key_concepts_panel,
   declare_late_dps_warning_panel,
 } from '../../panels/intro_panels/index.js';
 import { declare_budget_measures_panel } from '../../panels/budget_measures/budget_measures_panel.js';
@@ -52,7 +52,7 @@ export const get_program_panels = subject => ensure_loaded({
   financial: [
     declare_dead_program_warning_panel(),
     declare_year_warning_panel(),
-    declare_financial_intro_panel(),
+    declare_financial_key_concepts_panel(),
     declare_welcome_mat_panel(),
     declare_budget_measures_panel(),
     declare_vote_stat_split_panel(),
@@ -64,7 +64,7 @@ export const get_program_panels = subject => ensure_loaded({
     declare_dp_rev_split_panel(),
   ],
   results: !subject.is_internal_service && subject.has_data('results_data') && [
-    declare_results_intro_panel(),
+    declare_results_key_concepts_panel(),
     declare_late_dps_warning_panel(),
     declare_drr_summary_panel(),
     declare_results_table_panel(),

@@ -1,4 +1,4 @@
-import { declare_people_intro_panel } from "../../panels/intro_panels/index.js";
+import { declare_people_key_concepts_panel } from "../../panels/intro_panels/index.js";
 import { declare_employee_last_year_totals_panel } from "../../panels/people/employee_last_year_totals.js";
 import { declare_employee_totals_panel } from "../../panels/people/employee_totals.js";
 import { declare_employee_prov_panel } from "../../panels/people/employee_prov.js";
@@ -9,7 +9,7 @@ import { declare_employee_fol_panel } from "../../panels/people/employee_fol.js"
 import { declare_employee_gender_panel } from "../../panels/people/employee_gender.js";
 
 export const get_people_panels = (subject) => [
-  declare_people_intro_panel(),
+  declare_people_key_concepts_panel(),
   subject.level !== "gov" && declare_employee_last_year_totals_panel(),
   declare_employee_totals_panel(),
   declare_employee_prov_panel(),

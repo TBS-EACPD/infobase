@@ -100,7 +100,7 @@ const get_graph_obj = createSelector(
   get_subj,
   props => _.get(props, "match.params.graph"),
   (subject, graph_key) => {
-    return PanelGraph.lookup(graph_key, subject.level) || PanelGraph.lookup('financial_intro', 'gov');
+    return PanelGraph.lookup(graph_key, subject.level) || PanelGraph.lookup('financial_key_concepts', 'gov');
   }
 );
 

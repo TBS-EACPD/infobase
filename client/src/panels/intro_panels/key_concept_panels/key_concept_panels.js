@@ -22,6 +22,14 @@ const {
 const { text_maker, TM } = create_text_maker_component([common_lang, fin_lang, ppl_lang, results_lang, tag_lang]);
 
 
+const common_panel_config = {
+  static: true,
+  footnotes: false,
+  info_deps: [],
+  source: false,
+  calculate: _.constant(true),
+};
+
 const shouldAddOrgNameItem = subject => subject.is('dept') && subject.applied_title && subject.name !== subject.applied_title;
 const curried_render = ({ q_a_keys, omit_name_item }) => function ({ calculations: { subject } }) {
   let rendered_q_a_keys = _.clone(q_a_keys);
@@ -66,17 +74,11 @@ const curried_render = ({ q_a_keys, omit_name_item }) => function ({ calculation
 };
 
 
-
-export const declare_financial_intro_panel = () => declare_panel({
-  panel_key: "financial_intro",
+export const declare_financial_key_concepts_panel = () => declare_panel({
+  panel_key: "financial_key_concepts",
   levels: ['gov', 'dept', 'crso', 'program', 'tag'],
   panel_config_func: (level, panel_key) => ({
-    static: true,
-    footnotes: false,
-    info_deps: [],
-    source: false,
-    calculate: _.constant(true),
-
+    ...common_panel_config,
     render: curried_render({
       q_a_keys: [
         'where_does_authority_come_from',
@@ -91,16 +93,11 @@ export const declare_financial_intro_panel = () => declare_panel({
   }),
 });
 
-
-export const declare_results_intro_panel = () => declare_panel({
-  panel_key: "results_intro",
+export const declare_results_key_concepts_panel = () => declare_panel({
+  panel_key: "results_key_concepts",
   levels: ['gov', 'dept', 'crso', 'program'],
   panel_config_func: (level, panel_key) => ({
-    static: true,
-    footnotes: false,
-    info_deps: [],
-    source: false,
-    calculate: _.constant(true),
+    ...common_panel_config,
     render: curried_render({
       q_a_keys: [
         'what_is_policy_on_results',
@@ -113,17 +110,11 @@ export const declare_results_intro_panel = () => declare_panel({
   }),
 });
 
-
-export const declare_people_intro_panel = () => declare_panel({
-  panel_key: "people_intro",
+export const declare_people_key_concepts_panel = () => declare_panel({
+  panel_key: "people_key_concepts",
   levels: ["gov", "dept"],
   panel_config_func: (level, panel_key) => ({
-    static: true,
-    footnotes: false,
-    info_deps: [],
-    source: false,
-    calculate: _.constant(true),
-
+    ...common_panel_config,
     render: curried_render({
       q_a_keys: [
         'who_is_fps',
@@ -138,17 +129,11 @@ export const declare_people_intro_panel = () => declare_panel({
   }),
 });
 
-
 export const declare_tagging_key_concepts_panel = () => declare_panel({
   panel_key: "tagging_key_concepts",
   levels: ['tag'],
   panel_config_func: (level, panel_key) => ({
-    static: true,
-    footnotes: false,
-    info_deps: [],
-    source: false,
-    calculate: _.constant(true),
-  
+    ...common_panel_config,
     render: curried_render({
       q_a_keys: [
         'what_is_tagging',
