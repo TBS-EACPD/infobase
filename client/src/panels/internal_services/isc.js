@@ -1,5 +1,4 @@
 import text from './isc.yaml';
-import { GlossaryEntry } from '../../models/glossary.js';
 import { 
   InfographicPanel, 
   Subject, 
@@ -14,23 +13,20 @@ import {
 const { Gov, Tag } = Subject;
 const { std_years } = years;
 const { GraphLegend } = declarative_charts;
-
 const { text_maker, TM } = create_text_maker_component(text);
-
 
 export const declare_internal_services_panel = () => declare_panel({
   panel_key: "internal_services",
   levels: ["dept"],
-  panel_config_func: (level, panel_key) => ({
-    depends_on: ['programFtes', "programSpending"],
+  panel_config_func: () => ({
+    depends_on: ['programFtes'],
     title: "internal_service_panel_title",
-    calculate(subject, info){
+    calculate(subject){
       const { programFtes } = this.tables;
   
       const isc_crsos = _.filter(subject.crsos, "is_internal_service");
       if(_.isEmpty(isc_crsos)){
-        //org has no isc programs 
-        return false;
+        return false; //org has no isc programs 
       }
   
       const isc_tag = Tag.lookup("GOC017");
@@ -77,9 +73,6 @@ export const declare_internal_services_panel = () => declare_panel({
         },
       } = calculations;
 
-      const more_footnotes = [{
-        text: GlossaryEntry.lookup("INT_SERVICES").definition,
-      }].concat(footnotes);
       const years = _.map(std_years, yr => run_template(yr));
       const label_keys = [text_maker("internal_services"), text_maker("other_programs")];
       const colors = infobase_colors();
@@ -149,7 +142,7 @@ export const declare_internal_services_panel = () => declare_panel({
       return (
         <InfographicPanel
           title={text_maker("internal_service_panel_title")}
-          {...{sources,footnotes: more_footnotes}}
+          {...{sources, footnotes}}
         >
           {to_render}
         </InfographicPanel>
