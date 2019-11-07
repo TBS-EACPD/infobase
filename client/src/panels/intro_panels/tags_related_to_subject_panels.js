@@ -7,7 +7,7 @@ import {
   TextPanel, 
   util_components, 
 } from '../shared';
-import { WellList } from './WellList.js';
+import { WellList } from '../../components';
 import { HierarchyDeadElementIcon } from './hierarchy_component.js';
 import { infograph_href_template } from '../../link_utils.js';
 
