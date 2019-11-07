@@ -2,11 +2,11 @@ import { get_people_panels } from './get_people_panels.js';
 
 // shared all
 import { declare_welcome_mat_panel } from '../../panels/welcome_mat/welcome_mat.js';
-import { declare_financial_intro_panel } from '../../panels/intro_panels/index.js';
+import { declare_financial_key_concepts_panel } from '../../panels/intro_panels/index.js';
 
 // shared gov, dept, crso, program
 import {
-  declare_results_intro_panel,
+  declare_results_key_concepts_panel,
   declare_late_dps_warning_panel,
 } from '../../panels/intro_panels/index.js';
 import { declare_budget_measures_panel } from '../../panels/budget_measures/budget_measures_panel.js';
@@ -41,7 +41,7 @@ export const get_gov_panels = subject => ({
   ],
   financial: [
     declare_year_warning_panel(),
-    declare_financial_intro_panel(),
+    declare_financial_key_concepts_panel(),
     declare_welcome_mat_panel(),
     declare_budget_measures_panel(),
     declare_auth_exp_prog_spending_panel(),
@@ -55,7 +55,7 @@ export const get_gov_panels = subject => ({
   ],
   people: get_people_panels(subject),
   results: [
-    declare_results_intro_panel(),
+    declare_results_key_concepts_panel(),
     declare_late_dps_warning_panel(),
     declare_gov_drr_panel(),
     declare_gov_dp_panel(),

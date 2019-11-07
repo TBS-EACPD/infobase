@@ -1,6 +1,6 @@
 // shared all
 //import { declare_welcome_mat_panel } from '../../panels/welcome_mat/welcome_mat.js';
-//import { declare_financial_intro_panel } from '../../panels/intro_panels/index.js';
+//import { declare_financial_key_concepts_panel } from '../../panels/intro_panels/index.js';
 
 // shared dept, program, tag
 //import { declare_spend_rev_split_panel } from "../../panels/sobj/spend_rev_split.js";
@@ -40,7 +40,7 @@ export const get_tag_panels = subject => ({
   //Financial turned off indefinitely
   // financial: [
   //   declare_m2m_warning_panel(),
-  //   declare_financial_intro_panel(), 
+  //   declare_financial_key_concepts_panel(), 
   //   declare_welcome_mat_panel(),
   //   declare_vote_stat_split_panel(),
   //   declare_spend_rev_split_panel(),

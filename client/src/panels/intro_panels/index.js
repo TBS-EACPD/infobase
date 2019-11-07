@@ -27,9 +27,9 @@ export {
   declare_description_panel,
 } from './profile_panels.js';
 export {
-  declare_financial_intro_panel,
-  declare_results_intro_panel,
-  declare_people_intro_panel,
+  declare_financial_key_concepts_panel,
+  declare_results_key_concepts_panel,
+  declare_people_key_concepts_panel,
   declare_tagging_key_concepts_panel,
 } from './key_concept_panels/key_concept_panels.js';
 
