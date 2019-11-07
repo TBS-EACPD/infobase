@@ -1,22 +1,3 @@
-applied_title_q:
-  transform: [handlebars, markdown]
-  en: Other names for this organization?
-  fr: Autre nom pour cette organisation?
-    
-
-applied_title_a:
-  transform: [handlebars, markdown]
-  en: |
-    **{{subject.applied_title}}**
-
-    In some cases, the InfoBase will display two names for an organization—a legal title and an applied title. An organization’s legal title is the name that appears in its enabling legislation (act), proclamation, order in council, or other instrument used to create a branch of government.  The applied name is used in communications and is therefore the title that most people associate with the organization.
-  
-  fr: |
-    **{{subject.applied_title}}**
-
-    Dans certain cas l’InfoBase utilise deux noms pour une seule organisation—l’appellation légale et le titre d’usage. L’appellation légale est le nom figurant dans la loi d’habilitation, la proclamation, le décret ou tout autre instrument utilisé pour créer un organisme gouvernemental.  Le titre d’usage est utilisé pour toutes les communications et il est donc plus souvent associé à l’organisation.
-
-
 where_does_authority_come_from_q:
   en: |
     Where does the authority to spend public funds come from?

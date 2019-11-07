@@ -30,17 +30,10 @@ const common_panel_config = {
   calculate: _.constant(true),
 };
 
-const shouldAddOrgNameItem = subject => subject.is('dept') && subject.applied_title && subject.name !== subject.applied_title;
 const curried_render = ({ q_a_keys, omit_name_item }) => function ({ calculations: { subject } }) {
-  let rendered_q_a_keys = _.clone(q_a_keys);
-  if (!omit_name_item) {
-    if (shouldAddOrgNameItem(subject)) {
-      rendered_q_a_keys.unshift('applied_title');
-    } else {
-      rendered_q_a_keys.push('different_org_names_static');
-    }
-  }
+  let rendered_q_a_keys = _.compact(q_a_keys);
 
+  // vvv delete on drr17 exit
   if (subject.level === 'crso') {
     if (subject.is_cr) {
       rendered_q_a_keys = ['what_are_CR', ...rendered_q_a_keys];
@@ -48,6 +41,7 @@ const curried_render = ({ q_a_keys, omit_name_item }) => function ({ calculation
       rendered_q_a_keys = ['what_are_SOut', ...rendered_q_a_keys];
     }
   }
+  // ^^^ delete on drr17 exit
 
   return (
     <MediaQuery maxWidth={breakpoints.maxMediumDevice}>
@@ -81,13 +75,14 @@ export const declare_financial_key_concepts_panel = () => declare_panel({
     ...common_panel_config,
     render: curried_render({
       q_a_keys: [
+        'what_is_fy',
         'where_does_authority_come_from',
         'what_are_mains',
         'what_are_supps',
         'what_are_exps',
-        'what_is_fy',
         'why_cant_i_see_prov_spend',
         'what_spending_is_included',
+        level === 'dept' && 'different_org_names',
       ],
     }),
   }),
@@ -105,6 +100,7 @@ export const declare_results_key_concepts_panel = () => declare_panel({
         'what_is_a_drf',
         'how_do_orgs_measure_perf',
         'what_are_DPs_and_DRRs',
+        level === 'dept' && 'different_org_names',
       ],
     }),
   }),
@@ -124,6 +120,7 @@ export const declare_people_key_concepts_panel = () => declare_panel({
         'what_ppl_are_included',
         'what_ppl_arent_included',
         'where_is_data',
+        level === 'dept' && 'different_org_names',
       ],
     }),
   }),
