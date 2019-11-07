@@ -68,9 +68,9 @@ export const get_dept_panels = subject => ensure_loaded({
     declare_historical_g_and_c_panel(),
     declare_spend_rev_split_panel(),
     declare_detailed_program_spending_split_panel(),
+    declare_internal_services_panel(),
     declare_drr_planned_actual_panel(),
     declare_dp_rev_split_panel(),
-    declare_internal_services_panel(),
   ],
   people: _.includes(subject.tables, 'orgEmployeeType') && get_people_panels(subject),
   results: subject.has_data('results_data') && [
