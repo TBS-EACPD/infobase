@@ -1,5 +1,3 @@
-
-
 const WellList = ({ elements }) => <div>
   <ul className="list-unstyled">
     {_.chain(elements)
