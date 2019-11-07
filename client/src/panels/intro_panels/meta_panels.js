@@ -1,4 +1,4 @@
-import { TM } from './intro_graph_text_provider.js';
+import { TM } from './intro_panel_text_provider.js';
 import { declare_panel, util_components } from "../shared";
 
 const { AlertBanner } = util_components;

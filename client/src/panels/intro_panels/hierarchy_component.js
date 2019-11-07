@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { Fragment } from 'react';
-import { text_maker, TM } from './intro_graph_text_provider.js';
+import { text_maker, TM } from './intro_panel_text_provider.js';
 import { Subject } from '../shared.js';
 import { IconAttentionTriangle } from '../../icons/icons.js';
 

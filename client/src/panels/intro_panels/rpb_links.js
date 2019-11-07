@@ -1,5 +1,5 @@
-import { text_maker, TM } from './intro_graph_text_provider';
-import { declare_panel, TextPanel } from '../shared';
+import { text_maker, TM } from './intro_panel_text_provider.js';
+import { declare_panel, TextPanel } from '../shared.js';
 import { rpb_link } from '../../link_utils.js';
 import { Table } from '../../core/TableClass.js';
 import { WellList } from './WellList.js';

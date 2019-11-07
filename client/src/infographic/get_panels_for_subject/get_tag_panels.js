@@ -1,6 +1,6 @@
 // shared all
 //import { declare_welcome_mat_panel } from '../../panels/welcome_mat/welcome_mat.js';
-//import { declare_financial_intro_panel } from '../../panels/intro_graphs/index.js';
+//import { declare_financial_intro_panel } from '../../panels/intro_panels/index.js';
 
 // shared dept, program, tag
 //import { declare_spend_rev_split_panel } from "../../panels/sobj/spend_rev_split.js";
@@ -21,7 +21,7 @@ import {
   declare_related_tags_panel,
   declare_description_panel,
   declare_tagging_key_concepts_panel,
-} from '../../panels/intro_graphs/index.js';
+} from '../../panels/intro_panels/index.js';
 import { declare_horizontal_initiative_profile_panel } from '../../panels/tag_panels/horizontal_initiative_profile.js';
 import { declare_resource_structure_panel } from '../../panels/tag_panels/resource_structure.js';
 

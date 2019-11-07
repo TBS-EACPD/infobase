@@ -1,4 +1,4 @@
-import { declare_people_intro_panel } from "../../panels/intro_graphs/index.js";
+import { declare_people_intro_panel } from "../../panels/intro_panels/index.js";
 import { declare_employee_last_year_totals_panel } from "../../panels/people/employee_last_year_totals.js";
 import { declare_employee_totals_panel } from "../../panels/people/employee_totals.js";
 import { declare_employee_prov_panel } from "../../panels/people/employee_prov.js";

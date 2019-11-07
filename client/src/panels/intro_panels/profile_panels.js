@@ -1,4 +1,4 @@
-import { text_maker } from './intro_graph_text_provider.js';
+import { text_maker } from './intro_panel_text_provider.js';
 import {
   declare_panel,
   TextPanel,

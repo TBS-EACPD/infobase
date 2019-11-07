@@ -1,14 +1,14 @@
 import { declare_panel, util_components, Subject, breakpoints } from '../shared.js';
-import { text_maker, TM } from './intro_graph_text_provider.js';
+import { text_maker, TM } from './intro_panel_text_provider.js';
 import { declare_simplographic_panel } from './simplographic.js';
 import { declare_gov_related_info_panel } from './gov_related.js';
 import { declare_links_to_rpb_panel } from './rpb_links.js';
-import { declare_m2m_warning_panel } from './tag_intro_graphs.js';
+import { declare_m2m_warning_panel } from './tag_intro_panels.js';
 import {
   declare_year_warning_panel,
   declare_dead_program_warning_panel,
   declare_dead_crso_warning_panel,
-} from './meta_graphs.js';
+} from './meta_panels.js';
 import {
   declare_portfolio_structure_intro_panel,
   declare_portfolio_structure_related_panel,

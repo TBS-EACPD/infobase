@@ -2,18 +2,18 @@ import { get_people_panels } from './get_people_panels.js';
 
 // shared all
 import { declare_welcome_mat_panel } from '../../panels/welcome_mat/welcome_mat.js';
-import { declare_financial_intro_panel } from '../../panels/intro_graphs/index.js';
+import { declare_financial_intro_panel } from '../../panels/intro_panels/index.js';
 
 // shared gov, dept, crso, program
 import {
   declare_results_intro_panel,
   declare_late_dps_warning_panel,
-} from '../../panels/intro_graphs/index.js';
+} from '../../panels/intro_panels/index.js';
 import { declare_budget_measures_panel } from '../../panels/budget_measures/budget_measures_panel.js';
-import { declare_year_warning_panel } from '../../panels/intro_graphs/index.js';
+import { declare_year_warning_panel } from '../../panels/intro_panels/index.js';
 
 // shared gov, dept
-import { declare_links_to_rpb_panel } from '../../panels/intro_graphs/index.js';
+import { declare_links_to_rpb_panel } from '../../panels/intro_panels/index.js';
 import { declare_in_year_voted_stat_split_panel } from "../../panels/vote_stat/in_year_vote_stat_split.js";
 //import { declare_in_year_estimates_split_panel } from "../../panels/vote_stat/in_year_estimates_split.js";
 import { declare_historical_g_and_c_panel } from "../../panels/transfer_payments/historical_g_and_c.js";
@@ -23,7 +23,7 @@ import { declare_auth_exp_prog_spending_panel } from '../../panels/historical_au
 import {
   declare_simplographic_panel,
   declare_gov_related_info_panel,
-} from '../../panels/intro_graphs/index.js';
+} from '../../panels/intro_panels/index.js';
 import {
   declare_gov_drr_panel,
   declare_gov_dp_panel,
