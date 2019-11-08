@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=shield)](https://circleci.com/gh/TBS-EACPD/infobase)
+[![Test coverage status badge](https://storage.googleapis.com/all-test-coverage/master-email_backend-coverage-badge.svg)](https://storage.googleapis.com/all-test-coverage/master-email_backend-coverage.txt)
 
 Email Server
 =======
