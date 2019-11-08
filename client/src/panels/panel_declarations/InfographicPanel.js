@@ -40,6 +40,7 @@ class Panel_ extends React.Component {
       context,
       title,
       sources,
+      glossary_keys,
       footnotes,
       children,
       allowOverflow,
@@ -118,6 +119,7 @@ class Panel_ extends React.Component {
       otherHeaderContent: header_utils,
       children,
       sources,
+      glossary_keys,
       footnotes,
     });
   }
