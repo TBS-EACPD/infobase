@@ -679,7 +679,7 @@ const MobileOrA11YContent = ({ children }) => [
   </PaneItem>,
 ];
 
-function render({calculations, footnotes, sources}){
+function render({calculations, footnotes, glossary_keys, sources}){
   const { panel_args, subject } = calculations;
 
   let sources_override = sources;
@@ -712,6 +712,7 @@ function render({calculations, footnotes, sources}){
     <InfographicPanel
       title={text_maker("welcome_mat_title")}
       sources={sources_override}
+      glossary_keys={glossary_keys}
       footnotes={footnotes}
     >
       <WelcomeMat subject={subject} {...panel_args} />
@@ -864,6 +865,7 @@ export const declare_welcome_mat_panel = () => declare_panel({
       case "gov":
         return {
           footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+          glossary_keys: ["FTE"],
           info_deps: ["programFtes_gov_info"],
           depends_on: ['programSpending','programFtes'],
           missing_info: "ok",
@@ -885,6 +887,7 @@ export const declare_welcome_mat_panel = () => declare_panel({
       case "dept":
         return {
           footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+          glossary_keys: ["FTE"],
           info_deps: ["programFtes_dept_info"],
           depends_on: ['programSpending','programFtes', 'orgVoteStatEstimates', 'orgVoteStatPa'],
           missing_info: "ok",
@@ -943,6 +946,7 @@ export const declare_welcome_mat_panel = () => declare_panel({
       case "program":
         return {
           footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+          glossary_keys: ["FTE"],
           info_deps: ["programFtes_program_info"],
           depends_on: ['table6', 'table12'],
           missing_info: "ok",
@@ -952,6 +956,7 @@ export const declare_welcome_mat_panel = () => declare_panel({
       case "crso":
         return {
           footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+          glossary_keys: ["FTE"],
           info_deps: ["programFtes_crso_info"],
           depends_on: ['table6', 'table12'],
           missing_info: "ok",
@@ -961,6 +966,7 @@ export const declare_welcome_mat_panel = () => declare_panel({
       case "tag":
         return {
           footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
+          glossary_keys: ["FTE"],
           info_deps: ["programFtes_program_info"],
           depends_on: ['programSpending','programFtes'],
           missing_info: "ok",

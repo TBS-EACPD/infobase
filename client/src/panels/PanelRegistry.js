@@ -175,6 +175,14 @@ class PanelRegistry {
     }
   }
 
+  get_glossary_keys(){
+    if (this.glossary_keys === false){
+      return [];
+    } else {
+      return this.glossary_keys;
+    }
+  }
+
   get_footnotes(subject){ //array of footnote strings
 
     const footnote_concepts = this.footnote_concept_keys;
@@ -194,12 +202,14 @@ class PanelRegistry {
     const { subject } = calculations;
     const render_func = this._inner_render;
     const footnotes = this.get_footnotes(subject);
+    const glossary_keys = this.get_glossary_keys();
     const sources = this.get_source(subject);
 
     const react_el = render_func(
       {
         calculations,
         footnotes,
+        glossary_keys,
         sources,        
       },
       options

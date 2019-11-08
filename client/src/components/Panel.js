@@ -20,9 +20,9 @@ const PanelSource = ({links}) => {
   return (
     <span>
       <span aria-hidden> 
-        <TM k="source_link_text" />
+        <TM k="panel_source_link_text" />
       </span>
-      <span className="sr-only"> <TM k="a11y_source_expl"/> </span>
+      <span className="sr-only"> <TM k="panel_a11y_source_expl"/> </span>
       <ul
         className="list-unstyled list-inline"
         style={{display: "inline"}}
@@ -42,7 +42,30 @@ const PanelSource = ({links}) => {
   );
 };
 
-export const Panel = ({allowOverflow, title, otherHeaderContent, children, sources, footnotes }) => (
+const PanelGlossary = ({keys}) => {
+  if(_.isEmpty(keys)){
+    return null;
+  }
+  const last_ix = keys.length -1;
+  return (
+    <span>
+      <TM k="panel_glossary_text" />
+      <ul
+        className="list-unstyled list-inline"
+        style={{display: "inline"}}
+      >
+        {_.map(keys, (key,ix) =>
+          <li key={ix}>
+            <span>{key}</span>
+            {ix !== last_ix && ", "}
+          </li>
+        )}
+      </ul>
+    </span>
+  );
+};
+
+export const Panel = ({allowOverflow, title, otherHeaderContent, children, sources, glossary_keys, footnotes }) => (
   <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
     { (title || otherHeaderContent) &&
       <header className='panel-heading'>
@@ -56,6 +79,11 @@ export const Panel = ({allowOverflow, title, otherHeaderContent, children, sourc
       { _.nonEmpty(sources) && 
         <div>
           <PanelSource links={sources} />
+        </div>
+      }
+      { _.nonEmpty(glossary_keys) && 
+        <div>
+          <PanelGlossary keys={glossary_keys} />
         </div>
       }
       { _.nonEmpty(footnotes) && 
