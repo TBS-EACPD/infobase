@@ -8,7 +8,7 @@ import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './
 
 const { Dept } = Subject;
 
-const indicator_date_sorter = _.identity(); //FIXME: sort indicators by their date!
+const indicator_date_sorter = (ind) => ind.target_year ? ind.target_year + ind.target_month/12 : Infinity;
 function result_to_node(result, parent_id, doc){
   return {
     data: {
