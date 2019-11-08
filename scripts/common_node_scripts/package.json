@@ -1,6 +1,6 @@
 {
   "name": "common-node-scripts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Local package for node scripts that are common across mono-repo projects, to keep things DRY and to isolate their dependecies",
   "bin" : { 
     "merge-coverage-reports": "./merge_coverage_reports.js",
