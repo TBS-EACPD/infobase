@@ -27,7 +27,7 @@ export { PDFGenerator } from './PDFGenerator.js';
 export { CountdownCircle } from './CountdownCircle.js';
 export { Countdown } from './Countdown.js';
 export { LogInteractionEvents } from './LogInteractionEvents.js';
-export { GlossaryIcon } from './GlossaryIcon.js';
+export { GlossaryIcon, GlossaryLink } from './glossary_components.js';
 export { WellList } from './WellList.js';
 export { DisplayTable } from './DisplayTable.js';
 export { LabeledTable } from './LabeledTable.js';
