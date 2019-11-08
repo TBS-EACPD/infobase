@@ -14,12 +14,7 @@
     "fs-extra": "^8.1.0",
     "istanbul-api": "^2.1.6",
     "istanbul-lib-coverage": "^2.0.5",
-    "yargs": "^14.2.0",
-    "patch-package": "^6.2.0"
-  },
-  "scripts": {
-    "postinstall": "patch-package",
-    "postci": "patch-package"
+    "yargs": "^14.2.0"
   },
   "author": "Stephen O'Neil",
   "license": "MIT"
