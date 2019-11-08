@@ -1,13 +1,13 @@
 {
   "name": "infobase-monorepo",
-  "private": true,
   "description": "",
   "scripts": {
     "prod_deploy": "sh scripts/prod_scripts/prod_deploy.sh",
     "prod_rollback": "sh scripts/prod_scripts/prod_rollback.sh",
 
     "init_hooks": "sh scripts/dev_scripts/init_hooks.sh",
-    "infobase_tmux_init": "sh scripts/dev_scripts/infobase_tmux_init.sh",
+    "infobase_tmux_init": "sh scripts/dev_scripts/tmux_env.sh",
+    "tmux_env": "sh scripts/dev_scripts/tmux_env.sh",
 
     "refresh_pipeline_data": "sh scripts/dev_scripts/refresh_pipeline_data.sh"
   },

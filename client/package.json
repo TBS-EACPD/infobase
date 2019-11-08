@@ -1,6 +1,5 @@
 {
   "name": "infobase-client",
-  "private": true,
   "description": "",
   "main": "index.js",
   "directories": {
