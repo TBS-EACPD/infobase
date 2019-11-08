@@ -6,8 +6,7 @@
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true
     },
-    "ecmaVersion": 2017,
-    "sourceType": "module"
+    "ecmaVersion": 2017
   },
   "extends": [ "eslint:recommended", "plugin:node/recommended" ],
   "rules": {
@@ -34,6 +33,6 @@
         "warn",
         { "args": "none" }
       ],
-      "no-extra-semi": ["off"],
-  },
+      "no-extra-semi": ["off"]
+  }
 }
