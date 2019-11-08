@@ -209,7 +209,7 @@ class DetailedHistTPItems extends React.Component {
           label: tp,
           data: _.map(std_years, yr => 
             <Format
-              type="compact1"
+              type="compact1_written"
               content={record[`${yr}exp`] || 0}
             />
           ),

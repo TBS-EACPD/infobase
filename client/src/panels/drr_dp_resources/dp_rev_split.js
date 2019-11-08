@@ -94,10 +94,10 @@ export const declare_dp_rev_split_panel = () => declare_panel({
                     <th scope="row">
                       {run_template(year)}
                     </th>
-                    <td className="data-col-cell"> <Format type="compact1" content={gross} /> </td>
-                    <td className="data-col-cell"> <Format type="compact1" content={rev} /> </td>
-                    <td className="data-col-cell"> <Format type="compact1" content={spa} /> </td>
-                    <td className="data-col-cell"> <Format type="compact1" content={net} /> </td>
+                    <td className="data-col-cell"> <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={gross} /> </td>
+                    <td className="data-col-cell"> <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={rev} /> </td>
+                    <td className="data-col-cell"> <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={spa} /> </td>
+                    <td className="data-col-cell"> <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={net} /> </td>
                   </tr>
                 )}
               </tbody>

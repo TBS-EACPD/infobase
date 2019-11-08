@@ -134,7 +134,7 @@ export const declare_spend_by_so_hist_panel = () => declare_panel({
               _.map(data, ({label, data}) => ({
                 label,
                 /* eslint-disable react/jsx-key */
-                data: data.map(amt => <Format type="compact1" content={amt} />),
+                data: data.map(amt => <Format type="compact1_written" content={amt} />),
               }))
             }
             label_col_header={text_maker("so")}

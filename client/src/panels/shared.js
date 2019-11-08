@@ -496,9 +496,9 @@ export const PlannedActualTable = ({
     <tbody>
       <tr>
         <th scope="row"> <TM k="spending"/> </th>
-        <td> <Format type="compact1" content={planned_spend} /> </td>
-        <td> <Format type="compact1" content={actual_spend} /> </td>
-        <td> <Format type="compact1" content={diff_spend} /> </td>
+        <td> <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={planned_spend} /> </td>
+        <td> <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={actual_spend} /> </td>
+        <td> <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={diff_spend} /> </td>
       </tr>
       <tr>
         <th scope="row"> <TM k="ftes"/> </th>

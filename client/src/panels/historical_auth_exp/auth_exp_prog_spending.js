@@ -106,8 +106,8 @@ class AuthExpProgSpending extends React.Component {
         (exp_value,year_index) => ({
           label: history_ticks[year_index],
           data: [
-            formatter("compact2", exp_value, {raw: true}),
-            formatter("compact2", auth[year_index], {raw: true}),
+            formatter("compact1_written", exp_value, {raw: true}),
+            formatter("compact1_written", auth[year_index], {raw: true}),
             null,
           ],
         })
@@ -120,7 +120,7 @@ class AuthExpProgSpending extends React.Component {
           data: [
             null,
             null,
-            formatter("compact2", progSpending_value, {raw: true}),
+            formatter("compact1_written", progSpending_value, {raw: true}),
           ],
         })
       );

@@ -98,7 +98,7 @@ class HistoricalProgramBars extends React.Component {
           data={_.map(data, ({label, data})=>({
             label,
             /* eslint-disable react/jsx-key */
-            data: data.map(amt => <Format type="compact1" content={amt} />),
+            data: data.map(amt => <Format type="compact1_written" content={amt} />),
           }))}
           label_col_header={text_maker("program")}
           data_col_headers={ticks}
@@ -202,7 +202,7 @@ class DetailedProgramSplit extends React.Component {
                   <tr key={program.id+so_label}>
                     <td> {program.name} </td>
                     <td> {so_label} </td>
-                    <td> <Format type="compact1" content={value} /> </td>
+                    <td> <Format type="compact1_written" content={value} /> </td>
                   </tr>
                 )}
               </tbody>
