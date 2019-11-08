@@ -2,7 +2,7 @@
   "name": "common-node-scripts",
   "version": "1.0.2",
   "description": "Local package for node scripts that are common across mono-repo projects, to keep things DRY and to isolate their dependecies",
-  "bin" : { 
+  "bin": {
     "merge-coverage-reports": "./coverage_management/merge_coverage_reports.js",
     "create-coverage-shield-badge": "./coverage_management/create_coverage_shield_badge.js"
   },
@@ -15,13 +15,18 @@
     "@babel/preset-env": "^7.6.2",
     "babel-core": "^7.0.0-bridge.0",
     "eslint": "^4.18.1",
-    "eslint-plugin-node": "^6.0.0"
+    "eslint-plugin-node": "^6.0.0",
   },
   "dependencies": {
     "fs-extra": "^8.1.0",
     "istanbul-api": "^2.1.6",
     "istanbul-lib-coverage": "^2.0.5",
-    "yargs": "^14.2.0"
+    "yargs": "^14.2.0",
+    "patch-package": "^6.2.0"
+  },
+  "scripts": {
+    "postinstall": "patch-package",
+    "postci": "patch-package"
   },
   "author": "Stephen O'Neil",
   "license": "MIT"
