@@ -1,5 +1,6 @@
 import './Panel.scss';
 import text from './Panel.yaml';
+import { GlossaryLink } from '../components';
 
 import classNames from 'classnames';
 
@@ -56,7 +57,7 @@ const PanelGlossary = ({keys}) => {
       >
         {_.map(keys, (key,ix) =>
           <li key={ix}>
-            <span>{key}</span>
+            <GlossaryLink id={key} item_class="glossary-link"/>
             {ix !== last_ix && ", "}
           </li>
         )}
@@ -82,7 +83,7 @@ export const Panel = ({allowOverflow, title, otherHeaderContent, children, sourc
         </div>
       }
       { _.nonEmpty(glossary_keys) && 
-        <div>
+        <div className="mrgn-tp-md">
           <PanelGlossary keys={glossary_keys} />
         </div>
       }

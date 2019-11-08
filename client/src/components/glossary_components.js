@@ -36,13 +36,13 @@ export const GlossaryIcon = ({id, alternate_text, arrow_selector, inner_selector
   </GlossaryTooltipItem>
 );
 
-export const GlossaryLink = ({id, alternate_text, arrow_selector, inner_selector}) => (
+export const GlossaryLink = ({id, alternate_text, item_class, arrow_selector, inner_selector}) => (
   <GlossaryTooltipItem
     id={id}
     arrow_selector={arrow_selector}
     inner_selector={inner_selector}
   >
-    <span>
+    <span className={item_class}>
       {alternate_text ? alternate_text : GlossaryEntry.lookup(id).title}
     </span>
   </GlossaryTooltipItem>
