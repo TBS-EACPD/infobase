@@ -27,7 +27,8 @@
     "eslint-plugin-react": "^7.4.0",
     "jest": "^24",
     "jest-cli": "^24",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "common-node-scripts": "file:../scripts/common_node_scripts"
   },
   "scripts": {
     "prebuild": "rm -rf transpiled_build",
@@ -35,8 +36,11 @@
     "prestart": "npm run build",
     "start": "nodemon --watch src --watch package-lock.json --watch templates -e js,json --exec babel-node transpiled_build/index.js",
     "debug": "nodemon --watch src --watch package-lock.json --watch templates -e js.json --exec babel-node --inspect-brk src/index.js",
-    "test": "jest --coverage",
-    "prod_deploy": "sh deploy_scripts/prod_deploy_email_backend_function.sh"
+    "unit_tests": "jest --coverage --forceExit  --config jest_configs/unit_tests.config.js",
+    "end_to_end_tests": "jest --coverage --forceExit  --config jest_configs/end_to_end_tests.config.js",
+    "prod_deploy": "sh deploy_scripts/prod_deploy_email_backend_function.sh",
+    "merge_coverage_reports": "merge-coverage-reports --report ./coverage/*/coverage-final.json",
+    "create_coverage_shield_badge": "create-coverage-shield-badge --report ./coverage/coverage-final.json > ./coverage/coverage-shield-badge.svg"
   },
   "authors": [
     "Stephen O'Neil"
