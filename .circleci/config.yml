@@ -136,7 +136,7 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - ./scripts/ci_scripts
+            - ./scripts
 
             - ./data
             - ./test-data
