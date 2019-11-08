@@ -51,7 +51,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
       .zip(series)
       .map( ([label, amt])=> ({
         label,
-        data: <Format type="compact1" content={amt} />,
+        data: <Format type="compact1_written" content={amt} />,
       }))
       .value();
     

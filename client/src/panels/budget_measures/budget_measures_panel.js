@@ -627,22 +627,22 @@ class BudgetMeasureHBars extends React.Component {
               data: _.filter([
                 !treatAsProgram(subject) && <Format
                   key = { budget_measure_item.id + "col2" } 
-                  type = "compact1" 
+                  type = "compact1_written" 
                   content = { budget_measure_item.funding } 
                 />,
                 <Format
                   key = { budget_measure_item.id + (treatAsProgram(subject) ? "col2" : "col3") } 
-                  type = "compact1"
+                  type = "compact1_written"
                   content = { budget_measure_item.allocated } 
                 />,
                 !treatAsProgram(subject) && <Format
                   key = { budget_measure_item.id + "col4" } 
-                  type = "compact1"
+                  type = "compact1_written"
                   content = { budget_measure_item.withheld } 
                 />,
                 !treatAsProgram(subject) && <Format
                   key = { budget_measure_item.id + "col5" } 
-                  type = "compact1"
+                  type = "compact1_written"
                   content = { budget_measure_item.remaining } 
                 />,
                 has_budget_links && <a 
@@ -672,22 +672,22 @@ class BudgetMeasureHBars extends React.Component {
                   data: _.filter([
                     <Format
                       key = { org_item.key + "col3" } 
-                      type = "compact1" 
+                      type = "compact1_written" 
                       content = { org_item.funding } 
                     />,
                     <Format
                       key = { org_item.key + "col4" } 
-                      type = "compact1"
+                      type = "compact1_written"
                       content = { org_item.allocated } 
                     />,
                     <Format
                       key = { org_item.key + "col5" } 
-                      type = "compact1"
+                      type = "compact1_written"
                       content = { org_item.withheld } 
                     />,
                     <Format
                       key = { org_item.key + "col6" } 
-                      type = "compact1"
+                      type = "compact1_written"
                       content = { org_item.remaining } 
                     />,
                   ]),
@@ -711,7 +711,7 @@ class BudgetMeasureHBars extends React.Component {
                   data: _.filter([
                     <Format
                       key = { program_item.key + "col3" } 
-                      type = "compact1" 
+                      type = "compact1_written" 
                       content = { program_item.allocated } 
                     />,
                   ]),

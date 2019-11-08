@@ -76,7 +76,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
       .map((exp_value, year_index) => ({
         label: history_ticks[year_index],
         data: [
-          formatter("compact2", exp_value, {raw: true}),
+          formatter("compact1_written", exp_value, {raw: true}),
           null,
         ],
       }))
@@ -89,7 +89,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
         label: plan_ticks[year_index],
         data: [
           null,
-          formatter("compact2", progSpending_value, {raw: true}),
+          formatter("compact1_written", progSpending_value, {raw: true}),
         ],
       })
     );

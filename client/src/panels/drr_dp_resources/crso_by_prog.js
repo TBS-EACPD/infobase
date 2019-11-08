@@ -115,7 +115,7 @@ class PlannedProgramResources extends React.Component {
             data={programs.map(({data, label}) => ({
               label,
               /* eslint-disable react/jsx-key */
-              data: data.map(amt => <Format type={is_fte? "big_int" : "compact1"} content={amt} /> ),
+              data: data.map(amt => <Format type={is_fte? "big_int" : "compact1_written"} content={amt} /> ),
             }))}
           />
         </div>

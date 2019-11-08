@@ -191,7 +191,7 @@ const row_cells = ({ name, rpb_link, voted_stat, amount }) => (
     </td>
     <td className="right_number">
       <Format
-        type="compact1"
+        type={window.is_a11y_mode ? "compact1_written" : "compact1"}
         content={amount}
       />
     </td>

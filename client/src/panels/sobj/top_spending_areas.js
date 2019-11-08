@@ -72,7 +72,7 @@ const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) =>
             {...{
               data: _.map(top_3_sos_and_remainder, ({label, value}) => ({
                 label,
-                data: <Format type="compact1" content={value} />,
+                data: <Format type="compact1_written" content={value} />,
               })),
               label_col_header: text_maker("so"),
               data_col_headers: [ `${run_template(_.last(std_years))} ${text_maker("spending")}` ],

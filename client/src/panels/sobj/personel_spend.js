@@ -48,7 +48,7 @@ export const declare_personnel_spend_panel = () => declare_panel({
                 .zip(graph_args.series["0"])
                 .map( ([label, amt]) => ({
                   label,
-                  data: <Format type="compact1" content={amt} />,
+                  data: <Format type="compact1_written" content={amt} />,
                 }))
                 .value()
             }
