@@ -10,10 +10,14 @@ source ./scripts/ci_scripts/authenticate-server-gcloud.sh "redact-start"
 project=$1
 sha=$(echo "$CIRCLE_SHA1" | cut -c 1-7)
 
+# json and txt reports for long term storage
 gsutil cp ./coverage/coverage-final.json $GCLOUD_ALL_COVERAGE_BUCKET_URL/$CIRCLE_BRANCH-$sha-$project.json
 gsutil cp ./coverage/coverage-final.txt $GCLOUD_ALL_COVERAGE_BUCKET_URL/$CIRCLE_BRANCH-$sha-$project.txt
 
+# branch-head coverage badge and txt for linking in README's, etc
 gsutil cp ./coverage/coverage-shield-badge.svg $GCLOUD_ALL_COVERAGE_BUCKET_URL/$CIRCLE_BRANCH-$project-coverage-badge.svg
 gsutil setmeta -h "Cache-Control:no-cache" $GCLOUD_ALL_COVERAGE_BUCKET_URL/$CIRCLE_BRANCH-$project-coverage-badge.svg
+gsutil cp ./coverage/coverage-final.txt $GCLOUD_ALL_COVERAGE_BUCKET_URL/$CIRCLE_BRANCH-$project-coverage.txt
+gsutil setmeta -h "Cache-Control:no-cache" $GCLOUD_ALL_COVERAGE_BUCKET_URL/$CIRCLE_BRANCH-$project-coverage.txt
 
 source ./scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-end"

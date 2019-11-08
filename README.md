@@ -10,8 +10,8 @@ The live site can be found [here](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/inde
 
 This repository contains the following projects: 
   1) the InfoBase single page application ([/client](https://github.com/TBS-EACPD/InfoBase/blob/master/client))
-  2) the InfoBase data API ([/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server)) ![Test coverage status badge](https://storage.googleapis.com/api-test-coverage/server-coverage-badge.svg)
-  2) the InfoBase email backend ([/email_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend)).
+  2) the InfoBase data API ([/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server)) [![Test coverage status badge](https://storage.googleapis.com/all-test-coverage/master-server-coverage-badge.svg)](https://storage.googleapis.com/all-test-coverage/master-server-coverage.txt)
+  2) the InfoBase email backend ([/email_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend)) [![Test coverage status badge](https://storage.googleapis.com/all-test-coverage/master-email_backend-coverage-badge.svg)](https://storage.googleapis.com/all-test-coverage/master-email_backend-coverage.txt)
   
 See the README.md files in those respective directories for more details on each project.
 

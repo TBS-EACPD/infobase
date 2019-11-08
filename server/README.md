@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=shield)](https://circleci.com/gh/TBS-EACPD/infobase)
-![Test coverage status badge](https://storage.googleapis.com/api-test-coverage/server-coverage-badge.svg)
+[![Test coverage status badge](https://storage.googleapis.com/all-test-coverage/master-server-coverage-badge.svg)](https://storage.googleapis.com/all-test-coverage/master-server-coverage.txt)
 
 *(le Français suit)*
 
