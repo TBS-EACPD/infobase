@@ -1,6 +1,5 @@
 {
   "name": "infobase-server",
-  "private": true,
   "description": "",
   "main": "transpiled_build/index.js",
   "directories": {
@@ -37,14 +36,11 @@
     "eslint": "^4.18.1",
     "eslint-plugin-node": "^6.0.0",
     "eslint-plugin-react": "^7.14.3",
-    "fs-extra": "^8.1.0",
-    "istanbul-api": "^2.1.6",
-    "istanbul-lib-coverage": "^2.0.5",
     "jest": "^24.9.0",
     "jest-cli": "^24.9.0",
     "kill-port": "^1.5.2",
     "nodemon": "^1.19.3",
-    "yargs": "^14.2.0"
+    "jest-scripts": "file:../jest-scripts"
   },
   "scripts": {
     "presnapshot_tests": "(export USE_TEST_DATA='true' && babel-node src/populate_db.js)",
@@ -52,7 +48,7 @@
     "postsnapshot_tests": "babel-node src/populate_db.js",
     "unit_tests": "jest --coverage --forceExit  --config jest_configs/unit_tests.config.js",
     "unit_tests:watch": "jest --watch --config jest_configs/unit_tests.config.js",
-    "combine_coverage_reports": "babel-node ./jest_configs/mapCoverage.js --report ./coverage/*/coverage-final.json",
+    "merge_coverage_reports": "merge-coverage-reports --report ./coverage/*/coverage-final.json",
     "test": "(export DO_NOT_PRINT_COVERAGE=true && npm run unit_tests && npm run snapshot_tests && npm run combine_coverage_reports)",
     "start": "nodemon --config nodemon_start_config.json --watch src --watch package-lock.json --watch ../data -e csv,json,js --exec babel-node src/server.js",
     "start:transpiled": "babel-node transpiled_build/server.js",

@@ -1,0 +1,28 @@
+{
+  "name": "jest-scripts",
+  "version": "1.0.0",
+  "description": "Local package for common jest related scripts",
+  "bin" : { 
+    "merge-coverage-reports": "./merge_coverage_reports.js",
+    "create-coverage-shield-badge": "./create_coverage_shield_badge.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "@babel/preset-env": "^7.6.2",
+    "babel-core": "^7.0.0-bridge.0",
+    "eslint": "^4.18.1",
+    "eslint-plugin-node": "^6.0.0"
+  },
+  "dependencies": {
+    "fs-extra": "^8.1.0",
+    "istanbul-api": "^2.1.6",
+    "istanbul-lib-coverage": "^2.0.5",
+    "yargs": "^14.2.0"
+  },
+  "author": "Stephen O'Neil",
+  "license": "MIT"
+}
