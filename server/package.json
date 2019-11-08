@@ -50,7 +50,7 @@
     "unit_tests:watch": "jest --watch --config jest_configs/unit_tests.config.js",
     "merge_coverage_reports": "merge-coverage-reports --report ./coverage/*/coverage-final.json",
     "create_coverage_shield_badge": "create-coverage-shield-badge --report ./coverage/coverage-final.json > ./coverage/coverage-shield-badge.svg",
-    "test": "(export DO_NOT_PRINT_COVERAGE=true && npm run unit_tests && npm run snapshot_tests && npm run combine_coverage_reports)",
+    "test": "(npm run unit_tests && npm run snapshot_tests && npm run combine_coverage_reports)",
     "start": "nodemon --config nodemon_start_config.json --watch src --watch package-lock.json --watch ../data -e csv,json,js --exec babel-node src/server.js",
     "start:transpiled": "babel-node transpiled_build/server.js",
     "start:debug": "nodemon --config nodemon_start_config.json --watch src --watch package-lock.json --watch ../data -e csv,json,js --exec babel-node --inspect ./src/server.js",
