@@ -181,7 +181,7 @@ jobs:
           background: true
       - run: (cd server && npm run snapshot_tests) # the end to end snapshot tests, run again un-transpiled src for more useful coverage stats
       
-      - run: (cd server && npm run combine_coverage_reports)
+      - run: (cd server && npm run merge_coverage_reports && npm run create_coverage_shield_badge)
       - persist_to_workspace:
           root: ./
           paths:
