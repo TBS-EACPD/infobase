@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const yargs = require('yargs');
-const { createCoverageMap } = require('istanbul-lib-coverage');
+const { createCoverageMap, createCoverageSummary } = require('istanbul-lib-coverage');
+const fs = require('fs-extra');
 
 
 const get_svg_string = (coverage_status_color, coverage_percent) => `
@@ -25,10 +26,10 @@ const get_svg_string = (coverage_status_color, coverage_percent) => `
     Coverage
   </text>
   <text x="900" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="275">
-  ${coverage_percent}%
+    ${coverage_percent}%
   </text>
   <text x="900" y="140" transform="scale(.1)" textLength="275">
-  ${coverage_percent}%
+    ${coverage_percent}%
   </text>
 </g>
 </svg>`;
@@ -44,11 +45,16 @@ function create_coverage_shield_badge(){
     })
     .argv;
 
-  const report_file = argv.report;
-
+  const coverage_report_file = fs.readJsonSync(argv.report);
   const map = createCoverageMap({});
-  const coverage = map.fileCoverageFor(report_file);
-  const coverage_summary = coverage.toSummary();
+  map.merge(coverage_report_file)
+
+  const coverage_summary = createCoverageSummary();
+  map.files().forEach(function(file) {
+    const file_coverage = map.fileCoverageFor(file);
+    const file_summary = file_coverage.toSummary();
+    coverage_summary.merge(file_summary);
+  });
   
   const coverage_percent = Math.round(coverage_summary.data.lines.pct);
   
