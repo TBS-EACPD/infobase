@@ -34,6 +34,9 @@ jobs:
           paths:
             - node_modules
           key: email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}
+
+      - run: (cd email_backend && npm run unit_tests)
+
       - run:
           name: start_email_backend
           command: (cd email_backend && npm start)
@@ -41,8 +44,12 @@ jobs:
       - run:
           command: |
             sleep 10 # Give server time to start before running tests, hack alert
-      - run: (cd email_backend && npm test)
-      - run: circleci step halt
+      - run: (cd email_backend && npm run end_to_end_tests)
+
+      - run: (cd email_backend && npm run merge_coverage_reports && npm run create_coverage_shield_badge)
+      - run: (cd email_backend && ./scripts/ci_scripts/store_project_coverage.sh email_backend)
+
+      - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
@@ -182,10 +189,7 @@ jobs:
       - run: (cd server && npm run snapshot_tests) # the end to end snapshot tests, run again un-transpiled src for more useful coverage stats
       
       - run: (cd server && npm run merge_coverage_reports && npm run create_coverage_shield_badge)
-      - persist_to_workspace:
-          root: ./
-          paths:
-            - ./server/coverage # save coverage output for later
+      - run: (cd server && ./scripts/ci_scripts/store_project_coverage.sh server)
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
@@ -219,7 +223,8 @@ jobs:
           command: (cd client && npm run ci_serve)
           background: true
       - run: (cd client && npm run ci_route_load_tests)
-      - run: circleci step halt # stops and returns successful, once route load tests end, since the mongod and api otherwise hold this job open a couple minutes long
+
+      - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
@@ -263,9 +268,6 @@ jobs:
       - run: ./scripts/ci_scripts/create_deploy_envs.sh
 
       - run: ./scripts/ci_scripts/authenticate-server-gcloud.sh
-
-      # if on master, store the coverage stats and coverage badge created by the test job
-      - run: test $CIRCLE_BRANCH = master && ./scripts/ci_scripts/store_server_coverage.sh || true
 
       # Checksum all JS files in transpiled_build, used to determine if the function needs to be redeployed
       - run: find ./server/transpiled_build -name "*.js" | xargs cksum > server-checksums.txt
