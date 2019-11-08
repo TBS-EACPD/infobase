@@ -1,7 +1,7 @@
 {
-  "name": "jest-scripts",
+  "name": "common-node-scripts",
   "version": "1.0.0",
-  "description": "Local package for common jest related scripts",
+  "description": "Local package for node scripts that are common across mono-repo projects, to keep things DRY and to isolate their dependecies",
   "bin" : { 
     "merge-coverage-reports": "./merge_coverage_reports.js",
     "create-coverage-shield-badge": "./create_coverage_shield_badge.js"

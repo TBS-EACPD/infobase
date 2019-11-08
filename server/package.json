@@ -40,7 +40,7 @@
     "jest-cli": "^24.9.0",
     "kill-port": "^1.5.2",
     "nodemon": "^1.19.3",
-    "jest-scripts": "file:../jest-scripts"
+    "common-node-scripts": "file:../scripts/common_node_scripts"
   },
   "scripts": {
     "presnapshot_tests": "(export USE_TEST_DATA='true' && babel-node src/populate_db.js)",
