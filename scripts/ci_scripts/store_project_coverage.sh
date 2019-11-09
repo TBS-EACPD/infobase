@@ -3,8 +3,6 @@
 
 set -e # will exit if any command has non-zero exit value
 
-sh ./scripts/ci_scripts/authenticate-server-gcloud.sh
-
 source ./scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-start"
 
 project=$1
