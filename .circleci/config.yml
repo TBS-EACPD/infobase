@@ -20,7 +20,7 @@ jobs:
     docker:
       - image: eaadtbs/ib-ci-build:latest
         <<: *dockerhub_auth
-    working_directory: "~/InfoBase"
+    working_directory: "~/InfoBase/email_backend"
     steps:
       - checkout:
           path: "~/InfoBase"
@@ -29,25 +29,25 @@ jobs:
             - email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}
       - run: 
           command: |
-            [ -e "email_backend/node_modules" ] || (cd email_backend && npm ci)
+            [ -e "node_modules" ] || (cd email_backend && npm ci)
       - save_cache:
           paths:
             - node_modules
           key: email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}
 
-      - run: (cd email_backend && npm run unit_tests)
+      - run: npm run unit_tests
 
       - run:
           name: start_email_backend
-          command: (cd email_backend && npm start)
+          command: npm start
           background: true
       - run:
           command: |
             sleep 10 # Give server time to start before running tests, hack alert
-      - run: (cd email_backend && npm run end_to_end_tests)
+      - run: npm run end_to_end_tests
 
-      - run: (cd email_backend && npm run merge_coverage_reports && npm run create_coverage_shield_badge)
-      - run: (cd email_backend && ./scripts/ci_scripts/store_project_coverage.sh email_backend)
+      - run: npm run merge_coverage_reports && npm run create_coverage_shield_badge
+      - run: ../scripts/ci_scripts/store_project_coverage.sh email_backend
 
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
@@ -166,17 +166,17 @@ jobs:
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
-  test: # faster but less in-depth than then test_end_to_end job. Good to move ahead with data and server deploy if these pass
+  test_server:
     docker:
       - image: eaadtbs/ib-ci-test:latest
         <<: *dockerhub_auth
-    working_directory: "~/InfoBase"
+    working_directory: "~/InfoBase/server"
     steps:
       - attach_workspace:
           at: ./
-      - run: ./scripts/ci_scripts/create_envs.sh
+      - run: ../scripts/ci_scripts/create_envs.sh
 
-      - run: (cd server && npm run unit_tests)
+      - run: npm run unit_tests
 
       - run: 
           name: mongod
@@ -184,12 +184,12 @@ jobs:
           background: true
       - run: 
           name: start_api_server
-          command: (cd server && npm run start)
+          command: npm run start
           background: true
-      - run: (cd server && npm run snapshot_tests) # the end to end snapshot tests, run again un-transpiled src for more useful coverage stats
+      - run: npm run snapshot_tests # the end to end snapshot tests, run again un-transpiled src for more useful coverage stats
       
-      - run: (cd server && npm run merge_coverage_reports && npm run create_coverage_shield_badge)
-      - run: (cd server && ./scripts/ci_scripts/store_project_coverage.sh server)
+      - run: npm run merge_coverage_reports && npm run create_coverage_shield_badge
+      - run: ../scripts/ci_scripts/store_project_coverage.sh server
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
@@ -203,6 +203,7 @@ jobs:
           at: ./
       - run: ./scripts/ci_scripts/create_envs.sh
 
+      # repeats some of the server tests, because these fail fast and short-curcuit us before the long-running browser tests
       - run: (cd server && npm run unit_tests)
 
       - run: 
@@ -318,12 +319,12 @@ workflows:
       - test_end_to_end:
           requires:
             - build
-      - test:
+      - test_server:
           requires:
             - build
       - deploy_data:
           requires:
-            - test
+            - test_server
           <<: *deploy_filter
       - deploy_server:
           requires:
