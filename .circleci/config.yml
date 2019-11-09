@@ -47,10 +47,25 @@ jobs:
       - run: (cd email_backend && npm run end_to_end_tests)
 
       - run: (cd email_backend && npm run merge_coverage_reports && npm run create_coverage_shield_badge)
-      - run: ./scripts/ci_scripts/store_project_coverage.sh email_backend
+      
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - ./scripts
+            - ./email_backend/coverage
 
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
+  # Note: the image used for this job is provided by google
+  store_email_backend_coverage:
+    working_directory: "~/InfoBase"
+    docker:
+      - image: google/cloud-sdk:slim
+    steps:
+      - attach_workspace:
+          at: ./
+      - run: ./scripts/ci_scripts/authenticate-server-gcloud.sh
+      - run: (cd email_backend && ../scripts/ci_scripts/store_project_coverage.sh email_backend)
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   cleanup_dev_dbs:
@@ -186,8 +201,22 @@ jobs:
       - run: (cd server && npm run snapshot_tests) # the end to end snapshot tests, run again un-transpiled src for more useful coverage stats
       
       - run: (cd server && npm run merge_coverage_reports && npm run create_coverage_shield_badge)
-      - run: ./scripts/ci_scripts/store_project_coverage.sh server
 
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - ./server/coverage
+
+  # Note: the image used for this job is provided by google
+  store_server_coverage:
+    working_directory: "~/InfoBase"
+    docker:
+      - image: google/cloud-sdk:slim
+    steps:
+      - attach_workspace:
+          at: ./
+      - run: ./scripts/ci_scripts/authenticate-server-gcloud.sh
+      - run: (cd server && ../scripts/ci_scripts/store_project_coverage.sh server)
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test_end_to_end: # slower but more in-depth than the test job. Wait until these have passed before deploying the client
@@ -306,9 +335,14 @@ workflows:
   test_email_backend:
     jobs:
       - test_email_backend
+      - store_email_backend_coverage:
+          requires:
+            - test_email_backend
+
   cleanup_dev_dbs:
     jobs:
       - cleanup_dev_dbs
+
   # One workflow that runs all three job stages (build -> test -> deploy_data/server/client), each stage requiring
   build_test_deploy:
     jobs:
@@ -319,6 +353,9 @@ workflows:
       - test_server:
           requires:
             - build
+      - store_server_coverage:
+          requires:
+            - test_server
       - deploy_data:
           requires:
             - test_server
