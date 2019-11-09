@@ -3,9 +3,9 @@
 
 set -e # will exit if any command has non-zero exit value
 
-source ./scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-start"
-
 sh ./scripts/ci_scripts/authenticate-server-gcloud.sh
+
+source ./scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-start"
 
 project=$1
 sha=$(echo "$CIRCLE_SHA1" | cut -c 1-7)
