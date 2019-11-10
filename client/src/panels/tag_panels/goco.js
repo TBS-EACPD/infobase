@@ -210,8 +210,8 @@ class Goco extends React.Component {
       
       const handleHover = (node, targetElement, data) => {
         targetElement.style.cursor = 'pointer';
-        const allGroupedElements = targetElement.parentElement.parentElement;
-        const childrenGroupedElements = _.map( _.drop(allGroupedElements.children, 2), _.identity );
+        const allGroupedElements = targetElement.parentNode.parentNode;
+        const childrenGroupedElements = _.map( _.drop(allGroupedElements.childNodes, 2), _.identity );
         const hover_index_map = generate_index_map(data);
         const target_spending = childrenGroupedElements[hover_index_map[node.indexValue][0]];
         const target_fte = childrenGroupedElements[hover_index_map[node.indexValue][1]];
@@ -219,7 +219,7 @@ class Goco extends React.Component {
         if(!_.isEqual(target_spending, clicked_spending) && !_.isEqual(target_fte, clicked_fte)){
           target_spending && toggleOpacity(target_spending);
           target_fte && toggleOpacity(target_fte);
-          _.forEach(allGroupedElements.parentElement.querySelectorAll("text"),
+          _.forEach(allGroupedElements.parentNode.querySelectorAll("text"),
             (textElement) => {
               const currentText = textElement.textContent.replace(/\s+/g, '');
               const target_text = node.indexValue.replace(/\s+/g, '');
@@ -245,8 +245,8 @@ class Goco extends React.Component {
       }, {});
 
       const handleClick = (node, targetElement, data) => {
-        const allGroupedElements = targetElement.parentElement.parentElement;
-        const childrenGroupedElements = _.map( _.drop(allGroupedElements.children, 2), _.identity );
+        const allGroupedElements = targetElement.parentNode.parentNode;
+        const childrenGroupedElements = _.map( _.drop(allGroupedElements.childNodes, 2), _.identity );
 
         const click_index_map = generate_index_map(data);
         const target_spending = childrenGroupedElements[click_index_map[node.indexValue][0]];
@@ -255,7 +255,7 @@ class Goco extends React.Component {
         _.forEach(childrenGroupedElements, (element) => {
           element.style.opacity = 0.4;
         });
-        _.forEach(allGroupedElements.parentElement.querySelectorAll("text"),
+        _.forEach(allGroupedElements.parentNode.querySelectorAll("text"),
           (textElement) => {
             const currentText = textElement.textContent.replace(/\s+/g, '');
             const target_text = node.indexValue.replace(/\s+/g, '');
