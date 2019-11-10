@@ -78,6 +78,22 @@ const percent_value_tooltip = (tooltip_items, formatter, total) => (
   </div>
 );
 
+const IESymbolShape = ({
+  x, y, size, fill, borderWidth, borderColor,
+}) => (
+  <rect
+    x={x}
+    y={y}
+    transform={`translate(0 -4)`}
+    fill={fill}
+    strokeWidth={borderWidth}
+    stroke={borderColor}
+    width={size}
+    height={size}
+    style={{ pointerEvents: 'none' }}
+  />
+);
+
 const general_default_props = {
   tooltip: (d, tooltip_formatter) => default_tooltip(d, tooltip_formatter),
   is_money: true,
@@ -306,6 +322,8 @@ export class NivoResponsiveHBar extends React.Component{
       labelSkipWidth,
       markers,
     } = this.props;
+    legends && window.feature_detection.is_IE() ? legends[0].symbolShape = IESymbolShape : null;
+
     return (
       //have to have an empty string in key to make sure
       //that negative bars will be displayed
@@ -425,7 +443,8 @@ export class NivoResponsiveLine extends React.Component {
     const {
       y_scale_zoomed,
     } = this.state;
-
+    
+    legends && window.feature_detection.is_IE() ? legends[0].symbolShape = IESymbolShape : null;
     return (
       <Fragment>
         {show_yaxis_zoom && !enableArea &&
