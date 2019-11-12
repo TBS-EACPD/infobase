@@ -403,8 +403,8 @@ class BudgetMeasureHBars extends React.Component {
         .value();
 
     const valid_selected_value = _.filter(value_options, value_option => value_option.id === selected_value).length === 1 ?
-        selected_value :
-        value_options[0].id;
+      selected_value :
+      value_options[0].id;
 
     const get_program_allocation_data_from_dept_data = (data) => {
       return _.chain(data)
