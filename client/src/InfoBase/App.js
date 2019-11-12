@@ -37,7 +37,7 @@ const PrivacyStatement = retrying_react_lazy( () => import(/* webpackChunkName: 
 const TreeMap = retrying_react_lazy( () => import(/* webpackChunkName: "TreeMap" */ '../TreeMap/TreeMap.js') ); 
 const TextDiff = retrying_react_lazy( () => import(/* webpackChunkName: "TextDiff" */ '../diff/TextDiff.js') ); 
 const Lab = retrying_react_lazy( () => import(/* webpackChunkName: "InfoLab" */ '../lab/InfoLab.js') ); 
-const IsolatedPanel = retrying_react_lazy( () => import(/* webpackChunkName: "IsolatedPanel" */ '../panels/IndividualPanelRoute.js') ); 
+const IsolatedPanel = retrying_react_lazy( () => import(/* webpackChunkName: "IsolatedPanel" */ '../panels/IndividualPanelRoute/IndividualPanelRoute.js') ); 
 const IndicatorPanel = retrying_react_lazy( () => import(/* webpackChunkName: "IndicatorDisplay" */ '../panels/panel_declarations/result_graphs/indicator_display.js') ); 
 
 export class App extends React.Component {

@@ -1,5 +1,5 @@
 import { Table } from './TableClass.js';
-import { PanelGraph, tables_for_graph } from './PanelGraph.js';
+import { PanelRegistry, tables_for_graph } from '../panels/PanelRegistry.js';
 import { Statistics, tables_for_statistics } from './Statistics.js';
 import { api_load_results_bundle, api_load_results_counts, subject_has_results } from '../models/populate_results.js';
 import { load_footnotes_bundle } from '../models/populate_footnotes.js';
@@ -52,7 +52,7 @@ function ensure_loaded({
   const should_load_results = (
     results || 
     _.chain(graph_keys)
-      .map(key => PanelGraph.lookup(key, subject_level))
+      .map(key => PanelRegistry.lookup(key, subject_level))
       .map('requires_results')
       .concat( 
         _.chain(stat_keys)
@@ -67,7 +67,7 @@ function ensure_loaded({
   const should_load_result_counts = (
     require_result_counts ||
     _.chain(graph_keys)
-      .map(key => PanelGraph.lookup(key, subject_level))
+      .map(key => PanelRegistry.lookup(key, subject_level))
       .map('requires_result_counts')
       .concat( 
         _.chain(stat_keys)
@@ -82,7 +82,7 @@ function ensure_loaded({
   const should_load_granular_result_counts = (
     require_granular_result_counts ||
     _.chain(graph_keys)
-      .map(key => PanelGraph.lookup(key, subject_level))
+      .map(key => PanelRegistry.lookup(key, subject_level))
       .map('requires_granular_result_counts')
       .concat( 
         _.chain(stat_keys)
@@ -97,7 +97,7 @@ function ensure_loaded({
   const should_load_has_budget_measures = (
     has_budget_measures ||
     _.chain(graph_keys)
-      .map(key => PanelGraph.lookup(key, subject_level))
+      .map(key => PanelRegistry.lookup(key, subject_level))
       .map('requires_has_budget_measures')
       .some()
       .value()
@@ -106,7 +106,7 @@ function ensure_loaded({
   const should_load_budget_measures = (
     budget_measures ||
     _.chain(graph_keys)
-      .map(key => PanelGraph.lookup(key, subject_level))
+      .map(key => PanelRegistry.lookup(key, subject_level))
       .map('requires_budget_measures')
       .some()
       .value()
@@ -123,7 +123,7 @@ function ensure_loaded({
   const result_docs_to_load = !_.isEmpty(result_docs) ?
     result_docs :
     _.chain(graph_keys)
-      .map(key => PanelGraph.lookup(key, subject_level))
+      .map(key => PanelRegistry.lookup(key, subject_level))
       .map('required_result_docs')
       .concat( 
         _.chain(stat_keys)

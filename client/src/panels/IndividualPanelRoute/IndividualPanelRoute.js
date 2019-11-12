@@ -1,12 +1,13 @@
-import { StandardRouteContainer } from '../core/NavComponents';
+import text from './IndividualPanelRoute.yaml';
 
-import { get_panels_for_subject } from '../infographic/get_panels_for_subject/index.js';
-import { Subject } from '../models/subject';
-import { SpinnerWrapper } from '../components/index.js';
-import { ensure_loaded } from '../core/lazy_loader';
-import { ReactPanelGraph } from '../core/PanelCollectionView';
-import { create_text_maker } from '../models/text.js';
-import text from './individual_panel.yaml';
+import { StandardRouteContainer } from '../../core/NavComponents.js';
+import { PanelRenderer } from '../PanelRenderer.js';
+import { SpinnerWrapper } from '../../components/index.js';
+import { get_panels_for_subject } from '../../infographic/get_panels_for_subject/index.js';
+import { Subject } from '../../models/subject';
+import { ensure_loaded } from '../../core/lazy_loader';
+import { create_text_maker } from '../../models/text.js';
+
 const text_maker = create_text_maker(text);
 
 const {
@@ -86,7 +87,7 @@ export default class IsolatedPanel extends React.Component {
           <div id="main" style={{marginTop: "10px"}}>
             <h1>{subject.fancy_name}</h1>
             {panel_key &&
-              <ReactPanelGraph 
+              <PanelRenderer 
                 graph_key={panel_key}
                 subject={subject}
                 key={`${panel_key}-${subject.guid}`}
