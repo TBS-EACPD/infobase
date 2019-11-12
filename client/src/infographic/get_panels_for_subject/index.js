@@ -1,4 +1,4 @@
-import { PanelGraph } from '../../core/PanelGraph.js';
+import { PanelRegistry } from '../../panels/PanelRegistry.js';
 
 const panel_loading_promises = (subject) => {
   switch(subject.level){
@@ -24,7 +24,7 @@ export function get_panels_for_subject(subject){
           _.chain(panel_keys_for_area)
             .compact() //the above functions create null elements to ease using conditionals, filter them out.
             .map(key => {
-              const panel_obj = PanelGraph.lookup(key, subject.level);
+              const panel_obj = PanelRegistry.lookup(key, subject.level);
 
               if(!panel_obj && window.is_dev){
                 throw `${key} is not a valid graph`;

@@ -12,7 +12,7 @@ import { Subject } from "../models/subject.js";
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { get_panels_for_subject } from './get_panels_for_subject/index.js';
 import { bubble_defs } from './bubble_definitions.js'; 
-import { ReactPanelGraph } from '../core/PanelCollectionView.js';
+import { PanelRenderer } from '../panels/PanelRenderer.js';
 import {
   create_text_maker_component,
   SpinnerWrapper,
@@ -229,7 +229,7 @@ class InfoGraph_ extends React.Component {
           }
           { !loading &&
             _.map(panel_keys, graph_key => 
-              <ReactPanelGraph 
+              <PanelRenderer 
                 graph_key={graph_key}
                 subject={subject}
                 active_bubble_id={active_bubble_id}

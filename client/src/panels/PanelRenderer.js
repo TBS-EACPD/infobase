@@ -1,11 +1,11 @@
 import { withRouter } from 'react-router';
 
 import { shallowEqualObjectsOverKeys } from '../general_utils.js';
-import { PanelGraph } from '../core/PanelGraph.js';
+import { PanelRegistry } from './PanelRegistry.js';
 import { panel_context } from '../infographic/context.js';
 
-export const ReactPanelGraph = withRouter(
-  class ReactPanelGraph_ extends React.Component {
+export const PanelRenderer = withRouter(
+  class PanelRenderer_ extends React.Component {
     render(){
       let {
         subject,
@@ -14,7 +14,7 @@ export const ReactPanelGraph = withRouter(
         active_bubble_id,
       } = this.props;  
 
-      const graph_obj = PanelGraph.lookup(graph_key, subject.level);
+      const graph_obj = PanelRegistry.lookup(graph_key, subject.level);
 
       const graph_options = {history};
 

@@ -1,18 +1,18 @@
 import {createSelector } from 'reselect';
-import { StandardRouteContainer } from '../core/NavComponents';
-import { ReactPanelGraph } from '../core/PanelCollectionView';
 import { Link } from 'react-router-dom';
+
+import { StandardRouteContainer } from '../core/NavComponents.js';
+import { PanelRenderer } from '../panels/PanelRenderer.js';
 import { create_text_maker } from '../models/text.js';
 import graph_text from "./GraphInventory.yaml";
 
-const tm = create_text_maker(graph_text);
-
-/* eslint-disable no-unused-vars */
-import { get_panels_for_subject } from '../infographic/get_panels_for_subject';
-import { Subject } from '../models/subject';
+import { get_panels_for_subject } from '../infographic/get_panels_for_subject/index.js';
+import { Subject } from '../models/subject.js';
 import { EverythingSearch, SpinnerWrapper } from '../components/index.js';
-import { ensure_loaded } from '../core/lazy_loader';
-import { PanelGraph } from '../core/PanelGraph';
+import { ensure_loaded } from '../core/lazy_loader.js';
+import { PanelRegistry } from '../panels/PanelRegistry.js';
+
+const tm = create_text_maker(graph_text);
 
 const {
   Dept, 
@@ -64,8 +64,8 @@ const getSubj = (level, id) => {
 
 function graphs_of_interest(graph){
   const { depends_on, info_deps, key} = graph;
-  const same_key = _.filter(PanelGraph.graphs, g => (g.key === key && g !== graph) );
-  const similar_dependencies = _.chain(PanelGraph.graphs)
+  const same_key = _.filter(PanelRegistry.graphs, g => (g.key === key && g !== graph) );
+  const similar_dependencies = _.chain(PanelRegistry.graphs)
     .filter(g => !_.isEmpty(
       _.union(
         _.intersection(g.depends_on,depends_on),
@@ -76,7 +76,7 @@ function graphs_of_interest(graph){
     .reject( g => g === graph )
     .value();
 
-  const rest = _.chain(PanelGraph.graphs)
+  const rest = _.chain(PanelRegistry.graphs)
     .map()
     .difference([ graph, ...similar_dependencies ])
     .sortBy('key')
@@ -100,7 +100,7 @@ const get_graph_obj = createSelector(
   get_subj,
   props => _.get(props, "match.params.graph"),
   (subject, graph_key) => {
-    return PanelGraph.lookup(graph_key, subject.level) || PanelGraph.lookup('financial_key_concepts', 'gov');
+    return PanelRegistry.lookup(graph_key, subject.level) || PanelRegistry.lookup('financial_key_concepts', 'gov');
   }
 );
 
@@ -272,7 +272,7 @@ export default class GraphInventory extends React.Component {
           <p> {tm("selected_graph")}: {panel.key} </p>
         </div>
         <div id="main">
-          <ReactPanelGraph 
+          <PanelRenderer 
             graph_key={panel.key}
             subject={subject}
             key={`${panel.key}-${subject.guid}`}

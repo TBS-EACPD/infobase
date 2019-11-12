@@ -1,5 +1,5 @@
-import { Table } from './TableClass.js';
-import { get_info, tables_for_statistics } from './Statistics.js';
+import { Table } from '../core/TableClass.js';
+import { get_info, tables_for_statistics } from '../core/Statistics.js';
 import { Subject } from '../models/subject.js';
 import FootNote from '../models/footnotes.js';
 import { rpb_link, get_appropriate_rpb_subject } from '../rpb/rpb_link.js';
@@ -18,7 +18,7 @@ const default_args = {
   },
 };
 
-class PanelGraph {
+class PanelRegistry {
   static get graphs() { return graphs; }
   
   static lookup(key,level){
@@ -79,7 +79,7 @@ class PanelGraph {
       _.each(["layout_def", "text", "title"], property => {
         if(this[property]){
           // eslint-disable-next-line no-console
-          console.warning(`PanelGraph redundant property: ${property}`);
+          console.warning(`PanelRegistry redundant property: ${property}`);
         }
       });
     }
@@ -211,7 +211,7 @@ class PanelGraph {
 
 
 function graphs_with_key(key, level){
-  let graphs = _.filter(PanelGraph.graphs, { key });
+  let graphs = _.filter(PanelRegistry.graphs, { key });
   if(level){
     graphs = _.filter(graphs, { level });
   }
@@ -238,10 +238,10 @@ function tables_for_graph(graph_key, subject_level){
 const layout_types = { full: 'full', half: 'half' };
 
 export {
+  PanelRegistry,
   layout_types,
-  PanelGraph,
   graphs_with_key,
   tables_for_graph,  
 };
 
-window._DEV_HELPERS.PanelGraph = PanelGraph;
+window._DEV_HELPERS.PanelRegistry = PanelRegistry;

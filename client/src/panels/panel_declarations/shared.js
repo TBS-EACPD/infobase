@@ -1,8 +1,9 @@
 import './shared.scss';
-import { InfographicPanel, StdPanel, TextPanel, Col } from '../InfographicPanel.js';
+
+import { InfographicPanel, StdPanel, TextPanel, Col } from './InfographicPanel.js';
 
 import { formats, dollar_formats, formatter } from '../../core/format.js';
-import { PanelGraph, layout_types } from '../../core/PanelGraph.js';
+import { PanelRegistry, layout_types } from '../PanelRegistry.js';
 import { newIBCategoryColors, newIBLightCategoryColors, newIBDarkCategoryColors, NA_color } from '../../core/color_schemes.js';
 import { breakpoints } from '../../core/breakpoint_defs.js';
 import { Table } from '../../core/TableClass.js';
@@ -557,9 +558,9 @@ const hex_to_rgb = (hex) => {
 
 const declare_panel = ({panel_key, levels, panel_config_func}) => {
 
-  if ( !PanelGraph.is_registered_graph_key(panel_key) ){
+  if ( !PanelRegistry.is_registered_graph_key(panel_key) ){
     levels.forEach( 
-      level => new PanelGraph({
+      level => new PanelRegistry({
         level,
         key: panel_key,
         ...panel_config_func(level, panel_key),
