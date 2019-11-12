@@ -18,4 +18,4 @@ gsutil setmeta -h "Cache-Control:no-cache" $GCLOUD_ALL_COVERAGE_BUCKET_URL/$CIRC
 gsutil cp ./coverage/coverage-final.txt $GCLOUD_ALL_COVERAGE_BUCKET_URL/$CIRCLE_BRANCH-$project-coverage.txt
 gsutil setmeta -h "Cache-Control:no-cache" $GCLOUD_ALL_COVERAGE_BUCKET_URL/$CIRCLE_BRANCH-$project-coverage.txt
 
-source ~/InfoBase/ci_scripts/redact_env_vars_from_logging.sh "redact-end"
+source ~/InfoBase/scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-end"
