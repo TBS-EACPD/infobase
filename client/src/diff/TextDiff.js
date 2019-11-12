@@ -11,9 +11,9 @@ import { ensure_loaded } from '../core/lazy_loader.js';
 
 import { Subject } from '../models/subject';
 import { result_docs, get_result_doc_keys } from '../models/results.js';
-import { Result, indicator_text_functions } from '../panels/result_graphs/results_common.js';
+import { Result, indicator_text_functions } from '../panels/panel_declarations/result_graphs/results_common.js';
 const { indicator_target_text } = indicator_text_functions;
-import result_text from '../panels/result_graphs/result_components.yaml';
+import result_text from '../panels/panel_declarations/result_graphs/result_components.yaml';
 
 import {
   Select,

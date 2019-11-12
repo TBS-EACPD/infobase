@@ -1,0 +1,184 @@
+@import "../../../common_css/common-variables";
+
+.quadrant-dl > div:first-child {
+  float:left;
+  border-bottom: none;
+  border-right: none;
+}
+
+.quadrant-dl > div:nth-child(2) {
+  float:right;
+  border-bottom: none;
+}
+
+.quadrant-dl > div:nth-child(3) {
+  float:left;
+  border-right: none;
+}
+
+.quadrant-dl > div:nth-child(4) {
+  float:right;  
+}
+
+.quadrant-dl{
+  overflow: visible;
+  margin: 0;
+}
+.quadrant-dl > div {
+  width: 50%;
+}
+
+.number-box {
+  height: 125px;
+  margin: 0;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  color: $textLightColor;
+  background-color: $buttonPrimaryColor;
+  border: 1px solid $buttonSecondaryColor;
+}
+.quadrant-dl > div > dt,
+.line-quadrant-dl > div > dt {
+  display: block;
+  order: 2;
+  font-weight: $mediumFontWeight;
+}
+.quadrant-dl > div > dd,
+.line-quadrant-dl > div > dd {
+  display: flex;
+  order: 1;
+  align-items: center;
+  justify-content: center;
+  font-size : 40px;
+  margin-bottom: 0px;
+}
+
+ul.indicator-list {
+  margin: 0px;
+  padding: 0px;
+}
+
+ul.indicator-list > li {
+  @include unstyled-list;
+  padding: 10px;
+  margin-left: -15px;
+  margin-right: 20px;
+  background-color: inherit;
+}
+
+ul.indicator-list > li:not(:first-child) {
+  border-top: 2px solid $separatorColor;
+  margin-top: 6rem;
+}
+
+.indicator-item__header {
+  font-size: 1.2em;
+  text-align:center;
+  margin-top: 10px; 
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+/* mostly resetting bootstrap's normalization of dd/dt */
+
+
+dl.indicator-item__dl {
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+dl.indicator-item__dl dt+dd {
+  padding-bottom: 10px;
+}
+
+@media(min-width: $minSmallDevice){
+  dl.indicator-item__dl > dd,
+  dl.indicator-item__dl > dt {
+    margin-bottom:0;
+  }
+
+  dl.indicator-item__dl > dt:first-of-type,
+  dl.indicator-item__dl > dd:first-of-type {
+    border-top: none;
+  }
+}
+
+.status-icon-array {
+  @media(max-width: $maxExtraSmallDevice){
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+.inline-status-icon {
+  padding-left: 6px;
+  padding-right: 5px;
+  font-size: 1.2em;
+  white-space: nowrap;
+  position: relative;
+}
+.inline-status-icon__count {
+  color: $textColor;
+  bottom: 2px;
+  font-size: 60%;
+}
+
+/* color classes for icon-array viz */
+.results-icon-array-pass {
+  background-color: $successDarkColor;
+}
+
+.results-icon-array-fail {
+  background-color: $failDarkColor;
+}
+
+.results-icon-array-na {
+  background-color: $warnDarkColor;
+}
+
+.results-icon-array-neutral {
+  background-color: $tertiaryColor;
+}
+
+//used in results-explorer 
+.indicator-container-container {
+  padding-right:10px;
+  padding-top:10px;
+}
+
+.results-flat-table > div > div > table {
+  width: 100%;
+  position: relative;
+  & > tbody > tr > td:first-child { // subject
+    width: 23%;
+  }
+  & > tbody > tr > td:nth-child(2) { // indicator
+    width: 30%;
+  }
+  & > tbody > tr > td:nth-child(3) { // target
+    width: 15%;
+  }
+  & > tbody > tr > td:nth-child(4) { // actual result
+    width: 15%;
+  }
+  & > tbody > tr > td:nth-child(5) { // Date to achieve
+    width: 15%;
+  }
+  & > tbody > tr > td:nth-child(6) { // status icon
+    min-width: 60px;
+    width: 2%;
+  }
+}
+
+.status-icon-table--met-icon, .status-icon-table--not-met-icon, .status-icon-table--na-icon, .status-icon-table--future-icon {
+  margin: 0px;
+}
+
+.badge.badge--is-new-indicator {
+  font-size: 12px;
+  margin-left: 5px;
+  background-color: $highlightColor;
+  color: $backgroundColor;
+  vertical-align: 0.1em;
+}

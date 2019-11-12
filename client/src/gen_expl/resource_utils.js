@@ -1,4 +1,4 @@
-import { planned_resource_fragment } from '../panels/result_graphs/results_common.js';
+import { planned_resource_fragment } from '../panels/panel_declarations/result_graphs/results_common.js';
 
 
 export function get_resources_for_subject(subject, doc){
