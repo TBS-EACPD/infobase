@@ -1,10 +1,8 @@
 import './DisplayTable.scss';
-import classNames from 'classnames';
-import { util_components } from '../panels/shared.js';
-const {
-  SortDirections,
-} = util_components;
 
+import classNames from 'classnames';
+
+import { SortDirections } from './SortDirection.js';
 import { TM } from './TextMaker.js';
 
 export class DisplayTable extends React.Component {
