@@ -19,23 +19,22 @@ export const ReactPanelGraph = withRouter(
       const graph_options = {history};
 
       const { Provider } = panel_context;
-      
+
       const calculations = graph_obj.calculate(subject, graph_options);
-      
+
       if(!calculations){
         return null;
       }
-      return <div id={graph_key} tabIndex="0">
-        <Provider value={ {active_bubble_id, graph_key, subject} }>
-          { graph_obj.render(calculations, graph_options) }
-        </Provider>
-      </div>;
-
-      
+      return (
+        <div id={graph_key} tabIndex="0">
+          <Provider value={ {active_bubble_id, graph_key, subject} }>
+            { graph_obj.render(calculations, graph_options) }
+          </Provider>
+        </div>
+      );
     }
     shouldComponentUpdate(nextProps){
       return !shallowEqualObjectsOverKeys(nextProps, this.props, ['subject','graph_key']);
-    }
-    
+    } 
   }
 );

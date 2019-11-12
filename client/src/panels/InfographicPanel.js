@@ -62,7 +62,7 @@ class Panel_ extends React.Component {
           subject.dept_code : 
           `${subject.dept.dept_code} - ${subject.name}`
     );
-    const share_modal_title = `${share_modal_subject_fragment && `${share_modal_subject_fragment} — ` || ""}${title}`;
+    const share_modal_title = `${share_modal_subject_fragment ? `${share_modal_subject_fragment} — ` : ""}${title}`;
 
     const header_utils = context && (
       <div style={{marginLeft: 'auto'}}>
@@ -144,6 +144,7 @@ export const TextPanel = props => {
 };
 
 
+
 /* 
   The below components allow to reduce some redundancy when addressing a particular use case: 
   
@@ -162,21 +163,15 @@ export const TextPanel = props => {
       {...first_col_content}
     </Col>
   </StdPanel>
-
-
 */
 
-
+//Dummy component that will be remapped to flexboxgrid columns 
 const Col = ({ children, size }) => null;
-
 Col.propTypes = {
   size: PropTypes.number.isRequired,
   isText: PropTypes.bool,
   isGraph: PropTypes.bool,
 };
-
-
-//Dummy component that will be remapped to flexboxgrid columns 
 
 const StdPanel = ({ title, sources, footnotes, children, containerAlign }) => {
   const mapped_children = _.chain(children)
@@ -217,9 +212,7 @@ const StdPanel = ({ title, sources, footnotes, children, containerAlign }) => {
       </div>
     </InfographicPanel>
   );
-
 };
-
 StdPanel.propTypes = {
   children: function (props) {
     const { children } = props;

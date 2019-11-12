@@ -22,9 +22,9 @@ class PanelGraph {
   static get graphs() { return graphs; }
   
   static lookup(key,level){
-    const lookup = create_graph_key(key,level);
+    const lookup = create_graph_key(key, level);
     if (window.is_dev && !graphs[lookup]) {
-      /* eslint-disable no-console */
+      // eslint-disable-next-line no-console
       console.error(`bad graph key - ${lookup} for level ${level}`);
       return null;
     }
@@ -50,8 +50,7 @@ class PanelGraph {
       return _.chain(graph_obj.depends_on)
         .union(tables_from_info_deps)
         .includes(table_id)
-        .value();
-          
+        .value();   
     });
   }
 
@@ -60,30 +59,30 @@ class PanelGraph {
   }
 
   static register_instance(instance){
-
     const { 
       full_key,
       level,
     } = instance;
+
     if (!_.includes(subjects, level)){
       throw `graph ${instance.key} has an undefined level`;
     }
-
     if (full_key in graphs){
       throw `graph ${instance.key} has already been defined`;
     }
+
     graphs[full_key] = instance;
   }
 
   new_api_warnings(){
-    if(this.is_old_api || !window.is_dev){
-      return;
+    if (window.is_dev){
+      _.each(["layout_def", "text", "title"], property => {
+        if(this[property]){
+          // eslint-disable-next-line no-console
+          console.warning(`PanelGraph redundant property: ${property}`);
+        }
+      });
     }
-    _.each(["layout_def", "text", "title"], property => {
-      if(this[property]){
-        console.warning(`PanelGraph redundant property: ${property}`);
-      }
-    });
   }
 
   constructor(def){
@@ -95,7 +94,7 @@ class PanelGraph {
     //we copy every thing except render and calculate, which follow a specific API
     this._inner_calculate = def.calculate || (()=> true);
     this._inner_render = def.render;
-    const to_assign = _.omit(def, [ 'render', 'calculate' ]);
+    const to_assign = _.omit(def, ['render', 'calculate']);
     const full_key = create_graph_key(def.key,def.level);
     Object.assign(
       this,  
@@ -105,17 +104,16 @@ class PanelGraph {
     );
                      
     this.constructor.register_instance(this);
-
   }
 
   get tables(){ //table defs in depends_on indexed by their table ids
     return _.chain(this.depends_on)
-      .map( table_id => [table_id, Table.lookup(table_id) ] )
+      .map( table_id => [table_id, Table.lookup(table_id)] )
       .fromPairs()
       .value();
   }
 
-  calculate(subject,options={}){ //delegates to the proper level's calculate function
+  calculate(subject, options={}){ //delegates to the proper level's calculate function
     if (this.level !== subject.level){
       return false;
     }
@@ -127,7 +125,7 @@ class PanelGraph {
 
     info.is_a11y_mode = window.is_a11y_mode;
 
-    const graph_args = calc_func.call(this,subject,info, options);
+    const graph_args = calc_func.call(this,subject, info, options);
     if(graph_args === false){ return false; }
 
     //inner_render API : a graph's inner_render fucntion usually wants access to info, graph_args and subject.
@@ -142,16 +140,13 @@ class PanelGraph {
       return this.source(subject);
     } else { //if it's undefined we'll make one
       /* eslint-disable-next-line no-use-before-define */
-      return _.chain(tables_for_graph(this.key, subject.level))
-        .map( table => Table.lookup(table))
+      return _.chain( tables_for_graph(this.key, subject.level) )
+        .map( table => Table.lookup(table) )
         .map( table => {
-
-          let appropriate_subject = get_appropriate_rpb_subject(subject);
-
           return {
             html: table.name,
             href: rpb_link({
-              subject: appropriate_subject.guid,
+              subject: get_appropriate_rpb_subject(subject).guid,
               table: table.id,
               mode: 'details',
             }),
@@ -162,15 +157,13 @@ class PanelGraph {
   }
 
   get footnote_concept_keys(){
-
     if (this.footnotes === false){
       return [];
-    } else if(_.isArray(this.footnotes)){
+    } else if( _.isArray(this.footnotes) ){
       return _.chain(this.footnotes)
         .concat( this.machinery_footnotes ? ["MACHINERY"] : [] )
         .uniqBy()
         .value();
-
     } else {
       return _.chain(this.tables)
         .map('tags')
@@ -179,7 +172,6 @@ class PanelGraph {
         .concat( this.machinery_footnotes ? ["MACHINERY"] : [] )
         .uniqBy()
         .value();
-
     }
   }
 
@@ -196,8 +188,6 @@ class PanelGraph {
       .uniqBy('text') //some footnotes are duplicated to support different topics, years, orgs, etc. 
       .compact()
       .value();
-  
-
   }
 
   render(calculations, options={}){
@@ -206,14 +196,16 @@ class PanelGraph {
     const footnotes = this.get_footnotes(subject);
     const sources = this.get_source(subject);
 
-    const react_el = render_func({
-      calculations,
-      footnotes,
-      sources,        
-    },options);
+    const react_el = render_func(
+      {
+        calculations,
+        footnotes,
+        sources,        
+      },
+      options
+    );
     
     return react_el;
-    
   }
 }
 
@@ -226,12 +218,12 @@ function graphs_with_key(key, level){
   return graphs;
 }
 
-function tables_for_graph( graph_key, subject_level ){
+function tables_for_graph(graph_key, subject_level){
   const graph_objs = graphs_with_key(graph_key, subject_level);
   return _.chain( graph_objs )
     .map('info_deps')
     .flatten()
-    .map( tables_for_statistics )
+    .map(tables_for_statistics)
     .flatten()
     .union( 
       _.chain(graph_objs)
