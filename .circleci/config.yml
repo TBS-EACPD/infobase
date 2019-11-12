@@ -37,13 +37,6 @@ jobs:
 
       - run: (cd email_backend && npm run unit_tests)
 
-      - run:
-          name: start_email_backend
-          command: (cd email_backend && npm start)
-          background: true
-      - run:
-          command: |
-            sleep 10 # Give server time to start before running tests, hack alert
       - run: (cd email_backend && npm run end_to_end_tests)
 
       - run: (cd email_backend && npm run merge_coverage_reports && npm run create_coverage_shield_badge)
@@ -53,8 +46,6 @@ jobs:
           paths:
             - ./scripts
             - ./email_backend/coverage
-
-      - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
   # Note: the image used for this job is provided by google
   store_email_backend_coverage:

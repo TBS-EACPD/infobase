@@ -2,10 +2,12 @@ import axios from 'axios';
 import nodemailer from 'nodemailer';
 import _ from 'lodash';
 
-describe("End-to-end tests for email_backend endpoints", () => {
+// eslint-disable-next-line no-unused-vars
+import { email_backend } from './index.js'; // Server's started as side effect of import, kind of a GCloud Function thing although I could clean that up
 
+describe("End-to-end tests for email_backend endpoints", () => {
   const prod_test_url = "https://us-central1-report-a-problem-email-244220.cloudfunctions.net/prod-email-backend";
-  const local_test_url = "http://127.0.0.1:7331";
+  const local_test_url = `http://127.0.0.1:7331`;
   
   const test_against_prod = false;
   const test_url = test_against_prod ? prod_test_url: local_test_url;
