@@ -78,13 +78,13 @@ const percent_value_tooltip = (tooltip_items, formatter, total) => (
   </div>
 );
 
-const IESymbolShape = ({
+const fixedSymbolShape = ({
   x, y, size, fill, borderWidth, borderColor,
 }) => (
   <rect
     x={x}
     y={y}
-    transform={`translate(0 -4)`}
+    transform={window.feature_detection.is_IE() ? `translate(0 -4)` : ''}
     fill={fill}
     strokeWidth={borderWidth}
     stroke={borderColor}
@@ -145,7 +145,8 @@ export class NivoResponsivePie extends React.Component{
       startAngle,
       is_money,
     } = this.props;
-
+    legends && (legends[0].symbolShape = fixedSymbolShape);
+    
     return (
       <ResponsivePie
         {...{data,
@@ -224,6 +225,7 @@ export class NivoResponsiveBar extends React.Component{
       labelTextColor,
       borderWidth,
     } = this.props;
+    legends && (legends[0].symbolShape = fixedSymbolShape);
 
     return (
       //have to have an empty string in key to make sure
@@ -322,7 +324,7 @@ export class NivoResponsiveHBar extends React.Component{
       labelSkipWidth,
       markers,
     } = this.props;
-    legends && window.feature_detection.is_IE() ? legends[0].symbolShape = IESymbolShape : null;
+    legends && (legends[0].symbolShape = fixedSymbolShape);
 
     return (
       //have to have an empty string in key to make sure
@@ -443,8 +445,8 @@ export class NivoResponsiveLine extends React.Component {
     const {
       y_scale_zoomed,
     } = this.state;
-    
-    legends && window.feature_detection.is_IE() ? legends[0].symbolShape = IESymbolShape : null;
+
+    legends && (legends[0].symbolShape = fixedSymbolShape);
     return (
       <Fragment>
         {show_yaxis_zoom && !enableArea &&
