@@ -23,7 +23,7 @@ export const declare_last_year_g_and_c_perspective_panel = () => declare_panel({
     footnotes: ['SOBJ10'],
     info_deps: ['orgTransferPayments_gov_info', 'orgTransferPayments_dept_info', 'orgVoteStatPa_dept_info'],
     calculate(subject, info, options){
-      const graph_args = {
+      const panel_args = {
         dept_in_gov: [
           { value: info.gov_tp_exp_pa_last_year, name: 'y'},
           { value: info.dept_tp_exp_pa_last_year, name: 'x'},
@@ -36,13 +36,13 @@ export const declare_last_year_g_and_c_perspective_panel = () => declare_panel({
   
       const has_transfer_payments = info.dept_tp_exp_pa_last_year !== 0;
   
-      return has_transfer_payments && graph_args;
+      return has_transfer_payments && panel_args;
     },
     render({calculations, footnotes, sources}){
-      const { subject, graph_args, info } = calculations; 
-      const gov_tp_exp_pa_last_year = graph_args.dept_in_gov[0].value;
-      const dept_tp_exp_pa_last_year = graph_args.dept_in_gov[1].value;
-      const dept_exp_pa_last_year= graph_args.tp_in_exp[0].value;
+      const { subject, panel_args, info } = calculations; 
+      const gov_tp_exp_pa_last_year = panel_args.dept_in_gov[0].value;
+      const dept_tp_exp_pa_last_year = panel_args.dept_in_gov[1].value;
+      const dept_exp_pa_last_year= panel_args.tp_in_exp[0].value;
   
       const fmt_gov_tp_exp_pa_last_year = formatter("compact", gov_tp_exp_pa_last_year, {raw: true, precision: 1});
       const fmt_dept_tp_exp_pa_last_year = formatter("compact", dept_tp_exp_pa_last_year, {raw: true, precision: 1});

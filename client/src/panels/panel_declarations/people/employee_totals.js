@@ -52,8 +52,8 @@ export const declare_employee_totals_panel = () => declare_panel({
     },
 
     render({calculations, footnotes, sources}){
-      const { subject, info, graph_args } = calculations;
-      const { series, ticks } = graph_args;
+      const { subject, info, panel_args } = calculations;
+      const { series, ticks } = panel_args;
 
       const data_formatter = () =>([{
         id: months[3].text,

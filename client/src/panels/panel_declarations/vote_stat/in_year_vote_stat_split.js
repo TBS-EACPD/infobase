@@ -9,12 +9,12 @@ import {
 
 const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,footnotes,sources}) => {
   const { 
-    graph_args,
+    panel_args,
     info,
   } = calculations;
 
   const data = _.map(
-    graph_args,
+    panel_args,
     (data_set) => ({
       ...data_set,
       id: data_set.label,

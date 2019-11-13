@@ -60,7 +60,7 @@ export const declare_dp_rev_split_panel = () => declare_panel({
     },
     render({calculations, footnotes, sources}){
       const {
-        graph_args: data,
+        panel_args: data,
         info,
       } = calculations;
 

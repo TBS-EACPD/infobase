@@ -309,7 +309,7 @@ export const declare_historical_g_and_c_panel = () => declare_panel({
           render({calculations, footnotes, sources}){
             const { 
               info,
-              graph_args: series,
+              panel_args: series,
             } = calculations;
             return (
               <InfographicPanel
@@ -359,7 +359,7 @@ export const declare_historical_g_and_c_panel = () => declare_panel({
           render({calculations,footnotes, sources}){
             const { 
               info, 
-              graph_args: {
+              panel_args: {
                 rows,
                 rolled_up,
               } } = calculations;

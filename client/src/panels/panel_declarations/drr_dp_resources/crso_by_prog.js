@@ -24,11 +24,11 @@ const { planning_years } = years;
 const { text_maker, TM } = create_text_maker_component(text);
 
 const render_resource_type = (is_fte) => ({calculations, footnotes}) => {
-  const { graph_args, subject, info } = calculations;
+  const { panel_args, subject, info } = calculations;
   
   const sources = [ is_fte ? get_planned_fte_source_link(subject) : get_planned_spending_source_link(subject) ];
 
-  const { exp_data, fte_data } = graph_args;
+  const { exp_data, fte_data } = panel_args;
 
   //use hacky side-effects to create colors for all programs, so that these colours are consitent accross the fte/$ panel
   const all_program_names = _.chain(exp_data.programs)

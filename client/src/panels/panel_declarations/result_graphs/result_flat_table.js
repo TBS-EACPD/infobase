@@ -248,7 +248,7 @@ export const declare_results_table_panel = () => declare_panel({
     render({calculations, sources}){
       const { 
         subject, 
-        graph_args: {
+        panel_args: {
           docs_with_data,
           last_drr_doc,
           subject_result_counts,

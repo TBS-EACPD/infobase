@@ -58,8 +58,8 @@ class AuthExpProgSpending extends React.Component {
   render(){
     const { calculations, footnotes, sources } = this.props;
     const { active_series } = this.state;
-    const { info, graph_args, subject } = calculations;
-    const { exp, auth, progSpending } = graph_args;
+    const { info, panel_args, subject } = calculations;
+    const { exp, auth, progSpending } = panel_args;
 
     const series_labels = [
       text_maker("expenditures"),

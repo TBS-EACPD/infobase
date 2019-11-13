@@ -173,9 +173,9 @@ export const declare_spending_in_tag_perspective_panel = () => declare_panel({
     },
   
     render({calculations, footnotes, sources}){
-      const { graph_args, subject, info } = calculations;
+      const { panel_args, subject, info } = calculations;
   
-      const { tag_exps } = graph_args;
+      const { tag_exps } = panel_args;
       const prog_exp = info.program_exp_planning_year_1;
   
       return (

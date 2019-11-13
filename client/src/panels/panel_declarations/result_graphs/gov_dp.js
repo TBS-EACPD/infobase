@@ -106,7 +106,7 @@ export const declare_gov_dp_panel = () => declare_panel({
     source: (subject) => get_source_links(["DP"]),
     render({ calculations, sources}){
       const {
-        graph_args: {
+        panel_args: {
           verbose_gov_counts,
           counts_by_dept,
         },

@@ -95,7 +95,7 @@ export const declare_gov_drr_panel = () => declare_panel({
   
     render({calculations, footnotes, sources}){
       const {
-        graph_args,
+        panel_args,
       } = calculations;
   
       return (
@@ -103,7 +103,7 @@ export const declare_gov_drr_panel = () => declare_panel({
           title={text_maker("drr_summary_title")}
           { ...{footnotes, sources} }
         >
-          <GovDRR {...graph_args} />
+          <GovDRR {...panel_args} />
         </InfographicPanel>
       );
     },

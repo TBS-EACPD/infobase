@@ -509,7 +509,7 @@ export const declare_explore_results_panel = () => declare_panel({
     render({calculations, sources}){
       const { 
         subject, 
-        graph_args: {
+        panel_args: {
           docs_with_data,
         },
       } = calculations;

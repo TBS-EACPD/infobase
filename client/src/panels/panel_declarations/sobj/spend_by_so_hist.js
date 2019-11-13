@@ -123,8 +123,8 @@ export const declare_spend_by_so_hist_panel = () => declare_panel({
       };
     },
     render({calculations, footnotes, sources}){
-      const { graph_args, info } = calculations;
-      const {ticks, data} = graph_args;
+      const { panel_args, info } = calculations;
+      const {ticks, data} = panel_args;
     
       let graph_content;
       if(window.is_a11y_mode){

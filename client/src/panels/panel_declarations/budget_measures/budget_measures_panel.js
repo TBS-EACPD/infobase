@@ -201,7 +201,7 @@ const calculate_functions = {
 
 const budget_measure_render = function({calculations, footnotes, sources}){
 
-  const { graph_args } = calculations;
+  const { panel_args } = calculations;
 
   return (
     <InfographicPanel
@@ -210,11 +210,11 @@ const budget_measure_render = function({calculations, footnotes, sources}){
         sources, 
         footnotes: _.compact([
           ...footnotes,
-          (_.includes(["gov", 133, 55], graph_args.subject.id) && {text: text_maker("budget2019_biv_includes_excludes_note")}),
+          (_.includes(["gov", 133, 55], panel_args.subject.id) && {text: text_maker("budget2019_biv_includes_excludes_note")}),
         ]),
       }}
     >
-      <BudgetMeasurePanel graph_args = { graph_args } />
+      <BudgetMeasurePanel panel_args = { panel_args } />
     </InfographicPanel>
   );
 };
@@ -224,7 +224,7 @@ class BudgetMeasurePanel extends React.Component {
   constructor(props){
     super(props);
     const { 
-      graph_args: {
+      panel_args: {
         years_with_data,
       },
     } = props;
@@ -237,7 +237,7 @@ class BudgetMeasurePanel extends React.Component {
   }
   mountAndUpdate(){
     const { 
-      graph_args: {
+      panel_args: {
         subject,
       },
     } = this.props;
@@ -259,9 +259,9 @@ class BudgetMeasurePanel extends React.Component {
   componentDidMount(){ this.mountAndUpdate(); }
   componentDidUpdate(){ this.mountAndUpdate(); }
   render(){
-    const { graph_args } = this.props;
+    const { panel_args } = this.props;
 
-    const { subject } = graph_args;
+    const { subject } = panel_args;
 
     const {
       years_with_data,
@@ -277,7 +277,7 @@ class BudgetMeasurePanel extends React.Component {
           </div>
         }
         { !loading &&
-          <BudgetMeasureHBars graph_args={ graph_args } selected_year={ selected_year } />
+          <BudgetMeasureHBars panel_args={ panel_args } selected_year={ selected_year } />
         }
       </Fragment>
     );
@@ -285,7 +285,7 @@ class BudgetMeasurePanel extends React.Component {
     const above_tab_text = <div className = "frow" >
       { years_with_data.length === 1 && ( subject.level === "dept" || treatAsProgram(subject) ) &&
         <div className = "fcol-md-12 fcol-xs-12 medium_panel_text text">
-          { ( graph_args.subject.level === "dept" || treatAsProgram(subject) ) &&
+          { ( panel_args.subject.level === "dept" || treatAsProgram(subject) ) &&
               <TM
                 k={"budget_measures_above_tab_text"} 
                 args={{
@@ -333,7 +333,7 @@ class BudgetMeasureHBars extends React.Component {
     super(props);
 
     const { 
-      graph_args: {
+      panel_args: {
         subject,
       },
     } = props;
@@ -349,7 +349,7 @@ class BudgetMeasureHBars extends React.Component {
   }
   static getDerivedStateFromProps(props, state){
     const { 
-      graph_args: {
+      panel_args: {
         get_data,
         get_info,
         subject,
@@ -544,7 +544,7 @@ class BudgetMeasureHBars extends React.Component {
   }
   render(){
     const { 
-      graph_args: {
+      panel_args: {
         subject,
       },
       selected_year,

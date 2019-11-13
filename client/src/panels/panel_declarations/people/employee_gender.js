@@ -78,12 +78,12 @@ export const declare_employee_gender_panel = () => declare_panel({
     calculate: calculate_funcs_by_level[level],
   
     render({calculations, footnotes, sources}){
-      const { info, graph_args } = calculations;
+      const { info, panel_args } = calculations;
       
       const ticks = _.map(people_years, y => `${run_template(y)}`);
       
       let required_footnotes;
-      const has_suppressed_data = _.some(graph_args, graph_arg => graph_arg.label === gender.sup.text);
+      const has_suppressed_data = _.some(panel_args, graph_arg => graph_arg.label === gender.sup.text);
       if (has_suppressed_data){
         required_footnotes = footnotes;
       } else {
@@ -104,7 +104,7 @@ export const declare_employee_gender_panel = () => declare_panel({
           { !window.is_a11y_mode &&
             <Col size={12} isGraph>
               <PplSharePie
-                graph_args = {graph_args}
+                panel_args = {panel_args}
                 label_col_header = {text_maker("employee_gender")}
               />
             </Col>
@@ -122,7 +122,7 @@ export const declare_employee_gender_panel = () => declare_panel({
                       formatter: formats.big_int_raw,
                     },
                     initial_graph_mode: "bar_grouped",
-                    data: graph_args,
+                    data: panel_args,
                   }}
                 />
               </HeightClippedGraph>
@@ -133,7 +133,7 @@ export const declare_employee_gender_panel = () => declare_panel({
               <A11YTable
                 label_col_header = {text_maker("employee_gender")}
                 data_col_headers = {[...ticks, text_maker("five_year_percent_header")]}
-                data = {_.map(graph_args, dimension => { 
+                data = {_.map(panel_args, dimension => { 
                   return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]};
                 })}
               />

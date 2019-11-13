@@ -70,10 +70,10 @@ const color_scale = vs => function (d) {
 };
 
 const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, sources }) {
-  const { info, graph_args } = calculations;
+  const { info, panel_args } = calculations;
   const isVoted = vs === "voted";
 
-  const { data } = graph_args;
+  const { data } = panel_args;
 
   const col = "{{est_in_year}}_estimates";
   const top_10_rows = _.take(data, 10);

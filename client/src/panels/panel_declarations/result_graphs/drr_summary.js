@@ -213,7 +213,7 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
 
 const render = ({calculations, footnotes, sources}) => {
   const {
-    graph_args,
+    panel_args,
     subject,
   } = calculations;
 
@@ -221,7 +221,7 @@ const render = ({calculations, footnotes, sources}) => {
     <InfographicPanel title={text_maker("drr_summary_title")} footnotes={footnotes} sources={sources}>
       <DrrSummary
         subject={subject}
-        {...graph_args}
+        {...panel_args}
       />
     </InfographicPanel>
   );

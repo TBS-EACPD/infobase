@@ -21,8 +21,8 @@ const text_keys_by_level = {
 };
 
 function render({calculations, footnotes, sources}) {
-  const { graph_args, info, subject } = calculations;       
-  const { neg_exp, gross_exp, net_exp } = graph_args; 
+  const { panel_args, info, subject } = calculations;       
+  const { neg_exp, gross_exp, net_exp } = panel_args; 
   
   const series = [gross_exp, neg_exp];
   const _ticks = [ 'gross', 'revenues' ];

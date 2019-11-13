@@ -22,7 +22,7 @@ import { PageDetails } from '../components/PageDetails.js';
 
 const Home = retrying_react_lazy( () => import(/* webpackChunkName: "Home" */ '../home/home.js') );
 const A11yHome = retrying_react_lazy( () => import(/* webpackChunkName: "A11yHome" */ '../home/a11y_home.js') );
-const GraphInventory = retrying_react_lazy( () => import(/* webpackChunkName: "GraphInventory" */ '../graph_route/GraphInventory.js') );
+const PanelInventory = retrying_react_lazy( () => import(/* webpackChunkName: "PanelInventory" */ '../PanelInventory/PanelInventory.js') );
 const PartitionRoute = retrying_react_lazy( () => import(/* webpackChunkName: "PartitionRoute" */ '../partition/partition_subapp/PartitionRoute.js') );
 const BudgetMeasuresRoute = retrying_react_lazy( () => import(/* webpackChunkName: "BudgetMeasuresRoute" */ '../partition/budget_measures_subapp/BudgetMeasuresRoute.js') );
 const About = retrying_react_lazy( () => import(/* webpackChunkName: "About" */ '../about/about.js') );
@@ -71,13 +71,17 @@ export class App extends React.Component {
               <Route path="/budget-tracker/:first_column?/:selected_value?/:budget_year?" component={BudgetMeasuresRoute} />
               <Route path="/rpb/:config?" component={ReportBuilder} />
               <Route path="/about" component={About} />
-              <Route path="/graph/:level?/:graph?/:id?" component={GraphInventory} />
               <Route path="/compare_estimates/:h7y_layout?" component={EstimatesComparison} />
               <Route path="/privacy" component={PrivacyStatement} />
               <Route path="/diff/:org_id?/:crso_id?/:program_id?" component={TextDiff} />
               <Route path="/lab" component={Lab} />
               <Route path="/panel/:level?/:subject_id?/:panel_key?" component={IsolatedPanel} />
               <Route path="/indicator/:id?" component={IndicatorPanel} />
+              <Redirect 
+                from="/graph/:level?/:panel?/:id?"
+                to="/panel-inventory/:level?/:panel?/:id?"
+              />
+              <Route path="/panel-inventory/:level?/:panel?/:id?" component={PanelInventory} />
               { !window.is_a11y_mode && <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} /> }
               { !window.is_a11y_mode && <Route path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?" component={TreeMap} /> }
               { window.is_a11y_mode && <Route path="/start/:no_basic_equiv?" component={A11yHome} /> }
