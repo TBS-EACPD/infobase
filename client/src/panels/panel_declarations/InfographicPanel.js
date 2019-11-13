@@ -49,10 +49,10 @@ class Panel_ extends React.Component {
 
     const file_name_context = subject ? subject.level === 'dept' ? subject.dept_code: subject.id : "";
     const file_name = `${file_name_context}_${title}.pdf`;
-    const panel_link = context && panel_href_template(subject, context.active_bubble_id, context.graph_key) && 
+    const panel_link = context && panel_href_template(subject, context.active_bubble_id, context.panel_key) && 
       window.location.href.replace(
         window.location.hash, 
-        panel_href_template(subject, context.active_bubble_id, context.graph_key)
+        panel_href_template(subject, context.active_bubble_id, context.panel_key)
       );
 
     const share_modal_subject_fragment = subject && (
@@ -66,14 +66,14 @@ class Panel_ extends React.Component {
 
     const header_utils = context && (
       <div style={{marginLeft: 'auto'}}>
-        { context.graph_key &&
+        { context.panel_key &&
           <LogInteractionEvents
             event_type={"PANEL_PDF_DOWNLOADED"}
             event_details={title}
             style={{display: 'inline'}}
           >
             <PDFGenerator 
-              target_id={context.graph_key}
+              target_id={context.panel_key}
               file_name={file_name}
               title={title}
               link={panel_link}

@@ -7,7 +7,7 @@ import { rpb_link, get_appropriate_rpb_subject } from '../rpb/rpb_link.js';
 const subjects = _.keys(Subject);
 
 const graphs = {};
-const create_graph_key = (key,level) => `${key}:${level}`;
+const create_panel_key = (key,level) => `${key}:${level}`;
 
 const default_args = {
   depends_on: [],
@@ -22,7 +22,7 @@ class PanelRegistry {
   static get graphs() { return graphs; }
   
   static lookup(key,level){
-    const lookup = create_graph_key(key, level);
+    const lookup = create_panel_key(key, level);
     if (window.is_dev && !graphs[lookup]) {
       // eslint-disable-next-line no-console
       console.error(`bad graph key - ${lookup} for level ${level}`);
@@ -31,11 +31,11 @@ class PanelRegistry {
     return graphs[lookup];
   }
 
-  static is_registered_graph_key(test_key){
+  static is_registered_panel_key(test_key){
     return _.chain(graphs)
       .keys(graphs)
       .join()
-      .thru( all_graph_keys => RegExp(`,${test_key}:.+,`).test(`,${all_graph_keys},`) )
+      .thru( all_panel_keys => RegExp(`,${test_key}:.+,`).test(`,${all_panel_keys},`) )
       .value();
   }
 
@@ -95,7 +95,7 @@ class PanelRegistry {
     this._inner_calculate = def.calculate || (()=> true);
     this._inner_render = def.render;
     const to_assign = _.omit(def, ['render', 'calculate']);
-    const full_key = create_graph_key(def.key,def.level);
+    const full_key = create_panel_key(def.key,def.level);
     Object.assign(
       this,  
       default_args,
@@ -218,8 +218,8 @@ function graphs_with_key(key, level){
   return graphs;
 }
 
-function tables_for_graph(graph_key, subject_level){
-  const graph_objs = graphs_with_key(graph_key, subject_level);
+function tables_for_graph(panel_key, subject_level){
+  const graph_objs = graphs_with_key(panel_key, subject_level);
   return _.chain( graph_objs )
     .map('info_deps')
     .flatten()

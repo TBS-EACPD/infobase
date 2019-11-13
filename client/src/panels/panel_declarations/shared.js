@@ -558,7 +558,7 @@ const hex_to_rgb = (hex) => {
 
 const declare_panel = ({panel_key, levels, panel_config_func}) => {
 
-  if ( !PanelRegistry.is_registered_graph_key(panel_key) ){
+  if ( !PanelRegistry.is_registered_panel_key(panel_key) ){
     levels.forEach( 
       level => new PanelRegistry({
         level,
