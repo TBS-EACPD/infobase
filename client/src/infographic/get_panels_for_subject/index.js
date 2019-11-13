@@ -27,7 +27,7 @@ export function get_panels_for_subject(subject){
               const panel_obj = PanelRegistry.lookup(key, subject.level);
 
               if(!panel_obj && window.is_dev){
-                throw `${key} is not a valid graph`;
+                throw `${key} is not a valid panel`;
               }
     
               return panel_obj && key;

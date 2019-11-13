@@ -35,7 +35,7 @@ export const declare_personnel_spend_panel = () => declare_panel({
     },
   
     render({calculations, footnotes, sources}){
-      const {info, graph_args} = calculations;
+      const {info, panel_args} = calculations;
   
   
       let graph_content;
@@ -45,7 +45,7 @@ export const declare_personnel_spend_panel = () => declare_panel({
             data_col_headers={[ text_maker("spending") ]}
             data={
               _.chain(info.last_years)
-                .zip(graph_args.series["0"])
+                .zip(panel_args.series["0"])
                 .map( ([label, amt]) => ({
                   label,
                   data: <Format type="compact1_written" content={amt} />,
@@ -59,7 +59,7 @@ export const declare_personnel_spend_panel = () => declare_panel({
         
         const personnel_data = () =>[{
           id: "Personnel",
-          data: _.map(graph_args.series[0],
+          data: _.map(panel_args.series[0],
             (spending_data,year_index) =>({
               y: spending_data,
               x: calculations.info.last_years[year_index],
@@ -68,7 +68,7 @@ export const declare_personnel_spend_panel = () => declare_panel({
         
         graph_content = <div style={{height: 400}} aria-hidden = {true} position="relative">
           <NivoResponsiveLine
-            raw_data = {graph_args.series[0]}
+            raw_data = {panel_args.series[0]}
             data = {personnel_data()}
             margin = {{
               "top": 50,

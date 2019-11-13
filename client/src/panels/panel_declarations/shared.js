@@ -56,10 +56,10 @@ const infobase_colors_smart = (col_scale) => (label) => {
 };
 
 
-export const PplSharePie = ({graph_args, label_col_header, sort_func}) => {
+export const PplSharePie = ({panel_args, label_col_header, sort_func}) => {
   sort_func = sort_func || ((a,b) => b.value-a.value);
 
-  const data = graph_args
+  const data = panel_args
     .map( d => 
       ({
         value: d.five_year_percent, 

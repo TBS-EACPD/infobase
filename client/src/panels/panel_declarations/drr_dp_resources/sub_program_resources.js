@@ -393,7 +393,7 @@ export const declare_sub_program_resources_panel = () => declare_panel({
     render({calculations, footnotes, sources}){
       const { 
         subject, 
-        graph_args: {
+        panel_args: {
           dp_ftes,
           dp_subs,
           dp_sub_subs,

@@ -263,7 +263,7 @@ export const declare_resource_structure_panel = () => declare_panel({
     render({calculations}){
       const { 
         subject, 
-        graph_args: {
+        panel_args: {
           has_dp_data,
           has_drr_data,
         },

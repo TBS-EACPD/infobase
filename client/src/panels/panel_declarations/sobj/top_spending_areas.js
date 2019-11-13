@@ -46,10 +46,10 @@ const common_cal = (programs,programSobjs) => {
 
 
 const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) => {
-  const { graph_args, info } = calculations;
-  const { top_3_sos_and_remainder } = graph_args;
+  const { panel_args, info } = calculations;
+  const { top_3_sos_and_remainder } = panel_args;
 
-  const graph_data = graph_args.map(d => ({
+  const graph_data = panel_args.map(d => ({
     label: d["label"],
     id: d["label"],
     value: d["value"],

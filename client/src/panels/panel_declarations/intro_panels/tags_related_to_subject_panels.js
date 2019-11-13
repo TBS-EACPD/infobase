@@ -89,7 +89,7 @@ export const declare_tags_of_interest_panel = () => declare_panel({
     },
     render({calculations}){
       const { 
-        graph_args: tags_by_root, 
+        panel_args: tags_by_root, 
         subject, 
       } = calculations;
 
@@ -211,7 +211,7 @@ export const declare_related_tags_panel = () => declare_panel({
   
     render({calculations}){
       const {
-        graph_args: {
+        panel_args: {
           related_tags_by_type_with_counts,
         },
       } = calculations;

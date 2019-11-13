@@ -7,10 +7,10 @@ import {
 } from "../shared.js";
 
 const render_w_options = ({text_key, graph_col, text_col}) => ({calculations, sources, footnotes}) => {
-  const { info, graph_args } = calculations;
+  const { info, panel_args } = calculations;
 
   const data = _.map(
-    graph_args,
+    panel_args,
     (data_set) => ({
       ...data_set,
       id: data_set.label,

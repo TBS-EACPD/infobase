@@ -62,7 +62,7 @@ export const declare_late_dps_warning_panel = () => declare_panel({
               (org_id) => Dept.lookup(org_id).fancy_name
             ),
           },
-          render({ calculations: { graph_args: late_dp_department_names } }) {
+          render({ calculations: { panel_args: late_dp_department_names } }) {
             return (
               <AlertBanner additional_class_names={'large_panel_text'}>
                 <TM k="late_dps_warning_gov" args={{late_dp_department_names}}/>

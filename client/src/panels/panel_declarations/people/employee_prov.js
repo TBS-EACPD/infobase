@@ -117,8 +117,8 @@ class CanadaGraph extends React.Component {
     this._render();
   }
   _render() {
-    const { graph_args, prov_callback } = this.props;
-    const { years_by_province, color_scale } = graph_args;
+    const { panel_args, prov_callback } = this.props;
+    const { years_by_province, color_scale } = panel_args;
 
     const graph_area_sel = d3.select( ReactDOM.findDOMNode(this.graph_area.current) );
 
@@ -205,8 +205,8 @@ class ProvPanel extends React.Component {
       level,
     } = this.props.render_args;
 
-    const { info, graph_args } = calculations;
-    const { years_by_province, color_scale } = graph_args;
+    const { info, panel_args } = calculations;
+    const { years_by_province, color_scale } = panel_args;
 
     const prov_callback = (new_prov) => {
       if(new_prov !== this.state.prov){
@@ -244,13 +244,13 @@ class ProvPanel extends React.Component {
                 <div className="legend-container" style={{ maxHeight: "400px", width: "100%", overflowY: "hidden", marginTop: "10px"}}>
                   <CanadaGraphBarLegend
                     prov={this.state.prov}
-                    years_by_province={graph_args.years_by_province}
+                    years_by_province={panel_args.years_by_province}
                   />
                 </div>
               </div>
               <div className="fcol-md-9" style={{position: "relative"}}>
                 <CanadaGraph
-                  graph_args={graph_args}
+                  panel_args={panel_args}
                   prov_callback={prov_callback}
                 />
               </div>

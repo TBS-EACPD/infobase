@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { PanelRenderer } from '../panels/PanelRenderer.js';
 import { create_text_maker } from '../models/text.js';
-import graph_text from "./GraphInventory.yaml";
+import panel_text from "./PanelInventory.yaml";
 
 import { get_panels_for_subject } from '../infographic/get_panels_for_subject/index.js';
 import { Subject } from '../models/subject.js';
@@ -12,7 +12,7 @@ import { EverythingSearch, SpinnerWrapper } from '../components/index.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { PanelRegistry } from '../panels/PanelRegistry.js';
 
-const tm = create_text_maker(graph_text);
+const tm = create_text_maker(panel_text);
 
 const {
   Dept, 
@@ -23,8 +23,8 @@ const {
   CRSO,
 } = Subject;
 
-function url_template(subject, graph){
-  return `/graph/${subject.level}/${graph.key}/${subject.id}`;
+function url_template(subject, panel){
+  return `/panel-inventory/${subject.level}/${panel.key}/${subject.id}`;
 }
 
 const defaultSubjectKeys = {
@@ -60,12 +60,12 @@ const getSubj = (level, id) => {
 };
 
 // Bring back footnotes inventory ??
-// const link_to_footnotes = ( panel_key, level) => `#footnotes/graph/${panel_key}/${level}`;
+// const link_to_footnotes = ( panel_key, level) => `#footnotes/panel/${panel_key}/${level}`;
 
-function graphs_of_interest(graph){
-  const { depends_on, info_deps, key} = graph;
-  const same_key = _.filter(PanelRegistry.graphs, g => (g.key === key && g !== graph) );
-  const similar_dependencies = _.chain(PanelRegistry.graphs)
+function panels_of_interest(panel){
+  const { depends_on, info_deps, key} = panel;
+  const same_key = _.filter(PanelRegistry.panels, g => (g.key === key && g !== panel) );
+  const similar_dependencies = _.chain(PanelRegistry.panels)
     .filter(g => !_.isEmpty(
       _.union(
         _.intersection(g.depends_on,depends_on),
@@ -73,12 +73,12 @@ function graphs_of_interest(graph){
       )
     )
     )
-    .reject( g => g === graph )
+    .reject( g => g === panel )
     .value();
 
-  const rest = _.chain(PanelRegistry.graphs)
+  const rest = _.chain(PanelRegistry.panels)
     .map()
-    .difference([ graph, ...similar_dependencies ])
+    .difference([ panel, ...similar_dependencies ])
     .sortBy('key')
     .value();
 
@@ -98,34 +98,34 @@ const get_subj = createSelector(
 
 const get_panel_obj = createSelector(
   get_subj,
-  props => _.get(props, "match.params.graph"),
+  props => _.get(props, "match.params.panel"),
   (subject, panel_key) => {
     return PanelRegistry.lookup(panel_key, subject.level) || PanelRegistry.lookup('financial_key_concepts', 'gov');
   }
 );
 
 
-const get_related_graphs = createSelector(
+const get_related_panels = createSelector(
   get_panel_obj,
-  graph => graphs_of_interest(graph)
+  panel => panels_of_interest(panel)
 );
 
 const get_derived_props = props => {
   return {
     subject: get_subj(props),
     panel: get_panel_obj(props),
-    related_graphs: get_related_graphs(props), 
+    related_panels: get_related_panels(props), 
   };
 };
 
 
-const RelatedInfo = ({ subject, panel, related_graphs }) => {
+const RelatedInfo = ({ subject, panel, related_panels }) => {
 
   const {
     similar_dependencies,
     same_key,
     rest,
-  } = related_graphs;
+  } = related_panels;
 
   return <div>
     <h2> {tm("related_panels")} </h2>
@@ -142,7 +142,7 @@ const RelatedInfo = ({ subject, panel, related_graphs }) => {
       </thead>
       <tbody>
         <PanelTableRow 
-          key="current_graph"
+          key="current_panel"
           className="success"
           panel={panel}
           current_subject={subject}
@@ -199,7 +199,7 @@ const PanelTableRow = ({ current_subject, panel, className }) => {
 };
 
 
-export default class GraphInventory extends React.Component {
+export default class panelInventory extends React.Component {
   constructor(){
     super();
     this.state = {
@@ -255,21 +255,21 @@ export default class GraphInventory extends React.Component {
       const { 
         subject,
         panel,
-        related_graphs,
+        related_panels,
       } = get_derived_props(this.props);
 
       content = <div>
-        <h1> {tm("graph_inventory")} </h1>
+        <h1> {tm("panel_inventory")} </h1>
         <div className="mrgn-bttm-lg">
           <EverythingSearch
-            placeholder="See this graph with another subject"
+            placeholder="See this panel with another subject"
             reject_dead_orgs={false}
             href_template={ subj => url_template(subj, panel) }
           />
         </div>
         <div>
           <p> {tm("selected_subject")}: {subject.name} ({subject.level}) </p>
-          <p> {tm("selected_graph")}: {panel.key} </p>
+          <p> {tm("selected_panel")}: {panel.key} </p>
         </div>
         <div id="main">
           <PanelRenderer 
@@ -293,7 +293,7 @@ export default class GraphInventory extends React.Component {
           <RelatedInfo {...{
             panel, 
             subject,
-            related_graphs,
+            related_panels,
           }} />
         </div>
 
@@ -302,10 +302,10 @@ export default class GraphInventory extends React.Component {
 
     return (
       <StandardRouteContainer 
-        title={tm("graph_inventory")}
-        breadcrumbs={[tm("graph_inventory")]}
+        title={tm("panel_inventory")}
+        breadcrumbs={[tm("panel_inventory")]}
         description={null}
-        route_key={"graph_inventory"}
+        route_key={"panel_inventory"}
       >
         {content}
       </StandardRouteContainer>

@@ -39,7 +39,7 @@ const estimates_split_calculate = function(subject, info, options){
 const estimates_split_render_w_text_key = text_key => ({calculations, footnotes, sources}) => {
   const {
     info,
-    graph_args: {
+    panel_args: {
       in_year: in_year_bar_args,
     },
   } = calculations;

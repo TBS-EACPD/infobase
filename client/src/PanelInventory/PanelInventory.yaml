@@ -1,13 +1,13 @@
-selected_graph:
-  en: Selected graph
+selected_panel:
+  en: Selected panel
   fr: Graphique sélectionné
 
 selected_subject:
   en: Selected subject
   fr: Sujet sélectionné
 
-graph_inventory:
-  en: Graph inventory
+panel_inventory:
+  en: Panel inventory
   fr: Répertoire des graphiques
 
 related_panels:

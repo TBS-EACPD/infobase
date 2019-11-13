@@ -44,7 +44,7 @@ export const declare_estimates_in_perspective_panel = () => declare_panel({
     },
   
     render({calculations, footnotes, sources}){
-      const { subject, graph_args, info } = calculations;
+      const { subject, panel_args, info } = calculations;
       return (
         <StdPanel
           title={text_maker("estimates_perspective_title")}
@@ -57,7 +57,7 @@ export const declare_estimates_in_perspective_panel = () => declare_panel({
             <Col isGraph size={7}>
               <DeptEstimatesPerspective
                 subject={subject} 
-                {...graph_args} 
+                {...panel_args} 
               />
             </Col>
           }

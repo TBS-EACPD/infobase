@@ -77,7 +77,7 @@ export const declare_drr_planned_actual_panel = () => declare_panel({
     },
 
     render({calculations, sources}){
-      const { graph_args, subject, info } = calculations;
+      const { panel_args, subject, info } = calculations;
       
       const { 
         actual_spend,
@@ -87,7 +87,7 @@ export const declare_drr_planned_actual_panel = () => declare_panel({
         diff_ftes,
         diff_spend,
         footnotes,
-      } = graph_args;
+      } = panel_args;
 
 
       return (
@@ -95,7 +95,7 @@ export const declare_drr_planned_actual_panel = () => declare_panel({
           <TM 
             k={ `${subject.level}_drr_planned_actual_text` }
             args={{
-              ...graph_args,
+              ...panel_args,
               subject,
               crso_prg_num: subject.level === "crso" && _.max([info.crso_fte_prg_num, info.crso_exp_prg_num]),
             }}

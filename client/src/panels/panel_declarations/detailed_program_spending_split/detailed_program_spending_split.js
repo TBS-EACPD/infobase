@@ -476,7 +476,7 @@ export const declare_detailed_program_spending_split_panel = () => declare_panel
 
     render({calculations, footnotes, sources}){
       const {
-        graph_args: {
+        panel_args: {
           flat_data,
           higher_level_mapping,
           top_3_so_nums,

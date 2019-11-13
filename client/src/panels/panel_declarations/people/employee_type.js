@@ -83,7 +83,7 @@ export const declare_employee_type_panel = () => declare_panel({
     calculate: calculate_funcs_by_level[level],
   
     render({calculations, footnotes, sources}){
-      const { info, graph_args } = calculations;
+      const { info, panel_args } = calculations;
       
       const ticks = _.map(people_years, y => `${run_template(y)}`);
 
@@ -104,7 +104,7 @@ export const declare_employee_type_panel = () => declare_panel({
           { !window.is_a11y_mode &&
             <Col size={12} isGraph>
               <PplSharePie
-                graph_args = {graph_args}
+                panel_args = {panel_args}
                 label_col_header = {text_maker("employee_type")}
               />
             </Col>
@@ -122,7 +122,7 @@ export const declare_employee_type_panel = () => declare_panel({
                       formatter: formats.big_int_raw,
                     },
                     initial_graph_mode: "bar_stacked",
-                    data: graph_args,
+                    data: panel_args,
                   }}
                 />
               </HeightClippedGraph>
@@ -133,7 +133,7 @@ export const declare_employee_type_panel = () => declare_panel({
               <A11YTable
                 label_col_header = {text_maker("employee_type")}
                 data_col_headers = {[...ticks, text_maker("five_year_percent_header")]}
-                data = {_.map(graph_args, 
+                data = {_.map(panel_args, 
                   dimension => { 
                     return {label: dimension.label, data: [...dimension.data, formats["percentage1_raw"](dimension.five_year_percent)]}; 
                   }
