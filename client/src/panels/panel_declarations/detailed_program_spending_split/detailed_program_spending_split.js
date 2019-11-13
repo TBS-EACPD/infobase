@@ -38,7 +38,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 
 const text_keys = {
-  dept: "dept_historical_program_spending_text", //note that we're recycling another's graph text, we'll clean this up later once we confirm we're good with this.
+  dept: "dept_historical_program_spending_text", //note that we're recycling another panel's text, we'll clean this up later once we confirm we're good with this.
   tag: "tag_Progam_activity_spending_text",
 };
 

@@ -14,13 +14,13 @@ export const PanelRenderer = withRouter(
         active_bubble_id,
       } = this.props;  
 
-      const graph_obj = PanelRegistry.lookup(panel_key, subject.level);
+      const panel_obj = PanelRegistry.lookup(panel_key, subject.level);
 
-      const graph_options = {history};
+      const panel_options = {history};
 
       const { Provider } = panel_context;
 
-      const calculations = graph_obj.calculate(subject, graph_options);
+      const calculations = panel_obj.calculate(subject, panel_options);
 
       if(!calculations){
         return null;
@@ -28,7 +28,7 @@ export const PanelRenderer = withRouter(
       return (
         <div id={panel_key} tabIndex="0">
           <Provider value={ {active_bubble_id, panel_key, subject} }>
-            { graph_obj.render(calculations, graph_options) }
+            { panel_obj.render(calculations, panel_options) }
           </Provider>
         </div>
       );

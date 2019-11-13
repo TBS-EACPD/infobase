@@ -6,7 +6,6 @@ import { rpb_link, get_appropriate_rpb_subject } from '../rpb/rpb_link.js';
 
 const subjects = _.keys(Subject);
 
-const graphs = {};
 const create_panel_key = (key,level) => `${key}:${level}`;
 
 const default_args = {
@@ -18,44 +17,45 @@ const default_args = {
   },
 };
 
+const panels = {};
 class PanelRegistry {
-  static get graphs() { return graphs; }
+  static get panels() { return panels; }
   
   static lookup(key,level){
     const lookup = create_panel_key(key, level);
-    if (window.is_dev && !graphs[lookup]) {
+    if (window.is_dev && !panels[lookup]) {
       // eslint-disable-next-line no-console
-      console.error(`bad graph key - ${lookup} for level ${level}`);
+      console.error(`bad panel key - ${lookup} for level ${level}`);
       return null;
     }
-    return graphs[lookup];
+    return panels[lookup];
   }
 
   static is_registered_panel_key(test_key){
-    return _.chain(graphs)
-      .keys(graphs)
+    return _.chain(panels)
+      .keys(panels)
       .join()
       .thru( all_panel_keys => RegExp(`,${test_key}:.+,`).test(`,${all_panel_keys},`) )
       .value();
   }
 
-  static graphs_for_table(table_id){
-    return _.filter(graphs, graph_obj => {
-      const tables_from_info_deps = _.chain(graph_obj.info_deps)
+  static panels_for_table(table_id){
+    return _.filter(panels, panel_obj => {
+      const tables_from_info_deps = _.chain(panel_obj.info_deps)
         .compact()
         .map( stat_key => tables_for_statistics(stat_key) )
         .flatten()
         .value();
 
-      return _.chain(graph_obj.depends_on)
+      return _.chain(panel_obj.depends_on)
         .union(tables_from_info_deps)
         .includes(table_id)
         .value();   
     });
   }
 
-  static graphs_for_level(level_name){
-    return _.filter(graphs, {level: level_name});
+  static panels_for_level(level_name){
+    return _.filter(panels, {level: level_name});
   }
 
   static register_instance(instance){
@@ -65,13 +65,13 @@ class PanelRegistry {
     } = instance;
 
     if (!_.includes(subjects, level)){
-      throw `graph ${instance.key} has an undefined level`;
+      throw `panel ${instance.key} has an undefined level`;
     }
-    if (full_key in graphs){
-      throw `graph ${instance.key} has already been defined`;
+    if (full_key in panels){
+      throw `panel ${instance.key} has already been defined`;
     }
 
-    graphs[full_key] = instance;
+    panels[full_key] = instance;
   }
 
   new_api_warnings(){
@@ -89,7 +89,7 @@ class PanelRegistry {
     this.new_api_warnings();
     
     //note that everything attached to this is read-only
-    //Additionally, every graph only has one object like this, so this object contains nothing about 
+    //Additionally, every panel only has one object like this, so this object contains nothing about 
 
     //we copy every thing except render and calculate, which follow a specific API
     this._inner_calculate = def.calculate || (()=> true);
@@ -125,11 +125,11 @@ class PanelRegistry {
 
     info.is_a11y_mode = window.is_a11y_mode;
 
-    const graph_args = calc_func.call(this,subject, info, options);
-    if(graph_args === false){ return false; }
+    const panel_args = calc_func.call(this,subject, info, options);
+    if(panel_args === false){ return false; }
 
-    //inner_render API : a graph's inner_render fucntion usually wants access to info, graph_args and subject.
-    return {subject, info, graph_args};
+    //inner_render API : a panel's inner_render fucntion usually wants access to info, panel_args and subject.
+    return {subject, info, panel_args};
   }
   
   get_source(subject){
@@ -140,7 +140,7 @@ class PanelRegistry {
       return this.source(subject);
     } else { //if it's undefined we'll make one
       /* eslint-disable-next-line no-use-before-define */
-      return _.chain( tables_for_graph(this.key, subject.level) )
+      return _.chain( tables_for_panel(this.key, subject.level) )
         .map( table => Table.lookup(table) )
         .map( table => {
           return {
@@ -210,23 +210,23 @@ class PanelRegistry {
 }
 
 
-function graphs_with_key(key, level){
-  let graphs = _.filter(PanelRegistry.graphs, { key });
+function panels_with_key(key, level){
+  let panels = _.filter(PanelRegistry.panels, { key });
   if(level){
-    graphs = _.filter(graphs, { level });
+    panels = _.filter(panels, { level });
   }
-  return graphs;
+  return panels;
 }
 
-function tables_for_graph(panel_key, subject_level){
-  const graph_objs = graphs_with_key(panel_key, subject_level);
-  return _.chain( graph_objs )
+function tables_for_panel(panel_key, subject_level){
+  const panel_objs = panels_with_key(panel_key, subject_level);
+  return _.chain( panel_objs )
     .map('info_deps')
     .flatten()
     .map(tables_for_statistics)
     .flatten()
     .union( 
-      _.chain(graph_objs)
+      _.chain(panel_objs)
         .map('depends_on')
         .flatten()
         .value()
@@ -240,8 +240,8 @@ const layout_types = { full: 'full', half: 'half' };
 export {
   PanelRegistry,
   layout_types,
-  graphs_with_key,
-  tables_for_graph,  
+  panels_with_key,
+  tables_for_panel,  
 };
 
 window._DEV_HELPERS.PanelRegistry = PanelRegistry;

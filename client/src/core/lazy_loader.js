@@ -1,5 +1,5 @@
 import { Table } from './TableClass.js';
-import { PanelRegistry, tables_for_graph } from '../panels/PanelRegistry.js';
+import { PanelRegistry, tables_for_panel } from '../panels/PanelRegistry.js';
 import { Statistics, tables_for_statistics } from './Statistics.js';
 import { api_load_results_bundle, api_load_results_counts, subject_has_results } from '../models/populate_results.js';
 import { load_footnotes_bundle } from '../models/populate_footnotes.js';
@@ -35,7 +35,7 @@ function ensure_loaded({
   const table_set = _.chain( table_keys )
     .union(
       _.chain(panel_keys)
-        .map(key => tables_for_graph(key, subject_level))
+        .map(key => tables_for_panel(key, subject_level))
         .flatten()
         .value()
     )
@@ -48,7 +48,7 @@ function ensure_loaded({
     .uniqBy()
     .map( table_key => Table.lookup(table_key) )
     .value();
-  //results can be required explicitly, or be a dependency of a graph/statistic
+  //results can be required explicitly, or be a dependency of a panel/statistic
   const should_load_results = (
     results || 
     _.chain(panel_keys)

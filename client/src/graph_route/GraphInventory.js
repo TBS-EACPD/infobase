@@ -96,7 +96,7 @@ const get_subj = createSelector(
   }
 );
 
-const get_graph_obj = createSelector(
+const get_panel_obj = createSelector(
   get_subj,
   props => _.get(props, "match.params.graph"),
   (subject, panel_key) => {
@@ -106,14 +106,14 @@ const get_graph_obj = createSelector(
 
 
 const get_related_graphs = createSelector(
-  get_graph_obj,
+  get_panel_obj,
   graph => graphs_of_interest(graph)
 );
 
 const get_derived_props = props => {
   return {
     subject: get_subj(props),
-    panel: get_graph_obj(props),
+    panel: get_panel_obj(props),
     related_graphs: get_related_graphs(props), 
   };
 };
