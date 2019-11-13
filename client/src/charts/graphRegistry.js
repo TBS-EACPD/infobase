@@ -34,7 +34,7 @@ class GraphRegistry {
 
   update_registry(){
     const new_registry = this.registry.filter(
-      (graph_obj) => document.body.contains( graph_obj.html.node() ) 
+      (panel_obj) => document.body.contains( panel_obj.html.node() ) 
     );
     this.registry = new_registry;
   }
@@ -42,11 +42,11 @@ class GraphRegistry {
   update_graphs(){
     this.window_width_last_updated_at = window.innerWidth;
 
-    this.registry.forEach( (graph_obj) => {
-      graph_obj.outside_width = graph_obj.html.node().offsetWidth;
-      graph_obj.outside_height = graph_obj.options.height || 400;
+    this.registry.forEach( (panel_obj) => {
+      panel_obj.outside_width = panel_obj.html.node().offsetWidth;
+      panel_obj.outside_height = panel_obj.options.height || 400;
 
-      const html_container = graph_obj.html.node();
+      const html_container = panel_obj.html.node();
 
       // forEach directly on a nodeList has spoty support even with polyfils, 
       // mapping it through to an array first works consistently though
@@ -60,7 +60,7 @@ class GraphRegistry {
           }
         );
 
-      graph_obj.render(graph_obj.options);
+      panel_obj.render(panel_obj.options);
     });
   }
 
