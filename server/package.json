@@ -43,6 +43,8 @@
     "common-node-scripts": "file:../scripts/common_node_scripts"
   },
   "scripts": {
+    "preci": "(cd ../scripts/common_node_scripts && npm ci)",
+    "preinstall": "(cd ../scripts/common_node_scripts && npm ci)",
     "presnapshot_tests": "(export USE_TEST_DATA='true' && babel-node src/populate_db.js)",
     "snapshot_tests": "jest --coverage --forceExit --config jest_configs/snapshot_tests.config.js",
     "postsnapshot_tests": "babel-node src/populate_db.js",

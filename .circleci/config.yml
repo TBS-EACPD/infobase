@@ -33,6 +33,7 @@ jobs:
       - save_cache:
           paths:
             - email_backend/node_modules
+            - scripts/common_node_scripts/node_modules
           key: email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}
 
       - run: (cd email_backend && npm run unit_tests)
@@ -105,7 +106,8 @@ jobs:
             [ -e "client/node_modules" ] || (cd client && npm ci)
       - save_cache:
           paths:
-            - node_modules
+            - client/node_modules
+            - scripts/common_node_scripts/node_modules
           key: client-dependencies-{{ checksum "client/package-lock.json" }}
 
       - restore_cache:
@@ -130,7 +132,8 @@ jobs:
             [ -e "server/node_modules" ] || (cd server && npm ci)
       - save_cache:
           paths:
-            - node_modules
+            - server/node_modules
+            - scripts/common_node_scripts/node_modules
           key: server-dependencies-{{ checksum "server/package-lock.json" }}
       - restore_cache:
           keys:

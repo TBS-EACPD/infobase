@@ -31,6 +31,8 @@
     "nodemon": "^1.19.1"
   },
   "scripts": {
+    "preci": "(cd ../scripts/common_node_scripts && npm ci)",
+    "preinstall": "(cd ../scripts/common_node_scripts && npm ci)",
     "prebuild": "rm -rf transpiled_build",
     "build": "babel src/ --out-dir transpiled_build --copy-files --ignore node_modules",
     "prestart": "npm run build",
