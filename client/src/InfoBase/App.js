@@ -22,7 +22,6 @@ import { PageDetails } from '../components/PageDetails.js';
 
 const Home = retrying_react_lazy( () => import(/* webpackChunkName: "Home" */ '../home/home.js') );
 const A11yHome = retrying_react_lazy( () => import(/* webpackChunkName: "A11yHome" */ '../home/a11y_home.js') );
-const PanelInventory = retrying_react_lazy( () => import(/* webpackChunkName: "PanelInventory" */ '../panels/PanelInventory/PanelInventory.js') );
 const PartitionRoute = retrying_react_lazy( () => import(/* webpackChunkName: "PartitionRoute" */ '../partition/partition_subapp/PartitionRoute.js') );
 const BudgetMeasuresRoute = retrying_react_lazy( () => import(/* webpackChunkName: "BudgetMeasuresRoute" */ '../partition/budget_measures_subapp/BudgetMeasuresRoute.js') );
 const About = retrying_react_lazy( () => import(/* webpackChunkName: "About" */ '../about/about.js') );
@@ -37,8 +36,9 @@ const PrivacyStatement = retrying_react_lazy( () => import(/* webpackChunkName: 
 const TreeMap = retrying_react_lazy( () => import(/* webpackChunkName: "TreeMap" */ '../TreeMap/TreeMap.js') ); 
 const TextDiff = retrying_react_lazy( () => import(/* webpackChunkName: "TextDiff" */ '../diff/TextDiff.js') ); 
 const Lab = retrying_react_lazy( () => import(/* webpackChunkName: "InfoLab" */ '../lab/InfoLab.js') ); 
-const IsolatedPanel = retrying_react_lazy( () => import(/* webpackChunkName: "IsolatedPanel" */ '../panels/IndividualPanelRoute/IndividualPanelRoute.js') ); 
-const IndicatorPanel = retrying_react_lazy( () => import(/* webpackChunkName: "IndicatorDisplay" */ '../panels/panel_declarations/result_graphs/indicator_display.js') ); 
+const IsolatedPanel = retrying_react_lazy( () => import(/* webpackChunkName: "IsolatedPanel" */ '../panels/panel_routes/IsolatedPanel.js') );
+const PanelInventory = retrying_react_lazy( () => import(/* webpackChunkName: "PanelInventory" */ '../panels/panel_routes/PanelInventory.js') );
+const IndicatorPanel = retrying_react_lazy( () => import(/* webpackChunkName: "IndicatorDisplay" */ '../panels/panel_routes/IndicatorPanel.js') ); 
 
 export class App extends React.Component {
   constructor(){

@@ -1,4 +1,4 @@
-import text from './IndividualPanelRoute.yaml';
+import text from './IsolatedPanel.yaml';
 
 import { StandardRouteContainer } from '../../core/NavComponents.js';
 import { PanelRenderer } from '../PanelRenderer.js';
