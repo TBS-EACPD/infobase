@@ -74,19 +74,7 @@ const Drr17IndicatorResultDisplay = ({
 };
 // ^^ delete on drr17 exit
 
-const IndicatorList = ({ indicators }) => (
-  <ul className="indicator-list">
-    {_.map(indicators, ind => 
-      <li key={ind.id}>
-        <SingleIndicatorDisplay indicator={ind} />
-      </li>
-    )}
-  </ul>
-);
-
-
-
-const SingleIndicatorDisplay = ({indicator}, show_doc) => {
+const IndicatorDisplay = ({indicator}, show_doc) => {
   const is_drr = /drr/.test(indicator.doc);
   const has_previous_year_target = !_.isNull(indicator.previous_year_target_type);
   const has_previous_year_result = false; // DRR_TODO: previous year results aren't in the API right now, but they probably will be for DRR18 (if not, clean this out)
@@ -229,6 +217,15 @@ const SingleIndicatorDisplay = ({indicator}, show_doc) => {
     </div>
   );
 };
+const IndicatorList = ({ indicators }) => (
+  <ul className="indicator-list">
+    {_.map(indicators, ind => 
+      <li key={ind.id}>
+        <IndicatorDisplay indicator={ind} />
+      </li>
+    )}
+  </ul>
+);
 
 
 //must have only 4 elements
@@ -442,7 +439,6 @@ function indicators_period_span_str(indicators){
     .value();
 }
 
-const IndicatorDisplay = IndicatorList;
 
 class HorizontalStatusTable extends React.Component {
   constructor(props){
@@ -598,8 +594,8 @@ const NewBadge = () => {
 };
 
 export {
-  SingleIndicatorDisplay,
   IndicatorDisplay,
+  IndicatorList,
   QuadrantDefList,
   status_icons,
   large_status_icons,

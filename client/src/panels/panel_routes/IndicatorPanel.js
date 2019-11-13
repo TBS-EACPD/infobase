@@ -1,17 +1,15 @@
-import { get_client } from '../../../graphql_utils.js';
 import gql from 'graphql-tag';
-import { log_standard_event } from '../../../core/analytics.js';
-import { StandardRouteContainer } from '../../../core/NavComponents.js';
 
-import { TM, text_maker } from './result_text_provider.js';
+import { get_client } from '../../graphql_utils.js';
+import { log_standard_event } from '../../core/analytics.js';
+import { StandardRouteContainer } from '../../core/NavComponents.js';
 
-import {
-  Panel,
-  SpinnerWrapper,
-} from '../../../components';
+import { Panel, SpinnerWrapper } from '../../components/index.js';
 
-import { Indicator } from '../../../models/results.js';
-import { SingleIndicatorDisplay } from './result_components.js';
+import { Indicator } from '../../models/results.js';
+
+import { IndicatorDisplay } from '../panel_declarations/result_graphs/result_components.js';
+import { TM, text_maker } from '../panel_declarations/result_graphs/result_text_provider.js';
 
 
 const indicators_fields_fragment = `  id
@@ -131,7 +129,7 @@ export default class IndicatorPanel extends React.Component {
         <TM k="indicator_display_title" el="h1" />
         {loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
           <Panel title={indicator.name}>
-            <SingleIndicatorDisplay indicator={indicator} show_doc={true}/>
+            <IndicatorDisplay indicator={indicator} show_doc={true}/>
           </Panel>
         }
       </StandardRouteContainer>
