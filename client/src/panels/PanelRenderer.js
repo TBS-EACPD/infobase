@@ -9,12 +9,12 @@ export const PanelRenderer = withRouter(
     render(){
       let {
         subject,
-        graph_key,
+        panel_key,
         history,
         active_bubble_id,
       } = this.props;  
 
-      const graph_obj = PanelRegistry.lookup(graph_key, subject.level);
+      const graph_obj = PanelRegistry.lookup(panel_key, subject.level);
 
       const graph_options = {history};
 
@@ -26,15 +26,15 @@ export const PanelRenderer = withRouter(
         return null;
       }
       return (
-        <div id={graph_key} tabIndex="0">
-          <Provider value={ {active_bubble_id, graph_key, subject} }>
+        <div id={panel_key} tabIndex="0">
+          <Provider value={ {active_bubble_id, panel_key, subject} }>
             { graph_obj.render(calculations, graph_options) }
           </Provider>
         </div>
       );
     }
     shouldComponentUpdate(nextProps){
-      return !shallowEqualObjectsOverKeys(nextProps, this.props, ['subject','graph_key']);
+      return !shallowEqualObjectsOverKeys(nextProps, this.props, ['subject','panel_key']);
     } 
   }
 );

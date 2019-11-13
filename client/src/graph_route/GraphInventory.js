@@ -60,7 +60,7 @@ const getSubj = (level, id) => {
 };
 
 // Bring back footnotes inventory ??
-// const link_to_footnotes = ( graph_key, level) => `#footnotes/graph/${graph_key}/${level}`;
+// const link_to_footnotes = ( panel_key, level) => `#footnotes/graph/${panel_key}/${level}`;
 
 function graphs_of_interest(graph){
   const { depends_on, info_deps, key} = graph;
@@ -99,8 +99,8 @@ const get_subj = createSelector(
 const get_graph_obj = createSelector(
   get_subj,
   props => _.get(props, "match.params.graph"),
-  (subject, graph_key) => {
-    return PanelRegistry.lookup(graph_key, subject.level) || PanelRegistry.lookup('financial_key_concepts', 'gov');
+  (subject, panel_key) => {
+    return PanelRegistry.lookup(panel_key, subject.level) || PanelRegistry.lookup('financial_key_concepts', 'gov');
   }
 );
 
@@ -210,7 +210,7 @@ export default class GraphInventory extends React.Component {
   }
   loadDeps({subject,panel}){
     ensure_loaded({
-      graph_keys: [ panel.key ],
+      panel_keys: [ panel.key ],
       subject_level: subject.level,
       subject,
       footnotes_for: subject,
@@ -273,7 +273,7 @@ export default class GraphInventory extends React.Component {
         </div>
         <div id="main">
           <PanelRenderer 
-            graph_key={panel.key}
+            panel_key={panel.key}
             subject={subject}
             key={`${panel.key}-${subject.guid}`}
           />

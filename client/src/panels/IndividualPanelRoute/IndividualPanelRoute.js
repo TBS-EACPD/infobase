@@ -55,7 +55,7 @@ export default class IsolatedPanel extends React.Component {
         ensure_loaded({
           subject: subject,
           has_results: true,
-          graph_keys: [ panel_key ],
+          panel_keys: [ panel_key ],
           subject_level: subject.level,
           footnotes_for: subject,
         })
@@ -88,7 +88,7 @@ export default class IsolatedPanel extends React.Component {
             <h1>{subject.fancy_name}</h1>
             {panel_key &&
               <PanelRenderer 
-                graph_key={panel_key}
+                panel_key={panel_key}
                 subject={subject}
                 key={`${panel_key}-${subject.guid}`}
               />

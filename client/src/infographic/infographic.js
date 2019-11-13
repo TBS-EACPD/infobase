@@ -228,12 +228,12 @@ class InfoGraph_ extends React.Component {
             </p>
           }
           { !loading &&
-            _.map(panel_keys, graph_key => 
+            _.map(panel_keys, panel_key => 
               <PanelRenderer 
-                graph_key={graph_key}
+                panel_key={panel_key}
                 subject={subject}
                 active_bubble_id={active_bubble_id}
-                key={graph_key + subject.guid}
+                key={panel_key + subject.guid}
               />
             )  
           }
@@ -299,7 +299,7 @@ class InfoGraph_ extends React.Component {
   loadGraphDeps({bubbles_for_subject, active_bubble_id, subject, level}){
     const panel_keys = get_panels_for_subj_bubble(bubbles_for_subject, active_bubble_id);
     ensure_loaded({
-      graph_keys: panel_keys,
+      panel_keys,
       subject_level: level,
       subject: subject,
       footnotes_for: subject,

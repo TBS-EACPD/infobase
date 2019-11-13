@@ -17,7 +17,7 @@ function load(table_objs){
 }
 
 function ensure_loaded({ 
-  graph_keys, 
+  panel_keys, 
   stat_keys, 
   table_keys, 
   subject_level, 
@@ -34,7 +34,7 @@ function ensure_loaded({
 }){
   const table_set = _.chain( table_keys )
     .union(
-      _.chain(graph_keys)
+      _.chain(panel_keys)
         .map(key => tables_for_graph(key, subject_level))
         .flatten()
         .value()
@@ -51,7 +51,7 @@ function ensure_loaded({
   //results can be required explicitly, or be a dependency of a graph/statistic
   const should_load_results = (
     results || 
-    _.chain(graph_keys)
+    _.chain(panel_keys)
       .map(key => PanelRegistry.lookup(key, subject_level))
       .map('requires_results')
       .concat( 
@@ -66,7 +66,7 @@ function ensure_loaded({
 
   const should_load_result_counts = (
     require_result_counts ||
-    _.chain(graph_keys)
+    _.chain(panel_keys)
       .map(key => PanelRegistry.lookup(key, subject_level))
       .map('requires_result_counts')
       .concat( 
@@ -81,7 +81,7 @@ function ensure_loaded({
 
   const should_load_granular_result_counts = (
     require_granular_result_counts ||
-    _.chain(graph_keys)
+    _.chain(panel_keys)
       .map(key => PanelRegistry.lookup(key, subject_level))
       .map('requires_granular_result_counts')
       .concat( 
@@ -96,7 +96,7 @@ function ensure_loaded({
 
   const should_load_has_budget_measures = (
     has_budget_measures ||
-    _.chain(graph_keys)
+    _.chain(panel_keys)
       .map(key => PanelRegistry.lookup(key, subject_level))
       .map('requires_has_budget_measures')
       .some()
@@ -105,7 +105,7 @@ function ensure_loaded({
 
   const should_load_budget_measures = (
     budget_measures ||
-    _.chain(graph_keys)
+    _.chain(panel_keys)
       .map(key => PanelRegistry.lookup(key, subject_level))
       .map('requires_budget_measures')
       .some()
@@ -122,7 +122,7 @@ function ensure_loaded({
 
   const result_docs_to_load = !_.isEmpty(result_docs) ?
     result_docs :
-    _.chain(graph_keys)
+    _.chain(panel_keys)
       .map(key => PanelRegistry.lookup(key, subject_level))
       .map('required_result_docs')
       .concat( 
