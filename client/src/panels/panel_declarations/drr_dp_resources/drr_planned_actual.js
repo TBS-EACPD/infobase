@@ -1,9 +1,10 @@
 import text from "./drr_planned_actual.yaml";
 
+import { PlannedActualTable } from './PlannedActualTable.js';
+
 import {
   declare_panel,
   FootNote,
-  PlannedActualTable,
   create_text_maker_component,
   TextPanel,
   get_source_links,
