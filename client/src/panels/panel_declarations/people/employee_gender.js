@@ -3,15 +3,17 @@ import { AverageSharePie } from './AverageSharePie.js';
 import {
   formats,
   run_template,
-  declare_panel,
-  HeightClippedGraph,
-  LineBarToggleGraph,
   businessConstants,
   years,
   create_text_maker_component,
   declarative_charts,
   StdPanel,
   Col,
+
+  declare_panel,
+
+  LineBarToggleGraph,
+  HeightClippedGraph,
 } from "../shared.js"; 
 
 const { text_maker, TM } = create_text_maker_component(text);
