@@ -1,9 +1,9 @@
 import text from "./employee_fol.yaml";
+import { AverageSharePie } from './AverageSharePie.js';
 import {
   formats,
   run_template,
   declare_panel,
-  PplSharePie,
   HeightClippedGraph,
   LineBarToggleGraph,
   businessConstants,
@@ -13,6 +13,7 @@ import {
   StdPanel,
   Col,
 } from "../shared.js"; 
+
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -103,7 +104,7 @@ export const declare_employee_fol_panel = () => declare_panel({
           </Col>
           { !window.is_a11y_mode &&
             <Col size={12} isGraph>
-              <PplSharePie
+              <AverageSharePie
                 panel_args = {panel_args}
                 label_col_header = {text_maker("FOL")}
               />
