@@ -12,7 +12,7 @@ import { get_static_url } from '../../../request_utils.js';
 const { Gov, Dept } = Subject;
 const { create_text_maker_component} = util_components;
 
-const { TM } = create_text_maker_component(simplographic_text);
+const { text_maker, TM } = create_text_maker_component(simplographic_text);
 
 export const declare_simplographic_panel = () => declare_panel({
   panel_key: "simplographic",
@@ -135,7 +135,7 @@ export const declare_simplographic_panel = () => declare_panel({
       };
   
       return (
-        <InfographicPanel>
+        <InfographicPanel title={text_maker("simplographic_title")}>
           <div className="medium_panel_text">
             <Row top_border img_src="money.svg" title_key="simplographic_spending_title" text_key="simplographic_spending_text"/> 
             <Row img_src="employees.svg" title_key="simplographic_people_title" text_key="simplographic_people_text"/> 
