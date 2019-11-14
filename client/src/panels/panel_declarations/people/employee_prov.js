@@ -10,7 +10,6 @@ import {
   Col,
   declarative_charts,
   NivoResponsiveHBar,
-  hex_to_rgb,
   Canada,
 } from "../shared.js"; 
 import { Fragment } from 'react';
@@ -23,6 +22,22 @@ const { GraphLegend, A11YTable } = declarative_charts;
 
 const graph_color = window.infobase_color_constants.secondaryColor;
 
+//copied from https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+const hex_to_rgb = (hex) => {
+  // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+    return r + r + g + g + b + b;
+  });
+
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16),
+  } : null;
+};
+
 const get_graph_color = (alpha) => {
   const rgb = hex_to_rgb(graph_color);
   return rgb && `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha || 1})`;
@@ -31,19 +46,23 @@ const get_graph_color = (alpha) => {
 const format_prov_data = (prov, years_by_province) => {
   var prov_data;
   if(prov==="Canada"){
-    prov_data = _.map(years_by_province,(data,ix) => ({
-      year: run_template(people_years[ix]),
-      value: _.chain(data)
-        .values()
-        .sum()
-        .value(),
-    }));
+    prov_data = _.map(
+      years_by_province,
+      (data,ix) => ({
+        year: run_template(people_years[ix]),
+        value: _.chain(data)
+          .values()
+          .sum()
+          .value(),
+      })
+    );
   } else {
     prov_data = _.map(years_by_province,(data,ix) => ({year: run_template(people_years[ix]), value: data[prov]}));
   }
 
   return _.reverse(prov_data);
 };
+
 
 class CanadaGraphBarLegend extends React.Component {
   constructor(){
