@@ -48,6 +48,20 @@ const {
 } = util_components;
 
 
+const declare_panel = ({panel_key, levels, panel_config_func}) => {
+  if ( !PanelRegistry.is_registered_panel_key(panel_key) ){
+    levels.forEach( 
+      level => new PanelRegistry({
+        level,
+        key: panel_key,
+        ...panel_config_func(level, panel_key),
+      })
+    );
+  }
+
+  return panel_key;
+};
+
 const infobase_colors_smart = (col_scale) => (label) => {
   if ( _.includes(businessConstants.NA_values,label) ){
     return NA_color;
@@ -55,8 +69,36 @@ const infobase_colors_smart = (col_scale) => (label) => {
   return col_scale(label);
 };
 
+const get_planned_spending_source_link = subject => {
+  const appropriate_subject = get_appropriate_rpb_subject(subject);
+  const table = Table.lookup('programSpending');
+  return {
+    html: table.name,
+    href: rpb_link({
+      subject: appropriate_subject.guid,
+      table: table.id,
+      mode: 'details',
+      columns: ['{{planning_year_1}}'], 
+    }),
+  };
+};
+const get_planned_fte_source_link = subject => {
+  const appropriate_subject = get_appropriate_rpb_subject(subject);
+  const table = Table.lookup('programFtes');
+  return {
+    html: table.name,
+    href: rpb_link({
+      subject: appropriate_subject.guid,
+      table: table.id,
+      mode: 'details',
+      columns: ['{{planning_year_1}}'], 
+    }),
+  };
+};
 
-export const CommonDonut = function({graph_data, legend_data, graph_height}){
+
+
+const CommonDonut = function({graph_data, legend_data, graph_height}){
 
   const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
 
@@ -116,7 +158,7 @@ export const CommonDonut = function({graph_data, legend_data, graph_height}){
   );
 };
 
-export class LineBarToggleGraph extends React.Component {
+class LineBarToggleGraph extends React.Component {
   constructor(props){
     super(props);
 
@@ -374,7 +416,7 @@ LineBarToggleGraph.defaultProps = {
   initial_graph_mode: "bar_stacked",
 };
 
-export const TspanLineWrapper = ({text, width, line_height=1}) => <Fragment>
+const TspanLineWrapper = ({text, width, line_height=1}) => <Fragment>
   {
     _.chain(text)
       .thru( text => text.split(/\s+/) )
@@ -400,23 +442,12 @@ export const TspanLineWrapper = ({text, width, line_height=1}) => <Fragment>
   }
 </Fragment>;
 
-export const HeightClippedGraph = ({clipHeight, children}) => {
+const HeightClippedGraph = ({clipHeight, children}) => {
   return (
     <HeightClipper clipHeight={clipHeight || 185} allowReclip={true} buttonTextKey={"show_content"} gradientClasses={"gradient clipped-graph-gradient"}>
       {children}
     </HeightClipper>
   );
-};
-
-export const sum_a_tag_col = function sum_tag_col(tag, table, col){
-  return _.chain(tag.programs)
-    .map(p => table.programs.get(p))
-    .flatten()
-    .compact()
-    .filter(col)
-    .map(col)
-    .reduce( ( (acc, amt) => acc + amt), 0 )
-    .value();
 };
 
 export const PlannedActualTable = ({
@@ -452,69 +483,9 @@ export const PlannedActualTable = ({
   </table>
 );
 
-export const get_planned_spending_source_link = subject => {
-  const appropriate_subject = get_appropriate_rpb_subject(subject);
-  const table = Table.lookup('programSpending');
-  return {
-    html: table.name,
-    href: rpb_link({
-      subject: appropriate_subject.guid,
-      table: table.id,
-      mode: 'details',
-      columns: ['{{planning_year_1}}'], 
-    }),
-  };
-};
-
-export const get_planned_fte_source_link = subject => {
-  const appropriate_subject = get_appropriate_rpb_subject(subject);
-  const table = Table.lookup('programFtes');
-  return {
-    html: table.name,
-    href: rpb_link({
-      subject: appropriate_subject.guid,
-      table: table.id,
-      mode: 'details',
-      columns: ['{{planning_year_1}}'], 
-    }),
-  };
-};
-
-//copied from https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
-const hex_to_rgb = (hex) => {
-  // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, function(m, r, g, b) {
-    return r + r + g + g + b + b;
-  });
-
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16),
-  } : null;
-};
-
-
-const declare_panel = ({panel_key, levels, panel_config_func}) => {
-
-  if ( !PanelRegistry.is_registered_panel_key(panel_key) ){
-    levels.forEach( 
-      level => new PanelRegistry({
-        level,
-        key: panel_key,
-        ...panel_config_func(level, panel_key),
-      })
-    );
-  }
-
-  return panel_key;
-};
-
 
 export {
-  declare_panel,
+  // re-exports
   Table,
   rpb_link,
   get_appropriate_rpb_subject,
@@ -549,14 +520,24 @@ export {
   newIBCategoryColors,
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
-  infobase_colors_smart,
   NivoResponsiveBar,
   NivoResponsiveHBar,
   NivoResponsiveLine,
   NivoResponsivePie,
-  hex_to_rgb,
   Canada,
   breakpoints,
   SpinnerWrapper,
   get_formatter,
+
+  // shared panel utils
+  declare_panel,
+  infobase_colors_smart,
+  get_planned_spending_source_link,
+  get_planned_fte_source_link,
+
+  // shared panel components
+  CommonDonut,
+  LineBarToggleGraph,
+  HeightClippedGraph,
+  TspanLineWrapper,
 };

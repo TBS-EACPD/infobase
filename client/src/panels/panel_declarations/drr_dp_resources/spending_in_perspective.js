@@ -1,7 +1,6 @@
 import text from './perspective_text.yaml';
 import {
   declare_panel, 
-  sum_a_tag_col,
   util_components,
   declarative_charts,
   InfographicPanel,
@@ -21,6 +20,15 @@ const {
 const { text_maker, TM } = create_text_maker_component(text);
 
 const col = "{{planning_year_1}}";
+
+const sum_a_tag_col = (tag, table, col) => _.chain(tag.programs)
+  .map(p => table.programs.get(p))
+  .flatten()
+  .compact()
+  .filter(col)
+  .map(col)
+  .reduce( ( (acc, amt) => acc + amt), 0 )
+  .value();
 
 
 class SpendInTagPerspective extends React.Component {
