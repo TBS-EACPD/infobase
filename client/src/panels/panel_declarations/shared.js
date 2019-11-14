@@ -27,7 +27,6 @@ import { glossary_href } from '../../link_utils.js';
 import * as general_utils from '../../general_utils.js';
 import * as util_components from '../../components/index.js';
 
-
 import classNames from 'classnames';
 import { Fragment } from 'react';
 
@@ -97,9 +96,7 @@ const get_planned_fte_source_link = subject => {
 };
 
 
-
 const CommonDonut = function({graph_data, legend_data, graph_height}){
-
   const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
 
   const has_neg = _.chain(legend_data)
@@ -129,30 +126,32 @@ const CommonDonut = function({graph_data, legend_data, graph_height}){
           total = {total}
         />
       </div>
-      {!has_neg && 
-      <div className="centerer" style={{marginTop: "-40px"}}>
-        <div 
-          style={{
-            width: "100%", /* IE 11 */ 
-            maxWidth: '400px', 
-            flexGrow: 1,
-          }}
-        >
-          <TabularPercentLegend
-            items={legend_items}
-            get_right_content={item => 
-              <div style={{width: "120px", display: "flex"}}>
-                <div style={{width: "60px"}}>
-                  <Format type="compact1" content={item.value} />
-                </div>
-                <div style={{width: "60px"}}>
-                  (<Format type="percentage1" content={(item.value)*Math.pow(total,-1)} />)
-                </div>
-              </div>
-            }
-          />
+      { !has_neg && 
+        <div className="centerer" style={{marginTop: "-40px"}}>
+          <div 
+            style={{
+              width: "100%", /* IE 11 */ 
+              maxWidth: '400px', 
+              flexGrow: 1,
+            }}
+          >
+            <TabularPercentLegend
+              items={legend_items}
+              get_right_content={
+                (item) => (
+                  <div style={{width: "120px", display: "flex"}}>
+                    <div style={{width: "60px"}}>
+                      <Format type="compact1" content={item.value} />
+                    </div>
+                    <div style={{width: "60px"}}>
+                      <Format type="percentage1" content={(item.value)*Math.pow(total,-1)} />
+                    </div>
+                  </div>
+                )
+              }
+            />
+          </div>
         </div>
-      </div>
       }
     </div>
   );
@@ -337,7 +336,6 @@ class LineBarToggleGraph extends React.Component {
       },
     };
 
-
     return (
       <div className="frow">
         <div 
@@ -450,39 +448,6 @@ const HeightClippedGraph = ({clipHeight, children}) => {
   );
 };
 
-export const PlannedActualTable = ({
-  planned_ftes,
-  actual_ftes,
-  diff_ftes,
-
-  planned_spend,
-  actual_spend,
-  diff_spend,
-}) => (
-  <table className="table">
-    <thead><tr>
-      <th></th>
-      <th scope="col"> <TM k="planned" /></th>
-      <th scope="col"> <TM k="actual" /></th>
-      <th scope="col"> <TM k="difference_planned_actual" /></th>
-    </tr></thead>
-    <tbody>
-      <tr>
-        <th scope="row"> <TM k="spending"/> </th>
-        <td> <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={planned_spend} /> </td>
-        <td> <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={actual_spend} /> </td>
-        <td> <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={diff_spend} /> </td>
-      </tr>
-      <tr>
-        <th scope="row"> <TM k="ftes"/> </th>
-        <td> <Format type="big_int" content={planned_ftes} /> </td>
-        <td> <Format type="big_int" content={actual_ftes} /> </td>
-        <td> <Format type="big_int" content={diff_ftes} /> </td>
-      </tr>
-    </tbody> 
-  </table>
-);
-
 
 export {
   // re-exports
@@ -495,6 +460,7 @@ export {
   general_utils,
   FootNote,
   util_components,
+  Format,
   infograph_href_template,
   glossary_href,
   Results,

@@ -10,10 +10,11 @@ import {
   provide_sort_func_selector,
 } from '../../../gen_expl/resource-explorer-common.js';
 
+import { PlannedActualTable } from './PlannedActualTable.js';
+
 import {
   declare_panel,
   Subject,
-  PlannedActualTable,
   Results,
   general_utils,
   InfographicPanel,
