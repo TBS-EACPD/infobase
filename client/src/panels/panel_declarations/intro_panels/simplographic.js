@@ -1,4 +1,7 @@
+import './simplographic.scss';
 import simplographic_text from './simplographic.yaml';
+
+
 import { 
   Subject, 
   declare_panel, 
@@ -108,7 +111,7 @@ export const declare_simplographic_panel = () => declare_panel({
     render({calculations}){
       const { panel_args: big_info } = calculations;
       const Row = props => {
-        const this_row_props = {className: "grid-row canada-intro-grid", style: {borderTop: 0, padding: "15px 0px", marginLeft: "-50px", marginRight: "-15px"}};
+        const this_row_props = {className: "grid-row about-government-intro-grid", style: {borderTop: 0, padding: "15px 0px", marginLeft: "-50px", marginRight: "-15px"}};
         if (props.top_border){
           this_row_props.style.borderTop="#";
         }

@@ -1,9 +1,9 @@
 import text from "./employee_type.yaml";
+import { AverageSharePie } from './AverageSharePie.js';
 import {
   formats,
   run_template,
   declare_panel,
-  PplSharePie,
   LineBarToggleGraph,
   HeightClippedGraph,
   businessConstants,
@@ -103,7 +103,7 @@ export const declare_employee_type_panel = () => declare_panel({
           </Col>
           { !window.is_a11y_mode &&
             <Col size={12} isGraph>
-              <PplSharePie
+              <AverageSharePie
                 panel_args = {panel_args}
                 label_col_header = {text_maker("employee_type")}
               />
