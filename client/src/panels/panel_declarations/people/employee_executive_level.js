@@ -2,13 +2,15 @@ import text from "./employee_executive_level.yaml";
 import {
   formats,
   run_template,
-  declare_panel,
   businessConstants,
   years,
   create_text_maker_component,
   declarative_charts,
   StdPanel,
   Col,
+
+  declare_panel,
+
   LineBarToggleGraph,
 } from "../shared.js"; 
 

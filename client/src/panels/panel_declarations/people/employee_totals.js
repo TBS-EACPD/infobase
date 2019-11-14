@@ -2,16 +2,16 @@ import text from "./employee_totals.yaml";
 import {
   formats,
   run_template,
-  declare_panel, 
   years,
   create_text_maker_component,
   declarative_charts,
   StdPanel,
   Col,
   NivoResponsiveLine,
-} from "../shared.js"; 
+  businessConstants,
 
-import { businessConstants } from '../../../models/businessConstants';
+  declare_panel, 
+} from "../shared.js"; 
 
 const { months } = businessConstants;
 

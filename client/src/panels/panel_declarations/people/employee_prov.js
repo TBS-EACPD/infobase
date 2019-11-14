@@ -2,7 +2,6 @@ import text from "./employee_prov.yaml";
 import {
   formats,
   run_template,
-  declare_panel,
   years,
   businessConstants,
   create_text_maker_component,
@@ -11,6 +10,8 @@ import {
   declarative_charts,
   NivoResponsiveHBar,
   Canada,
+
+  declare_panel,
 } from "../shared.js"; 
 import { Fragment } from 'react';
 

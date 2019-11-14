@@ -8,6 +8,7 @@ import { newIBCategoryColors, newIBLightCategoryColors, newIBDarkCategoryColors,
 import { breakpoints } from '../../core/breakpoint_defs.js';
 import { Table } from '../../core/TableClass.js';
 import { Statistics } from '../../core/Statistics.js';
+import { ensure_loaded } from '../../core/lazy_loader.js';
 
 import * as Results from '../../models/results.js';
 import { create_text_maker, trivial_text_maker, run_template } from '../../models/text.js';
@@ -15,10 +16,12 @@ import { Subject } from '../../models/subject';
 import { years } from '../../models/years.js';
 import { businessConstants } from '../../models/businessConstants.js';
 import FootNote from '../../models/footnotes.js'; 
+import { GlossaryEntry } from '../../models/glossary.js';
 
 import * as declarative_charts from '../../charts/declarative_charts.js';
 import { NivoResponsiveBar, NivoResponsiveHBar, NivoResponsiveLine, NivoResponsivePie, get_formatter } from '../../charts/NivoCharts.js';
 import { Canada } from '../../charts/canada.js';
+import { FlatTreeMapViz } from '../../charts/flat_treemap/FlatTreeMapViz.js';
 
 import { rpb_link, get_appropriate_rpb_subject } from '../../rpb/rpb_link.js';
 import { infograph_href_template as infograph_href_template } from '../../infographic/routes.js';
@@ -26,6 +29,7 @@ import { get_source_links } from '../../metadata/data_sources.js';
 import { glossary_href } from '../../link_utils.js';
 import * as general_utils from '../../general_utils.js';
 import * as util_components from '../../components/index.js';
+import * as table_common from '../../tables/table_common.js';
 
 import classNames from 'classnames';
 import { Fragment } from 'react';
@@ -459,12 +463,14 @@ export {
   businessConstants,
   general_utils,
   FootNote,
+  GlossaryEntry,
   util_components,
   Format,
   infograph_href_template,
   glossary_href,
   Results,
   Statistics,
+  ensure_loaded,
   declarative_charts,
   formats,
   dollar_formats,
@@ -491,9 +497,11 @@ export {
   NivoResponsiveLine,
   NivoResponsivePie,
   Canada,
+  FlatTreeMapViz,
   breakpoints,
   SpinnerWrapper,
   get_formatter,
+  table_common,
 
   // shared panel utils
   declare_panel,

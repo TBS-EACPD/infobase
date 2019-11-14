@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
 
-import { TM, text_maker } from '../panels/panel_declarations/result_graphs/result_text_provider.js';
+import { TM, text_maker } from '../panels/panel_declarations/results/result_text_provider.js';
+import { IndicatorDisplay } from '../panels/panel_declarations/results/result_components.js';
+
 import { infograph_href_template } from '../link_utils.js';
 import { Indicator, result_docs } from '../models/results.js';
-import { IndicatorDisplay } from '../panels/panel_declarations/result_graphs/result_components.js';
-
 
 
 const type_text_keys = {

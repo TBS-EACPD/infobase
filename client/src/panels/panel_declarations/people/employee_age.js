@@ -3,7 +3,6 @@ import {
   formats,
   run_template,
   Subject,
-  declare_panel,
   businessConstants,
   years,
   TabbedContent,
@@ -11,6 +10,9 @@ import {
   declarative_charts,
   StdPanel,
   Col,
+
+  declare_panel, 
+  
   LineBarToggleGraph,
 } from "../shared.js"; 
 

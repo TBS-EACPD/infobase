@@ -14,7 +14,7 @@
 
 // tag only panels
 import {
-  declare_m2m_warning_panel,
+  declare_m2m_tag_warning_panel,
   declare_tag_fed_structure_panel,
   declare_sibling_tags_panel,
   declare_tag_progs_by_dept_panel,
@@ -34,12 +34,12 @@ export const get_tag_panels = subject => ({
     declare_tag_progs_by_dept_panel(),
   ],
   structure: [ 
-    declare_m2m_warning_panel(),
+    declare_m2m_tag_warning_panel(),
     declare_resource_structure_panel(),
   ],
   //Financial turned off indefinitely
   // financial: [
-  //   declare_m2m_warning_panel(),
+  //   declare_m2m_tag_warning_panel(),
   //   declare_financial_key_concepts_panel(), 
   //   declare_welcome_mat_panel(),
   //   declare_vote_stat_split_panel(),
