@@ -1,4 +1,5 @@
-import text from './isc.yaml';
+import text from './internal_services.yaml';
+
 import { 
   InfographicPanel, 
   Subject, 

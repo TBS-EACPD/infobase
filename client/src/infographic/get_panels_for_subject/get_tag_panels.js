@@ -1,19 +1,19 @@
-// shared all
-//import { declare_welcome_mat_panel } from '../../panels/welcome_mat/welcome_mat.js';
-//import { declare_financial_key_concepts_panel } from '../../panels/intro_panels/index.js';
-
-// shared dept, program, tag
-//import { declare_spend_rev_split_panel } from "../../panels/sobj/spend_rev_split.js";
-
-// shared dept, tag
-//import { declare_detailed_program_spending_split_panel } from "../../panels/detailed_program_spending_split/detailed_program_spending_split.js";
-
-// shared program, tag
-//import { declare_vote_stat_split_panel } from "../../panels/vote_stat/last_year_vote_stat_split.js";
-//import { declare_top_spending_areas_panel } from "../../panels/sobj/top_spending_areas.js";
-
-// tag only panels
 import {
+  // shared all
+  //declare_welcome_mat_panel,
+  //declare_financial_key_concepts_panel,
+  
+  // shared dept, program, tag
+  //declare_spend_rev_split_panel,
+  
+  // shared dept, tag
+  //declare_detailed_program_spending_split_panel,
+  
+  // shared program, tag
+  //declare_vote_stat_split_panel,
+  //declare_top_spending_areas_panel,
+
+  // tag only panels
   declare_m2m_tag_warning_panel,
   declare_tag_fed_structure_panel,
   declare_sibling_tags_panel,
@@ -21,9 +21,9 @@ import {
   declare_related_tags_panel,
   declare_description_panel,
   declare_tagging_key_concepts_panel,
-} from '../../panels/panel_declarations/intro_panels/index.js';
-import { declare_horizontal_initiative_profile_panel } from '../../panels/panel_declarations/tag_panels/horizontal_initiative_profile.js';
-import { declare_resource_structure_panel } from '../../panels/panel_declarations/tag_panels/resource_structure.js';
+  declare_horizontal_initiative_profile_panel,
+  declare_resource_structure_panel,
+} from '../../panels/panel_declarations/index.js';
 
 export const get_tag_panels = subject => ({
   intro: [

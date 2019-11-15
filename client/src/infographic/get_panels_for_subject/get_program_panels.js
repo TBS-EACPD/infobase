@@ -1,43 +1,41 @@
 import { ensure_loaded } from '../../core/lazy_loader.js';
 
-// shared all
-import { declare_welcome_mat_panel } from '../../panels/panel_declarations/welcome_mat/welcome_mat.js';
-import { declare_financial_key_concepts_panel } from '../../panels/panel_declarations/intro_panels/index.js';
-
-// shared gov, dept, crso, program
 import {
+  // shared all
+  declare_welcome_mat_panel,
+  declare_financial_key_concepts_panel,
+
+  // shared gov, dept, crso, program
   declare_results_key_concepts_panel,
   declare_late_dps_warning_panel,
-} from '../../panels/panel_declarations/intro_panels/index.js';
-import { declare_budget_measures_panel } from '../../panels/panel_declarations/budget_measures/budget_measures_panel.js';
-import { declare_year_warning_panel } from '../../panels/panel_declarations/intro_panels/index.js';
+  declare_budget_measures_panel,
+  declare_year_warning_panel,
 
-// shared dept, crso, program
-import { declare_explore_results_panel } from '../../panels/panel_declarations/result_graphs/index.js';
-import { declare_results_table_panel } from '../../panels/panel_declarations/result_graphs/index.js';
-import { declare_tags_of_interest_panel } from '../../panels/panel_declarations/intro_panels/index.js';
-import { declare_drr_planned_actual_panel } from "../../panels/panel_declarations/drr_dp_resources/drr_planned_actual.js";
-import { declare_dp_rev_split_panel } from "../../panels/panel_declarations/drr_dp_resources/dp_rev_split.js";
-import { declare_drr_summary_panel } from '../../panels/panel_declarations/result_graphs/index.js';
+  // shared dept, crso, program
+  declare_explore_results_panel,
+  declare_results_table_panel,
+  declare_tags_of_interest_panel,
+  declare_drr_planned_actual_panel,
+  declare_dp_rev_split_panel,
+  declare_drr_summary_panel,
 
-// shared dept, program, tag
-import { declare_spend_rev_split_panel } from "../../panels/panel_declarations/sobj/spend_rev_split.js";
+  // shared dept, program, tag
+  declare_spend_rev_split_panel,
 
-// shared crso, program
-import { declare_profile_panel } from '../../panels/panel_declarations/intro_panels/index.js';
+  // shared crso, program
+  declare_profile_panel,
 
-// shared program, tag
-import { declare_vote_stat_split_panel } from "../../panels/panel_declarations/vote_stat/last_year_vote_stat_split.js";
-import { declare_top_spending_areas_panel } from "../../panels/panel_declarations/sobj/top_spending_areas.js";
+  // shared program, tag
+  declare_vote_stat_split_panel,
+  declare_top_spending_areas_panel,
 
-// program only panels
-import {
+  // program only panels
   declare_dead_program_warning_panel,
   declare_program_fed_structure_panel,
   declare_related_program_structure_panel,
-} from '../../panels/panel_declarations/intro_panels/index.js';
-import { declare_spending_in_tag_perspective_panel } from "../../panels/panel_declarations/drr_dp_resources/spending_in_perspective.js";
-import { declare_sub_program_resources_panel } from "../../panels/panel_declarations/drr_dp_resources/sub_program_resources.js";
+  declare_spending_in_tag_perspective_panel,
+  declare_sub_program_resources_panel,
+} from '../../panels/panel_declarations/index.js';
 
 // To be safe, ensure all used has_<data> checks are loaded
 export const get_program_panels = subject => ensure_loaded({

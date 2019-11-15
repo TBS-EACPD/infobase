@@ -1,49 +1,48 @@
 import { get_people_panels } from './get_people_panels.js';
 import { ensure_loaded } from '../../core/lazy_loader.js';
 
-// shared all
-import { declare_welcome_mat_panel } from '../../panels/panel_declarations/welcome_mat/welcome_mat.js';
-import { declare_financial_key_concepts_panel } from '../../panels/panel_declarations/intro_panels/index.js';
-
-// shared gov, dept, crso, program
 import {
+  // shared all
+  declare_welcome_mat_panel,
+  declare_financial_key_concepts_panel,
+
+  // shared gov, dept, crso, program
   declare_results_key_concepts_panel,
   declare_late_dps_warning_panel,
-} from '../../panels/panel_declarations/intro_panels/index.js';
-import { declare_budget_measures_panel } from '../../panels/panel_declarations/budget_measures/budget_measures_panel.js';
-import { declare_year_warning_panel } from '../../panels/panel_declarations/intro_panels/index.js';
+  declare_budget_measures_panel,
+  declare_year_warning_panel,
 
-// shared dept, crso, program
-import { declare_explore_results_panel } from '../../panels/panel_declarations/result_graphs/index.js';
-import { declare_results_table_panel } from '../../panels/panel_declarations/result_graphs/index.js';
-import { declare_tags_of_interest_panel } from '../../panels/panel_declarations/intro_panels/index.js';
-import { declare_drr_planned_actual_panel } from "../../panels/panel_declarations/drr_dp_resources/drr_planned_actual.js";
-import { declare_dp_rev_split_panel } from "../../panels/panel_declarations/drr_dp_resources/dp_rev_split.js";
-import { declare_drr_summary_panel } from '../../panels/panel_declarations/result_graphs/index.js';
+  // shared dept, crso, program
+  declare_explore_results_panel,
+  declare_results_table_panel,
+  declare_tags_of_interest_panel,
+  declare_drr_planned_actual_panel,
+  declare_dp_rev_split_panel,
+  declare_drr_summary_panel,
 
-// shared dept, program, tag
-import { declare_spend_rev_split_panel } from "../../panels/panel_declarations/sobj/spend_rev_split.js";
+  // shared dept, program, tag
+  declare_spend_rev_split_panel,
 
-// shared gov, dept
-import { declare_links_to_rpb_panel } from '../../panels/panel_declarations/intro_panels/index.js';
-import { declare_in_year_voted_stat_split_panel } from "../../panels/panel_declarations/vote_stat/in_year_vote_stat_split.js";
-//import { declare_in_year_estimates_split_panel } from "../../panels/panel_declarations/vote_stat/in_year_estimates_split.js";
-import { declare_historical_g_and_c_panel } from "../../panels/panel_declarations/transfer_payments/historical_g_and_c.js";
-import { declare_auth_exp_prog_spending_panel } from '../../panels/panel_declarations/historical_auth_exp/auth_exp_prog_spending.js';
+  // shared gov, dept
+  declare_links_to_rpb_panel,
+  declare_in_year_voted_stat_split_panel,
+  //declare_in_year_estimates_split_panel,
+  declare_historical_g_and_c_panel,
+  declare_auth_exp_prog_spending_panel,
 
-// shared dept, tag
-import { declare_detailed_program_spending_split_panel } from "../../panels/panel_declarations/detailed_program_spending_split/detailed_program_spending_split.js";
+  // shared dept, tag
+  declare_detailed_program_spending_split_panel,
 
-// dept only panels
-import {
+  // dept only panels
   declare_portfolio_structure_intro_panel,
   declare_portfolio_structure_related_panel,
-} from '../../panels/intro_panels/index.js';
-import { declare_estimates_in_perspective_panel } from "../../panels/vote_stat/estimates_in_perspective.js";
-import { declare_spend_by_so_hist_panel } from "../../panels/sobj/spend_by_so_hist.js";
-import { declare_igoc_fields_panel } from '../../panels/igoc/igoc_panel.js';
-import { declare_last_year_g_and_c_perspective_panel } from "../../panels/transfer_payments/last_year_g_and_c_perspective.js";
-import { declare_internal_services_panel } from '../../panels/internal_services/isc.js';
+  declare_estimates_in_perspective_panel,
+  declare_spend_by_so_hist_panel,
+  declare_igoc_fields_panel,
+  declare_last_year_g_and_c_perspective_panel,
+  declare_internal_services_panel,
+} from '../../panels/panel_declarations/index.js';
+
 
 // To be safe, ensure all used has_<data> checks are loaded
 export const get_dept_panels = subject => ensure_loaded({

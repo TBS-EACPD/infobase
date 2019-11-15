@@ -38,8 +38,7 @@ const node_render = vs => function (foreign_sel) {
           `<div class="FlatTreeMap__ContentText">
             ${formats.compact1(node.data["{{est_in_year}}_estimates"])}
           </div>` : 
-          ""
-        }
+          "" }
       </div>
     `;
     return ret;
