@@ -8,7 +8,7 @@ import {
   declare_panel,
 } from "../../shared.js";
 
-const render_w_options = ({text_key, graph_col, text_col}) => ({calculations, sources, footnotes}) => {
+const render_w_options = ({text_key, graph_col, text_col}) => ({calculations, sources, footnotes, glossary_keys}) => {
   const { info, panel_args } = calculations;
 
   const data = _.map(
@@ -22,7 +22,7 @@ const render_w_options = ({text_key, graph_col, text_col}) => ({calculations, so
   return (
     <StdPanel
       title={text_maker("vote_stat_split_title")}
-      {...{footnotes,sources}}
+      {...{footnotes,sources,glossary_keys}}
     >
       <Col isText size={text_col}>
         <TM k={text_key} args={info} />
@@ -51,6 +51,7 @@ export const declare_vote_stat_split_panel = () => declare_panel({
           depends_on: ['programVoteStat'],
           info_deps: ["programVoteStat_program_info"],
           footnotes: ["VOTED", "STAT"],
+          glossary_keys: ["AUTH"],
         
           calculate(subject,info,options){ 
             const {programVoteStat} = this.tables;
@@ -80,6 +81,7 @@ export const declare_vote_stat_split_panel = () => declare_panel({
           depends_on: ['programVoteStat'],
           info_deps: ["programVoteStat_tag_info"],
           footnotes: ["VOTED", "STAT"],
+          glossary_keys: ["AUTH"],
           calculate(subject,info,options){ 
             const {programVoteStat} = this.tables;
         

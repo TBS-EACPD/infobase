@@ -9,7 +9,7 @@ import {
 } from "../../shared.js";
 
 
-const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,footnotes,sources}) => {
+const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,footnotes,sources,glossary_keys}) => {
   const { 
     panel_args,
     info,
@@ -26,7 +26,7 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,foo
   return (
     <StdPanel 
       title={text_maker("in_year_voted_stat_split_title")}
-      {...{sources,footnotes}}
+      {...{sources,footnotes,glossary_keys}}
     >
       <Col isText size={text_col}>
         <TM k={text_key} args={info} />
@@ -55,6 +55,7 @@ export const declare_in_year_voted_stat_split_panel = () => declare_panel({
           depends_on: ['orgVoteStatEstimates'],
           machinery_footnotes: false,
           info_deps: ['orgVoteStatEstimates_gov_info'],
+          glossary_keys: ["AUTH"],
         
           calculate(subject,info){
             return [
@@ -73,6 +74,7 @@ export const declare_in_year_voted_stat_split_panel = () => declare_panel({
           depends_on: ['orgVoteStatEstimates'],
           info_deps: ['orgVoteStatEstimates_dept_info', 'orgVoteStatEstimates_gov_info' ],
           machinery_footnotes: false,
+          glossary_keys: ["AUTH"],
           calculate(subject,info){
             // check for negative voted or statutory values, or 0 for both
             if ( 
