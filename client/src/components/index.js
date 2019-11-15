@@ -29,6 +29,8 @@ export { Countdown } from './Countdown.js';
 export { LogInteractionEvents } from './LogInteractionEvents.js';
 export { GlossaryIcon } from './GlossaryIcon.js';
 export { WellList } from './WellList.js';
+export { DisplayTable } from './DisplayTable.js';
+export { LabeledTable } from './LabeledTable.js';
 
 export { StatelessModal, FixedPopover } from './modals_and_popovers';
 

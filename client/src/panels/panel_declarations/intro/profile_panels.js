@@ -9,7 +9,7 @@ import {
   declare_panel,
 } from "../shared.js";
 
-const { text_maker } = create_text_maker(text);
+const text_maker = create_text_maker(text);
 const { sanitized_dangerous_inner_html } = general_utils;
 const { LabeledTombstone } = util_components;
 

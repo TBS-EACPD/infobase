@@ -18,7 +18,7 @@ import {
   crso_pi_hierarchy,
 } from './hierarchy_component.js';
 
-const { text_maker } = create_text_maker(text);
+const text_maker = create_text_maker(text);
 const { HeightClipper } = util_components;
 
 

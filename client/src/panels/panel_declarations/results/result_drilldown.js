@@ -18,7 +18,6 @@ const {
   Format,
   TextAbbrev,
   Details, 
-  Explorer,
 } = util_components;
 
 import { 
@@ -30,6 +29,7 @@ import {
 import { StatusIconTable, InlineStatusIconList } from './result_components.js';
 import { TM, text_maker } from './result_text_provider.js';
 
+import { Explorer } from '../../../components/ExplorerComponents.js';
 
 //drilldown stuff
 import { createSelector } from 'reselect';
@@ -543,7 +543,6 @@ export const declare_explore_results_panel = () => declare_panel({
           />
         </InfographicPanel>
       );
-
     },
   }),
 });
