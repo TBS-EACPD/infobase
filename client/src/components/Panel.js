@@ -1,6 +1,6 @@
 import './Panel.scss';
 import text from './Panel.yaml';
-import { GlossaryLink } from '../components';
+import { GlossaryLink } from './glossary_components.js';
 
 import classNames from 'classnames';
 
