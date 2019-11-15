@@ -1,4 +1,4 @@
-import { util_components } from '../shared.js';
+import { util_components } from '../../shared.js';
 
 const { Format, TM } = util_components;
 

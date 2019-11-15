@@ -1,9 +1,18 @@
-import { text_maker, TM } from '../intro/intro_panel_text_provider.js';
-import { declare_panel, TextPanel } from '../shared.js';
-import { rpb_link } from '../../../link_utils.js';
-import { Table } from '../../../core/TableClass.js';
-import { WellList } from '../../../components';
+import text from './rpb_links.yaml';
 
+import {
+  TextPanel,
+  util_components,
+  Table,
+  rpb_link,
+  create_text_maker,
+
+  declare_panel, 
+} from '../shared.js';
+
+const { WellList } = util_components;
+
+const { text_maker, TM } = create_text_maker([text]);
 
 const people_table_ids = [
   'orgEmployeeType',

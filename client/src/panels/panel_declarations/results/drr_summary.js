@@ -9,6 +9,7 @@ import {
   InfographicPanel,
   businessConstants,
   get_source_links,
+  Results,
 
   declare_panel,
 } from "../shared.js";
@@ -19,7 +20,6 @@ import {
   ordered_status_keys,
   get_result_doc_keys,
   filter_and_genericize_doc_counts,
-  Results,
 } from './results_common.js';
 
 import { IconArray } from '../../../charts/IconArray.js';

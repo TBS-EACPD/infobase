@@ -1,6 +1,6 @@
 import "./budget_measures_panel.scss";
 import text1 from "./budget_measures_panel.yaml";
-import text2 from "../../../partition/budget_measures_subapp/BudgetMeasuresRoute.yaml";
+import text2 from "../../../../partition/budget_measures_subapp/BudgetMeasuresRoute.yaml";
 
 import { Fragment } from 'react';
 import MediaQuery from 'react-responsive';

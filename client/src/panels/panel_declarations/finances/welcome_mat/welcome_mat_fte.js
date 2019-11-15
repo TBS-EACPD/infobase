@@ -1,26 +1,26 @@
-import text from '../../../common_text/common_lang.yaml';
+
 import { Fragment } from 'react';
 import MediaQuery from 'react-responsive';
+
 import {
   run_template,
   years,
   declarative_charts,
-  create_text_maker_component,
   NivoResponsiveLine,
   newIBCategoryColors,
   formatter,
+  trivial_text_maker,
 } from "../../shared.js";
 
 const {
   A11YTable,
 } = declarative_charts;
 
-const { text_maker } = create_text_maker_component(text);
 const { std_years, planning_years, public_accounts_year } = years;
 
 export const format_and_get_fte = (type, info, subject) => {
   const colors = d3.scaleOrdinal().range(newIBCategoryColors);
-  const series_labels = [text_maker("actual_ftes"), text_maker("planned_ftes")];
+  const series_labels = [trivial_text_maker("actual_ftes"), trivial_text_maker("planned_ftes")];
   const history_ticks = _.map(std_years, run_template);
   const plan_ticks = _.map(planning_years, run_template);
 

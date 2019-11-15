@@ -1,8 +1,12 @@
-import { text_maker } from '../intro/intro_panel_text_provider.js';
+import text from './hierarchy_panels.yaml';
+
 import { 
-  declare_panel, 
-  util_components, 
+  util_components,
   TextPanel, 
+  infograph_href_template,
+  create_text_maker,
+  
+  declare_panel, 
 } from '../shared.js';
 import { 
   HierarchyPeek, 
@@ -13,8 +17,8 @@ import {
   crso_hierarchy, 
   crso_pi_hierarchy,
 } from './hierarchy_component.js';
-import { infograph_href_template } from '../../../link_utils.js';
 
+const { text_maker } = create_text_maker(text);
 const { HeightClipper } = util_components;
 
 

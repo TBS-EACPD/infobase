@@ -1,0 +1,34 @@
+dead_crso_warning:
+  en: This Core Responsibility is no longer active
+  fr: Cette responsabilité essentielle n'est plus active
+
+dead_program_warning_text:
+  transform: [handlebars, markdown]
+  en: |
+    Unless you're here for historical financial data, select the 'Where can I go from here?' topic above to see all of **{{subj_name subject.dept}}**'s Programs.
+  fr: |
+    À moins que vous voulez des donées financières historiques, sélectionnez le sujet «Où puis-je aller à partir d'ici?» ci-dessus pour voir tous les Programmes **{{de_dept subject.dept}}**.
+dead_program_warning:
+  transform: [handlebars, markdown]
+  en: This Program is no longer active; only limited information is available
+  fr: Ce programme n'est plus actif; les renseignements disponibles sont limités
+
+m2m_warning_title:
+  en: |
+    How to use tags?
+  fr: |
+    Comment utiliser les étiquettes?
+
+late_dps_warning_gov:
+  transform: [handlebars]
+  en: The count of results and indicators does not include indicators for {{array_to_grammatical_list late_dp_department_names}}. Information will be updated as soon as the data is submitted.
+  fr: Le nombre de résultats et d’indicateurs n’inclus pas les indicateurs pour {{array_to_grammatical_list late_dp_department_names}}. L’information sera mise-à-jour dès que les données auront été soumises.
+late_dps_warning_dept:
+  en: The 2019-20 Departmental Plan data is not available for this organization. Information will be updated as soon as the data is submitted.
+  fr: L'information des plans ministériel 2019-2020 n’est pas disponible pour cette organisation. L’information sera mise-à-jour dès que les données auront été soumises.
+late_dps_warning_program:
+  en: The 2019-20 Departmental Plan data is not available for this Program. Information will be updated as soon as the data is submitted.
+  fr: L'information des plans ministériel 2019-2020 n’est pas disponible pour ce programme. L’information sera mise-à-jour dès que les données auront été soumises.
+late_dps_warning_crso:
+  en: The 2019-20 Departmental Plan data is not available for this Core Responsibility. Information will be updated as soon as the data is submitted.
+  fr: L'information des plans ministériel 2019-2020 n’est pas disponible pour cette responsabilité essentielle. L’information sera mise-à-jour dès que les données auront été soumises.

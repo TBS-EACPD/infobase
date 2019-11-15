@@ -1,0 +1,10 @@
+links_to_rpb_title:
+  en: Detailed reports by subject
+  fr: Rapports détaillés par sujets
+
+links_to_rpb_text:
+  transform: [ handlebars, markdown ]
+  en: |
+    Select from one of the following tables to see the data behind the infographic and build your own report. 
+  fr: |
+    Choisissez parmi l'un des tableaux ci-dessous pour voir les données qui supportent les infographies et construire votre propre rapport.

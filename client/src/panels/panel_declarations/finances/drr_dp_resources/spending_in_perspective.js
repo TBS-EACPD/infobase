@@ -6,7 +6,7 @@ import {
   InfographicPanel,
   create_text_maker_component,
   NivoResponsivePie,
-} from "../shared.js";
+} from "../../shared.js";
 
 const {
   TabularPercentLegend,
