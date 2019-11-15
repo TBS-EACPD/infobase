@@ -102,7 +102,6 @@ class PanelRegistry {
       to_assign,
       { full_key }
     );
-                     
     this.constructor.register_instance(this);
   }
 
