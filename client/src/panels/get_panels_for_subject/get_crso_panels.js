@@ -26,7 +26,7 @@ import {
   declare_crso_links_to_other_crso_panel,
   declare_crso_by_prog_fte_panel,
   declare_crso_by_prog_exp_panel,
-} from '../../panels/panel_declarations/index.js';
+} from '../panel_declarations/index.js';
 
 // To be safe, ensure all used has_<data> checks are loaded
 export const get_crso_panels = subject => ensure_loaded({

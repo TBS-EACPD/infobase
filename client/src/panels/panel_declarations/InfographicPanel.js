@@ -11,12 +11,12 @@ import {
   WriteToClipboard,
   PDFGenerator,
   LogInteractionEvents,
-} from '../../components';
+} from '../../components/index.js';
 
 import { IconCopyLink } from '../../icons/icons.js';
-
 import { panel_href_template } from '../../infographic/routes.js';
-import { panel_context } from '../../infographic/context.js';
+
+import { panel_context } from '../PanelRenderer.js';
 
 
 const { text_maker } = create_text_maker_component(text);

@@ -10,8 +10,8 @@ import AccessibleBubbleMenu from './a11y_bubble_menu.js';
 import { shallowEqualObjectsOverKeys, SafeJSURL } from '../general_utils.js';
 import { Subject } from "../models/subject.js";
 import { ensure_loaded } from '../core/lazy_loader.js';
-import { get_panels_for_subject } from './get_panels_for_subject/index.js';
 import { bubble_defs } from './bubble_definitions.js'; 
+import { get_panels_for_subject } from '../panels/get_panels_for_subject/index.js';
 import { PanelRenderer } from '../panels/PanelRenderer.js';
 import {
   create_text_maker_component,

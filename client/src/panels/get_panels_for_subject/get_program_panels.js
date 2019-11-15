@@ -33,7 +33,7 @@ import {
   declare_related_program_structure_panel,
   declare_spending_in_tag_perspective_panel,
   declare_sub_program_resources_panel,
-} from '../../panels/panel_declarations/index.js';
+} from '../panel_declarations/index.js';
 
 // To be safe, ensure all used has_<data> checks are loaded
 export const get_program_panels = subject => ensure_loaded({

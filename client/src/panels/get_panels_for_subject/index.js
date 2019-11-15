@@ -1,4 +1,4 @@
-import { PanelRegistry } from '../../panels/PanelRegistry.js';
+import { PanelRegistry } from '../PanelRegistry.js';
 
 const panel_loading_promises = (subject) => {
   switch(subject.level){
