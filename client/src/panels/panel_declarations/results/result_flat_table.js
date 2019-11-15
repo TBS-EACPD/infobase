@@ -167,7 +167,7 @@ class ResultsTable extends React.Component {
       last_drr_doc,
     } = this.props;
     const { loading, status_active_list } = this.state;
-    
+
     if (loading) {
       return (
         <div style={{position: "relative", height: "80px", marginBottom: "-10px"}}>
