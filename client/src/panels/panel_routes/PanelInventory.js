@@ -1,16 +1,19 @@
 import {createSelector } from 'reselect';
 import { Link } from 'react-router-dom';
 
-import { StandardRouteContainer } from '../../core/NavComponents.js';
-import { PanelRenderer } from '../PanelRenderer.js';
-import { create_text_maker } from '../../models/text.js';
 import panel_text from "./PanelInventory.yaml";
 
-import { get_panels_for_subject } from '../../infographic/get_panels_for_subject/index.js';
+import { get_panels_for_subject } from '../get_panels_for_subject/index.js';
+import { PanelRenderer } from '../PanelRenderer.js';
+import { PanelRegistry } from '../PanelRegistry.js';
+
+import { StandardRouteContainer } from '../../core/NavComponents.js';
+import { create_text_maker } from '../../models/text.js';
+
 import { Subject } from '../../models/subject.js';
 import { EverythingSearch, SpinnerWrapper } from '../../components/index.js';
 import { ensure_loaded } from '../../core/lazy_loader.js';
-import { PanelRegistry } from '../PanelRegistry.js';
+
 
 const tm = create_text_maker(panel_text);
 
