@@ -25,10 +25,6 @@ export const declare_internal_services_panel = () => declare_panel({
       const { programFtes } = this.tables;
   
       const isc_crsos = _.filter(subject.crsos, "is_internal_service");
-      if(_.isEmpty(isc_crsos)){
-        return false; //org has no isc programs 
-      }
-  
       const isc_tag = Tag.lookup("GOC017");
   
       const last_year_fte_col = "{{pa_last_year}}";
@@ -76,22 +72,25 @@ export const declare_internal_services_panel = () => declare_panel({
       const years = _.map(std_years, yr => run_template(yr));
       const label_keys = [text_maker("internal_services"), text_maker("other_programs")];
       const colors = infobase_colors();
-
+      
+      const first_active_isc = _.findIndex(series, data => data[label_keys[0]] !== 0);
+      const last_active_isc = _.findLastIndex(series, data => data[label_keys[0]] !== 0);
+      
       const bar_series = _.reduce(label_keys, (result, label_value) => {
         _.assign( result, _.fromPairs([[label_value, _.map(series, label_value)]]) );
         return result;
       }, {});
 
-      const bar_data = _.map(
-        years,
-        (date, date_index) =>({
+      const bar_data = _.chain(years)
+        .map((date, date_index) => ({
           date,
           ..._.chain(bar_series)
             .map((data, label) => [label, data[date_index]])
             .fromPairs()
             .value(),
-        })
-      );
+        }))
+        .filter((isc, isc_index) => isc_index >= first_active_isc && isc_index <= last_active_isc)
+        .value();
 
       const legend_items = _.reduce(label_keys, (result, label_value) => {
         result.push({
@@ -140,6 +139,7 @@ export const declare_internal_services_panel = () => declare_panel({
       </div>;
   
       return (
+        !_.isEmpty(bar_data) && 
         <InfographicPanel
           title={text_maker("internal_service_panel_title")}
           {...{sources, footnotes}}
