@@ -8,7 +8,7 @@ import {
   declare_employee_executive_level_panel, 
   declare_employee_fol_panel,
   declare_employee_gender_panel,
-} from "../../panels/panel_declarations/index.js";
+} from "../panel_declarations/index.js";
 
 export const get_people_panels = (subject) => [
   declare_people_key_concepts_panel(),

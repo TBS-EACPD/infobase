@@ -3,7 +3,8 @@ import { withRouter } from 'react-router';
 import { PanelRegistry } from './PanelRegistry.js';
 
 import { shallowEqualObjectsOverKeys } from '../general_utils.js';
-import { panel_context } from '../infographic/context.js';
+
+export const panel_context = React.createContext(null);
 
 export const PanelRenderer = withRouter(
   class PanelRenderer_ extends React.Component {

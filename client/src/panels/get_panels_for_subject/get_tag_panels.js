@@ -23,7 +23,7 @@ import {
   declare_tagging_key_concepts_panel,
   declare_horizontal_initiative_profile_panel,
   declare_resource_structure_panel,
-} from '../../panels/panel_declarations/index.js';
+} from '../panel_declarations/index.js';
 
 export const get_tag_panels = subject => ({
   intro: [
