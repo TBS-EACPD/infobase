@@ -1,4 +1,3 @@
-import { get_people_panels } from './get_people_panels.js';
 import { ensure_loaded } from '../../core/lazy_loader.js';
 
 import {
@@ -32,6 +31,14 @@ import {
   //declare_in_year_estimates_split_panel,
   declare_historical_g_and_c_panel,
   declare_auth_exp_prog_spending_panel,
+  declare_people_key_concepts_panel,
+  declare_employee_totals_panel,
+  declare_employee_prov_panel,
+  declare_employee_type_panel,
+  declare_employee_age_panel,
+  declare_employee_executive_level_panel, 
+  declare_employee_fol_panel,
+  declare_employee_gender_panel,
 
   // shared dept, tag
   declare_detailed_program_spending_split_panel,
@@ -43,6 +50,7 @@ import {
   declare_spend_by_so_hist_panel,
   declare_last_year_g_and_c_perspective_panel,
   declare_internal_services_panel,
+  declare_employee_last_year_totals_panel,
 } from '../../panels/panel_declarations/index.js';
 
 
@@ -73,7 +81,17 @@ export const get_dept_panels = subject => ensure_loaded({
     declare_drr_planned_actual_panel(),
     declare_dp_rev_split_panel(),
   ],
-  people: _.includes(subject.tables, 'orgEmployeeType') && get_people_panels(subject),
+  people: _.includes(subject.tables, 'orgEmployeeType') && [
+    declare_people_key_concepts_panel(),
+    declare_employee_last_year_totals_panel(),
+    declare_employee_totals_panel(),
+    declare_employee_prov_panel(),
+    declare_employee_type_panel(),
+    declare_employee_age_panel(),
+    declare_employee_executive_level_panel(),
+    declare_employee_fol_panel(),
+    declare_employee_gender_panel(),
+  ],
   results: subject.has_data('results_data') && [
     declare_results_key_concepts_panel(),
     declare_late_dps_warning_panel(),

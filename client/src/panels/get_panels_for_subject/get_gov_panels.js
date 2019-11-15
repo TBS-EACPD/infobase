@@ -1,5 +1,3 @@
-import { get_people_panels } from './get_people_panels.js';
-
 import {
   // shared all
   declare_welcome_mat_panel,
@@ -17,6 +15,14 @@ import {
   //declare_in_year_estimates_split_panel,
   declare_historical_g_and_c_panel,
   declare_auth_exp_prog_spending_panel,
+  declare_people_key_concepts_panel,
+  declare_employee_totals_panel,
+  declare_employee_prov_panel,
+  declare_employee_type_panel,
+  declare_employee_age_panel,
+  declare_employee_executive_level_panel, 
+  declare_employee_fol_panel,
+  declare_employee_gender_panel,
 
   // gov only panels
   declare_simplographic_panel,
@@ -47,7 +53,16 @@ export const get_gov_panels = subject => ({
     declare_historical_g_and_c_panel(),
     declare_personnel_spend_panel(),
   ],
-  people: get_people_panels(subject),
+  people: [
+    declare_people_key_concepts_panel(),
+    declare_employee_totals_panel(),
+    declare_employee_prov_panel(),
+    declare_employee_type_panel(),
+    declare_employee_age_panel(),
+    declare_employee_executive_level_panel(),
+    declare_employee_fol_panel(),
+    declare_employee_gender_panel(),
+  ],
   results: [
     declare_results_key_concepts_panel(),
     declare_late_dps_warning_panel(),
