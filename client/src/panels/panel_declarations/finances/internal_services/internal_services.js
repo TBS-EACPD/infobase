@@ -62,7 +62,7 @@ export const declare_internal_services_panel = () => declare_panel({
     render({calculations,sources,footnotes}){
       const {
         subject,
-        graph_args: {
+        panel_args: {
           gov_fte_total,
           gov_isc_fte,
           total_fte,
