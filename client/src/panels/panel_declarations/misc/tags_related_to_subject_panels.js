@@ -1,18 +1,23 @@
+import text from './tags_related_to_subject_panels.yaml';
+import hierarchy_text from './hierarchy_panels.yaml';
+
 import classNames from 'classnames';
 import { Fragment } from 'react';
-import { text_maker, TM } from '../intro/intro_panel_text_provider.js';
+
 import { 
   Subject, 
-  declare_panel, 
   TextPanel, 
   util_components, 
-} from '../shared.js';
-import { WellList } from '../../../components';
-import { HierarchyDeadElementIcon } from '../intro/hierarchy_component.js';
-import { infograph_href_template } from '../../../link_utils.js';
+  infograph_href_template,
+  create_text_maker,
 
+  declare_panel, 
+} from '../shared.js';
+import { HierarchyDeadElementIcon } from './hierarchy_component.js';
+
+const { text_maker, TM } = create_text_maker([text, hierarchy_text]);
 const { Dept, Tag, Program } = Subject;
-const { HeightClipper } = util_components;
+const { HeightClipper, WellList } = util_components;
 
 const scheme_order = [
   "GOCO",

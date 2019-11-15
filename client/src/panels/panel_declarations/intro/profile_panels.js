@@ -1,11 +1,15 @@
-import { text_maker } from './intro_panel_text_provider.js';
+import text from './profile_panels.yaml';
+
 import {
-  declare_panel,
   TextPanel,
   general_utils,
   util_components,
+  create_text_maker,
+
+  declare_panel,
 } from "../shared.js";
 
+const { text_maker } = create_text_maker(text);
 const { sanitized_dangerous_inner_html } = general_utils;
 const { LabeledTombstone } = util_components;
 

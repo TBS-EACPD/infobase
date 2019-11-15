@@ -1,42 +1,45 @@
-import '../../../gen_expl/explorer-styles.scss';
-import text from "./sub_program_resources.yaml";
-
-import { createSelector } from 'reselect';
-import { combineReducers, createStore } from 'redux';
-import { Provider, connect } from 'react-redux';
-
-import { 
-  get_col_defs,
-  provide_sort_func_selector,
-} from '../../../gen_expl/resource-explorer-common.js';
-
-import { PlannedActualTable } from './PlannedActualTable.js';
-
-import {
-  declare_panel,
-  Subject,
-  Results,
-  general_utils,
-  InfographicPanel,
-  create_text_maker_component,
-  TabbedControls,
-} from "../shared.js";
-
+import '../../../../gen_expl/explorer-styles.scss';
 import {
   get_root,
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,
-} from '../../../gen_expl/hierarchy_tools.js';
-
-import { Explorer } from '../../../components/ExplorerComponents.js';
-
+} from '../../../../gen_expl/hierarchy_tools.js';
 import {
   get_memoized_funcs,
   initial_root_state,
   root_reducer,
   map_state_to_root_props_from_memoized_funcs,
   map_dispatch_to_root_props,
-} from '../../../gen_expl/state_and_memoizing';
+} from '../../../../gen_expl/state_and_memoizing';
+import { 
+  get_col_defs,
+  provide_sort_func_selector,
+} from '../../../../gen_expl/resource-explorer-common.js';
+
+
+import text from "./sub_program_resources.yaml";
+
+import { createSelector } from 'reselect';
+import { combineReducers, createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
+
+import { PlannedActualTable } from './PlannedActualTable.js';
+
+import {
+  Subject,
+  Results,
+  general_utils,
+  InfographicPanel,
+  create_text_maker_component,
+  TabbedControls,
+  util_components,
+
+  declare_panel,
+} from "../../shared.js";
+
+
+
+const { Explorer } = util_components;
 
 const { get_by_guid } = Subject;
 

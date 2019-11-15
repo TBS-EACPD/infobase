@@ -8,8 +8,8 @@ import { Panel, SpinnerWrapper } from '../../components/index.js';
 
 import { Indicator } from '../../models/results.js';
 
-import { IndicatorDisplay } from '../panel_declarations/result_graphs/result_components.js';
-import { TM, text_maker } from '../panel_declarations/result_graphs/result_text_provider.js';
+import { IndicatorDisplay } from '../panel_declarations/results/result_components.js';
+import { TM, text_maker } from '../panel_declarations/results/result_text_provider.js';
 
 
 const indicators_fields_fragment = `  id

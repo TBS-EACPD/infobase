@@ -1,0 +1,33 @@
+dept_related_tags_title:
+  en: Tags for this organization
+  fr: Étiquettes pour cette organisation
+dept_is_tagged_with_following:
+  transform: [handlebars,markdown]
+  en: |
+    Programs under **{{subj_name subject}}** have been {{gl_tt "tagged" "TAG"}} under the following areas of interest
+  fr: |
+    Les Programmes sous **{{subj_name subject}}** ont été {{gl_tt "étiquetés" "TAG"}} comme relevant des sujets suivants
+
+program_tags_title:
+  en: Tags for this Program
+  fr: Étiquettes pour ce programme
+program_is_tagged_with_following:
+  transform: [handlebars,markdown]
+  en: |
+    **{{subj_name subject}}** has been {{gl_tt "tagged" "TAG"}} with the following areas of interest
+  fr: |
+    Le Programme **{{subj_name subject}}** a été {{gl_tt "étiqueté" "TAG"}} aux domaines d'intérêt suivants
+
+crso_tags_title:
+  en: Tags for this Core Responsibility
+  fr: Étiquettes pour cette responsabilité essentielle 
+crso_is_tagged_with_following:
+  transform: [handlebars,markdown]
+  en: |
+    Programs under **{{subj_name subject}}** have been {{gl_tt "tagged" "TAG"}} under the following areas of interest
+  fr: |
+    Les Programmes sous **{{subj_name subject}}** ont été {{gl_tt "étiquetés" "TAG"}} comme relevant des sujets suivants
+
+tag_progs_by_dept_title:
+  en: Which organizations have programs under this tag? 
+  fr: Quelles sont les organisations qui ont des programmes associés à cette étiquette?

@@ -8,9 +8,9 @@ import {
   create_text_maker_component,
   TextPanel,
   get_source_links,
-} from '../shared.js';
+} from '../../shared.js';
 
-import { ResultCounts, current_drr_key } from '../result_graphs/results_common.js';
+import { ResultCounts, current_drr_key } from '../../results/results_common.js';
 
 const { text_maker, TM } = create_text_maker_component(text);
 

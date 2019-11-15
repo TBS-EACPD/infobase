@@ -1,9 +1,12 @@
+import text from './hierarchy_panels.yaml';
+
 import classNames from 'classnames';
 import { Fragment } from 'react';
-import { text_maker, TM } from '../intro/intro_panel_text_provider.js';
-import { Subject } from '../shared.js';
+
+import { Subject, create_text_maker } from '../shared.js';
 import { IconAttentionTriangle } from '../../../icons/icons.js';
 
+const { text_maker, TM } = create_text_maker(text);
 const { Gov } = Subject;
 
 
