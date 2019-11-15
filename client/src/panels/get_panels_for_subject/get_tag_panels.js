@@ -3,6 +3,9 @@ import {
   //declare_welcome_mat_panel,
   //declare_financial_key_concepts_panel,
   
+  // shared dept, crso, program, tag
+  declare_profile_panel,
+
   // shared dept, program, tag
   //declare_spend_rev_split_panel,
   
@@ -21,7 +24,6 @@ import {
   declare_related_tags_panel,
   declare_description_panel,
   declare_tagging_key_concepts_panel,
-  declare_horizontal_initiative_profile_panel,
   declare_resource_structure_panel,
 } from '../panel_declarations/index.js';
 
@@ -29,7 +31,7 @@ export const get_tag_panels = subject => ({
   intro: [
     declare_tagging_key_concepts_panel(),
     declare_description_panel(),
-    declare_horizontal_initiative_profile_panel(),
+    declare_profile_panel(),
     declare_tag_fed_structure_panel(),
     declare_tag_progs_by_dept_panel(),
   ],

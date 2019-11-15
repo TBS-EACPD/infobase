@@ -12,8 +12,10 @@ import {
   declare_budget_measures_panel,
   declare_year_warning_panel,
 
-  // shared dept, crso, program
+  // shared dept, crso, program, tag
   declare_profile_panel,
+
+  // shared dept, crso, program
   declare_explore_results_panel,
   declare_results_table_panel,
   declare_tags_of_interest_panel,
