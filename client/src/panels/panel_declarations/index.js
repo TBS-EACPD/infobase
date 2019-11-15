@@ -27,7 +27,6 @@ export {
 
 export {
   declare_horizontal_initiative_profile_panel,
-  declare_igoc_fields_panel,
   declare_profile_panel,
   declare_description_panel,
   declare_simplographic_panel,

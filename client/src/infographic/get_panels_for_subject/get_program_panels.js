@@ -12,6 +12,7 @@ import {
   declare_year_warning_panel,
 
   // shared dept, crso, program
+  declare_profile_panel,
   declare_explore_results_panel,
   declare_results_table_panel,
   declare_tags_of_interest_panel,
@@ -21,9 +22,6 @@ import {
 
   // shared dept, program, tag
   declare_spend_rev_split_panel,
-
-  // shared crso, program
-  declare_profile_panel,
 
   // shared program, tag
   declare_vote_stat_split_panel,
