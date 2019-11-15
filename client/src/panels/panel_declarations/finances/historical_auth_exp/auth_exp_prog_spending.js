@@ -50,7 +50,7 @@ const calculate = function(subject) {
 class AuthExpProgSpending extends React.Component {
   constructor(props){
     super(props);
-    const active_series = [ text_maker("expenditures"), text_maker("authorities") ];
+    const active_series = [ text_maker("budgetary_expenditures"), text_maker("authorities") ];
     if(props.calculations.subject.has_planned_spending){
       active_series.push( text_maker("planned_spending") );
     }
@@ -64,7 +64,7 @@ class AuthExpProgSpending extends React.Component {
     const { exp, auth, progSpending } = panel_args;
 
     const series_labels = [
-      text_maker("expenditures"),
+      text_maker("budgetary_expenditures"),
       text_maker("authorities"),
       subject.has_planned_spending ? text_maker("planned_spending") : null,
     ];
@@ -246,7 +246,7 @@ class AuthExpProgSpending extends React.Component {
         },
         ...(
           _.isEqual(exp, auth)
-          && _.includes(active_series, text_maker("expenditures"))
+          && _.includes(active_series, text_maker("budgetary_expenditures"))
           && _.includes(active_series, text_maker("authorities")
           )
         && {
@@ -304,6 +304,7 @@ class AuthExpProgSpending extends React.Component {
         </div>
       </Fragment>;
     }
+    
   
     return (
       <StdPanel
@@ -348,7 +349,7 @@ export const declare_auth_exp_prog_spending_panel = () => declare_panel({
   panel_config_func: (level, panel_key) => ({
     depends_on: ["orgVoteStatPa", "programSpending"],
     info_deps: [`orgVoteStatPa_${level}_info`, `programSpending_${level}_info`],
-    glossary_keys: ["BUD_EXP"],
+    glossary_keys: ["BUD_EXP", "NB_EXP"],
     calculate,
     render,
   }),

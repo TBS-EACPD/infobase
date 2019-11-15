@@ -175,7 +175,7 @@ Col.propTypes = {
   isGraph: PropTypes.bool,
 };
 
-const StdPanel = ({ title, sources, footnotes, children, containerAlign }) => {
+const StdPanel = ({ title, sources, footnotes, glossary_keys, children, containerAlign }) => {
   const mapped_children = _.chain(children)
     .flatMap( child => {
       if ( child.type && child.type === Fragment ){
@@ -208,7 +208,7 @@ const StdPanel = ({ title, sources, footnotes, children, containerAlign }) => {
     .value();
 
   return (
-    <InfographicPanel {...{title, sources, footnotes}}>
+    <InfographicPanel {...{title, sources, footnotes, glossary_keys}}>
       <div className={`frow ${containerAlign || 'middle'}-xs`}>
         {mapped_children}
       </div>
