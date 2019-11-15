@@ -5,14 +5,14 @@ import {
   util_components,
   Table,
   rpb_link,
-  create_text_maker,
+  create_text_maker_component,
 
-  declare_panel, 
+  declare_panel,
 } from '../shared.js';
 
 const { WellList } = util_components;
 
-const { text_maker, TM } = create_text_maker([text]);
+const { text_maker, TM } = create_text_maker_component([text]);
 
 const people_table_ids = [
   'orgEmployeeType',

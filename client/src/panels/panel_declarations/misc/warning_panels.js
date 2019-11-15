@@ -3,12 +3,12 @@ import text from './warning_panels.yaml';
 import {
   util_components,
   Subject,
-  create_text_maker,
+  create_text_maker_component,
 
   declare_panel,
 } from "../shared.js";
 
-const { TM } = create_text_maker([text]);
+const { TM } = create_text_maker_component([text]);
 const { Dept } = Subject;
 const { AlertBanner, KeyConceptList } = util_components;
 
