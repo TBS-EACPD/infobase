@@ -1,39 +1,33 @@
 import { get_people_panels } from './get_people_panels.js';
 
-// shared all
-import { declare_welcome_mat_panel } from '../../panels/panel_declarations/welcome_mat/welcome_mat.js';
-import { declare_financial_key_concepts_panel } from '../../panels/panel_declarations/intro_panels/index.js';
-
-// shared gov, dept, crso, program
 import {
+  // shared all
+  declare_welcome_mat_panel,
+  declare_financial_key_concepts_panel,
+
+  // shared gov, dept, crso, program
   declare_results_key_concepts_panel,
   declare_late_dps_warning_panel,
-} from '../../panels/panel_declarations/intro_panels/index.js';
-import { declare_budget_measures_panel } from '../../panels/panel_declarations/budget_measures/budget_measures_panel.js';
-import { declare_year_warning_panel } from '../../panels/panel_declarations/intro_panels/index.js';
+  declare_budget_measures_panel,
+  declare_year_warning_panel,
 
-// shared gov, dept
-import { declare_links_to_rpb_panel } from '../../panels/panel_declarations/intro_panels/index.js';
-import { declare_in_year_voted_stat_split_panel } from "../../panels/panel_declarations/vote_stat/in_year_vote_stat_split.js";
-//import { declare_in_year_estimates_split_panel } from "../../panels/vote_stat/in_year_estimates_split.js";
-import { declare_historical_g_and_c_panel } from "../../panels/panel_declarations/transfer_payments/historical_g_and_c.js";
-import { declare_auth_exp_prog_spending_panel } from '../../panels/panel_declarations/historical_auth_exp/auth_exp_prog_spending.js';
+  // shared gov, dept
+  declare_links_to_rpb_panel,
+  declare_in_year_voted_stat_split_panel,
+  //declare_in_year_estimates_split_panel,
+  declare_historical_g_and_c_panel,
+  declare_auth_exp_prog_spending_panel,
 
-// gov only panels
-import {
+  // gov only panels
   declare_simplographic_panel,
   declare_gov_related_info_panel,
-} from '../../panels/panel_declarations/intro_panels/index.js';
-import {
   declare_gov_drr_panel,
   declare_gov_dp_panel,
-} from '../../panels/panel_declarations/result_graphs/index.js';
-import {
   declare_in_year_voted_breakdown_panel,
   declare_in_year_stat_breakdown_panel,
-} from "../../panels/panel_declarations/vote_stat/in_year_vote_stat_breakdown.js";
-import { declare_gocographic_panel } from '../../panels/panel_declarations/tag_panels/goco.js';
-import { declare_personnel_spend_panel } from "../../panels/panel_declarations/sobj/personel_spend.js";
+  declare_gocographic_panel,
+  declare_personnel_spend_panel,
+} from '../../panels/panel_declarations/index.js';
 
 export const get_gov_panels = subject => ({
   intro: [

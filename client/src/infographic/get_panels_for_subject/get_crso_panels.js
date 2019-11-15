@@ -1,38 +1,34 @@
 import { ensure_loaded } from '../../core/lazy_loader.js';
 
-// shared all
-import { declare_welcome_mat_panel } from '../../panels/panel_declarations/welcome_mat/welcome_mat.js';
-import { declare_financial_key_concepts_panel } from '../../panels/panel_declarations/intro_panels/index.js';
-
-// shared gov, dept, crso, program
 import {
+  // shared all
+  declare_welcome_mat_panel,
+  declare_financial_key_concepts_panel,
+
+  // shared gov, dept, crso, program
   declare_results_key_concepts_panel,
   declare_late_dps_warning_panel,
-} from '../../panels/panel_declarations/intro_panels/index.js';
-import { declare_budget_measures_panel } from '../../panels/panel_declarations/budget_measures/budget_measures_panel.js';
-import { declare_year_warning_panel } from '../../panels/panel_declarations/intro_panels/index.js';
+  declare_budget_measures_panel,
+  declare_year_warning_panel,
 
-// shared dept, crso, program
-import { declare_explore_results_panel } from '../../panels/panel_declarations/result_graphs/index.js';
-import { declare_results_table_panel } from '../../panels/panel_declarations/result_graphs/index.js';
-import { declare_tags_of_interest_panel } from '../../panels/panel_declarations/intro_panels/index.js';
-import { declare_drr_planned_actual_panel } from "../../panels/panel_declarations/drr_dp_resources/drr_planned_actual.js";
-import { declare_dp_rev_split_panel } from "../../panels/panel_declarations/drr_dp_resources/dp_rev_split.js";
-import { declare_drr_summary_panel } from '../../panels/panel_declarations/result_graphs/index.js';
+  // shared dept, crso, program
+  declare_explore_results_panel,
+  declare_results_table_panel,
+  declare_tags_of_interest_panel,
+  declare_drr_planned_actual_panel,
+  declare_dp_rev_split_panel,
+  declare_drr_summary_panel,
 
-// shared crso, program
-import { declare_profile_panel } from '../../panels/panel_declarations/intro_panels/index.js';
+  // shared crso, program
+  declare_profile_panel,
 
-// crso only panels
-import {
+  // crso only panels
   declare_dead_crso_warning_panel,
   declare_crso_in_gov_panel,
   declare_crso_links_to_other_crso_panel,
-} from '../../panels/panel_declarations/intro_panels/index.js';
-import {
   declare_crso_by_prog_fte_panel,
   declare_crso_by_prog_exp_panel,
-} from "../../panels/panel_declarations/drr_dp_resources/crso_by_prog.js";
+} from '../../panels/panel_declarations/index.js';
 
 // To be safe, ensure all used has_<data> checks are loaded
 export const get_crso_panels = subject => ensure_loaded({
