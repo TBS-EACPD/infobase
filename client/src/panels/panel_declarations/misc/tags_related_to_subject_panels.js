@@ -9,13 +9,13 @@ import {
   TextPanel, 
   util_components, 
   infograph_href_template,
-  create_text_maker,
+  create_text_maker_component,
 
   declare_panel, 
 } from '../shared.js';
 import { HierarchyDeadElementIcon } from './hierarchy_component.js';
 
-const { text_maker, TM } = create_text_maker([text, hierarchy_text]);
+const { text_maker, TM } = create_text_maker_component([text, hierarchy_text]);
 const { Dept, Tag, Program } = Subject;
 const { HeightClipper, WellList } = util_components;
 
