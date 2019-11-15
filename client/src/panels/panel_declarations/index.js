@@ -26,7 +26,6 @@ export {
 } from './finances/index.js';
 
 export {
-  declare_horizontal_initiative_profile_panel,
   declare_profile_panel,
   declare_description_panel,
   declare_simplographic_panel,
