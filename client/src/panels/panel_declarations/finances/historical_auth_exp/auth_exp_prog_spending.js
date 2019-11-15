@@ -58,7 +58,7 @@ class AuthExpProgSpending extends React.Component {
   }
 
   render(){
-    const { calculations, footnotes, sources } = this.props;
+    const { calculations, footnotes, sources, glossary_keys } = this.props;
     const { active_series } = this.state;
     const { info, panel_args, subject } = calculations;
     const { exp, auth, progSpending } = panel_args;
@@ -309,7 +309,7 @@ class AuthExpProgSpending extends React.Component {
       <StdPanel
         containerAlign={subject.has_planned_spending ? "top" : "middle"}
         title={text_maker("auth_exp_prog_spending_title", {...info, ...additional_info})}
-        {...{footnotes,sources}}
+        {...{footnotes,sources,glossary_keys}}
       >
         <Col size={4} isText>
           <TM k={text_keys_by_level[subject.level]} args={{...info, ...additional_info}} />
@@ -330,12 +330,13 @@ class AuthExpProgSpending extends React.Component {
   }
 }
 
-const render = function({calculations, footnotes, sources}) {
+const render = function({calculations, footnotes, sources, glossary_keys}) {
   return (
     <AuthExpProgSpending
       calculations={calculations}
       footnotes={footnotes}
       sources={sources}
+      glossary_keys={glossary_keys}
     />
   );
 };
@@ -347,6 +348,7 @@ export const declare_auth_exp_prog_spending_panel = () => declare_panel({
   panel_config_func: (level, panel_key) => ({
     depends_on: ["orgVoteStatPa", "programSpending"],
     info_deps: [`orgVoteStatPa_${level}_info`, `programSpending_${level}_info`],
+    glossary_keys: ["BUD_EXP"],
     calculate,
     render,
   }),
