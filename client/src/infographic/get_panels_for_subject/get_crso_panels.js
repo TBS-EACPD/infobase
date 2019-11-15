@@ -12,15 +12,13 @@ import {
   declare_year_warning_panel,
 
   // shared dept, crso, program
+  declare_profile_panel,
   declare_explore_results_panel,
   declare_results_table_panel,
   declare_tags_of_interest_panel,
   declare_drr_planned_actual_panel,
   declare_dp_rev_split_panel,
   declare_drr_summary_panel,
-
-  // shared crso, program
-  declare_profile_panel,
 
   // crso only panels
   declare_dead_crso_warning_panel,

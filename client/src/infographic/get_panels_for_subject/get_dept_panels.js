@@ -13,6 +13,7 @@ import {
   declare_year_warning_panel,
 
   // shared dept, crso, program
+  declare_profile_panel,
   declare_explore_results_panel,
   declare_results_table_panel,
   declare_tags_of_interest_panel,
@@ -38,7 +39,6 @@ import {
   declare_portfolio_structure_related_panel,
   declare_estimates_in_perspective_panel,
   declare_spend_by_so_hist_panel,
-  declare_igoc_fields_panel,
   declare_last_year_g_and_c_perspective_panel,
   declare_internal_services_panel,
 } from '../../panels/panel_declarations/index.js';
@@ -50,7 +50,7 @@ export const get_dept_panels = subject => ensure_loaded({
   has_results: true,
 }).then( () => ({
   intro: [
-    declare_igoc_fields_panel(),
+    declare_profile_panel(),
     declare_portfolio_structure_intro_panel(),
   ],
   financial: _.includes(subject.tables, 'programSpending') && [
