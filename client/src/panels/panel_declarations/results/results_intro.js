@@ -44,7 +44,7 @@ const ResultsIntroPanel = ({counts, verbose_gov_counts, counts_by_dept}) => {
 
 export const declare_results_intro_panel = () => declare_panel({
   panel_key: "results_intro",
-  levels: ["gov", "dept", "crso", "program"],
+  levels: ["gov", "dept"],
   panel_config_func: (level, panel_key) => ({
     requires_result_counts: level === "dept",
     require_granular_result_counts: level !== "dept",

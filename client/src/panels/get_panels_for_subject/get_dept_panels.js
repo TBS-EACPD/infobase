@@ -10,7 +10,6 @@ import {
   declare_late_dps_warning_panel,
   declare_budget_measures_panel,
   declare_year_warning_panel,
-  declare_results_intro_panel,
 
   // shared dept, crso, program, tag
   declare_profile_panel,
@@ -40,6 +39,7 @@ import {
   declare_employee_executive_level_panel, 
   declare_employee_fol_panel,
   declare_employee_gender_panel,
+  declare_results_intro_panel,
 
   // shared dept, tag
   declare_detailed_program_spending_split_panel,
