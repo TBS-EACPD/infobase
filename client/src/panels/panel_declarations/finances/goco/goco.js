@@ -247,13 +247,8 @@ class Goco extends React.Component {
       }, {});
 
       const handleClick = (node, targetElement, data) => {
-<<<<<<< HEAD:client/src/panels/panel_declarations/finances/goco/goco.js
-        const allGroupedElements = targetElement.parentNode.parentNode;
-        const childrenGroupedElements = _.map( _.drop(allGroupedElements.childNodes, 2), _.identity );
-=======
         const allGroupedElements = targetElement.parentElement.parentElement;
         const childrenGroupedElements = _.map( _.drop(allGroupedElements.children, 1), _.identity );
->>>>>>> fixed goco partially with hover:client/src/panels/tag_panels/goco.js
 
         const click_index_map = generate_index_map(data);
         const target_spending = childrenGroupedElements[click_index_map[node.indexValue][0]];
