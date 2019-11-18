@@ -8,7 +8,6 @@ import {
   declare_late_dps_warning_panel,
   declare_budget_measures_panel,
   declare_year_warning_panel,
-  declare_results_intro_panel,
 
   // shared gov, dept
   declare_links_to_rpb_panel,
@@ -24,6 +23,7 @@ import {
   declare_employee_executive_level_panel, 
   declare_employee_fol_panel,
   declare_employee_gender_panel,
+  declare_results_intro_panel,
 
   // gov only panels
   declare_simplographic_panel,
