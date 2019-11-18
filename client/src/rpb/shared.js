@@ -206,6 +206,7 @@ class ExportButton extends React.Component {
   render(){
     const {
       id,
+      get_csv_string,
     } = this.props;
     const { 
       success,
@@ -222,7 +223,7 @@ class ExportButton extends React.Component {
           <TextMaker text_key="export_table" />
         </button>
       </div>;
-    } else if(window.feature_detection.clipboard_access){
+    } else {
       const buttonText = (
         success === false ? 
         <TextMaker text_key="error" /> :
@@ -233,20 +234,13 @@ class ExportButton extends React.Component {
         )
       );
       
-      return <div>
-        <button 
-          id={id}
-          className="btn btn-ib-primary btn-block"
-          onClick={ ()=>{ this.clipBoardClickHandler(); } }
-        >
-          { buttonText }
-        </button>
-      </div>;
-
-    } else {
-      return null;
+      return <WriteToClipboard 
+        text_to_copy={get_csv_string()}
+        icon_color={window.infobase_color_constants.secondaryColor}
+        button_class_name="btn btn-ib-primary btn-block"
+        IconComponent={() => buttonText}
+      />;
     }
-
   }
   triggerDownload(){
     const csv_str = this.props.get_csv_string();
@@ -256,28 +250,6 @@ class ExportButton extends React.Component {
     temporary_anchor.setAttribute("download", 'table.csv');
     temporary_anchor.setAttribute("href", uri);
     temporary_anchor.dispatchEvent( new MouseEvent('click') );
-  }
-   
-
-  clipBoardClickHandler(){
-    const {
-      get_excel_string,
-    } = this.props;
-
-
-    try {
-
-      window.clipboardData.setData('Text', get_excel_string());
-      this.setState({success: true});
-
-    } catch(e){
-      this.setState({success: false});
-    }
-
-    setTimeout(()=>{
-      this.setState({success: null});
-    },3000);
-
   }
 }
 

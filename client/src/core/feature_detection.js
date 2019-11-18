@@ -26,7 +26,6 @@ const has_local_storage = (function(){
 })();
 
 const download_attr = 'download' in document.createElement('a');
-const clipboard_access = 'clipboardData' in window;
 const binary_download = typeof ArrayBuffer !== 'undefined';
 
 export {
@@ -34,6 +33,5 @@ export {
   is_mobile,
   has_local_storage,
   download_attr,
-  clipboard_access,
   binary_download,
 };

@@ -86,14 +86,7 @@ class GranularView extends React.Component {
               <div className="rpb-config-item">
                 <ExportButton 
                   id="export_button"
-                  get_csv_string={ ()=> this.get_csv_string() }
-                  get_excel_string={ ()=> {
-                    const el = document.createElement('div');
-                    ReactDOM.render(this.get_plain_table_content(true), el);
-                    const excel_str= el.querySelector('table').outerHTML;
-                    ReactDOM.unmountComponentAtNode(el);
-                    return excel_str;
-                  }}
+                  get_csv_string={ () => this.get_csv_string() }
                 />
               </div>
               <ShareReport />
