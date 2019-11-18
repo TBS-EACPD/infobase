@@ -69,6 +69,7 @@ export {
 } from "./people/index.js";
 
 export {
+  declare_results_intro_panel,
   declare_explore_results_panel,
   declare_results_table_panel,
   declare_drr_summary_panel,
