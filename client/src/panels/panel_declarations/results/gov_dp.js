@@ -41,7 +41,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const latest_dp_doc_key = _.last( get_result_doc_keys('dp') );
 
-const ResultsIntroPanel = ({counts, verbose_gov_counts, counts_by_dept}) => {
+const DpSummary = ({counts, verbose_gov_counts, counts_by_dept}) => {
   const current_dp_counts_with_generic_keys = filter_and_genericize_doc_counts(counts, current_dp_key);
 
   return (
@@ -122,7 +122,7 @@ export const declare_gov_dp_panel = () => declare_panel({
           sources={sources}
           allowOverflow
         >
-          <ResultsIntroPanel 
+          <DpSummary 
             counts={counts}
             verbose_gov_counts={verbose_gov_counts}
             counts_by_dept={counts_by_dept}
