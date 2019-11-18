@@ -10,6 +10,7 @@ import {
   declare_late_dps_warning_panel,
   declare_budget_measures_panel,
   declare_year_warning_panel,
+  declare_results_intro_panel,
 
   // shared dept, crso, program, tag
   declare_profile_panel,
@@ -94,6 +95,7 @@ export const get_dept_panels = subject => ensure_loaded({
   ],
   results: subject.has_data('results_data') && [
     declare_results_key_concepts_panel(),
+    declare_results_intro_panel(),
     declare_late_dps_warning_panel(),
     declare_drr_summary_panel(),
     declare_results_table_panel(),
