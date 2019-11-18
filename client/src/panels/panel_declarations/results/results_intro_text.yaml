@@ -1,4 +1,8 @@
 
+results_intro_title:
+  en: Introduction to Results
+  fr: TODO TODO
+
 results_intro_text:
   transform: [handlebars,markdown]
   en: |
@@ -7,8 +11,6 @@ results_intro_text:
     
     Organizations are grouped into {{gl_tt "Core Responsibilities" "CR"}} and {{gl_tt "Programs" "PROG"}}. Core Responsibilities have {{gl_tt "departmental results" "DR"}}
     and Programs also have {{gl_tt "results" "PO"}}. Progress for each result is measured by {{gl_tt "indicator targets" "IND_RESULT"}}. 
-
-    Indicator targets can be one of several types; for example, progress toward numeric targets is measured by a specific numeric, dollar, or percentage value, or a range of those values.
   fr: |
     En avril 2018, les organisations de l’administration publique ont adopté une {{gl_tt "nouvelle structure redditionnelle" "DRF"}} fondée sur les résultats.
 
@@ -43,12 +45,20 @@ drr_summary_text:
     {{else}}
       In its **{{pa_last_year}}** {{gl_tt "Departmental Results Report" "DRR"}}, {{subj_name subject}} sought to achieve **{{fmt_big_int drr_results}}** results.
     {{/if}}
-    Progress towards meeting these results was measured using **{{fmt_big_int drr_total}}** indicators.
+    Progress towards meeting these results was measured using **{{fmt_big_int drr_indicators}}** indicators.
   fr: |
     {{#if is_gov}}
       En {{pa_last_year}}, **{{num_depts}}** organisations ont cherché à obtenir **{{fmt_big_int drr_results}}** résultats.
     {{else}}
       En {{pa_last_year}}, {{subj_name subject}} a cherché à atteindre **{{fmt_big_int drr_results}}** résultats.
     {{/if}}
-    Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés à l’aide de **{{fmt_big_int drr_total}}** indicateurs.
+    Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés à l’aide de **{{fmt_big_int drr_indicators}}** indicateurs.
 
+
+reports_links_text:
+  transform: [handlebars,markdown]
+  en: |
+    The most recent {{ext_link "Departmental plans" dp_url}}
+    and {{ext_link "Departmental Results Reports" drr_url}} can be found on canada.ca.
+  fr: |
+    TODO

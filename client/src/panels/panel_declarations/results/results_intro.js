@@ -17,6 +17,7 @@ import {
   GranularResultCounts,
   row_to_drr_status_counts,
   get_result_doc_keys,
+  result_docs,
 } from './results_common.js';
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -25,9 +26,9 @@ const { text_maker, TM } = create_text_maker_component(text);
 const latest_drr_doc_key = _.last( get_result_doc_keys("drr") );
 const latest_dp_doc_key = _.last( get_result_doc_keys("dp") );
 
-const ResultsIntroPanel = ({subject, counts, verbose_gov_counts}) => {
-  const dp_summary_text_args = {subject, counts, verbose_gov_counts};
-  const drr_summary_text_args = {subject, counts, verbose_gov_counts};
+const ResultsIntroPanel = ({subject, summary_counts, doc_urls}) => {
+  const summary_text_args = {subject, ...summary_counts};
+  
   return (
     <div className="frow middle-xs">
       <div className="fcol-md-7 medium_panel_text">
@@ -51,8 +52,9 @@ const ResultsIntroPanel = ({subject, counts, verbose_gov_counts}) => {
         </div>
       }
       <div className="fcol-md-12 medium_panel_text">
-        <TM k="dp_summary_text" args={dp_summary_text_args} />
-        <TM k="drr_summary_text" args={drr_summary_text_args} />
+        <TM k="dp_summary_text" args={summary_text_args} />
+        <TM k="drr_summary_text" args={summary_text_args} />
+        <TM k="reports_links_text" args={doc_urls} />
       </div>
     </div>
   );
@@ -76,34 +78,43 @@ export const declare_results_intro_panel = () => declare_panel({
         }
       })();
 
-      const counts = row_to_drr_status_counts(verbose_counts, latest_drr_doc_key);
-    
       if(verbose_counts[`${latest_drr_doc_key}_total`] < 1){
         return false;
       }
-    
+
+      const summary_counts = {
+        dp_results: verbose_counts[`${latest_dp_doc_key}_results`],
+        dp_indicators: verbose_counts[`${latest_dp_doc_key}_indicators`],
+        drr_results: verbose_counts[`${latest_drr_doc_key}_results`],
+        drr_indicators: verbose_counts[`${latest_drr_doc_key}_total`],
+      };
+
+      const doc_urls = {
+        dp_url: result_docs[latest_dp_doc_key].doc_url,
+        drr_url: result_docs[latest_drr_doc_key].doc_url,
+      };
+
       return {
         subject,
-        verbose_counts,
-        counts,
+        summary_counts,
+        doc_urls,
       };
     },
     render({ calculations, sources}){
       const {
         subject,
-        verbose_counts,
-        counts,
+        panel_args,
       } = calculations;
   
       return (
         <InfographicPanel
-          title={"OMG WTF LOL"}
+          title={text_maker("results_intro_title")}
           sources={sources}
           allowOverflow
         >
           <ResultsIntroPanel
             subject={subject}
-            {...{verbose_counts, counts}}
+            {...panel_args}
           />
         </InfographicPanel>
       ); 
