@@ -58,7 +58,7 @@ drr_summary_text:
 reports_links_text:
   transform: [handlebars,markdown]
   en: |
-    The most recent {{ext_link "Departmental plans" dp_url}}
+    The most recent {{ext_link "Departmental Plans" dp_url}}
     and {{ext_link "Departmental Results Reports" drr_url}} can be found on canada.ca.
   fr: |
     TODO
