@@ -14,6 +14,7 @@
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
+    "@nivo/bar": "^0.52.1",
     "@nivo/line": "^0.52.1",
     "@nivo/pie": "^0.52.1",
     "@nivo/stream": "^0.52.1",
@@ -77,6 +78,7 @@
     "nodemon": "^1.19.1",
     "null-loader": "^0.1.1",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "patch-package": "^6.2.0",
     "popper.js": "^1.14.6",
     "prop-types": "^15.6.2",
     "qrcode-generator": "^1.4.3",
@@ -136,7 +138,9 @@
     "ci_route_load_tests": "node browser-tests/route-load-tests.js --browser chromium --sandbox false --concurrency 8",
     "ci_serve": "http-server -s -a 127.0.0.1",
     "serve-loopback": "http-server -a 127.0.0.1",
-    "serve": "http-server"
+    "serve": "http-server",
+    "postinstall": "npx patch-package",
+    "postci": "npx patch-package"
   },
   "authors": [
     "Alex Cousineau-Leduc",

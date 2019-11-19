@@ -1,5 +1,5 @@
+import { ResponsiveBar } from '@nivo/bar';
 import { ResponsiveLine } from '@nivo/line';
-import { ResponsiveBar } from './nivo-bar.js';
 import { ResponsivePie } from '@nivo/pie';
 import { formats, dollar_formats } from "../core/format.js";
 import { Fragment } from 'react';
