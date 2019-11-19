@@ -90,8 +90,8 @@ export const declare_results_intro_panel = () => declare_panel({
       };
 
       const doc_urls = {
-        dp_url: result_docs[latest_dp_doc_key].doc_url,
-        drr_url: result_docs[latest_drr_doc_key].doc_url,
+        dp_url: result_docs[latest_dp_doc_key][`doc_url_${window.lang}`],
+        drr_url: result_docs[latest_drr_doc_key][`doc_url_${window.lang}`],
       };
 
       return {
