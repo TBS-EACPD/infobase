@@ -1,10 +1,12 @@
 import { IconQuestion } from '../icons/icons.js';
 import { GlossaryEntry } from '../models/glossary.js';
 import { glossary_href } from '../link_utils.js';
+import { trivial_text_maker } from '../models/text.js';
 
 const GlossaryTooltipItem = ({id, arrow_selector, inner_selector, children}) => (
   <a
-    href={( window.is_a11y_mode || window.feature_detection.is_mobile() ) ? glossary_href(id) : null}
+    href={ window.is_a11y_mode ? glossary_href(id) : null}
+    title={ window.is_a11y_mode ? trivial_text_maker("glossary_link_title") : null}
     className="tag-glossary-item"
     data-toggle="tooltip"
     data-ibtt-glossary-key={id}
