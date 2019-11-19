@@ -175,13 +175,9 @@ class PanelRegistry {
   }
 
   get_glossary_keys(){
-    if (this.glossary_keys === false){
-      return [];
-    } else {
-      return this.glossary_keys;
-    }
+    return this.glossary_keys || [];
   }
-
+  
   get_footnotes(subject){ //array of footnote strings
 
     const footnote_concepts = this.footnote_concept_keys;
