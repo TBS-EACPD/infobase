@@ -5,6 +5,7 @@ import {
   ReportDatasets,
   ShareReport,
   NoDataMessage,
+  ExportButton,
 } from './shared.js';
 import { 
   Select, 
@@ -120,6 +121,12 @@ class SimpleView extends React.Component {
                   </div>
                 </div>
               }
+              <div className="rpb-config-item">
+                <ExportButton
+                  id="export_button"
+                  get_csv_string={ ()=> this.get_csv_string() }
+                />
+              </div>
               <ShareReport/>
             </div>
             <div className="clearfix" />
@@ -152,7 +159,45 @@ class SimpleView extends React.Component {
         </div>
       </div>
     );
-  } 
+  }
+
+  get_csv_string(){
+    const {
+      dimension,
+      sort_col,
+      descending,
+      columns,
+      deptBreakoutMode,
+      simple_table_rows: {
+        rows,
+        total_row,
+      },
+    } = this.props;
+    
+    const cols = _.reduce(columns, (result, value, key) => {
+      result[value.nick] = key + 1;
+      return result;
+    }, {[deptBreakoutMode ? 'dept' : dimension]: 0});
+
+    const headers = [
+      text_maker(deptBreakoutMode ? 'org' : dimension),
+      ..._.map( columns, (col) => (col.fully_qualified_name ) ),
+    ];
+    const formatted_rows = 
+      _.chain(rows)
+        .map((row) =>{
+          return _.concat(
+            deptBreakoutMode ? Dept.lookup(row.dept).name : row[dimension],
+            _.map( columns, ({nick}) => row[nick])
+          );
+        })
+        .orderBy((row) => [row[cols[sort_col]]], [descending ? "desc" : "asc"])
+        .value();
+    const formatted_total_row = _.concat( text_maker("total"), _.map(columns, ({nick}) => total_row[nick]) );
+    const formatted_table_content = [headers].concat(formatted_rows, [formatted_total_row]);
+    return d3.csvFormatRows(formatted_table_content);
+  }
+
   get_table_content(){
     const {
       dimension,   
@@ -172,7 +217,7 @@ class SimpleView extends React.Component {
 
     const headers = [
       { nick: deptBreakoutMode ? 'dept' : dimension, display: text_maker(deptBreakoutMode ? 'org' : dimension) },
-      ...columns.map( col => ({ nick: col.nick, display: col.fully_qualified_name }) ),
+      ..._.map( columns, (col) => ({ nick: col.nick, display: col.fully_qualified_name }) ),
     ];
     return (
       <table 
