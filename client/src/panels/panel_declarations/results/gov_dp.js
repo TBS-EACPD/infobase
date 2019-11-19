@@ -21,8 +21,6 @@ import {
 } from './results_common.js';
 import { HorizontalStatusTable } from './result_components.js';
 
-import { get_static_url } from '../../../request_utils.js';
-
 const get_dp_rpb_links = () => ({
   spend: rpb_link({
     table: "programSpending",
@@ -46,27 +44,8 @@ const DpSummary = ({counts, verbose_gov_counts, counts_by_dept}) => {
 
   return (
     <Fragment>
-      <div className="frow middle-xs">
-        <div className="fcol-md-7 medium_panel_text">
-          <TM k="gov_dp_text" args={{...current_dp_counts_with_generic_keys, depts_with_dps: counts_by_dept.length}} />
-        </div>
-        {!window.is_a11y_mode &&
-          <div className="fcol-md-5">
-            <div
-              style={{
-                padding: "20px",
-              }}
-            >
-              <img
-                src={get_static_url(`png/result-taxonomy-${window.lang}.png`)} 
-                style={{
-                  width: "100%",
-                  maxHeight: "500px",
-                }}
-              />
-            </div>
-          </div>
-        }
+      <div className="fcol-md-12 medium_panel_text">
+        <TM k="gov_dp_text" args={{...current_dp_counts_with_generic_keys, depts_with_dps: counts_by_dept.length}} />
       </div>
       <HorizontalStatusTable 
         counts_by_dept={counts_by_dept}
