@@ -110,7 +110,6 @@ export const declare_results_intro_panel = () => declare_panel({
         <InfographicPanel
           title={text_maker("results_intro_title")}
           sources={sources}
-          allowOverflow
         >
           <ResultsIntroPanel
             subject={subject}
