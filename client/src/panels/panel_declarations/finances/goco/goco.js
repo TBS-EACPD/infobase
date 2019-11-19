@@ -91,7 +91,7 @@ class Goco extends React.Component {
     const spend_fte_text_data = {
       ...total_fte_spend,
       max_sa: maxSpending.label,
-      max_sa_share: maxSpending[spending_text] / total_fte_spend.total_spending,
+      max_sa_share: maxSpending[`actual_${spending_text}`] / total_fte_spend.total_spending,
     };
     
     if(window.is_a11y_mode){
