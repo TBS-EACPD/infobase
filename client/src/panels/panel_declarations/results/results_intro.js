@@ -54,7 +54,7 @@ const ResultsIntroPanel = ({subject, summary_counts, doc_urls}) => {
       <div className="fcol-md-12 medium_panel_text">
         <TM k="dp_summary_text" args={summary_text_args} />
         <TM k="drr_summary_text" args={summary_text_args} />
-        <TM k="reports_links_text" args={doc_urls} />
+        {summary_counts.drr_results > 0 && <TM k="reports_links_text" args={doc_urls} />}
       </div>
     </div>
   );
@@ -78,7 +78,7 @@ export const declare_results_intro_panel = () => declare_panel({
         }
       })();
 
-      if(verbose_counts[`${latest_drr_doc_key}_total`] < 1){
+      if(verbose_counts[`${latest_dp_doc_key}_results`] < 1){
         return false;
       }
 
