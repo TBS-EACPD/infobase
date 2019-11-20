@@ -14,6 +14,7 @@ import { ExtendedCanada } from '../../../../charts/extended_canada.js';
 const { std_years } = years;
 const context_years = std_years;
 const formatter = formats["compact2_raw"];
+const includeNcr = false;
 
 //const { text_maker, TM } = create_text_maker_component(text);
 const { A11YTable } = declarative_charts;
@@ -23,7 +24,13 @@ const calculate_common = (years_by_province) => {
   const color_scale = d3.scaleLinear()
     .domain([0,max])
     .range([0.2,1]);
-  return { years_by_province, color_scale, context_years, formatter };
+  return {
+    years_by_province,
+    color_scale,
+    context_years,
+    formatter,
+    includeNcr,
+  };
 };
 
 const calculate_funcs_by_level = {

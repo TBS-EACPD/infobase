@@ -2,7 +2,7 @@ import text from "./employee_prov.yaml";
 import {
   formats,
   run_template,
-  years,
+  year_templates,
   businessConstants,
   create_text_maker_component,
   StdPanel,
@@ -14,8 +14,9 @@ import { Canada } from "../../../charts/canada/index.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const { people_years } = years;
+const { people_years } = year_templates;
 const formatter = formats["big_int_raw"];
+const includeNcr = true;
 
 const { provinces } = businessConstants;
 const { A11YTable } = declarative_charts;
