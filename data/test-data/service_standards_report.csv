@@ -1,6 +1,0 @@
-"id","standard","year","lower","upper","count","met_count","is_target_met","comment_en","comment_fr"
-1,1,2018,99.15,"100.00",123,123,1,,
-2,2,2018,90,"100.00",31,18,0,"whoops","oups"
-3,3,2018,90,"100.00",9757,0,0,"better luck next time","plus de chance la prochaine fois"
-4,4,2018,99.8,"100.00",4225,4225,1,,
-5,5,2018,50,"100.00",3543,2000,1,,
