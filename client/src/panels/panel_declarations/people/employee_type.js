@@ -16,20 +16,12 @@ import {
   HeightClippedGraph,
 } from "../shared.js"; 
 
-import { GlossaryEntry } from '../../../models/glossary.js';
-
 const { text_maker, TM } = create_text_maker_component(text);
 
 const { people_years } = years;
 const { tenure } = businessConstants;
 
 const { A11YTable } = declarative_charts;
-
-
-const employee_type_glossary_footnotes = _.map(
-  ['INDET_PEOPLE', 'TERM_PEOPLE', 'CASUAL_PEOPLE', 'STUD_PEOPLE'],
-  (glossary_key) => ({text: GlossaryEntry.lookup(glossary_key).definition})
-);
 
 
 const info_deps_by_level = {
@@ -82,9 +74,10 @@ export const declare_employee_type_panel = () => declare_panel({
   panel_config_func: (level, panel_key) => ({
     depends_on: ['orgEmployeeType'],
     info_deps: info_deps_by_level[level],
+    glossary_keys: ['INDET_PEOPLE', 'TERM_PEOPLE', 'CASUAL_PEOPLE', 'STUD_PEOPLE'],
     calculate: calculate_funcs_by_level[level],
   
-    render({calculations, footnotes, sources}){
+    render({calculations, footnotes, sources, glossary_keys}){
       const { info, panel_args } = calculations;
       
       const ticks = _.map(people_years, y => `${run_template(y)}`);
@@ -92,13 +85,7 @@ export const declare_employee_type_panel = () => declare_panel({
       return (
         <StdPanel
           title={text_maker("employee_type_title")}
-          {...{
-            footnotes: _.concat(
-              footnotes,
-              employee_type_glossary_footnotes
-            ),
-            sources,
-          }}
+          {...{footnotes, sources, glossary_keys}}
         >
           <Col size={12} isText>
             <TM k={level+"_employee_type_text"} args={info} />

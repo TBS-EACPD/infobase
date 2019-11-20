@@ -6,7 +6,6 @@ import {
   InfographicPanel,
   create_text_maker_component,
   get_source_links,
-  GlossaryEntry,
 
   declare_panel,
 } from "../../shared.js";
@@ -27,6 +26,7 @@ export const declare_dp_rev_split_panel = () => declare_panel({
     depends_on: ['programSpending'],
     machinery_footnotes: false,
     footnotes: ["PLANNED_GROSS", "PLANNED_EXP", "PLANNED_FTE"],
+    glossary_keys: ["SPA"],
     source: (subject) => get_source_links(["DP"]),
     calculate(subject,info){
       const { programSpending } = this.tables;
@@ -59,21 +59,16 @@ export const declare_dp_rev_split_panel = () => declare_panel({
       });
 
     },
-    render({calculations, footnotes, sources}){
+    render({calculations, footnotes, sources, glossary_keys}){
       const {
         panel_args: data,
         info,
       } = calculations;
 
-      const new_footnotes = footnotes.concat([
-        { text: GlossaryEntry.lookup("SPA").definition },
-      ]);
-
       return (
         <InfographicPanel
           title={text_maker("dp_rev_split_title")}
-          footnotes={new_footnotes}
-          sources={sources}
+          {...{footnotes, sources, glossary_keys}}
         >
           <div>
             <TM k="dp_rev_split_text" args={info} />
