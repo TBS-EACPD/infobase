@@ -137,7 +137,7 @@ export const ResultNodeContent = ({
 }) => (
   <div className="indicator-container-container">
     <div className="indicator-container">
-      <IndicatorList indicators={_.map(indicator_nodes, 'data.indicator')} stripe_rows={true} />
+      <IndicatorList indicators={_.map(indicator_nodes, 'data.indicator')} />
     </div>
     { !_.isEmpty(contributing_programs) && 
       <div>
