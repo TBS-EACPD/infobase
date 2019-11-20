@@ -32,8 +32,8 @@ const calculate_funcs_by_level = {
     return calculate_common( std_years.map( year => orgTransferPaymentsRegion.prov_code(year, false) ) );
   },
   dept: function(subject){
-    const { orgEmployeeRegion } = this.tables;
-    return calculate_common( std_years.map( year => orgEmployeeRegion.prov_code(year, subject.unique_id) ) );
+    const { orgTransferPaymentsRegion } = this.tables;
+    return calculate_common( std_years.map( year => orgTransferPaymentsRegion.prov_code(year, subject.unique_id) ) );
   },
 };
 
