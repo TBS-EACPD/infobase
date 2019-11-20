@@ -60,6 +60,7 @@ export class Canada {
     const main_color = this.options.color;
     const color_scale = this.options.color_scale;
     const formatter = this.options.formatter;
+    const includeNcr = this.options.includeNcr;
     
     const data = this.options.data;
     const last_year_data = _.last(data);
@@ -185,7 +186,7 @@ export class Canada {
           }); 
 
         
-        const prov_text_key = (prov_key === 'on' || prov_key === 'qc') ? 
+        const prov_text_key = (includeNcr && (prov_key === 'on' || prov_key === 'qc')) ? 
           `${prov_key}lessncr` : 
           prov_key;
         
@@ -199,7 +200,6 @@ export class Canada {
         } else {
           prov_name = prov_key;
         }
-
         
         d3.select(this)
           .append("p")
@@ -243,5 +243,6 @@ export class Canada {
       provinces_with_optional_markers,
       (prov_key) => `path#CA-${prov_key}-Marker`
     );
+    !includeNcr ? hide_map_components("path#CA-ncr") : null;
   };
 }

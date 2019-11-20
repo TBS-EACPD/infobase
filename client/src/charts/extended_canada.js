@@ -43,10 +43,16 @@ class CanadaGraphBarLegend extends React.Component {
     super();
   }
   render() {
-    const { prov, years_by_province, context_years, formatter } = this.props;
+    const {
+      prov,
+      years_by_province,
+      context_years,
+      formatter,
+      includeNcr,
+    } = this.props;
 
     const province_graph_title = function(prov){
-      if (prov === 'on' || prov === 'qc'){
+      if (includeNcr && (prov === 'on' || prov === 'qc')){
         prov += "lessncr";
       }
       return `${trivial_text_maker("five_year_history")} ${prov === "Canada" ? prov : provinces[prov].text}`;
@@ -108,7 +114,13 @@ class CanadaGraph extends React.Component {
   }
   _render() {
     const { graph_args, prov_callback } = this.props;
-    const { years_by_province, color_scale, context_years, formatter } = graph_args;
+    const { 
+      years_by_province,
+      color_scale,
+      context_years,
+      formatter,
+      includeNcr,
+    } = graph_args;
 
     const graph_area_sel = d3.select( ReactDOM.findDOMNode(this.graph_area.current) );
 
@@ -120,6 +132,7 @@ class CanadaGraph extends React.Component {
       ticks: ticks,
       color_scale: color_scale,
       formatter: formatter,
+      includeNcr: includeNcr,
     });
 
     let active_prov = false;
@@ -150,7 +163,13 @@ export class ExtendedCanada extends React.Component{
 
   render(){
     const { graph_args } = this.props;
-    const { years_by_province, color_scale, context_years, formatter } = graph_args;
+    const {
+      years_by_province,
+      color_scale,
+      context_years,
+      formatter,
+      includeNcr,
+    } = graph_args;
 
     const legend_items = _.map( color_scale.ticks(5).reverse(), (tick) => ({
       label: `${formats["big_int_raw"](tick)}+`,
@@ -182,6 +201,7 @@ export class ExtendedCanada extends React.Component{
               years_by_province={years_by_province}
               context_years={context_years}
               formatter={formatter}
+              includeNcr={includeNcr}
             />
           </div>
         </div>
