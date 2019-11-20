@@ -272,7 +272,6 @@ class SingleSubjExplorer extends React.Component {
         onClickExpand: id => toggle_node(id),
         get_non_col_content: get_non_col_content_func({doc}),
       };
-  
       inner_content = (
         <div>
           <div style={{ marginTop: "10px" }}>

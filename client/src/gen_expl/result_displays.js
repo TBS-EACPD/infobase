@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { TM, text_maker } from '../panels/panel_declarations/results/result_text_provider.js';
-import { IndicatorDisplay } from '../panels/panel_declarations/results/result_components.js';
+import { IndicatorList } from '../panels/panel_declarations/results/result_components.js';
 
 import { infograph_href_template } from '../link_utils.js';
 import { Indicator, result_docs } from '../models/results.js';
@@ -137,7 +137,7 @@ export const ResultNodeContent = ({
 }) => (
   <div className="indicator-container-container">
     <div className="indicator-container">
-      <IndicatorDisplay indicators={_.map(indicator_nodes, 'data.indicator')} stripe_rows={true} />
+      <IndicatorList indicators={_.map(indicator_nodes, 'data.indicator')} stripe_rows={true} />
     </div>
     { !_.isEmpty(contributing_programs) && 
       <div>
