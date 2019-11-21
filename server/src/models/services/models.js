@@ -45,7 +45,7 @@ export default function(model_singleton){
 
   const ServiceSchema = mongoose.Schema({
     service_id: pkey_type(),
-    org_id:parent_fkey_type(),
+    org_id: parent_fkey_type(),
     year: str_type,
 
     ...bilingual_str('name'),
@@ -70,9 +70,12 @@ export default function(model_singleton){
   model_singleton.define_model("ServiceStandard", ServiceStandardSchema);
   model_singleton.define_model("Service", ServiceSchema);
   
+  const {
+    Service,
+  } = model_singleton.models;
 
   const loaders = {
-    // TODO
+    services_by_org_id: create_resource_by_foreignkey_attr_dataloader(Service, 'org_id'),
   };
   _.each( loaders, (val, key) =>  model_singleton.define_loader(key, val) );
 }
