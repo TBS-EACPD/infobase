@@ -8,6 +8,7 @@ import core_subject from './core_subject';
 import results from './results';
 import budget_measures from './budget_measures';
 import resources from './finances';
+import services from './services';
 // import pses from './pses';
 // import sobjs from './standard_objects';
 // import people from './people';
@@ -23,6 +24,7 @@ const sub_module_defs = [
   results,
   budget_measures,
   resources,
+  services,
   // pses,
   // sobjs,
   // search,
