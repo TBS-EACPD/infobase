@@ -98,10 +98,10 @@ ochro_includes_excludes_en:
         Canadian Security Intelligence Service, the National Capital Commission, Canada Investment and Savings, and the Canadian Forces Non-Public Funds. 
 
     To assist in your analysis of Federal Public Service human resources data,
-    a {{ext_link "glossary of key terms" "http://www.tbs-sct.gc.ca/res/stats/gloss-eng.asp"}} 
+    find here a {{ext_link "glossary of key terms" "https://www.canada.ca/en/treasury-board-secretariat/services/innovation/human-resources-statistics/demographic-snapshot-federal-public-service-glossary-key-terms.html"}} 
     used in many of the Office of the Chief Human Resources Officer's 
-    (OCHRO) demographic products and reports is available on the 
-    {{ext_link "OCHRO Human Resources Statistics webpage" "http://www.tbs-sct.gc.ca/res/stats/hrs-srh-eng.asp"}}. 
+    (OCHRO) demographic products. Additional reports are available on the 
+    {{ext_link "OCHRO Human Resources Statistics webpage" "https://www.canada.ca/en/treasury-board-secretariat/services/innovation/human-resources-statistics.html"}}. 
     {{/if}}
 
 
@@ -141,6 +141,6 @@ ochro_includes_excludes_fr:
 
 
     Afin de faciliter votre analyse des données sur les ressources humaines de la fonction publique fédérale, le Bureau du dirigeant principal des ressources humaines 
-    (BDPRH) a publié, sur sa page Web {{ext_link "Statistiques sur les ressources humaines" "http://www.tbs-sct.gc.ca/res/stats/hrs-srh-fra.asp"}}, un {{ext_link "glossaire des termes clés" "http://www.tbs-sct.gc.ca/res/stats/gloss-fra.asp"}} 
+    (BDPRH) a publié, sur sa page Web {{ext_link "Statistiques sur les ressources humaines" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/innovation/statistiques-ressources-humaines.html"}}, un {{ext_link "glossaire des termes clés" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/innovation/statistiques-ressources-humaines/apercu-demographique-fonction-publique-federale-glossaire-termes-cles.html"}} 
     utilisés dans bon nombre de ses produits et rapports démographiques.
     {{/if}}
