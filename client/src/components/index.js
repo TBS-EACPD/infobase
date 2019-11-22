@@ -32,6 +32,12 @@ export { WellList } from './WellList.js';
 export { DisplayTable } from './DisplayTable.js';
 export { LabeledTable } from './LabeledTable.js';
 
+export {
+  Explorer,
+  ExplorerHeader,
+  ExplorerNode,
+} from './ExplorerComponents.js';
+
 export { StatelessModal, FixedPopover } from './modals_and_popovers';
 
 export {
