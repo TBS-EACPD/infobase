@@ -20,7 +20,9 @@ Object {
             "last_gender_analysis": null,
             "name": "Recall Notification – Mittens",
             "org_id": "326",
+            "scope": "External Service",
             "service_id": "1",
+            "service_type": "Communications Services, Advisory Services",
             "standards": Array [
               Object {
                 "channel": "online",
@@ -62,7 +64,9 @@ Object {
             "last_gender_analysis": null,
             "name": "Regulatory Complaints – Mittens",
             "org_id": "326",
+            "scope": "External Service",
             "service_id": "2",
+            "service_type": "Regulatory Compliance and Enforcement",
             "standards": Array [
               Object {
                 "channel": "online",
@@ -104,7 +108,9 @@ Object {
             "last_gender_analysis": null,
             "name": "Canada Mitten Plan (CMP) Regular Benefits",
             "org_id": "326",
+            "scope": "External Service",
             "service_id": "3",
+            "service_type": "Resources",
             "standards": Array [
               Object {
                 "channel": "online",
@@ -170,7 +176,9 @@ Object {
             "last_gender_analysis": null,
             "name": "Mitten-mail",
             "org_id": "326",
+            "scope": "Internal Service, Internal Enterprise Service",
             "service_id": "4",
+            "service_type": "Communications Services",
             "standards": Array [
               Object {
                 "channel": "online",

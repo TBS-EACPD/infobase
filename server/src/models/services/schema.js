@@ -11,27 +11,31 @@ const schema = `
     service_id: String
     org_id: String
     year: String
+    is_active: Boolean
 
     name: String
     description: String
-    digital_enablement_comment: String
+    service_type: String
+    scope: String
 
     last_gender_analysis: String
 
     collects_fees: Boolean
+
     account_reg_digital_status: String
     authentication_status: String
     application_digital_status: String
     decision_digital_status: String
     issuance_digital_status: String
     issue_res_digital_status: String
-    is_active: Boolean
+    digital_enablement_comment: String
 
     standards: [ServiceStandard],
   }
   type ServiceStandard{
     standard_id: String
     service_id: String
+    is_active: Boolean
 
     name: String
 
@@ -39,8 +43,6 @@ const schema = `
     channel: String
     standard_type: String
     other_type_comment: String
-    
-    is_active: Boolean
 
     target_type: String
     lower: Float
@@ -67,6 +69,8 @@ export default function({models, loaders}){
     Service: {
       name: bilingual_field("name"),
       description: bilingual_field("description"),
+      service_type: bilingual_field("service_type"),
+      scope: bilingual_field("scope"),
       digital_enablement_comment: bilingual_field("digital_enablement_comment"),
     },
     ServiceStandard: {
