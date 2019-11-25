@@ -1,12 +1,8 @@
 import './results.scss';
 
-import classNames from 'classnames';
-import { Fragment } from 'react';
 import {
   declare_panel,
-  declarative_charts,
   InfographicPanel,
-  businessConstants,
   get_source_links,
   create_text_maker_component,
 } from "../shared.js";
@@ -14,8 +10,6 @@ import text from './results_intro_text.yaml';
 import { get_static_url } from '../../../request_utils.js';
 import { 
   ResultCounts,
-  GranularResultCounts,
-  row_to_drr_status_counts,
   get_result_doc_keys,
   result_docs,
 } from './results_common.js';
