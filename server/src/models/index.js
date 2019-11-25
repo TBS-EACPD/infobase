@@ -19,12 +19,12 @@ import services from './services';
 
 
 //the order of sub_module_defs controls the order of model creation and database population, which potentially matters
-const sub_module_defs = [
+const sub_module_defs = _.compact([
   core_subject,
   results,
   budget_measures,
   resources,
-  services,
+  global.USE_TEST_DATA && services,
   // pses,
   // sobjs,
   // search,
@@ -32,7 +32,7 @@ const sub_module_defs = [
   // vote_stat,
   // transfer_payments,
   // transfer_payments_loc,
-];
+]);
 
 
 export function create_models(){
