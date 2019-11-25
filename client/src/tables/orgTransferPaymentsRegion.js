@@ -1,3 +1,4 @@
+import text from './orgTransferPaymentsRegion.yaml';
 import {
   stats, 
   trivial_text_maker, 
@@ -17,7 +18,7 @@ const {
 } = years;
 
 export default {
-  //text,
+  text,
   id: "orgTransferPaymentsRegion",
   //legacy_id: "table10",
   source: ["PA"],
@@ -123,38 +124,6 @@ export default {
         })
         .value();
     },
-    /*"high_level_prov_split": function (year, options) {
-      options = options || {};
-      var lk = provinces,
-        format = options.format || false,
-        fm1 = formats["big_int"],
-        fm2 = formats.percentage,
-        ncr = this.lang === 'en' ? "NCR" : "RCN",
-        non_ncr = "Non-"+ncr,
-        abroad = lk.abroad.text,
-        dept_total = d3.sum(this.data, function (d) {
-          return d[year];
-        });
-      var groups = _.groupBy(this.data, function (x) {
-        if (x.region_code === 'ncr') {
-          return ncr;
-        } else if (x.region_code === "abroad") {
-          return abroad;
-        } else {
-          return non_ncr;
-        }
-      }, this);
-      return _.map([ncr, non_ncr, abroad], function (key) {
-        var relevant_group = groups[key];
-        var sub_column = _.map(relevant_group, year);
-        var group_total = d3.sum(sub_column);
-        if (format) {
-          return [key, fm1(group_total), fm2(group_total / dept_total)];
-        } else {
-          return [key, group_total, group_total / dept_total];
-        }
-      });
-    },*/
   },
 
   "dimensions": [

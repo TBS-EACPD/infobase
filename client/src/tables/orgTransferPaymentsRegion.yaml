@@ -1,0 +1,18 @@
+orgTransferPaymentsRegion_short:
+  transform: [handlebars,embeded-markdown,markdown]
+  en: |
+    This is for transfer payments region
+  fr: |
+    hello
+orgTransferPaymentsRegion:
+  transform: [handlebars,embeded-markdown,markdown]
+  en: |
+    {{{gt "orgEmployeeRegion_short"}}}
+
+    {{> ochro_includes_excludes_en}}
+
+  fr: |
+    {{{gt "orgEmployeeRegion_short"}}}
+
+    {{> ochro_includes_excludes_fr}}
+
