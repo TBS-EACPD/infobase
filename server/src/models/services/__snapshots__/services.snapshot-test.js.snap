@@ -323,10 +323,12 @@ Object {
             "org_id": "326",
             "other_channel_applications": 0,
             "program_ids": Array [
-              "",
+              "TBC-BXA03",
             ],
             "programs": Array [
-              null,
+              Object {
+                "name": "Results and Performance Reporting Policies and Initiatives",
+              },
             ],
             "scope": Array [
               "External Service",
