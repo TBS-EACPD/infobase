@@ -126,7 +126,8 @@ Object {
                 "target_type": "BERNOULLI",
                 "upper": 100,
                 "urls": Array [
-                  "https://www.canada.ca/gcinfobase, https://www.canada.ca/infobasegc",
+                  "https://www.canada.ca/gcinfobase",
+                  "https://www.canada.ca/infobasegc",
                 ],
               },
               Object {

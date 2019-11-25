@@ -2,6 +2,11 @@ import _ from "lodash";
 
 import { get_standard_csv_file_rows } from '../load_utils.js';
 
+const multi_value_string_fields_to_arrays = (list_fields, seperator=',') => _.mapValues(
+  list_fields,
+  (array_string) => _.split(array_string, seperator)
+);
+
 export default async function({models}){
   const { 
     ServiceStandard,
@@ -15,12 +20,26 @@ export default async function({models}){
       service: service_id,
       comment_en,
       comment_fr,
+
+      urls_en,
+      urls_fr,
+      rtp_urls_en,
+      rtp_urls_fr,
+
       ...other_fields
     }) => ({
       standard_id,
       service_id,
       target_comment_en: comment_en,
       target_comment_fr: comment_fr,
+
+      ...multi_value_string_fields_to_arrays({
+        urls_en,
+        urls_fr,
+        rtp_urls_en,
+        rtp_urls_fr,
+      }),
+
       ...other_fields,
     }),
   );
