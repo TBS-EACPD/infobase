@@ -1,0 +1,9 @@
+tp_by_region_title: 
+  transform: [handlebars]
+  en: Transfer payments by Geographic Region ({{ppl_last_year_5}} to {{ppl_last_year}})
+  fr: Paiements de transfert selon la région géographique ({{ppl_last_year_5}} à {{ppl_last_year}})
+
+tp_by_region_text: 
+  transform: [handlebars]
+  en: hello
+  fr: bonjour
