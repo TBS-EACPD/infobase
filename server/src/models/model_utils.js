@@ -32,6 +32,12 @@ export const parent_fkey_type = () => ({
   index: true,
 })
 
+export const sparse_parent_fkey_type = () => ({
+  ...str_type,
+  sparse: true,
+  index: true,
+})
+
 export const fyear_type = () => ({
   type: Number,
   index: true,

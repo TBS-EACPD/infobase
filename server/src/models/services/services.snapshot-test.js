@@ -3,27 +3,46 @@ query{
   root(lang: "en"){
     org(org_id: "326"){
       services {
-        service_id,
-        org_id,
-        year,
-        is_active,
-
-        name,
-        description,
-        service_type,
-        scope,
-        
-        last_gender_analysis,
-        
-        collects_fees,
-
-        account_reg_digital_status,
-        authentication_status,
-        application_digital_status,
-        decision_digital_status,
-        issuance_digital_status,
-        issue_res_digital_status,
-        digital_enablement_comment,
+        service_id
+        org_id
+        org {
+          name
+        }
+        program_ids
+        programs {
+          name
+        }
+        year
+        is_active
+    
+        name
+        description
+        service_type
+        scope
+        target_groups
+        feedback_channels
+        urls
+        comment
+    
+        last_gender_analysis
+    
+        collects_fees
+        cra_buisnss_number_is_identifier
+        sin_is_identifier
+        account_reg_digital_status
+        authentication_status
+        application_digital_status
+        decision_digital_status
+        issuance_digital_status
+        issue_res_digital_status
+        digital_enablement_comment
+    
+        telephone_enquires
+        website_visits
+        online_applications
+        in_person_applications
+        mail_applications
+        other_channel_applications
 
         standards {
           standard_id,

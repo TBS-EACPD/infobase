@@ -51,6 +51,7 @@ export default async function({models}){
       id: service_id,
       dept: org_id,
 
+      program_ids,
       service_type_en,
       service_type_fr,
       scope_en,
@@ -68,6 +69,7 @@ export default async function({models}){
       org_id,
 
       ...multi_value_string_fields_to_arrays({
+        program_ids,
         service_type_en,
         service_type_fr,
         scope_en,

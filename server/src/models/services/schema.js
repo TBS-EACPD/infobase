@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import { 
   bilingual_field, 
 } from '../schema_utils';
@@ -10,27 +12,42 @@ const schema = `
   type Service{
     service_id: String
     org_id: String
+    org: Org
+    program_ids: [String]
+    programs: [Program]
     year: String
     is_active: Boolean
 
     name: String
     description: String
-    service_type: String
-    scope: String
+    service_type: [String]
+    scope: [String]
+    target_groups: [String]
+    feedback_channels: [String]
+    urls: [String]
+    comment: String
 
     last_gender_analysis: String
 
     collects_fees: Boolean
-
-    account_reg_digital_status: String
-    authentication_status: String
-    application_digital_status: String
-    decision_digital_status: String
-    issuance_digital_status: String
-    issue_res_digital_status: String
+    cra_buisnss_number_is_identifier: Boolean
+    sin_is_identifier: Boolean
+    account_reg_digital_status: Boolean
+    authentication_status: Boolean
+    application_digital_status: Boolean
+    decision_digital_status: Boolean
+    issuance_digital_status: Boolean
+    issue_res_digital_status: Boolean
     digital_enablement_comment: String
 
-    standards: [ServiceStandard],
+    telephone_enquires: Float
+    website_visits: Float
+    online_applications: Float
+    in_person_applications: Float
+    mail_applications: Float
+    other_channel_applications: Float
+
+    standards: [ServiceStandard]
   }
   type ServiceStandard{
     standard_id: String
@@ -39,7 +56,7 @@ const schema = `
 
     name: String
 
-    last_gcss_tool_year: String,
+    last_gcss_tool_year: String
     channel: String
     standard_type: String
     other_type_comment: String
@@ -51,8 +68,8 @@ const schema = `
     met_count: Float
     is_target_met: Boolean
     target_comment: String
-    urls: [String],
-    rtp_urls: [String],
+    urls: [String]
+    rtp_urls: [String]
   }
 `;
 
@@ -60,6 +77,8 @@ const schema = `
 export default function({models, loaders}){
   const {
     services_by_org_id,
+    org_id_loader,
+    prog_id_loader,
   } = loaders;
 
   const resolvers = {
@@ -67,10 +86,17 @@ export default function({models, loaders}){
       services: ({org_id}) => services_by_org_id.load(org_id),
     },
     Service: {
+      org: ({org_id}) => org_id_loader.load(org_id),
+      programs: ({program_ids}) => _.map( program_ids, (program_id) => prog_id_loader.load(program_id) ),
+
       name: bilingual_field("name"),
       description: bilingual_field("description"),
       service_type: bilingual_field("service_type"),
       scope: bilingual_field("scope"),
+      target_groups: bilingual_field("target_groups"),
+      feedback_channels: bilingual_field("feedback_channels"),
+      urls: bilingual_field("urls"),
+      comment: bilingual_field("comment"),
       digital_enablement_comment: bilingual_field("digital_enablement_comment"),
     },
     ServiceStandard: {
