@@ -17,7 +17,7 @@ const context_years = std_years;
 const formatter = formats["compact2_raw"];
 const includeNcr = false;
 
-const { text_maker, TM } = create_text_maker_component(text);
+const { text_maker } = create_text_maker_component(text);
 const { provinces } = businessConstants;
 const { A11YTable } = declarative_charts;
 
@@ -82,7 +82,6 @@ export const declare_tp_by_region_panel = () => declare_panel({
         calculations,
         footnotes,
         sources,
-        level,
       } = render_args;
   
       const { graph_args } = calculations;
@@ -91,6 +90,7 @@ export const declare_tp_by_region_panel = () => declare_panel({
       return (
         <StdPanel
           title={text_maker("tp_by_region_title")}
+          {...{footnotes, sources}}
         >
           <Col size={12} isText>
             {text_maker("tp_by_region_text")}

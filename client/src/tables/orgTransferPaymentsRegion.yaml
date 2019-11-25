@@ -7,12 +7,12 @@ orgTransferPaymentsRegion_short:
 orgTransferPaymentsRegion:
   transform: [handlebars,embeded-markdown,markdown]
   en: |
-    {{{gt "orgEmployeeRegion_short"}}}
+    {{{gt "orgTransferPaymentsRegion_short"}}}
 
     {{> ochro_includes_excludes_en}}
 
   fr: |
-    {{{gt "orgEmployeeRegion_short"}}}
+    {{{gt "orgTransferPaymentsRegion_short"}}}
 
     {{> ochro_includes_excludes_fr}}
 
