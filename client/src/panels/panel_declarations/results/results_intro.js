@@ -20,8 +20,8 @@ const { text_maker, TM } = create_text_maker_component(text);
 const latest_drr_doc_key = _.last( get_result_doc_keys("drr") );
 const latest_dp_doc_key = _.last( get_result_doc_keys("dp") );
 
-const ResultsIntroPanel = ({subject, summary_counts, doc_urls}) => {
-  const summary_text_args = {subject, ...summary_counts};
+const ResultsIntroPanel = ({subject, summary_counts, summary_size, doc_urls}) => {
+  const summary_text_args = {subject, ...summary_counts, ...summary_size};
   
   return (
     <div className="frow middle-xs">
@@ -83,6 +83,11 @@ export const declare_results_intro_panel = () => declare_panel({
         drr_indicators: verbose_counts[`${latest_drr_doc_key}_total`],
       };
 
+      const summary_size = {
+        num_crs: _.size(subject.crsos),
+        num_programs: _.reduce(subject.crsos, (sum,crso) => sum+_.size(crso.programs), 0)
+      };
+
       const doc_urls = {
         dp_url: result_docs[latest_dp_doc_key][`doc_url_${window.lang}`],
         drr_url: result_docs[latest_drr_doc_key][`doc_url_${window.lang}`],
@@ -91,6 +96,7 @@ export const declare_results_intro_panel = () => declare_panel({
       return {
         subject,
         summary_counts,
+        summary_size,
         doc_urls,
       };
     },
