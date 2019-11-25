@@ -24,7 +24,7 @@ const sub_module_defs = _.compact([
   results,
   budget_measures,
   resources,
-  global.USE_TEST_DATA && services,
+  services,
   // pses,
   // sobjs,
   // search,
