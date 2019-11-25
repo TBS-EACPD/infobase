@@ -44,6 +44,7 @@ export default async function({models}){
     }),
   );
 
+
   const service_rows = _.map(
     get_standard_csv_file_rows("services.csv"),
     ({
@@ -60,6 +61,7 @@ export default async function({models}){
       ),
     }),
   );
+
 
   return await Promise.all([
     ServiceStandard.insertMany(service_standard_rows),

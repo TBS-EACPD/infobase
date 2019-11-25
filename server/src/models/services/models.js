@@ -14,16 +14,19 @@ import {
   create_resource_by_foreignkey_attr_dataloader,
 } from '../loader_utils.js';
 
+
 const service_status_type = {
   type: String,
   enum : ['ENABLED', 'NOT_ENABLED', 'NA'],
 };
+
 
 export default function(model_singleton){
 
   const ServiceStandardSchema = mongoose.Schema({
     standard_id: sparse_pkey_type(),
     service_id: parent_fkey_type(),
+    is_active: {type: Boolean},
 
     ...bilingual_str('name'),
 
@@ -31,8 +34,6 @@ export default function(model_singleton){
     channel: str_type, // TODO should be an enum, get possible values
     standard_type: str_type, // TODO should be an enum, get possible values
     ...bilingual_str('other_type_comment'),
-    
-    is_active: {type: Boolean},
 
     target_type: str_type, // TODO should be an enum, get possible values
     lower: {type: Number},
@@ -49,21 +50,24 @@ export default function(model_singleton){
     service_id: pkey_type(),
     org_id: parent_fkey_type(),
     year: str_type,
+    is_active: {type: Boolean},
 
     ...bilingual_str('name'),
     ...bilingual_str('description'),
-    ...bilingual_str('digital_enablement_comment'),
+    ...bilingual_str('service_type'),
+    ...bilingual_str('scope'),
 
     last_gender_analysis: str_type,
 
     collects_fees: {type: Boolean},
+    
     account_reg_digital_status: service_status_type,
     authentication_status: service_status_type,
     application_digital_status: service_status_type,
     decision_digital_status: service_status_type,
     issuance_digital_status: service_status_type,
     issue_res_digital_status: service_status_type,
-    is_active: {type: Boolean},
+    ...bilingual_str('digital_enablement_comment'),
 
     standards: [ServiceStandardSchema],
   });

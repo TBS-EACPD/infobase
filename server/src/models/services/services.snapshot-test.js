@@ -6,25 +6,29 @@ query{
         service_id,
         org_id,
         year,
+        is_active,
 
         name,
         description,
-        digital_enablement_comment,
-
+        service_type,
+        scope,
+        
         last_gender_analysis,
-
+        
         collects_fees,
+
         account_reg_digital_status,
         authentication_status,
         application_digital_status,
         decision_digital_status,
         issuance_digital_status,
         issue_res_digital_status,
-        is_active,
+        digital_enablement_comment,
 
         standards {
           standard_id,
           service_id,
+          is_active,
 
           name,
 
@@ -33,7 +37,6 @@ query{
           standard_type,
           other_type_comment,
 
-          is_active,
 
           target_type,
           lower,
