@@ -30,7 +30,6 @@ export default async function({models}){
     ({
       id: service_id,
       dept: org_id,
-      year,
       ...other_fields
     }) => ({
       service_id,
