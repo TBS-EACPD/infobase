@@ -2,16 +2,16 @@ import _ from "lodash";
 import mongoose from "mongoose";
 
 import { 
-  str_type,
   pkey_type,
   sparse_pkey_type,
   parent_fkey_type,
+  str_type,
   bilingual_str,
+  bilingual,
 } from '../model_utils.js';
 
 import {
   create_resource_by_foreignkey_attr_dataloader,
-  create_resource_by_id_attr_dataloader,
 } from '../loader_utils.js';
 
 const service_status_type = {
@@ -41,6 +41,8 @@ export default function(model_singleton){
     met_count: {type: Number},
     is_target_met: {type: Boolean},
     ...bilingual_str('target_comment'),
+    ...bilingual('urls', [str_type]),
+    ...bilingual('rtp_urls', [str_type]),
   });
 
   const ServiceSchema = mongoose.Schema({

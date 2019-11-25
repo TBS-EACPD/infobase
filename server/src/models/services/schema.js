@@ -49,6 +49,8 @@ const schema = `
     met_count: Float
     is_target_met: Boolean
     target_comment: String
+    urls: [String],
+    rtp_urls: [String],
   }
 `;
 
@@ -71,6 +73,8 @@ export default function({models, loaders}){
       name: bilingual_field("name"),
       other_type_comment: bilingual_field("other_type_comment"),
       target_comment: bilingual_field("target_comment"),
+      urls: bilingual_field("urls"),
+      rtp_urls: bilingual_field("rtp_urls"),
     },
   };
 
