@@ -50,11 +50,38 @@ export default async function({models}){
     ({
       id: service_id,
       dept: org_id,
+
+      service_type_en,
+      service_type_fr,
+      scope_en,
+      scope_fr,
+      target_groups_en,
+      target_groups_fr,
+      feedback_channels_en,
+      feedback_channels_fr,
+      urls_en,
+      urls_fr,
+
       ...other_fields
     }) => ({
       service_id,
       org_id,
+
+      ...multi_value_string_fields_to_arrays({
+        service_type_en,
+        service_type_fr,
+        scope_en,
+        scope_fr,
+        target_groups_en,
+        target_groups_fr,
+        feedback_channels_en,
+        feedback_channels_fr,
+        urls_en,
+        urls_fr,
+      }),
+
       ...other_fields,
+
       standards: _.filter(
         service_standard_rows,
         (service_standard) => service_standard.service_id === service_id
