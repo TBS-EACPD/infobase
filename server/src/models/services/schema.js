@@ -8,6 +8,9 @@ const schema = `
   extend type Org{
     services: [Service]
   }
+  extend type Program{
+    services: [Service]
+  }
   
   type Service{
     service_id: String
@@ -77,6 +80,7 @@ const schema = `
 export default function({models, loaders}){
   const {
     services_by_org_id,
+    services_by_program_id,
     org_id_loader,
     prog_id_loader,
   } = loaders;
@@ -84,6 +88,9 @@ export default function({models, loaders}){
   const resolvers = {
     Org: {
       services: ({org_id}) => services_by_org_id.load(org_id),
+    },
+    Program: {
+      services: ({program_id}) => services_by_program_id.load(program_id),
     },
     Service: {
       org: ({org_id}) => org_id_loader.load(org_id),
