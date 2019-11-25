@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 
 import { 
   pkey_type,
-  sparse_pkey_type,
   parent_fkey_type,
   str_type,
   bilingual_str,
@@ -14,17 +13,10 @@ import {
   create_resource_by_foreignkey_attr_dataloader,
 } from '../loader_utils.js';
 
-
-const service_status_type = {
-  type: String,
-  enum : ['ENABLED', 'NOT_ENABLED', 'NA'],
-};
-
-
 export default function(model_singleton){
 
   const ServiceStandardSchema = mongoose.Schema({
-    standard_id: sparse_pkey_type(),
+    standard_id: pkey_type(),
     service_id: parent_fkey_type(),
     is_active: {type: Boolean},
 
@@ -49,25 +41,38 @@ export default function(model_singleton){
   const ServiceSchema = mongoose.Schema({
     service_id: pkey_type(),
     org_id: parent_fkey_type(),
+    programs_ids: [parent_fkey_type()],
     year: str_type,
     is_active: {type: Boolean},
 
     ...bilingual_str('name'),
     ...bilingual_str('description'),
-    ...bilingual_str('service_type'),
-    ...bilingual_str('scope'),
+    ...bilingual('service_type', [str_type]),
+    ...bilingual('scope', [str_type]),
+    ...bilingual('target_groups', [str_type]),
+    ...bilingual('feedback_channels', [str_type]),
+    ...bilingual('urls', [str_type]),
+    ...bilingual_str('comment'),
 
     last_gender_analysis: str_type,
 
     collects_fees: {type: Boolean},
-    
-    account_reg_digital_status: service_status_type,
-    authentication_status: service_status_type,
-    application_digital_status: service_status_type,
-    decision_digital_status: service_status_type,
-    issuance_digital_status: service_status_type,
-    issue_res_digital_status: service_status_type,
+    cra_buisnss_number_is_identifier: {type: Boolean},
+    sin_is_identifier: {type: Boolean},
+    account_reg_digital_status: {type: Boolean},
+    authentication_status: {type: Boolean},
+    application_digital_status: {type: Boolean},
+    decision_digital_status: {type: Boolean},
+    issuance_digital_status: {type: Boolean},
+    issue_res_digital_status: {type: Boolean},
     ...bilingual_str('digital_enablement_comment'),
+
+    telephone_enquires: {type: Number},
+    website_visits: {type: Number},
+    online_applications: {type: Number},
+    in_person_applications: {type: Number},
+    mail_applications: {type: Number},
+    other_channel_applications: {type: Number},
 
     standards: [ServiceStandardSchema],
   });
@@ -82,6 +87,7 @@ export default function(model_singleton){
 
   const loaders = {
     services_by_org_id: create_resource_by_foreignkey_attr_dataloader(Service, 'org_id'),
+    services_by_program_id: create_resource_by_foreignkey_attr_dataloader(Service, 'program_ids'),
   };
   _.each( loaders, (val, key) =>  model_singleton.define_loader(key, val) );
 }
