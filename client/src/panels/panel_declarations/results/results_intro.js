@@ -62,7 +62,7 @@ export const declare_results_intro_panel = () => declare_panel({
   panel_config_func: (level, panel_key) => ({
     requires_granular_result_counts: true,
     footnotes: ["RESULTS_COUNTS", "RESULTS"],
-    source: (subject) => get_source_links(["DRR"]),
+    source: (subject) => get_source_links(["DP","DRR"]),
     calculate: (subject) => {
 
       const is_gov = subject.level == 'gov';
@@ -78,13 +78,9 @@ export const declare_results_intro_panel = () => declare_panel({
             .map( obj => ({...obj, total: d3.sum(_.values(obj.counts)) } ) )
             .value();
           const gov_counts = _.mergeWith({}, ...dept_counts, (val, src) => _.isNumber(val) ? val + src : src);
-          //const num_crs = _.sumBy(counts_by_dept, counts => _.size(counts.subject.crsos));
-          //const num_programs = _.sumBy(counts_by_dept, counts => _.reduce(counts.subject.crsos, (sum,crso) => sum+_.size(crso.programs), 0));
           const depts_with_dps = _.sumBy(counts_by_dept, dept => dept.counts[`${latest_dp_doc_key}_results`] > 0 ? 1 : 0);
           const depts_with_drrs = _.sumBy(counts_by_dept, dept => dept.counts[`${latest_drr_doc_key}_results`] > 0 ? 1 : 0);
           return {
-            //num_crs,
-            //num_programs,
             depts_with_dps,
             depts_with_drrs,
             ...(_.omit(gov_counts, ['id','level','subject_id'])),
