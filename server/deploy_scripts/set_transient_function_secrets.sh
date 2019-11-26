@@ -36,3 +36,5 @@ export MDB_PW=$(lpass show MDB_READ_PW --notes)
 echo "MDB_CONNECT_STRING: '$MDB_CONNECT_STRING'" >> $scratch/envs.yaml
 echo "MDB_USERNAME: '$MDB_USERNAME'" >> $scratch/envs.yaml
 echo "MDB_PW: '$MDB_PW'" >> $scratch/envs.yaml
+
+echo "USE_REMOTE_DB: 1" >> $scratch/envs.yaml
