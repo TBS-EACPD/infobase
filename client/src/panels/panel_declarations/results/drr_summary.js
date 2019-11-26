@@ -237,7 +237,7 @@ export const declare_drr_summary_panel = () => declare_panel({
   levels: ["dept", "crso", "program"],
   panel_config_func: (level, panel_key) => ({
     requires_result_counts: level === "dept",
-    require_granular_result_counts: level !== "dept",
+    requires_granular_result_counts: level !== "dept",
     footnotes: ["RESULTS_COUNTS", "RESULTS"],
     source: (subject) => get_source_links(["DRR"]),
     calculate(subject){
