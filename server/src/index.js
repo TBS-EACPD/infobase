@@ -2,5 +2,4 @@
 const _ = require('lodash');
 global._ = _;
 const app = require('./app');
-global.IS_DEV_SERVER = false;
 module.exports = { app }

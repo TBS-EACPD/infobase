@@ -1,7 +1,6 @@
 const _ = require('lodash');
 
 global._ = _;
-global.IS_DEV_SERVER = !(process.env.SHOULD_USE_REMOTE_DB);
 
 const app = require('./app');
 
