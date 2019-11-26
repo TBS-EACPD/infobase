@@ -4,23 +4,25 @@ import mongoose from "mongoose";
 
 function get_connection_str(){
 
-  if(process.env.USE_LOCAL_DB){
+  if(process.env.USE_REMOTE_DB){
+    console.log("using remote db")
+    const {
+      MDB_CONNECT_STRING,
+      MDB_USERNAME, // different usernames in read-mode vs populate-mode
+      MDB_PW,
+      MDB_NAME,
+    } = process.env;
+
+    return MDB_CONNECT_STRING
+      .replace('{MDB_USERNAME}', MDB_USERNAME)
+      .replace('{MDB_PW}', MDB_PW)
+      .replace('{MDB_NAME}', MDB_NAME);
+  } else {
     console.log("using local db")
     return "mongodb://127.0.0.1:27017/infobase";
   }
 
-  console.log("using remote db")
-  const {
-    MDB_CONNECT_STRING,
-    MDB_USERNAME, // different usernames in read-mode vs populate-mode
-    MDB_PW,
-    MDB_NAME,
-  } = process.env;
-
-  return MDB_CONNECT_STRING
-    .replace('{MDB_USERNAME}', MDB_USERNAME)
-    .replace('{MDB_PW}', MDB_PW)
-    .replace('{MDB_NAME}', MDB_NAME);
+  
 }
 
 
