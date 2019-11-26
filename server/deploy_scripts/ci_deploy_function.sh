@@ -7,7 +7,7 @@ echo "MDB_CONNECT_STRING: '$MDB_CONNECT_STRING_3'" >> ./envs.yaml
 echo "MDB_USERNAME: '$MDB_USERNAME'" >> ./envs.yaml
 echo "MDB_PW: '$MDB_PW'" >> ./envs.yaml
 
-echo "USE_REMOTE_DB: 1" >> ./envs.yaml
+echo "USE_REMOTE_DB: '1'" >> ./envs.yaml
 
 source ../scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-start"
 
