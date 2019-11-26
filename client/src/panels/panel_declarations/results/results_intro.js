@@ -11,7 +11,7 @@ const { Dept } = Subject;
 import text from './results_intro_text.yaml';
 import { get_static_url } from '../../../request_utils.js';
 import { 
-  GranularResultCounts,
+  ResultCounts,
   get_result_doc_keys,
   result_docs,
 } from './results_common.js';
@@ -69,8 +69,7 @@ export const declare_results_intro_panel = () => declare_panel({
 
       const verbose_counts = (() => {
         if(is_gov){
-          const dept_counts = GranularResultCounts.get_data();
-          debugger;
+          const dept_counts = ResultCounts.get_all_dept_counts();
           const counts_by_dept = _.chain(dept_counts)
             .map( row => ({
               subject: Dept.lookup(row.id),
@@ -79,14 +78,13 @@ export const declare_results_intro_panel = () => declare_panel({
             .map( obj => ({...obj, total: d3.sum(_.values(obj.counts)) } ) )
             .value();
           const gov_counts = _.mergeWith({}, ...dept_counts, (val, src) => _.isNumber(val) ? val + src : src);
-          const num_crs = _.sumBy(counts_by_dept, counts => _.size(counts.subject.crsos));
-          const num_programs = _.sumBy(counts_by_dept, counts => _.reduce(counts.subject.crsos, (sum,crso) => sum+_.size(crso.programs), 0));
+          //const num_crs = _.sumBy(counts_by_dept, counts => _.size(counts.subject.crsos));
+          //const num_programs = _.sumBy(counts_by_dept, counts => _.reduce(counts.subject.crsos, (sum,crso) => sum+_.size(crso.programs), 0));
           const depts_with_dps = _.sumBy(counts_by_dept, dept => dept.counts[`${latest_dp_doc_key}_results`] > 0 ? 1 : 0);
           const depts_with_drrs = _.sumBy(counts_by_dept, dept => dept.counts[`${latest_drr_doc_key}_results`] > 0 ? 1 : 0);
-          debugger;
           return {
-            num_crs,
-            num_programs,
+            //num_crs,
+            //num_programs,
             depts_with_dps,
             depts_with_drrs,
             ...(_.omit(gov_counts, ['id','level','subject_id'])),
@@ -95,7 +93,7 @@ export const declare_results_intro_panel = () => declare_panel({
           return {
             num_crs: _.size(subject.crsos),
             num_programs: _.reduce(subject.crsos, (sum,crso) => sum+_.size(crso.programs), 0),
-            ...GranularResultCounts.get_subject_counts(subject.id),
+            ...ResultCounts.get_dept_counts(subject.id),
           };
         }
       })();
@@ -109,10 +107,8 @@ export const declare_results_intro_panel = () => declare_panel({
         dp_indicators: verbose_counts[`${latest_dp_doc_key}_indicators`],
         drr_results: verbose_counts[`${latest_drr_doc_key}_results`],
         drr_indicators: verbose_counts[`${latest_drr_doc_key}_total`],
-        num_dp_crs: verbose_counts.num_dp_crs,
-        num_dp_programs: verbose_counts.num_dp_programs,
-        num_drr_crs: verbose_counts.num_drr_crs,
-        num_drr_programs: verbose_counts.num_drr_programs,
+        num_crs: is_gov ? 0 : verbose_counts.num_crs,
+        num_programs: is_gov ? 0 : verbose_counts.num_programs,
         depts_with_dps: is_gov ? verbose_counts.depts_with_dps : 1,
         depts_with_drrs: is_gov ? verbose_counts.depts_with_drrs : 1,
       };
