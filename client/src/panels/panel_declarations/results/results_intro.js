@@ -1,11 +1,13 @@
 import './results.scss';
 
 import {
+  Subject,
   declare_panel,
   InfographicPanel,
   get_source_links,
   create_text_maker_component,
 } from "../shared.js";
+const { Dept } = Subject;
 import text from './results_intro_text.yaml';
 import { get_static_url } from '../../../request_utils.js';
 import { 
@@ -20,8 +22,8 @@ const { text_maker, TM } = create_text_maker_component(text);
 const latest_drr_doc_key = _.last( get_result_doc_keys("drr") );
 const latest_dp_doc_key = _.last( get_result_doc_keys("dp") );
 
-const ResultsIntroPanel = ({subject, summary_counts, summary_size, doc_urls}) => {
-  const summary_text_args = {subject, ...summary_counts, ...summary_size};
+const ResultsIntroPanel = ({subject, is_gov, summary_result_counts, doc_urls}) => {
+  const summary_text_args = {subject, is_gov, ...summary_result_counts};
   
   return (
     <div className="frow middle-xs">
@@ -48,7 +50,7 @@ const ResultsIntroPanel = ({subject, summary_counts, summary_size, doc_urls}) =>
       <div className="fcol-md-12 medium_panel_text">
         <TM k="dp_summary_text" args={summary_text_args} />
         <TM k="drr_summary_text" args={summary_text_args} />
-        {summary_counts.drr_results > 0 && <TM k="reports_links_text" args={doc_urls} />}
+        {summary_result_counts.drr_results > 0 && <TM k="reports_links_text" args={doc_urls} />}
       </div>
     </div>
   );
@@ -63,12 +65,38 @@ export const declare_results_intro_panel = () => declare_panel({
     footnotes: ["RESULTS_COUNTS", "RESULTS"],
     source: (subject) => get_source_links(["DRR"]),
     calculate: (subject) => {
+
+      const is_gov = subject.level == 'gov';
+
       const verbose_counts = (() => {
-        switch (level){
-          case 'dept':
-            return ResultCounts.get_dept_counts(subject.id);
-          case 'gov':
-            return ResultCounts.get_gov_counts();
+        if(is_gov){
+          const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${latest_dp_doc_key}_results`] > 0 );
+          const counts_by_dept = _.chain(dept_counts)
+            .map( row => ({
+              subject: Dept.lookup(row.id),
+              counts: row,
+            }))
+            .map( obj => ({...obj, total: d3.sum(_.values(obj.counts)) } ) )
+            .value();
+          const gov_counts = _.mergeWith({}, ...dept_counts, (val, src) => _.isNumber(val) ? val + src : src);
+          const num_crs = _.sumBy(counts_by_dept, counts => _.size(counts.subject.crsos));
+          const num_programs = _.sumBy(counts_by_dept, counts => _.reduce(counts.subject.crsos, (sum,crso) => sum+_.size(crso.programs), 0));
+          const depts_with_dps = _.sumBy(counts_by_dept, dept => dept.counts[`${latest_dp_doc_key}_results`] > 0 ? 1 : 0);
+          const depts_with_drrs = _.sumBy(counts_by_dept, dept => dept.counts[`${latest_drr_doc_key}_results`] > 0 ? 1 : 0);
+          
+          return {
+            num_crs,
+            num_programs,
+            depts_with_dps,
+            depts_with_drrs,
+            ...(_.omit(gov_counts, ['id','level','subject_id'])),
+          };
+        } else {
+          return {
+            num_crs: _.size(subject.crsos),
+            num_programs: _.reduce(subject.crsos, (sum,crso) => sum+_.size(crso.programs), 0),
+            ...ResultCounts.get_dept_counts(subject.id),
+          };
         }
       })();
 
@@ -76,16 +104,15 @@ export const declare_results_intro_panel = () => declare_panel({
         return false;
       }
 
-      const summary_counts = {
+      const summary_result_counts = {
         dp_results: verbose_counts[`${latest_dp_doc_key}_results`],
         dp_indicators: verbose_counts[`${latest_dp_doc_key}_indicators`],
         drr_results: verbose_counts[`${latest_drr_doc_key}_results`],
         drr_indicators: verbose_counts[`${latest_drr_doc_key}_total`],
-      };
-
-      const summary_size = {
-        num_crs: _.size(subject.crsos),
-        num_programs: _.reduce(subject.crsos, (sum,crso) => sum+_.size(crso.programs), 0)
+        num_crs: verbose_counts.num_crs,
+        num_programs: verbose_counts.num_programs,
+        depts_with_dps: is_gov ? verbose_counts.depts_with_dps : 1,
+        depts_with_drrs: is_gov ? verbose_counts.depts_with_drrs : 1,
       };
 
       const doc_urls = {
@@ -95,8 +122,8 @@ export const declare_results_intro_panel = () => declare_panel({
 
       return {
         subject,
-        summary_counts,
-        summary_size,
+        is_gov,
+        summary_result_counts,
         doc_urls,
       };
     },

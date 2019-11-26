@@ -11,7 +11,7 @@ results_intro_text:
     and a {{gl_tt "Program Inventory" "PI"}}.
     
     Organizations are made up of {{gl_tt "Core Responsibilities" "CR"}} and {{gl_tt "Programs" "PROG"}} within each Core Responsibility. Core Responsibilities and Programs
-    have {{gl_tt "results" "RESULT"}}. Progress for each result is measured by {{gl_tt "indicator targets" "IND_RESULT"}}.
+    have {{gl_tt "results" "RESULT"}}. Progress for each result is measured by one or more {{gl_tt "indicators" "IND_RESULT"}}, each of which has a target.
   fr: |
     En avril 2018, les organisations de l’administration publique ont adopté une {{gl_tt "nouvelle structure redditionnelle" "DRF"}} fondée sur les résultats.
 
@@ -45,7 +45,7 @@ drr_summary_text:
   transform: [handlebars,markdown]
   en: |
     {{#if is_gov}}
-      In **{{pa_last_year}}**, **{{num_depts}}** organizations sought to achieve **{{fmt_big_int drr_results}}** results.
+      In **{{pa_last_year}}**, **{{fmt_big_int depts_with_drrs}}** organizations sought to achieve **{{fmt_big_int drr_results}}** results.
     {{else}}
       In its **{{pa_last_year}}** {{gl_tt "Departmental Results Report" "DRR"}}, {{subj_name subject}} sought to achieve **{{fmt_big_int drr_results}}** results.
     {{/if}}
