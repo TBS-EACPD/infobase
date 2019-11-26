@@ -394,7 +394,7 @@ const PI_DR_Links = {
   _all(){ return links; }, //debugging purposes
 };
 
-//assumes ensure_loaded: results_summary has been called
+//assumes ensure_loaded: requires_result_counts has been called
 const results_counts_not_loaded_error = "result counts have not yet been loaded!";
 const ResultCounts = {
   data: null,
@@ -432,7 +432,7 @@ const ResultCounts = {
   },
 };
 
-//assumes ensure_loaded: results_summary has been called
+//assumes ensure_loaded: requires_granular_result_counts has been called
 const granular_results_counts_not_loaded_error = "granular result counts have not yet been loaded!";
 const GranularResultCounts = {
   data: null,
@@ -455,12 +455,6 @@ const GranularResultCounts = {
       throw "data has already been set";
     }
     this.data = data;
-  },
-  get_all_crso_counts(){
-    return _.filter(this.data, {level: 'crso'}); 
-  },
-  get_all_program_counts(){
-    return _.filter(this.data, {level: 'program'}); 
   },
 };
 

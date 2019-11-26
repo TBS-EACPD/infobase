@@ -25,8 +25,8 @@ function ensure_loaded({
   has_results,
   results,
   result_docs,
-  require_result_counts,
-  require_granular_result_counts,
+  requires_result_counts,
+  requires_granular_result_counts,
   has_budget_measures,
   budget_measures,
   budget_years,
@@ -65,7 +65,7 @@ function ensure_loaded({
   );
 
   const should_load_result_counts = (
-    require_result_counts ||
+    requires_result_counts ||
     _.chain(panel_keys)
       .map(key => PanelRegistry.lookup(key, subject_level))
       .map('requires_result_counts')
@@ -80,7 +80,7 @@ function ensure_loaded({
   );
 
   const should_load_granular_result_counts = (
-    require_granular_result_counts ||
+    requires_granular_result_counts ||
     _.chain(panel_keys)
       .map(key => PanelRegistry.lookup(key, subject_level))
       .map('requires_granular_result_counts')
