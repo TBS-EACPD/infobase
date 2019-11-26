@@ -28,7 +28,6 @@ gcloud auth activate-service-account --key-file=$scratch/key.json
 export PROJECT=$(lpass show PROD_API_PROJECT_ID --notes)
 
 touch $scratch/envs.yaml
-echo "SHOULD_USE_REMOTE_DB: '$SHOULD_USE_REMOTE_DB'" >> $scratch/envs.yaml
 echo "MDB_NAME: '$MDB_NAME'" >> $scratch/envs.yaml
 
 export MDB_CONNECT_STRING=$(lpass show MDB_CONNECT_STRING_3 --notes)

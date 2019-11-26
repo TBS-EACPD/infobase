@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 function get_connection_str(){
 
-  if(global.IS_DEV_SERVER){
+  if(process.env.USE_LOCAL_DB){
     console.log("using local db")
     return "mongodb://127.0.0.1:27017/infobase";
   }

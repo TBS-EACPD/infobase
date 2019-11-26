@@ -42,7 +42,7 @@ app.use("/", function (req, res, next) {
     }
 
     // eslint-disable-next-line no-console
-    !global.IS_DEV_SERVER && console.log( JSON.stringify(get_log_object_for_request(req), null, 2) );
+    !process.env.USE_LOCAL_DB && console.log( JSON.stringify(get_log_object_for_request(req), null, 2) );
 
     next();
   }
