@@ -258,7 +258,6 @@ jobs:
       - attach_workspace:
           at: ./
       - run: ./scripts/ci_scripts/create_envs.sh
-      - run: ./scripts/ci_scripts/create_deploy_envs.sh
 
       # Checksum all files in data dir, used to determine if the database needs to be populated
       - run: cksum ./data/* > data-checksums.txt
@@ -286,7 +285,6 @@ jobs:
       - attach_workspace:
           at: ./
       - run: ./scripts/ci_scripts/create_envs.sh
-      - run: ./scripts/ci_scripts/create_deploy_envs.sh
 
       - run: ./scripts/ci_scripts/authenticate-server-gcloud.sh
 
