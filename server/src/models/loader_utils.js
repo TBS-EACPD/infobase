@@ -49,26 +49,32 @@ const deep_and_complete_group_by = (attr_path, ids, rows) => {
 };
 //dataloaders for fetching children based on parent key
 export function create_resource_by_foreignkey_attr_dataloader(model, fk_attr){
-  return new DataLoader(async function(fk_ids){
-    const rows = await model.find({
-      [fk_attr]: { "$in": _.uniq(fk_ids) },
-    });
-    const rows_by_id = deep_and_complete_group_by(fk_attr, fk_ids, rows);
-    return _.map(fk_ids, id => rows_by_id[id]);
-  });
+  return new DataLoader(
+    async function(fk_ids){
+      const rows = await model.find({
+        [fk_attr]: { "$in": _.uniq(fk_ids) },
+      });
+      const rows_by_id = deep_and_complete_group_by(fk_attr, fk_ids, rows);
+      return _.map(fk_ids, id => rows_by_id[id]);
+    },
+    { cache: !!process.env.USE_REMOTE_DB }
+  );
 }
 
 
 //dataloaders for fetching rows by id
 export function create_resource_by_id_attr_dataloader(model, id_attr){
-  return new DataLoader(async function(ids){
-    const rows = await model.find({
-      [id_attr]: { "$in": _.uniq(ids) },
-    });
-    const rows_by_id = _.keyBy(
-      rows,
-      (row) => _.get(row, id_attr)
-    );
-    return _.map(ids, id => rows_by_id[id]);
-  });
+  return new DataLoader(
+    async function(ids){
+      const rows = await model.find({
+        [id_attr]: { "$in": _.uniq(ids) },
+      });
+      const rows_by_id = _.keyBy(
+        rows,
+        (row) => _.get(row, id_attr)
+      );
+      return _.map(ids, id => rows_by_id[id]);
+    },
+    { cache: !!process.env.USE_REMOTE_DB }
+  );
 }
