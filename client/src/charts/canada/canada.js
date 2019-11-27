@@ -5,11 +5,11 @@ import {
   businessConstants,
   declarative_charts,
   NivoResponsiveHBar,
-  hex_to_rgb,
-  Canada,
-} from "../panels/shared.js"; 
+} from "../../panels/shared.js";
+import { Canada_D3_Component } from './canada_d3_component.js';
+import { hex_to_rgb } from '../../general_utils.js';
 import { Fragment } from 'react';
-import { trivial_text_maker } from '../models/text.js';
+import { trivial_text_maker } from '../../models/text.js';
 
 const { GraphLegend } = declarative_charts;
 const { provinces } = businessConstants;
@@ -22,19 +22,15 @@ const get_graph_color = (alpha) => {
 };
 
 const format_prov_data = (prov, years_by_province, context_years) => {
-  var prov_data;
-  if(prov==="Canada"){
-    prov_data = _.map(years_by_province,(data,ix) => ({
+  const prov_data = prov ?
+    _.map(years_by_province,(data,ix) => ({year: run_template(context_years[ix]), value: data[prov]}))
+    : _.map(years_by_province,(data,ix) => ({
       year: run_template(context_years[ix]),
       value: _.chain(data)
         .values()
         .sum()
         .value(),
     }));
-  } else {
-    prov_data = _.map(years_by_province,(data,ix) => ({year: run_template(context_years[ix]), value: data[prov]}));
-  }
-
   return _.reverse(prov_data);
 };
 
@@ -55,7 +51,7 @@ class CanadaGraphBarLegend extends React.Component {
       if (includeNcr && (prov === 'on' || prov === 'qc')){
         prov += "lessncr";
       }
-      return `${trivial_text_maker("five_year_history")} ${prov === "Canada" ? prov : provinces[prov].text}`;
+      return `${trivial_text_maker("five_year_history")} ${prov ? provinces[prov].text : prov}`;
     };
 
     const formatted_data = format_prov_data(prov, years_by_province, context_years);
@@ -126,7 +122,7 @@ class CanadaGraph extends React.Component {
 
     const ticks = _.map(context_years, y => `${run_template(y)}`);
     
-    const canada_graph = new Canada(graph_area_sel.node(), {
+    const canada_graph = new Canada_D3_Component(graph_area_sel.node(), {
       color: get_graph_color(1),
       data: years_by_province,
       ticks: ticks,
@@ -143,7 +139,7 @@ class CanadaGraph extends React.Component {
     canada_graph.dispatch.on('dataMouseLeave', () => {
       _.delay(() => {
         if (!active_prov) {
-          prov_callback("Canada");
+          prov_callback(null);
         }
       }, 200);
       active_prov = false;
@@ -153,11 +149,11 @@ class CanadaGraph extends React.Component {
   }
 }
 
-export class ExtendedCanada extends React.Component{
+export class Canada extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      prov: "Canada",
+      prov: null,
     };
   }
 

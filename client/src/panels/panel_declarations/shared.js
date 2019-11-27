@@ -20,7 +20,6 @@ import { GlossaryEntry } from '../../models/glossary.js';
 
 import * as declarative_charts from '../../charts/declarative_charts.js';
 import { NivoResponsiveBar, NivoResponsiveHBar, NivoResponsiveLine, NivoResponsivePie, get_formatter } from '../../charts/NivoCharts.js';
-import { Canada } from '../../charts/canada.js';
 import { FlatTreeMapViz } from '../../charts/flat_treemap/FlatTreeMapViz.js';
 
 import { rpb_link, get_appropriate_rpb_subject } from '../../rpb/rpb_link.js';
@@ -497,7 +496,6 @@ export {
   NivoResponsiveHBar,
   NivoResponsiveLine,
   NivoResponsivePie,
-  Canada,
   FlatTreeMapViz,
   breakpoints,
   SpinnerWrapper,

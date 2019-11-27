@@ -5,5 +5,7 @@ tp_by_region_title:
 
 tp_by_region_text: 
   transform: [handlebars]
-  en: hello
-  fr: bonjour
+  en: 
+    hello
+  fr: 
+    bonjour

@@ -10,8 +10,8 @@
 //  with the array ordered by fiscal year
 //
 
-import graphRegistry from "./graphRegistry.js";
-import { businessConstants } from '../models/businessConstants.js';
+import graphRegistry from "../graphRegistry.js";
+import { businessConstants } from '../../models/businessConstants.js';
 import { canada_svg } from "./canada.yaml";
 
 const { provinces, provinces_short } = businessConstants;
@@ -36,7 +36,7 @@ const ordering = {
   pe: 16,
 };
 
-export class Canada {
+export class Canada_D3_Component {
   
   constructor(container, options){
 

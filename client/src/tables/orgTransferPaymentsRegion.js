@@ -1,16 +1,11 @@
 import text from './orgTransferPaymentsRegion.yaml';
 import {
-  stats, 
   trivial_text_maker, 
-  m, 
-  Statistics, 
-  format, 
-  people_five_year_percentage_formula,
+  m,
   businessConstants,
   years,
 } from "./table_common";
 
-const { formats } = format;
 const { provinces } = businessConstants;
 const { 
   std_years, 
@@ -20,7 +15,6 @@ const {
 export default {
   text,
   id: "orgTransferPaymentsRegion",
-  //legacy_id: "table10",
   source: ["PA"],
   "tags": [
     "PA",
@@ -30,8 +24,8 @@ export default {
   ],
 
   "link": {
-    //"en": "",
-    //"fr": "",
+    "en": "",
+    "fr": "",
   },
 
   "name": {
@@ -76,8 +70,8 @@ export default {
         "nick": header,
         "header": m("{{mar_31}}") + ", " + years_short[ix],
         "description": {
-          //"en": "Corresponds to the active employee population by Geographic Region, as of March 31 " + years_short[ix],
-          //"fr": "Correspond à l'effectif actif par région géographique, au 31 mars " + years_short[ix],
+          "en": "Corresponds to the transfer payments by Geographic Region, as of March 31 " + years_short[ix],
+          "fr": "Correspond à paiements de transfert par région géographique, au 31 mars " + years_short[ix],
         },
       });
     });
@@ -90,9 +84,8 @@ export default {
         "en": trivial_text_maker("five_year_percent_description"),
         "fr": trivial_text_maker("five_year_percent_description"),
       },
-      "formula": people_five_year_percentage_formula("region",people_years),
-    });
-    */
+      "formula": people_five_year_percentage_formula("region",std_years),
+    });*/
   },
 
   "mapper": function (row) {
