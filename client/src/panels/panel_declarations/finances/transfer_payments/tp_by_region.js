@@ -10,10 +10,9 @@ import {
   Col,
   declarative_charts,
 } from "../shared";
-import { ExtendedCanada } from '../../../../charts/extended_canada.js';
+import { Canada } from '../../charts/canada/index.js';
 
 const { std_years } = years;
-const context_years = std_years;
 const formatter = formats["compact2_raw"];
 const includeNcr = false;
 
@@ -29,7 +28,7 @@ const calculate_common = (years_by_province) => {
   return {
     years_by_province,
     color_scale,
-    context_years,
+    context_years: std_years,
     formatter,
     includeNcr,
   };
@@ -46,29 +45,20 @@ const calculate_funcs_by_level = {
   },
 };
 
-const prepare_data_for_a11y_table = (years_by_province) => {
-  const total_tp = _.chain(years_by_province)
-    .map( year_by_province => d3.sum( _.values(year_by_province) ) )
-    .reduce( (sum, value) => sum + value, 0)
-    .value();
-  
-  return _.chain(provinces)
+const prepare_data_for_a11y_table = (years_by_province) =>
+  _.chain(provinces)
     .map((province, prov_code) => {
       if(prov_code!="onlessncr" && prov_code!="qclessncr" && prov_code!="ncr"){
-        const yearly_tp = _.map(years_by_province, (year_by_province) => year_by_province[prov_code]);
         const formatted_yearly_tp = _.map(years_by_province, (year_by_province) => formats["compact2_written_raw"](year_by_province[prov_code]));
-        const five_year_avg_share = d3.sum(yearly_tp)/total_tp;
-        const formatted_avg_share = formats["percentage1_raw"](five_year_avg_share);
 
         return {
           label: province.text,
-          data: [...formatted_yearly_tp, formatted_avg_share],
+          data: formatted_yearly_tp,
         };
       }
     })
     .filter((data) => !_.isUndefined(data))
     .value();
-};
 
 export const declare_tp_by_region_panel = () => declare_panel({
   panel_key: "tp_by_region",
@@ -97,7 +87,7 @@ export const declare_tp_by_region_panel = () => declare_panel({
           </Col>
           { !window.is_a11y_mode &&
             <Col size={12} isGraph>
-              <ExtendedCanada
+              <Canada
                 graph_args={graph_args}
               />
             </Col>
@@ -106,7 +96,7 @@ export const declare_tp_by_region_panel = () => declare_panel({
             <Col size={12} isGraph>
               <A11YTable
                 label_col_header = {text_maker("prov")}
-                data_col_headers = {[..._.map( context_years, y => run_template(y) ), text_maker("five_year_percent_header")]}
+                data_col_headers = {_.map( std_years, y => run_template(y) )}
                 data = { prepare_data_for_a11y_table(years_by_province) }
               />
             </Col>

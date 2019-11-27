@@ -1,18 +1,14 @@
 orgTransferPaymentsRegion_short:
   transform: [handlebars,embeded-markdown,markdown]
   en: |
-    This is for transfer payments region
+    TODO
   fr: |
-    hello
+    TODO
 orgTransferPaymentsRegion:
   transform: [handlebars,embeded-markdown,markdown]
   en: |
     {{{gt "orgTransferPaymentsRegion_short"}}}
 
-    {{> ochro_includes_excludes_en}}
-
   fr: |
     {{{gt "orgTransferPaymentsRegion_short"}}}
-
-    {{> ochro_includes_excludes_fr}}
 
