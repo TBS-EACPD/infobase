@@ -32,5 +32,4 @@ trap print_captured_output EXIT
 
 wait $ib_prod_pid
 wait $a11y_prod_pid
-
-kill -9 $spinner_pid
+exit
