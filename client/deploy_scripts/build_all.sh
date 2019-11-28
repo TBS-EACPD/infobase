@@ -14,4 +14,4 @@ wait $ib_prod_pid
 cat /tmp/ib_prod_build_output
 
 wait $a11y_prod_pid
-cat /tmp/ia11y_prod_build_output
+cat /tmp/a11y_prod_build_output
