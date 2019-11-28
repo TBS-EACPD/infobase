@@ -9,11 +9,15 @@ RUN adduser -h ${SERVICE_HOME} -s /sbin/nologin -u 1000 -D ${SERVICE_USER} && \
   apk add --no-cache \
     git \
     bash \
-    ca-certificates
+    curl \
+    ca-certificates && \
+  curl -sSL https://sdk.cloud.google.com | bash && \
+  curl https://storage.googleapis.com/pub/gsutil.tar.gz && tar xfz gsutil.tar.gz -C $HOME && rm gsutil.tar.gz
+ENV PATH ${PATH}:$HOME/gsutil
+
 # image specific
 RUN apk add --no-cache \
-  openssh \
-  curl
+  openssh
 
 USER    ${SERVICE_USER}
 WORKDIR ${SERVICE_HOME}
