@@ -4,6 +4,7 @@ const path = require('path');
 const gitsha = require('git-bundle-sha');
 const { create_config } = require('./webpack_common.js');
 const ip = require('ip');
+const _ = require('lodash');
 
 const build_dir_name = process.env.BUILD_DIR || "build";
 const args = process.argv;
@@ -16,7 +17,8 @@ function choose(name){
 
 const prod = !!choose('PROD');
 const babel = !choose('NO-BABEL');
-const both = !!choose('BOTH');
+const en = !!choose('EN');
+const fr = !!choose('FR');
 const no_watch = !!choose("NO-WATCH");
 const stats = !!choose("STATS");
 const stats_baseline = !!choose("STATS-BASELINE");
@@ -48,11 +50,16 @@ const options_by_app = {
   },
 };
 
+const langs = _.chain([en && "en", fr && "fr"])
+  .compact()
+  .thru( langs => _.isEmpty(langs) ? ["en"] : langs )
+  .value();
+
 console.log(`
   app: ${app},
   prod: ${prod}, 
-  babel: ${babel}, 
-  both languages: ${both}
+  babel: ${babel},
+  languages: ${langs},
 `);
 
 
@@ -61,7 +68,6 @@ gitsha(function(err, commit_sha){
 
   const app_options = options_by_app[app];
 
-  const langs = both ? [ 'en', 'fr' ] : ['en'];
   const config = langs.map(lang => create_config({
     commit_sha,
     language: lang,
