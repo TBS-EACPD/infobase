@@ -15,7 +15,12 @@ npm run a11y_prod_no_watch > $scratch/a11y_prod_build_out 2> $scratch/a11y_prod_
 a11y_prod_pid=$!
 
 
+spinner_pid=$(sh ../scripts/spinner.sh)
+
+
 function print_captured_output {
+  kill -9 $spinner_pid
+
   cat $scratch/ib_prod_build_out
   cat $scratch/ib_prod_build_err
 
@@ -27,3 +32,5 @@ trap print_captured_output EXIT
 
 wait $ib_prod_pid
 wait $a11y_prod_pid
+
+kill -9 $spinner_pid
