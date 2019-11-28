@@ -4,14 +4,16 @@ set -e # will exit if any command has non-zero exit value
 
 npm run IB_base
 
-npm run IB_prod_no_watch > /tmp/ib_prod_build_output &
+scratch=$(mktemp -d -t build_all_logs.XXXXXXXXXX)
+
+npm run IB_prod_no_watch > $scratch/ib_prod_build_output &
 ib_prod_pid=$!
 
-npm run a11y_prod_no_watch > /tmp/a11y_prod_build_output &
+npm run a11y_prod_no_watch > $scratch/a11y_prod_build_output &
 a11y_prod_pid=$!
 
 wait $ib_prod_pid
-cat /tmp/ib_prod_build_output
+cat $scratch/ib_prod_build_output
 
 wait $a11y_prod_pid
-cat /tmp/a11y_prod_build_output
+cat $scratch/a11y_prod_build_output
