@@ -6,6 +6,7 @@ set -e # will exit if any command has non-zero exit value
 npm run IB_base
 
 
+# Run standard and a11y builds in parallel as background processes, store thieir stdout and stderr in temp files and hold on to their pids
 scratch=$(mktemp -d -t captured_build_output.XXXXXXXXXX)
 
 npm run IB_prod_no_watch > $scratch/ib_prod_build_out 2> $scratch/ib_prod_build_err &
@@ -14,10 +15,11 @@ ib_prod_pid=$!
 npm run a11y_prod_no_watch > $scratch/a11y_prod_build_out 2> $scratch/a11y_prod_build_err &
 a11y_prod_pid=$!
 
-
+# Start a spinner going in the terminal meanwhile, hold on to its pid to stop it later
 spinner_pid=$(sh ../scripts/spinner.sh)
 
 
+# When exiting, either from finishing, being killed, or throwing an error, kill the spinner and dump the captured build process output to terminal
 function print_captured_output {
   kill -9 $spinner_pid
 
