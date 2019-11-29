@@ -18,7 +18,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   test_email_backend:
     docker:
-      - image: eaadtbs/ib-ci-build:latest
+      - image: eaadtbs/ib-ci-build:merge-ci-jobs
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -62,7 +62,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   cleanup_dev_dbs:
     docker:
-      - image: eaadtbs/ib-ci-test:latest
+      - image: eaadtbs/ib-ci-test:merge-ci-jobs
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -89,7 +89,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   build:
     docker:
-      - image: eaadtbs/ib-ci-build:latest
+      - image: eaadtbs/ib-ci-build:merge-ci-jobs
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -174,7 +174,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test_server:
     docker:
-      - image: eaadtbs/ib-ci-test:latest
+      - image: eaadtbs/ib-ci-test:merge-ci-jobs
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -215,7 +215,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test_end_to_end: # slower but more in-depth than the test job. Wait until these have passed before deploying the client
     docker:
-      - image: eaadtbs/ib-ci-test:latest
+      - image: eaadtbs/ib-ci-test:merge-ci-jobs
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -252,7 +252,7 @@ jobs:
   deploy_data:
     working_directory: "~/InfoBase"
     docker:
-      - image: eaadtbs/ib-ci-test:latest
+      - image: eaadtbs/ib-ci-test:merge-ci-jobs
         <<: *dockerhub_auth
     steps:
       - attach_workspace:
