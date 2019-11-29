@@ -11,7 +11,47 @@ const get_dept_services_query = (years_to_load) => gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
     org(org_id: $id) {
-      id
+      org_id
+      ${_.map(years_to_load,
+          year => `
+            services()
+            service_id
+            program_ids
+            year: String
+            is_active: Boolean
+
+            name: String
+            description: String
+            service_type: [String]
+            scope: [String]
+            target_groups: [String]
+            feedback_channels: [String]
+            urls: [String]
+            comment: String
+
+            last_gender_analysis: String
+
+            collects_fees: Boolean
+            cra_buisnss_number_is_identifier: Boolean
+            sin_is_identifier: Boolean
+            account_reg_digital_status: Boolean
+            authentication_status: Boolean
+            application_digital_status: Boolean
+            decision_digital_status: Boolean
+            issuance_digital_status: Boolean
+            issue_res_digital_status: Boolean
+            digital_enablement_comment: String
+
+            telephone_enquires: Float
+            website_visits: Float
+            online_applications: Float
+            in_person_applications: Float
+            mail_applications: Float
+            other_channel_applications: Float
+
+            standards: [ServiceStandard]
+            `
+        )}
       ${program_results_fragment(docs_to_load)}
     }
   }
