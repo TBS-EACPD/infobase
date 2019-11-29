@@ -28,7 +28,6 @@ export const declare_services_intro_panel = () => declare_panel({
     requires_result_counts: true,
     calculate: () => { return true; },
     footnotes: false,
-    source: (subject) => [get_source_links(["SERVICES"])],
     render({ calculations, sources}){
       return (
         <InfographicPanel
