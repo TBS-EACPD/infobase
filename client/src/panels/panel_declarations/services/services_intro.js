@@ -15,7 +15,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 const ServicesIntroPanel = () => {
   return (
     <div>
-      {text_maker("omg")}
+      {text_maker("services_intro_text")}
     </div>
   );
 };
@@ -32,7 +32,7 @@ export const declare_services_intro_panel = () => declare_panel({
     render({ calculations, sources}){
       return (
         <InfographicPanel
-          title={"TODO"}
+          title={text_maker("services_intro_title")}
           sources={sources}
         >
           <ServicesIntroPanel

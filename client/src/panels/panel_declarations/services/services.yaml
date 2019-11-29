@@ -1,3 +1,8 @@
-omg:
-  en: omg
-  fr: wtf
+services_intro_title:
+  en: Service Inventory
+  fr: Répertoire de services
+
+services_intro_text:
+  en: The Service Inventory provides a corporate-wide perspective on information related to Government of Canada services.
+  fr: Répertoire de services fournit une perspective pangouvernementale des services du gouvernement du Canada.
+
