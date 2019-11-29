@@ -76,3 +76,7 @@ export {
   declare_gov_drr_panel,
   declare_gov_dp_panel,
 } from './results/index.js';
+
+export {
+  declare_services_intro_panel,
+} from './services/index.js';

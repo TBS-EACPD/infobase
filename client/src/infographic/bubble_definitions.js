@@ -63,6 +63,14 @@ export const bubble_defs = {
     tables: [],
     svg_content: svgs.results.text,
   },
+  services: {
+    ix: 17,
+    id: "services",
+    title: _.constant(text.services_title[lang]),
+    description: _.constant(text.services_desc[lang]),
+    tables: [],
+    svg_content: svgs.services.text,
+  },
   related: {
     ix: 20,
     id: 'related',

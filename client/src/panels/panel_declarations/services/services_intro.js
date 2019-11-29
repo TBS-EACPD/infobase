@@ -14,7 +14,9 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesIntroPanel = () => {
   return (
-      "omg"
+    <div>
+      {text_maker("omg")}
+    </div>
   );
 };
   
