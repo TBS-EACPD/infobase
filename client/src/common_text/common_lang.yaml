@@ -941,8 +941,21 @@ all_orgs:
   en: All organizations
   fr: Toutes les organisations
 
+service:
+  en: Service
+  fr: Service
 
+services:
+  en: Services
+  fr: Services
 
+service_standard:
+  en: Service Standard
+  fr: Norme de service
+
+service_standards:
+  en: Service Standards
+  fr: Normes de service
 
 dp_spending:
   transform: [handlebars]
