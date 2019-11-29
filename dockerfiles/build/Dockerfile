@@ -16,6 +16,7 @@ USER ${SERVICE_USER}
 RUN curl -sSL https://sdk.cloud.google.com | bash && \
   exec sh && \
   gcloud init
+ENV PATH $SERVICE_HOME/google-cloud-sdk/bin:$PATH
 USER root
 
 # image specific
