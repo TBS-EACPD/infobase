@@ -5,7 +5,7 @@ import {
   businessConstants,
   declarative_charts,
   NivoResponsiveHBar,
-} from "../../panels/shared.js";
+} from "../../panels/panel_declarations/shared.js";
 import { Canada_D3_Component } from './canada_d3_component.js';
 import { hex_to_rgb } from '../../general_utils.js';
 import { Fragment } from 'react';
