@@ -9,8 +9,8 @@ import {
   StdPanel,
   Col,
   declarative_charts,
-} from "../shared";
-import { Canada } from '../../charts/canada/index.js';
+} from "../../shared.js";
+import { Canada } from '../../../../charts/canada/index.js';
 
 const { std_years } = years;
 const formatter = formats["compact2_raw"];
@@ -73,9 +73,8 @@ export const declare_tp_by_region_panel = () => declare_panel({
         footnotes,
         sources,
       } = render_args;
-  
-      const { graph_args } = calculations;
-      const { years_by_province } = graph_args;
+      const { panel_args } = calculations;
+      const { years_by_province } = panel_args;
 
       return (
         <StdPanel
@@ -88,7 +87,7 @@ export const declare_tp_by_region_panel = () => declare_panel({
           { !window.is_a11y_mode &&
             <Col size={12} isGraph>
               <Canada
-                graph_args={graph_args}
+                graph_args={panel_args}
               />
             </Col>
           }
