@@ -168,7 +168,7 @@ export class Canada extends React.Component{
     } = graph_args;
 
     const legend_items = _.map( color_scale.ticks(5).reverse(), (tick) => ({
-      label: `${formats["compact_raw"](tick)}+`,
+      label: `${formatter(tick)}+`,
       active: true,
       id: tick,
       color: get_graph_color( color_scale(tick) ),
