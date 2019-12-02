@@ -1,6 +1,5 @@
 import text from './orgTransferPaymentsRegion.yaml';
 import {
-  trivial_text_maker, 
   m,
   businessConstants,
   years,
@@ -75,17 +74,6 @@ export default {
         },
       });
     });
-    /*
-    this.add_col({
-      "type": "percentage1",
-      "nick": "five_year_percent",
-      "header": trivial_text_maker("five_year_percent_header"),
-      "description": {
-        "en": trivial_text_maker("five_year_percent_description"),
-        "fr": trivial_text_maker("five_year_percent_description"),
-      },
-      "formula": people_five_year_percentage_formula("region",std_years),
-    });*/
   },
 
   "mapper": function (row) {

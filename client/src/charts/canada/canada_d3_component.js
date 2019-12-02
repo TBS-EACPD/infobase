@@ -36,7 +36,7 @@ const ordering = {
   pe: 16,
 };
 
-export class Canada_D3_Component {
+export class CanadaD3Component {
   
   constructor(container, options){
 
