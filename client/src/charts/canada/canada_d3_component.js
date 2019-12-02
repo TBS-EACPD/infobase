@@ -167,6 +167,9 @@ export class Canada_D3_Component {
           .filter(function(){ 
             return d3.select(this).attr("id") === `label-${prov_key}`;
           });
+        prov_key === "on" && !includeNcr ?
+          label.attr("transform", `translate(${label.node().transform.baseVal[0].matrix.e * 1.1},${label.node().transform.baseVal[0].matrix.f})`)
+          : null;
 
         const coords = label.attr("transform")
           .replace(/(translate\(|\)|)/g,"")
@@ -243,6 +246,6 @@ export class Canada_D3_Component {
       provinces_with_optional_markers,
       (prov_key) => `path#CA-${prov_key}-Marker`
     );
-    !includeNcr ? hide_map_components("path#CA-ncr") : null;
+    !includeNcr ? hide_map_components("path#CA-ncr") && hide_map_components("path#CA-ncr-Marker") : null;
   };
 }
