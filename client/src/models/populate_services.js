@@ -2,8 +2,7 @@ import { get_client } from '../graphql_utils.js';
 import gql from 'graphql-tag';
 import { log_standard_event } from '../core/analytics.js';
 import { 
-  Service, 
-  ServiceStandard, 
+  Service,
 } from './services.js';
 
 const { service_years } = Service;

@@ -210,6 +210,7 @@ function ensure_loaded({
     footnotes_prom,
     has_budget_measures_prom,
     budget_measures_prom,
+    services_prom,
     horizontal_initiative_lookups_prom,
   ]);
 }
