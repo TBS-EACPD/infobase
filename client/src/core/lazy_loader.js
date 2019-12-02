@@ -31,6 +31,8 @@ function ensure_loaded({
   has_budget_measures,
   budget_measures,
   budget_years,
+  services,
+  service_years,
   footnotes_for: footnotes_subject,
 }){
   const table_set = _.chain( table_keys )
@@ -121,7 +123,7 @@ function ensure_loaded({
   );
 
   const should_load_services = (
-    budget_measures ||
+    services ||
     _.chain(panel_keys)
       .map(key => PanelRegistry.lookup(key, subject_level))
       .map('requires_services')
