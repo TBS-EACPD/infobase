@@ -166,10 +166,10 @@ export class Canada_D3_Component {
         const label = svg.selectAll("g.label")
           .filter(function(){ 
             return d3.select(this).attr("id") === `label-${prov_key}`;
-          });
+          });/*
         prov_key === "on" && !includeNcr ?
           label.attr("transform", `translate(${label.node().transform.baseVal[0].matrix.e * 1.1},${label.node().transform.baseVal[0].matrix.f})`)
-          : null;
+          : null;*/
 
         const coords = label.attr("transform")
           .replace(/(translate\(|\)|)/g,"")
