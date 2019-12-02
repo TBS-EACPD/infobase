@@ -450,6 +450,7 @@ export function api_load_results_bundle(subject, result_docs){
         doc => {
           _.setWith(_api_subject_ids_with_loaded_results, `${doc}.${level}.${id}`, true, Object);
 
+          // can't tell us if subject has no results for any doc, just if it has any for current doc, so only update the _subject_has_results entry if positive
           _subject_has_results[id] = _.nonEmpty(results) || _subject_has_results[id]; // side effect
         }
       );
@@ -581,7 +582,8 @@ export function api_load_results_counts(level = "summary"){
         }
         api_is_results_count_loaded[level] = true;
 
-        _.each( mapped_rows, ({id}) => _subject_has_results[id] = _.nonEmpty(mapped_rows) || _subject_has_results[id] ); // side effect
+        // if it's in the results count set, it has results data
+        _.each( mapped_rows, ({id}) => _subject_has_results[id] = true ); // side effect
 
         return Promise.resolve();
       })
