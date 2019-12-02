@@ -1,16 +1,12 @@
-
-import {
-  run_template,
-  businessConstants,
-  declarative_charts,
-  NivoResponsiveHBar,
-} from "../../panels/panel_declarations/shared.js";
-import { Canada_D3_Component } from './canada_d3_component.js';
+import { GraphLegend } from "../declarative_charts.js";
+import { NivoResponsiveHBar } from "../NivoCharts.js";
+import { run_template } from "../../models/text.js";
+import { businessConstants } from "../../models/businessConstants.js";
+import { CanadaD3Component } from './canada_d3_component.js';
 import { hex_to_rgb } from '../../general_utils.js';
 import { Fragment } from 'react';
 import { trivial_text_maker } from '../../models/text.js';
 
-const { GraphLegend } = declarative_charts;
 const { provinces } = businessConstants;
 
 const graph_color = window.infobase_color_constants.secondaryColor;
@@ -121,7 +117,7 @@ class CanadaGraph extends React.Component {
 
     const ticks = _.map(context_years, y => `${run_template(y)}`);
     
-    const canada_graph = new Canada_D3_Component(graph_area_sel.node(), {
+    const canada_graph = new CanadaD3Component(graph_area_sel.node(), {
       color: get_graph_color(1),
       data: years_by_province,
       ticks: ticks,

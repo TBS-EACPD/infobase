@@ -48,7 +48,7 @@ const calculate_funcs_by_level = {
 const prepare_data_for_a11y_table = (years_by_province) =>
   _.chain(provinces)
     .map((province, prov_code) => {
-      if(prov_code!="onlessncr" && prov_code!="qclessncr" && prov_code!="ncr"){
+      if( !_.includes(["onlessncr", "qclessncr", "ncr"], prov_code)){
         const formatted_yearly_tp = _.map(years_by_province, (year_by_province) => formats["compact2_written_raw"](year_by_province[prov_code]));
 
         return {
