@@ -25,6 +25,11 @@ query($lang: String!, $id: String) {
 `;
 const _subject_has_results = {}; // This is also populated as a side effect of api_load_results_bundle and api_load_results_counts calls
 export function subject_has_results(subject){
+  if ( !_.isNull( subject.has_data('results_data') ) ){
+    // short curicuit if already set, this isn't a status that changes durring a session
+    return Promise.resolve();
+  }
+
   const { id } = subject;
 
   const level = subject.level === "dept" ? "org" : subject.level;
