@@ -4,6 +4,7 @@ import { Statistics, tables_for_statistics } from './Statistics.js';
 import { api_load_results_bundle, api_load_results_counts, subject_has_results } from '../models/populate_results.js';
 import { load_footnotes_bundle } from '../models/populate_footnotes.js';
 import { api_load_subject_has_measures, api_load_budget_measures } from '../models/populate_budget_measures.js';
+import { api_load_services } from '../models/populate_services.js';
 import { load_horizontal_initiative_lookups } from '../models/populate_horizontal_initiative_lookups.js';
 
 // given an array of tables, returns a promise when they are all loaded.
@@ -119,6 +120,15 @@ function ensure_loaded({
     _.isUndefined(subject.lookups)
   );
 
+  const should_load_services = (
+    budget_measures ||
+    _.chain(panel_keys)
+      .map(key => PanelRegistry.lookup(key, subject_level))
+      .map('requires_services')
+      .some()
+      .value()
+  );
+
 
   const result_docs_to_load = !_.isEmpty(result_docs) ?
     result_docs :
@@ -174,6 +184,12 @@ function ensure_loaded({
   const budget_measures_prom = (
     should_load_budget_measures ?
       api_load_budget_measures(subject, budget_years) :
+      Promise.resolve()
+  );
+
+  const services_prom = (
+    should_load_services ?
+      api_load_services(subject, service_years) :
       Promise.resolve()
   );
 
