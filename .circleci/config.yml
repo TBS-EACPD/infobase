@@ -1,14 +1,13 @@
-dockerhub_auth: &dockerhub_auth
-  auth:
-    username: $DOCKERHUB_USERNAME
-    password: $DOCKERHUB_PASSWORD
-
 build_image: &build_image
   - image: eaadtbs/ib-ci-build:v1.1
-    <<: *dockerhub_auth
+    auth:
+      username: $DOCKERHUB_USERNAME
+      password: $DOCKERHUB_PASSWORD
 test_image: &test_image
   - image: eaadtbs/ib-ci-test:v1.1
-    <<: *dockerhub_auth
+    auth:
+      username: $DOCKERHUB_USERNAME
+      password: $DOCKERHUB_PASSWORD
 
 # yaml fragment for deploy filters
 deploy_filter: &deploy_filter 
@@ -24,7 +23,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   test_email_backend:
     docker:
-      <<: *build_image
+      *build_image
     working_directory: "~/InfoBase"
     steps:
       - checkout:
@@ -54,7 +53,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   cleanup_dev_dbs:
     docker:
-      <<: *build_image
+      *build_image
     working_directory: "~/InfoBase"
     steps:
       - checkout:
@@ -80,7 +79,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   build:
     docker:
-      <<: *build_image
+      *build_image
     working_directory: "~/InfoBase"
     steps:
       - checkout:
@@ -164,7 +163,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test_server:
     docker:
-      <<: *build_image
+      *build_image
     working_directory: "~/InfoBase"
     steps:
       - attach_workspace:
@@ -192,7 +191,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test_end_to_end: # slower but more in-depth than the test job. Wait until these have passed before deploying the client
     docker:
-      <<: *build_image
+      *build_image
     working_directory: "~/InfoBase"
     steps:
       - attach_workspace:
@@ -228,7 +227,7 @@ jobs:
   deploy_data:
     working_directory: "~/InfoBase"
     docker:
-      <<: *build_image
+      *build_image
     steps:
       - attach_workspace:
           at: ./
