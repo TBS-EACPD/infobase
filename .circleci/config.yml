@@ -3,6 +3,13 @@ dockerhub_auth: &dockerhub_auth
     username: $DOCKERHUB_USERNAME
     password: $DOCKERHUB_PASSWORD
 
+build_image: &build_image
+  - image: eaadtbs/ib-ci-build:v1.1
+    <<: *dockerhub_auth
+test_image: &test_image
+  - image: eaadtbs/ib-ci-test:v1.1
+    <<: *dockerhub_auth
+
 # yaml fragment for deploy filters
 deploy_filter: &deploy_filter 
   filters:
@@ -14,12 +21,10 @@ deploy_filter: &deploy_filter
 version: 2
 jobs:
 
-
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   test_email_backend:
     docker:
-      - image: eaadtbs/ib-ci-build:v1.1
-        <<: *dockerhub_auth
+      <<: *build_image
     working_directory: "~/InfoBase"
     steps:
       - checkout:
@@ -49,8 +54,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   cleanup_dev_dbs:
     docker:
-      - image: eaadtbs/ib-ci-test:v1.1
-        <<: *dockerhub_auth
+      <<: *build_image
     working_directory: "~/InfoBase"
     steps:
       - checkout:
@@ -76,8 +80,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   build:
     docker:
-      - image: eaadtbs/ib-ci-build:v1.1
-        <<: *dockerhub_auth
+      <<: *build_image
     working_directory: "~/InfoBase"
     steps:
       - checkout:
@@ -161,8 +164,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test_server:
     docker:
-      - image: eaadtbs/ib-ci-test:v1.1
-        <<: *dockerhub_auth
+      <<: *build_image
     working_directory: "~/InfoBase"
     steps:
       - attach_workspace:
@@ -190,8 +192,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test_end_to_end: # slower but more in-depth than the test job. Wait until these have passed before deploying the client
     docker:
-      - image: eaadtbs/ib-ci-test:v1.1
-        <<: *dockerhub_auth
+      <<: *build_image
     working_directory: "~/InfoBase"
     steps:
       - attach_workspace:
@@ -227,8 +228,7 @@ jobs:
   deploy_data:
     working_directory: "~/InfoBase"
     docker:
-      - image: eaadtbs/ib-ci-test:v1.1
-        <<: *dockerhub_auth
+      <<: *build_image
     steps:
       - attach_workspace:
           at: ./
