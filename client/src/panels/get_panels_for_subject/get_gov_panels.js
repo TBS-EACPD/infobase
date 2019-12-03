@@ -12,7 +12,7 @@ import {
   // shared gov, dept
   declare_links_to_rpb_panel,
   declare_in_year_voted_stat_split_panel,
-  //declare_in_year_estimates_split_panel,
+  declare_in_year_estimates_split_panel,
   declare_historical_g_and_c_panel,
   declare_auth_exp_prog_spending_panel,
   declare_people_key_concepts_panel,
@@ -46,7 +46,7 @@ export const get_gov_panels = subject => ({
     declare_welcome_mat_panel(),
     declare_budget_measures_panel(),
     declare_auth_exp_prog_spending_panel(),
-    //declare_in_year_estimates_split_panel(),//turned off until supps A
+    declare_in_year_estimates_split_panel(),//turned off until supps A
     declare_in_year_voted_stat_split_panel(),
     declare_in_year_stat_breakdown_panel(),
     declare_in_year_voted_breakdown_panel(),

@@ -1,4 +1,4 @@
-"""dept_code""","vote_num","vs_type","name_en","name_fr","doc","est_last_year_4","est_last_year_3","est_last_year_2","est_last_year","est_in_year"
+"dept_code","vote_num","vs_type","name_en","name_fr","doc","est_last_year_4","est_last_year_3","est_last_year_2","est_last_year","est_in_year"
 "ACOA",1,1,"Operating and Program","Fonctionnement and Programme","ME",64399896,64222120,63351960,66292642,65905491
 "ACOA",1,1,"Operating and Program","Fonctionnement and Programme","VA",3252679,3219995,6586778,0,0
 "ACOA",10,7,"Launching a Federal Strategy on Jobs and Tourism","Lancement d'une stratégie fédérale sur l'emploi et le tourisme","ME",,,,,2091224

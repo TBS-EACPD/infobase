@@ -35,7 +35,6 @@ const estimates_split_calculate = function(subject, info, options){
     },
   };
 };
-//NOTE: Once supps A comes out, we'll need to switch all the est_last_year to est_in_year, here, in the titles and in the text.
 
 const estimates_split_render_w_text_key = text_key => ({calculations, footnotes, sources}) => {
   const {
