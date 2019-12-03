@@ -25,67 +25,70 @@ query($lang: String!, $id: String) {
 `;
 const _subject_has_results = {}; // This is also populated as a side effect of api_load_results_bundle and api_load_results_counts calls
 export function subject_has_results(subject){
-  if ( !_.isNull( subject.has_data('results_data') ) ){
-    // short curicuit if already set, this isn't a status that changes durring a session
+  
+  try {
+    // throws an error if the has results_data status has yet to be loaded (in which case we load it in the catch block)
+    subject.has_data('results_data');
+    // if it didn't throw an error then we're done
     return Promise.resolve();
-  }
+  } catch(error){
+    const { id } = subject;
 
-  const { id } = subject;
+    const level = subject.level === "dept" ? "org" : subject.level;
 
-  const level = subject.level === "dept" ? "org" : subject.level;
+    if ( !_.isUndefined(subject.is_internal_service) && subject.is_internal_service){
+      // opimization for internal services, they never have results
+      subject.set_has_data('results_data', false);
+      return Promise.resolve();
+    } else if( !_.isUndefined(_subject_has_results[id]) ){
+      // case where _subject_has_results was populated by side effect but the subject.has_data status hasn't yet synced
+      subject.set_has_data('results_data', _subject_has_results[id]);
+      return Promise.resolve();
+    } else {
+      const time_at_request = Date.now();
+      const client = get_client();
 
-  if ( !_.isUndefined(subject.is_internal_service) && subject.is_internal_service){
-    subject.set_has_data('results_data', false);
-    return Promise.resolve();
-  }
+      const id_key = level === "org" ? "org_id" : "id";
 
-  if( !_.isUndefined(_subject_has_results[id]) ){
-    subject.set_has_data('results_data', _subject_has_results[id]); // if _subject_has_results was populated by sie effect, subject may not have had value set yet 
-    return Promise.resolve();
-  } else {
-    const time_at_request = Date.now();
-    const client = get_client();
-
-    const id_key = level === "org" ? "org_id" : "id";
-
-    return client.query({
-      query: has_results_query(level, id_key), 
-      variables: {lang: window.lang, id: id},
-      _query_name: 'has_results',
-    })
-      .then( (response) => {
-        const resp_time = Date.now() - time_at_request;
-
-        const has_results = response && response.data.root[level].has_results;
-
-        if( _.isBoolean(has_results) ){
-          log_standard_event({
-            SUBAPP: window.location.hash.replace('#',''),
-            MISC1: "API_QUERY_SUCCESS",
-            MISC2: `Has results, took ${resp_time} ms`,
-          });
-        } else {
-          log_standard_event({
-            SUBAPP: window.location.hash.replace('#',''),
-            MISC1: "API_QUERY_UNEXPECTED",
-            MISC2: `Has results, took ${resp_time} ms`,
-          });  
-        }
-
-        _subject_has_results[id] = has_results;
-        subject.set_has_data('results_data', has_results);
-
-        return Promise.resolve();
+      return client.query({
+        query: has_results_query(level, id_key), 
+        variables: {lang: window.lang, id: id},
+        _query_name: 'has_results',
       })
-      .catch(function(error){
-        const resp_time = Date.now() - time_at_request;     
-        log_standard_event({
-          SUBAPP: window.location.hash.replace('#',''),
-          MISC1: "API_QUERY_FAILURE",
-          MISC2: `Has results, took  ${resp_time} ms - ${error.toString()}`,
+        .then( (response) => {
+          const resp_time = Date.now() - time_at_request;
+
+          const has_results = response && response.data.root[level].has_results;
+
+          if( _.isBoolean(has_results) ){
+            log_standard_event({
+              SUBAPP: window.location.hash.replace('#',''),
+              MISC1: "API_QUERY_SUCCESS",
+              MISC2: `Has results, took ${resp_time} ms`,
+            });
+          } else {
+            log_standard_event({
+              SUBAPP: window.location.hash.replace('#',''),
+              MISC1: "API_QUERY_UNEXPECTED",
+              MISC2: `Has results, took ${resp_time} ms`,
+            });  
+          }
+
+          _subject_has_results[id] = has_results;
+          subject.set_has_data('results_data', has_results);
+
+          return Promise.resolve();
+        })
+        .catch(function(error){
+          const resp_time = Date.now() - time_at_request;     
+          log_standard_event({
+            SUBAPP: window.location.hash.replace('#',''),
+            MISC1: "API_QUERY_FAILURE",
+            MISC2: `Has results, took  ${resp_time} ms - ${error.toString()}`,
+          });
+          throw error;
         });
-        throw error;
-      });
+    }
   }
 }
 
