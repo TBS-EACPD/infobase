@@ -13,6 +13,7 @@ import {
 
 const result_doc_keys = get_result_doc_keys();
 
+
 const has_results_query = (level, id_key) => gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
@@ -24,14 +25,20 @@ query($lang: String!, $id: String) {
 }
 `;
 const _subject_has_results = {}; // This is also populated as a side effect of api_load_results_bundle and api_load_results_counts calls
-export function subject_has_results(subject){
-  
-  try {
-    // throws an error if the has results_data status has yet to be loaded (in which case we load it in the catch block)
-    subject.has_data('results_data');
-    // if it didn't throw an error then we're done
+export const subject_has_results = (subject) => {
+
+  const has_results_is_loaded = (() => {
+    try {
+      subject.has_data('results_data');
+    } catch(error){
+      return false;
+    }
+    return true;
+  })();
+
+  if (has_results_is_loaded){
     return Promise.resolve();
-  } catch(error){
+  } else {
     const { id } = subject;
 
     const level = subject.level === "dept" ? "org" : subject.level;
@@ -50,11 +57,12 @@ export function subject_has_results(subject){
 
       const id_key = level === "org" ? "org_id" : "id";
 
-      return client.query({
-        query: has_results_query(level, id_key), 
-        variables: {lang: window.lang, id: id},
-        _query_name: 'has_results',
-      })
+      return client
+        .query({
+          query: has_results_query(level, id_key), 
+          variables: {lang: window.lang, id: id},
+          _query_name: 'has_results',
+        })
         .then( (response) => {
           const resp_time = Date.now() - time_at_request;
 
@@ -90,7 +98,7 @@ export function subject_has_results(subject){
         });
     }
   }
-}
+};
 
 
 let _api_subject_ids_with_loaded_results = {};
