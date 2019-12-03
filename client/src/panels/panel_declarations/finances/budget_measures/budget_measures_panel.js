@@ -253,6 +253,8 @@ class BudgetMeasurePanel extends React.Component {
         subject,
         budget_measures: true,
         budget_years: [selected_year],
+        services: true,
+        services_years: ['2019'],
       })
         .then( () => this.setState({loading: false}) );
     }

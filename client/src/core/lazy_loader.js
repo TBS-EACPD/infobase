@@ -32,7 +32,7 @@ function ensure_loaded({
   budget_measures,
   budget_years,
   services,
-  service_years,
+  services_years,
   footnotes_for: footnotes_subject,
 }){
   const table_set = _.chain( table_keys )
@@ -191,7 +191,7 @@ function ensure_loaded({
 
   const services_prom = (
     should_load_services ?
-      api_load_services(subject, service_years) :
+      api_load_services(subject, services_years) :
       Promise.resolve()
   );
 
