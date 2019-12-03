@@ -1,6 +1,11 @@
 
 const featured_content_items = _.compact([
   {
+    text_key: 'supps_a',
+    href: '#compare_estimates',
+    is_new: "true",
+  },
+  {
     text_key: 'igoc',
     href: '#igoc',
   },
