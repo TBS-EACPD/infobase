@@ -5,13 +5,10 @@ import {
   Service,
 } from './services.js';
 
-const { service_years } = Service;
 
-
-const dept_service_fragment = (years_to_load) => (
-  `${_.map(years_to_load,
-    year => `
-      services${year}: (year: ${_.toInteger(year)}){
+const dept_service_fragment = (
+  `
+      services$: services {
         service_id
         program_ids
         is_active
@@ -67,35 +64,34 @@ const dept_service_fragment = (years_to_load) => (
           urls
           rtp_urls
         }
-      `
-  )}`
+      }
+  `
 );
 
-const get_dept_services_query = (years_to_load) => gql`
+const get_dept_services_query = gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
     org(org_id: $id) {
       org_id
-      ${dept_service_fragment(years_to_load)}
+      ${dept_service_fragment}
     }
   }
 }
 `;
 
-const get_all_services_query = (years_to_load) => gql`
-query($lang: String!, $id: String) {
+const get_all_services_query = gql`
+query($lang: String!) {
   root(lang: $lang) {
     orgs {
       org_id
-      ${dept_service_fragment(years_to_load)}
+      ${dept_service_fragment}
     }
   }
 }
 `;
 
 const _subject_ids_with_loaded_services = {};
-export function api_load_services(subject, years){
-  const years_to_load = !_.isEmpty(years) ? years : service_years;
+export function api_load_services(subject){
 
   const level = (subject && subject.level) || 'gov';
 
@@ -105,10 +101,7 @@ export function api_load_services(subject, years){
     query,
     response_data_accessor,
   } = (() => {
-    const subject_is_loaded = ({level, id}) => _.every(
-      years_to_load,
-      year => _.get(_subject_ids_with_loaded_services, `${year}.${level}.${id}`)
-    );
+    const subject_is_loaded = ({level, id}) => _.get(_subject_ids_with_loaded_services, `${level}.${id}`);
 
     const all_is_loaded = () => subject_is_loaded({level: 'gov', id: 'gov'});
     const dept_is_loaded = (org) => all_is_loaded() || subject_is_loaded(org);
@@ -118,14 +111,14 @@ export function api_load_services(subject, years){
         return {
           is_loaded: dept_is_loaded(subject),
           id: subject.id,
-          query: get_dept_services_query(years_to_load),
+          query: get_dept_services_query,
           response_data_accessor: (response) => response.data.root.org,
         };
       default:
         return {
           is_loaded: all_is_loaded(subject),
           id: 'gov',
-          query: get_all_services_query(years_to_load),
+          query: get_all_services_query,
           response_data_accessor: (response) => response.data.root.gov,
         };
     }
@@ -163,35 +156,30 @@ export function api_load_services(subject, years){
           MISC2: `Services, took ${resp_time} ms`,
         });  
       }
-      _.each(
-        years_to_load,
-        year => {
-          const services_in_year = response_data[`services${year}`];
+      const all_services = response_data[`services`];
 
-          if ( !_.isEmpty(services_in_year) ){
-            _.each(
-              services_in_year,
-              service => Service.create_and_register({...service, year}),
-            );
-          }
+      if ( !_.isEmpty(all_services) ){
+        _.each(
+          all_services,
+          service => Service.create_and_register({...service}),
+        );
+      }
 
-          // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
-          // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh
-          _.setWith(
-            _subject_ids_with_loaded_services,
-            `${year}.${level}.${id}`,
-            true,
-            Object
-          );
+      // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
+      // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh
+      _.setWith(
+        _subject_ids_with_loaded_services,
+        `${level}.${id}`,
+        true,
+        Object
+      );
 
-          // side effect
-          _.setWith(
-            _subject_ids_with_loaded_services, 
-            `${year}.${level}.${id}`, 
-            _.isEmpty(services_in_year),
-            Object
-          );
-        }
+      // side effect
+      _.setWith(
+        _subject_ids_with_loaded_services, 
+        `${level}.${id}`, 
+        _.isEmpty(all_services),
+        Object
       );
 
       return Promise.resolve();

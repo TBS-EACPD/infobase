@@ -12,7 +12,6 @@ const Service = class Service extends static_subject_store(){
   static get type_name(){ return 'service'; }
   static get singular(){ return trivial_text_maker("service"); }
   static get plural(){ return trivial_text_maker("services"); }
-  static get services_years(){ return ["2019"]; }
   get level(){ return "service"; }
   get guid(){ return `service_${this.id}`; }
 
