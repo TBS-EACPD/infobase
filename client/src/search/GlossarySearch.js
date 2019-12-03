@@ -21,7 +21,7 @@ const GlossarySearch = withRouter(
         onSelect = {
           ({id}) => history.push( glossary_href(id).replace("#","/") )
         }
-        minLength = { 3 }
+        minLength = { 2 }
       />;
     }
   }
