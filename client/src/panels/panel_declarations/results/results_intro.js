@@ -103,10 +103,10 @@ export const declare_results_intro_panel = () => declare_panel({
         dp_indicators: verbose_counts[`${latest_dp_doc_key}_indicators`],
         drr_results: verbose_counts[`${latest_drr_doc_key}_results`],
         drr_indicators: verbose_counts[`${latest_drr_doc_key}_total`],
-        num_crs: is_gov ? 0 : verbose_counts.num_crs,
-        num_programs: is_gov ? 0 : verbose_counts.num_programs,
-        depts_with_dps: is_gov ? verbose_counts.depts_with_dps : 1,
-        depts_with_drrs: is_gov ? verbose_counts.depts_with_drrs : 1,
+        num_crs: is_gov ? false : verbose_counts.num_crs,
+        num_programs: is_gov ? false : verbose_counts.num_programs,
+        depts_with_dps: is_gov ? verbose_counts.depts_with_dps : false,
+        depts_with_drrs: is_gov ? verbose_counts.depts_with_drrs : false,
       };
 
       const doc_urls = {
@@ -123,7 +123,6 @@ export const declare_results_intro_panel = () => declare_panel({
     },
     render({ calculations, sources}){
       const {
-        subject,
         panel_args,
       } = calculations;
   
@@ -133,7 +132,6 @@ export const declare_results_intro_panel = () => declare_panel({
           sources={sources}
         >
           <ResultsIntroPanel
-            subject={subject}
             {...panel_args}
           />
         </InfographicPanel>
