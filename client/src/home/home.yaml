@@ -75,8 +75,8 @@ estimates_comp_home_title:
   en: Estimates Comparison
   fr: Comparaison des budgets principal de dépenses
 
-estimates_comp_home_text:
-  en: See how the government's recent supplementary spending plan compares to the original plan
+estimates_comp_home_text: # TODO: this text is bad for the potion of the year where we only have mains
+  en: See how the government's recent supplementary spending plan compares to the initial plan
   fr: Voir comment le plan de dépenses supplémentaire du gouvernement compare à leur plan principal
 
 featured_data_title:
