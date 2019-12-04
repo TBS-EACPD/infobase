@@ -71,7 +71,7 @@ reports_links_text:
   transform: [handlebars,markdown]
   en: |
     The full text of the {{ext_link "Departmental Plans" dp_url}}
-    and {{ext_link "Departmental Results Reports" drr_url}} can be found on canada.ca.
+    and {{ext_link "Departmental Results Reports" drr_url}} can be found on {{ext_link "Canada.ca" "https://www.canada.ca/"}}.
   fr: |
     Vous trouverez les {{ext_link "plans ministériels" dp_url}} et {{ext_link "rapports sur les résultats ministériels" drr_url}}
-    à canada.ca.
+    à {{ext_link "Canada.ca" "https://www.canada.ca/"}}.
