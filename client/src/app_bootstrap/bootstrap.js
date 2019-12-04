@@ -75,7 +75,6 @@ function bootstrap(App, app_reducer, done){
   load_fonts();
 
   populate_stores().then(()=>{
-
     _.each(table_defs, table_def => Table.create_and_register(table_def));
 
     // Create a history of your choosing (we're using a browser history in this case)
