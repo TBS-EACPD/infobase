@@ -150,6 +150,12 @@ const get_non_col_content = ({node}) => {
 
   return (
     <div>
+      { subject && subject.level === "dept" && subject.applied_title && subject.applied_title !== subject.name &&
+        <div className="mrgn-bttm-sm" style={{fontSize: "14px"}}>
+          <b><TM k="applied_title" args={{subject}} />: </b>
+          {subject.applied_title}
+        </div>
+      }
       { !_.isEmpty(amounts_by_doc) &&
         <div>
           <DetailedAmountsByDoc amounts_by_doc={amounts_by_doc} />
@@ -170,7 +176,7 @@ const get_non_col_content = ({node}) => {
           </HeightClipper>
         </div>
       }
-      { subject && 
+      { subject &&
         <div className='ExplorerNode__BRLinkContainer'>
           <a href={infograph_href_template(subject)}> 
             <TM k="infograph_for" args={{subject}} />
