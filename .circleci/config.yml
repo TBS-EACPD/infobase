@@ -39,6 +39,10 @@ jobs:
 
       - run: (cd email_backend && npm run end_to_end_tests)
 
+      - run: 
+          command: | # halt here if on a dunderscore branch, expected to be running in an env without the GCloud env vars required for the following steps
+            [[ $(git branch --show-current) =~ ^__ ]] && circleci step halt
+
       - run: (cd email_backend && npm run merge_coverage_reports && npm run create_coverage_shield_badge)
       
       - run: ./scripts/ci_scripts/authenticate-server-gcloud.sh
@@ -179,7 +183,11 @@ jobs:
           command: (cd server && npm run start)
           background: true
       - run: (cd server && npm run snapshot_tests) # the end to end snapshot tests, run against un-transpiled src for more useful coverage stats
-      
+
+      - run: 
+          command: | # halt here if on a dunderscore branch, expected to be running in an env without the GCloud env vars required for the following steps
+            [[ $(git branch --show-current) =~ ^__ ]] && circleci step halt
+
       - run: (cd server && npm run merge_coverage_reports && npm run create_coverage_shield_badge)
 
       - run: ./scripts/ci_scripts/authenticate-server-gcloud.sh
@@ -305,6 +313,7 @@ workflows:
   cleanup_dev_dbs:
     jobs:
       - cleanup_dev_dbs
+      <<: *deploy_filter
 
   # One workflow that runs all three job stages (build -> test -> deploy_data/server/client), each stage requiring
   build_test_deploy:
