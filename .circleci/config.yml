@@ -312,8 +312,8 @@ workflows:
 
   cleanup_dev_dbs:
     jobs:
-      - cleanup_dev_dbs
-      <<: *deploy_filter
+      - cleanup_dev_dbs:
+          <<: *deploy_filter
 
   # One workflow that runs all three job stages (build -> test -> deploy_data/server/client), each stage requiring
   build_test_deploy:
