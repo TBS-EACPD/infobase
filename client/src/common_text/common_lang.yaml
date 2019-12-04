@@ -985,10 +985,10 @@ DRR_resources:
   fr: Resources utilisées en {{pa_last_year}}
 
 
-see_an_infograph_for:
+infograph_for:
   transform: [handlebars]
-  en: See an infographic for {{subj_name subject}}
-  fr: Voir une infographie pour {{subj_name subject}}
+  en: Infographic for {{subj_name subject}}
+  fr: Infographie pour {{subj_name subject}}
 
 
 budget_measure:
