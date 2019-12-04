@@ -8,7 +8,7 @@ import {
 
 const dept_service_fragment = (
   `
-      services$: services {
+      services: services {
         service_id
         program_ids
         is_active
@@ -90,11 +90,18 @@ query($lang: String!) {
 }
 `;
 
+const extract_flat_data_from_hierarchical_response = (response) =>{
+  return _.chain(response).
+    map(resp=>resp.services).
+    compact().
+    flatten(true).
+    value();
+};
+
 const _subject_ids_with_loaded_services = {};
 export function api_load_services(subject){
-
   const level = (subject && subject.level) || 'gov';
-
+  
   const {
     is_loaded,
     id,
@@ -119,7 +126,7 @@ export function api_load_services(subject){
           is_loaded: all_is_loaded(subject),
           id: 'gov',
           query: get_all_services_query,
-          response_data_accessor: (response) => response.data.root.gov,
+          response_data_accessor: (response) => response.data.root.orgs,
         };
     }
   })();
@@ -156,7 +163,8 @@ export function api_load_services(subject){
           MISC2: `Services, took ${resp_time} ms`,
         });  
       }
-      const all_services = response_data[`services`];
+      
+      const all_services = extract_flat_data_from_hierarchical_response(response_data);
 
       if ( !_.isEmpty(all_services) ){
         _.each(
