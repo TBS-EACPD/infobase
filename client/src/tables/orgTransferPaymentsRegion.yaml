@@ -1,9 +1,9 @@
 orgTransferPaymentsRegion_short:
   transform: [handlebars,embeded-markdown,markdown]
   en: |
-    TODO
+    RTP_TODO
   fr: |
-    TODO
+    RTP_TODO
 orgTransferPaymentsRegion:
   transform: [handlebars,embeded-markdown,markdown]
   en: |

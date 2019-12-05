@@ -1,30 +1,28 @@
 import text from './orgTransferPaymentsRegion.yaml';
 import {
-  m,
   businessConstants,
   years,
 } from "./table_common";
 
 const { provinces } = businessConstants;
-const { 
-  std_years, 
-  years_short,
-} = years;
+const { std_years } = years;
 
 export default {
   text,
   id: "orgTransferPaymentsRegion",
   source: ["PA"],
   "tags": [
+    "EXP",
     "PA",
     "GEO",
     "FPS",
     "ANNUAL",
+    "SOBJ10",
   ],
 
   "link": {
-    "en": "",
-    "fr": "",
+    "en": "RTP_TODO",
+    "fr": "RTP_TODO",
   },
 
   "name": {
@@ -66,11 +64,14 @@ export default {
       this.add_col({
         "simple_default": ix === 4,
         "type": "big_int",
-        "nick": header,
-        "header": m("{{mar_31}}") + ", " + years_short[ix],
+        "nick": header+'exp',
+        "header": {
+          "en": "Expenditures",
+          "fr": "Dépenses",
+        },
         "description": {
-          "en": "Corresponds to the transfer payments by Geographic Region, as of March 31 " + years_short[ix],
-          "fr": "Correspond à paiements de transfert par région géographique, au 31 mars " + years_short[ix],
+          "en": "RTP_TODO",
+          "fr": "RTP_TODO",
         },
       });
     });
