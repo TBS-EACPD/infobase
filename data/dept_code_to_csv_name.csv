@@ -100,6 +100,7 @@
 "CAS","program_sobjs"
 "CAS","program_spending"
 "CAS","program_vote_stat"
+"CASDO","org_vote_stat_estimates"
 "CAT","crso"
 "CAT","org_sobjs"
 "CAT","org_vote_stat_pa"

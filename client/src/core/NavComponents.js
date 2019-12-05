@@ -158,7 +158,6 @@ export class StandardRouteContainer extends React.Component {
         <BreadCrumbs crumbs={breadcrumbs} />
         <HeaderBanner route_filter={_.constant(false)} />
         {beta && <HeaderBanner route_filter={_.constant(true)} banner_content={trivial_text_maker("beta_banner_content")} banner_class="info" additional_class_names="beta-banner"/>}
-        <HeaderBanner route_filter={_.constant(true)} banner_content={"This build contains entirely FAKE data for a potential Supplementary Estimates A 2019-20. This is for development purposes ONLY."} banner_class="warning"/>
         <AnalyticsSynchronizer route_key={route_key} />
         { shouldSyncLang !== false &&
           <LangSynchronizer /> 
