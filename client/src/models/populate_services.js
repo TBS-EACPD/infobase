@@ -7,7 +7,7 @@ import {
 
 
 const dept_service_fragment = (
-  `
+  `org_id
       services: services {
         service_id
         program_ids
@@ -72,7 +72,7 @@ const get_dept_services_query = gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
     org(org_id: $id) {
-      org_id
+      id
       ${dept_service_fragment}
     }
   }
@@ -83,7 +83,6 @@ const get_all_services_query = gql`
 query($lang: String!) {
   root(lang: $lang) {
     orgs {
-      org_id
       ${dept_service_fragment}
     }
   }
