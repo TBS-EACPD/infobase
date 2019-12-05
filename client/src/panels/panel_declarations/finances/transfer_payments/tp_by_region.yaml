@@ -6,6 +6,6 @@ tp_by_region_title:
 tp_by_region_text: 
   transform: [handlebars]
   en: 
-    hello
+    RTP_TODO
   fr: 
-    bonjour
+    RTP_TODO
