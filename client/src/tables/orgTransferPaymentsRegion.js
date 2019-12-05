@@ -2,6 +2,8 @@ import text from './orgTransferPaymentsRegion.yaml';
 import {
   businessConstants,
   years,
+  Statistics,
+  stats,
 } from "./table_common";
 
 const { provinces } = businessConstants;
@@ -60,31 +62,32 @@ export default {
         "fr": "Région géographique",
       },
     });
-    _.each(std_years, (header,ix)=>{
-      this.add_col({
-        "simple_default": ix === 4,
-        "type": "big_int",
-        "nick": header+'exp',
-        "header": {
-          "en": "Expenditures",
-          "fr": "Dépenses",
-        },
-        "description": {
-          "en": "RTP_TODO",
-          "fr": "RTP_TODO",
-        },
-      });
-    });
+    _.each(
+      std_years, 
+      (header, ix) => {
+        this.add_col({
+          "simple_default": ix === 4,
+          "type": "big_int",
+          "nick": header,
+          "header": header,
+          "description": {
+            "en": "RTP_TODO",
+            "fr": "RTP_TODO",
+          },
+        });
+      }
+    );
   },
 
-  "mapper": function (row) {
-    var new_value = provinces[row[1]].text;
-    row.splice(2, 0, new_value);
-    return row;
+  "mapper": (row) => {
+    const [org_id, prov_code, ...values] = row;
+    const prov_text = provinces[prov_code].text;
+    return [org_id, prov_code, prov_text, ...values];
   },
 
-  "sort": function(mapped_rows, lang){
-    return _.sortBy(mapped_rows, function(row){
+  "sort": (mapped_rows, lang) => _.sortBy(
+    mapped_rows, 
+    (row) => {
       if (row.region === provinces.abroad.text){
         return "Z";
       } 
@@ -92,26 +95,20 @@ export default {
         return "I";
       }
       return row.region;
-    });
-  },
+    }
+  ),
 
   "queries": {
-    "gov_grouping": function() {
-      return _.chain(this.table.horizontal(std_years,false))
-        .map(function(years, key){
-          return [key].concat(years);
-        })
-        .sortBy(function(row){
-          return d3.sum(_.tail(row));
-        })
-        .value();
-    },
+    "gov_grouping": () => _.chain( this.table.horizontal(std_years, false) )
+      .map( (years, key) => [key].concat(years) )
+      .sortBy( (row) => d3.sum( _.tail(row) ) )
+      .value(),
   },
 
   "dimensions": [
     {
       title_key: "prov",
-      filter_func: _.constant(_.property('region') ),
+      filter_func: _.constant( _.property('region') ),
       include_in_report_builder: true,
     },
     {
@@ -120,3 +117,30 @@ export default {
     },
   ],
 };
+
+Statistics.create_and_register({
+  id: 'orgTransferPaymentsRegion_dept_info', 
+  table_deps: [ 'orgTransferPaymentsRegion'],
+  level: 'dept',
+  compute: (subject, tables, infos, add, c) => {
+    const table = tables.orgTransferPaymentsRegion;
+    const q = table.q(subject);
+    c.dept = subject;
+
+    var all_years = q.get_top_x(["region"].concat(std_years), Infinity, {zip: true});
+    // RTP_TODO
+  },
+});
+
+Statistics.create_and_register({
+  id: 'orgTransferPaymentsRegion_gov_info', 
+  table_deps: [ 'orgTransferPaymentsRegion'],
+  level: 'gov',
+  compute: (subject, tables, infos, add, c) => {
+    const table = tables.orgTransferPaymentsRegion;
+    const q = table.q(subject);
+    
+    var all_years = q.gov_grouping();
+    // RTP_TODO
+  },
+});
