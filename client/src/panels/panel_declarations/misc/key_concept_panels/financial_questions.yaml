@@ -25,7 +25,7 @@ what_are_voted_auth_q:
     Que sont les autorisations «votées»?
 what_are_voted_auth_a:
   en: |
-    Voted spending authorities are sought through appropriation (or "supply") acts tabled in Parliament
+    Voted spending authorities are sought through appropriation (or "supply") acts tabled in Parliament.
   fr: |
     Les autorisations de dépenses votées sont demandées par l’entremise des lois de crédits déposées au Parlement. 
 
@@ -73,7 +73,7 @@ what_are_exps_q:
   en: |
     What are "expenditures"?
   fr: |
-    Que sont les «dépenses»?
+    Que sont les « dépenses »?
 
 what_are_exps_a:
   en: |
@@ -102,7 +102,7 @@ what_is_so_q:
 what_is_so_a:
   transform: [handlebars,markdown]
   en: |
-    Standard objects are the highest level of classification for categorizing expenditures used for parliamentary, management and reporting purposes. The allocation of the categories by standard object is as follow:
+    Standard objects are the highest level of classification for categorizing expenditures used for parliamentary, management and reporting purposes. The allocation of the categories by standard object is as follows:
     
     
      1. Personnel
