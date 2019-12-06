@@ -255,8 +255,6 @@ class BudgetMeasurePanel extends React.Component {
         subject,
         budget_measures: true,
         budget_years: [selected_year],
-        services: true,
-        services_years: ['2019'],
       })
         .then( () => this.setState({loading: false}) );
     }
@@ -273,9 +271,6 @@ class BudgetMeasurePanel extends React.Component {
       selected_year,
       loading,
     } = this.state;
-
-    const asdf = Service.get_all();
-    debugger;
 
     const inner_content = (
       <Fragment>
