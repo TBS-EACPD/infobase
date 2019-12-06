@@ -6,6 +6,9 @@ import {
 } from './storeMixins.js';
 import { trivial_text_maker } from '../models/text.js';
 
+// dependencies are tangled up too much here, disable it for the whole file
+/* eslint-disable no-use-before-define */
+
 const static_subject_store = () => mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
 
 const Service = class Service extends static_subject_store(){
@@ -16,9 +19,15 @@ const Service = class Service extends static_subject_store(){
   get guid(){ return `service_${this.id}`; }
 
   static create_and_register(def){
-    const {id, serv} = def;
-    const inst = new Service(serv);
-    this.register(id, inst );
+    const { service_id } = def;
+    // duplicate service_id as id since it makes sense
+    def.id = def.service_id;
+    const inst = new Service(def);
+    this.register(service_id, inst );
+  }
+
+  get standards(){
+    return ServiceStandard.lookup(this.id);
   }
 
   constructor(serv){

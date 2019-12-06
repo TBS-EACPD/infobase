@@ -90,11 +90,11 @@ query($lang: String!) {
 `;
 
 const extract_flat_data_from_hierarchical_response = (response) =>{
-  return _.chain(response).
-    map(resp=>resp.services).
-    compact().
-    flatten(true).
-    value();
+  return _.chain(_.isArray(response) ? response : [response])
+    .map(resp=>resp.services)
+    .compact()
+    .flatten(true)
+    .value();
 };
 
 const _subject_ids_with_loaded_services = {};
@@ -168,7 +168,7 @@ export function api_load_services(subject){
       if ( !_.isEmpty(all_services) ){
         _.each(
           all_services,
-          service => Service.create_and_register({...service}),
+          service => Service.create_and_register(service),
         );
       }
 
