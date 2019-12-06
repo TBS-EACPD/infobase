@@ -16,7 +16,6 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const { people_years } = year_templates;
 const formatter = formats["big_int_raw"];
-const includeNcr = true;
 
 const { provinces } = businessConstants;
 const { A11YTable } = declarative_charts;

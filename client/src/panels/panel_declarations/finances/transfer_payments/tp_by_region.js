@@ -14,23 +14,21 @@ import { Canada } from '../../../../charts/canada/index.js';
 
 const { std_years } = years;
 const formatter = formats["compact2_raw"];
-const includeNcr = false;
 
 const { text_maker } = create_text_maker_component(text);
 const { provinces } = businessConstants;
 const { A11YTable } = declarative_charts;
 
-const calculate_common = (years_by_province) => {
-  const max = d3.max(d3.values(_.last(years_by_province)));
+const calculate_common = (data) => {
+  const max = d3.max(d3.values(_.last(data)));
   const color_scale = d3.scaleLinear()
     .domain([0,max])
     .range([0.2,1]);
   return {
-    years_by_province,
+    data,
     color_scale,
-    context_years: std_years,
+    years: std_years,
     formatter,
-    includeNcr,
   };
 };
 
@@ -45,11 +43,14 @@ const calculate_funcs_by_level = {
   },
 };
 
-const prepare_data_for_a11y_table = (years_by_province) =>
+const prepare_data_for_a11y_table = (data) =>
   _.chain(provinces)
     .map((province, prov_code) => {
       if( !_.includes(["onlessncr", "qclessncr", "ncr"], prov_code)){
-        const formatted_yearly_tp = _.map(years_by_province, (year_by_province) => formats["compact2_written_raw"](year_by_province[prov_code]));
+        const formatted_yearly_tp = _.map(
+          data, 
+          (row) => formats["compact2_written_raw"](row[prov_code])
+        );
 
         return {
           label: province.text,
@@ -74,7 +75,7 @@ export const declare_tp_by_region_panel = () => declare_panel({
         sources,
       } = render_args;
       const { panel_args } = calculations;
-      const { years_by_province } = panel_args;
+      const { data } = panel_args;
 
       return (
         <StdPanel
@@ -96,7 +97,7 @@ export const declare_tp_by_region_panel = () => declare_panel({
               <A11YTable
                 label_col_header = {text_maker("prov")}
                 data_col_headers = {_.map( std_years, y => run_template(y) )}
-                data = { prepare_data_for_a11y_table(years_by_province) }
+                data = { prepare_data_for_a11y_table(data) }
               />
             </Col>
           }

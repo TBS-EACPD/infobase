@@ -233,16 +233,24 @@ canada_svg:
         transform="translate(510,845)" />
       <g
         class="label"
+        id="label-nu"
+        transform="translate(570,585)" />
+      <g
+        class="label"
         id="label-on"
-        transform="translate(590,970)" />
+        transform="translate(660,970)" />
+      <g
+        class="label"
+        id="label-onlessncr"
+        transform="translate(600,970)" />
       <g
         class="label"
         id="label-qc"
-        transform="translate(855,930)" />
+        transform="translate(890,930)" />
       <g
         class="label"
-        id="label-nu"
-        transform="translate(570,585)" />
+        id="label-qclessncr"
+        transform="translate(855,930)" />
       <g
         class="label"
         id="label-nt"
