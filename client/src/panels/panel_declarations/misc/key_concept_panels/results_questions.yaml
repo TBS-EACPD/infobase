@@ -5,7 +5,7 @@ what_is_policy_on_results_q:
 what_is_policy_on_results_a:
   transform: [handlebars, markdown]
   en: |
-    The {{ext_link "Policy on Results" "https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300"}} sets out the fundamental requirements for federal departmental accountability for performance information and evaluation, while highlighting the importance of results in management and spending decision making, as well as public reporting. It seeks to improve the achievement of results across governmentand enhancing understanding of the results the government seeks to achieve, does achieve, and the resources used to so. 
+    The {{ext_link "Policy on Results" "https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300"}} sets out the fundamental requirements for federal departmental accountability for performance information and evaluation, while highlighting the importance of results in management and spending decision making, as well as public reporting. It seeks to improve the achievement of results across government and enhancing understanding of the results the government seeks to achieve, does achieve, and the resources used to so. 
   fr: |
     La {{ext_link "politique sur les résultats" "https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300"}} établit les exigences fondamentales de la responsabilité ministérielle fédérale canadienne concernant l’information sur le rendement et l’évaluation, tout en soulignant l’importance des résultats dans la prise de décisions liées à la gestion, aux dépenses et aux rapports publics. La politique cherche à obtenir de meilleurs résultats à l'échelle gouvernementale et mieux comprendre les résultats que le gouvernement cherche à atteindre et réussit à atteindre, ainsi que les ressources utilisées pour ce faire.
 
