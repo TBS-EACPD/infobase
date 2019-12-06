@@ -4,7 +4,7 @@ import {
   years,
   Statistics,
   stats,
-} from "./table_common";
+} from "./table_common.js";
 
 const { provinces } = businessConstants;
 const { std_years } = years;
