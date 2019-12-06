@@ -28,16 +28,13 @@ what_are_SOut_a:
 what_are_CR_q:
   en: What are Core Responsibilities?
   fr: Qu’est-ce qu’une responsabilité essentielle ?
-what_are_CR_a:
+
+what_are_CR_q:
   transform: [handlebars, markdown]
   en: |
-    An enduring function or role performed by a department. 
-    The intentions of the department with respect to a Core Responsibility are reflected in one or more related 
-    Departmental Results that the department seeks to contribute to or influence.
+    Core responsibilities describe the areas in which the department acts or has authority to operate on behalf of Canadians. A Core Responsibility corresponds to a department’s enduring function or role.
   fr: |
-    Fonction ou rôle permanent exercé par un ministère. Les intentions du ministère concernant une 
-    responsabilité essentielle se traduisent par un ou plusieurs Résultats Ministériels auxquels le ministère cherche à 
-    contribuer ou sur lesquels il veut avoir une influence.
+    Les responsabilités essentielles décrivent les domaines de haut niveau à l’intérieur desquels l’organisation agit ou pour lesquels elle a le pouvoir de mener ses activités au nom des Canadiens. Une responsabilité essentielle correspond à une fonction ou au rôle permanent exercé par un ministère.
 
 
 what_are_ftes_q:
