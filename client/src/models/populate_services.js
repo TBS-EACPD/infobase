@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import { log_standard_event } from '../core/analytics.js';
 import { 
   Service,
+  ServiceStandard,
 } from './services.js';
 
 
@@ -90,11 +91,16 @@ query($lang: String!) {
 `;
 
 const extract_flat_data_from_hierarchical_response = (response) =>{
-  return _.chain(_.isArray(response) ? response : [response])
+  const serviceStandards = [];
+  const services = _.chain(_.isArray(response) ? response : [response])
     .map(resp=>resp.services)
     .compact()
     .flatten(true)
+    .each(service =>
+      _.each(service.standards, standard => serviceStandards.push( _.omit(standard, "__typename") ))
+    )
     .value();
+  return {services, serviceStandards};
 };
 
 const _subject_ids_with_loaded_services = {};
@@ -163,12 +169,18 @@ export function api_load_services(subject){
         });  
       }
       
-      const all_services = extract_flat_data_from_hierarchical_response(response_data);
+      const {services, serviceStandards} = extract_flat_data_from_hierarchical_response(response_data);
 
-      if ( !_.isEmpty(all_services) ){
+      if ( !_.isEmpty(services) ){
         _.each(
-          all_services,
+          services,
           service => Service.create_and_register(service),
+        );
+      }
+      if ( !_.isEmpty(serviceStandards) ){
+        _.each(
+          serviceStandards,
+          standard => ServiceStandard.create_and_register(standard),
         );
       }
 
@@ -185,7 +197,7 @@ export function api_load_services(subject){
       _.setWith(
         _subject_ids_with_loaded_services, 
         `${level}.${id}`, 
-        _.isEmpty(all_services),
+        _.isEmpty(services),
         Object
       );
 
