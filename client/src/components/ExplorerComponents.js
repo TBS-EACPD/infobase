@@ -351,12 +351,17 @@ export class Explorer extends React.Component {
   }
   updateWidth(){
     const { width_setter_el } = this;
+    const { min_width } = this.props;
     const width = _.get(
       width_setter_el.querySelector(".ExplorerNode"), //the first row, but not the header
       "scrollWidth"
     );
-    if(_.isNumber(width) && width > width_setter_el.parentNode.clientWidth){
-      width_setter_el.style.minWidth = `${width}`;
+    if (_.isNumber(width) && width > width_setter_el.parentNode.clientWidth){
+      if (min_width && width < min_width){
+        width_setter_el.style.minWidth = `${min_width}px`;
+      } else {
+        width_setter_el.style.minWidth = `${width}px`;
+      }
     } else {
       width_setter_el.style.minWidth = null;
     }
