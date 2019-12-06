@@ -57,7 +57,7 @@ gov_auth_exp_prog_spending_body:
 dept_auth_exp_prog_spending_body:
   transform: [handlebars, markdown]
   en: |
-    Over the last 5 years, **{{subj_name dept}}** has {{gl_tt "authorized" "AUTH"}} an average spending of **{{fmt_compact2_written dept_five_year_auth_average}}** while
+    Over the last 5 years, **{{subj_name dept}}** has received average {{gl_tt "authorities" "AUTH"}} of **{{fmt_compact2_written dept_five_year_auth_average}}** while
     {{gl_tt "actually spending" "BUD_EXP"}} an average of **{{fmt_compact2_written dept_five_year_exp_average}}**.
     
     In **{{last_history_year}}**, **{{fmt_compact1_written last_year_lapse_amt}}** or **{{fmt_percentage1 last_year_lapse_pct}}** of approved
@@ -65,7 +65,7 @@ dept_auth_exp_prog_spending_body:
     
     {{#if subject.has_planned_spending}}Spending is {{will_change_to plan_change ""}} **{{fmt_compact2_written dept_exp_planning_year_3}}** by {{last_planned_year}}. {{/if}}
   fr: |
-    Au cours des cinq dernières années, **{{subj_name dept}}** a {{gl_tt "autorisé" "AUTH"}} des dépenses moyennes de **{{fmt_compact1_written gov_five_year_auth_average}}**
+    Au cours des cinq dernières années, **{{subj_name dept}}** a reçu des {{gl_tt "autorisations" "AUTH"}} moyennes de **{{fmt_compact1_written gov_five_year_auth_average}}**
     alors que les {{gl_tt "dépenses" "BUD_EXP"}} réelles s'élevaient en moyenne à **{{fmt_compact1_written gov_five_year_exp_average}}**.
     
     En {{last_history_year}}, **{{fmt_compact1_written last_year_lapse_amt}}** ou **{{fmt_percentage1 hist_avg_tot_pct}}** des autorisations approuvées étaient
