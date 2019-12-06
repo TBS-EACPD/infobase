@@ -69,7 +69,7 @@ const dept_service_fragment = (
   `
 );
 
-const get_dept_services_query = gql`
+const dept_services_query = gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
     org(org_id: $id) {
@@ -80,7 +80,7 @@ query($lang: String!, $id: String) {
 }
 `;
 
-const get_all_services_query = gql`
+const all_services_query = gql`
 query($lang: String!) {
   root(lang: $lang) {
     orgs {
@@ -123,14 +123,14 @@ export function api_load_services(subject){
         return {
           is_loaded: dept_is_loaded(subject),
           id: subject.id,
-          query: get_dept_services_query,
+          query: dept_services_query,
           response_data_accessor: (response) => response.data.root.org,
         };
       default:
         return {
           is_loaded: all_is_loaded(subject),
           id: 'gov',
-          query: get_all_services_query,
+          query: all_services_query,
           response_data_accessor: (response) => response.data.root.orgs,
         };
     }
