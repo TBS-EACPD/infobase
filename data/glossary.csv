@@ -118,6 +118,7 @@ Dans le RRM, les ministères et organismes donnent de l’information sur les pr
 * À l’occasion, les organismes peuvent identifier des besoins de dépenses additionnels durant l’année. Le budget supplémentaire des dépenses permet aux organismes de recevoir d’avantage d’autorisations pour rencontrer ces exigences. 
 * Le budget supplémentaire des dépenses est publié au cours de l'exercice. Chaque publication est désignée en ordre alphabétique (A, B, C, etc.)."
 "ETYPE_PEOPLE","Employee Type","Type d'employé","Employee Type refers to the nature of the appointment to the Public Service. There are four employee types: casual, student, term, indeterminate (including seasonal indeterminate).  
+
 * Casual employees are persons employed on a determinate basis pursuant to the PSEA Section 50 for a period not exceeding 90 working days in one calendar year in any particular department or other organization to that part of the public service to which the Public Service Commission has exclusive authority to make appointments. Casual employees can be part-time or full-time:
   * Full-time casual employees work the same number of scheduled hours of work as defined by the relevant collective agreement, but are not members of the bargaining unit.
   * Part-time casual employees work less than the scheduled hours of work as defined by the relevant collective agreement, but are not members of the bargaining unit.
