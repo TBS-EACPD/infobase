@@ -370,6 +370,7 @@ class EstimatesExplorer extends React.Component {
               sort_col,
               is_descending,
             }}
+            min_width={525}
           />
         </div>
         <div
