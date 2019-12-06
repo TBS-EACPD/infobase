@@ -48,7 +48,7 @@ what_tags_are_available_a:
     Une liste complète des étiquettes est accessible dans la {{ext_link "Norme sur l’étiquetage" "http://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=31306"}} de la {{ext_link "Politique sur les résultats" "http://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=31300"}}.  
 
 what_are_how_we_help_q:
-  en: What are 'Method of intervention' ( or 'How we help') tags?
+  en: What are 'Method of intervention' (or 'How we help') tags?
   fr: Que sont les étiquettes de la « méthode d’intervention » (ou « De quelle façon nous aidons »).
 
 
@@ -66,8 +66,8 @@ what_are_how_we_help_a:
 
 
 what_are_gocos_q:
-  en: What are Government of Canada Spending (Areas of Work) and Activities Areas tags?
-  fr: Quelles sont les étiquettes des secteurs des dépenses (secteurs de travail) et des secteurs d'activités du gouvernement du Canada?
+  en: What are Government of Canada Spending Areas and Activities tags?
+  fr: Quelles sont les étiquettes des secteurs des dépenses et des secteurs d'activités du gouvernement du Canada?
 
 what_are_gocos_a:
   transform: [handlebars, markdown]
