@@ -356,7 +356,7 @@ export class Explorer extends React.Component {
       "scrollWidth"
     );
     if(_.isNumber(width) && width > width_setter_el.parentNode.clientWidth){
-      width_setter_el.style.minWidth = `${width * 1.4}px`;
+      width_setter_el.style.minWidth = `${width}`;
     } else {
       width_setter_el.style.minWidth = null;
     }
