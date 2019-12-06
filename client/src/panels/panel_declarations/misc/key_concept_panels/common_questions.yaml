@@ -29,7 +29,7 @@ what_are_CR_q:
   en: What are Core Responsibilities?
   fr: Qu’est-ce qu’une responsabilité essentielle ?
 
-what_are_CR_q:
+what_are_CR_a:
   transform: [handlebars, markdown]
   en: |
     Core responsibilities describe the areas in which the department acts or has authority to operate on behalf of Canadians. A Core Responsibility corresponds to a department’s enduring function or role.
