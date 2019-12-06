@@ -57,7 +57,7 @@ export function create_resource_by_foreignkey_attr_dataloader(model, fk_attr){
       const rows_by_id = deep_and_complete_group_by(fk_attr, fk_ids, rows);
       return _.map(fk_ids, id => rows_by_id[id]);
     },
-    //{ cache: !!process.env.USE_REMOTE_DB }
+    { cache: !!process.env.USE_REMOTE_DB }
   );
 }
 
@@ -75,6 +75,6 @@ export function create_resource_by_id_attr_dataloader(model, id_attr){
       );
       return _.map(ids, id => rows_by_id[id]);
     },
-    //{ cache: !!process.env.USE_REMOTE_DB }
+    { cache: !!process.env.USE_REMOTE_DB }
   );
 }
