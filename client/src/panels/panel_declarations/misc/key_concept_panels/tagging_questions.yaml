@@ -32,18 +32,18 @@ what_tags_are_available_q:
 what_tags_are_available_a:
   transform: [handlebars, markdown]
   en: |
-    In the context of Program tagging there are two types of tags, those that:
+    In the context of Program tagging there are two types of tags:
 
-      1. Linkage tags that identify the connection between Programs and Departmental and Government of Canada Spending and Outcome Area. 
-      2. Descriptive tags that identify standardized characteristics of Programs (i.e. Method of intervention  - How we help)
+      1. Linkage tags that identify the connection between Programs and Government of Canada Spending Areas and Activities.
+      2. Descriptive tags that identify standardized characteristics of Programs (i.e. Method of intervention - How we help)
 
-    A full list of tags can be found in the {{ext_link "Standard on Tagging" "http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31306"}} under the  {{ext_link "Policy on Results" "http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300"}}. 
+    A full list of tags can be found in the {{ext_link "Standard on Tagging" "http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31306"}} under the  {{ext_link "Policy on Results" "http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300"}}.
 
   fr: |
     Dans le contexte de l’étiquetage de Programmes, il existe deux types d’étiquettes :
 
-      1. Les étiquettes établissant des liens, qui indiquent le lien entre les Programmes et le secteur des dépenses et des résultats ministériels et du gouvernement du Canada. 
-      2. Les étiquettes descriptives, qui indiquent les caractéristiques uniformisées des Programmes (par exemple, méthode d’intervention – Comment  nous aidons).
+      1. Les étiquettes établissant des liens, qui indiquent le lien entre les Programmes et le secteur des dépenses et d’activités du gouvernement du Canada. 
+      2. Les étiquettes descriptives, qui indiquent les caractéristiques uniformisées des Programmes (par exemple, méthode d’intervention – Comment nous aidons).
 
     Une liste complète des étiquettes est accessible dans la {{ext_link "Norme sur l’étiquetage" "http://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=31306"}} de la {{ext_link "Politique sur les résultats" "http://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=31300"}}.  
 
