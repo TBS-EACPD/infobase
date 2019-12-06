@@ -48,7 +48,7 @@ const Service = class Service extends static_subject_store(){
   }
 };
 
-const service_indexed_standards = []
+const service_indexed_standards = [];
 const ServiceStandard = class ServiceStandard extends static_subject_store(){
   static get type_name(){ return 'service_standard'; }
   static get singular(){ return trivial_text_maker("service_standard"); }
