@@ -18,7 +18,7 @@ const { provinces, provinces_short } = businessConstants;
 const canada_svg_text = canada_svg.text;
 
 const ordering = _.chain([
-  "abroad", "na", "yt", "nt", "nu", "bc", "ab", "sk", "mb", "on", "qc", "nl", "ncr", "nb", "ns", "pe",
+  "abroad", "na", "yt", "nt", "nu", "bc", "ab", "sk", "mb", "on", "onlessncr", "qc", "qclessncr", "nl", "ncr", "nb", "ns", "pe",
 ])
   .map( (prov_key, index) => [prov_key, index] )
   .fromPairs()
@@ -35,6 +35,8 @@ const get_province_display_name = (prov_key, scale) => {
     return prov_key;
   }
 };
+
+const get_province_element_id = (prov_key) => `#ca-${prov_key}`;
 
 
 export class CanadaD3Component {
@@ -68,6 +70,24 @@ export class CanadaD3Component {
     const svg = this.svg;
     const graph_dispatcher = this.dispatch;
     
+    const data_has_ncr_broken_out = _.some(
+      data,
+      (row) => _.chain(row)
+        .keys()
+        .some( (key) => /^ncr$|^.*lessncr$/.test(key) )
+        .value()
+    );
+    if (data_has_ncr_broken_out){
+      _.each(
+        ["on", "qc"],
+        (prov_key) => svg
+          .select( get_province_element_id(prov_key) )
+          .attr(
+            "id",
+            get_province_element_id(`${prov_key}lessncr`).replace('#', '')
+          )
+      );
+    }
 
     // Set dimensions and scaling of svg
     svg
@@ -89,7 +109,7 @@ export class CanadaD3Component {
     let previous_event_target_prov_key = false;
     const dispatch_mouseLeave = function(){
       if (previous_event_target_prov_key) {
-        svg.select(`#CA-${previous_event_target_prov_key}`)
+        svg.select( get_province_element_id(previous_event_target_prov_key) )
           .styles({
             "stroke-width": "2px",
             stroke: main_color,
@@ -100,7 +120,7 @@ export class CanadaD3Component {
     };
     const dispatch_mouseEnter = function(prov_key){
       if (previous_event_target_prov_key) {
-        svg.select(`#CA-${previous_event_target_prov_key}`)
+        svg.select( get_province_element_id(previous_event_target_prov_key) )
           .styles({
             "stroke-width": "2px",
             stroke: main_color,
@@ -108,7 +128,7 @@ export class CanadaD3Component {
       }
       if ( !_.isUndefined(last_year_data[prov_key]) ){
         previous_event_target_prov_key = prov_key;
-        svg.select(`#CA-${prov_key}`)
+        svg.select( get_province_element_id(prov_key) )
           .styles({
             "stroke-width": (prov_key === "abroad" || prov_key === "na") ? "8px" : "15px",
             stroke: main_color,
@@ -164,7 +184,7 @@ export class CanadaD3Component {
 
         const label = svg.selectAll("g.label")
           .filter(function(){ 
-            return d3.select(this).attr("id") === `label-${prov_key}`;
+            return d3.select(this).attr("id") === `ca-${prov_key}--label`;
           });
 
         const coords = label.attr("transform")
@@ -225,7 +245,7 @@ export class CanadaD3Component {
     ];
     hide_optional_components(
       optional_provinces,
-      (prov_key) => `.province#CA-${prov_key}`
+      (prov_key) => `.province${get_province_element_id(prov_key)}`
     );
   
     const provinces_with_optional_markers = [
@@ -236,7 +256,7 @@ export class CanadaD3Component {
     ];
     hide_optional_components(
       provinces_with_optional_markers,
-      (prov_key) => `path#CA-${prov_key}-Marker`
+      (prov_key) => `path${get_province_element_id(prov_key)}--marker`
     );
   };
 }
