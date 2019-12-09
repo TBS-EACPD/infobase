@@ -1,11 +1,13 @@
 @import '../common_css/common-variables';
 
+$large_margin: 40px;
+$small_margin: 10px;
 
 .intro-box {
   padding: 30px 0 0;
   background-color: $primaryColor;
   color: $textLightColor;
-  border-bottom: 10px solid $highlightColor;
+  border-bottom: $small_margin solid $highlightColor;
 
   & > h1 {
     border-bottom: none !important;
@@ -32,8 +34,8 @@
   border: none;
   font-size: 40px;
   font-weight: $lightFontWeight;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: $small_margin;
+  margin-bottom: $small_margin;
 }
 
 .intro-box > .container > h3 {
@@ -45,7 +47,7 @@
   color: $textColor !important;
   background-color: $secondaryColor;
   border-radius: $standardBorderRadius;
-  margin-bottom: 40px;
+  margin-bottom: $large_margin;
   height: auto;
   width: 100%;
 
@@ -69,20 +71,20 @@
     @media(min-width:$minLargeDevice) {
       margin-top: 0px;
     }
-    @media(max-width:$maxLargeDevice) {
-      margin-top: 35px;
+    @media(max-width: $maxLargeDevice) {
+      margin-top: $large_margin - 5px;
     }
-    @media(max-width:$maxMediumDevice) {
-      margin-top: 10px;
+    @media(max-width: $maxMediumDevice) {
+      margin-top: $small_margin;
     }
   }
 
   & > .h3.home-featured-data-header {
     @media(min-width:$minLargeDevice) {
-      margin-top: 40px;
+      margin-top: $large_margin;
     }
-    @media(max-width:$maxLargeDevice) {
-      margin-top: 10px;
+    @media(max-width: $maxLargeDevice) {
+      margin-top: $small_margin;
     }
   }
 }  
@@ -121,8 +123,13 @@ li.list-group-item--home {
 }
 
 .home-trinity-container {
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: $large_margin;
+  margin-bottom: $large_margin;
+
+  @media(max-width: $maxExtraSmallDevice) {
+    margin-top: $small_margin;
+    margin-bottom: $small_margin;
+  }
 
   & > .frow {
     justify-content: space-between;
@@ -158,6 +165,10 @@ li.list-group-item--home {
   &:hover, &:focus {
     background-color: $tertiaryColor;
   }
+
+  @media(max-width: $maxExtraSmallDevice) {
+    flex-flow: row-reverse;
+  }
 }
 
 .TrinityItem__Title {
@@ -175,7 +186,13 @@ li.list-group-item--home {
 .TrinityItem__Img {
   width: 40%;
   height: 100%;
-  margin-bottom: 10px;
+  margin-bottom: $small_margin;
+
+  @media(max-width: $maxExtraSmallDevice) {
+    width: 5em;
+    height: inherit;
+    margin: $small_margin;
+  }
 
   & > img {
     width: 100%;
@@ -190,7 +207,7 @@ li.list-group-item--home {
 }
 
 .xtralinks {
-  padding-top: 40px;
+  padding-top: $large_margin;
   
   & > frow {
     justify-content: space-around;
