@@ -49,16 +49,14 @@ const FeaturedContentItem = ({ text_key, href, is_link_out, is_new, is_youtube }
 </li>;
 
 const TrinityItem = ({img_url, title, href}) => (
-  <div className="fcol-md-4">
-    <a href={href} className="TrinityItem">
-      <div className="TrinityItem__Title">
-        {title}
-      </div>
-      <div className="TrinityItem__Img">
-        <img aria-hidden="true" src={img_url}/>
-      </div>
-    </a>
-  </div>
+  <a href={href} className="TrinityItem fcol-md-4">
+    <div className="TrinityItem__Title">
+      {title}
+    </div>
+    <div className="TrinityItem__Img">
+      <img aria-hidden="true" src={img_url}/>
+    </div>
+  </a>
 );
 
 const HomeLayout = props => (
@@ -77,24 +75,22 @@ const HomeLayout = props => (
     </div>
 
     <div className="container">
-      <div className="home-trinity-container">
-        <div className="frow">
-          <TrinityItem
-            href="#orgs/gov/gov/infograph/financial"
-            img_url={get_static_url('svg/expend.svg')}
-            title={<TM k="home_finance_title" />}
-          />
-          <TrinityItem
-            href="#orgs/gov/gov/infograph/people"
-            img_url={get_static_url('svg/people.svg')}
-            title={<TM k="home_ppl_title" />}
-          />
-          <TrinityItem
-            href="#orgs/gov/gov/infograph/results"
-            img_url={get_static_url('svg/results.svg')}
-            title={<TM k="home_results_title" />}
-          />
-        </div>
+      <div className="home-trinity-container frow">
+        <TrinityItem
+          href="#orgs/gov/gov/infograph/financial"
+          img_url={get_static_url('svg/expend.svg')}
+          title={<TM k="home_finance_title" />}
+        />
+        <TrinityItem
+          href="#orgs/gov/gov/infograph/people"
+          img_url={get_static_url('svg/people.svg')}
+          title={<TM k="home_ppl_title" />}
+        />
+        <TrinityItem
+          href="#orgs/gov/gov/infograph/results"
+          img_url={get_static_url('svg/results.svg')}
+          title={<TM k="home_results_title" />}
+        />
       </div>
       <div className="frow home-cols">
         <div className="fcol-md-7">
@@ -119,7 +115,7 @@ const HomeLayout = props => (
           </div>       
         </div>
         <div className="fcol-md-5">
-          <h2 className="home-search-header">
+          <h2>
             <TM k="home_search_bar_title" />
           </h2> 
           <div className="search-box">
@@ -146,7 +142,7 @@ const HomeLayout = props => (
               />
             </div>       
           </div>
-          <h2 className="home-search-header">
+          <h2>
             <TM k="featured_data_title" />
           </h2>
           <div>
