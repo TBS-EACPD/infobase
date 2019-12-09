@@ -17,7 +17,6 @@
 .pull-down-accordion-header {
   padding: 10px;
   cursor: pointer;
-  border-radius: 5px 5px 0px 0px;
 
   & > button {
     @include unstyled-button;
@@ -37,7 +36,6 @@
 .pull-down-accordion-footer {
   min-height: 10px;
   padding: 5px 0 2px 0;
-  border-radius: 0 0 5px 5px;
   border-top: 1px solid white;
 }
 
