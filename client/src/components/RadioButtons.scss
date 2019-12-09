@@ -4,7 +4,7 @@
   display: inline-flex;
   width: 700px;
   border: 2px solid $buttonPrimaryColor;
-  border-radius: 10px;
+  border-radius: $standardBorderRadius;
   font-size: 1.2em;
   font-weight: $mediumFontWeight;
   background-color: inherit;

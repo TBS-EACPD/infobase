@@ -274,7 +274,7 @@ a.btn-ib-light {
   background-color: inherit;
   border: 2px solid $buttonPrimaryColor;
   color: inherit;
-  border-radius: 10px; 
+  border-radius: $standardBorderRadius; 
   
   &:focus,
   &:active,
@@ -288,7 +288,7 @@ a.btn-ib-light {
    background-color: $backgroundColor;
    border: 2px solid $buttonPrimaryColor;
    color: $buttonPrimaryColor !important;
-   border-radius: 10px;
+   border-radius: $standardBorderRadius;
 }
 .btn-ib-primary:hover,
 .btn-ib-primary:active,
@@ -303,7 +303,7 @@ a.btn-ib-light {
 
 .btn-ib-toggle {
   border: 2px solid $buttonPrimaryColor;
-  border-radius: 10px;
+  border-radius: $standardBorderRadius;
 }
 .btn-ib-toggle.btn-ib-toggle--on {
   background-color: $buttonPrimaryColor;
@@ -317,7 +317,7 @@ a.btn-ib-light {
 
 .list-group {
   border: 2px solid $separatorColor;
-  border-radius: 10px;
+  border-radius: $standardBorderRadius;
 }
 
 .list-group--withheader {
@@ -504,13 +504,13 @@ ol.breadcrumb > li:last-child > :last-child {
   background-color: $secondaryColor;
   text-align: center;
   border-color: $secondaryColor;
-  border-radius: 10px 10px 0px 0px;
+  border-radius: $standardBorderRadius $standardBorderRadius 0px 0px;
   padding: 10px;
 }
 
 .form-control.input-lg {
   border: 2px solid $separatorColor;
-  border-radius: 10px;
+  border-radius: $standardBorderRadius;
   box-shadow: none !important;
   opacity: 1;
   background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);

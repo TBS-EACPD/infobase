@@ -61,7 +61,7 @@ div.d3-list {
   padding: 8px 10px 0px;
   border: 1px solid $separatorColor;
   background-color: $backgroundColor;
-  border-radius: 10px;
+  border-radius: $standardBorderRadius;
 }
 
 .legend-container.horizontal {

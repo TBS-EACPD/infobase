@@ -37,7 +37,7 @@ $partitionPopupColour: $secondaryColor;
   width: inherit;
   position: absolute;
   background-color: rgba( $partitionBackgroundColour, 0.81);
-  border-radius: 10px;
+  border-radius: $standardBorderRadius;
   z-index: 101;
 }
 

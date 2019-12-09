@@ -40,8 +40,8 @@
 }
 @media (min-width: $minMediumDevice){
   .labeled-box-label {
-    width:18%;
-    border-radius: 10px 0px 0px 10px;
+    width: 18%;
+    border-radius: $standardBorderRadius 0px 0px $standardBorderRadius;
     /* make the blue rounded part go over the content labeled-box-content */
     z-index: 1;
   }
