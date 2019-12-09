@@ -21,7 +21,7 @@
 .labeled-box-content {
   display: flex;
   border: 1px solid $primaryColor;
-  border-radius: 0 10px 10px 0;
+  border-radius: 0 $standardBorderRadius $standardBorderRadius 0;
   background-color: $backgroundColor;
   padding: 10px 10px 10px 10px;
   & > .row{
