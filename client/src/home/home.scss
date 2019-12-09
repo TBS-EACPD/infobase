@@ -221,9 +221,6 @@ li.list-group-item--home {
       background-color: lighten($tertiaryColor, 30%) !important;
     }
   }
-  & > a.link-unstyled > .top-img-card {
-    min-height: 300px;
-  }
   & > a > .top-img-card > .top-img-card__top {
     @media(min-width: $minExtraSmallDevice) {
       height: 150px;
