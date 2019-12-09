@@ -49,7 +49,20 @@ const table_links_by_tag = _.chain( tables )
       tag,
       _.chain(tables)
         .filter( ({tags}) => _.includes(tags, tag) )
-        .map( (table) => <a key={table.id} href={rpb_link({table})}>{table.name}</a>)
+        .map( 
+          (table) => (
+            <li 
+              key={table.id}
+              style={{
+                display: "inline-block",
+                marginRight: "1em",
+              }}
+            >
+              • <a href={rpb_link({table})}>{table.name}</a>
+            </li>
+          )
+        )
+        .thru( (list_items) => <ul>{list_items}</ul> )
         .value(),
     ]
   )
