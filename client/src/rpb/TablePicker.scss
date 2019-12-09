@@ -42,81 +42,18 @@
   background-color: $buttonPrimaryColor;
   padding-right: 3px;
   border-radius: 0px 8px 8px 0px;
-  border:none;
+  border: none;
   color: $textLightColor;
 
   // Fix inconsistent sub-pixel white gaps in IE11
   padding-left: 1px;
   margin-right: -1px;
-}
 
-.tag-glossary-item {
-  width: 25px;
-  height: 30px;
-
-  & > .tag-glossary-icon {
-    height: inherit;
-    width: inherit;
+  // override glossary icon size
+  & > .glossary-tooltip-link > svg {
+    width: 1.5em !important;
+    height: 2em !important;
   }
-
-  & > .tag-tooltip-text {
-    visibility: hidden;
-    color: $textLightColor;
-    background-color: $primaryColor;
-    text-align: left;
-    border-radius: 5px;
-    padding: 1px 20px 10px 20px;
-    position: absolute;
-    z-index: 1;
-    font-size: 0.8em;
-    border: none; 
-    
-    @media (min-width: $minLargeDevice) { 
-      width: 550px;
-    }
-    @media (min-width: $minMediumDevice) and (max-width: $maxLargeDevice) { 
-      width: 70vw;
-      right: 0vw;
-    }
-    @media (max-width: $maxMediumDevice) { 
-      width: 80vw;
-      right: 0vw;
-    }
-  }
-}
-
-.TablePicker__tooltip-inner{
-  background-color: $primaryColor;
-}
-.tooltip[x-placement^="right"]>.TablePicker__tooltip-arrow {
-  border-right-color: $primaryColor;
-  border-left-color: transparent;
-  border-top-color: transparent;
-  border-bottom-color: transparent;
-}
-.tooltip[x-placement^="left"]>.TablePicker__tooltip-arrow {
-  border-left-color: $primaryColor;
-  border-right-color: transparent;
-  border-top-color: transparent;
-  border-bottom-color: transparent;
-}
-.tooltip[x-placement^="bottom"]>.TablePicker__tooltip-arrow {
-  border-bottom-color: $primaryColor;
-  border-right-color: transparent;
-  border-top-color: transparent;
-  border-left-color: transparent;
-}
-.tooltip[x-placement^="top"]>.TablePicker__tooltip-arrow {
-  border-top-color: $primaryColor;
-  border-right-color: transparent;
-  border-left-color: transparent;
-  border-bottom-color: transparent;
-}
-
-
-.tag-glossary-item:hover > .tag-tooltip-text,
-.tag-button-helper:focus > .tag-glossary-item > .tag-tooltip-text {
-  visibility: visible;
 }
 
 .tag-cloud-main > li:hover > button,
