@@ -156,6 +156,7 @@ li.list-group-item--home {
 
   @media(max-width: $maxExtraSmallDevice) {
     flex-flow: row-reverse;
+    justify-content: center;
     &:first-child {
       margin-top: $small_margin;
     }
@@ -172,7 +173,10 @@ li.list-group-item--home {
   text-transform: uppercase;
   color: $textLightColor;
 
-  width: 100% /* IE fix */
+
+  @media(min-width: $minExtraSmallDevice) {
+    width: 100% /* IE fix */
+  }
 }
 
 .TrinityItem__Img {
