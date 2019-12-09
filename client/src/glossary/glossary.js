@@ -40,7 +40,21 @@ function get_glossary_items_by_letter(){
   return glossary_items_by_letter;
 }
 
-
+const tables = Table.get_all();
+const table_links_by_tag = _.chain( tables )
+  .flatMap('tags')
+  .uniq()
+  .map(
+    (tag) => [
+      tag,
+      _.chain(tables)
+        .filter( ({tags}) => _.includes(tags, tag) )
+        .map( (table) => <a key={table.id} href={rpb_link({table})}>{table.name}</a>)
+        .value(),
+    ]
+  )
+  .fromPairs()
+  .value();
 
 //id tag is there for legacy styles 
 const Glossary_ = ({ active_key, items_by_letter }) => (
@@ -90,62 +104,54 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
             items_by_letter, 
             ({letter, items}) => _.map(
               items, 
-              (item, ix) => {
-                
-                const tagged_table_links = _.chain( Table.get_all() )
-                  .filter( (table) => _.includes(table.tags, item.id) )
-                  .map( (table) => <a key={table.id} href={rpb_link({table})}>{table.name}</a> )
-                  .value();
-
-                return (
-                  <Fragment key={ix}>
-                    <dt
-                      className="glossary-dt"
-                      id={
-                      ix === 0 ?
-                      `__${letter}` :
-                      null 
-                      }
-                      tabIndex={0}
+              (item, ix) => (
+                <Fragment key={ix}>
+                  <dt
+                    className="glossary-dt"
+                    id={
+                    ix === 0 ?
+                    `__${letter}` :
+                    null 
+                    }
+                    tabIndex={0}
+                  >
+                    <span
+                      id={item.id}
+                      tabIndex={-1}
                     >
-                      <span
-                        id={item.id}
-                        tabIndex={-1}
-                      >
-                        {item.title}
-                      </span>
-                    </dt>
-                    <dd>
-  
-                      <div 
-                        dangerouslySetInnerHTML={{__html: item.definition}}
-                      />
-  
+                      {item.title}
+                    </span>
+                  </dt>
+                  <dd>
+
+                    <div 
+                      dangerouslySetInnerHTML={{__html: item.definition}}
+                    />
+
+                    <p>
+                      {text_maker("glossary_translation")} {item.translation}
+                    </p>
+
+                    { table_links_by_tag[item.id] &&
                       <p>
-                        {text_maker("glossary_translation")} {item.translation}
+                        {text_maker("glossary_related_data")} {table_links_by_tag[item.id]}
                       </p>
-  
-                      { !_.isEmpty(tagged_table_links) &&
-                        <p>
-                          {text_maker("glossary_related_data")} {tagged_table_links}
-                        </p>
-                      }
-                      
-                      <div className='glossary-top-link-container'>
-                        <a className="glossary-top-link"
-                          href="#"
-                          tabIndex='0'
-                          onClick={evt => {
-                            evt.preventDefault();
-                            document.body.scrollTop = document.documentElement.scrollTop = 0;
-                            document.querySelector('#glossary_search > div > div > input').focus();
-                          }}
-                        >{text_maker("back_to_top")}</a>
-                      </div>
-                    </dd>
-                  </Fragment>
-                );
-              }
+                    }
+                    
+                    <div className='glossary-top-link-container'>
+                      <a className="glossary-top-link"
+                        href="#"
+                        tabIndex='0'
+                        onClick={evt => {
+                          evt.preventDefault();
+                          document.body.scrollTop = document.documentElement.scrollTop = 0;
+                          document.querySelector('#glossary_search > div > div > input').focus();
+                        }}
+                      >{text_maker("back_to_top")}</a>
+                    </div>
+                  </dd>
+                </Fragment>
+              )
             )
           )}
         </dl>
