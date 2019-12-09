@@ -76,8 +76,8 @@ hr {
 
 .glossary-tooltip-link,
 .glossary-tooltip-link:visited {
-  text-decoration: none !important;
-  border-bottom: 1px dotted $textColor !important;
+  text-decoration: none;
+  border-bottom: 1px dotted $textColor;
   transition: width 2s;
   opacity: 0.8;
 }
