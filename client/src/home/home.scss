@@ -1,13 +1,13 @@
 @import '../common_css/common-variables';
 
-$large_margin: 40px;
-$small_margin: 10px;
+$largeMargin: 40px;
+$smallMargin: 10px;
 
 .intro-box {
   padding: 30px 0 0;
   background-color: $primaryColor;
   color: $textLightColor;
-  border-bottom: $small_margin solid $highlightColor;
+  border-bottom: $smallMargin solid $highlightColor;
 
   & > h1 {
     border-bottom: none !important;
@@ -34,8 +34,8 @@ $small_margin: 10px;
   border: none;
   font-size: 40px;
   font-weight: $lightFontWeight;
-  margin-top: $small_margin;
-  margin-bottom: $small_margin;
+  margin-top: $smallMargin;
+  margin-bottom: $smallMargin;
 }
 
 .intro-box > .container > h3 {
@@ -47,9 +47,9 @@ $small_margin: 10px;
   color: $textColor !important;
   background-color: $secondaryColor;
   border-radius: $standardBorderRadius;
-  margin-bottom: $large_margin;
+  margin-bottom: $largeMargin;
   @media(max-width: $maxExtraSmallDevice) {
-    margin-bottom: $small_margin;
+    margin-bottom: $smallMargin;
   }
   height: auto;
   width: 100%;
@@ -69,20 +69,20 @@ $small_margin: 10px;
 
 .frow.home-cols > .fcol-md-5 {
   @media(max-width: $maxMediumDevice){
-    margin-bottom: $small_margin;
+    margin-bottom: $smallMargin;
   }
 
 
   & > h2:first-child {
     margin-top: 0px;
     @media(max-width: $maxExtraSmallDevice) {
-      margin-top: $small_margin;
+      margin-top: $smallMargin;
     }
   }
   & > h2:not(:first-child) {
-    margin-top: $large_margin/2;
+    margin-top: $largeMargin/2;
     @media(max-width: $maxExtraSmallDevice) {
-      margin-top: $small_margin;
+      margin-top: $smallMargin;
     }
   }
 }  
@@ -121,11 +121,11 @@ li.list-group-item--home {
 }
 
 .home-trinity-container {
-  margin-top: $large_margin;
-  margin-bottom: $large_margin;
+  margin-top: $largeMargin;
+  margin-bottom: $largeMargin;
   @media(max-width: $maxExtraSmallDevice) {
-    margin-top: $small_margin;
-    margin-bottom: $small_margin;
+    margin-top: $smallMargin;
+    margin-bottom: $smallMargin;
   }
 
   justify-content: space-between;
@@ -158,9 +158,9 @@ li.list-group-item--home {
     flex-flow: row-reverse;
     justify-content: center;
     &:first-child {
-      margin-top: $small_margin;
+      margin-top: $smallMargin;
     }
-    margin-bottom: $small_margin;
+    margin-bottom: $smallMargin;
   }
 }
 
@@ -182,12 +182,12 @@ li.list-group-item--home {
 .TrinityItem__Img {
   width: 40%;
   height: 100%;
-  margin-bottom: $small_margin;
+  margin-bottom: $smallMargin;
 
   @media(max-width: $maxExtraSmallDevice) {
     width: 5em;
     height: inherit;
-    margin: $small_margin;
+    margin: $smallMargin;
   }
 
   & > img {
@@ -203,9 +203,9 @@ li.list-group-item--home {
 }
 
 .xtralinks {
-  padding-top: $large_margin;
+  padding-top: $largeMargin;
   @media(max-width: $maxExtraSmallDevice){
-    padding-top: $small_margin;
+    padding-top: $smallMargin;
   }
   
   & > frow {
