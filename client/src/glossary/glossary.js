@@ -5,6 +5,8 @@ import {
   StandardRouteContainer,
   ScrollToTargetContainer,
 } from '../core/NavComponents.js';
+import { Table } from '../core/TableClass.js'; 
+import { rpb_link } from '../rpb/rpb_link.js';
 import { GlossaryEntry } from '../models/glossary.js';
 import { 
   create_text_maker_component,
@@ -84,46 +86,68 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
       </div>
       <div className="glossary-items">
         <dl>
-          {_.map(items_by_letter, ({ letter, items}) => _.map(items, (item,ix) => 
-            <Fragment key={ix}>
-              <dt
-                className="glossary-dt"
-                id={
-                ix === 0 ?
-                `__${letter}` :
-                null 
-                }
-                tabIndex={0}
-              >
-                <span
-                  id={item.id}
-                  tabIndex={-1}
-                >
-                  {item.title}
-                </span>
-              </dt>
-              <dd>
-                <div 
-                  dangerouslySetInnerHTML={{__html: item.definition}}
-                />
-                <div>
-                  <p>{text_maker("glossary_translation")} {item.translation}</p>
-                </div>
+          {_.map(
+            items_by_letter, 
+            ({letter, items}) => _.map(
+              items, 
+              (item, ix) => {
                 
-                <div className='glossary-top-link-container'>
-                  <a className="glossary-top-link"
-                    href="#"
-                    tabIndex='0'
-                    onClick={evt => {
-                      evt.preventDefault();
-                      document.body.scrollTop = document.documentElement.scrollTop = 0;
-                      document.querySelector('#glossary_search > div > div > input').focus();
-                    }}
-                  >{text_maker("back_to_top")}</a>
-                </div>
-              </dd>
-              
-            </Fragment>))}
+                const tagged_table_links = _.chain( Table.get_all() )
+                  .filter( (table) => _.includes(table.tags, item.id) )
+                  .map( (table) => <a key={table.id} href={rpb_link({table})}>{table.name}</a> )
+                  .value();
+
+                return (
+                  <Fragment key={ix}>
+                    <dt
+                      className="glossary-dt"
+                      id={
+                      ix === 0 ?
+                      `__${letter}` :
+                      null 
+                      }
+                      tabIndex={0}
+                    >
+                      <span
+                        id={item.id}
+                        tabIndex={-1}
+                      >
+                        {item.title}
+                      </span>
+                    </dt>
+                    <dd>
+  
+                      <div 
+                        dangerouslySetInnerHTML={{__html: item.definition}}
+                      />
+  
+                      <p>
+                        {text_maker("glossary_translation")} {item.translation}
+                      </p>
+  
+                      { !_.isEmpty(tagged_table_links) &&
+                        <p>
+                          {text_maker("glossary_related_data")} {tagged_table_links}
+                        </p>
+                      }
+                      
+                      <div className='glossary-top-link-container'>
+                        <a className="glossary-top-link"
+                          href="#"
+                          tabIndex='0'
+                          onClick={evt => {
+                            evt.preventDefault();
+                            document.body.scrollTop = document.documentElement.scrollTop = 0;
+                            document.querySelector('#glossary_search > div > div > input').focus();
+                          }}
+                        >{text_maker("back_to_top")}</a>
+                      </div>
+                    </dd>
+                  </Fragment>
+                );
+              }
+            )
+          )}
         </dl>
       </div>
     </div>
