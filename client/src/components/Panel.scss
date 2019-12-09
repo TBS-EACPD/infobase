@@ -58,7 +58,7 @@
   .panel.panel-info.panel-flat {
     margin-bottom: 23px;
     background-color: $backgroundColor;
-    border-radius: 10px;
+    border-radius: $standardBorderRadius;
     border: 2px solid $primaryColor;
   }
 
@@ -69,7 +69,7 @@
   
   section.panel {
     background-color: $primaryColor;
-    border-radius: 10px;
+    border-radius: $standardBorderRadius;
     border: 2px solid $primaryColor;
     overflow:hidden
   }

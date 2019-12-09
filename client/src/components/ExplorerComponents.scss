@@ -17,7 +17,7 @@
   margin-bottom: 4px;
 
   /* default borders that are overridden by even/odd/is-search_match */
-  border-radius: 10px;
+  border-radius: $standardBorderRadius;
   border-width: 1px;
   border-style: solid;
 
@@ -131,7 +131,7 @@
 .ExplorerHeader {
   padding-top: 5px;
   padding-bottom: 5px;
-  border-radius: 10px;
+  border-radius: $standardBorderRadius;
 
   &.ExplorerHeader--blue {
     background-color: $secondaryColor;

@@ -2,7 +2,7 @@
 
 // Partition diagram Style overwrites
 .budget-measure-partiton-area > .partition-diagram-outer-area > .partition-diagram {
-  border-radius: 10px;
+  border-radius: $standardBorderRadius;
 
   & > .header {
     color: $textLightColor;

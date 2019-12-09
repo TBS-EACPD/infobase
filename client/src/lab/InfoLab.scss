@@ -3,7 +3,7 @@
 
 .lab-content {
     background-color: $secondaryColor;
-    border-radius: 10px;
+    border-radius: $standardBorderRadius;
     margin: 10px;
     min-height: 200px;
 }

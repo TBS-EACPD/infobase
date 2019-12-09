@@ -44,7 +44,7 @@
 .col-content.featured-col-content {
   color: $textColor !important;
   background-color: $secondaryColor;
-  border-radius: 10px;
+  border-radius: $standardBorderRadius;
   margin-bottom: 40px;
   height: auto;
   width: 100%;
@@ -54,7 +54,7 @@
   }
 
   & > a:hover > .left-img-card, & > a:focus > .left-img-card {
-    border-radius: 10px;
+    border-radius: $standardBorderRadius;
     background-color: lighten( $secondaryColor, 10% )
   }
 }
@@ -90,7 +90,7 @@
 .col-content.misc-col-content {
   color: $textColor !important;
   background-color: $tertiaryColor;
-  border-radius: 10px;
+  border-radius: $standardBorderRadius;
 }
 
 li.list-group-item--home {
@@ -149,7 +149,7 @@ li.list-group-item--home {
   @include unstyled-link;
   height: 100%;
   background-color: darken( $tertiaryColor, 10% );
-  border-radius: 10px;
+  border-radius: $standardBorderRadius;
   display: flex;
   flex-direction: column;
   align-items: center;

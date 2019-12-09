@@ -138,7 +138,7 @@
   font-size: 12px;
 }
 .partition-popup {
-  border-radius: 10px;
+  border-radius: $standardBorderRadius;
   z-index: 100;
   text-align: left;
   color: $textColor;

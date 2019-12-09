@@ -97,7 +97,7 @@
 .item-card {
   border-width: 2px;
   border-style: solid;
-  border-radius: 10px;
+  border-radius: $standardBorderRadius;
   border-color: $primaryColor;
   display: flex;
   flex-direction: column;

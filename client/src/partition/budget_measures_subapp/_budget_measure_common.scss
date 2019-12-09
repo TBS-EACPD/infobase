@@ -5,7 +5,7 @@ $controlsColorLighter: $secondaryColor;
 
 @mixin budget-controls-footer-mixin {
   background-color: $controlsColor;
-  border-radius: 10px;
+  border-radius: $standardBorderRadius;
 
   & > .labeled-box {
 
