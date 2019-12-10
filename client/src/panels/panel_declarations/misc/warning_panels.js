@@ -1,19 +1,13 @@
 import text from './warning_panels.yaml'; 
 
 import {
-  run_template,
-  year_templates,
+  actual_to_planned_gap_year,
   util_components,
   Subject,
   create_text_maker_component,
 
   declare_panel,
 } from "../shared.js";
-
-const {
-  std_years,
-  planning_last_year,
-} = year_templates;
 
 const { TM } = create_text_maker_component([text]);
 const { Dept } = Subject;
@@ -62,22 +56,21 @@ export const declare_dead_crso_warning_panel = () => declare_panel({
 });
 
 
-export const declare_year_warning_panel = () => declare_panel({
-  panel_key: "year_warning",
+export const declare_gap_year_warning_panel = () => declare_panel({
+  panel_key: "gap_year_warning",
   levels: ['gov','dept','crso','program'],
   panel_config_func: (level, panel_key) => ({
     footnotes: false,
     calculate: (subject, info, options) => {
-      return !subject.is_dead && run_template( _.last(std_years) ) !== run_template(planning_last_year);
+      return !subject.is_dead && actual_to_planned_gap_year;
     },
     render({calculations}){
-      const { info } = calculations;
       return (
         <div 
           className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text"
           style={{textAlign: "center"}}
         >
-          <TM k="year_warning" args={{year: info.current_fiscal_year}}/>
+          <TM k="gap_year_warning" args={{gap_year: actual_to_planned_gap_year}}/>
         </div>
       );
     },

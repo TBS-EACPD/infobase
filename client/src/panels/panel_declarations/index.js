@@ -47,7 +47,7 @@ export {
   declare_crso_links_to_other_crso_panel,
   declare_late_dps_warning_panel,
   declare_m2m_tag_warning_panel,
-  declare_year_warning_panel,
+  declare_gap_year_warning_panel,
   declare_dead_program_warning_panel,
   declare_dead_crso_warning_panel,
   declare_resource_structure_panel,

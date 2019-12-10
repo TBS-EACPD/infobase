@@ -58,10 +58,33 @@ const year_values = _.mapValues(
   (templates) => _.map(templates, run_template)
 );
 
-const has_actual_to_planned_gap_year = false;
+const actual_to_planned_gap_year = _.chain(year_values)
+  .thru( ({std_years, planning_years}) => [_.last(std_years), _.first(planning_years)] )
+  .map( (fiscal_year) => _.chain(fiscal_year)
+    .split('-')
+    .first()
+    .parseInt()
+    .value()
+  )
+  .thru( ([last_pa_year, first_planning_year]) => {
+    if (first_planning_year - last_pa_year == 2){
+
+      const first_year = last_pa_year + 1;
+      const second_year = window.lang === "en" ? 
+        first_planning_year.toString().substring(2) : 
+        first_planning_year;
+
+      return `${first_year}-${second_year}`;
+    } else if(first_planning_year - last_pa_year > 2){
+      throw new Error('The gap between the latest Public Accounts year and the first Planning year is more than one fiscal year. This should never happen?');
+    } else {
+      return false;
+    }
+  })
+  .value();
 
 export {
   year_templates,
   year_values,
-  has_actual_to_planned_gap_year,
+  actual_to_planned_gap_year,
 };

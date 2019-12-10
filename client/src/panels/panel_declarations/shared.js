@@ -16,7 +16,7 @@ import { Subject } from '../../models/subject';
 import {
   year_templates,
   year_values,
-  has_actual_to_planned_gap_year,
+  actual_to_planned_gap_year,
 } from '../../models/years.js';
 import { businessConstants } from '../../models/businessConstants.js';
 import FootNote from '../../models/footnotes.js'; 
@@ -465,7 +465,7 @@ export {
   Subject,
   year_templates,
   year_values,
-  has_actual_to_planned_gap_year,
+  actual_to_planned_gap_year,
   businessConstants,
   general_utils,
   FootNote,

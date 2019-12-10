@@ -16,7 +16,7 @@ import { TreeMapInstructions } from './TreeMapInstructions.js';
 import { TreeMapLegend } from './TreeMapLegend.js';
 import { infograph_href_template } from '../infographic/routes.js';
 import { run_template } from '../models/text.js';
-import { year_templates } from '../models/years.js';
+import { actual_to_planned_gap_year } from '../models/years.js';
 import { create_text_maker_component } from '../components/index.js';
 import { 
   sequentialBlues,
@@ -24,12 +24,6 @@ import {
   sequentialGreens,
   sequentialPurples,
 } from '../core/color_schemes.js';
-
-const {
-  std_years,
-  planning_last_year,
-  current_fiscal_year,
-} = year_templates;
 
 const { TM, text_maker } = create_text_maker_component([treemap_text]);
 
@@ -52,12 +46,12 @@ function generate_infograph_href(d, data_area) {
 }
 
 
-const YearWarning = () => run_template( _.last(std_years) ) !== run_template(planning_last_year) && (
+const YearWarning = () => actual_to_planned_gap_year && (
   <div 
     className="alert alert-info alert-no-symbol alert--is-bordered medium_panel_text"
     style={{textAlign: "center"}}
   >
-    <TM k="year_warning" args={{year: run_template(current_fiscal_year)}}/>
+    <TM k="gap_year_warning" args={{gap_year: actual_to_planned_gap_year}}/>
   </div>
 );
 

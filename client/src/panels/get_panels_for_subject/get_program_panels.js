@@ -9,7 +9,7 @@ import {
   declare_results_key_concepts_panel,
   declare_late_dps_warning_panel,
   declare_budget_measures_panel,
-  declare_year_warning_panel,
+  declare_gap_year_warning_panel,
 
   // shared dept, crso, program, tag
   declare_profile_panel,
@@ -49,7 +49,7 @@ export const get_program_panels = subject => ensure_loaded({
   ],
   financial: [
     declare_dead_program_warning_panel(),
-    declare_year_warning_panel(),
+    declare_gap_year_warning_panel(),
     declare_financial_key_concepts_panel(),
     declare_welcome_mat_panel(),
     declare_budget_measures_panel(),
