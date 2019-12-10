@@ -5,9 +5,9 @@ import text from './programFtes.yaml';
 //
 
 
-import { stats, Subject, trivial_text_maker, m, Statistics, years } from './table_common';
+import { stats, Subject, trivial_text_maker, m, Statistics, year_templates } from './table_common';
 
-const { std_years, planning_years } = years;
+const { std_years, planning_years } = year_templates;
 const { Program, Gov } = Subject;
 
 export default {

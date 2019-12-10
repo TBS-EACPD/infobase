@@ -4,13 +4,13 @@ import {
   trivial_text_maker, 
   m, 
   Statistics, 
-  years,
+  year_templates,
 } from "./table_common";
 
 const {
   people_years,
   people_years_short_second,
-} = years;
+} = year_templates;
 
 export default {
   text,

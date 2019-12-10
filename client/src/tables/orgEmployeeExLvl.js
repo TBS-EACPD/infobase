@@ -7,7 +7,7 @@ import {
   Statistics,  
   people_five_year_percentage_formula,
   businessConstants,
-  years,
+  year_templates,
 } from "./table_common";
 
 const {
@@ -17,7 +17,7 @@ const {
 const {
   people_years,
   people_years_short_second,
-} = years;
+} = year_templates;
 
 export default {
   text,

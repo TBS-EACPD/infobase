@@ -9,11 +9,11 @@ import {
   m, 
   Statistics, 
   businessConstants, 
-  years,
+  year_templates,
 } from './table_common';
 
 const { sos } = businessConstants;
-const { std_years } = years;
+const { std_years } = year_templates;
 
 export default {
   text,

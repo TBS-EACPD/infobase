@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import MediaQuery from 'react-responsive';
 import {
   run_template,
-  years,
+  year_templates,
   declarative_charts,
   trivial_text_maker,
   NivoResponsiveLine,
@@ -15,7 +15,7 @@ const {
   A11YTable,
 } = declarative_charts;
 
-const { std_years, planning_years, current_fiscal_year } = years;
+const { std_years, planning_years, current_fiscal_year } = year_templates;
 const exp_cols = _.map(std_years, yr=>`${yr}exp`);
 
 const calculate = (type, subject) => {

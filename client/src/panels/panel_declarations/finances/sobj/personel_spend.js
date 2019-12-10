@@ -1,7 +1,7 @@
 import { text_maker, TM } from './sobj_text_provider.js';
 import {
   declare_panel,
-  years,
+  year_templates,
   businessConstants,
   util_components,
   declarative_charts,
@@ -13,7 +13,7 @@ const {
   A11YTable,
 } = declarative_charts;
 const { sos } = businessConstants;
-const { std_years } = years;
+const { std_years } = year_templates;
 const { Format } = util_components;
 
 export const declare_personnel_spend_panel = () => declare_panel({

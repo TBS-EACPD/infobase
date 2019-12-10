@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import text from './auth_exp_prog_spending.yaml';
 import {
   run_template,
-  years,
+  year_templates,
   declarative_charts,
   StdPanel,
   Col,
@@ -21,7 +21,7 @@ const {
 } = declarative_charts;
 const { Details } = util_components;
 
-const { std_years, planning_years } = years;
+const { std_years, planning_years } = year_templates;
 const { text_maker, TM } = create_text_maker_component(text);
 
 const auth_cols = _.map(std_years, yr=>`${yr}auth`);

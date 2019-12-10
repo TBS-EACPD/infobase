@@ -2,10 +2,10 @@
 // of the table spec
 import text from './orgVoteStatPa.yaml';
 
-import { stats, vote_stat_dimension, major_vote_stat, m, Statistics, years} from './table_common';
+import { stats, vote_stat_dimension, major_vote_stat, m, Statistics, year_templates} from './table_common';
 import { trivial_text_maker } from '../models/text.js';
 
-const { std_years } = years;
+const { std_years } = year_templates;
 const voted_label = trivial_text_maker("voted");
 const stat_label = trivial_text_maker("stat");
 

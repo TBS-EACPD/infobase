@@ -1,7 +1,7 @@
 import text from './dp_rev_split.yaml';
 import {
   util_components,
-  years,
+  year_templates,
   run_template,
   InfographicPanel,
   create_text_maker_component,
@@ -12,7 +12,7 @@ import {
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const { planning_years } = years;
+const { planning_years } = year_templates;
 
 const { Format } = util_components;
 

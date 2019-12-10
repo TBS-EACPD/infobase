@@ -1,7 +1,7 @@
 import text from './crso_by_prog.yaml';
 import {
   NivoResponsiveBar,
-  years,
+  year_templates,
   declarative_charts,
   util_components,
   run_template,
@@ -20,7 +20,7 @@ const {
   A11YTable,
 } = declarative_charts;
 
-const { planning_years } = years;
+const { planning_years } = year_templates;
 
 const { text_maker, TM } = create_text_maker_component(text);
 

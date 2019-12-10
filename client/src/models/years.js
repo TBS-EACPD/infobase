@@ -1,4 +1,6 @@
-const years = {
+import { run_template } from './text.js';
+
+const year_templates = {
   std_years: [
     "{{pa_last_year_5}}",
     "{{pa_last_year_4}}",
@@ -51,4 +53,15 @@ const years = {
   ],
 };
 
-export { years };
+const year_values = _.mapValues(
+  year_templates,
+  (templates) => _.map(templates, run_template)
+);
+
+const has_actual_to_planned_gap_year = false;
+
+export {
+  year_templates,
+  year_values,
+  has_actual_to_planned_gap_year,
+};

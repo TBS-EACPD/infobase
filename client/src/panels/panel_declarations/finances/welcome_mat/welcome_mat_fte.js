@@ -4,7 +4,7 @@ import MediaQuery from 'react-responsive';
 
 import {
   run_template,
-  years,
+  year_templates,
   declarative_charts,
   NivoResponsiveLine,
   newIBCategoryColors,
@@ -16,7 +16,7 @@ const {
   A11YTable,
 } = declarative_charts;
 
-const { std_years, planning_years, current_fiscal_year } = years;
+const { std_years, planning_years, current_fiscal_year } = year_templates;
 
 export const format_and_get_fte = (type, info, subject) => {
   const colors = d3.scaleOrdinal().range(newIBCategoryColors);

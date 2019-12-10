@@ -3,7 +3,7 @@ import text from './top_spending_areas.yaml';
 import {
   util_components,
   run_template,
-  years,
+  year_templates,
   StdPanel,
   Col,
   declarative_charts,
@@ -20,7 +20,7 @@ const {
   collapse_by_so,
 } = table_common;
 
-const { std_years } = years;
+const { std_years } = year_templates;
 const { Format } = util_components;
 const { A11YTable } = declarative_charts;
 

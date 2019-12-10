@@ -2,9 +2,9 @@
 // of the table spec
 import text from './orgTransferPayments.yaml';
 
-import { stats, trivial_text_maker, Statistics, years, businessConstants } from './table_common';
+import { stats, trivial_text_maker, Statistics, year_templates, businessConstants } from './table_common';
 
-const { std_years } = years;
+const { std_years } = year_templates;
 const { transfer_payments } = businessConstants;
 
 export default {

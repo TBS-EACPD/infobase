@@ -4,7 +4,7 @@ import { run_template } from '../../models/text.js';
 // into the provided context object
 const stats = {
 
-  add_all_years(add,context_prefix, years, amounts){
+  add_all_years(add, context_prefix, years, amounts){
     let total = 0;
     let prefix = context_prefix === '' ? "" : context_prefix + '_';
     _.each(years, (year,i)=>{

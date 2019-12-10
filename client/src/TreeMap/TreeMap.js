@@ -16,7 +16,7 @@ import { TreeMapInstructions } from './TreeMapInstructions.js';
 import { TreeMapLegend } from './TreeMapLegend.js';
 import { infograph_href_template } from '../infographic/routes.js';
 import { run_template } from '../models/text.js';
-import { years } from '../models/years.js';
+import { year_templates } from '../models/years.js';
 import { create_text_maker_component } from '../components/index.js';
 import { 
   sequentialBlues,
@@ -29,7 +29,7 @@ const {
   std_years,
   planning_last_year,
   current_fiscal_year,
-} = years;
+} = year_templates;
 
 const { TM, text_maker } = create_text_maker_component([treemap_text]);
 

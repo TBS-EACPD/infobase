@@ -7,7 +7,7 @@ import text from './programSobjs.yaml';
 // of the table spec
 import { 
   trivial_text_maker, 
-  years, 
+  year_templates, 
   businessConstants,
   Statistics, 
   rows_to_rev_split,
@@ -17,7 +17,7 @@ import {
 import { Subject } from '../models/subject';
 
 const { Program } = Subject;
-const { std_years } = years;
+const { std_years } = year_templates;
 const { sos } = businessConstants;
 
 export default {
