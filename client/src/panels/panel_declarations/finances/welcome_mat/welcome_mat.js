@@ -856,7 +856,8 @@ const common_program_crso_calculate = function(subject, info, options){
   return {type, info, calcs};
 };
 
-
+const footnotes = ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"];
+const depends_on = ['programSpending', 'programFtes'];
 export const declare_welcome_mat_panel = () => declare_panel({
   panel_key: "welcome_mat",
   levels: ["gov", "dept", "program", "crso", "tag"],
@@ -864,10 +865,9 @@ export const declare_welcome_mat_panel = () => declare_panel({
     switch (level){
       case "gov":
         return {
-          footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-          glossary_keys: ["FTE"],
+          footnotes,
           info_deps: ["programFtes_gov_info"],
-          depends_on: ['programSpending','programFtes'],
+          depends_on,
           missing_info: "ok",
           calculate (subject, info, options){
             const { programSpending, programFtes } = this.tables; 
@@ -886,10 +886,9 @@ export const declare_welcome_mat_panel = () => declare_panel({
         };
       case "dept":
         return {
-          footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-          glossary_keys: ["FTE"],
+          footnotes,
           info_deps: ["programFtes_dept_info"],
-          depends_on: ['programSpending','programFtes', 'orgVoteStatEstimates', 'orgVoteStatPa'],
+          depends_on: ['orgVoteStatEstimates', 'orgVoteStatPa', ...depends_on],
           missing_info: "ok",
           calculate (subject, info, options){
             const { programSpending, programFtes, orgVoteStatEstimates } = this.tables; 
@@ -945,30 +944,30 @@ export const declare_welcome_mat_panel = () => declare_panel({
         };
       case "program":
         return {
-          footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-          glossary_keys: ["FTE"],
+          footnotes,
           info_deps: ["programFtes_program_info"],
-          depends_on: ['table6', 'table12'],
+          depends_on,
+          glossary_keys: ["FTE"],
           missing_info: "ok",
           calculate: common_program_crso_calculate,
           render,
         };
       case "crso":
         return {
-          footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-          glossary_keys: ["FTE"],
+          footnotes,
           info_deps: ["programFtes_crso_info"],
-          depends_on: ['table6', 'table12'],
+          depends_on,
+          glossary_keys: ["FTE"],
           missing_info: "ok",
           calculate: common_program_crso_calculate,
           render,
         };
       case "tag":
         return {
-          footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
-          glossary_keys: ["FTE"],
+          footnotes,
           info_deps: ["programFtes_program_info"],
-          depends_on: ['programSpending','programFtes'],
+          depends_on,
+          glossary_keys: ["FTE"],
           missing_info: "ok",
           calculate (subject, info, options){
             const { programSpending, programFtes } = this.tables; 
