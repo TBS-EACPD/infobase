@@ -1,6 +1,6 @@
 import './Panel.scss';
 import text from './Panel.yaml';
-import { GlossaryLink } from './glossary_components.js';
+import { GlossaryItem } from './glossary_components.js';
 
 import classNames from 'classnames';
 
@@ -57,7 +57,7 @@ const PanelGlossary = ({keys}) => {
       >
         {_.map(keys, (key,ix) =>
           <li key={ix}>
-            <GlossaryLink id={key} item_class="glossary-link"/>
+            <GlossaryItem id={key} item_class="glossary-link"/>
             {ix !== last_ix && ", "}
           </li>
         )}

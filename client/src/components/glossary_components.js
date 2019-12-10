@@ -46,7 +46,7 @@ export const GlossaryIcon = ({id, alternate_text, arrow_selector, inner_selector
   </GlossaryTooltipWrapper>
 );
 
-export const GlossaryLink = ({id, alternate_text, item_class, arrow_selector, inner_selector}) => (
+export const GlossaryItem = ({id, alternate_text, item_class, arrow_selector, inner_selector}) => (
   <GlossaryTooltipWrapper
     id={id}
     arrow_selector={arrow_selector}
