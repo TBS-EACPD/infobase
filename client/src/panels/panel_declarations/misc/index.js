@@ -19,7 +19,7 @@ export {
 } from './hierarchy_panels.js';
 
 export {
-  declare_year_warning_panel,
+  declare_gap_year_warning_panel,
   declare_dead_program_warning_panel,
   declare_dead_crso_warning_panel,
   declare_m2m_tag_warning_panel,

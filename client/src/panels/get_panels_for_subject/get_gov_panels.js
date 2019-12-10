@@ -7,7 +7,7 @@ import {
   declare_results_key_concepts_panel,
   declare_late_dps_warning_panel,
   declare_budget_measures_panel,
-  declare_year_warning_panel,
+  declare_gap_year_warning_panel,
 
   // shared gov, dept
   declare_links_to_rpb_panel,
@@ -41,7 +41,7 @@ export const get_gov_panels = subject => ({
     declare_simplographic_panel(),
   ],
   financial: [
-    declare_year_warning_panel(),
+    declare_gap_year_warning_panel(),
     declare_financial_key_concepts_panel(),
     declare_welcome_mat_panel(),
     declare_budget_measures_panel(),

@@ -3,6 +3,7 @@ import text from './auth_exp_prog_spending.yaml';
 import {
   run_template,
   year_templates,
+  actual_to_planned_gap_year,
   declarative_charts,
   StdPanel,
   Col,
@@ -75,24 +76,9 @@ class AuthExpProgSpending extends React.Component {
     const history_ticks = _.map(std_years, run_template);
     const plan_ticks = _.map(planning_years, run_template);
   
-    const latest_historical_year = _.chain(history_ticks)
-      .last()
-      .split('-')
-      .first()
-      .parseInt()
-      .value();
-    const first_planning_year = _.chain(plan_ticks)
-      .first()
-      .split('-')
-      .first()
-      .parseInt()
-      .value();
-    const gap_year = first_planning_year - latest_historical_year === 2 && subject.has_planned_spending ? 
-      `${latest_historical_year+1}-${(latest_historical_year+2).toString().substring(2)}` :
-      null;
-  
-    const marker_year = subject.has_planned_spending ? (gap_year || _.first(plan_ticks)) : null;
+    const gap_year = (subject.has_planned_spending && actual_to_planned_gap_year) || null;
 
+    const marker_year = gap_year || (subject.has_planned_spending && _.first(plan_ticks)) || null;
     
     const additional_info = {
       last_history_year: _.last(history_ticks),
@@ -257,7 +243,7 @@ class AuthExpProgSpending extends React.Component {
             {
               axis: 'x',
               value: marker_year,
-              lineStyle: { 
+              lineStyle: {
                 stroke: window.infobase_color_constants.tertiaryColor, 
                 strokeWidth: 2,
                 strokeDasharray: ("3, 3"),

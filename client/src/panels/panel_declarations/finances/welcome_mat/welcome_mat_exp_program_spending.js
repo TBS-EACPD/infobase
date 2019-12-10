@@ -3,6 +3,7 @@ import MediaQuery from 'react-responsive';
 import {
   run_template,
   year_templates,
+  actual_to_planned_gap_year,
   declarative_charts,
   trivial_text_maker,
   NivoResponsiveLine,
@@ -15,7 +16,7 @@ const {
   A11YTable,
 } = declarative_charts;
 
-const { std_years, planning_years, current_fiscal_year } = year_templates;
+const { std_years, planning_years } = year_templates;
 const exp_cols = _.map(std_years, yr=>`${yr}exp`);
 
 const calculate = (type, subject) => {
@@ -50,23 +51,9 @@ export const format_and_get_exp_program_spending = (type, subject) => {
   const history_ticks = _.map(std_years, run_template);
   const plan_ticks = _.map(planning_years, run_template);
   
-  const latest_historical_year = _.chain(history_ticks)
-    .last()
-    .split('-')
-    .first()
-    .parseInt()
-    .value();
-  const first_planning_year = _.chain(plan_ticks)
-    .first()
-    .split('-')
-    .first()
-    .parseInt()
-    .value();
-  const gap_year = first_planning_year - latest_historical_year === 2 && subject.has_planned_spending ?
-      run_template(current_fiscal_year) :
-      null;
+  const gap_year = (subject.has_planned_spending && actual_to_planned_gap_year) || null;
 
-  const marker_year = subject.has_planned_spending ? (gap_year || _.first(plan_ticks)) : null;
+  const marker_year = gap_year || (subject.has_planned_spending && _.first(plan_ticks)) || null;
 
   let exp_program_spending_graph;
   if(window.is_a11y_mode){
