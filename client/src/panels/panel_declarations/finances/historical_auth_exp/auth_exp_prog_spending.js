@@ -77,8 +77,6 @@ class AuthExpProgSpending extends React.Component {
     const plan_ticks = _.map(planning_years, run_template);
   
     const gap_year = (subject.has_planned_spending && actual_to_planned_gap_year) || null;
-
-    const marker_year = gap_year || (subject.has_planned_spending && _.first(plan_ticks)) || null;
     
     const additional_info = {
       last_history_year: _.last(history_ticks),
@@ -238,11 +236,11 @@ class AuthExpProgSpending extends React.Component {
         && {
           layers: ['grid', 'markers', 'areas', DashedLine, 'slices', 'dots', 'axes', 'legends'],
         }),
-        ...(marker_year && _.includes(active_series, text_maker("planned_spending")) && {
+        ...(gap_year && _.includes(active_series, text_maker("planned_spending")) && {
           markers: [
             {
               axis: 'x',
-              value: marker_year,
+              value: gap_year,
               lineStyle: {
                 stroke: window.infobase_color_constants.tertiaryColor, 
                 strokeWidth: 2,

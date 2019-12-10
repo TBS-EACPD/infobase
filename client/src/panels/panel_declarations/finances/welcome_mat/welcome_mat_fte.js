@@ -27,8 +27,6 @@ export const format_and_get_fte = (type, info, subject) => {
 
   const gap_year = (subject.has_planned_spending && actual_to_planned_gap_year) || null;
 
-  const marker_year = gap_year || (subject.has_planned_spending && _.first(plan_ticks)) || null;
-
   const history_data_index = _.map(std_years, (std_year) => `${subject.level}_fte_${std_year.replace(/{|}/g, "")}`);
   const planned_data_index = _.map(planning_years, (planned_year) => `${subject.level}_fte_${planned_year.replace(/{|}/g, "")}`);
   
@@ -156,11 +154,11 @@ export const format_and_get_fte = (type, info, subject) => {
           symbolSize: 12,
         },
       ],
-      ...(marker_year && graph_data.length > 1 && {
+      ...(gap_year && graph_data.length > 1 && {
         markers: [
           {
             axis: 'x',
-            value: marker_year,
+            value: gap_year,
             lineStyle: { 
               stroke: window.infobase_color_constants.tertiaryColor, 
               strokeWidth: 2,
