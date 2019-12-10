@@ -54,7 +54,7 @@ hr {
   text-align: left !important;
   border: none;
   padding: 1px 20px;
-  border-radius: 5px;
+  border-radius: $standardBorderRadius;
 
   @media (min-width:$minLargeDevice){
     max-width: 600px !important;
@@ -260,6 +260,9 @@ div.label {
   }
 }
 
+.nav-pills > li > a {
+  border-radius: $standardBorderRadius;
+}
 /* our app-wide a:visited: black is overriding all the bootstrap white on dark blue styles...  */
 .nav-pills > li.active > a {
   background-color: $primaryColor !important;

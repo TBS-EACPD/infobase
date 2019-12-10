@@ -2,7 +2,7 @@
 @import "../common_css/common-variables";
 
 
-/* styles outside totally outside the explorer */
+/* styles totally outside the explorer */
 .search-clear-container {
   border: 1px solid $separatorColor;
   background-color: lighten($tertiaryColor, 30%);
@@ -12,7 +12,7 @@
   align-content: center;
   padding: 20px;
   margin-bottom: 20px;
-  border-radius: 5px;
+  border-radius: $standardBorderRadius;
 }
 
 
@@ -32,7 +32,7 @@
 
 /* resource-explorer */
 .hierarchy-selection {
-  border-radius: 5px;
+  border-radius: $standardBorderRadius;
   border: 1px solid $primaryColor;
   margin-bottom: 30px;
   background-color: $primaryColor;

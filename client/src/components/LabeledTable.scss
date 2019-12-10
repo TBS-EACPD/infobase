@@ -2,21 +2,21 @@
 
 
 /* copied from resource-explorer */
-.displayTable {
-    border-radius: 5px;
+.labeledTable {
+    border-radius: $standardBorderRadius;
     border: 1px solid $primaryColor;
     margin-bottom: 30px;
     background-color: $primaryColor;
   }
   
-  .displayTable__header {
+  .labeledTable__header {
     color: $textLightColor;
     padding: 10px 0 10px 0;
     font-size: 1.4em;
     text-align: center;
   }
 
-  .displayTable__item {
+  .labeledTable__item {
     @include unstyled-link;
     background-color: lighten($tertiaryColor,40);
     color: $textColor;
@@ -32,28 +32,28 @@
       cursor: pointer;
     }
   }
-  .displayTable__item.active {
+  .labeledTable__item.active {
     background-color: lighten($tertiaryColor,20);
   }
-  .displayTable__item:not(:last-child){
+  .labeledTable__item:not(:last-child){
     border-bottom: 1px solid $primaryColor;
   }
   
   @media(min-width:$minMediumDevice){
-    .displayTable__item {
+    .labeledTable__item {
       display: flex;
       align-items: stretch;
       justify-content: flex-start; 
       padding: 0;
     }
   
-    .displayTable__item > .displayTable__item--header,
-    .displayTable__item > .displayTable__item--description {
+    .labeledTable__item > .labeledTable__item--header,
+    .labeledTable__item > .labeledTable__item--description {
       padding: 15px 10px 15px 25px;
   
     }
   
-    .displayTable__item > .displayTable__item--header {
+    .labeledTable__item > .labeledTable__item--header {
       flex: 0 0 30%;
       width: 100%;
       max-width:100%;
@@ -61,7 +61,7 @@
       border-right: 1px solid $primaryColor;
     }
   
-    .displayTable__item > .displayTable__item--description {
+    .labeledTable__item > .labeledTable__item--description {
       width: 100%;
       max-width:100%;
       display: flex;
@@ -71,24 +71,24 @@
   }
 
   @media(max-width:$maxMediumDevice){
-    .displayTable__items {
+    .labeledTable__items {
       display: flex;
       flex-direction: column;
     }
   
-    .displayTable__item > .displayTable__item--header,
-    .displayTable__item > .displayTable__item--description {
+    .labeledTable__item > .labeledTable__item--header,
+    .labeledTable__item > .labeledTable__item--description {
       padding: 5px;
     }
   
-    .displayTable__item > .displayTable__item--header {
+    .labeledTable__item > .labeledTable__item--header {
       font-size: 1.2em;
       font-weight: $heavyFontWeight;
     }
 
   }
   
-  .displayTable__item:last-child {
+  .labeledTable__item:last-child {
     border-bottom-right-radius: $standardBorderRadius/2;
     border-bottom-left-radius: $standardBorderRadius/2;
   }

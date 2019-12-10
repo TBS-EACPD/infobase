@@ -161,7 +161,7 @@ $treeMapTooltipColor: $primaryColor;
   position: absolute;
   width: 250px;
   height: auto;
-  border-radius:5px;
+  border-radius: $standardBorderRadius;
   border: 2px solid white;
   background: none repeat scroll 0 0 $treeMapTooltipColor;
   color: white;
@@ -217,7 +217,7 @@ $treeMapTooltipColor: $primaryColor;
       color: $textLightColor;
       font-size: 18px;
       padding: 5px;
-      border-radius: 5px 5px 0px 0px;
+      border-radius: $standardBorderRadius $standardBorderRadius 0px 0px;
       min-height: 0px;
     }
   
@@ -238,7 +238,7 @@ $treeMapTooltipColor: $primaryColor;
         width: 100%;
       }
       & > .treemap-options__option:last-child {
-        border-radius: 0px 0px 5px 5px;
+        border-radius: 0px 0px $standardBorderRadius $standardBorderRadius;
         border-width: 1px 2px 2px 2px;
       }
       

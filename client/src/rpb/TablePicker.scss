@@ -213,9 +213,3 @@
   transition: max-height 500ms ease-out, opacity 500ms ease-out;
 
 }
-
-
-/* our app-wide a:visited: black is overriding all the bootstrap white on dark blue styles...  */
-.nav-pills > li.active > a {
-  color: $textLightColor !important;
-}
