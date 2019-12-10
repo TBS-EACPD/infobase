@@ -124,6 +124,6 @@
 }
 
 .hierarchy-selection-item:last-child {
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: $standardBorderRadius/2;
+  border-bottom-left-radius: $standardBorderRadius/2;
 }

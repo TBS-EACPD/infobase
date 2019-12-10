@@ -63,13 +63,13 @@ $controlsColorLighter: lighten($controlsColor, 20%);
     color: $controlsColor;
   }
   .filter-table__item:first-child {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-top-left-radius: $standardBorderRadius;
+    border-bottom-left-radius: $standardBorderRadius;
     border-left-width: 2px;
   }
   .filter-table__item:last-child {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-top-right-radius: $standardBorderRadius;
+    border-bottom-right-radius: $standardBorderRadius;
   }
 
   .filter-table__components {
@@ -96,12 +96,12 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   }
   .filter-table__item:first-child {
     border-top-width: 1px;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
+    border-top-right-radius: $standardBorderRadius/2;
+    border-top-left-radius: $standardBorderRadius/2;
   }
   .filter-table__item:last-child {
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: $standardBorderRadius/2;
+    border-bottom-left-radius: standardBorderRadius/2;
   }
 
   .filter-table__eye {

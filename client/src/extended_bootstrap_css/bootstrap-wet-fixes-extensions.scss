@@ -331,13 +331,13 @@ li.list-group-item {
   border-width: 1px 0px 1px 0px;
   &:first-child {
     border-top-color: rgba(0,0,0,0);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: $standardBorderRadius;
+    border-top-right-radius: $standardBorderRadius;
   }
   &:last-child {
     border-bottom-color: rgba(0,0,0,0);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: $standardBorderRadius;
+    border-bottom-right-radius: $standardBorderRadius;
   }
 }
 .list-group-item:hover:not(.active),
@@ -431,8 +431,8 @@ dl.dl-no-bold-dts {
 
 .alert--is-bordered { 
 border-width: 2px 2px 2px 8px;
-border-bottom-right-radius: 10px;
-border-top-right-radius: 10px;
+border-bottom-right-radius: $standardBorderRadius;
+border-top-right-radius: $standardBorderRadius;
 }
 .alert { 
 background-color: $backgroundColor;
