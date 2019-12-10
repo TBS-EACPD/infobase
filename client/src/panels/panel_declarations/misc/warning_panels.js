@@ -70,7 +70,7 @@ export const declare_year_warning_panel = () => declare_panel({
           className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text"
           style={{textAlign: "center"}}
         >
-          <TM k="year_warning" args={{year: info.public_accounts_year}}/>
+          <TM k="year_warning" args={{year: info.current_fiscal_year}}/>
         </div>
       );
     },
