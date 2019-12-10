@@ -53,7 +53,7 @@ const YearWarning = () => {
         className="alert alert-info alert-no-symbol alert--is-bordered medium_panel_text"
         style={{textAlign: "center"}}
       >
-        <TM k="year_warning" args={{year: year_constants.public_accounts_year}}/>
+        <TM k="year_warning" args={{year: year_constants.current_fiscal_year}}/>
       </div>
     );
   }

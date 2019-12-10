@@ -162,7 +162,7 @@ const WelcomeMat = (props) => {
     latest_hist_spend_data,
     oldest_hist_spend_data,
   } = calcs;
-  const current_year = _.parseInt( run_template('{{pa_in_year_short_first}}') );
+  const current_year = _.parseInt( run_template('{{current_fiscal_year_short_first}}') );
   const oldest_hist_year = _.chain(oldest_hist_spend_data.year)
     .split('-')
     .head()
