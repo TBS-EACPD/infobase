@@ -7,7 +7,7 @@ import {
 import {
   run_template,
   declare_panel,
-  years,
+  year_templates,
   businessConstants,
   declarative_charts,
   InfographicPanel,
@@ -16,7 +16,7 @@ import {
 } from "../../shared.js";
 
 const { transfer_payments } = businessConstants;
-const { std_years } = years;
+const { std_years } = year_templates;
 const { Format } = util_components;
 
 const { 

@@ -7,7 +7,7 @@ import {
   run_template,
   util_components,
   infograph_href_template,
-  years,
+  year_templates,
   declarative_charts,
   businessConstants,
   InfographicPanel,
@@ -21,7 +21,7 @@ import {
   HeightClippedGraph,
 } from "../../shared.js";
 
-const { std_years } = years; 
+const { std_years } = year_templates; 
 
 const { 
   create_text_maker_component,

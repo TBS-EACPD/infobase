@@ -8,7 +8,7 @@ import {
   run_template,
   Table,
   InfographicPanel,
-  years,
+  year_templates,
   create_text_maker_component,
   util_components,
   rpb_link,
@@ -24,7 +24,7 @@ import { format_and_get_fte } from "./welcome_mat_fte.js";
 
 const { Format } = util_components;
 
-const { std_years, planning_years } = years;
+const { std_years, planning_years } = year_templates;
 const exp_cols = _.map(std_years, yr => `${yr}exp`);
 const actual_history_years = _.map(std_years, run_template);
 

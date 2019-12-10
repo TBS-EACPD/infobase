@@ -1,6 +1,6 @@
 import { mix, staticStoreMixin } from '../models/storeMixins.js';
 import { Table } from './TableClass.js';
-import { years } from '../models/years.js';
+import { year_templates } from '../models/years.js';
 import { Subject } from '../models/subject.js';
 import { run_template } from '../models/text.js'; //just needed for a few constants, consider moving this elsewhere...
 
@@ -8,10 +8,10 @@ const { Gov } = Subject;
 
 const year_constants = {
   lang: window.lang,
-  last_years: _.map(years.std_years, e => run_template(e)),
+  last_years: _.map(year_templates.std_years, e => run_template(e)),
   current_fiscal_year: run_template("{{current_fiscal_year}}"),
-  people_years: _.map(years.people_years, e => run_template(e)),
-  planning_years: _.map(years.planning_years, e => run_template(e)),
+  people_years: _.map(year_templates.people_years, e => run_template(e)),
+  planning_years: _.map(year_templates.planning_years, e => run_template(e)),
   est_next_year: run_template("{{est_next_year}}"),
   est_in_year: run_template("{{est_in_year}}"),
 };

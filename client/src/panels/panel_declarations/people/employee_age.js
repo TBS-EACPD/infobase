@@ -4,7 +4,7 @@ import {
   run_template,
   Subject,
   businessConstants,
-  years,
+  year_templates,
   TabbedContent,
   create_text_maker_component,
   declarative_charts,
@@ -18,7 +18,7 @@ import {
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const { people_years } = years;
+const { people_years } = year_templates;
 const { compact_age_groups } = businessConstants;
 
 const { A11YTable } = declarative_charts;

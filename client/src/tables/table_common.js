@@ -1,5 +1,5 @@
 import { stats } from '../core/tables/stats.js';
-import { years } from '../models/years.js';
+import { year_templates } from '../models/years.js';
 import { Subject } from '../models/subject';
 import { Statistics } from '../core/Statistics.js';
 import * as format from '../core/format';
@@ -246,7 +246,7 @@ export {
   Subject,
   Statistics,
   format,
-  years,
+  year_templates,
   rows_to_rev_split,
   is_non_revenue,
   collapse_by_so,

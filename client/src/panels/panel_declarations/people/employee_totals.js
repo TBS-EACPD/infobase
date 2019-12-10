@@ -2,7 +2,7 @@ import text from "./employee_totals.yaml";
 import {
   formats,
   run_template,
-  years,
+  year_templates,
   create_text_maker_component,
   declarative_charts,
   StdPanel,
@@ -20,7 +20,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 const {
   people_years, 
   people_years_short_second,
-} = years;
+} = year_templates;
 
 const {
   A11YTable,

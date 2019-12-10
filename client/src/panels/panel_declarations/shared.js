@@ -13,7 +13,11 @@ import { ensure_loaded } from '../../core/lazy_loader.js';
 import * as Results from '../../models/results.js';
 import { create_text_maker, trivial_text_maker, run_template } from '../../models/text.js';
 import { Subject } from '../../models/subject';
-import { years } from '../../models/years.js';
+import {
+  year_templates,
+  year_values,
+  has_actual_to_planned_gap_year,
+} from '../../models/years.js';
 import { businessConstants } from '../../models/businessConstants.js';
 import FootNote from '../../models/footnotes.js'; 
 import { GlossaryEntry } from '../../models/glossary.js';
@@ -459,7 +463,9 @@ export {
   rpb_link,
   get_appropriate_rpb_subject,
   Subject,
-  years,
+  year_templates,
+  year_values,
+  has_actual_to_planned_gap_year,
   businessConstants,
   general_utils,
   FootNote,

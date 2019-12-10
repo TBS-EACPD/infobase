@@ -5,7 +5,7 @@ import {
   Subject, 
   run_template, 
   create_text_maker_component,
-  years, 
+  year_templates, 
   declarative_charts,
   NivoResponsiveBar,
   
@@ -13,7 +13,7 @@ import {
 } from '../../shared.js';
 
 const { Gov, Tag } = Subject;
-const { std_years } = years;
+const { std_years } = year_templates;
 const { GraphLegend } = declarative_charts;
 const { text_maker, TM } = create_text_maker_component(text);
 

@@ -2,10 +2,10 @@ import text from './programVoteStat.yaml';
 
 // see [here](../table_definition.html) for description
 // of the table spec
-import { Subject, trivial_text_maker, Statistics, years } from './table_common';
+import { Subject, trivial_text_maker, Statistics, year_templates } from './table_common';
 
 const { Program } = Subject;
-const { std_years } = years;
+const { std_years } = year_templates;
 
 export default {
   text,

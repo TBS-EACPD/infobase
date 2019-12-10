@@ -2,7 +2,7 @@ import text from "./employee_prov.yaml";
 import {
   formats,
   run_template,
-  years,
+  year_templates,
   businessConstants,
   create_text_maker_component,
   StdPanel,
@@ -17,7 +17,7 @@ import { Fragment } from 'react';
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const { people_years } = years;
+const { people_years } = year_templates;
 const { provinces } = businessConstants;
 const { GraphLegend, A11YTable } = declarative_charts;
 

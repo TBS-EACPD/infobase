@@ -1,6 +1,6 @@
 import {
   businessConstants,
-  years,
+  year_templates,
   util_components,
   InfographicPanel,
   declarative_charts,
@@ -18,7 +18,7 @@ const {
   A11YTable,
 } = declarative_charts;
 const { sos } = businessConstants;
-const { std_years } = years;
+const { std_years } = year_templates;
 const { Format } = util_components;
 
 class SobjLine extends React.Component {

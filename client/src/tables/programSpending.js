@@ -4,10 +4,10 @@ import text from './programSpending.yaml';
 // of the table spec
 //const {spending_areas} = require('../../models/goco.js');
 
-import { stats, Subject, trivial_text_maker, Statistics, years } from './table_common';
+import { stats, Subject, trivial_text_maker, Statistics, year_templates } from './table_common';
 
 const { Program, Gov, Dept } = Subject;
-const { std_years, planning_years} = years;
+const { std_years, planning_years} = year_templates;
 const exp_cols = _.map(std_years, yr=>yr+"exp");
 
 export default {

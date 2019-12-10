@@ -2,13 +2,18 @@ import text from './warning_panels.yaml';
 
 import {
   run_template,
-  years,
+  year_templates,
   util_components,
   Subject,
   create_text_maker_component,
 
   declare_panel,
 } from "../shared.js";
+
+const {
+  std_years,
+  planning_last_year,
+} = year_templates;
 
 const { TM } = create_text_maker_component([text]);
 const { Dept } = Subject;
@@ -63,7 +68,7 @@ export const declare_year_warning_panel = () => declare_panel({
   panel_config_func: (level, panel_key) => ({
     footnotes: false,
     calculate: (subject, info, options) => {
-      return !subject.is_dead && run_template( _.last(years.std_years) ) !== run_template(years.planning_last_year);
+      return !subject.is_dead && run_template( _.last(std_years) ) !== run_template(planning_last_year);
     },
     render({calculations}){
       const { info } = calculations;

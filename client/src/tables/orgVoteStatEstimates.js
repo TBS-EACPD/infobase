@@ -8,10 +8,10 @@ import {
   trivial_text_maker, 
   major_vote_big_stat, 
   Statistics, 
-  years,
+  year_templates,
   businessConstants,
 } from './table_common';
-const { estimates_years } = years;
+const { estimates_years } = year_templates;
 const est_cols = _.map(estimates_years, yr => yr+"_estimates");
 const in_year_col = est_cols[4];
 const last_year_col = est_cols[3];
