@@ -121,11 +121,7 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
                 <Fragment key={ix}>
                   <dt
                     className="glossary-dt"
-                    id={
-                    ix === 0 ?
-                    `__${letter}` :
-                    null 
-                    }
+                    id={ix === 0 ? `__${letter}` : null}
                     tabIndex={0}
                   >
                     <span
