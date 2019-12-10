@@ -576,3 +576,7 @@ ol.breadcrumb > li:last-child > :last-child {
 caption {
   color: $textColor;
 }
+
+.badge {
+  border-radius: $standardBorderRadius;
+}
