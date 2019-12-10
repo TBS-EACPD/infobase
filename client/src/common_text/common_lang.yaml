@@ -360,12 +360,6 @@ total_table:
 fiscal_year:
   en: Fiscal Year
   fr: Exercice Financier
-no_data_available_for_open_year:
-  transform: [handlebars]
-  en: | 
-    {{open_year}} data not available
-  fr: | 
-    Les données pour {{open_year}} ne sont pas disponibles
 hidden_panels:
   en: Hidden Panels
   fr: Graphiques cachées

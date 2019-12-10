@@ -48,10 +48,6 @@ const years = {
     "{{ppl_last_year_2_short_second}}",
     "{{ppl_last_year_short_second}}",
   ],
-  lapse_years: [
-    "{{lapse_in_year}}", 
-    "{{lapse_last_year}}", 
-  ],
 };
 
 export { years };
