@@ -7,6 +7,106 @@ import {
 } from './services.js';
 
 
+const get_subject_has_services_query = (level, id_arg_name) => gql`
+query($lang: String! $id: String) {
+  root(lang: $lang) {
+    ${level}(${id_arg_name}: $id){
+      id
+      hasServices: has_services
+    }
+  }
+}
+`;
+const _subject_has_services = {};
+export function api_load_subject_has_services(subject){
+  const level = subject && subject.level;
+
+  const {
+    is_loaded,
+    id,
+    query,
+    response_data_accessor,
+  } = (() => {
+    const subject_is_loaded = ({level, id}) => _.get(_subject_has_services, `${level}.${id}`);
+
+    switch(level){
+      case 'dept':
+        return {
+          is_loaded: subject_is_loaded(subject),
+          id: subject.id,
+          query: get_subject_has_services_query('org', 'org_id'),
+          response_data_accessor: (response) => response.data.root.org,
+        };
+      default:
+        return {
+          is_loaded: true, // no default case, this is to resolve the promise early
+        };
+    }
+  })();
+
+  if( is_loaded ){
+    // ensure that subject.has_data matches _subject_has_services, since _subject_has_services hay have been updated via side-effect
+    subject.set_has_data(
+      `services_data`, 
+      _.get(_subject_has_services, `${level}.${id}`)
+    );
+    return Promise.resolve();
+  }
+
+  const time_at_request = Date.now();
+  const client = get_client();
+  return client.query({
+    query,
+    variables: {
+      lang: window.lang,
+      id,
+      _query_name: 'subject_has_services',
+    },
+  })
+    .then( (response) => {
+      const response_data = response_data_accessor(response);
+
+      const resp_time = Date.now() - time_at_request; 
+      if( !_.isEmpty(response_data) ){
+        // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
+        log_standard_event({
+          SUBAPP: window.location.hash.replace('#',''),
+          MISC1: "API_QUERY_SUCCESS",
+          MISC2: `Has services, took ${resp_time} ms`,
+        });
+      } else {
+        log_standard_event({
+          SUBAPP: window.location.hash.replace('#',''),
+          MISC1: "API_QUERY_UNEXPECTED",
+          MISC2: `Has services, took ${resp_time} ms`,
+        });  
+      }
+
+      subject.set_has_data(`services_data`, response_data[`hasServices`]);
+
+      // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
+      // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh
+      _.setWith(
+        _subject_has_services,
+        `${level}.${id}`,
+        response_data[`hasServices`],
+        Object
+      );
+
+      return Promise.resolve();
+    })
+    .catch(function(error){
+      const resp_time = Date.now() - time_at_request;     
+      log_standard_event({
+        SUBAPP: window.location.hash.replace('#',''),
+        MISC1: "API_QUERY_FAILURE",
+        MISC2: `Has services, took ${resp_time} ms - ${error.toString()}`,
+      });
+      throw error;
+    });
+}
+
+
 const dept_service_fragment = (
   `org_id
       services: services {

@@ -7,6 +7,7 @@ import {
 const schema = `
   extend type Org{
     services: [Service]
+    has_services: Boolean
   }
   extend type Program{
     services: [Service]
@@ -77,7 +78,13 @@ const schema = `
 `;
 
 
+
+
 export default function({models, loaders}){
+  const {
+    Service,
+  } = models;
+
   const {
     services_by_org_id,
     services_by_program_id,
@@ -85,9 +92,15 @@ export default function({models, loaders}){
     prog_id_loader,
   } = loaders;
 
+  const org_has_services = async (org_id) => {
+    const has_service = await Service.findOne( { org_id: org_id });
+    return !_.isNull( has_service );
+  };
+
   const resolvers = {
     Org: {
       services: ({org_id}) => services_by_org_id.load(org_id),
+      has_services: ({org_id}) => org_has_services(org_id),
     },
     Program: {
       services: ({program_id}) => services_by_program_id.load(program_id),
