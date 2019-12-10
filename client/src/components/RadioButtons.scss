@@ -4,7 +4,7 @@
   display: inline-flex;
   width: 700px;
   border: 2px solid $buttonPrimaryColor;
-  border-radius: $standardBorderRadius;
+  border-radius: 10px; // this component's hacky styling is brittle to border radius changes, so it's not using the standardBorderRadius var; has to be manually updated
   font-size: 1.2em;
   font-weight: $mediumFontWeight;
   background-color: inherit;
@@ -21,8 +21,9 @@
   color: $buttonPrimaryColor;
   border-radius: 0px;
   background-color: transparent;
-  margin-left: -1px;
+  margin-left: -2px;
   margin-top: -1px;
+  margin-right: -1px;
   margin-bottom: -1px;
   position: relative;
   -webkit-box-shadow: none;
@@ -33,7 +34,7 @@
 .radio-buttons__option.radio-buttons__option--active {
   color: $backgroundColor;
   background-color: $buttonPrimaryColor;
-  border-radius: 7px;
+  border-radius: 10px; // this component's hacky styling is brittle to border radius changes, so it's not using the standardBorderRadius var; has to be manually updated
   cursor: default;
   font-weight: $mediumFontWeight;
 
@@ -67,7 +68,7 @@
 .radio-buttons__option:not(.radio-buttons__option--active):focus { 
   background-color: change-color($color: $buttonPrimaryColor, $alpha: 0.75);
   color: $backgroundColor !important;
-  border-radius: 7px;
+  border-radius: 10px; // this component's hacky styling is brittle to border radius changes, so it's not using the standardBorderRadius var; has to be manually updated
   font-weight: $mediumFontWeight;
   -webkit-box-shadow: none;
   box-shadow: none;
