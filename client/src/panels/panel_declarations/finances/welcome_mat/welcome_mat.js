@@ -833,9 +833,9 @@ function get_calcs(subject, q6, q12){
 
 
 const common_program_crso_calculate = function(subject, info, options){
-  const { table6, table12 } = this.tables; 
-  const q6 = table6.q(subject);
-  const q12 = table12.q(subject);
+  const { programSpending, programFtes } = this.tables; 
+  const q6 = programSpending.q(subject);
+  const q12 = programFtes.q(subject);
 
   const has_planned = has_planning_data(subject, q6);
   const has_hist = has_hist_data(subject, q6);
