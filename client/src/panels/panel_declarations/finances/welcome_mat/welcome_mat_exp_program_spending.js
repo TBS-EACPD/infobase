@@ -53,8 +53,6 @@ export const format_and_get_exp_program_spending = (type, subject) => {
   
   const gap_year = (subject.has_planned_spending && actual_to_planned_gap_year) || null;
 
-  const marker_year = gap_year || (subject.has_planned_spending && _.first(plan_ticks)) || null;
-
   let exp_program_spending_graph;
   if(window.is_a11y_mode){
     const historical_data = _.chain(exp)
@@ -159,11 +157,11 @@ export const format_and_get_exp_program_spending = (type, subject) => {
         bottom: 70,
         left: 40,
       },  
-      ...(marker_year && both_exists && _.includes(series_labels, trivial_text_maker("planned_spending")) && {
+      ...(gap_year && both_exists && _.includes(series_labels, trivial_text_maker("planned_spending")) && {
         markers: [
           {
             axis: 'x',
-            value: marker_year,
+            value: gap_year,
             lineStyle: { 
               stroke: window.infobase_color_constants.tertiaryColor, 
               strokeWidth: 2,
