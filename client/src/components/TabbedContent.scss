@@ -25,8 +25,8 @@ li.tabbed-controls__label {
   padding: 5px 20px 3px 20px;
   margin-left: -2px;
   margin-right: 1px;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+  border-top-left-radius: $standardBorderRadius*3;
+  border-top-right-radius: $standardBorderRadius*3;
   border: 1px solid change-color($color: $backgroundColor, $alpha: 0.5);
   background-color: $primaryColor;
   transition: background-color 125ms ease, border-radius 250ms ease;
@@ -53,8 +53,8 @@ li.tabbed-controls__label:not(.tabbed-controls__label--disabled){
 
 li.tabbed-controls__label--active {
   @include active-tab-mixin;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-top-left-radius: $standardBorderRadius;
+  border-top-right-radius: $standardBorderRadius;
   cursor: default;
 
   & > .tabbed-controls__label-text {
@@ -65,8 +65,8 @@ li.tabbed-controls__label--active {
 
 li.tabbed-controls__label--disabled {
   @include disabled-tab-mixin;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+  border-top-left-radius: $standardBorderRadius*3;
+  border-top-right-radius: $standardBorderRadius*3;
   cursor: not-allowed;
 
   & > .tabbed-controls__label-text {
