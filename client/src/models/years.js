@@ -22,6 +22,7 @@ const years = {
     "{{est_last_year}}",
     "{{est_in_year}}",
   ],
+  planning_last_year: '{{planning_last_year_1}}',
   planning_years: [
     '{{planning_year_1}}',
     '{{planning_year_2}}',
