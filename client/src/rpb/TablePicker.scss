@@ -26,23 +26,22 @@
   text-align: center;
   background-color: $buttonPrimaryColor;
   padding: 3px 8px 3px 15px;
-  border-radius: 8px 0px 0px 8px;
+  border-radius: $standardBorderRadius 0px 0px $standardBorderRadius;
   color: $textLightColor;
   border: none;
 
   &:only-child {
     padding: 3px 15px;
-    border-radius: 8px;
+    border-radius: $standardBorderRadius;;
   }
-
 }
 
 .tag-cloud-main > li > span.tag-button-helper {
   text-align: center;
   background-color: $buttonPrimaryColor;
   padding-right: 3px;
-  border-radius: 0px 8px 8px 0px;
-  border: none;
+  border-radius: 0px $standardBorderRadius $standardBorderRadius 0px;
+  border:none;
   color: $textLightColor;
 
   // Fix inconsistent sub-pixel white gaps in IE11
@@ -107,7 +106,7 @@
 
 .item-card-mat {
   background-color: $backgroundColor;
-  border-radius: 0 0 9px 9px;
+  border-radius: 0 0 $standardBorderRadius $standardBorderRadius;
 }
 
 .item-card > .item-title {
@@ -118,7 +117,7 @@
   color: $textLightColor;
   background-color: $primaryColor;
   border-color: $primaryColor;
-  border-radius: 8px 8px 0 0;
+  border-radius: $standardBorderRadius $standardBorderRadius 0 0;
   height: 40px;
 }
 
@@ -170,7 +169,7 @@
   margin: 12px 12px 0 0;
   color: $textColor;
   background-color: lighten($tertiaryColor, 20%);
-  border-radius: 0px 5px 5px 0px;
+  border-radius: 0px $standardBorderRadius/2 $standardBorderRadius/2 0px;
   border-style: solid;
   border-width: 0 0 0 4px;
   border-color: $secondaryColor;
