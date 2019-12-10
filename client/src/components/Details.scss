@@ -8,7 +8,7 @@ $borderColor: transparent;
   margin-bottom: .25em;
   display: block;
 
-  border-radius: 4px;
+  border-radius: $standardBorderRadius;
   border: 1px solid $borderColor;
 }
 
