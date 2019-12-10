@@ -1124,10 +1124,7 @@ copy:
 
 
 ## warning for missing data prior to PAs
-
 year_warning:
   transform: [handlebars, markdown]
   en: The {{year}} actual spending data will be available once the {{year}} Public Accounts are tabled.
   fr: Les données pour les dépenses réelles de {{year}} seront disponibles lorsque les Comptes publics de {{year}} seront déposés.
-    
-

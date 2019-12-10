@@ -39,8 +39,8 @@ const get_single_info = _.memoize(
 
 //this is the part of the module that gets consumed by those who want info, ie. core/graphs.js
 function get_info(subject, infokeys){
-  const computed_separate = _.map( infokeys, key => get_single_info(key, subject));
-  const computed = Object.assign.apply(null,[{}].concat(computed_separate));
+  const computed_separate = _.map( infokeys, key => get_single_info(key, subject) );
+  const computed = Object.assign.apply( null, [{}].concat(computed_separate) );
   return {
     subject, dept: subject.constructor.type_name === 'dept' ? subject : undefined,
     ...computed,
@@ -146,5 +146,4 @@ export {
   Statistics, 
   get_info,
   tables_for_statistics,
-  year_constants,
 };
