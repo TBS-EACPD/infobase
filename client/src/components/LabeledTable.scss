@@ -2,21 +2,21 @@
 
 
 /* copied from resource-explorer */
-.labeledTable {
+.labeled-table {
     border-radius: $standardBorderRadius;
     border: 1px solid $primaryColor;
     margin-bottom: 30px;
     background-color: $primaryColor;
   }
   
-  .labeledTable__header {
+  .labeled-table__header {
     color: $textLightColor;
     padding: 10px 0 10px 0;
     font-size: 1.4em;
     text-align: center;
   }
 
-  .labeledTable__item {
+  .labeled-table-item {
     @include unstyled-link;
     background-color: lighten($tertiaryColor,40);
     color: $textColor;
@@ -32,28 +32,28 @@
       cursor: pointer;
     }
   }
-  .labeledTable__item.active {
+  .labeled-table-item.active {
     background-color: lighten($tertiaryColor,20);
   }
-  .labeledTable__item:not(:last-child){
+  .labeled-table-item:not(:last-child){
     border-bottom: 1px solid $primaryColor;
   }
   
   @media(min-width:$minMediumDevice){
-    .labeledTable__item {
+    .labeled-table-item {
       display: flex;
       align-items: stretch;
       justify-content: flex-start; 
       padding: 0;
     }
   
-    .labeledTable__item > .labeledTable__item--header,
-    .labeledTable__item > .labeledTable__item--description {
+    .labeled-table-item > .labeled-table-item__header,
+    .labeled-table-item > .labeled-table-item__description {
       padding: 15px 10px 15px 25px;
   
     }
   
-    .labeledTable__item > .labeledTable__item--header {
+    .labeled-table-item > .labeled-table-item__header {
       flex: 0 0 30%;
       width: 100%;
       max-width:100%;
@@ -61,7 +61,7 @@
       border-right: 1px solid $primaryColor;
     }
   
-    .labeledTable__item > .labeledTable__item--description {
+    .labeled-table-item > .labeled-table-item__description {
       width: 100%;
       max-width:100%;
       display: flex;
@@ -71,25 +71,25 @@
   }
 
   @media(max-width:$maxMediumDevice){
-    .labeledTable__items {
+    .labeled-table-items {
       display: flex;
       flex-direction: column;
     }
   
-    .labeledTable__item > .labeledTable__item--header,
-    .labeledTable__item > .labeledTable__item--description {
+    .labeled-table-item > .labeled-table-item__header,
+    .labeled-table-item > .labeled-table-item__description {
       padding: 5px;
     }
   
-    .labeledTable__item > .labeledTable__item--header {
+    .labeled-table-item > .labeled-table-item__header {
       font-size: 1.2em;
       font-weight: $heavyFontWeight;
     }
 
   }
   
-  .labeledTable__item:last-child {
-    border-bottom-right-radius: $standardBorderRadius/2;
-    border-bottom-left-radius: $standardBorderRadius/2;
+  .labeled-table-item:last-child {
+    border-bottom-right-radius: $standardBorderRadius;
+    border-bottom-left-radius: $standardBorderRadius;
   }
   

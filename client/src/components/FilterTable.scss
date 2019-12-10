@@ -96,12 +96,12 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   }
   .filter-table__item:first-child {
     border-top-width: 1px;
-    border-top-right-radius: $standardBorderRadius/2;
-    border-top-left-radius: $standardBorderRadius/2;
+    border-top-right-radius: $standardBorderRadius;
+    border-top-left-radius: $standardBorderRadius;
   }
   .filter-table__item:last-child {
-    border-bottom-right-radius: $standardBorderRadius/2;
-    border-bottom-left-radius: standardBorderRadius/2;
+    border-bottom-right-radius: $standardBorderRadius;
+    border-bottom-left-radius: $standardBorderRadius;
   }
 
   .filter-table__eye {
