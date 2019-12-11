@@ -196,7 +196,7 @@ class ResultsTable extends React.Component {
           </div>
           <HeightClippedGraph clipHeight={200}>
             <div className="results-flat-table">
-              {indicator_table_from_list(filtered_indicators, !subject.is_first_wave && last_drr_doc === 'drr17')}
+              {indicator_table_from_list(filtered_indicators, last_drr_doc === 'drr17')}
             </div>
           </HeightClippedGraph>
         </div>
