@@ -121,7 +121,7 @@ export const declare_spend_by_so_hist_panel = () => declare_panel({
             .filter(d => d3.sum(d.data) )
             .value()
         ),
-        ticks: info.last_years,
+        ticks: _.map(std_years, run_template),
       };
     },
     render({calculations, footnotes, sources}){

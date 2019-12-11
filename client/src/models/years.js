@@ -1,6 +1,7 @@
 import { run_template } from './text.js';
 
 const year_templates = {
+  current_fiscal_year: "{{current_fiscal_year}}",
   std_years: [
     "{{pa_last_year_5}}",
     "{{pa_last_year_4}}",
@@ -8,9 +9,12 @@ const year_templates = {
     "{{pa_last_year_2}}",
     '{{pa_last_year}}',
   ],
-  current_fiscal_year: "{{current_fiscal_year}}",
-  in_year_years: [
-    "{{est_in_year}}",
+  years_short: [ 
+    "{{pa_last_year_5_short_first}}",
+    "{{pa_last_year_4_short_first}}",
+    "{{pa_last_year_3_short_first}}",
+    "{{pa_last_year_2_short_first}}",
+    '{{pa_last_year_short_first}}',
   ],
   estimates_years: [
     "{{est_last_year_4}}",
@@ -20,22 +24,11 @@ const year_templates = {
     "{{est_in_year}}",
     //"{{est_next_year}}",
   ],
-  cr_estimates_years: [
-    "{{est_last_year}}",
-    "{{est_in_year}}",
-  ],
   planning_last_year: '{{planning_last_year_1}}',
   planning_years: [
     '{{planning_year_1}}',
     '{{planning_year_2}}',
     '{{planning_year_3}}',
-  ],
-  years_short: [ 
-    "{{pa_last_year_5_short_first}}",
-    "{{pa_last_year_4_short_first}}",
-    "{{pa_last_year_3_short_first}}",
-    "{{pa_last_year_2_short_first}}",
-    '{{pa_last_year_short_first}}',
   ],
   people_years: [
     "{{ppl_last_year_5}}",
