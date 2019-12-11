@@ -3,7 +3,6 @@ import text from "./orgEmployeeRegion.yaml";
 import {
   stats, 
   trivial_text_maker, 
-  m, 
   Statistics, 
   format, 
   people_five_year_percentage_formula,
@@ -75,7 +74,7 @@ export default {
         "simple_default": ix === 4,
         "type": "big_int",
         "nick": header,
-        "header": m("{{mar_31}}") + ", " + people_years_short_second[ix],
+        "header": `${trivial_text_maker("fiscal_year_end")}, ${people_years_short_second[ix]}`,
         "description": {
           "en": "Corresponds to the active employee population by Geographic Region, as of March 31 " + people_years_short_second[ix],
           "fr": "Correspond à l'effectif actif par région géographique, au 31 mars " + people_years_short_second[ix],

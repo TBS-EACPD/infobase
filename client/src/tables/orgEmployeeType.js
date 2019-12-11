@@ -3,7 +3,6 @@ import text from "./orgEmployeeType.yaml";
 import {
   stats, 
   trivial_text_maker, 
-  m, 
   Statistics,
   people_five_year_percentage_formula,
   businessConstants,
@@ -65,7 +64,7 @@ export default {
         "type": "big_int",
         "simple_default": ix === 4,
         "nick": header,
-        "header": m("{{mar_31}}") + ", " + people_years_short_second[ix],
+        "header": `${trivial_text_maker("fiscal_year_end")}, ${people_years_short_second[ix]}`,
         "description": {
           "en": "Corresponds to the active employee population by Employee Type, as of March 31 " + people_years_short_second[ix],
           "fr": "Correspond à l'effectif actif par type d'employé, au 31 mars " + people_years_short_second[ix],

@@ -360,6 +360,9 @@ total_table:
 fiscal_year:
   en: Fiscal Year
   fr: Exercice Financier
+fiscal_year_end:
+  en: March 31
+  fr: 31 mars
 hidden_panels:
   en: Hidden Panels
   fr: Graphiques cachées
