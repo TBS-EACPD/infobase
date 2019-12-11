@@ -8,6 +8,7 @@ import {
   StdPanel,
   Col,
   NivoResponsiveLine,
+  run_template,
 } from "../../shared.js";
 const { 
   A11YTable,
@@ -44,7 +45,8 @@ export const declare_personnel_spend_panel = () => declare_panel({
           <A11YTable
             data_col_headers={[ text_maker("spending") ]}
             data={
-              _.chain(info.last_years)
+              _.chain(std_years)
+                .map(run_template)
                 .zip(panel_args.series["0"])
                 .map( ([label, amt]) => ({
                   label,
@@ -62,7 +64,7 @@ export const declare_personnel_spend_panel = () => declare_panel({
           data: _.map(panel_args.series[0],
             (spending_data,year_index) =>({
               y: spending_data,
-              x: calculations.info.last_years[year_index],
+              x: run_template(std_years[year_index]),
             })),
         }];
         
