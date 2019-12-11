@@ -59,7 +59,7 @@ export default {
         "simple_default": ix === 4,
         "type": "decimal1",
         "nick": header,
-        "header": m("{{mar_31}}") + ", " + people_years_short_second[ix],
+        "header": `${trivial_text_maker("fiscal_year_end")}, ${people_years_short_second[ix]}`,
         "description": {
           "en": "Corresponds to the departmental average age, as of March 31 "+people_years_short_second[ix],
           "fr": "Correspond à l'âge moyen au ministère, au 31 mars "+people_years_short_second[ix],

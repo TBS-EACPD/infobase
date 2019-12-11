@@ -75,8 +75,8 @@ export default {
             "fr": "Dépenses prévues pour l'exercice se terminant le {{qfr_in_year_end}}",
           },
           "description": {
-            "en": "Corresponds to the planned expenditures tabled by the organization in their QFR for the fiscal year ending on {{mar_31}} of the relevant year.",
-            "fr": "Correspondent aux dépenses prévues présentées par l'organisation dans son rapport financier trimestriel (RFT) pour l’exercice se terminant le {{mar_31}} de l’année pertinente.",
+            "en": `Corresponds to the planned expenditures tabled by the organization in their QFR for the fiscal year ending on ${trivial_text_maker("fiscal_year_end")} of the relevant year.`,
+            "fr": `Correspondent aux dépenses prévues présentées par l'organisation dans son rapport financier trimestriel (RFT) pour l’exercice se terminant le ${trivial_text_maker("fiscal_year_end")} de l’année pertinente.`,
           },
         },
         {
@@ -115,8 +115,8 @@ export default {
             "fr": "Dépenses prévues pour l'exercice se terminant le {{qfr_last_year_end}}",
           },
           "description": {
-            "en": "Corresponds to the planned expenditures tabled by the organization in their QFR for the fiscal year ending on {{mar_31}} of the relevant year.",
-            "fr": "Correspondent aux dépenses prévues présentées par l'organisation dans son rapport financier trimestriel (RFT) pour l’exercice se terminant le {{mar_31}} de l’année pertinente.",
+            "en": `Corresponds to the planned expenditures tabled by the organization in their QFR for the fiscal year ending on ${trivial_text_maker("fiscal_year_end")} of the relevant year.`,
+            "fr": `Correspondent aux dépenses prévues présentées par l'organisation dans son rapport financier trimestriel (RFT) pour l’exercice se terminant le ${trivial_text_maker("fiscal_year_end")} de l’année pertinente.`,
           },
         },
         {
