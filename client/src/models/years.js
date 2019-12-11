@@ -46,14 +46,11 @@ const year_templates = {
   ],
 };
 
-const year_values = _.mapValues(
-  year_templates,
-  (templates) => _.map(templates, run_template)
-);
 
-const actual_to_planned_gap_year = _.chain(year_values)
+const actual_to_planned_gap_year = _.chain(year_templates)
   .thru( ({std_years, planning_years}) => [_.last(std_years), _.first(planning_years)] )
   .map( (fiscal_year) => _.chain(fiscal_year)
+    .thru(run_template)
     .split('-')
     .first()
     .parseInt()
@@ -76,8 +73,8 @@ const actual_to_planned_gap_year = _.chain(year_values)
   })
   .value();
 
+
 export {
   year_templates,
-  year_values,
   actual_to_planned_gap_year,
 };
