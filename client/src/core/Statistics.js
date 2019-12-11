@@ -1,17 +1,8 @@
 import { mix, staticStoreMixin } from '../models/storeMixins.js';
 import { Table } from './TableClass.js';
-import { year_values } from '../models/years.js';
 import { Subject } from '../models/subject.js';
-import { run_template } from '../models/text.js'; //just needed for a few constants, consider moving this elsewhere...
 
 const { Gov } = Subject;
-
-const year_constants = {
-  lang: window.lang,
-  est_next_year: run_template("{{est_next_year}}"),
-  est_in_year: run_template("{{est_in_year}}"),
-  ...year_values,
-};
 
 const get_single_info = _.memoize(
   (stats_key,subject) => {
@@ -40,7 +31,6 @@ function get_info(subject, infokeys){
   return {
     subject, dept: subject.constructor.type_name === 'dept' ? subject : undefined,
     ...computed,
-    ...year_constants,
   };
 }
 
