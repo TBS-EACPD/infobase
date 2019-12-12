@@ -361,7 +361,7 @@ export const declare_sub_program_resources_panel = () => declare_panel({
       const program_ftes_q = this.tables.programFtes.q(subject);
   
       const dp_ftes = program_ftes_q.sum("{{planning_year_1}}");
-      const drr_ftes = program_ftes_q.sum("{{pa_last_year}}");
+      const drr_ftes = program_ftes_q.sum("{{pa_last_year_2}}");
   
       const subs = SubProgramEntity.sub_programs(subject.id);
   

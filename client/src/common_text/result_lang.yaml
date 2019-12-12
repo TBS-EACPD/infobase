@@ -98,34 +98,19 @@ no_results_for_this_subject:
 
 targets_to_achieve_past:
   transform: [handlebars]
-  en: To be achieved by March 31, {{pa_last_year_short_second}}
-  fr: Indicateurs à atteindre au plus tard le 31 mars {{pa_last_year_short_second}}
+  en: To be achieved by March 31, {{pa_last_year_2_short_second}}
+  fr: Indicateurs à atteindre au plus tard le 31 mars {{pa_last_year_2_short_second}}
 
 
 targets_to_achieve_future_and_ongoing:
   transform: [handlebars]
-  en: Ongoing or to be achieved after March 31, {{pa_last_year_short_second}}
-  fr: Indicateurs permanents ou à atteindre après le 31 mars {{pa_last_year_short_second}}
+  en: Ongoing or to be achieved after March 31, {{pa_last_year_2_short_second}}
+  fr: Indicateurs permanents ou à atteindre après le 31 mars {{pa_last_year_2_short_second}}
 
 
 targets_to_achieve_other:
   en: Date not specified by organization
   fr: Aucune date fixée par l'organisation
-
-
-pa_last_year_spend:
-  transform: [handlebars]
-  en: |
-    {{pa_last_year}} actual spending  
-  fr: |
-    {{pa_last_year}} dépenses actuelles
-
-pa_last_year_ftes:
-  transform: [handlebars]
-  en: |
-    {{pa_last_year}} actual FTEs  
-  fr: |
-    {{pa_last_year}} ETPs actuels
   
 
 planning_year_1_spend:
@@ -198,29 +183,23 @@ fte_planning_year_3:
   fr: ETP prévues {{planning_year_3}}
 
 
-ftes_pa_last_year:
-  transform: [handlebars]
-  en: |
-    {{pa_last_year}} FTEs
-  fr: ETP {{pa_last_year}}
-
 planned_fte_pa_last_year:
   transform: [handlebars]
   en: |
-    {{pa_last_year}} planned FTEs
-  fr: ETP prévues {{pa_last_year}}
+    {{pa_last_year_2}} planned FTEs
+  fr: ETP prévues {{pa_last_year_2}}
   
 spend_pa_last_year:
   transform: [handlebars]
   en: |
-    {{pa_last_year}} actual spending
-  fr: Dépenses {{pa_last_year}}
+    {{pa_last_year_2}} actual spending
+  fr: Dépenses {{pa_last_year_2}}
 
 planned_spend_pa_last_year:
   transform: [handlebars]
   en: |
-    {{pa_last_year}} planned spending
-  fr: Dépenses prévues {{pa_last_year}}
+    {{pa_last_year_2}} planned spending
+  fr: Dépenses prévues {{pa_last_year_2}}
 
 planned:
   en: Planned

@@ -80,9 +80,9 @@ const get_planning_data_for_subject_from_table = (subject, type, doc) => {
 
   let col;
   if(doc === current_drr_key){
-    col = "{{pa_last_year}}";
+    col = "{{pa_last_year_2}}";
     if(type === "spending"){
-      col = "{{pa_last_year}}exp";
+      col = "{{pa_last_year_2}}exp";
     }
   } else {
     col = "{{planning_year_1}}";

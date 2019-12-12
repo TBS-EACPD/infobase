@@ -1,7 +1,7 @@
 sub_program_DRR_title:
   transform: [handlebars]
-  en: Resources for {{pa_last_year}}
-  fr: Resources pour {{pa_last_year}}
+  en: Resources for {{pa_last_year_2}}
+  fr: Resources pour {{pa_last_year_2}}
 
 sub_program_DP_title:
   transform: [handlebars]
@@ -11,9 +11,9 @@ sub_program_DP_title:
 sub_program_resources_drr_text:
   transform: [handlebars,markdown]
   en: |
-    In {{pa_last_year}}, the program **{{subj_name subject}}** was comprised of **{{num_subs}}** {{gl_tt "sub-programs" "SSP"}} {{#if has_sub_subs}} and **{{num_sub_subs}}** sub-sub-programs. To learn more on sub-sub programs, select on one of the sub-programs below{{else}}.{{/if}}
+    In {{pa_last_year_2}}, the program **{{subj_name subject}}** was comprised of **{{num_subs}}** {{gl_tt "sub-programs" "SSP"}} {{#if has_sub_subs}} and **{{num_sub_subs}}** sub-sub-programs. To learn more on sub-sub programs, select on one of the sub-programs below{{else}}.{{/if}}
   fr: |
-    En {{pa_last_year}}, le programme **{{subj_name subject}}** était composé de **{{num_subs}}** {{gl_tt "sous-programmes" "SSP"}} {{#if has_sub_subs}} et **{{num_sub_subs}}** sous-sous programmes. Pour en apprendre d'avantage sur les sous-sous programmes, sélectionner l'un des sous programmes ci-dessous{{else}}.{{/if}}
+    En {{pa_last_year_2}}, le programme **{{subj_name subject}}** était composé de **{{num_subs}}** {{gl_tt "sous-programmes" "SSP"}} {{#if has_sub_subs}} et **{{num_sub_subs}}** sous-sous programmes. Pour en apprendre d'avantage sur les sous-sous programmes, sélectionner l'un des sous programmes ci-dessous{{else}}.{{/if}}
 
 sub_program_resources_dp_text:
   transform: [handlebars,markdown]
@@ -26,9 +26,9 @@ sub_program_resources_dp_text:
 sub_program_resources_title__drr:
   transform: [handlebars]
   en: |
-   {{gt "sub_program_resources_title__part"}} ({{pa_last_year}})
+   {{gt "sub_program_resources_title__part"}} ({{pa_last_year_2}})
   fr: |
-   {{gt "sub_program_resources_title__part"}} ({{pa_last_year}})
+   {{gt "sub_program_resources_title__part"}} ({{pa_last_year_2}})
 
 sub_program_resources_title__dp:
   transform: [handlebars]
@@ -46,9 +46,9 @@ sub_program_resources_title__dp_last_year:
 sub_program_resources_title__both:
   transform: [handlebars]
   en: |
-   {{gt "sub_program_resources_title__part"}} ({{pa_last_year}} and {{planning_year_1}})  
+   {{gt "sub_program_resources_title__part"}} ({{pa_last_year_2}} and {{planning_year_1}})  
   fr: |
-   {{gt "sub_program_resources_title__part"}} ({{pa_last_year}} et {{planning_year_1}})
+   {{gt "sub_program_resources_title__part"}} ({{pa_last_year_2}} et {{planning_year_1}})
 
 sub_program_resources_title__part:
   en: |

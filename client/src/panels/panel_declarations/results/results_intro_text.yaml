@@ -48,19 +48,19 @@ drr_summary_text:
   transform: [handlebars,markdown]
   en: |
     {{#if is_gov}}
-      In **{{pa_last_year}}**, **{{fmt_big_int depts_with_drrs}}** organizations sought to achieve **{{fmt_big_int drr_results}}** results.
+      In **{{pa_last_year_2}}**, **{{fmt_big_int depts_with_drrs}}** organizations sought to achieve **{{fmt_big_int drr_results}}** results.
     {{else}}
-      In its **{{pa_last_year}}** {{gl_tt "Departmental Results Report" "DRR"}}, {{subj_name subject}} sought to achieve **{{fmt_big_int drr_results}}** results.
+      In its **{{pa_last_year_2}}** {{gl_tt "Departmental Results Report" "DRR"}}, {{subj_name subject}} sought to achieve **{{fmt_big_int drr_results}}** results.
     {{/if}}
     Progress towards meeting these results was measured using **{{fmt_big_int drr_indicators}}** indicators, and a {{gl_tt "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
     based on the measured outcome of the indicator's target.
   fr: |
     {{#if is_gov}}
-      En **{{pa_last_year}}**, **{{fmt_big_int depts_with_drrs}}** organisations ont cherché à atteindre **{{fmt_big_int drr_results}}** résultats. 
+      En **{{pa_last_year_2}}**, **{{fmt_big_int depts_with_drrs}}** organisations ont cherché à atteindre **{{fmt_big_int drr_results}}** résultats. 
       Les progrès vers l'atteinte de ces résultats ont été mesurés à l'aide de **{{fmt_big_int drr_indicators}}** indicateurs, et
       un état du résultat a été associé à chaque indicateur selon la mesure du résultat prévu pour la cible de l'indicateur.
     {{else}}
-      Dans son {{gl_tt "rapport sur les résultats ministériel" "DRR"}} de **{{pa_last_year}}**, {{subj_name subject}}
+      Dans son {{gl_tt "rapport sur les résultats ministériel" "DRR"}} de **{{pa_last_year_2}}**, {{subj_name subject}}
       a cherché à obtenir **{{fmt_big_int drr_results}}** résultats. On a mesuré les progrès vers l'atteinte de ces résultats
       à l'aide de **{{fmt_big_int drr_indicators}}** indicateurs, et un état du résultat a été associé à chaque indicateur
       selon la mesure du résultat prévu pour la cible de l'indicateur.
