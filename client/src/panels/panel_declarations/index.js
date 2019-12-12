@@ -79,4 +79,5 @@ export {
 
 export {
   declare_services_intro_panel,
+  declare_services_target_group_panel,
 } from './services/index.js';

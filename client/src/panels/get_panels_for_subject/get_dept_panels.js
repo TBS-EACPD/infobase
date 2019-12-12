@@ -52,6 +52,7 @@ import {
   declare_employee_last_year_totals_panel,
   declare_detailed_program_spending_split_panel,
   declare_services_intro_panel,
+  declare_services_target_group_panel,
 } from '../../panels/panel_declarations/index.js';
 
 
@@ -59,6 +60,7 @@ import {
 export const get_dept_panels = subject => ensure_loaded({
   subject: subject,
   has_results: true,
+  has_services: true,
 }).then( () => ({
   intro: [
     declare_profile_panel(),
@@ -102,8 +104,9 @@ export const get_dept_panels = subject => ensure_loaded({
     declare_results_table_panel(),
     declare_explore_results_panel(),
   ],
-  services: [
+  services: subject.has_data('services_data') && [
     declare_services_intro_panel(),
+    declare_services_target_group_panel(),
   ],
   related: _.nonEmpty(subject.programs) && [
     declare_portfolio_structure_related_panel(),

@@ -25,7 +25,6 @@ export const declare_services_intro_panel = () => declare_panel({
   panel_key: "dept_services_intro",
   levels: ["dept"],
   panel_config_func: (level, panel_key) => ({
-    requires_result_counts: true,
     calculate: () => { return true; },
     footnotes: false,
     render({ calculations, sources}){

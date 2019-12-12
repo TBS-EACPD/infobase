@@ -111,6 +111,7 @@ const dept_service_fragment = (
   `org_id
       services: services {
         service_id
+        org_id
         program_ids
         is_active
 

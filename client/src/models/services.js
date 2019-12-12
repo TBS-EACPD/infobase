@@ -6,7 +6,7 @@ import {
 } from './storeMixins.js';
 import { trivial_text_maker } from '../models/text.js';
 
-import { Program } from './organizational_entities.js';
+import { Program, Dept } from './organizational_entities.js';
 
 // dependencies are tangled up too much here, disable it for the whole file
 /* eslint-disable no-use-before-define */
@@ -17,8 +17,13 @@ const Service = class Service extends static_subject_store(){
   static get type_name(){ return 'service'; }
   static get singular(){ return trivial_text_maker("service"); }
   static get plural(){ return trivial_text_maker("services"); }
+  static get_by_dept(org_id){
+    return _.filter(Service.get_all(), serv => serv.subject.id === org_id);
+  }
   get level(){ return "service"; }
   get guid(){ return `service_${this.id}`; }
+
+  get subject(){ return Dept.lookup(this.org_id); }
 
   static create_and_register(def){
     const { service_id } = def;

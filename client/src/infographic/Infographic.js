@@ -282,6 +282,7 @@ class InfoGraph_ extends React.Component {
     ensure_loaded({
       subject: subject,
       has_results: true,
+      has_services: true,
     }).then( () => get_panels_for_subject(subject).then(
       (bubbles_for_subject) => this.setState({ bubble_menu_loading: false, bubbles_for_subject })
     ) );
