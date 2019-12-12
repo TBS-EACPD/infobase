@@ -42,9 +42,9 @@ class SubProgramEntity {
       doc === 'drr17' ?
         [
           {
-            year: "pa_last_year_planned",
-            ftes: this.planned_spend_pa_last_year,
-            spending: this.planned_fte_pa_last_year,
+            year: "pa_last_year_2",
+            ftes: this.planned_fte_pa_last_year,
+            spending: this.planned_spend_pa_last_year,
           },
           {
             year: "pa_last_year_2",

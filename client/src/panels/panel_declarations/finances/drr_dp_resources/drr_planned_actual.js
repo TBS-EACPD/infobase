@@ -25,55 +25,59 @@ export const declare_drr_planned_actual_panel = () => declare_panel({
     source: (subject) => get_source_links(["DP","DRR"]),
     title: "drr_planned_actual_title",
     calculate(subject, info){
-      if(subject.level === 'dept'){
-        if(!subject.is_rpp_org){
-          return false;
-        }
-      } else if(!subject.dept.is_rpp_org){
-        return false;
-      } 
-  
-      let counts;
-      if(subject.level === 'dept'){
-        counts = ResultCounts.get_dept_counts(subject.id);
-      } else {
-        counts = ResultCounts.get_dept_counts(subject.dept.id);
-      }
-      if(!counts || counts[`${current_drr_key}_total`] < 1){
-        return false;
-      }
+      // vvv temporary, disable this panel
+      return false;
+      // ^^^ temporary
 
-      const { programSpending, programFtes } = this.tables;
-      const spend_q = programSpending.q(subject);
-      const fte_q = programFtes.q(subject);
-
-      const planned_spend = spend_q.sum("drr_last_year");
-      const planned_ftes = fte_q.sum("drr_last_year");
-
-      const actual_spend = spend_q.sum("{{pa_last_year_2}}exp");
-      const actual_ftes = fte_q.sum("{{pa_last_year_2}}");
-
-  
-      //program has been dead before drr_last_year
-      if( !_.some([actual_spend, actual_ftes, planned_ftes, planned_spend]) ){
-        return false;
-      }
-
-
-      const footnotes = FootNote.get_for_subject(
-        subject,
-        ['DRR_EXP', 'DRR_FTE']
-      );
-
-      return { 
-        planned_ftes,
-        planned_spend,
-        actual_ftes,
-        actual_spend,
-        diff_spend: actual_spend - planned_spend,
-        diff_ftes: actual_ftes - planned_ftes,
-        footnotes,
-      };
+      //if(subject.level === 'dept'){
+      //  if(!subject.is_rpp_org){
+      //    return false;
+      //  }
+      //} else if(!subject.dept.is_rpp_org){
+      //  return false;
+      //} 
+  //
+      //let counts;
+      //if(subject.level === 'dept'){
+      //  counts = ResultCounts.get_dept_counts(subject.id);
+      //} else {
+      //  counts = ResultCounts.get_dept_counts(subject.dept.id);
+      //}
+      //if(!counts || counts[`${current_drr_key}_total`] < 1){
+      //  return false;
+      //}
+//
+      //const { programSpending, programFtes } = this.tables;
+      //const spend_q = programSpending.q(subject);
+      //const fte_q = programFtes.q(subject);
+//
+      //const planned_spend = spend_q.sum("drr_last_year");
+      //const planned_ftes = fte_q.sum("drr_last_year");
+//
+      //const actual_spend = spend_q.sum("{{pa_last_year_2}}exp");
+      //const actual_ftes = fte_q.sum("{{pa_last_year_2}}");
+//
+  //
+      ////program has been dead before drr_last_year
+      //if( !_.some([actual_spend, actual_ftes, planned_ftes, planned_spend]) ){
+      //  return false;
+      //}
+//
+//
+      //const footnotes = FootNote.get_for_subject(
+      //  subject,
+      //  ['DRR_EXP', 'DRR_FTE']
+      //);
+//
+      //return { 
+      //  planned_ftes,
+      //  planned_spend,
+      //  actual_ftes,
+      //  actual_spend,
+      //  diff_spend: actual_spend - planned_spend,
+      //  diff_ftes: actual_ftes - planned_ftes,
+      //  footnotes,
+      //};
 
     },
 

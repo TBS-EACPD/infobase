@@ -25,12 +25,12 @@ function result_to_node(result, parent_id, doc){
 const get_sub_program_resources = (sub_program, doc) => ({
   spending: (
     doc === "drr17" ?
-      sub_program.pa_last_year_2 :
+      sub_program.pa_last_year_1 :
       sub_program.spend_planning_year_1
   ),
   ftes: (
     doc === "drr17" ? 
-      sub_program.pa_last_year_2 :
+      sub_program.pa_last_year_1 :
       sub_program.fte_planning_year_1
   ),
 });
