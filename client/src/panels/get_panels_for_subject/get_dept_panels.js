@@ -22,7 +22,7 @@ import {
   declare_dp_rev_split_panel,
   declare_drr_summary_panel,
 
-  // shared dept, program, tag
+  // shared dept, program
   declare_spend_rev_split_panel,
 
   // shared gov, dept
@@ -41,9 +41,6 @@ import {
   declare_employee_gender_panel,
   declare_results_intro_panel,
 
-  // shared dept, tag
-  declare_detailed_program_spending_split_panel,
-
   // dept only panels
   declare_portfolio_structure_intro_panel,
   declare_portfolio_structure_related_panel,
@@ -52,6 +49,7 @@ import {
   declare_last_year_g_and_c_perspective_panel,
   declare_internal_services_panel,
   declare_employee_last_year_totals_panel,
+  declare_detailed_program_spending_split_panel,
 } from '../../panels/panel_declarations/index.js';
 
 

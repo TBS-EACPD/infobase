@@ -22,12 +22,8 @@ import {
   declare_dp_rev_split_panel,
   declare_drr_summary_panel,
 
-  // shared dept, program, tag
+  // shared dept, program,
   declare_spend_rev_split_panel,
-
-  // shared program, tag
-  declare_vote_stat_split_panel,
-  declare_top_spending_areas_panel,
 
   // program only panels
   declare_dead_program_warning_panel,
@@ -35,6 +31,8 @@ import {
   declare_related_program_structure_panel,
   declare_spending_in_tag_perspective_panel,
   declare_sub_program_resources_panel,
+  declare_vote_stat_split_panel,
+  declare_top_spending_areas_panel,
 } from '../panel_declarations/index.js';
 
 // To be safe, ensure all used has_<data> checks are loaded

@@ -15,19 +15,6 @@ dept_spend_rev_split_text:
     on obtient des dépenses _nettes_ de **{{fmt_compact1_written dept_exp_pa_last_year}}**.
 
 
-tag_spend_rev_split_text:
-  transform: [handlebars, markdown]
-  en: |
-    In {{pa_last_year}}, Programs falling under the "**{{subj_name subject}}**"
-    tag recorded revenues of **{{fmt_compact1_written tag_exp_rev_neg_minus}}**.
-    Netting these revenues from the maximum *gross* expenditures of **{{fmt_compact1_written tag_exp_rev_gross}}** of tagged programs results in 
-    **{{fmt_compact1_written tag_exp_rev_net}}** in *net* expenditures.
-  fr: |
-    En {{pa_last_year}}, des recettes de **{{fmt_compact1_written tag_exp_rev_neg_minus}}** 
-    ont été enregistrées pour les programmes liés à l’étiquette «**{{subj_name subject}}**».
-    Après compensation de ces recettes maximales par rapport aux dépenses *brutes* maximales de **{{fmt_compact1_written tag_exp_rev_gross}}** pour l’étiquette, 
-    les dépenses maximal *nettes* s’élèvent à **{{fmt_compact1_written tag_exp_rev_net}}**.
-
 program_spend_rev_split_text:
   transform: [handlebars, markdown]
   en: |
@@ -37,6 +24,3 @@ program_spend_rev_split_text:
   fr: |
     En {{pa_last_year}}, des recettes de **{{fmt_compact1_written program_exp_rev_neg_minus}}** ont été enregistré pour le programme «**{{subj_name subject}}**».
     Après compensation de ces recettes par rapport aux dépenses *brutes* de **{{fmt_compact1_written program_exp_rev_gross}}** consacrées au programme, les dépenses *nettes* s'élèvent à **{{fmt_compact1_written program_exp_rev_net}}**.
-
-
-

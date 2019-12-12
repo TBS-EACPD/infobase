@@ -38,19 +38,7 @@ const { sos } = businessConstants;
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-
-const text_keys = {
-  dept: "dept_historical_program_spending_text", //note that we're recycling another panel's text, we'll clean this up later once we confirm we're good with this.
-  tag: "tag_Progam_activity_spending_text",
-};
-
-const info_deps_by_level = {
-  dept: [ "programSpending_dept_info" ],
-  tag: [ "programSpending_tag_info" ],
-};
-
-const footnote_topics = [ 'PROG', 'SOBJ' ];
-
+const footnote_topics = ['PROG', 'SOBJ'];
 
 class HistoricalProgramBars extends React.Component {
   constructor(props){
@@ -380,15 +368,13 @@ class DetailedProgramSplit extends React.Component {
 
 export const declare_detailed_program_spending_split_panel = () => declare_panel({
   panel_key: "detailed_program_spending_split",
-  levels: ["dept", "tag"],
+  levels: ["dept"],
   panel_config_func: (level, panel_key) => ({
-    info_deps: info_deps_by_level[level],
+    info_deps: ["programSpending_dept_info"],
     depends_on: ['programSobjs', "programSpending"],
 
     footnotes: footnote_topics,
     calculate(subject,info,options){
-
-      const is_tag = subject.level === "tag";
   
       const {programSobjs, programSpending} = this.tables;
 
@@ -438,7 +424,7 @@ export const declare_detailed_program_spending_split_panel = () => declare_panel
         })
         .map(row => 
           ({
-            label: is_tag ? `${row.prgm} (${Subject.Dept.lookup(row.dept).dept_code})` : row.prgm,
+            label: row.prgm,
             data: exp_cols.map(col => row[col]),
             active: false,
           })
@@ -518,7 +504,7 @@ export const declare_detailed_program_spending_split_panel = () => declare_panel
           {...{sources, footnotes: [...footnotes, ...program_footnotes]}}
         >
           <div className="medium_panel_text">
-            <TM k={text_keys[level]} args={info} />
+            <TM k={"dept_historical_program_spending_text"} args={info} /> 
           </div>
           <div>
             <div>

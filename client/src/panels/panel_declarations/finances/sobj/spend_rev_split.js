@@ -17,7 +17,6 @@ const { text_maker, TM } = create_text_maker_component(text);
 const text_keys_by_level = {
   dept: "dept_spend_rev_split_text",
   program: "program_spend_rev_split_text",
-  tag: "tag_spend_rev_split_text",
 };
 
 function render({calculations, footnotes, sources}) {
@@ -83,7 +82,7 @@ function render({calculations, footnotes, sources}) {
 
 export const declare_spend_rev_split_panel = () => declare_panel({
   panel_key: "spend_rev_split",
-  levels: ["dept", "program", "tag"],
+  levels: ["dept", "program"],
   panel_config_func: (level, panel_key) => {
     switch (level){
       case "dept":
@@ -110,21 +109,6 @@ export const declare_spend_rev_split_panel = () => declare_panel({
           calculate(subject,info,options){ 
             const {programSobjs} = this.tables;
             const prog_rows = programSobjs.programs.get(subject);
-            const rev_split = rows_to_rev_split(prog_rows);
-            if(rev_split.neg_exp === 0){
-              return false;
-            }
-            return rev_split;
-          },
-          render,
-        };
-      case "tag":
-        return {
-          depends_on: ["programSobjs"],
-          info_deps: ["tag_revenue"],
-          calculate(subject,info,options){
-            const {programSobjs} = this.tables;
-            const prog_rows = programSobjs.q(subject).data;
             const rev_split = rows_to_rev_split(prog_rows);
             if(rev_split.neg_exp === 0){
               return false;

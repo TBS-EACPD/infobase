@@ -43,65 +43,34 @@ const render_w_options = ({text_key, graph_col, text_col}) => ({calculations, so
 
 export const declare_vote_stat_split_panel = () => declare_panel({
   panel_key: "vote_stat_split",
-  levels: ["program", "tag"],
-  panel_config_func: (level, panel_key) => {
-    switch (level){
-      case "program":
-        return {
-          depends_on: ['programVoteStat'],
-          info_deps: ["programVoteStat_program_info"],
-          footnotes: ["VOTED", "STAT"],
-          glossary_keys: ["AUTH"],
-        
-          calculate(subject,info,options){ 
-            const {programVoteStat} = this.tables;
-            const vote_stat = _.map(
-              programVoteStat.programs.get(subject), 
-              row => ({
-                label: row.vote_stat,
-                value: row["{{pa_last_year}}"],
-              })
-            );
-        
-            if( _.every( vote_stat, ({value}) => value === 0) ){
-              return false;
-            }
-        
-            return vote_stat;
-          },
-        
-          render: render_w_options({
-            text_key: "program_vote_stat_split_text",
-            graph_col: 7,
-            text_col: 5,
-          }),
-        };
-      case "tag":
-        return {
-          depends_on: ['programVoteStat'],
-          info_deps: ["programVoteStat_tag_info"],
-          footnotes: ["VOTED", "STAT"],
-          glossary_keys: ["AUTH"],
-          calculate(subject,info,options){ 
-            const {programVoteStat} = this.tables;
-        
-            return _.chain(programVoteStat.q(subject).data)
-              .groupBy("vote_stat")
-              .map((lines, key)=> {
-                return {
-                  label: key,
-                  value: d3.sum( lines, _.property("{{pa_last_year}}") ),
-                };
-              })
-              .value();
-          },
-        
-          render: render_w_options({
-            text_key: "tag_vote_stat_split_text",
-            graph_col: 5,
-            text_col: 7,
-          }),
-        };
-    }
-  },
+  levels: ["program"],
+  panel_config_func: (level, panel_key) => ({
+    depends_on: ['programVoteStat'],
+    info_deps: ["programVoteStat_program_info"],
+    footnotes: ["VOTED", "STAT"],
+    glossary_keys: ["AUTH"],
+  
+    calculate(subject,info,options){
+      const {programVoteStat} = this.tables;
+      const vote_stat = _.map(
+        programVoteStat.programs.get(subject), 
+        row => ({
+          label: row.vote_stat,
+          value: row["{{pa_last_year}}"],
+        })
+      );
+  
+      if( _.every( vote_stat, ({value}) => value === 0) ){
+        return false;
+      }
+  
+      return vote_stat;
+    },
+  
+    render: render_w_options({
+      text_key: "program_vote_stat_split_text",
+      graph_col: 7,
+      text_col: 5,
+    }),
+  }),
 });

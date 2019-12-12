@@ -526,9 +526,6 @@ const WelcomeMat = (props) => {
       } else if(level === "dept"){
         spend_summary_key = "dept1_welcome_mat_spending_summary";
         fte_summary_key = "welcome_mat_fte_summary";
-      } else if(level === "tag"){
-        spend_summary_key = "tag_welcome_mat_spending_summary";
-        fte_summary_key = "tag_welcome_mat_fte_summary";
       }
     } else {
       spend_summary_key = false;
@@ -739,7 +736,6 @@ function has_planning_data(subject, q6){
       has_dp = subject.dept.dp_status;
       break;
     case "gov":
-    case "tag":
       has_dp = true;
   }
 
@@ -860,7 +856,7 @@ const footnotes = ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"];
 const depends_on = ['programSpending', 'programFtes'];
 export const declare_welcome_mat_panel = () => declare_panel({
   panel_key: "welcome_mat",
-  levels: ["gov", "dept", "program", "crso", "tag"],
+  levels: ["gov", "dept", "program", "crso"],
   panel_config_func: (level, panel_key) => {
     switch (level){
       case "gov":
@@ -960,29 +956,6 @@ export const declare_welcome_mat_panel = () => declare_panel({
           glossary_keys: ["FTE"],
           missing_info: "ok",
           calculate: common_program_crso_calculate,
-          render,
-        };
-      case "tag":
-        return {
-          footnotes,
-          info_deps: ["programFtes_program_info"],
-          depends_on,
-          glossary_keys: ["FTE"],
-          missing_info: "ok",
-          calculate (subject, info, options){
-            const { programSpending, programFtes } = this.tables; 
-            const q6 = programSpending.q(subject);
-            const q12 = programFtes.q(subject);
-        
-            const calcs = get_calcs(subject, q6, q12);
-        
-            return {
-              type: "hist_planned",
-              info,
-              calcs,
-              is_m2m: subject.root.cardinality === "MtoM",
-            };
-          },
           render,
         };
     }
