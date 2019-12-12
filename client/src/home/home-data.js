@@ -1,6 +1,16 @@
 
 const featured_content_items = _.compact([
   {
+    text_key: 'quick_link_spending_by_program',
+    href: '#partition/dept/exp',
+    is_new: "true",
+  },
+  {
+    text_key: 'quick_link_ftes_by_program',
+    href: '#partition/dept/fte',
+    is_new: "true",
+  },
+  {
     text_key: 'supps_a',
     href: '#compare_estimates',
     is_new: "true",
@@ -16,14 +26,6 @@ const featured_content_items = _.compact([
   {
     text_key: 'quick_link_infolab',
     href: '#lab',
-  },
-  {
-    text_key: 'quick_link_budget_2019',
-    href: '#budget-tracker/budget-measure/overview/budget-2019',
-  },
-  {
-    text_key: 'quick_link_hi_tags',
-    href: '#resource-explorer/HI/dp19',
   },
 ]);
 
