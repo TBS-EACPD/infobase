@@ -40,14 +40,14 @@ class SubProgramEntity {
   resources(doc){
     const records = (
       doc === 'drr17' ?
-        [ 
+        [
           {
             year: "pa_last_year_planned",
             ftes: this.planned_spend_pa_last_year,
             spending: this.planned_fte_pa_last_year,
           },
           {
-            year: "pa_last_year",
+            year: "pa_last_year_2",
             ftes: this.fte_pa_last_year,
             spending: this.spend_pa_last_year,
           },
@@ -64,7 +64,7 @@ class SubProgramEntity {
             spending: this.spend_planning_year_2,
           },
           { 
-            year: '{{planning_year_3}}',
+            year: 'planning_year_3',
             ftes: this.fte_planning_year_3,
             spending: this.spend_planning_year_3,
           },
@@ -470,8 +470,8 @@ const status_key_to_glossary_key = {
 
 const drr_docs = {
   drr17: {
-    year: run_template('{{pa_last_year}}'),
-    year_short: run_template('{{pa_last_year_short_second}}'),
+    year: run_template('{{pa_last_year_2}}'),
+    year_short: run_template('{{pa_last_year_2_short_second}}'),
     has_resources: true,
     could_have_previous: false,
     doc_url_en: "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2017-18-departmental-results-reports.html",

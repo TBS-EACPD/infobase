@@ -50,8 +50,8 @@ export const declare_drr_planned_actual_panel = () => declare_panel({
       const planned_spend = spend_q.sum("drr_last_year");
       const planned_ftes = fte_q.sum("drr_last_year");
 
-      const actual_spend = spend_q.sum("{{pa_last_year}}exp");
-      const actual_ftes = fte_q.sum("{{pa_last_year}}");
+      const actual_spend = spend_q.sum("{{pa_last_year_2}}exp");
+      const actual_ftes = fte_q.sum("{{pa_last_year_2}}");
 
   
       //program has been dead before drr_last_year

@@ -971,16 +971,16 @@ dp_ftes:
 drr_spending:
   transform: [handlebars]
   en: |
-    {{pa_last_year}} Spending
+    {{pa_last_year_2}} Spending
   fr: |
-    Dépenses pour {{pa_last_year}}
+    Dépenses pour {{pa_last_year_2}}
 
 drr_ftes:
   transform: [handlebars]
   en: |
-    {{pa_last_year}} Number of FTEs
+    {{pa_last_year_2}} Number of FTEs
   fr: |
-    Nombre d'ETP pour {{pa_last_year}} 
+    Nombre d'ETP pour {{pa_last_year_2}} 
 
 DP_resources:
   transform: [handlebars]
@@ -991,8 +991,8 @@ DP_resources:
 DRR_resources:
   transform: [handlebars]
   en: |
-    {{pa_last_year}} Actual Resources 
-  fr: Resources utilisées en {{pa_last_year}}
+    {{pa_last_year_2}} Actual Resources 
+  fr: Resources utilisées en {{pa_last_year_2}}
 
 
 infograph_for:

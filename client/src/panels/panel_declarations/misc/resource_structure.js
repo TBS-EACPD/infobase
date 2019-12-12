@@ -245,7 +245,7 @@ export const declare_resource_structure_panel = () => declare_panel({
         //there are some cases where an SO that died before pa_last_year can crash this graph...
         has_drr_data = _.some(subject.programs, prog => {
           const rows = programSpending.programs.get(prog);
-          return !_.isEmpty(rows) && _.first(rows)["{{pa_last_year}}"] > 0;
+          return !_.isEmpty(rows) && _.first(rows)["{{pa_last_year_2}}"] > 0;
         });
       }
   
