@@ -46,7 +46,7 @@ function generate_infograph_href(d, data_area) {
 }
 
 
-const YearWarning = () => actual_to_planned_gap_year && (
+const GapYearWarning = () => (
   <div 
     className="alert alert-info alert-no-symbol alert--is-bordered medium_panel_text"
     style={{textAlign: "center"}}
@@ -440,7 +440,7 @@ export default class TreeMapper extends React.Component {
               <h1> {text_maker("treemap_title")} </h1>
               <button className="TreeMap__SkipLink button-unstyled a11y-version-link" tabIndex="0" onClick={skip}>{text_maker("skip_to_main_content")}</button>
               <TreeMapInstructions />
-              <YearWarning />
+              {actual_to_planned_gap_year && <GapYearWarning />}
               <div className="row">
                 <div className="col-md-10">
                   <div className="row">
