@@ -95,32 +95,17 @@ const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) =>
 
 export const declare_top_spending_areas_panel = () => declare_panel({
   panel_key: "top_spending_areas",
-  levels: ["program", "tag"],
-  panel_config_func: (level, panel_key) => {
-    switch (level){
-      case "program":
-        return {
-          depends_on: ['programSobjs'],
-          info_deps: ["program_std_obj"],
-          footnotes: ["SOBJ"],
-          calculate(subject,info,options){ 
-            if ( _.isEmpty( this.tables.programSobjs.programs.get(subject) ) ){
-              return false;
-            }
-            return common_cal([subject], this.tables.programSobjs);
-          },
-          render: render_w_options({text_key: "program_top_spending_areas_text"}),
-        };
-      case "tag":
-        return {
-          info_deps: ["tag_std_obj"],
-          depends_on: ['programSobjs'],
-          footnotes: ["SOBJ"],
-          calculate(subject,info,options){ 
-            return common_cal(subject.programs, this.tables.programSobjs);
-          },
-          render: render_w_options({text_key: "tag_top_spending_areas_text"}),
-        };
-    }
-  },
+  levels: ["program"],
+  panel_config_func: (level, panel_key) => ({
+    depends_on: ['programSobjs'],
+    info_deps: ["program_std_obj"],
+    footnotes: ["SOBJ"],
+    calculate(subject,info,options){ 
+      if ( _.isEmpty( this.tables.programSobjs.programs.get(subject) ) ){
+        return false;
+      }
+      return common_cal([subject], this.tables.programSobjs);
+    },
+    render: render_w_options({text_key: "program_top_spending_areas_text"}),
+  }),
 });

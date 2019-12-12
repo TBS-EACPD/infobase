@@ -70,7 +70,7 @@ const curried_render = ({ q_a_keys, omit_name_item }) => function ({ calculation
 
 export const declare_financial_key_concepts_panel = () => declare_panel({
   panel_key: "financial_key_concepts",
-  levels: ['gov', 'dept', 'crso', 'program', 'tag'],
+  levels: ['gov', 'dept', 'crso', 'program'],
   panel_config_func: (level, panel_key) => ({
     ...common_panel_config,
     render: curried_render({
