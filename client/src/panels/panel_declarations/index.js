@@ -79,5 +79,5 @@ export {
 
 export {
   declare_services_intro_panel,
-  declare_services_target_group_panel,
+  declare_services_fees_panel,
 } from './services/index.js';

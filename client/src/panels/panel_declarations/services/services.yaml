@@ -6,6 +6,34 @@ services_intro_text:
   en: The Service Inventory provides a corporate-wide perspective on information related to Government of Canada services.
   fr: Répertoire de services fournit une perspective pangouvernementale des services du gouvernement du Canada.
 
-services_target_group_title:
-  en: Service Target Groups
+services_fees_title:
+  en: Service Fees
+  fr: TODO
+
+services_fees_text:
+  en: TODO
+  fr: TODO
+
+has_fees:
+  en: Has fees
+  fr: TODO
+
+no_fees:
+  en: No fees
+  fr: TODO
+
+uses_CRA:
+  en: Uses CRA Business Number as identifier
+  fr: TODO
+
+no_CRA:
+  en: Does not use CRA Business Number as identifier
+  fr: TODO
+
+uses_SIN:
+  en: Uses SIN as identifier
+  fr: TODO
+
+no_SIN:
+  en: Does not use SIN as identifier
   fr: TODO
