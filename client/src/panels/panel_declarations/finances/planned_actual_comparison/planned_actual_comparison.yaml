@@ -6,7 +6,7 @@ planned_actual_title:
 dept_planned_actual_text:
   transform: [handlebars, markdown]
   en: |
-    In {{pa_last_year}}, {{subj_name subject}} planned to spend **{{fmt_compact1_written planned_spend}}** and employ **{{fmt_big_int planned_ftes}}** {{gl_tt "full-time equivalents (FTE)" "FTE"}}. It actually spent {{fmt_compact1_written actual_spend}} and employed {{fmt_big_int actual_ftes}} FTEs.
+    In {{pa_last_year}}, {{subj_name subject}} planned to spend **{{fmt_compact1_written planned_spend}}** and employ **{{fmt_big_int planned_ftes}}** {{gl_tt "full-time equivalents (FTE)" "FTE"}}. It actually spent **{{fmt_compact1_written actual_spend}}** and employed **{{fmt_big_int actual_ftes}}** FTEs.
   fr: |
     En {{pa_last_year}}, {{subj_name subject}} prévoyait dépenser **{{fmt_compact1_written planned_spend}}** et employer **{{fmt_big_int planned_ftes}}** {{gl_tt "équivalents temps plein (ETP)" "FTE"}}. En fait, l'organisation a dépensé **{{fmt_compact1_written actual_spend}}** et employé **{{fmt_big_int actual_ftes}}** ETP.
 

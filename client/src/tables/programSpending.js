@@ -93,7 +93,7 @@ export default {
     });
     this.add_col({
       "type": "big_int",
-      "nick": "drr_last_year",
+      "nick": "pa_last_year_planned",
       "hidden": true,
       "header": {
         "en": "{{pa_last_year}} - Planned Spending",

@@ -10,7 +10,6 @@ import {
   get_source_links,
 } from '../../shared.js';
 
-import { ResultCounts, current_drr_key } from '../../results/results_common.js';
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -20,10 +19,7 @@ export const declare_planned_actual_comparison_panel = () => declare_panel({
   panel_config_func: (level, panel_key) => ({
     depends_on: ['programSpending', 'programFtes'],
     info_deps: level === 'crso' ? ['programSpending_crso_info','programFtes_crso_info'] : [],
-    //used as as a fail mechanism. If result counts aren't present, bail
-    requires_result_counts: true,
-    source: (subject) => get_source_links(["DP","DRR"]),
-    title: "planned_actual_comparison_title",
+    source: (subject) => get_source_links(["DP","DRR","PA"]),
     calculate(subject, info){
 
       if(subject.level === 'dept'){
@@ -32,30 +28,20 @@ export const declare_planned_actual_comparison_panel = () => declare_panel({
         }
       } else if(!subject.dept.is_rpp_org){
         return false;
-      } 
+      }
   
-      let counts;
-      if(subject.level === 'dept'){
-        counts = ResultCounts.get_dept_counts(subject.id);
-      } else {
-        counts = ResultCounts.get_dept_counts(subject.dept.id);
-      }
-      if(!counts || counts[`${current_drr_key}_total`] < 1){
-        return false;
-      }
-
       const { programSpending, programFtes } = this.tables;
       const spend_q = programSpending.q(subject);
       const fte_q = programFtes.q(subject);
 
-      const planned_spend = spend_q.sum("drr_last_year");
-      const planned_ftes = fte_q.sum("drr_last_year");
+      const planned_spend = spend_q.sum("pa_last_year_planned");
+      const planned_ftes = fte_q.sum("pa_last_year_planned");
 
       const actual_spend = spend_q.sum("{{pa_last_year}}exp");
       const actual_ftes = fte_q.sum("{{pa_last_year}}");
 
 
-      //program has been dead before drr_last_year
+      //program has been dead before pa_last_year_planned
       if( !_.some([actual_spend, actual_ftes, planned_ftes, planned_spend]) ){
         return false;
       }
@@ -93,9 +79,9 @@ export const declare_planned_actual_comparison_panel = () => declare_panel({
 
 
       return (
-        <TextPanel title={text_maker("planned_actual_comparison_title")} footnotes={footnotes} sources={sources}>
+        <TextPanel title={text_maker("planned_actual_title")} footnotes={footnotes} sources={sources}>
           <TM 
-            k={ `${subject.level}_planned_actual_comparison_text` }
+            k={ `${subject.level}_planned_actual_text` }
             args={{
               ...panel_args,
               subject,
