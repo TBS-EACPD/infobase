@@ -18,7 +18,7 @@ import {
   declare_explore_results_panel,
   declare_results_table_panel,
   declare_tags_of_interest_panel,
-  declare_drr_planned_actual_panel,
+  declare_planned_actual_comparison_panel,
   declare_dp_rev_split_panel,
   declare_drr_summary_panel,
 
@@ -46,7 +46,7 @@ export const get_crso_panels = subject => ensure_loaded({
     declare_financial_key_concepts_panel(),
     declare_welcome_mat_panel(),
     declare_budget_measures_panel(),
-    declare_drr_planned_actual_panel(),
+    declare_planned_actual_comparison_panel(),
     declare_crso_by_prog_fte_panel(),
     declare_crso_by_prog_exp_panel(),
     declare_dp_rev_split_panel(),

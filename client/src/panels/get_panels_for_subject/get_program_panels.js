@@ -18,7 +18,7 @@ import {
   declare_explore_results_panel,
   declare_results_table_panel,
   declare_tags_of_interest_panel,
-  declare_drr_planned_actual_panel,
+  declare_planned_actual_comparison_panel,
   declare_dp_rev_split_panel,
   declare_drr_summary_panel,
 
@@ -57,7 +57,7 @@ export const get_program_panels = subject => ensure_loaded({
     declare_spend_rev_split_panel(),
     declare_top_spending_areas_panel(),
     declare_spending_in_tag_perspective_panel(),
-    declare_drr_planned_actual_panel(),
+    declare_planned_actual_comparison_panel(),
     declare_sub_program_resources_panel(),
     declare_dp_rev_split_panel(),
   ],

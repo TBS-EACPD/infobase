@@ -23,7 +23,7 @@ import { createSelector } from 'reselect';
 import { combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
-import { PlannedActualTable } from './PlannedActualTable.js';
+import { PlannedActualTable } from '../planned_actual_comparison/PlannedActualTable.js';
 
 import {
   Subject,

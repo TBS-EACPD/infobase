@@ -18,7 +18,7 @@ import {
   declare_explore_results_panel,
   declare_results_table_panel,
   declare_tags_of_interest_panel,
-  declare_drr_planned_actual_panel,
+  declare_planned_actual_comparison_panel,
   declare_dp_rev_split_panel,
   declare_drr_summary_panel,
 
@@ -79,7 +79,7 @@ export const get_dept_panels = subject => ensure_loaded({
     declare_spend_rev_split_panel(),
     declare_detailed_program_spending_split_panel(),
     declare_internal_services_panel(),
-    declare_drr_planned_actual_panel(),
+    declare_planned_actual_comparison_panel(),
     declare_dp_rev_split_panel(),
   ],
   people: _.includes(subject.tables, 'orgEmployeeType') && [
