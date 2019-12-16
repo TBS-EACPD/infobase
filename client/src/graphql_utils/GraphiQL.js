@@ -9,15 +9,17 @@ import { SpinnerWrapper, ContainerEscapeHatch } from '../components/index.js';
 import { get_api_url } from './graphql_utils.js';
 
 
-const default_query = `
-query{
-  root(lang: "${window.lang}"){
-    org(org_id: "1"){
+const defaults = {
+  query: `query($lang: String!, $org_id: String){
+  root(lang: $lang){
+    org(org_id: $org_id){
       name
     }
   }
-}
-`;
+}`,
+  variables: '{"lang": "en", "org_id": "1"}',
+};
+
 
 export default class _GraphiQL extends React.Component {
   constructor(){
@@ -53,7 +55,13 @@ export default class _GraphiQL extends React.Component {
                 MISC2: graphql_params,
               });
 
-              this.props.history.push(`/graphiql/${encodeURIComponent(graphql_params.query)}`);
+              const encoded_query = encodeURIComponent(graphql_params.query);
+              const encoded_variables = _.chain(graphql_params.variables)
+                .thru( (variables) => !_.isNull(variables) ? JSON.stringify(variables) : null )
+                .thru( (variable_string) => !_.isNull(variable_string) ? encodeURIComponent(variable_string) : null )
+                .value();
+
+              this.props.history.push(`/graphiql/${encoded_query}${_.isNull(encoded_variables) ? "" : `/${encoded_variables}`}`);
             }
 
             // return the promise from the fetch
@@ -70,11 +78,15 @@ export default class _GraphiQL extends React.Component {
       match: {
         params: {
           encoded_query,
+          encoded_variables,
         },
       },
     } = this.props;
 
-    const decoded_query = !_.isEmpty(encoded_query) ? decodeURIComponent(encoded_query) : undefined;
+    const decoded_query = encoded_query ? decodeURIComponent(encoded_query) : undefined;
+    const decoded_variables = encoded_variables ? decodeURIComponent(encoded_variables) : undefined;
+
+    const use_default_query = _.isUndefined(decoded_query);
 
     return (
       <StandardRouteContainer
@@ -92,16 +104,18 @@ export default class _GraphiQL extends React.Component {
               style={{
                 resize: "vertical",
                 overflow: "auto",
-                minHeight: "70vh",
-                height: "70vh",
+                height: "80vh",
                 padding: "10px",
               }}
             >
               <GraphiQL
                 fetcher={fetcher}
-                query={decoded_query}
-                defaultQuery={default_query}
+
+                query={use_default_query ? defaults.query : decoded_query}
+                variables={use_default_query ? defaults.variables : decoded_variables}
+
                 docExplorerOpen={true}
+                defaultVariableEditorOpen={true}
               />
             </div>
           </ContainerEscapeHatch>
