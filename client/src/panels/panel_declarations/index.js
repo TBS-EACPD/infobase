@@ -4,7 +4,7 @@ export {
   declare_crso_by_prog_fte_panel,
   declare_crso_by_prog_exp_panel,
   declare_dp_rev_split_panel,
-  declare_drr_planned_actual_panel,
+  declare_planned_actual_comparison_panel,
   declare_spending_in_tag_perspective_panel,
   declare_sub_program_resources_panel,
   declare_gocographic_panel,
