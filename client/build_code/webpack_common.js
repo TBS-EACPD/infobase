@@ -57,7 +57,7 @@ const get_rules = ({
       use: js_module_loader_rules,
       sideEffects: true,
     },
-    { // node modules that require transpilation...
+    { // node modules that specifically require transpilation...
       include: /node_modules\/(graphiql|graphql-language-service-.*|codemirror-graphql|codemirror)/,
       test: /\.js$/,
       use: js_module_loader_rules,
@@ -84,8 +84,17 @@ const get_rules = ({
       ],
       sideEffects: true,
     },
+    { 
+      test: /\.csv$/,
+      use: [ { loader: 'raw-loader' } ],
+    },
+    {
+      test: /\.svg$/,
+      loader: 'svg-inline-loader',
+    },
     {
       test: /\.yaml$/,
+      exclude: /node_modules/, // custom loader, make sure not to hit node_modules with it
       use: [
         { loader: "json-loader" },
         { 
@@ -94,18 +103,10 @@ const get_rules = ({
         },
       ],
     },
-    { 
-      test: /\.csv$/,
-      use: [ { loader: 'raw-loader' } ],
-    },
     {
       test: /\.json$/,
-      exclude: /node_modules/,
+      exclude: /node_modules/, // don't run on dependencies, if they're already internally loading their own json then applying the loader a second time fails (it's no longer valid json the second time)
       use: [{loader: 'json-loader'}],
-    },
-    {
-      test: /\.svg$/,
-      loader: 'svg-inline-loader',
     },
   ];
 };
