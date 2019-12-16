@@ -90,11 +90,11 @@ export default {
 
     this.add_col({ 
       "type": "big_int",
-      "nick": "drr_last_year" ,
+      "nick": "pa_last_year_planned" ,
       "hidden": true,
       "header": {
-        "en": "{{pa_last_year}}  "+ m("Planned FTEs"),
-        "fr": "{{pa_last_year}}  "+ m("ETP prévus"),
+        "en": "{{pa_last_year}} - "+ m("Planned FTEs"),
+        "fr": "{{pa_last_year}} - "+ m("ETP prévus"),
       },
       "description": {
         "en": `Corresponds to the total number of planned FTEs for the fiscal year {{pa_last_year}}`,
