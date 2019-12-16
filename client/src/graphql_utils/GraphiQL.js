@@ -8,6 +8,17 @@ import { SpinnerWrapper, ContainerEscapeHatch } from '../components/index.js';
 
 import { get_api_url } from './graphql_utils.js';
 
+
+const default_query = `
+query{
+  root(lang: "${window.lang}"){
+    org(org_id: "1"){
+      name
+    }
+  }
+}
+`;
+
 export default class _GraphiQL extends React.Component {
   constructor(){
     super();
@@ -55,7 +66,11 @@ export default class _GraphiQL extends React.Component {
                 padding: "10px",
               }}
             >
-              <GraphiQL fetcher={fetcher} />
+              <GraphiQL
+                fetcher={fetcher}
+                defaultQuery={default_query}
+                docExplorerOpen={true}
+              />
             </div>
           </ContainerEscapeHatch>
         }
