@@ -41,11 +41,16 @@ export const LeafSpinner = ({config_name}) => {
     },
   };
   
+  const default_config_name = _.chain(leaf_spinner_configs)
+    .keys()
+    .first()
+    .value();
+
   const {
     outer_positioning,
     spinner_container_style,
     svg_modifier,
-  } = leaf_spinner_configs[config_name];
+  } = leaf_spinner_configs[config_name || default_config_name];
 
   return (
     <div style={{position: outer_positioning}}>

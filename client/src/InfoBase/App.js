@@ -39,6 +39,7 @@ const Lab = retrying_react_lazy( () => import(/* webpackChunkName: "InfoLab" */ 
 const IsolatedPanel = retrying_react_lazy( () => import(/* webpackChunkName: "IsolatedPanel" */ '../panels/panel_routes/IsolatedPanel.js') );
 const PanelInventory = retrying_react_lazy( () => import(/* webpackChunkName: "PanelInventory" */ '../panels/panel_routes/PanelInventory.js') );
 const IndicatorPanel = retrying_react_lazy( () => import(/* webpackChunkName: "IndicatorDisplay" */ '../panels/panel_routes/IndicatorPanel.js') ); 
+const GraphiQL = retrying_react_lazy( () => import(/* webpackChunkName: "GraphiQL" */ '../graphql_utils/GraphiQL.js') ); 
 
 export class App extends React.Component {
   constructor(){
@@ -82,6 +83,7 @@ export class App extends React.Component {
                 to="/panel-inventory/:level?/:panel?/:id?"
               />
               <Route path="/panel-inventory/:level?/:panel?/:id?" component={PanelInventory} />
+              <Route path="/graphiql" component={GraphiQL} />
               { !window.is_a11y_mode && <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} /> }
               { !window.is_a11y_mode && <Route path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?" component={TreeMap} /> }
               { window.is_a11y_mode && <Route path="/start/:no_basic_equiv?" component={A11yHome} /> }
