@@ -422,15 +422,14 @@ const WelcomeMat = (props) => {
     return (
       <WelcomeMatShell
         header_row={[
-          <HeaderPane key="a" size={20} children={years_ago} />,
-          !latest_equals_oldest_hist &&
+          !latest_equals_oldest_hist && <HeaderPane key="a" size={20} children={years_ago} />,
           <HeaderPane key="b" size={20} children={last_year} />,
           <HeaderPane key="c" size={20} children={in_this_year} />,
           <HeaderPane key="d" size={40} children={hist_trend} />,
         ]}
         spend_row={[
 
-          <Pane key="a" size={20}>
+          !latest_equals_oldest_hist && <Pane key="a" size={20}>
             <MobileOrA11YContent children={years_ago} />
             <PaneItem textSize="small">
               <TM k="spending_was__new" />
@@ -440,7 +439,6 @@ const WelcomeMat = (props) => {
             </PaneItem>
           </Pane>,
 
-          !latest_equals_oldest_hist &&
           <Pane key="b" size={20}>
             <MobileOrA11YContent children={last_year} />
             <PaneItem textSize="small">
@@ -500,7 +498,7 @@ const WelcomeMat = (props) => {
     //fte row
     //spend (hist-diff and plan-diff) txt, fte (hist-diff and plan-diff) txt
 
-    const {  
+    const {
       spend_last_year,
       spend_plan_3,
 
@@ -535,15 +533,15 @@ const WelcomeMat = (props) => {
     return (
       <WelcomeMatShell
         header_row={[
-          <HeaderPane key="a" size={15} children={years_ago} />,
-          !latest_equals_oldest_hist &&
+          !latest_equals_oldest_hist && <HeaderPane key="a" size={15} children={years_ago} />,
           <HeaderPane key="b" size={15} children={last_year} />,
           <HeaderPane key="c" size={15} children={in_three_years} />,
           <HeaderPane key="d" size={55} children={long_term_trend} />,
         ]}
         spend_row={[
 
-          <Pane key="a" size={15}>
+
+          !latest_equals_oldest_hist && <Pane key="a" size={15}>
             <MobileOrA11YContent children={years_ago} />
             <PaneItem textSize="small">
               <TM k="spending_was__new" />
@@ -556,7 +554,6 @@ const WelcomeMat = (props) => {
             }
           </Pane>,
 
-          !latest_equals_oldest_hist &&
           <Pane key="b" size={15}>
             <MobileOrA11YContent children={last_year} />
             <PaneItem textSize="small">
@@ -589,7 +586,7 @@ const WelcomeMat = (props) => {
         ]}
         fte_row={fte_graph && [
 
-          <Pane key="a" size={15}>
+          !latest_equals_oldest_hist && <Pane key="a" size={15}>
             <MobileOrA11YContent children={years_ago} />
             <PaneItem textSize="medium">
               <FteFormat amt={oldest_hist_fte_data.value} />
@@ -602,7 +599,6 @@ const WelcomeMat = (props) => {
             }
           </Pane>,
 
-          !latest_equals_oldest_hist &&
           <Pane key="b" size={15}>
             <MobileOrA11YContent children={last_year} />
             <PaneItem textSize="small">
@@ -784,17 +780,17 @@ function get_calcs(subject, q6, q12){
 
   const spend_last_year_5 = _.first(hist_spend_data);
   const spend_last_year = _.last(hist_spend_data);
-  const spend_plan_1= _.first(planned_spend_data);
-  const spend_plan_3= _.last(planned_spend_data);
+  const spend_plan_1 = _.first(planned_spend_data);
+  const spend_plan_3 = _.last(planned_spend_data);
   
   const latest_year_hist_spend_diff = (latest_hist_spend_data.value-oldest_hist_spend_data.value)/oldest_hist_spend_data.value;
   const last_year_hist_spend_diff = (spend_last_year-oldest_hist_spend_data.value)/oldest_hist_spend_data.value;
   const planned_spend_diff = (spend_plan_3-spend_last_year)/spend_last_year;
 
-  const fte_last_year_5= _.first(hist_fte_data);
-  const fte_last_year= _.last(hist_fte_data);
-  const fte_plan_1= _.first(planned_fte_data);
-  const fte_plan_3= _.last(planned_fte_data);
+  const fte_last_year_5 = _.first(hist_fte_data);
+  const fte_last_year = _.last(hist_fte_data);
+  const fte_plan_1 = _.first(planned_fte_data);
+  const fte_plan_3 = _.last(planned_fte_data);
 
   const latest_year_hist_fte_diff = (latest_hist_fte_data.value-oldest_hist_fte_data.value)/oldest_hist_fte_data.value;
   const last_year_hist_fte_diff = (fte_last_year-oldest_hist_fte_data.value)/oldest_hist_fte_data.value;
