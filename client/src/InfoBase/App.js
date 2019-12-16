@@ -83,7 +83,7 @@ export class App extends React.Component {
                 to="/panel-inventory/:level?/:panel?/:id?"
               />
               <Route path="/panel-inventory/:level?/:panel?/:id?" component={PanelInventory} />
-              <Route path="/graphiql" component={GraphiQL} />
+              <Route path="/graphiql/:encoded_query?" component={GraphiQL} />
               { !window.is_a11y_mode && <Route path="/partition/:perspective?/:data_type?" component={PartitionRoute} /> }
               { !window.is_a11y_mode && <Route path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?" component={TreeMap} /> }
               { window.is_a11y_mode && <Route path="/start/:no_basic_equiv?" component={A11yHome} /> }
