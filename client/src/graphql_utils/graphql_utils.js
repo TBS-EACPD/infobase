@@ -8,7 +8,7 @@ import { compressToBase64 } from 'lz-string';
 const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${window.sha}/graphql`;
 
 let api_url;
-const get_api_url = async () => {
+export const get_api_url = async () => {
   if (!api_url){
     if(window.is_ci){
       api_url = `hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls`;
@@ -38,7 +38,7 @@ const get_api_url = async () => {
 };
 
 // Makes our GET requests tolerant of long queries, sufficient but may not work for arbitrarily long queries
-const query_length_tolerant_fetch = async (uri, options) => {
+export const query_length_tolerant_fetch = async (uri, options) => {
   const url_encoded_query = uri.split("?query=")[1];
   const query_string_hash = string_hash(url_encoded_query);
 

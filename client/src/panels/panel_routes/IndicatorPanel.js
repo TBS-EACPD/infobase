@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import { get_client } from '../../graphql_utils.js';
+import { get_client } from '../../graphql_utils/graphql_utils.js';
 import { log_standard_event } from '../../core/analytics.js';
 import { StandardRouteContainer } from '../../core/NavComponents.js';
 
