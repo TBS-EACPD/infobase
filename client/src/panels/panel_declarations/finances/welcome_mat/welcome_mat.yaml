@@ -10,27 +10,27 @@ no_wrap_year:
 years_ago:
   transform: [handlebars, markdown]
   en: |
-    {{actual_hist_years_apart}} year{{#if plural_years}}s{{/if}} ago ({{oldest_hist_spend_year}})
+    {{current_hist_years_apart}} year{{#if plural_years}}s{{/if}} ago ({{oldest_hist_spend_year}})
   fr: |
-    Il y a {{actual_hist_years_apart}} an{{#if plural_years}}s{{/if}} ({{oldest_hist_spend_year}})
+    Il y a {{current_hist_years_apart}} an{{#if plural_years}}s{{/if}} ({{oldest_hist_spend_year}})
 last_year:
   transform: [handlebars]
   en: |
-   Last year {{> no_wrap_year year=pa_last_year}}
+    Last year {{> no_wrap_year year=pa_last_year}}
   fr: |
-   L'année dernière {{> no_wrap_year year=pa_last_year}}
-in_three_years:
-  transform: [handlebars]
-  en: |
-    In 3 years' time {{> no_wrap_year year=planning_year_3}}
-  fr: |
-    Dans 3 ans {{> no_wrap_year year=planning_year_3}}
+    L'année dernière {{> no_wrap_year year=pa_last_year}}
 in_this_year:
   transform: [handlebars]
   en: |
     This year {{> no_wrap_year year=est_in_year}}
   fr: |
     Cette année {{> no_wrap_year year=est_in_year}}
+years_ahead:
+  transform: [handlebars]
+  en: |
+    In {{current_planned_years_apart}} years time {{> no_wrap_year year=planning_year_3}}
+  fr: |
+    Dans {{current_planned_years_apart}} ans {{> no_wrap_year year=planning_year_3}}
 
 long_term_trend:
   transform: [handlebars]
