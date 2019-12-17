@@ -156,7 +156,6 @@ const WelcomeMat = (props) => {
     subject,
     info,
     calcs,
-    is_m2m,
   } = props;
   const {
     latest_hist_spend_data,
@@ -574,9 +573,6 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="medium">
               <SpendFormat amt={oldest_hist_spend_data.value} />
             </PaneItem>
-            {is_m2m && 
-              <PaneItem textSize="small"> (Maximum) </PaneItem>
-            }
           </Pane>,
 
           <Pane key="b" size={15}>
@@ -587,9 +583,6 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="medium">
               <SpendFormat amt={spend_last_year} />
             </PaneItem>
-            {is_m2m && 
-              <PaneItem textSize="small"> (Maximum) </PaneItem>
-            }
           </Pane>,
 
           <Pane key="c" size={15}>
@@ -600,9 +593,6 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="medium">
               <SpendFormat amt={spend_plan_3} />
             </PaneItem>
-            {is_m2m && 
-              <PaneItem textSize="small"> (Maximum) </PaneItem>
-            }
           </Pane>,
 
           <Pane noPadding key="d" size={55}>
@@ -619,9 +609,6 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="small">
               <TM k="ftes_were_employed" />
             </PaneItem>
-            {is_m2m && 
-              <PaneItem textSize="small"> (Maximum) </PaneItem>
-            }
           </Pane>,
 
           <Pane key="b" size={15}>
@@ -632,9 +619,6 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="medium">
               <FteFormat amt={fte_last_year} />
             </PaneItem>
-            {is_m2m && 
-              <PaneItem textSize="small"> (Maximum) </PaneItem>
-            }
           </Pane>,
 
           <Pane key="c" size={15}>
@@ -645,9 +629,6 @@ const WelcomeMat = (props) => {
             <PaneItem textSize="medium">
               <FteFormat amt={fte_plan_3} />
             </PaneItem>
-            {is_m2m && 
-              <PaneItem textSize="small"> (Maximum) </PaneItem>
-            }
           </Pane>,
 
           <Pane noPadding key="d" size={55}>
