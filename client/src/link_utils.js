@@ -3,11 +3,11 @@ import { rpb_link } from './rpb/rpb_link.js';
 import { Table } from './core/TableClass.js';
 import { GlossaryEntry } from './models/glossary.js';
 
-const glossary_href = (subject_or_id) => {
+const glossary_href = (subject_or_id, first_character = '#') => {
   const id = _.isString(subject_or_id) ? subject_or_id : subject_or_id.id;
   const is_valid_glossary_item = !_.isUndefined( GlossaryEntry.lookup(id) );
 
-  return is_valid_glossary_item && `#glossary/${id}`;
+  return is_valid_glossary_item && `${first_character}glossary/${id}`;
 };
 
 const general_href_for_item = item => {
@@ -21,7 +21,7 @@ const general_href_for_item = item => {
     return rpb_link({ table: item.table.id }, true);
 
   } else if(item.constructor === GlossaryEntry){
-    return glossary_href(item);
+    return glossary_href(item, '/');
   }
 
 };
