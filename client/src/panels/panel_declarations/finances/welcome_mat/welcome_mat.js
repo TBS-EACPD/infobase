@@ -229,12 +229,12 @@ const WelcomeMat = (props) => {
 
     //note that it may or may not have FTEs...
     const {
-      spend_last_year,
-      last_year_hist_spend_diff,
+      latest_year_hist_spend_diff,
+      latest_year_hist_fte_diff,
 
-      last_year_hist_fte_diff,
+      spend_latest_year,
       oldest_hist_fte_data,
-      fte_last_year,
+      fte_latest_year,
     } = calcs;
 
     return (
@@ -259,10 +259,10 @@ const WelcomeMat = (props) => {
           <Pane key="b" size={20}>
             <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="small">
-              <TM k="spending_change_was__new" args={{hist_change: last_year_hist_spend_diff}}/>
+              <TM k="spending_change_was__new" args={{hist_change: latest_year_hist_spend_diff}}/>
             </PaneItem>
             <PaneItem textSize="medium">
-              <SpendFormat amt={spend_last_year} />
+              <SpendFormat amt={spend_latest_year} />
             </PaneItem>
           </Pane>,
 
@@ -284,10 +284,10 @@ const WelcomeMat = (props) => {
           <Pane key="b" size={20}>
             <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="small">
-              <TM k="fte_change_was__new" args={{hist_change: last_year_hist_fte_diff}}/>
+              <TM k="fte_change_was__new" args={{hist_change: latest_year_hist_fte_diff}}/>
             </PaneItem>
             <PaneItem textSize="medium">
-              <FteFormat amt={fte_last_year} />
+              <FteFormat amt={fte_latest_year} />
             </PaneItem>
           </Pane>,
 
@@ -436,9 +436,8 @@ const WelcomeMat = (props) => {
     //text about hist-diff
     const {
       spend_plan_1,
-      spend_last_year,
-      last_year_hist_spend_diff,
       latest_year_hist_spend_diff,
+      spend_latest_year,
     } = calcs;
 
     const current_hist_years_apart = _.parseInt( _.split(latest_hist_spend_data.year, '-') ) - _.parseInt( _.split(oldest_hist_spend_data.year, '-') ) + 1;
@@ -466,10 +465,10 @@ const WelcomeMat = (props) => {
           <Pane key="b" size={20}>
             <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="small">
-              <TM k="spending_change_was__new" args={{hist_change: last_year_hist_spend_diff}}/>
+              <TM k="spending_change_was__new" args={{hist_change: latest_year_hist_spend_diff}}/>
             </PaneItem>
             <PaneItem textSize="medium">
-              <SpendFormat amt={spend_last_year} />
+              <SpendFormat amt={spend_latest_year} />
             </PaneItem>
           </Pane>,
 
@@ -523,16 +522,14 @@ const WelcomeMat = (props) => {
     //spend (hist-diff and plan-diff) txt, fte (hist-diff and plan-diff) txt
 
     const {
-      spend_last_year,
       spend_plan_3,
 
-      last_year_hist_spend_diff,
-      last_year_hist_fte_diff,
       latest_year_hist_spend_diff,
       latest_year_hist_fte_diff,
       planned_spend_diff,
 
-      fte_last_year,
+      spend_latest_year,
+      fte_latest_year,
       oldest_hist_fte_data,
       fte_plan_3,
       planned_fte_diff,
@@ -578,10 +575,10 @@ const WelcomeMat = (props) => {
           <Pane key="b" size={15}>
             <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="small">
-              <TM k="spending_change_was__new" args={{hist_change: last_year_hist_spend_diff}}/>
+              <TM k="spending_change_was__new" args={{hist_change: latest_year_hist_spend_diff}}/>
             </PaneItem>
             <PaneItem textSize="medium">
-              <SpendFormat amt={spend_last_year} />
+              <SpendFormat amt={spend_latest_year} />
             </PaneItem>
           </Pane>,
 
@@ -614,10 +611,10 @@ const WelcomeMat = (props) => {
           <Pane key="b" size={15}>
             <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="small">
-              <TM k="fte_change_was__new" args={{hist_change: last_year_hist_fte_diff}}/>
+              <TM k="fte_change_was__new" args={{hist_change: latest_year_hist_fte_diff}}/>
             </PaneItem>
             <PaneItem textSize="medium">
-              <FteFormat amt={fte_last_year} />
+              <FteFormat amt={fte_latest_year} />
             </PaneItem>
           </Pane>,
 
@@ -784,23 +781,19 @@ function get_calcs(subject, q6, q12){
   const oldest_hist_fte_data = get_non_zero_data_year(hist_fte_data, actual_history_years);
   const latest_hist_fte_data = get_non_zero_data_year(hist_fte_data, actual_history_years, true);
 
-  const spend_last_year_5 = _.first(hist_spend_data);
-  const spend_last_year = _.last(hist_spend_data);
+  const spend_latest_year = latest_hist_spend_data.value;
   const spend_plan_1 = _.first(planned_spend_data);
   const spend_plan_3 = _.last(planned_spend_data);
   
   const latest_year_hist_spend_diff = (latest_hist_spend_data.value-oldest_hist_spend_data.value)/oldest_hist_spend_data.value;
-  const last_year_hist_spend_diff = (spend_last_year-oldest_hist_spend_data.value)/oldest_hist_spend_data.value;
-  const planned_spend_diff = (spend_plan_3-spend_last_year)/spend_last_year;
+  const planned_spend_diff = (spend_plan_3-spend_latest_year)/spend_latest_year;
 
-  const fte_last_year_5 = _.first(hist_fte_data);
-  const fte_last_year = _.last(hist_fte_data);
+  const fte_latest_year = latest_hist_fte_data.value;
   const fte_plan_1 = _.first(planned_fte_data);
   const fte_plan_3 = _.last(planned_fte_data);
 
   const latest_year_hist_fte_diff = (latest_hist_fte_data.value-oldest_hist_fte_data.value)/oldest_hist_fte_data.value;
-  const last_year_hist_fte_diff = (fte_last_year-oldest_hist_fte_data.value)/oldest_hist_fte_data.value;
-  const planned_fte_diff = (fte_plan_3-fte_last_year)/fte_last_year;
+  const planned_fte_diff = (fte_plan_3-fte_latest_year)/fte_latest_year;
 
   return {
     oldest_hist_spend_data,
@@ -808,20 +801,16 @@ function get_calcs(subject, q6, q12){
     oldest_hist_fte_data,
     has_hist,
     has_planned,
-    spend_last_year_5,
-    spend_last_year,
+    spend_latest_year,
     spend_plan_1,
     spend_plan_3,
     latest_year_hist_spend_diff,
-    last_year_hist_spend_diff,
     planned_spend_diff,
 
-    fte_last_year_5,
-    fte_last_year,
+    fte_latest_year,
     fte_plan_1,
     fte_plan_3,
     latest_year_hist_fte_diff,
-    last_year_hist_fte_diff,
     planned_fte_diff,
 
     fte_data,
