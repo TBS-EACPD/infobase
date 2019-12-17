@@ -452,7 +452,7 @@ const WelcomeMat = (props) => {
         ]}
         spend_row={[
 
-          !latest_equals_oldest_hist && <Pane key="a" size={20}>
+          <Pane key="a" size={20}>
             <MobileOrA11YContent children={years_ago} />
             <PaneItem textSize="small">
               <TM k="spending_was__new" />
@@ -462,7 +462,7 @@ const WelcomeMat = (props) => {
             </PaneItem>
           </Pane>,
 
-          <Pane key="b" size={20}>
+          !latest_equals_oldest_hist && <Pane key="b" size={20}>
             <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="small">
               <TM k="spending_change_was__new" args={{hist_change: latest_year_hist_spend_diff}}/>
@@ -562,7 +562,7 @@ const WelcomeMat = (props) => {
         spend_row={[
 
 
-          !latest_equals_oldest_hist && <Pane key="a" size={15}>
+          <Pane key="a" size={15}>
             <MobileOrA11YContent children={years_ago} />
             <PaneItem textSize="small">
               <TM k="spending_was__new" />
@@ -572,7 +572,7 @@ const WelcomeMat = (props) => {
             </PaneItem>
           </Pane>,
 
-          <Pane key="b" size={15}>
+          !latest_equals_oldest_hist && <Pane key="b" size={15}>
             <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="small">
               <TM k="spending_change_was__new" args={{hist_change: latest_year_hist_spend_diff}}/>
@@ -598,7 +598,7 @@ const WelcomeMat = (props) => {
         ]}
         fte_row={fte_graph && [
 
-          !latest_equals_oldest_hist && <Pane key="a" size={15}>
+          <Pane key="a" size={15}>
             <MobileOrA11YContent children={years_ago} />
             <PaneItem textSize="medium">
               <FteFormat amt={oldest_hist_fte_data.value} />
@@ -608,7 +608,7 @@ const WelcomeMat = (props) => {
             </PaneItem>
           </Pane>,
 
-          <Pane key="b" size={15}>
+          !latest_equals_oldest_hist && <Pane key="b" size={15}>
             <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="small">
               <TM k="fte_change_was__new" args={{hist_change: latest_year_hist_fte_diff}}/>
