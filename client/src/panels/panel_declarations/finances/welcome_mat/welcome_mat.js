@@ -162,19 +162,27 @@ const WelcomeMat = (props) => {
     latest_hist_spend_data,
     oldest_hist_spend_data,
   } = calcs;
+  
+  const [ oldest_hist_year, latest_hist_year ] = _.map(
+    [oldest_hist_spend_data.year, latest_hist_spend_data.year],
+    (fiscal_year) => _.chain(fiscal_year)
+      .split('-')
+      .head()
+      .parseInt() 
+      .value()
+  );
   const current_year = _.parseInt( run_template('{{current_fiscal_year_short_first}}') );
-  const oldest_hist_year = _.chain(oldest_hist_spend_data.year)
-    .split('-')
-    .head()
-    .parseInt()
-    .value();
-  const actual_hist_years_apart = current_year - oldest_hist_year;
-  const latest_equals_oldest_hist = oldest_hist_spend_data.year === latest_hist_spend_data.year;
+  const latest_planned_year = _.parseInt( run_template('{{planning_year_3_short_first}}') );
+
+  const current_hist_years_apart = current_year - oldest_hist_year;
+  const current_planned_years_apart = latest_planned_year - current_year;
 
   //vars used multiple times accross multiple cases
+  const latest_equals_oldest_hist = oldest_hist_spend_data.year === latest_hist_spend_data.year;
+
   const years_ago = <TM k="years_ago" args={{
-    plural_years: actual_hist_years_apart > 1,
-    actual_hist_years_apart: actual_hist_years_apart,
+    plural_years: current_hist_years_apart > 1,
+    current_hist_years_apart,
     oldest_hist_spend_year: oldest_hist_spend_data.year,
   }} />;  
   const hist_trend = <TM k="hist_trend" args={{
@@ -182,9 +190,26 @@ const WelcomeMat = (props) => {
     latest_hist_spend_year: latest_hist_spend_data.year,
   }} />;
   
-  const last_year = <TM k="last_year" />;
-  const in_three_years = <TM k="in_three_years" />;
   const in_this_year = <TM k="in_this_year" />;
+  const last_year = <TM k="last_year" />;
+  const latest_hist_year_text = (() => {
+    const current_latest_hist_years_apart = current_year - latest_hist_year;
+    if (current_latest_hist_years_apart > 1){
+      return <TM k="years_ago" args={{
+        plural_years: true,
+        current_hist_years_apart: current_latest_hist_years_apart,
+        oldest_hist_spend_year: latest_hist_spend_data.year,
+      }} />;
+    } else if (current_latest_hist_years_apart === 1){
+      return last_year;
+    } else if (current_latest_hist_years_apart === 0){
+      return in_this_year;
+    } else {
+      throw new Error("Actual spending years are ahead of current fiscal year value? Shouldn't happen");
+    }
+  })();
+
+  const years_ahead = <TM k="years_ahead" args={{current_planned_years_apart}} />;
 
   const long_term_trend = <TM k="long_term_trend" args={{oldest_hist_spend_year: oldest_hist_spend_data.year}} />;
   const planned_trend = <TM k="3_year_trend" />;
@@ -217,7 +242,7 @@ const WelcomeMat = (props) => {
       <WelcomeMatShell
         header_row={[
           <HeaderPane key="a" size={20} children={years_ago} />,
-          <HeaderPane key="b" size={20} children={last_year} />,
+          <HeaderPane key="b" size={20} children={latest_hist_year_text} />,
           <HeaderPane key="d" size={40} children={hist_trend} />,
         ]}
         spend_row={[
@@ -233,7 +258,7 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane key="b" size={20}>
-            <MobileOrA11YContent children={last_year} />
+            <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="small">
               <TM k="spending_change_was__new" args={{hist_change: last_year_hist_spend_diff}}/>
             </PaneItem>
@@ -258,7 +283,7 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane key="b" size={20}>
-            <MobileOrA11YContent children={last_year} />
+            <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="small">
               <TM k="fte_change_was__new" args={{hist_change: last_year_hist_fte_diff}}/>
             </PaneItem>
@@ -297,14 +322,14 @@ const WelcomeMat = (props) => {
     return (
       <WelcomeMatShell
         header_row={[
-          <HeaderPane key="b" size={20} children={in_this_year} />,
-          <HeaderPane key="c" size={20} children={in_three_years} />,
-          <HeaderPane key="d" size={40} children={planned_trend} />,
+          <HeaderPane key="a" size={20} children={latest_hist_year_text} />,
+          <HeaderPane key="b" size={20} children={years_ahead} />,
+          <HeaderPane key="c" size={40} children={planned_trend} />,
         ]}
         spend_row={[
 
           <Pane key="a" size={20}>
-            <MobileOrA11YContent children={last_year} />
+            <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="small">
               <TM k="spending_will_be_1__new"/>
             </PaneItem>
@@ -314,7 +339,7 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane key="b" size={20}>
-            <MobileOrA11YContent children={in_three_years} />
+            <MobileOrA11YContent children={years_ahead} />
             <PaneItem textSize="small">
               <TM k="spending_change_will__new" args={{plan_change: planned_spend_diff}} />
             </PaneItem>
@@ -329,7 +354,7 @@ const WelcomeMat = (props) => {
         ]}
         fte_row={fte_graph && [
           <Pane key="a" size={20}>
-            <MobileOrA11YContent children={in_this_year} />
+            <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="medium">
               <FteFormat amt={fte_plan_1} />
             </PaneItem>
@@ -339,7 +364,7 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane key="b" size={20}>
-            <MobileOrA11YContent children={in_three_years} />
+            <MobileOrA11YContent children={years_ahead} />
             <PaneItem textSize="small">
               <TM k="fte_change_will__new" args={{plan_change: planned_fte_diff}} />
             </PaneItem>
@@ -366,7 +391,7 @@ const WelcomeMat = (props) => {
       <WelcomeMatShell
         header_row={[
           <HeaderPane key="a" size={20} children={years_ago} />,
-          <HeaderPane key="b" size={20} children={last_year} />,
+          <HeaderPane key="b" size={20} children={latest_hist_year_text} />,
           <HeaderPane key="c" size={20} children={in_this_year} />,
           <HeaderPane key="d" size={40} children={hist_trend} />,
         ]}
@@ -378,7 +403,7 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane key="b" size={20}>
-            <MobileOrA11YContent children={last_year} />
+            <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="small" children={no_hist_spending} />
           </Pane>,
 
@@ -417,13 +442,13 @@ const WelcomeMat = (props) => {
       latest_year_hist_spend_diff,
     } = calcs;
 
-    const actual_hist_years_apart = _.parseInt( _.split(latest_hist_spend_data.year, '-') ) - _.parseInt( _.split(oldest_hist_spend_data.year, '-') ) + 1;
+    const current_hist_years_apart = _.parseInt( _.split(latest_hist_spend_data.year, '-') ) - _.parseInt( _.split(oldest_hist_spend_data.year, '-') ) + 1;
 
     return (
       <WelcomeMatShell
         header_row={[
           !latest_equals_oldest_hist && <HeaderPane key="a" size={20} children={years_ago} />,
-          <HeaderPane key="b" size={20} children={last_year} />,
+          <HeaderPane key="b" size={20} children={latest_hist_year_text} />,
           <HeaderPane key="c" size={20} children={in_this_year} />,
           <HeaderPane key="d" size={40} children={hist_trend} />,
         ]}
@@ -440,7 +465,7 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane key="b" size={20}>
-            <MobileOrA11YContent children={last_year} />
+            <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="small">
               <TM k="spending_change_was__new" args={{hist_change: last_year_hist_spend_diff}}/>
             </PaneItem>
@@ -478,7 +503,7 @@ const WelcomeMat = (props) => {
                 k="dept2_welcome_mat_spending_summary"
                 args={{
                   exp_hist_change: latest_year_hist_spend_diff,
-                  actual_hist_years_apart: actual_hist_years_apart,
+                  current_hist_years_apart: current_hist_years_apart,
                   subject,
                 }}
               />
@@ -534,8 +559,8 @@ const WelcomeMat = (props) => {
       <WelcomeMatShell
         header_row={[
           !latest_equals_oldest_hist && <HeaderPane key="a" size={15} children={years_ago} />,
-          <HeaderPane key="b" size={15} children={last_year} />,
-          <HeaderPane key="c" size={15} children={in_three_years} />,
+          <HeaderPane key="b" size={15} children={latest_hist_year_text} />,
+          <HeaderPane key="c" size={15} children={years_ahead} />,
           <HeaderPane key="d" size={55} children={long_term_trend} />,
         ]}
         spend_row={[
@@ -555,7 +580,7 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane key="b" size={15}>
-            <MobileOrA11YContent children={last_year} />
+            <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="small">
               <TM k="spending_change_was__new" args={{hist_change: last_year_hist_spend_diff}}/>
             </PaneItem>
@@ -568,7 +593,7 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane key="c" size={15}>
-            <MobileOrA11YContent children={in_three_years} />
+            <MobileOrA11YContent children={years_ahead} />
             <PaneItem textSize="small">
               <TM k="spending_change_will__new" args={{plan_change: planned_spend_diff}} />
             </PaneItem>
@@ -600,7 +625,7 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane key="b" size={15}>
-            <MobileOrA11YContent children={last_year} />
+            <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="small">
               <TM k="fte_change_was__new" args={{hist_change: last_year_hist_fte_diff}}/>
             </PaneItem>
@@ -613,7 +638,7 @@ const WelcomeMat = (props) => {
           </Pane>,
 
           <Pane key="c" size={15}>
-            <MobileOrA11YContent children={in_three_years} />
+            <MobileOrA11YContent children={years_ahead} />
             <PaneItem textSize="small">
               <TM k="fte_change_will__new" args={{plan_change: planned_fte_diff}} />
             </PaneItem>
@@ -640,7 +665,7 @@ const WelcomeMat = (props) => {
                     exp_plan_change: planned_spend_diff,
                     oldest_hist_spend_year: oldest_hist_spend_data.year,
                     latest_hist_spend_year: latest_hist_spend_data.year,
-                    actual_hist_years_apart: actual_hist_years_apart,
+                    current_hist_years_apart: current_hist_years_apart,
                     subject,
                   }}
                 />
