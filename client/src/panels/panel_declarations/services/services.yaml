@@ -37,3 +37,11 @@ uses_SIN:
 no_SIN:
   en: Does not use SIN as identifier
   fr: TODO
+
+label_sin_is_identifier:
+  en: Uses SIN as identifier
+  fr: TODO
+
+label_cra_buisnss_number_is_identifier:
+  en: Uses CRA Business Number as identifier
+  fr: TODO

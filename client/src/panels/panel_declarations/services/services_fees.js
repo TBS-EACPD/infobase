@@ -9,8 +9,11 @@ import {
   CommonDonut,
   declare_panel,
   InfographicPanel,
+  NivoResponsiveBar,
+  declarative_charts,
 } from "../shared.js";
 
+const { GraphLegend } = declarative_charts;
 import { Fragment } from 'react';
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -32,36 +35,6 @@ const ServicesFeesPanel = ({panel_args}) => {
     },
   ];
 
-  const total_uses_CRA = _.reduce(panel_args.services, (sum, serv) => serv.cra_buisnss_number_is_identifier ? sum+1 : sum, 0);
-  const total_no_CRA = _.size(panel_args.services) - total_uses_CRA;
-  const data_CRA = [
-    {
-      value: total_uses_CRA,
-      label: text_maker("uses_CRA"),
-      id: "uses_CRA",
-    },
-    {
-      value: total_no_CRA,
-      label: text_maker("no_CRA"),
-      id: "no_CRA",
-    },
-  ];
-
-  const total_uses_SIN = _.reduce(panel_args.services, (sum, serv) => serv.sin_is_identifier ? sum+1 : sum, 0);
-  const total_no_SIN = _.size(panel_args.services) - total_uses_SIN;
-  const data_SIN = [
-    {
-      value: total_uses_SIN,
-      label: text_maker("uses_SIN"),
-      id: "uses_SIN",
-    },
-    {
-      value: total_no_SIN,
-      label: text_maker("no_SIN"),
-      id: "no_SIN",
-    },
-  ];
-
   return (
     <Fragment>
       <TM k={"services_fees_text"} />
@@ -70,16 +43,6 @@ const ServicesFeesPanel = ({panel_args}) => {
             <CommonDonut
               graph_data = {data_fees}
               legend_data = {data_fees}
-              graph_height = '300px'
-            />
-            <CommonDonut
-              graph_data = {data_CRA}
-              legend_data = {data_CRA}
-              graph_height = '300px'
-            />
-            <CommonDonut
-              graph_data = {data_SIN}
-              legend_data = {data_SIN}
               graph_height = '300px'
             />
           </Fragment>
