@@ -80,4 +80,5 @@ export {
 export {
   declare_services_intro_panel,
   declare_services_fees_panel,
+  declare_services_ids_panel,
 } from './services/index.js';
