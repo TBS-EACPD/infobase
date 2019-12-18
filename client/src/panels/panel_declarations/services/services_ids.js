@@ -71,7 +71,7 @@ const ServicesIdPanel = ({panel_args}) => {
   
 
 export const declare_services_ids_panel = () => declare_panel({
-  panel_key: "dept_services_fees",
+  panel_key: "dept_services_ids",
   levels: ["dept"],
   panel_config_func: (level, panel_key) => ({
     requires_services: true,

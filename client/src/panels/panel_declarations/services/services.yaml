@@ -45,3 +45,28 @@ label_sin_is_identifier:
 label_cra_buisnss_number_is_identifier:
   en: Uses CRA Business Number as identifier
   fr: TODO
+
+label_telephone_enquires:
+  en: Telephone enquiries
+  fr: TODO
+
+label_website_visits:
+  en: Website visits
+  fr: TODO
+
+label_online_applications:
+  en: Online applications
+  fr: TODO
+
+label_in_person_applications:
+  en: In person applications
+  fr: TODO
+
+label_mail_applications:
+  en: Applications by mail
+  fr: TODO
+
+label_other_channel_applications:
+  en: Applications by other channels
+  fr: TODO
+
