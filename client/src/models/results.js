@@ -469,54 +469,44 @@ const status_key_to_glossary_key = {
   future: "RESULTS_ONGOING",
 };
 
-class DocInfo {
-  constructor({doc_type, doc_key, year_short, has_resources, doc_url_en, doc_url_fr, index}){
-    this.doc_type = doc_type;
-    this.doc_key = doc_key;
-    this.year_short = year_short;
-    this.has_resources = has_resources;
-    this.doc_url_en = doc_url_en;
-    this.doc_url_fr = doc_url_fr;
 
-    this.year = year_to_fiscal_year(this.year_short);
-    this.could_have_previous = index > 0;
-  }
-}
-const declare_doc_info_objects = (doc_type, docs) => _.chain(docs)
+const build_doc_info_objects = (doc_type, docs) => _.chain(docs)
   .map(
-    (doc_properties) => ({
-      doc_type: doc_type,
+    (doc_properties, index) => ({
+      doc_type,
       doc_key: `${doc_type}${doc_properties.year_short.substring(2)}`,
+      year: year_to_fiscal_year(doc_properties.year_short),
+      has_resources: !_.isEmpty(doc_properties.resource_years),
+      could_have_previous: index > 0,
       ...doc_properties,
     })
   )
-  .map( (doc_properties, index) => [doc_properties.doc_key, new DocInfo({...doc_properties, index})] )
-  .fromPairs()
+  .keyBy('doc_key')
   .value();
 
-const drr_docs = declare_doc_info_objects(
+const drr_docs = build_doc_info_objects(
   "drr",
   [
     {
       year_short: "2017",
-      has_resources: true,
+      resource_years: ["pa_last_year_2"],
       doc_url_en: "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2017-18-departmental-results-reports.html",
       doc_url_fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2017-2018.html",
     },
   ]
 );
-const dp_docs = declare_doc_info_objects(
+const dp_docs = build_doc_info_objects(
   "dp",
   [
     {
       year_short: "2018",
-      has_resources: false,
+      resource_years: [],
       doc_url_en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2018-19-departmental-plans.html",
       doc_url_fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2018-2019.html",
     },
     {
       year_short: "2019",
-      has_resources: true,
+      resource_years: ["planning_year_1", "planning_year_2", "planning_year_3"],
       doc_url_en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2019-20-departmental-plans.html",
       doc_url_fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2019-2020.html",
     },
