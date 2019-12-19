@@ -16,21 +16,22 @@ const { Dept } = Subject;
 import {
   ResultCounts,
   get_result_doc_keys,
-  current_dp_key,
   filter_and_genericize_doc_counts,
+  result_docs,
+  current_dp_key,
 } from './results_common.js';
 import { HorizontalStatusTable } from './result_components.js';
 
 const get_dp_rpb_links = () => ({
   spend: rpb_link({
     table: "programSpending",
-    columns: ['{{planning_year_1}}','{{planning_year_2}}','{{planning_year_3}}'], 
+    columns: result_docs[current_dp_key].resource_years, 
     mode: "details",
     
   }),
   ftes: rpb_link({
     table: "programFtes",
-    columns: ['{{planning_year_1}}','{{planning_year_2}}','{{planning_year_3}}'], 
+    columns: result_docs[current_dp_key].resource_years, 
     mode: "details",
   }),
 });
