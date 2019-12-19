@@ -28,7 +28,7 @@ const {
 
 const link_to_results_infograph = subj => infograph_href_template(subj, 'results');
 
-function pick_table(subject,type,doc){
+function pick_table(subject, type, doc){
   return Table.lookup(
     type === "spending" ?
       "programSpending" :
@@ -37,7 +37,7 @@ function pick_table(subject,type,doc){
 }
 
 const get_rows_for_subject_from_table = _.memoize( (subject, type,doc) => {
-  const table = pick_table(subject, type,doc);
+  const table = pick_table(subject, type, doc);
   if( subject.level === 'program'){
     const rows_or_record = table.programs.get(subject);
     if(!rows_or_record){
@@ -72,33 +72,31 @@ const get_rows_for_subject_from_table = _.memoize( (subject, type,doc) => {
     return null;
   }
 
-}, (subject,type,doc) => `${subject.guid}-${type}-${doc}` );
+}, (subject, type, doc) => `${subject.guid}-${type}-${doc}` );
 
-const get_planning_data_for_subject_from_table = (subject, type, doc) => {
-  const rows = get_rows_for_subject_from_table(subject,type,doc);
-  const table = pick_table(subject,type,doc);
+const get_resources_for_subject_from_table = (subject, type, doc) => {
+  const doc_resource_year = _.first(result_docs[doc].resource_years);
+  if ( !_.isUndefined(doc_resource_year) ){
+    const rows = get_rows_for_subject_from_table(subject, type, doc);
+    const table = pick_table(subject, type, doc);
 
-  let col;
-  if(doc === current_drr_key){
-    col = "{{pa_last_year_2}}";
-    if(type === "spending"){
-      col = "{{pa_last_year_2}}exp";
-    }
+    const col_suffix = (/drr/.test(doc) && type === "spending") ? "exp" : "";
+    const col = `${_.first(result_docs[doc].resource_years)}${col_suffix}`;
+
+    return table.col_from_nick(col).formula(rows);
   } else {
-    col = "{{planning_year_1}}";
+    return false;
   }
-
-  return table.col_from_nick(col).formula(rows);
 };
 
-const planned_resource_fragment = (subject, doc) => {
-  const spending = get_planning_data_for_subject_from_table(subject, "spending", doc);
-  const ftes = get_planning_data_for_subject_from_table(subject, "fte", doc);
+const results_resource_fragment = (subject, doc) => {
+  const spending = get_resources_for_subject_from_table(subject, "spending", doc);
+  const ftes = get_resources_for_subject_from_table(subject, "fte", doc);
 
   return {
     spending,
     ftes,
-  }; 
+  };
 };
 
 const isDeptWithoutResults = (subject) => _.chain(subject.programs)
@@ -316,7 +314,7 @@ export {
   current_drr_key,
   current_dp_key,
 
-  planned_resource_fragment,
+  results_resource_fragment,
   link_to_results_infograph,
   isDeptWithoutResults,
   row_to_drr_status_counts,
