@@ -81,7 +81,7 @@ class ServicesChannelsPanel extends React.Component {
 
     return (
       <Fragment>
-        <TM k={"services_fees_text"} />
+        <TM k={"communication_channels_text"} />
         { !window.is_a11y_mode &&
             <Fragment>
               <Select
@@ -135,7 +135,7 @@ export const declare_services_channels_panel = () => declare_panel({
       
       return (
         <InfographicPanel
-          title={text_maker("services_fees_title")}
+          title={text_maker("communication_channels_title")}
           sources={sources}
         >
           <ServicesChannelsPanel

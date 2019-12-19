@@ -42,7 +42,7 @@ const ServicesIdPanel = ({panel_args}) => {
 
   return (
     <Fragment>
-      <TM k={"services_fees_text"} />
+      <TM k={"services_ids_text"} />
       { !window.is_a11y_mode &&
           <Fragment>
             <GraphLegend
@@ -86,7 +86,7 @@ export const declare_services_ids_panel = () => declare_panel({
       
       return (
         <InfographicPanel
-          title={text_maker("services_fees_title")}
+          title={text_maker("services_ids_title")}
           sources={sources}
         >
           <ServicesIdPanel
