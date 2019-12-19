@@ -1,0 +1,15 @@
+@import "../../../common_css/common-variables";
+
+.services-icon-array-true {
+  background-color: $secondaryColor;
+}
+
+.services-icon-array-false {
+  background-color: #4abbc4; // colour #2 from the default scheme
+}
+
+.services-icon-array-na {
+  background-color: $tertiaryColor;
+}
+
+  

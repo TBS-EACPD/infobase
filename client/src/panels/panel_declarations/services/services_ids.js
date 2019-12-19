@@ -4,9 +4,6 @@ import { Service } from '../../../models/services.js';
 
 import {
   create_text_maker_component,
-  StdPanel,
-  Col,
-  CommonDonut,
   declare_panel,
   InfographicPanel,
   NivoResponsiveBar,

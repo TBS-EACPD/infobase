@@ -4,12 +4,11 @@ import text from './services.yaml';
 import {
   create_text_maker_component,
   InfographicPanel,
-  get_source_links,
 
   declare_panel,
 } from "../shared.js";
 
-const { text_maker, TM } = create_text_maker_component(text);
+const { text_maker } = create_text_maker_component(text);
 
 
 const ServicesIntroPanel = () => {

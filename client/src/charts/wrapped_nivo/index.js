@@ -1,9 +1,10 @@
-import { NivoResponsiveBar, NivoResponsiveHBar } from './nivo_bar.js';
-import { NivoResponsiveLine } from './nivo_line.js';
-import { NivoResponsivePie } from './nivo_pie.js';
-import { CircleProportionChart } from './nivo_bubble.js';
+import { NivoResponsiveBar, NivoResponsiveHBar } from "./nivo_bar.js";
+import { NivoResponsiveLine } from "./nivo_line.js";
+import { NivoResponsivePie } from "./nivo_pie.js";
+import { CircleProportionChart } from "./nivo_bubble.js";
+import { NivoResponsiveHeatMap } from "./nivo_heatmap.js";
 
-export { NivoLineBarToggle } from './NivoLineBarToggle.js';
+export { NivoLineBarToggle } from "./NivoLineBarToggle.js";
 
 export {
   NivoResponsiveBar,
@@ -11,4 +12,5 @@ export {
   NivoResponsiveLine,
   NivoResponsivePie,
   CircleProportionChart,
+  NivoResponsiveHeatMap,
 };

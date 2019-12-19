@@ -85,3 +85,11 @@ services_ids_title:
 services_ids_text:
   en: Insert text here
   fr: TODO
+
+digital_status_title:
+  en: Digital status
+  fr: TODO
+
+digital_status_text:
+  en: Information about the digital availability of different service steps. Blah blah blah more text here to make this longer. Lorem ipsum dolor sit amet etc etc etc. Is this long enough yet?
+  fr: TODO

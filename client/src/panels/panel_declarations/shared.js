@@ -27,6 +27,7 @@ import {
   NivoResponsivePie,
   CircleProportionChart,
   NivoLineBarToggle,
+  NivoResponsiveHeatMap,
 } from '../../charts/wrapped_nivo/index.js';
 import {
   get_formatter,
@@ -180,7 +181,12 @@ export {
   NivoResponsiveHBar,
   NivoResponsiveLine,
   NivoResponsivePie,
+<<<<<<< HEAD
   CircleProportionChart,
+=======
+  NivoResponsiveHeatMap,
+  Canada,
+>>>>>>> e56dd1069... add digital status heatmap
   FlatTreeMapViz,
   Canada,
   breakpoints,

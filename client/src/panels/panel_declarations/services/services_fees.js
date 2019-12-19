@@ -4,16 +4,11 @@ import { Service } from '../../../models/services.js';
 
 import {
   create_text_maker_component,
-  StdPanel,
-  Col,
   CommonDonut,
   declare_panel,
   InfographicPanel,
-  NivoResponsiveBar,
-  declarative_charts,
 } from "../shared.js";
 
-const { GraphLegend } = declarative_charts;
 import { Fragment } from 'react';
 
 const { text_maker, TM } = create_text_maker_component(text);

@@ -82,4 +82,5 @@ export {
   declare_services_fees_panel,
   declare_services_ids_panel,
   declare_services_channels_panel,
+  declare_services_digital_status_panel,
 } from './services/index.js';
