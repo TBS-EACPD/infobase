@@ -982,12 +982,12 @@
 "IJC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-102977,-163877,-120446.00,-123347,0
 "IJC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,25000,0.00,0,0
 "INAC",1,1,"Operating and Program","Fonctionnement and Programme","ME",1069154628,658200538,892342724.00,613211553,3316984242
-"INAC",1,1,"Operating and Program","Fonctionnement and Programme","SEA",278127454,204799222,19831837.00,307064237,88344608
+"INAC",1,1,"Operating and Program","Fonctionnement and Programme","SEA",278127454,204799222,19831837.00,307064237,87505898
 "INAC",1,1,"Operating and Program","Fonctionnement and Programme","SEB",0,117375502,91888537.00,68863812,0
 "INAC",1,1,"Operating and Program","Fonctionnement and Programme","SEC",110333479,-13184525,-43038426.00,0,0
 "INAC",1,1,"Operating and Program","Fonctionnement and Programme","VA",28574728,29358572,-8938160.00,45329714,0
 "INAC",10,3,"Grants & Contributions","Subventions et Contributions","ME",6936151589,6652765968,8966692676.00,2359854884,2625384706
-"INAC",10,3,"Grants & Contributions","Subventions et Contributions","SEA",109462639,981831046,699089958.00,1376694473,0
+"INAC",10,3,"Grants & Contributions","Subventions et Contributions","SEA",109462639,981831046,699089958.00,1376694473,185789393
 "INAC",10,3,"Grants & Contributions","Subventions et Contributions","SEB",0,520600017,350088546.00,105797866,0
 "INAC",10,3,"Grants & Contributions","Subventions et Contributions","SEC",120354069,105077732,-2849211.00,0,0
 "INAC",10,3,"Grants & Contributions","Subventions et Contributions","VA",-566972,0,-2741174337.00,115474963,0
@@ -997,7 +997,7 @@
 "INAC",40,7,"Indigenous Youth and Reconciliation","Jeunes autochtones et réconciliation","ME",,,,,4874600
 "INAC",45,7,"More Connectivity = More Affordable Electricity","Plus de branchement = plus d'électricité abordable","ME",,,,,6000000
 "INAC",5,2,"Capital","Capital","ME",35946145,41432179,44496010.00,15091444,5491717
-"INAC",5,2,"Capital","Capital","SEA",4501519,13266026,0.00,2877924,185789393
+"INAC",5,2,"Capital","Capital","SEA",4501519,13266026,0.00,2877924,838710
 "INAC",5,2,"Capital","Capital","SEB",0,400273,0.00,198556,0
 "INAC",5,2,"Capital","Capital","SEC",100000,0,0.00,0,0
 "INAC",5,2,"Capital","Capital","VA",17155182,327480,7519201.00,7296688,0
