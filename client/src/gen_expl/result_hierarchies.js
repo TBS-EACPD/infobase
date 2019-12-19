@@ -23,16 +23,8 @@ function result_to_node(result, parent_id, doc){
 
 // vv delete on drr17 exit
 const get_sub_program_resources = (sub_program, doc) => ({
-  spending: (
-    doc === "drr17" ?
-      sub_program.pa_last_year_1 :
-      sub_program.spend_planning_year_1
-  ),
-  ftes: (
-    doc === "drr17" ? 
-      sub_program.pa_last_year_1 :
-      sub_program.fte_planning_year_1
-  ),
+  spending: sub_program.spend_pa_last_year,
+  ftes: sub_program.fte_pa_last_year,
 });
 // ^^ delete on drr17 exit
 
