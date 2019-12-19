@@ -6,7 +6,6 @@ import {
   Subject,
   create_text_maker_component,
   InfographicPanel,
-  rpb_link,
   get_source_links,
 
   declare_panel,
@@ -17,24 +16,10 @@ import {
   ResultCounts,
   get_result_doc_keys,
   filter_and_genericize_doc_counts,
-  result_docs,
   current_dp_key,
 } from './results_common.js';
 import { HorizontalStatusTable } from './result_components.js';
 
-const get_dp_rpb_links = () => ({
-  spend: rpb_link({
-    table: "programSpending",
-    columns: result_docs[current_dp_key].resource_years, 
-    mode: "details",
-    
-  }),
-  ftes: rpb_link({
-    table: "programFtes",
-    columns: result_docs[current_dp_key].resource_years, 
-    mode: "details",
-  }),
-});
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -94,7 +79,6 @@ export const declare_gov_dp_panel = () => declare_panel({
         },
       } = calculations;
       const counts = ResultCounts.get_gov_counts();
-      const { spend, ftes } = get_dp_rpb_links();
   
       return (
         <InfographicPanel
@@ -106,8 +90,6 @@ export const declare_gov_dp_panel = () => declare_panel({
             counts={counts}
             verbose_gov_counts={verbose_gov_counts}
             counts_by_dept={counts_by_dept}
-            spend_link={spend}
-            fte_link={ftes}
           />
         </InfographicPanel>
       ); 
