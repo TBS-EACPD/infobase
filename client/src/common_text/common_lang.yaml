@@ -982,17 +982,17 @@ drr_ftes:
   fr: |
     Nombre d'ETP pour {{pa_last_year_2}} 
 
-DP_resources:
+planned_resources:
   transform: [handlebars]
   en: |
-    {{planning_year_1}} Planned Resources
-  fr: Resources prévues en {{planning_year_1}}
+    {{year}} Planned Resources
+  fr: Resources prévues en {{year}}
 
-DRR_resources:
+actual_resources:
   transform: [handlebars]
   en: |
-    {{pa_last_year_2}} Actual Resources 
-  fr: Resources utilisées en {{pa_last_year_2}}
+    {{year}} Actual Resources 
+  fr: Resources utilisées en {{year}}
 
 
 infograph_for:

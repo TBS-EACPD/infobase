@@ -11,7 +11,8 @@ import { StandardRouteContainer } from '../core/NavComponents';
 import { get_col_defs } from '../gen_expl/resource-explorer-common.js';
 import { Subject } from '../models/subject.js';
 import { GlossaryEntry } from '../models/glossary.js';
-import { current_drr_key, current_dp_key } from '../models/results.js';
+import { run_template } from '../models/text.js';
+import { current_drr_key, current_dp_key, result_docs } from '../models/results.js';
 import { 
   create_text_maker_component,
   SpinnerWrapper,
@@ -285,12 +286,12 @@ class ExplorerPage extends React.Component {
           tab_options = {[
             {
               key: current_drr_key, 
-              label: <TM k="DRR_resources" />,
+              label: <TM k="actual_resources" args={{year: run_template( _.first(result_docs[current_drr_key].resource_years) )}}/>,
               is_open: doc === current_drr_key,
             },
             {
               key: current_dp_key, 
-              label: <TM k="DP_resources" />,
+              label: <TM k="planned_resources" args={{year: run_template( _.first(result_docs[current_dp_key].resource_years) )}}/>,
               is_open: doc === current_dp_key,
             },
           ]}

@@ -16,11 +16,9 @@ import {
   create_text_maker_component,
   TabbedControls,
   Results,
+  run_template,
 } from "../shared.js";
-
-const { current_drr_key, current_dp_key } = Results;
-
-import { 
+import {
   create_rooted_resource_scheme,
   get_initial_resource_state,
 } from '../../../gen_expl/rooted_resource_scheme.js';
@@ -33,7 +31,20 @@ import {
   map_dispatch_to_root_props,
 } from '../../../gen_expl/state_and_memoizing';
 
+
 const { text_maker, TM } = create_text_maker_component(text);
+
+const {
+  current_drr_key,
+  current_dp_key,
+  result_docs,
+} = Results;
+
+const current_drr_doc = result_docs[current_drr_key];
+const current_drr_resource_year_template = _.first(current_drr_doc.resource_years);
+const current_dp_doc = result_docs[current_dp_key];
+const current_dp_resource_year_template = _.first(current_dp_doc.resource_years);
+
 
 const children_grouper = (node, children) => {
   //this one only has one depth, so the root must group its children
@@ -46,7 +57,7 @@ const children_grouper = (node, children) => {
     .value();
 };
 
-const get_non_col_content = ({node}) => { 
+const get_non_col_content = ({node}) => {
   const {
     data: {
       defs,
@@ -130,7 +141,7 @@ class RootedResourceExplorer extends React.Component {
       return inner_content;
     }
  
-    const tab_on_click = (doc)=> set_doc !== doc && set_doc(doc);
+    const tab_on_click = (doc) => set_doc !== doc && set_doc(doc);
 
     return (
       <div className="tabbed-content">
@@ -138,13 +149,13 @@ class RootedResourceExplorer extends React.Component {
           tab_callback={ tab_on_click }
           tab_options={ _.compact([
             has_drr_data && {
-              label: <TM k="DRR_resources" />,
+              label: <TM k="actual_resources" args={{year: run_template(current_drr_resource_year_template)}} />,
               key: current_drr_key, 
               is_open: doc === current_drr_key,
             },
             has_dp_data && {
               key: current_dp_key, 
-              label: <TM k="DP_resources" />,
+              label: <TM k="planned_resources" args={{year: run_template(current_dp_resource_year_template)}} />,
               is_open: doc === current_dp_key,
             },
           ])}
@@ -211,9 +222,7 @@ class RootedResourceExplorerContainer extends React.Component {
         />
       </Provider>
     );
-
   }
-
 }
 
 
@@ -227,37 +236,21 @@ export const declare_resource_structure_panel = () => declare_panel({
     calculate(subject){
       const { programSpending } = this.tables;
   
-      let has_dp_data = true;
-      let has_drr_data = true;
-  
-      if(subject.level === 'tag'){
-        has_dp_data = _.some( subject.programs, program => !program.is_dead );
-        has_drr_data = _.some( subject.programs, program => !program.crso.is_cr );
-      }
-  
-      if(subject.level === 'program'){
-        has_dp_data = !subject.is_dead;
-        has_drr_data = !subject.crso.is_cr;
-      }
-  
-      if(subject.level === 'crso'){
-        has_dp_data = !subject.is_dead;
-        //there are some cases where an SO that died before pa_last_year can crash this graph...
-        has_drr_data = _.some(subject.programs, prog => {
-          const rows = programSpending.programs.get(prog);
-          return !_.isEmpty(rows) && _.first(rows)["{{pa_last_year_2}}"] > 0;
-        });
-      }
-  
-      if(!has_dp_data && !has_drr_data){
-        return false;
-      }
-  
-      return {
+      const has_some_program_spending_for_year = (resource_year) => _.some(
+        subject.programs,
+        program => _.some(
+          programSpending.programs.get(program),
+          (row) => _.isNumber(row[resource_year]) && row[resource_year] !== 0
+        )
+      );
+
+      const has_drr_data = current_drr_resource_year_template && has_some_program_spending_for_year(`${current_drr_resource_year_template}exp`);
+      const has_dp_data = current_dp_resource_year_template && has_some_program_spending_for_year(current_dp_resource_year_template);
+
+      return (has_dp_data || has_drr_data) && {
         has_dp_data,
         has_drr_data,
       };
-  
     },
   
     render({calculations}){
@@ -284,7 +277,6 @@ export const declare_resource_structure_panel = () => declare_panel({
           />
         </InfographicPanel>
       );
-  
     },
   }),
 });
