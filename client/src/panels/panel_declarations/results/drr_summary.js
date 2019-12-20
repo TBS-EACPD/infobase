@@ -18,7 +18,6 @@ import {
   ResultCounts,
   GranularResultCounts,
   ordered_status_keys,
-  get_result_doc_keys,
   filter_and_genericize_doc_counts,
 } from './results_common.js';
 
@@ -26,9 +25,10 @@ import { IconArray } from '../../../charts/IconArray.js';
 
 const { A11YTable } = declarative_charts;
 const { result_simple_statuses } = businessConstants;
-const { current_drr_key } = Results;
+const { current_drr_key, result_docs } = Results;
 
-const latest_drr_doc_key = _.last( get_result_doc_keys("drr") );
+const current_drr_year = result_docs[current_drr_key].year;
+const current_drr_target_year = _.toNumber(result_docs[current_drr_key].year_short) + 1;
 
 const grid_colors = {
   met: "results-icon-array-pass",
@@ -134,7 +134,7 @@ const StatusGrid = props => {
       label: result_simple_statuses[status_key].text,
       data: [ real_count ],
     })),
-    data_col_headers: [ text_maker('results_icon_array_title') ],
+    data_col_headers: [ text_maker('results_icon_array_title', {year: current_drr_year}) ],
   };
 
 
@@ -151,7 +151,7 @@ const StatusGrid = props => {
   return (
     <div>
       <div className="h3">
-        <TM k="results_icon_array_title" />
+        <TM k="results_icon_array_title" args={{year: current_drr_year}} />
       </div>
       <div>
         <MiniLegend items={legend_data} />
@@ -187,6 +187,8 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
     subject, 
     num_depts, 
     is_gov, 
+    year: current_drr_year,
+    target_year: current_drr_target_year,
     ...current_drr_counts_with_generic_keys,
   };
 
@@ -200,7 +202,7 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
       </div>
     </div>
     <div className="frow middle-xs between-md" style={{marginBottom: "30px"}} >
-      { summary_text_args[`${latest_drr_doc_key}_past_total`] !== 0 &&
+      { summary_text_args[`${current_drr_key}_past_total`] !== 0 &&
         <div className="fcol-md-6 fcol-xs-12 medium_panel_text" >
           <TM
             k="drr_summary_text_summary_left"
@@ -208,7 +210,7 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
           />
         </div>
       }
-      <div className={`fcol-md-${ summary_text_args[`${latest_drr_doc_key}_past_total`] !== 0 ? 6 : 12 } fcol-xs-12 medium_panel_text`} >
+      <div className={`fcol-md-${ summary_text_args[`${current_drr_key}_past_total`] !== 0 ? 6 : 12 } fcol-xs-12 medium_panel_text`} >
         <StatusGrid {...counts} />
       </div>
     </div>
@@ -222,7 +224,7 @@ const render = ({calculations, footnotes, sources}) => {
   } = calculations;
 
   return (
-    <InfographicPanel title={text_maker("drr_summary_title")} footnotes={footnotes} sources={sources}>
+    <InfographicPanel title={text_maker("drr_summary_title", {year: current_drr_year})} footnotes={footnotes} sources={sources}>
       <DrrSummary
         subject={subject}
         {...panel_args}
@@ -261,9 +263,9 @@ export const declare_drr_summary_panel = () => declare_panel({
         }
       })();
 
-      const counts = row_to_drr_status_counts(verbose_counts, latest_drr_doc_key);
+      const counts = row_to_drr_status_counts(verbose_counts, current_drr_key);
     
-      if(verbose_counts[`${latest_drr_doc_key}_total`] < 1){
+      if(verbose_counts[`${current_drr_key}_total`] < 1){
         return false;
       }
     
