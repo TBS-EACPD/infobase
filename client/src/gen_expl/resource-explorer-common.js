@@ -28,7 +28,7 @@ export const get_col_defs = ({doc}) => [
             'actual_spending_header' 
         }
         args={{
-          year: result_docs[doc].primary_resource_year,
+          year: result_docs[doc].primary_resource_year_written,
         }}
       />
     ),
@@ -47,7 +47,7 @@ export const get_col_defs = ({doc}) => [
             'actual_ftes_header' 
         }
         args={{
-          year: result_docs[doc].primary_resource_year,
+          year: result_docs[doc].primary_resource_year_written,
         }}
       />
     ),
