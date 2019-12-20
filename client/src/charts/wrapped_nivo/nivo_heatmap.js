@@ -18,6 +18,7 @@ export class NivoResponsiveHeatMap extends React.Component {
       cellBorderColor,
       enableLabels,
       labelTextColor,
+      nanColor,
       top_axis,
       bttm_axis,
       left_axis,
@@ -43,6 +44,7 @@ export class NivoResponsiveHeatMap extends React.Component {
           cellBorderColor,
           enableLabels,
           labelTextColor,
+          nanColor,
         }}
         tooltip={tooltip}
         axisBottom={remove_bottom_axis ? null : bttm_axis}
@@ -60,4 +62,7 @@ NivoResponsiveHeatMap.defaultProps = {
   ...general_default_props,
   forceSquare: true,
   cellOpacity: 1,
+  nanColor: window.infobase_color_constants.tertiaryColor,
+  motion_stiffness: 300,
+  motion_damping: 25,
 };

@@ -1143,6 +1143,13 @@ copy:
   en: Copy
   fr: Copier
 
+yes:
+  en: Yes
+  fr: Oui
+
+no:
+  en: No
+  fr: Non
 
 ## warning for missing data prior to PAs
 gap_year_warning:
