@@ -3,6 +3,7 @@ import { trivial_text_maker } from './text.js';
 import { Program, CRSO } from './organizational_entities.js';
 import { businessConstants } from './businessConstants.js';
 import { formats } from '../core/format.js';
+import { run_template } from '../tables/table_common.js';
 
 const { months } = businessConstants;
 const { year_to_fiscal_year } = formats;
@@ -476,6 +477,8 @@ const build_doc_info_objects = (doc_type, docs) => _.chain(docs)
       doc_type,
       doc_key: `${doc_type}${doc_properties.year_short.substring(2)}`,
       year: year_to_fiscal_year(doc_properties.year_short),
+      resource_years_written: _.map(doc_properties.resource_years, run_template),
+      primary_resource_year_written: doc_properties.primary_resource_year_written,
       has_resources: !_.isEmpty(doc_properties.resource_years),
       could_have_previous: index > 0,
       ...doc_properties,

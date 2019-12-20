@@ -11,7 +11,6 @@ import { StandardRouteContainer } from '../core/NavComponents';
 import { get_col_defs } from '../gen_expl/resource-explorer-common.js';
 import { Subject } from '../models/subject.js';
 import { GlossaryEntry } from '../models/glossary.js';
-import { run_template } from '../models/text.js';
 import { current_drr_key, current_dp_key, result_docs } from '../models/results.js';
 import { 
   create_text_maker_component,
@@ -286,12 +285,12 @@ class ExplorerPage extends React.Component {
           tab_options = {[
             {
               key: current_drr_key, 
-              label: <TM k="actual_resources" args={{year: run_template(result_docs[current_drr_key].primary_resource_year)}}/>,
+              label: <TM k="actual_resources" args={{year: result_docs[current_drr_key].primary_resource_year_written}}/>,
               is_open: doc === current_drr_key,
             },
             {
               key: current_dp_key, 
-              label: <TM k="planned_resources" args={{year: run_template(result_docs[current_dp_key].primary_resource_year)}}/>,
+              label: <TM k="planned_resources" args={{year: result_docs[current_dp_key].primary_resource_year_written}}/>,
               is_open: doc === current_dp_key,
             },
           ]}
