@@ -2,6 +2,8 @@ import {
   TrivialTM as TM,
   Format,
 } from '../components/index.js';
+import { result_docs } from '../models/results.js';
+
 import { createSelector } from 'reselect';
 
 
@@ -22,9 +24,12 @@ export const get_col_defs = ({doc}) => [
       <TM 
         k={ 
           /dp/.test(doc) ? 
-            "dp_spending" : 
-            'drr_spending' 
-        } 
+            "planned_spending_header" : 
+            'actual_spending_header' 
+        }
+        args={{
+          year: _.first(result_docs[doc].resource_years),
+        }}
       />
     ),
     get_val: node => _.get(node, "data.resources.spending"),
@@ -38,9 +43,12 @@ export const get_col_defs = ({doc}) => [
       <TM 
         k={ 
           /dp/.test(doc) ? 
-            "dp_ftes" : 
-            'drr_ftes' 
-        } 
+            "planned_ftes_header" : 
+            'actual_ftes_header' 
+        }
+        args={{
+          year: _.first(result_docs[doc].resource_years),
+        }}
       />
     ),
     get_val: node => _.get(node, "data.resources.ftes"),

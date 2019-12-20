@@ -114,12 +114,30 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
 
 export const spending_header = createSelector(
   doc => doc, 
-  doc => <TM k={ /dp/.test(doc) ? "dp_spending" : "drr_spending"} />
+  doc => <TM 
+    k={
+      /dp/.test(doc) ?
+        "planned_spending_header" :
+        "actual_spending_header"
+    }
+    args={{
+      year: _.first(result_docs[doc].resource_years),
+    }}
+  />
 );
 
 export const fte_header = createSelector(
   doc => doc,
-  doc => <TM k={/dp/.test(doc) ? "dp_ftes" : "drr_ftes"} />
+  doc => <TM 
+    k={
+      /dp/.test(doc) ?
+        "planned_ftes_header" :
+        "actual_ftes_header"
+    }
+    args={{
+      year: _.first(result_docs[doc].resource_years),
+    }}
+  />
 );
 
 

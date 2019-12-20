@@ -954,33 +954,33 @@ service_standards:
   en: Service Standards
   fr: Normes de service
 
-dp_spending:
+planned_spending_header:
   transform: [handlebars]
   en: |
-    {{planning_year_1}} Planned Spending
+    {{year}} Planned Spending
   fr: |
-    Dépenses planifiées pour {{planning_year_1}}
+    Dépenses planifiées pour {{year}}
 
-dp_ftes:
+planned_ftes_header:
   transform: [handlebars]
   en: |
-    {{planning_year_1}} Number of Planned FTEs
+    {{year}} Number of Planned FTEs
   fr: |
-    Nombre d'ETP prévus pour {{planning_year_1}} 
+    Nombre d'ETP prévus pour {{year}} 
 
-drr_spending:
+actual_spending_header:
   transform: [handlebars]
   en: |
-    {{pa_last_year_2}} Spending
+    {{year}} Spending
   fr: |
-    Dépenses pour {{pa_last_year_2}}
+    Dépenses pour {{year}}
 
-drr_ftes:
+actual_ftes_header:
   transform: [handlebars]
   en: |
-    {{pa_last_year_2}} Number of FTEs
+    {{year}} Number of FTEs
   fr: |
-    Nombre d'ETP pour {{pa_last_year_2}} 
+    Nombre d'ETP pour {{year}} 
 
 planned_resources:
   transform: [handlebars]
