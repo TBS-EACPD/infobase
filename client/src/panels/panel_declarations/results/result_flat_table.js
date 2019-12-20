@@ -41,6 +41,7 @@ const {
 
 import { create_full_results_hierarchy } from '../../../gen_expl/result_hierarchies.js';
 
+const current_drr_year = result_docs[current_drr_key].year;
 
 const get_actual_parent = (indicator_node, full_results_hierarchy) => {
   const parent = _.find(full_results_hierarchy, {id: indicator_node.parent_id});
@@ -108,9 +109,6 @@ const subject_link = (node) => {
 };
 
 
-
-
-
 const indicator_table_from_list = (indicator_list, is_drr17) => {
   const column_keys = ["indicator","target","target_result","date_to_achieve","status"];
   const sort_keys = ["indicator","date_to_achieve", "status"];
@@ -134,7 +132,14 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
       status: _.indexOf(ordered_status_keys, ind.indicator.status_key),
     },
   }) );
-  return <DisplayTable data={table_data} label_col_header={text_maker("activity")} column_keys={column_keys} table_data_headers={table_data_headers} sort_keys={sort_keys} table_name={text_maker("result_flat_table_title")}/>;
+  return <DisplayTable 
+    data={table_data}
+    label_col_header={text_maker("activity")}
+    column_keys={column_keys}
+    table_data_headers={table_data_headers}
+    sort_keys={sort_keys}
+    table_name={text_maker("result_flat_table_title", {year: current_drr_year})}
+  />;
 };
 
 
@@ -184,7 +189,7 @@ class ResultsTable extends React.Component {
       return (
         <div>
           <div className="medium_panel_text">
-            <TM k="result_flat_table_text" args={{ subject, drr_total: subject_result_counts[`${current_drr_key}_total`] }}/>
+            <TM k="result_flat_table_text" args={{ subject, drr_total: subject_result_counts[`${current_drr_key}_total`], year: current_drr_year }}/>
           </div>
           <div style={{padding: '10px 10px'}}>
             <StatusIconTable 
@@ -258,7 +263,7 @@ export const declare_results_table_panel = () => declare_panel({
       } = calculations;
 
       return (
-        <InfographicPanel title={text_maker("result_flat_table_title")} sources={sources}>
+        <InfographicPanel title={text_maker("result_flat_table_title", {year: current_drr_year})} sources={sources}>
           <ResultsTable
             {...{
               subject,
