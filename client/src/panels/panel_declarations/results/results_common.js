@@ -75,13 +75,13 @@ const get_rows_for_subject_from_table = _.memoize( (subject, type,doc) => {
 }, (subject, type, doc) => `${subject.guid}-${type}-${doc}` );
 
 const get_resources_for_subject_from_table = (subject, type, doc) => {
-  const doc_resource_year = _.first(result_docs[doc].resource_years);
+  const doc_resource_year = result_docs[doc].primary_resource_year;
   if ( !_.isUndefined(doc_resource_year) ){
     const rows = get_rows_for_subject_from_table(subject, type, doc);
     const table = pick_table(subject, type, doc);
 
     const col_suffix = (/drr/.test(doc) && type === "spending") ? "exp" : "";
-    const col = `${_.first(result_docs[doc].resource_years)}${col_suffix}`;
+    const col = `${result_docs[doc].primary_resource_year}${col_suffix}`;
 
     return table.col_from_nick(col).formula(rows);
   } else {

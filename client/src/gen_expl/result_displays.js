@@ -121,7 +121,7 @@ export const spending_header = createSelector(
         "actual_spending_header"
     }
     args={{
-      year: _.first(result_docs[doc].resource_years),
+      year: result_docs[doc].primary_resource_year,
     }}
   />
 );
@@ -135,7 +135,7 @@ export const fte_header = createSelector(
         "actual_ftes_header"
     }
     args={{
-      year: _.first(result_docs[doc].resource_years),
+      year: result_docs[doc].primary_resource_year,
     }}
   />
 );
