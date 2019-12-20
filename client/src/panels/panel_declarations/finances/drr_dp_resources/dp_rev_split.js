@@ -62,7 +62,6 @@ export const declare_dp_rev_split_panel = () => declare_panel({
     render({calculations, footnotes, sources, glossary_keys}){
       const {
         panel_args: data,
-        info,
       } = calculations;
 
       return (
@@ -70,9 +69,6 @@ export const declare_dp_rev_split_panel = () => declare_panel({
           title={text_maker("dp_rev_split_title")}
           {...{footnotes, sources, glossary_keys}}
         >
-          <div>
-            <TM k="dp_rev_split_text" args={info} />
-          </div>
           <div>
             <table className="table infobase-table table-bordered">
               <thead>

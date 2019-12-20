@@ -1,17 +1,9 @@
 dp_rev_split_title:
   transform: [handlebars]
   en: |
-     Gross and Net Planned Spending ({{planning_year_1}} to {{planning_year_3}})
+    Gross and Net Planned Spending ({{planning_year_1}} to {{planning_year_3}})
   fr: |
     Dépenses prévues brutes et nettes ({{planning_year_1}} à {{planning_year_3}})
-
-
-# do we need text for this panel ??
-dp_rev_split_text:
-  transform: [handlebars, markdown]
-  en: <div></div>
-  fr: <div></div>
-
 
 dp_net:
   en: Planned Spending (net)
