@@ -286,12 +286,12 @@ class ExplorerPage extends React.Component {
           tab_options = {[
             {
               key: current_drr_key, 
-              label: <TM k="actual_resources" args={{year: run_template( _.first(result_docs[current_drr_key].resource_years) )}}/>,
+              label: <TM k="actual_resources" args={{year: run_template(result_docs[current_drr_key].primary_resource_year)}}/>,
               is_open: doc === current_drr_key,
             },
             {
               key: current_dp_key, 
-              label: <TM k="planned_resources" args={{year: run_template( _.first(result_docs[current_dp_key].resource_years) )}}/>,
+              label: <TM k="planned_resources" args={{year: run_template(result_docs[current_dp_key].primary_resource_year)}}/>,
               is_open: doc === current_dp_key,
             },
           ]}
