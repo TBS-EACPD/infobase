@@ -20,7 +20,7 @@ import {
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const ResultsIntroPanel = ({subject, is_gov, summary_result_counts, doc_urls}) => {
+const ResultsIntroPanel = ({subject, is_gov, summary_result_counts, doc_urls, has_current_dp, has_current_drr}) => {
   const summary_text_args = {subject, is_gov, ...summary_result_counts};
   
   return (
@@ -46,22 +46,28 @@ const ResultsIntroPanel = ({subject, is_gov, summary_result_counts, doc_urls}) =
         </div>
       }
       <div className="fcol-md-12 medium_panel_text">
-        <TM 
-          k="dp_summary_text" 
-          args={{
-            ...summary_text_args,
-            year: result_docs[current_dp_key].year,
-            tabling_year: _.toNumber(result_docs[current_dp_key].year_short) + 1,
-          }}
-        />
-        <TM
-          k="drr_summary_text"
-          args={{
-            ...summary_text_args,
-            year: result_docs[current_drr_key].year,
-          }}
-        />
-        {summary_result_counts.drr_results > 0 && <TM k="reports_links_text" args={doc_urls} />}
+        { has_current_dp &&
+          <TM
+            k="dp_summary_text" 
+            args={{
+              ...summary_text_args,
+              year: result_docs[current_dp_key].year,
+              tabling_year: _.toNumber(result_docs[current_dp_key].year_short) + 1,
+            }}
+          />
+        }
+        { has_current_drr &&
+          <TM
+            k="drr_summary_text"
+            args={{
+              ...summary_text_args,
+              year: result_docs[current_drr_key].year,
+            }}
+          />
+        }
+        { // TODO: with some more logic, eithyer here or in the yaml, this could be `has_current_dp || has_current_drr`, but for now only show links if it will have both
+          has_current_dp && has_current_drr && <TM k="reports_links_text" args={doc_urls} />
+        }
       </div>
     </div>
   );
@@ -105,7 +111,10 @@ export const declare_results_intro_panel = () => declare_panel({
         }
       })();
 
-      if(verbose_counts[`${current_dp_key}_results`] < 1){
+      const has_current_dp = verbose_counts[`${current_dp_key}_results`] < 1;
+      const has_current_drr = verbose_counts[`${current_drr_key}_results`] < 1;
+
+      if(has_current_dp || has_current_drr){
         return false;
       }
 
@@ -130,6 +139,8 @@ export const declare_results_intro_panel = () => declare_panel({
         is_gov,
         summary_result_counts,
         doc_urls,
+        has_current_dp,
+        has_current_drr,
       };
     },
     render({ calculations, sources}){
