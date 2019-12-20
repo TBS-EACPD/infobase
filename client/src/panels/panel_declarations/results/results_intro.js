@@ -12,7 +12,6 @@ import text from './results_intro_text.yaml';
 import { get_static_url } from '../../../request_utils.js';
 import { 
   ResultCounts,
-  get_result_doc_keys,
   result_docs,
   current_drr_key,
   current_dp_key,
