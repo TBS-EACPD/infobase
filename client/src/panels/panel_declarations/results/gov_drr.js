@@ -10,14 +10,13 @@ import {
   row_to_drr_status_counts,
   ResultCounts,
   result_statuses,
-  get_result_doc_keys,
+  result_docs,
+  current_drr_key,
 } from './results_common.js';
 import { DrrSummary } from './drr_summary.js';
 import { HorizontalStatusTable } from './result_components.js';
 
 const { Gov, Dept } = Subject;
-
-const latest_drr_doc_key = _.last( get_result_doc_keys("drr") );
 
 class GovDRR extends React.Component {
   render(){
@@ -46,13 +45,13 @@ class GovDRR extends React.Component {
             gov_counts={verbose_gov_counts}
             status_columns={_.chain(result_statuses)
               .map( (status_text, status_key) => [
-                `${latest_drr_doc_key}_indicators_${status_key}`,
+                `${current_drr_key}_indicators_${status_key}`,
                 status_text.text,
               ])
               .fromPairs()
               .value()
             }
-            doc={latest_drr_doc_key}
+            doc={current_drr_key}
           />
         </div>
       </div>
@@ -71,10 +70,10 @@ export const declare_gov_drr_panel = () => declare_panel({
   
     calculate(){
       const verbose_gov_counts = ResultCounts.get_gov_counts();
-      const gov_counts = row_to_drr_status_counts(verbose_gov_counts, latest_drr_doc_key);
+      const gov_counts = row_to_drr_status_counts(verbose_gov_counts, current_drr_key);
   
       
-      const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${latest_drr_doc_key}_total`] > 0 );
+      const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${current_drr_key}_total`] > 0 );
       const num_depts = dept_counts.length;
   
       const counts_by_dept = _.chain(dept_counts)
@@ -101,7 +100,7 @@ export const declare_gov_drr_panel = () => declare_panel({
   
       return (
         <InfographicPanel
-          title={text_maker("drr_summary_title")}
+          title={text_maker("drr_summary_title", {year: result_docs[current_drr_key].year})}
           { ...{footnotes, sources} }
         >
           <GovDRR {...panel_args} />
