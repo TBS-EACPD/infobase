@@ -1,4 +1,4 @@
-import text from './gov_dp_text.yaml';
+import text from './gov_dp.yaml';
 
 import { Fragment } from 'react';
 
@@ -14,16 +14,17 @@ const { Dept } = Subject;
 
 import {
   ResultCounts,
-  get_result_doc_keys,
   filter_and_genericize_doc_counts,
   current_dp_key,
+  result_docs,
 } from './results_common.js';
 import { HorizontalStatusTable } from './result_components.js';
 
-
 const { text_maker, TM } = create_text_maker_component(text);
 
-const latest_dp_doc_key = _.last( get_result_doc_keys('dp') );
+const current_dp_year = result_docs[current_dp_key].year;
+const current_dp_corresponding_drr_year = _.toNumber(result_docs[current_dp_key].year_short) + 1;
+
 
 const DpSummary = ({counts, verbose_gov_counts, counts_by_dept}) => {
   const current_dp_counts_with_generic_keys = filter_and_genericize_doc_counts(counts, current_dp_key);
@@ -31,16 +32,24 @@ const DpSummary = ({counts, verbose_gov_counts, counts_by_dept}) => {
   return (
     <Fragment>
       <div className="fcol-md-12 medium_panel_text">
-        <TM k="gov_dp_text" args={{...current_dp_counts_with_generic_keys, depts_with_dps: counts_by_dept.length}} />
+        <TM 
+          k="gov_dp_text"
+          args={{
+            ...current_dp_counts_with_generic_keys, 
+            depts_with_dps: counts_by_dept.length,
+            year: current_dp_year,
+            drr_tabling_year: current_dp_corresponding_drr_year,
+          }}
+        />
       </div>
       <HorizontalStatusTable 
         counts_by_dept={counts_by_dept}
         gov_counts={verbose_gov_counts}
         status_columns={{
-          [`${latest_dp_doc_key}_results`]: text_maker("results"),
-          [`${latest_dp_doc_key}_indicators`]: text_maker("indicators"),
+          [`${current_dp_key}_results`]: text_maker("results"),
+          [`${current_dp_key}_indicators`]: text_maker("indicators"),
         }}
-        doc={latest_dp_doc_key}
+        doc={current_dp_key}
       />
     </Fragment>
   );
@@ -55,7 +64,7 @@ export const declare_gov_dp_panel = () => declare_panel({
     calculate: () => {
       const verbose_gov_counts = ResultCounts.get_gov_counts();
       
-      const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${latest_dp_doc_key}_results`] > 0 );
+      const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${current_dp_key}_results`] > 0 );
       const counts_by_dept = _.chain(dept_counts)
         .map( row => ({ 
           subject: Dept.lookup(row.id),
@@ -82,7 +91,7 @@ export const declare_gov_dp_panel = () => declare_panel({
   
       return (
         <InfographicPanel
-          title={text_maker("gov_dp_summary_title")}
+          title={text_maker("gov_dp_summary_title", {year: current_dp_year})}
           sources={sources}
           allowOverflow
         >
