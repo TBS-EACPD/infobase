@@ -487,6 +487,7 @@ const build_doc_info_objects = (doc_type, docs) => _.chain(docs)
   .keyBy('doc_key')
   .value();
 
+// for now, resource year values will need to be updated manually as program_spending.csv, etc, roll forward
 const drr_docs = build_doc_info_objects(
   "drr",
   [
