@@ -14,13 +14,11 @@ import {
   ResultCounts,
   get_result_doc_keys,
   result_docs,
+  current_drr_key,
+  current_dp_key,
 } from './results_common.js';
 
 const { text_maker, TM } = create_text_maker_component(text);
-
-
-const latest_drr_doc_key = _.last( get_result_doc_keys("drr") );
-const latest_dp_doc_key = _.last( get_result_doc_keys("dp") );
 
 const ResultsIntroPanel = ({subject, is_gov, summary_result_counts, doc_urls}) => {
   const summary_text_args = {subject, is_gov, ...summary_result_counts};
@@ -48,8 +46,21 @@ const ResultsIntroPanel = ({subject, is_gov, summary_result_counts, doc_urls}) =
         </div>
       }
       <div className="fcol-md-12 medium_panel_text">
-        <TM k="dp_summary_text" args={summary_text_args} />
-        <TM k="drr_summary_text" args={summary_text_args} />
+        <TM 
+          k="dp_summary_text" 
+          args={{
+            ...summary_text_args,
+            year: result_docs[current_dp_key].year,
+            tabling_year: _.toNumber(result_docs[current_dp_key].year_short) + 1,
+          }}
+        />
+        <TM
+          k="drr_summary_text"
+          args={{
+            ...summary_text_args,
+            year: result_docs[current_drr_key].year,
+          }}
+        />
         {summary_result_counts.drr_results > 0 && <TM k="reports_links_text" args={doc_urls} />}
       </div>
     </div>
@@ -78,8 +89,8 @@ export const declare_results_intro_panel = () => declare_panel({
             .map( obj => ({...obj, total: d3.sum(_.values(obj.counts)) } ) )
             .value();
           const gov_counts = _.mergeWith({}, ...dept_counts, (val, src) => _.isNumber(val) ? val + src : src);
-          const depts_with_dps = _.sumBy(counts_by_dept, dept => dept.counts[`${latest_dp_doc_key}_results`] > 0 ? 1 : 0);
-          const depts_with_drrs = _.sumBy(counts_by_dept, dept => dept.counts[`${latest_drr_doc_key}_results`] > 0 ? 1 : 0);
+          const depts_with_dps = _.sumBy(counts_by_dept, dept => dept.counts[`${current_dp_key}_results`] > 0 ? 1 : 0);
+          const depts_with_drrs = _.sumBy(counts_by_dept, dept => dept.counts[`${current_drr_key}_results`] > 0 ? 1 : 0);
           return {
             depts_with_dps,
             depts_with_drrs,
@@ -94,15 +105,15 @@ export const declare_results_intro_panel = () => declare_panel({
         }
       })();
 
-      if(verbose_counts[`${latest_dp_doc_key}_results`] < 1){
+      if(verbose_counts[`${current_dp_key}_results`] < 1){
         return false;
       }
 
       const summary_result_counts = {
-        dp_results: verbose_counts[`${latest_dp_doc_key}_results`],
-        dp_indicators: verbose_counts[`${latest_dp_doc_key}_indicators`],
-        drr_results: verbose_counts[`${latest_drr_doc_key}_results`],
-        drr_indicators: verbose_counts[`${latest_drr_doc_key}_total`],
+        dp_results: verbose_counts[`${current_dp_key}_results`],
+        dp_indicators: verbose_counts[`${current_dp_key}_indicators`],
+        drr_results: verbose_counts[`${current_drr_key}_results`],
+        drr_indicators: verbose_counts[`${current_drr_key}_total`],
         num_crs: is_gov ? false : verbose_counts.num_crs,
         num_programs: is_gov ? false : verbose_counts.num_programs,
         depts_with_dps: is_gov ? verbose_counts.depts_with_dps : false,
@@ -110,8 +121,8 @@ export const declare_results_intro_panel = () => declare_panel({
       };
 
       const doc_urls = {
-        dp_url: result_docs[latest_dp_doc_key][`doc_url_${window.lang}`],
-        drr_url: result_docs[latest_drr_doc_key][`doc_url_${window.lang}`],
+        dp_url: result_docs[current_dp_key][`doc_url_${window.lang}`],
+        drr_url: result_docs[current_drr_key][`doc_url_${window.lang}`],
       };
 
       return {
