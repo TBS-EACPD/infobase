@@ -16,7 +16,6 @@ import {
   create_text_maker_component,
   TabbedControls,
   Results,
-  run_template,
 } from "../shared.js";
 import {
   create_rooted_resource_scheme,
@@ -41,9 +40,7 @@ const {
 } = Results;
 
 const current_drr_doc = result_docs[current_drr_key];
-const current_drr_resource_year_template = _.first(current_drr_doc.resource_years);
 const current_dp_doc = result_docs[current_dp_key];
-const current_dp_resource_year_template = _.first(current_dp_doc.resource_years);
 
 
 const children_grouper = (node, children) => {
@@ -149,13 +146,13 @@ class RootedResourceExplorer extends React.Component {
           tab_callback={ tab_on_click }
           tab_options={ _.compact([
             has_drr_data && {
-              label: <TM k="actual_resources" args={{year: run_template(current_drr_resource_year_template)}} />,
+              label: <TM k="actual_resources" args={{year: current_drr_doc.primary_resource_year_written}} />,
               key: current_drr_key, 
               is_open: doc === current_drr_key,
             },
             has_dp_data && {
               key: current_dp_key, 
-              label: <TM k="planned_resources" args={{year: run_template(current_dp_resource_year_template)}} />,
+              label: <TM k="planned_resources" args={{year: current_dp_doc.primary_resource_year_written}} />,
               is_open: doc === current_dp_key,
             },
           ])}
@@ -244,8 +241,8 @@ export const declare_resource_structure_panel = () => declare_panel({
         )
       );
 
-      const has_drr_data = current_drr_resource_year_template && has_some_program_spending_for_year(`${current_drr_resource_year_template}exp`);
-      const has_dp_data = current_dp_resource_year_template && has_some_program_spending_for_year(current_dp_resource_year_template);
+      const has_drr_data = current_drr_doc.primary_resource_year && has_some_program_spending_for_year(`${current_drr_doc.primary_resource_year}exp`);
+      const has_dp_data = current_dp_doc.primary_resource_year && has_some_program_spending_for_year(current_dp_doc.primary_resource_year);
 
       return (has_dp_data || has_drr_data) && {
         has_dp_data,
