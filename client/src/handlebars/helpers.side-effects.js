@@ -618,10 +618,10 @@ Handlebars.registerHelper("divide",function(numerator, denominator){
   return numerator/denominator;
 });
 
-Handlebars.registerHelper("ext_link",function(display, url){
+Handlebars.registerHelper("ext_link",function(display, url, title){
   if (url){
     return new Handlebars.SafeString(
-      `<a target="_blank" rel="noopener noreferrer" href="${url}">${display}</a>`
+      `<a target="_blank" rel="noopener noreferrer" href="${url}" ${title && `title="${title}"`}>${display}</a>`
     );
   } else {
     return display;
