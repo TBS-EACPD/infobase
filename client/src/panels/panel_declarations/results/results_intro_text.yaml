@@ -33,6 +33,7 @@ dp_summary_text:
       by **{{fmt_big_int dp_indicators}}** indicators. Assessed performance of planned results for **{{fmt_big_int num_crs}}** Core Responsibilities and **{{fmt_big_int num_programs}}** Programs will be reported
       in **Fall {{tabling_year}}**.
     {{/if}}
+    <br/>The full text of the Departmental Plans can be found on {{ext_link "Canada.ca" dp_url}}.
   fr: |
     {{#if is_gov}}
       En **{{year}}**, **{{fmt_big_int depts_with_dps}}** organisations cherchent à atteindre **{{fmt_big_int dp_results}}**
@@ -42,6 +43,7 @@ dp_summary_text:
       mesurés par **{{fmt_big_int dp_indicators}}** indicateurs. On fera état du rendement des résultats escomptés
       pour **{{fmt_big_int num_crs}}** responsabilités essentielles et **{{fmt_big_int num_programs}}** programmes à **l'automne {{tabling_year}}**.
     {{/if}}
+    <br/>Vous trouverez le plans ministériels à {{ext_link "Canada.ca" dp_url}}.
 
 
 drr_summary_text:
@@ -54,6 +56,7 @@ drr_summary_text:
     {{/if}}
     Progress towards meeting these results was measured using **{{fmt_big_int drr_indicators}}** indicators, and a {{gl_tt "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
     based on the measured outcome of the indicator's target.
+    <br/>The full text of the Departmental Results Reports can be found on {{ext_link "Canada.ca" drr_url}}.
   fr: |
     {{#if is_gov}}
       En **{{year}}**, **{{fmt_big_int depts_with_drrs}}** organisations ont cherché à atteindre **{{fmt_big_int drr_results}}** résultats. 
@@ -65,13 +68,4 @@ drr_summary_text:
       à l'aide de **{{fmt_big_int drr_indicators}}** indicateurs, et un état du résultat a été associé à chaque indicateur
       selon la mesure du résultat prévu pour la cible de l'indicateur.
     {{/if}}
-
-
-reports_links_text:
-  transform: [handlebars,markdown]
-  en: |
-    The full text of the {{ext_link "Departmental Plans" dp_url}}
-    and {{ext_link "Departmental Results Reports" drr_url}} can be found on {{ext_link "Canada.ca" "https://www.canada.ca/"}}.
-  fr: |
-    Vous trouverez les {{ext_link "plans ministériels" dp_url}} et {{ext_link "rapports sur les résultats ministériels" drr_url}}
-    à {{ext_link "Canada.ca" "https://www.canada.ca/"}}.
+    <br/>Vous trouverez le rapports sur les résultats ministériels à {{ext_link "Canada.ca" drr_url}}.

@@ -52,6 +52,7 @@ const ResultsIntroPanel = ({subject, is_gov, summary_result_counts, doc_urls, ha
               ...summary_text_args,
               year: result_docs[current_dp_key].year,
               tabling_year: _.toNumber(result_docs[current_dp_key].year_short) + 1,
+              ...doc_urls,
             }}
           />
         }
@@ -61,11 +62,9 @@ const ResultsIntroPanel = ({subject, is_gov, summary_result_counts, doc_urls, ha
             args={{
               ...summary_text_args,
               year: result_docs[current_drr_key].year,
+              ...doc_urls,
             }}
           />
-        }
-        { // TODO: with some more logic, eithyer here or in the yaml, this could be `has_current_dp || has_current_drr`, but for now only show links if it will have both
-          has_current_dp && has_current_drr && <TM k="reports_links_text" args={doc_urls} />
         }
       </div>
     </div>
