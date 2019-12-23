@@ -41,17 +41,13 @@ const FancyUL = ({children, ul_class})=> (
 );
 
 const FootnoteList = ({ footnotes }) => <div style={{padding: "10px"}}>
-  <ul>
+  <FancyUL>
     {_.chain(footnotes)
       .uniqBy("text")
-      .map( ({text}, ix) => 
-        <li key={ix}>
-          <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(text)} />
-        </li>
-      )
+      .map( ({text}, ix) => <div key={ix} dangerouslySetInnerHTML={sanitized_dangerous_inner_html(text)} />)
       .value()
     }
-  </ul>
+  </FancyUL>
 </div>;
 
 const Year = ({y}) => run_template(`{{${y}}}`);
