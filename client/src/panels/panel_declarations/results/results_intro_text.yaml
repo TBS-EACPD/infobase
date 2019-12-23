@@ -33,7 +33,6 @@ dp_summary_text:
       by **{{fmt_big_int dp_indicators}}** indicators. Assessed performance of planned results for **{{fmt_big_int num_crs}}** Core Responsibilities and **{{fmt_big_int num_programs}}** Programs will be reported
       in **Fall {{tabling_year}}**.
     {{/if}}
-    {{#if dp_url}}<br/>The full text of the Departmental Plans can be found on {{ext_link "Canada.ca" dp_url}}.{{/if}}
   fr: |
     {{#if is_gov}}
       En **{{year}}**, **{{fmt_big_int depts_with_dps}}** organisations cherchent à atteindre **{{fmt_big_int dp_results}}**
@@ -43,7 +42,6 @@ dp_summary_text:
       mesurés par **{{fmt_big_int dp_indicators}}** indicateurs. On fera état du rendement des résultats escomptés
       pour **{{fmt_big_int num_crs}}** responsabilités essentielles et **{{fmt_big_int num_programs}}** programmes à **l'automne {{tabling_year}}**.
     {{/if}}
-    {{#if dp_url}}<br/>Vous trouverez le plans ministériels à {{ext_link "Canada.ca" dp_url}}.{{/if}}
 
 
 drr_summary_text:
@@ -56,7 +54,6 @@ drr_summary_text:
     {{/if}}
     Progress towards meeting these results was measured using **{{fmt_big_int drr_indicators}}** indicators, and a {{gl_tt "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
     based on the measured outcome of the indicator's target.
-    {{#if drr_url}}<br/>The full text of the Departmental Results Reports can be found on {{ext_link "Canada.ca" drr_url}}.{{/if}}
   fr: |
     {{#if is_gov}}
       En **{{year}}**, **{{fmt_big_int depts_with_drrs}}** organisations ont cherché à atteindre **{{fmt_big_int drr_results}}** résultats. 
@@ -68,4 +65,11 @@ drr_summary_text:
       à l'aide de **{{fmt_big_int drr_indicators}}** indicateurs, et un état du résultat a été associé à chaque indicateur
       selon la mesure du résultat prévu pour la cible de l'indicateur.
     {{/if}}
-    {{#if drr_url}}<br/>Vous trouverez le rapports sur les résultats ministériels à {{ext_link "Canada.ca" drr_url}}.{{/if}}
+
+
+reports_links_text:
+  transform: [handlebars,markdown]
+  en: |
+    The full text of all Departmental Plans can be found {{ext_link "here" dp_url}}. Departmental Results Reports can be found on {{ext_link "here" drr_url}}.
+  fr: |
+    TODO

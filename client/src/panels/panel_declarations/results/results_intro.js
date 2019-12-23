@@ -52,7 +52,6 @@ const ResultsIntroPanel = ({subject, is_gov, summary_result_counts, doc_urls, ha
               ...summary_text_args,
               year: result_docs[current_dp_key].year,
               tabling_year: _.toNumber(result_docs[current_dp_key].year_short) + 1,
-              ...doc_urls,
             }}
           />
         }
@@ -62,10 +61,10 @@ const ResultsIntroPanel = ({subject, is_gov, summary_result_counts, doc_urls, ha
             args={{
               ...summary_text_args,
               year: result_docs[current_drr_key].year,
-              ...doc_urls,
             }}
           />
         }
+        <TM k="reports_links_text" args={doc_urls} />
       </div>
     </div>
   );
