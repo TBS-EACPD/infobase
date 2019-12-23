@@ -14,7 +14,7 @@ import {
 } from '../../components/index.js';
 
 import { IconCopyLink } from '../../icons/icons.js';
-import { panel_href_template } from '../../infographic/routes.js';
+import { panel_href_template } from '../../infographic/infographic_link.js';
 
 import { panel_context } from '../PanelRenderer.js';
 

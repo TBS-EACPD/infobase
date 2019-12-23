@@ -1,4 +1,4 @@
-import { infograph_href_template } from './infographic/routes.js';
+import { infograph_href_template } from './infographic/infographic_link.js';
 import { rpb_link } from './rpb/rpb_link.js';
 import { Table } from './core/TableClass.js';
 import { GlossaryEntry } from './models/glossary.js';

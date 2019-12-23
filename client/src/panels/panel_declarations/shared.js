@@ -24,7 +24,7 @@ import { Canada } from '../../charts/canada.js';
 import { FlatTreeMapViz } from '../../charts/flat_treemap/FlatTreeMapViz.js';
 
 import { rpb_link, get_appropriate_rpb_subject } from '../../rpb/rpb_link.js';
-import { infograph_href_template as infograph_href_template } from '../../infographic/routes.js';
+import { infograph_href_template as infograph_href_template } from '../../infographic/infographic_link.js';
 import { get_source_links } from '../../metadata/data_sources.js';
 import { glossary_href } from '../../link_utils.js';
 import * as general_utils from '../../general_utils.js';
