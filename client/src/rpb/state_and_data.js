@@ -240,10 +240,7 @@ function create_mapStateToProps(){
 
     return _.chain(gov_footnotes)
       .concat(subject_footnotes)
-      .map('text')
-      .uniqBy()
-      .compact()
-      .concat([ text_maker('different_org_names_rpb_footnote') ])
+      .concat([ {text: text_maker('different_org_names_rpb_footnote')} ])
       .value();
   });
 
