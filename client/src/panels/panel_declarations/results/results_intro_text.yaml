@@ -70,6 +70,6 @@ drr_summary_text:
 reports_links_text:
   transform: [handlebars,markdown]
   en: |
-    The full text of all Departmental Plans can be found {{ext_link "here" dp_url}}. Departmental Results Reports can be found on {{ext_link "here" drr_url}}.
+    The full text of all {{gl_tt "Departmental Plans" "DP"}} can be found {{ext_link "here" dp_url}}. {{gl_tt "Departmental Results Reports" "DRR"}} can be found on {{ext_link "here" drr_url}}.
   fr: |
     TODO
