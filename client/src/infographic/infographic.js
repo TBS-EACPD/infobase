@@ -165,7 +165,7 @@ class InfoGraph_ extends React.Component {
 
     const search_component = <AdvancedSearch
       everything_search_config={{
-        href_template: subj => infograph_href_template(subj, active_bubble_id, true),
+        href_template: subj => infograph_href_template(subj, active_bubble_id, '/'),
         search_text: text_maker('subject_search_placeholder'),
         large: true,
       }}
@@ -341,7 +341,7 @@ const InfoGraph = ({
         }
       }
     )();
-    return <Redirect to={infograph_href_template(subject_parent, bubble_id, true)} />;
+    return <Redirect to={infograph_href_template(subject_parent, bubble_id, '/')} />;
   }
   
   const title = text_maker("infographic_for", { name: name_for_title(subject) });

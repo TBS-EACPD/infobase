@@ -373,12 +373,12 @@ const URLSynchronizer = withRouter(
     }
     componentDidMount(){ //on the first render, it's possible the url is naive
       const { history } = this.props;
-      const new_url = rpb_link(this.props.state, true);
+      const new_url = rpb_link(this.props.state, '/');
       history.replace(new_url);
     }
     componentDidUpdate(){
       const { history } = this.props;
-      const new_url = rpb_link(this.props.state, true);
+      const new_url = rpb_link(this.props.state, '/');
       history.push(new_url);
     }
 
