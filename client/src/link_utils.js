@@ -11,19 +11,13 @@ const glossary_href = (subject_or_id, first_character = '#') => {
 };
 
 const general_href_for_item = item => {
-
-  if(item.level){ //subject entity
-
-    return infograph_href_template(item, null, true);
-
+  if(item.level){
+    return infograph_href_template(item, null, '/');
   } else if(item.table && item.table.constructor === Table){
-
-    return rpb_link({ table: item.table.id }, true);
-
+    return rpb_link({ table: item.table.id }, '/');
   } else if(item.constructor === GlossaryEntry){
     return glossary_href(item, '/');
   }
-
 };
 
 export {
@@ -32,4 +26,3 @@ export {
   glossary_href,
   general_href_for_item,
 };
-  
