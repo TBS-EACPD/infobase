@@ -95,19 +95,6 @@ no_results_for_this_subject:
   en: There are no available results for **{{subj_name subject}}**
   fr: Aucun résultat n'est disponible pour **{{subj_name subject}}**
 
-
-targets_to_achieve_past:
-  transform: [handlebars]
-  en: To be achieved by March 31, {{pa_last_year_2_short_second}}
-  fr: Indicateurs à atteindre au plus tard le 31 mars {{pa_last_year_2_short_second}}
-
-
-targets_to_achieve_future_and_ongoing:
-  transform: [handlebars]
-  en: Ongoing or to be achieved after March 31, {{pa_last_year_2_short_second}}
-  fr: Indicateurs permanents ou à atteindre après le 31 mars {{pa_last_year_2_short_second}}
-
-
 targets_to_achieve_other:
   en: Date not specified by organization
   fr: Aucune date fixée par l'organisation
@@ -196,72 +183,3 @@ result_status_with_gl:
   transform: [handlebars]
   text: |
     {{gl_tt text glossary_key}}
-
-
-planning_year_1_spend:
-  transform: [handlebars]
-  en: |
-    {{planning_year_1}} planned spending  
-  fr: |
-    {{planning_year_1}} dépenses planifiés
-
-planning_year_1_ftes:
-  transform: [handlebars]
-  en: |
-    {{planning_year_1}} planned FTEs  
-  fr: |
-    {{planning_year_1}} ETPs planifiés
-
-spend_planning_year_1:
-  transform: [handlebars]
-  en: |
-    {{planning_year_1}} Planned Spending
-  fr: Dépenses prévues {{planning_year_1}}
-
-spend_planning_year_2:
-  transform: [handlebars]
-  en: |
-    {{planning_year_2}} Planned Spending
-  fr: Dépenses prévues {{planning_year_2}}
-
-spend_planning_year_3:
-  transform: [handlebars]
-  en: |
-    {{planning_year_3}} Planned Spending
-  fr: Dépenses prévues {{planning_year_3}}
-
-fte_planning_year_1:
-  transform: [handlebars]
-  en: |
-    {{planning_year_1}} Planned FTEs
-  fr: ETP prévues {{planning_year_1}}
-
-fte_planning_year_2:
-  transform: [handlebars]
-  en: |
-    {{planning_year_2}} Planned FTEs
-  fr: ETP prévues {{planning_year_2}}
-
-fte_planning_year_3:
-  transform: [handlebars]
-  en: |
-    {{planning_year_3}} Planned FTEs
-  fr: ETP prévues {{planning_year_3}}
-
-planned_fte_pa_last_year:
-  transform: [handlebars]
-  en: |
-    {{pa_last_year_2}} planned FTEs
-  fr: ETP prévues {{pa_last_year_2}}
-  
-spend_pa_last_year:
-  transform: [handlebars]
-  en: |
-    {{pa_last_year_2}} actual spending
-  fr: Dépenses {{pa_last_year_2}}
-
-planned_spend_pa_last_year:
-  transform: [handlebars]
-  en: |
-    {{pa_last_year_2}} planned spending
-  fr: Dépenses prévues {{pa_last_year_2}}
