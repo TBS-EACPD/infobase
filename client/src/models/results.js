@@ -478,7 +478,7 @@ const build_doc_info_objects = (doc_type, docs) => _.chain(docs)
       doc_key: `${doc_type}${doc_properties.year_short.substring(2)}`,
       year: year_to_fiscal_year(doc_properties.year_short),
       resource_years_written: _.map(doc_properties.resource_years, run_template),
-      primary_resource_year_written: doc_properties.primary_resource_year_written,
+      primary_resource_year_written: run_template(doc_properties.primary_resource_year),
       has_resources: !_.isEmpty(doc_properties.resource_years),
       could_have_previous: index > 0,
       ...doc_properties,
