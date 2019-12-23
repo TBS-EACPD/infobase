@@ -19,7 +19,7 @@ import {
   AdvancedSearch,
 } from '../components/index.js';
 
-import { infograph_href_template } from './routes.js';
+import { infograph_href_template } from './infographic_link.js';
 
 const sub_app_name = "infographic_org";
 

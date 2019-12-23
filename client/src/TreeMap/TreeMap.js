@@ -14,7 +14,7 @@ import { TreeMapSidebar } from './TreeMapSidebar.js';
 import { TreeMapTopbar } from './TreeMapTopBar.js';
 import { TreeMapInstructions } from './TreeMapInstructions.js';
 import { TreeMapLegend } from './TreeMapLegend.js';
-import { infograph_href_template } from '../infographic/routes.js';
+import { infograph_href_template } from '../infographic/infographic_link.js';
 import { run_template } from '../models/text.js';
 import { actual_to_planned_gap_year } from '../models/years.js';
 import { create_text_maker_component } from '../components/index.js';
