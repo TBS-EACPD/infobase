@@ -110,10 +110,10 @@ export const declare_results_intro_panel = () => declare_panel({
         }
       })();
 
-      const has_current_dp = verbose_counts[`${current_dp_key}_results`] < 1;
-      const has_current_drr = verbose_counts[`${current_drr_key}_results`] < 1;
+      const has_current_dp = verbose_counts[`${current_dp_key}_results`] > 0;
+      const has_current_drr = verbose_counts[`${current_drr_key}_results`] > 0;
 
-      if(has_current_dp || has_current_drr){
+      if(!has_current_dp && !has_current_drr){
         return false;
       }
 
