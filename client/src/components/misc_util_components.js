@@ -4,10 +4,7 @@ import { Fragment } from 'react';
 import { run_template, trivial_text_maker, create_text_maker } from '../models/text.js';
 import { formats } from '../core/format.js';
 
-import { 
-  text_abbrev,
-  sanitized_dangerous_inner_html,
-} from '../general_utils.js';
+import { text_abbrev } from '../general_utils.js';
 
 import { TextMaker, TM } from './TextMaker.js';
 
@@ -39,16 +36,6 @@ const FancyUL = ({children, ul_class})=> (
     }
   </ul>
 );
-
-const FootnoteList = ({ footnotes }) => <div style={{padding: "10px"}}>
-  <FancyUL>
-    {_.chain(footnotes)
-      .uniqBy("text")
-      .map( ({text}, ix) => <div key={ix} dangerouslySetInnerHTML={sanitized_dangerous_inner_html(text)} />)
-      .value()
-    }
-  </FancyUL>
-</div>;
 
 const Year = ({y}) => run_template(`{{${y}}}`);
 
@@ -90,7 +77,6 @@ export {
   TrivialTextMaker,
   TrivialTM,
   ExternalLink,
-  FootnoteList,
   Year,
   TextAbbrev,
   lang,

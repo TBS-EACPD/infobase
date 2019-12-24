@@ -5,10 +5,8 @@ import { GlossaryItem } from './glossary_components.js';
 import classNames from 'classnames';
 
 import { Details } from './Details.js';
-import { 
-  FootnoteList,
-  create_text_maker_component,
-} from './misc_util_components.js';
+import { FootnoteList } from './FootnoteList.js';
+import { create_text_maker_component } from './misc_util_components.js';
 
 
 const { TM } = create_text_maker_component(text);
