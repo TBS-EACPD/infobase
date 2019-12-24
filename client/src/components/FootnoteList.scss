@@ -1,0 +1,11 @@
+.footnote-list {
+  margin: 0px 20px;
+}
+
+.footnote-list__note {
+  font-size: 14px;
+
+  & > p {
+    margin: 0px;
+  }
+}

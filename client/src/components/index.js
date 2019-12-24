@@ -31,6 +31,7 @@ export { GlossaryIcon, GlossaryItem } from './glossary_components.js';
 export { WellList } from './WellList.js';
 export { DisplayTable } from './DisplayTable.js';
 export { LabeledTable } from './LabeledTable.js';
+export { FootnoteList } from './FootnoteList.js';
 
 export {
   Explorer,
@@ -46,7 +47,6 @@ export {
   TrivialTextMaker,
   TrivialTM,
   ExternalLink,
-  FootnoteList,
   Year,
   TextAbbrev,
   lang,
