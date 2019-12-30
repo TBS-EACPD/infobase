@@ -32,7 +32,9 @@ const ServicesFeesPanel = ({panel_args}) => {
 
   return (
     <Fragment>
-      <TM k={"services_fees_text"} />
+      <div className="medium_panel_text">
+        <TM k={"services_fees_text"} />
+      </div>
       { !window.is_a11y_mode &&
           <Fragment>
             <CommonDonut

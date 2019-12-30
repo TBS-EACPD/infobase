@@ -15,41 +15,34 @@ import classNames from 'classnames';
 
 const { GraphLegend } = declarative_charts;
 
-const { text_maker} = create_text_maker_component(text);
+const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesDigitalPanel = ({panel_args}) => {
 
   const data_keys = ["account_reg_digital_status", "authentication_status", "application_digital_status", "decision_digital_status", "issuance_digital_status", "issue_res_digital_status"];
 
   const heatmap_data = _.chain(panel_args.services)
-    .map(serv=>_.pick(serv,_.concat(["name"],data_keys)))
+    .map(serv=>_.pick(serv,_.concat(["name"], data_keys)))
     .map(serv=>_.each(serv, (value, key)=>{
       if(value===null) serv[key] = NaN;
+      if(_.includes(data_keys, key)) serv[text_maker(key)] = serv[key];
     } ))
     .value();
-
-  const value_colors = {
-    true: "services-icon-array-true",
-    false: "services-icon-array-false",
-    null: "services-icon-array-na",
-  };
-
-
 
   const legend_items = [
     {
       id: "legend_yes",
-      label: text_maker("yes"),
+      label: text_maker("digital_option_available"),
       color: window.infobase_color_constants.secondaryColor,
     },
     {
       id: "legend_no",
-      label: text_maker("no"),
+      label: text_maker("digital_option_not_available"),
       color: "#4abbc4",
     },
     {
       id: "legend_na",
-      label: text_maker("not_available"),
+      label: text_maker("services_unknown"),
       color: window.infobase_color_constants.tertiaryColor,
     },
   ];
@@ -96,22 +89,25 @@ const ServicesDigitalPanel = ({panel_args}) => {
       </table>
     </div>
   );
-  
 
   return (
     <div>
+      <div className="medium_panel_text">
+        <TM k={"services_digital_status_text"} />
+      </div>
       { !window.is_a11y_mode &&
         <div>
           <div className="fcol-md-9" style = {{height: '400px'}}>
             <NivoResponsiveHeatMap
               data={heatmap_data}
-              keys={data_keys}
+              keys={_.map(data_keys, key => text_maker(key))}
               indexBy="name"
               tooltip={(d) => tooltip( [d], (value) => formats.big_int(value, {raw: true}) ) }
               colors={["#4abbc4",window.infobase_color_constants.secondaryColor]}
               nanColor={window.infobase_color_constants.tertiaryColor}
               enableLabels={false}
               padding={1}
+              motion_stiffness={100}
               top_axis={{
                 tickSize: 7,
                 tickPadding: 10,

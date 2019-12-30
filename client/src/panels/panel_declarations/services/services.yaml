@@ -90,6 +90,42 @@ digital_status_title:
   en: Digital status
   fr: TODO
 
-digital_status_text:
-  en: Information about the digital availability of different service steps. Blah blah blah more text here to make this longer. Lorem ipsum dolor sit amet etc etc etc. Is this long enough yet?
+services_digital_status_text:
+  en: Information about the digital availability of different service steps. Double check the text labels for these things, I had to do some guessing.
+  fr: TODO
+
+account_reg_digital_status:
+  en: Account registration
+  fr: TODO
+
+authentication_status:
+  en: Authentication
+  fr: TODO
+
+application_digital_status:
+  en: Application
+  fr: TODO
+
+decision_digital_status:
+  en: Decision
+  fr: TODO
+
+issuance_digital_status:
+  en: Issuance
+  fr: TODO
+
+issue_res_digital_status:
+  en: Issue resolution
+  fr: TODO
+
+digital_option_available:
+  en: Digital option available
+  fr: TODO
+
+digital_option_not_available:
+  en: No digital option
+  fr: TODO
+
+services_unknown:
+  en: Unknown / no data
   fr: TODO
