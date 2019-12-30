@@ -46,20 +46,6 @@ const ServicesDigitalPanel = ({panel_args}) => {
       color: window.infobase_color_constants.tertiaryColor,
     },
   ];
-  
-
-  function colors(d) {
-    const d_str = _.toString(d);
-
-
-    return _.isNull(d) ?
-      "grey" :
-      d3.scaleLinear()
-        .domain([true, false])
-        .range(["green","red"]);
-  }
-  colors.domain = () => [true, false];
-  colors.range = () => ["green","red"];
 
   const value_display = (val) => (
     _.isNaN(val) ?
