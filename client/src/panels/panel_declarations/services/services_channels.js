@@ -99,11 +99,14 @@ class ServicesChannelsPanel extends React.Component {
                   colorBy = {d => colors(d.id)}
                   keys = {["number"]}
                   is_money = {false}
+                  bttm_axis = {{
+                    tickRotation: 45,
+                  }}
                   margin = {{
                     top: 15,
-                    right: 30,
-                    bottom: 40,
-                    left: 50,
+                    right: 60,
+                    bottom: 130,
+                    left: 60,
                   }}
                 />
               </div>
