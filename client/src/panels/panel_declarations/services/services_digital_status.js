@@ -11,7 +11,7 @@ import {
   formats,
 } from "../shared.js";
 
-import classNames from 'classnames';
+import {Fragment} from 'react';
 
 const { GraphLegend } = declarative_charts;
 
@@ -31,44 +31,45 @@ const ServicesDigitalPanel = ({panel_args}) => {
 
   const legend_items = [
     {
-      id: "legend_yes",
+      id: "legend_true",
       label: text_maker("digital_option_available"),
       color: window.infobase_color_constants.secondaryColor,
     },
     {
-      id: "legend_no",
+      id: "legend_false",
       label: text_maker("digital_option_not_available"),
       color: "#4abbc4",
     },
     {
-      id: "legend_na",
+      id: "legend_NaN",
       label: text_maker("services_unknown"),
       color: window.infobase_color_constants.tertiaryColor,
     },
   ];
 
-  const value_display = (val) => (
-    _.isNaN(val) ?
-      text_maker("not_available") :
-      val ? text_maker("yes") : text_maker("no")
-  );
+  const value_display = (val) => {
+    const obj = _.find(legend_items, item => item.id === `legend_${val}`);
+    return obj.label;
+  };
 
   const tooltip = (tooltip_items, formatter) => (
     <div style={{color: window.infobase_color_constants.textColor}}>
-      <table style={{width: '100%', borderCollapse: 'collapse'}}>
+      <table style={{width: '100%'}}>
         <tbody>
           { tooltip_items.map(
             tooltip_item => (
-              <tr key = {tooltip_item.key}>
-                <td style= {{padding: '3px 5px'}}>
-                  <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.color}} />
-                </td>
-                <td style={{padding: '3px 5px'}}> {tooltip_item.yKey} </td>
-                <td style={{padding: '3px 5px'}}> : </td>
-                <td style={{padding: '3px 5px'}}> {tooltip_item.xKey} </td> 
-                <td style={{padding: '3px 5px'}}> : </td>
-                <td style={{padding: '3px 5px'}}> {value_display(tooltip_item.value)} </td> 
-              </tr>
+              <Fragment key = {tooltip_item.key}>
+                <tr>
+                  <td style= {{padding: '3px 5px'}}>
+                    <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.color, marginLeft: "auto", marginRight: 0}} />
+                  </td>
+                  <td style={{padding: '3px 5px'}}>{tooltip_item.yKey}</td>
+                </tr>
+                <tr>
+                  <td/>
+                  <td style={{padding: '3px 5px'}}>{tooltip_item.xKey}: {value_display(tooltip_item.value)}</td>
+                </tr>
+              </Fragment>
             )
           )}
         </tbody>
