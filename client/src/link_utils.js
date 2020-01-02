@@ -17,6 +17,8 @@ const general_href_for_item = (item, first_character) => {
     return rpb_link({ table: item.table.id }, first_character);
   } else if(item.constructor === GlossaryEntry){
     return glossary_href(item, first_character);
+  } else {
+    throw new Error(`${item} does not appear to be an entity with an href template`);
   }
 };
 
