@@ -41,7 +41,7 @@ describe("convert_GET_with_compressed_query_to_POST", function(){
 
 
 describe("get_log_object_for_request", function(){
-  it("Builds log as expected for a normal GET request", () => {
+  it("Builds log as expected for a normal GET request with variables", () => {
     const GET_request = {
       method: "GET",
       headers: {
@@ -57,6 +57,26 @@ describe("get_log_object_for_request", function(){
     expect(log_object.non_query).toEqual(undefined);
     expect(log_object.query_name).toEqual("test");
     expect(log_object.variables).toEqual({lang: "en"});
+    expect(log_object.query_hash).toEqual( expect.stringMatching(/.?/) );
+    expect(log_object.query).toEqual(query_string);
+  });
+
+  it("Builds log as expected for a normal GET request without variables", () => {
+    const GET_request = {
+      method: "GET",
+      headers: {
+        origin: "test",
+      },
+      query: query_string,
+    };
+
+    const log_object = get_log_object_for_request(GET_request);
+
+    expect(log_object.origin).toEqual("test");
+    expect(log_object.method).toEqual("GET");
+    expect(log_object.non_query).toEqual(undefined);
+    expect(log_object.query_name).toEqual("test");
+    expect(log_object.variables).toEqual({});
     expect(log_object.query_hash).toEqual( expect.stringMatching(/.?/) );
     expect(log_object.query).toEqual(query_string);
   });
