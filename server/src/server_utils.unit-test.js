@@ -8,7 +8,7 @@ import {
 
 const query_string = 'query ($lang: String!) {\n  root(lang: $lang) {\n    gov {\n      id\n      __typename\n    }\n    __typename\n  }\n}';
 const variable_string = '{"lang":"en","_query_name":"test"}';
-const uncompressed_query = `${query_string}&variables=${variable_string}`;
+const query_object = {query: query_string, variables: variable_string};
 const compressed_query = "I4VwpgTgngBAFAEgDYEMB2BzAXDAygFwgEtMBCAShgG8AoGGCAe0fzlUx2XQ0tvvoyMAbtTr96RACZjxAfVn4oABzBoUAWzAyYAX23zFKtZrF6dAMiEpiKAEZIwAZwC8VAETsMbrG9VuANG6yoJBQssZg3m74TvhuOkA";
 
 
@@ -47,7 +47,7 @@ describe("get_log_object_for_request", function(){
       headers: {
         origin: "test",
       },
-      query: uncompressed_query,
+      query: query_object,
     };
 
     const log_object = get_log_object_for_request(GET_request);
@@ -67,7 +67,7 @@ describe("get_log_object_for_request", function(){
       headers: {
         origin: "test",
       },
-      query: query_string,
+      query: {query: query_string},
     };
 
     const log_object = get_log_object_for_request(GET_request);
