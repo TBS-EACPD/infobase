@@ -10,15 +10,15 @@ const glossary_href = (subject_or_id, first_character = '#') => {
   return is_valid_glossary_item && `${first_character}glossary/${id}`;
 };
 
-const general_href_for_item = (item, first_character) => {
-  if(item.level){
-    return infograph_href_template(item, null, first_character);
-  } else if(item.table && item.table.constructor === Table){
-    return rpb_link({ table: item.table.id }, first_character);
-  } else if(item.constructor === GlossaryEntry){
-    return glossary_href(item, first_character);
+const smart_href_template = (entity, first_character) => {
+  if(entity.level){
+    return infograph_href_template(entity, null, first_character);
+  } else if(entity.table.constructor === Table && entity.table){
+    return rpb_link({ table: entity.table.id }, first_character);
+  } else if(entity.constructor === GlossaryEntry){
+    return glossary_href(entity, first_character);
   } else {
-    throw new Error(`${item} does not appear to be an entity with an href template`);
+    throw new Error(`${entity} does not belong to a class with a known href template`);
   }
 };
 
@@ -26,5 +26,5 @@ export {
   infograph_href_template,
   rpb_link,
   glossary_href,
-  general_href_for_item,
+  smart_href_template,
 };

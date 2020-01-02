@@ -12,7 +12,7 @@ import {
   ContainerEscapeHatch,
 } from '../components/index.js';
 
-import { general_href_for_item } from '../link_utils.js';
+import { smart_href_template } from '../link_utils.js';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { get_static_url } from '../request_utils.js';
 
@@ -134,7 +134,7 @@ const HomeLayout = props => (
                 include_tables={true} 
                 include_glossary={true}
                 org_scope="all_orgs_with_gov"
-                href_template={ (item) => general_href_for_item(item, '/') }
+                href_template={ (item) => smart_href_template(item, '/') }
                 onNewQuery={ query => { 
                   log_standard_event({
                     SUBAPP: "home",
