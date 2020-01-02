@@ -22,11 +22,13 @@ const get_query_and_variables_from_request = (req) => {
     const {query, variables} = req.body;
     return {query, variables};
   } else if( req.query ){
-    const [query, variables_string] = req.query.split("&variables=");
+    const [query, variables_string] = req.query.includes("&variables=") ?
+      req.query.split("&variables=") :
+      [req.query, ""];
 
     const confirmed_query = /^query/.test(query) && query
 
-    const variables = JSON.parse(variables_string);
+    const variables = variables_string && JSON.parse(variables_string);
 
     return {query: confirmed_query, variables};
   } else {

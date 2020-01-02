@@ -75,7 +75,7 @@ describe("get_log_object_for_request", function(){
     expect(log_object.origin).toEqual("test");
     expect(log_object.method).toEqual("GET");
     expect(log_object.non_query).toEqual(undefined);
-    expect(log_object.query_name).toEqual("test");
+    expect(log_object.query_name).toEqual(undefined);
     expect(log_object.variables).toEqual({});
     expect(log_object.query_hash).toEqual( expect.stringMatching(/.?/) );
     expect(log_object.query).toEqual(query_string);
