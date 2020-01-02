@@ -134,7 +134,7 @@ const HomeLayout = props => (
                 include_tables={true} 
                 include_glossary={true}
                 org_scope="all_orgs_with_gov"
-                href_template={ general_href_for_item }
+                href_template={ (item) => general_href_for_item(item, '/') }
                 onNewQuery={ query => { 
                   log_standard_event({
                     SUBAPP: "home",
