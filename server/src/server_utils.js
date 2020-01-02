@@ -2,17 +2,12 @@ import { decompressFromBase64 } from 'lz-string';
 import md5 from 'md5';
 
 import _ from 'lodash';
-
-const safely_split_query_string = (query_string) => query_string.includes("&variables=") ?
-  query_string.split("&variables=") :
-  [query_string, ""];
-
   
 // Side effect alert: this function mutates the suplied request object so that the conversion persists to subsequent server midleware
 // ... bit of a hack, and I'm not just talking about a function having side effects
 export const convert_GET_with_compressed_query_to_POST = (req) => {
   const decoded_decompressed_query = decompressFromBase64(req.headers['encoded-compressed-query']);
-  const [query, variables] = safely_split_query_string(decoded_decompressed_query);
+  const [query, variables] = decoded_decompressed_query.split("&variables=");
 
   req.method = "POST";
   req.body = {
