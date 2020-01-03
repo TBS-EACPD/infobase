@@ -17,7 +17,6 @@ const {
   SpinnerWrapper,
   Format,
   TextAbbrev,
-  Details, 
 } = util_components;
 
 import { 
@@ -242,7 +241,6 @@ class SingleSubjExplorer extends React.Component {
       data_loading,
       doc,
       set_doc,
-      has_subs,
       icon_counts,
       toggle_status_status_key,
       clear_status_filter,
@@ -292,18 +290,6 @@ class SingleSubjExplorer extends React.Component {
                 onClearClick={clear_status_filter}
               />
             </div>
-          }
-          { has_subs && 
-            <Details
-              summary_content={
-                <TM k="where_can_find_subs_question" />
-              }
-              content={
-                <div style={{margin: "10px 0"}}>
-                  <TM k="where_can_find_subs_answer" />
-                </div>
-              }
-            />
           }
           <div style={{marginTop: '15px'}}>
             <form

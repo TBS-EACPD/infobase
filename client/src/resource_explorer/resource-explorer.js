@@ -17,7 +17,6 @@ import {
   SpinnerWrapper,
   KeyConceptList,
   TabbedControls,
-  Details,
   AlertBanner,
   GlossaryIcon,
 } from '../components/index.js';
@@ -261,13 +260,7 @@ class ExplorerPage extends React.Component {
     const all_category_props = [ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props, hi_props] : []) ];
     const current_category = _.find(all_category_props, props => props.active);
     return <div>
-      <div style={{marginBottom: '35px'}}>
-        <TM k="tag_nav_intro_text" el="div" />
-        <Details
-          summary_content={<TM k="where_can_find_subs_question" />}
-          content={<TM k="where_can_find_subs_answer" />}
-        />
-      </div>
+      <TM k="tag_nav_intro_text" el="div" />
       <div className="tabbed-content">
         <TabbedControls
           tab_callback = {
