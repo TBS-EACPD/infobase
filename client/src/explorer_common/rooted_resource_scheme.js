@@ -1,8 +1,9 @@
 import { createSelector } from 'reselect';
-import { shallowEqualObjectsOverKeys, sanitized_dangerous_inner_html } from '../general_utils.js';
+
+import { get_resources_for_subject, provide_sort_func_selector } from './resource_explorer_common.js';
 import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './hierarchy_tools.js';
-import { get_resources_for_subject } from './resource_utils.js';
-import { provide_sort_func_selector } from './resource_explorer_common.js';
+
+import { shallowEqualObjectsOverKeys, sanitized_dangerous_inner_html } from '../general_utils.js';
 import { current_drr_key, current_dp_key } from '../models/results';
 import { trivial_text_maker } from '../models/text.js';
 

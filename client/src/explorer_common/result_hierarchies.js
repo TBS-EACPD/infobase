@@ -1,10 +1,11 @@
-import { get_resources_for_subject } from './resource_utils.js';
+import { get_resources_for_subject } from './resource_explorer_common.js';
+import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './hierarchy_tools.js';
+
 import { Subject } from '../models/subject.js';
 import { 
   Result, 
   SubProgramEntity,
 } from '../models/results.js';
-import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './hierarchy_tools.js';
 
 const { Dept } = Subject;
 

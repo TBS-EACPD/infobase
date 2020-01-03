@@ -1,12 +1,13 @@
 import { createSelector } from 'reselect';
+
+import { provide_sort_func_selector, get_resources_for_subject } from './resource_explorer_common.js';
+import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './hierarchy_tools.js';
+
 import { infograph_href_template } from '../link_utils.js';
-import { provide_sort_func_selector } from './resource_explorer_common.js';
 import { shallowEqualObjectsOverKeys, sanitized_dangerous_inner_html } from '../general_utils.js';
 import { HeightClipper } from '../components/index.js';
-import { get_resources_for_subject } from './resource_utils.js';
 import { Subject } from '../models/subject.js';
 import { trivial_text_maker as text_maker } from '../models/text.js';
-import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './hierarchy_tools.js';
 import { current_dp_key } from '../models/results.js';
 
 const { 

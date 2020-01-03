@@ -7,8 +7,8 @@ import classNames from 'classnames';
 import { 
   infograph_href_template,
 } from '../link_utils.js';
-import { StandardRouteContainer } from '../core/NavComponents';
-import { get_col_defs } from '../explorer_common/resource_explorer_common.js';
+import { StandardRouteContainer } from '../core/NavComponents.js';
+import { ensure_loaded } from '../core/lazy_loader.js';
 import { Subject } from '../models/subject.js';
 import { GlossaryEntry } from '../models/glossary.js';
 import { current_drr_key, current_dp_key, result_docs } from '../models/results.js';
@@ -25,8 +25,9 @@ const { Tag } = Subject;
 
 //drilldown stuff
 import { combineReducers, createStore } from 'redux';
-
 import { Provider, connect } from 'react-redux';
+
+import { get_col_defs } from '../explorer_common/resource_explorer_common.js';
 import { get_root } from '../explorer_common/hierarchy_tools.js';
 import { resource_scheme, get_initial_resource_state } from '../explorer_common/resource_scheme.js';
 import { 
@@ -35,8 +36,7 @@ import {
   root_reducer, 
   map_state_to_root_props_from_memoized_funcs, 
   map_dispatch_to_root_props,
-} from '../explorer_common/state_and_memoizing';
-import { ensure_loaded } from '../core/lazy_loader.js';
+} from '../explorer_common/state_and_memoizing.js';
 import { Explorer } from '../components/ExplorerComponents.js';
 
 const INCLUDE_OTHER_TAGS = true;

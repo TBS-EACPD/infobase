@@ -6,6 +6,18 @@ import { result_docs } from '../models/results.js';
 
 import { createSelector } from 'reselect';
 
+import { results_resource_fragment } from '../panels/panel_declarations/results/results_common.js';
+
+
+export const get_resources_for_subject = (subject, doc) => {
+  const resources = results_resource_fragment(subject, doc);
+
+  if(resources.spending || resources.ftes){
+    return resources;
+  } else {
+    return null;
+  }
+};
 
 
 export const get_col_defs = ({doc}) => [
