@@ -27,13 +27,13 @@ const get_rules = ({
             useBuiltIns: false,
             modules: false,
             targets: should_use_babel ? 
-              {
-                Safari: "7",
-                ie: "11",
-              } : 
-              {
-                Chrome: "66",
-              },
+              [
+                "Safari 7",
+                "ie 11",
+              ] : 
+              [
+                "last 2 Chrome versions",
+              ],
             forceAllTransforms: is_prod_build, // need to forceAllTransforms when uglifying
           }],
           "@babel/preset-react",
