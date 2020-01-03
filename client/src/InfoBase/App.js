@@ -26,16 +26,16 @@ const PartitionRoute = retrying_react_lazy( () => import(/* webpackChunkName: "P
 const BudgetMeasuresRoute = retrying_react_lazy( () => import(/* webpackChunkName: "BudgetMeasuresRoute" */ '../partition/budget_measures_subapp/BudgetMeasuresRoute.js') );
 const About = retrying_react_lazy( () => import(/* webpackChunkName: "About" */ '../about/about.js') );
 const MetaData = retrying_react_lazy( () => import(/* webpackChunkName: "Metadata" */ '../metadata/metadata.js') );
-const IgocExplorer = retrying_react_lazy( () => import(/* webpackChunkName: "igoc_explorer" */ '../igoc_explorer/igoc_explorer.js') );
+const IgocExplorer = retrying_react_lazy( () => import(/* webpackChunkName: "igoc_explorer" */ '../IgocExplorer/IgocExplorer.js') );
 const TagExplorer = retrying_react_lazy( () => import(/* webpackChunkName: "TagExplorer" */ '../TagExplorer/TagExplorer.js') );
 const Glossary = retrying_react_lazy( () => import(/* webpackChunkName: "Glossary" */ '../glossary/glossary.js') );
 const ReportBuilder = retrying_react_lazy( () => import(/* webpackChunkName: "ReportBuilder" */ '../rpb/index.js') );
-const InfoGraph = retrying_react_lazy( () => import(/* webpackChunkName: "Infographic" */ '../infographic/infographic.js') );
+const Infographic = retrying_react_lazy( () => import(/* webpackChunkName: "Infographic" */ '../infographic/Infographic.js') );
 const EstimatesComparison = retrying_react_lazy( () => import(/* webpackChunkName: "EstimatesComparison" */ '../EstimatesComparison/EstimatesComparison.js') );
 const PrivacyStatement = retrying_react_lazy( () => import(/* webpackChunkName: "PrivacyStatement" */ '../PrivacyStatement/PrivacyStatement.js') );
 const TreeMap = retrying_react_lazy( () => import(/* webpackChunkName: "TreeMap" */ '../TreeMap/TreeMap.js') ); 
-const TextDiff = retrying_react_lazy( () => import(/* webpackChunkName: "TextDiff" */ '../diff/TextDiff.js') ); 
-const Lab = retrying_react_lazy( () => import(/* webpackChunkName: "InfoLab" */ '../lab/InfoLab.js') ); 
+const TextDiff = retrying_react_lazy( () => import(/* webpackChunkName: "TextDiff" */ '../TextDiff/TextDiff.js') ); 
+const Lab = retrying_react_lazy( () => import(/* webpackChunkName: "InfoLab" */ '../InfoLab/InfoLab.js') ); 
 const IsolatedPanel = retrying_react_lazy( () => import(/* webpackChunkName: "IsolatedPanel" */ '../panels/panel_routes/IsolatedPanel.js') );
 const PanelInventory = retrying_react_lazy( () => import(/* webpackChunkName: "PanelInventory" */ '../panels/panel_routes/PanelInventory.js') );
 const IndicatorPanel = retrying_react_lazy( () => import(/* webpackChunkName: "IndicatorDisplay" */ '../panels/panel_routes/IndicatorPanel.js') ); 
@@ -67,7 +67,7 @@ export class App extends React.Component {
                 to="/tag-explorer/:hierarchy_scheme?/:doc?"
               />
               <Route path="/tag-explorer/:hierarchy_scheme?/:doc?" component={TagExplorer} />
-              <Route path="/orgs/:level/:subject_id/infograph/:active_bubble_id?/:options?/" component={InfoGraph} />
+              <Route path="/orgs/:level/:subject_id/infograph/:active_bubble_id?/:options?/" component={Infographic} />
               <Route path="/glossary/:active_key?" component={Glossary} />
               <Redirect 
                 from="/budget-measures/:first_column?/:selected_value?/:budget_year?" 

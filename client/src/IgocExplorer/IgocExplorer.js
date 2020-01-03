@@ -1,4 +1,4 @@
-import './igoc_explorer.scss';
+import './IgocExplorer.scss';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { createSelector } from 'reselect';
 
@@ -7,7 +7,7 @@ import { combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { create_igoc_hierarchy } from './hierarchies.js';
 import { ExplorerForIgoc } from './explorer_view.js';
-import { filter_hierarchy } from '../gen_expl/hierarchy_tools.js';
+import { filter_hierarchy } from '../explorer_common/hierarchy_tools.js';
 import { igoc_tmf as text_maker, TM } from './igoc_explorer_text.js';
 import { 
   get_memoized_funcs, 
@@ -15,7 +15,7 @@ import {
   root_reducer, 
   map_state_to_root_props_from_memoized_funcs, 
   map_dispatch_to_root_props, 
-} from '../gen_expl/state_and_memoizing';
+} from '../explorer_common/state_and_memoizing';
 
 
 const map_state_to_props_from_memoized_funcs = memoized_funcs => {

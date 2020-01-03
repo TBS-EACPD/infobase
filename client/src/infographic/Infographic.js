@@ -1,7 +1,7 @@
 import { Redirect } from 'react-router';
 
-import './infographic.scss';
-import text from "./infographic.yaml";
+import './Infographic.scss';
+import text from "./Infographic.yaml";
 
 import { StandardRouteContainer } from '../core/NavComponents';
 import { log_standard_event } from '../core/analytics.js';
@@ -314,7 +314,7 @@ class InfoGraph_ extends React.Component {
 }
 
 const is_fake_infographic = (subject) => !_.isUndefined(subject.is_fake) && subject.is_fake;
-const InfoGraph = ({
+const Infographic = ({
   match: {
     params: {
       level, 
@@ -369,4 +369,4 @@ const InfoGraph = ({
 };
 
 
-export { InfoGraph as default };
+export { Infographic as default };

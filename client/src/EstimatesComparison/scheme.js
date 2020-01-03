@@ -5,7 +5,7 @@ import { Table } from '../core/TableClass.js';
 import FootNote from '../models/footnotes.js';
 import {GlossaryEntry} from '../models/glossary.js';
 import { Subject } from '../models/subject.js';
-import { convert_d3_hierarchy_to_explorer_hierarchy } from '../gen_expl/hierarchy_tools.js';
+import { convert_d3_hierarchy_to_explorer_hierarchy } from '../explorer_common/hierarchy_tools.js';
 import { shallowEqualObjectsOverKeys } from '../general_utils.js';
 
 const { Dept } = Subject;

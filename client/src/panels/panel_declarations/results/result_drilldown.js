@@ -36,22 +36,22 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import redux_promise_middleware from 'redux-promise-middleware';
 import { Provider, connect } from 'react-redux';
 
-import { get_root } from '../../../gen_expl/hierarchy_tools.js';
-import { single_subj_results_scheme, get_initial_single_subj_results_state } from '../../../gen_expl/results_scheme.js';
+import { get_root } from '../../../explorer_common/hierarchy_tools.js';
+import { single_subj_results_scheme, get_initial_single_subj_results_state } from '../../../explorer_common/results_scheme.js';
 import { 
   get_type_name, 
   ResultNodeContent, 
   spending_header, 
   fte_header, 
   ResultCounts as ResultCountsComponent,
-} from '../../../gen_expl/result_displays.js';
+} from '../../../explorer_common/result_displays.js';
 import { 
   get_memoized_funcs, 
   initial_root_state, 
   root_reducer, 
   map_state_to_root_props_from_memoized_funcs, 
   map_dispatch_to_root_props, 
-} from '../../../gen_expl/state_and_memoizing';
+} from '../../../explorer_common/state_and_memoizing';
 
 
 const get_non_col_content_func = createSelector(
