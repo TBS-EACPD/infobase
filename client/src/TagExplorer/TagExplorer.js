@@ -1,6 +1,6 @@
 import '../gen_expl/explorer-styles.scss';
 
-import explorer_text from './explorer.yaml';
+import text from './TagExplorer.yaml';
 import { Fragment } from 'react';
 import classNames from 'classnames';
 
@@ -21,7 +21,6 @@ import {
   GlossaryIcon,
 } from '../components/index.js';
 
-
 const { Tag } = Subject;
 
 //drilldown stuff
@@ -41,7 +40,8 @@ import { ensure_loaded } from '../core/lazy_loader.js';
 import { Explorer } from '../components/ExplorerComponents.js';
 
 const INCLUDE_OTHER_TAGS = true;
-const { text_maker, TM } = create_text_maker_component(explorer_text);
+
+const { text_maker, TM } = create_text_maker_component(text);
 
 const dp_only_schemes = ["MLT"];
 
@@ -52,7 +52,7 @@ const children_grouper = (node, children) => {
 
   return _.chain(children)
     .groupBy(child => child.data.subject.plural() )
-    .map( (node_group,plural) => ({
+    .map( (node_group, plural) => ({
       display: plural,
       node_group,
     }))
@@ -156,7 +156,7 @@ class ExplorerPage extends React.Component {
       get_non_col_content: render_non_col_content,
       children_grouper,
       col_click,
-    } ;
+    };
 
     const { loading } = this.state;
 
@@ -256,7 +256,7 @@ class ExplorerPage extends React.Component {
       </div>
     </div>;
     
-    // DRR_TODO: all refine the check for including other tags, drr18 has all the tags dp19 does
+    // DRR_TODO: refine the checks for including other tags, drr18 has all the tags dp19 does
     const all_category_props = [ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props, hi_props] : []) ];
     const current_category = _.find(all_category_props, props => props.active);
     return <div>
@@ -268,8 +268,8 @@ class ExplorerPage extends React.Component {
               const route_base = window.location.href.split('#')[0];
 
               const new_route = {
-                [current_drr_key]: `#resource-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/${current_drr_key}`,
-                [current_dp_key]: `#resource-explorer/${hierarchy_scheme}/${current_dp_key}`,
+                [current_drr_key]: `#tag-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/${current_drr_key}`,
+                [current_dp_key]: `#tag-explorer/${hierarchy_scheme}/${current_dp_key}`,
               }[key];
 
               window.location.href = `${route_base}${new_route}`;
@@ -292,7 +292,7 @@ class ExplorerPage extends React.Component {
           <div>
             <ul className="nav nav-justified nav-pills">
               {_.map(all_category_props, props =>
-                <li key={props.id} className={classNames(props.active && 'active')}><a href={`#resource-explorer/${props.id}/${doc}`} >{props.title}</a></li>
+                <li key={props.id} className={classNames(props.active && 'active')}><a href={`#tag-explorer/${props.id}/${doc}`} >{props.title}</a></li>
               )}
             </ul>
           </div>
@@ -331,7 +331,6 @@ class ExplorerPage extends React.Component {
         </div>
       </div>
     </div>;
-
   }
 }
 
@@ -380,7 +379,6 @@ class OldExplorerContainer extends React.Component {
       store,
       Container,
     };
-
   }
   static getDerivedStateFromProps(nextProps, prevState){
     const { hierarchy_scheme, doc } = nextProps;
@@ -397,13 +395,11 @@ class OldExplorerContainer extends React.Component {
         <Container />
       </Provider>
     );
-
   }
-
 }
 
 
-export default class ResourceExplorer extends React.Component {
+export default class TagExplorer extends React.Component {
   constructor(){
     super();
     this.state = { loading: true };
@@ -454,7 +450,7 @@ export default class ResourceExplorer extends React.Component {
 
     // vv delete on drr17 exit, GIVEN that the new DRR is fully tagged, which is should be
     //additional validation
-    if(doc == "drr17" && !_.includes(['min','dept','GOCO','HWH'], hierarchy_scheme) ){
+    if( doc == "drr17" && !_.includes(['min','dept','GOCO','HWH'], hierarchy_scheme) ){
       hierarchy_scheme = "min";
     }
     // ^^ delete on drr17 exit
@@ -465,6 +461,5 @@ export default class ResourceExplorer extends React.Component {
         <OldExplorerContainer {...{hierarchy_scheme, doc}} />
       </StandardRouteContainer>
     );
-
   }
 }
