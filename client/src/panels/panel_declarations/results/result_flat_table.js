@@ -39,7 +39,7 @@ const {
   indicator_actual_text,
 } = indicator_text_functions;
 
-import { create_full_results_hierarchy } from '../../../gen_expl/result_hierarchies.js';
+import { create_full_results_hierarchy } from '../../../explorer_common/result_hierarchies.js';
 
 const current_drr_year = result_docs[current_drr_key].year;
 

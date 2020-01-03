@@ -1,20 +1,20 @@
-import '../../../../gen_expl/explorer-styles.scss';
+import '../../../../explorer_common/explorer-styles.scss';
 import {
   get_root,
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,
-} from '../../../../gen_expl/hierarchy_tools.js';
+} from '../../../../explorer_common/hierarchy_tools.js';
 import {
   get_memoized_funcs,
   initial_root_state,
   root_reducer,
   map_state_to_root_props_from_memoized_funcs,
   map_dispatch_to_root_props,
-} from '../../../../gen_expl/state_and_memoizing';
+} from '../../../../explorer_common/state_and_memoizing';
 import { 
   get_col_defs,
   provide_sort_func_selector,
-} from '../../../../gen_expl/resource-explorer-common.js';
+} from '../../../../explorer_common/resource_explorer_common.js';
 
 
 import text from "./sub_program_resources.yaml";

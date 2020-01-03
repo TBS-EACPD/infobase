@@ -1,9 +1,9 @@
-import '../gen_expl/explorer-styles.scss';
+import '../explorer_common/explorer-styles.scss';
 import { Fragment } from 'react';
 import { createSelector } from 'reselect';
 import classNames from 'classnames';
 import { infograph_href_template } from '../link_utils.js';
-import { get_root } from '../gen_expl/hierarchy_tools.js';
+import { get_root } from '../explorer_common/hierarchy_tools.js';
 import { igoc_tmf as text_maker, TM } from './igoc_explorer_text.js';
 import { SpinnerWrapper, DlItem } from '../components/index.js';
 import { sanitized_dangerous_inner_html } from '../general_utils.js';

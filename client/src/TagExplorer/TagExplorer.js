@@ -1,4 +1,4 @@
-import '../gen_expl/explorer-styles.scss';
+import '../explorer_common/explorer-styles.scss';
 
 import text from './TagExplorer.yaml';
 import { Fragment } from 'react';
@@ -8,7 +8,7 @@ import {
   infograph_href_template,
 } from '../link_utils.js';
 import { StandardRouteContainer } from '../core/NavComponents';
-import { get_col_defs } from '../gen_expl/resource-explorer-common.js';
+import { get_col_defs } from '../explorer_common/resource_explorer_common.js';
 import { Subject } from '../models/subject.js';
 import { GlossaryEntry } from '../models/glossary.js';
 import { current_drr_key, current_dp_key, result_docs } from '../models/results.js';
@@ -27,15 +27,15 @@ const { Tag } = Subject;
 import { combineReducers, createStore } from 'redux';
 
 import { Provider, connect } from 'react-redux';
-import { get_root } from '../gen_expl/hierarchy_tools.js';
-import { resource_scheme, get_initial_resource_state } from '../gen_expl/resource_scheme.js';
+import { get_root } from '../explorer_common/hierarchy_tools.js';
+import { resource_scheme, get_initial_resource_state } from '../explorer_common/resource_scheme.js';
 import { 
   get_memoized_funcs, 
   initial_root_state, 
   root_reducer, 
   map_state_to_root_props_from_memoized_funcs, 
   map_dispatch_to_root_props,
-} from '../gen_expl/state_and_memoizing';
+} from '../explorer_common/state_and_memoizing';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { Explorer } from '../components/ExplorerComponents.js';
 

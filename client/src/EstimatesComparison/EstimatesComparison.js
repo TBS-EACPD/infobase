@@ -16,14 +16,14 @@ import {
 } from '../components/index.js';
 import { 
   get_root,
-} from '../gen_expl/hierarchy_tools.js';
+} from '../explorer_common/hierarchy_tools.js';
 import {
   get_memoized_funcs,
   initial_root_state,
   root_reducer,
   map_state_to_root_props_from_memoized_funcs,
   map_dispatch_to_root_props,
-} from '../gen_expl/state_and_memoizing';
+} from '../explorer_common/state_and_memoizing';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { Explorer } from '../components/ExplorerComponents.js';
 import {
