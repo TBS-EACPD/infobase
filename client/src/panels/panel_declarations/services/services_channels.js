@@ -75,7 +75,6 @@ class ServicesChannelsPanel extends React.Component {
       return result;
     }, []);
 
-
     return (
       <Fragment>
         <TM k={"communication_channels_text"} />
@@ -108,6 +107,8 @@ class ServicesChannelsPanel extends React.Component {
                     bottom: 130,
                     left: 60,
                   }}
+                  table_switch = {true}
+                  table_data_headers={["TODO name of whatever","TODO number of whatever"]}
                 />
               </div>
               { selected_service_id !== "all" && <GraphLegend items={feedback_channel_statuses} /> }
