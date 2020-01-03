@@ -27,7 +27,7 @@ const BudgetMeasuresRoute = retrying_react_lazy( () => import(/* webpackChunkNam
 const About = retrying_react_lazy( () => import(/* webpackChunkName: "About" */ '../about/about.js') );
 const MetaData = retrying_react_lazy( () => import(/* webpackChunkName: "Metadata" */ '../metadata/metadata.js') );
 const IgocExplorer = retrying_react_lazy( () => import(/* webpackChunkName: "igoc_explorer" */ '../igoc_explorer/igoc_explorer.js') );
-const ResourceExplorer = retrying_react_lazy( () => import(/* webpackChunkName: "ResourceExplorer" */ '../resource_explorer/resource-explorer.js') );
+const TagExplorer = retrying_react_lazy( () => import(/* webpackChunkName: "TagExplorer" */ '../TagExplorer/TagExplorer.js') );
 const Glossary = retrying_react_lazy( () => import(/* webpackChunkName: "Glossary" */ '../glossary/glossary.js') );
 const ReportBuilder = retrying_react_lazy( () => import(/* webpackChunkName: "ReportBuilder" */ '../rpb/index.js') );
 const InfoGraph = retrying_react_lazy( () => import(/* webpackChunkName: "Infographic" */ '../infographic/infographic.js') );
@@ -62,7 +62,11 @@ export class App extends React.Component {
               <Route path="/error-boundary-test" component={ () => {throw "This route throws errors!";} }/>
               <Route path="/metadata/:data_source?" component={MetaData}/>
               <Route path="/igoc/:grouping?" component={IgocExplorer} />
-              <Route path="/resource-explorer/:hierarchy_scheme?/:doc?" component={ResourceExplorer} />
+              <Redirect 
+                from="/resource-explorer/:hierarchy_scheme?/:doc?"
+                to="/tag-explorer/:hierarchy_scheme?/:doc?"
+              />
+              <Route path="/tag-explorer/:hierarchy_scheme?/:doc?" component={TagExplorer} />
               <Route path="/orgs/:level/:subject_id/infograph/:active_bubble_id?/:options?/" component={InfoGraph} />
               <Route path="/glossary/:active_key?" component={Glossary} />
               <Redirect 
