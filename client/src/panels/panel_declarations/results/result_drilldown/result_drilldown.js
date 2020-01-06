@@ -1,4 +1,4 @@
-import '../results.scss';
+import './result_drilldown.scss';
 
 import classNames from 'classnames';
 
