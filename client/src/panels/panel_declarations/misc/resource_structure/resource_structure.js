@@ -1,4 +1,3 @@
-import '../../../../explorer_common/explorer-styles.scss';
 import text from './resource_structure.yaml';
 
 import { combineReducers, createStore } from 'redux';
@@ -14,6 +13,7 @@ import {
   Results,
 } from "../../shared.js";
 
+import '../../../../explorer_common/explorer-styles.scss';
 import { get_root } from '../../../../explorer_common/hierarchy_tools.js';
 import { get_col_defs } from '../../../../explorer_common/resource_explorer_common.js';
 import { Explorer } from '../../../../explorer_common/explorer_components.js';
