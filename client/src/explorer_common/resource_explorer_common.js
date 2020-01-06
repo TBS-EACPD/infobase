@@ -1,19 +1,81 @@
-import { 
+import { createSelector } from 'reselect';
+
+import {
   TrivialTM as TM,
   Format,
 } from '../components/index.js';
 import { run_template } from '../models/text.js';
+import { Table } from '../core/TableClass.js';
 
-import { createSelector } from 'reselect';
-
-import { results_resource_fragment } from '../panels/panel_declarations/results/results_common.js';
+const is_planning_year = (year) => /planning/.test(year);
 
 
-export const get_resources_for_subject = (subject, doc) => {
-  const resources = results_resource_fragment(subject, doc);
+const pick_table = (type) => Table.lookup(
+  type === "spending" ?
+    "programSpending" :
+    "programFtes"
+);
 
-  if(resources.spending || resources.ftes){
-    return resources;
+const get_rows_for_subject_from_table = _.memoize(
+  (subject, type, year) => {
+    const table = pick_table(type);
+    if( subject.level === 'program'){
+      const rows_or_record = table.programs.get(subject);
+      if(!rows_or_record){
+        return null;
+      }
+      if(_.isArray(rows_or_record)){ 
+        return rows_or_record;
+      } else {
+        return [ rows_or_record ];
+      }
+    } else if( is_planning_year(year) && _.includes(["dept", "crso"], subject.level) ){
+      return table.q(subject).data;
+    } else if( !_.isEmpty(subject.programs) ){
+      return _.chain(subject.programs)
+        .map( prog => get_rows_for_subject_from_table(prog, type, year) )
+        .flatten()
+        .value();
+    } else if(subject.level === 'ministry'){
+      return _.chain(subject.orgs)
+        .map( org => get_rows_for_subject_from_table(org, type, year) )
+        .flatten(true)
+        .compact()
+        .value();
+    } else if( !_.isEmpty(subject.children_tags) ){
+      return _.chain(subject.children_tags)
+        .map( tag => get_rows_for_subject_from_table(tag, type, year) )
+        .flatten(true)
+        .uniqBy()
+        .compact()
+        .value();
+    } else {
+      return null;
+    }
+  
+  }, 
+  (subject, type, year) => `${subject.guid}-${type}-${year}`
+);
+
+const get_resources_for_subject_from_table = (subject, type, year) => {
+  const rows = get_rows_for_subject_from_table(subject, type, year);
+  const table = pick_table(type);
+
+  const col_suffix = (!is_planning_year(year) && type === "spending") ? "exp" : "";
+  const col = `${year}${col_suffix}`;
+
+  return table.col_from_nick(col).formula(rows);
+};
+
+export const get_resources_for_subject = (subject, year) => {
+  const spending = get_resources_for_subject_from_table(subject, "spending", year);
+  const ftes = get_resources_for_subject_from_table(subject, "fte", year);
+
+  if(spending || ftes){
+    return {
+      spending,
+      ftes,
+    };
   } else {
     return null;
   }
@@ -35,7 +97,7 @@ export const get_col_defs = ({year}) => [
     header_display: (
       <TM 
         k={ 
-          /planning/.test(year) ? 
+          is_planning_year(year) ? 
             'planned_spending_header' :
             'actual_spending_header'
         }
@@ -54,7 +116,7 @@ export const get_col_defs = ({year}) => [
     header_display: (
       <TM 
         k={ 
-          /planning/.test(year) ? 
+          is_planning_year(year) ? 
             'planned_ftes_header' :
             'actual_ftes_header'
         }

@@ -1,11 +1,12 @@
 import { text_maker } from './result_text_provider.js';
 import {
-  Table,
   Results,
   infograph_href_template,
   businessConstants,
   formats,
 } from '../shared.js';
+
+import { get_resources_for_subject } from '../../../explorer_common/resource_explorer_common.js';
 
 const { 
   Result, 
@@ -26,77 +27,19 @@ const {
   result_simple_statuses,
 } = businessConstants;
 
-const link_to_results_infograph = subj => infograph_href_template(subj, 'results');
-
-function pick_table(subject, type, doc){
-  return Table.lookup(
-    type === "spending" ?
-      "programSpending" :
-      "programFtes"
-  );
-}
-
-const get_rows_for_subject_from_table = _.memoize( (subject, type,doc) => {
-  const table = pick_table(subject, type, doc);
-  if( subject.level === 'program'){
-    const rows_or_record = table.programs.get(subject);
-    if(!rows_or_record){
-      return null;
-    }
-    if(_.isArray(rows_or_record)){ 
-      return rows_or_record;
-    } else {
-      return [ rows_or_record ];
-    }
-  } else if( /dp/.test(doc) && _.includes(["dept", "crso"], subject.level)){
-    return table.q(subject).data;
-  } else if(!_.isEmpty(subject.programs)){
-    return _.chain(subject.programs)
-      .map(prog => get_rows_for_subject_from_table(prog, type, doc) )
-      .flatten()
-      .value();
-  } else if(subject.level === 'ministry'){
-    return _.chain(subject.orgs)
-      .map(org => get_rows_for_subject_from_table(org, type, doc) )
-      .flatten(true)
-      .compact()
-      .value();
-  } else if(!_.isEmpty(subject.children_tags)){
-    return _.chain(subject.children_tags)
-      .map(tag => get_rows_for_subject_from_table(tag, type, doc) )
-      .flatten(true)
-      .uniqBy()
-      .compact()
-      .value();
-  } else {
-    return null;
-  }
-
-}, (subject, type, doc) => `${subject.guid}-${type}-${doc}` );
-
-const get_resources_for_subject_from_table = (subject, type, doc) => {
-  const doc_resource_year = result_docs[doc].primary_resource_year;
-  if ( !_.isUndefined(doc_resource_year) ){
-    const rows = get_rows_for_subject_from_table(subject, type, doc);
-    const table = pick_table(subject, type, doc);
-
-    const col_suffix = (/drr/.test(doc) && type === "spending") ? "exp" : "";
-    const col = `${result_docs[doc].primary_resource_year}${col_suffix}`;
-
-    return table.col_from_nick(col).formula(rows);
-  } else {
-    return false;
-  }
-};
+const link_to_results_infograph = subject => infograph_href_template(subject, 'results');
 
 const results_resource_fragment = (subject, doc) => {
-  const spending = get_resources_for_subject_from_table(subject, "spending", doc);
-  const ftes = get_resources_for_subject_from_table(subject, "fte", doc);
+  const doc_resource_year = result_docs[doc].primary_resource_year;
 
-  return {
-    spending,
-    ftes,
-  };
+  if (doc_resource_year){
+    return get_resources_for_subject(subject, doc_resource_year);
+  } else {
+    return {
+      spending: false,
+      ftes: false,
+    };
+  }
 };
 
 const isDeptWithoutResults = (subject) => _.chain(subject.programs)
