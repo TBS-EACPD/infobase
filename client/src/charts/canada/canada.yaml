@@ -254,7 +254,7 @@ canada_svg:
       <g
         class="label"
         id="ca-nl--label"
-        transform="translate(185,580)" />
+        transform="translate(1195,770)" />
       <g
         class="label"
         id="ca-yt--label"
@@ -262,7 +262,7 @@ canada_svg:
       <g
         class="label"
         id="ca-nt--label"
-        transform="translate(1195,770)" />
+        transform="translate(185,580)" />
       <g
         class="label"
         id="ca-ns--label"
