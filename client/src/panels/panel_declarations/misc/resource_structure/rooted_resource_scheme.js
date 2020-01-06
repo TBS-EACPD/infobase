@@ -7,17 +7,20 @@ import { shallowEqualObjectsOverKeys, sanitized_dangerous_inner_html } from '../
 
 import {
   trivial_text_maker,
-  Results,
+  year_templates,
 } from "../../shared.js";
 
 const {
-  current_drr_key,
-  current_dp_key,
-} = Results;
+  std_years,
+  planning_years,
+} = year_templates;
 
-function create_rooted_resource_hierarchy({doc,root_subject}){
+const actual_year = _.last(std_years);
+const planning_year = _.first(planning_years);
 
-  const get_resources = subject => get_resources_for_subject(subject, doc);
+function create_rooted_resource_hierarchy({year, root_subject}){
+
+  const get_resources = subject => get_resources_for_subject(subject, year);
 
   const root = {
     root: true,
@@ -131,10 +134,10 @@ function create_rooted_resource_hierarchy({doc,root_subject}){
 }
 
 
-const get_initial_resource_state = ({subject, has_drr_data, has_dp_data }) => ({
+const get_initial_resource_state = ({subject, has_planning_data}) => ({
   sort_col: 'spending',
   is_descending: true,
-  doc: has_dp_data ? current_dp_key : current_drr_key,
+  year: has_planning_data ? planning_year : actual_year,
 });
 
 const partial_scheme = {
@@ -145,7 +148,7 @@ const partial_scheme = {
   },
   dispatch_to_props: dispatch => ({ 
     col_click: col_key => dispatch({type: 'column_header_click', payload: col_key }),
-    set_doc: doc => dispatch({type: 'set_doc', payload: doc }),
+    set_year: year => dispatch({type: 'set_year', payload: year }),
   }),
   reducer: (state=get_initial_resource_state({}), action) => {
     const { type, payload } = action;
@@ -156,8 +159,8 @@ const partial_scheme = {
       const mods = clicked_col === sort_col ? { is_descending: !is_descending } : { is_descending: true, sort_col: clicked_col };
 
       return {...state, ...mods};
-    } else if(type === "set_doc"){
-      return {...state, doc: payload };
+    } else if(type === "set_year"){
+      return {...state, year: payload };
     } else {
       return state;
     }
@@ -167,7 +170,7 @@ const partial_scheme = {
     return !shallowEqualObjectsOverKeys(
       oldSchemeState, 
       newSchemeState, 
-      ["doc"] 
+      ["year"] 
     );
   },
 };
@@ -177,9 +180,9 @@ function create_rooted_resource_scheme({subject}){
 
   return {...partial_scheme,
     get_base_hierarchy_selector: () => createSelector(
-      state => state.rooted_resources.doc,
-      doc => create_rooted_resource_hierarchy({ 
-        doc,
+      state => state.rooted_resources.year,
+      year => create_rooted_resource_hierarchy({ 
+        year,
         root_subject: subject,
       })
     ),

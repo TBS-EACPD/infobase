@@ -10,7 +10,8 @@ import {
   InfographicPanel,
   create_text_maker_component,
   TabbedControls,
-  Results,
+  year_templates,
+  run_template,
 } from "../../shared.js";
 
 import '../../../../explorer_common/explorer-styles.scss';
@@ -33,14 +34,12 @@ import {
 const { text_maker, TM } = create_text_maker_component(text);
 
 const {
-  current_drr_key,
-  current_dp_key,
-  result_docs,
-} = Results;
+  std_years,
+  planning_years,
+} = year_templates;
 
-const current_drr_doc = result_docs[current_drr_key];
-const current_dp_doc = result_docs[current_dp_key];
-
+const actual_year = _.last(std_years);
+const planning_year = _.first(planning_years);
 
 const children_grouper = (node, children) => {
   //this one only has one depth, so the root must group its children
@@ -97,17 +96,17 @@ class RootedResourceExplorer extends React.Component {
       is_descending,
       sort_col,
       col_click,
-      doc,
-      set_doc,
+      year,
+      set_year,
       subject,
-      has_dp_data,
-      has_drr_data,
+      has_planning_data,
+      has_actual_data,
     } = this.props;
 
     const root = get_root(flat_nodes);
 
     const explorer_config = {
-      column_defs: get_col_defs({doc}),
+      column_defs: get_col_defs({year}),
       onClickExpand: id => toggle_node(id),
       is_sortable: true,
       zebra_stripe: true,
@@ -137,22 +136,22 @@ class RootedResourceExplorer extends React.Component {
       return inner_content;
     }
  
-    const tab_on_click = (doc) => set_doc !== doc && set_doc(doc);
+    const tab_on_click = (year) => set_year !== year && set_year(year);
 
     return (
       <div className="tabbed-content">
         <TabbedControls
           tab_callback={ tab_on_click }
           tab_options={ _.compact([
-            has_drr_data && {
-              label: <TM k="actual_resources" args={{year: current_drr_doc.primary_resource_year_written}} />,
-              key: current_drr_key, 
-              is_open: doc === current_drr_key,
+            has_actual_data && {
+              label: <TM k="actual_resources" args={{year: run_template(actual_year)}} />,
+              key: actual_year, 
+              is_open: year === actual_year,
             },
-            has_dp_data && {
-              key: current_dp_key, 
-              label: <TM k="planned_resources" args={{year: current_dp_doc.primary_resource_year_written}} />,
-              is_open: doc === current_dp_key,
+            has_planning_data && {
+              key: planning_year, 
+              label: <TM k="planned_resources" args={{year: run_template(planning_year)}} />,
+              is_open: year === planning_year,
             },
           ])}
         />
@@ -183,8 +182,8 @@ class RootedResourceExplorerContainer extends React.Component {
       rooted_resource_scheme: scheme,
       initial_rooted_resource_state,
       subject,
-      has_dp_data,
-      has_drr_data,
+      has_planning_data,
+      has_actual_data,
     } = this.props;
 
     const scheme_key = scheme.key;
@@ -213,8 +212,8 @@ class RootedResourceExplorerContainer extends React.Component {
         <Container
           scheme={scheme}
           subject={subject}
-          has_dp_data={has_dp_data}
-          has_drr_data={has_drr_data}
+          has_planning_data={has_planning_data}
+          has_actual_data={has_actual_data}
         />
       </Provider>
     );
@@ -240,12 +239,12 @@ export const declare_resource_structure_panel = () => declare_panel({
         )
       );
 
-      const has_drr_data = current_drr_doc.primary_resource_year && has_some_program_spending_for_year(`${current_drr_doc.primary_resource_year}exp`);
-      const has_dp_data = current_dp_doc.primary_resource_year && has_some_program_spending_for_year(current_dp_doc.primary_resource_year);
+      const has_actual_data = has_some_program_spending_for_year(`${actual_year}exp`);
+      const has_planning_data = has_some_program_spending_for_year(planning_year);
 
-      return (has_dp_data || has_drr_data) && {
-        has_dp_data,
-        has_drr_data,
+      return (has_planning_data || has_actual_data) && {
+        has_planning_data,
+        has_actual_data,
       };
     },
   
@@ -253,8 +252,8 @@ export const declare_resource_structure_panel = () => declare_panel({
       const { 
         subject, 
         panel_args: {
-          has_dp_data,
-          has_drr_data,
+          has_planning_data,
+          has_actual_data,
         },
       } = calculations;
   
@@ -266,10 +265,10 @@ export const declare_resource_structure_panel = () => declare_panel({
         >
           <RootedResourceExplorerContainer 
             subject={subject} 
-            has_dp_data={has_dp_data}
-            has_drr_data={has_drr_data}
+            has_planning_data={has_planning_data}
+            has_actual_data={has_actual_data}
             rooted_resource_scheme={scheme}
-            initial_rooted_resource_state={get_initial_resource_state({subject, has_dp_data, has_drr_data})}
+            initial_rooted_resource_state={get_initial_resource_state({subject, has_planning_data, has_actual_data})}
           />
         </InfographicPanel>
       );
