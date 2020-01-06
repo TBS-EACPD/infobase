@@ -10,7 +10,8 @@ import { StandardRouteContainer } from '../core/NavComponents.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import { Subject } from '../models/subject.js';
 import { GlossaryEntry } from '../models/glossary.js';
-import { current_drr_key, current_dp_key, result_docs } from '../models/results.js';
+import { year_templates} from '../models/years.js';
+import { run_template } from '../models/text.js';
 import { 
   create_text_maker_component,
   SpinnerWrapper,
@@ -19,8 +20,6 @@ import {
   AlertBanner,
   GlossaryIcon,
 } from '../components/index.js';
-
-const { Tag } = Subject;
 
 //drilldown stuff
 import { combineReducers, createStore } from 'redux';
@@ -40,9 +39,15 @@ import { Explorer } from '../explorer_common/explorer_components.js';
 
 import { resource_scheme, get_initial_resource_state } from './resource_scheme.js';
 
-const INCLUDE_OTHER_TAGS = true;
+const { Tag } = Subject;
 
 const { text_maker, TM } = create_text_maker_component(text);
+
+const { std_years, planning_years } = year_templates;
+const actual_year = _.last(std_years);
+const planning_year = _.first(planning_years);
+
+const INCLUDE_OTHER_TAGS = true;
 
 const dp_only_schemes = ["MLT"];
 
@@ -144,13 +149,13 @@ class ExplorerPage extends React.Component {
       is_descending,
       sort_col,
       col_click,
-      doc,
+      year,
       is_m2m,
     } = this.props;
 
 
     const explorer_config = {
-      column_defs: get_col_defs({doc}),
+      column_defs: get_col_defs({year}),
       onClickExpand: id => toggle_node(id),
       is_sortable: true,
       zebra_stripe: true,
@@ -258,7 +263,7 @@ class ExplorerPage extends React.Component {
     </div>;
     
     // DRR_TODO: refine the checks for including other tags, drr18 has all the tags dp19 does
-    const all_category_props = [ min_props, dept_props, goco_props, hwh_props, ...(doc === "dp19" && INCLUDE_OTHER_TAGS ? [wwh_props, hi_props] : []) ];
+    const all_category_props = [ min_props, dept_props, goco_props, hwh_props, ...(INCLUDE_OTHER_TAGS ? [wwh_props, hi_props] : []) ];
     const current_category = _.find(all_category_props, props => props.active);
     return <div>
       <TM k="tag_nav_intro_text" el="div" />
@@ -269,8 +274,8 @@ class ExplorerPage extends React.Component {
               const route_base = window.location.href.split('#')[0];
 
               const new_route = {
-                [current_drr_key]: `#tag-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/${current_drr_key}`,
-                [current_dp_key]: `#tag-explorer/${hierarchy_scheme}/${current_dp_key}`,
+                [actual_year]: `#tag-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/${actual_year}`,
+                [planning_year]: `#tag-explorer/${hierarchy_scheme}/${planning_year}`,
               }[key];
 
               window.location.href = `${route_base}${new_route}`;
@@ -278,14 +283,14 @@ class ExplorerPage extends React.Component {
           }
           tab_options = {[
             {
-              key: current_drr_key, 
-              label: <TM k="actual_resources" args={{year: result_docs[current_drr_key].primary_resource_year_written}}/>,
-              is_open: doc === current_drr_key,
+              key: actual_year, 
+              label: <TM k="actual_resources" args={{year: run_template(actual_year)}}/>,
+              is_open: year === actual_year,
             },
             {
-              key: current_dp_key, 
-              label: <TM k="planned_resources" args={{year: result_docs[current_dp_key].primary_resource_year_written}}/>,
-              is_open: doc === current_dp_key,
+              key: planning_year, 
+              label: <TM k="planned_resources" args={{year: run_template(planning_year)}}/>,
+              is_open: year === planning_year,
             },
           ]}
         />
@@ -293,7 +298,7 @@ class ExplorerPage extends React.Component {
           <div>
             <ul className="nav nav-justified nav-pills">
               {_.map(all_category_props, props =>
-                <li key={props.id} className={classNames(props.active && 'active')}><a href={`#tag-explorer/${props.id}/${doc}`} >{props.title}</a></li>
+                <li key={props.id} className={classNames(props.active && 'active')}><a href={`#tag-explorer/${props.id}/${year}`} >{props.title}</a></li>
               )}
             </ul>
           </div>
@@ -351,7 +356,7 @@ const map_state_to_props_from_memoized_funcs = memoized_funcs => {
 class OldExplorerContainer extends React.Component {
   constructor(props){
     super();
-    const { hierarchy_scheme, doc } = props;
+    const { hierarchy_scheme, year } = props;
     const scheme = resource_scheme;
     const scheme_key = scheme.key;
 
@@ -369,7 +374,7 @@ class OldExplorerContainer extends React.Component {
 
     const initialState = {
       root: ({...initial_root_state, scheme_key}),
-      [scheme_key]: get_initial_resource_state({ hierarchy_scheme, doc }),
+      [scheme_key]: get_initial_resource_state({ hierarchy_scheme, year }),
     };
 
     const connecter = connect(mapStateToProps, mapDispatchToProps);
@@ -382,10 +387,10 @@ class OldExplorerContainer extends React.Component {
     };
   }
   static getDerivedStateFromProps(nextProps, prevState){
-    const { hierarchy_scheme, doc } = nextProps;
+    const { hierarchy_scheme, year } = nextProps;
     const { store } = prevState;
 
-    resource_scheme.set_hierarchy_and_doc(store, hierarchy_scheme, doc);
+    resource_scheme.set_hierarchy_and_year(store, hierarchy_scheme, year);
     
     return null;
   }
@@ -433,7 +438,7 @@ export default class TagExplorer extends React.Component {
     let { 
       params: {
         hierarchy_scheme,
-        doc,
+        year,
       },
     } = match;
 
@@ -443,23 +448,16 @@ export default class TagExplorer extends React.Component {
         'min'
     );
 
-    doc = (
-      _.includes([current_drr_key, current_drr_key], doc) ? 
-        doc :
-        current_dp_key
+    year = (
+      _.includes([actual_year, planning_year], year) ? 
+        year :
+        planning_year
     );
-
-    // vv delete on drr17 exit, GIVEN that the new DRR is fully tagged, which is should be
-    //additional validation
-    if( doc == "drr17" && !_.includes(['min','dept','GOCO','HWH'], hierarchy_scheme) ){
-      hierarchy_scheme = "min";
-    }
-    // ^^ delete on drr17 exit
     
     return (
       <StandardRouteContainer {...route_container_args}>
         {header}
-        <OldExplorerContainer {...{hierarchy_scheme, doc}} />
+        <OldExplorerContainer {...{hierarchy_scheme, year}} />
       </StandardRouteContainer>
     );
   }

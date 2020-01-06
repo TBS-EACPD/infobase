@@ -48,9 +48,9 @@ const related_tags_row = (related_tags, subject_type) => {
   };
 };
 
-function create_resource_hierarchy({hierarchy_scheme,doc}){
+function create_resource_hierarchy({hierarchy_scheme, year}){
 
-  const get_resources = subject => get_resources_for_subject(subject, doc);
+  const get_resources = subject => get_resources_for_subject(subject, year);
 
   const root = {
     root: true,
@@ -240,9 +240,9 @@ function create_resource_hierarchy({hierarchy_scheme,doc}){
 }
 
 
-const get_initial_resource_state = ({hierarchy_scheme, doc}) => ({
+const get_initial_resource_state = ({hierarchy_scheme, year}) => ({
   hierarchy_scheme: hierarchy_scheme || "min",
-  doc: doc || current_dp_key,
+  year: year || current_dp_key,
   sort_col: _.includes(non_rolling_up_schemes, hierarchy_scheme) ? 'name' : 'spending',
   is_descending: !_.includes(non_rolling_up_schemes, hierarchy_scheme),
 });
@@ -260,17 +260,17 @@ const resource_scheme = {
     col_click: col_key => dispatch({ type: 'column_header_click', payload: col_key }),
   }),
   //this helps the URL override store actions
-  set_hierarchy_and_doc(store, hierarchy_scheme, doc){
+  set_hierarchy_and_year(store, hierarchy_scheme, year){
     store.dispatch({
-      type: "set_hierarchy_and_doc",
-      payload: { hierarchy_scheme, doc }, 
+      type: "set_hierarchy_and_year",
+      payload: { hierarchy_scheme, year }, 
     });
   },
   reducer: (state=get_initial_resource_state({}), action) => {
     const { type, payload } = action;
-    if(type === 'set_hierarchy_and_doc'){
-      const { hierarchy_scheme, doc } = payload;
-      return ({...state, hierarchy_scheme, doc });
+    if(type === 'set_hierarchy_and_year'){
+      const { hierarchy_scheme, year } = payload;
+      return ({...state, hierarchy_scheme, year });
     } else if(type === 'set_hierarchy_scheme'){
       return ({...state, hierarchy_scheme: payload });
     } else if(type === 'column_header_click'){
@@ -280,8 +280,8 @@ const resource_scheme = {
       const mods = clicked_col === sort_col ? { is_descending: !is_descending } : { is_descending: true, sort_col: clicked_col };
 
       return ({...state, ...mods});
-    } else if(type==="set_doc"){
-      return ({...state, doc: payload });
+    } else if(type==="set_year"){
+      return ({...state, year: payload });
     } else {
       return state;
     }
@@ -289,17 +289,17 @@ const resource_scheme = {
   },
   get_base_hierarchy_selector: () => createSelector(
     state => state.resources.hierarchy_scheme,
-    state => state.resources.doc,
-    (hierarchy_scheme, doc) => create_resource_hierarchy({ 
+    state => state.resources.year,
+    (hierarchy_scheme, year) => create_resource_hierarchy({ 
       hierarchy_scheme,
-      doc,
+      year,
     })
   ),
   shouldUpdateFlatNodes(oldSchemeState, newSchemeState){
     return !shallowEqualObjectsOverKeys(
       oldSchemeState, 
       newSchemeState, 
-      ['hierarchy_scheme', 'doc' ] 
+      ['hierarchy_scheme', 'year' ] 
     );
   },
 };
