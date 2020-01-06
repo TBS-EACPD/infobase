@@ -10,7 +10,7 @@ import {
   root_reducer,
   map_state_to_root_props_from_memoized_funcs,
   map_dispatch_to_root_props,
-} from '../../../../explorer_common/state_and_memoizing';
+} from '../../../../explorer_common/state_and_memoizing.js';
 import { 
   get_col_defs,
   provide_sort_func_selector,

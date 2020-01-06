@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
-import { provide_sort_func_selector, get_resources_for_subject } from './resource_explorer_common.js';
-import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './hierarchy_tools.js';
+import { provide_sort_func_selector, get_resources_for_subject } from '../explorer_common/resource_explorer_common.js';
+import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from '../explorer_common/hierarchy_tools.js';
 
 import { infograph_href_template } from '../link_utils.js';
 import { shallowEqualObjectsOverKeys, sanitized_dangerous_inner_html } from '../general_utils.js';

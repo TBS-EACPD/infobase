@@ -1,19 +1,20 @@
-import { Subject } from '../models/subject.js';
-
 import { createSelector } from 'reselect';
 
-import { filter_hierarchy } from './hierarchy_tools.js';
+import { filter_hierarchy } from '../../../../explorer_common/hierarchy_tools.js';
 
 import { create_full_results_hierarchy } from './result_hierarchies.js';
 
-import { Indicator } from '../models/results.js';
-
-import { ensure_loaded } from '../core/lazy_loader.js';
+import {
+  ensure_loaded,
+  Subject,
+  Results, 
+} from '../../shared.js';
 
 const { 
   get_by_guid, 
 } = Subject;
 
+const { Indicator } = Results;
 
 export const get_initial_single_subj_results_state = ({subj_guid, doc, mode, docs_with_data }) => ({
   data_loading: false, // smoother if responsibility for loading initial state data falls outside redux, so assume start with data loaded

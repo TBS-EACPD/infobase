@@ -1,13 +1,16 @@
-import { get_resources_for_subject } from './resource_explorer_common.js';
-import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from './hierarchy_tools.js';
+import { get_resources_for_subject } from '../../../../explorer_common/resource_explorer_common.js';
+import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from '../../../../explorer_common/hierarchy_tools.js';
 
-import { Subject } from '../models/subject.js';
 import { 
-  Result, 
-  SubProgramEntity,
-} from '../models/results.js';
+  Subject,
+  Results,
+} from '../../shared.js';
 
 const { Dept } = Subject;
+const { 
+  Result, 
+  SubProgramEntity,
+} = Results;
 
 const indicator_date_sorter = (ind) => ind.target_year ? ind.target_year + ind.target_month/12 : Infinity;
 function result_to_node(result, parent_id, doc){

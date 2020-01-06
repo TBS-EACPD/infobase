@@ -26,7 +26,7 @@ export {
   declare_late_dps_warning_panel,
 } from './warning_panels.js';
 
-export { declare_resource_structure_panel } from './resource_structure.js';
+export { declare_resource_structure_panel } from './resource_structure/resource_structure.js';
 
 export { declare_links_to_rpb_panel } from './rpb_links.js';
 

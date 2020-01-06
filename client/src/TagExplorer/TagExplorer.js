@@ -29,7 +29,6 @@ import { Provider, connect } from 'react-redux';
 
 import { get_col_defs } from '../explorer_common/resource_explorer_common.js';
 import { get_root } from '../explorer_common/hierarchy_tools.js';
-import { resource_scheme, get_initial_resource_state } from '../explorer_common/resource_scheme.js';
 import { 
   get_memoized_funcs, 
   initial_root_state, 
@@ -38,6 +37,8 @@ import {
   map_dispatch_to_root_props,
 } from '../explorer_common/state_and_memoizing.js';
 import { Explorer } from '../explorer_common/explorer_components.js';
+
+import { resource_scheme, get_initial_resource_state } from './resource_scheme.js';
 
 const INCLUDE_OTHER_TAGS = true;
 
