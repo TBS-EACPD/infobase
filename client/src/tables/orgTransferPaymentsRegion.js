@@ -1,13 +1,12 @@
 import text from './orgTransferPaymentsRegion.yaml';
 import {
   businessConstants,
-  years,
+  year_templates,
   Statistics,
-  stats,
 } from "./table_common.js";
 
 const { provinces } = businessConstants;
-const { std_years } = years;
+const { std_years } = year_templates;
 
 export default {
   text,
