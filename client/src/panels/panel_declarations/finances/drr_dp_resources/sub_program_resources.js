@@ -1,3 +1,9 @@
+import text from "./sub_program_resources.yaml";
+
+import { createSelector } from 'reselect';
+import { combineReducers, createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
+
 import '../../../../explorer_common/explorer-styles.scss';
 import {
   get_root,
@@ -11,17 +17,7 @@ import {
   map_state_to_root_props_from_memoized_funcs,
   map_dispatch_to_root_props,
 } from '../../../../explorer_common/state_and_memoizing.js';
-import { 
-  get_col_defs,
-  provide_sort_func_selector,
-} from '../../../../explorer_common/resource_explorer_common.js';
-
-
-import text from "./sub_program_resources.yaml";
-
-import { createSelector } from 'reselect';
-import { combineReducers, createStore } from 'redux';
-import { Provider, connect } from 'react-redux';
+import { provide_sort_func_selector } from '../../../../explorer_common/resource_explorer_common.js';
 
 import { PlannedActualTable } from '../planned_actual_comparison/PlannedActualTable.js';
 
@@ -33,10 +29,10 @@ import {
   create_text_maker_component,
   TabbedControls,
   util_components,
+  Format,
 
   declare_panel,
 } from "../../shared.js";
-
 
 
 const { Explorer } = util_components;
@@ -49,6 +45,7 @@ const {
   SubProgramEntity,
   ResultCounts,
   get_result_doc_keys,
+  result_docs,
 } = Results;
 
 const { 
@@ -58,6 +55,7 @@ const {
 
 const latest_drr_doc_key = _.last( get_result_doc_keys('drr') );
 const latest_dp_doc_key = _.last( get_result_doc_keys('dp') );
+
 
 const sub_to_node = (sub,doc) => ({
   id: sub.id,
@@ -153,6 +151,54 @@ const get_non_col_renderer = ({doc}) => ({node}) => {
     </div>
   );
 };
+
+const get_col_defs = ({doc}) => [
+  {
+    id: 'name',
+    width: 250,
+    textAlign: "left",
+    header_display: <TM k="name" />,
+    get_val: ({data}) => data.name,
+  },
+  {
+    id: "spending",
+    width: 150,
+    textAlign: "right",
+    header_display: (
+      <TM 
+        k={ 
+          /dp/.test(doc) ? 
+            "planned_spending_header" : 
+            'actual_spending_header' 
+        }
+        args={{
+          year: result_docs[doc].primary_resource_year_written,
+        }}
+      />
+    ),
+    get_val: node => _.get(node, "data.resources.spending"),
+    val_display: val => _.isNumber(val) ? <Format type="compact1" content={val} /> : null,
+  },
+  {
+    id: "ftes",
+    width: 150,
+    textAlign: "right",
+    header_display: (
+      <TM 
+        k={ 
+          /dp/.test(doc) ? 
+            "planned_ftes_header" : 
+            'actual_ftes_header' 
+        }
+        args={{
+          year: result_docs[doc].primary_resource_year_written,
+        }}
+      />
+    ),
+    get_val: node => _.get(node, "data.resources.ftes"),
+    val_display: val => _.isNumber(val) ? <Format type="big_int" content={val} /> : null,
+  },
+];
 
 
 

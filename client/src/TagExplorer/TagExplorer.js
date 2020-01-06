@@ -1,6 +1,5 @@
-import '../explorer_common/explorer-styles.scss';
-
 import text from './TagExplorer.yaml';
+
 import { Fragment } from 'react';
 import classNames from 'classnames';
 
@@ -27,6 +26,7 @@ const { Tag } = Subject;
 import { combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
+import '../explorer_common/explorer-styles.scss';
 import { get_col_defs } from '../explorer_common/resource_explorer_common.js';
 import { get_root } from '../explorer_common/hierarchy_tools.js';
 import { 
