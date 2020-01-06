@@ -1,4 +1,4 @@
-import './results.scss';
+import './result_components.scss';
 import { TM, text_maker } from './result_text_provider.js';
 
 import { Fragment } from 'react';

@@ -1,3 +1,5 @@
+import './result_flat_table.scss';
+
 import { Fragment } from 'react';
 
 import { TM, text_maker } from './result_text_provider.js';

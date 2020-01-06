@@ -1,4 +1,4 @@
-import './results.scss';
+import './drr_summary.scss';
 import { TM, text_maker } from './drr_summary_text.js';
 
 import classNames from 'classnames';

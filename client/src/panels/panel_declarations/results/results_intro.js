@@ -1,5 +1,3 @@
-import './results.scss';
-
 import {
   Subject,
   declare_panel,
@@ -8,8 +6,10 @@ import {
   create_text_maker_component,
 } from "../shared.js";
 const { Dept } = Subject;
-import text from './results_intro_text.yaml';
+
 import { get_static_url } from '../../../request_utils.js';
+
+import text from './results_intro_text.yaml';
 import { 
   ResultCounts,
   result_docs,
