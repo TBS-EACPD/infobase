@@ -33,12 +33,6 @@ export { DisplayTable } from './DisplayTable.js';
 export { LabeledTable } from './LabeledTable.js';
 export { FootnoteList } from './FootnoteList.js';
 
-export {
-  Explorer,
-  ExplorerHeader,
-  ExplorerNode,
-} from './ExplorerComponents.js';
-
 export { StatelessModal, FixedPopover } from './modals_and_popovers';
 
 export {

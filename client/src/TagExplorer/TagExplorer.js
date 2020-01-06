@@ -37,7 +37,7 @@ import {
   map_state_to_root_props_from_memoized_funcs, 
   map_dispatch_to_root_props,
 } from '../explorer_common/state_and_memoizing.js';
-import { Explorer } from '../components/ExplorerComponents.js';
+import { Explorer } from '../explorer_common/explorer_components.js';
 
 const INCLUDE_OTHER_TAGS = true;
 

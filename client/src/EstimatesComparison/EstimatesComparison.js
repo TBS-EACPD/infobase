@@ -24,8 +24,8 @@ import {
   map_state_to_root_props_from_memoized_funcs,
   map_dispatch_to_root_props,
 } from '../explorer_common/state_and_memoizing';
+import { Explorer } from '../explorer_common/explorer_components.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
-import { Explorer } from '../components/ExplorerComponents.js';
 import {
   estimates_diff_scheme,
   col_defs,
