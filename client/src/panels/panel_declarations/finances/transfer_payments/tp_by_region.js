@@ -3,7 +3,7 @@ import {
   formats,
   run_template,
   declare_panel,
-  years,
+  year_templates,
   businessConstants,
   create_text_maker_component,
   StdPanel,
@@ -12,7 +12,7 @@ import {
 } from "../../shared.js";
 import { Canada } from '../../../../charts/canada/index.js';
 
-const { std_years } = years;
+const { std_years } = year_templates;
 const formatter = formats["compact2_raw"];
 
 const { text_maker } = create_text_maker_component(text);
