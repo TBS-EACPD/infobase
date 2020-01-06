@@ -66,7 +66,7 @@ export class App extends React.Component {
                 from="/resource-explorer/:hierarchy_scheme?/:doc?"
                 to="/tag-explorer/:hierarchy_scheme?/:doc?"
               />
-              <Route path="/tag-explorer/:hierarchy_scheme?/:doc?" component={TagExplorer} />
+              <Route path="/tag-explorer/:hierarchy_scheme?/:year?" component={TagExplorer} />
               <Route path="/orgs/:level/:subject_id/infograph/:active_bubble_id?/:options?/" component={Infographic} />
               <Route path="/glossary/:active_key?" component={Glossary} />
               <Redirect 
