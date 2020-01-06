@@ -2,7 +2,7 @@ import {
   TrivialTM as TM,
   Format,
 } from '../components/index.js';
-import { result_docs } from '../models/results.js';
+import { run_template } from '../models/text.js';
 
 import { createSelector } from 'reselect';
 
@@ -20,7 +20,7 @@ export const get_resources_for_subject = (subject, doc) => {
 };
 
 
-export const get_col_defs = ({doc}) => [
+export const get_col_defs = ({year}) => [
   {
     id: 'name',
     width: 250,
@@ -35,12 +35,12 @@ export const get_col_defs = ({doc}) => [
     header_display: (
       <TM 
         k={ 
-          /dp/.test(doc) ? 
-            "planned_spending_header" : 
-            'actual_spending_header' 
+          /planning/.test(year) ? 
+            'planned_spending_header' :
+            'actual_spending_header'
         }
         args={{
-          year: result_docs[doc].primary_resource_year_written,
+          year: run_template(year),
         }}
       />
     ),
@@ -54,12 +54,12 @@ export const get_col_defs = ({doc}) => [
     header_display: (
       <TM 
         k={ 
-          /dp/.test(doc) ? 
-            "planned_ftes_header" : 
-            'actual_ftes_header' 
+          /planning/.test(year) ? 
+            'planned_ftes_header' :
+            'actual_ftes_header'
         }
         args={{
-          year: result_docs[doc].primary_resource_year_written,
+          year: run_template(year),
         }}
       />
     ),
