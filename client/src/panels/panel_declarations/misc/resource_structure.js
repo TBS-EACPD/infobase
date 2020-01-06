@@ -4,12 +4,8 @@ import text from './resource_structure.yaml';
 import { combineReducers, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { Fragment } from 'react';
-import { Explorer } from '../../../components/ExplorerComponents.js';
 
 import { infograph_href_template } from '../../../link_utils.js';
-import { get_root } from '../../../explorer_common/hierarchy_tools.js';
-import { get_col_defs } from '../../../explorer_common/resource_explorer_common.js';
-
 import {
   declare_panel,
   InfographicPanel,
@@ -17,11 +13,14 @@ import {
   TabbedControls,
   Results,
 } from "../shared.js";
+
+import { get_root } from '../../../explorer_common/hierarchy_tools.js';
+import { get_col_defs } from '../../../explorer_common/resource_explorer_common.js';
+import { Explorer } from '../../../explorer_common/explorer_components.js';
 import {
   create_rooted_resource_scheme,
   get_initial_resource_state,
 } from '../../../explorer_common/rooted_resource_scheme.js';
-
 import {
   get_memoized_funcs,
   initial_root_state,

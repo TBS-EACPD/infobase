@@ -28,7 +28,6 @@ import {
 import { StatusIconTable, InlineStatusIconList } from './result_components.js';
 import { TM, text_maker } from './result_text_provider.js';
 
-import { Explorer } from '../../../components/ExplorerComponents.js';
 
 //drilldown stuff
 import { createSelector } from 'reselect';
@@ -36,6 +35,7 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import redux_promise_middleware from 'redux-promise-middleware';
 import { Provider, connect } from 'react-redux';
 
+import { Explorer } from '../../../explorer_common/explorer_components.js';
 import { get_root } from '../../../explorer_common/hierarchy_tools.js';
 import { single_subj_results_scheme, get_initial_single_subj_results_state } from '../../../explorer_common/results_scheme.js';
 import { 

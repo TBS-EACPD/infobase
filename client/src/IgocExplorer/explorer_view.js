@@ -1,13 +1,16 @@
 import '../explorer_common/explorer-styles.scss';
+import { igoc_tmf as text_maker, TM } from './igoc_explorer_text.js';
+
 import { Fragment } from 'react';
 import { createSelector } from 'reselect';
 import classNames from 'classnames';
-import { infograph_href_template } from '../link_utils.js';
+
 import { get_root } from '../explorer_common/hierarchy_tools.js';
-import { igoc_tmf as text_maker, TM } from './igoc_explorer_text.js';
-import { SpinnerWrapper, DlItem } from '../components/index.js';
+import { Explorer } from '../explorer_common/explorer_components.js';
+
+import { infograph_href_template } from '../link_utils.js';
 import { sanitized_dangerous_inner_html } from '../general_utils.js';
-import { Explorer } from '../components/ExplorerComponents.js';
+import { SpinnerWrapper, DlItem } from '../components/index.js';
 import { Subject } from '../models/subject.js';
 
 const { InstForm } = Subject;

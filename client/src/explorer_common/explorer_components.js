@@ -1,11 +1,15 @@
-import './ExplorerComponents.scss';
+import './explorer-components.scss';
+
 import classNames from 'classnames';
 import { TransitionGroup } from 'react-transition-group';
 import FlipMove from 'react-flip-move';
 import { createSelector } from 'reselect';
 
-import { FirstChild, AccordionEnterExit } from './Accordions.js';
-import { SortDirections } from './SortDirection.js';
+import {
+  FirstChild,
+  AccordionEnterExit,
+  SortDirections,
+} from '../components/index.js';
 
 import { trivial_text_maker } from '../models/text.js';
 
