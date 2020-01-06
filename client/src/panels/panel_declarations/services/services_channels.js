@@ -91,27 +91,34 @@ class ServicesChannelsPanel extends React.Component {
               <div>
                 {selected_title}
               </div>
-              <div className="fcol-md-9" style = {{height: '300px'}} aria-hidden = {true}>
-                <NivoResponsiveBar
-                  data = {bar_data}
-                  indexBy = "label"
-                  colorBy = {d => colors(d.id)}
-                  keys = {["number"]}
-                  is_money = {false}
-                  bttm_axis = {{
-                    tickRotation: 45,
-                  }}
-                  margin = {{
-                    top: 15,
-                    right: 60,
-                    bottom: 130,
-                    left: 60,
-                  }}
-                  table_switch = {true}
-                  table_data_headers={["TODO name of whatever","TODO number of whatever"]}
-                />
+              <div className="frow">
+                <div className="fcol-md-9" aria-hidden = {true}>
+                  <NivoResponsiveBar
+                    data = {bar_data}
+                    indexBy = "label"
+                    colorBy = {d => colors(d.id)}
+                    keys = {["number"]}
+                    is_money = {false}
+                    bttm_axis = {{
+                      tickRotation: 45,
+                    }}
+                    margin = {{
+                      top: 15,
+                      right: 60,
+                      bottom: 130,
+                      left: 60,
+                    }}
+                    graph_height = {"300px"}
+                    table_switch = {true}
+                    table_data_headers={["TODO name of whatever","TODO number of whatever"]}
+                  />
+                </div>
+                { selected_service_id !== "all" && 
+                  <div className="fcol-md-3">
+                    <GraphLegend items={feedback_channel_statuses} />
+                  </div>
+                }
               </div>
-              { selected_service_id !== "all" && <GraphLegend items={feedback_channel_statuses} /> }
             </Fragment>
         }
       </Fragment>
