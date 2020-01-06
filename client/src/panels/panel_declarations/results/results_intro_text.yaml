@@ -72,4 +72,4 @@ reports_links_text:
   en: |
     The full text of all {{gl_tt "Departmental Plans" "DP"}} can be found {{ext_link "here" dp_url "index of Departmental Plans"}}. {{gl_tt "Departmental Results Reports" "DRR"}} can be found {{ext_link "here" drr_url "index of Departmental Results Reports"}}.
   fr: |
-    TODO
+    Les documents complets des {{gl_tt "plans ministériels" "DP"}} se trouvent {{ext_link "içi" dp_url "liste des plans ministériels"}}. Les {{gl_tt "rapports sur les résultats ministériels" "DRR"}} se trouvent {{ext_link "içi" drr_url "liste des rapports sur les résultats ministériels"}}.
