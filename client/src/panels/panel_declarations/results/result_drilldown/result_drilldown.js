@@ -1,4 +1,4 @@
-import './results.scss';
+import '../results.scss';
 
 import classNames from 'classnames';
 
@@ -12,7 +12,7 @@ import {
   ensure_loaded,
   
   declare_panel, 
-} from '../shared.js';
+} from '../../shared.js';
 const { 
   SpinnerWrapper,
   Format,
@@ -24,9 +24,9 @@ import {
   ResultCounts,
   GranularResultCounts,
   result_docs,
-} from './results_common.js';
-import { StatusIconTable, InlineStatusIconList } from './result_components.js';
-import { TM, text_maker } from './result_text_provider.js';
+} from '../results_common.js';
+import { StatusIconTable, InlineStatusIconList } from '../result_components.js';
+import { TM, text_maker } from '../result_text_provider.js';
 
 
 //drilldown stuff
@@ -35,23 +35,24 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import redux_promise_middleware from 'redux-promise-middleware';
 import { Provider, connect } from 'react-redux';
 
-import { Explorer } from '../../../explorer_common/explorer_components.js';
-import { get_root } from '../../../explorer_common/hierarchy_tools.js';
-import { single_subj_results_scheme, get_initial_single_subj_results_state } from '../../../explorer_common/results_scheme.js';
-import { 
-  get_type_name, 
-  ResultNodeContent, 
-  spending_header, 
-  fte_header, 
-  ResultCounts as ResultCountsComponent,
-} from '../../../explorer_common/result_displays.js';
+import { Explorer } from '../../../../explorer_common/explorer_components.js';
+import { get_root } from '../../../../explorer_common/hierarchy_tools.js';
 import { 
   get_memoized_funcs, 
   initial_root_state, 
   root_reducer, 
   map_state_to_root_props_from_memoized_funcs, 
   map_dispatch_to_root_props, 
-} from '../../../explorer_common/state_and_memoizing';
+} from '../../../../explorer_common/state_and_memoizing.js';
+
+import { single_subj_results_scheme, get_initial_single_subj_results_state } from './results_scheme.js';
+import { 
+  get_type_name, 
+  ResultNodeContent, 
+  spending_header, 
+  fte_header, 
+  ResultCounts as ResultCountsComponent,
+} from './result_displays.js';
 
 
 const get_non_col_content_func = createSelector(
