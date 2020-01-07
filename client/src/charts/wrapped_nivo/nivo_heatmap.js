@@ -34,7 +34,6 @@ export class NivoResponsiveHeatMap extends React.Component {
       remove_left_axis,
       motion_stiffness,
       motion_damping,
-      table_switch,
       label_col_header,
       graph_height,
     } = this.props;
@@ -86,24 +85,6 @@ export class NivoResponsiveHeatMap extends React.Component {
             table_data_headers={keys}
             table_name={"TODO"}
           />
-        )}
-        {table_switch && (
-          <button
-            style={{
-              zIndex: 999,
-              padding: "0px",
-            }}
-            className="btn-ib-zoom"
-            onClick={() => {
-              this.setState({
-                show_table: !show_table,
-              });
-            }}
-          >
-            {this.state.show_table
-              ? trivial_text_maker("switch_to_graph")
-              : trivial_text_maker("switch_to_table")}
-          </button>
         )}
       </Fragment>
     );
