@@ -27,7 +27,7 @@
   text-align: center !important;
   padding: 10px;
 
-  @media(max-width: $maxExtraSmallDevice) {
+  @media(max-width: $maxSmallDevice) {
     min-height: 275px;
     padding: 0px;
   }
@@ -37,11 +37,17 @@
   padding: 20px;
   @media(max-width: $maxExtraSmallDevice) {
     padding: 0px;
+    height: 100px;
+  }
+  @media(min-width: $minExtraSmallDevice) {
+    height: 150px;
+    width: 100%;
   }
 }
 
 .top-img-card__img {
-  width: 50%;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .top-img-card__bottom {
@@ -58,4 +64,12 @@
   font-size: 1.25em;
   padding: 10px;
   color: $textColor;
+}
+
+.top-img-card-container[href]{
+  &:hover, &:focus {
+    & > .top-img-card {
+      background-color: lighten($tertiaryColor, 30%) !important;
+    }
+  }
 }
