@@ -5,9 +5,11 @@ import {
   Format,
 } from '../components/index.js';
 import { run_template } from '../models/text.js';
+import { year_templates } from '../models/years.js';
 import { Table } from '../core/TableClass.js';
 
-const is_planning_year = (year) => /planning/.test(year);
+
+const is_planning_year = (year) => _.includes(year_templates.planning_years, year);
 
 
 const pick_table = (type) => Table.lookup(
