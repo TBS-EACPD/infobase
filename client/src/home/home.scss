@@ -223,11 +223,10 @@ li.list-group-item--home {
   & > a > .top-img-card > .top-img-card__top {
     @media(min-width: $minExtraSmallDevice) {
       height: 150px;
-      width: 150px;
+      width: 100%;
     }
     @media(max-width: $maxExtraSmallDevice) {
       height: 100px;
-      width: 100px;
     }
     & > .top-img-card__img {
       max-width: 100%;
