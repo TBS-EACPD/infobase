@@ -156,7 +156,7 @@ li.list-group-item--home {
 
   @media(max-width: $maxExtraSmallDevice) {
     flex-flow: row-reverse;
-    justify-content: center;
+    justify-content: space-around;
     &:first-child {
       margin-top: $smallMargin;
     }
@@ -173,9 +173,8 @@ li.list-group-item--home {
   text-transform: uppercase;
   color: $textLightColor;
 
-
   @media(min-width: $minExtraSmallDevice) {
-    width: 100% /* IE fix */
+    width: 100%; /* IE fix */
   }
 }
 
