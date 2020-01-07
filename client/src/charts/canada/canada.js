@@ -165,16 +165,19 @@ export class Canada extends React.Component{
       years,
       formatter,
     } = graph_args;
-
-    const legend_items = _.map(
-      color_scale.ticks(5).reverse(),
-      (tick) => ({
-        label: `${formatter(tick)}+`,
+    const legend_items = _.reduce(color_scale.ticks(5).reverse(), (result, tick, key) => {
+      result.items.push({
+        label: result.prevTick ? `${formatter(tick)} - ${formatter(result.prevTick)}` : `${formatter(tick)}+`,
         active: true,
         id: tick,
         color: get_graph_color( color_scale(tick) ),
-      })
-    );
+      });
+      result.prevTick = tick;
+      return result;
+    }, {
+      prevTick: null,
+      items: [],
+    });
   
     return (
       <div className="frow no-container">
@@ -184,7 +187,7 @@ export class Canada extends React.Component{
               {trivial_text_maker("legend")}
             </p>
             <GraphLegend
-              items={legend_items}
+              items={legend_items.items}
             />
           </div>
           <div className="legend-container" style={{ maxHeight: "400px", width: "100%", overflowY: "hidden", marginTop: "10px"}}>
