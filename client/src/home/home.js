@@ -239,7 +239,7 @@ const SubAppLayout = props => (
               img_src={get_static_url("svg/explorer.svg")}
               title_key="explorer_home_title"
               text_key="explorer_home_text"
-              link_href="#resource-explorer"
+              link_href="#tag-explorer"
             />
           </div>
           <div className="fcol-md-3 fcol-sm-6 linkcard">
