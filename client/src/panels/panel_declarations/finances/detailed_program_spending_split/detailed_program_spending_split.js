@@ -162,7 +162,6 @@ class DetailedProgramSplit extends React.Component {
     } = this.props;
     const { selected_program } = this.state;
 
-    const divHeight = 650;
     const colors = infobase_colors();
     const formatter = formats.compact1_raw;
 
@@ -251,6 +250,8 @@ class DetailedProgramSplit extends React.Component {
       )
       .sortBy("total")
       .value();
+
+    const divHeight = 650 * (graph_ready_data.length / 30) * 2;
 
     const markers = _.map(
       graph_ready_data,
