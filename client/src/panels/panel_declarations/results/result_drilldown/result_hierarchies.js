@@ -1,5 +1,5 @@
-import { get_resources_for_subject } from '../../../../explorer_common/resource_explorer_common.js';
 import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from '../../../../explorer_common/hierarchy_tools.js';
+import { results_resource_fragment } from '../results_common.js';
 
 import { 
   Subject,
@@ -34,9 +34,8 @@ const get_sub_program_resources = (sub_program, doc) => ({
 
 
 export function create_full_results_hierarchy({subject_guid, doc, allow_no_result_branches}){
-
-
-  const get_resources = subject => get_resources_for_subject(subject, doc);
+  
+  const get_resources = subject => results_resource_fragment(subject, doc);
 
   const root_subject = Subject.get_by_guid(subject_guid);
   let root;
