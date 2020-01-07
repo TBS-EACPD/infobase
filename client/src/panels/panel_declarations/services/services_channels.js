@@ -51,10 +51,13 @@ class ServicesChannelsPanel extends React.Component {
     
     const selected_title = selected_service.name;
 
-    const bar_data = _.map(data_keys, key => ({
-      number: selected_service[key],
-      label: text_maker(`label_${key}`),
-    }) );
+    const bar_data = _.chain(data_keys)
+      .map(key => ({
+        number: selected_service[key],
+        label: text_maker(`label_${key}`),
+      }) )
+      .each(obj => {obj[text_maker("number_of_enquiries")] = obj.number;})
+      .value();
 
     const options = _.chain([all_services])
       .concat(panel_args.services)
@@ -97,7 +100,7 @@ class ServicesChannelsPanel extends React.Component {
                     data = {bar_data}
                     indexBy = "label"
                     colorBy = {d => colors(d.id)}
-                    keys = {["number"]}
+                    keys = {[text_maker("number_of_enquiries")]}
                     is_money = {false}
                     bttm_axis = {{
                       tickRotation: 45,
@@ -110,7 +113,7 @@ class ServicesChannelsPanel extends React.Component {
                     }}
                     graph_height = {"300px"}
                     table_switch = {true}
-                    table_data_headers={["TODO name of whatever","TODO number of whatever"]}
+                    label_col_header = {text_maker("label_method")}
                   />
                 </div>
                 { selected_service_id !== "all" && 

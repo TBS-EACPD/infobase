@@ -17,13 +17,19 @@ const { text_maker, TM } = create_text_maker_component(text);
 const ServicesIdPanel = ({panel_args}) => {
   const data_keys = ["sin_is_identifier", "cra_buisnss_number_is_identifier"];
   const label_keys = ["uses_this_id", "doesnt_use_id"];
+  const labels = _.map(label_keys, key => text_maker(`label_${key}`));
   const colors = infobase_colors();
 
-  const bar_data = _.map(data_keys, key => ({
-    uses_this_id: _.reduce(panel_args.services, (sum, serv) => serv[key] ? sum+1 : sum, 0),
-    doesnt_use_id: _.size(panel_args.services) - _.reduce(panel_args.services, (sum, serv) => serv[key] ? sum+1 : sum, 0),
-    label: text_maker(`label_${key}`),
-  }) );
+  const bar_data = _.chain(data_keys)
+    .map(key => ({
+      uses_this_id: _.reduce(panel_args.services, (sum, serv) => serv[key] ? sum+1 : sum, 0),
+      doesnt_use_id: _.size(panel_args.services) - _.reduce(panel_args.services, (sum, serv) => serv[key] ? sum+1 : sum, 0),
+      label: text_maker(`label_${key}`),
+    }) )
+    .each(obj => _.each(obj, (value, key)=>{
+      if(_.includes(label_keys, key)) obj[text_maker(`label_${key}`)] = obj[key];
+    } ))
+    .value();
 
   return (
     <Fragment>
@@ -34,7 +40,7 @@ const ServicesIdPanel = ({panel_args}) => {
               data = {bar_data}
               indexBy = "label"
               colorBy = {d => colors(d.id)}
-              keys = {label_keys}
+              keys = {labels}
               is_money = {false}
               margin = {{
                 top: 50,
@@ -60,7 +66,7 @@ const ServicesIdPanel = ({panel_args}) => {
               ]}
               graph_height = {"300px"}
               table_switch = {true}
-              table_data_headers={[]}
+              label_col_header = {text_maker("label_identifier")}
             />
           </div>
       }

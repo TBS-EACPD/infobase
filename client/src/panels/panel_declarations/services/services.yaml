@@ -137,3 +137,19 @@ digital_option_not_available:
 services_unknown:
   en: Unknown / no data
   fr: TODO
+
+service_name:
+  en: Service Name
+  fr: TODO
+
+number_of_enquiries:
+  en: Number of enquiries
+  fr: TODO
+
+label_method:
+  en: Method
+  fr: TODO
+
+label_identifier:
+  en: Identifier
+  fr: TODO

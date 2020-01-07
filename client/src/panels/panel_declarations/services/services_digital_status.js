@@ -84,7 +84,7 @@ const ServicesDigitalPanel = ({panel_args}) => {
       </div>
       { !window.is_a11y_mode &&
         <div>
-          <div className="fcol-md-9" style = {{height: '400px'}}>
+          <div className="fcol-md-9">
             <NivoResponsiveHeatMap
               data={heatmap_data}
               keys={_.map(data_keys, key => text_maker(key))}
@@ -106,13 +106,9 @@ const ServicesDigitalPanel = ({panel_args}) => {
                 bottom: 30,
                 left: 70,
               }}
-              legends = {[
-                {
-                  anchor: 'bottom-right',
-                  direction: 'row',
-                  itemDirection: 'left-to-right',
-                },
-              ]}
+              graph_height = {"400px"}
+              table_switch = {true}
+              label_col_header = {text_maker("service_name")}
             />
           </div>
           <GraphLegend
