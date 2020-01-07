@@ -47,6 +47,12 @@ const { std_years, planning_years } = year_templates;
 const actual_year = _.last(std_years);
 const planning_year = _.first(planning_years);
 
+const route_arg_to_year_map = {
+  actual: actual_year,
+  planned: planning_year,
+};
+const year_to_route_arg_map = _.invert(route_arg_to_year_map);
+
 const INCLUDE_OTHER_TAGS = true;
 
 const dp_only_schemes = ["MLT"];
@@ -274,8 +280,8 @@ class ExplorerPage extends React.Component {
               const route_base = window.location.href.split('#')[0];
 
               const new_route = {
-                [actual_year]: `#tag-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/${actual_year}`,
-                [planning_year]: `#tag-explorer/${hierarchy_scheme}/${planning_year}`,
+                [actual_year]: `#tag-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/actual`,
+                [planning_year]: `#tag-explorer/${hierarchy_scheme}/planned`,
               }[key];
 
               window.location.href = `${route_base}${new_route}`;
@@ -298,7 +304,7 @@ class ExplorerPage extends React.Component {
           <div>
             <ul className="nav nav-justified nav-pills">
               {_.map(all_category_props, props =>
-                <li key={props.id} className={classNames(props.active && 'active')}><a href={`#tag-explorer/${props.id}/${year}`} >{props.title}</a></li>
+                <li key={props.id} className={classNames(props.active && 'active')}><a href={`#tag-explorer/${props.id}/${year_to_route_arg_map[year]}`} >{props.title}</a></li>
               )}
             </ul>
           </div>
@@ -438,7 +444,7 @@ export default class TagExplorer extends React.Component {
     let { 
       params: {
         hierarchy_scheme,
-        year,
+        period,
       },
     } = match;
 
@@ -448,12 +454,8 @@ export default class TagExplorer extends React.Component {
         'min'
     );
 
-    year = (
-      _.includes([actual_year, planning_year], year) ? 
-        year :
-        planning_year
-    );
-    
+    const year = route_arg_to_year_map[period] || planning_year;
+
     return (
       <StandardRouteContainer {...route_container_args}>
         {header}
