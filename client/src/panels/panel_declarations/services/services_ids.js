@@ -44,12 +44,7 @@ const ServicesIdPanel = ({panel_args}) => {
               }}
               legends = {[
                 {
-                  dataFrom: 'keys', 
-                  data: label_keys.map((id, index) => ({
-                    color: "#440000",
-                    id,
-                    label: text_maker(`label_${id}`),
-                  })),
+                  dataFrom: 'keys',
                   anchor: 'top-left',
                   direction: 'row',
                   justify: false,
