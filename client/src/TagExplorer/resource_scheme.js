@@ -7,14 +7,18 @@ import { infograph_href_template } from '../link_utils.js';
 import { shallowEqualObjectsOverKeys, sanitized_dangerous_inner_html } from '../general_utils.js';
 import { HeightClipper } from '../components/index.js';
 import { Subject } from '../models/subject.js';
+import { year_templates} from '../models/years.js';
 import { trivial_text_maker as text_maker } from '../models/text.js';
-import { current_dp_key } from '../models/results.js';
 
 const { 
   Tag,
   Dept, 
   Ministry, 
 } = Subject;
+
+const { planning_years } = year_templates;
+const planning_year = _.first(planning_years);
+
 
 const non_rolling_up_schemes = ['WWH', 'MLT', 'HI'];
 
@@ -242,7 +246,7 @@ function create_resource_hierarchy({hierarchy_scheme, year}){
 
 const get_initial_resource_state = ({hierarchy_scheme, year}) => ({
   hierarchy_scheme: hierarchy_scheme || "min",
-  year: year || current_dp_key,
+  year: year || planning_year,
   sort_col: _.includes(non_rolling_up_schemes, hierarchy_scheme) ? 'name' : 'spending',
   is_descending: !_.includes(non_rolling_up_schemes, hierarchy_scheme),
 });
