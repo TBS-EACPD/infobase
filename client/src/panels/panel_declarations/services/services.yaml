@@ -51,7 +51,7 @@ label_uses_this_id:
   fr: TODO
 
 label_doesnt_use_id:
-  en: Not used identifier
+  en: Not used as identifier
   fr: TODO
 
 label_telephone_enquires:
