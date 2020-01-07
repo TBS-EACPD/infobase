@@ -41,7 +41,8 @@ const compact = (precision, val, lang, options) => {
   let symbol;
   let new_val;
   if (val === 0){ 
-    return "0";
+    new_val = 0;
+    symbol = "";
   } else if (abs >= 1000000000){
     new_val = val/1000000000;
     symbol = abbrev[1000000000][lang];

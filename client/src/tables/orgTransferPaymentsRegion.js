@@ -27,13 +27,13 @@ export default {
   },
 
   "name": {
-    "en": "Transfer Payments by Geographic Region",
-    "fr": "Paiements de transfert selon la région géographique",
+    "en": "Transfer Payments by recipient region",
+    "fr": "RTP_TODO",
   },
 
   "title": {
-    "en": "Transfer Payments by Geographic Region",
-    "fr": "Paiements de transfert selon la région géographique",
+    "en": "Transfer Payments by recipient region",
+    "fr": "RTP_TODO",
   },
 
   "add_cols": function(){
