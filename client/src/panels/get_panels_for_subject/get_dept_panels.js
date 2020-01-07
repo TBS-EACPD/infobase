@@ -109,10 +109,10 @@ export const get_dept_panels = subject => ensure_loaded({
   ],
   services: subject.has_data('services_data') && [
     declare_services_intro_panel(),
-    declare_services_fees_panel(),
-    declare_services_ids_panel(),
-    declare_services_channels_panel(),
     declare_services_digital_status_panel(),
+    declare_services_channels_panel(),
+    declare_services_ids_panel(),
+    declare_services_fees_panel(),
   ],
   related: _.nonEmpty(subject.programs) && [
     declare_portfolio_structure_related_panel(),
