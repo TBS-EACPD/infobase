@@ -7,10 +7,8 @@ import {
   declare_panel,
   InfographicPanel,
   NivoResponsiveBar,
-  declarative_charts,
 } from "../shared.js";
 
-const { GraphLegend } = declarative_charts;
 import { Fragment } from 'react';
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -18,49 +16,58 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesIdPanel = ({panel_args}) => {
   const data_keys = ["sin_is_identifier", "cra_buisnss_number_is_identifier"];
-  const label_keys = ["yes", "no"];
+  const label_keys = ["uses_this_id", "doesnt_use_id"];
   const colors = infobase_colors();
 
   const bar_data = _.map(data_keys, key => ({
-    yes: _.reduce(panel_args.services, (sum, serv) => serv[key] ? sum+1 : sum, 0),
-    no: _.size(panel_args.services) - _.reduce(panel_args.services, (sum, serv) => serv[key] ? sum+1 : sum, 0),
+    uses_this_id: _.reduce(panel_args.services, (sum, serv) => serv[key] ? sum+1 : sum, 0),
+    doesnt_use_id: _.size(panel_args.services) - _.reduce(panel_args.services, (sum, serv) => serv[key] ? sum+1 : sum, 0),
     label: text_maker(`label_${key}`),
   }) );
-  
-
-  const legend_items = _.reduce(label_keys, (result, label_value) => {
-    result.push({
-      id: label_value,
-      label: label_value,
-      color: colors(label_value),
-    });
-    return result;
-  }, []);
 
   return (
     <Fragment>
       <TM k={"services_ids_text"} />
       { !window.is_a11y_mode &&
-          <Fragment>
-            <GraphLegend
-              items={legend_items}
+          <div className="fcol-md-9" aria-hidden = {true}>
+            <NivoResponsiveBar
+              data = {bar_data}
+              indexBy = "label"
+              colorBy = {d => colors(d.id)}
+              keys = {label_keys}
+              is_money = {false}
+              margin = {{
+                top: 50,
+                right: 30,
+                bottom: 40,
+                left: 50,
+              }}
+              legends = {[
+                {
+                  dataFrom: 'keys', 
+                  data: label_keys.map((id, index) => ({
+                    color: "#440000",
+                    id,
+                    label: text_maker(`label_${id}`),
+                  })),
+                  anchor: 'top-left',
+                  direction: 'row',
+                  justify: false,
+                  translateX: 0,
+                  translateY: -30,
+                  itemDirection: 'left-to-right',
+                  itemWidth: 2,
+                  itemHeight: 20,
+                  itemsSpacing: 160,
+                  itemOpacity: 0.75,
+                  symbolSize: 20,
+                },
+              ]}
+              graph_height = {"300px"}
+              table_switch = {true}
+              table_data_headers={[]}
             />
-            <div className="fcol-md-9" style = {{height: '300px'}} aria-hidden = {true}>
-              <NivoResponsiveBar
-                data = {bar_data}
-                indexBy = "label"
-                colorBy = {d => colors(d.id)}
-                keys = {label_keys}
-                is_money = {false}
-                margin = {{
-                  top: 15,
-                  right: 30,
-                  bottom: 40,
-                  left: 50,
-                }}
-              />
-            </div>
-          </Fragment>
+          </div>
       }
     </Fragment>
   );

@@ -106,6 +106,13 @@ const ServicesDigitalPanel = ({panel_args}) => {
                 bottom: 30,
                 left: 70,
               }}
+              legends = {[
+                {
+                  anchor: 'bottom-right',
+                  direction: 'row',
+                  itemDirection: 'left-to-right',
+                },
+              ]}
             />
           </div>
           <GraphLegend

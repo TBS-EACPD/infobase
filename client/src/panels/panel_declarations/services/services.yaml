@@ -39,11 +39,19 @@ no_SIN:
   fr: TODO
 
 label_sin_is_identifier:
-  en: Uses SIN as identifier
+  en: SIN
   fr: TODO
 
 label_cra_buisnss_number_is_identifier:
-  en: Uses CRA Business Number as identifier
+  en: CRA Business Number
+  fr: TODO
+
+label_uses_this_id:
+  en: Used as identifier
+  fr: TODO
+
+label_doesnt_use_id:
+  en: Not used identifier
   fr: TODO
 
 label_telephone_enquires:
