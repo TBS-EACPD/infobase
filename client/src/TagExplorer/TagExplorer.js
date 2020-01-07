@@ -53,8 +53,6 @@ const route_arg_to_year_map = {
 };
 const year_to_route_arg_map = _.invert(route_arg_to_year_map);
 
-const INCLUDE_OTHER_TAGS = true;
-
 const dp_only_schemes = ["MLT"];
 
 const children_grouper = (node, children) => {
@@ -208,6 +206,8 @@ class ExplorerPage extends React.Component {
       active: hierarchy_scheme === 'dept',
       id: 'dept',
     };
+    const all_category_props = [ min_props, dept_props, goco_props, hwh_props, wwh_props, hi_props];
+    const current_category = _.find(all_category_props, props => props.active);
 
     const inner_content = <div>
       <div style={{marginTop: '15px'}}>
@@ -268,8 +268,6 @@ class ExplorerPage extends React.Component {
       </div>
     </div>;
     
-    const all_category_props = [ min_props, dept_props, goco_props, hwh_props, ...(INCLUDE_OTHER_TAGS ? [wwh_props, hi_props] : []) ];
-    const current_category = _.find(all_category_props, props => props.active);
     return <div>
       <TM k="tag_nav_intro_text" el="div" />
       <div className="tabbed-content">
