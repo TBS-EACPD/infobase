@@ -64,9 +64,9 @@ export class App extends React.Component {
               <Route path="/igoc/:grouping?" component={IgocExplorer} />
               <Redirect 
                 from="/resource-explorer/:hierarchy_scheme?/:doc?"
-                to="/tag-explorer/:hierarchy_scheme?/:doc?"
+                to="/tag-explorer/:hierarchy_scheme"
               />
-              <Route path="/tag-explorer/:hierarchy_scheme?/:year?" component={TagExplorer} />
+              <Route path="/tag-explorer/:hierarchy_scheme?/:period?" component={TagExplorer} />
               <Route path="/orgs/:level/:subject_id/infograph/:active_bubble_id?/:options?/" component={Infographic} />
               <Route path="/glossary/:active_key?" component={Glossary} />
               <Redirect 
