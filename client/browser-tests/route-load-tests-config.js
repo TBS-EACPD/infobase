@@ -186,8 +186,8 @@ module.exports.route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
-    name: "Resource Explorer",
-    route: "resource-explorer",
+    name: "Tag Explorer",
+    route: "tag-explorer",
     test_on: ["eng", "basic-eng"],
   },
   {
