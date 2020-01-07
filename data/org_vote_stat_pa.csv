@@ -85,7 +85,7 @@
 "CCRA","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",173717,173717,91666,91666,160629,160629,62735,62735,119852,119852
 "CCRA","S",999,"Spending of revenues received through the conduct of its operations pursuant to section 60 of the Canada Revenue Agency Act","Dépenses des recettes résultant de la poursuite des opérations en vertu de l'article 60 de la Loi sur l'Agence du revenu du Canada",166085289,166085289,169032577,169032577,163733679,163733679,166387494,166387494,182105000,182105000
 "CDC",1,1,"Operating/Program","Fonctionnement/Programme",3886777,3884137,3731258,3723258,3783194,3773193,3934160,3924160,4054782,3979440
-"CEAA",1,1,"Operating/Program","Fonctionnement/Programme",29054020,26847609,29156074,27579392,38348293,35361771,36634525,36373415,50597198,44050777
+"CEAA",1,1,"Operating/Program","Fonctionnement/Programme",29054020,26847609,29156074,27579392,38348293,35361771,36634525,36373415,50597197,44050777
 "CEAA","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",2909480,2909480,1636910,1636910,3326229,3326229,3448745,3448745,3513244,3513244
 "CEAA","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",,,111,0,111,,,,,
 "CEO",1,1,"Operating/Program","Fonctionnement/Programme",31582646,30144204,31294526,29376133,30713703,28287648,32302382,31903703,33820175,32244015
@@ -625,7 +625,7 @@
 "SWC","S",999,"Salary and Motor Car Allowance","Traitement et allocation pour automobile",,,,,,,2000,2000,86000,86000
 "SWC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",2004,2004,89,0,89,,58,,182,
 "TBC",1,1,"Operating/Program","Fonctionnement/Programme",321758616,295850911,303094237,248942508,366807216,290703748,309299504,272955611,298698721,279801932
-"TBC",5,6,"Treasury Board Central","Crédit du Conseil du Trésor",750000000,0,750000000,0,635642771,0,530274898,0,620803209,0
+"TBC",5,6,"Treasury Board Central","Crédit du Conseil du Trésor",750000000,0,750000000,0,635642771,0,530274898,0,620803211,0
 "TBC",10,6,"Treasury Board Central","Crédit du Conseil du Trésor",103000,0,2090470,0,693000,0,693000,0,209653633,0
 "TBC",15,6,"Treasury Board Central","Crédit du Conseil du Trésor",0,0,,,0,0,0,0,0,0
 "TBC",20,6,"Treasury Board Central","Crédit du Conseil du Trésor",2506134407,2454311704,2719270604,2690624377,2460070604,2406697551,3274680578,3164665468,2952919397,2739639374
@@ -657,7 +657,7 @@
 "TRC",1,1,"Operating/Program","Fonctionnement/Programme",10538831,5788405,6451251,5922532,,,,,,
 "TRC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",206332,206332,59401,59401,,,,,,
 "VAC",1,1,"Operating/Program","Fonctionnement/Programme",880092932,806206370,903625387,864706848,1015905697,959154685,1022118507,926664000,1070668762,1001640228
-"VAC",5,3,"Grants & Contributions","Subventions et Contributions",2688403902,2533729901,2736010000,2693998960,2861462000,2774591177,3867796000,3814604720,3692225002,3655818666
+"VAC",5,3,"Grants & Contributions","Subventions et Contributions",2688403902,2533729901,2736010000,2693998960,2861462000,2774591177,3867796000,3814604720,3692225001,3655818666
 "VAC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",36416679,36416679,36138297,36138297,36863419,36863419,32450710,32450710,32862854,32862854
 "VAC","S",999,"Court Awards","Montants adjugés par une cour",26000,26000,12025,12025,13907,13907,7121,7121,10890,10890
 "VAC","S",999,"Losses on Foreign Exchange","Pertes d'opérations de change",,,414,414,5976,5976,,,2028,2028
