@@ -41,6 +41,7 @@ const ServicesFeesPanel = ({panel_args}) => {
               graph_data = {data_fees}
               legend_data = {data_fees}
               graph_height = '300px'
+              data_format = 'int'
             />
           </Fragment>
       }
