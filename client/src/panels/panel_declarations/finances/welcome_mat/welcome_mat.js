@@ -160,6 +160,8 @@ const WelcomeMat = (props) => {
   const {
     latest_hist_spend_data,
     oldest_hist_spend_data,
+    is_spend_empty,
+    is_fte_empty,
   } = calcs;
   
   const [ oldest_hist_year, latest_hist_year ] = _.map(
@@ -244,7 +246,7 @@ const WelcomeMat = (props) => {
           <HeaderPane key="b" size={20} children={latest_hist_year_text} />,
           <HeaderPane key="d" size={40} children={hist_trend} />,
         ]}
-        spend_row={[
+        spend_row={ !is_spend_empty && [
 
           <Pane key="a" size={20}>
             <MobileOrA11YContent children={years_ago} />
@@ -270,7 +272,7 @@ const WelcomeMat = (props) => {
             {exp_program_spending_graph}
           </Pane>,
         ]}
-        fte_row={ fte_graph && [
+        fte_row={ !is_fte_empty && [
           <Pane key="a" size={20}>
             <MobileOrA11YContent children={years_ago} />
             <PaneItem textSize="medium">
@@ -325,7 +327,7 @@ const WelcomeMat = (props) => {
           <HeaderPane key="b" size={20} children={years_ahead} />,
           <HeaderPane key="c" size={40} children={planned_trend} />,
         ]}
-        spend_row={[
+        spend_row={ !is_spend_empty && [
 
           <Pane key="a" size={20}>
             <MobileOrA11YContent children={latest_hist_year_text} />
@@ -351,7 +353,7 @@ const WelcomeMat = (props) => {
             {exp_program_spending_graph}
           </Pane>,
         ]}
-        fte_row={fte_graph && [
+        fte_row={ !is_fte_empty && [
           <Pane key="a" size={20}>
             <MobileOrA11YContent children={latest_hist_year_text} />
             <PaneItem textSize="medium">
@@ -451,7 +453,7 @@ const WelcomeMat = (props) => {
           <HeaderPane key="c" size={20} children={in_this_year} />,
           <HeaderPane key="d" size={40} children={hist_trend} />,
         ]}
-        spend_row={[
+        spend_row={ !is_spend_empty && [
 
           !latest_equals_oldest_hist && <Pane key="a" size={20}>
             <MobileOrA11YContent children={years_ago} />
@@ -571,7 +573,7 @@ const WelcomeMat = (props) => {
           <HeaderPane key="c" size={15} children={years_ahead} />,
           <HeaderPane key="d" size={55} children={long_term_trend} />,
         ]}
-        spend_row={[
+        spend_row={ !is_spend_empty && [
 
 
           !latest_equals_oldest_hist && <Pane key="a" size={15}>
@@ -618,7 +620,7 @@ const WelcomeMat = (props) => {
             {exp_program_spending_graph}
           </Pane>,
         ]}
-        fte_row={fte_graph && [
+        fte_row={ !is_fte_empty && [
 
           !latest_equals_oldest_hist && <Pane key="a" size={15}>
             <MobileOrA11YContent children={years_ago} />
@@ -782,10 +784,15 @@ function get_calcs(subject, q6, q12){
 
   const hist_spend_data = _.map(exp_cols, col => q6.sum(col) || 0);
   const planned_spend_data = _.map(planning_years, col => q6.sum(col) || 0);
+  const spend_data = _.concat(hist_spend_data, planned_spend_data);
   
   const hist_fte_data = _.map(std_years, col => q12.sum(col) || 0);
   const planned_fte_data = _.map(planning_years, col => q12.sum(col) || 0);
   const fte_data = _.concat(hist_fte_data, planned_fte_data);
+
+  const isEmpty = (data) => _.isEmpty(data) || _.every(data, (e) => e===0);
+  const is_spend_empty = isEmpty(spend_data);
+  const is_fte_empty = isEmpty(fte_data);
 
   const get_non_zero_data_year = (data, years, reverse) => {
     const loop = reverse ? _.forEachRight : _.forEach;
@@ -838,12 +845,14 @@ function get_calcs(subject, q6, q12){
     spend_plan_3,
     latest_year_hist_spend_diff,
     planned_spend_diff,
+    is_spend_empty,
 
     fte_latest_year,
     fte_plan_1,
     fte_plan_3,
     latest_year_hist_fte_diff,
     planned_fte_diff,
+    is_fte_empty,
 
     fte_data,
   };
