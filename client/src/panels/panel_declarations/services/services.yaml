@@ -11,7 +11,7 @@ services_fees_title:
   fr: TODO
 
 services_fees_text:
-  en: TODO
+  en: Does this service charge fees?
   fr: TODO
 
 has_fees:
@@ -86,12 +86,16 @@ communication_channels_text:
   en: How do services receive enquiries and applications, and what feedback channels are available?
   fr: TODO
 
+communication_channels_feedback_title:
+  en: What feedback channels are available for this service?
+  fr: TODO
+
 services_ids_title:
   en: Identification methods
   fr: TODO
 
 services_ids_text:
-  en: Insert text here
+  en: What identification methods are supported by this service?
   fr: TODO
 
 digital_status_title:
