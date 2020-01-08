@@ -23,6 +23,7 @@ const ResultsIntroPanel = ({subject, is_gov, summary_result_counts, doc_urls, ha
   const summary_text_args = {subject, is_gov, ...summary_result_counts};
   
   return (
+    //
     <div className="frow middle-xs">
       <div className="fcol-md-7 medium_panel_text">
         <TM k="results_intro_text" />
