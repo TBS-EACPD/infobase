@@ -251,6 +251,7 @@ class DetailedProgramSplit extends React.Component {
       .sortBy("total")
       .value();
 
+    // Change height of the graph region according to the number of programs
     const divHeight = 650 * (graph_ready_data.length / 30) * 2;
 
     const markers = _.map(
