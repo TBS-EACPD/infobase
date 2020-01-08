@@ -91,11 +91,11 @@ class ServicesChannelsPanel extends React.Component {
                 className = "form-control"
                 style = {{padding: "5px"}}
               />
-              <div>
-                {selected_title}
-              </div>
               <div className="frow">
                 <div className="fcol-md-9" aria-hidden = {true}>
+                  <div>
+                    {selected_title}
+                  </div>
                   <NivoResponsiveBar
                     data = {bar_data}
                     indexBy = "label"
@@ -117,8 +117,13 @@ class ServicesChannelsPanel extends React.Component {
                   />
                 </div>
                 { selected_service_id !== "all" && 
-                  <div className="fcol-md-3">
-                    <GraphLegend items={feedback_channel_statuses} />
+                  <div className="fcol-md-3" aria-hidden = {true}>
+                    <div>
+                      {text_maker("communication_channels_feedback_title")}
+                    </div>
+                    <div className="fcol-md-3">
+                      <GraphLegend items={feedback_channel_statuses} />
+                    </div>
                   </div>
                 }
               </div>
