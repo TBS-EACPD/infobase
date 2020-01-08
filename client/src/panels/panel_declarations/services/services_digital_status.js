@@ -83,7 +83,7 @@ const ServicesDigitalPanel = ({panel_args}) => {
         <TM k={"services_digital_status_text"} />
       </div>
       { !window.is_a11y_mode &&
-        <div>
+        <div className="frow">
           <div className="fcol-md-9">
             <NivoResponsiveHeatMap
               data={heatmap_data}
@@ -101,7 +101,7 @@ const ServicesDigitalPanel = ({panel_args}) => {
                 tickRotation: -45,
               }}
               margin={{
-                top: 150,
+                top: 130,
                 right: 30,
                 bottom: 30,
                 left: 70,
@@ -111,9 +111,11 @@ const ServicesDigitalPanel = ({panel_args}) => {
               label_col_header = {text_maker("service_name")}
             />
           </div>
-          <GraphLegend
-            items={legend_items}
-          />
+          <div className="fcol-md-3" style={{paddingTop: "80px"}}>
+            <GraphLegend
+              items={legend_items}
+            />
+          </div>
         </div>
       }
     </div>
