@@ -43,27 +43,27 @@ $smallMargin: 10px;
   font-size: 20px;
 }
 
-.col-content.featured-col-content {
-  color: $textColor !important;
-  background-color: $secondaryColor;
-  border-radius: $standardBorderRadius;
-  margin-bottom: $largeMargin;
+.additional-featured-content {
   @media(max-width: $maxExtraSmallDevice) {
-    margin-bottom: $smallMargin;
+    display: none;
   }
-  height: auto;
-  width: 100%;
-
-  @media(min-width: $minLargeDevice) {
-    width: 95%;
-  }
-  @media(min-width: $minLargeDevice) {
-    width: 95%;
-  }
-
-  & > a:hover > .left-img-card, & > a:focus > .left-img-card {
+  
+  & > .col-content {
+    color: $textColor !important;
+    background-color: $secondaryColor;
     border-radius: $standardBorderRadius;
-    background-color: lighten( $secondaryColor, 10% )
+    margin-bottom: $largeMargin;
+    height: auto;
+    width: 100%;  
+
+    @media(min-width: $minLargeDevice) {
+      width: 95%;
+    }  
+
+    & > a:hover > .left-img-card, & > a:focus > .left-img-card {
+      border-radius: $standardBorderRadius;
+      background-color: lighten( $secondaryColor, 10% )
+    }
   }
 }
 
