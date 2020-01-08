@@ -94,6 +94,7 @@ const HomeLayout = props => (
       </div>
       <div className="frow home-cols">
         <div className="fcol-md-7 additional-featured-content">
+          { /* NOTE: additional-featured-content is hidden on small screens for compactness. These should NOT be the only way to navigate to something */ }
           <div className="col-content">
             <CardLeftImage
               tmf={home_tm}
