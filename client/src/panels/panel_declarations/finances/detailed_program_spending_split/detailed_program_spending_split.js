@@ -251,7 +251,8 @@ class DetailedProgramSplit extends React.Component {
       .sortBy("total")
       .value();
 
-    // Change height of the graph region according to the number of programs
+    // Increase height of the graph region for y-axis labels to have sufficient room
+    // This is required to corretly display the labels when too many programs are present
     const divHeight = 650 * (graph_ready_data.length / 30) * 2;
 
     const markers = _.map(
