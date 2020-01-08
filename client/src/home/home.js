@@ -93,8 +93,8 @@ const HomeLayout = props => (
         />
       </div>
       <div className="frow home-cols">
-        <div className="fcol-md-7">
-          <div className="col-content featured-col-content">
+        <div className="fcol-md-7 additional-featured-content">
+          <div className="col-content">
             <CardLeftImage
               tmf={home_tm}
               img_src={get_static_url("svg/compare-estimates-white.svg")}
@@ -103,7 +103,7 @@ const HomeLayout = props => (
               link_href="#compare_estimates"
             />
           </div> 
-          <div className="col-content featured-col-content">
+          <div className="col-content">
             <CardLeftImage
               tmf={home_tm}
               img_src={get_static_url("svg/DPs.svg")}
