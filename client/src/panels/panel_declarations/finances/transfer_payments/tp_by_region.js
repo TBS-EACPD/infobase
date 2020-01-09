@@ -15,7 +15,7 @@ import { Canada } from '../../../../charts/canada/index.js';
 const { std_years } = year_templates;
 const formatter = formats["compact2_raw"];
 
-const { text_maker } = create_text_maker_component(text);
+const { text_maker, TM } = create_text_maker_component(text);
 const { provinces } = businessConstants;
 const { A11YTable } = declarative_charts;
 
@@ -76,6 +76,22 @@ export const declare_tp_by_region_panel = () => declare_panel({
       } = render_args;
       const { panel_args } = calculations;
       const { data } = panel_args;
+      const current_year_data = _.last(data);
+
+      const largest_prov = _.chain(current_year_data)
+        .keys()
+        .maxBy( (prov) => current_year_data[prov] )
+        .value();
+      const total_sum = 
+        _.reduce(current_year_data,
+          (sum, value) => sum += value,
+          0);
+      const percent_of_total = current_year_data[largest_prov] / total_sum;
+      const text_args = {
+        largest_prov: provinces[largest_prov].text,
+        total_sum: formatter(total_sum),
+        percent_of_total: formats["percentage1_raw"](percent_of_total),
+      };
 
       return (
         <StdPanel
@@ -83,7 +99,7 @@ export const declare_tp_by_region_panel = () => declare_panel({
           {...{footnotes, sources}}
         >
           <Col size={12} isText>
-            {text_maker("tp_by_region_text")}
+            <TM k="tp_by_region_text" args={text_args}/>
           </Col>
           { !window.is_a11y_mode &&
             <Col size={12} isGraph>

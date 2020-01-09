@@ -15,7 +15,7 @@ export default {
   "tags": [
     "EXP",
     "PA",
-    "GEO",
+    "TP_GEO",
     "FPS",
     "ANNUAL",
     "SOBJ10",
