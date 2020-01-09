@@ -2,7 +2,6 @@ import text from './orgTransferPaymentsRegion.yaml';
 import {
   businessConstants,
   year_templates,
-  Statistics,
 } from "./table_common.js";
 
 const { provinces } = businessConstants;
@@ -70,7 +69,7 @@ export default {
           "nick": header,
           "header": header,
           "description": {
-            "en": "RTP_TODO",
+            "en": `Amount of Transfer payment in ${header}`,
             "fr": "RTP_TODO",
           },
         });
@@ -116,30 +115,3 @@ export default {
     },
   ],
 };
-
-Statistics.create_and_register({
-  id: 'orgTransferPaymentsRegion_dept_info', 
-  table_deps: [ 'orgTransferPaymentsRegion'],
-  level: 'dept',
-  compute: (subject, tables, infos, add, c) => {
-    const table = tables.orgTransferPaymentsRegion;
-    const q = table.q(subject);
-    c.dept = subject;
-
-    var all_years = q.get_top_x(["region"].concat(std_years), Infinity, {zip: true});
-    // RTP_TODO
-  },
-});
-
-Statistics.create_and_register({
-  id: 'orgTransferPaymentsRegion_gov_info', 
-  table_deps: [ 'orgTransferPaymentsRegion'],
-  level: 'gov',
-  compute: (subject, tables, infos, add, c) => {
-    const table = tables.orgTransferPaymentsRegion;
-    const q = table.q(subject);
-    
-    var all_years = q.gov_grouping();
-    // RTP_TODO
-  },
-});
