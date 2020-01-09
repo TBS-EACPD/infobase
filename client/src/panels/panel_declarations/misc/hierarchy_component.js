@@ -14,7 +14,7 @@ const { Gov } = Subject;
   This component helps put a subject in context.
 
   If it's a Department, Program or CR, it will show the department's full inventory,
-  placing the active element first. It is recommended that consumers clip the height of this component, 
+  placing the current_subject element first. It is recommended that consumers clip the height of this component, 
   since Fisheries and Ocean has like 36 programs! 
 
   If it's a tag, instead of showing all programs, it will just show ancestors, like so
@@ -94,7 +94,7 @@ export const HierarchyPeek = ({root}) => {
 const _HierarchyPeek = ({root}) => (
   <div>
     { 
-      !root.active ?
+      !root.current_subject ?
         <Fragment>
           { root.dead && <HierarchyDeadElementIcon /> }
           <span className={ classNames(root.dead && 'dead-element') }>
@@ -157,13 +157,13 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
     children: _.isEmpty(subject.min) ? 
       [{ 
         name: subject.name,
-        active: true,
+        current_subject: true,
       }]: 
       [{ 
         name: `${subject.ministry.name} (${text_maker('ministry')})`,
         children: (
           _.chain(subject.ministry.orgs)
-            .filter(node => node.status === 'Active' || is_subject(node) )
+            .filter(node => !node.is_dead || is_subject(node) )
             .groupBy('type')
             .toPairs()
             .sortBy( ([type, group]) => _.includes(group, subject) )
@@ -175,7 +175,7 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
                 .reverse()
                 .map(org => ({
                   name: org.name,
-                  active: is_subject(org),
+                  current_subject: is_subject(org),
                   href: href_generator(org),
                   dead: _.isEmpty(org.tables),
                   limited_data: _.isEmpty(org.tables),
@@ -196,7 +196,7 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
 */
 export const org_internal_hierarchy = ({subject, href_generator, show_dead_sos, label_crsos}) => ({
   name: subject.name,
-  active: true,
+  current_subject: true,
   children: _.chain(subject.crsos)
     .filter( show_dead_sos ? _.constant(true) : 'is_active' )
     .map(crso => ({
@@ -244,13 +244,13 @@ export const program_hierarchy = ({subject, href_generator, show_siblings, show_
                 .filter( (program) => !program.is_fake)
                 .map(prog => ({
                   name: prog.name,
-                  active: is_subject(prog),
+                  current_subject: is_subject(prog),
                   href: href_generator(prog),
                   dead: !prog.is_active,
                 }))
                 .sortBy('dead')
                 .reverse()
-                .sortBy('active')
+                .sortBy('current_subject')
                 .reverse()
                 .value() :
               null,
@@ -285,7 +285,7 @@ export const tag_hierarchy = ({subject, showSiblings, showChildren, href_generat
     .map( tag => ({
       name: tag.name,
       href: href_generator(tag),
-      active: is_subject(tag),
+      current_subject: is_subject(tag),
       children: (
         showChildren && 
         is_subject(tag) && 
@@ -300,7 +300,7 @@ export const tag_hierarchy = ({subject, showSiblings, showChildren, href_generat
           .value()
       ),
     }))
-    .sortBy('active')
+    .sortBy('current_subject')
     .reverse()
     .value();
 
@@ -348,7 +348,7 @@ export const crso_hierarchy = ({subject, href_generator, show_siblings, show_unc
                 name: crso.name,
                 is_cr: crso.is_cr,
                 href: crso.is_cr && href_generator(crso),
-                active: is_subject(crso),
+                current_subject: is_subject(crso),
                 dead: !crso.is_active,
                 children: //program
                   _.chain(crso.programs)
@@ -386,7 +386,7 @@ export const crso_pi_hierarchy = ({subject, href_generator, show_siblings, show_
         children: [{ //crso
           level: subject.level,
           name: subject.name,
-          active: true,
+          current_subject: true,
           is_cr: subject.is_cr,
           href: href_generator(subject),
           children: // program
@@ -430,7 +430,7 @@ export const crso_gov_hierarchy = ({subject, href_generator, show_siblings, show
               level: crso.level,
               name: crso.name,
               href: crso.is_cr && href_generator(crso),
-              active: is_subject(crso),
+              current_subject: is_subject(crso),
             })
           )
           .value(),
