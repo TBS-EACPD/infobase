@@ -30,13 +30,6 @@ const { Gov } = Subject;
 */
 
 
-const activeStyle = {
-  color: '#333333',
-  fontWeight: '400',
-  padding: '5px',
-};
-
-const get_style = ({ active, dead}) => active ? activeStyle : null;
 
 export const HierarchyDeadElementIcon = () => <IconAttentionTriangle
   title={text_maker("hierarchy_dead_element_icon_alt_text")}
@@ -109,7 +102,6 @@ const _HierarchyPeek = ({root}) => (
               root.href ? 
                 <a
                   href={root.href} 
-                  style={ get_style(root) }
                 >
                   {
                     root.level === "crso" ? 
@@ -121,18 +113,13 @@ const _HierarchyPeek = ({root}) => (
                       root.name
                   } 
                 </a> :
-                <span style={get_style(root)}>
-                  {root.name}
-                </span>
+                <span>{root.name}</span>
             }
           </span>
         </Fragment> :
         <Fragment>
           { root.dead && <HierarchyDeadElementIcon /> }
-          <span 
-            style={ get_style(root) }
-            className={ classNames(root.dead && 'dead-element') }
-          >
+          <span className={ classNames(root.dead && 'dead-element') }>
             { root.name }
           </span>
         </Fragment>
