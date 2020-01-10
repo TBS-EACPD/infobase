@@ -47,11 +47,13 @@ $smallMargin: 10px;
   font-size: 20px;
 }
 
-.additional-featured-content {
-  @media(max-width: $maxExtraSmallDevice) {
-    display: none;
+
+.featured-home-cols {
+  @media(max-width: $maxMediumDevice) {
+    flex-direction: column-reverse; 
   }
-  
+}
+.featured-home-cols__additional{
   & > .col-content {
     color: $textColor !important;
     background-color: $secondaryColor;
@@ -70,12 +72,10 @@ $smallMargin: 10px;
     }
   }
 }
-
-.frow.home-cols > .fcol-md-5 {
+.featured-home-cols__primary {
   @media(max-width: $maxMediumDevice){
     margin-bottom: $smallMargin;
   }
-
 
   & > h2:first-child {
     margin-top: 0px;
