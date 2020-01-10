@@ -91,6 +91,7 @@ export const declare_tp_by_region_panel = () => declare_panel({
         largest_prov: provinces[largest_prov].text,
         total_sum: formatter(total_sum),
         percent_of_total: formats["percentage1_raw"](percent_of_total),
+        subject: calculations.subject,
       };
 
       return (
