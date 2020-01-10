@@ -21,8 +21,8 @@ export default {
   ],
 
   "link": {
-    "en": "RTP_TODO",
-    "fr": "RTP_TODO",
+    "en": "https://open.canada.ca/data/en/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
+    "fr": "https://ouvert.canada.ca/data/fr/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
   },
 
   "name": {
