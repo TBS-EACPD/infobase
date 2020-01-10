@@ -92,9 +92,8 @@ const HomeLayout = props => (
           title={<TM k="home_results_title" />}
         />
       </div>
-      <div className="frow home-cols">
-        <div className="fcol-md-7 additional-featured-content">
-          { /* NOTE: additional-featured-content is hidden on small screens for compactness. These should NOT be the only way to navigate to something */ }
+      <div className="frow featured-home-cols">
+        <div className="fcol-md-7 featured-home-cols__additional">
           <div className="col-content">
             <CardLeftImage
               tmf={home_tm}
@@ -115,7 +114,7 @@ const HomeLayout = props => (
             />
           </div>       
         </div>
-        <div className="fcol-md-5">
+        <div className="fcol-md-5 featured-home-cols__primary">
           <h2>
             <TM k="home_search_bar_title" />
           </h2> 
