@@ -8,7 +8,7 @@ deploy_filter: &deploy_filter
   filters:
     branches:
       ignore:
-        - /__.*/
+        #- /__.*/ DRR_TODO: re-enable filter
 
 
 version: 2
