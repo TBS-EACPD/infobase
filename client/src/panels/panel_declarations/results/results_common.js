@@ -61,10 +61,10 @@ const type_by_data_type = {
   percent_range: "result_percentage",
 };
 
+const measure_display = (measure) => !_.isEmpty(measure) ? ` ( ${measure} )` : "";
+
 const indicator_target_text = (indicator) => {
   const target_unspecified_display = text_maker("unspecified_target");
-
-  const measure_display = (measure) => !_.isEmpty(measure) && `( ${measure} )`;
 
   const get_display_case = ({target_type, target_min, target_max, target_narrative, measure, seeking_to}) => {
     switch(target_type){
@@ -80,14 +80,14 @@ const indicator_target_text = (indicator) => {
         }
         switch(seeking_to){
           case 'target':
-            return `${text_maker("result_exact_text")} ${formats[type_by_data_type[target_type]](+target_min)}` + (measure_display(measure) || "");
+            return `${text_maker("result_exact_text")} ${formats[type_by_data_type[target_type]](+target_min)}${measure_display(measure)}`;
           case 'min':
-            return `${text_maker("result_upper_target_text")} ${formats[type_by_data_type[target_type]](+target_max)}` + (measure_display(measure) || "");
+            return `${text_maker("result_upper_target_text")} ${formats[type_by_data_type[target_type]](+target_max)}${measure_display(measure)}`;
           case 'max':
-            return `${text_maker("result_lower_target_text")} ${formats[type_by_data_type[target_type]](+target_min)}` + (measure_display(measure) || "");
+            return `${text_maker("result_lower_target_text")} ${formats[type_by_data_type[target_type]](+target_min)}${measure_display(measure)}`;
           case 'range':
-            return `${text_maker("result_range_text")} ${formats[type_by_data_type[target_type]](+target_min)} ${text_maker("and")} ${formats[type_by_data_type[target_type]](+target_max)}` + 
-              (measure_display(measure) || "");
+            return `${text_maker("result_range_text")} ${formats[type_by_data_type[target_type]](+target_min)} ${text_maker("and")} ${
+              formats[type_by_data_type[target_type]](+target_max)}${measure_display(measure)}`;
           default:
             return target_unspecified_display;
         }
@@ -136,8 +136,6 @@ const drr17_indicator_target_text = (indicator) => {
   } = indicator;
   const target_unspecified_display = text_maker("unspecified_target");
 
-  const measure_display = (measure) => !_.isEmpty(measure) && `( ${measure} )`;
-
   const get_display_case = (data_type, min, max, narrative, measure) => {
     switch(target_type){
       case 'num':
@@ -147,13 +145,13 @@ const drr17_indicator_target_text = (indicator) => {
       case 'percent':
       case 'percent_range': {
         if ( /range/.test(target_type) && (min && max) ){
-          return `${formats[type_by_data_type[data_type]](+min)} ${text_maker("to")} ${formats[type_by_data_type[data_type]](+max)}` + (measure_display(measure) || "");
+          return `${formats[type_by_data_type[data_type]](+min)} ${text_maker("to")} ${formats[type_by_data_type[data_type]](+max)}${measure_display(measure)}`;
         } else if (min && max && min === max){
-          return formats[type_by_data_type[data_type]](+min) + (measure_display(measure) || "");
+          return formats[type_by_data_type[data_type]](+min) + measure_display(measure);
         } else if (min && !max){
-          return formats[type_by_data_type[data_type]](+min) + (measure_display(measure) || "");
+          return formats[type_by_data_type[data_type]](+min) + measure_display(measure);
         } else if (!min && max){
-          return formats[type_by_data_type[data_type]](+max) + (measure_display(measure) || "");
+          return formats[type_by_data_type[data_type]](+max) + measure_display(measure);
         } else {
           return target_unspecified_display; 
         }
@@ -186,7 +184,6 @@ const indicator_actual_text = (indicator) => {
   } = indicator;
 
   const result_unspecified_display = text_maker("unspecified");
-  const measure_display = (measure) => !_.isEmpty(measure) && `( ${measure} )`;
 
   const get_display_case = (datatype, actual, measure) => {
     switch(datatype){
@@ -196,7 +193,7 @@ const indicator_actual_text = (indicator) => {
       case 'dollar_range':
       case 'percent':
       case 'percent_range': {
-        return actual ? formats[type_by_data_type[datatype]](+actual) + (measure_display(measure) || "") : result_unspecified_display;
+        return actual ? formats[type_by_data_type[datatype]](+actual) + measure_display(measure) : result_unspecified_display;
       }
       case 'text': {
         return _.isEmpty(actual) ? result_unspecified_display : actual;
