@@ -23,7 +23,6 @@ import {
 
 export default function(model_singleton){
 
-  //"id","subject_id","name_en","name_fr","doc"
   const ResultSchema = mongoose.Schema({
     result_id: pkey_type(),
     stable_id: str_type,
@@ -56,7 +55,6 @@ export default function(model_singleton){
       .value(),
   });
 
-  // "id","result_id","name_en","name_fr","target_year","target_month","explanation_en","explanation_fr","target_type","target_min","target_max","target_narrative_en","target_narrative_fr","doc","actual_datatype","actual_result_en","actual_result_fr","status_key","status_period","methodology_en","methodology_fr","measure_en","measure_fr"
   const IndicatorSchema = mongoose.Schema({
     indicator_id: pkey_type(),
     stable_id: str_type,
@@ -93,7 +91,6 @@ export default function(model_singleton){
     ),
   });
 
-  //"id","parent_id","name_en","name_fr","description_en","description_fr","planned_spend_pa_last_year","spend_pa_last_year","drr_spend_expl_en","drr_spend_expl_fr","planned_fte_pa_last_year","fte_pa_last_year","drr_fte_expl_en","drr_fte_expl_fr"
   const SubProgramSchema = mongoose.Schema({
     sub_program_id: pkey_type(),
     parent_id: parent_fkey_type(),
