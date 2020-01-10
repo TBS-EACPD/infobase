@@ -183,7 +183,11 @@ export class Table extends mix().with(staticStoreMixin){
       .each(function(col){
         col.formula = function(data){
           if (_.isArray(data)){
-            return d3.sum(_.map(data,col.nick || col.wcag));
+            const to_sum = _.map(data,col.nick || col.wcag);
+            if(_.isEmpty(to_sum) || _.every(to_sum, _.isUndefined) ){
+              return null;
+            }
+            return d3.sum(to_sum);
           }
           return data;
         };
