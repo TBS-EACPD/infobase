@@ -166,6 +166,7 @@ const get_result_count_records = (sub_programs, results, indicators) => {
 };
 
 const counts_from_indicators = (indicators) => _.chain(indicators)
+  .filter( (indicator) => !_.isUndefined(indicator) ) // DRR_TODO: this is absolutely temporary, just smoothing over somedrr18 data hicups. Either the data is corrected up stream or this is replaced with a smarter check somewhere earlier in the populate process, do not release with this line in!
   .map(
     ({doc, result_id, status_key}) => ({
       [`${doc}_results`]: result_id,
