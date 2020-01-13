@@ -4,6 +4,5 @@ export const drr_docs = [
 ];
 
 export const dp_docs = [
-  "dp18",
   "dp19",
 ];
