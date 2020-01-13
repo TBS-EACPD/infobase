@@ -43,13 +43,9 @@ budget_home_text:
   en: Explore a breakout of the Budget Implementation Votes which are being funded through Estimates
   fr: Découvrir une visualisation des crédits d’exécution du budget qui seront financés par le Budget des dépenses
 
-mains_dps_home_title:
-  en: 2019-20 Departmental Plans
-  fr: Plans ministériels de 2019-2020
-
-mains_dps_home_text:
-  en: The 2019-20 Departmental Plans were tabled on April 11 2019. Explore the data to see what results departments and agencies are seeking to achieve
-  fr: Les plans ministériels 2019-2020 ont été déposés au Parlement le 11 avril 2019. Explorer les données pour voir les résultats que les ministères et organismes cherchent à atteindre
+drr_home_text:
+  en: The 2018-19 Departmental Results Reports were tabled on DATE. Explore the data to see how departments performed against thier planned results
+  fr: DRR_TODO
 
 planet_home_title:
   en: Bubble Explorer
@@ -201,9 +197,9 @@ quick_link_DP_1920:
   en: 2019-20 Departmental Plans
   fr: Plans Ministériels de 2019-2020
 
-quick_link_DRR_1718:
-  en: 2017-18 Departmental Results Reports
-  fr: Rapport sur les résultats ministériels de 2017-2018
+quick_link_DRR_1819:
+  en: 2018-19 Departmental Results Reports
+  fr: Rapport sur les résultats ministériels de 2018-2019
 
 quick_link_auth_and_exp:
   en: 2017-18 Authorities and Expenditures

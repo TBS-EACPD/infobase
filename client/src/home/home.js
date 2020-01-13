@@ -97,20 +97,20 @@ const HomeLayout = props => (
           <div className="col-content">
             <CardLeftImage
               tmf={home_tm}
-              img_src={get_static_url("svg/compare-estimates-white.svg")}
-              title_key="estimates_comp_home_title"
-              text_key="estimates_comp_home_text"
-              link_href="#compare_estimates"
+              img_src={get_static_url("svg/DPs.svg")}
+              title_key="quick_link_DRR_1819"
+              text_key="drr_home_text"
+              link_key="check_home_link"
+              link_href="#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_drr)"
             />
           </div> 
           <div className="col-content">
             <CardLeftImage
               tmf={home_tm}
-              img_src={get_static_url("svg/DPs.svg")}
-              title_key="mains_dps_home_title"
-              text_key="mains_dps_home_text"
-              link_key="check_home_link"
-              link_href="#orgs/gov/gov/infograph/results"
+              img_src={get_static_url("svg/compare-estimates-white.svg")}
+              title_key="estimates_comp_home_title"
+              text_key="estimates_comp_home_text"
+              link_href="#compare_estimates"
             />
           </div>       
         </div>
