@@ -521,12 +521,6 @@ const dp_docs = build_doc_info_objects(
   "dp",
   [
     {
-      year_short: "2018",
-      resource_years: [],
-      doc_url_en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2018-19-departmental-plans.html",
-      doc_url_fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2018-2019.html",
-    },
-    {
       year_short: "2019",
       resource_years: ["{{planning_year_1}}", "{{planning_year_2}}", "{{planning_year_3}}"],
       doc_url_en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2019-20-departmental-plans.html",
