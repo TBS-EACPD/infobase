@@ -57,8 +57,6 @@ fragment result_and_indicator_fields on Result {
     result_explanation
     
     actual_result
-    actual_datatype
-    actual_result
     
     status_key
     

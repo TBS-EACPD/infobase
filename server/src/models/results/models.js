@@ -65,7 +65,6 @@ export default function(model_singleton){
     ...bilingual_str("target_explanation"),
     ...bilingual_str("result_explanation"),
     doc: str_type,
-    actual_datatype: str_type,
     ...bilingual_str("actual_result"),
     status_key: str_type,
     ...bilingual_str("methodology"),

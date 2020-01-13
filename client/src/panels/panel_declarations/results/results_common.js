@@ -178,7 +178,7 @@ const drr17_indicator_target_text = (indicator) => {
 
 const indicator_actual_text = (indicator) => {
   const {
-    actual_datatype,
+    target_type,
     actual_result,
     measure,
   } = indicator;
@@ -208,12 +208,12 @@ const indicator_actual_text = (indicator) => {
     }
   };
 
-  return get_display_case(actual_datatype, actual_result, measure);
+  return get_display_case(target_type, actual_result, measure);
 };
 
 const indicator_previous_actual_text = (indicator) => {
   const fake_previous = {
-    actual_datatype: indicator.previous_actual_datatype,
+    target_type: indicator.previous_target_type,
     actual_result: indicator.previous_actual_result,
     measure: indicator.previous_measure,
   };
