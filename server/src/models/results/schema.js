@@ -150,7 +150,6 @@ ${
     target_explanation: String
     result_explanation: String
 
-    actual_datatype: String
     actual_result: String
     
     status_key: String

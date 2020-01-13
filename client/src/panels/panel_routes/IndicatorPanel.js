@@ -38,7 +38,6 @@ const indicators_fields_fragment = `  id
   target_explanation
   result_explanation
 
-  actual_datatype
   actual_result
   
   status_key

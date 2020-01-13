@@ -159,7 +159,6 @@ ${doc}_results: results(doc: "${doc}") {
     target_explanation
     result_explanation
 
-    actual_datatype
     actual_result
     
     status_key
