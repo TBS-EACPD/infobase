@@ -89,19 +89,6 @@ export default function(model_singleton){
     ),
   });
 
-  const SubProgramSchema = mongoose.Schema({
-    sub_program_id: pkey_type(),
-    parent_id: parent_fkey_type(),
-    ...bilingual_str("name"),
-    ...bilingual_str("description"),
-    planned_spend_pa_last_year: { type: Number },
-    spend_pa_last_year: { type: Number },
-    planned_fte_pa_last_year: { type: Number },
-    fte_pa_last_year: { type: Number },
-    ...bilingual_str("drr_spend_expl"),
-    ...bilingual_str("drr_fte_expl"),
-  });
-
   const PIDRLinkSchema = mongoose.Schema({
     program_id: parent_fkey_type(),
     result_id: parent_fkey_type(),
@@ -110,21 +97,18 @@ export default function(model_singleton){
   model_singleton.define_model("Result", ResultSchema);
   model_singleton.define_model("ResultCount", ResultCountSchema);
   model_singleton.define_model("Indicator", IndicatorSchema);
-  model_singleton.define_model("SubProgram", SubProgramSchema);
   model_singleton.define_model("PIDRLink", PIDRLinkSchema);
 
-  const { SubProgram, Result, Indicator, PIDRLink } = model_singleton.models;
+  const { Result, Indicator, PIDRLink } = model_singleton.models;
   const result_by_subj_loader = create_resource_by_foreignkey_attr_dataloader(Result, 'subject_id');
   const indicator_by_result_loader = create_resource_by_foreignkey_attr_dataloader(Indicator, 'result_id');
   const program_link_loader = create_resource_by_foreignkey_attr_dataloader(PIDRLink, "program_id");
-  const sub_program_loader = create_resource_by_foreignkey_attr_dataloader(SubProgram, "parent_id");
   const indicator_id_loader = create_resource_by_id_attr_dataloader(Indicator, 'indicator_id');
   _.each(
     { 
       result_by_subj_loader,
       indicator_by_result_loader,
       program_link_loader,
-      sub_program_loader,
       indicator_id_loader,
     }, 
     (val,key) =>  model_singleton.define_loader(key,val)
