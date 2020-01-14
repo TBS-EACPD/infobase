@@ -42,14 +42,14 @@ class ServicesChannelsPanel extends React.Component {
 
     const all_services = _.chain({})
       .mergeWith(..._.map(panel_args.services, serv=>_.pick(serv,data_keys)),_.add)
-      .merge({name: text_maker("all"), id: "all"})
+      .merge({name: text_maker("all_services"), id: "all"})
       .value();
 
     const selected_service = selected_service_id === "all" ? 
       all_services :
       _.find(panel_args.services, serv => serv.id === selected_service_id) || _.first(panel_args.services);
     
-    const selected_title = selected_service.name;
+    const selected_title = `${text_maker("channels_enquiry_vectors")} ${selected_service.name}`;
 
     const bar_data = _.chain(data_keys)
       .map(key => ({
@@ -95,7 +95,7 @@ class ServicesChannelsPanel extends React.Component {
               />
               <div className="frow">
                 <div className="fcol-md-9" aria-hidden = {true}>
-                  <div>
+                  <div className="medium_panel_text">
                     {selected_title}
                   </div>
                   <NivoResponsiveBar
@@ -120,12 +120,10 @@ class ServicesChannelsPanel extends React.Component {
                 </div>
                 { selected_service_id !== "all" && 
                   <div className="fcol-md-3" aria-hidden = {true}>
-                    <div>
+                    <div className="medium_panel_text">
                       {text_maker("communication_channels_feedback_title")}
                     </div>
-                    <div className="fcol-md-3">
-                      <GraphLegend items={feedback_channel_statuses} />
-                    </div>
+                    <GraphLegend items={feedback_channel_statuses} />
                   </div>
                 }
               </div>

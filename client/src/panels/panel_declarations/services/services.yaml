@@ -85,6 +85,10 @@ label_other_channel_applications:
   en: Applications by other channels
   fr: TODO
 
+all_services:
+  en: All services
+  fr: Tous les services
+
 communication_channels_title:
   en: Communication channels
   fr: TODO
@@ -92,6 +96,12 @@ communication_channels_title:
 communication_channels_text:
   en: How do services receive enquiries and applications, and what feedback channels are available?
   fr: TODO
+
+channels_enquiry_vectors:
+  en: |
+    Enquiry and application vectors:
+  fr: |
+    TODO
 
 communication_channels_feedback_title:
   en: What feedback channels are available for this service?
