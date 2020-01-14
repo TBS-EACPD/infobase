@@ -1,51 +1,56 @@
 import _ from "lodash";
 import { get_standard_csv_file_rows } from '../load_utils.js';
 
-import { dp_docs } from './results_common.js';
+import { drr_docs, dp_docs } from './results_common.js';
+
+const doc_keys = [ ...drr_docs, ...dp_docs ];
+const valid_doc_filter = ({doc}) => _.includes(doc_keys, doc);
 
 export default async function({models}){
   const { Result, ResultCount, Indicator, PIDRLink } = models;
   
-  const result_records = get_standard_csv_file_rows("results.csv");
+  const raw_result_records = get_standard_csv_file_rows("results.csv");
 
-  const indicator_records = get_standard_csv_file_rows("indicators.csv");
+  const raw_indicator_records = get_standard_csv_file_rows("indicators.csv");
 
   const pi_dr_links = get_standard_csv_file_rows("pi_dr_links.csv");
     
-  _.each(result_records, result => {
-    result.result_id = result.id;
-    result.id = null;
-  });
+  const result_records = _.chain(raw_result_records)
+    .map(result => ({
+      ...result,
+      id: null,
+      result_id: result.id,
+    }) )
+    .filter( valid_doc_filter )
+    .value();
   
-  _.each(indicator_records, indicator => {
-    const { 
-      target_year, 
-      target_month,
-      doc,
-      stable_id,
-    } = indicator;
+  const indicator_records = _.chain(raw_indicator_records)
+    .map( (indicator) => ({
+      ...indicator,
+      id: null,
+      indicator_id: indicator.id,
+      target_year: _.isNaN(parseInt(indicator.target_year)) ? null : parseInt(indicator.target_year),
+      target_month: _.isEmpty(indicator.target_month) ? null : +indicator.target_month,
+      status_key: indicator.status_key || "dp",
+    }) )
+    .map( (indicator, ix, indicator_records) => {
+      const {
+        doc,
+        stable_id,
+      } = indicator;
 
-    indicator.indicator_id = indicator.id;
-    indicator.id = null;
-    indicator.target_year = _.isNaN(parseInt(target_year)) ? null : parseInt(target_year);
-    indicator.target_month = _.isEmpty(target_month) ? null : +target_month;
-    if (!indicator.status_key){
-      indicator.status_key = "dp";
-    }
-
-    const dp_doc_index = _.indexOf(dp_docs, doc);
-    if (dp_doc_index > 0){
-      // Look for corresponding indicator, by stable_id, from previous DP. Embed previous year target fields here
-      const previous_year_indicator_instance = _.find(
-        indicator_records,
-        (indicator) => indicator.stable_id === stable_id &&
-          indicator.doc === dp_docs[dp_doc_index-1]
-      );
-
-      if ( !_.isUndefined(previous_year_indicator_instance) ){
-        _.assign(
-          indicator,
-          {
+      const dp_doc_index = _.indexOf(dp_docs, doc);
+      if (dp_doc_index > 0){
+        // Look for corresponding indicator, by stable_id, from previous DP. Embed previous year target fields here
+        const previous_year_indicator_instance = _.find(
+          indicator_records,
+          (indicator) => indicator.stable_id === stable_id &&
+            indicator.doc === dp_docs[dp_doc_index-1]
+        );
+  
+        if ( !_.isUndefined(previous_year_indicator_instance) ){
+          return {
+            ...indicator,
             ..._.chain(["target_type", "target_min", "target_max", "seeking_to", "target_change"])
               .map(field_key => [ `previous_year_${field_key}`, previous_year_indicator_instance[`${field_key}`] ])
               .fromPairs()
@@ -65,11 +70,15 @@ export default async function({models}){
               )
               .fromPairs()
               .value(),
-          }
-        );
+          };
+        }
       }
-    }
-  });
+
+      // fall through for new indicators
+      return indicator;
+    })
+    .filter( valid_doc_filter )
+    .value();
 
   const result_count_records = get_result_count_records(result_records, indicator_records);
 
