@@ -112,16 +112,15 @@ class Panel_ extends React.Component {
         }
       </div>
     );
-
-    return Panel({
-      allowOverflow,
-      title,
-      otherHeaderContent: header_utils,
-      children,
-      sources,
-      glossary_keys,
-      footnotes,
-    });
+    return <Panel
+      allowOverflow={allowOverflow}
+      title={title}
+      otherHeaderContent={header_utils}
+      children={children}
+      sources={sources}
+      glossary_keys={glossary_keys}
+      footnotes={footnotes}
+    />;
   }
 }
 

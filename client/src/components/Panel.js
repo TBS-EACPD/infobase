@@ -64,35 +64,70 @@ const PanelGlossary = ({keys}) => {
   );
 };
 
-export const Panel = ({allowOverflow, title, otherHeaderContent, children, sources, glossary_keys, footnotes }) => (
-  <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
-    { (title || otherHeaderContent) &&
-      <header className='panel-heading'>
-        { title && <h3 className="panel-title"> {title} </h3> }
-        { otherHeaderContent }
-      </header>
-    }
-    <div className='panel-body'>
-      { children }
-      <div className="mrgn-tp-md" />
-      { _.nonEmpty(sources) && 
-        <div>
-          <PanelSource links={sources} />
-        </div>
-      }
-      { _.nonEmpty(glossary_keys) && 
-        <div className="mrgn-tp-md">
-          <PanelGlossary keys={glossary_keys} />
-        </div>
-      }
-      { _.nonEmpty(footnotes) && 
-        <div className="mrgn-tp-md">
-          <Details
-            summary_content={ <TM k="footnotes" /> }
-            content={ <FootnoteList footnotes={footnotes} /> }
-          />
-        </div>
-      }
-    </div>
-  </section>
-);
+export class Panel extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      isOpen: true,
+    };
+  }
+  render(){
+    const { isOpen } = this.state;
+    const {
+      allowOverflow,
+      title,
+      otherHeaderContent,
+      children,
+      sources,
+      glossary_keys,
+      footnotes,
+    } = this.props;
+    const label_id = _.uniqueId("IBDetails__a11yLabel");
+
+    return (
+      <section className={classNames('panel panel-info mrgn-bttm-md', allowOverflow && "panel-overflow")}>
+        { (title || otherHeaderContent) &&
+          <header className='panel-heading'>
+            {
+              <button
+                className={classNames("panel-heading-utils")}
+                onClick={()=> this.setState({isOpen: !isOpen})}
+                aria-labelledby={label_id}
+              >
+                <span aria-hidden>
+                  { isOpen ? "▼" : "►" }
+                </span>
+              </button>
+            }
+            { title && <h3 className="panel-title"> {title} </h3> }
+            { otherHeaderContent }
+          </header>
+        }
+        { isOpen && 
+          <div className='panel-body'>
+            { children }
+            <div className="mrgn-tp-md" />
+            { _.nonEmpty(sources) && 
+              <div>
+                <PanelSource links={sources} />
+              </div>
+            }
+            { _.nonEmpty(glossary_keys) && 
+              <div className="mrgn-tp-md">
+                <PanelGlossary keys={glossary_keys} />
+              </div>
+            }
+            { _.nonEmpty(footnotes) && 
+              <div className="mrgn-tp-md">
+                <Details
+                  summary_content={ <TM k="footnotes" /> }
+                  content={ <FootnoteList footnotes={footnotes} /> }
+                />
+              </div>
+            }
+          </div>
+        }
+      </section>
+    );
+  }
+}
