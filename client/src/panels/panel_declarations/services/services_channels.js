@@ -80,7 +80,9 @@ class ServicesChannelsPanel extends React.Component {
 
     return (
       <Fragment>
-        <TM k={"communication_channels_text"} />
+        <div className="medium_panel_text">
+          <TM k={"communication_channels_text"} />
+        </div>
         { !window.is_a11y_mode &&
             <Fragment>
               <Select

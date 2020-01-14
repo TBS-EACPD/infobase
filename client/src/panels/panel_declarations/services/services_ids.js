@@ -33,7 +33,9 @@ const ServicesIdPanel = ({panel_args}) => {
 
   return (
     <Fragment>
-      <TM k={"services_ids_text"} />
+      <div className="medium_panel_text">
+        <TM k={"services_ids_text"} />
+      </div>
       { !window.is_a11y_mode &&
           <div className="fcol-md-9" aria-hidden = {true}>
             <NivoResponsiveBar
