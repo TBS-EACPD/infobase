@@ -11,7 +11,6 @@ import { Tag } from './tags.js';
 import { 
   Result,
   Indicator,
-  SubProgramEntity,
 } from './results.js';
 import { BudgetMeasure } from './budget_measures.js';
 
@@ -27,7 +26,6 @@ const Subject = {
   Tag,
   Result,
   Indicator,
-  SubProgramEntity,
   BudgetMeasure,
 };
 

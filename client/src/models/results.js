@@ -1,4 +1,3 @@
-import { sanitized_marked } from '../general_utils.js';
 import { trivial_text_maker } from './text.js';
 import { Program, CRSO } from './organizational_entities.js';
 import { businessConstants } from './businessConstants.js';
@@ -11,166 +10,15 @@ const { year_to_fiscal_year } = formats;
 // dependencies are tangled up too much here, disable it for the whole file
 /* eslint-disable no-use-before-define */
 
-// vv delete on drr17 exit
-const parent_indexed_sub_program_entities = {};
-const sub_program_entities_by_id = {};
-class SubProgramEntity {
-  static sub_programs(program_id){
-    return parent_indexed_sub_program_entities[program_id] || [];
-  } 
-  static lookup(id){
-    return sub_program_entities_by_id[id];
-  }
-  static create_and_register(def){
-    const { id, parent_id } = def;
-
-    if(sub_program_entities_by_id[id]){
-      return;
-    }
-
-    const inst = new SubProgramEntity(def);
-
-    if(!parent_indexed_sub_program_entities[parent_id]){
-      parent_indexed_sub_program_entities[parent_id] = [];
-    }
-    parent_indexed_sub_program_entities[parent_id].push(inst);
-    sub_program_entities_by_id[id] = inst;
-
-  }
-  constructor(def){
-    Object.assign(this,def);
-  }
-  resources(doc){
-    const records = (
-      doc === 'drr17' ?
-        [
-          {
-            year: "pa_last_year_2",
-            ftes: this.planned_fte_pa_last_year,
-            spending: this.planned_spend_pa_last_year,
-          },
-          {
-            year: "pa_last_year_2",
-            ftes: this.fte_pa_last_year,
-            spending: this.spend_pa_last_year,
-          },
-        ] :
-        [
-          { 
-            year: 'planning_year_1',
-            ftes: this.fte_planning_year_1,
-            spending: this.spend_planning_year_1,
-          },
-          { 
-            year: 'planning_year_2',
-            ftes: this.fte_planning_year_2,
-            spending: this.spend_planning_year_2,
-          },
-          { 
-            year: 'planning_year_3',
-            ftes: this.fte_planning_year_3,
-            spending: this.spend_planning_year_3,
-          },
-        ]
-    );
-
-    return _.map(records, ({ year, ftes, spending }) => ({
-      year, 
-      ftes: _.isNumber(ftes) ? ftes : trivial_text_maker('unknown'), 
-      spending: _.isNumber(spending) ? spending : trivial_text_maker('unknown'),
-    }));
-  }
-  resource_notes(doc){
-    return _.chain(this)
-      .pick(
-        /dp/.test(doc) ? 
-          [
-            'dp_no_spending_expl',
-            'dp_spend_trend_expl',
-            'dp_no_fte_expl',
-            'dp_fte_trend_expl',
-          ] : 
-          [ 
-            'drr_spend_expl',
-            'drr_fte_expl',
-          ]
-      )
-      .values()
-      .compact()
-      .map( txt => sanitized_marked(txt) )
-      .value();
-  }
-  children(){
-    return parent_indexed_sub_program_entities[this.id] || [];
-  }
-  //currently not being used
-  static get_all(){
-    return _.chain(parent_indexed_sub_program_entities)
-      .map(_.identity)
-      .flatten()
-      .value();
-  }
-  get level(){
-    const { parent_id } = this;
-    return (
-      this.constructor.lookup(parent_id) ?
-        'sub_sub_program' :
-        'sub_program'
-    );
-  }
-  singular(){
-    return trivial_text_maker(this.level);
-  }
-  plural(){
-    return trivial_text_maker(this.level+"s");
-  }
-  get guid(){
-    return `${this.level}_${this.id}`;
-  }
-  get has_dp_resources(){
-    return _.chain(this)
-      .pick([
-        'spend_planning_year_1',
-        'spend_planning_year_2',
-        'spend_planning_year_3',
-        'fte_planning_year_1',
-        'fte_planning_year_2',
-        'fte_planning_year_3',
-      ])
-      .some(num => _.isNumber(num) && !_.isNaN(num) )
-      .value();
-  }
-  get has_drr_resources(){
-    return _.chain(this)
-      .pick([
-        "spend_pa_last_year",
-        "planned_spend_pa_last_year",
-
-        "fte_pa_last_year",
-        "planned_fte_pa_last_year",
-      ])
-      .some(num => _.isNumber(num) && !_.isNaN(num) )
-      .value();
-  }
-}
-// ^^ delete on drr17 exit
-
-//currently only supports dept, crso, programs, subs and sub-subs
+//currently only supports dept, crso, programs
 function _get_flat_results(subject){
-  switch(subject.level){
-    case 'sub_sub_program': // delete on drr17 exit
-      return Result.get_entity_results(subject.id);
-
-    case 'sub_program': // delete on drr17 exit
+  switch(subject.level){        
     case 'program':
-      return _.chain( SubProgramEntity.sub_programs(subject.id) )
-        .map( _get_flat_results )
-        .flatten()
-        .concat( Result.get_entity_results(subject.id) )
+      return _.chain( Result.get_entity_results(subject.id) )
         .uniqBy('id')
         .compact()
         .value();
-          
+      
     case 'crso':
       return _.chain(subject.programs)
         .map(_get_flat_results)
@@ -194,7 +42,7 @@ function _get_flat_results(subject){
 
 
 
-//critical assumption: ids are unique accross programs, CRs, sub-programs and sub-sub-programs
+//critical assumption: ids are unique accross programs and CRs
 //FIXME data issue:
 // Note that Finance BLJ's programs will all share the same result, 
 //this makes it impossible 
@@ -270,9 +118,8 @@ class Result {
     const { subject_id } = this;
     let program = Program.lookup(subject_id);
     let crso = CRSO.lookup(subject_id);
-    let sub_prog = SubProgramEntity.lookup(subject_id); // delete on drr17 exit
 
-    return program || crso || sub_prog;
+    return program || crso;
   }
   get parent_level(){
     const subject = this.subject;
@@ -504,12 +351,6 @@ const drr_docs = build_doc_info_objects(
   "drr",
   [
     {
-      year_short: "2017",
-      resource_years: ["{{pa_last_year_2}}"],
-      doc_url_en: "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2017-18-departmental-results-reports.html",
-      doc_url_fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2017-2018.html",
-    },
-    {
       year_short: "2018",
       resource_years: ["{{pa_last_year}}"],
       doc_url_en: "TODO",
@@ -557,7 +398,6 @@ const current_dp_key = _.last( get_result_doc_keys('dp') );
 export {
   Result,
   Indicator,
-  SubProgramEntity,
   PI_DR_Links,
   ResultCounts,
   GranularResultCounts,
@@ -572,7 +412,6 @@ export {
 Object.assign(window._DEV_HELPERS, {
   Result,
   Indicator,
-  SubProgramEntity,
   PI_DR_Links,
   ResultCounts,
   GranularResultCounts,

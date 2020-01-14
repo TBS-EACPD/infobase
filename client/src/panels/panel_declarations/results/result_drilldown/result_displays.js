@@ -12,8 +12,6 @@ const type_text_keys = {
   cr: "core_responsibilities",
   so: "strategic_outcomes",
   program: "programs",
-  sub_program: "sub_programs",
-  sub_sub_program: "sub_sub_programs",
   dr: "dept_results",
   result: "results",
 };
@@ -51,32 +49,14 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
   let text_key = "";
   if(subject.level === 'dept'){
     if( /drr/.test(doc) ){
-      if (count_items.cr > 0){
-        text_key = "result_counts_drr_dept_first_wave";
-      } else if(count_items.sub_program > 0){
-        if(count_items.sub_sub_program > 0){
-          text_key = "result_counts_drr_dept_sub_sub";
-        } else {
-          text_key = "result_counts_drr_dept_sub";
-        }
-      } else {
-        text_key = "result_counts_drr_dept_no_subs";
-      }
+      text_key = "result_counts_drr_dept";
     } else {
       text_key = "result_counts_dp_dept";
     }
 
   } else if(subject.level === 'program'){
     if( /drr/.test(doc) ){
-      if(count_items.sub_program > 0){
-        if(count_items.sub_sub_program > 0){
-          text_key = "result_counts_drr_prog_paa_sub_sub";
-        } else {
-          text_key = "result_counts_drr_prog_paa_sub";
-        }
-      } else {
-        text_key = "result_counts_drr_prog_paa_no_subs";
-      }
+      text_key = "result_counts_drr_prog";
     } else {
       text_key = "result_counts_dp_prog";
     } 
@@ -99,9 +79,6 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
           num_prog_results: count_items.result || 0,
           num_results: (count_items.result || 0) + (count_items.dr || 0),
           num_indicators: count_items.indicator || 0,
-
-          num_subs: count_items.sub_program,
-          num_sub_subs: count_items.sub_sub_program,
 
           num_drs: count_items.dr,
           num_crs: count_items.cr,

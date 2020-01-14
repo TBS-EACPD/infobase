@@ -9,9 +9,7 @@ import {
   breakpoints,
   ensure_loaded,
   infograph_href_template,
-  glossary_href,
   get_source_links,
-  Subject,
   Results,
 
   declare_panel,
@@ -19,8 +17,8 @@ import {
   HeightClippedGraph,
 } from '../shared.js';
 const { SpinnerWrapper, DisplayTable } = util_components;
-const { Program } = Subject;
-const { SubProgramEntity, current_drr_key } = Results;
+
+const { current_drr_key } = Results;
 
 import {
   StatusIconTable,
@@ -36,7 +34,6 @@ import {
   indicator_text_functions,
 } from './results_common.js';
 const {
-  drr17_indicator_target_text,
   indicator_target_text,
   indicator_actual_text,
 } = indicator_text_functions;
@@ -47,7 +44,7 @@ const current_drr_year = result_docs[current_drr_key].year;
 
 const get_actual_parent = (indicator_node, full_results_hierarchy) => {
   const parent = _.find(full_results_hierarchy, {id: indicator_node.parent_id});
-  if(_.includes(["cr", "program", "sub_program", "sub_sub_program"], parent.data.type)) {
+  if(_.includes(["cr", "program"], parent.data.type)) {
     return parent;
   } else if(parent.data.type === "dr" || parent.data.type === "result"){
     return get_actual_parent(parent, full_results_hierarchy);
@@ -65,53 +62,20 @@ const get_indicators = (subject, doc) => {
 };
 
 
-const subject_link = (node) => {
-  if (node.data.subject.level === "sub_program" || node.data.subject.level === "sub_sub_program"){
-    const program_id = node.data.subject.level === "sub_program" ?
-    node.data.subject.parent_id :
-      SubProgramEntity.lookup(node.data.subject.parent_id).parent_id;
-    const program = Program.lookup(program_id);
-    const program_name = program.name;
-    return (
-      <span>
-        {node.data.name}
-        {` (${text_maker("a_masc")} `}
-        <a
-          href={window.is_a11y_mode ? glossary_href("SSP") : undefined}
-          className="nowrap glossary-tooltip-link"
-          tabIndex={0}
-          aria-hidden="true"
-          data-toggle="tooltip"
-          data-ibtt-glossary-key="SSP"
-          data-ibtt-html="true"
-          data-ibtt-container="body"
-        >
-          {text_maker(node.data.subject.level)}
-        </a>
-        {` ${text_maker("of")} `}
-        <a href={infograph_href_template(program,"results")}>
-          {program_name}
-        </a>
-        )
-      </span>
-    );
-  } else {
-    return (
-      <span>
-        <a href={infograph_href_template(node.data.subject,"results")}>
-          {node.data.name}
-        </a>
-        {" "}
-        <span className='text-nowrap'>
-          ({text_maker(node.data.subject.level === "program" ? node.data.subject.level : "core_resp")})
-        </span>
-      </span>
-    );
-  }
-};
+const subject_link = (node) => (
+  <span>
+    <a href={infograph_href_template(node.data.subject,"results")}>
+      {node.data.name}
+    </a>
+    {" "}
+    <span className='text-nowrap'>
+      ({text_maker(node.data.subject.level === "program" ? node.data.subject.level : "core_resp")})
+    </span>
+  </span>
+);
 
 
-const indicator_table_from_list = (indicator_list, is_drr17) => {
+const indicator_table_from_list = (indicator_list) => {
   const column_keys = ["activity","indicator","target","target_result","date_to_achieve","status"];
   const sort_keys = ["activity","indicator","date_to_achieve", "status"];
   const table_data_headers = _.map(column_keys, k => text_maker(k));
@@ -119,7 +83,7 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
     col_data: {
       activity: subject_link(ind.parent_node),
       indicator: <a href={`#indicator/${ind.indicator.id}`}>{ind.indicator.name}</a>,
-      target: is_drr17 ? drr17_indicator_target_text(ind.indicator) : indicator_target_text(ind.indicator),
+      target: indicator_target_text(ind.indicator),
       target_result: indicator_actual_text(ind.indicator),
       date_to_achieve: ind.indicator.target_date,
       status: <Fragment>
@@ -204,7 +168,7 @@ class ResultsTable extends React.Component {
           </div>
           <HeightClippedGraph clipHeight={200}>
             <div className="results-flat-table">
-              {indicator_table_from_list(filtered_indicators, last_drr_doc === 'drr17')}
+              {indicator_table_from_list(filtered_indicators)}
             </div>
           </HeightClippedGraph>
         </div>

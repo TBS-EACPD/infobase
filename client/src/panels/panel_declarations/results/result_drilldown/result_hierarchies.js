@@ -9,7 +9,6 @@ import {
 const { Dept } = Subject;
 const { 
   Result, 
-  SubProgramEntity,
 } = Results;
 
 const indicator_date_sorter = (ind) => ind.target_year ? ind.target_year + ind.target_month/12 : Infinity;
@@ -24,13 +23,6 @@ function result_to_node(result, parent_id, doc){
     id: `${parent_id}-${result.guid}`,
   };
 }
-
-// vv delete on drr17 exit
-const get_sub_program_resources = (sub_program, doc) => ({
-  spending: sub_program.spend_pa_last_year,
-  ftes: sub_program.fte_pa_last_year,
-});
-// ^^ delete on drr17 exit
 
 
 export function create_full_results_hierarchy({subject_guid, doc, allow_no_result_branches}){
@@ -106,7 +98,6 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
     switch(type){
 
       case 'tag': {
-
         const nodes_by_program_by_dept = _.chain(subject.programs)
           .groupBy(prog => prog.dept.id)
           .map( (progs,dept_id) => {
@@ -133,28 +124,10 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
           })
           .value();
 
-        return nodes_by_program_by_dept;
-
-      
+        return nodes_by_program_by_dept;      
       }
+
       case 'dept': {
-
-        // vv delete on drr17 exit
-        if (doc === 'drr17' && !subject.is_first_wave){
-          // for PAA structures, the SO adds an annoying layer of drilling down for no reason
-          return subject.programs.map(prog => ({
-            id: prog.guid,
-            isExpanded: false,
-            data: {
-              subject: prog,
-              type: 'program',
-              name: prog.name,
-              resources: get_resources(prog),
-            }, 
-          }));
-        }
-        // ^^ delete on drr17 exit
-
         return _.chain(subject.crsos)
           .filter('is_cr')
           .map(crso => ({
@@ -171,7 +144,6 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
       }
 
       case 'cr': {
-
         const programs = subject.programs.map(prog => ({
           id: `${parent_id}-${prog.guid}`,
           data: {
@@ -188,82 +160,13 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
         );
     
         return results.concat(programs);
-
-      }
-
-      case 'so' : {
-        const programs = subject.programs.map(prog => ({
-          id: `${parent_id}-${prog.guid}`,
-          data: {
-            name: prog.name,
-            subject: prog,
-            type: 'program',
-            resources: get_resources(prog),
-          }, 
-        }));
-
-        const results = _.chain(Result.get_entity_results(subject.id))
-          .reject(root_subject.level === subject ? _.constant(false) : 'is_dr' ) //DRs will be attached at the dept level. Only ever attach them to the cr if they are the root.
-          .map( result => result_to_node(result, parent_id, doc) )
-          .value();
-    
-        return results.concat(programs);
-
       }
 
       case 'program': {
         const program_results = Result.get_entity_results(subject.id);
-
         const result_nodes = _.map(program_results, result => result_to_node(result, parent_id, doc) );
-
-        // vv delete on drr17 exit
-        const subs = SubProgramEntity.sub_programs(subject.id);
-        const sub_program_nodes = _.map(subs, sub => ({
-          id: `${parent_id}-${sub.guid}`,
-          data: {
-            name: sub.name,
-            subject: sub, 
-            type: 'sub_program',
-            resources: get_sub_program_resources(sub, doc),
-            description: sub.description,
-          },
-        }));
-        // ^^ delete on drr17 exit
-
-        return result_nodes.concat(sub_program_nodes);
+        return result_nodes;
       }
-
-      // vv delete on drr17 exit
-      case 'sub_program': {
-        const results = _.map(
-          Result.get_entity_results(subject.id),
-          result => result_to_node(result, parent_id, doc)
-        );
-        const sub_subs = _.map(
-          SubProgramEntity.sub_programs(subject.id),
-          subsub => ({
-            id: `${parent_id}-${subsub.guid}`,
-            data: {
-              subject: subsub,
-              name: subsub.name,
-              type: 'sub_sub_program',
-              resources: get_sub_program_resources(subsub, doc),
-              description: subsub.description,
-            },
-          })
-        );
-        return results.concat(sub_subs);
-
-      }
-
-      case 'sub_sub_program': {
-        return _.map(
-          Result.get_entity_results(subject.id),
-          result => result_to_node(result, parent_id, doc)
-        );
-
-      }
-      // ^^ delete on drr17 exit
 
       case 'result':
       case 'dr':

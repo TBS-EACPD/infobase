@@ -27,7 +27,6 @@ const {
   indicator_actual_text,
   indicator_previous_target_text,
   indicator_previous_actual_text,
-  drr17_indicator_target_text,
 } = indicator_text_functions;
 
 const { 
@@ -39,40 +38,18 @@ const { sanitized_marked } = general_utils;
 
 
 const IndicatorResultDisplay = (props) => {
-  const {indicator, is_actual, is_drr17, is_previous} = props;
+  const {indicator, is_actual, is_previous} = props;
   if(is_actual){
-    return is_previous ? <span>{indicator_previous_actual_text(indicator)}</span> : <span>{indicator_actual_text(indicator)}</span>;
+    return is_previous ? 
+      <span>{indicator_previous_actual_text(indicator)}</span> : 
+      <span>{indicator_actual_text(indicator)}</span>;
+  } else {
+    return is_previous ? 
+      <span>{indicator_previous_target_text(indicator)}</span> : 
+      <span>{indicator_target_text(indicator)}</span>;
   }
-  // vv delete on drr17 exit
-  if(!is_drr17){
-    return is_previous ? <span>{indicator_previous_target_text(indicator)}</span> : <span>{indicator_target_text(indicator)}</span>;
-  }
-  return <span>{drr17_indicator_target_text(indicator)}</span>;
-  // ^^ delete on drr17 exit
 };
 
-
-// vv delete on drr17 exit
-const Drr17IndicatorResultDisplay = ({
-  data_type,
-  min, 
-  max,
-  narrative,
-  measure,
-}) => {
-  return (
-    <span>
-      {drr17_indicator_target_text({
-        data_type,
-        min, 
-        max,
-        narrative,
-        measure,
-      })}
-    </span>
-  );
-};
-// ^^ delete on drr17 exit
 
 const IndicatorDisplay = ({indicator}, show_doc) => {
   const is_drr = /drr/.test(indicator.doc);
@@ -118,7 +95,6 @@ const IndicatorDisplay = ({indicator}, show_doc) => {
           <IndicatorResultDisplay
             indicator={indicator}
             is_actual={false}
-            is_drr17={indicator.doc === "drr17"}
           />
         </dd>
         { is_drr && indicator.actual_result &&
@@ -127,7 +103,7 @@ const IndicatorDisplay = ({indicator}, show_doc) => {
               {indicator.status_key === "future" ? <TM k="target_result_interim"/> : <TM k="target_result"/>}
             </dt>
             <dd>
-              <IndicatorResultDisplay indicator={indicator} is_actual={true} is_drr17={indicator.doc === "drr17"}/>
+              <IndicatorResultDisplay indicator={indicator} is_actual={true}/>
             </dd>
           </Fragment>
         }
@@ -146,7 +122,7 @@ const IndicatorDisplay = ({indicator}, show_doc) => {
         { !_.isEmpty(indicator.target_explanation) &&
           <Fragment>
             <dt>
-              <TM k={indicator.doc === "drr17" ? "generic_explanation" : "target_explanation"} />
+              <TM k={"target_explanation"} />
             </dt>
             <dd>
               <div dangerouslySetInnerHTML={{ __html: sanitized_marked(indicator.target_explanation) }} /> 
@@ -187,7 +163,7 @@ const IndicatorDisplay = ({indicator}, show_doc) => {
               <TM k="previous_year_target"/>
             </dt>
             <dd>
-              <IndicatorResultDisplay indicator={indicator} is_actual={false} is_drr17={indicator.doc === "drr17"} is_previous={true} />
+              <IndicatorResultDisplay indicator={indicator} is_actual={false} is_previous={true} />
             </dd>
           </Fragment>
         }
@@ -198,7 +174,7 @@ const IndicatorDisplay = ({indicator}, show_doc) => {
               <TM k="previous_year_target_result"/>
             </dt>
             <dd>
-              <IndicatorResultDisplay indicator={indicator} is_actual={true} is_drr17={indicator.doc === "drr17"} is_previous={true} />
+              <IndicatorResultDisplay indicator={indicator} is_actual={true} is_previous={true} />
             </dd>
           </Fragment>
         }
@@ -593,6 +569,5 @@ export {
   InlineStatusIconList,
   HorizontalStatusTable,
   NewBadge,
-  Drr17IndicatorResultDisplay,
   IndicatorResultDisplay,
 }; 

@@ -60,23 +60,6 @@ drr_links:
   en: Departmental Results Report (DRR)
   fr: Rapport sur les résultats ministériels (RRM)
 
-sub_program:
-  en: Sub-Program
-  fr: Sous-Programme
-
-sub_programs:
-  en: Sub-Programs
-  fr: Sous-Programmes
-
-sub_sub_program:
-  en: Sub-Sub-Program
-  fr: Sous-sous-Programme
-
-sub_sub_programs:
-  en: Sub-Sub-Programs
-  fr: Sous-sous-Programmes
-
-
 dept_result:
   en: Departmental Result
   fr: Résultat ministériel

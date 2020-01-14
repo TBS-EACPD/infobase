@@ -30,7 +30,6 @@ import {
   declare_program_fed_structure_panel,
   declare_related_program_structure_panel,
   declare_spending_in_tag_perspective_panel,
-  declare_sub_program_resources_panel,
   declare_vote_stat_split_panel,
   declare_top_spending_areas_panel,
 } from '../panel_declarations/index.js';
@@ -56,7 +55,6 @@ export const get_program_panels = subject => ensure_loaded({
     declare_top_spending_areas_panel(),
     declare_spending_in_tag_perspective_panel(),
     declare_planned_actual_comparison_panel(),
-    declare_sub_program_resources_panel(),
     declare_dp_rev_split_panel(),
   ],
   results: !subject.is_internal_service && subject.has_data('results_data') && [
