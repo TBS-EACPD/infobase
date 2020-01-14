@@ -42,6 +42,7 @@ const ServicesIdPanel = ({panel_args}) => {
               colorBy = {d => colors(d.id)}
               keys = {labels}
               is_money = {false}
+              tick_value = {3}
               margin = {{
                 top: 50,
                 right: 30,
