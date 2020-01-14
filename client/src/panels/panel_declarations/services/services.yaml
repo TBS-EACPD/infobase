@@ -3,8 +3,15 @@ services_intro_title:
   fr: Répertoire de services
 
 services_intro_text:
-  en: The Service Inventory provides a corporate-wide perspective on information related to Government of Canada services.
-  fr: Répertoire de services fournit une perspective pangouvernementale des services du gouvernement du Canada.
+  transform: [handlebars,markdown]
+  en: |
+    The Service Inventory provides a corporate-wide perspective on information related to Government of Canada services.
+
+    **{{subj_name subject}}** is reporting on **{{num_services}}** services.
+  fr: |
+    Répertoire de services fournit une perspective pangouvernementale des services du gouvernement du Canada.
+
+    TODO
 
 services_fees_title:
   en: Service Fees
