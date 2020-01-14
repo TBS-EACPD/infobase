@@ -11,7 +11,6 @@ import { get_resources_for_subject } from '../../../explorer_common/resource_exp
 const { 
   Result, 
   Indicator, 
-  SubProgramEntity, 
   ResultCounts,
   GranularResultCounts,
   status_key_to_glossary_key,
@@ -125,57 +124,6 @@ const indicator_previous_target_text = (indicator) => {
   return indicator_target_text(fake_previous);
 };
 
-// vv delete on drr17 exit
-const drr17_indicator_target_text = (indicator) => {
-  const {
-    target_type,
-    target_min, 
-    target_max,
-    target_narrative,
-    measure,
-  } = indicator;
-  const target_unspecified_display = text_maker("unspecified_target");
-
-  const get_display_case = (data_type, min, max, narrative, measure) => {
-    switch(target_type){
-      case 'num':
-      case 'num_range':
-      case 'dollar':
-      case 'dollar_range':
-      case 'percent':
-      case 'percent_range': {
-        if ( /range/.test(target_type) && (min && max) ){
-          return `${formats[type_by_data_type[data_type]](+min)} ${text_maker("to")} ${formats[type_by_data_type[data_type]](+max)}${measure_display(measure)}`;
-        } else if (min && max && min === max){
-          return formats[type_by_data_type[data_type]](+min) + measure_display(measure);
-        } else if (min && !max){
-          return formats[type_by_data_type[data_type]](+min) + measure_display(measure);
-        } else if (!min && max){
-          return formats[type_by_data_type[data_type]](+max) + measure_display(measure);
-        } else {
-          return target_unspecified_display; 
-        }
-      }
-  
-      case 'text': {
-        if ( _.isEmpty(narrative) ){ return target_unspecified_display; }
-        return narrative;
-      }
-  
-      case 'tbd': {
-        return text_maker("tbd_result_text");
-      }
-  
-      default: {
-        //certain indicators have no targets
-        return null;
-      }
-    }
-  };
-  return get_display_case(target_type, target_min, target_max, target_narrative, measure);
-};
-// ^^ delete on drr17 exit
-
 const indicator_actual_text = (indicator) => {
   const {
     target_type,
@@ -225,7 +173,6 @@ const indicator_text_functions = {
   indicator_actual_text,
   indicator_previous_target_text,
   indicator_previous_actual_text,
-  drr17_indicator_target_text, // delete on drr17 exit
 };
 
 const filter_and_genericize_doc_counts = (counts, doc_key) => {
@@ -244,7 +191,6 @@ const filter_and_genericize_doc_counts = (counts, doc_key) => {
 export {
   Result,
   Indicator,
-  SubProgramEntity,
   ResultCounts,
   GranularResultCounts,
   status_key_to_glossary_key,

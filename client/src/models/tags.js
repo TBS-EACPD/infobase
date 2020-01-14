@@ -63,9 +63,6 @@ const Tag = class Tag extends extensible_subject_store(){
     }
 
   }
-  get is_first_wave(){ //in concordance with other subject classes... delete on drr17 exit
-    return false;
-  }
   plural(){
 
     if(this.root.id === "GOCO"){

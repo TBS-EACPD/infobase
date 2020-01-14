@@ -4,7 +4,6 @@ import { log_standard_event } from '../core/analytics.js';
 import { 
   Indicator, 
   Result, 
-  SubProgramEntity, 
   PI_DR_Links, 
   ResultCounts,
   GranularResultCounts,
@@ -102,27 +101,6 @@ export const subject_has_results = (subject) => {
 
 
 let _api_subject_ids_with_loaded_results = {};
-const sub_program_fields = `
-id
-name
-description
-spend_planning_year_1
-spend_planning_year_2
-spend_planning_year_3
-fte_planning_year_1
-fte_planning_year_2
-fte_planning_year_3
-dp_no_spending_expl
-dp_spend_trend_expl
-dp_no_fte_expl
-dp_fte_trend_expl
-spend_pa_last_year
-fte_pa_last_year
-planned_spend_pa_last_year
-planned_fte_pa_last_year
-drr_spend_expl
-drr_fte_expl
-`;
 const results_fields_fragment = (docs_to_load) => _.chain(docs_to_load)
   .map(doc =>`
 ${doc}_results: results(doc: "${doc}") {
@@ -176,14 +154,6 @@ ${results_fields_fragment(docs_to_load)}
 pidrlinks {
   program_id
   result_id
-}
-sub_programs {
-  ${sub_program_fields}
-  ${results_fields_fragment(docs_to_load)}
-  sub_programs {
-    ${sub_program_fields}
-    ${results_fields_fragment(docs_to_load)}
-  }
 }
 `;
 const crso_load_results_bundle_fragment = (docs_to_load) => `
@@ -246,8 +216,7 @@ query($lang: String!) {
 
 
 function extract_flat_data_from_results_hierarchies(hierarchical_response_data){
-  const sub_programs = [],
-    results = [],
+  const results = [],
     indicators = [],
     pi_dr_links = [];
 
@@ -288,47 +257,6 @@ function extract_flat_data_from_results_hierarchies(hierarchical_response_data){
           (pidrlink) => pi_dr_links.push(pidrlink)
         );
       }
-
-      if ( !_.isEmpty(subject.sub_programs) ){
-        _.each(
-          subject.sub_programs,
-          (sub_program) => {
-
-            const cleaned_sub_program = _.chain(sub_program)
-              .cloneDeep()
-              .omit("__typename")
-              .thru( sub_program => {
-                _.each(
-                  [
-                    "spend_planning_year_1",
-                    "spend_planning_year_2",
-                    "spend_planning_year_3",
-                    "fte_planning_year_1",
-                    "fte_planning_year_2",
-                    "fte_planning_year_3",
-                    "spend_pa_last_year",
-                    "fte_pa_last_year",
-                    "planned_spend_pa_last_year",
-                    "planned_fte_pa_last_year",
-                  ], 
-                  key => {
-                    sub_program[key] = _.isNaN(sub_program[key]) ? null : +sub_program[key];
-                  }
-                );
-
-                return {
-                  ...sub_program,
-                  parent_id: subject.id,
-                };
-              })
-              .value();
-
-            sub_programs.push(cleaned_sub_program);
-          }
-        );
-
-        crawl_hierachy_level(subject.sub_programs);
-      }
     }
   );
 
@@ -351,7 +279,6 @@ function extract_flat_data_from_results_hierarchies(hierarchical_response_data){
   );
 
   return {
-    sub_programs,
     results,
     indicators,
     pi_dr_links,
@@ -445,13 +372,11 @@ export function api_load_results_bundle(subject, result_docs){
       }
 
       const {
-        sub_programs,
         results,
         indicators,
         pi_dr_links,
       } = extract_flat_data_from_results_hierarchies(hierarchical_response_data);
 
-      _.each( sub_programs, obj => SubProgramEntity.create_and_register(obj) );
       _.each( results, obj => Result.create_and_register(obj) );
       _.each( indicators, obj => Indicator.create_and_register(obj) );
       _.each( pi_dr_links, ({program_id, result_id}) => PI_DR_Links.add(program_id, result_id) );

@@ -50,11 +50,6 @@ export const single_subj_results_scheme = {
   ),
   get_props_selector: ()=> {
 
-    const has_sub_selector = createSelector(
-      _.property('base_hierarchy'),
-      hierarchy => _.some(hierarchy, node => node.data.type === 'sub_program')
-    );
-
     const is_status_filter_enabled_selector = createSelector(
       _.property('single_subj_results.status_key_whitelist'), 
       whitelist => _.nonEmpty(whitelist)
@@ -86,7 +81,6 @@ export const single_subj_results_scheme = {
         doc,
         status_key_whitelist,
         
-        has_subs: has_sub_selector(augmented_state),
         subject,
         icon_counts,
         is_status_filter_enabled: is_status_filter_enabled_selector(augmented_state),

@@ -31,17 +31,10 @@ const common_panel_config = {
 };
 
 const curried_render = ({ q_a_keys, omit_name_item }) => function ({ calculations: { subject } }) {
-  let rendered_q_a_keys = _.compact(q_a_keys);
-
-  // vvv delete on drr17 exit
-  if (subject.level === 'crso') {
-    if (subject.is_cr) {
-      rendered_q_a_keys = ['what_are_CR', ...rendered_q_a_keys];
-    } else {
-      rendered_q_a_keys = ['what_are_SOut', ...rendered_q_a_keys];
-    }
-  }
-  // ^^^ delete on drr17 exit
+  let rendered_q_a_keys = _.compact([
+    ...q_a_keys,
+    subject.level === 'crso' && 'what_are_CR',
+  ]);
 
   return (
     <MediaQuery maxWidth={breakpoints.maxMediumDevice}>

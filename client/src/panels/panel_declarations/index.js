@@ -6,7 +6,6 @@ export {
   declare_dp_rev_split_panel,
   declare_planned_actual_comparison_panel,
   declare_spending_in_tag_perspective_panel,
-  declare_sub_program_resources_panel,
   declare_gocographic_panel,
   declare_auth_exp_prog_spending_panel,
   declare_internal_services_panel,
