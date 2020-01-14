@@ -4,35 +4,13 @@ import { get_standard_csv_file_rows } from '../load_utils.js';
 import { dp_docs } from './results_common.js';
 
 export default async function({models}){
-  const { SubProgram, Result, ResultCount, Indicator, PIDRLink } = models;
+  const { Result, ResultCount, Indicator, PIDRLink } = models;
   
-  const sub_program_records = get_standard_csv_file_rows("subprograms.csv");
-
   const result_records = get_standard_csv_file_rows("results.csv");
 
   const indicator_records = get_standard_csv_file_rows("indicators.csv");
 
   const pi_dr_links = get_standard_csv_file_rows("pi_dr_links.csv");
-
-  _.each(sub_program_records, sub_program => {
-    _.each([
-      "spend_planning_year_1",
-      "spend_planning_year_2",
-      "spend_planning_year_3",
-      "fte_planning_year_1",
-      "fte_planning_year_2",
-      "fte_planning_year_3",
-      "spend_pa_last_year",
-      "fte_pa_last_year",
-      "planned_spend_pa_last_year",
-      "planned_fte_pa_last_year",
-    ], key => {
-      sub_program[key] = _.isNaN(+sub_program[key]) ? null : +sub_program[key];
-    });
-
-    sub_program.sub_program_id = sub_program.id;
-    sub_program.id = null;
-  });
     
   _.each(result_records, result => {
     result.result_id = result.id;
@@ -93,9 +71,8 @@ export default async function({models}){
     }
   });
 
-  const result_count_records = get_result_count_records(sub_program_records, result_records, indicator_records);
+  const result_count_records = get_result_count_records(result_records, indicator_records);
 
-  await SubProgram.insertMany(sub_program_records);
   await Result.insertMany(result_records);
   await ResultCount.insertMany(result_count_records);
   await Indicator.insertMany(indicator_records);
@@ -103,18 +80,7 @@ export default async function({models}){
 }
 
 
-const get_result_count_records = (sub_programs, results, indicators) => {
-  const sub_program_id_to_program_id = _.chain(sub_programs)
-    .map(({sub_program_id, parent_id}) => [sub_program_id, parent_id])
-    .fromPairs()
-    .thru(
-      sub_program_id_to_parent_id => _.mapValues(
-        sub_program_id_to_parent_id,
-        (parent_id) => sub_program_id_to_parent_id[parent_id] || parent_id
-      )
-    )
-    .value();
-
+const get_result_count_records = (results, indicators) => {
   const indicators_by_result_id = _.groupBy(indicators, 'result_id');
 
   const gov_row = {
@@ -125,7 +91,7 @@ const get_result_count_records = (sub_programs, results, indicators) => {
 
   const igoc_rows = get_standard_csv_file_rows("igoc.csv");
   const dept_rows = _.chain(results)
-    .groupBy( ({subject_id}) => _.split(sub_program_id_to_program_id[subject_id] || subject_id, '-')[0] )
+    .groupBy( ({subject_id}) => _.split(subject_id, '-')[0] )
     .mapValues(
       results => _.flatMap(
         results,
@@ -142,7 +108,7 @@ const get_result_count_records = (sub_programs, results, indicators) => {
     .value();
 
   const crso_or_prog_rows = _.chain(results)
-    .groupBy( ({subject_id}) => sub_program_id_to_program_id[subject_id] || subject_id )
+    .groupBy('subject_id')
     .mapValues(
       results => _.flatMap(
         results,

@@ -75,11 +75,6 @@ fragment everything on Org {
       results(doc: "drr17") {
         ...result_and_indicator_fields
       }
-      sub_programs {
-        results(doc: "drr17") {
-          ...result_and_indicator_fields
-        }
-      }
     }
 
     dp18_results: results(doc: "dp18") {

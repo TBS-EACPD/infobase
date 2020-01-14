@@ -31,43 +31,12 @@ const schema = `
 
   extend type Program {
     target_counts(doc: String): ResultCount
-    sub_programs: [SubProgram]
     results(doc: String): [Result]
     # special departmental results to which this programs 'contributes' to
     drs: [Result]
     pidrlinks: [PIDRLink]
     has_results: Boolean
   }
-
-  type SubProgram {
-    id: String
-    name: String
-    description: String
-    spend_planning_year_1: Float
-    spend_planning_year_2: Float
-    spend_planning_year_3: Float
-    fte_planning_year_1: Float
-    fte_planning_year_2: Float
-    fte_planning_year_3: Float
-
-    dp_no_spending_expl: String
-    dp_spend_trend_expl: String
-    dp_no_fte_expl: String
-    dp_fte_trend_expl: String
-
-    spend_pa_last_year: Float
-    fte_pa_last_year: Float
-    planned_spend_pa_last_year: Float
-    planned_fte_pa_last_year: Float
-
-    drr_spend_expl: String
-    drr_fte_expl: String
-
-    program: Program
-    sub_programs: [SubProgram]
-    results(doc: String): [Result]
-  }
-
 
   type AllDocResultCount {
     subject_id: String
@@ -171,7 +140,6 @@ export default function({models,loaders}){
     Org,
     Crso,
     Program,
-    SubProgram,
     Result,
     ResultCount,
     Indicator,
@@ -186,7 +154,6 @@ export default function({models,loaders}){
     result_by_subj_loader,
     indicator_by_result_loader,
     program_link_loader,
-    sub_program_loader,
     indicator_id_loader,
   } = loaders;
 
@@ -235,15 +202,8 @@ export default function({models,loaders}){
       .map(attr)
       .compact()
       .value();
-
-    const sub_programs = await sub_program_loader.loadMany(cr_or_program_ids);
-    const sub_subs = await sub_program_loader.loadMany( flatmap_to_attr(sub_programs, 'sub_program_id') );
     
-    const results = await result_by_subj_loader.loadMany([
-      ...cr_or_program_ids,
-      ...flatmap_to_attr(sub_programs, 'sub_program_id'),
-      ...flatmap_to_attr(sub_subs, 'sub_program_id'),
-    ]);
+    const results = await result_by_subj_loader.loadMany(cr_or_program_ids);
 
     const all_indicators = await indicator_by_result_loader.loadMany( flatmap_to_attr(results, 'result_id') );
 
@@ -278,8 +238,6 @@ export default function({models,loaders}){
       id_val = subject.crso_id;
     } else if(subject instanceof Program){
       id_val = subject.program_id;
-    } else if (subject instanceof SubProgram){
-      id_val = subject.sub_program_id;
     } else {
       throw "bad subject";
     }
@@ -332,7 +290,6 @@ export default function({models,loaders}){
     },
     Program: {
       results: get_results,
-      sub_programs: ({program_id}) => sub_program_loader.load(program_id),
       drs: ({program_id}) => program_link_loader.load(program_id),
       pidrlinks: async ({program_id}) => {
         const linked_results = await program_link_loader.load(program_id);
@@ -343,21 +300,6 @@ export default function({models,loaders}){
       },
       target_counts: ({program_id}, {doc}) => get_target_counts([program_id], doc),
       has_results: ({program_id}) => subject_has_results(program_id),
-    },
-    SubProgram: {
-      id: _.property('sub_program_id'),
-      sub_programs: ({sub_program_id}) => sub_program_loader.load(sub_program_id),
-      results: get_results,
-      name: bilingual_field("name"),
-      description: bilingual_field("description"),
-
-      drr_fte_expl: bilingual_field("drr_fte_expl"),
-      drr_spend_expl: bilingual_field("drr_spend_expl"),
-
-      dp_fte_trend_expl: bilingual_field("dp_fte_trend_expl"),
-      dp_spend_trend_expl: bilingual_field("dp_spend_trend_expl"),
-      dp_no_fte_expl: bilingual_field("dp_no_fte_expl"),
-      dp_no_spending_expl: bilingual_field("dp_no_spending_expl"),
     },
     Result: {
       id: _.property('result_id'),

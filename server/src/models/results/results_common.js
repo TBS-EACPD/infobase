@@ -1,5 +1,4 @@
 const current_drr_docs = [
-  "drr17",
   "drr18",
 ];
 const current_dp_docs = [
