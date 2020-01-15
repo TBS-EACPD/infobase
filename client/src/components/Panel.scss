@@ -71,6 +71,7 @@
     background-color: $primaryColor;
     border-radius: $standardBorderRadius;
     border: 2px solid $primaryColor;
+    contain: content;
     overflow:hidden
   }
   
@@ -92,6 +93,7 @@
   }
   button.panel-heading-utils {
     background-color: Transparent;
+    contain: strict;
     border: none;
     margin-right: 5px;
     padding: 0;
