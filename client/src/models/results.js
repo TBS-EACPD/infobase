@@ -373,6 +373,13 @@ const result_docs = {
   ...drr_docs,
   ...dp_docs,
 };
+const result_docs_in_tabling_order = _.chain(result_docs)
+  .values()
+  .sortBy( ({doc_type, year_short}) => doc_type === 'drr' ?
+    +year_short + 1.1 : // DRRs are tabled a year behind, add 0.1 further to give priority over same year DPs 
+    +year_short - 1 // DPs are tabled a year ahead
+  )
+  .value();
 
 const get_result_doc_keys = (doc_type) => _.chain([drr_docs, dp_docs])
   .map( (docs) => _.chain(docs)
@@ -394,7 +401,6 @@ const get_result_doc_keys = (doc_type) => _.chain([drr_docs, dp_docs])
 const current_drr_key = _.last( get_result_doc_keys('drr') );
 const current_dp_key = _.last( get_result_doc_keys('dp') );
 
-
 export {
   Result,
   Indicator,
@@ -404,6 +410,7 @@ export {
   status_key_to_glossary_key,
   ordered_status_keys,
   result_docs,
+  result_docs_in_tabling_order,
   get_result_doc_keys,
   current_drr_key,
   current_dp_key,

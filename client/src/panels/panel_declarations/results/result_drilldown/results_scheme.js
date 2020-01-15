@@ -7,7 +7,7 @@ import { create_full_results_hierarchy } from './result_hierarchies.js';
 import {
   ensure_loaded,
   Subject,
-  Results, 
+  Results,
 } from '../../shared.js';
 
 const { 
@@ -16,9 +16,9 @@ const {
 
 const { Indicator } = Results;
 
-export const get_initial_single_subj_results_state = ({subj_guid, doc, mode, docs_with_data }) => ({
+export const get_initial_single_subj_results_state = ({subj_guid, doc}) => ({
   data_loading: false, // smoother if responsibility for loading initial state data falls outside redux, so assume start with data loaded
-  doc: _.last(docs_with_data),
+  doc,
   subject_guid: subj_guid || 'dept_1',
   status_key_whitelist: [],
 });

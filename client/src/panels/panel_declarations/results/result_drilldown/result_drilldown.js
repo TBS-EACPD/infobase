@@ -24,6 +24,7 @@ import {
   ResultCounts,
   GranularResultCounts,
   result_docs,
+  result_docs_in_tabling_order,
 } from '../results_common.js';
 import { StatusIconTable, InlineStatusIconList } from '../result_components.js';
 import { TM, text_maker } from '../result_text_provider.js';
@@ -405,15 +406,13 @@ class SingleSubjResultsContainer extends React.Component {
   componentDidMount(){
     const { 
       subject,
-      docs_with_data,
+      latest_doc_with_data,
     } = this.props;
-
-    const { doc } = get_initial_single_subj_results_state({ subj_guid: subject.guid, docs_with_data });
    
     ensure_loaded({
       subject,
       results: true,
-      result_docs: [doc],
+      result_docs: [latest_doc_with_data],
     })
       .then( () => this.setState({loading: false}) );
   }
@@ -421,6 +420,7 @@ class SingleSubjResultsContainer extends React.Component {
     const { 
       subject,
       docs_with_data,
+      latest_doc_with_data,
     } = this.props;
     const { loading } = this.state;
 
@@ -448,7 +448,7 @@ class SingleSubjResultsContainer extends React.Component {
   
       const initialState = {
         root: ({...initial_root_state, scheme_key}),
-        [scheme_key]: get_initial_single_subj_results_state({ subj_guid: subject.guid, docs_with_data }),
+        [scheme_key]: get_initial_single_subj_results_state({ subj_guid: subject.guid, doc: latest_doc_with_data }),
       };
   
       const Container = connect(mapStateToProps, mapDispatchToProps)(SingleSubjExplorer);
@@ -480,8 +480,8 @@ export const declare_explore_results_panel = () => declare_panel({
         ResultCounts.get_dept_counts(subject.id) :
         GranularResultCounts.get_subject_counts(subject.id);
 
-      const had_doc_data = (doc) => {
-        const count_key = /drr/.test(doc) ? `${doc}_total` : `${doc}_indicators`;
+      const had_doc_data = (doc_key) => {
+        const count_key = /drr/.test(doc_key) ? `${doc_key}_total` : `${doc_key}_indicators`;
         return (
           !_.isUndefined(subject_result_counts) && 
           !_.isNull(subject_result_counts[count_key]) && 
@@ -498,7 +498,13 @@ export const declare_explore_results_panel = () => declare_panel({
         return false;
       }
 
-      return { docs_with_data };
+      const latest_doc_with_data = _.chain(result_docs_in_tabling_order)
+        .map('doc_key')
+        .intersection(docs_with_data)
+        .last()
+        .value();
+
+      return { docs_with_data, latest_doc_with_data };
     },
 
     render({calculations, sources}){
@@ -506,6 +512,7 @@ export const declare_explore_results_panel = () => declare_panel({
         subject, 
         panel_args: {
           docs_with_data,
+          latest_doc_with_data,
         },
       } = calculations;
 
@@ -525,6 +532,7 @@ export const declare_explore_results_panel = () => declare_panel({
             {...{
               subject,
               docs_with_data,
+              latest_doc_with_data,
             }}
           />
         </InfographicPanel>
