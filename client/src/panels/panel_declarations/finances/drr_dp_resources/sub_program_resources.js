@@ -18,6 +18,7 @@ import {
   map_dispatch_to_root_props,
 } from '../../../../explorer_common/state_and_memoizing.js';
 import { provide_sort_func_selector } from '../../../../explorer_common/resource_explorer_common.js';
+import { Explorer } from '../../../../explorer_common/explorer_components.js';
 
 import { PlannedActualTable } from '../planned_actual_comparison/PlannedActualTable.js';
 
@@ -28,14 +29,11 @@ import {
   InfographicPanel,
   create_text_maker_component,
   TabbedControls,
-  util_components,
   Format,
 
   declare_panel,
 } from "../../shared.js";
 
-
-const { Explorer } = util_components;
 
 const { get_by_guid } = Subject;
 
@@ -299,7 +297,7 @@ class SubProgramResourceTree extends React.Component {
         />
       </div>
     </div>;
-    
+
     const tab_on_click = (doc) => set_doc !== doc && set_doc(doc);
 
     if(!has_dp_data || !has_drr_data){ //don't wrap the inner content in a tab layout
