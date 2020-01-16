@@ -20,7 +20,7 @@ const { planning_years } = year_templates;
 const planning_year = _.first(planning_years);
 
 
-const non_rolling_up_schemes = ['WWH', 'MLT', 'HI'];
+const non_rolling_up_schemes = ['HWH', 'WWH', 'HI'];
 
 const related_tags_row = (related_tags, subject_type) => {
   const term = subject_type === "program" ? 
@@ -74,7 +74,6 @@ function create_resource_hierarchy({hierarchy_scheme, year}){
         case 'HWH':
         case 'WWH':
         case 'CCOFOG':
-        case 'MLT':
         case 'HI':
           return _.map(Tag.lookup(hierarchy_scheme).children_tags, tag => ({
             id: tag.guid,
