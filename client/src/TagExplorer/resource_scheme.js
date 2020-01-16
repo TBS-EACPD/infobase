@@ -73,7 +73,6 @@ function create_resource_hierarchy({hierarchy_scheme, year}){
         case 'GOCO':
         case 'HWH':
         case 'WWH':
-        case 'CCOFOG':
         case 'HI':
           return _.map(Tag.lookup(hierarchy_scheme).children_tags, tag => ({
             id: tag.guid,

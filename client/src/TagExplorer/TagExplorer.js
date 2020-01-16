@@ -443,7 +443,7 @@ export default class TagExplorer extends React.Component {
     } = match;
 
     hierarchy_scheme = (
-      _.includes(['min','dept','GOCO','HWH', "WWH", "CCOFOG", "HI"], hierarchy_scheme) ? 
+      _.includes(['min','dept','GOCO','HWH', "WWH", "HI"], hierarchy_scheme) ? 
         hierarchy_scheme :
         'min'
     );
