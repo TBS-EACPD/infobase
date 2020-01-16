@@ -274,6 +274,10 @@ function populate_program_tag_linkages(programs_m2m_tags){
     const tag = Tag.lookup(tagID);
     const tag_root_id = tag.root.id;
 
+    // CCOFOGs are currently disabled, they have quirks to resolve and code around (duplicated nodes as you go down, some tagging done at the root level some at other levels, etc.)
+    if(tag_root_id === "CCOFOG"){
+      return;
+    }
 
     program.tags.push(tag);
     tag.programs.push(program);
