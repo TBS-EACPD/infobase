@@ -74,12 +74,6 @@ const Tag = class Tag extends extensible_subject_store(){
       } else {
         return trivial_text_maker("gocos");
       }
-    } else if(this.root.id === "MLT"){
-      if(!this.is_lowest_level_tag){
-        return trivial_text_maker("priorities");
-      } else {
-        return trivial_text_maker("commitments");
-      }
     } else {
       if (_.nonEmpty(this.programs) && _.isEmpty(this.children_tags)){
         return trivial_text_maker("tag")+"(s)";

@@ -53,7 +53,6 @@ const route_arg_to_year_map = {
 };
 const year_to_route_arg_map = _.invert(route_arg_to_year_map);
 
-const dp_only_schemes = ["MLT"];
 
 const children_grouper = (node, children) => {
   if(node.root){
@@ -175,13 +174,11 @@ class ExplorerPage extends React.Component {
     const [
       goco_props, 
       hwh_props,
-      //mlt_props,
       wwh_props,
       hi_props,
     ] = _.chain([ 
       Tag.lookup("GOCO"),
       Tag.lookup("HWH"),
-      //Tag.lookup("MLT"),
       Tag.lookup("WWH"),
       Tag.lookup("HI"),
     ])
@@ -277,7 +274,7 @@ class ExplorerPage extends React.Component {
               const route_base = window.location.href.split('#')[0];
 
               const new_route = {
-                [actual_year]: `#tag-explorer/${_.includes(dp_only_schemes, hierarchy_scheme) ? "min" : hierarchy_scheme }/actual`,
+                [actual_year]: `#tag-explorer/${hierarchy_scheme}/actual`,
                 [planning_year]: `#tag-explorer/${hierarchy_scheme}/planned`,
               }[key];
 
@@ -446,7 +443,7 @@ export default class TagExplorer extends React.Component {
     } = match;
 
     hierarchy_scheme = (
-      _.includes(['min','dept','GOCO','HWH', "WWH", "CCOFOG", "MLT", "HI"], hierarchy_scheme) ? 
+      _.includes(['min','dept','GOCO','HWH', "WWH", "CCOFOG", "HI"], hierarchy_scheme) ? 
         hierarchy_scheme :
         'min'
     );
