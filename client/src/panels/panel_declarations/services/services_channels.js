@@ -38,7 +38,7 @@ class ServicesChannelsPanel extends React.Component {
     const { selected_service_id } = this.state;
     const colors = infobase_colors();
 
-    const data_keys = ["telephone_enquires",	"website_visits",	"online_applications",	"in_person_applications",	"mail_applications",	"other_channel_applications"];
+    const data_keys = ["telephone_enquires", "website_visits", "online_applications", "in_person_applications", "mail_applications", "other_channel_applications"];
 
     const all_services = _.chain({})
       .mergeWith(..._.map(panel_args.services, serv=>_.pick(serv,data_keys)),_.add)
