@@ -132,7 +132,7 @@ class RootedResourceExplorer extends React.Component {
       </div>
     </div>;
 
-    if(_.includes(["CCOFOG", "WWH"], subject.root.id)){
+    if(_.includes(["WWH"], subject.root.id)){
       return inner_content;
     }
  

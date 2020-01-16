@@ -274,10 +274,6 @@ function populate_program_tag_linkages(programs_m2m_tags){
     const tag = Tag.lookup(tagID);
     const tag_root_id = tag.root.id;
 
-    // we have CCOFOG data but, for [reason] we don't use them in the InfoBase currently
-    if(tag_root_id === "CCOFOG"){
-      return;
-    }
 
     program.tags.push(tag);
     tag.programs.push(program);
