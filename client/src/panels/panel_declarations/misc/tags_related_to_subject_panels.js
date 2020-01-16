@@ -22,7 +22,6 @@ const { HeightClipper, WellList } = util_components;
 const scheme_order = [
   "GOCO",
   "WWH",
-  "MLT",
   "CCOFOG",
   "HWH",
 ];
