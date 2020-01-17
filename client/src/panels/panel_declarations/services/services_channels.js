@@ -40,8 +40,11 @@ class ServicesChannelsPanel extends React.Component {
 
     const data_keys = ["telephone_enquires", "website_visits", "online_applications", "in_person_applications", "mail_applications", "other_channel_applications"];
 
-    const all_services = _.chain({})
-      .mergeWith(..._.map(panel_args.services, serv=>_.pick(serv,data_keys)),_.add)
+    const all_services = _.chain(panel_args.services)
+      .map( service => _.pick(service, data_keys) )
+      .flatMap( _.toPairs )
+      .groupBy( _.first )
+      .mapValues( (key_value_pairs) => _.reduce(key_value_pairs, (sum, [key, value]) => sum + value, 0) )
       .merge({name: text_maker("all_services"), id: "all"})
       .value();
 
@@ -69,14 +72,14 @@ class ServicesChannelsPanel extends React.Component {
     
     const all_feedback_channels = ["Online", "Postal Mail", "Fax", "Email", "In-Person", "Telephone"];
 
-    const feedback_channel_statuses = _.reduce(all_feedback_channels, (result, channel) => {
-      result.push({
-        id: channel,
-        label: channel,
-        color: _.includes(selected_service.feedback_channels, channel) ? colors(0) : null,
-      });
-      return result;
-    }, []);
+    const feedback_channel_statuses = _.map(all_feedback_channels,
+      channel => 
+        ({
+          id: channel,
+          label: channel,
+          color: _.includes(selected_service.feedback_channels, channel) ? colors(0) : null,
+        })
+    );
 
     return (
       <Fragment>
