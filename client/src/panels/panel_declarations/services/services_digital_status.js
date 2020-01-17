@@ -23,10 +23,11 @@ const ServicesDigitalPanel = ({panel_args}) => {
 
   const heatmap_data = _.chain(panel_args.services)
     .map(serv=>_.pick(serv,_.concat(["name"], data_keys)))
-    .map(serv=>_.each(serv, (value, key)=>{
-      if(value===null) serv[key] = NaN;
-      if(_.includes(data_keys, key)) serv[text_maker(key)] = serv[key];
-    } ))
+    .map(serv=>_.chain(serv)
+      .map( (value, key) => ([text_maker(key),value]) )
+      .map( pair => pair[1] === null ? [pair[0],NaN] : pair ) 
+      .fromPairs()
+      .value() )
     .value();
 
   const legend_items = [
@@ -88,7 +89,7 @@ const ServicesDigitalPanel = ({panel_args}) => {
             <NivoResponsiveHeatMap
               data={heatmap_data}
               keys={_.map(data_keys, key => text_maker(key))}
-              indexBy="name"
+              indexBy="Name"
               tooltip={(d) => tooltip( [d], (value) => formats.big_int(value, {raw: true}) ) }
               colors={["#4abbc4",window.infobase_color_constants.secondaryColor]}
               nanColor={window.infobase_color_constants.tertiaryColor}
