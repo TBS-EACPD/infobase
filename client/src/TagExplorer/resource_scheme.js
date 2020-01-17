@@ -156,8 +156,8 @@ const get_initial_resource_state = ({hierarchy_scheme, year}) => {
   return {
     hierarchy_scheme: scheme_id,
     year: year || planning_year,
-    sort_col: !can_roll_up ? 'spending' : 'name',
-    is_descending: !can_roll_up,
+    sort_col: can_roll_up ? 'spending' : 'name',
+    is_descending: can_roll_up,
   };
 };
 

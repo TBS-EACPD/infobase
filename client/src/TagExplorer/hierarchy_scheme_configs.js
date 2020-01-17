@@ -20,7 +20,7 @@ const tag_configs = _.chain(Tag.tag_roots)
     title: name,
     text: description,
     is_m2m,
-    can_roll_up: is_m2m,
+    can_roll_up: !is_m2m,
     get_depth_one_nodes: (year) => _.map(
       children_tags, 
       tag => ({
@@ -59,7 +59,7 @@ const min_config = {
   title: trivial_text_maker("how_were_accountable"),
   text: trivial_text_maker("portfolio_description"),
   is_m2m: false,
-  can_roll_up: false,
+  can_roll_up: true,
   get_depth_one_nodes: (year) => _.chain( Ministry.get_all() )
     .map(min => ({
       id: min.guid,
@@ -80,7 +80,7 @@ const dept_config = {
   title: trivial_text_maker("organizations_public_funds"),
   text: trivial_text_maker("a_z_list_of_orgs"),
   is_m2m: false,
-  can_roll_up: false,
+  can_roll_up: true,
   get_depth_one_nodes: (year) => _.map(
     Dept.get_all(),
     org => get_org_nodes(org, year),
