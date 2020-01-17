@@ -8,7 +8,6 @@ import {
 } from '../link_utils.js';
 import { StandardRouteContainer } from '../core/NavComponents.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
-import { Subject } from '../models/subject.js';
 import { GlossaryEntry } from '../models/glossary.js';
 import { year_templates} from '../models/years.js';
 import { run_template } from '../models/text.js';
@@ -38,8 +37,7 @@ import {
 import { Explorer } from '../explorer_common/explorer_components.js';
 
 import { resource_scheme, get_initial_resource_state } from './resource_scheme.js';
-
-const { Tag } = Subject;
+import { hierarchy_scheme_configs, default_scheme_id } from './hierarchy_scheme_configs.js';
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -52,7 +50,6 @@ const route_arg_to_year_map = {
   planned: planning_year,
 };
 const year_to_route_arg_map = _.invert(route_arg_to_year_map);
-
 
 const children_grouper = (node, children) => {
   if(node.root){
@@ -153,7 +150,6 @@ class ExplorerPage extends React.Component {
       sort_col,
       col_click,
       year,
-      is_m2m,
     } = this.props;
 
 
@@ -171,39 +167,16 @@ class ExplorerPage extends React.Component {
 
     const root = get_root(flat_nodes);
 
-    const [
-      goco_props, 
-      hwh_props,
-      wwh_props,
-      hi_props,
-    ] = _.chain([ 
-      Tag.lookup("GOCO"),
-      Tag.lookup("HWH"),
-      Tag.lookup("WWH"),
-      Tag.lookup("HI"),
-    ])
-      .compact()
-      .map( ({ description, name, id }) => ({
-        title: name,
-        text: description,  
-        active: hierarchy_scheme === id,
+    const all_category_props = _.map(
+      hierarchy_scheme_configs,
+      ({id, title, text, is_m2m}) => ({
         id,
-      }))
-      .value();
-    const min_props = {
-      title: text_maker("how_were_accountable"),
-      text: text_maker("portfolio_description"),
-      active: hierarchy_scheme === 'min',
-      id: 'min',
-    };
-
-    const dept_props = {
-      title: text_maker("organizations_public_funds"),
-      text: text_maker("a_z_list_of_orgs"),
-      active: hierarchy_scheme === 'dept',
-      id: 'dept',
-    };
-    const all_category_props = [ min_props, dept_props, goco_props, hwh_props, wwh_props, hi_props];
+        title,
+        text,
+        is_m2m,
+        active: id === hierarchy_scheme,
+      })
+    );
     const current_category = _.find(all_category_props, props => props.active);
 
     const inner_content = <div>
@@ -312,7 +285,7 @@ class ExplorerPage extends React.Component {
               />
             }
           </h2>
-          { is_m2m &&
+          { current_category.is_m2m &&
             <AlertBanner banner_class="danger">
               <KeyConceptList 
                 question_answer_pairs={
@@ -443,9 +416,9 @@ export default class TagExplorer extends React.Component {
     } = match;
 
     hierarchy_scheme = (
-      _.includes(['min','dept','GOCO','HWH', "WWH", "HI"], hierarchy_scheme) ? 
+      _.chain(hierarchy_scheme_configs).map('id').includes(hierarchy_scheme).value() ? 
         hierarchy_scheme :
-        'min'
+        default_scheme_id
     );
 
     const year = route_arg_to_year_map[period] || planning_year;
