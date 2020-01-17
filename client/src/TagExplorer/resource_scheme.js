@@ -5,54 +5,18 @@ import { filter_hierarchy, convert_d3_hierarchy_to_explorer_hierarchy } from '..
 
 import { infograph_href_template } from '../link_utils.js';
 import { shallowEqualObjectsOverKeys, sanitized_dangerous_inner_html } from '../general_utils.js';
-import { HeightClipper } from '../components/index.js';
-import { Subject } from '../models/subject.js';
 import { year_templates} from '../models/years.js';
 import { trivial_text_maker as text_maker } from '../models/text.js';
 
-const { 
-  Tag,
-  Dept, 
-  Ministry, 
-} = Subject;
+import { related_tags_row } from './tag_hierarchy_utils.js';
+import { hierarchy_scheme_configs, default_scheme_id } from './hierarchy_scheme_configs.js';
 
 const { planning_years } = year_templates;
 const planning_year = _.first(planning_years);
 
 
-const non_rolling_up_schemes = ['HWH', 'WWH', 'HI'];
-
-const related_tags_row = (related_tags, subject_type) => {
-  const term = subject_type === "program" ? 
-    text_maker('related_tags_for_program') : 
-    text_maker('related_tags');
-  
-  const list_content = (
-    <ul className="ExplorerNode__List">
-      {_.map(related_tags, related_tag =>
-        <li key={related_tag.id}>
-          <a href={infograph_href_template(related_tag)} >
-            {related_tag.name} 
-          </a>
-        </li>
-      )}
-    </ul>
-  );
-  const def = related_tags.length > 6 ?
-    <HeightClipper 
-      allowReclip={true} 
-      clipHeight={110}
-      children={list_content} 
-    /> :
-    list_content;
-
-  return {
-    term,
-    def,
-  };
-};
-
 function create_resource_hierarchy({hierarchy_scheme, year}){
+  const hierarchy_scheme_config = hierarchy_scheme_configs[hierarchy_scheme];
 
   const get_resources = subject => get_resources_for_subject(subject, year);
 
@@ -67,66 +31,8 @@ function create_resource_hierarchy({hierarchy_scheme, year}){
       return node.children; //shortcut: if children is already defined, use it.
     }
 
-    if(node === root){//if there is no root subject, we use all departments as children of the root.
-      switch(hierarchy_scheme){
-
-        case 'GOCO':
-        case 'HWH':
-        case 'WWH':
-        case 'HI':
-          return _.map(Tag.lookup(hierarchy_scheme).children_tags, tag => ({
-            id: tag.guid,
-            data: {
-              name: tag.name,
-              resources: _.includes(non_rolling_up_schemes, hierarchy_scheme) ? null : get_resources(tag),
-              subject: tag,
-              defs: tag.is_lowest_level_tag && _.compact(
-                [
-                  !_.isEmpty(tag.description) && {
-                    term: text_maker('description'),
-                    def: <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(tag.description)} />,
-                  },
-                  tag.is_m2m && !_.isEmpty( tag.related_tags() ) && 
-                    related_tags_row( tag.related_tags(), "tag" ),
-                ]
-              ),  
-            },
-          }));
-
-        case 'min':
-          return _.chain( Ministry.get_all() )
-            .map(min => ({
-              id: min.guid,
-              data: {
-                name: min.name,
-                subject: min,
-                resources: get_resources(min),
-              },
-              children: _.chain(min.orgs)
-                .map(org => ({
-                  id: org.guid,
-                  data: {
-                    name: org.name,
-                    subject: org,
-                    resources: get_resources(org),
-                  },
-                }))
-                .value(), 
-            }))
-            .value();
-
-        case 'dept':
-          return _.chain(Dept.get_all())
-            .map(org => ({
-              id: org.guid,
-              data: {
-                name: org.name,
-                subject: org,
-                resources: get_resources(org),
-              },
-            }))
-            .value();
-      }
+    if(node === root){
+      return hierarchy_scheme_config.get_depth_one_nodes(year);
     } 
 
     const {
@@ -137,7 +43,6 @@ function create_resource_hierarchy({hierarchy_scheme, year}){
     } = node;
 
     switch(subject.level){
-
       case 'tag': {
         if(subject.is_lowest_level_tag){
           return _.chain(subject.programs)
@@ -186,6 +91,7 @@ function create_resource_hierarchy({hierarchy_scheme, year}){
 
         break;
       }
+
       case 'dept': {
         return _.chain(subject.crsos)
           .map(crso => ({
@@ -242,21 +148,24 @@ function create_resource_hierarchy({hierarchy_scheme, year}){
 }
 
 
-const get_initial_resource_state = ({hierarchy_scheme, year}) => ({
-  hierarchy_scheme: hierarchy_scheme || "min",
-  year: year || planning_year,
-  sort_col: _.includes(non_rolling_up_schemes, hierarchy_scheme) ? 'name' : 'spending',
-  is_descending: !_.includes(non_rolling_up_schemes, hierarchy_scheme),
-});
+const get_initial_resource_state = ({hierarchy_scheme, year}) => {
+  const scheme_id = hierarchy_scheme || default_scheme_id;
+
+  const can_roll_up = hierarchy_scheme_configs[scheme_id].can_roll_up;
+
+  return {
+    hierarchy_scheme: scheme_id,
+    year: year || planning_year,
+    sort_col: !can_roll_up ? 'spending' : 'name',
+    is_descending: !can_roll_up,
+  };
+};
 
 const resource_scheme = {
   key: 'resources',
   get_sort_func_selector: () => provide_sort_func_selector('resources'),
   get_props_selector: () => {
-    return augmented_state => ({ 
-      ...augmented_state.resources,
-      is_m2m: _.includes(['HWH', 'WWH', 'HI'], augmented_state.resources.hierarchy_scheme),
-    });
+    return augmented_state => augmented_state.resources;
   },
   dispatch_to_props: dispatch => ({ 
     col_click: col_key => dispatch({ type: 'column_header_click', payload: col_key }),
