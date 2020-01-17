@@ -54,13 +54,13 @@ class ServicesChannelsPanel extends React.Component {
     
     const selected_title = `${text_maker("channels_enquiry_vectors")} ${selected_service.name}`;
 
-    const bar_data = _.chain(data_keys)
-      .map(key => ({
-        number: selected_service[key],
+    const bar_data = _.map(
+      data_keys,
+      key => ({
+        [text_maker("number_of_enquiries")]: selected_service[key],
         label: text_maker(`label_${key}`),
-      }) )
-      .each(obj => {obj[text_maker("number_of_enquiries")] = obj.number;})
-      .value();
+      })
+    );
 
     const options = _.chain([all_services])
       .concat(panel_args.services)
