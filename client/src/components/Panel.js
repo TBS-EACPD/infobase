@@ -100,7 +100,7 @@ export class Panel extends React.Component{
               </button>
             }
             { title && <h3 className="panel-title"> {title} </h3> }
-            { otherHeaderContent }
+            { isOpen && otherHeaderContent }
           </header>
         }
         { isOpen && 
