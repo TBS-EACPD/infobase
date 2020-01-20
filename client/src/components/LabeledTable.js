@@ -28,7 +28,7 @@ export class LabeledTable extends React.Component {
                   { styles && styles.header ? <span className={styles.header}>{item.name}</span> : item.name }
                 </div>
                 <div className="labeled-table-item__description">
-                  { styles && styles.desc ? <span className={styles.desc}>item.desc</span> : item.desc }
+                  { styles && styles.desc ? <span className={styles.desc}>{item.desc}</span> : item.desc }
                 </div>
               </a> :
               <div className="labeled-table-item" key={item.name}>
@@ -36,7 +36,7 @@ export class LabeledTable extends React.Component {
                   { styles && styles.header ? <span className={styles.header}>{item.name}</span> : item.name }
                 </div>
                 <div className="labeled-table-item__description">
-                  { styles && styles.desc ? <span className={styles.desc}>item.desc</span> : item.desc }
+                  { styles && styles.desc ? <span className={styles.desc}>{item.desc}</span> : item.desc }
                 </div>
               </div>
           )}
