@@ -13,7 +13,7 @@ export class LabeledTable extends React.Component {
         <div className="labeled-table__header">
           {title}
         </div>
-        <div className="labeled-table-items">
+        <div className="labeled-table__items">
           {_.map(content, item =>
           item.href ?
               <a href={item.href}
