@@ -71,7 +71,7 @@
 }
 
 @media(max-width:$maxMediumDevice){
-  .labeled-table-items {
+  .labeled-table__items {
     display: flex;
     flex-direction: column;
   }
