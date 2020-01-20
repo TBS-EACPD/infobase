@@ -1,9 +1,12 @@
 import './DisplayTable.scss';
+import text from '../common_text/result_lang.yaml';
+import { create_text_maker_component } from './misc_util_components.js';
 
 import classNames from 'classnames';
 
 import { SortDirections } from './SortDirection.js';
-import { TM } from './TextMaker.js';
+
+const { text_maker, TM } = create_text_maker_component(text);
 
 export class DisplayTable extends React.Component {
   constructor(props){
@@ -11,9 +14,8 @@ export class DisplayTable extends React.Component {
     this.state = {
       sort_by: "label",
       descending: true,
-      filter_by: undefined,
-      filter: undefined,
-      show_all: false,
+      indicator_query: "",
+      activity_query: "",
     };
   }
 
@@ -39,11 +41,14 @@ export class DisplayTable extends React.Component {
     } = this.props;
     const {
       sort_by,
+      activity_query,
+      indicator_query,
       descending,
     } = this.state;
-  
 
+    const lower_case_str_includes = (string, substring) => _.includes(string.toLowerCase().trim(), substring.toLowerCase().trim());
     const sorted_data = _.chain(data)
+      .filter(row => lower_case_str_includes(row.sort_keys.label, activity_query) && lower_case_str_includes(row.sort_keys.indicator, indicator_query))
       .sortBy(row => _.has(row["sort_keys"],sort_by) ? row["sort_keys"][sort_by] : row["label"]) // careful with sorting, sort keys could be zero/falsey
       .tap(descending ? _.noop : _.reverse)
       .value();
@@ -64,12 +69,24 @@ export class DisplayTable extends React.Component {
             <tr className="table-header">
               <th 
                 className="center-text"
-                onClick={ () => this.header_click("label") }
               >
                 {label_col_header || ""}
-                <SortDirections 
-                  asc={!descending && sort_by === "label"} 
-                  desc={descending && sort_by === "label"}
+                <div
+                  onClick={ () => this.header_click("label") }
+                >
+                  <SortDirections 
+                    asc={!descending && sort_by === "label"} 
+                    desc={descending && sort_by === "label"}
+                  />
+                </div>
+                <input
+                  type="text"
+                  style={{width: "100%"}}
+                  value={activity_query}
+                  onChange={evt => 
+                    this.setState({ activity_query: evt.target.value })
+                  }
+                  placeholder={text_maker('filter_results')}
                 />
               </th>
               {
@@ -79,13 +96,27 @@ export class DisplayTable extends React.Component {
                       <th 
                         key={i} 
                         className={classNames("center-text", "display-table__sortable")}
-                        onClick={ () => _.includes(sort_keys,tick) && this.header_click(tick) }
                       >
                         {table_data_headers[i]}
-                        <SortDirections 
-                          asc={!descending && sort_by === tick} 
-                          desc={descending && sort_by === tick}
-                        />
+                        <div
+                          onClick={ () => _.includes(sort_keys,tick) && this.header_click(tick) }
+                        >
+                          <SortDirections 
+                            asc={!descending && sort_by === tick} 
+                            desc={descending && sort_by === tick}
+                          />
+                        </div>
+                        { tick === "indicator" &&
+                          <input
+                            type="text"
+                            style={{width: "100%"}}
+                            value={indicator_query}
+                            onChange={evt => 
+                              this.setState({ indicator_query: evt.target.value })
+                            }
+                            placeholder={text_maker('filter_results')}
+                          />
+                        }
                       </th> :
                       <th 
                         key={i} 
