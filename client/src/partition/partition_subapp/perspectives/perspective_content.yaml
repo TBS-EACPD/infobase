@@ -95,7 +95,7 @@ partition_popup_parent_dept_name:
   handlebars_partial: true
   text: |
     <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
-      <a href='#orgs/dept/{{dept_id}}/infograph' class='partition-link-out' style='color:inherit;'> 
+      <a href='#orgs/dept/{{dept_id}}/infograph/intro' class='partition-link-out' style='color:inherit;'> 
         {{dept_name}}
       </a>
     </div>
@@ -113,7 +113,7 @@ partition_popup_description:
 partition_popup_infograph_link:
   handlebars_partial: true
   text: |
-    <a href='#orgs/{{level}}/{{id}}/infograph' 
+    <a href='#orgs/{{level}}/{{id}}/infograph/intro' 
       class='btn btn-xs btn-block mrgn-bttm-sm partition-link-out' 
       style='background-color:{{color}};'>
       {{gt "see_the_infographic"}}
@@ -179,7 +179,7 @@ partition_program_popup:
     <ul class='list-unstyled'>
       {{#each tags}}
       <li>
-        <a href='#orgs/tag/{{id}}/infograph' class='partition-link-out'>
+        <a href='#orgs/tag/{{id}}/infograph/intro' class='partition-link-out'>
           {{name}}
         </a>
       </li>
