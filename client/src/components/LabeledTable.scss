@@ -47,13 +47,13 @@
     padding: 0;
   }
 
-  .labeled-table__item > .labeled-table__item__header,
-  .labeled-table__item > .labeled-table__item__description {
+  .labeled-table__item > .labeled-table__item-label,
+  .labeled-table__item > .labeled-table__item-description {
     padding: 15px 10px 15px 25px;
 
   }
 
-  .labeled-table__item > .labeled-table__item__header {
+  .labeled-table__item > .labeled-table__item-label {
     flex: 0 0 30%;
     width: 100%;
     max-width:100%;
@@ -61,7 +61,7 @@
     border-right: 1px solid $primaryColor;
   }
 
-  .labeled-table__item > .labeled-table__item__description {
+  .labeled-table__item > .labeled-table__item-description {
     width: 100%;
     max-width:100%;
     display: flex;
@@ -76,12 +76,12 @@
     flex-direction: column;
   }
 
-  .labeled-table__item > .labeled-table__item__header,
-  .labeled-table__item > .labeled-table__item__description {
+  .labeled-table__item > .labeled-table__item-label,
+  .labeled-table__item > .labeled-table__item-description {
     padding: 5px;
   }
 
-  .labeled-table__item > .labeled-table__item__header {
+  .labeled-table__item > .labeled-table__item-label {
     font-size: 1.2em;
     font-weight: $heavyFontWeight;
   }
