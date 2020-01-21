@@ -24,18 +24,18 @@ export class LabeledTable extends React.Component {
                 aria-checked={item.active}
                 key={item.name}
               >
-                <div className="labeled-table__item__header">
+                <div className="labeled-table__item-label">
                   { styles && styles.header ? <span className={styles.header}>{item.name}</span> : item.name }
                 </div>
-                <div className="labeled-table__item__description">
+                <div className="labeled-table__item-description">
                   { styles && styles.desc ? <span className={styles.desc}>{item.desc}</span> : item.desc }
                 </div>
               </a> :
               <div className="labeled-table__item" key={item.name}>
-                <div className="labeled-table__item__header">
+                <div className="labeled-table__item-label">
                   { styles && styles.header ? <span className={styles.header}>{item.name}</span> : item.name }
                 </div>
-                <div className="labeled-table__item__description">
+                <div className="labeled-table__item-description">
                   { styles && styles.desc ? <span className={styles.desc}>{item.desc}</span> : item.desc }
                 </div>
               </div>
