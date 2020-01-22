@@ -10,7 +10,7 @@ import { StandardRouteContainer } from '../core/NavComponents.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
 
 import { Subject } from '../models/subject';
-import { result_docs, get_result_doc_keys } from '../models/results.js';
+import { result_docs } from '../models/results.js';
 import { Result, indicator_text_functions } from '../panels/panel_declarations/results/results_common.js';
 const { indicator_target_text } = indicator_text_functions;
 import result_text from '../panels/panel_declarations/results/result_components.yaml';
@@ -28,11 +28,15 @@ const { Dept, CRSO, Program } = Subject;
 
 const { TM, text_maker } = create_text_maker_component([diff_text, result_text]);
 
-const dp_keys_to_compare = _.takeRight(get_result_doc_keys('dp'), 2);
-const [previous_dp_key, current_dp_key] = dp_keys_to_compare;
-const [previous_dp_year, current_dp_year] = _.map(
-  dp_keys_to_compare,
-  (dp_key) => result_docs[dp_key].year
+const doc_keys_to_compare = _.chain(result_docs)
+  .sortBy('year')
+  .takeRight(2)
+  .map('doc_key')
+  .value();
+const [previous_doc_key, current_doc_key] = doc_keys_to_compare;
+const [previous_year, current_year] = _.map(
+  doc_keys_to_compare,
+  (key) => result_docs[key].year
 );
 
 const get_subject_from_props = (props) => {
@@ -96,8 +100,8 @@ const process_indicators = (matched_indicators, indicator_status) => {
       }
       const indicator = indicator_pair[0];
       const status = _.compact([
-        indicator.doc === previous_dp_key && "indicator_removed",
-        indicator.doc === current_dp_key && "indicator_added",
+        indicator.doc === previous_doc_key && "indicator_removed",
+        indicator.doc === current_doc_key && "indicator_added",
       ]);
       return {
         status: status,
@@ -135,12 +139,12 @@ const no_difference = (text, key) => (
 const difference_report = (diff, key) => {
   const year1 = (
     <div className="col-md-6" >
-      <h5>{previous_dp_year}</h5>
+      <h5>{previous_year}</h5>
     </div>
   );
   const year2 = (
     <div className="col-md-6" >
-      <h5>{current_dp_year}</h5>
+      <h5>{current_year}</h5>
     </div>
   );
 
@@ -305,7 +309,7 @@ export default class TextDiffApp extends React.Component {
     ensure_loaded({
       subject,
       results: true,
-      result_docs: dp_keys_to_compare,
+      result_docs: doc_keys_to_compare,
     })
       .then( () => {
         const matched_indicators = get_indicators(subject);
@@ -348,7 +352,7 @@ export default class TextDiffApp extends React.Component {
       ensure_loaded({
         subject,
         results: true,
-        result_docs: _.chain(result_docs).keys().filter( doc => /^dp[0-9]+/ ).takeRight(2).value(),
+        result_docs: doc_keys_to_compare,
       })
         .then( () => {
           const matched_indicators = get_indicators(subject);
@@ -386,13 +390,13 @@ export default class TextDiffApp extends React.Component {
       <StandardRouteContainer
         title={text_maker("diff_title")}
         breadcrumbs={[text_maker("diff_title")]}
-        description={text_maker("diff_intro_text", {previous_dp_year, current_dp_year})}
+        description={text_maker("diff_intro_text", {previous_year, current_year})}
         route_key="_diff"
         beta={true}
       >
         <TM k="diff_title" el="h1" />
         <div className={classNames("medium_panel_text","text-diff__instructions")}>
-          <TM k="diff_intro_text" args={{previous_dp_year, current_dp_year}}/>
+          <TM k="diff_intro_text" args={{previous_year, current_year}}/>  {/*//TODO fix this line!!!*/}
         </div>
         <div className={classNames("medium_panel_text")}>
           <label htmlFor='select_dept'>
