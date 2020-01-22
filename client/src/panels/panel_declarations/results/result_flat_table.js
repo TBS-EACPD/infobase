@@ -100,7 +100,7 @@ const indicator_table_from_list = (indicator_list) => {
   }) );
   return <DisplayTable 
     data={table_data}
-    label_col_header={text_maker("activity")}
+    label_col_header={text_maker("cr_or_program")}
     column_keys={column_keys}
     table_data_headers={table_data_headers}
     sort_keys={sort_keys}
@@ -210,7 +210,7 @@ export const declare_results_table_panel = () => declare_panel({
       const last_drr_doc = _.chain(docs_with_data)
         .sort()
         .last()
-        .value(); // DRR_TODO: make sure this works properly for drr18
+        .value();
 
       if( _.isEmpty(docs_with_data) ){
         return false;

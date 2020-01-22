@@ -54,7 +54,7 @@ const IndicatorResultDisplay = (props) => {
 const IndicatorDisplay = ({indicator}, show_doc) => {
   const is_drr = /drr/.test(indicator.doc);
   const has_previous_year_target = !_.isNull(indicator.previous_year_target_type);
-  const has_previous_year_result = false; // DRR_TODO: previous year results aren't in the API right now, but they probably will be for DRR18 (if not, clean this out)
+  const has_previous_year_result = false; // DRR_TODO: previous year results aren't available/in the API yet, but they should be starting with DRR19 (if not, clean this out eventually)
   const dp_docs = get_result_doc_keys('dp');
   const drr_docs = get_result_doc_keys('drr');
   const should_display_new_status = _.indexOf(dp_docs, indicator.doc) > 0 || _.indexOf(drr_docs, indicator.doc) > 0;
