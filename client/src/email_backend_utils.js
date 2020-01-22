@@ -18,7 +18,7 @@ const get_email_template_names = () => fetch(
   `${email_backend_url}/email_template_names`,
   {
     method: 'GET',
-    mode: "cors",
+    mode: 'cors',
   }
 )
   .then( resp => resp.text() )
@@ -31,7 +31,7 @@ const get_email_template = (template_name) => fetch(
   `${email_backend_url}/email_template?template_name=${template_name}`,
   {
     method: 'GET',
-    mode: "cors",
+    mode: 'cors',
   }
 )
   .then( 
@@ -45,7 +45,7 @@ const send_completed_email_template = (template_name, completed_template) => fet
   `${email_backend_url}/submit_email`,
   {
     method: 'POST',
-    mode: "cors",
+    mode: 'cors',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       template_name,
