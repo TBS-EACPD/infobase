@@ -12,6 +12,7 @@ import { get_static_url } from '../../../request_utils.js';
 import text from './results_intro_text.yaml';
 import { 
   ResultCounts,
+  GranularResultCounts,
   result_docs,
   current_drr_key,
   current_dp_key,
@@ -74,7 +75,8 @@ export const declare_results_intro_panel = () => declare_panel({
   panel_key: "results_intro",
   levels: ["gov", "dept"],
   panel_config_func: (level, panel_key) => ({
-    requires_granular_result_counts: true,
+    requires_result_counts: level === "gov",
+    requires_granular_result_counts: level !== "gov",
     footnotes: ["RESULTS_COUNTS", "RESULTS"],
     source: (subject) => get_source_links(["DP","DRR"]),
     calculate: (subject) => {
@@ -84,6 +86,8 @@ export const declare_results_intro_panel = () => declare_panel({
       const verbose_counts = (() => {
         if(is_gov){
           const dept_counts = ResultCounts.get_all_dept_counts();
+          const gov_counts = _.mergeWith({}, ...dept_counts, (val, src) => _.isNumber(val) ? val + src : src);
+
           const counts_by_dept = _.chain(dept_counts)
             .map( row => ({
               subject: Dept.lookup(row.id),
@@ -91,9 +95,9 @@ export const declare_results_intro_panel = () => declare_panel({
             }))
             .map( obj => ({...obj, total: d3.sum(_.values(obj.counts)) } ) )
             .value();
-          const gov_counts = _.mergeWith({}, ...dept_counts, (val, src) => _.isNumber(val) ? val + src : src);
           const depts_with_dps = _.sumBy(counts_by_dept, dept => dept.counts[`${current_dp_key}_results`] > 0 ? 1 : 0);
           const depts_with_drrs = _.sumBy(counts_by_dept, dept => dept.counts[`${current_drr_key}_results`] > 0 ? 1 : 0);
+
           return {
             depts_with_dps,
             depts_with_drrs,
@@ -101,8 +105,16 @@ export const declare_results_intro_panel = () => declare_panel({
           };
         } else {
           return {
-            num_crs: _.size(subject.crsos),
-            num_programs: _.reduce(subject.crsos, (sum,crso) => sum+_.size(crso.programs), 0),
+            num_crs: _.chain(subject.crsos)
+              .map( ({id}) => _.get(GranularResultCounts.get_subject_counts(id), `${current_dp_key}_results`) )
+              .compact()
+              .size()
+              .value(),
+            num_programs: _.chain(subject.programs)
+              .map( ({id}) => _.get(GranularResultCounts.get_subject_counts(id), `${current_dp_key}_results`) )
+              .compact()
+              .size()
+              .value(),
             ...ResultCounts.get_dept_counts(subject.id),
           };
         }
