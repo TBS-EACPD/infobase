@@ -353,8 +353,8 @@ const drr_docs = build_doc_info_objects(
     {
       year_short: "2018",
       resource_years: ["{{pa_last_year}}"],
-      doc_url_en: "TODO",
-      doc_url_fr: "TODO",
+      doc_url_en: "DRR_TODO",
+      doc_url_fr: "DRR_TODO",
     },
   ]
 );
