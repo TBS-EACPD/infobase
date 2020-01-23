@@ -39,13 +39,19 @@ late_results_warning_gov:
   fr: DRR_TODO
 late_results_warning_dept:
   transform: [handlebars]
-  en: The {{result_doc_name}} data is not yet available for this organization. An update will follow once their data is submitted.
-  fr: L'information des {{result_doc_name}} n’est pas disponible pour cette organisation. L’information sera mise-à-jour dès que les données auront été soumises.
+  en: |
+    {{result_doc_name}} data is not yet available for this organization. An update will follow once their data is submitted.
+  fr: |
+    L'information des {{result_doc_name}} n’est pas disponible pour cette organisation. L’information sera mise-à-jour dès que les données auront été soumises.
 late_results_warning_program:
   transform: [handlebars]
-  en: The {{result_doc_name}} data is not yet available for this Program. An update will follow once their data is submitted.
-  fr: L'information des {{result_doc_name}} n’est pas disponible pour ce programme. L’information sera mise-à-jour dès que les données auront été soumises.
+  en: |
+    {{result_doc_name}} data is not yet available for this Program. An update will follow once their data is submitted.
+  fr: |
+    L'information des {{result_doc_name}} n’est pas disponible pour ce programme. L’information sera mise-à-jour dès que les données auront été soumises.
 late_results_warning_crso:
   transform: [handlebars]
-  en: The {{result_doc_name}} data is not yet available for this Core Responsibility. An update will follow once their data is submitted.
-  fr: L'information des {{result_doc_name}} n’est pas disponible pour cette responsabilité essentielle. L’information sera mise-à-jour dès que les données auront été soumises.
+  en: |
+    {{result_doc_name}} data is not yet available for this Core Responsibility. An update will follow once their data is submitted.
+  fr: |
+    L'information des {{result_doc_name}} n’est pas disponible pour cette responsabilité essentielle. L’information sera mise-à-jour dès que les données auront été soumises.
