@@ -15,7 +15,7 @@ import {
 const { TM, text_maker} = create_text_maker_component([text]);
 const { Dept } = Subject;
 const { result_docs_in_tabling_order } = Results;
-const { AlertBanner, KeyConceptList } = util_components;
+const { AlertBanner, KeyConceptList, MultiColumnList } = util_components;
 
 export const declare_dead_program_warning_panel = () => declare_panel({
   panel_key: "dead_program_warning",
@@ -152,12 +152,13 @@ export const declare_late_results_warning_panel = () => declare_panel({
                   result_doc_name: text_maker(`${result_doc.doc_type}_name`, {year: result_doc.year}),
                 }}
               />
-              <ul>
-                {_.map(
+              <MultiColumnList 
+                list_items={_.map(
                   result_doc.late_departments, 
-                  (org_id) => <li>{Dept.lookup(org_id).fancy_name}</li>
+                  (org_id) => Dept.lookup(org_id).fancy_name
                 )}
-              </ul>
+                li_class="font-small"
+              />
             </Fragment>;
 
             return get_per_doc_late_results_alert(per_doc_inner_content);
