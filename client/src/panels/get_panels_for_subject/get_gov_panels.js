@@ -5,8 +5,7 @@ import {
 
   // shared gov, dept, crso, program
   declare_results_key_concepts_panel,
-  declare_late_drrs_warning_panel,
-  declare_late_dps_warning_panel,
+  declare_late_results_warning_panel,
   declare_budget_measures_panel,
   declare_gap_year_warning_panel,
 
@@ -69,8 +68,7 @@ export const get_gov_panels = subject => ({
   ],
   results: [
     declare_results_key_concepts_panel(),
-    declare_late_drrs_warning_panel(),
-    declare_late_dps_warning_panel(),
+    declare_late_results_warning_panel(),
     declare_results_intro_panel(),
     declare_gov_drr_panel(),
     declare_gov_dp_panel(),
