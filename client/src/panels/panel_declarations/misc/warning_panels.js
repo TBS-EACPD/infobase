@@ -145,13 +145,20 @@ export const declare_late_results_warning_panel = () => declare_panel({
           info_deps: [],
           calculate: () => !_.isEmpty(docs_with_late_departments),
           render(){
-            const per_doc_inner_content = (result_doc) => <TM
-              k={'late_results_warning_gov'}
-              args={{
-                result_doc_name: text_maker(`${result_doc.doc_type}_name`, {year: result_doc.year}),
-                late_department_names: _.map(result_doc.late_departments, (org_id) => Dept.lookup(org_id).fancy_name),
-              }}
-            />;
+            const per_doc_inner_content = (result_doc) => <Fragment>
+              <TM
+                k={'late_results_warning_gov'}
+                args={{
+                  result_doc_name: text_maker(`${result_doc.doc_type}_name`, {year: result_doc.year}),
+                }}
+              />
+              <ul>
+                {_.map(
+                  result_doc.late_departments, 
+                  (org_id) => <li>{Dept.lookup(org_id).fancy_name}</li>
+                )}
+              </ul>
+            </Fragment>;
 
             return get_per_doc_late_results_alert(per_doc_inner_content);
           },
