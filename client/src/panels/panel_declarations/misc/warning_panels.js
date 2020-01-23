@@ -1,6 +1,6 @@
 import text from './warning_panels.yaml'; 
 
-import { Fragment } from 'React';
+import { Fragment } from 'react';
 
 import {
   actual_to_planned_gap_year,
@@ -12,7 +12,7 @@ import {
   declare_panel,
 } from "../shared.js";
 
-const { TM } = create_text_maker_component([text]);
+const { TM, text_maker} = create_text_maker_component([text]);
 const { Dept } = Subject;
 const { result_docs_in_tabling_order } = Results;
 const { AlertBanner, KeyConceptList } = util_components;
@@ -148,7 +148,7 @@ export const declare_late_results_warning_panel = () => declare_panel({
             const per_doc_inner_content = (result_doc) => <TM
               k={'late_results_warning_gov'}
               args={{
-                result_doc_name: `TODO: ${result_doc.doc_key} ${result_doc.year}`,
+                result_doc_name: text_maker(`${result_doc.doc_type}_name`, {year: result_doc.year}),
                 late_department_names: _.map(result_doc.late_departments, (org_id) => Dept.lookup(org_id).fancy_name),
               }}
             />;
@@ -174,7 +174,7 @@ export const declare_late_results_warning_panel = () => declare_panel({
             const per_doc_inner_content = (result_doc) => <TM
               k={`late_results_warning_${level}`}
               args={{
-                result_doc_name: `TODO: ${result_doc.doc_key} ${result_doc.year}`,
+                result_doc_name: text_maker(`${result_doc.doc_type}_name`, {year: result_doc.year}),
               }}
             />;
             
