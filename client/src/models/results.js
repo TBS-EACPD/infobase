@@ -346,7 +346,7 @@ const build_doc_info_objects = (doc_type, docs) => _.chain(docs)
   .keyBy('doc_key')
   .value();
 
-// for now, resource year values will need to be updated manually as program_spending.csv, etc, roll forward
+// for now, resource_years values will need to be updated manually as program_spending.csv, etc, roll forward
 const drr_docs = build_doc_info_objects(
   "drr",
   [
@@ -355,6 +355,7 @@ const drr_docs = build_doc_info_objects(
       resource_years: ["{{pa_last_year}}"],
       doc_url_en: "DRR_TODO",
       doc_url_fr: "DRR_TODO",
+      late_departments: [235, 150, 302, 138, 326, 129, 125, 114],
     },
   ]
 );
@@ -366,6 +367,7 @@ const dp_docs = build_doc_info_objects(
       resource_years: ["{{planning_year_1}}", "{{planning_year_2}}", "{{planning_year_3}}"],
       doc_url_en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2019-20-departmental-plans.html",
       doc_url_fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2019-2020.html",
+      late_departments: [],
     },
   ]
 );

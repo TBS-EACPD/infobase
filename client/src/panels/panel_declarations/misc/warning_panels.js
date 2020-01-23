@@ -1,9 +1,12 @@
 import text from './warning_panels.yaml'; 
 
+import { Fragment } from 'React';
+
 import {
   actual_to_planned_gap_year,
   util_components,
   Subject,
+  Results,
   create_text_maker_component,
 
   declare_panel,
@@ -11,6 +14,7 @@ import {
 
 const { TM } = create_text_maker_component([text]);
 const { Dept } = Subject;
+const { result_docs_in_tabling_order } = Results;
 const { AlertBanner, KeyConceptList } = util_components;
 
 export const declare_dead_program_warning_panel = () => declare_panel({
@@ -110,65 +114,73 @@ export const declare_m2m_tag_warning_panel = () => declare_panel({
 });
 
 
-const late_drr_departments = [];
-const late_dp_departments = [1];
+export const declare_late_results_warning_panel = () => declare_panel({
+  panel_key: 'late_results_warning',
+  levels: ['gov', 'dept', 'crso', 'program'],
+  panel_config_func: (level, panel_key) => {
+    const docs_with_late_departments = _.chain(result_docs_in_tabling_order)
+      .reverse()
+      .filter(({late_departments}) => late_departments.length > 0)
+      .value();
 
-export const [
-  declare_late_drrs_warning_panel,
-  declare_late_dps_warning_panel,
-] = _.map(
-  [
-    ['drr', late_drr_departments],
-    ['dp', late_dp_departments],
-  ],
-  ([doc_type, late_departments]) => (
-    () => declare_panel({
-      panel_key: `late_${doc_type}s_warning`,
-      levels: ['gov', 'dept', 'crso', 'program'],
-      panel_config_func: (level, panel_key) => {
-        switch (level){
-          case "gov":
-            return {
-              static: true,
-              footnotes: false,
-              source: false,
-              info_deps: [],
-              calculate: () => !_.isEmpty(late_departments) && {
-                late_department_names: _.map(
-                  late_departments,
-                  (org_id) => Dept.lookup(org_id).fancy_name
-                ),
-              },
-              render({ calculations: { panel_args: late_department_names } }) {
-                return (
-                  <AlertBanner additional_class_names={'large_panel_text'}>
-                    <TM k={`late_${doc_type}s_warning_gov`} args={{late_department_names}}/>
-                  </AlertBanner>
-                );
-              },
-            };
-          default:
-            return {
-              static: true,
-              footnotes: false,
-              source: false,
-              info_deps: [],
-              calculate: (subject) => _.includes(
-                late_departments, 
-                level === 'dept' ?
-                  subject.id :
-                  subject.dept.id
-              ),
-              render() {
-                return (
-                  <AlertBanner additional_class_names={'large_panel_text'}>
-                    <TM k={`late_${doc_type}s_warning_${level}`} />
-                  </AlertBanner>
-                );
-              },
-            };
-        }
-      },
-    })
-  )
-);
+    const get_per_doc_late_results_alert = (per_doc_inner_content) => (
+      <Fragment>
+        {_.map(
+          docs_with_late_departments,
+          (result_doc, ix) => (
+            <AlertBanner key={ix} additional_class_names={'large_panel_text'}>
+              {per_doc_inner_content(result_doc)}
+            </AlertBanner>
+          )
+        )}
+      </Fragment>
+    );
+
+    switch (level){
+      case "gov":
+        return {
+          static: true,
+          footnotes: false,
+          source: false,
+          info_deps: [],
+          calculate: () => !_.isEmpty(docs_with_late_departments),
+          render(){
+            const per_doc_inner_content = (result_doc) => <TM
+              k={'late_results_warning_gov'}
+              args={{
+                result_doc_name: `TODO: ${result_doc.doc_key} ${result_doc.year}`,
+                late_department_names: _.map(result_doc.late_departments, (org_id) => Dept.lookup(org_id).fancy_name),
+              }}
+            />;
+
+            return get_per_doc_late_results_alert(per_doc_inner_content);
+          },
+        };
+      default:
+        return {
+          static: true,
+          footnotes: false,
+          source: false,
+          info_deps: [],
+          calculate: (subject) => _.chain(docs_with_late_departments)
+            .flatMap('late_departments')
+            .includes(
+              level === 'dept' ?
+                subject.id :
+                subject.dept.id
+            )
+            .value(),
+          render(){
+            const per_doc_inner_content = (result_doc) => <TM
+              k={`late_results_warning_${level}`}
+              args={{
+                result_doc_name: `TODO: ${result_doc.doc_key} ${result_doc.year}`,
+              }}
+            />;
+            
+            return get_per_doc_late_results_alert(per_doc_inner_content);
+          },
+        };
+    }
+  },
+});

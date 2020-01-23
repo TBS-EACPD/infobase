@@ -23,8 +23,7 @@ export {
   declare_dead_program_warning_panel,
   declare_dead_crso_warning_panel,
   declare_m2m_tag_warning_panel,
-  declare_late_dps_warning_panel,
-  declare_late_drrs_warning_panel,
+  declare_late_results_warning_panel,
 } from './warning_panels.js';
 
 export { declare_resource_structure_panel } from './resource_structure/resource_structure.js';
