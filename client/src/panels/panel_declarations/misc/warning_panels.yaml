@@ -19,9 +19,23 @@ m2m_warning_title:
   fr: |
     Comment utiliser les étiquettes?
 
+
+dp_name:
+  transform: [handlebars]
+  en: |
+    {{year}} Departmental Plans
+  fr: |
+    plans ministériels de {{year}}
+drr_name:
+  transform: [handlebars]
+  en: |
+    {{year}} Departmental Results Report
+  fr: |
+    rapport sur les résultats ministériels de {{year}}
+
 late_results_warning_gov:
   transform: [handlebars]
-  en: The {{result_doc_name}} count of results and indicators does not include indicators for {{array_to_grammatical_list late_department_names}}. An update will follow once their data is submitted.
+  en: The {{result_doc_name}} results and indicator counts do not include indicators for {{array_to_grammatical_list late_department_names}}. An update will follow once their data is submitted.
   fr: Le nombre de résultats et d’indicateurs des {{result_doc_name}} n’inclus pas les indicateurs pour {{array_to_grammatical_list late_department_names}}. L’information sera mise-à-jour dès que les données auront été soumises.
 late_results_warning_dept:
   transform: [handlebars]
