@@ -35,8 +35,8 @@ drr_name:
 
 late_results_warning_gov:
   transform: [handlebars]
-  en: The {{result_doc_name}} results and indicator counts do not include indicators for {{array_to_grammatical_list late_department_names}}. An update will follow once their data is submitted.
-  fr: Le nombre de résultats et d’indicateurs des {{result_doc_name}} n’inclus pas les indicateurs pour {{array_to_grammatical_list late_department_names}}. L’information sera mise-à-jour dès que les données auront été soumises.
+  en: The {{result_doc_name}} results and indicator counts do not include values from the organizations listed below, as their data is not yet available. Updates will follow as their data is submitted.
+  fr: DRR_TODO
 late_results_warning_dept:
   transform: [handlebars]
   en: The {{result_doc_name}} data is not yet available for this organization. An update will follow once their data is submitted.
