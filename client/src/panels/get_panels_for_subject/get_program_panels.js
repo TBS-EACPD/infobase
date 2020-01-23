@@ -7,6 +7,7 @@ import {
 
   // shared gov, dept, crso, program
   declare_results_key_concepts_panel,
+  declare_late_drrs_warning_panel,
   declare_late_dps_warning_panel,
   declare_budget_measures_panel,
   declare_gap_year_warning_panel,
@@ -59,6 +60,7 @@ export const get_program_panels = subject => ensure_loaded({
   ],
   results: !subject.is_internal_service && subject.has_data('results_data') && [
     declare_results_key_concepts_panel(),
+    declare_late_drrs_warning_panel(),
     declare_late_dps_warning_panel(),
     declare_drr_summary_panel(),
     declare_results_table_panel(),
