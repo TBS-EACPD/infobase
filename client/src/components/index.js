@@ -47,6 +47,7 @@ export {
   create_text_maker_component,
   DlItem,
   AlertBanner,
+  MultiColumnList,
 } from './misc_util_components.js';
 
 export { DeptSearch, DeptSearchWithoutRouter } from '../search/DeptSearch.js';
