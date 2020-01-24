@@ -296,8 +296,8 @@ result_statuses:
     en: Target not met
     fr: Cible non atteinte
   not_available:
-    en: Result not available
-    fr: Résultat non disponible
+    en: Not available
+    fr: Non disponible
   future:
     en: Result to be achieved in the future
     fr: Résultat à atteindre dans le future
