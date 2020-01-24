@@ -13,10 +13,11 @@ export const app_reducer = (state={ lang: window.lang }, { type, payload }) => {
 
 import { ErrorBoundary } from '../core/ErrorBoundary.js';
 import { DevFip } from '../core/DevFip.js';
-import { TooltipActivator } from '../glossary/TooltipActivator';
+import { TooltipActivator } from '../glossary/TooltipActivator.js';
 import { InsertRuntimeFooterLinks } from '../core/InsertRuntimeFooterLinks.js';
-import { ReactUnmounter } from '../core/NavComponents';
-import { EasyAccess } from '../core/EasyAccess';
+import { ReactUnmounter } from '../core/NavComponents.js';
+import { EasyAccess } from '../core/EasyAccess.js';
+import { SurveyPopup } from '../core/SurveyPopup.js';
 import { SpinnerWrapper } from '../components/SpinnerWrapper.js';
 import { PageDetails } from '../components/PageDetails.js';
 
@@ -55,6 +56,7 @@ export class App extends React.Component {
           <DevFip />
           <InsertRuntimeFooterLinks />
           <EasyAccess />
+          <SurveyPopup />
           <ReactUnmounter />
           { !window.is_a11y_mode && <TooltipActivator /> }
           <Suspense fallback={<SpinnerWrapper config_name={"route"} />}>
