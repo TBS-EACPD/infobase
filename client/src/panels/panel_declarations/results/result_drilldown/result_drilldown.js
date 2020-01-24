@@ -351,33 +351,28 @@ class SingleSubjExplorer extends React.Component {
     }
 
     const tab_on_click = (doc) => set_doc !== doc && set_doc(doc, subject);
-
-    if( docs_with_data.length === 1){ //don't wrap the inner content in a tab layout if only one option
-      return inner_content;
-    } else {
-      return (
-        <div className="tabbed-content">
-          <TabbedControls
-            tab_callback={ tab_on_click }
-            tab_options={
-              _.map(
-                docs_with_data,
-                (doc_with_data) => ({
-                  key: doc_with_data,
-                  label: /drr/.test(doc_with_data) ? 
-                    <TM k="DRR_results_option_title" args={{doc_year: result_docs[doc_with_data].year}} /> :
-                    <TM k="DP_results_option_title" args={{doc_year: result_docs[doc_with_data].year}} />,
-                  is_open: doc_with_data === doc,
-                })
-              )
-            }
-          />
-          <div className="tabbed-content__pane">
-            {inner_content}
-          </div>
+    return (
+      <div className="tabbed-content">
+        <TabbedControls
+          tab_callback={ tab_on_click }
+          tab_options={
+            _.map(
+              docs_with_data,
+              (doc_with_data) => ({
+                key: doc_with_data,
+                label: /drr/.test(doc_with_data) ? 
+                  <TM k="DRR_results_option_title" args={{doc_year: result_docs[doc_with_data].year}} /> :
+                  <TM k="DP_results_option_title" args={{doc_year: result_docs[doc_with_data].year}} />,
+                is_open: doc_with_data === doc,
+              })
+            )
+          }
+        />
+        <div className="tabbed-content__pane">
+          {inner_content}
         </div>
-      );
-    }
+      </div>
+    );
   }
 }
 
