@@ -98,7 +98,7 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
           num_programs: count_items.program || 0,
           num_prog_results: count_items.result || 0,
           num_results: (count_items.result || 0) + (count_items.dr || 0),
-          num_indicators: count_items.indicator,
+          num_indicators: count_items.indicator || 0,
 
           num_subs: count_items.sub_program,
           num_sub_subs: count_items.sub_sub_program,
