@@ -14,7 +14,7 @@ const footer_link_items = _.compact([
   window.is_a11y_mode && {
     id: "footer-standard-link",
     href: index_lang_lookups.standard_version_url[window.lang],
-    text: index_lang_lookups.standard_version_titile[window.lang],
+    text: index_lang_lookups.standard_version_title[window.lang],
   },
   {
     href: run_template("{{survey_link}}"),
