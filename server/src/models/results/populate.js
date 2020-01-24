@@ -14,7 +14,12 @@ export default async function({models}){
   const raw_indicator_records = get_standard_csv_file_rows("indicators.csv");
 
   const pi_dr_links = get_standard_csv_file_rows("pi_dr_links.csv");
-    
+
+  const results_with_indicators = _.chain(raw_indicator_records)
+    .map('result_id')
+    .uniq()
+    .value();
+
   const result_records = _.chain(raw_result_records)
     .map(result => ({
       ...result,
@@ -22,6 +27,7 @@ export default async function({models}){
       result_id: result.id,
     }) )
     .filter( valid_doc_filter )
+    .filter( ({result_id}) => _.includes(results_with_indicators, result_id) ) // results without indicators are a data issue. The pipeline tracks these cases, so we can quietly discard them here
     .value();
   
   const indicator_records = _.chain(raw_indicator_records)
@@ -141,7 +147,6 @@ const get_result_count_records = (results, indicators) => {
 };
 
 const counts_from_indicators = (indicators) => _.chain(indicators)
-  .filter( (indicator) => !_.isUndefined(indicator) ) // DRR_TODO: this is absolutely temporary, just smoothing over somedrr18 data hicups. Either the data is corrected up stream or this is replaced with a smarter check somewhere earlier in the populate process, do not release with this line in!
   .map(
     ({doc, result_id, status_key}) => ({
       [`${doc}_results`]: result_id,
