@@ -290,7 +290,7 @@ gender:
 
 result_statuses:
   met:
-    en: Target Met
+    en: Target met
     fr: Cible atteinte
   not_met:
     en: Target not met
@@ -307,7 +307,7 @@ result_simple_statuses:
     en: Met
     fr: Atteint
   not_met:
-    en: Not Met
+    en: Not met
     fr: Non atteint
   not_available:
     en: Not available
