@@ -61,7 +61,7 @@ const type_by_data_type = {
   percent_range: "result_percentage",
 };
 
-const measure_display = (measure) => !_.isEmpty(measure) ? ` ( ${measure} )` : "";
+const measure_display = (measure) => !_.isEmpty(measure) ? ` (${measure})` : "";
 
 const indicator_target_text = (indicator) => {
   const target_unspecified_display = text_maker("unspecified_target");
