@@ -44,8 +44,8 @@ budget_home_text:
   fr: Découvrir une visualisation des crédits d’exécution du budget qui seront financés par le Budget des dépenses
 
 drr_home_text:
-  en: The 2018-19 Departmental Results Reports were tabled on DATE. Explore the data to see how departments performed against their plans
-  fr: DRR_TODO
+  en: The 2018-19 Departmental Results Reports were tabled on DRR_TODO. Explore the data to see how departments performed against their plans
+  fr: Les rapports sur les résultats ministériels de 2018-2019 ont été déposés le DRR_TODO. Consultez les données pour voir le rendement des ministères par rapport aux prévisions.
 
 planet_home_title:
   en: Bubble Explorer
