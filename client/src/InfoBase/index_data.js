@@ -148,7 +148,7 @@ const index_lang_lookups = {
     en: "index-eng.html",
     fr: "index-fra.html",
   },
-  standard_version_titile: {
+  standard_version_title: {
     en: "Graphical version",
     fr: "Version graphique",
   },
