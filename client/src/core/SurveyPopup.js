@@ -20,7 +20,7 @@ const route_root = (path) => _.chain(path)
 
 
 // less likely for users without local storage since they will always have a chance to see it, even after previously filling it out or dimissing it
-const chance_increment = has_local_storage ? 0.1 : 0.05;
+const chance_increment = has_local_storage ? 0.2 : 0.05;
 
 
 export const SurveyPopup = withRouter(
@@ -45,7 +45,7 @@ export const SurveyPopup = withRouter(
               default_state,
               (default_value, key) => {
                 const local_storage_value = localStorage.getItem(`infobase_survey_popup_${key}`);
-                return !_.isNull ? local_storage_value : default_value;
+                return !_.isNull(local_storage_value) ? local_storage_value : default_value;
               }
             );
           } else {
@@ -72,13 +72,13 @@ export const SurveyPopup = withRouter(
       this.state = {
         active: active,
         previous_route_root: null,
-        chance: chance,
+        chance: +chance, // comeso out of local storage as a string, cast to number here to be safe
       };
     }
     handleButtonPress(button_type){
       if ( _.includes(["yes", "no"], button_type) ){
-        localStorage.getItem(`infobase_survey_popup_active`, false);
-        localStorage.getItem(`infobase_survey_popup_deactivated_unix_time`, Date.now());
+        localStorage.setItem(`infobase_survey_popup_active`, false);
+        localStorage.setItem(`infobase_survey_popup_deactivated_unix_time`, Date.now());
 
         if (button_type === "yes"){
           window.open( text_maker("survey_link") );
