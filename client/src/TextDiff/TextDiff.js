@@ -38,6 +38,10 @@ const [previous_year, current_year] = _.map(
   doc_keys_to_compare,
   (key) => result_docs[key].year
 );
+const [previous_doc_name, current_doc_name] = _.map(
+  doc_keys_to_compare,
+  (key) => result_docs[key].name
+);
 
 const get_subject_from_props = (props) => {
   const {
@@ -390,13 +394,13 @@ export default class TextDiffApp extends React.Component {
       <StandardRouteContainer
         title={text_maker("diff_title")}
         breadcrumbs={[text_maker("diff_title")]}
-        description={text_maker("diff_intro_text", {previous_year, current_year})}
+        description={text_maker("diff_intro_text", {previous_doc_name, current_doc_name})}
         route_key="_diff"
         beta={true}
       >
         <TM k="diff_title" el="h1" />
         <div className={classNames("medium_panel_text","text-diff__instructions")}>
-          <TM k="diff_intro_text" args={{previous_year, current_year}}/>  {/*//TODO fix this line!!!*/}
+          <TM k="diff_intro_text" args={{previous_doc_name, current_doc_name}}/>
         </div>
         <div className={classNames("medium_panel_text")}>
           <label htmlFor='select_dept'>
