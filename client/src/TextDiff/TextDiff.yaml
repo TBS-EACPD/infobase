@@ -13,7 +13,7 @@ diff_intro_text:
     Please note that limitations of the difference highlighting algorithm may cause some formatting to show as raw markdown (e.g. '**').
   fr: |
     Cet outil permet la comparaison entre les indicateurs et leurs données tel que leurs méthodologies et leurs cibles, et surligne les
-    portions qui ont changé entre le **{{previous_doc_name}}** et le **{{current_doc_name}}** pour l'organisation sélectionné.
+    portions qui ont changé entre le **{{previous_doc_name}}** et le **{{current_doc_name}}** pour l'organisation sélectionnée.
 
     Le texte en rouge sur la gauche a été supprimé et le texte en vert sur la droite a été ajouté.
     
