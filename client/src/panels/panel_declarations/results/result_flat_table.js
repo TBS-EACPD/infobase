@@ -112,12 +112,18 @@ const subject_link = (node) => {
 
 
 const indicator_table_from_list = (indicator_list, is_drr17) => {
-  const column_keys = ["indicator","target","target_result","date_to_achieve","status"];
-  const sort_keys = ["indicator","date_to_achieve", "status"];
+  const column_keys = ["activity","indicator","target","target_result","date_to_achieve","status"];
+  const sort_keys = ["activity","indicator","date_to_achieve", "status"];
   const table_data_headers = _.map(column_keys, k => text_maker(k));
+  const col_search = _.reduce(column_keys, (result, col) => {
+    if(col==="activity" || col==="indicator"){
+      result[col] = "";
+    }
+    return result;
+  }, {});
   const table_data = _.map(indicator_list, ind => ({
-    label: subject_link(ind.parent_node),
     col_data: {
+      activity: subject_link(ind.parent_node),
       indicator: <a href={`#indicator/${ind.indicator.id}`}>{ind.indicator.name}</a>,
       target: is_drr17 ? drr17_indicator_target_text(ind.indicator) : indicator_target_text(ind.indicator),
       target_result: indicator_actual_text(ind.indicator),
@@ -128,7 +134,7 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
       </Fragment>,
     },
     sort_keys: {
-      label: ind.parent_node.data.name,
+      activity: ind.parent_node.data.name,
       indicator: ind.indicator.name,
       date_to_achieve: ind.indicator.target_year ? ind.indicator.target_year + ind.indicator.target_month/12 : Infinity,
       status: _.indexOf(ordered_status_keys, ind.indicator.status_key),
@@ -140,6 +146,7 @@ const indicator_table_from_list = (indicator_list, is_drr17) => {
     column_keys={column_keys}
     table_data_headers={table_data_headers}
     sort_keys={sort_keys}
+    col_search={col_search}
     table_name={text_maker("result_flat_table_title", {year: current_drr_year})}
   />;
 };
