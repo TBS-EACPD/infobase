@@ -1,5 +1,5 @@
 import './DisplayTable.scss';
-import text from '../common_text/result_lang.yaml';
+import text from '../common_text/common_lang.yaml';
 import { create_text_maker_component } from './misc_util_components.js';
 
 import classNames from 'classnames';
@@ -11,11 +11,14 @@ const { text_maker, TM } = create_text_maker_component(text);
 export class DisplayTable extends React.Component {
   constructor(props){
     super();
+    const {
+      sort_keys,
+      col_search,
+    } = props;
     this.state = {
-      sort_by: "label",
+      sort_by: sort_keys[0],
       descending: true,
-      indicator_query: "",
-      activity_query: "",
+      col_search: col_search,
     };
   }
 
@@ -35,21 +38,24 @@ export class DisplayTable extends React.Component {
       column_keys,
       data,
       table_name,
-      label_col_header,
       sort_keys,
       table_data_headers,
     } = this.props;
     const {
       sort_by,
-      activity_query,
-      indicator_query,
+      col_search,
       descending,
     } = this.state;
 
     const lower_case_str_includes = (string, substring) => _.includes(string.toLowerCase().trim(), substring.toLowerCase().trim());
     const sorted_data = _.chain(data)
-      .filter(row => lower_case_str_includes(row.sort_keys.label, activity_query) && lower_case_str_includes(row.sort_keys.indicator, indicator_query))
-      .sortBy(row => _.has(row["sort_keys"],sort_by) ? row["sort_keys"][sort_by] : row["label"]) // careful with sorting, sort keys could be zero/falsey
+      .filter(row => {
+        return _.reduce(col_search, (result, query, col) => {
+          result = result && lower_case_str_includes(row.sort_keys[col], query);
+          return result;
+        }, true);
+      })
+      .sortBy(row => _.has(row["sort_keys"],sort_by) ? row["sort_keys"][sort_by] : row[sort_keys[0]]) // careful with sorting, sort keys could be zero/falsey
       .tap(descending ? _.noop : _.reverse)
       .value();
 
@@ -67,28 +73,6 @@ export class DisplayTable extends React.Component {
           </caption>
           <thead>
             <tr className="table-header">
-              <th 
-                className="center-text"
-              >
-                {label_col_header || ""}
-                <div
-                  onClick={ () => this.header_click("label") }
-                >
-                  <SortDirections 
-                    asc={!descending && sort_by === "label"} 
-                    desc={descending && sort_by === "label"}
-                  />
-                </div>
-                <input
-                  type="text"
-                  style={{width: "100%"}}
-                  value={activity_query}
-                  onChange={evt => 
-                    this.setState({ activity_query: evt.target.value })
-                  }
-                  placeholder={text_maker('filter_results')}
-                />
-              </th>
               {
                 _.map(column_keys, (tick, i) => {
                   return (
@@ -98,23 +82,25 @@ export class DisplayTable extends React.Component {
                         className={classNames("center-text", "display-table__sortable")}
                       >
                         {table_data_headers[i]}
-                        <div
-                          onClick={ () => _.includes(sort_keys,tick) && this.header_click(tick) }
-                        >
+                        <div onClick={ () => _.includes(sort_keys,tick) && this.header_click(tick) }>
                           <SortDirections 
-                            asc={!descending && sort_by === tick} 
+                            asc={!descending && sort_by === tick}
                             desc={descending && sort_by === tick}
                           />
                         </div>
-                        { tick === "indicator" &&
+                        { !_.isUndefined(col_search[tick]) &&
                           <input
                             type="text"
-                            style={{width: "100%"}}
-                            value={indicator_query}
-                            onChange={evt => 
-                              this.setState({ indicator_query: evt.target.value })
-                            }
-                            placeholder={text_maker('filter_results')}
+                            id={tick}
+                            style={{ width: "100%", fontWeight: "normal" }}
+                            onChange={evt => {
+                              const new_query = _.clone(col_search);
+                              new_query[evt.target.id] = evt.target.value;
+                              this.setState({
+                                col_search: new_query,
+                              });
+                            }}
+                            placeholder={text_maker('filter_data')}
                           />
                         }
                       </th> :
@@ -130,17 +116,8 @@ export class DisplayTable extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {_.map(sorted_data, ({ label, col_data }, i) => 
+            {_.map(sorted_data, ({ col_data }, i) => 
               <tr key={i}>
-                <th 
-                  scope={
-                    !label_col_header ?
-                    "row" :
-                    null
-                  }
-                >
-                  { label }
-                </th> 
                 {_.map(
                   column_keys, 
                   col => (
