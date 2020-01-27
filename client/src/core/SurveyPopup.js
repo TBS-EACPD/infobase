@@ -18,9 +18,10 @@ const route_root = (path) => _.chain(path)
   .first()
   .value();
 
+
 // less likely for users without local storage since they will always have a chance to see it, even after previously filling it out or dimissing it
-const base_chance = 1;
 const chance_increment = has_local_storage ? 0.1 : 0.05;
+
 
 export const SurveyPopup = withRouter(
   class _SurveyPopup extends React.Component {
@@ -29,32 +30,61 @@ export const SurveyPopup = withRouter(
 
       this.handleButtonPress.bind(this);
 
-      props.history.listen(
-        ({pathname}) => {
-          if ( this.state.previous_route_root !== route_root(pathname) ){
-            this.setState({
-              chance: this.state.chance + chance_increment,
-              previous_route_root: route_root(pathname),
-            });
+      const {
+        active,
+        chance,
+      } = (
+        () => {
+          const default_state = {
+            active: true,
+            chance: 0,
+          };
+
+          if (has_local_storage){
+            return _.mapValues(
+              default_state,
+              (default_value, key) => {
+                const local_storage_value = localStorage.getItem(`infobase_survey_popup_${key}`);
+                localStorage.getItem(`infobase_survey_popup_chance`, local_storage_value);
+                return !_.isNull ? local_storage_value : default_value;
+              }
+            );
+          } else {
+            return default_state;
           }
         }
-      );
+      )();
+
+      if (active){
+        props.history.listen(
+          ({pathname}) => {
+            if ( this.state.previous_route_root !== route_root(pathname) ){
+              const new_chance = this.state.chance + chance_increment;
+
+
+              this.setState({
+                chance: new_chance,
+                previous_route_root: route_root(pathname),
+              });
+            }
+          }
+        );
+      }
 
       this.state = {
-        active: true,
+        active: active,
         previous_route_root: null,
-        chance: base_chance,
+        chance: chance,
       };
     }
     handleButtonPress(button_type){
-      switch(button_type){
-        case "yes":
-          //TODO
-          break;
+      if ( _.includes(["yes", "no"], button_type) ){
+        localStorage.getItem(`infobase_survey_popup_active`, false);
+        localStorage.getItem( `infobase_survey_popup_deactivated_unix_time`, Date.now() );
 
-        case "no":
+        if (button_type === "yes"){
           //TODO
-          break;
+        }
       }
 
       this.setState({active: false});
