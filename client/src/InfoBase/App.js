@@ -2,7 +2,7 @@ import './App.scss';
 
 import { Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-\
+
 import { initialize_analytics } from '../core/analytics.js';
 import { has_local_storage } from '../core/feature_detection.js';
 
