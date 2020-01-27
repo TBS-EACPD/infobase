@@ -1,0 +1,23 @@
+suvey_popup_header:
+  en: Have a few minutes to help us improve this site?
+  fr: TODO
+
+survey_popup_body:
+  transform: [markdown]
+  en: | 
+    We're running a quick study to see where people expect to find things on the site. Your responses will help us improve.  
+
+    Choosing “Yes, after my visit” will open a new window that you can return to once you complete your visit.
+  fr: TODO
+
+survey_popup_yes:
+  en: Yes, after my visit
+  fr: TODO
+
+survey_popup_later:
+  en: Maybe some other time
+  fr: TODO
+
+survey_popup_no:
+  en: No, do not ask again
+  fr: TODO

@@ -143,4 +143,5 @@ FixedPopover.defaultProps = {
   auto_close_time: false,
   close_text: _.upperFirst( trivial_text_maker("close") ),
   close_button_in_header: false,
+  on_close_callback: _.noop,
 };
