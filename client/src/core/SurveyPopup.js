@@ -90,7 +90,7 @@ export const SurveyPopup = withRouter(
     }
     shouldComponentUpdate(nextProps, nextState){
       const chance_to_open_changed = this.state.chance !== nextState.chance;
-      const is_closing = !this.state.active && this.state.active !== nextState.active;
+      const is_closing = this.state.active !== nextState.active;
 
       return chance_to_open_changed || is_closing;
     }
