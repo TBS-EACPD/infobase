@@ -19,7 +19,7 @@ const get_path_root = (path) => _.chain(path)
   .value();
 
 const seconds_in_a_half_year = 60*60*24*(365/2);
-const should_reset_local_storage = () => !localStorage.getItem(`infobase_survey_popup_active`) &&
+const should_reset_local_storage = () => localStorage.getItem(`infobase_survey_popup_deactivated`) &&
   Date.now() - localStorage.getItem(`infobase_survey_popup_deactivated_since`) > seconds_in_a_half_year;
 
 const get_state_defaults = () => {
@@ -29,20 +29,22 @@ const get_state_defaults = () => {
   };
 
   if (has_local_storage){
-    return _.mapValues(
-      default_state,
-      (default_value, key) => {
-        const local_storage_value = localStorage.getItem(`infobase_survey_popup_${key}`);
-        return !_.isNull(local_storage_value) ? local_storage_value : default_value;
-      }
-    );
+    const local_storage_deactivated = localStorage.getItem(`infobase_survey_popup_deactivated`);
+    const local_storage_chance = localStorage.getItem(`infobase_survey_popup_chance`);
+
+    // localStorage is all strings, so be aware that we cast those to a boolean and a number below
+    return {
+      active: !_.isNull(local_storage_deactivated) ? !local_storage_deactivated : default_state.active,
+      chance: !_.isNull(local_storage_chance) ? +local_storage_chance : default_state.chance,
+    };
   } else {
     return default_state;
   }
 };
 
-// less likely for users without local storage since they will always have a chance to see it, even after previously filling it out or dimissing it
-const chance_increment = has_local_storage ? 0.2 : 0.05;
+// Make it less likely for users without local storage to get the popup to balance that they will always have a chance to see it,
+// even after previously dimissing it. Going by caniuse.com stats, that's less than 8% of users globally, and shrinking, anyway
+const chance_increment = has_local_storage ? 0.15 : 0.05;
 
 export const SurveyPopup = withRouter(
   class _SurveyPopup extends React.Component {
@@ -50,7 +52,7 @@ export const SurveyPopup = withRouter(
       super(props);
 
       this.handleButtonPress.bind(this);
-      
+
       props.history.listen(
         ({pathname}) => {
           if ( this.state.active && this.state.previous_path_root !== get_path_root(pathname) ){
@@ -67,8 +69,9 @@ export const SurveyPopup = withRouter(
       );
 
       if ( has_local_storage && should_reset_local_storage() ){
-        localStorage.setItem(`infobase_survey_popup_active`, null);
-        localStorage.setItem(`infobase_survey_popup_chance`, null);
+        localStorage.removeItem('infobase_survey_popup_chance');
+        localStorage.removeItem('infobase_survey_popup_deactivated');
+        localStorage.removeItem('infobase_survey_popup_deactivated_since');
       }
 
       const {
@@ -78,14 +81,14 @@ export const SurveyPopup = withRouter(
 
       this.state = {
         active: active,
-        chance: +chance, // comes out of local storage as a string, cast to number here to be safe
+        chance: chance,
         previous_path_root: null,
       };
     }
     handleButtonPress(button_type){
       if ( _.includes(["yes", "no"], button_type) ){
         if (has_local_storage){
-          localStorage.setItem(`infobase_survey_popup_active`, false);
+          localStorage.setItem(`infobase_survey_popup_deactivated`, "true");
           localStorage.setItem(`infobase_survey_popup_deactivated_since`, Date.now());
         }
 
@@ -110,34 +113,29 @@ export const SurveyPopup = withRouter(
 
       const should_render = active && Math.random() < chance;
 
-      if (should_render){
-        return <FixedPopover
-          show={true}
-          header={<TM k="suvey_popup_header" />}
-          body={<TM k="survey_popup_body" />}
-          footer={
-            _.chain([
-              "yes",
-              "later",
-              has_local_storage && "no",
-            ])
-              .compact()
-              .map( (button_type) => (
-                <button 
-                  className="btn btn-ib-primary"
-                  key={button_type}
-                  onClick={ () => this.handleButtonPress(button_type) }
-                >
-                  {text_maker(`survey_popup_${button_type}`)}
-                </button>
-              ) )
-              .value()
-          }
-          on_close_callback={() => this.setState({active: false})}
-        />;
-      } else {
-        return null;
-      }
+      return <FixedPopover
+        show={should_render}
+        header={<TM k="suvey_popup_header" />}
+        body={<TM k="survey_popup_body" />}
+        footer={
+          _.chain([
+            "yes",
+            "later",
+            has_local_storage && "no",
+          ])
+            .compact()
+            .map( (button_type) => (
+              <button 
+                className="btn btn-ib-primary"
+                key={button_type}
+                onClick={ () => this.handleButtonPress(button_type) }
+              >
+                {text_maker(`survey_popup_${button_type}`)}
+              </button>
+            ) )
+            .value()
+        }
+      />;
     }
   }
 );
