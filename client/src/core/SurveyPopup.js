@@ -4,9 +4,15 @@ import { has_local_storage } from './feature_detection.js';
 
 import { FixedPopover } from '../components/index.js';
 
-// less likely for users without local storage since they will always have a chance to see it, even after interacting with it
-const base_chance = has_local_storage ? 0.25 : 0.05;
-const chance_increment = has_local_storage ? 0.1 : 0.05;
+const route_root = (path) => _.chain(path)
+  .replace(/^\//, '')
+  .split('/')
+  .first()
+  .value();
+
+// less likely for users without local storage since they will always have a chance to see it, even after previously filling it out or dimissing it
+const base_chance = has_local_storage ? 0.2 : 0.05;
+const chance_increment = has_local_storage ? 0.05 : 0.01;
 
 export const SurveyPopup = withRouter(
   class _SurveyPopup extends React.Component {
@@ -16,10 +22,11 @@ export const SurveyPopup = withRouter(
       const { history } = props;
 
       history.listen(
-        (location, action) => {
-          if (action === 'PUSH' && history){
+        ({pathname}) => {
+          if ( this.state.previous_route_root !== route_root(pathname) ){
             this.setState({
               chance: this.state.chance + chance_increment,
+              previous_route_root: route_root(pathname),
             });
           }
         }
@@ -27,23 +34,23 @@ export const SurveyPopup = withRouter(
 
       this.state = {
         active: true,
+        previous_route_root: null,
         chance: base_chance,
       };
     }
-    shouldComponentUpdate(nextProps, nextState){
+    render(){
       const {
         active,
         chance,
-      } = nextState;
-      
-      const should_get_chance_to_render = active && chance > this.state.chance;
+      } = this.state;
 
-      return should_get_chance_to_render;
-    }
-    render(){
-      const { chance } = this.state;
+      const should_render = Math.random() < chance;
 
-      return null;
+      if (active && should_render){
+        return <div>bleh</div>;
+      } else {
+        return null;
+      }
     }
   }
 );
