@@ -5,12 +5,13 @@ suvey_popup_header:
 survey_popup_body:
   transform: [markdown]
   en: | 
-    We're running a quick study to see where people expect to find things on the site. Your responses will help us improve.  
+    Please take a few minutes at the end of your visit today to anonymously tell us about your experience with the GC InfoBase. Your feedback will help us improve. Thank you!
 
-    Choosing “Yes, after my visit” will open a new window that you can return to once you complete your visit.
+    Choosing “Yes, after my visit” will open a new window that you can return to once you finish browsing the GC InfoBase.
   fr: TODO
 
 survey_popup_yes:
+  transform: [handlebars]
   en: Yes, after my visit
   fr: TODO
 
@@ -21,3 +22,10 @@ survey_popup_later:
 survey_popup_no:
   en: No, do not ask again
   fr: TODO
+
+survey_link:
+  transform: [handlebars]
+  en: |
+    {{{survey_link}}}
+  fr: |
+    {{{survey_link}}}

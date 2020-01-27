@@ -45,7 +45,6 @@ export const SurveyPopup = withRouter(
               default_state,
               (default_value, key) => {
                 const local_storage_value = localStorage.getItem(`infobase_survey_popup_${key}`);
-                localStorage.getItem(`infobase_survey_popup_chance`, local_storage_value);
                 return !_.isNull ? local_storage_value : default_value;
               }
             );
@@ -55,21 +54,20 @@ export const SurveyPopup = withRouter(
         }
       )();
 
-      if (active){
-        props.history.listen(
-          ({pathname}) => {
-            if ( this.state.previous_route_root !== route_root(pathname) ){
-              const new_chance = this.state.chance + chance_increment;
+      props.history.listen(
+        ({pathname}) => {
+          if ( this.state.active && this.state.previous_route_root !== route_root(pathname) ){
+            const new_chance = this.state.chance + chance_increment;
 
+            localStorage.setItem(`infobase_survey_popup_chance`, new_chance);
 
-              this.setState({
-                chance: new_chance,
-                previous_route_root: route_root(pathname),
-              });
-            }
+            this.setState({
+              chance: new_chance,
+              previous_route_root: route_root(pathname),
+            });
           }
-        );
-      }
+        }
+      );
 
       this.state = {
         active: active,
@@ -80,14 +78,20 @@ export const SurveyPopup = withRouter(
     handleButtonPress(button_type){
       if ( _.includes(["yes", "no"], button_type) ){
         localStorage.getItem(`infobase_survey_popup_active`, false);
-        localStorage.getItem( `infobase_survey_popup_deactivated_unix_time`, Date.now() );
+        localStorage.getItem(`infobase_survey_popup_deactivated_unix_time`, Date.now());
 
         if (button_type === "yes"){
-          //TODO
+          window.open( text_maker("survey_link") );
         }
       }
 
       this.setState({active: false});
+    }
+    shouldComponentUpdate(nextProps, nextState){
+      const has_new_chance_to_open = this.state.chance !== nextState.chance;
+      const is_closing = this.state.active !== nextState.active;
+
+      return has_new_chance_to_open || is_closing;
     }
     render(){
       const {
@@ -95,9 +99,9 @@ export const SurveyPopup = withRouter(
         chance,
       } = this.state;
 
-      const should_render = Math.random() < chance;
+      const should_render = active && Math.random() < chance;
 
-      if (active && should_render){
+      if (should_render){
         return <FixedPopover
           show={true}
           header={<TM k="suvey_popup_header" />}
