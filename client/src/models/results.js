@@ -318,6 +318,22 @@ const status_key_to_glossary_key = {
 };
 
 
+const get_doc_name = (doc_type, year) => {
+  if(doc_type === "dp" && window.lang === "en"){
+    return `${run_template(year)} Departmental Plan`;
+  }
+  if(doc_type === "dp" && window.lang === "fr"){
+    return `plan ministériel de ${run_template(year)}`;
+  }
+  if(doc_type === "drr" && window.lang === "en"){
+    return `${run_template(year)} Departmental Results Report`;
+  }
+  if(doc_type === "drr" && window.lang === "fr"){
+    return `rapport sur les résultats ministériels de ${run_template(year)}`;
+  }
+  throw "Error: document type should be 'dp' or 'drr' and window.lang should be 'en' or 'fr'";
+};
+
 const build_doc_info_objects = (doc_type, docs) => _.chain(docs)
   .map(
     (doc_properties, index) => {
@@ -334,6 +350,7 @@ const build_doc_info_objects = (doc_type, docs) => _.chain(docs)
         doc_type,
         doc_key: `${doc_type}${year_short.substring(2)}`,
         year: year_to_fiscal_year(year_short),
+        name: get_doc_name(doc_type, year_short),
         resource_years_written: _.map(resource_years, run_template),
         primary_resource_year,
         primary_resource_year_written: primary_resource_year && run_template(primary_resource_year),
