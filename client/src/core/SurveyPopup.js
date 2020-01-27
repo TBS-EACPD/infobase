@@ -2,8 +2,6 @@ import text from "./SurveyPopup.yaml";
 
 import { withRouter } from 'react-router';
 
-import { has_local_storage } from './feature_detection.js';
-
 import { FixedPopover, create_text_maker_component } from '../components/index.js';
 
 const {
@@ -23,28 +21,21 @@ const should_reset_local_storage = () => localStorage.getItem(`infobase_survey_p
   Date.now() - localStorage.getItem(`infobase_survey_popup_deactivated_since`) > seconds_in_a_half_year;
 
 const get_state_defaults = () => {
-  const default_state = {
-    active: true,
-    chance: 0,
+  const default_active = true;
+  const default_chance = 0;
+
+  const local_storage_deactivated = localStorage.getItem(`infobase_survey_popup_deactivated`);
+  const local_storage_chance = localStorage.getItem(`infobase_survey_popup_chance`);
+
+  // localStorage is all strings, note that we cast the values read from it to a boolean and a number below
+  return {
+    active: !_.isNull(local_storage_deactivated) ? !local_storage_deactivated : default_active,
+    chance: !_.isNull(local_storage_chance) ? +local_storage_chance : default_chance,
   };
-
-  if (has_local_storage){
-    const local_storage_deactivated = localStorage.getItem(`infobase_survey_popup_deactivated`);
-    const local_storage_chance = localStorage.getItem(`infobase_survey_popup_chance`);
-
-    // localStorage is all strings, so be aware that we cast those to a boolean and a number below
-    return {
-      active: !_.isNull(local_storage_deactivated) ? !local_storage_deactivated : default_state.active,
-      chance: !_.isNull(local_storage_chance) ? +local_storage_chance : default_state.chance,
-    };
-  } else {
-    return default_state;
-  }
 };
 
-// Make it less likely for users without local storage to get the popup to balance that they will always have a chance to see it,
-// even after previously dimissing it. Going by caniuse.com stats, that's less than 8% of users globally, and shrinking, anyway
-const chance_increment = has_local_storage ? 0.15 : 0.05;
+
+const chance_increment = 0.15;
 
 export const SurveyPopup = withRouter(
   class _SurveyPopup extends React.Component {
@@ -58,7 +49,7 @@ export const SurveyPopup = withRouter(
           if ( this.state.active && this.state.previous_path_root !== get_path_root(pathname) ){
             const new_chance = this.state.chance + chance_increment;
 
-            has_local_storage && localStorage.setItem(`infobase_survey_popup_chance`, new_chance);
+            localStorage.setItem(`infobase_survey_popup_chance`, new_chance);
 
             this.setState({
               chance: new_chance,
@@ -68,7 +59,7 @@ export const SurveyPopup = withRouter(
         }
       );
 
-      if ( has_local_storage && should_reset_local_storage() ){
+      if ( should_reset_local_storage() ){
         localStorage.removeItem('infobase_survey_popup_chance');
         localStorage.removeItem('infobase_survey_popup_deactivated');
         localStorage.removeItem('infobase_survey_popup_deactivated_since');
@@ -87,10 +78,8 @@ export const SurveyPopup = withRouter(
     }
     handleButtonPress(button_type){
       if ( _.includes(["yes", "no"], button_type) ){
-        if (has_local_storage){
-          localStorage.setItem(`infobase_survey_popup_deactivated`, "true");
-          localStorage.setItem(`infobase_survey_popup_deactivated_since`, Date.now());
-        }
+        localStorage.setItem(`infobase_survey_popup_deactivated`, "true");
+        localStorage.setItem(`infobase_survey_popup_deactivated_since`, Date.now());
 
         if (button_type === "yes"){
           window.open( text_maker("survey_link") );
@@ -100,10 +89,10 @@ export const SurveyPopup = withRouter(
       this.setState({active: false});
     }
     shouldComponentUpdate(nextProps, nextState){
-      const has_new_chance_to_open = this.state.chance !== nextState.chance;
-      const is_closing = this.state.active !== nextState.active;
+      const chance_to_open_changed = this.state.chance !== nextState.chance;
+      const is_closing = !this.state.active && this.state.active !== nextState.active;
 
-      return has_new_chance_to_open || is_closing;
+      return chance_to_open_changed || is_closing;
     }
     render(){
       const {
@@ -121,7 +110,7 @@ export const SurveyPopup = withRouter(
           _.chain([
             "yes",
             "later",
-            has_local_storage && "no",
+            "no",
           ])
             .compact()
             .map( (button_type) => (
