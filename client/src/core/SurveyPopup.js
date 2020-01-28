@@ -96,6 +96,13 @@ export const SurveyPopup = withRouter(
 
       return chance_to_open_changed || is_closing;
     }
+    componentDidMount(){
+      // if a new user bounces from the first page they see, want them to have some chance of getting the popup if they ever return
+      // this is clobered by the properly incrementing value for users who don't bounce though
+      if (this.state.chance === 0){
+        localStorage.setItem(`infobase_survey_popup_chance`, 0.25);
+      }
+    }
     render(){
       const {
         active,
