@@ -1,6 +1,6 @@
 suvey_popup_header:
   en: Have a few minutes to help us improve the site?
-  fr: TODO
+  fr: Pouvez-vous prendre quelques minutes pour nous aider à améliorer le site?
 
 survey_popup_body:
   transform: [markdown]
@@ -10,20 +10,25 @@ survey_popup_body:
     Choosing “Yes, after my visit” will open our survey in a new window. You can return to this window to complete the survey after you have finished browsing the GC InfoBase; it will not time out.
 
     We always value your feedback. Thank you!
-  fr: TODO
+  fr: |
+    A la fin de votre visite aujourd'hui, prenez le temps de nous parler de votre expérience avec l'InfoBase du GC.
+
+    En sélectionnant "Oui, après ma visite", vous accéderez à une nouvelle fenêtre de notre enquête. Quand vous aurez fini de parcourir l'InfoBase du GC, vous pourrez revenir à cette fenêtre pour répondre au questionnaire ; il vous restera du temps.
+
+    Vos commentaires nous sont toujours précieux. Merci!
 
 survey_popup_yes:
   transform: [handlebars]
   en: Yes, after my visit
-  fr: TODO
+  fr: Oui, après ma visite
 
 survey_popup_later:
   en: Maybe some other time
-  fr: TODO
+  fr: Peut-être une autre fois
 
 survey_popup_no:
   en: No, do not ask again
-  fr: TODO
+  fr: Non, ne le demandez plus
 
 survey_link:
   transform: [handlebars]
