@@ -10,12 +10,16 @@ import { run_template } from "../../models/text.js";
 import { businessConstants } from "../../models/businessConstants.js";
 import { trivial_text_maker } from '../../models/text.js';
 
+
 const { provinces } = businessConstants;
 
 const get_graph_color = (alpha) => {
   const rgb = hex_to_rgb(secondaryColor);
   return rgb && `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha || 1})`;
 };
+
+//boolean used to track state of graph
+let show_per_capita = false;
 
 
 class CanadaGraphBarLegend extends React.Component {
@@ -89,6 +93,7 @@ class CanadaGraphBarLegend extends React.Component {
   }
 }
 
+
 class CanadaGraph extends React.Component {
   constructor(){
     super();
@@ -140,6 +145,22 @@ class CanadaGraph extends React.Component {
   }
 }
 
+
+//switch to change graph display from transfer payment amount to transfer payment per capita
+class DisplayToggle extends React.Component {
+  constructor(){
+    super();
+    
+  }
+  render(){
+    return(
+      <input type="checkbox" name="">
+      </input>
+    );
+  }
+}
+
+
 export class Canada extends React.Component{
   constructor(props){
     super(props);
@@ -175,7 +196,11 @@ export class Canada extends React.Component{
     return (
       <div className="frow no-container">
         <div className="fcol-md-3">
-          <div className="legend-container" style={{ maxHeight: "400px", width: "100%" }}>
+          <div className="legend-container" style={{ maxHeight: "400px", width: "100%", marginBottom: "10px"}}>
+            <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">Show Per Capita</p>
+            <DisplayToggle/>
+          </div>
+          <div className="legend-container" style={{ maxHeight: "400px", width: "100%", marginTop: "10px"}}>
             <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
               {trivial_text_maker("legend")}
             </p>
