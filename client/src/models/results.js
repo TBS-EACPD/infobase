@@ -372,7 +372,7 @@ const drr_docs = build_doc_info_objects(
       resource_years: ["{{pa_last_year}}"],
       doc_url_en: "DRR_TODO",
       doc_url_fr: "DRR_TODO",
-      late_departments: [235, 150, 302, 138, 326, 129, 125, 114],
+      late_departments: [302, 326, 125],
     },
   ]
 );
