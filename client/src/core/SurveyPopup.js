@@ -82,10 +82,6 @@ export const SurveyPopup = withRouter(
       if ( _.includes(["yes", "no"], button_type) ){
         localStorage.setItem(`infobase_survey_popup_deactivated`, "true");
         localStorage.setItem(`infobase_survey_popup_deactivated_since`, Date.now());
-
-        if (button_type === "yes"){
-          window.open( text_maker("survey_link") );
-        }
       }
 
       this.setState({active: false});
@@ -125,22 +121,29 @@ export const SurveyPopup = withRouter(
         }
         body={<TM k="survey_popup_body" />}
         footer={
-          _.chain([
-            "yes",
-            "later",
-            "no",
-          ])
-            .compact()
-            .map( (button_type) => (
-              <button 
-                className="btn btn-ib-primary"
-                key={button_type}
-                onClick={ () => this.handleButtonPress(button_type) }
-              >
-                {text_maker(`survey_popup_${button_type}`)}
-              </button>
-            ) )
-            .value()
+          <Fragment>
+            <a 
+              href={text_maker("survey_link")}
+              target="_blank" rel="noopener noreferrer"
+              className="btn btn-ib-primary"
+              onClick={ () => this.handleButtonPress('yes') }
+            >
+              {text_maker('survey_popup_yes')}
+            </a>
+            {
+              _.map(
+                ["later", "no"],
+                (button_type) => <button 
+                  key={button_type}
+                  className="btn btn-ib-primary"
+                  onClick={ () => this.handleButtonPress(button_type) }
+                >
+                  {text_maker(`survey_popup_${button_type}`)}
+                </button>,
+              )
+            }
+          </Fragment>
+
         }
       />;
     }
