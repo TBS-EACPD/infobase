@@ -51,7 +51,7 @@ const IndicatorResultDisplay = (props) => {
 };
 
 
-const IndicatorDisplay = ({indicator}, show_doc) => {
+const IndicatorDisplay = ({indicator, show_doc}) => {
   const is_drr = /drr/.test(indicator.doc);
   const has_previous_year_target = !_.isNull(indicator.previous_year_target_type);
   const has_previous_year_result = false; // DRR_TODO: previous year results aren't available/in the API yet, but they should be starting with DRR19 (if not, clean this out eventually)
