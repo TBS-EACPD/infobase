@@ -37,7 +37,7 @@ const get_state_defaults = () => {
 };
 
 
-const chance_increment = 0.15;
+const chance_increment = 0.2;
 
 export const SurveyPopup = withRouter(
   class _SurveyPopup extends React.Component {
@@ -100,7 +100,7 @@ export const SurveyPopup = withRouter(
       // if a new user bounces from the first page they see, want them to have some chance of getting the popup if they ever return
       // this is clobered by the properly incrementing value for users who don't bounce though
       if (this.state.chance === 0){
-        localStorage.setItem(`infobase_survey_popup_chance`, 0.25);
+        localStorage.setItem(`infobase_survey_popup_chance`, chance_increment);
       }
     }
     render(){
