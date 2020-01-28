@@ -143,15 +143,12 @@ const indicator_actual_text = (indicator) => {
       case 'percent_range': {
         return actual ? formats[type_by_data_type[datatype]](+actual) + measure_display(measure) : result_unspecified_display;
       }
+      case 'tbd': // TODO tbd's are rare, and mostly have blank actual vales... but they CAN have actual values (in which case we have no idea how to format them ATM, as the type is just TBD), so just displaying them raw for now. Data model needs to adjust to account for them
       case 'text': {
         return _.isEmpty(actual) ? result_unspecified_display : actual;
       }
-      case 'tbd': {
-        return text_maker("tbd_result_text");
-      }
       default: {
-        //certain indicators have no targets
-        return null;
+        return result_unspecified_display;
       }
     }
   };
