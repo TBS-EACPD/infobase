@@ -1,7 +1,7 @@
-import './RadioButtons.scss';
+import './SlideToggle.scss';
 import classNames from 'classnames';
 
-export const RadioButtons = ({ options, onChange }) => <div className="radio-buttons">
+export const SlideToggle = ({ options, onChange }) => <div className="radio-buttons">
   {/* display = text, id = state, active = selected or not */}
   {options.map( ({ display, id, active })=> 
     <button 

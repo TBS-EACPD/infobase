@@ -33,6 +33,7 @@ export { WellList } from './WellList.js';
 export { DisplayTable } from './DisplayTable.js';
 export { LabeledTable } from './LabeledTable.js';
 export { FootnoteList } from './FootnoteList.js';
+export { SlideToggle } from './SlideToggle.js';
 
 export { StatelessModal, FixedPopover } from './modals_and_popovers';
 
