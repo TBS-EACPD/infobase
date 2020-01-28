@@ -1,7 +1,9 @@
 import text from "./SurveyPopup.yaml";
 
+import { Fragment } from 'react';
 import { withRouter } from 'react-router';
 
+import { IconFeedback } from '../icons/icons.js';
 import { FixedPopover, create_text_maker_component } from '../components/index.js';
 
 const {
@@ -104,7 +106,16 @@ export const SurveyPopup = withRouter(
 
       return <FixedPopover
         show={should_render}
-        header={<TM k="suvey_popup_header" />}
+        title={
+          <Fragment>
+            <IconFeedback
+              title={text_maker("suvey_popup_header")}
+              color={window.infobase_color_constants.tertiaryColor}
+              alternate_color={false}
+            />
+            {text_maker("suvey_popup_header")}
+          </Fragment>
+        }
         body={<TM k="survey_popup_body" />}
         footer={
           _.chain([
