@@ -34,6 +34,7 @@ export { DisplayTable } from './DisplayTable.js';
 export { LabeledTable } from './LabeledTable.js';
 export { FootnoteList } from './FootnoteList.js';
 export { AlertBanner } from './AlertBanner.js';
+export { SlideToggle } from './SlideToggle.js';
 
 export { StatelessModal, FixedPopover } from './modals_and_popovers';
 
