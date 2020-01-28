@@ -94,8 +94,7 @@ const indicator_target_text = (indicator) => {
       }
   
       case 'text': {
-        if ( _.isEmpty(target_narrative) ){ return target_unspecified_display; }
-        return target_narrative;
+        return _.isEmpty(target_narrative) ? target_unspecified_display : target_narrative;
       }
   
       case 'tbd': {
@@ -103,8 +102,7 @@ const indicator_target_text = (indicator) => {
       }
   
       default: {
-        //certain indicators have no targets
-        return null;
+        return target_unspecified_display;
       }
     }
   };
