@@ -67,6 +67,7 @@ const indicator_target_text = (indicator) => {
   const target_unspecified_display = text_maker("unspecified_target");
 
   const get_display_case = ({target_type, target_min, target_max, target_narrative, measure, seeking_to}) => {
+    // target_types of ..._range are a hold over from old data, in the future there will only be num, dollar, etc. and and the seeking_to value will indicate if it is a range or not
     switch(target_type){
       case 'num':
       case 'num_range':
