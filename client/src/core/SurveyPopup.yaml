@@ -5,9 +5,11 @@ suvey_popup_header:
 survey_popup_body:
   transform: [markdown]
   en: | 
-    Please take a few minutes at the end of your visit today to anonymously tell us about your experience with the GC InfoBase. We always value your feedback. Thank you!
+    Please take a few minutes at the end of your visit today to tell us about your experience with GC InfoBase.
 
-    Choosing “Yes, after my visit” will open our survey in a new window. You can return to this window and finish browsing the GC InfoBase before completing that survey, it will not time out.
+    Choosing “Yes, after my visit” will open our survey in a new window. You can return to this window to complete the survey after you have finished browsing the GC InfoBase; it will not time out.
+
+    We always value your feedback. Thank you!
   fr: TODO
 
 survey_popup_yes:
