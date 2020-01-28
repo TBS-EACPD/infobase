@@ -3,6 +3,7 @@ import text from "./SurveyPopup.yaml";
 import { Fragment } from 'react';
 import { withRouter } from 'react-router';
 
+import { log_standard_event } from './analytics.js';
 import { IconFeedback } from '../icons/icons.js';
 import { FixedPopover, create_text_maker_component } from '../components/index.js';
 
@@ -83,6 +84,12 @@ export const SurveyPopup = withRouter(
         localStorage.setItem(`infobase_survey_popup_deactivated`, "true");
         localStorage.setItem(`infobase_survey_popup_deactivated_since`, Date.now());
       }
+
+      log_standard_event({
+        SUBAPP: window.location.hash.replace('#','') || "start",
+        MISC1: "SURVEY_POPUP_INTERACTION",
+        MISC2: button_type,
+      });
 
       this.setState({active: false});
     }
