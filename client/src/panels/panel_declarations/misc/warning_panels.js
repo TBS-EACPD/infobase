@@ -152,12 +152,13 @@ export const declare_late_results_warning_panel = () => declare_panel({
                   result_doc_name: text_maker(`${result_doc.doc_type}_name`, {year: result_doc.year}),
                 }}
               />
-              <MultiColumnList 
+              <MultiColumnList
                 list_items={_.map(
                   result_doc.late_departments, 
                   (org_id) => Dept.lookup(org_id).fancy_name
                 )}
-                li_class="font-small"
+                column_count={ window.lang === "en" && result_doc.late_departments > 3 ? 2 : 1 }
+                li_class={ result_doc.late_departments > 4 ? "font-small" : '' }
               />
             </Fragment>;
 
