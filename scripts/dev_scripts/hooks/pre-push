@@ -11,7 +11,7 @@ read local_ref local_sha remote_ref remote_sha
 
 local_branch_name=$(echo "$local_ref" | sed "s/refs\/heads\///")
 
-if [[ $local_branch_name =~ ^__ && $remote != "archive" ]]; then
-  echo "Double underscore branches can only be pushed to the archive (private) remote!"
+if [[ ($local_branch_name =~ ^__ || $local_branch_name =~ ^archived__ ) && $remote != "archive" ]]; then
+  echo "Double underscore and archived branches can only be pushed to the archive (private) remote!"
   exit 1
 fi
