@@ -236,7 +236,7 @@ export class CanadaD3Component {
           (yearly_data) => yearly_data[prov_key]
         );
         if (!corresponding_province_has_data){
-          hide_map_components( selector_template(prov_key) );
+          //hide_map_components( selector_template(prov_key) );
         }
       }
     );

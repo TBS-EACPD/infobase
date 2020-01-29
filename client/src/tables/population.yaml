@@ -1,0 +1,14 @@
+population_short:
+  transform: [handlebars,embeded-markdown,markdown]
+  en: |
+    RTP_TODO
+  fr: |
+    RTP_TODO
+population:
+  transform: [handlebars,embeded-markdown,markdown]
+  en: |
+    {{{gt "population_short"}}}
+
+  fr: |
+    {{{gt "population_short"}}}
+

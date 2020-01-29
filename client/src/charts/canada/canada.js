@@ -18,9 +18,6 @@ const get_graph_color = (alpha) => {
   return rgb && `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha || 1})`;
 };
 
-//boolean used to track state of graph
-let show_per_capita = false;
-
 
 class CanadaGraphBarLegend extends React.Component {
   constructor(){
@@ -146,21 +143,6 @@ class CanadaGraph extends React.Component {
 }
 
 
-//switch to change graph display from transfer payment amount to transfer payment per capita
-class DisplayToggle extends React.Component {
-  constructor(){
-    super();
-    
-  }
-  render(){
-    return(
-      <input type="checkbox" name="">
-      </input>
-    );
-  }
-}
-
-
 export class Canada extends React.Component{
   constructor(props){
     super(props);
@@ -196,10 +178,6 @@ export class Canada extends React.Component{
     return (
       <div className="frow no-container">
         <div className="fcol-md-3">
-          <div className="legend-container" style={{ maxHeight: "400px", width: "100%", marginBottom: "10px"}}>
-            <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">Show Per Capita</p>
-            <DisplayToggle/>
-          </div>
           <div className="legend-container" style={{ maxHeight: "400px", width: "100%", marginTop: "10px"}}>
             <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
               {trivial_text_maker("legend")}
