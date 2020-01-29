@@ -35,23 +35,23 @@ drr_name:
 
 late_results_warning_gov:
   transform: [handlebars]
-  en: The {{result_doc_name}} results and indicator counts do not include values from the organizations listed below, as their data is not yet available. Updates will follow as their data is submitted.
-  fr: Les résultats et les indicateurs figurant dans le {{result_doc_name}} n'incluent pas les valeurs des organisations ci-dessous, car leurs données ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.
+  en: The {{result_doc_name}} data does not include values from the organizations listed below, as their data is not yet available. Updates will follow.
+  fr: Les données du {{result_doc_name}} des organisations ci-dessous ne sont pas encore disponibles.  Des mises à jour suivront au fur et à mesure de la transmission de ces données.
 late_results_warning_dept:
   transform: [handlebars]
   en: |
-    {{result_doc_name}} data is not yet available for this organization. An update will follow once their data is submitted.
+    {{result_doc_name}} data for this organization is not yet available. An update will follow.
   fr: |
-    Les données du {{result_doc_name}} de cette organisation ne sont pas encore disponibles. Une mise à jour suivra dès que leurs données nous seront transmises.
+    Les données du {{result_doc_name}} de cette organisation ne sont pas encore disponibles. Une mise à jour suivra.
 late_results_warning_program:
   transform: [handlebars]
   en: |
-    {{result_doc_name}} data is not yet available for this Program. An update will follow once their data is submitted.
+    {{result_doc_name}} data for this Program is not yet available. An update will follow.
   fr: |
-    Les données du {{result_doc_name}} de ce programme ne sont pas encore disponibles. Une mise à jour suivra dès que leurs données nous seront transmises.
+    Les données du {{result_doc_name}} de ce programme ne sont pas encore disponibles. Une mise à jour suivra.
 late_results_warning_crso:
   transform: [handlebars]
   en: |
-    {{result_doc_name}} data is not yet available for this Core Responsibility. An update will follow once their data is submitted.
+    {{result_doc_name}} data for this Core Responsibility is not yet available. An update will follow.
   fr: |
-    Les données du {{result_doc_name}} de cette responsabilité essentielle ne sont pas encore disponibles. Une mise à jour suivra dès que leurs données nous seront transmises.
+    Les données du {{result_doc_name}} de cette responsabilité essentielle ne sont pas encore disponibles. Une mise à jour suivra.
