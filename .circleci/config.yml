@@ -58,6 +58,9 @@ jobs:
       - checkout:
           path: "~/InfoBase"
 
+      # only let this job run in the true repo
+      - run: if [ "$CIRCLE_PROJECT_REPONAME" != "infobase" ]; then circleci-agent step halt; fi
+
       - run:
           command: git branch -r > ./active-branches.txt
 
