@@ -39,8 +39,8 @@ jobs:
 
       - run: (cd email_backend && npm run end_to_end_tests)
 
-     # halt here if on a dunderscore branch, expected to be running in an env without the GCloud env vars required for the following steps
-      - run: if [[ "$CIRCLE_BRANCH" =~ ^__ ]]; then circleci step halt; fi
+     # halt here if not on the true repo, expected that means this is running in an env without the GCloud env vars required for the following steps
+      - run: if [[ "$CIRCLE_PROJECT_REPONAME" != "infobase" ]]; then circleci step halt; fi
 
       - run: (cd email_backend && npm run merge_coverage_reports && npm run create_coverage_shield_badge)
       
@@ -186,8 +186,8 @@ jobs:
           background: true
       - run: (cd server && npm run snapshot_tests) # the end to end snapshot tests, run against un-transpiled src for more useful coverage stats
 
-      # halt here if on a dunderscore branch, expected to be running in an env without the GCloud env vars required for the following steps
-      - run: if [[ "$CIRCLE_BRANCH" =~ ^__ ]]; then circleci step halt; fi
+      # halt here if not on the true repo, expected that means this is running in an env without the GCloud env vars required for the following steps
+      - run: if [[ "$CIRCLE_PROJECT_REPONAME" != "infobase" ]]; then circleci step halt; fi
 
       - run: (cd server && npm run merge_coverage_reports && npm run create_coverage_shield_badge)
 
