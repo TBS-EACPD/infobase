@@ -13,6 +13,7 @@ import { ensure_loaded } from '../core/lazy_loader.js';
 import { bubble_defs } from './bubble_definitions.js'; 
 import { get_panels_for_subject } from '../panels/get_panels_for_subject/index.js';
 import { PanelRenderer } from '../panels/PanelRenderer.js';
+import { tables_for_panel } from '../panels/PanelRegistry.js';
 import {
   create_text_maker_component,
   SpinnerWrapper,
@@ -89,6 +90,8 @@ class InfoGraph_ extends React.Component {
     this.state = {
       bubble_menu_loading: true,
       infographic_loading: true,
+      select_all: true,
+      panel_filter: {},
       subject: props.subject,
       bubbles_for_subject: {},
       active_bubble_id: props.active_bubble_id,
@@ -144,8 +147,9 @@ class InfoGraph_ extends React.Component {
       bubble_menu_loading,
       infographic_loading,
       bubbles_for_subject,
+      panel_filter,
+      select_all,
     } = this.state;
-
     const loading = bubble_menu_loading || infographic_loading;
 
     // Shortcircuit these to false when bubble menu is loading because the sorted bubbles can't be known yet
@@ -217,15 +221,55 @@ class InfoGraph_ extends React.Component {
               }
             </p>
           }
+          <div>
+            { !loading &&
+              <label key="select_all">
+                <input
+                  type='checkbox'
+                  value="select_all"
+                  checked={select_all}
+                  onChange={ () => {
+                    const copy_filter = _.reduce(panel_filter, (result, checked, dependency) => {
+                      result[dependency] = !select_all;
+                      return result;
+                    }, {});
+                    this.setState({
+                      panel_filter: copy_filter,
+                      select_all: !select_all,
+                    });
+                  }}
+                />
+                Select All
+              </label>
+            }
+            { !loading &&
+              _.map(panel_filter, (checked, dependency) =>
+                <label key={dependency}>
+                  <input
+                    type='checkbox'
+                    value={dependency}
+                    checked={panel_filter[dependency]}
+                    onChange={ (evt) => {
+                      const copy_filter = _.clone(panel_filter);
+                      copy_filter[evt.target.value] = evt.target.checked;
+                      this.setState({panel_filter: copy_filter});
+                    }}
+                  />
+                  {dependency}
+                </label>
+              )
+            }
+          </div>
           { !loading &&
             _.map(panel_keys, panel_key => 
-              <PanelRenderer 
+              <PanelRenderer
                 panel_key={panel_key}
                 subject={subject}
+                panel_filter={panel_filter}
                 active_bubble_id={active_bubble_id}
                 key={panel_key + subject.guid}
               />
-            )  
+            )
           }
         </div>
         { !_.isEmpty(active_bubble_id) && 
@@ -295,8 +339,19 @@ class InfoGraph_ extends React.Component {
       footnotes_for: subject,
     }).then( () => {
       if ( shallowEqualObjectsOverKeys({active_bubble_id, subject, level}, this.state, ['subject','active_bubble_id','level']) ){
+        const panel_filter = _.chain(panel_keys)
+          .map(panel_key => tables_for_panel(panel_key, subject.level))
+          .flatten()
+          .uniq()
+          .reduce((result, value) => {
+            result[value] = true;
+            return result;
+          }, {})
+          .value();
+          
         this.setState({
           infographic_loading: false,
+          panel_filter: panel_filter,
         });
       }
     });
