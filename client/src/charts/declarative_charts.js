@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { IconCheckmark } from '../icons/icons.js';
 import { LiquidFillGauge as D3LiquidFillGauge } from './liquid_fill_gauge.js';
 import { A11YTable } from './A11yTable.js';
 
@@ -15,14 +16,22 @@ const GraphLegend = ({
       >
         <span 
           aria-hidden={true}
-          style={ 
-            (!onClick || active) ?  
-            { backgroundColor: color, border: "1px solid " + color } : 
-            { border: "1px solid " + color }
-          }
+          style={{
+            border: `1px solid ${color}`,
+            backgroundColor: (!onClick || active) ? color : "transparent",
+            textAlign: "center",
+          }}
           className={ onClick ? "legend-color-checkbox span-hover" : "legend-color-checkbox" }
           onClick={ () => onClick && onClick(id) }
-        />
+        >
+          <IconCheckmark
+            color="white"
+            width={14}
+            height={11}
+            vertical_align={0.1}
+          />
+        </span>
+
         { onClick ?
           <span
             role="checkbox"
