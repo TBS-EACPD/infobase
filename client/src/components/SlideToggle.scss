@@ -1,79 +1,51 @@
 @import '../common_css/common-variables';
 
-//input[type="checkbox"]
-
-/*
-.slide-toggle {
-  display: inline-flex;
-  width: 700px;
-  border: 2px solid $buttonPrimaryColor;
-  border-radius: 10px; // this component's hacky styling is brittle to border radius changes, so it's not using the standardBorderRadius var; has to be manually updated
-  font-size: 1.2em;
-  font-weight: $mediumFontWeight;
-  background-color: inherit;
-
-  @media(max-width: $maxExtraSmallDevice){
-    flex-direction: column;
-  }
-}
-
-.radio-buttons__option {
-  @include unstyled-button;
-  flex: 1;
-  padding: 5px 15px;
-  color: $buttonPrimaryColor;
-  border-radius: 0px;
-  background-color: transparent;
-  margin-left: -2px;
-  margin-top: -1px;
-  margin-right: -1px;
-  margin-bottom: -1px;
+.slide-toggle-checkbox{
   position: relative;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  width: 80px;
+  height: 40px;
+  -webkit-appearance: none;
+  background: #c6c6c6;
+  outline: none;
+  border-radius: 20px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+  transition: 0.5s;
+}
+
+.slide-toggle-checkbox:active, .slide-toggle-checkbox:checked:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+.slide-toggle-checkbox:checked {
+  background: #03a9f4;
+}
+
+.slide-toggle-checkbox:before {
+  content:'';
+  position: absolute;
+  background: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  top:0;
+  left:0;
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: 0.5s;
+}
+
+.slide-toggle-checkbox:checked:before {
+  left: 40px;
+}
+
+.checkbox-container {
+  //position: absolute;
+  //top: 50%;
+  //left: 50%;
+  //transform: translate(-50%, -50%);
   text-align: center;
+  vertical-align: middle;
 }
-
-.radio-buttons__option.radio-buttons__option--active {
-  color: $backgroundColor;
-  background-color: $buttonPrimaryColor;
-  border-radius: 10px; // this component's hacky styling is brittle to border radius changes, so it's not using the standardBorderRadius var; has to be manually updated
-  cursor: default;
-  font-weight: $mediumFontWeight;
-
-  &:after, &:before {
-    display: none;
-  }
+.checkbox-title {
+  text-align: center;
+  vertical-align: middle;
 }
-
-%pseduo-separator-common {
-  @media(min-width: $minExtraSmallDevice){
-    content: "";
-    border: solid $buttonPrimaryColor;
-    position: absolute;
-    height: 76%;
-    top: 13%;
-    border-width: 0 0 0 1px;
-  }
-}
-.radio-buttons__option:not(:last-child):after {
-  @extend %pseduo-separator-common;
-  right: 0px;
-}
-.radio-buttons__option:not(:first-child):before {
-  @extend %pseduo-separator-common;
-  left: -1px;
-}
-
-
-.radio-buttons__option:not(.radio-buttons__option--active):hover,
-.radio-buttons__option:not(.radio-buttons__option--active):active,
-.radio-buttons__option:not(.radio-buttons__option--active):focus { 
-  background-color: change-color($color: $buttonPrimaryColor, $alpha: 0.75);
-  color: $backgroundColor !important;
-  border-radius: 10px; // this component's hacky styling is brittle to border radius changes, so it's not using the standardBorderRadius var; has to be manually updated
-  font-weight: $mediumFontWeight;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-*/

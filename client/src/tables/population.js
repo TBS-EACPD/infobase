@@ -1,4 +1,4 @@
-import text from './orgTransferPaymentsRegion.yaml';
+import text from './population.yaml';
 import {
   businessConstants,
   year_templates,
@@ -10,36 +10,40 @@ const { std_years } = year_templates;
 
 export default {
   text,
-  id: "orgTransferPaymentsRegion",
-  source: ["PA"],     
-  tags: [
+  id: "population",
+  source: ["PA"],
+  "tags": [
+    "EXP",
+    "PA",
     "TP_GEO",
+    "FPS",
+    "ANNUAL",
     "SOBJ10",
   ],
 
   "link": {
-    "en": "https://open.canada.ca/data/en/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
-    "fr": "https://ouvert.canada.ca/data/fr/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
+    "en": "https://open.canada.ca/data/en/dataset/ec690886-687d-4d59-9b1b-51311435d344",
+    "fr": "https://ouvert.canada.ca/data/fr/dataset/ec690886-687d-4d59-9b1b-51311435d344",
   },
 
   "name": {
-    "en": "Transfer Payments by recipient region",
-    "fr": "Paiements de transfert par région du bénéficiaire",
+    "en": "Population estimates, quarterly",
+    "fr": "Estimations de la population, trimestrielles",
   },
 
   "title": {
-    "en": "Transfer Payments by recipient region",
-    "fr": "Paiements de transfert par région du bénéficiaire",
+    "en": "Population estimates, quarterly",
+    "fr": "Estimations de la population, trimestrielles",
   },
 
   "add_cols": function(){
-    this.add_col({
+    /*this.add_col({
       "type": "int",
       "key": true,
       "hidden": true,
       "nick": "dept",
       "header": '',
-    });
+    });*/
     this.add_col({
       "type": "short-str",
       "key": true,
@@ -66,8 +70,8 @@ export default {
           "nick": header,
           "header": header,
           "description": {
-            "en": `Amount of transfer payment in ${header}`,
-            "fr": `Montant du paiement de transfert en ${header}`,
+            "en": `Population in ${header}`,
+            "fr": "RTP_TODO",
           },
         });
       }
@@ -91,9 +95,9 @@ export default {
   },
 
   "mapper": (row) => {
-    const [org_id, prov_code, ...values] = row;
+    const [/*org_id, */prov_code, ...values] = row;
     const prov_text = provinces[prov_code].text;
-    return [org_id, prov_code, prov_text, ...values];
+    return [/*org_id, */prov_code, prov_text, ...values];
   },
 
   "sort": (mapped_rows, lang) => _.sortBy(
