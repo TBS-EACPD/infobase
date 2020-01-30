@@ -76,12 +76,12 @@ const subject_link = (node) => (
 
 
 const indicator_table_from_list = (indicator_list) => {
-  const column_keys = ["activity","indicator","target","target_result","date_to_achieve","status"];
-  const sort_keys = ["activity","indicator","date_to_achieve", "status"];
+  const column_keys = ["cr_or_program","indicator","target","target_result","date_to_achieve","status"];
+  const sort_keys = ["cr_or_program","indicator","date_to_achieve", "status"];
   const table_data_headers = _.map(column_keys, k => text_maker(k));
   const table_data = _.map(indicator_list, ind => ({
     col_data: {
-      activity: subject_link(ind.parent_node),
+      cr_or_program: subject_link(ind.parent_node),
       indicator: <a href={`#indicator/${ind.indicator.id}`}>{ind.indicator.name}</a>,
       target: indicator_target_text(ind.indicator),
       target_result: indicator_actual_text(ind.indicator),
@@ -92,7 +92,7 @@ const indicator_table_from_list = (indicator_list) => {
       </Fragment>,
     },
     sort_keys: {
-      activity: ind.parent_node.data.name,
+      cr_or_program: ind.parent_node.data.name,
       indicator: ind.indicator.name,
       date_to_achieve: ind.indicator.target_year ? ind.indicator.target_year + ind.indicator.target_month/12 : Infinity,
       status: _.indexOf(ordered_status_keys, ind.indicator.status_key),
