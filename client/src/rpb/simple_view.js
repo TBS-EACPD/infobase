@@ -1,6 +1,5 @@
 import { TextMaker, text_maker } from './rpb_text_provider.js';
 import { 
-  SelectList,
   ReportDetails,
   ReportDatasets,
   ShareReport,
@@ -12,8 +11,10 @@ import {
   Format, 
   LabeledBox,
   AlertBanner,
-  SortDirections, 
+  SortDirections,
+  CheckBox,
 } from '../components/index.js';
+import { GraphLegend } from '../charts/declarative_charts.js';
 import { Details } from '../components/Details.js';
 import { rpb_link } from './rpb_link.js';
 import { Subject } from '../models/subject.js';
@@ -46,6 +47,7 @@ class SimpleView extends React.Component {
       on_toggle_col_nick,
       on_toggle_deptBreakout,
     } = this.props;
+
     return (
       <div> 
         <LabeledBox label={<TextMaker text_key="rpb_table_controls" />}>
@@ -53,29 +55,27 @@ class SimpleView extends React.Component {
             <div className="col-md-6">
               <fieldset className="rpb-config-item col-selection simple">
                 <legend className="rpb-config-header"> <TextMaker text_key="select_columns" /> </legend>
-                <SelectList 
-                  items={_.map(all_data_columns, obj => ({id: obj.nick, display: obj.fully_qualified_name }) ) }
-                  selected={ _.map(columns,'nick') }
-                  is_multi_select={true}
-                  onSelect={id=> on_toggle_col_nick(id) }
+                <GraphLegend 
+                  items={
+                    _.map(all_data_columns, obj => ({
+                      id: obj.nick,
+                      label: obj.fully_qualified_name,
+                      active: _.includes(_.map(columns, 'nick'), obj.nick),
+                    }))
+                  }
+                  onClick={ id=> on_toggle_col_nick(id) }
                 />
               </fieldset>
             </div>
             <div className="col-md-6">
               { subject === Gov && 
                 <div className="rpb-config-item">
-                  <label 
-                    className="rpb-config-header" 
-                  > 
-                    <TextMaker text_key="show_dept_breakout" />
-                    <input 
-                      type="checkbox"
-                      disabled={subject!==Gov}
-                      checked={deptBreakoutMode}
-                      onChange={on_toggle_deptBreakout}
-                      style={{ marginLeft: '15px' }}
-                    />
-                  </label>
+                  <CheckBox
+                    disabled={subject!==Gov}
+                    active={deptBreakoutMode}
+                    onClick={on_toggle_deptBreakout}
+                    label={text_maker("show_dept_breakout")}
+                  />
                 </div>
               }
               <div className="rpb-config-item">

@@ -13,6 +13,7 @@ import {
   Format,
   RadioButtons,
   LabeledBox,
+  CheckBox,
 } from '../components/index.js';
 import { 
   get_root,
@@ -327,15 +328,12 @@ class EstimatesExplorer extends React.Component {
               />
             }
             { h7y_layout === "org" &&
-              <label>
-                <input
-                  type="checkbox"
-                  checked={!show_stat}
-                  onChange={toggle_stat_filter}
-                  style={{ marginRight: '1rem' }}
-                />
-                <TM k="show_only_votes" />
-              </label>
+              <CheckBox
+                label={text_maker("show_only_votes")}
+                active={!show_stat}
+                onClick={toggle_stat_filter}
+                style={{ marginTop: '1rem' }}
+              />
             }
           </form>
         </div>

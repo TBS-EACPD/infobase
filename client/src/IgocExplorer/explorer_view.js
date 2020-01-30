@@ -10,7 +10,11 @@ import { Explorer } from '../explorer_common/explorer_components.js';
 
 import { infograph_href_template } from '../link_utils.js';
 import { sanitized_dangerous_inner_html } from '../general_utils.js';
-import { SpinnerWrapper, DlItem } from '../components/index.js';
+import {
+  SpinnerWrapper,
+  DlItem,
+  CheckBox,
+} from '../components/index.js';
 import { Subject } from '../models/subject.js';
 
 const { InstForm } = Subject;
@@ -275,15 +279,14 @@ class ExplorerForIgoc extends React.Component {
           }
         </form>
         <div className="igoc-checkbox-and-count-row">
-          <label>
-            <input 
-              type="checkbox"
-              checked={should_show_orgs_without_data}
-              onChange={on_toggle_orgs_without_data}
-              style={{marginRight: "5px"}}
-            />
-            <TM k="show_orgs_without_data"/>
-          </label>
+          <CheckBox
+            id={"show_orgs_without_data"}
+            active={should_show_orgs_without_data}
+            onClick={on_toggle_orgs_without_data}
+            label={text_maker("show_orgs_without_data")}
+            checkMark_vertical_align={6}
+            checkbox_style={{ marginTop: 4 }}
+          />
           <div>
             <TM k="displayed_orgs_count" args={{org_count}}/>
           </div>
