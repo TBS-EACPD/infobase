@@ -27,12 +27,12 @@ export default {
 
   "name": {
     "en": "Transfer Payments by recipient region",
-    "fr": "RTP_TODO",
+    "fr": "Paiements de transfert par région du bénéficiaire",
   },
 
   "title": {
     "en": "Transfer Payments by recipient region",
-    "fr": "RTP_TODO",
+    "fr": "Paiements de transfert par région du bénéficiaire",
   },
 
   "add_cols": function(){
@@ -69,8 +69,8 @@ export default {
           "nick": header,
           "header": header,
           "description": {
-            "en": `Amount of Transfer payment in ${header}`,
-            "fr": "RTP_TODO",
+            "en": `Amount of transfer payment in ${header}`,
+            "fr": `Montant du paiement de transfert en ${header}`,
           },
         });
       }
