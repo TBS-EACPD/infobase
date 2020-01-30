@@ -13,6 +13,10 @@ const {
 } = create_text_maker_component(text);
 
 
+const chance_increment = 0.2;
+const survey_campaign_end_date = new Date(2020, 3, 14).getTime()/1000;
+
+
 const get_path_root = (path) => _.chain(path)
   .replace(/^\//, '')
   .split('/')
@@ -37,8 +41,7 @@ const get_state_defaults = () => {
   };
 };
 
-
-const chance_increment = 0.2;
+const is_survey_campaign_over = () => Date.now() > survey_campaign_end_date;
 
 export const SurveyPopup = withRouter(
   class _SurveyPopup extends React.Component {
@@ -112,7 +115,7 @@ export const SurveyPopup = withRouter(
         chance,
       } = this.state;
 
-      const should_render = active && Math.random() < chance;
+      const should_render = is_survey_campaign_over() && active && Math.random() < chance;
 
       return <FixedPopover
         show={should_render}
