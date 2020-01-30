@@ -49,6 +49,7 @@ export class FixedPopover extends React.Component {
       subtitle,
       header,
       body,
+      max_body_height,
       footer,
       dialog_position,
       additional_dialog_class,
@@ -123,7 +124,9 @@ export class FixedPopover extends React.Component {
             {header_content}
           </Modal.Header>
           { body &&
-            <Modal.Body>
+            <Modal.Body
+              style={max_body_height ? {maxHeight: max_body_height, overflowY: "scroll"} : {}}
+            >
               {body}
             </Modal.Body>
           }
@@ -144,4 +147,8 @@ FixedPopover.defaultProps = {
   close_text: _.upperFirst( trivial_text_maker("close") ),
   close_button_in_header: false,
   on_close_callback: _.noop,
+
+  // if the popup gets too tall, it will be cut-off (and possibly non-interactable for it) on mobile
+  // 40vh is a bit arbitrary as a default, but leaves room for long header/footer content
+  max_body_height: "40vh",
 };
