@@ -125,7 +125,7 @@ export class FixedPopover extends React.Component {
           </Modal.Header>
           { body &&
             <Modal.Body
-              style={max_body_height ? {maxHeight: max_body_height, overflowY: "scroll"} : {}}
+              style={max_body_height ? {maxHeight: max_body_height, overflowY: "auto"} : {}}
             >
               {body}
             </Modal.Body>
