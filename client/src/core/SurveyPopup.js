@@ -139,7 +139,7 @@ export const SurveyPopup = withRouter(
         }
         body={<TM k="survey_popup_body" />}
         footer={
-          <Fragment>
+          <div style={{display: "flex", justifyContent: "center"}}>
             <a 
               href={text_maker("survey_link")}
               target="_blank" rel="noopener noreferrer"
@@ -160,8 +160,7 @@ export const SurveyPopup = withRouter(
                 </button>,
               )
             }
-          </Fragment>
-
+          </div>
         }
       />;
     }
