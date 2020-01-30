@@ -7,9 +7,19 @@ table.display-table > thead > tr > th.display-table__sortable {
 
 table.display-table > thead > tr {
   background-color: $primaryColor;
-}
-table.display-table > thead > tr > th {
-  color: $textLightColor;
+
+  &:not(:last-child) > th {
+    border-bottom: none;
+  }
+  & > th {
+    border-top: none;
+
+    color: $textLightColor;
+
+    &.center-text {
+      vertical-align: middle;
+    }
+  }
 }
 table.display-table > thead > tr > td,
 table.display-table > thead > tr > th {
