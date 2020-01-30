@@ -60,7 +60,7 @@ budget_source_desc:
 
 transfer_payments_source_title:
   en: Transfer Payments by recipient region
-  fr: RTP_TODO
+  fr: Paiements de transfert par région du bénéficiaire
 
 transfer_payments_source_desc:
   en: A transfer payment is a grant, contribution or other payment made by the Government for which no goods or services are received. This data shows the ministry, department, the name and location of the recipient, together with the total amount paid.
