@@ -1,4 +1,5 @@
 import './DisplayTable.scss';
+
 import text from '../common_text/common_lang.yaml';
 import { create_text_maker_component } from './misc_util_components.js';
 
@@ -78,46 +79,56 @@ export class DisplayTable extends React.Component {
           <thead>
             <tr className="table-header">
               {
+                _.map(column_keys, (tick, i) => <th
+                  key={i} 
+                  className={"center-text"}
+                >
+                  {table_data_headers[i]}
+                </th>)
+              }
+            </tr>
+            <tr className="table-header">
+              {
                 _.map(column_keys, (tick, i) => {
+                  const sortable = _.includes(sort_keys, tick);
+                  const filterable = !_.isUndefined(col_search_keys[tick]);
+
                   return (
-                    _.includes(sort_keys,tick) ?
-                      <th 
-                        key={i} 
-                        className={classNames("center-text", "display-table__sortable")}
-                      >
-                        {table_data_headers[i]}
+                    <th
+                      key={i} 
+                      className={classNames("center-text", sortable && "display-table__sortable")}
+                    >
+                      { sortable &&
                         <div onClick={ () => _.includes(sort_keys,tick) && this.header_click(tick) }>
                           <SortDirections 
                             asc={!descending && sort_by === tick}
                             desc={descending && sort_by === tick}
                           />
                         </div>
-                        { _.includes(col_search_keys, tick) &&
-                          <input
-                            type="text"
-                            id={tick}
-                            style={{ width: "100%", fontWeight: "normal" }}
-                            onChange={evt => {
+                      } 
+                      { filterable &&
+                        <input
+                          type="text"
+                          id={tick}
+                          style={{ width: "100%", fontWeight: "normal" }}
+                          onChange={ 
+                            (evt) => {
                               const new_query = _.chain(col_search_keys)
-                                .keyBy()
-                                .mapValues( (key)=>col_search[key] || "" )
+                                .map( 
+                                  (key) => key === evt.target.id ? 
+                                    evt.target.value :
+                                    (col_search[key] || "")
+                                )
+                                .fromPairs()
                                 .value();
-                              
-                              new_query[evt.target.id] = evt.target.value;
-                              this.setState({
-                                col_search: new_query,
-                              });
-                            }}
-                            placeholder={text_maker('filter_data')}
-                          />
-                        }
-                      </th> :
-                      <th 
-                        key={i} 
-                        className={"center-text"}
-                      >
-                        {table_data_headers[i]}
-                      </th>
+
+                              this.setState({ col_search: new_query });
+                            }
+                          }
+                          placeholder={text_maker('filter_data')}
+                        />
+                      }
+                    </th>
                   );
                 })
               }
