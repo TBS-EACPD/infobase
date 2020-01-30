@@ -114,6 +114,63 @@ provinces:
     en: Not Available
     fr: Non disponible
 
+
+provinces_with_article:
+  ab:
+    en: Alberta
+    fr: l'Alberta
+  abroad:
+    en: Abroad
+    fr: À l'étranger
+  bc:
+    en: British Columbia
+    fr: la Colombie-Britannique
+  mb:
+    en: Manitoba
+    fr: le Manitoba
+  nb:
+    en: New Brunswick
+    fr: le Nouveau-Brunswick
+  ncr:
+    en: NCR
+    fr: le RCN
+  ns:
+    en: Nova Scotia
+    fr: la Nouvelle-Écosse
+  nt:
+    en: Northwest Territories
+    fr: les Territoires du Nord-Ouest
+  nu: 
+    en: Nunavut
+    fr: leNunavut
+  on:
+    en: Ontario
+    fr: l'Ontario
+  onlessncr:
+    en: Ontario (non-NCR)
+    fr: l'Ontario (hors RCN)
+  pe:
+    en: Prince Edward Island
+    fr: l'Île-du-Prince-Édouard
+  qc:
+    en: Quebec
+    fr: le Québec
+  qclessncr:
+    en: Quebec (non-NCR)
+    fr: le Québec (hors RCN)
+  sk: 
+    en: Saskatchewan
+    fr: la Saskatchewan
+  yt: 
+    en: Yukon
+    fr: le Yukon
+  nl:
+    en: Newfoundland and Labrador
+    fr: le Terre-Neuve-et-Labrador
+  na:
+    en: Not Available
+    fr: Non disponible
+
     
 provinces_short:
   ab:

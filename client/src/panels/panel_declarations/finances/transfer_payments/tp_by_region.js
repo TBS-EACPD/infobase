@@ -16,7 +16,7 @@ const { std_years } = year_templates;
 const formatter = formats["compact2_raw"];
 
 const { text_maker, TM } = create_text_maker_component(text);
-const { provinces } = businessConstants;
+const { provinces, provinces_with_article } = businessConstants;
 const { A11YTable } = declarative_charts;
 
 const calculate_common = (data) => {
@@ -90,7 +90,7 @@ export const declare_tp_by_region_panel = () => declare_panel({
           0);
       const percent_of_total = current_year_data[largest_prov] / total_sum;
       const text_args = {
-        largest_prov: provinces[largest_prov].text,
+        largest_prov: provinces_with_article[largest_prov].text,
         total_sum: formatter(total_sum),
         percent_of_total: formats["percentage1_raw"](percent_of_total),
         subject: calculations.subject,
