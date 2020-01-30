@@ -14,6 +14,7 @@ export { CardBackgroundImage } from './CardBackgroundImage.js';
 export { DebouncedTextInput } from './DebouncedTextInput.js';
 export { ContainerEscapeHatch } from './ContainerEscapeHatch.js';
 export { FilterTable } from './FilterTable.js';
+export { CheckBox } from './CheckBox.js';
 export { Details } from './Details.js';
 export { EmbeddedVideo } from './EmbeddedVideo.js';
 export { SpinnerWrapper } from './SpinnerWrapper.js';

@@ -1,50 +1,28 @@
 import classNames from 'classnames';
-import { IconCheckmark } from '../icons/icons.js';
 import { LiquidFillGauge as D3LiquidFillGauge } from './liquid_fill_gauge.js';
+import { CheckBox } from '../components/index.js';
 import { A11YTable } from './A11yTable.js';
 
-const GraphLegend = ({ 
+const GraphLegend = ({
   isHorizontal, //defaults to false
+  isSolidBox, //defaults to false
   items, // [ { active, id, label, color }] 
   onClick, //id => { }
-}) => ( 
+}) => (
   <ul className={classNames("legend-list-inline", isHorizontal && "horizontal")}>
     {_.map(items, ({ color, label, id, active }) => 
       <li
         key={id}
         className="legend-list-el"
       >
-        <span 
-          aria-hidden={true}
-          style={{
-            border: `1px solid ${color}`,
-            backgroundColor: (!onClick || active) ? color : "transparent",
-            textAlign: "center",
-          }}
-          className={ onClick ? "legend-color-checkbox span-hover" : "legend-color-checkbox" }
-          onClick={ () => onClick && onClick(id) }
-        >
-          <IconCheckmark
-            color="white"
-            width={14}
-            height={11}
-            vertical_align={0.1}
-          />
-        </span>
-
-        { onClick ?
-          <span
-            role="checkbox"
-            aria-checked={active}
-            tabIndex={0}
-            className="link-styled"
-            onClick={ () => onClick(id) }
-            onKeyDown={ (e) => (e.keyCode===13 || e.keyCode===32) && onClick(id) }
-          > 
-            { label }
-          </span> : 
-          <span> { label } </span>
-        } 
+        <CheckBox
+          id={id}
+          onClick={onClick}        
+          color={color}
+          label={label}
+          active={active}
+          isSolidBox={isSolidBox}
+        />
       </li>
     )}
   </ul>
