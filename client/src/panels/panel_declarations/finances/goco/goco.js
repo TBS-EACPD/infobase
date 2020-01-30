@@ -316,6 +316,7 @@ class Goco extends React.Component {
             <GraphLegend
               isHorizontal
               items={legend_items}
+              isSolidBox
             />
           </div>
         </div>
