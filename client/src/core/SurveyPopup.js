@@ -90,8 +90,8 @@ export const SurveyPopup = withRouter(
 
       log_standard_event({
         SUBAPP: window.location.hash.replace('#','') || "start",
-        MISC1: "SURVEY_POPUP_INTERACTION",
-        MISC2: button_type,
+        MISC1: "SURVEY_POPUP",
+        MISC2: `interaction: ${button_type}`,
       });
 
       this.setState({active: false});
@@ -115,10 +115,18 @@ export const SurveyPopup = withRouter(
         chance,
       } = this.state;
 
-      const should_render = is_survey_campaign_over() && active && Math.random() < chance;
+      const should_show = is_survey_campaign_over() && active && Math.random() < chance;
+
+      if (should_show){
+        log_standard_event({
+          SUBAPP: window.location.hash.replace('#','') || "start",
+          MISC1: "SURVEY_POPUP",
+          MISC2: 'displayed',
+        });
+      }
 
       return <FixedPopover
-        show={should_render}
+        show={should_show}
         title={
           <Fragment>
             <IconFeedback
