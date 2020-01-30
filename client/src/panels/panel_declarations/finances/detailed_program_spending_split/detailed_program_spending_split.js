@@ -307,6 +307,7 @@ class DetailedProgramSplit extends React.Component {
             <div className="legend-container">
               <GraphLegend
                 items={legend_items}
+                isSolidBox
               />
             </div>
           }
