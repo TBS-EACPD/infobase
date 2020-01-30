@@ -17,7 +17,7 @@ const GraphLegend = ({
       >
         <CheckBox
           id={id}
-          onClick={onClick}        
+          onClick={onClick}
           color={color}
           label={label}
           active={active}

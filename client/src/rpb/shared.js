@@ -14,41 +14,6 @@ import classNames from 'classnames';
 
 const { Gov } = Subject;
 
-const SelectList = ({
-  legend_text,
-  items, //[ {id,display} ]
-  selected, //[ ids ]
-  is_multi_select, //true, defaults to false. All it does is provide the aria attr.
-  onSelect, //(id)=> { ... }
-  display,
-}) => {
-  return (
-    <ul 
-      className="list-unstyled" 
-    >
-      {_.map(items , ({id,display})=> {
-        const isSelected = _.includes(selected,id);
-        return (
-          <li 
-            key={id}
-            className={ is_multi_select ? "checkbox" : "radio" }
-          >
-            <label
-            >
-              <input 
-                onChange={()=>onSelect(id)}
-                type={ is_multi_select ? 'checkbox' : 'radio' }
-                checked={isSelected}
-              /> 
-              {display} 
-            </label>
-          </li>
-        );
-      })}
-    </ul>
-  );
-};
-
 const ReportDetails = ({
   table, 
   dimension, 
@@ -292,7 +257,6 @@ const NoDataMessage = ()=> (
 
 
 export { 
-  SelectList,
   ReportDetails,
   ReportDatasets,
   ShareReport,

@@ -4,6 +4,7 @@ import text from "./AdvancedSearch.yaml";
 import { EverythingSearch } from './EverythingSearch.js';
 
 import { Details } from '../components/Details.js';
+import { CheckBox } from '../components/CheckBox';
 
 import { create_text_maker } from '../models/text.js';
 const text_maker = create_text_maker(text);
@@ -56,15 +57,6 @@ const complete_option_hierarchy = {
   },
 };
 
-const Checkbox = ({label, checked, onChange}) => (
-  <div className="checkbox">
-    <label>
-      <input type={'checkbox'} checked={checked} onChange={onChange}/>
-      {label}
-    </label>
-  </div>
-);
-
 export class AdvancedSearch extends React.Component {
   constructor(props) {
     super(props);
@@ -107,10 +99,11 @@ export class AdvancedSearch extends React.Component {
         return (
           <div key={option_key}>
             { ( !window.is_a11y_mode || (window.is_a11y_mode && !has_children_to_display) ) &&
-              <Checkbox
+              <CheckBox
                 label={option_node.label}
-                checked={has_checked_child_option}
-                onChange={
+                active={has_checked_child_option}
+                style={{padding: 3}}
+                onClick={
                   () => this.setState(
                     _.chain(option_node.child_options)
                       .map( (child_node, child_key) => [child_key, !has_checked_child_option] )
@@ -141,13 +134,16 @@ export class AdvancedSearch extends React.Component {
           .value();
         
         if (should_be_displayed){
-          return <Checkbox 
+          return <CheckBox
+            style={{padding: 3}}
             key={option_key}
             label={option_node.label}
-            checked={optional_configs[option_key]}
-            onChange={ () => this.setState(
-              { [option_key]: !optional_configs[option_key] }
-            )}
+            active={optional_configs[option_key]}
+            onClick={ () => 
+              this.setState({
+                [option_key]: !optional_configs[option_key],
+              })
+            }
           />;
         }
       }

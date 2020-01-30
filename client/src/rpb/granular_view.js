@@ -1,6 +1,5 @@
 import { TextMaker, text_maker } from './rpb_text_provider.js';
 import { 
-  SelectList,
   ReportDetails,
   ReportDatasets,
   ExportButton,
@@ -14,6 +13,7 @@ import {
   LabeledBox,
   AlertBanner,
 } from '../components/index.js';
+import { GraphLegend } from '../charts/declarative_charts.js';
 import { Details } from '../components/Details.js';
 import { Subject } from '../models/subject.js';
 
@@ -46,17 +46,15 @@ class GranularView extends React.Component {
             <div className='col-md-6'>
               <fieldset className="rpb-config-item col-selection simple">
                 <legend className="rpb-config-header"> <TextMaker text_key="select_columns" /> </legend>
-                <SelectList 
-                  items={ _.map(
-                    all_data_columns, 
-                    ({nick, fully_qualified_name}) => ({
-                      id: nick, 
-                      display: fully_qualified_name, 
-                    }) 
-                  )}
-                  selected={ _.map(columns,'nick') }
-                  is_multi_select={true}
-                  onSelect={id=> on_toggle_col_nick(id) }
+                <GraphLegend 
+                  items={
+                    _.map(all_data_columns, ({nick, fully_qualified_name}) => ({
+                      id: nick,
+                      label: fully_qualified_name,
+                      active: _.includes(_.map(columns,'nick'), nick),
+                    }))
+                  }
+                  onClick={ id=> on_toggle_col_nick(id) }
                 />
               </fieldset>
             </div>
