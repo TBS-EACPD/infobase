@@ -65,7 +65,9 @@ const ResultsIntroPanel = ({subject, is_gov, summary_result_counts, doc_urls, ha
             }}
           />
         }
-        <TM k="reports_links_text" args={doc_urls} />
+        { _.some( doc_urls, (doc_url) => !_.isNull(doc_url) ) &&
+          <TM k="reports_links_text" args={doc_urls} />
+        }
       </div>
     </div>
   );
