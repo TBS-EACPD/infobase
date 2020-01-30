@@ -3,7 +3,7 @@ import { TM, text_maker } from './result_text_provider.js';
 
 import { Fragment } from 'react';
 
-import { util_components, general_utils, glossary_href } from '../shared.js';
+import { util_components, general_utils } from '../shared.js';
 import {
   status_key_to_glossary_key,
   ordered_status_keys,
@@ -297,14 +297,7 @@ const StatusIconTable = ({ icon_counts, onIconClick, onClearClick, active_list }
                   {result_simple_statuses[status_key].text}
                 </span>
               ) :
-              (
-                <a 
-                  href={glossary_href(status_key_to_glossary_key[status_key])} 
-                  title={text_maker("glossary_link_title")}
-                >
-                  {result_simple_statuses[status_key].text}
-                </a>
-              ),
+              ( result_simple_statuses[status_key].text ),
             icon: large_status_icons[status_key],
           }) )
         }
