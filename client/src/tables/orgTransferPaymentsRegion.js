@@ -10,13 +10,9 @@ const { std_years } = year_templates;
 export default {
   text,
   id: "orgTransferPaymentsRegion",
-  source: ["PA"],
-  "tags": [
-    "EXP",
-    "PA",
+  source: ["PA"],     
+  tags: [
     "TP_GEO",
-    "FPS",
-    "ANNUAL",
     "SOBJ10",
   ],
 
