@@ -172,7 +172,6 @@ export class Canada extends React.Component{
       id: tick,
       color: get_graph_color( color_scale(tick) ),
     }));
-  
     return (
       <div className="frow no-container">
         <div className="fcol-md-3">

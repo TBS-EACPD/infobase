@@ -19,30 +19,26 @@ const { text_maker, TM } = create_text_maker_component(text);
 const { provinces, provinces_with_article } = businessConstants;
 const { A11YTable } = declarative_charts;
 
-const calculate_common = (data) => {
-  const max = d3.max(d3.values(_.last(data)));
+const calculate_common = (subject, table) => {
+  const level = subject.level;
+  const data = std_years.map( year => table.prov_code(year, level === "gov" ? false : subject.unique_id) );
+
+  const most_recent_data = _.last(data);
+  
+  // slightly hacky check for no data (since if a dept doesn't have data table.prov_code() returns everything)
+  if (level === 'dept' && _.isObject(_.values(most_recent_data)[0])){
+    return false;
+  }
+  const max = _.max(_.values(most_recent_data));
   const color_scale = d3.scaleLinear()
     .domain([0,max])
     .range([0.2,1]);
-  return {
+  return max > 0 && {
     data,
     color_scale,
     years: std_years,
     formatter,
   };
-};
-
-//cache-busting comment (TODO: remove this)
-
-const calculate_funcs_by_level = {
-  gov: function(){
-    const { orgTransferPaymentsRegion } = this.tables;
-    return calculate_common( std_years.map( year => orgTransferPaymentsRegion.prov_code(year, false) ) );
-  },
-  dept: function(subject){
-    const { orgTransferPaymentsRegion } = this.tables;
-    return calculate_common( std_years.map( year => orgTransferPaymentsRegion.prov_code(year, subject.unique_id) ) );
-  },
 };
 
 const prepare_data_for_a11y_table = (data) =>
@@ -68,7 +64,10 @@ export const declare_tp_by_region_panel = () => declare_panel({
   levels: ["gov", "dept"],
   panel_config_func: (level, panel_key) => ({
     depends_on: ['orgTransferPaymentsRegion'],
-    calculate: calculate_funcs_by_level[level],
+    calculate: function(subject, info, options){
+      const { orgTransferPaymentsRegion } = this.tables;
+      return calculate_common(subject, orgTransferPaymentsRegion);
+    },
     
     render(render_args){
       const {
@@ -95,7 +94,6 @@ export const declare_tp_by_region_panel = () => declare_panel({
         percent_of_total: formats["percentage1_raw"](percent_of_total),
         subject: calculations.subject,
       };
-
       return (
         <StdPanel
           title={text_maker("tp_by_region_title")}
