@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { get_standard_csv_file_rows } from '../load_utils.js';
 
-import { ordered_doc_keys, drr_docs, dp_docs } from './results_common.js';
+import { time_period_ordered_doc_keys, drr_docs, dp_docs } from './results_common.js';
 
 const doc_keys = [ ...drr_docs, ...dp_docs ];
 const valid_doc_filter = ({doc}) => _.includes(doc_keys, doc);
@@ -45,12 +45,12 @@ export default async function({models}){
         stable_id,
       } = indicator;
 
-      const doc_index = _.indexOf(ordered_doc_keys, doc);
+      const doc_index = _.indexOf(time_period_ordered_doc_keys, doc);
       if ( doc_index > 0){
         // Look for corresponding indicator, by stable_id, from the previous documents. Pick most recent previous version
         const previous_year_indicator_instance = _.chain(indicator_records)
           .filter( (indicator) => indicator.stable_id === stable_id &&
-            _.indexOf(ordered_doc_keys, indicator.doc) < doc_index
+            _.indexOf(time_period_ordered_doc_keys, indicator.doc) < doc_index
           )
           .last()
           .value();
