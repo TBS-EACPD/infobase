@@ -54,7 +54,7 @@ export default async function({models}){
           )
           .last()
           .value();
-        debugger
+
         if ( !_.isUndefined(previous_year_indicator_instance) ){
           return {
             ...indicator,
