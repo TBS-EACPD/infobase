@@ -164,13 +164,18 @@ export class CanadaD3Component {
       .on("blur", dispatch_mouseLeave);
 
     // Add labels to provinces with data, attach event dispatchers
+    const provinces_to_label = data_has_ncr_broken_out ?
+      _.chain(ordering)
+        .keys()
+        .pullAll(["on","qc"])
+        .value() :
+      _.chain(ordering)
+        .keys()
+        .pullAll(["onlessncr","qclessncr","ncr"])
+        .value();
+    
     html.selectAll("div.label")
-      .data( _.chain(last_year_data)
-        .toPairs()
-        .map( ([prov_key, prov_value]) => prov_key )
-        .sortBy( (prov_key) => ordering[prov_key] )
-        .value()
-      )
+      .data(provinces_to_label)
       .enter()
       .append("div")
       .order()
@@ -215,7 +220,7 @@ export class CanadaD3Component {
         d3.select(this)
           .append("p")
           .style("margin-bottom", "0px")
-          .html( formatter(last_year_data[prov_key]) );
+          .html( formatter(last_year_data[prov_key] || 0) );
       });
 
 
