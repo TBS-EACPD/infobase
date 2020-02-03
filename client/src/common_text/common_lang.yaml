@@ -1124,6 +1124,14 @@ zoom_out:
   en: Zoom out
   fr: Dézoomer
 
+switch_to_graph:
+  en: Switch to graph
+  fr: TODO
+
+switch_to_table:
+  en: Switch to table
+  fr: TODO
+
 arrow:
   en: Arrow
   fr: Flèche
@@ -1138,3 +1146,4 @@ gap_year_warning:
   transform: [handlebars, markdown]
   en: The {{gap_year}} actual spending data will be available once the {{gap_year}} Public Accounts are tabled.
   fr: Les données pour les dépenses réelles de {{gap_year}} seront disponibles lorsque les Comptes publics de {{gap_year}} seront déposés.
+
