@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import { createTestAccount } from 'nodemailer';
 import { google } from 'googleapis';
 const OAuth2 = google.auth.OAuth2;
 
@@ -29,7 +29,7 @@ const get_prod_auth = async () => {
   };
 };
 
-const get_dev_auth = async () => await nodemailer.createTestAccount();
+const get_dev_auth = async () => await createTestAccount();
 
 const get_auth = async () => {
   if (process.env.IS_PROD_SERVER){

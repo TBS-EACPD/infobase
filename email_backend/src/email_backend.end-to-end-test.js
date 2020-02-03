@@ -5,6 +5,23 @@ import _ from 'lodash';
 // eslint-disable-next-line no-unused-vars
 import { email_backend } from './index.js'; // Server's started as side effect of import, kind of a GCloud Function thing although I could clean that up
 
+
+jest.mock('nodemailer'); // eslint-disable-line no-undef
+const { 
+  createTransport, 
+  createTestAccount, 
+  getTestMessageUrl, // eslint-disable-line no-unused-vars
+} = jest.requireActual('nodemailer'); // eslint-disable-line no-undef
+nodemailer.createTransport.mockImplementationOnce( (transport_config) => {
+  const transporter = createTransport(transport_config);
+
+  return {
+    ...transporter,
+    sendMail: (options) => transporter.sendMail(options),
+  };
+});
+
+
 describe("End-to-end tests for email_backend endpoints", () => {
   const prod_test_url = "https://us-central1-report-a-problem-email-244220.cloudfunctions.net/prod-email-backend";
   const local_test_url = `http://127.0.0.1:7331`;
@@ -80,7 +97,7 @@ describe("End-to-end tests for email_backend endpoints", () => {
     async () => {
       try {
         // Check if Ethereal can be reached to test mail sending, this test will be skipped (passingly) if it can't be
-        await nodemailer.createTestAccount();
+        await createTestAccount();
       } catch(error){
         if ( /getaddrinfo/.test(error) ){
           // eslint-disable-next-line no-console
@@ -93,6 +110,6 @@ describe("End-to-end tests for email_backend endpoints", () => {
 
       return expect(ok).toBe(200);
     },
-    ethereal_timeout_limit
+    ethereal_timeout_limit*1.5 // timeout on the async returning, shouldn't hit this anyway as the async should give up on its own after only ethereal_timeout_limit
   );
 });
