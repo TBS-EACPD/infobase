@@ -5,6 +5,7 @@ import { formats, dollar_formats } from "../core/format.js";
 import { Fragment } from 'react';
 import { IconZoomIn, IconZoomOut } from '../icons/icons.js';
 import { trivial_text_maker } from '../models/text.js';
+import { breakpoints } from '../core/breakpoint_defs.js';
 import './NivoCharts.scss';
 
 
@@ -40,9 +41,10 @@ const get_scale_bounds = (stacked, raw_data, zoomed) => {
   };
 };
 
-const default_tooltip = (tooltip_items, formatter) => (
+
+const default_tooltip = (tooltip_items, formatter, total) => ( // total indicates percent value tooltip being used
   <div style={{color: window.infobase_color_constants.textColor}}>
-    <table style={{width: '100%', borderCollapse: 'collapse'}}>
+    <table style={{width: '100%', borderCollapse: 'collapse', fontSize: window.innerWidth < breakpoints.minSmallDevice ? '14px' : 'inherit'}}>
       <tbody>
         { tooltip_items.map(
           tooltip_item => ( 
@@ -50,8 +52,17 @@ const default_tooltip = (tooltip_items, formatter) => (
               <td style= {{padding: '3px 5px'}}>
                 <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.color}} />
               </td>
-              <td style={{padding: '3px 5px'}}> {tooltip_item.id} </td>
-              <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+              { window.innerWidth < breakpoints.minSmallDevice ?
+                  <td>
+                    <div style={{padding: '3px 5px'}}> {tooltip_item.id} </div>
+                    <div style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+                  </td>
+                  :
+                  <Fragment>
+                    <td style={{padding: '3px 5px'}}> {tooltip_item.id} </td>
+                    <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+                  </Fragment>
+              }
             </tr>
           )
         )}
@@ -62,17 +73,30 @@ const default_tooltip = (tooltip_items, formatter) => (
 
 const percent_value_tooltip = (tooltip_items, formatter, total) => (
   <div>
-    <table>
-      <tbody>{ tooltip_items.map( d =>(
-        <tr key = {d.id}>
-          <td style = {{padding: '3px 5px'}}>
-            <div style = {{height: '12px', width: '12px', backgroundColor: d.color}}/>
-          </td>
-          <td style = {{padding: '3px 5px'}}>{d.id}</td>
-          <td style = {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{__html: formatter(d.value)}}/>
-          <td style = {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{__html: formats.percentage1(d.value/total)}}/>
-        </tr>
-      ))}
+    <table style={{width: '100%', borderCollapse: 'collapse', fontSize: window.innerWidth < breakpoints.minMediumDevice ? '14px' : 'inherit'}}>
+      <tbody>
+        { tooltip_items.map(
+          tooltip_item =>(
+            <tr key = {tooltip_item.id}>
+              <td style = {{padding: '3px 5px'}}>
+                <div style = {{height: '12px', width: '12px', backgroundColor: tooltip_item.color}}/>
+              </td>
+              { window.innerWidth < breakpoints.minSmallDevice ?
+                  <td>
+                    <div style = {{padding: '3px 5px'}}>{tooltip_item.id}</div>
+                    <div style = {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
+                    <div style = {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{__html: formats.percentage1(tooltip_item.value/total)}}/>
+                  </td>
+                  :
+                  <Fragment>
+                    <td style = {{padding: '3px 5px'}}>{tooltip_item.id}</td>
+                    <td style = {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
+                    <td style = {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{__html: formats.percentage1(tooltip_item.value/total)}}/>
+                  </Fragment>
+              }
+            </tr>
+          )
+        )}
       </tbody>
     </table>
   </div>
