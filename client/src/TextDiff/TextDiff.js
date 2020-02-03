@@ -12,8 +12,8 @@ import { ensure_loaded } from '../core/lazy_loader.js';
 import { Subject } from '../models/subject';
 import { result_docs, get_result_doc_keys } from '../models/results.js';
 import { Result, indicator_text_functions } from '../panels/panel_declarations/results/results_common.js';
-const { indicator_target_text } = indicator_text_functions;
 import result_text from '../panels/panel_declarations/results/result_components.yaml';
+import { declarative_charts } from '../panels/panel_declarations/shared.js';
 
 import {
   Select,
@@ -22,8 +22,8 @@ import {
   SpinnerWrapper,
 } from '../components';
 
-import { FancyCheckboxSelector } from '../components/CheckboxSelector.js';
-
+const { indicator_target_text } = indicator_text_functions;
+const { GraphLegend } = declarative_charts;
 const { Dept, CRSO, Program } = Subject;
 
 const { TM, text_maker } = create_text_maker_component([diff_text, result_text]);
@@ -111,8 +111,7 @@ const process_indicators = (matched_indicators, indicator_status) => {
     })
     .filter(
       (row) => !_.chain(indicator_status)
-        .pickBy('active')
-        .keys()
+        .map((status_row) => status_row.active && status_row.id)
         .intersection(row.status)
         .isEmpty()
         .value()
@@ -265,22 +264,18 @@ export default class TextDiffApp extends React.Component {
       loading: true,
       subject: get_subject_from_props(props),
       indicator_status_changed: false,
-      indicator_status: _.reduce([
+      indicator_status: _.map([
         { label: text_maker("indicator_desc_changed"), id: "indicator_desc_changed" }, 
         { label: text_maker("target_changed"), id: "target_changed" },
         { label: text_maker("indicator_added"), id: "indicator_added" }, 
         { label: text_maker("indicator_removed"), id: "indicator_removed" },
         { label: text_maker("indicator_no_diff"), id: "indicator_no_diff" },
-      ],
-      (result, status) => {
-        result[status.id] = {
-          active: true,
-          label: status.label,
-          id: status.id,
-          color: colors(status.id),
-        };
-        return result;
-      }, {} ),
+      ], (status) => ({
+        active: true,
+        label: status.label,
+        id: status.id,
+        color: colors(status.id),
+      })),
     };
   }
 
@@ -310,7 +305,6 @@ export default class TextDiffApp extends React.Component {
       .then( () => {
         const matched_indicators = get_indicators(subject);
         const processed_indicators = process_indicators(matched_indicators, indicator_status);
-        
         this.setState({
           first_load: false,
           subject: subject,
@@ -453,16 +447,19 @@ export default class TextDiffApp extends React.Component {
         </div>
         <div style={{padding: '0px 0px 20px 0px'}}>
           <div className="medium_panel_text">
-            <FancyCheckboxSelector
+            <GraphLegend
               items={indicator_status}
-              callbackToggle={ id => {
-                indicator_status[id].active = !indicator_status[id].active;
+              checkMark_vertical_align={6}
+              onClick={ id => {
+                const copy_indicator_status = _.map(indicator_status, row => row.id===id ? ({
+                  ...row,
+                  active: !row.active,
+                }) : row);
                 this.setState({
-                  indicator_status: indicator_status,
+                  indicator_status: copy_indicator_status,
                   indicator_status_changed: true,
                 });
               }}
-              legend={text_maker("filter_by_status")}
             />
           </div>
         </div>
