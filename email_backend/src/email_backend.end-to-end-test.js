@@ -1,5 +1,5 @@
 import axios from 'axios';
-import nodemailer from 'nodemailer';
+
 import _ from 'lodash';
 
 // eslint-disable-next-line no-unused-vars
@@ -7,11 +7,8 @@ import { email_backend } from './index.js'; // Server's started as side effect o
 
 
 jest.mock('nodemailer'); // eslint-disable-line no-undef
-const { 
-  createTransport, 
-  createTestAccount, 
-  getTestMessageUrl, // eslint-disable-line no-unused-vars
-} = jest.requireActual('nodemailer'); // eslint-disable-line no-undef
+import nodemailer from 'nodemailer';
+const { createTransport, createTestAccount, getTestMessageUrl } = jest.requireActual('nodemailer'); // eslint-disable-line no-undef
 nodemailer.createTransport.mockImplementationOnce( (transport_config) => {
   const transporter = createTransport(transport_config);
 
@@ -21,6 +18,9 @@ nodemailer.createTransport.mockImplementationOnce( (transport_config) => {
   };
 });
 
+// unmock what we want to actually use from nodemailer in testing... there must be a more selective way to mock, right?
+nodemailer.createTestAccount.mockImplementation( createTestAccount );
+nodemailer.getTestMessageUrl.mockImplementation( getTestMessageUrl )
 
 describe("End-to-end tests for email_backend endpoints", () => {
   const prod_test_url = "https://us-central1-report-a-problem-email-244220.cloudfunctions.net/prod-email-backend";
