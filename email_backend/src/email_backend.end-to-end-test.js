@@ -41,6 +41,7 @@ describe("End-to-end tests for email_backend endpoints", () => {
     optional_automatic: "bluh",
   };
   
+  
   it("/email_template_names returns an array of template names", async () => {
     const { data: template_names } = await make_email_template_names_request();
 
@@ -50,11 +51,13 @@ describe("End-to-end tests for email_backend endpoints", () => {
     return expect(template_names_is_array && template_names_values_are_strings).toBe(true);
   });    
 
+
   it("/email_template returns status 400 for an invalid invalid template_name", async () => {
     const { status: bad_template_name_status } = await make_email_template_request("zzz_unlikely_name");
 
     return expect(bad_template_name_status).toBe(400);
   });
+
   it("/email_template returns a non-empty object when given a valid template_name", async () => {
     const { data: template } = await make_email_template_request(test_template_name);
 
@@ -63,13 +66,16 @@ describe("End-to-end tests for email_backend endpoints", () => {
     return expect(template_is_valid).toBe(true);
   });
 
+
   it("/submit_email returns status 400 when a non-existant or invalid template is submitted", async () => {
     const { status: bad_template_name_status } = await make_submit_email_request("zzz_unlikely_name", completed_test_template);
     const { status: invalid_template_status } = await make_submit_email_request(test_template_name, {bleh: "bleh"});
 
     return expect([bad_template_name_status, invalid_template_status]).toEqual([400, 400]);
   });
- 
+
+  // this test is flaky due to its reliance on a third party service to validate submitted emails
+  const ethereal_timeout_limit = 60000;
   it("/submit_email returns status 200 when a valid template is submitted", 
     async () => {
       try {
@@ -87,6 +93,6 @@ describe("End-to-end tests for email_backend endpoints", () => {
 
       return expect(ok).toBe(200);
     },
-    10000 // longer than default timeout, had this flake because Ethereal was just a little slow
+    ethereal_timeout_limit
   );
 });
