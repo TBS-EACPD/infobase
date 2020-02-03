@@ -2,7 +2,7 @@ import express from 'express';
 import body_parser from 'body-parser';
 import compression from 'compression';
 import cors from 'cors';
-import { createTransport, getTestMessageUrl } from 'nodemailer';
+import nodemailer from 'nodemailer';
 import _ from 'lodash';
 
 import { 
@@ -123,7 +123,7 @@ const make_email_backend = (templates) => {
         const email_body = make_email_body_from_completed_template(original_template, completed_template);
 
         const transport_config = await get_transport_config();
-        const transporter = createTransport(transport_config);
+        const transporter = nodemailer.createTransport(transport_config);
 
         const sent_mail_info = await transporter.sendMail({
           ...email_config,
@@ -133,7 +133,7 @@ const make_email_backend = (templates) => {
 
         if (!process.env.IS_PROD_SERVER){
           // eslint-disable-next-line no-console
-          console.log(`Test mail URL: ${getTestMessageUrl(sent_mail_info)}`);
+          console.log(`Test mail URL: ${nodemailer.getTestMessageUrl(sent_mail_info)}`);
         }
 
         const mail_sent_successfully = ( 
