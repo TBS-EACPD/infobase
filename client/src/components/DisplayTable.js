@@ -13,12 +13,15 @@ export class DisplayTable extends React.Component {
     super();
     const {
       sort_keys,
-      col_search,
+      col_search_keys,
     } = props;
     this.state = {
       sort_by: sort_keys[0],
       descending: true,
-      col_search: col_search,
+      col_search: _.chain(col_search_keys)
+        .keyBy()
+        .mapValues(()=>"")
+        .value(),
     };
   }
 
@@ -40,13 +43,14 @@ export class DisplayTable extends React.Component {
       table_name,
       sort_keys,
       table_data_headers,
+      col_search_keys,
     } = this.props;
     const {
       sort_by,
       col_search,
       descending,
     } = this.state;
-
+    
     const lower_case_str_includes = (string, substring) => _.includes(string.toLowerCase().trim(), substring.toLowerCase().trim());
     const sorted_data = _.chain(data)
       .filter(row => {
@@ -88,13 +92,17 @@ export class DisplayTable extends React.Component {
                             desc={descending && sort_by === tick}
                           />
                         </div>
-                        { !_.isUndefined(col_search[tick]) &&
+                        { _.includes(col_search_keys, tick) &&
                           <input
                             type="text"
                             id={tick}
                             style={{ width: "100%", fontWeight: "normal" }}
                             onChange={evt => {
-                              const new_query = _.clone(col_search);
+                              const new_query = _.chain(col_search_keys)
+                                .keyBy()
+                                .mapValues((key)=>col_search[key] || "")
+                                .value();
+                              
                               new_query[evt.target.id] = evt.target.value;
                               this.setState({
                                 col_search: new_query,
