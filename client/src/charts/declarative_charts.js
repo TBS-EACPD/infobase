@@ -8,6 +8,9 @@ const GraphLegend = ({
   isSolidBox, //defaults to false
   items, // [ { active, id, label, color }] 
   onClick, //id => { }
+  checkbox_style, //style for checkbox
+  label_style, //style for label
+  checkMark_vertical_align, //vertical alignment for checkmark
 }) => (
   <ul className={classNames("legend-list-inline", isHorizontal && "horizontal")}>
     {_.map(items, ({ color, label, id, active }) => 
@@ -22,6 +25,9 @@ const GraphLegend = ({
           label={label}
           active={active}
           isSolidBox={isSolidBox}
+          checkbox_style={checkbox_style}
+          label_style={label_style}
+          checkMark_vertical_align={checkMark_vertical_align}
         />
       </li>
     )}
