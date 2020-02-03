@@ -1,16 +1,18 @@
 import axios from 'axios';
-
 import _ from 'lodash';
 
-// eslint-disable-next-line no-unused-vars
-import { email_backend } from './index.js'; // Server's started as side effect of import, kind of a GCloud Function thing although I could clean that up
-
-
+// mocking JUST nodemailer.createTransport, leaving everything else with its original implementation... is there a more direct way to do this?
 jest.mock('nodemailer'); // eslint-disable-line no-undef
 import nodemailer from 'nodemailer';
-const { createTransport, createTestAccount, getTestMessageUrl } = jest.requireActual('nodemailer'); // eslint-disable-line no-undef
-nodemailer.createTransport.mockImplementationOnce( (transport_config) => {
-  const transporter = createTransport(transport_config);
+const { ...actual_nodemailer } = jest.requireActual('nodemailer'); // eslint-disable-line no-undef
+
+_.each(
+  nodemailer,
+  (member, identifier) => member.mockImplementation(actual_nodemailer[identifier])
+);
+
+nodemailer.createTransport.mockImplementation( (transport_config) => {
+  const transporter = actual_nodemailer.createTransport(transport_config);
 
   return {
     ...transporter,
@@ -18,9 +20,10 @@ nodemailer.createTransport.mockImplementationOnce( (transport_config) => {
   };
 });
 
-// unmock what we want to actually use from nodemailer in testing... there must be a more selective way to mock, right?
-nodemailer.createTestAccount.mockImplementation( createTestAccount );
-nodemailer.getTestMessageUrl.mockImplementation( getTestMessageUrl )
+
+// eslint-disable-next-line no-unused-vars
+import { email_backend } from './index.js'; // Server's started as side effect of this import, kind of a GCloud Function thing although I could clean that up
+
 
 describe("End-to-end tests for email_backend endpoints", () => {
   const prod_test_url = "https://us-central1-report-a-problem-email-244220.cloudfunctions.net/prod-email-backend";
@@ -97,7 +100,7 @@ describe("End-to-end tests for email_backend endpoints", () => {
     async () => {
       try {
         // Check if Ethereal can be reached to test mail sending, this test will be skipped (passingly) if it can't be
-        await createTestAccount();
+        await actual_nodemailer.createTestAccount();
       } catch(error){
         if ( /getaddrinfo/.test(error) ){
           // eslint-disable-next-line no-console
