@@ -9,6 +9,15 @@
   border-radius: $standardBorderRadius;
 }
 
+.btn-table-view { 
+  background-color: $backgroundColor;
+  border: 2px solid $secondaryColor;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  color: $secondaryColor !important;
+  border-radius: $standardBorderRadius;
+}
+
 .nivo-tooltip {
   width: 100%;
   border-collapse: collapse;

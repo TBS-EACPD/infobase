@@ -79,6 +79,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
       <div style={{ height: "450px" }} aria-hidden = {true}>
         <NivoResponsiveBar
           data = {estimate_data}
+          table_switch = {true}
           keys = {keys}
           label_format = { d => <tspan y={ -4 }> {dollar_formats.compact2_raw(d)} </tspan>}
           isInteractive = {false}
