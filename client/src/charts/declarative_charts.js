@@ -8,6 +8,7 @@ const GraphLegend = ({
   isSolidBox, //defaults to false
   items, // [ { active, id, label, color }] 
   onClick, //id => { }
+  container_style, //style for div, containing checkbox and label
   checkbox_style, //style for checkbox
   label_style, //style for label
   checkMark_vertical_align, //vertical alignment for checkmark
@@ -25,6 +26,7 @@ const GraphLegend = ({
           label={label}
           active={active}
           isSolidBox={isSolidBox}
+          container_style={container_style}
           checkbox_style={checkbox_style}
           label_style={label_style}
           checkMark_vertical_align={checkMark_vertical_align}

@@ -9,7 +9,7 @@ export class CheckBox extends React.Component{
       label,
       active,
       isSolidBox,
-      style,
+      container_style,
       checkbox_style,
       label_style,
       checkMark_vertical_align,
@@ -17,7 +17,7 @@ export class CheckBox extends React.Component{
     } = this.props;
 
     return <div style={{
-      ...style,
+      ...container_style,
       pointerEvents: disabled && "none",
       opacity: disabled && 0.4,
     }}>

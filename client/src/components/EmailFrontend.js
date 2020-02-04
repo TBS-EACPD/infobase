@@ -140,7 +140,7 @@ class EmailFrontend extends React.Component {
               { _.map(
                 field_info.enum_values, (label_by_lang, key) => 
                   <CheckBox
-                    style={{padding: 5}}
+                    container_style={{ padding: 5 }}
                     key={`${key}_check`}
                     id={get_field_id(key)}
                     disabled={disable_forms}
@@ -215,14 +215,14 @@ class EmailFrontend extends React.Component {
               }
               <div className="email-backend-form__privacy-note">
                 <TM k="email_frontend_privacy_note" />
-                <div style={{textAlign: 'center'}}>
+                <div style={{ textAlign: 'center' }}>
                   <CheckBox 
                     id={"email_frontend_privacy"} 
                     active={privacy_acknowledged} 
                     disabled={disable_forms}
                     onClick={ () => this.setState({privacy_acknowledged: !privacy_acknowledged }) }
                     label={text_maker("email_frontend_privacy_ack")}
-                    label_style={{fontWeight: 'bold'}}
+                    label_style={{ fontWeight: 'bold' }}
                   />
                 </div>
               </div>

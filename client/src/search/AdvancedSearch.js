@@ -102,7 +102,7 @@ export class AdvancedSearch extends React.Component {
               <CheckBox
                 label={option_node.label}
                 active={has_checked_child_option}
-                style={{padding: 3}}
+                container_style={{ padding: 3 }}
                 onClick={
                   () => this.setState(
                     _.chain(option_node.child_options)
@@ -135,7 +135,7 @@ export class AdvancedSearch extends React.Component {
         
         if (should_be_displayed){
           return <CheckBox
-            style={{padding: 3}}
+            container_style={{ padding: 3 }}
             key={option_key}
             label={option_node.label}
             active={optional_configs[option_key]}
