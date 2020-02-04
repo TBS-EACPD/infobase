@@ -1,0 +1,101 @@
+{
+    "meta": {
+      "subject_template": "Feedback: [${find_info}], ${lang}, ${route}, ${sha}, ${client_id}",
+      "subject_template_old": "Feedback: [${issue_type}], ${lang}, ${route}, ${sha}, ${client_id}"
+    },
+  
+    "find_info": {
+      "required": true,
+      "value_type": "enums",
+      "enum_values": {
+        "found": {
+          "en": "Yes",
+          "fr": "Oui"
+        },
+        "not_found": {
+          "en": "No",
+          "fr": "Non"
+        }
+      },
+      "form_type": "radio-buttons",//check change to radio buttons
+      "form_label": {
+        "en": "Did you find what you were looking for on GC InfoBase?",
+        "fr": "Did you find what you were looking for on GC InfoBase?"
+      }
+    },
+
+    "issue_type": {
+      "required": true,
+      "value_type": "enums",
+      "enum_values": {
+        "bug": {
+          "en": "Something is broken",
+          "fr": "Quelque chose ne fonctionne pas"
+        },
+        "typo": {
+          "en": "It has a spelling or grammar mistake",
+          "fr": "II y a une erreur d'orthographe ou de grammaire"
+        },
+        "inaccurate": {
+          "en": "The information is wrong",
+          "fr": "L'information est erronée"
+        },
+        "outdated": {
+          "en": "The information is outdated",
+          "fr": "L'information n'est plus à jour"
+        },
+        "navigation": {
+          "en": "I can't find what I'm looking for",
+          "fr": "Je ne trouve pas ce que je cherche"
+        },
+        "other": {
+          "en": "other",
+          "fr": "Autre"
+        }
+      },
+      "form_type": "checkbox",
+      "form_label": {
+        "en": "Select all that apply:",
+        "fr": "Sélectionner toutes les cases qui s'appliquent :"
+      }
+    },
+    "issue_details": {
+      "required": true,
+      "value_type": "string",
+      "form_type": "textarea",
+      "form_label": {
+        "en": "Details (required)",
+        "fr": "Détails (obligatoire)"
+      }
+    },
+    "sha": {
+      "required": true,
+      "value_type": "string",
+      "form_type": false
+    },
+    "route": {
+      "required": true,
+      "value_type": "string",
+      "form_type": false
+    },
+    "lang": {
+      "required": true,
+      "value_type": "string",
+      "form_type": false
+    },
+    "app_version": {
+      "required": true,
+      "value_type": "string",
+      "form_type": false
+    },
+    "client_id": {
+      "required": true,
+      "value_type": "string",
+      "form_type": false
+    },
+    "additional": {
+      "required": false,
+      "value_type": "json",
+      "form_type": false
+    }
+  }
