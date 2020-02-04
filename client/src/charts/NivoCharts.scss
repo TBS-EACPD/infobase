@@ -8,3 +8,18 @@
   color: $tertiaryColor !important;
   border-radius: $standardBorderRadius;
 }
+
+.nivo-tooltip {
+  width: 100%;
+  border-collapse: collapse;
+  @media(min-width: $minSmallDevice){
+    font-size: inherit;
+  }
+  @media(max-width: $maxSmallDevice){
+    font-size: 14px;
+  }
+}
+
+.nivo-tooltip__content {
+  padding: 3px 5px;
+}

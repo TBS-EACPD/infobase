@@ -6,6 +6,7 @@ import { Fragment } from 'react';
 import { IconZoomIn, IconZoomOut } from '../icons/icons.js';
 import { trivial_text_maker } from '../models/text.js';
 import { breakpoints } from '../core/breakpoint_defs.js';
+import MediaQuery from 'react-responsive';
 import './NivoCharts.scss';
 
 
@@ -42,58 +43,52 @@ const get_scale_bounds = (stacked, raw_data, zoomed) => {
 };
 
 
+const smalldevice_tooltip_content = (tooltip_item, formatter) => (
+  <td>
+    <div className="nivo-tooltip__content"> {tooltip_item.id} </div>
+    <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+  </td>
+);
+
+const tooltip_content = (tooltip_item, formatter) => (
+  <Fragment>
+    <td className="nivo-tooltip__content"> {tooltip_item.id} </td>
+    <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+  </Fragment>
+);
+
+const smalldevice_percent_tooltip_content = (tooltip_item, formatter, total) => (
+  <td>
+    <div className="nivo-tooltip__content">{tooltip_item.id}</div>
+    <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
+    <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(tooltip_item.value/total)}}/>
+  </td>
+);
+
+const percent_tooltip_content = (tooltip_item, formatter, total) => (
+  <Fragment>
+    <td className="nivo-tooltip__content">{tooltip_item.id}</td>
+    <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
+    <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(tooltip_item.value/total)}}/>
+  </Fragment>
+);
+
 const default_tooltip = (tooltip_items, formatter, total) => ( // total indicates percent value tooltip being used
   <div style={{color: window.infobase_color_constants.textColor}}>
-    <table style={{width: '100%', borderCollapse: 'collapse', fontSize: window.innerWidth < breakpoints.minSmallDevice ? '14px' : 'inherit'}}>
+    <table className="nivo-tooltip">
       <tbody>
         { tooltip_items.map(
           tooltip_item => ( 
             <tr key = {tooltip_item.id}>
-              <td style= {{padding: '3px 5px'}}>
+              <td className="nivo-tooltip__content">
                 <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.color}} />
               </td>
-              { window.innerWidth < breakpoints.minSmallDevice ?
-                  <td>
-                    <div style={{padding: '3px 5px'}}> {tooltip_item.id} </div>
-                    <div style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
-                  </td>
-                  :
-                  <Fragment>
-                    <td style={{padding: '3px 5px'}}> {tooltip_item.id} </td>
-                    <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
-                  </Fragment>
-              }
-            </tr>
-          )
-        )}
-      </tbody>
-    </table>
-  </div>
-);
-
-const percent_value_tooltip = (tooltip_items, formatter, total) => (
-  <div>
-    <table style={{width: '100%', borderCollapse: 'collapse', fontSize: window.innerWidth < breakpoints.minMediumDevice ? '14px' : 'inherit'}}>
-      <tbody>
-        { tooltip_items.map(
-          tooltip_item =>(
-            <tr key = {tooltip_item.id}>
-              <td style = {{padding: '3px 5px'}}>
-                <div style = {{height: '12px', width: '12px', backgroundColor: tooltip_item.color}}/>
-              </td>
-              { window.innerWidth < breakpoints.minSmallDevice ?
-                  <td>
-                    <div style = {{padding: '3px 5px'}}>{tooltip_item.id}</div>
-                    <div style = {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
-                    <div style = {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{__html: formats.percentage1(tooltip_item.value/total)}}/>
-                  </td>
-                  :
-                  <Fragment>
-                    <td style = {{padding: '3px 5px'}}>{tooltip_item.id}</td>
-                    <td style = {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
-                    <td style = {{padding: '3px 5px'}} dangerouslySetInnerHTML = {{__html: formats.percentage1(tooltip_item.value/total)}}/>
-                  </Fragment>
-              }
+              <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}> {/* Have I gotten min and max mixed up here?? */}
+                {total ? percent_tooltip_content(tooltip_item, formatter, total) : tooltip_content(tooltip_item, formatter) }
+              </MediaQuery>
+              <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
+                {total ? smalldevice_percent_tooltip_content(tooltip_item, formatter, total) : smalldevice_tooltip_content(tooltip_item, formatter)}
+              </MediaQuery>
             </tr>
           )
         )}
@@ -120,6 +115,7 @@ const fixedSymbolShape = ({
 
 const general_default_props = {
   tooltip: (d, tooltip_formatter) => default_tooltip(d, tooltip_formatter),
+  percent_value_tooltip: (d, tooltip_formatter, total) => default_tooltip(d, tooltip_formatter, total),
   is_money: true,
   remove_bottom_axis: false,
   remove_left_axis: false,
@@ -160,6 +156,7 @@ export class NivoResponsivePie extends React.Component{
       enableRadialLabels,
       enableSlicesLabels,
       tooltip,
+      percent_value_tooltip,
       include_percent,
       total,
       margin,
@@ -340,6 +337,7 @@ export class NivoResponsiveHBar extends React.Component{
       motion_damping,
       motion_stiffness,
       tooltip,
+      percent_value_tooltip,
       enableGridX,
       groupMode,
       enableGridY,
@@ -459,6 +457,7 @@ export class NivoResponsiveLine extends React.Component {
       stacked,
       theme,
       tooltip,
+      percent_value_tooltip,
       markers,
       legends,
       magnify_glass_translateX,
