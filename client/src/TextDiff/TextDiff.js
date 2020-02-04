@@ -447,6 +447,9 @@ export default class TextDiffApp extends React.Component {
         </div>
         <div style={{padding: '0px 0px 20px 0px'}}>
           <div className="medium_panel_text">
+            <label htmlFor='select_program'>
+              <TM k="filter_by_status"/>
+            </label>
             <GraphLegend
               items={indicator_status}
               checkMark_vertical_align={6}
