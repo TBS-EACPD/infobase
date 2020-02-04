@@ -18,6 +18,7 @@ export class CheckBox extends React.Component{
 
     return <div style={{
       ...container_style,
+      display: "flex",
       pointerEvents: disabled && "none",
       opacity: disabled && 0.4,
     }}>
