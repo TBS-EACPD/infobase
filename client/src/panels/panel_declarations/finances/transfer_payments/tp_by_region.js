@@ -12,7 +12,6 @@ import {
 } from "../../shared.js";
 import { Canada } from '../../../../charts/canada/index.js';
 import { SlideToggle } from '../../../../components/index.js';
-import { TumblrShareButton } from 'react-share';
 
 const { std_years } = year_templates;
 
@@ -23,15 +22,15 @@ const { provinces, provinces_with_article } = businessConstants;
 const { A11YTable } = declarative_charts;
 
 
-class TPMap extends React.Component{
-  constructor(props){
+class TPMap extends React.Component {
+  constructor(props) {
     super(props);
-    this.state = {show_per_capita: false};
+    this.state = { show_per_capita: false };
   }
   render(){
     const { calculations, footnotes, sources } = this.props;
     const { tables } = calculations.panel_args;
-    const { tp/*, pop */} = tables;
+    const { tp } = tables;
     const { show_per_capita } = this.state;
 
     //changes how the event is handled for the Slide Toggler
@@ -40,9 +39,11 @@ class TPMap extends React.Component{
     };
 
     //set data to right data
-    const pop = null;
-    const table_to_use = show_per_capita ? pop : tp;
-    const data = (show_per_capita) ? std_years.map( (year) => table_to_use.prov_code(year, false /*subject.unique_id*/) ) : std_years.map( (year) => table_to_use.prov_code(year, false /*subject.unique_id*/) );
+    const table_to_use = tp;
+    //fix later to show gov or a dept
+    const data = (show_per_capita) ?
+      std_years.map((year) => table_to_use.prov_code(year, false /*subject.unique_id*/))
+      : std_years.map((year) => table_to_use.prov_code(year, false /*subject.unique_id*/));
     //TO FIX - add department data instead of just gov data
 
     const current_year_data = _.last(data);//find new place to get data from
@@ -54,14 +55,14 @@ class TPMap extends React.Component{
       .max()
       .value();
     const color_scale = d3.scaleLinear()
-      .domain([0,max])
-      .range([0.2,1]);
-    
+      .domain([0, max])
+      .range([0.2, 1]);
+
     const largest_prov = _.chain(current_year_data)
       .keys()
-      .maxBy( (prov) => current_year_data[prov] )
+      .maxBy((prov) => current_year_data[prov])
       .value();
-    const total_sum = 
+    const total_sum =
       _.reduce(current_year_data,
         (sum, value) => sum += value,
         0);
@@ -77,12 +78,12 @@ class TPMap extends React.Component{
     return (
       <StdPanel
         title={text_maker("tp_by_region_title")}
-        {...{footnotes, sources}}
+        {...{ footnotes, sources }}
       >
         <Col size={12} isText>
-          <TM k="tp_by_region_text" args={text_args}/>
+          <TM k="tp_by_region_text" args={text_args} />
         </Col>
-        { !window.is_a11y_mode &&
+        {!window.is_a11y_mode &&
           <Col size={12} isGraph>
             <SlideToggle
               onSelect={changeState}
@@ -121,9 +122,9 @@ class TPMap extends React.Component{
 const prepare_data_for_a11y_table = (data) =>
   _.chain(provinces)
     .map((province, prov_code) => {
-      if( !_.includes(["onlessncr", "qclessncr", "ncr"], prov_code)){
+      if (!_.includes(["onlessncr", "qclessncr", "ncr"], prov_code)) {
         const formatted_yearly_tp = _.map(
-          data, 
+          data,
           (row) => formats["compact2_written_raw"](row[prov_code])
         );
 
@@ -147,9 +148,9 @@ const render_func = (render_args) => {
 
   return (
     <TPMap
-      calculations = {calculations} 
-      footnotes = {footnotes}
-      sources = {sources}
+      calculations={calculations}
+      footnotes={footnotes}
+      sources={sources}
     />
   );
 };
@@ -159,18 +160,17 @@ export const declare_tp_by_region_panel = () => declare_panel({
   panel_key: "tp_by_region",
   levels: ["gov", "dept"],
   panel_config_func: (level, panel_key) => ({
-  depends_on: ['orgTransferPaymentsRegion'/*, 'populationRegion'*/],
-    calculate: function(subject, info){
-      const {orgTransferPaymentsRegion/*, populationRegion*/} = this.tables;
+    depends_on: ['orgTransferPaymentsRegion'],
+    calculate: function (subject, info) {
+      const { orgTransferPaymentsRegion } = this.tables;
 
       if ( subject.level === 'dept' && !_.has(orgTransferPaymentsRegion.depts , subject.id) ){
         return false;
       }
 
-      return { 
+      return {
         tables: {
           tp: orgTransferPaymentsRegion,
-          //pop: populationRegion,
         },
       };
     },
