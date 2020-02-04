@@ -104,7 +104,9 @@ const table_csvs = _.map(
   name => public_dir_prefixer(`${name}.csv`)
 );
 
-const other_csv_names_unilingual = [];
+const other_csv_names_unilingual = [
+  'population.csv',
+];
 const other_csv_names_bilingual = _.flatMap(
   [
     "hi_lookups",
