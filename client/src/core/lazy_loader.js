@@ -51,6 +51,7 @@ function ensure_loaded({
     .uniqBy()
     .map( table_key => Table.lookup(table_key) )
     .value();
+  //debugger;
   //results can be required explicitly, or be a dependency of a panel/statistic
   const should_load_results = (
     results || 
@@ -215,7 +216,7 @@ function ensure_loaded({
       load_horizontal_initiative_lookups() :
       Promise.resolve()
   );
-
+    
   return Promise.all([
     load(table_set),
     results_prom,
