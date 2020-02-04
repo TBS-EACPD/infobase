@@ -332,7 +332,7 @@ class EstimatesExplorer extends React.Component {
                 label={text_maker("show_only_votes")}
                 active={!show_stat}
                 onClick={toggle_stat_filter}
-                style={{ marginTop: '1rem' }}
+                container_style={{ marginTop: '1rem' }}
               />
             }
           </form>
