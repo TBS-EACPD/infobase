@@ -24,19 +24,6 @@
   border: 1px solid $highlightColor;
   margin: 5px;
   padding: 5px;
-
-  & > p {
-    margin: 0px;
-  }
-
-  & > .checkbox {
-    margin: 0px;
-    text-align: center;
-
-    & > label {
-      font-weight: $heavyFontWeight;
-    }
-  }
 }
 
 .email-backend-form__send-btn--sending {
