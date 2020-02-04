@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 import { create_text_maker_component } from './misc_util_components.js';
 import { SpinnerWrapper } from './SpinnerWrapper';
+import { CheckBox } from './CheckBox.js';
 
 import { 
   get_client_id,
@@ -130,49 +131,32 @@ class EmailFrontend extends React.Component {
 
 
     const get_field_id = (field_key) => `email_frontend_${field_key}`;
-    const EnumCheckbox = ({label, enum_key, field_key, is_checked}) => (
-      <div className="checkbox">
-        <label htmlFor={get_field_id(enum_key)}>
-          <input 
-            id={get_field_id(enum_key)} 
-            type="checkbox" 
-            checked={is_checked} 
-            disabled={disable_forms}
-            onChange={
-              () => {
-                this.mergeIntoCompletedTemplateState(
-                  field_key,
-                  _.chain(completed_template[field_key])
-                    .xor([enum_key])
-                    .sort()
-                    .value()
-                );
-              }
-            }
-          />
-          {label}
-        </label>
-      </div>
-    );
     const get_form_for_user_field = (field_info, field_key) => {
       switch(field_info.form_type){
         case 'checkbox':
           return (
             <fieldset>
               <legend>{field_info.form_label[window.lang]}</legend>
-              {
-                _.map(
-                  field_info.enum_values,
-                  (label_by_lang, key) => <EnumCheckbox
+              { _.map(
+                field_info.enum_values, (label_by_lang, key) => 
+                  <CheckBox
+                    style={{padding: 5}}
                     key={`${key}_check`}
-
+                    id={get_field_id(key)}
+                    disabled={disable_forms}
+                    active={_.includes(completed_template[field_key], key)}
                     label={label_by_lang[window.lang]}
-                    enum_key={key}
-                    field_key={field_key}
-                    is_checked={_.includes(completed_template[field_key], key)}
+                    onClick={() => {
+                      this.mergeIntoCompletedTemplateState(
+                        field_key,
+                        _.chain(completed_template[field_key])
+                          .xor([key])
+                          .sort()
+                          .value()
+                      );
+                    }}
                   />
-                )
-              }
+              )}
             </fieldset>
           );
         case 'textarea':
@@ -231,17 +215,15 @@ class EmailFrontend extends React.Component {
               }
               <div className="email-backend-form__privacy-note">
                 <TM k="email_frontend_privacy_note" />
-                <div className="checkbox">
-                  <label htmlFor={"email_frontend_privacy"}>
-                    <input 
-                      id={"email_frontend_privacy"} 
-                      type="checkbox" 
-                      checked={privacy_acknowledged} 
-                      disabled={disable_forms}
-                      onChange={ () => this.setState({privacy_acknowledged: !privacy_acknowledged }) }
-                    />
-                    {text_maker("email_frontend_privacy_ack")}
-                  </label>
+                <div style={{textAlign: 'center'}}>
+                  <CheckBox 
+                    id={"email_frontend_privacy"} 
+                    active={privacy_acknowledged} 
+                    disabled={disable_forms}
+                    onClick={ () => this.setState({privacy_acknowledged: !privacy_acknowledged }) }
+                    label={text_maker("email_frontend_privacy_ack")}
+                    label_style={{fontWeight: 'bold'}}
+                  />
                 </div>
               </div>
               {
