@@ -100,7 +100,7 @@ export class DisplayTable extends React.Component {
                             onChange={evt => {
                               const new_query = _.chain(col_search_keys)
                                 .keyBy()
-                                .mapValues((key)=>col_search[key] || "")
+                                .mapValues( (key)=>col_search[key] || "" )
                                 .value();
                               
                               new_query[evt.target.id] = evt.target.value;
