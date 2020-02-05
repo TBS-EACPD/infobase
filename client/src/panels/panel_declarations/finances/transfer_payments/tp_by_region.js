@@ -88,13 +88,13 @@ class TPMap extends React.Component {
           const result = _.chain(_.keys(single_year_tp_data))
             .pullAll(["na", "abroad"])
             .map((prov) => {
-              const top = single_year_tp_data[prov];
-              const bottom = population[prov];
-              const mix = top/bottom[i];
-              return mix;
+              // const top = single_year_tp_data[prov];
+              // const bottom = population[prov];
+              // const mix = top/bottom[i];
+              // debugger;
+              return single_year_tp_data[prov]/population[prov][i];
             } )
             .value();
-          debugger;
           return result;
         });
 
