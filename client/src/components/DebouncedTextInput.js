@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import classNames from 'classnames';
 
 class DebouncedTextInput extends React.Component {
   render(){
@@ -8,6 +9,7 @@ class DebouncedTextInput extends React.Component {
       defaultValue,
       debounceTime,
       updateCallback,
+      inputClassName,
     } = this.props;
 
     this.debounced_callback = _.debounce(event => updateCallback(event.target.value), debounceTime);
@@ -31,7 +33,7 @@ class DebouncedTextInput extends React.Component {
         <input  
           id = { unique_id }
           type = "text"
-          className = "form-control search input-lg"
+          className = { classNames("form-control", inputClassName) }
           placeholder = { placeHolder || "" }
           defaultValue = { defaultValue || undefined }
           onChange = { handle_change }
@@ -44,6 +46,9 @@ class DebouncedTextInput extends React.Component {
   }
 }
 
-DebouncedTextInput.defaultProps= {debounceTime: 500};
+DebouncedTextInput.defaultProps= {
+  debounceTime: 500,
+  additionalInputClasses: "input-lg",
+};
 
 export { DebouncedTextInput };

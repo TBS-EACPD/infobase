@@ -1,10 +1,5 @@
 @import '../common_css/common-variables';
 
-table.display-table > thead > tr > th.display-table__sortable {
-  cursor: pointer;
-}
-
-
 table.display-table > thead > tr {
   background-color: $primaryColor;
 
@@ -18,6 +13,11 @@ table.display-table > thead > tr {
 
     &.center-text {
       vertical-align: middle;
+    }
+
+    & > .search {
+      width: 100%;
+      font-weight: $lightFontWeight;
     }
   }
 }
