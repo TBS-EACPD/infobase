@@ -1,6 +1,6 @@
 {
     "meta": {
-      "subject_template": "Feedback: [${found_info}], [${easily_nav}], [${useful_info}], [${user_type}], [${device_type}], [${familiar_info}], ${lang}, ${route}, ${sha}, ${client_id}",
+      "subject_template": "Feedback: [${found_info}], [${easily_nav}], [${useful_info}], [${user_type}], [${device_type}], [${familiar_info}], ${lang}, ${route}, ${sha}, ${client_id}"
     },
   
 
