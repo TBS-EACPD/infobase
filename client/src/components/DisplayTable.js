@@ -3,34 +3,43 @@ import './DisplayTable.scss';
 import text from '../common_text/common_lang.yaml';
 import { create_text_maker_component } from './misc_util_components.js';
 
-import classNames from 'classnames';
-
 import { SortDirections } from './SortDirection.js';
+import { DebouncedTextInput } from './DebouncedTextInput.js';
 
 const { text_maker, TM } = create_text_maker_component(text);
 
 export class DisplayTable extends React.Component {
   constructor(props){
-    super();
-    const {
-      sort_keys,
-      col_search_keys,
-    } = props;
+    super(props);
+
+    this.sort_click.bind(this);
+
+    const { rows } = props;
+
+    const { sort_values, search_values } = _.first(rows);
+
+    const sort_by = _.chain(sort_values)
+      .keys()
+      .first()
+      .value();
+
+    const searches = _.mapValues(
+      search_values,
+      () => "",
+    );
+
     this.state = {
-      sort_by: sort_keys[0],
+      sort_by,
       descending: true,
-      col_search: _.chain(col_search_keys)
-        .keyBy()
-        .mapValues(()=>"")
-        .value(),
+      searches,
     };
   }
 
-  header_click(col_name){
+  sort_click(column_key){
     this.setState({
-      sort_by: col_name,
+      sort_by: column_key,
       descending: (
-        this.state.sort_by === col_name ?
+        this.state.sort_by === column_key ?
           !this.state.descending :
           true
       ),
@@ -39,29 +48,34 @@ export class DisplayTable extends React.Component {
 
   render(){
     const {
-      column_keys,
-      data,
-      table_name,
-      sort_keys,
-      table_data_headers,
-      col_search_keys,
+      name,
+      column_names,
+      rows,
     } = this.props;
     const {
       sort_by,
-      col_search,
       descending,
+      searches,
     } = this.state;
-    
-    const lower_case_str_includes = (string, substring) => _.includes(string.toLowerCase().trim(), substring.toLowerCase().trim());
-    const sorted_data = _.chain(data)
-      .filter(row => {
-        return _.reduce(col_search, (result, query, col) => {
-          result = result && lower_case_str_includes(row.sort_keys[col], query);
-          return result;
-        }, true);
-      })
-      .sortBy(row => _.has(row["sort_keys"],sort_by) ? row["sort_keys"][sort_by] : row[sort_keys[0]]) // careful with sorting, sort keys could be zero/falsey
-      .tap(descending ? _.noop : _.reverse)
+
+    const ordered_column_keys = _.keys(column_names);
+
+    const clean_search_string = (search_string) => _.chain(search_string).deburr().toLower().trim().value();
+    const sorted_filtered_data = _.chain(rows)
+      .filter(
+        ({search_values}) => _.chain(search_values)
+          .map( (search_value, column_key) => (
+            _.isEmpty(searches[column_key]) ||
+            _.includes(
+              clean_search_string(search_value),
+              clean_search_string(searches[column_key])
+            )
+          ) )
+          .every()
+          .value()
+      )
+      .sortBy( ({sort_values}) => sort_values[sort_by] )
+      .tap( descending ? _.noop : _.reverse )
       .value();
 
     return (
@@ -70,82 +84,91 @@ export class DisplayTable extends React.Component {
           <caption className="sr-only">
             <div>
               { 
-                !_.isEmpty(table_name) ? 
-                table_name : 
-                <TM k="a11y_table_title_default" />
+                !_.isEmpty(name) ? 
+                  name :
+                  <TM k="a11y_table_title_default" />
               }
             </div>
           </caption>
           <thead>
             <tr className="table-header">
               {
-                _.map(column_keys, (tick, i) => <th
-                  key={i} 
-                  className={"center-text"}
-                >
-                  {table_data_headers[i]}
-                </th>)
+                _.map(
+                  column_names,
+                  (name, i) => <th
+                    key={i} 
+                    className={"center-text"}
+                  >
+                    {name}
+                  </th>
+                )
               }
             </tr>
             <tr className="table-header">
               {
-                _.map(column_keys, (tick, i) => {
-                  const sortable = _.includes(sort_keys, tick);
-                  const filterable = !_.isUndefined(col_search_keys[tick]);
-
-                  return (
-                    <th
-                      key={i} 
-                      className={classNames("center-text", sortable && "display-table__sortable")}
-                    >
-                      { sortable &&
-                        <div onClick={ () => _.includes(sort_keys,tick) && this.header_click(tick) }>
-                          <SortDirections 
-                            asc={!descending && sort_by === tick}
-                            desc={descending && sort_by === tick}
-                          />
-                        </div>
-                      } 
-                      { filterable &&
-                        <input
-                          type="text"
-                          id={tick}
-                          style={{ width: "100%", fontWeight: "normal" }}
-                          onChange={ 
-                            (evt) => {
-                              const new_query = _.chain(col_search_keys)
-                                .map( 
-                                  (key) => key === evt.target.id ? 
-                                    evt.target.value :
-                                    (col_search[key] || "")
-                                )
-                                .fromPairs()
-                                .value();
-
-                              this.setState({ col_search: new_query });
+                _.chain(rows)
+                  .first()
+                  .thru(
+                    ({sort_values, search_values}) => _.map(
+                      ordered_column_keys,
+                      (column_key) => {
+                        const sortable = _.has(sort_values, column_key);
+                        const searchable = _.has(search_values, column_key);
+      
+                        return (
+                          <th 
+                            key={column_key}
+                            style={{textAlign: "center"}}
+                          >
+                            { sortable &&
+                              <div onClick={ () => this.sort_click(column_key) }>
+                                <SortDirections 
+                                  asc={!descending && sort_by === column_key}
+                                  desc={descending && sort_by === column_key}
+                                />
+                              </div>
+                            } 
+                            { searchable &&
+                              <DebouncedTextInput
+                                inputClassName={"search input-sm"}
+                                placeHolder={text_maker('filter_data')}
+                                updateCallback={ (search_value) => {
+                                  const updated_searches = _.mapValues(
+                                    searches,
+                                    (value, key) => key === column_key ? 
+                                      search_value :
+                                      value
+                                  );
+      
+                                  this.setState({ searches: updated_searches });
+                                }}
+                                debounceTime={300}
+                              />
                             }
-                          }
-                          placeholder={text_maker('filter_data')}
-                        />
+                          </th>
+                        );
                       }
-                    </th>
-                  );
-                })
+                    )
+                  )
+                  .value()
               }
             </tr>
           </thead>
           <tbody>
-            {_.map(sorted_data, ({ col_data }, i) => 
-              <tr key={i}>
-                {_.map(
-                  column_keys, 
-                  col => (
-                    <td key={col}>
-                      {col_data[col]}
-                    </td>
-                  )
-                )}
-              </tr>
+            {_.map(
+              sorted_filtered_data, 
+              ({ display_values }, i) => (
+                <tr key={i}>
+                  {_.map(
+                    ordered_column_keys,
+                    col => (
+                      <td key={col}>
+                        {display_values[col]}
+                      </td>
+                    )
+                  )}
+                </tr>
+              )
             )}
           </tbody>
         </table>

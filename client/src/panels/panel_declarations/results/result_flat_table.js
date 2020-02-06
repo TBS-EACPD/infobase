@@ -56,7 +56,7 @@ const get_actual_parent = (indicator_node, full_results_hierarchy) => {
 const get_indicators = (subject, doc) => {
   const full_results_hierarchy = create_full_results_hierarchy({subject_guid: subject.guid, doc, allow_no_result_branches: false});
   return _.chain(full_results_hierarchy)
-    .filter(node => node.data.type==="indicator")
+    .filter(node => node.data.type === "indicator")
     .map( indicator_node => ({ ...indicator_node.data, parent_node: get_actual_parent(indicator_node, full_results_hierarchy) }) )
     .value();
 };
@@ -76,36 +76,54 @@ const subject_link = (node) => (
 
 
 const indicator_table_from_list = (indicator_list) => {
-  const column_keys = ["cr_or_program","indicator","target","target_result","date_to_achieve","status"];
-  const sort_keys = ["cr_or_program","indicator","date_to_achieve", "status"];
-  const table_data_headers = _.map(column_keys, k => text_maker(k));
-  const table_data = _.map(indicator_list, ind => ({
-    col_data: {
-      cr_or_program: subject_link(ind.parent_node),
-      indicator: <a href={`#indicator/${ind.indicator.id}`}>{ind.indicator.name}</a>,
-      target: indicator_target_text(ind.indicator),
-      target_result: indicator_actual_text(ind.indicator),
-      date_to_achieve: ind.indicator.target_date,
-      status: <Fragment>
-        <span aria-hidden="true" className="copyable-hidden">{result_statuses[ind.indicator.status_key].text}</span>
-        {window.innerWidth < breakpoints.mediumDevice ? status_icons[ind.indicator.status_key] : large_status_icons[ind.indicator.status_key]}
-      </Fragment>,
-    },
-    sort_keys: {
-      cr_or_program: ind.parent_node.data.name,
-      indicator: ind.indicator.name,
-      date_to_achieve: ind.indicator.target_year ? ind.indicator.target_year + ind.indicator.target_month/12 : Infinity,
-      status: _.indexOf(ordered_status_keys, ind.indicator.status_key),
-    },
-  }) );
+  const column_names = {
+    cr_or_program: text_maker("cr_or_program"),
+    indicator: text_maker("indicator"),
+    target: text_maker("target"),
+    target_result: text_maker("target_result"),
+    date_to_achieve: text_maker("date_to_achieve"),
+    status: text_maker("status"),
+  };
+
+  const rows = _.map(
+    indicator_list, 
+    ind => {
+      const display_values = {
+        cr_or_program: subject_link(ind.parent_node),
+        indicator: <a href={`#indicator/${ind.indicator.id}`}>{ind.indicator.name}</a>,
+        target: indicator_target_text(ind.indicator),
+        target_result: indicator_actual_text(ind.indicator),
+        date_to_achieve: ind.indicator.target_date,
+        status: <Fragment>
+          <span aria-hidden="true" className="copyable-hidden">{result_statuses[ind.indicator.status_key].text}</span>
+          {window.innerWidth < breakpoints.mediumDevice ? status_icons[ind.indicator.status_key] : large_status_icons[ind.indicator.status_key]}
+        </Fragment>,
+      };
+
+      const sort_values = {
+        cr_or_program: ind.parent_node.data.name,
+        indicator: ind.indicator.name,
+        date_to_achieve: ind.indicator.target_year ? ind.indicator.target_year + ind.indicator.target_month/12 : Infinity,
+        status: _.indexOf(ordered_status_keys, ind.indicator.status_key),
+      };
+
+      const search_values = {
+        cr_or_program: ind.parent_node.data.name,
+        indicator: ind.indicator.name,
+      };
+
+      return {
+        display_values,
+        sort_values,
+        search_values,
+      };
+    }
+  );
+
   return <DisplayTable 
-    data={table_data}
-    label_col_header={text_maker("cr_or_program")}
-    column_keys={column_keys}
-    table_data_headers={table_data_headers}
-    sort_keys={sort_keys}
-    col_search_keys={["activity","indicator"]}
-    table_name={text_maker("result_flat_table_title", {year: current_drr_year})}
+    name={text_maker("result_flat_table_title", {year: current_drr_year})}
+    column_names={column_names}
+    rows={rows}
   />;
 };
 
