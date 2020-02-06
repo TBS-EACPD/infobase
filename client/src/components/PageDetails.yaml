@@ -2,6 +2,10 @@ report_a_problem:
   en: Report a problem or mistake on this page
   fr: Signaler un problème ou une erreur sur cette page
 
+feedback:
+  en: Give feedback on the Infobase in general
+  fr: Donner des commentaires sur l'Infobase en général
+
 infobase_version:
   en: |
     Version:
