@@ -81,7 +81,7 @@ class TPMap extends React.Component {
       const data = (!show_per_capita) ?
         std_years.map((year) => table_to_use.prov_code(year, false /*subject.unique_id*/))
         : 
-        //math to apply division to tp data
+        //math to apply division to tp data (runs only if show-per-capita is active)
         std_years.map((year, i) => {
           const single_year_tp_data = table_to_use.prov_code(year, false /*subject.unique_id*/);
 
@@ -91,17 +91,17 @@ class TPMap extends React.Component {
               // const top = single_year_tp_data[prov];
               // const bottom = population[prov];
               // const mix = top/bottom[i];
-              // debugger;
-              return single_year_tp_data[prov]/population[prov][i];
+              return [prov, single_year_tp_data[prov]/population[prov][i]];
             } )
+            .fromPairs()
             .value();
           return result;
         });
 
       //TODO last step - add department data instead of just gov data
       
-      const current_year_data = _.last(data);//find new place to get data from
-
+      const current_year_data = _.last(data);//this gets the most recent year
+      
       //determine colour scale
       const max = d3.max(d3.values(_.last(data)));
       const color_scale = d3.scaleLinear()

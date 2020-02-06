@@ -102,6 +102,9 @@ class CanadaGraph extends React.Component {
   componentDidMount() {
     this._render();
   }
+  componentDidUpdate() {
+    this._render();
+  }
   _render() {
     const { graph_args, prov_select_callback } = this.props;
     const { 
