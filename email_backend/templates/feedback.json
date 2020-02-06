@@ -1,11 +1,16 @@
 {
     "meta": {
-      "subject_template": "Feedback: [${find_info}], ${lang}, ${route}, ${sha}, ${client_id}",
-      "subject_template_old": "Feedback: [${issue_type}], ${lang}, ${route}, ${sha}, ${client_id}"
+      "subject_template": "Feedback: [${found_info}], [${easily_nav}], [${useful_info}], [${user_type}], [${device_type}], [${familiar_info}], ${lang}, ${route}, ${sha}, ${client_id}",
     },
   
-    "find_info": {
+
+    "found_info": {
       "required": true,
+      "form_type": "radio",
+      "form_label": {
+        "en": "Did you find what you were looking for on GC InfoBase?",
+        "fr": "Avez-vous trouvé ce que vous cherchiez dans l’InfoBase du GC?"
+      },
       "value_type": "enums",
       "enum_values": {
         "found": {
@@ -16,58 +21,231 @@
           "en": "No",
           "fr": "Non"
         }
-      },
-      "form_type": "radio-buttons",//check change to radio buttons
-      "form_label": {
-        "en": "Did you find what you were looking for on GC InfoBase?",
-        "fr": "Did you find what you were looking for on GC InfoBase?"
       }
     },
-
-    "issue_type": {
-      "required": true,
-      "value_type": "enums",
-      "enum_values": {
-        "bug": {
-          "en": "Something is broken",
-          "fr": "Quelque chose ne fonctionne pas"
-        },
-        "typo": {
-          "en": "It has a spelling or grammar mistake",
-          "fr": "II y a une erreur d'orthographe ou de grammaire"
-        },
-        "inaccurate": {
-          "en": "The information is wrong",
-          "fr": "L'information est erronée"
-        },
-        "outdated": {
-          "en": "The information is outdated",
-          "fr": "L'information n'est plus à jour"
-        },
-        "navigation": {
-          "en": "I can't find what I'm looking for",
-          "fr": "Je ne trouve pas ce que je cherche"
-        },
-        "other": {
-          "en": "other",
-          "fr": "Autre"
-        }
-      },
-      "form_type": "checkbox",
-      "form_label": {
-        "en": "Select all that apply:",
-        "fr": "Sélectionner toutes les cases qui s'appliquent :"
-      }
-    },
-    "issue_details": {
-      "required": true,
+    "found_info_details": {
+      "required": false,
       "value_type": "string",
       "form_type": "textarea",
       "form_label": {
-        "en": "Details (required)",
-        "fr": "Détails (obligatoire)"
+        "en": "If no, please specify what you were looking for.",
+        "fr": "Dans la négative, veuillez préciser ce que vous cherchiez."
       }
     },
+    
+
+    "easily_nav": {
+      "required": true,
+      "form_type": "radio",
+      "form_label": {
+        "en": "To what extent did you find GC InfoBase easy to navigate? (1=not at all useful and 5=very useful)",
+        "fr": "Dans quelle mesure la navigation est-elle facile dans l’InfoBase du GC?"
+      },
+      "value_type": "enums",
+      "enum_values": {
+        "one": {
+          "en": "1",
+          "fr": "1"
+        },
+        "two": {
+          "en": "2",
+          "fr": "2"
+        },
+        "three": {
+          "en": "3",
+          "fr": "3"
+        },
+        "four": {
+          "en": "4",
+          "fr": "4"
+        },
+        "five": {
+          "en": "5",
+          "fr": "5"
+        }
+      }
+    },
+    "easily_nav_details": {
+      "required": false,
+      "value_type": "string",
+      "form_type": "textarea",
+      "form_label": {
+        "en": "If you did not find it easy to navigate, please specify any difficulties you experienced.",
+        "fr": "Si vous n'avez pas trouvé facile de naviguer, précisez les difficultés que vous avez éprouvées."
+      }
+    },
+
+
+    "useful_info": {
+      "required": true,
+      "form_type": "radio",
+      "form_label": {
+        "en": "To what extent did you find the spending information on GC InfoBase useful? (1=not at all easy and 5=very easy)",
+        "fr": "Dans quelle mesure avez-vous trouvé les renseignements financiers utiles dans l’InfoBase du GC?"
+      },
+      "value_type": "enums",
+      "enum_values": {
+        "one": {
+          "en": "1",
+          "fr": "1"
+        },
+        "two": {
+          "en": "2",
+          "fr": "2"
+        },
+        "three": {
+          "en": "3",
+          "fr": "3"
+        },
+        "four": {
+          "en": "4",
+          "fr": "4"
+        },
+        "five": {
+          "en": "5",
+          "fr": "5"
+        }
+      }
+    },
+    "useful_info_details": {
+      "required": false,
+      "value_type": "string",
+      "form_type": "textarea",
+      "form_label": {
+        "en": "If you did not find the information useful, please specify why.",
+        "fr": "Si les renseignements, à votre avis, n’étaient pas utiles, indiquez pourquoi."
+      }
+    },
+    
+
+    "user_type": {
+      "required": true,
+      "form_type": "radio",
+      "form_label": {
+        "en": "Please choose the type of user that best describes you:",
+        "fr": "Veuillez choisi le type d’utilisateur qui vous décrit le mieux :"
+      },
+      "value_type": "enums",
+      "enum_values": {
+        "academic": {
+          "en": "Academic/Researcher/Student",
+          "fr": "Universitaire / étudiant / chercheur"
+        },
+        "federal": {
+          "en": "Federal public servant",
+          "fr": "Fonctionnaire fédéral"
+        },
+        "journalist": {
+          "en": "Journalist",
+          "fr": "Journaliste"
+        },
+        "public": {
+          "en": "Member of the general public",
+          "fr": "Membre du grand public"
+        },
+        "gov": {
+          "en": "Member (or staff) of the Parliament of Canada",
+          "fr": "Député (ou membre du personnel) de la Chambre des communes ou du Sénat"
+        },
+        "servant": {
+          "en": "Provincial/municipal public servant",
+          "fr": "Fonctionnaire provincial / municipal"
+        },
+        "other": {
+          "en": "Other, please specify:",
+          "fr": "Autre, veuillez préciser :"
+        }
+      }
+    },
+    "user_type_other": {
+      "required": false,
+      "value_type": "string",
+      "form_type": "textarea",
+      "form_label": {
+        "en": "",
+        "fr": ""
+      }
+    },
+
+
+    "device_type": {
+      "required": true,
+      "form_type": "radio",
+      "form_label": {
+        "en": "On which device did you access GC InfoBase?",
+        "fr": "Sur quel appareil avez-vous accédé à l’InfoBase du GC?"
+      },
+      "value_type": "enums",
+      "enum_values": {
+        "phone": {
+          "en": "Mobile phone (e.g. smartphone)",
+          "fr": "Cellulaire (p. ex. téléphone intelligent)"
+        },
+        "desktop": {
+          "en": "Desktop/Laptop computer",
+          "fr": "Ordinateur de bureau / portable"
+        },
+        "tablet": {
+          "en": "Tablet (e.g. iPad)",
+          "fr": "Tablette (p. ex. iPad)"
+        },
+        "other": {
+          "en": "Other, please specify:",
+          "fr": "Autre, veuillez préciser :"
+        }
+      }
+    },
+    "device_type_other": {
+      "required": false,
+      "value_type": "string",
+      "form_type": "textarea",
+      "form_label": {
+        "en": "",
+        "fr": ""
+      }
+    },
+
+
+    "familiar_info": {
+      "required": true,
+      "form_type": "radio",
+      "form_label": {
+        "en": "How familiar are you with the type of information presented on GC InfoBase (i.e. federal spending, people management and results data)?",
+        "fr": "Dans quelle mesure connaissez-vous le type de renseignements présentés dans l’InfoBase du GC (c.-à-d. les données du gouvernement fédéral sur les dépenses, la gestion des personnes et les résultats)?"
+      },
+      "value_type": "enums",
+      "enum_values": {
+        "none": {
+          "en": "Not at all",
+          "fr": "Pas du tout"
+        },
+        "somewhat": {
+          "en": "Somewhat familiar",
+          "fr": "Modérément"
+        },
+        "familar": {
+          "en": "Familiar",
+          "fr": "Bien"
+        },
+        "very": {
+          "en": "Very Familiar",
+          "fr": "Très bien"
+        }
+      }
+    },
+
+
+    "other_details": {
+      "required": false,
+      "value_type": "string",
+      "form_type": "textarea",
+      "form_label": {
+        "en": "We are always looking for ways to improve GC InfoBase!<br/>Please provide any other details about your experience.",
+        "fr": "Nous cherchons des moyens d’améliorer l’InfoBase du GC!<br/>Pourriez-vous nous donner d'autres détails sur votre expérience."
+      }
+    },
+
+
     "sha": {
       "required": true,
       "value_type": "string",
