@@ -83,7 +83,7 @@ const default_tooltip = (tooltip_items, formatter, total) => ( // total indicate
               <td className="nivo-tooltip__content">
                 <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.color}} />
               </td>
-              <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}> {/* Have I gotten min and max mixed up here?? */}
+              <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
                 {total ? percent_tooltip_content(tooltip_item, formatter, total) : tooltip_content(tooltip_item, formatter) }
               </MediaQuery>
               <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
