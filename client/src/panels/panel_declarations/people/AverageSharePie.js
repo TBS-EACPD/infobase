@@ -10,6 +10,8 @@ import {
   util_components,
 } from "../shared.js"; 
 
+import { LabeledBox } from '../../../components/index.js';
+
 const { TabularPercentLegend } = declarative_charts;
 const { Format } = util_components;
 
@@ -70,6 +72,9 @@ export const AverageSharePie = ({panel_args, sort_func}) => {
                 </span>
               }
             />
+            <div className="centerer">
+              <p><i>*Chart data is averaged over the period listed</i></p>
+            </div>
           </div>
         </div>
       </div>
