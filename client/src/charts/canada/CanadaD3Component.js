@@ -172,13 +172,15 @@ export class CanadaD3Component {
       .filter( prov_key => _.some(data, (yearly_data) => yearly_data[prov_key]) )
       .value();
     
-    console.log(provinces_to_label);
+    //console.log(provinces_to_label);
     
     const labels = html.selectAll("div.label");
-  
-    labels.data([]).exit().remove();
-  
-    labels.data(provinces_to_label)
+    //debugger;
+    //console.log("removing all labels");
+    const wtf = labels.data([]).exit().remove();
+    //debugger;
+    //console.log("attaching data and adding labels");
+    const asdf = wtf.data(provinces_to_label)
       .enter()
       .append("div")
       .order()
@@ -226,44 +228,45 @@ export class CanadaD3Component {
           .html( formatter(last_year_data[prov_key] || 0) );
       });
 
-    // Hide optional map components based on data availability
-    const hide_map_components = (selector) => svg
-      .selectAll(selector)
-      .styles({
-        visibility: "hidden",
-      });
-    const hide_optional_components = (prov_keys, selector_template) => _.each(
-      prov_keys,
-      (prov_key) => {
-        const corresponding_province_has_data = _.some(
-          data,
-          (yearly_data) => yearly_data[prov_key]
-        );
-        if (!corresponding_province_has_data){
-          hide_map_components( selector_template(prov_key) );
-        }
-      }
-    );
+      
+    // // Hide optional map components based on data availability
+    // const hide_map_components = (selector) => svg
+    //   .selectAll(selector)
+    //   .styles({
+    //     visibility: "hidden",
+    //   });
+    // const hide_optional_components = (prov_keys, selector_template) => _.each(
+    //   prov_keys,
+    //   (prov_key) => {
+    //     const corresponding_province_has_data = _.some(
+    //       data,
+    //       (yearly_data) => yearly_data[prov_key]
+    //     );
+    //     if (!corresponding_province_has_data){
+    //       hide_map_components( selector_template(prov_key) );
+    //     }
+    //   }
+    // );
     
-    const optional_provinces = [
-      "abroad", 
-      "na",
-      "ncr",
-    ];
-    hide_optional_components(
-      optional_provinces,
-      (prov_key) => `.province${get_province_element_id(prov_key)}`
-    );
+    // const optional_provinces = [
+    //   "abroad", 
+    //   "na",
+    //   "ncr",
+    // ];
+    // hide_optional_components(
+    //   optional_provinces,
+    //   (prov_key) => `.province${get_province_element_id(prov_key)}`
+    // );
   
-    const provinces_with_optional_markers = [
-      "pe",
-      "ns",
-      "nb",
-      "ncr",
-    ];
-    hide_optional_components(
-      provinces_with_optional_markers,
-      (prov_key) => `path${get_province_element_id(prov_key)}--marker`
-    );
+    // const provinces_with_optional_markers = [
+    //   "pe",
+    //   "ns",
+    //   "nb",
+    //   "ncr",
+    // ];
+    // hide_optional_components(
+    //   provinces_with_optional_markers,
+    //   (prov_key) => `path${get_province_element_id(prov_key)}--marker`
+    // );
   };
 }
