@@ -240,8 +240,8 @@
       "value_type": "string",
       "form_type": "textarea",
       "form_label": {
-        "en": "We are always looking for ways to improve GC InfoBase!<br/>Please provide any other details about your experience.",
-        "fr": "Nous cherchons des moyens d’améliorer l’InfoBase du GC!<br/>Pourriez-vous nous donner d'autres détails sur votre expérience."
+        "en": "We are always looking for ways to improve GC InfoBase! Please provide any other details about your experience.",
+        "fr": "Nous cherchons des moyens d’améliorer l’InfoBase du GC! Pourriez-vous nous donner d'autres détails sur votre expérience."
       }
     },
 
