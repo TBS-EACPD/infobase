@@ -172,17 +172,22 @@ export class CanadaD3Component {
       .filter( prov_key => _.some(data, (yearly_data) => yearly_data[prov_key]) )
       .value();
     
-    html.selectAll("div.label")
-      .data(provinces_to_label)
+    console.log(provinces_to_label);
+    
+    const labels = html.selectAll("div.label");
+  
+    labels.data([]).exit().remove();
+  
+    labels.data(provinces_to_label)
       .enter()
       .append("div")
       .order()
       .attr("class", "label")
       .attr("tabindex", 0)
-      .on("mouseenter", dispatch_mouseEnter)
-      .on("focus", dispatch_mouseEnter)
-      .on("mouseleave", dispatch_mouseLeave)
-      .on("blur", dispatch_mouseLeave)
+      // .on("mouseenter", dispatch_mouseEnter)
+      // .on("focus", dispatch_mouseEnter)
+      // .on("mouseleave", dispatch_mouseLeave)
+      // .on("blur", dispatch_mouseLeave)
       .each( function(prov_key, i){
 
         const label = svg.selectAll("g.label")
@@ -218,9 +223,8 @@ export class CanadaD3Component {
         d3.select(this)
           .append("p")
           .style("margin-bottom", "0px")
-          .html( formatter(last_year_data[prov_key]) );
+          .html( formatter(last_year_data[prov_key] || 0) );
       });
-
 
     // Hide optional map components based on data availability
     const hide_map_components = (selector) => svg
@@ -236,7 +240,7 @@ export class CanadaD3Component {
           (yearly_data) => yearly_data[prov_key]
         );
         if (!corresponding_province_has_data){
-          //hide_map_components( selector_template(prov_key) );
+          hide_map_components( selector_template(prov_key) );
         }
       }
     );
