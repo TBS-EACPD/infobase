@@ -31,8 +31,9 @@ employee_gender:
 
 
 five_year_percent_header:
-  en: Averaged share(s) over the past five years (%)
-  fr: Part(s) moyenne(s) sur les cinq dernières années (en pourcentage)
+  transform: [handlebars]
+  en: Average share from {{ppl_last_year_5}} to {{ppl_last_year}} (%)
+  fr: Part moyenne de {{ppl_last_year_5}} à {{ppl_last_year}} (en pourcentage)
 five_year_percent_short:
   en: Average share
   fr: Part moyenne
