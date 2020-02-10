@@ -325,7 +325,9 @@ export class NivoResponsiveBar extends React.Component{
     legends && (legends[0].symbolShape = fixedSymbolShape);
 
     const table_data = _.map(data, row => ({col_data: row, label: row[indexBy], sort_keys: row}));
-    const table = <DisplayTable data={table_data} label_col_header={label_col_header} column_keys={keys} sort_keys={keys} table_data_headers={keys} table_name={"TODO"}/>;
+    const table_header_keys = _.concat([indexBy],keys);
+    
+    const table = <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
     
     // have to have an empty string in key to make sure that negative bars will be displayed
     
