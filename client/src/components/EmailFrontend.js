@@ -131,20 +131,47 @@ class EmailFrontend extends React.Component {
 
 
     const get_field_id = (field_key) => `email_frontend_${field_key}`;
+    const EnumField = ({form_type, label, enum_key, field_key, is_checked}) => (
+      <div className={form_type}>
+        <label htmlFor={get_field_id(enum_key)}>
+          <input 
+            id={get_field_id(enum_key)} 
+            type={form_type}
+            checked={is_checked} 
+            disabled={disable_forms}
+            onChange={
+              () => {
+                this.mergeIntoCompletedTemplateState(
+                  field_key,
+                  form_type === "radio" ?
+                    [enum_key] :
+                    _.chain(completed_template[field_key])
+                      .xor([enum_key])
+                      .sort()
+                      .value()
+                );
+              }
+            }
+          />
+          {label}
+        </label>
+      </div>
+    );
+
     const get_form_for_user_field = (field_info, field_key) => {
       switch(field_info.form_type){
         case 'checkbox':
+        case 'radio':
           return (
             <fieldset>
               <legend>{field_info.form_label[window.lang]}</legend>
-              { _.map(
-                field_info.enum_values, (label_by_lang, key) => 
-                  <CheckBox
-                    container_style={{ padding: 5 }}
-                    key={`${key}_check`}
-                    id={get_field_id(key)}
-                    disabled={disable_forms}
-                    active={_.includes(completed_template[field_key], key)}
+              {
+                _.map(
+                  field_info.enum_values,
+                  (label_by_lang, key) => <EnumField
+                    key={`${key}_${field_info.form_type}`}
+
+                    form_type={field_info.form_type}
                     label={label_by_lang[window.lang]}
                     onClick={() => {
                       this.mergeIntoCompletedTemplateState(
@@ -156,7 +183,7 @@ class EmailFrontend extends React.Component {
                       );
                     }}
                   />
-              )}
+                )}
             </fieldset>
           );
         case 'textarea':
@@ -183,10 +210,6 @@ class EmailFrontend extends React.Component {
               />
             </Fragment>
           );
-        // case 'radio':
-        //   return (
-            
-        //   );
         case 'error':
           return (
             <label>
