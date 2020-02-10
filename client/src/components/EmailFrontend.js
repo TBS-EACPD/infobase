@@ -210,10 +210,6 @@ class EmailFrontend extends React.Component {
               />
             </Fragment>
           );
-        // case 'radio':
-        //   return (
-            
-        //   );
         case 'error':
           return (
             <label>
