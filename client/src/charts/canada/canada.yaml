@@ -278,7 +278,7 @@ canada_svg:
       <g
         class="label"
         id="ca-ncr--label"
-        transform="translate(885,1200)" />
+        transform="translate(875,1217)" />
       <path
          id="ca-pe--marker"
          style="fill:none;stroke:rgb(140, 140, 140);stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
@@ -295,7 +295,7 @@ canada_svg:
          d="m 1137.511,1052.2429 c 17.2451,-36.1484 48.4189,-36.1484 48.4189,-36.1484 l 0.3316,0 0,0" />
       <path
          id="ca-ncr--marker"
-         transform="rotate(90 1137.511 1052.2429) translate(96 214)"
+         transform="translate(-220 103) rotate(140 1137.511 1052.2429)"
          style="fill:none;stroke:rgb(140, 140, 140);stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
          d="m 1137.511,1052.2429 c 17.2451,-36.1484 48.4189,-36.1484 48.4189,-36.1484 l 0.3316,0 0,0" />
     </g>
