@@ -21,18 +21,22 @@ const { A11YTable } = declarative_charts;
 
 const calculate_common = (subject, table) => {
   const level = subject.level;
-  const data = std_years.map( year => table.prov_code(year, level === "gov" ? false : subject.unique_id) );
 
-  const most_recent_data = _.last(data);
-  
-  // slightly hacky check for no data (since if a dept doesn't have data table.prov_code() returns everything)
-  if (level === 'dept' && _.isObject(_.values(most_recent_data)[0])){
+  if ( level === 'dept' && !_.has(table.depts , subject.id) ){
     return false;
   }
-  const max = _.max(_.values(most_recent_data));
+
+  const data = std_years.map( year => table.prov_code(year, level === "gov" ? false : subject.id) );
+  
+  const max = _.chain(data)
+    .last()
+    .values()
+    .max()
+    .value();
   const color_scale = d3.scaleLinear()
-    .domain([0,max])
-    .range([0.2,1]);
+    .domain([0, max])
+    .range([0.2, 1]);
+
   return max > 0 && {
     data,
     color_scale,
@@ -83,10 +87,11 @@ export const declare_tp_by_region_panel = () => declare_panel({
         .keys()
         .maxBy( (prov) => current_year_data[prov] )
         .value();
-      const total_sum = 
-        _.reduce(current_year_data,
-          (sum, value) => sum += value,
-          0);
+      const total_sum = _.reduce(
+        current_year_data,
+        (sum, value) => sum += value,
+        0
+      );
       const percent_of_total = current_year_data[largest_prov] / total_sum;
       const text_args = {
         largest_prov: provinces_with_article[largest_prov].text,
@@ -94,6 +99,7 @@ export const declare_tp_by_region_panel = () => declare_panel({
         percent_of_total: formats["percentage1_raw"](percent_of_total),
         subject: calculations.subject,
       };
+
       return (
         <StdPanel
           title={text_maker("tp_by_region_title")}
@@ -112,9 +118,9 @@ export const declare_tp_by_region_panel = () => declare_panel({
           { window.is_a11y_mode &&
             <Col size={12} isGraph>
               <A11YTable
-                label_col_header = {text_maker("prov")}
-                data_col_headers = {_.map( std_years, y => run_template(y) )}
-                data = { prepare_data_for_a11y_table(data) }
+                label_col_header={text_maker("prov")}
+                data_col_headers={_.map( std_years, y => run_template(y) )}
+                data={prepare_data_for_a11y_table(data)}
               />
             </Col>
           }
