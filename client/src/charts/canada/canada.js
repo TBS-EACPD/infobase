@@ -5,16 +5,15 @@ import { CanadaD3Component } from './CanadaD3Component.js';
 import { GraphLegend } from "../declarative_charts.js";
 import { NivoResponsiveHBar } from "../NivoCharts.js";
 import { hex_to_rgb } from '../../general_utils.js';
+import { secondaryColor, tertiaryColor } from '../../core/color_defs.js';
 import { run_template } from "../../models/text.js";
 import { businessConstants } from "../../models/businessConstants.js";
 import { trivial_text_maker } from '../../models/text.js';
 
 const { provinces } = businessConstants;
 
-const graph_color = window.infobase_color_constants.secondaryColor;
-
 const get_graph_color = (alpha) => {
-  const rgb = hex_to_rgb(graph_color);
+  const rgb = hex_to_rgb(secondaryColor);
   return rgb && `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha || 1})`;
 };
 
@@ -115,7 +114,8 @@ class CanadaGraph extends React.Component {
     const ticks = _.map(years, y => `${run_template(y)}`);
     
     const canada_graph = new CanadaD3Component(graph_area_sel.node(), {
-      color: get_graph_color(1),
+      main_color: get_graph_color(1),
+      secondary_color: tertiaryColor,
       data,
       ticks,
       color_scale,

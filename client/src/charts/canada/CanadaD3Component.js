@@ -59,7 +59,8 @@ export class CanadaD3Component {
     const scale = Math.min(x_scale, y_scale);
     const height = scale * y_scale_factor;
     const padding = ( this.outside_width - (scale * x_scale_factor) ) / 2;
-    const main_color = this.options.color;
+    const main_color = this.options.main_color;
+    const secondary_color = this.options.secondary_color;
     const color_scale = this.options.color_scale;
     const formatter = this.options.formatter;
     
@@ -139,6 +140,10 @@ export class CanadaD3Component {
     };
 
     // Set province colours, attach event dispatchers
+    const province_is_active = (prov_key) => _.some(data, (year) => year[prov_key]);
+    const get_color = (prov_key) => province_is_active(prov_key) ? main_color : secondary_color;
+    const get_opacity = (prov_key) => province_is_active(prov_key) ? color_scale(last_year_data[prov_key] || 0) : 0.5;
+
     svg.selectAll(".province")
       .each(function(d){
         var that = d3.select(this);
@@ -146,17 +151,11 @@ export class CanadaD3Component {
         d3.select(this).datum(prov_key);
       })
       .styles({
-        fill: main_color,
-        "fill-opacity": function(prov_key, i){
-          var val = last_year_data[prov_key];
-          return color_scale(val || 0);
-        },
+        fill: get_color,
+        "fill-opacity": get_opacity,
         "stroke-width": "2px",
-        stroke: main_color,
-        "stroke-opacity": function(prov_key, i){
-          var val = last_year_data[prov_key];
-          return color_scale(val || 0);
-        },
+        stroke: get_color,
+        "stroke-opacity": get_opacity,
       })
       .on("mouseenter", dispatch_mouseEnter)
       .on("focus", dispatch_mouseEnter)
@@ -164,15 +163,14 @@ export class CanadaD3Component {
       .on("blur", dispatch_mouseLeave);
 
     // Add labels to provinces with data, attach event dispatchers
-    const provinces_to_label = data_has_ncr_broken_out ?
-      _.chain(ordering)
-        .keys()
-        .pullAll(["on","qc"])
-        .value() :
-      _.chain(ordering)
-        .keys()
-        .pullAll(["onlessncr","qclessncr","ncr"])
-        .value();
+    const provinces_to_label = _.chain(ordering)
+      .keys()
+      .pullAll( data_has_ncr_broken_out ? 
+        ["on","qc"] :
+        ["onlessncr","qclessncr","ncr"]
+      )
+      .filter( prov_key => _.some(data, (yearly_data) => yearly_data[prov_key]) )
+      .value();
     
     html.selectAll("div.label")
       .data(provinces_to_label)
@@ -220,7 +218,7 @@ export class CanadaD3Component {
         d3.select(this)
           .append("p")
           .style("margin-bottom", "0px")
-          .html( formatter(last_year_data[prov_key] || 0) );
+          .html( formatter(last_year_data[prov_key]) );
       });
 
 
