@@ -11,6 +11,23 @@ import { DisplayTable } from '../components/DisplayTable.js';
 import './NivoCharts.scss';
 
 
+const TableSwitchButton = (props) => {
+  const {showing_table, onClick} = props;
+
+  return (
+    <button
+      style={{
+        zIndex: 999,
+      }}
+      className="btn-table-view btn-group-lg btn-ib-primary"
+      onClick={ onClick }
+    >
+      { showing_table ? trivial_text_maker("switch_to_graph") : trivial_text_maker("switch_to_table") }
+    </button>
+  );
+}
+
+
 const get_formatter = (is_money, formatter, raw = true) => (
   _.isUndefined(formatter) ?
     ( 
@@ -113,6 +130,37 @@ const fixedSymbolShape = ({
     style={{ pointerEvents: 'none' }}
   />
 );
+
+class TableSwitchableGraph extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      show_table: false,
+    };
+  }
+
+  render(){      
+    const {
+      show_table,
+    } = this.state;
+
+    const {
+      graph,
+      table,
+    } = this.props;
+
+    return (
+      <Fragment>
+        { show_table ? table : graph }
+        <TableSwitchButton
+          showing_table={show_table}
+          onClick={() => this.setState({ show_table: !show_table }) }
+        />
+      </Fragment>
+    );
+  }
+}
+
 
 const general_default_props = {
   tooltip: (d, tooltip_formatter) => default_tooltip(d, tooltip_formatter),
@@ -235,13 +283,6 @@ NivoResponsivePie.defaultProps = {
 };
 
 export class NivoResponsiveBar extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      show_table: false,
-    };
-  }
-
   render(){
     const{
       data,
@@ -278,87 +319,60 @@ export class NivoResponsiveBar extends React.Component{
       animate,
       labelTextColor,
       borderWidth,
-      table_switch,
       label_col_header,
-      graph_height,
     } = this.props;
 
     legends && (legends[0].symbolShape = fixedSymbolShape);
-    
-    const {
-      show_table,
-    } = this.state;
 
     const table_data = _.map(data, row => ({col_data: row, label: row[indexBy], sort_keys: row}));
-
-    return (
-      <Fragment>
-        {/*have to have an empty string in key to make sure
-         that negative bars will be displayed */}
-        { !show_table ?
-        <ResponsiveBar
-          {...{data,
-            margin,
-            colors,
-            groupMode,
-            enableGridX,
-            enableGridY,
-            colorBy,
-            theme, 
-            indexBy, 
-            enableLabel, 
-            legends,
-            isInteractive,
-            motion_damping,
-            motion_stiffness,
-            onMouseEnter,
-            onMouseLeave,
-            onClick,
-            padding,
-            tooltip,
-            label,
-            animate,
-            labelTextColor,
-            borderWidth,
-          }}
-          keys = {_.union([''],keys)}
-          labelFormat={_.isUndefined(label_format) ? null : label_format}
-          tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
-          axisBottom={remove_bottom_axis ? null : bttm_axis}
-          axisLeft={
-            remove_left_axis ?
-              null :
-              {
-                tickValues: tick_value || 6,
-                format: (d) => get_formatter(is_money, text_formatter)(d),
-                min: min,
-                max: max,
-                ...(left_axis || {}),
-              }
+    const table = <DisplayTable data={table_data} label_col_header={label_col_header} column_keys={keys} sort_keys={keys} table_data_headers={keys} table_name={"TODO"}/>;
+    
+    // have to have an empty string in key to make sure that negative bars will be displayed
+    
+    const graph = <ResponsiveBar
+      {...{data,
+        margin,
+        colors,
+        groupMode,
+        enableGridX,
+        enableGridY,
+        colorBy,
+        theme, 
+        indexBy, 
+        enableLabel, 
+        legends,
+        isInteractive,
+        motion_damping,
+        motion_stiffness,
+        onMouseEnter,
+        onMouseLeave,
+        onClick,
+        padding,
+        tooltip,
+        label,
+        animate,
+        labelTextColor,
+        borderWidth,
+      }}
+      keys = {_.union([''],keys)}
+      labelFormat={_.isUndefined(label_format) ? null : label_format}
+      tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
+      axisBottom={remove_bottom_axis ? null : bttm_axis}
+      axisLeft={
+        remove_left_axis ?
+          null :
+          {
+            tickValues: tick_value || 6,
+            format: (d) => get_formatter(is_money, text_formatter)(d),
+            min: min,
+            max: max,
+            ...(left_axis || {}),
           }
-          borderColor="inherit:darker(1.6)"
-        /> :
-        <DisplayTable data={table_data} label_col_header={label_col_header} column_keys={keys} sort_keys={keys} table_data_headers={keys} table_name={"TODO"}/>
-        }
-        {table_switch &&
-          <button
-            style={{
-              zIndex: 999,
-            }}
-            className="btn-table-view btn-group-lg btn-ib-primary"
-            onClick={ 
-              () => {
-                this.setState({
-                  show_table: !show_table,
-                });
-              }
-            }
-          >
-            { this.state.show_table ? trivial_text_maker("switch_to_graph") : trivial_text_maker("switch_to_table") }
-          </button>
-        }
-      </Fragment>
-    );
+      }
+      borderColor="inherit:darker(1.6)"
+    />;
+    
+    return <TableSwitchableGraph graph={graph} table={table} />;
   }
 };
 NivoResponsiveBar.defaultProps = {
