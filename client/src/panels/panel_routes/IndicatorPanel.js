@@ -21,8 +21,6 @@ const indicators_fields_fragment = `  id
   target_year
   target_month
 
-  is_reporting_discontinued
-
   target_type
   target_min
   target_max
