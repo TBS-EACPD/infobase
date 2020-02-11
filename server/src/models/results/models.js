@@ -62,7 +62,6 @@ export default function(model_singleton){
     ...bilingual_str("name"),
     target_year: number_type,
     target_month: number_type,
-    is_reporting_discontinued: { type: Boolean },
     ...bilingual_str("target_explanation"),
     ...bilingual_str("result_explanation"),
     doc: str_type,
