@@ -131,8 +131,6 @@ ${
     target_year: String
     target_month: String
 
-    is_reporting_discontinued: Boolean
-
     target_type: String
     target_min: String
     target_max: String
