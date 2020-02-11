@@ -84,17 +84,6 @@ const IndicatorDisplay = ({indicator}, show_doc) => {
   return (
     <div className="indicator-item">
       <dl className="dl-horizontal indicator-item__dl">
-        
-        { indicator.is_reporting_discontinued &&
-          <Fragment>
-            <dt>
-              <TM k="note" />
-            </dt>
-            <dd>
-              <TM k="result_is_retired" />
-            </dd>
-          </Fragment>
-        }
 
         <dt>
           <TM k="indicator" />

@@ -18,10 +18,6 @@ tbd_result_text:
   en: Target to be determined
   fr: Cible à déterminer
 
-result_is_retired:
-  en: DRR_TODO
-  fr: DRR_TODO
-
 indicator_display_title:
   en: Single Indicator details
   fr: Détails pour un seul Indicateur
