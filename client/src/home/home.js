@@ -41,12 +41,14 @@ export default class Home extends React.Component {
 
 }
 
-const FeaturedContentItem = ({ text_key, href, is_link_out, is_new, is_youtube }) => <li className="list-group-item list-group-item--home">
-  { is_new && <span className="badge badge--is-new"> <TM k={"new"} /> </span> }
-  <a href={href} target={is_link_out ? "_blank" : "_self"} rel={is_link_out ? "noopener noreferrer" : ""}> 
-    <TM k={text_key} /> 
-  </a>
-</li>;
+const FeaturedContentItem = ({ text_key, href, is_link_out, is_new, is_youtube }) => (
+  <li className="list-group-item list-group-item--home">
+    { is_new && <span className="badge badge--is-new"> <TM k={"new"} /> </span> }
+    <a href={_.has(href, window.lang) ? href[window.lang] : href} target={is_link_out ? "_blank" : "_self"} rel={is_link_out ? "noopener noreferrer" : ""}> 
+      <TM k={text_key} /> 
+    </a>
+  </li>
+);
 
 const TrinityItem = ({img_url, title, href}) => (
   <a href={href} className="TrinityItem fcol-md-4">
