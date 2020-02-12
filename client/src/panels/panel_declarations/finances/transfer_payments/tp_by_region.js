@@ -183,7 +183,7 @@ class TPMap extends React.Component {
               />
             </Col>
           }
-          {/* { window.is_a11y_mode &&
+          { window.is_a11y_mode &&
             <Col size={12} isGraph>
               <A11YTable
                 label_col_header = {text_maker("prov")}
@@ -196,7 +196,7 @@ class TPMap extends React.Component {
                 data = { prepare_data_for_a11y_table(data) }
               />
             </Col>
-          } */}
+          }
         </StdPanel>
       );
     }
