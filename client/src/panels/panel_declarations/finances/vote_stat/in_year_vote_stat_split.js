@@ -9,7 +9,7 @@ import {
 } from "../../shared.js";
 
 
-const render_w_options = ({graph_col, text_col, text_key}) => ({calculations,footnotes,sources,glossary_keys}) => {
+const render_w_options = ({graph_col, text_col, text_key}) => ({calculations, footnotes, sources, glossary_keys}) => {
   const { 
     panel_args,
     info,
