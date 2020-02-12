@@ -25,7 +25,8 @@ let year;
 const get_year = (presentation_scheme) => {
   switch (presentation_scheme){
     case "est_doc_mains" : 
-    case "est_doc_sea" : return "{{est_in_year}}";
+    case "est_doc_sea" :
+    case "est_doc_seb" :return "{{est_in_year}}";
     default : return "{{est_last_year}}";
   }
 };
