@@ -208,25 +208,25 @@ const sources = _.mapValues({
       ];
     },
   },
-  // RTP_TODO: RTP: {
-  // RTP_TODO:   title(){ return tm("transfer_payments_source_title"); },
-  // RTP_TODO:   description(){ return tm("transfer_payments_source_desc"); },
-  // RTP_TODO:   frequency: frequencies.y,
-  // RTP_TODO:   open_data: {
-  // RTP_TODO:     en: "https://open.canada.ca/data/en/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
-  // RTP_TODO:     fr: "https://ouvert.canada.ca/data/fr/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
-  // RTP_TODO:   },
-  // RTP_TODO:   items(){
-  // RTP_TODO:     return [{
-  // RTP_TODO:       id: 'rtp',
-  // RTP_TODO:       text: tm("transfer_payments_source_title"),
-  // RTP_TODO:       inline_link: rpb_link({
-  // RTP_TODO:         table: 'orgTransferPaymentsRegion',
-  // RTP_TODO:         mode: 'details',
-  // RTP_TODO:       }),
-  // RTP_TODO:     }];
-  // RTP_TODO:   },
-  // RTP_TODO: },
+   RTP: {
+     title(){ return tm("transfer_payments_source_title"); },
+     description(){ return tm("transfer_payments_source_desc"); },
+     frequency: frequencies.y,
+     open_data: {
+       en: "https://open.canada.ca/data/en/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
+       fr: "https://ouvert.canada.ca/data/fr/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
+     },
+     items(){
+       return [{
+         id: 'rtp',
+         text: tm("transfer_payments_source_title"),
+         inline_link: rpb_link({
+           table: 'orgTransferPaymentsRegion',
+           mode: 'details',
+         }),
+       }];
+     },
+   },
 }, (obj, key) => ({...obj, key}));
 
 

@@ -27,7 +27,7 @@ import orgVoteStatPa from "../tables/orgVoteStatPa.js";
 import orgSobjs from "../tables/orgSobjs.js";
 import programSpending from "../tables/programSpending.js";
 import orgTransferPayments from "../tables/orgTransferPayments.js";
-// RTP_TODO: import orgTransferPaymentsRegion from "../tables/orgTransferPaymentsRegion.js";
+ import orgTransferPaymentsRegion from "../tables/orgTransferPaymentsRegion.js";
 import orgVoteStatEstimates from "../tables/orgVoteStatEstimates.js";
 import orgEmployeeType from "../tables/orgEmployeeType.js";
 import orgEmployeeRegion from "../tables/orgEmployeeRegion.js";
@@ -47,7 +47,7 @@ const table_defs = [
   orgSobjs,
   programSpending,
   orgTransferPayments,
-  // RTP_TODO: orgTransferPaymentsRegion,
+   orgTransferPaymentsRegion,
   orgVoteStatEstimates,
   orgEmployeeType,
   orgEmployeeRegion,
