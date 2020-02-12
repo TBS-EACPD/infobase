@@ -10,7 +10,7 @@ import {
   declare_budget_measures_panel,
 
   // shared gov, dept
-  // RTP_TODO: declare_tp_by_region_panel,
+   declare_tp_by_region_panel,
   declare_links_to_rpb_panel,
   declare_in_year_voted_stat_split_panel,
   declare_in_year_estimates_split_panel,
@@ -45,7 +45,7 @@ export const get_gov_panels = subject => ({
     declare_late_resources_panel(),
     declare_financial_key_concepts_panel(),
     declare_welcome_mat_panel(),
-    // RTP_TODO: declare_tp_by_region_panel(),
+     declare_tp_by_region_panel(),
     declare_budget_measures_panel(),
     declare_auth_exp_planned_spending_panel(),
     declare_in_year_estimates_split_panel(),//turned off until supps A
