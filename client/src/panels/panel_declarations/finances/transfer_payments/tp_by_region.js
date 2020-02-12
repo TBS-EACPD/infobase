@@ -49,18 +49,48 @@ function loadPopulation(){
   ); 
 };
 
+
+const prepare_data_for_a11y_table = (data) => _.chain(provinces)
+  .map((province, prov_code) => {
+    if (!_.includes(["onlessncr", "qclessncr", "ncr"], prov_code)) {
+      const formatted_yearly_tp = _.map(
+        data,
+        (row) => formats["compact2_written_raw"](row[prov_code])
+      );
+
+      return {
+        label: province.text,
+        data: formatted_yearly_tp,
+      };
+    }
+  })
+  .filter((data) => !_.isUndefined(data))
+  .value();
+
+
 class TPMap extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { show_per_capita: false, loading: true, population: {} };
-  }
 
+    this.state = {
+      show_per_capita: false,
+      loading: true,
+      population: {},
+    };
+  }
   componentDidMount(){
-    loadPopulation().then( (transformed) => this.setState({ loading: false, population: transformed }));
+    loadPopulation()
+      .then( 
+        (transformed) => this.setState({
+          loading: false,
+          population: transformed,
+        })
+      );
   }
   render(){
     const { calculations, footnotes, sources } = this.props;
     const { show_per_capita, loading, population } = this.state;
+
     if (loading) {
       return (
         <div style = {{position: "relative", height: "80px", marginBottom: "-10px"}}>
@@ -79,8 +109,7 @@ class TPMap extends React.Component {
       const table_to_use = tp;
       //fix later to show gov or a dept
       const data = (!show_per_capita) ?
-        std_years.map((year) => table_to_use.prov_code(year, false /*subject.unique_id*/))
-        : 
+        std_years.map((year) => table_to_use.prov_code(year, false /*subject.unique_id*/)) : 
         //math to apply division to tp data (runs only if show-per-capita is active)
         std_years.map((year, i) => {
           const single_year_tp_data = table_to_use.prov_code(year, false /*subject.unique_id*/);
@@ -103,7 +132,11 @@ class TPMap extends React.Component {
       const current_year_data = _.last(data);//this gets the most recent year
       
       //determine colour scale
-      const max = d3.max(d3.values(_.last(data)));
+      const max = _.chain(data)
+        .last()
+        .values()
+        .max()
+        .value();
       const color_scale = d3.scaleLinear()
         .domain([0, max])
         .range([0.2, 1]);
@@ -112,10 +145,11 @@ class TPMap extends React.Component {
         .keys()
         .maxBy((prov) => current_year_data[prov])
         .value();
-      const total_sum =
-        _.reduce(current_year_data,
-          (sum, value) => sum += value,
-          0);
+      const total_sum = _.reduce(
+        current_year_data,
+        (sum, value) => sum += value,
+        0
+      );
       const percent_of_total = current_year_data[largest_prov] / total_sum;
       const text_args = {
         largest_prov: provinces[largest_prov].text,
@@ -170,43 +204,6 @@ class TPMap extends React.Component {
 }
 
 
-const prepare_data_for_a11y_table = (data) =>
-  _.chain(provinces)
-    .map((province, prov_code) => {
-      if (!_.includes(["onlessncr", "qclessncr", "ncr"], prov_code)) {
-        const formatted_yearly_tp = _.map(
-          data,
-          (row) => formats["compact2_written_raw"](row[prov_code])
-        );
-
-        return {
-          label: province.text,
-          data: formatted_yearly_tp,
-        };
-      }
-    })
-    .filter((data) => !_.isUndefined(data))
-    .value();
-
-
-//render function
-const render_func = (render_args) => {
-  const {
-    calculations,
-    footnotes,
-    sources,
-  } = render_args;
-
-  return (
-    <TPMap
-      calculations={calculations}
-      footnotes={footnotes}
-      sources={sources}
-    />
-  );
-};
-
-
 export const declare_tp_by_region_panel = () => declare_panel({
   panel_key: "tp_by_region",
   levels: ["gov", "dept"],
@@ -225,6 +222,12 @@ export const declare_tp_by_region_panel = () => declare_panel({
         },
       };
     },
-    render: render_func,
+    render: ({calculations, footnotes, sources}) => (
+      <TPMap
+        calculations={calculations}
+        footnotes={footnotes}
+        sources={sources}
+      />
+    ),
   }),
 });
