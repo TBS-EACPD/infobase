@@ -208,25 +208,25 @@ const sources = _.mapValues({
       ];
     },
   },
-   RTP: {
-     title(){ return tm("transfer_payments_source_title"); },
-     description(){ return tm("transfer_payments_source_desc"); },
-     frequency: frequencies.y,
-     open_data: {
-       en: "https://open.canada.ca/data/en/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
-       fr: "https://ouvert.canada.ca/data/fr/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
-     },
-     items(){
-       return [{
-         id: 'rtp',
-         text: tm("transfer_payments_source_title"),
-         inline_link: rpb_link({
-           table: 'orgTransferPaymentsRegion',
-           mode: 'details',
-         }),
-       }];
-     },
-   },
+  RTP: {
+    title(){ return tm("transfer_payments_source_title"); },
+    description(){ return tm("transfer_payments_source_desc"); },
+    frequency: frequencies.y,
+    open_data: {
+      en: "https://open.canada.ca/data/en/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
+      fr: "https://ouvert.canada.ca/data/fr/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
+    },
+    items(){
+      return [{
+        id: 'rtp',
+        text: tm("transfer_payments_source_title"),
+        inline_link: rpb_link({
+          table: 'orgTransferPaymentsRegion',
+          mode: 'details',
+        }),
+      }];
+    },
+  },
 }, (obj, key) => ({...obj, key}));
 
 
