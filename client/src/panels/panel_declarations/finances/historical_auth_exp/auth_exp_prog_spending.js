@@ -34,12 +34,16 @@ const text_keys_by_level = {
 };
 
 
-const calculate = function(subject) {
-  const { orgVoteStatPa, programSpending } = this.tables;
+const calculate = function(subject, info, options) {
+  const { orgVoteStatPa, programSpending, orgVoteStatEstimates } = this.tables;
 
   const query_subject = subject.is("gov") ? undefined : subject;
+
+  const qEst = orgVoteStatEstimates.q(query_subject);
+  const est_in_year = qEst.sum('{{est_in_year}}_estimates', {as_object: false});
+
   const qAuthExp = orgVoteStatPa.q(query_subject);
-  const auth = qAuthExp.sum(auth_cols, {as_object: false});
+  const auth = _.concat(qAuthExp.sum(auth_cols, {as_object: false}), est_in_year);
   const exp = qAuthExp.sum(exp_cols, {as_object: false});
 
   const qProgSpending = programSpending.q(query_subject);
@@ -73,13 +77,14 @@ class AuthExpProgSpending extends React.Component {
     const colors = d3.scaleOrdinal().range(newIBCategoryColors);
     const raw_data = _.concat(exp, auth, progSpending);
   
-    const history_ticks = _.map(std_years, run_template);
+    const auth_ticks = _.concat(_.map(std_years, run_template), run_template('{{est_in_year}}'));
+    const exp_ticks = _.map(std_years, run_template);
     const plan_ticks = _.map(planning_years, run_template);
   
     const gap_year = (subject.has_planned_spending && actual_to_planned_gap_year) || null;
     
     const additional_info = {
-      last_history_year: _.last(history_ticks),
+      last_history_year: run_template(_.last(std_years)),
       last_planned_year: _.last(plan_ticks),
       gap_year: gap_year,
       plan_change: info[`${subject.level}_exp_planning_year_3`] - info[`${subject.level}_auth_average`],
@@ -136,8 +141,8 @@ class AuthExpProgSpending extends React.Component {
       );
       const graph_data = _.chain(series_labels)
         .zip([
-          zip_years_and_data(history_ticks, exp),
-          zip_years_and_data(history_ticks, auth),
+          zip_years_and_data(exp_ticks, exp),
+          zip_years_and_data(auth_ticks, auth),
           _.compact([
             gap_year && {
               x: gap_year,
@@ -331,7 +336,7 @@ export const declare_auth_exp_prog_spending_panel = () => declare_panel({
   panel_key: "auth_exp_prog_spending",
   levels: ["gov", "dept"],
   panel_config_func: (level, panel_key) => ({
-    depends_on: ["orgVoteStatPa", "programSpending"],
+    depends_on: ["orgVoteStatPa", "programSpending", "orgVoteStatEstimates"],
     info_deps: [`orgVoteStatPa_${level}_info`, `programSpending_${level}_info`],
     glossary_keys: ["BUD_EXP", "NB_EXP"],
     calculate,
