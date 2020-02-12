@@ -13,7 +13,6 @@ import {
 import { Canada } from '../../../../charts/canada/index.js';
 import { SlideToggle, SpinnerWrapper } from '../../../../components/index.js';
 import { get_static_url, make_request } from '../../../../request_utils.js';
-//import { Subject } from './subject.js';
 
 const { std_years } = year_templates;
 
@@ -41,10 +40,8 @@ function loadPopulation(){
         .value()
       )
       .value();
-    //loaded now contains the csv of pop data
     
     return transformed;
-    //population from TPMap now contains the csv of pop data
   }
   ); 
 };
@@ -100,36 +97,31 @@ class TPMap extends React.Component {
       const { tables } = calculations.panel_args;
       const { tp } = tables;
 
-      //changes how the event is handled for the Slide Toggler
       const changeState = () => {
         this.setState({ show_per_capita: !show_per_capita });
       };
 
-      //set data to right data
-      const table_to_use = tp;
-      //fix later to show gov or a dept
+      const get_subject_data_for_year = (year) => tp.prov_code(
+        year,
+        calculations.subject.level === 'dept' && calculations.subject.id
+      );
+
       const data = (!show_per_capita) ?
-        std_years.map((year) => table_to_use.prov_code(year, false /*subject.unique_id*/)) : 
-        //math to apply division to tp data (runs only if show-per-capita is active)
+        std_years.map(get_subject_data_for_year) : 
         std_years.map((year, i) => {
-          const single_year_tp_data = table_to_use.prov_code(year, false /*subject.unique_id*/);
+          const single_year_tp_data = get_subject_data_for_year(year);
 
           const result = _.chain(_.keys(single_year_tp_data))
             .pullAll(["na", "abroad"])
             .map((prov) => {
-              // const top = single_year_tp_data[prov];
-              // const bottom = population[prov];
-              // const mix = top/bottom[i];
               return [prov, single_year_tp_data[prov]/population[prov][i]];
             } )
             .fromPairs()
             .value();
           return result;
         });
-
-      //TODO last step - add department data instead of just gov data
       
-      const current_year_data = _.last(data);//this gets the most recent year
+      const current_year_data = _.last(data);
       
       //determine colour scale
       const max = _.chain(data)
