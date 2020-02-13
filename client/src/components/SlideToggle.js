@@ -1,5 +1,4 @@
 import './SlideToggle.scss';
-import classNames from 'classnames';
 
 export const SlideToggle = (props) => {
 //no constructor needed since nothing is being set

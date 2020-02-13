@@ -4,8 +4,8 @@ tp_by_region_title:
   fr: Paiements de transfert par région du bénéficiaire
 
 per_capita_button_title:
-  en: Toggle Show Per Capita
-  fr: Toggle Afficher Par Habitant
+  en: Toggle Show-per-Capita
+  fr: Toggle Afficher-par-Habitant
 
 tp_by_region_text: 
   transform: [handlebars, markdown]
