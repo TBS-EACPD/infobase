@@ -65,7 +65,7 @@
     "populate_db:debug": "nodemon --watch ../data -e csv --exec babel-node --inspect src/populate_db.js",
     "prebuild": "rm -rf transpiled_build",
     "build": "babel src/ --out-dir transpiled_build --copy-files --ignore node_modules",
-    "mongod": "(if [[ ! -e ./mongo/db ]]; then mkdir ./mongo/db; fi; mongod --config ./mongo/mongod.conf)"
+    "mongod": "./mongo/start_mongod.sh"
   },
   "authors": [
     "Alex Cousineau-Leduc",
