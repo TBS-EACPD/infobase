@@ -106,21 +106,22 @@ class TPMap extends React.Component {
         calculations.subject.level === 'dept' && calculations.subject.id
       );
 
-      const data = (!show_per_capita) ?
-        std_years.map(get_subject_data_for_year) : 
-        std_years.map((year, i) => {
-          const single_year_tp_data = get_subject_data_for_year(year);
-
-          const result = _.chain(_.keys(single_year_tp_data))
-            .pullAll(["na", "abroad"])
-            .map((prov) => {
-              return [prov, single_year_tp_data[prov]/population[prov][i]];
-            } )
-            .fromPairs()
-            .value();
-          return result;
-        });
+      //generating both data sets, as a11y table will need both later anyways
+      const tp_data_for_a11y = std_years.map(get_subject_data_for_year);
+      const tp_pc_data_for_a11y = std_years.map((year, i) => {
+        const single_year_tp_data = get_subject_data_for_year(year);
+        const result = _.chain(_.keys(single_year_tp_data))
+          .pullAll(["na", "abroad"])
+          .map((prov) => {
+            return [prov, single_year_tp_data[prov]/population[prov][i]];
+          })
+          .fromPairs()
+          .value();
+        return result;
+      });
       
+      const data = (show_per_capita) ? tp_pc_data_for_a11y : tp_data_for_a11y;
+
       const current_year_data = _.last(data);
       
       //determine colour scale
@@ -164,7 +165,7 @@ class TPMap extends React.Component {
             <Col size={12} isGraph>
               <SlideToggle
                 onSelect={changeState}
-                name="Toggle Show Per Capita"
+                name="per_capita_button_title"
               />
               <Canada
                 graph_args={{
@@ -179,14 +180,14 @@ class TPMap extends React.Component {
           { window.is_a11y_mode &&
             <Col size={12} isGraph>
               <A11YTable
-                label_col_header = {text_maker("prov")}
-                data_col_headers = {_.map( std_years, y => run_template(y) )}// TODO - change this to read first 5 headers then next 5_per_capita
-                data = { prepare_data_for_a11y_table(data) }
+                label_col_header = {text_maker("tp_a11y_table_title")}
+                data_col_headers = {_.map( std_years, y => run_template(y) )}
+                data = { prepare_data_for_a11y_table(tp_data_for_a11y) }
               />
               <A11YTable
-                label_col_header = {text_maker("prov")}
-                data_col_headers = {_.map( std_years, y => run_template(y) )}// TODO - change this to read first 5 headers then next 5_per_capita
-                data = { prepare_data_for_a11y_table(data) }
+                label_col_header = {text_maker("tp_pc_a11y_table_title")}
+                data_col_headers = {_.map( std_years, y => run_template(y) )}
+                data = { prepare_data_for_a11y_table(tp_pc_data_for_a11y) }
               />
             </Col>
           }
