@@ -47,7 +47,7 @@ else
     send-keys 'cd client && while true; do npm run IB_base_watch; sleep 30; done' C-m \; \
     selectp -t 4 \; \
     split-window -v \; \
-    send-keys 'cd server && mongod' C-m \; \
+    send-keys 'cd server && npm run mongod' C-m \; \
     split-window -h \; \
     send-keys 'cd server && while true; do npm run populate_db:exitcrash; sleep 30; done' C-m \;
 fi
