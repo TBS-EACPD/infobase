@@ -176,6 +176,7 @@ export class CanadaD3Component {
     
     labels_to_remove.data([]).exit().remove();
     
+    
     const labels_to_add = html.selectAll("div.label")
       .data(provinces_to_label)
       .enter()
@@ -225,6 +226,8 @@ export class CanadaD3Component {
           .html( formatter(last_year_data[prov_key] || 0) );
       });
 
+    //never used?
+    labels_to_add;
       
     // Hide optional map components based on data availability
     const hide_map_components = (selector) => svg
