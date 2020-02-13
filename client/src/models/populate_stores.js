@@ -250,19 +250,21 @@ function populate_programs(rows){
   const [ dept_code, crso_id, activity_code, name, old_name, desc, is_crown, is_active, is_internal_service, is_fake] = [0,1,2,3,4,5,6,7,8,9,10];
   _.each(rows,row => {
     const crso = CRSO.lookup(row[crso_id]);
-    const instance = Program.create_and_register({
-      crso,
-      activity_code: row[activity_code],
-      dept: Dept.lookup(row[dept_code]),
-      data: {},
-      description: _.trim(row[desc].replace(/^<p>/i,"").replace(/<\/p>$/i,"")),
-      name: row[name],
-      old_name: row[old_name],
-      is_active: !!(+row[is_active]),
-      is_internal_service: row[is_internal_service] === "1",
-      is_fake: row[is_fake] === "1",
-    });
-    crso.programs.push(instance);
+    if (crso){ // DP_TODO: this is just to get things going while the data's unfinished. Want this to fail fast nromally
+      const instance = Program.create_and_register({
+        crso,
+        activity_code: row[activity_code],
+        dept: Dept.lookup(row[dept_code]),
+        data: {},
+        description: _.trim(row[desc].replace(/^<p>/i,"").replace(/<\/p>$/i,"")),
+        name: row[name],
+        old_name: row[old_name],
+        is_active: !!(+row[is_active]),
+        is_internal_service: row[is_internal_service] === "1",
+        is_fake: row[is_fake] === "1",
+      });
+      crso.programs.push(instance);
+    }
   });
 };
 
@@ -272,15 +274,17 @@ function populate_program_tag_linkages(programs_m2m_tags){
     const [ program_id , tagID ] = row;
     const program = Program.lookup(program_id);
     const tag = Tag.lookup(tagID);
-    const tag_root_id = tag.root.id;
+    if (program){ // DP_TODO: this is just to get things going while the data's unfinished. Want this to fail fast nromally
+      const tag_root_id = tag.root.id;
 
-    // CCOFOGs are currently disabled, they have quirks to resolve and code around (duplicated nodes as you go down, some tagging done at the root level some at other levels, etc.)
-    if(tag_root_id === "CCOFOG"){
-      return;
+      // CCOFOGs are currently disabled, they have quirks to resolve and code around (duplicated nodes as you go down, some tagging done at the root level some at other levels, etc.)
+      if(tag_root_id === "CCOFOG"){
+        return;
+      }
+
+      program.tags.push(tag);
+      tag.programs.push(program);
     }
-
-    program.tags.push(tag);
-    tag.programs.push(program);
   }); 
 };
 
