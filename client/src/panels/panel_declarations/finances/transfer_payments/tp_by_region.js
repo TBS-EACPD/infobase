@@ -148,6 +148,7 @@ class TPMap extends React.Component {
         total_sum: formatter(total_sum),
         percent_of_total: formats["percentage1_raw"](percent_of_total),
         subject: calculations.subject,
+        show_per_capita: show_per_capita,
       };
 
 
