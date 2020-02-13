@@ -19,7 +19,7 @@ const { std_years } = year_templates;
 const formatter = formats["compact2_raw"];
 
 const { text_maker, TM } = create_text_maker_component(text);
-const { provinces, provinces_with_article } = businessConstants;
+const { provinces/*, provinces_with_article*/ } = businessConstants;
 const { A11YTable } = declarative_charts;
 
 
@@ -165,7 +165,7 @@ class TPMap extends React.Component {
             <Col size={12} isGraph>
               <SlideToggle
                 onSelect={changeState}
-                name="per_capita_button_title"
+                name={text_maker("per_capita_button_title")}
               />
               <Canada
                 graph_args={{
