@@ -83,12 +83,18 @@ export default {
   },
   "mapper": function (row) {
     const program = Program.get_from_activity_code(row[0], row[1]);
+
+    if (!program){ return []; } // DP_TODO: just patching over incomplete data
+  
     row.splice(2,0,program.name);
     row[3] = row[3] === "V" ? trivial_text_maker("voted") : trivial_text_maker("stat");
     return row;
   },
   process_mapped_row(mapped_row){
+    if ( !mapped_row.dept_code ){ return null; } // DP_TODO: just patching over incomplete data
+
     const program_obj = Program.get_from_activity_code(mapped_row.dept, mapped_row.activity_code);
+  
     if(!this.programs.get(program_obj)){ 
       this.programs.set(program_obj, []); 
     }

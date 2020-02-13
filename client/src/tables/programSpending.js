@@ -186,12 +186,16 @@ export default {
 
   mapper: function (row) {
     const program = Program.get_from_activity_code(row[0], row[1]);
+
+    if (!program){ return []; } // DP_TODO: just patching over incomplete data
+  
     row.splice(2,0,program.id);
     row.splice(3,0,program.name);
     return row;
   },
 
   process_mapped_row: function(mapped_row){
+    if ( !mapped_row.dept_code ){ return null; } // DP_TODO: just patching over incomplete data
     const program_obj = Program.get_from_activity_code(mapped_row.dept, mapped_row.activity_code);
     this.programs.set(program_obj, [mapped_row]); //assumption: only one row per program... This is not consistent with e.g. programSobjs. 
   },
