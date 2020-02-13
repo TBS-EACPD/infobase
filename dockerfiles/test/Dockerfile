@@ -1,4 +1,4 @@
-# by :13.0.1 at least, alpine-node started including comming with old versions of chromium and mongodb installed
+# by :13.0.1 at least, alpine-node started coming with old versions of chromium and mongodb installed
 # No luck upgrading or uninstalling them, and they were breaking testcafe and cleanup_dev_dbs.sh respectively
 # 12.9.0 was the previous image I built from/knew to be good, not necessarily the latest pre-funny buisness
 # ... can't stay locked to this forever though
