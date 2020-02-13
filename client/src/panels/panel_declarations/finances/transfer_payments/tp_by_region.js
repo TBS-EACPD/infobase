@@ -47,21 +47,21 @@ function loadPopulation(){
 };
 
 
-const prepare_data_for_a11y_table = (data) => _.chain(provinces)
-  .map((province, prov_code) => {
-    if (!_.includes(["onlessncr", "qclessncr", "ncr"], prov_code)) {
-      const formatted_yearly_tp = _.map(
-        data,
-        (row) => formats["compact2_written_raw"](row[prov_code])
-      );
-
-      return {
-        label: province.text,
-        data: formatted_yearly_tp,
-      };
-    }
-  })
-  .filter((data) => !_.isUndefined(data))
+const prepare_data_for_a11y_table = (data) => _.chain(data)
+  .flatMap( _.keys )
+  .uniq()
+  .map( (prov_code) => {
+    const formatted_data = _.map(
+      data,
+      (row) => formats["compact2_written_raw"](row[prov_code] || 0)
+    );
+  
+    return {
+      label: provinces[prov_code].text,
+      data: formatted_data,
+    };
+  } )
+  .filter('data')
   .value();
 
 
@@ -145,7 +145,7 @@ class TPMap extends React.Component {
       );
       const percent_of_total = current_year_data[largest_prov] / total_sum;
       const text_args = {
-        largest_prov: provinces[largest_prov].text,
+        largest_prov: provinces[largest_prov].text,// TODO: check use of provinces_with_article for french version of yaml text
         total_sum: formatter(total_sum),
         percent_of_total: formats["percentage1_raw"](percent_of_total),
         subject: calculations.subject,
