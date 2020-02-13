@@ -3,6 +3,10 @@ tp_by_region_title:
   en: Transfer payments by recipient region
   fr: Paiements de transfert par région du bénéficiaire
 
+per_capita_button_title:
+  en: Toggle Show Per Capita
+  fr: Toggle Afficher Par Habitant
+
 tp_by_region_text: 
   transform: [handlebars, markdown]
   en: |
@@ -14,3 +18,12 @@ tp_by_region_text:
     En **{{pa_last_year}}**, **{{subj_name subject}}** a versé **{{total_sum}}** en paiements de transfert{{#if show_per_capita}} par habitant{{else}} supérieurs à 100 000 dollars{{/if}}. Les bénéficiaires de **{{largest_prov}}** ont reçu la part moyenne la plus importante **({{percent_of_total}})** au cours des cinq derniers exercices financiers.
 
     Survolez ou tapez sur une province ou un territoire dans la carte ci-dessous pour voir le total des paiements de transfert au cours des cinq dernières années. Notez que l'échelle peut changer pour s'adapter aux données affichées.
+
+tp_a11y_table_title:
+  en: Transfer Payments for Provinces
+  fr: Paiements de Transfert pour les Provinces
+
+tp_pc_a11y_table_title:
+  en: Transfer Payments for Provinces per Capita
+  fr: Paiements de Transfert pour les Provinces par Habitant
+
