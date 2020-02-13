@@ -6,11 +6,11 @@ tp_by_region_title:
 tp_by_region_text: 
   transform: [handlebars, markdown]
   en: |
-    In **{{pa_last_year}}**, **{{subj_name subject}}** paid out **{{total_sum}}** in {{gl_tt "transfer payments" "TP"}} above $100,000. Recipients in **{{largest_prov}}** received the largest average share **({{percent_of_total}})** over the past five fiscal years.
+    In **{{pa_last_year}}**, **{{subj_name subject}}** paid out **{{total_sum}}** in {{gl_tt "transfer payments" "TP"}}{{#if show_per_capita}} per capita{{else}} above $100,000{{/if}}. Recipients in **{{largest_prov}}** received the largest average share **({{percent_of_total}})** over the past five fiscal years.
 
     Hover over or tap a province or territory in the map below to see the total transfer payments over the last five years. Note that the scale may change to accommodate the data displayed.
 
   fr: |
-    En **{{pa_last_year}}**, **{{subj_name subject}}** a versé **{{total_sum}}** en paiements de transfert supérieurs à 100 000 dollars. Les bénéficiaires de **{{largest_prov}}** ont reçu la part moyenne la plus importante **({{percent_of_total}})** au cours des cinq derniers exercices financiers.
+    En **{{pa_last_year}}**, **{{subj_name subject}}** a versé **{{total_sum}}** en paiements de transfert{{#if show_per_capita}} par habitant{{else}} supérieurs à 100 000 dollars{{/if}}. Les bénéficiaires de **{{largest_prov}}** ont reçu la part moyenne la plus importante **({{percent_of_total}})** au cours des cinq derniers exercices financiers.
 
     Survolez ou tapez sur une province ou un territoire dans la carte ci-dessous pour voir le total des paiements de transfert au cours des cinq dernières années. Notez que l'échelle peut changer pour s'adapter aux données affichées.
