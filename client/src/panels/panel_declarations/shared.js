@@ -102,12 +102,7 @@ const get_planned_fte_source_link = subject => {
 const CommonDonut = function({graph_data, legend_data, graph_height}){
   const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
 
-  const has_neg = _.chain(legend_data)
-    .map('value')
-    .min()
-    .value() < 0;
-
-  const legend_items = !has_neg && _.chain(legend_data)
+  const legend_items = _.chain(legend_data)
     .sortBy('value')
     .reverse()
     .map( ({value, label }) => ({ 
@@ -118,44 +113,46 @@ const CommonDonut = function({graph_data, legend_data, graph_height}){
     }))
     .value();
 
-  const total = d3.sum( legend_data, _.property('value') );
-
+  const absolute_total = _.reduce(
+    legend_data,
+    (sum, {value}) => sum + Math.abs(value),
+    0 
+  );
+  
   return(
     <div aria-hidden = {true}>
       <div style = {{height: graph_height}}>
         <NivoResponsivePie
           data = {graph_data}
           colorBy = {d=>color_scale(d.label)}
-          total = {total}
+          total = {absolute_total}
         />
       </div>
-      { !has_neg && 
-        <div className="centerer" style={{marginTop: "-40px"}}>
-          <div 
-            style={{
-              width: "100%", /* IE 11 */ 
-              maxWidth: '400px', 
-              flexGrow: 1,
-            }}
-          >
-            <TabularPercentLegend
-              items={legend_items}
-              get_right_content={
-                (item) => (
-                  <div style={{width: "120px", display: "flex"}}>
-                    <div style={{width: "60px"}}>
-                      <Format type="compact1" content={item.value} />
-                    </div>
-                    <div style={{width: "60px"}}>
-                      <Format type="percentage1" content={(item.value)*Math.pow(total,-1)} />
-                    </div>
+      <div className="centerer" style={{marginTop: "-40px"}}>
+        <div 
+          style={{
+            width: "100%", /* IE 11 */ 
+            maxWidth: '400px', 
+            flexGrow: 1,
+          }}
+        >
+          <TabularPercentLegend
+            items={legend_items}
+            get_right_content={
+              (item) => (
+                <div style={{width: "120px", display: "flex"}}>
+                  <div style={{width: "60px"}}>
+                    <Format type="compact1" content={item.value} />
                   </div>
-                )
-              }
-            />
-          </div>
+                  <div style={{width: "60px"}}>
+                    <Format type="percentage1" content={Math.abs(item.value)*Math.pow(absolute_total, -1)} />
+                  </div>
+                </div>
+              )
+            }
+          />
         </div>
-      }
+      </div>
     </div>
   );
 };
