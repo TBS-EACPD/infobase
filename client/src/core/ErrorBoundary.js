@@ -1,6 +1,13 @@
 import { get_static_url, make_request } from '../request_utils.js';
 import { log_standard_event } from './analytics.js';
 
+
+const NoIndex = () => ReactDOM.createPortal(
+  <meta name="robots" content="noindex" />,
+  document.head
+);
+
+
 export class ErrorBoundary extends React.Component {
   constructor(){
     super();
@@ -72,6 +79,7 @@ export class ErrorBoundary extends React.Component {
             alignItems: "center",
           }}
         >
+          <NoIndex />
           <span>
             {
               {  
