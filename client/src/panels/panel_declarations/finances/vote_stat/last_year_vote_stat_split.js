@@ -8,12 +8,8 @@ import {
   declare_panel,
 } from "../../shared.js";
 
-
-const render_w_options = ({graph_col, text_col, text_key}) => ({calculations, sources, footnotes, glossary_keys}) => {
-  const { 
-    panel_args,
-    info, 
-  } = calculations;
+const render_w_options = ({text_key, graph_col, text_col}) => ({calculations, sources, footnotes, glossary_keys}) => {
+  const { info, panel_args } = calculations;
 
   const data = _.map(
     panel_args,
@@ -26,7 +22,7 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations, so
   return (
     <StdPanel
       title={text_maker("vote_stat_split_title")}
-      {...{sources,footnotes,glossary_keys}}
+      {...{footnotes,sources,glossary_keys}}
     >
       <Col isText size={text_col}>
         <TM k={text_key} args={info} />

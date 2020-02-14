@@ -61,7 +61,7 @@ const smalldevice_percent_tooltip_content = (tooltip_item, formatter, total) => 
   <td>
     <div className="nivo-tooltip__content">{tooltip_item.id}</div>
     <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
-    <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(tooltip_item.value/total)}}/>
+    <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}}/>
   </td>
 );
 
@@ -69,7 +69,7 @@ const percent_tooltip_content = (tooltip_item, formatter, total) => (
   <Fragment>
     <td className="nivo-tooltip__content">{tooltip_item.id}</td>
     <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
-    <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(tooltip_item.value/total)}}/>
+    <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}}/>
   </Fragment>
 );
 
@@ -168,9 +168,19 @@ export class NivoResponsivePie extends React.Component{
     } = this.props;
     legends && (legends[0].symbolShape = fixedSymbolShape);
     
+    const data_with_absolute_values = _.map(
+      data,
+      (data) => ({
+        ...data,
+        value: Math.abs(data.value),
+        original_value: data.value,
+      })
+    );
+    
     return (
       <ResponsivePie
-        {...{data,
+        {...{
+          data: data_with_absolute_values,
           margin,
           colors,
           theme,
@@ -180,9 +190,25 @@ export class NivoResponsivePie extends React.Component{
           legends,
           colorBy,
         }}
-        tooltip={ (d) => include_percent? 
-          percent_value_tooltip( [d], get_formatter(is_money, text_formatter, false), total) :
-          tooltip([d], get_formatter(is_money, text_formatter, false)) }
+        tooltip={ (data) => {
+          const data_with_original_values = {
+            ...data,
+            value: data.original_value,
+          };
+
+          if (include_percent){
+            return percent_value_tooltip(
+              [data_with_original_values],
+              get_formatter(is_money, text_formatter, false), 
+              total
+            );
+          } else {
+            return tooltip(
+              [data_with_original_values],
+              get_formatter(is_money, text_formatter, false)
+            );
+          } 
+        }}
         innerRadius={0.5}
         borderWidth={1}
         borderColor="inherit:darker(0.2)"
