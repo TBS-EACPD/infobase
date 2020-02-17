@@ -33,7 +33,6 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations, fo
       </Col>
       {!window.is_a11y_mode &&
         <Col isGraph size={graph_col}>
-          <p>does not appear</p>
           <CommonDonut
             graph_data = {data}
             legend_data ={data}
