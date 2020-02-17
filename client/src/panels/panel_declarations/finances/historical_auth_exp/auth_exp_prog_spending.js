@@ -84,6 +84,8 @@ class AuthExpProgSpending extends React.Component {
   
     const gap_year = (subject.has_planned_spending && actual_to_planned_gap_year) || null;
     
+    const estimates_extra_year = actual_to_estimates_gap_year || null;
+
     const additional_info = {
       last_history_year: run_template(_.last(std_years)),
       last_planned_year: _.last(plan_ticks),
