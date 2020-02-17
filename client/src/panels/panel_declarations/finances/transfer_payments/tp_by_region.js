@@ -19,7 +19,7 @@ const { std_years } = year_templates;
 const formatter = formats["compact2_raw"];
 
 const { text_maker, TM } = create_text_maker_component(text);
-const { provinces/*, provinces_with_article*/ } = businessConstants;
+const { provinces, provinces_with_article } = businessConstants;
 const { A11YTable } = declarative_charts;
 
 
@@ -145,7 +145,7 @@ class TPMap extends React.Component {
       );
       const percent_of_total = current_year_data[largest_prov] / total_sum;
       const text_args = {
-        largest_prov: provinces[largest_prov].text,// TODO: check use of provinces_with_article for french version of yaml text
+        largest_prov: provinces_with_article[largest_prov].text,
         total_sum: formatter(total_sum),
         percent_of_total: formats["percentage1_raw"](percent_of_total),
         subject: calculations.subject,
