@@ -23,7 +23,6 @@ const { provinces, provinces_with_article } = businessConstants;
 const { A11YTable } = declarative_charts;
 
 
-//function to load and prepare data, returning a promise
 function loadPopulation(){
   const parse_csv_string = csv_string => _.tail( d3.csvParseRows( _.trim(csv_string) ) );
 
@@ -31,7 +30,6 @@ function loadPopulation(){
     .then( csv_string => parse_csv_string(csv_string) );
     
   return load_csv().then(function(loaded) {
-    //transforming pop data to be code friendly
     const transformed = _.chain(loaded)
       .keyBy(row => row[0])
       .mapValues(row => _.chain(row)
@@ -107,8 +105,8 @@ class TPMap extends React.Component {
       );
 
       //generating both data sets, as a11y table will need both later anyways
-      const tp_data_for_a11y = std_years.map(get_subject_data_for_year);
-      const tp_pc_data_for_a11y = std_years.map((year, i) => {
+      const tp_data = std_years.map(get_subject_data_for_year);
+      const tp_pc_data = std_years.map((year, i) => {
         const single_year_tp_data = get_subject_data_for_year(year);
         const result = _.chain(_.keys(single_year_tp_data))
           .pullAll(["na", "abroad"])
@@ -120,11 +118,11 @@ class TPMap extends React.Component {
         return result;
       });
       
-      const data = (show_per_capita) ? tp_pc_data_for_a11y : tp_data_for_a11y;
+      const data = (show_per_capita) ? tp_pc_data : tp_data;
 
       const current_year_data = _.last(data);
       
-      //determine colour scale
+      //organize data for colour scale
       const max = _.chain(data)
         .last()
         .values()
@@ -182,12 +180,12 @@ class TPMap extends React.Component {
               <A11YTable
                 label_col_header = {text_maker("tp_a11y_table_title")}
                 data_col_headers = {_.map( std_years, y => run_template(y) )}
-                data = { prepare_data_for_a11y_table(tp_data_for_a11y) }
+                data = { prepare_data_for_a11y_table(tp_data) }
               />
               <A11YTable
                 label_col_header = {text_maker("tp_pc_a11y_table_title")}
                 data_col_headers = {_.map( std_years, y => run_template(y) )}
-                data = { prepare_data_for_a11y_table(tp_pc_data_for_a11y) }
+                data = { prepare_data_for_a11y_table(tp_pc_data) }
               />
             </Col>
           }
