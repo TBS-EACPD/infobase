@@ -11,7 +11,6 @@ import {
   create_text_maker_component,
   NivoResponsiveLine,
   newIBCategoryColors,
-  formatter,
   util_components,
 
   declare_panel,
@@ -70,8 +69,8 @@ class AuthExpProgSpending extends React.Component {
     const { exp, auth, progSpending } = panel_args;
 
     const series_labels = [
-      text_maker("budgetary_expenditures"),
       text_maker("authorities"),
+      text_maker("budgetary_expenditures"),
       subject.has_planned_spending ? text_maker("planned_spending") : null,
     ];
 
@@ -98,31 +97,19 @@ class AuthExpProgSpending extends React.Component {
     
     let graph_content;
     if(window.is_a11y_mode){
-      const historical_data = _.map(
-        exp, 
-        (exp_value,year_index) => ({
-          label: history_ticks[year_index],
-          data: [
-            formatter("compact1_written", exp_value, {raw: true}),
-            formatter("compact1_written", auth[year_index], {raw: true}),
-            null,
-          ],
-        })
-      );
-      
-      const planning_data = _.map(
-        progSpending, 
-        (progSpending_value, year_index) => ({
-          label: plan_ticks[year_index],
-          data: [
-            null,
-            null,
-            formatter("compact1_written", progSpending_value, {raw: true}),
-          ],
-        })
-      );
-  
-      const data = _.concat(historical_data, planning_data);
+      const all_ticks = _.chain(auth_ticks)
+        .concat(exp_ticks, plan_ticks)
+        .uniq()
+        .value();
+
+      const data = _.map(all_ticks, tick => ({
+        label: tick,
+        data: [
+          auth[_.findIndex(auth_ticks, d=>d===tick)] || null,
+          exp[_.findIndex(exp_ticks, d=>d===tick)] || null,
+          progSpending[_.findIndex(plan_ticks, d=>d===tick)] || null,
+        ],
+      }));
   
       graph_content = (
         <A11YTable
