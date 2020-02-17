@@ -33,6 +33,7 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations, fo
       </Col>
       {!window.is_a11y_mode &&
         <Col isGraph size={graph_col}>
+          <p>does not appear</p>
           <CommonDonut
             graph_data = {data}
             legend_data ={data}
@@ -76,10 +77,10 @@ export const declare_in_year_voted_stat_split_panel = () => declare_panel({
           machinery_footnotes: false,
           glossary_keys: ["AUTH"],
           calculate(subject,info){
-            // check for negative voted or statutory values, or 0 for both
+            // check for either negative voted or statutory values, or 0 for both
             if ( 
-              info.dept_stat_est_in_year < 0 || 
-              info.dept_voted_est_in_year < 0 ||
+              (info.dept_stat_est_in_year < 0 && info.dept_voted_est_in_year >= 0) || 
+              (info.dept_voted_est_in_year < 0 && info.dept_stat_est_in_year >= 0) ||
               (info.dept_stat_est_in_year === 0 && info.dept_stat_est_in_year === 0)
             ){
               return false;
