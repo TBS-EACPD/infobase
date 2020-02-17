@@ -4,7 +4,6 @@ import {
   run_template,
   year_templates,
   actual_to_planned_gap_year,
-  actual_to_estimates_gap_year,
   declarative_charts,
   StdPanel,
   Col,
@@ -69,8 +68,8 @@ class AuthExpProgSpending extends React.Component {
     const { exp, auth, progSpending } = panel_args;
 
     const series_labels = [
-      text_maker("authorities"),
       text_maker("budgetary_expenditures"),
+      text_maker("authorities"),
       subject.has_planned_spending ? text_maker("planned_spending") : null,
     ];
 
@@ -82,8 +81,6 @@ class AuthExpProgSpending extends React.Component {
     const plan_ticks = _.map(planning_years, run_template);
   
     const gap_year = (subject.has_planned_spending && actual_to_planned_gap_year) || null;
-    
-    const estimates_extra_year = actual_to_estimates_gap_year || null;
 
     const additional_info = {
       last_history_year: run_template(_.last(std_years)),

@@ -73,28 +73,8 @@ const actual_to_planned_gap_year = _.chain(year_templates)
   })
   .value();
 
-const actual_to_estimates_gap_year = _.chain(year_templates)
-  .thru( ({std_years, estimates_years}) => [_.last(std_years), _.last(estimates_years)] )
-  .map( (fiscal_year) => _.chain(fiscal_year)
-    .thru(run_template)
-    .split('-')
-    .first()
-    .parseInt()
-    .value()
-  )
-  .thru( ([last_pa_year, last_estimates_year]) => {
-    if(last_estimates_year - last_pa_year === 1){
-      return last_estimates_year;
-    } else if (last_estimates_year - last_pa_year === 0){
-      false;
-    } else {
-      throw new Error('Estimates in year is coming before last PA year. This should never happen?')
-    }
-  })
-  .value();
 
 export {
   year_templates,
   actual_to_planned_gap_year,
-  actual_to_estimates_gap_year,
 };
