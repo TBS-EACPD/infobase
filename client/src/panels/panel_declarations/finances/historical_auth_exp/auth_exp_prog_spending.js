@@ -102,9 +102,9 @@ class AuthExpProgSpending extends React.Component {
       const data = _.map(all_ticks, tick => ({
         label: tick,
         data: [
-          auth[_.findIndex(auth_ticks, d=>d===tick)] || null,
-          exp[_.findIndex(exp_ticks, d=>d===tick)] || null,
-          progSpending[_.findIndex(plan_ticks, d=>d===tick)] || null,
+          _.isNumber(auth[_.findIndex(auth_ticks, d=>d===tick)]) ? auth[_.findIndex(auth_ticks, d=>d===tick)] : null,
+          _.isNumber(exp[_.findIndex(exp_ticks, d=>d===tick)]) ? exp[_.findIndex(exp_ticks, d=>d===tick)] : null,
+          _.isNumber(progSpending[_.findIndex(plan_ticks, d=>d===tick)]) ? progSpending[_.findIndex(plan_ticks, d=>d===tick)] : null,
         ],
       }));
   
