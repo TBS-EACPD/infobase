@@ -11,23 +11,6 @@ import { DisplayTable } from '../components/DisplayTable.js';
 import './NivoCharts.scss';
 
 
-const TableSwitchButton = (props) => {
-  const {showing_table, onClick} = props;
-
-  return (
-    <button
-      style={{
-        zIndex: 999,
-      }}
-      className="btn-table-view btn-group-lg btn-ib-primary"
-      onClick={ onClick }
-    >
-      { showing_table ? trivial_text_maker("switch_to_graph") : trivial_text_maker("switch_to_table") }
-    </button>
-  );
-}
-
-
 const get_formatter = (is_money, formatter, raw = true) => (
   _.isUndefined(formatter) ?
     ( 
@@ -152,10 +135,15 @@ class TableSwitchableGraph extends React.Component{
     return (
       <Fragment>
         { show_table ? table : graph }
-        <TableSwitchButton
-          showing_table={show_table}
-          onClick={() => this.setState({ show_table: !show_table }) }
-        />
+        <button
+          style={{
+            zIndex: 999,
+          }}
+          className="btn-table-view btn-group-lg btn-ib-primary"
+          onClick={ () => this.setState({ show_table: !show_table }) }
+        >
+          { show_table ? trivial_text_maker("switch_to_graph") : trivial_text_maker("switch_to_table") }
+        </button>
       </Fragment>
     );
   }
