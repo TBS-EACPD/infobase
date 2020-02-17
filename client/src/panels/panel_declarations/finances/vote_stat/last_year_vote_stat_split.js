@@ -29,6 +29,7 @@ const render_w_options = ({text_key, graph_col, text_col}) => ({calculations, so
       </Col>
       { !window.is_a11y_mode &&
         <Col isGraph size={graph_col}>
+          <p>here</p>
           <CommonDonut
             graph_data = {data}
             legend_data = {data}
@@ -59,8 +60,12 @@ export const declare_vote_stat_split_panel = () => declare_panel({
           value: row["{{pa_last_year}}"],
         })
       );
-  
-      if( _.every( vote_stat, ({value}) => value === 0) ){
+      
+      // check for either negative voted or statutory values, or 0 for both
+      if ( 
+        (_.every( vote_stat, ({value}) => value === 0)) ||
+        (_.minBy(vote_stat, 'value').value < 0 && _.maxBy(vote_stat, 'value').value >= 0)
+      ){
         return false;
       }
   
