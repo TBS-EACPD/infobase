@@ -1,7 +1,7 @@
 import { ResponsiveBar } from '@nivo/bar';
 import { ResponsiveLine } from '@nivo/line';
 import { ResponsivePie } from '@nivo/pie';
-import { formats, dollar_formats } from "../core/format.js";
+import { formats, dollar_formats } from "../../core/format.js";
 import { Fragment } from 'react';
 import classNames from 'classnames';
 import { IconZoomIn, IconZoomOut } from '../icons/icons.js';
@@ -12,34 +12,12 @@ import {
   DisplayTable,
   StatelessModal,
   Format,
-} from '../components/index.js';
-import { TabularPercentLegend, GraphLegend } from '../charts/declarative_charts.js';
-import { breakpoints } from '../core/breakpoint_defs.js';
-import { businessConstants } from '../models/businessConstants.js';
-import { newIBCategoryColors, NA_color } from '../core/color_schemes.js';
+} from '../../components/index.js';
+import { TabularPercentLegend, GraphLegend } from '../declarative_charts.js';
+import { breakpoints } from '../../core/breakpoint_defs.js';
+import { newIBCategoryColors } from '../../core/color_schemes.js';
+import { infobase_colors_smart, get_formatter } from './shared.js';
 import './NivoCharts.scss';
-
-
-export const infobase_colors_smart = (col_scale) => (label) => {
-  if ( _.includes(businessConstants.NA_values,label) ){
-    return NA_color;
-  }
-  return col_scale(label);
-};
-
-const get_formatter = (is_money, formatter, raw = true) => (
-  _.isUndefined(formatter) ?
-    ( 
-      !is_money ? 
-        (value) => formats.big_int(value, {raw}) :
-        (
-          raw ? 
-            (value) => dollar_formats.compact2_raw(value) : 
-            (value) => formats.compact2(value)
-        )
-    ) :
-    ((value) => raw ? formatter(value, {raw: true}) : formatter(value))
-);
 
 
 const get_scale_bounds = (stacked, raw_data, zoomed) => {
@@ -704,10 +682,6 @@ NivoResponsiveLine.defaultProps = {
   },
   motion_damping: 19,
   motion_stiffness: 100,
-};
-
-export {
-  get_formatter,
 };
 
 
