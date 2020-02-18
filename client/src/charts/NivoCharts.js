@@ -11,6 +11,7 @@ import {
   DisplayTable,
   StatelessModal,
 } from '../components/index.js';
+import { breakpoints } from '../core/breakpoint_defs.js';
 import './NivoCharts.scss';
 
 
@@ -117,6 +118,13 @@ const fixedSymbolShape = ({
   />
 );
 
+
+const get_modal_width = () => {
+  if (window.innerWidth < breakpoints.mediumDevice) return '.mymodal-sm';
+  if (window.innerWidth > breakpoints.largeDevice ) return '.mymodal-xl';
+  return '.mymodal-lg';
+};
+
 class TableSwitchableGraph extends React.Component{
   constructor(props){
     super(props);
@@ -152,6 +160,7 @@ class TableSwitchableGraph extends React.Component{
           title={ trivial_text_maker("table_view") }
           body={ table }
           on_close_callback={() => this.setState({show_table: false})}
+          additional_dialog_class = { get_modal_width() }
         />
       </Fragment>
     );
@@ -426,51 +435,58 @@ export class NivoResponsiveHBar extends React.Component{
     } = this.props;
     legends && (legends[0].symbolShape = fixedSymbolShape);
 
-    return (
-      //have to have an empty string in key to make sure
-      //that negative bars will be displayed
-      <ResponsiveBar
-        {...{data,
-          margin,
-          colors,
-          groupMode,
-          enableGridX,
-          enableGridY,
-          colorBy,
-          theme, 
-          indexBy, 
-          enableLabel, 
-          label,
-          legends,
-          isInteractive,
-          labelSkipWidth,
-          markers,
-        }}
-        layout = 'horizontal'
-        keys = {_.union([''],keys)}
-        labelFormat={_.isUndefined(label_format) ? null : label_format}
-        tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
-        axisBottom={remove_bottom_axis ? null : bttm_axis}
-        axisTop={add_top_axis ? top_axis : null}
-        axisLeft={
-          remove_left_axis ?
-            null :
-            {
-              tickValues: tick_value || 6,
-              format: (d) => get_formatter(is_money, text_formatter)(d),
-              min: "auto",
-              max: "auto",
-              ...(left_axis || {}),
-            }
-        }
-        padding={padding}
-        borderColor="inherit:darker(1.6)"
-        motionDamping={motion_damping}
-        motionStiffness={motion_stiffness}
-        labelTextColor={window.infobase_color_constants.textColor}
-        labelSkipWidth={labelSkipWidth}
-      />
-    );
+
+    const table_data = _.map(data, row => ({col_data: row, label: row[indexBy], sort_keys: row}));
+    const table_header_keys = _.concat([indexBy],keys);
+    
+    const table = <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
+    
+    
+    //have to have an empty string in key to make sure
+    //that negative bars will be displayed
+    const graph = <ResponsiveBar
+      {...{data,
+        margin,
+        colors,
+        groupMode,
+        enableGridX,
+        enableGridY,
+        colorBy,
+        theme, 
+        indexBy, 
+        enableLabel, 
+        label,
+        legends,
+        isInteractive,
+        labelSkipWidth,
+        markers,
+      }}
+      layout = 'horizontal'
+      keys = {_.union([''],keys)}
+      labelFormat={_.isUndefined(label_format) ? null : label_format}
+      tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
+      axisBottom={remove_bottom_axis ? null : bttm_axis}
+      axisTop={add_top_axis ? top_axis : null}
+      axisLeft={
+        remove_left_axis ?
+          null :
+          {
+            tickValues: tick_value || 6,
+            format: (d) => get_formatter(is_money, text_formatter)(d),
+            min: "auto",
+            max: "auto",
+            ...(left_axis || {}),
+          }
+      }
+      padding={padding}
+      borderColor="inherit:darker(1.6)"
+      motionDamping={motion_damping}
+      motionStiffness={motion_stiffness}
+      labelTextColor={window.infobase_color_constants.textColor}
+      labelSkipWidth={labelSkipWidth}
+    />
+
+    return <TableSwitchableGraph graph={graph} table={table} />;
   }
 };
 NivoResponsiveHBar.defaultProps = {

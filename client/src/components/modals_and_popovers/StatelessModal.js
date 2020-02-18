@@ -1,6 +1,7 @@
 import './bootstrap_modal_exstension.scss';
 
 import { Modal } from 'react-bootstrap';
+import classNames from 'classnames';
 
 import { trivial_text_maker } from '../../models/text.js';
 
@@ -27,6 +28,7 @@ export class StatelessModal extends React.Component {
       footer,
       close_text,
       close_button_in_header,
+      additional_dialog_class,
     } = this.props;
 
     const default_header = (
@@ -53,6 +55,7 @@ export class StatelessModal extends React.Component {
       <Modal 
         show={show}
         onHide={this.closeModal}
+        dialogClassName={classNames(`modal-dialog`, additional_dialog_class)}
       >
         <div>
           <Modal.Header closeButton={!close_text}>
