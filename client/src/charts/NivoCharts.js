@@ -120,9 +120,9 @@ const fixedSymbolShape = ({
 
 
 const get_modal_width = () => {
-  if (window.innerWidth < breakpoints.mediumDevice) return '.mymodal-sm';
-  if (window.innerWidth > breakpoints.largeDevice ) return '.mymodal-xl';
-  return '.mymodal-lg';
+  if (window.innerWidth < breakpoints.minMediumDevice) { return 'mymodal-sm'; }
+  if (window.innerWidth > breakpoints.maxLargeDevice ) { return 'mymodal-xl'; }
+  return 'mymodal-lg';
 };
 
 class TableSwitchableGraph extends React.Component{
