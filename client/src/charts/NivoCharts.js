@@ -332,7 +332,7 @@ export class NivoResponsiveBar extends React.Component{
 
     const table_data = _.map(data, row => ({col_data: row, label: row[indexBy], sort_keys: row}));
     const table_header_keys = _.concat([indexBy],keys);
-    
+
     const table = <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
     
     // have to have an empty string in key to make sure that negative bars will be displayed
@@ -563,7 +563,23 @@ export class NivoResponsiveLine extends React.Component {
     } = this.state;
 
     legends && (legends[0].symbolShape = fixedSymbolShape);
-    return (
+
+    const table_data = _.map(data, row => ({
+      col_data: _.chain(row.data)
+        .map(d=>[d.x,d.y])
+        .fromPairs()
+        .assign({label: row.id})
+        .value(),
+      label: row.id}));
+    const table_header_keys = _.concat(['label'], _.chain(data)
+      .map( d=>_.map( d.data, d=>d.x ) )
+      .flatten()
+      .uniq()
+      .value() );
+    
+    const table = <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
+
+    const graph =
       <Fragment>
         {show_yaxis_zoom && !enableArea &&
           <button
@@ -641,8 +657,9 @@ export class NivoResponsiveLine extends React.Component {
           dotSize={stacked ? 0 : 10}
           areaOpacity={stacked ? 1 : 0}
         />
-      </Fragment>
-    );
+      </Fragment>;
+
+    return <TableSwitchableGraph graph={graph} table={table} />;
   }
 }
 
