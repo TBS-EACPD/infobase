@@ -7,7 +7,10 @@ import { IconZoomIn, IconZoomOut } from '../icons/icons.js';
 import { trivial_text_maker } from '../models/text.js';
 import { breakpoints } from '../core/breakpoint_defs.js';
 import MediaQuery from 'react-responsive';
-import { DisplayTable } from '../components/DisplayTable.js';
+import {
+  DisplayTable,
+  StatelessModal,
+} from '../components/index.js';
 import './NivoCharts.scss';
 
 
@@ -134,7 +137,6 @@ class TableSwitchableGraph extends React.Component{
 
     return (
       <Fragment>
-        { show_table ? table : graph }
         <button
           style={{
             zIndex: 999,
@@ -142,8 +144,15 @@ class TableSwitchableGraph extends React.Component{
           className="btn-table-view btn-group-lg btn-ib-primary"
           onClick={ () => this.setState({ show_table: !show_table }) }
         >
-          { show_table ? trivial_text_maker("switch_to_graph") : trivial_text_maker("switch_to_table") }
+          { trivial_text_maker("show_table") }
         </button>
+        { graph }
+        <StatelessModal
+          show={ show_table }
+          title={ trivial_text_maker("table_view") }
+          body={ table }
+          on_close_callback={() => this.setState({show_table: false})}
+        />
       </Fragment>
     );
   }
