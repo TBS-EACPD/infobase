@@ -24,6 +24,9 @@ import {
   NivoResponsiveHBar,
   NivoResponsiveLine,
   NivoResponsivePie,
+  CommonDonut,
+  LineBarToggleGraph,
+  AverageSharePie,
   get_formatter,
   infobase_colors_smart,
 } from '../../charts/NivoCharts.js';
@@ -493,10 +496,13 @@ export {
   SpinnerWrapper,
   get_formatter,
   table_common,
+  CommonDonut,
+  LineBarToggleGraph,
+  AverageSharePie,
+  infobase_colors_smart,
 
   // shared panel utils
   declare_panel,
-  infobase_colors_smart,
   get_planned_spending_source_link,
   get_planned_fte_source_link,
 

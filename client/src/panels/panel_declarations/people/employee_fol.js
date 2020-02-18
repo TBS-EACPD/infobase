@@ -1,5 +1,4 @@
 import text from "./employee_fol.yaml";
-import { AverageSharePie } from './AverageSharePie.js';
 import {
   formats,
   run_template,
@@ -14,6 +13,7 @@ import {
 
   LineBarToggleGraph,
   HeightClippedGraph,
+  AverageSharePie,
 } from "../shared.js"; 
 
 
