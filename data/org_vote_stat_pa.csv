@@ -516,7 +516,7 @@
 "ODPP","S",999,"Electoral expenditures","Dépenses électorales",2394505,2394505,2602906,2602906,3039792,3039792,3410178,3410178,2925462,2925462
 "ODPP","S",999,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs",,,,,58442,58442,,,,
 "ODPP","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",,,,,15493,,15493,15493,,
-"OEC",1,1,"Operating/Program","Fonctionnement/Programme",6178280,5607761,6178280,5157753,6178280,5594657,6178280,5973165,6134141,5826881
+"OEC",1,1,"Operating/Program","Fonctionnement/Programme",6178280,5607761,6178280,5157753,6178280,5594657,6178280,5973165,6134141,5826882
 "OEC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",669451,669451,600385,600385,638245,638245,665257,665257,690883,690883
 "OICC",1,1,"Operating/Program","Fonctionnement/Programme",75080093,66586698,123741190,58768365,131616485,57324445,217145305,141061203,135577405,85726632
 "OICC",3,2,"Capital","Capital",94036524,15647305,,,,,,,,
@@ -526,7 +526,7 @@
 "OICC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",5045588,5045588,5185853,5185853,5286930,5286930,6123830,6123830,7012877,7012877
 "OICC","S",999,"Gas Tax Fund","Fonds de la taxe sur l'essence",1973269432,1973269432,1973269432,1973269432,2071932904,2071932904,2071932904,2071932904,2170596375,2170596375
 "OICC","S",999,"Salary and Motor Car Allowance","Traitement et allocation pour automobile",80300,80300,82328,82328,83500,83500,84600,84600,86000,86000
-"OPSIC",1,1,"Operating/Program","Fonctionnement/Programme",5210967,4393958,5180606,4055285,5202586,3928727,5279398,4518110,5382010,5202329
+"OPSIC",1,1,"Operating/Program","Fonctionnement/Programme",5210967,4393958,5180606,4055285,5202586,3928727,5279398,4518110,5382010,5202328
 "OPSIC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",447023,447023,398272,398272,394972,394972,431723,431722,418784,418784
 "OPSIC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",46,46,,,,,,,,
 "ORL",1,1,"Operating/Program","Fonctionnement/Programme",4341487,4245194,4211532,3972732,4227735,4156751,4642478,4438552,5840315,4930738
