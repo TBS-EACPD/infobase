@@ -1124,12 +1124,12 @@ zoom_out:
   en: Zoom out
   fr: Dézoomer
 
-switch_to_graph:
-  en: Switch to graph
+show_table:
+  en: Show data table
   fr: TODO
 
-switch_to_table:
-  en: Switch to table
+table_view:
+  en: Table view
   fr: TODO
 
 arrow:
