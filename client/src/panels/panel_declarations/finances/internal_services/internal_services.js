@@ -103,17 +103,11 @@ export const declare_internal_services_panel = () => declare_panel({
         return result;
       }, []);
 
-      const to_render = <div>
-        <div className="medium_panel_text" style={{marginBottom: "15px"}}>
-          <TM
-            k="internal_service_panel_text"
-            args={{
-              subject,
-              isc_fte_pct: isc_fte / total_fte,
-              gov_isc_fte_pct: gov_isc_fte / gov_fte_total,
-            }}
-          />
-        </div>
+      let graph_content;
+      if (window.is_a11y_mode) {
+        graph_content = null;
+      } else {
+        graph_content = 
         <div className="frow md-middle"> 
           <div className="fcol-md-3">
             <div className="well legend-container">
@@ -137,7 +131,21 @@ export const declare_internal_services_panel = () => declare_panel({
               }}
             />
           </div>
+        </div>;
+      }
+
+      const to_render = <div>
+        <div className="medium_panel_text" style={{marginBottom: "15px"}}>
+          <TM
+            k="internal_service_panel_text"
+            args={{
+              subject,
+              isc_fte_pct: isc_fte / total_fte,
+              gov_isc_fte_pct: gov_isc_fte / gov_fte_total,
+            }}
+          />
         </div>
+        {graph_content}
       </div>;
   
       return (
