@@ -16,7 +16,7 @@ import {
 import { TabularPercentLegend, GraphLegend } from '../declarative_charts.js';
 import { breakpoints } from '../../core/breakpoint_defs.js';
 import { newIBCategoryColors } from '../../core/color_schemes.js';
-import { infobase_colors_smart, get_formatter } from './shared.js';
+import { infobase_colors_smart, get_formatter } from '../shared.js';
 import './NivoCharts.scss';
 
 
