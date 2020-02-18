@@ -19,7 +19,15 @@ import FootNote from '../../models/footnotes/footnotes.js';
 import { GlossaryEntry } from '../../models/glossary.js';
 
 import * as declarative_charts from '../../charts/declarative_charts.js';
-import { NivoResponsiveBar, NivoResponsiveHBar, NivoResponsiveLine, NivoResponsivePie, get_formatter } from '../../charts/NivoCharts.js';
+import {
+  NivoResponsiveBar,
+  NivoResponsiveHBar,
+  NivoResponsiveLine,
+  NivoResponsivePie,
+  get_formatter,
+  infobase_colors_smart,
+} from '../../charts/NivoCharts.js';
+import { Canada } from '../../charts/canada.js';
 import { FlatTreeMapViz } from '../../charts/flat_treemap/FlatTreeMapViz.js';
 
 import { rpb_link, get_appropriate_rpb_subject } from '../../rpb/rpb_link.js';
@@ -30,13 +38,7 @@ import * as general_utils from '../../general_utils.js';
 import * as util_components from '../../components/index.js';
 import * as table_common from '../../tables/table_common.js';
 
-import classNames from 'classnames';
 import { Fragment } from 'react';
-
-const {
-  TabularPercentLegend,
-  GraphLegend,
-} = declarative_charts;
 
 const {
   Format,
@@ -62,13 +64,6 @@ const declare_panel = ({panel_key, levels, panel_config_func}) => {
   }
 
   return panel_key;
-};
-
-const infobase_colors_smart = (col_scale) => (label) => {
-  if ( _.includes(businessConstants.NA_values,label) ){
-    return NA_color;
-  }
-  return col_scale(label);
 };
 
 const get_planned_spending_source_link = subject => {
@@ -506,8 +501,6 @@ export {
   get_planned_fte_source_link,
 
   // shared panel components
-  CommonDonut,
-  LineBarToggleGraph,
   HeightClippedGraph,
   TspanLineWrapper,
 };
