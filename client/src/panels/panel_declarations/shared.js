@@ -29,7 +29,7 @@ import {
   AverageSharePie,
   get_formatter,
   infobase_colors_smart,
-} from '../../charts/NivoCharts.js';
+} from '../../charts/nivo/NivoCharts.js/index.js';
 import { Canada } from '../../charts/canada.js';
 import { FlatTreeMapViz } from '../../charts/flat_treemap/FlatTreeMapViz.js';
 
