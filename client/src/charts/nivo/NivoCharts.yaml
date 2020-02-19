@@ -14,3 +14,7 @@ show_table:
 table_view:
   en: Table view
   fr: TODO
+
+toggle_graph:
+  en: Toggle Graph Type
+  fr: Changer le type de graphique

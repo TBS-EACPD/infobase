@@ -608,9 +608,6 @@ report_details:
 legend:
   en: Legend
   fr: Légende
-toggle_graph:
-  en: Toggle Graph Type
-  fr: Changer le type de graphique
 alternate_view:
   en: Alternate View
   fr: Autre vue
@@ -1115,7 +1112,7 @@ SOBJ21:
 SOBJ22:
     en: Internal Revenues
     fr: Revenus internes
-    
+
 arrow:
   en: Arrow
   fr: Flèche
