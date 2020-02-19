@@ -128,26 +128,27 @@ export const declare_spend_by_so_hist_panel = () => declare_panel({
       const { panel_args, info } = calculations;
       const {ticks, data} = panel_args;
     
-      let graph_content;
-      if(window.is_a11y_mode){
-        graph_content = (
-          <A11YTable
-            data={
-              _.map(data, ({label, data}) => ({
-                label,
-                /* eslint-disable react/jsx-key */
-                data: data.map(amt => <Format type="compact1_written" content={amt} />),
-              }))
-            }
-            label_col_header={text_maker("so")}
-            data_col_headers={ticks} 
-          />
-        );
-      } else {
-        graph_content = (
-          <SobjLine data={data} />
-        );
-      }
+      const graph_content = (() => {
+        if(window.is_a11y_mode){
+          return(
+            <A11YTable
+              data={
+                _.map(data, ({label, data}) => ({
+                  label,
+                  /* eslint-disable react/jsx-key */
+                  data: data.map(amt => <Format type="compact1_written" content={amt} />),
+                }))
+              }
+              label_col_header={text_maker("so")}
+              data_col_headers={ticks} 
+            />
+          );
+        } else {
+          return(
+            <SobjLine data={data} />
+          );
+        }
+      })();
   
       return (
         <InfographicPanel

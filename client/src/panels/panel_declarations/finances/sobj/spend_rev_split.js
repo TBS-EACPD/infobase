@@ -44,8 +44,7 @@ function render({calculations, footnotes, sources}) {
 
   const graph_content = (() => {
     if (window.is_a11y_mode) {
-      return (
-        null);
+      return (null);
     } else {
       return (
         <div style = {{height: '400px'}} aria-hidden = {true}>
