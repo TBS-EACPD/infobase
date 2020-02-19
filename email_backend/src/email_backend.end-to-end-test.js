@@ -30,7 +30,7 @@ _.each(
 
 const ethereal_timeout_limit = 20000;
 
-const timed_out_flag = "TIMED OUT!";
+const timed_out_flag = "TIMEDOUT";
 nodemailer.createTestAccount.mockImplementation( 
   () => promise_timeout_race(
     actual_nodemailer.createTestAccount(),
