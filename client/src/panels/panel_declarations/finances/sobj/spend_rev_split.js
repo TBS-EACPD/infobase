@@ -39,30 +39,30 @@ function render({calculations, footnotes, sources}) {
     (spend_rev_value,tick_index)=>({
       title: ticks[tick_index],
       [ticks[tick_index]]: spend_rev_value,
-    }));
+    })
+  );
 
-  let graph_content;
-  if(window.is_a11y_mode){
-    //all information is contained in text
-    graph_content = null;
-  } else {
-    
-    graph_content = (
-      <div style = {{height: '400px'}} aria-hidden = {true}>
-        <NivoResponsiveBar
-          data = {spend_rev_data}
-          keys = {ticks}
-          indexBy = "title"
-          enableLabel = {true}
-          isInteractive = {false}
-          label_format = { d=><tspan y={-4}> {formats.compact1(d, {raw: true})} </tspan>}
-          colorBy = {d => d.data[d.id] < 0 ? window.infobase_color_constants.highlightColor : window.infobase_color_constants.secondaryColor}
-          enableGridX={false}
-        />
-      </div>
-    );
-      
-  }
+  const graph_content = (() => {
+    if (window.is_a11y_mode) {
+      return (
+        null);
+    } else {
+      return (
+        <div style = {{height: '400px'}} aria-hidden = {true}>
+          <NivoResponsiveBar
+            data = {spend_rev_data}
+            keys = {ticks}
+            indexBy = "title"
+            enableLabel = {true}
+            isInteractive = {false}
+            label_format = { d=><tspan y={-4}> {formats.compact1(d, {raw: true})} </tspan>}
+            colorBy = {d => d.data[d.id] < 0 ? window.infobase_color_constants.highlightColor : window.infobase_color_constants.secondaryColor}
+            enableGridX={false}
+          />
+        </div>
+      );
+    }
+  })();
 
   return (
     <StdPanel
