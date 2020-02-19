@@ -110,7 +110,7 @@ const fixedSymbolShape = ({
   />
 );
 
-class TableSwitchableGraph extends React.Component{
+class InteractiveGraph extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -126,23 +126,28 @@ class TableSwitchableGraph extends React.Component{
     const {
       graph,
       table,
+      disable_table_view,
+      other_buttons,
     } = this.props;
 
     return (
       <Fragment>
-        <button
-          style={{
-            zIndex: 999,
-          }}
-          className="btn-table-view btn-group-lg btn-ib-primary"
-          onClick={ () => this.setState({ show_table: !show_table }) }
-        >
-          { <IconTable
-            title={text_maker("show_table")}
-            color={window.infobase_color_constants.tertiaryColor}
-            alternate_color={window.infobase_color_constants.primaryColor}
-          /> }
-        </button>
+        { !disable_table_view && 
+          <button
+            style={{
+              zIndex: 999,
+            }}
+            className="btn-ib-primary"
+            onClick={ () => this.setState({ show_table: !show_table }) }
+          >
+            { <IconTable
+              title={text_maker("show_table")}
+              color={window.infobase_color_constants.tertiaryColor}
+              alternate_color={window.infobase_color_constants.primaryColor}
+            /> }
+          </button>
+        }
+        { other_buttons }
         { graph }
         <StatelessModal
           show={ show_table }
@@ -373,7 +378,7 @@ export class NivoResponsiveBar extends React.Component{
       borderColor="inherit:darker(1.6)"
     />;
     
-    return <TableSwitchableGraph graph={graph} table={table} />;
+    return <InteractiveGraph graph={graph} table={table} />;
   }
 };
 NivoResponsiveBar.defaultProps = {
@@ -479,7 +484,7 @@ export class NivoResponsiveHBar extends React.Component{
       labelSkipWidth={labelSkipWidth}
     />
 
-    return <TableSwitchableGraph graph={graph} table={table} />;
+    return <InteractiveGraph graph={graph} table={table} />;
   }
 };
 NivoResponsiveHBar.defaultProps = {
@@ -572,87 +577,77 @@ export class NivoResponsiveLine extends React.Component {
     
     const table = <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
 
-    const graph =
-      <Fragment>
-        {show_yaxis_zoom && !enableArea &&
-          <button
-            style={{
-              position: "absolute",
-              left: magnify_glass_translateX || margin.left,
-              top: magnify_glass_translateY || margin.top,
-              marginLeft: "-7px",
-              marginTop: "-30px",
-              zIndex: 999,
-              padding: "0px",
-            }}
-            className="btn-ib-zoom"
-            onClick={ 
-              () => {
-                this.setState({
-                  y_scale_zoomed: !y_scale_zoomed,
-                });
-              }
-            }
-          >
-            { this.state.y_scale_zoomed ? 
-                <IconZoomOut
-                  title={text_maker("zoom_out")}
-                  color={window.infobase_color_constants.tertiaryColor}
-                  alternate_color={window.infobase_color_constants.primaryColor}
-                /> : 
-                <IconZoomIn 
-                  title={text_maker("zoom_in")}
-                  color={window.infobase_color_constants.tertiaryColor}
-                  alternate_color={window.infobase_color_constants.primaryColor}
-                />
-            }
-          </button>
+    const zoom_button = (show_yaxis_zoom && !enableArea) ?
+      <button
+        className="btn-ib-primary"
+        onClick={ 
+          () => {
+            this.setState({
+              y_scale_zoomed: !y_scale_zoomed,
+            });
+          }
         }
-        <ResponsiveLine
-          {...{
-            data,
-            margin,
-            enableGridX,
-            enableGridY,
-            enableArea,
-            colorBy,
-            colors,
-            theme,
-            enableDotLabel,
-            markers,
-            legends,
-            layers,
-          }}
-          tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
-          yScale={{
-            stacked: !!stacked,
-            type: "linear",
-            min: min || get_scale_bounds(stacked, raw_data, y_scale_zoomed).min,
-            max: max || get_scale_bounds(stacked, raw_data, y_scale_zoomed).max,
-            ...(yScale || {}),
-          }}
-          axisBottom={remove_bottom_axis ? null : bttm_axis}
-          axisLeft={remove_left_axis ? null :
-          {
-            orient: "left",
-            tickSize: 5,
-            tickPadding: 5,
-            tickValues: tick_amount || 6,
-            format: d => get_formatter(is_money, text_formatter)(d),
-            ...(left_axis || {}),
-          }}
-          axisTop={null}
-          axisRight={null}
-          xScale={{ type: "point" }}
-          animate={true}
-          motionStiffness={motion_stiffness}
-          motionDamping={motion_damping}
-          dotSize={stacked ? 0 : 10}
-          areaOpacity={stacked ? 1 : 0}
-        />
-      </Fragment>;
+      >
+        { this.state.y_scale_zoomed ? 
+            <IconZoomOut
+              title={text_maker("zoom_out")}
+              color={window.infobase_color_constants.tertiaryColor}
+              alternate_color={window.infobase_color_constants.primaryColor}
+            /> : 
+            <IconZoomIn 
+              title={text_maker("zoom_in")}
+              color={window.infobase_color_constants.tertiaryColor}
+              alternate_color={window.infobase_color_constants.primaryColor}
+            />
+        }
+      </button> :
+      undefined;
 
-    return <TableSwitchableGraph graph={graph} table={table} />;
+    const graph =
+      <ResponsiveLine
+        {...{
+          data,
+          margin,
+          enableGridX,
+          enableGridY,
+          enableArea,
+          colorBy,
+          colors,
+          theme,
+          enableDotLabel,
+          markers,
+          legends,
+          layers,
+        }}
+        tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
+        yScale={{
+          stacked: !!stacked,
+          type: "linear",
+          min: min || get_scale_bounds(stacked, raw_data, y_scale_zoomed).min,
+          max: max || get_scale_bounds(stacked, raw_data, y_scale_zoomed).max,
+          ...(yScale || {}),
+        }}
+        axisBottom={remove_bottom_axis ? null : bttm_axis}
+        axisLeft={remove_left_axis ? null :
+        {
+          orient: "left",
+          tickSize: 5,
+          tickPadding: 5,
+          tickValues: tick_amount || 6,
+          format: d => get_formatter(is_money, text_formatter)(d),
+          ...(left_axis || {}),
+        }}
+        axisTop={null}
+        axisRight={null}
+        xScale={{ type: "point" }}
+        animate={true}
+        motionStiffness={motion_stiffness}
+        motionDamping={motion_damping}
+        dotSize={stacked ? 0 : 10}
+        areaOpacity={stacked ? 1 : 0}
+      />;
+
+    return <InteractiveGraph graph={graph} table={table} other_buttons={[zoom_button]}/>;
   }
 }
 
