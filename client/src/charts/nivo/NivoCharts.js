@@ -4,8 +4,8 @@ import { ResponsivePie } from '@nivo/pie';
 import { formats, dollar_formats } from "../../core/format.js";
 import { Fragment } from 'react';
 import classNames from 'classnames';
-import { IconZoomIn, IconZoomOut } from '../icons/icons.js';
-import { trivial_text_maker } from '../models/text.js';
+import { IconZoomIn, IconZoomOut } from '../../icons/icons.js';
+import { create_text_maker } from '../../models/text.js';
 import { breakpoints } from '../core/breakpoint_defs.js';
 import MediaQuery from 'react-responsive';
 import {
@@ -18,7 +18,9 @@ import { breakpoints } from '../../core/breakpoint_defs.js';
 import { newIBCategoryColors } from '../../core/color_schemes.js';
 import { infobase_colors_smart, get_formatter } from '../shared.js';
 import './NivoCharts.scss';
+import graph_text from './NivoCharts.yaml';
 
+const text_maker = create_text_maker(graph_text);
 
 const get_scale_bounds = (stacked, raw_data, zoomed) => {
   const min = _.min(raw_data);
@@ -142,12 +144,12 @@ class TableSwitchableGraph extends React.Component{
           className="btn-table-view btn-group-lg btn-ib-primary"
           onClick={ () => this.setState({ show_table: !show_table }) }
         >
-          { trivial_text_maker("show_table") }
+          { text_maker("show_table") }
         </button>
         { graph }
         <StatelessModal
           show={ show_table }
-          title={ trivial_text_maker("table_view") }
+          title={ text_maker("table_view") }
           body={ table }
           on_close_callback={() => this.setState({show_table: false})}
           additional_dialog_class = { get_modal_width() }
@@ -593,12 +595,12 @@ export class NivoResponsiveLine extends React.Component {
           >
             { this.state.y_scale_zoomed ? 
                 <IconZoomOut
-                  title={trivial_text_maker("zoom_out")}
+                  title={text_maker("zoom_out")}
                   color={window.infobase_color_constants.tertiaryColor}
                   alternate_color={window.infobase_color_constants.primaryColor}
                 /> : 
                 <IconZoomIn 
-                  title={trivial_text_maker("zoom_in")}
+                  title={text_maker("zoom_in")}
                   color={window.infobase_color_constants.tertiaryColor}
                   alternate_color={window.infobase_color_constants.primaryColor}
                 />
@@ -975,7 +977,7 @@ export class LineBarToggleGraph extends React.Component {
                     }
                   }
                 >
-                  {trivial_text_maker("toggle_graph")}
+                  {text_maker("toggle_graph")}
                 </button>
               </span>
             }
@@ -1053,7 +1055,7 @@ export const AverageSharePie = ({panel_args, sort_func}) => {
         <div className="centerer">
           <div className="centerer-IE-fix">
             <span className="average-share-percent-header">
-              {trivial_text_maker("five_year_percent_header")}
+              {text_maker("five_year_percent_header")}
             </span>
             <TabularPercentLegend
               items={legend_items}
