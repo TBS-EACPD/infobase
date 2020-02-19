@@ -149,7 +149,7 @@ class TableSwitchableGraph extends React.Component{
             if (window.innerWidth < breakpoints.minMediumDevice) { return 'modal-sm'; }
             if (window.innerWidth > breakpoints.maxLargeDevice ) { return 'modal-xl'; }
             return 'modal-lg';
-          })(); }
+          })() }
         />
       </Fragment>
     );
