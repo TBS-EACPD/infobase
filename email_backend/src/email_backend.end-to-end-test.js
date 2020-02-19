@@ -28,8 +28,27 @@ _.each(
   (member, identifier) => member.mockImplementation(actual_nodemailer[identifier])
 );
 
-const ethereal_timeout_limit = 30000;
+const ethereal_timeout_limit = 20000;
+
+const timed_out_flag = "TIMED OUT!";
+nodemailer.createTestAccount.mockImplementation( 
+  () => promise_timeout_race(
+    actual_nodemailer.createTestAccount(),
+    ethereal_timeout_limit,
+    (resolve, reject) => resolve(timed_out_flag),
+  )
+);
+
 nodemailer.createTransport.mockImplementation( (transport_config) => {
+  // eslint-disable-next-line no-console
+  const alert_to_flaked_test = () => console.log(`FLAKY TEST ALERT: was unable to reach ethereal within ${ethereal_timeout_limit}ms, giving up but not failing the test over it.`);
+
+  if ( transport_config.auth === timed_out_flag){
+    alert_to_flaked_test();
+
+    return { sendMail: () => ({response: "200"}) };
+  }
+
   const transporter = actual_nodemailer.createTransport(transport_config);
 
   return {
@@ -38,8 +57,7 @@ nodemailer.createTransport.mockImplementation( (transport_config) => {
       const send_mail_promise = transporter.sendMail(options);
 
       const timeout_callback = (resolve, reject) => {
-        // eslint-disable-next-line no-console
-        console.log(`FLAKY TEST ALERT: was unable to reach ethereal within ${ethereal_timeout_limit}ms, giving up but not failing the test over it.`);
+        alert_to_flaked_test();
 
         resolve({response: "200"});
       };
@@ -127,26 +145,9 @@ describe("End-to-end tests for email_backend endpoints", () => {
     return expect([bad_template_name_status, invalid_template_status]).toEqual([400, 400]);
   });
 
-  // this test is flaky due to its reliance on a third party service to validate submitted emails
+  // this test is flaky due to its reliance on a third party service to validate submitted emails; the services is occasionally unresponsive
   it("/submit_email returns status 200 when a valid template is submitted", 
     async () => {
-      // Check if Ethereal can be reached to test mail sending, this test will be skipped (passingly) if it can't be
-      const ethereal_connection_status = await promise_timeout_race(
-        actual_nodemailer.createTestAccount(),
-        ethereal_timeout_limit,
-        (resolve, reject) => reject(),
-      )
-        .catch( (error) => {
-          return error ?
-            error.toString() : 
-            "Didn't run end-to-end test on /submit_email because Ethereal could not be reached to to create a test account.";
-        });
-      if ( _.isString(ethereal_connection_status) ){
-        // eslint-disable-next-line no-console
-        console.log("Didn't run end-to-end test on /submit_email because Ethereal could not be reached to to create a test account.");
-        return expect("Oops, this is flaky").toEqual("Oops, this is flaky");
-      }
-
       const { status: ok } = await make_submit_email_request(test_template_name, completed_test_template);
 
       return expect(ok).toBe(200);
@@ -154,6 +155,6 @@ describe("End-to-end tests for email_backend endpoints", () => {
     // timeout on the async returning, just needs to be significantly longer than ethereal_timeout_limit. Shouldn't hit the Jest level timeout as the time-constraint in this test
     // is communications with ethereal, which is being timed out after ethereal_timeout_limit. If an ethereal_timeout_limit is hit, then this test flakes passingly (not great, but it
     // was between that and just dropping this test altogether). Can still flake if the Jest level timeout is hit for nondeterministic system resource/event loop reasons, ah well!
-    ethereal_timeout_limit*10
+    ethereal_timeout_limit*5
   );
 });
