@@ -147,7 +147,7 @@ class InteractiveGraph extends React.Component{
             /> }
           </button>
         }
-        { other_buttons }
+        { _.map(other_buttons, (button,i) => <span key={i}>{button}</span> ) }
         { graph }
         <StatelessModal
           show={ show_table }
