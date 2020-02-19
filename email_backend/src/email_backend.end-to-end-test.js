@@ -1,6 +1,23 @@
 import axios from 'axios';
 import _ from 'lodash';
 
+
+const promise_timeout_race = (promise, time_limit, timeout_callback=_.noop) => {
+  const timeout_promise = new Promise((resolve, reject) => {
+    const timeout = setTimeout(
+      () => {
+        clearTimeout(timeout);
+
+        timeout_callback(resolve, reject)
+      },
+      time_limit
+    );
+  });
+
+  return Promise.race([promise, timeout_promise]);
+};
+
+
 // mocking JUST nodemailer.createTransport, leaving everything else with its original implementation... is there a more direct way to do this?
 jest.mock('nodemailer'); // eslint-disable-line no-undef
 import nodemailer from 'nodemailer';
@@ -11,7 +28,7 @@ _.each(
   (member, identifier) => member.mockImplementation(actual_nodemailer[identifier])
 );
 
-const ethereal_timeout_limit = 10000;
+const ethereal_timeout_limit = 30000;
 nodemailer.createTransport.mockImplementation( (transport_config) => {
   const transporter = actual_nodemailer.createTransport(transport_config);
 
@@ -20,21 +37,18 @@ nodemailer.createTransport.mockImplementation( (transport_config) => {
     sendMail: (options) => {
       const send_mail_promise = transporter.sendMail(options);
 
-      const timeout_promise = new Promise((resolve, reject) => {
-        const timeout = setTimeout(
-          () => {
-            clearTimeout(timeout);
+      const timeout_callback = (resolve, reject) => {
+        // eslint-disable-next-line no-console
+        console.log(`FLAKY TEST ALERT: was unable to reach ethereal within ${ethereal_timeout_limit}ms, giving up but not failing the test over it.`);
 
-            // eslint-disable-next-line no-console
-            console.log(`FLAKY TEST ALERT: was unable to reach ethereal within ${ethereal_timeout_limit}ms, giving up but not failing the test over it.`);
+        resolve({response: "200"});
+      };
 
-            resolve({response: "200"});
-          },
-          ethereal_timeout_limit
-        );
-      });
-
-      return Promise.race([send_mail_promise, timeout_promise]);
+      return promise_timeout_race(
+        send_mail_promise,
+        ethereal_timeout_limit,
+        timeout_callback,
+      );
     },
   };
 });
@@ -116,15 +130,21 @@ describe("End-to-end tests for email_backend endpoints", () => {
   // this test is flaky due to its reliance on a third party service to validate submitted emails
   it("/submit_email returns status 200 when a valid template is submitted", 
     async () => {
-      try {
-        // Check if Ethereal can be reached to test mail sending, this test will be skipped (passingly) if it can't be
-        await actual_nodemailer.createTestAccount();
-      } catch(error){
-        if ( /getaddrinfo/.test(error) ){
-          // eslint-disable-next-line no-console
-          console.log("Didn't run end-to-end test on /submit_email because Ethereal could not be reached to mock sending mail.");
-          return expect("Oops, this is flaky").toEqual("Oops, this is flaky");
-        }
+      // Check if Ethereal can be reached to test mail sending, this test will be skipped (passingly) if it can't be
+      const ethereal_connection_status = await promise_timeout_race(
+        actual_nodemailer.createTestAccount(),
+        ethereal_timeout_limit,
+        (resolve, reject) => reject(),
+      )
+        .catch( (error) => {
+          return error ?
+            error.toString() : 
+            "Didn't run end-to-end test on /submit_email because Ethereal could not be reached to to create a test account.";
+        });
+      if ( _.isString(ethereal_connection_status) ){
+        // eslint-disable-next-line no-console
+        console.log("Didn't run end-to-end test on /submit_email because Ethereal could not be reached to to create a test account.");
+        return expect("Oops, this is flaky").toEqual("Oops, this is flaky");
       }
 
       const { status: ok } = await make_submit_email_request(test_template_name, completed_test_template);
@@ -132,8 +152,8 @@ describe("End-to-end tests for email_backend endpoints", () => {
       return expect(ok).toBe(200);
     },
     // timeout on the async returning, just needs to be significantly longer than ethereal_timeout_limit. Shouldn't hit the Jest level timeout as the time-constraint in this test
-    // is communications with ethereal, which are timed out after ethereal_timeout_limit. If an ethereal_timeout_limit is hit, then this test flakes passingly (not great, but it
+    // is communications with ethereal, which is being timed out after ethereal_timeout_limit. If an ethereal_timeout_limit is hit, then this test flakes passingly (not great, but it
     // was between that and just dropping this test altogether). Can still flake if the Jest level timeout is hit for nondeterministic system resource/event loop reasons, ah well!
-    ethereal_timeout_limit*6
+    ethereal_timeout_limit*10
   );
 });
