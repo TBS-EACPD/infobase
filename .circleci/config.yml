@@ -24,13 +24,11 @@ jobs:
       - checkout:
           path: "~/InfoBase"
 
-      - run: cksum ./email-backend/src/** > src-checksums.txt
+      - run: cksum ./email_backend/** > checksums.txt
       - restore_cache:
           keys:
-            - email-backend-already-tested-{{ checksum "email_backend/package-lock.json" }}-{{ checksum "src-checksums.txt" }}
-      - run: 
-          command: |
-            [ -e "already-tested" ] && circleci step halt
+            - email-backend-already-tested-{{ checksum "checksums.txt" }}
+      - run: if [[ -e "already-tested" ]]; then circleci step halt; fi
 
       - restore_cache:
           keys:
@@ -52,7 +50,7 @@ jobs:
       - save_cache:
           paths:
             - ./already-tested
-          key: email-backend-already-tested-{{ checksum "email_backend/package-lock.json" }}-{{ checksum "src-checksums.txt" }}
+          key: email-backend-already-tested-{{ checksum "checksums.txt" }}
 
      # halt here if not on the true repo, expected that means this is running in an env without the GCloud env vars required for the following steps
       - run: if [[ "$CIRCLE_PROJECT_REPONAME" != "infobase" ]]; then circleci step halt; fi
