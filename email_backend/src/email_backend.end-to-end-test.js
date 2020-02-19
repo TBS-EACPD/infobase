@@ -131,6 +131,9 @@ describe("End-to-end tests for email_backend endpoints", () => {
 
       return expect(ok).toBe(200);
     },
-    ethereal_timeout_limit*3 // timeout on the async returning, shouldn't hit this anyway as the async should give up on its own after only ethereal_timeout_limit
+    // timeout on the async returning, just needs to be significantly longer than ethereal_timeout_limit. Shouldn't hit the Jest level timeout as the time-constraint in this test
+    // is communications with ethereal, which are timed out after ethereal_timeout_limit. If an ethereal_timeout_limit is hit, then this test flakes passingly (not great, but it
+    // was between that and just dropping this test altogether). Can still flake if the Jest level timeout is hit for nondeterministic system resource/event loop reasons, ah well!
+    ethereal_timeout_limit*6
   );
 });
