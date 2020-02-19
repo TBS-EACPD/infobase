@@ -4,7 +4,7 @@ import { ResponsivePie } from '@nivo/pie';
 import { formats, dollar_formats } from "../../core/format.js";
 import { Fragment } from 'react';
 import classNames from 'classnames';
-import { IconZoomIn, IconZoomOut } from '../../icons/icons.js';
+import { IconZoomIn, IconZoomOut, IconTable } from '../../icons/icons.js';
 import { create_text_maker } from '../../models/text.js';
 import { breakpoints } from '../core/breakpoint_defs.js';
 import MediaQuery from 'react-responsive';
@@ -137,7 +137,11 @@ class TableSwitchableGraph extends React.Component{
           className="btn-table-view btn-group-lg btn-ib-primary"
           onClick={ () => this.setState({ show_table: !show_table }) }
         >
-          { text_maker("show_table") }
+          { <IconTable
+            title={text_maker("show_table")}
+            color={window.infobase_color_constants.tertiaryColor}
+            alternate_color={window.infobase_color_constants.primaryColor}
+          /> }
         </button>
         { graph }
         <StatelessModal
