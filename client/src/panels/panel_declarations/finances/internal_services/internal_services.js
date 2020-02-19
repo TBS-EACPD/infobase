@@ -107,52 +107,54 @@ export const declare_internal_services_panel = () => declare_panel({
         return result;
       }, []);
 
-      let graph_content;
-      if (window.is_a11y_mode) {
-        graph_content = (
-          <A11YTable 
-            table_name={text_maker("internal_service_panel_title")}
-            data={_.chain(bar_data)
-              .flatMap( _.keys )
-              .uniq()
-              .pull('date')
-              .map( (label) => (
-                {
-                  label,
-                  data: _.map(bar_data, label),
-                }
-              ) )
-              .value()}
-            label_col_header={text_maker("program")}
-            data_col_headers={std_years.map(yr => run_template(yr))}
-          />);
-      } else {
-        graph_content = 
-        <div className="frow md-middle"> 
-          <div className="fcol-md-3">
-            <div className="well legend-container">
-              <GraphLegend
-                items={legend_items}
-              />
+      const graph_content = (() => {
+        if (window.is_a11y_mode) {
+          return (
+            <A11YTable 
+              table_name={text_maker("internal_service_panel_title")}
+              data={_.chain(bar_data)
+                .flatMap( _.keys )
+                .uniq()
+                .pull('date')
+                .map( (label) => (
+                  {
+                    label,
+                    data: _.map(bar_data, label),
+                  }
+                ) )
+                .value()}
+              label_col_header={text_maker("program")}
+              data_col_headers={std_years.map(yr => run_template(yr))}
+            />);
+        } else {
+          return (
+            <div className="frow md-middle"> 
+              <div className="fcol-md-3">
+                <div className="well legend-container">
+                  <GraphLegend
+                    items={legend_items}
+                  />
+                </div>
+              </div>
+              <div className="fcol-md-9" style = {{height: '300px'}} aria-hidden = {true}>
+                <NivoResponsiveBar
+                  data = {bar_data}
+                  indexBy = "date"
+                  colorBy = {d => colors(d.id)}
+                  keys = {label_keys}
+                  is_money = {false}
+                  margin = {{
+                    top: 15,
+                    right: 30,
+                    bottom: 40,
+                    left: 50,
+                  }}
+                />
+              </div>
             </div>
-          </div>
-          <div className="fcol-md-9" style = {{height: '300px'}} aria-hidden = {true}>
-            <NivoResponsiveBar
-              data = {bar_data}
-              indexBy = "date"
-              colorBy = {d => colors(d.id)}
-              keys = {label_keys}
-              is_money = {false}
-              margin = {{
-                top: 15,
-                right: 30,
-                bottom: 40,
-                left: 50,
-              }}
-            />
-          </div>
-        </div>;
-      }
+          );
+        }
+      })();
 
       const to_render = <div>
         <div className="medium_panel_text" style={{marginBottom: "15px"}}>
