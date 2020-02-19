@@ -110,13 +110,6 @@ const fixedSymbolShape = ({
   />
 );
 
-
-const get_modal_width = () => {
-  if (window.innerWidth < breakpoints.minMediumDevice) { return 'modal-sm'; }
-  if (window.innerWidth > breakpoints.maxLargeDevice ) { return 'modal-xl'; }
-  return 'modal-lg';
-};
-
 class TableSwitchableGraph extends React.Component{
   constructor(props){
     super(props);
@@ -152,7 +145,11 @@ class TableSwitchableGraph extends React.Component{
           title={ text_maker("table_view") }
           body={ table }
           on_close_callback={() => this.setState({show_table: false})}
-          additional_dialog_class = { get_modal_width() }
+          additional_dialog_class = { (() => {
+            if (window.innerWidth < breakpoints.minMediumDevice) { return 'modal-sm'; }
+            if (window.innerWidth > breakpoints.maxLargeDevice ) { return 'modal-xl'; }
+            return 'modal-lg';
+          })(); }
         />
       </Fragment>
     );
