@@ -12,9 +12,13 @@ import {
   declare_panel, 
 } from '../../shared.js';
 
+
 const { Gov, Tag } = Subject;
 const { std_years } = year_templates;
-const { GraphLegend } = declarative_charts;
+const { 
+  GraphLegend, 
+  A11YTable, 
+} = declarative_charts;
 const { text_maker, TM } = create_text_maker_component(text);
 
 export const declare_internal_services_panel = () => declare_panel({
@@ -105,7 +109,23 @@ export const declare_internal_services_panel = () => declare_panel({
 
       let graph_content;
       if (window.is_a11y_mode) {
-        graph_content = null;
+        graph_content = (
+          <A11YTable 
+            table_name={text_maker("internal_service_panel_title")}
+            data={_.chain(bar_data)
+              .flatMap( _.keys )
+              .uniq()
+              .pull('date')
+              .map( (label) => (
+                {
+                  label,
+                  data: _.map(bar_data, label),
+                }
+              ) )
+              .value()}
+            label_col_header={text_maker("program")}
+            data_col_headers={std_years.map(yr => run_template(yr))}
+          />);
       } else {
         graph_content = 
         <div className="frow md-middle"> 
