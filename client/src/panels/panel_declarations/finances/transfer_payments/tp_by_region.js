@@ -25,23 +25,23 @@ const { A11YTable } = declarative_charts;
 
 function loadPopulation(){
   const parse_csv_string = csv_string => _.tail( d3.csvParseRows( _.trim(csv_string) ) );
-
-  const load_csv = () => make_request( get_static_url(`csv/population.csv`) )
-    .then( csv_string => parse_csv_string(csv_string) );
+  
+  return make_request( get_static_url(`csv/population.csv`) )
+    .then( csv_string => parse_csv_string(csv_string) )
+    .then(function(population_data) {
+      const population_values_by_prov_code = 
+      _.chain(population_data)
+        .keyBy(_.first)
+        .mapValues(row => _.chain(row)
+          .tail()
+          .map(value => parseInt(value))
+          .value()
+        )
+        .value();
     
-  return load_csv().then(function(loaded) {
-    const transformed = _.chain(loaded)
-      .keyBy(row => row[0])
-      .mapValues(row => _.chain(row)
-        .tail()
-        .map(value => parseInt(value))
-        .value()
-      )
-      .value();
-    
-    return transformed;
-  }
-  ); 
+      return population_values_by_prov_code;
+    }
+    ); 
 };
 
 
@@ -89,7 +89,7 @@ class TPMap extends React.Component {
     if (loading) {
       return (
         <div style = {{position: "relative", height: "80px", marginBottom: "-10px"}}>
-          <SpinnerWrapper/>
+          <SpinnerWrapper config_name={"sub_route"} />
         </div>);
     } else {
       const { tables } = calculations.panel_args;
@@ -108,22 +108,29 @@ class TPMap extends React.Component {
       const tp_data = std_years.map(get_subject_data_for_year);
       const tp_pc_data = std_years.map((year, i) => {
         const single_year_tp_data = get_subject_data_for_year(year);
-        const result = _.chain(_.keys(single_year_tp_data))
+        const result = _.chain(
+          _.keys(single_year_tp_data))
           .pullAll(["na", "abroad"])
+          
           .map((prov) => {
-            return [prov, single_year_tp_data[prov]/population[prov][i]];
+            const in_year_prov_transfer_payments = single_year_tp_data[prov];
+            const in_year_prov_population = population[prov][i];
+            return [
+              prov,
+              in_year_prov_transfer_payments/in_year_prov_population,
+            ];
           })
           .fromPairs()
           .value();
         return result;
       });
       
-      const data = (show_per_capita) ? tp_pc_data : tp_data;
+      const data_using = (show_per_capita) ? tp_pc_data : tp_data;
 
-      const current_year_data = _.last(data);
+      const current_year_data = _.last(data_using);
       
       //organize data for colour scale
-      const max = _.chain(data)
+      const max = _.chain(data_using)
         .last()
         .values()
         .max()
@@ -134,7 +141,7 @@ class TPMap extends React.Component {
 
       const largest_prov = _.chain(current_year_data)
         .keys()
-        .maxBy((prov) => current_year_data[prov])
+        .maxBy( (prov) => current_year_data[prov] )
         .value();
       const total_sum = _.reduce(
         current_year_data,
@@ -164,10 +171,10 @@ class TPMap extends React.Component {
               <SlideToggle
                 onSelect={changeState}
                 name={text_maker("per_capita_button_title")}
-              />
+              />{/* TODO replace slide toggle with switching panel */}
               <Canada
                 graph_args={{
-                  data: data,
+                  data: data_using,
                   color_scale: color_scale,
                   years: std_years,
                   formatter: formatter,

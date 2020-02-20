@@ -51,7 +51,7 @@ function ensure_loaded({
     .uniqBy()
     .map( table_key => Table.lookup(table_key) )
     .value();
-  //debugger;
+    
   //results can be required explicitly, or be a dependency of a panel/statistic
   const should_load_results = (
     results || 
