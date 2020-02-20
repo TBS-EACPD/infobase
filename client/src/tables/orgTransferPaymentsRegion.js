@@ -72,22 +72,6 @@ export default {
         });
       }
     );
-    //this data should be put into the pop table in the future (find in tp_by_region)
-    // _.each(
-    //   std_years, 
-    //   (header, ix) => {
-    //     this.add_col({
-    //       "simple_default": false,
-    //       "type": "big_int",
-    //       "nick": `${header}_per_capita`,
-    //       "header": `${header}_per_capita`,
-    //       "description": {
-    //         "en": `Amount of Transfer payment per capita in ${header}`,
-    //         "fr": "RTP_TODO",
-    //       },
-    //     });
-    //   }
-    // );
   },
 
   "mapper": (row) => {
