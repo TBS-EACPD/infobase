@@ -706,7 +706,15 @@ export const CommonDonut = function({graph_data, legend_data, graph_height}){
 
   const total = d3.sum( legend_data, _.property('value') );
 
-  return(
+  const table_data = _.chain(graph_data)
+    .map( row => _.assign(row, {percentage: row.value/total}) )
+    .map( row => ({col_data: row, label: row["label"]}) )
+    .value();
+  const table_header_keys = ["label", "value", "percentage"];
+
+  const table = <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
+
+  const graph =
     <div aria-hidden = {true}>
       <div style = {{height: graph_height}}>
         <NivoResponsivePie
@@ -742,8 +750,10 @@ export const CommonDonut = function({graph_data, legend_data, graph_height}){
           </div>
         </div>
       }
-    </div>
-  );
+    </div>;
+  
+  return <InteractiveGraph graph={graph} table={table} />;
+
 };
 
 export class LineBarToggleGraph extends React.Component {
