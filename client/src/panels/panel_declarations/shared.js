@@ -26,7 +26,6 @@ import {
   NivoResponsivePie,
   CommonDonut,
   LineBarToggleGraph,
-  AverageSharePie,
   get_formatter,
   infobase_colors_smart,
 } from '../../charts/nivo/NivoCharts.js';
@@ -498,7 +497,6 @@ export {
   table_common,
   CommonDonut,
   LineBarToggleGraph,
-  AverageSharePie,
   infobase_colors_smart,
 
   // shared panel utils
