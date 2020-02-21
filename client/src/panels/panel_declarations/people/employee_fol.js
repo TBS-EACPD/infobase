@@ -12,8 +12,6 @@ import {
   declare_panel,
 
   LineBarToggleGraph,
-  HeightClippedGraph,
-  AverageSharePie,
 } from "../shared.js"; 
 
 
@@ -106,29 +104,19 @@ export const declare_employee_fol_panel = () => declare_panel({
           </Col>
           { !window.is_a11y_mode &&
             <Col size={12} isGraph>
-              <AverageSharePie
-                panel_args = {panel_args}
-                label_col_header = {text_maker("FOL")}
+              <LineBarToggleGraph 
+                {...{
+                  legend_title: text_maker("FOL"),
+                  bar: true,
+                  graph_options: {
+                    y_axis: text_maker("employees"),
+                    ticks: ticks,
+                    formatter: formats.big_int_raw,
+                  },
+                  initial_graph_mode: "bar_grouped",
+                  data: panel_args,
+                }}
               />
-            </Col>
-          }
-          { !window.is_a11y_mode && level === "dept" &&
-            <Col size={12} isGraph>
-              <HeightClippedGraph>
-                <LineBarToggleGraph 
-                  {...{
-                    legend_title: text_maker("FOL"),
-                    bar: true,
-                    graph_options: {
-                      y_axis: text_maker("employees"),
-                      ticks: ticks,
-                      formatter: formats.big_int_raw,
-                    },
-                    initial_graph_mode: "bar_grouped",
-                    data: panel_args,
-                  }}
-                />
-              </HeightClippedGraph>
             </Col>
           }
           { window.is_a11y_mode &&

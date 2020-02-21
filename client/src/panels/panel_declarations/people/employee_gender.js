@@ -12,8 +12,6 @@ import {
   declare_panel,
 
   LineBarToggleGraph,
-  HeightClippedGraph,
-  AverageSharePie,
 } from "../shared.js"; 
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -103,32 +101,22 @@ export const declare_employee_gender_panel = () => declare_panel({
           <Col size={12} isText>
             <TM k={level+"_employee_gender_text"} args={info} />
           </Col>
-          { !window.is_a11y_mode &&
-            <Col size={12} isGraph>
-              <AverageSharePie
-                panel_args = {panel_args}
-                label_col_header = {text_maker("employee_gender")}
-              />
-            </Col>
-          }
           { !window.is_a11y_mode && level === "dept" &&
             <Col size={12} isGraph>
-              <HeightClippedGraph>
-                <LineBarToggleGraph 
-                  {...{
-                    legend_title: text_maker("employee_gender"),
-                    bar: true,
-                    graph_options: {
-                      y_axis: text_maker("employees"),
-                      ticks: ticks,
-                      formatter: formats.big_int_raw,
-                    },
-                    initial_graph_mode: "bar_grouped",
-                    data: panel_args,
-                  }}
-                />
-              </HeightClippedGraph>
-            </Col>
+              <LineBarToggleGraph 
+                {...{
+                  legend_title: text_maker("employee_gender"),
+                  bar: true,
+                  graph_options: {
+                    y_axis: text_maker("employees"),
+                    ticks: ticks,
+                    formatter: formats.big_int_raw,
+                  },
+                  initial_graph_mode: "bar_grouped",
+                  data: panel_args,
+                }}
+              />
+          </Col>
           }
           { window.is_a11y_mode &&
             <Col size={12} isGraph>
