@@ -11,7 +11,7 @@ import {
   declarative_charts,
 } from "../../shared.js";
 import { Canada } from '../../../../charts/canada/index.js';
-import { SlideToggle, SpinnerWrapper, TabbedContent } from '../../../../components/index.js';
+import { SpinnerWrapper, TabbedContent } from '../../../../components/index.js';
 import { get_static_url, make_request } from '../../../../request_utils.js';
 
 const { std_years } = year_templates;
@@ -100,11 +100,6 @@ class TPMap extends React.Component {
         calculations.subject.level === 'dept' && calculations.subject.id
       );
 
-      // const changeState = () => {
-      //   this.setState({ show_per_capita: !show_per_capita });
-      // };
-
-      //generating both data sets, as a11y table will need both later anyways
       const data_tp = std_years.map(get_subject_data_for_year);
       const data_tppc = std_years.map((year, i) => {
         const single_year_tp_data = get_subject_data_for_year(year);
@@ -125,12 +120,9 @@ class TPMap extends React.Component {
         return result;
       });
       
-      //const data_using = (show_per_capita) ? tp_pc_data : data_tp;
-
       //REGULAR TP VERSION
       const current_year_data_tp = _.last(data_tp);
       
-      //organize data for colour scale
       const max_tp = _.chain(data_tp)
         .last()
         .values()
@@ -162,7 +154,6 @@ class TPMap extends React.Component {
       //TP PER CAPITA VERSION
       const current_year_data_tppc = _.last(data_tppc);
       
-      //organize data for colour scale
       const max_tppc = _.chain(data_tppc)
         .last()
         .values()
@@ -197,22 +188,15 @@ class TPMap extends React.Component {
           {...{ footnotes, sources }}
         >
           <Col size={12} isText>
-            {/*<SlideToggle
-              onSelect={changeState}
-              name={text_maker("per_capita_button_title")}
-            />*/}
-            
             <TabbedContent
               tab_keys={["show_tp", "show_tp_per_capita"]}
               tab_labels={{
                 show_tp: text_maker("show_tp"),
                 show_tp_per_capita: text_maker("show_tp_per_capita"),
               }}
-
               tab_pane_contents={{
                 show_tp: (
                   <div id={"tp_tab_pane"}>
-                    {/* {changeState} */}
                     <TM k="tp_by_region_text" args={text_args_tp} />
                     {!window.is_a11y_mode && 
                       <Canada
@@ -224,13 +208,11 @@ class TPMap extends React.Component {
                         }}
                       />
                     }
-                    {/*<LineBarToggleGraph {...age_group_options} />*/}
                     <div className='clearfix'></div>
                   </div>
                 ), 
                 show_tp_per_capita: (
                   <div id={"tp_per_capita_tab_pane"}>
-                    {/* {changeState} */}
                     <TM k="tp_by_region_text" args={text_args_tppc} />
                     {!window.is_a11y_mode && 
                       <Canada
@@ -242,15 +224,12 @@ class TPMap extends React.Component {
                         }}
                       />
                     }
-                    {/*<LineBarToggleGraph {...avg_age_options} />*/}
                     <div className='clearfix'></div>
                   </div>
                 ),
               }}
             />
-            
           </Col>
-
           { window.is_a11y_mode &&
             <Col size={12} isGraph>
               <A11YTable
