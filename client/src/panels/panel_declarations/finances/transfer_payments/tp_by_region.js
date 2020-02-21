@@ -175,15 +175,40 @@ class TPMap extends React.Component {
                 show_tp: text_maker("show_tp"),
                 show_tp_per_capita: text_maker("show_tp_per_capita"),
               }}
+
               tab_pane_contents={{
                 show_tp: (
                   <div id={"tp_tab_pane"}>
+                    {/* {changeState} */}
+                    <TM k="tp_by_region_text" args={text_args} />
+                    {!window.is_a11y_mode && 
+                      <Canada
+                        graph_args={{
+                          data: data_using,
+                          color_scale: color_scale,
+                          years: std_years,
+                          formatter: formatter,
+                        }}
+                      />
+                    }
                     {/*<LineBarToggleGraph {...age_group_options} />*/}
                     <div className='clearfix'></div>
                   </div>
                 ), 
                 show_tp_per_capita: (
                   <div id={"tp_per_capita_tab_pane"}>
+                    {/* {changeState} */}
+                    <TM k="tp_by_region_text" args={text_args} />
+                    {!window.is_a11y_mode && 
+                      <Canada
+                        graph_args={{
+                          data: data_using,
+                          color_scale: color_scale,
+                          years: std_years,
+                          formatter: formatter,
+                        }}
+                      />
+                    }
                     {/*<LineBarToggleGraph {...avg_age_options} />*/}
                     <div className='clearfix'></div>
                   </div>
@@ -191,21 +216,8 @@ class TPMap extends React.Component {
               }}
             />
             
-            <TM k="tp_by_region_text" args={text_args} />
           </Col>
 
-          {!window.is_a11y_mode &&
-            <Col size={12} isGraph>
-              <Canada
-                graph_args={{
-                  data: data_using,
-                  color_scale: color_scale,
-                  years: std_years,
-                  formatter: formatter,
-                }}
-              />
-            </Col>
-          }
           { window.is_a11y_mode &&
             <Col size={12} isGraph>
               <A11YTable
