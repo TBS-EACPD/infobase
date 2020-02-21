@@ -685,7 +685,7 @@ NivoResponsiveLine.defaultProps = {
 
 
 
-export const CommonDonut = function({graph_data, legend_data, graph_height}){
+export const CommonDonut = function({graph_data, legend_data, legend_header_key, graph_height, display_horizontal}){
   const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
 
   const has_neg = _.chain(legend_data)
@@ -715,41 +715,40 @@ export const CommonDonut = function({graph_data, legend_data, graph_height}){
   const table = <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
 
   const graph =
-    <div aria-hidden = {true}>
-      <div style = {{height: graph_height}}>
+    <div className={display_horizontal ? classNames("average-share-pie__horizontal","average-share-pie") : "average-share-pie"} aria-hidden = {true}>
+      <div className="average-share-pie__graph" style = {{height: graph_height}}>
         <NivoResponsivePie
           data = {graph_data}
           colorBy = {d=>color_scale(d.label)}
           total = {total}
         />
       </div>
-      { !has_neg && 
-        <div className="centerer" style={{marginTop: "-40px"}}>
-          <div 
-            style={{
-              width: "100%", /* IE 11 */ 
-              maxWidth: '400px', 
-              flexGrow: 1,
-            }}
-          >
+      <div className="average-share-pie__legend">
+        <div className="centerer">
+          <div className="centerer-IE-fix">
+            { legend_header_key && 
+              <span className="average-share-pie__legend-header">
+                {text_maker(legend_header_key)}
+              </span>
+            }
             <TabularPercentLegend
               items={legend_items}
               get_right_content={
                 (item) => (
-                  <div style={{width: "120px", display: "flex"}}>
-                    <div style={{width: "60px"}}>
+                  <div>
+                    <span className="average-share-pie__legend-data">
                       <Format type="compact1" content={item.value} />
-                    </div>
-                    <div style={{width: "60px"}}>
+                    </span>
+                    <span className="average-share-pie__legend-data">
                       <Format type="percentage1" content={(item.value)*Math.pow(total,-1)} />
-                    </div>
+                    </span>
                   </div>
                 )
               }
             />
           </div>
         </div>
-      }
+      </div>
     </div>;
   
   return <InteractiveGraph graph={graph} table={table} />;
@@ -1015,6 +1014,8 @@ LineBarToggleGraph.defaultProps = {
 
 
 export const AverageSharePie = ({panel_args, sort_func}) => {
+  const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
+
   const used_sort_func = sort_func || ((a,b) => b.value-a.value);
 
   const data = panel_args
@@ -1026,7 +1027,6 @@ export const AverageSharePie = ({panel_args, sort_func}) => {
       })
     ).sort(used_sort_func);
 
-  const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
 
   const legend_items = _.map(
     data, 
@@ -1041,7 +1041,7 @@ export const AverageSharePie = ({panel_args, sort_func}) => {
   return (
     <div 
       aria-hidden={true}
-      className="average-share-pie"
+      className={classNames("average-share-pie__horizontal","average-share-pie")}
     >
       <div className="average-share-pie__graph" style = {{height: '350px'}}>
         <NivoResponsivePie
@@ -1060,7 +1060,7 @@ export const AverageSharePie = ({panel_args, sort_func}) => {
       <div className="average-share-pie__legend">
         <div className="centerer">
           <div className="centerer-IE-fix">
-            <span className="average-share-percent-header">
+            <span className="average-share-pie__legend-header">
               {text_maker("five_year_percent_header")}
             </span>
             <TabularPercentLegend
