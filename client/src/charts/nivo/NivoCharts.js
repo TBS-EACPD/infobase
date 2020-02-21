@@ -685,7 +685,7 @@ NivoResponsiveLine.defaultProps = {
 
 
 
-export const CommonDonut = function({graph_data, legend_data, legend_header_key, graph_height, display_horizontal}){
+export const CommonDonut = function({graph_data, legend_data, graph_height, display_horizontal}){
   const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
 
   const has_neg = _.chain(legend_data)
@@ -726,11 +726,6 @@ export const CommonDonut = function({graph_data, legend_data, legend_header_key,
       <div className="average-share-pie__legend">
         <div className="centerer">
           <div className="centerer-IE-fix">
-            { legend_header_key && 
-              <span className="average-share-pie__legend-header">
-                {text_maker(legend_header_key)}
-              </span>
-            }
             <TabularPercentLegend
               items={legend_items}
               get_right_content={
