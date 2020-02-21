@@ -6,7 +6,7 @@ import { Fragment } from 'react';
 import classNames from 'classnames';
 import { IconZoomIn, IconZoomOut, IconTable } from '../../icons/icons.js';
 import { create_text_maker } from '../../models/text.js';
-import { breakpoints } from '../core/breakpoint_defs.js';
+import { breakpoints } from '../../core/breakpoint_defs.js';
 import MediaQuery from 'react-responsive';
 import {
   DisplayTable,
@@ -14,7 +14,6 @@ import {
   Format,
 } from '../../components/index.js';
 import { TabularPercentLegend, GraphLegend } from '../declarative_charts.js';
-import { breakpoints } from '../../core/breakpoint_defs.js';
 import { newIBCategoryColors } from '../../core/color_schemes.js';
 import { infobase_colors_smart, get_formatter } from '../shared.js';
 import './NivoCharts.scss';
@@ -688,12 +687,7 @@ NivoResponsiveLine.defaultProps = {
 export const CommonDonut = function({graph_data, legend_data, graph_height, display_horizontal}){
   const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
 
-  const has_neg = _.chain(legend_data)
-    .map('value')
-    .min()
-    .value() < 0;
-
-  const legend_items = !has_neg && _.chain(legend_data)
+  const legend_items = _.chain(legend_data)
     .sortBy('value')
     .reverse()
     .map( ({value, label }) => ({ 
@@ -704,10 +698,14 @@ export const CommonDonut = function({graph_data, legend_data, graph_height, disp
     }))
     .value();
 
-  const total = d3.sum( legend_data, _.property('value') );
+  const absolute_total = _.reduce(
+    legend_data,
+    (sum, {value}) => sum + Math.abs(value),
+    0 
+  );
 
   const table_data = _.chain(graph_data)
-    .map( row => _.assign(row, {percentage: row.value/total}) )
+    .map( row => _.assign(row, {percentage: row.value/absolute_total}) )
     .map( row => ({col_data: row, label: row["label"]}) )
     .value();
   const table_header_keys = ["label", "value", "percentage"];
@@ -720,7 +718,7 @@ export const CommonDonut = function({graph_data, legend_data, graph_height, disp
         <NivoResponsivePie
           data = {graph_data}
           colorBy = {d=>color_scale(d.label)}
-          total = {total}
+          total = {absolute_total}
         />
       </div>
       <div className="common-donut__legend">
@@ -735,7 +733,7 @@ export const CommonDonut = function({graph_data, legend_data, graph_height, disp
                       <Format type="compact1" content={item.value} />
                     </span>
                     <span className="common-donut__legend-data">
-                      <Format type="percentage1" content={(item.value)*Math.pow(total,-1)} />
+                      <Format type="percentage1" content={(item.value)*Math.pow(absolute_total,-1)} />
                     </span>
                   </div>
                 )
