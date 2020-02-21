@@ -39,15 +39,19 @@
   width: 100%;
   flex-grow: 1;
 
-  & > .average-share-percent-header {
+  & > .average-share-pie__legend-header {
     display: inline-block;
     width: 100%;
     text-align: right;
     font-weight: bold;
   }
 }
+.average-share-pie__legend-data {
+  padding-left: 5px;
+  padding-right: 5px;
+}
 @media (min-width:$minMediumDevice){
-  div.average-share-pie{
+  div.average-share-pie__horizontal{
     display: flex;
     justify-content: space-around;
 
