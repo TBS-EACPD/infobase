@@ -304,6 +304,22 @@ a.btn-ib-light {
   color: $backgroundColor !important;
 }
 
+.btn-ib-array {
+  border-width: 2px 0px;
+  border-radius: 0px;
+}
+.btn-ib-array:first-child {
+  border-left-width: 2px;
+  border-top-left-radius: $standardBorderRadius;
+  border-bottom-left-radius: $standardBorderRadius;
+}
+.btn-ib-array:last-child {
+  border-right-width: 2px;
+  border-top-right-radius: $standardBorderRadius;
+  border-bottom-right-radius: $standardBorderRadius;
+}
+
+
 .btn-ib-toggle {
   border: 2px solid $buttonPrimaryColor;
   border-radius: $standardBorderRadius;

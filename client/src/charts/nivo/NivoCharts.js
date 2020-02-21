@@ -131,22 +131,24 @@ class InteractiveGraph extends React.Component{
 
     return (
       <Fragment>
-        { !disable_table_view && 
-          <button
-            style={{
-              zIndex: 999,
-            }}
-            className="btn-ib-primary"
-            onClick={ () => this.setState({ show_table: !show_table }) }
-          >
-            { <IconTable
-              title={text_maker("show_table")}
-              color={window.infobase_color_constants.tertiaryColor}
-              alternate_color={window.infobase_color_constants.primaryColor}
-            /> }
-          </button>
-        }
-        { _.map(other_buttons, (button,i) => <span key={i}>{button}</span> ) }
+        <div> {/* Don't get rid of this, need it for proper functioning of the child selectors on the buttons */}
+          { !disable_table_view && 
+            <button
+              className={classNames("btn-ib-primary","btn-ib-array")}
+              style={{
+                zIndex: 999,
+              }}
+              onClick={ () => this.setState({ show_table: !show_table }) }
+            >
+              { <IconTable
+                title={text_maker("show_table")}
+                color={window.infobase_color_constants.secondaryColor}
+                alternate_color={window.infobase_color_constants.backgroundColor}
+              /> }
+            </button>
+          }
+          { _.map(other_buttons, (button,i) => <Fragment key={i}>{button}</Fragment> ) }
+        </div>
         { graph }
         <StatelessModal
           show={ show_table }
@@ -578,7 +580,7 @@ export class NivoResponsiveLine extends React.Component {
 
     const zoom_button = (show_yaxis_zoom && !enableArea) ?
       <button
-        className="btn-ib-primary"
+        className={classNames("btn-ib-primary","btn-ib-array")}
         onClick={ 
           () => {
             this.setState({
@@ -590,13 +592,13 @@ export class NivoResponsiveLine extends React.Component {
         { this.state.y_scale_zoomed ? 
             <IconZoomOut
               title={text_maker("zoom_out")}
-              color={window.infobase_color_constants.tertiaryColor}
-              alternate_color={window.infobase_color_constants.primaryColor}
+              color={window.infobase_color_constants.secondaryColor}
+              alternate_color={window.infobase_color_constants.backgroundColor}
             /> : 
             <IconZoomIn 
               title={text_maker("zoom_in")}
-              color={window.infobase_color_constants.tertiaryColor}
-              alternate_color={window.infobase_color_constants.primaryColor}
+              color={window.infobase_color_constants.secondaryColor}
+              alternate_color={window.infobase_color_constants.backgroundColor}
             />
         }
       </button> :
