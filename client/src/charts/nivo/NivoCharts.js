@@ -715,15 +715,15 @@ export const CommonDonut = function({graph_data, legend_data, graph_height, disp
   const table = <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
 
   const graph =
-    <div className={display_horizontal ? classNames("average-share-pie__horizontal","average-share-pie") : "average-share-pie"} aria-hidden = {true}>
-      <div className="average-share-pie__graph" style = {{height: graph_height}}>
+    <div className={display_horizontal ? classNames("common-donut__horizontal","common-donut") : "common-donut"} aria-hidden = {true}>
+      <div className="common-donut__graph" style = {{height: graph_height}}>
         <NivoResponsivePie
           data = {graph_data}
           colorBy = {d=>color_scale(d.label)}
           total = {total}
         />
       </div>
-      <div className="average-share-pie__legend">
+      <div className="common-donut__legend">
         <div className="centerer">
           <div className="centerer-IE-fix">
             <TabularPercentLegend
@@ -731,10 +731,10 @@ export const CommonDonut = function({graph_data, legend_data, graph_height, disp
               get_right_content={
                 (item) => (
                   <div>
-                    <span className="average-share-pie__legend-data">
+                    <span className="common-donut__legend-data">
                       <Format type="compact1" content={item.value} />
                     </span>
-                    <span className="average-share-pie__legend-data">
+                    <span className="common-donut__legend-data">
                       <Format type="percentage1" content={(item.value)*Math.pow(total,-1)} />
                     </span>
                   </div>
