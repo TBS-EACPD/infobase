@@ -11,7 +11,7 @@ import {
   declarative_charts,
 } from "../../shared.js";
 import { Canada } from '../../../../charts/canada/index.js';
-import { SlideToggle, SpinnerWrapper, TabbedControls, TabbedContent } from '../../../../components/index.js';
+import { SlideToggle, SpinnerWrapper, TabbedContent } from '../../../../components/index.js';
 import { get_static_url, make_request } from '../../../../request_utils.js';
 
 const { std_years } = year_templates;
@@ -95,18 +95,18 @@ class TPMap extends React.Component {
       const { tables } = calculations.panel_args;
       const { tp } = tables;
 
-      const changeState = () => {
-        this.setState({ show_per_capita: !show_per_capita });
-      };
-
       const get_subject_data_for_year = (year) => tp.prov_code(
         year,
         calculations.subject.level === 'dept' && calculations.subject.id
       );
 
+      // const changeState = () => {
+      //   this.setState({ show_per_capita: !show_per_capita });
+      // };
+
       //generating both data sets, as a11y table will need both later anyways
-      const tp_data = std_years.map(get_subject_data_for_year);
-      const tp_pc_data = std_years.map((year, i) => {
+      const data_tp = std_years.map(get_subject_data_for_year);
+      const data_tppc = std_years.map((year, i) => {
         const single_year_tp_data = get_subject_data_for_year(year);
         const result = _.chain(
           _.keys(single_year_tp_data))
@@ -125,34 +125,67 @@ class TPMap extends React.Component {
         return result;
       });
       
-      const data_using = (show_per_capita) ? tp_pc_data : tp_data;
+      //const data_using = (show_per_capita) ? tp_pc_data : data_tp;
 
-      const current_year_data = _.last(data_using);
+      //REGULAR TP VERSION
+      const current_year_data_tp = _.last(data_tp);
       
       //organize data for colour scale
-      const max = _.chain(data_using)
+      const max_tp = _.chain(data_tp)
         .last()
         .values()
         .max()
         .value();
-      const color_scale = d3.scaleLinear()
-        .domain([0, max])
+      const color_scale_tp = d3.scaleLinear()
+        .domain([0, max_tp])
         .range([0.2, 1]);
 
-      const largest_prov = _.chain(current_year_data)
+      const largest_prov_tp = _.chain(current_year_data_tp)
         .keys()
-        .maxBy( (prov) => current_year_data[prov] )
+        .maxBy( (prov) => current_year_data_tp[prov] )
         .value();
-      const total_sum = _.reduce(
-        current_year_data,
+      const total_sum_tp = _.reduce(
+        current_year_data_tp,
         (sum, value) => sum += value,
         0
       );
-      const percent_of_total = current_year_data[largest_prov] / total_sum;
-      const text_args = {
-        largest_prov: provinces_with_article[largest_prov].text,
-        total_sum: formatter(total_sum),
-        percent_of_total: formats["percentage1_raw"](percent_of_total),
+      const percent_of_total_tp = current_year_data_tp[largest_prov_tp] / total_sum_tp;
+      const text_args_tp = {
+        largest_prov: provinces_with_article[largest_prov_tp].text,
+        total_sum: formatter(total_sum_tp),
+        percent_of_total: formats["percentage1_raw"](percent_of_total_tp),
+        subject: calculations.subject,
+        show_per_capita: show_per_capita,
+      };
+
+
+      //TP PER CAPITA VERSION
+      const current_year_data_tppc = _.last(data_tppc);
+      
+      //organize data for colour scale
+      const max_tppc = _.chain(data_tppc)
+        .last()
+        .values()
+        .max()
+        .value();
+      const color_scale_tppc = d3.scaleLinear()
+        .domain([0, max_tppc])
+        .range([0.2, 1]);
+
+      const largest_prov_tppc = _.chain(current_year_data_tppc)
+        .keys()
+        .maxBy( (prov) => current_year_data_tppc[prov] )
+        .value();
+      const total_sum_tppc = _.reduce(
+        current_year_data_tppc,
+        (sum, value) => sum += value,
+        0
+      );
+      const percent_of_total_tppc = current_year_data_tppc[largest_prov_tppc] / total_sum_tppc;
+      const text_args_tppc = {
+        largest_prov: provinces_with_article[largest_prov_tppc].text,
+        total_sum: formatter(total_sum_tppc),
+        percent_of_total: formats["percentage1_raw"](percent_of_total_tppc),
         subject: calculations.subject,
         show_per_capita: show_per_capita,
       };
@@ -180,12 +213,12 @@ class TPMap extends React.Component {
                 show_tp: (
                   <div id={"tp_tab_pane"}>
                     {/* {changeState} */}
-                    <TM k="tp_by_region_text" args={text_args} />
+                    <TM k="tp_by_region_text" args={text_args_tp} />
                     {!window.is_a11y_mode && 
                       <Canada
                         graph_args={{
-                          data: data_using,
-                          color_scale: color_scale,
+                          data: data_tp,
+                          color_scale: color_scale_tp,
                           years: std_years,
                           formatter: formatter,
                         }}
@@ -198,12 +231,12 @@ class TPMap extends React.Component {
                 show_tp_per_capita: (
                   <div id={"tp_per_capita_tab_pane"}>
                     {/* {changeState} */}
-                    <TM k="tp_by_region_text" args={text_args} />
+                    <TM k="tp_by_region_text" args={text_args_tppc} />
                     {!window.is_a11y_mode && 
                       <Canada
                         graph_args={{
-                          data: data_using,
-                          color_scale: color_scale,
+                          data: data_tppc,
+                          color_scale: color_scale_tppc,
                           years: std_years,
                           formatter: formatter,
                         }}
@@ -223,12 +256,12 @@ class TPMap extends React.Component {
               <A11YTable
                 label_col_header = {text_maker("tp_a11y_table_title")}
                 data_col_headers = {_.map( std_years, y => run_template(y) )}
-                data = { prepare_data_for_a11y_table(tp_data) }
+                data = { prepare_data_for_a11y_table(data_tp) }
               />
               <A11YTable
                 label_col_header = {text_maker("tp_pc_a11y_table_title")}
                 data_col_headers = {_.map( std_years, y => run_template(y) )}
-                data = { prepare_data_for_a11y_table(tp_pc_data) }
+                data = { prepare_data_for_a11y_table(data_tppc) }
               />
             </Col>
           }
