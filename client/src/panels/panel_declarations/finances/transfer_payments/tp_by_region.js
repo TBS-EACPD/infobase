@@ -11,7 +11,7 @@ import {
   declarative_charts,
 } from "../../shared.js";
 import { Canada } from '../../../../charts/canada/index.js';
-import { SlideToggle, SpinnerWrapper } from '../../../../components/index.js';
+import { RadioButtons, SlideToggle, SpinnerWrapper, TabbedControls, TabbedContent } from '../../../../components/index.js';
 import { get_static_url, make_request } from '../../../../request_utils.js';
 
 const { std_years } = year_templates;
@@ -164,14 +164,53 @@ class TPMap extends React.Component {
           {...{ footnotes, sources }}
         >
           <Col size={12} isText>
+            <SlideToggle
+              onSelect={changeState}
+              name={text_maker("per_capita_button_title")}
+            />
+            
+            <div className="centerer">
+              <RadioButtons
+                options={[
+                  {
+                    id: "tp",
+                    //active: this.setState({ show_per_capita: !show_per_capita }),
+                    display: <TM k="show_tp" />,
+                  },
+                  {
+                    id: "tp_per_capita",
+                    //active: this.setState({ show_per_capita: !show_per_capita }),
+                    display: <TM k="show_tp_per_capita" />,
+                  },
+                ]}
+                //onChange={ id => history.push(`/compare_estimates/${id}`) }
+                //onChange={(event) => onSelect(event.target.value)}
+                //onChange={this.setState({ show_per_capita: !show_per_capita })}
+              />
+            </div>
+          
+            {/* TODO replace slide toggle with switching panel
+            
+            <TabbedControls
+              tab_callback={ (year) => this.setState({loading: true, selected_year: year}) }
+              tab_options={
+                _.map(
+                  treatAsProgram(subject) ? years_with_data : budget_years,
+                  (year) => ({
+                    key: year,
+                    label: `${text_maker("budget_name_header")} ${year}`,
+                    is_open: selected_year === year,
+                    is_disabled: !(_.includes(years_with_data, year)),
+                  })
+                )
+              }
+            /> */}
+            
             <TM k="tp_by_region_text" args={text_args} />
           </Col>
+
           {!window.is_a11y_mode &&
             <Col size={12} isGraph>
-              <SlideToggle
-                onSelect={changeState}
-                name={text_maker("per_capita_button_title")}
-              />{/* TODO replace slide toggle with switching panel */}
               <Canada
                 graph_args={{
                   data: data_using,
