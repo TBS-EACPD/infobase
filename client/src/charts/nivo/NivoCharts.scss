@@ -1,23 +1,5 @@
 @import "../../common_css/common-variables";
 
-.btn-ib-zoom { 
-  background-color: $backgroundColor;
-  border: 2px solid $backgroundColor;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-  color: $tertiaryColor !important;
-  border-radius: $standardBorderRadius;
-}
-
-.btn-table-view { 
-  background-color: $backgroundColor;
-  border: 2px solid $secondaryColor;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-  color: $secondaryColor !important;
-  border-radius: $standardBorderRadius;
-}
-
 .nivo-tooltip {
   width: 100%;
   border-collapse: collapse;
