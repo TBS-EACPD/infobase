@@ -132,7 +132,7 @@ class InteractiveGraph extends React.Component{
     return (
       <Fragment>
         <div> {/* Don't get rid of this, need it for proper functioning of the child selectors on the buttons */}
-          { !disable_table_view && 
+          { table && 
             <button
               className={classNames("btn-ib-primary","btn-ib-array")}
               style={{
@@ -325,6 +325,7 @@ export class NivoResponsiveBar extends React.Component{
       labelTextColor,
       borderWidth,
       label_col_header,
+      disable_table_view,
     } = this.props;
 
     legends && (legends[0].symbolShape = fixedSymbolShape);
@@ -332,7 +333,7 @@ export class NivoResponsiveBar extends React.Component{
     const table_data = _.map(data, row => ({col_data: row, label: row[indexBy], sort_keys: row}));
     const table_header_keys = _.concat([indexBy],keys);
 
-    const table = <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
+    const table = !disable_table_view && <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
     
     // have to have an empty string in key to make sure that negative bars will be displayed
     
@@ -431,6 +432,7 @@ export class NivoResponsiveHBar extends React.Component{
       label,
       labelSkipWidth,
       markers,
+      disable_table_view,
     } = this.props;
     legends && (legends[0].symbolShape = fixedSymbolShape);
 
@@ -438,7 +440,7 @@ export class NivoResponsiveHBar extends React.Component{
     const table_data = _.map(data, row => ({col_data: row, label: row[indexBy], sort_keys: row}));
     const table_header_keys = _.concat([indexBy],keys);
     
-    const table = <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
+    const table = !disable_table_view && <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
     
     
     //have to have an empty string in key to make sure
@@ -553,6 +555,7 @@ export class NivoResponsiveLine extends React.Component {
       markers,
       legends,
       layers,
+      disable_table_view,
     } = this.props;
 
     const {
@@ -574,7 +577,7 @@ export class NivoResponsiveLine extends React.Component {
       .uniq()
       .value() );
     
-    const table = <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
+    const table = !disable_table_view && <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
 
     const zoom_button = (show_yaxis_zoom && !enableArea) ?
       <button
@@ -684,7 +687,7 @@ NivoResponsiveLine.defaultProps = {
 
 
 
-export const CommonDonut = function({graph_data, legend_data, graph_height, display_horizontal}){
+export const CommonDonut = function({graph_data, legend_data, graph_height, display_horizontal, disable_table_view}){
   const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
 
   const legend_items = _.chain(legend_data)
@@ -710,7 +713,7 @@ export const CommonDonut = function({graph_data, legend_data, graph_height, disp
     .value();
   const table_header_keys = ["label", "value", "percentage"];
 
-  const table = <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
+  const table = !disable_table_view && <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
 
   const graph =
     <div className={display_horizontal ? classNames("common-donut__horizontal","common-donut") : "common-donut"} aria-hidden = {true}>

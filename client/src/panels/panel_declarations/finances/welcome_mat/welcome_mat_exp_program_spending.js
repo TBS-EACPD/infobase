@@ -135,6 +135,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
       enableGridY: false,
       remove_left_axis: true,
       show_yaxis_zoom: false,
+      disable_table_view: true,
       min: _.min(raw_data) * 0.9,
       max: _.max(raw_data) * 1.1,
       legends: [
@@ -156,7 +157,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
         right: 40,
         bottom: 70,
         left: 40,
-      },  
+      },
       ...(gap_year && both_exists && _.includes(series_labels, trivial_text_maker("planned_spending")) && {
         markers: [
           {

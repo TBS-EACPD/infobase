@@ -134,6 +134,7 @@ export const format_and_get_fte = (type, info, subject) => {
       enableGridY: false,
       remove_left_axis: true,
       show_yaxis_zoom: false,
+      disable_table_view: true,
       margin: {
         top: 10,
         right: 40,
