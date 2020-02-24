@@ -82,6 +82,7 @@ class CanadaGraphBarLegend extends React.Component {
             enableGridX={false}
             enableGridY={false}
             isInteractive={false}
+            disable_table_view={true}
           />
         </div>
       </Fragment>
