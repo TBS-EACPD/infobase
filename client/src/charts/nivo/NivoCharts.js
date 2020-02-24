@@ -109,6 +109,16 @@ const fixedSymbolShape = ({
   />
 );
 
+
+const bar_table_data = (data, indexBy, table_view_format) => _.chain(data)
+  .map(row => _.chain(row)
+    .toPairs()
+    .map(r => r[0]===indexBy ? r : [r[0],table_view_format(r[1])] )
+    .fromPairs()
+    .value() )
+  .map(row => ({col_data: row, label: row[indexBy], sort_keys: row}))
+  .value();
+
 class InteractiveGraph extends React.Component{
   constructor(props){
     super(props);
@@ -177,6 +187,7 @@ const general_default_props = {
   enableGridX: true,
   enableGridY: true,
   disable_table_view: false,
+  table_view_format: formats.dollar_raw,
   margin: {
     top: 50,
     right: 40,
@@ -325,11 +336,12 @@ export class NivoResponsiveBar extends React.Component{
       labelTextColor,
       borderWidth,
       disable_table_view,
+      table_view_format,
     } = this.props;
 
     legends && (legends[0].symbolShape = fixedSymbolShape);
 
-    const table_data = _.map(data, row => ({col_data: row, label: row[indexBy], sort_keys: row}));
+    const table_data = bar_table_data(data, indexBy, table_view_format);
     const table_header_keys = _.concat([indexBy],keys);
 
     const table = !disable_table_view && <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
@@ -398,6 +410,7 @@ NivoResponsiveBar.defaultProps = {
 };
 
 
+
 export class NivoResponsiveHBar extends React.Component{
   render(){
     const{
@@ -432,11 +445,12 @@ export class NivoResponsiveHBar extends React.Component{
       labelSkipWidth,
       markers,
       disable_table_view,
+      table_view_format,
     } = this.props;
     legends && (legends[0].symbolShape = fixedSymbolShape);
 
 
-    const table_data = _.map(data, row => ({col_data: row, label: row[indexBy], sort_keys: row}));
+    const table_data = bar_table_data(data, indexBy, table_view_format);
     const table_header_keys = _.concat([indexBy],keys);
     
     const table = !disable_table_view && <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
@@ -555,6 +569,7 @@ export class NivoResponsiveLine extends React.Component {
       legends,
       layers,
       disable_table_view,
+      table_view_format,
     } = this.props;
 
     const {
@@ -565,7 +580,7 @@ export class NivoResponsiveLine extends React.Component {
 
     const table_data = _.map(data, row => ({
       col_data: _.chain(row.data)
-        .map(d=>[d.x,d.y])
+        .map(d => [d.x,table_view_format(d.y)])
         .fromPairs()
         .assign({label: row.id})
         .value(),
@@ -651,8 +666,6 @@ export class NivoResponsiveLine extends React.Component {
     return <InteractiveGraph graph={graph} table={table} other_buttons={[zoom_button]}/>;
   }
 }
-
-
 NivoResponsiveLine.defaultProps = {
   ...general_default_props,
   tooltip: (slice, tooltip_formatter) => default_tooltip(
@@ -684,8 +697,6 @@ NivoResponsiveLine.defaultProps = {
 };
 
 
-
-
 export const CommonDonut = function({graph_data, legend_data, graph_height, display_horizontal, disable_table_view}){
   const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
 
@@ -706,11 +717,13 @@ export const CommonDonut = function({graph_data, legend_data, graph_height, disp
     0 
   );
 
+  const table_data_format = formats.dollar_raw;// TODO: make this a prop
+
   const table_data = _.chain(graph_data)
-    .map( row => _.assign(row, {percentage: row.value/absolute_total}) )
+    .map( row => _.assign(row, {percentage: formats.percentage_raw(row.value/absolute_total), formatted_value: table_data_format(row.value)}) )
     .map( row => ({col_data: row, label: row["label"]}) )
     .value();
-  const table_header_keys = ["label", "value", "percentage"];
+  const table_header_keys = ["label", "formatted_value", "percentage"];
 
   const table = !disable_table_view && <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
 
