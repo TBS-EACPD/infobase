@@ -552,8 +552,6 @@ export class NivoResponsiveLine extends React.Component {
       tooltip,
       markers,
       legends,
-      magnify_glass_translateX,
-      magnify_glass_translateY,
       layers,
     } = this.props;
 
