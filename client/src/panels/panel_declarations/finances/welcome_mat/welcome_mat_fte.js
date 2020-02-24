@@ -133,7 +133,7 @@ export const format_and_get_fte = (type, info, subject) => {
       colorBy: d => colors(d.id),
       enableGridY: false,
       remove_left_axis: true,
-      show_yaxis_zoom: false,
+      disable_yaxis_zoom: true,
       disable_table_view: true,
       margin: {
         top: 10,

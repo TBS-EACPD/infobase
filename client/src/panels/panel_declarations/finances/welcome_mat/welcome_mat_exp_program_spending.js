@@ -134,7 +134,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
       colorBy: d => colors(d.id),
       enableGridY: false,
       remove_left_axis: true,
-      show_yaxis_zoom: false,
+      disable_yaxis_zoom: true,
       disable_table_view: true,
       min: _.min(raw_data) * 0.9,
       max: _.max(raw_data) * 1.1,

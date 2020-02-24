@@ -177,6 +177,7 @@ const general_default_props = {
   enableLabel: false,
   enableGridX: true,
   enableGridY: true,
+  disable_table_view: false,
   margin: {
     top: 50,
     right: 40,
@@ -540,7 +541,7 @@ export class NivoResponsiveLine extends React.Component {
       enableGridX,
       enableGridY,
       left_axis,
-      show_yaxis_zoom,
+      disable_yaxis_zoom,
       yScale,
       motion_damping,
       motion_stiffness,
@@ -579,7 +580,7 @@ export class NivoResponsiveLine extends React.Component {
     
     const table = !disable_table_view && <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
 
-    const zoom_button = (show_yaxis_zoom && !enableArea) ?
+    const zoom_button = (!disable_yaxis_zoom && !enableArea) ?
       <button
         className={classNames("btn-ib-primary","btn-ib-array")}
         onClick={ 
@@ -674,7 +675,7 @@ NivoResponsiveLine.defaultProps = {
   enableDotLabel: false,
   enableArea: false,
   stacked: false,
-  show_yaxis_zoom: true,
+  disable_yaxis_zoom: false,
   yScale: {
     type: "linear",
     zoomed: false,
