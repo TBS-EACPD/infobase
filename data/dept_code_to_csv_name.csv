@@ -94,6 +94,7 @@
 "CAS","program_sobjs"
 "CAS","program_spending"
 "CAS","program_vote_stat"
+"CASDO","crso"
 "CASDO","org_vote_stat_estimates"
 "CAT","crso"
 "CAT","org_sobjs"
