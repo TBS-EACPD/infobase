@@ -68,7 +68,6 @@ class TPMap extends React.Component {
     super(props);
 
     this.state = {
-      show_per_capita: false,
       loading: true,
       population: {},
     };
@@ -84,7 +83,7 @@ class TPMap extends React.Component {
   }
   render(){
     const { calculations, footnotes, sources } = this.props;
-    const { show_per_capita, loading, population } = this.state;
+    const { loading, population } = this.state;
 
     if (loading) {
       return (
@@ -147,7 +146,7 @@ class TPMap extends React.Component {
         total_sum: formatter(total_sum_tp),
         percent_of_total: formats["percentage1_raw"](percent_of_total_tp),
         subject: calculations.subject,
-        show_per_capita: show_per_capita,
+        show_per_capita: false,
       };
 
 
@@ -178,7 +177,7 @@ class TPMap extends React.Component {
         total_sum: formatter(total_sum_tppc),
         percent_of_total: formats["percentage1_raw"](percent_of_total_tppc),
         subject: calculations.subject,
-        show_per_capita: show_per_capita,
+        show_per_capita: true,
       };
 
 
