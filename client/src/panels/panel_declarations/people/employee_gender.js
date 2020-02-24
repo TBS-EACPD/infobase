@@ -116,7 +116,7 @@ export const declare_employee_gender_panel = () => declare_panel({
                   data: panel_args,
                 }}
               />
-          </Col>
+            </Col>
           }
           { window.is_a11y_mode &&
             <Col size={12} isGraph>

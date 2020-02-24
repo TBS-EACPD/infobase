@@ -4,7 +4,7 @@ import { InfographicPanel, StdPanel, TextPanel, Col } from './InfographicPanel.j
 
 import { formats, dollar_formats, formatter } from '../../core/format.js';
 import { PanelRegistry, layout_types } from '../PanelRegistry.js';
-import { newIBCategoryColors, newIBLightCategoryColors, newIBDarkCategoryColors, NA_color } from '../../core/color_schemes.js';
+import { newIBCategoryColors, newIBLightCategoryColors, newIBDarkCategoryColors } from '../../core/color_schemes.js';
 import { breakpoints } from '../../core/breakpoint_defs.js';
 import { Table } from '../../core/TableClass.js';
 import { Statistics } from '../../core/Statistics.js';
