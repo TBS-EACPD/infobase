@@ -1,4 +1,5 @@
 import text from "./employee_executive_level.yaml";
+import { AverageSharePie } from './AverageSharePie.js';
 import {
   formats,
   run_template,
@@ -12,6 +13,7 @@ import {
   declare_panel,
 
   LineBarToggleGraph,
+  HeightClippedGraph,
 } from "../shared.js"; 
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -93,18 +95,28 @@ export const declare_employee_executive_level_panel = () => declare_panel({
           </Col>
           { !window.is_a11y_mode &&
             <Col size={12} isGraph>
-              <LineBarToggleGraph
-                {...{
-                  legend_title: text_maker("ex_level"),
-                  bar: true,
-                  graph_options: {
-                    y_axis: text_maker("employees"),
-                    ticks: ticks,
-                    formatter: formats.big_int_raw,
-                  },
-                  initial_graph_mode: "bar_stacked",
-                  data: panel_args,
-                }}
+              <HeightClippedGraph>
+                <LineBarToggleGraph
+                  {...{
+                    legend_title: text_maker("ex_level"),
+                    bar: true,
+                    graph_options: {
+                      y_axis: text_maker("employees"),
+                      ticks: ticks,
+                      formatter: formats.big_int_raw,
+                    },
+                    initial_graph_mode: "bar_stacked",
+                    data: panel_args,
+                  }}
+                />
+              </HeightClippedGraph>
+            </Col>
+          }
+          { !window.is_a11y_mode &&
+            <Col size={12} isGraph>
+              <AverageSharePie
+                panel_args = {panel_args}
+                label_col_header = {text_maker("ex_level")}
               />
             </Col>
           }

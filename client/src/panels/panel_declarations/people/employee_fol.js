@@ -112,7 +112,7 @@ export const declare_employee_fol_panel = () => declare_panel({
               />
             </Col>
           }
-          { !window.is_a11y_mode && level === "dept" &&
+          { !window.is_a11y_mode && /* level === "dept" && */
             <Col size={12} isGraph>
               <HeightClippedGraph>
                 <LineBarToggleGraph 
