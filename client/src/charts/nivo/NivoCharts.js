@@ -1,7 +1,7 @@
 import { ResponsiveBar } from '@nivo/bar';
 import { ResponsiveLine } from '@nivo/line';
 import { ResponsivePie } from '@nivo/pie';
-import { formats, dollar_formats } from "../../core/format.js";
+import { formats } from "../../core/format.js";
 import { Fragment } from 'react';
 import classNames from 'classnames';
 import { IconZoomIn, IconZoomOut, IconTable } from '../../icons/icons.js';
@@ -125,7 +125,6 @@ class InteractiveGraph extends React.Component{
     const {
       graph,
       table,
-      disable_table_view,
       other_buttons,
     } = this.props;
 
@@ -325,7 +324,6 @@ export class NivoResponsiveBar extends React.Component{
       animate,
       labelTextColor,
       borderWidth,
-      label_col_header,
       disable_table_view,
     } = this.props;
 
@@ -486,7 +484,7 @@ export class NivoResponsiveHBar extends React.Component{
       motionStiffness={motion_stiffness}
       labelTextColor={window.infobase_color_constants.textColor}
       labelSkipWidth={labelSkipWidth}
-    />
+    />;
 
     return <InteractiveGraph graph={graph} table={table} />;
   }
