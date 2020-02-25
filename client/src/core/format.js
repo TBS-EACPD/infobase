@@ -247,10 +247,8 @@ _.each(
   }
 );
 
-const dollar_formats = _.pickBy( formats, (format, key) => /^compact([0-9?]?)+_raw$/.test(key) );
 export { 
   formatter, 
   list_formatter, 
   formats,
-  dollar_formats,
 };
