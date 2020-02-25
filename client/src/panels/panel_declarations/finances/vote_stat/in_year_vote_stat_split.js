@@ -3,7 +3,7 @@ import {
   StdPanel,
   Col,
 
-  CommonDonut,
+  NivoResponsivePie,
 
   declare_panel,
 } from "../../shared.js";
@@ -33,8 +33,8 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations, fo
       </Col>
       {!window.is_a11y_mode &&
         <Col isGraph size={graph_col}>
-          <CommonDonut
-            graph_data = {data}
+          <NivoResponsivePie
+            data = {data}
             legend_data ={data}
             graph_height = '400px'
           /> 

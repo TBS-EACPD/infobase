@@ -24,7 +24,6 @@ import {
   NivoResponsiveHBar,
   NivoResponsiveLine,
   NivoResponsivePie,
-  CommonDonut,
   LineBarToggleGraph,
 } from '../../charts/nivo/NivoCharts.js';
 import {
@@ -183,7 +182,6 @@ export {
   SpinnerWrapper,
   get_formatter,
   table_common,
-  CommonDonut,
   LineBarToggleGraph,
   infobase_colors_smart,
 

@@ -215,6 +215,8 @@ export class NivoResponsivePie extends React.Component{
   render(){
     const {
       data,
+      legend_data,
+      graph_height,
       colors,
       theme,
       enableRadialLabels,
@@ -225,12 +227,27 @@ export class NivoResponsivePie extends React.Component{
       total,
       margin,
       text_formatter,
-      colorBy,
       legends,
       startAngle,
       is_money,
+      disable_table_view,
+      display_horizontal,
     } = this.props;
     legends && (legends[0].symbolShape = fixedSymbolShape);
+
+    const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
+    const colorBy = d=>color_scale(d.label);
+
+    const legend_items = _.chain(legend_data)
+      .sortBy('value')
+      .reverse()
+      .map( ({value, label }) => ({ 
+        value,
+        label,
+        color: color_scale(label),
+        id: label,
+      }))
+      .value();
     
     const data_with_absolute_values = _.map(
       data,
@@ -241,47 +258,88 @@ export class NivoResponsivePie extends React.Component{
       })
     );
     
-    return (
-      <ResponsivePie
-        {...{
-          data: data_with_absolute_values,
-          margin,
-          colors,
-          theme,
-          startAngle,
-          enableSlicesLabels,
-          enableRadialLabels,
-          legends,
-          colorBy,
-        }}
-        tooltip={ (data) => {
-          const data_with_original_values = {
-            ...data,
-            value: data.original_value,
-          };
-
-          if (include_percent){
-            return percent_value_tooltip(
-              [data_with_original_values],
-              get_formatter(is_money, text_formatter, false), 
-              total
-            );
-          } else {
-            return tooltip(
-              [data_with_original_values],
-              get_formatter(is_money, text_formatter, false)
-            );
-          } 
-        }}
-        innerRadius={0.5}
-        borderWidth={1}
-        borderColor="inherit:darker(0.2)"
-        radialLabelsSkipAngle={0}
-        animate={true}
-        motionStiffness={30}
-        motionDamping={15}
-      />
+    const legend_total = _.reduce(
+      legend_data,
+      (sum, {value}) => sum + Math.abs(value),
+      0 
     );
+
+    const table_data = _.chain(data)
+      .map( row => _.assign(row, {percentage: formats.percentage_raw(row.value/legend_total), formatted_value: get_formatter(is_money, text_formatter, true, true)(row.value)}) )
+      .map( row => ({col_data: row, label: row["label"]}) )
+      .value();
+    const table_header_keys = ["label", "formatted_value", "percentage"];
+
+    const table = !disable_table_view && <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
+
+    const graph =
+    <div className={display_horizontal ? classNames("common-donut__horizontal","common-donut") : "common-donut"} aria-hidden = {true}>
+      <div className="common-donut__graph" style = {{height: graph_height}}>
+        <ResponsivePie
+          {...{
+            data: data_with_absolute_values,
+            margin,
+            colors,
+            theme,
+            startAngle,
+            enableSlicesLabels,
+            enableRadialLabels,
+            legends,
+            colorBy,
+          }}
+          tooltip={ (data) => {
+            const data_with_original_values = {
+              ...data,
+              value: data.original_value,
+            };
+
+            if (include_percent){
+              return percent_value_tooltip(
+                [data_with_original_values],
+                get_formatter(is_money, text_formatter, false), 
+                total
+              );
+            } else {
+              return tooltip(
+                [data_with_original_values],
+                get_formatter(is_money, text_formatter, false)
+              );
+            } 
+          }}
+          innerRadius={0.5}
+          borderWidth={1}
+          borderColor="inherit:darker(0.2)"
+          radialLabelsSkipAngle={0}
+          animate={true}
+          motionStiffness={30}
+          motionDamping={15}
+        />
+      </div>
+      <div className="common-donut__legend">
+        <div className="centerer">
+          <div className="centerer-IE-fix">
+            <TabularPercentLegend
+              items={legend_items}
+              get_right_content={
+                (item) => (
+                  <div>
+                    <span className="common-donut__legend-data">
+                      <Format type="compact1" content={item.value} />
+                    </span>
+                    <span className="common-donut__legend-data">
+                      <Format type="percentage1" content={(item.value)*Math.pow(legend_total,-1)} />
+                    </span>
+                  </div>
+                )
+              }
+            />
+          </div>
+        </div>
+      </div>
+    </div>;
+    
+
+    return <InteractiveGraph graph={graph} table={table} />;
   }
 }
 NivoResponsivePie.defaultProps = {
@@ -690,73 +748,6 @@ NivoResponsiveLine.defaultProps = {
   },
   motion_damping: 19,
   motion_stiffness: 100,
-};
-
-
-export const CommonDonut = function({graph_data, legend_data, graph_height, display_horizontal, disable_table_view}){
-  const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
-
-  const legend_items = _.chain(legend_data)
-    .sortBy('value')
-    .reverse()
-    .map( ({value, label }) => ({ 
-      value,
-      label,
-      color: color_scale(label),
-      id: label,
-    }))
-    .value();
-
-  const absolute_total = _.reduce(
-    legend_data,
-    (sum, {value}) => sum + Math.abs(value),
-    0 
-  );
-
-  const table_data_format = formats.dollar_raw;// TODO: make this a prop
-
-  const table_data = _.chain(graph_data)
-    .map( row => _.assign(row, {percentage: formats.percentage_raw(row.value/absolute_total), formatted_value: table_data_format(row.value)}) )
-    .map( row => ({col_data: row, label: row["label"]}) )
-    .value();
-  const table_header_keys = ["label", "formatted_value", "percentage"];
-
-  const table = !disable_table_view && <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
-
-  const graph =
-    <div className={display_horizontal ? classNames("common-donut__horizontal","common-donut") : "common-donut"} aria-hidden = {true}>
-      <div className="common-donut__graph" style = {{height: graph_height}}>
-        <NivoResponsivePie
-          data = {graph_data}
-          colorBy = {d=>color_scale(d.label)}
-          total = {absolute_total}
-        />
-      </div>
-      <div className="common-donut__legend">
-        <div className="centerer">
-          <div className="centerer-IE-fix">
-            <TabularPercentLegend
-              items={legend_items}
-              get_right_content={
-                (item) => (
-                  <div>
-                    <span className="common-donut__legend-data">
-                      <Format type="compact1" content={item.value} />
-                    </span>
-                    <span className="common-donut__legend-data">
-                      <Format type="percentage1" content={(item.value)*Math.pow(absolute_total,-1)} />
-                    </span>
-                  </div>
-                )
-              }
-            />
-          </div>
-        </div>
-      </div>
-    </div>;
-  
-  return <InteractiveGraph graph={graph} table={table} />;
-
 };
 
 export class LineBarToggleGraph extends React.Component {

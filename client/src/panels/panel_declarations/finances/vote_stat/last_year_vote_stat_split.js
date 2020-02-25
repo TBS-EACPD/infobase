@@ -2,8 +2,8 @@ import { text_maker, TM } from './vote_stat_text_provider.js';
 import {
   StdPanel,
   Col,
-  
-  CommonDonut,
+
+  NivoResponsivePie,
 
   declare_panel,
 } from "../../shared.js";
@@ -29,8 +29,8 @@ const render_w_options = ({text_key, graph_col, text_col}) => ({calculations, so
       </Col>
       { !window.is_a11y_mode &&
         <Col isGraph size={graph_col}>
-          <CommonDonut
-            graph_data = {data}
+          <NivoResponsivePie
+            data = {data}
             legend_data = {data}
             graph_height = '400px'
           />
