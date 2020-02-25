@@ -187,7 +187,6 @@ const general_default_props = {
   enableGridX: true,
   enableGridY: true,
   disable_table_view: false,
-  table_view_format: formats.dollar_raw,
   margin: {
     top: 50,
     right: 40,
@@ -336,12 +335,11 @@ export class NivoResponsiveBar extends React.Component{
       labelTextColor,
       borderWidth,
       disable_table_view,
-      table_view_format,
     } = this.props;
 
     legends && (legends[0].symbolShape = fixedSymbolShape);
 
-    const table_data = bar_table_data(data, indexBy, table_view_format);
+    const table_data = bar_table_data(data, indexBy, get_formatter(is_money, text_formatter, true, true));
     const table_header_keys = _.concat([indexBy],keys);
 
     const table = !disable_table_view && <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
@@ -445,12 +443,11 @@ export class NivoResponsiveHBar extends React.Component{
       labelSkipWidth,
       markers,
       disable_table_view,
-      table_view_format,
     } = this.props;
     legends && (legends[0].symbolShape = fixedSymbolShape);
 
 
-    const table_data = bar_table_data(data, indexBy, table_view_format);
+    const table_data = bar_table_data(data, indexBy, get_formatter(is_money, text_formatter, true, true));
     const table_header_keys = _.concat([indexBy],keys);
     
     const table = !disable_table_view && <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
@@ -569,7 +566,6 @@ export class NivoResponsiveLine extends React.Component {
       legends,
       layers,
       disable_table_view,
-      table_view_format,
     } = this.props;
 
     const {
@@ -580,7 +576,7 @@ export class NivoResponsiveLine extends React.Component {
 
     const table_data = _.map(data, row => ({
       col_data: _.chain(row.data)
-        .map(d => [d.x,table_view_format(d.y)])
+        .map(d => [d.x,get_formatter(is_money, text_formatter, true, true)(d.y)])
         .fromPairs()
         .assign({label: row.id})
         .value(),
