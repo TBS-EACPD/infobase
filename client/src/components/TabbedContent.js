@@ -61,6 +61,7 @@ export class TabbedContent extends React.Component {
       tab_keys,
       tab_labels,
       tab_pane_contents,
+      tab_is_disabled,
     } = this.props;
     
     const open_tab_key = this.state.open_tab_key;
@@ -72,6 +73,7 @@ export class TabbedContent extends React.Component {
         key,
         label: tab_labels[key],
         is_open: open_tab_key === key,
+        is_disabled: tab_is_disabled,
       })
     );
 
