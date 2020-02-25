@@ -37,32 +37,6 @@ const GraphLegend = ({
 );
 
 
-const TabularPercentLegend = ({
-  items, // [ { active, id, label, color }] 
-  onClick, //id => { }
-  get_right_content, //item => react element
-}) => (
-  <ul className="list-unstyled">
-    {_.map(items, item => 
-      <li
-        key={item.id}
-        className="tabular-legend-list-el"
-      >
-        <span 
-          aria-hidden={true}
-          className="legend-color-checkbox"
-          style={{backgroundColor: item.color }}
-        />
-        <span>
-          {item.label}
-        </span>
-        <span style={{marginLeft: 'auto', textAlign: 'right', whiteSpace: "nowrap"}}>
-          { get_right_content(item) } 
-        </span>
-      </li>
-    )}
-  </ul>
-);
 
 class LiquidFillGauge extends React.Component {
   render(){
@@ -87,6 +61,5 @@ class LiquidFillGauge extends React.Component {
 export {
   GraphLegend,
   A11YTable,
-  TabularPercentLegend,
   LiquidFillGauge,
 };

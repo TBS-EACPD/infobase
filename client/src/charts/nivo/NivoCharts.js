@@ -13,7 +13,7 @@ import {
   StatelessModal,
   Format,
 } from '../../components/index.js';
-import { TabularPercentLegend, GraphLegend } from '../declarative_charts.js';
+import { GraphLegend } from '../declarative_charts.js';
 import { newIBCategoryColors } from '../../core/color_schemes.js';
 import { infobase_colors_smart, get_formatter } from '../shared.js';
 import './NivoCharts.scss';
@@ -107,6 +107,34 @@ const fixedSymbolShape = ({
     height={size}
     style={{ pointerEvents: 'none' }}
   />
+);
+
+
+const TabularPercentLegend = ({
+  items, // [ { active, id, label, color }] 
+  onClick, //id => { }
+  get_right_content, //item => react element
+}) => (
+  <ul className="list-unstyled">
+    {_.map(items, item => 
+      <li
+        key={item.id}
+        className="tabular-legend-list-el"
+      >
+        <span 
+          aria-hidden={true}
+          className="legend-color-checkbox"
+          style={{backgroundColor: item.color }}
+        />
+        <span>
+          {item.label}
+        </span>
+        <span style={{marginLeft: 'auto', textAlign: 'right', whiteSpace: "nowrap"}}>
+          { get_right_content(item) } 
+        </span>
+      </li>
+    )}
+  </ul>
 );
 
 
