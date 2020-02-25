@@ -2,7 +2,7 @@ import './shared.scss';
 
 import { InfographicPanel, StdPanel, TextPanel, Col } from './InfographicPanel.js';
 
-import { formats, dollar_formats, formatter } from '../../core/format.js';
+import { formats, formatter } from '../../core/format.js';
 import { PanelRegistry, layout_types } from '../PanelRegistry.js';
 import { newIBCategoryColors, newIBLightCategoryColors, newIBDarkCategoryColors } from '../../core/color_schemes.js';
 import { breakpoints } from '../../core/breakpoint_defs.js';
@@ -155,7 +155,6 @@ export {
   ensure_loaded,
   declarative_charts,
   formats,
-  dollar_formats,
   formatter,
   trivial_text_maker,
   create_text_maker,

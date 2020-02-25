@@ -6,7 +6,6 @@ import {
   StdPanel,
   Col,
   NivoResponsiveBar,
-  dollar_formats,
 
   declare_panel,
 } from "../../shared.js";
@@ -81,7 +80,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
           data = {estimate_data}
           table_switch = {true}
           keys = {keys}
-          label_format = { d => <tspan y={ -4 }> {dollar_formats.compact2_raw(d)} </tspan>}
+          label_format = { d => <tspan y={ -4 }> {formats.compact2_raw(d)} </tspan>}
           isInteractive = {false}
           enableLabel = {true}
           indexBy = "label"
