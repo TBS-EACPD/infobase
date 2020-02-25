@@ -11,7 +11,7 @@ import {
   declarative_charts,
 } from "../../shared.js";
 import { Canada } from '../../../../charts/canada/index.js';
-import { SpinnerWrapper, TabbedContent } from '../../../../components/index.js';
+import { SpinnerWrapper, TabbedContent , TabbedControls } from '../../../../components/index.js';
 import { get_static_url, make_request } from '../../../../request_utils.js';
 
 const { std_years } = year_templates;
@@ -149,6 +149,7 @@ class TPMap extends React.Component {
         show_per_capita: false,
       };
 
+      const should_tab_be_disabled = (Object.entries(data_tppc[0]) == "") ? true : false;
 
       //TP PER CAPITA VERSION
       const current_year_data_tppc = _.last(data_tppc);
@@ -173,13 +174,12 @@ class TPMap extends React.Component {
       );
       const percent_of_total_tppc = current_year_data_tppc[largest_prov_tppc] / total_sum_tppc;
       const text_args_tppc = {
-        largest_prov: provinces_with_article[largest_prov_tppc].text,
+        largest_prov: (should_tab_be_disabled) ? null : provinces_with_article[largest_prov_tppc].text,
         total_sum: formatter(total_sum_tppc),
         percent_of_total: formats["percentage1_raw"](percent_of_total_tppc),
         subject: calculations.subject,
         show_per_capita: true,
       };
-
 
       return (
         <StdPanel
@@ -187,12 +187,13 @@ class TPMap extends React.Component {
           {...{ footnotes, sources }}
         >
           <Col size={12} isText>
-            <TabbedContent
+            <TabbedContent 
               tab_keys={["show_tp", "show_tp_per_capita"]}
               tab_labels={{
                 show_tp: text_maker("show_tp"),
                 show_tp_per_capita: text_maker("show_tp_per_capita"),
               }}
+              tab_is_disabled={should_tab_be_disabled}
               tab_pane_contents={{
                 show_tp: (
                   <div id={"tp_tab_pane"}>
