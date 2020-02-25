@@ -2,19 +2,13 @@ import text from './perspective_text.yaml';
 import {
   declare_panel, 
   util_components,
-  declarative_charts,
   InfographicPanel,
   create_text_maker_component,
   NivoResponsivePie,
 } from "../../shared.js";
 
-const {
-  TabularPercentLegend,
-} = declarative_charts;
-
 const { 
   Select,
-  Format,
 } = util_components;
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -65,29 +59,6 @@ class SpendInTagPerspective extends React.Component {
       },
     ];
 
-    const has_neg = _.chain(data).map('value').min().value() < 0;
-
-    const legend_display = (!has_neg && 
-      <TabularPercentLegend
-        items={
-          _.map(data, obj => ({...obj,
-            color: color_scale(obj.label),
-            id: obj.label,
-          }))
-        }
-        get_right_content={item =>  
-          <div style={{width: "120px", display: "flex"}}>
-            <div style={{width: "60px"}}>
-              <Format type="compact1" content={item.value} />  
-            </div>
-            <div style={{width: "60px"}}>
-              (<Format type="percentage1" content={item.value*Math.pow(active_tag_exp,-1)} />)
-            </div>
-          </div>
-        }
-      />
-    );
-
     return (
       <div className="grid-row">
         <div 
@@ -132,15 +103,13 @@ class SpendInTagPerspective extends React.Component {
               />
             </div>
           }
-          <div style={{height: '400px'}} aria-hidden = {true}>
-            <NivoResponsivePie
-              data = {data}
-              colorBy = {obj=>color_scale(obj.label)}
-              total = {d3.sum( data, _.property('value') )}
-              height = '400px'
-            />
-          </div>
-          {legend_display}
+          <NivoResponsivePie
+            data = {data}
+            legend_data = {data}
+            graph_height = '400px'
+            colorBy = {obj=>color_scale(obj.label)}
+            height = '400px'
+          />
         </div>
 
       </div>

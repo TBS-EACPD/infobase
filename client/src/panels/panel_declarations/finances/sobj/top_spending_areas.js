@@ -12,7 +12,7 @@ import {
 
   declare_panel,
   
-  CommonDonut,
+  NivoResponsivePie,
 } from "../../shared.js";
 
 const {
@@ -81,8 +81,8 @@ const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) =>
               data_col_headers: [ `${run_template(_.last(std_years))} ${text_maker("spending")}` ],
             }}
           /> : 
-          <CommonDonut
-            graph_data = {graph_data}
+          <NivoResponsivePie
+            data = {graph_data}
             legend_data = {graph_data}
             graph_height = '450px'
           />
