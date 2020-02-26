@@ -452,7 +452,7 @@ export default class TextDiffApp extends React.Component {
             </label>
             <GraphLegend
               items={indicator_status}
-              checkMark_vertical_align={6}
+              checkmark_vertical_align={6}
               onClick={ id => {
                 const copy_indicator_status = _.map(indicator_status, row => row.id===id ? ({
                   ...row,

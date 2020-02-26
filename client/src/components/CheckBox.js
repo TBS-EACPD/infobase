@@ -12,15 +12,15 @@ export class CheckBox extends React.Component{
       container_style,
       checkbox_style,
       label_style,
-      checkMark_vertical_align,
+      checkmark_vertical_align,
       disabled,
     } = this.props;
 
     return <div style={{
-      ...container_style,
       display: "flex",
       pointerEvents: disabled && "none",
       opacity: disabled && 0.4,
+      ...container_style,
     }}>
       <span
         aria-hidden={true}
@@ -31,14 +31,14 @@ export class CheckBox extends React.Component{
           textAlign: "center",
         }}
         className={ onClick ? "legend-color-checkbox span-hover" : "legend-color-checkbox" }
-        onClick={ () => onClick && onClick(id) }
+        onClick={ () => !disabled && onClick && onClick(id) }
       >
         { !isSolidBox && 
         <IconCheckmark
           color={window.infobase_color_constants.backgroundColor}
           width={10}
           height={10}
-          vertical_align={checkMark_vertical_align}
+          vertical_align={checkmark_vertical_align}
         />
         }
       </span>
@@ -62,5 +62,5 @@ export class CheckBox extends React.Component{
 }
 CheckBox.defaultProps = {
   color: window.infobase_color_constants.primaryColor,
-  checkMark_vertical_align: 0.1,
+  checkmark_vertical_align: 0.1,
 };

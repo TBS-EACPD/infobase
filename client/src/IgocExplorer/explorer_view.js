@@ -284,7 +284,7 @@ class ExplorerForIgoc extends React.Component {
             active={should_show_orgs_without_data}
             onClick={on_toggle_orgs_without_data}
             label={text_maker("show_orgs_without_data")}
-            checkMark_vertical_align={6}
+            checkmark_vertical_align={6}
             checkbox_style={{ marginTop: 4 }}
           />
           <div>

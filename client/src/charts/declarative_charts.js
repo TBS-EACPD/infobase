@@ -11,7 +11,7 @@ const GraphLegend = ({
   container_style, //style for div, containing checkbox and label
   checkbox_style, //style for checkbox
   label_style, //style for label
-  checkMark_vertical_align, //vertical alignment for checkmark
+  checkmark_vertical_align, //vertical alignment for checkmark
 }) => (
   <ul className={classNames("legend-list-inline", isHorizontal && "horizontal")}>
     {_.map(items, ({ color, label, id, active }) => 
@@ -29,7 +29,7 @@ const GraphLegend = ({
           container_style={container_style}
           checkbox_style={checkbox_style}
           label_style={label_style}
-          checkMark_vertical_align={checkMark_vertical_align}
+          checkmark_vertical_align={checkmark_vertical_align}
         />
       </li>
     )}
