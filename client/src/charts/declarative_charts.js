@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { LiquidFillGauge as D3LiquidFillGauge } from './liquid_fill_gauge.js';
 import { CheckBox } from '../components/index.js';
 import { A11YTable } from './A11yTable.js';
 
@@ -38,28 +37,7 @@ const GraphLegend = ({
 
 
 
-class LiquidFillGauge extends React.Component {
-  render(){
-    return <div ref="graph_area" style={{position: 'relative'}} />;
-  }
-  _render(){
-    this.graph_instance.render(_.clone(this.props));
-  }
-  componentDidMount(){
-    this.graph_instance = new D3LiquidFillGauge(
-      this.refs.graph_area,
-      _.clone(this.props)
-    );
-    this._render();
-
-  }
-  componentDidUpdate(){
-    this._render();
-  }
-}
-
 export {
   GraphLegend,
   A11YTable,
-  LiquidFillGauge,
 };
