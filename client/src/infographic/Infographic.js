@@ -94,7 +94,6 @@ class InfoGraph_ extends React.Component {
     this.state = {
       bubble_menu_loading: true,
       infographic_loading: true,
-      select_all: true,
       panel_filter: {},
       subject: props.subject,
       bubbles_for_subject: {},
@@ -249,14 +248,14 @@ class InfoGraph_ extends React.Component {
             persist_content={true}
             content={
               <GraphLegend
-                items={ _.map(panel_filter, (checked, dependency) => {
-                  return {
+                items={ _.map(panel_filter, (checked, dependency) => 
+                  ({
                     id: dependency,
                     label: Table.lookup(dependency).name,
                     active: checked,
                     color: window.infobase_color_constants.primaryColor,
-                  };
-                })}
+                  })
+                )}
                 onClick={ (evt) => {
                   const copy_filter = _.clone(panel_filter);
                   copy_filter[evt] = !panel_filter[evt];
