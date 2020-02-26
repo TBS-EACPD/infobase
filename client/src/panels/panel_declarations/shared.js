@@ -176,6 +176,7 @@ export {
   NivoResponsiveHBar,
   NivoResponsiveLine,
   NivoResponsivePie,
+  NivoResponsiveBubble,
   FlatTreeMapViz,
   Canada,
   breakpoints,
