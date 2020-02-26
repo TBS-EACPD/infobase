@@ -10,12 +10,9 @@ import {
   StdPanel,
   Col,
   NivoResponsiveBubble,
-  declarative_charts,
-
   declare_panel,
 } from "../../shared.js";
 
-const { LiquidFillGauge } = declarative_charts;
 
 
 export const declare_last_year_g_and_c_perspective_panel = () => declare_panel({
@@ -46,11 +43,6 @@ export const declare_last_year_g_and_c_perspective_panel = () => declare_panel({
       const gov_tp_exp_pa_last_year = panel_args.dept_in_gov[0].value;
       const dept_tp_exp_pa_last_year = panel_args.dept_in_gov[1].value;
       const dept_exp_pa_last_year= panel_args.tp_in_exp[0].value;
-  
-      const fmt_gov_tp_exp_pa_last_year = formatter("compact", gov_tp_exp_pa_last_year, {raw: true, precision: 1});
-      const fmt_dept_tp_exp_pa_last_year = formatter("compact", dept_tp_exp_pa_last_year, {raw: true, precision: 1});
-      const fmt_dept_exp_pa_last_year = formatter("compact", dept_exp_pa_last_year, {raw: true, precision: 1});
-  
 
       return (
         <StdPanel
