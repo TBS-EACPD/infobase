@@ -11,7 +11,7 @@ import {
   declarative_charts,
 } from "../../shared.js";
 import { Canada } from '../../../../charts/canada/index.js';
-import { SpinnerWrapper, TabbedContent , TabbedControls } from '../../../../components/index.js';
+import { SpinnerWrapper, TabbedContent } from '../../../../components/index.js';
 import { get_static_url, make_request } from '../../../../request_utils.js';
 
 const { std_years } = year_templates;
