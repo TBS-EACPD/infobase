@@ -1,22 +1,23 @@
 import { TM, text_maker } from './vote_stat_text_provider.js';
 import {
   formatter,
-  declarative_charts,
   StdPanel,
   Col,
+  NivoResponsiveBubble,
 
   declare_panel,
 } from "../../shared.js";
 
-const { LiquidFillGauge } = declarative_charts;
-
 const DeptEstimatesPerspective = ({subject, dept_total, gov_total}) => (
-  <LiquidFillGauge
+
+  <NivoResponsiveBubble 
     height={250}
     value={dept_total}
+    name={subject.fancy_name}
     totalValue={gov_total}
-    descriptiveTextValue={`${formatter("compact1", dept_total, {raw: true})} ${text_maker("of")} ${formatter("compact1", gov_total, {raw: true})}`}
+    totalName={text_maker("government_stats")}
   />
+
 );
 
 
