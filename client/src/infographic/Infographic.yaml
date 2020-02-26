@@ -59,7 +59,9 @@ infograph_explorer_link:
   en: Advanced search
   fr: Recherche avancée
 
-
+filter_panels:
+  en: Filter Infographs
+  fr: TODO
 
 
 

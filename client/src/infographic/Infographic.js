@@ -3,7 +3,11 @@ import { Redirect } from 'react-router';
 import './Infographic.scss';
 import text from "./Infographic.yaml";
 
+import { IconFilter } from '../icons/icons.js';
+import { Details } from '../components/Details.js';
+import { GraphLegend } from '../charts/declarative_charts.js';
 import { StandardRouteContainer } from '../core/NavComponents';
+import { Table } from '../core/TableClass.js';
 import { log_standard_event } from '../core/analytics.js';
 import { BubbleMenu } from './BubbleMenu.js';
 import AccessibleBubbleMenu from './a11y_bubble_menu.js';
@@ -148,7 +152,6 @@ class InfoGraph_ extends React.Component {
       infographic_loading,
       bubbles_for_subject,
       panel_filter,
-      select_all,
     } = this.state;
     const loading = bubble_menu_loading || infographic_loading;
 
@@ -182,6 +185,13 @@ class InfoGraph_ extends React.Component {
         include_tables: false,
       }}
     />;
+    const filter_icon_props = {
+      color: window.infobase_color_constants.primaryColor,
+      title: "Filter icon for panels",
+      width: 15,
+      height: 15,
+      vertical_align: 5,
+    };
 
     return (
       <div>
@@ -221,45 +231,40 @@ class InfoGraph_ extends React.Component {
               }
             </p>
           }
-          <div>
-            { !loading &&
-              <label key="select_all">
-                <input
-                  type='checkbox'
-                  value="select_all"
-                  checked={select_all}
-                  onChange={ () => {
-                    const copy_filter = _.reduce(panel_filter, (result, checked, dependency) => {
-                      result[dependency] = !select_all;
-                      return result;
-                    }, {});
-                    this.setState({
-                      panel_filter: copy_filter,
-                      select_all: !select_all,
-                    });
-                  }}
-                />
-                Select All
-              </label>
+          <Details
+            closed_drawer_icon={
+              <IconFilter
+                {...filter_icon_props}
+                key="closed_filter"
+              />
             }
-            { !loading &&
-              _.map(panel_filter, (checked, dependency) =>
-                <label key={dependency}>
-                  <input
-                    type='checkbox'
-                    value={dependency}
-                    checked={panel_filter[dependency]}
-                    onChange={ (evt) => {
-                      const copy_filter = _.clone(panel_filter);
-                      copy_filter[evt.target.value] = evt.target.checked;
-                      this.setState({panel_filter: copy_filter});
-                    }}
-                  />
-                  {dependency}
-                </label>
-              )
+            opened_drawer_icon={
+              <IconFilter
+                {...filter_icon_props}
+                key="opened_filter"
+                rotation={180}
+              />
             }
-          </div>
+            summary_content={text_maker("filter_panels")}
+            persist_content={true}
+            content={
+              <GraphLegend
+                items={ _.map(panel_filter, (checked, dependency) => {
+                  return {
+                    id: dependency,
+                    label: Table.lookup(dependency).name,
+                    active: checked,
+                    color: window.infobase_color_constants.primaryColor,
+                  };
+                })}
+                onClick={ (evt) => {
+                  const copy_filter = _.clone(panel_filter);
+                  copy_filter[evt] = !panel_filter[evt];
+                  this.setState({ panel_filter: copy_filter });
+                }}
+              />  
+            }
+          />
           { !loading &&
             _.map(panel_keys, panel_key => 
               <PanelRenderer
@@ -343,8 +348,8 @@ class InfoGraph_ extends React.Component {
           .map(panel_key => tables_for_panel(panel_key, subject.level))
           .flatten()
           .uniq()
-          .reduce((result, value) => {
-            result[value] = true;
+          .reduce((result, table_id) => {
+            result[table_id] = true;
             return result;
           }, {})
           .value();

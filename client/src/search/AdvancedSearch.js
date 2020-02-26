@@ -5,6 +5,7 @@ import { EverythingSearch } from './EverythingSearch.js';
 
 import { Details } from '../components/Details.js';
 import { CheckBox } from '../components/CheckBox';
+import { IconFilter } from '../icons/icons.js';
 
 import { create_text_maker } from '../models/text.js';
 const text_maker = create_text_maker(text);
@@ -148,6 +149,13 @@ export class AdvancedSearch extends React.Component {
         }
       }
     };
+    const filter_icon_props = {
+      color: window.infobase_color_constants.primaryColor,
+      title: "Filter icon for Advanced Search",
+      width: 15,
+      height: 15,
+      vertical_align: 5,
+    };
 
     return(
       <div>
@@ -156,6 +164,19 @@ export class AdvancedSearch extends React.Component {
         </div>
         <div className="col-md-12">
           <Details
+            closed_drawer_icon={
+              <IconFilter
+                {...filter_icon_props}
+                key="closed_filter"
+              />
+            }
+            opened_drawer_icon={
+              <IconFilter
+                {...filter_icon_props}
+                key="opened_filter"
+                rotation={180}
+              />
+            }
             summary_content={text_maker("advaced_search_title")}
             persist_content={true}
             content={
