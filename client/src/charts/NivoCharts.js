@@ -1,0 +1,765 @@
+import { ResponsiveBar } from '@nivo/bar';
+import { ResponsiveLine } from '@nivo/line';
+import { ResponsivePie } from '@nivo/pie';
+import { ResponsiveBubble } from '@nivo/circle-packing';
+import { formats, dollar_formats } from "../core/format.js";
+import { Fragment } from 'react';
+import { IconZoomIn, IconZoomOut } from '../icons/icons.js';
+import { trivial_text_maker } from '../models/text.js';
+import { breakpoints } from '../core/breakpoint_defs.js';
+import { newIBLightCategoryColors } from '../core/color_schemes.js';
+import MediaQuery from 'react-responsive';
+import './NivoCharts.scss';
+
+
+const get_formatter = (is_money, formatter, raw = true) => (
+  _.isUndefined(formatter) ?
+    ( 
+      !is_money ? 
+        (value) => formats.big_int(value, {raw}) :
+        (
+          raw ? 
+            (value) => dollar_formats.compact2_raw(value) : 
+            (value) => formats.compact2(value)
+        )
+    ) :
+    ((value) => raw ? formatter(value, {raw: true}) : formatter(value))
+);
+
+
+const get_scale_bounds = (stacked, raw_data, zoomed) => {
+  const min = _.min(raw_data);
+  const max = _.max(raw_data);
+  const scaled_min = min < 0 ? min * 1.05 : min * 0.95;
+  const scaled_max = max < 0 ? max * 0.95 : max * 1.05;
+  if(stacked){
+    return {
+      min: min < 0 ? scaled_min : 0,
+      max: 'auto',
+    };
+  }
+  return {
+    min: zoomed || min < 0 ? scaled_min : 0,
+    max: !zoomed && max < 0 ? 0 : scaled_max,
+  };
+};
+
+
+const smalldevice_tooltip_content = (tooltip_item, formatter) => (
+  <td>
+    <div className="nivo-tooltip__content"> {tooltip_item.id} </div>
+    <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+  </td>
+);
+
+const tooltip_content = (tooltip_item, formatter) => (
+  <Fragment>
+    <td className="nivo-tooltip__content"> {tooltip_item.id} </td>
+    <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+  </Fragment>
+);
+
+const smalldevice_percent_tooltip_content = (tooltip_item, formatter, total) => (
+  <td>
+    <div className="nivo-tooltip__content">{tooltip_item.id}</div>
+    <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
+    <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}}/>
+  </td>
+);
+
+const percent_tooltip_content = (tooltip_item, formatter, total) => (
+  <Fragment>
+    <td className="nivo-tooltip__content">{tooltip_item.id}</td>
+    <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
+    <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}}/>
+  </Fragment>
+);
+
+const default_tooltip = (tooltip_items, formatter, total) => ( // total indicates percent value tooltip being used
+  <div style={{color: window.infobase_color_constants.textColor}}>
+    <table className="nivo-tooltip">
+      <tbody>
+        { tooltip_items.map(
+          tooltip_item => ( 
+            <tr key = {tooltip_item.id}>
+              <td className="nivo-tooltip__content">
+                <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.color}} />
+              </td>
+              <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
+                {total ? percent_tooltip_content(tooltip_item, formatter, total) : tooltip_content(tooltip_item, formatter) }
+              </MediaQuery>
+              <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
+                {total ? smalldevice_percent_tooltip_content(tooltip_item, formatter, total) : smalldevice_tooltip_content(tooltip_item, formatter)}
+              </MediaQuery>
+            </tr>
+          )
+        )}
+      </tbody>
+    </table>
+  </div>
+);
+
+const fixedSymbolShape = ({
+  x, y, size, fill, borderWidth, borderColor,
+}) => (
+  <rect
+    x={x}
+    y={y}
+    transform={window.feature_detection.is_IE() ? `translate(0 -4)` : ''}
+    fill={fill}
+    strokeWidth={borderWidth}
+    stroke={borderColor}
+    width={size}
+    height={size}
+    style={{ pointerEvents: 'none' }}
+  />
+);
+
+const general_default_props = {
+  tooltip: (d, tooltip_formatter) => default_tooltip(d, tooltip_formatter),
+  percent_value_tooltip: (d, tooltip_formatter, total) => default_tooltip(d, tooltip_formatter, total),
+  is_money: true,
+  remove_bottom_axis: false,
+  remove_left_axis: false,
+  add_top_axis: false,
+  enableLabel: false,
+  enableGridX: true,
+  enableGridY: true,
+  margin: {
+    top: 50,
+    right: 40,
+    bottom: 50,
+    left: 70,
+  },
+  theme: {
+    axis: {
+      ticks: {
+        text: { 
+          fontSize: 12,
+          fill: window.infobase_color_constants.textColor,
+        },
+      },
+    },
+    legends: {
+      text: {
+        fontSize: 12,
+      },
+    },
+  },
+};
+
+
+export class NivoResponsivePie extends React.Component{
+  render(){
+    const {
+      data,
+      colors,
+      theme,
+      enableRadialLabels,
+      enableSlicesLabels,
+      tooltip,
+      percent_value_tooltip,
+      include_percent,
+      total,
+      margin,
+      text_formatter,
+      colorBy,
+      legends,
+      startAngle,
+      is_money,
+    } = this.props;
+    legends && (legends[0].symbolShape = fixedSymbolShape);
+    
+    const data_with_absolute_values = _.map(
+      data,
+      (data) => ({
+        ...data,
+        value: Math.abs(data.value),
+        original_value: data.value,
+      })
+    );
+    
+    return (
+      <ResponsivePie
+        {...{
+          data: data_with_absolute_values,
+          margin,
+          colors,
+          theme,
+          startAngle,
+          enableSlicesLabels,
+          enableRadialLabels,
+          legends,
+          colorBy,
+        }}
+        tooltip={ (data) => {
+          const data_with_original_values = {
+            ...data,
+            value: data.original_value,
+          };
+
+          if (include_percent){
+            return percent_value_tooltip(
+              [data_with_original_values],
+              get_formatter(is_money, text_formatter, false), 
+              total
+            );
+          } else {
+            return tooltip(
+              [data_with_original_values],
+              get_formatter(is_money, text_formatter, false)
+            );
+          } 
+        }}
+        innerRadius={0.5}
+        borderWidth={1}
+        borderColor="inherit:darker(0.2)"
+        radialLabelsSkipAngle={0}
+        animate={true}
+        motionStiffness={30}
+        motionDamping={15}
+      />
+    );
+  }
+}
+NivoResponsivePie.defaultProps = {
+  ...general_default_props,
+  margin: {
+    top: 30,
+    right: 80,
+    bottom: 60,
+    left: 50,
+  },
+  include_percent: true,
+  enableRadialLabels: false,
+  enableSlicesLabels: false,
+};
+
+export class NivoResponsiveBar extends React.Component{
+
+  render(){
+    const{
+      data,
+      keys,
+      margin,
+      label_format,
+      colors,
+      bttm_axis,
+      left_axis,
+      isInteractive,
+      indexBy,
+      remove_bottom_axis,
+      remove_left_axis,
+      enableLabel,
+      label,
+      is_money,
+      legends,
+      tick_value,
+      text_formatter,
+      theme,
+      colorBy,
+      min,
+      max,
+      motion_damping,
+      motion_stiffness,
+      tooltip,
+      enableGridX,
+      groupMode,
+      enableGridY,
+      onMouseEnter,
+      onMouseLeave,
+      onClick,
+      padding,
+      animate,
+      labelTextColor,
+      borderWidth,
+    } = this.props;
+    legends && (legends[0].symbolShape = fixedSymbolShape);
+
+    return (
+      //have to have an empty string in key to make sure
+      //that negative bars will be displayed
+      <ResponsiveBar
+        {...{data,
+          margin,
+          colors,
+          groupMode,
+          enableGridX,
+          enableGridY,
+          colorBy,
+          theme, 
+          indexBy, 
+          enableLabel, 
+          legends,
+          isInteractive,
+          motion_damping,
+          motion_stiffness,
+          onMouseEnter,
+          onMouseLeave,
+          onClick,
+          padding,
+          tooltip,
+          label,
+          animate,
+          labelTextColor,
+          borderWidth,
+        }}
+        keys = {_.union([''],keys)}
+        labelFormat={_.isUndefined(label_format) ? null : label_format}
+        tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
+        axisBottom={remove_bottom_axis ? null : bttm_axis}
+        axisLeft={
+          remove_left_axis ?
+            null :
+            {
+              tickValues: tick_value || 6,
+              format: (d) => get_formatter(is_money, text_formatter)(d),
+              min: min,
+              max: max,
+              ...(left_axis || {}),
+            }
+        }
+        borderColor="inherit:darker(1.6)"
+      />
+    );
+  }
+};
+NivoResponsiveBar.defaultProps = {
+  ...general_default_props,
+  padding: 0.3,
+  bttm_axis: {
+    tickSize: 7,
+    tickPadding: 10,
+    tickRotation: 0,
+  },
+  labelTextColor: "inherit:darker(2)",
+  isInteractive: true,
+  motion_damping: 15,
+  motion_stiffness: 95,
+};
+
+
+export class NivoResponsiveHBar extends React.Component{
+  render(){
+    const{
+      data,
+      keys,
+      margin,
+      label_format,
+      colors,
+      bttm_axis,
+      left_axis,
+      top_axis,
+      isInteractive,
+      indexBy,
+      remove_bottom_axis,
+      remove_left_axis,
+      add_top_axis,
+      enableLabel,
+      is_money,
+      legends,
+      tick_value,
+      text_formatter,
+      theme,
+      colorBy,
+      motion_damping,
+      motion_stiffness,
+      tooltip,
+      enableGridX,
+      groupMode,
+      enableGridY,
+      padding,
+      label,
+      labelSkipWidth,
+      markers,
+    } = this.props;
+    legends && (legends[0].symbolShape = fixedSymbolShape);
+
+    return (
+      //have to have an empty string in key to make sure
+      //that negative bars will be displayed
+      <ResponsiveBar
+        {...{data,
+          margin,
+          colors,
+          groupMode,
+          enableGridX,
+          enableGridY,
+          colorBy,
+          theme, 
+          indexBy, 
+          enableLabel, 
+          label,
+          legends,
+          isInteractive,
+          labelSkipWidth,
+          markers,
+        }}
+        layout = 'horizontal'
+        keys = {_.union([''],keys)}
+        labelFormat={_.isUndefined(label_format) ? null : label_format}
+        tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
+        axisBottom={remove_bottom_axis ? null : bttm_axis}
+        axisTop={add_top_axis ? top_axis : null}
+        axisLeft={
+          remove_left_axis ?
+            null :
+            {
+              tickValues: tick_value || 6,
+              format: (d) => get_formatter(is_money, text_formatter)(d),
+              min: "auto",
+              max: "auto",
+              ...(left_axis || {}),
+            }
+        }
+        padding={padding}
+        borderColor="inherit:darker(1.6)"
+        motionDamping={motion_damping}
+        motionStiffness={motion_stiffness}
+        labelTextColor={window.infobase_color_constants.textColor}
+        labelSkipWidth={labelSkipWidth}
+      />
+    );
+  }
+};
+NivoResponsiveHBar.defaultProps = {
+  ...general_default_props,
+
+  bttm_axis: {
+    tickSize: 7,
+    tickPadding: 10,
+  },
+  theme: {
+    legends: {
+      text: {
+        fontSize: 14,
+      },
+    },
+    labels: {
+      text: {
+        fontSize: 14,
+      },
+    },
+  },
+  isInteractive: true,
+  max: "auto",
+  min: "auto",
+  padding: 0.3,
+  motion_damping: 15,
+  motion_stiffness: 95,
+  labelSkipWidth: 10,
+};
+
+export class NivoResponsiveLine extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      y_scale_zoomed: false,
+    };
+  }
+  render(){
+    const {
+      data,
+      is_money,
+      raw_data,
+      margin,
+      tick_amount,
+      colors,
+      colorBy,
+      max,
+      min,
+      enableArea,
+      enableGridX,
+      enableGridY,
+      left_axis,
+      show_yaxis_zoom,
+      yScale,
+      motion_damping,
+      motion_stiffness,
+      enableDotLabel,
+      remove_bottom_axis,
+      remove_left_axis,
+      bttm_axis,
+      text_formatter,
+      stacked,
+      theme,
+      tooltip,
+      markers,
+      legends,
+      magnify_glass_translateX,
+      magnify_glass_translateY,
+      layers,
+    } = this.props;
+
+    const {
+      y_scale_zoomed,
+    } = this.state;
+
+    legends && (legends[0].symbolShape = fixedSymbolShape);
+    return (
+      <Fragment>
+        {show_yaxis_zoom && !enableArea &&
+          <button
+            style={{
+              position: "absolute",
+              left: magnify_glass_translateX || margin.left,
+              top: magnify_glass_translateY || margin.top,
+              marginLeft: "-7px",
+              marginTop: "-30px",
+              zIndex: 999,
+              padding: "0px",
+            }}
+            className="btn-ib-zoom"
+            onClick={ 
+              () => {
+                this.setState({
+                  y_scale_zoomed: !y_scale_zoomed,
+                });
+              }
+            }
+          >
+            { this.state.y_scale_zoomed ? 
+                <IconZoomOut
+                  title={trivial_text_maker("zoom_out")}
+                  color={window.infobase_color_constants.tertiaryColor}
+                  alternate_color={window.infobase_color_constants.primaryColor}
+                /> : 
+                <IconZoomIn 
+                  title={trivial_text_maker("zoom_in")}
+                  color={window.infobase_color_constants.tertiaryColor}
+                  alternate_color={window.infobase_color_constants.primaryColor}
+                />
+            }
+          </button>
+        }
+        <ResponsiveLine
+          {...{
+            data,
+            margin,
+            enableGridX,
+            enableGridY,
+            enableArea,
+            colorBy,
+            colors,
+            theme,
+            enableDotLabel,
+            markers,
+            legends,
+            layers,
+          }}
+          tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
+          yScale={{
+            stacked: !!stacked,
+            type: "linear",
+            min: min || get_scale_bounds(stacked, raw_data, y_scale_zoomed).min,
+            max: max || get_scale_bounds(stacked, raw_data, y_scale_zoomed).max,
+            ...(yScale || {}),
+          }}
+          axisBottom={remove_bottom_axis ? null : bttm_axis}
+          axisLeft={remove_left_axis ? null :
+          {
+            orient: "left",
+            tickSize: 5,
+            tickPadding: 5,
+            tickValues: tick_amount || 6,
+            format: d => get_formatter(is_money, text_formatter)(d),
+            ...(left_axis || {}),
+          }}
+          axisTop={null}
+          axisRight={null}
+          xScale={{ type: "point" }}
+          animate={true}
+          motionStiffness={motion_stiffness}
+          motionDamping={motion_damping}
+          dotSize={stacked ? 0 : 10}
+          areaOpacity={stacked ? 1 : 0}
+        />
+      </Fragment>
+    );
+  }
+}
+
+
+NivoResponsiveLine.defaultProps = {
+  ...general_default_props,
+  tooltip: (slice, tooltip_formatter) => default_tooltip(
+    slice.data.map( 
+      (d) => ({
+        id: d.serie.id,
+        color: d.serie.color,
+        value: d.data.y,
+      })
+    ), 
+    tooltip_formatter,
+  ),
+  colors: window.infobase_color_constants.textColor,
+  bttm_axis: {
+    tickSize: 7,
+    tickPadding: 12,
+  },
+  enableDotLabel: false,
+  enableArea: false,
+  stacked: false,
+  show_yaxis_zoom: true,
+  yScale: {
+    type: "linear",
+    zoomed: false,
+    toggle: false,
+  },
+  motion_damping: 19,
+  motion_stiffness: 100,
+};
+
+
+
+const TspanLineWrapper = ({text, width, line_height=1}) => <Fragment>
+  {
+    _.chain(text)
+      .thru( text => text.split(/\s+/) )
+      .reduce(
+        (lines, word) => {
+          const [current_line, ...finished_lines] = _.reverse(lines);
+          const potential_new_line = `${current_line} ${word}`;
+          if (potential_new_line.length < width) {
+            return [...finished_lines, potential_new_line];
+          } else {
+            return [...finished_lines, current_line, word];
+          }
+        },
+        [""],
+      )
+      .map(
+        (line, ix) =>
+          <tspan key={ix} x={0} y={0} dy={ix > 0 ? line_height*ix + "em" : "0em"}>
+            {line}
+          </tspan> 
+      )
+      .value()
+  }
+</Fragment>;
+
+const min_node_radius = 5;
+const BubbleNode = ({ node, style, handlers, theme }) => {
+  if (style.r <= 0) return null;
+
+  const real_r = node.data.id==="outer" ?
+    style.r :
+    style.r*node.data.ratio > min_node_radius ?
+      style.r*node.data.ratio :
+      min_node_radius;
+  
+  return (
+    <g transform={`translate(${style.x},${style.y})`}>
+      <circle
+        r={real_r}
+        {...handlers}
+        fill={style.fill ? style.fill : style.color}
+        stroke={style.borderColor}
+        strokeWidth={style.borderWidth}
+      />
+      {node.label !== false &&
+        <g transform={`translate(0,-20)`}>
+          <text
+            textAnchor="middle"
+            alignmentBaseline="central"
+            style={{
+              ...theme.labels.text,
+              fill: style.labelTextColor,
+              pointerEvents: 'none',
+            }}>
+            <TspanLineWrapper
+              text={node.label}
+              width={50}
+            />
+          </text>
+        </g>
+      }
+      {/* (
+        <text
+          textAnchor="middle"
+          alignmentBaseline="central"
+          style={{
+            ...theme.labels.text,
+            fill: style.labelTextColor,
+            pointerEvents: 'none',
+          }}
+        >
+          {node.label}
+        </text>
+      )} */}
+    </g>
+  );
+};
+
+
+export class NivoResponsiveBubble extends React.Component{
+  render(){
+    const{
+      margin,
+      is_money,
+      legends,
+      text_formatter,
+      tooltip,
+      labelSkipWidth,
+      height,
+      value,
+      name,
+      totalValue,
+      totalName,
+    } = this.props;
+    legends && (legends[0].symbolShape = fixedSymbolShape);
+
+    const root = {
+      "id": "outer",
+      "name": totalName,
+      "value": totalValue-value,
+      "children": [
+        {
+          "id": "inner",
+          "name": name,
+          "value": value,
+          "ratio": value/totalValue,
+        },
+      ],
+    };
+
+    const color_scale = d3.scaleOrdinal().range(newIBLightCategoryColors);
+
+    return (
+      <div style={{height: height}}>
+        <div style={{textAlign: "center"}}>
+          {totalName}
+        </div>
+        <ResponsiveBubble
+          {...{root,
+            margin,
+          }}
+          tooltip={ (d) => default_tooltip( [d], get_formatter(is_money, text_formatter, false), totalValue) }
+          identity="name"
+          value="value"
+          colorBy={d=>color_scale(d.name)}
+          borderColor="inherit:darker(1.6)"
+          borderWidth={2}
+          enableLabel={true}
+          labelTextColor={window.infobase_color_constants.textColor}
+          labelSkipWidth={labelSkipWidth}
+          animate={true}
+          motionStiffness={90}
+          motionDamping={12}  
+          leavesOnly={false}
+          padding={0}
+          nodeComponent={BubbleNode}
+          margin={{ top: 2, right: 0, bottom: 2, left: 0 }}
+        />
+      </div>
+    );
+  }
+};
+NivoResponsiveBubble.defaultProps = {
+  ...general_default_props,
+  isInteractive: false,
+};
+
+export {
+  get_formatter,
+};

@@ -9,6 +9,7 @@ import {
   formatter,
   StdPanel,
   Col,
+  NivoResponsiveBubble,
   declarative_charts,
 
   declare_panel,
@@ -50,6 +51,7 @@ export const declare_last_year_g_and_c_perspective_panel = () => declare_panel({
       const fmt_dept_tp_exp_pa_last_year = formatter("compact", dept_tp_exp_pa_last_year, {raw: true, precision: 1});
       const fmt_dept_exp_pa_last_year = formatter("compact", dept_exp_pa_last_year, {raw: true, precision: 1});
   
+
       return (
         <StdPanel
           title={text_maker("last_year_g_and_c_perspective_title")}
@@ -62,21 +64,21 @@ export const declare_last_year_g_and_c_perspective_panel = () => declare_panel({
           { !window.is_a11y_mode &&
             <Fragment>
               <Col size={3} isGraph>
-                <LiquidFillGauge 
+                <NivoResponsiveBubble 
                   height={200}
-                  title={Subject.Gov.name}
-                  totalValue={gov_tp_exp_pa_last_year}
                   value={dept_tp_exp_pa_last_year}
-                  descriptiveTextValue={`${fmt_dept_tp_exp_pa_last_year} ${text_maker("of")} ${fmt_gov_tp_exp_pa_last_year}`}
+                  name={text_maker("dept_transfer_payments", info)}
+                  totalValue={gov_tp_exp_pa_last_year}
+                  totalName={text_maker("gov_transfer_payments")}
                 />
               </Col>
               <Col size={3} isGraph>
-                <LiquidFillGauge
+                <NivoResponsiveBubble 
                   height={200}
-                  title={subject.name}
-                  totalValue={dept_exp_pa_last_year}
                   value={dept_tp_exp_pa_last_year}
-                  descriptiveTextValue={`${fmt_dept_tp_exp_pa_last_year} ${text_maker("of")} ${fmt_dept_exp_pa_last_year}`}
+                  name={text_maker("dept_transfer_payments", info)}
+                  totalValue={dept_exp_pa_last_year}
+                  totalName={text_maker("dept_expenditures", info)}
                 />
               </Col>
             </Fragment>

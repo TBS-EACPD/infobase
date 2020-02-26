@@ -2,6 +2,24 @@ transfer_payment:
   en: Transfer Payment
   fr: Paiements de transfert
 
+dept_transfer_payments:
+  transform: [handlebars]
+  en: |
+    {{subj_name subject}} transfer payment expenditures
+  fr: |
+    Dépenses en paiements de transfert de {{subj_name subject}} 
+
+dept_expenditures:
+  transform: [handlebars]
+  en: |
+    {{subj_name subject}} expenditures
+  fr: |
+    Dépenses de {{subj_name subject}} 
+
+gov_transfer_payments:
+  en: Government transfer payment expenditures
+  fr: Dépenses gouvernementales en paiements de transfert
+
 transfer_payment_type:
   en: Transfer Payment Type
   fr: Type de paiements de transfert
