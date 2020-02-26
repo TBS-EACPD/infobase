@@ -3,16 +3,15 @@ import text2 from "../../../common_text/common_lang.yaml";
 import {
   formatter,
   create_text_maker_component,
-  declarative_charts,
   StdPanel,
   Col,
+  NivoResponsiveBubble,
 
   declare_panel,
 } from "../shared.js"; 
 
 const { text_maker, TM } = create_text_maker_component([text1, text2]);
 
-const { LiquidFillGauge } = declarative_charts;
 
 
 export const declare_employee_last_year_totals_panel = () => declare_panel({
@@ -55,17 +54,12 @@ export const declare_employee_last_year_totals_panel = () => declare_panel({
               <TM k="dept_employee_last_year_totals_text" args={info} />
             </Col>
             <Col size={7} isGraph>
-              <LiquidFillGauge
-                height = {300}
+              <NivoResponsiveBubble 
+                height={200}
                 value={dept_emp_value}
-                totalValue = {gov_emp_value}
-                descriptiveTextValue={`${dept_emp_fmt} ${text_maker("of")} ${gov_emp_fmt}`}
-                margin = {{
-                  top: 10,
-                  right: 0,
-                  bottom: 10,
-                  left: 0,          
-                }}
+                name={info.subject.fancy_name}
+                totalValue={gov_emp_value}
+                totalName={text_maker("fps")}
               />
             </Col>
           </StdPanel>
