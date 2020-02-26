@@ -180,6 +180,7 @@ export class Canada extends React.Component{
               {trivial_text_maker("legend")}
             </p>
             <GraphLegend
+              isSolidBox
               items={legend_items}
             />
           </div>
