@@ -36,3 +36,6 @@ tp_pc_a11y_table_title:
   en: Transfer Payments for Provinces per Capita
   fr: Paiements de Transfert pour les Provinces par Habitant
 
+tp_no_data_hover_label:
+  en: There is insufficient data
+  fr: TODO check - Les données sont insuffisantes
