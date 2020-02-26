@@ -638,9 +638,12 @@ const TspanLineWrapper = ({text, width, line_height=1}) => <Fragment>
   }
 </Fragment>;
 
-const min_node_radius = 5;
 const BubbleNode = ({ node, style, handlers, theme }) => {
   if (style.r <= 0) return null;
+
+  const min_node_radius = 5;
+  const text_y_adjustment = -20;
+  const text_width = 50;
 
   const real_r = node.data.id==="outer" ?
     style.r :
@@ -658,7 +661,7 @@ const BubbleNode = ({ node, style, handlers, theme }) => {
         strokeWidth={style.borderWidth}
       />
       {node.label !== false &&
-        <g transform={`translate(0,-20)`}>
+        <g transform={`translate(0,${text_y_adjustment})`}>
           <text
             textAnchor="middle"
             alignmentBaseline="central"
@@ -669,24 +672,11 @@ const BubbleNode = ({ node, style, handlers, theme }) => {
             }}>
             <TspanLineWrapper
               text={node.label}
-              width={50}
+              width={text_width}
             />
           </text>
         </g>
       }
-      {/* (
-        <text
-          textAnchor="middle"
-          alignmentBaseline="central"
-          style={{
-            ...theme.labels.text,
-            fill: style.labelTextColor,
-            pointerEvents: 'none',
-          }}
-        >
-          {node.label}
-        </text>
-      )} */}
     </g>
   );
 };
@@ -699,7 +689,6 @@ export class NivoResponsiveBubble extends React.Component{
       is_money,
       legends,
       text_formatter,
-      tooltip,
       labelSkipWidth,
       height,
       value,
