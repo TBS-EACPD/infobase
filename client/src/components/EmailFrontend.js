@@ -223,6 +223,7 @@ class EmailFrontend extends React.Component {
                     onClick={ () => this.setState({privacy_acknowledged: !privacy_acknowledged }) }
                     label={text_maker("email_frontend_privacy_ack")}
                     label_style={{ fontWeight: 'bold' }}
+                    container_style={{ justifyContent: "center" }}
                   />
                 </div>
               </div>
