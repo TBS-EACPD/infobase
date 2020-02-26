@@ -188,13 +188,13 @@ behind_scenes_sub_text_2:
   transform: [handlebars, markdown]
   en: |
     We draw inspiration from work done across the globe, in both the public and private sectors. Our [Government at a Glance diagram](#partition/dept/exp) was inspired by the excellent 
-    work of the {{ext_link "USAFacts.org" "https://usafacts.org/the-big-picture/spending"}} team. Our minimal page header and footer were inspired by our colleagues at the 
+    work of the {{ext_link "USAFacts.org" "https://usafacts.org/visualizations/the-big-picture/"}} team. Our minimal page header and footer were inspired by our colleagues at the 
     {{ext_link "Canadian Digital Service" "https://digital.canada.ca"}}. We are regularly inspired to push our data visualizations even further by the D3 community at large, and through 
     resources like the {{ext_link "D3 gallery" "https://github.com/d3/d3/wiki/Gallery"}}.
   fr: |
     Notre source d’inspiration est le travail effectué à l’échelle mondiale, tant dans le secteur public que privé. Pour le
     [diagramme Panorama de l'administration publique](#partition/dept/exp), nous sommes inspirés par l’excellent travail accompli par l’équipe 
-    {{ext_link "USAFacts.org" "https://usafacts.org/the-big-picture/spending"}}. L’inspiration pour la taille minimale de l’en-tête et du bas de page nous vient de nos collègues à 
+    {{ext_link "USAFacts.org" "https://usafacts.org/visualizations/the-big-picture/"}}. L’inspiration pour la taille minimale de l’en-tête et du bas de page nous vient de nos collègues à 
     {{ext_link "Service numérique canadien" "https://numerique.canada.ca/"}}. Enfin, nous sommes régulièrement inspirés par la grande collectivité D3 qui nous incite à peaufiner encore 
     davantage les visualisations de données, au moyen de ressources comme la {{ext_link "galerie D3" "https://github.com/d3/d3/wiki/Gallery"}}.
 
