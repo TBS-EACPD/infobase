@@ -1577,8 +1577,8 @@
 "PMPRB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",997586,1021850,935765.00,1181921,1278744
 "PMPRB","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-71772,-113934,-89400.00,-260355,0
 "PMPRB","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",47,448,472.00,1634,
-"PPP",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",11800000,11800000,11800000.00,,
-"PPP",5,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",219400000,267700000,267700000.00,,
+"PPP",1,5,"Payments to Crown Corps - Used until 2017-18","Paiement aux sociétés d'État - utilisé jusqu'en 2017-2018","ME",11800000,11800000,11800000.00,,
+"PPP",5,5,"Payments to Crown Corps - Used until 2017-18","Paiement aux sociétés d'État - utilisé jusqu'en 2017-2018","ME",219400000,267700000,267700000.00,,
 "PPS",1,1,"Operating and Program","Fonctionnement and Programme","ME",0,56313707,62100000.00,76663760,81786647
 "PPS",1,1,"Operating and Program","Fonctionnement and Programme","SEA",0,0,3272189.00,7127658,0
 "PPS",1,1,"Operating and Program","Fonctionnement and Programme","SEB",3111253,6691090,14245794.00,0,0
