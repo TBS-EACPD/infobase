@@ -6,6 +6,7 @@ export class TabbedControls extends React.Component {
     const {
       tab_options,
       tab_callback,
+      disabled_message,
     } = this.props;
     
     return (
@@ -22,6 +23,7 @@ export class TabbedControls extends React.Component {
                 id = {key + "_tab"}
                 key = {key + "_tab"}
                 onClick = { () => !is_disabled && tab_callback(key) }
+                title={is_disabled ? disabled_message : ''}
               > 
                 <span
                   tabIndex = {0} 
@@ -42,7 +44,12 @@ export class TabbedControls extends React.Component {
     );
   }
 }
-
+TabbedControls.defaultProps = {
+  disabled_message: {
+    en: "Disabled",
+    fr: "TODO",
+  }[window.lang],
+};
 
 /*props: 
   tab_keys: array of keys associated with tabs,
@@ -62,6 +69,7 @@ export class TabbedContent extends React.Component {
       tab_labels,
       tab_pane_contents,
       tab_is_disabled,
+      disabled_message,
     } = this.props;
     
     const open_tab_key = this.state.open_tab_key;
@@ -72,8 +80,8 @@ export class TabbedContent extends React.Component {
       (key) => ({
         key,
         label: tab_labels[key],
+        is_disabled: tab_is_disabled[key],
         is_open: open_tab_key === key,
-        is_disabled: tab_is_disabled,
       })
     );
 
@@ -81,7 +89,7 @@ export class TabbedContent extends React.Component {
 
     return (
       <div className="tabbed-content" aria-hidden="true">
-        <TabbedControls { ...{tab_options, tab_callback} } />
+        <TabbedControls { ...{tab_options, tab_callback, disabled_message} } />
         <div 
           className="tabbed-content__pane"
           ref = { open_tab_key+"_tabbed_content_pane" }

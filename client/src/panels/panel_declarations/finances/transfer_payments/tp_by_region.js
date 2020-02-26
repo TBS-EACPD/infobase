@@ -149,8 +149,8 @@ class TPMap extends React.Component {
         show_per_capita: false,
       };
 
-      const should_tab_be_disabled = (Object.entries(data_tppc[0]) == "") ? true : false;
-
+      const should_tab_be_disabled = _.every(data_tppc, _.isEmpty);
+      
       //TP PER CAPITA VERSION
       const current_year_data_tppc = _.last(data_tppc);
       
@@ -193,7 +193,11 @@ class TPMap extends React.Component {
                 show_tp: text_maker("show_tp"),
                 show_tp_per_capita: text_maker("show_tp_per_capita"),
               }}
-              tab_is_disabled={should_tab_be_disabled}
+              tab_is_disabled={{
+                show_tp: false,
+                show_tp_per_capita: should_tab_be_disabled,
+              }}
+              disabled_message={text_maker("tp_no_data_hover_label")}
               tab_pane_contents={{
                 show_tp: (
                   <div id={"tp_tab_pane"}>
