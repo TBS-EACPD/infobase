@@ -9,7 +9,13 @@ export class Details extends React.Component {
     };
   }
   render(){
-    const { summary_content, content, persist_content } = this.props;
+    const {
+      summary_content,
+      content,
+      persist_content,
+      closed_drawer_icon,
+      opened_drawer_icon,
+    } = this.props;
     const { isOpen } = this.state;
 
     const aria_labels = {
@@ -32,7 +38,7 @@ export class Details extends React.Component {
         aria-labelledby={label_id}
       >
         <span aria-hidden className="IBDetails__TogglerIcon">
-          { isOpen ? "▼" : "►" }
+          { isOpen ? opened_drawer_icon || "▼" : closed_drawer_icon || "►" }
         </span>
         <span id={label_id}>
           { summary_content }
