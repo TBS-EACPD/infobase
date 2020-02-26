@@ -80,8 +80,8 @@ export class TabbedContent extends React.Component {
       (key) => ({
         key,
         label: tab_labels[key],
-        is_disabled: tab_is_disabled[key],
         is_open: open_tab_key === key,
+        is_disabled: (tab_is_disabled)?tab_is_disabled[key]:false,
       })
     );
 
