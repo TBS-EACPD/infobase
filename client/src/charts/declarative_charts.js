@@ -6,13 +6,13 @@ import { A11YTable } from './A11yTable.js';
 const GraphLegend = ({
   isHorizontal, //defaults to false
   isSolidBox, //defaults to false
-  items, // [ { active, id, label, color }] 
-  onClick, //id => { }
+  items, //required: [ {active, id, label, color} ] 
+  onClick, //required: id => {}
   container_style, //style for div, containing checkbox and label
   checkbox_style, //style for checkbox
   label_style, //style for label
   a11y_label_style, //style for a11y label only
-  checkmark_vertical_align, //vertical alignment for checkmark
+  checkmark_vertical_align, //defaults to 0.1
 }) => (
   <ul className={window.is_a11y_mode ? "list-unstyled" : classNames("legend-list-inline", isHorizontal && "horizontal")}>
     {_.map(items, ({ color, label, id, active }) => 
