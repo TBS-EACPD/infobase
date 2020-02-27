@@ -403,7 +403,7 @@ const result_docs_in_tabling_order = _.chain(result_docs)
   .values()
   .sortBy( ({doc_type, year_short}) => doc_type === 'drr' ?
     +year_short + 1.1 : // DRRs are tabled a year behind, add 0.1 further to give priority over same year DPs 
-    +year_short - 1 // DPs are tabled a year ahead
+    +year_short // DPs are tabled a year ahead
   )
   .value();
 
