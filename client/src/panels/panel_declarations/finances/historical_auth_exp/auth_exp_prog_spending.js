@@ -21,7 +21,7 @@ const {
 } = declarative_charts;
 const { Details } = util_components;
 
-const { std_years, planning_years } = year_templates;
+const { std_years, planning_years, estimates_years } = year_templates;
 const { text_maker, TM } = create_text_maker_component(text);
 
 const auth_cols = _.map(std_years, yr=>`${yr}auth`);
@@ -39,10 +39,15 @@ const calculate = function(subject, info, options) {
   const query_subject = subject.is("gov") ? undefined : subject;
 
   const qEst = orgVoteStatEstimates.q(query_subject);
-  const est_in_year = qEst.sum('{{est_in_year}}_estimates', {as_object: false});
+  // wonky code below is to figure out how many extra estimates years we need, 1 or 2
+  const est_extra_years = run_template('{{pa_last_year}}') === run_template('{{est_last_year}}') ?
+    qEst.sum('{{est_in_year}}_estimates', {as_object: false}) :
+    run_template('{{pa_last_year}}') === run_template('{{est_last_year_2}}') ?
+      [qEst.sum('{{est_last_year}}_estimates', {as_object: false}), qEst.sum('{{est_in_year}}_estimates', {as_object: false})] :
+      [];
 
   const qAuthExp = orgVoteStatPa.q(query_subject);
-  const auth = _.concat(qAuthExp.sum(auth_cols, {as_object: false}), est_in_year);
+  const auth = _.concat(qAuthExp.sum(auth_cols, {as_object: false}), est_extra_years);
   const exp = qAuthExp.sum(exp_cols, {as_object: false});
 
   const qProgSpending = programSpending.q(query_subject);
@@ -76,14 +81,17 @@ class AuthExpProgSpending extends React.Component {
     const colors = d3.scaleOrdinal().range(newIBCategoryColors);
     const raw_data = _.concat(exp, auth, progSpending);
   
-    const auth_ticks = _.concat(_.map(std_years, run_template), run_template('{{est_in_year}}'));
+    const auth_ticks = _.chain(_.map(std_years, run_template))
+      .concat(_.map(estimates_years, run_template))
+      .uniq()
+      .value();
     const exp_ticks = _.map(std_years, run_template);
     const plan_ticks = _.map(planning_years, run_template);
-  
+
     const gap_year = (subject.has_planned_spending && actual_to_planned_gap_year) || null;
 
     const additional_info = {
-      last_history_year: run_template(_.last(std_years)),
+      last_history_year: _.last(auth_ticks),
       last_planned_year: _.last(plan_ticks),
       gap_year: gap_year,
       plan_change: info[`${subject.level}_exp_planning_year_3`] - info[`${subject.level}_auth_average`],
