@@ -23,13 +23,12 @@ const { provinces, provinces_with_article } = businessConstants;
 const { A11YTable } = declarative_charts;
 
 
-function loadPopulation(){
+const loadPopulation = () => {
   const parse_csv_string = csv_string => _.tail( d3.csvParseRows( _.trim(csv_string) ) );
   
   return make_request( get_static_url(`csv/population.csv`) )
     .then( csv_string => parse_csv_string(csv_string) )
-    .then(function(population_data) {
-      const population_values_by_prov_code = 
+    .then((population_data) =>
       _.chain(population_data)
         .keyBy(_.first)
         .mapValues(row => _.chain(row)
@@ -37,11 +36,8 @@ function loadPopulation(){
           .map(value => parseInt(value))
           .value()
         )
-        .value();
-    
-      return population_values_by_prov_code;
-    }
-    ); 
+        .value()
+    );
 };
 
 
@@ -267,11 +263,7 @@ export const declare_tp_by_region_panel = () => declare_panel({
         return false;
       }
 
-      return {
-        tables: {
-          tp: orgTransferPaymentsRegion,
-        },
-      };
+      return { tables: {tp: orgTransferPaymentsRegion} };
     },
     render: ({calculations, footnotes, sources}) => (
       <TPMap
