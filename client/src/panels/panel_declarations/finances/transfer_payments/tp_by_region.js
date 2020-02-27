@@ -87,10 +87,9 @@ class TPMap extends React.Component {
           <SpinnerWrapper config_name={"sub_route"} />
         </div>);
     } else {
-      const { tables } = calculations.panel_args;
-      const { tp } = tables;
+      const tp_table = calculations.panel_args.table;
 
-      const get_subject_data_for_year = (year) => tp.prov_code(
+      const get_subject_data_for_year = (year) => tp_table.prov_code(
         year,
         calculations.subject.level === 'dept' && calculations.subject.id
       );
@@ -260,7 +259,7 @@ export const declare_tp_by_region_panel = () => declare_panel({
         return false;
       }
 
-      return { tables: {tp: orgTransferPaymentsRegion} };
+      return { table: orgTransferPaymentsRegion };
     },
     render: ({calculations, footnotes, sources}) => (
       <TPMap
