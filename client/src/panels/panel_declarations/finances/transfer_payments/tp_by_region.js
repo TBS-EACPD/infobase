@@ -98,10 +98,8 @@ class TPMap extends React.Component {
       const data_tp = std_years.map(get_subject_data_for_year);
       const data_tppc = std_years.map((year, i) => {
         const single_year_tp_data = get_subject_data_for_year(year);
-        const result = _.chain(
-          _.keys(single_year_tp_data))
+        return _.chain( _.keys(single_year_tp_data) )
           .pullAll(["na", "abroad"])
-          
           .map((prov) => {
             const in_year_prov_transfer_payments = single_year_tp_data[prov];
             const in_year_prov_population = population[prov][i];
@@ -112,7 +110,6 @@ class TPMap extends React.Component {
           })
           .fromPairs()
           .value();
-        return result;
       });
       
       //REGULAR TP VERSION
@@ -170,7 +167,7 @@ class TPMap extends React.Component {
       );
       const percent_of_total_tppc = current_year_data_tppc[largest_prov_tppc] / total_sum_tppc;
       const text_args_tppc = {
-        largest_prov: (should_tab_be_disabled) ? null : provinces_with_article[largest_prov_tppc].text,
+        largest_prov: !should_tab_be_disabled && provinces_with_article[largest_prov_tppc].text,
         total_sum: formatter(total_sum_tppc),
         percent_of_total: formats["percentage1_raw"](percent_of_total_tppc),
         subject: calculations.subject,
