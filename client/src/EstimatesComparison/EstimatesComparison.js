@@ -333,6 +333,7 @@ class EstimatesExplorer extends React.Component {
                 active={!show_stat}
                 onClick={toggle_stat_filter}
                 container_style={{ marginTop: '1rem' }}
+                a11y_label_style={{fontWeight: "bold"}}
               />
             }
           </form>
