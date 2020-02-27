@@ -9,6 +9,7 @@ export class CheckBox extends React.Component{
       label,
       active,
       isSolidBox,
+      a11y_label_style,
       container_style,
       checkbox_style,
       label_style,
@@ -16,7 +17,19 @@ export class CheckBox extends React.Component{
       disabled,
     } = this.props;
 
-    return <div style={{
+    return window.is_a11y_mode ?
+    <div className="checkbox">
+      <label style={a11y_label_style}>
+        <input 
+          type='checkbox'
+          checked={active}
+          onChange={onClick}
+          style={{marginRight: 5}}
+        />
+        { label }
+      </label>
+    </div>
+    : <div style={{
       display: "flex",
       pointerEvents: disabled && "none",
       opacity: disabled && 0.4,
