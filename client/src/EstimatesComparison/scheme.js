@@ -96,11 +96,19 @@ const get_keys_in_sups = (include_stat) => _.chain(Table.lookup('orgVoteStatEsti
   .fromPairs()
   .value();
 
-const calculate_percent_value = (current_value, comparison_value) => (
-  current_doc_is_mains ?
-    (current_value - comparison_value)/comparison_value :
-    current_value/comparison_value
-) || 0;
+const calculate_percent_value = (current_value, comparison_value) => {
+  if (!current_value && comparison_value){
+    return -Infinity;
+  } else if (current_value && !comparison_value){
+    return Infinity;
+  } else {
+    if (current_doc_is_mains){
+      return (current_value - comparison_value)/comparison_value;
+    } else {
+      return current_value/comparison_value;
+    }
+  }
+};
 
 function get_data_by_org(include_stat){
 
@@ -344,21 +352,20 @@ export const col_defs = [
     header_display: current_doc_is_mains ? <TM k="previous_mains_comparison_value" /> : <TM k="change_from_comparison_value" />,
     get_val: node => _.get(node, "data.percent_value"),
     val_display: val => {
-      let content;
-      if( Math.abs( -1-val ) < 0.001){
+      if(val === -Infinity){
         return <Red><strong><TM k="item_no_longer_active"/></strong></Red>;
-      } else if(val > 10){ //let's consider +1000% to be a new item
+      } else if(val === Infinity){
         return <Green><strong><TM k="new"/></strong></Green>;
       } else {
-        content= <Format type="percentage2" content={Math.abs(val)} />;
-      }
+        const unsigned_percent_display = <Format type="percentage2" content={Math.abs(val)} />;
 
-      if(val>0){
-        return <Green>+{content}</Green>;
-      } else if(val===0){
-        return content;
-      } else {
-        return <Red>-{content}</Red>;
+        if(val > 0){
+          return <Green>+{unsigned_percent_display}</Green>;
+        } else if(val === 0){
+          return unsigned_percent_display;
+        } else {
+          return <Red>-{unsigned_percent_display}</Red>;
+        }
       }
     },
   },
