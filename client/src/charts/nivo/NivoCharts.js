@@ -138,14 +138,20 @@ const TabularPercentLegend = ({
 );
 
 
-const bar_table_data = (data, indexBy, table_view_format) => _.chain(data)
-  .map(row => _.chain(row)
+const bar_table_data = (data, indexBy, table_view_format) => _.map(data, row => ({
+  display_values: _.chain(row)
     .toPairs()
-    .map(r => r[0]===indexBy ? r : [r[0],table_view_format(r[1])] )
+    .map(r => r[0]===indexBy ? ["label", r[1]] : [r[0],table_view_format(r[1])] )
     .fromPairs()
-    .value() )
-  .map(row => ({col_data: row, label: row[indexBy], sort_keys: row}))
-  .value();
+    .value(),
+  sort_values: {
+    label: row[indexBy],
+    ...(_.omit(row, 'indexBy')),
+  },
+  search_values: {
+    label: row[indexBy],
+  },
+}) );
 
 class InteractiveGraph extends React.Component{
   constructor(props){
@@ -292,13 +298,31 @@ export class NivoResponsivePie extends React.Component{
       0 
     );
 
-    const table_data = _.chain(data)
-      .map( row => _.assign(row, {percentage: formats.percentage_raw(row.value/legend_total), formatted_value: get_formatter(is_money, text_formatter, true, true)(row.value)}) )
-      .map( row => ({col_data: row, label: row["label"]}) )
-      .value();
-    const table_header_keys = ["label", "formatted_value", "percentage"];
+    const table_data = _.map(data, row => ({
+      display_values: {
+        label: row["label"],
+        percentage: formats.percentage_raw(row.value/legend_total),
+        value: get_formatter(is_money, text_formatter, true, true)(row.value),
+      },
+      sort_values: {
+        label: row["label"],
+        percentage: row.value/legend_total,
+        value: row.value,
+      },
+      search_values: {
+        label: row["label"],
+      },
+    }) );
+    
+    const column_names = {
+      label: text_maker("label"),
+      value: text_maker("value"),
+      percentage: text_maker("percentage"),
+    };
 
-    const table = !disable_table_view && <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
+    const ordered_column_keys = ["label", "value", "percentage"];
+
+    const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={"TODO"} />;
 
     const graph =
     <div className={display_horizontal ? classNames("common-donut__horizontal","common-donut") : "common-donut"} aria-hidden = {true}>
@@ -355,7 +379,7 @@ export class NivoResponsivePie extends React.Component{
                       <Format type="compact1" content={item.value} />
                     </span>
                     <span className="common-donut__legend-data">
-                      <Format type="percentage1" content={(item.value)*Math.pow(legend_total,-1)} />
+                      <Format type="percentage1" content={item.value/legend_total} />
                     </span>
                   </div>
                 )
@@ -421,17 +445,20 @@ export class NivoResponsiveBar extends React.Component{
       labelTextColor,
       borderWidth,
       disable_table_view,
+      table_first_column_name,
     } = this.props;
 
     legends && (legends[0].symbolShape = fixedSymbolShape);
 
     const table_data = bar_table_data(data, indexBy, get_formatter(is_money, text_formatter, true, true));
-    const table_header_keys = _.concat([indexBy],keys);
-
-    const table = !disable_table_view && <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
+    const ordered_column_keys = _.concat([indexBy],keys);
+    const column_names = _.chain(ordered_column_keys)
+      .zip( _.concat([table_first_column_name ? table_first_column_name : text_maker("label")], keys) )
+      .fromPairs()
+      .value();
+    const table = !disable_table_view && <DisplayTable rows={table_data} ordered_column_keys={ordered_column_keys} column_names={column_names} name={"TODO"}/>;
     
     // have to have an empty string in key to make sure that negative bars will be displayed
-    
     const graph = <ResponsiveBar
       {...{data,
         margin,
@@ -529,14 +556,19 @@ export class NivoResponsiveHBar extends React.Component{
       labelSkipWidth,
       markers,
       disable_table_view,
+      table_first_column_name,
     } = this.props;
     legends && (legends[0].symbolShape = fixedSymbolShape);
 
 
     const table_data = bar_table_data(data, indexBy, get_formatter(is_money, text_formatter, true, true));
-    const table_header_keys = _.concat([indexBy],keys);
-    
-    const table = !disable_table_view && <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
+    const ordered_column_keys = _.concat([indexBy],keys);
+    const column_names = _.chain(ordered_column_keys)
+      .zip( _.concat([table_first_column_name ? table_first_column_name : text_maker("label")], keys) )
+      .fromPairs()
+      .value();
+
+    const table = !disable_table_view && <DisplayTable rows={table_data} ordered_column_keys={ordered_column_keys} column_names={column_names} name={"TODO"}/>;
     
     
     //have to have an empty string in key to make sure
@@ -661,19 +693,27 @@ export class NivoResponsiveLine extends React.Component {
     legends && (legends[0].symbolShape = fixedSymbolShape);
 
     const table_data = _.map(data, row => ({
-      col_data: _.chain(row.data)
+      display_values: _.chain(row.data)
         .map(d => [d.x,get_formatter(is_money, text_formatter, true, true)(d.y)])
         .fromPairs()
         .assign({label: row.id})
         .value(),
-      label: row.id}));
-    const table_header_keys = _.concat(['label'], _.chain(data)
+      sort_values: {
+        label: row.id,
+        ...(_.omit(row, 'id')),
+      },
+      search_values: {
+        label: row.id,
+      },
+    }) );
+    const ordered_column_keys = _.concat(['label'], _.chain(data)
       .map( d=>_.map( d.data, d=>d.x ) )
       .flatten()
       .uniq()
       .value() );
+    const column_names = _.fromPairs(_.zip(ordered_column_keys,ordered_column_keys)); //TODO: fix this
     
-    const table = !disable_table_view && <DisplayTable data={table_data} column_keys={table_header_keys} sort_keys={table_header_keys} table_data_headers={table_header_keys} table_name={"TODO"}/>;
+    const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={"TODO"}/>;
 
     const zoom_button = (!disable_yaxis_zoom && !enableArea) ?
       <button
