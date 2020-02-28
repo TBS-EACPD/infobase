@@ -13,7 +13,7 @@ const featured_content_items = _.compact([
     text_key: 'supps_b',
     href: {
       en: "#rpb/.-.-(subject.-.-'gov_gov.-.-preferDeptBreakout.-.-true.-.-mode.-.-'simple.-.-table.-.-'orgVoteStatEstimates.-.-columns.-.-(.-.-'*7b*7best_last_year*7d*7d_estimates).-.-dimension.-.-'by_estimates_doc.-.-filter.-.-'Supp.*20Estimates*20B.-.-sort_col.-.-'dept.-.-descending.-.-false)",
-      fr: "http://127.0.0.1:8080/build/InfoBase/index-fra.html#rpb/.-.-(subject.-.-'gov_gov.-.-preferDeptBreakout.-.-true.-.-mode.-.-'simple.-.-table.-.-'orgVoteStatEstimates.-.-columns.-.-(.-.-'*7b*7best_last_year*7d*7d_estimates).-.-dimension.-.-'by_estimates_doc.-.-filter.-.-'Budget*20supp.*20B.-.-sort_col.-.-'dept.-.-descending.-.-false)",
+      fr: "#rpb/.-.-(subject.-.-'gov_gov.-.-preferDeptBreakout.-.-true.-.-mode.-.-'simple.-.-table.-.-'orgVoteStatEstimates.-.-columns.-.-(.-.-'*7b*7best_last_year*7d*7d_estimates).-.-dimension.-.-'by_estimates_doc.-.-filter.-.-'Budget*20supp.*20B.-.-sort_col.-.-'dept.-.-descending.-.-false)",
     },
   },
   {
