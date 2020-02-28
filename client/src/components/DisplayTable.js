@@ -51,14 +51,13 @@ export class DisplayTable extends React.Component {
       name,
       column_names,
       rows,
+      ordered_column_keys,
     } = this.props;
     const {
       sort_by,
       descending,
       searches,
     } = this.state;
-
-    const ordered_column_keys = _.keys(column_names);
 
     const clean_search_string = (search_string) => _.chain(search_string).deburr().toLower().trim().value();
     const sorted_filtered_data = _.chain(rows)

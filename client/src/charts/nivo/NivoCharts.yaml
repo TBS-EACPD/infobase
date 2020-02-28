@@ -18,3 +18,15 @@ table_view:
 toggle_graph:
   en: Toggle Graph Type
   fr: Changer le type de graphique
+
+label:
+  en: Label
+  fr: Étiquette
+
+value:
+  en: Value
+  fr: Valeur
+
+percentage:
+  en: Percentage
+  fr: Pourcentage
