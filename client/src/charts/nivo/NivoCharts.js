@@ -141,15 +141,15 @@ const TabularPercentLegend = ({
 const bar_table_data = (data, indexBy, table_view_format) => _.map(data, row => ({
   display_values: _.chain(row)
     .toPairs()
-    .map(r => r[0]===indexBy ? ["label", r[1]] : [r[0],table_view_format(r[1])] )
+    .map(r => r[0]===indexBy ? [indexBy, r[1]] : [r[0],table_view_format(r[1])] )
     .fromPairs()
     .value(),
   sort_values: {
-    label: row[indexBy],
+    [indexBy]: row[indexBy],
     ...(_.omit(row, 'indexBy')),
   },
   search_values: {
-    label: row[indexBy],
+    [indexBy]: row[indexBy],
   },
 }) );
 
@@ -456,6 +456,7 @@ export class NivoResponsiveBar extends React.Component{
       .zip( _.concat([table_first_column_name ? table_first_column_name : text_maker("label")], keys) )
       .fromPairs()
       .value();
+
     const table = !disable_table_view && <DisplayTable rows={table_data} ordered_column_keys={ordered_column_keys} column_names={column_names} name={"TODO"}/>;
     
     // have to have an empty string in key to make sure that negative bars will be displayed
