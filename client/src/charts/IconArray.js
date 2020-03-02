@@ -7,12 +7,12 @@ export class IconArray extends React.Component {
     } = this.props;
 
     const rendered_items = _.map(items, (item, ix) =>
-      <div
+      <div 
         key={ix}
-        title={item}//figure out passing in variable
         style={{
           flex: "0 0 auto",
         }}
+        title={(items[0].status_key)}
       >
         {render_item(item)}
       </div>
