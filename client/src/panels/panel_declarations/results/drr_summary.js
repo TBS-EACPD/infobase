@@ -69,6 +69,7 @@ const MiniLegend = ({ items }) => (
             marginRight: "5px",
           }}
           className={className}
+          title={id}
         />
         <span> {label} </span>
       </div>
