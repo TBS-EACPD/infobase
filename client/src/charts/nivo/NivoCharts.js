@@ -566,7 +566,7 @@ export class NivoResponsiveHBar extends React.Component{
 
 
     const table = !disable_table_view && bar_table(data, keys, indexBy, get_formatter(is_money, text_formatter, true, true), table_first_column_name);
-    
+
     //have to have an empty string in key to make sure
     //that negative bars will be displayed
     const graph = <ResponsiveBar
@@ -680,6 +680,7 @@ export class NivoResponsiveLine extends React.Component {
       legends,
       layers,
       disable_table_view,
+      table_first_column_name,
     } = this.props;
 
     const {
@@ -694,21 +695,27 @@ export class NivoResponsiveLine extends React.Component {
         .fromPairs()
         .assign({label: row.id})
         .value(),
-      sort_values: {
-        label: row.id,
-        ...(_.omit(row, 'id')),
-      },
+      sort_values: _.chain(row.data)
+        .map(d => [d.x,d.y])
+        .fromPairs()
+        .assign({label: row.id})
+        .value(),
       search_values: {
         label: row.id,
       },
     }) );
-    const ordered_column_keys = _.concat(['label'], _.chain(data)
+    const last_column_keys = _.chain(data)
       .map( d=>_.map( d.data, d=>d.x ) )
       .flatten()
       .uniq()
-      .value() );
-    const column_names = _.fromPairs(_.zip(ordered_column_keys,ordered_column_keys)); //TODO: fix this
-    
+      .value();
+    const ordered_column_keys = _.concat(['label'], last_column_keys);
+  
+    const column_names = _.chain(ordered_column_keys)
+      .zip( _.concat([table_first_column_name ? table_first_column_name : text_maker("label")], last_column_keys) )
+      .fromPairs()
+      .value();
+
     const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={"TODO"}/>;
 
     const zoom_button = (!disable_yaxis_zoom && !enableArea) ?
