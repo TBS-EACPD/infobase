@@ -264,21 +264,25 @@ class InfoGraph_ extends React.Component {
             summary_content={text_maker("filter_panels")}
             persist_content={true}
             content={
-              <GraphLegend
-                items={ _.map(panel_filter, (checked, dependency) => 
-                  ({
-                    id: dependency,
-                    label: Table.lookup(dependency).name,
-                    active: checked,
-                    color: window.infobase_color_constants.primaryColor,
-                  })
-                )}
-                onClick={ (evt) => {
-                  const copy_filter = _.clone(panel_filter);
-                  copy_filter[evt] = !panel_filter[evt];
-                  this.setState({ panel_filter: copy_filter });
-                }}
-              />  
+              <fieldset>
+                <legend> {text_maker("filter_panels_description")} </legend>
+                <GraphLegend
+                  container_style={{ marginLeft: "20px" }}
+                  items={ _.map(panel_filter, (checked, dependency) => 
+                    ({
+                      id: dependency,
+                      label: Table.lookup(dependency).name,
+                      active: checked,
+                      color: window.infobase_color_constants.primaryColor,
+                    })
+                  )}
+                  onClick={ (evt) => {
+                    const copy_filter = _.clone(panel_filter);
+                    copy_filter[evt] = !panel_filter[evt];
+                    this.setState({ panel_filter: copy_filter });
+                  }}
+                />
+              </fieldset>
             }
           />
           <span className="panel-status-text">
