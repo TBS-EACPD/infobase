@@ -17,7 +17,7 @@ import { ensure_loaded } from '../core/lazy_loader.js';
 import { bubble_defs } from './bubble_definitions.js'; 
 import { get_panels_for_subject } from '../panels/get_panels_for_subject/index.js';
 import { PanelRenderer } from '../panels/PanelRenderer.js';
-import { tables_for_panel } from '../panels/PanelRegistry.js';
+import { tables_for_panel, PanelRegistry } from '../panels/PanelRegistry.js';
 import {
   create_text_maker_component,
   SpinnerWrapper,
@@ -151,6 +151,7 @@ class InfoGraph_ extends React.Component {
       infographic_loading,
       bubbles_for_subject,
       panel_filter,
+      total_number_of_panels,
     } = this.state;
     const loading = bubble_menu_loading || infographic_loading;
 
@@ -191,6 +192,22 @@ class InfoGraph_ extends React.Component {
       height: 15,
       vertical_align: 5,
     };
+    const panel_renderers = !loading &&
+      _.chain(panel_keys)
+        .map((panel_key) => {
+          const panel_obj = PanelRegistry.lookup(panel_key, subject.level);
+          const panel_filter_arr = _.map(panel_filter, (value, key) => panel_filter[key] && key);
+          const is_filtered = _.intersection(panel_filter_arr, panel_obj.depends_on).length > 0;
+
+          return is_filtered && <PanelRenderer
+            panel_key={panel_key}
+            subject={subject}
+            active_bubble_id={active_bubble_id}
+            key={panel_key + subject.guid}
+          />;
+        })
+        .filter()
+        .value();
 
     return (
       <div>
@@ -264,16 +281,13 @@ class InfoGraph_ extends React.Component {
               />  
             }
           />
-          { !loading &&
-            _.map(panel_keys, panel_key => 
-              <PanelRenderer
-                panel_key={panel_key}
-                subject={subject}
-                panel_filter={panel_filter}
-                active_bubble_id={active_bubble_id}
-                key={panel_key + subject.guid}
-              />
-            )
+          <span className="panel-status-text">
+            <TM k="panels_status"
+              args={{ number_of_active_panels: panel_renderers.length, total_number_of_panels: total_number_of_panels }}
+            />
+          </span>
+          { !loading && 
+            panel_renderers
           }
         </div>
         { !_.isEmpty(active_bubble_id) && 
@@ -352,10 +366,17 @@ class InfoGraph_ extends React.Component {
             return result;
           }, {})
           .value();
-          
+
+        const total_number_of_panels = _.reduce(panel_keys, (count, panel_key) => {
+          const panel_obj = PanelRegistry.lookup(panel_key, subject.level);
+          const panel_filter_arr = _.map(panel_filter, (value, key) => panel_filter[key] && key);
+          return _.intersection(panel_filter_arr, panel_obj.depends_on).length > 0 ? count + 1 : count;
+        }, 0);
+        
         this.setState({
           infographic_loading: false,
           panel_filter: panel_filter,
+          total_number_of_panels: total_number_of_panels,
         });
       }
     });

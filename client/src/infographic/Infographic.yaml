@@ -62,7 +62,10 @@ infograph_explorer_link:
 filter_panels:
   en: Filter Infographs
   fr: TODO
-
+panels_status:
+  transform: [handlebars]
+  en: Showing {{number_of_active_panels}} of {{total_number_of_panels}} panels
+  fr: TODO
 
 
 
