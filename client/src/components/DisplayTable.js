@@ -115,6 +115,8 @@ export class DisplayTable extends React.Component {
                         const sortable = _.has(sort_values, column_key);
                         const searchable = _.has(search_values, column_key);
       
+                        const current_search_input = (searchable && searches[column_key]) || null;
+
                         return (
                           <th 
                             key={column_key}
@@ -127,11 +129,12 @@ export class DisplayTable extends React.Component {
                                   desc={descending && sort_by === column_key}
                                 />
                               </div>
-                            } 
+                            }
                             { searchable &&
                               <DebouncedTextInput
                                 inputClassName={"search input-sm"}
                                 placeHolder={text_maker('filter_data')}
+                                defaultValue={current_search_input}
                                 updateCallback={ (search_value) => {
                                   const updated_searches = _.mapValues(
                                     searches,
