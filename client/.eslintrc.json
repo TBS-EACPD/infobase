@@ -19,6 +19,9 @@
   },
   "extends": [ "eslint:recommended", "plugin:react/recommended" ],
   "rules": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
       "indent": [
           "warn",
           2,
