@@ -75,7 +75,6 @@ class SimpleView extends React.Component {
                     active={deptBreakoutMode}
                     onClick={on_toggle_deptBreakout}
                     label={text_maker("show_dept_breakout")}
-                    a11y_label_style={{fontWeight: "bold"}}
                   />
                 </div>
               }

@@ -286,7 +286,6 @@ class ExplorerForIgoc extends React.Component {
             label={text_maker("show_orgs_without_data")}
             checkmark_vertical_align={6}
             checkbox_style={{ marginTop: 4 }}
-            a11y_label_style={{fontWeight: "bold"}}
           />
           <div>
             <TM k="displayed_orgs_count" args={{org_count}}/>

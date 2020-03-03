@@ -11,7 +11,6 @@ const GraphLegend = ({
   container_style, //style for div, containing checkbox and label
   checkbox_style, //style for checkbox
   label_style, //style for label
-  a11y_label_style, //style for a11y label only
   checkmark_vertical_align, //defaults to 0.1
 }) => (
   <ul className={window.is_a11y_mode ? "list-unstyled" : classNames("legend-list-inline", isHorizontal && "horizontal")}>
@@ -30,7 +29,6 @@ const GraphLegend = ({
           container_style={container_style}
           checkbox_style={checkbox_style}
           label_style={label_style}
-          a11y_label_style={a11y_label_style}
           checkmark_vertical_align={checkmark_vertical_align}
         />
       </li>

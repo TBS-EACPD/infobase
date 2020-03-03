@@ -12,14 +12,13 @@ export class CheckBox extends React.Component{
       container_style, //style for div, containing checkbox and label
       checkbox_style, //style for checkbox
       label_style, //style for label
-      a11y_label_style, //style for a11y label only
       checkmark_vertical_align, //defaults to 0.1
       disabled, //greys out checkbox and make it non-clickable if true
     } = this.props;
 
     return window.is_a11y_mode ?
     <div className="checkbox">
-      <label style={a11y_label_style}>
+      <label>
         <input 
           type='checkbox'
           checked={active}
