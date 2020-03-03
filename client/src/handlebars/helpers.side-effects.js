@@ -384,7 +384,13 @@ function subject_name(subject){
     );
 
   } else {
-    return subject.name;
+    if (subject.name === "Government"){
+      return "The Government";
+    } else if (subject.name === "Gouvernement"){
+      return "Le Gouvernement";
+    } else {
+      return subject.name;
+    }
   }
 };
 
