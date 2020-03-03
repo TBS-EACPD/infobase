@@ -159,8 +159,7 @@ export class CanadaD3Component {
       })
       .on("mouseenter", dispatch_mouseEnter)
       .on("focus", dispatch_mouseEnter)
-      .on("mouseleave", dispatch_mouseLeave)
-      .on("blur", dispatch_mouseLeave);
+      .on("mouseleave", dispatch_mouseLeave);
 
     // Add labels to provinces with data, attach event dispatchers
     const provinces_to_label = _.chain(ordering)
@@ -172,11 +171,6 @@ export class CanadaD3Component {
       .filter( prov_key => _.some(data, (yearly_data) => yearly_data[prov_key]) )
       .value();
     
-    const labels_to_remove = html.selectAll("div.label");
-    
-    labels_to_remove.data([]).exit().remove();
-    
-    
     html.selectAll("div.label")
       .data(provinces_to_label)
       .enter()
@@ -187,7 +181,6 @@ export class CanadaD3Component {
       .on("mouseenter", dispatch_mouseEnter)
       .on("focus", dispatch_mouseEnter)
       .on("mouseleave", dispatch_mouseLeave)
-      .on("blur", dispatch_mouseLeave)
       .each( function(prov_key, i){
 
         const label = svg.selectAll("g.label")
