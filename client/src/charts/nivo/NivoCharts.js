@@ -621,8 +621,6 @@ export class NivoResponsiveHBar extends React.Component{
     </div>;
 
 
-//debugger;
-
     return <InteractiveGraph graph={graph} table={table} />;
   }
 };
