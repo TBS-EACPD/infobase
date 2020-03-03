@@ -177,7 +177,11 @@ export class AdvancedSearch extends React.Component {
                 rotation={180}
               />
             }
-            summary_content={text_maker("advaced_search_title")}
+            summary_content={
+              <span style={{fontSize: 16}}>
+                {text_maker("advaced_search_title")}
+              </span>
+            }
             persist_content={true}
             content={
               <fieldset>
