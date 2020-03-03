@@ -184,19 +184,11 @@ class ResultsTable extends React.Component {
               onClearClick={clear_status_filter}
             />
           </div>
-          {
-            filtered_indicators.length > 0 ?
-              <HeightClippedGraph clipHeight={200}>
-                <div className="results-flat-table">
-                  {indicator_table_from_list(filtered_indicators)}
-                </div>
-              </HeightClippedGraph> :
-              <TM 
-                k="no_data_for_filters" 
-                el="div" 
-                style={{width: "100%", textAlign: "center"}} 
-              />
-          }
+          <HeightClippedGraph clipHeight={200}>
+            <div className="results-flat-table">
+              {indicator_table_from_list(filtered_indicators)}
+            </div>
+          </HeightClippedGraph>
         </div>
       );
     }
