@@ -120,13 +120,14 @@ class HistTPTypes extends React.Component {
           />  
         </div>
 
-        <div style ={{height: '400px', position: "relative"}} aria-hidden = {true}>
+        <div style ={{position: "relative"}}>
           <NivoResponsiveLine
             enableArea = {true}
             disable_yaxis_zoom = {true}
             data = {expenditure_data}
             colorBy={d => colors(d.id)}
             stacked = {true}
+            graph_height = '400px'
           />
         </div>
       </Fragment>;
@@ -272,7 +273,7 @@ class DetailedHistTPItems extends React.Component {
             />  
           </div>
         </div>
-        <div className="fcol-md-8" style={{height: '400px', position: "relative"}} aria-hidden = {true}>
+        <div className="fcol-md-8" style={{position: "relative"}}>
           <NivoResponsiveLine
             data = {detail_expend_data}
             raw_data = {raw_data}
@@ -282,6 +283,7 @@ class DetailedHistTPItems extends React.Component {
               "bottom": 50,
               "left": 70,
             }}
+            graph_height = '400px'
             colorBy={d=>color_scale(d.id)}
           />
         </div>

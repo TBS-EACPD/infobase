@@ -141,6 +141,7 @@ export const format_and_get_fte = (type, info, subject) => {
         bottom: 67,
         left: 40,
       },
+      graph_height: '230px',
       legends: [
         {
           anchor: 'bottom-right',
@@ -177,18 +178,14 @@ export const format_and_get_fte = (type, info, subject) => {
     fte_graph = (
       <Fragment>
         <MediaQuery minWidth={1199}>
-          <div style={{height: 230}} aria-hidden = {true}>
-            <NivoResponsiveLine
-              {...nivo_fte_props}
-            />
-          </div>
+          <NivoResponsiveLine
+            {...nivo_fte_props}
+          />
         </MediaQuery>
         <MediaQuery maxWidth={1198}>
-          <div style={{height: 230}} aria-hidden = {true}>
-            <NivoResponsiveLine
-              {...nivo_mobile_fte_props}
-            />
-          </div>
+          <NivoResponsiveLine
+            {...nivo_mobile_fte_props}
+          />
         </MediaQuery>
       </Fragment>
     );

@@ -47,7 +47,7 @@ function render({calculations, footnotes, sources}) {
       return (null);
     } else {
       return (
-        <div style = {{height: '400px'}} aria-hidden = {true}>
+        <div>
           <NivoResponsiveBar
             data = {spend_rev_data}
             keys = {ticks}
@@ -57,6 +57,7 @@ function render({calculations, footnotes, sources}) {
             label_format = { d=><tspan y={-4}> {formats.compact1(d, {raw: true})} </tspan>}
             colorBy = {d => d.data[d.id] < 0 ? window.infobase_color_constants.highlightColor : window.infobase_color_constants.secondaryColor}
             enableGridX={false}
+            graph_height = '400px'
           />
         </div>
       );

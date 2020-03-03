@@ -876,18 +876,16 @@ class BudgetMeasureHBars extends React.Component {
             </div>
           </div>
           <MediaQuery minWidth={992}>
-            <div className="centerer" style={{height: `${data.length*30 + 150}px`}}>
-              <NivoResponsiveHBar
-                {...nivo_default_props}
-              />
-            </div>
+            <NivoResponsiveHBar
+              {...nivo_default_props}
+              graph_height = {`${data.length*30 + 150}px`}
+            />
           </MediaQuery>
           <MediaQuery maxWidth={992}>
-            <div className="centerer" style={{height: `${data.length*40 + 150}px`}}>
-              <NivoResponsiveHBar
-                {...nivo_mobile_props}
-              />
-            </div>
+            <NivoResponsiveHBar
+              {...nivo_mobile_props}
+              graph_height = {`${data.length*40 + 150}px`}
+            />
           </MediaQuery>
         </Fragment>
       );

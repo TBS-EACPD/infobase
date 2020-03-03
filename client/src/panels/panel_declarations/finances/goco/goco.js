@@ -280,6 +280,7 @@ class Goco extends React.Component {
               onMouseEnter={ (child_node, e) => handleHover(child_node, e.target, node.data.children) }
               onMouseLeave={ (child_node, e) => handleHover(child_node, e.target, node.data.children) }  
               onClick={ (child_node, e) => window.open(tick_map[child_node.indexValue], '_blank') }
+              graph_height = '500px'
               bttm_axis={{
                 renderTick: tick => {
                   return <g key={tick.key} transform={ `translate(${tick.x},${tick.y + 16})` }>
@@ -320,13 +321,14 @@ class Goco extends React.Component {
             />
           </div>
         </div>
-        <div style={{height: 400}}>
+        <div>
           <NivoResponsiveBar
             { ...nivo_default_props }
             data={ graph_data }
             onMouseEnter={ (node, e) => handleHover(node, e.target, graph_data) }
             onMouseLeave={ (node, e) => handleHover(node, e.target, graph_data) }
             onClick={ (node, e) => handleClick(node, e.target, graph_data) }
+            graph_height = '400px'
             bttm_axis={{
               renderTick: tick => {
                 return <g key={tick.key} transform={ `translate(${tick.x},${tick.y + 16})` }>
@@ -352,7 +354,7 @@ class Goco extends React.Component {
       </div>
       { graph_content }
       { child_graph &&
-          <div style={ {height: 500, paddingBottom: 30} }>
+          <div style={{paddingBottom: 30}}>
             { child_graph }
           </div>
       }

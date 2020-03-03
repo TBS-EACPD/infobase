@@ -72,36 +72,35 @@ export const declare_employee_totals_panel = () => declare_panel({
             <TM k={level+"_employee_totals_text"} args={info} />
           </Col>
           { !window.is_a11y_mode &&
-             <Col size={8} isGraph>
-               <div style ={{height: '400px'}} aria-hidden = {true}>
-                 <NivoResponsiveLine
-                   data = { data_formatter()}
-                   raw_data = {series}
-                   colors = { window.infobase_color_constants.primaryColor }
-                   is_money = {false}
-                   yScale = {{toggle: true}}
-                   tooltip = {slice =>  
-                     <div style={{color: window.infobase_color_constants.textColor}}>
-                       <table style={{width: '100%', borderCollapse: 'collapse'}}>
-                         <tbody>
-                           { slice.data.map(
-                             tooltip_item => ( 
-                               <tr key = {tooltip_item.serie.id}>
-                                 <td style= {{padding: '3px 5px'}}>
-                                   <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.serie.color}} />
-                                 </td>
-                                 <td style={{padding: '3px 5px'}}> {tooltip_item.serie.id} </td>
-                                 <td style = {{padding: '3px 5px'}}> {tooltip_item.data.x}</td>
-                                 <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: formats.big_int(tooltip_item.data.y)}} />
-                               </tr>
-                             )
-                           )}
-                         </tbody>
-                       </table>
-                     </div>}
-                 />
-               </div>
-             </Col>
+              <Col size={8} isGraph>
+                <NivoResponsiveLine
+                  data = { data_formatter()}
+                  raw_data = {series}
+                  colors = { window.infobase_color_constants.primaryColor }
+                  is_money = {false}
+                  yScale = {{toggle: true}}
+                  graph_height = '400px'
+                  tooltip = {slice =>  
+                    <div style={{color: window.infobase_color_constants.textColor}}>
+                      <table style={{width: '100%', borderCollapse: 'collapse'}}>
+                        <tbody>
+                          { slice.data.map(
+                            tooltip_item => ( 
+                              <tr key = {tooltip_item.serie.id}>
+                                <td style= {{padding: '3px 5px'}}>
+                                  <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.serie.color}} />
+                                </td>
+                                <td style={{padding: '3px 5px'}}> {tooltip_item.serie.id} </td>
+                                <td style = {{padding: '3px 5px'}}> {tooltip_item.data.x}</td>
+                                <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: formats.big_int(tooltip_item.data.y)}} />
+                              </tr>
+                            )
+                          )}
+                        </tbody>
+                      </table>
+                    </div>}
+                />
+              </Col>
           }
           { window.is_a11y_mode &&
             <Col size={12} isGraph>

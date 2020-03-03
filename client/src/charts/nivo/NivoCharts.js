@@ -237,6 +237,7 @@ const general_default_props = {
     bottom: 50,
     left: 70,
   },
+  graph_height: '400px',
   theme: {
     axis: {
       ticks: {
@@ -423,6 +424,7 @@ export class NivoResponsiveBar extends React.Component{
       data,
       keys,
       margin,
+      graph_height,
       label_format,
       colors,
       bttm_axis,
@@ -463,48 +465,51 @@ export class NivoResponsiveBar extends React.Component{
     const table = !disable_table_view && bar_table(data, keys, indexBy, get_formatter(is_money, text_formatter, true, true), table_first_column_name);
 
     // have to have an empty string in key to make sure that negative bars will be displayed
-    const graph = <ResponsiveBar
-      {...{data,
-        margin,
-        colors,
-        groupMode,
-        enableGridX,
-        enableGridY,
-        colorBy,
-        theme, 
-        indexBy, 
-        enableLabel, 
-        legends,
-        isInteractive,
-        motion_damping,
-        motion_stiffness,
-        onMouseEnter,
-        onMouseLeave,
-        onClick,
-        padding,
-        tooltip,
-        label,
-        animate,
-        labelTextColor,
-        borderWidth,
-      }}
-      keys = {_.union([''],keys)}
-      labelFormat={_.isUndefined(label_format) ? null : label_format}
-      tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
-      axisBottom={remove_bottom_axis ? null : bttm_axis}
-      axisLeft={
-        remove_left_axis ?
-          null :
-          {
-            tickValues: tick_value || 6,
-            format: (d) => get_formatter(is_money, text_formatter)(d),
-            min: min,
-            max: max,
-            ...(left_axis || {}),
+    const graph = 
+      <div style={{height: graph_height }} aria-hidden='true'>
+        <ResponsiveBar
+          {...{data,
+            margin,
+            colors,
+            groupMode,
+            enableGridX,
+            enableGridY,
+            colorBy,
+            theme, 
+            indexBy, 
+            enableLabel, 
+            legends,
+            isInteractive,
+            motion_damping,
+            motion_stiffness,
+            onMouseEnter,
+            onMouseLeave,
+            onClick,
+            padding,
+            tooltip,
+            label,
+            animate,
+            labelTextColor,
+            borderWidth,
+          }}
+          keys = {_.union([''],keys)}
+          labelFormat={_.isUndefined(label_format) ? null : label_format}
+          tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
+          axisBottom={remove_bottom_axis ? null : bttm_axis}
+          axisLeft={
+            remove_left_axis ?
+              null :
+              {
+                tickValues: tick_value || 6,
+                format: (d) => get_formatter(is_money, text_formatter)(d),
+                min: min,
+                max: max,
+                ...(left_axis || {}),
+              }
           }
-      }
-      borderColor="inherit:darker(1.6)"
-    />;
+          borderColor="inherit:darker(1.6)"
+        />
+      </div>;
     
     return <InteractiveGraph graph={graph} table={table} />;
   }
@@ -532,6 +537,7 @@ export class NivoResponsiveHBar extends React.Component{
       data,
       keys,
       margin,
+      graph_height,
       label_format,
       colors,
       bttm_axis,
@@ -569,47 +575,53 @@ export class NivoResponsiveHBar extends React.Component{
 
     //have to have an empty string in key to make sure
     //that negative bars will be displayed
-    const graph = <ResponsiveBar
-      {...{data,
-        margin,
-        colors,
-        groupMode,
-        enableGridX,
-        enableGridY,
-        colorBy,
-        theme, 
-        indexBy, 
-        enableLabel, 
-        label,
-        legends,
-        isInteractive,
-        labelSkipWidth,
-        markers,
-      }}
-      layout = 'horizontal'
-      keys = {_.union([''],keys)}
-      labelFormat={_.isUndefined(label_format) ? null : label_format}
-      tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
-      axisBottom={remove_bottom_axis ? null : bttm_axis}
-      axisTop={add_top_axis ? top_axis : null}
-      axisLeft={
-        remove_left_axis ?
-          null :
-          {
-            tickValues: tick_value || 6,
-            format: (d) => get_formatter(is_money, text_formatter)(d),
-            min: "auto",
-            max: "auto",
-            ...(left_axis || {}),
-          }
-      }
-      padding={padding}
-      borderColor="inherit:darker(1.6)"
-      motionDamping={motion_damping}
-      motionStiffness={motion_stiffness}
-      labelTextColor={window.infobase_color_constants.textColor}
-      labelSkipWidth={labelSkipWidth}
-    />;
+    const graph = 
+    <div className="centerer" style={{height: graph_height}} aria-hidden='true'>
+      <ResponsiveBar
+        {...{data,
+          margin,
+          colors,
+          groupMode,
+          enableGridX,
+          enableGridY,
+          colorBy,
+          theme, 
+          indexBy, 
+          enableLabel, 
+          label,
+          legends,
+          isInteractive,
+          labelSkipWidth,
+          markers,
+        }}
+        layout = 'horizontal'
+        keys = {_.union([''],keys)}
+        labelFormat={_.isUndefined(label_format) ? null : label_format}
+        tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
+        axisBottom={remove_bottom_axis ? null : bttm_axis}
+        axisTop={add_top_axis ? top_axis : null}
+        axisLeft={
+          remove_left_axis ?
+            null :
+            {
+              tickValues: tick_value || 6,
+              format: (d) => get_formatter(is_money, text_formatter)(d),
+              min: "auto",
+              max: "auto",
+              ...(left_axis || {}),
+            }
+        }
+        padding={padding}
+        borderColor="inherit:darker(1.6)"
+        motionDamping={motion_damping}
+        motionStiffness={motion_stiffness}
+        labelTextColor={window.infobase_color_constants.textColor}
+        labelSkipWidth={labelSkipWidth}
+      />
+    </div>;
+
+
+//debugger;
 
     return <InteractiveGraph graph={graph} table={table} />;
   }
@@ -655,6 +667,7 @@ export class NivoResponsiveLine extends React.Component {
       is_money,
       raw_data,
       margin,
+      graph_height,
       tick_amount,
       colors,
       colorBy,
@@ -745,48 +758,50 @@ export class NivoResponsiveLine extends React.Component {
       undefined;
 
     const graph =
-      <ResponsiveLine
-        {...{
-          data,
-          margin,
-          enableGridX,
-          enableGridY,
-          enableArea,
-          colorBy,
-          colors,
-          theme,
-          enableDotLabel,
-          markers,
-          legends,
-          layers,
-        }}
-        tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
-        yScale={{
-          stacked: !!stacked,
-          type: "linear",
-          min: min || get_scale_bounds(stacked, raw_data, y_scale_zoomed).min,
-          max: max || get_scale_bounds(stacked, raw_data, y_scale_zoomed).max,
-          ...(yScale || {}),
-        }}
-        axisBottom={remove_bottom_axis ? null : bttm_axis}
-        axisLeft={remove_left_axis ? null :
-        {
-          orient: "left",
-          tickSize: 5,
-          tickPadding: 5,
-          tickValues: tick_amount || 6,
-          format: d => get_formatter(is_money, text_formatter)(d),
-          ...(left_axis || {}),
-        }}
-        axisTop={null}
-        axisRight={null}
-        xScale={{ type: "point" }}
-        animate={true}
-        motionStiffness={motion_stiffness}
-        motionDamping={motion_damping}
-        dotSize={stacked ? 0 : 10}
-        areaOpacity={stacked ? 1 : 0}
-      />;
+      <div style={{height: graph_height }} aria-hidden='true'>
+        <ResponsiveLine
+          {...{
+            data,
+            margin,
+            enableGridX,
+            enableGridY,
+            enableArea,
+            colorBy,
+            colors,
+            theme,
+            enableDotLabel,
+            markers,
+            legends,
+            layers,
+          }}
+          tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
+          yScale={{
+            stacked: !!stacked,
+            type: "linear",
+            min: min || get_scale_bounds(stacked, raw_data, y_scale_zoomed).min,
+            max: max || get_scale_bounds(stacked, raw_data, y_scale_zoomed).max,
+            ...(yScale || {}),
+          }}
+          axisBottom={remove_bottom_axis ? null : bttm_axis}
+          axisLeft={remove_left_axis ? null :
+          {
+            orient: "left",
+            tickSize: 5,
+            tickPadding: 5,
+            tickValues: tick_amount || 6,
+            format: d => get_formatter(is_money, text_formatter)(d),
+            ...(left_axis || {}),
+          }}
+          axisTop={null}
+          axisRight={null}
+          xScale={{ type: "point" }}
+          animate={true}
+          motionStiffness={motion_stiffness}
+          motionDamping={motion_damping}
+          dotSize={stacked ? 0 : 10}
+          areaOpacity={stacked ? 1 : 0}
+        />
+      </div>;
 
     return <InteractiveGraph graph={graph} table={table} other_buttons={[zoom_button]}/>;
   }

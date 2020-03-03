@@ -226,6 +226,7 @@ class AuthExpProgSpending extends React.Component {
           bottom: 40,
           left: 100,
         },
+        graph_height: '400px',
         ...(
           _.isEqual(exp, auth)
           && _.includes(active_series, text_maker("budgetary_expenditures"))
@@ -279,7 +280,7 @@ class AuthExpProgSpending extends React.Component {
             />
           </div>
         </div>
-        <div style={{height: 400}} aria-hidden = {true}>
+        <div>
           <NivoResponsiveLine
             {...nivo_default_props}
           />
