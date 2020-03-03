@@ -12,6 +12,9 @@ import {
   Results,
 
   declare_panel,
+
+  NivoResponsivePie,
+
 } from "../shared.js";
 import { 
   row_to_drr_status_counts,
@@ -24,7 +27,7 @@ import {
 
 import { IconArray } from '../../../charts/IconArray.js';
 
-const { A11YTable } = declarative_charts;
+const { A11YTable, GraphLegend } = declarative_charts;
 const { result_simple_statuses } = businessConstants;
 const { current_drr_key, result_docs } = Results;
 
@@ -37,6 +40,15 @@ const grid_colors = {
   not_available: "results-icon-array-na",
   future: "results-icon-array-neutral",
 };
+
+const result_color_scale = d3.scaleOrdinal()
+  .domain(["met","not_met","not_available","future"])
+  .range([
+    window.infobase_color_constants.successDarkColor,
+    window.infobase_color_constants.failDarkColor,
+    window.infobase_color_constants.warnDarkColor,
+    window.infobase_color_constants.tertiaryColor,
+  ]);
 
 const icon_order = _.chain(ordered_status_keys)
   .map( (status_key, ix) => [status_key, ix*5] )
@@ -183,6 +195,88 @@ const StatusGrid = props => {
 };
 
 
+
+class PercentageViz extends React.Component {
+  constructor(props){
+    super(props);
+    const { counts } = this.props;
+
+    const all_ids = _.keys(counts);
+
+    this.state = {
+      selected: _.filter(all_ids, id => id !== "future"), // default to no future
+    };
+  }
+
+  render(){
+    const { counts } = this.props;
+    const { selected } = this.state;
+
+    const data = _.chain(counts)
+      .toPairs()
+      .map(pair => ({label: result_statuses[pair[0]].text, value: pair[1], id: pair[0]}))
+      .value();
+    
+
+    const graph_data = _.filter(data, d=>_.includes(selected,d.id));
+    const graph_total = _.sumBy(graph_data, 'value');
+
+    const new_summary_text_args = {
+      drr_total: graph_total,
+      drr_indicators_met: _.includes(selected, 'met') && counts.met,
+      drr_indicators_not_met: _.includes(selected, 'not_met') && counts.not_met,
+      drr_indicators_not_available: _.includes(selected, 'not_available') && counts.not_available,
+      drr_indicators_future: _.includes(selected, 'future') && counts.future,
+    };
+
+    return (
+      <Fragment>
+        <div className="frow">
+          <div className="fcol-md-6 fcol-xs-6" >
+            <div>
+              {text_maker("graph_legend_instructions")}
+            </div>
+            <div className="centerer">
+              <div className="legend-container">
+                <GraphLegend
+                  items={_.chain(data)
+                    .map( ({ label, id }) => ({
+                      label: label,
+                      active: _.includes(selected, id),
+                      id,
+                      color: result_color_scale(id),
+                    }))
+                    .value()
+                  }
+                  onClick={id => {!(selected.length === 1 && selected.includes(id)) &&
+                    this.setState({
+                      selected: _.toggle_list(selected, id),
+                    });
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="fcol-md-6 fcol-xs-6 medium_panel_text" >
+            <TM
+              k="new_drr_summary_text_summary"
+              args={new_summary_text_args} 
+            />
+          </div>
+        </div>
+        <div style={{height: '400px'}} aria-hidden = {true}>
+          <NivoResponsivePie
+            data = {graph_data}
+            colorBy = {obj=>result_color_scale(obj.id)}
+            total = {graph_total}
+            height = '400px'
+          />
+        </div>
+      </Fragment>
+    );
+  };
+};
+
 export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts }) => {
   const current_drr_counts_with_generic_keys = filter_and_genericize_doc_counts(verbose_counts, current_drr_key);
 
@@ -205,16 +299,17 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
       </div>
     </div>
     <div className="frow middle-xs between-md" style={{marginBottom: "30px"}} >
-      { summary_text_args[`${current_drr_key}_past_total`] !== 0 &&
-        <div className="fcol-md-6 fcol-xs-12 medium_panel_text" >
-          <TM
-            k="drr_summary_text_summary_left"
-            args={summary_text_args} 
-          />
+      <div className={"fcol-md-12 fcol-xs-12"} >
+        <div style={{padding: "30px"}}>
+          <StatusGrid {...counts} />
         </div>
-      }
-      <div className={`fcol-md-${ summary_text_args[`${current_drr_key}_past_total`] !== 0 ? 6 : 12 } fcol-xs-12 medium_panel_text`} >
-        <StatusGrid {...counts} />
+        <div style={{padding: "10px"}}>
+          <p>Detailed explanation of result statuses here</p>
+          <p>With some examples</p>
+          <p>Detailed explanation of result statuses here</p>
+          <p>With some examples</p>
+        </div>
+        <PercentageViz summary_text_args={summary_text_args} counts={counts} />
       </div>
     </div>
   </Fragment>;
