@@ -105,7 +105,7 @@ export class DisplayTable extends React.Component {
               }
             </tr>
             <tr className="table-header">
-              {
+              { rows.length > 0 &&
                 _.chain(rows)
                   .first()
                   .thru(
@@ -172,6 +172,13 @@ export class DisplayTable extends React.Component {
             )}
           </tbody>
         </table>
+        { sorted_filtered_data.length === 0 &&
+          <TM 
+            k="no_data" 
+            el="div" 
+            style={{width: "100%", textAlign: "center"}} 
+          />
+        }
       </div>
     );
   }

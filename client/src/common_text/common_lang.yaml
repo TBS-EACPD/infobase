@@ -270,9 +270,6 @@ another_org_search:
 no_data:
   en: No data available for this table
   fr: Aucune donnée n'est disponible pour ce tableau
-no_data_for_filters:
-  en: No data available for the selected filters
-  fr: Aucune donnée n'est disponible pour les filtres sélectionnés
 open_data_link:
   en: Open Data Link
   fr: Lien vers les données ouvertes
