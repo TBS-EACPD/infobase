@@ -10,7 +10,7 @@ const TextMaker = ({text_maker_func, text_key, el, args, style, className, templ
     {
       style,
       className,
-      dangerouslySetInnerHTML: {__html: html}
+      dangerouslySetInnerHTML: {__html: html},
     }
   );
 };
