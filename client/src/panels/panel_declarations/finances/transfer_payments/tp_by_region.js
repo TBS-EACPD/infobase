@@ -113,7 +113,6 @@ class TPMap extends React.Component {
       
       //REGULAR TP VERSION
       const current_year_data_tp = _.last(data_tp);
-      
       const max_tp = _.chain(data_tp)
         .last()
         .values()
@@ -122,7 +121,6 @@ class TPMap extends React.Component {
       const color_scale_tp = d3.scaleLinear()
         .domain([0, max_tp])
         .range([0.2, 1]);
-
       const largest_prov_tp = _.chain(current_year_data_tp)
         .keys()
         .maxBy( (prov) => current_year_data_tp[prov] )
