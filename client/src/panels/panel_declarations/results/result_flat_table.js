@@ -192,7 +192,6 @@ class ResultsTable extends React.Component {
         </div>
       );
     }
-
   }
 }
 
