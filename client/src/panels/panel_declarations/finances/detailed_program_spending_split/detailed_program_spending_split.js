@@ -127,7 +127,7 @@ class HistoricalProgramBars extends React.Component {
             />
           </div>
         </div>
-        <div className="fcol-md-8" style={{ height: '400px' }} aria-hidden = {true}>
+        <div className="fcol-md-8">
           <NivoResponsiveBar
             data = {data_formatter}
             keys = {Object.keys(graph_data)}
@@ -139,6 +139,7 @@ class HistoricalProgramBars extends React.Component {
               bottom: 50,
               left: 70,
             }}
+            graph_height = '400px'
           />
         </div>
       </div>
@@ -313,54 +314,49 @@ class DetailedProgramSplit extends React.Component {
           }
         </div> 
         <div className="fcol-md-9" style={{ width: "100%" }}>
-          <div 
-            style={{
-              height: divHeight,
+          <NivoResponsiveHBar
+            data={graph_ready_data}
+            indexBy="label"
+            keys={so_label_list}
+            margin = {{
+              top: 10,
+              right: 70,
+              bottom: 30,
+              left: 215,
             }}
-          >
-            <NivoResponsiveHBar
-              data={graph_ready_data}
-              indexBy="label"
-              keys={so_label_list}
-              margin = {{
-                top: 10,
-                right: 70,
-                bottom: 30,
-                left: 215,
-              }}
-              colorBy = {d => colors(d.id)}
-              bttm_axis = {{
-                tickSize: 5,
-                tickPadding: 5,
-                tickValues: 6,
-                format: (d) => formatter(d),
-              }}
-              left_axis = {{
-                tickSize: 5,
-                tickPadding: 5,
-                renderTick: tick => (
-                  <g key={tick.key} transform={`translate(${tick.x-5},${tick.y+1.5})`}>
-                    <a
-                      href={programs_by_name[tick.value] ? infograph_href_template(programs_by_name[tick.value]) : null}
-                      target="_blank" rel="noopener noreferrer"
+            graph_height={divHeight}
+            colorBy = {d => colors(d.id)}
+            bttm_axis = {{
+              tickSize: 5,
+              tickPadding: 5,
+              tickValues: 6,
+              format: (d) => formatter(d),
+            }}
+            left_axis = {{
+              tickSize: 5,
+              tickPadding: 5,
+              renderTick: tick => (
+                <g key={tick.key} transform={`translate(${tick.x-5},${tick.y+1.5})`}>
+                  <a
+                    href={programs_by_name[tick.value] ? infograph_href_template(programs_by_name[tick.value]) : null}
+                    target="_blank" rel="noopener noreferrer"
+                  >
+                    <text
+                      textAnchor="end"
+                      dominantBaseline="end"
+                      style={{
+                        ...tick.theme.axis.ticks.text,
+                      }}
                     >
-                      <text
-                        textAnchor="end"
-                        dominantBaseline="end"
-                        style={{
-                          ...tick.theme.axis.ticks.text,
-                        }}
-                      >
-                        <TspanLineWrapper text={tick.value} width={40}/>
-                      </text>
-                    </a>
-                  </g>
-                ),
-              }}
-              markers = {markers}
-              padding = {0.05}
-            />
-          </div>
+                      <TspanLineWrapper text={tick.value} width={40}/>
+                    </text>
+                  </a>
+                </g>
+              ),
+            }}
+            markers = {markers}
+            padding = {0.05}
+          />
         </div>
       </div> 
     </div>;

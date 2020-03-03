@@ -158,6 +158,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
         bottom: 70,
         left: 40,
       },
+      graph_height: '230px',
       ...(gap_year && both_exists && _.includes(series_labels, trivial_text_maker("planned_spending")) && {
         markers: [
           {
@@ -180,18 +181,14 @@ export const format_and_get_exp_program_spending = (type, subject) => {
     exp_program_spending_graph = (
       <Fragment>
         <MediaQuery minWidth={1199}>
-          <div style={{height: 230}} aria-hidden = {true}>
-            <NivoResponsiveLine
-              {...nivo_exp_program_spending_props}
-            />
-          </div>
+          <NivoResponsiveLine
+            {...nivo_exp_program_spending_props}
+          />
         </MediaQuery>
         <MediaQuery maxWidth={1198}>
-          <div style={{height: 230}} aria-hidden = {true}>
-            <NivoResponsiveLine
-              {...nivo_mobile_exp_program_spending_props}
-            />
-          </div>
+          <NivoResponsiveLine
+            {...nivo_mobile_exp_program_spending_props}
+          />
         </MediaQuery>
       </Fragment>
     );

@@ -137,7 +137,7 @@ export const declare_internal_services_panel = () => declare_panel({
                   />
                 </div>
               </div>
-              <div className="fcol-md-9" style = {{height: '300px'}} aria-hidden = {true}>
+              <div className="fcol-md-9">
                 <NivoResponsiveBar
                   data = {bar_data}
                   indexBy = "date"
@@ -150,6 +150,7 @@ export const declare_internal_services_panel = () => declare_panel({
                     bottom: 40,
                     left: 50,
                   }}
+                  graph_height = '300px'
                 />
               </div>
             </div>

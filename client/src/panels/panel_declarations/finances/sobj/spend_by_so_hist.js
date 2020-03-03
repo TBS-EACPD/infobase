@@ -80,7 +80,7 @@ class SobjLine extends React.Component {
             />
           </div>
         </div>
-        <div className="fcol-md-8" style={{height: '500px', position: "relative", marginTop: "10px"}} aria-hidden = {true}>
+        <div className="fcol-md-8" style={{position: "relative", marginTop: "10px"}}>
           <NivoResponsiveLine
             data = {spending_data.reverse()}
             raw_data = {raw_data}
@@ -90,6 +90,7 @@ class SobjLine extends React.Component {
               bottom: 90,
               left: 70,
             }}
+            graph_height = '500px'
             colorBy={d => colors(d.id)}
           />
         </div>

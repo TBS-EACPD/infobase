@@ -52,39 +52,38 @@ class CanadaGraphBarLegend extends React.Component {
         <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
           {province_graph_title(prov)}
         </p>
-        <div style={{ height: "200px", width: "100%" }}>
-          <NivoResponsiveHBar
-            data={graph_data}
-            indexBy="year"
-            keys={["value"]}
-            enableLabel={true}
-            label_format={d => <tspan x={100} y={16}> {formatter(d)} </tspan>}
-            label={d => `${d.data.year}: ${formatter(d.value)}`}
-            colorBy={d => get_graph_color(0.5)}
-            margin={{
-              top: 40,
-              right: 30,
-              bottom: 20,
-              left: 20,
-            }}
-            padding={0.1}
-            is_money={false}
-            top_axis={{
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: -30,
-              tickValues: 4,
-              format: (d) => formatter(d),
-            }}
-            remove_bottom_axis={true}
-            remove_left_axis={true}
-            add_top_axis={true}
-            enableGridX={false}
-            enableGridY={false}
-            isInteractive={false}
-            disable_table_view={true}
-          />
-        </div>
+        <NivoResponsiveHBar
+          data={graph_data}
+          indexBy="year"
+          keys={["value"]}
+          enableLabel={true}
+          label_format={d => <tspan x={100} y={16}> {formatter(d)} </tspan>}
+          label={d => `${d.data.year}: ${formatter(d.value)}`}
+          colorBy={d => get_graph_color(0.5)}
+          margin={{
+            top: 40,
+            right: 30,
+            bottom: 20,
+            left: 20,
+          }}
+          graph_height="200px"
+          padding={0.1}
+          is_money={false}
+          top_axis={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: -30,
+            tickValues: 4,
+            format: (d) => formatter(d),
+          }}
+          remove_bottom_axis={true}
+          remove_left_axis={true}
+          add_top_axis={true}
+          enableGridX={false}
+          enableGridY={false}
+          isInteractive={false}
+          disable_table_view={true}
+        />
       </Fragment>
     );
   }

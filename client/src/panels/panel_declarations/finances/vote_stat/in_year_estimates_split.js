@@ -75,43 +75,42 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
     );
  
     content = (
-      <div style={{ height: "450px" }} aria-hidden = {true}>
-        <NivoResponsiveBar
-          data = {estimate_data}
-          table_switch = {true}
-          keys = {keys}
-          label_format = { d => <tspan y={ -4 }> {formats.compact2_raw(d)} </tspan>}
-          isInteractive = {false}
-          enableLabel = {true}
-          indexBy = "label"
-          colorBy = {d => d.data[d.id] < 0 ? window.infobase_color_constants.highlightColor : window.infobase_color_constants.secondaryColor}
-          margin = {{            
-            top: 50,
-            right: 40,
-            bottom: 120,
-            left: 40, 
-          }}
-          bttm_axis= {{
-            format: d => (_.words(d).length > 3) ? d.substring(0,20)+'...' : d,
-            tickSize: 3,
-            tickRotation: -45,
-            tickPadding: 10,
-          }}
-          enableGridX = {false}
-          remove_left_axis = {true}
-          theme={{
-            axis: {
-              ticks: {
-                text: { 
-                  fontSize: 12,
-                  fill: window.infobase_color_constants.textColor,
-                  fontWeight: '550',
-                },
+      <NivoResponsiveBar
+        data = {estimate_data}
+        table_switch = {true}
+        keys = {keys}
+        label_format = { d => <tspan y={ -4 }> {formats.compact2_raw(d)} </tspan>}
+        isInteractive = {false}
+        enableLabel = {true}
+        indexBy = "label"
+        colorBy = {d => d.data[d.id] < 0 ? window.infobase_color_constants.highlightColor : window.infobase_color_constants.secondaryColor}
+        margin = {{            
+          top: 50,
+          right: 40,
+          bottom: 120,
+          left: 40, 
+        }}
+        bttm_axis= {{
+          format: d => (_.words(d).length > 3) ? d.substring(0,20)+'...' : d,
+          tickSize: 3,
+          tickRotation: -45,
+          tickPadding: 10,
+        }}
+        graph_height = '450px'
+        enableGridX = {false}
+        remove_left_axis = {true}
+        theme={{
+          axis: {
+            ticks: {
+              text: { 
+                fontSize: 12,
+                fill: window.infobase_color_constants.textColor,
+                fontWeight: '550',
               },
             },
-          }}
-        />
-      </div>
+          },
+        }}
+      />
     );
   }
 

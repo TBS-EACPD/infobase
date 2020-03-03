@@ -167,13 +167,14 @@ class PlannedProgramResources extends React.Component {
             />
           </div>
         </div>
-        <div className="fcol-md-8" style={{ height: '400px'}} aria-hidden = {true}>
+        <div className="fcol-md-8">
           <NivoResponsiveBar
             data = {data_by_year}
             keys = {Object.keys(graph_data)}
             indexBy = "year"
             colorBy = { d => colors(d.id)}
             is_money = {!is_fte}
+            graph_height = '400px'
           />
         </div>
       </div>

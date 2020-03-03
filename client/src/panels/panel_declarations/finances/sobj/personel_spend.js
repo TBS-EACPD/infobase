@@ -68,7 +68,7 @@ export const declare_personnel_spend_panel = () => declare_panel({
             })),
         }];
         
-        graph_content = <div style={{height: 400}} aria-hidden = {true} position="relative">
+        graph_content = <div position="relative">
           <NivoResponsiveLine
             raw_data = {panel_args.series[0]}
             data = {personnel_data()}
@@ -79,6 +79,7 @@ export const declare_personnel_spend_panel = () => declare_panel({
               "left": 65,
             }}
             colors = { window.infobase_color_constants.primaryColor }
+            graph_height = '400px'
           />
         </div>;
       }
