@@ -8,7 +8,7 @@ gov_gap_explain_body:
   en: |
     Actual expenditures for all organizations are sourced from the {{gl_tt "Public Accounts of Canada" "PA"}}. Planned expenditures for most organizations are sourced from {{gl_tt "Departmental Plans" "DP"}}.
 
-    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in the latest Departmental Plans, but the {{gap_year}} the {{gl_tt "Public Accounts of Canada" "PA"}} are not yet available.
+    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in the latest Departmental Plans, but the {{gap_year}} {{gl_tt "Public Accounts of Canada" "PA"}} are not yet available.
   fr: |
     Les dépenses réelles de toutes les organisations correspondent à celle publiées dans les {{gl_tt "Comptes publics du Canada" "PA"}}. Les dépenses prévues pour la plupart des organisations proviennent des {{gl_tt "plans ministériels" "DP"}}.
 
@@ -19,7 +19,7 @@ dept_gap_explain_body:
   en: |
     Actual expenditures for all organizations are sourced from the {{gl_tt "Public Accounts of Canada" "PA"}}. Planned expenditures for most organizations are sourced from {{gl_tt "Departmental Plans" "DP"}}.
 
-    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in {{subj_name dept}}’s latest Departmental Plan, but the {{gap_year}} the {{gl_tt "Public Accounts of Canada" "PA"}} are not yet available.
+    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in {{subj_name dept}}’s latest Departmental Plan, but the {{gap_year}} {{gl_tt "Public Accounts of Canada" "PA"}} are not yet available.
   fr: |
     Les dépenses réelles de toutes les organisations correspondent à celle publiées dans les {{gl_tt "Comptes publics du Canada" "PA"}}. Les dépenses prévues pour la plupart des organisations proviennent des {{gl_tt "plans ministériels" "DP"}}.
 

@@ -91,7 +91,7 @@ class AuthExpProgSpending extends React.Component {
     const gap_year = (subject.has_planned_spending && actual_to_planned_gap_year) || null;
 
     const additional_info = {
-      last_history_year: _.last(auth_ticks),
+      last_history_year: _.last(exp_ticks),
       last_planned_year: _.last(plan_ticks),
       gap_year: gap_year,
       plan_change: info[`${subject.level}_exp_planning_year_3`] - info[`${subject.level}_auth_average`],
