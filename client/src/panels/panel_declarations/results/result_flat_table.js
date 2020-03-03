@@ -170,7 +170,7 @@ class ResultsTable extends React.Component {
       const filtered_indicators = _.filter(flat_indicators, ind => _.isEmpty(status_active_list) || _.includes(status_active_list,ind.indicator.status_key));
       const toggle_status_status_key = (status_key) => this.setState({status_active_list: _.toggle_list(status_active_list, status_key)});
       const clear_status_filter = () => this.setState({status_active_list: []});
-      
+
       return (
         <div>
           <div className="medium_panel_text">
@@ -184,11 +184,19 @@ class ResultsTable extends React.Component {
               onClearClick={clear_status_filter}
             />
           </div>
-          <HeightClippedGraph clipHeight={200}>
-            <div className="results-flat-table">
-              {indicator_table_from_list(filtered_indicators)}
-            </div>
-          </HeightClippedGraph>
+          {
+            filtered_indicators.length > 0 ?
+              <HeightClippedGraph clipHeight={200}>
+                <div className="results-flat-table">
+                  {indicator_table_from_list(filtered_indicators)}
+                </div>
+              </HeightClippedGraph> :
+              <TM 
+                k="no_data_for_filters" 
+                el="div" 
+                style={{width: "100%", textAlign: "center"}} 
+              />
+          }
         </div>
       );
     }
