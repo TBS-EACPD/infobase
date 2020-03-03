@@ -60,11 +60,11 @@ infograph_explorer_link:
   fr: Recherche avancée
 
 filter_panels:
-  en: Filter Panels
+  en: Panel Filters
   fr: TODO
 panels_status:
   transform: [handlebars]
-  en: Showing {{number_of_active_panels}} of {{total_number_of_panels}} panels
+  en: (showing {{number_of_active_panels}} of {{total_number_of_panels}} panels)
   fr: TODO
 filter_panels_description:
   en: |

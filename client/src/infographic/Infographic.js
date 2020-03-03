@@ -187,17 +187,21 @@ class InfoGraph_ extends React.Component {
     />;
     const filter_icon_props = {
       color: window.infobase_color_constants.primaryColor,
-      title: "Filter icon for panels",
+      title: text_maker("filter_panels"),
       width: 15,
       height: 15,
       vertical_align: 5,
     };
+    const is_filter_panels = active_bubble_id === "financial" || active_bubble_id === "people";
     const panel_renderers = !loading &&
       _.chain(panel_keys)
         .map((panel_key) => {
           const panel_obj = PanelRegistry.lookup(panel_key, subject.level);
-          const panel_filter_arr = _.map(panel_filter, (value, key) => panel_filter[key] && key);
-          const is_filtered = _.intersection(panel_filter_arr, panel_obj.depends_on).length > 0;
+          const active_panel_filter_keys = _.chain(panel_filter)
+            .map((value, key) => value && key)
+            .compact()
+            .value();
+          const is_filtered = _.intersection(active_panel_filter_keys, panel_obj.depends_on).length > 0 || !is_filter_panels;
 
           return is_filtered && <PanelRenderer
             panel_key={panel_key}
@@ -247,49 +251,58 @@ class InfoGraph_ extends React.Component {
               }
             </p>
           }
-          <Details
-            closed_drawer_icon={
-              <IconFilter
-                {...filter_icon_props}
-                key="closed_filter"
-              />
-            }
-            opened_drawer_icon={
-              <IconFilter
-                {...filter_icon_props}
-                key="opened_filter"
-                rotation={180}
-              />
-            }
-            summary_content={text_maker("filter_panels")}
-            persist_content={true}
-            content={
-              <fieldset>
-                <legend> {text_maker("filter_panels_description")} </legend>
-                <GraphLegend
-                  container_style={{ marginLeft: "20px" }}
-                  items={ _.map(panel_filter, (checked, dependency) => 
-                    ({
-                      id: dependency,
-                      label: Table.lookup(dependency).name,
-                      active: checked,
-                      color: window.infobase_color_constants.primaryColor,
-                    })
-                  )}
-                  onClick={ (evt) => {
-                    const copy_filter = _.clone(panel_filter);
-                    copy_filter[evt] = !panel_filter[evt];
-                    this.setState({ panel_filter: copy_filter });
-                  }}
+          { is_filter_panels &&
+            <Details
+              closed_drawer_icon={
+                <IconFilter
+                  {...filter_icon_props}
+                  key="closed_filter"
                 />
-              </fieldset>
-            }
-          />
-          <span className="panel-status-text">
-            <TM k="panels_status"
-              args={{ number_of_active_panels: panel_renderers.length, total_number_of_panels: total_number_of_panels }}
+              }
+              opened_drawer_icon={
+                <IconFilter
+                  {...filter_icon_props}
+                  key="opened_filter"
+                  rotation={180}
+                />
+              }
+              summary_content={
+                <div>
+                  <span style={{fontSize: 16}}>
+                    <TM k="filter_panels"/>
+                  </span>
+                  <span> </span>
+                  <span className="panel-status-text">
+                    <TM k="panels_status"
+                      args={{ number_of_active_panels: panel_renderers.length, total_number_of_panels: total_number_of_panels }}
+                    />
+                  </span>
+                </div>              
+              }
+              persist_content={true}
+              content={
+                <fieldset>
+                  <legend> {text_maker("filter_panels_description")} </legend>
+                  <GraphLegend
+                    container_style={{ marginLeft: "20px" }}
+                    items={ _.map(panel_filter, (checked, dependency) => 
+                      ({
+                        id: dependency,
+                        label: Table.lookup(dependency).name,
+                        active: checked,
+                        color: window.infobase_color_constants.primaryColor,
+                      })
+                    )}
+                    onClick={ (evt) => {
+                      const copy_filter = _.clone(panel_filter);
+                      copy_filter[evt] = !panel_filter[evt];
+                      this.setState({ panel_filter: copy_filter });
+                    }}
+                  />
+                </fieldset>
+              }
             />
-          </span>
+          }
           { !loading && 
             panel_renderers
           }
@@ -365,16 +378,17 @@ class InfoGraph_ extends React.Component {
           .map(panel_key => tables_for_panel(panel_key, subject.level))
           .flatten()
           .uniq()
-          .reduce((result, table_id) => {
-            result[table_id] = true;
-            return result;
-          }, {})
+          .map(( table_id) => [table_id, true])
+          .fromPairs()
           .value();
 
         const total_number_of_panels = _.reduce(panel_keys, (count, panel_key) => {
           const panel_obj = PanelRegistry.lookup(panel_key, subject.level);
-          const panel_filter_arr = _.map(panel_filter, (value, key) => panel_filter[key] && key);
-          return _.intersection(panel_filter_arr, panel_obj.depends_on).length > 0 ? count + 1 : count;
+          const active_panel_filter_keys = _.chain(panel_filter)
+            .map((value, key) => value && key)
+            .compact()
+            .value();
+          return _.intersection(active_panel_filter_keys, panel_obj.depends_on).length > 0 ? count + 1 : count;
         }, 0);
         
         this.setState({
