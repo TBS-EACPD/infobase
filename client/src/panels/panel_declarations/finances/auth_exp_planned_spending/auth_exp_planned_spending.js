@@ -24,8 +24,8 @@ const { Details } = util_components;
 const { std_years, planning_years, estimates_years } = year_templates;
 const { text_maker, TM } = create_text_maker_component(text);
 
-const auth_cols = _.map(std_years, yr=>`${yr}auth`);
-const exp_cols = _.map(std_years, yr=>`${yr}exp`);
+const auth_cols = _.map(std_years, yr => `${yr}auth`);
+const exp_cols = _.map(std_years, yr => `${yr}exp`);
 
 const text_keys_by_level = {
   dept: "dept_auth_exp_planned_spending_body",
@@ -37,23 +37,31 @@ const calculate = function(subject, info, options) {
   const { orgVoteStatPa, programSpending, orgVoteStatEstimates } = this.tables;
 
   const query_subject = subject.is("gov") ? undefined : subject;
+  
+  const exp_values = orgVoteStatPa.q(query_subject).sum(exp_cols, {as_object: false});
 
-  const qEst = orgVoteStatEstimates.q(query_subject);
-  // wonky code below is to figure out how many extra estimates years we need, 1 or 2
-  const est_extra_years = run_template('{{pa_last_year}}') === run_template('{{est_last_year}}') ?
-    qEst.sum('{{est_in_year}}_estimates', {as_object: false}) :
-    run_template('{{pa_last_year}}') === run_template('{{est_last_year_2}}') ?
-      [qEst.sum('{{est_last_year}}_estimates', {as_object: false}), qEst.sum('{{est_in_year}}_estimates', {as_object: false})] :
-      [];
 
-  const qAuthExp = orgVoteStatPa.q(query_subject);
-  const auth = _.concat(qAuthExp.sum(auth_cols, {as_object: false}), est_extra_years);
-  const exp = qAuthExp.sum(exp_cols, {as_object: false});
+  const history_years_written = _.map(std_years, run_template);
+  const future_auth_year_templates = _.takeRightWhile(
+    estimates_years,
+    (est_year) => !_.includes( history_years_written, run_template(est_year) )
+  );
 
-  const qProgSpending = programSpending.q(query_subject);
-  const progSpending = subject.has_planned_spending ? qProgSpending.sum(planning_years, {as_object: false}) : null;
+  const historical_auth_values = orgVoteStatPa.q(query_subject).sum(auth_cols, {as_object: false});
+  const future_auth_values = _.map(
+    future_auth_year_templates,
+    (future_auth_year_template) => orgVoteStatEstimates.q(query_subject).sum(`${future_auth_year_template}_estimates`, {as_object: false})
+  );
 
-  return {exp, auth, progSpending};
+  const auth_values = _.concat(historical_auth_values, future_auth_values);
+
+
+  const planned_spending_values = subject.has_planned_spending ?
+    programSpending.q(query_subject).sum(planning_years, {as_object: false}) :
+    null;
+
+
+  return {exp_values, auth_values, planned_spending_values};
 };
 
 class AuthExpProgSpending extends React.Component {
@@ -70,7 +78,7 @@ class AuthExpProgSpending extends React.Component {
     const { calculations, footnotes, sources, glossary_keys } = this.props;
     const { active_series } = this.state;
     const { info, panel_args, subject } = calculations;
-    const { exp, auth, progSpending } = panel_args;
+    const { exp_values, auth_values, planned_spending_values } = panel_args;
 
     const series_labels = [
       text_maker("budgetary_expenditures"),
@@ -79,10 +87,11 @@ class AuthExpProgSpending extends React.Component {
     ];
 
     const colors = d3.scaleOrdinal().range(newIBCategoryColors);
-    const raw_data = _.concat(exp, auth, progSpending);
+    const raw_data = _.concat(exp_values, auth_values, planned_spending_values);
   
-    const auth_ticks = _.chain(_.map(std_years, run_template))
-      .concat(_.map(estimates_years, run_template))
+    const auth_ticks = _.chain(std_years)
+      .concat( estimates_years )
+      .map( run_template )
       .uniq()
       .value();
     const exp_ticks = _.map(std_years, run_template);
@@ -95,7 +104,7 @@ class AuthExpProgSpending extends React.Component {
       last_planned_year: _.last(plan_ticks),
       gap_year: gap_year,
       plan_change: info[`${subject.level}_exp_planning_year_3`] - info[`${subject.level}_auth_average`],
-      hist_avg_tot_pct: _.isEqual(exp, auth) ? 0 : info[`${subject.level}_hist_avg_tot_pct`],
+      hist_avg_tot_pct: _.isEqual(exp_values, auth_values) ? 0 : info[`${subject.level}_hist_avg_tot_pct`],
       last_year_lapse_amt: info[`${subject.level}_auth_pa_last_year`] - info[`${subject.level}_exp_pa_last_year`] || 0,
       last_year_lapse_pct: (info[`${subject.level}_auth_pa_last_year`] - info[`${subject.level}_exp_pa_last_year`] || 0)/info[`${subject.level}_auth_pa_last_year`],
     };
@@ -110,9 +119,9 @@ class AuthExpProgSpending extends React.Component {
       const data = _.map(all_ticks, tick => ({
         label: tick,
         data: [
-          _.isNumber(auth[_.findIndex(auth_ticks, d=>d===tick)]) ? auth[_.findIndex(auth_ticks, d=>d===tick)] : null,
-          _.isNumber(exp[_.findIndex(exp_ticks, d=>d===tick)]) ? exp[_.findIndex(exp_ticks, d=>d===tick)] : null,
-          _.isNumber(progSpending[_.findIndex(plan_ticks, d=>d===tick)]) ? progSpending[_.findIndex(plan_ticks, d=>d===tick)] : null,
+          _.isNumber(auth_values[_.findIndex(auth_ticks, d=>d===tick)]) ? auth_values[_.findIndex(auth_ticks, d=>d===tick)] : null,
+          _.isNumber(exp_values[_.findIndex(exp_ticks, d=>d===tick)]) ? exp_values[_.findIndex(exp_ticks, d=>d===tick)] : null,
+          _.isNumber(planned_spending_values[_.findIndex(plan_ticks, d=>d===tick)]) ? planned_spending_values[_.findIndex(plan_ticks, d=>d===tick)] : null,
         ],
       }));
   
@@ -136,14 +145,14 @@ class AuthExpProgSpending extends React.Component {
       );
       const graph_data = _.chain(series_labels)
         .zip([
-          zip_years_and_data(exp_ticks, exp),
-          zip_years_and_data(auth_ticks, auth),
+          zip_years_and_data(exp_ticks, exp_values),
+          zip_years_and_data(auth_ticks, auth_values),
           _.compact([
             gap_year && {
               x: gap_year,
               y: null,
             },
-            ...zip_years_and_data(plan_ticks, progSpending),
+            ...zip_years_and_data(plan_ticks, planned_spending_values),
           ]),
         ])
         .filter( row => !_.isNull(row[0]) && _.includes(active_series, row[0]))
@@ -229,7 +238,7 @@ class AuthExpProgSpending extends React.Component {
           left: 100,
         },
         ...(
-          _.isEqual(exp, auth)
+          _.isEqual(exp_values, auth_values)
           && _.includes(active_series, text_maker("budgetary_expenditures"))
           && _.includes(active_series, text_maker("authorities")
           )
