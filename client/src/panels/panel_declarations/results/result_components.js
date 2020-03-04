@@ -221,7 +221,7 @@ const result_status_icon_components = (status, width) => {
     met: <IconCheck
       key="met"
       title={result_simple_statuses.met.text}
-      color={color_defs.successDarkColor}
+      color={"#206BBD"}
       width={width}
       vertical_align={"0em"}
       alternate_color={false}
@@ -230,7 +230,7 @@ const result_status_icon_components = (status, width) => {
     not_met: <IconAttention
       key="not_met"
       title={result_simple_statuses.not_met.text}
-      color={color_defs.failDarkColor}
+      color={"#4abbc4"}
       width={width}
       vertical_align={"0em"}
       alternate_color={false}
@@ -239,7 +239,7 @@ const result_status_icon_components = (status, width) => {
     not_available: <IconNotApplicable
       key="not_available"
       title={result_simple_statuses.not_available.text}
-      color={color_defs.warnDarkColor}
+      color={"#e89a40"}
       width={width}
       vertical_align={"0em"}
       alternate_color={false}
@@ -248,7 +248,7 @@ const result_status_icon_components = (status, width) => {
     future: <IconClock
       key="future"
       title={result_simple_statuses.future.text}
-      color={color_defs.tertiaryColor}
+      color={"#919bd4"}
       width={width}
       vertical_align={"0em"}
       alternate_color={false}
