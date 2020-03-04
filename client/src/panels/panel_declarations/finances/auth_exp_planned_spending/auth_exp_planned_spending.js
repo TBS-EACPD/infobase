@@ -63,37 +63,44 @@ const AuthExpPlannedSpendingTable = ({data_series}) => {
   );
 };
   
-const get_auth_exp_diff = (slice_data) => Math.abs(slice_data[0].data.y - slice_data[1].data.y);
-const auth_exp_planned_spending_tooltip = (slice, tooltip_formatter) => (
-  <div style={{color: window.infobase_color_constants.textColor}}>
-    <table style={{width: '100%', borderCollapse: 'collapse'}}>
-      <tbody>
-        { slice.data.map(
-          tooltip_item => (
-            <tr key = {tooltip_item.serie.id}>
-              <td style= {{padding: '3px 5px'}}>
-                <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.serie.color}} />
-              </td>
-              <td style={{padding: '3px 5px'}}> {tooltip_item.serie.id} </td>
-              <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: tooltip_formatter(tooltip_item.data.y)}} />
-            </tr>
-          )
-        )}
-        { slice.data.length > 1 ? 
-          <tr>
-            <td style= {{height: '12px', width: '12px', padding: '3px 5px'}}/>
-            <td style={{padding: '3px 5px'}}> {text_maker('difference')} </td>
-            <td
-              style={{padding: '3px 5px', color: window.infobase_color_constants.highlightColor}} 
-              dangerouslySetInnerHTML={{__html: tooltip_formatter(get_auth_exp_diff(slice.data))}}
-            />
-          </tr> :
-          null
-        }
-      </tbody>
-    </table>
-  </div>
-);
+const get_auth_exp_diff = ([larger_data_point, smaller_data_point]) => Math.abs(larger_data_point.data.y - smaller_data_point.data.y);
+const auth_exp_planned_spending_tooltip = (graph_slice, tooltip_formatter) => {
+  const null_filtered_slice_data = _.filter(
+    graph_slice.data,
+    ({data}) => !_.isNull(data.y)
+  );
+
+  return (
+    <div style={{color: window.infobase_color_constants.textColor}}>
+      <table style={{width: '100%', borderCollapse: 'collapse'}}>
+        <tbody>
+          { null_filtered_slice_data.map(
+            tooltip_item => (
+              <tr key = {tooltip_item.serie.id}>
+                <td style= {{padding: '3px 5px'}}>
+                  <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.serie.color}} />
+                </td>
+                <td style={{padding: '3px 5px'}}> {tooltip_item.serie.id} </td>
+                <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: tooltip_formatter(tooltip_item.data.y)}} />
+              </tr>
+            )
+          )}
+          { null_filtered_slice_data.length > 1 ? 
+            <tr>
+              <td style= {{height: '12px', width: '12px', padding: '3px 5px'}}/>
+              <td style={{padding: '3px 5px'}}> {text_maker('difference')} </td>
+              <td
+                style={{padding: '3px 5px', color: window.infobase_color_constants.highlightColor}} 
+                dangerouslySetInnerHTML={{__html: tooltip_formatter(get_auth_exp_diff(null_filtered_slice_data))}}
+              />
+            </tr> :
+            null
+          }
+        </tbody>
+      </table>
+    </div>
+  );
+};
 class AuthExpPlannedSpendingGraph extends React.Component {
   constructor(props){
     super(props);
@@ -113,6 +120,12 @@ class AuthExpPlannedSpendingGraph extends React.Component {
     const { active_series } = this.state;
 
     const colors = d3.scaleOrdinal().range(newIBCategoryColors);
+    const has_multiple_active_series = _.chain(active_series)
+      .values()
+      .compact()
+      .value()
+      .length > 1;
+
     
     const legend_items = _.map(
       data_series,
@@ -126,20 +139,30 @@ class AuthExpPlannedSpendingGraph extends React.Component {
 
     const graph_data = _.chain(data_series)
       .filter( ({key}) => active_series[key] )
-      .map(
-        ({label, years, values}) => ({
-          id: label,
-          data: _.chain(years)
-            .zip(values)
-            .map(
-              ([year, value]) => ({
-                x: year,
-                y: value,
-              })
-            )
-            .value(),
-        })
+      .flatMap(
+        ({key, label, years, values}) => [
+          gap_year && key === "planned_spending" && has_multiple_active_series && {
+            id: "gap-year",
+            data: [{
+              x: gap_year,
+              y: null,
+            }],
+          },
+          {
+            id: label,
+            data: _.chain(years)
+              .zip(values)
+              .map(
+                ([year, value]) => ({
+                  x: year,
+                  y: value,
+                })
+              )
+              .value(),
+          },
+        ]
       )
+      .compact()
       .value();
     
     
@@ -201,7 +224,7 @@ class AuthExpPlannedSpendingGraph extends React.Component {
       //&& {
       //  layers: ['grid', 'markers', 'areas', DashedLine, 'slices', 'dots', 'axes', 'legends'],
       //}),
-      ...(gap_year && active_series.planned_spending && {
+      ...(gap_year && active_series.planned_spending && has_multiple_active_series && {
         markers: [
           {
             axis: 'x',
@@ -234,9 +257,9 @@ class AuthExpPlannedSpendingGraph extends React.Component {
                   this.setState({
                     active_series: {
                       ...active_series,
-                      [key_corresponding_to_label]: !active_series[key_corresponding_to_label], 
+                      [key_corresponding_to_label]: !active_series[key_corresponding_to_label] || !has_multiple_active_series, 
                     },
-                  })
+                  });
                 }
               }
             />
