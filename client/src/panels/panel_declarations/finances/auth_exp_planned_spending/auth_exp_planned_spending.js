@@ -64,14 +64,17 @@ const calculate = function(subject, info, options) {
   return {exp_values, auth_values, planned_spending_values};
 };
 
-class AuthExpProgSpending extends React.Component {
+class AuthExpPlannedSpending extends React.Component {
   constructor(props){
     super(props);
-    const active_series = [ text_maker("budgetary_expenditures"), text_maker("authorities") ];
-    if(props.calculations.subject.has_planned_spending){
-      active_series.push( text_maker("planned_spending") );
-    }
-    this.state = { active_series: active_series };
+
+    const active_series = _.compact([
+      text_maker("budgetary_expenditures"),
+      text_maker("authorities"),
+      props.calculations.subject.has_planned_spending && text_maker("planned_spending"),
+    ]);
+
+    this.state = { active_series };
   }
 
   render(){
@@ -326,7 +329,7 @@ class AuthExpProgSpending extends React.Component {
 
 const render = function({calculations, footnotes, sources, glossary_keys}) {
   return (
-    <AuthExpProgSpending
+    <AuthExpPlannedSpending
       calculations={calculations}
       footnotes={footnotes}
       sources={sources}
