@@ -201,9 +201,9 @@ export class CanadaD3Component {
             position: "absolute",
             "border-radius": "5px",
             "text-align": "center",
-            "font-size": "10px",
+            "font-size": scale * 22 + "px",
             "background-color": window.infobase_color_constants.separatorColor,
-          }); 
+          });
 
         
         const prov_name = get_province_display_name(prov_key, scale);
