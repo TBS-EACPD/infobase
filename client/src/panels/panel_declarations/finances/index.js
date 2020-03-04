@@ -13,7 +13,7 @@ export { declare_planned_actual_comparison_panel } from './planned_actual_compar
 
 export { declare_gocographic_panel } from './goco/goco.js';
 
-export { declare_auth_exp_prog_spending_panel } from './historical_auth_exp/auth_exp_prog_spending.js';
+export { declare_auth_exp_planned_spending_panel } from './auth_exp_planned_spending/auth_exp_planned_spending.js.js';
 
 export { declare_internal_services_panel } from './internal_services/internal_services.js';
 

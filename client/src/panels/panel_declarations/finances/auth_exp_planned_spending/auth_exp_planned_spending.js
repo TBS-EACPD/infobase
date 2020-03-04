@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import text from './auth_exp_prog_spending.yaml';
+import text from './auth_exp_planned_spending.yaml';
 import {
   run_template,
   year_templates,
@@ -28,8 +28,8 @@ const auth_cols = _.map(std_years, yr=>`${yr}auth`);
 const exp_cols = _.map(std_years, yr=>`${yr}exp`);
 
 const text_keys_by_level = {
-  dept: "dept_auth_exp_prog_spending_body",
-  gov: "gov_auth_exp_prog_spending_body",
+  dept: "dept_auth_exp_planned_spending_body",
+  gov: "gov_auth_exp_planned_spending_body",
 };
 
 
@@ -293,7 +293,7 @@ class AuthExpProgSpending extends React.Component {
     return (
       <StdPanel
         containerAlign={subject.has_planned_spending ? "top" : "middle"}
-        title={text_maker("auth_exp_prog_spending_title", {...info, ...additional_info})}
+        title={text_maker("auth_exp_planned_spending_title", {...info, ...additional_info})}
         {...{footnotes,sources,glossary_keys}}
       >
         <Col size={4} isText>
@@ -327,8 +327,8 @@ const render = function({calculations, footnotes, sources, glossary_keys}) {
 };
 
 
-export const declare_auth_exp_prog_spending_panel = () => declare_panel({
-  panel_key: "auth_exp_prog_spending",
+export const declare_auth_exp_planned_spending_panel = () => declare_panel({
+  panel_key: "auth_exp_planned_spending",
   levels: ["gov", "dept"],
   panel_config_func: (level, panel_key) => ({
     depends_on: ["orgVoteStatPa", "programSpending", "orgVoteStatEstimates"],
