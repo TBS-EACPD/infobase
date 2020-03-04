@@ -164,9 +164,6 @@ const StatusGrid = props => {
 
   return (
     <div>
-      <div className="h3">
-        <TM k="results_icon_array_title" args={{year: current_drr_year}} />
-      </div>
       <div>
         <MiniLegend items={legend_data} />
         <div>
@@ -232,45 +229,52 @@ class PercentageViz extends React.Component {
     return (
       <Fragment>
         <div className="frow">
-          <div className="fcol-md-6 fcol-xs-6" >
-            <div>
-              {text_maker("graph_legend_instructions")}
-            </div>
-            <div className="centerer">
-              <div className="legend-container">
-                <GraphLegend
-                  items={_.chain(data)
-                    .map( ({ label, id }) => ({
-                      label: label,
-                      active: _.includes(selected, id),
-                      id,
-                      color: result_color_scale(id),
-                    }))
-                    .value()
-                  }
-                  onClick={id => {!(selected.length === 1 && selected.includes(id)) &&
-                    this.setState({
-                      selected: _.toggle_list(selected, id),
-                    });
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="fcol-md-6 fcol-xs-6 medium_panel_text" >
+          <div className="fcol-md-4 fcol-xs-4 medium_panel_text" >
             <TM
               k="new_drr_summary_text_summary"
               args={new_summary_text_args} 
             />
           </div>
-        </div>
-        <div style={{height: '400px'}} aria-hidden = {true}>
-          <NivoResponsivePie
-            data = {graph_data}
-            colorBy = {obj=>result_color_scale(obj.id)}
-            total = {graph_total}
-            height = '400px'
-          />
+          <div className="fcol-md-4 fcol-xs-4 medium_panel_text" >
+            <div style={{height: '280px'}} aria-hidden = {true}>
+              <NivoResponsivePie
+                data = {graph_data}
+                colorBy = {obj=>result_color_scale(obj.id)}
+                total = {graph_total}
+                height = '280px'
+                is_money = {false}
+                margin = {{
+                  top: 30,
+                  right: 30,
+                  bottom: 30,
+                  left: 30,
+                }}
+              />
+            </div>
+          </div>
+          <div className="fcol-md-4 fcol-xs-4" >
+            <div className="medium_panel_text">
+              {text_maker("graph_legend_instructions")}
+            </div>
+            <div className="legend-container">
+              <GraphLegend
+                items={_.chain(data)
+                  .map( ({ label, id }) => ({
+                    label: label,
+                    active: _.includes(selected, id),
+                    id,
+                    color: result_color_scale(id),
+                  }))
+                  .value()
+                }
+                onClick={id => {!(selected.length === 1 && selected.includes(id)) &&
+                  this.setState({
+                    selected: _.toggle_list(selected, id),
+                  });
+                }}
+              />
+            </div>
+          </div>
         </div>
       </Fragment>
     );
@@ -292,23 +296,23 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
   return <Fragment>
     <div className="frow middle-xs between-md">
       <div className="fcol-md-12 fcol-xs-12 medium_panel_text" >
-        <TM 
-          k="drr_summary_text_intro"
-          args={summary_text_args} 
-        />
+        <TM k="drr_summary_text_intro" args={summary_text_args} />
+      </div>
+    </div>
+    <div className="frow middle-xs between-md">
+      <div className="fcol-md-7 fcol-xs-7 medium_panel_text" >
+        <div style={{padding: "10px"}}>
+          <TM k="result_status_explanation"/>
+        </div>
+      </div>
+      <div className="fcol-md-5 fcol-xs-5" >
+        <div style={{padding: "30px"}}>
+          <StatusGrid {...counts} />
+        </div>
       </div>
     </div>
     <div className="frow middle-xs between-md" style={{marginBottom: "30px"}} >
       <div className={"fcol-md-12 fcol-xs-12"} >
-        <div style={{padding: "30px"}}>
-          <StatusGrid {...counts} />
-        </div>
-        <div style={{padding: "10px"}}>
-          <p>Detailed explanation of result statuses here</p>
-          <p>With some examples</p>
-          <p>Detailed explanation of result statuses here</p>
-          <p>With some examples</p>
-        </div>
         <PercentageViz summary_text_args={summary_text_args} counts={counts} />
       </div>
     </div>
