@@ -42,7 +42,7 @@ const AuthExpPlannedSpendingTable = ({data_series}) => {
     .value();
   
   const data = _.map(
-    all_years,
+    all_years, 
     (year) => ({
       label: year,
       data: _.map(
@@ -63,206 +63,188 @@ const AuthExpPlannedSpendingTable = ({data_series}) => {
   );
 };
   
-//class AuthExpPlannedSpendingGraph extends React.Component {
-//  constructor(props){
-//    super(props);
-//
-//    const data_series = _.chain([
-//      "budgetary_expenditures",
-//      "authorities",
-//      props.calculations.subject.has_planned_spending && "planned_spending",
-//    ])
-//      .compact()
-//      .map(
-//        (series_key) => ({
-//          series_key,
-//          label: text_maker(series_key),
-//          active: true,
-//        })
-//      )
-//      .value();
-//
-//    this.state = { data_series };
-//  }
-//  render(){
-//    const {
-//      exp_values,
-//      auth_values,
-//      planned_spending_values,
-//      gap_year,
-//    } = this.props;
-//    const { data_series } = this.state;
-//
-//    const colors = d3.scaleOrdinal().range(newIBCategoryColors);
-//    const raw_data = _.concat(exp_values, auth_values, planned_spending_values);
-//    
-//    const zip_years_and_data = (years, data) => _.map(
-//      years,
-//      (year, year_ix) => {
-//        if(data){
-//          return {
-//            x: year,
-//            y: data[year_ix],
-//          };
-//        }
-//      }
-//    );
-//    const graph_data = _.chain(series_labels)
-//      .zip([
-//        zip_years_and_data(exp_ticks, exp_values),
-//        zip_years_and_data(auth_ticks, auth_values),
-//        _.compact([
-//          gap_year && {
-//            x: gap_year,
-//            y: null,
-//          },
-//          ...zip_years_and_data(plan_ticks, planned_spending_values),
-//        ]),
-//      ])
-//      .filter( row => !_.isNull(row[0]) && _.includes(active_series, row[0]))
-//      .map( ([id, data]) => ({id, data}) )
-//      .value();
-//    
-//    const get_auth_exp_diff = (slice_data) => Math.abs(slice_data[0].data.y - slice_data[1].data.y);
-//    
-//    const lineStyleById = {
-//      [series_labels[0]]: {
-//        stroke: colors(series_labels[0]),
-//        strokeWidth: 2.5,
-//      },
-//      [series_labels[1]]: {
-//        strokeDasharray: '56',
-//        stroke: colors(series_labels[1]),
-//        strokeWidth: 2.5,
-//      },
-//      [series_labels[2]]: {
-//        stroke: colors(series_labels[2]),
-//        strokeWidth: 2.5,
-//      },
-//    };
-//    
-//    const DashedLine = ({ lineGenerator, xScale, yScale }) => {
-//      return graph_data.map(({ id, data }) => {
-//        return (
-//          <path
-//            key={id}
-//            d={lineGenerator(
-//              data.map(d => ({
-//                x: xScale(d.x),
-//                y: d.y != null ? yScale(d.y) : null,
-//              }))
-//            )}
-//            fill="none"
-//            style={lineStyleById[id]}
-//          />
-//        );
-//      });
-//    };
-//  
-//    const nivo_default_props = {
-//      data: graph_data,
-//      raw_data: raw_data,
-//      colorBy: d => colors(d.id),
-//      magnify_glass_translateX: 80,
-//      magnify_glass_translateY: 70,
-//      tooltip: (slice, tooltip_formatter) => (
-//        <div style={{color: window.infobase_color_constants.textColor}}>
-//          <table style={{width: '100%', borderCollapse: 'collapse'}}>
-//            <tbody>
-//              { slice.data.map(
-//                tooltip_item => (
-//                  <tr key = {tooltip_item.serie.id}>
-//                    <td style= {{padding: '3px 5px'}}>
-//                      <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.serie.color}} />
-//                    </td>
-//                    <td style={{padding: '3px 5px'}}> {tooltip_item.serie.id} </td>
-//                    <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: tooltip_formatter(tooltip_item.data.y)}} />
-//                  </tr>
-//                )
-//              )}
-//              { slice.data.length > 1 ? 
-//                <tr>
-//                  <td style= {{height: '12px', width: '12px', padding: '3px 5px'}}/>
-//                  <td style={{padding: '3px 5px'}}> {text_maker('difference')} </td>
-//                  <td
-//                    style={{padding: '3px 5px', color: window.infobase_color_constants.highlightColor}} 
-//                    dangerouslySetInnerHTML={{__html: tooltip_formatter(get_auth_exp_diff(slice.data))}}
-//                  />
-//                </tr> :
-//                null
-//              }
-//            </tbody>
-//          </table>
-//        </div>
-//      ),
-//      margin: {
-//        top: 10,
-//        right: 30,
-//        bottom: 40,
-//        left: 100,
-//      },
-//      ...(
-//        _.isEqual(exp_values, auth_values)
-//        && _.includes(active_series, text_maker("budgetary_expenditures"))
-//        && _.includes(active_series, text_maker("authorities")
-//        )
-//      && {
-//        layers: ['grid', 'markers', 'areas', DashedLine, 'slices', 'dots', 'axes', 'legends'],
-//      }),
-//      ...(gap_year && _.includes(active_series, text_maker("planned_spending")) && {
-//        markers: [
-//          {
-//            axis: 'x',
-//            value: gap_year,
-//            lineStyle: {
-//              stroke: window.infobase_color_constants.tertiaryColor, 
-//              strokeWidth: 2,
-//              strokeDasharray: ("3, 3"),
-//            },  
-//          },
-//        ], 
-//      }),
-//    };
-//    
-//    const legend_items = _.chain(series_labels)
-//      .map( (label) => {
-//        return {
-//          id: label,
-//          label: label,
-//          active: _.includes(active_series, label),
-//          color: colors(label),
-//        };
-//      })
-//      .filter( (legend_row) => !_.isNull(legend_row.id) )
-//      .value();
-//  
-//    return (
-//      <Fragment>
-//        <div style={{padding: '10px 25px 0px 97px'}}>
-//          <div className="legend-container">
-//            <GraphLegend
-//              isHorizontal
-//              items={legend_items}
-//              onClick={ id => { 
-//                !(
-//                  active_series.length === 1 &&
-//                  _.includes(active_series, id)
-//                ) && this.setState({
-//                  active_series: _.toggle_list(active_series, id),
-//                });
-//              }}
-//            />
-//          </div>
-//        </div>
-//        <div style={{height: 400}} aria-hidden = {true}>
-//          <NivoResponsiveLine
-//            {...nivo_default_props}
-//          />
-//        </div>
-//      </Fragment>
-//    );
-//  }
-//}
+const get_auth_exp_diff = (slice_data) => Math.abs(slice_data[0].data.y - slice_data[1].data.y);
+const auth_exp_planned_spending_tooltip = (slice, tooltip_formatter) => (
+  <div style={{color: window.infobase_color_constants.textColor}}>
+    <table style={{width: '100%', borderCollapse: 'collapse'}}>
+      <tbody>
+        { slice.data.map(
+          tooltip_item => (
+            <tr key = {tooltip_item.serie.id}>
+              <td style= {{padding: '3px 5px'}}>
+                <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.serie.color}} />
+              </td>
+              <td style={{padding: '3px 5px'}}> {tooltip_item.serie.id} </td>
+              <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: tooltip_formatter(tooltip_item.data.y)}} />
+            </tr>
+          )
+        )}
+        { slice.data.length > 1 ? 
+          <tr>
+            <td style= {{height: '12px', width: '12px', padding: '3px 5px'}}/>
+            <td style={{padding: '3px 5px'}}> {text_maker('difference')} </td>
+            <td
+              style={{padding: '3px 5px', color: window.infobase_color_constants.highlightColor}} 
+              dangerouslySetInnerHTML={{__html: tooltip_formatter(get_auth_exp_diff(slice.data))}}
+            />
+          </tr> :
+          null
+        }
+      </tbody>
+    </table>
+  </div>
+);
+class AuthExpPlannedSpendingGraph extends React.Component {
+  constructor(props){
+    super(props);
+
+    const active_series = _.chain(props.data_series)
+      .map( ({key}) => [key, true] )
+      .fromPairs()
+      .value();
+
+    this.state = { active_series };
+  }
+  render(){
+    const {
+      data_series,
+      gap_year,
+    } = this.props;
+    const { active_series } = this.state;
+
+    const colors = d3.scaleOrdinal().range(newIBCategoryColors);
+    
+    const legend_items = _.map(
+      data_series,
+      ({key, label}) => ({
+        id: label,
+        label: label,
+        active: active_series[key],
+        color: colors(label),
+      })
+    );
+
+    const graph_data = _.chain(data_series)
+      .filter( ({key}) => active_series[key] )
+      .map(
+        ({label, years, values}) => ({
+          id: label,
+          data: _.chain(years)
+            .zip(values)
+            .map(
+              ([year, value]) => ({
+                x: year,
+                y: value,
+              })
+            )
+            .value(),
+        })
+      )
+      .value();
+    
+    
+    
+    // VVV This, and following commented out code, relates to a `layers` option in nivo_default_props which seems to be unreachable under the current logic? VVV
+    // Since exp_values and auth_values will never be equal... not since we started including the "future" auth years, right? What was this layers/DashedLine stuff about?
+    //
+    //const lineStyleById = {
+    //  [series_labels[0]]: {
+    //    stroke: colors(series_labels[0]),
+    //    strokeWidth: 2.5,
+    //  },
+    //  [series_labels[1]]: {
+    //    strokeDasharray: '56',
+    //    stroke: colors(series_labels[1]),
+    //    strokeWidth: 2.5,
+    //  },
+    //  [series_labels[2]]: {
+    //    stroke: colors(series_labels[2]),
+    //    strokeWidth: 2.5,
+    //  },
+    //};
+    
+    //const DashedLine = ({ lineGenerator, xScale, yScale }) => {
+    //  return graph_data.map(({ id, data }) => {
+    //    return (
+    //      <path
+    //        key={id}
+    //        d={lineGenerator(
+    //          data.map(d => ({
+    //            x: xScale(d.x),
+    //            y: d.y != null ? yScale(d.y) : null,
+    //          }))
+    //        )}
+    //        fill="none"
+    //        style={lineStyleById[id]}
+    //      />
+    //    );
+    //  });
+    //};
+  
+    const nivo_props = {
+      data: graph_data,
+      raw_data: _.flatMap(data_series, 'values'),
+      colorBy: d => colors(d.id),
+      magnify_glass_translateX: 80,
+      magnify_glass_translateY: 70,
+      tooltip: auth_exp_planned_spending_tooltip,
+      margin: {
+        top: 10,
+        right: 30,
+        bottom: 40,
+        left: 100,
+      },
+      //...(
+      //  _.isEqual(exp_values, auth_values)
+      //  && active_series.budgetary_expenditures
+      //  && active_series.authorities
+      //  )
+      //&& {
+      //  layers: ['grid', 'markers', 'areas', DashedLine, 'slices', 'dots', 'axes', 'legends'],
+      //}),
+      ...(gap_year && active_series["planned_spending"] && {
+        markers: [
+          {
+            axis: 'x',
+            value: gap_year,
+            lineStyle: {
+              stroke: window.infobase_color_constants.tertiaryColor, 
+              strokeWidth: 2,
+              strokeDasharray: ("3, 3"),
+            },  
+          },
+        ], 
+      }),
+    };
+    
+
+    return (
+      <Fragment>
+        <div style={{padding: '10px 25px 0px 97px'}} aria-hidden={true}>
+          <div className="legend-container">
+            <GraphLegend
+              isHorizontal
+              items={legend_items}
+              onClick={ 
+                (id) => this.setState({
+                  active_series: {
+                    ...active_series,
+                    [id]: !active_series[id], 
+                  },
+                })
+              }
+            />
+          </div> 
+        </div>
+        <div style={{height: 400}}>
+          <NivoResponsiveLine
+            {...nivo_props}
+          />
+        </div>
+      </Fragment>
+    );
+  }
+}
 
 
 const render = function({calculations, footnotes, sources, glossary_keys}) {
@@ -289,9 +271,15 @@ const render = function({calculations, footnotes, sources, glossary_keys}) {
         }
       </Col>
       <Col size={8} isGraph>
+        { window.is_a11y_mode ?
           <AuthExpPlannedSpendingTable
             data_series={data_series}
+          /> :
+          <AuthExpPlannedSpendingGraph
+            data_series={data_series}
+            gap_year={additional_info.gap_year}
           />
+        }
       </Col>
     </StdPanel>
   );
