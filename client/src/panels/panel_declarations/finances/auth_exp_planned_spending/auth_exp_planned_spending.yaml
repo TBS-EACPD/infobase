@@ -25,7 +25,7 @@ dept_gap_explain_body:
 
     Les dépenses prévues pour {{est_in_year}} à {{last_planned_year}} ont été publiés dans le plan ministériel de {{subj_name dept}} le plus récent, mais les {{gl_tt "Comptes publics du Canada" "PA"}} de {{gap_year}} ne sont pas encore disponibles.
 
-auth_exp_prog_spending_title:
+auth_exp_planned_spending_title:
   transform: [handlebars]
   en: |
     {{#if subject.has_planned_spending}}Authorities, Expenditures and Planned Spending
@@ -34,7 +34,7 @@ auth_exp_prog_spending_title:
     {{#if subject.has_planned_spending}}Autorisations, dépenses et Dépenses prévues
     {{else}} Autorisations et dépenses {{/if}}
 
-gov_auth_exp_prog_spending_body:
+gov_auth_exp_planned_spending_body:
   transform: [handlebars, markdown]
   en: |
     Over the last 5 years, the government has {{gl_tt "authorized" "AUTH"}} an average spending of **{{fmt_compact1_written gov_five_year_auth_average}}** while
@@ -54,7 +54,7 @@ gov_auth_exp_prog_spending_body:
     
     {{#if subject.has_planned_spending}}Les dépenses {{fr_will_change_to plan_change "f" "p" ""}} **{{fmt_compact1_written gov_exp_planning_year_3}}** d'ici à {{last_planned_year}}. {{/if}}
 
-dept_auth_exp_prog_spending_body:
+dept_auth_exp_planned_spending_body:
   transform: [handlebars, markdown]
   en: |
     Over the last 5 years, **{{subj_name dept}}** has received average {{gl_tt "authorities" "AUTH"}} of **{{fmt_compact2_written dept_five_year_auth_average}}** while

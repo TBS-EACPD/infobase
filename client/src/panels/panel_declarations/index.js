@@ -7,7 +7,7 @@ export {
   declare_planned_actual_comparison_panel,
   declare_spending_in_tag_perspective_panel,
   declare_gocographic_panel,
-  declare_auth_exp_prog_spending_panel,
+  declare_auth_exp_planned_spending_panel,
   declare_internal_services_panel,
   declare_personnel_spend_panel,
   declare_spend_by_so_hist_panel,
