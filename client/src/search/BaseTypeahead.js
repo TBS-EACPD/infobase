@@ -17,6 +17,7 @@ import { create_text_maker } from '../models/text.js';
 import { TM } from '../components/TextMaker.js';
 
 import { InfoBaseHighlighter } from './search_utils.js';
+import { StatelessModal } from '../components/modals_and_popovers/StatelessModal.js';
 
 const text_maker = create_text_maker(text);
 const TextMaker = (props) => <TM tmf={text_maker} {...props}/>;
@@ -44,8 +45,8 @@ export class BaseTypeahead extends React.Component {
     this.typeahead_node
       .querySelector(".rbt-input-hint-container")
       .insertAdjacentHTML(
-        'beforeend', 
-        `<div class="search-icon-container">
+        'afterbegin',
+        `<div class="icon-container left">
           <span 
             aria-hidden="true"
           >
@@ -53,6 +54,29 @@ export class BaseTypeahead extends React.Component {
           </span>
         </div>`
       );
+    this.typeahead_node
+      .querySelector(".rbt-input-hint-container")
+      .insertAdjacentHTML(
+        'beforeend',
+        `<div class="icon-container right">
+          <button
+            class="filter-button"
+            aria-hidden="false"
+            role="button"
+            tabIndex=0
+          >
+          <img src="${get_static_url("svg/filter.svg")}" style="width:22px; height:22px;" />
+          </button>
+        </div>`
+      );
+    const filter = this.typeahead_node.querySelector(".filter-button");
+    const onClick = (evt) => {
+      console.log(filter.getBoundingClientRect());
+    };
+    filter.onclick = (e) => onClick(e);
+    filter.onkeydown = (e) => { 
+      if(e.keyCode===13 || e.keyCode===32){ onClick(e); } ;
+    };
   }
   render(){
     const {
@@ -158,7 +182,7 @@ export class BaseTypeahead extends React.Component {
         }
         labelKey = "name"
         paginate = { false } // Turn off built in pagination
-
+        inputProps={{ style: {textIndent: 25} }}
         placeholder = { placeholder }
         minLength = { minLength }
         bsSize = { bootstrapSize }  

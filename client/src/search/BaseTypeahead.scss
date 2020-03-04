@@ -67,13 +67,27 @@
   }
 }
 
-.rbt-input-hint-container > .search-icon-container {
+.rbt-input-hint-container > .icon-container {
   position: absolute; 
   height: 100%; 
-  right: 8px; 
   top: 0px; 
   display: flex; 
   align-items: center;
+}
+.left {
+  left: 8px;
+}
+.right {
+  right: 20px;
+}
+.filter-button {
+  background-color: Transparent;
+  border: none;
+  padding: 0;
+
+  &:active {
+    transform: scale(1.15);
+  }
 }
 
 .search-grayed-out-hint {
