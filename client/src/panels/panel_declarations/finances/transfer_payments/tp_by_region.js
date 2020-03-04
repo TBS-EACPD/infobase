@@ -133,6 +133,7 @@ class TPMap extends React.Component {
       const percent_of_total_tp = current_year_data_tp[largest_prov_tp] / total_sum_tp;
       const text_args_tp = {
         largest_prov: provinces_with_article[largest_prov_tp].text,
+        largest_amount: formatter(current_year_data_tp[largest_prov_tp]),
         total_sum: formatter(total_sum_tp),
         percent_of_total: formats["percentage1_raw"](percent_of_total_tp),
         subject: calculations.subject,
@@ -162,12 +163,14 @@ class TPMap extends React.Component {
         (sum, value) => sum += value[4],
         0
       );
-      const total_sum_tppc = total_sum_tp / total_pop;
-      const percent_of_total_tppc = current_year_data_tppc[largest_prov_tppc] / total_sum_tppc;
+      //const total_sum_tppc = total_sum_tp / total_pop;
+      //const percent_of_total_tppc = current_year_data_tppc[largest_prov_tppc] / total_sum_tppc;
       const text_args_tppc = {
-        largest_prov: !should_tab_be_disabled && provinces_with_article[largest_prov_tppc].text,
-        total_sum: formatter(total_sum_tppc),
-        percent_of_total: formats["percentage1_raw"](percent_of_total_tppc),
+        largest_prov: provinces_with_article[largest_prov_tppc].text,
+        largest_amount: formatter(current_year_data_tp[largest_prov_tppc]),
+        largest_per_capita: formatter(current_year_data_tppc[largest_prov_tppc]),
+        total_sum: formatter(total_sum_tp),
+        percent_of_total: formats["percentage1_raw"](percent_of_total_tp),
         subject: calculations.subject,
         show_per_capita: true,
       };
