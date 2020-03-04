@@ -65,6 +65,7 @@ drr_summary_text:
       à l'aide de **{{fmt_big_int drr_indicators}}** indicateurs, et un état du résultat a été associé à chaque indicateur
       selon la mesure du résultat prévu pour la cible de l'indicateur.
     {{/if}}
+    TODO: need french translation for this bit
 
 
 reports_links_text:
