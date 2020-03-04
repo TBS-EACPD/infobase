@@ -143,7 +143,6 @@ class AuthExpPlannedSpendingGraph extends React.Component {
       .value();
     
     
-    
     // VVV This, and following commented out code, relates to a `layers` option in nivo_default_props which seems to be unreachable under the current logic? VVV
     // Since exp_values and auth_values will never be equal... not since we started including the "future" auth years, right? What was this layers/DashedLine stuff about?
     //
@@ -202,7 +201,7 @@ class AuthExpPlannedSpendingGraph extends React.Component {
       //&& {
       //  layers: ['grid', 'markers', 'areas', DashedLine, 'slices', 'dots', 'axes', 'legends'],
       //}),
-      ...(gap_year && active_series["planned_spending"] && {
+      ...(gap_year && active_series.planned_spending && {
         markers: [
           {
             axis: 'x',
@@ -226,12 +225,19 @@ class AuthExpPlannedSpendingGraph extends React.Component {
               isHorizontal
               items={legend_items}
               onClick={ 
-                (id) => this.setState({
-                  active_series: {
-                    ...active_series,
-                    [id]: !active_series[id], 
-                  },
-                })
+                (label) => {
+                  const key_corresponding_to_label = _.find(
+                    data_series,
+                    {label}
+                  ).key;
+
+                  this.setState({
+                    active_series: {
+                      ...active_series,
+                      [key_corresponding_to_label]: !active_series[key_corresponding_to_label], 
+                    },
+                  })
+                }
               }
             />
           </div> 
