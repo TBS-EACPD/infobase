@@ -157,11 +157,12 @@ class TPMap extends React.Component {
         .keys()
         .maxBy( (prov) => current_year_data_tppc[prov] )
         .value();
-      const total_sum_tppc = _.reduce(
-        current_year_data_tppc,
-        (sum, value) => sum += value,
+      const total_pop = _.reduce(
+        population,
+        (sum, value) => sum += value[4],
         0
       );
+      const total_sum_tppc = total_sum_tp / total_pop;
       const percent_of_total_tppc = current_year_data_tppc[largest_prov_tppc] / total_sum_tppc;
       const text_args_tppc = {
         largest_prov: !should_tab_be_disabled && provinces_with_article[largest_prov_tppc].text,
