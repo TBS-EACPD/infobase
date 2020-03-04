@@ -192,7 +192,7 @@ class InfoGraph_ extends React.Component {
       height: 15,
       vertical_align: 5,
     };
-    const is_filter_panels = active_bubble_id === "financial" || active_bubble_id === "people";
+    const show_all_panels_bubble_type = !(active_bubble_id === "financial" || active_bubble_id === "people");
     const panel_renderers = !loading &&
       _.chain(panel_keys)
         .map((panel_key) => {
@@ -201,9 +201,8 @@ class InfoGraph_ extends React.Component {
             .map((value, key) => value && key)
             .compact()
             .value();
-          const is_filtered = _.intersection(active_panel_filter_keys, panel_obj.depends_on).length > 0 || !is_filter_panels;
-
-          return is_filtered && <PanelRenderer
+          const show_panel = _.intersection(active_panel_filter_keys, panel_obj.depends_on).length > 0 || show_all_panels_bubble_type;
+          return show_panel && <PanelRenderer
             panel_key={panel_key}
             subject={subject}
             active_bubble_id={active_bubble_id}
@@ -251,7 +250,7 @@ class InfoGraph_ extends React.Component {
               }
             </p>
           }
-          { is_filter_panels &&
+          { !show_all_panels_bubble_type &&
             <Details
               closed_drawer_icon={
                 <IconFilter
@@ -268,15 +267,11 @@ class InfoGraph_ extends React.Component {
               }
               summary_content={
                 <div>
-                  <span style={{fontSize: 16}}>
-                    <TM k="filter_panels"/>
-                  </span>
-                  <span> </span>
-                  <span className="panel-status-text">
-                    <TM k="panels_status"
-                      args={{ number_of_active_panels: panel_renderers.length, total_number_of_panels: total_number_of_panels }}
-                    />
-                  </span>
+                  <TM style={{ fontSize: 16 }} k="filter_panels"/>
+                  {" "}
+                  <TM className="panel-status-text" k="panels_status"
+                    args={{ number_of_active_panels: panel_renderers.length, total_number_of_panels: total_number_of_panels }}
+                  />
                 </div>              
               }
               persist_content={true}
