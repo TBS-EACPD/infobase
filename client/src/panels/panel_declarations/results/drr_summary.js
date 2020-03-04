@@ -41,14 +41,7 @@ const grid_colors = {
   future: "results-icon-array-neutral",
 };
 
-const result_color_scale = d3.scaleOrdinal()
-  .domain(["met","not_met","not_available","future"])
-  .range([
-    window.infobase_color_constants.successDarkColor,
-    window.infobase_color_constants.failDarkColor,
-    window.infobase_color_constants.warnDarkColor,
-    window.infobase_color_constants.tertiaryColor,
-  ]);
+const result_color_scale = window.infobase_colors(); // NOTE: this is not going to guarantee that all results data (plots, grid, icons) will have the same colour scale, I'm just hacking it for now
 
 const icon_order = _.chain(ordered_status_keys)
   .map( (status_key, ix) => [status_key, ix*5] )
