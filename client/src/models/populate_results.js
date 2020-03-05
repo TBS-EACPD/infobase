@@ -247,7 +247,7 @@ function extract_flat_data_from_results_hierarchies(hierarchical_response_data){
 
               // methodologies are markdown, but many contain a line starting with an unescaped # that ISN'T a header, but an actuall number sign
               // a header in a methodology would be invalid Titan input anyway, so safe to escape all those cases ourselves
-              indicator.methodology = indicator.methodology.replace(/^#/g, "\\#");
+              indicator.methodology = indicator.methodology && indicator.methodology.replace(/^#/g, "\\#");
 
               indicators.push( _.omit(indicator, "__typename") );
             }
