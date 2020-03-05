@@ -385,9 +385,9 @@ function subject_name(subject){
 
   } else {
     if (subject.name === "Government"){
-      return "The Government";
+      return "the Government";
     } else if (subject.name === "Gouvernement"){
-      return "Le Gouvernement";
+      return "le Gouvernement";
     } else {
       return subject.name;
     }
