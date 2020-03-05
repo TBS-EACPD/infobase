@@ -15,7 +15,7 @@ function cleanup {
 
   unset PROJECT
 
-  unset MDB_CONNECT_STRING
+  unset TEMP_MDB_CONNECT_STRING
   unset MDB_USERNAME
   unset MDB_PW
 }
@@ -30,10 +30,10 @@ export PROJECT=$(lpass show PROD_API_PROJECT_ID --notes)
 touch $scratch/envs.yaml
 echo "MDB_NAME: '$MDB_NAME'" >> $scratch/envs.yaml
 
-export MDB_CONNECT_STRING=$(lpass show MDB_CONNECT_STRING_3 --notes)
-export MDB_USERNAME=$(lpass show MDB_READ_USER --notes)
-export MDB_PW=$(lpass show MDB_READ_PW --notes)
-echo "MDB_CONNECT_STRING: '$MDB_CONNECT_STRING'" >> $scratch/envs.yaml
+export TEMP_MDB_CONNECT_STRING=$(lpass show TEMP_MDB_CONNECT_STRING_3 --notes)
+export MDB_USERNAME=$(lpass show TEMP_MDB_READ_USER --notes)
+export MDB_PW=$(lpass show TEMP_MDB_READ_PW --notes)
+echo "TEMP_MDB_CONNECT_STRING: '$TEMP_MDB_CONNECT_STRING'" >> $scratch/envs.yaml
 echo "MDB_USERNAME: '$MDB_USERNAME'" >> $scratch/envs.yaml
 echo "MDB_PW: '$MDB_PW'" >> $scratch/envs.yaml
 
