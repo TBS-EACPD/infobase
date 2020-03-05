@@ -6,28 +6,12 @@
 # For more information, run:
 #   $ gcloud topic gcloudignore
 #
-.gcloudignore
-.git
-.gitignore
 
-node_modules
-*.DS_Store
-*.swp
-*.swo
-.vscode/
-npm-debug*
-*credentials*.json
+# ignore everything
+/[!.]*
+/.?*
 
-coverage
-coverage/
-src
-src/
-deploy_scripts
-deploy_scripts/
-
-mongo
-
-.bablerc
-.eslintrc.json
-jest.config.js
-README.md
+# explicitly include just what's actually required in the cloud function
+!/package.json
+!/package-lock.json
+!/transpiled_build/**
