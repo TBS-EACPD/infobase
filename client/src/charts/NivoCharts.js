@@ -5,11 +5,15 @@ import { ResponsiveBubble } from '@nivo/circle-packing';
 import { formats, dollar_formats } from "../core/format.js";
 import { Fragment } from 'react';
 import { IconZoomIn, IconZoomOut } from '../icons/icons.js';
+import { create_text_maker_component } from '../components/index.js';
 import { trivial_text_maker } from '../models/text.js';
 import { breakpoints } from '../core/breakpoint_defs.js';
-import { newIBLightCategoryColors } from '../core/color_schemes.js';
+import { newIBCategoryColors } from '../core/color_schemes.js';
 import MediaQuery from 'react-responsive';
 import './NivoCharts.scss';
+import graph_text from './NivoCharts.yaml';
+
+const { text_maker, TM } = create_text_maker_component(graph_text);
 
 
 const get_formatter = (is_money, formatter, raw = true) => (
@@ -641,7 +645,7 @@ const TspanLineWrapper = ({text, width, line_height=1}) => <Fragment>
 const BubbleNode = ({ node, style, handlers, theme }) => {
   if (style.r <= 0) return null;
 
-  const min_node_radius = 5;
+  const min_node_radius = 2;
   const text_y_adjustment = -20;
   const text_width = 50;
 
@@ -712,35 +716,39 @@ export class NivoResponsiveBubble extends React.Component{
       ],
     };
 
-    const color_scale = d3.scaleOrdinal().range(newIBLightCategoryColors);
+    const title = <TM k="bubble_title" args={{outer: totalName, inner: name}}/>;
+
+    const color_scale = d3.scaleOrdinal().range(newIBCategoryColors);
 
     return (
-      <div style={{height: height}}>
-        <div style={{textAlign: "center"}}>
-          {totalName}
+      <Fragment>
+        <div style={{height: height}}>
+          <ResponsiveBubble
+            {...{root,
+              margin,
+            }}
+            tooltip={ (d) => default_tooltip( [d], get_formatter(is_money, text_formatter, false), totalValue) }
+            identity="name"
+            value="value"
+            colorBy={d=>color_scale(d.name)}
+            borderColor="inherit:darker(1.6)"
+            borderWidth={0}
+            enableLabel={false}
+            labelTextColor={window.infobase_color_constants.textColor}
+            labelSkipWidth={labelSkipWidth}
+            animate={true}
+            motionStiffness={90}
+            motionDamping={12}  
+            leavesOnly={false}
+            padding={0}
+            nodeComponent={BubbleNode}
+            margin={{ top: 15, right: 0, bottom: 15, left: 0 }}
+          />
         </div>
-        <ResponsiveBubble
-          {...{root,
-            margin,
-          }}
-          tooltip={ (d) => default_tooltip( [d], get_formatter(is_money, text_formatter, false), totalValue) }
-          identity="name"
-          value="value"
-          colorBy={d=>color_scale(d.name)}
-          borderColor="inherit:darker(1.6)"
-          borderWidth={2}
-          enableLabel={true}
-          labelTextColor={window.infobase_color_constants.textColor}
-          labelSkipWidth={labelSkipWidth}
-          animate={true}
-          motionStiffness={90}
-          motionDamping={12}  
-          leavesOnly={false}
-          padding={0}
-          nodeComponent={BubbleNode}
-          margin={{ top: 2, right: 0, bottom: 2, left: 0 }}
-        />
-      </div>
+        <div style={{textAlign: "center"}}>
+          {title}
+        </div>
+      </Fragment>
     );
   }
 };
