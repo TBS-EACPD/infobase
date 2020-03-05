@@ -3,10 +3,6 @@ tp_by_region_title:
   en: Transfer payments by recipient region
   fr: Paiements de transfert par région du bénéficiaire
 
-per_capita_button_title:
-  en: Toggle Show-per-Capita
-  fr: Toggle Afficher-par-Habitant
-
 tp_by_region_text: 
   transform: [handlebars, markdown]
   en: |
@@ -24,9 +20,8 @@ show_tp:
   fr: Les Paiements de Transfert
 
 show_tp_per_capita:
-  en: Tranfer Payments Per Capita
+  en: Tranfer Payments per Capita
   fr: Les Paiements de Transfert par Habitant
-
 
 tp_a11y_table_title:
   en: Transfer Payments for Provinces
