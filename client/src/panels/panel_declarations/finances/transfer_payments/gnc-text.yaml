@@ -5,19 +5,19 @@ transfer_payment:
 dept_transfer_payments:
   transform: [handlebars]
   en: |
-    {{subj_name subject}} transfer payment expenditures
+    {{subj_abbr subject}} transfer payment spending
   fr: |
-    Dépenses en paiements de transfert de {{subj_name subject}} 
+    Dépenses en paiements de transfert de {{subj_abbr subject}} 
 
 dept_expenditures:
   transform: [handlebars]
   en: |
-    {{subj_name subject}} expenditures
+    {{subj_abbr subject}} total spending
   fr: |
-    Dépenses de {{subj_name subject}} 
+    Dépenses totales de {{subj_abbr subject}} 
 
 gov_transfer_payments:
-  en: Government transfer payment expenditures
+  en: Government transfer payment spending
   fr: Dépenses gouvernementales en paiements de transfert
 
 transfer_payment_type:
