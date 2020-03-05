@@ -156,7 +156,14 @@ export class StandardRouteContainer extends React.Component {
         <DocumentTitle title_str={title} />
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
-        <HeaderBanner route_filter={_.constant(false)} />
+        <HeaderBanner 
+          route_filter={_.constant(true)}
+          banner_content={{
+            en: "One of GC InfoBase's hosting providers is experiencing a service outage. Many sections of the site are out of order as a result. We will be back to normal ASAP, thank you for your patience.",
+            fr: "L'un de nos fournisseurs qui héberge l'InfoBase du GC éprouve une panne de service. Le site est donc en grande partie inopérant . Nous reviendrons à la normale dès que possible. Merci de votre patience.",
+          }[window.lang]}
+          banner_class="warning"
+        />
         {beta && <HeaderBanner route_filter={_.constant(true)} banner_content={trivial_text_maker("beta_banner_content")} banner_class="info" additional_class_names="beta-banner"/>}
         <AnalyticsSynchronizer route_key={route_key} />
         { shouldSyncLang !== false &&
