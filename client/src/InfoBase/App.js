@@ -58,7 +58,7 @@ export class App extends React.Component {
           <DevFip />
           <InsertRuntimeFooterLinks />
           <EasyAccess />
-          { false && has_local_storage && <SurveyPopup /> } 
+          { has_local_storage && <SurveyPopup /> } 
           <ReactUnmounter />
           { !window.is_a11y_mode && <TooltipActivator /> }
           <Suspense fallback={<SpinnerWrapper config_name={"route"} />}>
