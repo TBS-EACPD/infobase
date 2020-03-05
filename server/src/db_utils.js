@@ -7,13 +7,13 @@ function get_connection_str(){
   if(process.env.USE_REMOTE_DB){
     console.log("using remote db")
     const {
-      TEMP_MDB_CONNECT_STRING,
+      MDB_CONNECT_STRING,
       MDB_USERNAME, // different usernames in read-mode vs populate-mode
       MDB_PW,
       MDB_NAME,
     } = process.env;
 
-    return TEMP_MDB_CONNECT_STRING
+    return MDB_CONNECT_STRING
       .replace('{MDB_USERNAME}', MDB_USERNAME)
       .replace('{MDB_PW}', MDB_PW)
       .replace('{MDB_NAME}', MDB_NAME);

@@ -20,16 +20,16 @@ DB_SUFFIX=prod-db-
 CURRENT_SHA=$(git rev-parse HEAD | cut -c1-7)
 NEW_PROD_MDB_NAME=$DB_SUFFIX$CURRENT_SHA
 
-#CURRENT_PROD_MDB_NAME=$(mongo $(lpass show TEMP_MDB_SHELL_CONNECT_STRING --notes) \
-#  --username $(lpass show TEMP_MDB_WRITE_USER --notes) --password $(lpass show TEMP_MDB_WRITE_PW --notes) \
-#  --eval "printjson(db.getSiblingDB('metadata').metadata.findOne({}).prod)" | tail -n 1 | sed 's/"//g')
-#if [[ ! $CURRENT_PROD_MDB_NAME =~ ^$DB_SUFFIX  ]]; then
-#  >&2 echo "ERROR: failed to get current prod DB name. Expected something with the suffix \"$DB_SUFFIX\", got \"$CURRENT_PROD_MDB_NAME\""
-#  exit
-#elif [[ $CURRENT_PROD_MDB_NAME = $NEW_PROD_MDB_NAME ]] ; then
-#  >&2 echo "ERROR: attempting to deploy from $CURRENT_SHA, but $CURRENT_SHA is already in production. If you really need a re-deploy, make a do-nothing commit first"
-#  exit
-#fi
+CURRENT_PROD_MDB_NAME=$(mongo $(lpass show MDB_SHELL_CONNECT_STRING --notes) \
+  --username $(lpass show MDB_WRITE_USER --notes) --password $(lpass show MDB_WRITE_PW --notes) \
+  --eval "printjson(db.getSiblingDB('metadata').metadata.findOne({}).prod)" | tail -n 1 | sed 's/"//g')
+if [[ ! $CURRENT_PROD_MDB_NAME =~ ^$DB_SUFFIX  ]]; then
+  >&2 echo "ERROR: failed to get current prod DB name. Expected something with the suffix \"$DB_SUFFIX\", got \"$CURRENT_PROD_MDB_NAME\""
+  exit
+elif [[ $CURRENT_PROD_MDB_NAME = $NEW_PROD_MDB_NAME ]] ; then
+  >&2 echo "ERROR: attempting to deploy from $CURRENT_SHA, but $CURRENT_SHA is already in production. If you really need a re-deploy, make a do-nothing commit first"
+  exit
+fi
 
 
 (cd server && sh deploy_scripts/prod_deploy_data.sh)
@@ -38,7 +38,7 @@ NEW_PROD_MDB_NAME=$DB_SUFFIX$CURRENT_SHA
 (cd client && sh deploy_scripts/prod_deploy_client.sh)
 
 # --eval seems to be the go-to way to passing args in to a JS mongo script
-mongo $(lpass show TEMP_MDB_SHELL_CONNECT_STRING --notes) \
-  --username $(lpass show TEMP_MDB_WRITE_USER --notes) --password $(lpass show TEMP_MDB_WRITE_PW --notes) \
+mongo $(lpass show MDB_SHELL_CONNECT_STRING --notes) \
+  --username $(lpass show MDB_WRITE_USER --notes) --password $(lpass show MDB_WRITE_PW --notes) \
   --eval "const new_prod_db_name = '$NEW_PROD_MDB_NAME';" \
   scripts/prod_scripts/mongo_post_deploy_cleanup.js
