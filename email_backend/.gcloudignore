@@ -1,23 +1,9 @@
-.gcloudignore
-.git
-.gitignore
+# ignore everything
+/[!.]*
+/.?*
 
-node_modules
-*.DS_Store
-*.swp
-*.swo
-.vscode/
-npm-debug*
-*credentials*.json
-
-coverage
-coverage/
-src
-src/
-deploy_scripts
-deploy_scripts/
-
-.bablerc
-.eslintrc.json
-jest.config.js
-README.md
+# explicitly include just what's actually required in the cloud function
+!/package.json
+!/package-lock.json
+!/transpiled_build/**
+!/templates/**
