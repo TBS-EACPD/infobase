@@ -25,6 +25,8 @@ src/
 deploy_scripts
 deploy_scripts/
 
+mongo
+
 .bablerc
 .eslintrc.json
 jest.config.js
