@@ -374,6 +374,13 @@ Handlebars.registerHelper("lang",function(context){
   }
 });
 
+function subject_acronym_or_name(subject){
+  return _.isUndefined(subject.abbr) ?
+    subject.name :
+    subject.abbr;
+};
+Handlebars.registerHelper('subj_abbr', subject_acronym_or_name);
+
 Handlebars.registerHelper('ce_crso', crso => {
   if(crso.is_cr){
     return `cette ${trivial_text_maker('core_resp')}`;
