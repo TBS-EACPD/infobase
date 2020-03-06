@@ -24,6 +24,7 @@ export {
   declare_dead_crso_warning_panel,
   declare_m2m_tag_warning_panel,
   declare_late_results_warning_panel,
+  declare_late_planned_spending_panel,
 } from './warning_panels.js';
 
 export { declare_resource_structure_panel } from './resource_structure/resource_structure.js';
