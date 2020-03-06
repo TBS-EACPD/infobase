@@ -42,9 +42,9 @@ result_counts_drr_cr:
 result_counts_drr_prog:
   transform: [handlebars,markdown]
   en: |
-    In {{doc_year}}, **{{subj_name subject}}** sought to achieve **{{fmt_big_int num_results}}** results. Progress towards meeting these results was {{gl_tt "measured" "RESULTS_STATUS"}} using **{{fmt_big_int num_indicators}} {{gl_tt "indicators" "IND_RESULT"}}**. {{> "past_tense_results_progress_fragment_en"}}
+    In {{doc_year}}, **{{subj_name subject}}** sought to achieve **{{fmt_big_int num_results}}** results.git {{> "past_tense_results_progress_fragment_en"}}
   fr: |
-    En {{doc_year}}, **{{subj_name subject}}** a cherché à obtenir **{{fmt_big_int num_results}}** résultats. Les progrès vers l’atteinte de ces résultats ont été {{gl_tt "mesurés" "RESULTS_STATUS"}} à l’aide de **{{fmt_big_int num_indicators}}** {{gl_tt "indicateurs" "IND_RESULT"}}. {{> "past_tense_results_progress_fragment_fr"}}
+    En {{doc_year}}, **{{subj_name subject}}** a cherché à obtenir **{{fmt_big_int num_results}}** résultats. {{> "past_tense_results_progress_fragment_fr"}}
 
 
 future_tense_results_progress_fragment_en:
