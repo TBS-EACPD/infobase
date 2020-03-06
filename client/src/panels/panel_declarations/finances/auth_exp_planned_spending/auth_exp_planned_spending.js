@@ -27,11 +27,6 @@ const { text_maker, TM } = create_text_maker_component(text);
 const auth_cols = _.map(std_years, yr => `${yr}auth`);
 const exp_cols = _.map(std_years, yr => `${yr}exp`);
 
-const text_keys_by_level = {
-  dept: "dept_auth_exp_planned_spending_body",
-  gov: "gov_auth_exp_planned_spending_body",
-};
-
 
 const AuthExpPlannedSpendingTable = ({data_series}) => {
   const series_labels = _.map(data_series, 'label');
@@ -292,7 +287,7 @@ const render = function({calculations, footnotes, sources, glossary_keys}) {
       {...{footnotes, sources, glossary_keys}}
     >
       <Col size={4} isText>
-        <TM k={text_keys_by_level[subject.level]} args={final_info} />
+        <TM k={`${subject.level}_auth_exp_planned_spending_body`} args={final_info} />
         { additional_info.gap_year &&
           <div className="auth-gap-details">
             <Details
@@ -348,27 +343,44 @@ const calculate = function(subject, info, options) {
   const data_series = _.chain([
     {
       key: "budgetary_expenditures",
-      year_templates: std_years,
-      values: exp_values,
+      untrimmed_year_templates: std_years,
+      untrimmed_values: exp_values,
     },
     {
       key: "authorities",
-      year_templates: _.concat(std_years, future_auth_year_templates),
-      values: auth_values,
+      untrimmed_year_templates: _.concat(std_years, future_auth_year_templates),
+      untrimmed_values: auth_values,
     },
     subject.has_planned_spending && {
       key: "planned_spending",
-      year_templates: planning_years,
-      values: planned_spending_values,
+      untrimmed_year_templates: planning_years,
+      untrimmed_values: planned_spending_values,
     },
   ])
     .compact()
     .map(
-      (series) => ({
-        ...series,
-        years: _.map(series.year_templates, run_template),
-        label: text_maker(series.key),
-      })
+      (series) => {
+        
+        const [
+          trimmed_year_templates,
+          trimmed_values,
+        ] = _.chain(series.untrimmed_year_templates)
+          .zip(series.untrimmed_values)
+          .dropWhile( ([year_template, value]) => !value )
+          .dropRightWhile( ([year_template, value]) => !value )
+          .unzip()
+          .value();
+
+        return {
+          ...series,
+
+          year_templates: trimmed_year_templates,
+          values: trimmed_values,
+
+          label: text_maker(series.key),
+          years: _.map(trimmed_year_templates, run_template),
+        };
+      }
     )
     .value();
 
