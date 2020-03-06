@@ -12,7 +12,6 @@ export class IconArray extends React.Component {
         style={{
           flex: "0 0 auto",
         }}
-        title={(items[0].status_key)}
       >
         {render_item(item)}
       </div>

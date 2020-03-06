@@ -19,6 +19,7 @@ import {
   GranularResultCounts,
   ordered_status_keys,
   filter_and_genericize_doc_counts,
+  result_statuses,
 } from './results_common.js';
 
 import { IconArray } from '../../../charts/IconArray.js';
@@ -69,7 +70,7 @@ const MiniLegend = ({ items }) => (
             marginRight: "5px",
           }}
           className={className}
-          title={id}
+          title={result_statuses[id].text}
         />
         <span> {label} </span>
       </div>
@@ -169,6 +170,7 @@ const StatusGrid = props => {
                   render_item={ ({status_key}) => 
                     <div 
                       className={classNames(icon_array_size_class, grid_colors[status_key])} 
+                      title={result_statuses[status_key].text}
                     />
                   }
                 />
