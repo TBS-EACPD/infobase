@@ -193,3 +193,54 @@ export const declare_late_results_warning_panel = () => declare_panel({
     }
   },
 });
+
+
+export const declare_late_planned_spending_panel = () => declare_panel({
+  panel_key: 'late_planned_spending_warning',
+  levels: ['gov', 'dept', 'crso', 'program'],
+  panel_config_func: (level, panel_key) => {
+    const docs_with_late_planned_spending = [129, 138, 247, 278, 347, 348, 350];
+
+    switch (level){
+      case "gov":
+        return {
+          static: true,
+          footnotes: false,
+          source: false,
+          info_deps: [],
+          calculate: () => !_.isEmpty(docs_with_late_planned_spending),
+          render: () => (
+            <AlertBanner additional_class_names={'large_panel_text'}>
+              <TM k={'late_planned_spending_warning_gov'} />
+              <MultiColumnList
+                list_items={_.map(
+                  docs_with_late_planned_spending, 
+                  (org_id) => Dept.lookup(org_id).fancy_name
+                )}
+                column_count={ window.lang === "en" && docs_with_late_planned_spending.length > 3 ? 2 : 1 }
+                li_class={ docs_with_late_planned_spending.length > 4 ? "font-small" : '' }
+              />
+            </AlertBanner>
+          ),
+        };
+      default:
+        return {
+          static: true,
+          footnotes: false,
+          source: false,
+          info_deps: [],
+          calculate: (subject) => _.includes(
+            docs_with_late_planned_spending,
+            level === 'dept' ?
+              subject.id :
+              subject.dept.id
+          ),
+          render: () => (
+            <AlertBanner additional_class_names={'large_panel_text'}>
+              <TM k={`late_planned_spending_warning_${level}`} />
+            </AlertBanner>
+          ),
+        };
+    }
+  },
+});
