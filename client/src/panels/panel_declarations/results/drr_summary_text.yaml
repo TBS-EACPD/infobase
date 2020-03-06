@@ -71,8 +71,8 @@ result_status_explanation:
     The result status depends on how the target was defined, e.g. a minimum target requires a measured outcome (actual result) greater than the target.
     
     * If the measured outcome satisfies the target, the indicator is assigned a status of {{gl_tt "Target met" "RESULTS_MET"}}.
-    * If the measured outcome is outside the range or standard established by the the target, the indicator's status is {{gl_tt "Target not met" "RESULTS_NOT_MET"}}.
+    * If the measured outcome is outside the range or standard established by the target, the indicator's status is {{gl_tt "Target not met" "RESULTS_NOT_MET"}}.
     * Indicators for which no target was set, or for which data was unavailable, are assigned the status {{gl_tt "No result available" "RESULTS_NOT_AVAILABLE"}}.
-    * If the date to achieve the target is after the end of the fiscal year (March 31), or if there is no date to achieve the target the status is {{gl_tt "Result to be achieved in the future" "RESULTS_ONGOING"}}.
+    * If the date to achieve the target is after the end of the fiscal year (March 31), or if there is no date to achieve the target, the status is {{gl_tt "Result to be achieved in the future" "RESULTS_ONGOING"}}.
   fr: |
     TODO
