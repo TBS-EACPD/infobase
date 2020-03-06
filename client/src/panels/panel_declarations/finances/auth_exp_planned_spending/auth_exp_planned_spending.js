@@ -224,7 +224,10 @@ class AuthExpPlannedSpendingGraph extends React.Component {
       //&& {
       //  layers: ['grid', 'markers', 'areas', DashedLine, 'slices', 'dots', 'axes', 'legends'],
       //}),
-      ...(gap_year && active_series.planned_spending && has_multiple_active_series && {
+      ...( gap_year &&
+          active_series.budgetary_expenditures &&
+          ! active_series.authorities && // authorities always span the gap year, so don't mark it when displaying them
+          active_series.planned_spending && {
         markers: [
           {
             axis: 'x',
