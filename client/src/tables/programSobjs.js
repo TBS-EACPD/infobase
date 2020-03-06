@@ -7,6 +7,7 @@ import text from './programSobjs.yaml';
 // of the table spec
 import { 
   trivial_text_maker, 
+  run_template,
   year_templates, 
   businessConstants,
   Statistics, 
@@ -17,8 +18,19 @@ import {
 import { Subject } from '../models/subject';
 
 const { Program } = Subject;
-const { std_years } = year_templates;
 const { sos } = businessConstants;
+
+const { std_years } = year_templates;
+
+// data is tied to public accounts (std_years), but only exists from 2014-15 onwards
+const years = _.filter(
+  std_years,
+  (year) => _.chain(year)
+    .thru(run_template)
+    .split('-')
+    .first()
+    .value() >= 2015
+);
 
 export default {
   text,
@@ -80,7 +92,6 @@ export default {
         "fr": "Article courant",
       },
     });
-    const years = _.takeRight(std_years, 3);
     years.forEach(yr=> {
       this.add_col({ 
         "type": "big_int",
@@ -102,6 +113,7 @@ export default {
   
     row.splice(2,0,program.name);
     row.splice(4,0, sos[row[3]].text);
+
     return row;
   },
   process_mapped_row (mapped_row){

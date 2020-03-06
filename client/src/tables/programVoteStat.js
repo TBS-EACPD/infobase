@@ -2,10 +2,21 @@ import text from './programVoteStat.yaml';
 
 // see [here](../table_definition.html) for description
 // of the table spec
-import { Subject, trivial_text_maker, Statistics, year_templates } from './table_common';
+import { Subject, trivial_text_maker, run_template, Statistics, year_templates } from './table_common';
 
 const { Program } = Subject;
+
 const { std_years } = year_templates;
+
+// data is tied to public accounts (std_years), but only exists from 2014-15 onwards
+const years = _.filter(
+  std_years,
+  (year) => _.chain(year)
+    .thru(run_template)
+    .split('-')
+    .first()
+    .value() >= 2015
+);
 
 export default {
   text,
@@ -62,7 +73,6 @@ export default {
         "fr": "Crédit / législatif",
       },
     });
-    const years = _.takeRight(std_years, 3);
     years.forEach(yr=> {
       this.add_col({
         "type": "big_int",
