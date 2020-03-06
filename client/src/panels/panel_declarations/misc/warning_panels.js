@@ -157,8 +157,8 @@ export const declare_late_results_warning_panel = () => declare_panel({
                   result_doc.late_departments, 
                   (org_id) => Dept.lookup(org_id).fancy_name
                 )}
-                column_count={ window.lang === "en" && result_doc.late_departments > 3 ? 2 : 1 }
-                li_class={ result_doc.late_departments > 4 ? "font-small" : '' }
+                column_count={ window.lang === "en" && result_doc.late_departments.length > 3 ? 2 : 1 }
+                li_class={ result_doc.late_departments.length > 4 ? "font-small" : '' }
               />
             </Fragment>;
 
