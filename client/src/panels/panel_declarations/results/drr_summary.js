@@ -10,11 +10,8 @@ import {
   businessConstants,
   get_source_links,
   Results,
-
   declare_panel,
-
   NivoResponsivePie,
-
 } from "../shared.js";
 import { 
   row_to_drr_status_counts,
@@ -23,7 +20,9 @@ import {
   ordered_status_keys,
   filter_and_genericize_doc_counts,
   result_statuses,
+  result_color_scale,
 } from './results_common.js';
+
 
 import { IconArray } from '../../../charts/IconArray.js';
 
@@ -41,7 +40,6 @@ const grid_colors = {
   future: "results-icon-array-neutral",
 };
 
-const result_color_scale = window.infobase_colors(); // NOTE: this is not going to guarantee that all results data (plots, grid, icons) will have the same colour scale, I'm just hacking it for now
 
 const icon_order = _.chain(ordered_status_keys)
   .map( (status_key, ix) => [status_key, ix*5] )
