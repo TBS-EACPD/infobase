@@ -4,6 +4,7 @@ import {
   infograph_href_template,
   businessConstants,
   formats,
+  newIBCategoryColors,
 } from '../shared.js';
 
 import { get_resources_for_subject } from '../../../explorer_common/resource_explorer_common.js';
@@ -185,6 +186,16 @@ const filter_and_genericize_doc_counts = (counts, doc_key) => {
   return doc_counts_with_generic_keys;
 };
 
+const result_color_scale = d3.scaleOrdinal()
+  .domain(["met","not_met","not_available","future"])
+  .range([
+    newIBCategoryColors[0],
+    newIBCategoryColors[1],
+    newIBCategoryColors[2],
+    newIBCategoryColors[3],
+  ]);
+
+
 export {
   Result,
   Indicator,
@@ -206,6 +217,6 @@ export {
   result_simple_statuses,
 
   indicator_text_functions,
-
+  result_color_scale,
   filter_and_genericize_doc_counts,
 };

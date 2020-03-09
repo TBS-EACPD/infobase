@@ -13,6 +13,7 @@ import {
   indicator_text_functions,
   get_result_doc_keys,
   result_docs,
+  result_color_scale,
 } from './results_common.js';
 import {
   IconCheck,
@@ -221,7 +222,7 @@ const result_status_icon_components = (status, width) => {
     met: <IconCheck
       key="met"
       title={result_simple_statuses.met.text}
-      color={"#206BBD"}
+      color={result_color_scale("met")}
       width={width}
       vertical_align={"0em"}
       alternate_color={false}
@@ -230,7 +231,7 @@ const result_status_icon_components = (status, width) => {
     not_met: <IconAttention
       key="not_met"
       title={result_simple_statuses.not_met.text}
-      color={"#4abbc4"}
+      color={result_color_scale("not_met")}
       width={width}
       vertical_align={"0em"}
       alternate_color={false}
@@ -239,7 +240,7 @@ const result_status_icon_components = (status, width) => {
     not_available: <IconNotApplicable
       key="not_available"
       title={result_simple_statuses.not_available.text}
-      color={"#e89a40"}
+      color={result_color_scale("not_available")}
       width={width}
       vertical_align={"0em"}
       alternate_color={false}
@@ -248,7 +249,7 @@ const result_status_icon_components = (status, width) => {
     future: <IconClock
       key="future"
       title={result_simple_statuses.future.text}
-      color={"#919bd4"}
+      color={result_color_scale("future")}
       width={width}
       vertical_align={"0em"}
       alternate_color={false}
