@@ -195,13 +195,13 @@ export class CanadaD3Component {
 
         d3.select(this)
           .styles({
-            left: padding + (scale * coords[0]) + "px",
-            top: scale * coords[1] + "px",
+            left: `${padding + (scale * coords[0])}px`,
+            top: `${scale * coords[1]}px`,
             padding: "5px",
             position: "absolute",
             "border-radius": "5px",
             "text-align": "center",
-            "font-size": scale * 22 + "px",
+            "font-size": `${scale * 22}px`,
             "background-color": window.infobase_color_constants.separatorColor,
           });
 
