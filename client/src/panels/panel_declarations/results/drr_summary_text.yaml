@@ -16,7 +16,7 @@ drr_summary_text_intro:
       In **{{year}}**, {{subj_name subject}} sought to achieve **{{fmt_big_int drr_results}}** results.
     {{/if}}
     Progress towards meeting these results was measured using **{{fmt_big_int drr_total}}** indicators, and a {{gl_tt "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
-    based on the measured outcome of the indicator's target.
+    based on the measured outcome (actual result) of the indicator's target.
   fr: |
     {{#if is_gov}}
       En **{{year}}**, **{{num_depts}}** organisations ont cherché à obtenir **{{fmt_big_int drr_results}}** résultats.
@@ -35,11 +35,11 @@ new_drr_summary_text_summary:
       {{#if drr_indicators_future}}* **{{fmt_big_int drr_indicators_future}}** (**{{fmt_percentage1 (divide drr_indicators_future drr_total)}}**) are {{gl_tt "to be achieved in the future" "RESULTS_ONGOING"}}{{/if}}
   fr: |
     {{#if drr_total}}
-    TODO TODO TODO needs to match the english text
-    De ces **{{fmt_big_int drr_past_total}}** indicateurs qui devaient atteindre leur cible au plus tard le 31 mars {{target_year}}:
-      {{#if drr_indicators_met}}* **{{fmt_big_int drr_indicators_met}}** (**{{fmt_percentage1 (divide drr_indicators_met drr_past_total)}}**) {{gl_tt "ont atteint" "RESULTS_MET"}} leur cible{{/if}}
-      {{#if drr_indicators_not_met}}* **{{fmt_big_int drr_indicators_not_met}}** (**{{fmt_percentage1 (divide drr_indicators_not_met drr_past_total)}}**) {{gl_tt "n’ont pas atteint" "RESULTS_NOT_MET"}} leur cible{{/if}}
-      {{#if drr_indicators_not_available}}* **{{fmt_big_int drr_indicators_not_available}}** (**{{fmt_percentage1 (divide drr_indicators_not_available drr_past_total)}}**) {{gl_tt "n’ont pas de résultat disponible" "RESULTS_NOT_AVAILABLE"}}{{/if}}
+    De ces **{{fmt_big_int drr_past_total}}** indicateurs rapportés:
+      {{#if drr_indicators_met}}* **{{fmt_big_int drr_indicators_met}}** (**{{fmt_percentage1 (divide drr_indicators_met drr_total)}}**) {{gl_tt "ont atteint" "RESULTS_MET"}} leur cible{{/if}}
+      {{#if drr_indicators_not_met}}* **{{fmt_big_int drr_indicators_not_met}}** (**{{fmt_percentage1 (divide drr_indicators_not_met drr_total)}}**) {{gl_tt "n’ont pas atteint" "RESULTS_NOT_MET"}} leur cible{{/if}}
+      {{#if drr_indicators_not_available}}* **{{fmt_big_int drr_indicators_not_available}}** (**{{fmt_percentage1 (divide drr_indicators_not_available drr_total)}}**) {{gl_tt "n’ont pas de résultat disponible" "RESULTS_NOT_AVAILABLE"}}{{/if}}
+      {{#if drr_indicators_future}}* **{{fmt_big_int drr_indicators_future}}** (**{{fmt_percentage1 (divide drr_indicators_future drr_total)}}**) sont {{gl_tt "à atteindre dans le future" "RESULTS_ONGOING"}}{{/if}}
     {{/if}}
 
 gov_drr_summary_org_table_text:
@@ -68,7 +68,7 @@ graph_legend_instructions:
 result_status_explanation:
   transform: [handlebars,markdown]
   en: |
-    The result status depends on how the target was defined, e.g. a minimum target requires a measured outcome (actual result) greater than the target.
+    The result status depends on how the target was defined, e.g. a minimum target requires a measured outcome greater than the target.
     
     * If the measured outcome satisfies the target, the indicator is assigned a status of {{gl_tt "Target met" "RESULTS_MET"}}.
     * If the measured outcome is outside the range or standard established by the target, the indicator's status is {{gl_tt "Target not met" "RESULTS_NOT_MET"}}.
