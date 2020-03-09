@@ -56,6 +56,7 @@ export const declare_employee_last_year_totals_panel = () => declare_panel({
             <Col size={7} isGraph>
               <NivoResponsiveBubble 
                 height={200}
+                is_money={false}
                 value={dept_emp_value}
                 name={info.subject.fancy_name}
                 totalValue={gov_emp_value}
