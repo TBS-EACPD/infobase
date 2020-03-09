@@ -73,10 +73,12 @@ const url_state_selector = createSelector(_.identity, (str) => {
 });
 
 const RPBTitle = ({ table_name, subject_name }) => {
-  if(!table_name){
+  if (!table_name) {
     return <h1> {text_maker("report_builder_title")} </h1>;
   }
-  return <h1> {subject_name ? subject_name : text_maker("government_stats")} </h1>;
+  return (
+    <h1> {subject_name ? subject_name : text_maker("government_stats")} </h1>
+  );
 };
 
 class Root extends React.Component {
@@ -296,7 +298,6 @@ class RPB extends React.Component {
           <SpinnerWrapper config_name={"route"} />
         ) : (
           <Fragment>
-<<<<<<< HEAD
             <LabeledBox label={<TextMaker text_key="rpb_pick_org" />}>
               <SubjectFilterPicker
                 subject={subject}
@@ -331,46 +332,6 @@ class RPB extends React.Component {
                 <GranularView {...this.props} />
               )
             ) : null}
-=======
-            { table &&
-              <LabeledBox label={<TextMaker text_key="rpb_pick_org" />}>
-                <SubjectFilterPicker 
-              <SubjectFilterPicker 
-                <SubjectFilterPicker 
-                  subject={subject}  
-                subject={subject}  
-                  subject={subject}  
-                  onSelect={ subj=> on_set_subject(subj) }
-                />
-              </LabeledBox>
-            }
-            { table &&
-              <LabeledBox label={<TextMaker text_key="rpb_select_mode" />}>
-                <div className="centerer">
-                  <RadioButtons
-                    options = {[
-                      {id: 'simple', display: <TextMaker text_key="simple_view_title" />, active: mode==='simple'},
-                      {id: 'details', display: <TextMaker text_key="granular_view_title" />, active: mode==='details'}]}
-                    
-                    onChange={ id =>{
-                      on_switch_mode(id);} 
-                    on_switch_mode(id);} 
-                      on_switch_mode(id);} 
-                    }
-                  />
-                </div>
-              </LabeledBox>
-            }
-            {
-              table ? 
-              (
-                mode === 'simple' ?
-                <SimpleView {...this.props} /> :
-                <GranularView {...this.props} /> 
-              ) :
-              null
-            }
->>>>>>> rpb title update, only show options if table is selected
           </Fragment>
         )}
       </div>

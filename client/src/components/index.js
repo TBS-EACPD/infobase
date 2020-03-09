@@ -22,6 +22,7 @@ export { ContainerEscapeHatch } from "./ContainerEscapeHatch.js";
 export { FilterTable } from "./FilterTable.js";
 export { CheckBox } from "./CheckBox.js";
 export { Details } from "./Details.js";
+export { EmbeddedVideo } from "./EmbeddedVideo.js";
 export { SpinnerWrapper } from "./SpinnerWrapper.js";
 export { KeyConceptList } from "./KeyConceptList.js";
 export { BackToTop } from "./BackToTop.js";
