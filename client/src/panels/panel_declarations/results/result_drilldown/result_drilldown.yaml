@@ -42,7 +42,7 @@ result_counts_drr_cr:
 result_counts_drr_prog:
   transform: [handlebars,markdown]
   en: |
-    In {{doc_year}}, **{{subj_name subject}}** sought to achieve **{{fmt_big_int num_results}}** results.git {{> "past_tense_results_progress_fragment_en"}}
+    In {{doc_year}}, **{{subj_name subject}}** sought to achieve **{{fmt_big_int num_results}}** results. {{> "past_tense_results_progress_fragment_en"}}
   fr: |
     En {{doc_year}}, **{{subj_name subject}}** a cherché à obtenir **{{fmt_big_int num_results}}** résultats. {{> "past_tense_results_progress_fragment_fr"}}
 
