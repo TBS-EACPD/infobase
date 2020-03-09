@@ -12,6 +12,7 @@ export { TabbedControls, TabbedContent } from "./TabbedContent.js";
 export { LabeledBox } from "./LabeledBox.js";
 export { TextMaker, TM } from "./TextMaker.js";
 export { TwoLevelSelect } from "./TwoLevelSelect.js";
+export { TrinityItem } from "./TrinityItem.js";
 export { CardTopImage } from "./CardTopImage.js";
 export { CardLeftImage } from "./CardLeftImage.js";
 export { CardCenteredImage } from "./CardCenteredImage.js";

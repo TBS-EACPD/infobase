@@ -10,6 +10,7 @@ import {
   CardTopImage,
   CardLeftImage,
   ContainerEscapeHatch,
+  TrinityItem,
 } from "../components/index.js";
 
 import { smart_href_template } from "../link_utils.js";
@@ -63,15 +64,6 @@ const FeaturedContentItem = ({
       <TM k={text_key} />
     </a>
   </li>
-);
-
-const TrinityItem = ({ img_url, title, href }) => (
-  <a href={href} className="TrinityItem fcol-md-4">
-    <div className="TrinityItem__Title">{title}</div>
-    <div className="TrinityItem__Img">
-      <img aria-hidden="true" src={img_url} />
-    </div>
-  </a>
 );
 
 const HomeLayout = (props) => (

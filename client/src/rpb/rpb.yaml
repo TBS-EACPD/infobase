@@ -23,6 +23,9 @@ table_picker_none_selected_summary:
   en: To see data, select a table
   fr: Pour voir des données, veuillez choisir un tableau 
 
+select_dataset_type:
+  en: Select type of Dataset
+  fr: TODO
 
 select_table_button:
   en: Select a table or topic

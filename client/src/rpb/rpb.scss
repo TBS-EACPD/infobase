@@ -6,6 +6,23 @@
   min-width: 75%;
 }
 
+.modal-container {
+  background-color: white;
+  overflow: auto;
+  line-height: 1.5;
+  padding: 0px 20px 0px 20px;
+  border-radius: 5px;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+}
+
+.trinity-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 50px 10px 0px 0px;
+}
 
 li.select-list-item {
   margin: 5px 0;

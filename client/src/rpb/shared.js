@@ -205,41 +205,19 @@ class ExportButton extends React.Component {
 
 //the parent flexbox styling screws stuff up and makes it impossible to center vertically, top padding tweaked to correct
 const SubjectFilterPicker = ({ subject, onSelect }) => (
-  <div style={{ paddingTop: "10px" }}>
-    <div className="md-half-width md-gutter-right">
-      <button
-        onClick={
-          subject.guid === "gov_gov"
-            ? null
-            : () => {
-                onSelect(Gov);
-              }
-        }
-        className={classNames("btn btn-ib-primary", {
-          "btn-ib-primary--selected": subject.guid === "gov_gov",
-        })}
-        style={{
-          width: "100%",
-          verticalAlign: "baseline",
-        }}
-      >
-        <TextMaker
-          text_key="see_all_data"
-          args={{ selected: subject.guid === "gov_gov" }}
-        />
-      </button>
-    </div>
-    <div className="md-half-width md-gutter-left row-opition-content-search">
-      <DeptSearch
-        include_gov={true}
-        onSelect={(subject) => {
-          onSelect(subject);
-        }}
-        search_text={text_maker(
-          subject.guid === "gov_gov" ? "org_search" : "another_org_search"
-        )}
-      />
-    </div>
+  <div
+    style={{ paddingTop: "10px" }}
+    className="centerer md-half-width row-opition-content-search"
+  >
+    <DeptSearch
+      include_gov={true}
+      onSelect={(subject) => {
+        onSelect(subject);
+      }}
+      search_text={text_maker(
+        subject.guid === "gov_gov" ? "org_search" : "another_org_search"
+      )}
+    />
   </div>
 );
 
