@@ -193,11 +193,11 @@ class InteractiveGraph extends React.Component{
               }}
               onClick={ () => this.setState({ show_table: !show_table }) }
             >
-              { <IconTable
+              <IconTable
                 title={text_maker("show_table")}
                 color={window.infobase_color_constants.secondaryColor}
                 alternate_color={window.infobase_color_constants.backgroundColor}
-              /> }
+              />
             </button>
           }
           { _.map(other_buttons, (button,i) => <Fragment key={i}>{button}</Fragment> ) }
