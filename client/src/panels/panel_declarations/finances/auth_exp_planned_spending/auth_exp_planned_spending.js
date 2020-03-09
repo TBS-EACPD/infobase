@@ -168,44 +168,65 @@ class AuthExpPlannedSpendingGraph extends React.Component {
       .compact()
       .value();
     
-    
-    // VVV This, and following commented out code, relates to a `layers` option in nivo_default_props which seems to be unreachable under the current logic? VVV
-    // Since exp_values and auth_values will never be equal... not since we started including the "future" auth years, right? What was this layers/DashedLine stuff about?
-    //
-    //const lineStyleById = {
-    //  [series_labels[0]]: {
-    //    stroke: colors(series_labels[0]),
-    //    strokeWidth: 2.5,
-    //  },
-    //  [series_labels[1]]: {
-    //    strokeDasharray: '56',
-    //    stroke: colors(series_labels[1]),
-    //    strokeWidth: 2.5,
-    //  },
-    //  [series_labels[2]]: {
-    //    stroke: colors(series_labels[2]),
-    //    strokeWidth: 2.5,
-    //  },
-    //};
-    
-    //const DashedLine = ({ lineGenerator, xScale, yScale }) => {
-    //  return graph_data.map(({ id, data }) => {
-    //    return (
-    //      <path
-    //        key={id}
-    //        d={lineGenerator(
-    //          data.map(d => ({
-    //            x: xScale(d.x),
-    //            y: d.y != null ? yScale(d.y) : null,
-    //          }))
-    //        )}
-    //        fill="none"
-    //        style={lineStyleById[id]}
-    //      />
-    //    );
-    //  });
-    //};
-  
+    // TODO: is it worth hoisting this pattern in to NivoResponsiveLine? Doesn't account for more than two lines overlapping but that would be easy enough to add
+    const line_segments = _.chain(graph_data)
+      .flatMap(
+        ({id, data}, z_index) => _.chain(data)
+          .dropRight()
+          .map( 
+            (point, index) => ({
+              id,
+              z_index,
+              range: `${point.x}/${data[index+1].x}`,
+              data: [ point, data[index+1] ],
+            }) 
+          )
+          .value()
+      )
+      .thru( (line_segments) => _.map(
+        line_segments,
+        (line_segment) => ({
+          ...line_segment,
+          overlaps: !_.chain(line_segments)
+            .filter( 
+              ({z_index, range, data}) => z_index < line_segment.z_index && 
+                range === line_segment.range &&
+                _.isEqual(data, line_segment.data) 
+            )
+            .isEmpty()
+            .value(),
+        })
+      ) )
+      .value();
+    const lines_with_dashed_overlaps = ({ lineGenerator, xScale, yScale }) => _.map(
+      line_segments,
+      ({id, data, overlaps}, index) => (
+        <path
+          key={index}
+          d={lineGenerator(
+            _.map(
+              data,
+              ({x, y}) => ({
+                x: xScale(x),
+                y: !_.isNull(y) ? yScale(y) : null,
+              })
+            )
+          )}
+          fill="none"
+          style={{
+            stroke: colors(id),
+            strokeWidth: 2.5,
+            strokeDasharray: overlaps ? 25 : null,
+          }}
+        />
+      )
+    );
+
+    const should_mark_gap_year = gap_year &&
+      active_series.budgetary_expenditures &&
+      ! active_series.authorities && // authorities always span the gap year, so don't mark it when displaying them
+      active_series.planned_spending;
+
     const nivo_props = {
       data: graph_data,
       raw_data: _.flatMap(data_series, 'values'),
@@ -219,30 +240,22 @@ class AuthExpPlannedSpendingGraph extends React.Component {
         bottom: 40,
         left: 100,
       },
-      //...(
-      //  _.isEqual(exp_values, auth_values)
-      //  && active_series.budgetary_expenditures
-      //  && active_series.authorities
-      //  )
-      //&& {
-      //  layers: ['grid', 'markers', 'areas', DashedLine, 'slices', 'dots', 'axes', 'legends'],
-      //}),
-      ...( gap_year &&
-          active_series.budgetary_expenditures &&
-          ! active_series.authorities && // authorities always span the gap year, so don't mark it when displaying them
-          active_series.planned_spending && {
-        markers: [
-          {
-            axis: 'x',
-            value: gap_year,
-            lineStyle: {
-              stroke: window.infobase_color_constants.tertiaryColor, 
-              strokeWidth: 2,
-              strokeDasharray: ("3, 3"),
-            },  
-          },
-        ], 
-      }),
+      layers: ['grid', 'markers', 'areas', lines_with_dashed_overlaps, 'slices', 'dots', 'axes', 'legends'],
+      ...( should_mark_gap_year && 
+        {
+          markers: [
+            {
+              axis: 'x',
+              value: gap_year,
+              lineStyle: {
+                stroke: window.infobase_color_constants.tertiaryColor, 
+                strokeWidth: 2,
+                strokeDasharray: '3, 3',
+              },
+            },
+          ], 
+        }
+      ),
     };
     
 
