@@ -202,7 +202,7 @@ export const declare_late_planned_spending_panel = () => declare_panel({
   panel_key: 'late_planned_spending_warning',
   levels: ['gov', 'dept', 'crso', 'program'],
   panel_config_func: (level, panel_key) => {
-    const docs_with_late_planned_spending = [247, 347, 350];
+    const docs_with_late_planned_spending = [247, 347];
 
     switch (level){
       case "gov":
