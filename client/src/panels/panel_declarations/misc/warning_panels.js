@@ -250,7 +250,7 @@ export const get_warning_panel_footnotes = (subject, footnote_tags) => _.chain([
     render: gap_year_warning_inner_render,
   },
   {
-    tags: ['DP'],
+    tags: ['DP_RESULTS'],
     calculate: late_results_warning_calculate,
     render: late_results_warning_inner_render,
   },
