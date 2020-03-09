@@ -10,7 +10,6 @@ import { AlertBanner, GlossaryIcon } from "../components";
 import {
   categories,
   concepts_by_category,
-  concept_filter,
   concept_white_filter,
   concept_filter_by_type,
 } from "./table_picker_concept_filter.js";
@@ -61,6 +60,8 @@ class TablePicker extends React.Component {
     this.state = {
       active_concepts: [],
     };
+
+    this.fadeOutAndSelectTable = _.bind(this.fadeOutAndSelectTable, this);
 
     this.tables = _.chain(Table.get_all())
       .reject("reference_table")
