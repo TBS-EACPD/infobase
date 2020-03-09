@@ -78,7 +78,7 @@ export const declare_gov_dp_panel = () => declare_panel({
         counts_by_dept,
       };
     },
-    footnotes: ["DP_RESULTS"],
+    footnotes: false,
     source: (subject) => get_source_links(["DP"]),
     render({ calculations, sources}){
       const {

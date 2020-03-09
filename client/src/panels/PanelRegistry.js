@@ -4,8 +4,6 @@ import { Subject } from '../models/subject.js';
 import FootNote from '../models/footnotes.js';
 import { rpb_link, get_appropriate_rpb_subject } from '../rpb/rpb_link.js';
 
-import { get_warning_panel_footnotes } from './panel_declarations/misc/warning_panels.js';
-
 const subjects = _.keys(Subject);
 
 const create_panel_key = (key,level) => `${key}:${level}`;
@@ -190,8 +188,7 @@ class PanelRegistry {
         footnote_concepts
       )
     )
-      .uniqBy('text') //some footnotes are duplicated to support different topics, years, orgs, etc.
-      .concat( get_warning_panel_footnotes(subject, footnote_concepts) )
+      .uniqBy('text') //some footnotes are duplicated to support different topics, years, orgs, etc. 
       .compact()
       .value();
   }
