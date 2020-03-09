@@ -109,7 +109,7 @@ class AuthExpPlannedSpendingGraph extends React.Component {
     super(props);
 
     const active_series = _.chain(props.data_series)
-      .map( ({key}) => [key, true] )
+      .map( ({key, values}) => [key, _.some(values)] )
       .fromPairs()
       .value();
 
