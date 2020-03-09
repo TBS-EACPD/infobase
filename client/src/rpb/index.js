@@ -6,7 +6,8 @@ import { createSelector } from "reselect";
 import { withRouter } from "react-router";
 import { log_standard_event } from "../core/analytics.js";
 import { Fragment } from "react";
-import { TextMaker, text_maker } from "./rpb_text_provider.js";
+import { TextMaker, text_maker, TM } from "./rpb_text_provider.js";
+import { get_static_url } from "../request_utils.js";
 import "./rpb.scss";
 
 //data and state stuff
@@ -28,6 +29,8 @@ import {
   SpinnerWrapper,
   RadioButtons,
   LabeledBox,
+  TrinityItem,
+  DeptSearch,
 } from "../components/index.js";
 import AriaModal from "react-aria-modal";
 
@@ -72,30 +75,15 @@ const url_state_selector = createSelector(_.identity, (str) => {
 const RPBTitle = ({ table_name, subject_name }) => {
   const title_prefix = text_maker("report_builder_title");
   if (!table_name) {
-    return <h1>{title_prefix}</h1>;
+    return <h1> {title_prefix} </h1>;
   }
-  if (!subject_name) {
-    return <h1>{`${title_prefix} - ${table_name}`}</h1>;
-  }
-  return <h1>{`${title_prefix} - ${table_name} - ${subject_name}`}</h1>;
+  return (
+    <h1>
+      {title_prefix} - {table_name} -{" "}
+      {subject_name ? subject_name : text_maker("government_stats")}
+    </h1>
+  );
 };
-
-function slowScrollDown() {
-  const el = document.getElementById("rpb-main-content");
-  if (!_.isElement(el)) {
-    return;
-  }
-  el.focus();
-  d3.select(el)
-    .transition()
-    .duration(1000)
-    .tween("uniquetweenname2", () => {
-      const i = d3.interpolateNumber(0, el.getBoundingClientRect().top);
-      return (t) => {
-        window.scrollTo(0, i(t));
-      };
-    });
-}
 
 class Root extends React.Component {
   constructor(props) {
@@ -142,14 +130,12 @@ class RPB extends React.Component {
       this.state = {
         table_picking: false,
       };
-
-      setTimeout(() => {
-        slowScrollDown();
-      });
     } else {
       this.state = {
         loading: false,
         table_picking: true,
+        dataset_type: "",
+        selected_subject: null,
       };
     }
   }
@@ -167,13 +153,12 @@ class RPB extends React.Component {
     }).then(() => {
       this.props.on_switch_table(table_id);
       this.setState({ loading: false });
-      setTimeout(() => {
-        slowScrollDown();
-      });
     });
   }
 
   render() {
+    const { dataset_type, selected_subject } = this.state;
+
     const {
       table,
       mode,
@@ -183,6 +168,40 @@ class RPB extends React.Component {
       on_switch_mode,
       on_set_subject,
     } = this.props;
+
+    const Step1 = () => (
+      <div style={{ textAlign: "center", paddingBottom: "50px" }}>
+        <TextMaker
+          style={{ fontWeight: "bold", fontSize: 50 }}
+          text_key="select_dataset_type"
+        />
+        <div className="trinity-container">
+          <TrinityItem
+            title={<TM k="finances" />}
+            img_url={get_static_url("svg/expend.svg")}
+            onClick={() => this.setState({ dataset_type: "money" })}
+          />
+          <TrinityItem
+            img_url={get_static_url("svg/people.svg")}
+            title={<TM k="people" />}
+            onClick={() => this.setState({ dataset_type: "people" })}
+          />
+        </div>
+      </div>
+    );
+
+    const Step2 = () => (
+      <div style={{ minHeight: 410 }}>
+        <TM style={{ fontWeight: "bold", fontSize: 50 }} k={"org_search"} />
+        <DeptSearch
+          include_gov={true}
+          onSelect={(subject) => this.setState({ selected_subject: subject })}
+          search_text={text_maker(
+            subject.guid === "gov_gov" ? "org_search" : "another_org_search"
+          )}
+        />
+      </div>
+    );
 
     return (
       <div style={{ minHeight: "800px", marginBottom: "100px" }} id="">
@@ -205,56 +224,43 @@ class RPB extends React.Component {
         />
         <LabeledBox label={<TextMaker text_key="rpb_pick_data" />}>
           <div>
-            <div className="centerer">
-              <p
-                id="picker-label"
-                className="md-half-width md-gutter-right"
-                style={{ margin: 0 }}
-              >
-                {table ? (
+            <div className="centerer md-half-width">
+              {window.is_a11y_mode ? (
+                <AccessibleTablePicker
+                  onSelect={(id) => this.pickTable(id)}
+                  tables={_.reject(Table.get_all(), "reference_table")}
+                  selected={_.get(table, "id")}
+                  broken_url={broken_url}
+                />
+              ) : (
+                <button
+                  className="btn btn-ib-primary"
+                  style={{ width: "100%" }}
+                  onClick={() => {
+                    this.setState({ table_picking: true });
+                  }}
+                >
                   <TextMaker
-                    text_key="table_picker_select_different_summary"
-                    args={{ name: table.name }}
+                    text_key={
+                      table
+                        ? "select_another_table_button"
+                        : "select_table_button"
+                    }
                   />
-                ) : (
-                  <TextMaker text_key="table_picker_none_selected_summary" />
-                )}
-              </p>
-              <div className="md-half-width md-gutter-left">
-                {window.is_a11y_mode ? (
-                  <AccessibleTablePicker
-                    onSelect={(id) => this.pickTable(id)}
-                    tables={_.reject(Table.get_all(), "reference_table")}
-                    selected={_.get(table, "id")}
-                    broken_url={broken_url}
-                  />
-                ) : (
-                  <button
-                    className="btn btn-ib-primary"
-                    style={{ width: "100%" }}
-                    onClick={() => {
-                      this.setState({ table_picking: true });
-                    }}
-                  >
-                    <TextMaker
-                      text_key={
-                        table
-                          ? "select_another_table_button"
-                          : "select_table_button"
-                      }
-                    />
-                  </button>
-                )}
-              </div>
+                </button>
+              )}
             </div>
             {!window.is_a11y_mode && (
               <AriaModal
                 mounted={this.state.table_picking}
                 onExit={() => {
                   if (this.state.table_picking) {
-                    this.setState({ table_picking: false });
+                    this.setState({
+                      table_picking: false,
+                      dataset_type: "",
+                      selected_subject: null,
+                    });
                     setTimeout(() => {
-                      slowScrollDown();
                       const sub_app_node = document.querySelector(
                         "#" + sub_app_name
                       );
@@ -266,7 +272,7 @@ class RPB extends React.Component {
                 }}
                 titleId="tbp-title"
                 getApplicationNode={() => document.getElementById("app")}
-                verticallyCenter={true}
+                //verticallyCenter={true}
                 underlayStyle={{
                   paddingTop: "50px",
                   paddingBottom: "50px",
@@ -276,20 +282,17 @@ class RPB extends React.Component {
                 <div
                   tabIndex={-1}
                   id="modal-child"
-                  className="container app-font"
-                  style={{
-                    backgroundColor: "white",
-                    overflow: "auto",
-                    lineHeight: 1.5,
-                    padding: "0px 20px 0px 20px",
-                    borderRadius: "5px",
-                    fontWeight: 400,
-                  }}
+                  className="container app-font modal-container"
                 >
-                  <TablePicker
-                    onSelect={(id) => this.pickTable(id)}
-                    broken_url={broken_url}
-                  />
+                  {!dataset_type && <Step1 />}
+                  {/*dataset_type && !selected_subject && <Step2/>*/}
+                  {dataset_type /* && selected_subject */ && (
+                    <TablePicker
+                      onSelect={(id) => this.pickTable(id)}
+                      dataset_type={dataset_type}
+                      broken_url={broken_url}
+                    />
+                  )}
                 </div>
               </AriaModal>
             )}

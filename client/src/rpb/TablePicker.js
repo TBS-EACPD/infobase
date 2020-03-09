@@ -11,6 +11,8 @@ import {
   categories,
   concepts_by_category,
   concept_filter,
+  concept_white_filter,
+  concept_filter_by_type,
 } from "./table_picker_concept_filter.js";
 import { TextMaker } from "./rpb_text_provider.js";
 
@@ -60,10 +62,9 @@ class TablePicker extends React.Component {
       active_concepts: [],
     };
 
-    this.fadeOutAndSelectTable = _.bind(this.fadeOutAndSelectTable, this);
-
     this.tables = _.chain(Table.get_all())
       .reject("reference_table")
+      .filter((t) => concept_filter_by_type(this.props.dataset_type, t.tags))
       .map((t) => ({
         id: t.id,
         display: t.name,
@@ -77,7 +78,7 @@ class TablePicker extends React.Component {
     this.linkage = _.chain(Table.get_all())
       .reject("reference_table")
       .map((table_obj) =>
-        _.map(_.filter(table_obj.tags, concept_filter), (concept) => ({
+        _.map(_.filter(table_obj.tags, concept_white_filter), (concept) => ({
           table_id: table_obj.id,
           concept_id: concept,
         }))
@@ -283,39 +284,43 @@ class TaggedItemCloud extends React.Component {
     return (
       <div>
         <div style={{ padding: "0px" }}>
-          {_.map(categories, (cat) => (
-            <div key={cat} className="labeled-box">
-              <div className="labeled-box-label">
-                <div className="labeled-box-label-text">
-                  <TextMaker text_key={cat} />
+          {_.map(
+            categories,
+            (cat) =>
+              tags_by_category[cat].length > 0 && (
+                <div key={cat} className="labeled-box">
+                  <div className="labeled-box-label">
+                    <div className="labeled-box-label-text">
+                      <TextMaker text_key={cat} />
+                    </div>
+                  </div>
+                  <div className="labeled-box-content labeled-box-large">
+                    <ul className="tag-cloud-main">
+                      {_.map(tags_by_category[cat], ({ id, active }) => (
+                        <li
+                          key={id}
+                          className={classNames(active && "active")}
+                          onClick={() => onSelectTag(id)}
+                        >
+                          <button role="checkbox" aria-checked={!!active}>
+                            <TextMaker text_key={id} />
+                          </button>
+                          {GlossaryEntry.lookup(id) && (
+                            <span className="tag-button-helper" tabIndex="0">
+                              <GlossaryIcon
+                                id={id}
+                                inner_selector={"TablePicker__tooltip-inner"}
+                                arrow_selector={"TablePicker__tooltip-arrow"}
+                              />
+                            </span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
-              <div className="labeled-box-content labeled-box-large">
-                <ul className="tag-cloud-main">
-                  {_.map(tags_by_category[cat], ({ id, active }) => (
-                    <li
-                      key={id}
-                      className={classNames(active && "active")}
-                      onClick={() => onSelectTag(id)}
-                    >
-                      <button role="checkbox" aria-checked={!!active}>
-                        <TextMaker text_key={id} />
-                      </button>
-                      {GlossaryEntry.lookup(id) && (
-                        <span className="tag-button-helper" tabIndex="0">
-                          <GlossaryIcon
-                            id={id}
-                            inner_selector={"TablePicker__tooltip-inner"}
-                            arrow_selector={"TablePicker__tooltip-arrow"}
-                          />
-                        </span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
+              )
+          )}
         </div>
         {_.isEmpty(items) ? (
           <div className="centerer" style={{ minHeight: "300px" }}>
