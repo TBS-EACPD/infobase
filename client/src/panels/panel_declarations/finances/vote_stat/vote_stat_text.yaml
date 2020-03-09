@@ -141,23 +141,24 @@ estimates_perspective_text:
    As of the {{est_in_year}} {{last_estimates}}, the government has presented Parliament with planned {{gl_tt "budgetary" 'BUD_EXP'}} expenditure estimates
    totaling **{{fmt_compact1_written gov_tabled_est_in_year}}**. Of this amount, **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** (or **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}**) will be allocated to **{{subject.name}}**.
 
+
    {{! only to be used near year end when a main estimates for the following year has been tabled}}
    {{#if false}}
    On {{mains_date}}, the {{est_next_year}} {{gl_tt "Main Estimates" "MAINS"}} were tabled in Parliament 
    outlining **{{fmt_compact1_written dept_tabled_est_next_year_estimates}}** 
-   in planned expenditures **{{changing_by  dept_mains_tabled_diff "fmt_percentage1"}}** from last year.
+   in planned expenditures **{{changing_by  dept_mains_tabled_diff "fmt_percentage2"}}** from last year.
    
    {{/if}}
 
   fr: |
-   En date du {{last_estimates}} {{est_in_year}}, le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de **{{fmt_compact1_written gov_tabled_est_in_year}}**. De ce montant, **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** (ou **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}**) seront attribués à **{{subject.name}}**. 
+   En date du {{last_estimates}} {{est_in_year}}, le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de **{{fmt_compact1_written gov_tabled_est_in_year}}**. De ce montant, **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** (ou **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}**) seront attribués à **{{subject.name}}**.
 
 
    {{! only to be used near year end when a main estimates for the following year has been tabled}}
    {{#if false}}
    Le {{mains_date}}, le {{gl_tt "Budget principal des dépenses" "MAINS"}} de {{est_next_year}} a été déposé au 
    Parlement présentant **{{fmt_compact1_written dept_tabled_est_next_year_estimates}}** en dépenses prévues.  
-   Il s'agit d'**{{fr_changing_by  dept_mains_tabled_diff "m" "s" "fmt_percentage1"}}** par rapport à l'année précédente. 
+   Il s'agit d'**{{fr_changing_by  dept_mains_tabled_diff "m" "s" "fmt_percentage2"}}** par rapport à l'année précédente. 
    
    {{/if}}
 
