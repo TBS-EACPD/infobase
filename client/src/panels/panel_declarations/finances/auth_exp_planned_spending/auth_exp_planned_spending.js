@@ -376,30 +376,48 @@ const calculate = function(subject, info, options) {
       key: "planned_spending",
       untrimmed_year_templates: planning_years,
       untrimmed_values: planned_spending_values,
+      year_templates: planning_years,
+      values: planned_spending_values,
     },
   ])
     .compact()
     .map(
       (series) => {
         
-        const [
-          trimmed_year_templates,
-          trimmed_values,
-        ] = _.chain(series.untrimmed_year_templates)
-          .zip(series.untrimmed_values)
-          .dropWhile( ([year_template, value]) => !value )
-          .dropRightWhile( ([year_template, value]) => !value )
-          .unzip()
-          .value();
-
+        const {
+          year_templates,
+          values,
+        } = (
+          () => {
+            if (series.year_templates && series.values){
+              return series;
+            } else {
+              const [
+                trimmed_year_templates,
+                trimmed_values,
+              ] = _.chain(series.untrimmed_year_templates)
+                .zip(series.untrimmed_values)
+                .dropWhile( ([year_template, value]) => !value )
+                .dropRightWhile( ([year_template, value]) => !value )
+                .unzip()
+                .value();
+    
+              return {
+                year_templates: trimmed_year_templates,
+                values: trimmed_values,
+              };
+            }
+          }
+        )();
+        
         return {
           ...series,
 
-          year_templates: trimmed_year_templates,
-          values: trimmed_values,
+          year_templates,
+          values,
 
+          years: _.map(year_templates, run_template),
           label: text_maker(series.key),
-          years: _.map(trimmed_year_templates, run_template),
         };
       }
     )
