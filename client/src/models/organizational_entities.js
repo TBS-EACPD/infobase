@@ -125,21 +125,27 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
   // TODO: pipeline will change to set programs has_planned_spending to 0/1 (based on whether they have a stamped DP, and CRs and depts will roll this up (using _.some()))
   // wait on has_planned_spending and dp_status cleanup until then
   get has_planned_spending(){
-    return !(
-      _.includes([
+    const is_categorically_exempt = _.includes(
+      [ 
+        'crown_corp',
+        'parl_ent',
+        'spec_op_agency',
+        'joint_enterprise',
+      ],
+      this.inst_form.id
+    );
+
+    const is_special_case = _.includes(
+      [
         "CSEC", 
         "CSIS",
-        "FCAC",
         "IJC",
         "GG",
-      ],this.dept_code) ||
-      _.includes([ 
-        "Crown Corporations", 
-        "Sociétés d'État", 
-        "Parliamentary Entities",
-        "Entités Parlementaires",
-      ],this.inst_form)
+      ],
+      this.dept_code
     );
+
+    return !(is_categorically_exempt || is_special_case);
   }
   get is_rpp_org(){
     return this.dp_status !== false;
