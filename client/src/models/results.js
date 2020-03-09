@@ -391,7 +391,7 @@ const dp_docs = build_doc_info_objects(
       resource_years: ["{{planning_year_1}}", "{{planning_year_2}}", "{{planning_year_3}}"],
       doc_url_en: null, //DP_TODO
       doc_url_fr: null, //DP_TODO
-      late_departments: [76, 98, 123, 124, 126, 129, 133, 135, 136, 137, 138, 152, 174, 237, 241, 242, 247, 278, 296, 306, 326, 347, 348, 350],
+      late_departments: [76, 98, 124, 126, 129, 133, 136, 152, 174, 241, 242, 247, 256, 278, 296, 326, 347, 348, 350],
     },
   ]
 );
