@@ -72,9 +72,9 @@ estimates_comp_home_title:
   fr: Comparaison des budgets principal de dépenses
 
 estimates_comp_home_text:
-  transform: [handelbars]
+  transform: [handlebars]
   en: See how the government's initial {{est_next_year}} spending plan compares to the initial plan for {{est_in_year}}
-  fr: DP_TODO
+  fr: Voyez comment le plan de dépenses initial du gouvernement pour {{est_next_year}} se compare à son plan initial pour {{est_in_year}}
 estimates_comp_home_text_supps:
   en: See how the government's recent supplementary spending plan compares to the initial plan
   fr: Voir comment le plan de dépenses supplémentaire du gouvernement compare à leur plan principal
