@@ -1,5 +1,8 @@
-import { Fragment } from 'react';
+import './auth_exp_planned_spending.scss';
 import text from './auth_exp_planned_spending.yaml';
+
+import { Fragment } from 'react';
+
 import {
   run_template,
   year_templates,
@@ -67,26 +70,31 @@ const auth_exp_planned_spending_tooltip = (graph_slice, tooltip_formatter) => {
 
   return (
     <div style={{color: window.infobase_color_constants.textColor}}>
-      <table style={{width: '100%', borderCollapse: 'collapse'}}>
+      <table className="auth-exp-planned-spend-tooltip">
         <tbody>
           { null_filtered_slice_data.map(
             tooltip_item => (
-              <tr key = {tooltip_item.serie.id}>
-                <td style= {{padding: '3px 5px'}}>
-                  <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.serie.color}} />
+              <tr key={tooltip_item.serie.id}>
+                <td>
+                  <div style={{ backgroundColor: tooltip_item.serie.color, height: '12px', width: '12px' }} />
                 </td>
-                <td style={{padding: '3px 5px'}}> {tooltip_item.serie.id} </td>
-                <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: tooltip_formatter(tooltip_item.data.y)}} />
+                <td>
+                  {tooltip_item.serie.id}
+                </td>
+                <td
+                  dangerouslySetInnerHTML={{ __html: tooltip_formatter(tooltip_item.data.y) }}
+                />
               </tr>
             )
           )}
           { null_filtered_slice_data.length > 1 ? 
             <tr>
-              <td style= {{height: '12px', width: '12px', padding: '3px 5px'}}/>
-              <td style={{padding: '3px 5px'}}> {text_maker('difference')} </td>
-              <td
-                style={{padding: '3px 5px', color: window.infobase_color_constants.highlightColor}} 
-                dangerouslySetInnerHTML={{__html: tooltip_formatter(get_auth_exp_diff(null_filtered_slice_data))}}
+              <td/>
+              <td>
+                {text_maker('difference')}
+              </td>
+              <td style={{color: window.infobase_color_constants.highlightColor}} 
+                dangerouslySetInnerHTML={{ __html: tooltip_formatter( get_auth_exp_diff(null_filtered_slice_data) ) }}
               />
             </tr> :
             null
