@@ -398,7 +398,6 @@ const calculate = function(subject, info, options) {
               ] = _.chain(series.untrimmed_year_templates)
                 .zip(series.untrimmed_values)
                 .dropWhile( ([year_template, value]) => !value )
-                .dropRightWhile( ([year_template, value]) => !value )
                 .unzip()
                 .value();
     
