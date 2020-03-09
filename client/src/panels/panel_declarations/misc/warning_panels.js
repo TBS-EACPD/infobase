@@ -17,6 +17,18 @@ const { Dept } = Subject;
 const { result_docs_in_tabling_order } = Results;
 const { AlertBanner, KeyConceptList, MultiColumnList } = util_components;
 
+
+const WarningPanel = ({banner_class = 'info', center_text = true, children}) => (
+  <AlertBanner
+    banner_class={banner_class}
+    additional_class_names='large_panel_text'
+    style={center_text ? {textAlign: "center"} : {}}
+  >
+    {children}
+  </AlertBanner>
+);
+
+
 export const declare_dead_program_warning_panel = () => declare_panel({
   panel_key: "dead_program_warning",
   levels: ['program'],
@@ -25,13 +37,9 @@ export const declare_dead_program_warning_panel = () => declare_panel({
     calculate: _.property("is_dead"),
     render(){
       return (
-        <AlertBanner
-          banner_class="danger"
-          additional_class_names={'large_panel_text'}
-          style={{textAlign: "center"}}
-        >
+        <WarningPanel banner_class="danger">
           <TM k="dead_program_warning" />
-        </AlertBanner>
+        </WarningPanel>
       );
     },
   }),
@@ -47,13 +55,9 @@ export const declare_dead_crso_warning_panel = () => declare_panel({
     render(){
       
       return (
-        <AlertBanner
-          banner_class="danger"
-          additional_class_names={'large_panel_text'}
-          style={{textAlign: "center"}}
-        >
+        <WarningPanel banner_class="danger">
           <TM k="dead_crso_warning" />
-        </AlertBanner>
+        </WarningPanel>
       );
     },
   }),
@@ -70,12 +74,9 @@ export const declare_gap_year_warning_panel = () => declare_panel({
     },
     render({calculations}){
       return (
-        <div 
-          className="alert alert-info alert-no-symbol alert--is-bordered large_panel_text"
-          style={{textAlign: "center"}}
-        >
+        <WarningPanel>
           <TM k="gap_year_warning" args={{gap_year: actual_to_planned_gap_year}}/>
-        </div>
+        </WarningPanel>
       );
     },
   }),
@@ -92,7 +93,7 @@ export const declare_m2m_tag_warning_panel = () => declare_panel({
     },
   
     render: () => (
-      <AlertBanner banner_class="danger">
+      <WarningPanel center_text={false}>
         <KeyConceptList 
           question_answer_pairs={
             _.map( 
@@ -108,7 +109,7 @@ export const declare_m2m_tag_warning_panel = () => declare_panel({
             )
           }
         />
-      </AlertBanner>
+      </WarningPanel>
     ),
   }),
 });
@@ -128,9 +129,9 @@ export const declare_late_results_warning_panel = () => declare_panel({
         {_.map(
           docs_with_late_departments,
           (result_doc, ix) => (
-            <AlertBanner key={ix} additional_class_names={'large_panel_text'}>
+            <WarningPanel key={ix}>
               {per_doc_inner_content(result_doc)}
-            </AlertBanner>
+            </WarningPanel>
           )
         )}
       </Fragment>
@@ -145,22 +146,24 @@ export const declare_late_results_warning_panel = () => declare_panel({
           info_deps: [],
           calculate: () => !_.isEmpty(docs_with_late_departments),
           render(){
-            const per_doc_inner_content = (result_doc) => <Fragment>
-              <TM
-                k={'late_results_warning_gov'}
-                args={{
-                  result_doc_name: text_maker(`${result_doc.doc_type}_name`, {year: result_doc.year}),
-                }}
-              />
-              <MultiColumnList
-                list_items={_.map(
-                  result_doc.late_departments, 
-                  (org_id) => Dept.lookup(org_id).fancy_name
-                )}
-                column_count={ window.lang === "en" && result_doc.late_departments.length > 3 ? 2 : 1 }
-                li_class={ result_doc.late_departments.length > 4 ? "font-small" : '' }
-              />
-            </Fragment>;
+            const per_doc_inner_content = (result_doc) => (
+              <div style={{textAlign: "left"}}>
+                <TM
+                  k={'late_results_warning_gov'}
+                  args={{
+                    result_doc_name: text_maker(`${result_doc.doc_type}_name`, {year: result_doc.year}),
+                  }}
+                />
+                <MultiColumnList
+                  list_items={_.map(
+                    result_doc.late_departments, 
+                    (org_id) => Dept.lookup(org_id).fancy_name
+                  )}
+                  column_count={ window.lang === "en" && result_doc.late_departments.length > 3 ? 2 : 1 }
+                  li_class={ result_doc.late_departments.length > 4 ? "font-small" : '' }
+                />
+              </div>
+            );
 
             return get_per_doc_late_results_alert(per_doc_inner_content);
           },
@@ -210,7 +213,7 @@ export const declare_late_planned_spending_panel = () => declare_panel({
           info_deps: [],
           calculate: () => !_.isEmpty(docs_with_late_planned_spending),
           render: () => (
-            <AlertBanner additional_class_names={'large_panel_text'}>
+            <WarningPanel center_text={false}>
               <TM k={'late_planned_spending_warning_gov'} />
               <MultiColumnList
                 list_items={_.map(
@@ -220,7 +223,7 @@ export const declare_late_planned_spending_panel = () => declare_panel({
                 column_count={ window.lang === "en" && docs_with_late_planned_spending.length > 3 ? 2 : 1 }
                 li_class={ docs_with_late_planned_spending.length > 4 ? "font-small" : '' }
               />
-            </AlertBanner>
+            </WarningPanel>
           ),
         };
       default:
@@ -236,9 +239,9 @@ export const declare_late_planned_spending_panel = () => declare_panel({
               subject.dept.id
           ),
           render: () => (
-            <AlertBanner additional_class_names={'large_panel_text'}>
+            <WarningPanel>
               <TM k={`late_planned_spending_warning_${level}`} />
-            </AlertBanner>
+            </WarningPanel>
           ),
         };
     }
