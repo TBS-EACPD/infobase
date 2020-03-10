@@ -7,10 +7,12 @@ import {
   create_text_maker_component,
   InfographicPanel,
   get_source_links,
+  util_components,
 
   declare_panel,
 } from "../shared.js";
 const { Dept } = Subject;
+const { AlertBanner } = util_components;
 
 import {
   ResultCounts,
@@ -26,12 +28,20 @@ const current_dp_year = result_docs[current_dp_key].year;
 const current_dp_corresponding_drr_year = _.toNumber(result_docs[current_dp_key].year_short) + 1;
 
 
-const DpSummary = ({counts, verbose_gov_counts, counts_by_dept}) => {
+const DpSummary = ({counts, verbose_gov_counts, counts_by_dept, late_dept_count}) => {
   const current_dp_counts_with_generic_keys = filter_and_genericize_doc_counts(counts, current_dp_key);
 
   return (
     <Fragment>
       <div className="fcol-md-12 medium_panel_text">
+        { late_dept_count &&
+          <AlertBanner>
+            <TM 
+              k="gov_dp_late_dept_warning"
+              args={{late_dept_count}}
+            />
+          </AlertBanner>
+        }
         <TM 
           k="gov_dp_text"
           args={{
@@ -73,9 +83,12 @@ export const declare_gov_dp_panel = () => declare_panel({
         .map( obj => ({...obj, total: d3.sum(_.values(obj.counts)) } ) )
         .value();
   
+      const late_dept_count = result_docs[current_dp_key].late_departments.length;
+
       return { 
         verbose_gov_counts,
         counts_by_dept,
+        late_dept_count,
       };
     },
     footnotes: ["DP_RESULTS"],
@@ -85,6 +98,7 @@ export const declare_gov_dp_panel = () => declare_panel({
         panel_args: {
           verbose_gov_counts,
           counts_by_dept,
+          late_dept_count,
         },
       } = calculations;
       const counts = ResultCounts.get_gov_counts();
@@ -100,6 +114,7 @@ export const declare_gov_dp_panel = () => declare_panel({
             counts={counts}
             verbose_gov_counts={verbose_gov_counts}
             counts_by_dept={counts_by_dept}
+            late_dept_count={late_dept_count}
           />
         </InfographicPanel>
       ); 

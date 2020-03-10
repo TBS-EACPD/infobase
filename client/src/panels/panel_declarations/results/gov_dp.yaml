@@ -12,6 +12,11 @@ gov_dp_text:
   fr: |
     En **{{year}}**, **{{fmt_big_int depts_with_dps}}** organisations comptent atteindre **{{fmt_big_int dp_results}}** résultats, mesurés par **{{fmt_big_int dp_indicators}}** indicateurs. L'évaluation du rendement par rapport à ces indicateurs fera l’objet d’un rapport à **l’automne {{drr_tabling_year}}**.
 
+gov_dp_late_dept_warning:
+  transform: [handlebars,markdown]
+  en: Totals below are incomplete, data is currently missing for **{{late_dept_count}}** organizations. Updates will follow.
+  fr: Les totaux ci-dessous sont incomplets, les données sont manquantes pour **{{late_dept_count}}** organisations. Une mise à jour suivra.
+
 
 gov_dp_above_search_bar_text:
   transform: [handlebars,markdown]
