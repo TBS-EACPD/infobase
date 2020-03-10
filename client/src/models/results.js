@@ -389,9 +389,9 @@ const dp_docs = build_doc_info_objects(
     {
       year_short: "2020",
       resource_years: ["{{planning_year_1}}", "{{planning_year_2}}", "{{planning_year_3}}"],
-      doc_url_en: null, //DP_TODO
-      doc_url_fr: null, //DP_TODO
-      late_departments: [76, 98, 124, 126, 129, 133, 136, 152, 174, 241, 242, 247, 256, 278, 296, 326, 347, 348, 350],
+      doc_url_en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2020-21-departmental-plans.html",
+      doc_url_fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2020-2021.html",
+      late_departments: [76, 98, 124, 126, 129, 133, 136, 152, 174, 241, 242, 247, 256, 278, 296, 326, 347, 348],
     },
   ]
 );
