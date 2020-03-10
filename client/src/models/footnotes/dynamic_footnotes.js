@@ -11,6 +11,11 @@ const text_maker = create_text_maker(text);
 
 const depts_with_late_planned_spending = [247, 347];
 
+const expand_dept_cr_and_programs = (dept) => [
+  dept,
+  ...dept.crsos,
+  ...dept.programs,
+];
 
 const get_dynamic_footnotes = () => {
   const gap_year_footnotes = _.map(
@@ -28,37 +33,28 @@ const get_dynamic_footnotes = () => {
     
   const entities_with_late_planned_spending = _.chain(depts_with_late_planned_spending)
     .map(Dept.lookup)
-    .flatMap(
-      (dept) => [
-        dept,
-        ...dept.crsos,
-        ...dept.programs,
-      ]
-    )
+    .flatMap( expand_dept_cr_and_programs )
     .value();
   const late_planned_spending_footnotes = _.map(
     [
       Gov,
       ...entities_with_late_planned_spending,
     ],
-    (subject) => (
-      actual_to_planned_gap_year && 
-      {
-        subject,
-        topic_keys: ['PLANNED_EXP', 'DP_EXP'],
-        text: `<p>${text_maker(`late_planned_spending_warning_${subject.level}`)}</p>${
-          subject.level === 'gov' ? 
-            `<ul>${
-              _.reduce(
-                depts_with_late_planned_spending,
-                (elements, org_id) => `${elements}<li>${Dept.lookup(org_id).fancy_name}</li>`,
-                ''
-              )
-            }</ul>` :
-            ''
-        }`,
-      }
-    )
+    (subject) => ({
+      subject,
+      topic_keys: ['PLANNED_EXP', 'DP_EXP'],
+      text: `<p>${text_maker(`late_planned_spending_warning_${subject.level}`)}</p>${
+        subject.level === 'gov' ? 
+          `<ul>${
+            _.reduce(
+              depts_with_late_planned_spending,
+              (elements, org_id) => `${elements}<li>${Dept.lookup(org_id).fancy_name}</li>`,
+              ''
+            )
+          }</ul>` :
+          ''
+      }`,
+    })
   );
   
   
@@ -70,13 +66,7 @@ const get_dynamic_footnotes = () => {
     .flatMap(
       ({late_departments, doc_type, year}) => _.chain(late_departments)
         .map(Dept.lookup)
-        .flatMap(
-          (dept) => [
-            dept,
-            ...dept.crsos,
-            ...dept.programs,
-          ]
-        )
+        .flatMap( expand_dept_cr_and_programs )
         .map(
           (subject) => (
             actual_to_planned_gap_year && 
@@ -93,6 +83,7 @@ const get_dynamic_footnotes = () => {
         .value()
     )
     .value();
+
   const gov_late_result_doc_footnotes = _.map(
     docs_with_late_departments,
     ({late_departments, doc_type, year}) => ({
