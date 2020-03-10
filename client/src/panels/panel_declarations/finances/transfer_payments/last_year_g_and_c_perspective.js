@@ -5,8 +5,6 @@ import {
   TM,
 } from './gnc_text_provider.js';
 import {
-  Subject,
-  formatter,
   StdPanel,
   Col,
   NivoResponsiveBubble,
@@ -39,7 +37,7 @@ export const declare_last_year_g_and_c_perspective_panel = () => declare_panel({
       return has_transfer_payments && panel_args;
     },
     render({calculations, footnotes, sources}){
-      const { subject, panel_args, info } = calculations; 
+      const { panel_args, info } = calculations; 
       const gov_tp_exp_pa_last_year = panel_args.dept_in_gov[0].value;
       const dept_tp_exp_pa_last_year = panel_args.dept_in_gov[1].value;
       const dept_exp_pa_last_year= panel_args.tp_in_exp[0].value;

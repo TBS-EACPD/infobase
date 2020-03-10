@@ -13,7 +13,7 @@ import MediaQuery from 'react-responsive';
 import './NivoCharts.scss';
 import graph_text from './NivoCharts.yaml';
 
-const { text_maker, TM } = create_text_maker_component(graph_text);
+const { TM } = create_text_maker_component(graph_text);
 
 
 const get_formatter = (is_money, formatter, raw = true) => (
@@ -613,34 +613,6 @@ NivoResponsiveLine.defaultProps = {
   motion_damping: 19,
   motion_stiffness: 100,
 };
-
-
-
-const TspanLineWrapper = ({text, width, line_height=1}) => <Fragment>
-  {
-    _.chain(text)
-      .thru( text => text.split(/\s+/) )
-      .reduce(
-        (lines, word) => {
-          const [current_line, ...finished_lines] = _.reverse(lines);
-          const potential_new_line = `${current_line} ${word}`;
-          if (potential_new_line.length < width) {
-            return [...finished_lines, potential_new_line];
-          } else {
-            return [...finished_lines, current_line, word];
-          }
-        },
-        [""],
-      )
-      .map(
-        (line, ix) =>
-          <tspan key={ix} x={0} y={0} dy={ix > 0 ? line_height*ix + "em" : "0em"}>
-            {line}
-          </tspan> 
-      )
-      .value()
-  }
-</Fragment>;
 
 const BubbleNode = ({ node, style, handlers, theme }) => {
   if (style.r <= 0) return null;

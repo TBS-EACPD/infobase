@@ -1,7 +1,6 @@
 import text1 from "./employee_last_year_totals.yaml";
 import text2 from "../../../common_text/common_lang.yaml";
 import {
-  formatter,
   create_text_maker_component,
   StdPanel,
   Col,
@@ -43,8 +42,6 @@ export const declare_employee_last_year_totals_panel = () => declare_panel({
         
         const dept_emp_value = panel_args.vals[1].value;
         const gov_emp_value = panel_args.vals[0].value;
-        const dept_emp_fmt = formatter("compact", dept_emp_value, {raw: true, noMoney: true, precision: 1});
-        const gov_emp_fmt = formatter("compact", gov_emp_value, {raw: true, noMoney: true, precision: 1});    
         return (
           <StdPanel
             title={text_maker("dept_employee_last_year_totals_title")}

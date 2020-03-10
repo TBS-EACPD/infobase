@@ -1,6 +1,5 @@
 import { TM, text_maker } from './vote_stat_text_provider.js';
 import {
-  formatter,
   StdPanel,
   Col,
   NivoResponsiveBubble,
