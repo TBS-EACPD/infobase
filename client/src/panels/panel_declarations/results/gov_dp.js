@@ -7,12 +7,10 @@ import {
   create_text_maker_component,
   InfographicPanel,
   get_source_links,
-  util_components,
 
   declare_panel,
 } from "../shared.js";
 const { Dept } = Subject;
-const { AlertBanner } = util_components;
 
 import {
   ResultCounts,
@@ -20,7 +18,10 @@ import {
   current_dp_key,
   result_docs,
 } from './results_common.js';
-import { HorizontalStatusTable } from './result_components.js';
+import {
+  HorizontalStatusTable,
+  LateDepartmentsBanner,
+} from './result_components.js';
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -34,14 +35,7 @@ const DpSummary = ({counts, verbose_gov_counts, counts_by_dept, late_dept_count}
   return (
     <Fragment>
       <div className="fcol-md-12 medium_panel_text">
-        { late_dept_count &&
-          <AlertBanner>
-            <TM 
-              k="gov_dp_late_dept_warning"
-              args={{late_dept_count}}
-            />
-          </AlertBanner>
-        }
+        { late_dept_count && <LateDepartmentsBanner late_dept_count={late_dept_count} /> }
         <TM 
           k="gov_dp_text"
           args={{
