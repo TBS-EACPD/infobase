@@ -35,6 +35,7 @@ const get_dynamic_footnotes = () => {
   const entities_with_late_planned_spending = _.chain(depts_with_late_planned_spending)
     .map(Dept.lookup)
     .flatMap( expand_dept_cr_and_programs )
+    .thru( (late_entities) => late_entities.length > 0 ? [Gov, ...late_entities] : [] )
     .value();
   const late_planned_spending_footnotes = _.map(
     [
