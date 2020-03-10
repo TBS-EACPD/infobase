@@ -14,7 +14,10 @@ import {
   current_drr_key,
 } from './results_common.js';
 import { DrrSummary } from './drr_summary.js';
-import { HorizontalStatusTable } from './result_components.js';
+import {
+  HorizontalStatusTable,
+  LateDepartmentsBanner,
+} from './result_components.js';
 
 const { Gov, Dept } = Subject;
 
@@ -24,11 +27,17 @@ class GovDRR extends React.Component {
       counts_by_dept,
       gov_counts,
       num_depts,
-      verbose_gov_counts, 
+      verbose_gov_counts,
+      late_dept_count, 
     } = this.props;
 
     return (
       <div>
+        { late_dept_count && late_dept_count > 0 && 
+          <div className="medium_panel_text">
+            <LateDepartmentsBanner late_dept_count={late_dept_count} />
+          </div>
+        }
         <DrrSummary
           subject={Gov}
           verbose_counts={verbose_gov_counts}
@@ -84,12 +93,14 @@ export const declare_gov_drr_panel = () => declare_panel({
         .map( obj => ({...obj, total: d3.sum(_.values(obj.counts)) } ) )
         .value();
   
+      const late_dept_count = result_docs[current_drr_key].late_departments.length;
   
       return {
         gov_counts,
         counts_by_dept,
         verbose_gov_counts,
         num_depts,
+        late_dept_count,
       };
     },
   
