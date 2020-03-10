@@ -3,7 +3,7 @@ import text from './warning_panels.yaml';
 import { Fragment } from 'react';
 
 import dynamic_footnote_text from '../../../models/footnotes/dynamic_footnotes.yaml';
-import { docs_with_late_planned_spending } from '../../../models/footnotes/dynamic_footnotes.yaml';
+import { depts_with_late_planned_spending } from '../../../models/footnotes/dynamic_footnotes.js';
 
 import {
   util_components,
@@ -195,17 +195,17 @@ export const declare_late_planned_spending_panel = () => declare_panel({
           footnotes: false,
           source: false,
           info_deps: [],
-          calculate: () => !_.isEmpty(docs_with_late_planned_spending),
+          calculate: () => !_.isEmpty(depts_with_late_planned_spending),
           render: () => (
             <WarningPanel center_text={false}>
               <TM k={'late_planned_spending_warning_gov'} />
               <MultiColumnList
                 list_items={_.map(
-                  docs_with_late_planned_spending, 
+                  depts_with_late_planned_spending, 
                   (org_id) => Dept.lookup(org_id).fancy_name
                 )}
-                column_count={ window.lang === "en" && docs_with_late_planned_spending.length > 3 ? 2 : 1 }
-                li_class={ docs_with_late_planned_spending.length > 4 ? "font-small" : '' }
+                column_count={ window.lang === "en" && depts_with_late_planned_spending.length > 3 ? 2 : 1 }
+                li_class={ depts_with_late_planned_spending.length > 4 ? "font-small" : '' }
               />
             </WarningPanel>
           ),
@@ -217,7 +217,7 @@ export const declare_late_planned_spending_panel = () => declare_panel({
           source: false,
           info_deps: [],
           calculate: (subject) => _.includes(
-            docs_with_late_planned_spending,
+            depts_with_late_planned_spending,
             level === 'dept' ?
               subject.id :
               subject.dept.id
