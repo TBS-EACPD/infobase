@@ -9,7 +9,7 @@ const {
   Dept,
 } = Subject;
 import { Table } from '../core/TableClass.js';
-import Footnote from '../models/footnotes.js';
+import Footnote from '../models/footnotes/footnotes.js';
 
 
 const initial_state = {

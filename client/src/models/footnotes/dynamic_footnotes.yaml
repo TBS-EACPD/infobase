@@ -1,0 +1,49 @@
+dp_name:
+  transform: [handlebars]
+  en: |
+    {{year}} Departmental Plans
+  fr: |
+    Plans ministériels {{year}}
+drr_name:
+  transform: [handlebars]
+  en: |
+    {{year}} Departmental Results Report
+  fr: |
+    Rapport sur les résultats ministériels {{year}}
+
+late_results_warning_gov:
+  transform: [handlebars]
+  en: The {{result_doc_name}} data does not include values from the organizations listed below, as their data is not yet available. Updates will follow.
+  fr: Les données du {{result_doc_name}} des organisations ci-dessous ne sont pas encore disponibles.  Des mises à jour suivront au fur et à mesure de la transmission de ces données.
+late_results_warning_dept:
+  transform: [handlebars]
+  en: |
+    {{result_doc_name}} data for this organization is not yet available. An update will follow.
+  fr: |
+    Les données du {{result_doc_name}} de cette organisation ne sont pas encore disponibles. Une mise à jour suivra.
+late_results_warning_program:
+  transform: [handlebars]
+  en: |
+    {{result_doc_name}} data for this Program is not yet available. An update will follow.
+  fr: |
+    Les données du {{result_doc_name}} de ce programme ne sont pas encore disponibles. Une mise à jour suivra.
+late_results_warning_crso:
+  transform: [handlebars]
+  en: |
+    {{result_doc_name}} data for this Core Responsibility is not yet available. An update will follow.
+  fr: |
+    Les données du {{result_doc_name}} de cette responsabilité essentielle ne sont pas encore disponibles. Une mise à jour suivra.
+
+
+late_planned_spending_warning_gov:
+  en: Planned spending data does not include values from the organizations listed below, as their data is not yet available. Updates will follow.
+  fr: Dépenses planifiées des organisations ci-dessous ne sont pas encore disponibles.  Des mises à jour suivront au fur et à mesure de la transmission de ces données.
+late_planned_spending_warning_dept:
+  en: Planned spending for this organization is not yet available. An update will follow.
+  fr: Dépenses planifiées pour cette organisation ne sont pas encore disponibles. Une mise à jour suivra.
+late_planned_spending_warning_program:
+  en: Planned spending for this Program is not yet available. An update will follow.
+  fr: Dépenses planifiées pour ce programme ne sont pas encore disponibles. Une mise à jour suivra.
+late_planned_spending_warning_crso:
+  en: Planned spending for this Core Responsibility is not yet available. An update will follow.
+  fr: Dépenses planifiées pour cette responsabilité essentielle ne sont pas encore disponibles. Une mise à jour suivra.

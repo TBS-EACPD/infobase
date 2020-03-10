@@ -8,7 +8,6 @@ import {
   declare_late_results_warning_panel,
   declare_late_planned_spending_panel,
   declare_budget_measures_panel,
-  declare_gap_year_warning_panel,
 
   // shared gov, dept
   // RTP_TODO: declare_tp_by_region_panel,
@@ -44,7 +43,6 @@ export const get_gov_panels = subject => ({
   ],
   financial: [
     declare_late_planned_spending_panel(),
-    declare_gap_year_warning_panel(),
     declare_financial_key_concepts_panel(),
     declare_welcome_mat_panel(),
     // RTP_TODO: declare_tp_by_region_panel(),
