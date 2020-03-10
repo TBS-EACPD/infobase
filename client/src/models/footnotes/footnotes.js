@@ -1,4 +1,4 @@
-import { mix, staticStoreMixin } from './storeMixins.js';
+import { mix, staticStoreMixin } from '../storeMixins.js';
 
 const footnotes_by_id = {};
 

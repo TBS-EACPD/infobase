@@ -1,8 +1,10 @@
-import { sanitized_marked } from '../general_utils.js';
-import { get_static_url, make_request } from '../request_utils.js';
-import { Subject } from './subject.js';
+import { sanitized_marked } from '../../general_utils.js';
+import { get_static_url, make_request } from '../../request_utils.js';
+import { Subject } from '../subject.js';
 import FootNote from './footnotes.js';
-import { run_template } from './text.js';
+import { run_template } from '../text.js';
+
+import { dynamic_footnotes } from './dynamic_footnotes.js';
 
 let _loaded_dept_or_tag_codes = {};
 
@@ -106,6 +108,13 @@ function load_footnotes_bundle(subject){
 //this is exposed so populate stores can take the 'global' class-level footnotes that will be used by every infograph.
 function populate_global_footnotes(csv_str){
   populate_footnotes_info(csv_str); 
+
+  _.each(
+    dynamic_footnotes,
+    function(footnote_config){
+      FootNote.create_and_register(footnote_config);
+    }
+  );
 }
 
 export {

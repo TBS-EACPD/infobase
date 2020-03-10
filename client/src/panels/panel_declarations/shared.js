@@ -15,7 +15,7 @@ import { create_text_maker, trivial_text_maker, run_template } from '../../model
 import { Subject } from '../../models/subject';
 import { year_templates, actual_to_planned_gap_year } from '../../models/years.js';
 import { businessConstants } from '../../models/businessConstants.js';
-import FootNote from '../../models/footnotes.js'; 
+import FootNote from '../../models/footnotes/footnotes.js'; 
 import { GlossaryEntry } from '../../models/glossary.js';
 
 import * as declarative_charts from '../../charts/declarative_charts.js';

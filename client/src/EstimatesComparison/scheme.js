@@ -2,7 +2,7 @@ import { text_maker, TM } from './text-provider';
 import { createSelector } from 'reselect';
 import { Format } from '../components/index.js';
 import { Table } from '../core/TableClass.js';
-import FootNote from '../models/footnotes.js';
+import FootNote from '../models/footnotes/footnotes.js';
 import {GlossaryEntry} from '../models/glossary.js';
 import { Subject } from '../models/subject.js';
 import { convert_d3_hierarchy_to_explorer_hierarchy } from '../explorer_common/hierarchy_tools.js';

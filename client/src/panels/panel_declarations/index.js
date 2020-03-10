@@ -48,7 +48,6 @@ export {
   declare_late_results_warning_panel,
   declare_late_planned_spending_panel,
   declare_m2m_tag_warning_panel,
-  declare_gap_year_warning_panel,
   declare_dead_program_warning_panel,
   declare_dead_crso_warning_panel,
   declare_resource_structure_panel,

@@ -10,7 +10,6 @@ import {
   declare_late_results_warning_panel,
   declare_late_planned_spending_panel,
   declare_budget_measures_panel,
-  declare_gap_year_warning_panel,
 
   // shared dept, crso, program, tag
   declare_profile_panel,
@@ -66,7 +65,6 @@ export const get_dept_panels = subject => ensure_loaded({
   ],
   financial: _.includes(subject.tables, 'programSpending') && [
     declare_late_planned_spending_panel(),
-    declare_gap_year_warning_panel(),
     declare_financial_key_concepts_panel(),
     declare_welcome_mat_panel(),
     // RTP_TODO: declare_tp_by_region_panel(),

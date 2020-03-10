@@ -2,8 +2,10 @@ import text from './warning_panels.yaml';
 
 import { Fragment } from 'react';
 
+import dynamic_footnote_text from '../../../models/footnotes/dynamic_footnotes.yaml';
+import { docs_with_late_planned_spending } from '../../../models/footnotes/dynamic_footnotes.yaml';
+
 import {
-  actual_to_planned_gap_year,
   util_components,
   Subject,
   Results,
@@ -12,7 +14,7 @@ import {
   declare_panel,
 } from "../shared.js";
 
-const { TM, text_maker} = create_text_maker_component([text]);
+const { TM, text_maker} = create_text_maker_component([text, dynamic_footnote_text]);
 const { Dept } = Subject;
 const { result_docs_in_tabling_order } = Results;
 const { AlertBanner, KeyConceptList, MultiColumnList } = util_components;
@@ -63,24 +65,6 @@ export const declare_dead_crso_warning_panel = () => declare_panel({
   }),
 });
 
-
-export const declare_gap_year_warning_panel = () => declare_panel({
-  panel_key: "gap_year_warning",
-  levels: ['gov','dept','crso','program'],
-  panel_config_func: (level, panel_key) => ({
-    footnotes: false,
-    calculate: (subject, info, options) => {
-      return !subject.is_dead && actual_to_planned_gap_year;
-    },
-    render({calculations}){
-      return (
-        <WarningPanel>
-          <TM k="gap_year_warning" args={{gap_year: actual_to_planned_gap_year}}/>
-        </WarningPanel>
-      );
-    },
-  }),
-});
 
 
 export const declare_m2m_tag_warning_panel = () => declare_panel({
@@ -183,12 +167,14 @@ export const declare_late_results_warning_panel = () => declare_panel({
             )
             .value(),
           render(){
-            const per_doc_inner_content = (result_doc) => <TM
-              k={`late_results_warning_${level}`}
-              args={{
-                result_doc_name: text_maker(`${result_doc.doc_type}_name`, {year: result_doc.year}),
-              }}
-            />;
+            const per_doc_inner_content = (result_doc) => (
+              <TM
+                k={`late_results_warning_${level}`}
+                args={{
+                  result_doc_name: text_maker(`${result_doc.doc_type}_name`, {year: result_doc.year}),
+                }}
+              />
+            );
             
             return get_per_doc_late_results_alert(per_doc_inner_content);
           },
@@ -202,8 +188,6 @@ export const declare_late_planned_spending_panel = () => declare_panel({
   panel_key: 'late_planned_spending_warning',
   levels: ['gov', 'dept', 'crso', 'program'],
   panel_config_func: (level, panel_key) => {
-    const docs_with_late_planned_spending = [247, 347];
-
     switch (level){
       case "gov":
         return {
