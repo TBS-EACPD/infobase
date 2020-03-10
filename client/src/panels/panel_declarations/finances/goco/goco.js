@@ -90,13 +90,15 @@ class Goco extends React.Component {
       .sortBy(d => -d[spending_text])
       .value();
 
+    const ordered_column_keys = [sa_text, spending_text, ftes_text];
+    const column_names = ordered_column_keys;
     const custom_table_data = _.chain(Tag.gocos_by_spendarea)
       .map(sa=> {
         const children = _.map(sa.children_tags, goco => {
           const actual_Spending = programSpending.q(goco).sum(spend_col);
           const actual_FTEs = programFtes.q(goco).sum(fte_col);
 
-          const table_data = {
+          const table_data = [{
             display_values: {
               [sa_text]: goco.name,
               [spending_text]: actual_Spending,
@@ -110,12 +112,10 @@ class Goco extends React.Component {
             search_values: {
               [sa_text]: goco.name,
             },
-          };
-          const ordered_column_keys = [sa_text, spending_text, ftes_text];
-          const column_names = ordered_column_keys;
+          }];
           return <DisplayTable rows={table_data} ordered_column_keys={ordered_column_keys} column_names={column_names} name={"TODO"}/>;
         });
-        return {
+        const table_data = [{
           display_values: {
             [text_maker("spending_area")]: sa.name,
             [spending_text]: total_fte_spend[sa.id].total_child_spending,
@@ -130,11 +130,13 @@ class Goco extends React.Component {
             [text_maker("spending_area")]: sa.name,
           },
           children: _.sortBy(children, d => -d[spending_text]),
-        };
+        }];
+        return <DisplayTable key={sa.id} rows={table_data} ordered_column_keys={ordered_column_keys} column_names={column_names} name={"TODO"}/>;     
       })
       .sortBy(d => -d[spending_text])
       .value();
 
+      debugger;
 
     const maxSpending = _.maxBy(graph_data, spending_text);
     const spend_fte_text_data = {
