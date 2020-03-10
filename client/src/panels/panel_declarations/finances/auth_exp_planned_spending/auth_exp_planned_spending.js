@@ -31,6 +31,9 @@ const auth_cols = _.map(std_years, yr => `${yr}auth`);
 const exp_cols = _.map(std_years, yr => `${yr}exp`);
 
 
+const include_verbose_gap_year_explanation = false;
+
+
 const AuthExpPlannedSpendingTable = ({data_series}) => {
   const series_labels = _.map(data_series, 'label');
 
@@ -309,7 +312,7 @@ const render = function({calculations, footnotes, sources, glossary_keys}) {
     >
       <Col size={4} isText>
         <TM k={`${subject.level}_auth_exp_planned_spending_body`} args={final_info} />
-        { additional_info.gap_year &&
+        { include_verbose_gap_year_explanation && additional_info.gap_year &&
           <div className="auth-gap-details">
             <Details
               summary_content={<TM k={"gap_explain_title"} args={final_info}/>}
