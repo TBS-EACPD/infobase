@@ -9,7 +9,8 @@ const all_subject_classes= [Gov, Dept, CRSO, Program];
 const text_maker = create_text_maker(text);
 
 
-const depts_with_late_planned_spending = [247, 347];
+const depts_with_late_planned_spending = [];
+
 
 const expand_dept_cr_and_programs = (dept) => [
   dept,
