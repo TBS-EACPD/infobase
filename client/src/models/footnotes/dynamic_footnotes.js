@@ -25,20 +25,7 @@ const get_dynamic_footnotes = () => {
     )
   );
   
-  
-  const late_dp_footnotes = _.map(
-    all_subject_classes,
-    (subject_class) => (
-      actual_to_planned_gap_year && 
-      {
-        subject: subject_class,
-        topic_keys: ['DP_RESULTS', 'PLANNED_EXP'],
-        text: text_maker('gap_year_warning', {gap_year: actual_to_planned_gap_year}),
-      }
-    )
-  );
-  
-  
+    
   const entities_with_late_planned_spending = _.chain(depts_with_late_planned_spending)
     .map(Dept.lookup)
     .flatMap(
@@ -57,7 +44,7 @@ const get_dynamic_footnotes = () => {
     (subject) => (
       actual_to_planned_gap_year && 
       {
-        subject: subject,
+        subject,
         topic_keys: ['PLANNED_EXP', 'DP_EXP'],
         text: `<p>${text_maker(`late_planned_spending_warning_${subject.level}`)}</p>${
           subject.level === 'gov' ? 
@@ -75,10 +62,60 @@ const get_dynamic_footnotes = () => {
   );
   
   
+  const docs_with_late_departments = _.chain(result_docs_in_tabling_order)
+    .reverse()
+    .filter(({late_departments}) => late_departments.length > 0)
+    .value();
+  const late_result_doc_footnotes = _.chain(docs_with_late_departments)
+    .flatMap(
+      ({late_departments, doc_type, year}) => _.chain(late_departments)
+        .map(Dept.lookup)
+        .flatMap(
+          (dept) => [
+            dept,
+            ...dept.crsos,
+            ...dept.programs,
+          ]
+        )
+        .map(
+          (subject) => (
+            actual_to_planned_gap_year && 
+            {
+              subject,
+              topic_keys: [`${_.toUpper(doc_type)}_RESULTS`],
+              text: text_maker(
+                `late_results_warning_${subject.level}`,
+                { result_doc_name: text_maker(`${doc_type}_name`, {year}) }
+              ),
+            }
+          )
+        )
+        .value()
+    )
+    .value();
+  const gov_late_result_doc_footnotes = _.map(
+    docs_with_late_departments,
+    ({late_departments, doc_type, year}) => ({
+      subject: Gov,
+      topic_keys: [`${_.toUpper(doc_type)}_RESULTS`],
+      text: `<p>${text_maker('late_results_warning_gov', {result_doc_name: text_maker(`${doc_type}_name`, {year})} )}</p>${
+        `<ul>${
+          _.reduce(
+            late_departments,
+            (elements, org_id) => `${elements}<li>${Dept.lookup(org_id).fancy_name}</li>`,
+            ''
+          )
+        }</ul>`
+      }`,
+    })
+  );
+  
+
   return _.chain([
     ...gap_year_footnotes,
-    ...late_dp_footnotes,
     ...late_planned_spending_footnotes,
+    ...late_result_doc_footnotes,
+    ...gov_late_result_doc_footnotes,
   ])
     .compact()
     .map( 

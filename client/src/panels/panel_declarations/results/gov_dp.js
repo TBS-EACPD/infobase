@@ -80,7 +80,7 @@ export const declare_gov_dp_panel = () => declare_panel({
     },
     footnotes: ["DP_RESULTS"],
     source: (subject) => get_source_links(["DP"]),
-    render({ calculations, sources}){
+    render({ calculations, sources, footnotes}){
       const {
         panel_args: {
           verbose_gov_counts,
@@ -93,6 +93,7 @@ export const declare_gov_dp_panel = () => declare_panel({
         <InfographicPanel
           title={text_maker("gov_dp_summary_title", {year: current_dp_year})}
           sources={sources}
+          footnotes={footnotes}
           allowOverflow
         >
           <DpSummary 

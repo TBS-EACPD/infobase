@@ -199,9 +199,9 @@ export const declare_results_table_panel = () => declare_panel({
   panel_key: "results_flat_table",
   levels: ["dept", "crso", "program"],
   panel_config_func: (level, panel_key) => ({
-    footnotes: ["DRR_RESULTS", "DP_RESULTS"],
+    footnotes: ["DRR_RESULTS"],
     depends_on: ["programSpending", "programFtes"],
-    source: (subject) => get_source_links(["DP","DRR"]),
+    source: (subject) => get_source_links(["DRR"]),
     requires_result_counts: level === 'dept',
     requires_granular_result_counts: level !== 'dept',
     calculate(subject){
@@ -236,7 +236,7 @@ export const declare_results_table_panel = () => declare_panel({
       return { docs_with_data, subject_result_counts, last_drr_doc };
     },
 
-    render({calculations, sources}){
+    render({calculations, sources, footnotes}){
       const { 
         subject, 
         panel_args: {
@@ -247,7 +247,7 @@ export const declare_results_table_panel = () => declare_panel({
       } = calculations;
 
       return (
-        <InfographicPanel title={text_maker("result_flat_table_title", {year: current_drr_year})} sources={sources}>
+        <InfographicPanel title={text_maker("result_flat_table_title", {year: current_drr_year})} sources={sources} footnotes={footnotes}>
           <ResultsTable
             {...{
               subject,
