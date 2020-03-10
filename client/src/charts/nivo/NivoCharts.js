@@ -422,6 +422,7 @@ export class NivoResponsiveBar extends React.Component{
   render(){
     const{
       data,
+      custom_table,
       keys,
       margin,
       graph_height,
@@ -461,8 +462,10 @@ export class NivoResponsiveBar extends React.Component{
     } = this.props;
 
     legends && (legends[0].symbolShape = fixedSymbolShape);
-
-    const table = !disable_table_view && bar_table(data, keys, indexBy, get_formatter(is_money, text_formatter, true, true), table_first_column_name);
+  
+    const table = !disable_table_view && (
+      custom_table || bar_table(data, keys, indexBy, get_formatter(is_money, text_formatter, true, true), table_first_column_name)
+    );
 
     // have to have an empty string in key to make sure that negative bars will be displayed
     const graph = 
