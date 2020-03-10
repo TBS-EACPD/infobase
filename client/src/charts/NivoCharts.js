@@ -685,7 +685,7 @@ export class NivoResponsiveBubble extends React.Component{
 
     const color_scale = d3.scaleOrdinal().range(newIBCategoryColors);
 
-    const root = {
+    const graph_data = {
       id: totalName,
       name: totalName,
       value: totalValue-value,
@@ -702,7 +702,19 @@ export class NivoResponsiveBubble extends React.Component{
       ],
     };
 
-    const tooltip_data = [root, root.children[0]];
+    const tooltip_data = [
+      {
+        id: totalName,
+        value: totalValue,
+        color: color_scale(totalName),
+      },
+      {
+        id: name,
+        value: value,
+        color: color_scale(name),
+      },
+    ];
+    
 
     const title = <TM k="bubble_title" args={{outer: totalName, inner: name}}/>;
 
@@ -711,7 +723,7 @@ export class NivoResponsiveBubble extends React.Component{
       <Fragment>
         <div style={{height: height}}>
           <ResponsiveBubble
-            {...{root,
+            {...{graph_data,
               margin,
             }}
             tooltip={ (d) => default_tooltip( tooltip_data, get_formatter(is_money, text_formatter, false), totalValue) }
