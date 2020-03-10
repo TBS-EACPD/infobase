@@ -428,7 +428,10 @@ const calculate = function(subject, info, options) {
     last_planned_year: run_template( _.last(planning_years) ),
     gap_year: (subject.has_planned_spending && actual_to_planned_gap_year) || null,
     plan_change: info[`${subject.level}_exp_planning_year_3`] - info[`${subject.level}_auth_average`],
-    hist_avg_tot_pct: _.isEqual(exp_values, auth_values) ? 0 : info[`${subject.level}_hist_avg_tot_pct`],
+    hist_avg_tot_pct: _.chain(auth_values)
+      .dropRight( auth_values.length - exp_values.length )
+      .isEqual(exp_values)
+      .value() ? 0 : info[`${subject.level}_hist_avg_tot_pct`],
     last_year_lapse_amt: info[`${subject.level}_auth_pa_last_year`] - info[`${subject.level}_exp_pa_last_year`] || 0,
     last_year_lapse_pct: (info[`${subject.level}_auth_pa_last_year`] - info[`${subject.level}_exp_pa_last_year`] || 0)/info[`${subject.level}_auth_pa_last_year`],
   };
