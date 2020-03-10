@@ -23,7 +23,9 @@ drr_summary_text_intro:
     {{else}}
       En **{{year}}**, {{subj_name subject}} a cherché à atteindre **{{fmt_big_int drr_results}}** résultats.
     {{/if}}
-    TODO: need french translation for this bit
+    Les progrès réalisés pour atteindre ces résultats ont été mesurés au moyen de **{{fmt_big_int drr_total}}** indicateurs, et un {{gl_tt "état du résultat" "RESULTS_STATUS"}}
+    a été attribué à chaque indicateur correspondant au résultat obtenu pour la cible de l'indicateur.
+
 
 new_drr_summary_text_summary:
   transform: [handlebars,markdown]
@@ -63,7 +65,8 @@ graph_legend_instructions:
   en: |
     Click to change which results are counted in the full set:
   fr: |
-    TODO
+    Cliquez ci-dessous pour changer l’état des résultats pris en compte dans l’ensemble du cercle
+
 
 result_status_explanation:
   transform: [handlebars,markdown]
@@ -75,4 +78,9 @@ result_status_explanation:
     * Indicators for which no target was set, or for which data was unavailable, are assigned the status {{gl_tt "No result available" "RESULTS_NOT_AVAILABLE"}}.
     * If the date to achieve the target is after the end of the fiscal year (March 31), or if there is no date to achieve the target, the status is {{gl_tt "Result to be achieved in the future" "RESULTS_ONGOING"}}.
   fr: |
-    TODO
+    L'état du résultat dépend de la manière dont la cible a été définie, par exemple une cible minimale exige un résultat mesuré (résultat réel) supérieur à la cible.
+    
+    * Si le résultat mesuré correspond à la cible, l'indicateur se voit attribuer l'état {{gl_tt "Cible atteinte" "RESULTS_MET"}}.
+    * Si le résultat mesuré se situe en dehors de la fourchette ou de la norme établie par la cible, l’état de l'indicateur est {{gl_tt "Cible non atteinte" "RESULTS_NOT_MET"}}.
+    * Les indicateurs pour lesquels aucune cible n'a été fixée, ou pour lesquels les données n'étaient pas disponibles, se voient attribuer l’état {{gl_tt "Résultat non disponible" "RESULTS_NOT_AVAILABLE"}}.
+    * Si la date d’atteinte de la cible est postérieure à la fin de l'exercice financier (31 mars), ou s'il n'y a pas de date d’atteinte de la cible, l’état est {{gl_tt "Résultat à atteindre dans le futur" "RESULTS_ONGOING"}}.
