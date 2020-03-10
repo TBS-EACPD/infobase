@@ -33,10 +33,6 @@ const featured_content_items = _.compact([
     text_key: 'igoc',
     href: '#igoc',
   },
-  {
-    text_key: 'quick_link_people_2019',
-    href: '#orgs/gov/gov/infograph/people',
-  },
 ]);
 
 export { featured_content_items };
