@@ -4,7 +4,7 @@ import { Subject } from '../subject.js';
 import FootNote from './footnotes.js';
 import { run_template } from '../text.js';
 
-import { dynamic_footnotes } from './dynamic_footnotes.js';
+import { get_dynamic_footnotes } from './dynamic_footnotes.js';
 
 let _loaded_dept_or_tag_codes = {};
 
@@ -110,7 +110,7 @@ function populate_global_footnotes(csv_str){
   populate_footnotes_info(csv_str); 
 
   _.each(
-    dynamic_footnotes,
+    get_dynamic_footnotes(),
     function(footnote_config){
       FootNote.create_and_register(footnote_config);
     }
