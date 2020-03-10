@@ -646,10 +646,8 @@ const BubbleNode = ({ node, style, handlers, theme }) => {
   if (style.r <= 0) return null;
 
   const min_node_radius = 2;
-  const text_y_adjustment = -20;
-  const text_width = 50;
 
-  const real_r = node.data.id==="outer" ?
+  const real_r = node.data.isOuter ?
     style.r :
     style.r*node.data.ratio > min_node_radius ?
       style.r*node.data.ratio :
@@ -664,23 +662,6 @@ const BubbleNode = ({ node, style, handlers, theme }) => {
         stroke={style.borderColor}
         strokeWidth={style.borderWidth}
       />
-      {node.label !== false &&
-        <g transform={`translate(0,${text_y_adjustment})`}>
-          <text
-            textAnchor="middle"
-            alignmentBaseline="central"
-            style={{
-              ...theme.labels.text,
-              fill: style.labelTextColor,
-              pointerEvents: 'none',
-            }}>
-            <TspanLineWrapper
-              text={node.label}
-              width={text_width}
-            />
-          </text>
-        </g>
-      }
     </g>
   );
 };
@@ -702,23 +683,29 @@ export class NivoResponsiveBubble extends React.Component{
     } = this.props;
     legends && (legends[0].symbolShape = fixedSymbolShape);
 
+    const color_scale = d3.scaleOrdinal().range(newIBCategoryColors);
+
     const root = {
-      "id": "outer",
-      "name": totalName,
-      "value": totalValue-value,
-      "children": [
+      id: totalName,
+      name: totalName,
+      value: totalValue-value,
+      color: color_scale(totalName),
+      isOuter: true,
+      children: [
         {
-          "id": "inner",
-          "name": name,
-          "value": value,
-          "ratio": value/totalValue,
+          id: name,
+          name: name,
+          value: value,
+          ratio: value/totalValue,
+          color: color_scale(name),
         },
       ],
     };
 
+    const tooltip_data = [root, root.children[0]];
+
     const title = <TM k="bubble_title" args={{outer: totalName, inner: name}}/>;
 
-    const color_scale = d3.scaleOrdinal().range(newIBCategoryColors);
 
     return (
       <Fragment>
@@ -727,7 +714,7 @@ export class NivoResponsiveBubble extends React.Component{
             {...{root,
               margin,
             }}
-            tooltip={ (d) => default_tooltip( [d], get_formatter(is_money, text_formatter, false), totalValue) }
+            tooltip={ (d) => default_tooltip( tooltip_data, get_formatter(is_money, text_formatter, false), totalValue) }
             identity="name"
             value="value"
             colorBy={d=>color_scale(d.name)}
