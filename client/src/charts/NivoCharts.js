@@ -695,9 +695,7 @@ export class NivoResponsiveBubble extends React.Component{
       <Fragment>
         <div style={{height: height}}>
           <ResponsiveBubble
-            {...{graph_data,
-              margin,
-            }}
+            root={ graph_data }
             tooltip={ (d) => default_tooltip( tooltip_data, get_formatter(is_money, text_formatter, false), totalValue) }
             identity="name"
             value="value"
@@ -713,7 +711,7 @@ export class NivoResponsiveBubble extends React.Component{
             leavesOnly={false}
             padding={0}
             nodeComponent={BubbleNode}
-            margin={{ top: 15, right: 0, bottom: 15, left: 0 }}
+            margin={ margin }
           />
         </div>
         <div style={{textAlign: "center"}}>
@@ -726,6 +724,7 @@ export class NivoResponsiveBubble extends React.Component{
 NivoResponsiveBubble.defaultProps = {
   ...general_default_props,
   isInteractive: false,
+  margin: { top: 15, right: 0, bottom: 15, left: 0 }
 };
 
 export {
