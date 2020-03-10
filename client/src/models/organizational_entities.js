@@ -122,8 +122,7 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
       .compact()
       .value();
   }
-  // TODO: pipeline will change to set programs has_planned_spending to 0/1 (based on whether they have a stamped DP, and CRs and depts will roll this up (using _.some()))
-  // wait on has_planned_spending and dp_status cleanup until then
+  // TODO: these hardcoded rules are horrible, need the pipeline to include flags somewhere so planned spending status can be managed as data
   get has_planned_spending(){
     const is_categorically_exempt = _.includes(
       [ 
