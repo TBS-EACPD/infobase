@@ -154,7 +154,7 @@ export const declare_results_intro_panel = () => declare_panel({
         has_current_drr,
       };
     },
-    render({ calculations, sources}){
+    render({ calculations, sources, footnotes}){
       const {
         panel_args,
       } = calculations;
@@ -163,6 +163,7 @@ export const declare_results_intro_panel = () => declare_panel({
         <InfographicPanel
           title={text_maker("results_intro_title")}
           sources={sources}
+          footnotes={footnotes}
         >
           <ResultsIntroPanel
             {...panel_args}

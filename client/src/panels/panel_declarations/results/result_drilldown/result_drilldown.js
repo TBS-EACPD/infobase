@@ -502,7 +502,7 @@ export const declare_explore_results_panel = () => declare_panel({
       return { docs_with_data, latest_doc_with_data };
     },
 
-    render({calculations, sources}){
+    render({calculations, sources, footnotes}){
       const { 
         subject, 
         panel_args: {
@@ -522,7 +522,7 @@ export const declare_explore_results_panel = () => declare_panel({
         .value();
 
       return (
-        <InfographicPanel title={text_maker("result_drilldown_title", { ...year_range_with_data })} sources={sources}>
+        <InfographicPanel title={text_maker("result_drilldown_title", { ...year_range_with_data })} sources={sources} footnotes={footnotes}>
           <SingleSubjResultsContainer
             {...{
               subject,

@@ -17,22 +17,16 @@ late_results_warning_gov:
   fr: Les données du {{result_doc_name}} des organisations ci-dessous ne sont pas encore disponibles.  Des mises à jour suivront au fur et à mesure de la transmission de ces données.
 late_results_warning_dept:
   transform: [handlebars]
-  en: |
-    {{result_doc_name}} data for this organization is not yet available. An update will follow.
-  fr: |
-    Les données du {{result_doc_name}} de cette organisation ne sont pas encore disponibles. Une mise à jour suivra.
+  en: The {{result_doc_name}} data for this organization is not yet available. An update will follow.
+  fr: Les données du {{result_doc_name}} de cette organisation ne sont pas encore disponibles. Une mise à jour suivra.
 late_results_warning_program:
   transform: [handlebars]
-  en: |
-    {{result_doc_name}} data for this Program is not yet available. An update will follow.
-  fr: |
-    Les données du {{result_doc_name}} de ce programme ne sont pas encore disponibles. Une mise à jour suivra.
+  en: The {{result_doc_name}} data for this Program is not yet available. An update will follow.
+  fr: Les données du {{result_doc_name}} de ce programme ne sont pas encore disponibles. Une mise à jour suivra.
 late_results_warning_crso:
   transform: [handlebars]
-  en: |
-    {{result_doc_name}} data for this Core Responsibility is not yet available. An update will follow.
-  fr: |
-    Les données du {{result_doc_name}} de cette responsabilité essentielle ne sont pas encore disponibles. Une mise à jour suivra.
+  en: The {{result_doc_name}} data for this Core Responsibility is not yet available. An update will follow.
+  fr: Les données du {{result_doc_name}} de cette responsabilité essentielle ne sont pas encore disponibles. Une mise à jour suivra.
 
 
 late_planned_spending_warning_gov:
