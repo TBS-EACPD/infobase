@@ -64,7 +64,7 @@ const AlertBanner = ({children, banner_class, additional_class_names, style}) =>
   const banner_class_name = `alert-${banner_class || 'info'}`;
 
   return (
-    <div className={ `alert alert-no-symbol alert--is-bordered ${banner_class_name} ${additional_class_names}` } style={style}>
+    <div className={classNames('alert alert-no-symbol alert--is-bordered', banner_class_name, additional_class_names)} style={style}>
       { children }
     </div>
   );
