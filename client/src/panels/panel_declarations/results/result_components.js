@@ -33,6 +33,7 @@ const {
   HeightClipper,
   FilterTable,
   SortDirections,
+  AlertBanner,
 } = util_components;
 const { sanitized_marked } = general_utils;
 
@@ -543,13 +544,20 @@ class HorizontalStatusTable extends React.Component {
   }
 }
 
-const NewBadge = () => {
-  return (
-    <span className="badge badge--is-new-indicator">
-      {text_maker("new")}
-    </span>
-  );
-};
+const NewBadge = () => (
+  <span className="badge badge--is-new-indicator">
+    {text_maker("new")}
+  </span>
+);
+
+const LateDepartmentsBanner = ({late_dept_count}) => (
+  <AlertBanner>
+    <TM 
+      k="result_late_depts_warning"
+      args={{late_dept_count}}
+    />
+  </AlertBanner>
+);
 
 export {
   IndicatorDisplay,
@@ -563,4 +571,5 @@ export {
   HorizontalStatusTable,
   NewBadge,
   IndicatorResultDisplay,
+  LateDepartmentsBanner,
 }; 

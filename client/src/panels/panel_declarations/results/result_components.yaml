@@ -29,3 +29,8 @@ indicator_display_desc:
 report:
   en: Report
   fr: Rapport
+
+result_late_depts_warning:
+  transform: [handlebars,markdown]
+  en: Totals below are incomplete, data is not yet available for **{{late_dept_count}}** {{plural_branch late_dept_count "organization" "organizations"}}. Updates will follow.
+  fr: Les totaux ci-dessous sont incomplets, les données ne sont pas encore disponibles pour **{{late_dept_count}}** {{plural_branch late_dept_count "organisation" "organisations"}}. Des mises à jour suivront.
