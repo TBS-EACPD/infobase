@@ -60,7 +60,7 @@ const get_dynamic_footnotes = () => {
   
   
   const docs_with_late_departments = _.chain(result_docs_in_tabling_order)
-    .clone() // fuck... reverse mutates
+    .clone() // ...reverse mutates, clone first!
     .reverse()
     .filter(({late_departments}) => late_departments.length > 0)
     .value();

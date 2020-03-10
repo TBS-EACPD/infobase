@@ -14,9 +14,8 @@ gov_dp_text:
 
 gov_dp_late_dept_warning:
   transform: [handlebars,markdown]
-  en: Totals below are incomplete, data is currently missing for **{{late_dept_count}}** organizations. Updates will follow.
-  fr: Les totaux ci-dessous sont incomplets, les données sont manquantes pour **{{late_dept_count}}** organisations. Une mise à jour suivra.
-
+  en: Totals below are incomplete, data is not yet available for **{{late_dept_count}}** organizations. Updates will follow.
+  fr: Les totaux ci-dessous sont incomplets, les données ne sont pas encore disponibles pour **{{late_dept_count}}** organisations. Des mises à jour suivront.
 
 gov_dp_above_search_bar_text:
   transform: [handlebars,markdown]
