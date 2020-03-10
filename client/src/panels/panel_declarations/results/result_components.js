@@ -21,7 +21,6 @@ import {
   IconNotApplicable,
   IconClock,
 } from '../../../icons/icons.js';
-import * as color_defs from '../../../core/color_defs.js';
 
 const {
   indicator_target_text,
