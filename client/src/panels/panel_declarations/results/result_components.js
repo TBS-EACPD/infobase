@@ -551,9 +551,11 @@ const NewBadge = () => (
 );
 
 const LateDepartmentsBanner = ({late_dept_count}) => (
-  <AlertBanner>
+  <AlertBanner
+    style={{textAlign: 'center'}}
+  >
     <TM 
-      k="result_late_depts_warning"
+      k='result_late_depts_warning'
       args={{late_dept_count}}
     />
   </AlertBanner>

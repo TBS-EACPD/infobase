@@ -55,21 +55,6 @@ const DlItem = ({ term, def }) => (
   </Fragment>
 );
 
-const banner_classes = ['info', 'success', 'warning', 'danger'];
-const AlertBanner = ({children, banner_class, additional_class_names, style}) => {
-  if ( banner_class && !_.includes(banner_classes, banner_class) ){
-    throw `AlertBanner received invalid banner_class prop of ${banner_class}`;
-  }
-
-  const banner_class_name = `alert-${banner_class || 'info'}`;
-
-  return (
-    <div className={classNames('alert alert-no-symbol alert--is-bordered', banner_class_name, additional_class_names)} style={style}>
-      { children }
-    </div>
-  );
-};
-
 const MultiColumnList = ({list_items, column_count=2, ul_class, li_class}) => (
   <div
     className={ul_class}
@@ -107,6 +92,5 @@ export {
   lang,
   create_text_maker_component,
   DlItem,
-  AlertBanner,
   MultiColumnList,
 };

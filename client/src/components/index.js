@@ -33,6 +33,7 @@ export { WellList } from './WellList.js';
 export { DisplayTable } from './DisplayTable.js';
 export { LabeledTable } from './LabeledTable.js';
 export { FootnoteList } from './FootnoteList.js';
+export { AlertBanner } from './AlertBanner.js';
 
 export { StatelessModal, FixedPopover } from './modals_and_popovers';
 
@@ -47,7 +48,6 @@ export {
   lang,
   create_text_maker_component,
   DlItem,
-  AlertBanner,
   MultiColumnList,
 } from './misc_util_components.js';
 

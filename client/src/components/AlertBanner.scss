@@ -1,0 +1,7 @@
+.ib-alert {
+  // paragraph default bottom margin throws off alert padding, clobber it
+  & > p,
+  & > * > p {
+    margin: 0px;
+  }
+}
