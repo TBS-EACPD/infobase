@@ -2,6 +2,9 @@ gocographic_title:
   en: Government of Canada Spending Areas
   fr: Secteurs de dépenses du gouvernement du Canada.
 
+spending_area:
+  en: Spending Area
+  fr: Secteur de dépense
 
 goco_intro_text:
   transform: [handlebars, markdown]
