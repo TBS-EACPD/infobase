@@ -35,7 +35,7 @@ const DpSummary = ({counts, verbose_gov_counts, counts_by_dept, late_dept_count}
   return (
     <Fragment>
       <div className="fcol-md-12 medium_panel_text">
-        { !!late_dept_count && <LateDepartmentsBanner late_dept_count={late_dept_count} /> }
+        { late_dept_count > 0 && <LateDepartmentsBanner late_dept_count={late_dept_count} /> }
         <TM 
           k="gov_dp_text"
           args={{
