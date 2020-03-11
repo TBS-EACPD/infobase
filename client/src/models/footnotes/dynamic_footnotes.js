@@ -8,10 +8,6 @@ import { create_text_maker } from '../text.js';
 const all_subject_classes= [Gov, Dept, CRSO, Program];
 const text_maker = create_text_maker(text);
 
-
-const depts_with_late_planned_spending = [];
-
-
 const expand_dept_cr_and_programs = (dept) => [
   dept,
   ...dept.crsos,
@@ -31,85 +27,70 @@ const get_dynamic_footnotes = () => {
     )
   );
   
-    
-  const entities_with_late_planned_spending = _.chain(depts_with_late_planned_spending)
-    .map(Dept.lookup)
-    .flatMap( expand_dept_cr_and_programs )
-    .thru( (late_entities) => late_entities.length > 0 ? [Gov, ...late_entities] : [] )
-    .value();
-  const late_planned_spending_footnotes = _.map(
-    [
-      Gov,
-      ...entities_with_late_planned_spending,
-    ],
-    (subject) => ({
-      subject,
-      topic_keys: ['PLANNED_EXP', 'DP_EXP'],
-      text: `<p>${text_maker(`late_planned_spending_warning_${subject.level}`)}</p>${
-        subject.level === 'gov' ? 
-          `<ul>${
-            _.reduce(
-              depts_with_late_planned_spending,
-              (elements, org_id) => `${elements}<li>${Dept.lookup(org_id).fancy_name}</li>`,
-              ''
+
+  const late_result_or_resource_footnotes = _.flatMap(
+    ['results', 'resources'],
+    (result_or_resource) => {
+      const late_org_property = `late_${result_or_resource}_orgs`;
+
+      const docs_with_late_orgs = _.chain(result_docs_in_tabling_order)
+        .clone() // ...reverse mutates, clone first!
+        .reverse()
+        .filter( (doc) => doc[late_org_property].length > 0 )
+        .value();
+
+      const gov_footnotes = _.map(
+        docs_with_late_orgs,
+        ({ [late_org_property]: late_orgs, doc_type, year }) => ({
+          subject: Gov,
+          topic_keys: result_or_resource === 'resources' ?
+            ['PLANNED_EXP', 'DP_EXP'] :
+            [`${_.toUpper(doc_type)}_RESULTS`],
+          text: `<p>${text_maker(`late_${result_or_resource}_warning_gov`, {result_doc_name: text_maker(`${doc_type}_name`, {year})} )}</p>${
+            `<ul>${
+              _.reduce(
+                late_orgs,
+                (elements, org_id) => `${elements}<li>${Dept.lookup(org_id).fancy_name}</li>`,
+                ''
+              )
+            }</ul>`
+          }`,
+        })
+      );
+
+      const dept_footnotes = _.chain(docs_with_late_orgs)
+        .flatMap(
+          ({ [late_org_property]: late_orgs, doc_type, year}) => _.chain(late_orgs)
+            .map(Dept.lookup)
+            .flatMap( expand_dept_cr_and_programs )
+            .map(
+              (subject) => (
+                actual_to_planned_gap_year && 
+                {
+                  subject,
+                  topic_keys: [`${_.toUpper(doc_type)}_RESULTS`],
+                  text: text_maker(
+                    `late_${result_or_resource}_warning_${subject.level}`,
+                    { result_doc_name: text_maker(`${doc_type}_name`, {year}) }
+                  ),
+                }
+              )
             )
-          }</ul>` :
-          ''
-      }`,
-    })
-  );
-  
-  
-  const docs_with_late_departments = _.chain(result_docs_in_tabling_order)
-    .clone() // ...reverse mutates, clone first!
-    .reverse()
-    .filter(({late_departments}) => late_departments.length > 0)
-    .value();
-  const late_result_doc_footnotes = _.chain(docs_with_late_departments)
-    .flatMap(
-      ({late_departments, doc_type, year}) => _.chain(late_departments)
-        .map(Dept.lookup)
-        .flatMap( expand_dept_cr_and_programs )
-        .map(
-          (subject) => (
-            actual_to_planned_gap_year && 
-            {
-              subject,
-              topic_keys: [`${_.toUpper(doc_type)}_RESULTS`],
-              text: text_maker(
-                `late_results_warning_${subject.level}`,
-                { result_doc_name: text_maker(`${doc_type}_name`, {year}) }
-              ),
-            }
-          )
+            .value()
         )
-        .value()
-    )
-    .value();
+        .value();
 
-  const gov_late_result_doc_footnotes = _.map(
-    docs_with_late_departments,
-    ({late_departments, doc_type, year}) => ({
-      subject: Gov,
-      topic_keys: [`${_.toUpper(doc_type)}_RESULTS`],
-      text: `<p>${text_maker('late_results_warning_gov', {result_doc_name: text_maker(`${doc_type}_name`, {year})} )}</p>${
-        `<ul>${
-          _.reduce(
-            late_departments,
-            (elements, org_id) => `${elements}<li>${Dept.lookup(org_id).fancy_name}</li>`,
-            ''
-          )
-        }</ul>`
-      }`,
-    })
+      return [
+        ...gov_footnotes, 
+        ...dept_footnotes,
+      ];
+    }
   );
   
-
+  
   return _.chain([
     ...gap_year_footnotes,
-    ...late_planned_spending_footnotes,
-    ...late_result_doc_footnotes,
-    ...gov_late_result_doc_footnotes,
+    ...late_result_or_resource_footnotes,
   ])
     .compact()
     .map( 
@@ -122,7 +103,4 @@ const get_dynamic_footnotes = () => {
 };
 
 
-export {
-  get_dynamic_footnotes,
-  depts_with_late_planned_spending,
-};
+export { get_dynamic_footnotes };

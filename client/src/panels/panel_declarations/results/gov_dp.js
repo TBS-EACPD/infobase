@@ -77,7 +77,7 @@ export const declare_gov_dp_panel = () => declare_panel({
         .map( obj => ({...obj, total: d3.sum(_.values(obj.counts)) } ) )
         .value();
   
-      const late_dept_count = result_docs[current_dp_key].late_departments.length;
+      const late_dept_count = result_docs[current_dp_key].late_results_orgs.length;
 
       return { 
         verbose_gov_counts,

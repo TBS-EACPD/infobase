@@ -3,7 +3,6 @@ import text from './warning_panels.yaml';
 import { Fragment } from 'react';
 
 import dynamic_footnote_text from '../../../models/footnotes/dynamic_footnotes.yaml';
-import { depts_with_late_planned_spending } from '../../../models/footnotes/dynamic_footnotes.js';
 
 import {
   util_components,
@@ -103,15 +102,15 @@ export const declare_late_results_warning_panel = () => declare_panel({
   panel_key: 'late_results_warning',
   levels: ['gov', 'dept', 'crso', 'program'],
   panel_config_func: (level, panel_key) => {
-    const docs_with_late_departments = _.chain(result_docs_in_tabling_order)
+    const docs_with_late_orgs = _.chain(result_docs_in_tabling_order)
       .reverse()
-      .filter(({late_departments}) => late_departments.length > 0)
+      .filter(({late_results_orgs}) => late_results_orgs.length > 0)
       .value();
 
     const get_per_doc_late_results_alert = (per_doc_inner_content) => (
       <Fragment>
         {_.map(
-          docs_with_late_departments,
+          docs_with_late_orgs,
           (result_doc, ix) => (
             <WarningPanel key={ix}>
               {per_doc_inner_content(result_doc)}
@@ -128,7 +127,7 @@ export const declare_late_results_warning_panel = () => declare_panel({
           footnotes: false,
           source: false,
           info_deps: [],
-          calculate: () => !_.isEmpty(docs_with_late_departments),
+          calculate: () => !_.isEmpty(docs_with_late_orgs),
           render(){
             const per_doc_inner_content = (result_doc) => (
               <div style={{textAlign: "left"}}>
@@ -140,11 +139,11 @@ export const declare_late_results_warning_panel = () => declare_panel({
                 />
                 <MultiColumnList
                   list_items={_.map(
-                    result_doc.late_departments, 
+                    result_doc.late_results_orgs, 
                     (org_id) => Dept.lookup(org_id).fancy_name
                   )}
-                  column_count={ window.lang === "en" && result_doc.late_departments.length > 3 ? 2 : 1 }
-                  li_class={ result_doc.late_departments.length > 4 ? "font-small" : '' }
+                  column_count={ window.lang === "en" && result_doc.late_results_orgs.length > 3 ? 2 : 1 }
+                  li_class={ result_doc.late_results_orgs.length > 4 ? "font-small" : '' }
                 />
               </div>
             );
@@ -158,8 +157,8 @@ export const declare_late_results_warning_panel = () => declare_panel({
           footnotes: false,
           source: false,
           info_deps: [],
-          calculate: (subject) => _.chain(docs_with_late_departments)
-            .flatMap('late_departments')
+          calculate: (subject) => _.chain(docs_with_late_orgs)
+            .flatMap('late_results_orgs')
             .includes(
               level === 'dept' ?
                 subject.id :
@@ -184,8 +183,15 @@ export const declare_late_results_warning_panel = () => declare_panel({
 });
 
 
-export const declare_late_planned_spending_panel = () => declare_panel({
-  panel_key: 'late_planned_spending_warning',
+// Assume that ONLY the most recent DP could possibly have late resources (or at least we only care about a banner for them). DRR resources are decoupled
+// from the document tabling, and it would be extreme (illegal, if results ever graduates from policy to law) for us to not get planned resources from a DP org for a full year.
+const depts_with_late_resources = _.chain(result_docs_in_tabling_order)
+  .filter( ({doc_type}) => doc_type === 'dp' )
+  .last()
+  .get('late_resources_orgs')
+  .value();
+export const declare_late_resources_panel = () => declare_panel({
+  panel_key: 'late_resources_warning',
   levels: ['gov', 'dept', 'crso', 'program'],
   panel_config_func: (level, panel_key) => {
     switch (level){
@@ -195,17 +201,17 @@ export const declare_late_planned_spending_panel = () => declare_panel({
           footnotes: false,
           source: false,
           info_deps: [],
-          calculate: () => !_.isEmpty(depts_with_late_planned_spending),
+          calculate: () => !_.isEmpty(depts_with_late_resources),
           render: () => (
             <WarningPanel center_text={false}>
-              <TM k={'late_planned_spending_warning_gov'} />
+              <TM k={'late_resources_warning_gov'} />
               <MultiColumnList
                 list_items={_.map(
-                  depts_with_late_planned_spending, 
+                  depts_with_late_resources, 
                   (org_id) => Dept.lookup(org_id).fancy_name
                 )}
-                column_count={ window.lang === "en" && depts_with_late_planned_spending.length > 3 ? 2 : 1 }
-                li_class={ depts_with_late_planned_spending.length > 4 ? "font-small" : '' }
+                column_count={ window.lang === "en" && depts_with_late_resources.length > 3 ? 2 : 1 }
+                li_class={ depts_with_late_resources.length > 4 ? "font-small" : '' }
               />
             </WarningPanel>
           ),
@@ -217,14 +223,14 @@ export const declare_late_planned_spending_panel = () => declare_panel({
           source: false,
           info_deps: [],
           calculate: (subject) => _.includes(
-            depts_with_late_planned_spending,
+            depts_with_late_resources,
             level === 'dept' ?
               subject.id :
               subject.dept.id
           ),
           render: () => (
             <WarningPanel>
-              <TM k={`late_planned_spending_warning_${level}`} />
+              <TM k={`late_resources_warning_${level}`} />
             </WarningPanel>
           ),
         };

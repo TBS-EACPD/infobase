@@ -8,7 +8,7 @@ import {
   // shared gov, dept, crso, program
   declare_results_key_concepts_panel,
   declare_late_results_warning_panel,
-  declare_late_planned_spending_panel,
+  declare_late_resources_panel,
   declare_budget_measures_panel,
 
   // shared dept, crso, program, tag
@@ -64,7 +64,7 @@ export const get_dept_panels = subject => ensure_loaded({
     declare_portfolio_structure_intro_panel(),
   ],
   financial: _.includes(subject.tables, 'programSpending') && [
-    declare_late_planned_spending_panel(),
+    declare_late_resources_panel(),
     declare_financial_key_concepts_panel(),
     declare_welcome_mat_panel(),
     // RTP_TODO: declare_tp_by_region_panel(),

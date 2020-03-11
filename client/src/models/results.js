@@ -342,9 +342,9 @@ const build_doc_info_objects = (doc_type, docs) => _.chain(docs)
         resource_years,
       } = doc_properties;
 
-      const primary_resource_year = doc_type === "drr" ? 
-        _.last(resource_years) :
-        _.first(resource_years);
+      const is_drr = doc_type === "drr";
+
+      const primary_resource_year = is_drr ? _.last(resource_years) : _.first(resource_years);
 
       return {
         doc_type,
@@ -357,6 +357,9 @@ const build_doc_info_objects = (doc_type, docs) => _.chain(docs)
         has_resources: !_.isEmpty(resource_years),
         could_have_previous: index > 0,
         ...doc_properties,
+        ...( // "DRR resources" are fully decoupled from DRR tabling, come from public accounts. Don't allow late_resources_orgs to be populated on a DRR
+          is_drr && {late_resources_orgs: []} 
+        ),
       };
     }
   )
@@ -372,7 +375,7 @@ const drr_docs = build_doc_info_objects(
       resource_years: ["{{pa_last_year}}"],
       doc_url_en: "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2018-19-departmental-results-reports.html",
       doc_url_fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2018-2019.html",
-      late_departments: [],
+      late_results_orgs: [],
     },
   ]
 );
@@ -384,14 +387,16 @@ const dp_docs = build_doc_info_objects(
       resource_years: [],
       doc_url_en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2019-20-departmental-plans.html",
       doc_url_fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2019-2020.html",
-      late_departments: [],
+      late_results_orgs: [],
+      late_resources_orgs: [],
     },
     {
       year_short: "2020",
       resource_years: ["{{planning_year_1}}", "{{planning_year_2}}", "{{planning_year_3}}"],
       doc_url_en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2020-21-departmental-plans.html",
       doc_url_fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2020-2021.html",
-      late_departments: [241],
+      late_results_orgs: [241],
+      late_resources_orgs: [],
     },
   ]
 );
