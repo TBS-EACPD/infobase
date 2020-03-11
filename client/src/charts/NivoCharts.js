@@ -45,21 +45,21 @@ const get_scale_bounds = (stacked, raw_data, zoomed) => {
 
 const smalldevice_tooltip_content = (tooltip_item, formatter) => (
   <td>
-    <div className="nivo-tooltip__content"> {tooltip_item.id} </div>
+    <div className="nivo-tooltip__content"> {tooltip_item.name || tooltip_item.id} </div>
     <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
   </td>
 );
 
 const tooltip_content = (tooltip_item, formatter) => (
   <Fragment>
-    <td className="nivo-tooltip__content"> {tooltip_item.id} </td>
+    <td className="nivo-tooltip__content"> {tooltip_item.name || tooltip_item.id} </td>
     <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
   </Fragment>
 );
 
 const smalldevice_percent_tooltip_content = (tooltip_item, formatter, total) => (
   <td>
-    <div className="nivo-tooltip__content">{tooltip_item.id}</div>
+    <div className="nivo-tooltip__content">{tooltip_item.name || tooltip_item.id}</div>
     <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
     <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}}/>
   </td>
@@ -67,7 +67,7 @@ const smalldevice_percent_tooltip_content = (tooltip_item, formatter, total) => 
 
 const percent_tooltip_content = (tooltip_item, formatter, total) => (
   <Fragment>
-    <td className="nivo-tooltip__content">{tooltip_item.id}</td>
+    <td className="nivo-tooltip__content">{tooltip_item.name || tooltip_item.id}</td>
     <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
     <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}}/>
   </Fragment>
