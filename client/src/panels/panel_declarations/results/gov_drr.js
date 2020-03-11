@@ -33,7 +33,7 @@ class GovDRR extends React.Component {
 
     return (
       <div>
-        { !!late_dept_count &&
+        { late_dept_count > 0 &&
           <div className="medium_panel_text">
             <LateDepartmentsBanner late_dept_count={late_dept_count} />
           </div>
