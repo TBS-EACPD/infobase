@@ -200,13 +200,17 @@ class PercentageViz extends React.Component {
     const { counts } = this.props;
     const { selected } = this.state;
 
-    const data = _.chain(counts)
-      .toPairs()
-      .map(pair => ({label: result_statuses[pair[0]].text, value: pair[1], id: pair[0]}))
-      .value();
+    const all_data = _.map(
+      counts,
+      (value, key) => ({
+        label: result_statuses[key].text,
+        id: key,
+        value,
+      })
+    );
     
 
-    const graph_data = _.filter(data, d=>_.includes(selected,d.id));
+    const graph_data = _.filter(all_data, d=>_.includes(selected,d.id));
     const graph_total = _.sumBy(graph_data, 'value');
 
     const new_summary_text_args = {
@@ -249,7 +253,7 @@ class PercentageViz extends React.Component {
             </div>
             <div className="legend-container">
               <GraphLegend
-                items={_.chain(data)
+                items={_.chain(all_data)
                   .map( ({ label, id }) => ({
                     label: label,
                     active: _.includes(selected, id),
