@@ -88,7 +88,7 @@ export class TabbedContent extends React.Component {
     const tab_callback = (key) => this.setState({open_tab_key: key});
 
     return (
-      <div className="tabbed-content" aria-hidden="true">
+      <div className="tabbed-content">
         <TabbedControls { ...{tab_options, tab_callback, disabled_message} } />
         <div 
           className="tabbed-content__pane"
