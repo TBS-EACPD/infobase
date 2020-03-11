@@ -32,7 +32,7 @@ const central_vote_footnotes = [
   [15, footnote_from_glossary_item("TB15")],
   [25, footnote_from_glossary_item("TB25")],
   [30, footnote_from_glossary_item("TB30")],
-  [35, footnote_from_glossary_item("TB35")],
+  [33, footnote_from_glossary_item("TB33")],
   [40, _.constant(biv_footnote)],
 ];
 
