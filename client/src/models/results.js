@@ -391,7 +391,7 @@ const dp_docs = build_doc_info_objects(
       resource_years: ["{{planning_year_1}}", "{{planning_year_2}}", "{{planning_year_3}}"],
       doc_url_en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2020-21-departmental-plans.html",
       doc_url_fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2020-2021.html",
-      late_departments: [76, 136, 241],
+      late_departments: [241],
     },
   ]
 );
