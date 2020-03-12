@@ -15,23 +15,23 @@ export class TabbedControls extends React.Component {
           {_.map(tab_options, 
             ({key, label, is_open, is_disabled}) => (
               <li
-                className = { classNames({
+                className={ classNames({
                   'tabbed-controls__label': true,
                   'tabbed-controls__label--active': !!is_open,
                   'tabbed-controls__label--disabled': !!is_disabled,
                 }) }
-                id = {key + "_tab"}
-                key = {key + "_tab"}
-                onClick = { () => !is_disabled && tab_callback(key) }
+                id={key + "_tab"}
+                key={key + "_tab"}
+                onClick={ () => !is_disabled && tab_callback(key) }
                 title={is_disabled ? disabled_message : ''}
               > 
                 <span
-                  tabIndex = {0} 
-                  className = "tabbed-controls__label-text"
-                  role = "button"
-                  aria-pressed = { is_open }
-                  onClick = { () => !is_disabled && tab_callback(key) }
-                  onKeyDown = { (e) => !is_disabled && (e.keyCode===13 || e.keyCode===32) && tab_callback(key) }
+                  tabIndex={0} 
+                  className="tabbed-controls__label-text"
+                  role="button"
+                  aria-pressed={ is_open }
+                  onClick={ () => !is_disabled && tab_callback(key) }
+                  onKeyDown={ (e) => !is_disabled && _.includes([13, 32], e.keyCode) && tab_callback(key) }
                 >
                   {label}
                 </span>
@@ -92,8 +92,8 @@ export class TabbedContent extends React.Component {
         <TabbedControls { ...{tab_options, tab_callback, disabled_message} } />
         <div 
           className="tabbed-content__pane"
-          ref = { open_tab_key+"_tabbed_content_pane" }
-          key = { open_tab_key+"_tabbed_content_pane" }
+          ref={ open_tab_key+"_tabbed_content_pane" }
+          key={ open_tab_key+"_tabbed_content_pane" }
         > 
           {tabPaneContent}
         </div>
