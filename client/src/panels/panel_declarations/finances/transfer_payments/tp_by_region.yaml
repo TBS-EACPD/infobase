@@ -29,7 +29,7 @@ show_tp:
   fr: Les Paiements de Transfert
 
 show_tp_per_capita:
-  en: Tranfer Payments per Capita
+  en: Transfer Payments per Capita
   fr: Les Paiements de Transfert par Habitant
 
 tp_a11y_table_title:
