@@ -46,15 +46,21 @@ const get_dynamic_footnotes = () => {
           topic_keys: result_or_resource === 'resources' ?
             ['PLANNED_EXP', 'DP_EXP'] :
             [`${_.toUpper(doc_type)}_RESULTS`],
-          text: `<p>${text_maker(`late_${result_or_resource}_warning_gov`, {result_doc_name: text_maker(`${doc_type}_name`, {year})} )}</p>${
-            `<ul>${
-              _.reduce(
-                late_orgs,
-                (elements, org_id) => `${elements}<li>${Dept.lookup(org_id).fancy_name}</li>`,
-                ''
-              )
-            }</ul>`
-          }`,
+          text: (
+            `<p>
+            ${text_maker(
+              `late_${result_or_resource}_warning_gov`,
+              {result_doc_name: text_maker(`${doc_type}_name`, {year})}
+            )}
+            </p>
+            <ul>
+            ${_.reduce(
+              late_orgs,
+              (elements, org_id) => `${elements}<li>${Dept.lookup(org_id).fancy_name}</li>`,
+              ''
+            )}
+            </ul>`
+          ),
         })
       );
 
