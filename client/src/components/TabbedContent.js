@@ -26,10 +26,11 @@ export class TabbedControls extends React.Component {
                 title={is_disabled ? disabled_message : ''}
               > 
                 <span
-                  tabIndex={0} 
+                  tabIndex={0}
                   className="tabbed-controls__label-text"
                   role="button"
                   aria-pressed={ is_open }
+                  aria-disabled={ is_disabled }
                   onClick={ () => !is_disabled && tab_callback(key) }
                   onKeyDown={ (e) => !is_disabled && _.includes([13, 32], e.keyCode) && tab_callback(key) }
                 >
