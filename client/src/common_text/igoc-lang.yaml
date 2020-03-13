@@ -111,3 +111,7 @@ inst_form:
 pop_group:
   en: Population Group
   fr: Groupe de population
+
+belonging_to:
+  en: belonging to
+  fr: appartenir à
