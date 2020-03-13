@@ -7,7 +7,7 @@ import {
 import {
   StdPanel,
   Col,
-  NivoResponsiveBubble,
+  CircleProportionChart,
   declare_panel,
 } from "../../shared.js";
 
@@ -54,7 +54,7 @@ export const declare_last_year_g_and_c_perspective_panel = () => declare_panel({
           { !window.is_a11y_mode &&
             <Fragment>
               <Col size={3} isGraph>
-                <NivoResponsiveBubble 
+                <CircleProportionChart 
                   height={200}
                   value={dept_tp_exp_pa_last_year}
                   name={text_maker("dept_transfer_payments", info)}
@@ -63,7 +63,7 @@ export const declare_last_year_g_and_c_perspective_panel = () => declare_panel({
                 />
               </Col>
               <Col size={3} isGraph>
-                <NivoResponsiveBubble 
+                <CircleProportionChart 
                   height={200}
                   value={dept_tp_exp_pa_last_year}
                   name={text_maker("dept_transfer_payments", info)}

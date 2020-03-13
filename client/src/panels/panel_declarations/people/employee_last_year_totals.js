@@ -4,7 +4,7 @@ import {
   create_text_maker_component,
   StdPanel,
   Col,
-  NivoResponsiveBubble,
+  CircleProportionChart,
 
   declare_panel,
 } from "../shared.js"; 
@@ -51,7 +51,7 @@ export const declare_employee_last_year_totals_panel = () => declare_panel({
               <TM k="dept_employee_last_year_totals_text" args={info} />
             </Col>
             <Col size={7} isGraph>
-              <NivoResponsiveBubble 
+              <CircleProportionChart 
                 height={200}
                 is_money={false}
                 value={dept_emp_value}

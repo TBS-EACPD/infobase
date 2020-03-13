@@ -2,14 +2,14 @@ import { TM, text_maker } from './vote_stat_text_provider.js';
 import {
   StdPanel,
   Col,
-  NivoResponsiveBubble,
+  CircleProportionChart,
 
   declare_panel,
 } from "../../shared.js";
 
 const DeptEstimatesPerspective = ({subject, dept_total, gov_total}) => (
 
-  <NivoResponsiveBubble 
+  <CircleProportionChart 
     height={250}
     value={dept_total}
     name={subject.fancy_name}
