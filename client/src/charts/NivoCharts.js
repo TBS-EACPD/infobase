@@ -724,7 +724,7 @@ export class CircleProportionChart extends React.Component{
 CircleProportionChart.defaultProps = {
   ...general_default_props,
   isInteractive: false,
-  margin: { top: 15, right: 0, bottom: 15, left: 0 }
+  margin: { top: 15, right: 0, bottom: 15, left: 0 },
 };
 
 export {
