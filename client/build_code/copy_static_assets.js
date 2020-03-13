@@ -105,7 +105,7 @@ const table_csvs = _.map(
 );
 
 const other_csv_names_unilingual = [
-  'population.csv',
+  'canadian_population_estimates_by_province.csv',
 ];
 const other_csv_names_bilingual = _.flatMap(
   [
