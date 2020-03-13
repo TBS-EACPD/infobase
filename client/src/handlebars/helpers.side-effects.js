@@ -533,7 +533,7 @@ Handlebars.registerHelper("gl_title",function(key){
 
 Handlebars.registerHelper("infograph_link",function(subject){
   const href = infograph_href_template(subject); 
-  const str = `<a href="${href}" title="${trivial_text_maker('infographic_for', { subject })}">${subject.fancy_name}</a>`;
+  const str = `<a href="${href}" title="${trivial_text_maker('infographic_for', { subject })}">${subject.display_name}</a>`;
   return new Handlebars.SafeString(str);
 });
 

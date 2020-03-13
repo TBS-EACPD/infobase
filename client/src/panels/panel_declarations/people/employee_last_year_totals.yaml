@@ -6,7 +6,7 @@ dept_employee_last_year_totals_title:
 dept_employee_last_year_totals_text:
   transform: [handlebars,markdown]
   en: |
-    In **{{ppl_last_year}}**, **{{fmt_big_int dept_head_count_ppl_last_year}}**  {{gl_tt "people" "HEAD"}} were employed by **{{subject.fancy_name}}}**, 
+    In **{{ppl_last_year}}**, **{{fmt_big_int dept_head_count_ppl_last_year}}**  {{gl_tt "people" "HEAD"}} were employed by **{{subject.display_name}}}**, 
     representing **{{fmt_smart_percentage1 dept_head_count_dept_share_last_year}}** of the total {{gl_tt "Federal Public Service" "FPS"}} population. 
 
   fr: |

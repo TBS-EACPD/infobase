@@ -104,7 +104,7 @@ const Tag = class Tag extends extensible_subject_store(){
       .sortBy("name")
       .value();
   }
-  get fancy_name(){
+  get display_name(){
     return this.name;
   }
   get is_m2m(){

@@ -140,7 +140,7 @@ export const declare_late_results_warning_panel = () => declare_panel({
                 <MultiColumnList
                   list_items={_.map(
                     result_doc.late_results_orgs, 
-                    (org_id) => Dept.lookup(org_id).fancy_name
+                    (org_id) => Dept.lookup(org_id).display_name
                   )}
                   column_count={ window.lang === "en" && result_doc.late_results_orgs.length > 3 ? 2 : 1 }
                   li_class={ result_doc.late_results_orgs.length > 4 ? "font-small" : '' }
@@ -208,7 +208,7 @@ export const declare_late_resources_panel = () => declare_panel({
               <MultiColumnList
                 list_items={_.map(
                   depts_with_late_resources, 
-                  (org_id) => Dept.lookup(org_id).fancy_name
+                  (org_id) => Dept.lookup(org_id).display_name
                 )}
                 column_count={ window.lang === "en" && depts_with_late_resources.length > 3 ? 2 : 1 }
                 li_class={ depts_with_late_resources.length > 4 ? "font-small" : '' }

@@ -17,9 +17,9 @@ gov_employee_age_text:
 dept_employee_age_text:
   transform: [handlebars,markdown]
   en: |
-   From **{{fmt_big_int dept_head_count_age_first_active_year}}** to **{{fmt_big_int dept_head_count_age_last_active_year}}**, people aged **{{fmt_big_int dept_head_count_age_top}}** accounted for the largest average share (**{{fmt_percentage1 dept_head_count_age_top_avg_percent}}**) of **{{subject.fancy_name}}** employees.
+   From **{{fmt_big_int dept_head_count_age_first_active_year}}** to **{{fmt_big_int dept_head_count_age_last_active_year}}**, people aged **{{fmt_big_int dept_head_count_age_top}}** accounted for the largest average share (**{{fmt_percentage1 dept_head_count_age_top_avg_percent}}**) of **{{subject.display_name}}** employees.
 
-   Over this period, the **average age** of **{{subject.fancy_name}}** employees **{{two_value_changed_to dept_avgage_first_active_value dept_avgage_last_active_value "fmt_decimal1"}}**.
+   Over this period, the **average age** of **{{subject.display_name}}** employees **{{two_value_changed_to dept_avgage_first_active_value dept_avgage_last_active_value "fmt_decimal1"}}**.
    For comparison, the average age of all **Federal Public Service** employees **{{two_value_changed_to gov_avgage_last_year_5 gov_avgage_last_year "fmt_decimal1"}}**.
   fr: |
    De **{{fmt_big_int dept_head_count_age_first_active_year}}** à **{{fmt_big_int dept_head_count_age_last_active_year}}**, les personnes âgées de **{{fmt_big_int dept_head_count_age_top}}** constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 dept_head_count_age_top_avg_percent}}**) d’employés **{{de_dept dept}}**.
@@ -38,7 +38,7 @@ gov_employee_age_text_temporary_no_avg_age:
 dept_employee_age_text_temporary_no_avg_age:
   transform: [handlebars,markdown]
   en: |
-   From **{{fmt_big_int dept_head_count_age_first_active_year}}** to **{{fmt_big_int dept_head_count_age_last_active_year}}**, people aged **{{fmt_big_int dept_head_count_age_top}}** accounted for the largest average share (**{{fmt_percentage1 dept_head_count_age_top_avg_percent}}**) of **{{subject.fancy_name}}** employees.
+   From **{{fmt_big_int dept_head_count_age_first_active_year}}** to **{{fmt_big_int dept_head_count_age_last_active_year}}**, people aged **{{fmt_big_int dept_head_count_age_top}}** accounted for the largest average share (**{{fmt_percentage1 dept_head_count_age_top_avg_percent}}**) of **{{subject.display_name}}** employees.
 
   fr: |
    De **{{fmt_big_int dept_head_count_age_first_active_year}}** à **{{fmt_big_int dept_head_count_age_last_active_year}}**, les personnes âgées de **{{fmt_big_int dept_head_count_age_top}}** constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 dept_head_count_age_top_avg_percent}}**) d’employés **{{de_dept dept}}**.

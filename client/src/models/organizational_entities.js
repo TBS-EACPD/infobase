@@ -38,7 +38,7 @@ const Gov = {
   description: gov_name,
   title: gov_name,
   legal_name: gov_name,
-  fancy_name: trivial_text_maker('the_goc'),
+  display_name: trivial_text_maker('the_goc'),
 };
 
 
@@ -59,7 +59,7 @@ const Ministry = class Ministry extends static_subject_store(){
     this.description = "";
     this.orgs = [];
   }
-  get fancy_name(){
+  get display_name(){
     return this.name;
   }
 };
@@ -162,7 +162,7 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
       return false;
     }
   }
-  get fancy_name(){
+  get display_name(){
     return this.applied_title || this.name;
   }
   get old_name(){
@@ -263,7 +263,7 @@ const CRSO = class CRSO extends static_subject_store_with_API_data(){
       return trivial_text_maker("strategic_outcomes");
     }
   }
-  get fancy_name(){
+  get display_name(){
     return this.name;
   }
   get has_planned_spending(){ 
@@ -313,7 +313,7 @@ const Program = class Program extends static_subject_store_with_API_data(){
   get link_to_infographic(){
     return `#orgs/program/${this.id}/infograph`;
   }
-  get fancy_name(){
+  get display_name(){
     return this.name;
   }
   get is_dead(){
@@ -379,7 +379,7 @@ const InstForm = class InstForm extends static_subject_store(){
       orgs: [],
     });
   }
-  get fancy_name(){
+  get display_name(){
     return this.name;
   }
   singular(){

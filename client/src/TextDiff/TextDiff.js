@@ -379,7 +379,7 @@ export default class TextDiffApp extends React.Component {
       history,
     } = this.props;
 
-    const all_depts = _.chain(Dept.get_all()).filter(dept => !!dept.dp_status).sortBy('fancy_name').value();
+    const all_depts = _.chain(Dept.get_all()).filter(dept => !!dept.dp_status).sortBy('display_name').value();
     const crs_without_internal = _.filter(subject.level === 'dept' ? subject.crsos : subject.dept.crsos, cr => cr.is_cr && !(cr.is_internal_service));
 
     const current_dept = subject.level === 'dept' ? subject : subject.dept;
@@ -408,7 +408,7 @@ export default class TextDiffApp extends React.Component {
               const new_url = this.get_new_url(Dept.lookup(id));
               history.push(new_url);
             }}
-            options={ _.map(all_depts, dept => ({id: dept.id, display: dept.fancy_name}) )}
+            options={ _.map(all_depts, dept => ({id: dept.id, display: dept.display_name}) )}
           />
         </div>
         <div className={classNames("medium_panel_text")}>
