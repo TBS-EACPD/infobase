@@ -26,7 +26,7 @@ const { A11YTable } = declarative_charts;
 const loadPopulation = () => {
   const parse_csv_string = csv_string => _.tail( d3.csvParseRows( _.trim(csv_string) ) );
   
-  return make_request( get_static_url(`csv/population.csv`) )
+  return make_request( get_static_url(`csv/canadian_population_estimates_by_province.csv`) )
     .then( csv_string => parse_csv_string(csv_string) )
     .then((population_data) =>
       _.chain(population_data)
