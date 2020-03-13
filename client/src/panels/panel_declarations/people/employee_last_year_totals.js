@@ -54,10 +54,10 @@ export const declare_employee_last_year_totals_panel = () => declare_panel({
               <CircleProportionChart 
                 height={200}
                 is_money={false}
-                value={dept_emp_value}
-                name={info.subject.fancy_name}
-                totalValue={gov_emp_value}
-                totalName={text_maker("fps")}
+                child_value={dept_emp_value}
+                child_name={info.subject.fancy_name}
+                parent_value={gov_emp_value}
+                parent_name={text_maker("fps")}
               />
             </Col>
           </StdPanel>
