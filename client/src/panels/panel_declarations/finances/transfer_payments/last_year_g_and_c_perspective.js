@@ -56,19 +56,19 @@ export const declare_last_year_g_and_c_perspective_panel = () => declare_panel({
               <Col size={3} isGraph>
                 <CircleProportionChart 
                   height={200}
-                  value={dept_tp_exp_pa_last_year}
-                  name={text_maker("dept_transfer_payments", info)}
-                  totalValue={dept_exp_pa_last_year}
-                  totalName={text_maker("dept_expenditures", info)}
+                  child_value={dept_tp_exp_pa_last_year}
+                  child_name={text_maker("dept_transfer_payments", info)}
+                  parent_value={dept_exp_pa_last_year}
+                  parent_name={text_maker("dept_expenditures", info)}
                 />
               </Col>
               <Col size={3} isGraph>
                 <CircleProportionChart 
                   height={200}
-                  value={dept_tp_exp_pa_last_year}
-                  name={text_maker("dept_transfer_payments", info)}
-                  totalValue={gov_tp_exp_pa_last_year}
-                  totalName={text_maker("gov_transfer_payments")}
+                  child_value={dept_tp_exp_pa_last_year}
+                  child_name={text_maker("dept_transfer_payments", info)}
+                  parent_value={gov_tp_exp_pa_last_year}
+                  parent_name={text_maker("gov_transfer_payments")}
                 />
               </Col>
             </Fragment>

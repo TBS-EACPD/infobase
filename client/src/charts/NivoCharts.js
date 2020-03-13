@@ -660,55 +660,54 @@ export class CircleProportionChart extends React.Component{
       text_formatter,
       labelSkipWidth,
       height,
-      value,
-      name,
-      totalValue,
-      totalName,
+      child_value,
+      child_name,
+      parent_value,
+      parent_name,
     } = this.props;
     legends && (legends[0].symbolShape = fixedSymbolShape);
 
     const color_scale = d3.scaleOrdinal().range(newIBCategoryColors);
 
     const graph_data = {
-      id: totalName,
-      name: totalName,
-      value: totalValue-value,
-      color: color_scale(totalName),
+      id: parent_name,
+      name: parent_name,
+      value: parent_value-child_value,
+      color: color_scale(parent_name),
       isOuter: true,
       children: [
         {
-          id: name,
-          name: name,
-          value: value,
-          ratio: value/totalValue,
-          color: color_scale(name),
+          id: child_name,
+          name: child_name,
+          value: child_value,
+          ratio: child_value/parent_value,
+          color: color_scale(child_name),
         },
       ],
     };
 
     const tooltip_data = [
       {
-        id: totalName,
-        value: totalValue,
-        color: color_scale(totalName),
+        id: parent_name,
+        value: parent_value,
+        color: color_scale(parent_name),
       },
       {
-        id: name,
-        value: value,
-        color: color_scale(name),
+        id: child_name,
+        value: child_value,
+        color: color_scale(child_name),
       },
     ];
     
 
-    const title = <TM k="bubble_title" args={{outer: totalName, inner: name}}/>;
-
+    const title = <TM k="bubble_title" args={{outer: parent_name, inner: child_name}}/>;
 
     return (
       <Fragment>
         <div style={{height: height}}>
           <ResponsiveBubble
             root={ graph_data }
-            tooltip={ (d) => default_tooltip( true, tooltip_data, get_formatter(is_money, text_formatter, false), get_percent_formatter(value/totalValue, false), totalValue) }
+            tooltip={ (d) => default_tooltip( true, tooltip_data, get_formatter(is_money, text_formatter, false), get_percent_formatter(child_value/parent_value, false), parent_value) }
             identity="name"
             value="value"
             colorBy={d=>color_scale(d.name)}
