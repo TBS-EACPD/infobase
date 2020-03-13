@@ -73,7 +73,7 @@ export const declare_last_year_g_and_c_perspective_panel = () => declare_panel({
               <Col size={3} isGraph>
                 <LiquidFillGauge
                   height={200}
-                  title={subject.fancy_name}
+                  title={subject.display_name}
                   totalValue={dept_exp_pa_last_year}
                   value={dept_tp_exp_pa_last_year}
                   descriptiveTextValue={`${fmt_dept_tp_exp_pa_last_year} ${text_maker("of")} ${fmt_dept_exp_pa_last_year}`}

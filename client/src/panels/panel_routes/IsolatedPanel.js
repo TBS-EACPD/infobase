@@ -86,7 +86,7 @@ export default class IsolatedPanel extends React.Component {
           route_key={"panel"}
         >
           <div id="main" style={{marginTop: "10px"}}>
-            <h1>{subject.fancy_name}</h1>
+            <h1>{subject.display_name}</h1>
             {panel_key &&
               <PanelRenderer 
                 panel_key={panel_key}

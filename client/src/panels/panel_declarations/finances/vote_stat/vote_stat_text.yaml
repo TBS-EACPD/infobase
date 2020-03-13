@@ -68,7 +68,7 @@ dept_in_year_voted_stat_split_text:
   transform: [handlebars,markdown]
   en: |
    Of the **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** estimated expenditures for 
-   **{{subject.fancy_name}}**, **{{fmt_percentage1 dept_stat_percent_est_in_year}}** (or **{{fmt_compact1_written dept_stat_est_in_year}}**) 
+   **{{subject.display_name}}**, **{{fmt_percentage1 dept_stat_percent_est_in_year}}** (or **{{fmt_compact1_written dept_stat_est_in_year}}**) 
    will be funded from {{gl_tt "statutory authorities" "STAT"}} and **{{fmt_percentage1 dept_voted_percent_est_in_year}}** 
    (or **{{fmt_compact1_written dept_voted_est_in_year}}**) from {{gl_tt "voted authorities" "VOTED"}}.
 
@@ -110,7 +110,7 @@ gov_in_year_estimates_split_text:
 dept_in_year_estimates_split_text:
   transform: [handlebars,markdown]
   en: |
-   As of the {{est_in_year}} {{last_estimates}}, **{{subject.fancy_name}}**'s planned budgetary expenditures of **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** were presented in the 
+   As of the {{est_in_year}} {{last_estimates}}, **{{subject.display_name}}**'s planned budgetary expenditures of **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** were presented in the 
    following {{gl_tt "Estimates processes" "EST_PROC"}} and {{gl_tt "adjustments and transfers" "ADJUS"}}: 
    {{#each dept_in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
@@ -139,7 +139,7 @@ estimates_perspective_text:
   transform: [handlebars,markdown]
   en: |
    As of the {{est_in_year}} {{last_estimates}}, the government has presented Parliament with planned {{gl_tt "budgetary" 'BUD_EXP'}} expenditure estimates
-   totaling **{{fmt_compact1_written gov_tabled_est_in_year}}**. Of this amount, **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** (or **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}**) will be allocated to **{{subject.fancy_name}}**.
+   totaling **{{fmt_compact1_written gov_tabled_est_in_year}}**. Of this amount, **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** (or **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}**) will be allocated to **{{subject.display_name}}**.
 
    {{! only to be used near year end when a main estimates for the following year has been tabled}}
    {{#if false}}
@@ -150,7 +150,7 @@ estimates_perspective_text:
    {{/if}}
 
   fr: |
-   En date du {{last_estimates}} {{est_in_year}}, le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de **{{fmt_compact1_written gov_tabled_est_in_year}}**. De ce montant, **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** (ou **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}**) seront attribués à **{{subject.fancy_name}}**. 
+   En date du {{last_estimates}} {{est_in_year}}, le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de **{{fmt_compact1_written gov_tabled_est_in_year}}**. De ce montant, **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** (ou **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}**) seront attribués à **{{subject.display_name}}**. 
 
 
    {{! only to be used near year end when a main estimates for the following year has been tabled}}

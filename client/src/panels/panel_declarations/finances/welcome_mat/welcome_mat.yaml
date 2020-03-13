@@ -257,7 +257,7 @@ welcome_mat_fte_summary:
 dept1_welcome_mat_spending_summary:
   transform: [handlebars, markdown]
   en: |
-   Total spending for {{subject.fancy_name}}
+   Total spending for {{subject.display_name}}
    {{changed_by  exp_hist_change "fmt_percentage1"  }} between {{oldest_hist_spend_year}} and {{latest_hist_spend_year}} 
    and is
    {{will_change_by  exp_plan_change "fmt_percentage1"}} 
@@ -270,10 +270,10 @@ dept1_welcome_mat_spending_summary:
 dept2_welcome_mat_spending_summary:
   transform: [handlebars, markdown]
   en: |
-   In the last {{actual_hist_years_apart}} years, total spending for {{subject.fancy_name}}
+   In the last {{actual_hist_years_apart}} years, total spending for {{subject.display_name}}
    {{changed_by  exp_hist_change "fmt_percentage1"  }}.
   fr: |
-   Au cours des {{actual_hist_years_apart}} dernières années, les {{gl_tt "dépenses" "EXP"}} totales pour {{subject.fancy_name}}      
+   Au cours des {{actual_hist_years_apart}} dernières années, les {{gl_tt "dépenses" "EXP"}} totales pour {{subject.display_name}}      
    {{fr_changed_by  exp_hist_change  "f" "p" "fmt_percentage1"  }}.
 
 CR_exp_ftes_fte_summary:

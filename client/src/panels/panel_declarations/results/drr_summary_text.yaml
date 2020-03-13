@@ -13,7 +13,7 @@ drr_summary_text_intro:
     {{#if is_gov}}
       In **{{year}}**, **{{num_depts}}** organizations sought to achieve **{{fmt_big_int drr_results}}** results.
     {{else}}
-      In **{{year}}**, {{subject.fancy_name}} sought to achieve **{{fmt_big_int drr_results}}** results.
+      In **{{year}}**, {{subject.display_name}} sought to achieve **{{fmt_big_int drr_results}}** results.
     {{/if}}
     Progress towards meeting these results was measured using **{{fmt_big_int drr_total}}** indicators, and a {{gl_tt "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
     based on the measured outcome (actual result) of the indicator's target.
@@ -21,7 +21,7 @@ drr_summary_text_intro:
     {{#if is_gov}}
       En **{{year}}**, **{{num_depts}}** organisations ont cherché à obtenir **{{fmt_big_int drr_results}}** résultats.
     {{else}}
-      En **{{year}}**, {{subject.fancy_name}} a cherché à atteindre **{{fmt_big_int drr_results}}** résultats.
+      En **{{year}}**, {{subject.display_name}} a cherché à atteindre **{{fmt_big_int drr_results}}** résultats.
     {{/if}}
     Les progrès réalisés pour atteindre ces résultats ont été mesurés au moyen de **{{fmt_big_int drr_total}}** indicateurs, et un {{gl_tt "état du résultat" "RESULTS_STATUS"}}
     a été attribué à chaque indicateur correspondant au résultat obtenu pour la cible de l'indicateur.

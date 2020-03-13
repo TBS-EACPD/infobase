@@ -34,19 +34,19 @@ dept_historical_program_spending_text:
   transform: [handlebars,markdown]
   en: |
    Each organization is responsible for a number of {{gl_tt "Programs" "PROG"}}.
-   {{#if dept_prg_top2}} In {{pa_last_year}}, **{{subject.fancy_name}}** had **{{dept_prg_num}}** Programs.
+   {{#if dept_prg_top2}} In {{pa_last_year}}, **{{subject.display_name}}** had **{{dept_prg_num}}** Programs.
    During that fiscal year, the largest Program in terms of net spending was
    "**{{fmt_compact1_written dept_prg_top1}}**" (**{{fmt_compact1_written dept_prg_top1_amnt}}**)
    followed by "**{{fmt_compact1_written dept_prg_top2}}**" (**{{fmt_compact1_written dept_prg_top2_amnt}}**). In the past five years, 
    {{fmt_compact1_written dept_prg_top1}} spent on average {{fmt_compact1_written dept_prg_five_year_top_avg}}.
 
-   {{else}} In {{pa_last_year}}, **{{subject.fancy_name}}** had **{{dept_prg_num}}** Program. During that fiscal year, the largest Program was _**{{fmt_compact1_written dept_prg_top1}}**_
+   {{else}} In {{pa_last_year}}, **{{subject.display_name}}** had **{{dept_prg_num}}** Program. During that fiscal year, the largest Program was _**{{fmt_compact1_written dept_prg_top1}}**_
    (**{{fmt_compact1_written dept_prg_top1_amnt}}**). In the past five years, {{fmt_compact1_written dept_prg_top1}} spent on average {{fmt_compact1_written dept_prg_five_year_top_avg}}.
    {{/if}}
 
   fr: |
    Chaque organisation a la responsabilité d’un certain nombre de programmes.
-   {{#if dept_prg_top2}} En {{pa_last_year}}, **{{dept.fancy_name}}** comptait **{{dept_prg_num}}** programmes.
+   {{#if dept_prg_top2}} En {{pa_last_year}}, **{{dept.display_name}}** comptait **{{dept_prg_num}}** programmes.
    Durant cet exercice, le plus important programme en termes de dépenses nettes était « **{{fmt_compact1_written dept_prg_top1}}** » (**{{fmt_compact1_written dept_prg_top1_amnt}}**),
    suivi de « **{{fmt_compact1_written dept_prg_top2}}** » (**{{fmt_compact1_written dept_prg_top2_amnt}}**). Durant les cinq dernières années, {{fmt_compact1_written dept_prg_top1}} a dépensé en moyenne {{fmt_compact1_written dept_prg_five_year_top_avg}}.
    {{else}} En {{pa_last_year}}, **{{le_dept dept}}** comptait **{{dept_prg_num}}** programme. Durant cet exercice, le plus important programme était
