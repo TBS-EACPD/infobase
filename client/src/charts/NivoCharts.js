@@ -30,6 +30,17 @@ const get_formatter = (is_money, formatter, raw = true) => (
     ((value) => raw ? formatter(value, {raw: true}) : formatter(value))
 );
 
+// TODO: reorg this as part of PR #500
+const get_percent_formatter = (value, raw = true) => (
+  value < 0.001 ? (
+    raw ? 
+      (value) => formats.percentage2_raw(value) : 
+      (value) => formats.percentage2(value)
+  ) :
+    raw ? 
+      (value) => formats.percentage1_raw(value) : 
+      (value) => formats.percentage1(value)
+);
 
 const get_scale_bounds = (stacked, raw_data, zoomed) => {
   const min = _.min(raw_data);
@@ -63,23 +74,23 @@ const tooltip_content = (tooltip_item, formatter) => (
   </Fragment>
 );
 
-const smalldevice_percent_tooltip_content = (tooltip_item, formatter, total) => (
+const smalldevice_percent_tooltip_content = (tooltip_item, formatter, percent_formatter, total) => (
   <td>
     <div className="nivo-tooltip__content">{tooltip_item.id}</div>
     <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
-    <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}}/>
+    <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: percent_formatter(Math.abs(tooltip_item.value)/total)}}/>
   </td>
 );
 
-const percent_tooltip_content = (tooltip_item, formatter, total) => (
+const percent_tooltip_content = (tooltip_item, formatter, percent_formatter, total) => (
   <Fragment>
     <td className="nivo-tooltip__content">{tooltip_item.id}</td>
     <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
-    <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}}/>
+    <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: percent_formatter(Math.abs(tooltip_item.value)/total)}}/>
   </Fragment>
 );
 
-const default_tooltip = (tooltip_items, formatter, total) => ( // total indicates percent value tooltip being used
+const default_tooltip = (is_percent, tooltip_items, formatter, percent_formatter, total) => (
   <div style={{color: window.infobase_color_constants.textColor}}>
     <table className="nivo-tooltip">
       <tbody>
@@ -90,10 +101,10 @@ const default_tooltip = (tooltip_items, formatter, total) => ( // total indicate
                 <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.color}} />
               </td>
               <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
-                {total ? percent_tooltip_content(tooltip_item, formatter, total) : tooltip_content(tooltip_item, formatter) }
+                {is_percent ? percent_tooltip_content(tooltip_item, formatter, percent_formatter, total) : tooltip_content(tooltip_item, formatter) }
               </MediaQuery>
               <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
-                {total ? smalldevice_percent_tooltip_content(tooltip_item, formatter, total) : smalldevice_tooltip_content(tooltip_item, formatter)}
+                {is_percent ? smalldevice_percent_tooltip_content(tooltip_item, formatter, percent_formatter, total) : smalldevice_tooltip_content(tooltip_item, formatter)}
               </MediaQuery>
             </tr>
           )
@@ -120,8 +131,8 @@ const fixedSymbolShape = ({
 );
 
 const general_default_props = {
-  tooltip: (d, tooltip_formatter) => default_tooltip(d, tooltip_formatter),
-  percent_value_tooltip: (d, tooltip_formatter, total) => default_tooltip(d, tooltip_formatter, total),
+  tooltip: (d, tooltip_formatter) => default_tooltip(false, d, tooltip_formatter),
+  percent_value_tooltip: (d, tooltip_formatter, tooltip_percent_formatter, total) => default_tooltip(true, d, tooltip_formatter, tooltip_percent_formatter, total),
   is_money: true,
   remove_bottom_axis: false,
   remove_left_axis: false,
@@ -587,6 +598,7 @@ export class NivoResponsiveLine extends React.Component {
 NivoResponsiveLine.defaultProps = {
   ...general_default_props,
   tooltip: (slice, tooltip_formatter) => default_tooltip(
+    false,
     slice.data.map( 
       (d) => ({
         id: d.serie.id,
@@ -696,7 +708,7 @@ export class CircleProportionChart extends React.Component{
         <div style={{height: height}}>
           <ResponsiveBubble
             root={ graph_data }
-            tooltip={ (d) => default_tooltip( tooltip_data, get_formatter(is_money, text_formatter, false), totalValue) }
+            tooltip={ (d) => default_tooltip( true, tooltip_data, get_formatter(is_money, text_formatter, false), get_percent_formatter(value/totalValue, false), totalValue) }
             identity="name"
             value="value"
             colorBy={d=>color_scale(d.name)}
