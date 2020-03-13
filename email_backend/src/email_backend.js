@@ -143,6 +143,24 @@ const make_email_backend = (templates) => {
         );
         if (mail_sent_successfully){
           response.send("200");
+
+          //Sending info to MongoDB server
+          const mongoose = require('mongoose');
+
+          mongoose.connect('mongodb://localhost/Feedback');
+
+          mongoose.connection.once('open', function(){
+            console.log('Successfully Connected');
+          }).on('error', function(error){
+            console.log('Connection Error: ', error);
+          });
+
+
+          // template_name,
+          // completed_template,
+          // meta_data,
+
+          
         } else {
           const error_message = `Internal Server Error: mail was unable to send. ${ 
             sent_mail_info.err ? 
