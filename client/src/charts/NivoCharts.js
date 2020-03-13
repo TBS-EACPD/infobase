@@ -639,7 +639,7 @@ const BubbleNode = ({ node, style, handlers, theme }) => {
 };
 
 
-export class NivoResponsiveBubble extends React.Component{
+export class CircleProportionChart extends React.Component{
   render(){
     const{
       margin,
@@ -721,7 +721,7 @@ export class NivoResponsiveBubble extends React.Component{
     );
   }
 };
-NivoResponsiveBubble.defaultProps = {
+CircleProportionChart.defaultProps = {
   ...general_default_props,
   isInteractive: false,
   margin: { top: 15, right: 0, bottom: 15, left: 0 }
