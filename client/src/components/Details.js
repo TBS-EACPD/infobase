@@ -13,8 +13,6 @@ export class Details extends React.Component {
       summary_content,
       content,
       persist_content,
-      closed_drawer_icon,
-      opened_drawer_icon,
     } = this.props;
     const { isOpen } = this.state;
 
@@ -38,7 +36,7 @@ export class Details extends React.Component {
         aria-labelledby={label_id}
       >
         <span aria-hidden className="IBDetails__TogglerIcon">
-          { isOpen ? opened_drawer_icon : closed_drawer_icon }
+          { isOpen ? "▼" : "►" }
         </span>
         <span id={label_id}>
           { summary_content }
@@ -53,7 +51,3 @@ export class Details extends React.Component {
     </div>;
   }
 }
-Details.defaultProps = {
-  opened_drawer_icon: "▼",
-  closed_drawer_icon: "►",
-};

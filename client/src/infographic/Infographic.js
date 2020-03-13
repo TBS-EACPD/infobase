@@ -3,9 +3,7 @@ import { Redirect } from 'react-router';
 import './Infographic.scss';
 import text from "./Infographic.yaml";
 
-import { IconFilter } from '../icons/icons.js';
 import { Details } from '../components/Details.js';
-import { GraphLegend } from '../charts/declarative_charts.js';
 import { StandardRouteContainer } from '../core/NavComponents';
 import { Table } from '../core/TableClass.js';
 import { log_standard_event } from '../core/analytics.js';
@@ -18,10 +16,12 @@ import { bubble_defs } from './bubble_definitions.js';
 import { get_panels_for_subject } from '../panels/get_panels_for_subject/index.js';
 import { PanelRenderer } from '../panels/PanelRenderer.js';
 import { tables_for_panel, PanelRegistry } from '../panels/PanelRegistry.js';
+import { MultiColumnList } from '../components/misc_util_components.js';
 import {
   create_text_maker_component,
   SpinnerWrapper,
   AdvancedSearch,
+  CheckBox,
 } from '../components/index.js';
 
 import { infograph_href_template } from './infographic_link.js';
@@ -185,13 +185,7 @@ class InfoGraph_ extends React.Component {
         include_tables: false,
       }}
     />;
-    const filter_icon_props = {
-      color: window.infobase_color_constants.primaryColor,
-      title: text_maker("filter_panels"),
-      width: 15,
-      height: 15,
-      vertical_align: 5,
-    };
+
     const show_all_panels_bubble_type = !(active_bubble_id === "financial" || active_bubble_id === "people");
     const panel_renderers = !loading &&
       _.chain(panel_keys)
@@ -252,19 +246,6 @@ class InfoGraph_ extends React.Component {
           }
           { !show_all_panels_bubble_type &&
             <Details
-              closed_drawer_icon={
-                <IconFilter
-                  {...filter_icon_props}
-                  key="closed_filter"
-                />
-              }
-              opened_drawer_icon={
-                <IconFilter
-                  {...filter_icon_props}
-                  key="opened_filter"
-                  rotation={180}
-                />
-              }
               summary_content={
                 <div>
                   <TM style={{ fontSize: 16 }} k="filter_panels"/>
@@ -278,21 +259,24 @@ class InfoGraph_ extends React.Component {
               content={
                 <fieldset>
                   <legend> {text_maker("filter_panels_description")} </legend>
-                  <GraphLegend
-                    container_style={{ marginLeft: "20px" }}
-                    items={ _.map(panel_filter, (checked, dependency) => 
-                      ({
-                        id: dependency,
-                        label: Table.lookup(dependency).name,
-                        active: checked,
-                        color: window.infobase_color_constants.primaryColor,
-                      })
-                    )}
-                    onClick={ (evt) => {
-                      const copy_filter = _.clone(panel_filter);
-                      copy_filter[evt] = !panel_filter[evt];
-                      this.setState({ panel_filter: copy_filter });
-                    }}
+                  <MultiColumnList
+                    list_items={
+                      _.map(panel_filter, (checked, dependency) => (
+                        <CheckBox
+                          id={dependency}
+                          label={Table.lookup(dependency).name}
+                          active={checked}
+                          color={window.infobase_color_constants.primaryColor}
+                          container_style={{margin: "4px"}}
+                          onClick={ (evt) => {
+                            const copy_filter = _.clone(panel_filter);
+                            copy_filter[evt] = !panel_filter[evt];
+                            this.setState({ panel_filter: copy_filter });
+                          }}
+                        />
+                      ))
+                    }
+                    li_class={"removeBulletPoints"}
                   />
                 </fieldset>
               }
@@ -370,10 +354,11 @@ class InfoGraph_ extends React.Component {
     }).then( () => {
       if ( shallowEqualObjectsOverKeys({active_bubble_id, subject, level}, this.state, ['subject','active_bubble_id','level']) ){
         const panel_filter = _.chain(panel_keys)
-          .map(panel_key => tables_for_panel(panel_key, subject.level))
+          .map(panel_key =>
+            _.intersection( subject.table_ids, tables_for_panel(panel_key, subject.level) ))
           .flatten()
           .uniq()
-          .map(( table_id) => [table_id, true])
+          .map( (table_id) => [table_id, true] )
           .fromPairs()
           .value();
 
