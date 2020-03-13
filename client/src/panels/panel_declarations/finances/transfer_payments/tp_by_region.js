@@ -140,7 +140,7 @@ class TPMap extends React.Component {
         show_per_capita: false,
       };
 
-      const should_tab_be_disabled = _.every(data_tppc, _.isEmpty);
+      const should_per_capita_tab_be_disabled = _.every(data_tppc, _.isEmpty);
       
       //TP PER CAPITA VERSION
       const current_year_data_tppc = _.last(data_tppc);
@@ -175,18 +175,15 @@ class TPMap extends React.Component {
         >
           <Col size={12} isText>
             <TabbedContent 
-              tab_keys={["show_tp", "show_tp_per_capita"]}
-              tab_labels={{
-                show_tp: text_maker("show_tp"),
-                show_tp_per_capita: text_maker("show_tp_per_capita"),
-              }}
-              tab_is_disabled={{
-                show_tp: false,
-                show_tp_per_capita: should_tab_be_disabled,
-              }}
+              tab_keys={["tp", "tp_per_capita"]}
+              disabled_tabs={_.compact([should_per_capita_tab_be_disabled && "tp_per_capita"])}
               disabled_message={text_maker("tp_no_data_hover_label")}
+              tab_labels={{
+                tp: text_maker("show_tp"),
+                tp_per_capita: text_maker("show_tp_per_capita"),
+              }}
               tab_pane_contents={{
-                show_tp: (
+                tp: (
                   <div id={"tp_tab_pane"}>
                     <TM k="tp_by_region_text" args={text_args_tp} />
                     {!window.is_a11y_mode && 
@@ -202,7 +199,7 @@ class TPMap extends React.Component {
                     <div className='clearfix'></div>
                   </div>
                 ), 
-                show_tp_per_capita: (
+                tp_per_capita: (
                   <div id={"tp_per_capita_tab_pane"}>
                     <TM k="tp_by_region_text" args={text_args_tppc} />
                     {!window.is_a11y_mode && 
