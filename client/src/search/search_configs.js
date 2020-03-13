@@ -69,7 +69,7 @@ const LimitedDataDisplay = (search, name) => (
 );
 const org_templates = {
   header_function: () => Dept.plural,
-  name_function: org => org.applied_title ? `${org.name} (${org.applied_title})` : org.name,
+  name_function: org => org.applied_title ? `${org.applied_title} (${_.toLower( trivial_text_maker('legal_name') )}: ${org.name})` : org.fancy_name,
   menu_content_function: function(org, search){
     if (org.level !== "gov" && org.old_name){
       const reg_exps = query_to_reg_exps(search);
@@ -198,7 +198,7 @@ const glossary_lite = {
 const gocos = {
   config_name: 'gocos',
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.GOCO.name}`,
-  name_function: _.property('name'),
+  name_function: _.property('fancy_name'),
   get_data: () => _.chain(Tag.get_all())
     .filter( (tag) => tag.root.id === "GOCO" )
     .filter('is_lowest_level_tag')
@@ -209,7 +209,7 @@ const gocos = {
 const how_we_help = {
   config_name: 'how_we_help',
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.HWH.name}`,
-  name_function: _.property('name'),
+  name_function: _.property('fancy_name'),
   get_data: () => _.chain(Tag.get_all())
     .filter( tag => tag.root.id === "HWH")
     .filter('is_lowest_level_tag')
@@ -220,7 +220,7 @@ const how_we_help = {
 const who_we_help = {
   config_name: 'who_we_help',
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.WWH.name}`,
-  name_function: _.property('name'),
+  name_function: _.property('fancy_name'),
   get_data: () => _.chain(Tag.get_all())
     .filter( tag => tag.root.id === "WWH")
     .filter('is_lowest_level_tag')
@@ -231,7 +231,7 @@ const who_we_help = {
 const horizontal_initiative = {
   config_name: 'horizontal_initiative',
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.HI.name}`,
-  name_function: _.property('name'),
+  name_function: _.property('fancy_name'),
   get_data: () => _.chain(Tag.get_all())
     .filter( tag => tag.root.id === "HI")
     .filter('is_lowest_level_tag')
@@ -262,15 +262,18 @@ const datasets = {
   filter: (query, datum) => memoized_re_matchers(query, ['name', 'flat_tag_titles'], "datasets")(datum),
 };
 
+const program_or_crso_search_display_name = ({is_internal_service, fancy_name, dept}) => is_internal_service ?
+  fancy_name :
+  `${fancy_name} - ${dept.fancy_name}`;
 
 const programs = {
   config_name: 'programs',
   header_function: () => trivial_text_maker('programs'),
-  name_function: program => `${program.name} (${program.dept.fancy_name})`,
+  name_function: program_or_crso_search_display_name,
   get_data: () => Program.get_all(),
   filter: (query, datum) => memoized_re_matchers(query, ['name', 'old_name', 'activity_code'], "programs")(datum),
   menu_content_function: function(program, search){
-    let display_name = this.name_function(program);
+    const name = this.name_function(program);
 
     if (program.old_name){
       const reg_exps = query_to_reg_exps(search);
@@ -279,26 +282,31 @@ const programs = {
       const matched_on_old_name = _.every( reg_exps, re => _.deburr(program.old_name).match(re) );
 
       if ( matched_on_old_name && !matched_on_current_name){
-        display_name = `${display_name} (${trivial_text_maker("previously_named")}: ${program.old_name})`;
-      }
-    }
-
-    if ( program.is_dead ){
-      return (
-        <span className="search-grayed-out-hint">
+        return (
           <InfoBaseHighlighter 
-            search={search} 
-            content={`${display_name} (${trivial_text_maker("non_active_program")})`} 
+            search={search}
+            content={`${name} (${trivial_text_maker("previously_named")}: ${program.old_name})`}
           />
-        </span>
-      );
+        );
+      }
     } else {
-      return (
-        <InfoBaseHighlighter 
-          search={search}
-          content={display_name}
-        />
-      );
+      if ( program.is_dead ){
+        return (
+          <span className="search-grayed-out-hint">
+            <InfoBaseHighlighter 
+              search={search} 
+              content={`${name} (${trivial_text_maker("non_active_program")})`} 
+            />
+          </span>
+        );
+      } else {
+        return (
+          <InfoBaseHighlighter 
+            search={search}
+            content={name}
+          />
+        );
+      }
     }
   },
 };
@@ -307,7 +315,7 @@ const programs = {
 const crsos = {
   config_name: 'crsos',
   header_function: () => trivial_text_maker('core_resps'),
-  name_function: crso => `${crso.name} (${crso.dept.fancy_name})`,
+  name_function: program_or_crso_search_display_name,
   get_data: () => _.filter(CRSO.get_all(), 'is_cr'),
   filter: (query, datum) => memoized_re_matchers(query, ['name', 'activity_code'], "crsos")(datum),
 };
