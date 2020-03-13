@@ -18,6 +18,9 @@ import {
 
 import { throttle_requests_by_client } from './throttle_requests_by_client.js';
 
+// import { new_problem } from 'problem_mongoose.js';
+// const new_problem = require('problem_mongoose');
+
 const get_request_content = (request) => (!_.isEmpty(request.body) && request.body) || (!_.isEmpty(request.query) && request.query);
 
 const log_email_request = (request, log_message) => {
@@ -146,19 +149,30 @@ const make_email_backend = (templates) => {
 
           //Sending info to MongoDB server
           const mongoose = require('mongoose');
+          const assert = require('assert');
 
           mongoose.connect('mongodb://localhost/Feedback');
 
           mongoose.connection.once('open', function(){
             console.log('Successfully Connected');
+
+            const Schema = mongoose.Schema;
+            const problem_schema = new Schema({
+            });            
+            const new_problem = mongoose.model('Problems', problem_schema);
+
+            const problem_to_send = new new_problem({
+              template_name,
+              completed_template,
+            });
+
+            problem_to_send.save().then(function(){
+              assert(problem_to_send.isNew() === false);
+            });
+
           }).on('error', function(error){
             console.log('Connection Error: ', error);
           });
-
-
-          // template_name,
-          // completed_template,
-          // meta_data,
 
           
         } else {
