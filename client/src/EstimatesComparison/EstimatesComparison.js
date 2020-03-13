@@ -180,7 +180,7 @@ const get_non_col_content = ({node}) => {
       { subject &&
         <div className='ExplorerNode__BRLinkContainer'>
           <a href={infograph_href_template(subject)}> 
-            <TM k="infograph_for" args={{subject}} />
+            <TM k="infographic_for" args={{subject}} />
           </a>
         </div>
       }

@@ -374,22 +374,6 @@ Handlebars.registerHelper("lang",function(context){
   }
 });
 
-function subject_name(subject){
-
-  if (subject.is("dept")){
-    return (
-        !_.isEmpty(subject.applied_title) ?
-        subject.applied_title :
-        subject.name
-    );
-
-  } else {
-    return subject.name;
-  }
-};
-
-Handlebars.registerHelper('subj_name', subject_name);
-
 Handlebars.registerHelper('ce_crso', crso => {
   if(crso.is_cr){
     return `cette ${trivial_text_maker('core_resp')}`;
@@ -413,22 +397,6 @@ Handlebars.registerHelper('du_crso', crso => {
     return `du ${trivial_text_maker('strategic_outcome')}`;
   }
 });
-
-// looks up the name for the department if passed
-// a department object
-Handlebars.registerHelper("dept", context => {
-  if(window.is_dev){
-    console.error('"dept" handlebars helper is deprecated, pass the subject OBJECT to the helper "subj_name" instead');
-  }
-
-  if(context.constructor){
-    return subject_name(context);
-  }
-  else {
-    return Subject.Dept.lookup(context).applied_title;
-  }
-});
-
 
 // looks up the name for the department if passed
 // a department object
@@ -565,7 +533,7 @@ Handlebars.registerHelper("gl_title",function(key){
 
 Handlebars.registerHelper("infograph_link",function(subject){
   const href = infograph_href_template(subject); 
-  const str = `<a href="${href}" title="${trivial_text_maker('infograph_for', { subject })}">${subject.fancy_name}</a>`;
+  const str = `<a href="${href}" title="${trivial_text_maker('infographic_for', { subject })}">${subject.fancy_name}</a>`;
   return new Handlebars.SafeString(str);
 });
 

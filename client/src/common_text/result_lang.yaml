@@ -75,8 +75,8 @@ no_indicators_for_this_result:
 
 no_results_for_this_subject:
   transform: [handlebars, markdown]
-  en: There are no available results for **{{subj_name subject}}**
-  fr: Aucun résultat n'est disponible pour **{{subj_name subject}}**
+  en: There are no available results for **{{subject.fancy_name}}**
+  fr: Aucun résultat n'est disponible pour **{{subject.fancy_name}}**
 
 targets_to_achieve_other:
   en: Date not specified by organization

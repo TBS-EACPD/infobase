@@ -28,13 +28,13 @@ employee_prov_title:
 dept_employee_prov_text:
   transform: [handlebars,markdown]
   en: |
-   From **{{fmt_big_int dept_head_count_region_first_active_year}}** to **{{fmt_big_int dept_head_count_region_last_active_year}}**, the largest average share of **{{subj_name subject}}** employees (**{{fmt_percentage1 dept_head_count_region_top_avg_percent}}**) worked in **{{fmt_big_int dept_head_count_region_top}}**.
+   From **{{fmt_big_int dept_head_count_region_first_active_year}}** to **{{fmt_big_int dept_head_count_region_last_active_year}}**, the largest average share of **{{subject.fancy_name}}** employees (**{{fmt_percentage1 dept_head_count_region_top_avg_percent}}**) worked in **{{fmt_big_int dept_head_count_region_top}}**.
 
 
    * The **National Capital Region (NCR)** includes employees working in both Ottawa (Ontario) and Gatineau (Quebec).
    
 
-   {{#unless is_a11y_mode}}* Hover over or tap a province or territory in the map below to see the number of **{{subj_name subject}}** employees working in that region over the last five snapshots. Note that the scale may change to accommodate the data displayed. {{/unless}}
+   {{#unless is_a11y_mode}}* Hover over or tap a province or territory in the map below to see the number of **{{subject.fancy_name}}** employees working in that region over the last five snapshots. Note that the scale may change to accommodate the data displayed. {{/unless}}
    
 
   fr: |

@@ -279,6 +279,9 @@ open_data_datasets:
 link:
   en: Link
   fr: Lien
+the_goc:
+  en: the Government of Canada
+  fr: le gouvernement du Canada
 org:
   en: Organization
   fr: Organisation
@@ -995,12 +998,6 @@ actual_resources:
   fr: Resources utilisées en {{year}}
 
 
-infograph_for:
-  transform: [handlebars]
-  en: Infographic for {{subj_name subject}}
-  fr: Infographie pour {{subj_name subject}}
-
-
 budget_measure:
   en: Budget Measure
   fr: Mesure budgétaire
@@ -1024,8 +1021,8 @@ you_are_here:
 
 infographic_for:
   transform: [handlebars]
-  en: Infographic for {{name}}
-  fr: Infographie pour {{name}}
+  en: Infographic for {{subject.fancy_name}}
+  fr: Infographie pour {{subject.fancy_name}}
 
 
 ##################################
