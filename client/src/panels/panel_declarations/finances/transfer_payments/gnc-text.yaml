@@ -18,10 +18,10 @@ last_year_g_and_c_perspective_title:
 dept_last_year_g_and_c_perspective_text:
   transform: [handlebars,markdown]
   en: |
-   In {{pa_last_year}}, **{{subj_name subject}}** spent **{{fmt_compact1_written dept_tp_exp_pa_last_year}}** (or **{{fmt_smart_percentage1 dept_tp_exp_ratio_pa_last_year}}** of total spending) on transfer payments. 
-   Transfer payment made by **{{subj_name subject}}** accounted for **{{fmt_smart_percentage1 dept_tp_exp_ratio_gov_pa_last_year}}** of the total of **{{fmt_compact1_written gov_tp_exp_pa_last_year}}** spent on transfer payments by the government as a whole.
+   In {{pa_last_year}}, **{{subject.fancy_name}}** spent **{{fmt_compact1_written dept_tp_exp_pa_last_year}}** (or **{{fmt_smart_percentage1 dept_tp_exp_ratio_pa_last_year}}** of total spending) on transfer payments. 
+   Transfer payment made by **{{subject.fancy_name}}** accounted for **{{fmt_smart_percentage1 dept_tp_exp_ratio_gov_pa_last_year}}** of the total of **{{fmt_compact1_written gov_tp_exp_pa_last_year}}** spent on transfer payments by the government as a whole.
   fr: |
-   En {{pa_last_year}}, **{{subj_name subject}}** a dépensé **{{fmt_compact1_written dept_tp_exp_pa_last_year}}** (ou **{{fmt_smart_percentage1 dept_tp_exp_ratio_pa_last_year}}** des dépenses totales) en paiements de transfert. 
+   En {{pa_last_year}}, **{{subject.fancy_name}}** a dépensé **{{fmt_compact1_written dept_tp_exp_pa_last_year}}** (ou **{{fmt_smart_percentage1 dept_tp_exp_ratio_pa_last_year}}** des dépenses totales) en paiements de transfert. 
    Ce montant représentait **{{fmt_smart_percentage1 dept_tp_exp_ratio_gov_pa_last_year}}** des dépenses totales du gouvernement en paiements de transfert de **{{fmt_compact1_written gov_tp_exp_pa_last_year}}**.
 
 gov_historical_g_and_c_text:
@@ -58,7 +58,7 @@ historical_g_and_c_detailed_title:
 dept_historical_g_and_c_text:
   transform: [handlebars,markdown]
   en: |
-   Over the last five years ({{pa_last_year_5}} to {{pa_last_year}}), **{{subj_name subject}}** spent an average of **{{fmt_compact1_written dept_tp_exp_average}}** in {{gl_tt "Transfer Payments" "TP"}} per year.
+   Over the last five years ({{pa_last_year_5}} to {{pa_last_year}}), **{{subject.fancy_name}}** spent an average of **{{fmt_compact1_written dept_tp_exp_average}}** in {{gl_tt "Transfer Payments" "TP"}} per year.
 
    During this same period, **{{fmt_compact1_written dept_tp_type_exp_top}}** payments accounted for 
    the largest share of transfer payments with an average of **{{fmt_compact1_written dept_tp_type_exp_top_avg}}** in spending per year. 
@@ -72,7 +72,7 @@ dept_historical_g_and_c_text:
    de **{{fmt_compact1_written dept_tp_type_exp_top_avg}}**.
 
 
-   De {{pa_last_year_5}} à {{pa_last_year}}, le plus important paiement de transfert pour **{{subj_name subject}}** était constitué de **{{fmt_compact1_written dept_tp_exp_top}}**, avec des dépenses annuelles moyennes 
+   De {{pa_last_year_5}} à {{pa_last_year}}, le plus important paiement de transfert pour **{{subject.fancy_name}}** était constitué de **{{fmt_compact1_written dept_tp_exp_top}}**, avec des dépenses annuelles moyennes 
    de **{{fmt_compact1_written dept_tp_exp_top_avg}}**.
 historical_g_and_c_custom_new_row:
   transform: [handlebars]

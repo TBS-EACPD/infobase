@@ -38,7 +38,7 @@ const Gov = {
   description: gov_name,
   title: gov_name,
   legal_name: gov_name,
-  fancy_name: gov_name,
+  fancy_name: trivial_text_maker('the_goc'),
 };
 
 
@@ -59,6 +59,9 @@ const Ministry = class Ministry extends static_subject_store(){
     this.description = "";
     this.orgs = [];
   }
+  get fancy_name(){
+    return this.name;
+  }
 };
 
 const Dept = class Dept extends static_subject_store_with_API_data(){
@@ -71,7 +74,7 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
   }
   static get type_name() { return 'dept'; }
   static get singular(){ return trivial_text_maker("org"); }
-  static get plural(){ return trivial_text_maker("orgs");}
+  static get plural(){ return trivial_text_maker("orgs"); }
   static depts_with_data(){ 
     //lazy initialized
     if(!this._depts_with_data){ 
@@ -375,6 +378,9 @@ const InstForm = class InstForm extends static_subject_store(){
       children_forms: [],
       orgs: [],
     });
+  }
+  get fancy_name(){
+    return this.name;
   }
   singular(){
     throw "TODO";

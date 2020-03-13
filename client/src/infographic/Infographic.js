@@ -25,16 +25,6 @@ const sub_app_name = "infographic_org";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const name_for_title = subject => {
-  if(subject.level === 'program' && !_.isEmpty(subject.dept.abbr)){
-    return `${subject.name} (${subject.dept.abbr})`;
-  } else if(subject.level === 'org'){
-    return subject.legal_name;
-  } else {
-    return subject.name;
-  }
-};
-
 class AnalyticsSynchronizer extends React.Component {
   render(){ return null; }
   componentDidMount(){ this._logAnalytics(); }
@@ -344,7 +334,7 @@ const Infographic = ({
     return <Redirect to={infograph_href_template(subject_parent, bubble_id, '/')} />;
   }
   
-  const title = text_maker("infographic_for", { name: name_for_title(subject) });
+  const title = text_maker("infographic_for", {subject});
   const desc_key = {
     financial: "finance_infograph_desc_meta_attr",
     people: "ppl_infograph_desc_meta_attr",

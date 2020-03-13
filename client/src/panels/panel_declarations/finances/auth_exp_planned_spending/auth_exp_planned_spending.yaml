@@ -19,11 +19,11 @@ dept_gap_explain_body:
   en: |
     Actual expenditures for all organizations are sourced from the {{gl_tt "Public Accounts of Canada" "PA"}}. Planned expenditures for most organizations are sourced from {{gl_tt "Departmental Plans" "DP"}}.
 
-    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in {{subj_name dept}}’s latest Departmental Plan, but the {{gap_year}} {{gl_tt "Public Accounts of Canada" "PA"}} are not yet available.
+    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in {{dept.fancy_name}}’s latest Departmental Plan, but the {{gap_year}} {{gl_tt "Public Accounts of Canada" "PA"}} are not yet available.
   fr: |
     Les dépenses réelles de toutes les organisations correspondent à celle publiées dans les {{gl_tt "Comptes publics du Canada" "PA"}}. Les dépenses prévues pour la plupart des organisations proviennent des {{gl_tt "plans ministériels" "DP"}}.
 
-    Les dépenses prévues pour {{est_in_year}} à {{last_planned_year}} ont été publiés dans le plan ministériel de {{subj_name dept}} le plus récent, mais les {{gl_tt "Comptes publics du Canada" "PA"}} de {{gap_year}} ne sont pas encore disponibles.
+    Les dépenses prévues pour {{est_in_year}} à {{last_planned_year}} ont été publiés dans le plan ministériel de {{dept.fancy_name}} le plus récent, mais les {{gl_tt "Comptes publics du Canada" "PA"}} de {{gap_year}} ne sont pas encore disponibles.
 
 auth_exp_planned_spending_title:
   transform: [handlebars]
@@ -57,7 +57,7 @@ gov_auth_exp_planned_spending_body:
 dept_auth_exp_planned_spending_body:
   transform: [handlebars, markdown]
   en: |
-    Over the last 5 years, **{{subj_name dept}}** has received average {{gl_tt "authorities" "AUTH"}} of **{{fmt_compact2_written dept_five_year_auth_average}}** while
+    Over the last 5 years, **{{dept.fancy_name}}** has received average {{gl_tt "authorities" "AUTH"}} of **{{fmt_compact2_written dept_five_year_auth_average}}** while
     {{gl_tt "actually spending" "BUD_EXP"}} an average of **{{fmt_compact2_written dept_five_year_exp_average}}**.
     
     In **{{last_history_year}}**, **{{fmt_compact1_written last_year_lapse_amt}}** or **{{fmt_percentage1 last_year_lapse_pct}}** of approved
@@ -65,7 +65,7 @@ dept_auth_exp_planned_spending_body:
     
     {{#if subject.has_planned_spending}}Spending is {{will_change_to plan_change ""}} **{{fmt_compact2_written dept_exp_planning_year_3}}** by {{last_planned_year}}. {{/if}}
   fr: |
-    Au cours des cinq dernières années, **{{subj_name dept}}** a reçu des {{gl_tt "autorisations" "AUTH"}} moyennes de **{{fmt_compact1_written dept_five_year_auth_average}}**
+    Au cours des cinq dernières années, **{{dept.fancy_name}}** a reçu des {{gl_tt "autorisations" "AUTH"}} moyennes de **{{fmt_compact1_written dept_five_year_auth_average}}**
     alors que les {{gl_tt "dépenses" "BUD_EXP"}} réelles s'élevaient en moyenne à **{{fmt_compact1_written dept_five_year_exp_average}}**.
     
     En {{last_history_year}}, **{{fmt_compact1_written last_year_lapse_amt}}** ou **{{fmt_percentage1 hist_avg_tot_pct}}** des autorisations approuvées étaient
