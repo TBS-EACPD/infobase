@@ -150,24 +150,22 @@ const make_email_backend = (templates) => {
           //Sending info to MongoDB server
           const mongoose = require('mongoose');
           const assert = require('assert');
+          const Schema = mongoose.Schema;
 
           mongoose.connect('mongodb://localhost/Feedback');
 
           mongoose.connection.once('open', function(){
             console.log('Successfully Connected');
 
-            const Schema = mongoose.Schema;
-            const problem_schema = new Schema({
-            });            
-            const new_problem = mongoose.model('Problems', problem_schema);
 
-            const problem_to_send = new new_problem({
-              template_name,
-              completed_template,
-            });
+            var problem_schema = new Schema({}, { strict: false });
+            var new_problem = mongoose.model('Problems', problem_schema);
+            var problem_to_send = new new_problem({ template: template_name, info: completed_template });
+            problem_to_send.save();
 
             problem_to_send.save().then(function(){
               assert(problem_to_send.isNew() === false);
+              console.log('Send Successful');
             });
 
           }).on('error', function(error){
