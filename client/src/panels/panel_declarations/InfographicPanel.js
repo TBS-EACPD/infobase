@@ -176,16 +176,21 @@ Col.propTypes = {
   isGraph: PropTypes.bool,
 };
 
+const flatten_and_filter_children = (children) => _.chain(children)
+  .thru( (children) => _.isArray(children) ? children : [children] )
+  .flatMap( child => {
+    if ( child.type && child.type === Fragment ){
+      return child.props.children;
+    } else {
+      return child;
+    }
+  })
+  .filter( child => child && child.type )
+  .value();
+
 const StdPanel = ({ title, sources, footnotes, glossary_keys, children, containerAlign }) => {
   const mapped_children = _.chain(children)
-    .flatMap( child => {
-      if ( child.type && child.type === Fragment ){
-        return child.props.children;
-      } else {
-        return child;
-      }
-    })
-    .filter( child => child && child.type )
+    .thru( flatten_and_filter_children )
     .map( ({ props }, ix) => {
       const { size, isText, isGraph, extraClasses, passedRef } = props;
      
@@ -221,16 +226,7 @@ StdPanel.propTypes = {
     const { children } = props;
     
     const are_children_valid = (children) => {
-      const filtered_and_flattened_children = _.chain(children)
-        .flatMap( child => {
-          if ( child.type && child.type === Fragment ){
-            return child.props.children;
-          } else {
-            return child;
-          }
-        })
-        .filter(_.identity)
-        .value();
+      const filtered_and_flattened_children = flatten_and_filter_children(children);
 
       return _.every(filtered_and_flattened_children, {type: Col});
     };
