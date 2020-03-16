@@ -93,7 +93,7 @@ const default_tooltip = (tooltip_items, formatter, total) => ( // total indicate
   </div>
 );
 
-const fixedSymbolShape = ({
+const fixed_symbol_shape = ({
   x, y, size, fill, borderWidth, borderColor,
 }) => (
   <rect
@@ -278,7 +278,15 @@ export class NivoResponsivePie extends React.Component{
       disable_table_view,
       display_horizontal,
     } = this.props;
-    legends && (legends[0].symbolShape = fixedSymbolShape);
+
+    const IE_fixed_legends = legends ? (
+      _.map(legends,
+        legend => _.chain(legend)
+          .clone()
+          .assign({symbolShape: fixed_symbol_shape})
+          .value() )
+      ) :
+      undefined;
 
     const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
     const colorBy = d=>color_scale(d.label);
@@ -347,9 +355,9 @@ export class NivoResponsivePie extends React.Component{
             startAngle,
             enableSlicesLabels,
             enableRadialLabels,
-            legends,
             colorBy,
           }}
+          legends={ IE_fixed_legends }
           tooltip={ (data) => {
             const data_with_original_values = {
               ...data,
@@ -461,7 +469,14 @@ export class NivoResponsiveBar extends React.Component{
       table_first_column_name,
     } = this.props;
 
-    legends && (legends[0].symbolShape = fixedSymbolShape);
+    const IE_fixed_legends = legends ? (
+      _.map(legends,
+        legend => _.chain(legend)
+          .clone()
+          .assign({symbolShape: fixed_symbol_shape})
+          .value() )
+      ) :
+      undefined;
   
     const table = !disable_table_view && (
       custom_table || bar_table(data, keys, indexBy, get_formatter(is_money, text_formatter, true, true), table_first_column_name)
@@ -481,7 +496,6 @@ export class NivoResponsiveBar extends React.Component{
             theme, 
             indexBy, 
             enableLabel, 
-            legends,
             isInteractive,
             motion_damping,
             motion_stiffness,
@@ -495,7 +509,8 @@ export class NivoResponsiveBar extends React.Component{
             labelTextColor,
             borderWidth,
           }}
-          keys = {_.union([''],keys)}
+          legends={ IE_fixed_legends }
+          keys={_.union([''],keys)}
           labelFormat={_.isUndefined(label_format) ? null : label_format}
           tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
           axisBottom={remove_bottom_axis ? null : bttm_axis}
@@ -571,8 +586,15 @@ export class NivoResponsiveHBar extends React.Component{
       disable_table_view,
       table_first_column_name,
     } = this.props;
-    legends && (legends[0].symbolShape = fixedSymbolShape);
-
+    
+    const IE_fixed_legends = legends ? (
+      _.map(legends,
+        legend => _.chain(legend)
+          .clone()
+          .assign({symbolShape: fixed_symbol_shape})
+          .value() )
+      ) :
+      undefined;
 
     const table = !disable_table_view && bar_table(data, keys, indexBy, get_formatter(is_money, text_formatter, true, true), table_first_column_name);
 
@@ -592,11 +614,11 @@ export class NivoResponsiveHBar extends React.Component{
           indexBy, 
           enableLabel, 
           label,
-          legends,
           isInteractive,
           labelSkipWidth,
           markers,
         }}
+        legends = { IE_fixed_legends }
         layout = 'horizontal'
         keys = {_.union([''],keys)}
         labelFormat={_.isUndefined(label_format) ? null : label_format}
@@ -701,8 +723,15 @@ export class NivoResponsiveLine extends React.Component {
       y_scale_zoomed,
     } = this.state;
 
-    legends && (legends[0].symbolShape = fixedSymbolShape);
-
+    const IE_fixed_legends = legends ? (
+      _.map(legends,
+        legend => _.chain(legend)
+          .clone()
+          .assign({symbolShape: fixed_symbol_shape})
+          .value() )
+      ) :
+      undefined;
+    
     const table_data = _.map(data, row => ({
       display_values: _.chain(row.data)
         .map(d => [d.x,get_formatter(is_money, text_formatter, true, true)(d.y)])
@@ -772,9 +801,9 @@ export class NivoResponsiveLine extends React.Component {
             theme,
             enableDotLabel,
             markers,
-            legends,
             layers,
           }}
+          legends={ IE_fixed_legends }
           tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
           yScale={{
             stacked: !!stacked,
