@@ -91,7 +91,7 @@ class CanadaGraphBarLegend extends React.Component {
 }
 
 
-class CanadaGraph extends React.Component {
+class CanadaGraph extends React.PureComponent {
   constructor(){
     super();
     this.graph_area = React.createRef();
