@@ -1,4 +1,7 @@
 import text from './tp_by_region.yaml';
+
+import { Fragment } from 'react';
+
 import {
   formats,
   run_template,
@@ -10,6 +13,7 @@ import {
   Col,
   declarative_charts,
 } from "../../shared.js";
+
 import { Canada } from '../../../../charts/canada/index.js';
 import { SpinnerWrapper, TabbedContent } from '../../../../components/index.js';
 import { get_static_url, make_request } from '../../../../request_utils.js';
@@ -187,7 +191,7 @@ class TPMap extends React.Component {
               }}
               tab_pane_contents={{
                 tp: (
-                  <div id={"tp_tab_pane"}>
+                  <Fragment>
                     <TM k="tp_by_region_text" args={text_args_tp} />
                     {!window.is_a11y_mode && 
                       <Canada
@@ -199,11 +203,10 @@ class TPMap extends React.Component {
                         }}
                       />
                     }
-                    <div className='clearfix'></div>
-                  </div>
+                  </Fragment>
                 ), 
                 tp_per_capita: (
-                  <div id={"tp_per_capita_tab_pane"}>
+                  <Fragment>
                     <TM k="tp_by_region_text" args={text_args_tppc} />
                     {!window.is_a11y_mode && 
                       <Canada
@@ -215,8 +218,7 @@ class TPMap extends React.Component {
                         }}
                       />
                     }
-                    <div className='clearfix'></div>
-                  </div>
+                  </Fragment>
                 ),
               }}
             />
