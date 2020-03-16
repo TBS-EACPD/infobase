@@ -45,7 +45,33 @@ const group_prov_data_by_year = (data_by_prov) => _.chain(data_by_prov)
   .map( _.fromPairs )
   .value();
 
-const prepare_data_for_a11y_table = (data) => _.chain(data)
+const get_common_text_args = (transfer_payment_data) => {
+
+};
+
+const get_color_scale = (data) => _.chain(data)
+  .last()
+  .values()
+  .max()
+  .thru(
+    (last_year_max) => d3.scaleLinear()
+      .domain([0, last_year_max])
+      .range([0.2, 1])
+  )
+  .value();
+const TransferPaymentsByRegionGraph = ({data}) => (
+  <Canada
+    graph_args={{
+      data,
+      color_scale: get_color_scale(data),
+      years: std_years,
+      formatter: formatter,
+    }}
+  />
+);
+
+
+const format_data_for_a11y_table = (data) => _.chain(data)
   .flatMap( _.keys )
   .uniq()
   .map( (prov_code) => {
@@ -61,6 +87,21 @@ const prepare_data_for_a11y_table = (data) => _.chain(data)
   } )
   .filter('data')
   .value();
+const TransferPaymentsByRegionA11yTable = ({data}) => (
+  <A11YTable
+    label_col_header={ text_maker('geo_region') }
+    data_col_headers={ _.map(std_years, run_template) }
+    data={ format_data_for_a11y_table(data) }
+  />
+);
+
+const TransferPaymentsByRegionContent = ({data}) => !window.is_a11y_mode ?
+  <TransferPaymentsByRegionGraph
+    data={data}
+  /> :
+  <TransferPaymentsByRegionA11yTable
+    data={data}
+  />;
 
 
 class TPMap extends React.Component {
@@ -99,11 +140,11 @@ class TPMap extends React.Component {
         },
       } = calculations;
 
-      const transfer_payments_data_by_prov = transfer_payments_table.prov_code(
+      const transfer_payments_by_prov = transfer_payments_table.prov_code(
         std_years,
         subject.level === 'dept' && subject.id
       );
-      const per_capita_data_by_prov = _.chain(transfer_payments_data_by_prov)
+      const per_capita_by_prov = _.chain(transfer_payments_by_prov)
         .omitBy( (values, prov_code) => _.isUndefined(population_data[prov_code]) )
         .mapValues(
           (transfer_payment_values, prov_code) => _.chain(transfer_payment_values)
@@ -115,19 +156,13 @@ class TPMap extends React.Component {
         )
         .value();
 
-      const transfer_payment_data = group_prov_data_by_year(transfer_payments_data_by_prov);
-      const per_capita_data = group_prov_data_by_year(per_capita_data_by_prov);
+      const transfer_payment_data = group_prov_data_by_year(transfer_payments_by_prov);
+      const per_capita_data = group_prov_data_by_year(per_capita_by_prov);
       
+      const common_text_args = get_common_text_args(transfer_payment_data);
+
       //REGULAR TP VERSION
       const current_year_data_tp = _.last(transfer_payment_data);
-      const max_tp = _.chain(transfer_payment_data)
-        .last()
-        .values()
-        .max()
-        .value();
-      const color_scale_tp = d3.scaleLinear()
-        .domain([0, max_tp])
-        .range([0.2, 1]);
       const largest_prov_tp = _.chain(current_year_data_tp)
         .keys()
         .maxBy( (prov) => current_year_data_tp[prov] )
@@ -151,15 +186,6 @@ class TPMap extends React.Component {
       
       //TP PER CAPITA VERSION
       const current_year_data_tppc = _.last(per_capita_data);
-      
-      const max_tppc = _.chain(per_capita_data)
-        .last()
-        .values()
-        .max()
-        .value();
-      const color_scale_tppc = d3.scaleLinear()
-        .domain([0, max_tppc])
-        .range([0.2, 1]);
 
       const largest_prov_tppc = _.chain(current_year_data_tppc)
         .keys()
@@ -181,62 +207,31 @@ class TPMap extends React.Component {
           {...{ footnotes, sources }}
         >
           <Col size={12} isText>
+            <TM k="tp_by_region_text" args={text_args_tp} />
+          </Col>
+          <Col size={12} isGraph>
             <TabbedContent 
-              tab_keys={["tp", "tp_per_capita"]}
-              disabled_tabs={_.compact([should_per_capita_tab_be_disabled && "tp_per_capita"])}
+              tab_keys={["transfer_payments", "transfer_payments_per_capita"]}
+              disabled_tabs={_.compact([should_per_capita_tab_be_disabled && "transfer_payments_per_capita"])}
               disabled_message={text_maker("tp_no_data_hover_label")}
               tab_labels={{
-                tp: text_maker("show_tp"),
-                tp_per_capita: text_maker("show_tp_per_capita"),
+                transfer_payments: text_maker("transfer_payments"),
+                transfer_payments_per_capita: text_maker("transfer_payments_per_capita"),
               }}
               tab_pane_contents={{
-                tp: (
-                  <Fragment>
-                    <TM k="tp_by_region_text" args={text_args_tp} />
-                    {!window.is_a11y_mode && 
-                      <Canada
-                        graph_args={{
-                          data: transfer_payment_data,
-                          color_scale: color_scale_tp,
-                          years: std_years,
-                          formatter: formatter,
-                        }}
-                      />
-                    }
-                  </Fragment>
+                transfer_payments: (
+                  <TransferPaymentsByRegionContent
+                    data={transfer_payment_data}
+                  />
                 ), 
-                tp_per_capita: (
-                  <Fragment>
-                    <TM k="tp_by_region_text" args={text_args_tppc} />
-                    {!window.is_a11y_mode && 
-                      <Canada
-                        graph_args={{
-                          data: per_capita_data,
-                          color_scale: color_scale_tppc,
-                          years: std_years,
-                          formatter: formatter,
-                        }}
-                      />
-                    }
-                  </Fragment>
+                transfer_payments_per_capita: (
+                  <TransferPaymentsByRegionContent
+                    data={per_capita_data}
+                  />
                 ),
               }}
             />
           </Col>
-          { window.is_a11y_mode &&
-            <Col size={12} isGraph>
-              <A11YTable
-                label_col_header = {text_maker("tp_a11y_table_title")}
-                data_col_headers = {_.map( std_years, y => run_template(y) )}
-                data = { prepare_data_for_a11y_table(transfer_payment_data) }
-              />
-              <A11YTable
-                label_col_header = {text_maker("tp_pc_a11y_table_title")}
-                data_col_headers = {_.map( std_years, y => run_template(y) )}
-                data = { prepare_data_for_a11y_table(per_capita_data) }
-              />
-            </Col>
-          }
         </StdPanel>
       );
     }

@@ -24,21 +24,14 @@ tp_by_region_text:
     
     Survolez ou tapez sur une province ou un territoire dans la carte ci-dessous pour voir le total des paiements de transfert au cours des cinq dernières années. Notez que l'échelle peut changer pour s'adapter aux données affichées.
 
-show_tp:
+
+transfer_payments:
   en: Transfer Payments
-  fr: Les Paiements de Transfert
+  fr: Paiements de transfert
 
-show_tp_per_capita:
+transfer_payments_per_capita:
   en: Transfer Payments per Capita
-  fr: Les Paiements de Transfert par Habitant
-
-tp_a11y_table_title:
-  en: Transfer Payments for Provinces
-  fr: Paiements de Transfert pour les Provinces
-
-tp_pc_a11y_table_title:
-  en: Transfer Payments for Provinces per Capita
-  fr: Paiements de Transfert pour les Provinces par Habitant
+  fr: Paiements de transfert par habitant
 
 tp_no_data_hover_label:
   en: There is insufficient data
