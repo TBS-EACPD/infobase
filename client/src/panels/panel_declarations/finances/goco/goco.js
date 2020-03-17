@@ -90,13 +90,16 @@ class Goco extends React.Component {
       .sortBy(d => -d[spending_text])
       .value();
 
+    const spending_table_formatter = get_formatter(true, undefined, true, true);
+    const fte_table_formatter = get_formatter(false, undefined, true, true);
+
     const ordered_column_keys = [sa_text, spending_text, ftes_text];
     const column_names = ordered_column_keys;
     const rows = _.map(Tag.gocos_by_spendarea, sa => {
       const display_values = {
         [text_maker("spending_area")]: sa.name,
-        [spending_text]: total_fte_spend[sa.id].total_child_spending,
-        [ftes_text]: total_fte_spend[sa.id].total_child_ftes,
+        [spending_text]: spending_table_formatter(total_fte_spend[sa.id].total_child_spending),
+        [ftes_text]: fte_table_formatter(total_fte_spend[sa.id].total_child_ftes),
       };
       const sort_values = {
         [text_maker("spending_area")]: sa.name,
@@ -119,8 +122,8 @@ class Goco extends React.Component {
         return {
           display_values: {
             [sa_text]: goco.name,
-            [spending_text]: actual_Spending,
-            [ftes_text]: actual_FTEs,
+            [spending_text]: spending_table_formatter(actual_Spending),
+            [ftes_text]: fte_table_formatter(actual_FTEs),
           },
           sort_values: {
             [sa_text]: goco.name,
