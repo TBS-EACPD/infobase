@@ -1,5 +1,7 @@
 import text from './tp_by_region.yaml';
 
+import { Fragment } from 'react';
+
 import {
   formats,
   run_template,
@@ -136,21 +138,14 @@ const format_data_for_a11y_table = (data) => _.chain(data)
   } )
   .filter('data')
   .value();
-const TransferPaymentsByRegionA11yTable = ({data}) => (
+const TransferPaymentsByRegionA11yTable = ({table_name, data}) => (
   <A11YTable
+    table_name={table_name}
     label_col_header={ text_maker('geo_region') }
     data_col_headers={ _.map(std_years, run_template) }
     data={ format_data_for_a11y_table(data) }
   />
 );
-
-const TransferPaymentsByRegionContent = ({data}) => !window.is_a11y_mode ?
-  <TransferPaymentsByRegionGraph
-    data={data}
-  /> :
-  <TransferPaymentsByRegionA11yTable
-    data={data}
-  />;
 
 
 class TPMap extends React.Component {
@@ -222,27 +217,41 @@ class TPMap extends React.Component {
             }
           </Col>
           <Col size={12} isGraph>
-            <TabbedContent 
-              tab_keys={["transfer_payments", "transfer_payments_per_capita"]}
-              disabled_tabs={_.compact([!text_args.show_per_capita_data && "transfer_payments_per_capita"])}
-              disabled_message={text_maker("tp_no_data_hover_label")}
-              tab_labels={{
-                transfer_payments: text_maker("transfer_payments"),
-                transfer_payments_per_capita: text_maker("transfer_payments_per_capita"),
-              }}
-              tab_pane_contents={{
-                transfer_payments: (
-                  <TransferPaymentsByRegionContent
-                    data={transfer_payment_data}
-                  />
-                ), 
-                transfer_payments_per_capita: (
-                  <TransferPaymentsByRegionContent
-                    data={per_capita_data}
-                  />
-                ),
-              }}
-            />
+            { !window.is_a11y_mode &&
+              <TabbedContent 
+                tab_keys={["transfer_payments", "transfer_payments_per_capita"]}
+                disabled_tabs={_.compact([!text_args.show_per_capita_data && "transfer_payments_per_capita"])}
+                disabled_message={text_maker("tp_no_data_hover_label")}
+                tab_labels={{
+                  transfer_payments: text_maker("transfer_payments"),
+                  transfer_payments_per_capita: text_maker("transfer_payments_per_capita"),
+                }}
+                tab_pane_contents={{
+                  transfer_payments: (
+                    <TransferPaymentsByRegionGraph
+                      data={transfer_payment_data}
+                    />
+                  ), 
+                  transfer_payments_per_capita: (
+                    <TransferPaymentsByRegionGraph
+                      data={per_capita_data}
+                    />
+                  ),
+                }}
+              />
+            }
+            { window.is_a11y_mode &&
+              <Fragment>
+                <TransferPaymentsByRegionA11yTable
+                  table_name={text_maker("transfer_payments")}
+                  data={per_capita_data}
+                />
+                <TransferPaymentsByRegionA11yTable
+                  table_name={text_maker("transfer_payments_per_capita")}
+                  data={per_capita_data}
+                />
+              </Fragment>
+            }
           </Col>
         </StdPanel>
       );
