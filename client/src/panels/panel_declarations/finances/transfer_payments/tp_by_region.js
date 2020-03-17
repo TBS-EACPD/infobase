@@ -1,7 +1,5 @@
 import text from './tp_by_region.yaml';
 
-import { Fragment } from 'react';
-
 import {
   formats,
   run_template,
@@ -45,8 +43,75 @@ const group_prov_data_by_year = (data_by_prov) => _.chain(data_by_prov)
   .value();
 
 
-const get_common_text_args = (transfer_payment_data) => {
+const get_text_args = (subject, transfer_payment_data, per_capita_data) => {
+  const last_year_data = _.last(transfer_payment_data);
+  const last_year_data_per_capita = _.last(per_capita_data);
 
+
+  const subject_total_value = _.chain(last_year_data)
+    .values()
+    .reduce( (accumulator, value) => accumulator + value, 0)
+    .value();
+
+
+  const [
+    largest_total_prov_code,
+    largest_total_value,
+  ] = _.chain(last_year_data)
+    .toPairs()
+    .sortBy( ([prov_code, value]) => value )
+    .last()
+    .value();
+  const largest_total_prov = provinces_with_article[largest_total_prov_code].text;
+  const largest_total_percent = largest_total_value/subject_total_value;
+  
+
+  const show_per_capita_data = !_.isEmpty(per_capita_data);
+  const [
+    largest_per_capita_prov_code,
+    largest_per_capita_value,
+  ] = _.chain(last_year_data_per_capita)
+    .toPairs()
+    .sortBy( ([prov_code, value]) => value )
+    .last()
+    .value();
+  const largest_per_capita_prov = show_per_capita_data && provinces_with_article[largest_per_capita_prov_code].text;
+
+
+  const compare_per_capita_to_largest_total = show_per_capita_data && !_.includes(['abroad','na'], largest_total_prov_code);
+  const largest_total_per_capita_value = compare_per_capita_to_largest_total && last_year_data_per_capita[largest_total_prov_code];
+  const largest_total_per_capita_rank = compare_per_capita_to_largest_total &&
+    _.chain(last_year_data_per_capita)
+      .toPairs()
+      .sortBy( ([prov_code, value]) => value )
+      .reverse()
+      .findIndex( ([prov_code, value]) => prov_code === largest_total_prov_code )
+      .thru( (index) => {
+        if (index === -1){
+          throw new Error(`Expected per capita value for ${largest_per_capita_prov_code} to exist`);
+        } else {
+          return index + 1;
+        }
+      } )
+      .value();
+
+
+  return {
+    subject,
+    subject_total_value,
+
+    largest_total_prov,
+    largest_total_value,
+    largest_total_percent,
+
+    show_per_capita_data,
+    largest_per_capita_prov,
+    largest_per_capita_value,
+
+    compare_per_capita_to_largest_total,
+    largest_total_per_capita_value,
+    largest_total_per_capita_rank,
+  };    
 };
 
 
@@ -159,47 +224,7 @@ class TPMap extends React.Component {
       const transfer_payment_data = group_prov_data_by_year(transfer_payments_by_prov);
       const per_capita_data = group_prov_data_by_year(per_capita_by_prov);
       
-      const common_text_args = get_common_text_args(transfer_payment_data);
-
-      //REGULAR TP VERSION
-      const current_year_data_tp = _.last(transfer_payment_data);
-      const largest_prov_tp = _.chain(current_year_data_tp)
-        .keys()
-        .maxBy( (prov) => current_year_data_tp[prov] )
-        .value();
-      const total_sum_tp = _.reduce(
-        current_year_data_tp,
-        (sum, value) => sum += value,
-        0
-      );
-      const percent_of_total_tp = current_year_data_tp[largest_prov_tp] / total_sum_tp;
-      const text_args_tp = {
-        subject,
-        largest_prov: provinces_with_article[largest_prov_tp].text,
-        largest_amount: formatter(current_year_data_tp[largest_prov_tp]),
-        total_sum: formatter(total_sum_tp),
-        percent_of_total: formats["percentage1_raw"](percent_of_total_tp),
-        show_per_capita: false,
-      };
-
-      const should_per_capita_tab_be_disabled = _.every(per_capita_data, _.isEmpty);
-      
-      //TP PER CAPITA VERSION
-      const current_year_data_tppc = _.last(per_capita_data);
-
-      const largest_prov_tppc = _.chain(current_year_data_tppc)
-        .keys()
-        .maxBy( (prov) => current_year_data_tppc[prov] )
-        .value();
-      const text_args_tppc = {
-        subject,
-        largest_prov: provinces_with_article[largest_prov_tppc].text,
-        largest_amount: formatter(current_year_data_tp[largest_prov_tppc]),
-        largest_per_capita: formatter(current_year_data_tppc[largest_prov_tppc]),
-        total_sum: formatter(total_sum_tp),
-        percent_of_total: formats["percentage1_raw"](percent_of_total_tp),
-        show_per_capita: true,
-      };
+      const text_args = get_text_args(subject, transfer_payment_data, per_capita_data);
 
       return (
         <StdPanel
@@ -207,7 +232,7 @@ class TPMap extends React.Component {
           {...{ footnotes, sources }}
         >
           <Col size={12} isText>
-            <TM k="tp_by_region_text" args={text_args_tp} />
+            <TM k="tp_by_region_text" args={text_args} />
             { !window.is_a11y_mode &&
               <TM k="tp_by_region_graph_usage" />
             }
@@ -215,7 +240,7 @@ class TPMap extends React.Component {
           <Col size={12} isGraph>
             <TabbedContent 
               tab_keys={["transfer_payments", "transfer_payments_per_capita"]}
-              disabled_tabs={_.compact([should_per_capita_tab_be_disabled && "transfer_payments_per_capita"])}
+              disabled_tabs={_.compact([!text_args.show_per_capita_data && "transfer_payments_per_capita"])}
               disabled_message={text_maker("tp_no_data_hover_label")}
               tab_labels={{
                 transfer_payments: text_maker("transfer_payments"),
