@@ -6,24 +6,21 @@ tp_by_region_title:
 tp_by_region_text: 
   transform: [handlebars, markdown]
   en: |
-    {{#if show_per_capita}}  
-    In **{{pa_last_year}}**, **{{subj_name subject}}** paid out **{{total_sum}}** in {{gl_tt "transfer payments" "TP"}}. The recipient provinces for transfer payments above $100,000 are shown below, as an amount divided by the population of the region selected. Recipients in **{{largest_prov}}** received the largest divided share of **{{largest_per_capita}}** per resident, and a total of **{{largest_amount}}**.
-    {{else}}
-    In **{{pa_last_year}}**, **{{subj_name subject}}** paid out **{{total_sum}}** in {{gl_tt "transfer payments" "TP"}}. The recipient provinces for transfer payments above $100,000 are shown below. Recipients in **{{largest_prov}}** received the largest total share of **{{largest_amount}}** ({{percent_of_total}}).
+    In **{{pa_last_year}}**, **{{subj_name subject}}** paid out **{{total_sum}}** in {{gl_tt "transfer payments" "TP"}}. **{{largest_total_prov_value}}** ({{largest_total_prov_percent}}) went to recipients in **{{largest_total_prov}}**, making it the region receiving the largest total share of {{subj_name subject}}'s transfer payments.  
+
+    {{#if show_per_capita_text}}
+      When accounting for population statistics, the region with the largest per capita transfer payment value in **{{pa_last_year}}** was **{{largest_prov_per_capita}}**, at **{{largest_amount_per_capita}}** per capita.
+      {{#if compare_per_capita_to_largest_total}}
+        **{{largest_prov}}**, the region receiving the largest total value, had **{{largest_total_prov_per_capita_value}}** per capita, making it the **{{largest_total_prov_per_capita_rank}}** highest per capita recipient.
+      {{/if}}
     {{/if}}
-
-    Hover over or tap a province or territory in the map below to see the total transfer payments over the last five years. Note that the scale may change to accommodate the data displayed.
-
   fr: |
-    #TODO
-    {{#if show_per_capita}}  
-    En **{{pa_last_year}}**, **{{subj_name subject}}** a versé **{{total_sum}}** en paiements de transfert. Les provinces bénéficiaires des paiements de transfert au-dessus 100 000 $ sont présentés ci-dessous, un montant divisé par la population de la région sélectionnée. Les bénéficiaires de **{{largest_prov}}** ont reçu la plus grande part divisée de **{{largest_per_capita}}** par habitant, soit un total de **{{largest_amount}}**.
-    {{else}}
-    En **{{pa_last_year}}**, **{{subj_name subject}}** a versé **{{total_sum}}** en paiements de transfert. Les provinces bénéficiaires des paiements de transfert au-dessus 100 000 $ sont présentés ci-dessous. Les bénéficiaires de **{{largest_prov}}** ont reçu la plus grande part totale de **{{largest_amount}}** ({{percent_of_total}}).
-    {{/if}}
-    
-    Survolez ou tapez sur une province ou un territoire dans la carte ci-dessous pour voir le total des paiements de transfert au cours des cinq dernières années. Notez que l'échelle peut changer pour s'adapter aux données affichées.
+    TODO
 
+
+tp_by_region_graph_usage:
+  en: Hover over or tap a province or territory in the map below to see the total transfer payments over the last five years. Note that the scale may change to accommodate the data displayed.
+  fr: Survolez ou tapez sur une province ou un territoire dans la carte ci-dessous pour voir le total des paiements de transfert au cours des cinq dernières années. Notez que l'échelle peut changer pour s'adapter aux données affichées.
 
 transfer_payments:
   en: Transfer Payments
