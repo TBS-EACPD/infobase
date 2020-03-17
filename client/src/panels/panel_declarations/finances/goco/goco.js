@@ -92,51 +92,51 @@ class Goco extends React.Component {
 
     const ordered_column_keys = [sa_text, spending_text, ftes_text];
     const column_names = ordered_column_keys;
-    const custom_table_data = _.chain(Tag.gocos_by_spendarea)
-      .map(sa=> {
-        const children = _.map(sa.children_tags, goco => {
-          const actual_Spending = programSpending.q(goco).sum(spend_col);
-          const actual_FTEs = programFtes.q(goco).sum(fte_col);
+    const rows = _.map(Tag.gocos_by_spendarea, sa => {
+      const display_values = {
+        [text_maker("spending_area")]: sa.name,
+        [spending_text]: total_fte_spend[sa.id].total_child_spending,
+        [ftes_text]: total_fte_spend[sa.id].total_child_ftes,
+      };
+      const sort_values = {
+        [text_maker("spending_area")]: sa.name,
+        [spending_text]: total_fte_spend[sa.id].total_child_spending,
+        [ftes_text]: total_fte_spend[sa.id].total_child_ftes,
+      };
+      const search_values = {
+        [text_maker("spending_area")]: sa.name,
+      };
+      return {display_values, sort_values, search_values};
+    });
 
-          const table_data = [{
-            display_values: {
-              [sa_text]: goco.name,
-              [spending_text]: actual_Spending,
-              [ftes_text]: actual_FTEs,
-            },
-            sort_values: {
-              [sa_text]: goco.name,
-              [spending_text]: actual_Spending,
-              [ftes_text]: actual_FTEs,
-            },
-            search_values: {
-              [sa_text]: goco.name,
-            },
-          }];
-          return <DisplayTable rows={table_data} ordered_column_keys={ordered_column_keys} column_names={column_names} name={"TODO"}/>;
-        });
-        const table_data = [{
+    const custom_table = <DisplayTable rows={rows} ordered_column_keys={ordered_column_keys} column_names={column_names} name={"TODO"}/>;     
+
+    const child_tables = _.map(Tag.gocos_by_spendarea, sa => {
+      const rows = _.map(sa.children_tags, goco => {
+        const actual_Spending = programSpending.q(goco).sum(spend_col);
+        const actual_FTEs = programFtes.q(goco).sum(fte_col);
+
+        return {
           display_values: {
-            [text_maker("spending_area")]: sa.name,
-            [spending_text]: total_fte_spend[sa.id].total_child_spending,
-            [ftes_text]: total_fte_spend[sa.id].total_child_ftes,
+            [sa_text]: goco.name,
+            [spending_text]: actual_Spending,
+            [ftes_text]: actual_FTEs,
           },
           sort_values: {
-            [text_maker("spending_area")]: sa.name,
-            [spending_text]: total_fte_spend[sa.id].total_child_spending,
-            [ftes_text]: total_fte_spend[sa.id].total_child_ftes,
+            [sa_text]: goco.name,
+            [spending_text]: actual_Spending,
+            [ftes_text]: actual_FTEs,
           },
           search_values: {
-            [text_maker("spending_area")]: sa.name,
+            [sa_text]: goco.name,
           },
-          children: _.sortBy(children, d => -d[spending_text]),
-        }];
-        return <DisplayTable key={sa.id} rows={table_data} ordered_column_keys={ordered_column_keys} column_names={column_names} name={"TODO"}/>;     
-      })
-      .sortBy(d => -d[spending_text])
-      .value();
-
-      debugger;
+        };
+      });
+      return {
+        key: sa.name,
+        table: <DisplayTable rows={rows} ordered_column_keys={ordered_column_keys} column_names={column_names} name={"TODO"}/>,
+      };
+    });
 
     const maxSpending = _.maxBy(graph_data, spending_text);
     const spend_fte_text_data = {
@@ -328,6 +328,7 @@ class Goco extends React.Component {
             <NivoResponsiveBar
               { ...nivo_default_props }
               data={ node.data.children }
+              custom_table={_.find(child_tables, ['key',node.indexValue]).table}
               onMouseEnter={ (child_node, e) => handleHover(child_node, e.target, node.data.children) }
               onMouseLeave={ (child_node, e) => handleHover(child_node, e.target, node.data.children) }  
               onClick={ (child_node, e) => window.open(tick_map[child_node.indexValue], '_blank') }
@@ -376,7 +377,7 @@ class Goco extends React.Component {
           <NivoResponsiveBar
             { ...nivo_default_props }
             data={ graph_data }
-            custom_table={ custom_table_data }
+            custom_table={ custom_table }
             onMouseEnter={ (node, e) => handleHover(node, e.target, graph_data) }
             onMouseLeave={ (node, e) => handleHover(node, e.target, graph_data) }
             onClick={ (node, e) => handleClick(node, e.target, graph_data) }
