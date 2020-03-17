@@ -38,16 +38,17 @@ const load_population_data = () => make_request( get_static_url(`csv/canadian_po
       .value()
   );
 
-
 const group_prov_data_by_year = (data_by_prov) => _.chain(data_by_prov)
   .map( (values, prov_code) => _.map(values, (value) => [prov_code, value]) )
   .unzip()
   .map( _.fromPairs )
   .value();
 
+
 const get_common_text_args = (transfer_payment_data) => {
 
 };
+
 
 const get_color_scale = (data) => _.chain(data)
   .last()
@@ -69,7 +70,6 @@ const TransferPaymentsByRegionGraph = ({data}) => (
     }}
   />
 );
-
 
 const format_data_for_a11y_table = (data) => _.chain(data)
   .flatMap( _.keys )
@@ -208,6 +208,9 @@ class TPMap extends React.Component {
         >
           <Col size={12} isText>
             <TM k="tp_by_region_text" args={text_args_tp} />
+            { !window.is_a11y_mode &&
+              <TM k="tp_by_region_graph_usage" />
+            }
           </Col>
           <Col size={12} isGraph>
             <TabbedContent 
@@ -237,7 +240,6 @@ class TPMap extends React.Component {
     }
   }
 }
-
 
 export const declare_tp_by_region_panel = () => declare_panel({
   panel_key: "tp_by_region",
