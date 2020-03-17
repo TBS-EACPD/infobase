@@ -11,7 +11,7 @@ tp_by_region_text:
     {{#if show_per_capita_data}}
       When accounting for population statistics, the region with the largest per capita transfer payment value in **{{pa_last_year}}** was **{{largest_per_capita_prov}}**, at **{{fmt_compact1_written largest_per_capita_value}} per capita**.
       {{#if compare_per_capita_to_largest_total}}
-        **{{largest_total_prov}}**, the region receiving the largest total value, was paid **{{fmt_compact1_written largest_total_per_capita_value}} per capita**, making it the **{{largest_total_per_capita_rank}}** highest per capita recipient.
+        For comparison, the region receiving the largest total value, **{{largest_total_prov}}**, received **{{fmt_compact1_written largest_total_per_capita_value}} per capita**.
       {{/if}}
     {{/if}}
   fr: |
