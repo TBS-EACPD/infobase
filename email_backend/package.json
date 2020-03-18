@@ -26,9 +26,9 @@
     "eslint": "^4.18.1",
     "eslint-plugin-node": "^6.0.0",
     "eslint-plugin-react": "^7.4.0",
-    "jest": "^24",
-    "jest-cli": "^24",
-    "nodemon": "^1.19.1"
+    "jest": "^25.1.0",
+    "jest-cli": "^25.1.0",
+    "nodemon": "^2.0.2"
   },
   "scripts": {
     "prebuild": "rm -rf transpiled_build",
