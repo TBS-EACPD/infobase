@@ -214,6 +214,7 @@ class PercentageViz extends React.Component {
     const graph_data = _.filter(all_data, d=>_.includes(selected,d.id));
     const graph_total = _.sumBy(graph_data, 'value');
 
+
     const new_summary_text_args = {
       year: current_drr_year,
       drr_total: graph_total,
@@ -301,12 +302,14 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
         <div style={{padding: "10px"}}>
           <TM k="result_status_explanation"/>
           <table>
-            {_.map( ordered_status_keys, status => (
-              <tr>
-                <td style={{padding: "10px"}}>{large_status_icons[status]}</td>
-                <td><TM k={`result_status_explanation_${status}`}/></td>
-              </tr>
-            ) )}
+            <tbody>
+              {_.map( ordered_status_keys, status => (
+                <tr key={status}>
+                  <td style={{padding: "10px"}}>{large_status_icons[status]}</td>
+                  <td><TM k={`result_status_explanation_${status}`}/></td>
+                </tr>
+              ) )}
+            </tbody>
           </table>
         </div>
       </div>
