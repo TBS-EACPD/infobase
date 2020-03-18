@@ -186,14 +186,9 @@ const filter_and_genericize_doc_counts = (counts, doc_key) => {
   return doc_counts_with_generic_keys;
 };
 
-const result_color_scale = d3.scaleOrdinal()
+const result_color_scale = d3.scaleOrdinal() // this is a d3 scale to allow seamless slotting into a nivo graph
   .domain(["met","not_met","not_available","future"])
-  .range([
-    newIBCategoryColors[0],
-    newIBCategoryColors[1],
-    newIBCategoryColors[2],
-    newIBCategoryColors[3],
-  ]);
+  .range(_.take(newIBCategoryColors, 4));
 
 
 export {
