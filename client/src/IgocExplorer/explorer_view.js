@@ -35,16 +35,22 @@ function get_org_count(node){
 const SubjectFields = ({ subject, grouping }) => (
   <div style={{marginTop: "2em"}}>
     <dl className="dl-horizontal dl-no-bold-dts dl-really-long-terms">
-      { _.nonEmpty(subject.applied_title) && subject.applied_title !== subject.legal_name &&
+      { subject.applied_title && 
         <DlItem
           term={<TM k="applied_title" />}
           def={subject.applied_title}
         />
       }
-      { _.nonEmpty(subject.old_name) && 
+      { subject.old_name && 
         <DlItem
           term={<TM k="previously_named" />}
           def={subject.old_name}
+        />
+      }
+      { subject.legal_name &&
+        <DlItem
+          term={<TM k="legal_name" />}
+          def={subject.legal_name}
         />
       }
       { subject.is_dead && 

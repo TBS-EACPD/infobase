@@ -136,7 +136,7 @@ class SimpleView extends React.Component {
           <Details
             summary_content={
               <div>
-                { table.title } : {subject.name}  
+                { table.title } : {subject.display_name}  
               </div>
             }
             content={

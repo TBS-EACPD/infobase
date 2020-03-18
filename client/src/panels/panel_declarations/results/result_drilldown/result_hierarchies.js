@@ -50,7 +50,7 @@ export function create_full_results_hierarchy({subject_guid, doc, allow_no_resul
       root: true,
       data: {
         subject: root_subject,
-        name: root_subject.name,
+        name: root_subject.display_name,
         type: root_type,
       },
     };
