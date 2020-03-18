@@ -69,18 +69,27 @@ graph_legend_instructions:
 
 
 result_status_explanation:
-  transform: [handlebars,markdown]
-  en: |
-    The result status depends on how the target was defined, e.g. a minimum target requires a measured outcome greater than the target.
-    
-    * If the measured outcome satisfies the target, the indicator is assigned a status of {{gl_tt "Target met" "RESULTS_MET"}}.
-    * If the measured outcome is outside the range or standard established by the target, the indicator's status is {{gl_tt "Target not met" "RESULTS_NOT_MET"}}.
-    * Indicators for which no target was set, or for which data was unavailable, are assigned the status {{gl_tt "No result available" "RESULTS_NOT_AVAILABLE"}}.
-    * If the date to achieve the target is after the end of the fiscal year (March 31), or if there is no date to achieve the target, the status is {{gl_tt "Result to be achieved in the future" "RESULTS_ONGOING"}}.
-  fr: |
-    L'état du résultat dépend de la manière dont la cible a été définie, par exemple une cible minimale exige un résultat mesuré (résultat réel) supérieur à la cible.
-    
-    * Si le résultat mesuré correspond à la cible, l'indicateur se voit attribuer l'état {{gl_tt "Cible atteinte" "RESULTS_MET"}}.
-    * Si le résultat mesuré se situe en dehors de la fourchette ou de la norme établie par la cible, l’état de l'indicateur est {{gl_tt "Cible non atteinte" "RESULTS_NOT_MET"}}.
-    * Les indicateurs pour lesquels aucune cible n'a été fixée, ou pour lesquels les données n'étaient pas disponibles, se voient attribuer l’état {{gl_tt "Résultat non disponible" "RESULTS_NOT_AVAILABLE"}}.
-    * Si la date d’atteinte de la cible est postérieure à la fin de l'exercice financier (31 mars), ou s'il n'y a pas de date d’atteinte de la cible, l’état est {{gl_tt "Résultat à atteindre dans le futur" "RESULTS_ONGOING"}}.
+  transform: [handlebars]
+  en: The result status depends on how the target was defined, e.g. a minimum target requires a measured outcome (actual result) greater than the target.
+
+  fr: L'état du résultat dépend de la manière dont la cible a été définie, par exemple une cible minimale exige un résultat mesuré (résultat réel) supérieur à la cible.
+
+result_status_explanation_met:
+  transform: [handlebars]
+  en: If the measured outcome satisfies the target, the indicator is assigned a status of {{gl_tt "Target met" "RESULTS_MET"}}.
+  fr: Si le résultat mesuré correspond à la cible, l'indicateur se voit attribuer l'état {{gl_tt "Cible atteinte" "RESULTS_MET"}}.
+
+result_status_explanation_not_met:
+  transform: [handlebars]
+  en: If the measured outcome is outside the range or standard established by the target, the indicator's status is {{gl_tt "Target not met" "RESULTS_NOT_MET"}}.
+  fr: Si le résultat mesuré se situe en dehors de la fourchette ou de la norme établie par la cible, l’état de l'indicateur est {{gl_tt "Cible non atteinte" "RESULTS_NOT_MET"}}.
+
+result_status_explanation_not_available:
+  transform: [handlebars]
+  en: Indicators for which no target was set, or for which data was unavailable, are assigned the status {{gl_tt "No result available" "RESULTS_NOT_AVAILABLE"}}.
+  fr: Les indicateurs pour lesquels aucune cible n'a été fixée, ou pour lesquels les données n'étaient pas disponibles, se voient attribuer l’état {{gl_tt "Résultat non disponible" "RESULTS_NOT_AVAILABLE"}}.
+
+result_status_explanation_future:
+  transform: [handlebars]
+  en: If the date to achieve the target is after the end of the fiscal year (March 31), or if there is no date to achieve the target, the status is {{gl_tt "Result to be achieved in the future" "RESULTS_ONGOING"}}.
+  fr: Si la date d’atteinte de la cible est postérieure à la fin de l'exercice financier (31 mars), ou s'il n'y a pas de date d’atteinte de la cible, l’état est {{gl_tt "Résultat à atteindre dans le futur" "RESULTS_ONGOING"}}.

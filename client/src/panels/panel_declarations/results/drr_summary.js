@@ -23,6 +23,7 @@ import {
   result_color_scale,
 } from './results_common.js';
 
+import { large_status_icons } from './result_components.js';
 
 import { IconArray } from '../../../charts/IconArray.js';
 
@@ -298,6 +299,14 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
       <div className="fcol-md-7 fcol-xs-7 medium_panel_text" >
         <div style={{padding: "10px"}}>
           <TM k="result_status_explanation"/>
+          <table>
+            {_.map( ordered_status_keys, status => (
+              <tr>
+                <td style={{padding: "10px"}}>{large_status_icons[status]}</td>
+                <td><TM k={`result_status_explanation_${status}`}/></td>
+              </tr>
+            ) )}
+          </table>
         </div>
       </div>
       <div className="fcol-md-5 fcol-xs-5" >
