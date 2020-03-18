@@ -69,42 +69,48 @@ const LimitedDataDisplay = (search, name) => (
 );
 const org_templates = {
   header_function: () => Dept.plural,
-  name_function: org => org.applied_title ? `${org.applied_title} (${_.toLower( trivial_text_maker('legal_name') )}: ${org.name})` : org.name,
+  name_function: org => org.name,
   menu_content_function: function(org, search){
-    if (org.level !== "gov" && org.old_name){
-      const reg_exps = query_to_reg_exps(search);
-
-      const re_matcher_without_old_name = get_re_matcher(
-        _.filter(org_attributes_to_match, (attribute) => attribute !== 'old_name'),
-        reg_exps
-      );
-      const matched_on_attr_other_than_old_name = re_matcher_without_old_name(org);
-
-      const matched_on_old_name = _.every( reg_exps, re => _.deburr(org.old_name).match(re) );
-
-      const menu_content_with_old_name = `${org.name} (${trivial_text_maker("previously_named")}: ${org.old_name})`;
-
-      if ( matched_on_old_name && !matched_on_attr_other_than_old_name){
-        if ( _.isEmpty(org.tables) ){
-          return LimitedDataDisplay(search, menu_content_with_old_name);
-        } else {
-          return (
-            <InfoBaseHighlighter 
-              search={search}
-              content={menu_content_with_old_name}
-            />
-          );
-        }
-      }
-    }
-
-    if ( org.level !== "gov" && _.isEmpty(org.tables) ){
-      return LimitedDataDisplay(search, org.name);
-    } else {
+    if (org.level === "gov"){
       return (
         <InfoBaseHighlighter 
           search={search}
           content={ this.name_function(org) }
+        />
+      );
+    }
+
+
+    const result_name = ( () => {
+      const reg_exps = query_to_reg_exps(search);
+
+      const name_like_attribute_matched = _.find(
+        [
+          'name',
+          'legal_name',
+          'old_name',
+        ],
+        (attribute) => get_re_matcher([attribute], reg_exps)(org)
+      );
+
+      switch (name_like_attribute_matched){
+        case 'legal_name':
+          return `${org.name} (${trivial_text_maker('legal_name')}: ${org.legal_name})`;
+        case 'old_name':
+          return `${org.name} (${trivial_text_maker('previously_named')}: ${org.old_name})`;
+        default:
+          return org.name;
+      }
+    })();
+    
+
+    if ( _.isEmpty(org.tables) ){
+      return LimitedDataDisplay(search, result_name);
+    } else {
+      return (
+        <InfoBaseHighlighter 
+          search={search}
+          content={result_name}
         />
       );
     }
