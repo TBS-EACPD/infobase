@@ -24,7 +24,7 @@ const ordering = _.chain([
   .fromPairs()
   .value();
 
-const get_province_name = (prov_key, scale) => {
+const get_province_display_name = (prov_key, scale) => {
   if ( provinces[prov_key] && (scale > 0.5) ){
     // If the graph is large enough and the full name is defined, use full name
     return provinces[prov_key].text; 
@@ -208,7 +208,7 @@ export class CanadaD3Component {
           }); 
 
         
-        const prov_name = get_province_name(prov_key, scale);
+        const prov_name = get_province_display_name(prov_key, scale);
         
         d3.select(this)
           .append("p")

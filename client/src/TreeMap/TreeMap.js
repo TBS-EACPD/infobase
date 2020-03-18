@@ -56,11 +56,11 @@ const GapYearWarning = () => (
 );
 
 
-function node_html(node, name, text_size, display_number) {
+function node_html(node, display_name, text_size, display_number) {
   return `
   <div class="TreeMapNode__ContentBox TreeMapNode__ContentBox--standard">
     <div class="TreeMapNode__ContentTitle ${text_size && `TreeMapNode__ContentTitle${text_size}` || ''}">
-      ${name}
+      ${display_name}
     </div>
     ${ display_number && `
     <div class="TreeMapNode__ContentText ${text_size && `TreeMapNode__ContentText${text_size}` || ''}">
@@ -90,13 +90,13 @@ function std_node_render(is_fte, foreign_sel) {
     const node_size = get_node_size.bind(this)();
     if (node_size === "tiny") { return; } //no contents on tiny nodes
     const text_size = node_size === "medium" ? "" : `--${node_size}`;
-    const name = node_name(node, this.offsetWidth);
+    const display_name = node_name(node, this.offsetWidth);
     const display_number = this.offsetHeight > 50 ?
       is_fte ?
         format_display_number(node.data.ftes, true) :
         format_display_number(node.data.amount) :
       '';
-    return node_html(node, name, text_size, display_number);
+    return node_html(node, display_name, text_size, display_number);
   });
 }
 const curried_node_render = _.curry(std_node_render);
