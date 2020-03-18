@@ -151,7 +151,7 @@ const get_non_col_content = ({node}) => {
 
   return (
     <div>
-      { subject && subject.level === "dept" && subject.legal_name && subject.legal_name !== subject.applied_title &&
+      { subject && subject.level === "dept" && subject.legal_name &&
         <div className="mrgn-bttm-sm" style={{fontSize: "14px"}}>
           <b><TM k="legal_name" args={{subject}} />: </b>
           {subject.legal_name}
