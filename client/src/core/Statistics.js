@@ -108,7 +108,7 @@ class Statistics extends mix().with(staticStoreMixin){
     } catch (e){ 
       if(window.is_dev){
         /* eslint-disable-next-line no-console */
-        console.error(`missing values for ${subject.display_name}`);
+        console.error(`missing values for ${subject.name}`);
       }
       stats.missing_values = true;
     }

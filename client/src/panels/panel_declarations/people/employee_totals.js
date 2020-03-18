@@ -107,7 +107,7 @@ export const declare_employee_totals_panel = () => declare_panel({
                 label_col_header = {text_maker("org")} 
                 data_col_headers = {ticks}
                 data = {[{
-                  label: subject.display_name, 
+                  label: subject.name, 
                   data: series,
                 }]}
               />

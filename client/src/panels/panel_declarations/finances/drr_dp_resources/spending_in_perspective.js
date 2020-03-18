@@ -48,8 +48,8 @@ class SpendInTagPerspective extends React.Component {
 
     const data = [
       {
-        id: subject.display_name,
-        label: subject.display_name, 
+        id: subject.name,
+        label: subject.name, 
         value: prog_exp,
       },
       {

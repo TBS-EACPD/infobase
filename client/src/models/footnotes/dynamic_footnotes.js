@@ -56,7 +56,7 @@ const get_dynamic_footnotes = () => {
             <ul>
             ${_.reduce(
               late_orgs,
-              (elements, org_id) => `${elements}<li>${Dept.lookup(org_id).display_name}</li>`,
+              (elements, org_id) => `${elements}<li>${Dept.lookup(org_id).name}</li>`,
               ''
             )}
             </ul>`

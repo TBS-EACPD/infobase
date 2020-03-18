@@ -444,7 +444,7 @@ export const declare_detailed_program_spending_split_panel = () => declare_panel
           ) )
           .map( footnote => ({
             ...footnote,
-            text: `<strong>${footnote.subject.display_name}: </strong>${footnote.text}`,
+            text: `<strong>${footnote.subject.name}: </strong>${footnote.text}`,
           }) )
           .value()
         )

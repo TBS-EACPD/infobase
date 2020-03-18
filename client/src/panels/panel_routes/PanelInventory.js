@@ -271,7 +271,7 @@ export default class panelInventory extends React.Component {
           />
         </div>
         <div>
-          <p> {tm("selected_subject")}: {subject.display_name} ({subject.level}) </p>
+          <p> {tm("selected_subject")}: {subject.name} ({subject.level}) </p>
           <p> {tm("selected_panel")}: {panel.key} </p>
         </div>
         <div id="main">
