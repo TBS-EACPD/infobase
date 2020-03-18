@@ -11,7 +11,7 @@ const org_to_node = (subject, parent_id="a") => ({
   id: `${parent_id}-${subject.id}`,
   data: {
     type: 'org',
-    name: subject.display_name,
+    name: subject.name,
     subject,
   },
 });

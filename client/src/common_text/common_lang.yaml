@@ -1024,8 +1024,8 @@ you_are_here:
 
 infographic_for:
   transform: [handlebars]
-  en: Infographic for {{subject.display_name}}
-  fr: Infographie pour {{subject.display_name}}
+  en: Infographic for {{subject.name}}
+  fr: Infographie pour {{subject.name}}
 
 
 ##################################

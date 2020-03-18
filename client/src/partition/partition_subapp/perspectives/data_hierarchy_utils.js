@@ -48,7 +48,7 @@ const post_traversal_search_string_set = function(node){
   }
   if ( node.data.is("dept") ){
     node.data.search_string += _.deburr(
-      `${node.data.dept_code} ${node.data.abbr} ${node.data.display_name}`.toLowerCase()
+      `${node.data.dept_code} ${node.data.abbr} ${node.data.name}`.toLowerCase()
     );
   }
 };

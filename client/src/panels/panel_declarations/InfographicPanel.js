@@ -59,10 +59,10 @@ class Panel_ extends React.Component {
     const share_modal_subject_fragment = subject ?
       (
         subject.level === 'tag' || subject.level === 'gov' ?
-          subject.display_name :
+          subject.name :
           subject.level === 'dept' ? 
             subject.abbr : 
-            `${subject.dept.abbr} - ${subject.display_name}`
+            `${subject.dept.abbr} - ${subject.name}`
       ) + ' — ':
       "";
     const share_modal_title = `${share_modal_subject_fragment}${title}`;

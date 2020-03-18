@@ -59,7 +59,7 @@ export const declare_profile_panel = () => declare_panel({
 
             return {
               profile_fields: [
-                ["hi_name", subject.display_name],
+                ["hi_name", subject.name],
                 ["hi_lead_dept", 
                   lead_dept && (
                     <a href={infograph_href_template(lead_dept)}>
@@ -82,7 +82,7 @@ export const declare_profile_panel = () => declare_panel({
         case 'program':
           return subject.id && {
             profile_fields: [
-              ["name", subject.display_name],
+              ["name", subject.name],
               ["status", subject.status],
               ["previously_named", subject.old_name],
               ["description", subject.description && <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.description)}/>],

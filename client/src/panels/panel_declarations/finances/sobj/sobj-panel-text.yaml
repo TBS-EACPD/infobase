@@ -7,7 +7,7 @@ dept_fin_spend_by_so_hist_text:
   transform: [handlebars,markdown]
   en: |
    {{gl_tt "Standard objects" "SOBJ"}} are the highest level of classification for categorizing 
-   expenditures. From {{pa_last_year_5}} to {{pa_last_year}}, the largest share of **{{subject.display_name}}'s** expenditures were reported 
+   expenditures. From {{pa_last_year_5}} to {{pa_last_year}}, the largest share of **{{subject.name}}'s** expenditures were reported 
    under the **{{ dept_so_five_year_top}}** standard object - representing an average amount of **{{fmt_compact1_written dept_so_five_year_top_avg}}** 
    out of an average total annual spending of **{{fmt_compact1_written dept_five_year_exp_average}}**.  
 

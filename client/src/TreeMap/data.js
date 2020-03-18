@@ -150,22 +150,22 @@ function get_data_drf(perspective, year, year_1, year_2, filter_var, get_changes
   const orgs = _.chain(Dept.get_all())
     .map(org => ({
       subject: org,
-      name: org.display_name,
+      name: org.name,
       children: _.chain(org.crsos)
         .map(crso => ({
           subject: crso,
-          name: crso.display_name,
+          name: crso.name,
           children: _.chain(crso.programs)
             .map(prog => {
               return get_changes ?
                 {
                   subject: prog,
-                  name: prog.display_name,
+                  name: prog.name,
                   amount: program_spending_table.q(prog).sum(header_col("drf", year_2)) - program_spending_table.q(prog).sum(header_col("drf", year_1)),
                   ftes: program_ftes_table.q(prog).sum(header_col("ftes", year_2)) - program_ftes_table.q(prog).sum(header_col("ftes", year_1)),
                 } : {
                   subject: prog,
-                  name: prog.display_name,
+                  name: prog.name,
                   amount: program_spending_table.q(prog).sum(header_col("drf", year)),
                   ftes: program_ftes_table.q(prog).sum(header_col("ftes", year)) || 0, // if NA 
                 };
@@ -227,7 +227,7 @@ function get_data_so(perspective, year, year_1, year_2, filter_var, get_changes)
   const all_orgs = _.chain(Dept.get_all())
     .map(org => ({
       subject: org,
-      name: org.display_name,
+      name: org.name,
       children: _.chain(so_nums_to_get)
         .map(so => ({
           name: tm(`SOBJ${so}`),
@@ -280,7 +280,7 @@ function get_data_tp(perspective, year, year_1, year_2, filter_var, get_changes)
   const all_orgs = _.chain(Dept.get_all())
     .map(org => ({
       subject: org,
-      name: org.display_name,
+      name: org.name,
       children: _.chain(tp_table.q(org).data)
         .map(row => ({
           name: row.tp,
@@ -330,7 +330,7 @@ function get_data_vs(perspective, year, year_1, year_2, filter_var, get_changes)
   const orgs = _.chain(Dept.get_all())
     .map(org => ({
       subject: org,
-      name: org.display_name,
+      name: org.name,
       children: _.chain(vote_stat_table.q(org).data)
         .groupBy('desc')
         .toPairs()

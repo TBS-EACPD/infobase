@@ -17,9 +17,9 @@ gov_employee_type_text:
 dept_employee_type_text:
   transform: [handlebars,markdown] 
   en: |
-   From **{{fmt_big_int dept_head_count_type_first_active_year}}** to **{{fmt_big_int dept_head_count_type_last_active_year}}**, the **{{fmt_big_int dept_head_count_type_top}}** workforce accounted for the largest average share (**{{fmt_percentage1 dept_head_count_type_top_avg_percent}}**) of **{{subject.display_name}}'s** total population.
+   From **{{fmt_big_int dept_head_count_type_first_active_year}}** to **{{fmt_big_int dept_head_count_type_last_active_year}}**, the **{{fmt_big_int dept_head_count_type_top}}** workforce accounted for the largest average share (**{{fmt_percentage1 dept_head_count_type_top_avg_percent}}**) of **{{subject.name}}'s** total population.
    
-   Over this period, the proportion of **Students** in **{{subject.display_name}}'s** workforce **{{two_value_changed_to dept_student_share_first_active_year dept_student_share_last_active_year "fmt_percentage1"}}**.
+   Over this period, the proportion of **Students** in **{{subject.name}}'s** workforce **{{two_value_changed_to dept_student_share_first_active_year dept_student_share_last_active_year "fmt_percentage1"}}**.
   fr: |
    De **{{fmt_big_int dept_head_count_type_first_active_year}}** à **{{fmt_big_int dept_head_count_type_last_active_year}}**, les employés nommés pour une «**{{fmt_big_int dept_head_count_type_top}}**» constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 dept_head_count_type_top_avg_percent}}**) de l’effectif **{{de_dept dept}}**.
    

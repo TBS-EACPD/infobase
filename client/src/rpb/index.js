@@ -206,7 +206,7 @@ class RPB extends React.Component {
         }} 
       />
       <RPBTitle 
-        subject_name={subject !== Gov && subject && subject.display_name}
+        subject_name={subject !== Gov && subject && subject.name}
         table_name={table && table.name}
       />
       <LabeledBox label={ <TextMaker text_key="rpb_pick_data" /> }>

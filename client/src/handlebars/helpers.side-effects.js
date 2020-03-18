@@ -411,7 +411,7 @@ Handlebars.registerHelper("de_dept",function(context){
   if (article.length > 0 && _.last(article) !== "'") {
     article += " ";
   }
-  return article + (dept.display_name);
+  return article + (dept.name);
 
 });
 // looks up the name for the department if passed
@@ -427,7 +427,7 @@ Handlebars.registerHelper("le_dept",function(context){
   if (article.length > 0 && _.last(article) !== "'") {
     article += " ";
   }
-  return article + (dept.display_name);
+  return article + (dept.name);
 });
 
 // {{encodeURI "someurl"}} -> encodes the string with URL
@@ -533,7 +533,7 @@ Handlebars.registerHelper("gl_title",function(key){
 
 Handlebars.registerHelper("infograph_link",function(subject){
   const href = infograph_href_template(subject); 
-  const str = `<a href="${href}" title="${trivial_text_maker('infographic_for', { subject })}">${subject.display_name}</a>`;
+  const str = `<a href="${href}" title="${trivial_text_maker('infographic_for', { subject })}">${subject.name}</a>`;
   return new Handlebars.SafeString(str);
 });
 

@@ -11,13 +11,6 @@ const static_subject_store = () => mix().with(staticStoreMixin, PluralSingular, 
 const static_subject_store_with_API_data = () => mix().with(staticStoreMixin, PluralSingular, SubjectMixin, CanHaveAPIData);
 
 
-const gov_name = ( 
-  window.lang === 'en' ? 
-  "Government" : 
-  "Gouvernement" 
-);
-
-
 const Gov = {
   constructor: {
     type_name: 'gov',
@@ -33,12 +26,11 @@ const Gov = {
   level: 'gov',
   get has_planned_spending(){ return true;},
   lookup(){ return this; },
-  name: gov_name,
+  name: trivial_text_maker('the_goc'),
   // the following name-like fields are for compatibility with old APIs and to ensure it's searchable in org-searches
-  description: gov_name,
-  title: gov_name,
-  legal_name: gov_name,
-  display_name: trivial_text_maker('the_goc'),
+  description: trivial_text_maker('the_goc'),
+  title: trivial_text_maker('the_goc'),
+  legal_name: trivial_text_maker('the_goc'),
 };
 
 
@@ -58,9 +50,6 @@ const Ministry = class Ministry extends static_subject_store(){
     this.name = name;
     this.description = "";
     this.orgs = [];
-  }
-  get display_name(){
-    return this.name;
   }
 };
 
@@ -108,7 +97,6 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
     Object.assign(
       this, 
       {
-        name: def.legal_name,
         id: def.unique_id,
         minister_objs: [],
         table_ids: [],
@@ -118,6 +106,12 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
     );
   }
 
+  get name(){
+    return this.applied_title || this.legal_name;
+  }
+  get old_name(){
+    return this.old_applied_title;
+  }
   get programs(){
     return _.chain(this.crsos)
       .map('programs')
@@ -161,12 +155,6 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
     } else {
       return false;
     }
-  }
-  get display_name(){
-    return this.applied_title || this.name;
-  }
-  get old_name(){
-    return this.old_applied_title;
   }
   get tables(){
     return this.table_ids; 
@@ -263,9 +251,6 @@ const CRSO = class CRSO extends static_subject_store_with_API_data(){
       return trivial_text_maker("strategic_outcomes");
     }
   }
-  get display_name(){
-    return this.name;
-  }
   get has_planned_spending(){ 
     return _.some(this.programs, program => program.has_planned_spending);
   }
@@ -312,9 +297,6 @@ const Program = class Program extends static_subject_store_with_API_data(){
   }
   get link_to_infographic(){
     return `#orgs/program/${this.id}/infograph`;
-  }
-  get display_name(){
-    return this.name;
   }
   get is_dead(){
     return !this.is_active;
@@ -378,9 +360,6 @@ const InstForm = class InstForm extends static_subject_store(){
       children_forms: [],
       orgs: [],
     });
-  }
-  get display_name(){
-    return this.name;
   }
   singular(){
     throw "TODO";

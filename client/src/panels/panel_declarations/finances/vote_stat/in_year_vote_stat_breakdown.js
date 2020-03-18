@@ -19,9 +19,9 @@ const main_col = "{{est_in_year}}_estimates";
 
 const text_func = (vs, d, break_str) => {
   if (vs == 'voted') {
-    return d.dept ? `${Subject.Dept.lookup(d.dept).display_name} ${break_str}  ${d.desc}` : d.desc;
+    return d.dept ? `${Subject.Dept.lookup(d.dept).name} ${break_str}  ${d.desc}` : d.desc;
   } else {
-    return d.dept ? `${d.desc} ${break_str} ${Subject.Dept.lookup(d.dept).display_name}` : d.desc;
+    return d.dept ? `${d.desc} ${break_str} ${Subject.Dept.lookup(d.dept).name}` : d.desc;
   }
 };
 
@@ -80,7 +80,7 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
   const total_amt = d3.sum(data, _.property(col));
 
   const rows = _.map(top_10_rows, obj => ({
-    name: Subject.Dept.lookup(obj.dept).display_name,
+    name: Subject.Dept.lookup(obj.dept).name,
     rpb_link: infograph_href_template(Subject.Dept.lookup(obj.dept)),
     voted_stat: obj.desc,
     amount: obj[col],

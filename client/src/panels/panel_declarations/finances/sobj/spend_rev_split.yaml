@@ -6,8 +6,8 @@ spend_rev_split_title:
 dept_spend_rev_split_text:
   transform: [handlebars, markdown]
   en: |
-    In {{pa_last_year}}, **{{subject.display_name}}** had recorded revenues of **{{fmt_compact1_written dept_pa_last_year_rev_minus}}**.  Netting these revenues 
-    off **{{subject.display_name}}’s** *gross* expenditures of **{{fmt_compact1_written dept_pa_last_year_gross_exp}}** leaves **{{fmt_compact1_written dept_exp_pa_last_year}}** in *net* expenditures.
+    In {{pa_last_year}}, **{{subject.name}}** had recorded revenues of **{{fmt_compact1_written dept_pa_last_year_rev_minus}}**.  Netting these revenues 
+    off **{{subject.name}}’s** *gross* expenditures of **{{fmt_compact1_written dept_pa_last_year_gross_exp}}** leaves **{{fmt_compact1_written dept_exp_pa_last_year}}** in *net* expenditures.
 
   fr: |
     En {{pa_last_year}}, **{{le_dept dept}}** a généré des recettes de **{{fmt_compact1_written dept_pa_last_year_rev_minus}}**.
@@ -18,9 +18,9 @@ dept_spend_rev_split_text:
 program_spend_rev_split_text:
   transform: [handlebars, markdown]
   en: |
-    In {{pa_last_year}}, revenues of **{{fmt_compact1_written program_exp_rev_neg_minus}}** were recorded for the program "**{{subject.display_name}}**".
+    In {{pa_last_year}}, revenues of **{{fmt_compact1_written program_exp_rev_neg_minus}}** were recorded for the program "**{{subject.name}}**".
     Netting these revenues from the total *gross* expenditures of **{{fmt_compact1_written program_exp_rev_gross}}** dedicated to this program leaves **{{fmt_compact1_written program_exp_rev_net}}** in *net* expenditures.
    
   fr: |
-    En {{pa_last_year}}, des recettes de **{{fmt_compact1_written program_exp_rev_neg_minus}}** ont été enregistré pour le programme «**{{subject.display_name}}**».
+    En {{pa_last_year}}, des recettes de **{{fmt_compact1_written program_exp_rev_neg_minus}}** ont été enregistré pour le programme «**{{subject.name}}**».
     Après compensation de ces recettes par rapport aux dépenses *brutes* de **{{fmt_compact1_written program_exp_rev_gross}}** consacrées au programme, les dépenses *nettes* s'élèvent à **{{fmt_compact1_written program_exp_rev_net}}**.
