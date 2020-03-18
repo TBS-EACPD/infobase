@@ -169,6 +169,9 @@ inclusive:
 previously_named:
   en: Previously Named
   fr: Précédemment nommé
+legal_name:
+  en: Legal Title
+  fr: Appellation légale
 applied_title:
   en: Applied Title
   fr: Titre appliqué

@@ -56,14 +56,16 @@ class Panel_ extends React.Component {
         panel_href_template(subject, context.active_bubble_id, context.panel_key)
       );
 
-    const share_modal_subject_fragment = subject && (
-      subject.level === 'tag' || subject.level === 'gov' ?
-        subject.name :
-        subject.level === 'dept' ? 
-          subject.dept_code : 
-          `${subject.dept.dept_code} - ${subject.name}`
-    );
-    const share_modal_title = `${share_modal_subject_fragment ? `${share_modal_subject_fragment} — ` : ""}${title}`;
+    const share_modal_subject_fragment = subject ?
+      (
+        subject.level === 'tag' || subject.level === 'gov' ?
+          subject.display_name :
+          subject.level === 'dept' ? 
+            subject.abbr : 
+            `${subject.dept.abbr} - ${subject.display_name}`
+      ) + ' — ':
+      "";
+    const share_modal_title = `${share_modal_subject_fragment}${title}`;
 
     const header_utils = context && (
       <div style={{marginLeft: 'auto'}}>

@@ -24,36 +24,32 @@ export const declare_profile_panel = () => declare_panel({
   panel_config_func: (level, panel_key) => ({
     calculate: (subject) => {
       switch(level){
-        case 'dept': {
-          if (subject.name){
-            return {
-              profile_fields: [
-                ["legal_name", subject.legal_name],
-                ["status", subject.status],
-                ["end_yr", subject.end_yr],
-                ["notes", subject.notes],
-                ["applied_title", subject.applied_title],
-                ["acronym", subject.abbr],
-                ["previously_named", subject.old_name],
-                ["incorp_yr", subject.incorp_yr],
-                ["type", subject.type],
-                ["website", !subject.is_dead && subject.website_url && <ExternalLink href={generate_href(subject.website_url)}>{subject.website_url}</ExternalLink>],
-                ["eval_links", !subject.is_dead && subject.eval_url && <ExternalLink href={generate_href(subject.eval_url)}>{subject.eval_url}</ExternalLink>],
-                ["minister", !_.isEmpty(subject.minister) && _.chain(subject.minister).flatMap( (minister, ix) => [minister, <br key={ix} />]).dropRight().value()],
-                ["mandate", subject.mandate && <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.mandate)}/>],
-                ["legislation", subject.legislation],
-                ["fiscal_end_yr", subject.fiscal_end_yr],
-                ["auditor", subject.auditor],
-                ["fed_ownership", subject.fed_ownership],
-                ["board_comp", subject.board_comp],
-                ["inst_faa", subject.schedule],
-                ["hr_faa", subject.faa_hr],
-                ["pas_code", subject.pas_code],
-              ],
-            };
-          }
-          break;
-        }
+        case 'dept':
+          return subject.id && {
+            profile_fields: [
+              ["applied_title", subject.applied_title],
+              ["acronym", subject.abbr],
+              ["previously_named", subject.old_name],
+              ["legal_name", subject.legal_name],
+              ["status", subject.status],
+              ["end_yr", subject.end_yr],
+              ["notes", subject.notes],
+              ["incorp_yr", subject.incorp_yr],
+              ["type", subject.type],
+              ["website", !subject.is_dead && subject.website_url && <ExternalLink href={generate_href(subject.website_url)}>{subject.website_url}</ExternalLink>],
+              ["eval_links", !subject.is_dead && subject.eval_url && <ExternalLink href={generate_href(subject.eval_url)}>{subject.eval_url}</ExternalLink>],
+              ["minister", !_.isEmpty(subject.minister) && _.chain(subject.minister).flatMap( (minister, ix) => [minister, <br key={ix} />]).dropRight().value()],
+              ["mandate", subject.mandate && <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.mandate)}/>],
+              ["legislation", subject.legislation],
+              ["fiscal_end_yr", subject.fiscal_end_yr],
+              ["auditor", subject.auditor],
+              ["fed_ownership", subject.fed_ownership],
+              ["board_comp", subject.board_comp],
+              ["inst_faa", subject.schedule],
+              ["hr_faa", subject.faa_hr],
+              ["pas_code", subject.pas_code],
+            ],
+          };
 
         case 'tag': {
           // Only for HI tags, at least for now
@@ -63,7 +59,7 @@ export const declare_profile_panel = () => declare_panel({
 
             return {
               profile_fields: [
-                ["hi_name", subject.name],
+                ["hi_name", subject.display_name],
                 ["hi_lead_dept", 
                   lead_dept && (
                     <a href={infograph_href_template(lead_dept)}>
@@ -83,27 +79,20 @@ export const declare_profile_panel = () => declare_panel({
         }
 
         case 'crso': 
-        case 'program': {
-          if (subject.name){
-            return {
-              profile_fields: [
-                ["name", subject.name],
-                ["status", subject.status],
-                ["previously_named", subject.old_name],
-                ["description", subject.description && <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.description)}/>],
-                ["activity_code", subject.activity_code],
-              ],
-            };
-          }
-          break;
-        }
+        case 'program':
+          return subject.id && {
+            profile_fields: [
+              ["name", subject.display_name],
+              ["status", subject.status],
+              ["previously_named", subject.old_name],
+              ["description", subject.description && <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.description)}/>],
+              ["activity_code", subject.activity_code],
+            ],
+          };
 
-        default: {
-          break;
-        }
+        default:
+          return false;
       }
-
-      return false;
     },
     render({calculations}){
       const { profile_fields } = calculations.panel_args;

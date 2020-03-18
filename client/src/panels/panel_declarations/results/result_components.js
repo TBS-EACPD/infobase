@@ -449,7 +449,7 @@ class HorizontalStatusTable extends React.Component {
       .pipe( show_all ? _.identity : list => _.take(list, 15) )
       .sortBy( 
         sort_by ==='subject' ? 
-          ({subject}) => subject.name : 
+          ({subject}) => subject.display_name : 
           row => row.counts[sort_by]
       )
       .pipe( descending ? arr => arr.reverse() : _.identity )
@@ -499,7 +499,7 @@ class HorizontalStatusTable extends React.Component {
                   { subject.level === "gov" && <TM k="goc_total"/> }
                   { subject.level === "dept" &&
                     <a href={link_to_results_infograph(subject)}>
-                      {subject.name}
+                      {subject.display_name}
                     </a>
                   }
                 </td> 
