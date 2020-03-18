@@ -215,6 +215,7 @@ class PercentageViz extends React.Component {
     const graph_total = _.sumBy(graph_data, 'value');
 
     const new_summary_text_args = {
+      year: current_drr_year,
       drr_total: graph_total,
       drr_indicators_met: _.includes(selected, 'met') && counts.met,
       drr_indicators_not_met: _.includes(selected, 'not_met') && counts.not_met,
