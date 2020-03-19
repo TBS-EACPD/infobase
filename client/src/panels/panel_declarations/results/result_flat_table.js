@@ -119,7 +119,8 @@ const indicator_table_from_list = (indicator_list) => {
       };
     }
   );
-
+  console.log(column_names);
+  console.log(rows);
   return <DisplayTable 
     name={text_maker("result_flat_table_title", {year: current_drr_year})}
     column_names={column_names}
