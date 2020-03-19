@@ -74,8 +74,9 @@ export const declare_profile_panel = () => declare_panel({
                 ["hi_dr_link", hi_lookups.dr_url && <ExternalLink href={hi_lookups.dr_url}>{hi_lookups.dr_url}</ExternalLink>],
               ],
             };
+          } else {
+            return false;
           }
-          break;
         }
 
         case 'crso': 
