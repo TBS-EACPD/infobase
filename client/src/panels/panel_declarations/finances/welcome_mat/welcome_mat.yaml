@@ -25,6 +25,12 @@ in_this_year:
     This year {{> no_wrap_year year=est_in_year}}
   fr: |
     Cette année {{> no_wrap_year year=est_in_year}}
+next_year:
+  transform: [handlebars]
+  en: |
+    Next year {{> no_wrap_year year=planning_year_1}}
+  fr: |
+    L'année prochaine {{> no_wrap_year year=planning_year_1}}
 years_ahead:
   transform: [handlebars]
   en: |

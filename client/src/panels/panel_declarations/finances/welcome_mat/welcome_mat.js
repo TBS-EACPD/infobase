@@ -173,6 +173,7 @@ const WelcomeMat = (props) => {
       .value()
   );
   const current_year = _.parseInt( run_template('{{current_fiscal_year_short_first}}') );
+  const first_planned_year = _.parseInt( run_template('{{planning_year_1_short_first}}') );
   const latest_planned_year = _.parseInt( run_template('{{planning_year_3_short_first}}') );
 
   const current_hist_years_apart = current_year - oldest_hist_year;
@@ -207,6 +208,19 @@ const WelcomeMat = (props) => {
       return in_this_year;
     } else {
       throw new Error("Actual spending years are ahead of current fiscal year value? Shouldn't happen");
+    }
+  })();
+
+  const first_planned_year_text = (() => {
+    const current_first_planned_years_apart = first_planned_year - current_year;
+    if (current_first_planned_years_apart === 0){
+      return <TM k="in_this_year" />;
+    } else if (current_first_planned_years_apart === 1){
+      return <TM k="next_year" />;
+    } else if (current_first_planned_years_apart >= 1){
+      return <TM k="years_ahead" args={{current_planned_years_apart: current_first_planned_years_apart}} />;
+    } else if (current_first_planned_years_apart <= -1){
+      throw new Error("Current year is ahead of first planning year? Shouldn't happen");
     }
   })();
 
@@ -323,14 +337,14 @@ const WelcomeMat = (props) => {
     return (
       <WelcomeMatShell
         header_row={[
-          <HeaderPane key="a" size={20} children={latest_hist_year_text} />,
+          <HeaderPane key="a" size={20} children={first_planned_year_text} />,
           <HeaderPane key="b" size={20} children={years_ahead} />,
           <HeaderPane key="c" size={40} children={planned_trend} />,
         ]}
         spend_row={ has_spending && [
 
           <Pane key="a" size={20}>
-            <MobileOrA11YContent children={latest_hist_year_text} />
+            <MobileOrA11YContent children={first_planned_year_text} />
             <PaneItem textSize="small">
               <TM k="spending_will_be_1__new"/>
             </PaneItem>
