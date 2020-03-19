@@ -3,7 +3,6 @@ import {
   Subject,
   InfographicPanel,
   get_source_links,
-  
   declare_panel,
 } from "../shared.js";
 import {
@@ -12,19 +11,19 @@ import {
   result_statuses,
   result_docs,
   current_drr_key,
+  link_to_results_infograph,
 } from './results_common.js';
 import { DrrSummary } from './drr_summary.js';
-import {
-  HorizontalStatusTable,
-  LateDepartmentsBanner,
-} from './result_components.js';
+import { LateDepartmentsBanner } from './result_components.js';
+import { DisplayTable } from '../../../components/index.js';
 
 const { Gov, Dept } = Subject;
 
 class GovDRR extends React.Component {
   render(){
     const {
-      counts_by_dept,
+      rows_of_counts_by_dept,
+      column_names,
       gov_counts,
       num_depts,
       verbose_gov_counts,
@@ -49,18 +48,10 @@ class GovDRR extends React.Component {
           <div className="medium_panel_text">
             <TM k="gov_drr_summary_org_table_text" />
           </div>
-          <HorizontalStatusTable 
-            counts_by_dept={counts_by_dept}
-            gov_counts={verbose_gov_counts}
-            status_columns={_.chain(result_statuses)
-              .map( (status_text, status_key) => [
-                `${current_drr_key}_indicators_${status_key}`,
-                status_text.text,
-              ])
-              .fromPairs()
-              .value()
-            }
-            doc={current_drr_key}
+          <DisplayTable
+            name={"Government DRR"}
+            column_names={column_names}
+            rows={rows_of_counts_by_dept}
           />
         </div>
       </div>
@@ -80,24 +71,42 @@ export const declare_gov_drr_panel = () => declare_panel({
     calculate(){
       const verbose_gov_counts = ResultCounts.get_gov_counts();
       const gov_counts = row_to_drr_status_counts(verbose_gov_counts, current_drr_key);
-  
       
       const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${current_drr_key}_total`] > 0 );
       const num_depts = dept_counts.length;
-  
-      const counts_by_dept = _.chain(dept_counts)
-        .map( row => ({ 
-          subject: Dept.lookup(row.id),
-          counts: row,
-        }))
-        .map( obj => ({...obj, total: d3.sum(_.values(obj.counts)) } ) )
+      
+      const column_keys = _.chain(result_statuses)
+        .map((row, key) => [`${current_drr_key}_indicators_${key}`, row.text])
+        .fromPairs()
         .value();
-  
+      
+      const rows_of_counts_by_dept = _.map(dept_counts, row => {
+        const subject = Dept.lookup(row.id);
+        const link_to_subject = <a href={link_to_results_infograph(subject)}>
+          {subject.name}
+        </a>;
+        const display_values = _.chain(column_keys)
+          .keys()
+          .map(column_key => [column_key, row[column_key]])
+          .fromPairs()
+          .set("subject_name", link_to_subject)
+          .value();
+        const sort_values = {...display_values, subject_name: subject.name};
+        const search_values = { subject_name: subject.name };
+
+        return {
+          display_values,
+          sort_values,
+          search_values,
+        };
+      });
+      const column_names = _.assignIn({subject_name: text_maker("org")}, column_keys);
       const late_dept_count = result_docs[current_drr_key].late_results_orgs.length;
   
       return {
         gov_counts,
-        counts_by_dept,
+        rows_of_counts_by_dept,
+        column_names,
         verbose_gov_counts,
         num_depts,
         late_dept_count,

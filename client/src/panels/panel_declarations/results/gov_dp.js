@@ -7,31 +7,27 @@ import {
   create_text_maker_component,
   InfographicPanel,
   get_source_links,
-
   declare_panel,
 } from "../shared.js";
-const { Dept } = Subject;
-
 import {
   ResultCounts,
   filter_and_genericize_doc_counts,
   current_dp_key,
   result_docs,
+  link_to_results_infograph,
 } from './results_common.js';
-import {
-  HorizontalStatusTable,
-  LateDepartmentsBanner,
-} from './result_components.js';
+import { LateDepartmentsBanner } from './result_components.js';
+import { DisplayTable } from '../../../components';
 
+const { Dept } = Subject;
 const { text_maker, TM } = create_text_maker_component(text);
 
 const current_dp_year = result_docs[current_dp_key].year;
 const current_dp_corresponding_drr_year = _.toNumber(result_docs[current_dp_key].year_short) + 1;
 
 
-const DpSummary = ({counts, verbose_gov_counts, counts_by_dept, late_dept_count}) => {
+const DpSummary = ({counts, rows_of_counts_by_dept, column_names, late_dept_count}) => {
   const current_dp_counts_with_generic_keys = filter_and_genericize_doc_counts(counts, current_dp_key);
-
   return (
     <Fragment>
       <div className="fcol-md-12 medium_panel_text">
@@ -40,20 +36,16 @@ const DpSummary = ({counts, verbose_gov_counts, counts_by_dept, late_dept_count}
           k="gov_dp_text"
           args={{
             ...current_dp_counts_with_generic_keys, 
-            depts_with_dps: counts_by_dept.length,
+            depts_with_dps: rows_of_counts_by_dept.length,
             year: current_dp_year,
             drr_tabling_year: current_dp_corresponding_drr_year,
           }}
         />
       </div>
-      <HorizontalStatusTable 
-        counts_by_dept={counts_by_dept}
-        gov_counts={verbose_gov_counts}
-        status_columns={{
-          [`${current_dp_key}_results`]: text_maker("results"),
-          [`${current_dp_key}_indicators`]: text_maker("indicators"),
-        }}
-        doc={current_dp_key}
+      <DisplayTable
+        name={"Government DP"}
+        rows={rows_of_counts_by_dept}
+        column_names={column_names}
       />
     </Fragment>
   );
@@ -65,23 +57,40 @@ export const declare_gov_dp_panel = () => declare_panel({
   levels: ["gov"],
   panel_config_func: (level, panel_key) => ({
     requires_result_counts: true,
-    calculate: () => {
-      const verbose_gov_counts = ResultCounts.get_gov_counts();
-      
+    calculate: () => {      
       const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${current_dp_key}_results`] > 0 );
-      const counts_by_dept = _.chain(dept_counts)
-        .map( row => ({ 
-          subject: Dept.lookup(row.id),
-          counts: row,
-        }))
-        .map( obj => ({...obj, total: d3.sum(_.values(obj.counts)) } ) )
-        .value();
-  
+
+      const column_keys = {
+        [`${current_dp_key}_results`]: text_maker("results"),
+        [`${current_dp_key}_indicators`]: text_maker("indicators"),
+      };
+
+      const rows_of_counts_by_dept = _.map(dept_counts, row => {
+        const subject = Dept.lookup(row.id);
+        const link_to_subject = <a href={link_to_results_infograph(subject)}>
+          {subject.name}
+        </a>;
+        const display_values = _.chain(column_keys)
+          .keys()
+          .map(column_key => [column_key, row[column_key]])
+          .fromPairs()
+          .set("subject_name", link_to_subject)
+          .value();
+        const sort_values = {...display_values, subject_name: subject.name};
+        const search_values = { subject_name: subject.name };
+
+        return {
+          display_values,
+          sort_values,
+          search_values,
+        };
+      });
+      const column_names = _.assignIn({subject_name: text_maker("org")}, column_keys);
       const late_dept_count = result_docs[current_dp_key].late_results_orgs.length;
 
       return { 
-        verbose_gov_counts,
-        counts_by_dept,
+        column_names,
+        rows_of_counts_by_dept,
         late_dept_count,
       };
     },
@@ -90,8 +99,8 @@ export const declare_gov_dp_panel = () => declare_panel({
     render({ calculations, sources, footnotes}){
       const {
         panel_args: {
-          verbose_gov_counts,
-          counts_by_dept,
+          column_names,
+          rows_of_counts_by_dept,
           late_dept_count,
         },
       } = calculations;
@@ -106,8 +115,8 @@ export const declare_gov_dp_panel = () => declare_panel({
         >
           <DpSummary 
             counts={counts}
-            verbose_gov_counts={verbose_gov_counts}
-            counts_by_dept={counts_by_dept}
+            column_names={column_names}
+            rows_of_counts_by_dept={rows_of_counts_by_dept}
             late_dept_count={late_dept_count}
           />
         </InfographicPanel>
