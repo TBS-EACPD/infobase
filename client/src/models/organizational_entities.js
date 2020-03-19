@@ -98,6 +98,8 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
       this, 
       {
         id: def.unique_id,
+        name: def.applied_title || def.legal_name,
+        old_name: def.old_applied_title,
         minister_objs: [],
         table_ids: [],
         crsos: [],
@@ -106,12 +108,6 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
     );
   }
 
-  get name(){
-    return this.applied_title || this.legal_name;
-  }
-  get old_name(){
-    return this.old_applied_title;
-  }
   get programs(){
     return _.chain(this.crsos)
       .map('programs')
