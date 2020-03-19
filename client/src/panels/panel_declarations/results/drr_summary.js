@@ -210,13 +210,15 @@ class PercentageViz extends React.Component {
       })
     );
     
+    const all_data_total = _.sumBy(all_data, 'value');
 
     const graph_data = _.filter(all_data, d=>_.includes(selected,d.id));
     const graph_total = _.sumBy(graph_data, 'value');
 
     const new_summary_text_args = {
       year: current_drr_year,
-      drr_total: graph_total,
+      drr_subset: graph_total,
+      drr_total: all_data_total,
       drr_indicators_met: _.includes(selected, 'met') && counts.met,
       drr_indicators_not_met: _.includes(selected, 'not_met') && counts.not_met,
       drr_indicators_not_available: _.includes(selected, 'not_available') && counts.not_available,
@@ -226,29 +228,6 @@ class PercentageViz extends React.Component {
     return (
       <Fragment>
         <div className="frow">
-          <div className="fcol-md-4 fcol-xs-4 medium_panel_text" >
-            <TM
-              k="new_drr_summary_text_summary"
-              args={new_summary_text_args} 
-            />
-          </div>
-          <div className="fcol-md-4 fcol-xs-4 medium_panel_text" >
-            <div style={{height: '280px'}} aria-hidden = {true}>
-              <NivoResponsivePie
-                data = {graph_data}
-                colorBy = {obj=>result_color_scale(obj.id)}
-                total = {graph_total}
-                height = '280px'
-                is_money = {false}
-                margin = {{
-                  top: 30,
-                  right: 30,
-                  bottom: 30,
-                  left: 30,
-                }}
-              />
-            </div>
-          </div>
           <div className="fcol-md-4 fcol-xs-4" >
             <div className="medium_panel_text">
               {text_maker("graph_legend_instructions")}
@@ -271,6 +250,29 @@ class PercentageViz extends React.Component {
                 }}
               />
             </div>
+          </div>
+          <div className="fcol-md-4 fcol-xs-4 medium_panel_text" >
+            <div style={{height: '280px'}} aria-hidden = {true}>
+              <NivoResponsivePie
+                data = {graph_data}
+                colorBy = {obj=>result_color_scale(obj.id)}
+                total = {graph_total}
+                height = '280px'
+                is_money = {false}
+                margin = {{
+                  top: 30,
+                  right: 30,
+                  bottom: 30,
+                  left: 30,
+                }}
+              />
+            </div>
+          </div>
+          <div className="fcol-md-4 fcol-xs-4 medium_panel_text" >
+            <TM
+              k="new_drr_summary_text_summary"
+              args={new_summary_text_args} 
+            />
           </div>
         </div>
       </Fragment>
