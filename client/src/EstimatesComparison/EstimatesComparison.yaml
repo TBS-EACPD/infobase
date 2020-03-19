@@ -81,7 +81,7 @@ change_from_comparison_value:
 previous_mains_comparison_value:
   transform: [handlebars]
   en: Comparison to Main Estimates <span class="nowrap">{{est_last_year}}</span>
-  fr: Comparaison avec le budget principale <span class="nowrap">{{est_last_year}}</span> (%)
+  fr: Comparaison avec le budget principal <span class="nowrap">{{est_last_year}}</span> (%)
 
 show_only_votes:
   en: Only show voted items
