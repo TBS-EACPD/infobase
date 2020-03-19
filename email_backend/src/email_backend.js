@@ -21,6 +21,10 @@ import { throttle_requests_by_client } from './throttle_requests_by_client.js';
 // import { new_problem } from 'problem_mongoose.js';
 // const new_problem = require('problem_mongoose');
 
+const mongoose = require('mongoose');
+const assert = require('assert');
+const Schema = mongoose.Schema;
+
 const get_request_content = (request) => (!_.isEmpty(request.body) && request.body) || (!_.isEmpty(request.query) && request.query);
 
 const log_email_request = (request, log_message) => {
@@ -104,6 +108,7 @@ const make_email_backend = (templates) => {
         template_name,
         completed_template,
       } = get_request_content(request);
+      debugger;
 
       const original_template = templates[template_name];
 
@@ -148,24 +153,24 @@ const make_email_backend = (templates) => {
           response.send("200");
 
           //Sending info to MongoDB server
-          const mongoose = require('mongoose');
-          const assert = require('assert');
-          const Schema = mongoose.Schema;
-
           mongoose.connect('mongodb://localhost/Feedback');
 
           mongoose.connection.once('open', function(){
-            console.log('Successfully Connected');
+            console.log('Connection Successful');
 
 
             var problem_schema = new Schema({}, { strict: false });
             var new_problem = mongoose.model('Problems', problem_schema);
-            var problem_to_send = new new_problem({ template: template_name, info: completed_template });
-            problem_to_send.save();
+            var problem_to_send = new new_problem({ 
+              // form: template_name,
+              type: completed_template.issue_type[0],
+              details: completed_template.issue_details,
+              full: request,
+            });
 
             problem_to_send.save().then(function(){
               assert(problem_to_send.isNew() === false);
-              console.log('Send Successful');
+              console.log('Mongo Log Request Successful');
             });
 
           }).on('error', function(error){
