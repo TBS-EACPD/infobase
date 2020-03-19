@@ -965,21 +965,16 @@ export const declare_welcome_mat_panel = () => declare_panel({
                 calcs: proper_calcs,
               };
             } else {
-              //org with DP, we have everything! 
-        
-              if(has_planned){
-                return {
-                  type: "hist_planned",
-                  info,
-                  calcs,
-                };
-              } else {
-                return {
-                  type: "hist",
-                  info,
-                  calcs,
-                };
-              }
+              // DP org, could have hist and/or planned
+              const type = has_hist && has_planned ?
+                'hist_planned' :
+                 (has_hist && 'hist') || (has_planned && 'planned');
+
+              return type && {
+                type,
+                info,
+                calcs,
+              };
             }
           },
           render,
