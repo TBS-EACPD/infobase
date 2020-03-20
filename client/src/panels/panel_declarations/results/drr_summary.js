@@ -201,14 +201,14 @@ class PercentageViz extends React.Component {
     const { counts } = this.props;
     const { selected } = this.state;
 
-    const all_data = _.map(
-      counts,
-      (value, key) => ({
+    const all_data = _.chain(counts)
+      .map( (value, key) => ({
         name: result_statuses[key].text,
         id: key,
         value,
-      })
-    );
+      }) )
+      .filter( status => status.value > 0 )
+      .value();
     
     const all_data_total = _.sumBy(all_data, 'value');
 
