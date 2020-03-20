@@ -13,7 +13,7 @@ import MediaQuery from 'react-responsive';
 import './NivoCharts.scss';
 import graph_text from './NivoCharts.yaml';
 
-const { TM } = create_text_maker_component(graph_text);
+const { TM, text_maker } = create_text_maker_component(graph_text);
 
 
 const get_formatter = (is_money, formatter, raw = true) => (
@@ -650,6 +650,51 @@ const BubbleNode = ({ node, style, handlers, theme }) => {
   );
 };
 
+const circle_proportion_tooltip = (tooltip_data, is_money) => (
+  <div style={{color: window.infobase_color_constants.textColor}}>
+    <table style={{width: '100%', borderCollapse: 'collapse'}}>
+      <tbody>
+        <tr key = {tooltip_data.parent.id}>
+          <td className="nivo-tooltip__content">
+            <div style={{display: "flex"}}>
+              <div style={{height: '12px', width: '12px', backgroundColor: tooltip_data.all_other.color, flex: "0 0 auto"}} />
+              <div style={{paddingBottom: '12px', padding: '5px', flex: "0 0 auto"}}>{text_maker("and")}</div>
+              <div style={{height: '12px', width: '12px', backgroundColor: tooltip_data.child.color, flex: "0 0 auto"}} />
+            </div>
+          </td>
+          <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
+            {percent_tooltip_content(tooltip_data.parent, get_formatter(is_money), get_percent_formatter(tooltip_data.parent.value), tooltip_data.parent.value)}
+          </MediaQuery>
+          <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
+            {smalldevice_percent_tooltip_content(tooltip_data.parent, get_formatter(is_money), get_percent_formatter(tooltip_data.parent.value), tooltip_data.parent.value)}
+          </MediaQuery>
+        </tr>
+        <tr key = {tooltip_data.child.id}>
+          <td className="nivo-tooltip__content">
+            <div style={{height: '12px', width: '12px', backgroundColor: tooltip_data.child.color}} />
+          </td>
+          <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
+            {percent_tooltip_content(tooltip_data.child, get_formatter(is_money), get_percent_formatter(tooltip_data.child.value), tooltip_data.parent.value)}
+          </MediaQuery>
+          <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
+            {smalldevice_percent_tooltip_content(tooltip_data.child, get_formatter(is_money), get_percent_formatter(tooltip_data.child.value), tooltip_data.parent.value)}
+          </MediaQuery>
+        </tr>
+        <tr key = {tooltip_data.all_other.id}>
+          <td className="nivo-tooltip__content">
+            <div style={{height: '12px', width: '12px', backgroundColor: tooltip_data.all_other.color}} />
+          </td>
+          <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
+            {percent_tooltip_content(tooltip_data.all_other, get_formatter(is_money), get_percent_formatter(tooltip_data.all_other.value), tooltip_data.parent.value)}
+          </MediaQuery>
+          <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
+            {smalldevice_percent_tooltip_content(tooltip_data.all_other, get_formatter(is_money), get_percent_formatter(tooltip_data.all_other.value), tooltip_data.parent.value)}
+          </MediaQuery>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+)
 
 export class CircleProportionChart extends React.Component{
   render(){
@@ -686,18 +731,22 @@ export class CircleProportionChart extends React.Component{
       ],
     };
 
-    const tooltip_data = [
-      {
-        id: parent_name,
-        value: parent_value,
+    const tooltip_data = {
+      all_other: {
+        id: text_maker("bubble_all_other"),
+        value: parent_value-child_value,
         color: color_scale(parent_name),
       },
-      {
+      child: {
         id: child_name,
         value: child_value,
         color: color_scale(child_name),
       },
-    ];
+      parent: {
+        id: parent_name,
+        value: parent_value,
+      },
+    };
     
 
     const title = <TM k="bubble_title" args={{outer: parent_name, inner: child_name}}/>;
@@ -707,7 +756,7 @@ export class CircleProportionChart extends React.Component{
         <div style={{height: height}}>
           <ResponsiveBubble
             root={ graph_data }
-            tooltip={ (d) => default_tooltip( true, tooltip_data, get_formatter(is_money, text_formatter, false), get_percent_formatter(child_value/parent_value, false), parent_value) }
+            tooltip={ () => circle_proportion_tooltip(tooltip_data, is_money) }
             identity="name"
             value="value"
             colorBy={d=>color_scale(d.name)}
