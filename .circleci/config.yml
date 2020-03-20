@@ -102,12 +102,11 @@ jobs:
             - scripts/common_node_scripts/node_modules
           key: client-dependencies-{{ checksum "client/package-lock.json" }}
 
+      - run: ./scripts/ci_scripts/get_bundle_stats_baseline.sh
+
       - restore_cache:
           keys:
             - prod-build-{{ .Branch }}-{{ .Revision }}
-      - run:
-          command: | # get master's latest baseline.json to use as the comparison baseline when IB_prod runs, but not if restored from a cache since it won't be used if build_all.sh doesn't run
-            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || ./scripts/ci_scripts/get_bundle_stats_baseline.sh
       - run:
           command: |
             [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh)
