@@ -134,13 +134,21 @@ const TransferPaymentsByRegionGraph = ({data}) => (
   />
 );
 
-const format_data_for_a11y_table = (data) => _.chain(data)
+const format_data_for_a11y_table = (data, is_per_capita) => _.chain(data)
   .flatMap( _.keys )
   .uniq()
   .map( (prov_code) => {
     const formatted_data = _.map(
       data,
-      (row) => formats["compact2_written_raw"](row[prov_code] || 0)
+      (row) => {
+        const formatted_value = formats["compact2_written_raw"](row[prov_code] || 0);
+
+        if (is_per_capita){
+          return `${formatted_value} ${text_maker('per_capita')}`;
+        } else {
+          return formatted_value;
+        }
+      }
     );
   
     return {
@@ -150,12 +158,12 @@ const format_data_for_a11y_table = (data) => _.chain(data)
   } )
   .filter('data')
   .value();
-const TransferPaymentsByRegionA11yTable = ({table_name, data}) => (
+const TransferPaymentsByRegionA11yTable = ({table_name, data, is_per_capita}) => (
   <A11YTable
     table_name={table_name}
     label_col_header={ text_maker('geo_region') }
     data_col_headers={ _.map(std_years, run_template) }
-    data={ format_data_for_a11y_table(data) }
+    data={ format_data_for_a11y_table(data, is_per_capita) }
   />
 );
 
@@ -256,11 +264,12 @@ class TPMap extends React.Component {
               <Fragment>
                 <TransferPaymentsByRegionA11yTable
                   table_name={text_maker("transfer_payments")}
-                  data={per_capita_data}
+                  data={transfer_payment_data}
                 />
                 <TransferPaymentsByRegionA11yTable
                   table_name={text_maker("transfer_payments_per_capita")}
                   data={per_capita_data}
+                  is_per_capita={true}
                 />
               </Fragment>
             }
