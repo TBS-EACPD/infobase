@@ -17,32 +17,46 @@ export const convert_GET_with_compressed_query_to_POST = (req) => {
   };
 };
 
+
 const get_query_and_variables_from_request = (req) => {
-  if ( !_.isEmpty(req.body) ){
-    const {query, variables} = req.body;
-    return {query, variables};
-  } else if( req.query ){
-    const {query, variables} = req.query;
-
-    const confirmed_query = /^query/.test(query) && query
-
-    const parsed_variables = variables && JSON.parse(variables);
-
-    return {query: confirmed_query, variables: parsed_variables};
-  } else {
-    return {};
-  }
-};
-export const get_log_object_for_request = (req) => {
-  const {query, variables} = get_query_and_variables_from_request(req);
-
-  const {_query_name, ...query_variables} = (() =>{
+  const quiet_failing_json_parse = (json_String) => {
     try {
-      return JSON.parse(variables);
-    } catch(error){
+      return JSON.parse(json_String);
+    } catch(erro){
+      return {};
+    }
+  };
+
+  const {
+    query,
+    variables,
+  } = (() => {
+    if ( !_.isEmpty(req.body) ){
+      const {query, variables} = req.body;
+      return {query, variables};
+    } else if( req.query ){
+      const {query, variables} = req.query;
+
+      const confirmed_query = /^query/.test(query) && query
+
+      return {
+        query: confirmed_query,
+        variables: quiet_failing_json_parse(variables),
+      };
+    } else {
       return {};
     }
   })();
+  
+  const {
+    _query_name: query_name,
+    ...actual_query_variables
+  } = variables || {};
+
+  return {query, query_name, variables: actual_query_variables};
+};
+export const get_log_object_for_request = (req) => {
+  const {query, query_name, variables} = get_query_and_variables_from_request(req);
 
   const method = req.method === "POST" ? 
     ( _.has(req.headers, 'encoded-compressed-query') ? 
@@ -51,13 +65,16 @@ export const get_log_object_for_request = (req) => {
     ) :
     req.method;
 
+  // NOTE: query needs to be the last field here. There's a size limit per log item, and query is the field most
+  // capable of pushing the log over the limit (afterwhich it truncates). In the truncation case, the query hash
+  // at least gives some opportunity to still properly identify the query
   return _.pickBy(
     {
       origin: req.headers && req.headers.origin,
       method,
       non_query: !query && "Apparently not a GraphQL query! Normally, this shouldn't happen!",
-      query_name: _query_name, 
-      variables: query_variables,
+      query_name, 
+      variables,
       query_hash: query && md5(query),
       query,
     },
