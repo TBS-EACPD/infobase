@@ -72,23 +72,28 @@ const get_text_args = (subject, transfer_payment_data, per_capita_data) => {
   const [
     largest_per_capita_prov_code,
     largest_per_capita_value,
-  ] = _.chain(last_year_data_per_capita)
-    .toPairs()
-    .sortBy( ([prov_code, value]) => value )
-    .last()
-    .value();
-  const largest_per_capita_prov = show_per_capita_data && provinces_with_article[largest_per_capita_prov_code].text;
+  ] = show_per_capita_data ?
+    _.chain(last_year_data_per_capita)
+      .toPairs()
+      .sortBy( ([prov_code, value]) => value )
+      .last()
+      .value() :
+      [false, false];
+  const largest_per_capita_prov = show_per_capita_data &&
+    provinces_with_article[largest_per_capita_prov_code].text;
 
 
-  const compare_per_capita_to_largest_total = !_.includes(
-    [
-      'abroad', 
-      'na', 
-      largest_per_capita_prov_code,
-    ],
-    largest_total_prov_code
-  );
-  const largest_total_per_capita_value = last_year_data_per_capita[largest_total_prov_code];
+  const compare_per_capita_to_largest_total = show_per_capita_data &&
+    !_.includes(
+      [
+        'abroad', 
+        'na', 
+        largest_per_capita_prov_code,
+      ],
+      largest_total_prov_code
+    );
+  const largest_total_per_capita_value = compare_per_capita_to_largest_total &&
+    last_year_data_per_capita[largest_total_prov_code];
 
   return {
     subject,
