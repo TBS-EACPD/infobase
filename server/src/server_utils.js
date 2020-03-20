@@ -35,7 +35,14 @@ const get_query_and_variables_from_request = (req) => {
 };
 export const get_log_object_for_request = (req) => {
   const {query, variables} = get_query_and_variables_from_request(req);
-  const {_query_name, ...query_variables} = variables || {};
+
+  const {_query_name, ...query_variables} = (() =>{
+    try {
+      return JSON.parse(variables);
+    } catch(error){
+      return {};
+    }
+  })();
 
   const method = req.method === "POST" ? 
     ( _.has(req.headers, 'encoded-compressed-query') ? 
