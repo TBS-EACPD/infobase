@@ -199,7 +199,6 @@ class PercentageViz extends React.Component {
 
   render(){
     const { counts } = this.props;
-    const { selected } = this.state;
 
     const all_data = _.chain(counts)
       .map( (value, key) => ({
@@ -209,7 +208,9 @@ class PercentageViz extends React.Component {
       }) )
       .filter( status => status.value > 0 )
       .value();
-    
+
+    const selected = !(all_data.length === 1 && all_data[0].id === "future") ? this.state.selected : _.keys(counts); // override selected if there are only future indicators
+
     const all_data_total = _.sumBy(all_data, 'value');
 
     const graph_data = _.filter(all_data, d=>_.includes(selected,d.id));
