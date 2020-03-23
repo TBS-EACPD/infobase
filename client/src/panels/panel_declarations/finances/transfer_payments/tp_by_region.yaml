@@ -6,12 +6,12 @@ tp_by_region_title:
 tp_by_region_text: 
   transform: [handlebars, markdown]
   en: |
-    In **{{pa_last_year}}**, **{{subject.name}}** paid out **{{fmt_compact1_written subject_total_value}}** in {{gl_tt "transfer payments" "TP"}}. **{{fmt_compact1_written largest_total_value}}** ({{fmt_percentage1 largest_total_percent}}) went to recipients in **{{largest_total_prov}}**, making it the region receiving the largest total share of {{subject.name}}'s transfer payments.  
+    In **{{pa_last_year}}**, **{{subject.name}}** paid out **{{fmt_compact1_written subject_total_value}}** in {{gl_tt "transfer payments" "TP"}}. **{{fmt_compact1_written largest_total_value}}** ({{fmt_percentage1 largest_total_percent}}) went to recipients in **{{largest_total_prov}}**, making it the region receiving the largest total share of {{subject.name}}'s transfer payments.
 
     {{#if show_per_capita_data}}
-      When accounting for population statistics, the local region with the largest per capita transfer payment value in **{{pa_last_year}}** was **{{largest_per_capita_prov}}**, at **{{fmt_compact2_written largest_per_capita_value}} per capita**.
+      When accounting for population statistics, the local region with the largest per capita transfer payment value in **{{pa_last_year}}** was **{{largest_per_capita_prov}}**, at **{{#compare largest_per_capita_value 0.01 operator=">=" }}{{fmt_compact2_written largest_per_capita_value}}{{else}}less than $0.01{{/compare}} per capita**.
       {{#if compare_per_capita_to_largest_total}}
-        For comparison, the local region receiving the largest total value, **{{largest_total_prov}}**, received **{{fmt_compact2_written largest_total_per_capita_value}} per capita**.
+        For comparison, the local region receiving the largest total value, **{{largest_total_prov}}**, received **{{#compare largest_total_per_capita_value 0.01 operator=">=" }}{{fmt_compact2_written largest_total_per_capita_value}}{{else}}less than $0.01{{/compare}} per capita**.
       {{/if}}
     {{/if}}
   fr: |
