@@ -56,6 +56,7 @@ export class DisplayTable extends React.Component {
     const {
       name,
       column_names,
+      total,
       rows,
       ordered_column_keys,
     } = this.props;
@@ -188,6 +189,18 @@ export class DisplayTable extends React.Component {
                 </tr>
               )
             )}
+            { total &&
+            <tr key="total_row">
+              <td style={{fontWeight: 700}} key="total">
+                {text_maker("total")}
+              </td>
+              { _.map(total, col => (
+                <td style={{fontWeight: 700}} key={col}>
+                  {col}
+                </td>
+              ))}
+            </tr>
+            }
           </tbody>
         </table>
         { sorted_filtered_data.length === 0 &&
