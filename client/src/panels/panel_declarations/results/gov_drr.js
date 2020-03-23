@@ -4,6 +4,7 @@ import {
   InfographicPanel,
   get_source_links,
   declare_panel,
+  HeightClippedGraph,
 } from "../shared.js";
 import {
   row_to_drr_status_counts,
@@ -27,7 +28,8 @@ class GovDRR extends React.Component {
       gov_counts,
       num_depts,
       verbose_gov_counts,
-      late_dept_count, 
+      late_dept_count,
+      total,
     } = this.props;
 
     return (
@@ -48,11 +50,14 @@ class GovDRR extends React.Component {
           <div className="medium_panel_text">
             <TM k="gov_drr_summary_org_table_text" />
           </div>
-          <DisplayTable
-            name={"Government DRR"}
-            column_names={column_names}
-            rows={rows_of_counts_by_dept}
-          />
+          <HeightClippedGraph clipHeight={330}>
+            <DisplayTable
+              name={"Government DRR"}
+              column_names={column_names}
+              rows={rows_of_counts_by_dept}
+              total={total}
+            />
+          </HeightClippedGraph>
         </div>
       </div>
     );
@@ -100,11 +105,17 @@ export const declare_gov_drr_panel = () => declare_panel({
           search_values,
         };
       });
+      const total = _.chain(column_keys)
+        .keys()
+        .map(key => [key, verbose_gov_counts[key]])
+        .fromPairs()
+        .value();
       const column_names = _.assignIn({subject_name: text_maker("org")}, column_keys);
       const late_dept_count = result_docs[current_drr_key].late_results_orgs.length;
   
       return {
         gov_counts,
+        total,
         rows_of_counts_by_dept,
         column_names,
         verbose_gov_counts,

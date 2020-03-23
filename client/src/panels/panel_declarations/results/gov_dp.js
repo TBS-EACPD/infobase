@@ -8,6 +8,7 @@ import {
   InfographicPanel,
   get_source_links,
   declare_panel,
+  HeightClippedGraph,
 } from "../shared.js";
 import {
   ResultCounts,
@@ -26,7 +27,7 @@ const current_dp_year = result_docs[current_dp_key].year;
 const current_dp_corresponding_drr_year = _.toNumber(result_docs[current_dp_key].year_short) + 1;
 
 
-const DpSummary = ({counts, rows_of_counts_by_dept, column_names, late_dept_count}) => {
+const DpSummary = ({counts, rows_of_counts_by_dept, total, column_names, late_dept_count}) => {
   const current_dp_counts_with_generic_keys = filter_and_genericize_doc_counts(counts, current_dp_key);
   return (
     <Fragment>
@@ -42,11 +43,14 @@ const DpSummary = ({counts, rows_of_counts_by_dept, column_names, late_dept_coun
           }}
         />
       </div>
-      <DisplayTable
-        name={"Government DP"}
-        rows={rows_of_counts_by_dept}
-        column_names={column_names}
-      />
+      <HeightClippedGraph clipHeight={330}>
+        <DisplayTable
+          name={"Government DP"}
+          rows={rows_of_counts_by_dept}
+          column_names={column_names}
+          total={total}
+        />
+      </HeightClippedGraph>
     </Fragment>
   );
 };
@@ -59,6 +63,7 @@ export const declare_gov_dp_panel = () => declare_panel({
     requires_result_counts: true,
     calculate: () => {      
       const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${current_dp_key}_results`] > 0 );
+      const verbose_gov_counts = ResultCounts.get_gov_counts();
 
       const column_keys = {
         [`${current_dp_key}_results`]: text_maker("results"),
@@ -85,11 +90,17 @@ export const declare_gov_dp_panel = () => declare_panel({
           search_values,
         };
       });
+      const total = _.chain(column_keys)
+        .keys()
+        .map(key => [key, verbose_gov_counts[key]])
+        .fromPairs()
+        .value();
       const column_names = _.assignIn({subject_name: text_maker("org")}, column_keys);
       const late_dept_count = result_docs[current_dp_key].late_results_orgs.length;
 
       return { 
         column_names,
+        total,
         rows_of_counts_by_dept,
         late_dept_count,
       };
@@ -100,6 +111,7 @@ export const declare_gov_dp_panel = () => declare_panel({
       const {
         panel_args: {
           column_names,
+          total,
           rows_of_counts_by_dept,
           late_dept_count,
         },
@@ -115,6 +127,7 @@ export const declare_gov_dp_panel = () => declare_panel({
         >
           <DpSummary 
             counts={counts}
+            total={total}
             column_names={column_names}
             rows_of_counts_by_dept={rows_of_counts_by_dept}
             late_dept_count={late_dept_count}
