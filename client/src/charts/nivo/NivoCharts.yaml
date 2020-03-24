@@ -30,3 +30,14 @@ value:
 percentage:
   en: Percentage
   fr: Pourcentage
+
+bubble_title:
+  transform: [handlebars, markdown]
+  en: |
+    **{{inner}}** as a fraction of **{{outer}}**
+  fr: |
+    TODO
+
+bubble_all_other:
+  en: All other
+  fr: TODO

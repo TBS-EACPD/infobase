@@ -24,6 +24,7 @@ import {
   NivoResponsiveHBar,
   NivoResponsiveLine,
   NivoResponsivePie,
+  CircleProportionChart,
   LineBarToggleGraph,
 } from '../../charts/nivo/NivoCharts.js';
 import {
