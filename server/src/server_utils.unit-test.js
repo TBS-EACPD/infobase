@@ -1,15 +1,20 @@
 import _ from 'lodash';
 
+import { encode } from 'querystring';
+import { compressToBase64 } from 'lz-string';
+
 import {
   convert_GET_with_compressed_query_to_POST,
   get_log_object_for_request,
 } from './server_utils.js';
 
 
-const query_string = 'query ($lang: String!) {\n  root(lang: $lang) {\n    gov {\n      id\n      __typename\n    }\n    __typename\n  }\n}';
+const query = 'query ($lang: String!) {\n  root(lang: $lang) {\n    gov {\n      id\n      __typename\n    }\n    __typename\n  }\n}';
 const variable_string = '{"lang":"en","_query_name":"test"}';
-const query_object = {query: query_string, variables: variable_string};
-const compressed_query = "I4VwpgTgngBAFAEgDYEMB2BzAXDAygFwgEtMBCAShgG8AoGGCAe0fzlUx2XQ0tvvoyMAbtTr96RACZjxAfVn4oABzBoUAWzAyYAX23zFKtZrF6dAMiEpiKAEZIwAZwC8VAETsMbrG9VuANG6yoJBQssZg3m74TvhuOkA";
+const query_object = {query, variables: variable_string};
+
+const url_encoded_query = encode(query_object);
+const compressed_query = compressToBase64(url_encoded_query);
 
 
 describe("convert_GET_with_compressed_query_to_POST", function(){
@@ -30,7 +35,7 @@ describe("convert_GET_with_compressed_query_to_POST", function(){
         "encoded-compressed-query": compressed_query,
       },
       body: { 
-        query: query_string,
+        query,
         variables: variable_string,
         operationName: null,
       },
@@ -47,7 +52,7 @@ describe("get_log_object_for_request", function(){
       headers: {
         origin: "test",
       },
-      query: query_object,
+      query_object,
     };
 
     const log_object = get_log_object_for_request(GET_request);
@@ -58,7 +63,7 @@ describe("get_log_object_for_request", function(){
     expect(log_object.query_name).toEqual("test");
     expect(log_object.variables).toEqual({lang: "en"});
     expect(log_object.query_hash).toEqual( expect.stringMatching(/.?/) );
-    expect(log_object.query).toEqual(query_string);
+    expect(log_object.query).toEqual(query);
   });
 
   it("Builds log as expected for a normal GET request without variables", () => {
@@ -67,7 +72,7 @@ describe("get_log_object_for_request", function(){
       headers: {
         origin: "test",
       },
-      query: {query: query_string},
+      query: {query},
     };
 
     const log_object = get_log_object_for_request(GET_request);
@@ -78,7 +83,7 @@ describe("get_log_object_for_request", function(){
     expect(log_object.query_name).toEqual(undefined);
     expect(log_object.variables).toEqual({});
     expect(log_object.query_hash).toEqual( expect.stringMatching(/.?/) );
-    expect(log_object.query).toEqual(query_string);
+    expect(log_object.query).toEqual(query);
   });
 
   it("Builds log as expected for a normal POST request", () => {
@@ -88,7 +93,7 @@ describe("get_log_object_for_request", function(){
         origin: "test",
       },
       body: {
-        query: query_string,
+        query,
         variables: JSON.parse(variable_string),
       },
     };
@@ -101,7 +106,7 @@ describe("get_log_object_for_request", function(){
     expect(log_object.query_name).toEqual("test");
     expect(log_object.variables).toEqual({lang: "en"});
     expect(log_object.query_hash).toEqual( expect.stringMatching(/.?/) );
-    expect(log_object.query).toEqual(query_string);
+    expect(log_object.query).toEqual(query);
   });
 
   it("Builds log as expected for a GET request with encoded-compressed-query that has been converted to a POST", () => {
@@ -112,7 +117,7 @@ describe("get_log_object_for_request", function(){
         "encoded-compressed-query": "sdfsdfas",
       },
       body: {
-        query: query_string,
+        query,
         variables: JSON.parse(variable_string),
       },
     };
