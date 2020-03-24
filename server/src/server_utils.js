@@ -1,4 +1,5 @@
 import { decompressFromBase64 } from 'lz-string';
+import { decode } from 'querystring';
 import md5 from 'md5';
 
 import _ from 'lodash';
@@ -6,8 +7,8 @@ import _ from 'lodash';
 // Side effect alert: this function mutates the suplied request object so that the conversion persists to subsequent server midleware
 // ... bit of a hack, and I'm not just talking about a function having side effects
 export const convert_GET_with_compressed_query_to_POST = (req) => {
-  const decoded_decompressed_query = decompressFromBase64(req.headers['encoded-compressed-query']);
-  const [query, variables] = decoded_decompressed_query.split("&variables=");
+  const decompressed_query = decompressFromBase64(req.headers['encoded-compressed-query']);
+  const {query, variables} = decode(decompressed_query);
 
   req.method = "POST";
   req.body = {
