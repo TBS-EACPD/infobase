@@ -52,7 +52,7 @@ describe("get_log_object_for_request", function(){
       headers: {
         origin: "test",
       },
-      query_object,
+      query: query_object,
     };
 
     const log_object = get_log_object_for_request(GET_request);
