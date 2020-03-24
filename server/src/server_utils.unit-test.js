@@ -60,7 +60,7 @@ describe("get_log_object_for_request", function(){
     expect(log_object.origin).toEqual("test");
     expect(log_object.method).toEqual("GET");
     expect(log_object.non_query).toEqual(undefined);
-    expect(log_object.query_name).toEqual("test");
+    expect(log_object._query_name).toEqual("test");
     expect(log_object.variables).toEqual({lang: "en"});
     expect(log_object.query_hash).toEqual( expect.stringMatching(/.?/) );
     expect(log_object.query).toEqual(query);
@@ -80,7 +80,7 @@ describe("get_log_object_for_request", function(){
     expect(log_object.origin).toEqual("test");
     expect(log_object.method).toEqual("GET");
     expect(log_object.non_query).toEqual(undefined);
-    expect(log_object.query_name).toEqual(undefined);
+    expect(log_object._query_name).toEqual(undefined);
     expect(log_object.variables).toEqual({});
     expect(log_object.query_hash).toEqual( expect.stringMatching(/.?/) );
     expect(log_object.query).toEqual(query);
@@ -103,29 +103,10 @@ describe("get_log_object_for_request", function(){
     expect(log_object.origin).toEqual("test");
     expect(log_object.method).toEqual("POST");
     expect(log_object.non_query).toEqual(undefined);
-    expect(log_object.query_name).toEqual("test");
+    expect(log_object._query_name).toEqual("test");
     expect(log_object.variables).toEqual({lang: "en"});
     expect(log_object.query_hash).toEqual( expect.stringMatching(/.?/) );
     expect(log_object.query).toEqual(query);
-  });
-
-  it("Builds log as expected for a GET request with encoded-compressed-query that has been converted to a POST", () => {
-    const POST_converted_from_GET_with_compressed_query = {
-      method: "POST",
-      headers: {
-        origin: "test",
-        "encoded-compressed-query": "sdfsdfas",
-      },
-      body: {
-        query,
-        variables: JSON.parse(variable_string),
-      },
-    };
-
-    const log_object = get_log_object_for_request(POST_converted_from_GET_with_compressed_query);
-
-    // only the one difference between this and the regular POST case
-    expect(log_object.method).toEqual("GET with encoded-compressed-query header, treated as POST");
   });
 
   it("Identifies non-query requests as such", () => {
@@ -142,5 +123,31 @@ describe("get_log_object_for_request", function(){
 
     expect(log_object_body.non_query).toEqual( expect.stringMatching(/.?/) );
     expect(log_object_no_body.non_query).toEqual( expect.stringMatching(/.?/) );
+  });
+
+
+  it("Integration: GET requests converted to POST requests generate log objects as expected", () => {
+    const GET_with_compressed_query = {
+      method: "GET",
+      headers: {
+        "encoded-compressed-query": compressed_query,
+        origin: "test",
+      },
+    };;
+
+    const mutated_request_object = _.cloneDeep(GET_with_compressed_query);
+    convert_GET_with_compressed_query_to_POST(mutated_request_object);
+
+    const log_object = get_log_object_for_request(mutated_request_object);
+
+    expect(log_object.origin).toEqual("test");
+    expect(log_object.non_query).toEqual(undefined);
+    expect(log_object._query_name).toEqual("test");
+    expect(log_object.variables).toEqual({lang: "en"});
+    expect(log_object.query_hash).toEqual( expect.stringMatching(/.?/) );
+    expect(log_object.query).toEqual(query);
+
+    // should be the only difference between this and the regular POST case
+    expect(log_object.method).toEqual("GET with encoded-compressed-query header, treated as POST");
   });
 });
