@@ -209,7 +209,7 @@ class PercentageViz extends React.Component {
       .filter( status => status.value > 0 )
       .value();
 
-    const selected = !(all_data.length === 1 && all_data[0].id === "future") ? this.state.selected : _.keys(counts); // override selected if there are only future indicators
+    const selected = _.some(all_data, ({id}) => id !== "future") ? this.state.selected : _.keys(counts); // override selected if there are only future indicators
 
     const all_data_total = _.sumBy(all_data, 'value');
 
