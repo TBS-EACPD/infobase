@@ -3,12 +3,17 @@ import { ResponsiveBubble } from '@nivo/circle-packing';
 import classNames from 'classnames';
 import { Fragment } from 'react';
 import {
+  InteractiveGraph,
   graph_text_maker,
   general_default_props,
+  get_formatter,
 } from './nivo_shared.js';
+import { formats } from "../../core/format.js";
 import { newIBCategoryColors } from '../../core/color_schemes.js';
-
-
+import {
+  DisplayTable,
+} from '../../components/index.js';
+  
 
 const BubbleNode = ({ node, style, handlers, theme }) => {
   if (style.r <= 0) return null;
@@ -34,51 +39,6 @@ const BubbleNode = ({ node, style, handlers, theme }) => {
   );
 };
 
-// const circle_proportion_tooltip = (tooltip_data, is_money) => (
-//   <div style={{color: window.infobase_color_constants.textColor}}>
-//     <table style={{width: '100%', borderCollapse: 'collapse'}}>
-//       <tbody>
-//         <tr key = {tooltip_data.parent.id}>
-//           <td className="nivo-tooltip__content">
-//             <div style={{display: "flex"}}>
-//               <div style={{height: '12px', width: '12px', backgroundColor: tooltip_data.all_other.color, flex: "0 0 auto"}} />
-//               <div style={{paddingBottom: '12px', padding: '5px', flex: "0 0 auto"}}>{graph_text_maker("and")}</div>
-//               <div style={{height: '12px', width: '12px', backgroundColor: tooltip_data.child.color, flex: "0 0 auto"}} />
-//             </div>
-//           </td>
-//           <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
-//             {percent_tooltip_content(tooltip_data.parent, get_formatter(is_money), get_percent_formatter(tooltip_data.parent.value), tooltip_data.parent.value)}
-//           </MediaQuery>
-//           <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
-//             {smalldevice_percent_tooltip_content(tooltip_data.parent, get_formatter(is_money), get_percent_formatter(tooltip_data.parent.value), tooltip_data.parent.value)}
-//           </MediaQuery>
-//         </tr>
-//         <tr key = {tooltip_data.child.id}>
-//           <td className="nivo-tooltip__content">
-//             <div style={{height: '12px', width: '12px', backgroundColor: tooltip_data.child.color}} />
-//           </td>
-//           <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
-//             {percent_tooltip_content(tooltip_data.child, get_formatter(is_money), get_percent_formatter(tooltip_data.child.value), tooltip_data.parent.value)}
-//           </MediaQuery>
-//           <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
-//             {smalldevice_percent_tooltip_content(tooltip_data.child, get_formatter(is_money), get_percent_formatter(tooltip_data.child.value), tooltip_data.parent.value)}
-//           </MediaQuery>
-//         </tr>
-//         <tr key = {tooltip_data.all_other.id}>
-//           <td className="nivo-tooltip__content">
-//             <div style={{height: '12px', width: '12px', backgroundColor: tooltip_data.all_other.color}} />
-//           </td>
-//           <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
-//             {percent_tooltip_content(tooltip_data.all_other, get_formatter(is_money), get_percent_formatter(tooltip_data.all_other.value), tooltip_data.parent.value)}
-//           </MediaQuery>
-//           <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
-//             {smalldevice_percent_tooltip_content(tooltip_data.all_other, get_formatter(is_money), get_percent_formatter(tooltip_data.all_other.value), tooltip_data.parent.value)}
-//           </MediaQuery>
-//         </tr>
-//       </tbody>
-//     </table>
-//   </div>
-// )
 
 export class CircleProportionChart extends React.Component{
   render(){
@@ -92,6 +52,7 @@ export class CircleProportionChart extends React.Component{
       child_name,
       parent_value,
       parent_name,
+      disable_table_view,
     } = this.props;
 
     const color_scale = d3.scaleOrdinal().range(newIBCategoryColors);
@@ -113,27 +74,54 @@ export class CircleProportionChart extends React.Component{
       ],
     };
 
-    const tooltip_data = {
-      all_other: {
-        id: graph_text_maker("bubble_all_other"),
-        value: parent_value-child_value,
-        color: color_scale(parent_name),
-      },
-      child: {
-        id: child_name,
-        value: child_value,
-        color: color_scale(child_name),
-      },
-      parent: {
-        id: parent_name,
-        value: parent_value,
-      },
+
+    const ordered_column_keys = ["name","value","percent"];
+    
+    const column_names = {
+      name: graph_text_maker("label"),
+      value: graph_text_maker("value"),
+      percentage: graph_text_maker("percentage"),
     };
+
+    const table_data = [
+      {
+        display_values: {
+          name: parent_name,
+          value: get_formatter(is_money, text_formatter, true, true)(parent_value),
+          percent: formats.percentage1_raw(1.0),
+        },
+        sort_values: {
+          name: parent_name,
+          value: parent_value,
+          percent: 1.0,
+        },
+        search_values: {
+          name: parent_name,
+        },
+      },
+      {
+        display_values: {
+          name: child_name,
+          value: get_formatter(is_money, text_formatter, true, true)(child_value),
+          percent: formats.percentage1_raw(child_value/parent_value),
+        },
+        sort_values: {
+          name: child_name,
+          value: child_value,
+          percent: child_value/parent_value,
+        },
+        search_values: {
+          name: child_name,
+        },
+      },
+    ];
     
 
-    const title = <div>{graph_text_maker("bubble_title",{outer: parent_name, inner: child_name})}</div>;
 
-    return (
+    const title = <div>{graph_text_maker("bubble_title",{outer: parent_name, inner: child_name})}</div>;  
+    const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={graph_text_maker("bubble_title")} />;
+
+    const graph = (
       <Fragment>
         <div style={{height: height}}>
           <ResponsiveBubble
@@ -160,6 +148,8 @@ export class CircleProportionChart extends React.Component{
         </div>
       </Fragment>
     );
+
+    return <InteractiveGraph graph={graph} table={table} />;
   }
 };
 CircleProportionChart.defaultProps = {
