@@ -4,6 +4,15 @@ import md5 from 'md5';
 
 import _ from 'lodash';
   
+const quiet_failing_json_parse = (json_String) => {
+  try {
+    return JSON.parse(json_String);
+  } catch(erro){
+    return {};
+  }
+};
+
+
 // Side effect alert: this function mutates the suplied request object so that the conversion persists to subsequent server midleware
 // ... bit of a hack, and I'm not just talking about a function having side effects
 export const convert_GET_with_compressed_query_to_POST = (req) => {
@@ -13,21 +22,13 @@ export const convert_GET_with_compressed_query_to_POST = (req) => {
   req.method = "POST";
   req.body = {
     query,
-    variables,
+    variables: quiet_failing_json_parse(variables),
     operationName: null,
   };
 };
 
 
 const get_query_and_variables_from_request = (req) => {
-  const quiet_failing_json_parse = (json_String) => {
-    try {
-      return JSON.parse(json_String);
-    } catch(erro){
-      return {};
-    }
-  };
-
   const {
     query,
     variables,
@@ -48,16 +49,16 @@ const get_query_and_variables_from_request = (req) => {
       return {};
     }
   })();
-  
+
   const {
-    _query_name: query_name,
+    _query_name,
     ...actual_query_variables
   } = variables || {};
 
-  return {query, query_name, variables: actual_query_variables};
+  return {query, _query_name, variables: actual_query_variables};
 };
 export const get_log_object_for_request = (req) => {
-  const {query, query_name, variables} = get_query_and_variables_from_request(req);
+  const {query, _query_name, variables} = get_query_and_variables_from_request(req);
 
   const method = req.method === "POST" ? 
     ( _.has(req.headers, 'encoded-compressed-query') ? 
@@ -74,7 +75,7 @@ export const get_log_object_for_request = (req) => {
       origin: req.headers && req.headers.origin,
       method,
       non_query: !query && "Apparently not a GraphQL query! Normally, this shouldn't happen!",
-      query_name, 
+      _query_name, 
       variables,
       query_hash: query && md5(query),
       query,

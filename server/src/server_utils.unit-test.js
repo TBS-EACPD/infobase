@@ -36,7 +36,7 @@ describe("convert_GET_with_compressed_query_to_POST", function(){
       },
       body: { 
         query,
-        variables: variable_string,
+        variables: JSON.parse(variable_string),
         operationName: null,
       },
     };
