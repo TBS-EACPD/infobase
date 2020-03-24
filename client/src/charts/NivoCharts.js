@@ -74,21 +74,29 @@ const tooltip_content = (tooltip_item, formatter) => (
   </Fragment>
 );
 
-const smalldevice_percent_tooltip_content = (tooltip_item, formatter, percent_formatter, total) => (
-  <td>
-    <div className="nivo-tooltip__content">{tooltip_item.id}</div>
-    <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
-    <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: percent_formatter(Math.abs(tooltip_item.value)/total)}}/>
-  </td>
-);
+const smalldevice_percent_tooltip_content = (tooltip_item, formatter, percent_formatter, total) => {
+  const percent_value = Math.abs(tooltip_item.value)/total;
+  const formatted_percent = _.isUndefined(percent_formatter) ? get_percent_formatter(percent_value)(percent_value) : percent_formatter(percent_value);
+  return (
+    <td>
+      <div className="nivo-tooltip__content">{tooltip_item.id}</div>
+      <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
+      <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatted_percent}}/>
+    </td>
+  );
+};
 
-const percent_tooltip_content = (tooltip_item, formatter, percent_formatter, total) => (
-  <Fragment>
-    <td className="nivo-tooltip__content">{tooltip_item.id}</td>
-    <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
-    <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: percent_formatter(Math.abs(tooltip_item.value)/total)}}/>
-  </Fragment>
-);
+const percent_tooltip_content = (tooltip_item, formatter, percent_formatter, total) => {
+  const percent_value = Math.abs(tooltip_item.value)/total;
+  const formatted_percent = _.isUndefined(percent_formatter) ? get_percent_formatter(percent_value)(percent_value) : percent_formatter(percent_value);
+  return (
+    <Fragment>
+      <td className="nivo-tooltip__content">{tooltip_item.id}</td>
+      <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
+      <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatted_percent}}/>
+    </Fragment>
+  );
+}
 
 const default_tooltip = (is_percent, tooltip_items, formatter, percent_formatter, total) => (
   <div style={{color: window.infobase_color_constants.textColor}}>
@@ -217,6 +225,7 @@ export class NivoResponsivePie extends React.Component{
             return percent_value_tooltip(
               [data_with_original_values],
               get_formatter(is_money, text_formatter, false), 
+              undefined, 
               total
             );
           } else {
