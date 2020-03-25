@@ -164,7 +164,7 @@ export class DisplayTable extends React.Component {
                   {_.map(
                     ordered_column_keys,
                     col => (
-                      <td key={col}>
+                      <td style={{fontSize: "14px"}} key={col}>
                         {display_values[col]}
                       </td>
                     )
