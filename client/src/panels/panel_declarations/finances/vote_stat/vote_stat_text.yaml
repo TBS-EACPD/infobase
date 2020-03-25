@@ -150,7 +150,7 @@ estimates_perspective_text:
    {{/if}}
 
   fr: |
-   En date du {{last_estimates}} {{est_in_year}}, le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de **{{fmt_compact1_written gov_tabled_est_in_year}}**. De ce montant, **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** (ou **{{fmt_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}**) seront attribués à **{{subj_name subject}}**. 
+   En date du {{last_estimates}} {{est_in_year}}, le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de **{{fmt_compact1_written gov_tabled_est_in_year}}**. De ce montant, **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** (ou **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}**) seront attribués à **{{subj_name subject}}**. 
 
 
    {{! only to be used near year end when a main estimates for the following year has been tabled}}
