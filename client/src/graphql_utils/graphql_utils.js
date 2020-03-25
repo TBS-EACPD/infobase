@@ -36,9 +36,11 @@ export const get_api_url = async () => {
 // Makes our GET requests tolerant of long queries, sufficient but may not work for arbitrarily long queries
 export const query_length_tolerant_fetch = async (uri, options) => {
 
-  // important, this regex lazy matches up to and including FIRST ? occurence, although I hope there aren't ?'s in our queries...
+  // important, this regex lazy matches up to and including FIRST ? occurence, which (in a URI)
+  // should be where the query string starts. I've complicated it slightly just in case there's ever a ? IN
+  // the query string (well, that'd be an encoding error anyway)
   const url_encoded_query = uri.replace(/^(.*?)\?/, '');
-  
+
   const query_string_hash = string_hash(url_encoded_query);
 
   const short_uri = `${await get_api_url()}?v=${window.sha}&queryHash=${query_string_hash}`;

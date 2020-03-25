@@ -4,9 +4,9 @@ import md5 from 'md5';
 
 import _ from 'lodash';
   
-const quiet_failing_json_parse = (json_String) => {
+const quiet_failing_json_parse = (json_string) => {
   try {
-    return JSON.parse(json_String);
+    return JSON.parse(json_string);
   } catch(erro){
     return {};
   }
