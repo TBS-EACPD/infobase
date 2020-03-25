@@ -1109,7 +1109,7 @@ export class LineBarToggleGraph extends React.Component {
           style={{ width: "100%", position: "relative" }}
           tabIndex="-1"
         >
-          <div style = {{height: '400px'}} aria-hidden = {true}>
+          <div aria-hidden = {true}>
             { extra_graph_options.bar?
                 <NivoResponsiveBar { ...extended_graph_options_bar}/> :
                 <NivoResponsiveLine {...extended_graph_options_line} /> }
