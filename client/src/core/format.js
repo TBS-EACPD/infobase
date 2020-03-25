@@ -12,8 +12,8 @@ const money_formatter = {
   fr: _.map(Array(3), (val,ix) => new Intl.NumberFormat('fr-CA', {style: 'currency', currency: 'CAD', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
 };
 const percent_formatter = {
-  en: _.map(Array(3), (val,ix) => new Intl.NumberFormat('en-CA', {style: 'percent', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
-  fr: _.map(Array(3), (val,ix) => new Intl.NumberFormat('fr-CA', {style: 'percent', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
+  en: _.map(Array(4), (val,ix) => new Intl.NumberFormat('en-CA', {style: 'percent', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
+  fr: _.map(Array(4), (val,ix) => new Intl.NumberFormat('fr-CA', {style: 'percent', minimumFractionDigits: ix, maximumFractionDigits: ix}) ),
 };
 
 // results need to be displayed with the number of digits they are entered in. We don't do any rounding!
@@ -128,6 +128,19 @@ const percentage = (precision, val, lang, options) => {
   }
 };
 
+// 'smart' percent formatter that scales decimal places (up to 3) based on the value
+const percentage_smart = (min_precision, val, lang, options) => {
+  const smart_precision = val < 0.001 ? 3 :
+    (val < 0.01 ? 2 : 1);
+  const precision = (min_precision && min_precision > smart_precision) ? min_precision : smart_precision;
+  const rtn = percent_formatter[lang][precision].format(val);
+  if (options.raw){
+    return rtn;
+  }else {
+    return `<span class='text-nowrap'>${rtn}</span>`;
+  }
+};
+
 const types_to_format = {
   "compact": (val, lang, options) => compact(options.precision, val, lang, options),
   "compact1": _.curry(compact)(1),
@@ -138,6 +151,8 @@ const types_to_format = {
   "percentage": (val, lang, options) => percentage(options.precision, val, lang, options),
   "percentage1": _.curry(percentage)(1),
   "percentage2": _.curry(percentage)(2),
+  "smart_percentage1": _.curry(percentage_smart)(1),
+  "smart_percentage2": _.curry(percentage_smart)(2),
   "result_percentage": (val, lang) => result_percent_formatter[lang].format(val/100),
   "result_num": (val, lang) => result_number_formatter[lang].format(val),
   "decimal1": (val, lang, options) => number_formatter[lang][1].format(val),
