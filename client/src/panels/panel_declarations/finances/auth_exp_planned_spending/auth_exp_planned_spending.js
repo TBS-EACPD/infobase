@@ -287,11 +287,9 @@ class AuthExpPlannedSpendingGraph extends React.Component {
             />
           </div> 
         </div>
-        <div style={{height: 400}}>
-          <NivoResponsiveLine
-            {...nivo_props}
-          />
-        </div>
+        <NivoResponsiveLine
+          {...nivo_props}
+        />
       </Fragment>
     );
   }
