@@ -138,7 +138,7 @@ const TabularPercentLegend = ({
 );
 
 
-const bar_table = (data, keys, indexBy, table_view_format, table_first_column_name) => {
+const bar_table = (data, keys, indexBy, table_view_format, table_name, table_first_column_name) => {
   const table_data = _.map(data, row => ({
     display_values: _.chain(row)
       .toPairs()
@@ -160,7 +160,7 @@ const bar_table = (data, keys, indexBy, table_view_format, table_first_column_na
     .fromPairs()
     .value();
 
-  return <DisplayTable rows={table_data} ordered_column_keys={ordered_column_keys} column_names={column_names} name={"TODO"}/>;
+  return <DisplayTable rows={table_data} ordered_column_keys={ordered_column_keys} column_names={column_names} name={table_name || text_maker("default_table_name")}/>;
 };
 
 class InteractiveGraph extends React.Component{
@@ -179,6 +179,7 @@ class InteractiveGraph extends React.Component{
     const {
       graph,
       table,
+      table_name,
       other_buttons,
     } = this.props;
 
@@ -205,7 +206,7 @@ class InteractiveGraph extends React.Component{
         { graph }
         <StatelessModal
           show={ show_table }
-          title={ text_maker("table_view") }
+          title={ table_name || text_maker("default_table_name") }
           body={ table }
           on_close_callback={() => this.setState({show_table: false})}
           additional_dialog_class = { (() => {
@@ -277,6 +278,7 @@ export class NivoResponsivePie extends React.Component{
       is_money,
       disable_table_view,
       display_horizontal,
+      table_name,
     } = this.props;
 
     const IE_fixed_legends = legends ? (
@@ -341,7 +343,7 @@ export class NivoResponsivePie extends React.Component{
 
     const ordered_column_keys = ["label", "value", "percentage"];
 
-    const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={"TODO"} />;
+    const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={table_name || text_maker("default_table_name")} />;
 
     const graph =
     <div className={display_horizontal ? classNames("common-donut__horizontal","common-donut") : "common-donut"} aria-hidden = {true}>
@@ -410,7 +412,7 @@ export class NivoResponsivePie extends React.Component{
     </div>;
     
 
-    return <InteractiveGraph graph={graph} table={table} />;
+    return <InteractiveGraph graph={graph} table={table} table_name={table_name} />;
   }
 }
 NivoResponsivePie.defaultProps = {
@@ -466,6 +468,7 @@ export class NivoResponsiveBar extends React.Component{
       labelTextColor,
       borderWidth,
       disable_table_view,
+      table_name,
       table_first_column_name,
     } = this.props;
 
@@ -479,7 +482,7 @@ export class NivoResponsiveBar extends React.Component{
       undefined;
   
     const table = !disable_table_view && (
-      custom_table || bar_table(data, keys, indexBy, get_formatter(is_money, text_formatter, true, true), table_first_column_name)
+      custom_table || bar_table(data, keys, indexBy, get_formatter(is_money, text_formatter, true, true), table_name, table_first_column_name)
     );
 
     // have to have an empty string in key to make sure that negative bars will be displayed
@@ -529,7 +532,7 @@ export class NivoResponsiveBar extends React.Component{
         />
       </div>;
     
-    return <InteractiveGraph graph={graph} table={table} />;
+    return <InteractiveGraph graph={graph} table={table} table_name={table_name}/>;
   }
 };
 NivoResponsiveBar.defaultProps = {
@@ -584,6 +587,7 @@ export class NivoResponsiveHBar extends React.Component{
       labelSkipWidth,
       markers,
       disable_table_view,
+      table_name,
       table_first_column_name,
     } = this.props;
     
@@ -596,7 +600,7 @@ export class NivoResponsiveHBar extends React.Component{
       ) :
       undefined;
 
-    const table = !disable_table_view && bar_table(data, keys, indexBy, get_formatter(is_money, text_formatter, true, true), table_first_column_name);
+    const table = !disable_table_view && bar_table(data, keys, indexBy, get_formatter(is_money, text_formatter, true, true), table_name, table_first_column_name);
 
     //have to have an empty string in key to make sure
     //that negative bars will be displayed
@@ -646,7 +650,7 @@ export class NivoResponsiveHBar extends React.Component{
     </div>;
 
 
-    return <InteractiveGraph graph={graph} table={table} />;
+    return <InteractiveGraph graph={graph} table={table} table_name={table_name} />;
   }
 };
 NivoResponsiveHBar.defaultProps = {
@@ -716,6 +720,7 @@ export class NivoResponsiveLine extends React.Component {
       legends,
       layers,
       disable_table_view,
+      table_name,
       table_first_column_name,
     } = this.props;
 
@@ -759,7 +764,7 @@ export class NivoResponsiveLine extends React.Component {
       .fromPairs()
       .value();
 
-    const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={"TODO"}/>;
+    const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={table_name || text_maker("default_table_name")}/>;
 
     const zoom_button = (!disable_yaxis_zoom && !enableArea) ?
       <button
@@ -833,7 +838,7 @@ export class NivoResponsiveLine extends React.Component {
         />
       </div>;
 
-    return <InteractiveGraph graph={graph} table={table} other_buttons={[zoom_button]}/>;
+    return <InteractiveGraph graph={graph} table={table} other_buttons={[zoom_button]} table_name={table_name} />;
   }
 }
 NivoResponsiveLine.defaultProps = {

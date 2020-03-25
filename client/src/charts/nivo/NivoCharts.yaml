@@ -9,11 +9,11 @@ zoom_out:
 
 show_table:
   en: Show data table
-  fr: TODO
+  fr: Afficher le tableau de données
 
-table_view:
-  en: Table view
-  fr: TODO
+default_table_name:
+  en: Table of data
+  fr: Tableau de données
 
 toggle_graph:
   en: Toggle Graph Type
