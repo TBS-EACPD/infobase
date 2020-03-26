@@ -2,10 +2,13 @@
 
 .igoc-checkbox-and-count-row {
   display: flex;
-  justify-content: space-between;
   flex-direction: row;
   @media (max-width: $maxMediumDevice){
     flex-direction: column;
+  }
+
+  & > * {
+    flex-grow: 1;
   }
 }
 

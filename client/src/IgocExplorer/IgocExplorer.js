@@ -35,11 +35,13 @@ const scheme = {
   get_props_selector: () => createSelector(
     _.property('igoc.grouping'),
     _.property('igoc.should_show_orgs_without_data'),
-    (grouping, should_show_orgs_without_data) => {
+    _.property('igoc.should_use_legal_titles'),
+    (grouping, should_show_orgs_without_data, should_use_legal_titles) => {
       return {
         sort_func: _.identity,
         grouping,
         should_show_orgs_without_data,
+        should_use_legal_titles,
       };
     }
   ),
@@ -48,13 +50,18 @@ const scheme = {
     on_toggle_orgs_without_data: ()=> dispatch({
       type: 'toggle_orgs_without_data',
     }),
+    on_toggle_use_legal_titles: ()=> dispatch({
+      type: 'toggle_use_legal_titles',
+    }),
   }),
 
-  reducer: (state={ grouping: 'portfolio', should_show_orgs_without_data: true}, action) => {
+  reducer: (state={ grouping: 'portfolio', should_show_orgs_without_data: true, should_use_legal_titles: false}, action) => {
     const { type, payload } = action;
     switch(type){
       case 'toggle_orgs_without_data':
         return {...state, should_show_orgs_without_data: !state.should_show_orgs_without_data };
+      case 'toggle_use_legal_titles':
+        return {...state, should_use_legal_titles: !state.should_use_legal_titles };
       case 'set_grouping':
         return {...state, grouping: payload};
       default: 
@@ -111,6 +118,7 @@ class ExplorerContainer extends React.Component {
       [scheme_key]: { 
         grouping,
         should_show_orgs_without_data: true,
+        should_use_legal_titles: false,
       },
     };
 
