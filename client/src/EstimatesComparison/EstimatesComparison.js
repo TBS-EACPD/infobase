@@ -29,7 +29,7 @@ import { Explorer } from '../explorer_common/explorer_components.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import {
   estimates_diff_scheme,
-  col_defs,
+  get_col_defs,
   get_initial_state as get_initial_scheme_state,
   current_doc_is_mains,
   current_sups_letter,
@@ -151,12 +151,6 @@ const get_non_col_content = ({node}) => {
 
   return (
     <div>
-      { subject && subject.level === "dept" && subject.legal_title &&
-        <div className="mrgn-bttm-sm" style={{fontSize: "14px"}}>
-          <b><TM k="legal_title" args={{subject}} />: </b>
-          {subject.legal_title}
-        </div>
-      }
       { !_.isEmpty(amounts_by_doc) &&
         <div>
           <DetailedAmountsByDoc amounts_by_doc={amounts_by_doc} />
@@ -192,7 +186,10 @@ const get_non_col_content = ({node}) => {
 class EstimatesExplorer extends React.Component {
   constructor(){
     super();
-    this.state = { _query: "" };
+    this.state = {
+      _query: "",
+      use_legal_titles: false,
+    };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
   handleQueryChange(new_query){
@@ -252,19 +249,21 @@ class EstimatesExplorer extends React.Component {
       toggle_stat_filter,
       h7y_layout,
     } = this.props;
-    const { loading } = this.state;
+
+    const {
+      loading,
+      use_legal_titles,
+    } = this.state;
 
     const root = get_root(flat_nodes);
 
     const explorer_config = {
-      column_defs: col_defs,
+      column_defs: get_col_defs(use_legal_titles),
+      get_non_col_content,
       onClickExpand: id => toggle_node(id),
       is_sortable: true,
       zebra_stripe: true,
       col_click,
-      //un-used features...
-      get_non_col_content,
-      children_grouper: null,
     };
 
     return (
@@ -328,12 +327,20 @@ class EstimatesExplorer extends React.Component {
               />
             }
             { h7y_layout === "org" &&
-              <CheckBox
-                label={text_maker("show_only_votes")}
-                active={!show_stat}
-                onClick={toggle_stat_filter}
-                container_style={{ marginTop: '1rem' }}
-              />
+              <div className='estimates-checkbox-row'>
+                <CheckBox
+                  label={text_maker("show_only_votes")}
+                  active={!show_stat}
+                  onClick={toggle_stat_filter}
+                  container_style={{ marginTop: '1rem' }}
+                />
+                <CheckBox
+                  active={use_legal_titles}
+                  onClick={() => this.setState({use_legal_titles: !use_legal_titles})}
+                  label={text_maker("use_legal_title")}
+                  container_style={{ marginTop: '1rem' }}
+                />
+              </div>
             }
           </form>
         </div>
