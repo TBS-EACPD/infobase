@@ -1,5 +1,6 @@
 import '../explorer_common/explorer-styles.scss';
 import { igoc_tmf as text_maker, TM } from './igoc_explorer_text.js';
+import { grouping_options } from './hierarchies.js';
 
 import { Fragment } from 'react';
 import { createSelector } from 'reselect';
@@ -248,95 +249,102 @@ class ExplorerForIgoc extends React.Component {
       get_non_col_content: get_non_col_content_func({grouping}),
     };
 
-    return <div>
+    return (
       <div>
-        <ul className="nav nav-justified nav-pills">
-          <li className={classNames(grouping==='portfolio' && 'active')}><a href="#igoc/portfolio" > <TM k="by_ministry" /> </a></li>
-          <li className={classNames(grouping==='inst_form' && 'active')}><a href="#igoc/inst_form" > <TM k="by_inst_form" /> </a></li>
-          <li className={classNames(grouping==='historical' && 'active')}><a href="#igoc/historical" > <TM k="by_historical" /></a></li>
-          <li className={classNames(grouping==='pop_group' && 'active')}><a href="#igoc/pop_group" > <TM k="by_pop_group" /></a></li>
-          <li className={classNames(grouping==='all' && 'active')}><a href="#igoc/all" > <TM k="all_orgs" /></a></li>
-        </ul>
-      </div>
-      <div
-        style={{
-          margin: '15px 0',
-        }}
-      >
-        <form
-          style={{marginBottom: "5px"}}
-          onSubmit={evt => {
-            evt.preventDefault();
-            evt.stopPropagation();
-            set_query(evt.target.querySelector('input').value);
-            this.refs.focus_mount.focus();
+        <div>
+          <ul className="nav nav-justified nav-pills">
+            {
+              _.map(
+                grouping_options,
+                ({option_name}, option_key) => (
+                  <li className={classNames(option_key === grouping && 'active')}>
+                    <a href={`#igoc/${option_key}`} >
+                      {option_name}
+                    </a>
+                  </li>
+                )
+              )
+            }
+          </ul>
+        </div>
+        <div
+          style={{
+            margin: '15px 0',
           }}
         >
-          <input 
-            aria-label={text_maker("explorer_search_is_optional")}            
-            className="form-control input-lg"
-            type="text"
-            style={{width: "100%"}}
-            placeholder={text_maker('igoc_search_text')}
-            onChange={evt => this.handleQueryChange(evt.target.value)}
-
-          />
-          {
-            window.is_a11y_mode &&
+          <form
+            style={{marginBottom: "5px"}}
+            onSubmit={evt => {
+              evt.preventDefault();
+              evt.stopPropagation();
+              set_query(evt.target.querySelector('input').value);
+              this.refs.focus_mount.focus();
+            }}
+          >
             <input 
-              type="submit"
-              name="search"
-              value={text_maker("explorer_search")}
+              aria-label={text_maker("explorer_search_is_optional")}            
+              className="form-control input-lg"
+              type="text"
+              style={{width: "100%"}}
+              placeholder={text_maker('igoc_search_text')}
+              onChange={evt => this.handleQueryChange(evt.target.value)}
+  
             />
+            {
+              window.is_a11y_mode &&
+              <input 
+                type="submit"
+                name="search"
+                value={text_maker("explorer_search")}
+              />
+            }
+          </form>
+          <div className="igoc-checkbox-and-count-row">
+            <CheckBox
+              id={"show_orgs_without_data"}
+              active={should_show_orgs_without_data}
+              onClick={on_toggle_orgs_without_data}
+              label={text_maker("show_orgs_without_data")}
+              checkmark_vertical_align={6}
+              checkbox_style={{ marginTop: 4 }}
+            />
+            <TM k="displayed_orgs_count" args={{org_count}} el="div" />
+            <CheckBox
+              id={"use_legal_title"}
+              active={should_use_legal_titles}
+              onClick={on_toggle_use_legal_titles}
+              label={text_maker("use_legal_title")}
+              checkmark_vertical_align={6}
+              checkbox_style={{ marginTop: 4 }}
+            />
+          </div>
+        </div>
+        <div 
+          tabIndex={-1}
+          className="explorer-focus-mount"
+          ref="focus_mount" 
+          style={{position: 'relative'}}
+          aria-label={text_maker("explorer_focus_mount")}
+        >
+          {loading && 
+            <div className="loading-overlay">
+              <div style={{height: '200px',position: 'relative'}}>
+                <SpinnerWrapper config_name={"sub_route"} /> 
+              </div>
+            </div>
           }
-        </form>
-        <div className="igoc-checkbox-and-count-row">
-          <CheckBox
-            id={"show_orgs_without_data"}
-            active={should_show_orgs_without_data}
-            onClick={on_toggle_orgs_without_data}
-            label={text_maker("show_orgs_without_data")}
-            checkmark_vertical_align={6}
-            checkbox_style={{ marginTop: 4 }}
-          />
-          <TM k="displayed_orgs_count" args={{org_count}} el="div" />
-          <CheckBox
-            id={"use_legal_title"}
-            active={should_use_legal_titles}
-            onClick={on_toggle_use_legal_titles}
-            label={text_maker("use_legal_title")}
-            checkmark_vertical_align={6}
-            checkbox_style={{ marginTop: 4 }}
+          {is_filtering && _.isEmpty(root.children) &&
+            <div style={{fontWeight: 'bold', fontSize: '1.5em', textAlign: 'center'}}>  
+              <TM k="search_no_results" />
+            </div>
+          }
+          <Explorer
+            config={explorer_config}
+            root={root}
           />
         </div>
       </div>
-      <div 
-        tabIndex={-1}
-        className="explorer-focus-mount"
-        ref="focus_mount" 
-        style={{position: 'relative'}}
-        aria-label={text_maker("explorer_focus_mount")}
-      >
-        {loading && 
-          <div className="loading-overlay">
-            <div style={{height: '200px',position: 'relative'}}>
-              <SpinnerWrapper config_name={"sub_route"} /> 
-            </div>
-          </div>
-        }
-        {is_filtering && _.isEmpty(root.children) &&
-          <div style={{fontWeight: 'bold', fontSize: '1.5em', textAlign: 'center'}}>  
-            <TM k="search_no_results" />
-          </div>
-        }
-        <Explorer
-          config={explorer_config}
-          root={root}
-        />
-      </div>
-    </div>;
- 
-
+    );
   }
 }
 

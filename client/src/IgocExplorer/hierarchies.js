@@ -36,81 +36,79 @@ const pop_group_node = ({ pop_group_key, children, isExpanded }) => ({
   isExpanded,
 });
 
-const create_igoc_hierarchy = grouping => {
 
-  let nodes;
-  switch(grouping){
-    case 'portfolio': {
-      nodes = _.chain(Dept.get_all())
-        .groupBy(org => _.get(org,'ministry.name') || text_maker("undef_ministry") )
-        .map( (orgs,min_name)=>({
-          id: min_name,
-          data: {
-            type: 'ministry',
-            name: min_name,
-          },
-          children: _.chain(orgs)
-            .reject('is_dead')
-            .map(org => org_to_node(org, min_name))
-            .sortBy('data.name')
-            .value(),
+const grouping_options = {
+  portfolio: {
+    option_name: text_maker('by_ministry'),
+    get_nodes: () => _.chain(Dept.get_all())
+      .groupBy(org => _.get(org,'ministry.name') || text_maker("undef_ministry") )
+      .map( (orgs,min_name)=>({
+        id: min_name,
+        data: {
+          type: 'ministry',
+          name: min_name,
+        },
+        children: _.chain(orgs)
+          .reject('is_dead')
+          .map(org => org_to_node(org, min_name))
+          .sortBy('data.name')
+          .value(),
 
-        }))
-        .sortBy('data.name')
-        .sortBy(node => node.data.name === text_maker("undef_ministry"))
-        .value();
-      break;
-    }
-    case 'inst_form': {
-      nodes = _.chain(Dept.get_all())
-        .reject("is_dead")
-        .groupBy('inst_form.parent_form.id')
-        .map( (orgs, parent_form_id) => ({
-          id: parent_form_id,
-          data: {
-            name: InstForm.lookup(parent_form_id).name,
-            type: 'inst_form',
-          },
-          children: _.chain(orgs)
-            .groupBy('inst_form.id')
-            .map( (orgs,type_id) => ({
-              id: type_id,
-              data: {
-                type: 'inst_form',
-                name: InstForm.lookup(type_id).name,
-              },
-              children: _.chain(orgs)
-                .map(org => org_to_node(org, type_id) )
-                .sortBy('data.name')
-                .value(),
-            }))
-            .value(),
-        }))
-        .each(parent_form_node => { 
-
-          if(parent_form_node.children.length === 1){
-            //if an inst form grouping just contains a single inst form, 'skip' the level
-            const { children } = parent_form_node.children[0]; 
-            parent_form_node.children = children;
-          } else {
-            parent_form_node.isExpanded = true;
-          }
-        })
-        .sortBy(parent_form_node => _.indexOf(parent_inst_form_sort_order, parent_form_node.id) )
-        .value();
-      break;
-    }
-    case 'historical': {
-      nodes = _.chain(Dept.get_all())
-        .filter('is_dead')
-        .map(org => org_to_node(org, "root") )
-        .sortBy(node=> +node.data.subject.end_yr)
-        .reverse()
-        .value();
-          
-      break;
-    }
-    case 'pop_group': {
+      }))
+      .sortBy('data.name')
+      .sortBy(node => node.data.name === text_maker("undef_ministry"))
+      .value(),
+  },
+  inst_form: {
+    option_name: text_maker('by_inst_form'),
+    get_nodes: () =>_.chain(Dept.get_all())
+      .reject("is_dead")
+      .groupBy('inst_form.parent_form.id')
+      .map( (orgs, parent_form_id) => ({
+        id: parent_form_id,
+        data: {
+          name: InstForm.lookup(parent_form_id).name,
+          type: 'inst_form',
+        },
+        children: _.chain(orgs)
+          .groupBy('inst_form.id')
+          .map( (orgs,type_id) => ({
+            id: type_id,
+            data: {
+              type: 'inst_form',
+              name: InstForm.lookup(type_id).name,
+            },
+            children: _.chain(orgs)
+              .map(org => org_to_node(org, type_id) )
+              .sortBy('data.name')
+              .value(),
+          }))
+          .value(),
+      }))
+      .each(parent_form_node => { 
+        if(parent_form_node.children.length === 1){
+          //if an inst form grouping just contains a single inst form, 'skip' the level
+          const { children } = parent_form_node.children[0]; 
+          parent_form_node.children = children;
+        } else {
+          parent_form_node.isExpanded = true;
+        }
+      })
+      .sortBy(parent_form_node => _.indexOf(parent_inst_form_sort_order, parent_form_node.id) )
+      .value(),
+  },
+  historical: {
+    option_name: text_maker('by_historical'),
+    get_nodes: () =>_.chain(Dept.get_all())
+      .filter('is_dead')
+      .map(org => org_to_node(org, "root") )
+      .sortBy(node=> +node.data.subject.end_yr)
+      .reverse()
+      .value(),
+  },
+  pop_group: {
+    option_name: text_maker('by_pop_group'),
+    get_nodes: () => {
       /*
         fps
           cpa
@@ -131,7 +129,7 @@ const create_igoc_hierarchy = grouping => {
           .map(org_to_node)
           .value(),
       });
-    
+
       const cpa_other_portion_node = pop_group_node({ 
         pop_group_key: "cpa_other_portion",
         children: _.chain(orgs)
@@ -168,18 +166,24 @@ const create_igoc_hierarchy = grouping => {
           .value(),
       });
 
-      nodes = [fps_node, na_node]; 
-      break;
-    }
-    case 'all':
-    default: {
-      nodes = _.chain(Dept.get_all())
-        .map(org => org_to_node(org,'root'))
-        .sortBy('data.name')
-        .value();
-      break;
-    }
-  }
+      return [fps_node, na_node]; 
+    },
+  },
+  all: {
+    option_name: text_maker('all_orgs'),
+    get_nodes: () => _.chain(Dept.get_all())
+      .map(org => org_to_node(org,'root'))
+      .sortBy('data.name')
+      .value(),
+  },
+};
+
+
+const create_igoc_hierarchy = (grouping) => {
+
+  const nodes = _.has(grouping_options, grouping) ?
+    grouping_options[grouping].get_nodes() :
+    grouping_options.all.get_nodes();
 
   const root = {
     id: 'root',
@@ -190,14 +194,13 @@ const create_igoc_hierarchy = grouping => {
     children: nodes,
   };
 
-  const d3_hierarchy = d3.hierarchy(root, node=>node.children );
+  const d3_hierarchy = d3.hierarchy(root, (node) => node.children );
   const flat_nodes = convert_d3_hierarchy_to_explorer_hierarchy(d3_hierarchy);
 
-
   return flat_nodes;
-  
 };
 
 export {
   create_igoc_hierarchy,
+  grouping_options,
 };
