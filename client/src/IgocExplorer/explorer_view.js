@@ -190,7 +190,13 @@ const get_non_col_content_func = createSelector(
 class ExplorerForIgoc extends React.Component {
   constructor(){
     super();
-    this.state = { _query: "" };
+    this.state = {
+      _query: "",
+
+      // note should_use_legal_titles exists totally outside the redux here. No need for it to be redux-state,
+      // and not worth all that added boiler plate to get it in there
+      should_use_legal_titles: false,
+    };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
   handleQueryChange(new_query){
@@ -227,14 +233,15 @@ class ExplorerForIgoc extends React.Component {
       //scheme props
       grouping,
       should_show_orgs_without_data,
-      should_use_legal_titles,
 
       on_toggle_orgs_without_data,
-      on_toggle_use_legal_titles,
 
     } = this.props;
 
-    const { loading } = this.state;
+    const {
+      loading,
+      should_use_legal_titles,
+    } = this.state;
 
     const root = get_root(flat_nodes);
     
@@ -288,7 +295,6 @@ class ExplorerForIgoc extends React.Component {
               style={{width: "100%"}}
               placeholder={text_maker('igoc_search_text')}
               onChange={evt => this.handleQueryChange(evt.target.value)}
-  
             />
             {
               window.is_a11y_mode &&
@@ -312,7 +318,7 @@ class ExplorerForIgoc extends React.Component {
             <CheckBox
               id={"use_legal_title"}
               active={should_use_legal_titles}
-              onClick={on_toggle_use_legal_titles}
+              onClick={() => this.setState({should_use_legal_titles: !should_use_legal_titles})}
               label={text_maker("use_legal_title")}
               checkmark_vertical_align={6}
               checkbox_style={{ marginTop: 4 }}
