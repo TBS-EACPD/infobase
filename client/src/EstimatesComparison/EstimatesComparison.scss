@@ -18,3 +18,12 @@
   padding: 10px 0; 
   margin-bottom:5px;
 }
+
+.estimates-checkbox-row {
+  display: flex;
+  flex-direction: row;
+  @media (max-width: $maxMediumDevice){
+    flex-direction: column;
+  }
+  justify-content: space-evenly;
+}

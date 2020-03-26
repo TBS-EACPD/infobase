@@ -329,13 +329,15 @@ function get_data_by_item_types(){
 const Green = ({children}) => <span style={{color: "hsla(120, 100%, 25%, 1)"}}>{children}</span>;
 const Red = ({children}) => <span style={{color: "hsla(0, 100%, 40%, 1)"}}>{children}</span>;
 
-export const col_defs = [
+export const get_col_defs = (use_legal_titles) => [
   {
     id: 'name',
     width: 250,
     textAlign: "left",
     header_display: <TM k="name" />,
-    get_val: ({data}) => data.name,
+    get_val: ({data}) => use_legal_titles && _.has(data, 'subject.legal_title') ?
+      data.subject.legal_title :
+      data.name,
   },
   {
     id: "current_value",
@@ -371,6 +373,7 @@ export const col_defs = [
   },
 ];
 
+const col_defs = get_col_defs();
 
 const scheme_key = "estimates_diff";
 const h7y_layout_options = ["org", "item_type"];
