@@ -30,7 +30,7 @@ const Gov = {
   // the following name-like fields are for compatibility with old APIs and to ensure it's searchable in org-searches
   description: trivial_text_maker('the_goc'),
   title: trivial_text_maker('the_goc'),
-  legal_name: trivial_text_maker('the_goc'),
+  legal_title: trivial_text_maker('the_goc'),
 };
 
 
@@ -98,7 +98,7 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
       this, 
       {
         id: def.unique_id,
-        name: def.applied_title || def.legal_name,
+        name: def.applied_title || def.legal_title,
         old_name: def.old_applied_title,
         minister_objs: [],
         table_ids: [],
