@@ -105,7 +105,7 @@ const inst_form_sort_order = [
 ];
 
 const react_html_string = str => <span dangerouslySetInnerHTML={{ __html: str }} />;
-const get_col_defs = ({show_counts, should_use_legal_titles}) => [{
+const get_col_defs = ({show_counts, use_legal_titles}) => [{
   id: "name",
   width: 250,
   textAlign: "left",
@@ -118,7 +118,7 @@ const get_col_defs = ({show_counts, should_use_legal_titles}) => [{
       },
     } = node;
 
-    const display_name = type === "org" && should_use_legal_titles ?
+    const display_name = type === "org" && use_legal_titles ?
       subject.legal_title :
       name;
 
@@ -193,9 +193,9 @@ class ExplorerForIgoc extends React.Component {
     this.state = {
       _query: "",
 
-      // note should_use_legal_titles exists totally outside the redux here. No need for it to be redux-state,
+      // note use_legal_titles exists totally outside the redux here. No need for it to be redux-state,
       // and not worth all that added boiler plate to get it in there
-      should_use_legal_titles: false,
+      use_legal_titles: false,
     };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
@@ -240,7 +240,7 @@ class ExplorerForIgoc extends React.Component {
 
     const {
       loading,
-      should_use_legal_titles,
+      use_legal_titles,
     } = this.state;
 
     const root = get_root(flat_nodes);
@@ -249,7 +249,7 @@ class ExplorerForIgoc extends React.Component {
 
     const explorer_config = {
       children_grouper: get_children_grouper({grouping}),
-      column_defs: get_col_defs({show_counts: !is_filtering, should_use_legal_titles}),
+      column_defs: get_col_defs({show_counts: !is_filtering, use_legal_titles}),
       shouldHideHeader: true,
       zebra_stripe: true,
       onClickExpand: id => toggle_node(id),
@@ -317,8 +317,8 @@ class ExplorerForIgoc extends React.Component {
             <TM k="displayed_orgs_count" args={{org_count}} el="div" />
             <CheckBox
               id={"use_legal_title"}
-              active={should_use_legal_titles}
-              onClick={() => this.setState({should_use_legal_titles: !should_use_legal_titles})}
+              active={use_legal_titles}
+              onClick={() => this.setState({use_legal_titles: !use_legal_titles})}
               label={text_maker("use_legal_title")}
               checkmark_vertical_align={6}
               checkbox_style={{ marginTop: 4 }}

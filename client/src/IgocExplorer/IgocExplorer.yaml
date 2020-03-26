@@ -43,10 +43,6 @@ show_orgs_without_data:
   en: Show organizations without data
   fr: Montrer les organisation qui n'ont pas de données
 
-use_legal_title:
-  en: Use legal titles
-  fr: Utilisez des titres légaux
-
 displayed_orgs_count:
   transform: [handlebars, markdown]
   en: |
