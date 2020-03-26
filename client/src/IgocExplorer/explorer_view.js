@@ -104,7 +104,7 @@ const inst_form_sort_order = [
 ];
 
 const react_html_string = str => <span dangerouslySetInnerHTML={{ __html: str }} />;
-const get_col_defs = ({show_counts}) => [{
+const get_col_defs = ({show_counts, should_use_legal_titles}) => [{
   id: "name",
   width: 250,
   textAlign: "left",
@@ -117,12 +117,16 @@ const get_col_defs = ({show_counts}) => [{
       },
     } = node;
 
+    const display_name = type === "org" && should_use_legal_titles ?
+      subject.legal_name :
+      name;
+
     if(type !== "org" && show_counts){
-      return react_html_string(`${name} (${get_org_count(node)})`);
+      return react_html_string(`${display_name} (${get_org_count(node)})`);
     } else if(subject && subject.end_yr){
-      return react_html_string(`${name} (${subject.end_yr})`);
+      return react_html_string(`${display_name} (${subject.end_yr})`);
     } else {
-      return react_html_string(name);
+      return react_html_string(display_name);
     }
   },
 }];
@@ -222,8 +226,10 @@ class ExplorerForIgoc extends React.Component {
       //scheme props
       grouping,
       should_show_orgs_without_data,
+      should_use_legal_titles,
 
       on_toggle_orgs_without_data,
+      on_toggle_use_legal_titles,
 
     } = this.props;
 
@@ -235,7 +241,7 @@ class ExplorerForIgoc extends React.Component {
 
     const explorer_config = {
       children_grouper: get_children_grouper({grouping}),
-      column_defs: get_col_defs({show_counts: !is_filtering}),
+      column_defs: get_col_defs({show_counts: !is_filtering, should_use_legal_titles}),
       shouldHideHeader: true,
       zebra_stripe: true,
       onClickExpand: id => toggle_node(id),
@@ -293,9 +299,15 @@ class ExplorerForIgoc extends React.Component {
             checkmark_vertical_align={6}
             checkbox_style={{ marginTop: 4 }}
           />
-          <div>
-            <TM k="displayed_orgs_count" args={{org_count}}/>
-          </div>
+          <TM k="displayed_orgs_count" args={{org_count}} el="div" />
+          <CheckBox
+            id={"use_legal_title"}
+            active={should_use_legal_titles}
+            onClick={on_toggle_use_legal_titles}
+            label={text_maker("use_legal_title")}
+            checkmark_vertical_align={6}
+            checkbox_style={{ marginTop: 4 }}
+          />
         </div>
       </div>
       <div 
