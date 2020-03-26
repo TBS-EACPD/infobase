@@ -48,9 +48,11 @@ use_legal_title:
   fr: TODO
 
 displayed_orgs_count:
-  transform: [handlebars,markdown]
-  text: |
-    {{gt "inst_form_corp_int_filter"}}: **{{rawfmt_big_int org_count}}** 
+  transform: [handlebars, markdown]
+  en: |
+    {{gt "inst_form_corp_int_filter"}} shown: **{{rawfmt_big_int org_count}}**
+  fr: |
+    {{gt "inst_form_corp_int_filter"}} affichés: **{{rawfmt_big_int org_count}}** 
 
 by_pop_group:
   en: By population group
