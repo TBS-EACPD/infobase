@@ -51,7 +51,7 @@ const memoized_re_matchers = _.memoize(
 
 
 const org_attributes_to_match = [ 
-  'legal_name', 
+  'legal_title', 
   'applied_title',
   'old_name',
   'abbr',
@@ -87,15 +87,15 @@ const org_templates = {
       const name_like_attribute_matched = _.find(
         [
           'name',
-          'legal_name',
+          'legal_title',
           'old_name',
         ],
         (attribute) => get_re_matcher([attribute], reg_exps)(org)
       );
 
       switch (name_like_attribute_matched){
-        case 'legal_name':
-          return `${org.name} (${trivial_text_maker('legal_name')}: ${org.legal_name})`;
+        case 'legal_title':
+          return `${org.name} (${trivial_text_maker('legal_title')}: ${org.legal_title})`;
         case 'old_name':
           return `${org.name} (${trivial_text_maker('previously_named')}: ${org.old_name})`;
         default:

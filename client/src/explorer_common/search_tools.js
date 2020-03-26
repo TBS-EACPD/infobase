@@ -27,7 +27,7 @@ function node_to_match_tokens(node){
       .pick([
         'name',
         'old_name',
-        'legal_name',
+        'legal_title',
         'applied_title',
         'dept_code',
         'abbr',

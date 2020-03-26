@@ -30,7 +30,7 @@ export const declare_profile_panel = () => declare_panel({
               ["applied_title", subject.applied_title],
               ["acronym", subject.abbr],
               ["previously_named", subject.old_name],
-              ["legal_name", subject.legal_name],
+              ["legal_title", subject.legal_title],
               ["status", subject.status],
               ["end_yr", subject.end_yr],
               ["notes", subject.notes],

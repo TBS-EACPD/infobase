@@ -47,10 +47,10 @@ const SubjectFields = ({ subject, grouping }) => (
           def={subject.old_name}
         />
       }
-      { subject.legal_name &&
+      { subject.legal_title &&
         <DlItem
-          term={<TM k="legal_name" />}
-          def={subject.legal_name}
+          term={<TM k="legal_title" />}
+          def={subject.legal_title}
         />
       }
       { subject.is_dead && 
@@ -118,7 +118,7 @@ const get_col_defs = ({show_counts, should_use_legal_titles}) => [{
     } = node;
 
     const display_name = type === "org" && should_use_legal_titles ?
-      subject.legal_name :
+      subject.legal_title :
       name;
 
     if(type !== "org" && show_counts){
