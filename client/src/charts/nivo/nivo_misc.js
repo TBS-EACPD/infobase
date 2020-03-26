@@ -4,7 +4,10 @@ import { NivoResponsiveBar } from './nivo_bar.js';
 import { NivoResponsiveLine } from './nivo_line.js';
 import {
   graph_text_maker,
+  infobase_colors_smart,
 } from './nivo_shared.js';
+import { GraphLegend } from '../declarative_charts.js';
+import { newIBCategoryColors } from '../../core/color_schemes.js';
 import { formats } from "../../core/format.js";
 
 export class LineBarToggleGraph extends React.Component {
