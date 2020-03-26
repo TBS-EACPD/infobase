@@ -323,18 +323,20 @@ class EstimatesExplorer extends React.Component {
               />
             }
             { h7y_layout === "org" &&
-              <div className='estimates-checkbox-row'>
+              <div className='estimates-checkbox-row medium_panel_text'>
                 <CheckBox
                   label={text_maker("show_only_votes")}
                   active={!show_stat}
                   onClick={toggle_stat_filter}
-                  container_style={{ marginTop: '1rem' }}
+                  checkmark_vertical_align={6}
+                  checkbox_style={{ marginTop: 4 }}
                 />
                 <CheckBox
                   active={use_legal_titles}
                   onClick={toggle_legal_titles}
                   label={text_maker("use_legal_title")}
-                  container_style={{ marginTop: '1rem' }}
+                  checkmark_vertical_align={6}
+                  checkbox_style={{ marginTop: 4 }}
                 />
               </div>
             }
