@@ -29,7 +29,6 @@ import { Explorer } from '../explorer_common/explorer_components.js';
 import { ensure_loaded } from '../core/lazy_loader.js';
 import {
   estimates_diff_scheme,
-  get_col_defs,
   get_initial_state as get_initial_scheme_state,
   current_doc_is_mains,
   current_sups_letter,
@@ -186,10 +185,7 @@ const get_non_col_content = ({node}) => {
 class EstimatesExplorer extends React.Component {
   constructor(){
     super();
-    this.state = {
-      _query: "",
-      use_legal_titles: false,
-    };
+    this.state = { _query: "" };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
   handleQueryChange(new_query){
@@ -247,18 +243,18 @@ class EstimatesExplorer extends React.Component {
       doc_code,
       show_stat,
       toggle_stat_filter,
+      use_legal_titles,
+      toggle_legal_titles,
+      column_defs,
       h7y_layout,
     } = this.props;
 
-    const {
-      loading,
-      use_legal_titles,
-    } = this.state;
+    const { loading } = this.state;
 
     const root = get_root(flat_nodes);
 
     const explorer_config = {
-      column_defs: get_col_defs(use_legal_titles),
+      column_defs,
       get_non_col_content,
       onClickExpand: id => toggle_node(id),
       is_sortable: true,
@@ -336,7 +332,7 @@ class EstimatesExplorer extends React.Component {
                 />
                 <CheckBox
                   active={use_legal_titles}
-                  onClick={() => this.setState({use_legal_titles: !use_legal_titles})}
+                  onClick={toggle_legal_titles}
                   label={text_maker("use_legal_title")}
                   container_style={{ marginTop: '1rem' }}
                 />

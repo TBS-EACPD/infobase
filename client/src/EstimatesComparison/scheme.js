@@ -329,7 +329,7 @@ function get_data_by_item_types(){
 const Green = ({children}) => <span style={{color: "hsla(120, 100%, 25%, 1)"}}>{children}</span>;
 const Red = ({children}) => <span style={{color: "hsla(0, 100%, 40%, 1)"}}>{children}</span>;
 
-export const get_col_defs = (use_legal_titles) => [
+const get_column_defs = (use_legal_titles) => [
   {
     id: 'name',
     width: 250,
@@ -373,15 +373,16 @@ export const get_col_defs = (use_legal_titles) => [
   },
 ];
 
-const col_defs = get_col_defs();
-
 const scheme_key = "estimates_diff";
 const h7y_layout_options = ["org", "item_type"];
+const use_legal_titles_default = false;
 export const get_initial_state = (intitial_h7y_layout) => ({
   doc_code: current_doc_code,
   sort_col: "current_value",
   is_descending: true,
   show_stat: true,
+  use_legal_titles: use_legal_titles_default,
+  column_defs: get_column_defs(use_legal_titles_default),
   h7y_layout: _.includes(h7y_layout_options, intitial_h7y_layout) ? 
     intitial_h7y_layout : 
     h7y_layout_options[0],
@@ -392,11 +393,12 @@ export const estimates_diff_scheme = {
     return createSelector(
       [
         aug_state => aug_state[scheme_key].is_descending, 
-        aug_state => aug_state[scheme_key].sort_col, 
+        aug_state => aug_state[scheme_key].sort_col,
+        aug_state => aug_state[scheme_key].column_defs,
       ],
-      (is_descending, sort_col) => {
+      (is_descending, sort_col, column_defs) => {
   
-        const attr_getter = _.find(col_defs, { id: sort_col }).get_val;
+        const attr_getter = _.find(column_defs, { id: sort_col }).get_val;
   
         return list => _.chain(list) //sort by search relevance, than the initial sort func
           .sortBy(attr_getter)
@@ -409,6 +411,7 @@ export const estimates_diff_scheme = {
   dispatch_to_props: dispatch => ({ 
     col_click: col_key => dispatch({type: 'column_header_click', payload: col_key }),
     toggle_stat_filter: () => dispatch({type: "toggle_stat_filter"}),
+    toggle_legal_titles: () => dispatch({type: "toggle_legal_titles"}),
     set_h7y_layout: layout_key => dispatch({type: "set_h7y_layout", payload: layout_key}),
   }),
   reducer: (state=get_initial_state(), action) => {
@@ -428,6 +431,13 @@ export const estimates_diff_scheme = {
       return {
         ...state,
         show_stat: !state.show_stat,
+      };
+    }
+    if(type === "toggle_legal_titles"){
+      return {
+        ...state,
+        use_legal_titles: !state.use_legal_titles,
+        column_defs: get_column_defs(!state.use_legal_titles),
       };
     }
     if(type === 'column_header_click'){
