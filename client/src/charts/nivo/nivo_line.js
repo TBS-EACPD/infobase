@@ -42,36 +42,37 @@ export class NivoResponsiveLine extends React.Component {
   render(){
     const {
       data,
-      is_money,
       raw_data,
       margin,
+      legends,
       graph_height,
+      bttm_axis,
+      left_axis,
+      remove_bottom_axis,
+      remove_left_axis,
+      disable_yaxis_zoom,
+      yScale,
+      enableDotLabel,
+      is_money,
+      text_formatter,
+      theme,
       colors,
       colorBy,
-      max,
-      min,
+      tooltip,
+      max, // only used for welcome mat
+      min, // only used for welcome mat
       enableArea,
       enableGridX,
       enableGridY,
-      left_axis,
-      disable_yaxis_zoom,
-      yScale,
-      motion_damping,
-      motion_stiffness,
-      enableDotLabel,
-      remove_bottom_axis,
-      remove_left_axis,
-      bttm_axis,
-      text_formatter,
       stacked,
-      theme,
-      tooltip,
       markers,
-      legends,
       layers,
       disable_table_view,
       table_name,
       table_first_column_name,
+      isInteractive,
+      motionDamping,
+      motionStiffness,
     } = this.props;
 
     const {
@@ -157,6 +158,9 @@ export class NivoResponsiveLine extends React.Component {
             enableDotLabel,
             markers,
             layers,
+            isInteractive,
+            motionDamping,
+            motionStiffness,
           }}
           legends={ IE_fixed_legends }
           tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
@@ -181,8 +185,6 @@ export class NivoResponsiveLine extends React.Component {
           axisRight={null}
           xScale={{ type: "point" }}
           animate={true}
-          motionStiffness={motion_stiffness}
-          motionDamping={motion_damping}
           dotSize={stacked ? 0 : 10}
           areaOpacity={stacked ? 1 : 0}
         />
@@ -217,6 +219,4 @@ NivoResponsiveLine.defaultProps = {
     zoomed: false,
     toggle: false,
   },
-  motion_damping: 19,
-  motion_stiffness: 100,
 };
