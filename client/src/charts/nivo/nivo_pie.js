@@ -5,7 +5,6 @@ import {
   graph_text_maker,
   InteractiveGraph,
   general_default_props,
-  fixed_symbol_shape,
   infobase_colors_smart,
   get_formatter,
 } from './nivo_shared.js';
