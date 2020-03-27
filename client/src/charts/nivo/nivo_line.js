@@ -46,7 +46,6 @@ export class NivoResponsiveLine extends React.Component {
       raw_data,
       margin,
       graph_height,
-      tick_amount,
       colors,
       colorBy,
       max,
@@ -174,7 +173,7 @@ export class NivoResponsiveLine extends React.Component {
             orient: "left",
             tickSize: 5,
             tickPadding: 5,
-            tickValues: tick_amount || 6,
+            tickValues: 6,
             format: d => get_formatter(is_money, text_formatter)(d),
             ...(left_axis || {}),
           }}
