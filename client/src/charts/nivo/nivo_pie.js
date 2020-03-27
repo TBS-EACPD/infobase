@@ -51,6 +51,7 @@ export class NivoResponsivePie extends React.Component{
       legend_data,
       graph_height,
       colors,
+      colorBy,
       theme,
       enableRadialLabels,
       enableSlicesLabels,
@@ -77,8 +78,8 @@ export class NivoResponsivePie extends React.Component{
       ) :
       undefined;
 
-    const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
-    const colorBy = d=>color_scale(d.label);
+    const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(colors || newIBCategoryColors) );
+    const color_func = colorBy || (d=>color_scale(d.label));
 
     const legend_items = _.chain(legend_data)
       .sortBy('value')
@@ -144,8 +145,8 @@ export class NivoResponsivePie extends React.Component{
             startAngle,
             enableSlicesLabels,
             enableRadialLabels,
-            colorBy,
           }}
+          colorBy={ color_func }
           legends={ IE_fixed_legends }
           tooltip={ (data) => {
             const data_with_original_values = {

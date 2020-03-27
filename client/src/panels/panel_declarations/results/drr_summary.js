@@ -215,6 +215,7 @@ class PercentageViz extends React.Component {
 
     const graph_data = _.filter(all_data, d=>_.includes(selected,d.id));
     const graph_total = _.sumBy(graph_data, 'value');
+    const colorBy = d=>result_color_scale(d.id);
 
     const new_summary_text_args = {
       year: current_drr_year,
@@ -253,21 +254,18 @@ class PercentageViz extends React.Component {
             </div>
           </div>
           <div className="fcol-md-4 fcol-xs-4 medium_panel_text" >
-            <div style={{height: '280px'}} aria-hidden = {true}>
-              <NivoResponsivePie
-                data = {graph_data}
-                colorBy = {obj=>result_color_scale(obj.id)}
-                total = {graph_total}
-                height = '280px'
-                is_money = {false}
-                margin = {{
-                  top: 30,
-                  right: 30,
-                  bottom: 30,
-                  left: 30,
-                }}
-              />
-            </div>
+            <NivoResponsivePie
+              data = {graph_data}
+              graph_height = '280px'
+              is_money = {false}
+              colorBy = {colorBy}
+              margin = {{
+                top: 30,
+                right: 30,
+                bottom: 30,
+                left: 30,
+              }}
+            />
           </div>
           <div className="fcol-md-4 fcol-xs-4 medium_panel_text" >
             <TM
