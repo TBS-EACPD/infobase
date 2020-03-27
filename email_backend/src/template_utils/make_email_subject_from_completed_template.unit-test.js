@@ -5,7 +5,7 @@ describe("make_email_subject_from_completed_template", () => {
   it("properly generates subject messages", () => {
     const original_test_template = {
       meta: {
-        subject_template: "Test subject: [${enums}], ${number}, ${blah}",
+        subject_template: "Test subject: [${radio}], [${enums}], ${number}, ${blah}",
       },
     };
     const completed_test_template = {
