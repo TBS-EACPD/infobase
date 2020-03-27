@@ -111,7 +111,7 @@ export class NivoResponsiveLine extends React.Component {
     const ordered_column_keys = _.concat(['label'], last_column_keys);
   
     const column_names = _.chain(ordered_column_keys)
-      .zip( _.concat([table_first_column_name ? table_first_column_name : graph_text_maker("label")], last_column_keys) )
+      .zip( _.concat([table_first_column_name || graph_text_maker("label")], last_column_keys) )
       .fromPairs()
       .value();
 
