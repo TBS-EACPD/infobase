@@ -18,9 +18,6 @@ import {
 
 import { throttle_requests_by_client } from './throttle_requests_by_client.js';
 
-// import { new_problem } from 'problem_mongoose.js';
-// const new_problem = require('problem_mongoose');
-
 const get_request_content = (request) => (!_.isEmpty(request.body) && request.body) || (!_.isEmpty(request.query) && request.query);
 
 const log_email_request = (request, log_message) => {
@@ -104,16 +101,10 @@ const make_email_backend = (templates) => {
         template_name,
         completed_template,
       } = get_request_content(request);
-      // const other = {};
       const {
         ip,
-        client,
         headers,
       } = request;
-
-      // other.ip = ip;
-      // other.client = client;
-      // other.headers = headers;
 
       const original_template = templates[template_name];
 
@@ -159,7 +150,6 @@ const make_email_backend = (templates) => {
 
           //Sending info to MongoDB server
           const mongoose = require('mongoose');
-          // const assert = require('assert');
           const Schema = mongoose.Schema;
           
           mongoose.connect('mongodb://localhost/Feedback');
@@ -171,7 +161,6 @@ const make_email_backend = (templates) => {
             const new_problem = mongoose.model('Problems', problem_schema);
             //could not find a way to consistently read off of data types with dashes without using []
             const problem_to_send = new new_problem({ 
-              // form: template_name,
               type: completed_template.issue_type[0],
               details: completed_template.issue_details,
               user: headers["user-agent"],
@@ -179,10 +168,9 @@ const make_email_backend = (templates) => {
               ip: ip,
               full: completed_template,
               headers: headers,
-              // client: client,
-              // other: other,
             });
 
+            //if message is not shown, log is unsuccessful
             problem_to_send.save().then(function(){
               // assert(problem_to_send.isNew() === false);
               console.log('Mongo Log Request Successful.');
