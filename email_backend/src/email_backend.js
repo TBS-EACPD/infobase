@@ -104,18 +104,17 @@ const make_email_backend = (templates) => {
         template_name,
         completed_template,
       } = get_request_content(request);
-      const other = {};
+      // const other = {};
       const {
         ip,
         client,
         headers,
       } = request;
 
-      other.ip = ip;
-      other.client = client;
-      other.headers = headers;
+      // other.ip = ip;
+      // other.client = client;
+      // other.headers = headers;
 
-      debugger;
       const original_template = templates[template_name];
 
       if ( _.isUndefined(original_template) || !validate_completed_template(original_template, completed_template) ){
@@ -170,16 +169,18 @@ const make_email_backend = (templates) => {
 
             const problem_schema = new Schema({}, { strict: false });
             const new_problem = mongoose.model('Problems', problem_schema);
-            debugger;
             //could not find a way to consistently read off of data types with dashes without using []
             const problem_to_send = new new_problem({ 
               // form: template_name,
               type: completed_template.issue_type[0],
               details: completed_template.issue_details,
               user: headers["user-agent"],
-              // date: Date.now,
+              date: Date.now,
+              ip: ip,
               full: completed_template,
-              other: other,
+              headers: headers,
+              // client: client,
+              // other: other,
             });
 
             problem_to_send.save().then(function(){
