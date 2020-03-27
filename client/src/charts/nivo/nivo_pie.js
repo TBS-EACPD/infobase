@@ -157,7 +157,7 @@ export class NivoResponsivePie extends React.Component{
               return percent_value_tooltip(
                 [data_with_original_values],
                 get_formatter(is_money, text_formatter, false), 
-                total
+                total || _.sumBy(data_with_absolute_values, 'value')
               );
             } else {
               return tooltip(
