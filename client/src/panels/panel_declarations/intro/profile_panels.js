@@ -28,9 +28,9 @@ export const declare_profile_panel = () => declare_panel({
           return subject.id && {
             profile_fields: [
               ["applied_title", subject.applied_title],
+              ["legal_title", subject.legal_title],
               ["acronym", subject.abbr],
               ["previously_named", subject.old_name],
-              ["legal_title", subject.legal_title],
               ["status", subject.status],
               ["end_yr", subject.end_yr],
               ["notes", subject.notes],
