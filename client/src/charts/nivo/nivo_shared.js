@@ -180,6 +180,9 @@ const general_default_props = {
       },
     },
   },
+  isInteractive: true,
+  motionDamping: 15,
+  motionStiffness: 95,
 };
 
 export {

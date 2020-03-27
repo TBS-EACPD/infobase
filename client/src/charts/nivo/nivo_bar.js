@@ -42,44 +42,40 @@ export class NivoResponsiveBar extends React.Component{
   render(){
     const{
       data,
-      custom_table,
       keys,
+      groupMode,
+      indexBy,
       margin,
+      legends,
       graph_height,
-      label_format,
-      colors,
       bttm_axis,
       left_axis,
-      isInteractive,
-      indexBy,
       remove_bottom_axis,
       remove_left_axis,
       enableLabel,
       label,
+      label_format,
       is_money,
-      legends,
-      tick_value,
       text_formatter,
       theme,
+      colors,
       colorBy,
-      min,
-      max,
-      motion_damping,
-      motion_stiffness,
       tooltip,
       enableGridX,
-      groupMode,
       enableGridY,
       onMouseEnter,
       onMouseLeave,
       onClick,
       padding,
-      animate,
-      labelTextColor,
       borderWidth,
       disable_table_view,
+      custom_table,
       table_name,
       table_first_column_name,
+      isInteractive,
+      animate,
+      motionDamping,
+      motionStiffness,
     } = this.props;
 
     const IE_fixed_legends = legends ? (
@@ -108,37 +104,36 @@ export class NivoResponsiveBar extends React.Component{
             colorBy,
             theme, 
             indexBy, 
-            enableLabel, 
-            isInteractive,
-            motion_damping,
-            motion_stiffness,
             onMouseEnter,
             onMouseLeave,
             onClick,
             padding,
             tooltip,
+            enableLabel,
             label,
-            animate,
-            labelTextColor,
             borderWidth,
+            isInteractive,
+            animate,
+            motionDamping,
+            motionStiffness,
           }}
           legends={ IE_fixed_legends }
           keys={_.union([''],keys)}
           labelFormat={_.isUndefined(label_format) ? null : label_format}
+          labelTextColor={window.infobase_color_constants.textColor}
           tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
           axisBottom={remove_bottom_axis ? null : bttm_axis}
           axisLeft={
             remove_left_axis ?
               null :
               {
-                tickValues: tick_value || 6,
+                tickValues: 6,
                 format: (d) => get_formatter(is_money, text_formatter)(d),
-                min: min,
-                max: max,
+                min: "auto",
+                max: "auto",
                 ...(left_axis || {}),
               }
           }
-          borderColor="inherit:darker(1.6)"
         />
       </div>;
     
@@ -153,11 +148,6 @@ NivoResponsiveBar.defaultProps = {
     tickPadding: 10,
     tickRotation: 0,
   },
-  labelTextColor: "inherit:darker(2)",
-  isInteractive: true,
-  motion_damping: 15,
-  motion_stiffness: 95,
-  table_switch: false,
 };
   
   
@@ -167,38 +157,37 @@ export class NivoResponsiveHBar extends React.Component{
     const{
       data,
       keys,
+      groupMode,
+      indexBy,
       margin,
+      legends,
       graph_height,
-      label_format,
-      colors,
       bttm_axis,
       left_axis,
       top_axis,
-      isInteractive,
-      indexBy,
       remove_bottom_axis,
       remove_left_axis,
       add_top_axis,
       enableLabel,
+      label,
+      label_format,
+      labelSkipWidth,
       is_money,
-      legends,
-      tick_value,
       text_formatter,
       theme,
+      colors,
       colorBy,
-      motion_damping,
-      motion_stiffness,
       tooltip,
       enableGridX,
-      groupMode,
       enableGridY,
       padding,
-      label,
-      labelSkipWidth,
       markers,
       disable_table_view,
       table_name,
       table_first_column_name,
+      isInteractive,
+      motionDamping,
+      motionStiffness,
     } = this.props;
     
     const IE_fixed_legends = legends ? (
@@ -228,13 +217,17 @@ export class NivoResponsiveHBar extends React.Component{
           indexBy, 
           enableLabel, 
           label,
-          isInteractive,
           labelSkipWidth,
+          padding,
           markers,
+          isInteractive,
+          motionDamping,
+          motionStiffness,
         }}
         legends = { IE_fixed_legends }
         layout = 'horizontal'
         keys = {_.union([''],keys)}
+        labelTextColor={window.infobase_color_constants.textColor}
         labelFormat={_.isUndefined(label_format) ? null : label_format}
         tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
         axisBottom={remove_bottom_axis ? null : bttm_axis}
@@ -243,19 +236,13 @@ export class NivoResponsiveHBar extends React.Component{
           remove_left_axis ?
             null :
             {
-              tickValues: tick_value || 6,
+              tickValues: 6,
               format: (d) => get_formatter(is_money, text_formatter)(d),
               min: "auto",
               max: "auto",
               ...(left_axis || {}),
             }
         }
-        padding={padding}
-        borderColor="inherit:darker(1.6)"
-        motionDamping={motion_damping}
-        motionStiffness={motion_stiffness}
-        labelTextColor={window.infobase_color_constants.textColor}
-        labelSkipWidth={labelSkipWidth}
       />
     </div>;
 
@@ -265,7 +252,6 @@ export class NivoResponsiveHBar extends React.Component{
 };
 NivoResponsiveHBar.defaultProps = {
   ...general_default_props,
-
   bttm_axis: {
     tickSize: 7,
     tickPadding: 10,
@@ -282,11 +268,6 @@ NivoResponsiveHBar.defaultProps = {
       },
     },
   },
-  isInteractive: true,
-  max: "auto",
-  min: "auto",
   padding: 0.3,
-  motion_damping: 15,
-  motion_stiffness: 95,
   labelSkipWidth: 10,
 };
