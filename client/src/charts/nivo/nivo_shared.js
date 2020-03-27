@@ -13,6 +13,7 @@ import { formats } from "../../core/format.js";
 
 import { create_text_maker } from '../../models/text.js';
 import graph_text from './NivoCharts.yaml';
+import { m } from '../../tables/table_common.js';
 
 const graph_text_maker = create_text_maker(graph_text);
 

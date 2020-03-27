@@ -52,31 +52,16 @@ export class NivoResponsivePie extends React.Component{
       graph_height,
       colors,
       colorBy,
-      theme,
-      enableRadialLabels,
-      enableSlicesLabels,
+      include_percent,
       tooltip,
       percent_value_tooltip,
-      include_percent,
-      total,
-      margin,
-      text_formatter,
-      legends,
-      startAngle,
       is_money,
-      disable_table_view,
+      text_formatter,
+      margin,
       display_horizontal,
+      disable_table_view,
       table_name,
     } = this.props;
-
-    const IE_fixed_legends = legends ? (
-      _.map(legends,
-        legend => _.chain(legend)
-          .clone()
-          .assign({symbolShape: fixed_symbol_shape})
-          .value() )
-      ) :
-      undefined;
 
     const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(colors || newIBCategoryColors) );
     const color_func = colorBy || (d=>color_scale(d.label));
@@ -141,13 +126,8 @@ export class NivoResponsivePie extends React.Component{
             data: data_with_absolute_values,
             margin,
             colors,
-            theme,
-            startAngle,
-            enableSlicesLabels,
-            enableRadialLabels,
           }}
           colorBy={ color_func }
-          legends={ IE_fixed_legends }
           tooltip={ (data) => {
             const data_with_original_values = {
               ...data,
@@ -158,7 +138,7 @@ export class NivoResponsivePie extends React.Component{
               return percent_value_tooltip(
                 [data_with_original_values],
                 get_formatter(is_money, text_formatter, false), 
-                total || _.sumBy(data_with_absolute_values, 'value')
+                _.sumBy(data_with_absolute_values, 'value')
               );
             } else {
               return tooltip(
@@ -168,12 +148,10 @@ export class NivoResponsivePie extends React.Component{
             } 
           }}
           innerRadius={0.5}
-          borderWidth={1}
-          borderColor="inherit:darker(0.2)"
-          radialLabelsSkipAngle={0}
-          animate={true}
-          motionStiffness={30}
-          motionDamping={15}
+          animate={false}
+          borderWidth={0}
+          enableSlicesLabels={false}
+          enableRadialLabels={false}
         />
       </div>
       <div className="common-donut__legend">
@@ -212,6 +190,4 @@ NivoResponsivePie.defaultProps = {
     left: 50,
   },
   include_percent: true,
-  enableRadialLabels: false,
-  enableSlicesLabels: false,
 };
