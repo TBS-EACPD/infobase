@@ -169,11 +169,13 @@ table_picker_no_tables_found:
   fr: Aucun tableau n'est disponible pour la combinaison d'étiquette choisie. 
 
 different_org_names_rpb_footnote:
-  transform: [markdown]
+  transform: [markdown, handlebars]
   en: | 
-    In some cases, the InfoBase will display two names for an organization—a legal title and an applied title. An organization’s legal title is the name that appears in its enabling legislation (act), proclamation, order in council, or other instrument used to create a branch of government. The applied name is used in communications and is therefore the title that most people associate with the organization. **This report lists organizations according to their legal name**. 
+    In some cases, there are two names for an organization—an {{gl_tt "applied title" "AT_IGOC"}} and a {{gl_tt "legal title" "LT_IGOC"}}. The GC InfoBase uses applied titles when available.
+
+    Note that some of the data sources for the GC InfoBase, such as Main Estimates and Public Accounts, are always presented by legal title in their original publication.
   fr: | 
-    Dans certain cas l’InfoBase utilise deux noms pour une seule organisation—l’appellation légale et le titre d’usage. L’appellation légale est le nom figurant dans la loi d’habilitation, la proclamation, le décret ou tout autre instrument utilisé pour créer un organisme gouvernemental. Le titre d’usage est utilisé pour toutes les communications et il est donc plus souvent associé à l’organisation. **Ce rapport énumère les organisations selon leur appellation légale**.
+    TODO
 
 rpb_no_data:
   transform: [markdown]
