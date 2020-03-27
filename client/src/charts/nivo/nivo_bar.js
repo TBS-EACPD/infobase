@@ -30,7 +30,7 @@ const bar_table = (data, keys, indexBy, table_view_format, table_name, table_fir
 
   const ordered_column_keys = _.concat([indexBy],keys);
   const column_names = _.chain(ordered_column_keys)
-    .zip( _.concat([table_first_column_name ? table_first_column_name : graph_text_maker("label")], keys) )
+    .zip( _.concat([table_first_column_name || graph_text_maker("label")], keys) )
     .fromPairs()
     .value();
 
