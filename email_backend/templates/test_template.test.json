@@ -26,6 +26,25 @@
       "fr": "Sélectionner toutes les cases qui s'appliquent :"
     }
   },
+  "radio": {
+    "required": true,
+    "form_type": "radio",
+    "form_label": {
+      "en": "Did you find what you were looking for on GC InfoBase?",
+      "fr": "Avez-vous trouvé ce que vous cherchiez dans l’InfoBase du GC?"
+    },
+    "value_type": "enums",
+    "enum_values": {
+      "found": {
+        "en": "Yes",
+        "fr": "Oui"
+      },
+      "not_found": {
+        "en": "No",
+        "fr": "Non"
+      }
+    }
+  },
   "text": {
     "required": true,
     "value_type": "string",
