@@ -169,7 +169,7 @@ table_picker_no_tables_found:
   fr: Aucun tableau n'est disponible pour la combinaison d'étiquette choisie. 
 
 different_org_names_rpb_footnote:
-  transform: [markdown, handlebars]
+  transform: [handlebars, markdown]
   en: | 
     In some cases, there are two names for an organization—an {{gl_tt "applied title" "AT_IGOC"}} and a {{gl_tt "legal title" "LT_IGOC"}}. The GC InfoBase uses applied titles when available.
 
