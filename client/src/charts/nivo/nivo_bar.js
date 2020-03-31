@@ -20,7 +20,7 @@ const bar_table = (data, keys, indexBy, table_view_format, table_name, table_fir
     ),
     sort_values: {
       [indexBy]: row[indexBy],
-      ...(_.omit(row, 'indexBy')),
+      ...(_.omit(row, indexBy)),
     },
     search_values: {
       [indexBy]: row[indexBy],
