@@ -202,7 +202,7 @@ class PercentageViz extends React.Component {
 
     const all_data = _.chain(counts)
       .map( (value, key) => ({
-        name: result_statuses[key].text,
+        label: result_statuses[key].text,
         id: key,
         value,
       }) )
@@ -214,6 +214,7 @@ class PercentageViz extends React.Component {
     const all_data_total = _.sumBy(all_data, 'value');
 
     const graph_data = _.filter(all_data, d=>_.includes(selected,d.id));
+    
     const graph_total = _.sumBy(graph_data, 'value');
     const colorBy = d=>result_color_scale(d.id);
 
@@ -237,8 +238,8 @@ class PercentageViz extends React.Component {
             <div className="legend-container">
               <GraphLegend
                 items={_.chain(all_data)
-                  .map( ({ name, id }) => ({
-                    label: name,
+                  .map( ({ label, id }) => ({
+                    label: label,
                     active: _.includes(selected, id),
                     id,
                     color: result_color_scale(id),

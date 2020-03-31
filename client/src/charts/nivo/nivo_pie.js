@@ -91,10 +91,16 @@ export class NivoResponsivePie extends React.Component{
       0 
     );
 
+    const graph_total = _.reduce(
+      data,
+      (sum, {value}) => sum + Math.abs(value),
+      0 
+    );
+
     const table_data = _.map(data, row => ({
       display_values: {
         label: row["label"],
-        percentage: formats.percentage_raw(row.value/legend_total),
+        percentage: formats.percentage_raw(row.value/graph_total),
         value: get_formatter(is_money, text_formatter, true, true)(row.value),
       },
       sort_values: {
