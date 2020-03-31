@@ -6,8 +6,8 @@ import {
   InteractiveGraph,
   general_default_props,
   default_tooltip,
-  fixed_symbol_shape,
   get_formatter,
+  fix_legends_IE,
 } from './nivo_shared.js';
 import {
   DisplayTable,
@@ -79,14 +79,7 @@ export class NivoResponsiveLine extends React.Component {
       y_scale_zoomed,
     } = this.state;
 
-    const IE_fixed_legends = legends ? (
-      _.map(legends,
-        legend => _.chain(legend)
-          .clone()
-          .assign({symbolShape: fixed_symbol_shape})
-          .value() )
-      ) :
-      undefined;
+    const IE_fixed_legends = fix_legends_IE(legends);
     
     const table_data = _.map(data, row => ({
       display_values: _.chain(row.data)

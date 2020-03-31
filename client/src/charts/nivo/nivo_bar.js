@@ -4,8 +4,8 @@ import {
   graph_text_maker,
   InteractiveGraph,
   general_default_props,
-  fixed_symbol_shape,
   get_formatter,
+  fix_legends_IE,
 } from './nivo_shared.js';
 import {
   DisplayTable,
@@ -14,11 +14,10 @@ import {
 
 const bar_table = (data, keys, indexBy, table_view_format, table_name, table_first_column_name) => {
   const table_data = _.map(data, row => ({
-    display_values: _.chain(row)
-      .toPairs()
-      .map(r => r[0]===indexBy ? [indexBy, r[1]] : [r[0],table_view_format(r[1])] )
-      .fromPairs()
-      .value(),
+    display_values: _.mapValues(
+      row,
+      (values, key) => key === indexBy ? values : table_view_format(values)
+    ),
     sort_values: {
       [indexBy]: row[indexBy],
       ...(_.omit(row, 'indexBy')),
@@ -78,14 +77,7 @@ export class NivoResponsiveBar extends React.Component{
       motionStiffness,
     } = this.props;
 
-    const IE_fixed_legends = legends ? (
-      _.map(legends,
-        legend => _.chain(legend)
-          .clone()
-          .assign({symbolShape: fixed_symbol_shape})
-          .value() )
-      ) :
-      undefined;
+    const IE_fixed_legends = fix_legends_IE(legends);
   
     const table = !disable_table_view && (
       custom_table || bar_table(data, keys, indexBy, get_formatter(is_money, text_formatter, true, true), table_name, table_first_column_name)
@@ -190,14 +182,7 @@ export class NivoResponsiveHBar extends React.Component{
       motionStiffness,
     } = this.props;
     
-    const IE_fixed_legends = legends ? (
-      _.map(legends,
-        legend => _.chain(legend)
-          .clone()
-          .assign({symbolShape: fixed_symbol_shape})
-          .value() )
-      ) :
-      undefined;
+    const IE_fixed_legends = fix_legends_IE(legends);
 
     const table = !disable_table_view && bar_table(data, keys, indexBy, get_formatter(is_money, text_formatter, true, true), table_name, table_first_column_name);
 
