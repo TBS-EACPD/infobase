@@ -168,17 +168,6 @@ table_picker_no_tables_found:
   en: No tables are available for the selected combination of tags. 
   fr: Aucun tableau n'est disponible pour la combinaison d'étiquette choisie. 
 
-different_org_names_rpb_footnote:
-  transform: [handlebars, markdown]
-  en: | 
-    In some cases, there are two names for an organization—an {{gl_tt "applied title" "AT_IGOC"}} and a {{gl_tt "legal title" "LT_IGOC"}}. The GC InfoBase uses applied titles when available.
-
-    Note that some of the data sources for the GC InfoBase, such as Main Estimates and Public Accounts, are always presented by legal title in their original publication.
-  fr: | 
-    Dans certains cas, il y a deux noms pour une organisation : un {{gl_tt "titre d'usage" "AT_IGOC"}} et un {{gl_tt "titre légal" "LT_IGOC"}}. Dans l'InfoBase du GC, on utilise les titres d'usage quand ils existent.
-
-    Notez que certaines des sources de données de l'InfoBase du GC, telles que le Budget principal des dépenses et les Comptes publics, sont toujours présentées par titre légal dans leur publication d'origine.
-
 rpb_no_data:
   transform: [markdown]
   en: |
