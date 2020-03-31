@@ -38,13 +38,12 @@ $margin: 30px;
   }
 }
 
-
-.modal-sm {
-  width: 300px;
-}
-.modal-lg {
+.modal-responsive {
   width: 800px;
-}
-.modal-xl {
-  width: 1140px;
+  @media(min-width: $minSmallDevice){
+    width: 300px;
+  }
+  @media(max-width: $maxLargeDevice){
+    width: 1140;
+  }
 }
