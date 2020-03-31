@@ -14,7 +14,7 @@ const {
 
 
 const chance_increment = 0.2;
-const survey_campaign_end_date = new Date(2020, 3, 31).getTime()/1000;
+const survey_campaign_end_date = new Date(2020, 3, 31).getTime();
 
 
 const get_path_root = (path) => _.chain(path)
