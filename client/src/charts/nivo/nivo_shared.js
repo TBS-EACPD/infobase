@@ -184,12 +184,23 @@ const general_default_props = {
   motionStiffness: 95,
 };
 
+const fix_legends_IE = (legends) => {
+  return legends ? (
+    _.map(legends,
+      legend => _.chain(legend)
+        .clone()
+        .assign({symbolShape: fixed_symbol_shape})
+        .value() )
+    ) :
+    undefined;
+};
+
 export {
   InteractiveGraph,
   default_tooltip,
   general_default_props,
   graph_text_maker, 
-  fixed_symbol_shape,
   get_formatter,
   infobase_colors_smart,
+  fix_legends_IE,
 };
