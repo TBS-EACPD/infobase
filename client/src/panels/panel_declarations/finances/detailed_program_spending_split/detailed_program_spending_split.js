@@ -139,7 +139,6 @@ class HistoricalProgramBars extends React.Component {
               bottom: 50,
               left: 70,
             }}
-            graph_height = '400px'
           />
         </div>
       </div>

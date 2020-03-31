@@ -79,7 +79,6 @@ export const declare_personnel_spend_panel = () => declare_panel({
               "left": 65,
             }}
             colors = { window.infobase_color_constants.primaryColor }
-            graph_height = '400px'
           />
         </div>;
       }

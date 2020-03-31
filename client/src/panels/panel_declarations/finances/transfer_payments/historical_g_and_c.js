@@ -127,7 +127,6 @@ class HistTPTypes extends React.Component {
             data = {expenditure_data}
             colorBy={d => colors(d.id)}
             stacked = {true}
-            graph_height = '400px'
           />
         </div>
       </Fragment>;
@@ -283,7 +282,6 @@ class DetailedHistTPItems extends React.Component {
               "bottom": 50,
               "left": 70,
             }}
-            graph_height = '400px'
             colorBy={d=>color_scale(d.id)}
           />
         </div>

@@ -106,7 +106,6 @@ class SpendInTagPerspective extends React.Component {
           <NivoResponsivePie
             data = {data}
             legend_data = {data}
-            graph_height = '400px'
             colorBy = {obj=>color_scale(obj.label)}
           />
         </div>

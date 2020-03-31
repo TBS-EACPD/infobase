@@ -174,7 +174,6 @@ class PlannedProgramResources extends React.Component {
             indexBy = "year"
             colorBy = { d => colors(d.id)}
             is_money = {!is_fte}
-            graph_height = '400px'
           />
         </div>
       </div>

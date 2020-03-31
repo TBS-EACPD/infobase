@@ -36,7 +36,6 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations, fo
           <NivoResponsivePie
             data = {data}
             legend_data ={data}
-            graph_height = '400px'
           /> 
         </Col>
       }
