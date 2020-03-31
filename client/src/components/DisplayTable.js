@@ -16,17 +16,18 @@ export class DisplayTable extends React.Component {
 
     const { rows } = props;
 
-    const { sort_values, search_values } = _.first(rows);
+    const { sort_values } = _.first(rows);
 
     const sort_by = _.chain(sort_values)
       .keys()
       .first()
       .value();
 
-    const searches = _.mapValues(
-      search_values,
-      () => "",
-    );
+    const searches = _.chain(rows)
+      .map( row => _.keys(row.search_values) )
+      .union().keyBy()
+      .mapValues( () => "" )
+      .value();
 
     this.state = {
       sort_by,
@@ -77,6 +78,18 @@ export class DisplayTable extends React.Component {
       .tap( descending ? _.noop : _.reverse )
       .value();
 
+    const all_sort_keys = _.chain(rows)
+      .map( row => _.keys(row.sort_values) )
+      .flatten()
+      .uniq()
+      .value();
+
+    const all_search_keys = _.chain(rows)
+      .map( row => _.keys(row.search_values) )
+      .flatten()
+      .uniq()
+      .value();
+
     return (
       <div style={{overflowX: "auto", marginTop: "20px", marginBottom: "20px"}}>
         <table className="table display-table no-total-row">
@@ -111,9 +124,9 @@ export class DisplayTable extends React.Component {
                     ({sort_values, search_values}) => _.map(
                       ordered_column_keys,
                       (column_key) => {
-                        const sortable = _.has(sort_values, column_key);
-                        const searchable = _.has(search_values, column_key);
-      
+                        const sortable = _.includes(all_sort_keys, column_key);
+                        const searchable = _.includes(all_search_keys, column_key);
+
                         const current_search_input = (searchable && searches[column_key]) || null;
 
                         return (
