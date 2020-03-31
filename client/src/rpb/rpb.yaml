@@ -175,7 +175,9 @@ different_org_names_rpb_footnote:
 
     Note that some of the data sources for the GC InfoBase, such as Main Estimates and Public Accounts, are always presented by legal title in their original publication.
   fr: | 
-    TODO
+    Dans certains cas, il y a deux noms pour une organisation : un {{gl_tt "titre d'usage" "AT_IGOC"}} et un {{gl_tt "titre légal" "LT_IGOC"}}. Dans l'InfoBase du GC, on utilise les titres d'usage quand ils existent.
+
+    Notez que certaines des sources de données de l'InfoBase du GC, telles que le Budget principal des dépenses et les Comptes publics, sont toujours présentées par titre légal dans leur publication d'origine.
 
 rpb_no_data:
   transform: [markdown]
