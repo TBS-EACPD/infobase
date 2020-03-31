@@ -134,11 +134,7 @@ class InteractiveGraph extends React.Component{
           title={ table_name || graph_text_maker("default_table_name") }
           body={ table }
           on_close_callback={() => this.setState({show_table: false})}
-          additional_dialog_class = { (() => {
-            if (window.innerWidth < breakpoints.minMediumDevice) { return 'modal-sm'; }
-            if (window.innerWidth > breakpoints.maxLargeDevice ) { return 'modal-xl'; }
-            return 'modal-lg';
-          })() }
+          additional_dialog_class = {'modal-responsive'}
         />
       </Fragment>
     );
