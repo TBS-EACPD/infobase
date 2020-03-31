@@ -101,7 +101,7 @@ export const declare_employee_gender_panel = () => declare_panel({
           <Col size={12} isText>
             <TM k={level+"_employee_gender_text"} args={info} />
           </Col>
-          { !window.is_a11y_mode && level === "dept" &&
+          { !window.is_a11y_mode &&
             <Col size={12} isGraph>
               <LineBarToggleGraph 
                 {...{
