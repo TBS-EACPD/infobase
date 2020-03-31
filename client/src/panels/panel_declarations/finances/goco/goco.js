@@ -384,7 +384,6 @@ class Goco extends React.Component {
             onMouseEnter={ (node, e) => handleHover(node, e.target, graph_data) }
             onMouseLeave={ (node, e) => handleHover(node, e.target, graph_data) }
             onClick={ (node, e) => handleClick(node, e.target, graph_data) }
-            graph_height = '400px'
             bttm_axis={{
               renderTick: tick => {
                 return <g key={tick.key} transform={ `translate(${tick.x},${tick.y + 16})` }>

@@ -79,7 +79,6 @@ export const declare_employee_totals_panel = () => declare_panel({
                   colors = { window.infobase_color_constants.primaryColor }
                   is_money = {false}
                   yScale = {{toggle: true}}
-                  graph_height = '400px'
                   tooltip = {slice =>  
                     <div style={{color: window.infobase_color_constants.textColor}}>
                       <table style={{width: '100%', borderCollapse: 'collapse'}}>
