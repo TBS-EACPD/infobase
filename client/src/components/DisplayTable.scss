@@ -1,5 +1,9 @@
 @import '../common_css/common-variables';
 
+table.display-table {
+  width: 99%;
+}
+
 table.display-table > thead > tr {
   background-color: $primaryColor;
 
@@ -30,6 +34,7 @@ table.display-table > thead > tr > th {
 table.display-table > tbody > tr > td,
 table.display-table > tbody > tr > th {
   font-weight: $mediumFontWeight;
+  border: 1px solid $separatorColor;
 }
 
 table.display-table > tbody > tr {
