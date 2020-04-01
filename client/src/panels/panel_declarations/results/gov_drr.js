@@ -54,6 +54,7 @@ class GovDRR extends React.Component {
             <DisplayTable
               name={"Government DRR"}
               column_names={column_names}
+              ordered_column_keys={_.keys(column_names)}
               rows={rows_of_counts_by_dept}
               total={total}
             />
@@ -107,7 +108,7 @@ export const declare_gov_drr_panel = () => declare_panel({
       });
       const total = _.chain(column_keys)
         .keys()
-        .map(key => [key, verbose_gov_counts[key]])
+        .map(key => [key, "big_int"])
         .fromPairs()
         .value();
       const column_names = _.assignIn({subject_name: text_maker("org")}, column_keys);

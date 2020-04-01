@@ -2,7 +2,7 @@ import './DisplayTable.scss';
 
 import text from '../common_text/common_lang.yaml';
 import { Fragment } from 'react';
-import { create_text_maker_component } from './misc_util_components.js';
+import { create_text_maker_component, Format } from './misc_util_components.js';
 
 import { SortDirections } from './SortDirection.js';
 import { DebouncedTextInput } from './DebouncedTextInput.js';
@@ -66,6 +66,8 @@ export class DisplayTable extends React.Component {
       descending,
       searches,
     } = this.state;
+    
+    const total_nicks = _.keys(total);
 
     const clean_search_string = (search_string) => _.chain(search_string).deburr().toLower().trim().value();
     const sorted_filtered_data = _.chain(rows)
@@ -94,6 +96,13 @@ export class DisplayTable extends React.Component {
       .flatMap( row => _.keys(row.search_values) )
       .uniq()
       .value();
+
+    const total_row = _.reduce(sorted_filtered_data, (result, row) => {
+      _.forEach(total_nicks, nick => {
+        result[nick] = _.isUndefined(result[nick]) ? row.sort_values[nick] : result[nick] + row.sort_values[nick];
+      });
+      return result;
+    }, {});
 
     return (
       <div style={{overflowX: "auto", marginTop: "20px", marginBottom: "20px"}}>
@@ -200,7 +209,7 @@ export class DisplayTable extends React.Component {
               <tr key="total_row">
                 { _.map(ordered_column_keys, (col, idx) => (
                   <td style={{fontWeight: 700}} key={col}>
-                    {total[col] ? total[col] : ""}
+                    {total_row[col] ? <Format type={total[col]} content={total_row[col]}/> : ""}
                   </td>
                 ))}
               </tr>

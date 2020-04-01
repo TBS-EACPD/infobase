@@ -75,6 +75,14 @@ export const declare_dp_rev_split_panel = () => declare_panel({
         panel_args: data,
       } = calculations;
 
+      const column_names = {
+        year: text_maker("year"),
+        net: text_maker("dp_gross"),
+        gross: text_maker("dp_revenue"),
+        spa: text_maker("dp_spa"),
+        rev: text_maker("dp_net"),
+      };
+
       return (
         <InfographicPanel
           title={text_maker("dp_rev_split_title")}
@@ -83,13 +91,8 @@ export const declare_dp_rev_split_panel = () => declare_panel({
           <DisplayTable
             name={text_maker("dp_rev_split_title")}
             rows={data}
-            column_names={{
-              year: text_maker("year"),
-              net: text_maker("dp_gross"),
-              gross: text_maker("dp_revenue"),
-              spa: text_maker("dp_spa"),
-              rev: text_maker("dp_net"),
-            }}
+            column_names={column_names}
+            ordered_column_keys={_.keys(column_names)}
           />
         </InfographicPanel>
       );
