@@ -1,7 +1,7 @@
 @import '../common_css/common-variables';
 
 table.display-table {
-  width: 99%;
+  width: 99%; // avoid annoying 1px scroll caused by border
 }
 
 table.display-table > thead > tr {
