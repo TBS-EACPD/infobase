@@ -93,8 +93,11 @@ export class NivoResponsiveLine extends React.Component {
       .compact()
       .groupBy('label')
       .map( _.spread(_.merge) )
-      .map( row=>({
-        display_values: row,
+      .map( row=> ({
+        display_values: _.mapValues(
+          row,
+          (values, key) => key === 'label' ? values : get_formatter(is_money,text_formatter,true,true)(values)
+        ),
         sort_values: row,
         search_values: {label: row.label},
       }))
