@@ -74,8 +74,8 @@ export class DisplayTable extends React.Component {
           .every()
           .value()
       )
-      .sortBy( ({sort_values}) => sort_values[sort_by] )
-      .tap( descending ? _.noop : _.reverse )
+      .sortBy( ({sort_values}) => sort_values[sort_by] ? sort_values[sort_by] : Number.NEGATIVE_INFINITY )
+      .tap( descending ? _.reverse : _.noop )
       .value();
 
     const all_sort_keys = _.chain(rows)
