@@ -12,12 +12,14 @@ import {
   SortDirections, 
   LabeledBox,
   AlertBanner,
+  DisplayTable,
 } from '../components/index.js';
 import { GraphLegend } from '../charts/declarative_charts.js';
 import { Details } from '../components/Details.js';
 import { Subject } from '../models/subject.js';
 
 import classNames from 'classnames';
+import { Form } from 'react-bootstrap/lib/Navbar';
 
 const { Dept } = Subject;
 const PAGE_SIZE = 600;
@@ -142,119 +144,63 @@ class GranularView extends React.Component {
 
     const non_dept_key_cols = _.reject(sorted_key_columns, {nick: 'dept'});
 
-
     const totals_by_nick = _.chain(data_columns)
-      .map( ({nick, formula}) => [ nick, formula(flat_data) ] )
+      .map( ({nick, formula, type}) =>
+        [ nick, <Format key={`total_${nick}`} type={type} content={formula(flat_data)}/> ]
+      )
       .fromPairs()
+      .value();
+    const cols = [
+      ...non_dept_key_cols,
+      ...data_columns,
+    ];
+    const column_names = _.chain([
+      {nick: "dept", fully_qualified_name: text_maker("org")},
+      ...cols,
+    ])
+      .map( ({nick, fully_qualified_name}) => [nick, fully_qualified_name] )
+      .fromPairs()
+      .value();
+
+    const rows = _.chain(shown_rows)
+      .map(row => {
+        const dept_name = Dept.lookup(row.dept).name;
+        const display_values = {
+          dept: <Format type={'wide-str'} content={dept_name}/>,
+          ..._.chain(cols)
+            .map( ({nick, type}) => [ nick, type ? <Format type={type} content={row[nick]}/> : row[nick] ] )
+            .fromPairs()
+            .value(),
+        };
+        const sort_values = {
+          dept: dept_name,
+          ..._.chain(cols)
+            .map( ({nick}) => [nick, row[nick]] )
+            .fromPairs()
+            .value(),
+        };
+        const search_values = {
+          dept: dept_name,
+          ..._.chain(non_dept_key_cols)
+            .map( ({nick}) => [ nick, row[nick]] )
+            .fromPairs()
+            .value(),
+        };
+        return {
+          display_values: display_values,
+          sort_values: sort_values,
+          search_values: search_values,
+        };
+      })
       .value();
 
     return (
       <div>
-        <table 
-          tabIndex={-1}
-          ref={excel_mode ? null : "table"}
-          id="main-table"
-          className="border infobase-table table-rpb table-dark-blue table-rpb-simple"
-        >
-          <thead>
-            <tr className="table-header">
-              <th 
-                scope="col"
-                style={{ cursor: 'pointer' }}
-                key="dept"
-              > 
-                <PlainTableHeader
-                  disabled={excel_mode}
-                  display={text_maker('org')} 
-                  active={sort_col === 'dept' ? sortDirection : null }
-                  onClick={()=> on_header_click('dept') }
-                />
-              </th>
-              {[ 
-                ...non_dept_key_cols, 
-                ...data_columns,
-              ].map( ({nick, fully_qualified_name}) => 
-                <th 
-                  scope="col"
-                  style={{ cursor: 'pointer' }}
-                  key={nick}
-                >
-                  <PlainTableHeader
-                    disabled={excel_mode}
-                    display={fully_qualified_name} 
-                    active={sort_col === nick ? sortDirection : null }
-                    onClick={()=> on_header_click(nick) }
-                  />
-                </th> 
-              )}
-            </tr>
-          </thead>
-          <tbody>
-            {_.map( (excel_mode? flat_data : shown_rows), row => 
-              <tr key={row.csv_index}>
-                <td 
-                  key={'dept'}
-                  className="key-col-cell"
-                > 
-                  {Dept.lookup(row.dept).name} 
-                </td>
-                { _.map(
-                  non_dept_key_cols, ({nick}) => 
-                    <td 
-                      key={nick}
-                      className="key-col-cell"
-                    > 
-                      { row[nick] } 
-                    </td> 
-                ).concat(
-                  _.map(data_columns, ({nick, type}) => 
-                    <td 
-                      className="data-col-cell"
-                      key={nick}
-                    > 
-                      { !excel_mode ?
-                <Format
-                  type={type}
-                  content={row[nick]}
-                /> :
-                row[nick] 
-                      }
-                    </td> 
-                  )
-                )}
-              </tr>
-            )}
-            <tr key="_rpb_total">
-              <td key='dept'> 
-                { 
-            pages.length > 1 ? 
-            text_maker('total_all_pages') :
-            text_maker('total')
-                } 
-              </td>
-              { _.map(non_dept_key_cols, ({nick}) => 
-                <td 
-                  className="key-col-cell" 
-                  key={nick}
-                /> 
-              )}
-              { _.map(data_columns, ({nick, type}) => 
-                <td 
-                  className="data-col-cell"
-                  key={nick}
-                > 
-                  { !excel_mode ?
-            <Format 
-              type={type} 
-              content={totals_by_nick[nick]} 
-            /> :
-            totals_by_nick[nick]
-                  }
-                </td>
-              )}
-            </tr>
-          </tbody>
-        </table>
+        <DisplayTable
+          rows={rows}
+          column_names={column_names}
+          total={totals_by_nick}
+        />
 
         {!excel_mode && pages.length > 1 && 
           <div className="pagination-container">
