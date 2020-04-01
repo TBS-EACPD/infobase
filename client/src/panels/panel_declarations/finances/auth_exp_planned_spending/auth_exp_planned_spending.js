@@ -35,12 +35,26 @@ const include_verbose_gap_year_explanation = false;
 
 
 const AuthExpPlannedSpendingTable = ({data_series}) => {
-  const series_labels = _.map(data_series, 'label');
-
   const all_years = _.chain(data_series)
     .flatMap('years')
     .uniq()
     .value();
+    //WIP TODO
+  const rows = _.reduce(data_series, (result, col) => {
+    const display_values = _.chain(all_years)
+      .zip(col.values)
+      .map(value => value[1] ? {[col.key]: value[1]} : {[col.key]: ""})
+      .value();
+    const concat_display_values = _.chain(display_values)
+      .zip(result.display_values)
+      .map(row => _.assignIn(row[0], row[1]))
+      .value();
+
+    return {
+      display_values: concat_display_values,
+    };
+  }, {});
+  const series_labels = _.map(data_series, 'label');
   
   const data = _.map(
     all_years, 

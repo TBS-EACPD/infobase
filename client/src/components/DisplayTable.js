@@ -1,6 +1,7 @@
 import './DisplayTable.scss';
 
 import text from '../common_text/common_lang.yaml';
+import { Fragment } from 'react';
 import { create_text_maker_component } from './misc_util_components.js';
 
 import { SortDirections } from './SortDirection.js';
@@ -190,16 +191,20 @@ export class DisplayTable extends React.Component {
               )
             )}
             { total &&
-            <tr key="total_row">
-              <td style={{fontWeight: 700}} key="total">
-                {text_maker("total")}
-              </td>
-              { _.map(total, col => (
-                <td style={{fontWeight: 700}} key={col}>
-                  {col}
+            <Fragment>
+              <tr key="total_description">
+                <td style={{fontWeight: 700, textAlign: "center"}} key="total" colSpan={ordered_column_keys.length}>
+                  {text_maker("total")}
                 </td>
-              ))}
-            </tr>
+              </tr>
+              <tr key="total_row">
+                { _.map(ordered_column_keys, (col, idx) => (
+                  <td style={{fontWeight: 700}} key={col}>
+                    {total[col] ? total[col] : ""}
+                  </td>
+                ))}
+              </tr>
+            </Fragment>
             }
           </tbody>
         </table>

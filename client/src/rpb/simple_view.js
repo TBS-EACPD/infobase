@@ -13,6 +13,7 @@ import {
   AlertBanner,
   SortDirections,
   CheckBox,
+  DisplayTable,
 } from '../components/index.js';
 import { GraphLegend } from '../charts/declarative_charts.js';
 import { Details } from '../components/Details.js';
@@ -212,86 +213,59 @@ class SimpleView extends React.Component {
       on_header_click,
     } = this.props;
 
-
     const first_col_nick = deptBreakoutMode ? 'dept' : dimension;
+    const column_names = 
+      {
+        [deptBreakoutMode ? 'dept' : dimension]: text_maker(deptBreakoutMode ? 'org' : dimension),
+        ..._.chain( columns)
+          .map( col => [ col.nick, col.fully_qualified_name ] )
+          .fromPairs()
+          .value(),
+      };
+    const dp_rows = _.chain(rows)
+      .map(row => {
+        const row_values = _.chain(columns)
+          .map( col => [col.nick, row[col.nick]])
+          .fromPairs()
+          .value();
+        const display_values = {
+          [first_col_nick]: first_col_nick === "dept" ? 
+          <a href={granular_rpb_link_for_org(this.props, Dept.lookup(row.dept))}>
+            {Dept.lookup(row.dept).name}
+          </a> :
+          <a href={granular_rpb_link_for_filter(this.props, row[first_col_nick])}>
+            {row[first_col_nick]}
+          </a>,
+          ..._.chain(columns)
+            .map( col => [col.nick, <Format key={col.nick} type={col.type} content={row[col.nick]}/>])
+            .fromPairs()
+            .value(),
+        };
+        const sort_values = {
+          [first_col_nick]: first_col_nick === "dept" ? Dept.lookup(row.dept).name : row[first_col_nick],
+          ...row_values,
+        };
+        const search_values = {
+          [first_col_nick]: first_col_nick === "dept" ? Dept.lookup(row.dept).name : row[first_col_nick],
+        };
+        return {
+          display_values: display_values,
+          sort_values: sort_values,
+          search_values: search_values,
+        };
+      })
+      .value();
 
-    const headers = [
-      { nick: deptBreakoutMode ? 'dept' : dimension, display: text_maker(deptBreakoutMode ? 'org' : dimension) },
-      ..._.map( columns, (col) => ({ nick: col.nick, display: col.fully_qualified_name }) ),
-    ];
-    return (
-      <table 
-        className="medium_panel_text border infobase-table table-rpb table-rpb-simple table-condensed table-dark-blue"
-      >
-        <thead>
-          <tr className="table-header">
-            {_.map(headers, ( {nick, display} , ix) => 
-              <th 
-                key={nick}
-                onClick={()=>{ on_header_click(nick); }}
-                style={{cursor: 'pointer'}}
-                scope="col"
-              >
-                {display}
-                <SortDirections 
-                  asc={!descending && sort_col === nick }
-                  desc={descending && sort_col === nick }
-                />
-              </th>
-            )}
-          </tr>
-        </thead>
-        <tbody>
-          {_.map(rows, row => 
-            <tr key={row[first_col_nick]} >
-              <td 
-                className="key-col-cell"
-                key={first_col_nick}
-              > 
-                { first_col_nick === "dept" ? 
-              <a href={granular_rpb_link_for_org(this.props, Dept.lookup(row.dept))}>
-                {Dept.lookup(row.dept).name}
-              </a> :
-              <a href={granular_rpb_link_for_filter(this.props, row[first_col_nick])}>
-                {row[first_col_nick]}
-              </a> 
-                }
-              </td>
-              {_.map( columns, ({nick,type}) => 
-                <td 
-                  className="data-col-cell"
-                  key={nick}
-                >
-                  <Format 
-                    type={type} 
-                    content={row[nick]} 
-                  /> 
-                </td>
-              )}
-            </tr>
-          )}
-          <tr key="_rpb_total">
-            <td 
-              className="key-col-cell"
-              key={first_col_nick}
-            >
-              <TextMaker el="span" text_key='total' /> 
-            </td>
-            {_.map(columns, ({nick,type}) => 
-              <td 
-                className="data-col-cell"
-                key={nick}
-              >
-                <Format 
-                  type={type} 
-                  content={total_row[nick]} 
-                /> 
-              </td>
-            )}
-          </tr>
-        </tbody>
-      </table>
-    );
+    return <DisplayTable
+      name="simple table"
+      rows={dp_rows}
+      column_names={column_names}
+      total={ _.chain(columns)
+        .map(col => [col.nick, <Format key={col.nick} type={col.type} content={total_row[col.nick]}/>])
+        .fromPairs()
+        .value()
+      }
+    />;
   }
 }
 
