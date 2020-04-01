@@ -243,6 +243,7 @@ class AuthExpPlannedSpendingGraph extends React.Component {
         bottom: 40,
         left: 100,
       },
+      table_ordered_column_keys: _.map(['authorities','budgetary_expenditures','planned_spending'], key => text_maker(key)),
       layers: ['grid', 'markers', 'areas', lines_with_dashed_overlaps, 'slices', 'dots', 'axes', 'legends'],
       ...( should_mark_gap_year && 
         {

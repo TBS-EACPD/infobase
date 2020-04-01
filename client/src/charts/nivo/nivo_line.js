@@ -70,6 +70,7 @@ export class NivoResponsiveLine extends React.Component {
       disable_table_view,
       table_name,
       table_first_column_name,
+      table_ordered_column_keys,
       isInteractive,
       motionDamping,
       motionStiffness,
@@ -84,9 +85,12 @@ export class NivoResponsiveLine extends React.Component {
     const table_data = _.chain(data)
       .map(row=>{
         const series_name = row.id;
-        return _.chain(row.data).map(series=>({label: series.x, [series_name]: series.y})).value()
+        return _.chain(row.data)
+          .map(series => (_.isNil(series.y) ? undefined : {label: series.x, [series_name]: series.y}) )
+          .value();
       })
       .flatten()
+      .compact()
       .groupBy('label')
       .map( _.spread(_.merge) )
       .map( row=>({
@@ -95,8 +99,8 @@ export class NivoResponsiveLine extends React.Component {
         search_values: {label: row.label},
       }))
       .value();
-    const ordered_column_keys = _.concat( ['label'], _.map(data,'id') );
-    const column_names = _.concat( [table_first_column_name || graph_text_maker("label")], _.map(data,'id') );
+    const ordered_column_keys = _.concat( ['label'], table_ordered_column_keys || _.map(data,'id') );
+    const column_names = _.concat( [table_first_column_name || graph_text_maker("label")], table_ordered_column_keys || _.map(data,'id') );
 
     const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={table_name || graph_text_maker("default_table_name")}/>;
 
