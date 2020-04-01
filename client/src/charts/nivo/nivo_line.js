@@ -81,32 +81,22 @@ export class NivoResponsiveLine extends React.Component {
 
     const IE_fixed_legends = fix_legends_IE(legends);
     
-    const table_data = _.map(data, row => ({
-      display_values: _.chain(row.data)
-        .map(d => [d.x,get_formatter(is_money, text_formatter, true, true)(d.y)])
-        .fromPairs()
-        .assign({label: row.id})
-        .value(),
-      sort_values: _.chain(row.data)
-        .map(d => [d.x,d.y])
-        .fromPairs()
-        .assign({label: row.id})
-        .value(),
-      search_values: {
-        label: row.id,
-      },
-    }) );
-    const last_column_keys = _.chain(data)
-      .map( d=>_.map( d.data, d=>d.x ) )
+    const table_data = _.chain(data)
+      .map(row=>{
+        const series_name = row.id;
+        return _.chain(row.data).map(series=>({label: series.x, [series_name]: series.y})).value()
+      })
       .flatten()
-      .uniq()
+      .groupBy('label')
+      .map( _.spread(_.merge) )
+      .map( row=>({
+        display_values: row,
+        sort_values: row,
+        search_values: {label: row.label},
+      }))
       .value();
-    const ordered_column_keys = _.concat(['label'], last_column_keys);
-  
-    const column_names = _.chain(ordered_column_keys)
-      .zip( _.concat([table_first_column_name || graph_text_maker("label")], last_column_keys) )
-      .fromPairs()
-      .value();
+    const ordered_column_keys = _.concat( ['label'], _.map(data,'id') );
+    const column_names = _.concat( [table_first_column_name || graph_text_maker("label")], _.map(data,'id') );
 
     const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={table_name || graph_text_maker("default_table_name")}/>;
 
