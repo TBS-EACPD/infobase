@@ -79,14 +79,12 @@ export class DisplayTable extends React.Component {
       .value();
 
     const all_sort_keys = _.chain(rows)
-      .map( row => _.keys(row.sort_values) )
-      .flatten()
+      .flatMap( row => _.keys(row.sort_values) )
       .uniq()
       .value();
 
     const all_search_keys = _.chain(rows)
-      .map( row => _.keys(row.search_values) )
-      .flatten()
+      .flatMap( row => _.keys(row.search_values) )
       .uniq()
       .value();
 
