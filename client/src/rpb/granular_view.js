@@ -144,10 +144,8 @@ class GranularView extends React.Component {
 
     const non_dept_key_cols = _.reject(sorted_key_columns, {nick: 'dept'});
 
-    const totals_by_nick = _.chain(data_columns)
-      .map( ({nick, formula, type}) =>
-        [ nick, <Format key={`total_${nick}`} type={type} content={formula(flat_data)}/> ]
-      )
+    const totals_nick = _.chain(data_columns)
+      .map( ({nick, type}) => [nick, type])
       .fromPairs()
       .value();
     const cols = [
@@ -199,7 +197,8 @@ class GranularView extends React.Component {
         <DisplayTable
           rows={rows}
           column_names={column_names}
-          total={totals_by_nick}
+          total={totals_nick}
+          ordered_column_keys={_.keys(column_names)}
         />
 
         {!excel_mode && pages.length > 1 && 

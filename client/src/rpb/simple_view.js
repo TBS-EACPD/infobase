@@ -257,11 +257,12 @@ class SimpleView extends React.Component {
       .value();
 
     return <DisplayTable
-      name="simple table"
+      name="simple_table"
       rows={dp_rows}
       column_names={column_names}
+      ordered_column_keys={_.keys(column_names)}
       total={ _.chain(columns)
-        .map(col => [col.nick, <Format key={col.nick} type={col.type} content={total_row[col.nick]}/>])
+        .map( ({nick, type}) => [nick, type] )
         .fromPairs()
         .value()
       }
