@@ -40,10 +40,10 @@ $margin: 30px;
 
 .modal-responsive {
   width: 800px;
-  @media(min-width: $minSmallDevice){
-    width: 300px;
+  @media(min-width: $maxLargeDevice){
+    width: 1140px;
   }
-  @media(max-width: $maxLargeDevice){
-    width: 1140;
+  @media(max-width:  $minSmallDevice){
+    width: 300px;
   }
 }
