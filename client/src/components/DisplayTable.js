@@ -22,12 +22,17 @@ export class DisplayTable extends React.Component {
       .keys()
       .first()
       .value();
-
+    
     const searches = _.chain(rows)
-      .map( row => _.keys(row.search_values) )
-      .union().keyBy()
-      .mapValues( () => "" )
+      .flatMap( 
+        ({search_values}) => _.chain(search_values)
+          .keys()
+          .map( (search_key) => [search_key, ""] )
+          .value()
+      )
+      .fromPairs()  // left out the uniq-ing step, happens implicitly here since the resulting object will only have one instance of each key
       .value();
+    
 
     this.state = {
       sort_by,
@@ -74,7 +79,7 @@ export class DisplayTable extends React.Component {
           .every()
           .value()
       )
-      .sortBy( ({sort_values}) => sort_values[sort_by] ? sort_values[sort_by] : Number.NEGATIVE_INFINITY )
+      .sortBy( ({sort_values}) => _.isNumber(sort_values[sort_by]) ? sort_values[sort_by] : Number.NEGATIVE_INFINITY )
       .tap( descending ? _.reverse : _.noop )
       .value();
 

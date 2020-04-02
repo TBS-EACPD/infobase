@@ -197,20 +197,21 @@ class AuthExpProgSpending extends React.Component {
                 { slice.data.map(
                   tooltip_item => (
                     <tr key = {tooltip_item.serie.id}>
-                      <td style= {{padding: '3px 5px'}}>
+                      <td className="nivo-tooltip__content">
                         <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.serie.color}} />
                       </td>
-                      <td style={{padding: '3px 5px'}}> {tooltip_item.serie.id} </td>
-                      <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: tooltip_formatter(tooltip_item.data.y)}} />
+                      <td className="nivo-tooltip__content"> {tooltip_item.serie.id} </td>
+                      <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: tooltip_formatter(tooltip_item.data.y)}} />
                     </tr>
                   )
                 )}
                 { slice.data.length > 1 ? 
                   <tr>
-                    <td style= {{height: '12px', width: '12px', padding: '3px 5px'}}/>
-                    <td style={{padding: '3px 5px'}}> {text_maker('difference')} </td>
+                    <td className="nivo-tooltip__content" style={{height: '12px'}}/>
+                    <td className="nivo-tooltip__content"> {text_maker('difference')} </td>
                     <td
-                      style={{padding: '3px 5px', color: window.infobase_color_constants.highlightColor}} 
+                      className="nivo-tooltip__content"
+                      style={{color: window.infobase_color_constants.highlightColor}} 
                       dangerouslySetInnerHTML={{__html: tooltip_formatter(get_auth_exp_diff(slice.data))}}
                     />
                   </tr> :
