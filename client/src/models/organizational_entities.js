@@ -24,7 +24,7 @@ const Gov = {
     return this.constructor === comparator;
   },
   level: 'gov',
-  get has_planned_spending(){ return true;},
+  get has_planned_spending(){ return true; },
   lookup(){ return this; },
   name: trivial_text_maker('the_goc'),
   // the following name-like fields are for compatibility with old APIs and to ensure it's searchable in org-searches
@@ -37,7 +37,7 @@ const Gov = {
 const Ministry = class Ministry extends static_subject_store(){
   static get type_name() { return 'ministry'; }
   static get singular(){ return trivial_text_maker("ministry"); }
-  static get plural(){ return trivial_text_maker("ministries");}
+  static get plural(){ return trivial_text_maker("ministries"); }
 
   static create_and_register(id,name){
     const inst = new Ministry(id,name);
@@ -212,7 +212,7 @@ const Dept = class Dept extends static_subject_store_with_API_data(){
 };
 
 const CRSO = class CRSO extends static_subject_store_with_API_data(){
-  static get singular(){ return trivial_text_maker("");}
+  static get singular(){ return trivial_text_maker(""); }
   static get plural(){ return trivial_text_maker(""); }
   static get type_name() { return 'crso'; }
   static get_from_id(crso_id){
@@ -304,7 +304,7 @@ const Program = class Program extends static_subject_store_with_API_data(){
 const Minister = class Minister extends static_subject_store(){
   static get type_name() { return 'minister'; }
   static get singular(){ return trivial_text_maker("minister"); }
-  static get plural(){ return trivial_text_maker("minister");}
+  static get plural(){ return trivial_text_maker("minister"); }
 
   static create_and_register(id,name){
     const inst = new Minister(id,name);

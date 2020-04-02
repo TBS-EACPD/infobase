@@ -411,7 +411,7 @@ Handlebars.registerHelper("de_dept",function(context){
   if (article.length > 0 && _.last(article) !== "'") {
     article += " ";
   }
-  return article + (dept.name);
+  return article + dept.name;
 
 });
 // looks up the name for the department if passed
@@ -427,7 +427,7 @@ Handlebars.registerHelper("le_dept",function(context){
   if (article.length > 0 && _.last(article) !== "'") {
     article += " ";
   }
-  return article + (dept.name);
+  return article + dept.name;
 });
 
 // {{encodeURI "someurl"}} -> encodes the string with URL
