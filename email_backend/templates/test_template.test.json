@@ -1,6 +1,6 @@
 {
   "meta": {
-    "subject_template": "Test subject: [${radio}], [${enums}], ${number}"
+    "subject_template": "Test subject: [${enums}], [${radio}], ${number}"
   },
 
   "enums": {
