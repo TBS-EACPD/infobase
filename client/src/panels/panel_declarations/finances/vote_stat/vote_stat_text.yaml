@@ -21,7 +21,6 @@ in_year_stat_breakdown_text:
   transform: [handlebars, markdown]
   en: |
    Of the **{{fmt_compact1_written gov_stat_est_in_year}}** the government expects to spend in {{gl_tt "statutory" "STAT"}} authorities, the **10** largest will be:
-
   fr: |
    Des **{{fmt_compact1_written gov_stat_est_in_year}}** que le gouvernement prévoit dépenser en autorisations {{gl_tt "législatives" "STAT"}}, 
    les *10* plus importantes seront :
