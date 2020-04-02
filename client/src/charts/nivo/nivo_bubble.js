@@ -1,6 +1,5 @@
 import './NivoCharts.scss';
 import { ResponsiveBubble } from '@nivo/circle-packing';
-import classNames from 'classnames';
 import { Fragment } from 'react';
 import {
   InteractiveGraph,
