@@ -197,7 +197,7 @@ class ExplorerForIgoc extends React.Component {
       // and not worth all that added boiler plate to get it in there
       use_legal_titles: false,
     };
-    this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
+    this.debounced_set_query = _.debounce(this.set_query, 500);
   }
   handleQueryChange(new_query){
     this.setState({
@@ -206,8 +206,12 @@ class ExplorerForIgoc extends React.Component {
     });
     this.debounced_set_query(new_query);
   } 
-  debounced_set_query(new_query){
+  set_query(new_query){
     this.props.set_query(new_query);
+
+    // we want a spinner while the component re-renders in response to the search, as it can be a relatively slow update.
+    // Current approach is a dumb 0.5 second spinner on every query change, and requires abunch of timeout overhead,
+    // this is obviously junk and should some day be done better
     this.timedOutStateChange = setTimeout(()=>{
       this.setState({
         loading: false,
