@@ -30,7 +30,7 @@ export class DisplayTable extends React.Component {
           .map( (search_key) => [search_key, ""] )
           .value()
       )
-      .fromPairs()  // left out the uniq-ing step, happens implicitly here since the resulting object will only have one instance of each key
+      .fromPairs()
       .value();
     
 
