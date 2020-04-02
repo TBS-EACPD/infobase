@@ -86,12 +86,12 @@ export const declare_employee_totals_panel = () => declare_panel({
                           { slice.data.map(
                             tooltip_item => ( 
                               <tr key = {tooltip_item.serie.id}>
-                                <td style= {{padding: '3px 5px'}}>
+                                <td className="nivo-tooltip__content">
                                   <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.serie.color}} />
                                 </td>
-                                <td style={{padding: '3px 5px'}}> {tooltip_item.serie.id} </td>
-                                <td style = {{padding: '3px 5px'}}> {tooltip_item.data.x}</td>
-                                <td style={{padding: '3px 5px'}} dangerouslySetInnerHTML={{__html: formats.big_int(tooltip_item.data.y)}} />
+                                <td className="nivo-tooltip__content"> {tooltip_item.serie.id} </td>
+                                <td className="nivo-tooltip__content"> {tooltip_item.data.x}</td>
+                                <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formats.big_int(tooltip_item.data.y)}} />
                               </tr>
                             )
                           )}
