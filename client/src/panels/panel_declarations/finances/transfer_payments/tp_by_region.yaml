@@ -15,7 +15,7 @@ tp_by_region_text:
       {{/if}}
     {{/if}}
   fr: |
-    En **{{pa_last_year}}**, **{{#if is_gov}}{{subject.name}}{{else}}{{le_dept dept}}{{/if}}** a versé **{{fmt_compact1_written subject_total_value}}** en {{gl_tt "paiements de transfert" "TP"}}. Un montant de **{{fmt_compact1_written largest_total_value}} ({{fmt_percentage1 largest_total_percent}})** a été versé aux bénéficiaires **{{largest_total_prov}}**, ce qui en fait la région qui reçoit la plus grande part des paiements de transfert {{#if is_gov}}{{subject.name}}{{else}}{{le_dept dept}}{{/if}}.
+    En **{{pa_last_year}}**, **{{#if is_gov}}{{subject.name}}{{else}}{{le_dept subject}}{{/if}}** a versé **{{fmt_compact1_written subject_total_value}}** en {{gl_tt "paiements de transfert" "TP"}}. Un montant de **{{fmt_compact1_written largest_total_value}} ({{fmt_percentage1 largest_total_percent}})** a été versé aux bénéficiaires en **{{largest_total_prov}}**, ce qui en fait la région qui reçoit la plus grande part des paiements de transfert {{#if is_gov}}du {{subject.name}}{{else}}{{de_dept subject}}{{/if}}.
 
     {{#if show_per_capita_data}}
       Lorsqu'on tient compte de la population, la province ou le territoire ayant la plus grande valeur de paiement de transfert par habitant en **{{pa_last_year}}** était **{{largest_per_capita_prov}}**, à **{{#compare largest_per_capita_value 0.01 operator=">=" }}{{fmt_compact2_written largest_per_capita_value}}{{else}}moins de 0,01 ${{/compare}} par habitant**.
