@@ -113,7 +113,6 @@ provinces:
   na:
     en: Not Available
     fr: Non disponible
-
     
 provinces_short:
   ab:
@@ -159,6 +158,83 @@ provinces_short:
   na:
     en: N.A.
     fr: N.D.
+
+
+le_provinces:
+  ab:
+    text: l'Alberta
+  abroad:
+    text: à l'étranger
+  bc:
+    text: la Colombie-Britannique
+  mb:
+    text: le Manitoba
+  nb:
+    text: le Nouveau-Brunswick
+  ncr:
+    text: la RCN
+  ns:
+    text: la Nouvelle-Écosse
+  nt:
+    text: les Territoires du Nord-Ouest
+  nu:
+    text: le Nunavut
+  on:
+    text: l'Ontario
+  onlessncr:
+    text: l'Ontario (hors RCN)
+  pe:
+    text: l'Île-du-Prince-Édouard
+  qc:
+    text: le Québec
+  qclessncr:
+    text: le Québec (hors RCN)
+  sk:
+    text: la Saskatchewan
+  yt:
+    text: le Yukon
+  nl:
+    text: le Terre-Neuve-et-Labrador
+  na:
+    text: le non disponible
+
+de_provinces:
+  ab:
+    text: de l'Alberta
+  abroad:
+    text: de l'étranger
+  bc:
+    text: de la Colombie-Britannique
+  mb:
+    text: du Manitoba
+  nb:
+    text: du Nouveau-Brunswick
+  ncr:
+    text: de la RCN
+  ns:
+    text: de la Nouvelle-Écosse
+  nt:
+    text: des Territoires du Nord-Ouest
+  nu:
+    text: du Nunavut
+  on:
+    text: de l'Ontario
+  onlessncr:
+    text: de l'Ontario (hors RCN)
+  pe:
+    text: de l'Île-du-Prince-Édouard
+  qc:
+    text: du Québec
+  qclessncr:
+    text: du Québec (hors RCN)
+  sk:
+    text: de la Saskatchewan
+  yt:
+    text: du Yukon
+  nl:
+    text: de Terre-Neuve-et-Labrador
+  na:
+    text: de non disponible
 
 
 age_groups:
