@@ -47,8 +47,8 @@ export class TabbedControls extends React.Component {
 }
 TabbedControls.defaultProps = {
   disabled_message: {
-    en: "Disabled due to lack of information",
-    fr: "TODO - confirm translation: Désactivé par manque d'informations",
+    en: "Disabled due to a lack of information",
+    fr: "Désactivé faute d'information",
   }[window.lang],
 };
 

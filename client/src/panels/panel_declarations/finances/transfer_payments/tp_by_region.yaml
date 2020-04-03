@@ -6,7 +6,7 @@ tp_by_region_title:
 tp_by_region_text: 
   transform: [handlebars, markdown]
   en: |
-    In **{{pa_last_year}}**, **{{subject.name}}** paid out **{{fmt_compact1_written subject_total_value}}** in {{gl_tt "transfer payments" "TP"}}. **{{fmt_compact1_written largest_total_value}}** ({{fmt_percentage1 largest_total_percent}}) went to recipients in **{{largest_total_prov}}**, making it the region receiving the largest total share of {{subject.name}}'s transfer payments.
+    In **{{pa_last_year}}**, **{{subject.name}}** paid out **{{fmt_compact1_written subject_total_value}}** in {{gl_tt "transfer payments" "TP"}}. **{{fmt_compact1_written largest_total_value}} ({{fmt_percentage1 largest_total_percent}})** went to recipients in **{{largest_total_prov}}**, making it the region receiving the largest total share of {{subject.name}}'s transfer payments.
 
     {{#if show_per_capita_data}}
       When accounting for population, the province or territory with the largest per capita transfer payment value in **{{pa_last_year}}** was **{{largest_per_capita_prov}}**, at **{{#compare largest_per_capita_value 0.01 operator=">=" }}{{fmt_compact2_written largest_per_capita_value}}{{else}}less than $0.01{{/compare}} per capita**.
@@ -15,8 +15,14 @@ tp_by_region_text:
       {{/if}}
     {{/if}}
   fr: |
-    TODO
+    En **{{pa_last_year}}**, **{{#if is_gov}}{{subject.name}}{{else}}{{le_dept dept}}{{/if}}** a versé **{{fmt_compact1_written subject_total_value}}** en {{gl_tt "paiements de transfert" "TP"}}. Un montant de **{{fmt_compact1_written largest_total_value}} ({{fmt_percentage1 largest_total_percent}})** a été versé aux bénéficiaires **{{largest_total_prov}}**, ce qui en fait la région qui reçoit la plus grande part des paiements de transfert {{#if is_gov}}{{subject.name}}{{else}}{{le_dept dept}}{{/if}}.
 
+    {{#if show_per_capita_data}}
+      Lorsqu'on tient compte de la population, la province ou le territoire ayant la plus grande valeur de paiement de transfert par habitant en **{{pa_last_year}}** était **{{largest_per_capita_prov}}**, à **{{#compare largest_per_capita_value 0.01 operator=">=" }}{{fmt_compact2_written largest_per_capita_value}}{{else}}moins de 0,01 ${{/compare}} par habitant**.
+      {{#if compare_per_capita_to_largest_total}}
+        À titre de comparaison, la province ou le territoire recevant la valeur totale la plus élevée, **{{largest_total_prov}}**, a reçu **{{#compare largest_total_per_capita_value 0.01 operator=">=" }}{{fmt_compact2_written largest_total_per_capita_value}}{{else}}moins de 0,01 ${{/compare}} par habitant**.
+      {{/if}}
+    {{/if}}
 
 tp_by_region_graph_usage:
   en: Hover over or tap a province or territory in the map below to see the total transfer payments over the last five years. Note that the scale may change to accommodate the data displayed.
@@ -36,4 +42,4 @@ per_capita:
 
 tp_no_data_hover_label:
   en: The per capita view is not applicable for the available data
-  fr: TODO
+  fr: La vue par habitant n'est pas applicable aux données disponibles

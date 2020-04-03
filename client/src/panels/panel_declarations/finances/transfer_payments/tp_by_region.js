@@ -97,6 +97,7 @@ const get_text_args = (subject, transfer_payment_data, per_capita_data) => {
 
   return {
     subject,
+    is_gov: subject.level === 'gov',
     subject_total_value,
 
     largest_total_prov,
