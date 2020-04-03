@@ -23,7 +23,7 @@ const { std_years } = year_templates;
 const formatter = formats["compact2_raw"];
 
 const { text_maker, TM } = create_text_maker_component(text);
-const { provinces } = businessConstants;
+const { provinces, de_provinces } = businessConstants;
 const { A11YTable } = declarative_charts;
 
 
@@ -65,6 +65,7 @@ const get_text_args = (subject, transfer_payment_data, per_capita_data) => {
     .last()
     .value();
   const largest_total_prov = provinces[largest_total_prov_code].text;
+  const de_largest_total_prov = de_provinces[largest_total_prov_code].text;
   const largest_total_percent = largest_total_value/subject_total_value;
   
 
@@ -101,6 +102,7 @@ const get_text_args = (subject, transfer_payment_data, per_capita_data) => {
     subject_total_value,
 
     largest_total_prov,
+    de_largest_total_prov,
     largest_total_value,
     largest_total_percent,
 
