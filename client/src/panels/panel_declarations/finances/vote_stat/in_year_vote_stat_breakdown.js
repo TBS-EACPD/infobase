@@ -1,5 +1,5 @@
 import { text_maker, TM } from './vote_stat_text_provider.js';
-import { Fragment } from 'react';
+import { DisplayTable } from '../../../../components/index.js';
 import {
   Subject,
   formats,
@@ -78,13 +78,53 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
   const top_10_rows = _.take(data, 10);
   const complement_amt = _.last(data)[col];
   const total_amt = d3.sum(data, _.property(col));
+  const column_names = {
+    name: text_maker("org"),
+    voted_stat: text_maker(isVoted ? "voted" : "stat"),
+    amount: text_maker("authorities"),
+  };
+  const amt_type = window.is_a11y_mode ? "compact1_written" : "compact1";
+  const total = { amount: amt_type} ;
 
-  const rows = _.map(top_10_rows, obj => ({
-    name: Subject.Dept.lookup(obj.dept).name,
-    rpb_link: infograph_href_template(Subject.Dept.lookup(obj.dept)),
-    voted_stat: obj.desc,
-    amount: obj[col],
-  }));
+  const rows = _.map(top_10_rows, obj => {
+    const subj = Subject.Dept.lookup(obj.dept);
+    const display_values = {
+      name: <a href={infograph_href_template(subj)}> {subj.name} </a>,
+      voted_stat: obj.desc,
+      amount: <Format type={amt_type} content={obj[col]} />,
+    };
+    const search_values = {
+      name: subj.name,
+      voted_stat: obj.desc,
+    };
+    const sort_values = {
+      name: subj.name,
+      voted_stat: obj.desc,
+      amount: obj[col],
+    };
+    return {
+      display_values: display_values,
+      sort_values: sort_values,
+      search_values: search_values,
+    };
+  });
+  const complement_desc = text_maker(isVoted ? 'all_other_voted_items' : 'all_other_stat_items');
+  const rows_with_complement_amt = _.concat(rows, [{
+    display_values: {
+      name: "",
+      voted_stat: complement_desc,
+      amount: <Format type={amt_type} content={complement_amt} />,
+    },
+    search_values: {
+      name: "",
+      voted_stat: complement_desc,
+    },
+    sort_values: {
+      name: "",
+      voted_stat: complement_desc,
+      amount: complement_amt,
+    },
+  }]);
 
   const packing_data = {
     name: "",
@@ -121,11 +161,11 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
         />
       </Col>
       <Col isGraph size={6}>
-        <TopTenTable
-          rows={rows}
-          complement_amt={complement_amt}
-          total_amt={total_amt}
-          isVoted={isVoted}
+        <DisplayTable
+          rows={rows_with_complement_amt}
+          column_names={column_names}
+          total={total}
+          unsorted_initial={true}
         />
       </Col>
       {show_pack &&
@@ -143,9 +183,7 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
       }
     </StdPanel>
   );
-
 };
-
 
 const planned_vote_or_stat_calculate = vs => function (subject, info) {
   const { orgVoteStatEstimates } = this.tables;
@@ -171,76 +209,6 @@ const planned_vote_or_stat_calculate = vs => function (subject, info) {
 
   return ret;
 };
-
-
-const row_cells = ({ name, rpb_link, voted_stat, amount }) => (
-  <Fragment>
-    { rpb_link ? 
-      <td className="left-text_plain">
-        <a href={rpb_link}>
-          {name}
-        </a>
-      </td> :
-      <td className="left-text_plain">
-        {name}
-      </td>
-    }
-    <td className="left-text_plain">
-      {voted_stat}
-    </td>
-    <td className="right_number">
-      <Format
-        type={window.is_a11y_mode ? "compact1_written" : "compact1"}
-        content={amount}
-      />
-    </td>
-  </Fragment>
-);
-
-const TopTenTable = ({ rows, total_amt, complement_amt, isVoted }) => (
-  <table
-    className="table infobase-table table-striped border table-condensed table-blue"
-    style={{ fontSize: '12px', lineHeight: 1 }}
-  >
-    <thead>
-      <tr className="table-header">
-        <th scope="col"><TM k="org" /></th>
-        <th scope="col"><TM k={isVoted ? "voted" : "stat"} /></th>
-        <th scope="col"><TM k="authorities" /></th>
-      </tr>
-    </thead>
-    <tbody>
-      {_.map(rows, obj =>
-        <tr key={obj.name + obj.voted_stat}>
-          {row_cells(obj)}
-        </tr>
-      )}
-      <tr key="complement">
-        {
-          row_cells({
-            name: "",
-            voted_stat: text_maker(
-              isVoted ?
-                'all_other_voted_items' :
-                'all_other_stat_items'
-            ),
-            amount: complement_amt,
-          })
-        }
-      </tr>
-      <tr key="total" className="total background-blue">
-        {
-          row_cells({
-            name: text_maker('total'),
-            voted_stat: '',
-            amount: total_amt,
-          })
-        }
-      </tr>
-    </tbody>
-  </table>
-);
-
 
 const declare_in_year_voted_breakdown_panel = () => declare_panel({
   panel_key: "in_year_voted_breakdown",
