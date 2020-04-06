@@ -15,11 +15,14 @@ export class DisplayTable extends React.Component {
 
     this.sort_click.bind(this);
 
-    const { rows } = props;
+    const {
+      rows,
+      unsorted_initial,
+    } = props;
 
     const { sort_values } = _.first(rows);
 
-    const sort_by = _.chain(sort_values)
+    const sort_by = unsorted_initial ? null : _.chain(sort_values)
       .keys()
       .first()
       .value();
@@ -201,17 +204,16 @@ export class DisplayTable extends React.Component {
             )}
             { total &&
             <Fragment>
-              <tr key="total_description">
-                <td style={{fontWeight: 700, textAlign: "center"}} key="total" colSpan={ordered_column_keys.length}>
-                  {text_maker("total")}
-                </td>
-              </tr>
               <tr key="total_row">
-                { _.map(ordered_column_keys, (col, idx) => (
-                  <td style={{fontWeight: 700}} key={col}>
-                    {total_row[col] ? <Format type={total[col]} content={total_row[col]}/> : ""}
-                  </td>
-                ))}
+                { _.chain(["total"])
+                  .concat( _.tail(ordered_column_keys) ) //Assume first column is not total
+                  .map(col => (
+                    <td style={{fontWeight: 700}} key={col}>
+                      { col==="total" ? text_maker("total") :
+                        total_row[col] ? <Format type={total[col]} content={total_row[col]}/> : "" }
+                    </td>
+                  ))
+                  .value() }
               </tr>
             </Fragment>
             }
