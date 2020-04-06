@@ -26,7 +26,7 @@ import {
   declare_spend_rev_split_panel,
 
   // shared gov, dept
-  declare_tp_by_region_panel,
+  //declare_tp_by_region_panel,
   declare_links_to_rpb_panel,
   declare_in_year_voted_stat_split_panel,
   declare_in_year_estimates_split_panel,
@@ -67,7 +67,7 @@ export const get_dept_panels = subject => ensure_loaded({
     declare_late_resources_panel(),
     declare_financial_key_concepts_panel(),
     declare_welcome_mat_panel(),
-    declare_tp_by_region_panel(),
+    //declare_tp_by_region_panel(),
     declare_budget_measures_panel(),
     declare_auth_exp_planned_spending_panel(),
     declare_estimates_in_perspective_panel(),
