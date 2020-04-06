@@ -32,8 +32,6 @@ const verify_values_are_expected_and_match_value_types = (field_templates, compl
             return _.isNumber(field_value);
           case "json":
             return _.isObject(field_value);
-          case "radio":
-            return _.isString(field_value);// TODO - make more in depth radio check
           case "enums":
             return _.chain(field_templates)
               .get(`${field_key}.enum_values`)
@@ -52,6 +50,25 @@ const verify_values_are_expected_and_match_value_types = (field_templates, compl
                 }
               )
               .value();
+          case "radio":
+            // return _.isString(field_value);// TODO - make more in depth radio check
+            return _.chain(field_templates)
+              .get(`${field_key}.enum_values`)
+              .keys()
+              .thru(
+                (enum_values) => {
+                  const some_submitted_keys_are_not_enum_options = _.without(field_value, ...enum_values).length > 0;
+                  const required_field_but_no_valid_values = is_required && _.intersection(field_value, enum_values).length === 0;
+                  const is_invalid_for_form_type = field_templates[field_key].form_type === "radio" &&
+                    _.without(field_value, ...enum_values).length > 1;
+                  return (
+                    !some_submitted_keys_are_not_enum_options && 
+                    !required_field_but_no_valid_values &&
+                    !is_invalid_for_form_type
+                  );
+                }
+              )
+              .value(); //copy and pasted from enums
           default:
             return false; //unexpected type in the json itself
         }
