@@ -40,7 +40,7 @@ export class DisplayTable extends React.Component {
 
     this.state = {
       sort_by,
-      descending: true,
+      descending: unsorted_initial ? null : true,
       searches,
     };
   }

@@ -164,6 +164,7 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
         <DisplayTable
           rows={rows_with_complement_amt}
           column_names={column_names}
+          ordered_column_keys={_.keys(column_names)}
           total={total}
           unsorted_initial={true}
         />
