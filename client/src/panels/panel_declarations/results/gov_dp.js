@@ -64,7 +64,6 @@ export const declare_gov_dp_panel = () => declare_panel({
     requires_result_counts: true,
     calculate: () => {      
       const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${current_dp_key}_results`] > 0 );
-      const verbose_gov_counts = ResultCounts.get_gov_counts();
 
       const column_keys = {
         [`${current_dp_key}_results`]: text_maker("results"),

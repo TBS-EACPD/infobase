@@ -11,7 +11,6 @@ import {
   Format, 
   LabeledBox,
   AlertBanner,
-  SortDirections,
   CheckBox,
   DisplayTable,
 } from '../components/index.js';
@@ -165,8 +164,6 @@ class SimpleView extends React.Component {
   get_csv_string(){
     const {
       dimension,
-      sort_col,
-      descending,
       columns,
       deptBreakoutMode,
       simple_table_rows: {
@@ -174,11 +171,6 @@ class SimpleView extends React.Component {
         total_row,
       },
     } = this.props;
-    
-    const cols = _.reduce(columns, (result, value, key) => {
-      result[value.nick] = key + 1;
-      return result;
-    }, {[deptBreakoutMode ? 'dept' : dimension]: 0});
 
     const headers = [
       text_maker(deptBreakoutMode ? 'org' : dimension),
@@ -192,7 +184,6 @@ class SimpleView extends React.Component {
             _.map( columns, ({nick}) => row[nick])
           );
         })
-        .orderBy((row) => [row[cols[sort_col]]], [descending ? "desc" : "asc"])
         .value();
     const formatted_total_row = _.concat( text_maker("total"), _.map(columns, ({nick}) => total_row[nick]) );
     const formatted_table_content = [headers].concat(formatted_rows, [formatted_total_row]);
@@ -203,14 +194,8 @@ class SimpleView extends React.Component {
     const {
       dimension,   
       columns,
-      sort_col,
-      descending,
       deptBreakoutMode,
-      simple_table_rows: {
-        rows,
-        total_row,
-      },
-      on_header_click,
+      simple_table_rows: { rows },
     } = this.props;
 
     const first_col_nick = deptBreakoutMode ? 'dept' : dimension;
