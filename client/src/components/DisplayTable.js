@@ -1,7 +1,6 @@
 import './DisplayTable.scss';
 
 import text from '../common_text/common_lang.yaml';
-import { Fragment } from 'react';
 import { create_text_maker_component, Format } from './misc_util_components.js';
 
 import { SortDirections } from './SortDirection.js';
@@ -203,7 +202,6 @@ export class DisplayTable extends React.Component {
               )
             )}
             { total &&
-            <Fragment>
               <tr key="total_row">
                 { _.chain(["total"])
                   .concat( _.tail(ordered_column_keys) ) //Assume first column is not total
@@ -215,7 +213,6 @@ export class DisplayTable extends React.Component {
                   ))
                   .value() }
               </tr>
-            </Fragment>
             }
           </tbody>
         </table>
