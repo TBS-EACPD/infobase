@@ -27,6 +27,25 @@ describe("make_email_body_from_completed_template", () => {
           fr: "Sélectionner toutes les cases qui s'appliquent :",
         },
       },
+      "radio": {
+        "required": true,
+        "value_type": "enums",
+        "enum_values": {
+          "yes": {
+            "en": "Yes",
+            "fr": "Oui",
+          },
+          "no": {
+            "en": "No",
+            "fr": "Non",
+          },
+        },
+        "form_type": "radio",
+        "form_label": {
+          "en": "Did you find what you were looking for on GC InfoBase?",
+          "fr": "Avez-vous trouvé ce que vous cherchiez dans l’InfoBase du GC?",
+        },
+      },
       issue: {
         required: true,
         value_type: "string",
@@ -49,27 +68,33 @@ describe("make_email_body_from_completed_template", () => {
     };
     const completed_test_template = {
       enums: ["bug", "typo"],
+      radio: "yes",
       issue: "Lorem ipsum dolor sit amet, varius nulla justo sed, tincidunt interdum lectus, diam donec rhoncus wisi ut. Lacinia massa risus mi risus phasellus id. Sollicitudin convallis vel eget libero, porttitor aenean elementum, ornare at, nullam quis, pellentesque erat id. Rhoncus pretium nec luctus mauris tincidunt, donec adipiscing vivamus tempus, mauris nullam porttitor natoque elit, lectus sapien libero vestibulum venenatis quisque. Eros tempor in, ipsum luctus sit suspendisse tincidunt, wisi id mollis viverra. Orci diam pede nunc, non nec condimentum dui aliquam aliquet tortor, libero ut cras. Vel blandit eu wisi rhoncus, sit dicta, a sem in sed, ipsum iaculis.",
       json: { bleh: "blah", bluh: { blagh: "blargh" } },
       some_number: 1,
     };
 
-    const expected_body_content = `enums:
-    bug, typo
+    const expected_body_content = 
+    `enums:
+      bug, typo
 
-issue:
-    Lorem ipsum dolor sit amet, varius nulla justo sed, tincidunt interdum lectus, diam donec rhoncus wisi ut. Lacinia massa risus mi risus phasellus id. Sollicitudin convallis vel eget libero, porttitor aenean elementum, ornare at, nullam quis, pellentesque erat id. Rhoncus pretium nec luctus mauris tincidunt, donec adipiscing vivamus tempus, mauris nullam porttitor natoque elit, lectus sapien libero vestibulum venenatis quisque. Eros tempor in, ipsum luctus sit suspendisse tincidunt, wisi id mollis viverra. Orci diam pede nunc, non nec condimentum dui aliquam aliquet tortor, libero ut cras. Vel blandit eu wisi rhoncus, sit dicta, a sem in sed, ipsum iaculis.
+    radio:
+      yes
 
-json:
-    {
-      "bleh": "blah",
-      "bluh": {
-        "blagh": "blargh"
+    issue:
+      Lorem ipsum dolor sit amet, varius nulla justo sed, tincidunt interdum lectus, diam donec rhoncus wisi ut. Lacinia massa risus mi risus phasellus id. Sollicitudin convallis vel eget libero, porttitor aenean elementum, ornare at, nullam quis, pellentesque erat id. Rhoncus pretium nec luctus mauris tincidunt, donec adipiscing vivamus tempus, mauris nullam porttitor natoque elit, lectus sapien libero vestibulum venenatis quisque. Eros tempor in, ipsum luctus sit suspendisse tincidunt, wisi id mollis viverra. Orci diam pede nunc, non nec condimentum dui aliquam aliquet tortor, libero ut cras. Vel blandit eu wisi rhoncus, sit dicta, a sem in sed, ipsum iaculis.
+
+    json:
+      {
+        "bleh": "blah",
+        "bluh": {
+          "blagh": "blargh"
+        }
       }
-    }
 
-some_number:
-    1`;
+    some_number:
+      1`
+    ;
 
     return expect(
       make_email_body_from_completed_template(
