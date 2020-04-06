@@ -32,6 +32,8 @@ const verify_values_are_expected_and_match_value_types = (field_templates, compl
             return _.isNumber(field_value);
           case "json":
             return _.isObject(field_value);
+          case "radio":
+            return _.isString(field_value);// TODO - make more in depth radio check
           case "enums":
             return _.chain(field_templates)
               .get(`${field_key}.enum_values`)

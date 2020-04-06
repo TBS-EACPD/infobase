@@ -13,11 +13,11 @@
       },
       "value_type": "enums",
       "enum_values": {
-        "found": {
+        "yes": {
           "en": "Yes",
           "fr": "Oui"
         },
-        "not_found": {
+        "no": {
           "en": "No",
           "fr": "Non"
         }
