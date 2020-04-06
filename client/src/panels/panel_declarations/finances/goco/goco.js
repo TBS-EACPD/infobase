@@ -68,20 +68,20 @@ class Goco extends React.Component {
     const graph_data = _.chain(Tag.gocos_by_spendarea)
       .map(sa=> {
         const children = _.map(sa.children_tags, goco => {
-          const actual_Spending = programSpending.q(goco).sum(spend_col);
-          const actual_FTEs = programFtes.q(goco).sum(fte_col);
+          const actual_spending = programSpending.q(goco).sum(spend_col);
+          const actual_ftes = programFtes.q(goco).sum(fte_col);
           return {
             label: goco.name,
-            actual_Spending: actual_Spending,
-            actual_FTEs: actual_FTEs,
-            [spending_text]: actual_Spending / total_fte_spend[sa.id].total_child_spending,
-            [ftes_text]: actual_FTEs / total_fte_spend[sa.id].total_child_ftes,
+            actual_spending: actual_spending,
+            actual_ftes: actual_ftes,
+            [spending_text]: actual_spending / total_fte_spend[sa.id].total_child_spending,
+            [ftes_text]: actual_ftes / total_fte_spend[sa.id].total_child_ftes,
           };
         });
         return {
           label: sa.name,
-          actual_Spending: total_fte_spend[sa.id].total_child_spending,
-          actual_FTEs: total_fte_spend[sa.id].total_child_ftes,
+          actual_spending: total_fte_spend[sa.id].total_child_spending,
+          actual_ftes: total_fte_spend[sa.id].total_child_ftes,
           [spending_text]: total_fte_spend[sa.id].total_child_spending / total_fte_spend.total_spending,
           [ftes_text]: total_fte_spend[sa.id].total_child_ftes / total_fte_spend.total_ftes,
           children: _.sortBy(children, d => -d[spending_text]),
@@ -116,19 +116,19 @@ class Goco extends React.Component {
 
     const child_tables = _.map(Tag.gocos_by_spendarea, sa => {
       const rows = _.map(sa.children_tags, goco => {
-        const actual_Spending = programSpending.q(goco).sum(spend_col);
-        const actual_FTEs = programFtes.q(goco).sum(fte_col);
+        const actual_spending = programSpending.q(goco).sum(spend_col);
+        const actual_ftes = programFtes.q(goco).sum(fte_col);
 
         return {
           display_values: {
             [sa_text]: goco.name,
-            [spending_text]: spending_table_formatter(actual_Spending),
-            [ftes_text]: fte_table_formatter(actual_FTEs),
+            [spending_text]: spending_table_formatter(actual_spending),
+            [ftes_text]: fte_table_formatter(actual_ftes),
           },
           sort_values: {
             [sa_text]: goco.name,
-            [spending_text]: actual_Spending,
-            [ftes_text]: actual_FTEs,
+            [spending_text]: actual_spending,
+            [ftes_text]: actual_ftes,
           },
           search_values: {
             [sa_text]: goco.name,
@@ -145,14 +145,14 @@ class Goco extends React.Component {
     const spend_fte_text_data = {
       ...total_fte_spend,
       max_sa: maxSpending.label,
-      max_sa_share: maxSpending[`actual_${spending_text}`] / total_fte_spend.total_spending,
+      max_sa_share: maxSpending.actual_spending / total_fte_spend.total_spending,
     };
     
     if(window.is_a11y_mode){
       const a11y_data = _.map(graph_data, row => {
         return {
           label: row.label,
-          data: [formats.compact1_written_raw(row.actual_Spending), formats.big_int_raw(row.actual_FTEs)],
+          data: [formats.compact1_written_raw(row.actual_spending), formats.big_int_raw(row.actual_ftes)],
         };
       });
       
@@ -163,7 +163,7 @@ class Goco extends React.Component {
             child_data: _.map(row.children, (child) => {
               return {
                 label: child.label,
-                data: [formats.compact1_written_raw(child.actual_Spending), formats.big_int_raw(child.actual_FTEs)],
+                data: [formats.compact1_written_raw(child.actual_spending), formats.big_int_raw(child.actual_ftes)],
               };
             }),
           }
@@ -197,7 +197,15 @@ class Goco extends React.Component {
         };
       });
 
-      const format_value = (d) => get_formatter(d.id==="Spending")(d.data[`actual_${d.id}`]);
+      const format_value = (d) => {
+        const is_spending = d.id === spending_text;
+
+        const value = is_spending ? 
+          d.data.actual_spending :
+          d.data.actual_ftes;
+
+        return get_formatter(is_spending)(value);
+      };
 
       const nivo_default_props = {
         indexBy: "label",
