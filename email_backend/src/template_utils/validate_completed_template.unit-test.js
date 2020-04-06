@@ -31,23 +31,23 @@ describe("validate_completed_template", () => {
         fr: "Sélectionner toutes les cases qui s'appliquent :",
       },
     },
-    "radio": {
-      "required": true,
-      "value_type": "enums",
-      "enum_values": {
-        "yes": {
-          "en": "Yes",
-          "fr": "Oui",
+    radio: {
+      required: true,
+      value_type: "enums",
+      enum_values: {
+        yes: {
+          en: "Yes",
+          fr: "Oui",
         },
-        "no": {
-          "en": "No",
-          "fr": "Non",
+        no: {
+          en: "No",
+          fr: "Non",
         },
       },
-      "form_type": "radio",
-      "form_label": {
-        "en": "Did you find what you were looking for on GC InfoBase?",
-        "fr": "Avez-vous trouvé ce que vous cherchiez dans l’InfoBase du GC?",
+      form_type: "radio",
+      form_label: {
+        en: "Did you find what you were looking for on GC InfoBase?",
+        fr: "Avez-vous trouvé ce que vous cherchiez dans l’InfoBase du GC?",
       },
     },
     issue: {
