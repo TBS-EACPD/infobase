@@ -34,8 +34,6 @@ const rpb_link = (naive_state, first_character = '#') => _.chain(naive_state)
         'table',
         'preferDeptBreakout',
         'preferTable',
-        'sort_col',
-        'descending',
         'filter',
       ],
       key

@@ -8,8 +8,7 @@ import {
 } from './shared.js';
 import { 
   Format, 
-  TwoLevelSelect, 
-  SortDirections, 
+  TwoLevelSelect,
   LabeledBox,
   AlertBanner,
   DisplayTable,
@@ -19,7 +18,6 @@ import { Details } from '../components/Details.js';
 import { Subject } from '../models/subject.js';
 
 import classNames from 'classnames';
-import { Form } from 'react-bootstrap/lib/Navbar';
 
 const { Dept } = Subject;
 const PAGE_SIZE = 600;
@@ -125,22 +123,16 @@ class GranularView extends React.Component {
 
   get_plain_table_content(excel_mode=false){
     const {
-      table,
       columns: data_columns,
-      sort_col,
       page_num,
       flat_data,
-      descending,
       sorted_key_columns,
 
-      on_header_click,
       on_set_page,
     } = this.props;
 
     const pages = _.chunk(flat_data, PAGE_SIZE);
     const shown_rows = pages[page_num];
-
-    const sortDirection = descending ? "DESC" : "ASC";
 
     const non_dept_key_cols = _.reject(sorted_key_columns, {nick: 'dept'});
 
@@ -289,31 +281,6 @@ class GranularView extends React.Component {
 
     const headers_and_rows = [headers].concat(array_based_rows);
     return d3.csvFormatRows(headers_and_rows);
-  }
-
-
-}
-
-class PlainTableHeader extends React.PureComponent {
-  render(){
-    const { 
-      display, 
-      active, 
-      onClick, 
-      disabled, 
-    } = this.props;
-  
-    return <div onClick={onClick}>
-      {display}
-      {!disabled && 
-        <span aria-hidden={true}>
-          <SortDirections 
-            asc={active ==="ASC" }
-            desc={active ==="DESC" }
-          />
-        </span>
-      }
-    </div>;
   }
 }
 

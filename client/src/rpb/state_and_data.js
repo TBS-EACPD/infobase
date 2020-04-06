@@ -45,8 +45,6 @@ function get_default_state_for_new_table(table_id){
     dimension: get_default_dimension_for_table(table),
     filter: text_maker('all'),
     page_num: 0,
-    sort_col: 'dept',
-    descending: false,
     broken_url: false,
   };
 }
@@ -99,21 +97,6 @@ const reducer = (state=initial_state, action) => {
     case 'navigate_to_new_state': {
       const new_state = payload;
       return new_state;
-    }
-
-    case 'header_click': {
-      const col_nick = payload;
-      if(state.sort_col === col_nick){
-        return {...state, descending: !state.descending };
-      } else {
-        return {
-          ...state,
-          sort_col: col_nick,
-          descending: true, 
-          page_num: 0,
-        };
-      }
-
     }
 
     case 'toggle_col_nick': {
@@ -327,25 +310,13 @@ function create_mapStateToProps(){
 
   const get_deptBreakoutMode = state => state.subject === 'gov_gov' && state.preferDeptBreakout;
 
-  const reverse_array = arr => _.clone(arr).reverse();
-
   const get_flat_data = createSelector(
-    [ get_table_data, get_subject_filter_func, get_cat_filter_func, get_zero_filter_func, _.property('sort_col') , _.property('descending') ],
-    ( table_data, subject_filter_func, cat_filter_func, zero_filter_func, sort_col, descending ) => (
+    [ get_table_data, get_subject_filter_func, get_cat_filter_func, get_zero_filter_func ],
+    ( table_data, subject_filter_func, cat_filter_func, zero_filter_func ) => (
       _.chain(table_data)
         .filter(subject_filter_func)
         .filter(cat_filter_func)
         .reject(zero_filter_func)
-        .sortBy( 
-          sort_col === 'dept' ? 
-            row => Dept.lookup(row.dept).name : 
-            sort_col
-        )
-        .pipe(
-          descending ? 
-            reverse_array :  
-            _.identity 
-        )
         .value()
 
     )
@@ -427,8 +398,8 @@ function create_mapStateToProps(){
   );
 
   const get_simple_table_rows = createSelector(
-    [get_flat_data, get_sorted_columns, get_deptBreakoutMode, _.property('filter'), _.property('dimension'), _.property('sort_col'), _.property('descending') ],
-    (flat_data, columns,deptBreakoutMode, filter, dimension, sort_col, descending) => {
+    [get_flat_data, get_sorted_columns, get_deptBreakoutMode, _.property('filter'), _.property('dimension') ],
+    (flat_data, columns,deptBreakoutMode, filter, dimension ) => {
       
       const rows = (
         deptBreakoutMode ?
@@ -441,12 +412,6 @@ function create_mapStateToProps(){
                 [ col.nick , col.formula(rows) ]
               )), 
             ]))
-            .sortBy(
-              sort_col === 'dept' ? 
-                row => Dept.lookup(row.dept).name : 
-                sort_col
-            )
-            .pipe( descending ? reverse_array : _.identity )
             .value()  
         ) : 
         (
@@ -458,8 +423,6 @@ function create_mapStateToProps(){
                [ col.nick , col.formula(rows) ]
              )),
            ]))
-           .sortBy(sort_col)
-           .pipe( descending ? reverse_array : _.identity )
            .value()
         )
       );
@@ -510,7 +473,6 @@ function mapDispatchToProps(dispatch){
     on_set_dimension: dim_key => dispatch({type: 'set_dimension', payload: dim_key}),
     on_set_filter: ({ dimension, filter }) => dispatch({ type: 'set_filter', payload: { dimension, filter} }),
     on_switch_table: table_id => dispatch({ type: 'switch_table', payload: table_id }),
-    on_header_click: col_nick => dispatch({type: 'header_click', payload: col_nick }),
     on_toggle_col_nick: col_nick => dispatch({type: 'toggle_col_nick', payload: col_nick }),
     on_toggle_deptBreakout: ()=> dispatch({type: 'toggle_deptBreakout'}),
     on_toggle_preferTable: ()=> dispatch({type: 'toggle_preferTable'}),

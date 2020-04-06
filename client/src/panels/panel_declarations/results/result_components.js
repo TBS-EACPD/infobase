@@ -7,7 +7,6 @@ import { util_components, general_utils } from '../shared.js';
 import {
   status_key_to_glossary_key,
   ordered_status_keys,
-  link_to_results_infograph,
   result_statuses,
   result_simple_statuses,
   indicator_text_functions,
@@ -32,7 +31,6 @@ const {
 const { 
   HeightClipper,
   FilterTable,
-  SortDirections,
   AlertBanner,
 } = util_components;
 const { sanitized_marked } = general_utils;
