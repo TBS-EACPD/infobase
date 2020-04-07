@@ -68,8 +68,6 @@ export class DisplayTable extends React.Component {
       descending,
       searches,
     } = this.state;
-    
-    const total_nicks = _.keys(total);
 
     const clean_search_string = (search_string) => _.chain(search_string).deburr().toLower().trim().value();
     const sorted_filtered_data = _.chain(rows)
@@ -98,13 +96,13 @@ export class DisplayTable extends React.Component {
       .flatMap( row => _.keys(row.search_values) )
       .uniq()
       .value();
-
-    const total_row = _.reduce(sorted_filtered_data, (result, row) => {
-      _.forEach(total_nicks, nick => {
-        result[nick] = _.isUndefined(result[nick]) ? row.sort_values[nick] : result[nick] + row.sort_values[nick];
-      });
-      return result;
-    }, {});
+    
+    const total_row = _.reduce(
+      sorted_filtered_data, (totals, row) => 
+        _.mapValues(totals, (total, col_key) =>
+          total + row.sort_values[col_key]),
+      _.mapValues(total, () => 0)
+    );
 
     return (
       <div style={{overflowX: "auto", marginTop: "20px", marginBottom: "20px"}}>
@@ -202,16 +200,20 @@ export class DisplayTable extends React.Component {
               )
             )}
             { total &&
-              <tr key="total_row">
-                { _.chain(["total"])
-                  .concat( _.tail(ordered_column_keys) ) //Assume first column is not total
+              <tr className="total-row" key="total_row">
+                <td>{text_maker("total")}</td>
+                { _.chain(ordered_column_keys)
+                  .tail()
                   .map(col => (
-                    <td style={{fontWeight: 700}} key={col}>
-                      { col==="total" ? text_maker("total") :
-                        total_row[col] ? <Format type={total[col]} content={total_row[col]}/> : "" }
+                    <td key={col}>
+                      { total_row[col] ? 
+                        <Format type={total[col]} content={total_row[col]}/> : 
+                        ""
+                      }
                     </td>
                   ))
-                  .value() }
+                  .value()
+                }
               </tr>
             }
           </tbody>
