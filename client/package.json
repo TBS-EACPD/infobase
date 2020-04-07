@@ -61,7 +61,7 @@
     "graphiql": "^0.17.5",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
-    "handlebars": "^4.5.3",
+    "handlebars": "^4.7.6",
     "history": "^4.7.2",
     "html2canvas": "^1.0.0-rc.1",
     "http-server": "^0.12.1",
