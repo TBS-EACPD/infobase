@@ -1,5 +1,10 @@
 const featured_content_items = _.compact([
   {
+    text_key: 'quick_link_tp_by_region',
+    href: "#orgs/gov/gov/infograph/financial/.-.-(panel_key.-.-'tp_by_region)",
+    is_new: "true",
+  },
+  {
     text_key: 'quick_link_DP_2021',
     href: "#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_dp)",
     is_new: "true",
@@ -20,14 +25,6 @@ const featured_content_items = _.compact([
       en: "#rpb/.-.-(subject.-.-'gov_gov.-.-preferDeptBreakout.-.-true.-.-mode.-.-'simple.-.-table.-.-'orgVoteStatEstimates.-.-columns.-.-(.-.-'*7b*7best_last_year*7d*7d_estimates).-.-dimension.-.-'by_estimates_doc.-.-filter.-.-'Supp.*20Estimates*20B.-.-sort_col.-.-'dept.-.-descending.-.-false)",
       fr: "#rpb/.-.-(subject.-.-'gov_gov.-.-preferDeptBreakout.-.-true.-.-mode.-.-'simple.-.-table.-.-'orgVoteStatEstimates.-.-columns.-.-(.-.-'*7b*7best_last_year*7d*7d_estimates).-.-dimension.-.-'by_estimates_doc.-.-filter.-.-'Budget*20supp.*20B.-.-sort_col.-.-'dept.-.-descending.-.-false)",
     },
-  },
-  {
-    text_key: 'quick_link_spending_by_program',
-    href: '#partition/dept/exp',
-  },
-  {
-    text_key: 'quick_link_ftes_by_program',
-    href: '#partition/dept/fte',
   },
   {
     text_key: 'igoc',
