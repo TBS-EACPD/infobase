@@ -56,7 +56,7 @@ class GovDRR extends React.Component {
               column_names={column_names}
               ordered_column_keys={_.keys(column_names)}
               rows={rows_of_counts_by_dept}
-              total={total}
+              total_row_config={total}
             />
           </HeightClippedGraph>
         </div>

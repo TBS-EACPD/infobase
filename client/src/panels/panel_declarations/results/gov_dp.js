@@ -49,7 +49,7 @@ const DpSummary = ({counts, rows_of_counts_by_dept, total, column_names, late_de
           rows={rows_of_counts_by_dept}
           column_names={column_names}
           ordered_column_keys={_.keys(column_names)}
-          total={total}
+          total_row_config={total}
         />
       </HeightClippedGraph>
     </Fragment>

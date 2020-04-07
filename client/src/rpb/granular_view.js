@@ -189,7 +189,7 @@ class GranularView extends React.Component {
         <DisplayTable
           rows={rows}
           column_names={column_names}
-          total={totals_nick}
+          total_row_config={totals_nick}
           ordered_column_keys={_.keys(column_names)}
         />
 
