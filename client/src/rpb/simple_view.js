@@ -245,7 +245,7 @@ class SimpleView extends React.Component {
       rows={dp_rows}
       column_names={column_names}
       ordered_column_keys={_.keys(column_names)}
-      total={ _.chain(columns)
+      total_row_config={ _.chain(columns)
         .map( ({nick, type}) => [nick, type] )
         .fromPairs()
         .value()

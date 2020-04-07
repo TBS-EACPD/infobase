@@ -59,7 +59,7 @@ export class DisplayTable extends React.Component {
     const {
       name,
       column_names,
-      total,
+      total_row_config,
       rows,
       ordered_column_keys,
     } = this.props;
@@ -101,7 +101,7 @@ export class DisplayTable extends React.Component {
       sorted_filtered_data, (totals, row) => 
         _.mapValues(totals, (total, col_key) =>
           total + row.sort_values[col_key]),
-      _.mapValues(total, () => 0)
+      _.mapValues(total_row_config, () => 0)
     );
 
     return (
@@ -199,7 +199,7 @@ export class DisplayTable extends React.Component {
                 </tr>
               )
             )}
-            { total &&
+            { total_row_config &&
               <tr className="total-row" key="total_row">
                 <td>{text_maker("total")}</td>
                 { _.chain(ordered_column_keys)
@@ -207,7 +207,7 @@ export class DisplayTable extends React.Component {
                   .map(col => (
                     <td key={col}>
                       { total_row[col] ? 
-                        <Format type={total[col]} content={total_row[col]}/> : 
+                        <Format type={total_row_config[col]} content={total_row[col]}/> : 
                         ""
                       }
                     </td>
