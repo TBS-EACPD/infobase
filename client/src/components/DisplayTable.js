@@ -1,5 +1,6 @@
 import './DisplayTable.scss';
 
+import classNames from 'classnames';
 import text from '../common_text/common_lang.yaml';
 import { create_text_maker_component, Format } from './misc_util_components.js';
 
@@ -98,15 +99,17 @@ export class DisplayTable extends React.Component {
       .value();
     
     const total_row = _.reduce(
-      sorted_filtered_data, (totals, row) => 
-        _.mapValues(totals, (total, col_key) =>
-          total + row.sort_values[col_key]),
+      sorted_filtered_data,
+      (totals, row) => _.mapValues(
+        totals,
+        (total, col_key) => total + row.sort_values[col_key]
+      ),
       _.mapValues(total_row_config, () => 0)
     );
 
     return (
       <div style={{overflowX: "auto", marginTop: "20px", marginBottom: "20px"}}>
-        <table className="table display-table no-total-row">
+        <table className={classNames("table", "display-table", !total_row_config && "no-total-row")}>
           <caption className="sr-only">
             <div>
               { 
@@ -200,7 +203,7 @@ export class DisplayTable extends React.Component {
               )
             )}
             { total_row_config &&
-              <tr className="total-row" key="total_row">
+              <tr key="total_row">
                 <td>{text_maker("total")}</td>
                 { _.chain(ordered_column_keys)
                   .tail()
