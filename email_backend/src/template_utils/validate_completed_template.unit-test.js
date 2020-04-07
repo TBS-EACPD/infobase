@@ -31,25 +31,25 @@ describe("validate_completed_template", () => {
         fr: "Sélectionner toutes les cases qui s'appliquent :",
       },
     },
-    // radio: {
-    //   required: true,
-    //   value_type: "enums",
-    //   enum_values: {
-    //     yes: {
-    //       en: "Yes",
-    //       fr: "Oui",
-    //     },
-    //     no: {
-    //       en: "No",
-    //       fr: "Non",
-    //     },
-    //   },
-    //   form_type: "radio",
-    //   form_label: {
-    //     en: "Did you find what you were looking for on GC InfoBase?",
-    //     fr: "Avez-vous trouvé ce que vous cherchiez dans l’InfoBase du GC?",
-    //   },
-    // },
+    radio: {
+      required: true,
+      value_type: "enums",
+      enum_values: {
+        yes: {
+          en: "Yes",
+          fr: "Oui",
+        },
+        no: {
+          en: "No",
+          fr: "Non",
+        },
+      },
+      form_type: "radio",
+      form_label: {
+        en: "Did you find what you were looking for on GC InfoBase?",
+        fr: "Avez-vous trouvé ce que vous cherchiez dans l’InfoBase du GC?",
+      },
+    },
     issue: {
       required: true,
       value_type: "string",
@@ -77,7 +77,7 @@ describe("validate_completed_template", () => {
   };
   const valid_completed_test_fields_complete = {
     enums: ["bug", "other"],
-    // radio: ["yes"],
+    radio: ["yes"],
     issue: "I don't think the line graphs should always start at 0",
     sha: "fenef8723hhf2h9jdj2j3d92093",
     id: '1234qwert',
@@ -85,33 +85,33 @@ describe("validate_completed_template", () => {
   };
   const valid_completed_test_fields_incomplete = {
     enums: ["bug", "other"],
-    // radio: ["yes"],
+    radio: ["yes"],
     issue: "I don't think the line graphs should always start at 0",
     sha: "fenef8723hhf2h9jdj2j3d92093",
   };
   const invalid_completed_test_fields_missing_required = {
-    // radio: ["yes"],
+    radio: ["yes"],
     issue: "I think the line graphs should always start at 0",
     id: '1234qwert',
     additional: { bleh: "blah", bluh: { blagh: "blargh" } },
   };
   const invalid_completed_test_fields_bad_value_type = {
     enums: "not a valid enum",
-    // radio: ["yes"],
+    radio: ["yes"],
     issue: "I think the line graphs should always start at 0",
     sha: "fenef8723hhf2h9jdj2j3d92093",
     additional: "1",
   };
   const invalid_completed_test_fields_bad_extra_field = {
     enums: ["bug", "other"],
-    // radio: ["yes"],
+    radio: ["yes"],
     issue: "I think the line graphs should always start at 0",
     sha: "fenef8723hhf2h9jdj2j3d92093",
     bonus: "Free real estate",
   };
   const invalid_completed_test_fields_empty_required_enums = {
     enums: [],
-    // radio: ["yes"],
+    radio: ["yes"],
     issue: "I don't think the line graphs should always start at 0",
     sha: "fenef8723hhf2h9jdj2j3d92093",
     id: '1234qwert',
