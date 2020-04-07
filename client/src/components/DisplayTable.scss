@@ -3,6 +3,9 @@
 table.display-table {
   width: 99%; // avoid annoying 1px scroll caused by border
 }
+.total-row td {
+  font-weight: $heavyFontWeight !important;
+}
 
 table.display-table > thead > tr {
   background-color: $primaryColor;

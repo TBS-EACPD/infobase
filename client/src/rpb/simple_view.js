@@ -199,14 +199,13 @@ class SimpleView extends React.Component {
     } = this.props;
 
     const first_col_nick = deptBreakoutMode ? 'dept' : dimension;
-    const column_names = 
-      {
-        [deptBreakoutMode ? 'dept' : dimension]: text_maker(deptBreakoutMode ? 'org' : dimension),
-        ..._.chain( columns)
-          .map( col => [ col.nick, col.fully_qualified_name ] )
-          .fromPairs()
-          .value(),
-      };
+    const column_names = {
+      [deptBreakoutMode ? 'dept' : dimension]: text_maker(deptBreakoutMode ? 'org' : dimension),
+      ..._.chain( columns)
+        .map( col => [ col.nick, col.fully_qualified_name ] )
+        .fromPairs()
+        .value(),
+    };
     const dp_rows = _.chain(rows)
       .map(row => {
         const row_values = _.chain(columns)
@@ -218,9 +217,9 @@ class SimpleView extends React.Component {
           <a href={granular_rpb_link_for_org(this.props, Dept.lookup(row.dept))}>
             {Dept.lookup(row.dept).name}
           </a> :
-          <a href={granular_rpb_link_for_filter(this.props, row[first_col_nick])}>
-            {row[first_col_nick]}
-          </a>,
+            <a href={granular_rpb_link_for_filter(this.props, row[first_col_nick])}>
+              {row[first_col_nick]}
+            </a>,
           ..._.chain(columns)
             .map( col => [col.nick, <Format key={col.nick} type={col.type} content={row[col.nick]}/>])
             .fromPairs()
