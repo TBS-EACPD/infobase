@@ -45,7 +45,7 @@ const DpSummary = ({counts, rows_of_counts_by_dept, total, column_names, late_de
       </div>
       <HeightClippedGraph clipHeight={330}>
         <DisplayTable
-          name={"Government DP"}
+          table_name={"Government DP"}
           rows={rows_of_counts_by_dept}
           column_names={column_names}
           ordered_column_keys={_.keys(column_names)}

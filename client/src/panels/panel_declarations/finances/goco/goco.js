@@ -112,7 +112,7 @@ class Goco extends React.Component {
       return {display_values, sort_values, search_values};
     });
 
-    const custom_table = <DisplayTable rows={rows} ordered_column_keys={ordered_column_keys} column_names={column_names} name={"TODO"}/>;     
+    const custom_table = <DisplayTable rows={rows} ordered_column_keys={ordered_column_keys} column_names={column_names} table_name={"TODO"}/>;     
 
     const child_tables = _.map(Tag.gocos_by_spendarea, sa => {
       const rows = _.map(sa.children_tags, goco => {
@@ -137,7 +137,7 @@ class Goco extends React.Component {
       });
       return {
         key: sa.name,
-        table: <DisplayTable rows={rows} ordered_column_keys={ordered_column_keys} column_names={column_names} name={"TODO"}/>,
+        table: <DisplayTable rows={rows} ordered_column_keys={ordered_column_keys} column_names={column_names} table_name={"TODO"}/>,
       };
     });
 

@@ -76,7 +76,6 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
 
   const col = "{{est_in_year}}_estimates";
   const top_10_rows = _.take(data, 10);
-  const complement_amt = _.last(data)[col];
   const total_amt = d3.sum(data, _.property(col));
   const column_names = {
     name: text_maker("org"),
@@ -84,45 +83,36 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
     amount: text_maker("authorities"),
   };
   const amt_type = window.is_a11y_mode ? "compact1_written" : "compact1";
-  const total = { amount: amt_type} ;
+  
+  const table_data = _.map(top_10_rows, obj => ({
+    name: {
+      subj: Subject.Dept.lookup(obj.dept),
+      value: Subject.Dept.lookup(obj.dept).name,
+    },
+    voted_stat: {
+      value: obj.desc,
+    },
+    amount: {
+      amt_type: amt_type,
+      value: obj[col],
+    },
+  }));
+  const column_config = {
+    total: { amount: amt_type },
+    sort: ["name", "voted_stat", "amount"],
+    search: ["name", "voted_stat"],
+    display: {
+      name: ({subj, value}) => subj ? <a href={infograph_href_template(subj)}> {value} </a> : value,
+      amount: ({amt_type, value}) => <Format type={amt_type} content={value} />,
+    },
+  };
 
-  const rows = _.map(top_10_rows, obj => {
-    const subj = Subject.Dept.lookup(obj.dept);
-    const display_values = {
-      name: <a href={infograph_href_template(subj)}> {subj.name} </a>,
-      voted_stat: obj.desc,
-      amount: <Format type={amt_type} content={obj[col]} />,
-    };
-    const search_values = {
-      name: subj.name,
-      voted_stat: obj.desc,
-    };
-    const sort_values = {
-      name: subj.name,
-      voted_stat: obj.desc,
-      amount: obj[col],
-    };
-    return {
-      display_values: display_values,
-      sort_values: sort_values,
-      search_values: search_values,
-    };
-  });
-  const complement_desc = text_maker(isVoted ? 'all_other_voted_items' : 'all_other_stat_items');
-  const rows_with_complement_amt = _.concat(rows, [{
-    display_values: {
-      name: "",
-      voted_stat: complement_desc,
-      amount: <Format type={amt_type} content={complement_amt} />,
-    },
-    search_values: {
-      name: "",
-      voted_stat: complement_desc,
-    },
-    sort_values: {
-      name: "",
-      voted_stat: complement_desc,
-      amount: complement_amt,
+  const data_with_complement_amt = _.concat(table_data, [{
+    name: { value: "" },
+    voted_stat: { value: text_maker(isVoted ? 'all_other_voted_items' : 'all_other_stat_items') },
+    amount: {
+      amt_type: amt_type,
+      value: _.last(data)[col],
     },
   }]);
 
@@ -162,10 +152,10 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
       </Col>
       <Col isGraph size={6}>
         <DisplayTable
-          rows={rows_with_complement_amt}
+          data={data_with_complement_amt}
           column_names={column_names}
           ordered_column_keys={_.keys(column_names)}
-          total_row_config={total}
+          column_config={column_config}
           unsorted_initial={true}
         />
       </Col>
