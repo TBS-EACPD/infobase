@@ -89,7 +89,7 @@ export const declare_dp_rev_split_panel = () => declare_panel({
           {...{footnotes, sources, glossary_keys}}
         >
           <DisplayTable
-            name={text_maker("dp_rev_split_title")}
+            table_name={text_maker("dp_rev_split_title")}
             rows={data}
             column_names={column_names}
             ordered_column_keys={_.keys(column_names)}

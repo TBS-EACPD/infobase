@@ -206,50 +206,50 @@ class SimpleView extends React.Component {
         .fromPairs()
         .value(),
     };
-    const dp_rows = _.chain(rows)
-      .map(row => {
-        const row_values = _.chain(columns)
-          .map( col => [col.nick, row[col.nick]])
-          .fromPairs()
-          .value();
-        const display_values = {
-          [first_col_nick]: first_col_nick === "dept" ? 
-          <a href={granular_rpb_link_for_org(this.props, Dept.lookup(row.dept))}>
-            {Dept.lookup(row.dept).name}
-          </a> :
-            <a href={granular_rpb_link_for_filter(this.props, row[first_col_nick])}>
-              {row[first_col_nick]}
-            </a>,
-          ..._.chain(columns)
-            .map( col => [col.nick, <Format key={col.nick} type={col.type} content={row[col.nick]}/>])
-            .fromPairs()
-            .value(),
-        };
-        const sort_values = {
-          [first_col_nick]: first_col_nick === "dept" ? Dept.lookup(row.dept).name : row[first_col_nick],
-          ...row_values,
-        };
-        const search_values = {
-          [first_col_nick]: first_col_nick === "dept" ? Dept.lookup(row.dept).name : row[first_col_nick],
-        };
-        return {
-          display_values: display_values,
-          sort_values: sort_values,
-          search_values: search_values,
-        };
-      })
-      .value();
 
-    return <DisplayTable
-      name="simple_table"
-      rows={dp_rows}
-      column_names={column_names}
-      ordered_column_keys={_.keys(column_names)}
-      total_row_config={ _.chain(columns)
+    const column_config = {
+      sort: _.keys(column_names),
+      search: [ first_col_nick ],
+      display: {
+        [first_col_nick]: ({row_value, value}) => (
+          <a href={ first_col_nick === "dept" ?
+            granular_rpb_link_for_org(this.props, Dept.lookup(row_value)) :
+            granular_rpb_link_for_filter(this.props, row_value)}>
+            {value}
+          </a>
+        ),
+        ..._.chain(columns)
+          .map( col => 
+            [col.nick, ({value}) => <Format key={col.nick} type={col.type} content={value}/>]
+          )
+          .fromPairs()
+          .value(),
+      },
+      total: _.chain(columns)
         .map( ({nick, type}) => [nick, type] )
         .fromPairs()
-        .value()
-      }
+        .value(),
+    };
+    const dp_data = _.map(rows, row => 
+      ({
+        [first_col_nick]: {
+          row_value: row[first_col_nick],
+          value: first_col_nick === "dept" ?
+            Dept.lookup(row[first_col_nick]).name : row[first_col_nick],
+        },
+        ..._.chain(columns)
+          .map( col => [ col.nick, { value: row[col.nick] } ] )
+          .fromPairs()
+          .value(),
+      })
+    );
+
+    return <DisplayTable
+      table_name="simple_table"
+      data={dp_data}
+      column_names={column_names}
+      ordered_column_keys={_.keys(column_names)}
+      column_config={column_config}
     />;
   }
 }

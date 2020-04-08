@@ -16,27 +16,16 @@ export class DisplayTable extends React.Component {
     this.sort_click.bind(this);
 
     const {
-      rows,
       unsorted_initial,
+      column_config,
     } = props;
 
-    const { sort_values } = _.first(rows);
-
-    const sort_by = unsorted_initial ? null : _.chain(sort_values)
-      .keys()
-      .first()
-      .value();
+    const sort_by = unsorted_initial ? null : _.first(column_config.sort);
     
-    const searches = _.chain(rows)
-      .flatMap( 
-        ({search_values}) => _.chain(search_values)
-          .keys()
-          .map( (search_key) => [search_key, ""] )
-          .value()
-      )
+    const searches = _.chain(column_config.search)
+      .map(search_key => [search_key, ""])
       .fromPairs()
       .value();
-    
 
     this.state = {
       sort_by,
@@ -58,11 +47,32 @@ export class DisplayTable extends React.Component {
 
   render(){
     const {
-      name,
-      column_names,
-      total_row_config,
-      rows,
-      ordered_column_keys,
+      table_name, // Optional: Name of table
+      column_names, // { column_key: column_name, column_key2: column_name2 }
+      ordered_column_keys, // [column_key, column_key2]
+      data, /* 
+      [
+        {
+          column_without_any_display_formats: {
+            value: 1, **required
+          }
+          column_with_display_format_in_column_config: {
+            format_type: "big_int"
+            value: 10, **required
+          }
+        }
+      ]
+      */
+      column_config, /* Everything Optional
+        {
+          sort: [column_key, column_key2]
+          search: [column_key]
+          total: {column_key2: "big_int"}
+          display: {
+            column_key: ({format_type, value}) => <Format type={format_type} content={value}/>
+          }
+        }
+      */
     } = this.props;
     const {
       sort_by,
@@ -71,50 +81,39 @@ export class DisplayTable extends React.Component {
     } = this.state;
 
     const clean_search_string = (search_string) => _.chain(search_string).deburr().toLower().trim().value();
-    const sorted_filtered_data = _.chain(rows)
-      .filter(
-        ({search_values}) => _.chain(search_values)
-          .map( (search_value, column_key) => (
-            _.isEmpty(searches[column_key]) ||
+    const sorted_filtered_data = _.chain(data)
+      .filter( (row) => _.chain(row)
+        .map( (column, column_key) => (
+          _.isEmpty(searches[column_key]) ||
             _.includes(
-              clean_search_string(search_value),
+              clean_search_string(column.value),
               clean_search_string(searches[column_key])
             )
-          ) )
-          .every()
-          .value()
+        ) )
+        .every()
+        .value()
       )
-      .sortBy( ({sort_values}) => _.isNumber(sort_values[sort_by]) ? sort_values[sort_by] : Number.NEGATIVE_INFINITY )
+      .sortBy( row => ( row[sort_by] && _.isNumber(row[sort_by].value) )
+        ? row[sort_by].value : Number.NEGATIVE_INFINITY )
       .tap( descending ? _.reverse : _.noop )
-      .value();
-
-    const all_sort_keys = _.chain(rows)
-      .flatMap( row => _.keys(row.sort_values) )
-      .uniq()
-      .value();
-
-    const all_search_keys = _.chain(rows)
-      .flatMap( row => _.keys(row.search_values) )
-      .uniq()
       .value();
     
     const total_row = _.reduce(
       sorted_filtered_data,
       (totals, row) => _.mapValues(
         totals,
-        (total, col_key) => total + row.sort_values[col_key]
+        (total, col_key) => total + row[col_key].value
       ),
-      _.mapValues(total_row_config, () => 0)
+      _.mapValues(column_config.total, () => 0)
     );
-
     return (
       <div style={{overflowX: "auto", marginTop: "20px", marginBottom: "20px"}}>
-        <table className={classNames("table", "display-table", !total_row_config && "no-total-row")}>
+        <table className={classNames("table", "display-table", !column_config.total && "no-total-row")}>
           <caption className="sr-only">
             <div>
               { 
-                !_.isEmpty(name) ? 
-                  name :
+                !_.isEmpty(table_name) ? 
+                table_name :
                   <TM k="a11y_table_title_default" />
               }
             </div>
@@ -124,85 +123,80 @@ export class DisplayTable extends React.Component {
               {
                 _.map(
                   column_names,
-                  (name, i) => <th
+                  (col_name, i) => <th
                     key={i} 
                     className={"center-text"}
                   >
-                    {name}
+                    {col_name}
                   </th>
                 )
               }
             </tr>
             <tr className="table-header">
-              { rows.length > 0 &&
-                _.chain(rows)
-                  .first()
-                  .thru(
-                    ({sort_values, search_values}) => _.map(
-                      ordered_column_keys,
-                      (column_key) => {
-                        const sortable = _.includes(all_sort_keys, column_key);
-                        const searchable = _.includes(all_search_keys, column_key);
+              { sorted_filtered_data.length > 0 &&
+                _.map(
+                  ordered_column_keys,
+                  (column_key) => {
+                    const sortable = _.includes(column_config.sort, column_key);
+                    const searchable = _.includes(column_config.search, column_key);
 
-                        const current_search_input = (searchable && searches[column_key]) || null;
+                    const current_search_input = (searchable && searches[column_key]) || null;
 
-                        return (
-                          <th 
-                            key={column_key}
-                            style={{textAlign: "center"}}
-                          >
-                            { sortable &&
-                              <div onClick={ () => this.sort_click(column_key) }>
-                                <SortDirections 
-                                  asc={!descending && sort_by === column_key}
-                                  desc={descending && sort_by === column_key}
-                                />
-                              </div>
-                            }
-                            { searchable &&
-                              <DebouncedTextInput
-                                inputClassName={"search input-sm"}
-                                placeHolder={text_maker('filter_data')}
-                                defaultValue={current_search_input}
-                                updateCallback={ (search_value) => {
-                                  const updated_searches = _.mapValues(
-                                    searches,
-                                    (value, key) => key === column_key ? 
-                                      search_value :
-                                      value
-                                  );
-      
-                                  this.setState({ searches: updated_searches });
-                                }}
-                                debounceTime={300}
-                              />
-                            }
-                          </th>
-                        );
-                      }
-                    )
-                  )
-                  .value()
+                    return (
+                      <th 
+                        key={column_key}
+                        style={{textAlign: "center"}}
+                      >
+                        { sortable &&
+                          <div onClick={ () => this.sort_click(column_key) }>
+                            <SortDirections 
+                              asc={!descending && sort_by === column_key}
+                              desc={descending && sort_by === column_key}
+                            />
+                          </div>
+                        }
+                        { searchable &&
+                          <DebouncedTextInput
+                            inputClassName={"search input-sm"}
+                            placeHolder={text_maker('filter_data')}
+                            defaultValue={current_search_input}
+                            updateCallback={ (search_value) => {
+                              const updated_searches = _.mapValues(
+                                searches,
+                                (value, key) => key === column_key ? 
+                                  search_value :
+                                  value
+                              );
+
+                              this.setState({ searches: updated_searches });
+                            }}
+                            debounceTime={300}
+                          />
+                        }
+                      </th>
+                    );
+                  }
+                )
               }
             </tr>
           </thead>
           <tbody>
             {_.map(
               sorted_filtered_data, 
-              ({ display_values }, i) => (
+              (row, i) => (
                 <tr key={i}>
                   {_.map(
                     ordered_column_keys,
                     col => (
                       <td style={{fontSize: "14px"}} key={col}>
-                        {display_values[col]}
+                        {column_config.display[col] ?
+                          column_config.display[col](row[col]) : row[col].value}
                       </td>
-                    )
-                  )}
+                    ))}
                 </tr>
               )
             )}
-            { total_row_config &&
+            { column_config.total &&
               <tr key="total_row">
                 <td>{text_maker("total")}</td>
                 { _.chain(ordered_column_keys)
@@ -210,7 +204,7 @@ export class DisplayTable extends React.Component {
                   .map(col => (
                     <td key={col}>
                       { total_row[col] ? 
-                        <Format type={total_row_config[col]} content={total_row[col]}/> : 
+                        <Format type={column_config.total[col]} content={total_row[col]}/> : 
                         ""
                       }
                     </td>

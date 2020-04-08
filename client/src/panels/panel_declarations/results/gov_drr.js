@@ -52,7 +52,7 @@ class GovDRR extends React.Component {
           </div>
           <HeightClippedGraph clipHeight={330}>
             <DisplayTable
-              name={"Government DRR"}
+              table_name={"Government DRR"}
               column_names={column_names}
               ordered_column_keys={_.keys(column_names)}
               rows={rows_of_counts_by_dept}
