@@ -127,14 +127,14 @@ export const format_and_get_fte = (type, info, subject) => {
     const nivo_fte_props = {
       data: graph_data,
       raw_data: raw_data,
-      min: _.min(raw_data) * 0.9,
-      max: _.max(raw_data) * 1.1,
       is_money: false,
       colorBy: d => colors(d.id),
       enableGridY: false,
       remove_left_axis: true,
-      disable_yaxis_zoom: true,
+      disable_y_axis_zoom: true,
       disable_table_view: true,
+      y_scale_min: _.min(raw_data) * 0.9,
+      y_scale_max: _.max(raw_data) * 1.1,
       margin: {
         top: 10,
         right: 40,

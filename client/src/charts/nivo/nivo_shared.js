@@ -17,9 +17,7 @@ import graph_text from './NivoCharts.yaml';
 const graph_text_maker = create_text_maker(graph_text);
 
 
-const fixed_symbol_shape = ({
-  x, y, size, fill, borderWidth, borderColor,
-}) => (
+const fixed_symbol_shape = ({x, y, size, fill, borderWidth, borderColor}) => (
   <rect
     x={x}
     y={y}
@@ -32,39 +30,18 @@ const fixed_symbol_shape = ({
     style={{ pointerEvents: 'none' }}
   />
 );
+const fix_legend_symbols = (legends) => legends ?
+  _.map(
+    legends,
+    legend => _.chain(legend)
+      .clone()
+      .assign({symbolShape: fixed_symbol_shape})
+      .value()
+  ) :
+  undefined;
 
 
-const smalldevice_tooltip_content = (tooltip_item, formatter) => (
-  <td>
-    <div className="nivo-tooltip__content"> {tooltip_item.name || tooltip_item.id} </div>
-    <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
-  </td>
-);
-
-const tooltip_content = (tooltip_item, formatter) => (
-  <Fragment>
-    <td className="nivo-tooltip__content"> {tooltip_item.name || tooltip_item.id} </td>
-    <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
-  </Fragment>
-);
-
-const smalldevice_percent_tooltip_content = (tooltip_item, formatter, total) => (
-  <td>
-    <div className="nivo-tooltip__content">{tooltip_item.name || tooltip_item.id}</div>
-    <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
-    <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}}/>
-  </td>
-);
-
-const percent_tooltip_content = (tooltip_item, formatter, total) => (
-  <Fragment>
-    <td className="nivo-tooltip__content">{tooltip_item.name || tooltip_item.id}</td>
-    <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
-    <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}}/>
-  </Fragment>
-);
-
-const default_tooltip = (tooltip_items, formatter, total) => ( // total indicates percent value tooltip being used
+const TooltipFactory = ({tooltip_items, TooltipContentComponent}) => (
   <div style={{color: window.infobase_color_constants.textColor}}>
     <table className="nivo-tooltip">
       <tbody>
@@ -74,12 +51,9 @@ const default_tooltip = (tooltip_items, formatter, total) => ( // total indicate
               <td className="nivo-tooltip__content">
                 <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.color}} />
               </td>
-              <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
-                {total ? percent_tooltip_content(tooltip_item, formatter, total) : tooltip_content(tooltip_item, formatter) }
-              </MediaQuery>
-              <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
-                {total ? smalldevice_percent_tooltip_content(tooltip_item, formatter, total) : smalldevice_tooltip_content(tooltip_item, formatter)}
-              </MediaQuery>
+              <TooltipContentComponent
+                tooltip_item={tooltip_item}
+              />
             </tr>
           )
         )}
@@ -87,6 +61,53 @@ const default_tooltip = (tooltip_items, formatter, total) => ( // total indicate
     </table>
   </div>
 );
+
+const DefaultTooltip = ({tooltip_items, formatter}) => (
+  <TooltipFactory
+    tooltip_items={tooltip_items}
+    tooltip_content_component={
+      ({tooltip_item}) => (
+        <Fragment>
+          <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
+            <td className="nivo-tooltip__content"> {tooltip_item.name || tooltip_item.id} </td>
+            <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+          </MediaQuery>
+          <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
+            <td>
+              <div className="nivo-tooltip__content"> {tooltip_item.name || tooltip_item.id} </div>
+              <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+            </td>
+          </MediaQuery>
+        </Fragment>
+      )
+    }
+  />
+);
+
+const DefaultPercentTooltip = ({tooltip_items, formatter, total}) => (
+  <TooltipFactory
+    tooltip_items={tooltip_items}
+    tooltip_content_component={
+      ({tooltip_item}) => (
+        <Fragment>
+          <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
+            <td className="nivo-tooltip__content">{tooltip_item.name || tooltip_item.id}</td>
+            <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
+            <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}}/>
+          </MediaQuery>
+          <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
+            <td>
+              <div className="nivo-tooltip__content">{tooltip_item.name || tooltip_item.id}</div>
+              <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
+              <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}}/>
+            </td>
+          </MediaQuery>
+        </Fragment>
+      )
+    }
+  />
+);
+
 
 class InteractiveGraph extends React.Component{
   constructor(props){
@@ -143,8 +164,15 @@ class InteractiveGraph extends React.Component{
   
 
 const general_default_props = {
-  tooltip: (d, tooltip_formatter) => default_tooltip(d, tooltip_formatter),
-  percent_value_tooltip: (d, tooltip_formatter, total) => default_tooltip(d, tooltip_formatter, total),
+  tooltip: (d, formatter) => <DefaultTooltip 
+    tooltip_items={d}
+    formatter={formatter}
+  />,
+  percent_value_tooltip: (d, formatter, total) => <DefaultPercentTooltip
+    tooltip_items={d}
+    formatter={formatter}
+    total={total}
+  />,
   is_money: true,
   remove_bottom_axis: false,
   remove_left_axis: false,
@@ -180,23 +208,14 @@ const general_default_props = {
   motionStiffness: 95,
 };
 
-const fix_legends_IE = (legends) => {
-  return legends ? (
-    _.map(legends,
-      legend => _.chain(legend)
-        .clone()
-        .assign({symbolShape: fixed_symbol_shape})
-        .value() )
-    ) :
-    undefined;
-};
-
 export {
   InteractiveGraph,
-  default_tooltip,
+  TooltipFactory,
+  DefaultTooltip,
+  DefaultPercentTooltip,
   general_default_props,
   graph_text_maker, 
   get_formatter,
   infobase_colors_smart,
-  fix_legends_IE,
+  fix_legend_symbols,
 };

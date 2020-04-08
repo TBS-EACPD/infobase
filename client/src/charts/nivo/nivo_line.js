@@ -5,9 +5,9 @@ import {
   graph_text_maker,
   InteractiveGraph,
   general_default_props,
-  default_tooltip,
+  DefaultTooltip,
   get_formatter,
-  fix_legends_IE,
+  fix_legend_symbols,
 } from './nivo_shared.js';
 import {
   DisplayTable,
@@ -50,7 +50,7 @@ export class NivoResponsiveLine extends React.Component {
       left_axis,
       remove_bottom_axis,
       remove_left_axis,
-      disable_yaxis_zoom,
+      disable_y_axis_zoom,
       yScale,
       enableDotLabel,
       is_money,
@@ -59,8 +59,8 @@ export class NivoResponsiveLine extends React.Component {
       colors,
       colorBy,
       tooltip,
-      max, // only used for welcome mat
-      min, // only used for welcome mat
+      y_scale_max,
+      y_scale_min,
       enableArea,
       enableGridX,
       enableGridY,
@@ -79,8 +79,6 @@ export class NivoResponsiveLine extends React.Component {
     const {
       y_scale_zoomed,
     } = this.state;
-
-    const IE_fixed_legends = fix_legends_IE(legends);
     
     const table_data = _.chain(data)
       .map(row=>{
@@ -107,7 +105,7 @@ export class NivoResponsiveLine extends React.Component {
 
     const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={table_name || graph_text_maker("default_table_name")}/>;
 
-    const zoom_button = (!disable_yaxis_zoom && !enableArea) ?
+    const zoom_button = (!disable_y_axis_zoom && !enableArea) ?
       <button
         className={classNames("btn-ib-primary","btn-ib-array")}
         onClick={ 
@@ -152,13 +150,13 @@ export class NivoResponsiveLine extends React.Component {
             motionDamping,
             motionStiffness,
           }}
-          legends={ IE_fixed_legends }
+          legends={ fix_legend_symbols(legends) }
           tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
           yScale={{
             stacked: !!stacked,
             type: "linear",
-            min: min || get_scale_bounds(stacked, raw_data, y_scale_zoomed).min,
-            max: max || get_scale_bounds(stacked, raw_data, y_scale_zoomed).max,
+            min: y_scale_min || get_scale_bounds(stacked, raw_data, y_scale_zoomed).min,
+            max: y_scale_max || get_scale_bounds(stacked, raw_data, y_scale_zoomed).max,
             ...(yScale || {}),
           }}
           axisBottom={remove_bottom_axis ? null : bttm_axis}
@@ -185,16 +183,20 @@ export class NivoResponsiveLine extends React.Component {
 }
 NivoResponsiveLine.defaultProps = {
   ...general_default_props,
-  tooltip: (slice, tooltip_formatter) => default_tooltip(
-    slice.data.map( 
+  tooltip: (slice, formatter) => {
+    const tooltip_items = slice.data.map( 
       (d) => ({
         id: d.serie.id,
         color: d.serie.color,
         value: d.data.y,
       })
-    ), 
-    tooltip_formatter,
-  ),
+    );
+
+    return <DefaultTooltip
+      tooltip_items={tooltip_items}
+      formatter={formatter}
+    />;
+  },
   colors: window.infobase_color_constants.textColor,
   bttm_axis: {
     tickSize: 7,
@@ -203,7 +205,7 @@ NivoResponsiveLine.defaultProps = {
   enableDotLabel: false,
   enableArea: false,
   stacked: false,
-  disable_yaxis_zoom: false,
+  disable_y_axis_zoom: false,
   yScale: {
     type: "linear",
     zoomed: false,

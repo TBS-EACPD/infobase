@@ -5,7 +5,7 @@ import {
   InteractiveGraph,
   general_default_props,
   get_formatter,
-  fix_legends_IE,
+  fix_legend_symbols,
 } from './nivo_shared.js';
 import {
   DisplayTable,
@@ -76,8 +76,6 @@ export class NivoResponsiveBar extends React.Component{
       motionDamping,
       motionStiffness,
     } = this.props;
-
-    const IE_fixed_legends = fix_legends_IE(legends);
   
     const table = !disable_table_view && (
       custom_table || bar_table(data, keys, indexBy, get_formatter(is_money, text_formatter, true, true), table_name, table_first_column_name)
@@ -109,7 +107,7 @@ export class NivoResponsiveBar extends React.Component{
             motionDamping,
             motionStiffness,
           }}
-          legends={ IE_fixed_legends }
+          legends={ fix_legend_symbols(legends) }
           keys={_.union([''],keys)}
           labelFormat={_.isUndefined(label_format) ? null : label_format}
           labelTextColor={window.infobase_color_constants.textColor}
@@ -181,8 +179,6 @@ export class NivoResponsiveHBar extends React.Component{
       motionDamping,
       motionStiffness,
     } = this.props;
-    
-    const IE_fixed_legends = fix_legends_IE(legends);
 
     const table = !disable_table_view && bar_table(data, keys, indexBy, get_formatter(is_money, text_formatter, true, true), table_name, table_first_column_name);
 
@@ -209,7 +205,7 @@ export class NivoResponsiveHBar extends React.Component{
           motionDamping,
           motionStiffness,
         }}
-        legends = { IE_fixed_legends }
+        legends = { fix_legend_symbols(legends) }
         layout = 'horizontal'
         keys = {_.union([''],keys)}
         labelTextColor={window.infobase_color_constants.textColor}

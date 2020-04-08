@@ -123,7 +123,7 @@ class HistTPTypes extends React.Component {
         <div style ={{position: "relative"}}>
           <NivoResponsiveLine
             enableArea = {true}
-            disable_yaxis_zoom = {true}
+            disable_y_axis_zoom = {true}
             data = {expenditure_data}
             colorBy={d => colors(d.id)}
             stacked = {true}
