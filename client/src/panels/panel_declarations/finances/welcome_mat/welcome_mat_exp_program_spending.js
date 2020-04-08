@@ -134,10 +134,10 @@ export const format_and_get_exp_program_spending = (type, subject) => {
       colorBy: d => colors(d.id),
       enableGridY: false,
       remove_left_axis: true,
-      disable_yaxis_zoom: true,
+      disable_y_axis_zoom: true,
       disable_table_view: true,
-      min: _.min(raw_data) * 0.9,
-      max: _.max(raw_data) * 1.1,
+      y_scale_min: _.min(raw_data) * 0.9,
+      y_scale_max: _.max(raw_data) * 1.1,
       legends: [
         {
           anchor: 'bottom-right',
