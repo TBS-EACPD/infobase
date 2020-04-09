@@ -156,15 +156,13 @@ const make_email_backend = (templates) => {
 
           mongoose.connection.once('open', function(){
             console.log('Connection Successful.');
-
             const problem_schema = new Schema({}, { strict: false });
             const new_problem = mongoose.model('Problems', problem_schema);
-            //could not find a way to consistently read off of data types with dashes without using []
             const problem_to_send = new new_problem({ 
               type: completed_template.issue_type[0],
               details: completed_template.issue_details,
               user: headers["user-agent"],
-              date: Date.now,
+              date: Date(),
               ip: ip,
               full: completed_template,
               headers: headers,
@@ -172,7 +170,6 @@ const make_email_backend = (templates) => {
 
             //if message is not shown, log is unsuccessful
             problem_to_send.save().then(function(){
-              // assert(problem_to_send.isNew() === false);
               console.log('Mongo Log Request Successful.');
             });
 
