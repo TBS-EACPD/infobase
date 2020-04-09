@@ -1,16 +1,20 @@
-import './NivoCharts.scss';
+import './nivo_common.scss';
+
 import classNames from 'classnames';
+
+import {
+  nivo_common_text_maker,
+  infobase_colors_smart,
+} from './nivo_common.js';
 import { NivoResponsiveBar } from './nivo_bar.js';
 import { NivoResponsiveLine } from './nivo_line.js';
-import {
-  graph_text_maker,
-  infobase_colors_smart,
-} from './nivo_shared.js';
+
 import { GraphLegend } from '../declarative_charts.js';
 import { newIBCategoryColors } from '../../core/color_schemes.js';
 import { formats } from "../../core/format.js";
 
-export class LineBarToggleGraph extends React.Component {
+
+export class NivoLineBarToggle extends React.Component {
   constructor(props){
     super(props);
 
@@ -237,7 +241,7 @@ export class LineBarToggleGraph extends React.Component {
                     }
                   }
                 >
-                  {graph_text_maker("toggle_graph")}
+                  {nivo_common_text_maker("toggle_graph")}
                 </button>
               </span>
             }
@@ -258,7 +262,7 @@ export class LineBarToggleGraph extends React.Component {
     );
   }
 };
-LineBarToggleGraph.defaultProps = {
+NivoLineBarToggle.defaultProps = {
   legend_col_full_size: 4,
   graph_col_full_size: 8,
   legend_class: false,

@@ -1,20 +1,17 @@
+import graph_text from './nivo_common.yaml';
+
 import { Fragment } from 'react';
 import MediaQuery from 'react-responsive';
-import { breakpoints } from '../../core/breakpoint_defs.js';
 import classNames from 'classnames';
 
-import { IconTable } from '../../icons/icons.js';
-import {
-  StatelessModal,
-} from '../../components/index.js';
-
-import { get_formatter, infobase_colors_smart } from '../shared.js';
+import { breakpoints } from '../../core/breakpoint_defs.js';
 import { formats } from "../../core/format.js";
-
+import { get_formatter, infobase_colors_smart } from '../shared.js';
+import { IconTable } from '../../icons/icons.js';
+import { StatelessModal } from '../../components/index.js';
 import { create_text_maker } from '../../models/text.js';
-import graph_text from './NivoCharts.yaml';
 
-const graph_text_maker = create_text_maker(graph_text);
+const nivo_common_text_maker = create_text_maker(graph_text);
 
 
 const fixed_symbol_shape = ({x, y, size, fill, borderWidth, borderColor}) => (
@@ -141,7 +138,7 @@ class InteractiveGraph extends React.Component{
               onClick={ () => this.setState({ show_table: !show_table }) }
             >
               <IconTable
-                title={graph_text_maker("show_table")}
+                title={nivo_common_text_maker("show_table")}
                 color={window.infobase_color_constants.secondaryColor}
                 alternate_color={window.infobase_color_constants.backgroundColor}
               />
@@ -152,7 +149,7 @@ class InteractiveGraph extends React.Component{
         { graph }
         <StatelessModal
           show={ show_table }
-          title={ table_name || graph_text_maker("default_table_name") }
+          title={ table_name || nivo_common_text_maker("default_table_name") }
           body={ table }
           on_close_callback={() => this.setState({show_table: false})}
           additional_dialog_class = {'modal-responsive'}
@@ -214,7 +211,7 @@ export {
   DefaultTooltip,
   DefaultPercentTooltip,
   general_default_props,
-  graph_text_maker, 
+  nivo_common_text_maker, 
   get_formatter,
   infobase_colors_smart,
   fix_legend_symbols,

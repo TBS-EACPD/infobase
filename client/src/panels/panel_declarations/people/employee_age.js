@@ -13,7 +13,7 @@ import {
 
   declare_panel, 
   
-  LineBarToggleGraph,
+  NivoLineBarToggle,
 } from "../shared.js"; 
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -131,7 +131,7 @@ export const declare_employee_age_panel = () => declare_panel({
       
       const ticks = _.map(people_years, y => `${run_template(y)}`);
       
-      // Options for LineBarToggleGraph React components
+      // Options for NivoLineBarToggle React components
       const age_group_options = {
         legend_title: text_maker("age_group"),
         bar: true,
@@ -177,13 +177,13 @@ export const declare_employee_age_panel = () => declare_panel({
                   tab_pane_contents={{
                     age_group: (
                       <div id={"emp_age_tab_pane"}>
-                        <LineBarToggleGraph {...age_group_options} />
+                        <NivoLineBarToggle {...age_group_options} />
                         <div className='clearfix'></div>
                       </div>
                     ), 
                     avgage: (
                       <div id={"emp_age_tab_pane"}>
-                        <LineBarToggleGraph {...avg_age_options} />
+                        <NivoLineBarToggle {...avg_age_options} />
                         <div className='clearfix'></div>
                       </div>
                     ),

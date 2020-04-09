@@ -1,17 +1,18 @@
-import './NivoCharts.scss';
+import './nivo_common.scss';
+
 import { ResponsiveBubble } from '@nivo/circle-packing';
 import { Fragment } from 'react';
+
 import {
   InteractiveGraph,
-  graph_text_maker,
+  nivo_common_text_maker,
   general_default_props,
   get_formatter,
-} from './nivo_shared.js';
+} from './nivo_common.js';
+
 import { formats } from "../../core/format.js";
 import { newIBCategoryColors } from '../../core/color_schemes.js';
-import {
-  DisplayTable,
-} from '../../components/index.js';
+import { DisplayTable } from '../../components/index.js';
   
 
 const BubbleNode = ({ node, style, handlers, theme }) => {
@@ -77,9 +78,9 @@ export class CircleProportionChart extends React.Component{
     const ordered_column_keys = ["name","value","percent"];
     
     const column_names = {
-      name: graph_text_maker("label"),
-      value: graph_text_maker("value"),
-      percentage: graph_text_maker("percentage"),
+      name: nivo_common_text_maker("label"),
+      value: nivo_common_text_maker("value"),
+      percentage: nivo_common_text_maker("percentage"),
     };
 
     const table_data = [
@@ -117,8 +118,8 @@ export class CircleProportionChart extends React.Component{
     
 
 
-    const title = <div>{graph_text_maker("bubble_title",{outer: parent_name, inner: child_name})}</div>;  
-    const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={graph_text_maker("bubble_title")} />;
+    const title = <div>{nivo_common_text_maker("bubble_title",{outer: parent_name, inner: child_name})}</div>;  
+    const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={nivo_common_text_maker("bubble_title")} />;
 
     const graph = (
       <Fragment>

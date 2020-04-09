@@ -1,17 +1,18 @@
-import './NivoCharts.scss';
+import './nivo_common.scss';
+
 import { ResponsiveLine } from '@nivo/line';
 import classNames from 'classnames';
+
 import {
-  graph_text_maker,
+  nivo_common_text_maker,
   InteractiveGraph,
   general_default_props,
   DefaultTooltip,
   get_formatter,
   fix_legend_symbols,
-} from './nivo_shared.js';
-import {
-  DisplayTable,
-} from '../../components/index.js';
+} from './nivo_common.js';
+
+import { DisplayTable } from '../../components/index.js';
 import { IconZoomIn, IconZoomOut } from '../../icons/icons.js';
 
 const get_scale_bounds = (stacked, raw_data, zoomed) => {
@@ -101,9 +102,9 @@ export class NivoResponsiveLine extends React.Component {
       }))
       .value();
     const ordered_column_keys = _.concat( ['label'], table_ordered_column_keys || _.map(data,'id') );
-    const column_names = _.concat( [table_first_column_name || graph_text_maker("label")], table_ordered_column_keys || _.map(data,'id') );
+    const column_names = _.concat( [table_first_column_name || nivo_common_text_maker("label")], table_ordered_column_keys || _.map(data,'id') );
 
-    const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={table_name || graph_text_maker("default_table_name")}/>;
+    const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={table_name || nivo_common_text_maker("default_table_name")}/>;
 
     const zoom_button = (!disable_y_axis_zoom && !enableArea) ?
       <button
@@ -118,12 +119,12 @@ export class NivoResponsiveLine extends React.Component {
       >
         { this.state.y_scale_zoomed ? 
             <IconZoomOut
-              title={graph_text_maker("zoom_out")}
+              title={nivo_common_text_maker("zoom_out")}
               color={window.infobase_color_constants.secondaryColor}
               alternate_color={window.infobase_color_constants.backgroundColor}
             /> : 
             <IconZoomIn 
-              title={graph_text_maker("zoom_in")}
+              title={nivo_common_text_maker("zoom_in")}
               color={window.infobase_color_constants.secondaryColor}
               alternate_color={window.infobase_color_constants.backgroundColor}
             />

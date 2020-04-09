@@ -11,7 +11,7 @@ import {
 
   declare_panel,
 
-  LineBarToggleGraph,
+  NivoLineBarToggle,
 } from "../shared.js"; 
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -103,7 +103,7 @@ export const declare_employee_gender_panel = () => declare_panel({
           </Col>
           { !window.is_a11y_mode &&
             <Col size={12} isGraph>
-              <LineBarToggleGraph 
+              <NivoLineBarToggle 
                 {...{
                   legend_title: text_maker("employee_gender"),
                   bar: true,

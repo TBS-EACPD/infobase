@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import { CanadaD3Component } from './CanadaD3Component.js';
 
 import { GraphLegend } from "../declarative_charts.js";
-import { NivoResponsiveHBar } from "../nivo/NivoCharts.js";
+import { NivoResponsiveHBar } from "../wrapped_nivo/index.js";
 import { hex_to_rgb } from '../../general_utils.js';
 import { secondaryColor, tertiaryColor } from '../../core/color_defs.js';
 import { run_template } from "../../models/text.js";

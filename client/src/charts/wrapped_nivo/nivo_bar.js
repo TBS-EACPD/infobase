@@ -1,15 +1,16 @@
-import './NivoCharts.scss';
+import './nivo_common.scss';
+
 import { ResponsiveBar } from '@nivo/bar';
+
 import {
-  graph_text_maker,
+  nivo_common_text_maker,
   InteractiveGraph,
   general_default_props,
   get_formatter,
   fix_legend_symbols,
-} from './nivo_shared.js';
-import {
-  DisplayTable,
-} from '../../components/index.js';
+} from './nivo_common.js';
+
+import { DisplayTable } from '../../components/index.js';
 
 
 const bar_table = (data, keys, indexBy, table_view_format, table_name, table_first_column_name) => {
@@ -29,11 +30,11 @@ const bar_table = (data, keys, indexBy, table_view_format, table_name, table_fir
 
   const ordered_column_keys = _.concat([indexBy],keys);
   const column_names = _.chain(ordered_column_keys)
-    .zip( _.concat([table_first_column_name || graph_text_maker("label")], keys) )
+    .zip( _.concat([table_first_column_name || nivo_common_text_maker("label")], keys) )
     .fromPairs()
     .value();
 
-  return <DisplayTable rows={table_data} ordered_column_keys={ordered_column_keys} column_names={column_names} name={table_name || graph_text_maker("default_table_name")}/>;
+  return <DisplayTable rows={table_data} ordered_column_keys={ordered_column_keys} column_names={column_names} name={table_name || nivo_common_text_maker("default_table_name")}/>;
 };
 
 

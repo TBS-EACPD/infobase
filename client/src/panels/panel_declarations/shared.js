@@ -25,8 +25,8 @@ import {
   NivoResponsiveLine,
   NivoResponsivePie,
   CircleProportionChart,
-  LineBarToggleGraph,
-} from '../../charts/nivo/NivoCharts.js';
+  NivoLineBarToggle,
+} from '../../charts/wrapped_nivo/index.js';
 import {
   get_formatter,
   infobase_colors_smart,
@@ -184,7 +184,7 @@ export {
   SpinnerWrapper,
   get_formatter,
   table_common,
-  LineBarToggleGraph,
+  NivoLineBarToggle,
   infobase_colors_smart,
 
   // shared panel utils
