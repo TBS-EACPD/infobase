@@ -1,13 +1,16 @@
-import './NivoCharts.scss';
+import './nivo_common.scss';
+
 import { ResponsivePie } from '@nivo/pie';
 import classNames from 'classnames';
+
 import {
-  graph_text_maker,
+  nivo_common_text_maker,
   InteractiveGraph,
   general_default_props,
   infobase_colors_smart,
   get_formatter,
-} from './nivo_shared.js';
+} from './nivo_common.js';
+
 import { formats } from "../../core/format.js";
 import { newIBCategoryColors } from '../../core/color_schemes.js';
 import {
@@ -114,14 +117,14 @@ export class NivoResponsivePie extends React.Component{
     }) );
     
     const column_names = {
-      label: graph_text_maker("label"),
-      value: graph_text_maker("value"),
-      percentage: graph_text_maker("percentage"),
+      label: nivo_common_text_maker("label"),
+      value: nivo_common_text_maker("value"),
+      percentage: nivo_common_text_maker("percentage"),
     };
 
     const ordered_column_keys = ["label", "value", "percentage"];
 
-    const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={table_name || graph_text_maker("default_table_name")} />;
+    const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={table_name || nivo_common_text_maker("default_table_name")} />;
 
     const graph =
     <div className={display_horizontal ? classNames("common-donut__horizontal","common-donut") : "common-donut"} aria-hidden = {true}>
