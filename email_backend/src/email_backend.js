@@ -152,31 +152,30 @@ const make_email_backend = (templates) => {
           const mongoose = require('mongoose');
           const Schema = mongoose.Schema;
           
-          mongoose.connect('mongodb://localhost/Feedback');
+          //TODO - change this to change the database connection
+          mongoose.connect('mongodb://localhost/Feedback')
+            .then( () => {
 
-          mongoose.connection.once('open', function(){
-            console.log('Connection Successful.');
-            const problem_schema = new Schema({}, { strict: false });
-            const new_problem = mongoose.model('Problems', problem_schema);
-            const problem_to_send = new new_problem({ 
-              type: completed_template.issue_type[0],
-              details: completed_template.issue_details,
-              user: headers["user-agent"],
-              date: Date(),
-              ip: ip,
-              full: completed_template,
-              headers: headers,
-            });
+              console.log('Connection Successful.');
+              const problem_schema = new Schema({}, { strict: false });
+              const new_problem = mongoose.model('Problems', problem_schema);
+              const problem_to_send = new new_problem({ 
+                type: completed_template.issue_type[0],
+                details: completed_template.issue_details,
+                user: headers["user-agent"],
+                date: Date(),
+                ip: ip,
+                full: completed_template,
+                headers: headers,
+              });
+  
+              //if message is not shown, log is unsuccessful
+              problem_to_send.save().then(function(){
+                console.log('Mongo Log Request Successful.');
+              });
 
-            //if message is not shown, log is unsuccessful
-            problem_to_send.save().then(function(){
-              console.log('Mongo Log Request Successful.');
-            });
-
-          }).on('error', function(error){
-            console.log('Connection Error: ', error);
-          });
-
+            } )
+            .catch( (error) => console.log('Connection Error: ', error) );
           
         } else {
           const error_message = `Internal Server Error: mail was unable to send. ${ 
