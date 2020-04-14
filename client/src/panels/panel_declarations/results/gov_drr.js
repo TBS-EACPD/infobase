@@ -29,7 +29,7 @@ class GovDRR extends React.Component {
       num_depts,
       verbose_gov_counts,
       late_dept_count,
-      total,
+      column_config,
     } = this.props;
 
     return (
@@ -55,8 +55,8 @@ class GovDRR extends React.Component {
               table_name={"Government DRR"}
               column_names={column_names}
               ordered_column_keys={_.keys(column_names)}
-              rows={rows_of_counts_by_dept}
-              total_row_config={total}
+              data={rows_of_counts_by_dept}
+              column_config={column_config}
             />
           </HeightClippedGraph>
         </div>
@@ -86,41 +86,39 @@ export const declare_gov_drr_panel = () => declare_panel({
         .fromPairs()
         .value();
       
-      const rows_of_counts_by_dept = _.map(dept_counts, row => {
-        const subject = Dept.lookup(row.id);
-        const link_to_subject = <a href={link_to_results_infograph(subject)}>
-          {subject.name}
-        </a>;
-        const display_values = _.chain(column_keys)
+      const rows_of_counts_by_dept = _.map(dept_counts, row => ({
+        subject_name: {subject: Dept.lookup(row.id), value: Dept.lookup(row.id).name},
+        ..._.chain(column_keys)
           .keys()
-          .map(column_key => [column_key, row[column_key]])
+          .map(column_key => [ column_key, { value: row[column_key] } ])
           .fromPairs()
-          .set("subject_name", link_to_subject)
-          .value();
-        const sort_values = {...display_values, subject_name: subject.name};
-        const search_values = { subject_name: subject.name };
-
-        return {
-          display_values,
-          sort_values,
-          search_values,
-        };
-      });
-      const total = _.chain(column_keys)
-        .keys()
-        .map(key => [key, "big_int"])
-        .fromPairs()
-        .value();
+          .value(),
+      }));
+      const column_config = {
+        display: {
+          subject_name: ({subject, value}) => subject ? <a href={link_to_results_infograph(subject)}> {value} </a> : value,
+        },
+        sort: _.chain(column_keys)
+          .keys()
+          .concat(["subject_name"])
+          .value(),
+        search: ["subject_name"],
+        total: _.chain(column_keys)
+          .keys()
+          .map(key => [key, "big_int"])
+          .fromPairs()
+          .value(),
+      };
       const column_names = _.assignIn({subject_name: text_maker("org")}, column_keys);
       const late_dept_count = result_docs[current_drr_key].late_results_orgs.length;
   
       return {
         gov_counts,
-        total,
         rows_of_counts_by_dept,
         column_names,
         verbose_gov_counts,
         num_depts,
+        column_config,
         late_dept_count,
       };
     },

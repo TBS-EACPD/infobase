@@ -136,10 +136,6 @@ class GranularView extends React.Component {
 
     const non_dept_key_cols = _.reject(sorted_key_columns, {nick: 'dept'});
 
-    const totals_nick = _.chain(data_columns)
-      .map( ({nick, type}) => [nick, type])
-      .fromPairs()
-      .value();
     const cols = [
       ...non_dept_key_cols,
       ...data_columns,
@@ -151,45 +147,42 @@ class GranularView extends React.Component {
       .map( ({nick, fully_qualified_name}) => [nick, fully_qualified_name] )
       .fromPairs()
       .value();
-
-    const rows = _.chain(shown_rows)
-      .map(row => {
-        const dept_name = Dept.lookup(row.dept).name;
-        const display_values = {
-          dept: <Format type={'wide-str'} content={dept_name}/>,
-          ..._.chain(cols)
-            .map( ({nick, type}) => [ nick, type ? <Format type={type} content={row[nick]}/> : row[nick] ] )
-            .fromPairs()
-            .value(),
-        };
-        const sort_values = {
-          dept: dept_name,
-          ..._.chain(cols)
-            .map( ({nick}) => [nick, row[nick]] )
-            .fromPairs()
-            .value(),
-        };
-        const search_values = {
-          dept: dept_name,
-          ..._.chain(non_dept_key_cols)
-            .map( ({nick}) => [ nick, row[nick]] )
-            .fromPairs()
-            .value(),
-        };
-        return {
-          display_values: display_values,
-          sort_values: sort_values,
-          search_values: search_values,
-        };
-      })
-      .value();
+    
+    const table_data = _.map(shown_rows, row => ({
+      dept: {value: Dept.lookup(row.dept).name},
+      ..._.chain(cols)
+        .map( ({nick}) => [ nick, {value: row[nick]} ] )
+        .fromPairs()
+        .value(),
+    }));
+    const column_config = {
+      display: {
+        dept: ({value}) => <Format type={'wide-str'} content={value} />,
+        ..._.chain(cols)
+          .map( ({nick, type}) => [ nick, ({value}) => type ? <Format type={type} content={value}/> : value ] )
+          .fromPairs()
+          .value(),
+      },
+      sort: _.chain(cols)
+        .map( ({nick}) => nick)
+        .concat(["dept"])
+        .value(),
+      search: _.chain(non_dept_key_cols)
+        .map( ({nick}) => nick)
+        .concat(["dept"])
+        .value(),
+      total: _.chain(data_columns)
+        .map( ({nick, type}) => [nick, type])
+        .fromPairs()
+        .value(),
+    };
 
     return (
       <div>
         <DisplayTable
-          rows={rows}
+          data={table_data}
           column_names={column_names}
-          total_row_config={totals_nick}
+          column_config={column_config}
           ordered_column_keys={_.keys(column_names)}
         />
 
