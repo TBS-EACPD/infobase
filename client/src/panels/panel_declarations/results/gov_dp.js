@@ -27,7 +27,7 @@ const current_dp_year = result_docs[current_dp_key].year;
 const current_dp_corresponding_drr_year = _.toNumber(result_docs[current_dp_key].year_short) + 1;
 
 
-const DpSummary = ({counts, rows_of_counts_by_dept, total, column_names, late_dept_count}) => {
+const DpSummary = ({counts, rows_of_counts_by_dept, column_config, column_names, late_dept_count}) => {
   const current_dp_counts_with_generic_keys = filter_and_genericize_doc_counts(counts, current_dp_key);
   return (
     <Fragment>
@@ -46,10 +46,10 @@ const DpSummary = ({counts, rows_of_counts_by_dept, total, column_names, late_de
       <HeightClippedGraph clipHeight={330}>
         <DisplayTable
           table_name={"Government DP"}
-          rows={rows_of_counts_by_dept}
+          data={rows_of_counts_by_dept}
+          column_config={column_config}
           column_names={column_names}
           ordered_column_keys={_.keys(column_names)}
-          total_row_config={total}
         />
       </HeightClippedGraph>
     </Fragment>
@@ -70,37 +70,35 @@ export const declare_gov_dp_panel = () => declare_panel({
         [`${current_dp_key}_indicators`]: text_maker("indicators"),
       };
 
-      const rows_of_counts_by_dept = _.map(dept_counts, row => {
-        const subject = Dept.lookup(row.id);
-        const link_to_subject = <a href={link_to_results_infograph(subject)}>
-          {subject.name}
-        </a>;
-        const display_values = _.chain(column_keys)
+      const rows_of_counts_by_dept = _.map(dept_counts, row => ({
+        subject_name: {value: Dept.lookup(row.id).name},
+        ..._.chain(column_keys)
           .keys()
-          .map(column_key => [column_key, row[column_key]])
+          .map(column_key => [ column_key, {value: row[column_key]} ])
           .fromPairs()
-          .set("subject_name", link_to_subject)
-          .value();
-        const sort_values = {...display_values, subject_name: subject.name};
-        const search_values = { subject_name: subject.name };
-
-        return {
-          display_values,
-          sort_values,
-          search_values,
-        };
-      });
-      const total = _.chain(column_keys)
-        .keys()
-        .map(key => [key, "big_int"])
-        .fromPairs()
-        .value();
+          .value(),
+      }));
+      const column_config = {
+        display: {
+          subject_name: ({subject, value}) => subject ? <a href={link_to_results_infograph(subject)}> {value} </a> : value,
+        },
+        sort: _.chain(column_keys)
+          .keys()
+          .concat(["subject_name"])
+          .value(),
+        search: ["subject_name"],
+        total: _.chain(column_keys)
+          .keys()
+          .map(key => [key, "big_int"])
+          .fromPairs()
+          .value(),
+      };
       const column_names = _.assignIn({subject_name: text_maker("org")}, column_keys);
       const late_dept_count = result_docs[current_dp_key].late_results_orgs.length;
 
       return { 
         column_names,
-        total,
+        column_config,
         rows_of_counts_by_dept,
         late_dept_count,
       };
@@ -111,9 +109,9 @@ export const declare_gov_dp_panel = () => declare_panel({
       const {
         panel_args: {
           column_names,
-          total,
           rows_of_counts_by_dept,
           late_dept_count,
+          column_config,
         },
       } = calculations;
       const counts = ResultCounts.get_gov_counts();
@@ -127,10 +125,10 @@ export const declare_gov_dp_panel = () => declare_panel({
         >
           <DpSummary 
             counts={counts}
-            total={total}
             column_names={column_names}
             rows_of_counts_by_dept={rows_of_counts_by_dept}
             late_dept_count={late_dept_count}
+            column_config={column_config}
           />
         </InfographicPanel>
       ); 

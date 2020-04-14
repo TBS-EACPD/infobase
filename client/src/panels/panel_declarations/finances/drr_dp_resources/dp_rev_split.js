@@ -46,34 +46,43 @@ export const declare_dp_rev_split_panel = () => declare_panel({
       if(!has_special_vals){
         return false;
       }
-
-      return _.map(planning_years, yr => {
+      const find_year_data_ends_with =
+        (year_data, end_str) =>
+          _.find( year_data, ({col}) => _.endsWith(col, end_str) ).value;
+      
+      const table_data = _.map(planning_years, yr => {
         const year_data = _.filter(data, ({col}) => _.startsWith(col,yr));
-        const sort_values = {
-          year: run_template(yr),
-          net: _.find(year_data, ({col: yr}) ).value,
-          gross: _.find(year_data, ({col}) => _.endsWith(col, "_gross")).value,
-          spa: _.find(year_data, ({col}) => _.endsWith(col, "_spa")).value,
-          rev: _.find(year_data, ({col}) => _.endsWith(col, "_rev")).value,
-        };
-        const display_values = {
-          year: <span style={{fontWeight: 'bold'}}>{sort_values.year}</span>,
-          net: <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={sort_values.net} />,
-          gross: <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={sort_values.gross} />,
-          spa: <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={sort_values.spa} />,
-          rev: <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={sort_values.rev} />,
-        };
         return {
-          display_values: display_values,
-          sort_values: sort_values,
+          year: {value: run_template(yr)},
+          net: {value: _.find(year_data, ({col: yr}) ).value},
+          gross: {value: find_year_data_ends_with(year_data, "_gross")},
+          spa: {value: find_year_data_ends_with(year_data, "_spa")},
+          rev: {value: find_year_data_ends_with(year_data, "_rev")},
         };
       });
+      const column_config = {
+        display: {
+          year: ({value}) => <span style={{fontWeight: 'bold'}}> {value} </span>,
+          net: ({value}) => <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={value}/>,
+          gross: ({value}) => <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={value}/>,
+          spa: ({value}) => <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={value}/>,
+          rev: ({value}) => <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={value}/>,
+        },
+        sort: ['year', 'net', 'gross', 'spa', 'rev'],
+      };
+
+      return {
+        table_data,
+        column_config,
+      };
 
     },
     render({calculations, footnotes, sources, glossary_keys}){
+      const { panel_args } = calculations;
       const {
-        panel_args: data,
-      } = calculations;
+        table_data,
+        column_config,
+      } = panel_args;
 
       const column_names = {
         year: text_maker("year"),
@@ -90,7 +99,8 @@ export const declare_dp_rev_split_panel = () => declare_panel({
         >
           <DisplayTable
             table_name={text_maker("dp_rev_split_title")}
-            rows={data}
+            data={table_data}
+            column_config={column_config}
             column_names={column_names}
             ordered_column_keys={_.keys(column_names)}
           />
