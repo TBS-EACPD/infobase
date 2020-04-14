@@ -1,0 +1,40 @@
+@import "../../common_css/common-variables";
+
+.infobase-pie.infobase-pie--horizontal {
+  @media (min-width:$minMediumDevice){
+    display: flex;
+    justify-content: space-around;
+
+    & > .infobase-pie__graph{
+      flex: 0 1 50%;
+    }
+    & > .infobase-pie__graph > * {
+      width: 100%;
+    }
+    & > .infobase-pie__legend {
+      flex: 0 1 50%;
+      align-items: center;
+      margin-right: 100px;
+    }
+    & > .infobase-pie__legend > .centerer {
+      height: 100%;
+    }
+  }
+}
+
+.infobase-pie__legend-data {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.infobase-pie > .infobase-pie__legend > .centerer > .centerer-IE-fix {
+  width: 100%;
+  flex-grow: 1;
+
+  & > .infobase-pie__legend-header {
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+    font-weight: bold;
+  }
+}

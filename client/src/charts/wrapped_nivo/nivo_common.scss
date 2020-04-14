@@ -13,42 +13,4 @@
 
 .nivo-tooltip__content {
   padding: 3px 5px;
-} 
-
-
-.common-donut > .common-donut__legend > .centerer > .centerer-IE-fix {
-  width: 100%;
-  flex-grow: 1;
-
-  & > .common-donut__legend-header {
-    display: inline-block;
-    width: 100%;
-    text-align: right;
-    font-weight: bold;
-  }
-}
-.common-donut__legend-data {
-  padding-left: 5px;
-  padding-right: 5px;
-}
-@media (min-width:$minMediumDevice){
-  div.common-donut__horizontal{
-    display: flex;
-    justify-content: space-around;
-
-    & > .common-donut__graph{
-      flex: 0 1 50%;
-    }
-    & > .common-donut__graph > * {
-      width: 100%;
-    }
-    & > .common-donut__legend {
-      flex: 0 1 50%;
-      align-items: center;
-      margin-right: 100px;
-    }
-    & > .common-donut__legend > .centerer {
-      height: 100%;
-    }
-  }
 }

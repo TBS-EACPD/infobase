@@ -1,5 +1,3 @@
-import './nivo_common.scss';
-
 import { ResponsiveBubble } from '@nivo/circle-packing';
 import { Fragment } from 'react';
 

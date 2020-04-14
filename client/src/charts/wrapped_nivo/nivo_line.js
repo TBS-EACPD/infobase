@@ -1,5 +1,3 @@
-import './nivo_common.scss';
-
 import { ResponsiveLine } from '@nivo/line';
 import classNames from 'classnames';
 
@@ -104,7 +102,14 @@ export class NivoResponsiveLine extends React.Component {
     const ordered_column_keys = _.concat( ['label'], table_ordered_column_keys || _.map(data,'id') );
     const column_names = _.concat( [table_first_column_name || nivo_common_text_maker("label")], table_ordered_column_keys || _.map(data,'id') );
 
-    const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={table_name || nivo_common_text_maker("default_table_name")}/>;
+    const table = !disable_table_view && (
+      <DisplayTable 
+        rows={table_data}
+        column_names={column_names}
+        ordered_column_keys={ordered_column_keys}
+        name={table_name || nivo_common_text_maker("default_table_name")}
+      />
+    );
 
     const zoom_button = (!disable_y_axis_zoom && !enableArea) ?
       <button
