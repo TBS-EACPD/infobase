@@ -1,4 +1,4 @@
-import './nivo_common.scss';
+import './nivo_pie.scss';
 
 import { ResponsivePie } from '@nivo/pie';
 import classNames from 'classnames';
@@ -124,68 +124,78 @@ export class NivoResponsivePie extends React.Component{
 
     const ordered_column_keys = ["label", "value", "percentage"];
 
-    const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={table_name || nivo_common_text_maker("default_table_name")} />;
+    const table = !disable_table_view && (
+      <DisplayTable
+        rows={table_data}
+        column_names={column_names}
+        ordered_column_keys={ordered_column_keys}
+        name={table_name || nivo_common_text_maker("default_table_name")}
+      />
+    );
 
-    const graph =
-    <div className={display_horizontal ? classNames("common-donut__horizontal","common-donut") : "common-donut"} aria-hidden = {true}>
-      <div className="common-donut__graph" style = {{height: graph_height}}>
-        <ResponsivePie
-          {...{
-            data: data_with_absolute_values,
-            margin,
-            colors,
-          }}
-          colorBy={ color_func }
-          tooltip={ (data) => {
-            const data_with_original_values = {
-              ...data,
-              value: data.original_value,
-            };
+    const graph = (
+      <div 
+        className={classNames('infobase-pie', display_horizontal && 'infobase-pie--horizontal')}
+        aria-hidden={true}
+      >
+        <div className="infobase-pie__graph" style = {{height: graph_height}}>
+          <ResponsivePie
+            {...{
+              data: data_with_absolute_values,
+              margin,
+              colors,
+            }}
+            colorBy={ color_func }
+            tooltip={ (data) => {
+              const data_with_original_values = {
+                ...data,
+                value: data.original_value,
+              };
 
-            if (include_percent){
-              return percent_value_tooltip(
-                [data_with_original_values],
-                get_formatter(is_money, text_formatter, false), 
-                _.sumBy(data_with_absolute_values, 'value')
-              );
-            } else {
-              return tooltip(
-                [data_with_original_values],
-                get_formatter(is_money, text_formatter, false)
-              );
-            } 
-          }}
-          innerRadius={0.5}
-          animate={false}
-          borderWidth={0}
-          enableSlicesLabels={false}
-          enableRadialLabels={false}
-        />
-      </div>
-      <div className="common-donut__legend">
-        <div className="centerer">
-          <div className="centerer-IE-fix">
-            <TabularPercentLegend
-              items={legend_items}
-              get_right_content={
-                (item) => (
-                  <div>
-                    <span className="common-donut__legend-data">
-                      <Format type="compact1" content={item.value} />
-                    </span>
-                    <span className="common-donut__legend-data">
-                      <Format type="percentage1" content={item.value/legend_total} />
-                    </span>
-                  </div>
-                )
-              }
-            />
+              if (include_percent){
+                return percent_value_tooltip(
+                  [data_with_original_values],
+                  get_formatter(is_money, text_formatter, false), 
+                  _.sumBy(data_with_absolute_values, 'value')
+                );
+              } else {
+                return tooltip(
+                  [data_with_original_values],
+                  get_formatter(is_money, text_formatter, false)
+                );
+              } 
+            }}
+            innerRadius={0.5}
+            animate={false}
+            borderWidth={0}
+            enableSlicesLabels={false}
+            enableRadialLabels={false}
+          />
+        </div>
+        <div className="infobase-pie__legend">
+          <div className="centerer">
+            <div className="centerer-IE-fix">
+              <TabularPercentLegend
+                items={legend_items}
+                get_right_content={
+                  (item) => (
+                    <div>
+                      <span className="infobase-pie__legend-data">
+                        <Format type="compact1" content={item.value} />
+                      </span>
+                      <span className="infobase-pie__legend-data">
+                        <Format type="percentage1" content={item.value/legend_total} />
+                      </span>
+                    </div>
+                  )
+                }
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>;
+    );
     
-
     return <InteractiveGraph graph={graph} table={table} table_name={table_name} />;
   }
 }

@@ -1,3 +1,4 @@
+import './nivo_common.scss';
 import graph_text from './nivo_common.yaml';
 
 import { Fragment } from 'react';

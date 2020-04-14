@@ -1,5 +1,3 @@
-import './nivo_common.scss';
-
 import classNames from 'classnames';
 
 import {
