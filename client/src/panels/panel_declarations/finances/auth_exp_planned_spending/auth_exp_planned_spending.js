@@ -426,6 +426,7 @@ const calculate = function(subject, info, options) {
 
 
   const additional_info = {
+    has_planned_spending: subject.has_planned_spending,
     last_history_year: run_template( _.last(std_years) ),
     last_planned_year: run_template( _.last(planning_years) ),
     gap_year: (subject.has_planned_spending && actual_to_planned_gap_year) || null,
