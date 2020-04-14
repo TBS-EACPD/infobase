@@ -66,8 +66,10 @@ const DefaultTooltip = ({tooltip_items, formatter}) => (
       ({tooltip_item}) => (
         <Fragment>
           <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
-            <td className="nivo-tooltip__content"> {tooltip_item.name || tooltip_item.id} </td>
-            <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+            <Fragment> {/* MediaQuery jank, it will insert a div wrapping its children when it has mutliple of them, need a manual Fragment to avoid that */}
+              <td className="nivo-tooltip__content"> {tooltip_item.name || tooltip_item.id} </td>
+              <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+            </Fragment>
           </MediaQuery>
           <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
             <td>
@@ -88,9 +90,11 @@ const DefaultPercentTooltip = ({tooltip_items, formatter, total}) => (
       ({tooltip_item}) => (
         <Fragment>
           <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
-            <td className="nivo-tooltip__content">{tooltip_item.name || tooltip_item.id}</td>
-            <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
-            <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}}/>
+            <Fragment> {/* MediaQuery jank, it will insert a div wrapping its children when it has mutliple of them, need a manual Fragment to avoid that */}
+              <td className="nivo-tooltip__content">{tooltip_item.name || tooltip_item.id}</td>
+              <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
+              <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}}/>
+            </Fragment>
           </MediaQuery>
           <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
             <td>
@@ -128,7 +132,7 @@ class InteractiveGraph extends React.Component{
 
     return (
       <Fragment>
-        <div> {/* Don't get rid of this, need it for proper functioning of the child selectors on the buttons */}
+        <div> {/* Don't get rid of this div, need it for proper functioning of the child selectors on the buttons (editors note: huh???)*/}
           { table && 
             <button
               className={classNames("btn-ib-primary","btn-ib-array")}
