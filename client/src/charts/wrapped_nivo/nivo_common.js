@@ -62,7 +62,7 @@ const TooltipFactory = ({tooltip_items, TooltipContentComponent}) => (
 const DefaultTooltip = ({tooltip_items, formatter}) => (
   <TooltipFactory
     tooltip_items={tooltip_items}
-    tooltip_content_component={
+    TooltipContentComponent={
       ({tooltip_item}) => (
         <Fragment>
           <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
@@ -84,7 +84,7 @@ const DefaultTooltip = ({tooltip_items, formatter}) => (
 const DefaultPercentTooltip = ({tooltip_items, formatter, total}) => (
   <TooltipFactory
     tooltip_items={tooltip_items}
-    tooltip_content_component={
+    TooltipContentComponent={
       ({tooltip_item}) => (
         <Fragment>
           <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
