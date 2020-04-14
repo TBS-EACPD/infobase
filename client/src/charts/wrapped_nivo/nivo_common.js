@@ -45,7 +45,7 @@ const TooltipFactory = ({tooltip_items, TooltipContentComponent}) => (
       <tbody>
         { tooltip_items.map(
           tooltip_item => ( 
-            <tr key = {tooltip_item.id}>
+            <tr key={tooltip_item.id}>
               <td className="nivo-tooltip__content">
                 <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.color}} />
               </td>
@@ -67,14 +67,18 @@ const DefaultTooltip = ({tooltip_items, formatter}) => (
       ({tooltip_item}) => (
         <Fragment>
           <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
-            <Fragment> {/* MediaQuery jank, it will insert a div wrapping its children when it has mutliple of them, need a manual Fragment to avoid that */}
-              <td className="nivo-tooltip__content"> {tooltip_item.name || tooltip_item.id} </td>
+            <Fragment>{ /* MediaQuery jank, it will insert a div wrapping its children when it has mutliple of them, need a manual Fragment to avoid that */ }
+              <td className="nivo-tooltip__content">
+                {tooltip_item.name || tooltip_item.id}
+              </td>
               <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
             </Fragment>
           </MediaQuery>
           <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
             <td>
-              <div className="nivo-tooltip__content"> {tooltip_item.name || tooltip_item.id} </div>
+              <div className="nivo-tooltip__content">
+                {tooltip_item.name || tooltip_item.id}
+              </div>
               <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
             </td>
           </MediaQuery>
@@ -91,17 +95,21 @@ const DefaultPercentTooltip = ({tooltip_items, formatter, total}) => (
       ({tooltip_item}) => (
         <Fragment>
           <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
-            <Fragment> {/* MediaQuery jank, it will insert a div wrapping its children when it has mutliple of them, need a manual Fragment to avoid that */}
-              <td className="nivo-tooltip__content">{tooltip_item.name || tooltip_item.id}</td>
-              <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
-              <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}}/>
+            <Fragment>{ /* MediaQuery jank, it will insert a div wrapping its children when it has mutliple of them, need a manual Fragment to avoid that */ }
+              <td className="nivo-tooltip__content">
+                {tooltip_item.name || tooltip_item.id}
+              </td>
+              <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}} />
+              <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}} />
             </Fragment>
           </MediaQuery>
           <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
             <td>
-              <div className="nivo-tooltip__content">{tooltip_item.name || tooltip_item.id}</div>
-              <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}}/>
-              <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}}/>
+              <div className="nivo-tooltip__content">
+                {tooltip_item.name || tooltip_item.id}
+              </div>
+              <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}} />
+              <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}} />
             </td>
           </MediaQuery>
         </Fragment>
@@ -133,7 +141,7 @@ class InteractiveGraph extends React.Component{
 
     return (
       <Fragment>
-        <div> {/* Don't get rid of this div, need it for proper functioning of the child selectors on the buttons (editors note: huh???)*/}
+        <div>{ /* Don't get rid of this div, need it for proper functioning of the child selectors on the buttons (editors note: huh???)*/ }
           { table && 
             <button
               className={classNames("btn-ib-primary","btn-ib-array")}
@@ -157,7 +165,7 @@ class InteractiveGraph extends React.Component{
           title={ table_name || nivo_common_text_maker("default_table_name") }
           body={ table }
           on_close_callback={() => this.setState({show_table: false})}
-          additional_dialog_class = {'modal-responsive'}
+          additional_dialog_class={'modal-responsive'}
         />
       </Fragment>
     );
