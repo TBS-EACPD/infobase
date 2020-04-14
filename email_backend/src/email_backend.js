@@ -18,6 +18,8 @@ import {
 
 import { throttle_requests_by_client } from './throttle_requests_by_client.js';
 
+import mongoose from 'mongoose'; 
+
 const get_request_content = (request) => (!_.isEmpty(request.body) && request.body) || (!_.isEmpty(request.query) && request.query);
 
 const log_email_request = (request, log_message) => {
@@ -149,15 +151,13 @@ const make_email_backend = (templates) => {
           response.send("200");
 
           //Sending info to MongoDB server
-          const mongoose = require('mongoose');
           const Schema = mongoose.Schema;
-          
+          const problem_schema = new Schema({}, { strict: false });
           //TODO - change this to change the database connection
           mongoose.connect('mongodb://localhost/Feedback')
             .then( () => {
 
               console.log('Connection Successful.');
-              const problem_schema = new Schema({}, { strict: false });
               const new_problem = mongoose.model('Problems', problem_schema);
               const problem_to_send = new new_problem({ 
                 type: completed_template.issue_type[0],
