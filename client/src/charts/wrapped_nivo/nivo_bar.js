@@ -32,7 +32,12 @@ const bar_table = (data, keys, indexBy, table_view_format, table_name, table_fir
     .fromPairs()
     .value();
 
-  return <DisplayTable rows={table_data} ordered_column_keys={ordered_column_keys} column_names={column_names} name={table_name || nivo_common_text_maker("default_table_name")}/>;
+  return <DisplayTable
+    rows={table_data}
+    ordered_column_keys={ordered_column_keys}
+    column_names={column_names}
+    name={table_name || nivo_common_text_maker("default_table_name")}
+  />;
 };
 
 

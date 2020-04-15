@@ -1,16 +1,17 @@
+import text from './NivoLineBarToggle.yaml';
+
 import classNames from 'classnames';
 
-import {
-  nivo_common_text_maker,
-  infobase_colors_smart,
-} from './nivo_common.js';
+import { infobase_colors_smart } from './nivo_common.js';
 import { NivoResponsiveBar } from './nivo_bar.js';
 import { NivoResponsiveLine } from './nivo_line.js';
 
 import { GraphLegend } from '../declarative_charts.js';
 import { newIBCategoryColors } from '../../core/color_schemes.js';
 import { formats } from "../../core/format.js";
+import { create_text_maker } from '../../models/text.js';
 
+const text_maker = create_text_maker(text);
 
 export class NivoLineBarToggle extends React.Component {
   constructor(props){
@@ -239,7 +240,7 @@ export class NivoLineBarToggle extends React.Component {
                     }
                   }
                 >
-                  {nivo_common_text_maker("toggle_graph")}
+                  {text_maker("toggle_graph")}
                 </button>
               </span>
             }

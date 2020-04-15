@@ -1,12 +1,3 @@
-
-zoom_in:
-  en: Zoom in
-  fr: Zoomer
-
-zoom_out:
-  en: Zoom out
-  fr: Dézoomer
-
 show_table:
   en: Show data table
   fr: Afficher le tableau de données
@@ -14,30 +5,3 @@ show_table:
 default_table_name:
   en: Table of data
   fr: Tableau de données
-
-toggle_graph:
-  en: Toggle Graph Type
-  fr: Changer le type de graphique
-
-label:
-  en: Label
-  fr: Étiquette
-
-value:
-  en: Value
-  fr: Valeur
-
-percentage:
-  en: Percentage
-  fr: Pourcentage
-
-bubble_title:
-  transform: [handlebars, markdown]
-  en: |
-    **{{inner}}** as a fraction of **{{outer}}**
-  fr: |
-    TODO
-
-bubble_all_other:
-  en: All other
-  fr: TODO
