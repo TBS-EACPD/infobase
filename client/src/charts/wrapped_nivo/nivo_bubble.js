@@ -16,25 +16,37 @@ import { DisplayTable } from '../../components/index.js';
   
 const text_maker = create_text_maker_with_nivo_common(text);
 
+
+const MIN_NODE_RADIUS = 2;
 const BubbleNode = ({ node, style, handlers, theme }) => {
-  if (style.r <= 0) return null;
+  if (style.r <= 0){
+    return null;
+  }
 
-  const min_node_radius = 2;
+  const {
+    r, x, y,
 
-  const real_r = node.data.isOuter ?
-    style.r :
-    style.r*node.data.ratio > min_node_radius ?
-      style.r*node.data.ratio :
-      min_node_radius;
+    fill,
+    color,
+    borderColor,
+    borderWidth,
+  } = style;
+
+  const {
+    isOuter,
+    ratio,
+  } = node.data;
+
+  const real_r = isOuter ? r : _.max([r*ratio, MIN_NODE_RADIUS]);
   
   return (
-    <g transform={`translate(${style.x},${style.y})`}>
+    <g transform={`translate(${x},${y})`}>
       <circle
         r={real_r}
         {...handlers}
-        fill={style.fill ? style.fill : style.color}
-        stroke={style.borderColor}
-        strokeWidth={style.borderWidth}
+        fill={fill ? fill : color}
+        stroke={borderColor}
+        strokeWidth={borderWidth}
       />
     </g>
   );
@@ -76,12 +88,11 @@ export class CircleProportionChart extends React.Component{
     };
 
 
-    const ordered_column_keys = ["name","value","percent"];
-    
+    const ordered_column_keys = ["name", "value", "percent"];
     const column_names = {
       name: text_maker("label"),
       value: text_maker("value"),
-      percentage: text_maker("percentage"),
+      percent: text_maker("percentage"),
     };
 
     const table_data = [
@@ -119,8 +130,20 @@ export class CircleProportionChart extends React.Component{
     
 
 
-    const title = <div>{text_maker("bubble_title",{outer: parent_name, inner: child_name})}</div>;  
-    const table = !disable_table_view && <DisplayTable rows={table_data} column_names={column_names} ordered_column_keys={ordered_column_keys} name={text_maker("bubble_title")} />;
+    const title = <div
+      dangerouslySetInnerHTML={{
+        __html: text_maker("bubble_title", {outer: parent_name, inner: child_name}),
+      }}
+    />;  
+
+    const table = !disable_table_view && (
+      <DisplayTable
+        rows={table_data}
+        column_names={column_names}
+        ordered_column_keys={ordered_column_keys}
+        name={text_maker("bubble_title")}
+      />
+    );
 
     const graph = (
       <Fragment>
