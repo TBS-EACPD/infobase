@@ -13,7 +13,7 @@ import { StatelessModal } from '../../components/index.js';
 import { create_text_maker } from '../../models/text.js';
 
 const nivo_common_text_maker = create_text_maker(graph_text);
-
+const create_text_maker_with_nivo_common = (additional_text) => create_text_maker([graph_text, additional_text]);
 
 const fixed_symbol_shape = ({x, y, size, fill, borderWidth, borderColor}) => (
   <rect
@@ -225,6 +225,7 @@ export {
   DefaultPercentTooltip,
   general_default_props,
   nivo_common_text_maker, 
+  create_text_maker_with_nivo_common,
   get_formatter,
   infobase_colors_smart,
   fix_legend_symbols,
