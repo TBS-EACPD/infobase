@@ -28,8 +28,8 @@ const ProportionalNode = ({ node, style, handlers }) => {
   }
 
   const {
-    // note these aren't values for the node, but for the whole graph, e.g. r is always the outer circle radius,
-    // and (x, y) is the center of the graph
+    // note these aren't values for the specific node, but for the whole graph, e.g. r is always the outer circle radius,
+    // and (x, y) is the center of the graph. Node specific values are calculated below
     r, x, y,
 
     fill,
@@ -50,7 +50,7 @@ const ProportionalNode = ({ node, style, handlers }) => {
       const proportion_ratio = node.value/node.parent.value;
 
       return _.max([
-        r*proportion_ratio,
+        r*Math.sqrt(proportion_ratio), // want the actual area to be proportional? Do the math
         MIN_NODE_RADIUS,
       ]);
     }
