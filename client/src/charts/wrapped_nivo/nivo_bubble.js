@@ -30,7 +30,9 @@ const ProportionalNode = ({ node, style, handlers }) => {
   const {
     // note these aren't values for the specific node, but for the whole graph, e.g. r is always the outer circle radius,
     // and (x, y) is the center of the graph. Node specific values are calculated below
-    r, x, y,
+    r: graph_radius,
+    x: center_x,
+    y: center_y,
 
     fill,
     color,
@@ -38,9 +40,17 @@ const ProportionalNode = ({ node, style, handlers }) => {
     borderWidth,
   } = style;
 
-  const propotional_radius = (() => {
+  const {
+    node_radius,
+    node_x,
+    node_y,
+  } = (() => {
     if ( _.isNull(node.parent) ){
-      return r;
+      return {
+        node_radius: graph_radius,
+        node_x: center_x,
+        node_y: center_y,
+      };
     } else {
 
       // need to be clear here, node.value !== graph_data.value as seen below. The config data from graph_data is stored in
@@ -49,17 +59,25 @@ const ProportionalNode = ({ node, style, handlers }) => {
       // we're doing here extra hacky
       const proportion_ratio = node.value/node.parent.value;
 
-      return _.max([
-        r*Math.sqrt(proportion_ratio), // want the actual area to be proportional? Do the math
+      const node_radius = _.max([
+        graph_radius*Math.sqrt(proportion_ratio), // do the math, make the actual area proportional
         MIN_NODE_RADIUS,
       ]);
+
+      const bottom_of_graph = center_y + graph_radius - node_radius;
+
+      return {
+        node_radius,
+        node_x: center_x,
+        node_y: bottom_of_graph,
+      };
     }
   })();
   
   return (
-    <g transform={`translate(${x},${y})`}>
+    <g transform={`translate(${node_x},${node_y})`}>
       <circle
-        r={propotional_radius}
+        r={node_radius}
         {...handlers}
         fill={fill ? fill : color}
         stroke={borderColor}
