@@ -16,14 +16,20 @@ import { DisplayTable } from '../../components/index.js';
   
 const text_maker = create_text_maker_with_nivo_common(text);
 
+// Hacky abuse of ResponsiveBubble... very fragile against nivo changes. Bonus comments left in this file to balance against this
+// Would be trivial to make this graph ourselves, only reason for doing it like this is
+// to get nivo native tooltips (and even then they're extra funky ones) and our common nivo graph utilities.
+// ... that's something worth reconsidering down the line  
 
 const MIN_NODE_RADIUS = 2;
-const BubbleNode = ({ node, style, handlers, theme }) => {
+const ProportionalNode = ({ node, style, handlers }) => {
   if (style.r <= 0){
     return null;
   }
 
   const {
+    // note these aren't values for the node, but for the whole graph, e.g. r is always the outer circle radius,
+    // and (x, y) is the center of the graph
     r, x, y,
 
     fill,
@@ -32,17 +38,28 @@ const BubbleNode = ({ node, style, handlers, theme }) => {
     borderWidth,
   } = style;
 
-  const {
-    isOuter,
-    ratio,
-  } = node.data;
+  const propotional_radius = (() => {
+    if ( _.isNull(node.parent) ){
+      return r;
+    } else {
 
-  const real_r = isOuter ? r : _.max([r*ratio, MIN_NODE_RADIUS]);
+      // need to be clear here, node.value !== graph_data.value as seen below. The config data from graph_data is stored in
+      // node.data. The value in node.value is node.data.value PLUS the sum of child values
+      // ... kind of makes sense for the standard use of this graph, but still a bit of annoying hidden logic. Makes what
+      // we're doing here extra hacky
+      const proportion_ratio = node.value/node.parent.value;
+
+      return _.max([
+        r*proportion_ratio,
+        MIN_NODE_RADIUS,
+      ]);
+    }
+  })();
   
   return (
     <g transform={`translate(${x},${y})`}>
       <circle
-        r={real_r}
+        r={propotional_radius}
         {...handlers}
         fill={fill ? fill : color}
         stroke={borderColor}
@@ -73,15 +90,15 @@ export class CircleProportionChart extends React.Component{
     const graph_data = {
       id: parent_name,
       name: parent_name,
-      value: parent_value-child_value,
+      // ... nivo bubble will roll child values back up and add them to the parent value for use (both in the graph and tooltip)
+      // so we need to remove the inner portion from the total here
+      value: parent_value - child_value,
       color: color_scale(parent_name),
-      isOuter: true,
       children: [
         {
           id: child_name,
           name: child_name,
           value: child_value,
-          ratio: child_value/parent_value,
           color: color_scale(child_name),
         },
       ],
@@ -129,7 +146,6 @@ export class CircleProportionChart extends React.Component{
     ];
     
 
-
     const title = <div
       dangerouslySetInnerHTML={{
         __html: text_maker("bubble_title", {outer: parent_name, inner: child_name}),
@@ -149,10 +165,10 @@ export class CircleProportionChart extends React.Component{
       <Fragment>
         <div style={{height: height}}>
           <ResponsiveBubble
-            root={ graph_data }
+            root={graph_data}
             identity="name"
             value="value"
-            colorBy={d=>color_scale(d.name)}
+            colorBy={d => color_scale(d.name)}
             borderColor="inherit:darker(1.6)"
             borderWidth={0}
             enableLabel={false}
@@ -163,7 +179,7 @@ export class CircleProportionChart extends React.Component{
             motionDamping={12}  
             leavesOnly={false}
             padding={0}
-            nodeComponent={BubbleNode}
+            nodeComponent={ProportionalNode}
             margin={ margin }
           />
         </div>
