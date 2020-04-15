@@ -12,7 +12,7 @@ const DeptEstimatesPerspective = ({subject, dept_total, gov_total}) => (
   <CircleProportionChart 
     height={250}
     child_value={dept_total}
-    child_name={subject.fancy_name}
+    child_name={subject.name}
     parent_value={gov_total}
     parent_name={text_maker("government_stats")}
   />
