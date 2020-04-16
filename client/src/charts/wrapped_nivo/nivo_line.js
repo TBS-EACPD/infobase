@@ -85,7 +85,7 @@ export class NivoResponsiveLine extends React.Component {
     } = this.state;
     
     const table_data = _.chain(data)
-      .map(row=>{
+      .map(row => {
         const series_name = row.id;
         return _.chain(row.data)
           .map(series => (_.isNil(series.y) ? undefined : {label: series.x, [series_name]: series.y}) )
