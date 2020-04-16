@@ -12,14 +12,14 @@ import { DisplayTable } from '../../components/index.js';
 
 
 const bar_table = (data, keys, indexBy, table_view_format, table_name, table_first_column_name) => {
-  const table_data2 = _.map(data, row => ({
+  const table_data = _.map(data, row => ({
     [indexBy]: row[indexBy],
     ..._.chain(keys)
       .map( key => [key, row[key]] )
       .fromPairs()
       .value(),
   }));
-  
+
   const column_configs = {
     [indexBy]: {
       index: 0,
@@ -39,7 +39,7 @@ const bar_table = (data, keys, indexBy, table_view_format, table_name, table_fir
   };
 
   return <DisplayTable
-    data={table_data2}
+    data={table_data}
     column_configs={column_configs}
     table_name={table_name || nivo_common_text_maker("default_table_name")}/>;
 };
