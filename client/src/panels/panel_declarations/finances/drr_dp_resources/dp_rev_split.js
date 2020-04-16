@@ -53,27 +53,59 @@ export const declare_dp_rev_split_panel = () => declare_panel({
       const table_data = _.map(planning_years, yr => {
         const year_data = _.filter(data, ({col}) => _.startsWith(col,yr));
         return {
-          year: {value: run_template(yr)},
-          net: {value: _.find(year_data, ({col: yr}) ).value},
-          gross: {value: find_year_data_ends_with(year_data, "_gross")},
-          spa: {value: find_year_data_ends_with(year_data, "_spa")},
-          rev: {value: find_year_data_ends_with(year_data, "_rev")},
+          year: run_template(yr),
+          net: _.find(year_data, ({col: yr}) ).value,
+          gross: find_year_data_ends_with(year_data, "_gross"),
+          spa: find_year_data_ends_with(year_data, "_spa"),
+          rev: find_year_data_ends_with(year_data, "_rev"),
         };
       });
-      const column_config = {
-        display: {
-          year: ({value}) => <span style={{fontWeight: 'bold'}}> {value} </span>,
-          net: ({value}) => <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={value}/>,
-          gross: ({value}) => <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={value}/>,
-          spa: ({value}) => <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={value}/>,
-          rev: ({value}) => <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={value}/>,
+      const column_configs = {
+        year: {
+          index: 1,
+          header: text_maker("year"),
+          is_sortable: true,
+          is_summable: false,
+          //sum_func: null,
+          formatter: (value) => <span style={{fontWeight: 'bold'}}> {value} </span>,
         },
-        sort: ['year', 'net', 'gross', 'spa', 'rev'],
+        net: {
+          index: 2,
+          header: text_maker("dp_gross"),
+          is_sortable: true,
+          is_summable: true,
+          //sum_func: null,
+          formatter: (value) => <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={value}/>,
+        },
+        gross: {
+          index: 3,
+          header: text_maker("dp_revenue"),
+          is_sortable: true,
+          is_summable: true,
+          //sum_func: null,
+          formatter: (value) => <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={value}/>,
+        },
+        spa: {
+          index: 4,
+          header: text_maker("dp_spa"),
+          is_sortable: true,
+          is_summable: true,
+          //sum_func: null,
+          formatter: (value) => <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={value}/>,
+        },
+        rev: {
+          index: 5,
+          header: text_maker("dp_net"),
+          is_sortable: true,
+          is_summable: true,
+          //sum_func: null,
+          formatter: (value) => <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={value}/>,
+        },
       };
 
       return {
         table_data,
-        column_config,
+        column_configs,
       };
 
     },
@@ -81,16 +113,8 @@ export const declare_dp_rev_split_panel = () => declare_panel({
       const { panel_args } = calculations;
       const {
         table_data,
-        column_config,
+        column_configs,
       } = panel_args;
-
-      const column_names = {
-        year: text_maker("year"),
-        net: text_maker("dp_gross"),
-        gross: text_maker("dp_revenue"),
-        spa: text_maker("dp_spa"),
-        rev: text_maker("dp_net"),
-      };
 
       return (
         <InfographicPanel
@@ -100,9 +124,7 @@ export const declare_dp_rev_split_panel = () => declare_panel({
           <DisplayTable
             table_name={text_maker("dp_rev_split_title")}
             data={table_data}
-            column_config={column_config}
-            column_names={column_names}
-            ordered_column_keys={_.keys(column_names)}
+            column_configs={column_configs}
           />
         </InfographicPanel>
       );

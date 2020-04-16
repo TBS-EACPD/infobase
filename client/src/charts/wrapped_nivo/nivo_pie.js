@@ -94,44 +94,36 @@ export class NivoResponsivePie extends React.Component{
       0 
     );
 
-    const graph_total = _.reduce(
-      data,
-      (sum, {value}) => sum + Math.abs(value),
-      0 
-    );
-
     const table_data = _.map(data, row => ({
-      display_values: {
-        label: row["label"],
-        percentage: formats.percentage_raw(row.value/graph_total),
-        value: get_formatter(is_money, text_formatter, true, true)(row.value),
+      label: row.label,
+      percentage: row.value/legend_total,
+      value: row.value,
+    }));
+    const column_configs = {
+      label: {
+        index: 0,
+        header: nivo_common_text_maker("label"),
+        is_searchable: true,
+        is_sortable: true,
       },
-      sort_values: {
-        label: row["label"],
-        percentage: row.value/legend_total,
-        value: row.value,
+      value: {
+        index: 1,
+        header: nivo_common_text_maker("value"),
+        is_sortable: true,
+        formatter: (value) => value ? get_formatter(is_money, text_formatter, true, true)(value) : "",
       },
-      search_values: {
-        label: row["label"],
+      percentage: {
+        index: 2,
+        header: nivo_common_text_maker("percentage"),
+        is_sortable: true,
+        formatter: (value) => formats.percentage_raw(value),
       },
-    }) );
-    
-    const column_names = {
-      label: nivo_common_text_maker("label"),
-      value: nivo_common_text_maker("value"),
-      percentage: nivo_common_text_maker("percentage"),
     };
 
-    const ordered_column_keys = ["label", "value", "percentage"];
-
-    const table = !disable_table_view && (
-      <DisplayTable
-        rows={table_data}
-        column_names={column_names}
-        ordered_column_keys={ordered_column_keys}
-        name={table_name || nivo_common_text_maker("default_table_name")}
-      />
-    );
+    const table = !disable_table_view && <DisplayTable
+      data={table_data}
+      column_configs={column_configs}
+      table_name={table_name || nivo_common_text_maker("default_table_name")} />;
 
     const graph = (
       <div 

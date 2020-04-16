@@ -77,43 +77,44 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
   const col = "{{est_in_year}}_estimates";
   const top_10_rows = _.take(data, 10);
   const total_amt = d3.sum(data, _.property(col));
-  const column_names = {
-    name: text_maker("org"),
-    voted_stat: text_maker(isVoted ? "voted" : "stat"),
-    amount: text_maker("authorities"),
-  };
-  const amt_type = window.is_a11y_mode ? "compact1_written" : "compact1";
   
+  const subj_map = _.chain(top_10_rows)
+    .map( obj => [Subject.Dept.lookup(obj.dept).name, infograph_href_template(Subject.Dept.lookup(obj.dept))] )
+    .fromPairs()
+    .value();
   const table_data = _.map(top_10_rows, obj => ({
+    name: Subject.Dept.lookup(obj.dept).name,
+    voted_stat: obj.desc,
+    amount: obj[col],
+  }));
+
+  const column_configs = {
     name: {
-      subj: Subject.Dept.lookup(obj.dept),
-      value: Subject.Dept.lookup(obj.dept).name,
+      index: 0,
+      header: text_maker("org"),
+      is_sortable: true,
+      is_searchable: true,
+      formatter: (value) => subj_map[value] ? <a href={subj_map[value]}> {value} </a> : value,
     },
     voted_stat: {
-      value: obj.desc,
+      index: 1,
+      header: text_maker(isVoted ? "voted" : "stat"),
+      is_sortable: true,
+      is_searchable: true,
     },
     amount: {
-      amt_type: amt_type,
-      value: obj[col],
-    },
-  }));
-  const column_config = {
-    total: { amount: amt_type },
-    sort: ["name", "voted_stat", "amount"],
-    search: ["name", "voted_stat"],
-    display: {
-      name: ({subj, value}) => subj ? <a href={infograph_href_template(subj)}> {value} </a> : value,
-      amount: ({amt_type, value}) => <Format type={amt_type} content={value} />,
+      index: 2,
+      header: text_maker("authorities"),
+      is_sortable: true,
+      is_summable: true,
+      formatter: (value) => <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={value} />,
     },
   };
 
   const data_with_complement_amt = _.concat(table_data, [{
-    name: { value: "" },
-    voted_stat: { value: text_maker(isVoted ? 'all_other_voted_items' : 'all_other_stat_items') },
-    amount: {
-      amt_type: amt_type,
-      value: _.last(data)[col],
-    },
+    name: "",
+    voted_stat: text_maker(isVoted ? 'all_other_voted_items' : 'all_other_stat_items'),
+    amount: _.last(data)[col],
   }]);
 
   const packing_data = {
@@ -153,9 +154,7 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
       <Col isGraph size={6}>
         <DisplayTable
           data={data_with_complement_amt}
-          column_names={column_names}
-          ordered_column_keys={_.keys(column_names)}
-          column_config={column_config}
+          column_configs={column_configs}
           unsorted_initial={true}
         />
       </Col>

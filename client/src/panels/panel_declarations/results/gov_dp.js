@@ -27,7 +27,7 @@ const current_dp_year = result_docs[current_dp_key].year;
 const current_dp_corresponding_drr_year = _.toNumber(result_docs[current_dp_key].year_short) + 1;
 
 
-const DpSummary = ({counts, rows_of_counts_by_dept, column_config, column_names, late_dept_count}) => {
+const DpSummary = ({counts, rows_of_counts_by_dept, column_configs, column_names, late_dept_count}) => {
   const current_dp_counts_with_generic_keys = filter_and_genericize_doc_counts(counts, current_dp_key);
   return (
     <Fragment>
@@ -47,7 +47,7 @@ const DpSummary = ({counts, rows_of_counts_by_dept, column_config, column_names,
         <DisplayTable
           table_name={"Government DP"}
           data={rows_of_counts_by_dept}
-          column_config={column_config}
+          column_configs={column_configs}
           column_names={column_names}
           ordered_column_keys={_.keys(column_names)}
         />
@@ -65,40 +65,43 @@ export const declare_gov_dp_panel = () => declare_panel({
     calculate: () => {      
       const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${current_dp_key}_results`] > 0 );
 
-      const column_keys = {
-        [`${current_dp_key}_results`]: text_maker("results"),
-        [`${current_dp_key}_indicators`]: text_maker("indicators"),
-      };
+      const subj_map = _.chain(dept_counts)
+        .map(row => [ Dept.lookup(row.id).name, link_to_results_infograph(Dept.lookup(row.id)) ])
+        .fromPairs()
+        .value();
 
       const rows_of_counts_by_dept = _.map(dept_counts, row => ({
-        subject_name: {value: Dept.lookup(row.id).name},
-        ..._.chain(column_keys)
-          .keys()
-          .map(column_key => [ column_key, {value: row[column_key]} ])
-          .fromPairs()
-          .value(),
+        subject_name: Dept.lookup(row.id).name,
+        [`${current_dp_key}_results`]: row[`${current_dp_key}_results`],
+        [`${current_dp_key}_indicators`]: row[`${current_dp_key}_indicators`],
       }));
-      const column_config = {
-        display: {
-          subject_name: ({subject, value}) => subject ? <a href={link_to_results_infograph(subject)}> {value} </a> : value,
+      const column_configs = {
+        subject_name: {
+          index: 0,
+          header: text_maker("org"),
+          is_sortable: true,
+          is_searchable: true,
+          formatter: (value) => subj_map[value] ? <a href={subj_map[value]}> {value} </a> : value,
         },
-        sort: _.chain(column_keys)
-          .keys()
-          .concat(["subject_name"])
-          .value(),
-        search: ["subject_name"],
-        total: _.chain(column_keys)
-          .keys()
-          .map(key => [key, "big_int"])
-          .fromPairs()
-          .value(),
+        [`${current_dp_key}_results`]: {
+          index: 1,
+          header: text_maker("results"),
+          is_sortable: true,
+          is_summable: true,
+          formatter: "big_int",
+        },
+        [`${current_dp_key}_indicators`]: {
+          index: 2,
+          header: text_maker("indicators"),
+          is_sortable: true,
+          is_summable: true,
+          formatter: "big_int",
+        },
       };
-      const column_names = _.assignIn({subject_name: text_maker("org")}, column_keys);
       const late_dept_count = result_docs[current_dp_key].late_results_orgs.length;
 
       return { 
-        column_names,
-        column_config,
+        column_configs,
         rows_of_counts_by_dept,
         late_dept_count,
       };
@@ -111,7 +114,7 @@ export const declare_gov_dp_panel = () => declare_panel({
           column_names,
           rows_of_counts_by_dept,
           late_dept_count,
-          column_config,
+          column_configs,
         },
       } = calculations;
       const counts = ResultCounts.get_gov_counts();
@@ -128,7 +131,7 @@ export const declare_gov_dp_panel = () => declare_panel({
             column_names={column_names}
             rows_of_counts_by_dept={rows_of_counts_by_dept}
             late_dept_count={late_dept_count}
-            column_config={column_config}
+            column_configs={column_configs}
           />
         </InfographicPanel>
       ); 

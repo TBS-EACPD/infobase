@@ -12,32 +12,36 @@ import { DisplayTable } from '../../components/index.js';
 
 
 const bar_table = (data, keys, indexBy, table_view_format, table_name, table_first_column_name) => {
-  const table_data = _.map(data, row => ({
-    display_values: _.mapValues(
-      row,
-      (values, key) => key === indexBy ? values : table_view_format(values)
-    ),
-    sort_values: {
-      [indexBy]: row[indexBy],
-      ...(_.omit(row, indexBy)),
+  const table_data2 = _.map(data, row => ({
+    [indexBy]: row[indexBy],
+    ..._.chain(keys)
+      .map( key => [key, row[key]] )
+      .fromPairs()
+      .value(),
+  }));
+  
+  const column_configs = {
+    [indexBy]: {
+      index: 0,
+      header: table_first_column_name || nivo_common_text_maker("label"),
+      is_searchable: true,
+      is_sortable: true,
     },
-    search_values: {
-      [indexBy]: row[indexBy],
-    },
-  }) );
-
-  const ordered_column_keys = _.concat([indexBy],keys);
-  const column_names = _.chain(ordered_column_keys)
-    .zip( _.concat([table_first_column_name || nivo_common_text_maker("label")], keys) )
-    .fromPairs()
-    .value();
+    ..._.chain(keys)
+      .map((key, idx) => [key, {
+        index: idx + 1,
+        header: key,
+        is_sortable: true,
+        formatter: (value) => table_view_format(value),
+      }])
+      .fromPairs()
+      .value(),
+  };
 
   return <DisplayTable
-    rows={table_data}
-    ordered_column_keys={ordered_column_keys}
-    column_names={column_names}
-    name={table_name || nivo_common_text_maker("default_table_name")}
-  />;
+    data={table_data2}
+    column_configs={column_configs}
+    table_name={table_name || nivo_common_text_maker("default_table_name")}/>;
 };
 
 

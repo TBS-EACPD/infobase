@@ -95,49 +95,80 @@ class Goco extends React.Component {
 
     const ordered_column_keys = [sa_text, spending_text, ftes_text];
     const column_names = ordered_column_keys;
-    const rows = _.map(Tag.gocos_by_spendarea, sa => {
-      const display_values = {
-        [text_maker("spending_area")]: sa.name,
-        [spending_text]: spending_table_formatter(total_fte_spend[sa.id].total_child_spending),
-        [ftes_text]: fte_table_formatter(total_fte_spend[sa.id].total_child_ftes),
-      };
-      const sort_values = {
-        [text_maker("spending_area")]: sa.name,
-        [spending_text]: total_fte_spend[sa.id].total_child_spending,
-        [ftes_text]: total_fte_spend[sa.id].total_child_ftes,
-      };
-      const search_values = {
-        [text_maker("spending_area")]: sa.name,
-      };
-      return {display_values, sort_values, search_values};
-    });
+    const spend_map = _.chain(Tag.gocos_by_spendarea)
+      .map(sa => {
+        const total_spending = total_fte_spend[sa.id].total_child_spending;
+        return [total_spending, spending_table_formatter(total_spending) ];
+      })
+      .fromPairs()
+      .value();
+    const ftes_map = _.chain(Tag.gocos_by_spendarea)
+      .map(sa => {
+        const total_ftes = total_fte_spend[sa.id].total_child_ftes;
+        return [total_ftes, spending_table_formatter(total_ftes) ];
+      })
+      .fromPairs()
+      .value();
+    const parent_table_data = _.map(Tag.gocos_by_spendarea, sa => ({
+      [sa_text]: sa.name,
+      [spending_text]: total_fte_spend[sa.id].total_child_spending,
+      [ftes_text]: total_fte_spend[sa.id].total_child_ftes,
+    }));
+    const parent_table_column_configs = {
+      [sa_text]: {
+        index: 0,
+        header: sa_text,
+        is_searchable: true,
+      },
+      [spending_text]: {
+        index: 1,
+        header: spending_text,
+        is_sortable: true,
+        formatter: (value) => spend_map[value],
+      },
+      [ftes_text]: {
+        index: 2,
+        header: ftes_text,
+        is_sortable: true,
+        formatter: (value) => ftes_map[value],
+      },
+    };
 
-    const custom_table = <DisplayTable rows={rows} ordered_column_keys={ordered_column_keys} column_names={column_names} table_name={"TODO"}/>;     
+    const custom_table = <DisplayTable
+      data={parent_table_data}
+      column_configs={parent_table_column_configs} />;
 
     const child_tables = _.map(Tag.gocos_by_spendarea, sa => {
-      const rows = _.map(sa.children_tags, goco => {
-        const actual_spending = programSpending.q(goco).sum(spend_col);
-        const actual_ftes = programFtes.q(goco).sum(fte_col);
-
-        return {
-          display_values: {
-            [sa_text]: goco.name,
-            [spending_text]: spending_table_formatter(actual_spending),
-            [ftes_text]: fte_table_formatter(actual_ftes),
-          },
-          sort_values: {
-            [sa_text]: goco.name,
-            [spending_text]: actual_spending,
-            [ftes_text]: actual_ftes,
-          },
-          search_values: {
-            [sa_text]: goco.name,
-          },
-        };
-      });
+      const child_table_data = _.map(sa.children_tags, goco => ({
+        [sa_text]: goco.name,
+        [spending_text]: programSpending.q(goco).sum(spend_col),
+        [ftes_text]: programFtes.q(goco).sum(fte_col),
+      }));
+      const child_table_column_configs = {
+        [sa_text]: {
+          index: 0,
+          header: sa_text,
+          is_searchable: true,
+          is_sortable: true,
+        },
+        [spending_text]: {
+          index: 1,
+          header: spending_text,
+          is_sortable: true,
+          formatter: (value) => spending_table_formatter(value),
+        },
+        [ftes_text]: {
+          index: 2,
+          header: ftes_text,
+          is_sortable: true,
+          formatter: (value) => fte_table_formatter(value),
+        },
+      };
       return {
         key: sa.name,
-        table: <DisplayTable rows={rows} ordered_column_keys={ordered_column_keys} column_names={column_names} table_name={"TODO"}/>,
+        table: <DisplayTable
+          data={child_table_data}
+          column_configs={child_table_column_configs} />,
       };
     });
 

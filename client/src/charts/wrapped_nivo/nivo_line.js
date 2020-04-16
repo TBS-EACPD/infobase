@@ -95,32 +95,32 @@ export class NivoResponsiveLine extends React.Component {
       .compact()
       .groupBy('label')
       .map( _.spread(_.merge) )
-      .map( row=> ({
-        display_values: _.mapValues(
-          row,
-          (values, key) => key === 'label' ? values : get_formatter(is_money,text_formatter,true,true)(values)
-        ),
-        sort_values: row,
-        search_values: {label: row.label},
+      .map( row => ({
+        ..._.mapValues(row),
       }))
       .value();
-    const ordered_column_keys = _.concat(
-      ['label'],
-      table_ordered_column_keys || _.map(data,'id')
-    );
-    const column_names = _.concat(
-      [table_first_column_name || text_maker("label")],
-      table_ordered_column_keys || _.map(data,'id')
-    );
+    const column_configs = {
+      label: {
+        index: 0,
+        header: table_first_column_name || text_maker("label"),
+        is_sortable: true,
+        is_searchable: true,
+      },
+      ..._.chain(table_ordered_column_keys || _.map(data,'id'))
+        .map( (col, idx) => [col, {
+          index: idx + 1,
+          header: col,
+          is_sortable: true,
+          formatter: (value) => value ? get_formatter(is_money,text_formatter,true,true)(value) : "",
+        }] )
+        .fromPairs()
+        .value(),
+    };
 
-    const table = !disable_table_view && (
-      <DisplayTable 
-        rows={table_data}
-        column_names={column_names}
-        ordered_column_keys={ordered_column_keys}
-        name={table_name || text_maker("default_table_name")}
-      />
-    );
+    const table = !disable_table_view && <DisplayTable
+      data={table_data}
+      column_configs={column_configs}
+      table_name={table_name || text_maker("default_table_name")} />;
 
     const zoom_button = (!disable_y_axis_zoom && !enableArea) ?
       <button

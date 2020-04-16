@@ -29,7 +29,7 @@ class GovDRR extends React.Component {
       num_depts,
       verbose_gov_counts,
       late_dept_count,
-      column_config,
+      column_configs,
     } = this.props;
 
     return (
@@ -56,7 +56,7 @@ class GovDRR extends React.Component {
               column_names={column_names}
               ordered_column_keys={_.keys(column_names)}
               data={rows_of_counts_by_dept}
-              column_config={column_config}
+              column_configs={column_configs}
             />
           </HeightClippedGraph>
         </div>
@@ -86,39 +86,49 @@ export const declare_gov_drr_panel = () => declare_panel({
         .fromPairs()
         .value();
       
+      const subj_map = _.chain(dept_counts)
+        .map(row => [ Dept.lookup(row.id).name, link_to_results_infograph(Dept.lookup(row.id)) ])
+        .fromPairs()
+        .value();
+      
       const rows_of_counts_by_dept = _.map(dept_counts, row => ({
-        subject_name: {subject: Dept.lookup(row.id), value: Dept.lookup(row.id).name},
+        subject_name: Dept.lookup(row.id).name,
         ..._.chain(column_keys)
           .keys()
-          .map(column_key => [ column_key, { value: row[column_key] } ])
+          .map(column_key => [ column_key, row[column_key] ])
           .fromPairs()
           .value(),
       }));
-      const column_config = {
-        display: {
-          subject_name: ({subject, value}) => subject ? <a href={link_to_results_infograph(subject)}> {value} </a> : value,
+      const column_configs = {
+        subject_name: {
+          index: 0,
+          header: text_maker("org"),
+          is_sortable: true,
+          is_searchable: true,
+          formatter: (value) => subj_map[value] ? <a href={subj_map[value]}> {value} </a> : value,
         },
-        sort: _.chain(column_keys)
+        ..._.chain(column_keys)
           .keys()
-          .concat(["subject_name"])
-          .value(),
-        search: ["subject_name"],
-        total: _.chain(column_keys)
-          .keys()
-          .map(key => [key, "big_int"])
+          .map( (column_key, index) => [column_key, {
+            index: index + 1,
+            header: column_keys[column_key],
+            is_sortable: true,
+            is_summable: true,
+            formatter: "big_int",
+          }] )
           .fromPairs()
           .value(),
       };
       const column_names = _.assignIn({subject_name: text_maker("org")}, column_keys);
       const late_dept_count = result_docs[current_drr_key].late_results_orgs.length;
-  
+
       return {
         gov_counts,
         rows_of_counts_by_dept,
         column_names,
         verbose_gov_counts,
         num_depts,
-        column_config,
+        column_configs,
         late_dept_count,
       };
     },
