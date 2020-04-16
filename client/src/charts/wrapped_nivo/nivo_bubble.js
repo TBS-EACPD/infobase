@@ -10,16 +10,15 @@ import {
   get_formatter,
 } from './nivo_common.js';
 
-import { formats } from "../../core/format.js";
+import { formats } from '../../core/format.js';
 import { newIBCategoryColors } from '../../core/color_schemes.js';
 import { DisplayTable } from '../../components/index.js';
   
 const text_maker = create_text_maker_with_nivo_common(text);
 
-// Hacky abuse of ResponsiveBubble... very fragile against nivo changes. Bonus comments left in this file to balance against this
-// Would be trivial to make this graph ourselves, only reason for doing it like this is
-// to get nivo native tooltips (and even then they're extra funky ones) and our common nivo graph utilities.
-// ... that's something worth reconsidering down the line  
+// Hacky abuse of ResponsiveBubble... very fragile against nivo changes. Bonus comments left in this file to balance against that
+// Would be trivial to make this graph ourselves, only reason for doing it like this is to get nivo native tooltips (and even 
+// then they're extra customized ones) and our common nivo graph utilities ...consider rethinking this though
 
 const MIN_NODE_RADIUS = 2;
 const ProportionalNode = ({ node, style, handlers }) => {
@@ -64,12 +63,15 @@ const ProportionalNode = ({ node, style, handlers }) => {
         MIN_NODE_RADIUS,
       ]);
 
-      const bottom_of_graph = center_y + graph_radius - node_radius;
+      // this y position will place the bottom of the inner circle just barely above the bottom of the outer circle.
+      // Easier to judge proptions than when it's centered, and the slight offset stops the the svg's edges from
+      // overlaping and looking jagged
+      const node_y = center_y + (graph_radius - node_radius) - 1;
 
       return {
         node_radius,
         node_x: center_x,
-        node_y: bottom_of_graph,
+        node_y,
       };
     }
   })();
@@ -82,6 +84,7 @@ const ProportionalNode = ({ node, style, handlers }) => {
         fill={fill ? fill : color}
         stroke={borderColor}
         strokeWidth={borderWidth}
+        shapeRendering={"geometricPrecision"}
       />
     </g>
   );
