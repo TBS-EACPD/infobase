@@ -199,46 +199,48 @@ class SimpleView extends React.Component {
     } = this.props;
 
     const first_col_nick = deptBreakoutMode ? 'dept' : dimension;
-    const column_names = {
-      [deptBreakoutMode ? 'dept' : dimension]: text_maker(deptBreakoutMode ? 'org' : dimension),
-      ..._.chain( columns)
-        .map( col => [ col.nick, col.fully_qualified_name ] )
+    const subj_map = _.chain(rows)
+      .map(row => {
+        const row_first_col_nick_value = row[first_col_nick];
+        return [ first_col_nick === "dept" ? Dept.lookup(row_first_col_nick_value).name : row_first_col_nick_value,
+        first_col_nick === "dept" ?
+          granular_rpb_link_for_org(this.props, Dept.lookup(row_first_col_nick_value)) :
+          granular_rpb_link_for_filter(this.props, row_first_col_nick_value) ];
+      })
+      .fromPairs()
+      .value();
+    const data_type_map = _.chain(columns)
+      .map(col => [col.nick, col.type])
+      .fromPairs()
+      .value();
+
+    const column_configs = {
+      [first_col_nick]: {
+        index: 0,
+        header: text_maker(deptBreakoutMode ? 'org' : dimension),
+        is_sortable: true,
+        is_searchable: true,
+        formatter: (value) => subj_map[value] ? <a href={subj_map[value]}> {value} </a> : value,
+      },
+      ..._.chain(columns)
+        .map( (col, idx) => 
+          [col.nick, {
+            index: idx + 1,
+            header: col.fully_qualified_name,
+            is_sortable: true,
+            is_summable: true,
+            formatter: data_type_map[col.nick],
+          }]
+        )
         .fromPairs()
         .value(),
     };
 
-    const column_config = {
-      sort: _.keys(column_names),
-      search: [ first_col_nick ],
-      display: {
-        [first_col_nick]: ({row_value, value}) => (
-          <a href={ first_col_nick === "dept" ?
-            granular_rpb_link_for_org(this.props, Dept.lookup(row_value)) :
-            granular_rpb_link_for_filter(this.props, row_value)}>
-            {value}
-          </a>
-        ),
-        ..._.chain(columns)
-          .map( col => 
-            [col.nick, ({value}) => <Format key={col.nick} type={col.type} content={value}/>]
-          )
-          .fromPairs()
-          .value(),
-      },
-      total: _.chain(columns)
-        .map( ({nick, type}) => [nick, type] )
-        .fromPairs()
-        .value(),
-    };
     const dp_data = _.map(rows, row => 
       ({
-        [first_col_nick]: {
-          row_value: row[first_col_nick],
-          value: first_col_nick === "dept" ?
-            Dept.lookup(row[first_col_nick]).name : row[first_col_nick],
-        },
+        [first_col_nick]: first_col_nick === "dept" ? Dept.lookup(row[first_col_nick]).name : row[first_col_nick],
         ..._.chain(columns)
-          .map( col => [ col.nick, { value: row[col.nick] } ] )
+          .map( col => [ col.nick, row[col.nick] ] )
           .fromPairs()
           .value(),
       })
@@ -247,9 +249,7 @@ class SimpleView extends React.Component {
     return <DisplayTable
       table_name="simple_table"
       data={dp_data}
-      column_names={column_names}
-      ordered_column_keys={_.keys(column_names)}
-      column_config={column_config}
+      column_configs={column_configs}
     />;
   }
 }

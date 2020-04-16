@@ -140,50 +140,42 @@ class GranularView extends React.Component {
       ...non_dept_key_cols,
       ...data_columns,
     ];
-    const column_names = _.chain([
-      {nick: "dept", fully_qualified_name: text_maker("org")},
-      ...cols,
-    ])
-      .map( ({nick, fully_qualified_name}) => [nick, fully_qualified_name] )
-      .fromPairs()
-      .value();
+    const is_matched_undefined = (column_collection, nick) =>
+      _.isUndefined( _.find(column_collection, col => col.nick===nick) );
     
-    const table_data = _.map(shown_rows, row => ({
-      dept: {value: Dept.lookup(row.dept).name},
-      ..._.chain(cols)
-        .map( ({nick}) => [ nick, {value: row[nick]} ] )
-        .fromPairs()
-        .value(),
-    }));
-    const column_config = {
-      display: {
-        dept: ({value}) => <Format type={'wide-str'} content={value} />,
-        ..._.chain(cols)
-          .map( ({nick, type}) => [ nick, ({value}) => type ? <Format type={type} content={value}/> : value ] )
-          .fromPairs()
-          .value(),
+    const column_configs = {
+      dept: {
+        index: 0,
+        header: text_maker('org'),
+        is_sortable: true,
+        is_searchable: true,
+        formatter: "wide-str",
       },
-      sort: _.chain(cols)
-        .map( ({nick}) => nick)
-        .concat(["dept"])
-        .value(),
-      search: _.chain(non_dept_key_cols)
-        .map( ({nick}) => nick)
-        .concat(["dept"])
-        .value(),
-      total: _.chain(data_columns)
-        .map( ({nick, type}) => [nick, type])
+      ..._.chain(cols)
+        .map( ({nick, type, fully_qualified_name}, idx) => [ nick, {
+          index: idx + 1,
+          header: fully_qualified_name,
+          is_sortable: true,
+          is_searchable: !is_matched_undefined(non_dept_key_cols, nick),
+          is_summable: !is_matched_undefined(data_columns, nick),
+          formatter: type,
+        }] )
         .fromPairs()
         .value(),
     };
+    const table_data = _.map(shown_rows, row => ({
+      dept: Dept.lookup(row.dept).name,
+      ..._.chain(cols)
+        .map( ({nick}) => [ nick, row[nick] ] )
+        .fromPairs()
+        .value(),
+    }));
 
     return (
       <div>
         <DisplayTable
           data={table_data}
-          column_names={column_names}
-          column_config={column_config}
-          ordered_column_keys={_.keys(column_names)}
+          column_configs={column_configs}
         />
 
         {!excel_mode && pages.length > 1 && 

@@ -61,7 +61,6 @@ const get_indicators = (subject, doc) => {
     .value();
 };
 
-
 const subject_link = (node) => (
   <span>
     <a href={infograph_href_template(node.data.subject,"results")}>
@@ -74,56 +73,67 @@ const subject_link = (node) => (
   </span>
 );
 
-
 const indicator_table_from_list = (indicator_list) => {
-  const column_names = {
-    cr_or_program: text_maker("cr_or_program"),
-    indicator: text_maker("indicator"),
-    target: text_maker("target"),
-    target_result: text_maker("target_result"),
-    date_to_achieve: text_maker("date_to_achieve"),
-    status: text_maker("status"),
+  const subject_link_map = _.chain(indicator_list)
+    .map(ind => [ind.parent_node.data.name, subject_link(ind.parent_node)])
+    .fromPairs()
+    .value();
+  const indicator_id_map = _.chain(indicator_list)
+    .map(ind => [ind.indicator.name, `#indicator/${ind.indicator.id}`])
+    .fromPairs()
+    .value();
+  const column_configs = {
+    cr_or_program: {
+      index: 0,
+      header: text_maker("cr_or_program"),
+      is_sortable: true,
+      is_searchable: true,
+      formatter: (value) => subject_link_map[value],
+    },
+    indicator: {
+      index: 1,
+      header: text_maker("indicator"),
+      is_sortable: true,
+      is_searchable: true,
+      formatter: (value) => <a href={indicator_id_map[value]}> {value} </a>,
+    },
+    target: {
+      index: 2,
+      header: text_maker("target"),
+    },
+    target_result: {
+      index: 3,
+      header: text_maker("target_result"),
+    },
+    date_to_achieve: {
+      index: 4,
+      header: text_maker("date_to_achieve"),
+      is_sortable: true,
+    },
+    status: {
+      index: 5,
+      header: text_maker("status"),
+      is_sortable: true,
+      formatter: (value) => <Fragment>
+        <span aria-hidden="true" className="copyable-hidden">{result_statuses[value].text}</span>
+        {window.innerWidth < breakpoints.mediumDevice ? status_icons[value] : large_status_icons[value]}
+      </Fragment>,
+    },
   };
 
-  const rows = _.map(
-    indicator_list, 
-    ind => {
-      const display_values = {
-        cr_or_program: subject_link(ind.parent_node),
-        indicator: <a href={`#indicator/${ind.indicator.id}`}>{ind.indicator.name}</a>,
-        target: indicator_target_text(ind.indicator),
-        target_result: indicator_actual_text(ind.indicator),
-        date_to_achieve: ind.indicator.target_date,
-        status: <Fragment>
-          <span aria-hidden="true" className="copyable-hidden">{result_statuses[ind.indicator.status_key].text}</span>
-          {window.innerWidth < breakpoints.mediumDevice ? status_icons[ind.indicator.status_key] : large_status_icons[ind.indicator.status_key]}
-        </Fragment>,
-      };
-
-      const sort_values = {
-        cr_or_program: ind.parent_node.data.name,
-        indicator: ind.indicator.name,
-        date_to_achieve: ind.indicator.target_year ? ind.indicator.target_year + ind.indicator.target_month/12 : Infinity,
-        status: _.indexOf(ordered_status_keys, ind.indicator.status_key),
-      };
-
-      const search_values = {
-        cr_or_program: ind.parent_node.data.name,
-        indicator: ind.indicator.name,
-      };
-
-      return {
-        display_values,
-        sort_values,
-        search_values,
-      };
-    }
-  );
+  const table_data = _.map(indicator_list, ind => ({
+    cr_or_program: ind.parent_node.data.name,
+    indicator: ind.indicator.name,
+    target: indicator_target_text(ind.indicator),
+    target_result: indicator_actual_text(ind.indicator),
+    date_to_achieve: ind.indicator.target_date,
+    status: ind.indicator.status_key,
+  }));
+  
   return <DisplayTable 
     table_name={text_maker("result_flat_table_title", {year: current_drr_year})}
-    column_names={column_names}
-    ordered_column_keys={_.keys(column_names)}
-    rows={rows}
+    data={table_data}
+    column_configs={column_configs}
   />;
 };
 
