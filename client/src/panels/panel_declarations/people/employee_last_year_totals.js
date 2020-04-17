@@ -58,7 +58,7 @@ export const declare_employee_last_year_totals_panel = () => declare_panel({
                 child_value={dept_emp_value}
                 child_name={text_maker('dept_headcount', {subject})}
                 parent_value={gov_emp_value}
-                parent_name={text_maker('the_fps')}
+                parent_name={text_maker('all_fps')}
               />
             </Col>
           </StdPanel>
