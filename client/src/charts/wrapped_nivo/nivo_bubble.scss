@@ -1,0 +1,13 @@
+@import "../../common_css/common-variables";
+
+.proportional-bubble-tooltip {
+  @media(min-width: $minSmallDevice){
+    width: 400px;
+  }
+}
+
+.proportional-bubble-tooltip__legend_icon {
+  height: 12px;
+  width: 12px;
+  border-radius: 100%;
+}
