@@ -47,6 +47,7 @@ export const declare_last_year_g_and_c_perspective_panel = () => declare_panel({
           title={text_maker("last_year_g_and_c_perspective_title")}
           footnotes={footnotes}
           sources={sources}
+          allowOverflow={true}
         >
           <Col size={6} isText>
             <TM k="dept_last_year_g_and_c_perspective_text" args={info} />
