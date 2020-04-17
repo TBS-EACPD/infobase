@@ -12,6 +12,7 @@ import {
   get_formatter,
 } from './nivo_common.js';
 
+import { formats } from "../../core/format.js";
 import { breakpoints } from '../../core/breakpoint_defs.js';
 import { newIBCategoryColors } from '../../core/color_schemes.js';
 import { DisplayTable } from '../../components/index.js';
@@ -134,10 +135,10 @@ export class CircleProportionChart extends React.Component{
           <tbody>
             { _.map(
               [
-                [parent_name, parent_value],
-                [child_name, child_value],
+                [parent_name, parent_value, 1],
+                [child_name, child_value, child_value/parent_value],
               ],
-              ([name, value]) => <tr key={name}>
+              ([name, value, percent]) => <tr key={name}>
                 <td className="nivo-tooltip__content">
                   <div
                     className="proportional-bubble-tooltip__legend_icon"
@@ -149,13 +150,17 @@ export class CircleProportionChart extends React.Component{
                     <td className="nivo-tooltip__content">
                       {name}
                     </td>
-                    <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: value_formatter(value)}} />
+                    <td className="nivo-tooltip__content" 
+                      dangerouslySetInnerHTML={{__html: value_formatter(value)}}
+                    />
+                    <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formats.smart_percentage1(percent)}} />
                   </Fragment>
                 </MediaQuery>
                 <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
                   <td>
                     <div className="nivo-tooltip__content">{name}</div>
                     <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: value_formatter(value)}} />
+                    <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formats.smart_percentage1(percent)}} />
                   </td>
                 </MediaQuery>
               </tr>
@@ -233,6 +238,5 @@ export class CircleProportionChart extends React.Component{
 };
 CircleProportionChart.defaultProps = {
   ...general_default_props,
-  isInteractive: false,
   margin: { top: 15, right: 0, bottom: 15, left: 0 },
 };
