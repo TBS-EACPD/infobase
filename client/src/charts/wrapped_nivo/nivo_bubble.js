@@ -1,7 +1,9 @@
+import './nivo_bubble.scss';
 import text from './nivo_bubble.yaml';
 
 import { ResponsiveBubble } from '@nivo/circle-packing';
 import { Fragment } from 'react';
+import MediaQuery from 'react-responsive';
 
 import {
   InteractiveGraph,
@@ -10,7 +12,7 @@ import {
   get_formatter,
 } from './nivo_common.js';
 
-import { formats } from '../../core/format.js';
+import { breakpoints } from '../../core/breakpoint_defs.js';
 import { newIBCategoryColors } from '../../core/color_schemes.js';
 import { DisplayTable } from '../../components/index.js';
   
@@ -107,6 +109,7 @@ export class CircleProportionChart extends React.Component{
     } = this.props;
 
     const color_scale = d3.scaleOrdinal().range(newIBCategoryColors);
+    const value_formatter= get_formatter(is_money, text_formatter, true, true);
 
     const graph_data = {
       id: parent_name,
@@ -124,6 +127,43 @@ export class CircleProportionChart extends React.Component{
         },
       ],
     };
+
+    const tooltip = () => (
+      <div className="proportional-bubble-tooltip" style={{color: window.infobase_color_constants.textColor}}>
+        <table className="nivo-tooltip">
+          <tbody>
+            { _.map(
+              [
+                [parent_name, parent_value],
+                [child_name, child_value],
+              ],
+              ([name, value]) => <tr key={name}>
+                <td className="nivo-tooltip__content">
+                  <div
+                    className="proportional-bubble-tooltip__legend_icon"
+                    style={{backgroundColor: color_scale(name)}}
+                  />
+                </td>
+                <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
+                  <Fragment>{ /* MediaQuery jank, it will insert a div wrapping its children when it has mutliple of them, need a manual Fragment to avoid that */ }
+                    <td className="nivo-tooltip__content">
+                      {name}
+                    </td>
+                    <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: value_formatter(value)}} />
+                  </Fragment>
+                </MediaQuery>
+                <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
+                  <td>
+                    <div className="nivo-tooltip__content">{name}</div>
+                    <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: value_formatter(value)}} />
+                  </td>
+                </MediaQuery>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    );
 
     const title = <div
       dangerouslySetInnerHTML={{
@@ -154,7 +194,7 @@ export class CircleProportionChart extends React.Component{
             padding={0}
             nodeComponent={ProportionalNode}
             margin={ margin }
-            // TODO: only thing left is the custom tooltip. Remember to give it cirlces instead of squares and etc
+            tooltip={tooltip}
           />
         </div>
         <div style={{textAlign: "center"}}>
@@ -174,7 +214,7 @@ export class CircleProportionChart extends React.Component{
       ([label, value]) => ({
         display_values: {
           label,
-          value: get_formatter(is_money, text_formatter, true, true)(value),
+          value: value_formatter(value),
         },
         sort_values: {label, value},
       })
@@ -183,7 +223,7 @@ export class CircleProportionChart extends React.Component{
       <DisplayTable
         rows={table_data}
         column_names={column_names}
-        ordered_column_keys={ordered_column_keys}s
+        ordered_column_keys={ordered_column_keys}
       />
     );
 
