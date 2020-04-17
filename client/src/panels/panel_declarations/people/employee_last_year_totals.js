@@ -38,7 +38,7 @@ export const declare_employee_last_year_totals_panel = () => declare_panel({
       if(window.is_a11y_mode){
         return;
       } else {
-        const {info, panel_args} = calculations;
+        const {subject, info, panel_args} = calculations;
         
         const dept_emp_value = panel_args.vals[1].value;
         const gov_emp_value = panel_args.vals[0].value;
@@ -55,9 +55,9 @@ export const declare_employee_last_year_totals_panel = () => declare_panel({
                 height={200}
                 is_money={false}
                 child_value={dept_emp_value}
-                child_name={info.subject.name}
+                child_name={text_maker('dept_headcount', {subject})}
                 parent_value={gov_emp_value}
-                parent_name={text_maker("fps")}
+                parent_name={text_maker('the_fps')}
               />
             </Col>
           </StdPanel>

@@ -7,19 +7,6 @@ import {
   declare_panel,
 } from "../../shared.js";
 
-const DeptEstimatesPerspective = ({subject, dept_total, gov_total}) => (
-
-  <CircleProportionChart 
-    height={250}
-    child_value={dept_total}
-    child_name={subject.name}
-    parent_value={gov_total}
-    parent_name={text_maker("government_stats")}
-  />
-
-);
-
-
 export const declare_estimates_in_perspective_panel = () => declare_panel({
   panel_key: "estimates_in_perspective",
   levels: ["dept"],
@@ -45,7 +32,15 @@ export const declare_estimates_in_perspective_panel = () => declare_panel({
     },
   
     render({calculations, footnotes, sources}){
-      const { subject, panel_args, info } = calculations;
+      const {
+        subject,
+        info,
+        panel_args: {
+          gov_total,
+          dept_total,
+        },
+      } = calculations;
+
       return (
         <StdPanel
           title={text_maker("estimates_perspective_title")}
@@ -56,9 +51,12 @@ export const declare_estimates_in_perspective_panel = () => declare_panel({
           </Col>
           {!window.is_a11y_mode &&
             <Col isGraph size={7}>
-              <DeptEstimatesPerspective
-                subject={subject} 
-                {...panel_args} 
+              <CircleProportionChart 
+                height={250}
+                child_value={dept_total}
+                child_name={text_maker('dept_estimates', {subject})}
+                parent_value={gov_total}
+                parent_name={text_maker('gov_estimates')}
               />
             </Col>
           }

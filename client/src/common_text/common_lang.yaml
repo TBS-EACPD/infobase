@@ -678,6 +678,9 @@ cspa:
 fps:
   en: Federal Public Service
   fr: Fonction publique fédérale
+the_fps:
+  en: the Federal Public Service
+  fr: la Fonction publique fédérale
 other_port_cpa:
   en: Other Portions of the Core Public Administration
   fr: Autres secteurs de l’administration publique centrale

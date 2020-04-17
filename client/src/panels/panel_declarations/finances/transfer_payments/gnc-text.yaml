@@ -5,16 +5,16 @@ transfer_payment:
 dept_transfer_payments:
   transform: [handlebars]
   en: |
-    {{subj_abbr subject}} transfer payment spending
+    {{subject.abbr}} transfer payment spending
   fr: |
-    Dépenses en paiements de transfert de {{subj_abbr subject}} 
+    Dépenses en paiements de transfert de {{subject.abbr}} 
 
 dept_expenditures:
   transform: [handlebars]
   en: |
-    {{subj_abbr subject}} total spending
+    {{subject.abbr}} total spending
   fr: |
-    Dépenses totales de {{subj_abbr subject}} 
+    Dépenses totales de {{subject.abbr}} 
 
 gov_transfer_payments:
   en: Government transfer payment spending
@@ -36,10 +36,10 @@ last_year_g_and_c_perspective_title:
 dept_last_year_g_and_c_perspective_text:
   transform: [handlebars,markdown]
   en: |
-   In {{pa_last_year}}, **{{subject.name}}** ({{subj_abbr subject}}) spent **{{fmt_compact1_written dept_tp_exp_pa_last_year}}** (or **{{fmt_smart_percentage1 dept_tp_exp_ratio_pa_last_year}}** of total spending) on transfer payments. 
+   In {{pa_last_year}}, **{{subject.name}} ({{subject.abbr}})** spent **{{fmt_compact1_written dept_tp_exp_pa_last_year}}** (or **{{fmt_smart_percentage1 dept_tp_exp_ratio_pa_last_year}}** of total spending) on transfer payments. 
    Transfer payments made by **{{subject.name}}** accounted for **{{fmt_smart_percentage1 dept_tp_exp_ratio_gov_pa_last_year}}** of the total of **{{fmt_compact1_written gov_tp_exp_pa_last_year}}** spent on transfer payments by the government as a whole.
   fr: |
-   En {{pa_last_year}}, **{{subject.name}}** ({{subj_abbr subject}}) a dépensé **{{fmt_compact1_written dept_tp_exp_pa_last_year}}** (ou **{{fmt_smart_percentage1 dept_tp_exp_ratio_pa_last_year}}** des dépenses totales) en paiements de transfert. 
+   En {{pa_last_year}}, **{{subject.name}} ({{subject.abbr}})** a dépensé **{{fmt_compact1_written dept_tp_exp_pa_last_year}}** (ou **{{fmt_smart_percentage1 dept_tp_exp_ratio_pa_last_year}}** des dépenses totales) en paiements de transfert. 
    Ce montant représentait **{{fmt_smart_percentage1 dept_tp_exp_ratio_gov_pa_last_year}}** des dépenses totales du gouvernement en paiements de transfert de **{{fmt_compact1_written gov_tp_exp_pa_last_year}}**.
 
 gov_historical_g_and_c_text:

@@ -1,6 +1,6 @@
 bubble_title:
   transform: [handlebars, markdown]
   en: |
-    **{{inner}}** as a fraction of **{{outer}}**
+    **{{inner}}** as a portion of **{{outer}}**
   fr: |
     TODO
