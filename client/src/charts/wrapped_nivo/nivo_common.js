@@ -104,8 +104,8 @@ const DefaultPercentTooltip = ({tooltip_items, formatter, total}) => (
               <td className="nivo-tooltip__content">
                 {tooltip_item.name || tooltip_item.id}
               </td>
-              <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}} />
-              <td className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}} />
+              <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+              <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}} />
             </Fragment>
           </MediaQuery>
           <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
@@ -113,8 +113,8 @@ const DefaultPercentTooltip = ({tooltip_items, formatter, total}) => (
               <div className="nivo-tooltip__content">
                 {tooltip_item.name || tooltip_item.id}
               </div>
-              <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formatter(tooltip_item.value)}} />
-              <div className="nivo-tooltip__content" dangerouslySetInnerHTML = {{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}} />
+              <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+              <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}} />
             </td>
           </MediaQuery>
         </Fragment>
@@ -124,6 +124,7 @@ const DefaultPercentTooltip = ({tooltip_items, formatter, total}) => (
 );
 
 
+// TODO: refactor this...
 class InteractiveGraph extends React.Component{
   constructor(props){
     super(props);

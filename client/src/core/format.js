@@ -129,7 +129,7 @@ const percentage = (precision, val, lang, options) => {
 };
 
 // 'smart' percent formatter that scales decimal places (up to 3) based on the value
-const percentage_smart = (min_precision, val, lang, options) => {
+const smart_percentage = (min_precision, val, lang, options) => {
   const smart_precision = val < 0.001 ? 3 :
     (val < 0.01 ? 2 : 1);
   const precision = (min_precision && min_precision > smart_precision) ? min_precision : smart_precision;
@@ -151,8 +151,8 @@ const types_to_format = {
   "percentage": (val, lang, options) => percentage(options.precision, val, lang, options),
   "percentage1": _.curry(percentage)(1),
   "percentage2": _.curry(percentage)(2),
-  "smart_percentage1": _.curry(percentage_smart)(1),
-  "smart_percentage2": _.curry(percentage_smart)(2),
+  "smart_percentage1": _.curry(smart_percentage)(1),
+  "smart_percentage2": _.curry(smart_percentage)(2),
   "result_percentage": (val, lang) => result_percent_formatter[lang].format(val/100),
   "result_num": (val, lang) => result_number_formatter[lang].format(val),
   "decimal1": (val, lang, options) => number_formatter[lang][1].format(val),
