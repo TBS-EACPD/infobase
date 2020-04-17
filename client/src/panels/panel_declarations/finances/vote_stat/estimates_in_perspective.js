@@ -45,6 +45,7 @@ export const declare_estimates_in_perspective_panel = () => declare_panel({
         <StdPanel
           title={text_maker("estimates_perspective_title")}
           {...{footnotes, sources}}
+          allowOverflow={true}
         >
           <Col isText size={5}>
             <TM k="estimates_perspective_text" args={info} />

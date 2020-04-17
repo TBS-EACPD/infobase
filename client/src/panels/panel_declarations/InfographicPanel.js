@@ -188,7 +188,7 @@ const flatten_and_filter_children = (children) => _.chain(children)
   .filter( child => child && child.type )
   .value();
 
-const StdPanel = ({ title, sources, footnotes, glossary_keys, children, containerAlign }) => {
+const StdPanel = ({ children, containerAlign, ...panelProps }) => {
   const mapped_children = _.chain(children)
     .thru( flatten_and_filter_children )
     .map( ({ props }, ix) => {
@@ -214,7 +214,7 @@ const StdPanel = ({ title, sources, footnotes, glossary_keys, children, containe
     .value();
 
   return (
-    <InfographicPanel {...{title, sources, footnotes, glossary_keys}}>
+    <InfographicPanel {...panelProps}>
       <div className={`frow ${containerAlign || 'middle'}-xs`}>
         {mapped_children}
       </div>

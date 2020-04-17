@@ -46,6 +46,7 @@ export const declare_employee_last_year_totals_panel = () => declare_panel({
           <StdPanel
             title={text_maker("dept_employee_last_year_totals_title")}
             {...{footnotes, sources}}
+            allowOverflow={true}
           >
             <Col size={5} isText>
               <TM k="dept_employee_last_year_totals_text" args={info} />
