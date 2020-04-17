@@ -154,6 +154,7 @@ export class CircleProportionChart extends React.Component{
             padding={0}
             nodeComponent={ProportionalNode}
             margin={ margin }
+            // TODO: only thing left is the custom tooltip. Remember to give it cirlces instead of squares and etc
           />
         </div>
         <div style={{textAlign: "center"}}>

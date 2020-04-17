@@ -39,16 +39,21 @@ const fix_legend_symbols = (legends) => legends ?
   undefined;
 
 
-const TooltipFactory = ({tooltip_items, TooltipContentComponent}) => (
+const DefaultTooltipColorLegend = ({tooltip_item}) => (
+  <td className="nivo-tooltip__content">
+    <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.color}} />
+  </td>
+);
+const TooltipFactory = ({tooltip_items, TooltipContentComponent, ColorLegendComponet=DefaultTooltipColorLegend}) => (
   <div style={{color: window.infobase_color_constants.textColor}}>
     <table className="nivo-tooltip">
       <tbody>
         { tooltip_items.map(
           tooltip_item => ( 
             <tr key={tooltip_item.id}>
-              <td className="nivo-tooltip__content">
-                <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.color}} />
-              </td>
+              { ColorLegendComponet && 
+                <ColorLegendComponet tooltip_item={tooltip_item} />
+              }
               <TooltipContentComponent
                 tooltip_item={tooltip_item}
               />
