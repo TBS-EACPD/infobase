@@ -135,10 +135,10 @@ export class CircleProportionChart extends React.Component{
           <tbody>
             { _.map(
               [
-                [parent_name, parent_value, 1],
-                [child_name, child_value, child_value/parent_value],
+                [parent_name, parent_value],
+                [child_name, child_value],
               ],
-              ([name, value, percent]) => <tr key={name}>
+              ([name, value]) => <tr key={name}>
                 <td className="nivo-tooltip__content">
                   <div
                     className="proportional-bubble-tooltip__legend_icon"
@@ -153,14 +153,14 @@ export class CircleProportionChart extends React.Component{
                     <td className="nivo-tooltip__content" 
                       dangerouslySetInnerHTML={{__html: value_formatter(value)}}
                     />
-                    <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formats.smart_percentage1(percent)}} />
+                    <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formats.smart_percentage1(value/parent_value)}} />
                   </Fragment>
                 </MediaQuery>
                 <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
                   <td>
                     <div className="nivo-tooltip__content">{name}</div>
                     <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: value_formatter(value)}} />
-                    <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formats.smart_percentage1(percent)}} />
+                    <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formats.smart_percentage1(value/parent_value)}} />
                   </td>
                 </MediaQuery>
               </tr>
@@ -198,7 +198,7 @@ export class CircleProportionChart extends React.Component{
             leavesOnly={false}
             padding={0}
             nodeComponent={ProportionalNode}
-            margin={ margin }
+            margin={margin}
             tooltip={tooltip}
           />
         </div>
