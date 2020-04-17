@@ -125,62 +125,14 @@ export class CircleProportionChart extends React.Component{
       ],
     };
 
-
-    const ordered_column_keys = ["name", "value", "percent"];
-    const column_names = {
-      name: text_maker("label"),
-      value: text_maker("value"),
-      percent: text_maker("percentage"),
-    };
-
-    const table_data = [
-      {
-        display_values: {
-          name: parent_name,
-          value: get_formatter(is_money, text_formatter, true, true)(parent_value),
-          percent: formats.percentage1_raw(1.0),
-        },
-        sort_values: {
-          name: parent_name,
-          value: parent_value,
-          percent: 1.0,
-        },
-        search_values: {
-          name: parent_name,
-        },
-      },
-      {
-        display_values: {
-          name: child_name,
-          value: get_formatter(is_money, text_formatter, true, true)(child_value),
-          percent: formats.percentage1_raw(child_value/parent_value),
-        },
-        sort_values: {
-          name: child_name,
-          value: child_value,
-          percent: child_value/parent_value,
-        },
-        search_values: {
-          name: child_name,
-        },
-      },
-    ];
-    
-
     const title = <div
       dangerouslySetInnerHTML={{
-        __html: text_maker("bubble_title", {outer: parent_name, inner: child_name}),
+        __html: text_maker(
+          "bubble_title", 
+          {outer: parent_name, inner: child_name}
+        ),
       }}
     />;  
-
-    const table = !disable_table_view && (
-      <DisplayTable
-        rows={table_data}
-        column_names={column_names}
-        ordered_column_keys={ordered_column_keys}
-        name={text_maker("bubble_title")}
-      />
-    );
 
     const graph = (
       <Fragment>
@@ -209,6 +161,31 @@ export class CircleProportionChart extends React.Component{
         </div>
       </Fragment>
     );
+
+
+    const ordered_column_keys = ["label", "value"];
+    const column_names = _.map(ordered_column_keys, text_maker);
+    const table_data = _.map(
+      [
+        [parent_name, parent_value],
+        [child_name, child_value],
+      ],
+      ([label, value]) => ({
+        display_values: {
+          label,
+          value: get_formatter(is_money, text_formatter, true, true)(value),
+        },
+        sort_values: {label, value},
+      })
+    );
+    const table = !disable_table_view && (
+      <DisplayTable
+        rows={table_data}
+        column_names={column_names}
+        ordered_column_keys={ordered_column_keys}s
+      />
+    );
+
 
     return <InteractiveGraph graph={graph} table={table} />;
   }
