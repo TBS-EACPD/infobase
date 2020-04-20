@@ -130,14 +130,14 @@ class EmailFrontend extends React.Component {
     const disable_forms = (sent_to_backend && backend_response.success) || awaiting_backend_response;
 
 
-    const get_field_id = (field_key) => `email_frontend_${field_key}`;
-    const EnumField = ({form_type, label, enum_key, field_key, is_checked}) => (
+    const get_field_id = (field_key, enum_key) => `email_frontend_${field_key}${enum_key ? `--${enum_key}` : ''}`;
+    const EnumField = ({form_type, label, enum_key, field_key}) => (
       <div className={form_type}>
-        <label htmlFor={get_field_id(enum_key)}>
+        <label htmlFor={get_field_id(field_key, enum_key)}>
           <input 
-            id={get_field_id(enum_key)} 
+            id={get_field_id(field_key, enum_key)} 
             type={form_type}
-            checked={is_checked} 
+            checked={_.includes(completed_template[field_key], enum_key)} 
             disabled={disable_forms}
             onChange={
               () => {
@@ -173,15 +173,8 @@ class EmailFrontend extends React.Component {
 
                     form_type={field_info.form_type}
                     label={label_by_lang[window.lang]}
-                    onClick={() => {
-                      this.mergeIntoCompletedTemplateState(
-                        field_key,
-                        _.chain(completed_template[field_key])
-                          .xor([key])
-                          .sort()
-                          .value()
-                      );
-                    }}
+                    enum_key={key}
+                    field_key={field_key}
                   />
                 )}
             </fieldset>
