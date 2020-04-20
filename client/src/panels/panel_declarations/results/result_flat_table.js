@@ -109,6 +109,7 @@ const indicator_table_from_list = (indicator_list) => {
       index: 4,
       header: text_maker("date_to_achieve"),
       is_sortable: true,
+      sort_func: (value) => new Date(value),
     },
     status: {
       index: 5,
@@ -129,7 +130,7 @@ const indicator_table_from_list = (indicator_list) => {
     date_to_achieve: ind.indicator.target_date,
     status: ind.indicator.status_key,
   }));
-  
+  console.log(table_data);
   return <DisplayTable 
     table_name={text_maker("result_flat_table_title", {year: current_drr_year})}
     data={table_data}
