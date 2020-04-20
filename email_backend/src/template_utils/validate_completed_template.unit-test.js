@@ -117,8 +117,14 @@ describe("validate_completed_template", () => {
     id: '1234qwert',
     additional: { bleh: "blah", bluh: { blagh: "blargh" } },
   };
-  // TODO - no additional test cases added for radio yet^
-  // if cases for radio are added above, remember to add corresponding true/false values below
+  const invalid_completed_test_fields_multiple_values_from_a_radio_form = {
+    enums: [],
+    radio: ["yes", "no"],
+    issue: "I don't think the line graphs should always start at 0",
+    sha: "fenef8723hhf2h9jdj2j3d92093",
+    id: '1234qwert',
+    additional: { bleh: "blah", bluh: { blagh: "blargh" } },
+  };
 
   const test_completed_fields = [
     valid_completed_test_fields_complete,
@@ -127,6 +133,7 @@ describe("validate_completed_template", () => {
     invalid_completed_test_fields_bad_value_type,
     invalid_completed_test_fields_bad_extra_field,
     invalid_completed_test_fields_empty_required_enums,
+    invalid_completed_test_fields_multiple_values_from_a_radio_form,
   ];
 
   it("verify_required_fields_present checks that all fields marked required in the template are in the completed fields", () => {
@@ -139,6 +146,7 @@ describe("validate_completed_template", () => {
       true,
       true,
       false,
+      true,
       true,
       true,
       true,
@@ -158,6 +166,7 @@ describe("validate_completed_template", () => {
       false,
       false,
       false,
+      false,
     ]);
   });
 
@@ -170,6 +179,7 @@ describe("validate_completed_template", () => {
     ).toEqual([
       true,
       true,
+      false,
       false,
       false,
       false,
