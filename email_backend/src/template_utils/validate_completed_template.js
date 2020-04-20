@@ -40,12 +40,12 @@ const verify_values_are_expected_and_match_value_types = (field_templates, compl
                 (enum_values) => {
                   const some_submitted_keys_are_not_enum_options = _.without(field_value, ...enum_values).length > 0;
                   const required_field_but_no_valid_values = is_required && _.intersection(field_value, enum_values).length === 0;
-                  const is_invalid_for_form_type = field_templates[field_key].form_type === "radio" &&
-                    _.without(field_value, ...enum_values).length > 1;
+                  const radio_form_but_multiple_values = field_templates[field_key].form_type === "radio" && field_value.length > 1;
+
                   return (
                     !some_submitted_keys_are_not_enum_options && 
                     !required_field_but_no_valid_values &&
-                    !is_invalid_for_form_type
+                    !radio_form_but_multiple_values
                   );
                 }
               )
