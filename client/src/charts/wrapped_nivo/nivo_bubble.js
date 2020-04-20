@@ -153,14 +153,14 @@ export class CircleProportionChart extends React.Component{
                     <td className="nivo-tooltip__content" 
                       dangerouslySetInnerHTML={{__html: value_formatter(value)}}
                     />
-                    <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formats.smart_percentage1(value/parent_value)}} />
+                    <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: `(${formats.smart_percentage1(value/parent_value)})` }} />
                   </Fragment>
                 </MediaQuery>
                 <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
                   <td>
                     <div className="nivo-tooltip__content">{name}</div>
                     <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: value_formatter(value)}} />
-                    <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formats.smart_percentage1(value/parent_value)}} />
+                    <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: `(${formats.smart_percentage1(value/parent_value)})` }} />
                   </td>
                 </MediaQuery>
               </tr>
