@@ -20,11 +20,12 @@ export class DisplayTable extends React.Component {
       column_configs,
     } = props;
 
-    const sort_by = unsorted_initial ? null : _.chain(column_configs)
-      .pickBy(col => col.is_sortable)
-      .keys()
-      .first()
-      .value();
+    const sort_by = unsorted_initial ? null :
+      _.chain(column_configs)
+        .pickBy(col => col.is_sortable)
+        .keys()
+        .first()
+        .value();
     
     const searches = _.chain(column_configs)
       .pickBy(col => col.is_searchable)
@@ -35,7 +36,7 @@ export class DisplayTable extends React.Component {
 
     this.state = {
       sort_by,
-      descending: unsorted_initial ? null : true,
+      descending: !unsorted_initial,
       searches,
     };
   }
@@ -54,8 +55,21 @@ export class DisplayTable extends React.Component {
   render(){
     const {
       table_name, // Optional: Name of table
-      data,
-      column_configs,
+      data, // [ {column_key: 134} ]
+      column_configs, /* {
+        column_key: {
+          index: 0, <- (integer) Zero indexed, order of column. Required
+          header: "Organization", <- (string) Name of column. Required
+          is_sortable: true, <- (boolean) Default sorts based on column values. Otherwise, must define sort_func config
+          is_summable: true, <- (boolean) Default sums based on column values. Otherwise, must define sum_func config
+          is_searchable: true, <- (boolean) Default searches based on column values. Otherwise, must define search_func config
+          formatter:
+            "big_int" <- (string) If it's string, auto formats using types_to_format.
+            OR
+            (value) => <span> {value} </span>, <- (function)  If it's function, column value is passed in
+        },
+      }
+      */
     } = this.props;
     const {
       sort_by,
