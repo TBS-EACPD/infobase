@@ -96,7 +96,7 @@ const ProportionalNode = ({ node, style, handlers }) => {
 
 export class CircleProportionChart extends React.Component{
   render(){
-    const{
+    const {
       margin,
       is_money,
       text_formatter,
@@ -115,7 +115,7 @@ export class CircleProportionChart extends React.Component{
     const graph_data = {
       id: parent_name,
       name: parent_name,
-      // ... nivo bubble will roll child values back up and add them to the parent value for use (both in the graph and tooltip)
+      // ... nivo bubble will roll child values back up and add them to the parent value for use in the graph
       // so we need to remove the inner portion from the total here
       value: parent_value - child_value,
       color: color_scale(parent_name),
