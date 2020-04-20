@@ -74,27 +74,11 @@ describe("make_email_body_from_completed_template", () => {
       some_number: 1,
     };
 
-    const expected_body_content = 
-`enums:
-    bug, typo
-
-radio:
-    yes
-
-issue:
-    Lorem ipsum dolor sit amet, varius nulla justo sed, tincidunt interdum lectus, diam donec rhoncus wisi ut. Lacinia massa risus mi risus phasellus id. Sollicitudin convallis vel eget libero, porttitor aenean elementum, ornare at, nullam quis, pellentesque erat id. Rhoncus pretium nec luctus mauris tincidunt, donec adipiscing vivamus tempus, mauris nullam porttitor natoque elit, lectus sapien libero vestibulum venenatis quisque. Eros tempor in, ipsum luctus sit suspendisse tincidunt, wisi id mollis viverra. Orci diam pede nunc, non nec condimentum dui aliquam aliquet tortor, libero ut cras. Vel blandit eu wisi rhoncus, sit dicta, a sem in sed, ipsum iaculis.
-
-json:
-    {
-      "bleh": "blah",
-      "bluh": {
-        "blagh": "blargh"
-      }
-    }
-
-some_number:
-    1`
-    ;
+    const expected_body_content = `enums:\n    bug, typo\n
+radio:\n    yes\n
+issue:\n    ${completed_test_template.issue}\n
+json:\n    {\n      "bleh": "blah",\n      "bluh": {\n        "blagh": "blargh"\n      }\n    }\n
+some_number:\n    1`;
 
     return expect(
       make_email_body_from_completed_template(
@@ -105,5 +89,4 @@ some_number:
       expected_body_content
     );
   });
-
 });
