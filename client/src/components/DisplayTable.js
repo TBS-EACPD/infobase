@@ -60,14 +60,13 @@ export class DisplayTable extends React.Component {
         column_key: {
           index: 0, <- (integer) Zero indexed, order of column. Required
           header: "Organization", <- (string) Name of column. Required
-          is_sortable: true, <- (boolean) Default sorts based on column values alphabetically or numerically. Otherwise, must define sort_func config
+          is_sortable: true, <- (boolean) Default sorts based on column values (number, string, Date supported)
           is_summable: true, <- (boolean) Sums based on column values
           is_searchable: true, <- (boolean) Searches based on column values
           formatter:
             "big_int" <- (string) If it's string, auto formats using types_to_format
             OR
             (value) => <span> {value} </span>, <- (function)  If it's function, column value is passed in
-          sort_func: (value) => new Date(value) <- (function) Column value is passed in for custom sort function
         },
       }
       */
@@ -79,6 +78,7 @@ export class DisplayTable extends React.Component {
     } = this.state;
 
     const clean_search_string = (search_string) => _.chain(search_string).deburr().toLower().trim().value();
+    const is_number_string_date = (val) => _.isNumber(val) || _.isString(val) || _.isDate(val);
     const sorted_filtered_data = _.chain(data)
       .filter( (row) => _.chain(row)
         .map( (column_value, column_key) => (
@@ -91,13 +91,11 @@ export class DisplayTable extends React.Component {
         .every()
         .value()
       )
-      .sortBy( row => row[sort_by] && (
-        column_configs[sort_by].sort_func ?
-        column_configs[sort_by].sort_func(row[sort_by]) :
-        ( _.isNumber(row[sort_by]) || _.isString(row[sort_by]) ) ?
+      .sortBy( row => row[sort_by] &&
+        is_number_string_date(row[sort_by]) ?
           row[sort_by] :
           Number.NEGATIVE_INFINITY
-      ) )
+      )
       .tap( descending ? _.reverse : _.noop )
       .value();
     

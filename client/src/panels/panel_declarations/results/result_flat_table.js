@@ -3,6 +3,7 @@ import './result_flat_table.scss';
 import { Fragment } from 'react';
 
 import { TM, text_maker } from './result_text_provider.js';
+import { businessConstants } from '../../../models/businessConstants.js';
 import { 
   util_components, 
   InfographicPanel,
@@ -19,6 +20,7 @@ import {
 const { SpinnerWrapper, DisplayTable } = util_components;
 
 const { current_drr_key } = Results;
+const { months } = businessConstants;
 
 import {
   StatusIconTable,
@@ -29,7 +31,6 @@ import {
   ResultCounts,
   GranularResultCounts,
   result_docs,
-  ordered_status_keys,
   result_statuses,
   indicator_text_functions,
 } from './results_common.js';
@@ -109,7 +110,8 @@ const indicator_table_from_list = (indicator_list) => {
       index: 4,
       header: text_maker("date_to_achieve"),
       is_sortable: true,
-      sort_func: (value) => new Date(value),
+      formatter: (val) => _.isDate(val) ?
+        `${months[val.getMonth() + 1].text} ${val.getFullYear()}` : val,
     },
     status: {
       index: 5,
@@ -130,7 +132,6 @@ const indicator_table_from_list = (indicator_list) => {
     date_to_achieve: ind.indicator.target_date,
     status: ind.indicator.status_key,
   }));
-  console.log(table_data);
   return <DisplayTable 
     table_name={text_maker("result_flat_table_title", {year: current_drr_year})}
     data={table_data}
