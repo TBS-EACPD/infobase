@@ -39,7 +39,7 @@
       "form_type": "radio",
       "form_label": {
         "en": "To what extent did you find GC InfoBase easy to navigate? (1=not at all useful and 5=very useful)",
-        "fr": "Dans quelle mesure la navigation est-elle facile dans l’InfoBase du GC?"
+        "fr": "Dans quelle mesure la navigation est-elle facile dans l’InfoBase du GC? (1=difficile et 5=très facile)"
       },
       "value_type": "enums",
       "enum_values": {
@@ -81,7 +81,7 @@
       "form_type": "radio",
       "form_label": {
         "en": "To what extent did you find the spending information on GC InfoBase useful? (1=not at all easy and 5=very easy)",
-        "fr": "Dans quelle mesure avez-vous trouvé les renseignements financiers utiles dans l’InfoBase du GC?"
+        "fr": "Dans quelle mesure avez-vous trouvé les renseignements financiers utiles dans l’InfoBase du GC? (1=inutile et 5=très utile)"
       },
       "value_type": "enums",
       "enum_values": {
@@ -120,10 +120,10 @@
 
     "user_type": {
       "required": true,
-      "form_type": "radio",
+      "form_type": "checkbox",
       "form_label": {
-        "en": "Please choose the type of user that best describes you:",
-        "fr": "Veuillez choisi le type d’utilisateur qui vous décrit le mieux :"
+        "en": "Please choose the type of user that best describes you (select all that apply):",
+        "fr": "Veuillez choisi le type d’utilisateur qui vous décrit le mieux (sélectionnez toutes les options qui s’appliquent) :"
       },
       "value_type": "enums",
       "enum_values": {
