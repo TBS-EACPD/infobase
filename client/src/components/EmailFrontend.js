@@ -36,6 +36,43 @@ const get_values_for_automatic_fields = (automatic_fields) => {
   );
 };
 
+const EnumField = ({
+  form_type,
+  label,
+  enum_key,
+  field_id, 
+  selected_enums_for_field,
+  disabled,
+  state_update_callback,
+}) => (
+  <div className={form_type}>
+    <label htmlFor={`${field_id}--${enum_key}`}>
+      <input 
+        id={`${field_id}--${enum_key}`} 
+        type={form_type}
+        checked={_.includes(selected_enums_for_field, enum_key)} 
+        disabled={disabled}
+        onChange={
+          () => {
+            state_update_callback(
+              form_type === "radio" ?
+                [enum_key] :
+                _.chain(selected_enums_for_field)
+                  .xor([enum_key])
+                  .sort()
+                  .value()
+            );
+          }
+        }
+      />
+      {label}
+    </label>
+  </div>
+);
+
+const get_field_id = (field_key) => `email_frontend_${field_key}`;
+
+
 class EmailFrontend extends React.Component {
   constructor(props){
     super(props);
@@ -122,41 +159,13 @@ class EmailFrontend extends React.Component {
         )
       )
       .value();
+
     const ready_to_send = all_required_user_fields_are_filled && privacy_acknowledged && (
       !sent_to_backend || // hasn't been submitted yet
       (sent_to_backend && !_.isEmpty(backend_response) && !backend_response.success) // submitted, but received a failing response, allow for retrys
     );
 
     const disable_forms = (sent_to_backend && backend_response.success) || awaiting_backend_response;
-
-
-    const get_field_id = (field_key, enum_key) => `email_frontend_${field_key}${enum_key ? `--${enum_key}` : ''}`;
-    const EnumField = ({form_type, label, enum_key, field_key}) => (
-      <div className={form_type}>
-        <label htmlFor={get_field_id(field_key, enum_key)}>
-          <input 
-            id={get_field_id(field_key, enum_key)} 
-            type={form_type}
-            checked={_.includes(completed_template[field_key], enum_key)} 
-            disabled={disable_forms}
-            onChange={
-              () => {
-                this.mergeIntoCompletedTemplateState(
-                  field_key,
-                  form_type === "radio" ?
-                    [enum_key] :
-                    _.chain(completed_template[field_key])
-                      .xor([enum_key])
-                      .sort()
-                      .value()
-                );
-              }
-            }
-          />
-          {label}
-        </label>
-      </div>
-    );
 
     const get_form_for_user_field = (field_info, field_key) => {
       switch(field_info.form_type){
@@ -168,14 +177,17 @@ class EmailFrontend extends React.Component {
               {
                 _.map(
                   field_info.enum_values,
-                  (label_by_lang, key) => <EnumField
-                    key={`${key}_${field_info.form_type}`}
-
-                    form_type={field_info.form_type}
-                    label={label_by_lang[window.lang]}
-                    enum_key={key}
-                    field_key={field_key}
-                  />
+                  (label_by_lang, key) => (
+                    <EnumField key={`${key}_${field_info.form_type}`}
+                      form_type={field_info.form_type}
+                      label={label_by_lang[window.lang]}
+                      enum_key={key}
+                      field_id={get_field_id(field_key)}
+                      selected_enums_for_field={completed_template[field_key]}
+                      disabled={disable_forms}
+                      state_update_callback={ (selected_enums) => this.mergeIntoCompletedTemplateState(field_key, selected_enums) }
+                    />
+                  )
                 )}
             </fieldset>
           );
