@@ -49,15 +49,25 @@ const DefaultTooltipColorLegend = ({tooltip_item}) => (
     />
   </td>
 );
-const TooltipFactory = ({tooltip_items, TooltipContentComponent, ColorLegendComponet=DefaultTooltipColorLegend}) => (
-  <div style={{color: window.infobase_color_constants.textColor}}>
+const TooltipFactory = ({
+  tooltip_items,
+  tooltip_container_class,
+  TooltipContentComponent,
+  ColorLegendComponet=DefaultTooltipColorLegend,
+}) => (
+  <div
+    className={tooltip_container_class}
+    style={{color: window.infobase_color_constants.textColor}}
+  >
     <table className="nivo-tooltip">
       <tbody>
         { tooltip_items.map(
-          tooltip_item => ( 
+          tooltip_item => (
             <tr key={tooltip_item.id}>
               { ColorLegendComponet && 
-                <ColorLegendComponet tooltip_item={tooltip_item} />
+                <ColorLegendComponet
+                  tooltip_item={tooltip_item}
+                />
               }
               <TooltipContentComponent
                 tooltip_item={tooltip_item}
