@@ -7,7 +7,7 @@ import MediaQuery from 'react-responsive';
 
 import {
   InteractiveGraph,
-  create_text_maker_with_nivo_common,
+  create_text_maker_component_with_nivo_common,
   general_default_props,
   get_formatter,
 } from './nivo_common.js';
@@ -17,7 +17,7 @@ import { breakpoints } from '../../core/breakpoint_defs.js';
 import { newIBCategoryColors } from '../../core/color_schemes.js';
 import { DisplayTable } from '../../components/index.js';
   
-const text_maker = create_text_maker_with_nivo_common(text);
+const { text_maker, TM } = create_text_maker_component_with_nivo_common(text);
 
 // Hacky abuse of ResponsiveBubble... very fragile against nivo changes. Bonus comments left in this file to balance against that
 // Would be trivial to make this graph ourselves, only reason for doing it like this is to get nivo native tooltips (and even 
@@ -170,15 +170,6 @@ export class CircleProportionChart extends React.Component{
       </div>
     );
 
-    const title = <div
-      dangerouslySetInnerHTML={{
-        __html: text_maker(
-          "bubble_title", 
-          {outer: parent_name, inner: child_name}
-        ),
-      }}
-    />;  
-
     const graph = (
       <Fragment>
         <div style={{height: height}}>
@@ -203,7 +194,10 @@ export class CircleProportionChart extends React.Component{
           />
         </div>
         <div style={{textAlign: "center"}}>
-          {title}
+          <TM
+            k={"bubble_title"} 
+            args={{outer: parent_name, inner: child_name}}
+          />
         </div>
       </Fragment>
     );
