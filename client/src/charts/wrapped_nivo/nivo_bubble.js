@@ -10,6 +10,7 @@ import {
   create_text_maker_component_with_nivo_common,
   general_default_props,
   get_formatter,
+  TooltipFactory,
 } from './nivo_common.js';
 
 import { formats } from "../../core/format.js";
@@ -130,50 +131,57 @@ export class CircleProportionChart extends React.Component{
     };
 
     const tooltip = () => (
-      <div className="proportional-bubble-tooltip" style={{color: window.infobase_color_constants.textColor}}>
-        <table className="nivo-tooltip">
-          <tbody>
-            { _.map(
-              [
-                [parent_name, parent_value],
-                [child_name, child_value],
-              ],
-              ([name, value]) => <tr key={name}>
+      <TooltipFactory
+        tooltip_items={[
+          {
+            id: "parent",
+            name: parent_name,
+            value: parent_value,
+          },
+          {
+            id: "child",
+            name: child_name,
+            value: child_value,
+          },
+        ]}
+        tooltip_container_class="proportional-bubble-tooltip"
+        ColorLegendComponet={({tooltip_item}) => (
+          <td className="nivo-tooltip__content">
+            <div
+              className="proportional-bubble-tooltip__legend_icon"
+              style={{backgroundColor: color_scale(tooltip_item.name)}}
+            />
+          </td>
+        )}
+        TooltipContentComponent={({tooltip_item}) => (
+          <Fragment>
+            <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
+              <Fragment>{ /* MediaQuery jank, it will insert a div wrapping its children when it has mutliple of them, need a manual Fragment to avoid that */ }
                 <td className="nivo-tooltip__content">
-                  <div
-                    className="proportional-bubble-tooltip__legend_icon"
-                    style={{backgroundColor: color_scale(name)}}
-                  />
+                  {tooltip_item.name}
                 </td>
-                <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
-                  <Fragment>{ /* MediaQuery jank, it will insert a div wrapping its children when it has mutliple of them, need a manual Fragment to avoid that */ }
-                    <td className="nivo-tooltip__content">
-                      {name}
-                    </td>
-                    <td className="nivo-tooltip__content">
-                      {value_formatter(value)}
-                    </td>
-                    <td className="nivo-tooltip__content">
-                      {`(${formats.smart_percentage1_raw(value/parent_value)})`}
-                    </td>
-                  </Fragment>
-                </MediaQuery>
-                <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
-                  <td>
-                    <div className="nivo-tooltip__content">{name}</div>
-                    <div className="nivo-tooltip__content">
-                      {value_formatter(value)}
-                    </div>
-                    <div className="nivo-tooltip__content">
-                      {`(${formats.smart_percentage1_raw(value/parent_value)})`}
-                    </div>
-                  </td>
-                </MediaQuery>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+                <td className="nivo-tooltip__content">
+                  {value_formatter(tooltip_item.value)}
+                </td>
+                <td className="nivo-tooltip__content">
+                  {`(${formats.smart_percentage1_raw(tooltip_item.value/parent_value)})`}
+                </td>
+              </Fragment>
+            </MediaQuery>
+            <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
+              <td>
+                <div className="nivo-tooltip__content">{tooltip_item.name}</div>
+                <div className="nivo-tooltip__content">
+                  {value_formatter(tooltip_item.value)}
+                </div>
+                <div className="nivo-tooltip__content">
+                  {`(${formats.smart_percentage1_raw(tooltip_item.value/parent_value)})`}
+                </div>
+              </td>
+            </MediaQuery>
+          </Fragment>
+        )}
+      />
     );
 
     const graph = (
