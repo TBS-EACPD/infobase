@@ -100,7 +100,7 @@ export class CircleProportionChart extends React.Component{
     const {
       margin,
       is_money,
-      text_formatter,
+      formatter,
       labelSkipWidth,
       height,
       child_value,
@@ -111,7 +111,7 @@ export class CircleProportionChart extends React.Component{
     } = this.props;
 
     const color_scale = d3.scaleOrdinal().range(newIBCategoryColors);
-    const value_formatter = get_formatter(is_money, text_formatter, true, true);
+    const value_formatter = get_formatter(is_money, formatter, true, false);
 
     const graph_data = {
       id: parent_name,
