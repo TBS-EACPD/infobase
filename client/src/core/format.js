@@ -128,12 +128,23 @@ const percentage = (precision, val, lang, options) => {
   }
 };
 
-// 'smart' percent formatter that scales decimal places (up to 3) based on the value
 const smart_percentage = (min_precision, val, lang, options) => {
-  const smart_precision = val < 0.001 ? 3 :
-    (val < 0.01 ? 2 : 1);
-  const precision = (min_precision && min_precision > smart_precision) ? min_precision : smart_precision;
-  const rtn = percent_formatter[lang][precision].format(val);
+  const one_significant_figure_of_precision = val !== 0 && Math.abs(val*100) < 1 && 
+    _.replace(
+      val*100,
+      /(^.*\.)(0*[1-9]?)(.*)/,
+      '$2'
+    ).length;
+  
+  const max_precision = percent_formatter[lang].length - 1;
+
+  const smart_precision = _.clamp(
+    one_significant_figure_of_precision,
+    min_precision,
+    max_precision
+  );
+  
+  const rtn = percent_formatter[lang][smart_precision].format(val);
   if (options.raw){
     return rtn;
   }else {
