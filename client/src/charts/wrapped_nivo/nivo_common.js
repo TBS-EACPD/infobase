@@ -9,11 +9,13 @@ import { breakpoints } from '../../core/breakpoint_defs.js';
 import { formats } from "../../core/format.js";
 import { get_formatter, infobase_colors_smart } from '../shared.js';
 import { IconTable } from '../../icons/icons.js';
-import { StatelessModal } from '../../components/index.js';
-import { create_text_maker } from '../../models/text.js';
+import {
+  create_text_maker_component,
+  StatelessModal,
+} from '../../components/index.js';
 
-const nivo_common_text_maker = create_text_maker(graph_text);
-const create_text_maker_with_nivo_common = (additional_text) => create_text_maker([graph_text, additional_text]);
+const { text_maker: nivo_common_text_maker } = create_text_maker_component(graph_text);
+const create_text_maker_component_with_nivo_common = (additional_text) => create_text_maker_component([graph_text, additional_text]);
 
 const fixed_symbol_shape = ({x, y, size, fill, borderWidth, borderColor}) => (
   <rect
@@ -231,7 +233,7 @@ export {
   DefaultPercentTooltip,
   general_default_props,
   nivo_common_text_maker, 
-  create_text_maker_with_nivo_common,
+  create_text_maker_component_with_nivo_common,
   get_formatter,
   infobase_colors_smart,
   fix_legend_symbols,

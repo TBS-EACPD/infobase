@@ -4,7 +4,7 @@ import { ResponsiveLine } from '@nivo/line';
 import classNames from 'classnames';
 
 import {
-  create_text_maker_with_nivo_common,
+  create_text_maker_component_with_nivo_common,
   InteractiveGraph,
   general_default_props,
   DefaultTooltip,
@@ -15,7 +15,7 @@ import {
 import { DisplayTable } from '../../components/index.js';
 import { IconZoomIn, IconZoomOut } from '../../icons/icons.js';
 
-const text_maker = create_text_maker_with_nivo_common(text);
+const { text_maker } = create_text_maker_component_with_nivo_common(text);
 
 
 const get_scale_bounds = (stacked, raw_data, zoomed) => {
