@@ -110,7 +110,7 @@ export class CircleProportionChart extends React.Component{
     } = this.props;
 
     const color_scale = d3.scaleOrdinal().range(newIBCategoryColors);
-    const value_formatter= get_formatter(is_money, text_formatter, true, true);
+    const value_formatter = get_formatter(is_money, text_formatter, true, true);
 
     const graph_data = {
       id: parent_name,
@@ -150,17 +150,23 @@ export class CircleProportionChart extends React.Component{
                     <td className="nivo-tooltip__content">
                       {name}
                     </td>
-                    <td className="nivo-tooltip__content" 
-                      dangerouslySetInnerHTML={{__html: value_formatter(value)}}
-                    />
-                    <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: `(${formats.smart_percentage1(value/parent_value)})` }} />
+                    <td className="nivo-tooltip__content">
+                      {value_formatter(value)}
+                    </td>
+                    <td className="nivo-tooltip__content">
+                      {`(${formats.smart_percentage1_raw(value/parent_value)})`}
+                    </td>
                   </Fragment>
                 </MediaQuery>
                 <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
                   <td>
                     <div className="nivo-tooltip__content">{name}</div>
-                    <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: value_formatter(value)}} />
-                    <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: `(${formats.smart_percentage1(value/parent_value)})` }} />
+                    <div className="nivo-tooltip__content">
+                      {value_formatter(value)}
+                    </div>
+                    <div className="nivo-tooltip__content">
+                      {`(${formats.smart_percentage1_raw(value/parent_value)})`}
+                    </div>
                   </td>
                 </MediaQuery>
               </tr>
