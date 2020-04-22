@@ -43,7 +43,10 @@ const fix_legend_symbols = (legends) => legends ?
 
 const DefaultTooltipColorLegend = ({tooltip_item}) => (
   <td className="nivo-tooltip__content">
-    <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.color}} />
+    <div
+      className="nivo-tooltip__legend-icon"
+      style={{backgroundColor: tooltip_item.color}}
+    />
   </td>
 );
 const TooltipFactory = ({tooltip_items, TooltipContentComponent, ColorLegendComponet=DefaultTooltipColorLegend}) => (
