@@ -93,28 +93,12 @@ class Goco extends React.Component {
     const spending_table_formatter = get_formatter(true, undefined, true, true);
     const fte_table_formatter = get_formatter(false, undefined, true, true);
 
-    const ordered_column_keys = [sa_text, spending_text, ftes_text];
-    const column_names = ordered_column_keys;
-    const spend_map = _.chain(Tag.gocos_by_spendarea)
-      .map(sa => {
-        const total_spending = total_fte_spend[sa.id].total_child_spending;
-        return [total_spending, spending_table_formatter(total_spending) ];
-      })
-      .fromPairs()
-      .value();
-    const ftes_map = _.chain(Tag.gocos_by_spendarea)
-      .map(sa => {
-        const total_ftes = total_fte_spend[sa.id].total_child_ftes;
-        return [total_ftes, spending_table_formatter(total_ftes) ];
-      })
-      .fromPairs()
-      .value();
     const parent_table_data = _.map(Tag.gocos_by_spendarea, sa => ({
       [sa_text]: sa.name,
       [spending_text]: total_fte_spend[sa.id].total_child_spending,
       [ftes_text]: total_fte_spend[sa.id].total_child_ftes,
     }));
-    const parent_table_column_configs = {
+    const table_column_configs = {
       [sa_text]: {
         index: 0,
         header: sa_text,
@@ -123,20 +107,18 @@ class Goco extends React.Component {
       [spending_text]: {
         index: 1,
         header: spending_text,
-        is_sortable: true,
-        formatter: (value) => spend_map[value],
+        formatter: (value) => spending_table_formatter(value),
       },
       [ftes_text]: {
         index: 2,
         header: ftes_text,
-        is_sortable: true,
-        formatter: (value) => ftes_map[value],
+        formatter: (value) => fte_table_formatter(value),
       },
     };
 
     const custom_table = <DisplayTable
       data={parent_table_data}
-      column_configs={parent_table_column_configs} />;
+      column_configs={table_column_configs} />;
 
     const child_tables = _.map(Tag.gocos_by_spendarea, sa => {
       const child_table_data = _.map(sa.children_tags, goco => ({
@@ -144,31 +126,11 @@ class Goco extends React.Component {
         [spending_text]: programSpending.q(goco).sum(spend_col),
         [ftes_text]: programFtes.q(goco).sum(fte_col),
       }));
-      const child_table_column_configs = {
-        [sa_text]: {
-          index: 0,
-          header: sa_text,
-          is_searchable: true,
-          is_sortable: true,
-        },
-        [spending_text]: {
-          index: 1,
-          header: spending_text,
-          is_sortable: true,
-          formatter: (value) => spending_table_formatter(value),
-        },
-        [ftes_text]: {
-          index: 2,
-          header: ftes_text,
-          is_sortable: true,
-          formatter: (value) => fte_table_formatter(value),
-        },
-      };
       return {
         key: sa.name,
         table: <DisplayTable
           data={child_table_data}
-          column_configs={child_table_column_configs} />,
+          column_configs={table_column_configs} />,
       };
     });
 

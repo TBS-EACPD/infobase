@@ -47,8 +47,7 @@ export const declare_dp_rev_split_panel = () => declare_panel({
         return false;
       }
       const find_year_data_ends_with =
-        (year_data, end_str) =>
-          _.find( year_data, ({col}) => _.endsWith(col, end_str) ).value;
+        (year_data, end_str) => _.find( year_data, ({col}) => _.endsWith(col, end_str) ).value;
       
       const table_data = _.map(planning_years, yr => {
         const year_data = _.filter(data, ({col}) => _.startsWith(col,yr));
@@ -63,36 +62,31 @@ export const declare_dp_rev_split_panel = () => declare_panel({
       const amt_type = window.is_a11y_mode ? "compact1_written" : "compact1";
       const column_configs = {
         year: {
-          index: 1,
+          index: 0,
           header: text_maker("year"),
-          is_sortable: true,
           formatter: (value) => <span style={{fontWeight: 'bold'}}> {value} </span>,
         },
         net: {
-          index: 2,
+          index: 1,
           header: text_maker("dp_gross"),
-          is_sortable: true,
           is_summable: true,
           formatter: amt_type,
         },
         gross: {
-          index: 3,
+          index: 2,
           header: text_maker("dp_revenue"),
-          is_sortable: true,
           is_summable: true,
           formatter: amt_type,
         },
         spa: {
-          index: 4,
+          index: 3,
           header: text_maker("dp_spa"),
-          is_sortable: true,
           is_summable: true,
           formatter: amt_type,
         },
         rev: {
-          index: 5,
+          index: 4,
           header: text_maker("dp_net"),
-          is_sortable: true,
           is_summable: true,
           formatter: amt_type,
         },

@@ -190,7 +190,7 @@ class Indicator {
   get target_date(){
     const { target_month, target_year } = this;
     if( _.isNumber(target_month) && _.isNumber(target_year) ){
-      return new Date(target_year, target_month);
+      return `${months[target_month].text} ${target_year}`;
     } else if( _.isNumber(target_year) ){
       return target_year;
     } else if( _.nonEmpty(target_year) ){

@@ -7,7 +7,6 @@ import {
   NoDataMessage,
 } from './shared.js';
 import { 
-  Format, 
   TwoLevelSelect,
   LabeledBox,
   AlertBanner,
@@ -147,7 +146,6 @@ class GranularView extends React.Component {
       dept: {
         index: 0,
         header: text_maker('org'),
-        is_sortable: true,
         is_searchable: true,
         formatter: "wide-str",
       },
@@ -155,7 +153,6 @@ class GranularView extends React.Component {
         .map( ({nick, type, fully_qualified_name}, idx) => [ nick, {
           index: idx + 1,
           header: fully_qualified_name,
-          is_sortable: true,
           is_searchable: !is_matched_undefined(non_dept_key_cols, nick),
           is_summable: !is_matched_undefined(data_columns, nick),
           formatter: type,

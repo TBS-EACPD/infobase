@@ -92,20 +92,17 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
     name: {
       index: 0,
       header: text_maker("org"),
-      is_sortable: true,
       is_searchable: true,
       formatter: (value) => subj_map[value] ? <a href={subj_map[value]}> {value} </a> : value,
     },
     voted_stat: {
       index: 1,
       header: text_maker(isVoted ? "voted" : "stat"),
-      is_sortable: true,
       is_searchable: true,
     },
     amount: {
       index: 2,
       header: text_maker("authorities"),
-      is_sortable: true,
       is_summable: true,
       formatter: (value) => <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={value} />,
     },

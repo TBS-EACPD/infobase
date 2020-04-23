@@ -27,7 +27,7 @@ const current_dp_year = result_docs[current_dp_key].year;
 const current_dp_corresponding_drr_year = _.toNumber(result_docs[current_dp_key].year_short) + 1;
 
 
-const DpSummary = ({counts, rows_of_counts_by_dept, column_configs, column_names, late_dept_count}) => {
+const DpSummary = ({counts, rows_of_counts_by_dept, column_configs, late_dept_count}) => {
   const current_dp_counts_with_generic_keys = filter_and_genericize_doc_counts(counts, current_dp_key);
   return (
     <Fragment>
@@ -77,21 +77,18 @@ export const declare_gov_dp_panel = () => declare_panel({
         subject_name: {
           index: 0,
           header: text_maker("org"),
-          is_sortable: true,
           is_searchable: true,
           formatter: (value) => subj_map[value] ? <a href={subj_map[value]}> {value} </a> : value,
         },
         [`${current_dp_key}_results`]: {
           index: 1,
           header: text_maker("results"),
-          is_sortable: true,
           is_summable: true,
           formatter: "big_int",
         },
         [`${current_dp_key}_indicators`]: {
           index: 2,
           header: text_maker("indicators"),
-          is_sortable: true,
           is_summable: true,
           formatter: "big_int",
         },
@@ -109,7 +106,6 @@ export const declare_gov_dp_panel = () => declare_panel({
     render({ calculations, sources, footnotes}){
       const {
         panel_args: {
-          column_names,
           rows_of_counts_by_dept,
           late_dept_count,
           column_configs,
@@ -126,7 +122,6 @@ export const declare_gov_dp_panel = () => declare_panel({
         >
           <DpSummary 
             counts={counts}
-            column_names={column_names}
             rows_of_counts_by_dept={rows_of_counts_by_dept}
             late_dept_count={late_dept_count}
             column_configs={column_configs}

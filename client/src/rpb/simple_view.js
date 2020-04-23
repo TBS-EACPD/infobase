@@ -8,7 +8,6 @@ import {
 } from './shared.js';
 import { 
   Select, 
-  Format, 
   LabeledBox,
   AlertBanner,
   CheckBox,
@@ -218,7 +217,6 @@ class SimpleView extends React.Component {
       [first_col_nick]: {
         index: 0,
         header: text_maker(deptBreakoutMode ? 'org' : dimension),
-        is_sortable: true,
         is_searchable: true,
         formatter: (value) => subj_map[value] ? <a href={subj_map[value]}> {value} </a> : value,
       },
@@ -227,7 +225,6 @@ class SimpleView extends React.Component {
           [col.nick, {
             index: idx + 1,
             header: col.fully_qualified_name,
-            is_sortable: true,
             is_summable: true,
             formatter: data_type_map[col.nick],
           }]

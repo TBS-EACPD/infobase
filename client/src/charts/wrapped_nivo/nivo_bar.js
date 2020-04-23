@@ -10,36 +10,25 @@ import {
 
 import { DisplayTable } from '../../components/index.js';
 
-
 const bar_table = (data, keys, indexBy, table_view_format, table_name, table_first_column_name) => {
-  const table_data = _.map(data, row => ({
-    [indexBy]: row[indexBy],
-    ..._.chain(keys)
-      .map( key => [key, row[key]] )
-      .fromPairs()
-      .value(),
-  }));
-
   const column_configs = {
     [indexBy]: {
       index: 0,
       header: table_first_column_name || nivo_common_text_maker("label"),
       is_searchable: true,
-      is_sortable: true,
     },
     ..._.chain(keys)
       .map((key, idx) => [key, {
         index: idx + 1,
         header: key,
-        is_sortable: true,
-        formatter: (value) => table_view_format(value),
+        formatter: (value) => _.isUndefined(value) ? "" : table_view_format(value),
       }])
       .fromPairs()
       .value(),
   };
 
   return <DisplayTable
-    data={table_data}
+    data={ _.map(data, row => _.pick(row, [indexBy, ...keys])) }
     column_configs={column_configs}
     table_name={table_name || nivo_common_text_maker("default_table_name")}/>;
 };
