@@ -20,7 +20,6 @@ import {
   IconNotApplicable,
   IconClock,
 } from '../../../icons/icons.js';
-import { businessConstants } from '../../../models/businessConstants.js';
 
 const {
   indicator_target_text,
@@ -35,8 +34,6 @@ const {
   AlertBanner,
 } = util_components;
 const { sanitized_marked } = general_utils;
-const { months } = businessConstants;
-
 
 const IndicatorResultDisplay = (props) => {
   const {indicator, is_actual, is_previous} = props;
@@ -86,10 +83,7 @@ const IndicatorDisplay = ({indicator, show_doc}) => {
           <TM k="date_to_achieve" />
         </dt>
         <dd>
-          { _.isDate(indicator.target_date) ?
-              `${months[indicator.target_date.getMonth() + 1].text} ${indicator.target_date.getFullYear()}` :
-              indicator.target_date
-          }
+          {indicator.target_date}
         </dd>
 
         <dt>

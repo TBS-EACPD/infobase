@@ -95,23 +95,20 @@ export class NivoResponsiveLine extends React.Component {
       .compact()
       .groupBy('label')
       .map( _.spread(_.merge) )
-      .map( row => ({
-        ..._.mapValues(row),
-      }))
       .value();
+    const line_table_value_formatter = (value) =>
+      _.isUndefined(value) ? "" : get_formatter(is_money,text_formatter,true,true)(value);
     const column_configs = {
       label: {
         index: 0,
         header: table_first_column_name || text_maker("label"),
-        is_sortable: true,
         is_searchable: true,
       },
       ..._.chain(table_ordered_column_keys || _.map(data,'id'))
         .map( (col, idx) => [col, {
           index: idx + 1,
           header: col,
-          is_sortable: true,
-          formatter: (value) => value ? get_formatter(is_money,text_formatter,true,true)(value) : "",
+          formatter: line_table_value_formatter,
         }] )
         .fromPairs()
         .value(),

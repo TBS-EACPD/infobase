@@ -1,13 +1,11 @@
 import './result_flat_table.scss';
 
 import { Fragment } from 'react';
-
 import { TM, text_maker } from './result_text_provider.js';
 import { businessConstants } from '../../../models/businessConstants.js';
-import { 
+import {
   util_components, 
   InfographicPanel,
-  breakpoints,
   ensure_loaded,
   infograph_href_template,
   get_source_links,
@@ -24,7 +22,6 @@ const { months } = businessConstants;
 
 import {
   StatusIconTable,
-  status_icons,
   large_status_icons,
 } from './result_components.js';
 import { 
@@ -87,41 +84,51 @@ const indicator_table_from_list = (indicator_list) => {
     cr_or_program: {
       index: 0,
       header: text_maker("cr_or_program"),
-      is_sortable: true,
       is_searchable: true,
       formatter: (value) => subject_link_map[value],
     },
     indicator: {
       index: 1,
       header: text_maker("indicator"),
-      is_sortable: true,
       is_searchable: true,
       formatter: (value) => <a href={indicator_id_map[value]}> {value} </a>,
     },
     target: {
       index: 2,
       header: text_maker("target"),
+      is_sortable: false,
     },
     target_result: {
       index: 3,
       header: text_maker("target_result"),
+      is_sortable: false,
     },
     date_to_achieve: {
       index: 4,
       header: text_maker("date_to_achieve"),
-      is_sortable: true,
       formatter: (val) => _.isDate(val) ?
         `${months[val.getMonth() + 1].text} ${val.getFullYear()}` : val,
     },
     status: {
       index: 5,
       header: text_maker("status"),
-      is_sortable: true,
       formatter: (value) => <Fragment>
         <span aria-hidden="true" className="copyable-hidden">{result_statuses[value].text}</span>
-        {window.innerWidth < breakpoints.mediumDevice ? status_icons[value] : large_status_icons[value]}
+        {large_status_icons[value]}
       </Fragment>,
     },
+  };
+
+  const get_indicator_date = ({target_year, target_month}) => {
+    if( _.isNumber(target_month) && _.isNumber(target_year) ){
+      return new Date(target_year, target_month);
+    } else if( _.isNumber(target_year) ){
+      return target_year;
+    } else if( _.nonEmpty(target_year) ){
+      return text_maker(target_year);
+    } else {
+      return text_maker("unspecified");
+    }
   };
 
   const table_data = _.map(indicator_list, ind => ({
@@ -129,7 +136,7 @@ const indicator_table_from_list = (indicator_list) => {
     indicator: ind.indicator.name,
     target: indicator_target_text(ind.indicator),
     target_result: indicator_actual_text(ind.indicator),
-    date_to_achieve: ind.indicator.target_date,
+    date_to_achieve: get_indicator_date(ind.indicator),
     status: ind.indicator.status_key,
   }));
   return <DisplayTable 

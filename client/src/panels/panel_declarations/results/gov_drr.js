@@ -24,7 +24,6 @@ class GovDRR extends React.Component {
   render(){
     const {
       rows_of_counts_by_dept,
-      column_names,
       gov_counts,
       num_depts,
       verbose_gov_counts,
@@ -101,7 +100,6 @@ export const declare_gov_drr_panel = () => declare_panel({
         subject_name: {
           index: 0,
           header: text_maker("org"),
-          is_sortable: true,
           is_searchable: true,
           formatter: (value) => subj_map[value] ? <a href={subj_map[value]}> {value} </a> : value,
         },
@@ -110,20 +108,17 @@ export const declare_gov_drr_panel = () => declare_panel({
           .map( (column_key, index) => [column_key, {
             index: index + 1,
             header: column_keys[column_key],
-            is_sortable: true,
             is_summable: true,
             formatter: "big_int",
           }] )
           .fromPairs()
           .value(),
       };
-      const column_names = _.assignIn({subject_name: text_maker("org")}, column_keys);
       const late_dept_count = result_docs[current_drr_key].late_results_orgs.length;
 
       return {
         gov_counts,
         rows_of_counts_by_dept,
-        column_names,
         verbose_gov_counts,
         num_depts,
         column_configs,

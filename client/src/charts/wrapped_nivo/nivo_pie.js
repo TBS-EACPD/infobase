@@ -104,18 +104,15 @@ export class NivoResponsivePie extends React.Component{
         index: 0,
         header: nivo_common_text_maker("label"),
         is_searchable: true,
-        is_sortable: true,
       },
       value: {
         index: 1,
         header: nivo_common_text_maker("value"),
-        is_sortable: true,
         formatter: (value) => value ? get_formatter(is_money, text_formatter, true, true)(value) : "",
       },
       percentage: {
         index: 2,
         header: nivo_common_text_maker("percentage"),
-        is_sortable: true,
         formatter: (value) => formats.percentage_raw(value),
       },
     };

@@ -29,9 +29,7 @@ export class DisplayTable extends React.Component {
     
     const searches = _.chain(column_configs)
       .pickBy(col => col.is_searchable)
-      .keys()
-      .map(search_key => [search_key, ""])
-      .fromPairs()
+      .mapValues( () => "" )
       .value();
 
     this.state = {
@@ -112,10 +110,13 @@ export class DisplayTable extends React.Component {
     );
     const is_total_exist = !_.isEmpty(total_row);
 
-    const ordered_column_keys = _.reduce( column_configs, (ordered_arr, column, column_key) => {
-      ordered_arr.splice(column.index, 0, column_key);
-      return ordered_arr;
-    }, [] );
+    const ordered_column_keys = _.chain(column_configs)
+      .map( ({index}, key) => [index, key] )
+      .sortBy( _.first )
+      .map( _.last )
+      .value();
+
+    const default_true = (val) => _.isUndefined(val) || val ? true : false;
 
     return (
       <div style={{overflowX: "auto", marginTop: "20px", marginBottom: "20px"}}>
@@ -148,7 +149,7 @@ export class DisplayTable extends React.Component {
                 _.map(
                   ordered_column_keys,
                   (column_key) => {
-                    const sortable = column_configs[column_key].is_sortable;
+                    const sortable = default_true(column_configs[column_key].is_sortable);
                     const searchable = column_configs[column_key].is_searchable;
 
                     const current_search_input = (searchable && searches[column_key]) || null;
@@ -244,3 +245,6 @@ export class DisplayTable extends React.Component {
     );
   }
 }
+DisplayTable.defaultProps = {
+
+};
