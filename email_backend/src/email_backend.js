@@ -158,7 +158,7 @@ const make_email_backend = (templates) => {
             .then( () => {
 
               console.log('Connection Successful.');
-              const new_problem = mongoose.model('Problems', problem_schema);
+              const new_problem = mongoose.model(completed_template.issue_type[0], problem_schema);
               const problem_to_send = new new_problem({ 
                 type: completed_template.issue_type[0],
                 details: completed_template.issue_details,
