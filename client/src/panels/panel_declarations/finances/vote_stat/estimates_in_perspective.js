@@ -47,10 +47,10 @@ export const declare_estimates_in_perspective_panel = () => declare_panel({
           {...{footnotes, sources}}
           allowOverflow={true}
         >
-          <Col isText size={5}>
+          <Col isText size={!window.is_a11y_mode ? 5 : 12}>
             <TM k="estimates_perspective_text" args={info} />
           </Col>
-          {!window.is_a11y_mode &&
+          { !window.is_a11y_mode &&
             <Col isGraph size={7}>
               <CircleProportionChart 
                 height={250}

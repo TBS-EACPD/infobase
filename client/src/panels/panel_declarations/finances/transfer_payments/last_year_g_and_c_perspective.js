@@ -49,7 +49,7 @@ export const declare_last_year_g_and_c_perspective_panel = () => declare_panel({
           sources={sources}
           allowOverflow={true}
         >
-          <Col size={6} isText>
+          <Col size={!window.is_a11y_mode ? 6 : 12} isText>
             <TM k="dept_last_year_g_and_c_perspective_text" args={info} />
           </Col>
           { !window.is_a11y_mode &&
