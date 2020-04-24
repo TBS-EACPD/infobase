@@ -35,22 +35,20 @@ export const declare_employee_last_year_totals_panel = () => declare_panel({
     },
   
     render({calculations, footnotes, sources}){
-      if(window.is_a11y_mode){
-        return;
-      } else {
-        const {subject, info, panel_args} = calculations;
-        
-        const dept_emp_value = panel_args.vals[1].value;
-        const gov_emp_value = panel_args.vals[0].value;
-        return (
-          <StdPanel
-            title={text_maker("dept_employee_last_year_totals_title")}
-            {...{footnotes, sources}}
-            allowOverflow={true}
-          >
-            <Col size={5} isText>
-              <TM k="dept_employee_last_year_totals_text" args={info} />
-            </Col>
+      const {subject, info, panel_args} = calculations;
+
+      const dept_emp_value = panel_args.vals[1].value;
+      const gov_emp_value = panel_args.vals[0].value;
+      return (
+        <StdPanel
+          title={text_maker("dept_employee_last_year_totals_title")}
+          {...{footnotes, sources}}
+          allowOverflow={true}
+        >
+          <Col size={!window.is_a11y_mode ? 5 : 12} isText>
+            <TM k="dept_employee_last_year_totals_text" args={info} />
+          </Col>
+          { !window.is_a11y_mode &&
             <Col size={7} isGraph>
               <CircleProportionChart 
                 height={200}
@@ -61,9 +59,9 @@ export const declare_employee_last_year_totals_panel = () => declare_panel({
                 parent_name={text_maker('all_fps')}
               />
             </Col>
-          </StdPanel>
-        );
-      }
+          }
+        </StdPanel>
+      );
     },
   }),
 });
