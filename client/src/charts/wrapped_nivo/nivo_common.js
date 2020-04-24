@@ -41,10 +41,10 @@ const fix_legend_symbols = (legends) => legends ?
   undefined;
 
 
-const DefaultTooltipColorLegend = ({tooltip_item}) => (
-  <td className="nivo-tooltip__content">
+const DefaultLegendIcon = ({tooltip_item}) => (
+  <td className="nivo-tooltip__legend-icon">
     <div
-      className="nivo-tooltip__legend-icon"
+      className={`nivo-tooltip__icon-${tooltip_item.shape || "square"}`} 
       style={{backgroundColor: tooltip_item.color}}
     />
   </td>
@@ -53,7 +53,7 @@ const TooltipFactory = ({
   tooltip_items,
   tooltip_container_class,
   TooltipContentComponent,
-  ColorLegendComponet=DefaultTooltipColorLegend,
+  LegendIconComponent=DefaultLegendIcon,
 }) => (
   <div
     className={tooltip_container_class}
@@ -64,8 +64,8 @@ const TooltipFactory = ({
         { tooltip_items.map(
           tooltip_item => (
             <tr key={tooltip_item.id}>
-              { ColorLegendComponet && 
-                <ColorLegendComponet
+              { LegendIconComponent && 
+                <LegendIconComponent
                   tooltip_item={tooltip_item}
                 />
               }
@@ -88,18 +88,18 @@ const DefaultTooltip = ({tooltip_items, formatter}) => (
         <Fragment>
           <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
             <Fragment>{ /* MediaQuery jank, it will insert a div wrapping its children when it has mutliple of them, need a manual Fragment to avoid that */ }
-              <td className="nivo-tooltip__content">
+              <td className="nivo-tooltip__label">
                 {tooltip_item.name || tooltip_item.id}
               </td>
-              <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+              <td className="nivo-tooltip__value" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
             </Fragment>
           </MediaQuery>
           <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
             <td>
-              <div className="nivo-tooltip__content">
+              <div className="nivo-tooltip__label">
                 {tooltip_item.name || tooltip_item.id}
               </div>
-              <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+              <div className="nivo-tooltip__value" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
             </td>
           </MediaQuery>
         </Fragment>
@@ -116,20 +116,20 @@ const DefaultPercentTooltip = ({tooltip_items, formatter, total}) => (
         <Fragment>
           <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
             <Fragment>{ /* MediaQuery jank, it will insert a div wrapping its children when it has mutliple of them, need a manual Fragment to avoid that */ }
-              <td className="nivo-tooltip__content">
+              <td className="nivo-tooltip__label">
                 {tooltip_item.name || tooltip_item.id}
               </td>
-              <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
-              <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}} />
+              <td className="nivo-tooltip__value" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+              <td className="nivo-tooltip__value" dangerouslySetInnerHTML={{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}} />
             </Fragment>
           </MediaQuery>
           <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
             <td>
-              <div className="nivo-tooltip__content">
+              <div className="nivo-tooltip__label">
                 {tooltip_item.name || tooltip_item.id}
               </div>
-              <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
-              <div className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}} />
+              <div className="nivo-tooltip__value" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
+              <div className="nivo-tooltip__value" dangerouslySetInnerHTML={{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}} />
             </td>
           </MediaQuery>
         </Fragment>

@@ -137,44 +137,40 @@ export class CircleProportionChart extends React.Component{
             id: "parent",
             name: parent_name,
             value: parent_value,
+            shape: "circle",
+            color: color_scale(parent_name),
           },
           {
             id: "child",
             name: child_name,
             value: child_value,
+            shape: "circle",
+            color: color_scale(child_name),
           },
         ]}
         tooltip_container_class="proportional-bubble-tooltip"
-        ColorLegendComponet={({tooltip_item}) => (
-          <td className="nivo-tooltip__content">
-            <div
-              className="proportional-bubble-tooltip__legend_icon"
-              style={{backgroundColor: color_scale(tooltip_item.name)}}
-            />
-          </td>
-        )}
         TooltipContentComponent={({tooltip_item}) => (
           <Fragment>
             <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
               <Fragment>{ /* MediaQuery jank, it will insert a div wrapping its children when it has mutliple of them, need a manual Fragment to avoid that */ }
-                <td className="nivo-tooltip__content">
+                <td className="nivo-tooltip__label">
                   {tooltip_item.name}
                 </td>
-                <td className="nivo-tooltip__content">
+                <td className="nivo-tooltip__value">
                   {value_formatter(tooltip_item.value)}
                 </td>
-                <td className="nivo-tooltip__content">
+                <td className="nivo-tooltip__value">
                   {`(${formats.smart_percentage1_raw(tooltip_item.value/parent_value)})`}
                 </td>
               </Fragment>
             </MediaQuery>
             <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
               <td>
-                <div className="nivo-tooltip__content">{tooltip_item.name}</div>
-                <div className="nivo-tooltip__content">
+                <div className="nivo-tooltip__label ">{tooltip_item.name}</div>
+                <div className="nivo-tooltip__value">
                   {value_formatter(tooltip_item.value)}
                 </div>
-                <div className="nivo-tooltip__content">
+                <div className="nivo-tooltip__value">
                   {`(${formats.smart_percentage1_raw(tooltip_item.value/parent_value)})`}
                 </div>
               </td>
