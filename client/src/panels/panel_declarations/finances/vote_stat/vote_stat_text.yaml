@@ -166,7 +166,7 @@ dept_estimates:
   en: |
     {{subject.abbr}} authorities
   fr: |
-    Montants déposés {{de_dept_abbr subject}}
+    Montants déposés {{{de_dept_abbr subject}}}
 
 gov_estimates:
   en: Government authorities
