@@ -166,8 +166,8 @@ dept_estimates:
   en: |
     {{subject.abbr}} authorities
   fr: |
-    TODO
+    Montants déposés {{de_dept subject}}
 
 gov_estimates:
   en: Government authorities
-  fr: TODO
+  fr: Montants déposés du Gouvernement

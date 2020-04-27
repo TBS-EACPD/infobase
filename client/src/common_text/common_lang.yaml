@@ -254,7 +254,7 @@ net:
   fr: Nettes
 goc_total:
   en: Government Total
-  fr: Total pour le Gouvernement
+  fr: Total du Gouvernement
 government_stats:
   en: Government
   fr: Gouvernement
@@ -683,7 +683,7 @@ the_fps:
   fr: la Fonction publique fédérale
 all_fps:
   en: All Federal Public Servants
-  fr: TODO
+  fr: Tous les fonctionnaires fédéraux
 other_port_cpa:
   en: Other Portions of the Core Public Administration
   fr: Autres secteurs de l’administration publique centrale
