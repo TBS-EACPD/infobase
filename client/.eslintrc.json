@@ -19,12 +19,27 @@
   },
   "rules": {
       "no-use-before-define": ["error", { "functions": true, "classes": true }],
+      "key-spacing": [ "warn" ],
+      "no-extra-semi": [ "off" ],
+      "prefer-const": ["warn"],
+      "no-duplicate-imports":["warn"],
+      "no-var":["warn"],
+
       "react/jsx-uses-vars": 1,
       "react/prop-types": [ "off" ],
       "react/no-string-refs": [ "off" ],
       "react/display-name": [ "off" ],
       "react/no-find-dom-node": [ "off" ],
-      "react/no-children-prop": [ "off" ]
+      "react/no-children-prop": [ "off" ],
+      "react/no-redundant-should-component-update": ["warn"],
+      "react/no-this-in-sfc": ["warn"],
+      "react/no-did-update-set-state": ["warn"],
+      "react/no-will-update-set-state": ["warn"],
+      "react/no-deprecated": ["warn"],
+      "react/no-direct-mutation-state": ["warn"], 
+      "react/void-dom-elements-no-children": ["warn"],
+      "react/jsx-key": ["warn"],
+      "react/jsx-pascal-case":["warn", { "ignore":["TM"] }]
   },
   "settings": {
     "react": {
