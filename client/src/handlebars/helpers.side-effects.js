@@ -398,37 +398,40 @@ Handlebars.registerHelper('du_crso', crso => {
   }
 });
 
-// looks up the name for the department if passed
-// a department object
-Handlebars.registerHelper("de_dept",function(context){
-  let dept;
-  if (context.is("dept")){
-    dept = context;
-  } else {
-    dept = Subject.Dept.lookup(context); 
-  }
-  let article = dept.du_de_la;
-  if (article.length > 0 && _.last(article) !== "'") {
-    article += " ";
-  }
-  return article + dept.name;
+const add_article_to_dept_identifier = (article_key, identifier_key, helper_context) => {
+  const dept_subject = helper_context.is("dept") ?
+    helper_context :
+    Subject.Dept.lookup(helper_context);
 
-});
+  const article = dept_subject[article_key];
+
+  const article_is_full_word = !_.isEmpty(article) && _.last(article) !== "'";
+  const article_identifier_separator = article_is_full_word ? " " : "";
+
+  const identifier = dept_subject[identifier_key];
+
+  return `${article}${article_identifier_separator}${identifier}`;
+};
+
 // looks up the name for the department if passed
 // a department object
-Handlebars.registerHelper("le_dept",function(context){
-  let dept;
-  if (context.is("dept")){
-    dept = context;
-  } else {
-    dept = Subject.Dept.lookup(context); 
-  }
-  let article = dept.le_la;
-  if (article.length > 0 && _.last(article) !== "'") {
-    article += " ";
-  }
-  return article + dept.name;
-});
+Handlebars.registerHelper(
+  "de_dept",
+  (context) => add_article_to_dept_identifier('du_de_la', 'name', context)
+);
+Handlebars.registerHelper(
+  "de_dept_abbr",
+  (context) => add_article_to_dept_identifier('du_de_la', 'abbr', context)
+);
+Handlebars.registerHelper(
+  "le_dept",
+  (context) => add_article_to_dept_identifier('le_la', 'name', context)
+);
+Handlebars.registerHelper(
+  "le_dept_abbr",
+  (context) => add_article_to_dept_identifier('le_la', 'abbr', context)
+);
+
 
 // {{encodeURI "someurl"}} -> encodes the string with URL
 // encoding, i.e. "blah blah" -> "blah%20blah"
