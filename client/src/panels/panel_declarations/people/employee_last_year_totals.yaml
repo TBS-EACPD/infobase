@@ -17,4 +17,4 @@ dept_headcount:
   en: |
     {{subject.abbr}} headcount
   fr: |
-    Montants déposés {{de_dept_abbr subject}}
+    Effectif {{{de_dept_abbr subject}}}
