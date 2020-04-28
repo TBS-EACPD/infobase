@@ -20,9 +20,7 @@ function get_connection_str(){
   } else {
     console.log("using local db")
     return "mongodb://127.0.0.1:27017/infobase";
-  }
-
-  
+  }  
 }
 
 

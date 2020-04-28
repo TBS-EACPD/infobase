@@ -154,7 +154,7 @@ const make_email_backend = (templates) => {
           const Schema = mongoose.Schema;
           const problem_schema = new Schema({}, { strict: false });
           //TODO - change this to change the database connection
-          mongoose.connect('mongodb://localhost/Feedback')
+          mongoose.connect('mongodb://127.0.0.1:27018/infobase')
             .then( () => {
 
               console.log('Connection Successful.');
