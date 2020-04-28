@@ -60,15 +60,17 @@ export class DisplayTable extends React.Component {
         column_key: {
           index: 0, <- (integer) Zero indexed, order of column. Required
           header: "Organization", <- (string) Name of column. Required
-          is_sortable: true, <- (boolean) Default sorts based on column values (number, string, Date supported)
-          is_summable: true, <- (boolean) Sums based on column values
-          is_searchable: true, <- (boolean) Searches based on column values
+          is_sortable: true, <- (boolean) Default to true
+          is_summable: true, <- (boolean) Default to false
+          is_searchable: true, <- (boolean) Default to false
           formatter:
             "big_int" <- (string) If it's string, auto formats using types_to_format
             OR
             (value) => <span> {value} </span>, <- (function)  If it's function, column value is passed in
-          sort_func: (a, b) => ... (function) Custom sort function. See use cases "sort_func_template"
-          search_formatter: (value) => Dept.lookup(value).name <- (function) actual value to search from data
+          search_formatter: (value) => Dept.lookup(value).name <- (function) Actual value to search from data. Default to raw value
+          sum_func: (sum, value) => ... <- (function) Custom sum func. Default to sum + value
+          sort_func: (a, b) => ... <- (function) Custom sort func. Default to _.sortBy
+          sum_initial_value: 0 <- (number) Default to 0
         },
       }
       */
@@ -78,6 +80,9 @@ export class DisplayTable extends React.Component {
       descending,
       searches,
     } = this.state;
+
+    const default_zero = (val) => _.isUndefined(val) ? 0 : val;
+    const default_true = (val) => _.isUndefined(val) || val ? true : false;
 
     const clean_search_string = (search_string) => _.chain(search_string).deburr().toLower().trim().value();
     const is_number_string_date = (val) => _.isNumber(val) || _.isString(val) || _.isDate(val);
@@ -114,11 +119,13 @@ export class DisplayTable extends React.Component {
       sorted_filtered_data,
       (totals, row) => _.mapValues(
         totals,
-        (total, col_key) => total + row[col_key]
+        (total, col_key) => column_configs[col_key].sum_func ?
+          column_configs[col_key].sum_func(total, row[col_key]) :
+          total + row[col_key]
       ),
       _.chain(column_configs)
         .pickBy(col => col.is_summable)
-        .mapValues(col => 0)
+        .mapValues(col => default_zero(col.sum_initial_value))
         .value()
     );
     const is_total_exist = !_.isEmpty(total_row);
@@ -128,8 +135,6 @@ export class DisplayTable extends React.Component {
       .sortBy( _.first )
       .map( _.last )
       .value();
-
-    const default_true = (val) => _.isUndefined(val) || val ? true : false;
 
     return (
       <div style={{overflowX: "auto", marginTop: "20px", marginBottom: "20px"}}>
