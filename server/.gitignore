@@ -8,5 +8,3 @@ npm-debug*
 coverage
 *credentials*.json
 transpiled_build/
-mongo/mongo.log
-mongo/db/*

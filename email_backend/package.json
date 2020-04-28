@@ -41,7 +41,7 @@
     "prod_deploy": "sh deploy_scripts/prod_deploy_email_backend_function.sh",
     "merge_coverage_reports": "merge-coverage-reports --report ./coverage/*/coverage-final.json",
     "create_coverage_shield_badge": "create-coverage-shield-badge --report ./coverage/coverage-final.json > ./coverage/coverage-shield-badge.svg",
-    "mongod": "./mongo/start_mongod.sh"
+    "mongod": "sh ../scripts/dev_scripts/local_mongod.sh -p 27018"
   },
   "authors": [
     "Stephen O'Neil"
