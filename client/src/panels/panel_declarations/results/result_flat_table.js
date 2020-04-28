@@ -155,7 +155,7 @@ const indicator_table_from_list = (indicator_list) => {
       return text_maker("unspecified");
     }
   };
-  console.log(indicator_list);
+  
   const table_data = _.map(indicator_list, ind => ({
     cr_or_program: ind.indicator.id,
     indicator: ind.indicator.id,
