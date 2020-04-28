@@ -1,6 +1,6 @@
 bubble_title:
   transform: [handlebars, markdown]
   en: |
-    **{{inner}}** as a portion of **{{outer}}**
+    Portion (**{{inner}}**) compared to total (**{{outer}}**)
   fr: |
-    **{{inner}}** en tant que partie de **{{outer}}**
+    Portion (**{{inner}}**) par rapport au total (**{{outer}}**)
