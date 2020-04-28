@@ -1,5 +1,5 @@
 import { text_maker, TM } from './vote_stat_text_provider.js';
-import { DisplayTable } from '../../../../components/index.js';
+import { DisplayTable, default_dept_name_sort_func } from '../../../../components/index.js';
 import {
   Subject,
   formats,
@@ -16,12 +16,13 @@ const { Format } = util_components;
 
 const main_col = "{{est_in_year}}_estimates";
 
+const { Dept } = Subject;
 
 const text_func = (vs, d, break_str) => {
   if (vs == 'voted') {
-    return d.dept ? `${Subject.Dept.lookup(d.dept).name} ${break_str}  ${d.desc}` : d.desc;
+    return d.dept ? `${Dept.lookup(d.dept).name} ${break_str}  ${d.desc}` : d.desc;
   } else {
-    return d.dept ? `${d.desc} ${break_str} ${Subject.Dept.lookup(d.dept).name}` : d.desc;
+    return d.dept ? `${d.desc} ${break_str} ${Dept.lookup(d.dept).name}` : d.desc;
   }
 };
 
@@ -77,13 +78,13 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
   const col = "{{est_in_year}}_estimates";
   const top_10_rows = _.take(data, 10);
   const total_amt = d3.sum(data, _.property(col));
-  
+
   const subj_map = _.chain(top_10_rows)
-    .map( obj => [Subject.Dept.lookup(obj.dept).name, infograph_href_template(Subject.Dept.lookup(obj.dept))] )
+    .map( obj => [obj.dept, infograph_href_template(Dept.lookup(obj.dept))] )
     .fromPairs()
     .value();
   const table_data = _.map(top_10_rows, obj => ({
-    name: Subject.Dept.lookup(obj.dept).name,
+    name: obj.dept,
     voted_stat: obj.desc,
     amount: obj[col],
   }));
@@ -93,7 +94,9 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
       index: 0,
       header: text_maker("org"),
       is_searchable: true,
-      formatter: (value) => subj_map[value] ? <a href={subj_map[value]}> {value} </a> : value,
+      formatter: (value) => subj_map[value] ? <a href={subj_map[value]}> {Dept.lookup(value).name} </a> : value,
+      search_formatter: (value) => value ? Dept.lookup(value).name : value,
+      sort_func: (a, b) => default_dept_name_sort_func(a, b),
     },
     voted_stat: {
       index: 1,
