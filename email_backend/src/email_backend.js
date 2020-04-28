@@ -16,9 +16,9 @@ import {
   make_email_body_from_completed_template,
 } from './template_utils';
 
-import { throttle_requests_by_client } from './throttle_requests_by_client.js';
+import { log_email_and_meta_to_db } from './db_utils';
 
-import mongoose from 'mongoose'; 
+import { throttle_requests_by_client } from './throttle_requests_by_client.js';
 
 const get_request_content = (request) => (!_.isEmpty(request.body) && request.body) || (!_.isEmpty(request.query) && request.query);
 
@@ -103,10 +103,6 @@ const make_email_backend = (templates) => {
         template_name,
         completed_template,
       } = get_request_content(request);
-      const {
-        ip,
-        headers,
-      } = request;
 
       const original_template = templates[template_name];
 
@@ -150,7 +146,7 @@ const make_email_backend = (templates) => {
         if (mail_sent_successfully){
           response.send("200");
 
-          // TODO mongo stuff
+          log_email_and_meta_to_db(request, completed_template, template_name, original_template, email_config);
         } else {
           const error_message = `Internal Server Error: mail was unable to send. ${ 
             sent_mail_info.err ? 
