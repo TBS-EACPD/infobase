@@ -150,33 +150,7 @@ const make_email_backend = (templates) => {
         if (mail_sent_successfully){
           response.send("200");
 
-          //Sending info to MongoDB server
-          const Schema = mongoose.Schema;
-          const problem_schema = new Schema({}, { strict: false });
-          //TODO - change this to change the database connection
-          mongoose.connect('mongodb://127.0.0.1:27018/infobase')
-            .then( () => {
-
-              console.log('Connection Successful.');
-              const new_problem = mongoose.model(completed_template.issue_type[0], problem_schema);
-              const problem_to_send = new new_problem({ 
-                type: completed_template.issue_type[0],
-                details: completed_template.issue_details,
-                user: headers["user-agent"],
-                date: Date(),
-                ip: ip,
-                full: completed_template,
-                headers: headers,
-              });
-  
-              //if message is not shown, log is unsuccessful
-              problem_to_send.save().then(function(){
-                console.log('Mongo Log Request Successful.');
-              });
-
-            } )
-            .catch( (error) => console.log('Connection Error: ', error) );
-          
+          // TODO mongo stuff
         } else {
           const error_message = `Internal Server Error: mail was unable to send. ${ 
             sent_mail_info.err ? 

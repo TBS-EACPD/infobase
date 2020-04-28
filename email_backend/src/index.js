@@ -1,10 +1,13 @@
 // entry-point, for both dev and GCF
+import { connect_db } from './db_utils';
 import { make_email_backend } from './email_backend.js';
 import { get_templates } from './template_utils';
 
 const email_backend = (() => {
   const templates = get_templates();
-  
+
+  connect_db();
+
   const email_backend = make_email_backend(templates);
 
   if (!process.env.IS_PROD_SERVER){
