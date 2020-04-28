@@ -2,12 +2,14 @@ import './DisplayTable.scss';
 
 import classNames from 'classnames';
 import text from '../common_text/common_lang.yaml';
+import { Subject } from "../models/subject.js";
 import { create_text_maker_component, Format } from './misc_util_components.js';
 
 import { SortDirections } from './SortDirection.js';
 import { DebouncedTextInput } from './DebouncedTextInput.js';
 
 const { text_maker, TM } = create_text_maker_component(text);
+const { Dept } = Subject;
 
 export class DisplayTable extends React.Component {
   constructor(props){
@@ -65,6 +67,8 @@ export class DisplayTable extends React.Component {
             "big_int" <- (string) If it's string, auto formats using types_to_format
             OR
             (value) => <span> {value} </span>, <- (function)  If it's function, column value is passed in
+          sort_func: (a, b) => ... (function) Custom sort function. See use cases "sort_func_template"
+          search_formatter: (value) => Dept.lookup(value).name <- (function) actual value to search from data
         },
       }
       */
@@ -79,21 +83,30 @@ export class DisplayTable extends React.Component {
     const is_number_string_date = (val) => _.isNumber(val) || _.isString(val) || _.isDate(val);
     const sorted_filtered_data = _.chain(data)
       .filter( (row) => _.chain(row)
-        .map( (column_value, column_key) => (
-          _.isEmpty(searches[column_key]) ||
+        .map( (column_value, column_key) => {
+          const col_config = column_configs[column_key];
+          const col_search_value = col_config.search_formatter ? col_config.search_formatter(column_value) : column_value;
+          return _.isEmpty(searches[column_key]) ||
             _.includes(
-              clean_search_string(column_value),
+              clean_search_string(col_search_value),
               clean_search_string(searches[column_key])
-            )
-        ) )
+            );
+        })
         .every()
         .value()
       )
-      .sortBy( row => row[sort_by] &&
-        is_number_string_date(row[sort_by]) ?
-          row[sort_by] :
-          Number.NEGATIVE_INFINITY
-      )
+      .thru( unsorted_array => {
+        if(sort_by) {
+          return column_configs[sort_by].sort_func ?
+            unsorted_array.sort((a, b) => column_configs[sort_by].sort_func(a[sort_by], b[sort_by])) :
+            _.sortBy(unsorted_array, row =>
+            is_number_string_date(row[sort_by]) ?
+              row[sort_by] :
+              Number.NEGATIVE_INFINITY
+            );
+        }
+        return unsorted_array;
+      })
       .tap( descending ? _.reverse : _.noop )
       .value();
     
@@ -245,6 +258,20 @@ export class DisplayTable extends React.Component {
     );
   }
 }
-DisplayTable.defaultProps = {
+export const sort_func_template = (a_name, b_name) => {
+  if(a_name < b_name) {
+    return -1;
+  } else if (a_name > b_name) {
+    return 1;
+  }
+  return 0;
+};
 
+export const default_dept_name_sort_func = (a, b) => {
+  if(a && b) {
+    const a_name = Dept.lookup(a).name.toUpperCase();
+    const b_name = Dept.lookup(b).name.toUpperCase();
+    return sort_func_template(a_name, b_name);
+  }
+  return 0;
 };

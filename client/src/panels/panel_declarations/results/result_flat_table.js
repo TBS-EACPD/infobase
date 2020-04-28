@@ -15,7 +15,11 @@ import {
 
   HeightClippedGraph,
 } from '../shared.js';
-const { SpinnerWrapper, DisplayTable } = util_components;
+const {
+  SpinnerWrapper,
+  DisplayTable,
+  sort_func_template,
+} = util_components;
 
 const { current_drr_key } = Results;
 const { months } = businessConstants;
@@ -72,26 +76,47 @@ const subject_link = (node) => (
 );
 
 const indicator_table_from_list = (indicator_list) => {
-  const subject_link_map = _.chain(indicator_list)
-    .map(ind => [ind.parent_node.data.name, subject_link(ind.parent_node)])
+  const ind_map = _.chain(indicator_list)
+    .map(ind => [ind.indicator.id, {
+      subject_link: subject_link(ind.parent_node),
+      subject_full_name: `${ind.parent_node.data.name} 
+        ${text_maker(ind.parent_node.data.subject.level === "program" ? ind.parent_node.data.subject.level : "core_resp")}`,
+      href: `#indicator/${ind.indicator.id}`,
+      name: ind.indicator.name, 
+    }])
     .fromPairs()
     .value();
-  const indicator_id_map = _.chain(indicator_list)
-    .map(ind => [ind.indicator.name, `#indicator/${ind.indicator.id}`])
-    .fromPairs()
-    .value();
+
   const column_configs = {
     cr_or_program: {
       index: 0,
       header: text_maker("cr_or_program"),
       is_searchable: true,
-      formatter: (value) => subject_link_map[value],
+      formatter: (value) => ind_map[value].subject_link,
+      search_formatter: (value) => ind_map[value].subject_full_name,
+      sort_func: (a, b) => {
+        if(a && b) {
+          const a_name = ind_map[a].subject_full_name.toUpperCase();
+          const b_name = ind_map[b].subject_full_name.toUpperCase();
+          return sort_func_template(a_name, b_name);
+        }
+        return 0;
+      },
     },
     indicator: {
       index: 1,
       header: text_maker("indicator"),
       is_searchable: true,
-      formatter: (value) => <a href={indicator_id_map[value]}> {value} </a>,
+      formatter: (value) => <a href={ind_map[value].href}> {ind_map[value].name} </a>,
+      sort_func: (a, b) => {
+        if(a && b) {
+          const a_name = ind_map[a].name.toUpperCase();
+          const b_name = ind_map[b].name.toUpperCase();
+          return sort_func_template(a_name, b_name);
+        }
+        return 0;
+      },
+      search_formatter: (value) => ind_map[value].name,
     },
     target: {
       index: 2,
@@ -130,10 +155,10 @@ const indicator_table_from_list = (indicator_list) => {
       return text_maker("unspecified");
     }
   };
-
+  console.log(indicator_list);
   const table_data = _.map(indicator_list, ind => ({
-    cr_or_program: ind.parent_node.data.name,
-    indicator: ind.indicator.name,
+    cr_or_program: ind.indicator.id,
+    indicator: ind.indicator.id,
     target: indicator_target_text(ind.indicator),
     target_result: indicator_actual_text(ind.indicator),
     date_to_achieve: get_indicator_date(ind.indicator),

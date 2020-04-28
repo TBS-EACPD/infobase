@@ -30,12 +30,16 @@ export { Countdown } from './Countdown.js';
 export { LogInteractionEvents } from './LogInteractionEvents.js';
 export { GlossaryIcon, GlossaryItem } from './glossary_components.js';
 export { WellList } from './WellList.js';
-export { DisplayTable } from './DisplayTable.js';
 export { LabeledTable } from './LabeledTable.js';
 export { FootnoteList } from './FootnoteList.js';
 export { AlertBanner } from './AlertBanner.js';
 
 export { StatelessModal, FixedPopover } from './modals_and_popovers';
+export {
+  DisplayTable,
+  default_dept_name_sort_func,
+  sort_func_template,
+} from './DisplayTable.js';
 
 export {
   Format,

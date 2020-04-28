@@ -16,7 +16,7 @@ import {
 } from './results_common.js';
 import { DrrSummary } from './drr_summary.js';
 import { LateDepartmentsBanner } from './result_components.js';
-import { DisplayTable } from '../../../components/index.js';
+import { DisplayTable, default_dept_name_sort_func } from '../../../components/index.js';
 
 const { Gov, Dept } = Subject;
 
@@ -84,12 +84,12 @@ export const declare_gov_drr_panel = () => declare_panel({
         .value();
       
       const subj_map = _.chain(dept_counts)
-        .map(row => [ Dept.lookup(row.id).name, link_to_results_infograph(Dept.lookup(row.id)) ])
+        .map(row => [ row.id, link_to_results_infograph(Dept.lookup(row.id)) ])
         .fromPairs()
         .value();
       
       const rows_of_counts_by_dept = _.map(dept_counts, row => ({
-        subject_name: Dept.lookup(row.id).name,
+        subject_name: row.id,
         ..._.chain(column_keys)
           .keys()
           .map(column_key => [ column_key, row[column_key] ])
@@ -101,7 +101,9 @@ export const declare_gov_drr_panel = () => declare_panel({
           index: 0,
           header: text_maker("org"),
           is_searchable: true,
-          formatter: (value) => subj_map[value] ? <a href={subj_map[value]}> {value} </a> : value,
+          formatter: (value) => value ? <a href={subj_map[value]}> {Dept.lookup(value).name} </a> : value,
+          sort_func: (a, b) => default_dept_name_sort_func(a, b),
+          search_formatter: (value) => value ? Dept.lookup(value).name : value,
         },
         ..._.chain(column_keys)
           .keys()

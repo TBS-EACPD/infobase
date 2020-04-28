@@ -12,6 +12,7 @@ import {
   AlertBanner,
   CheckBox,
   DisplayTable,
+  default_dept_name_sort_func,
 } from '../components/index.js';
 import { GraphLegend } from '../charts/declarative_charts.js';
 import { Details } from '../components/Details.js';
@@ -191,7 +192,7 @@ class SimpleView extends React.Component {
 
   get_table_content(){
     const {
-      dimension,   
+      dimension,
       columns,
       deptBreakoutMode,
       simple_table_rows: { rows },
@@ -199,13 +200,10 @@ class SimpleView extends React.Component {
 
     const first_col_nick = deptBreakoutMode ? 'dept' : dimension;
     const subj_map = _.chain(rows)
-      .map(row => {
-        const row_first_col_nick_value = row[first_col_nick];
-        return [ first_col_nick === "dept" ? Dept.lookup(row_first_col_nick_value).name : row_first_col_nick_value,
+      .map(row => [ row[first_col_nick],
         first_col_nick === "dept" ?
-          granular_rpb_link_for_org(this.props, Dept.lookup(row_first_col_nick_value)) :
-          granular_rpb_link_for_filter(this.props, row_first_col_nick_value) ];
-      })
+          granular_rpb_link_for_org(this.props, Dept.lookup(row[first_col_nick])) :
+          granular_rpb_link_for_filter(this.props, row[first_col_nick]) ])
       .fromPairs()
       .value();
     const data_type_map = _.chain(columns)
@@ -218,7 +216,9 @@ class SimpleView extends React.Component {
         index: 0,
         header: text_maker(deptBreakoutMode ? 'org' : dimension),
         is_searchable: true,
-        formatter: (value) => subj_map[value] ? <a href={subj_map[value]}> {value} </a> : value,
+        formatter: (value) => Dept.lookup(value) ? <a href={subj_map[value]}> {Dept.lookup(value).name} </a> : value,
+        sort_func: (a, b) => default_dept_name_sort_func(a, b),
+        search_formatter: (value) => Dept.lookup(value) ? Dept.lookup(value).name : value,
       },
       ..._.chain(columns)
         .map( (col, idx) => 
@@ -235,7 +235,7 @@ class SimpleView extends React.Component {
 
     const dp_data = _.map(rows, row => 
       ({
-        [first_col_nick]: first_col_nick === "dept" ? Dept.lookup(row[first_col_nick]).name : row[first_col_nick],
+        [first_col_nick]: row[first_col_nick],
         ..._.chain(columns)
           .map( col => [ col.nick, row[col.nick] ] )
           .fromPairs()
