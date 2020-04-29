@@ -179,7 +179,7 @@ class DetailedHistTPItems extends React.Component {
     
     const raw_data = _.flatMap(graph_series, value => value);
 
-    const all_tp_idx = _.map(prepped_rows, (row, idx) => idx);
+    const all_tp_idx = _.range(prepped_rows.length);
     const legend_items = _.map(prepped_rows, (row,ix) => ({
       id: ix,
       label: row.tp,
