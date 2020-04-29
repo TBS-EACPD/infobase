@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import _ from 'lodash';
 
 const meta_schema = mongoose.Schema({
   // todo, what meta do we want to log? Stuff from request object and email_config (sending user agent, recipient address, etc)
@@ -43,12 +44,12 @@ export const log_email_and_meta_to_db = (
   const model = make_mongoose_model_from_original_template({template_name, original_template});
 
   const email_fields = get_email_fields_for_log(completed_template, original_template);
-  const meta_fields = get_meta_fields_for_log(request, email_config);
+  const meta_sub_doc = get_meta_fields_for_log(request, email_config);
 
-  // short hand for adding a new entry to the collection with model_name (see make_mongoose_model_from_original_template),
+  // model.create is a short hand for adding a new entry to the collection with model_name (see make_mongoose_model_from_original_template),
   // creates a new collection with that name if one doesn't yet exist in the connected DB
   model.create({
     ...email_fields,
-    ...meta_fields,
+    email_submission_meta: meta_sub_doc,
   });
 };
