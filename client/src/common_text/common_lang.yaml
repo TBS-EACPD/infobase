@@ -8,6 +8,9 @@ new:
 filter_data:
   en: Filter Data
   fr: Filtrer les données
+select_all:
+  en: Select All
+  fr: Tout sélectionner
 notapplicable:
   en: Not Applicable
   fr: Sans objet

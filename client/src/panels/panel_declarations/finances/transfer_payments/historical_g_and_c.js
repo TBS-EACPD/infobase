@@ -179,6 +179,7 @@ class DetailedHistTPItems extends React.Component {
     
     const raw_data = _.flatMap(graph_series, value => value);
 
+    const all_tp_idx = _.map(prepped_rows, (row, idx) => idx);
     const legend_items = _.map(prepped_rows, (row,ix) => ({
       id: ix,
       label: row.tp,
@@ -266,6 +267,10 @@ class DetailedHistTPItems extends React.Component {
             }}
           >
             <GraphLegend
+              toggleActive={active_indices.length >= all_tp_idx.length}
+              onToggleClick={() => this.setState({
+                active_indices: active_indices.length < all_tp_idx.length ? all_tp_idx : [],
+              })}
               onClick={ id => !(active_indices.length==1 && active_indices.includes(id))
               && this.setState({active_indices: _.toggle_list(active_indices,id)})}
               items={legend_items}

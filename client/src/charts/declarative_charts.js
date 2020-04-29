@@ -1,6 +1,8 @@
 import classNames from 'classnames';
-import { CheckBox } from '../components/index.js';
+import { CheckBox, create_text_maker_component } from '../components/index.js';
 import { A11YTable } from './A11yTable.js';
+
+const { text_maker } = create_text_maker_component();
 
 const GraphLegend = ({
   isHorizontal, //defaults to false
@@ -11,8 +13,16 @@ const GraphLegend = ({
   checkbox_style, //style for checkbox
   label_style, //style for label
   checkmark_vertical_align, //defaults to 0.1
+  onToggleClick, //Toggles all items
+  toggleActive, //Toggle active status
 }) => (
   <ul className={window.is_a11y_mode ? "list-unstyled" : classNames("legend-list-inline", isHorizontal && "horizontal")}>
+    { onToggleClick && <CheckBox
+      id="toggleAll"
+      label={text_maker("select_all")}
+      onClick={onToggleClick}
+      active={toggleActive}
+    /> }
     {_.map(items, ({ color, label, id, active }) => 
       <li
         key={id}

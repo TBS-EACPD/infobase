@@ -34,6 +34,7 @@ class SobjLine extends React.Component {
     const { active_sobjs } = this.state;
     const { colors } = this;
 
+    const all_labels = _.map(data, "label");
     const legend_items = _.map(data, ({label}) => ({
       label,
       id: label,
@@ -69,6 +70,10 @@ class SobjLine extends React.Component {
           <div className="legend-container">
             <GraphLegend
               items={legend_items}
+              onToggleClick={() => this.setState({
+                active_sobjs: active_sobjs.length < all_labels.length ? all_labels : [],
+              })}
+              toggleActive={active_sobjs.length >= all_labels.length}
               onClick={ 
                 id => {
                   !(

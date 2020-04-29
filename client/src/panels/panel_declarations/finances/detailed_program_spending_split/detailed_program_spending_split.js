@@ -62,6 +62,7 @@ class HistoricalProgramBars extends React.Component {
     const { selected } = this.state;
 
     const colors = d3.scaleOrdinal().range(_.concat(newIBLightCategoryColors, newIBDarkCategoryColors ));
+    const all_keys = _.map(data, "id");
     const graph_data = _.chain(data)
       .filter( ({id}) => _.includes(selected, id) )
       .map( ({label, data }) => [ label, data ])
@@ -124,6 +125,10 @@ class HistoricalProgramBars extends React.Component {
                   selected: _.toggle_list(selected, id),
                 });
               }}
+              onToggleClick={() => this.setState({
+                selected: selected.length < all_keys.length ? all_keys : [],
+              })}
+              toggleActive={selected.length >= all_keys.length}
             />
           </div>
         </div>
