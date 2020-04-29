@@ -166,8 +166,8 @@ dept_estimates:
   en: |
     {{subject.abbr}} authorities
   fr: |
-    Montants déposés {{{de_dept_abbr subject}}}
+    Crédits votes {{{de_dept_abbr subject}}}
 
 gov_estimates:
   en: Government authorities
-  fr: Montants déposés du Gouvernement
+  fr: Crédits votes du Gouvernement
