@@ -17,12 +17,19 @@ const GraphLegend = ({
   toggleActive, //Toggle active status
 }) => (
   <ul className={window.is_a11y_mode ? "list-unstyled" : classNames("legend-list-inline", isHorizontal && "horizontal")}>
-    { onToggleClick && <CheckBox
-      id="toggleAll"
-      label={text_maker("select_all")}
-      onClick={onToggleClick}
-      active={toggleActive}
-    /> }
+    { onToggleClick && 
+      <CheckBox
+        id="toggleAll"
+        label={text_maker("select_all")}
+        onClick={onToggleClick}
+        active={toggleActive}
+        container_style={{
+          borderBottom: `1px dashed ${window.infobase_color_constants.tertiaryColor}`,
+          paddingBottom: 10,
+          marginBottom: 10,
+        }}
+      />
+    }
     {_.map(items, ({ color, label, id, active }) => 
       <li
         key={id}
