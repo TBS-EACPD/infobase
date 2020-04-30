@@ -70,10 +70,8 @@ class SobjLine extends React.Component {
           <div className="legend-container">
             <GraphLegend
               items={legend_items}
-              onToggleClick={() => this.setState({
-                active_sobjs: active_sobjs.length < all_labels.length ? all_labels : [],
-              })}
-              toggleActive={active_sobjs.length >= all_labels.length}
+              onSelectAll={ () => this.setState({active_sobjs: all_labels}) }
+              onSelectNone={ () => this.setState({active_sobjs: []}) }
               onClick={ 
                 id => {
                   !(

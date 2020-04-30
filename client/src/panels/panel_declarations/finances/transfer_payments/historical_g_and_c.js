@@ -267,14 +267,13 @@ class DetailedHistTPItems extends React.Component {
             }}
           >
             <GraphLegend
-              toggleActive={active_indices.length >= all_tp_idx.length}
-              onToggleClick={() => this.setState({
-                active_indices: active_indices.length < all_tp_idx.length ? all_tp_idx : [],
-              })}
+              selectAllActive={active_indices.length === all_tp_idx.length}
+              onSelectAll={ () => this.setState({active_indices: all_tp_idx}) }
+              onSelectNone={ () => this.setState({active_indices: []}) }
               onClick={ id => !(active_indices.length==1 && active_indices.includes(id))
               && this.setState({active_indices: _.toggle_list(active_indices,id)})}
               items={legend_items}
-            />  
+            />
           </div>
         </div>
         <div className="fcol-md-8" style={{position: "relative"}}>
