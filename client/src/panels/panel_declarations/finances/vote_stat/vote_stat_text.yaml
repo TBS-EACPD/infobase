@@ -166,8 +166,8 @@ dept_estimates:
   en: |
     {{subject.abbr}} authorities
   fr: |
-    Crédits votes {{{de_dept_abbr subject}}}
+    Autorisations {{{de_dept_abbr subject}}}
 
 gov_estimates:
   en: Government authorities
-  fr: Crédits votes du Gouvernement
+  fr: Autorisations du Gouvernement

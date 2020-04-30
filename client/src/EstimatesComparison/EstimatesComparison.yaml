@@ -60,13 +60,13 @@ last_year_authorities:
   transform: [handlebars]
   en: |
     {{est_last_year}} Authorities
-  fr: Montants déposés en {{est_last_year}}
+  fr: Autorisations en {{est_last_year}}
 
 this_year_authorities:
   transform: [handlebars]
   en: |
     {{est_in_year}} Authorities
-  fr: Montants déposés en {{est_in_year}}
+  fr: Autorisations en {{est_in_year}}
 
 
 doc_breakout_details:
