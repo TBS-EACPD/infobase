@@ -125,9 +125,8 @@ class HistoricalProgramBars extends React.Component {
                   selected: _.toggle_list(selected, id),
                 });
               }}
-              onToggleClick={() => this.setState({
-                selected: selected.length < all_keys.length ? all_keys : [],
-              })}
+              onSelectAll={ () => this.setState({selected: all_keys}) }
+              onSelectNone={ () => this.setState({selected: []}) }
               toggleActive={selected.length >= all_keys.length}
             />
           </div>
