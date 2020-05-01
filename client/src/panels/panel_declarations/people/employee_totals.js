@@ -4,7 +4,7 @@ import {
   run_template,
   year_templates,
   create_text_maker_component,
-  declarative_charts,
+  A11yTable,
   StdPanel,
   Col,
   NivoResponsiveLine,
@@ -21,10 +21,6 @@ const {
   people_years, 
   people_years_short_second,
 } = year_templates;
-
-const {
-  A11YTable,
-} = declarative_charts;
 
 const info_deps_by_level = {
   gov: ['orgEmployeeType_gov_info'],
@@ -103,7 +99,7 @@ export const declare_employee_totals_panel = () => declare_panel({
           }
           { window.is_a11y_mode &&
             <Col size={12} isGraph>
-              <A11YTable
+              <A11yTable
                 label_col_header = {text_maker("org")} 
                 data_col_headers = {ticks}
                 data = {[{

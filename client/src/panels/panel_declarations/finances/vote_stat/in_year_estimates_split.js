@@ -2,7 +2,7 @@ import { text_maker, TM } from './vote_stat_text_provider.js';
 import {
   util_components,
   run_template,
-  declarative_charts,
+  A11yTable,
   StdPanel,
   Col,
   NivoResponsiveBar,
@@ -12,10 +12,6 @@ import {
 import { formats } from "../../../../core/format.js";
 
 const { Format } = util_components;
-
-const { 
-  A11YTable,
-} = declarative_charts;
 
 const estimates_split_calculate = function(subject, info, options){
   const in_year_estimates_split = info[subject.level+"_in_year_estimates_split"];
@@ -55,7 +51,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
       .value();
     
     content = (
-      <A11YTable
+      <A11yTable
         {...{
           label_col_header: text_maker("estimates_doc"), 
           data_col_headers: [ run_template("{{est_in_year}}") ],

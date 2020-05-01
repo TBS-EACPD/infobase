@@ -4,17 +4,13 @@ import {
   run_template,
   year_templates,
   actual_to_planned_gap_year,
-  declarative_charts,
+  A11yTable,
   trivial_text_maker,
   NivoResponsiveLine,
   newIBCategoryColors,
   formatter,
   Table,
 } from "../../shared.js";
-
-const {
-  A11YTable,
-} = declarative_charts;
 
 const { std_years, planning_years } = year_templates;
 const exp_cols = _.map(std_years, yr=>`${yr}exp`);
@@ -80,7 +76,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
     const data = _.concat(historical_data, planning_data);
 
     exp_program_spending_graph = (
-      <A11YTable
+      <A11yTable
         data_col_headers={series_labels}
         data={data}
       />

@@ -6,16 +6,13 @@ import {
   run_template,
   year_templates,
   actual_to_planned_gap_year,
-  declarative_charts,
+  A11yTable,
   NivoResponsiveLine,
   newIBCategoryColors,
   formatter,
   trivial_text_maker,
 } from "../../shared.js";
 
-const {
-  A11YTable,
-} = declarative_charts;
 
 const { std_years, planning_years } = year_templates;
 
@@ -68,7 +65,7 @@ export const format_and_get_fte = (type, info, subject) => {
     const filtered_history_a11y_data = filter_a11y_data(history_a11y_data, 1);
     const filtered_planned_a11y_data = filter_a11y_data(planned_a11y_data, 0);
     fte_graph = (
-      <A11YTable
+      <A11yTable
         data_col_headers={series_labels}
         data={_.concat(filtered_history_a11y_data, filtered_planned_a11y_data)}
       />

@@ -2,7 +2,8 @@ import text from './crso_by_prog.yaml';
 import {
   NivoResponsiveBar,
   year_templates,
-  declarative_charts,
+  GraphLegend,
+  A11yTable,
   util_components,
   run_template,
   InfographicPanel,
@@ -14,11 +15,6 @@ import {
 } from "../../shared.js";
 
 const { Format } = util_components;
-
-const {
-  GraphLegend,
-  A11YTable,
-} = declarative_charts;
 
 const { planning_years } = year_templates;
 
@@ -107,7 +103,7 @@ class PlannedProgramResources extends React.Component {
           { text } 
         </div>
         <div>
-          <A11YTable
+          <A11yTable
             label_col_header={text_maker("program")}
             data_col_headers={_.map(
               ticks,

@@ -4,7 +4,8 @@ import {
   create_text_maker_component,
   Subject,
   formats,
-  declarative_charts,
+  GraphLegend,
+  A11yTable,
   InfographicPanel,
   Table,
   newIBCategoryColors,
@@ -18,7 +19,6 @@ import {
 
 import { DisplayTable } from '../../../../components/DisplayTable.js';
 
-const { GraphLegend, A11YTable } = declarative_charts;
 const { Tag } = Subject;
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -166,13 +166,13 @@ class Goco extends React.Component {
 
       graph_content = (
         <Fragment>
-          <A11YTable
+          <A11yTable
             label_col_header={text_maker("spend_area")}
             data_col_headers={series_labels}
             data={a11y_data}
           />
           { _.map( a11y_children, (child, i) =>
-            <A11YTable
+            <A11yTable
               key={i}
               table_name={child.parent_label}
               data_col_headers={series_labels}

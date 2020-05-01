@@ -1,10 +1,9 @@
 import classNames from 'classnames';
 import { CheckBox, create_text_maker_component } from '../components/index.js';
-import { A11YTable } from './A11yTable.js';
 
 const { TM } = create_text_maker_component();
 
-const GraphLegend = ({
+export const GraphLegend = ({
   isHorizontal, //defaults to false
   isSolidBox, //defaults to false
   items, //required: [ {active, id, label, color} ] 
@@ -54,10 +53,3 @@ const GraphLegend = ({
     )}
   </ul>
 );
-
-
-
-export {
-  GraphLegend,
-  A11YTable,
-};

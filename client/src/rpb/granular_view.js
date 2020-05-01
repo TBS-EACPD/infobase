@@ -12,7 +12,7 @@ import {
   AlertBanner,
   DisplayTable,
 } from '../components/index.js';
-import { GraphLegend } from '../charts/declarative_charts.js';
+import { GraphLegend } from '../charts/GraphLegend.js';
 import { Details } from '../components/Details.js';
 import { Subject } from '../models/subject.js';
 

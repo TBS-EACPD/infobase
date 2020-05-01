@@ -7,7 +7,7 @@ import {
   create_text_maker_component,
   StdPanel,
   Col,
-  declarative_charts,
+  A11yTable,
   declare_panel,
 } from "../shared.js"; 
 import { Canada } from "../../../charts/canada/index.js";
@@ -18,7 +18,6 @@ const { people_years } = year_templates;
 const formatter = formats["big_int_raw"];
 
 const { provinces } = businessConstants;
-const { A11YTable } = declarative_charts;
 
 const prepare_data_for_a11y_table = (data) => {
   const all_year_headcount_total = _.chain(data)
@@ -93,7 +92,7 @@ class ProvPanel extends React.Component {
         }
         { window.is_a11y_mode &&
           <Col size={12} isGraph>
-            <A11YTable
+            <A11yTable
               label_col_header = {text_maker("prov")}
               data_col_headers = {[..._.map( people_years, y => run_template(y) ), text_maker("five_year_percent_header")]}
               data = { prepare_data_for_a11y_table(data) }
