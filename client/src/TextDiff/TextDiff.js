@@ -13,7 +13,7 @@ import { Subject } from '../models/subject';
 import { result_docs } from '../models/results.js';
 import { Result, indicator_text_functions } from '../panels/panel_declarations/results/results_common.js';
 import result_text from '../panels/panel_declarations/results/result_components.yaml';
-import { declarative_charts } from '../panels/panel_declarations/shared.js';
+import { GraphLegend } from '../charts/GraphLegend.js';
 
 import {
   Select,
@@ -23,7 +23,6 @@ import {
 } from '../components';
 
 const { indicator_target_text } = indicator_text_functions;
-const { GraphLegend } = declarative_charts;
 const { Dept, CRSO, Program } = Subject;
 
 const { TM, text_maker } = create_text_maker_component([diff_text, result_text]);

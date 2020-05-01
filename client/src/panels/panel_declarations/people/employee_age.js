@@ -7,7 +7,7 @@ import {
   year_templates,
   TabbedContent,
   create_text_maker_component,
-  declarative_charts,
+  A11yTable,
   StdPanel,
   Col,
 
@@ -20,8 +20,6 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const { people_years } = year_templates;
 const { compact_age_groups } = businessConstants;
-
-const { A11YTable } = declarative_charts;
 
 
 const info_deps_by_level = {
@@ -194,7 +192,7 @@ export const declare_employee_age_panel = () => declare_panel({
           }
           { window.is_a11y_mode &&
             <Col size={12} isGraph>
-              <A11YTable
+              <A11yTable
                 label_col_header = {text_maker("age_group")}
                 data_col_headers = {[...ticks, text_maker("five_year_percent_header")]}
                 data = {_.map(panel_args.age_group, dimension => { 
@@ -205,7 +203,7 @@ export const declare_employee_age_panel = () => declare_panel({
           }
           { window.is_a11y_mode &&
             <Col size={12} isGraph>
-              <A11YTable
+              <A11yTable
                 label_col_header = {text_maker("avgage")}
                 data_col_headers = {ticks}
                 data = {panel_args.avg_age}

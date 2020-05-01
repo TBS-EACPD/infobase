@@ -8,7 +8,8 @@ import {
   util_components,
   infograph_href_template,
   year_templates,
-  declarative_charts,
+  GraphLegend,
+  A11yTable,
   businessConstants,
   InfographicPanel,
   FootNote,
@@ -28,11 +29,6 @@ const {
   Select,
   Format,
 } = util_components;
-
-const {
-  GraphLegend,
-  A11YTable,
-} = declarative_charts;
 
 const { sos } = businessConstants;
 
@@ -84,7 +80,7 @@ class HistoricalProgramBars extends React.Component {
   
     if(window.is_a11y_mode){
       return <div>
-        <A11YTable 
+        <A11yTable 
           table_name={text_maker("historical_prog_title")}
           data={_.map(data, ({label, data})=>({
             label,

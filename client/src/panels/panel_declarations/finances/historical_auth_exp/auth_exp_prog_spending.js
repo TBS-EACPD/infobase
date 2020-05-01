@@ -4,7 +4,8 @@ import {
   run_template,
   year_templates,
   actual_to_planned_gap_year,
-  declarative_charts,
+  GraphLegend,
+  A11yTable,
   StdPanel,
   Col,
   create_text_maker_component,
@@ -15,10 +16,6 @@ import {
   declare_panel,
 } from "../../shared.js";
 
-const { 
-  GraphLegend,
-  A11YTable,
-} = declarative_charts;
 const { Details } = util_components;
 
 const { std_years, planning_years, estimates_years } = year_templates;
@@ -117,7 +114,7 @@ class AuthExpProgSpending extends React.Component {
       }));
   
       graph_content = (
-        <A11YTable
+        <A11yTable
           data_col_headers={series_labels}
           data={data}
         />

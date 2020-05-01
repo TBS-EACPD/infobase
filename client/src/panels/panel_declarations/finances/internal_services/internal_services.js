@@ -6,7 +6,8 @@ import {
   run_template, 
   create_text_maker_component,
   year_templates, 
-  declarative_charts,
+  GraphLegend,
+  A11yTable,
   NivoResponsiveBar,
   
   declare_panel, 
@@ -15,10 +16,6 @@ import {
 
 const { Gov, Tag } = Subject;
 const { std_years } = year_templates;
-const { 
-  GraphLegend, 
-  A11YTable, 
-} = declarative_charts;
 const { text_maker, TM } = create_text_maker_component(text);
 
 export const declare_internal_services_panel = () => declare_panel({
@@ -110,7 +107,7 @@ export const declare_internal_services_panel = () => declare_panel({
       const graph_content = (() => {
         if (window.is_a11y_mode) {
           return (
-            <A11YTable 
+            <A11yTable 
               table_name={text_maker("internal_service_panel_title")}
               data={_.chain(bar_data)
                 .flatMap( _.keys )

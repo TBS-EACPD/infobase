@@ -4,15 +4,12 @@ import {
   year_templates,
   businessConstants,
   util_components,
-  declarative_charts,
+  A11yTable,
   StdPanel,
   Col,
   NivoResponsiveLine,
   run_template,
 } from "../../shared.js";
-const { 
-  A11YTable,
-} = declarative_charts;
 const { sos } = businessConstants;
 const { std_years } = year_templates;
 const { Format } = util_components;
@@ -42,7 +39,7 @@ export const declare_personnel_spend_panel = () => declare_panel({
       let graph_content;
       if(window.is_a11y_mode){
         graph_content = (
-          <A11YTable
+          <A11yTable
             data_col_headers={[ text_maker("spending") ]}
             data={
               _.chain(std_years)

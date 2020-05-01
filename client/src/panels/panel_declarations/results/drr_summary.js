@@ -5,7 +5,8 @@ import classNames from 'classnames';
 import { Fragment } from 'react';
 
 import {
-  declarative_charts,
+  GraphLegend,
+  A11yTable,
   InfographicPanel,
   businessConstants,
   get_source_links,
@@ -27,7 +28,6 @@ import { large_status_icons } from './result_components.js';
 
 import { IconArray } from '../../../charts/IconArray.js';
 
-const { A11YTable, GraphLegend } = declarative_charts;
 const { result_simple_statuses } = businessConstants;
 const { current_drr_key, result_docs } = Results;
 
@@ -147,7 +147,7 @@ const StatusGrid = props => {
   if(is_a11y_mode){
     return (
       <div>
-        <A11YTable
+        <A11yTable
           {...a11y_data}
         />
       </div>

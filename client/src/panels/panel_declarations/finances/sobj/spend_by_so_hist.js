@@ -3,7 +3,8 @@ import {
   year_templates,
   util_components,
   InfographicPanel,
-  declarative_charts,
+  GraphLegend,
+  A11yTable,
   run_template,
   NivoResponsiveLine,
   newIBLightCategoryColors,
@@ -13,10 +14,6 @@ import {
 } from "../../shared.js";
 import { text_maker, TM } from './sobj_text_provider.js';
 
-const { 
-  GraphLegend,
-  A11YTable,
-} = declarative_charts;
 const { sos } = businessConstants;
 const { std_years } = year_templates;
 const { Format } = util_components;
@@ -135,7 +132,7 @@ export const declare_spend_by_so_hist_panel = () => declare_panel({
       const graph_content = (() => {
         if(window.is_a11y_mode){
           return(
-            <A11YTable
+            <A11yTable
               data={
                 _.map(data, ({label, data}) => ({
                   label,

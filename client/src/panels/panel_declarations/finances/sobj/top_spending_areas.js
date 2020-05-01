@@ -6,7 +6,7 @@ import {
   year_templates,
   StdPanel,
   Col,
-  declarative_charts,
+  A11yTable,
   create_text_maker_component,
   table_common,
 
@@ -22,7 +22,6 @@ const {
 
 const { std_years } = year_templates;
 const { Format } = util_components;
-const { A11YTable } = declarative_charts;
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -71,7 +70,7 @@ const render_w_options = ({text_key}) => ({calculations, footnotes, sources}) =>
         size={7}
       >
         { window.is_a11y_mode ?
-          <A11YTable
+          <A11yTable
             {...{
               data: _.map(top_3_sos_and_remainder, ({label, value}) => ({
                 label,

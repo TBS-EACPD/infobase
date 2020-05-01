@@ -9,7 +9,8 @@ import {
   declare_panel,
   year_templates,
   businessConstants,
-  declarative_charts,
+  GraphLegend,
+  A11yTable,
   InfographicPanel,
   util_components,
   NivoResponsiveLine,
@@ -19,10 +20,6 @@ const { transfer_payments } = businessConstants;
 const { std_years } = year_templates;
 const { Format } = util_components;
 
-const { 
-  GraphLegend,
-  A11YTable,
-} = declarative_charts;
 
 const exp_years = std_years.map(year=> year+'exp');
 
@@ -86,7 +83,7 @@ class HistTPTypes extends React.Component {
         .value();
 
 
-      content = <A11YTable
+      content = <A11yTable
         data_col_headers={text_years}
         data={a11y_data}
         label_col_header={text_maker("transfer_payment_type")}
@@ -219,7 +216,7 @@ class DetailedHistTPItems extends React.Component {
       });
       return <div>
         {title_el}
-        <A11YTable 
+        <A11yTable 
           data={a11y_data}
           label_col_header={text_maker("transfer_payment")}
           data_col_headers={text_years}

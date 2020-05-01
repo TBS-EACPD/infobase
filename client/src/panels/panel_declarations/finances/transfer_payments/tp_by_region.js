@@ -11,7 +11,7 @@ import {
   create_text_maker_component,
   StdPanel,
   Col,
-  declarative_charts,
+  A11yTable,
 } from "../../shared.js";
 
 import { Canada } from '../../../../charts/canada/index.js';
@@ -24,7 +24,6 @@ const formatter = formats["compact2_raw"];
 
 const { text_maker, TM } = create_text_maker_component(text);
 const { provinces, de_provinces } = businessConstants;
-const { A11YTable } = declarative_charts;
 
 
 const load_population_data = () => make_request( get_static_url(`csv/canadian_population_estimates_by_province.csv`) )
@@ -162,7 +161,7 @@ const format_data_for_a11y_table = (data, is_per_capita) => _.chain(data)
   .filter('data')
   .value();
 const TransferPaymentsByRegionA11yTable = ({table_name, data, is_per_capita}) => (
-  <A11YTable
+  <A11yTable
     table_name={table_name}
     label_col_header={ text_maker('geo_region') }
     data_col_headers={ _.map(std_years, run_template) }

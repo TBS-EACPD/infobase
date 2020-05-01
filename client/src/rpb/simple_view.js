@@ -14,7 +14,7 @@ import {
   DisplayTable,
   default_dept_name_sort_func,
 } from '../components/index.js';
-import { GraphLegend } from '../charts/declarative_charts.js';
+import { GraphLegend } from '../charts/GraphLegend.js';
 import { Details } from '../components/Details.js';
 import { rpb_link } from './rpb_link.js';
 import { Subject } from '../models/subject.js';

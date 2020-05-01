@@ -10,7 +10,7 @@ import {
   Subject,
   businessConstants,
   util_components,
-  declarative_charts,
+  A11yTable,
   create_text_maker_component,
   InfographicPanel,
   NivoResponsiveHBar,
@@ -47,8 +47,6 @@ const {
   TabbedControls,
   SpinnerWrapper,
 } = util_components;
-
-const { A11YTable } = declarative_charts;
 
 const { text_maker, TM } = create_text_maker_component([text1,text2]);
 
@@ -622,7 +620,7 @@ class BudgetMeasureHBars extends React.Component {
 
       return <div>
         { text_area }
-        <A11YTable
+        <A11yTable
           table_name = { text_maker("budget_measure_a11y_table_title") }
           data = {_.map(data, 
             (budget_measure_item) => ({
@@ -667,7 +665,7 @@ class BudgetMeasureHBars extends React.Component {
           ])}
         />
         { subject.level === "gov" &&
-            <A11YTable
+            <A11yTable
               table_name = { text_maker("budget_org_a11y_table_title") }
               data = {_.map( get_org_budget_data_from_all_measure_data(data),
                 (org_item) => ({
@@ -706,7 +704,7 @@ class BudgetMeasureHBars extends React.Component {
             />
         }
         { subject.level === "dept" && !_.isEmpty(program_allocation_data) &&
-            <A11YTable
+            <A11yTable
               table_name = { text_maker("budget_program_a11y_table_title") }
               data = {_.map( program_allocation_data, 
                 (program_item) => ({

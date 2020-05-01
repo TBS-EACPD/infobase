@@ -18,7 +18,8 @@ import { businessConstants } from '../../models/businessConstants.js';
 import FootNote from '../../models/footnotes/footnotes.js'; 
 import { GlossaryEntry } from '../../models/glossary.js';
 
-import * as declarative_charts from '../../charts/declarative_charts.js';
+import { A11yTable } from '../../charts/A11yTable.js';
+import { GraphLegend } from '../../charts/GraphLegend.js';
 import {
   NivoResponsiveBar,
   NivoResponsiveHBar,
@@ -153,7 +154,6 @@ export {
   Results,
   Statistics,
   ensure_loaded,
-  declarative_charts,
   formats,
   formatter,
   trivial_text_maker,
@@ -173,6 +173,8 @@ export {
   newIBCategoryColors,
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
+  A11yTable,
+  GraphLegend,
   NivoResponsiveBar,
   NivoResponsiveHBar,
   NivoResponsiveLine,

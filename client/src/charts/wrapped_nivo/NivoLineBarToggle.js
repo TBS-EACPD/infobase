@@ -6,7 +6,7 @@ import { infobase_colors_smart } from './nivo_common.js';
 import { NivoResponsiveBar } from './nivo_bar.js';
 import { NivoResponsiveLine } from './nivo_line.js';
 
-import { GraphLegend } from '../declarative_charts.js';
+import { GraphLegend } from '../GraphLegend.js';
 import { newIBCategoryColors } from '../../core/color_schemes.js';
 import { formats } from "../../core/format.js";
 import { create_text_maker } from '../../models/text.js';
