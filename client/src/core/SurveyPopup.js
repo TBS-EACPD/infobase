@@ -115,7 +115,7 @@ export const SurveyPopup = withRouter(
         chance,
       } = this.state;
 
-      const should_show = is_survey_campaign_over() && active && Math.random() < chance;
+      const should_show = !is_survey_campaign_over() && active && Math.random() < chance;
 
       if (should_show){
         log_standard_event({
