@@ -82,6 +82,7 @@ const MiniLegend = ({ items }) => (
   </div>
 );
 
+// TODO: this could be a reusable chart, consider breaking it out at some point
 const StatusGrid = props => {
   const max_size = 800;
 
