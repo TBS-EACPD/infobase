@@ -43,7 +43,7 @@ else
     send-keys 'cd client' C-m \; \
     send-keys 'while true; do npm run serve-loopback; sleep 30; done' C-m \; \
     split-window -v \; \
-    send-keys "cd server $can_reach_npm && npm ci" C-m \; \
+    send-keys "cd server && $can_reach_npm && npm ci" C-m \; \
     send-keys "npm start" C-m \; \
     selectp -t 2 \; \
     split-window -h \; \
