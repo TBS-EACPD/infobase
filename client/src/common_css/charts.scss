@@ -3,12 +3,14 @@
 svg {
  overflow : hidden;
 }
+
 div.tick,
 .axis > text {
   color: $textColor;
   font-size: 85%;
   font-weight: $mediumFontWeight;
 }
+
 
 .axis > path,
 .axis > line {
@@ -25,6 +27,29 @@ div.tick,
 .axis.black > text {
   fill: $textColor;
 }
+
+
+.tick {
+  font-size: 12px;
+  font-weight: $mediumFontWeight;
+}
+
+.tick > text {
+  font-size: 12px!important;
+  font-weight: $mediumFontWeight;
+}
+
+.axis-label {
+  font-size: 13px!important;
+  font-weight: $mediumFontWeight;
+  text-anchor: start;
+}
+
+.__label {
+  font-weight: $mediumFontWeight;
+}
+
+
 .legend > li{
   margin-top: 5px;
 }
@@ -36,24 +61,8 @@ ul.legend.horizontal{
   margin-bottom: 10px;
 }
 
-
-.heatmap-square {
-  cursor: pointer;
-}
-.heatmap-square.hover {
-  background: white !important;
-}
-
-
 .bar-amount-neg {
   color: $highlightColor;
-}
-
-div.d3-list {
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding-right: 10px;
-  padding-left: 10px;
 }
 
 .legend-container {
@@ -109,45 +118,4 @@ div.d3-list {
   flex-shrink: 0;
   flex-grow: 0;
   border-radius: 3px;
-}
-
-.tick {
-  font-size: 12px;
-  font-weight: $mediumFontWeight;
-}
-
-.tick > text {
-  font-size: 12px!important;
-  font-weight: $mediumFontWeight;
-}
-
-.axis-label {
-  font-size: 13px!important;
-  font-weight: $mediumFontWeight;
-  text-anchor: start;
-}
-
-.__label {
-  font-weight: $mediumFontWeight;
-}
-
-
-
-
-.IconArrayItem {
-  width: 15px;
-  height: 15px;
-  margin: 0.5px;
-
-  &.IconArrayItem__Small {
-    width: 10px;
-    height: 10px;
-  }
-
-  &.IconArrayItem__Large {
-    width: 20px;
-    height: 20px;
-  }
-
-
 }
