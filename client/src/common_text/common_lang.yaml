@@ -282,9 +282,12 @@ open_data_datasets:
 link:
   en: Link
   fr: Lien
+goc:
+  en: Government of Canada
+  fr: Gouvernement du Canada
 the_goc:
-  en: the Government of Canada
-  fr: le gouvernement du Canada
+  en: The Government of Canada
+  fr: Le gouvernement du Canada
 org:
   en: Organization
   fr: Organisation

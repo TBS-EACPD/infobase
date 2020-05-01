@@ -26,11 +26,9 @@ const Gov = {
   level: 'gov',
   get has_planned_spending(){ return true; },
   lookup(){ return this; },
-  name: trivial_text_maker('the_goc'),
-  // the following name-like fields are for compatibility with old APIs and to ensure it's searchable in org-searches
+  name: trivial_text_maker('goc'),
   description: trivial_text_maker('the_goc'),
-  title: trivial_text_maker('the_goc'),
-  legal_title: trivial_text_maker('the_goc'),
+  legal_title: trivial_text_maker('goc'),
 };
 
 
