@@ -15,12 +15,34 @@ export const GraphLegend = ({
   onSelectAll, //function for Select All
   onSelectNone, //function for Select None
 }) => (
-  <ul className={window.is_a11y_mode ? "list-unstyled" : classNames("legend-list-inline", isHorizontal && "horizontal")}>
+  <div style={{maxHeight: 'inherit', display: 'flex', flexDirection: 'column'}}>
+    <div style={{overflowX: 'hidden'}}>
+      <ul className={window.is_a11y_mode ? "list-unstyled" : classNames("legend-list-inline", isHorizontal && "horizontal")}>
+        {_.map(items, ({ color, label, id, active }) => 
+          <li
+            key={id}
+            className= {window.is_a11y_mode ? "checkbox" : "legend-list-el"}
+          >
+            <CheckBox
+              id={id}
+              onClick={onClick}
+              color={color}
+              label={label}
+              active={active}
+              isSolidBox={isSolidBox}
+              container_style={container_style}
+              checkbox_style={checkbox_style}
+              label_style={label_style}
+              checkmark_vertical_align={checkmark_vertical_align}
+            />
+          </li>
+        )}
+      </ul>
+    </div>
     { onSelectAll && onSelectNone && 
       <div style={{
-        borderBottom: `1px dashed ${window.infobase_color_constants.tertiaryColor}`,
-        padding: "5px 0px 10px 5px",
-        marginBottom: 10,
+        borderTop: `1px dashed ${window.infobase_color_constants.tertiaryColor}`,
+        padding: "10px 0px 20px 5px",
       }}>
         <TM k="select" />:
         <span onClick={onSelectAll} className="link-styled" style={{margin: "0px 5px 0px 5px"}}>
@@ -32,24 +54,5 @@ export const GraphLegend = ({
         </span>
       </div>
     }
-    {_.map(items, ({ color, label, id, active }) => 
-      <li
-        key={id}
-        className= {window.is_a11y_mode ? "checkbox" : "legend-list-el"}
-      >
-        <CheckBox
-          id={id}
-          onClick={onClick}
-          color={color}
-          label={label}
-          active={active}
-          isSolidBox={isSolidBox}
-          container_style={container_style}
-          checkbox_style={checkbox_style}
-          label_style={label_style}
-          checkmark_vertical_align={checkmark_vertical_align}
-        />
-      </li>
-    )}
-  </ul>
+  </div>
 );
