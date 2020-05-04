@@ -25,7 +25,7 @@ const funcs = {
       .filter(_.isNumber)
       .value();
   },
-    
+  sortWith: (arr, custom_func) => _.map(arr).sort(custom_func),
 
   nonEmpty: any => !_.isEmpty(any),
 
