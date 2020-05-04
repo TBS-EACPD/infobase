@@ -81,15 +81,27 @@ export class DisplayTable extends React.Component {
       searches,
     } = this.state;
 
-    const default_zero = (val) => _.isUndefined(val) ? 0 : val;
-    const default_true = (val) => _.isUndefined(val) || val ? true : false;
+    const column_config_defaults = {
+      is_sortable: true,
+      is_summable: false,
+      is_searchable: false,
+      sum_func: (sum, value) => sum + value,
+      sum_initial_value: 0,
+    };
+    const col_configs_with_defaults = _.mapValues(
+      column_configs,
+      (supplied_column_config) => ({
+        ...column_config_defaults,
+        ...supplied_column_config,
+      })
+    );    
 
     const clean_search_string = (search_string) => _.chain(search_string).deburr().toLower().trim().value();
     const is_number_string_date = (val) => _.isNumber(val) || _.isString(val) || _.isDate(val);
     const sorted_filtered_data = _.chain(data)
       .filter( (row) => _.chain(row)
         .map( (column_value, column_key) => {
-          const col_config = column_configs[column_key];
+          const col_config = col_configs_with_defaults[column_key];
           const col_search_value = col_config.search_formatter ? col_config.search_formatter(column_value) : column_value;
           return _.isEmpty(searches[column_key]) ||
             _.includes(
@@ -102,8 +114,8 @@ export class DisplayTable extends React.Component {
       )
       .thru( unsorted_array => {
         if(sort_by) {
-          return column_configs[sort_by].sort_func ?
-            unsorted_array.sort((a, b) => column_configs[sort_by].sort_func(a[sort_by], b[sort_by])) :
+          return col_configs_with_defaults[sort_by].sort_func ?
+            unsorted_array.sort((a, b) => col_configs_with_defaults[sort_by].sort_func(a[sort_by], b[sort_by])) :
             _.sortBy(unsorted_array, row =>
             is_number_string_date(row[sort_by]) ?
               row[sort_by] :
@@ -119,18 +131,17 @@ export class DisplayTable extends React.Component {
       sorted_filtered_data,
       (totals, row) => _.mapValues(
         totals,
-        (total, col_key) => column_configs[col_key].sum_func ?
-          column_configs[col_key].sum_func(total, row[col_key]) :
-          total + row[col_key]
+        (total, col_key) => 
+          col_configs_with_defaults[col_key].sum_func(total, row[col_key])
       ),
-      _.chain(column_configs)
+      _.chain(col_configs_with_defaults)
         .pickBy(col => col.is_summable)
-        .mapValues(col => default_zero(col.sum_initial_value))
+        .mapValues(col => col.sum_initial_value)
         .value()
     );
     const is_total_exist = !_.isEmpty(total_row);
 
-    const ordered_column_keys = _.chain(column_configs)
+    const ordered_column_keys = _.chain(col_configs_with_defaults)
       .map( ({index}, key) => [index, key] )
       .sortBy( _.first )
       .map( _.last )
@@ -157,7 +168,7 @@ export class DisplayTable extends React.Component {
                     key={i} 
                     className={"center-text"}
                   >
-                    {column_configs[column_key].header}
+                    {col_configs_with_defaults[column_key].header}
                   </th>
                 )
               }
@@ -167,8 +178,8 @@ export class DisplayTable extends React.Component {
                 _.map(
                   ordered_column_keys,
                   (column_key) => {
-                    const sortable = default_true(column_configs[column_key].is_sortable);
-                    const searchable = column_configs[column_key].is_searchable;
+                    const sortable = col_configs_with_defaults[column_key].is_sortable;
+                    const searchable = col_configs_with_defaults[column_key].is_searchable;
 
                     const current_search_input = (searchable && searches[column_key]) || null;
 
@@ -219,10 +230,10 @@ export class DisplayTable extends React.Component {
                     ordered_column_keys,
                     col_key => (
                       <td style={{fontSize: "14px"}} key={col_key}>
-                        {column_configs[col_key].formatter ?
-                          _.isString(column_configs[col_key].formatter) ?
-                            <Format type={column_configs[col_key].formatter} content={row[col_key]} /> :
-                            column_configs[col_key].formatter(row[col_key]) : 
+                        {col_configs_with_defaults[col_key].formatter ?
+                          _.isString(col_configs_with_defaults[col_key].formatter) ?
+                            <Format type={col_configs_with_defaults[col_key].formatter} content={row[col_key]} /> :
+                            col_configs_with_defaults[col_key].formatter(row[col_key]) : 
                           row[col_key]}
                       </td>
                     ))}
@@ -237,10 +248,10 @@ export class DisplayTable extends React.Component {
                   .map(col_key => (
                     <td key={col_key}>
                       { total_row[col_key] ?
-                          column_configs[col_key].formatter ?
-                            _.isString(column_configs[col_key].formatter) ?
-                              <Format type={column_configs[col_key].formatter} content={total_row[col_key]} /> :
-                              column_configs[col_key].formatter(total_row[col_key]) :
+                          col_configs_with_defaults[col_key].formatter ?
+                            _.isString(col_configs_with_defaults[col_key].formatter) ?
+                              <Format type={col_configs_with_defaults[col_key].formatter} content={total_row[col_key]} /> :
+                              col_configs_with_defaults[col_key].formatter(total_row[col_key]) :
                             total_row[col_key] :
                           ""
                       }
