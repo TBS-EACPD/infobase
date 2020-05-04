@@ -115,11 +115,12 @@ export class DisplayTable extends React.Component {
       .thru( unsorted_array => {
         if(sort_by) {
           return col_configs_with_defaults[sort_by].sort_func ?
-            unsorted_array.sort((a, b) => col_configs_with_defaults[sort_by].sort_func(a[sort_by], b[sort_by])) :
+            _.sortWith( unsorted_array, (a, b) =>
+              col_configs_with_defaults[sort_by].sort_func(a[sort_by], b[sort_by]) ) :
             _.sortBy(unsorted_array, row =>
-            is_number_string_date(row[sort_by]) ?
-              row[sort_by] :
-              Number.NEGATIVE_INFINITY
+              is_number_string_date(row[sort_by]) ?
+                row[sort_by] :
+                Number.NEGATIVE_INFINITY
             );
         }
         return unsorted_array;
