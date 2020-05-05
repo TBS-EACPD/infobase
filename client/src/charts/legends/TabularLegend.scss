@@ -1,0 +1,18 @@
+@import "../../common_css/common-variables";
+
+.tabular-legend__list-el {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px 0;
+
+  &:not(:first-child) {
+    border-top: 1px solid $separatorColor;
+  }
+}
+.tabular-legend__right-column {
+  margin-left: auto;
+  text-align: right;
+  white-space: nowrap;
+}
