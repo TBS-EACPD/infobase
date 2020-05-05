@@ -97,7 +97,7 @@ jobs:
       - run: npm install @lhci/cli@0.3.x
       - run:
           name: lhci autorun
-          command: node ./node_modules/@lhci/cli/src/cli.js autorun --config ./scripts/ci_scripts/lighthouserc.json --upload.target=temporary-public-storage || echo "LHCI failed!"
+          command: node ./node_modules/@lhci/cli/src/cli.js autorun --config ./scripts/ci_scripts/lighthouserc.js --upload.target=temporary-public-storage || echo "LHCI failed!"
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   build:
