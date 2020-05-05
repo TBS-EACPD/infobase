@@ -182,7 +182,6 @@ export class Canada extends React.Component{
       <div className="frow no-container">
         <div className="fcol-md-3">
           <StandardLegend
-            container_style={{ maxHeight: "400px", width: "100%", marginTop: "10px"}}
             title={trivial_text_maker("legend")}
             items={legend_items}
             LegendCheckBoxProps={{isSolidBox: true}}

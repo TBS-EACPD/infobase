@@ -104,7 +104,6 @@ class HistoricalProgramBars extends React.Component {
       <div className="frow">
         <div className="fcol-md-4" style={{ width: "100%" }}>
           <StandardLegend
-            container_style={{ maxHeight: "400px" }}
             items={_.chain(data)
               .sortBy(({data}) => _.last(data) || 0 )
               .reverse()

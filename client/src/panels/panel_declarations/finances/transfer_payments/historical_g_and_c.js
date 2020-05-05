@@ -254,7 +254,6 @@ class DetailedHistTPItems extends React.Component {
       <div className="frow">
         <div className="fcol-md-4">
           <StandardLegend
-            container_style={{maxHeight: 400}}
             items={legend_items}
             onClick={ 
               (id) => !(active_indices.length==1 && active_indices.includes(id)) &&

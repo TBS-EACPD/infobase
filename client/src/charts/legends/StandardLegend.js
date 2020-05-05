@@ -3,7 +3,6 @@ import './StandardLegend.scss';
 import { LegendList } from './LegendList.js';
 
 export const StandardLegend = ({
-  container_style,
   title,
   items, //required: [ {active, id, label, color} ]
 
@@ -14,11 +13,8 @@ export const StandardLegend = ({
 
   Controls,
 }) => (
-  <div
-    className="standard-legend-container"
-    style={container_style}
-  >
-    <div style={{maxHeight: 'inherit', display: 'flex', flexDirection: 'column'}}>
+  <div className="standard-legend-container">
+    <div style={{maxHeight: '400px', display: 'flex', flexDirection: 'column'}}>
       { title &&
         <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
           {title}
