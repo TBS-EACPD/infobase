@@ -379,4 +379,4 @@ workflows:
           <<: *deploy_filter
       - lighthouse:
           requires:
-            - build
+            - deploy_client
