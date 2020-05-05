@@ -199,7 +199,6 @@ export class NivoLineBarToggle extends React.Component {
           style={{ width: "100%", position: "relative" }}
         >
           <StandardLegend
-            container_style={{ maxHeight: "400px" }}
             title={legend_title}
             items={
               _.map( 

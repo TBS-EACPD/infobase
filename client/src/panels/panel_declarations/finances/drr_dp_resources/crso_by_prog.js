@@ -145,7 +145,6 @@ class PlannedProgramResources extends React.Component {
       <div className="frow">
         <div className="fcol-md-4" style={{ width: "100%" }}>
           <StandardLegend
-            container_style={{maxHeight: "400px"}}
             items={_.map(programs, ({label}) =>({
               label,
               id: label,
