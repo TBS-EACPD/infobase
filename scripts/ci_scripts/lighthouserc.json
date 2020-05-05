@@ -2,8 +2,7 @@
   "ci": {
     "collect": {
       "url": [
-        "http://localhost:8080/build/InfoBase/index-eng.html#start",
-        "http://localhost:8080/build/InfoBase/index-eng.html#orgs/gov/gov/infograph/financial"
+        "https://dev.ea-ad.ca/master/index-eng.html#start"
       ]
     },
     "upload": {
