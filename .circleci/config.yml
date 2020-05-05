@@ -26,15 +26,24 @@ jobs:
       - restore_cache:
           keys:
             - email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}
+            - top-level-dependencies-{{ checksum "package-lock.json" }}
       - run: 
           command: |
             [ -e "email_backend/node_modules" ] || (cd email_backend && npm ci)
+      - run: 
+          command: |
+            [ -e "node_modules" ] || npm ci
       - save_cache:
           paths:
             - email_backend/node_modules
             - scripts/common_node_scripts/node_modules
           key: email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}
+      - save_cache:
+          paths:
+            - node_modules
+          key: top-level-dependencies-{{ checksum "package-lock.json" }}
 
+      - run: npm run check_format email_backend
       - run: (cd email_backend && npm run unit_tests)
 
       - run: (cd email_backend && npm run end_to_end_tests)
@@ -87,6 +96,17 @@ jobs:
     steps:
       - checkout:
           path: "~/InfoBase"
+      
+      - restore_cache:
+          keys:
+            - top-level-dependencies-{{ checksum "package-lock.json" }}
+      - run: 
+          command: |
+            [ -e "node_modules" ] ||  npm ci
+      - save_cache:
+          paths:
+            - node_modules
+          key: top-level-dependencies-{{ checksum "package-lock.json" }}
 
       - run: ./scripts/ci_scripts/create_envs.sh
 
@@ -140,10 +160,14 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
+            - ./node_modules
             - ./scripts
 
             - ./data
             - ./test-data
+            - ./package.json
+            - ./.prettierignore
+            - ./prettier.config.js
             
             - ./client/build
             - ./client/browser-tests
@@ -172,6 +196,8 @@ jobs:
       - attach_workspace:
           at: ./
       - run: ./scripts/ci_scripts/create_envs.sh
+
+      - run: npm run check_format server
 
       - run: (cd server && npm run unit_tests)
 
@@ -207,7 +233,8 @@ jobs:
 
       # repeats some of the server tests, because these fail fast and short-curcuit us before the long-running browser tests
       - run: (cd server && npm run unit_tests)
-
+      
+      - run: npm run check_format client
       - run: 
           name: mongod
           command: mongod

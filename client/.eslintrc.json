@@ -17,40 +17,9 @@
       "commonjs": true,
       "es6": true
   },
-  "extends": [ "eslint:recommended", "plugin:react/recommended" ],
   "rules": {
-      "indent": [
-          "warn",
-          2,
-          {
-            "SwitchCase": 1,
-            "ignoredNodes": [ "ConditionalExpression" ],
-            "flatTernaryExpressions": true
-          }
-      ],
-      "comma-dangle": [
-        "warn",
-        "always-multiline"
-      ],
-      "linebreak-style": [
-          "off",
-          "unix"
-      ],
-      "semi": [
-          "warn",
-          "always"
-      ],
-      "no-unused-vars": [
-          "warn",
-          { "args": "none" }
-      ],
-      "no-multi-spaces": [
-          "warn",
-          { "exceptions": { "Property": false } }
-      ],
       "no-use-before-define": ["error", { "functions": true, "classes": true }],
-      "key-spacing": [ "warn" ],
-      "no-extra-semi": [ "off" ],
+      "react/jsx-uses-vars": 1,
       "react/prop-types": [ "off" ],
       "react/no-string-refs": [ "off" ],
       "react/display-name": [ "off" ],
