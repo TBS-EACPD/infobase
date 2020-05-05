@@ -7,7 +7,7 @@ import {
   run_template,
   year_templates,
   actual_to_planned_gap_year,
-  GraphLegend,
+  StandardLegend,
   A11yTable,
   StdPanel,
   Col,
@@ -263,27 +263,25 @@ class AuthExpPlannedSpendingGraph extends React.Component {
     return (
       <Fragment>
         <div style={{padding: '10px 25px 0px 97px'}} aria-hidden={true}>
-          <div className="legend-container">
-            <GraphLegend
-              isHorizontal
-              items={legend_items}
-              onClick={ 
-                (label) => {
-                  const key_corresponding_to_label = _.find(
-                    data_series,
-                    {label}
-                  ).key;
-
-                  this.setState({
-                    active_series: {
-                      ...active_series,
-                      [key_corresponding_to_label]: !active_series[key_corresponding_to_label] || !has_multiple_active_series, 
-                    },
-                  });
-                }
+          <StandardLegend
+            isHorizontal={true}
+            items={legend_items}
+            onClick={ 
+              (label) => {
+                const key_corresponding_to_label = _.find(
+                  data_series,
+                  {label}
+                ).key;
+                
+                this.setState({
+                  active_series: {
+                    ...active_series,
+                    [key_corresponding_to_label]: !active_series[key_corresponding_to_label] || !has_multiple_active_series, 
+                  },
+                });
               }
-            />
-          </div> 
+            }
+          />
         </div>
         <NivoResponsiveLine
           {...nivo_props}

@@ -162,7 +162,7 @@ export class PDFGenerator extends React.Component {
     } else {
       // When the list of legend items are too long such that the items don't all fit into the defined max height, scroll is created to contain them.
       // Screenshotting that will cause items to overflow, hence below sets max height to a big arbitrary number which later gets set back to original.
-      const legend_container_arr = element_to_print.getElementsByClassName('legend-container');
+      const legend_container_arr = element_to_print.getElementsByClassName('standard-legend-container');
 
       const MAX_DIV_HEIGHT = "9999px";
       var oldMaxHeights = _.map(legend_container_arr, legend_container => (legend_container.style.maxHeight));

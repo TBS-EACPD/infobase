@@ -1,4 +1,7 @@
 import text from './detailed_program_spending_split.yaml';
+
+import { Fragment } from 'react';
+
 import {
   NivoResponsiveBar,
   NivoResponsiveHBar,
@@ -8,7 +11,7 @@ import {
   util_components,
   infograph_href_template,
   year_templates,
-  GraphLegend,
+  StandardLegend,
   A11yTable,
   businessConstants,
   InfographicPanel,
@@ -100,32 +103,45 @@ class HistoricalProgramBars extends React.Component {
       </div>
       <div className="frow">
         <div className="fcol-md-4" style={{ width: "100%" }}>
-          <div
-            className="legend-container"
-            style={{ maxHeight: "400px" }}
-          >
-            <GraphLegend
-              items={_.chain(data)
-                .sortBy(({data}) => _.last(data) || 0 )
-                .reverse()
-                .map( ({ label, id }) => ({
-                  label,
-                  active: _.includes(selected, id),
-                  id,
-                  color: colors(label),
-                }))
-                .value()
-              }
-              onClick={id => {!(selected.length === 1 && selected.includes(id)) &&
-                this.setState({
-                  selected: _.toggle_list(selected, id),
-                });
-              }}
-              onSelectAll={ () => this.setState({selected: all_keys}) }
-              onSelectNone={ () => this.setState({selected: []}) }
-              toggleActive={selected.length >= all_keys.length}
-            />
-          </div>
+          <StandardLegend
+            container_style={{ maxHeight: "400px" }}
+            items={_.chain(data)
+              .sortBy(({data}) => _.last(data) || 0 )
+              .reverse()
+              .map( ({ label, id }) => ({
+                label,
+                active: _.includes(selected, id),
+                id,
+                color: colors(label),
+              }))
+              .value()
+            }
+            onClick={id => {!(selected.length === 1 && selected.includes(id)) &&
+              this.setState({
+                selected: _.toggle_list(selected, id),
+              });
+            }}
+            Controls={
+              <Fragment>
+                <TM k="select" />:
+                <span
+                  onClick={() => this.setState({selected: all_keys})}
+                  className="link-styled"
+                  style={{margin: "0px 5px 0px 5px"}}
+                >
+                  <TM k="all"/>
+                </span>
+                |
+                <span
+                  onClick={() => this.setState({selected: []}) }
+                  className="link-styled" 
+                  style={{marginLeft: "5px"}}
+                >
+                  <TM k="none"/>
+                </span> 
+              </Fragment>
+            }
+          />
         </div>
         <div className="fcol-md-8">
           <NivoResponsiveBar
@@ -304,12 +320,10 @@ class DetailedProgramSplit extends React.Component {
             />
           </label>
           { legend_items &&
-            <div className="legend-container">
-              <GraphLegend
-                items={legend_items}
-                isSolidBox
-              />
-            </div>
+            <StandardLegend
+              items={legend_items}
+              LegendCheckBoxProps={{isSolidBox: true}}
+            />
           }
         </div> 
         <div className="fcol-md-9" style={{ width: "100%" }}>

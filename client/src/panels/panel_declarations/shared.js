@@ -19,7 +19,7 @@ import FootNote from '../../models/footnotes/footnotes.js';
 import { GlossaryEntry } from '../../models/glossary.js';
 
 import { A11yTable } from '../../charts/A11yTable.js';
-import { GraphLegend } from '../../charts/GraphLegend.js';
+import { StandardLegend } from '../../charts/legends';
 import {
   NivoResponsiveBar,
   NivoResponsiveHBar,
@@ -174,7 +174,7 @@ export {
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
   A11yTable,
-  GraphLegend,
+  StandardLegend,
   NivoResponsiveBar,
   NivoResponsiveHBar,
   NivoResponsiveLine,

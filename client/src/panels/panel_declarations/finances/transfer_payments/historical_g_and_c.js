@@ -9,7 +9,7 @@ import {
   declare_panel,
   year_templates,
   businessConstants,
-  GraphLegend,
+  StandardLegend,
   A11yTable,
   InfographicPanel,
   util_components,
@@ -103,30 +103,26 @@ class HistTPTypes extends React.Component {
         })
       );
 
-      content = <Fragment>
-        <div className="legend-container">
-          <GraphLegend
+      content = (
+        <Fragment>
+          <StandardLegend
             items={legend_items}
-            isHorizontal
-            onClick={ id => 
-              !(
-                !!filtered_series[tp_type_name(id)] && 
-                _.size(filtered_series) === 1
-              ) && this.setState({active_types: _.toggle_list(active_types, id) })
+            isHorizontal={true}
+            onClick={ (id) => !(!!filtered_series[tp_type_name(id)] && _.size(filtered_series) === 1) && 
+              this.setState({active_types: _.toggle_list(active_types, id) })
             }
           />  
-        </div>
-
-        <div style ={{position: "relative"}}>
-          <NivoResponsiveLine
-            enableArea = {true}
-            disable_y_axis_zoom = {true}
-            data = {expenditure_data}
-            colorBy={d => colors(d.id)}
-            stacked = {true}
-          />
-        </div>
-      </Fragment>;
+          <div style ={{position: "relative"}}>
+            <NivoResponsiveLine
+              enableArea = {true}
+              disable_y_axis_zoom = {true}
+              data = {expenditure_data}
+              colorBy={d => colors(d.id)}
+              stacked = {true}
+            />
+          </div>
+        </Fragment>
+      );
     }
     return <div className="frow middle-xs">
       <div className={`fcol-md-${text_split}`}>
@@ -257,21 +253,34 @@ class DetailedHistTPItems extends React.Component {
       </div>
       <div className="frow">
         <div className="fcol-md-4">
-          <div 
-            className="legend-container"
-            style={{
-              maxHeight: 400,
-            }}
-          >
-            <GraphLegend
-              selectAllActive={active_indices.length === all_tp_idx.length}
-              onSelectAll={ () => this.setState({active_indices: all_tp_idx}) }
-              onSelectNone={ () => this.setState({active_indices: []}) }
-              onClick={ id => !(active_indices.length==1 && active_indices.includes(id))
-              && this.setState({active_indices: _.toggle_list(active_indices,id)})}
-              items={legend_items}
-            />
-          </div>
+          <StandardLegend
+            container_style={{maxHeight: 400}}
+            items={legend_items}
+            onClick={ 
+              (id) => !(active_indices.length==1 && active_indices.includes(id)) &&
+                this.setState({active_indices: _.toggle_list(active_indices,id)})
+            }
+            Controls={
+              <Fragment>
+                <TM k="select" />:
+                <span
+                  onClick={() => this.setState({active_indices: all_tp_idx})}
+                  className="link-styled"
+                  style={{margin: "0px 5px 0px 5px"}}
+                >
+                  <TM k="all"/>
+                </span>
+                |
+                <span
+                  onClick={() => this.setState({active_indices: []}) }
+                  className="link-styled" 
+                  style={{marginLeft: "5px"}}
+                >
+                  <TM k="none"/>
+                </span> 
+              </Fragment>
+            }
+          />
         </div>
         <div className="fcol-md-8" style={{position: "relative"}}>
           <NivoResponsiveLine

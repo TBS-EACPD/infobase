@@ -13,7 +13,7 @@ import { Subject } from '../models/subject';
 import { result_docs } from '../models/results.js';
 import { Result, indicator_text_functions } from '../panels/panel_declarations/results/results_common.js';
 import result_text from '../panels/panel_declarations/results/result_components.yaml';
-import { GraphLegend } from '../charts/GraphLegend.js';
+import { LegendList } from '../charts/legends';
 
 import {
   Select,
@@ -457,18 +457,20 @@ export default class TextDiffApp extends React.Component {
             <label htmlFor='select_program'>
               <TM k="filter_by_status"/>
             </label>
-            <GraphLegend
+            <LegendList
               items={indicator_status}
-              checkmark_vertical_align={6}
-              onClick={ id => {
-                const copy_indicator_status = _.map(indicator_status, row => row.id===id ? ({
-                  ...row,
-                  active: !row.active,
-                }) : row);
-                this.setState({
-                  indicator_status: copy_indicator_status,
-                  indicator_status_changed: true,
-                });
+              LegendCheckBoxProps={{
+                checkmark_vertical_align: 6,
+                onClick: (id) => {
+                  const copy_indicator_status = _.map(indicator_status, row => row.id===id ? ({
+                    ...row,
+                    active: !row.active,
+                  }) : row);
+                  this.setState({
+                    indicator_status: copy_indicator_status,
+                    indicator_status_changed: true,
+                  });
+                },
               }}
             />
           </div>
