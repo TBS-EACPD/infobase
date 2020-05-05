@@ -1,0 +1,9 @@
+
+@import "../../common_css/common-variables";
+
+.standard-legend-container {
+  padding: 8px 10px 0px;
+  border: 1px solid $separatorColor;
+  background-color: $backgroundColor;
+  border-radius: $standardBorderRadius;
+}

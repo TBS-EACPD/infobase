@@ -53,33 +53,3 @@ div.tick,
 .bar-amount-neg {
   color: $highlightColor;
 }
-
-
-.legend-container {
-  padding: 8px 10px 0px;
-  border: 1px solid $separatorColor;
-  background-color: $backgroundColor;
-  border-radius: $standardBorderRadius;
-}
-
-
-.legend-list-el {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 5px;
-}
-
-.legend-list-inline {
-  @include unstyled-list;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-@media(min-width: $minExtraSmallDevice){
-  .legend-list-inline.horizontal {
-    flex-direction: row;
-  }
-}

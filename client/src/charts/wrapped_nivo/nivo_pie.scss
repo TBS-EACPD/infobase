@@ -38,28 +38,3 @@
     font-weight: bold;
   }
 }
-
-
-.tabular-legend__list-el {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 5px 0;
-
-  &:not(:first-child) {
-    border-top: 1px solid $separatorColor;
-  }
-}
-.tabular-legend__color-indicator {
-  width: 20px;
-  height: 20px;
-  margin-left: 5px;
-  margin-right: 5px;
-  border-radius: 3px;
-}
-.tabular-legend__right-column {
-  margin-left: auto;
-  text-align: right;
-  white-space: nowrap;
-}

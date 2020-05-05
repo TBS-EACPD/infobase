@@ -1,0 +1,21 @@
+@import "../../common_css/common-variables";
+
+.legend-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  &.legend-list--horizontal {
+    @media(min-width: $minExtraSmallDevice){
+      flex-direction: row;
+    }
+  }
+}
+
+.legend-list__item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 5px;
+}

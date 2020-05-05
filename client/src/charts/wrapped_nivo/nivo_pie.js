@@ -11,39 +11,13 @@ import {
   get_formatter,
 } from './nivo_common.js';
 
-import { formats } from "../../core/format.js";
+import { TabularLegend } from '../legends';
+import { formats } from '../../core/format.js';
 import { newIBCategoryColors } from '../../core/color_schemes.js';
 import {
   DisplayTable,
   Format,
 } from '../../components/index.js';
-
-
-const TabularPercentLegend = ({
-  items, // [ { active, id, label, color }]
-  get_right_content, //item => react element
-}) => (
-  <ul className="list-unstyled">
-    {_.map(items, item => 
-      <li
-        key={item.id}
-        className="tabular-legend__list-el"
-      >
-        <span
-          className="tabular-legend__color-indicator"
-          aria-hidden={true}
-          style={{backgroundColor: item.color}}
-        />
-        <span>
-          {item.label}
-        </span>
-        <span className="tabular-legend__right-column">
-          { get_right_content(item) } 
-        </span>
-      </li>
-    )}
-  </ul>
-);
 
 export class NivoResponsivePie extends React.Component{
   render(){
@@ -163,7 +137,7 @@ export class NivoResponsivePie extends React.Component{
         <div className="infobase-pie__legend">
           <div className="centerer">
             <div className="centerer-IE-fix">
-              <TabularPercentLegend
+              <TabularLegend
                 items={legend_items}
                 get_right_content={
                   (item) => (
