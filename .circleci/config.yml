@@ -97,7 +97,7 @@ jobs:
       - run: npm install @lhci/cli@0.3.x
       - run:
           name: lhci autorun
-          command: lhci autorun --upload.target=temporary-public-storage || echo "LHCI failed!"
+          command: node ./node_modules/@lhci/cli/src/cli.js autorun --upload.target=temporary-public-storage || echo "LHCI failed!"
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   build:
