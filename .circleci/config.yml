@@ -168,7 +168,7 @@ jobs:
             - ./server/package-lock.json
             - ./server/.babelrc
 
-      - run: sudo npm install -g @lhci/cli@0.3.x
+      - run: npm install -g @lhci/cli@0.3.x
       - run:
           name: lhci autorun
           command: lhci autorun --upload.target=temporary-public-storage || echo "LHCI failed!"
