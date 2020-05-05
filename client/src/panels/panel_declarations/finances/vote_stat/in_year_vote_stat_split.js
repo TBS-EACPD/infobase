@@ -34,8 +34,8 @@ const render_w_options = ({graph_col, text_col, text_key}) => ({calculations, fo
       {!window.is_a11y_mode &&
         <Col isGraph size={graph_col}>
           <NivoResponsivePie
-            data = {data}
-            legend_data ={data}
+            data={data}
+            legend_data={data}
           /> 
         </Col>
       }

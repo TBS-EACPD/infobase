@@ -20,25 +20,24 @@ import {
 
 
 const TabularPercentLegend = ({
-  items, // [ { active, id, label, color }] 
-  onClick, //id => { }
+  items, // [ { active, id, label, color }]
   get_right_content, //item => react element
 }) => (
   <ul className="list-unstyled">
     {_.map(items, item => 
       <li
         key={item.id}
-        className="tabular-legend-list-el"
+        className="tabular-legend__list-el"
       >
-        <span 
+        <span
+          className="tabular-legend__color-indicator"
           aria-hidden={true}
-          className="legend-color-checkbox"
-          style={{backgroundColor: item.color }}
+          style={{backgroundColor: item.color}}
         />
         <span>
           {item.label}
         </span>
-        <span style={{marginLeft: 'auto', textAlign: 'right', whiteSpace: "nowrap"}}>
+        <span className="tabular-legend__right-column">
           { get_right_content(item) } 
         </span>
       </li>
