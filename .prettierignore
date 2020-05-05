@@ -1,0 +1,20 @@
+node_modules
+
+# generated stuff
+client/app/
+client/build/
+client/build_prod/
+server/transpiled_build/
+
+
+# Prettier seems to want to format everything, just being defensive...
+*.yaml
+*.yml
+*.scss
+*.css
+*.html
+*.json
+*.graphql
+*.gql
+*.md
+*.babelrc
