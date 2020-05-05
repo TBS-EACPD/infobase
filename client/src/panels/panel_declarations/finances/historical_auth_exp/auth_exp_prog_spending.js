@@ -4,7 +4,7 @@ import {
   run_template,
   year_templates,
   actual_to_planned_gap_year,
-  GraphLegend,
+  StandardLegend,
   A11yTable,
   StdPanel,
   Col,
@@ -263,20 +263,18 @@ class AuthExpProgSpending extends React.Component {
       graph_content = 
       <Fragment>
         <div style={{padding: '10px 25px 0px 97px'}}>
-          <div className="legend-container">
-            <GraphLegend
-              isHorizontal
-              items={legend_items}
-              onClick={ id => { 
-                !(
-                  active_series.length === 1 &&
-                  _.includes(active_series, id)
-                ) && this.setState({
-                  active_series: _.toggle_list(active_series, id),
-                });
-              }}
-            />
-          </div>
+          <StandardLegend
+            items={legend_items}
+            isHorizontal={true}
+            onClick={ id => { 
+              !(
+                active_series.length === 1 &&
+                _.includes(active_series, id)
+              ) && this.setState({
+                active_series: _.toggle_list(active_series, id),
+              });
+            }}
+          />
         </div>
         <div>
           <NivoResponsiveLine

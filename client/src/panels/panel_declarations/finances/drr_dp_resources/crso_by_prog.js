@@ -2,7 +2,7 @@ import text from './crso_by_prog.yaml';
 import {
   NivoResponsiveBar,
   year_templates,
-  GraphLegend,
+  StandardLegend,
   A11yTable,
   util_components,
   run_template,
@@ -144,24 +144,20 @@ class PlannedProgramResources extends React.Component {
       </div>
       <div className="frow">
         <div className="fcol-md-4" style={{ width: "100%" }}>
-          <div 
-            style={{maxHeight: "400px"}}
-            className="legend-container"
-          >
-            <GraphLegend
-              items={_.map(programs, ({label}) =>({
-                label,
-                id: label,
-                active: _.includes(active_programs, label),
-                color: colors(label),
-              }))}
-              onClick={id => {!(active_programs.length === 1 && active_programs.includes(id)) &&
-                this.setState({
-                  active_programs: _.toggle_list(active_programs, id),
-                });
-              }}
-            />
-          </div>
+          <StandardLegend
+            container_style={{maxHeight: "400px"}}
+            items={_.map(programs, ({label}) =>({
+              label,
+              id: label,
+              active: _.includes(active_programs, label),
+              color: colors(label),
+            }))}
+            onClick={id => {!(active_programs.length === 1 && active_programs.includes(id)) &&
+              this.setState({
+                active_programs: _.toggle_list(active_programs, id),
+              });
+            }}
+          />
         </div>
         <div className="fcol-md-8">
           <NivoResponsiveBar

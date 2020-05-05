@@ -14,7 +14,7 @@ import {
   DisplayTable,
   default_dept_name_sort_func,
 } from '../components/index.js';
-import { GraphLegend } from '../charts/GraphLegend.js';
+import { LegendList } from '../charts/legends';
 import { Details } from '../components/Details.js';
 import { rpb_link } from './rpb_link.js';
 import { Subject } from '../models/subject.js';
@@ -55,7 +55,7 @@ class SimpleView extends React.Component {
             <div className="col-md-6">
               <fieldset className="rpb-config-item col-selection simple">
                 <legend className="rpb-config-header"> <TextMaker text_key="select_columns" /> </legend>
-                <GraphLegend 
+                <LegendList 
                   items={
                     _.map(all_data_columns, obj => ({
                       id: obj.nick,
@@ -63,7 +63,7 @@ class SimpleView extends React.Component {
                       active: _.includes(_.map(columns, 'nick'), obj.nick),
                     }))
                   }
-                  onClick={ id=> on_toggle_col_nick(id) }
+                  onClick={(id) => on_toggle_col_nick(id)}
                 />
               </fieldset>
             </div>

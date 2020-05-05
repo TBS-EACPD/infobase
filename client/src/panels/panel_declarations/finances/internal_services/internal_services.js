@@ -6,7 +6,7 @@ import {
   run_template, 
   create_text_maker_component,
   year_templates, 
-  GraphLegend,
+  StandardLegend,
   A11yTable,
   NivoResponsiveBar,
   
@@ -127,12 +127,10 @@ export const declare_internal_services_panel = () => declare_panel({
           return (
             <div className="frow md-middle"> 
               <div className="fcol-md-3">
-                <div className="well legend-container">
-                  <GraphLegend
-                    isSolidBox
-                    items={legend_items}
-                  />
-                </div>
+                <StandardLegend
+                  items={legend_items}
+                  LegendCheckBoxProps={{isSolidBox: true}}
+                />
               </div>
               <div className="fcol-md-9">
                 <NivoResponsiveBar

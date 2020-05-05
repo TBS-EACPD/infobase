@@ -6,7 +6,7 @@ import { infobase_colors_smart } from './nivo_common.js';
 import { NivoResponsiveBar } from './nivo_bar.js';
 import { NivoResponsiveLine } from './nivo_line.js';
 
-import { GraphLegend } from '../GraphLegend.js';
+import { StandardLegend } from '../legends';
 import { newIBCategoryColors } from '../../core/color_schemes.js';
 import { formats } from "../../core/format.js";
 import { create_text_maker } from '../../models/text.js';
@@ -198,53 +198,43 @@ export class NivoLineBarToggle extends React.Component {
           className={classNames(`fcol-xs-12 fcol-md-${legend_col_full_size}`, legend_col_class)} 
           style={{ width: "100%", position: "relative" }}
         >
-          <div
-            className="legend-container"
-            style={{ maxHeight: "400px" }}
-          >
-            { legend_title &&
-              <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
-                {legend_title}
-              </p>
+          <StandardLegend
+            container_style={{ maxHeight: "400px" }}
+            title={legend_title}
+            items={
+              _.map( 
+                data,
+                ({label}) => ({
+                  label,
+                  active: _.includes(selected, label),
+                  id: label,
+                  color: colors(label),
+                })
+              )
             }
-            <GraphLegend
-              items={
-                _.map( 
-                  data,
-                  ({label}) => ({
-                    label,
-                    active: _.includes(selected, label),
-                    id: label,
-                    color: colors(label),
-                  })
-                )
-              }
-              onClick={label =>{
-                !(selected.length === 1 && selected.includes(label)) &&
-                  (this.setState({
-                    selected: _.toggle_list(selected, label),
-                  }));
-              }}
-            />
-            { !disable_toggle &&
-              <span className="centerer" style={{paddingBottom: "15px"}}>
-                <button 
-                  className="btn-ib-primary"
-                  onClick={ 
-                    () => {
-                      const current_mode_index = _.indexOf(this.graph_modes, graph_mode);
-                      const name_of_next_graph_mode = this.graph_modes[(current_mode_index+1) % this.graph_modes.length];
-                      this.setState({
-                        graph_mode: name_of_next_graph_mode,
-                      });
-                    }
+            onClick={(label) => {
+              !(selected.length === 1 && selected.includes(label)) &&
+                (this.setState({
+                  selected: _.toggle_list(selected, label),
+                }));
+            }}
+            Controls={!disable_toggle &&
+              <button 
+                className="btn-ib-primary"
+                onClick={ 
+                  () => {
+                    const current_mode_index = _.indexOf(this.graph_modes, graph_mode);
+                    const name_of_next_graph_mode = this.graph_modes[(current_mode_index+1) % this.graph_modes.length];
+                    this.setState({
+                      graph_mode: name_of_next_graph_mode,
+                    });
                   }
-                >
-                  {text_maker("toggle_graph")}
-                </button>
-              </span>
+                }
+              >
+                {text_maker("toggle_graph")}
+              </button>
             }
-          </div>
+          />
         </div>
         <div 
           className={classNames(`fcol-xs-12 fcol-md-${graph_col_full_size}`, graph_col_class)} 

@@ -4,7 +4,7 @@ import {
   create_text_maker_component,
   Subject,
   formats,
-  GraphLegend,
+  StandardLegend,
   A11yTable,
   InfographicPanel,
   Table,
@@ -369,13 +369,11 @@ class Goco extends React.Component {
 
       graph_content = <Fragment>
         <div className="centerer mrgn-bttm-md" style={ {padding: '10px 25px 10px 25px'} }>
-          <div className="legend-container">
-            <GraphLegend
-              isHorizontal
-              items={legend_items}
-              isSolidBox
-            />
-          </div>
+          <StandardLegend
+            items={legend_items}
+            isHorizontal={true}
+            LegendCheckBoxProps={{isSolidBox: true}}
+          />
         </div>
         <div>
           <NivoResponsiveBar

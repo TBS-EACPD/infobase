@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { Fragment } from 'react';
 
 import {
-  GraphLegend,
+  StandardLegend,
   A11yTable,
   InfographicPanel,
   businessConstants,
@@ -236,24 +236,22 @@ class PercentageViz extends React.Component {
             <div className="medium_panel_text">
               {text_maker("graph_legend_instructions")}
             </div>
-            <div className="legend-container">
-              <GraphLegend
-                items={_.chain(all_data)
-                  .map( ({ label, id }) => ({
-                    label: label,
-                    active: _.includes(selected, id),
-                    id,
-                    color: result_color_scale(id),
-                  }))
-                  .value()
-                }
-                onClick={id => {!(selected.length === 1 && selected.includes(id)) &&
-                  this.setState({
-                    selected: _.toggle_list(selected, id),
-                  });
-                }}
-              />
-            </div>
+            <StandardLegend
+              items={_.chain(all_data)
+                .map( ({ label, id }) => ({
+                  label: label,
+                  active: _.includes(selected, id),
+                  id,
+                  color: result_color_scale(id),
+                }))
+                .value()
+              }
+              onClick={id => {!(selected.length === 1 && selected.includes(id)) &&
+                this.setState({
+                  selected: _.toggle_list(selected, id),
+                });
+              }}
+            />
           </div>
           <div className="fcol-md-4 fcol-xs-4 medium_panel_text" >
             <NivoResponsivePie

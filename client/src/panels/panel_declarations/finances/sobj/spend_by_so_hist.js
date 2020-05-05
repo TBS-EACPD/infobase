@@ -1,9 +1,11 @@
+import { Fragment } from 'react';
+
 import {
   businessConstants,
   year_templates,
   util_components,
   InfographicPanel,
-  GraphLegend,
+  StandardLegend,
   A11yTable,
   run_template,
   NivoResponsiveLine,
@@ -64,21 +66,37 @@ class SobjLine extends React.Component {
     return (
       <div className="frow">
         <div className="fcol-md-4">
-          <div className="legend-container">
-            <GraphLegend
-              items={legend_items}
-              onSelectAll={ () => this.setState({active_sobjs: all_labels}) }
-              onSelectNone={ () => this.setState({active_sobjs: []}) }
-              onClick={ 
-                id => {
-                  !(
-                    spending_data.length === 1 && 
-                    spending_data.map(o => o.id).includes(id) 
-                  ) && this.setState({ active_sobjs: _.toggle_list(active_sobjs, id) });
-                }
+          <StandardLegend
+            items={legend_items}
+            onClick={ 
+              id => {
+                !(
+                  spending_data.length === 1 && 
+                  spending_data.map(o => o.id).includes(id) 
+                ) && this.setState({ active_sobjs: _.toggle_list(active_sobjs, id) });
               }
-            />
-          </div>
+            }
+            Controls={
+              <Fragment>
+                <TM k="select" />:
+                <span
+                  onClick={() => this.setState({active_sobjs: all_labels})}
+                  className="link-styled"
+                  style={{margin: "0px 5px 0px 5px"}}
+                >
+                  <TM k="all"/>
+                </span>
+                |
+                <span
+                  onClick={() => this.setState({active_sobjs: []}) }
+                  className="link-styled" 
+                  style={{marginLeft: "5px"}}
+                >
+                  <TM k="none"/>
+                </span> 
+              </Fragment>
+            }
+          />
         </div>
         <div className="fcol-md-8" style={{position: "relative", marginTop: "10px"}}>
           <NivoResponsiveLine

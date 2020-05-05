@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 
 import { CanadaD3Component } from './CanadaD3Component.js';
 
-import { GraphLegend } from "../GraphLegend.js";
+import { StandardLegend } from "../legends";
 import { NivoResponsiveHBar } from "../wrapped_nivo/index.js";
 import { hex_to_rgb } from '../../general_utils.js';
 import { secondaryColor, tertiaryColor } from '../../core/color_defs.js';
@@ -181,16 +181,16 @@ export class Canada extends React.Component{
     return (
       <div className="frow no-container">
         <div className="fcol-md-3">
-          <div className="legend-container" style={{ maxHeight: "400px", width: "100%", marginTop: "10px"}}>
-            <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
-              {trivial_text_maker("legend")}
-            </p>
-            <GraphLegend
-              isSolidBox
-              items={legend_items}
-            />
-          </div>
-          <div className="legend-container" style={{ maxHeight: "400px", width: "100%", overflowY: "hidden", marginTop: "10px"}}>
+          <StandardLegend
+            container_style={{ maxHeight: "400px", width: "100%", marginTop: "10px"}}
+            title={trivial_text_maker("legend")}
+            items={legend_items}
+            LegendCheckBoxProps={{isSolidBox: true}}
+          />
+          <div 
+            className="standard-legend-container"
+            style={{ maxHeight: "400px", width: "100%", overflowY: "hidden", marginTop: "10px"}}
+          >
             <CanadaGraphBarLegend
               prov={this.state.prov}
               data={data}
