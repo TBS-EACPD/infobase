@@ -89,85 +89,12 @@ jobs:
   lighthouse:
     working_directory: "~/InfoBase"
     docker:
-      - image: eaadtbs/ib-ci-build:v1.2
+      - image: eaadtbs/ib-ci-test:v1.1
         <<: *dockerhub_auth
     steps:
       - checkout:
-          path: "~/InfoBase"
-
-      - run: ./scripts/ci_scripts/create_envs.sh
-
-      - restore_cache:
-          keys:
-            - client-dependencies-{{ checksum "client/package-lock.json" }}
-      - run: 
-          command: |
-            [ -e "client/node_modules" ] || (cd client && npm ci)
-      - save_cache:
-          paths:
-            - client/node_modules
-            - scripts/common_node_scripts/node_modules
-          key: client-dependencies-{{ checksum "client/package-lock.json" }}
-
-      - run: ./scripts/ci_scripts/get_bundle_stats_baseline.sh
-
-      - restore_cache:
-          keys:
-            - prod-build-{{ .Branch }}-{{ .Revision }}
-      - run:
-          command: |
-            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh)
-      - save_cache:
-          paths:
-            - client/build
-          key: prod-build-{{ .Branch }}-{{ .Revision }}
-
-      - restore_cache:
-          keys:
-            - server-dependencies-{{ checksum "server/package-lock.json" }}
-      - run: 
-          command: |
-            [ -e "server/node_modules" ] || (cd server && npm ci)
-      - save_cache:
-          paths:
-            - server/node_modules
-            - scripts/common_node_scripts/node_modules
-          key: server-dependencies-{{ checksum "server/package-lock.json" }}
-      - restore_cache:
-          keys:
-            - server-transpiled-build-{{ .Branch }}-{{ .Revision }}
-      - run:
-          command: |
-            [ -f "server/transpiled_build/app.js" ] || (cd server && npm run build)
-      - save_cache:
-          paths:
-            - server/transpiled_build
-          key: server-transpiled-build-{{ .Branch }}-{{ .Revision }}
-
-      - persist_to_workspace:
-          root: ./
-          paths:
-            - ./scripts
-
-            - ./data
-            - ./test-data
-            
-            - ./client/build
-            - ./client/browser-tests
-            - ./client/deploy_scripts
-            - ./client/node_modules
-            - ./client/package.json
-
-            - ./server/transpiled_build
-            - ./server/src
-            - ./server/deploy_scripts
-            - ./server/.gcloudignore
-            - ./server/jest_configs
-            - ./server/node_modules
-            - ./server/package.json
-            - ./server/package-lock.json
-            - ./server/.babelrc
-
+          path: "~/InfoBase/client"
+      - run: sudo npm install -g @lhci/cli@0.3.x
       - run:
           name: lhci autorun
           command: lhci autorun --upload.target=temporary-public-storage || echo "LHCI failed!"
@@ -450,4 +377,6 @@ workflows:
             - test_end_to_end
             - deploy_server
           <<: *deploy_filter
-      - lighthouse
+      - lighthouse:
+          requires:
+            - build
