@@ -78,7 +78,7 @@ jobs:
           key: dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}
 
   lighthouse:
-    working_directory: "~/InfoBase"
+    working_directory: "~/InfoBase/client"
     docker:
       - image: eaadtbs/ib-ci-test:v1.1
         <<: *dockerhub_auth
