@@ -135,7 +135,7 @@ export const declare_gov_drr_panel = () => declare_panel({
   
       return (
         <InfographicPanel
-          title={text_maker("drr_summary_title", {year: result_docs[current_drr_key].year})}
+          title={text_maker("gov_drr_summary_title", {year: result_docs[current_drr_key].year})}
           { ...{footnotes, sources} }
         >
           <GovDRR {...panel_args} />
