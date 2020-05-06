@@ -1,11 +1,10 @@
-import { Fragment } from 'react';
-
 import {
   businessConstants,
   year_templates,
   util_components,
   InfographicPanel,
   StandardLegend,
+  SelectAllControl,
   A11yTable,
   run_template,
   NivoResponsiveLine,
@@ -77,24 +76,9 @@ class SobjLine extends React.Component {
               }
             }
             Controls={
-              <Fragment>
-                <TM k="select" />:
-                <span
-                  onClick={() => this.setState({active_sobjs: all_labels})}
-                  className="link-styled"
-                  style={{margin: "0px 5px 0px 5px"}}
-                >
-                  <TM k="all"/>
-                </span>
-                |
-                <span
-                  onClick={() => this.setState({active_sobjs: []}) }
-                  className="link-styled" 
-                  style={{marginLeft: "5px"}}
-                >
-                  <TM k="none"/>
-                </span> 
-              </Fragment>
+              <SelectAllControl
+                SelectAllOnClick={ () => this.setState({active_sobjs: all_labels}) }
+                SelectNoneOnClick={ () => this.setState({active_sobjs: []}) } />
             }
           />
         </div>

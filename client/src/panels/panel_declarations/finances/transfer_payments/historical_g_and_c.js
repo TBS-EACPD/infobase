@@ -10,6 +10,7 @@ import {
   year_templates,
   businessConstants,
   StandardLegend,
+  SelectAllControl,
   A11yTable,
   InfographicPanel,
   util_components,
@@ -260,24 +261,9 @@ class DetailedHistTPItems extends React.Component {
                 this.setState({active_indices: _.toggle_list(active_indices,id)})
             }
             Controls={
-              <Fragment>
-                <TM k="select" />:
-                <span
-                  onClick={() => this.setState({active_indices: all_tp_idx})}
-                  className="link-styled"
-                  style={{margin: "0px 5px 0px 5px"}}
-                >
-                  <TM k="all"/>
-                </span>
-                |
-                <span
-                  onClick={() => this.setState({active_indices: []}) }
-                  className="link-styled" 
-                  style={{marginLeft: "5px"}}
-                >
-                  <TM k="none"/>
-                </span> 
-              </Fragment>
+              <SelectAllControl
+                SelectAllOnClick={ () => this.setState({active_indices: all_tp_idx}) }
+                SelectNoneOnClick={ () => this.setState({active_indices: []}) } />
             }
           />
         </div>
