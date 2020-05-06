@@ -1,3 +1,4 @@
+const _ = require("lodash");
 const { route_load_tests_config } = require('../../client/browser-tests/route-load-tests-config.js');
 
 module.exports = {
