@@ -305,12 +305,12 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
 
   return <Fragment>
     <div className="frow middle-xs between-md">
-      <div className="fcol-md-12 fcol-xs-12 medium_panel_text" >
+      <div className="fcol-xs-12 medium_panel_text" >
         <TM k="drr_summary_text_intro" args={summary_text_args} />
       </div>
     </div>
     <div className="frow middle-xs between-md">
-      <div className="fcol-md-7 fcol-xs-7 medium_panel_text" >
+      <div className="fcol-md-7 fcol-xs-12 medium_panel_text" >
         <div style={{padding: "10px"}}>
           <TM k="result_status_explanation"/>
           <table>
@@ -325,7 +325,7 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
           </table>
         </div>
       </div>
-      <div className="fcol-md-5 fcol-xs-5" >
+      <div className="fcol-md-5 fcol-xs-12" >
         <div style={{padding: "30px"}}>
           <StatusGrid {...counts} />
         </div>
@@ -333,7 +333,7 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
     </div>
     <div className="panel-separator" style={{marginTop: "0px"}} />
     <div className="frow middle-xs between-md" >
-      <div className={"fcol-md-12 fcol-xs-12"} >
+      <div className={"fcol-xs-12"} >
         <PercentageViz summary_text_args={summary_text_args} counts={counts} />
       </div>
     </div>
