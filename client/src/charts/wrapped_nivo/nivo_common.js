@@ -117,7 +117,10 @@ const DefaultPercentTooltip = ({tooltip_items, formatter, total}) => (
           <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
             <Fragment>{ /* MediaQuery jank, it will insert a div wrapping its children when it has mutliple of them, need a manual Fragment to avoid that */ }
               <td className="nivo-tooltip__label">
-                {tooltip_item.name || tooltip_item.id}
+                {/* TODO: standardize our chart APIs on either label or name. 
+                  Resolve whatever dumb issue meant the full plain language name needed to be used as the id sometimes... */
+                  tooltip_item.name || tooltip_item.label || tooltip_item.id
+                } 
               </td>
               <td className="nivo-tooltip__value" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
               <td className="nivo-tooltip__value" dangerouslySetInnerHTML={{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}} />
@@ -126,7 +129,7 @@ const DefaultPercentTooltip = ({tooltip_items, formatter, total}) => (
           <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
             <td>
               <div className="nivo-tooltip__label">
-                {tooltip_item.name || tooltip_item.id}
+                {tooltip_item.name || tooltip_item.label || tooltip_item.id}
               </div>
               <div className="nivo-tooltip__value" dangerouslySetInnerHTML={{__html: formatter(tooltip_item.value)}} />
               <div className="nivo-tooltip__value" dangerouslySetInnerHTML={{__html: formats.percentage1(Math.abs(tooltip_item.value)/total)}} />
