@@ -1,7 +1,5 @@
 import text from './detailed_program_spending_split.yaml';
 
-import { Fragment } from 'react';
-
 import {
   NivoResponsiveBar,
   NivoResponsiveHBar,
@@ -12,6 +10,7 @@ import {
   infograph_href_template,
   year_templates,
   StandardLegend,
+  SelectAllControl,
   A11yTable,
   businessConstants,
   InfographicPanel,
@@ -121,24 +120,9 @@ class HistoricalProgramBars extends React.Component {
               });
             }}
             Controls={
-              <Fragment>
-                <TM k="select" />:
-                <span
-                  onClick={() => this.setState({selected: all_keys})}
-                  className="link-styled"
-                  style={{margin: "0px 5px 0px 5px"}}
-                >
-                  <TM k="all"/>
-                </span>
-                |
-                <span
-                  onClick={() => this.setState({selected: []}) }
-                  className="link-styled" 
-                  style={{marginLeft: "5px"}}
-                >
-                  <TM k="none"/>
-                </span> 
-              </Fragment>
+              <SelectAllControl
+                SelectAllOnClick={ () => this.setState({selected: all_keys}) }
+                SelectNoneOnClick={ () => this.setState({selected: []}) } />
             }
           />
         </div>
