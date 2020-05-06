@@ -1,3 +1,4 @@
+import './CheckBox.scss';
 import classNames from 'classnames';
 
 import { IconCheckmark } from '../icons/icons.js';
@@ -43,20 +44,11 @@ export class CheckBox extends React.Component{
           <span
             aria-hidden={true}
             style={{
-              display: 'inline-block',
-              width: '20px',
-              height: '20px',
-              marginLeft: '5px',
-              marginRight: '5px',
-              flexShrink: 0,
-              flexGrow: 0,
               border: `1px solid ${color}`,
-              borderRadius: '3px',
               backgroundColor: (!onClick || active) ? color : "transparent",
-              textAlign: "center",
               ...checkbox_style,
             }}
-            className={classNames("legend-color-checkbox", onClick && "span-hover")}
+            className={classNames("checkbox-span", onClick && "span-hover")}
             onClick={ () => !disabled && onClick && onClick(id) }
           >
             { !isSolidBox && 
