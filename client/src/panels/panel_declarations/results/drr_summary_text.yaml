@@ -1,9 +1,17 @@
+gov_drr_summary_title:
+  transform: [handlebars]
+  en: |
+    {{year}} Departmental Results Reports Summary
+  fr: |
+    Sommaire des rapports sur les résultats ministériels de {{year}}
+
+# like gov_drr_summary_title, but report(s) is singular, subtle difference
 drr_summary_title:
   transform: [handlebars]
   en: |
-    {{year}} Department Results Report Summary
+    {{year}} Departmental Results Report Summary
   fr: |
-    Sommaire des rapports sur les résultats ministériels de {{year}}
+    Sommaire des rapport sur les résultats ministériels de {{year}}
 
 
 # this a multi-level text 
