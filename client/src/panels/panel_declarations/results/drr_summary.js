@@ -319,6 +319,7 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
         </div>
       </div>
     </div>
+    <div className="panel-separator" style={{marginTop: "0px"}} />
     <div className="frow middle-xs between-md" style={{marginBottom: "30px"}} >
       <div className={"fcol-md-12 fcol-xs-12"} >
         <PercentageViz summary_text_args={summary_text_args} counts={counts} />
