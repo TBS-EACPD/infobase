@@ -45,6 +45,7 @@ class GovDRR extends React.Component {
           is_gov={true}
           num_depts={num_depts}
         />
+        <div className="panel-separator" style={{marginTop: "0px"}} />
         <div>
           <div className="medium_panel_text">
             <TM k="gov_drr_summary_org_table_text" />
