@@ -263,7 +263,10 @@ class PercentageViz extends React.Component {
                 });
               }}
             />
-            <div className="legend-container">
+            <div
+              className="legend-container"
+              style={{margin: "5px 0px"}}
+            >
               <TM
                 k="drr_summary_stats"
                 args={new_summary_text_args} 
