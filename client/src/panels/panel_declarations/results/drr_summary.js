@@ -193,13 +193,18 @@ class PercentageViz extends React.Component {
 
     const all_ids = _.keys(counts);
 
+    const default_selected = all_ids.length > 1 ?
+      _.without(all_ids, "future") :
+      all_ids;
+
     this.state = {
-      selected: _.filter(all_ids, id => id !== "future"), // default to no future
+      selected: default_selected,
     };
   }
 
   render(){
     const { counts } = this.props;
+    const { selected } = this.state;
 
     const all_data = _.chain(counts)
       .map( (value, key) => ({
@@ -210,8 +215,6 @@ class PercentageViz extends React.Component {
       .filter( status => status.value > 0 )
       .value();
 
-    const selected = _.some(all_data, ({id}) => id !== "future") ? this.state.selected : _.keys(counts); // override selected if there are only future indicators
-
     const all_data_total = _.sumBy(all_data, 'value');
 
     const graph_data = _.filter(
@@ -220,7 +223,7 @@ class PercentageViz extends React.Component {
     );
     
     const graph_total = _.sumBy(graph_data, 'value');
-    const colorBy = d=>result_color_scale(d.id);
+    const colorBy = ({id}) => result_color_scale(id);
 
     const new_summary_text_args = {
       year: current_drr_year,
@@ -235,10 +238,15 @@ class PercentageViz extends React.Component {
     return (
       <Fragment>
         <div className="frow">
-          <div className="fcol-md-4 fcol-xs-4" >
-            <div className="medium_panel_text">
-              {text_maker("graph_legend_instructions")}
-            </div>
+          <div className="fcol-md-1 fcol-xs-0" />
+          <div 
+            className="fcol-md-4 fcol-xs-12" 
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-evenly",
+            }}
+          >
             <StandardLegend
               items={_.chain(all_data)
                 .map( ({ label, id }) => ({
@@ -255,11 +263,18 @@ class PercentageViz extends React.Component {
                 });
               }}
             />
+            <div className="legend-container">
+              <TM
+                k="drr_summary_stats"
+                args={new_summary_text_args} 
+              />
+            </div>
           </div>
-          <div className="fcol-md-4 fcol-xs-4 medium_panel_text" >
+          <div className="fcol-md-1 fcol-xs-0" />
+          <div className="fcol-md-6 fcol-xs-12 medium_panel_text" >
             <NivoResponsivePie
               data={graph_data}
-              graph_height='280px'
+              graph_height='300px'
               is_money={false}
               colorBy={colorBy}
               margin={{
@@ -268,12 +283,6 @@ class PercentageViz extends React.Component {
                 bottom: 30,
                 left: 30,
               }}
-            />
-          </div>
-          <div className="fcol-md-4 fcol-xs-4 medium_panel_text" >
-            <TM
-              k="new_drr_summary_text_summary"
-              args={new_summary_text_args} 
             />
           </div>
         </div>
@@ -323,7 +332,7 @@ export const DrrSummary = ({ subject, counts, verbose_counts, is_gov, num_depts 
       </div>
     </div>
     <div className="panel-separator" style={{marginTop: "0px"}} />
-    <div className="frow middle-xs between-md" style={{marginBottom: "30px"}} >
+    <div className="frow middle-xs between-md" >
       <div className={"fcol-md-12 fcol-xs-12"} >
         <PercentageViz summary_text_args={summary_text_args} counts={counts} />
       </div>
