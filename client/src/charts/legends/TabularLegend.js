@@ -13,7 +13,7 @@ export const TabularLegend = ({
         className="tabular-legend__list-el"
       >
         <CheckBox
-          // using CheckBox without any onClick, and with isSolid makes solid squares with styleing otherwise
+          // using CheckBox without any onClick, and with isSolid makes solid squares with styling otherwise
           // consistent with other legends; a bit of a hack but it's how all the legends get their icon styles ATM
           color={item.color}
           label={item.label}
