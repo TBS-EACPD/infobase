@@ -34,18 +34,17 @@ drr_summary_text_intro:
     Les progrès réalisés pour atteindre ces résultats ont été mesurés au moyen de **{{fmt_big_int drr_total}}** indicateurs, et un {{gl_tt "état du résultat" "RESULTS_STATUS"}}
     a été attribué à chaque indicateur correspondant au résultat obtenu pour la cible de l'indicateur.
 
-
-new_drr_summary_text_summary:
+drr_summary_stats:
   transform: [handlebars,markdown]
   en: |
-    In **{{year}}**, of the **{{fmt_big_int drr_subset}}** indicators (out of **{{fmt_big_int drr_total}}** total reported):
+    In **{{year}}**, of the **{{fmt_big_int drr_subset}}** indicators{{#isEqual drr_subset drr_total}}{{else}} selected above (out of the total of **{{fmt_big_int drr_total}}**){{/isEqual}}:
       {{#if drr_indicators_met}}* **{{fmt_big_int drr_indicators_met}}** (**{{fmt_percentage1 (divide drr_indicators_met drr_subset)}}**) {{gl_tt "met" "RESULTS_MET"}} their target{{/if}}
       {{#if drr_indicators_not_met}}* **{{fmt_big_int drr_indicators_not_met}}** (**{{fmt_percentage1 (divide drr_indicators_not_met drr_subset)}}**) did {{gl_tt "not meet" "RESULTS_NOT_MET"}} their target{{/if}}
       {{#if drr_indicators_not_available}}* **{{fmt_big_int drr_indicators_not_available}}** (**{{fmt_percentage1 (divide drr_indicators_not_available drr_subset)}}**) have {{gl_tt "no result available" "RESULTS_NOT_AVAILABLE"}}{{/if}}
       {{#if drr_indicators_future}}* **{{fmt_big_int drr_indicators_future}}** (**{{fmt_percentage1 (divide drr_indicators_future drr_subset)}}**) are {{gl_tt "to be achieved in the future" "RESULTS_ONGOING"}}{{/if}}
   fr: |
     {{#if drr_total}}
-    En **{{year}}**, de ces **{{fmt_big_int drr_subset}}** indicateurs (sur **{{fmt_big_int drr_total}}** au total rapportés):
+    En **{{year}}**, de ces **{{fmt_big_int drr_subset}}** indicateurs {{#isEqual drr_subset drr_total}}{{else}}sélectionnés ci-dessus (sur un total de **{{fmt_big_int drr_total}}**) {{/isEqual}}:
       {{#if drr_indicators_met}}* **{{fmt_big_int drr_indicators_met}}** (**{{fmt_percentage1 (divide drr_indicators_met drr_subset)}}**) {{gl_tt "ont atteint" "RESULTS_MET"}} leur cible{{/if}}
       {{#if drr_indicators_not_met}}* **{{fmt_big_int drr_indicators_not_met}}** (**{{fmt_percentage1 (divide drr_indicators_not_met drr_subset)}}**) {{gl_tt "n’ont pas atteint" "RESULTS_NOT_MET"}} leur cible{{/if}}
       {{#if drr_indicators_not_available}}* **{{fmt_big_int drr_indicators_not_available}}** (**{{fmt_percentage1 (divide drr_indicators_not_available drr_subset)}}**) {{gl_tt "n’ont pas de résultat disponible" "RESULTS_NOT_AVAILABLE"}}{{/if}}
