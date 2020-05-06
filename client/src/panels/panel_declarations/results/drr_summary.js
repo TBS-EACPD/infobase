@@ -264,7 +264,7 @@ class PercentageViz extends React.Component {
               }}
             />
             <div
-              className="legend-container"
+              className="standard-legend-container"
               style={{margin: "5px 0px"}}
             >
               <TM
