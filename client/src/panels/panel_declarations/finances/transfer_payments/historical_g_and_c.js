@@ -19,12 +19,12 @@ import {
 
 const { transfer_payments } = businessConstants;
 const { std_years } = year_templates;
-const { Format } = util_components;
-
+const { Format, DisplayTable } = util_components;
 
 const exp_years = std_years.map(year=> year+'exp');
 
 const text_years = _.map(std_years, run_template);
+const years_map = _.zipObject(exp_years, text_years);
 
 //gov: this is the content of the entire panel
 //dept: this is the top part of the panel
@@ -162,6 +162,33 @@ class DetailedHistTPItems extends React.Component {
       .reverse()
       .value();
     
+    const custom_table_data = _.chain(prepped_rows)
+      .filter( (_val, ix)=> _.includes(active_indices, ix))
+      .map(row => ({
+        label: row.tp,
+        ..._.chain(years_map)
+          .map( (text_year, exp_year) => [text_year, row[exp_year]] )
+          .fromPairs()
+          .value(),
+      }))
+      .value();
+    const column_configs = {
+      label: {
+        index: 0,
+        header: text_maker("label"),
+        is_searchable: true,
+      },
+      ..._.chain(text_years)
+        .map( (year, idx) => [year, {
+          index: idx + 1,
+          header: year,
+          is_summable: true,
+          formatter: "dollar",
+        }] )
+        .fromPairs()
+        .value(),
+    };
+
     const graph_series = _.chain(prepped_rows)
       .map(row => [
         row.tp,
@@ -278,6 +305,10 @@ class DetailedHistTPItems extends React.Component {
               "left": 70,
             }}
             colorBy={d=>color_scale(d.id)}
+            custom_table={<DisplayTable
+              data={custom_table_data}
+              column_configs={column_configs}
+            />}
           />
         </div>
       </div>

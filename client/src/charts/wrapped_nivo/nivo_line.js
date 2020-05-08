@@ -78,46 +78,51 @@ export class NivoResponsiveLine extends React.Component {
       isInteractive,
       motionDamping,
       motionStiffness,
+      custom_table,
     } = this.props;
 
     const {
       y_scale_zoomed,
     } = this.state;
     
-    const table_data = _.chain(data)
-      .map(row => {
-        const series_name = row.id;
-        return _.chain(row.data)
-          .map(series => (_.isNil(series.y) ? undefined : {label: series.x, [series_name]: series.y}) )
-          .value();
-      })
-      .flatten()
-      .compact()
-      .groupBy('label')
-      .map( _.spread(_.merge) )
-      .value();
-    const line_table_value_formatter = (value) =>
+    const get_table_nivo_line = () => {
+      const table_data = _.chain(data)
+        .map(row => {
+          const series_name = row.id;
+          return _.chain(row.data)
+            .map(series => (_.isNil(series.y) ? undefined : {label: series.x, [series_name]: series.y}) )
+            .value();
+        })
+        .flatten()
+        .compact()
+        .groupBy('label')
+        .map( _.spread(_.merge) )
+        .value();
+      const line_table_value_formatter = (value) =>
       _.isUndefined(value) ? "" : get_formatter(is_money,text_formatter,true,true)(value);
-    const column_configs = {
-      label: {
-        index: 0,
-        header: table_first_column_name || text_maker("label"),
-        is_searchable: true,
-      },
-      ..._.chain(table_ordered_column_keys || _.map(data,'id'))
-        .map( (col, idx) => [col, {
-          index: idx + 1,
-          header: col,
-          formatter: line_table_value_formatter,
-        }] )
-        .fromPairs()
-        .value(),
+      const column_configs = {
+        label: {
+          index: 0,
+          header: table_first_column_name || text_maker("label"),
+          is_searchable: true,
+        },
+        ..._.chain(table_ordered_column_keys || _.map(data,'id'))
+          .map( (col, idx) => [col, {
+            index: idx + 1,
+            header: col,
+            formatter: line_table_value_formatter,
+          }] )
+          .fromPairs()
+          .value(),
+      };
+      return <DisplayTable
+        data={table_data}
+        column_configs={column_configs}
+        table_name={table_name || text_maker("default_table_name")}
+      />;
     };
 
-    const table = !disable_table_view && <DisplayTable
-      data={table_data}
-      column_configs={column_configs}
-      table_name={table_name || text_maker("default_table_name")} />;
+    const table = !disable_table_view && custom_table || get_table_nivo_line();
 
     const zoom_button = (!disable_y_axis_zoom && !enableArea) ?
       <button

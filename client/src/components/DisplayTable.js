@@ -94,7 +94,7 @@ export class DisplayTable extends React.Component {
         ...column_config_defaults,
         ...supplied_column_config,
       })
-    );    
+    );
 
     const clean_search_string = (search_string) => _.chain(search_string).deburr().toLower().trim().value();
     const is_number_string_date = (val) => _.isNumber(val) || _.isString(val) || _.isDate(val);
