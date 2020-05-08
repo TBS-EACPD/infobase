@@ -146,6 +146,8 @@ const make_email_backend = (templates) => {
         if (mail_sent_successfully){
           response.send("200");
 
+          // Note: async func but not awaited, free up the function to keep handling requests in cases where the DB
+          // communication becomes a choke point
           log_email_and_meta_to_db(request, completed_template, template_name, original_template, email_config);
         } else {
           const error_message = `Internal Server Error: mail was unable to send. ${ 

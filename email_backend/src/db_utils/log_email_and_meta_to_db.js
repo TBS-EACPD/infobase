@@ -19,6 +19,8 @@ const make_mongoose_model_from_original_template = _.memoize(
 
     const model_name = `${template_name}_emails`;
 
+    // Creating a mongoose model has the side effect of initializing a corresponding collection on the
+    // connected DB. This operation will buffer if the DB is not yet connected
     return mongoose.model(model_name, template_schema);
   },
   ({template_name}) => template_name,
@@ -34,7 +36,7 @@ const get_meta_fields_for_log = (request, email_config) => {
 };
 
 
-export const log_email_and_meta_to_db = (
+export const log_email_and_meta_to_db = async (
   request,
   completed_template,
   template_name,
@@ -46,9 +48,9 @@ export const log_email_and_meta_to_db = (
   const email_fields = get_email_fields_for_log(completed_template, original_template);
   const meta_sub_doc = get_meta_fields_for_log(request, email_config);
 
-  // model.create is a short hand for adding a new entry to the collection with model_name (see make_mongoose_model_from_original_template),
-  // creates a new collection with that name if one doesn't yet exist in the connected DB
-  model.create({
+  // model.create is a short hand for adding a new entry to the collection with model_name (see make_mongoose_model_from_original_template)
+  // If no DB is connected yet, this write will buffer
+  return model.create({
     ...email_fields,
     email_submission_meta: meta_sub_doc,
   });

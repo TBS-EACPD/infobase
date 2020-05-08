@@ -24,7 +24,7 @@ const get_connection_str = () => {
 
 
 export const connect_db = async () => {
-  return await mongoose.connect(
+  return mongoose.connect(
     get_connection_str(),
     { 
       useCreateIndex: true,
