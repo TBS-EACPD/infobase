@@ -3,6 +3,9 @@ const { route_load_tests_config } = require('../../client/browser-tests/route-lo
 
 module.exports = {
   "ci": {
+    "settings": {
+      "maxWaitForLoad": 90000,
+    },
     "collect": {
       "numberOfRuns": 1,
       "url": _.map(route_load_tests_config, ({route}) => 
