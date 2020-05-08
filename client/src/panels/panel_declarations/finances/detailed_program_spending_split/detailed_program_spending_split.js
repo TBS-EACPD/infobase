@@ -23,6 +23,7 @@ import {
   TspanLineWrapper,
   HeightClippedGraph,
 } from "../../shared.js";
+import { DisplayTable } from '../../../../components';
 
 const { std_years } = year_templates; 
 
@@ -61,7 +62,18 @@ class HistoricalProgramBars extends React.Component {
 
     const colors = d3.scaleOrdinal().range(_.concat(newIBLightCategoryColors, newIBDarkCategoryColors ));
     const all_keys = _.map(data, "id");
-    const graph_data = _.chain(data)
+
+    const custom_table_data = _.chain(data)
+      .filter( ({id}) => _.includes(selected, id) )
+      .map( ({label, data}) => ({
+        label: label,
+        ..._.chain()
+          .zip(ticks, data)
+          .fromPairs()
+          .value(),
+      }) );
+
+    const processed_data = _.chain(data)
       .filter( ({id}) => _.includes(selected, id) )
       .map( ({label, data }) => [ label, data ])
       .fromPairs()
@@ -69,16 +81,32 @@ class HistoricalProgramBars extends React.Component {
     
     //have to have an empty string in key to make sure
     //that negative bars will be displayed
-    const data_formatter = _.map(
+    const graph_data = _.map(
       ticks,
       (year, year_index) => ({
         year,
-        ..._.chain(graph_data)
+        ..._.chain(processed_data)
           .map( (data, label) => [ label, data[year_index] ] )
           .fromPairs()
           .value(),
       })
     );
+    const column_configs = {
+      label: {
+        index: 0,
+        header: text_maker("program"),
+        is_searchable: true,
+      },
+      ..._.chain(ticks)
+        .map( (tick, idx) => [tick, {
+          index: idx + 1,
+          header: tick,
+          is_summable: true,
+          formatter: "dollar",
+        }] )
+        .fromPairs()
+        .value(),
+    };
   
     if(window.is_a11y_mode){
       return <div>
@@ -111,7 +139,7 @@ class HistoricalProgramBars extends React.Component {
                 active: _.includes(selected, id),
                 id,
                 color: colors(label),
-              }))
+              }) )
               .value()
             }
             onClick={id => {!(selected.length === 1 && selected.includes(id)) &&
@@ -128,8 +156,8 @@ class HistoricalProgramBars extends React.Component {
         </div>
         <div className="fcol-md-8">
           <NivoResponsiveBar
-            data = {data_formatter}
-            keys = {Object.keys(graph_data)}
+            data = {graph_data}
+            keys = {Object.keys(processed_data)}
             indexBy = "year"
             colorBy ={d => colors(d.id)}
             margin = {{
@@ -138,6 +166,10 @@ class HistoricalProgramBars extends React.Component {
               bottom: 50,
               left: 70,
             }}
+            custom_table={ <DisplayTable
+              column_configs={column_configs}
+              data={custom_table_data} />
+            }
           />
         </div>
       </div>
