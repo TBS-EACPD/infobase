@@ -85,7 +85,7 @@ export class NivoResponsiveLine extends React.Component {
       y_scale_zoomed,
     } = this.state;
     
-    const get_table_nivo_line = () => {
+    const get_table = () => {
       const table_data = _.chain(data)
         .map(row => {
           const series_name = row.id;
@@ -122,7 +122,7 @@ export class NivoResponsiveLine extends React.Component {
       />;
     };
 
-    const table = !disable_table_view && custom_table || get_table_nivo_line();
+    const table = !disable_table_view && ( custom_table || get_table() );
 
     const zoom_button = (!disable_y_axis_zoom && !enableArea) ?
       <button
