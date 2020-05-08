@@ -89,7 +89,7 @@ jobs:
   lighthouse:
     working_directory: "~/InfoBase"
     docker:
-      - image: selenium/node-chrome:latest
+      - image: markhobson/node-chrome:latest
         <<: *dockerhub_auth
     steps:
       - checkout:
