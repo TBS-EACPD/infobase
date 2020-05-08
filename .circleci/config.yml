@@ -89,7 +89,7 @@ jobs:
   lighthouse:
     working_directory: "~/InfoBase"
     docker:
-      - image: eaadtbs/ib-ci-test:v1.1
+      - image: selenium/node-chrome:latest
         <<: *dockerhub_auth
     steps:
       - checkout:
