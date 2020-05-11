@@ -188,7 +188,7 @@ export default class Glossary extends React.Component {
         breadcrumbs={[text_maker("glossary")]}
         description={text_maker("glossary_meta_desc")}
       >
-        <h1> <TM k="glossary" /> </h1>
+        <h1> <TM k="glossary" /></h1>
         <ScrollToTargetContainer target_id={active_key}>
           <BackToTop focus="#glossary_search > div > div > input"/>
           <Glossary_

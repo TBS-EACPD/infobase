@@ -190,7 +190,7 @@ class DetailedProgramSplit extends React.Component {
                   <tr key={program.id+so_label}>
                     <td> {program.name} </td>
                     <td> {so_label} </td>
-                    <td> <Format type="compact1_written" content={value} /> </td>
+                    <td><Format type="compact1_written" content={value} /></td>
                   </tr>
                 )}
               </tbody>

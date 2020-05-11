@@ -26,14 +26,14 @@ const Home = (props) => {
       route_key="start"
       description={text_maker("home_a11y_desc")}
     >
-      <h1> <TM k="title" /> </h1>
+      <h1> <TM k="title" /></h1>
       { no_basic_equiv === "no_basic_equiv" &&
         <AlertBanner banner_class={'warning'} additional_class_names={'large_panel_text'}>
           <TM k="home_a11y_non_a11y_redirect_warning" />
         </AlertBanner> 
       }
       <section>
-        <h2> <TM k="home_a11y_gov_infograph" /> </h2>
+        <h2> <TM k="home_a11y_gov_infograph" /></h2>
         <ul>
           <li> 
             <a href="#orgs/gov/gov/infograph/financial">
@@ -53,7 +53,7 @@ const Home = (props) => {
         </ul>
       </section>
       <section>
-        <h2> <TM k="home_a11y_subject_section_title" /> </h2>
+        <h2> <TM k="home_a11y_subject_section_title" /></h2>
         
         <section>
           <h3>
