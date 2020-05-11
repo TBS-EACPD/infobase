@@ -1,4 +1,4 @@
-import text from './spend_rev_split.yaml';
+import text from "./spend_rev_split.yaml";
 import {
   formats,
   create_text_maker_component,
@@ -6,7 +6,6 @@ import {
   Col,
   NivoResponsiveBar,
   table_common,
-  
   declare_panel,
 } from "../../shared.js";
 
@@ -19,43 +18,45 @@ const text_keys_by_level = {
   program: "program_spend_rev_split_text",
 };
 
-function render({calculations, footnotes, sources}) {
-  const { panel_args, info, subject } = calculations;       
-  const { neg_exp, gross_exp, net_exp } = panel_args; 
-  
+function render({ calculations, footnotes, sources }) {
+  const { panel_args, info, subject } = calculations;
+  const { neg_exp, gross_exp, net_exp } = panel_args;
+
   const series = [gross_exp, neg_exp];
-  const _ticks = [ 'gross', 'revenues' ];
+  const _ticks = ["gross", "revenues"];
 
   // if neg_exp is 0, then no point in showing the net bar
-  if (neg_exp !== 0){
+  if (neg_exp !== 0) {
     series.push(net_exp);
-    _ticks.push('net');
+    _ticks.push("net");
   }
-  
 
-  const ticks = _ticks.map(text_maker); 
-  const spend_rev_data = _.map(
-    series,
-    (spend_rev_value,tick_index)=>({
-      title: ticks[tick_index],
-      [ticks[tick_index]]: spend_rev_value,
-    })
-  );
+  const ticks = _ticks.map(text_maker);
+  const spend_rev_data = _.map(series, (spend_rev_value, tick_index) => ({
+    title: ticks[tick_index],
+    [ticks[tick_index]]: spend_rev_value,
+  }));
 
   const graph_content = (() => {
     if (window.is_a11y_mode) {
-      return (null);
+      return null;
     } else {
       return (
         <div>
           <NivoResponsiveBar
-            data = {spend_rev_data}
-            keys = {ticks}
-            indexBy = "title"
-            enableLabel = {true}
-            isInteractive = {false}
-            label_format = { d=><tspan y={-4}>{formats.compact1(d, {raw: true})}</tspan>}
-            colorBy = {d => d.data[d.id] < 0 ? window.infobase_color_constants.highlightColor : window.infobase_color_constants.secondaryColor}
+            data={spend_rev_data}
+            keys={ticks}
+            indexBy="title"
+            enableLabel={true}
+            isInteractive={false}
+            label_format={(d) => (
+              <tspan y={-4}>{formats.compact1(d, { raw: true })}</tspan>
+            )}
+            colorBy={(d) =>
+              d.data[d.id] < 0
+                ? window.infobase_color_constants.highlightColor
+                : window.infobase_color_constants.secondaryColor
+            }
             enableGridX={false}
           />
         </div>
@@ -66,7 +67,7 @@ function render({calculations, footnotes, sources}) {
   return (
     <StdPanel
       title={text_maker("spend_rev_split_title")}
-      {...{footnotes,sources}}
+      {...{ footnotes, sources }}
     >
       <Col size={5} isText>
         <TM k={text_keys_by_level[subject.level]} args={info} />
@@ -78,44 +79,45 @@ function render({calculations, footnotes, sources}) {
   );
 }
 
+export const declare_spend_rev_split_panel = () =>
+  declare_panel({
+    panel_key: "spend_rev_split",
+    levels: ["dept", "program"],
+    panel_config_func: (level, panel_key) => {
+      switch (level) {
+        case "dept":
+          return {
+            depends_on: ["orgVoteStatPa", "orgSobjs"],
+            footnotes: ["SOBJ_REV"],
+            info_deps: ["orgSobjs_dept_info", "orgVoteStatPa_dept_info"],
 
-export const declare_spend_rev_split_panel = () => declare_panel({
-  panel_key: "spend_rev_split",
-  levels: ["dept", "program"],
-  panel_config_func: (level, panel_key) => {
-    switch (level){
-      case "dept":
-        return {
-          depends_on: ["orgVoteStatPa","orgSobjs"],
-          footnotes: ["SOBJ_REV"],
-          info_deps: ["orgSobjs_dept_info","orgVoteStatPa_dept_info"],
-        
-          calculate(subject,info,options){
-            if ( info.dept_pa_last_year_rev === 0 ){
-              return false;
-            }
-            return { neg_exp: info.dept_pa_last_year_rev,
-              gross_exp: info.dept_pa_last_year_gross_exp,
-              net_exp: info.dept_exp_pa_last_year,
-            };
-          },
-          render,
-        };
-      case "program":
-        return {
-          depends_on: ["programSobjs"],
-          info_deps: ["program_revenue"],
-          calculate(subject,info,options){ 
-            const {programSobjs} = this.tables;
-            const prog_rows = programSobjs.programs.get(subject);
-            const rev_split = rows_to_rev_split(prog_rows);
-            if(rev_split.neg_exp === 0){
-              return false;
-            }
-            return rev_split;
-          },
-          render,
-        };
-    }
-  },
-});
+            calculate(subject, info, options) {
+              if (info.dept_pa_last_year_rev === 0) {
+                return false;
+              }
+              return {
+                neg_exp: info.dept_pa_last_year_rev,
+                gross_exp: info.dept_pa_last_year_gross_exp,
+                net_exp: info.dept_exp_pa_last_year,
+              };
+            },
+            render,
+          };
+        case "program":
+          return {
+            depends_on: ["programSobjs"],
+            info_deps: ["program_revenue"],
+            calculate(subject, info, options) {
+              const { programSobjs } = this.tables;
+              const prog_rows = programSobjs.programs.get(subject);
+              const rev_split = rows_to_rev_split(prog_rows);
+              if (rev_split.neg_exp === 0) {
+                return false;
+              }
+              return rev_split;
+            },
+            render,
+          };
+      }
+    },
+  });

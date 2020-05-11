@@ -1,4 +1,4 @@
-import { completeAssign } from '../general_utils.js';
+import { completeAssign } from "../general_utils.js";
 
 import * as a from "d3-array";
 import * as b from "d3-axis";

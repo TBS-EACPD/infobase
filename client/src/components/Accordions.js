@@ -1,13 +1,14 @@
-import './Accordions.scss';
-import { TransitionGroup, Transition } from 'react-transition-group';
-import { IconChevron } from '../icons/icons.js';
+import "./Accordions.scss";
+import { TransitionGroup, Transition } from "react-transition-group";
+import { IconChevron } from "../icons/icons.js";
 
-import { trivial_text_maker } from '../models/text.js';
+import { trivial_text_maker } from "../models/text.js";
 
-const get_accordion_label = (isExpanded) => ({
-  true: trivial_text_maker("collapse"),
-  false: trivial_text_maker("expand"),
-})[!!isExpanded];
+const get_accordion_label = (isExpanded) =>
+  ({
+    true: trivial_text_maker("collapse"),
+    false: trivial_text_maker("expand"),
+  }[!!isExpanded]);
 
 function FirstChild(props) {
   const childrenArray = React.Children.toArray(props.children);
@@ -16,41 +17,41 @@ function FirstChild(props) {
 
 const defaultMaxHeight = "300px";
 class AccordionEnterExit extends React.Component {
-  constructor(){
+  constructor() {
     super();
 
     this.onExiting = this.onExiting.bind(this);
     this.onEntering = this.onEntering.bind(this);
   }
-  onExiting(component){
+  onExiting(component) {
     const node = ReactDOM.findDOMNode(component);
     const initialHeight = node.offsetHeight;
 
     d3.select(node)
-      .style('opacity', 1 )
-      .style('max-height', initialHeight+'px')
+      .style("opacity", 1)
+      .style("max-height", initialHeight + "px")
       .transition()
       .ease(d3.easeLinear)
       .duration(this.props.collapseDuration)
-      .style('opacity', 1e-6 )
-      .style('max-height', '1px');
+      .style("opacity", 1e-6)
+      .style("max-height", "1px");
   }
-  onEntering(component){
+  onEntering(component) {
     const node = ReactDOM.findDOMNode(component);
 
     d3.select(node)
-      .style('max-height', "0px")
-      .style('opacity', 1e-6)
+      .style("max-height", "0px")
+      .style("opacity", 1e-6)
       .transition()
       .ease(d3.easeLinear)
       .duration(this.props.expandDuration)
-      .style( 'max-height', this.props.maxHeight || defaultMaxHeight )
-      .style('opacity', '1')
-      .on('end',function(){
-        d3.select(node).style('max-height', 'none');
+      .style("max-height", this.props.maxHeight || defaultMaxHeight)
+      .style("opacity", "1")
+      .on("end", function () {
+        d3.select(node).style("max-height", "none");
       });
   }
-  render(){
+  render() {
     const {
       expandDuration,
       collapseDuration,
@@ -76,10 +77,7 @@ class AccordionEnterExit extends React.Component {
         onEntering={this.onEntering}
         onExiting={this.onExiting}
       >
-        <div 
-          className={className}
-          style={style}
-        >
+        <div className={className} style={style}>
           {children}
         </div>
       </Transition>
@@ -87,25 +85,27 @@ class AccordionEnterExit extends React.Component {
   }
 }
 
-
-const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) => (
+const StatelessPullDownAccordion = ({
+  title,
+  isExpanded,
+  children,
+  onToggle,
+}) => (
   <div className="pull-down-accordion">
     <div className="pull-down-accordion-header" onClick={onToggle}>
-      <button aria-label={get_accordion_label(isExpanded)}>
-        { title }
-      </button>
-    </div> 
+      <button aria-label={get_accordion_label(isExpanded)}>{title}</button>
+    </div>
     <TransitionGroup component={FirstChild}>
-      { isExpanded &&
+      {isExpanded && (
         <AccordionEnterExit
           className="pull-down-accordion-body"
-          style={{paddingTop: "5px"}}
+          style={{ paddingTop: "5px" }}
           expandDuration={600}
           collapseDuration={600}
         >
           {children}
         </AccordionEnterExit>
-      }
+      )}
     </TransitionGroup>
     <div className="pull-down-accordion-footer" onClick={onToggle}>
       <div className="pull-down-accordion-expander">
@@ -115,27 +115,24 @@ const StatelessPullDownAccordion = ({ title, isExpanded, children, onToggle }) =
           rotation={isExpanded && 180}
         />
       </div>
-    </div> 
+    </div>
   </div>
 );
 
-
 class AutoAccordion extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       isExpanded: props.isInitiallyExpanded,
     };
   }
-  render(){
+  render() {
     const { isExpanded } = this.state;
-    return React.createElement(
-      StatelessPullDownAccordion,
-      { ...this.props, 
-        isExpanded,
-        onToggle: ()=> this.setState({ isExpanded: !isExpanded }),
-      }
-    );
+    return React.createElement(StatelessPullDownAccordion, {
+      ...this.props,
+      isExpanded,
+      onToggle: () => this.setState({ isExpanded: !isExpanded }),
+    });
   }
 }
 

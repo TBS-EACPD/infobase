@@ -1,5 +1,5 @@
-import { trivial_text_maker, run_template } from '../models/text.js';
-import { index_lang_lookups } from '../InfoBase/index_data.js';
+import { trivial_text_maker, run_template } from "../models/text.js";
+import { index_lang_lookups } from "../InfoBase/index_data.js";
 
 const footer_link_items = _.compact([
   {
@@ -23,20 +23,31 @@ const footer_link_items = _.compact([
 ]);
 
 export class InsertRuntimeFooterLinks extends React.Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      static_footer_links: document.querySelector('#footer_survey_link_area').innerHTML,
+      static_footer_links: document.querySelector("#footer_survey_link_area")
+        .innerHTML,
     };
   }
-  render(){
-    const footer_survey_link_ul = document.querySelector('#footer_survey_link_area');
-  
+  render() {
+    const footer_survey_link_ul = document.querySelector(
+      "#footer_survey_link_area"
+    );
+
     const links_to_insert = _.chain(footer_link_items)
-      .map( ({id, href, text}) => `<li><a ${id ? `id="${id}"` : ""} href="${href}" target="_blank" rel="noopener noreferrer">${text}</a></li>`)
-      .reduce( (memo, link_html) => memo + link_html, this.state.static_footer_links)
+      .map(
+        ({ id, href, text }) =>
+          `<li><a ${
+            id ? `id="${id}"` : ""
+          } href="${href}" target="_blank" rel="noopener noreferrer">${text}</a></li>`
+      )
+      .reduce(
+        (memo, link_html) => memo + link_html,
+        this.state.static_footer_links
+      )
       .value();
-  
+
     footer_survey_link_ul.innerHTML = links_to_insert;
 
     return null;

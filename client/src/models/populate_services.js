@@ -1,11 +1,7 @@
-import { get_client } from '../graphql_utils/graphql_utils.js';
-import gql from 'graphql-tag';
-import { log_standard_event } from '../core/analytics.js';
-import { 
-  Service,
-  ServiceStandard,
-} from './services.js';
-
+import { get_client } from "../graphql_utils/graphql_utils.js";
+import gql from "graphql-tag";
+import { log_standard_event } from "../core/analytics.js";
+import { Service, ServiceStandard } from "./services.js";
 
 const get_subject_has_services_query = (level, id_arg_name) => gql`
 query($lang: String! $id: String) {
@@ -18,23 +14,19 @@ query($lang: String! $id: String) {
 }
 `;
 const _subject_has_services = {};
-export function api_load_subject_has_services(subject){
+export function api_load_subject_has_services(subject) {
   const level = subject && subject.level;
 
-  const {
-    is_loaded,
-    id,
-    query,
-    response_data_accessor,
-  } = (() => {
-    const subject_is_loaded = ({level, id}) => _.get(_subject_has_services, `${level}.${id}`);
+  const { is_loaded, id, query, response_data_accessor } = (() => {
+    const subject_is_loaded = ({ level, id }) =>
+      _.get(_subject_has_services, `${level}.${id}`);
 
-    switch(level){
-      case 'dept':
+    switch (level) {
+      case "dept":
         return {
           is_loaded: subject_is_loaded(subject),
           id: subject.id,
-          query: get_subject_has_services_query('org', 'org_id'),
+          query: get_subject_has_services_query("org", "org_id"),
           response_data_accessor: (response) => response.data.root.org,
         };
       default:
@@ -44,10 +36,10 @@ export function api_load_subject_has_services(subject){
     }
   })();
 
-  if( is_loaded ){
+  if (is_loaded) {
     // ensure that subject.has_data matches _subject_has_services, since _subject_has_services hay have been updated via side-effect
     subject.set_has_data(
-      `services_data`, 
+      `services_data`,
       _.get(_subject_has_services, `${level}.${id}`)
     );
     return Promise.resolve();
@@ -55,31 +47,32 @@ export function api_load_subject_has_services(subject){
 
   const time_at_request = Date.now();
   const client = get_client();
-  return client.query({
-    query,
-    variables: {
-      lang: window.lang,
-      id,
-      _query_name: 'subject_has_services',
-    },
-  })
-    .then( (response) => {
+  return client
+    .query({
+      query,
+      variables: {
+        lang: window.lang,
+        id,
+        _query_name: "subject_has_services",
+      },
+    })
+    .then((response) => {
       const response_data = response_data_accessor(response);
 
-      const resp_time = Date.now() - time_at_request; 
-      if( !_.isEmpty(response_data) ){
+      const resp_time = Date.now() - time_at_request;
+      if (!_.isEmpty(response_data)) {
         // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
         log_standard_event({
-          SUBAPP: window.location.hash.replace('#',''),
+          SUBAPP: window.location.hash.replace("#", ""),
           MISC1: "API_QUERY_SUCCESS",
           MISC2: `Has services, took ${resp_time} ms`,
         });
       } else {
         log_standard_event({
-          SUBAPP: window.location.hash.replace('#',''),
+          SUBAPP: window.location.hash.replace("#", ""),
           MISC1: "API_QUERY_UNEXPECTED",
           MISC2: `Has services, took ${resp_time} ms`,
-        });  
+        });
       }
 
       subject.set_has_data(`services_data`, response_data[`hasServices`]);
@@ -95,10 +88,10 @@ export function api_load_subject_has_services(subject){
 
       return Promise.resolve();
     })
-    .catch(function(error){
-      const resp_time = Date.now() - time_at_request;     
+    .catch(function (error) {
+      const resp_time = Date.now() - time_at_request;
       log_standard_event({
-        SUBAPP: window.location.hash.replace('#',''),
+        SUBAPP: window.location.hash.replace("#", ""),
         MISC1: "API_QUERY_FAILURE",
         MISC2: `Has services, took ${resp_time} ms - ${error.toString()}`,
       });
@@ -106,9 +99,7 @@ export function api_load_subject_has_services(subject){
     });
 }
 
-
-const dept_service_fragment = (
-  `org_id
+const dept_service_fragment = `org_id
       services: services {
         service_id
         org_id
@@ -167,8 +158,7 @@ const dept_service_fragment = (
           rtp_urls
         }
       }
-  `
-);
+  `;
 
 const dept_services_query = gql`
 query($lang: String!, $id: String) {
@@ -191,36 +181,34 @@ query($lang: String!) {
 }
 `;
 
-const extract_flat_data_from_hierarchical_response = (response) =>{
+const extract_flat_data_from_hierarchical_response = (response) => {
   const serviceStandards = [];
   const services = _.chain(_.isArray(response) ? response : [response])
-    .map(resp=>resp.services)
+    .map((resp) => resp.services)
     .compact()
     .flatten(true)
-    .each(service =>
-      _.each(service.standards, standard => serviceStandards.push( _.omit(standard, "__typename") ))
+    .each((service) =>
+      _.each(service.standards, (standard) =>
+        serviceStandards.push(_.omit(standard, "__typename"))
+      )
     )
     .value();
-  return {services, serviceStandards};
+  return { services, serviceStandards };
 };
 
 const _subject_ids_with_loaded_services = {};
-export function api_load_services(subject){
-  const level = (subject && subject.level) || 'gov';
-  
-  const {
-    is_loaded,
-    id,
-    query,
-    response_data_accessor,
-  } = (() => {
-    const subject_is_loaded = ({level, id}) => _.get(_subject_ids_with_loaded_services, `${level}.${id}`);
+export function api_load_services(subject) {
+  const level = (subject && subject.level) || "gov";
 
-    const all_is_loaded = () => subject_is_loaded({level: 'gov', id: 'gov'});
+  const { is_loaded, id, query, response_data_accessor } = (() => {
+    const subject_is_loaded = ({ level, id }) =>
+      _.get(_subject_ids_with_loaded_services, `${level}.${id}`);
+
+    const all_is_loaded = () => subject_is_loaded({ level: "gov", id: "gov" });
     const dept_is_loaded = (org) => all_is_loaded() || subject_is_loaded(org);
 
-    switch(level){
-      case 'dept':
+    switch (level) {
+      case "dept":
         return {
           is_loaded: dept_is_loaded(subject),
           id: subject.id,
@@ -230,58 +218,58 @@ export function api_load_services(subject){
       default:
         return {
           is_loaded: all_is_loaded(subject),
-          id: 'gov',
+          id: "gov",
           query: all_services_query,
           response_data_accessor: (response) => response.data.root.orgs,
         };
     }
   })();
 
-  if (is_loaded){
+  if (is_loaded) {
     return Promise.resolve();
   }
 
   const time_at_request = Date.now();
   const client = get_client();
-  return client.query({
-    query,
-    variables: {
-      lang: window.lang, 
-      id,
-      _query_name: 'services',
-    },
-  })
-    .then( (response) => {
+  return client
+    .query({
+      query,
+      variables: {
+        lang: window.lang,
+        id,
+        _query_name: "services",
+      },
+    })
+    .then((response) => {
       const response_data = response_data_accessor(response);
 
-      const resp_time = Date.now() - time_at_request; 
-      if( !_.isEmpty(response_data) ){
+      const resp_time = Date.now() - time_at_request;
+      if (!_.isEmpty(response_data)) {
         // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
         log_standard_event({
-          SUBAPP: window.location.hash.replace('#',''),
+          SUBAPP: window.location.hash.replace("#", ""),
           MISC1: "API_QUERY_SUCCESS",
           MISC2: `Services, took ${resp_time} ms`,
         });
       } else {
         log_standard_event({
-          SUBAPP: window.location.hash.replace('#',''),
+          SUBAPP: window.location.hash.replace("#", ""),
           MISC1: "API_QUERY_UNEXPECTED",
           MISC2: `Services, took ${resp_time} ms`,
-        });  
+        });
       }
-      
-      const {services, serviceStandards} = extract_flat_data_from_hierarchical_response(response_data);
 
-      if ( !_.isEmpty(services) ){
-        _.each(
-          services,
-          service => Service.create_and_register(service),
-        );
+      const {
+        services,
+        serviceStandards,
+      } = extract_flat_data_from_hierarchical_response(response_data);
+
+      if (!_.isEmpty(services)) {
+        _.each(services, (service) => Service.create_and_register(service));
       }
-      if ( !_.isEmpty(serviceStandards) ){
-        _.each(
-          serviceStandards,
-          standard => ServiceStandard.create_and_register(standard),
+      if (!_.isEmpty(serviceStandards)) {
+        _.each(serviceStandards, (standard) =>
+          ServiceStandard.create_and_register(standard)
         );
       }
 
@@ -296,18 +284,18 @@ export function api_load_services(subject){
 
       // side effect
       _.setWith(
-        _subject_ids_with_loaded_services, 
-        `${level}.${id}`, 
+        _subject_ids_with_loaded_services,
+        `${level}.${id}`,
         _.isEmpty(services),
         Object
       );
 
       return Promise.resolve();
     })
-    .catch(function(error){
-      const resp_time = Date.now() - time_at_request;     
+    .catch(function (error) {
+      const resp_time = Date.now() - time_at_request;
       log_standard_event({
-        SUBAPP: window.location.hash.replace('#',''),
+        SUBAPP: window.location.hash.replace("#", ""),
         MISC1: "API_QUERY_FAILURE",
         MISC2: `Services, took ${resp_time} ms - ${error.toString()}`,
       });
