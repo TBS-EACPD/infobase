@@ -1,9 +1,9 @@
-import './nivo_bubble.scss';
-import text from './nivo_bubble.yaml';
+import "./nivo_bubble.scss";
+import text from "./nivo_bubble.yaml";
 
-import { ResponsiveBubble } from '@nivo/circle-packing';
-import { Fragment } from 'react';
-import MediaQuery from 'react-responsive';
+import { ResponsiveBubble } from "@nivo/circle-packing";
+import { Fragment } from "react";
+import MediaQuery from "react-responsive";
 
 import {
   InteractiveGraph,
@@ -11,22 +11,22 @@ import {
   general_default_props,
   get_formatter,
   TooltipFactory,
-} from './nivo_common.js';
+} from "./nivo_common.js";
 
 import { formats } from "../../core/format.js";
-import { breakpoints } from '../../core/breakpoint_defs.js';
-import { newIBCategoryColors } from '../../core/color_schemes.js';
-import { DisplayTable } from '../../components/index.js';
-  
+import { breakpoints } from "../../core/breakpoint_defs.js";
+import { newIBCategoryColors } from "../../core/color_schemes.js";
+import { DisplayTable } from "../../components/index.js";
+
 const { text_maker, TM } = create_text_maker_component_with_nivo_common(text);
 
 // Hacky abuse of ResponsiveBubble... very fragile against nivo changes. Bonus comments left in this file to balance against that
-// Would be trivial to make this graph ourselves, only reason for doing it like this is to get nivo native tooltips (and even 
+// Would be trivial to make this graph ourselves, only reason for doing it like this is to get nivo native tooltips (and even
 // then they're extra customized ones) and our common nivo graph utilities ...consider rethinking this though
 
 const MIN_NODE_RADIUS = 2;
 const ProportionalNode = ({ node, style, handlers }) => {
-  if (style.r <= 0){
+  if (style.r <= 0) {
     return null;
   }
 
@@ -43,27 +43,22 @@ const ProportionalNode = ({ node, style, handlers }) => {
     borderWidth,
   } = style;
 
-  const {
-    node_radius,
-    node_x,
-    node_y,
-  } = (() => {
-    if ( _.isNull(node.parent) ){
+  const { node_radius, node_x, node_y } = (() => {
+    if (_.isNull(node.parent)) {
       return {
         node_radius: graph_radius,
         node_x: center_x,
         node_y: center_y,
       };
     } else {
-
       // need to be clear here, node.value !== graph_data.value as seen below. The config data from graph_data is stored in
       // node.data. The value in node.value is node.data.value PLUS the sum of child values
       // ... kind of makes sense for the standard use of this graph, but still a bit of annoying hidden logic. Makes what
       // we're doing here extra hacky
-      const proportion_ratio = node.value/node.parent.value;
+      const proportion_ratio = node.value / node.parent.value;
 
       const node_radius = _.max([
-        graph_radius*Math.sqrt(proportion_ratio), // do the math, make the actual area proportional
+        graph_radius * Math.sqrt(proportion_ratio), // do the math, make the actual area proportional
         MIN_NODE_RADIUS,
       ]);
 
@@ -79,7 +74,7 @@ const ProportionalNode = ({ node, style, handlers }) => {
       };
     }
   })();
-  
+
   return (
     <g transform={`translate(${node_x},${node_y})`}>
       <circle
@@ -94,9 +89,8 @@ const ProportionalNode = ({ node, style, handlers }) => {
   );
 };
 
-
-export class CircleProportionChart extends React.Component{
-  render(){
+export class CircleProportionChart extends React.Component {
+  render() {
     const {
       margin,
       is_money,
@@ -149,18 +143,19 @@ export class CircleProportionChart extends React.Component{
           },
         ]}
         tooltip_container_class="proportional-bubble-tooltip"
-        TooltipContentComponent={({tooltip_item}) => (
+        TooltipContentComponent={({ tooltip_item }) => (
           <Fragment>
             <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
-              <Fragment>{ /* MediaQuery jank, it will insert a div wrapping its children when it has mutliple of them, need a manual Fragment to avoid that */ }
-                <td className="nivo-tooltip__label">
-                  {tooltip_item.name}
-                </td>
+              <Fragment>
+                {/* MediaQuery jank, it will insert a div wrapping its children when it has mutliple of them, need a manual Fragment to avoid that */}
+                <td className="nivo-tooltip__label">{tooltip_item.name}</td>
                 <td className="nivo-tooltip__value">
                   {value_formatter(tooltip_item.value)}
                 </td>
                 <td className="nivo-tooltip__value">
-                  {`(${formats.smart_percentage1_raw(tooltip_item.value/parent_value)})`}
+                  {`(${formats.smart_percentage1_raw(
+                    tooltip_item.value / parent_value
+                  )})`}
                 </td>
               </Fragment>
             </MediaQuery>
@@ -171,7 +166,9 @@ export class CircleProportionChart extends React.Component{
                   {value_formatter(tooltip_item.value)}
                 </div>
                 <div className="nivo-tooltip__value">
-                  {`(${formats.smart_percentage1_raw(tooltip_item.value/parent_value)})`}
+                  {`(${formats.smart_percentage1_raw(
+                    tooltip_item.value / parent_value
+                  )})`}
                 </div>
               </td>
             </MediaQuery>
@@ -182,12 +179,12 @@ export class CircleProportionChart extends React.Component{
 
     const graph = (
       <Fragment>
-        <div style={{height: height}}>
+        <div style={{ height: height }}>
           <ResponsiveBubble
             root={graph_data}
             identity="name"
             value="value"
-            colorBy={d => color_scale(d.name)}
+            colorBy={(d) => color_scale(d.name)}
             borderColor="inherit:darker(1.6)"
             borderWidth={0}
             enableLabel={false}
@@ -195,7 +192,7 @@ export class CircleProportionChart extends React.Component{
             labelSkipWidth={labelSkipWidth}
             animate={true}
             motionStiffness={90}
-            motionDamping={12}  
+            motionDamping={12}
             leavesOnly={false}
             padding={0}
             nodeComponent={ProportionalNode}
@@ -203,15 +200,14 @@ export class CircleProportionChart extends React.Component{
             tooltip={tooltip}
           />
         </div>
-        <div style={{textAlign: "center"}}>
+        <div style={{ textAlign: "center" }}>
           <TM
-            k={"bubble_title"} 
-            args={{outer: parent_name, inner: child_name}}
+            k={"bubble_title"}
+            args={{ outer: parent_name, inner: child_name }}
           />
         </div>
       </Fragment>
     );
-
 
     const ordered_column_keys = ["label", "value"];
     const column_names = _.map(ordered_column_keys, text_maker);
@@ -225,7 +221,7 @@ export class CircleProportionChart extends React.Component{
           label,
           value: value_formatter(value),
         },
-        sort_values: {label, value},
+        sort_values: { label, value },
       })
     );
     const table = !disable_table_view && (
@@ -236,10 +232,9 @@ export class CircleProportionChart extends React.Component{
       />
     );
 
-
     return <InteractiveGraph graph={graph} table={table} />;
   }
-};
+}
 CircleProportionChart.defaultProps = {
   ...general_default_props,
   margin: { top: 15, right: 0, bottom: 15, left: 0 },

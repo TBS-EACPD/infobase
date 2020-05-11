@@ -23,13 +23,13 @@ export {
   declare_vote_stat_split_panel,
   declare_welcome_mat_panel,
   declare_tp_by_region_panel,
-} from './finances/index.js';
+} from "./finances/index.js";
 
 export {
   declare_profile_panel,
   declare_description_panel,
   declare_simplographic_panel,
-} from './intro/index.js';
+} from "./intro/index.js";
 
 export {
   declare_financial_key_concepts_panel,
@@ -55,7 +55,7 @@ export {
   declare_tags_of_interest_panel,
   declare_tag_progs_by_dept_panel,
   declare_related_tags_panel,
-} from './misc/index.js';
+} from "./misc/index.js";
 
 export {
   declare_employee_age_panel,
@@ -75,4 +75,4 @@ export {
   declare_drr_summary_panel,
   declare_gov_drr_panel,
   declare_gov_dp_panel,
-} from './results/index.js';
+} from "./results/index.js";

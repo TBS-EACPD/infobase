@@ -87,16 +87,14 @@ query{
 
 const { execQuery } = global;
 
-describe("services data", function(){
-  
-  it("All services and standards for org", async ()=> {
+describe("services data", function () {
+  it("All services and standards for org", async () => {
     const data = await execQuery(all_services_and_standards_for_org, {});
     return expect(data).toMatchSnapshot();
   });
 
-  it("All services and standards for program", async ()=> {
+  it("All services and standards for program", async () => {
     const data = await execQuery(all_services_and_standards_for_program, {});
     return expect(data).toMatchSnapshot();
   });
-
 });

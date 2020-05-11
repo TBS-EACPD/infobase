@@ -1,9 +1,5 @@
-import _ from 'lodash';
-import { 
-  bilingual_field, 
-} from '../schema_utils';
-
-
+import _ from "lodash";
+import { bilingual_field } from "../schema_utils";
 
 const schema = `
   extend type Root {
@@ -123,12 +119,10 @@ const schema = `
 
 `;
 
-
-export default function({models,loaders,services}){
-
+export default function ({ models, loaders, services }) {
   const { Org, Program, Crso } = models;
 
-  const { 
+  const {
     org_deptcode_loader,
     org_id_loader,
     prog_dept_code_loader,
@@ -146,74 +140,75 @@ export default function({models,loaders,services}){
     name_fr: "Gouvernment",
   };
 
-  const subjectTypeResolver = record => {
-    if(record instanceof Org){
-      return 'Org';
-    } if(record instanceof Crso){
-      return 'Crso';
-    } if(record instanceof Program){
-      return 'Program';
+  const subjectTypeResolver = (record) => {
+    if (record instanceof Org) {
+      return "Org";
+    }
+    if (record instanceof Crso) {
+      return "Crso";
+    }
+    if (record instanceof Program) {
+      return "Program";
     } else {
       return null;
     }
   };
-  const subject_search_resolver = async (_x, { query }, {lang}) => {
-    const subjects = await services.search_subjects(query,lang);
-    return _.map(subjects, 'record')
+  const subject_search_resolver = async (_x, { query }, { lang }) => {
+    const subjects = await services.search_subjects(query, lang);
+    return _.map(subjects, "record");
   };
 
   const resolvers = {
     //These are just here for example sake
-    SubjectI:{ __resolveType: subjectTypeResolver },
-    SubjectU:{ __resolveType: subjectTypeResolver },
+    SubjectI: { __resolveType: subjectTypeResolver },
+    SubjectU: { __resolveType: subjectTypeResolver },
     Gov: {
       name: bilingual_field("name"),
     },
     Root: {
-      org_search: async (_x, { query }, {lang} ) => {
-        const orgs = await services.search_orgs(query,lang);
-        return _.map(orgs, 'record')
+      org_search: async (_x, { query }, { lang }) => {
+        const orgs = await services.search_orgs(query, lang);
+        return _.map(orgs, "record");
       },
-      program_search: async (_x, { query }, {lang}) => {
-        const orgs = await services.search_programs(query,lang);
-        return _.map(orgs, 'record')
+      program_search: async (_x, { query }, { lang }) => {
+        const orgs = await services.search_programs(query, lang);
+        return _.map(orgs, "record");
       },
-      crso_search: async (_x, { query }, {lang}) => {
-        const orgs = await services.search_crsos(query,lang);
-        return _.map(orgs, 'record')
+      crso_search: async (_x, { query }, { lang }) => {
+        const orgs = await services.search_crsos(query, lang);
+        return _.map(orgs, "record");
       },
       subject_search_interfaces: subject_search_resolver,
       subject_search_union: subject_search_resolver,
       all_orgs: () => Org.find({}),
-      orgs: ()=> Org.find({}),
-      org: (_x, {dept_code, org_id}) => {
-        if(org_id){
+      orgs: () => Org.find({}),
+      org: (_x, { dept_code, org_id }) => {
+        if (org_id) {
           return org_id_loader.load(org_id);
         } else {
           return org_deptcode_loader.load(dept_code);
         }
       },
       gov: _.constant(gov),
-      program: (_x, {id}) => prog_id_loader.load(id),
-      crso: (_x, {id}) => crso_id_loader.load(id),
+      program: (_x, { id }) => prog_id_loader.load(id),
+      crso: (_x, { id }) => crso_id_loader.load(id),
       subject: (_x, { level, id }) => {
-        switch(level){
-          case 'gov':
+        switch (level) {
+          case "gov":
             return gov;
 
-          case 'org':
+          case "org":
             return Org.get_by_id(id);
 
-          case 'program':
+          case "program":
             return Program.get_by_id(id);
-
         }
-      }, 
+      },
     },
     Org: {
       name: bilingual_field("name"),
       description: bilingual_field("description"),
-      mandate:  bilingual_field("description"),
+      mandate: bilingual_field("description"),
       id: _.property("org_id"),
       acronym: bilingual_field("acronym"),
       enabling_instrument: bilingual_field("enabling_instrument"),
@@ -227,32 +222,34 @@ export default function({models,loaders,services}){
       ministers: () => ["TODO"],
       inst_form: () => "TODO",
 
-      dp_url: (org, _args, {lang}) => org[`dp_url_${lang}`],
-      qfr_url: (org, _args, {lang}) => org[`qfr_url_${lang}`],
-      eval_url: (org, _args, {lang}) => org[`dp_url_${lang}`],
-      website_url: (org, _args, {lang}) => org[`dept_website_url_${lang}`],
+      dp_url: (org, _args, { lang }) => org[`dp_url_${lang}`],
+      qfr_url: (org, _args, { lang }) => org[`qfr_url_${lang}`],
+      eval_url: (org, _args, { lang }) => org[`dp_url_${lang}`],
+      website_url: (org, _args, { lang }) => org[`dept_website_url_${lang}`],
 
-      programs: org => org.dept_code && prog_dept_code_loader.load(org.dept_code),
-      crsos: ({dept_code}) => dept_code && crso_from_deptcode_loader.load(dept_code),
-      level:_.constant('Org'),
+      programs: (org) =>
+        org.dept_code && prog_dept_code_loader.load(org.dept_code),
+      crsos: ({ dept_code }) =>
+        dept_code && crso_from_deptcode_loader.load(dept_code),
+      level: _.constant("Org"),
     },
     Program: {
       name: bilingual_field("name"),
       description: bilingual_field("description"),
-      org: prog => org_deptcode_loader.load(prog.dept_code),
-      crso: prog => crso_id_loader.load(prog.crso_id),
-      id: _.property('program_id'),
-      level:_.constant('Program'),
+      org: (prog) => org_deptcode_loader.load(prog.dept_code),
+      crso: (prog) => crso_id_loader.load(prog.crso_id),
+      id: _.property("program_id"),
+      level: _.constant("Program"),
     },
     Crso: {
       name: bilingual_field("name"),
       description: bilingual_field("description"),
-      programs: ({crso_id}) => prog_crso_id_loader.load(crso_id),
-      org: ({ dept_code }) => org_deptcode_loader.load(dept_code),  
-      id: _.property('crso_id'),
-      level:_.constant('Crso'),
+      programs: ({ crso_id }) => prog_crso_id_loader.load(crso_id),
+      org: ({ dept_code }) => org_deptcode_loader.load(dept_code),
+      id: _.property("crso_id"),
+      level: _.constant("Crso"),
     },
-    InstForm :{
+    InstForm: {
       name: bilingual_field("name"),
     },
     Ministry: {
@@ -267,4 +264,4 @@ export default function({models,loaders,services}){
     schema,
     resolvers,
   };
-};
+}

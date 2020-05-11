@@ -1,23 +1,23 @@
-import './CountdownCircle.scss';
+import "./CountdownCircle.scss";
 
-import { Fragment } from 'react';
-import { is_IE } from '../core/feature_detection.js';
-import { Countdown } from './Countdown.js';
-
+import { Fragment } from "react";
+import { is_IE } from "../core/feature_detection.js";
+import { Countdown } from "./Countdown.js";
 
 const split_value_and_units = (size) => {
   const unit = /[a-z]+$/.exec(size);
-  const value = size.replace(unit, '');
+  const value = size.replace(unit, "");
   return [value, unit];
 };
 
-
 export class CountdownCircle extends React.Component {
-  constructor(){
+  constructor() {
     super();
-    this.state = { countdown_circle_instance_id: _.uniqueId('countdown-circle-instance-') };
+    this.state = {
+      countdown_circle_instance_id: _.uniqueId("countdown-circle-instance-"),
+    };
   }
-  render(){
+  render() {
     const {
       time, // in ms
       size,
@@ -29,47 +29,54 @@ export class CountdownCircle extends React.Component {
 
     const { countdown_circle_instance_id } = this.state;
 
-    const time_in_seconds = time/1000;
+    const time_in_seconds = time / 1000;
 
     const [stroke_value, stroke_unit] = split_value_and_units(stroke_width);
 
     const [size_value, size_unit] = split_value_and_units(size);
-    const circle_position = `${size_value/2}${size_unit}`;
-    const circle_radius_value = size_value/2.33;
+    const circle_position = `${size_value / 2}${size_unit}`;
+    const circle_radius_value = size_value / 2.33;
     const circle_radius = `${circle_radius_value}${size_unit}`;
-    const circle_circumference = `${2*Math.PI*circle_radius_value}${size_unit}`;
+    const circle_circumference = `${
+      2 * Math.PI * circle_radius_value
+    }${size_unit}`;
 
     return (
-      <div 
-        className='countdown-circle'
+      <div
+        className="countdown-circle"
         style={{
           width: size,
           height: size,
         }}
       >
-        { show_numbers &&
-          <div 
-            className='countdown-circle__number'
-            style={{lineHeight: size, color}}
+        {show_numbers && (
+          <div
+            className="countdown-circle__number"
+            style={{ lineHeight: size, color }}
           >
             <Countdown time={time_in_seconds} />
           </div>
-        }
-        <svg 
-          className={'countdown-circle__display'}
+        )}
+        <svg
+          className={"countdown-circle__display"}
           onAnimationEnd={on_end_callback}
           style={{
-            ...(show_numbers ? {top: `-${size}`} : {}),
+            ...(show_numbers ? { top: `-${size}` } : {}),
             strokeDasharray: circle_circumference,
             stroke: color,
             strokeWidth: stroke_width,
-            animation: `${!is_IE() ? countdown_circle_instance_id : 'countdown-circle-animation-ie-fallback'} ${time}ms linear 1 forwards`,
+            animation: `${
+              !is_IE()
+                ? countdown_circle_instance_id
+                : "countdown-circle-animation-ie-fallback"
+            } ${time}ms linear 1 forwards`,
           }}
         >
-          { !is_IE() &&
+          {!is_IE() && (
             <Fragment>
-              <style 
-                dangerouslySetInnerHTML={{__html: `
+              <style
+                dangerouslySetInnerHTML={{
+                  __html: `
                   @keyframes ${countdown_circle_instance_id} {
                     from {
                       stroke-dashoffset: 0px;
@@ -78,7 +85,8 @@ export class CountdownCircle extends React.Component {
                       stroke-dashoffset: ${circle_circumference};
                     }
                   }
-                `}}
+                `,
+                }}
               />
               <circle
                 r={circle_radius}
@@ -86,23 +94,23 @@ export class CountdownCircle extends React.Component {
                 cy={circle_position}
               />
             </Fragment>
-          }
-          { is_IE() &&
+          )}
+          {is_IE() && (
             <circle
               r={stroke_width}
               cx={circle_position}
-              cy={`${2*stroke_value}${stroke_unit}`}
+              cy={`${2 * stroke_value}${stroke_unit}`}
               fill={color}
             />
-          }
+          )}
         </svg>
       </div>
     );
   }
 }
 CountdownCircle.defaultProps = {
-  size: '3em',
+  size: "3em",
   color: window.infobase_color_constants.buttonPrimaryColor,
-  stroke_width: '2px',
+  stroke_width: "2px",
   show_numbers: false,
 };

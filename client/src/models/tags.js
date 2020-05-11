@@ -1,41 +1,48 @@
-import { 
+import {
   mix,
   exstensibleStoreMixin,
-  PluralSingular, 
+  PluralSingular,
   SubjectMixin,
-} from './storeMixins.js';
-import { trivial_text_maker } from '../models/text.js';
-import { Dept } from './organizational_entities.js';
+} from "./storeMixins.js";
+import { trivial_text_maker } from "../models/text.js";
+import { Dept } from "./organizational_entities.js";
 
-const extensible_subject_store = () => mix().with(exstensibleStoreMixin, PluralSingular, SubjectMixin);
+const extensible_subject_store = () =>
+  mix().with(exstensibleStoreMixin, PluralSingular, SubjectMixin);
 
 const tag_roots = [];
-const Tag = class Tag extends extensible_subject_store(){
-  static get tag_roots(){ 
+const Tag = class Tag extends extensible_subject_store() {
+  static get tag_roots() {
     return _.chain(tag_roots)
-      .map(tag_root => [ tag_root.id, tag_root ] )
+      .map((tag_root) => [tag_root.id, tag_root])
       .fromPairs()
       .value();
   }
-  static get type_name() { return 'tag'; }
-  static get singular(){ return trivial_text_maker("tag"); }
-  static get plural(){ return trivial_text_maker("tag")+"s";}
-  static create_and_register(def){
+  static get type_name() {
+    return "tag";
+  }
+  static get singular() {
+    return trivial_text_maker("tag");
+  }
+  static get plural() {
+    return trivial_text_maker("tag") + "s";
+  }
+  static create_and_register(def) {
     const inst = new Tag(def);
     this.register(inst.id, inst);
     return inst;
   }
-  static create_new_root(def){
+  static create_new_root(def) {
     const root = this.create_and_register(def);
     root.root = root;
     tag_roots.push(root);
     return root;
   }
-  static get gocos_by_spendarea(){
-    const goco_root = _.find(tag_roots, {id: "GOCO"});
+  static get gocos_by_spendarea() {
+    const goco_root = _.find(tag_roots, { id: "GOCO" });
     return goco_root.children_tags;
   }
-  constructor(attrs){
+  constructor(attrs) {
     super();
     Object.assign(
       this,
@@ -46,72 +53,78 @@ const Tag = class Tag extends extensible_subject_store(){
       attrs
     );
   }
-  singular(){
-
-    if(this.root.id === "GOCO"){
-      if (this.parent_tag && _.includes(tag_roots,this.parent_tag)){
+  singular() {
+    if (this.root.id === "GOCO") {
+      if (this.parent_tag && _.includes(tag_roots, this.parent_tag)) {
         return trivial_text_maker("spend_area");
       } else {
         return trivial_text_maker("goco");
       }
     } else {
-      if (_.nonEmpty(this.programs) && _.isEmpty(this.children_tags)){
+      if (_.nonEmpty(this.programs) && _.isEmpty(this.children_tags)) {
         return trivial_text_maker("tag");
       } else {
         return trivial_text_maker("tag_category");
       }
     }
-
   }
-  plural(){
-
-    if(this.root.id === "GOCO"){
-      if (this.parent_tag && _.includes(tag_roots,this.parent_tag)){
+  plural() {
+    if (this.root.id === "GOCO") {
+      if (this.parent_tag && _.includes(tag_roots, this.parent_tag)) {
         return trivial_text_maker("spend_areas");
       } else {
         return trivial_text_maker("gocos");
       }
     } else {
-      if (_.nonEmpty(this.programs) && _.isEmpty(this.children_tags)){
-        return trivial_text_maker("tag")+"(s)";
+      if (_.nonEmpty(this.programs) && _.isEmpty(this.children_tags)) {
+        return trivial_text_maker("tag") + "(s)";
       } else {
         return trivial_text_maker("tag_categories");
       }
     }
-
   }
-  get number_of_tagged(){ return this.programs.length; }
-  get is_lowest_level_tag(){ return _.nonEmpty(this.programs); }
-  get has_planned_spending(){ 
-    return this.is_lowest_level_tag &&
-      _.some(this.programs, program => program.has_planned_spending);
+  get number_of_tagged() {
+    return this.programs.length;
   }
-  get planned_spending_gaps(){
-    return this.is_lowest_level_tag &&
-      _.some(this.programs, program => !program.has_planned_spending);
+  get is_lowest_level_tag() {
+    return _.nonEmpty(this.programs);
   }
-  tagged_by_org(){
+  get has_planned_spending() {
+    return (
+      this.is_lowest_level_tag &&
+      _.some(this.programs, (program) => program.has_planned_spending)
+    );
+  }
+  get planned_spending_gaps() {
+    return (
+      this.is_lowest_level_tag &&
+      _.some(this.programs, (program) => !program.has_planned_spending)
+    );
+  }
+  tagged_by_org() {
+    return (
+      _.chain(this.programs)
+        //.filter(tagged => tagged.dept)
+        .groupBy((prog) => prog.dept.id)
+        .toPairs()
+        .map(([org_id, programs]) => {
+          return {
+            name: Dept.lookup(org_id).name,
+            programs: _.sortBy(programs, "name"),
+          };
+        })
+        .sortBy("name")
+        .value()
+    );
+  }
+  get is_m2m() {
+    return this.root.cardinality === "MtoM";
+  }
+  related_tags() {
     return _.chain(this.programs)
-    //.filter(tagged => tagged.dept)
-      .groupBy(prog => prog.dept.id )
-      .toPairs()
-      .map(([org_id, programs]) => {
-        return {
-          name: Dept.lookup(org_id).name,
-          programs: _.sortBy(programs,"name"),
-        };
-      })
-      .sortBy("name")
-      .value();
-  }
-  get is_m2m(){
-    return this.root.cardinality === 'MtoM';
-  }
-  related_tags(){
-    return _.chain(this.programs)
-      .map( prog => prog.tags )
+      .map((prog) => prog.tags)
       .flatten()
-      .filter( tag => tag.root.id === this.root.id)
+      .filter((tag) => tag.root.id === this.root.id)
       .uniqBy()
       .without(this)
       .value();
