@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from "lodash";
 
 const schema = `
   extend type Org {
@@ -21,45 +21,42 @@ const schema = `
   }
 `;
 
-export default function({models}){
-
+export default function ({ models }) {
   const { OrgSobj, ProgSobj } = models;
 
   const resolvers = {
     StandardObjectData: {
-      data(subject, {year, so_num} ){
+      data(subject, { year, so_num }) {
         const { level } = subject;
 
         let data;
-        if(level === "org"){
+        if (level === "org") {
           data = OrgSobj.get_flat_records(subject.dept_code);
-        } else if(level === "gov"){
+        } else if (level === "gov") {
           data = OrgSobj.get_flat_records("ZGOC");
-        } else if(level === "program"){
-          data= ProgSobj.get_flat_records(subject.id);
+        } else if (level === "program") {
+          data = ProgSobj.get_flat_records(subject.id);
         }
 
-        if(year){ 
-          data = _.filter(data, {year});
+        if (year) {
+          data = _.filter(data, { year });
         }
-        if(so_num){ 
-          data = _.filter(data, {so_num});
+        if (so_num) {
+          data = _.filter(data, { so_num });
         }
         return data;
       },
-      top_n_with_other(subject, { n, year }){
+      top_n_with_other(subject, { n, year }) {
         const { level } = subject;
 
-
-        if(level === "org"){
+        if (level === "org") {
           return OrgSobj.get_top_n_sobjs(subject.dept_code, year, n);
-        } else if(level === "gov"){
+        } else if (level === "gov") {
           return OrgSobj.get_top_n_sobjs("ZGOC", year, n);
-        } else if(level === "program"){
+        } else if (level === "program") {
           return ProgSobj.get_top_n_sobjs(subject.id, year, n);
         }
       },
-      
     },
     Org: {
       standard_object_data: _.identity,
@@ -76,5 +73,4 @@ export default function({models}){
     schema,
     resolvers,
   };
-
 }

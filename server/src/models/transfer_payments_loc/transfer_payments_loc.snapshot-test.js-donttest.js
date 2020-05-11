@@ -1,4 +1,4 @@
-const transfer_payment_location_query  = `
+const transfer_payment_location_query = `
 query {
   root(lang: "en") {
     transfer_payment_location(code: "1209034") {
@@ -50,14 +50,11 @@ query {
 }
 `;
 
-
 const { execQuery } = global;
 
-describe("transfer payment location", function(){
-
-  it("gives location def and transfer payment location records", async ()=> {
+describe("transfer payment location", function () {
+  it("gives location def and transfer payment location records", async () => {
     const data = await execQuery(transfer_payment_location_query, {});
     return expect(data).toMatchSnapshot();
   });
-
-})
+});

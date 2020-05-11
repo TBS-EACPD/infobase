@@ -1,33 +1,28 @@
-import _ from 'lodash';
+import _ from "lodash";
 import mongoose from "mongoose";
 
-import { 
+import {
   str_type,
   number_type,
-  bilingual, 
+  bilingual,
   pkey_type,
   parent_fkey_type,
   bilingual_str,
-} from '../model_utils.js';
+} from "../model_utils.js";
 
-import { 
-  drr_docs,
-  dp_docs,
-} from './results_common.js';
+import { drr_docs, dp_docs } from "./results_common.js";
 
 import {
   create_resource_by_foreignkey_attr_dataloader,
   create_resource_by_id_attr_dataloader,
-} from '../loader_utils.js';
+} from "../loader_utils.js";
 
-
-export default function(model_singleton){
-
+export default function (model_singleton) {
   const ResultSchema = mongoose.Schema({
     result_id: pkey_type(),
     stable_id: str_type,
     subject_id: parent_fkey_type(),
-    ...bilingual('name', str_type),
+    ...bilingual("name", str_type),
     doc: str_type,
   });
 
@@ -36,7 +31,7 @@ export default function(model_singleton){
     level: str_type,
 
     ..._.chain(drr_docs)
-      .flatMap( (drr_doc) => [
+      .flatMap((drr_doc) => [
         [`${drr_doc}_results`, number_type],
         [`${drr_doc}_indicators_met`, number_type],
         [`${drr_doc}_indicators_not_met`, number_type],
@@ -47,7 +42,7 @@ export default function(model_singleton){
       .value(),
 
     ..._.chain(dp_docs)
-      .flatMap( (dp_doc) => [
+      .flatMap((dp_doc) => [
         [`${dp_doc}_results`, number_type],
         [`${dp_doc}_indicators`, number_type],
       ])
@@ -71,7 +66,7 @@ export default function(model_singleton){
     // Want to populate certain indicator fields with their previous year value as available
     // Could use stable_id's to query for this from reducers, but embedding at populate time's much more efficient
     ..._.reduce(
-      { 
+      {
         target_type: str_type,
         target_min: number_type,
         target_max: number_type,
@@ -85,7 +80,7 @@ export default function(model_singleton){
         [field_key]: field_type,
         [`previous_year_${field_key}`]: field_type,
       }),
-      {},
+      {}
     ),
   });
 
@@ -100,17 +95,29 @@ export default function(model_singleton){
   model_singleton.define_model("PIDRLink", PIDRLinkSchema);
 
   const { Result, Indicator, PIDRLink } = model_singleton.models;
-  const result_by_subj_loader = create_resource_by_foreignkey_attr_dataloader(Result, 'subject_id');
-  const indicator_by_result_loader = create_resource_by_foreignkey_attr_dataloader(Indicator, 'result_id');
-  const program_link_loader = create_resource_by_foreignkey_attr_dataloader(PIDRLink, "program_id");
-  const indicator_id_loader = create_resource_by_id_attr_dataloader(Indicator, 'indicator_id');
+  const result_by_subj_loader = create_resource_by_foreignkey_attr_dataloader(
+    Result,
+    "subject_id"
+  );
+  const indicator_by_result_loader = create_resource_by_foreignkey_attr_dataloader(
+    Indicator,
+    "result_id"
+  );
+  const program_link_loader = create_resource_by_foreignkey_attr_dataloader(
+    PIDRLink,
+    "program_id"
+  );
+  const indicator_id_loader = create_resource_by_id_attr_dataloader(
+    Indicator,
+    "indicator_id"
+  );
   _.each(
-    { 
+    {
       result_by_subj_loader,
       indicator_by_result_loader,
       program_link_loader,
       indicator_id_loader,
-    }, 
-    (val,key) =>  model_singleton.define_loader(key,val)
-  )
+    },
+    (val, key) => model_singleton.define_loader(key, val)
+  );
 }

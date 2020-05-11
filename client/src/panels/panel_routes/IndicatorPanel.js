@@ -1,16 +1,18 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
-import { get_client } from '../../graphql_utils/graphql_utils.js';
-import { log_standard_event } from '../../core/analytics.js';
-import { StandardRouteContainer } from '../../core/NavComponents.js';
+import { get_client } from "../../graphql_utils/graphql_utils.js";
+import { log_standard_event } from "../../core/analytics.js";
+import { StandardRouteContainer } from "../../core/NavComponents.js";
 
-import { Panel, SpinnerWrapper } from '../../components/index.js';
+import { Panel, SpinnerWrapper } from "../../components/index.js";
 
-import { Indicator } from '../../models/results.js';
+import { Indicator } from "../../models/results.js";
 
-import { IndicatorDisplay } from '../panel_declarations/results/result_components.js';
-import { TM, text_maker } from '../panel_declarations/results/result_text_provider.js';
-
+import { IndicatorDisplay } from "../panel_declarations/results/result_components.js";
+import {
+  TM,
+  text_maker,
+} from "../panel_declarations/results/result_text_provider.js";
 
 const indicators_fields_fragment = `  id
   stable_id
@@ -56,8 +58,12 @@ query($lang: String!, $id: String) {
 `;
 
 const process_indicator = (indicator) => {
-  indicator.target_year = _.isNull(indicator.target_year) ? null : parseInt(indicator.target_year);
-  indicator.target_month = _.isNull(indicator.target_month) ? null : parseInt(indicator.target_month);
+  indicator.target_year = _.isNull(indicator.target_year)
+    ? null
+    : parseInt(indicator.target_year);
+  indicator.target_month = _.isNull(indicator.target_month)
+    ? null
+    : parseInt(indicator.target_month);
   return indicator;
 };
 
@@ -65,22 +71,25 @@ const query_api = (id) => {
   const time_at_request = Date.now();
   const client = get_client();
   const query = get_indicator_query;
-  return client.query({
-    query,
-    variables: {
-      lang: window.lang, 
-      id,
-      _query_name: 'results_bundle',
-    },
-  })
-    .then( (response) => {
-      Indicator.create_and_register(process_indicator(response.data.root.indicator));
+  return client
+    .query({
+      query,
+      variables: {
+        lang: window.lang,
+        id,
+        _query_name: "results_bundle",
+      },
+    })
+    .then((response) => {
+      Indicator.create_and_register(
+        process_indicator(response.data.root.indicator)
+      );
       return Promise.resolve();
     })
-    .catch(function(error){
-      const resp_time = Date.now() - time_at_request;     
+    .catch(function (error) {
+      const resp_time = Date.now() - time_at_request;
       log_standard_event({
-        SUBAPP: window.location.hash.replace('#',''),
+        SUBAPP: window.location.hash.replace("#", ""),
         MISC1: "API_QUERY_FAILURE",
         MISC2: `Single indicator, took  ${resp_time} ms - ${error.toString()}`,
       });
@@ -94,28 +103,26 @@ export default class IndicatorPanel extends React.Component {
     this.state = { loading: true };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const {
       match: {
         params: { id },
       },
     } = this.props;
-    query_api(id).then( () => this.setState({loading: false}) );
+    query_api(id).then(() => this.setState({ loading: false }));
   }
 
-  render(){
+  render() {
     const {
       match: {
         params: { id },
       },
     } = this.props;
 
-    const { 
-      loading,
-    } = this.state;
+    const { loading } = this.state;
 
     const indicator = Indicator.lookup(id);
-    
+
     return (
       <StandardRouteContainer
         title={text_maker("indicator_display_title")}
@@ -124,13 +131,14 @@ export default class IndicatorPanel extends React.Component {
         route_key="_inddisp"
       >
         <TM k="indicator_display_title" el="h1" />
-        {loading ? <SpinnerWrapper ref="spinner" config_name={"sub_route"} /> :
+        {loading ? (
+          <SpinnerWrapper ref="spinner" config_name={"sub_route"} />
+        ) : (
           <Panel title={indicator.name}>
-            <IndicatorDisplay indicator={indicator} show_doc={true}/>
+            <IndicatorDisplay indicator={indicator} show_doc={true} />
           </Panel>
-        }
+        )}
       </StandardRouteContainer>
-
     );
   }
 }

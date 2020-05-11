@@ -1,7 +1,6 @@
-import { make_email_body_from_completed_template } from './make_email_body_from_completed_template.js';
+import { make_email_body_from_completed_template } from "./make_email_body_from_completed_template.js";
 
 describe("make_email_body_from_completed_template", () => {
-
   it("properly generates body content", () => {
     const original_test_template = {
       enums: {
@@ -69,7 +68,8 @@ describe("make_email_body_from_completed_template", () => {
     const completed_test_template = {
       enums: ["bug", "typo"],
       radio: ["yes"],
-      issue: "Lorem ipsum dolor sit amet, varius nulla justo sed, tincidunt interdum lectus, diam donec rhoncus wisi ut. Lacinia massa risus mi risus phasellus id. Sollicitudin convallis vel eget libero, porttitor aenean elementum, ornare at, nullam quis, pellentesque erat id. Rhoncus pretium nec luctus mauris tincidunt, donec adipiscing vivamus tempus, mauris nullam porttitor natoque elit, lectus sapien libero vestibulum venenatis quisque. Eros tempor in, ipsum luctus sit suspendisse tincidunt, wisi id mollis viverra. Orci diam pede nunc, non nec condimentum dui aliquam aliquet tortor, libero ut cras. Vel blandit eu wisi rhoncus, sit dicta, a sem in sed, ipsum iaculis.",
+      issue:
+        "Lorem ipsum dolor sit amet, varius nulla justo sed, tincidunt interdum lectus, diam donec rhoncus wisi ut. Lacinia massa risus mi risus phasellus id. Sollicitudin convallis vel eget libero, porttitor aenean elementum, ornare at, nullam quis, pellentesque erat id. Rhoncus pretium nec luctus mauris tincidunt, donec adipiscing vivamus tempus, mauris nullam porttitor natoque elit, lectus sapien libero vestibulum venenatis quisque. Eros tempor in, ipsum luctus sit suspendisse tincidunt, wisi id mollis viverra. Orci diam pede nunc, non nec condimentum dui aliquam aliquet tortor, libero ut cras. Vel blandit eu wisi rhoncus, sit dicta, a sem in sed, ipsum iaculis.",
       json: { bleh: "blah", bluh: { blagh: "blargh" } },
       some_number: 1,
     };
@@ -83,10 +83,8 @@ some_number:\n    1`;
     return expect(
       make_email_body_from_completed_template(
         original_test_template,
-        completed_test_template,
+        completed_test_template
       )
-    ).toEqual(
-      expected_body_content
-    );
+    ).toEqual(expected_body_content);
   });
 });
