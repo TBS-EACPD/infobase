@@ -32,7 +32,7 @@ export default class MetaData extends React.Component {
         <div>
           <h1><TM k="metadata"/></h1>
         </div>
-        <p> <TM k='metadata_t'/> </p>
+        <p> <TM k='metadata_t'/></p>
         <ScrollToTargetContainer target_id={data_source}>
           {_.map(sorted_sources, (source) => (
             <div key={source.key} id={source.key}>
@@ -42,7 +42,7 @@ export default class MetaData extends React.Component {
                 <div>
                   { source.description() }
                 </div>
-                <div className="h4"> <TM k='datasets' /> </div>
+                <div className="h4"> <TM k='datasets' /></div>
                 <FancyUL>
                   {_.map(source.items(), ({key, id, text, inline_link, external_link }) => (
                     <span key={key || id} className="fancy-ul-span-flex">

@@ -195,7 +195,7 @@ const PanelTableRow = ({ current_subject, panel, className }) => {
       <td> {panel.depends_on.join(", ")} </td>
       <td> {panel.info_deps.join(", ")} </td>
       <td> {panel.notes} </td>
-      <td> <Link to={url}> link </Link> </td>
+      <td><Link to={url}> link </Link></td>
     </tr>
   );
 

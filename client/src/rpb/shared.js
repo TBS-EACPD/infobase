@@ -39,12 +39,12 @@ const ReportDetails = ({
         <p dangerouslySetInnerHTML={{__html: table_description}} />
       </div>
       <section className="mrgn-tp-lg">
-        <div className="h5"> <TextMaker text_key="col_defs" /> </div> 
+        <div className="h5"> <TextMaker text_key="col_defs" /></div> 
         <table className='table'>
           <thead>
             <tr> 
-              <th> <TextMaker text_key="col_name" /> </th>
-              <th> <TextMaker text_key="col_def" /> </th>
+              <th> <TextMaker text_key="col_name" /></th>
+              <th> <TextMaker text_key="col_def" /></th>
             </tr>
           </thead>
           <tbody>
@@ -62,7 +62,7 @@ const ReportDetails = ({
         <div 
           className="mrgn-tp-lg"
         >
-          <div className="h5"> <TextMaker text_key="footnotes" /> </div>
+          <div className="h5"> <TextMaker text_key="footnotes" /></div>
           <FootnoteList footnotes={footnotes} />
         </div>
       }

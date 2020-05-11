@@ -20,16 +20,16 @@ export const PlannedActualTable = ({
     </tr></thead>
     <tbody>
       <tr>
-        <th scope="row"> <TM k="spending"/> </th>
-        <td> <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={planned_spend} /> </td>
-        <td> <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={actual_spend} /> </td>
-        <td> <Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={diff_spend} /> </td>
+        <th scope="row"> <TM k="spending"/></th>
+        <td><Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={planned_spend} /></td>
+        <td><Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={actual_spend} /></td>
+        <td><Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={diff_spend} /></td>
       </tr>
       <tr>
-        <th scope="row"> <TM k="ftes"/> </th>
-        <td> <Format type="big_int" content={planned_ftes} /> </td>
-        <td> <Format type="big_int" content={actual_ftes} /> </td>
-        <td> <Format type="big_int" content={diff_ftes} /> </td>
+        <th scope="row"> <TM k="ftes"/></th>
+        <td><Format type="big_int" content={planned_ftes} /></td>
+        <td><Format type="big_int" content={actual_ftes} /></td>
+        <td><Format type="big_int" content={diff_ftes} /></td>
       </tr>
     </tbody> 
   </table>

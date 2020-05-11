@@ -21,7 +21,7 @@ const PanelSource = ({links}) => {
       <span aria-hidden> 
         <TM k="panel_source_link_text" />
       </span>
-      <span className="sr-only"> <TM k="panel_a11y_source_expl"/> </span>
+      <span className="sr-only"> <TM k="panel_a11y_source_expl"/></span>
       <ul
         className="list-unstyled list-inline"
         style={{display: "inline"}}

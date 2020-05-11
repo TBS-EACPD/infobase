@@ -43,7 +43,7 @@ export default class Home extends React.Component {
 
 const FeaturedContentItem = ({ text_key, href, is_link_out, is_new, is_youtube }) => (
   <li className="list-group-item list-group-item--home">
-    { is_new && <span className="badge badge--is-new"> <TM k={"new"} /> </span> }
+    { is_new && <span className="badge badge--is-new"> <TM k={"new"} /></span> }
     <a href={_.has(href, window.lang) ? href[window.lang] : href} target={is_link_out ? "_blank" : "_self"} rel={is_link_out ? "noopener noreferrer" : ""}> 
       <TM k={text_key} /> 
     </a>
@@ -68,8 +68,8 @@ const HomeLayout = props => (
       style={{ backgroundImage: `URL(${get_static_url("svg/backbanner.svg")})` }}
     >
       <header className="container">
-        <h1> <TM k="welcome" /> </h1>
-        <h3> <TM k="home_sub_title" /> </h3>
+        <h1> <TM k="welcome" /></h1>
+        <h3> <TM k="home_sub_title" /></h3>
         <div className="flag">
           <img aria-hidden="true" src={get_static_url("svg/flagline.svg")}/>
         </div>
@@ -166,8 +166,8 @@ const HomeLayout = props => (
       }}
     >
       <header className="container">
-        <h2 className="h1"> <TM k="subapps_title" /> </h2>
-        <h3 className="h2"> <TM k="subapps_text" /> </h3>
+        <h2 className="h1"> <TM k="subapps_title" /></h2>
+        <h3 className="h2"> <TM k="subapps_text" /></h3>
       </header>
     </div>
 
