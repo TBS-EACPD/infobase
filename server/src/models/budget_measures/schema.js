@@ -1,8 +1,8 @@
 import _ from "lodash";
 
-import { budget_years } from './budget_measures_common.js';
+import { budget_years } from "./budget_measures_common.js";
 
-import { bilingual_field } from '../schema_utils.js';
+import { bilingual_field } from "../schema_utils.js";
 
 const schema = `
   type FakeBudgetOrg {
@@ -92,33 +92,44 @@ const schema = `
   }
 `;
 
-export default function({models, loaders}){
-
+export default function ({ models, loaders }) {
   const validate_year = (year) => {
-    if ( _.includes( budget_years, _.toString(year) ) ){
+    if (_.includes(budget_years, _.toString(year))) {
       return true;
     } else {
-      throw `Invalid argument: ${year} is not a valid budget measure year. Valid years are ${budget_years.join(', ')}`;
+      throw `Invalid argument: ${year} is not a valid budget measure year. Valid years are ${budget_years.join(
+        ", "
+      )}`;
     }
   };
 
-  const get_measure_model_by_year = (year) => validate_year(year) && models[`Budget${year}Measure`];
-  const get_measure_loader_by_year = (loader_by, year) => validate_year(year) && loaders[`budget_${year}_measure_${loader_by}_loader`];
-  
-  const get_subject_has_measure_loader_by_year = (year) => validate_year(year) && loaders[`subject_with_budget_${year}_measure_subject_id_loader`];
+  const get_measure_model_by_year = (year) =>
+    validate_year(year) && models[`Budget${year}Measure`];
+  const get_measure_loader_by_year = (loader_by, year) =>
+    validate_year(year) &&
+    loaders[`budget_${year}_measure_${loader_by}_loader`];
+
+  const get_subject_has_measure_loader_by_year = (year) =>
+    validate_year(year) &&
+    loaders[`subject_with_budget_${year}_measure_subject_id_loader`];
 
   const resolvers = {
     Root: {
       fake_budget_orgs: () => models.FakeBudgetOrgSubject.find({}),
-      budget_measure: (_x, {year, measure_id}) => get_measure_loader_by_year('measure_id', year).load(measure_id),
+      budget_measure: (_x, { year, measure_id }) =>
+        get_measure_loader_by_year("measure_id", year).load(measure_id),
     },
     Gov: {
-      budget_measures: async (_x, {year}) => {
-        const all_budget_measures = await get_measure_model_by_year(year).find({});
+      budget_measures: async (_x, { year }) => {
+        const all_budget_measures = await get_measure_model_by_year(year).find(
+          {}
+        );
 
-        _.each(
-          all_budget_measures,
-          budget_measure => get_measure_loader_by_year('measure_id', year).prime(budget_measure.measure_id, budget_measure)
+        _.each(all_budget_measures, (budget_measure) =>
+          get_measure_loader_by_year("measure_id", year).prime(
+            budget_measure.measure_id,
+            budget_measure
+          )
         );
 
         return all_budget_measures;
@@ -126,19 +137,32 @@ export default function({models, loaders}){
     },
     FakeBudgetOrg: {
       name: bilingual_field("name"),
-      budget_measures: ({org_id}, {year}) => get_measure_loader_by_year('org_id', year).load(org_id),
+      budget_measures: ({ org_id }, { year }) =>
+        get_measure_loader_by_year("org_id", year).load(org_id),
     },
     Org: {
-      budget_measures: ({org_id}, {year}) => get_measure_loader_by_year('org_id', year).load(org_id),
-      has_budget_measures: async ({org_id}, {year}) => !_.isUndefined( await get_subject_has_measure_loader_by_year(year).load(org_id) ),
+      budget_measures: ({ org_id }, { year }) =>
+        get_measure_loader_by_year("org_id", year).load(org_id),
+      has_budget_measures: async ({ org_id }, { year }) =>
+        !_.isUndefined(
+          await get_subject_has_measure_loader_by_year(year).load(org_id)
+        ),
     },
     Crso: {
-      budget_measures: ({crso_id}, {year}) => get_measure_loader_by_year('subject_id', year).load(crso_id),
-      has_budget_measures: async ({crso_id}, {year}) => !_.isUndefined( await get_subject_has_measure_loader_by_year(year).load(crso_id) ),
+      budget_measures: ({ crso_id }, { year }) =>
+        get_measure_loader_by_year("subject_id", year).load(crso_id),
+      has_budget_measures: async ({ crso_id }, { year }) =>
+        !_.isUndefined(
+          await get_subject_has_measure_loader_by_year(year).load(crso_id)
+        ),
     },
     Program: {
-      budget_measures: ({program_id}, {year}) => get_measure_loader_by_year('subject_id', year).load(program_id),
-      has_budget_measures: async ({program_id}, {year}) => !_.isUndefined( await get_subject_has_measure_loader_by_year(year).load(program_id) ),
+      budget_measures: ({ program_id }, { year }) =>
+        get_measure_loader_by_year("subject_id", year).load(program_id),
+      has_budget_measures: async ({ program_id }, { year }) =>
+        !_.isUndefined(
+          await get_subject_has_measure_loader_by_year(year).load(program_id)
+        ),
     },
 
     BudgetMeasure: {
@@ -153,7 +177,7 @@ export default function({models, loaders}){
       name: bilingual_field("name"),
     },
   };
-  
+
   return {
     schema,
     resolvers,

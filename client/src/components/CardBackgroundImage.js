@@ -1,6 +1,6 @@
-import './CardBackgroundImage.scss';
+import "./CardBackgroundImage.scss";
 
-import { TM } from './TextMaker.js';
+import { TM } from "./TextMaker.js";
 
 const CardBackgroundImage = ({
   img_src,
@@ -12,9 +12,9 @@ const CardBackgroundImage = ({
   tmf,
 }) => (
   <a className="link-unstyled" href={link_href}>
-    <div 
-      className="background-img-card" 
-      style={{ backgroundImage: img_src && `URL(${img_src})`}}
+    <div
+      className="background-img-card"
+      style={{ backgroundImage: img_src && `URL(${img_src})` }}
     >
       <div className="background-img-card__top-left">
         <div className="background-img-card__title">

@@ -1,8 +1,8 @@
-import { text_maker } from '../partition_text_provider.js';
-import { run_template } from '../../../models/text.js';
-import { formats } from '../../../core/format.js';
+import { text_maker } from "../partition_text_provider.js";
+import { run_template } from "../../../models/text.js";
+import { formats } from "../../../core/format.js";
 
-const get_common_popup_options = d => {
+const get_common_popup_options = (d) => {
   return {
     year: run_template("{{pa_last_year}}"),
     up_to: false,
@@ -16,19 +16,21 @@ const get_common_popup_options = d => {
     id: d.data.id,
     color: d.color,
     first_column: d.depth === 1,
-    focus_text: d.magnified ? text_maker("partition_unfocus_button") : text_maker("partition_focus_button"),
+    focus_text: d.magnified
+      ? text_maker("partition_unfocus_button")
+      : text_maker("partition_focus_button"),
   };
 };
 
 const wrap_in_brackets = (text) => " (" + text + ")";
 
-const { compact1, big_int } = formats; 
+const { compact1, big_int } = formats;
 
 const formats_by_data_type = {
-  "exp": compact1,
-  "fte": big_int,
-  "estimates": compact1,
-  "org_info": big_int,
+  exp: compact1,
+  fte: big_int,
+  estimates: compact1,
+  org_info: big_int,
 };
 
 const data_types = [
@@ -53,10 +55,10 @@ const remapped_data_types = {
   planned_exp: "estimates",
 };
 
-export { 
-  get_common_popup_options, 
-  wrap_in_brackets, 
-  formats_by_data_type, 
+export {
+  get_common_popup_options,
+  wrap_in_brackets,
+  formats_by_data_type,
   data_types,
   remapped_data_types,
 };

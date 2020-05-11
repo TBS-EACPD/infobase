@@ -1,11 +1,9 @@
-module.exports = function(src){
+module.exports = function (src) {
   this.cacheable();
 
-
-  const str =  `
+  const str = `
     ${src}
     window.add_text_bundle(module.exports);
   `;
   return str;
-
 };

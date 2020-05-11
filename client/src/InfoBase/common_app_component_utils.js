@@ -1,12 +1,16 @@
-import { log_standard_event } from '../core/analytics.js';
-import { retry_promise } from '../general_utils.js';
+import { log_standard_event } from "../core/analytics.js";
+import { retry_promise } from "../general_utils.js";
 
 // Link tags for stylesheets should all have non null sheet properties
 const linked_stylesheets_loaded = () => {
   try {
-    const linked_style_sheets_have_loaded = _.chain( document.head.querySelectorAll(`link[rel='stylesheet'][href^='${window.cdn_url}']`) )
-      .map( _.identity )
-      .every( (link_tag) => !_.isNull(link_tag.sheet) )
+    const linked_style_sheets_have_loaded = _.chain(
+      document.head.querySelectorAll(
+        `link[rel='stylesheet'][href^='${window.cdn_url}']`
+      )
+    )
+      .map(_.identity)
+      .every((link_tag) => !_.isNull(link_tag.sheet))
       .value();
     return linked_style_sheets_have_loaded;
   } catch (e) {
@@ -21,10 +25,9 @@ const linked_stylesheets_loaded = () => {
 // Collecting analytics on this event, hopefully that helps us pin it down eventually. Check GA for recent occurences before deleting any of this code!
 // No decent fix, but reloading page seems to be enough when it happens within the team, so doing that programatically in prod
 const ensure_linked_stylesheets_load = () => {
-
-  if ( !linked_stylesheets_loaded() && !window.is_dev){
+  if (!linked_stylesheets_loaded() && !window.is_dev) {
     log_standard_event({
-      SUBAPP: window.location.hash.replace('#',''),
+      SUBAPP: window.location.hash.replace("#", ""),
       MISC1: "ERROR_IN_PROD",
       MISC2: "Linked style sheets failed to load!",
     });
@@ -33,11 +36,7 @@ const ensure_linked_stylesheets_load = () => {
   }
 };
 
+const retrying_react_lazy = (import_promise) =>
+  React.lazy(() => retry_promise(import_promise));
 
-const retrying_react_lazy = (import_promise) => React.lazy( () => retry_promise(import_promise) );
-
-
-export { 
-  ensure_linked_stylesheets_load,
-  retrying_react_lazy,
-};
+export { ensure_linked_stylesheets_load, retrying_react_lazy };
