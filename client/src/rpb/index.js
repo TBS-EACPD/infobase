@@ -153,7 +153,7 @@ class RPB extends React.Component {
   }
 
   render() {
-    const { dataset_type, selected_subject } = this.state;
+    const { dataset_type } = this.state;
 
     const {
       table,
