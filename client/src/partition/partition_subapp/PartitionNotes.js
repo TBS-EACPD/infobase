@@ -1,15 +1,17 @@
-import { AutoAccordion } from '../../components/index.js';
+import { AutoAccordion } from "../../components/index.js";
 import { text_maker } from "./partition_text_provider.js";
 
 export class PartitionNotes extends React.Component {
-  constructor(){
+  constructor() {
     super();
   }
-  componentDidMount(){
-    const autoAccordion = d3.select(ReactDOM.findDOMNode(this.refs.autoAccordion));
+  componentDidMount() {
+    const autoAccordion = d3.select(
+      ReactDOM.findDOMNode(this.refs.autoAccordion)
+    );
     autoAccordion.select(".pull-down-accordion-header").node().click();
   }
-  render(){
+  render() {
     const { note_content } = this.props;
     return (
       <div className="mrgn-bttm-sm">
@@ -17,8 +19,8 @@ export class PartitionNotes extends React.Component {
           title={text_maker("some_things_to_keep_in_mind")}
           ref="autoAccordion"
         >
-          <div style={{paddingLeft: '10px', paddingRight: '10px'}}>
-            { note_content }
+          <div style={{ paddingLeft: "10px", paddingRight: "10px" }}>
+            {note_content}
           </div>
         </AutoAccordion>
       </div>

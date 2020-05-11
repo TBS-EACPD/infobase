@@ -1,99 +1,91 @@
-import { GlossaryEntry } from '../models/glossary.js';
-import { escapeRegExp } from '../general_utils.js';
+import { GlossaryEntry } from "../models/glossary.js";
+import { escapeRegExp } from "../general_utils.js";
 
-function node_to_match_tokens(node){
+function node_to_match_tokens(node) {
   const {
-    data: {
-      type,
-      name,
-      subject, 
-      table,
-    },
+    data: { type, name, subject, table },
   } = node;
-  if(type === "indicator"){
+  if (type === "indicator") {
     return []; //searching will be done at the results level only.
   }
-  if(_.includes(["result", "dr"], type)){
+  if (_.includes(["result", "dr"], type)) {
     return _.chain(node.children)
-      .map('data.indicator')
-      .map( indicator => [ indicator.name, indicator.target_explanation, indicator.narrative, indicator.measure ] )
+      .map("data.indicator")
+      .map((indicator) => [
+        indicator.name,
+        indicator.target_explanation,
+        indicator.narrative,
+        indicator.measure,
+      ])
       .flatten()
       .compact()
       .concat([name])
       .value();
-  } else if(subject){
-
+  } else if (subject) {
     return _.chain(subject)
       .pick([
-        'name',
-        'old_name',
-        'legal_title',
-        'applied_title',
-        'dept_code',
-        'abbr',
-        'description',
-        'mandate',
+        "name",
+        "old_name",
+        "legal_title",
+        "applied_title",
+        "dept_code",
+        "abbr",
+        "description",
+        "mandate",
       ])
       .values()
       .compact()
       .value();
-
-  } else if(table){
-    return _.chain(table)
-      .pick([
-        'name',
-        'title',
-        'description',
-      ])
-      .values()
-      .concat( 
-        _.chain(table.tags)
-          .map( id => GlossaryEntry.lookup(id) )
-          .compact()
-          .map('title')
-          .value()
-      )
-      //TODO add in support for searching filter-values i.e. Personnel, Indeterminate, Operating, maybe even stat items
-      .compact()
-      .value();
-
+  } else if (table) {
+    return (
+      _.chain(table)
+        .pick(["name", "title", "description"])
+        .values()
+        .concat(
+          _.chain(table.tags)
+            .map((id) => GlossaryEntry.lookup(id))
+            .compact()
+            .map("title")
+            .value()
+        )
+        //TODO add in support for searching filter-values i.e. Personnel, Indeterminate, Operating, maybe even stat items
+        .compact()
+        .value()
+    );
   } else {
     return _.chain(node.data)
-      .pick([
-        'name',
-        'description',
-      ])
+      .pick(["name", "description"])
       .values()
-      .concat( _.chain(node).pick(['name','description']).values().value() )
+      .concat(_.chain(node).pick(["name", "description"]).values().value())
       .compact()
       .value();
   }
 }
 
-function substr_search_generator(flat_nodes){
-  
-  const search_nodes = flat_nodes.map(node => ({
+function substr_search_generator(flat_nodes) {
+  const search_nodes = flat_nodes.map((node) => ({
     id: node.id,
-    text_to_search: node_to_match_tokens(node).join(" "), 
+    text_to_search: node_to_match_tokens(node).join(" "),
   }));
-  
-  return query => {
 
+  return (query) => {
     let raw_tokens = query.split(" ");
     let matches_by_id;
 
-    const regexps = raw_tokens.map( str => new RegExp(escapeRegExp(str), 'gi'));
+    const regexps = raw_tokens.map(
+      (str) => new RegExp(escapeRegExp(str), "gi")
+    );
 
     matches_by_id = _.chain(search_nodes)
-      .filter( ({text_to_search}) => _.every(regexps, re => text_to_search.match(re) ) )
-      .map(node => [node.id, true])
+      .filter(({ text_to_search }) =>
+        _.every(regexps, (re) => text_to_search.match(re))
+      )
+      .map((node) => [node.id, true])
       .fromPairs()
       .value();
 
-    return node => matches_by_id[node.id];
+    return (node) => matches_by_id[node.id];
   };
 }
 
-export {
-  substr_search_generator,
-};
+export { substr_search_generator };

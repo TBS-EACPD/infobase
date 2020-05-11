@@ -122,44 +122,45 @@ query ($dept_code: String){
 
 ${emp_type_info_fragment}`;
 
-
-
 const { execQuery } = global;
 
-describe("people headcount data", function(){
-  
+describe("people headcount data", function () {
   const dept_code = "AGR";
 
   const type = "stu";
 
-  it("employee type snapshots: gov, all dimensions", async ()=> {
+  it("employee type snapshots: gov, all dimensions", async () => {
     const data = await execQuery(employee_type_data_gov_all_dim, {});
     return expect(data).toMatchSnapshot();
   });
 
-  it("employee type snapshots: dept, all dimensions", async ()=> {
-    const data = await execQuery(employee_type_data_dept_all_dim, {dept_code});
+  it("employee type snapshots: dept, all dimensions", async () => {
+    const data = await execQuery(employee_type_data_dept_all_dim, {
+      dept_code,
+    });
     return expect(data).toMatchSnapshot();
   });
 
-  it("employee type snapshots: gov, one dimension", async ()=> {
-    const data = await execQuery(employee_type_data_gov_one_dim, {type});
+  it("employee type snapshots: gov, one dimension", async () => {
+    const data = await execQuery(employee_type_data_gov_one_dim, { type });
     return expect(data).toMatchSnapshot();
   });
 
-  it("employee type snapshots: dept, one dimensions", async ()=> {
-    const data = await execQuery(employee_type_data_dept_one_dim, {dept_code, type});
+  it("employee type snapshots: dept, one dimensions", async () => {
+    const data = await execQuery(employee_type_data_dept_one_dim, {
+      dept_code,
+      type,
+    });
     return expect(data).toMatchSnapshot();
   });
 
-  it("people employee type info: gov", async ()=> {
+  it("people employee type info: gov", async () => {
     const data = await execQuery(emp_type_info_gov, {});
     return expect(data).toMatchSnapshot();
   });
 
-  it("people employee type info: dept", async ()=> {
-    const data = await execQuery(emp_type_info_dept, {dept_code});
+  it("people employee type info: dept", async () => {
+    const data = await execQuery(emp_type_info_dept, { dept_code });
     return expect(data).toMatchSnapshot();
   });
-  
 });

@@ -1,5 +1,5 @@
 window.APPLICATION_LANGUAGE = "en";
-window.matchMedia = jest.fn().mockImplementation(query => {
+window.matchMedia = jest.fn().mockImplementation((query) => {
   return {
     matches: false,
     media: query,
@@ -9,5 +9,5 @@ window.matchMedia = jest.fn().mockImplementation(query => {
   };
 });
 
-require('../app_bootstrap/inject_app_globals.side-effects.js');
-require('../handlebars/helpers.side-effects.js');
+require("../app_bootstrap/inject_app_globals.side-effects.js");
+require("../handlebars/helpers.side-effects.js");

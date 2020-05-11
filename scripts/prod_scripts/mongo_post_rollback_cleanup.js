@@ -1,6 +1,6 @@
 // Update metadata following a rollback
 
-const metadata_db = db.getSiblingDB('metadata');
+const metadata_db = db.getSiblingDB("metadata");
 
 const current_metadata_collection = metadata_db.metadata;
 

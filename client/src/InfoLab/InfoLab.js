@@ -1,23 +1,21 @@
-import './InfoLab.scss';
-import { StandardRouteContainer } from '../core/NavComponents.js';
-import { create_text_maker } from '../models/text.js';
-import { 
+import "./InfoLab.scss";
+import { StandardRouteContainer } from "../core/NavComponents.js";
+import { create_text_maker } from "../models/text.js";
+import {
   create_text_maker_component,
   CardLeftImage,
-} from '../components/index.js';
-import lab_text from './InfoLab.yaml';
-import { get_static_url } from '../request_utils.js';
-
+} from "../components/index.js";
+import lab_text from "./InfoLab.yaml";
+import { get_static_url } from "../request_utils.js";
 
 const { TM } = create_text_maker_component(lab_text);
 const text_maker = create_text_maker(lab_text);
-
 
 export default class InfoLab extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   render() {
     return (
       <StandardRouteContainer
@@ -29,7 +27,7 @@ export default class InfoLab extends React.Component {
       >
         <TM k="lab_title" el="h1" />
         <div className="medium_panel_text">
-          <TM k="lab_intro_text"/>
+          <TM k="lab_intro_text" />
         </div>
         <div className="frow">
           <div className="fcol-md-6 fcol-sm-12">
@@ -58,5 +56,4 @@ export default class InfoLab extends React.Component {
       </StandardRouteContainer>
     );
   }
-
 }

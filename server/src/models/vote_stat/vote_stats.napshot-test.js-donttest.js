@@ -1,7 +1,6 @@
 const _ = require("lodash");
 
-
-const org_query  = `
+const org_query = `
 query MyQuery($lang: String!, $dept_code: String!){
   root(lang: $lang){
     org(dept_code: $dept_code){
@@ -49,16 +48,13 @@ query MyQuery($lang: String!, $dept_code: String!){
 
 const { execQuery } = global;
 
-describe("vote-stat", function(){
-
-  it("vote-stat org test (public accounts + estimates)", async ()=> {
+describe("vote-stat", function () {
+  it("vote-stat org test (public accounts + estimates)", async () => {
     const variables = { dept_code: "AGR" };
     const data = await execQuery(org_query, variables);
     return expect(data).toMatchSnapshot();
   });
-
-})
-
+});
 
 const program_query = `
   query {
@@ -75,10 +71,10 @@ const program_query = `
   }
 `;
 
-describe("program vote-stat", function(){
-  it("program vote-stat", async ()=> {
-    const vars = { program_id: "AGR-AAA00"};
+describe("program vote-stat", function () {
+  it("program vote-stat", async () => {
+    const vars = { program_id: "AGR-AAA00" };
     const result = await execQuery(program_query, vars);
     expect(result).toMatchSnapshot();
-  })
-})
+  });
+});

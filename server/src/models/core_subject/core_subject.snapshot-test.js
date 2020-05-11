@@ -1,4 +1,4 @@
-const crso_query  = `
+const crso_query = `
 query CRSOTestQuery ($lang: String!){
   root(lang: $lang){
     org(org_id:"133"){
@@ -26,17 +26,14 @@ query CRSOTestQuery ($lang: String!){
 }
 `;
 
-
 const { execQuery } = global;
 
-describe("subject linkage", function(){
-
-  it("crso root, up and down linkage", async ()=> {
+describe("subject linkage", function () {
+  it("crso root, up and down linkage", async () => {
     const data = await execQuery(crso_query, {});
     return expect(data).toMatchSnapshot();
   });
-
-})
+});
 
 const org_fields_query = `
 query IgocTestQuery ($lang: String!){
@@ -112,15 +109,13 @@ query IgocTestQuery ($lang: String!){
     }
   }
 }
-`
+`;
 
-describe("igoc linkage and fields", function(){
-
-  it("igoc linkage and fields", async ()=> {
+describe("igoc linkage and fields", function () {
+  it("igoc linkage and fields", async () => {
     const data = await execQuery(org_fields_query, {});
     return expect(data).toMatchSnapshot();
   });
-
 });
 
 const program_query = `
@@ -144,11 +139,9 @@ query ProgramTestQuery ($lang: String!){
 }
 `;
 
-describe("program basic fields", function(){
-
-  it("program basic fields", async ()=> {
+describe("program basic fields", function () {
+  it("program basic fields", async () => {
     const data = await execQuery(program_query, {});
     return expect(data).toMatchSnapshot();
   });
-
 });

@@ -1,4 +1,4 @@
-import { bilingual_field } from '../schema_utils';
+import { bilingual_field } from "../schema_utils";
 
 const schema = `
 
@@ -56,20 +56,24 @@ export default function ({ models }) {
   const resolvers = {
     Root: {
       location_def: (parent, { code }) => {
-        return { 
+        return {
           ...LocationDef.get_record_by_loc_code(code),
-          transfer_payment_location_records: TransferPaymentLocationRecord.get_record_by_loc_code(code),
+          transfer_payment_location_records: TransferPaymentLocationRecord.get_record_by_loc_code(
+            code
+          ),
           total_amount: TransferPaymentLocationRecord.get_total_amount(code),
         };
       },
       transfer_payment_location: (parent, { code }) => {
         return {
-          transfer_payment_location_records: TransferPaymentLocationRecord.get_record_by_loc_code(code),
+          transfer_payment_location_records: TransferPaymentLocationRecord.get_record_by_loc_code(
+            code
+          ),
           location_def: LocationDef.get_record_by_loc_code(code),
         };
       },
       transfer_payment_in_map: (parent, { coords }) => {
-        return TransferPaymentLocationRecord.get_records_by_laglng(coords)
+        return TransferPaymentLocationRecord.get_records_by_laglng(coords);
       },
     },
     LocationDefRecord: {
