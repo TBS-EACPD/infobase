@@ -13,15 +13,13 @@ const base_breakpoints = {
 // Note max breakpoints are base breakpoints -1
 const breakpoints = {
   ..._.chain(base_breakpoints)
-    .mapKeys( (value, key) => `min${_.upperFirst(key)}`)
+    .mapKeys((value, key) => `min${_.upperFirst(key)}`)
     .value(),
 
   ..._.chain(base_breakpoints)
-    .mapKeys( (value, key) => `max${_.upperFirst(key)}`)
-    .mapValues( (value) => value-1)
+    .mapKeys((value, key) => `max${_.upperFirst(key)}`)
+    .mapValues((value) => value - 1)
     .value(),
 };
 
-export {
-  breakpoints,
-};
+export { breakpoints };

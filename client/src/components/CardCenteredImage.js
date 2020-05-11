@@ -1,7 +1,7 @@
-import classNames from 'classnames';
-import './CardCenteredImage.scss';
+import classNames from "classnames";
+import "./CardCenteredImage.scss";
 
-import { TM } from './TextMaker.js';
+import { TM } from "./TextMaker.js";
 
 const CardCenteredImage = ({
   img_src,
@@ -22,24 +22,24 @@ const CardCenteredImage = ({
       </div>
     </div>
     <div>
-      { img_src &&
-          <div className="centered-img-card__right">
-            <img
-              aria-hidden="true"
-              src={img_src}
-              className={classNames("centered-img-card__img")}
-            />
-          </div>
-      }
-      { link_key &&
-          <div className="centered-img-card__bottom-right">
-            <a className="link-unstyled" href={link_href}>
-              <div tabIndex={0} className="centered-img-card__badge">
-                <TM k={link_key} tmf={tmf} args={text_args} />
-              </div>
-            </a>
-          </div>
-      }
+      {img_src && (
+        <div className="centered-img-card__right">
+          <img
+            aria-hidden="true"
+            src={img_src}
+            className={classNames("centered-img-card__img")}
+          />
+        </div>
+      )}
+      {link_key && (
+        <div className="centered-img-card__bottom-right">
+          <a className="link-unstyled" href={link_href}>
+            <div tabIndex={0} className="centered-img-card__badge">
+              <TM k={link_key} tmf={tmf} args={text_args} />
+            </div>
+          </a>
+        </div>
+      )}
     </div>
   </div>
 );

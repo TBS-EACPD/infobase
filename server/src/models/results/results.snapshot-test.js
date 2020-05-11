@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from "lodash";
 
 const drr_docs_to_test = ["drr17"];
 const dp_docs_to_test = ["dp18", "dp19"];
@@ -151,8 +151,7 @@ fragment everything on Org {
 }
 `;
 
-describe("results data", function(){
-
+describe("results data", function () {
   it("Test departments result snapshot", async () => {
     const data = await execQuery(dept_results_data_query);
     return expect(data).toMatchSnapshot();
@@ -166,54 +165,56 @@ describe("results data", function(){
   it("Test that AllDocResultCount match rolled up ResultCount values", async () => {
     const all_result_counts_result = await execQuery(all_results_counts_query);
     const dept_result_counts_result = await execQuery(dept_results_count_query);
-    
-    const counts_by_dept_code = _.chain(all_result_counts_result.data.root.gov.all_target_counts_summary)
-      .map( counts => [counts.subject_id, counts] )
+
+    const counts_by_dept_code = _.chain(
+      all_result_counts_result.data.root.gov.all_target_counts_summary
+    )
+      .map((counts) => [counts.subject_id, counts])
       .fromPairs()
       .value();
 
-    const combine_docs_and_rekey = (dept_query_response) => _.mapValues(
-      {
-        subject_id: dept_query_response.id,
-        ..._.chain(drr_docs_to_test)
-          .flatMap(
-            drr_doc => _.chain(dept_query_response[drr_doc])
-              .omit("indicators_dp")
-              .map( (value, key) => [`${drr_doc}_${key}`, value] )
-              .fromPairs()
-              .value()
-          )
-          .reduce(
-            (all_drr_doc_counts, drr_doc_counts) => ({
-              ...all_drr_doc_counts,
-              ...drr_doc_counts,
-            }),
-            {}
-          )
-          .value(),
-        ..._.chain(dp_docs_to_test)
-          .flatMap(
-            dp_doc => ({
+    const combine_docs_and_rekey = (dept_query_response) =>
+      _.mapValues(
+        {
+          subject_id: dept_query_response.id,
+          ..._.chain(drr_docs_to_test)
+            .flatMap((drr_doc) =>
+              _.chain(dept_query_response[drr_doc])
+                .omit("indicators_dp")
+                .map((value, key) => [`${drr_doc}_${key}`, value])
+                .fromPairs()
+                .value()
+            )
+            .reduce(
+              (all_drr_doc_counts, drr_doc_counts) => ({
+                ...all_drr_doc_counts,
+                ...drr_doc_counts,
+              }),
+              {}
+            )
+            .value(),
+          ..._.chain(dp_docs_to_test)
+            .flatMap((dp_doc) => ({
               [`${dp_doc}_results`]: dept_query_response[dp_doc].results,
-              [`${dp_doc}_indicators`]: dept_query_response[dp_doc].indicators_dp,
-            })
-          )
-          .reduce(
-            (all_dp_doc_counts, dp_doc_counts) => ({
-              ...all_dp_doc_counts,
-              ...dp_doc_counts,
-            }),
-            {}
-          )
-          .value(),
-      },
-      (value) => value === 0 ? null : value 
-    );
+              [`${dp_doc}_indicators`]: dept_query_response[dp_doc]
+                .indicators_dp,
+            }))
+            .reduce(
+              (all_dp_doc_counts, dp_doc_counts) => ({
+                ...all_dp_doc_counts,
+                ...dp_doc_counts,
+              }),
+              {}
+            )
+            .value(),
+        },
+        (value) => (value === 0 ? null : value)
+      );
 
     const result_counts_match = _.chain(dept_result_counts_result.data.root)
-      .mapValues( combine_docs_and_rekey )
-      .every(
-        (counts) => _.isEqual(counts_by_dept_code[counts.subject_id], counts)
+      .mapValues(combine_docs_and_rekey)
+      .every((counts) =>
+        _.isEqual(counts_by_dept_code[counts.subject_id], counts)
       )
       .value();
 

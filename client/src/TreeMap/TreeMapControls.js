@@ -1,12 +1,9 @@
-import './TreeMap.scss';
-import {
-  run_template,
-} from '../models/text.js';
-import treemap_text from './TreeMap.yaml';
-import { create_text_maker } from '../models/text.js';
-import { Fragment } from 'react';
-import classNames from 'classnames';
-
+import "./TreeMap.scss";
+import { run_template } from "../models/text.js";
+import treemap_text from "./TreeMap.yaml";
+import { create_text_maker } from "../models/text.js";
+import { Fragment } from "react";
+import classNames from "classnames";
 
 const text_maker = create_text_maker([treemap_text]);
 
@@ -40,19 +37,19 @@ const year_to_year_changes = {
 };
 
 const year_changes = {
-  "drf": all_year_changes,
-  "drf_ftes": all_year_changes,
-  "tp": all_year_changes,
-  "vote_stat": all_year_changes.slice(0, 4),
-  "so": all_year_changes.slice(2, 4),
+  drf: all_year_changes,
+  drf_ftes: all_year_changes,
+  tp: all_year_changes,
+  vote_stat: all_year_changes.slice(0, 4),
+  so: all_year_changes.slice(2, 4),
 };
 
 const years = {
-  "drf": all_years,
-  "drf_ftes": all_years,
-  "tp": all_years.slice(0, 5),
-  "vote_stat": all_years.slice(0, 5),
-  "so": all_years.slice(2, 5),
+  drf: all_years,
+  drf_ftes: all_years,
+  tp: all_years.slice(0, 5),
+  vote_stat: all_years.slice(0, 5),
+  so: all_years.slice(2, 5),
 };
 
 const size_controls = [
@@ -85,7 +82,6 @@ const vs_type_controls = [
   { id: "999", display: text_maker("treemap_vstype999") },
 ];
 
-
 const so_type_controls = [
   { id: "All", display: text_maker("all") },
   { id: "1", display: text_maker("op_spending") },
@@ -101,38 +97,41 @@ function create_new_path(cur_params, new_param, new_val) {
   let new_color_var = cur_params.color_var;
   let new_filter_var = cur_params.filter_var;
   let new_year = cur_params.year;
-  let new_get_changes = cur_params.get_changes || '';
-  switch(new_param){
-    case("perspective"):
+  let new_get_changes = cur_params.get_changes || "";
+  switch (new_param) {
+    case "perspective":
       new_perspective = new_val;
       new_filter_var = "All";
-      if(new_val === "drf_ftes") new_color_var = "ftes";
-      if(new_val !== "drf" && new_val !== "drf_ftes") new_color_var = "spending";
+      if (new_val === "drf_ftes") new_color_var = "ftes";
+      if (new_val !== "drf" && new_val !== "drf_ftes")
+        new_color_var = "spending";
       break;
-    case("color_var"):
-      new_color_var = new_val; break;
-    case("filter_var"):
-      new_filter_var = new_val; break;
-    case("year"):
-      new_year = new_val; break;
-    case("get_changes"):
-      new_val ? new_get_changes = new_val : new_get_changes = '';
-      new_val ? new_year = year_to_year_changes[cur_params.year] : new_year = cur_params.year.split(":")[0];
+    case "color_var":
+      new_color_var = new_val;
+      break;
+    case "filter_var":
+      new_filter_var = new_val;
+      break;
+    case "year":
+      new_year = new_val;
+      break;
+    case "get_changes":
+      new_val ? (new_get_changes = new_val) : (new_get_changes = "");
+      new_val
+        ? (new_year = year_to_year_changes[cur_params.year])
+        : (new_year = cur_params.year.split(":")[0]);
       break;
   }
   const new_path = `/treemap/${new_perspective}/${new_color_var}/${new_filter_var}/${new_year}/${new_get_changes}`;
   return new_path;
 }
 
-
-
-
 export class TreeMapControls extends React.Component {
   constructor() {
     super();
   }
 
-  handle_click(key, value){
+  handle_click(key, value) {
     const {
       perspective,
       color_var,
@@ -142,7 +141,11 @@ export class TreeMapControls extends React.Component {
       location,
       history,
     } = this.props;
-    const new_path = create_new_path({perspective,color_var, year,get_changes, filter_var}, key, value);
+    const new_path = create_new_path(
+      { perspective, color_var, year, get_changes, filter_var },
+      key,
+      value
+    );
     if (location.pathname !== new_path) {
       history.push(new_path);
     }
@@ -161,8 +164,14 @@ export class TreeMapControls extends React.Component {
         <TreeMapLabeledBox label={text_maker("treemap_display_value_label")}>
           <div className="cent">
             <TreeMapRadioButtons
-              options={_.map(size_controls, ({ id, display }) => ({ id, display, active: id === perspective }))}
-              onChange={id => {this.handle_click("perspective",id);}}
+              options={_.map(size_controls, ({ id, display }) => ({
+                id,
+                display,
+                active: id === perspective,
+              }))}
+              onChange={(id) => {
+                this.handle_click("perspective", id);
+              }}
             />
           </div>
         </TreeMapLabeledBox>
@@ -181,71 +190,104 @@ export class TreeMapControls extends React.Component {
                   display: text_maker("year_changes"),
                 },
               ]}
-              onChange={id => {this.handle_click("get_changes",id==="year_changes");}}
+              onChange={(id) => {
+                this.handle_click("get_changes", id === "year_changes");
+              }}
             />
           </div>
         </TreeMapLabeledBox>
         <TreeMapLabeledBox label={text_maker("year")}>
           <div className="cent">
             <TreeMapRadioButtons
-              options={get_changes ?
-                _.map(year_changes[perspective], (id => ({ 
-                  id, 
-                  display: `${run_template("{{" + id.split(":")[0] + "}}")} ${text_maker("to")} ${run_template("{{" + id.split(":")[1] + "}}")}`,
-                  active: id === year,
-                }))) :
-                _.map(years[perspective], (id => ({
-                  id,
-                  display: run_template("{{" + id + "}}"),
-                  active: id === year,
-                })))
+              options={
+                get_changes
+                  ? _.map(year_changes[perspective], (id) => ({
+                      id,
+                      display: `${run_template(
+                        "{{" + id.split(":")[0] + "}}"
+                      )} ${text_maker("to")} ${run_template(
+                        "{{" + id.split(":")[1] + "}}"
+                      )}`,
+                      active: id === year,
+                    }))
+                  : _.map(years[perspective], (id) => ({
+                      id,
+                      display: run_template("{{" + id + "}}"),
+                      active: id === year,
+                    }))
               }
-              onChange={id => {this.handle_click("year",id);}}
+              onChange={(id) => {
+                this.handle_click("year", id);
+              }}
             />
           </div>
         </TreeMapLabeledBox>
-        {perspective === "tp" &&
+        {perspective === "tp" && (
           <TreeMapLabeledBox label={text_maker("treemap_gc_type_filter")}>
             <div className="cent">
               <TreeMapRadioButtons
-                options={_.map(gc_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
-                onChange={id => {this.handle_click("filter_var",id);}}
+                options={_.map(gc_type_controls, ({ id, display }) => ({
+                  id,
+                  display,
+                  active: (!filter_var && id === "All") || id === filter_var,
+                }))}
+                onChange={(id) => {
+                  this.handle_click("filter_var", id);
+                }}
               />
             </div>
           </TreeMapLabeledBox>
-        }
-        {(perspective === "drf" || perspective === "drf_ftes" ) &&
+        )}
+        {(perspective === "drf" || perspective === "drf_ftes") && (
           <TreeMapLabeledBox label={text_maker("treemap_color_by_label")}>
             <div className="cent">
               <TreeMapRadioButtons
-                options={_.map(color_controls, ({ id, display }) => ({ id, display, active: id === color_var }))}
-                onChange={id => {this.handle_click("color_var",id);}}
+                options={_.map(color_controls, ({ id, display }) => ({
+                  id,
+                  display,
+                  active: id === color_var,
+                }))}
+                onChange={(id) => {
+                  this.handle_click("color_var", id);
+                }}
               />
             </div>
           </TreeMapLabeledBox>
-        }
-        {perspective === "vote_stat" &&
+        )}
+        {perspective === "vote_stat" && (
           <TreeMapLabeledBox label={text_maker("treemap_vstype_filter")}>
             <div className="cent">
               <Fragment>
                 <TreeMapRadioButtons
-                  options={_.map(vs_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
-                  onChange={id => {this.handle_click("filter_var",id);}}
+                  options={_.map(vs_type_controls, ({ id, display }) => ({
+                    id,
+                    display,
+                    active: (!filter_var && id === "All") || id === filter_var,
+                  }))}
+                  onChange={(id) => {
+                    this.handle_click("filter_var", id);
+                  }}
                 />
               </Fragment>
             </div>
           </TreeMapLabeledBox>
-        }
-        {perspective === "so" &&
+        )}
+        {perspective === "so" && (
           <TreeMapLabeledBox label={text_maker("treemap_so_filter")}>
             <div className="cent">
               <TreeMapRadioButtons
-                options={_.map(so_type_controls, ({ id, display }) => ({ id, display, active: (!filter_var && id === "All") || id === filter_var }))}
-                onChange={id => {this.handle_click("filter_var",id);}}
+                options={_.map(so_type_controls, ({ id, display }) => ({
+                  id,
+                  display,
+                  active: (!filter_var && id === "All") || id === filter_var,
+                }))}
+                onChange={(id) => {
+                  this.handle_click("filter_var", id);
+                }}
               />
             </div>
           </TreeMapLabeledBox>
-        }
+        )}
       </div>
     );
   }
@@ -253,36 +295,35 @@ export class TreeMapControls extends React.Component {
 
 class TreeMapLabeledBox extends React.Component {
   render() {
-    const {
-      label,
-      children,
-    } = this.props;
+    const { label, children } = this.props;
 
     return (
       <div className="treemap-labeled-box">
-        <div className='treemap-labeled-box-label '>
-          <div className='treemap-labeled-box-label-text '>
-            {label}
-          </div>
+        <div className="treemap-labeled-box-label ">
+          <div className="treemap-labeled-box-label-text ">{label}</div>
         </div>
-        <div className="treemap-labeled-box-content">
-          {children}
-        </div>
+        <div className="treemap-labeled-box-content">{children}</div>
       </div>
     );
   }
 }
 
-
-const TreeMapRadioButtons = ({ options, onChange }) => <div className="treemap-options">
-  {options.map(({ display, id, active }) =>
-    <button
-      key={id}
-      aria-pressed={!!active}
-      className={classNames("treemap-options__option", active && "treemap-options__option--active")}
-      onClick={() => { onChange(id); }}
-    >
-      {display}
-    </button>
-  )}
-</div>;
+const TreeMapRadioButtons = ({ options, onChange }) => (
+  <div className="treemap-options">
+    {options.map(({ display, id, active }) => (
+      <button
+        key={id}
+        aria-pressed={!!active}
+        className={classNames(
+          "treemap-options__option",
+          active && "treemap-options__option--active"
+        )}
+        onClick={() => {
+          onChange(id);
+        }}
+      >
+        {display}
+      </button>
+    ))}
+  </div>
+);

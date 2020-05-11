@@ -1,6 +1,6 @@
-import './CardLeftImage.scss';
+import "./CardLeftImage.scss";
 
-import { TM } from './TextMaker.js';
+import { TM } from "./TextMaker.js";
 
 const CardLeftImage = ({
   img_src,
@@ -13,15 +13,15 @@ const CardLeftImage = ({
 }) => (
   <a className="link-unstyled" href={link_href}>
     <div className="left-img-card">
-      { img_src &&
+      {img_src && (
         <div className="left-img-card__left">
           <img
             aria-hidden="true"
             src={img_src}
-            className="left-img-card__img" 
+            className="left-img-card__img"
           />
         </div>
-      }
+      )}
       <div className="left-img-card__right-container">
         <div className="left-img-card__right">
           <div className="left-img-card__title">
@@ -30,13 +30,13 @@ const CardLeftImage = ({
           <div className="left-img-card__text">
             <TM k={text_key} tmf={tmf} args={text_args} />
           </div>
-          { button_text_key &&
-              <div className="left-img-card__bottom-right">
-                <div tabIndex={0} className="left-img-card__badge">
-                  <TM k={button_text_key} tmf={tmf} args={text_args} />
-                </div>
+          {button_text_key && (
+            <div className="left-img-card__bottom-right">
+              <div tabIndex={0} className="left-img-card__badge">
+                <TM k={button_text_key} tmf={tmf} args={text_args} />
               </div>
-          }
+            </div>
+          )}
         </div>
       </div>
     </div>

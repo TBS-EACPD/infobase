@@ -1,4 +1,1 @@
-export const budget_years = [
-  "2018",
-  "2019",
-];
+export const budget_years = ["2018", "2019"];

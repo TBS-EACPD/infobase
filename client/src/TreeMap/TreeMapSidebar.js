@@ -1,6 +1,5 @@
-import './TreeMap.scss';
-import { TreeMapControls } from './TreeMapControls.js';
-
+import "./TreeMap.scss";
+import { TreeMapControls } from "./TreeMapControls.js";
 
 export class TreeMapSidebar extends React.Component {
   constructor() {
@@ -20,12 +19,12 @@ export class TreeMapSidebar extends React.Component {
       <div>
         <div className="TreeMap_SideBar__Text">
           <TreeMapControls
-            perspective={ perspective }
-            color_var={ color_var }
-            year={ year }
-            filter_var={ filter_var }
-            get_changes={ get_changes }
-            location={ location }
+            perspective={perspective}
+            color_var={color_var}
+            year={year}
+            filter_var={filter_var}
+            get_changes={get_changes}
+            location={location}
             history={history}
           />
         </div>
