@@ -45,7 +45,7 @@ class GranularView extends React.Component {
             <div className='col-md-6'>
               <fieldset className="rpb-config-item col-selection simple">
                 <legend className="rpb-config-header"><TextMaker text_key="select_columns" /></legend>
-                <GraphLegend 
+                <LegendList 
                   items={
                     _.map(all_data_columns, ({nick, fully_qualified_name}) => ({
                       id: nick,
