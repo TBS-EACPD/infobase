@@ -27,8 +27,8 @@ const scheme_order = [
 ];
 
 const tag_root_display = tag_root => <div>
-  <div> {tag_root.name} </div>
-  <div className="small_panel_text"> {tag_root.description} </div>
+  <div>{tag_root.name}</div>
+  <div className="small_panel_text">{tag_root.description}</div>
 </div>;
 
 const tag_display = tag => ({
@@ -224,7 +224,7 @@ export const declare_related_tags_panel = () => declare_panel({
         display: tag_root_display(Tag.lookup(type)),
         children: _.map( tag_and_counts, ({ tag, count }) => ({
           href: infograph_href_template(tag),
-          display: <span>{tag.name} - {count} {Program.plural} <TM k="in_common" /></span>,
+          display: <span>{`${tag.name} - ${count} ${Program.plural} ${text_maker("in_common")}`}</span>,
         })),
       }));
   

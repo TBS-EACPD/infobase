@@ -198,7 +198,7 @@ const QuadrantDefList = ({defs} ) => (
       { 
         defs.map( ({key,val}, ix) => (
           <div key={key} className="number-box">
-            <dt> {key} </dt>
+            <dt>{key}</dt>
             <dd> 
               <div>
                 {val} 
@@ -364,7 +364,7 @@ const StatusDisplay = ({
 }) => (
   <div>
     <span className="nowrap">
-      <span style={{paddingRight: "5px"}}> { status_icons[status_key] } </span>
+      <span style={{paddingRight: "5px"}}>{ status_icons[status_key] }</span>
       <TM
         k="result_status_with_gl"
         args={{

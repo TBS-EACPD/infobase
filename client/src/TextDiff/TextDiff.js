@@ -186,7 +186,7 @@ const difference_report = (diff, key) => {
   return (
     <Fragment>
       <div className="text-diff__indicator-report__subheader" >
-        <h4> { text_maker(key) } </h4>
+        <h4>{ text_maker(key) }</h4>
       </div>
       <MediaQuery minWidth={992}>
         <div className={classNames("row", "text-diff__indicator-report__row")}>

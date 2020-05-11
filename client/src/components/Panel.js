@@ -99,7 +99,7 @@ export class Panel extends React.Component{
                 </span>
               </button>
             }
-            { title && <h3 className="panel-title"> {title} </h3> }
+            { title && <h3 className="panel-title">{title}</h3> }
             { isOpen && otherHeaderContent }
           </header>
         }

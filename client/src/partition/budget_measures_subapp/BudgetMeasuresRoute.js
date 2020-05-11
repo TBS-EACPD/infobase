@@ -203,7 +203,7 @@ export default class BudgetMeasuresRoute extends React.Component {
                         {
                           _.map(
                             footnotes_by_year[year_value],
-                            (footnote, ix) => <li key={ix}> {footnote} </li>
+                            (footnote, ix) => <li key={ix}>{footnote}</li>
                           )
                         }
                       </ul>

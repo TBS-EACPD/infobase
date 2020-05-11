@@ -57,8 +57,8 @@ export class A11yTable extends React.PureComponent {
                 </th>
                 {
                   _.isArray(data) ? 
-                  _.map(data, (d,j) => <td key={j}> {d} </td> ) :
-                  <td> {data} </td>
+                  _.map(data, (d,j) => <td key={j}>{d}</td> ) :
+                  <td>{data}</td>
                 }
               </tr>
             )}

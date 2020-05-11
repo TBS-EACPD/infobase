@@ -142,7 +142,7 @@ export const ResultNodeContent = ({
         <ul>
           {_.map(contributing_programs, prog => 
             <li key={prog.id}>
-              <a href={infograph_href_template(prog)}> { prog.name } </a>
+              <a href={infograph_href_template(prog)}>{ prog.name }</a>
             </li>
           )}
         </ul>

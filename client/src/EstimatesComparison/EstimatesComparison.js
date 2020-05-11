@@ -121,7 +121,7 @@ const DetailedAmountsByDoc = ({amounts_by_doc}) => {
         <tbody>
           {_.map(sorted_items, ({ doc_code, amount_last_year, amount_this_year }) => 
             <tr key={doc_code}>
-              <td> {estimates_docs[doc_code][lang]} </td>
+              <td>{estimates_docs[doc_code][lang]}</td>
               <td> 
                 {
                   amount_last_year && 

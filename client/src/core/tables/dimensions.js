@@ -70,7 +70,7 @@ const make_horizontal_func = function(func,table){
     //    horizontal = make_horizontal_func(dimension_func, standard_object_table ) 
     //  
     //    horizontal("last_year_column",true,true ) 
-    //    -> {
+    //    ->{
     //        "personnel" :  {
     //            org1 : val,
     //            org2 : val,

@@ -50,8 +50,8 @@ const ReportDetails = ({
           <tbody>
             {_.map(def_ready_columns, ({name, def}) => 
               <tr key={name}> 
-                <td> {name} </td>
-                <td> {def} </td>
+                <td>{name}</td>
+                <td>{def}</td>
               </tr>
             )}
           </tbody>

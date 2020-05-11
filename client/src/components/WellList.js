@@ -35,7 +35,7 @@ const WellList = ({ elements }) => <div>
                 >
                   {display}
                 </a> :
-                <span> {display} </span>
+                <span>{display}</span>
                 }
               </li>
             )}

@@ -74,7 +74,7 @@ const estimates_split_render_w_text_key = text_key => ({calculations, footnotes,
       <NivoResponsiveBar
         data = {estimate_data}
         keys = {keys}
-        label_format = { d => <tspan y={ -4 }> {formats.compact2_raw(d)} </tspan>}
+        label_format = { d => <tspan y={ -4 }>{formats.compact2_raw(d)}</tspan>}
         isInteractive = {false}
         enableLabel = {true}
         indexBy = "label"

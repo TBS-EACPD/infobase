@@ -72,7 +72,7 @@ export class CheckBox extends React.Component{
             > 
               { label }
             </span> :
-            <span style={label_style}> { label } </span>
+            <span style={label_style}>{ label }</span>
           }
         </div>
       );

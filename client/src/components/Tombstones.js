@@ -29,8 +29,8 @@ const LabeledTombstone = ({labels_and_items}) => (
         labels_and_items,
         ([label, item], ix) => (
           <Fragment key={ix}>
-            <dt> {label} </dt>
-            <dd> {item} </dd>
+            <dt>{label}</dt>
+            <dd>{item}</dd>
           </Fragment>
         )
       )

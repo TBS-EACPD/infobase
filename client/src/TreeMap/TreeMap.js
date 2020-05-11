@@ -437,7 +437,7 @@ export default class TreeMapper extends React.Component {
           <SpinnerWrapper ref="spinner" config_name={"route"} /> :
           <div>
             <div className="TreeMap__Wrapper">
-              <h1> {text_maker("treemap_title")} </h1>
+              <h1>{text_maker("treemap_title")}</h1>
               <button className="TreeMap__SkipLink button-unstyled a11y-version-link" tabIndex="0" onClick={skip}>{text_maker("skip_to_main_content")}</button>
               <TreeMapInstructions />
               {actual_to_planned_gap_year && <GapYearWarning />}

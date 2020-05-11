@@ -717,7 +717,7 @@ const WelcomeMat = (props) => {
 };
 
 const MobileOrA11YContent = ({ children }) => [
-  <div key="x" className="sr-only"> {children} </div>,
+  <div key="x" className="sr-only">{children}</div>,
   <PaneItem key="y" hide_lg textSize="large">
     {children}
   </PaneItem>,
