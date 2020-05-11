@@ -26,9 +26,8 @@ export {
 
 export {
   declare_historical_g_and_c_panel,
-  declare_last_year_g_and_c_perspective_panel,
-} from //declare_tp_by_region_panel,
-"./transfer_payments/index.js";
+  declare_last_year_g_and_c_perspective_panel, //declare_tp_by_region_panel,
+} from "./transfer_payments/index.js";
 
 export {
   declare_estimates_in_perspective_panel,

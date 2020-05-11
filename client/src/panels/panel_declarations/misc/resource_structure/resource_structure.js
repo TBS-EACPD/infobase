@@ -65,15 +65,17 @@ const get_non_col_content = ({ node }) => {
           ))}
         </dl>
       )}
-      {//only tags with programs (i.e. not tags that are just group of tags) have infographics
-      (_.includes(["program", "dept", "crso"], subject.level) ||
-        (subject.level === "tag" && !_.isEmpty(subject.programs))) && (
-        <div className="ExplorerNode__BRLinkContainer">
-          <a href={infograph_href_template(subject)}>
-            <TM k="see_infographic" />
-          </a>
-        </div>
-      )}
+      {
+        //only tags with programs (i.e. not tags that are just group of tags) have infographics
+        (_.includes(["program", "dept", "crso"], subject.level) ||
+          (subject.level === "tag" && !_.isEmpty(subject.programs))) && (
+          <div className="ExplorerNode__BRLinkContainer">
+            <a href={infograph_href_template(subject)}>
+              <TM k="see_infographic" />
+            </a>
+          </div>
+        )
+      }
     </div>
   );
 };
