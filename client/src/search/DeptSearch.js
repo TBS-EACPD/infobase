@@ -1,13 +1,10 @@
-import { withRouter } from 'react-router';
+import { withRouter } from "react-router";
 
-import { BaseTypeahead } from './BaseTypeahead.js';
-import {
-  make_orgs_search_config,
-  all_dp_orgs,
-} from './search_configs.js';
+import { BaseTypeahead } from "./BaseTypeahead.js";
+import { make_orgs_search_config, all_dp_orgs } from "./search_configs.js";
 
 class DeptSearchWithoutRouter extends React.Component {
-  render(){
+  render() {
     const {
       include_orgs_without_data,
       only_include_dp,
@@ -16,33 +13,32 @@ class DeptSearchWithoutRouter extends React.Component {
       onNewQuery,
       placeholder,
     } = this.props;
-  
+
     let { onSelect } = this.props;
-    
-    if(!onSelect && href_template && history){
-      onSelect = item => { 
-        history.push( href_template(item) );
+
+    if (!onSelect && href_template && history) {
+      onSelect = (item) => {
+        history.push(href_template(item));
       };
     }
-  
-    const search_config = only_include_dp ?
-      all_dp_orgs :
-      make_orgs_search_config({
-        orgs_to_include: !include_orgs_without_data ? "all" : "with_data",
-      });
-    
-    return <BaseTypeahead
-      onNewQuery = { onNewQuery }
-      placeholder = { placeholder }
-      search_configs = {[ search_config ]}
-      onSelect = { onSelect }
-    />;
+
+    const search_config = only_include_dp
+      ? all_dp_orgs
+      : make_orgs_search_config({
+          orgs_to_include: !include_orgs_without_data ? "all" : "with_data",
+        });
+
+    return (
+      <BaseTypeahead
+        onNewQuery={onNewQuery}
+        placeholder={placeholder}
+        search_configs={[search_config]}
+        onSelect={onSelect}
+      />
+    );
   }
 }
 
 const DeptSearch = withRouter(DeptSearchWithoutRouter);
 
-export { 
-  DeptSearch,
-  DeptSearchWithoutRouter,
-};
+export { DeptSearch, DeptSearchWithoutRouter };

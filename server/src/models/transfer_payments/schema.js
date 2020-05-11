@@ -1,5 +1,5 @@
-import _ from 'lodash';
-import { en_fr } from '../schema_utils';
+import _ from "lodash";
+import { en_fr } from "../schema_utils";
 
 const schema = `
   extend type Org {
@@ -30,40 +30,39 @@ const schema = `
   
 `;
 
-export default function({models}){
-
+export default function ({ models }) {
   const { TransferPayments } = models;
 
   const resolvers = {
     TransferPaymentsData: {
-      data(org, { year } ){
+      data(org, { year }) {
         let data = TransferPayments.get_flat_records(org.dept_code);
 
-        if(year){ 
+        if (year) {
           data = _.chain(data)
-            .filter({year})
-            .filter( record => record.auth && record.exp )
+            .filter({ year })
+            .filter((record) => record.auth && record.exp)
             .value();
         }
-         
+
         return data;
       },
-      top_n_with_other(org, { n, year }){
+      top_n_with_other(org, { n, year }) {
         return TransferPayments.get_top_n(org.dept_code, year, n);
       },
-      collapsed(org, { year }){
+      collapsed(org, { year }) {
         let data = TransferPayments.get_flat_records(org.dept_code);
 
-        if(year){ 
-          data = _.filter(data, {year});
+        if (year) {
+          data = _.filter(data, { year });
         }
 
         return _.chain(data)
-          .groupBy(record => `${record.type}-${record.year}`)
-          .map( (group)=> ({
+          .groupBy((record) => `${record.type}-${record.year}`)
+          .map((group) => ({
             type: group[0].type,
             year: group[0].year,
-            exp: _.sumBy(group, 'exp'),
+            exp: _.sumBy(group, "exp"),
             auth: _.sumBy(group, "auth"),
           }))
           .value();
@@ -72,12 +71,11 @@ export default function({models}){
     Org: {
       transfer_payments_data: _.identity,
     },
-    TransferPaymentsRecord: { name: en_fr("name_en","name_fr") },
+    TransferPaymentsRecord: { name: en_fr("name_en", "name_fr") },
   };
 
   return {
     schema,
     resolvers,
   };
-
 }

@@ -1,6 +1,6 @@
-import text from './gov_dp.yaml';
+import text from "./gov_dp.yaml";
 
-import { Fragment } from 'react';
+import { Fragment } from "react";
 
 import {
   Subject,
@@ -16,27 +16,37 @@ import {
   current_dp_key,
   result_docs,
   link_to_results_infograph,
-} from './results_common.js';
-import { LateDepartmentsBanner } from './result_components.js';
-import { DisplayTable, default_dept_name_sort_func } from '../../../components';
+} from "./results_common.js";
+import { LateDepartmentsBanner } from "./result_components.js";
+import { DisplayTable, default_dept_name_sort_func } from "../../../components";
 
 const { Dept } = Subject;
 const { text_maker, TM } = create_text_maker_component(text);
 
 const current_dp_year = result_docs[current_dp_key].year;
-const current_dp_corresponding_drr_year = _.toNumber(result_docs[current_dp_key].year_short) + 1;
+const current_dp_corresponding_drr_year =
+  _.toNumber(result_docs[current_dp_key].year_short) + 1;
 
-
-const DpSummary = ({counts, rows_of_counts_by_dept, column_configs, late_dept_count}) => {
-  const current_dp_counts_with_generic_keys = filter_and_genericize_doc_counts(counts, current_dp_key);
+const DpSummary = ({
+  counts,
+  rows_of_counts_by_dept,
+  column_configs,
+  late_dept_count,
+}) => {
+  const current_dp_counts_with_generic_keys = filter_and_genericize_doc_counts(
+    counts,
+    current_dp_key
+  );
   return (
     <Fragment>
       <div className="fcol-md-12 medium_panel_text">
-        { late_dept_count > 0 && <LateDepartmentsBanner late_dept_count={late_dept_count} /> }
-        <TM 
+        {late_dept_count > 0 && (
+          <LateDepartmentsBanner late_dept_count={late_dept_count} />
+        )}
+        <TM
           k="gov_dp_text"
           args={{
-            ...current_dp_counts_with_generic_keys, 
+            ...current_dp_counts_with_generic_keys,
             depts_with_dps: rows_of_counts_by_dept.length,
             year: current_dp_year,
             drr_tabling_year: current_dp_corresponding_drr_year,
@@ -54,81 +64,97 @@ const DpSummary = ({counts, rows_of_counts_by_dept, column_configs, late_dept_co
   );
 };
 
-export const declare_gov_dp_panel = () => declare_panel({
-  panel_key: "gov_dp",
-  levels: ["gov"],
-  panel_config_func: (level, panel_key) => ({
-    requires_result_counts: true,
-    calculate: () => {      
-      const dept_counts = _.filter(ResultCounts.get_all_dept_counts(), row => row[`${current_dp_key}_results`] > 0 );
+export const declare_gov_dp_panel = () =>
+  declare_panel({
+    panel_key: "gov_dp",
+    levels: ["gov"],
+    panel_config_func: (level, panel_key) => ({
+      requires_result_counts: true,
+      calculate: () => {
+        const dept_counts = _.filter(
+          ResultCounts.get_all_dept_counts(),
+          (row) => row[`${current_dp_key}_results`] > 0
+        );
 
-      const subj_map = _.chain(dept_counts)
-        .map(row => [ row.id, link_to_results_infograph(Dept.lookup(row.id)) ])
-        .fromPairs()
-        .value();
+        const subj_map = _.chain(dept_counts)
+          .map((row) => [
+            row.id,
+            link_to_results_infograph(Dept.lookup(row.id)),
+          ])
+          .fromPairs()
+          .value();
 
-      const rows_of_counts_by_dept = _.map(dept_counts, row => ({
-        subject_name: row.id,
-        [`${current_dp_key}_results`]: row[`${current_dp_key}_results`],
-        [`${current_dp_key}_indicators`]: row[`${current_dp_key}_indicators`],
-      }));
-      const column_configs = {
-        subject_name: {
-          index: 0,
-          header: text_maker("org"),
-          is_searchable: true,
-          formatter: (value) => subj_map[value] ? <a href={subj_map[value]}> {Dept.lookup(value).name} </a> : value,
-          sort_func: (a, b) => default_dept_name_sort_func(a, b),
-          search_formatter: (value) => value ? Dept.lookup(value).name : value,
-        },
-        [`${current_dp_key}_results`]: {
-          index: 1,
-          header: text_maker("results"),
-          is_summable: true,
-          formatter: "big_int",
-        },
-        [`${current_dp_key}_indicators`]: {
-          index: 2,
-          header: text_maker("indicators"),
-          is_summable: true,
-          formatter: "big_int",
-        },
-      };
-      const late_dept_count = result_docs[current_dp_key].late_results_orgs.length;
+        const rows_of_counts_by_dept = _.map(dept_counts, (row) => ({
+          subject_name: row.id,
+          [`${current_dp_key}_results`]: row[`${current_dp_key}_results`],
+          [`${current_dp_key}_indicators`]: row[`${current_dp_key}_indicators`],
+        }));
+        const column_configs = {
+          subject_name: {
+            index: 0,
+            header: text_maker("org"),
+            is_searchable: true,
+            formatter: (value) =>
+              subj_map[value] ? (
+                <a href={subj_map[value]}> {Dept.lookup(value).name} </a>
+              ) : (
+                value
+              ),
+            sort_func: (a, b) => default_dept_name_sort_func(a, b),
+            search_formatter: (value) =>
+              value ? Dept.lookup(value).name : value,
+          },
+          [`${current_dp_key}_results`]: {
+            index: 1,
+            header: text_maker("results"),
+            is_summable: true,
+            formatter: "big_int",
+          },
+          [`${current_dp_key}_indicators`]: {
+            index: 2,
+            header: text_maker("indicators"),
+            is_summable: true,
+            formatter: "big_int",
+          },
+        };
+        const late_dept_count =
+          result_docs[current_dp_key].late_results_orgs.length;
 
-      return { 
-        column_configs,
-        rows_of_counts_by_dept,
-        late_dept_count,
-      };
-    },
-    footnotes: ["DP_RESULTS"],
-    source: (subject) => get_source_links(["DP"]),
-    render({ calculations, sources, footnotes}){
-      const {
-        panel_args: {
+        return {
+          column_configs,
           rows_of_counts_by_dept,
           late_dept_count,
-          column_configs,
-        },
-      } = calculations;
-      const counts = ResultCounts.get_gov_counts();
-  
-      return (
-        <InfographicPanel
-          title={text_maker("gov_dp_summary_title", {year: current_dp_year})}
-          sources={sources}
-          footnotes={footnotes}
-          allowOverflow
-        >
-          <DpSummary 
-            counts={counts}
-            rows_of_counts_by_dept={rows_of_counts_by_dept}
-            late_dept_count={late_dept_count}
-            column_configs={column_configs}
-          />
-        </InfographicPanel>
-      ); 
-    },
-  }),
-});
+        };
+      },
+      footnotes: ["DP_RESULTS"],
+      source: (subject) => get_source_links(["DP"]),
+      render({ calculations, sources, footnotes }) {
+        const {
+          panel_args: {
+            rows_of_counts_by_dept,
+            late_dept_count,
+            column_configs,
+          },
+        } = calculations;
+        const counts = ResultCounts.get_gov_counts();
+
+        return (
+          <InfographicPanel
+            title={text_maker("gov_dp_summary_title", {
+              year: current_dp_year,
+            })}
+            sources={sources}
+            footnotes={footnotes}
+            allowOverflow
+          >
+            <DpSummary
+              counts={counts}
+              rows_of_counts_by_dept={rows_of_counts_by_dept}
+              late_dept_count={late_dept_count}
+              column_configs={column_configs}
+            />
+          </InfographicPanel>
+        );
+      },
+    }),
+  });

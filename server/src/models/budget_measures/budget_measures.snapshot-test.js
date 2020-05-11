@@ -37,7 +37,6 @@ data {
 }
 `;
 
-
 const direct_budget_measure_query = `
 query{
   root(lang: "en") {
@@ -123,7 +122,6 @@ query{
   }
 }`;
 
-
 const has_budget_measures_queries = `
 query{
   root(lang: "en") {
@@ -150,8 +148,7 @@ query{
 
 const { execQuery } = global;
 
-describe("Budget measure data", function(){
-  
+describe("Budget measure data", function () {
   it("budget measure snapshot: direct measure query", async () => {
     const data = await execQuery(direct_budget_measure_query, {});
     return expect(data).toMatchSnapshot();
@@ -181,11 +178,9 @@ describe("Budget measure data", function(){
     const data = await execQuery(program_budget_measure_query, {});
     return expect(data).toMatchSnapshot();
   });
-  
 
   it("subject has budget measure snapshots", async () => {
     const data = await execQuery(has_budget_measures_queries, {});
     return expect(data).toMatchSnapshot();
   });
-
 });

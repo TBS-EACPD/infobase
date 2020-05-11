@@ -1,11 +1,9 @@
-import text from './TreeMap.yaml';
-import { create_text_maker } from '../models/text.js';
+import text from "./TreeMap.yaml";
+import { create_text_maker } from "../models/text.js";
 import classNames from "classnames";
-import { smaller_items_text } from './data.js';
-
+import { smaller_items_text } from "./data.js";
 
 const text_maker = create_text_maker(text);
-
 
 export class TreeMap extends React.Component {
   constructor(props) {
@@ -13,7 +11,7 @@ export class TreeMap extends React.Component {
     this.state = { org_route: [...props.org_route] };
   }
   render() {
-    return <div ref={div => this.el = div} />;
+    return <div ref={(div) => (this.el = div)} />;
   }
   _update() {
     this._imperative_render();
@@ -31,11 +29,14 @@ export class TreeMap extends React.Component {
     if (
       this.props.perspective !== nextProps.perspective ||
       this.props.year !== nextProps.year ||
-      this.props.filter_var !== nextProps.filter_var) {
+      this.props.filter_var !== nextProps.filter_var
+    ) {
       return true;
     }
-    if (!_.isEqual(this.state.org_route, nextProps.org_route) &&
-      nextProps.org_route.length < this.state.org_route.length) {
+    if (
+      !_.isEqual(this.state.org_route, nextProps.org_route) &&
+      nextProps.org_route.length < this.state.org_route.length
+    ) {
       return true; // only override with zoomed out view
     }
     return false;
@@ -52,10 +53,11 @@ export class TreeMap extends React.Component {
       viz_height,
     } = this.props;
 
-    const org_route = (!_.isEqual(this.state.org_route, this.props.org_route) &&
-      this.props.org_route.length < this.state.org_route.length) ?
-      this.props.org_route :
-      this.state.org_route;
+    const org_route =
+      !_.isEqual(this.state.org_route, this.props.org_route) &&
+      this.props.org_route.length < this.state.org_route.length
+        ? this.props.org_route
+        : this.state.org_route;
 
     const el = this.el;
     if (data.length == 0) {
@@ -75,24 +77,20 @@ export class TreeMap extends React.Component {
     </div>`;
     }
 
-    const html_root = d3.select(el).select('div');
+    const html_root = d3.select(el).select("div");
 
     // the actual treemap div
-    const viz_root = html_root.select('.viz-root');
+    const viz_root = html_root.select(".viz-root");
 
     const width = viz_root.node().offsetWidth;
     let height = viz_height;
 
-
     // sets x and y scale to determine size of visible boxes
-    const x = d3.scaleLinear()
-      .domain([0, width])
-      .range([0, width]);
-    const y = d3.scaleLinear()
-      .domain([0, height])
-      .range([0, height]);
+    const x = d3.scaleLinear().domain([0, width]).range([0, width]);
+    const y = d3.scaleLinear().domain([0, height]).range([0, height]);
 
-    const treemap = d3.treemap()
+    const treemap = d3
+      .treemap()
       .tile(d3.treemapSquarify.ratio(1))
       .round(true)
       .size([width, height]);
@@ -106,7 +104,10 @@ export class TreeMap extends React.Component {
       const route_length = org_route.length;
       for (let i = 0; i < route_length; i++) {
         const next_name = org_route[i];
-        const next_item = _.filter(data_root.children, d => d.name === next_name);
+        const next_item = _.filter(
+          data_root.children,
+          (d) => d.name === next_name
+        );
         if (!_.isEmpty(next_item)) {
           data_root = next_item[0];
         }
@@ -117,21 +118,25 @@ export class TreeMap extends React.Component {
 
     // set up the node values to be the size, and adjust for cases where the size != sum of children's sizes
     // this avoids having to call d3's sum()
-    root.each(d => { d.data.value2 = d.data.size; });
-    root.eachBefore(d => {
+    root.each((d) => {
+      d.data.value2 = d.data.size;
+    });
+    root.eachBefore((d) => {
       if (d.children && d.data.value2 !== _.sumBy(d.children, "data.value2")) {
         const difference = d.data.value2 - _.sumBy(d.children, "data.value2");
         const total_sum = _.sumBy(d.children, "data.value2");
-        _.each(d.children, child => {
+        _.each(d.children, (child) => {
           const frac_of_total = child.data.value2 / total_sum;
           child.data.value2 += difference * frac_of_total;
         });
       }
     });
-    root.each(d => { d.value = d.data.value2; });
+    root.each((d) => {
+      d.value = d.data.value2;
+    });
 
-    treemap(root
-      .sort((a, b) => {
+    treemap(
+      root.sort((a, b) => {
         if (a.data.name === smaller_items_text) {
           return 9999999;
         }
@@ -143,7 +148,7 @@ export class TreeMap extends React.Component {
     );
     // Draw the coloured rectangles
     function rectan(sel) {
-      sel.styles(d => ({
+      sel.styles((d) => ({
         left: `${x(d.x0)}px`,
         top: `${y(d.y0)}px`,
         width: `${x(d.x1) - x(d.x0)}px`,
@@ -154,29 +159,24 @@ export class TreeMap extends React.Component {
 
     // Draw the invisible text rectangles
     function treemap_node_content_container(sel) {
-      sel
-        .styles(d => ({
-          left: `${x(d.x0)}px`,
-          top: `${y(d.y0)}px`,
-          width: `${x(d.x1) - x(d.x0)}px`,
-          height: `${y(d.y1) - y(d.y0)}px`,
-        }));
+      sel.styles((d) => ({
+        left: `${x(d.x0)}px`,
+        top: `${y(d.y0)}px`,
+        width: `${x(d.x1) - x(d.x0)}px`,
+        height: `${y(d.y1) - y(d.y0)}px`,
+      }));
     }
 
-    const display = d => {
-      const main_group = viz_root.insert('div')
-        .datum(d)
-        .attr('class', 'depth');
-      
+    const display = (d) => {
+      const main_group = viz_root.insert("div").datum(d).attr("class", "depth");
+
       function transition(d) {
         if (transitioning || !d) return;
         transitioning = true;
 
         // Remove all tooltips when transitioning
         // TODO: will this actually work? this is never set
-        d3.select(this)
-          .select('.TM_TooltipContainer')
-          .remove();
+        d3.select(this).select(".TM_TooltipContainer").remove();
 
         const zoomed_group = display(d);
         const main_trans = main_group.transition().duration(650);
@@ -186,29 +186,41 @@ export class TreeMap extends React.Component {
         y.domain([d.y0, d.y1]);
 
         // Hide overflow while transitioning
-        viz_root.style('overflow', "hidden");
+        viz_root.style("overflow", "hidden");
 
         // Draw child nodes on top of parent nodes.
-        viz_root.selectAll('.depth').sort((a, b) => a.depth - b.depth);
+        viz_root.selectAll(".depth").sort((a, b) => a.depth - b.depth);
 
         // Transition to the new view.
-        main_trans.selectAll('.TreeMap__Rectangle').call(rectan);
-        zoomed_trans.selectAll('.TreeMap__Rectangle').call(rectan);
+        main_trans.selectAll(".TreeMap__Rectangle").call(rectan);
+        zoomed_trans.selectAll(".TreeMap__Rectangle").call(rectan);
 
         // Remove text when transitioning, then display again
-        main_trans.selectAll('.TreeMapNode__ContentBox').style('display', 'none');
-        main_trans.selectAll('.TreeMapNode__ContentBoxContainer').call(treemap_node_content_container);
-        zoomed_trans.selectAll('.TreeMapNode__ContentBox').style('display', 'block');
-        zoomed_trans.selectAll('.TreeMapNode__ContentBoxContainer').call(treemap_node_content_container);
+        main_trans
+          .selectAll(".TreeMapNode__ContentBox")
+          .style("display", "none");
+        main_trans
+          .selectAll(".TreeMapNode__ContentBoxContainer")
+          .call(treemap_node_content_container);
+        zoomed_trans
+          .selectAll(".TreeMapNode__ContentBox")
+          .style("display", "block");
+        zoomed_trans
+          .selectAll(".TreeMapNode__ContentBoxContainer")
+          .call(treemap_node_content_container);
 
-        zoomed_trans.selectAll('.TreeMapNode__ContentBoxContainer').call(treemap_node_content_container); // TODO: why is this here?
+        zoomed_trans
+          .selectAll(".TreeMapNode__ContentBoxContainer")
+          .call(treemap_node_content_container); // TODO: why is this here?
 
         // Remove the old node when the transition is finished.
-        main_trans.on('end.remove', function () {
+        main_trans.on("end.remove", function () {
           this.remove();
           transitioning = false;
           viz_root.style("overflow", "visible");
-          zoomed_group.selectAll('.TreeMapNode__ContentBoxContainer').call(node_render);
+          zoomed_group
+            .selectAll(".TreeMapNode__ContentBoxContainer")
+            .call(node_render);
         });
       }
 
@@ -216,122 +228,135 @@ export class TreeMap extends React.Component {
         return;
       }
 
-
       main_group.html("");
-      const main = main_group.selectAll('.TreeMap__Division')
+      const main = main_group
+        .selectAll(".TreeMap__Division")
         .data(d.children)
         .enter()
-        .append('div');
+        .append("div");
 
       // add class and click handler to all divs with children
       if (!window.feature_detection.is_mobile()) {
         main
-          .filter(d => d.children)
-          .classed('TreeMap__Division', true)
-          .on('click', d => {
+          .filter((d) => d.children)
+          .classed("TreeMap__Division", true)
+          .on("click", (d) => {
             this.state.org_route.push(d.data.name);
             setRouteCallback(d.data.name, false);
             transition(d);
           })
-          .on('keydown', d => {
-            if (d3.event.keyCode != 13) { return; }
+          .on("keydown", (d) => {
+            if (d3.event.keyCode != 13) {
+              return;
+            }
             this.state.org_route.push(d.data.name);
             setRouteCallback(d.data.name, false);
             transition(d);
           });
       } else {
-        main
-          .filter(d => d.children)
-          .classed('TreeMap__Division', true);
+        main.filter((d) => d.children).classed("TreeMap__Division", true);
       }
 
-      main.selectAll('.TreeMap__Rectangle--is-child')
-        .data(d => d.children || [d])
+      main
+        .selectAll(".TreeMap__Rectangle--is-child")
+        .data((d) => d.children || [d])
         .enter()
-        .append('div')
-        .attr('class', 'TreeMap__Rectangle TreeMap__Rectangle--is-child')
+        .append("div")
+        .attr("class", "TreeMap__Rectangle TreeMap__Rectangle--is-child")
         .call(rectan);
 
-      main.append('div')
-        .attr('class', 'TreeMap__Rectangle TreeMap__Rectangle--is-parent')
+      main
+        .append("div")
+        .attr("class", "TreeMap__Rectangle TreeMap__Rectangle--is-parent")
         .call(rectan);
 
       if (!window.feature_detection.is_mobile()) {
-        main.append('div')
-          .attr('class', d => classNames('TreeMapNode__ContentBoxContainer', !_.isEmpty(d.children) && "TreeMapNode__ContentBoxContainer--has-children"))
+        main
+          .append("div")
+          .attr("class", (d) =>
+            classNames(
+              "TreeMapNode__ContentBoxContainer",
+              !_.isEmpty(d.children) &&
+                "TreeMapNode__ContentBoxContainer--has-children"
+            )
+          )
           .attr("tabindex", "0")
           .on("mouseenter focus", function (d) {
-            d3.select(this)
-              .selectAll('.TM_TooltipContainer')
-              .remove();
+            d3.select(this).selectAll(".TM_TooltipContainer").remove();
             setTimeout(() => {
-              d3.selectAll('.TM_TooltipContainer')
-                .remove();
-              var tool = d3.select(this).append("div")
+              d3.selectAll(".TM_TooltipContainer").remove();
+              var tool = d3
+                .select(this)
+                .append("div")
                 .attr("class", "TM_TooltipContainer")
                 .style("opacity", 0);
-              tool.transition()
-                .style("opacity", 1);
-              tool
-                .call(tooltip_render, year);
+              tool.transition().style("opacity", 1);
+              tool.call(tooltip_render, year);
             }, 300);
           })
           .on("mouseleave", function (d) {
-            d3.select(this)
-              .selectAll('.TM_TooltipContainer')
-              .remove();
+            d3.select(this).selectAll(".TM_TooltipContainer").remove();
           })
           .call(treemap_node_content_container);
       } else {
         const that = this;
-        main.append('div')
-          .attr('class', d => classNames('TreeMapNode__ContentBoxContainer', !_.isEmpty(d.children) && "TreeMapNode__ContentBoxContainer--has-children"))
+        main
+          .append("div")
+          .attr("class", (d) =>
+            classNames(
+              "TreeMapNode__ContentBoxContainer",
+              !_.isEmpty(d.children) &&
+                "TreeMapNode__ContentBoxContainer--has-children"
+            )
+          )
           .on("click", function (d) {
             if (d.toolTipped) {
-              d3.selectAll('.TM_TooltipContainer')
-                .remove();
-              d3.selectAll().classed("TreeMapNode__ContentBoxContainer--tapped", false);
+              d3.selectAll(".TM_TooltipContainer").remove();
+              d3.selectAll().classed(
+                "TreeMapNode__ContentBoxContainer--tapped",
+                false
+              );
               d.toolTipped = false;
-              if (d.children) { // do the transition
+              if (d.children) {
+                // do the transition
                 that.state.org_route.push(d.data.name);
                 setRouteCallback(d.data.name, false);
                 transition(d);
               }
             } else {
-              d3.selectAll('.TM_TooltipContainer')
-                .remove();
-              d3.selectAll('.TreeMapNode__ContentBoxContainer')
+              d3.selectAll(".TM_TooltipContainer").remove();
+              d3.selectAll(".TreeMapNode__ContentBoxContainer")
                 .classed("TreeMapNode__ContentBoxContainer--tapped", false)
                 .each(function (d) {
                   d.toolTipped = false;
                 });
-              d3.select(this).classed("TreeMapNode__ContentBoxContainer--tapped", true);
+              d3.select(this).classed(
+                "TreeMapNode__ContentBoxContainer--tapped",
+                true
+              );
               setTimeout(() => {
-                var tool = d3.select(this).append("div")
+                var tool = d3
+                  .select(this)
+                  .append("div")
                   .attr("class", "TM_TooltipContainer")
                   .style("opacity", 0);
-                tool.transition()
-                  .style("opacity", 1);
-                tool
-                  .call(tooltip_render);
+                tool.transition().style("opacity", 1);
+                tool.call(tooltip_render);
               }, 100);
               d.toolTipped = true;
-
             }
           })
           .call(treemap_node_content_container);
       }
 
-
       return main;
     };
 
-
     const main = display(root);
-    //node_render is special, we call it once on first render (here) 
+    //node_render is special, we call it once on first render (here)
     //and after transitions
-    if (main) { main.selectAll('.TreeMapNode__ContentBoxContainer').call(node_render); }
-
+    if (main) {
+      main.selectAll(".TreeMapNode__ContentBoxContainer").call(node_render);
+    }
   }
 }
-

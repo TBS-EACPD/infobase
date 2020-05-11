@@ -1,6 +1,5 @@
 export class PartitionPerspective {
-  constructor(args){
-    
+  constructor(args) {
     const required_args = {
       id: args.id,
       name: args.name,
@@ -11,10 +10,13 @@ export class PartitionPerspective {
       root_text_func: args.root_text_func,
       level_headers: args.level_headers,
     };
-    
-    const required_arg_is_missing = _.some(_.values(required_args), arg => _.isNull(arg) || _.isUndefined(arg));
 
-    if (required_arg_is_missing){
+    const required_arg_is_missing = _.some(
+      _.values(required_args),
+      (arg) => _.isNull(arg) || _.isUndefined(arg)
+    );
+
+    if (required_arg_is_missing) {
       throw `Partition diagram perspective ${args.name} is missing required arguments.`;
     } else {
       const optional_args = {
