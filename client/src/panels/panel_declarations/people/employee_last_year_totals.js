@@ -5,63 +5,64 @@ import {
   StdPanel,
   Col,
   CircleProportionChart,
-
   declare_panel,
-} from "../shared.js"; 
+} from "../shared.js";
 
 const { text_maker, TM } = create_text_maker_component([text1, text2]);
 
+export const declare_employee_last_year_totals_panel = () =>
+  declare_panel({
+    panel_key: "employee_last_year_totals",
+    levels: ["dept"],
+    panel_config_func: (level, panel_key) => ({
+      depends_on: ["orgEmployeeType"],
 
+      info_deps: ["orgEmployeeType_dept_info", "orgEmployeeType_gov_info"],
 
-export const declare_employee_last_year_totals_panel = () => declare_panel({
-  panel_key: "employee_last_year_totals",
-  levels: ["dept"],
-  panel_config_func: (level, panel_key) => ({
-    depends_on: ['orgEmployeeType'],
-  
-    info_deps: [
-      'orgEmployeeType_dept_info',
-      'orgEmployeeType_gov_info',
-    ],
-  
-    calculate(subject,info){
-      return { 
-        vals: [
-          {name: "gov_last_year_emp", value: info.gov_head_count_ppl_last_year},
-          {name: "dept_last_year_emp", value: info.dept_head_count_ppl_last_year},
-        ],
-        center: true,
-      };
-    },
-  
-    render({calculations, footnotes, sources}){
-      const {subject, info, panel_args} = calculations;
+      calculate(subject, info) {
+        return {
+          vals: [
+            {
+              name: "gov_last_year_emp",
+              value: info.gov_head_count_ppl_last_year,
+            },
+            {
+              name: "dept_last_year_emp",
+              value: info.dept_head_count_ppl_last_year,
+            },
+          ],
+          center: true,
+        };
+      },
 
-      const dept_emp_value = panel_args.vals[1].value;
-      const gov_emp_value = panel_args.vals[0].value;
-      return (
-        <StdPanel
-          title={text_maker("dept_employee_last_year_totals_title")}
-          {...{footnotes, sources}}
-          allowOverflow={true}
-        >
-          <Col size={!window.is_a11y_mode ? 5 : 12} isText>
-            <TM k="dept_employee_last_year_totals_text" args={info} />
-          </Col>
-          { !window.is_a11y_mode &&
-            <Col size={7} isGraph>
-              <CircleProportionChart 
-                height={200}
-                is_money={false}
-                child_value={dept_emp_value}
-                child_name={text_maker('dept_headcount', {subject})}
-                parent_value={gov_emp_value}
-                parent_name={text_maker('all_fps')}
-              />
+      render({ calculations, footnotes, sources }) {
+        const { subject, info, panel_args } = calculations;
+
+        const dept_emp_value = panel_args.vals[1].value;
+        const gov_emp_value = panel_args.vals[0].value;
+        return (
+          <StdPanel
+            title={text_maker("dept_employee_last_year_totals_title")}
+            {...{ footnotes, sources }}
+            allowOverflow={true}
+          >
+            <Col size={!window.is_a11y_mode ? 5 : 12} isText>
+              <TM k="dept_employee_last_year_totals_text" args={info} />
             </Col>
-          }
-        </StdPanel>
-      );
-    },
-  }),
-});
+            {!window.is_a11y_mode && (
+              <Col size={7} isGraph>
+                <CircleProportionChart
+                  height={200}
+                  is_money={false}
+                  child_value={dept_emp_value}
+                  child_name={text_maker("dept_headcount", { subject })}
+                  parent_value={gov_emp_value}
+                  parent_name={text_maker("all_fps")}
+                />
+              </Col>
+            )}
+          </StdPanel>
+        );
+      },
+    }),
+  });

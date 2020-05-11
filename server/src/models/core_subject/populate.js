@@ -3,15 +3,18 @@ import {
   get_standard_csv_file_rows,
   create_program_id,
   bilingual_remap,
-} from '../load_utils.js';
+} from "../load_utils.js";
 
-export default async function({models}){
+export default async function ({ models }) {
   const { Org, Program, Crso } = models;
 
-  const url_lookups = _.keyBy(get_standard_csv_file_rows("url_lookups.csv"), 'id');
+  const url_lookups = _.keyBy(
+    get_standard_csv_file_rows("url_lookups.csv"),
+    "id"
+  );
 
-  const org_objs = _.chain( get_standard_csv_file_rows("igoc.csv") )
-    .map(obj=> ({
+  const org_objs = _.chain(get_standard_csv_file_rows("igoc.csv"))
+    .map((obj) => ({
       ...obj,
       ministry_id: obj.ministry,
       inst_form_id: obj.institutional_form,
@@ -21,27 +24,31 @@ export default async function({models}){
       ...bilingual_remap(url_lookups[obj.dp_url_id], "dp_url", "url"),
       ...bilingual_remap(url_lookups[obj.qfr_url_id], "qfr_url", "url"),
       ...bilingual_remap(url_lookups[obj.eval_url_id], "eval_url", "url"),
-      ...bilingual_remap(url_lookups[obj.dept_website_id], "dept_website_url", "url"),
+      ...bilingual_remap(
+        url_lookups[obj.dept_website_id],
+        "dept_website_url",
+        "url"
+      ),
     }))
-    .map( rec => new Org(rec) )
+    .map((rec) => new Org(rec))
     .value();
 
   await Org.insertMany(org_objs);
 
-  const crso_objs = _.chain( get_standard_csv_file_rows("crso.csv") )
-    .map( obj => ({ 
-      ..._.omit(obj, 'id'),
+  const crso_objs = _.chain(get_standard_csv_file_rows("crso.csv"))
+    .map((obj) => ({
+      ..._.omit(obj, "id"),
       crso_id: obj.id,
       is_active: obj.is_active === "1",
       ...bilingual_remap(obj, "description", "desc"),
     }))
-    .map( obj => new Crso(obj) )
+    .map((obj) => new Crso(obj))
     .value();
 
   await Crso.insertMany(crso_objs);
 
-  const program_objs = _.chain( get_standard_csv_file_rows("program.csv") )
-    .map(obj => ({
+  const program_objs = _.chain(get_standard_csv_file_rows("program.csv"))
+    .map((obj) => ({
       ...obj,
       program_id: create_program_id(obj),
       is_crown: obj.is_crown === "1",
@@ -49,9 +56,8 @@ export default async function({models}){
       is_internal_service: obj.is_internal_service === "1",
       ...bilingual_remap(obj, "description", "desc"),
     }))
-    .map( obj => new Program(obj) )
+    .map((obj) => new Program(obj))
     .value();
 
   return await Program.insertMany(program_objs);
 }
-

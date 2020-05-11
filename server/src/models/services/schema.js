@@ -1,8 +1,6 @@
-import _ from 'lodash';
+import _ from "lodash";
 
-import { 
-  bilingual_field, 
-} from '../schema_utils';
+import { bilingual_field } from "../schema_utils";
 
 const schema = `
   extend type Org{
@@ -77,13 +75,8 @@ const schema = `
   }
 `;
 
-
-
-
-export default function({models, loaders}){
-  const {
-    Service,
-  } = models;
+export default function ({ models, loaders }) {
+  const { Service } = models;
 
   const {
     services_by_org_id,
@@ -93,21 +86,22 @@ export default function({models, loaders}){
   } = loaders;
 
   const org_has_services = async (org_id) => {
-    const has_service = await Service.findOne( { org_id: org_id });
-    return !_.isNull( has_service );
+    const has_service = await Service.findOne({ org_id: org_id });
+    return !_.isNull(has_service);
   };
 
   const resolvers = {
     Org: {
-      services: ({org_id}) => services_by_org_id.load(org_id),
-      has_services: ({org_id}) => org_has_services(org_id),
+      services: ({ org_id }) => services_by_org_id.load(org_id),
+      has_services: ({ org_id }) => org_has_services(org_id),
     },
     Program: {
-      services: ({program_id}) => services_by_program_id.load(program_id),
+      services: ({ program_id }) => services_by_program_id.load(program_id),
     },
     Service: {
-      org: ({org_id}) => org_id_loader.load(org_id),
-      programs: ({program_ids}) => _.map( program_ids, (program_id) => prog_id_loader.load(program_id) ),
+      org: ({ org_id }) => org_id_loader.load(org_id),
+      programs: ({ program_ids }) =>
+        _.map(program_ids, (program_id) => prog_id_loader.load(program_id)),
 
       name: bilingual_field("name"),
       description: bilingual_field("description"),

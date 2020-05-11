@@ -1,8 +1,10 @@
 #!/usr/bin/env node
-const yargs = require('yargs');
-const { createCoverageMap, createCoverageSummary } = require('istanbul-lib-coverage');
-const fs = require('fs-extra');
-
+const yargs = require("yargs");
+const {
+  createCoverageMap,
+  createCoverageSummary,
+} = require("istanbul-lib-coverage");
+const fs = require("fs-extra");
 
 const get_svg_string = (coverage_status_color, coverage_percent) => `
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="108" height="20">
@@ -34,49 +36,49 @@ const get_svg_string = (coverage_status_color, coverage_percent) => `
 </g>
 </svg>`;
 
-function create_coverage_shield_badge(){
-  const argv = yargs
-    .options({
-      report: {
-        type: 'string',
-        desc: 'Path of json coverage report file',
-        demandOption: true,
-      },
-    })
-    .argv;
+function create_coverage_shield_badge() {
+  const argv = yargs.options({
+    report: {
+      type: "string",
+      desc: "Path of json coverage report file",
+      demandOption: true,
+    },
+  }).argv;
 
   const coverage_report_file = fs.readJsonSync(argv.report);
   const map = createCoverageMap({});
-  map.merge(coverage_report_file)
+  map.merge(coverage_report_file);
 
   const coverage_summary = createCoverageSummary();
-  map.files().forEach(function(file) {
+  map.files().forEach(function (file) {
     const file_coverage = map.fileCoverageFor(file);
     const file_summary = file_coverage.toSummary();
     coverage_summary.merge(file_summary);
   });
-  
+
   const coverage_percent = Math.round(coverage_summary.data.lines.pct);
-  
-  const coverage_status_color = ( () => {
+
+  const coverage_status_color = (() => {
     if (coverage_percent >= 80) {
-      return '#4c1';
+      return "#4c1";
     } else if (coverage_percent >= 50) {
-      return '#dfb317';
+      return "#dfb317";
     } else {
-      return '#e05d44';
+      return "#e05d44";
     }
   })();
-  
-  const shield_badge_svg = get_svg_string(coverage_status_color, coverage_percent);
+
+  const shield_badge_svg = get_svg_string(
+    coverage_status_color,
+    coverage_percent
+  );
 
   console.log(shield_badge_svg); // eslint-disable-line no-console
 }
 
-
 try {
   create_coverage_shield_badge();
-} catch(err){
+} catch (err) {
   console.error(err); // eslint-disable-line no-console
   process.exit(1); // eslint-disable-line no-process-exit
 }

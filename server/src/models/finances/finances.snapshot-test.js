@@ -143,7 +143,7 @@ query ($lang: String = "en") {
     }
   }
 }`;
-const program_sobjs_query =`
+const program_sobjs_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
     program(id: "CPCC-ISC00") {
@@ -151,7 +151,7 @@ query ($lang: String = "en") {
     }
   }
 }`;
-const program_vote_stat_query =`
+const program_vote_stat_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
     program(id: "CPCC-ISC00") {
@@ -159,7 +159,7 @@ query ($lang: String = "en") {
     }
   }
 }`;
-const program_spending_query =`
+const program_spending_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
     program(id: "CPCC-ISC00") {
@@ -176,8 +176,7 @@ query ($lang: String = "en") {
   }
 }`;
 
-
-describe('finance data', () => {
+describe("finance data", () => {
   it("org vote stat pa snapshot", async () => {
     const data = await execQuery(org_vote_stat_pa_query, {});
     return expect(data).toMatchSnapshot();

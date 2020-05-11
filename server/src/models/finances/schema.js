@@ -1,6 +1,4 @@
-import { 
-  bilingual_field, 
-} from '../schema_utils';
+import { bilingual_field } from "../schema_utils";
 
 const schema = `
   extend type Org{
@@ -122,8 +120,7 @@ const schema = `
   }
 `;
 
-
-export default function({models, loaders}){
+export default function ({ models, loaders }) {
   const {
     orgVoteStatPa_loader,
     OrgVoteStatQfr_loader,
@@ -137,13 +134,17 @@ export default function({models, loaders}){
 
   const resolvers = {
     Org: {
-      org_vote_stat_pa: (org) =>  org.dept_code ? orgVoteStatPa_loader.load(org.dept_code) : null,
-      org_vote_stat_qfr: (org) =>  org.dept_code ? OrgVoteStatQfr_loader.load(org.dept_code) : null,
-      org_vote_stat_estimates: (org) =>  org.dept_code ? orgVoteStatEstimates_loader.load(org.dept_code) : null,
-      org_transfer_payments: (org) =>  org.dept_code ? orgTransferPayments_loader.load(org.dept_code) : null,
+      org_vote_stat_pa: (org) =>
+        org.dept_code ? orgVoteStatPa_loader.load(org.dept_code) : null,
+      org_vote_stat_qfr: (org) =>
+        org.dept_code ? OrgVoteStatQfr_loader.load(org.dept_code) : null,
+      org_vote_stat_estimates: (org) =>
+        org.dept_code ? orgVoteStatEstimates_loader.load(org.dept_code) : null,
+      org_transfer_payments: (org) =>
+        org.dept_code ? orgTransferPayments_loader.load(org.dept_code) : null,
     },
     Program: {
-      program_sobjs: (prog) =>  programSobjs_loader.load(prog.program_id),
+      program_sobjs: (prog) => programSobjs_loader.load(prog.program_id),
       program_vote_stat: (prog) => programVoteStat_loader.load(prog.program_id),
       program_spending: (prog) => programSpending_loader.load(prog.program_id),
       program_fte: (prog) => programFte_loader.load(prog.program_id),

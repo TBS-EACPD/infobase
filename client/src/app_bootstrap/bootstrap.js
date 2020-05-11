@@ -1,25 +1,25 @@
-import 'dom4';
-import 'whatwg-fetch';
+import "dom4";
+import "whatwg-fetch";
 
-import './inject_app_globals.side-effects.js';
+import "./inject_app_globals.side-effects.js";
 
 // Extend Handlebars global with additional helpers
-import '../handlebars/helpers.side-effects.js';
+import "../handlebars/helpers.side-effects.js";
 
-import '../common_css/common_css_index.side-effects.js';
+import "../common_css/common_css_index.side-effects.js";
 
-import ReactDOM from 'react-dom';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import { 
+import ReactDOM from "react-dom";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import {
   ConnectedRouter,
-  routerMiddleware, 
+  routerMiddleware,
   connectRouter,
-} from 'connected-react-router';
-import { default as createHistory } from 'history/createHashHistory';
-import { populate_stores } from '../models/populate_stores.js';
-import { Table } from '../core/TableClass.js';
-import WebFont from 'webfontloader';
+} from "connected-react-router";
+import { default as createHistory } from "history/createHashHistory";
+import { populate_stores } from "../models/populate_stores.js";
+import { Table } from "../core/TableClass.js";
+import WebFont from "webfontloader";
 
 import orgVoteStatQfr from "../tables/orgVoteStatQfr.js";
 import orgSobjsQfr from "../tables/orgSobjsQfr.js";
@@ -61,24 +61,21 @@ const table_defs = [
   programSobjs,
 ];
 
-
-const load_fonts = () => (
+const load_fonts = () =>
   WebFont.load({
     google: {
       families: ["Roboto:300,300i,400,400i,700,700i"],
     },
-  })
-);
+  });
 
-function bootstrap(App, app_reducer, done){
-  
+function bootstrap(App, app_reducer, done) {
   load_fonts();
 
-  populate_stores().then(()=>{
-    _.each(table_defs, table_def => Table.create_and_register(table_def));
+  populate_stores().then(() => {
+    _.each(table_defs, (table_def) => Table.create_and_register(table_def));
 
     // Create a history of your choosing (we're using a browser history in this case)
-    const history = createHistory({hashType: "noslash"});
+    const history = createHistory({ hashType: "noslash" });
 
     // Build the middleware for intercepting and dispatching navigation actions
     const middleware = routerMiddleware(history);
@@ -97,16 +94,16 @@ function bootstrap(App, app_reducer, done){
     // store.dispatch(push('/foo'))
     done();
 
-    ReactDOM.render( 
+    ReactDOM.render(
       <Provider store={store}>
-        { /* ConnectedRouter will use the store from Provider automatically */ }
+        {/* ConnectedRouter will use the store from Provider automatically */}
         <ConnectedRouter history={history}>
           <App />
         </ConnectedRouter>
       </Provider>,
-      document.getElementById('app')
-    ); 
+      document.getElementById("app")
+    );
   });
-};
+}
 
 export { bootstrap };

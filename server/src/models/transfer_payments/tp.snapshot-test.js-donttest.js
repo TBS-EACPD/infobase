@@ -1,7 +1,6 @@
 const _ = require("lodash");
 
-
-const org_query  = `
+const org_query = `
 query ($lang: String!, $dept_code: String!){
   root(lang: $lang){
     org(dept_code:$dept_code){
@@ -34,12 +33,10 @@ query ($lang: String!, $dept_code: String!){
 
 const { execQuery } = global;
 
-describe("transfer payments", function(){
-
-  it("org-level transfer payments", async ()=> {
+describe("transfer payments", function () {
+  it("org-level transfer payments", async () => {
     const variables = { dept_code: "AGR" };
     const data = await execQuery(org_query, variables);
     return expect(data).toMatchSnapshot();
   });
-
-})
+});

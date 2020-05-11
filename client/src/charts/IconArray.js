@@ -1,13 +1,9 @@
 export class IconArray extends React.Component {
-  render(){
-    const { 
-      render_item,
-      items,
-      heightFirst,
-    } = this.props;
+  render() {
+    const { render_item, items, heightFirst } = this.props;
 
-    const rendered_items = _.map(items, (item, ix) =>
-      <div 
+    const rendered_items = _.map(items, (item, ix) => (
+      <div
         key={ix}
         style={{
           flex: "0 0 auto",
@@ -15,7 +11,7 @@ export class IconArray extends React.Component {
       >
         {render_item(item)}
       </div>
-    );
+    ));
 
     return (
       <div

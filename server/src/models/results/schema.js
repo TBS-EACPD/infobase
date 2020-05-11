@@ -1,11 +1,8 @@
-import _ from 'lodash';
-import { bilingual_field } from '../schema_utils.js';
-import { first_true_promise } from '../general_utils.js'
+import _ from "lodash";
+import { bilingual_field } from "../schema_utils.js";
+import { first_true_promise } from "../general_utils.js";
 
-import { 
-  drr_docs,
-  dp_docs,
-} from './results_common.js';
+import { drr_docs, dp_docs } from "./results_common.js";
 
 const schema = `
   extend type Root {
@@ -42,30 +39,26 @@ const schema = `
     subject_id: String
     level: String
 
-${
-  _.reduce(
-    drr_docs,
-    (drr_fields, drr_doc) => `${drr_fields}
+${_.reduce(
+  drr_docs,
+  (drr_fields, drr_doc) => `${drr_fields}
     ${drr_doc}_results: Int
     ${drr_doc}_indicators_met: Int
     ${drr_doc}_indicators_not_available: Int
     ${drr_doc}_indicators_not_met: Int
     ${drr_doc}_indicators_future: Int
     `,
-    '',
-  )
-}
+  ""
+)}
 
-${
-  _.reduce(
-    dp_docs,
-    (dp_fields, dp_doc) => `${dp_fields}
+${_.reduce(
+  dp_docs,
+  (dp_fields, dp_doc) => `${dp_fields}
     ${dp_doc}_results: Int
     ${dp_doc}_indicators: Int
     `,
-    '',
-  )
-}
+  ""
+)}
   }
 
   type ResultCount {
@@ -133,9 +126,7 @@ ${
   }
 `;
 
-
-export default function({models,loaders}){
-
+export default function ({ models, loaders }) {
   const {
     Org,
     Crso,
@@ -150,32 +141,28 @@ export default function({models,loaders}){
     prog_dept_code_loader,
     crso_from_deptcode_loader,
     prog_crso_id_loader,
-    
+
     result_by_subj_loader,
     indicator_by_result_loader,
     program_link_loader,
     indicator_id_loader,
   } = loaders;
 
-
-  async function get_all_target_counts(levels){
-    return await ResultCount.find( { level: { '$in': levels } });
+  async function get_all_target_counts(levels) {
+    return await ResultCount.find({ level: { $in: levels } });
   }
-  
-  async function get_gov_target_counts(doc){
+
+  async function get_gov_target_counts(doc) {
     const orgs = await Org.find({});
-    
+
     return await get_org_target_counts(orgs, doc);
   }
-  
-  //this should take 6 DB queries, but the first 2 can be done in paralel
-  async function get_org_target_counts(orgs, doc){
-    const dept_codes = _.chain(orgs)
-      .map('dept_code')
-      .compact()
-      .value();
 
-    if ( _.isEmpty(dept_codes) ){
+  //this should take 6 DB queries, but the first 2 can be done in paralel
+  async function get_org_target_counts(orgs, doc) {
+    const dept_codes = _.chain(orgs).map("dept_code").compact().value();
+
+    if (_.isEmpty(dept_codes)) {
       return null;
     }
 
@@ -185,141 +172,145 @@ export default function({models,loaders}){
     ]);
 
     return await get_target_counts(
-      _.uniq([ 
-        ..._.chain(crsos).flatten().map('crso_id').filter().value(), 
-        ..._.chain(progs).flatten().map('program_id').filter().value(),
+      _.uniq([
+        ..._.chain(crsos).flatten().map("crso_id").filter().value(),
+        ..._.chain(progs).flatten().map("program_id").filter().value(),
       ]),
       doc
     );
   }
 
-  async function get_target_counts(cr_or_program_ids, doc){
-    
-    // turns [ [ { [attr]: val, ... }, undef ... ], undef ... ] into [ val, ... ] w/out undefs 
-    const flatmap_to_attr = (list_of_lists, attr) => _.chain(list_of_lists)
-      .compact()
-      .flatten()
-      .map(attr)
-      .compact()
-      .value();
-    
+  async function get_target_counts(cr_or_program_ids, doc) {
+    // turns [ [ { [attr]: val, ... }, undef ... ], undef ... ] into [ val, ... ] w/out undefs
+    const flatmap_to_attr = (list_of_lists, attr) =>
+      _.chain(list_of_lists).compact().flatten().map(attr).compact().value();
+
     const results = await result_by_subj_loader.loadMany(cr_or_program_ids);
 
-    const all_indicators = await indicator_by_result_loader.loadMany( flatmap_to_attr(results, 'result_id') );
+    const all_indicators = await indicator_by_result_loader.loadMany(
+      flatmap_to_attr(results, "result_id")
+    );
 
     const doc_indicators = _.chain(all_indicators)
       .flatten()
-      .filter({doc})
+      .filter({ doc })
       .value();
 
-    return _.defaults({
-      ..._.chain(doc_indicators)
-        .countBy('status_key')
-        .mapKeys( (value, key) => `indicators_${key}`)
-        .value(),
-      results: _.chain(results).compact().flatten().filter({doc}).value().length,
-      doc: doc,
-    }, 
-    {
-      results: 0,
-  
-      indicators_dp: 0,
-  
-      indicators_met: 0,
-      indicators_not_available: 0,
-      indicators_not_met: 0,
-      indicators_future: 0,
-    });
+    return _.defaults(
+      {
+        ..._.chain(doc_indicators)
+          .countBy("status_key")
+          .mapKeys((value, key) => `indicators_${key}`)
+          .value(),
+        results: _.chain(results).compact().flatten().filter({ doc }).value()
+          .length,
+        doc: doc,
+      },
+      {
+        results: 0,
+
+        indicators_dp: 0,
+
+        indicators_met: 0,
+        indicators_not_available: 0,
+        indicators_not_met: 0,
+        indicators_future: 0,
+      }
+    );
   }
 
-  async function get_results(subject, { doc }){
+  async function get_results(subject, { doc }) {
     let id_val;
-    if(subject instanceof Crso){
+    if (subject instanceof Crso) {
       id_val = subject.crso_id;
-    } else if(subject instanceof Program){
+    } else if (subject instanceof Program) {
       id_val = subject.program_id;
     } else {
       throw "bad subject";
     }
     let records = await result_by_subj_loader.load(id_val);
 
-    if(doc){
-      records = _.filter(records, {doc});
+    if (doc) {
+      records = _.filter(records, { doc });
     }
     return records;
   }
 
   const subject_has_results = async (subject_id) => {
-    const has_result = await ResultCount.findOne( { subject_id: subject_id });
-    return !_.isNull( has_result );
+    const has_result = await ResultCount.findOne({ subject_id: subject_id });
+    return !_.isNull(has_result);
   };
   const crso_has_results = async (crso_id) => {
-    const crso_has_own_results = await ResultCount.findOne( { subject_id: crso_id });
+    const crso_has_own_results = await ResultCount.findOne({
+      subject_id: crso_id,
+    });
 
-    if ( !_.isNull(crso_has_own_results) ){
+    if (!_.isNull(crso_has_own_results)) {
       return true;
     } else {
       const programs = await prog_crso_id_loader.load(crso_id);
 
-      return first_true_promise( 
-        _.map( 
-          programs, 
-          ({program_id}) => subject_has_results(program_id) 
-        ) 
+      return first_true_promise(
+        _.map(programs, ({ program_id }) => subject_has_results(program_id))
       );
     }
   };
 
   const resolvers = {
     Root: {
-      indicator: (_x, {id}) => indicator_id_loader.load(id),
+      indicator: (_x, { id }) => indicator_id_loader.load(id),
     },
     Gov: {
-      all_target_counts_summary: () => get_all_target_counts(['all','dept']),
-      all_target_counts_granular: () => get_all_target_counts(['crso_or_program']),
-      target_counts: (_x, {doc}) => get_gov_target_counts(doc),
+      all_target_counts_summary: () => get_all_target_counts(["all", "dept"]),
+      all_target_counts_granular: () =>
+        get_all_target_counts(["crso_or_program"]),
+      target_counts: (_x, { doc }) => get_gov_target_counts(doc),
     },
     Org: {
-      target_counts: (org, {doc}) => get_org_target_counts(org, doc),
-      has_results: ({org_id}) => subject_has_results(org_id),
+      target_counts: (org, { doc }) => get_org_target_counts(org, doc),
+      has_results: ({ org_id }) => subject_has_results(org_id),
     },
     Crso: {
       results: get_results,
-      target_counts: ({crso_id}, {doc}) => get_target_counts([crso_id], doc),
-      has_results: ({crso_id}) => crso_has_results(crso_id),
+      target_counts: ({ crso_id }, { doc }) =>
+        get_target_counts([crso_id], doc),
+      has_results: ({ crso_id }) => crso_has_results(crso_id),
     },
     Program: {
       results: get_results,
-      drs: ({program_id}) => program_link_loader.load(program_id),
-      pidrlinks: async ({program_id}) => {
+      drs: ({ program_id }) => program_link_loader.load(program_id),
+      pidrlinks: async ({ program_id }) => {
         const linked_results = await program_link_loader.load(program_id);
-        return _.map(
-          linked_results,
-          ({result_id}) => ({program_id, result_id})
-        );
+        return _.map(linked_results, ({ result_id }) => ({
+          program_id,
+          result_id,
+        }));
       },
-      target_counts: ({program_id}, {doc}) => get_target_counts([program_id], doc),
-      has_results: ({program_id}) => subject_has_results(program_id),
+      target_counts: ({ program_id }, { doc }) =>
+        get_target_counts([program_id], doc),
+      has_results: ({ program_id }) => subject_has_results(program_id),
     },
     Result: {
-      id: _.property('result_id'),
-      indicators: async (result, {doc}) => {
+      id: _.property("result_id"),
+      indicators: async (result, { doc }) => {
         let records = await indicator_by_result_loader.load(result.result_id);
-        
-        if(doc){
-          records = _.filter(records, {doc});
+
+        if (doc) {
+          records = _.filter(records, { doc });
         }
         return records;
       },
       name: bilingual_field("name"),
     },
     Indicator: {
-      id: _.property('indicator_id'),
+      id: _.property("indicator_id"),
       name: bilingual_field("name"),
       target_explanation: bilingual_field("target_explanation"),
       result_explanation: bilingual_field("result_explanation"),
       target_narrative: bilingual_field("target_narrative"),
-      previous_year_target_narrative: bilingual_field("previous_year_target_narrative"),
+      previous_year_target_narrative: bilingual_field(
+        "previous_year_target_narrative"
+      ),
       actual_result: bilingual_field("actual_result"),
       methodology: bilingual_field("methodology"),
       measure: bilingual_field("measure"),
