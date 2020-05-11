@@ -180,8 +180,8 @@ describe("End-to-end tests for email_backend endpoints", () => {
     "/submit_email returns status 200 and trys to log to db when a valid template is submitted",
     async () => {
       // note: log_email_and_meta_to_db is mocked to a noop. Not testing that logging actually works at this level,
-      // just that the server tries to call it should
-      // TODO: should we also test that the right args are at least passed? That's currently a testing gap
+      // just that the server tries to call log_email_and_meta_to_db when it is expected to
+      // TODO: should we also test that the correct args are at least passed? That's currently a testing gap
 
       const { status: ok } = await make_submit_email_request(
         test_template_name,
