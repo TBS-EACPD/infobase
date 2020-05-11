@@ -1,7 +1,7 @@
-import text from './nivo_line.yaml';
+import text from "./nivo_line.yaml";
 
-import { ResponsiveLine } from '@nivo/line';
-import classNames from 'classnames';
+import { ResponsiveLine } from "@nivo/line";
+import classNames from "classnames";
 
 import {
   create_text_maker_component_with_nivo_common,
@@ -10,23 +10,22 @@ import {
   DefaultTooltip,
   get_formatter,
   fix_legend_symbols,
-} from './nivo_common.js';
+} from "./nivo_common.js";
 
-import { DisplayTable } from '../../components/index.js';
-import { IconZoomIn, IconZoomOut } from '../../icons/icons.js';
+import { DisplayTable } from "../../components/index.js";
+import { IconZoomIn, IconZoomOut } from "../../icons/icons.js";
 
 const { text_maker } = create_text_maker_component_with_nivo_common(text);
-
 
 const get_scale_bounds = (stacked, raw_data, zoomed) => {
   const min = _.min(raw_data);
   const max = _.max(raw_data);
   const scaled_min = min < 0 ? min * 1.05 : min * 0.95;
   const scaled_max = max < 0 ? max * 0.95 : max * 1.05;
-  if(stacked){
+  if (stacked) {
     return {
       min: min < 0 ? scaled_min : 0,
-      max: 'auto',
+      max: "auto",
     };
   }
   return {
@@ -35,15 +34,14 @@ const get_scale_bounds = (stacked, raw_data, zoomed) => {
   };
 };
 
-
 export class NivoResponsiveLine extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       y_scale_zoomed: false,
     };
   }
-  render(){
+  render() {
     const {
       data,
       raw_data,
@@ -81,77 +79,86 @@ export class NivoResponsiveLine extends React.Component {
       custom_table,
     } = this.props;
 
-    const {
-      y_scale_zoomed,
-    } = this.state;
-    
+    const { y_scale_zoomed } = this.state;
+
     const get_table = () => {
       const table_data = _.chain(data)
-        .map(row => {
+        .map((row) => {
           const series_name = row.id;
           return _.chain(row.data)
-            .map(series => (_.isNil(series.y) ? undefined : {label: series.x, [series_name]: series.y}) )
+            .map((series) =>
+              _.isNil(series.y)
+                ? undefined
+                : { label: series.x, [series_name]: series.y }
+            )
             .value();
         })
         .flatten()
         .compact()
-        .groupBy('label')
-        .map( _.spread(_.merge) )
+        .groupBy("label")
+        .map(_.spread(_.merge))
         .value();
       const line_table_value_formatter = (value) =>
-      _.isUndefined(value) ? "" : get_formatter(is_money,text_formatter,true,true)(value);
+        _.isUndefined(value)
+          ? ""
+          : get_formatter(is_money, text_formatter, true, true)(value);
       const column_configs = {
         label: {
           index: 0,
           header: table_first_column_name || text_maker("label"),
           is_searchable: true,
         },
-        ..._.chain(table_ordered_column_keys || _.map(data,'id'))
-          .map( (col, idx) => [col, {
-            index: idx + 1,
-            header: col,
-            formatter: line_table_value_formatter,
-          }] )
+        ..._.chain(table_ordered_column_keys || _.map(data, "id"))
+          .map((col, idx) => [
+            col,
+            {
+              index: idx + 1,
+              header: col,
+              formatter: line_table_value_formatter,
+            },
+          ])
           .fromPairs()
           .value(),
       };
-      return <DisplayTable
-        data={table_data}
-        column_configs={column_configs}
-        table_name={table_name || text_maker("default_table_name")}
-      />;
+      return (
+        <DisplayTable
+          data={table_data}
+          column_configs={column_configs}
+          table_name={table_name || text_maker("default_table_name")}
+        />
+      );
     };
 
-    const table = !disable_table_view && ( custom_table || get_table() );
+    const table = !disable_table_view && (custom_table || get_table());
 
-    const zoom_button = (!disable_y_axis_zoom && !enableArea) ?
-      <button
-        className={classNames("btn-ib-primary","btn-ib-array")}
-        onClick={ 
-          () => {
+    const zoom_button =
+      !disable_y_axis_zoom && !enableArea ? (
+        <button
+          className={classNames("btn-ib-primary", "btn-ib-array")}
+          onClick={() => {
             this.setState({
               y_scale_zoomed: !y_scale_zoomed,
             });
-          }
-        }
-      >
-        { this.state.y_scale_zoomed ? 
+          }}
+        >
+          {this.state.y_scale_zoomed ? (
             <IconZoomOut
               title={text_maker("zoom_out")}
               color={window.infobase_color_constants.secondaryColor}
               alternate_color={window.infobase_color_constants.backgroundColor}
-            /> : 
-            <IconZoomIn 
+            />
+          ) : (
+            <IconZoomIn
               title={text_maker("zoom_in")}
               color={window.infobase_color_constants.secondaryColor}
               alternate_color={window.infobase_color_constants.backgroundColor}
             />
-        }
-      </button> :
-      undefined;
+          )}
+        </button>
+      ) : undefined;
 
-    const graph =
-      <div style={{height: graph_height }} aria-hidden='true'>
+    const graph = (
+      <div style={{ height: graph_height }} aria-hidden="true">
         <ResponsiveLine
           {...{
             data,
@@ -169,25 +176,34 @@ export class NivoResponsiveLine extends React.Component {
             motionDamping,
             motionStiffness,
           }}
-          legends={ fix_legend_symbols(legends) }
-          tooltip={ (d) => tooltip( d, get_formatter(is_money, text_formatter, false) ) }
+          legends={fix_legend_symbols(legends)}
+          tooltip={(d) =>
+            tooltip(d, get_formatter(is_money, text_formatter, false))
+          }
           yScale={{
             stacked: !!stacked,
             type: "linear",
-            min: y_scale_min || get_scale_bounds(stacked, raw_data, y_scale_zoomed).min,
-            max: y_scale_max || get_scale_bounds(stacked, raw_data, y_scale_zoomed).max,
+            min:
+              y_scale_min ||
+              get_scale_bounds(stacked, raw_data, y_scale_zoomed).min,
+            max:
+              y_scale_max ||
+              get_scale_bounds(stacked, raw_data, y_scale_zoomed).max,
             ...(yScale || {}),
           }}
           axisBottom={remove_bottom_axis ? null : bttm_axis}
-          axisLeft={remove_left_axis ? null :
-          {
-            orient: "left",
-            tickSize: 5,
-            tickPadding: 5,
-            tickValues: 6,
-            format: d => get_formatter(is_money, text_formatter)(d),
-            ...(left_axis || {}),
-          }}
+          axisLeft={
+            remove_left_axis
+              ? null
+              : {
+                  orient: "left",
+                  tickSize: 5,
+                  tickPadding: 5,
+                  tickValues: 6,
+                  format: (d) => get_formatter(is_money, text_formatter)(d),
+                  ...(left_axis || {}),
+                }
+          }
           axisTop={null}
           axisRight={null}
           xScale={{ type: "point" }}
@@ -195,26 +211,31 @@ export class NivoResponsiveLine extends React.Component {
           dotSize={stacked ? 0 : 10}
           areaOpacity={stacked ? 1 : 0}
         />
-      </div>;
+      </div>
+    );
 
-    return <InteractiveGraph graph={graph} table={table} other_buttons={[zoom_button]} table_name={table_name} />;
+    return (
+      <InteractiveGraph
+        graph={graph}
+        table={table}
+        other_buttons={[zoom_button]}
+        table_name={table_name}
+      />
+    );
   }
 }
 NivoResponsiveLine.defaultProps = {
   ...general_default_props,
   tooltip: (slice, formatter) => {
-    const tooltip_items = slice.data.map( 
-      (d) => ({
-        id: d.serie.id,
-        color: d.serie.color,
-        value: d.data.y,
-      })
-    );
+    const tooltip_items = slice.data.map((d) => ({
+      id: d.serie.id,
+      color: d.serie.color,
+      value: d.data.y,
+    }));
 
-    return <DefaultTooltip
-      tooltip_items={tooltip_items}
-      formatter={formatter}
-    />;
+    return (
+      <DefaultTooltip tooltip_items={tooltip_items} formatter={formatter} />
+    );
   },
   colors: window.infobase_color_constants.textColor,
   bttm_axis: {

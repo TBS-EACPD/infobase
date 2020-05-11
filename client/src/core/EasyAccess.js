@@ -1,30 +1,22 @@
-import { TrivialTM } from '../components/index.js';
-import { trivial_text_maker } from '../models/text.js';
-import { Fragment } from 'react';
-import {
-  IconAbout,
-  IconGlossary,
-  IconDataset,
-} from '../icons/icons.js';
-import './NavComponents.scss';
+import { TrivialTM } from "../components/index.js";
+import { trivial_text_maker } from "../models/text.js";
+import { Fragment } from "react";
+import { IconAbout, IconGlossary, IconDataset } from "../icons/icons.js";
+import "./NavComponents.scss";
 
 export class EasyAccess extends React.Component {
-  render(){ return null; }
-  componentDidMount(){
-    ReactDOM.render(
-
-      <EasyAccess_ />,
-      document.getElementById("easy-access")
-    );
+  render() {
+    return null;
+  }
+  componentDidMount() {
+    ReactDOM.render(<EasyAccess_ />, document.getElementById("easy-access"));
   }
 }
 const TM = TrivialTM;
 
-const EasyAccess_ = () =>
+const EasyAccess_ = () => (
   <Fragment>
-    <a
-      href='#glossary'
-      className="link-unstyled nav-item">
+    <a href="#glossary" className="link-unstyled nav-item">
       <IconGlossary
         title={trivial_text_maker("glossary")}
         inline={true}
@@ -34,10 +26,7 @@ const EasyAccess_ = () =>
         <TM k="glossary" />
       </span>
     </a>
-    <a
-      href="#metadata"
-      className="link-unstyled nav-item"
-    >
+    <a href="#metadata" className="link-unstyled nav-item">
       <IconDataset
         title={trivial_text_maker("metadata")}
         inline={true}
@@ -47,10 +36,7 @@ const EasyAccess_ = () =>
         <TM k="metadata" />
       </span>
     </a>
-    <a
-      href="#about"
-      className="link-unstyled nav-item"
-    >
+    <a href="#about" className="link-unstyled nav-item">
       <IconAbout
         title={trivial_text_maker("about_title")}
         inline={true}
@@ -60,4 +46,5 @@ const EasyAccess_ = () =>
         <TM k="about_title" />
       </span>
     </a>
-  </Fragment>;
+  </Fragment>
+);

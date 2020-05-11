@@ -2,9 +2,11 @@ import { create_models, populate_all_models } from "./models/index.js";
 import { connect_db, drop_db } from "./db_utils.js";
 
 // Properly exit on any unhandled promise rejections, for failing-fast in CI
-process.on('unhandledRejection', unhandledRejectionException => { throw unhandledRejectionException });
+process.on("unhandledRejection", (unhandledRejectionException) => {
+  throw unhandledRejectionException;
+});
 
-(async ()=> {
+(async () => {
   await connect_db();
   await drop_db();
   create_models();
@@ -15,4 +17,3 @@ process.on('unhandledRejection', unhandledRejectionException => { throw unhandle
   // For now, just exiting explicitly, but if possible should sort out why the process is held open without the next line
   process.exit(); /* eslint-disable-line no-process-exit */
 })();
-

@@ -1,44 +1,28 @@
-import './Tombstones.scss';
+import "./Tombstones.scss";
 
-import { Fragment } from 'react';
+import { Fragment } from "react";
 
-const UnlabeledTombstone = ({items}) => (
-  <table className='tombstone-table'>
+const UnlabeledTombstone = ({ items }) => (
+  <table className="tombstone-table">
     <tbody>
-      {
-        _.map(
-          items,
-          (item, ix) => (
-            <tr key={ix}>
-              <td>
-                {item}
-              </td>
-            </tr>
-          )
-        )
-      }
+      {_.map(items, (item, ix) => (
+        <tr key={ix}>
+          <td>{item}</td>
+        </tr>
+      ))}
     </tbody>
   </table>
 );
 
-
-const LabeledTombstone = ({labels_and_items}) => (
+const LabeledTombstone = ({ labels_and_items }) => (
   <dl className="dl-horizontal tombstone-data-list">
-    {
-      _.map(
-        labels_and_items,
-        ([label, item], ix) => (
-          <Fragment key={ix}>
-            <dt>{label}</dt>
-            <dd>{item}</dd>
-          </Fragment>
-        )
-      )
-    }
+    {_.map(labels_and_items, ([label, item], ix) => (
+      <Fragment key={ix}>
+        <dt>{label}</dt>
+        <dd>{item}</dd>
+      </Fragment>
+    ))}
   </dl>
 );
 
-export {
-  UnlabeledTombstone,
-  LabeledTombstone,
-};
+export { UnlabeledTombstone, LabeledTombstone };

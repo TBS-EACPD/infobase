@@ -1,4 +1,4 @@
-import * as color_defs from './color_defs.js';
+import * as color_defs from "./color_defs.js";
 
 const newIBCategoryColors = [
   "#206BBD", // blue
@@ -33,21 +33,9 @@ const newIBDarkCategoryColors = [
 // sequential colour schemes
 // dark text has sufficient contrast on the _last three_ colours only
 
-const sequentialBlues = [
-  "#D1E7FF",
-  "#B8CEE6",
-  "#7BA8D9",
-  "#4C89CC",
-  "#206BBD",
-];
+const sequentialBlues = ["#D1E7FF", "#B8CEE6", "#7BA8D9", "#4C89CC", "#206BBD"];
 
-const sequentialReds = [
-  "#FFD2D1",
-  "#F7B6B4",
-  "#F78D8C",
-  "#DB5E5C",
-  "#DA3A38",
-];
+const sequentialReds = ["#FFD2D1", "#F7B6B4", "#F78D8C", "#DB5E5C", "#DA3A38"];
 
 const sequentialGreens = [
   "#D1FFE0",
@@ -78,4 +66,3 @@ export {
   sequentialPurples,
   NA_color,
 };
-

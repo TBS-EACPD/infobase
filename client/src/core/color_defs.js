@@ -3,7 +3,8 @@
 
 const primaryColor = "#26374A";
 const secondaryColor = "#2C70C9";
-const tertiaryColor = "#8c949e"; /* this one is used lots at varying alpha/darkness levels, should stay grey */
+const tertiaryColor =
+  "#8c949e"; /* this one is used lots at varying alpha/darkness levels, should stay grey */
 
 const backgroundColor = "#fff";
 const highlightColor = "#da3a38";
@@ -23,7 +24,6 @@ const textLightColor = "#fff";
 const linkColor = "#2b438c";
 const linkFocusColor = "#0535d2";
 const linkVisitedColor = "#7834bc";
-
 
 /* dark and light colours don't have enough contrast between them for text, so don't use them that way! Use black text on light, or (check contrast) white text on dark*/
 const successLightColor = "#cbedbd";
