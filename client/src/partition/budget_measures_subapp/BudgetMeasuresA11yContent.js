@@ -299,9 +299,9 @@ export class BudgetMeasuresA11yContent extends React.Component {
             <TextMaker text_key="notes"/>: 
             <ul>
               { year_value === "2018" &&
-                <li> <TextMaker text_key="budget2018_measure_description_values_clarification"/></li>
+                <li><TextMaker text_key="budget2018_measure_description_values_clarification"/></li>
               }
-              <li> <TextMaker text_key="budget_measure_a11y_table_open_data_link" args={{budget_year: year_value}}/></li>
+              <li><TextMaker text_key="budget_measure_a11y_table_open_data_link" args={{budget_year: year_value}}/></li>
             </ul>
           </caption>
           <thead>

@@ -130,7 +130,7 @@ export const declare_simplographic_panel = () => declare_panel({
             </div>
           </div>
           <section className='lg-grid-panel70' style={{flexDirection: 'column'}}>
-            <div className="h2 mrgn-tp-sm" style={{textAlign: window.feature_detection.is_mobile() ? 'center' : 'inherit'}}> <TM k={props.title_key}/></div>
+            <div className="h2 mrgn-tp-sm" style={{textAlign: window.feature_detection.is_mobile() ? 'center' : 'inherit'}}><TM k={props.title_key}/></div>
             <TM el="p" k={props.text_key} args={big_info} />
           </section>
         </div>;
