@@ -21,9 +21,8 @@ export {
   declare_in_year_stat_breakdown_panel,
   declare_in_year_voted_stat_split_panel,
   declare_vote_stat_split_panel,
-  declare_welcome_mat_panel,
-} from //declare_tp_by_region_panel,
-"./finances/index.js";
+  declare_welcome_mat_panel, //declare_tp_by_region_panel,
+} from "./finances/index.js";
 
 export {
   declare_profile_panel,
