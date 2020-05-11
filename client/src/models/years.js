@@ -1,4 +1,4 @@
-import { run_template } from './text.js';
+import { run_template } from "./text.js";
 
 const year_templates = {
   current_fiscal_year: "{{current_fiscal_year}}",
@@ -7,14 +7,14 @@ const year_templates = {
     "{{pa_last_year_4}}",
     "{{pa_last_year_3}}",
     "{{pa_last_year_2}}",
-    '{{pa_last_year}}',
+    "{{pa_last_year}}",
   ],
-  years_short: [ 
+  years_short: [
     "{{pa_last_year_5_short_first}}",
     "{{pa_last_year_4_short_first}}",
     "{{pa_last_year_3_short_first}}",
     "{{pa_last_year_2_short_first}}",
-    '{{pa_last_year_short_first}}',
+    "{{pa_last_year_short_first}}",
   ],
   estimates_years: [
     "{{est_last_year_4}}",
@@ -24,11 +24,11 @@ const year_templates = {
     "{{est_in_year}}",
     //"{{est_next_year}}",
   ],
-  planning_last_year: '{{planning_last_year_1}}',
+  planning_last_year: "{{planning_last_year_1}}",
   planning_years: [
-    '{{planning_year_1}}',
-    '{{planning_year_2}}',
-    '{{planning_year_3}}',
+    "{{planning_year_1}}",
+    "{{planning_year_2}}",
+    "{{planning_year_3}}",
   ],
   people_years: [
     "{{ppl_last_year_5}}",
@@ -46,35 +46,36 @@ const year_templates = {
   ],
 };
 
-
 const actual_to_planned_gap_year = _.chain(year_templates)
-  .thru( ({std_years, planning_years}) => [_.last(std_years), _.first(planning_years)] )
-  .map( (fiscal_year) => _.chain(fiscal_year)
-    .thru(run_template)
-    .split('-')
-    .first()
-    .parseInt()
-    .value()
+  .thru(({ std_years, planning_years }) => [
+    _.last(std_years),
+    _.first(planning_years),
+  ])
+  .map((fiscal_year) =>
+    _.chain(fiscal_year)
+      .thru(run_template)
+      .split("-")
+      .first()
+      .parseInt()
+      .value()
   )
-  .thru( ([last_pa_year, first_planning_year]) => {
-    if (first_planning_year - last_pa_year == 2){
-
+  .thru(([last_pa_year, first_planning_year]) => {
+    if (first_planning_year - last_pa_year == 2) {
       const first_year = last_pa_year + 1;
-      const second_year = window.lang === "en" ? 
-        first_planning_year.toString().substring(2) : 
-        first_planning_year;
+      const second_year =
+        window.lang === "en"
+          ? first_planning_year.toString().substring(2)
+          : first_planning_year;
 
       return `${first_year}-${second_year}`;
-    } else if(first_planning_year - last_pa_year > 2){
-      throw new Error('The gap between the latest Public Accounts year and the first Planning year is more than one fiscal year. This should never happen?');
+    } else if (first_planning_year - last_pa_year > 2) {
+      throw new Error(
+        "The gap between the latest Public Accounts year and the first Planning year is more than one fiscal year. This should never happen?"
+      );
     } else {
       return false;
     }
   })
   .value();
 
-
-export {
-  year_templates,
-  actual_to_planned_gap_year,
-};
+export { year_templates, actual_to_planned_gap_year };

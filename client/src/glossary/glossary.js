@@ -1,86 +1,78 @@
-import './glossary.scss';
+import "./glossary.scss";
 import glossary_text from "./glossary.yaml";
-import { Fragment } from 'react';
-import { 
+import { Fragment } from "react";
+import {
   StandardRouteContainer,
   ScrollToTargetContainer,
-} from '../core/NavComponents.js';
-import { Table } from '../core/TableClass.js'; 
-import { rpb_link } from '../rpb/rpb_link.js';
-import { GlossaryEntry } from '../models/glossary.js';
-import { 
+} from "../core/NavComponents.js";
+import { Table } from "../core/TableClass.js";
+import { rpb_link } from "../rpb/rpb_link.js";
+import { GlossaryEntry } from "../models/glossary.js";
+import {
   create_text_maker_component,
   GlossarySearch,
   BackToTop,
-} from '../components/index.js';
+} from "../components/index.js";
 
 const { text_maker, TM } = create_text_maker_component(glossary_text);
 
-function get_glossary_items_by_letter(){
-  
+function get_glossary_items_by_letter() {
   const glossary_items = GlossaryEntry.get_all();
 
   const glossary_items_by_letter = _.chain(glossary_items)
-    .groupBy(item => {
+    .groupBy((item) => {
       const first_letter = item.title[0];
-      if (_.includes(["É","È","Ê","Ë"],first_letter)){
+      if (_.includes(["É", "È", "Ê", "Ë"], first_letter)) {
         return "E";
       }
       return first_letter;
     })
-    .map( (items, letter) => {
-      const sorted_items = _.sortBy(items, 'title');
+    .map((items, letter) => {
+      const sorted_items = _.sortBy(items, "title");
       return {
-        items: sorted_items, 
+        items: sorted_items,
         letter,
       };
     })
-    .sortBy('letter')
+    .sortBy("letter")
     .value();
   return glossary_items_by_letter;
 }
 
 const tables = Table.get_all();
-const table_links_by_tag = _.chain( tables )
-  .flatMap('tags')
+const table_links_by_tag = _.chain(tables)
+  .flatMap("tags")
   .uniq()
-  .map(
-    (tag) => [
-      tag,
-      _.chain(tables)
-        .filter( ({tags}) => _.includes(tags, tag) )
-        .map( 
-          (table) => (
-            <li 
-              key={table.id}
-              style={{
-                display: "inline-block",
-                marginRight: "1em",
-              }}
-            >
-              • <a href={rpb_link({table})}>{table.name}</a>
-            </li>
-          )
-        )
-        .thru( (list_items) => <ul>{list_items}</ul> )
-        .value(),
-    ]
-  )
+  .map((tag) => [
+    tag,
+    _.chain(tables)
+      .filter(({ tags }) => _.includes(tags, tag))
+      .map((table) => (
+        <li
+          key={table.id}
+          style={{
+            display: "inline-block",
+            marginRight: "1em",
+          }}
+        >
+          • <a href={rpb_link({ table })}>{table.name}</a>
+        </li>
+      ))
+      .thru((list_items) => <ul>{list_items}</ul>)
+      .value(),
+  ])
   .fromPairs()
   .value();
 
-//id tag is there for legacy styles 
+//id tag is there for legacy styles
 const Glossary_ = ({ active_key, items_by_letter }) => (
   <div id="#glossary-key">
     <div className="col-sm-12 col-md-8 col-md-offset-2 font-large">
-      { !window.is_a11y_mode &&
-        <div
-          id="glossary_search"
-          className='org_list font-xlarge mrgn-bttm-lg'
-        >
+      {!window.is_a11y_mode && (
+        <div id="glossary_search" className="org_list font-xlarge mrgn-bttm-lg">
           <GlossarySearch />
         </div>
-      }
+      )}
       <div
         className="glossary-letters mrgn-bttm-xl"
         style={{ textAlign: "center" }}
@@ -92,76 +84,74 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
             margin: "0px",
           }}
         >
-          {_.map(items_by_letter, ({ letter }) => 
-            <li key={letter}> 
+          {_.map(items_by_letter, ({ letter }) => (
+            <li key={letter}>
               <a
-                aria-label={`${text_maker("jump_to_letter_glossary_entries")} ${letter}`}
+                aria-label={`${text_maker(
+                  "jump_to_letter_glossary_entries"
+                )} ${letter}`}
                 href={`#__${letter}`}
                 className="glossary-letter-link"
-                onClick={evt => {
+                onClick={(evt) => {
                   evt.preventDefault();
                   const el = document.getElementById(`__${letter}`);
-                  el.scrollIntoView({behavior: "instant"});
+                  el.scrollIntoView({ behavior: "instant" });
                   el.focus();
                 }}
               >
                 {letter}
               </a>
-            </li>  
-          )}
+            </li>
+          ))}
         </ul>
       </div>
       <div className="glossary-items">
         <dl>
-          {_.map(
-            items_by_letter, 
-            ({letter, items}) => _.map(
-              items, 
-              (item, ix) => (
-                <Fragment key={ix}>
-                  <dt
-                    className="glossary-dt"
-                    id={ix === 0 ? `__${letter}` : null}
-                    tabIndex={0}
-                  >
-                    <span
-                      id={item.id}
-                      tabIndex={-1}
-                    >
-                      {item.title}
-                    </span>
-                  </dt>
-                  <dd>
+          {_.map(items_by_letter, ({ letter, items }) =>
+            _.map(items, (item, ix) => (
+              <Fragment key={ix}>
+                <dt
+                  className="glossary-dt"
+                  id={ix === 0 ? `__${letter}` : null}
+                  tabIndex={0}
+                >
+                  <span id={item.id} tabIndex={-1}>
+                    {item.title}
+                  </span>
+                </dt>
+                <dd>
+                  <div dangerouslySetInnerHTML={{ __html: item.definition }} />
 
-                    <div 
-                      dangerouslySetInnerHTML={{__html: item.definition}}
-                    />
+                  <p>
+                    {text_maker("glossary_translation")} {item.translation}
+                  </p>
 
+                  {table_links_by_tag[item.id] && (
                     <p>
-                      {text_maker("glossary_translation")} {item.translation}
+                      {text_maker("glossary_related_data")}{" "}
+                      {table_links_by_tag[item.id]}
                     </p>
+                  )}
 
-                    { table_links_by_tag[item.id] &&
-                      <p>
-                        {text_maker("glossary_related_data")} {table_links_by_tag[item.id]}
-                      </p>
-                    }
-                    
-                    <div className='glossary-top-link-container'>
-                      <a className="glossary-top-link"
-                        href="#"
-                        tabIndex='0'
-                        onClick={evt => {
-                          evt.preventDefault();
-                          document.body.scrollTop = document.documentElement.scrollTop = 0;
-                          document.querySelector('#glossary_search > div > div > input').focus();
-                        }}
-                      >{text_maker("back_to_top")}</a>
-                    </div>
-                  </dd>
-                </Fragment>
-              )
-            )
+                  <div className="glossary-top-link-container">
+                    <a
+                      className="glossary-top-link"
+                      href="#"
+                      tabIndex="0"
+                      onClick={(evt) => {
+                        evt.preventDefault();
+                        document.body.scrollTop = document.documentElement.scrollTop = 0;
+                        document
+                          .querySelector("#glossary_search > div > div > input")
+                          .focus();
+                      }}
+                    >
+                      {text_maker("back_to_top")}
+                    </a>
+                  </div>
+                </dd>
+              </Fragment>
+            ))
           )}
         </dl>
       </div>
@@ -170,12 +160,10 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
 );
 
 export default class Glossary extends React.Component {
-  render(){
-    const { 
+  render() {
+    const {
       match: {
-        params: {
-          active_key,
-        },
+        params: { active_key },
       },
     } = this.props;
 
@@ -188,9 +176,11 @@ export default class Glossary extends React.Component {
         breadcrumbs={[text_maker("glossary")]}
         description={text_maker("glossary_meta_desc")}
       >
-        <h1><TM k="glossary" /></h1>
+        <h1>
+          <TM k="glossary" />
+        </h1>
         <ScrollToTargetContainer target_id={active_key}>
-          <BackToTop focus="#glossary_search > div > div > input"/>
+          <BackToTop focus="#glossary_search > div > div > input" />
           <Glossary_
             active_key={active_key}
             items_by_letter={items_by_letter}
