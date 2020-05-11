@@ -181,15 +181,15 @@ class DetailedProgramSplit extends React.Component {
                     <TM k="so"/>
                   </th>
                   <th scope="col">
-                    {run_template("{{pa_last_year}}")} <TM k="expenditures" /> 
+                    {run_template("{{pa_last_year}}")}{" "}<TM k="expenditures" /> 
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {_.map( flat_data, ({so_label, program, value }) => 
                   <tr key={program.id+so_label}>
-                    <td> {program.name} </td>
-                    <td> {so_label} </td>
+                    <td>{program.name}</td>
+                    <td>{so_label}</td>
                     <td><Format type="compact1_written" content={value} /></td>
                   </tr>
                 )}

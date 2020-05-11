@@ -208,7 +208,7 @@ class Goco extends React.Component {
         enableGridX: false,
         enableGridY: false,
         label: d => format_value(d),
-        label_format: d => <tspan y={-3}> { d } </tspan>,
+        label_format: d => <tspan y={-3}>{ d }</tspan>,
         tooltip: (slice) => (
           <div style={{color: window.infobase_color_constants.textColor}}>
             <table style={{width: '100%', borderCollapse: 'collapse'}}>
@@ -219,7 +219,7 @@ class Goco extends React.Component {
                       <td className="nivo-tooltip__content">
                         <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.color}} />
                       </td>
-                      <td className="nivo-tooltip__content"> {tooltip_item.id} </td>
+                      <td className="nivo-tooltip__content">{tooltip_item.id}</td>
                       <td
                         className="nivo-tooltip__content"
                         dangerouslySetInnerHTML={{ __html: format_value(tooltip_item) }}
@@ -328,7 +328,7 @@ class Goco extends React.Component {
   
         const child_graph = (
           <Fragment>
-            <h4 style={{textAlign: "center"}}> { node.indexValue } </h4>
+            <h4 style={{textAlign: "center"}}>{ node.indexValue }</h4>
             <NivoResponsiveBar
               { ...nivo_default_props }
               data={ node.data.children }

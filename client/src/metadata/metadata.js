@@ -77,7 +77,7 @@ export default class MetaData extends React.Component {
                 </FancyUL>
                 <div className="fancy-ul-span-flex">
                   <span style={{alignSelf: "center"}}>
-                    <TM k="refresh_freq"/> {source.frequency.text}
+                    <TM k="refresh_freq"/>{" "}{source.frequency.text}
                   </span>
                   { source.open_data &&
                     <a 

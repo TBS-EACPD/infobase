@@ -76,7 +76,7 @@ const MiniLegend = ({ items }) => (
           className={className}
           title={result_statuses[id].text}
         />
-        <span> {label} </span>
+        <span>{label}</span>
       </div>
     )}
   </div>

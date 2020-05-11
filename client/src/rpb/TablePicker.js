@@ -303,7 +303,7 @@ class TaggedItemCloud extends React.Component {
       </div>
       { _.isEmpty(items) ? 
         <div className="centerer" style={{minHeight: '300px'}}> 
-          <p className="large_panel_text"> {noItemsMessage} </p> 
+          <p className="large_panel_text">{noItemsMessage}</p> 
         </div> :
         <div>
           <div className="row item-cloud-row">

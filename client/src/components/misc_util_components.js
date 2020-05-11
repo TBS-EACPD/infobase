@@ -31,7 +31,7 @@ const FancyUL = ({children, ul_class})=> (
   <ul className={classNames("fancy-ul", ul_class)}>
     { _.chain(children)
       .compact()
-      .map((item,i) => (<li key={i}> {item} </li>))
+      .map((item,i) => (<li key={i}>{item}</li>))
       .value()
     }
   </ul>
@@ -39,7 +39,7 @@ const FancyUL = ({children, ul_class})=> (
 
 const Year = ({y}) => run_template(`{{${y}}}`);
 
-const TextAbbrev = ({text, len}) => <div> { text_abbrev(text, len) } </div>;
+const TextAbbrev = ({text, len}) => <div>{ text_abbrev(text, len) }</div>;
 
 const TrivialTM = props => <TM tmf={trivial_text_maker} {...props} />;
 const TrivialTextMaker = props => <TextMaker text_maker_func={trivial_text_maker} {...props} />;
@@ -50,8 +50,8 @@ const create_text_maker_component = (text) => {
 
 const DlItem = ({ term, def }) => (
   <Fragment>
-    <dt> {term} </dt>
-    <dd> {def} </dd>
+    <dt>{term}</dt>
+    <dd>{def}</dd>
   </Fragment>
 );
 

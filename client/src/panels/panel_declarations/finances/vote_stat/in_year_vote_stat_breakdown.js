@@ -55,7 +55,7 @@ const tooltip_render = vs => function (d) {
     // this can't be called "title" (what tooltip.js uses) because of some other hover effects that fire on titles.
     "data-ibtt-text": ` 
       <div class="FlatTreeMap__ToolTip">
-        ${text_func(vs, d.data, "<br/>", true)} <br/>
+        ${text_func(vs, d.data, "<br/>", true)}<br/>
         ${formats.compact1(d.data["{{est_in_year}}_estimates"])} (${formats.percentage(d.data["{{est_in_year}}_estimates"]/d.data.total)} ${text_maker("of")} ${d.data.total_of})
       </div>`,
     "data-toggle": "tooltip",
@@ -94,7 +94,7 @@ const planned_vote_or_stat_render = vs => function ({ calculations, footnotes, s
       index: 0,
       header: text_maker("org"),
       is_searchable: true,
-      formatter: (value) => subj_map[value] ? <a href={subj_map[value]}> {Dept.lookup(value).name} </a> : value,
+      formatter: (value) => subj_map[value] ? <a href={subj_map[value]}>{Dept.lookup(value).name}</a> : value,
       search_formatter: (value) => value ? Dept.lookup(value).name : value,
       sort_func: (a, b) => default_dept_name_sort_func(a, b),
     },

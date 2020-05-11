@@ -138,7 +138,7 @@ class Panel_ extends React.Component {
 export const TextPanel = props => {
   const { children } = props;
   const filtered_props = _.omit(props, "children");
-  const new_children = <div className="medium_panel_text"> {children} </div>;
+  const new_children = <div className="medium_panel_text">{children}</div>;
   return (
     <InfographicPanel {...filtered_props}>
       {new_children}

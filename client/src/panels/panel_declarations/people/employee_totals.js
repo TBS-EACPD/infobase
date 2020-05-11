@@ -85,8 +85,8 @@ export const declare_employee_totals_panel = () => declare_panel({
                                 <td className="nivo-tooltip__content">
                                   <div style={{height: '12px', width: '12px', backgroundColor: tooltip_item.serie.color}} />
                                 </td>
-                                <td className="nivo-tooltip__content"> {tooltip_item.serie.id} </td>
-                                <td className="nivo-tooltip__content"> {tooltip_item.data.x}</td>
+                                <td className="nivo-tooltip__content">{tooltip_item.serie.id}</td>
+                                <td className="nivo-tooltip__content">{tooltip_item.data.x}</td>
                                 <td className="nivo-tooltip__content" dangerouslySetInnerHTML={{__html: formats.big_int(tooltip_item.data.y)}} />
                               </tr>
                             )

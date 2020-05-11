@@ -56,7 +56,7 @@ function create_resource_hierarchy({hierarchy_scheme, year}){
                   defs: _.compact([
                     {
                       term: text_maker('org'),
-                      def: <a href={infograph_href_template(prog.dept)}> {prog.dept.name} </a>,
+                      def: <a href={infograph_href_template(prog.dept)}>{prog.dept.name}</a>,
                     },
                     {
                       term: text_maker('description'),

@@ -66,8 +66,8 @@ const get_non_col_content = ({node}) => {
         <dl className="dl-horizontal">
           {_.map(defs, ({ term, def }, ix) => 
             <Fragment key={ix}>
-              <dt> { term } </dt>
-              <dd> { def } </dd>
+              <dt>{ term }</dt>
+              <dd>{ def }</dd>
             </Fragment>)}
         </dl>
       }

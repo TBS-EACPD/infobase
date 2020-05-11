@@ -131,7 +131,7 @@ const RelatedInfo = ({ subject, panel, related_panels }) => {
   } = related_panels;
 
   return <div>
-    <h2> {tm("related_panels")} </h2>
+    <h2>{tm("related_panels")}</h2>
     <table className="table table-bordered">
       <thead>
         <tr>
@@ -190,12 +190,12 @@ const PanelTableRow = ({ current_subject, panel, className }) => {
 
   return (
     <tr className={className}>
-      <td> {panel.key} </td>
-      <td> {panel.level} </td>
-      <td> {panel.depends_on.join(", ")} </td>
-      <td> {panel.info_deps.join(", ")} </td>
-      <td> {panel.notes} </td>
-      <td><Link to={url}> link </Link></td>
+      <td>{panel.key}</td>
+      <td>{panel.level}</td>
+      <td>{panel.depends_on.join(", ")}</td>
+      <td>{panel.info_deps.join(", ")}</td>
+      <td>{panel.notes}</td>
+      <td><Link to={url}>link</Link></td>
     </tr>
   );
 
@@ -262,7 +262,7 @@ export default class panelInventory extends React.Component {
       } = get_derived_props(this.props);
 
       content = <div>
-        <h1> {tm("panel_inventory")} </h1>
+        <h1>{tm("panel_inventory")}</h1>
         <div className="mrgn-bttm-lg">
           <EverythingSearch
             placeholder="See this panel with another subject"
@@ -271,8 +271,8 @@ export default class panelInventory extends React.Component {
           />
         </div>
         <div>
-          <p> {tm("selected_subject")}: {subject.name} ({subject.level}) </p>
-          <p> {tm("selected_panel")}: {panel.key} </p>
+          <p>{`${tm("selected_subject")}: ${subject.name} (${subject.level})}`}</p>
+          <p>{`${tm("selected_panel")}: ${panel.key}`}</p>
         </div>
         <div id="main">
           <PanelRenderer 
@@ -282,7 +282,7 @@ export default class panelInventory extends React.Component {
           />
           {!_.isEmpty(panel.notes) && 
             <div>
-              <h3> {tm("notes")} </h3>
+              <h3>{tm("notes")}</h3>
               { panel.notes }
             </div>
           }
@@ -325,8 +325,8 @@ class TestSubjectLinks extends React.Component {
     } = this.props;
     return (
       <div>
-        <h3> {tm("test_subjects")} </h3>
-        <div><Link to={href_template(Gov, panel)}> {tm("goc_total")} </Link></div>
+        <h3>{tm("test_subjects")}</h3>
+        <div><Link to={href_template(Gov, panel)}>{tm("goc_total")}</Link></div>
         <div><h5>Dept</h5></div>
         <div><Link to={href_template(Dept.lookup(151), panel)}>FCAC</Link></div>
         <div><Link to={href_template(Dept.lookup(94), panel)}>CSIS</Link></div>

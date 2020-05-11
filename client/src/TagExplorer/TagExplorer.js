@@ -89,8 +89,8 @@ function render_non_col_content({node}){
         <dl className="dl-horizontal">
           {_.map(extended_defs, ({ term, def }, ix) => !_.isEmpty(def) &&
             <Fragment key={ix}> 
-              <dt> { term } </dt>
-              <dd> { def } </dd>
+              <dt>{ term }</dt>
+              <dd>{ def }</dd>
             </Fragment>
           )}
         </dl>

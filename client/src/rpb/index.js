@@ -75,11 +75,11 @@ const url_state_selector = createSelector(
 const RPBTitle = ({ table_name, subject_name }) => {
   const title_prefix = text_maker("report_builder_title"); 
   if(!table_name){
-    return <h1> {title_prefix} </h1>;
+    return <h1>{title_prefix}</h1>;
   } if(!subject_name){
-    return <h1> {title_prefix} - {table_name} </h1>;
+    return <h1>{`${title_prefix} - ${table_name}`}</h1>;
   }
-  return <h1> {title_prefix} - {table_name} - {subject_name} </h1>;
+  return <h1>{`${title_prefix} - ${table_name} - ${subject_name}`}</h1>;
 };
 
 function slowScrollDown(){
