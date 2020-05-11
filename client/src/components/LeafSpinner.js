@@ -1,13 +1,12 @@
-import './LeafSpinner.scss';
-import leaf_loading_spinner from '../svg/leaf-loading-spinner.svg';
+import "./LeafSpinner.scss";
+import leaf_loading_spinner from "../svg/leaf-loading-spinner.svg";
 
-export const LeafSpinner = ({config_name}) => {
-
+export const LeafSpinner = ({ config_name }) => {
   const default_spinner_config_form = (scale) => ({
-    outer_positioning: 'default',
+    outer_positioning: "default",
     spinner_container_style: {
       transform: `scale(${scale})`,
-      position: 'fixed',
+      position: "fixed",
     },
     svg_modifier: _.identity,
   });
@@ -17,30 +16,37 @@ export const LeafSpinner = ({config_name}) => {
     route: default_spinner_config_form(2),
     sub_route: default_spinner_config_form(2),
     tabbed_content: {
-      outer_positioning: 'default',
+      outer_positioning: "default",
       spinner_container_style: {
         transform: `scale(1)`,
-        position: 'absolute',
-        top: '50%',
+        position: "absolute",
+        top: "50%",
       },
       svg_modifier: _.identity,
     },
     small_inline: {
-      outer_positioning: 'relative',
+      outer_positioning: "relative",
       spinner_container_style: {
-        transform: 'scale(0.25)',
-        position: 'absolute',
-        top: '9px',
-        left: '-50%',
+        transform: "scale(0.25)",
+        position: "absolute",
+        top: "9px",
+        left: "-50%",
       },
-      svg_modifier: (svg) => svg
-        .replace(`stroke="${window.infobase_color_constants.primaryColor}"`, 'stroke="#FFF"')
-        .replace(`stroke="${window.infobase_color_constants.secondaryColor}"`, 'stroke="#FFF"')
-        .replace('fill="#FF0000"', 'fill="#FFF"')
-        .replace('faded-background--true', 'faded-background--false'),
+      svg_modifier: (svg) =>
+        svg
+          .replace(
+            `stroke="${window.infobase_color_constants.primaryColor}"`,
+            'stroke="#FFF"'
+          )
+          .replace(
+            `stroke="${window.infobase_color_constants.secondaryColor}"`,
+            'stroke="#FFF"'
+          )
+          .replace('fill="#FF0000"', 'fill="#FFF"')
+          .replace("faded-background--true", "faded-background--false"),
     },
   };
-  
+
   const default_config_name = _.chain(leaf_spinner_configs)
     .keys()
     .first()
@@ -53,11 +59,11 @@ export const LeafSpinner = ({config_name}) => {
   } = leaf_spinner_configs[config_name || default_config_name];
 
   return (
-    <div style={{position: outer_positioning}}>
-      <div 
-        className="leaf-spinner-container" 
+    <div style={{ position: outer_positioning }}>
+      <div
+        className="leaf-spinner-container"
         style={spinner_container_style}
-        dangerouslySetInnerHTML={{__html: svg_modifier(leaf_loading_spinner)}}
+        dangerouslySetInnerHTML={{ __html: svg_modifier(leaf_loading_spinner) }}
       />
     </div>
   );

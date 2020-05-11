@@ -1,6 +1,6 @@
-import './StandardLegend.scss';
+import "./StandardLegend.scss";
 
-import { LegendList } from './LegendList.js';
+import { LegendList } from "./LegendList.js";
 
 export const StandardLegend = ({
   title,
@@ -14,13 +14,13 @@ export const StandardLegend = ({
   Controls,
 }) => (
   <div className="standard-legend-container">
-    <div style={{maxHeight: '400px', display: 'flex', flexDirection: 'column'}}>
-      { title &&
-        <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
-          {title}
-        </p>
-      }
-      <div style={{overflowX: 'hidden'}}>
+    <div
+      style={{ maxHeight: "400px", display: "flex", flexDirection: "column" }}
+    >
+      {title && (
+        <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">{title}</p>
+      )}
+      <div style={{ overflowX: "hidden" }}>
         <LegendList
           {...{
             items,
@@ -31,8 +31,8 @@ export const StandardLegend = ({
           }}
         />
       </div>
-      { Controls &&
-        <div 
+      {Controls && (
+        <div
           style={{
             borderTop: `1px dashed ${window.infobase_color_constants.tertiaryColor}`,
             padding: "10px 0px 10px 5px",
@@ -40,7 +40,7 @@ export const StandardLegend = ({
         >
           {Controls}
         </div>
-      }
+      )}
     </div>
   </div>
 );

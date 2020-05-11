@@ -1,6 +1,6 @@
 // Update prod db metadata after a deploy, delete outgoing rollback db
 
-const metadata_db = db.getSiblingDB('metadata');
+const metadata_db = db.getSiblingDB("metadata");
 
 const previous_metadata_collection = metadata_db.metadata;
 

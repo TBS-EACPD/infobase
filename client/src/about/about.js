@@ -1,26 +1,32 @@
 import about_text_bundle from "./about.yaml";
-import './about.scss';
-import '../explorer_common/explorer-styles.scss';
-import { StandardRouteContainer } from '../core/NavComponents.js';
-import { 
-  TM,
-  EmbeddedVideo,
-} from '../components/index.js';
-import { create_text_maker } from '../models/text.js';
-import { LabeledTable } from '../components/LabeledTable.js';
-import { IconGrid } from '../components/IconGrid.js';
-import { get_static_url } from '../request_utils.js';
-
+import "./about.scss";
+import "../explorer_common/explorer-styles.scss";
+import { StandardRouteContainer } from "../core/NavComponents.js";
+import { TM, EmbeddedVideo } from "../components/index.js";
+import { create_text_maker } from "../models/text.js";
+import { LabeledTable } from "../components/LabeledTable.js";
+import { IconGrid } from "../components/IconGrid.js";
+import { get_static_url } from "../request_utils.js";
 
 const text_maker = create_text_maker(about_text_bundle);
 
-const tech_icon_list = _.chain(['html5','node-js','react','git','github','python','sass','graphql','baseline-cloud'])
-  .map(tech => get_static_url(`svg/tech-logos/${tech}.svg`))
-  .map(svg => ({src: svg}))
+const tech_icon_list = _.chain([
+  "html5",
+  "node-js",
+  "react",
+  "git",
+  "github",
+  "python",
+  "sass",
+  "graphql",
+  "baseline-cloud",
+])
+  .map((tech) => get_static_url(`svg/tech-logos/${tech}.svg`))
+  .map((svg) => ({ src: svg }))
   .value();
 
 export default class About extends React.Component {
-  render(){
+  render() {
     return (
       <StandardRouteContainer
         title={text_maker("about_title")}
@@ -31,17 +37,32 @@ export default class About extends React.Component {
         <div className="medium_panel_text text-only-page-root">
           <TM tmf={text_maker} el="h1" k="about_page_title" />
           <EmbeddedVideo
-            title = { text_maker("about_video_title") }
-            video_source = { text_maker("about_video_src") }
-            transcript = { text_maker("about_video_transcript") }
+            title={text_maker("about_video_title")}
+            video_source={text_maker("about_video_src")}
+            transcript={text_maker("about_video_transcript")}
           />
           <TM tmf={text_maker} el="div" k="about_intro_section" />
-          <LabeledTable title={text_maker("principles_title")} content={[
-            {name: text_maker("principle_1_name"), desc: text_maker("principle_1_desc")},
-            {name: text_maker("principle_2_name"), desc: text_maker("principle_2_desc")},
-            {name: text_maker("principle_3_name"), desc: text_maker("principle_3_desc")},
-            {name: text_maker("principle_4_name"), desc: text_maker("principle_4_desc")},
-          ]} />
+          <LabeledTable
+            title={text_maker("principles_title")}
+            content={[
+              {
+                name: text_maker("principle_1_name"),
+                desc: text_maker("principle_1_desc"),
+              },
+              {
+                name: text_maker("principle_2_name"),
+                desc: text_maker("principle_2_desc"),
+              },
+              {
+                name: text_maker("principle_3_name"),
+                desc: text_maker("principle_3_desc"),
+              },
+              {
+                name: text_maker("principle_4_name"),
+                desc: text_maker("principle_4_desc"),
+              },
+            ]}
+          />
           <TM tmf={text_maker} el="h2" k="our_story_title" />
           <TM tmf={text_maker} el="h3" k="our_story_sub_title_1" />
           <TM tmf={text_maker} el="div" k="our_story_sub_text_1" />
@@ -68,4 +89,4 @@ export default class About extends React.Component {
       </StandardRouteContainer>
     );
   }
-};
+}
