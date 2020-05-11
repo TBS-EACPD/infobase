@@ -5,7 +5,7 @@ import text from "./Infographic.yaml";
 
 import { IconFilter } from "../icons/icons.js";
 import { Details } from "../components/Details.js";
-import { GraphLegend } from "../charts/declarative_charts.js";
+import { StandardLegend } from "../charts/legends";
 import { StandardRouteContainer } from "../core/NavComponents";
 import { Table } from "../core/TableClass.js";
 import { log_standard_event } from "../core/analytics.js";
@@ -323,8 +323,7 @@ class InfoGraph_ extends React.Component {
               content={
                 <fieldset>
                   <legend> {text_maker("filter_panels_description")} </legend>
-                  <GraphLegend
-                    container_style={{ marginLeft: "20px" }}
+                  <StandardLegend
                     items={_.map(panel_filter, (checked, dependency) => ({
                       id: dependency,
                       label: Table.lookup(dependency).name,
