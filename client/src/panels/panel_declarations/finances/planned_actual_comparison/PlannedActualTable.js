@@ -14,19 +14,19 @@ export const PlannedActualTable = ({
   <table className="table">
     <thead><tr>
       <th></th>
-      <th scope="col"> <TM k="planned" /></th>
-      <th scope="col"> <TM k="actual" /></th>
-      <th scope="col"> <TM k="difference_planned_actual" /></th>
+      <th scope="col"><TM k="planned" /></th>
+      <th scope="col"><TM k="actual" /></th>
+      <th scope="col"><TM k="difference_planned_actual" /></th>
     </tr></thead>
     <tbody>
       <tr>
-        <th scope="row"> <TM k="spending"/></th>
+        <th scope="row"><TM k="spending"/></th>
         <td><Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={planned_spend} /></td>
         <td><Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={actual_spend} /></td>
         <td><Format type={window.is_a11y_mode ? "compact1_written" : "compact1"} content={diff_spend} /></td>
       </tr>
       <tr>
-        <th scope="row"> <TM k="ftes"/></th>
+        <th scope="row"><TM k="ftes"/></th>
         <td><Format type="big_int" content={planned_ftes} /></td>
         <td><Format type="big_int" content={actual_ftes} /></td>
         <td><Format type="big_int" content={diff_ftes} /></td>

@@ -157,7 +157,7 @@ const IgocExplorer = ({match}) => {
       description={text_maker("igoc_desc_meta_attr")}
     >
       <div>
-        <h1> <TM k="igoc" /></h1>
+        <h1><TM k="igoc" /></h1>
       </div>
       <div className="medium_panel_text">
         <div style={{marginBottom: "1.5em"}}>
