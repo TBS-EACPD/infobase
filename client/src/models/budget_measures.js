@@ -21,8 +21,8 @@ const BudgetMeasure = class BudgetMeasure extends static_subject_store() {
         fr: "31 mars 2019",
       }[window.lang],
       2019: {
-        en: "January 31, 2020",
-        fr: "31 janvier 2020",
+        en: "February 29, 2020",
+        fr: "29 février 2020",
       }[window.lang],
     };
   }
