@@ -1,11 +1,17 @@
-import './FlatTreeMap.scss';
+import "./FlatTreeMap.scss";
 
 export class FlatTreeMapViz extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
-    return <div className="centerer" style={{width: "100%"}} ref={div => this.el = div} />;
+    return (
+      <div
+        className="centerer"
+        style={{ width: "100%" }}
+        ref={(div) => (this.el = div)}
+      />
+    );
   }
   componentDidMount() {
     this._imperative_render();
@@ -40,54 +46,50 @@ export class FlatTreeMapViz extends React.Component {
         >
     </div>`;
 
-
     const root = d3.hierarchy(data);
 
     const treemap = d3.treemap();
-    treemap
-      .size([width, height])
-      .tile(d3.treemapSquarify.ratio(2));
+    treemap.size([width, height]).tile(d3.treemapSquarify.ratio(2));
 
-    treemap(root
-      .sum(function (d) { return d[value_string]; })
-      .sort((a, b) => {
-        if (a.data.others) {
-          return 9999999;
-        }
-        if (b.data.others) {
-          return -9999999;
-        }
-        return b.value - a.value || b.height - a.height;
-      })
+    treemap(
+      root
+        .sum(function (d) {
+          return d[value_string];
+        })
+        .sort((a, b) => {
+          if (a.data.others) {
+            return 9999999;
+          }
+          if (b.data.others) {
+            return -9999999;
+          }
+          return b.value - a.value || b.height - a.height;
+        })
     );
 
     function treemap_node_content_container(sel) {
-      sel.styles(
-        d => ({
-          left: `${(d.x0)}px`,
-          top: `${(d.y0)}px`,
-          width: `${(d.x1) - (d.x0)}px`,
-          height: `${(d.y1) - (d.y0)}px`,
-        })
-      );
+      sel.styles((d) => ({
+        left: `${d.x0}px`,
+        top: `${d.y0}px`,
+        width: `${d.x1 - d.x0}px`,
+        height: `${d.y1 - d.y0}px`,
+      }));
     }
 
     function treemap_node_text_container(sel) {
-      sel.styles(
-        d => ({
-          width: `${(d.x1) - (d.x0)}px`,
-          height: `${(d.y1) - (d.y0)}px`,
-        })
-      );
+      sel.styles((d) => ({
+        width: `${d.x1 - d.x0}px`,
+        height: `${d.y1 - d.y0}px`,
+      }));
     }
 
-    const html_root = d3.select(el).select('div');
+    const html_root = d3.select(el).select("div");
 
     const items = html_root
-      .selectAll('div')
+      .selectAll("div")
       .data(root.children)
       .enter()
-      .append('div')
+      .append("div")
       .attr("class", "FlatTreeMap__ContentBox")
       .attr("tabindex", 0)
       .call(treemap_node_content_container)
@@ -96,16 +98,13 @@ export class FlatTreeMapViz extends React.Component {
       }));
 
     items
-      .append('div')
+      .append("div")
       .attr("class", "FlatTreeMap__TextBox")
       .call(treemap_node_text_container)
       .call(node_render);
 
     items.each(tooltip_render);
 
-
-
     return html_root;
   }
 }
-

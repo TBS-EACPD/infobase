@@ -1,10 +1,10 @@
-import { Fragment } from 'react';
-import MediaQuery from 'react-responsive';
+import { Fragment } from "react";
+import MediaQuery from "react-responsive";
 import {
   run_template,
   year_templates,
   actual_to_planned_gap_year,
-  declarative_charts,
+  A11yTable,
   trivial_text_maker,
   NivoResponsiveLine,
   newIBCategoryColors,
@@ -12,22 +12,26 @@ import {
   Table,
 } from "../../shared.js";
 
-const {
-  A11YTable,
-} = declarative_charts;
-
 const { std_years, planning_years } = year_templates;
-const exp_cols = _.map(std_years, yr=>`${yr}exp`);
+const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
 
 const calculate = (type, subject) => {
   const orgVoteStatPa = Table.lookup("orgVoteStatPa");
   const programSpending = Table.lookup("programSpending");
   const query_subject = subject.is("gov") ? undefined : subject;
-  const qExp = subject.is("dept") ? (type != "planned" ? orgVoteStatPa.q(query_subject) : null) : programSpending.q(query_subject);
-  const exp = qExp && qExp.sum(exp_cols, {as_object: false});
-  
-  const qProgSpending = type != "hist" ? programSpending.q(query_subject) : null;
-  const progSpending = qProgSpending && subject.has_planned_spending ? qProgSpending.sum(planning_years, {as_object: false}) : null;
+  const qExp = subject.is("dept")
+    ? type != "planned"
+      ? orgVoteStatPa.q(query_subject)
+      : null
+    : programSpending.q(query_subject);
+  const exp = qExp && qExp.sum(exp_cols, { as_object: false });
+
+  const qProgSpending =
+    type != "hist" ? programSpending.q(query_subject) : null;
+  const progSpending =
+    qProgSpending && subject.has_planned_spending
+      ? qProgSpending.sum(planning_years, { as_object: false })
+      : null;
 
   return { exp, progSpending };
 };
@@ -37,10 +41,16 @@ export const format_and_get_exp_program_spending = (type, subject) => {
   const { exp, progSpending } = calculate(type, subject);
   const raw_data = _.concat(exp, progSpending);
 
-  const exp_exists = exp && 0 != _.reduce(exp, (exp_sum, value) => 
-    exp_sum + value, 0);
-  const program_spending_exists = progSpending && 0 != _.reduce(progSpending, (progSpending_sum, value) => 
-    progSpending_sum + value, 0);
+  const exp_exists =
+    exp && 0 != _.reduce(exp, (exp_sum, value) => exp_sum + value, 0);
+  const program_spending_exists =
+    progSpending &&
+    0 !=
+      _.reduce(
+        progSpending,
+        (progSpending_sum, value) => progSpending_sum + value,
+        0
+      );
   const both_exists = exp_exists && program_spending_exists;
 
   const series_labels = [
@@ -50,20 +60,18 @@ export const format_and_get_exp_program_spending = (type, subject) => {
 
   const history_ticks = _.map(std_years, run_template);
   const plan_ticks = _.map(planning_years, run_template);
-  
-  const gap_year = (subject.has_planned_spending && actual_to_planned_gap_year) || null;
+
+  const gap_year =
+    (subject.has_planned_spending && actual_to_planned_gap_year) || null;
 
   let exp_program_spending_graph;
-  if(window.is_a11y_mode){
+  if (window.is_a11y_mode) {
     const historical_data = _.chain(exp)
       .map((exp_value, year_index) => ({
         label: history_ticks[year_index],
-        data: [
-          formatter("compact1_written", exp_value, {raw: true}),
-          null,
-        ],
+        data: [formatter("compact1_written", exp_value, { raw: true }), null],
       }))
-      .filter(d => d.data[0] != "0")
+      .filter((d) => d.data[0] != "0")
       .value();
 
     const planning_data = _.map(
@@ -72,7 +80,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
         label: plan_ticks[year_index],
         data: [
           null,
-          formatter("compact1_written", progSpending_value, {raw: true}),
+          formatter("compact1_written", progSpending_value, { raw: true }),
         ],
       })
     );
@@ -80,58 +88,63 @@ export const format_and_get_exp_program_spending = (type, subject) => {
     const data = _.concat(historical_data, planning_data);
 
     exp_program_spending_graph = (
-      <A11YTable
-        data_col_headers={series_labels}
-        data={data}
-      />
+      <A11yTable data_col_headers={series_labels} data={data} />
     );
   } else {
-    const zip_years_and_data = (years, data) => _.chain(years)
-      .map( (year, year_ix) => {
-        if(data){
-          return {
-            x: year,
-            y: data[year_ix],
-          };
-        }
-      })
-      .filter( (row) => {
-        if(years===history_ticks){
-          return row && row.y > 0;
-        } else{
-          return true;
-        }
-      })
-      .value();
+    const zip_years_and_data = (years, data) =>
+      _.chain(years)
+        .map((year, year_ix) => {
+          if (data) {
+            return {
+              x: year,
+              y: data[year_ix],
+            };
+          }
+        })
+        .filter((row) => {
+          if (years === history_ticks) {
+            return row && row.y > 0;
+          } else {
+            return true;
+          }
+        })
+        .value();
     const graph_data = _.chain(series_labels)
       .zip([
         zip_years_and_data(history_ticks, exp),
         _.compact([
-          gap_year && both_exists && {
-            x: gap_year,
-            y: null,
-          },
+          gap_year &&
+            both_exists && {
+              x: gap_year,
+              y: null,
+            },
           ...zip_years_and_data(plan_ticks, progSpending),
         ]),
       ])
-      .filter( row => !_.isNull(row[0]) )
-      .map( ([id, data]) => ({id, data}) )
+      .filter((row) => !_.isNull(row[0]))
+      .map(([id, data]) => ({ id, data }))
       .value();
-      
+
     const shouldTickRender = (tick) => {
-      if(type === "hist" || type === "hist_estimates"){
-        return tick === _.first(history_ticks) || tick === _.last(history_ticks);
-      } else if(type === "planned"){
+      if (type === "hist" || type === "hist_estimates") {
+        return (
+          tick === _.first(history_ticks) || tick === _.last(history_ticks)
+        );
+      } else if (type === "planned") {
         return tick === _.first(plan_ticks) || tick === _.last(plan_ticks);
-      } else{
-        return tick === gap_year || tick === _.first(history_ticks) || tick === _.last(plan_ticks);
+      } else {
+        return (
+          tick === gap_year ||
+          tick === _.first(history_ticks) ||
+          tick === _.last(plan_ticks)
+        );
       }
     };
-  
+
     const nivo_exp_program_spending_props = {
       raw_data: raw_data,
       data: graph_data,
-      colorBy: d => colors(d.id),
+      colorBy: (d) => colors(d.id),
       enableGridY: false,
       remove_left_axis: true,
       disable_y_axis_zoom: true,
@@ -140,11 +153,11 @@ export const format_and_get_exp_program_spending = (type, subject) => {
       y_scale_max: _.max(raw_data) * 1.1,
       legends: [
         {
-          anchor: 'bottom-right',
-          direction: 'row',
+          anchor: "bottom-right",
+          direction: "row",
           translateX: -80,
           translateY: 60,
-          itemDirection: 'left-to-right',
+          itemDirection: "left-to-right",
           itemWidth: 2,
           itemHeight: 20,
           itemsSpacing: 160,
@@ -158,37 +171,35 @@ export const format_and_get_exp_program_spending = (type, subject) => {
         bottom: 70,
         left: 40,
       },
-      graph_height: '230px',
-      ...(gap_year && both_exists && _.includes(series_labels, trivial_text_maker("planned_spending")) && {
-        markers: [
-          {
-            axis: 'x',
-            value: gap_year,
-            lineStyle: { 
-              stroke: window.infobase_color_constants.tertiaryColor, 
-              strokeWidth: 2,
-              strokeDasharray: ("3, 3"),
+      graph_height: "230px",
+      ...(gap_year &&
+        both_exists &&
+        _.includes(series_labels, trivial_text_maker("planned_spending")) && {
+          markers: [
+            {
+              axis: "x",
+              value: gap_year,
+              lineStyle: {
+                stroke: window.infobase_color_constants.tertiaryColor,
+                strokeWidth: 2,
+                strokeDasharray: "3, 3",
+              },
             },
-          },
-        ],
-      }),
+          ],
+        }),
     };
     const nivo_mobile_exp_program_spending_props = {
       ...nivo_exp_program_spending_props,
-      bttm_axis: { format: tick => (shouldTickRender(tick) ? tick : '') },
+      bttm_axis: { format: (tick) => (shouldTickRender(tick) ? tick : "") },
     };
-    
+
     exp_program_spending_graph = (
       <Fragment>
         <MediaQuery minWidth={1199}>
-          <NivoResponsiveLine
-            {...nivo_exp_program_spending_props}
-          />
+          <NivoResponsiveLine {...nivo_exp_program_spending_props} />
         </MediaQuery>
         <MediaQuery maxWidth={1198}>
-          <NivoResponsiveLine
-            {...nivo_mobile_exp_program_spending_props}
-          />
+          <NivoResponsiveLine {...nivo_mobile_exp_program_spending_props} />
         </MediaQuery>
       </Fragment>
     );

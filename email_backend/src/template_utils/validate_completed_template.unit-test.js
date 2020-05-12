@@ -1,12 +1,11 @@
-import { 
+import {
   validate_completed_template,
   verify_required_fields_present,
   verify_values_are_expected_and_match_value_types,
-} from './validate_completed_template.js'
-import _ from 'lodash';
+} from "./validate_completed_template.js";
+import _ from "lodash";
 
 describe("validate_completed_template", () => {
-
   const template_test_fields = {
     enums: {
       required: true,
@@ -81,16 +80,16 @@ describe("validate_completed_template", () => {
     radio: ["yes"],
     issue: "I don't think the line graphs should always start at 0",
     sha: "fenef8723hhf2h9jdj2j3d92093",
-    id: '1234qwert',
+    id: "1234qwert",
     additional: { bleh: "blah", bluh: { blagh: "blargh" } },
   };
   const valid_completed_test_fields_required_only = _.omit(
     valid_completed_test_fields,
-    ['id', 'additional']
+    ["id", "additional"]
   );
   const invalid_completed_test_fields_missing_required = _.omit(
     valid_completed_test_fields,
-    ['issue']
+    ["issue"]
   );
   const invalid_completed_test_fields_bad_value_type = {
     ...valid_completed_test_fields,
@@ -121,53 +120,28 @@ describe("validate_completed_template", () => {
 
   it("verify_required_fields_present checks that all fields marked required in the template are in the completed fields", () => {
     return expect(
-      _.map(
-        test_completed_fields,
-        (completed_fields) => verify_required_fields_present(template_test_fields, completed_fields)
+      _.map(test_completed_fields, (completed_fields) =>
+        verify_required_fields_present(template_test_fields, completed_fields)
       )
-    ).toEqual([
-      true,
-      true,
-      false,
-      true,
-      true,
-      true,
-      true,
-    ]);
+    ).toEqual([true, true, false, true, true, true, true]);
   });
 
   it("values_are_expected_and_match_value_types checks that all present fields are expected and match their type from the original template", () => {
     return expect(
-      _.map(
-        test_completed_fields,
-        (completed_fields) => verify_values_are_expected_and_match_value_types(template_test_fields, completed_fields)
+      _.map(test_completed_fields, (completed_fields) =>
+        verify_values_are_expected_and_match_value_types(
+          template_test_fields,
+          completed_fields
+        )
       )
-    ).toEqual([
-      true,
-      true,
-      true,
-      false,
-      false,
-      false,
-      false,
-    ]);
+    ).toEqual([true, true, true, false, false, false, false]);
   });
 
   it("validate_completed_template works end-to-end", () => {
     return expect(
-      _.map(
-        test_completed_fields,
-        (completed_fields) => validate_completed_template(template_test_fields, completed_fields)
+      _.map(test_completed_fields, (completed_fields) =>
+        validate_completed_template(template_test_fields, completed_fields)
       )
-    ).toEqual([
-      true,
-      true,
-      false,
-      false,
-      false,
-      false,
-      false,
-    ]);
+    ).toEqual([true, true, false, false, false, false, false]);
   });
-
 });

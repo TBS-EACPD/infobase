@@ -1,15 +1,14 @@
-import { Fragment } from 'react';
+import { Fragment } from "react";
 
-import { CanadaD3Component } from './CanadaD3Component.js';
+import { CanadaD3Component } from "./CanadaD3Component.js";
 
-import { GraphLegend } from "../declarative_charts.js";
+import { StandardLegend } from "../legends";
 import { NivoResponsiveHBar } from "../wrapped_nivo/index.js";
-import { hex_to_rgb } from '../../general_utils.js';
-import { secondaryColor, tertiaryColor } from '../../core/color_defs.js';
+import { hex_to_rgb } from "../../general_utils.js";
+import { secondaryColor, tertiaryColor } from "../../core/color_defs.js";
 import { run_template } from "../../models/text.js";
 import { businessConstants } from "../../models/businessConstants.js";
-import { trivial_text_maker } from '../../models/text.js';
-
+import { trivial_text_maker } from "../../models/text.js";
 
 const { provinces } = businessConstants;
 
@@ -18,33 +17,23 @@ const get_graph_color = (alpha) => {
   return rgb && `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha || 1})`;
 };
 
-
 class CanadaGraphBarLegend extends React.Component {
-  constructor(){
+  constructor() {
     super();
   }
   render() {
-    const {
-      prov,
-      data,
-      years,
-      formatter,
-    } = this.props;
+    const { prov, data, years, formatter } = this.props;
 
-    const province_graph_title = (prov) => `${trivial_text_maker("five_year_history")} ${prov ? provinces[prov].text : "Canada"}`;
+    const province_graph_title = (prov) =>
+      `${trivial_text_maker("five_year_history")} ${
+        prov ? provinces[prov].text : "Canada"
+      }`;
 
     const graph_data = _.chain(data)
-      .map( 
-        (data, ix) => ({
-          year: run_template(years[ix]), 
-          value: prov ? 
-            data[prov] :
-            _.chain(data)
-              .values()
-              .sum()
-              .value(),
-        })
-      )
+      .map((data, ix) => ({
+        year: run_template(years[ix]),
+        value: prov ? data[prov] : _.chain(data).values().sum().value(),
+      }))
       .reverse()
       .value();
 
@@ -58,9 +47,13 @@ class CanadaGraphBarLegend extends React.Component {
           indexBy="year"
           keys={["value"]}
           enableLabel={true}
-          label_format={d => <tspan x={100} y={16}> {formatter(d)} </tspan>}
-          label={d => `${d.data.year}: ${formatter(d.value)}`}
-          colorBy={d => get_graph_color(0.5)}
+          label_format={(d) => (
+            <tspan x={100} y={16}>
+              {formatter(d)}
+            </tspan>
+          )}
+          label={(d) => `${d.data.year}: ${formatter(d.value)}`}
+          colorBy={(d) => get_graph_color(0.5)}
           margin={{
             top: 40,
             right: 30,
@@ -90,14 +83,13 @@ class CanadaGraphBarLegend extends React.Component {
   }
 }
 
-
 class CanadaGraph extends React.PureComponent {
-  constructor(){
+  constructor() {
     super();
     this.graph_area = React.createRef();
   }
   render() {
-    return <div ref={this.graph_area}/>;
+    return <div ref={this.graph_area} />;
   }
   componentDidMount() {
     this._render();
@@ -107,17 +99,14 @@ class CanadaGraph extends React.PureComponent {
   }
   _render() {
     const { graph_args, prov_select_callback } = this.props;
-    const { 
-      data,
-      color_scale,
-      years,
-      formatter,
-    } = graph_args;
+    const { data, color_scale, years, formatter } = graph_args;
 
-    const graph_area_sel = d3.select( ReactDOM.findDOMNode(this.graph_area.current) );
+    const graph_area_sel = d3.select(
+      ReactDOM.findDOMNode(this.graph_area.current)
+    );
 
-    const ticks = _.map(years, y => `${run_template(y)}`);
-    
+    const ticks = _.map(years, (y) => `${run_template(y)}`);
+
     const canada_graph = new CanadaD3Component(graph_area_sel.node(), {
       main_color: get_graph_color(1),
       secondary_color: tertiaryColor,
@@ -128,11 +117,11 @@ class CanadaGraph extends React.PureComponent {
     });
 
     let active_prov = false;
-    canada_graph.dispatch.on('dataMouseEnter', prov => {
+    canada_graph.dispatch.on("dataMouseEnter", (prov) => {
       active_prov = true;
-      prov_select_callback(prov);    
+      prov_select_callback(prov);
     });
-    canada_graph.dispatch.on('dataMouseLeave', () => {
+    canada_graph.dispatch.on("dataMouseLeave", () => {
       _.delay(() => {
         if (!active_prov) {
           prov_select_callback(null);
@@ -145,9 +134,8 @@ class CanadaGraph extends React.PureComponent {
   }
 }
 
-
-export class Canada extends React.Component{
-  constructor(props){
+export class Canada extends React.Component {
+  constructor(props) {
     super(props);
 
     this.prov_select_callback = this.prov_select_callback.bind(this);
@@ -157,40 +145,45 @@ export class Canada extends React.Component{
     };
   }
 
-  prov_select_callback(selected_prov){
-    if(selected_prov !== this.state.prov){
-      this.setState({prov: selected_prov});
+  prov_select_callback(selected_prov) {
+    if (selected_prov !== this.state.prov) {
+      this.setState({ prov: selected_prov });
     }
   }
 
-  render(){
+  render() {
     const { graph_args } = this.props;
-    const {
-      data,
-      color_scale,
-      years,
-      formatter,
-    } = graph_args;
-    
-    const legend_items = _.map(color_scale.ticks(5).reverse(), (tick, idx, ticks) => ({
-      label: idx > 0 ? `${formatter(tick)} - ${formatter(ticks[idx - 1])}` : `${formatter(tick)}+`,
-      active: true,
-      id: tick,
-      color: get_graph_color( color_scale(tick) ),
-    }));
+    const { data, color_scale, years, formatter } = graph_args;
+
+    const legend_items = _.map(
+      color_scale.ticks(5).reverse(),
+      (tick, idx, ticks) => ({
+        label:
+          idx > 0
+            ? `${formatter(tick)} - ${formatter(ticks[idx - 1])}`
+            : `${formatter(tick)}+`,
+        active: true,
+        id: tick,
+        color: get_graph_color(color_scale(tick)),
+      })
+    );
     return (
       <div className="frow no-container">
         <div className="fcol-md-3">
-          <div className="legend-container" style={{ maxHeight: "400px", width: "100%", marginTop: "10px"}}>
-            <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
-              {trivial_text_maker("legend")}
-            </p>
-            <GraphLegend
-              isSolidBox
-              items={legend_items}
-            />
-          </div>
-          <div className="legend-container" style={{ maxHeight: "400px", width: "100%", overflowY: "hidden", marginTop: "10px"}}>
+          <StandardLegend
+            title={trivial_text_maker("legend")}
+            items={legend_items}
+            LegendCheckBoxProps={{ isSolidBox: true }}
+          />
+          <div
+            className="standard-legend-container"
+            style={{
+              maxHeight: "400px",
+              width: "100%",
+              overflowY: "hidden",
+              marginTop: "10px",
+            }}
+          >
             <CanadaGraphBarLegend
               prov={this.state.prov}
               data={data}
@@ -199,7 +192,7 @@ export class Canada extends React.Component{
             />
           </div>
         </div>
-        <div className="fcol-md-9" style={{position: "relative"}}>
+        <div className="fcol-md-9" style={{ position: "relative" }}>
           <CanadaGraph
             graph_args={graph_args}
             prov_select_callback={this.prov_select_callback}

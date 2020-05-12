@@ -154,6 +154,9 @@ planning:
 all:
   en: All
   fr: Tout
+none:
+  en: None
+  fr: Aucune
 to:
   en: to
   fr: à

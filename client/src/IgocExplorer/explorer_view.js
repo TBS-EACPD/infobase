@@ -1,93 +1,76 @@
-import '../explorer_common/explorer-styles.scss';
-import { igoc_tmf as text_maker, TM } from './igoc_explorer_text.js';
-import { grouping_options } from './hierarchies.js';
+import "../explorer_common/explorer-styles.scss";
+import { igoc_tmf as text_maker, TM } from "./igoc_explorer_text.js";
+import { grouping_options } from "./hierarchies.js";
 
-import { Fragment } from 'react';
-import { createSelector } from 'reselect';
-import classNames from 'classnames';
+import { Fragment } from "react";
+import { createSelector } from "reselect";
+import classNames from "classnames";
 
-import { get_root } from '../explorer_common/hierarchy_tools.js';
-import { Explorer } from '../explorer_common/explorer_components.js';
+import { get_root } from "../explorer_common/hierarchy_tools.js";
+import { Explorer } from "../explorer_common/explorer_components.js";
 
-import { infograph_href_template } from '../link_utils.js';
-import { sanitized_dangerous_inner_html } from '../general_utils.js';
-import {
-  SpinnerWrapper,
-  DlItem,
-  CheckBox,
-} from '../components/index.js';
-import { Subject } from '../models/subject.js';
+import { infograph_href_template } from "../link_utils.js";
+import { sanitized_dangerous_inner_html } from "../general_utils.js";
+import { SpinnerWrapper, DlItem, CheckBox } from "../components/index.js";
+import { Subject } from "../models/subject.js";
 
 const { InstForm } = Subject;
 
-function get_org_count(node){
-  if( _.get(node, "data.type") === "org"){
+function get_org_count(node) {
+  if (_.get(node, "data.type") === "org") {
     return 1;
-  } else if( _.isEmpty(node.children) ){
-    return 0; 
+  } else if (_.isEmpty(node.children)) {
+    return 0;
   } else {
     return _.chain(node.children)
-      .map(child => get_org_count(child))
+      .map((child) => get_org_count(child))
       .sum()
       .value();
   }
 }
 
 const SubjectFields = ({ subject, grouping }) => (
-  <div style={{marginTop: "2em"}}>
+  <div style={{ marginTop: "2em" }}>
     <dl className="dl-horizontal dl-no-bold-dts dl-really-long-terms">
-      { subject.applied_title && 
-        <DlItem
-          term={<TM k="applied_title" />}
-          def={subject.applied_title}
-        />
-      }
-      { subject.old_name && 
-        <DlItem
-          term={<TM k="previously_named" />}
-          def={subject.old_name}
-        />
-      }
-      { subject.legal_title &&
-        <DlItem
-          term={<TM k="legal_title" />}
-          def={subject.legal_title}
-        />
-      }
-      { subject.is_dead && 
+      {subject.applied_title && (
+        <DlItem term={<TM k="applied_title" />} def={subject.applied_title} />
+      )}
+      {subject.old_name && (
+        <DlItem term={<TM k="previously_named" />} def={subject.old_name} />
+      )}
+      {subject.legal_title && (
+        <DlItem term={<TM k="legal_title" />} def={subject.legal_title} />
+      )}
+      {subject.is_dead && (
         <Fragment>
-          <DlItem
-            term={<TM k="status" />}
-            def={subject.status}
-          />
-          <DlItem
-            term={<TM k="end_yr" />}
-            def={subject.end_yr}
-          />
+          <DlItem term={<TM k="status" />} def={subject.status} />
+          <DlItem term={<TM k="end_yr" />} def={subject.end_yr} />
         </Fragment>
-      }
-      { _.nonEmpty(subject.ministers) && 
+      )}
+      {_.nonEmpty(subject.ministers) && (
         <DlItem
-          term={<TM k="padded_minister_span"/>}
-          def={ _.map(subject.ministers,'name').join(", ") }
+          term={<TM k="padded_minister_span" />}
+          def={_.map(subject.ministers, "name").join(", ")}
         />
-      }
-      { _.nonEmpty(subject.mandate) && 
+      )}
+      {_.nonEmpty(subject.mandate) && (
         <DlItem
           term={<TM k="mandate" />}
-          def={ <div dangerouslySetInnerHTML={sanitized_dangerous_inner_html(subject.mandate)} /> }
+          def={
+            <div
+              dangerouslySetInnerHTML={sanitized_dangerous_inner_html(
+                subject.mandate
+              )}
+            />
+          }
         />
-      }
-      { _.nonEmpty(subject.notes) && 
-        <DlItem
-          term={<TM k ="notes"/>}
-          def={subject.notes}
-        />
-      }
+      )}
+      {_.nonEmpty(subject.notes) && (
+        <DlItem term={<TM k="notes" />} def={subject.notes} />
+      )}
     </dl>
   </div>
 );
-
 
 const inst_form_sort_order = [
   "min_dept",
@@ -104,48 +87,47 @@ const inst_form_sort_order = [
   "other",
 ];
 
-const react_html_string = str => <span dangerouslySetInnerHTML={{ __html: str }} />;
-const get_col_defs = ({show_counts, use_legal_titles}) => [{
-  id: "name",
-  width: 250,
-  textAlign: "left",
-  get_val: (node) => {
-    const {
-      data: {
-        name, 
-        subject, 
-        type,
-      },
-    } = node;
+const react_html_string = (str) => (
+  <span dangerouslySetInnerHTML={{ __html: str }} />
+);
+const get_col_defs = ({ show_counts, use_legal_titles }) => [
+  {
+    id: "name",
+    width: 250,
+    textAlign: "left",
+    get_val: (node) => {
+      const {
+        data: { name, subject, type },
+      } = node;
 
-    const display_name = type === "org" && use_legal_titles ?
-      subject.legal_title :
-      name;
+      const display_name =
+        type === "org" && use_legal_titles ? subject.legal_title : name;
 
-    if(type !== "org" && show_counts){
-      return react_html_string(`${display_name} (${get_org_count(node)})`);
-    } else if(subject && subject.end_yr){
-      return react_html_string(`${display_name} (${subject.end_yr})`);
-    } else {
-      return react_html_string(display_name);
-    }
+      if (type !== "org" && show_counts) {
+        return react_html_string(`${display_name} (${get_org_count(node)})`);
+      } else if (subject && subject.end_yr) {
+        return react_html_string(`${display_name} (${subject.end_yr})`);
+      } else {
+        return react_html_string(display_name);
+      }
+    },
   },
-}];
+];
 
 const get_children_grouper = createSelector(
   _.property("grouping"),
-  grouping => (node, children) => {
-    const trivial_grouping = [{node_group: children}];
-    if(node.root){
+  (grouping) => (node, children) => {
+    const trivial_grouping = [{ node_group: children }];
+    if (node.root) {
       return trivial_grouping;
     }
 
-    if(grouping==="portfolio" && node.data.type === "ministry"){
+    if (grouping === "portfolio" && node.data.type === "ministry") {
       return _.chain(children)
-        .groupBy('data.subject.inst_form.id')
+        .groupBy("data.subject.inst_form.id")
         .toPairs()
-        .sortBy( ([form_id]) => _.indexOf(inst_form_sort_order, form_id) )
-        .map( ([form_id, node_group])=> ({
+        .sortBy(([form_id]) => _.indexOf(inst_form_sort_order, form_id))
+        .map(([form_id, node_group]) => ({
           display: InstForm.lookup(form_id).name,
           node_group,
         }))
@@ -157,38 +139,36 @@ const get_children_grouper = createSelector(
 );
 
 const get_non_col_content_func = createSelector(
-  _.property('grouping'),
-  grouping => ({node}) => {
+  _.property("grouping"),
+  (grouping) => ({ node }) => {
     const {
-      data: {
-        subject,
-      },
+      data: { subject },
     } = node;
 
     return (
       <div>
-        { subject && 
+        {subject && (
           <div>
-            <SubjectFields {...{grouping, subject}} />
+            <SubjectFields {...{ grouping, subject }} />
           </div>
-        }
-        {subject && 
+        )}
+        {subject && (
           <div className="ExplorerNode__BRLinkContainer">
-            <a 
-              className="btn btn-xs btn-ib-light" 
+            <a
+              className="btn btn-xs btn-ib-light"
               href={infograph_href_template(subject)}
-            > 
-              <TM k="see_infographic" />    
+            >
+              <TM k="see_infographic" />
             </a>
           </div>
-        }
+        )}
       </div>
     );
   }
 );
 
 class ExplorerForIgoc extends React.Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       _query: "",
@@ -199,34 +179,36 @@ class ExplorerForIgoc extends React.Component {
     };
     this.debounced_set_query = _.debounce(this.set_query, 500);
   }
-  handleQueryChange(new_query){
+  handleQueryChange(new_query) {
     this.setState({
       _query: new_query,
       loading: new_query.length > 3 ? true : undefined,
     });
     this.debounced_set_query(new_query);
-  } 
-  set_query(new_query){
+  }
+  set_query(new_query) {
     this.props.set_query(new_query);
 
     // we want a spinner while the component re-renders in response to the search, as it can be a relatively slow update.
     // Current approach is a dumb 0.5 second spinner on every query change, and requires abunch of timeout overhead,
     // this is obviously junk and should some day be done better
-    this.timedOutStateChange = setTimeout(()=>{
+    this.timedOutStateChange = setTimeout(() => {
       this.setState({
         loading: false,
       });
     }, 500);
   }
-  componentWillUnmount(){
-    !_.isUndefined(this.debounced_set_query) && this.debounced_set_query.cancel();
-    !_.isUndefined(this.timedOutStateChange) && clearTimeout(this.timedOutStateChange);
+  componentWillUnmount() {
+    !_.isUndefined(this.debounced_set_query) &&
+      this.debounced_set_query.cancel();
+    !_.isUndefined(this.timedOutStateChange) &&
+      clearTimeout(this.timedOutStateChange);
   }
-  clearQuery(){
-    this.setState({_query: ""});
+  clearQuery() {
+    this.setState({ _query: "" });
     this.props.clear_query("");
   }
-  render(){
+  render() {
     const {
       flat_nodes,
       is_filtering,
@@ -239,75 +221,67 @@ class ExplorerForIgoc extends React.Component {
       should_show_orgs_without_data,
 
       on_toggle_orgs_without_data,
-
     } = this.props;
 
-    const {
-      loading,
-      use_legal_titles,
-    } = this.state;
+    const { loading, use_legal_titles } = this.state;
 
     const root = get_root(flat_nodes);
-    
-    const org_count = _.countBy(flat_nodes, node => _.isEmpty(node.children)).true;
+
+    const org_count = _.countBy(flat_nodes, (node) => _.isEmpty(node.children))
+      .true;
 
     const explorer_config = {
-      children_grouper: get_children_grouper({grouping}),
-      column_defs: get_col_defs({show_counts: !is_filtering, use_legal_titles}),
+      children_grouper: get_children_grouper({ grouping }),
+      column_defs: get_col_defs({
+        show_counts: !is_filtering,
+        use_legal_titles,
+      }),
       shouldHideHeader: true,
       zebra_stripe: true,
-      onClickExpand: id => toggle_node(id),
-      get_non_col_content: get_non_col_content_func({grouping}),
+      onClickExpand: (id) => toggle_node(id),
+      get_non_col_content: get_non_col_content_func({ grouping }),
     };
 
     return (
       <div>
         <div>
           <ul className="nav nav-justified nav-pills">
-            {
-              _.map(
-                grouping_options,
-                ({option_name}, option_key) => (
-                  <li className={classNames(option_key === grouping && 'active')}>
-                    <a href={`#igoc/${option_key}`} >
-                      {option_name}
-                    </a>
-                  </li>
-                )
-              )
-            }
+            {_.map(grouping_options, ({ option_name }, option_key) => (
+              <li className={classNames(option_key === grouping && "active")}>
+                <a href={`#igoc/${option_key}`}>{option_name}</a>
+              </li>
+            ))}
           </ul>
         </div>
         <div
           style={{
-            margin: '15px 0',
+            margin: "15px 0",
           }}
         >
           <form
-            style={{marginBottom: "5px"}}
-            onSubmit={evt => {
+            style={{ marginBottom: "5px" }}
+            onSubmit={(evt) => {
               evt.preventDefault();
               evt.stopPropagation();
-              set_query(evt.target.querySelector('input').value);
+              set_query(evt.target.querySelector("input").value);
               this.refs.focus_mount.focus();
             }}
           >
-            <input 
-              aria-label={text_maker("explorer_search_is_optional")}            
+            <input
+              aria-label={text_maker("explorer_search_is_optional")}
               className="form-control input-lg"
               type="text"
-              style={{width: "100%"}}
-              placeholder={text_maker('igoc_search_text')}
-              onChange={evt => this.handleQueryChange(evt.target.value)}
+              style={{ width: "100%" }}
+              placeholder={text_maker("igoc_search_text")}
+              onChange={(evt) => this.handleQueryChange(evt.target.value)}
             />
-            {
-              window.is_a11y_mode &&
-              <input 
+            {window.is_a11y_mode && (
+              <input
                 type="submit"
                 name="search"
                 value={text_maker("explorer_search")}
               />
-            }
+            )}
           </form>
           <div className="igoc-checkbox-and-count-row">
             <CheckBox
@@ -318,40 +292,45 @@ class ExplorerForIgoc extends React.Component {
               checkmark_vertical_align={6}
               checkbox_style={{ marginTop: 4 }}
             />
-            <TM k="displayed_orgs_count" args={{org_count}} el="div" />
+            <TM k="displayed_orgs_count" args={{ org_count }} el="div" />
             <CheckBox
               id={"use_legal_title"}
               active={use_legal_titles}
-              onClick={() => this.setState({use_legal_titles: !use_legal_titles})}
+              onClick={() =>
+                this.setState({ use_legal_titles: !use_legal_titles })
+              }
               label={text_maker("use_legal_title")}
               checkmark_vertical_align={6}
               checkbox_style={{ marginTop: 4 }}
             />
           </div>
         </div>
-        <div 
+        <div
           tabIndex={-1}
           className="explorer-focus-mount"
-          ref="focus_mount" 
-          style={{position: 'relative'}}
+          ref="focus_mount"
+          style={{ position: "relative" }}
           aria-label={text_maker("explorer_focus_mount")}
         >
-          {loading && 
+          {loading && (
             <div className="loading-overlay">
-              <div style={{height: '200px',position: 'relative'}}>
-                <SpinnerWrapper config_name={"sub_route"} /> 
+              <div style={{ height: "200px", position: "relative" }}>
+                <SpinnerWrapper config_name={"sub_route"} />
               </div>
             </div>
-          }
-          {is_filtering && _.isEmpty(root.children) &&
-            <div style={{fontWeight: 'bold', fontSize: '1.5em', textAlign: 'center'}}>  
+          )}
+          {is_filtering && _.isEmpty(root.children) && (
+            <div
+              style={{
+                fontWeight: "bold",
+                fontSize: "1.5em",
+                textAlign: "center",
+              }}
+            >
               <TM k="search_no_results" />
             </div>
-          }
-          <Explorer
-            config={explorer_config}
-            root={root}
-          />
+          )}
+          <Explorer config={explorer_config} root={root} />
         </div>
       </div>
     );

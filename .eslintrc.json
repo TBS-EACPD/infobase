@@ -1,0 +1,30 @@
+{
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "ecmaVersion": 2017,
+      "ecmaFeatures": {
+        "jsx": true,
+        "experimentalObjectRestSpread": true
+      },
+      "sourceType": "module",
+      "allowImportExportEverywhere": true
+    },
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true
+    },
+    "rules": {
+        "no-unused-vars": [
+            "warn",
+            { "args": "none" }
+        ],
+        "no-use-before-define": ["error", { "functions": true, "classes": true }],
+        "react/prop-types": [ "off" ],
+        "react/no-string-refs": [ "off" ],
+        "react/display-name": [ "off" ],
+        "react/no-find-dom-node": [ "off" ],
+        "react/no-children-prop": [ "off" ]
+    }
+  }
+  

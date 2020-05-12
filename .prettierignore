@@ -1,0 +1,25 @@
+node_modules
+
+# generated stuff
+client/app/
+client/build/
+client/build_prod/
+*/transpiled_build/
+*/coverage/
+
+# TODO these should be ephemeral files, but they aren't always cleaned up properly when tests are run locally
+# Can remove this line once that's fixed
+client/browser-tests/temp-route-tests-*
+
+
+# Prettier seems to want to format everything, just being defensive...
+*.yaml
+*.yml
+*.scss
+*.css
+*.html
+*.json
+*.graphql
+*.gql
+*.md
+*.babelrc

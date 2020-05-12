@@ -2,6 +2,8 @@
   "name": "infobase-monorepo",
   "description": "",
   "scripts": {
+    "autoformat": "prettier --write .",
+    "check_format": "prettier --check",
     "prod_deploy": "sh scripts/prod_scripts/prod_deploy.sh",
     "prod_rollback": "sh scripts/prod_scripts/prod_rollback.sh",
     "init_hooks": "sh scripts/dev_scripts/init_hooks.sh",
@@ -15,5 +17,8 @@
     "Kate Cook"
   ],
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "prettier": "^2.0.5"
+  }
 }
