@@ -34,6 +34,7 @@ open_source_q:
   en: Is GC InfoBase open sourced?
   fr: L’l’InfoBase du GC est-elle une source en libre accès?
 open_source_a:
+  transform: [handlebars]
   en: |
     Yes, the GC InfoBase web application is open sourced. The code is available for review and reuse
     {{ext_link "here" "https://github.com/TBS-EACPD/infobase" "GC InfoBase source code on GitHub"}}.
