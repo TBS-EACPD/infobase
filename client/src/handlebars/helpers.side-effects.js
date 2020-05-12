@@ -693,7 +693,7 @@ Handlebars.registerHelper("ext_link", function (display, url, title) {
   if (url) {
     return new Handlebars.SafeString(
       `<a target="_blank" rel="noopener noreferrer" href="${url}" ${
-        title && `title="${title}"`
+        _.isString(title) ? `title="${title}"` : ""
       }>${display}</a>`
     );
   } else {
