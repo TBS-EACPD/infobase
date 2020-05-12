@@ -48,6 +48,9 @@ const BudgetMeasuresRoute = retrying_react_lazy(() =>
 const About = retrying_react_lazy(() =>
   import(/* webpackChunkName: "About" */ "../about/about.js")
 );
+const Faq = retrying_react_lazy(() =>
+  import(/* webpackChunkName: "Faq" */ "../Faq/Faq.js")
+);
 const MetaData = retrying_react_lazy(() =>
   import(/* webpackChunkName: "Metadata" */ "../metadata/metadata.js")
 );
@@ -162,7 +165,7 @@ export class App extends React.Component {
               />
               <Route path="/rpb/:config?" component={ReportBuilder} />
               <Route path="/about" component={About} />
-              <Route path="/faq" component={About} />
+              <Route path="/faq" component={Faq} />
               <Route
                 path="/compare_estimates/:h7y_layout?"
                 component={EstimatesComparison}

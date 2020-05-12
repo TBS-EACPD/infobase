@@ -1,0 +1,44 @@
+faq_page_title:
+  en: Frequently Asked Questions
+  fr: TODO
+
+faq_page_description:
+  en: TODO
+  fr: TODO
+
+  
+data_source_q:
+  en: Where is the data from GC InfoBase sourced? Is it reliable?
+  fr: D'où proviennent les données de l’InfoBase du GC? Sont-elles fiables?
+data_source_a:
+  transform: [handlebars]
+  en: |
+    Relying on publications such as Public Accounts, Estimates, and Departmental Plans, GC InfoBase transforms complex
+    federal data into simple visual stories for Canadians. The data in GC InfoBase is typically updated shortly after
+    the associated reports are tabled in Parliament. These reports are available in their original form through the
+    {{ext_link "Government of Canada Publications website" "http://publications.gc.ca/site/eng/home.html"}}.
+  fr: |
+    S'appuyant sur des publications telles que les Comptes publics, les budgets des dépenses et les plans ministériels,
+    l’InfoBase du GC transforme des données fédérales complexes en de simples illustrations à l’intention des Canadiens.
+    Les données de l’InfoBase du GC , en règle générale, sont mises à jour peu de temps après le dépôt des rapports au Parlement.
+    Ces rapports accessibles intégralement sur le site {{ext_link "Publications du gouvernement du Canada" "http://publications.gc.ca/site/fra/accueil.html"}}.
+
+tools_q:
+  en: What tools did you use to build GC InfoBase?
+  fr: Quels outils avez-vous utilisés pour construire l’InfoBase du GC?
+tools_a:
+  en: GC InfoBase is a single-page web application that was developed using open-source libraries and standards (such as Bootstrap, webpack, YAML, handlebars.js, D3.js and React).
+  fr: L’l’InfoBase du GC est une application web d'une page qui a été développée au moyen des bibliothèques et des normes ouvertes (tels que Bootstrap, Webpack, YAML, handlebars.js, D3.js et React).
+
+open_source_q:
+  en: Is GC InfoBase open sourced?
+  fr: L’l’InfoBase du GC est-elle une source en libre accès?
+open_source_a:
+  en: |
+    Yes, the GC InfoBase web application is open sourced. The code is available for review and reuse
+    {{ext_link "here" "https://github.com/TBS-EACPD/infobase" "GC InfoBase source code on GitHub"}}.
+  fr: |
+    Oui, l'application web de l’InfoBase du GC est une source en libre accès. Le code est disponible pour examen et réutilisation
+    {{ext_link "ici" "https://github.com/TBS-EACPD/infobase" "Code source de l'InfoBase du GC sur GitHub"}}.
+
+# TODO: port over the rest of these... probably would work better as a csv, but might not be worth the pipeline overhead
