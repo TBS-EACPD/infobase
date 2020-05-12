@@ -1,12 +1,10 @@
+const _ = require("lodash");
 const {
   route_load_tests_config,
 } = require("../../client/browser-tests/route-load-tests-config.js");
 
 module.exports = {
   ci: {
-    settings: {
-      maxWaitForLoad: 90000,
-    },
     collect: {
       numberOfRuns: 1,
       url: _.map(
