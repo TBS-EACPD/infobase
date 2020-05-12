@@ -21,6 +21,11 @@ module.exports.route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
+    name: "Treemap Explorer",
+    route: "treemap",
+    test_on: ["eng"],
+  },
+  {
     name: "Datasets",
     route: "metadata",
     test_on: ["eng", "basic-eng"],

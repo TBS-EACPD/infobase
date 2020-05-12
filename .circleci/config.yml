@@ -92,8 +92,6 @@ jobs:
       - image: markhobson/node-chrome:latest
         <<: *dockerhub_auth
     steps:
-      - checkout:
-          path: "~/InfoBase"
       - run: npm install @lhci/cli@0.3.x
       - run:
           name: lhci autorun
