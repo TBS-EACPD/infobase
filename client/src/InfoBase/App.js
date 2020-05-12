@@ -162,11 +162,12 @@ export class App extends React.Component {
               />
               <Route path="/rpb/:config?" component={ReportBuilder} />
               <Route path="/about" component={About} />
+              <Route path="/faq" component={About} />
               <Route
                 path="/compare_estimates/:h7y_layout?"
                 component={EstimatesComparison}
               />
-              <Route path="/privacy" component={PrivacyStatement} />
+              <Route path="/privacy" component={PrivacyStatement} />s
               <Route
                 path="/diff/:org_id?/:crso_id?/:program_id?"
                 component={TextDiff}
