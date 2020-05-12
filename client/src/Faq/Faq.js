@@ -1,10 +1,11 @@
 import text from "./Faq.yaml";
 import "../explorer_common/explorer-styles.scss";
 import { StandardRouteContainer } from "../core/NavComponents.js";
-import { create_text_maker } from "../models/text.js";
-import { LabeledTable } from "../components/LabeledTable.js";
+import { LabeledTable, create_text_maker_component } from "../components";
 
-const text_maker = create_text_maker(text);
+const { text_maker, TM } = create_text_maker_component(text);
+
+const qa_keys = ["data_source", "tools", "open_source"];
 
 export default class Faq extends React.Component {
   render() {
@@ -18,20 +19,10 @@ export default class Faq extends React.Component {
         <div className="medium_panel_text text-only-page-root">
           <LabeledTable
             title={text_maker("faq_title")}
-            content={[
-              {
-                name: text_maker("data_source_q"),
-                desc: text_maker("data_source_a"),
-              },
-              {
-                name: text_maker("tools_q"),
-                desc: text_maker("tools_a"),
-              },
-              {
-                name: text_maker("open_source_q"),
-                desc: text_maker("open_source_a"),
-              },
-            ]}
+            content={_.map(qa_keys, (qa_key) => ({
+              name: text_maker(`${qa_key}_q`),
+              desc: <TM k={`${qa_key}_a`} />,
+            }))}
           />
         </div>
       </StandardRouteContainer>
