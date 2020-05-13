@@ -68,7 +68,7 @@ our_story_sub_title_1:
 our_story_sub_text_1:
   transform: [handlebars, markdown]
   en: |
-    The GC InfoBase was developed in response to a {{ext_link "Parliamentary request" "http://www.ourcommons.ca/DocumentViewer/en/41-1/OGGO/report-7/page-144"}} for better access to 
+    The GC InfoBase was developed in response to {{ext_link "a Parliamentary request" "http://www.ourcommons.ca/DocumentViewer/en/41-1/OGGO/report-7/page-144"}} for better access to 
     information on government finances. Its ongoing development seeks to meet a public demand for simpler government reporting.
 
 

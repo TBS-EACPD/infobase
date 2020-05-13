@@ -63,8 +63,8 @@ creation_q:
   en: Why was GC InfoBase created?
   fr: Pourquoi l’InfoBase du GC a-t-elle été créée?
 creation_a:
-  en: GC InfoBase development began in 2013 in response to a Parliamentary request for better access to data on government finances.
-  fr: Le développement de l’InfoBase du GC a commencé en 2013 en réponse à la demande du Parlement pour un meilleur accès aux données sur les finances publiques.
+  en: GC InfoBase development began in 2013 in response to {{ext_link "a Parliamentary request" "http://www.ourcommons.ca/DocumentViewer/en/41-1/OGGO/report-7/page-144"}} for better access to data on government finances.
+  fr: Le développement de l’InfoBase du GC a commencé en 2013 en réponse à la {{ext_link "demande du Parlement" "http://www.noscommunes.ca/DocumentViewer/fr/41-1/OGGO/rapport-7/page-144"}} pour un meilleur accès aux données sur les finances publiques.
 
 update_freq_q:
   en: How often is the data on GC InfoBase updated? 
