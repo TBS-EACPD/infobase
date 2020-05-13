@@ -61,6 +61,7 @@ export default class Faq extends React.Component {
         description={text_maker("faq_page_description")}
         route_key="_faq"
       >
+        <TM tmf={text_maker} el="h1" k="faq_page_title" />
         <ScrollToTargetContainer target_id={selected_qa_key}>
           <div className="medium_panel_text text-only-page-root">
             <FaqIndex />
