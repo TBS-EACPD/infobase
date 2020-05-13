@@ -1,10 +1,15 @@
+import "./Faq.scss";
 import text from "./Faq.yaml";
 
 import {
   StandardRouteContainer,
   ScrollToTargetContainer,
 } from "../core/NavComponents.js";
-import { LabeledTable, create_text_maker_component } from "../components";
+import {
+  LabeledTable,
+  create_text_maker_component,
+  FancyUL,
+} from "../components";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -24,16 +29,26 @@ const qa_keys = [
   "contact",
 ];
 
-const FaqIndex = ({ history }) => (
-  <ul>
-    {_.map(qa_keys, (qa_key) => (
-      <li key={qa_key}>
-        <a href={`#faq/${qa_key}`} title={text_maker("jump_to_question")}>
+const FaqIndex = () => (
+  <FancyUL ul_class="faq-index">
+    {[
+      <TM
+        key="jump_to_question"
+        k="jump_to_question"
+        el="h2"
+        style={{ margin: "0px", textAlign: "center" }}
+      />,
+      ..._.map(qa_keys, (qa_key) => (
+        <a
+          key={qa_key}
+          href={`#faq/${qa_key}`}
+          title={text_maker("jump_to_question")}
+        >
           {text_maker(`${qa_key}_q`)}
         </a>
-      </li>
-    ))}
-  </ul>
+      )),
+    ]}
+  </FancyUL>
 );
 
 const FaqTable = () => (
