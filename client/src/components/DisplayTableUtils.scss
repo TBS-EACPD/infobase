@@ -1,11 +1,28 @@
-.display-table-heading-utils {
+@import '../common_css/common-variables';
+
+.heading-container {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 1px;
+  width: 99%;
+  border-width: 1px 1px 0px 1px;
+  border-style: solid;
+  border-color: $primaryColor;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 8px 10px 0px;
+  background-color: $primaryColor;
+}
+
+.heading-utils {
   width: 1.5em;
   height: 1.5em;
 }
-button.display-table-heading-utils {
+button.heading-utils {
   background-color: Transparent;
   border: none;
   padding: 0;
+  margin-bottom: 5px;
 
   &:active {
     transform: scale(1.15);
