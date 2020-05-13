@@ -80,7 +80,11 @@ const render_w_options = ({ text_key }) => ({
             }}
           />
         ) : (
-          <NivoResponsivePie data={graph_data} graph_height="450px" />
+          <NivoResponsivePie
+            data={graph_data}
+            graph_height="450px"
+            show_legend={true}
+          />
         )}
       </Col>
     </StdPanel>
