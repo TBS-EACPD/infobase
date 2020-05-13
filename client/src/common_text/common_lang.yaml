@@ -430,6 +430,10 @@ percentage:
   en: Percentage
   fr: Pourcentage
 
+technology_examples:
+  en: such as React, Bootstrap, webpack, Sass, and GraphQL
+  fr: comme React, Bootstrap, webpack, Sass, et GraphQL
+
 #######################################
 # Data types
 #######################################

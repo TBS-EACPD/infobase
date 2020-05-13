@@ -68,8 +68,6 @@ export default class About extends React.Component {
           <TM tmf={text_maker} el="div" k="our_data_sub_text_1" />
           <TM tmf={text_maker} el="h3" k="our_data_sub_title_2" />
           <TM tmf={text_maker} el="div" k="our_data_sub_text_2" />
-          <TM tmf={text_maker} el="h3" k="our_data_sub_title_3" />
-          <TM tmf={text_maker} el="div" k="our_data_sub_text_3" />
           <TM tmf={text_maker} el="h2" k="behind_scenes_title" />
           <TM tmf={text_maker} el="h3" k="behind_scenes_sub_title_1" />
           <IconGrid icons={tech_icon_list} />
