@@ -165,7 +165,7 @@ export class App extends React.Component {
               />
               <Route path="/rpb/:config?" component={ReportBuilder} />
               <Route path="/about" component={About} />
-              <Route path="/faq" component={Faq} />
+              <Route path="/faq/:selected_qa_key?" component={Faq} />
               <Route
                 path="/compare_estimates/:h7y_layout?"
                 component={EstimatesComparison}

@@ -1,6 +1,9 @@
 import text from "./Faq.yaml";
 import "../explorer_common/explorer-styles.scss";
-import { StandardRouteContainer } from "../core/NavComponents.js";
+import {
+  StandardRouteContainer,
+  ScrollToTargetContainer,
+} from "../core/NavComponents.js";
 import { LabeledTable, create_text_maker_component } from "../components";
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -23,6 +26,12 @@ const qa_keys = [
 
 export default class Faq extends React.Component {
   render() {
+    const {
+      match: {
+        params: { selected_qa_key },
+      },
+    } = this.props;
+
     return (
       <StandardRouteContainer
         title={text_maker("faq_page_title")}
@@ -30,15 +39,17 @@ export default class Faq extends React.Component {
         description={text_maker("faq_page_description")}
         route_key="_faq"
       >
-        <div className="medium_panel_text text-only-page-root">
-          <LabeledTable
-            title={text_maker("faq_title")}
-            content={_.map(qa_keys, (qa_key) => ({
-              name: text_maker(`${qa_key}_q`),
-              desc: <TM k={`${qa_key}_a`} />,
-            }))}
-          />
-        </div>
+        <ScrollToTargetContainer target_id={selected_qa_key}>
+          <div className="medium_panel_text text-only-page-root">
+            <LabeledTable
+              title={text_maker("faq_title")}
+              content={_.map(qa_keys, (qa_key) => ({
+                name: <div id={qa_key}>{text_maker(`${qa_key}_q`)}</div>,
+                desc: <TM k={`${qa_key}_a`} />,
+              }))}
+            />
+          </div>
+        </ScrollToTargetContainer>
       </StandardRouteContainer>
     );
   }
