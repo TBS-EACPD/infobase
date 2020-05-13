@@ -6,6 +6,10 @@ faq_page_description:
   en: TODO
   fr: TODO
 
+jump_to_question:
+  en: Jump to question
+  fr: TODO
+
   
 data_source_q:
   en: Where is GC InfoBase data sourced from? Is it reliable?
