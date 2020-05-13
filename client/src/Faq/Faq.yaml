@@ -43,8 +43,9 @@ tools_q:
   en: What did you use to build GC InfoBase?
   fr: Qu'avez-vous utilisés pour construire l’InfoBase du GC? 
 tools_a:
-  en: GC InfoBase is a single-page web application that was developed using open-source libraries and standards (such as React, Bootstrap, webpack, SASS, and YAML).
-  fr: L’InfoBase du GC est une application web d'une page qui a été développée au moyen des bibliothèques et des normes ouvertes (tels que React, Bootstrap, webpack, Sass, et YAML).
+  transform: [handlebars]
+  en: GC InfoBase is a single-page web application that was developed using open-source libraries and standards ({{gt "technology_examples"}}).
+  fr: L’InfoBase du GC est une application web d'une page qui a été développée au moyen des bibliothèques et des normes ouvertes ({{gt "technology_examples"}}).
 
 infographic_tools_q:
   en: What did you use to create your data visualizations? 

@@ -140,27 +140,6 @@ our_data_sub_text_2:
     Les chiffres ne disent pas tout! L’InfoBase du GC s’avère utile aux utilisateurs en présentant de l’information contextuelle avec les données. On s’efforce, de concert avec les 
     organisations gouvernementales, à expliquer des données intéressantes, telles qu’une hausse ou une baisse des dépenses, ou l’état d’un résultat escompté.
 
-our_data_sub_title_3:
-  en: How can I download the raw data?
-  fr: Comment puis-je télécharger les données brutes?
-
-our_data_sub_text_3:
-  transform: [handlebars, markdown]
-  en: |
-    The GC InfoBase presents its data in many different ways, but we know that some people prefer to access the data directly for the sake of their own more focused analysis. 
-    For these brave souls, we ensure that all InfoBase data is also available in raw form on the 
-    {{ext_link "Government of Canada Open Data Portal" "https://open.canada.ca/data/en/dataset?portal_type=dataset"}}.
-
-
-    Individual links to the corresponding Open Data datasets for each dataset in the GC InfoBase can be found on our [Datasets page](#metadata).
-  fr: |
-    L’InfoBase présente les données de diverses façons, mais nous savons que certains préfèrent avoir un accès direct aux données pour mener leur propre analyse. C’est pourquoi 
-    on veille à ce que toutes les données contenues dans l’outil figurent aussi sous forme brute dans le 
-    {{ext_link "Portail de données ouvertes du gouvernement du Canada" "https://ouvert.canada.ca/data/fr/dataset?portal_type=dataset"}}.
-
-
-    Les liens vers les ensembles de données ouvertes correspondant à chaque tableau de l’InfoBase se trouvent dans la [page sur les données](#metadata).
-
 behind_scenes_title:
   en: Behind the Scenes
   fr: Derrière la scène
@@ -170,13 +149,14 @@ behind_scenes_sub_title_1:
   fr: Quelles sont les technologies utilisées dans l’InfoBase du GC?
 
 behind_scenes_sub_text_1:
+  transform: [handlebars]
   en: |
-    The GC InfoBase is a single-page web application, built in-house and from scratch. It was developed using open-source libraries and standards (such as Bootstrap, webpack, YAML, 
-    handlebars.js, D3.js and React). The team keeps the iteration time between prototypes and production short. Having built it from the ground-up gives us the flexibility to experiment 
+    The GC InfoBase is a single-page web application, built in-house and from scratch. It was developed using open-source libraries and standards ({{gt "technology_examples"}}).
+    The team keeps the iteration time between prototypes and production short. Having built it from the ground-up gives us the flexibility to experiment 
     with new ways of displaying information and allows the GC InfoBase to be constantly evolving, meeting user’s growing needs and expectations.
   fr: |
     L’InfoBase du GC est une application Web-maison d’une seule page montée de toutes pièces. Elle a été développée à l’aide de normes et de bibliothèques logicielles en libre accès 
-    (comme Bootstrap, Webpack, YAML, handlebars.js, D3.js et React). L’équipe maintient un court délai d’itération entre les prototypes et la production. Comme la page est montée de toutes 
+    ({{gt "technology_examples"}}). L’équipe maintient un court délai d’itération entre les prototypes et la production. Comme la page est montée de toutes 
     pièces, nous sommes en mesure de mettre à l’essai de nouvelles présentations de l’information et de constamment faire évoluer l’InfoBase du GC pour répondre aux attentes et besoins 
     croissants des utilisateurs.
 
