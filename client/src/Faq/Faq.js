@@ -36,7 +36,7 @@ const FaqIndex = () => (
         key="jump_to_question"
         k="jump_to_question"
         el="h2"
-        style={{ margin: "0px", textAlign: "center" }}
+        className="heading-unstyled"
       />,
       ..._.map(qa_keys, (qa_key) => (
         <a
@@ -53,7 +53,7 @@ const FaqIndex = () => (
 
 const FaqTable = () => (
   <LabeledTable
-    title={text_maker("faq_title")}
+    title={<TM k="faq_title" el="h2" className="heading-unstyled" />}
     content={_.map(qa_keys, (qa_key) => ({
       name: <div id={qa_key}>{text_maker(`${qa_key}_q`)}</div>,
       desc: <TM k={`${qa_key}_a`} />,
@@ -78,7 +78,7 @@ export default class Faq extends React.Component {
       >
         <TM tmf={text_maker} el="h1" k="faq_page_title" />
         <ScrollToTargetContainer target_id={selected_qa_key}>
-          <div className="medium_panel_text text-only-page-root">
+          <div className="medium_panel_text">
             <FaqIndex />
             <FaqTable />
           </div>
