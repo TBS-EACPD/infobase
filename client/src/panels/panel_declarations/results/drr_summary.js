@@ -264,6 +264,7 @@ class PercentageViz extends React.Component {
           <div className="fcol-md-6 fcol-xs-12 medium_panel_text">
             <NivoResponsivePie
               data={graph_data}
+              legend_data={graph_data}
               graph_height="300px"
               is_money={false}
               colorBy={colorBy}
