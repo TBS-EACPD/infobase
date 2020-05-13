@@ -57,15 +57,15 @@ export class NivoResponsivePie extends React.Component {
       original_value: data.value,
     }));
 
-    const legend_total = _.reduce(
-      legend_data,
+    const graph_total = _.reduce(
+      data,
       (sum, { value }) => sum + Math.abs(value),
       0
     );
 
     const table_data = _.map(data, (row) => ({
       label: row.label,
-      percentage: row.value / legend_total,
+      percentage: row.value / graph_total,
       value: row.value,
     }));
     const column_configs = {
@@ -152,7 +152,7 @@ export class NivoResponsivePie extends React.Component {
                     <span className="infobase-pie__legend-data">
                       <Format
                         type="percentage1"
-                        content={item.value / legend_total}
+                        content={item.value / graph_total}
                       />
                     </span>
                   </div>
