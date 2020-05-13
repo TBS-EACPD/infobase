@@ -32,6 +32,7 @@ export class NivoResponsivePie extends React.Component {
       display_horizontal,
       disable_table_view,
       table_name,
+      show_legend,
     } = this.props;
 
     const color_scale = infobase_colors_smart(
@@ -141,22 +142,24 @@ export class NivoResponsivePie extends React.Component {
         <div className="infobase-pie__legend">
           <div className="centerer">
             <div className="centerer-IE-fix">
-              <TabularLegend
-                items={legend_items}
-                get_right_content={(item) => (
-                  <div>
-                    <span className="infobase-pie__legend-data">
-                      <Format type="compact1" content={item.value} />
-                    </span>
-                    <span className="infobase-pie__legend-data">
-                      <Format
-                        type="percentage1"
-                        content={item.value / graph_total}
-                      />
-                    </span>
-                  </div>
-                )}
-              />
+              {show_legend && (
+                <TabularLegend
+                  items={legend_items}
+                  get_right_content={(item) => (
+                    <div>
+                      <span className="infobase-pie__legend-data">
+                        <Format type="compact1" content={item.value} />
+                      </span>
+                      <span className="infobase-pie__legend-data">
+                        <Format
+                          type="percentage1"
+                          content={item.value / graph_total}
+                        />
+                      </span>
+                    </div>
+                  )}
+                />
+              )}
             </div>
           </div>
         </div>
