@@ -8,7 +8,7 @@ faq_page_description:
 
   
 data_source_q:
-  en: Where is the data from GC InfoBase sourced? Is it reliable?
+  en: Where is GC InfoBase data sourced from? Is it reliable?
   fr: D'où proviennent les données de l’InfoBase du GC? Sont-elles fiables?
 data_source_a:
   transform: [handlebars]
@@ -31,15 +31,15 @@ tools_a:
   fr: L’l’InfoBase du GC est une application web d'une page qui a été développée au moyen des bibliothèques et des normes ouvertes (tels que Bootstrap, Webpack, YAML, handlebars.js, D3.js et React).
 
 open_source_q:
-  en: Is GC InfoBase open sourced?
-  fr: L’l’InfoBase du GC est-elle une source en libre accès?
+  en: Is the GC InfoBase application open sourced?
+  fr: L’application de l’InfoBase du GC est-elle une source en libre accès?
 open_source_a:
   transform: [handlebars]
   en: |
     Yes, the GC InfoBase web application is open sourced. The code is available for review and reuse
     {{ext_link "here" "https://github.com/TBS-EACPD/infobase" "GC InfoBase source code on GitHub"}}.
   fr: |
-    Oui, l'application web de l’InfoBase du GC est une source en libre accès. Le code est disponible pour examen et réutilisation
+    Oui, l’application web de l’InfoBase du GC est une source en libre accès. Le code est disponible pour examen et réutilisation
     {{ext_link "ici" "https://github.com/TBS-EACPD/infobase" "Code source de l'InfoBase du GC sur GitHub"}}.
 
 # TODO: port over the rest of these... probably would work better as a csv, but might not be worth the pipeline overhead
