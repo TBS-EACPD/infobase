@@ -1,5 +1,5 @@
 import text from "./Faq.yaml";
-import "../explorer_common/explorer-styles.scss";
+
 import {
   StandardRouteContainer,
   ScrollToTargetContainer,
@@ -24,6 +24,28 @@ const qa_keys = [
   "contact",
 ];
 
+const FaqIndex = ({ history }) => (
+  <ul>
+    {_.map(qa_keys, (qa_key) => (
+      <li key={qa_key}>
+        <a href={`#faq/${qa_key}`} title={text_maker("jump_to_question")}>
+          {text_maker(`${qa_key}_q`)}
+        </a>
+      </li>
+    ))}
+  </ul>
+);
+
+const FaqTable = () => (
+  <LabeledTable
+    title={text_maker("faq_title")}
+    content={_.map(qa_keys, (qa_key) => ({
+      name: <div id={qa_key}>{text_maker(`${qa_key}_q`)}</div>,
+      desc: <TM k={`${qa_key}_a`} />,
+    }))}
+  />
+);
+
 export default class Faq extends React.Component {
   render() {
     const {
@@ -41,13 +63,8 @@ export default class Faq extends React.Component {
       >
         <ScrollToTargetContainer target_id={selected_qa_key}>
           <div className="medium_panel_text text-only-page-root">
-            <LabeledTable
-              title={text_maker("faq_title")}
-              content={_.map(qa_keys, (qa_key) => ({
-                name: <div id={qa_key}>{text_maker(`${qa_key}_q`)}</div>,
-                desc: <TM k={`${qa_key}_a`} />,
-              }))}
-            />
+            <FaqIndex />
+            <FaqTable />
           </div>
         </ScrollToTargetContainer>
       </StandardRouteContainer>
