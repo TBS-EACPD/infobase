@@ -5,7 +5,21 @@ import { LabeledTable, create_text_maker_component } from "../components";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const qa_keys = ["data_source", "tools", "open_source"];
+const qa_keys = [
+  "data_source",
+  "open_source",
+  "tools",
+  "infographic_tools",
+  "creation",
+  "update_freq",
+  "raw_data",
+  "older_data",
+  "people_data_exemptions",
+  "spending_types",
+  "fte_levels",
+  "tagging_scheme",
+  "contact",
+];
 
 export default class Faq extends React.Component {
   render() {
