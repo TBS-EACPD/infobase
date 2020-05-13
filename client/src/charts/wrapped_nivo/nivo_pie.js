@@ -20,7 +20,6 @@ export class NivoResponsivePie extends React.Component {
   render() {
     const {
       data,
-      legend_data,
       graph_height,
       colors,
       colorBy,
@@ -40,7 +39,7 @@ export class NivoResponsivePie extends React.Component {
     );
     const color_func = colorBy || ((d) => color_scale(d.label));
 
-    const legend_items = _.chain(legend_data)
+    const legend_items = _.chain(data)
       .sortBy("value")
       .reverse()
       .map(({ value, label }) => ({
