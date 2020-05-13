@@ -180,4 +180,5 @@ NivoResponsivePie.defaultProps = {
     left: 50,
   },
   include_percent: true,
+  show_legend: true,
 };
