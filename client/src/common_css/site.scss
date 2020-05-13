@@ -148,6 +148,14 @@ body {
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-weight: $lightFontWeight;
   font-family: $fontFamily;
+
+  &.heading-unstyled {
+    margin: 0px;
+    text-transform: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    font-family: inherit;
+  }
 }
 
 b, strong, .heavy-weight {

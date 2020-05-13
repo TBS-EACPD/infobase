@@ -1,5 +1,12 @@
 ul.fancy-ul.faq-index {
   & > li {
     padding: 0px 15px;
+
+    &:first-child {
+      text-align: center;
+      font-size: 1.4em;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    } 
   }
 }
