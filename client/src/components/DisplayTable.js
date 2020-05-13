@@ -1,14 +1,13 @@
 import "./DisplayTable.scss";
-import text from "./DisplayTable.yaml";
 
+import text from "../common_text/common_lang.yaml";
 import classNames from "classnames";
 import { Subject } from "../models/subject.js";
 import { create_text_maker_component, Format } from "./misc_util_components.js";
 
+import { DisplayTableUtils } from "./DisplayTableUtils.js";
 import { SortDirections } from "./SortDirection.js";
 import { DebouncedTextInput } from "./DebouncedTextInput.js";
-import { WriteToClipboard } from "./WriteToClipboard.js";
-import { IconCopy } from "../icons/icons.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
 const { Dept } = Subject;
@@ -163,21 +162,7 @@ export class DisplayTable extends React.Component {
       <div
         style={{ overflowX: "auto", marginTop: "20px", marginBottom: "20px" }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row-reverse",
-            paddingBottom: 5,
-          }}
-        >
-          <WriteToClipboard
-            text_to_copy={data_to_csv_string}
-            button_class_name={"panel-heading-utils"}
-            button_description={text_maker("copy_table_data")}
-            IconComponent={IconCopy}
-            icon_color={window.infobase_color_constants.secondaryColor}
-          />
-        </div>
+        <DisplayTableUtils data_to_csv_string={data_to_csv_string} />
         <table
           className={classNames(
             "table",

@@ -1,0 +1,13 @@
+.display-table-heading-utils {
+  width: 1.5em;
+  height: 1.5em;
+}
+button.display-table-heading-utils {
+  background-color: Transparent;
+  border: none;
+  padding: 0;
+
+  &:active {
+    transform: scale(1.15);
+  }
+}
