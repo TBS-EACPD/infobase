@@ -8,7 +8,7 @@ export class LabeledTable extends React.Component {
       <div className="labeled-table">
         <div className="labeled-table__header">{title}</div>
         <div className="labeled-table__items">
-          {_.map(content, (item) =>
+          {_.map(content, (item, ix) =>
             item.href ? (
               <a
                 href={item.href}
@@ -20,7 +20,7 @@ export class LabeledTable extends React.Component {
                 )}
                 tabIndex={0}
                 aria-checked={item.active}
-                key={item.name}
+                key={ix}
               >
                 <div className="labeled-table__item-label">
                   {styles && styles.header ? (
@@ -38,7 +38,7 @@ export class LabeledTable extends React.Component {
                 </div>
               </a>
             ) : (
-              <div className="labeled-table__item" key={item.name}>
+              <div className="labeled-table__item" key={ix}>
                 <div className="labeled-table__item-label">
                   {styles && styles.header ? (
                     <span className={styles.header}>{item.name}</span>
