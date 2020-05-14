@@ -170,7 +170,7 @@ export class App extends React.Component {
                 path="/compare_estimates/:h7y_layout?"
                 component={EstimatesComparison}
               />
-              <Route path="/privacy" component={PrivacyStatement} />s
+              <Route path="/privacy" component={PrivacyStatement} />
               <Route
                 path="/diff/:org_id?/:crso_id?/:program_id?"
                 component={TextDiff}
