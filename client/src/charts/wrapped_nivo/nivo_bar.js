@@ -149,8 +149,6 @@ export class NivoResponsiveBar extends React.Component {
       </div>
     );
 
-    console.log(tooltip);
-
     return (
       <InteractiveGraph graph={graph} table={table} table_name={table_name} />
     );
