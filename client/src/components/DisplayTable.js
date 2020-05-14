@@ -71,7 +71,7 @@ export class DisplayTable extends React.Component {
       */,
     } = this.props;
     const { sort_by, descending, searches } = this.state;
-
+    console.log(column_configs);
     const column_config_defaults = {
       is_sortable: true,
       is_summable: false,
@@ -111,7 +111,7 @@ export class DisplayTable extends React.Component {
           .value()
       )
       .thru((unsorted_array) => {
-        if (sort_by) {
+        if (col_configs_with_defaults[sort_by]) {
           return col_configs_with_defaults[sort_by].sort_func
             ? _.sortWith(unsorted_array, (a, b) =>
                 col_configs_with_defaults[sort_by].sort_func(
