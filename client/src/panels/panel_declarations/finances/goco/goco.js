@@ -243,7 +243,7 @@ class Goco extends React.Component {
               <tbody>
                 {slice.map((tooltip_item) => (
                   <tr key={tooltip_item.id}>
-                    <td className="nivo-tooltip__content">
+                    <td className="nivo-tooltip__icon">
                       <div
                         style={{
                           height: "12px",
@@ -252,9 +252,9 @@ class Goco extends React.Component {
                         }}
                       />
                     </td>
-                    <td className="nivo-tooltip__content">{tooltip_item.id}</td>
+                    <td className="nivo-tooltip__label">{tooltip_item.id}</td>
                     <td
-                      className="nivo-tooltip__content"
+                      className="nivo-tooltip__value"
                       dangerouslySetInnerHTML={{
                         __html: format_value(tooltip_item),
                       }}

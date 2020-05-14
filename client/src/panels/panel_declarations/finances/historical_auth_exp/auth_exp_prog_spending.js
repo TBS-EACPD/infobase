@@ -215,7 +215,7 @@ class AuthExpProgSpending extends React.Component {
               <tbody>
                 {slice.data.map((tooltip_item) => (
                   <tr key={tooltip_item.serie.id}>
-                    <td className="nivo-tooltip__content">
+                    <td className="nivo-tooltip__icon">
                       <div
                         style={{
                           height: "12px",
@@ -224,11 +224,11 @@ class AuthExpProgSpending extends React.Component {
                         }}
                       />
                     </td>
-                    <td className="nivo-tooltip__content">
+                    <td className="nivo-tooltip__label">
                       {tooltip_item.serie.id}
                     </td>
                     <td
-                      className="nivo-tooltip__content"
+                      className="nivo-tooltip__value"
                       dangerouslySetInnerHTML={{
                         __html: tooltip_formatter(tooltip_item.data.y),
                       }}
@@ -238,14 +238,14 @@ class AuthExpProgSpending extends React.Component {
                 {slice.data.length > 1 ? (
                   <tr>
                     <td
-                      className="nivo-tooltip__content"
+                      className="nivo-tooltip__icon"
                       style={{ height: "12px" }}
                     />
-                    <td className="nivo-tooltip__content">
+                    <td className="nivo-tooltip__label">
                       {text_maker("difference")}
                     </td>
                     <td
-                      className="nivo-tooltip__content"
+                      className="nivo-tooltip__value"
                       style={{
                         color: window.infobase_color_constants.highlightColor,
                       }}
