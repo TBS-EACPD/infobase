@@ -1,0 +1,42 @@
+@import '../common_css/common-variables';
+
+ul.fancy-ul {
+  margin-bottom: 20px;
+  padding-left: 0;  
+}
+
+ul.fancy-ul > li {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: $backgroundColor;
+  border: 1px solid $separatorColor;
+  font-size: 16px;
+}
+
+ul.fancy-ul > li:first-child {
+  border-top-right-radius: $standardBorderRadius;
+  border-top-left-radius: $standardBorderRadius;
+}
+
+ul.fancy-ul > li:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: $standardBorderRadius;
+  border-bottom-left-radius: $standardBorderRadius;
+}
+
+.fancy-ul-span-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.fancy-ul-title-row {
+  width: 100%;
+  text-align: center;
+  font-weight: bold; 
+  font-size: 16px;
+}
