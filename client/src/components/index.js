@@ -37,6 +37,7 @@ export { WellList } from "./WellList.js";
 export { LabeledTable } from "./LabeledTable.js";
 export { FootnoteList } from "./FootnoteList.js";
 export { AlertBanner } from "./AlertBanner.js";
+export { FancyUL } from "./FancyUL.js";
 
 export { StatelessModal, FixedPopover } from "./modals_and_popovers";
 export {
@@ -47,7 +48,6 @@ export {
 
 export {
   Format,
-  FancyUL,
   TrivialTextMaker,
   TrivialTM,
   ExternalLink,

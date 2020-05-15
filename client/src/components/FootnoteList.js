@@ -2,7 +2,7 @@ import "./FootnoteList.scss";
 
 import { sanitized_dangerous_inner_html } from "../general_utils.js";
 
-import { FancyUL } from "./misc_util_components.js";
+import { FancyUL } from "./FancyUL.js";
 
 const FootnoteList = ({ footnotes }) => (
   <div className={"footnote-list"}>

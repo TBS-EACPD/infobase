@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import { Fragment } from "react";
 
 import {
@@ -33,15 +32,6 @@ class Format extends React.PureComponent {
     );
   }
 }
-
-const FancyUL = ({ children, ul_class }) => (
-  <ul className={classNames("fancy-ul", ul_class)}>
-    {_.chain(children)
-      .compact()
-      .map((item, i) => <li key={i}>{item}</li>)
-      .value()}
-  </ul>
-);
 
 const Year = ({ y }) => run_template(`{{${y}}}`);
 
@@ -87,7 +77,6 @@ const MultiColumnList = ({
 
 export {
   Format,
-  FancyUL,
   TrivialTextMaker,
   TrivialTM,
   ExternalLink,
