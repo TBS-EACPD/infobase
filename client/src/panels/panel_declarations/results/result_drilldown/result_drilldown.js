@@ -314,7 +314,12 @@ class SingleSubjExplorer extends React.Component {
                 type="button"
                 className="btn btn-primary"
                 style={{ width: "100%" }}
-                onClick={toggle_all}
+                onClick={() => {
+                  toggle_all(root);
+                  this.setState({
+                    is_expanded: !this.state.is_expanded,
+                  });
+                }}
               >
                 {this.state.is_expanded
                   ? text_maker("collapse_all")
