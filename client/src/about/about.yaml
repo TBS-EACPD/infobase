@@ -151,12 +151,12 @@ behind_scenes_sub_title_1:
 behind_scenes_sub_text_1:
   transform: [handlebars]
   en: |
-    The GC InfoBase is a single-page web application, built in-house and from scratch. It was developed using open-source libraries and standards ({{gt "technology_examples"}}).
+    The GC InfoBase is a single-page web application, built in-house and from scratch. It was developed using open-source libraries and standards (such as React, Bootstrap, webpack, Sass, and GraphQL).
     The team keeps the iteration time between prototypes and production short. Having built it from the ground-up gives us the flexibility to experiment 
     with new ways of displaying information and allows the GC InfoBase to be constantly evolving, meeting user’s growing needs and expectations.
   fr: |
     L’InfoBase du GC est une application Web-maison d’une seule page montée de toutes pièces. Elle a été développée à l’aide de normes et de bibliothèques logicielles en libre accès 
-    ({{gt "technology_examples"}}). L’équipe maintient un court délai d’itération entre les prototypes et la production. Comme la page est montée de toutes 
+    (comme React, Bootstrap, webpack, Sass, et GraphQL). L’équipe maintient un court délai d’itération entre les prototypes et la production. Comme la page est montée de toutes 
     pièces, nous sommes en mesure de mettre à l’essai de nouvelles présentations de l’information et de constamment faire évoluer l’InfoBase du GC pour répondre aux attentes et besoins 
     croissants des utilisateurs.
 
