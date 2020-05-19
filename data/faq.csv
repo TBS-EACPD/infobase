@@ -2,25 +2,25 @@ id,q_en,q_fr,a_en,a_fr
 data_source,Where is GC InfoBase data sourced from? Is it reliable?,D'où proviennent les données de l’InfoBase du GC? Sont-elles fiables?,"Relying on publications such as Public Accounts, Estimates, and Departmental Plans, GC InfoBase transforms complex
 federal data into simple visual stories for Canadians. The data in GC InfoBase is typically updated shortly after
 the associated reports are tabled in Parliament. These reports are available in their original form through the
-{{ext_link 'Government of Canada Publications website' 'http://publications.gc.ca/site/eng/home.html'}}.
+<a target='_blank' rel='noopener noreferrer' href='http://publications.gc.ca/site/eng/home.html'>Government of Canada Publications website</a>.
 ","S'appuyant sur des publications telles que les Comptes publics, les budgets des dépenses et les plans ministériels,
 l’InfoBase du GC transforme des données fédérales complexes en de simples illustrations à l’intention des Canadiens.
 Les données de l’InfoBase du GC , en règle générale, sont mises à jour peu de temps après le dépôt des rapports au Parlement.
-Ces rapports accessibles intégralement sur le site {{ext_link 'Publications du gouvernement du Canada' 'http://publications.gc.ca/site/fra/accueil.html'}}.
+Ces rapports accessibles intégralement sur le site <a target='_blank' rel='noopener noreferrer' href='http://publications.gc.ca/site/fra/accueil.html'>Publications du gouvernement du Canada</a>.
 "
 open_source,Is the GC InfoBase application open sourced?,L’application de l’InfoBase du GC est-elle une source en libre accès?,"Yes, the GC InfoBase web application is open sourced. The code is available for review and reuse
-{{ext_link 'here' 'https://github.com/TBS-EACPD/infobase' 'GC InfoBase source code on GitHub'}}.
+<a target='_blank' rel='noopener noreferrer' href='https://github.com/TBS-EACPD/infobase' title='GC InfoBase source code on GitHub'>here</a>.
 ","Oui, l’application web de l’InfoBase du GC est une source en libre accès. Le code est disponible pour examen et réutilisation
-{{ext_link 'ici' 'https://github.com/TBS-EACPD/infobase' 'Code source de l'InfoBase du GC sur GitHub'}}.
+<a target='_blank' rel='noopener noreferrer' href='https://github.com/TBS-EACPD/infobase' title='Code source de l'InfoBase du GC sur GitHub'>ici</a>.
 "
-tools,What did you use to build GC InfoBase?,Qu'avez-vous utilisés pour construire l’InfoBase du GC?,GC InfoBase is a single-page web application that was developed using open-source libraries and standards ({{gt 'technology_examples'}}).,L’InfoBase du GC est une application web d'une page qui a été développée au moyen des bibliothèques et des normes ouvertes ({{gt 'technology_examples'}}).
+tools,What did you use to build GC InfoBase?,Qu'avez-vous utilisés pour construire l’InfoBase du GC?,GC InfoBase is a single-page web application that was developed using open-source libraries and standards ({{gt 'technology_examples'</a>).,L’InfoBase du GC est une application web d'une page qui a été développée au moyen des bibliothèques et des normes ouvertes ({{gt 'technology_examples'</a>).
 infographic_tools,What did you use to create your data visualizations?,Qu'avez-vous utilisé pour créer vos visualisations de données?,"The graphs on GC InfoBase are built using JavaScript, specifically the graphing libraries D3.js and Nivo. For more information
-about the technology we use, you can consult the [About](#about) page or check out {{ext_link 'our source code' 'https://github.com/TBS-EACPD/infobase'}} on GitHub.
+about the technology we use, you can consult the [About](#about) page or check out <a target='_blank' rel='noopener noreferrer' href='https://github.com/TBS-EACPD/infobase'>our source code</a> on GitHub.
 ","Les graphiques sur l’InfoBase du GC sont réalisés au moyen de JavaScript, plus particulièrement les bibliothèques
 graphiques D3.js et Nivo. Pour obtenir de plus amples renseignements sur la technologie utilisée, consultez la page
-[À propos](#about) ou la page {{ext_link 'Code source de l'InfoBase du GC' 'https://github.com/TBS-EACPD/infobase'}} sur GitHub.
+[À propos](#about) ou la page <a target='_blank' rel='noopener noreferrer' href='https://github.com/TBS-EACPD/infobase'>Code source de l'InfoBase du GC</a> sur GitHub.
 "
-creation,Why was GC InfoBase created?,Pourquoi l’InfoBase du GC a-t-elle été créée?,GC InfoBase development began in 2013 in response to {{ext_link 'a Parliamentary request' 'http://www.ourcommons.ca/DocumentViewer/en/41-1/OGGO/report-7/page-144'}} for better access to data on government finances.,Le développement de l’InfoBase du GC a commencé en 2013 en réponse à la {{ext_link 'demande du Parlement' 'http://www.noscommunes.ca/DocumentViewer/fr/41-1/OGGO/rapport-7/page-144'}} pour un meilleur accès aux données sur les finances publiques.
+creation,Why was GC InfoBase created?,Pourquoi l’InfoBase du GC a-t-elle été créée?,GC InfoBase development began in 2013 in response to <a target='_blank' rel='noopener noreferrer' href='http://www.ourcommons.ca/DocumentViewer/en/41-1/OGGO/report-7/page-144'>a Parliamentary request</a> for better access to data on government finances.,Le développement de l’InfoBase du GC a commencé en 2013 en réponse à la <a target='_blank' rel='noopener noreferrer' href='http://www.noscommunes.ca/DocumentViewer/fr/41-1/OGGO/rapport-7/page-144'>demande du Parlement</a> pour un meilleur accès aux données sur les finances publiques.
 update_freq,How often is the data on GC InfoBase updated?,À quelle fréquence les données sur GC InfoBase est-elles mises à jour?,"The financial, people management and results data presented in GC InfoBase are updated as new data becomes available. Due to
 the nature of varying datasets, not all datasets are updated at the same time or on the same periodic schedule. For example,
 current-year data can be updated quarterly as organizations submit their Quarterly Financial Reports (QFRs), but historical
