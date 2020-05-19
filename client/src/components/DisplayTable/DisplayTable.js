@@ -1,15 +1,17 @@
 import "./DisplayTable.scss";
 
-import text from "../common_text/common_lang.yaml";
 import classNames from "classnames";
-import { Subject } from "../models/subject.js";
-import { create_text_maker_component, Format } from "./misc_util_components.js";
+import { Subject } from "../../models/subject.js";
+import {
+  create_text_maker_component,
+  Format,
+} from "../misc_util_components.js";
 
 import { DisplayTableUtils } from "./DisplayTableUtils.js";
-import { SortDirections } from "./SortDirection.js";
-import { DebouncedTextInput } from "./DebouncedTextInput.js";
+import { SortDirections } from "../SortDirection.js";
+import { DebouncedTextInput } from "../DebouncedTextInput.js";
 
-const { text_maker, TM } = create_text_maker_component(text);
+const { text_maker, TM } = create_text_maker_component();
 const { Dept } = Subject;
 
 export class DisplayTable extends React.Component {
@@ -63,7 +65,7 @@ export class DisplayTable extends React.Component {
             "big_int" <- (string) If it's string, auto formats using types_to_format
             OR
             (value) => <span> {value} </span>, <- (function)  If it's function, column value is passed in
-          search_formatter: (value) => Dept.lookup(value).name <- (function) Actual value to search from data. Default to raw value
+          raw_formatter: (value) => Dept.lookup(value).name <- (function) Actual raw value from data. Used for searching/csv string Default to value
           sum_func: (sum, value) => ... <- (function) Custom sum func. Default to sum + value
           sort_func: (a, b) => ... <- (function) Custom sort func. Default to _.sortBy
           sum_initial_value: 0 <- (number) Default to 0
@@ -97,8 +99,8 @@ export class DisplayTable extends React.Component {
         _.chain(row)
           .map((column_value, column_key) => {
             const col_config = col_configs_with_defaults[column_key];
-            const col_search_value = col_config.search_formatter
-              ? col_config.search_formatter(column_value)
+            const col_search_value = col_config.raw_formatter
+              ? col_config.raw_formatter(column_value)
               : column_value;
             return (
               _.isEmpty(searches[column_key]) ||
@@ -150,19 +152,21 @@ export class DisplayTable extends React.Component {
       .map(_.last)
       .value();
 
-    const data_to_csv_string = _.reduce(
-      sorted_filtered_data,
-      (result, row) => {
-        const row_csv = _.chain(row).flatMap().join(",").value();
-        return result + `${row_csv}\n`;
-      },
-      `${_.join(ordered_column_keys, ",")}\n`
+    const data_csv = [ordered_column_keys].concat(
+      _.map(sorted_filtered_data, (row) =>
+        _.map(row, (value, key) =>
+          col_configs_with_defaults[key].raw_formatter
+            ? col_configs_with_defaults[key].raw_formatter(value)
+            : value
+        )
+      )
     );
+
     return (
       <div
         style={{ overflowX: "auto", marginTop: "20px", marginBottom: "20px" }}
       >
-        <DisplayTableUtils data_to_csv_string={data_to_csv_string} />
+        <DisplayTableUtils data_to_csv_string={d3.csvFormatRows(data_csv)} />
         <table
           className={classNames(
             "table",

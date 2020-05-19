@@ -1,9 +1,5 @@
 import { text_maker, TM } from "./vote_stat_text_provider.js";
 import {
-  DisplayTable,
-  default_dept_name_sort_func,
-} from "../../../../components/index.js";
-import {
   Subject,
   formats,
   util_components,
@@ -14,7 +10,7 @@ import {
   FlatTreeMapViz,
   declare_panel,
 } from "../../shared.js";
-const { Format } = util_components;
+const { Format, DisplayTable, default_dept_name_sort_func } = util_components;
 
 const main_col = "{{est_in_year}}_estimates";
 
@@ -118,7 +114,7 @@ const planned_vote_or_stat_render = (vs) =>
           ) : (
             value
           ),
-        search_formatter: (value) => (value ? Dept.lookup(value).name : value),
+        raw_formatter: (value) => (value ? Dept.lookup(value).name : value),
         sort_func: (a, b) => default_dept_name_sort_func(a, b),
       },
       voted_stat: {
