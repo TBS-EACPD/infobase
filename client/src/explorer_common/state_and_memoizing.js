@@ -66,7 +66,6 @@ function root_reducer(state = initial_root_state, action) {
     }
 
     case "toggle_all": {
-      // TODO
       const { root } = payload;
       const shouldExpand = !payload.is_expanded;
 
