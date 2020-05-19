@@ -67,7 +67,36 @@ function root_reducer(state = initial_root_state, action) {
 
     case "toggle_all": {
       // TODO
-      return state;
+      const { root } = payload;
+      const shouldExpand = !payload.is_expanded;
+
+      const { userExpanded: oldExpanded, userCollapsed: oldCollapsed } = state;
+
+      let nodes = [];
+      let search_nodes = (parent) => {
+        if (parent.children.length === 0) {
+          return;
+        }
+        _.forEach(parent.children, (child) => {
+          if (shouldExpand) {
+            if (!child.isExpanded) {
+              nodes.push(child.id);
+            }
+          } else {
+            if (child.isExpanded) {
+              nodes.push(child.id);
+            }
+          }
+          search_nodes(child);
+        });
+      };
+      search_nodes(root);
+
+      if (shouldExpand) {
+        return { ...state, userExpanded: nodes, userCollapsed: [] };
+      } else {
+        return { ...state, userCollapsed: nodes, userExpanded: [] };
+      }
     }
 
     default: {
@@ -107,7 +136,11 @@ const map_dispatch_to_root_props = (dispatch) => {
       payload: { node },
     });
 
-  const toggle_all = () => dispatch({ type: "toggle_all" });
+  const toggle_all = (root, is_expanded) =>
+    dispatch({
+      type: "toggle_all",
+      payload: { root, is_expanded },
+    });
 
   const clear_query = () => dispatch({ type: "clear_query" });
 
