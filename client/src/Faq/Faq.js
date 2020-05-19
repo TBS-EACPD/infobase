@@ -35,9 +35,10 @@ const FaqIndex = () => (
 const FaqTable = () => (
   <LabeledTable
     title={<TM k="faq_title" el="h2" className="heading-unstyled" />}
-    content={_.map(faq_data, ({ q, a }, id) => ({
-      name: <div id={id}>{q}</div>,
-      desc: <div dangerouslySetInnerHTML={{ __html: a }} />,
+    contents={_.map(faq_data, ({ q, a }, id) => ({
+      id: id,
+      label: q,
+      content: <div dangerouslySetInnerHTML={{ __html: a }} />,
     }))}
   />
 );
