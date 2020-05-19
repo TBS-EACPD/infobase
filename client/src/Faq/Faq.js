@@ -1,5 +1,6 @@
 import "./Faq.scss";
 import text from "./Faq.yaml";
+import { faq_data } from "./faq_data.js";
 
 import {
   StandardRouteContainer,
@@ -13,22 +14,6 @@ import {
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const qa_keys = [
-  "data_source",
-  "open_source",
-  "tools",
-  "infographic_tools",
-  "creation",
-  "update_freq",
-  "raw_data",
-  "older_data",
-  "people_data_exemptions",
-  "spending_types",
-  "fte_levels",
-  "tagging_scheme",
-  "contact",
-];
-
 const FaqIndex = () => (
   <FancyUL ul_class="faq-index">
     {[
@@ -38,13 +23,9 @@ const FaqIndex = () => (
         el="h2"
         className="heading-unstyled"
       />,
-      ..._.map(qa_keys, (qa_key) => (
-        <a
-          key={qa_key}
-          href={`#faq/${qa_key}`}
-          title={text_maker("jump_to_question")}
-        >
-          {text_maker(`${qa_key}_q`)}
+      ..._.map(faq_data, ({ q }, id) => (
+        <a key={id} href={`#faq/${id}`} title={text_maker("jump_to_question")}>
+          {q}
         </a>
       )),
     ]}
@@ -54,9 +35,9 @@ const FaqIndex = () => (
 const FaqTable = () => (
   <LabeledTable
     title={<TM k="faq_title" el="h2" className="heading-unstyled" />}
-    content={_.map(qa_keys, (qa_key) => ({
-      name: <div id={qa_key}>{text_maker(`${qa_key}_q`)}</div>,
-      desc: <TM k={`${qa_key}_a`} />,
+    content={_.map(faq_data, ({ q, a }, id) => ({
+      name: <div id={id}>{q}</div>,
+      desc: <div dangerouslySetInnerHTML={{ __html: a }} />,
     }))}
   />
 );

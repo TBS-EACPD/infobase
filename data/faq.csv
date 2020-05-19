@@ -11,9 +11,9 @@ Ces rapports accessibles intégralement sur le site <a target='_blank' rel='noop
 open_source,Is the GC InfoBase application open sourced?,L’application de l’InfoBase du GC est-elle une source en libre accès?,"Yes, the GC InfoBase web application is open sourced. The code is available for review and reuse
 <a target='_blank' rel='noopener noreferrer' href='https://github.com/TBS-EACPD/infobase' title='GC InfoBase source code on GitHub'>here</a>.
 ","Oui, l’application web de l’InfoBase du GC est une source en libre accès. Le code est disponible pour examen et réutilisation
-<a target='_blank' rel='noopener noreferrer' href='https://github.com/TBS-EACPD/infobase' title='Code source de l'InfoBase du GC sur GitHub'>ici</a>.
+<a target='_blank' rel='noopener noreferrer' href='https://github.com/TBS-EACPD/infobase' title='Code source de l’InfoBase du GC sur GitHub'>ici</a>.
 "
-tools,What did you use to build GC InfoBase?,Qu'avez-vous utilisés pour construire l’InfoBase du GC?,GC InfoBase is a single-page web application that was developed using open-source libraries and standards ({{gt 'technology_examples'</a>).,L’InfoBase du GC est une application web d'une page qui a été développée au moyen des bibliothèques et des normes ouvertes ({{gt 'technology_examples'</a>).
+tools,What did you use to build GC InfoBase?,Qu'avez-vous utilisés pour construire l’InfoBase du GC?,GC InfoBase is a single-page web application that was developed using open-source libraries and standards ({{gt 'technology_examples'}}).,L’InfoBase du GC est une application web d'une page qui a été développée au moyen des bibliothèques et des normes ouvertes ({{gt 'technology_examples'}}).
 infographic_tools,What did you use to create your data visualizations?,Qu'avez-vous utilisé pour créer vos visualisations de données?,"The graphs on GC InfoBase are built using JavaScript, specifically the graphing libraries D3.js and Nivo. For more information
 about the technology we use, you can consult the [About](#about) page or check out <a target='_blank' rel='noopener noreferrer' href='https://github.com/TBS-EACPD/infobase'>our source code</a> on GitHub.
 ","Les graphiques sur l’InfoBase du GC sont réalisés au moyen de JavaScript, plus particulièrement les bibliothèques
