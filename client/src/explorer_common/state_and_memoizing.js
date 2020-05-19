@@ -70,8 +70,6 @@ function root_reducer(state = initial_root_state, action) {
       const { root } = payload;
       const shouldExpand = !payload.is_expanded;
 
-      const { userExpanded: oldExpanded, userCollapsed: oldCollapsed } = state;
-
       let nodes = [];
       let search_nodes = (parent) => {
         if (parent.children.length === 0) {
