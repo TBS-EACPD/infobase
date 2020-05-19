@@ -1,10 +1,9 @@
-@import '../common_css/common-variables';
+@import '../../common_css/common-variables';
 
-.heading-container {
+.dp-utils-heading-container {
   display: flex;
   flex-direction: row-reverse;
-  margin-bottom: 1px;
-  width: 99%;
+  width: 98.9%;
   border-width: 1px 1px 0px 1px;
   border-style: solid;
   border-color: $primaryColor;
@@ -14,11 +13,11 @@
   background-color: $primaryColor;
 }
 
-.heading-utils {
+.dp-utils-heading {
   width: 1.5em;
   height: 1.5em;
 }
-button.heading-utils {
+button.dp-utils-heading {
   background-color: Transparent;
   border: none;
   padding: 0;

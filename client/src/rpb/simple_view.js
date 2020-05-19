@@ -244,7 +244,7 @@ class SimpleView extends React.Component {
             value
           ),
         sort_func: (a, b) => default_dept_name_sort_func(a, b),
-        search_formatter: (value) =>
+        raw_formatter: (value) =>
           Dept.lookup(value) ? Dept.lookup(value).name : value,
       },
       ..._.chain(columns)

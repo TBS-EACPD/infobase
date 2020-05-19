@@ -15,7 +15,7 @@ import {
   TspanLineWrapper,
 } from "../../shared.js";
 
-import { DisplayTable } from "../../../../components/DisplayTable.js";
+import { DisplayTable } from "../../../../components";
 
 const { Tag } = Subject;
 
