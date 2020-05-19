@@ -189,7 +189,7 @@ const get_col_defs = createSelector(
 class SingleSubjExplorer extends React.Component {
   constructor() {
     super();
-    this.state = { query: "" };
+    this.state = { query: "", is_expanded: false };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
   handleQueryChange(new_query) {
@@ -310,6 +310,16 @@ class SingleSubjExplorer extends React.Component {
                 onChange={(evt) => this.handleQueryChange(evt.target.value)}
                 value={query}
               />
+              <button
+                type="button"
+                className="btn btn-primary"
+                style={{ width: "100%" }}
+                onClick={toggle_all}
+              >
+                {this.state.is_expanded
+                  ? text_maker("collapse_all")
+                  : text_maker("expand_all")}
+              </button>
               {window.is_a11y_mode && (
                 <input
                   type="submit"
