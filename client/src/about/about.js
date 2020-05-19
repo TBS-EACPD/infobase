@@ -39,22 +39,22 @@ export default class About extends React.Component {
           <TM tmf={text_maker} el="div" k="about_intro_section" />
           <LabeledTable
             title={text_maker("principles_title")}
-            content={[
+            contents={[
               {
-                name: text_maker("principle_1_name"),
-                desc: text_maker("principle_1_desc"),
+                label: text_maker("principle_1_name"),
+                content: text_maker("principle_1_desc"),
               },
               {
-                name: text_maker("principle_2_name"),
-                desc: text_maker("principle_2_desc"),
+                label: text_maker("principle_2_name"),
+                content: text_maker("principle_2_desc"),
               },
               {
-                name: text_maker("principle_3_name"),
-                desc: text_maker("principle_3_desc"),
+                label: text_maker("principle_3_name"),
+                content: text_maker("principle_3_desc"),
               },
               {
-                name: text_maker("principle_4_name"),
-                desc: text_maker("principle_4_desc"),
+                label: text_maker("principle_4_name"),
+                content: text_maker("principle_4_desc"),
               },
             ]}
           />
