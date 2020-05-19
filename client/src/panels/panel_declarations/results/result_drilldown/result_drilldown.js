@@ -226,6 +226,7 @@ class SingleSubjExplorer extends React.Component {
 
       set_query,
       toggle_node,
+      toggle_all,
 
       subject,
 

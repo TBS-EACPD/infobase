@@ -65,6 +65,11 @@ function root_reducer(state = initial_root_state, action) {
       }
     }
 
+    case "toggle_all": {
+      // TODO
+      return state;
+    }
+
     default: {
       return state;
     }
@@ -102,6 +107,8 @@ const map_dispatch_to_root_props = (dispatch) => {
       payload: { node },
     });
 
+  const toggle_all = () => dispatch({ type: "toggle_all" });
+
   const clear_query = () => dispatch({ type: "clear_query" });
 
   const enable_loading = () => dispatch({ type: "enable_loading" });
@@ -111,6 +118,7 @@ const map_dispatch_to_root_props = (dispatch) => {
     toggle_node,
     clear_query,
     enable_loading,
+    toggle_all,
   };
 };
 
