@@ -27,7 +27,6 @@ const { Gov } = Subject;
 //re-usable view stuff
 import {
   SpinnerWrapper,
-  RadioButtons,
   LabeledBox,
   TrinityItem,
   DeptSearch,
@@ -36,7 +35,6 @@ import AriaModal from "react-aria-modal";
 
 //specific view stuff
 import { AccessibleTablePicker, TablePicker } from "./TablePicker.js";
-import { SimpleView } from "./simple_view.js";
 import { GranularView } from "./granular_view.js";
 import { SubjectFilterPicker } from "./shared.js";
 import { Table } from "../core/TableClass.js";
@@ -157,11 +155,9 @@ class RPB extends React.Component {
 
     const {
       table,
-      mode,
       subject,
       broken_url,
 
-      on_switch_mode,
       on_set_subject,
     } = this.props;
 
@@ -325,13 +321,8 @@ class RPB extends React.Component {
                 />
               </div>
             </LabeledBox>
-            {table ? (
-              mode === "simple" ? (
-                <SimpleView {...this.props} />
-              ) : (
-                <GranularView {...this.props} />
-              )
-            ) : null}
+            )}
+            {table ? <GranularView {...this.props} /> : null}
           </Fragment>
         )}
       </div>
@@ -349,9 +340,8 @@ class AnalyticsSynchronizer extends React.Component {
   shouldComponentUpdate(new_props) {
     const table_has_changed = new_props.table !== this.props.table;
     const subject_has_changed = new_props.subject !== this.props.subject;
-    const mode_has_changed = new_props.mode !== this.props.mode;
 
-    return mode_has_changed || table_has_changed || subject_has_changed;
+    return table_has_changed || subject_has_changed;
   }
   componentDidUpdate() {
     if (this.props.table) {
@@ -368,7 +358,6 @@ class AnalyticsSynchronizer extends React.Component {
       SUBAPP: sub_app_name,
       SUBJECT_GUID: this.props.subject,
       MISC1: this.props.table,
-      MISC2: this.props.mode,
     });
   }
 }

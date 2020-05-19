@@ -10,9 +10,6 @@ import Footnote from "../models/footnotes/footnotes.js";
 
 const initial_state = {
   table_picking: true,
-  preferDeptBreakout: true,
-  preferTable: false,
-  mode: "simple",
   subject: "gov_gov",
 };
 
@@ -23,10 +20,6 @@ function get_all_data_columns_for_table(table) {
     .value();
 }
 
-function get_default_cols_for_table(table) {
-  return _.filter(get_all_data_columns_for_table(table), "simple_default");
-}
-
 function get_default_dimension_for_table(table) {
   return table.dimensions[0].title_key;
 }
@@ -34,7 +27,7 @@ function get_default_dimension_for_table(table) {
 //returns a the proposed new slice of state that will change when a new table is selected
 function get_default_state_for_new_table(table_id) {
   const table = Table.lookup(table_id);
-  const columns = _.map(get_default_cols_for_table(table), "nick");
+  const columns = _.map(get_all_data_columns_for_table(table), "nick");
   return {
     table: table_id,
     columns,
@@ -46,18 +39,11 @@ function get_default_state_for_new_table(table_id) {
 }
 
 function naive_to_real_state(naive_state) {
-  const {
-    preferTable,
-
-    table,
-  } = naive_state;
+  const { table } = naive_state;
 
   return {
     //default state
     subject: "gov_gov",
-    preferDeptBreakout: true,
-    preferTable: preferTable,
-    mode: "simple",
     ...//tables imply their own default state
     (table ? get_default_state_for_new_table(naive_state.table) : {}),
     ...naive_state, //whatever state is already defined takes precedence.
@@ -85,18 +71,6 @@ const reducer = (state = initial_state, action) => {
     case "navigate_to_new_state": {
       const new_state = payload;
       return new_state;
-    }
-
-    case "toggle_col_nick": {
-      const col_nick = payload;
-      if (state.columns.length < 2 && _.includes(state.columns, col_nick)) {
-        return state;
-      }
-      return {
-        ...state,
-        columns: _.toggle_list(state.columns, col_nick),
-        page_num: 0,
-      };
     }
 
     case "switch_table": {
@@ -129,31 +103,6 @@ const reducer = (state = initial_state, action) => {
         ...state,
         subject: guid,
         filter: text_maker("all"),
-        page_num: 0,
-      };
-    }
-
-    case "toggle_deptBreakout": {
-      return {
-        ...state,
-        preferDeptBreakout: !state.preferDeptBreakout,
-        filter: text_maker("all"),
-        page_num: 0,
-      };
-    }
-
-    case "toggle_preferTable": {
-      return {
-        ...state,
-        preferTable: !state.preferTable,
-        page_num: 0,
-      };
-    }
-
-    case "switch_mode": {
-      return {
-        ...state,
-        mode: payload,
         page_num: 0,
       };
     }
@@ -291,10 +240,6 @@ function create_mapStateToProps() {
         .isEmpty()
         .value()
   );
-
-  const get_deptBreakoutMode = (state) =>
-    state.subject === "gov_gov" && state.preferDeptBreakout;
-
   const get_flat_data = createSelector(
     [
       get_table_data,
@@ -308,132 +253,6 @@ function create_mapStateToProps() {
         .filter(cat_filter_func)
         .reject(zero_filter_func)
         .value()
-  );
-
-  const get_graph_split_data = createSelector(
-    [
-      get_flat_data,
-      get_subject,
-      get_table,
-      get_sorted_columns,
-      _.property("dimension"),
-      _.property("filter"),
-      get_all_filters,
-      get_deptBreakoutMode,
-    ],
-    (
-      flat_data,
-      subject,
-      table,
-      columns,
-      dimension,
-      filter,
-      filters_for_dim,
-      deptBreakoutMode
-    ) => {
-      if (_.isEmpty(flat_data) || columns.length > 1) {
-        return null;
-      }
-      const [col] = columns;
-
-      if (deptBreakoutMode) {
-        let artificial_filter;
-
-        if (filters_for_dim.length > 8) {
-          const top_5_filters = _.chain(flat_data)
-            .groupBy(dimension)
-            .map((rows, filt_val) => ({
-              filt: filt_val,
-              total: col.formula(rows),
-            }))
-            .sortBy("total")
-            .reverse()
-            .take(5)
-            .map("filt")
-            .value();
-
-          artificial_filter = (filt_val) =>
-            _.includes(top_5_filters, filt_val)
-              ? filt_val
-              : text_maker("other_s");
-        } else {
-          artificial_filter = _.identity;
-        }
-
-        return _.chain(flat_data)
-          .groupBy("dept")
-          .map((dept_rows, dept_id) => ({ dept_id, dept_rows }))
-          .sortBy(({ dept_rows }) => col.formula(dept_rows))
-          .reverse()
-          .map(({ dept_rows, dept_id }) => ({
-            key: dept_id,
-            label: Dept.lookup(dept_id).name,
-            subject: Dept.lookup(dept_id),
-            data: _.chain(dept_rows)
-              .groupBy((row) => artificial_filter(row[dimension]))
-              .map((filt_rows, filt_val) => ({
-                label: filt_val,
-                data: col.formula(filt_rows),
-              }))
-              .sortBy("data")
-              .reverse()
-              .value(),
-          }))
-          .value();
-      } else {
-        return _.chain(flat_data)
-          .groupBy(dimension)
-          .map((rows, filt_val) => ({
-            label: filt_val,
-            key: filt_val,
-            data: [{ data: col.formula(rows), label: filt_val }],
-          }))
-          .sortBy(({ data }) => _.first(data) || 0)
-          .value();
-      }
-    }
-  );
-
-  const get_simple_table_rows = createSelector(
-    [
-      get_flat_data,
-      get_sorted_columns,
-      get_deptBreakoutMode,
-      _.property("filter"),
-      _.property("dimension"),
-    ],
-    (flat_data, columns, deptBreakoutMode, filter, dimension) => {
-      const rows = deptBreakoutMode
-        ? _.chain(flat_data)
-            .groupBy("dept")
-            .map((rows, dept) =>
-              _.fromPairs([
-                ["dept", dept],
-                ..._.map(columns, (col) => [col.nick, col.formula(rows)]),
-              ])
-            )
-            .value()
-        : _.chain(flat_data)
-            .groupBy(dimension)
-            .map((rows, filter) =>
-              _.fromPairs([
-                [dimension, filter],
-                ..._.map(columns, (col) => [col.nick, col.formula(rows)]),
-              ])
-            )
-            .value();
-
-      const total_row = _.chain(columns)
-        .map((col) => [col.nick, col.formula(flat_data)])
-        //.concat([ deptBreakoutMode ? 'dept' : dimension, text_maker('all') ])
-        .fromPairs()
-        .value();
-
-      return {
-        rows,
-        total_row,
-      };
-    }
   );
 
   return (state) => {
@@ -450,18 +269,8 @@ function create_mapStateToProps() {
         !_.isEmpty(state.columns) && get_all_data_columns(state),
       flat_data: state.table && get_flat_data(state),
 
-      //simple view props,
-      deptBreakoutMode: get_deptBreakoutMode(state),
-      graph_data:
-        state.table && state.mode === "simple" && get_graph_split_data(state),
-      simple_table_rows:
-        state.table && state.mode === "simple" && get_simple_table_rows(state),
-
       //granular props
-      filters_by_dimension:
-        state.table &&
-        state.mode === "details" &&
-        get_filters_by_dimension(state),
+      filters_by_dimension: state.table && get_filters_by_dimension(state),
       sorted_key_columns:
         !_.isEmpty(state.columns) && get_sorted_key_columns(state),
     };
@@ -470,7 +279,6 @@ function create_mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
   return {
-    on_switch_mode: (mode) => dispatch({ type: "switch_mode", payload: mode }),
     on_set_subject: (subj) => dispatch({ type: "set_subject", payload: subj }),
     on_set_dimension: (dim_key) =>
       dispatch({ type: "set_dimension", payload: dim_key }),
@@ -478,10 +286,6 @@ function mapDispatchToProps(dispatch) {
       dispatch({ type: "set_filter", payload: { dimension, filter } }),
     on_switch_table: (table_id) =>
       dispatch({ type: "switch_table", payload: table_id }),
-    on_toggle_col_nick: (col_nick) =>
-      dispatch({ type: "toggle_col_nick", payload: col_nick }),
-    on_toggle_deptBreakout: () => dispatch({ type: "toggle_deptBreakout" }),
-    on_toggle_preferTable: () => dispatch({ type: "toggle_preferTable" }),
     on_set_page: (num) => dispatch({ type: "set_page", payload: num }),
   };
 }

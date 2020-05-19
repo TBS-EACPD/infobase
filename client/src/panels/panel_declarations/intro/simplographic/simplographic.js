@@ -78,7 +78,6 @@ export const declare_simplographic_panel = () =>
         const org_employee_type_link = rpb_link({ table: "orgEmployeeType" });
         const org_employee_region_link = rpb_link({
           table: "orgEmployeeRegion",
-          preferDeptBreakout: false,
         });
         const org_vote_stat_pa_link = rpb_link({ table: "orgVoteStatPa" });
 
