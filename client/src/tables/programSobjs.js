@@ -85,7 +85,7 @@ export default {
       this.add_col({
         type: "big_int",
         nick: yr,
-        simple_default: true,
+        initial_visible: true,
         header: yr,
         description: {
           en:

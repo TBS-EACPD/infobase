@@ -12,7 +12,6 @@ import {
   AlertBanner,
   DisplayTable,
 } from "../components/index.js";
-import { LegendList } from "../charts/legends";
 import { Details } from "../components/Details.js";
 import { Subject } from "../models/subject.js";
 
@@ -28,43 +27,20 @@ class GranularView extends React.Component {
       table,
       dimension,
       filter,
-      columns,
 
       flat_data,
-      all_data_columns,
       filters_by_dimension,
 
-      on_toggle_col_nick,
       on_set_filter,
     } = this.props;
-
     return (
       <div>
         <LabeledBox label={<TextMaker text_key="rpb_table_controls" />}>
           <div className="row">
             <div className="col-md-6">
-              <fieldset className="rpb-config-item col-selection simple">
-                <legend className="rpb-config-header">
-                  <TextMaker text_key="select_columns" />
-                </legend>
-                <LegendList
-                  items={_.map(
-                    all_data_columns,
-                    ({ nick, fully_qualified_name }) => ({
-                      id: nick,
-                      label: fully_qualified_name,
-                      active: _.includes(_.map(columns, "nick"), nick),
-                    })
-                  )}
-                  onClick={(id) => on_toggle_col_nick(id)}
-                />
-              </fieldset>
-            </div>
-            <div className="col-md-6">
               <div className="rpb-config-item">
                 <label className="rpb-config-header" htmlFor="filt_select">
-                  {" "}
-                  Filter{" "}
+                  Filter
                 </label>
                 <TwoLevelSelect
                   className="form-control form-control-ib"
@@ -153,7 +129,7 @@ class GranularView extends React.Component {
         formatter: "wide-str",
       },
       ..._.chain(cols)
-        .map(({ nick, type, fully_qualified_name }, idx) => [
+        .map(({ nick, type, fully_qualified_name, initial_visible }, idx) => [
           nick,
           {
             index: idx + 1,
@@ -161,6 +137,8 @@ class GranularView extends React.Component {
             is_searchable: !is_matched_undefined(non_dept_key_cols, nick),
             is_summable: !is_matched_undefined(data_columns, nick),
             formatter: type,
+            initial_visible:
+              !is_matched_undefined(non_dept_key_cols, nick) || initial_visible,
           },
         ])
         .fromPairs()

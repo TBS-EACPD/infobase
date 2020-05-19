@@ -96,7 +96,7 @@ export default {
       },
       {
         type: "big_int",
-        simple_default: true,
+        initial_visible: true,
         nick: "in_year_ytd-exp",
         header: {
           en: "Year to date used at quarter-end",

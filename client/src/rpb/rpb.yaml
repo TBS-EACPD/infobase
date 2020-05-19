@@ -46,10 +46,6 @@ rpb_select_mode:
   en: Select the type of report you want 
   fr: Sélectionner le type de rapport que vous voulez 
 
-simple_view_title:
-  en: Build a summary report
-  fr: Créer un rapport sommaire
-
 granular_view_title:
   en: Build a detailed report 
   fr: Créer un rapport détaillé

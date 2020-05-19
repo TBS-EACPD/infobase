@@ -183,7 +183,7 @@ module.exports.route_load_tests_config = [
   {
     name: "Report Builder - Report",
     route:
-      "rpb/~(columns~(~'thisyearexpenditures)~subject~'gov_gov~mode~'simple~dimension~'major_voted_stat~table~'orgVoteStatQfr~preferDeptBreakout~true~sort_col~'dept~descending~false~filter~'All)",
+      "rpb/~(columns~(~'thisyearexpenditures)~subject~'gov_gov~'dimension~'major_voted_stat~table~'orgVoteStatQfr~sort_col~'dept~descending~false~filter~'All)",
     test_on: ["eng", "basic-eng"],
   },
   {

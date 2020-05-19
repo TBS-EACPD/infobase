@@ -19,12 +19,6 @@ function root_reducer(state = initial_root_state, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case "switch_mode": {
-      const { scheme_key } = payload;
-
-      return { ...state, scheme_key, loading: false };
-    }
-
     case "toggle_node": {
       const { node } = payload;
 
@@ -108,12 +102,6 @@ const map_dispatch_to_root_props = (dispatch) => {
       payload: { node },
     });
 
-  const switch_mode = (scheme_key) =>
-    dispatch({
-      type: "switch_mode",
-      payload: { scheme_key },
-    });
-
   const clear_query = () => dispatch({ type: "clear_query" });
 
   const enable_loading = () => dispatch({ type: "enable_loading" });
@@ -121,7 +109,6 @@ const map_dispatch_to_root_props = (dispatch) => {
   return {
     set_query,
     toggle_node,
-    switch_mode,
     clear_query,
     enable_loading,
   };
