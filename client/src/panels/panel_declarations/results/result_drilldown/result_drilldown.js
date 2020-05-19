@@ -315,7 +315,7 @@ class SingleSubjExplorer extends React.Component {
                 className="btn btn-primary"
                 style={{ width: "100%" }}
                 onClick={() => {
-                  toggle_all(root);
+                  toggle_all(root, this.state.is_expanded);
                   this.setState({
                     is_expanded: !this.state.is_expanded,
                   });
