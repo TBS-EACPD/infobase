@@ -154,10 +154,10 @@ export class DisplayTable extends React.Component {
 
     const data_csv = [ordered_column_keys].concat(
       _.map(sorted_filtered_data, (row) =>
-        _.map(row, (value, key) =>
+        _.map(ordered_column_keys, (key) =>
           col_configs_with_defaults[key].raw_formatter
-            ? col_configs_with_defaults[key].raw_formatter(value)
-            : value
+            ? col_configs_with_defaults[key].raw_formatter(row[key])
+            : row[key]
         )
       )
     );
@@ -166,7 +166,10 @@ export class DisplayTable extends React.Component {
       <div
         style={{ overflowX: "auto", marginTop: "20px", marginBottom: "20px" }}
       >
-        <DisplayTableUtils data_to_csv_string={d3.csvFormatRows(data_csv)} />
+        <DisplayTableUtils
+          table_name={table_name}
+          data_to_csv_string={d3.csvFormatRows(data_csv)}
+        />
         <table
           className={classNames(
             "table",
