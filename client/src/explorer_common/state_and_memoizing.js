@@ -70,21 +70,21 @@ function root_reducer(state = initial_root_state, action) {
       const shouldExpand = !payload.is_expanded;
 
       let nodes = [];
-      let search_nodes = (parent) => {
-        if (parent.children.length === 0) {
+      let search_nodes = (source) => {
+        if (source.children.length === 0) {
           return;
         }
-        _.forEach(parent.children, (child) => {
+        _.forEach(source.children, (node) => {
           if (shouldExpand) {
-            if (!child.isExpanded) {
-              nodes.push(child.id);
+            if (!node.isExpanded) {
+              nodes.push(node.id);
             }
           } else {
-            if (child.isExpanded) {
-              nodes.push(child.id);
+            if (node.isExpanded) {
+              nodes.push(node.id);
             }
           }
-          search_nodes(child);
+          search_nodes(node);
         });
       };
       search_nodes(root);
@@ -92,7 +92,7 @@ function root_reducer(state = initial_root_state, action) {
       if (shouldExpand) {
         return { ...state, userExpanded: nodes, userCollapsed: [] };
       } else {
-        return { ...state, userCollapsed: nodes, userExpanded: [] };
+        return { ...state, userExpanded: [], userCollapsed: nodes };
       }
     }
 
