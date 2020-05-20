@@ -126,12 +126,7 @@ const planned_vote_or_stat_render = (vs) =>
         index: 2,
         header: text_maker("authorities"),
         is_summable: true,
-        formatter: (value) => (
-          <Format
-            type={window.is_a11y_mode ? "compact1_written" : "compact1"}
-            content={value}
-          />
-        ),
+        formatter: "dollar",
       },
     };
 
