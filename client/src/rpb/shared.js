@@ -76,10 +76,10 @@ const ReportDetails = ({
 
 const ReportDatasets = ({ table, subject }) => {
   const dataset_spans = table.link[window.lang] && [
-    <span key={"datasets_header"} className="fancy-ul-span-flex">
-      <span className="fancy-ul-title-row">{text_maker("metadata")}</span>
+    <span key={"datasets_header"} className="fancy-ul__title">
+      <TextMaker text_key="metadata" />
     </span>,
-    <span key={table.id} className="fancy-ul-span-flex">
+    <span key={table.id} className="frow">
       <span>{table.name}</span>
       <a
         target="_blank"
@@ -93,13 +93,13 @@ const ReportDatasets = ({ table, subject }) => {
   ];
 
   const data_source_spans = table.source.length > 0 && [
-    <span key={"datasets_header"} className="fancy-ul-span-flex">
-      <span className="fancy-ul-title-row">{text_maker("data_sources")}</span>
+    <span key={"datasets_header"} className="fancy-ul__title">
+      <TextMaker text_key="data_sources" />
     </span>,
     ..._.chain(table.source)
       .map((source) => {
         return all_sources[source].open_data ? (
-          <span key={table.id} className="fancy-ul-span-flex">
+          <span key={table.id} className="frow">
             <a href={"#metadata/" + source}>{all_sources[source].title()}</a>
             <a
               target="_blank"
@@ -119,13 +119,11 @@ const ReportDatasets = ({ table, subject }) => {
   ];
 
   return (
-    <div className="rpb-option-fancy-ul-container">
-      <FancyUL>
-        {_.flatten(
-          [dataset_spans, data_source_spans].filter((d) => d.length > 1)
-        )}
-      </FancyUL>
-    </div>
+    <FancyUL className={"rpb-option-fancy-ul"}>
+      {_.flatten(
+        [dataset_spans, data_source_spans].filter((d) => d.length > 1)
+      )}
+    </FancyUL>
   );
 };
 

@@ -9,7 +9,7 @@ import { sources } from "../../metadata/data_sources.js";
 const { BUDGET: budget_source } = sources;
 
 const FancyULBudgetSourceRow = (source_item, open_data_link) => (
-  <span key={source_item.id} className="fancy-ul-span-flex">
+  <span key={source_item.id} className="frow">
     <a href={"#metadata/BUDGET"}>{source_item.text}</a>
     <a
       target="_blank"

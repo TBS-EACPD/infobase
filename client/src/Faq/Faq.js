@@ -15,7 +15,7 @@ import {
 const { text_maker, TM } = create_text_maker_component(text);
 
 const FaqIndex = () => (
-  <FancyUL ul_class="faq-index">
+  <FancyUL className="faq-index">
     {[
       <TM
         key="jump_to_question"
