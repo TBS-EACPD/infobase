@@ -56,10 +56,11 @@ const DlItem = ({ term, def }) => (
 const MultiColumnList = ({
   list_items,
   column_count = 2,
+  className,
   ul_class,
   li_class,
 }) => (
-  <div className={ul_class} style={{ display: "flex", flexDirection: "row" }}>
+  <div className={className} style={{ display: "flex", flexDirection: "row" }}>
     {_.chain(list_items)
       .chunk(_.ceil(list_items.length / column_count))
       .map((list_chunk, ix) => (

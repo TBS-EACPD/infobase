@@ -39,12 +39,10 @@ li.select-list-item {
 
 }
 
-.rpb-option-fancy-ul-container {
+.rpb-option-fancy-ul {
   padding: 14px 15px 12px 20px; 
   width: 100%;
-  & > .fancy-ul {
-    margin-bottom: 0px;
-  }
+  margin-bottom: 0px;
 }
 
 .graph_report { 

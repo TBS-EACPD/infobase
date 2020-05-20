@@ -39,14 +39,11 @@ export default class MetaData extends React.Component {
             <div key={source.key} id={source.key}>
               <Panel title={source.title()}>
                 <div>{source.description()}</div>
-                <div className="h4">
-                  <TM k="datasets" />
-                </div>
-                <FancyUL>
+                <FancyUL title={text_maker("datasets")}>
                   {_.map(
                     source.items(),
                     ({ key, id, text, inline_link, external_link }) => (
-                      <span key={key || id} className="fancy-ul-span-flex">
+                      <span key={key || id} className="frow">
                         {inline_link ? (
                           <a
                             title={text_maker("rpb_link_text")}
@@ -72,7 +69,7 @@ export default class MetaData extends React.Component {
                     )
                   )}
                 </FancyUL>
-                <div className="fancy-ul-span-flex">
+                <div className="frow">
                   <span style={{ alignSelf: "center" }}>
                     <TM k="refresh_freq" /> {source.frequency.text}
                   </span>
