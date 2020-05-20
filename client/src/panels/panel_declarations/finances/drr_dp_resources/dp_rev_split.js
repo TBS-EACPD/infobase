@@ -63,7 +63,6 @@ export const declare_dp_rev_split_panel = () =>
             rev: find_year_data_ends_with(year_data, "_rev"),
           };
         });
-        const amt_type = window.is_a11y_mode ? "compact1_written" : "compact1";
         const column_configs = {
           year: {
             index: 0,
@@ -76,25 +75,25 @@ export const declare_dp_rev_split_panel = () =>
             index: 1,
             header: text_maker("dp_gross"),
             is_summable: true,
-            formatter: amt_type,
+            formatter: "dollar",
           },
           gross: {
             index: 2,
             header: text_maker("dp_revenue"),
             is_summable: true,
-            formatter: amt_type,
+            formatter: "dollar",
           },
           spa: {
             index: 3,
             header: text_maker("dp_spa"),
             is_summable: true,
-            formatter: amt_type,
+            formatter: "dollar",
           },
           rev: {
             index: 4,
             header: text_maker("dp_net"),
             is_summable: true,
-            formatter: amt_type,
+            formatter: "dollar",
           },
         };
 
