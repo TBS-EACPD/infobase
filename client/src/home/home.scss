@@ -8,7 +8,7 @@ $smallMargin: 10px;
 }
 
 .intro-box {
-  padding: 30px 0 0;
+  padding: 30px 0 20px;
   background-color: $primaryColor;
   color: $textLightColor;
   border-bottom: $smallMargin solid $highlightColor;
@@ -29,6 +29,7 @@ $smallMargin: 10px;
 
 .intro-box > .container > h1 {
   border: none;
+  text-align: center;
   font-size: 55px;
   font-weight: $lightFontWeight;
   margin-top: 25px;
@@ -44,6 +45,8 @@ $smallMargin: 10px;
 
 .intro-box > .container > h3 {
   font-weight: $lightFontWeight;
+  margin-top: 0px;
+  text-align: center;
   font-size: 20px;
 }
 
@@ -113,6 +116,9 @@ li.list-group-item--home {
   background-color: $highlightColor; 
   color: $textLightColor;
   font-size: 16px;
+}
+.search-box {
+  margin-bottom: 10px;
 }
 
 .flag {
