@@ -79,7 +79,7 @@ function root_reducer(state = initial_root_state, action) {
             (shouldExpand && !node.isExpanded) ||
             (!shouldExpand && node.isExpanded)
           ) {
-            nodes.push(node);
+            nodes.push(node.id);
           }
           search_nodes(node);
         });
