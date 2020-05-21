@@ -1,7 +1,7 @@
 import "./DisplayTable.scss";
 
 import classNames from "classnames";
-import { Subject } from "../../models/subject.js";
+
 import {
   create_text_maker_component,
   Format,
@@ -12,7 +12,6 @@ import { SortDirections } from "../SortDirection.js";
 import { DebouncedTextInput } from "../DebouncedTextInput.js";
 
 const { text_maker, TM } = create_text_maker_component();
-const { Dept } = Subject;
 
 export class DisplayTable extends React.Component {
   constructor(props) {
@@ -312,20 +311,3 @@ export class DisplayTable extends React.Component {
     );
   }
 }
-export const sort_func_template = (a_name, b_name) => {
-  if (a_name < b_name) {
-    return -1;
-  } else if (a_name > b_name) {
-    return 1;
-  }
-  return 0;
-};
-
-export const default_dept_name_sort_func = (a, b) => {
-  if (a && b) {
-    const a_name = Dept.lookup(a).name.toUpperCase();
-    const b_name = Dept.lookup(b).name.toUpperCase();
-    return sort_func_template(a_name, b_name);
-  }
-  return 0;
-};
