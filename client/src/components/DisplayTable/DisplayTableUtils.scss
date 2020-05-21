@@ -1,23 +1,10 @@
 @import '../../common_css/common-variables';
 
-.dp-utils-heading-container {
-  display: flex;
-  justify-content: flex-end;
-  width: 98.9%;
-  border-width: 1px 1px 0px 1px;
-  border-style: solid;
-  border-color: $primaryColor;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  padding: 8px 10px 0px;
-  background-color: $primaryColor;
-}
-
-.dp-utils-heading {
+.display_table__util-icon {
   width: 1.5em;
   height: 1.5em;
 }
-button.dp-utils-heading {
+button.display_table__util-icon {
   background-color: Transparent;
   border: none;
   padding: 0;
