@@ -9,11 +9,6 @@
 .display-table-container--with-utils > div {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  width: 98.9%;
-  border-width: 1px 1px 0px 1px;
-  border-style: solid;
-  border-color: $primaryColor;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: 8px 10px 0px;
@@ -26,8 +21,9 @@
   padding: 8px 10px 0px;
 }
 
+
 table.display-table {
-  width: 99%; // avoid annoying 1px scroll caused by border
+  margin-bottom: 10px;
 }
 
 table.display-table > thead > tr {
