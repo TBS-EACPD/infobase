@@ -9,9 +9,8 @@ const { text_maker } = create_text_maker_component(text);
 
 export class DisplayTableUtils extends React.Component {
   downloadCsv() {
-    const { data_to_csv_string, table_name } = this.props;
-    const uri =
-      "data:text/csv;charset=UTF-8," + encodeURIComponent(data_to_csv_string);
+    const { csv_string, table_name } = this.props;
+    const uri = "data:text/csv;charset=UTF-8," + encodeURIComponent(csv_string);
 
     const temporary_anchor = document.createElement("a");
     temporary_anchor.setAttribute(
@@ -22,7 +21,7 @@ export class DisplayTableUtils extends React.Component {
     temporary_anchor.dispatchEvent(new MouseEvent("click"));
   }
   render() {
-    const { data_to_csv_string } = this.props;
+    const { csv_string } = this.props;
 
     return (
       <div className="dp-utils-heading-container">
@@ -36,7 +35,7 @@ export class DisplayTableUtils extends React.Component {
           />
         </button>
         <WriteToClipboard
-          text_to_copy={data_to_csv_string}
+          text_to_copy={csv_string}
           button_class_name={"dp-utils-heading"}
           button_description={text_maker("copy_table_data_desc")}
           IconComponent={IconCopy}
