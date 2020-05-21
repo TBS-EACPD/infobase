@@ -172,151 +172,149 @@ export class DisplayTable extends React.Component {
           !disable_header_utils && "display-table-container--with-utils"
         )}
       >
-        <div>
-          {!disable_header_utils && (
-            <div className={"display-table-container__utils"}>
-              <DisplayTableCopy csv_string={csv_string} />
-              <DisplayTableDownload
-                csv_string={csv_string}
-                table_name={table_name}
-              />
-            </div>
+        {!disable_header_utils && (
+          <div className={"display-table-container__utils"}>
+            <DisplayTableCopy csv_string={csv_string} />
+            <DisplayTableDownload
+              csv_string={csv_string}
+              table_name={table_name}
+            />
+          </div>
+        )}
+        <table
+          className={classNames(
+            "table",
+            "display-table",
+            !is_total_exist && "no-total-row"
           )}
-          <table
-            className={classNames(
-              "table",
-              "display-table",
-              !is_total_exist && "no-total-row"
-            )}
-          >
-            <caption className="sr-only">
-              <div>
-                {!_.isEmpty(table_name) ? (
-                  table_name
-                ) : (
-                  <TM k="a11y_table_title_default" />
-                )}
-              </div>
-            </caption>
-            <thead>
-              <tr className="table-header">
-                {_.map(ordered_column_keys, (column_key, i) => (
-                  <th key={i} className={"center-text"}>
-                    {col_configs_with_defaults[column_key].header}
+        >
+          <caption className="sr-only">
+            <div>
+              {!_.isEmpty(table_name) ? (
+                table_name
+              ) : (
+                <TM k="a11y_table_title_default" />
+              )}
+            </div>
+          </caption>
+          <thead>
+            <tr className="table-header">
+              {_.map(ordered_column_keys, (column_key, i) => (
+                <th key={i} className={"center-text"}>
+                  {col_configs_with_defaults[column_key].header}
+                </th>
+              ))}
+            </tr>
+            <tr className="table-header">
+              {_.map(ordered_column_keys, (column_key) => {
+                const sortable =
+                  col_configs_with_defaults[column_key].is_sortable;
+                const searchable =
+                  col_configs_with_defaults[column_key].is_searchable;
+
+                const current_search_input =
+                  (searchable && searches[column_key]) || null;
+
+                return (
+                  <th key={column_key} style={{ textAlign: "center" }}>
+                    {sortable && (
+                      <div onClick={() => this.sort_click(column_key)}>
+                        <SortDirections
+                          asc={!descending && sort_by === column_key}
+                          desc={descending && sort_by === column_key}
+                        />
+                      </div>
+                    )}
+                    {searchable && (
+                      <DebouncedTextInput
+                        inputClassName={"search input-sm"}
+                        placeHolder={text_maker("filter_data")}
+                        defaultValue={current_search_input}
+                        updateCallback={(search_value) => {
+                          const updated_searches = _.mapValues(
+                            searches,
+                            (value, key) =>
+                              key === column_key ? search_value : value
+                          );
+
+                          this.setState({ searches: updated_searches });
+                        }}
+                        debounceTime={300}
+                      />
+                    )}
                   </th>
+                );
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {_.map(sorted_filtered_data, (row, i) => (
+              <tr key={i}>
+                {_.map(ordered_column_keys, (col_key) => (
+                  <td style={{ fontSize: "14px" }} key={col_key}>
+                    {col_configs_with_defaults[col_key].formatter ? (
+                      _.isString(
+                        col_configs_with_defaults[col_key].formatter
+                      ) ? (
+                        <Format
+                          type={col_configs_with_defaults[col_key].formatter}
+                          content={row[col_key]}
+                        />
+                      ) : (
+                        col_configs_with_defaults[col_key].formatter(
+                          row[col_key]
+                        )
+                      )
+                    ) : (
+                      row[col_key]
+                    )}
+                  </td>
                 ))}
               </tr>
-              <tr className="table-header">
-                {_.map(ordered_column_keys, (column_key) => {
-                  const sortable =
-                    col_configs_with_defaults[column_key].is_sortable;
-                  const searchable =
-                    col_configs_with_defaults[column_key].is_searchable;
-
-                  const current_search_input =
-                    (searchable && searches[column_key]) || null;
-
-                  return (
-                    <th key={column_key} style={{ textAlign: "center" }}>
-                      {sortable && (
-                        <div onClick={() => this.sort_click(column_key)}>
-                          <SortDirections
-                            asc={!descending && sort_by === column_key}
-                            desc={descending && sort_by === column_key}
-                          />
-                        </div>
-                      )}
-                      {searchable && (
-                        <DebouncedTextInput
-                          inputClassName={"search input-sm"}
-                          placeHolder={text_maker("filter_data")}
-                          defaultValue={current_search_input}
-                          updateCallback={(search_value) => {
-                            const updated_searches = _.mapValues(
-                              searches,
-                              (value, key) =>
-                                key === column_key ? search_value : value
-                            );
-
-                            this.setState({ searches: updated_searches });
-                          }}
-                          debounceTime={300}
-                        />
-                      )}
-                    </th>
-                  );
-                })}
-              </tr>
-            </thead>
-            <tbody>
-              {_.map(sorted_filtered_data, (row, i) => (
-                <tr key={i}>
-                  {_.map(ordered_column_keys, (col_key) => (
-                    <td style={{ fontSize: "14px" }} key={col_key}>
-                      {col_configs_with_defaults[col_key].formatter ? (
-                        _.isString(
-                          col_configs_with_defaults[col_key].formatter
-                        ) ? (
-                          <Format
-                            type={col_configs_with_defaults[col_key].formatter}
-                            content={row[col_key]}
-                          />
-                        ) : (
-                          col_configs_with_defaults[col_key].formatter(
-                            row[col_key]
+            ))}
+            {is_total_exist && (
+              <tr key="total_row">
+                <td>{text_maker("total")}</td>
+                {_.chain(ordered_column_keys)
+                  .tail()
+                  .map((col_key) => (
+                    <td key={col_key}>
+                      {total_row[col_key] ? (
+                        col_configs_with_defaults[col_key].formatter ? (
+                          _.isString(
+                            col_configs_with_defaults[col_key].formatter
+                          ) ? (
+                            <Format
+                              type={
+                                col_configs_with_defaults[col_key].formatter
+                              }
+                              content={total_row[col_key]}
+                            />
+                          ) : (
+                            col_configs_with_defaults[col_key].formatter(
+                              total_row[col_key]
+                            )
                           )
+                        ) : (
+                          total_row[col_key]
                         )
                       ) : (
-                        row[col_key]
+                        ""
                       )}
                     </td>
-                  ))}
-                </tr>
-              ))}
-              {is_total_exist && (
-                <tr key="total_row">
-                  <td>{text_maker("total")}</td>
-                  {_.chain(ordered_column_keys)
-                    .tail()
-                    .map((col_key) => (
-                      <td key={col_key}>
-                        {total_row[col_key] ? (
-                          col_configs_with_defaults[col_key].formatter ? (
-                            _.isString(
-                              col_configs_with_defaults[col_key].formatter
-                            ) ? (
-                              <Format
-                                type={
-                                  col_configs_with_defaults[col_key].formatter
-                                }
-                                content={total_row[col_key]}
-                              />
-                            ) : (
-                              col_configs_with_defaults[col_key].formatter(
-                                total_row[col_key]
-                              )
-                            )
-                          ) : (
-                            total_row[col_key]
-                          )
-                        ) : (
-                          ""
-                        )}
-                      </td>
-                    ))
-                    .value()}
-                </tr>
-              )}
-            </tbody>
-          </table>
-          {sorted_filtered_data.length === 0 && (
-            <TM
-              k="no_data"
-              el="div"
-              style={{ width: "100%", textAlign: "center" }}
-            />
-          )}
-        </div>
+                  ))
+                  .value()}
+              </tr>
+            )}
+          </tbody>
+        </table>
+        {sorted_filtered_data.length === 0 && (
+          <TM
+            k="no_data"
+            el="div"
+            style={{ width: "100%", textAlign: "center" }}
+          />
+        )}
       </div>
     );
   }
