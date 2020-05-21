@@ -79,7 +79,7 @@ function root_reducer(state = initial_root_state, action) {
             (shouldExpand && !node.isExpanded) ||
             (!shouldExpand && node.isExpanded)
           ) {
-            nodes.push(node.id);
+            nodes.push(node);
           }
           search_nodes(node);
         });
@@ -87,19 +87,9 @@ function root_reducer(state = initial_root_state, action) {
       search_nodes(root);
 
       if (shouldExpand) {
-        return {
-          ...state,
-          userExpanded: nodes,
-          userCollapsed: [],
-          loading: false,
-        };
+        return { ...state, userExpanded: nodes, userCollapsed: [] };
       } else {
-        return {
-          ...state,
-          userExpanded: [],
-          userCollapsed: nodes,
-          loading: false,
-        };
+        return { ...state, userExpanded: [], userCollapsed: nodes };
       }
     }
 
