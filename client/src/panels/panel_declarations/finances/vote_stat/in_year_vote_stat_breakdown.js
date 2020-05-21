@@ -10,7 +10,7 @@ import {
   FlatTreeMapViz,
   declare_panel,
 } from "../../shared.js";
-const { Format, DisplayTable, default_dept_name_sort_func } = util_components;
+const { DisplayTable, default_dept_name_sort_func } = util_components;
 
 const main_col = "{{est_in_year}}_estimates";
 
