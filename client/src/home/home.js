@@ -86,12 +86,34 @@ const HomeLayout = (props) => (
         <h1>
           <TM k="welcome" />
         </h1>
-        <h3>
-          <TM k="home_sub_title" />
-        </h3>
+        <div className="search-box">
+          <EverythingSearch
+            include_gov={false}
+            search_text={home_tm("everything_search_placeholder")}
+            large={true}
+            include_tags={true}
+            include_programs={true}
+            include_crsos={true}
+            include_tables={true}
+            include_glossary={true}
+            org_scope="all_orgs_with_gov"
+            href_template={(item) => smart_href_template(item, "/")}
+            onNewQuery={(query) => {
+              log_standard_event({
+                SUBAPP: "home",
+                SUBJECT_GUID: null,
+                MISC1: "home_search",
+                MISC2: query,
+              });
+            }}
+          />
+        </div>
         <div className="flag">
           <img aria-hidden="true" src={get_static_url("svg/flagline.svg")} />
         </div>
+        <h3>
+          <TM k="home_sub_title" />
+        </h3>
       </header>
     </div>
 
@@ -136,33 +158,6 @@ const HomeLayout = (props) => (
           </div>
         </div>
         <div className="fcol-md-5 featured-home-cols__primary">
-          <h2>
-            <TM k="home_search_bar_title" />
-          </h2>
-          <div className="search-box">
-            <div className="search-container home-search-container">
-              <EverythingSearch
-                include_gov={false}
-                search_text={home_tm("everything_search_placeholder")}
-                large={true}
-                include_tags={true}
-                include_programs={true}
-                include_crsos={true}
-                include_tables={true}
-                include_glossary={true}
-                org_scope="all_orgs_with_gov"
-                href_template={(item) => smart_href_template(item, "/")}
-                onNewQuery={(query) => {
-                  log_standard_event({
-                    SUBAPP: "home",
-                    SUBJECT_GUID: null,
-                    MISC1: "home_search",
-                    MISC2: query,
-                  });
-                }}
-              />
-            </div>
-          </div>
           <h2>
             <TM k="featured_data_title" />
           </h2>
