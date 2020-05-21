@@ -15,20 +15,18 @@ import {
 const { text_maker, TM } = create_text_maker_component(text);
 
 const FaqIndex = () => (
-  <FancyUL className="faq-index">
-    {[
-      <TM
-        key="jump_to_question"
-        k="jump_to_question"
-        el="h2"
-        className="heading-unstyled"
-      />,
-      ..._.map(faq_data, ({ q }, id) => (
-        <a key={id} href={`#faq/${id}`} title={text_maker("jump_to_question")}>
-          {q}
-        </a>
-      )),
-    ]}
+  <FancyUL
+    className="faq-index"
+    title={text_maker("jump_to_question")}
+    TitleComponent={({ children }) => (
+      <h2 className="heading-unstyled">{children}</h2>
+    )}
+  >
+    {_.map(faq_data, ({ q }, id) => (
+      <a key={id} href={`#faq/${id}`} title={text_maker("jump_to_question")}>
+        {q}
+      </a>
+    ))}
   </FancyUL>
 );
 
