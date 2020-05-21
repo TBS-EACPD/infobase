@@ -86,6 +86,12 @@ const HomeLayout = (props) => (
         <h1>
           <TM k="welcome" />
         </h1>
+        <h3 style={{ marginTop: 0 }}>
+          <TM k="home_sub_title" />
+        </h3>
+        <div className="flag">
+          <img aria-hidden="true" src={get_static_url("svg/flagline.svg")} />
+        </div>
         <div className="search-box">
           <EverythingSearch
             include_gov={false}
@@ -108,12 +114,6 @@ const HomeLayout = (props) => (
             }}
           />
         </div>
-        <div className="flag">
-          <img aria-hidden="true" src={get_static_url("svg/flagline.svg")} />
-        </div>
-        <h3 style={{ marginTop: 0 }}>
-          <TM k="home_sub_title" />
-        </h3>
       </header>
     </div>
 
