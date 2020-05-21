@@ -34,7 +34,10 @@ const FaqIndex = () => (
 
 const FaqTable = () => (
   <LabeledTable
-    title={<TM k="faq_title" el="h2" className="heading-unstyled" />}
+    title={text_maker("faq_title")}
+    TitleComponent={({ children }) => (
+      <h2 className="heading-unstyled">{children}</h2>
+    )}
     contents={_.map(faq_data, ({ q, a }, id) => ({
       id: id,
       label: q,
