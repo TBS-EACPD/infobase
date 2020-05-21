@@ -25,15 +25,17 @@ export class DisplayTableUtils extends React.Component {
 
     return (
       <div className="dp-utils-heading-container">
-        <button
-          onClick={() => this.downloadCsv()}
-          className={"dp-utils-heading"}
-        >
-          <IconDownload
-            title={text_maker("download_table_data_desc")}
-            color={window.infobase_color_constants.backgroundColor}
-          />
-        </button>
+        {!window.feature_detection.is_IE() && (
+          <button
+            onClick={() => this.downloadCsv()}
+            className={"dp-utils-heading"}
+          >
+            <IconDownload
+              title={text_maker("download_table_data_desc")}
+              color={window.infobase_color_constants.backgroundColor}
+            />
+          </button>
+        )}
         <WriteToClipboard
           text_to_copy={csv_string}
           button_class_name={"dp-utils-heading"}
