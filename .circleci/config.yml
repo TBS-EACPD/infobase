@@ -68,7 +68,7 @@ jobs:
           path: "~/InfoBase"
       - run: ./scripts/ci_scripts/create_envs.sh
 
-      - run: ./scripts/ci_scripts/authenticate-server-gcloud.sh
+      - run: ./scripts/ci_scripts/authenticate-client-gcloud.sh
 
       # only let this job run in the true repo
       - run: if [ "$CIRCLE_PROJECT_REPONAME" != "infobase" ]; then circleci-agent step halt; fi
