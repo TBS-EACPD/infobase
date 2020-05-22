@@ -1,6 +1,5 @@
 import { TextMaker, text_maker } from "./rpb_text_provider.js";
 import { sources as all_sources } from "../metadata/data_sources.js";
-import { Subject } from "../models/subject";
 import {
   DeptSearch,
   FancyUL,
@@ -9,10 +8,6 @@ import {
   FootnoteList,
 } from "../components/index.js";
 import { IconCopyLink } from "../icons/icons.js";
-
-import classNames from "classnames";
-
-const { Gov } = Subject;
 
 const ReportDetails = ({
   table,
@@ -128,80 +123,20 @@ const ReportDatasets = ({ table, subject }) => {
 };
 
 const ShareReport = () => (
-  <div className="rpb-config-item rpb-share-options">
+  <div className="rpb-config-item">
     <ShareButton
+      button_class_name={"panel-heading-utils"}
       url={window.location.href}
       icon_color={window.infobase_color_constants.secondaryColor}
     />
     <WriteToClipboard
+      button_class_name={"panel-heading-utils"}
       text_to_copy={window.location.href}
       icon_color={window.infobase_color_constants.secondaryColor}
       IconComponent={IconCopyLink}
     />
   </div>
 );
-
-class ExportButton extends React.Component {
-  //note that though props may not have changed, this method doesn't get triggered from this.setState
-  constructor() {
-    super();
-    this.state = {
-      success: null,
-    };
-  }
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return {
-      success: null,
-    };
-  }
-  render() {
-    const { id, get_csv_string } = this.props;
-    const { success } = this.state;
-
-    if (window.feature_detection.download_attr) {
-      return (
-        <div>
-          <button
-            id={id}
-            className="btn btn-ib-primary btn-block"
-            onClick={() => {
-              this.triggerDownload();
-            }}
-          >
-            <TextMaker text_key="export_table" />
-          </button>
-        </div>
-      );
-    } else {
-      const buttonText =
-        success === false ? (
-          <TextMaker text_key="error" />
-        ) : success === true ? (
-          <TextMaker text_key="finished_export_table_to_clipboard" />
-        ) : (
-          <TextMaker text_key="export_table_to_clipboard" />
-        );
-
-      return (
-        <WriteToClipboard
-          text_to_copy={get_csv_string()}
-          icon_color={window.infobase_color_constants.secondaryColor}
-          button_class_name="btn btn-ib-primary btn-block"
-          IconComponent={() => buttonText}
-        />
-      );
-    }
-  }
-  triggerDownload() {
-    const csv_str = this.props.get_csv_string();
-    const uri = "data:text/csv;charset=UTF-8," + encodeURIComponent(csv_str);
-
-    const temporary_anchor = document.createElement("a");
-    temporary_anchor.setAttribute("download", "table.csv");
-    temporary_anchor.setAttribute("href", uri);
-    temporary_anchor.dispatchEvent(new MouseEvent("click"));
-  }
-}
 
 //the parent flexbox styling screws stuff up and makes it impossible to center vertically, top padding tweaked to correct
 const SubjectFilterPicker = ({ subject, onSelect }) => (
@@ -233,7 +168,6 @@ export {
   ReportDetails,
   ReportDatasets,
   ShareReport,
-  ExportButton,
   SubjectFilterPicker,
   NoDataMessage,
 };

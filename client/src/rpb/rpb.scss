@@ -29,16 +29,6 @@ li.select-list-item {
 }
 
 @media(min-width: $minMediumDevice){
-  .rpb-config-item.col-selection.simple {
-    max-height: 500px;
-    overflow-y: auto; 
-  }
-
-  .rpb-config-item.col-selection.granular {
-    max-height: 500px;
-    overflow-y: auto; 
-  }
-
   .md-half-width{
     min-width: 50%;
     display: inline-block;
@@ -67,10 +57,11 @@ li.select-list-item {
 }
 
 .rpb-config-item {
-  margin-right: 0px;
-  margin-bottom: 5px;
-  padding: 5px;
-  min-height: 46px;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px 0px;
+  margin-bottom: 20px;
+  margin-top: 20px;
   & > .row {
     margin: 0px;
   }
@@ -83,13 +74,9 @@ li.select-list-item {
   font-weight: $heavyFontWeight;
   line-height: 20px;
   color: $primaryColor;
+  margin-right: 10px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
-}
-
-.rpb-simple-select {
-  width: 100%;
-  margin-top: -6px;
 }
 
 .rpb-data-cell {
@@ -127,18 +114,4 @@ li.select-list-item {
 
 .rpb-separator {
   border-bottom: 1px solid $separatorColor;
-}
-
-.rpb-share-options {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-
-  & > button {
-    background-color: Transparent;
-    border: none;  
-    &:active {
-      transform: scale(1.15);
-    }
-  }
 }

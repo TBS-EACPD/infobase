@@ -36,7 +36,7 @@ import AriaModal from "react-aria-modal";
 //specific view stuff
 import { AccessibleTablePicker, TablePicker } from "./TablePicker.js";
 import { GranularView } from "./granular_view.js";
-import { SubjectFilterPicker } from "./shared.js";
+import { SubjectFilterPicker, ShareReport } from "./shared.js";
 import { Table } from "../core/TableClass.js";
 
 //misc app stuff
@@ -210,10 +210,13 @@ class RPB extends React.Component {
             }
           }}
         />
-        <RPBTitle
-          subject_name={subject !== Gov && subject && subject.name}
-          table_name={table && table.name}
-        />
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <RPBTitle
+            subject_name={subject !== Gov && subject && subject.name}
+            table_name={table && table.name}
+          />
+          <ShareReport />
+        </div>
         <LabeledBox label={<TextMaker text_key="rpb_pick_data" />}>
           <div>
             <div className="centerer md-half-width">
@@ -300,7 +303,6 @@ class RPB extends React.Component {
                 onSelect={(subj) => on_set_subject(subj)}
               />
             </LabeledBox>
-            )}
             {table ? <GranularView {...this.props} /> : null}
           </Fragment>
         )}
