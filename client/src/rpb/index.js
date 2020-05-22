@@ -300,27 +300,6 @@ class RPB extends React.Component {
                 onSelect={(subj) => on_set_subject(subj)}
               />
             </LabeledBox>
-            <LabeledBox label={<TextMaker text_key="rpb_select_mode" />}>
-              <div className="centerer">
-                <RadioButtons
-                  options={[
-                    {
-                      id: "simple",
-                      display: <TextMaker text_key="simple_view_title" />,
-                      active: mode === "simple",
-                    },
-                    {
-                      id: "details",
-                      display: <TextMaker text_key="granular_view_title" />,
-                      active: mode === "details",
-                    },
-                  ]}
-                  onChange={(id) => {
-                    on_switch_mode(id);
-                  }}
-                />
-              </div>
-            </LabeledBox>
             )}
             {table ? <GranularView {...this.props} /> : null}
           </Fragment>
