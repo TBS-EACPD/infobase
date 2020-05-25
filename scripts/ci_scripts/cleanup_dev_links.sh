@@ -15,9 +15,8 @@ branches_with_dev_link_buckets=$(gsutil ls $GCLOUD_BUCKET_ROOT | \
 inactive_branches_with_dev_link_buckets=$(grep -Fxvf <(echo "$active_branches") <(echo "$branches_with_dev_link_buckets"))
 
 if [[ ! -z "$inactive_branches_with_dev_link_buckets" ]]; then
-  tmpfile=$(mktemp -t)
-
-  echo "<!DOCTYPE html>
+  index_names="index-eng.html index-fra.html index-basic-eng.html index-basic-fra.html"
+  new_index_html="<!DOCTYPE html>
   <html class='no-js' lang='en' dir='ltr'>
     <head>
       <meta charset='utf-8'>
@@ -34,11 +33,17 @@ if [[ ! -z "$inactive_branches_with_dev_link_buckets" ]]; then
         </h3>
       </main>
     </body>
-  </html>" > $tmpfile
+  </html>"
   
+  tmpfile=$(mktemp -d)
+
+  for index_name in $index_names; do
+    echo "$new_index_html" > "$tmpfile/$index_name"
+  done
+
   while IFS= read -r branch_name; do
-    gsutil cp -a public-read "$tmpfile" "$GCLOUD_BUCKET_ROOT/$branch_name/index-eng.html"
-    gsutil cp -a public-read "$tmpfile" "$GCLOUD_BUCKET_ROOT/$branch_name/index-fra.html"
+    echo "Clobbering index html's of $branch_name dev link"
+    gsutil rsync -m -d -a public-read $tmpfile $GCLOUD_BUCKET_ROOT/$branch_name
   done <<< "$inactive_branches_with_dev_link_buckets"
 
   rm "$tmpfile"
