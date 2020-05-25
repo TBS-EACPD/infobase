@@ -315,7 +315,7 @@ class SingleSubjExplorer extends React.Component {
                 className="btn btn-ib-light"
                 style={{
                   height: "40px",
-                  width: "100%",
+                  width: "50%",
                   margin: "5px 0px",
                 }}
                 onClick={() => {
@@ -325,11 +325,24 @@ class SingleSubjExplorer extends React.Component {
                   });
                 }}
               >
-                <span>
-                  {this.state.is_expanded
-                    ? text_maker("collapse_all")
-                    : text_maker("expand_all")}
-                </span>
+                <span>{text_maker("expand_all")}</span>
+              </button>
+              <button
+                type="button"
+                className="btn btn-ib-light"
+                style={{
+                  height: "40px",
+                  width: "50%",
+                  margin: "5px 0px",
+                }}
+                onClick={() => {
+                  toggle_all(root, this.state.is_expanded);
+                  this.setState({
+                    is_expanded: !this.state.is_expanded,
+                  });
+                }}
+              >
+                <span>{text_maker("collapse_all")}</span>
               </button>
               {window.is_a11y_mode && (
                 <input
