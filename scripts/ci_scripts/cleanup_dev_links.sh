@@ -16,8 +16,9 @@ branches_with_live_dev_links=$(gsutil ls "$GCLOUD_BUCKET_ROOT/*/favicon.ico" | \
 inactive_branches_with_live_dev_links=$(grep -Fxvf <(echo "$active_branches") <(echo "$branches_with_dev_link_buckets"))
 
 if [[ ! -z "$inactive_branches_with_live_dev_links" ]]; then
-  # the index html replacements used for dead dev links is stored in google cloud and must be updated there. Note that
-  # buckets don't support sym links, so if you update that file you should also clobber over all the existing instances
+  # the index html replacements used for dead dev links are stored in google cloud and must be updated there. Note that
+  # buckets don't support sym links, so if you update those files then you should also clobber over all the existing
+  # instances in each old dev link dir
   dead_dev_link_html_location="$GCLOUD_BUCKET_ROOT/____dead_dev_link_html"
 
   while IFS= read -r branch_name; do
