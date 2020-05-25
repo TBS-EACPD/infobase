@@ -21,12 +21,15 @@ if [[ ! -z "$inactive_branches_with_live_dev_links" ]]; then
   # instances in each old dev link dir
   dead_dev_link_html_location="$GCLOUD_BUCKET_ROOT/____dead_dev_link_html"
 
+  echo "Clobbering dev link files for: $inactive_branches_with_live_dev_links"
+
   while IFS= read -r branch_name; do
     gsutil -m rsync -cdr -a public-read "$dead_dev_link_html_location" "$GCLOUD_BUCKET_ROOT/$branch_name"
   done <<< "$inactive_branches_with_live_dev_links"
 
   rm -r "$tmpfile"
+else 
+  echo "No stale dev links to clobber"
 fi
-
 
 source ~/InfoBase/scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-end"
