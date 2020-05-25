@@ -41,12 +41,18 @@ if [[ ! -z "$inactive_branches_with_dev_link_buckets" ]]; then
     echo "$new_index_html" > "$tmpfile/$index_name"
   done
 
+  echo ""
+  echo "Storing dead dev link html index files in gcloud, to speed up later movements"
+  dead_dev_link_html_location="$GCLOUD_BUCKET_ROOT/____dead_dev_link_html"
+  gsutil -m rsync -c -a public-read -d "$tmpfile" $dead_dev_link_html_location
+
   while IFS= read -r branch_name; do
-    echo "Clobbering index html's of $branch_name dev link"
-    gsutil rsync -m -d -a public-read $tmpfile $GCLOUD_BUCKET_ROOT/$branch_name
+    echo ""
+    echo "Clobbering $branch_name dev link files"
+    gsutil -m rsync -cdr -a public-read "$dead_dev_link_html_location" "$GCLOUD_BUCKET_ROOT/$branch_name"
   done <<< "$inactive_branches_with_dev_link_buckets"
 
-  rm "$tmpfile"
+  rm -r "$tmpfile"
 fi
 
 
