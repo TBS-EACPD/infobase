@@ -15,7 +15,7 @@ branches_with_dev_link_buckets=$(gsutil ls $GCLOUD_BUCKET_ROOT | \
 inactive_branches_with_dev_link_buckets=$(grep -Fxvf <(echo "$active_branches") <(echo "$branches_with_dev_link_buckets"))
 
 if [[ ! -z "$inactive_branches_with_dev_link_buckets" ]]; then
-  tmpfile=$(mktemp ./inactive_dev_link_XXXXXX.html)
+  tmpfile=$(mktemp -t)
 
   echo "<!DOCTYPE html>
   <html class='no-js' lang='en' dir='ltr'>
