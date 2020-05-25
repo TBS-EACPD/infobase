@@ -68,28 +68,28 @@ function root_reducer(state = initial_root_state, action) {
     case "toggle_all": {
       const { root } = payload;
       const shouldExpand = !payload.is_expanded;
+      const { userExpanded: oldExpanded, userCollapsed: oldCollapsed } = state;
 
-      let nodes = [];
-      let search_nodes = (source) => {
-        if (source.children.length === 0) {
-          return;
-        }
-        _.forEach(source.children, (node) => {
-          if (
-            (shouldExpand && !node.isExpanded) ||
-            (!shouldExpand && node.isExpanded)
-          ) {
-            nodes.push(node.id);
-          }
-          search_nodes(node);
-        });
-      };
-      search_nodes(root);
+      const get_ids_to_update = ({ isExpanded, id, children }) => [
+        (shouldExpand && !isExpanded) || (!shouldExpand && isExpanded)
+          ? id
+          : [],
+        _.map(children, get_ids_to_update),
+      ];
+      const ids_to_update = _.flattenDeep(get_ids_to_update(root));
 
       if (shouldExpand) {
-        return { ...state, userExpanded: nodes, userCollapsed: [] };
+        return {
+          ...state,
+          userExpanded: oldExpanded.concat(ids_to_update),
+          userCollapsed: [],
+        };
       } else {
-        return { ...state, userExpanded: [], userCollapsed: nodes };
+        return {
+          ...state,
+          userExpanded: [],
+          userCollapsed: oldCollapsed.concat(ids_to_update),
+        };
       }
     }
 
