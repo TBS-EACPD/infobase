@@ -65,32 +65,38 @@ function root_reducer(state = initial_root_state, action) {
       }
     }
 
-    case "toggle_all": {
+    case "expand_all": {
       const { root } = payload;
-      const shouldExpand = !payload.is_expanded;
-      const { userExpanded: oldExpanded, userCollapsed: oldCollapsed } = state;
+      const { userExpanded: oldExpanded } = state;
 
       const get_ids_to_update = ({ isExpanded, id, children }) => [
-        (shouldExpand && !isExpanded) || (!shouldExpand && isExpanded)
-          ? id
-          : [],
+        !isExpanded ? id : [],
         _.map(children, get_ids_to_update),
       ];
       const ids_to_update = _.flattenDeep(get_ids_to_update(root));
 
-      if (shouldExpand) {
-        return {
-          ...state,
-          userExpanded: oldExpanded.concat(ids_to_update),
-          userCollapsed: [],
-        };
-      } else {
-        return {
-          ...state,
-          userExpanded: [],
-          userCollapsed: oldCollapsed.concat(ids_to_update),
-        };
-      }
+      return {
+        ...state,
+        userExpanded: oldExpanded.concat(ids_to_update),
+        userCollapsed: [],
+      };
+    }
+
+    case "collapse_all": {
+      const { root } = payload;
+      const { userCollapsed: oldCollapsed } = state;
+
+      const get_ids_to_update = ({ isExpanded, id, children }) => [
+        isExpanded ? id : [],
+        _.map(children, get_ids_to_update),
+      ];
+      const ids_to_update = _.flattenDeep(get_ids_to_update(root));
+
+      return {
+        ...state,
+        userExpanded: [],
+        userCollapsed: oldCollapsed.concat(ids_to_update),
+      };
     }
 
     default: {
@@ -130,10 +136,16 @@ const map_dispatch_to_root_props = (dispatch) => {
       payload: { node },
     });
 
-  const toggle_all = (root, is_expanded) =>
+  const expand_all = (root) =>
     dispatch({
-      type: "toggle_all",
-      payload: { root, is_expanded },
+      type: "expand_all",
+      payload: { root },
+    });
+
+  const collapse_all = (root) =>
+    dispatch({
+      type: "collapse_all",
+      payload: { root },
     });
 
   const clear_query = () => dispatch({ type: "clear_query" });
@@ -145,7 +157,8 @@ const map_dispatch_to_root_props = (dispatch) => {
     toggle_node,
     clear_query,
     enable_loading,
-    toggle_all,
+    expand_all,
+    collapse_all,
   };
 };
 
