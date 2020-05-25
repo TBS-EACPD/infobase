@@ -189,7 +189,7 @@ const get_col_defs = createSelector(
 class SingleSubjExplorer extends React.Component {
   constructor() {
     super();
-    this.state = { query: "", is_expanded: false };
+    this.state = { query: "" };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
   handleQueryChange(new_query) {
@@ -226,7 +226,8 @@ class SingleSubjExplorer extends React.Component {
 
       set_query,
       toggle_node,
-      toggle_all,
+      expand_all,
+      collapse_all,
 
       subject,
 
@@ -318,12 +319,7 @@ class SingleSubjExplorer extends React.Component {
                   width: "50%",
                   margin: "5px 0px",
                 }}
-                onClick={() => {
-                  toggle_all(root, this.state.is_expanded);
-                  this.setState({
-                    is_expanded: !this.state.is_expanded,
-                  });
-                }}
+                onClick={() => expand_all(root)}
               >
                 <span>{text_maker("expand_all")}</span>
               </button>
@@ -335,12 +331,7 @@ class SingleSubjExplorer extends React.Component {
                   width: "50%",
                   margin: "5px 0px",
                 }}
-                onClick={() => {
-                  toggle_all(root, this.state.is_expanded);
-                  this.setState({
-                    is_expanded: !this.state.is_expanded,
-                  });
-                }}
+                onClick={() => collapse_all(root)}
               >
                 <span>{text_maker("collapse_all")}</span>
               </button>
