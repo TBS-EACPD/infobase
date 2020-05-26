@@ -15,6 +15,14 @@ const initial_root_state = {
   userCollapsed: [],
 };
 
+function ids_to_update(root, should_expand) {
+  const get_ids_to_update = ({ isExpanded, id, children }) => [
+    (should_expand && !isExpanded) || (!should_expand && isExpanded) ? id : [],
+    _.map(children, get_ids_to_update),
+  ];
+  return _.flattenDeep(get_ids_to_update(root));
+}
+
 function root_reducer(state = initial_root_state, action) {
   const { type, payload } = action;
 
@@ -69,15 +77,9 @@ function root_reducer(state = initial_root_state, action) {
       const { root } = payload;
       const { userExpanded: oldExpanded } = state;
 
-      const get_ids_to_update = ({ isExpanded, id, children }) => [
-        !isExpanded ? id : [],
-        _.map(children, get_ids_to_update),
-      ];
-      const ids_to_update = _.flattenDeep(get_ids_to_update(root));
-
       return {
         ...state,
-        userExpanded: oldExpanded.concat(ids_to_update),
+        userExpanded: oldExpanded.concat(ids_to_update(root, true)),
         userCollapsed: [],
       };
     }
@@ -86,16 +88,10 @@ function root_reducer(state = initial_root_state, action) {
       const { root } = payload;
       const { userCollapsed: oldCollapsed } = state;
 
-      const get_ids_to_update = ({ isExpanded, id, children }) => [
-        isExpanded ? id : [],
-        _.map(children, get_ids_to_update),
-      ];
-      const ids_to_update = _.flattenDeep(get_ids_to_update(root));
-
       return {
         ...state,
         userExpanded: [],
-        userCollapsed: oldCollapsed.concat(ids_to_update),
+        userCollapsed: oldCollapsed.concat(ids_to_update(root, false)),
       };
     }
 
