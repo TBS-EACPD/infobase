@@ -18,46 +18,28 @@ import { DebouncedTextInput } from "../DebouncedTextInput.js";
 
 const { text_maker, TM } = create_text_maker_component();
 
+const column_config_defaults = {
+  initial_visible: true,
+  is_sortable: true,
+  is_summable: false,
+  is_searchable: false,
+  sum_func: (sum, value) => sum + value,
+  raw_formatter: _.identity,
+  sum_initial_value: 0,
+};
+
 export class DisplayTable extends React.Component {
   constructor(props) {
     super(props);
 
     const { unsorted_initial, column_configs } = props;
 
-    const sort_by = unsorted_initial
-      ? null
-      : _.chain(column_configs)
-          .pickBy((col) => col.is_sortable)
-          .keys()
-          .first()
-          .value();
-
-    const searches = _.chain(column_configs)
-      .pickBy((col) => col.is_searchable)
-      .mapValues(() => "")
-      .value();
-
-    this.state = {
-      sort_by,
-      descending: !unsorted_initial,
-      searches,
-    };
-  }
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { sort_by, visible_ordered_col_keys, searches } = prevState;
-    const all_col_keys = _.keys(nextProps.column_configs);
-    const col_keys_changed =
-      !_.includes(all_col_keys, sort_by) ||
-      _.intersection(all_col_keys, visible_ordered_col_keys).length <
-        visible_ordered_col_keys.length ||
-      _.intersection(all_col_keys, _.keys(searches)).length <
-        _.keys(searches).length;
-    return col_keys_changed ? DisplayTable.reset_states(nextProps) : prevState;
-  }
-  static reset_states(props) {
-    const { unsorted_initial, column_configs } = props;
-    const col_configs_with_defaults = DisplayTable.get_col_configs_with_defaults(
-      column_configs
+    const col_configs_with_defaults = _.mapValues(
+      column_configs,
+      (supplied_column_config) => ({
+        ...column_config_defaults,
+        ...supplied_column_config,
+      })
     );
 
     const visible_ordered_col_keys = _.chain(col_configs_with_defaults)
@@ -79,22 +61,13 @@ export class DisplayTable extends React.Component {
       .pickBy((col) => col.is_searchable)
       .mapValues(() => "")
       .value();
-    return { visible_ordered_col_keys, sort_by, searches };
-  }
-  static get_col_configs_with_defaults(column_configs) {
-    const column_config_defaults = {
-      initial_visible: true,
-      is_sortable: true,
-      is_summable: false,
-      is_searchable: false,
-      sum_func: (sum, value) => sum + value,
-      raw_formatter: _.identity,
-      sum_initial_value: 0,
+
+    this.state = {
+      visible_ordered_col_keys,
+      sort_by,
+      descending: !unsorted_initial,
+      searches,
     };
-    return _.mapValues(column_configs, (supplied_column_config) => ({
-      ...column_config_defaults,
-      ...supplied_column_config,
-    }));
   }
 
   render() {
@@ -128,8 +101,13 @@ export class DisplayTable extends React.Component {
       searches,
       visible_ordered_col_keys,
     } = this.state;
-    const col_configs_with_defaults = DisplayTable.get_col_configs_with_defaults(
-      column_configs
+
+    const col_configs_with_defaults = _.mapValues(
+      column_configs,
+      (supplied_column_config) => ({
+        ...column_config_defaults,
+        ...supplied_column_config,
+      })
     );
 
     const determine_text_align = (row, col) => {
@@ -236,27 +214,27 @@ export class DisplayTable extends React.Component {
                     label: col_configs_with_defaults[key].header,
                     active: _.includes(visible_ordered_col_keys, key),
                   }))}
-                  onClick={(clicked_key) =>
+                  onClick={(clicked_key) => {
                     !(
                       visible_ordered_col_keys.length === 1 &&
                       visible_ordered_col_keys.includes(clicked_key)
                     ) &&
-                    this.setState({
-                      visible_ordered_col_keys: _.chain(
-                        col_configs_with_defaults
-                      )
-                        .pickBy((col, key) =>
-                          _.chain(visible_ordered_col_keys)
-                            .toggle_list(clicked_key)
-                            .includes(key)
-                            .value()
+                      this.setState({
+                        visible_ordered_col_keys: _.chain(
+                          col_configs_with_defaults
                         )
-                        .map(({ index }, key) => [index, key])
-                        .sortBy(_.first)
-                        .map(_.last)
-                        .value(),
-                    })
-                  }
+                          .pickBy((col, key) =>
+                            _.chain(visible_ordered_col_keys)
+                              .toggle_list(clicked_key)
+                              .includes(key)
+                              .value()
+                          )
+                          .map(({ index }, key) => [index, key])
+                          .sortBy(_.first)
+                          .map(_.last)
+                          .value(),
+                      });
+                  }}
                 />
               }
             />
