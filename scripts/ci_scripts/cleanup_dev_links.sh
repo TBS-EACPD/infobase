@@ -28,8 +28,6 @@ if [[ ! -z "$inactive_branches_with_live_dev_links" ]]; then
     # saw cases where these html files were miss-typed. Couldn't tell why, but being explicit here to play it safe
     gsutil setmeta -h "Content-Type:text/html" "$GCLOUD_BUCKET_ROOT/$branch_name/*.html"
   done <<< "$inactive_branches_with_live_dev_links"
-
-  rm -r "$tmpfile"
 else 
   echo "No stale dev links to clobber"
 fi
