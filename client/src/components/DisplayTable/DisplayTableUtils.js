@@ -5,7 +5,12 @@ import { Fragment } from "react";
 
 import { create_text_maker_component } from "../misc_util_components.js";
 import { WriteToClipboard } from "../WriteToClipboard.js";
-import { IconCopy, IconDownload } from "../../icons/icons.js";
+import { DropdownMenu } from "../DropdownMenu.js";
+import {
+  IconCopy,
+  IconDownload,
+  IconFilterColumns,
+} from "../../icons/icons.js";
 
 const { text_maker } = create_text_maker_component(text);
 
@@ -16,6 +21,16 @@ export const DisplayTableCopy = ({ csv_string }) => (
     button_description={text_maker("copy_table_data_desc")}
     IconComponent={IconCopy}
     icon_color={window.infobase_color_constants.backgroundColor}
+  />
+);
+
+export const DisplayTableDropdownFilter = ({ columns }) => (
+  <DropdownMenu
+    button_class_name={"display_table__util-icon"}
+    button_description={text_maker("toggle_columns_desc")}
+    IconComponent={IconFilterColumns}
+    icon_color={window.infobase_color_constants.backgroundColor}
+    dropdownContent={columns}
   />
 );
 
