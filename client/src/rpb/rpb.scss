@@ -115,3 +115,17 @@ li.select-list-item {
 .rpb-separator {
   border-bottom: 1px solid $separatorColor;
 }
+.rpb-heading-utils {
+  width: 20px;
+  height: 20px;
+}
+button.rpb-heading-utils {
+  background-color: Transparent;
+  border: none;
+  margin-right: 5px;
+  padding: 0;
+
+  &:active {
+    transform: scale(1.15);
+  }
+}

@@ -125,12 +125,12 @@ const ReportDatasets = ({ table, subject }) => {
 const ShareReport = () => (
   <div className="rpb-config-item">
     <ShareButton
-      button_class_name={"panel-heading-utils"}
+      button_class_name={"rpb-heading-utils"}
       url={window.location.href}
       icon_color={window.infobase_color_constants.secondaryColor}
     />
     <WriteToClipboard
-      button_class_name={"panel-heading-utils"}
+      button_class_name={"rpb-heading-utils"}
       text_to_copy={window.location.href}
       icon_color={window.infobase_color_constants.secondaryColor}
       IconComponent={IconCopyLink}
