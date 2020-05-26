@@ -9,12 +9,26 @@ export class DropdownMenu extends React.Component {
     };
   }
   render() {
-    const { dropdownContent } = this.props;
+    const {
+      dropdownContent,
+      button_class_name,
+      button_description,
+      IconComponent,
+      icon_color,
+    } = this.props;
     const { isOpen } = this.state;
+
     return (
       <div className="dropdown">
-        <button onClick={() => this.setState({ isOpen: !isOpen })}>
-          TODO: column visible toggle btn design
+        <button
+          className={button_class_name}
+          onClick={() => this.setState({ isOpen: !isOpen })}
+        >
+          <IconComponent
+            title={button_description}
+            color={icon_color}
+            alternate_color={false}
+          />
         </button>
         <div
           className={classNames(

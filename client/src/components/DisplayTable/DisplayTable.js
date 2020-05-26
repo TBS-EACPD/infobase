@@ -6,8 +6,13 @@ import {
   create_text_maker_component,
   Format,
 } from "../misc_util_components.js";
+import { LegendList } from "../../charts/legends";
 
-import { DisplayTableCopy, DisplayTableDownload } from "./DisplayTableUtils.js";
+import {
+  DisplayTableCopy,
+  DisplayTableDownload,
+  DisplayTableDropdownFilter,
+} from "./DisplayTableUtils.js";
 import { SortDirections } from "../SortDirection.js";
 import { DebouncedTextInput } from "../DebouncedTextInput.js";
 
@@ -16,8 +21,6 @@ const { text_maker, TM } = create_text_maker_component();
 export class DisplayTable extends React.Component {
   constructor(props) {
     super(props);
-
-    this.sort_click.bind(this);
 
     const { unsorted_initial, column_configs } = props;
 
@@ -40,13 +43,58 @@ export class DisplayTable extends React.Component {
       searches,
     };
   }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { sort_by, visible_ordered_col_keys, searches } = prevState;
+    const all_col_keys = _.keys(nextProps.column_configs);
+    const col_keys_changed =
+      !_.includes(all_col_keys, sort_by) ||
+      _.intersection(all_col_keys, visible_ordered_col_keys).length <
+        visible_ordered_col_keys.length ||
+      _.intersection(all_col_keys, _.keys(searches)).length <
+        _.keys(searches).length;
+    return col_keys_changed ? DisplayTable.reset_states(nextProps) : prevState;
+  }
+  static reset_states(props) {
+    const { unsorted_initial, column_configs } = props;
+    const col_configs_with_defaults = DisplayTable.get_col_configs_with_defaults(
+      column_configs
+    );
 
-  sort_click(column_key) {
-    this.setState({
-      sort_by: column_key,
-      descending:
-        this.state.sort_by === column_key ? !this.state.descending : true,
-    });
+    const visible_ordered_col_keys = _.chain(col_configs_with_defaults)
+      .pickBy((col) => col.initial_visible)
+      .map(({ index }, key) => [index, key])
+      .sortBy(_.first)
+      .map(_.last)
+      .value();
+
+    const sort_by = unsorted_initial
+      ? null
+      : _.chain(col_configs_with_defaults)
+          .pickBy((col) => col.is_sortable)
+          .keys()
+          .first()
+          .value();
+
+    const searches = _.chain(col_configs_with_defaults)
+      .pickBy((col) => col.is_searchable)
+      .mapValues(() => "")
+      .value();
+    return { visible_ordered_col_keys, sort_by, searches };
+  }
+  static get_col_configs_with_defaults(column_configs) {
+    const column_config_defaults = {
+      initial_visible: true,
+      is_sortable: true,
+      is_summable: false,
+      is_searchable: false,
+      sum_func: (sum, value) => sum + value,
+      raw_formatter: _.identity,
+      sum_initial_value: 0,
+    };
+    return _.mapValues(column_configs, (supplied_column_config) => ({
+      ...column_config_defaults,
+      ...supplied_column_config,
+    }));
   }
 
   render() {
@@ -60,6 +108,7 @@ export class DisplayTable extends React.Component {
           is_sortable: true, <- (boolean) Default to true
           is_summable: true, <- (boolean) Default to false
           is_searchable: true, <- (boolean) Default to false
+          initial_visible: true, <- (boolean) Default to true
           formatter:
             "big_int" <- (string) If it's string, auto formats using types_to_format
             OR
@@ -73,35 +122,28 @@ export class DisplayTable extends React.Component {
       */,
       disable_header_utils,
     } = this.props;
-    const { sort_by, descending, searches } = this.state;
-
-    const column_config_defaults = {
-      is_sortable: true,
-      is_summable: false,
-      is_searchable: false,
-      sum_func: (sum, value) => sum + value,
-      sum_initial_value: 0,
-      raw_formatter: _.identity,
-    };
-    const col_configs_with_defaults = _.mapValues(
-      column_configs,
-      (supplied_column_config) => ({
-        ...column_config_defaults,
-        ...supplied_column_config,
-      })
+    const {
+      sort_by,
+      descending,
+      searches,
+      visible_ordered_col_keys,
+    } = this.state;
+    const col_configs_with_defaults = DisplayTable.get_col_configs_with_defaults(
+      column_configs
     );
 
     const determine_text_align = (row, col) => {
-      const current_col_formatter = col_configs_with_defaults[col].formatter
-      const current_col_raw_formatter = col_configs_with_defaults[col].raw_formatter
+      const current_col_formatter = col_configs_with_defaults[col].formatter;
+      const current_col_raw_formatter =
+        col_configs_with_defaults[col].raw_formatter;
       if (current_col_formatter) {
         if (_.isString(current_col_formatter) && _.isNumber(row[col])) {
-          return "right"
+          return "right";
         }
       } else if (_.isNumber(current_col_raw_formatter(row[col]))) {
-          return "right"
+        return "right";
       }
-    }
+    };
 
     const clean_search_string = (search_string) =>
       _.chain(search_string).deburr().toLower().trim().value();
@@ -159,17 +201,17 @@ export class DisplayTable extends React.Component {
     );
     const is_total_exist = !_.isEmpty(total_row);
 
-    const ordered_column_keys = _.chain(col_configs_with_defaults)
+    const all_ordered_col_keys = _.chain(col_configs_with_defaults)
       .map(({ index }, key) => [index, key])
       .sortBy(_.first)
       .map(_.last)
       .value();
-    const csv_string = _.chain(ordered_column_keys)
+    const csv_string = _.chain(visible_ordered_col_keys)
       .map((key) => col_configs_with_defaults[key].header)
       .thru((header_row) => [header_row])
       .concat(
         _.map(sorted_filtered_data, (row) =>
-          _.map(ordered_column_keys, (key) =>
+          _.map(visible_ordered_col_keys, (key) =>
             col_configs_with_defaults[key].raw_formatter(row[key])
           )
         )
@@ -186,6 +228,38 @@ export class DisplayTable extends React.Component {
       >
         {!disable_header_utils && (
           <div className={"display-table-container__utils"}>
+            <DisplayTableDropdownFilter
+              columns={
+                <LegendList
+                  items={_.map(all_ordered_col_keys, (key) => ({
+                    id: key,
+                    label: col_configs_with_defaults[key].header,
+                    active: _.includes(visible_ordered_col_keys, key),
+                  }))}
+                  onClick={(clicked_key) =>
+                    !(
+                      visible_ordered_col_keys.length === 1 &&
+                      visible_ordered_col_keys.includes(clicked_key)
+                    ) &&
+                    this.setState({
+                      visible_ordered_col_keys: _.chain(
+                        col_configs_with_defaults
+                      )
+                        .pickBy((col, key) =>
+                          _.chain(visible_ordered_col_keys)
+                            .toggle_list(clicked_key)
+                            .includes(key)
+                            .value()
+                        )
+                        .map(({ index }, key) => [index, key])
+                        .sortBy(_.first)
+                        .map(_.last)
+                        .value(),
+                    })
+                  }
+                />
+              }
+            />
             <DisplayTableCopy csv_string={csv_string} />
             <DisplayTableDownload
               csv_string={csv_string}
@@ -211,14 +285,14 @@ export class DisplayTable extends React.Component {
           </caption>
           <thead>
             <tr className="table-header">
-              {_.map(ordered_column_keys, (column_key, i) => (
+              {_.map(visible_ordered_col_keys, (column_key, i) => (
                 <th key={i} className={"center-text"}>
                   {col_configs_with_defaults[column_key].header}
                 </th>
               ))}
             </tr>
             <tr className="table-header">
-              {_.map(ordered_column_keys, (column_key) => {
+              {_.map(visible_ordered_col_keys, (column_key) => {
                 const sortable =
                   col_configs_with_defaults[column_key].is_sortable;
                 const searchable =
@@ -230,7 +304,17 @@ export class DisplayTable extends React.Component {
                 return (
                   <th key={column_key} style={{ textAlign: "center" }}>
                     {sortable && (
-                      <div onClick={() => this.sort_click(column_key)}>
+                      <div
+                        onClick={() =>
+                          this.setState({
+                            sort_by: column_key,
+                            descending:
+                              this.state.sort_by === column_key
+                                ? !this.state.descending
+                                : true,
+                          })
+                        }
+                      >
                         <SortDirections
                           asc={!descending && sort_by === column_key}
                           desc={descending && sort_by === column_key}
@@ -262,10 +346,14 @@ export class DisplayTable extends React.Component {
           <tbody>
             {_.map(sorted_filtered_data, (row, i) => (
               <tr key={i}>
-                {_.map(ordered_column_keys, (col_key) => (
-                  <td style={{ fontSize: "14px", textAlign: 
-                    determine_text_align(row, col_key)}} 
-                      key={col_key}>
+                {_.map(visible_ordered_col_keys, (col_key) => (
+                  <td
+                    style={{
+                      fontSize: "14px",
+                      textAlign: determine_text_align(row, col_key),
+                    }}
+                    key={col_key}
+                  >
                     {col_configs_with_defaults[col_key].formatter ? (
                       _.isString(
                         col_configs_with_defaults[col_key].formatter
@@ -289,12 +377,15 @@ export class DisplayTable extends React.Component {
             {is_total_exist && (
               <tr key="total_row">
                 <td>{text_maker("total")}</td>
-                {_.chain(ordered_column_keys)
+                {_.chain(visible_ordered_col_keys)
                   .tail()
                   .map((col_key) => (
-                    <td style={{textAlign: 
-                      determine_text_align(total_row, col_key)}} 
-                        key={col_key}>
+                    <td
+                      style={{
+                        textAlign: determine_text_align(total_row, col_key),
+                      }}
+                      key={col_key}
+                    >
                       {total_row[col_key] ? (
                         col_configs_with_defaults[col_key].formatter ? (
                           _.isString(
