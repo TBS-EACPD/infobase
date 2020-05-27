@@ -318,9 +318,12 @@ org_search:
 all_orgs_with_data:
   en: Organizations with data
   fr: Organisations avec des données
-other:
+other_s:
   en: Other(s)
   fr: Autre(s)
+other:
+  en: Other
+  fr: Autre
 rank:
   en: Rank
   fr: Rang
