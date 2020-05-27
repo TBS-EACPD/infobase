@@ -3,8 +3,6 @@ import { createSelector } from "reselect";
 
 //data
 import { Subject } from "../models/subject.js";
-
-const { Program, Dept } = Subject;
 import { Table } from "../core/TableClass.js";
 import Footnote from "../models/footnotes/footnotes.js";
 
@@ -97,16 +95,6 @@ const reducer = (state = initial_state, action) => {
       };
     }
 
-    case "set_subject": {
-      const { guid } = payload;
-      return {
-        ...state,
-        subject: guid,
-        filter: text_maker("all"),
-        page_num: 0,
-      };
-    }
-
     case "set_page": {
       return {
         ...state,
@@ -163,10 +151,8 @@ function create_mapStateToProps() {
     [get_table, get_subject],
     (table, subject) => {
       const topics = table.tags.concat(["MACHINERY"]);
-      const gov_footnotes = Footnote.get_for_subject(Subject.Gov, topics);
       const subject_footnotes = Footnote.get_for_subject(subject, topics);
-
-      return _.chain(gov_footnotes).concat(subject_footnotes).value();
+      return subject_footnotes;
     }
   );
 
@@ -203,26 +189,6 @@ function create_mapStateToProps() {
     return table.data;
   });
 
-  const get_subject_filter_func = createSelector(
-    [get_table, get_subject],
-    (table, subject) => {
-      let subj_filter = _.constant(true);
-      if (subject.level === "dept") {
-        subj_filter = { dept: subject.id };
-      } else if (subject.level === "program" && table.programs) {
-        subj_filter = {
-          dept: subject.dept.id,
-          activity_code: subject.activity_code,
-        };
-      } else if (subject.level === "tag" && table.programs) {
-        const prog_ids = _.map(subject.programs, "id");
-        subj_filter = (row) =>
-          _.includes(prog_ids, Program.unique_id(row.dept, row.activity_code));
-      }
-      return subj_filter;
-    }
-  );
-
   const get_cat_filter_func = createSelector(
     [_.property("dimension"), _.property("filter")],
     (dim_key, filter_val) =>
@@ -241,15 +207,9 @@ function create_mapStateToProps() {
         .value()
   );
   const get_flat_data = createSelector(
-    [
-      get_table_data,
-      get_subject_filter_func,
-      get_cat_filter_func,
-      get_zero_filter_func,
-    ],
-    (table_data, subject_filter_func, cat_filter_func, zero_filter_func) =>
+    [get_table_data, get_cat_filter_func, get_zero_filter_func],
+    (table_data, cat_filter_func, zero_filter_func) =>
       _.chain(table_data)
-        .filter(subject_filter_func)
         .filter(cat_filter_func)
         .reject(zero_filter_func)
         .value()
@@ -279,7 +239,6 @@ function create_mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
   return {
-    on_set_subject: (subj) => dispatch({ type: "set_subject", payload: subj }),
     on_set_dimension: (dim_key) =>
       dispatch({ type: "set_dimension", payload: dim_key }),
     on_set_filter: ({ dimension, filter }) =>

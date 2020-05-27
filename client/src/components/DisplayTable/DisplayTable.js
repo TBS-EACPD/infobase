@@ -42,11 +42,9 @@ export class DisplayTable extends React.Component {
       })
     );
 
-    const visible_ordered_col_keys = _.chain(col_configs_with_defaults)
+    const visible_col_keys = _.chain(col_configs_with_defaults)
       .pickBy((col) => col.initial_visible)
-      .map(({ index }, key) => [index, key])
-      .sortBy(_.first)
-      .map(_.last)
+      .keys()
       .value();
 
     const sort_by = unsorted_initial
@@ -63,7 +61,7 @@ export class DisplayTable extends React.Component {
       .value();
 
     this.state = {
-      visible_ordered_col_keys,
+      visible_col_keys,
       sort_by,
       descending: !unsorted_initial,
       searches,
@@ -95,12 +93,7 @@ export class DisplayTable extends React.Component {
       */,
       disable_header_utils,
     } = this.props;
-    const {
-      sort_by,
-      descending,
-      searches,
-      visible_ordered_col_keys,
-    } = this.state;
+    const { sort_by, descending, searches, visible_col_keys } = this.state;
 
     const col_configs_with_defaults = _.mapValues(
       column_configs,
@@ -184,6 +177,10 @@ export class DisplayTable extends React.Component {
       .sortBy(_.first)
       .map(_.last)
       .value();
+    const visible_ordered_col_keys = _.intersection(
+      all_ordered_col_keys,
+      visible_col_keys
+    );
     const csv_string = _.chain(visible_ordered_col_keys)
       .map((key) => col_configs_with_defaults[key].header)
       .thru((header_row) => [header_row])
@@ -220,24 +217,23 @@ export class DisplayTable extends React.Component {
                       visible_ordered_col_keys.includes(clicked_key)
                     ) &&
                       this.setState({
-                        visible_ordered_col_keys: _.chain(
-                          col_configs_with_defaults
-                        )
-                          .pickBy((col, key) =>
-                            _.chain(visible_ordered_col_keys)
-                              .toggle_list(clicked_key)
-                              .includes(key)
-                              .value()
-                          )
-                          .map(({ index }, key) => [index, key])
-                          .sortBy(_.first)
-                          .map(_.last)
-                          .value(),
+                        visible_col_keys: _.toggle_list(
+                          visible_col_keys,
+                          clicked_key
+                        ),
                       });
                   }}
                 />
               }
             />
+            <span
+              style={{
+                margin: "0px 10px 0px",
+                color: window.infobase_color_constants.backgroundColor,
+              }}
+            >
+              |
+            </span>
             <DisplayTableCopy csv_string={csv_string} />
             <DisplayTableDownload
               csv_string={csv_string}

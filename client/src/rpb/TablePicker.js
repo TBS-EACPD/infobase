@@ -10,8 +10,8 @@ import { AlertBanner, GlossaryIcon } from "../components";
 import {
   categories,
   concepts_by_category,
-  concept_white_filter,
-  concept_filter_by_type,
+  concept_whitelist_filter,
+  concept_filter_by_categories,
 } from "./table_picker_concept_filter.js";
 import { TextMaker } from "./rpb_text_provider.js";
 
@@ -65,7 +65,9 @@ class TablePicker extends React.Component {
 
     this.tables = _.chain(Table.get_all())
       .reject("reference_table")
-      .filter((t) => concept_filter_by_type(this.props.dataset_type, t.tags))
+      .filter((t) =>
+        concept_filter_by_categories(this.props.dataset_type, t.tags)
+      )
       .map((t) => ({
         id: t.id,
         display: t.name,
@@ -79,10 +81,13 @@ class TablePicker extends React.Component {
     this.linkage = _.chain(Table.get_all())
       .reject("reference_table")
       .map((table_obj) =>
-        _.map(_.filter(table_obj.tags, concept_white_filter), (concept) => ({
-          table_id: table_obj.id,
-          concept_id: concept,
-        }))
+        _.map(
+          _.filter(table_obj.tags, concept_whitelist_filter),
+          (concept) => ({
+            table_id: table_obj.id,
+            concept_id: concept,
+          })
+        )
       )
       .flatten()
       .value();

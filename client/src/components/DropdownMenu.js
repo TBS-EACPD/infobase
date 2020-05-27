@@ -31,9 +31,11 @@ export class DropdownMenu extends React.Component {
           />
         </button>
         <div
+          tabIndex={0}
+          aria-hidden={true}
           className={classNames(
-            "dropdown-content",
-            isOpen && "dropdown-is-open"
+            "dropdown__content",
+            isOpen && "dropdown__content__is-open"
           )}
         >
           {dropdownContent}
