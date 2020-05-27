@@ -28,6 +28,10 @@ const column_config_defaults = {
   sum_initial_value: 0,
 };
 
+/* Assumption: DisplayTable assumes 1st column to be string that describes its row
+  - If total row exists, 1st column will have the word "Total"
+  - 1st column cannot be toggled off by user
+*/
 export class DisplayTable extends React.Component {
   constructor(props) {
     super(props);
@@ -212,10 +216,8 @@ export class DisplayTable extends React.Component {
                     active: _.includes(visible_ordered_col_keys, key),
                   }))}
                   onClick={(clicked_key) => {
-                    !(
-                      visible_ordered_col_keys.length === 1 &&
-                      visible_ordered_col_keys.includes(clicked_key)
-                    ) &&
+                    // 1st column cannot be toggled off
+                    !(visible_ordered_col_keys[0] === clicked_key) &&
                       this.setState({
                         visible_col_keys: _.toggle_list(
                           visible_col_keys,
