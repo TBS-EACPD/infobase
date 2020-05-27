@@ -1,0 +1,11 @@
+subject_footnote_title:
+  transform: [handlebars]
+  en: |
+    {{name}} specific footnote(s):
+  fr: TODO
+
+global_footnote_title:
+  transform: [handlebars]
+  en: |
+    Global {{type_name}} footnote(s):
+  fr: TODO
