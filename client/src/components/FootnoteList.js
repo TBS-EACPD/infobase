@@ -22,7 +22,6 @@ const FootnoteList = ({ footnotes }) => {
   const { true: real_footnotes, false: fake_footnotes } = _.chain(footnotes)
     .uniqBy("text")
     .groupBy(
-      footnotes,
       ({ subject, topic_keys }) => _.isObject(subject) && !_.isEmpty(topic_keys)
     )
     .value();
