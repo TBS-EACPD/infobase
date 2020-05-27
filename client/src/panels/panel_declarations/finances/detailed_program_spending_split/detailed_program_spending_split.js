@@ -479,14 +479,7 @@ export const declare_detailed_program_spending_split_panel = () =>
           .map(({ program }) => program)
           .uniqBy((program) => program.activity_code)
           .flatMap((program) =>
-            _.chain(
-              FootNote.get_for_subject(program, [...footnote_topics, "EXP"])
-            )
-              .map((footnote) => ({
-                ...footnote,
-                text: `<strong>${footnote.subject.name}: </strong>${footnote.text}`,
-              }))
-              .value()
+            FootNote.get_for_subject(program, [...footnote_topics, "EXP"])
           )
           .filter()
           .value();
