@@ -12,6 +12,7 @@ $smallMargin: 10px;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 
   &:hover, &:focus {
     background-color: $tertiaryColor;
