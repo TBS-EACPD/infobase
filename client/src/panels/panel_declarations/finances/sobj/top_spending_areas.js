@@ -35,7 +35,7 @@ const common_cal = (programs, programSobjs) => {
   const remainder =
     top_3_sos.length > cut_off_index - 1
       ? {
-          label: text_maker("other"),
+          label: text_maker("other_s"),
           value: d3.sum(_.tail(rows_by_so, cut_off_index), _.property("value")),
         }
       : [];

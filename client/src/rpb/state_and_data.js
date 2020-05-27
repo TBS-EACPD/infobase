@@ -355,7 +355,7 @@ function create_mapStateToProps() {
           artificial_filter = (filt_val) =>
             _.includes(top_5_filters, filt_val)
               ? filt_val
-              : text_maker("other");
+              : text_maker("other_s");
         } else {
           artificial_filter = _.identity;
         }
