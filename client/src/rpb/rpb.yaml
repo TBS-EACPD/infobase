@@ -10,11 +10,6 @@ rpb_pick_data:
   en: Select your data
   fr: Sélectionnez vos données
 
-rpb_pick_org:
-  en: Select organization
-  fr: Sélectionnez une organisation
-
-
 table_picker_broken_link_warning:
   en: The link that brought you here contains errors and your report could not be generated. If you know what data you were looking for, please select it from the options below.
   fr: Le lien qui vous a amené ici est erroné. C'est pourquoi votre rapport n'a pas pu être généré. Si vous connaissez les données que vous recherchez, sélectionnez-les parmi les options ci-dessous.

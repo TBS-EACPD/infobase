@@ -270,9 +270,6 @@ ministry:
 ministries:
   en: Ministerial Portfolios
   fr: Portefeuilles ministériels
-another_org_search:
-  en: Search for another organization
-  fr: Recherche concernant une autre organisation
 no_data:
   en: No data available for this table
   fr: Aucune donnée n'est disponible pour ce tableau

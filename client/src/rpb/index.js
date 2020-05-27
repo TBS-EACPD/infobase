@@ -20,23 +20,19 @@ import {
 import { createStore } from "redux";
 import { Provider, connect } from "react-redux";
 import { ensure_loaded } from "../core/lazy_loader.js";
-import { Subject } from "../models/subject.js";
-
-const { Gov } = Subject;
 
 //re-usable view stuff
 import {
   SpinnerWrapper,
   LabeledBox,
   TrinityItem,
-  DeptSearch,
 } from "../components/index.js";
 import AriaModal from "react-aria-modal";
 
 //specific view stuff
 import { AccessibleTablePicker, TablePicker } from "./TablePicker.js";
 import { GranularView } from "./granular_view.js";
-import { SubjectFilterPicker, ShareReport } from "./shared.js";
+import { ShareReport } from "./shared.js";
 import { Table } from "../core/TableClass.js";
 
 //misc app stuff
@@ -69,15 +65,6 @@ const url_state_selector = createSelector(_.identity, (str) => {
 
   return state;
 });
-
-const RPBTitle = ({ table_name, subject_name }) => {
-  if (!table_name) {
-    return <h1> {text_maker("report_builder_title")} </h1>;
-  }
-  return (
-    <h1> {subject_name ? subject_name : text_maker("government_stats")} </h1>
-  );
-};
 
 class Root extends React.Component {
   constructor(props) {
@@ -153,15 +140,9 @@ class RPB extends React.Component {
   render() {
     const { dataset_type } = this.state;
 
-    const {
-      table,
-      subject,
-      broken_url,
+    const { table, broken_url } = this.props;
 
-      on_set_subject,
-    } = this.props;
-
-    const Step1 = () => (
+    const ConceptCategoryPicker = () => (
       <div style={{ textAlign: "center", paddingBottom: "50px" }}>
         <TextMaker
           style={{ fontWeight: "bold", fontSize: 50 }}
@@ -182,19 +163,6 @@ class RPB extends React.Component {
       </div>
     );
 
-    const Step2 = () => (
-      <div style={{ minHeight: 410 }}>
-        <TM style={{ fontWeight: "bold", fontSize: 50 }} k={"org_search"} />
-        <DeptSearch
-          include_gov={true}
-          onSelect={(subject) => this.setState({ selected_subject: subject })}
-          search_text={text_maker(
-            subject.guid === "gov_gov" ? "org_search" : "another_org_search"
-          )}
-        />
-      </div>
-    );
-
     return (
       <div style={{ minHeight: "800px", marginBottom: "100px" }} id="">
         <URLSynchronizer state={this.props} />
@@ -211,10 +179,7 @@ class RPB extends React.Component {
           }}
         />
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <RPBTitle
-            subject_name={subject !== Gov && subject && subject.name}
-            table_name={table && table.name}
-          />
+          <h1> {text_maker("report_builder_title")} </h1>
           <ShareReport />
         </div>
         <LabeledBox label={<TextMaker text_key="rpb_pick_data" />}>
@@ -267,7 +232,6 @@ class RPB extends React.Component {
                 }}
                 titleId="tbp-title"
                 getApplicationNode={() => document.getElementById("app")}
-                //verticallyCenter={true}
                 underlayStyle={{
                   paddingTop: "50px",
                   paddingBottom: "50px",
@@ -279,9 +243,8 @@ class RPB extends React.Component {
                   id="modal-child"
                   className="container app-font modal-container"
                 >
-                  {!dataset_type && <Step1 />}
-                  {/*dataset_type && !selected_subject && <Step2/>*/}
-                  {dataset_type /* && selected_subject */ && (
+                  {!dataset_type && <ConceptCategoryPicker />}
+                  {dataset_type && (
                     <TablePicker
                       onSelect={(id) => this.pickTable(id)}
                       dataset_type={dataset_type}
@@ -296,15 +259,7 @@ class RPB extends React.Component {
         {this.state.loading ? (
           <SpinnerWrapper config_name={"route"} />
         ) : (
-          <Fragment>
-            <LabeledBox label={<TextMaker text_key="rpb_pick_org" />}>
-              <SubjectFilterPicker
-                subject={subject}
-                onSelect={(subj) => on_set_subject(subj)}
-              />
-            </LabeledBox>
-            {table ? <GranularView {...this.props} /> : null}
-          </Fragment>
+          <Fragment>{table ? <GranularView {...this.props} /> : null}</Fragment>
         )}
       </div>
     );
@@ -320,9 +275,8 @@ class AnalyticsSynchronizer extends React.Component {
   }
   shouldComponentUpdate(new_props) {
     const table_has_changed = new_props.table !== this.props.table;
-    const subject_has_changed = new_props.subject !== this.props.subject;
 
-    return table_has_changed || subject_has_changed;
+    return table_has_changed;
   }
   componentDidUpdate() {
     if (this.props.table) {
@@ -337,7 +291,6 @@ class AnalyticsSynchronizer extends React.Component {
   send_event() {
     log_standard_event({
       SUBAPP: sub_app_name,
-      SUBJECT_GUID: this.props.subject,
       MISC1: this.props.table,
     });
   }

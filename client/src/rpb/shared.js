@@ -1,7 +1,6 @@
 import { TextMaker, text_maker } from "./rpb_text_provider.js";
 import { sources as all_sources } from "../metadata/data_sources.js";
 import {
-  DeptSearch,
   FancyUL,
   ShareButton,
   WriteToClipboard,
@@ -138,24 +137,6 @@ const ShareReport = () => (
   </div>
 );
 
-//the parent flexbox styling screws stuff up and makes it impossible to center vertically, top padding tweaked to correct
-const SubjectFilterPicker = ({ subject, onSelect }) => (
-  <div
-    style={{ paddingTop: "10px" }}
-    className="centerer md-half-width row-opition-content-search"
-  >
-    <DeptSearch
-      include_gov={true}
-      onSelect={(subject) => {
-        onSelect(subject);
-      }}
-      search_text={text_maker(
-        subject.guid === "gov_gov" ? "org_search" : "another_org_search"
-      )}
-    />
-  </div>
-);
-
 const NoDataMessage = () => (
   <div className="well large_panel_text">
     <div style={{ textAlign: "center" }}>
@@ -164,10 +145,4 @@ const NoDataMessage = () => (
   </div>
 );
 
-export {
-  ReportDetails,
-  ReportDatasets,
-  ShareReport,
-  SubjectFilterPicker,
-  NoDataMessage,
-};
+export { ReportDetails, ReportDatasets, ShareReport, NoDataMessage };
