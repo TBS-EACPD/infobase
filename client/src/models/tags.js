@@ -18,7 +18,7 @@ const Tag = class Tag extends extensible_subject_store() {
       .fromPairs()
       .value();
   }
-  static get type_name() {
+  static get subject_type() {
     return "tag";
   }
   static get singular() {

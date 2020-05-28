@@ -135,7 +135,7 @@ export class Table extends mix().with(staticStoreMixin) {
 
     if (this.subject_type === "program") {
       this.programs = new Map();
-    } else if (this.subject_type === "cr") {
+    } else if (this.subject_type === "crso") {
       this.crs = new Map();
     }
     this.val = this.id;

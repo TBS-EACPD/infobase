@@ -35,7 +35,7 @@ function get_info(subject, infokeys) {
   const computed = Object.assign.apply(null, [{}].concat(computed_separate));
   return {
     subject,
-    dept: subject.constructor.type_name === "dept" ? subject : undefined,
+    dept: subject.constructor.subject_type === "dept" ? subject : undefined,
     ...computed,
   };
 }

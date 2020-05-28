@@ -7,5 +7,5 @@ subject_footnote_title:
 global_footnote_title:
   transform: [handlebars]
   en: |
-    Global {{type_name}} footnote(s):
+    Global {{subject_name}} footnote(s):
   fr: TODO

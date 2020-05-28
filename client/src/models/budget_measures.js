@@ -42,7 +42,7 @@ const BudgetMeasure = class BudgetMeasure extends static_subject_store() {
       }[window.lang],
     };
   }
-  static get type_name() {
+  static get subject_type() {
     return "budget_measure";
   }
   static get singular() {
