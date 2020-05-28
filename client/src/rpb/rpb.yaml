@@ -53,14 +53,6 @@ rpb_report_data_sources:
  en: Datasets and data sources
  fr: Données et sources des données
 
-rpb_table_controls:
-  en: Sort and filter your report
-  fr: Trier et filtrer votre rapport
-
-select_columns:
-  en: Select column(s) to display
-  fr: Sélectionner les colonnes à afficher
-
 col_name:
   en: Column Name
   fr: Nom de la colonne
@@ -73,11 +65,6 @@ col_defs:
   en: Selected column definitions
   fr: Définitions des colonnes choisies
 
-
-show_dept_breakout:
-  en: Show a breakdown by organization
-  fr: Afficher une répartition par organisation
-
 dimension:
   en: Dimension
   fr: Dimension
@@ -86,9 +73,9 @@ sort_by:
   en: Sort By
   fr: Trier par
 
-group_by:
-  en: Group By
-  fr: Grouper
+group_data:
+  en: Group data
+  fr: TODO
 
 filter:
   en: Filter

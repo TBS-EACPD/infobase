@@ -155,7 +155,7 @@ const get_non_col_content_func = createSelector(
         {subject && (
           <div className="ExplorerNode__BRLinkContainer">
             <a
-              className="btn btn-xs btn-ib-light"
+              className="btn btn-xs btn-ib-primary"
               href={infograph_href_template(subject)}
             >
               <TM k="see_infographic" />

@@ -10,11 +10,11 @@ export class DropdownMenu extends React.Component {
   }
   render() {
     const {
-      dropdownContent,
+      dropdown_content,
       button_class_name,
+      dropdown_content_class_name,
       button_description,
-      IconComponent,
-      icon_color,
+      custom_dropdown_trigger,
     } = this.props;
     const { isOpen } = this.state;
 
@@ -23,22 +23,20 @@ export class DropdownMenu extends React.Component {
         <button
           className={button_class_name}
           onClick={() => this.setState({ isOpen: !isOpen })}
+          title={button_description}
         >
-          <IconComponent
-            title={button_description}
-            color={icon_color}
-            alternate_color={false}
-          />
+          {custom_dropdown_trigger}
         </button>
         <div
           tabIndex={0}
           aria-hidden={true}
           className={classNames(
+            dropdown_content_class_name,
             "dropdown__content",
             isOpen && "dropdown__content__is-open"
           )}
         >
-          {dropdownContent}
+          {dropdown_content}
         </div>
       </div>
     );

@@ -269,24 +269,24 @@ div.label {
   color: $textLightColor !important;
 }
 
-/* to be used with light-background */
-a.btn-ib-light {
-  color: inherit;
-}
+/* to be used with dark-background */
 .btn-ib-light {
-  background-color: inherit;
-  border: 2px solid $buttonPrimaryColor;
-  color: inherit;
-  border-radius: $standardBorderRadius; 
+  background-color: $primaryColor;
+  border: 2px solid $backgroundColor;
+  color: $backgroundColor;
+  border-radius: $standardBorderRadius;
+  margin: 0px 10px 0px;
   
   &:focus,
   &:active,
   &:hover {
-    background-color: $buttonPrimaryColor;
-    color: $backgroundColor !important;
+    background-color: $backgroundColor;
+    color: $primaryColor !important;
   }
 }
-
+a.btn-ib-primary {
+  color: inherit;
+}
 .btn-ib-primary { 
    background-color: $backgroundColor;
    border: 2px solid $buttonPrimaryColor;

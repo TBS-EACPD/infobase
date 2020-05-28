@@ -4,6 +4,6 @@ copy_table_data_desc:
 download_table_data_desc:
   en: Download table data as CSV
   fr: TODO
-toggle_columns_desc:
-  en: Toggle columns
+select_columns:
+  en: Select columns
   fr: TODO

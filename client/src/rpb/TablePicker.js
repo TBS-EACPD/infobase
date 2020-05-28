@@ -31,7 +31,7 @@ export const AccessibleTablePicker = ({
     {broken_url && <BrokenLinkBanner />}
     <select
       aria-labelledby="picker-label"
-      className="form-control form-control-ib rpb-simple-select"
+      className="form-control rpb-simple-select"
       value={selected}
       onChange={(evt) => onSelect(evt.target.value)}
     >

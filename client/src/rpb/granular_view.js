@@ -5,8 +5,9 @@ import {
   LabeledBox,
   AlertBanner,
   DisplayTable,
+  Details,
+  DropdownMenu,
 } from "../components/index.js";
-import { Details } from "../components/Details.js";
 import { Subject } from "../models/subject.js";
 
 import classNames from "classnames";
@@ -101,32 +102,43 @@ class GranularView extends React.Component {
 
     return (
       <div>
-        <div className="rpb-config-item">
-          <label className="rpb-config-header" htmlFor="filt_select">
-            {text_maker("filter_data")}
-          </label>
-          <TwoLevelSelect
-            className="form-control form-control-ib"
-            id="filt_select"
-            onSelect={(id) => {
-              const [dim_key, filt_key] = id.split("__");
-              on_set_filter({ filter: filt_key, dimension: dim_key });
-            }}
-            selected={`${dimension}__${filter}`}
-            grouped_options={_.mapValues(
-              filters_by_dimension,
-              (filter_by_dim) => ({
-                ...filter_by_dim,
-                children: _.sortBy(filter_by_dim.children, "display"),
-              })
-            )}
-          />
-        </div>
         {_.isEmpty(flat_data) ? (
           <NoDataMessage />
         ) : (
           <div>
-            <DisplayTable data={table_data} column_configs={column_configs} />
+            <DisplayTable
+              data={table_data}
+              column_configs={column_configs}
+              enable_utils={{
+                columnToggleUtil: true,
+              }}
+              custom_utils={[
+                <DropdownMenu
+                  button_class_name={"btn-ib-light"}
+                  key={"rpb_group_data"}
+                  button_description={text_maker("group_data")}
+                  dropdown_content={
+                    <TwoLevelSelect
+                      className="form-control full-width"
+                      id="filt_select"
+                      onSelect={(id) => {
+                        const [dim_key, filt_key] = id.split("__");
+                        on_set_filter({ filter: filt_key, dimension: dim_key });
+                      }}
+                      selected={`${dimension}__${filter}`}
+                      grouped_options={_.mapValues(
+                        filters_by_dimension,
+                        (filter_by_dim) => ({
+                          ...filter_by_dim,
+                          children: _.sortBy(filter_by_dim.children, "display"),
+                        })
+                      )}
+                    />
+                  }
+                  custom_dropdown_trigger={text_maker("group_data")}
+                />,
+              ]}
+            />
             {!excel_mode && pages.length > 1 && (
               <div className="pagination-container">
                 {window.is_a11y_mode && (
