@@ -1,5 +1,5 @@
-import "./Faq.scss";
-import text from "./Faq.yaml";
+import "./FAQ.scss";
+import text from "./FAQ.yaml";
 import { faq_data } from "./faq_data.js";
 
 import {
@@ -14,7 +14,7 @@ import {
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const FaqIndex = () => (
+const FAQIndex = () => (
   <FancyUL
     className="faq-index"
     title={text_maker("jump_to_question")}
@@ -30,7 +30,7 @@ const FaqIndex = () => (
   </FancyUL>
 );
 
-const FaqTable = () => (
+const FAQTable = () => (
   <LabeledTable
     title={text_maker("faq_title")}
     TitleComponent={({ children }) => (
@@ -44,7 +44,7 @@ const FaqTable = () => (
   />
 );
 
-export default class Faq extends React.Component {
+export default class FAQ extends React.Component {
   render() {
     const {
       match: {
@@ -62,8 +62,8 @@ export default class Faq extends React.Component {
         <TM tmf={text_maker} el="h1" k="faq_page_title" />
         <ScrollToTargetContainer target_id={selected_qa_key}>
           <div className="medium_panel_text">
-            <FaqIndex />
-            <FaqTable />
+            <FAQIndex />
+            <FAQTable />
           </div>
         </ScrollToTargetContainer>
       </StandardRouteContainer>
