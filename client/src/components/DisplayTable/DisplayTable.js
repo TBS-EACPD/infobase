@@ -112,10 +112,10 @@ export class DisplayTable extends React.Component {
         ...supplied_column_config,
       })
     );
-    const enable_utils_with_defaults = _.pickBy({
+    const enable_utils_with_defaults = {
       ...enable_utils_defaults,
       ...enable_utils,
-    });
+    };
 
     const determine_text_align = (row, col) => {
       const current_col_formatter = col_configs_with_defaults[col].formatter;
