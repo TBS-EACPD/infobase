@@ -2,6 +2,8 @@ import faq_csv_string from "../../../data/faq.csv";
 
 import marked from "marked";
 
+const DISABLED_QUESTIONS = ["contact"];
+
 export const faq_data = _.chain(faq_csv_string)
   .thru(d3.csvParse)
   .map((qa_row) => [
@@ -12,4 +14,5 @@ export const faq_data = _.chain(faq_csv_string)
     },
   ])
   .fromPairs()
+  .omit(DISABLED_QUESTIONS)
   .value();
