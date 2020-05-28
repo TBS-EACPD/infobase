@@ -15,7 +15,7 @@ const static_subject_store = () =>
   mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
 
 const Service = class Service extends static_subject_store() {
-  static get type_name() {
+  static get subject_type() {
     return "service";
   }
   static get singular() {
@@ -58,7 +58,7 @@ const Service = class Service extends static_subject_store() {
 
 const service_indexed_standards = [];
 const ServiceStandard = class ServiceStandard extends static_subject_store() {
-  static get type_name() {
+  static get subject_type() {
     return "service_standard";
   }
   static get singular() {

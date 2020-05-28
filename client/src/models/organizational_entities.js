@@ -14,7 +14,7 @@ const static_subject_store_with_API_data = () =>
 
 const Gov = {
   constructor: {
-    type_name: "gov",
+    subject_type: "gov",
   },
   id: "gov",
   guid: "gov_gov",
@@ -37,7 +37,7 @@ const Gov = {
 };
 
 const Ministry = class Ministry extends static_subject_store() {
-  static get type_name() {
+  static get subject_type() {
     return "ministry";
   }
   static get singular() {
@@ -65,7 +65,7 @@ const Dept = class Dept extends static_subject_store_with_API_data() {
   static lookup(org_id) {
     return super.lookup(_.isNaN(+org_id) ? org_id : +org_id);
   }
-  static get type_name() {
+  static get subject_type() {
     return "dept";
   }
   static get singular() {
@@ -216,7 +216,7 @@ const CRSO = class CRSO extends static_subject_store_with_API_data() {
   static get plural() {
     return trivial_text_maker("");
   }
-  static get type_name() {
+  static get subject_type() {
     return "crso";
   }
   static get_from_id(crso_id) {
@@ -263,7 +263,7 @@ const CRSO = class CRSO extends static_subject_store_with_API_data() {
 };
 
 const Program = class Program extends static_subject_store_with_API_data() {
-  static get type_name() {
+  static get subject_type() {
     return "program";
   }
   static get singular() {
@@ -312,7 +312,7 @@ const Program = class Program extends static_subject_store_with_API_data() {
 
 //Currently doesnt do anything, not even link to other departments
 const Minister = class Minister extends static_subject_store() {
-  static get type_name() {
+  static get subject_type() {
     return "minister";
   }
   static get singular() {
