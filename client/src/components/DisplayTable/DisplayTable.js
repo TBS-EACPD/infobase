@@ -9,9 +9,9 @@ import {
 import { LegendList } from "../../charts/legends";
 
 import {
-  DisplayTableCopy,
-  DisplayTableDownload,
-  DisplayTableDropdownFilter,
+  DisplayTableCopyCsv,
+  DisplayTableDownloadCsv,
+  DisplayTableColumnToggle,
 } from "./DisplayTableUtils.js";
 import { SortDirections } from "../SortDirection.js";
 import { DebouncedTextInput } from "../DebouncedTextInput.js";
@@ -26,6 +26,11 @@ const column_config_defaults = {
   sum_func: (sum, value) => sum + value,
   raw_formatter: _.identity,
   sum_initial_value: 0,
+};
+const enable_utils_defaults = {
+  columnToggleUtil: false,
+  copyCsvUtil: true,
+  downloadCsvUtil: true,
 };
 
 /* Assumption: DisplayTable assumes 1st column to be string that describes its row
@@ -95,7 +100,8 @@ export class DisplayTable extends React.Component {
         },
       }
       */,
-      disable_header_utils,
+      enable_utils,
+      custom_utils,
     } = this.props;
     const { sort_by, descending, searches, visible_col_keys } = this.state;
 
@@ -106,6 +112,10 @@ export class DisplayTable extends React.Component {
         ...supplied_column_config,
       })
     );
+    const enable_utils_with_defaults = _.pickBy({
+      ...enable_utils_defaults,
+      ...enable_utils,
+    });
 
     const determine_text_align = (row, col) => {
       const current_col_formatter = col_configs_with_defaults[col].formatter;
@@ -202,45 +212,44 @@ export class DisplayTable extends React.Component {
       <div
         className={classNames(
           "display-table-container",
-          !disable_header_utils && "display-table-container--with-utils"
+          enable_utils_with_defaults && "display-table-container--with-utils"
         )}
       >
-        {!disable_header_utils && (
+        {enable_utils_with_defaults && (
           <div className={"display-table-container__utils"}>
-            <DisplayTableDropdownFilter
-              columns={
-                <LegendList
-                  items={_.map(all_ordered_col_keys, (key) => ({
-                    id: key,
-                    label: col_configs_with_defaults[key].header,
-                    active: _.includes(visible_ordered_col_keys, key),
-                  }))}
-                  onClick={(clicked_key) => {
-                    // 1st column cannot be toggled off
-                    !(visible_ordered_col_keys[0] === clicked_key) &&
-                      this.setState({
-                        visible_col_keys: _.toggle_list(
-                          visible_col_keys,
-                          clicked_key
-                        ),
-                      });
-                  }}
-                />
-              }
-            />
-            <span
-              style={{
-                margin: "0px 10px 0px",
-                color: window.infobase_color_constants.backgroundColor,
-              }}
-            >
-              |
-            </span>
-            <DisplayTableCopy csv_string={csv_string} />
-            <DisplayTableDownload
-              csv_string={csv_string}
-              table_name={table_name}
-            />
+            {_.map(custom_utils)}
+            {enable_utils_with_defaults.columnToggleUtil && (
+              <DisplayTableColumnToggle
+                columns={
+                  <LegendList
+                    items={_.map(all_ordered_col_keys, (key) => ({
+                      id: key,
+                      label: col_configs_with_defaults[key].header,
+                      active: _.includes(visible_ordered_col_keys, key),
+                    }))}
+                    onClick={(clicked_key) => {
+                      // 1st column cannot be toggled off
+                      !(visible_ordered_col_keys[0] === clicked_key) &&
+                        this.setState({
+                          visible_col_keys: _.toggle_list(
+                            visible_col_keys,
+                            clicked_key
+                          ),
+                        });
+                    }}
+                  />
+                }
+              />
+            )}
+            {enable_utils_with_defaults.copyCsvUtil && (
+              <DisplayTableCopyCsv csv_string={csv_string} />
+            )}
+            {enable_utils_with_defaults.downloadCsvUtil && (
+              <DisplayTableDownloadCsv
+                csv_string={csv_string}
+                table_name={table_name}
+              />
+            )}
           </div>
         )}
         <table
