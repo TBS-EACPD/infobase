@@ -200,7 +200,7 @@ const make_org_info_ministry_perspective = () =>
     popup_template: org_info_perspective_popup_template,
     level_headers: {
       "1": text_maker("ministry"),
-      "2": text_maker("type"),
+      "2": text_maker("inst_form"),
       "3": text_maker("org"),
     },
     root_text_func: (root_value) =>
@@ -218,7 +218,7 @@ const make_org_info_federal_perspective = () =>
     data_wrapper_node_rules: org_info_data_wrapper_node_rules,
     popup_template: org_info_perspective_popup_template,
     level_headers: {
-      "1": text_maker("type"),
+      "1": text_maker("inst_form"),
       "2": text_maker("org"),
     },
     root_text_func: (root_value) =>
@@ -238,7 +238,7 @@ const make_org_info_interests_perspective = () =>
     data_wrapper_node_rules: org_info_data_wrapper_node_rules,
     popup_template: org_info_perspective_popup_template,
     level_headers: {
-      "1": text_maker("type"),
+      "1": text_maker("inst_form"),
       "2": text_maker("org"),
     },
     root_text_func: (root_value) =>
