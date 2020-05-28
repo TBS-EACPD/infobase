@@ -15,6 +15,8 @@ const static_subject_store_with_API_data = () =>
 const Gov = {
   constructor: {
     subject_type: "gov",
+    singular: trivial_text_maker("the_goc"),
+    plural: trivial_text_maker("goc"),
   },
   id: "gov",
   guid: "gov_gov",
@@ -336,6 +338,15 @@ const Minister = class Minister extends static_subject_store() {
 };
 
 const InstForm = class InstForm extends static_subject_store() {
+  static get subject_type() {
+    return "inst_form";
+  }
+  static get singular() {
+    throw "TODO";
+  }
+  static get plural() {
+    throw "TODO";
+  }
   static grandparent_forms() {
     return _.filter(this.get_all(), (obj) => _.isEmpty(obj.parent_forms));
   }
@@ -363,12 +374,6 @@ const InstForm = class InstForm extends static_subject_store() {
       children_forms: [],
       orgs: [],
     });
-  }
-  singular() {
-    throw "TODO";
-  }
-  plural() {
-    throw "TODO";
   }
 };
 
