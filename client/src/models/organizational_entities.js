@@ -212,14 +212,30 @@ const Dept = class Dept extends static_subject_store_with_API_data() {
 };
 
 const CRSO = class CRSO extends static_subject_store_with_API_data() {
-  static get singular() {
-    return trivial_text_maker("");
-  }
-  static get plural() {
-    return trivial_text_maker("");
-  }
   static get subject_type() {
     return "crso";
+  }
+  static get singular() {
+    return trivial_text_maker("core_resp");
+  }
+  static get plural() {
+    return trivial_text_maker("core_resps");
+  }
+  // subject class getters always return CR, instance funcs below are type sensitive
+  // fine for now, something to clean up when we finally drop SO's
+  singular() {
+    if (this.is_cr) {
+      return trivial_text_maker("core_resp");
+    } else {
+      return trivial_text_maker("strategic_outcome");
+    }
+  }
+  plural() {
+    if (this.is_cr) {
+      return trivial_text_maker("core_resps");
+    } else {
+      return trivial_text_maker("strategic_outcomes");
+    }
   }
   static get_from_id(crso_id) {
     return this.lookup(crso_id);
@@ -238,20 +254,6 @@ const CRSO = class CRSO extends static_subject_store_with_API_data() {
       },
       attrs
     );
-  }
-  singular() {
-    if (this.is_cr) {
-      return trivial_text_maker("core_resp");
-    } else {
-      return trivial_text_maker("strategic_outcome");
-    }
-  }
-  plural() {
-    if (this.is_cr) {
-      return trivial_text_maker("core_resps");
-    } else {
-      return trivial_text_maker("strategic_outcomes");
-    }
   }
   get has_planned_spending() {
     return _.some(this.programs, (program) => program.has_planned_spending);
