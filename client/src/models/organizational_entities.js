@@ -342,10 +342,10 @@ const InstForm = class InstForm extends static_subject_store() {
     return "inst_form";
   }
   static get singular() {
-    throw "TODO";
+    return trivial_text_maker("inst_form");
   }
   static get plural() {
-    throw "TODO";
+    return trivial_text_maker("inst_forms");
   }
   static grandparent_forms() {
     return _.filter(this.get_all(), (obj) => _.isEmpty(obj.parent_forms));

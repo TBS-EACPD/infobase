@@ -23,9 +23,12 @@ legislation:
 minister:
   en: Appropriate Minister(s)
   fr: Ministre(s) de tutelle
-type:
+inst_form:
   en: Institutional Form
   fr: Structure institutionnelle
+inst_forms:
+  en: Institutional Forms
+  fr: Structures institutionnelles
 website:
   en: Website
   fr: Site web
@@ -99,11 +102,6 @@ appropriated_filter:
 by_end_year:
   en: End Date
   fr: Date de fin
-
-
-inst_form:
-  en: Institutional Form
-  fr: Structure institutionnelle
 
 pop_group:
   en: Population Group
