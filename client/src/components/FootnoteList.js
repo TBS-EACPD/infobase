@@ -18,7 +18,7 @@ const SubjectSubtitle = ({ subject }) => {
   // have id's and subject classes must not. Also asserting that subject classes have a subject_name
   const is_subject_instance = !_.isUndefined(subject.id);
   const is_subject_class =
-    _.isUndefined(subject.id) && !_.isUndefined(subject.subject_name);
+    _.isUndefined(subject.id) && !_.isUndefined(subject.singular);
 
   if (is_subject_instance) {
     return (
@@ -30,7 +30,7 @@ const SubjectSubtitle = ({ subject }) => {
     return (
       <FootnoteListSubtitle
         title={text_maker("global_footnote_title", {
-          subject_name: subject.subject_name, // subject_name's a getter often, can't just destructure
+          subject_name: subject.singular, // singular's a getter often, can't just destructure
         })}
       />
     );

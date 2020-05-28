@@ -72,11 +72,7 @@ export const SubjectMixin = (superclass) => {
     constructor() {
       super();
 
-      const required_constructor_keys = [
-        "subject_type",
-        "subject_name",
-        "create_and_register",
-      ];
+      const required_constructor_keys = ["subject_type", "singular", "plural"];
       const missing_required_constructor_properties = _.filter(
         required_constructor_keys,
         (key) => _.chain(this.constructor).get(key).isUndefined().value()
