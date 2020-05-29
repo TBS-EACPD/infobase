@@ -9,3 +9,13 @@ global_footnote_title:
   en: |
     Universal {{subject_name}} footnotes
   fr: TODO
+
+footnote_year:
+  transform: [handlebars]
+  en: Applies in {{fmt_year_to_fiscal_year year}}
+  fr: S'applique en {{fmt_year_to_fiscal_year year}}
+
+footnote_years:
+  transform: [handlebars]
+  en: Applies from {{fmt_year_to_fiscal_year year1}} to {{fmt_year_to_fiscal_year year2}}
+  fr: S'applique de {{fmt_year_to_fiscal_year year1}} à {{fmt_year_to_fiscal_year year2}}

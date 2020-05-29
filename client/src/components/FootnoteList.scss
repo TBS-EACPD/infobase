@@ -6,6 +6,7 @@
 
 .footnote-list__item {
   font-size: 14px;
+  margin: 10px 0px 10px 2em;
   
   &:not(:first-child)::before{
     content: "";
@@ -16,7 +17,12 @@
   }
 }
 
-// standardize margins on whatever tags, usually p's, are wrapping the markdown produced innerHTML
+// kill margins on whatever tags, usually p's, are wrapping the markdown produced innerHTML
 .footnote-list__note > * {
-  margin: 10px 0px 10px 2em
+  margin: 0px;
+}
+
+.footnote-list__meta {
+  font-size: 13px;
+  margin: 5px 0px 0px 1em;
 }
