@@ -6,7 +6,7 @@ import { sanitized_dangerous_inner_html } from "../general_utils.js";
 import { FancyUL } from "./FancyUL.js";
 import { create_text_maker_component } from "./misc_util_components.js";
 
-const { text_maker } = create_text_maker_component(text);
+const { TM, text_maker } = create_text_maker_component(text);
 
 const FootnoteListSubtitle = ({ title }) => <div>{title}</div>; // styling TODO
 
@@ -47,6 +47,19 @@ const SubjectSubtitle = ({ subject }) => {
   }
 };
 
+const FootnoteMetaPeriod = ({ year1, year2 }) => {
+  const inner_content = (() => {
+    if (year1 && year2 && year1 !== year2) {
+      return <TM k="footnote_years" args={{ year1, year2 }} />;
+    } else {
+      const year = year1 || year2;
+      return <TM k="footnote_year" args={{ year }} />;
+    }
+  })();
+
+  return <div className="footnote-list__meta">{inner_content}</div>;
+};
+
 const FootnoteSublist = ({ footnotes }) => (
   <ul className="list-unstyled">
     {_.chain(footnotes)
@@ -58,7 +71,7 @@ const FootnoteSublist = ({ footnotes }) => (
             dangerouslySetInnerHTML={sanitized_dangerous_inner_html(text)}
           />
           {(year1 || year2) && (
-            <div className="footnote-list__meta">{/* TODO */}</div>
+            <FootnoteMetaPeriod year1={year1} year2={year2} />
           )}
           {!_.isEmpty(topic_keys) && (
             <div className="footnote-list__meta">{/* TODO */}</div>

@@ -24,6 +24,7 @@ const get_dynamic_footnotes = () => {
         text: text_maker("gap_year_warning", {
           gap_year: actual_to_planned_gap_year,
         }),
+        year1: actual_to_planned_gap_year,
       }
   );
 
@@ -59,6 +60,7 @@ const get_dynamic_footnotes = () => {
               ""
             )}
             </ul>`,
+          year1: year,
         })
       );
 
@@ -78,6 +80,7 @@ const get_dynamic_footnotes = () => {
                       result_doc_name: text_maker(`${doc_type}_name`, { year }),
                     }
                   ),
+                  year,
                 }
             )
             .value()
