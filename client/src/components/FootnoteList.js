@@ -1,12 +1,16 @@
 import "./FootnoteList.scss";
-import text from "./FootnoteList.yaml";
+import footnote_list_text from "./FootnoteList.yaml";
+import footnote_topic_text from "../models/footnotes/footnote_topics.yaml";
 
 import { sanitized_dangerous_inner_html } from "../general_utils.js";
 
 import { FancyUL } from "./FancyUL.js";
 import { create_text_maker_component } from "./misc_util_components.js";
 
-const { TM, text_maker } = create_text_maker_component(text);
+const { TM, text_maker } = create_text_maker_component([
+  footnote_list_text,
+  footnote_topic_text,
+]);
 
 const FootnoteListSubtitle = ({ title }) => <div>{title}</div>; // styling TODO
 
@@ -60,6 +64,16 @@ const FootnoteMetaPeriod = ({ year1, year2 }) => {
   return <div className="footnote-list__meta">{inner_content}</div>;
 };
 
+const FootnoteMetaTopics = ({ topic_keys }) => {
+  const plain_text_topics = _.chain(topic_keys).map(text_maker).sort().value();
+
+  return (
+    <div className="footnote-list__meta">
+      <TM k="footnote_topics" args={{ topics: plain_text_topics }} />
+    </div>
+  );
+};
+
 const FootnoteSublist = ({ footnotes }) => (
   <ul className="list-unstyled">
     {_.chain(footnotes)
@@ -74,7 +88,7 @@ const FootnoteSublist = ({ footnotes }) => (
             <FootnoteMetaPeriod year1={year1} year2={year2} />
           )}
           {!_.isEmpty(topic_keys) && (
-            <div className="footnote-list__meta">{/* TODO */}</div>
+            <FootnoteMetaTopics topic_keys={topic_keys} />
           )}
         </li>
       ))

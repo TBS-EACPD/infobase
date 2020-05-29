@@ -1,10 +1,13 @@
+import FootNote from "./footnotes.js";
+import { get_dynamic_footnotes } from "./dynamic_footnotes.js";
+import footnote_topic_text from "./footnote_topics.yaml";
+
 import { sanitized_marked } from "../../general_utils.js";
 import { get_static_url, make_request } from "../../request_utils.js";
 import { Subject } from "../subject.js";
-import FootNote from "./footnotes.js";
 import { run_template } from "../text.js";
 
-import { get_dynamic_footnotes } from "./dynamic_footnotes.js";
+const footnote_topic_keys = _.keys(footnote_topic_text);
 
 let _loaded_dept_or_tag_codes = {};
 
@@ -27,6 +30,16 @@ function populate_footnotes_info(csv_str) {
     const split_topic_keys = topic_keys
       .split(",")
       .map((key) => key.replace(" ", ""));
+
+    const invalid_keys = _.difference(split_topic_keys, footnote_topic_keys);
+    if (invalid_keys.length > 0) {
+      throw new Error(
+        `Footnote ${id} has invalid topic key(s): ${_.join(
+          invalid_keys,
+          ", "
+        )}. To register a new topic key, add it to client/src/models/footnotes/footnote_topics.yaml`
+      );
+    }
 
     const year1 = fyear1.split("-")[0];
     const year2 = fyear2.split("-")[0];
