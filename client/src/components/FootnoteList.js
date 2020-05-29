@@ -51,12 +51,19 @@ const FootnoteSublist = ({ footnotes }) => (
   <ul className="list-unstyled">
     {_.chain(footnotes)
       .uniqBy("text")
-      .map(({ text }, ix) => (
-        <li
-          key={`footnote_${ix}`}
-          className={"footnote-list__note"}
-          dangerouslySetInnerHTML={sanitized_dangerous_inner_html(text)}
-        />
+      .map(({ text, year1, year2, topic_keys }, ix) => (
+        <li key={`footnote_${ix}`} className={"footnote-list__item"}>
+          <div
+            className="footnote-list__note"
+            dangerouslySetInnerHTML={sanitized_dangerous_inner_html(text)}
+          />
+          {(year1 || year2) && (
+            <div className="footnote-list__meta">{/* TODO */}</div>
+          )}
+          {!_.isEmpty(topic_keys) && (
+            <div className="footnote-list__meta">{/* TODO */}</div>
+          )}
+        </li>
       ))
       .value()}
   </ul>
