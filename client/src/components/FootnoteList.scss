@@ -1,28 +1,31 @@
 @import '../common_css/common-variables';
 
+$indent: 2em;
+$spacing: 10px;
+
 .footnote-list {
   margin: 0px 20px;
 }
 
 .footnote-list__item {
   font-size: 14px;
-  margin: 10px 0px 10px 2em;
+  margin: $spacing 0px $spacing $indent;
   
   &:not(:first-child)::before{
     content: "";
     display: block;
     border-top: 1px solid $separatorColor;
-    width: 85%;
-    margin-left: 7.5%;
+    margin-left: $indent;
+    margin-bottom: $spacing;
   }
 }
 
-// kill margins on whatever tags, usually p's, are wrapping the markdown produced innerHTML
+// Set uniform margins on whatever tags, usually p's, are wrapping the markdown produced innerHTML
 .footnote-list__note > * {
-  margin: 0px;
+  margin: 0px 0px $spacing/2 0px
 }
 
 .footnote-list__meta {
   font-size: 13px;
-  margin: 5px 0px 0px 1em;
+  margin: $spacing/2 0px 0px $indent/2;
 }
