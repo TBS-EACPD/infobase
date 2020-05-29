@@ -4,12 +4,8 @@
   margin: 0px 20px;
 }
 
-.footnote-list__note {
+.footnote-list__item {
   font-size: 14px;
-
-  & > * {
-    margin: 10px 0px 10px 2em
-  }
   
   &:not(:first-child)::before{
     content: "";
@@ -18,4 +14,9 @@
     width: 85%;
     margin-left: 7.5%;
   }
+}
+
+// standardize margins on whatever tags, usually p's, are wrapping the markdown produced innerHTML
+.footnote-list__note > * {
+  margin: 10px 0px 10px 2em
 }
