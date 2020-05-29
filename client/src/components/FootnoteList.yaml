@@ -1,11 +1,11 @@
 subject_footnote_title:
   transform: [handlebars]
   en: |
-    {{name}} specific footnote(s):
+    {{subject_name}} specific footnotes:
   fr: TODO
 
 global_footnote_title:
   transform: [handlebars]
   en: |
-    Global {{subject_name}} footnote(s):
+    Universal {{subject_name}} footnotes:
   fr: TODO

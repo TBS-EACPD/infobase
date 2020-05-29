@@ -13,31 +13,37 @@ const FootnoteListSubtitle = ({ title }) => <div>{title}</div>; // styling TODO
 const SubjectSubtitle = ({ subject }) => {
   // classes don't exist in IE, which we transpile for, so can't actually test if an object is a class
   // or an instance of a class the reasonable way. Working from the assumption that subject instances must
-  // have id's and subject classes must not. Also asserting that subject classes have a subject_name
-  const is_subject_instance = !_.isUndefined(subject.id);
+  // have id's and subject classes must not
+  // Also asserting that the name properties we want to use in the title text exists
+  const is_subject_instance =
+    !_.isUndefined(subject.id) && !_.isUndefined(subject.name);
   const is_subject_class =
     _.isUndefined(subject.id) && !_.isUndefined(subject.singular);
 
   if (is_subject_instance) {
     return (
       <FootnoteListSubtitle
-        title={text_maker("subject_footnote_title", subject)}
+        title={text_maker("subject_footnote_title", {
+          subject_name: subject.name,
+        })}
       />
     );
   } else if (is_subject_class) {
     return (
       <FootnoteListSubtitle
         title={text_maker("global_footnote_title", {
-          subject_name: subject.singular, // singular's a getter often, can't just destructure
+          subject_name: subject.singular,
         })}
       />
     );
   } else {
-    // TODO hmm, throw an error or just use a default title? Wouldn't be a very fast failing error, likely
-    // to be caught in production if I do throw it
-    // ... guess loading all footnotes through the footnote route (that still alive?) during route load tests
-    // would catch it
-    return <div />;
+    // if this gets thrown, it's likely to be caught in prod. We'd have other problems if there were malformed subjects floating
+    // about though
+    throw new Error(
+      `FootnoteList SubjectSubtitle's must be passed valid subject instances or subject classes. ${JSON.stringify(
+        subject
+      )} is neither.`
+    );
   }
 };
 
