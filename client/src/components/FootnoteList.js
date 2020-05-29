@@ -3,10 +3,8 @@ import text from "./FootnoteList.yaml";
 
 import { sanitized_dangerous_inner_html } from "../general_utils.js";
 
-import {
-  FancyUL,
-  create_text_maker_component,
-} from "./misc_util_components.js";
+import { FancyUL } from "./FancyUL.js";
+import { create_text_maker_component } from "./misc_util_components.js";
 
 const { text_maker } = create_text_maker_component(text);
 
