@@ -47,11 +47,19 @@ const SubjectSubtitle = ({ subject }) => {
   }
 };
 
-const FootnoteItem = ({ text }) => (
-  <div
-    className={"footnote-list__note"}
-    dangerouslySetInnerHTML={sanitized_dangerous_inner_html(text)}
-  />
+const FootnoteSublist = ({ footnotes }) => (
+  <ul className="list-unstyled">
+    {_.chain(footnotes)
+      .uniqBy("text")
+      .map(({ text }, ix) => (
+        <li
+          key={`footnote_${ix}`}
+          className={"footnote-list__note"}
+          dangerouslySetInnerHTML={sanitized_dangerous_inner_html(text)}
+        />
+      ))
+      .value()}
+  </ul>
 );
 
 const FootnoteList = ({ footnotes }) => {
@@ -60,51 +68,25 @@ const FootnoteList = ({ footnotes }) => {
     ({ subject, topic_keys }) => _.isObject(subject) && !_.isEmpty(topic_keys)
   );
 
-  const include_subject_subtitles = _.chain(real_footnotes)
-    .map("subject.id")
-    .uniq()
-    .thru((subject_ids) => subject_ids.length > 1)
-    .value();
-
-  const include_other_subtitle =
-    !_.isEmpty(real_footnotes) && !_.isEmpty(fake_footnotes);
-
   return (
     <div className={"footnote-list"}>
       <FancyUL>
         {[
           ..._.chain(real_footnotes)
             .groupBy("subject.id")
-            .flatMap((footnotes, subject_id) => [
-              include_subject_subtitles && (
-                <SubjectSubtitle
-                  subject={footnotes[0].subject}
-                  key={`${subject_id}_title`}
-                />
-              ),
-              ..._.chain(footnotes)
-                .uniqBy("text")
-                .map(({ text }, ix) => (
-                  <FootnoteItem
-                    text={text}
-                    key={`${subject_id}_footnote_${ix}`}
-                  />
-                ))
-                .value(),
-            ])
-            .value(),
-          include_other_subtitle && (
-            <FootnoteListSubtitle
-              title={text_maker("other")}
-              key={"other_title"}
-            />
-          ),
-          ..._.chain(fake_footnotes)
-            .uniqBy("text")
-            .map(({ text }, ix) => (
-              <FootnoteItem key={ix} text={text} key={`other_footnote_${ix}`} />
+            .map((footnotes, subject_id) => (
+              <div key={`${subject_id}`}>
+                <SubjectSubtitle subject={footnotes[0].subject} />
+                <FootnoteSublist footnotes={footnotes} />
+              </div>
             ))
             .value(),
+          !_.isEmpty(fake_footnotes) && (
+            <div key={"other"}>
+              <FootnoteListSubtitle title={text_maker("other")} />
+              <FootnoteSublist footnotes={footnotes} />
+            </div>
+          ),
         ]}
       </FancyUL>
     </div>

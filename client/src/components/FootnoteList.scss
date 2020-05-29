@@ -1,7 +1,21 @@
+@import '../common_css/common-variables';
+
 .footnote-list {
   margin: 0px 20px;
 }
 
 .footnote-list__note {
   font-size: 14px;
+
+  & > * {
+    margin: 10px 0px 10px 2em
+  }
+  
+  &:not(:first-child)::before{
+    content: "";
+    display: block;
+    border-top: 1px solid $separatorColor;
+    width: 85%;
+    margin-left: 7.5%;
+  }
 }
