@@ -27,6 +27,7 @@ let year;
 const get_year = (presentation_scheme) => {
   switch (presentation_scheme) {
     case "est_doc_mains":
+    case "est_doc_sea":
     case "est_type":
     case "vs_type":
     case "org_estimates":
