@@ -12,19 +12,19 @@ const { TM, text_maker } = create_text_maker_component([
   footnote_topic_text,
 ]);
 
+const is_real_footnote = ({ subject, topic_keys }) =>
+  _.isObject(subject) && !_.isEmpty(topic_keys);
+
+// classes don't exist in IE, which we transpile for, so can't directly test if an object is a class or
+// an instance of a class. Need heuristics. Working from the assumption that subject instances must
+// have id's and subject classes must not
+const subject_is_class = ({ id }) => _.isUndefined(id);
+const subject_is_instance = ({ id }) => !_.isUndefined(id);
+
 const FootnoteListSubtitle = ({ title }) => <div>{title}</div>; // styling TODO
 
 const SubjectSubtitle = ({ subject }) => {
-  // classes don't exist in IE, which we transpile for, so can't actually test if an object is a class
-  // or an instance of a class the reasonable way. Working from the assumption that subject instances must
-  // have id's and subject classes must not
-  // Also asserting that the name properties we want to use in the title text exists
-  const is_subject_instance =
-    !_.isUndefined(subject.id) && !_.isUndefined(subject.name);
-  const is_subject_class =
-    _.isUndefined(subject.id) && !_.isUndefined(subject.singular);
-
-  if (is_subject_instance) {
+  if (subject_is_instance(subject) && !_.isUndefined(subject.name)) {
     return (
       <FootnoteListSubtitle
         title={text_maker("subject_footnote_title", {
@@ -32,7 +32,7 @@ const SubjectSubtitle = ({ subject }) => {
         })}
       />
     );
-  } else if (is_subject_class) {
+  } else if (subject_is_class(subject) && !_.isUndefined(subject.singular)) {
     return (
       <FootnoteListSubtitle
         title={text_maker("global_footnote_title", {
@@ -64,15 +64,16 @@ const FootnoteMetaPeriod = ({ year1, year2 }) => {
   return <div className="footnote-list__meta">{inner_content}</div>;
 };
 
-const FootnoteMetaTopics = ({ topic_keys }) => {
-  const plain_text_topics = _.chain(topic_keys).map(text_maker).sort().value();
-
-  return (
-    <div className="footnote-list__meta">
-      <TM k="footnote_topics" args={{ topics: plain_text_topics }} />
-    </div>
-  );
-};
+const topic_keys_to_plain_text = (topic_keys) =>
+  _.chain(topic_keys).map(text_maker).sort().value();
+const FootnoteMetaTopics = ({ topic_keys }) => (
+  <div className="footnote-list__meta">
+    <TM
+      k="footnote_topics"
+      args={{ topics: topic_keys_to_plain_text(topic_keys) }}
+    />
+  </div>
+);
 
 const FootnoteSublist = ({ footnotes }) => (
   <ul className="list-unstyled">
@@ -96,20 +97,56 @@ const FootnoteSublist = ({ footnotes }) => (
   </ul>
 );
 
+// sortBy is stable, so sorting by properties in reverse importance order results in the desired final ordering
+// note: not sorting by subject, expect that sorting/grouping to happen elsewhere, this is just footnote metadata sorting
+const sort_footnotes = (footnotes) =>
+  _.chain(footnotes)
+    .sortBy(({ year1, year2 }) => year2 || year1 || Infinity)
+    .reverse()
+    .sortBy(({ topic_keys }) =>
+      _.chain(topic_keys).thru(topic_keys_to_plain_text).join(" ").value()
+    )
+    .sortBy(({ topic_keys }) => -topic_keys.length)
+    .value();
+
+const group_and_sort_footnotes = (footnotes) =>
+  _.chain(footnotes)
+    .groupBy(({ subject: { id, name, singular } }) =>
+      !_.isUndefined(id) ? `${name}_${id}` : singular
+    )
+    .map((grouped_footnotes, group_name) => {
+      return [grouped_footnotes, group_name];
+    })
+    .sortBy(_.last)
+    .map(([grouped_footnotes]) => sort_footnotes(grouped_footnotes))
+    .value();
+
 const FootnoteList = ({ footnotes }) => {
   const { true: real_footnotes, false: fake_footnotes } = _.groupBy(
     footnotes,
-    ({ subject, topic_keys }) => _.isObject(subject) && !_.isEmpty(topic_keys)
+    is_real_footnote
+  );
+
+  const {
+    true: class_wide_footnotes,
+    false: instance_specific_footnotes,
+  } = _.groupBy(real_footnotes, ({ subject }) => subject_is_class(subject));
+
+  const class_footnotes_grouped_and_sorted = group_and_sort_footnotes(
+    class_wide_footnotes
+  );
+  const instance_footnotes_grouped_and_sorted = group_and_sort_footnotes(
+    instance_specific_footnotes
   );
 
   return (
     <div className={"footnote-list"}>
       <FancyUL>
         {[
-          ..._.chain(real_footnotes)
-            .groupBy("subject.id")
-            .map((footnotes, subject_id) => (
-              <div key={`${subject_id}`}>
+          ..._.chain(class_footnotes_grouped_and_sorted)
+            .concat(instance_footnotes_grouped_and_sorted)
+            .map((footnotes, ix) => (
+              <div key={`${ix}`}>
                 <SubjectSubtitle subject={footnotes[0].subject} />
                 <FootnoteSublist footnotes={footnotes} />
               </div>
