@@ -41,8 +41,8 @@ const SubjectSubtitle = ({ subject }) => {
       />
     );
   } else {
-    // if this gets thrown, it's likely to be caught in prod. We'd have other problems if there were malformed subjects floating
-    // about though
+    // Should fail fast for standard footnote, since the route load tests include the footnote inventory.
+    // Might not fail fast if ad-hoc fake footnotes are thrown in a FootnoteList in an obscure panel etc...
     throw new Error(
       `FootnoteList SubjectSubtitle's must be passed valid subject instances or subject classes. ${JSON.stringify(
         subject

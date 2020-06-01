@@ -15,9 +15,12 @@ const static_subject_store_with_API_data = () =>
 const Gov = {
   constructor: {
     subject_type: "gov",
-    singular: trivial_text_maker("the_goc"),
+    singular: trivial_text_maker("goc"),
     plural: trivial_text_maker("goc"),
   },
+  subject_type: "gov",
+  singular: trivial_text_maker("goc"),
+  plural: trivial_text_maker("goc"),
   id: "gov",
   guid: "gov_gov",
   is(comparator) {
