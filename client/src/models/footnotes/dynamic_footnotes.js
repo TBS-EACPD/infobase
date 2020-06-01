@@ -1,7 +1,7 @@
 import text from "./dynamic_footnotes.yaml";
 
 import { Gov, Dept, CRSO, Program } from "../organizational_entities.js";
-import { actual_to_planned_gap_year } from "../years.js";
+import { actual_to_planned_gap_year, fiscal_year_to_year } from "../years.js";
 import { result_docs_in_tabling_order } from "../results.js";
 import { create_text_maker } from "../text.js";
 
@@ -24,7 +24,7 @@ const get_dynamic_footnotes = () => {
         text: text_maker("gap_year_warning", {
           gap_year: actual_to_planned_gap_year,
         }),
-        year1: actual_to_planned_gap_year,
+        year1: fiscal_year_to_year(actual_to_planned_gap_year),
       }
   );
 
@@ -60,7 +60,7 @@ const get_dynamic_footnotes = () => {
               ""
             )}
             </ul>`,
-          year1: year,
+          year1: fiscal_year_to_year(year),
         })
       );
 
@@ -80,7 +80,7 @@ const get_dynamic_footnotes = () => {
                       result_doc_name: text_maker(`${doc_type}_name`, { year }),
                     }
                   ),
-                  year,
+                  year1: fiscal_year_to_year(year),
                 }
             )
             .value()
