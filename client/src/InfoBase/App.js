@@ -108,6 +108,11 @@ const IndicatorPanel = retrying_react_lazy(() =>
 const GraphiQL = retrying_react_lazy(() =>
   import(/* webpackChunkName: "GraphiQL" */ "../graphql_utils/GraphiQL.js")
 );
+const FootnoteInventory = retrying_react_lazy(() =>
+  import(
+    /* webpackChunkName: "FootnoteInventory" */ "../models/footnotes/FootnoteInventory.js"
+  )
+);
 
 export class App extends React.Component {
   constructor() {
@@ -189,6 +194,7 @@ export class App extends React.Component {
                 path="/panel-inventory/:level?/:panel?/:id?"
                 component={PanelInventory}
               />
+              <Route path="/footnote-inventory" component={FootnoteInventory} />
               <Route
                 path="/graphiql/:encoded_query?/:encoded_variables?"
                 component={GraphiQL}
