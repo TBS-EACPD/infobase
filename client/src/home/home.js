@@ -152,7 +152,7 @@ const HomeLayout = (props) => (
               tmf={home_tm}
               img_src={get_static_url("svg/compare-estimates-white.svg")}
               title_key="estimates_comp_home_title"
-              text_key="estimates_comp_home_text"
+              text_key="estimates_comp_home_text_supps"
               link_href="#compare_estimates"
             />
           </div>
@@ -227,7 +227,7 @@ const SubAppLayout = (props) => (
               tmf={home_tm}
               img_src={get_static_url("svg/compare-estimates.svg")}
               title_key="estimates_comp_home_title"
-              text_key="estimates_comp_home_text"
+              text_key="estimates_comp_home_text_supps"
               link_href="#compare_estimates"
             />
           </div>
