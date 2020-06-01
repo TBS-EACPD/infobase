@@ -18,8 +18,8 @@ const is_real_footnote = ({ subject, topic_keys }) =>
 // classes don't exist in IE, which we transpile for, so can't directly test if an object is a class or
 // an instance of a class. Need heuristics. Working from the assumption that subject instances must
 // have id's and subject classes must not
-const subject_is_class = ({ id }) => _.isUndefined(id);
-const subject_is_instance = ({ id }) => !_.isUndefined(id);
+const subject_is_class = ({ id }) => _.isUndefined(id) || id === "gov";
+const subject_is_instance = ({ id }) => !_.isUndefined(id) && id !== "gov";
 
 const FootnoteListSubtitle = ({ title }) => <div>{title}</div>; // styling TODO
 
