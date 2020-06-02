@@ -158,11 +158,6 @@ total_all_pages:
   en: Total (all pages)
   fr: total (toutes les pages)
 
-pagination_a11y:
-  transform: [handlebars]
-  en: There is too much data to show in a single table, the table above is showing page {{current}} of {{total}}. To view another page, select its number in the navigation list below.
-  fr: Il y a trop de données pour les montrer dans une table. La table ci-dessus représente la page numéro {{current}} de {{total}} pages. Pour voir la prochaine page, sélectionnez là de la liste ci-dessous.
-
 concept_category_timing:
   en: Release frequency
   fr: Fréquence de mise à jour

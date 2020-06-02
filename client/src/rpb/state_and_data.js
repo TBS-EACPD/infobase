@@ -31,7 +31,6 @@ function get_default_state_for_new_table(table_id) {
     columns,
     dimension: get_default_dimension_for_table(table),
     filter: text_maker("all"),
-    page_num: 0,
     broken_url: false,
   };
 }
@@ -82,7 +81,6 @@ const reducer = (state = initial_state, action) => {
         ...state,
         dimension,
         filter,
-        page_num: 0,
       };
     }
 
@@ -91,14 +89,6 @@ const reducer = (state = initial_state, action) => {
         ...state,
         dimension: payload,
         filter: text_maker("all"),
-        page_num: 0,
-      };
-    }
-
-    case "set_page": {
-      return {
-        ...state,
-        page_num: payload,
       };
     }
 
@@ -245,7 +235,6 @@ function mapDispatchToProps(dispatch) {
       dispatch({ type: "set_filter", payload: { dimension, filter } }),
     on_switch_table: (table_id) =>
       dispatch({ type: "switch_table", payload: table_id }),
-    on_set_page: (num) => dispatch({ type: "set_page", payload: num }),
   };
 }
 
