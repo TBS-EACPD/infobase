@@ -27,11 +27,6 @@ const column_config_defaults = {
   raw_formatter: _.identity,
   sum_initial_value: 0,
 };
-const enable_utils_defaults = {
-  columnToggleUtil: false,
-  copyCsvUtil: true,
-  downloadCsvUtil: true,
-};
 
 /* Assumption: DisplayTable assumes 1st column to be string that describes its row
   - If total row exists, 1st column will have the word "Total"
@@ -72,7 +67,7 @@ export class DisplayTable extends React.Component {
     this.state = {
       visible_col_keys,
       sort_by,
-      descending: !unsorted_initial,
+      descending: false,
       searches,
     };
   }
@@ -100,8 +95,7 @@ export class DisplayTable extends React.Component {
         },
       }
       */,
-      enable_utils,
-      custom_utils,
+      util_components,
     } = this.props;
     const { sort_by, descending, searches, visible_col_keys } = this.state;
 
@@ -112,10 +106,11 @@ export class DisplayTable extends React.Component {
         ...supplied_column_config,
       })
     );
-    const enable_utils_with_defaults = {
-      ...enable_utils_defaults,
-      ...enable_utils,
-    };
+    const NoDataMessage = () => (
+      <div className="well large_panel_text">
+        <div style={{ textAlign: "center" }}>{text_maker("no_data")}</div>
+      </div>
+    );
 
     const determine_text_align = (row, col) => {
       const current_col_formatter = col_configs_with_defaults[col].formatter;
@@ -208,198 +203,222 @@ export class DisplayTable extends React.Component {
       .thru((csv_data) => d3.csvFormatRows(csv_data))
       .value();
 
+    const util_components_default = {
+      copyCsvUtil: (
+        <DisplayTableCopyCsv key="copyCsvUtil" csv_string={csv_string} />
+      ),
+      downloadCsvUtil: (
+        <DisplayTableDownloadCsv
+          key="downloadCsvUtil"
+          csv_string={csv_string}
+          table_name={table_name}
+        />
+      ),
+      columnToggleUtil: (
+        <DisplayTableColumnToggle
+          key="columnToggleUtil"
+          columns={
+            <LegendList
+              items={_.map(all_ordered_col_keys, (key) => ({
+                id: key,
+                label: col_configs_with_defaults[key].header,
+                active: _.includes(visible_ordered_col_keys, key),
+              }))}
+              onClick={(clicked_key) => {
+                // 1st column cannot be toggled off
+                !(visible_ordered_col_keys[0] === clicked_key) &&
+                  this.setState({
+                    visible_col_keys: _.toggle_list(
+                      visible_col_keys,
+                      clicked_key
+                    ),
+                  });
+              }}
+            />
+          }
+        />
+      ),
+    };
+    const util_components_with_defaults = _.chain({
+      ...util_components_default,
+      ...util_components,
+    })
+      .map()
+      .reverse()
+      .value();
+
     return (
       <div
         className={classNames(
           "display-table-container",
-          enable_utils_with_defaults && "display-table-container--with-utils"
+          util_components_with_defaults && "display-table-container--with-utils"
         )}
       >
-        {enable_utils_with_defaults && (
+        {util_components_with_defaults && (
           <div className={"display-table-container__utils"}>
-            {_.map(custom_utils)}
-            {enable_utils_with_defaults.columnToggleUtil && (
-              <DisplayTableColumnToggle
-                columns={
-                  <LegendList
-                    items={_.map(all_ordered_col_keys, (key) => ({
-                      id: key,
-                      label: col_configs_with_defaults[key].header,
-                      active: _.includes(visible_ordered_col_keys, key),
-                    }))}
-                    onClick={(clicked_key) => {
-                      // 1st column cannot be toggled off
-                      !(visible_ordered_col_keys[0] === clicked_key) &&
-                        this.setState({
-                          visible_col_keys: _.toggle_list(
-                            visible_col_keys,
-                            clicked_key
-                          ),
-                        });
-                    }}
-                  />
-                }
-              />
-            )}
-            {enable_utils_with_defaults.copyCsvUtil && (
-              <DisplayTableCopyCsv csv_string={csv_string} />
-            )}
-            {enable_utils_with_defaults.downloadCsvUtil && (
-              <DisplayTableDownloadCsv
-                csv_string={csv_string}
-                table_name={table_name}
-              />
-            )}
+            {_.map(util_components_with_defaults)}
           </div>
         )}
-        <table
-          className={classNames(
-            "table",
-            "display-table",
-            !is_total_exist && "no-total-row"
-          )}
-        >
-          <caption className="sr-only">
-            <div>
-              {!_.isEmpty(table_name) ? (
-                table_name
-              ) : (
-                <TM k="a11y_table_title_default" />
-              )}
-            </div>
-          </caption>
-          <thead>
-            <tr className="table-header">
-              {_.map(visible_ordered_col_keys, (column_key, i) => (
-                <th key={i} className={"center-text"}>
-                  {col_configs_with_defaults[column_key].header}
-                </th>
-              ))}
-            </tr>
-            <tr className="table-header">
-              {_.map(visible_ordered_col_keys, (column_key) => {
-                const sortable =
-                  col_configs_with_defaults[column_key].is_sortable;
-                const searchable =
-                  col_configs_with_defaults[column_key].is_searchable;
-
-                const current_search_input =
-                  (searchable && searches[column_key]) || null;
-
-                return (
-                  <th key={column_key} style={{ textAlign: "center" }}>
-                    {sortable && (
-                      <div
-                        onClick={() =>
-                          this.setState({
-                            sort_by: column_key,
-                            descending:
-                              this.state.sort_by === column_key
-                                ? !this.state.descending
-                                : true,
-                          })
-                        }
-                      >
-                        <SortDirections
-                          asc={!descending && sort_by === column_key}
-                          desc={descending && sort_by === column_key}
-                        />
-                      </div>
-                    )}
-                    {searchable && (
-                      <DebouncedTextInput
-                        inputClassName={"search input-sm"}
-                        placeHolder={text_maker("filter_data")}
-                        defaultValue={current_search_input}
-                        updateCallback={(search_value) => {
-                          const updated_searches = _.mapValues(
-                            searches,
-                            (value, key) =>
-                              key === column_key ? search_value : value
-                          );
-
-                          this.setState({ searches: updated_searches });
-                        }}
-                        debounceTime={300}
-                      />
-                    )}
+        {_.isEmpty(sorted_filtered_data) ? (
+          <NoDataMessage />
+        ) : (
+          <table
+            className={classNames(
+              "table",
+              "display-table",
+              !is_total_exist && "no-total-row"
+            )}
+          >
+            <caption className="sr-only">
+              <div>
+                {!_.isEmpty(table_name) ? (
+                  table_name
+                ) : (
+                  <TM k="a11y_table_title_default" />
+                )}
+              </div>
+            </caption>
+            <thead>
+              <tr className="table-header">
+                {_.map(visible_ordered_col_keys, (column_key, i) => (
+                  <th key={i} className={"center-text"}>
+                    {col_configs_with_defaults[column_key].header}
                   </th>
-                );
-              })}
-            </tr>
-          </thead>
-          <tbody>
-            {_.map(sorted_filtered_data, (row, i) => (
-              <tr key={i}>
-                {_.map(visible_ordered_col_keys, (col_key) => (
-                  <td
-                    style={{
-                      fontSize: "14px",
-                      textAlign: determine_text_align(row, col_key),
-                    }}
-                    key={col_key}
-                  >
-                    {col_configs_with_defaults[col_key].formatter ? (
-                      _.isString(
-                        col_configs_with_defaults[col_key].formatter
-                      ) ? (
-                        <Format
-                          type={col_configs_with_defaults[col_key].formatter}
-                          content={row[col_key]}
-                        />
-                      ) : (
-                        col_configs_with_defaults[col_key].formatter(
-                          row[col_key]
-                        )
-                      )
-                    ) : (
-                      row[col_key]
-                    )}
-                  </td>
                 ))}
               </tr>
-            ))}
-            {is_total_exist && (
-              <tr key="total_row">
-                <td>{text_maker("total")}</td>
-                {_.chain(visible_ordered_col_keys)
-                  .tail()
-                  .map((col_key) => (
+              <tr className="table-header">
+                {_.map(visible_ordered_col_keys, (column_key) => {
+                  const sortable =
+                    col_configs_with_defaults[column_key].is_sortable;
+                  const searchable =
+                    col_configs_with_defaults[column_key].is_searchable;
+
+                  const current_search_input =
+                    (searchable && searches[column_key]) || null;
+
+                  return (
+                    <th key={column_key} style={{ textAlign: "center" }}>
+                      {sortable && (
+                        <div
+                          onClick={() =>
+                            this.setState({
+                              sort_by: column_key,
+                              descending:
+                                this.state.sort_by === column_key
+                                  ? !this.state.descending
+                                  : true,
+                            })
+                          }
+                        >
+                          <SortDirections
+                            asc={!descending && sort_by === column_key}
+                            desc={descending && sort_by === column_key}
+                          />
+                        </div>
+                      )}
+                      {searchable && (
+                        <DebouncedTextInput
+                          inputClassName={"search input-sm"}
+                          placeHolder={text_maker("filter_data")}
+                          defaultValue={current_search_input}
+                          updateCallback={(search_value) => {
+                            const updated_searches = _.mapValues(
+                              searches,
+                              (value, key) =>
+                                key === column_key ? search_value : value
+                            );
+
+                            this.setState({ searches: updated_searches });
+                          }}
+                          debounceTime={300}
+                        />
+                      )}
+                    </th>
+                  );
+                })}
+              </tr>
+            </thead>
+            <tbody>
+              {_.map(sorted_filtered_data, (row, i) => (
+                <tr key={i}>
+                  {_.map(visible_ordered_col_keys, (col_key) => (
                     <td
                       style={{
-                        textAlign: determine_text_align(total_row, col_key),
+                        fontSize: "14px",
+                        textAlign: determine_text_align(row, col_key),
                       }}
                       key={col_key}
                     >
-                      {total_row[col_key] ? (
-                        col_configs_with_defaults[col_key].formatter ? (
-                          _.isString(
-                            col_configs_with_defaults[col_key].formatter
-                          ) ? (
-                            <Format
-                              type={
-                                col_configs_with_defaults[col_key].formatter
-                              }
-                              content={total_row[col_key]}
-                            />
-                          ) : (
-                            col_configs_with_defaults[col_key].formatter(
-                              total_row[col_key]
-                            )
-                          )
+                      {col_configs_with_defaults[col_key].formatter ? (
+                        _.isString(
+                          col_configs_with_defaults[col_key].formatter
+                        ) ? (
+                          <Format
+                            type={col_configs_with_defaults[col_key].formatter}
+                            content={row[col_key]}
+                          />
                         ) : (
-                          total_row[col_key]
+                          col_configs_with_defaults[col_key].formatter(
+                            row[col_key]
+                          )
                         )
                       ) : (
-                        ""
+                        row[col_key]
                       )}
                     </td>
-                  ))
-                  .value()}
-              </tr>
-            )}
-          </tbody>
-        </table>
+                  ))}
+                </tr>
+              ))}
+              {is_total_exist && (
+                <tr key="total_row">
+                  <td>{text_maker("total")}</td>
+                  {_.chain(visible_ordered_col_keys)
+                    .tail()
+                    .map((col_key) => (
+                      <td
+                        style={{
+                          textAlign: determine_text_align(total_row, col_key),
+                        }}
+                        key={col_key}
+                      >
+                        {(() => {
+                          const has_total_row = total_row[col_key];
+                          if (has_total_row) {
+                            const has_formatter =
+                              col_configs_with_defaults[col_key].formatter;
+                            if (has_formatter) {
+                              const is_formatter_string = _.isString(
+                                col_configs_with_defaults[col_key].formatter
+                              );
+                              if (is_formatter_string) {
+                                return (
+                                  <Format
+                                    type={
+                                      col_configs_with_defaults[col_key]
+                                        .formatter
+                                    }
+                                    content={total_row[col_key]}
+                                  />
+                                );
+                              } else {
+                                return col_configs_with_defaults[
+                                  col_key
+                                ].formatter(total_row[col_key]);
+                              }
+                            } else {
+                              return total_row[col_key];
+                            }
+                          } else {
+                            return "";
+                          }
+                        })()}
+                      </td>
+                    ))}
+                </tr>
+              )}
+            </tbody>
+          </table>
+        )}
         {sorted_filtered_data.length === 0 && (
           <TM
             k="no_data"

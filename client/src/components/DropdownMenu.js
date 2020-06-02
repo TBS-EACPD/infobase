@@ -11,7 +11,8 @@ export class DropdownMenu extends React.Component {
   render() {
     const {
       dropdown_content,
-      button_class_name,
+      opened_button_class_name,
+      closed_button_class_name,
       dropdown_content_class_name,
       button_description,
       custom_dropdown_trigger,
@@ -21,7 +22,9 @@ export class DropdownMenu extends React.Component {
     return (
       <div className="dropdown">
         <button
-          className={button_class_name}
+          className={
+            isOpen ? opened_button_class_name : closed_button_class_name
+          }
           onClick={() => this.setState({ isOpen: !isOpen })}
           title={button_description}
         >

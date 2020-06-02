@@ -22,7 +22,8 @@ export const DisplayTableCopyCsv = ({ csv_string }) => (
 
 export const DisplayTableColumnToggle = ({ columns }) => (
   <DropdownMenu
-    button_class_name={"btn-ib-light"}
+    opened_button_class_name={"btn-ib-opened"}
+    closed_button_class_name={"btn-ib-light"}
     button_description={text_maker("select_columns")}
     dropdown_content={columns}
     dropdown_content_class_name={"no-right"}
