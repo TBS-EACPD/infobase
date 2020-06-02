@@ -1,5 +1,5 @@
 import { TextMaker, text_maker } from "./rpb_text_provider.js";
-import { ReportDetails, ReportDatasets, NoDataMessage } from "./shared.js";
+import { ReportDetails, ReportDatasets } from "./shared.js";
 import {
   TwoLevelSelect,
   LabeledBox,
@@ -102,98 +102,94 @@ class GranularView extends React.Component {
 
     return (
       <div>
-        {_.isEmpty(flat_data) ? (
-          <NoDataMessage />
-        ) : (
-          <div>
-            <DisplayTable
-              data={table_data}
-              column_configs={column_configs}
-              enable_utils={{
-                columnToggleUtil: true,
-              }}
-              custom_utils={[
-                <DropdownMenu
-                  button_class_name={"btn-ib-light"}
-                  key={"rpb_group_data"}
-                  button_description={text_maker("group_data")}
-                  dropdown_content={
-                    <TwoLevelSelect
-                      className="form-control full-width"
-                      id="filt_select"
-                      onSelect={(id) => {
-                        const [dim_key, filt_key] = id.split("__");
-                        on_set_filter({ filter: filt_key, dimension: dim_key });
-                      }}
-                      selected={`${dimension}__${filter}`}
-                      grouped_options={_.mapValues(
-                        filters_by_dimension,
-                        (filter_by_dim) => ({
-                          ...filter_by_dim,
-                          children: _.sortBy(filter_by_dim.children, "display"),
-                        })
-                      )}
-                    />
-                  }
-                  custom_dropdown_trigger={text_maker("group_data")}
-                />,
-              ]}
-            />
-            {!excel_mode && pages.length > 1 && (
-              <div className="pagination-container">
-                {window.is_a11y_mode && (
-                  <p>
-                    <TextMaker
-                      text_key="pagination_a11y"
-                      args={{ current: page_num, total: pages.length }}
-                    />
-                  </p>
-                )}
-                <ul className="pagination">
-                  {_.map(pages, (data, ix) => (
-                    <li
-                      key={ix}
-                      className={classNames(ix === page_num && "active")}
-                    >
-                      <span
-                        tabIndex={0}
-                        style={
-                          ix === page_num
-                            ? {
-                                color:
-                                  window.infobase_color_constants
-                                    .textLightColor,
-                              }
-                            : null
-                        }
-                        disabled={page_num === ix}
-                        role="button"
-                        onClick={
-                          ix === page_num
-                            ? null
-                            : () => {
-                                on_set_page(ix);
-                                this.refs.table.focus();
-                              }
-                        }
-                        onKeyDown={
-                          ix === page_num
-                            ? null
-                            : (e) => {
-                                if (e.keyCode === 13 || e.keyCode === 32) {
-                                  on_set_page(ix);
-                                  this.refs.table.focus();
-                                }
-                              }
-                        }
-                      >
-                        {ix + 1}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+        <DisplayTable
+          data={table_data}
+          column_configs={column_configs}
+          util_components={{
+            rpb_group_data: (
+              <DropdownMenu
+                opened_button_class_name={"btn-ib-opened"}
+                closed_button_class_name={"btn-ib-light"}
+                key={"rpb_group_data"}
+                button_description={text_maker("group_data")}
+                custom_dropdown_trigger={text_maker("group_data")}
+                dropdown_content={
+                  <TwoLevelSelect
+                    className="form-control full-width"
+                    id="filt_select"
+                    onSelect={(id) => {
+                      const [dim_key, filt_key] = id.split("__");
+                      on_set_filter({
+                        filter: filt_key,
+                        dimension: dim_key,
+                      });
+                    }}
+                    selected={`${dimension}__${filter}`}
+                    grouped_options={_.mapValues(
+                      filters_by_dimension,
+                      (filter_by_dim) => ({
+                        ...filter_by_dim,
+                        children: _.sortBy(filter_by_dim.children, "display"),
+                      })
+                    )}
+                  />
+                }
+              />
+            ),
+          }}
+        />
+        {!excel_mode && pages.length > 1 && (
+          <div className="pagination-container">
+            {window.is_a11y_mode && (
+              <p>
+                <TextMaker
+                  text_key="pagination_a11y"
+                  args={{ current: page_num, total: pages.length }}
+                />
+              </p>
             )}
+            <ul className="pagination">
+              {_.map(pages, (data, ix) => (
+                <li
+                  key={ix}
+                  className={classNames(ix === page_num && "active")}
+                >
+                  <span
+                    tabIndex={0}
+                    style={
+                      ix === page_num
+                        ? {
+                            color:
+                              window.infobase_color_constants.textLightColor,
+                          }
+                        : null
+                    }
+                    disabled={page_num === ix}
+                    role="button"
+                    onClick={
+                      ix === page_num
+                        ? null
+                        : () => {
+                            on_set_page(ix);
+                            this.refs.table.focus();
+                          }
+                    }
+                    onKeyDown={
+                      ix === page_num
+                        ? null
+                        : (e) => {
+                            if (e.keyCode === 13 || e.keyCode === 32) {
+                              on_set_page(ix);
+                              this.refs.table.focus();
+                            }
+                          }
+                    }
+                  >
+                    {ix + 1}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
       </div>

@@ -149,14 +149,6 @@ table_picker_no_tables_found:
   en: No tables are available for the selected combination of tags. 
   fr: Aucun tableau n'est disponible pour la combinaison d'étiquette choisie. 
 
-rpb_no_data:
-  transform: [markdown]
-  en: |
-    There is no data for the selected options
-  fr: | 
-    Il n'y a pas de donées pour les options sélectionnées
-
-
 please_use_table_option_a11y:
   transform: [handlebars]
   en: You are viewing a graph, to see a plain table, select '{{gt "select_table"}}' in the previous options

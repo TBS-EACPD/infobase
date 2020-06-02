@@ -137,12 +137,4 @@ const ShareReport = () => (
   </div>
 );
 
-const NoDataMessage = () => (
-  <div className="well large_panel_text">
-    <div style={{ textAlign: "center" }}>
-      <TextMaker text_key="rpb_no_data" />
-    </div>
-  </div>
-);
-
-export { ReportDetails, ReportDatasets, ShareReport, NoDataMessage };
+export { ReportDetails, ReportDatasets, ShareReport };

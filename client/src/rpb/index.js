@@ -6,8 +6,7 @@ import { createSelector } from "reselect";
 import { withRouter } from "react-router";
 import { log_standard_event } from "../core/analytics.js";
 import { Fragment } from "react";
-import { TextMaker, text_maker, TM } from "./rpb_text_provider.js";
-import { get_static_url } from "../request_utils.js";
+import { TextMaker, text_maker } from "./rpb_text_provider.js";
 import "./rpb.scss";
 
 //data and state stuff
@@ -22,11 +21,7 @@ import { Provider, connect } from "react-redux";
 import { ensure_loaded } from "../core/lazy_loader.js";
 
 //re-usable view stuff
-import {
-  SpinnerWrapper,
-  LabeledBox,
-  TrinityItem,
-} from "../components/index.js";
+import { SpinnerWrapper, LabeledBox } from "../components/index.js";
 import AriaModal from "react-aria-modal";
 
 //specific view stuff
@@ -115,7 +110,6 @@ class RPB extends React.Component {
       this.state = {
         loading: false,
         table_picking: true,
-        dataset_type: "",
         selected_subject: null,
       };
     }
@@ -138,30 +132,7 @@ class RPB extends React.Component {
   }
 
   render() {
-    const { dataset_type } = this.state;
-
     const { table, broken_url } = this.props;
-
-    const ConceptCategoryPicker = () => (
-      <div style={{ textAlign: "center", paddingBottom: "50px" }}>
-        <TextMaker
-          style={{ fontWeight: "bold", fontSize: 50 }}
-          text_key="select_dataset_type"
-        />
-        <div className="trinity-container">
-          <TrinityItem
-            title={<TM k="finances" />}
-            img_url={get_static_url("svg/expend.svg")}
-            onClick={() => this.setState({ dataset_type: "money" })}
-          />
-          <TrinityItem
-            img_url={get_static_url("svg/people.svg")}
-            title={<TM k="people" />}
-            onClick={() => this.setState({ dataset_type: "people" })}
-          />
-        </div>
-      </div>
-    );
 
     return (
       <div style={{ minHeight: "800px", marginBottom: "100px" }} id="">
@@ -183,7 +154,7 @@ class RPB extends React.Component {
           <ShareReport />
         </div>
         <LabeledBox label={<TextMaker text_key="rpb_pick_data" />}>
-          <div>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <div className="centerer md-half-width">
               {window.is_a11y_mode ? (
                 <AccessibleTablePicker
@@ -217,7 +188,6 @@ class RPB extends React.Component {
                   if (this.state.table_picking) {
                     this.setState({
                       table_picking: false,
-                      dataset_type: "",
                       selected_subject: null,
                     });
                     setTimeout(() => {
@@ -243,14 +213,11 @@ class RPB extends React.Component {
                   id="modal-child"
                   className="container app-font modal-container"
                 >
-                  {!dataset_type && <ConceptCategoryPicker />}
-                  {dataset_type && (
-                    <TablePicker
-                      onSelect={(id) => this.pickTable(id)}
-                      dataset_type={dataset_type}
-                      broken_url={broken_url}
-                    />
-                  )}
+                  <TablePicker
+                    onSelect={(id) => this.pickTable(id)}
+                    broken_url={broken_url}
+                  />
+                  }
                 </div>
               </AriaModal>
             )}
