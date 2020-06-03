@@ -319,7 +319,11 @@ class SingleSubjExplorer extends React.Component {
                   width: "50%",
                   margin: "5px 0px",
                 }}
-                onClick={() => expand_all(root)}
+                onClick={() => {
+                  this.setState({ loading_query: true });
+                  expand_all(root);
+                  this.setState({ loading_query: false });
+                }}
               >
                 <span>{text_maker("expand_all")}</span>
               </button>
@@ -331,7 +335,11 @@ class SingleSubjExplorer extends React.Component {
                   width: "50%",
                   margin: "5px 0px",
                 }}
-                onClick={() => collapse_all(root)}
+                onClick={() => {
+                  this.setState({ loading_query: true });
+                  collapse_all(root);
+                  this.setState({ loading_query: false });
+                }}
               >
                 <span>{text_maker("collapse_all")}</span>
               </button>
