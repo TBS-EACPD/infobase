@@ -6,5 +6,8 @@
     "@lhci/server": "0.4.x",
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  }  
 }
