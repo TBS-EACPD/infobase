@@ -1,7 +1,6 @@
 import { TextMaker, text_maker } from "./rpb_text_provider.js";
 import { ReportDetails, ReportDatasets } from "./shared.js";
 import {
-  TwoLevelSelect,
   LabeledBox,
   AlertBanner,
   DisplayTable,
@@ -9,8 +8,6 @@ import {
   DropdownMenu,
 } from "../components/index.js";
 import { Subject } from "../models/subject.js";
-
-import classNames from "classnames";
 
 const { Dept } = Subject;
 
@@ -93,6 +90,13 @@ class GranularView extends React.Component {
         .fromPairs()
         .value(),
     }));
+    const group_filter_options = _.map(
+      filters_by_dimension,
+      (filter_by_dim) => ({
+        ...filter_by_dim,
+        children: _.sortBy(filter_by_dim.children, "display"),
+      })
+    );
 
     return (
       <DisplayTable
@@ -107,25 +111,44 @@ class GranularView extends React.Component {
               button_description={text_maker("group_data")}
               custom_dropdown_trigger={text_maker("group_data")}
               dropdown_content={
-                <TwoLevelSelect
-                  className="form-control full-width"
-                  id="filt_select"
-                  onSelect={(id) => {
-                    const [dim_key, filt_key] = id.split("__");
-                    on_set_filter({
-                      filter: filt_key,
-                      dimension: dim_key,
-                    });
-                  }}
-                  selected={`${dimension}__${filter}`}
-                  grouped_options={_.mapValues(
-                    filters_by_dimension,
-                    (filter_by_dim) => ({
-                      ...filter_by_dim,
-                      children: _.sortBy(filter_by_dim.children, "display"),
-                    })
-                  )}
-                />
+                <div className="group_filter_dropdown">
+                  {_.map(group_filter_options, (group) => (
+                    <div key={group.id}>
+                      <span key={group.id} style={{ fontWeight: 700 }}>
+                        {group.display}
+                      </span>
+                      {_.map(group.children, (child) => (
+                        <div key={`${group.id}_${child.id}`}>
+                          <input
+                            type={"radio"}
+                            value={child.id}
+                            name={"rpb_group_filter"}
+                            key={child.id}
+                            onClick={(evt) => {
+                              const [
+                                dim_key,
+                                filt_key,
+                              ] = evt.target.value.split("__");
+                              on_set_filter({
+                                filter: filt_key,
+                                dimension: dim_key,
+                              });
+                            }}
+                            defaultChecked={
+                              child.id === `${dimension}__${filter}`
+                            }
+                          />
+                          <label
+                            className={"normal-rd-label"}
+                            key={child.display}
+                          >
+                            {child.display}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
               }
             />
           ),
