@@ -13,6 +13,7 @@ import {
   CheckBox,
   DisplayTable,
   default_dept_name_sort_func,
+  sort_func_template,
 } from "../components/index.js";
 import { LegendList } from "../charts/legends";
 import { Details } from "../components/Details.js";
@@ -243,9 +244,14 @@ class SimpleView extends React.Component {
           ) : (
             value
           ),
-        sort_func: (a, b) => default_dept_name_sort_func(a, b),
+        sort_func: (a, b) =>
+          deptBreakoutMode
+            ? default_dept_name_sort_func(Dept, a, b)
+            : sort_func_template(a, b),
         raw_formatter: (value) =>
-          Dept.lookup(value) ? Dept.lookup(value).name : value,
+          deptBreakoutMode && Dept.lookup(value)
+            ? Dept.lookup(value).name
+            : value,
       },
       ..._.chain(columns)
         .map((col, idx) => [

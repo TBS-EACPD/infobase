@@ -42,9 +42,10 @@ export { FancyUL } from "./FancyUL.js";
 export { StatelessModal, FixedPopover } from "./modals_and_popovers";
 export {
   DisplayTable,
+  default_subject_name_sort_func,
   default_dept_name_sort_func,
   sort_func_template,
-} from "./DisplayTable";
+} from "./DisplayTable/index.js";
 
 export {
   Format,
