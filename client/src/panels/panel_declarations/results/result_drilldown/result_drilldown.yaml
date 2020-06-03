@@ -1,6 +1,7 @@
 result_drilldown_title_part:
   en: Detailed Results
-  fr: Résultats escomptés
+  fr: Résultats détaillés
+
 
 result_drilldown_title:
   transform: [handlebars]
