@@ -118,3 +118,11 @@ button.rpb-heading-utils {
     transform: scale(1.15);
   }
 }
+.group_filter_dropdown {
+  display: flex;
+  flex-direction: column;
+}
+.normal-rd-label {
+  font-weight: 400;
+  margin-left: 3px;
+}
