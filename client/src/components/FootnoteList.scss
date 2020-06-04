@@ -29,8 +29,12 @@ $spacing: 10px;
   display: flex;
   flex-direction: row;
 
+  & > .footnote-list__meta_label {
+    margin-left: $indent;
+  }
+
   & > .footnote-list__meta_item {
     font-size: 13px;
-    margin: $spacing/2 0px 0px $indent/2;
+    margin-left: $spacing/2;
   }
 }
