@@ -1,7 +1,3 @@
-GENDER:
-  en: Employee gender
-  fr: Sexe
-
 QFR:
   en: Quarterly Financial Reports (QFRs)
   fr: Rapports financiers trimestriels (RFT)
@@ -18,10 +14,6 @@ AUTH:
   en: Authorities
   fr: Autorisations
 
-EXP:
-  en: Expenditures
-  fr: Dépenses
-
 VOTED:
   en: Voted amounts
   fr: Montants votés
@@ -30,9 +22,33 @@ STAT:
   en: Statutory authorities
   fr: Autorisations législatives
 
+EXP:
+  en: Expenditures
+  fr: Dépenses
+DRR_EXP:
+  en: Expenditures
+  fr: Dépenses
+
 PLANNED_EXP:
   en: Planned spending
   fr: Dépenses prévues
+DP_EXP:
+  en: Planned spending
+  fr: Dépenses prévues
+
+FTE:
+  en: Full-Time Equivalents (FTEs)
+  fr: Équivalents temps plein (ETP)
+DRR_FTE:
+  en: Full-Time Equivalent (FTE)
+  fr: Équivalent temps plein (ETP)
+
+PLANNED_FTE:
+  en: Planned Full-Time Equivalents (FTEs)
+  fr: Équivalents temps plein (ETP) prévus
+DP_FTE:
+  en: Planned Full-Time Equivalents (FTEs)
+  fr: Équivalents temps plein (ETP) prévus
 
 SOBJ10:
   en: Transfer payments
@@ -42,13 +58,13 @@ PEOPLE:
   en: Data about Public Servants
   fr: Données sur les fonctionaires
 
-FTE:
-  en: Full-Time Equivalent (FTE)
-  fr: Équivalent temps plein (ETP)
-
 FPS:
   en: Federal Public Service (FPS)
   fr: Fonction publique fédérale (FPF)
+
+GENDER:
+  en: Employee gender
+  fr: Sexe des employés
 
 AGE:
   en: Employee age
@@ -114,30 +130,10 @@ DRR:
   en: Departmental Results Reports
   fr: Rapport sur les résultats ministériels
 
-PLANNED_FTE:
-  en: TODO
-  fr: TODO
-
-DP_EXP:
-  en: TODO
-  fr: TODO
-
-DP_FTE:
-  en: TODO
-  fr: TODO
-
-DRR_EXP:
-  en: TODO
-  fr: TODO
-
-DRR_FTE:
-  en: TODO
-  fr: TODO
-
 MACHINERY:
-  en: TODO
-  fr: TODO
+  en: Machinery of Government Changes
+  fr: Changement à l'appareil gouvernemental
 
 ANY:
-  en: TODO
-  fr: TODO
+  en: Any
+  fr: Tout

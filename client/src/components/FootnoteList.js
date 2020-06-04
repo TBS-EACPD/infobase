@@ -68,7 +68,7 @@ const years_to_plain_text = (year1, year2) => {
   }
 };
 const topic_keys_to_plain_text = (topic_keys) =>
-  _.chain(topic_keys).map(text_maker).sort().value();
+  _.chain(topic_keys).map(text_maker).sort().uniq().value();
 
 const FootnoteMeta = ({ meta_items }) => (
   <div className={"footnote-list__meta_container"}>
