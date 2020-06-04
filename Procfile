@@ -1,1 +1,0 @@
-web: node lhci-server/server.js
