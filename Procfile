@@ -1,1 +1,1 @@
-web: node ../lhci-server/server.js
+web: node lhci-server/server.js
