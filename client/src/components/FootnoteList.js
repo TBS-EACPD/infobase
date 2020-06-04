@@ -19,7 +19,9 @@ const is_real_footnote = ({ subject, topic_keys }) =>
 const subject_is_class = ({ id }) => _.isUndefined(id) || id === "gov";
 const subject_is_instance = ({ id }) => !_.isUndefined(id) && id !== "gov";
 
-const FootnoteListSubtitle = ({ title }) => <div>{title}</div>; // styling TODO
+const FootnoteListSubtitle = ({ title }) => (
+  <div className="footnote-list__subtitle">{title}</div>
+);
 
 const SubjectSubtitle = ({ subject }) => {
   if (subject_is_instance(subject) && !_.isUndefined(subject.name)) {
