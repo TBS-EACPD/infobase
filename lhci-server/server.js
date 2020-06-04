@@ -7,14 +7,16 @@
 
 const { createServer } = require("@lhci/server");
 const port = process.env.PORT || 3338;
+const db_url =
+  process.env.DATABASE_URL ||
+  "postgres://euxyxgbbklroqe:9225c557b0c00c15d0c780a86d96dae157261f5ec600a4d7eaea967b31e44248@ec2-52-202-146-43.compute-1.amazonaws.com:5432/dd9g3q7ldv93et";
 
-console.log("Starting server...");
 createServer({
   port: port,
   storage: {
     storageMethod: "sql",
     sqlDialect: "postgres",
     sqlConnectionSsl: true,
-    sqlConnectionUrl: process.env.DATABASE_URL,
+    sqlConnectionUrl: db_url,
   },
 }).then(({ port }) => console.log("Listening on port", port));
