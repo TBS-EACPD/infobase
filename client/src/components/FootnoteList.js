@@ -101,12 +101,11 @@ const FootnoteSublist = ({ footnotes }) => (
 // note: not sorting by subject, expect that sorting/grouping to happen elsewhere, this is just footnote metadata sorting
 const sort_footnotes = (footnotes) =>
   _.chain(footnotes)
-    .sortBy(({ year1, year2 }) => year2 || year1 || Infinity)
-    .reverse()
     .sortBy(({ topic_keys }) =>
       _.chain(topic_keys).thru(topic_keys_to_plain_text).join(" ").value()
     )
     .sortBy(({ topic_keys }) => -topic_keys.length)
+    .sortBy(({ year1, year2 }) => -(year2 || year1 || Infinity))
     .value();
 
 const group_and_sort_footnotes = (footnotes) =>
