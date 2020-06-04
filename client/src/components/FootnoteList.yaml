@@ -4,10 +4,16 @@ subject_footnote_title:
     {{subject_name}} specific footnotes
   fr: TODO
 
-global_footnote_title:
+class_footnote_title:
   transform: [handlebars]
   en: |
     Universal {{subject_name}} footnotes
+  fr: TODO
+
+gov_footnote_title:
+  transform: [handlebars]
+  en: |
+    {{subject_name}} footnotes
   fr: TODO
 
 footnote_year:
