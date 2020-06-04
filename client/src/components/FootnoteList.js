@@ -61,14 +61,16 @@ const topic_keys_to_plain_text = (topic_keys) =>
 
 const FootnoteMeta = ({ meta_items }) => (
   <div className={"footnote-list__meta_container"}>
-    {_.chain(meta_items)
-      .compact()
-      .map((meta_item_text, ix) => (
-        <div key={ix} className="footnote-list__meta_item badge">
-          {meta_item_text}
-        </div>
-      ))
-      .value()}
+    {!_.isEmpty(meta_items) && (
+      <div className="footnote-list__meta_label">
+        {text_maker("footnote_meta")}
+      </div>
+    )}
+    {_.map(meta_items, (meta_item_text, ix) => (
+      <div key={ix} className="footnote-list__meta_item badge">
+        {meta_item_text}
+      </div>
+    ))}
   </div>
 );
 
@@ -83,10 +85,10 @@ const FootnoteSublist = ({ footnotes }) => (
             dangerouslySetInnerHTML={sanitized_dangerous_inner_html(text)}
           />
           <FootnoteMeta
-            meta_items={[
+            meta_items={_.compact([
               years_to_plain_text(year1, year2),
               ...topic_keys_to_plain_text(topic_keys),
-            ]}
+            ])}
           />
         </li>
       ))

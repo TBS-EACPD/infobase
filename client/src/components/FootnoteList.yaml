@@ -20,7 +20,9 @@ footnote_years:
   en: Applies from {{fmt_year_to_fiscal_year year1}} to {{fmt_year_to_fiscal_year year2}}
   fr: S'applique de {{fmt_year_to_fiscal_year year1}} à {{fmt_year_to_fiscal_year year2}}
 
-footnote_topics:
+footnote_meta:
   transform: [handlebars]
-  en: Related to {{array_to_grammatical_list topics}}
-  fr: TODO
+  en: |
+    Footnote tags:
+  fr: |
+    TODO
