@@ -2,15 +2,12 @@ import "./FootnoteList.scss";
 import footnote_list_text from "./FootnoteList.yaml";
 import footnote_topic_text from "../models/footnotes/footnote_topics.yaml";
 
+import { create_text_maker } from "../models/text.js";
 import { sanitized_dangerous_inner_html } from "../general_utils.js";
 
 import { FancyUL } from "./FancyUL.js";
-import { create_text_maker_component } from "./misc_util_components.js";
 
-const { TM, text_maker } = create_text_maker_component([
-  footnote_list_text,
-  footnote_topic_text,
-]);
+const text_maker = create_text_maker([footnote_list_text, footnote_topic_text]);
 
 const is_real_footnote = ({ subject, topic_keys }) =>
   _.isObject(subject) && !_.isEmpty(topic_keys);
@@ -51,27 +48,27 @@ const SubjectSubtitle = ({ subject }) => {
   }
 };
 
-const FootnoteMetaPeriod = ({ year1, year2 }) => {
-  const inner_content = (() => {
-    if (year1 && year2 && year1 !== year2) {
-      return <TM k="footnote_years" args={{ year1, year2 }} />;
-    } else {
-      const year = year1 || year2;
-      return <TM k="footnote_year" args={{ year }} />;
-    }
-  })();
-
-  return <div className="footnote-list__meta">{inner_content}</div>;
+const years_to_plain_text = (year1, year2) => {
+  if (year1 && year2 && year1 !== year2) {
+    return text_maker("footnote_years", { year1, year2 });
+  } else if (year1 || year2) {
+    const year = year1 || year2;
+    return text_maker("footnote_year", { year });
+  }
 };
-
 const topic_keys_to_plain_text = (topic_keys) =>
   _.chain(topic_keys).map(text_maker).sort().value();
-const FootnoteMetaTopics = ({ topic_keys }) => (
-  <div className="footnote-list__meta">
-    <TM
-      k="footnote_topics"
-      args={{ topics: topic_keys_to_plain_text(topic_keys) }}
-    />
+
+const FootnoteMeta = ({ meta_items }) => (
+  <div className={"footnote-list__meta_container"}>
+    {_.chain(meta_items)
+      .compact()
+      .map((meta_item_text, ix) => (
+        <div key={ix} className="footnote-list__meta_item badge">
+          {meta_item_text}
+        </div>
+      ))
+      .value()}
   </div>
 );
 
@@ -85,12 +82,12 @@ const FootnoteSublist = ({ footnotes }) => (
             className="footnote-list__note"
             dangerouslySetInnerHTML={sanitized_dangerous_inner_html(text)}
           />
-          {(year1 || year2) && (
-            <FootnoteMetaPeriod year1={year1} year2={year2} />
-          )}
-          {!_.isEmpty(topic_keys) && (
-            <FootnoteMetaTopics topic_keys={topic_keys} />
-          )}
+          <FootnoteMeta
+            meta_items={[
+              years_to_plain_text(year1, year2),
+              ...topic_keys_to_plain_text(topic_keys),
+            ]}
+          />
         </li>
       ))
       .value()}
