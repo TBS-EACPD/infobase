@@ -122,6 +122,7 @@ class GranularView extends React.Component {
                           <input
                             type={"radio"}
                             value={child.id}
+                            id={child.id}
                             name={"rpb_group_filter"}
                             key={child.id}
                             onClick={(evt) => {
@@ -139,6 +140,7 @@ class GranularView extends React.Component {
                             }
                           />
                           <label
+                            htmlFor={child.id}
                             className={"normal-rd-label"}
                             key={child.display}
                           >
