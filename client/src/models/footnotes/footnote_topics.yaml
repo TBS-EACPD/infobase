@@ -25,30 +25,32 @@ STAT:
 EXP:
   en: Expenditures
   fr: Dépenses
-DRR_EXP:
-  en: Expenditures
-  fr: Dépenses
 
 PLANNED_EXP:
-  en: Planned spending
-  fr: Dépenses prévues
-DP_EXP:
   en: Planned spending
   fr: Dépenses prévues
 
 FTE:
   en: Full-Time Equivalents (FTEs)
   fr: Équivalents temps plein (ETP)
-DRR_FTE:
-  en: Full-Time Equivalents (FTEs)
-  fr: Équivalents temps plein (ETP)
 
 PLANNED_FTE:
   en: Planned Full-Time Equivalents (FTEs)
   fr: Équivalents temps plein (ETP) prévus
+
+DRR_EXP:
+  en: Variance explanation - actual spending 
+  fr: Explication de l'écart - dépenses réelles
+DRR_FTE:
+  en: Variance explanation - actual FTEs
+  fr: Explication de l'écart - ETP réelles
+
+DP_EXP:
+  en: Variance explanation - planned spending
+  fr: Explication de l'écart - dépenses prévues
 DP_FTE:
-  en: Planned Full-Time Equivalents (FTEs)
-  fr: Équivalents temps plein (ETP) prévus
+  en: Variance explanation - planned FTEs
+  fr: Explication de l'écart - ETP prévus
 
 SOBJ10:
   en: Transfer payments
