@@ -107,8 +107,8 @@ export class DisplayTable extends React.Component {
       })
     );
     const NoDataMessage = () => (
-      <div className="well large_panel_text">
-        <div style={{ textAlign: "center" }}>{text_maker("no_data")}</div>
+      <div className="well large_panel_text no-data-msg">
+        {text_maker("no_data")}
       </div>
     );
 

@@ -17,7 +17,12 @@
   justify-content: flex-end;
   padding: 8px 10px 2px;
 }
-
+.no-data-msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 350px;
+}
 
 table.display-table {
   width: 99.9%; // avoid annoying always-there x-overflow caused by sub-pixel table border
