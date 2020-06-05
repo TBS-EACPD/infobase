@@ -31,6 +31,7 @@ import redux_promise_middleware from "redux-promise-middleware";
 import { Provider, connect } from "react-redux";
 
 import { Explorer } from "../../../../explorer_common/explorer_components.js";
+import "../../../../explorer_common/explorer-styles.scss";
 import { get_root } from "../../../../explorer_common/hierarchy_tools.js";
 import {
   get_memoized_funcs,
