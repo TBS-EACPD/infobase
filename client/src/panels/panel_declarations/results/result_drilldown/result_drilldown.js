@@ -216,6 +216,8 @@ class SingleSubjExplorer extends React.Component {
       this.debounced_set_query.cancel();
     !_.isUndefined(this.timedOutStateChange) &&
       clearTimeout(this.timedOutStateChange);
+    !_.isUndefined(this.expandTimout) && clearTimeout(this.expandTimout);
+    !_.isUndefined(this.collapseTimout) && clearTimeout(this.collapseTimout);
   }
   render() {
     const {
@@ -321,7 +323,7 @@ class SingleSubjExplorer extends React.Component {
                 }}
                 onClick={() => {
                   this.setState({ loading_query: true });
-                  setTimeout(() => {
+                  this.expandTimout = setTimeout(() => {
                     expand_all(root);
                     this.setState({ loading_query: false });
                   }, 0);
@@ -339,7 +341,7 @@ class SingleSubjExplorer extends React.Component {
                 }}
                 onClick={() => {
                   this.setState({ loading_query: true });
-                  setTimeout(() => {
+                  this.collapseTimout = setTimeout(() => {
                     collapse_all(root);
                     this.setState({ loading_query: false });
                   }, 0);
