@@ -321,8 +321,10 @@ class SingleSubjExplorer extends React.Component {
                 }}
                 onClick={() => {
                   this.setState({ loading_query: true });
-                  expand_all(root);
-                  this.setState({ loading_query: false });
+                  setTimeout(() => {
+                    expand_all(root);
+                    this.setState({ loading_query: false });
+                  }, 0);
                 }}
               >
                 <span>{text_maker("expand_all")}</span>
@@ -337,8 +339,10 @@ class SingleSubjExplorer extends React.Component {
                 }}
                 onClick={() => {
                   this.setState({ loading_query: true });
-                  collapse_all(root);
-                  this.setState({ loading_query: false });
+                  setTimeout(() => {
+                    collapse_all(root);
+                    this.setState({ loading_query: false });
+                  }, 0);
                 }}
               >
                 <span>{text_maker("collapse_all")}</span>
