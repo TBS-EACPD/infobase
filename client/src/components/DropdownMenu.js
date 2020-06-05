@@ -31,7 +31,6 @@ export class DropdownMenu extends React.Component {
           {custom_dropdown_trigger}
         </button>
         <div
-          aria-hidden={true}
           className={classNames(
             dropdown_content_class_name,
             "dropdown__content",
