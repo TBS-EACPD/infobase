@@ -246,7 +246,7 @@ class SimpleView extends React.Component {
           ),
         sort_func: (a, b) =>
           deptBreakoutMode
-            ? default_dept_name_sort_func(Dept, a, b)
+            ? default_dept_name_sort_func(a, b)
             : sort_func_template(a, b),
         raw_formatter: (value) =>
           deptBreakoutMode && Dept.lookup(value)
