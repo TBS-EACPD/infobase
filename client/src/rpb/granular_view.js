@@ -109,7 +109,7 @@ class GranularView extends React.Component {
               closed_button_class_name={"btn-ib-light"}
               key={"rpb_group_data"}
               button_description={text_maker("group_data")}
-              custom_dropdown_trigger={text_maker("group_data")}
+              custom_dropdown_trigger={`${text_maker("group_by")}: ${filter}`}
               dropdown_content={
                 <div className="group_filter_dropdown">
                   {_.map(group_filter_options, (group) => (

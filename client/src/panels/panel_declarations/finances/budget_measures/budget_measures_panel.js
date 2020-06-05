@@ -848,7 +848,7 @@ class BudgetMeasureHBars extends React.Component {
           <div className="row" style={{ marginBottom: "10px" }}>
             <div className="col-sm-6" align="center">
               <label style={{ padding: "7px" }} htmlFor="select_grouping">
-                {text_maker("budget_panel_group_by")}
+                {text_maker("group_by")}
               </label>
               <Select
                 id="select_grouping"
