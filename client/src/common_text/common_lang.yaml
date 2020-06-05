@@ -32,6 +32,9 @@ lang_select:
 grouped:
   en: Grouped
   fr: Groupés
+group_by:
+  en: Group by
+  fr: Grouper
 spend_area:
   en: Spending Area
   fr: Secteur de dépenses
