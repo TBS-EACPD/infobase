@@ -250,8 +250,24 @@ export class DisplayTable extends React.Component {
           <tbody>
             {_.map(sorted_filtered_data, (row, i) => (
               <tr key={i}>
-                {_.map(ordered_column_keys, (col_key) => (
-                  <td style={{ fontSize: "14px" }} key={col_key}>
+                {_.map(ordered_column_keys, (col_key) => {
+                  const style = { fontSize: "14px" }
+                  if (col_configs_with_defaults[col_key].formatter) {
+                    if (!_.isString(col_configs_with_defaults[col_key].formatter)) {
+                      const formatterReturn = col_configs_with_defaults[col_key].formatter(row[col_key])
+                      if (_.isString(formatterReturn)) {
+                        const onlyAlphanum = formatterReturn.replace(/[^W]+/g, "")
+                        if (!isNaN(onlyAlphanum)) {
+                          style.textAlign = "right"
+                        }
+                      }
+                    } else {
+                      style.textAlign = "right"
+                    }
+                  }
+
+                  return (
+                    <td style={style} key={col_key}>
                     {col_configs_with_defaults[col_key].formatter ? (
                       _.isString(
                         col_configs_with_defaults[col_key].formatter
@@ -269,7 +285,7 @@ export class DisplayTable extends React.Component {
                       row[col_key]
                     )}
                   </td>
-                ))}
+                )})}
               </tr>
             ))}
             {is_total_exist && (
