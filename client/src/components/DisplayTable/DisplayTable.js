@@ -251,7 +251,11 @@ export class DisplayTable extends React.Component {
             {_.map(sorted_filtered_data, (row, i) => (
               <tr key={i}>
                 {_.map(ordered_column_keys, (col_key) => (
-                  <td style={{ fontSize: "14px" }} key={col_key}>
+                  <td style={{ fontSize: "14px", textAlign: 
+                    col_configs_with_defaults[col_key].text_align ? 
+                      col_configs_with_defaults[col_key].text_align(
+                        col_configs_with_defaults[col_key].formatter(row[col_key])) 
+                        : "initial" }} key={col_key}>
                     {col_configs_with_defaults[col_key].formatter ? (
                       _.isString(
                         col_configs_with_defaults[col_key].formatter
