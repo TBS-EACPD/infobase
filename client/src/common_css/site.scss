@@ -45,7 +45,12 @@ div.ordinal {
 .success {
   background-color: $successLightColor;
 }
-
+.no-right {
+  right: 0;
+}
+.full-width {
+  width: 100%;
+}
 /* added for IE9, this adds a transparents 1x1 png file
  * so that mouseneter events can be registered on 
  * empty divs */

@@ -90,6 +90,7 @@ class GranularView extends React.Component {
         .fromPairs()
         .value(),
     }));
+
     const group_filter_options = _.map(
       filters_by_dimension,
       (filter_by_dim) => ({
@@ -97,64 +98,62 @@ class GranularView extends React.Component {
         children: _.sortBy(filter_by_dim.children, "display"),
       })
     );
+    const dropdown_content = (
+      <div className="group_filter_dropdown">
+        {_.map(group_filter_options, (group) => (
+          <div key={group.id}>
+            <span key={group.id} style={{ fontWeight: 700 }}>
+              {group.display}
+            </span>
+            {_.map(group.children, (child) => (
+              <div key={`${group.id}_${child.id}`}>
+                <input
+                  type={"radio"}
+                  value={child.id}
+                  id={child.id}
+                  name={"rpb_group_filter"}
+                  key={child.id}
+                  onClick={(evt) => {
+                    const [dim_key, filt_key] = evt.target.value.split("__");
+                    on_set_filter({
+                      filter: filt_key,
+                      dimension: dim_key,
+                    });
+                  }}
+                  defaultChecked={child.id === `${dimension}__${filter}`}
+                />
+                <label
+                  htmlFor={child.id}
+                  className={"normal-radio-btn-label"}
+                  key={child.display}
+                >
+                  {child.display}
+                </label>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+
+    const display_table_custom_util = {
+      rpb_group_data: (
+        <DropdownMenu
+          opened_button_class_name={"btn-ib-opened"}
+          closed_button_class_name={"btn-ib-light"}
+          key={"rpb_group_data"}
+          button_description={text_maker("group_data")}
+          custom_dropdown_trigger={`${text_maker("group_by")}: ${filter}`}
+          dropdown_content={dropdown_content}
+        />
+      ),
+    };
 
     return (
       <DisplayTable
         data={table_data}
         column_configs={column_configs}
-        util_components={{
-          rpb_group_data: (
-            <DropdownMenu
-              opened_button_class_name={"btn-ib-opened"}
-              closed_button_class_name={"btn-ib-light"}
-              key={"rpb_group_data"}
-              button_description={text_maker("group_data")}
-              custom_dropdown_trigger={`${text_maker("group_by")}: ${filter}`}
-              dropdown_content={
-                <div className="group_filter_dropdown">
-                  {_.map(group_filter_options, (group) => (
-                    <div key={group.id}>
-                      <span key={group.id} style={{ fontWeight: 700 }}>
-                        {group.display}
-                      </span>
-                      {_.map(group.children, (child) => (
-                        <div key={`${group.id}_${child.id}`}>
-                          <input
-                            type={"radio"}
-                            value={child.id}
-                            id={child.id}
-                            name={"rpb_group_filter"}
-                            key={child.id}
-                            onClick={(evt) => {
-                              const [
-                                dim_key,
-                                filt_key,
-                              ] = evt.target.value.split("__");
-                              on_set_filter({
-                                filter: filt_key,
-                                dimension: dim_key,
-                              });
-                            }}
-                            defaultChecked={
-                              child.id === `${dimension}__${filter}`
-                            }
-                          />
-                          <label
-                            htmlFor={child.id}
-                            className={"normal-rd-label"}
-                            key={child.display}
-                          >
-                            {child.display}
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              }
-            />
-          ),
-        }}
+        util_components={display_table_custom_util}
       />
     );
   }

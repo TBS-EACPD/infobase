@@ -205,17 +205,3 @@
   transition: max-height 500ms ease-out, opacity 500ms ease-out;
 
 }
-.back-button {
-  text-align: left;
-  border: none;
-  background-color: inherit;
-  padding: 0;
-  border-radius: 0;
-  margin-top: 20px;
-  cursor: pointer;
-
-  &:hover, &:focus {
-    color: $tertiaryColor;
-  }
-
-}

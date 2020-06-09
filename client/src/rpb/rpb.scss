@@ -1,12 +1,6 @@
 @import '../common_css/common-variables';
 
-
-.table-rpb {
-  margin: 0 auto;
-  min-width: 75%;
-}
-
-.modal-container {
+.rpb-modal-container {
   background-color: white;
   overflow: auto;
   line-height: 1.5;
@@ -15,13 +9,6 @@
   font-weight: 400;
   display: flex;
   flex-direction: column;
-}
-
-.trinity-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  padding: 50px 10px 0px 0px;
 }
 
 li.select-list-item {
@@ -35,25 +22,12 @@ li.select-list-item {
     padding-left: 20px;
     padding-right: 10px; 
   }
-
-  .md-gutter-right {
-    padding-right: 10px;
-  }
-
-  .md-gutter-left {
-    padding-left: 10px;
-  }
-
 }
 
 .rpb-option-fancy-ul {
   padding: 14px 15px 12px 20px; 
   width: 100%;
   margin-bottom: 0px;
-}
-
-.graph_report { 
-  border: 1px solid $secondaryColor ;
 }
 
 .rpb-config-item {
@@ -66,41 +40,6 @@ li.select-list-item {
     margin: 0px;
   }
 }
-
-.rpb-config-header {
-  display: block;
-  padding: 3px 0;
-  font-size: 12px;
-  font-weight: $heavyFontWeight;
-  line-height: 20px;
-  color: $primaryColor;
-  margin-right: 10px;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  text-transform: uppercase;
-}
-
-.rpb-data-cell {
-  text-align: right;
-}
-
-.rpb-key-cell {
-  text-align: left;
-}
-
-/* allows bootstrap columns to stick together */
-@media(min-width: $minMediumDevice){
-  .md-no-right-gutter {
-    padding-right: 0;
-  }
-  .md-no-left-gutter {
-    padding-left: 0;
-  }
-}
-
-.full-width {
-  width: 100%;
-}
-
 .rpb-separator {
   border-bottom: 1px solid $separatorColor;
 }
@@ -122,7 +61,7 @@ button.rpb-heading-utils {
   display: flex;
   flex-direction: column;
 }
-.normal-rd-label {
+.normal-radio-btn-label {
   font-weight: 400;
   margin-left: 3px;
 }
