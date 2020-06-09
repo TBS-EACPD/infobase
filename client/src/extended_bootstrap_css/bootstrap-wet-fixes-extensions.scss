@@ -268,12 +268,11 @@ div.label {
   background-color: $primaryColor !important;
   color: $textLightColor !important;
 }
-.btn-ib-opened {
+.btn-ib-light--reversed {
   background-color: $backgroundColor;
   border: 2px solid $backgroundColor;
   color: $primaryColor !important;
   border-radius: $standardBorderRadius;
-  margin: 0px 5px 0px 0px;
 }
 
 /* to be used with dark-background */
@@ -282,7 +281,6 @@ div.label {
   border: 2px solid $backgroundColor;
   color: $backgroundColor;
   border-radius: $standardBorderRadius;
-  margin: 0px 5px 0px 0px;
   
   &:focus,
   &:active,
