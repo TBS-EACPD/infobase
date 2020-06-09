@@ -5,13 +5,11 @@ const fiscal_year_to_year = (fy_string) =>
 
 const year_to_fiscal_year = (year) => {
   if (year) {
-    const second_year = (() => {
-      if (window.lang === "en") {
-        return year + 1;
-      } else {
-        return (year + 1).toString().substring(2);
-      }
-    })();
+    const second_year = {
+      en: year + 1,
+      fr: (year + 1).toString().substring(2),
+    }[window.lang];
+
     return `${year}-${second_year}`;
   } else {
     return "";
