@@ -30,24 +30,17 @@ $spacing: 10px;
 }
 
 .footnote-list__meta_container {
+  margin-left: $indent;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 
-  & > .footnote-list__meta_label {
-    margin-left: $indent;
-    margin-top: $spacing/2;
-  }
-
   & > .footnote-list__meta_item {
     font-size: 13px;
-    margin-left: $spacing/2;
-    margin-top: $spacing/2;
-  }
+    margin-top: $spacing/4;
 
-  & > .footnote-list__meta_label,
-  & > .footnote-list__meta_item {
-    // so that things look decent when wrapping occurs
-    margin-top: $spacing/2;
+    &:not(:first-child) {
+      margin-left: $spacing;
+    }
   }
 }

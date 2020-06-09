@@ -182,4 +182,16 @@ b, strong, .heavy-weight {
   color: $textColor;
 }
 
+// alternate to bootstrap badges
+.tag-badge {
+  padding: 2px 4px;
+  color: $textColor;
+  border-radius: 0px $standardBorderRadius/2 $standardBorderRadius/2 0px;
+  border-style: solid;
+  border-width: 1px 1px 1px 3px;
+  border-color: lighten($tertiaryColor, 20%) lighten($tertiaryColor, 20%) lighten($tertiaryColor, 20%) $secondaryColor;
 
+  &.tag-badge--solid {
+    background-color: lighten($tertiaryColor, 20%);
+  }
+}
