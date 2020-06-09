@@ -33,23 +33,16 @@ const SubjectSubtitle = ({ subject }) => {
       />
     );
   } else if (subject_is_class(subject) && !_.isUndefined(subject.singular)) {
-    if (subject.id === "gov") {
-      return (
-        <FootnoteListSubtitle
-          title={text_maker("gov_footnote_title", {
+    return (
+      <FootnoteListSubtitle
+        title={text_maker(
+          subject.id === "gov" ? "gov_footnote_title" : "class_footnote_title",
+          {
             subject_name: subject.singular,
-          })}
-        />
-      );
-    } else {
-      return (
-        <FootnoteListSubtitle
-          title={text_maker("class_footnote_title", {
-            subject_name: subject.singular,
-          })}
-        />
-      );
-    }
+          }
+        )}
+      />
+    );
   } else {
     // Should fail fast for standard footnote, since the route load tests include the footnote inventory.
     // Might not fail fast if ad-hoc fake footnotes are thrown in a FootnoteList in an obscure panel etc...
