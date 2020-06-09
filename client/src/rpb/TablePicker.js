@@ -226,7 +226,8 @@ class TaggedItemCloud extends React.Component {
                           className={classNames(
                             active && "active",
                             active && "active",
-                            "item-tag"
+                            "tag-badge",
+                            "tag-badge--solid"
                           )}
                         >
                           <TextMaker text_key={id} />

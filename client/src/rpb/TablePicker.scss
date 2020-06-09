@@ -161,24 +161,16 @@
   line-height: 1em;
   font-size: 0.8em;
   padding: 0px;
-}
 
-.item-tags > .item-tag {
-  display: inline;
-  padding: 6px 7px;
-  margin: 12px 12px 0 0;
-  color: $textColor;
-  background-color: lighten($tertiaryColor, 20%);
-  border-radius: 0px $standardBorderRadius/2 $standardBorderRadius/2 0px;
-  border-style: solid;
-  border-width: 0 0 0 4px;
-  border-color: $secondaryColor;
-}
+  & > .tag-badge {
+    margin: 12px 12px 0 0;
 
-.item-tags > .item-tag.active {
-  color: $textLightColor;
-  background-color: $secondaryColor;
-  border-color: $secondaryColor;
+    &.active {
+      color: $textLightColor;
+      background-color: $secondaryColor;
+      border-color: $secondaryColor;
+    }
+  }
 }
 
 .item-card > .item-select {
