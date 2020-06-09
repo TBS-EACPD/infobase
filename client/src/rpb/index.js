@@ -211,7 +211,7 @@ class RPB extends React.Component {
                 <div
                   tabIndex={-1}
                   id="modal-child"
-                  className="container app-font modal-container"
+                  className="container app-font rpb-modal-container"
                 >
                   <TablePicker
                     onSelect={(id) => this.pickTable(id)}
