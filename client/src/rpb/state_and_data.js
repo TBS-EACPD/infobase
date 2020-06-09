@@ -167,9 +167,10 @@ function create_mapStateToProps() {
       _.map(dimensions, ({ id: dim_key, display }) => ({
         display,
         id: dim_key,
-        children: _.map(get_filters_for_dim(table, dim_key), (filt) => ({
-          id: dim_key + "__" + filt,
-          display: filt,
+        children: _.map(get_filters_for_dim(table, dim_key), (filter) => ({
+          filter: filter,
+          dimension: dim_key,
+          display: filter,
         })),
       }))
   );

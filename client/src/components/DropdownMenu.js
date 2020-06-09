@@ -25,6 +25,7 @@ export class DropdownMenu extends React.Component {
           className={
             isOpen ? opened_button_class_name : closed_button_class_name
           }
+          style={{ marginRight: 5 }}
           onClick={() => this.setState({ isOpen: !isOpen })}
           title={button_description}
         >

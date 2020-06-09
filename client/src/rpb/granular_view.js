@@ -106,24 +106,24 @@ class GranularView extends React.Component {
               {group.display}
             </span>
             {_.map(group.children, (child) => (
-              <div key={`${group.id}_${child.id}`}>
+              <div key={`${group.id}_${child.filter}__${child.dimension}`}>
                 <input
                   type={"radio"}
-                  value={child.id}
-                  id={child.id}
+                  value={`${child.filter}__${child.dimension}`}
                   name={"rpb_group_filter"}
-                  key={child.id}
-                  onClick={(evt) => {
-                    const [dim_key, filt_key] = evt.target.value.split("__");
+                  key={`${child.filter}__${child.dimension}`}
+                  onClick={() => {
                     on_set_filter({
-                      filter: filt_key,
-                      dimension: dim_key,
+                      filter: child.filter,
+                      dimension: child.dimension,
                     });
                   }}
-                  defaultChecked={child.id === `${dimension}__${filter}`}
+                  defaultChecked={
+                    child.filter === filter && child.dimension === dimension
+                  }
                 />
                 <label
-                  htmlFor={child.id}
+                  htmlFor={`${child.filter}__${child.dimension}`}
                   className={"normal-radio-btn-label"}
                   key={child.display}
                 >
@@ -139,7 +139,7 @@ class GranularView extends React.Component {
     const display_table_custom_util = {
       rpb_group_data: (
         <DropdownMenu
-          opened_button_class_name={"btn-ib-opened"}
+          opened_button_class_name={"btn-ib-light--reversed"}
           closed_button_class_name={"btn-ib-light"}
           key={"rpb_group_data"}
           button_description={text_maker("group_data")}
