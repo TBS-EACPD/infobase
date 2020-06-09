@@ -255,7 +255,7 @@ export class DisplayTable extends React.Component {
                     col_configs_with_defaults[col_key].text_align ? 
                       col_configs_with_defaults[col_key].text_align(
                         col_configs_with_defaults[col_key].formatter(row[col_key])) 
-                        : "initial" }} key={col_key}>
+                        : col_configs_with_defaults[col_key].text_align }} key={col_key}>
                     {col_configs_with_defaults[col_key].formatter ? (
                       _.isString(
                         col_configs_with_defaults[col_key].formatter

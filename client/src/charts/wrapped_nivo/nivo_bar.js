@@ -33,7 +33,7 @@ const bar_table = (
           formatter: (value) =>
             _.isUndefined(value) ? "" : table_view_format(value),
           text_align: (value) => {
-            const onlyAlphanum = value.replace(/[^W]+/g, "")
+            const onlyAlphanum = value.replace(/[\W]+/g, "")
             if (!isNaN(onlyAlphanum)) {
               return "right"
             } else {
