@@ -314,42 +314,48 @@ class SingleSubjExplorer extends React.Component {
                 onChange={(evt) => this.handleQueryChange(evt.target.value)}
                 value={query}
               />
-              <button
-                type="button"
-                className="btn btn-ib-light"
-                style={{
-                  height: "40px",
-                  width: "50%",
-                  margin: "5px 0px",
-                }}
-                onClick={() => {
-                  this.setState({ loading_query: true });
-                  this.expandTimout = setTimeout(() => {
-                    expand_all(root);
-                    this.setState({ loading_query: false });
-                  }, 0);
-                }}
-              >
-                <span>{text_maker("expand_all")}</span>
-              </button>
-              <button
-                type="button"
-                className="btn btn-ib-light"
-                style={{
-                  height: "40px",
-                  width: "50%",
-                  margin: "5px 0px",
-                }}
-                onClick={() => {
-                  this.setState({ loading_query: true });
-                  this.collapseTimout = setTimeout(() => {
-                    collapse_all(root);
-                    this.setState({ loading_query: false });
-                  }, 0);
-                }}
-              >
-                <span>{text_maker("collapse_all")}</span>
-              </button>
+              <div style={{ display: "flex" }}>
+                <button
+                  type="button"
+                  className="btn btn-ib-light"
+                  style={{
+                    height: "40px",
+                    width: "50%",
+                    margin: "5px 2px",
+                  }}
+                  onClick={() => {
+                    // Inside an event handler setState batches all state changes asychronously,
+                    // to ensure the spinner shows when we want it to, we need to use setTimeout to force the code
+                    // to act asynchronously
+                    this.setState({ loading_query: true });
+                    this.expandTimout = setTimeout(() => {
+                      expand_all(root);
+                      this.setState({ loading_query: false });
+                    }, 0);
+                  }}
+                >
+                  <span>{text_maker("expand_all")}</span>
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-ib-light"
+                  style={{
+                    height: "40px",
+                    width: "50%",
+                    margin: "5px 2px",
+                  }}
+                  onClick={() => {
+                    // Same explanation as the expand all button
+                    this.setState({ loading_query: true });
+                    this.collapseTimout = setTimeout(() => {
+                      collapse_all(root);
+                      this.setState({ loading_query: false });
+                    }, 0);
+                  }}
+                >
+                  <span>{text_maker("collapse_all")}</span>
+                </button>
+              </div>
               {window.is_a11y_mode && (
                 <input
                   type="submit"
