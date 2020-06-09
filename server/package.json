@@ -7,7 +7,7 @@
     "build": "transpilied_build"
   },
   "engines": {
-    "node": "^9.0"
+    "node": "^10.0"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -29,7 +29,6 @@
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.6.2",
     "@babel/node": "^7.6.2",
-    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
     "@babel/plugin-transform-modules-commonjs": "^7.6.0",
     "@babel/preset-env": "^7.6.2",
     "babel-core": "^7.0.0-bridge.0",
