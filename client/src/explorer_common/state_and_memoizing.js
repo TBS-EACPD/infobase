@@ -95,14 +95,6 @@ function root_reducer(state = initial_root_state, action) {
       };
     }
 
-    case "clear_expanded_collapsed": {
-      return {
-        ...state,
-        userExpanded: [],
-        userCollapsed: [],
-      };
-    }
-
     default: {
       return state;
     }
@@ -140,10 +132,6 @@ const map_dispatch_to_root_props = (dispatch) => {
       payload: { node },
     });
 
-  const clear_query = () => dispatch({ type: "clear_query" });
-
-  const enable_loading = () => dispatch({ type: "enable_loading" });
-
   const expand_all = (root) =>
     dispatch({
       type: "expand_all",
@@ -156,10 +144,9 @@ const map_dispatch_to_root_props = (dispatch) => {
       payload: { root },
     });
 
-  const clear_expanded_collapsed = () =>
-    dispatch({
-      type: "clear_expanded_collapsed",
-    });
+  const clear_query = () => dispatch({ type: "clear_query" });
+
+  const enable_loading = () => dispatch({ type: "enable_loading" });
 
   return {
     set_query,
@@ -168,7 +155,6 @@ const map_dispatch_to_root_props = (dispatch) => {
     enable_loading,
     expand_all,
     collapse_all,
-    clear_expanded_collapsed,
   };
 };
 
@@ -312,15 +298,22 @@ function get_memoized_funcs(schemes) {
       oldState.root.userExpanded !== state.root.userExpanded
     ) {
       //union the SYMMETRIC differences
-      const toToggle = _.union(
+      const potential_to_toggle = _.union(
         _.difference(oldState.root.userCollapsed, state.root.userCollapsed),
         _.difference(state.root.userCollapsed, oldState.root.userCollapsed),
         _.difference(oldState.root.userExpanded, state.root.userExpanded),
         _.difference(state.root.userExpanded, oldState.root.userExpanded)
       );
 
+      // IMPORTANT: oldFlatNodes is always current, but oldState.root.userExpanded and userCollapsed can belong to a
+      // previous scheme, meaning potential_to_toggle may contain ids of nodes that nolonger exist. Drop any of those ids.
+      const safe_to_toggle = _.intersection(
+        potential_to_toggle,
+        _.map(oldFlatNodes, "id")
+      );
+
       flat_nodes = _.reduce(
-        toToggle,
+        safe_to_toggle,
         (accumulator, node_id) =>
           toggleExpandedFlat(
             accumulator,
