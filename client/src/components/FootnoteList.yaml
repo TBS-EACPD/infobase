@@ -1,20 +1,17 @@
 subject_footnote_title:
   transform: [handlebars]
   en: |
-    {{subject_name}} specific footnotes
-  fr: TODO
+    {{subject_name}}
 
 class_footnote_title:
   transform: [handlebars]
-  en: |
-    Universal {{subject_name}} footnotes
-  fr: TODO
+  en: General notes — {{subject_name}}
+  fr: Notes générales — {{subject_name}}
 
 gov_footnote_title:
   transform: [handlebars]
-  en: |
-    {{subject_name}} footnotes
-  fr: TODO
+  text: |
+    {{subject_name}}
 
 footnote_year:
   transform: [handlebars]
