@@ -251,15 +251,21 @@ export class DisplayTable extends React.Component {
             {_.map(sorted_filtered_data, (row, i) => (
               <tr key={i}>
                 {_.map(ordered_column_keys, (col_key) => (
-                  <td style={{ fontSize: "14px", textAlign: 
-                    col_configs_with_defaults[col_key].formatter ? 
-                      _.isString(col_configs_with_defaults[col_key].formatter) ?
-                        !isNaN(row[col_key]) ? "right" : undefined
-                      : _.isString(col_configs_with_defaults[col_key].formatter(row[col_key])) ?
-                        !isNaN(_.replace(col_configs_with_defaults[col_key].formatter(row[col_key]), /[\W]+/g, "")) ?
-                          "right" : undefined
-                      : undefined
-                    : undefined }} key={col_key}>
+                  <td style={{ fontSize: "14px", textAlign: (() => {
+                    const current_col_formatter = col_configs_with_defaults[col_key].formatter
+                    const current_col_raw_formatter = col_configs_with_defaults[col_key].raw_formatter
+                    if (current_col_formatter) {
+                      if (_.isString(current_col_formatter)) {
+                        if (_.isNumber(row[col_key])) {
+                          return "right"
+                        }
+                      } else {
+                        if (_.isNumber(current_col_raw_formatter(row[col_key]))) {
+                          return "right"
+                        }
+                      }
+                    }
+                  })()}} key={col_key}>
                     {col_configs_with_defaults[col_key].formatter ? (
                       _.isString(
                         col_configs_with_defaults[col_key].formatter
