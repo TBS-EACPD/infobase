@@ -14,7 +14,9 @@ module.exports = {
       ),
     },
     upload: {
-      target: "temporary-public-storage",
+      target: "lhci",
+      serverBaseUrl: "https://peaceful-lowlands-05998.herokuapp.com/",
+      token: "554e44e8-3fcb-46ba-8444-9cb54850bc72", // could also use LHCI_TOKEN variable instead
     },
   },
 };
