@@ -113,9 +113,33 @@ const sort_footnotes = (footnotes) =>
 
 const group_and_sort_footnotes = (footnotes) =>
   _.chain(footnotes)
-    .groupBy(({ subject: { id, name, singular } }) =>
-      !_.isUndefined(id) ? `${name}_${id}` : singular
-    )
+    .groupBy(({ subject }) => {
+      const { id, name, singular } = subject;
+
+      const subject_type =
+        subject.subject_type || _.get(subject, "constructor.subject_type");
+
+      const subject_type_sort_importance = (() => {
+        switch (subject_type) {
+          case "gov":
+            return 1;
+          case "dept":
+            return 2;
+          case "crso":
+            return 3;
+          case "program":
+            return 4;
+          default:
+            return 999;
+        }
+      })();
+
+      const name_for_sorting_purposes = subject_is_instance(subject)
+        ? `${name}_${id}`
+        : singular;
+
+      return `${subject_type_sort_importance}_${name_for_sorting_purposes}`;
+    })
     .map((grouped_footnotes, group_name) => {
       return [grouped_footnotes, group_name];
     })
