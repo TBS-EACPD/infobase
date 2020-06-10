@@ -95,6 +95,14 @@ function root_reducer(state = initial_root_state, action) {
       };
     }
 
+    case "clear_expanded_collapsed": {
+      return {
+        ...state,
+        userExpanded: [],
+        userCollapsed: [],
+      };
+    }
+
     default: {
       return state;
     }
@@ -132,6 +140,10 @@ const map_dispatch_to_root_props = (dispatch) => {
       payload: { node },
     });
 
+  const clear_query = () => dispatch({ type: "clear_query" });
+
+  const enable_loading = () => dispatch({ type: "enable_loading" });
+
   const expand_all = (root) =>
     dispatch({
       type: "expand_all",
@@ -144,9 +156,10 @@ const map_dispatch_to_root_props = (dispatch) => {
       payload: { root },
     });
 
-  const clear_query = () => dispatch({ type: "clear_query" });
-
-  const enable_loading = () => dispatch({ type: "enable_loading" });
+  const clear_expanded_collapsed = () =>
+    dispatch({
+      type: "clear_expanded_collapsed",
+    });
 
   return {
     set_query,
@@ -155,6 +168,7 @@ const map_dispatch_to_root_props = (dispatch) => {
     enable_loading,
     expand_all,
     collapse_all,
+    clear_expanded_collapsed,
   };
 };
 
