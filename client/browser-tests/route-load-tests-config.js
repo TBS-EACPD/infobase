@@ -204,6 +204,6 @@ module.exports.route_load_tests_config = [
   {
     name: "Footnote Inventory - all footnotes",
     route: "footnote-inventory",
-    test_on: ["eng"],
+    test_on: ["eng", "basic-eng", "fra"],
   },
 ];
