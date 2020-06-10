@@ -17,7 +17,11 @@
     "Kate Cook"
   ],
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@lhci/server": "0.4.x",
+    "pg": "^7.12.1",
+    "pg-hstore": "^2.3.3"
+  },
   "devDependencies": {
     "prettier": "^2.0.5"
   }
