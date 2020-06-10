@@ -15,4 +15,4 @@ createServer({
     sqlConnectionSsl: true,
     sqlConnectionUrl: process.env.DATABASE_URL,
   },
-}).then(({ port }) => console.log("Listening on port", port));
+}).then(({ port }) => console.log("Listening on port ", port));
