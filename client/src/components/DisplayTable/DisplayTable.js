@@ -296,7 +296,9 @@ export class DisplayTable extends React.Component {
                 {_.chain(ordered_column_keys)
                   .tail()
                   .map((col_key) => (
-                    <td key={col_key}>
+                    <td style={{textAlign: 
+                      determine_text_align(total_row, col_key)}} 
+                        key={col_key}>
                       {total_row[col_key] ? (
                         col_configs_with_defaults[col_key].formatter ? (
                           _.isString(
