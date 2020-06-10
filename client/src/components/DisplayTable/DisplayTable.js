@@ -91,6 +91,18 @@ export class DisplayTable extends React.Component {
       })
     );
 
+    const determine_text_align = (row, col) => {
+      const current_col_formatter = col_configs_with_defaults[col].formatter
+      const current_col_raw_formatter = col_configs_with_defaults[col].raw_formatter
+      if (current_col_formatter) {
+        if (_.isString(current_col_formatter) && _.isNumber(row[col])) {
+          return "right"
+        }
+      } else if (_.isNumber(current_col_raw_formatter(row[col]))) {
+          return "right"
+      }
+    }
+
     const clean_search_string = (search_string) =>
       _.chain(search_string).deburr().toLower().trim().value();
     const is_number_string_date = (val) =>
@@ -251,7 +263,9 @@ export class DisplayTable extends React.Component {
             {_.map(sorted_filtered_data, (row, i) => (
               <tr key={i}>
                 {_.map(ordered_column_keys, (col_key) => (
-                  <td style={{ fontSize: "14px" }} key={col_key}>
+                  <td style={{ fontSize: "14px", textAlign: 
+                    determine_text_align(row, col_key)}} 
+                      key={col_key}>
                     {col_configs_with_defaults[col_key].formatter ? (
                       _.isString(
                         col_configs_with_defaults[col_key].formatter
@@ -278,7 +292,9 @@ export class DisplayTable extends React.Component {
                 {_.chain(ordered_column_keys)
                   .tail()
                   .map((col_key) => (
-                    <td key={col_key}>
+                    <td style={{textAlign: 
+                      determine_text_align(total_row, col_key)}} 
+                        key={col_key}>
                       {total_row[col_key] ? (
                         col_configs_with_defaults[col_key].formatter ? (
                           _.isString(
