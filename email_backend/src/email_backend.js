@@ -152,7 +152,7 @@ const make_email_backend = (templates) => {
           template_name,
           original_template,
           email_config
-        );
+        ).catch(console.log);
       } else {
         const error_message = `Internal Server Error: mail was unable to send. ${
           sent_mail_info.err
