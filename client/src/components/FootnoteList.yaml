@@ -1,6 +1,6 @@
 subject_footnote_title:
   transform: [handlebars]
-  en: |
+  text: |
     {{subject_name}}
 
 class_footnote_title:
