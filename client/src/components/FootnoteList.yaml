@@ -8,11 +8,6 @@ class_footnote_title:
   en: General notes — {{subject_name}}
   fr: Notes générales — {{subject_name}}
 
-gov_footnote_title:
-  transform: [handlebars]
-  text: |
-    {{subject_name}}
-
 footnote_year:
   transform: [handlebars]
   en: Applies in {{fmt_year_to_fiscal_year year}}
