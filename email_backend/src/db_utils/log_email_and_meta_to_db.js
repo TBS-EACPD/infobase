@@ -52,8 +52,6 @@ export const log_email_and_meta_to_db = async (
   );
   const meta_sub_doc = get_meta_fields_for_log(request, email_config);
 
-  // model.create is a short hand for adding a new entry to the collection with model_name (see make_mongoose_model_from_original_template)
-  // If no DB is connected yet, this write will buffer
   return model.create({
     ...email_fields,
     email_submission_meta: meta_sub_doc,
