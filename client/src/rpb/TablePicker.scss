@@ -159,11 +159,11 @@
   flex-direction: row;
   flex-wrap: wrap;
   line-height: 1em;
-  font-size: 0.8em;
+  font-size: 0.9em;
   padding: 0px;
 
   & > .tag-badge {
-    margin: 12px 12px 0 0;
+    margin: 0 12px 12px 0;
 
     &.active {
       color: $textLightColor;
