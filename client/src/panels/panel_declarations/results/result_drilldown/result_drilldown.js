@@ -231,6 +231,7 @@ class SingleSubjExplorer extends React.Component {
       toggle_node,
       expand_all,
       collapse_all,
+      clear_expanded_collapsed,
 
       subject,
 
@@ -396,7 +397,8 @@ class SingleSubjExplorer extends React.Component {
       );
     }
 
-    const tab_on_click = (doc) => set_doc !== doc && set_doc(doc, subject);
+    const tab_on_click = (doc) =>
+      set_doc !== doc && clear_expanded_collapsed() && set_doc(doc, subject);
     return (
       <div className="tabbed-content">
         <TabbedControls

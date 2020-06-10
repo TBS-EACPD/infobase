@@ -95,6 +95,14 @@ function root_reducer(state = initial_root_state, action) {
       };
     }
 
+    case "clear_expanded_collapsed": {
+      return {
+        ...state,
+        userExpanded: [],
+        userCollapsed: [],
+      };
+    }
+
     default: {
       return state;
     }
@@ -132,6 +140,10 @@ const map_dispatch_to_root_props = (dispatch) => {
       payload: { node },
     });
 
+  const clear_query = () => dispatch({ type: "clear_query" });
+
+  const enable_loading = () => dispatch({ type: "enable_loading" });
+
   const expand_all = (root) =>
     dispatch({
       type: "expand_all",
@@ -144,9 +156,10 @@ const map_dispatch_to_root_props = (dispatch) => {
       payload: { root },
     });
 
-  const clear_query = () => dispatch({ type: "clear_query" });
-
-  const enable_loading = () => dispatch({ type: "enable_loading" });
+  const clear_expanded_collapsed = () =>
+    dispatch({
+      type: "clear_expanded_collapsed",
+    });
 
   return {
     set_query,
@@ -155,6 +168,7 @@ const map_dispatch_to_root_props = (dispatch) => {
     enable_loading,
     expand_all,
     collapse_all,
+    clear_expanded_collapsed,
   };
 };
 
@@ -305,8 +319,15 @@ function get_memoized_funcs(schemes) {
         _.difference(state.root.userExpanded, oldState.root.userExpanded)
       );
 
-      // IMPORTANT: oldFlatNodes is always current, but oldState.root.userExpanded and userCollapsed can belong to a
-      // previous scheme, meaning potential_to_toggle may contain ids of nodes that nolonger exist. Drop any of those ids.
+      // IMPORTANT: the current set of nodes, oldFlatNodes, depends on the explorer scheme,
+      // which changes independantly of the explorer root. This means that userCollapsed and
+      // userExpanded state stored in root is not guaranteed to reflect the current set of nodes...
+      // This is a pretty fragile point in the current explorer design, only surfaced because of
+      // the expand/collapse all buttons (previously, there was no way to add or remove old scheme
+      // ids from the userCollapsed/userExpanded sets, so the symmetric difference always removed them).
+      // Something to avoid in an explorer refactor, but not something that could properly be fixed with out,
+      // essentially, a whole explorer refactor (or manual clearing implemented by each explorer at whatever
+      // point they update thier internal schemes... but the explorer has too much boiler plate already)
       const safe_to_toggle = _.intersection(
         potential_to_toggle,
         _.map(oldFlatNodes, "id")
