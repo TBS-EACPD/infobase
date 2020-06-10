@@ -78,7 +78,7 @@ const FootnoteSublist = ({ footnotes }) => (
   <ul className="list-unstyled">
     {_.chain(footnotes)
       .uniqBy("text")
-      .map(({ text, year1, year2, topic_keys }, ix) => (
+      .map(({ text, year1, year2, topic_keys, subject }, ix) => (
         <li key={`footnote_${ix}`} className={"footnote-list__item"}>
           <div
             className="footnote-list__note"
@@ -88,6 +88,10 @@ const FootnoteSublist = ({ footnotes }) => (
             meta_items={_.compact([
               years_to_plain_text(year1, year2),
               ...topic_keys_to_plain_text(topic_keys),
+              subject_is_instance(subject) &&
+                _.isFunction(subject.singular) &&
+                subject.singular(),
+              subject_is_instance(subject) && _.get(subject, "dept.name"),
             ])}
           />
         </li>
