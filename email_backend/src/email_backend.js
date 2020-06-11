@@ -145,7 +145,8 @@ const make_email_backend = (templates) => {
         response.send("200");
 
         // Note: async func but not awaited, free up the function to keep handling requests in cases where the DB
-        // communication becomes a choke point
+        // communication becomes a choke point. Also, this all happens post-reponse, so the client isn't waiting on
+        // DB write either
         log_email_and_meta_to_db(
           request,
           completed_template,

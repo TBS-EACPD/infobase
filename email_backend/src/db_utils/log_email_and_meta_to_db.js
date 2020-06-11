@@ -2,15 +2,32 @@ import mongoose from "mongoose";
 import _ from "lodash";
 
 const meta_schema = mongoose.Schema({
+  to: { type: String },
+  from: { type: String },
   method: { type: String },
   requet_has_body: { type: Boolean },
   referer: { type: String },
+  server_date: { type: Date },
+  date: { type: String },
+  time: { type: String },
 });
-const get_meta_fields_for_log = ({ method, body, headers: { referer } }) => ({
-  method,
-  requet_has_body: !_.isEmpty(body),
-  referer,
-});
+const get_meta_fields_for_log = (
+  { to, from },
+  { method, body, headers: { referer } }
+) => {
+  const server_time = new Date();
+
+  return {
+    to,
+    from,
+    method,
+    requet_has_body: !_.isEmpty(body),
+    referer,
+    server_time,
+    date: server_time.toLocaleDateString("en-CA"),
+    time: server_time.toLocaleTimeString("en-CA"),
+  };
+};
 
 const template_type_to_schema_type = (value_type) => {
   switch (value_type) {
@@ -32,9 +49,7 @@ const make_mongoose_model_from_original_template = _.memoize(
       .thru((template_schema_def) =>
         mongoose.Schema({
           ...template_schema_def,
-          from: { type: String },
-          to: { type: String },
-          email_submission_meta: meta_schema,
+          email_meta: meta_schema,
         })
       )
       .value();
@@ -48,15 +63,6 @@ const make_mongoose_model_from_original_template = _.memoize(
   ({ template_name }) => template_name
 );
 
-const get_email_fields_for_log = (completed_template, email_config) => {
-  const { from, to } = email_config;
-  return {
-    from,
-    to,
-    ...completed_template,
-  };
-};
-
 export const log_email_and_meta_to_db = async (
   request,
   completed_template,
@@ -69,14 +75,10 @@ export const log_email_and_meta_to_db = async (
     original_template,
   });
 
-  const email_fields = get_email_fields_for_log(
-    completed_template,
-    email_config
-  );
-  const meta_sub_doc = get_meta_fields_for_log(request);
+  const meta_sub_doc = get_meta_fields_for_log(email_config, request);
 
   return model.create({
-    ...email_fields,
-    email_submission_meta: meta_sub_doc,
+    ...completed_template,
+    email_meta: meta_sub_doc,
   });
 };
