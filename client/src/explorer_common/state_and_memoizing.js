@@ -319,19 +319,33 @@ function get_memoized_funcs(schemes) {
         _.difference(state.root.userExpanded, oldState.root.userExpanded)
       );
 
-      // IMPORTANT: the current set of nodes, oldFlatNodes, depends on the explorer scheme,
-      // which changes independantly of the explorer root. This means that userCollapsed and
-      // userExpanded state stored in root is not guaranteed to reflect the current set of nodes...
-      // This is a pretty fragile point in the current explorer design, only surfaced because of
-      // the expand/collapse all buttons (previously, there was no way to add or remove old scheme
-      // ids from the userCollapsed/userExpanded sets, so the symmetric difference always removed them).
-      // Something to avoid in an explorer refactor, but not something that could properly be fixed with out,
-      // essentially, a whole explorer refactor (or manual clearing implemented by each explorer at whatever
-      // point they update thier internal schemes... but the explorer has too much boiler plate already)
+      // IMPORTANT: expanded/collapsed state is stored in state.root, largely managed by explorer_common code.
+      // The actual set of nodes present in any explorer depends entirely on root.scheme state, which is
+      // entirely managed, and almost entirely up to, each individual explorer implementation. There is nothing
+      // in explorer_common to ensure that the ids in userCollapsed and userExpanded are in sync with the actual
+      // list of current nodes (stored here in oldFlatNodes). To avoid errors, we have to filter out stale ids
+      // from the root state before performing any action on them here; this avoids crashes but does NOT guarantee
+      // correct behaviour. Each implementation of an explorer will need to be responsible for keeping things in sync
+      // itself by dispatching clear_expanded_collapsed as needed...
+      // This is just more book keeping and boilerplate for each explorer to juggle. Yet another pain point that won't
+      // be addressed till it's all refactored
+
+      const current_node_ids = _.map(oldFlatNodes, "id");
+
       const safe_to_toggle = _.intersection(
         potential_to_toggle,
-        _.map(oldFlatNodes, "id")
+        current_node_ids
       );
+
+      if (!_.isEqual(potential_to_toggle, safe_to_toggle) && window.is_dev) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          `Some ids stored in this explorer implemntation's root.userCollapsed and root.userExpanded state do not
+          exist in the current set of rendered nodes. Explorer implementations should dispatch clear_expanded_collapsed
+          to keep things in sync when changes to their internal scheme sate result in a new set of nodes being displayed,
+          otherwise there may be unexpected behaviour if ids are not unique across schemes.`
+        );
+      }
 
       flat_nodes = _.reduce(
         safe_to_toggle,
