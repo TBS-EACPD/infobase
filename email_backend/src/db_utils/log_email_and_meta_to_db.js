@@ -12,13 +12,26 @@ const get_meta_fields_for_log = ({ method, body, headers: { referer } }) => ({
   referer,
 });
 
+const template_type_to_schema_type = (value_type) => {
+  switch (value_type) {
+    case "enums":
+      return [String];
+    case "json":
+      return Object;
+    default:
+      return String;
+  }
+};
 const make_mongoose_model_from_original_template = _.memoize(
   ({ original_template, template_name }) => {
     const template_schema = _.chain(original_template)
-      // todo, process original_template in to an appropriate schema
+      .mapValues(({ required, value_type }) => ({
+        required,
+        type: template_type_to_schema_type(value_type),
+      }))
       .thru((template_schema_def) =>
         mongoose.Schema({
-          //...template_schema_def,
+          ...template_schema_def,
           from: { type: String },
           to: { type: String },
           email_submission_meta: meta_schema,
@@ -35,13 +48,13 @@ const make_mongoose_model_from_original_template = _.memoize(
   ({ template_name }) => template_name
 );
 
-const get_email_fields_for_log = (
-  completed_template,
-  original_template,
-  email_config
-) => {
+const get_email_fields_for_log = (completed_template, email_config) => {
   const { from, to } = email_config;
-  //todo, logic likely to reflect the steps used to generate the template_schema above
+  return {
+    from,
+    to,
+    ...completed_template,
+  };
 };
 
 export const log_email_and_meta_to_db = async (
@@ -58,12 +71,9 @@ export const log_email_and_meta_to_db = async (
 
   const email_fields = get_email_fields_for_log(
     completed_template,
-    original_template,
     email_config
   );
   const meta_sub_doc = get_meta_fields_for_log(request);
-
-  debugger;
 
   return model.create({
     ...email_fields,
