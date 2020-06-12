@@ -318,7 +318,7 @@ class SingleSubjExplorer extends React.Component {
               <div style={{ display: "flex" }}>
                 <button
                   type="button"
-                  className="btn btn-ib-light"
+                  className="btn btn-ib-primary"
                   style={{
                     height: "40px",
                     width: "50%",
@@ -339,7 +339,7 @@ class SingleSubjExplorer extends React.Component {
                 </button>
                 <button
                   type="button"
-                  className="btn btn-ib-light"
+                  className="btn btn-ib-primary"
                   style={{
                     height: "40px",
                     width: "50%",
