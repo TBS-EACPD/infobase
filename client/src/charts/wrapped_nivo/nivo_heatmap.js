@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { ResponsiveHeatMap } from "@nivo/heatmap";
 
 import { general_default_props } from "./nivo_common.js";
