@@ -107,7 +107,6 @@ export default {
       },
       {
         type: "big_int",
-        initial_visible: true,
         nick: "thisyearexpenditures",
         header: {
           en: "Year to date used at quarter-end",

@@ -88,7 +88,6 @@ export default {
         },
         {
           type: "big_int",
-          initial_visible: i === 4,
           nick: header + "exp",
           header: {
             en: "Expenditures",

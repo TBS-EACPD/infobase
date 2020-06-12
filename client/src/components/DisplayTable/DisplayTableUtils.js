@@ -27,7 +27,7 @@ export const DisplayTableColumnToggle = ({ columns }) => (
     button_description={text_maker("select_columns")}
     dropdown_content={columns}
     dropdown_content_class_name={"no-right"}
-    custom_dropdown_trigger={text_maker("select_columns")}
+    dropdown_trigger_txt={text_maker("select_columns")}
   />
 );
 
