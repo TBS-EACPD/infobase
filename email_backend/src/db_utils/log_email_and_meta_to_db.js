@@ -1,16 +1,17 @@
 import mongoose from "mongoose";
 import _ from "lodash";
 
-const meta_schema = mongoose.Schema({
-  to: { type: String },
-  from: { type: String },
-  method: { type: String },
-  requet_has_body: { type: Boolean },
-  referer: { type: String },
-  server_date: { type: Date },
-  date: { type: String },
-  time: { type: String },
-});
+const required_string = { type: String, required: true };
+const meta_schema_def = {
+  to: required_string,
+  from: required_string,
+  method: required_string,
+  requet_has_body: { type: Boolean, required: true },
+  referer: required_string,
+  server_time: { type: Date, required: true },
+  date: required_string,
+  time: required_string,
+};
 const get_meta_fields_for_log = (
   { to, from },
   { method, body, headers: { referer } }
@@ -49,7 +50,7 @@ const make_mongoose_model_from_original_template = _.memoize(
       .thru((template_schema_def) =>
         mongoose.Schema({
           ...template_schema_def,
-          email_meta: meta_schema,
+          email_meta: meta_schema_def,
         })
       )
       .value();
@@ -65,9 +66,9 @@ const make_mongoose_model_from_original_template = _.memoize(
 
 export const log_email_and_meta_to_db = async (
   request,
-  completed_template,
   template_name,
   original_template,
+  completed_template,
   email_config
 ) => {
   const model = make_mongoose_model_from_original_template({

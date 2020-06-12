@@ -149,9 +149,9 @@ const make_email_backend = (templates) => {
         // DB write either
         log_email_and_meta_to_db(
           request,
-          completed_template,
           template_name,
           original_template,
+          completed_template,
           email_config
         ).catch(console.log);
       } else {
