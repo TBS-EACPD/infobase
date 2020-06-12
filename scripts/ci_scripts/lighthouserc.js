@@ -1,4 +1,4 @@
-import _ from "lodash";
+const _ = require("lodash");
 
 const {
   route_load_tests_config,
