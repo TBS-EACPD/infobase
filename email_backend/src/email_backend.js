@@ -13,6 +13,8 @@ import {
   make_email_body_from_completed_template,
 } from "./template_utils";
 
+import { log_email_and_meta_to_db } from "./db_utils";
+
 import { throttle_requests_by_client } from "./throttle_requests_by_client.js";
 
 const get_request_content = (request) =>
@@ -141,6 +143,17 @@ const make_email_backend = (templates) => {
         _.isEmpty(sent_mail_info.rejected);
       if (mail_sent_successfully) {
         response.send("200");
+
+        // Note: async func but not awaited, free up the function to keep handling requests in cases where the DB
+        // communication becomes a choke point. Also, this all happens post-reponse, so the client isn't waiting on
+        // DB write either
+        log_email_and_meta_to_db(
+          request,
+          template_name,
+          original_template,
+          completed_template,
+          email_config
+        ).catch(console.log);
       } else {
         const error_message = `Internal Server Error: mail was unable to send. ${
           sent_mail_info.err

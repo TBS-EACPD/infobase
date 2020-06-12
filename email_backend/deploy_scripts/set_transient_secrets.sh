@@ -43,3 +43,14 @@ echo "EMAIL_BACKEND_RECEIVING_ADDRESS: '$EMAIL_BACKEND_RECEIVING_ADDRESS'" >> $s
 echo "EMAIL_BACKEND_CLIENT_ID: '$EMAIL_BACKEND_CLIENT_ID'" >> $scratch/envs.yaml
 echo "EMAIL_BACKEND_CLIENT_SECRET: '$EMAIL_BACKEND_CLIENT_SECRET'" >> $scratch/envs.yaml
 echo "EMAIL_BACKEND_REFRESH_TOKEN: '$EMAIL_BACKEND_REFRESH_TOKEN'" >> $scratch/envs.yaml
+
+export MDB_NAME=$(lpass show EMAIL_BACKEND_MDB_NAME --notes)
+export MDB_CONNECT_STRING=$(lpass show EMAIL_BACKEND_MDB_CONNECT_STRING_3 --notes)
+export MDB_USERNAME=$(lpass show EMAIL_BACKEND_MDB_USER --notes)
+export MDB_PW=$(lpass show EMAIL_BACKEND_MDB_PW --notes)
+echo "MDB_NAME: '$MDB_NAME'" >> $scratch/envs.yaml
+echo "MDB_CONNECT_STRING: '$MDB_CONNECT_STRING'" >> $scratch/envs.yaml
+echo "MDB_USERNAME: '$MDB_USERNAME'" >> $scratch/envs.yaml
+echo "MDB_PW: '$MDB_PW'" >> $scratch/envs.yaml
+
+echo "USE_REMOTE_DB: '1'" >> $scratch/envs.yaml

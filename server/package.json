@@ -48,8 +48,9 @@
     "presnapshot_tests:update": "(export USE_TEST_DATA=1 && babel-node src/populate_db.js)",
     "snapshot_tests:update": "(export USE_TEST_DATA=1 && jest --coverage --forceExit --config jest_configs/snapshot_tests.config.js --updateSnapshot)",
     "postsnapshot_tests:update": "(babel-node src/populate_db.js)",
-    "unit_tests": "jest --coverage --forceExit  --config jest_configs/unit_tests.config.js",
+    "unit_tests": "jest --coverage --forceExit --config jest_configs/unit_tests.config.js",
     "unit_tests:watch": "jest --watch --config jest_configs/unit_tests.config.js",
+    "unit_tests:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --coverage --forceExit --config jest_configs/unit_tests.config.js",
     "merge_coverage_reports": "merge-coverage-reports --report ./coverage/*/coverage-final.json",
     "create_coverage_shield_badge": "create-coverage-shield-badge --report ./coverage/coverage-final.json > ./coverage/coverage-shield-badge.svg",
     "test": "(npm run unit_tests && npm run snapshot_tests && npm run merge_coverage_reports)",
@@ -64,7 +65,7 @@
     "populate_db:debug": "nodemon --watch ../data -e csv --exec babel-node --inspect src/populate_db.js",
     "prebuild": "rm -rf transpiled_build",
     "build": "babel src/ --out-dir transpiled_build --copy-files --ignore node_modules",
-    "mongod": "./mongo/start_mongod.sh"
+    "mongod": "sh ../scripts/dev_scripts/local_mongod.sh -p 27017"
   },
   "authors": [
     "Alex Cousineau-Leduc",
