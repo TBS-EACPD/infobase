@@ -1,4 +1,5 @@
-const _ = require("lodash");
+import _ from "lodash";
+
 const {
   route_load_tests_config,
 } = require("../../client/browser-tests/route-load-tests-config.js");
