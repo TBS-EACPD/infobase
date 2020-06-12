@@ -142,18 +142,6 @@ const change_map = {
 // [helpers](http://handlebarsjs.com/#helpers)
 //
 
-function subject_name(subject) {
-  if (subject.is("dept")) {
-    return !_.isEmpty(subject.applied_title)
-      ? subject.applied_title
-      : subject.name;
-  } else {
-    return subject.name;
-  }
-}
-
-Handlebars.registerHelper("subj_name", subject_name);
-
 const calc_direction = function (val) {
   return val === 0 ? "constant" : val > 0 ? "increase" : "decrease";
 };
