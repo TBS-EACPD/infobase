@@ -92,6 +92,19 @@ jobs:
             - ./dev-dbs-clean-for-these-branches.txt
           key: dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}
 
+  lighthouse:
+    working_directory: "~/InfoBase"
+    docker:
+      - image: markhobson/node-chrome:latest
+        <<: *dockerhub_auth
+    steps:
+      - checkout:
+          path: "~/InfoBase"
+      - run: npm install @lhci/cli@^0.4.1
+      - run:
+          name: lhci autorun
+          command: node ./node_modules/@lhci/cli/src/cli.js autorun --config ./scripts/ci_scripts/lighthouserc.js
+
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   build:
@@ -371,3 +384,6 @@ workflows:
             - test_end_to_end
             - deploy_server
           <<: *deploy_filter
+      - lighthouse:
+          requires:
+            - deploy_client
