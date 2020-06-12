@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 
+import text from "./canada.yaml";
 import { CanadaD3Component } from "./CanadaD3Component.js";
 
 import { StandardLegend } from "../legends";
@@ -8,7 +9,9 @@ import { hex_to_rgb } from "../../general_utils.js";
 import { secondaryColor, tertiaryColor } from "../../core/color_defs.js";
 import { run_template } from "../../models/text.js";
 import { businessConstants } from "../../models/businessConstants.js";
-import { trivial_text_maker } from "../../models/text.js";
+import { create_text_maker } from "../../models/text.js";
+
+const text_maker = create_text_maker(text);
 
 const { provinces } = businessConstants;
 
@@ -25,9 +28,9 @@ class CanadaGraphBarLegend extends React.Component {
     const { prov, data, years, formatter } = this.props;
 
     const province_graph_title = (prov) =>
-      `${trivial_text_maker("five_year_history")} ${
-        prov ? provinces[prov].text : "Canada"
-      }`;
+      text_maker("five_year_history", {
+        province: prov ? provinces[prov].text : text_maker("global"),
+      });
 
     const graph_data = _.chain(data)
       .map((data, ix) => ({
@@ -171,7 +174,7 @@ export class Canada extends React.Component {
       <div className="frow no-container">
         <div className="fcol-md-3">
           <StandardLegend
-            title={trivial_text_maker("legend")}
+            title={text_maker("legend")}
             items={legend_items}
             LegendCheckBoxProps={{ isSolidBox: true }}
           />

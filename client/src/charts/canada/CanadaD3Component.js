@@ -12,7 +12,7 @@
 
 import graphRegistry from "../graphRegistry.js";
 import { businessConstants } from "../../models/businessConstants.js";
-import { canada_svg } from "./canada.yaml";
+import { canada_svg } from "./canada_svg.yaml";
 
 const { provinces, provinces_short } = businessConstants;
 const canada_svg_text = canada_svg.text;
