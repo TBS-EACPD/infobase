@@ -6,7 +6,7 @@ import {
   create_text_maker_component,
   Format,
 } from "../misc_util_components.js";
-import { LegendList } from "../../charts/legends";
+import { LegendList } from "../../charts/legends/LegendList.js";
 
 import {
   DisplayTableCopyCsv,

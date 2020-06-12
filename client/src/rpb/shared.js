@@ -1,4 +1,4 @@
-import { TextMaker, text_maker } from "./rpb_text_provider.js";
+import { TextMaker } from "./rpb_text_provider.js";
 import { sources as all_sources } from "../metadata/data_sources.js";
 import {
   FancyUL,
