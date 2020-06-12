@@ -95,7 +95,7 @@ const index_lang_lookups = {
   },
   bonus_footer_list: {
     en: `
-     <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/contact.html">Contact us</a></li>
+     <li><a target="_self" rel="noopener noreferrer" href="#contact">Contact us</a></li>
      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/government/dept.html">Departments and agencies</a></li>
      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/government/publicservice.html">Public service and military</a></li>
      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en/news.html">News</a></li>

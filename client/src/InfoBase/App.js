@@ -48,6 +48,10 @@ const BudgetMeasuresRoute = retrying_react_lazy(() =>
 const About = retrying_react_lazy(() =>
   import(/* webpackChunkName: "About" */ "../about/about.js")
 );
+
+const Contact = retrying_react_lazy(() => 
+  import("../contact/contact.js")
+)
 const FAQ = retrying_react_lazy(() =>
   import(/* webpackChunkName: "FAQ" */ "../FAQ/FAQ.js")
 );
@@ -170,6 +174,7 @@ export class App extends React.Component {
               />
               <Route path="/rpb/:config?" component={ReportBuilder} />
               <Route path="/about" component={About} />
+              <Route path="/contact" component={Contact} />
               <Route path="/faq/:selected_qa_key?" component={FAQ} />
               <Route
                 path="/compare_estimates/:h7y_layout?"
