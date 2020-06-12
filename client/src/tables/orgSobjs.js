@@ -63,7 +63,6 @@ export default {
     _.each(std_years, (header, i) => {
       this.add_col({
         type: "big_int",
-        initial_visible: i === 4,
         nick: header,
         header: header,
         description: {

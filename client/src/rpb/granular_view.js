@@ -68,7 +68,7 @@ class GranularView extends React.Component {
         formatter: "wide-str",
       },
       ..._.chain(cols)
-        .map(({ nick, type, fully_qualified_name, initial_visible }, idx) => [
+        .map(({ nick, type, fully_qualified_name }, idx) => [
           nick,
           {
             index: idx + 1,
@@ -76,8 +76,6 @@ class GranularView extends React.Component {
             is_searchable: !is_matched_undefined(non_dept_key_cols, nick),
             is_summable: !is_matched_undefined(data_columns, nick),
             formatter: type,
-            initial_visible:
-              !is_matched_undefined(non_dept_key_cols, nick) || initial_visible,
           },
         ])
         .fromPairs()
@@ -109,7 +107,7 @@ class GranularView extends React.Component {
               <div key={`${group.id}_${child.filter}__${child.dimension}`}>
                 <input
                   type={"radio"}
-                  value={`${child.filter}__${child.dimension}`}
+                  id={`${child.filter}__${child.dimension}`}
                   name={"rpb_group_filter"}
                   key={`${child.filter}__${child.dimension}`}
                   onClick={() => {
@@ -143,7 +141,7 @@ class GranularView extends React.Component {
           closed_button_class_name={"btn-ib-light"}
           key={"rpb_group_data"}
           button_description={text_maker("group_data")}
-          custom_dropdown_trigger={`${text_maker("group_by")}: ${filter}`}
+          dropdown_trigger_txt={`${text_maker("group_by")}`}
           dropdown_content={dropdown_content}
         />
       ),

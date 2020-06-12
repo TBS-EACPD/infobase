@@ -54,7 +54,6 @@ export default {
     });
     _.each(std_years, (header, ix) => {
       this.add_col({
-        initial_visible: ix === 4,
         type: "big_int",
         nick: header,
         header: header,

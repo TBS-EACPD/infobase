@@ -1,3 +1,5 @@
+@import '../common_css/common-variables';
+
 .dropdown {
   position: relative;
   display: inline-block;
@@ -12,4 +14,12 @@
 }
 .dropdown__content__is-open {
   display: block;
+}
+.close-dropdown {
+  &:hover, &:hover .close-dropdown__x {
+    color: $tertiaryColor;
+  }
+}
+.close-dropdown__x {
+  color: $highlightColor;
 }

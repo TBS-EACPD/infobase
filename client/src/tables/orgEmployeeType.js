@@ -56,7 +56,6 @@ export default {
     _.each(people_years, (header, ix) => {
       this.add_col({
         type: "big_int",
-        initial_visible: ix === 4,
         nick: header,
         header: `${trivial_text_maker("fiscal_year_end")}, ${
           people_years_short_second[ix]
