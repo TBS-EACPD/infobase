@@ -78,7 +78,7 @@ jest.mock("./db_utils/index.js"); // eslint-disable-line no-undef
 import { connect_db, log_email_and_meta_to_db } from "./db_utils";
 connect_db.mockImplementation(_.noop);
 const mock_log_email_and_meta_to_db = log_email_and_meta_to_db.mockImplementation(
-  _.noop
+  () => ({ catch: _.noop })
 );
 
 // eslint-disable-next-line no-unused-vars
