@@ -5,24 +5,22 @@ const required_string = { type: String, required: true };
 const meta_schema_def = {
   to: required_string,
   from: required_string,
-  method: required_string,
-  requet_has_body: { type: Boolean, required: true },
   referer: required_string,
   server_time: { type: Date, required: true },
   date: required_string,
   time: required_string,
 };
-const get_meta_fields_for_log = (
-  { to, from },
-  { method, body, headers: { referer } }
-) => {
+const get_meta_fields_for_log = (email_config, request) => {
+  const { to, from } = email_config;
+  const {
+    headers: { referer },
+  } = request;
+
   const server_time = new Date();
 
   return {
     to,
     from,
-    method,
-    requet_has_body: !_.isEmpty(body),
     referer,
     server_time,
     date: server_time.toLocaleDateString("en-CA"),

@@ -9,10 +9,10 @@ mongoose.Schema.mockImplementation(actual_mongoose.Schema);
 mongoose.model.mockImplementation((name, schema) => {
   const model = actual_mongoose.model(name, schema);
 
-  model.create = async (obj) => {
+  model.create = async (record_obj) => {
     let validated = true;
     try {
-      await model.validate(obj);
+      await model.validate(record_obj);
     } catch (err) {
       validated = err;
     }
@@ -128,7 +128,7 @@ describe("log_email_and_meta_to_db", () => {
 
   it("Builds a mongoose model from the original template, constructs and saves a valid record based on the completed template", async () => {
     // The model.create call at the end of log_email_and_meta_to_db has been mocked out and replaced with model.validate
-    const final_Record_object_validated_against_constructed_model = await log_email_and_meta_to_db(
+    const final_record_object_validated_against_constructed_model = await log_email_and_meta_to_db(
       request,
       template_name,
       original_template,
@@ -137,7 +137,7 @@ describe("log_email_and_meta_to_db", () => {
     );
 
     return expect(
-      final_Record_object_validated_against_constructed_model
+      final_record_object_validated_against_constructed_model
     ).toEqual(true);
   });
 });
