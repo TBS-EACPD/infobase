@@ -82,10 +82,6 @@ program_crso_budget_measures_panel_text:
     Ces montants sont calculées selon la comptabilité de caisse, conformément au {{ext_link "Budget principal des dépenses 2018-2019" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal/2018-19-budget-depenses/2018-2019-provenance-utilisation-credit-execution-budget-ministere.html"}}..
     {{> "budget_measure_panel_tracker_link_fr"}}
 
-budget_panel_group_by:
-  en: Group by
-  fr: Grouper
-
 budget_panel_select_value:
   en: See values for
   fr: Voir les valeurs pour

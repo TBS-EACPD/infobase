@@ -95,7 +95,7 @@ export class BudgetMeasuresControls extends React.Component {
             </div>
             <div className="budget-measures-search-box">
               <DebouncedTextInput
-                additionalInputClasses={"search input-lg"}
+                inputClassName={"search input-lg"}
                 a11y_label={text_maker(
                   "budget_measure_filter_by_name_and_desc_a11y_label"
                 )}

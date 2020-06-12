@@ -10,6 +10,7 @@ import {
   CardTopImage,
   CardLeftImage,
   ContainerEscapeHatch,
+  TrinityItem,
 } from "../components/index.js";
 
 import { smart_href_template } from "../link_utils.js";
@@ -65,15 +66,6 @@ const FeaturedContentItem = ({
   </li>
 );
 
-const TrinityItem = ({ img_url, title, href }) => (
-  <a href={href} className="TrinityItem fcol-md-4">
-    <div className="TrinityItem__Title">{title}</div>
-    <div className="TrinityItem__Img">
-      <img aria-hidden="true" src={img_url} />
-    </div>
-  </a>
-);
-
 const HomeLayout = (props) => (
   <div className="home-root">
     <div
@@ -86,11 +78,33 @@ const HomeLayout = (props) => (
         <h1>
           <TM k="welcome" />
         </h1>
-        <h3>
+        <h3 style={{ marginTop: 0 }}>
           <TM k="home_sub_title" />
         </h3>
         <div className="flag">
           <img aria-hidden="true" src={get_static_url("svg/flagline.svg")} />
+        </div>
+        <div className="search-box">
+          <EverythingSearch
+            include_gov={false}
+            search_text={home_tm("everything_search_placeholder")}
+            large={true}
+            include_tags={true}
+            include_programs={true}
+            include_crsos={true}
+            include_tables={true}
+            include_glossary={true}
+            org_scope="all_orgs_with_gov"
+            href_template={(item) => smart_href_template(item, "/")}
+            onNewQuery={(query) => {
+              log_standard_event({
+                SUBAPP: "home",
+                SUBJECT_GUID: null,
+                MISC1: "home_search",
+                MISC2: query,
+              });
+            }}
+          />
         </div>
       </header>
     </div>
@@ -130,39 +144,12 @@ const HomeLayout = (props) => (
               tmf={home_tm}
               img_src={get_static_url("svg/compare-estimates-white.svg")}
               title_key="estimates_comp_home_title"
-              text_key="estimates_comp_home_text"
+              text_key="estimates_comp_home_text_supps"
               link_href="#compare_estimates"
             />
           </div>
         </div>
         <div className="fcol-md-5 featured-home-cols__primary">
-          <h2>
-            <TM k="home_search_bar_title" />
-          </h2>
-          <div className="search-box">
-            <div className="search-container home-search-container">
-              <EverythingSearch
-                include_gov={false}
-                search_text={home_tm("everything_search_placeholder")}
-                large={true}
-                include_tags={true}
-                include_programs={true}
-                include_crsos={true}
-                include_tables={true}
-                include_glossary={true}
-                org_scope="all_orgs_with_gov"
-                href_template={(item) => smart_href_template(item, "/")}
-                onNewQuery={(query) => {
-                  log_standard_event({
-                    SUBAPP: "home",
-                    SUBJECT_GUID: null,
-                    MISC1: "home_search",
-                    MISC2: query,
-                  });
-                }}
-              />
-            </div>
-          </div>
           <h2>
             <TM k="featured_data_title" />
           </h2>
@@ -232,7 +219,7 @@ const SubAppLayout = (props) => (
               tmf={home_tm}
               img_src={get_static_url("svg/compare-estimates.svg")}
               title_key="estimates_comp_home_title"
-              text_key="estimates_comp_home_text"
+              text_key="estimates_comp_home_text_supps"
               link_href="#compare_estimates"
             />
           </div>

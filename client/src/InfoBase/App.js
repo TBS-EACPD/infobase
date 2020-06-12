@@ -48,6 +48,9 @@ const BudgetMeasuresRoute = retrying_react_lazy(() =>
 const About = retrying_react_lazy(() =>
   import(/* webpackChunkName: "About" */ "../about/about.js")
 );
+const FAQ = retrying_react_lazy(() =>
+  import(/* webpackChunkName: "FAQ" */ "../FAQ/FAQ.js")
+);
 const MetaData = retrying_react_lazy(() =>
   import(/* webpackChunkName: "Metadata" */ "../metadata/metadata.js")
 );
@@ -104,6 +107,11 @@ const IndicatorPanel = retrying_react_lazy(() =>
 );
 const GraphiQL = retrying_react_lazy(() =>
   import(/* webpackChunkName: "GraphiQL" */ "../graphql_utils/GraphiQL.js")
+);
+const FootnoteInventory = retrying_react_lazy(() =>
+  import(
+    /* webpackChunkName: "FootnoteInventory" */ "../models/footnotes/FootnoteInventory.js"
+  )
 );
 
 export class App extends React.Component {
@@ -162,6 +170,7 @@ export class App extends React.Component {
               />
               <Route path="/rpb/:config?" component={ReportBuilder} />
               <Route path="/about" component={About} />
+              <Route path="/faq/:selected_qa_key?" component={FAQ} />
               <Route
                 path="/compare_estimates/:h7y_layout?"
                 component={EstimatesComparison}
@@ -185,6 +194,7 @@ export class App extends React.Component {
                 path="/panel-inventory/:level?/:panel?/:id?"
                 component={PanelInventory}
               />
+              <Route path="/footnote-inventory" component={FootnoteInventory} />
               <Route
                 path="/graphiql/:encoded_query?/:encoded_variables?"
                 component={GraphiQL}

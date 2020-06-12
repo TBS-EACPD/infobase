@@ -161,7 +161,7 @@ partition_popup_inst_form_name:
   text: |
     {{#if inst_form_name}}
       <div class='mrgn-bttm-md popup-row-bottom-border popup-font-m'>
-        <strong>{{gt "type"}}:</strong> {{inst_form_name}}
+        <strong>{{gt "inst_form"}}:</strong> {{inst_form_name}}
       </div>
     {{/if}}
 
@@ -384,7 +384,7 @@ partition_spending_will_be_value_and_rpb_link_partial:
   handlebars_partial: true
   text: |
     <p class='amount'>
-      <a data-toggle="tooltip" data-ibtt-text='{{gt "rbp_link_text"}}' class="partition-amount partition-link-out" href="#rpb/~(columns~(~'*7b*7b{{clean_year}}*7d*7d_estimates)~subject~'gov_gov~mode~'details~dimension~'by_estimates_doc~filter~'All~table~'orgVoteStatEstimates~preferDeptBreakout~true~descending~false{{rpb_filter}})">
+      <a data-toggle="tooltip" data-ibtt-text='{{gt "rbp_link_text"}}' class="partition-amount partition-link-out" href="#rpb/~(columns~(~'*7b*7b{{clean_year}}*7d*7d_estimates)~subject~'gov_gov~dimension~'by_estimates_doc~filter~'All~table~'orgVoteStatEstimates~descending~false{{rpb_filter}})">
         {{rawfmt_compact1 x}}
       </a>
     </p>
@@ -423,11 +423,11 @@ partition_org_info_by_min:
 partition_org_info_federal_orgs_by_inst_form:
   transform: [handlebars]
   text: |
-    {{gt "inst_form_filter"}} {{gt "by"}} {{gt "type"}}
+    {{gt "inst_form_filter"}} {{gt "by"}} {{gt "inst_form"}}
 partition_org_info_interests_by_inst_form:
   transform: [handlebars]
   text: |
-    {{gt "corp_int_filter"}} {{gt "by"}} {{gt "type"}}
+    {{gt "corp_int_filter"}} {{gt "by"}} {{gt "inst_form"}}
 partition_spending_data:
   transform: [handlebars]
   text: |

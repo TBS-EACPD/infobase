@@ -82,7 +82,7 @@ export const declare_employee_totals_panel = () =>
                         <tbody>
                           {slice.data.map((tooltip_item) => (
                             <tr key={tooltip_item.serie.id}>
-                              <td className="nivo-tooltip__content">
+                              <td className="nivo-tooltip__icon">
                                 <div
                                   style={{
                                     height: "12px",
@@ -91,14 +91,14 @@ export const declare_employee_totals_panel = () =>
                                   }}
                                 />
                               </td>
-                              <td className="nivo-tooltip__content">
+                              <td className="nivo-tooltip__label">
                                 {tooltip_item.serie.id}
                               </td>
-                              <td className="nivo-tooltip__content">
+                              <td className="nivo-tooltip__label">
                                 {tooltip_item.data.x}
                               </td>
                               <td
-                                className="nivo-tooltip__content"
+                                className="nivo-tooltip__value"
                                 dangerouslySetInnerHTML={{
                                   __html: formats.big_int(tooltip_item.data.y),
                                 }}

@@ -17,7 +17,8 @@ const promise_timeout_race = (
   return Promise.race([promise, timeout_promise]);
 };
 
-// mocking JUST nodemailer.createTransport, leaving everything else with its original implementation... is there a more direct way to do this?
+// mocking JUST nodemailer.createTransport, from nodemailer leaving everything else with its original implementation...
+// is there a more direct way to do this?
 jest.mock("nodemailer"); // eslint-disable-line no-undef
 import nodemailer from "nodemailer";
 const { ...actual_nodemailer } = jest.requireActual("nodemailer"); // eslint-disable-line no-undef
@@ -71,6 +72,14 @@ nodemailer.createTransport.mockImplementation((transport_config) => {
     },
   };
 });
+
+// not going to run a db for these end to end tests, mock away attempts to use it
+jest.mock("./db_utils/index.js"); // eslint-disable-line no-undef
+import { connect_db, log_email_and_meta_to_db } from "./db_utils";
+connect_db.mockImplementation(_.noop);
+const mock_log_email_and_meta_to_db = log_email_and_meta_to_db.mockImplementation(
+  () => ({ catch: _.noop })
+);
 
 // eslint-disable-next-line no-unused-vars
 import { email_backend } from "./index.js"; // Server's started as side effect of this import, kind of a GCloud Function thing although I could clean that up
@@ -168,14 +177,21 @@ describe("End-to-end tests for email_backend endpoints", () => {
 
   // this test is flaky due to its reliance on a third party service to validate submitted emails; the services is occasionally unresponsive
   it(
-    "/submit_email returns status 200 when a valid template is submitted",
+    "/submit_email returns status 200 and trys to log to db when a valid template is submitted",
     async () => {
+      // note: log_email_and_meta_to_db is mocked to a noop. Not testing that logging actually works at this level,
+      // just that the server tries to call log_email_and_meta_to_db when it is expected to
+      // TODO: should we also test that the correct args are at least passed? That's currently a testing gap
+
       const { status: ok } = await make_submit_email_request(
         test_template_name,
         completed_test_template
       );
 
-      return expect(ok).toBe(200);
+      return (
+        expect(ok).toBe(200) &&
+        expect(mock_log_email_and_meta_to_db).toBeCalledOnce()
+      );
     },
     // timeout on the async returning, just needs to be significantly longer than ethereal_timeout_limit. Shouldn't hit the Jest level timeout as the time-constraint in this test
     // is communications with ethereal, which is being timed out after ethereal_timeout_limit. If an ethereal_timeout_limit is hit, then this test flakes passingly (not great, but it

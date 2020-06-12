@@ -15,16 +15,18 @@ const initial_root_state = {
   userCollapsed: [],
 };
 
+function ids_to_update(root, should_expand) {
+  const get_ids_to_update = ({ isExpanded, id, children }) => [
+    (should_expand && !isExpanded) || (!should_expand && isExpanded) ? id : [],
+    _.map(children, get_ids_to_update),
+  ];
+  return _.flattenDeep(get_ids_to_update(root));
+}
+
 function root_reducer(state = initial_root_state, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case "switch_mode": {
-      const { scheme_key } = payload;
-
-      return { ...state, scheme_key, loading: false };
-    }
-
     case "toggle_node": {
       const { node } = payload;
 
@@ -71,6 +73,36 @@ function root_reducer(state = initial_root_state, action) {
       }
     }
 
+    case "expand_all": {
+      const { root } = payload;
+      const { userExpanded: oldExpanded } = state;
+
+      return {
+        ...state,
+        userExpanded: oldExpanded.concat(ids_to_update(root, true)),
+        userCollapsed: [],
+      };
+    }
+
+    case "collapse_all": {
+      const { root } = payload;
+      const { userCollapsed: oldCollapsed } = state;
+
+      return {
+        ...state,
+        userExpanded: [],
+        userCollapsed: oldCollapsed.concat(ids_to_update(root, false)),
+      };
+    }
+
+    case "clear_expanded_collapsed": {
+      return {
+        ...state,
+        userExpanded: [],
+        userCollapsed: [],
+      };
+    }
+
     default: {
       return state;
     }
@@ -108,22 +140,35 @@ const map_dispatch_to_root_props = (dispatch) => {
       payload: { node },
     });
 
-  const switch_mode = (scheme_key) =>
-    dispatch({
-      type: "switch_mode",
-      payload: { scheme_key },
-    });
-
   const clear_query = () => dispatch({ type: "clear_query" });
 
   const enable_loading = () => dispatch({ type: "enable_loading" });
 
+  const expand_all = (root) =>
+    dispatch({
+      type: "expand_all",
+      payload: { root },
+    });
+
+  const collapse_all = (root) =>
+    dispatch({
+      type: "collapse_all",
+      payload: { root },
+    });
+
+  const clear_expanded_collapsed = () =>
+    dispatch({
+      type: "clear_expanded_collapsed",
+    });
+
   return {
     set_query,
     toggle_node,
-    switch_mode,
     clear_query,
     enable_loading,
+    expand_all,
+    collapse_all,
+    clear_expanded_collapsed,
   };
 };
 
@@ -267,15 +312,43 @@ function get_memoized_funcs(schemes) {
       oldState.root.userExpanded !== state.root.userExpanded
     ) {
       //union the SYMMETRIC differences
-      const toToggle = _.union(
+      const potential_to_toggle = _.union(
         _.difference(oldState.root.userCollapsed, state.root.userCollapsed),
         _.difference(state.root.userCollapsed, oldState.root.userCollapsed),
         _.difference(oldState.root.userExpanded, state.root.userExpanded),
         _.difference(state.root.userExpanded, oldState.root.userExpanded)
       );
 
+      // IMPORTANT: expanded/collapsed state is stored in state.root, largely managed by explorer_common code.
+      // The actual set of nodes present in any explorer depends entirely on root.scheme state, which is
+      // entirely managed, and almost entirely up to, each individual explorer implementation. There is nothing
+      // in explorer_common to ensure that the ids in userCollapsed and userExpanded are in sync with the actual
+      // list of current nodes (stored here in oldFlatNodes). To avoid errors, we have to filter out stale ids
+      // from the root state before performing any action on them here; this avoids crashes but does NOT guarantee
+      // correct behaviour. Each implementation of an explorer will need to be responsible for keeping things in sync
+      // itself by dispatching clear_expanded_collapsed as needed...
+      // This is just more book keeping and boilerplate for each explorer to juggle. Yet another pain point that won't
+      // be addressed till it's all refactored
+
+      const current_node_ids = _.map(oldFlatNodes, "id");
+
+      const safe_to_toggle = _.intersection(
+        potential_to_toggle,
+        current_node_ids
+      );
+
+      if (!_.isEqual(potential_to_toggle, safe_to_toggle) && window.is_dev) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          `Some ids stored in this explorer implemntation's root.userCollapsed and root.userExpanded state do not
+          exist in the current set of rendered nodes. Explorer implementations should dispatch clear_expanded_collapsed
+          to keep things in sync when changes to their internal scheme sate result in a new set of nodes being displayed,
+          otherwise there may be unexpected behaviour if ids are not unique across schemes.`
+        );
+      }
+
       flat_nodes = _.reduce(
-        toToggle,
+        safe_to_toggle,
         (accumulator, node_id) =>
           toggleExpandedFlat(
             accumulator,

@@ -58,7 +58,7 @@ jobs:
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
-  cleanup_dev_dbs:
+  cleanup_dev_links:
     docker:
       - image: eaadtbs/ib-ci-test:v1.1
         <<: *dockerhub_auth
@@ -66,6 +66,9 @@ jobs:
     steps:
       - checkout:
           path: "~/InfoBase"
+      - run: ./scripts/ci_scripts/create_envs.sh
+
+      - run: ./scripts/ci_scripts/authenticate-client-gcloud.sh
 
       # only let this job run in the true repo
       - run: if [ "$CIRCLE_PROJECT_REPONAME" != "infobase" ]; then circleci-agent step halt; fi
@@ -79,7 +82,10 @@ jobs:
             - dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}
       - run:
           command: |
-            [ -f "./dev-dbs-clean-for-these-branches.txt" ] || (./scripts/ci_scripts/cleanup_dev_dbs.sh)
+            if [ ! -f "./dev-dbs-clean-for-these-branches.txt" ]; then
+              ./scripts/ci_scripts/cleanup_dev_dbs.sh
+              ./scripts/ci_scripts/cleanup_dev_links.sh
+            fi
       - run: touch ./dev-dbs-clean-for-these-branches.txt
       - save_cache:
           paths:
@@ -337,9 +343,9 @@ workflows:
     jobs:
       - test_email_backend
 
-  cleanup_dev_dbs:
+  cleanup_dev_links:
     jobs:
-      - cleanup_dev_dbs:
+      - cleanup_dev_links:
           <<: *deploy_filter
 
   # One workflow that runs all three job stages (build -> test -> deploy_data/server/client), each stage requiring

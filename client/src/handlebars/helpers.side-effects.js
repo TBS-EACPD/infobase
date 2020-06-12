@@ -693,7 +693,7 @@ Handlebars.registerHelper("ext_link", function (display, url, title) {
   if (url) {
     return new Handlebars.SafeString(
       `<a target="_blank" rel="noopener noreferrer" href="${url}" ${
-        title && `title="${title}"`
+        _.isString(title) ? `title="${title}"` : ""
       }>${display}</a>`
     );
   } else {
@@ -709,13 +709,17 @@ Handlebars.registerHelper("array_to_grammatical_list", function (options) {
 
   const item_array = _.chain(options).values().flatten().value();
 
-  return item_array.length === 1
-    ? item_array[0]
-    : _.chain(item_array)
-        .take(item_array.length - 1)
-        .reduce((list_fragment, item) => `${list_fragment}${item}, `, "")
-        .thru(
-          (list_fragment) => `${list_fragment}${and_et} ${_.last(item_array)}`
-        )
-        .value();
+  if (item_array.length === 1) {
+    return item_array[0];
+  } else if (item_array.length === 2) {
+    return `${item_array[0]} ${and_et} ${item_array[1]}`;
+  } else {
+    return _.chain(item_array)
+      .take(item_array.length - 1)
+      .reduce((list_fragment, item) => `${list_fragment}${item}, `, "")
+      .thru(
+        (list_fragment) => `${list_fragment}${and_et} ${_.last(item_array)}`
+      )
+      .value();
+  }
 });

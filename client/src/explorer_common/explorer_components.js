@@ -15,65 +15,6 @@ import { trivial_text_maker } from "../models/text.js";
 
 const INDENT_SIZE = 24;
 
-const example_col_defs = [
-  {
-    id: "name",
-    width: 250,
-    textAlign: "left",
-    header_display: "Name",
-    get_val: ({ data }) => data.name,
-  },
-  {
-    id: "spend",
-    width: 150,
-    textAlign: "right",
-    header_display: "Spending",
-    get_val: ({ data }) => data.spend,
-  },
-  {
-    id: "spend1",
-    width: 150,
-    textAlign: "right",
-    header_display: "Spending",
-    get_val: ({ data }) => data.spend,
-  },
-  {
-    id: "spend11",
-    width: 150,
-    textAlign: "right",
-    header_display: "Spending",
-    get_val: ({ data }) => data.spend,
-  },
-  {
-    id: "spend112",
-    width: 150,
-    textAlign: "right",
-    header_display: "Spending",
-    get_val: ({ data }) => data.spend,
-  },
-  {
-    id: "spend2",
-    width: 150,
-    textAlign: "right",
-    header_display: "Spending",
-    get_val: ({ data }) => data.spend,
-  },
-  {
-    id: "spend3",
-    width: 150,
-    textAlign: "right",
-    header_display: "Spending",
-    get_val: ({ data }) => data.spend,
-  },
-  {
-    id: "ftes",
-    width: 150,
-    textAlign: "right",
-    header_display: "FTEs",
-    get_val: ({ data }) => data.ftes,
-  },
-];
-
 function get_mod_class(node, sibling_index, explorer_context) {
   if (node.is_search_match) {
     return "ExplorerNode--search-match";
@@ -314,7 +255,7 @@ const compute_col_styles = createSelector(_.identity, (col_defs) => {
         }
         marginRight = "auto";
       } else {
-        if (ix === example_col_defs.length - 1) {
+        if (ix === col_defs.length - 1) {
           //last col
           padding = "0 10px 0 5px";
         } else {
@@ -365,7 +306,12 @@ export class Explorer extends React.Component {
   render() {
     const {
       config,
-      config: { column_defs, shouldHideHeader },
+      config: {
+        // array of config objects, options are {id, width, textAlign, header_display, get_val}. Note header_display
+        // is text or a React component, get_val is a function to extract display values from explorer nodes
+        column_defs,
+        shouldHideHeader,
+      },
       col_state,
       root,
     } = this.props;

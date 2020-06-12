@@ -68,7 +68,7 @@ our_story_sub_title_1:
 our_story_sub_text_1:
   transform: [handlebars, markdown]
   en: |
-    The GC InfoBase was developed in response to a {{ext_link "Parliamentary request" "http://www.ourcommons.ca/DocumentViewer/en/41-1/OGGO/report-7/page-144"}} for better access to 
+    The GC InfoBase was developed in response to {{ext_link "a Parliamentary request" "http://www.ourcommons.ca/DocumentViewer/en/41-1/OGGO/report-7/page-144"}} for better access to 
     information on government finances. Its ongoing development seeks to meet a public demand for simpler government reporting.
 
 
@@ -140,27 +140,6 @@ our_data_sub_text_2:
     Les chiffres ne disent pas tout! L’InfoBase du GC s’avère utile aux utilisateurs en présentant de l’information contextuelle avec les données. On s’efforce, de concert avec les 
     organisations gouvernementales, à expliquer des données intéressantes, telles qu’une hausse ou une baisse des dépenses, ou l’état d’un résultat escompté.
 
-our_data_sub_title_3:
-  en: How can I download the raw data?
-  fr: Comment puis-je télécharger les données brutes?
-
-our_data_sub_text_3:
-  transform: [handlebars, markdown]
-  en: |
-    The GC InfoBase presents its data in many different ways, but we know that some people prefer to access the data directly for the sake of their own more focused analysis. 
-    For these brave souls, we ensure that all InfoBase data is also available in raw form on the 
-    {{ext_link "Government of Canada Open Data Portal" "https://open.canada.ca/data/en/dataset?portal_type=dataset"}}.
-
-
-    Individual links to the corresponding Open Data datasets for each dataset in the GC InfoBase can be found on our [Datasets page](#metadata).
-  fr: |
-    L’InfoBase présente les données de diverses façons, mais nous savons que certains préfèrent avoir un accès direct aux données pour mener leur propre analyse. C’est pourquoi 
-    on veille à ce que toutes les données contenues dans l’outil figurent aussi sous forme brute dans le 
-    {{ext_link "Portail de données ouvertes du gouvernement du Canada" "https://ouvert.canada.ca/data/fr/dataset?portal_type=dataset"}}.
-
-
-    Les liens vers les ensembles de données ouvertes correspondant à chaque tableau de l’InfoBase se trouvent dans la [page sur les données](#metadata).
-
 behind_scenes_title:
   en: Behind the Scenes
   fr: Derrière la scène
@@ -170,13 +149,14 @@ behind_scenes_sub_title_1:
   fr: Quelles sont les technologies utilisées dans l’InfoBase du GC?
 
 behind_scenes_sub_text_1:
+  transform: [handlebars]
   en: |
-    The GC InfoBase is a single-page web application, built in-house and from scratch. It was developed using open-source libraries and standards (such as Bootstrap, webpack, YAML, 
-    handlebars.js, D3.js and React). The team keeps the iteration time between prototypes and production short. Having built it from the ground-up gives us the flexibility to experiment 
+    The GC InfoBase is a single-page web application, built in-house and from scratch. It was developed using open-source libraries and standards (such as React, Bootstrap, webpack, Sass, and GraphQL).
+    The team keeps the iteration time between prototypes and production short. Having built it from the ground-up gives us the flexibility to experiment 
     with new ways of displaying information and allows the GC InfoBase to be constantly evolving, meeting user’s growing needs and expectations.
   fr: |
     L’InfoBase du GC est une application Web-maison d’une seule page montée de toutes pièces. Elle a été développée à l’aide de normes et de bibliothèques logicielles en libre accès 
-    (comme Bootstrap, Webpack, YAML, handlebars.js, D3.js et React). L’équipe maintient un court délai d’itération entre les prototypes et la production. Comme la page est montée de toutes 
+    (comme React, Bootstrap, webpack, Sass, et GraphQL). L’équipe maintient un court délai d’itération entre les prototypes et la production. Comme la page est montée de toutes 
     pièces, nous sommes en mesure de mettre à l’essai de nouvelles présentations de l’information et de constamment faire évoluer l’InfoBase du GC pour répondre aux attentes et besoins 
     croissants des utilisateurs.
 
@@ -254,39 +234,3 @@ feedback_text:
     
     Pour tous resnseignement des médias ou questions sure l'InfoBase du GC, veuillez envoyez un courriel à
     <a href="mailto:publicenquiries-demandesderenseignement@tbs-sct.gc.ca">Demandes de renseignement</a>.
-
-about_video_title:
-  en: GC InfoBase at a glance (introduction video)
-  fr: InfoBase du GC en un coup d’œil (vidéo d'introduction)
-
-about_video_src:
-  en: https://www.youtube-nocookie.com/embed/WG1ngAI49Bw?rel=0
-  fr: https://www.youtube-nocookie.com/embed/RrvWQJsrSVk?rel=0
-
-about_video_transcript:
-  transform: [markdown]
-  en: |
-    **Welcome to GC InfoBase!**
-    * This is your go to source for information on government spending, employee statistics, and results against plans and priorities, to name a few.
-    * GC InfoBase answers your questions by transforming complex data into simple visual stories.
-    * Start with clicking on “Government at a Glance” to see how money flows from the Treasury Board toward a specific departmental program.
-    * From there, you can find links to customized infographics which are also available for all level of government, from the GoC down to specific programs.
-    * The Budget Tracker makes it possible to follow where public funds are going and how they will be spent!
-    * You can now track budget items as they move through the different approvals down to the programs delivering the services.
-    * InfoBase also allows you to find out how many organizations are part of the Government.
-    * The Report Builder allows you to filter, sort and export the data you want.
-    * As you can see, GC InfoBase can present data in whatever way works best for you.
-    * You can also find all the data in raw form on the Government of Canada Open Data Portal.
-    * Find more information on the team behind the tool, the technology used and ways to share your ideas.
-  fr: |
-    **Bienvenue dans l’InfoBase du GC.**
-    * L’InfoBase est votre première source d’information gouvernementale, entre autres sur les dépenses du gouvernement, les statistiques relatives aux employés et les résultats obtenus par rapport aux plans et aux priorités.
-    * L’InfoBase du GC répond à vos questions en transformant tout simplement des données complexes en descriptifs visuels.
-    * Commencez par cliquez sur « Panorama de l’administration publique » pour voir le cheminement de l’argent du centre vers un programme ministériel particulier.
-    * À partir de là, vous pouvez trouver des liens vers des infographies personnalisées, qui sont aussi à votre disposition à tous les paliers de l’administration publique, allant du gouvernement du Canada jusqu’à des programmes particuliers.
-    * Vous pouvez maintenant faire le suivi des postes budgétaires au fur et à mesure qu’ils passent d’une approbation à l’autre, jusqu’aux programmes de prestation de services.
-    * L’InfoBase vous permet également de savoir combien d’organisations font partie de l’appareil gouvernemental.
-    * Le générateur de rapports vous permet de filtrer, trier et exporter des données.
-    * Comme vous voyez, l’InfoBase du GC peut présenter les données de la façon qui vous convient le mieux.
-    * Vous pouvez également trouver toutes les données brutes sur le portail Gouvernement ouvert.
-    * Trouvez plus d’informations sur l’équipe derrière l’outil, la technologie et les moyens de nous transmettre vos idées.

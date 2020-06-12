@@ -1,6 +1,7 @@
-/*same as above Select component, but expects groups to be of the form
-  [ { id: group1, display: "Group 1", children : [ { id, display } , ... ] }, ... ]
+/*same as above Select component, but expects groups to be of the form	
+  [ { id: group1, display: "Group 1", children : [ { id, display } , ... ] }, ... ]	
 */
+
 const TwoLevelSelect = ({
   style,
   id,

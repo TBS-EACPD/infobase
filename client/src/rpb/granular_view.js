@@ -1,99 +1,21 @@
 import { TextMaker, text_maker } from "./rpb_text_provider.js";
+import { ReportDetails, ReportDatasets } from "./shared.js";
 import {
-  ReportDetails,
-  ReportDatasets,
-  ExportButton,
-  ShareReport,
-  NoDataMessage,
-} from "./shared.js";
-import {
-  TwoLevelSelect,
   LabeledBox,
   AlertBanner,
   DisplayTable,
+  Details,
+  DropdownMenu,
 } from "../components/index.js";
-import { LegendList } from "../charts/legends";
-import { Details } from "../components/Details.js";
 import { Subject } from "../models/subject.js";
 
-import classNames from "classnames";
-
 const { Dept } = Subject;
-const PAGE_SIZE = 600;
 
 class GranularView extends React.Component {
   render() {
-    const {
-      subject,
-      table,
-      dimension,
-      filter,
-      columns,
-
-      flat_data,
-      all_data_columns,
-      filters_by_dimension,
-
-      on_toggle_col_nick,
-      on_set_filter,
-    } = this.props;
-
+    const { subject, table } = this.props;
     return (
       <div>
-        <LabeledBox label={<TextMaker text_key="rpb_table_controls" />}>
-          <div className="row">
-            <div className="col-md-6">
-              <fieldset className="rpb-config-item col-selection simple">
-                <legend className="rpb-config-header">
-                  <TextMaker text_key="select_columns" />
-                </legend>
-                <LegendList
-                  items={_.map(
-                    all_data_columns,
-                    ({ nick, fully_qualified_name }) => ({
-                      id: nick,
-                      label: fully_qualified_name,
-                      active: _.includes(_.map(columns, "nick"), nick),
-                    })
-                  )}
-                  onClick={(id) => on_toggle_col_nick(id)}
-                />
-              </fieldset>
-            </div>
-            <div className="col-md-6">
-              <div className="rpb-config-item">
-                <label className="rpb-config-header" htmlFor="filt_select">
-                  {" "}
-                  Filter{" "}
-                </label>
-                <TwoLevelSelect
-                  className="form-control form-control-ib"
-                  id="filt_select"
-                  onSelect={(id) => {
-                    const [dim_key, filt_key] = id.split("__");
-                    on_set_filter({ filter: filt_key, dimension: dim_key });
-                  }}
-                  selected={dimension + "__" + filter}
-                  grouped_options={_.mapValues(
-                    filters_by_dimension,
-                    (filter_by_dim) => ({
-                      ...filter_by_dim,
-                      children: _.sortBy(filter_by_dim.children, "display"),
-                    })
-                  )}
-                />
-              </div>
-              <div className="rpb-config-item">
-                <ExportButton
-                  id="export_button"
-                  get_csv_string={() => this.get_csv_string()}
-                />
-              </div>
-              <ShareReport />
-            </div>
-            <div className="clearfix" />
-          </div>
-        </LabeledBox>
         <LabeledBox
           label={
             <TextMaker
@@ -115,29 +37,22 @@ class GranularView extends React.Component {
           <ReportDatasets {...this.props} />
         </LabeledBox>
         {table.rpb_banner && <AlertBanner>{table.rpb_banner}</AlertBanner>}
-        <div id="rpb-main-content">
-          {_.isEmpty(flat_data) ? (
-            <NoDataMessage />
-          ) : (
-            this.get_plain_table_content()
-          )}
-        </div>
+        <div id="rpb-main-content">{this.get_table_content()}</div>
       </div>
     );
   }
 
-  get_plain_table_content(excel_mode = false) {
+  get_table_content() {
     const {
       columns: data_columns,
-      page_num,
       flat_data,
       sorted_key_columns,
 
-      on_set_page,
+      on_set_filter,
+      filters_by_dimension,
+      dimension,
+      filter,
     } = this.props;
-
-    const pages = _.chunk(flat_data, PAGE_SIZE);
-    const shown_rows = pages[page_num];
 
     const non_dept_key_cols = _.reject(sorted_key_columns, { nick: "dept" });
 
@@ -166,7 +81,7 @@ class GranularView extends React.Component {
         .fromPairs()
         .value(),
     };
-    const table_data = _.map(shown_rows, (row) => ({
+    const table_data = _.map(flat_data, (row) => ({
       dept: Dept.lookup(row.dept).name,
       ..._.chain(cols)
         .map(({ nick }) => [nick, row[nick]])
@@ -174,90 +89,71 @@ class GranularView extends React.Component {
         .value(),
     }));
 
-    return (
-      <div>
-        <DisplayTable data={table_data} column_configs={column_configs} />
-
-        {!excel_mode && pages.length > 1 && (
-          <div className="pagination-container">
-            {window.is_a11y_mode && (
-              <p>
-                <TextMaker
-                  text_key="pagination_a11y"
-                  args={{ current: page_num, total: pages.length }}
+    const group_filter_options = _.map(
+      filters_by_dimension,
+      (filter_by_dim) => ({
+        ...filter_by_dim,
+        children: _.sortBy(filter_by_dim.children, "display"),
+      })
+    );
+    const dropdown_content = (
+      <div className="group_filter_dropdown">
+        {_.map(group_filter_options, (group) => (
+          <div style={{ marginBottom: 10 }} key={group.id}>
+            <span key={group.id} style={{ fontWeight: 700 }}>
+              {group.display}
+            </span>
+            {_.map(group.children, (child) => (
+              <div key={`${group.id}_${child.filter}__${child.dimension}`}>
+                <input
+                  type={"radio"}
+                  id={`${child.filter}__${child.dimension}`}
+                  name={"rpb_group_filter"}
+                  key={`${child.filter}__${child.dimension}`}
+                  onClick={() => {
+                    on_set_filter({
+                      filter: child.filter,
+                      dimension: child.dimension,
+                    });
+                  }}
+                  defaultChecked={
+                    child.filter === filter && child.dimension === dimension
+                  }
                 />
-              </p>
-            )}
-            <ul className="pagination">
-              {_.map(pages, (data, ix) => (
-                <li
-                  key={ix}
-                  className={classNames(ix === page_num && "active")}
+                <label
+                  htmlFor={`${child.filter}__${child.dimension}`}
+                  className={"normal-radio-btn-label"}
+                  key={child.display}
                 >
-                  <span
-                    tabIndex={0}
-                    style={
-                      ix === page_num
-                        ? {
-                            color:
-                              window.infobase_color_constants.textLightColor,
-                          }
-                        : null
-                    }
-                    disabled={page_num === ix}
-                    role="button"
-                    onClick={
-                      ix === page_num
-                        ? null
-                        : () => {
-                            on_set_page(ix);
-                            this.refs.table.focus();
-                          }
-                    }
-                    onKeyDown={
-                      ix === page_num
-                        ? null
-                        : (e) => {
-                            if (e.keyCode === 13 || e.keyCode === 32) {
-                              on_set_page(ix);
-                              this.refs.table.focus();
-                            }
-                          }
-                    }
-                  >
-                    {ix + 1}
-                  </span>
-                </li>
-              ))}
-            </ul>
+                  {child.display}
+                </label>
+              </div>
+            ))}
           </div>
-        )}
+        ))}
       </div>
     );
-  }
 
-  get_csv_string() {
-    const { flat_data, sorted_key_columns, columns } = this.props;
+    const display_table_custom_util = {
+      rpb_group_data: (
+        <DropdownMenu
+          opened_button_class_name={"btn-ib-light--reversed"}
+          closed_button_class_name={"btn-ib-light"}
+          key={"rpb_group_data"}
+          button_description={text_maker("group_data")}
+          dropdown_trigger_txt={`${text_maker("group_by")}`}
+          dropdown_content={dropdown_content}
+        />
+      ),
+    };
 
-    const non_dept_key_columns = _.reject(sorted_key_columns, { nick: "dept" });
-
-    const cols = ["dept", ...non_dept_key_columns, ...columns];
-
-    const headers = [
-      text_maker("org"),
-      ..._.map([...non_dept_key_columns, ...columns], "fully_qualified_name"),
-    ];
-
-    const array_based_rows = _.chain(flat_data)
-      .map((row) =>
-        _.map(cols, (col) =>
-          col === "dept" ? Dept.lookup(row.dept).name : row[col.nick]
-        )
-      )
-      .value();
-
-    const headers_and_rows = [headers].concat(array_based_rows);
-    return d3.csvFormatRows(headers_and_rows);
+    return (
+      <DisplayTable
+        data={table_data}
+        column_configs={column_configs}
+        util_components={display_table_custom_util}
+      />
+    );
   }
 }
 

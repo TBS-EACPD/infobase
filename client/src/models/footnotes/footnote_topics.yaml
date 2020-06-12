@@ -1,0 +1,141 @@
+QFR:
+  en: Quarterly Financial Reports (QFRs)
+  fr: Rapports financiers trimestriels (RFT)
+
+PA:
+  en: Public Accounts of Canada
+  fr: Comptes publics du Canada
+
+EST_PROC:
+  en: Estimates process
+  fr: Processus du budget des dépenses
+
+AUTH:
+  en: Authorities
+  fr: Autorisations
+
+VOTED:
+  en: Voted amounts
+  fr: Montants votés
+
+STAT:
+  en: Statutory authorities
+  fr: Autorisations législatives
+
+EXP:
+  en: Expenditures
+  fr: Dépenses
+
+PLANNED_EXP:
+  en: Planned spending
+  fr: Dépenses prévues
+
+FTE:
+  en: Full-Time Equivalents (FTEs)
+  fr: Équivalents temps plein (ETP)
+
+PLANNED_FTE:
+  en: Planned Full-Time Equivalents (FTEs)
+  fr: Équivalents temps plein (ETP) prévus
+
+DRR_EXP:
+  en: Variance explanation - actual spending 
+  fr: Explication de l'écart - dépenses réelles
+DRR_FTE:
+  en: Variance explanation - actual FTEs
+  fr: Explication de l'écart - ETP réelles
+
+DP_EXP:
+  en: Variance explanation - planned spending
+  fr: Explication de l'écart - dépenses prévues
+DP_FTE:
+  en: Variance explanation - planned FTEs
+  fr: Explication de l'écart - ETP prévus
+
+SOBJ10:
+  en: Transfer payments
+  fr: Paiements de transfert
+
+PEOPLE:
+  en: Data about Public Servants
+  fr: Données sur les fonctionaires
+
+FPS:
+  en: Federal Public Service (FPS)
+  fr: Fonction publique fédérale (FPF)
+
+GENDER:
+  en: Employee gender
+  fr: Sexe des employés
+
+AGE:
+  en: Employee age
+  fr: Âge des employés
+
+GOV_FRAM:
+  en: Whole-of-government framework
+  fr: Cadre pangouvernemental
+
+SOBJ:
+  en: Standard Objects
+  fr: Articles courants
+
+PROG:
+  en: Program
+  fr: Programme
+
+GEO:
+  en: Geographic Data
+  fr: Données géographique
+
+TP_GEO:
+  en: Transfer Payments by Recipient Region
+  fr: Paiements de transfert par région du bénéficiaire
+
+FOL:
+  en: First Official Language
+  fr: Première langue officielle
+
+PLAN_DATA:
+  en: Planning Data
+  fr: Données relatives à la planification
+
+ESTIMATES:
+  en: Estimates
+  fr: Budget des dépenses
+
+EX_LVL:
+  en: Executive level
+  fr: Niveaux des cadres supérieurs
+
+SUPPRESSED_DATA:
+  en: Suppressed data
+  fr: Données supprimées
+
+GOCO:
+  en: Government of Canada Spending areas and Activities
+  fr: Secteurs de dépenses et d’activités du gouvernement du Canada
+
+ANNUAL:
+  en: Annual
+  fr: Annuelle
+
+QUARTERLY:
+  en: Quarterly
+  fr: Trimestrielle
+
+DP:
+  en: Departmental Plans
+  fr: Plans ministériels
+
+DRR:
+  en: Departmental Results Reports
+  fr: Rapport sur les résultats ministériels
+
+MACHINERY:
+  en: Machinery of Government Changes
+  fr: Changement à l'appareil gouvernemental
+
+ANY:
+  en: Any
+  fr: Tout

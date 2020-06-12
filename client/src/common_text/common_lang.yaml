@@ -32,6 +32,9 @@ lang_select:
 grouped:
   en: Grouped
   fr: Groupés
+group_by:
+  en: Group by
+  fr: Grouper
 spend_area:
   en: Spending Area
   fr: Secteur de dépenses
@@ -270,9 +273,6 @@ ministry:
 ministries:
   en: Ministerial Portfolios
   fr: Portefeuilles ministériels
-another_org_search:
-  en: Search for another organization
-  fr: Recherche concernant une autre organisation
 no_data:
   en: No data available for this table
   fr: Aucune donnée n'est disponible pour ce tableau
@@ -318,9 +318,12 @@ org_search:
 all_orgs_with_data:
   en: Organizations with data
   fr: Organisations avec des données
-other:
+other_s:
   en: Other(s)
   fr: Autre(s)
+other:
+  en: Other
+  fr: Autre
 rank:
   en: Rank
   fr: Rang
@@ -429,6 +432,7 @@ value:
 percentage:
   en: Percentage
   fr: Pourcentage
+
 
 #######################################
 # Data types
@@ -725,8 +729,8 @@ tabled_estimates:
 supps_a:
    transform: [handlebars]
    en: |
-     {{est_last_year}} Supplementary Estimates A
-   fr: Budget supplémentaire des dépenses (A) {{est_last_year}}
+     {{est_in_year}} Supplementary Estimates A
+   fr: Budget supplémentaire des dépenses (A) {{est_in_year}}
 
 supps_b:
   transform: [handlebars]

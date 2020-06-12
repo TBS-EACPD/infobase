@@ -1,7 +1,7 @@
 import "./LegendList.scss";
 
 import classNames from "classnames";
-import { CheckBox } from "../../components/index.js";
+import { CheckBox } from "../../components/CheckBox.js";
 
 export const LegendList = ({
   isHorizontal = false,

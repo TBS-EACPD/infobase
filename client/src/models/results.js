@@ -12,6 +12,9 @@ const { year_to_fiscal_year } = formats;
 
 //currently only supports dept, crso, programs
 function _get_flat_results(subject) {
+  if (subject.is_fake) {
+    return [];
+  }
   switch (subject.level) {
     case "program":
       return _.chain(Result.get_entity_results(subject.id))

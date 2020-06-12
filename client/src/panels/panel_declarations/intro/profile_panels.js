@@ -35,7 +35,7 @@ export const declare_profile_panel = () =>
                   ["end_yr", subject.end_yr],
                   ["notes", subject.notes],
                   ["incorp_yr", subject.incorp_yr],
-                  ["type", subject.type],
+                  ["inst_form", subject.type],
                   [
                     "website",
                     !subject.is_dead && subject.website_url && (

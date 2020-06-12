@@ -14,8 +14,13 @@ const static_subject_store_with_API_data = () =>
 
 const Gov = {
   constructor: {
-    type_name: "gov",
+    subject_type: "gov",
+    singular: trivial_text_maker("goc"),
+    plural: trivial_text_maker("goc"),
   },
+  subject_type: "gov",
+  singular: trivial_text_maker("goc"),
+  plural: trivial_text_maker("goc"),
   id: "gov",
   guid: "gov_gov",
   is(comparator) {
@@ -37,7 +42,7 @@ const Gov = {
 };
 
 const Ministry = class Ministry extends static_subject_store() {
-  static get type_name() {
+  static get subject_type() {
     return "ministry";
   }
   static get singular() {
@@ -65,7 +70,7 @@ const Dept = class Dept extends static_subject_store_with_API_data() {
   static lookup(org_id) {
     return super.lookup(_.isNaN(+org_id) ? org_id : +org_id);
   }
-  static get type_name() {
+  static get subject_type() {
     return "dept";
   }
   static get singular() {
@@ -210,14 +215,30 @@ const Dept = class Dept extends static_subject_store_with_API_data() {
 };
 
 const CRSO = class CRSO extends static_subject_store_with_API_data() {
+  static get subject_type() {
+    return "crso";
+  }
   static get singular() {
-    return trivial_text_maker("");
+    return trivial_text_maker("core_resp");
   }
   static get plural() {
-    return trivial_text_maker("");
+    return trivial_text_maker("core_resps");
   }
-  static get type_name() {
-    return "crso";
+  // subject class getters always return CR, instance funcs below are type sensitive
+  // fine for now, something to clean up when we finally drop SO's
+  singular() {
+    if (this.is_cr) {
+      return trivial_text_maker("core_resp");
+    } else {
+      return trivial_text_maker("strategic_outcome");
+    }
+  }
+  plural() {
+    if (this.is_cr) {
+      return trivial_text_maker("core_resps");
+    } else {
+      return trivial_text_maker("strategic_outcomes");
+    }
   }
   static get_from_id(crso_id) {
     return this.lookup(crso_id);
@@ -237,20 +258,6 @@ const CRSO = class CRSO extends static_subject_store_with_API_data() {
       attrs
     );
   }
-  singular() {
-    if (this.is_cr) {
-      return trivial_text_maker("core_resp");
-    } else {
-      return trivial_text_maker("strategic_outcome");
-    }
-  }
-  plural() {
-    if (this.is_cr) {
-      return trivial_text_maker("core_resps");
-    } else {
-      return trivial_text_maker("strategic_outcomes");
-    }
-  }
   get has_planned_spending() {
     return _.some(this.programs, (program) => program.has_planned_spending);
   }
@@ -263,7 +270,7 @@ const CRSO = class CRSO extends static_subject_store_with_API_data() {
 };
 
 const Program = class Program extends static_subject_store_with_API_data() {
-  static get type_name() {
+  static get subject_type() {
     return "program";
   }
   static get singular() {
@@ -312,7 +319,7 @@ const Program = class Program extends static_subject_store_with_API_data() {
 
 //Currently doesnt do anything, not even link to other departments
 const Minister = class Minister extends static_subject_store() {
-  static get type_name() {
+  static get subject_type() {
     return "minister";
   }
   static get singular() {
@@ -336,6 +343,15 @@ const Minister = class Minister extends static_subject_store() {
 };
 
 const InstForm = class InstForm extends static_subject_store() {
+  static get subject_type() {
+    return "inst_form";
+  }
+  static get singular() {
+    return trivial_text_maker("inst_form");
+  }
+  static get plural() {
+    return trivial_text_maker("inst_forms");
+  }
   static grandparent_forms() {
     return _.filter(this.get_all(), (obj) => _.isEmpty(obj.parent_forms));
   }
@@ -363,12 +379,6 @@ const InstForm = class InstForm extends static_subject_store() {
       children_forms: [],
       orgs: [],
     });
-  }
-  singular() {
-    throw "TODO";
-  }
-  plural() {
-    throw "TODO";
   }
 };
 

@@ -76,7 +76,6 @@ export default {
     _.each(std_years, (header, ix) => {
       this.add_col({
         type: "big_int",
-        simple_default: ix === 4,
         nick: header,
         header: {
           en: header + "  " + m("Actual FTEs"),

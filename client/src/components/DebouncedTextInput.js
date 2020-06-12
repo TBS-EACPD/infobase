@@ -48,7 +48,7 @@ class DebouncedTextInput extends React.Component {
 
 DebouncedTextInput.defaultProps = {
   debounceTime: 500,
-  additionalInputClasses: "input-lg",
+  inputClassName: "input-lg",
 };
 
 export { DebouncedTextInput };

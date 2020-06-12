@@ -72,7 +72,6 @@ export default {
     years.forEach((yr) => {
       this.add_col({
         type: "big_int",
-        simple_default: true,
         nick: yr,
         header: yr,
         description: {

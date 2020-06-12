@@ -19,16 +19,7 @@ const rpb_link = (naive_state, first_character = "#") =>
     .pickBy(
       (value, key) =>
         _.includes(
-          [
-            "columns",
-            "subject",
-            "mode",
-            "dimension",
-            "table",
-            "preferDeptBreakout",
-            "preferTable",
-            "filter",
-          ],
+          ["columns", "subject", "dimension", "table", "filter"],
           key
         ) ||
         (key === "broken_url" && value) // need to store broken_url in route state while true so it isn't lost, fine to drop it once it has been cleared (becomes false) to keep the URL clean

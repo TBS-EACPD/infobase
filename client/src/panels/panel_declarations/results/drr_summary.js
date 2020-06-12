@@ -273,6 +273,7 @@ class PercentageViz extends React.Component {
                 bottom: 30,
                 left: 30,
               }}
+              show_legend={false}
             />
           </div>
         </div>

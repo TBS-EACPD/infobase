@@ -4,3 +4,10 @@ bubble_title:
     Portion (**{{inner}}**) compared to total (**{{outer}}**)
   fr: |
     Portion (**{{inner}}**) par rapport au total (**{{outer}}**)
+
+raw_bubble_title:
+  transform: [handlebars]
+  en: |
+    Portion ({{inner}}) compared to total ({{outer}})
+  fr: |
+    Portion ({{inner}}) par rapport au total ({{outer}})

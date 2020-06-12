@@ -29,7 +29,7 @@ const render_w_options = ({ graph_col, text_col, text_key }) => ({
       </Col>
       {!window.is_a11y_mode && (
         <Col isGraph size={graph_col}>
-          <NivoResponsivePie data={data} legend_data={data} />
+          <NivoResponsivePie data={data} />
         </Col>
       )}
     </StdPanel>
