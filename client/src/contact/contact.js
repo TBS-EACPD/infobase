@@ -7,17 +7,18 @@ const text_maker = create_text_maker(contact_us_bundle)
 
 export default class Contact extends React.Component {
   render() {
-    console.log("tes")
+    console.log("test")
     return (
       <StandardRouteContainer
         title={text_maker("contact_us_title")}
         breadcrumbs={[text_maker("contact_us_title")]}
-        description={"about_intro_section"}
+        description={text_maker("contact_us_intro")}
         route_key="_contact"
       >
         <div className="medium_panel_text text-only-page-root">
           <TM tmf={text_maker} el="h1" k="contact_us_title"/>
-          awryrtwxc
+          <TM tmf={text_maker} el="div" k="contact_us_intro"/>
+          {/* <TM tmf={text_maker} el="div" k="contact_us_questions_email"/> */}
         </div>
       </StandardRouteContainer>
     );
