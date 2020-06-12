@@ -99,7 +99,7 @@ class GranularView extends React.Component {
     const dropdown_content = (
       <div className="group_filter_dropdown">
         {_.map(group_filter_options, (group) => (
-          <div key={group.id}>
+          <div style={{ marginBottom: 10 }} key={group.id}>
             <span key={group.id} style={{ fontWeight: 700 }}>
               {group.display}
             </span>
