@@ -7,7 +7,6 @@ const text_maker = create_text_maker(contact_us_bundle)
 
 export default class Contact extends React.Component {
   render() {
-    console.log("tes")
     return (
       <StandardRouteContainer
         title={text_maker("contact_us_title")}
