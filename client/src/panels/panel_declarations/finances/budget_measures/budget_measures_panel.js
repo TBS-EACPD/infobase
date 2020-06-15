@@ -212,6 +212,7 @@ const budget_measure_render = function ({ calculations, footnotes, sources }) {
         footnotes: _.compact([
           ...footnotes,
           _.includes(["gov", 133, 55], panel_args.subject.id) && {
+            subject: panel_args.subject,
             text: text_maker("budget2019_biv_includes_excludes_note"),
           },
         ]),
