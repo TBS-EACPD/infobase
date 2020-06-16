@@ -17,7 +17,7 @@ module.exports = {
     upload: {
       target: "lhci",
       serverBaseUrl: "https://infobase-lhci.herokuapp.com/",
-      token: "554e44e8-3fcb-46ba-8444-9cb54850bc72", // could also use LHCI_TOKEN variable instead
+      token: process.env.LHCI_TOKEN,
     },
   },
 };
