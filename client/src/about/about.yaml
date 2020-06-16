@@ -220,7 +220,7 @@ feedback_title:
 feedback_text:
   transform: [handlebars, markdown]
   en: |
-    Please visit the <a href="#contact">Contact Us</a> page for more information!
+    Please visit the <a href="#contact">Contact Us</a> page for more information.
 
   fr: |
-    S'il vous plait visitez la page <a href="#contact">Contactez-Nous</a> pour plus de renseignement.
+    S'il vous plaît visitez la page <a href="#contact">Contactez-Nous</a> pour plus de renseignement.
