@@ -20,10 +20,10 @@ export default class Contact extends React.Component {
           <TM tmf={text_maker} el="h2" k="feedback_title"/>
           <TM tmf={text_maker} el="div" k="feedback_text"/>
           <TM tmf={text_maker} el="h2" k="general_enquiries_title"/>
-          <TM tmf={text_maker} el="div" k="general_enquiries_sub_text_1"/>
-          <TM tmf={text_maker} el="div" k="general_enquiries_sub_text_2"/>
-          <TM tmf={text_maker} el="div" k="general_enquiries_sub_text_3"/>
-          <TM tmf={text_maker} el="div" k="general_enquiries_sub_text_4"/>
+          <TM tmf={text_maker} el="div" k="general_enquiries_text"/>
+          <TM tmf={text_maker} el="div" k="general_enquiries_contact"/>
+          <TM tmf={text_maker} el="div" k="general_enquiries_social_media"/>
+          <TM tmf={text_maker} el="div" k="general_enquiries_address"/>
         </div>
       </StandardRouteContainer>
     );

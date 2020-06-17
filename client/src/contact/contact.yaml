@@ -34,7 +34,7 @@ general_enquiries_title:
   en: General and Technical Enquiries
   fr: Questions de nature generale et techniques
 
-general_enquiries_sub_text_1:
+general_enquiries_text:
   transform: [handlebars, markdown]
   en: |
     Provision of the information requested on this form is voluntary. The information is being collected for the purpose of responding to your query/comments, 
@@ -47,7 +47,7 @@ general_enquiries_sub_text_1:
     personnels et seront conservées dans le répertoire des {{ext_link "POU 914 Communications publiques" "http://www.infosource.gc.ca/emp/emp03-fra.asp#pou914"}}. 
     La Loi vous donne le droit de consulter vos renseignements personnels.
 
-general_enquiries_sub_text_2:
+general_enquiries_contact:
   transform: [markdown]
   en: |
     Email: <a href="mailto:publicenquiries-demandesderenseignement@tbs-sct.gc.ca">Public Enquiries</a><br/>
@@ -58,7 +58,7 @@ general_enquiries_sub_text_2:
     Sans frais: 1-877-636-0656<br/>
     Telescripteur (ATS): 613-369-9371
 
-general_enquiries_sub_text_3:
+general_enquiries_social_media:
   transform: [handlebars, markdown]
   en: |
     You can also reach us through social media at the following channels:<br/>
@@ -71,7 +71,7 @@ general_enquiries_sub_text_3:
     {{ext_link "Facebook" "https://www.facebook.com/Votregouvernementaloeuvre/"}}<br/>
     {{ext_link "LinkedIn" "https://www.linkedin.com/company/tbs-sct/"}}
 
-general_enquiries_sub_text_4:
+general_enquiries_address:
   transform: [markdown]
   en: |
     Treasury Board of Canada Secretariat<br/>
