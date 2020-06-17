@@ -8,6 +8,7 @@ sql_cmd_branch_conditional=${sql_cmd_branches_with_suffix:0:$((${#sql_cmd_branch
 
 DATABASE_URL=$(heroku config -s --app infobase-lhci | cut -d \' -f2)
 inactive_build_ids=$(psql $DATABASE_URL -t -c "SELECT id FROM public.builds WHERE $sql_cmd_branch_conditional")
+inactive_build_ids=$(xargs <<< $inactive_build_ids)
 if [ -z "$inactive_build_ids" ]; then
   echo "No inactive builds in heroku psql DB"
 else
