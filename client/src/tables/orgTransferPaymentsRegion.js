@@ -7,7 +7,7 @@ const { std_years } = year_templates;
 export default {
   text,
   id: "orgTransferPaymentsRegion",
-  source: ["PA"],
+  source: ["RTP", "PA"],
   tags: ["TP_GEO", "SOBJ10"],
 
   link: {

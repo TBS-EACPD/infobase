@@ -1,5 +1,10 @@
 const featured_content_items = _.compact([
   {
+    text_key: "quick_link_tp_by_region",
+    href: "#orgs/gov/gov/infograph/financial/.-.-(panel_key.-.-'tp_by_region)",
+    is_new: "true",
+  },
+  {
     text_key: "supps_a",
     href: "#compare_estimates",
     is_new: "true",
@@ -19,14 +24,6 @@ const featured_content_items = _.compact([
   {
     text_key: "supps_b",
     href: "#partition/est_doc_seb/estimates",
-  },
-  {
-    text_key: "quick_link_spending_by_program",
-    href: "#partition/dept/exp",
-  },
-  {
-    text_key: "quick_link_ftes_by_program",
-    href: "#partition/dept/fte",
   },
   {
     text_key: "igoc",

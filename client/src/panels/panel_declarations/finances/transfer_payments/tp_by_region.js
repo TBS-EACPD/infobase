@@ -23,7 +23,7 @@ const { std_years } = year_templates;
 const formatter = formats["compact2_raw"];
 
 const { text_maker, TM } = create_text_maker_component(text);
-const { provinces, de_provinces } = businessConstants;
+const { provinces, le_provinces, de_provinces } = businessConstants;
 
 const load_population_data = () =>
   make_request(
@@ -60,6 +60,7 @@ const get_text_args = (subject, transfer_payment_data, per_capita_data) => {
     .last()
     .value();
   const largest_total_prov = provinces[largest_total_prov_code].text;
+  const le_largest_total_prov = le_provinces[largest_total_prov_code].text;
   const de_largest_total_prov = de_provinces[largest_total_prov_code].text;
   const largest_total_percent = largest_total_value / subject_total_value;
 
@@ -76,6 +77,8 @@ const get_text_args = (subject, transfer_payment_data, per_capita_data) => {
     : [false, false];
   const largest_per_capita_prov =
     show_per_capita_data && provinces[largest_per_capita_prov_code].text;
+  const le_largest_per_capita_prov =
+    show_per_capita_data && le_provinces[largest_per_capita_prov_code].text;
 
   const compare_per_capita_to_largest_total =
     show_per_capita_data &&
@@ -93,12 +96,14 @@ const get_text_args = (subject, transfer_payment_data, per_capita_data) => {
     subject_total_value,
 
     largest_total_prov,
+    le_largest_total_prov,
     de_largest_total_prov,
     largest_total_value,
     largest_total_percent,
 
     show_per_capita_data,
     largest_per_capita_prov,
+    le_largest_per_capita_prov,
     largest_per_capita_value,
 
     compare_per_capita_to_largest_total,
