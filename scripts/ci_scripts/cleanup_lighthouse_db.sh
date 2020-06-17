@@ -1,4 +1,5 @@
 set -e
+
 active_branches_with_remote=$(git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/remotes/origin)
 git_remote="origin/"
 active_branches=${active_branches_with_remote//$git_remote/}
