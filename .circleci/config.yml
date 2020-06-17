@@ -81,8 +81,7 @@ jobs:
           keys:
             - dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}
       - run:
-          command: |
-            [ -f "./dev-dbs-clean-for-these-branches.txt" ] || (./scripts/ci_scripts/cleanup_dev_dbs.sh && ./scripts/ci_scripts/cleanup_dev_links.sh)
+          command: ./scripts/ci_scripts/cleanup_dev_links.sh
       - run: touch ./dev-dbs-clean-for-these-branches.txt
       - save_cache:
           paths:
