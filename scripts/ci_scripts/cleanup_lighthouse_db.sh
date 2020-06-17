@@ -11,11 +11,15 @@ inactive_build_ids=$(psql $DATABASE_URL -t -c "SELECT id FROM public.builds WHER
 if [ -z "$inactive_build_ids" ]; then
   echo "No inactive builds in heroku psql DB"
 else
+  echo "Inactive builds: $inactive_build_ids"
   sql_cmd_delete_runs_stats_with_suffix=$(sed "s/[^ ]*/\"buildId\"='&' OR/g" <<< $inactive_build_ids)
   sql_cmd_delete_runs_stats_conditional=${sql_cmd_delete_runs_stats_with_suffix:0:$((${#sql_cmd_delete_runs_stats_with_suffix}-2))}
 
   sql_cmd_delete_build_with_suffix=$(sed "s/[^ ]*/\"id\"='&' OR/g" <<< $inactive_build_ids)
   sql_cmd_delete_build_conditional=${sql_cmd_delete_build_with_suffix:0:$((${#sql_cmd_delete_build_with_suffix}-2))}
+
+  echo "DELETE FROM public.runs WHERE $sql_cmd_delete_runs_stats_conditional"
+  echo "DELETE FROM public.builds WHERE $sql_cmd_delete_build_conditional"
 
   echo $(psql $DATABASE_URL -t -c "DELETE FROM public.runs WHERE $sql_cmd_delete_runs_stats_conditional")
   echo $(psql $DATABASE_URL -t -c "DELETE FROM public.statistics WHERE $sql_cmd_delete_runs_stats_conditional")
