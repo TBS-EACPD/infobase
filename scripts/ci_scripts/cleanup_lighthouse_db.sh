@@ -6,7 +6,7 @@ active_branches=${active_branches_with_remote//$git_remote/}
 sql_cmd_branches_with_suffix=$(sed "s/[^ ]*/branch!='&' AND/g" <<< $active_branches)
 sql_cmd_branch_conditional=${sql_cmd_branches_with_suffix:0:$((${#sql_cmd_branches_with_suffix}-3))}
 
-DATABASE_URL=$(heroku config -s | cut -d \' -f2)
+DATABASE_URL=$(heroku config -s --app infobase-lhci | cut -d \' -f2)
 inactive_build_ids=$(psql $DATABASE_URL -t -c "SELECT id FROM public.builds WHERE $sql_cmd_branch_conditional")
 if [ -z "$inactive_build_ids" ]; then
   echo "No inactive builds in heroku psql DB"
