@@ -100,7 +100,7 @@ jobs:
     steps:
       - checkout:
           path: "~/InfoBase"
-      - run: npm install @lhci/cli@^0.4.1
+      - run: ./scripts/ci_scripts/setup_lighthouse_env.sh
       - run: ./scripts/ci_scripts/cleanup_lighthouse_db.sh
       - run:
           name: lhci autorun
