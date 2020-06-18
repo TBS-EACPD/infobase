@@ -59,7 +59,7 @@ export default async function ({ models }) {
               indicator.stable_id === stable_id &&
               _.indexOf(time_period_ordered_doc_keys, indicator.doc) < doc_index
           )
-          .last()
+          .first()
           .value();
 
         if (!_.isUndefined(previous_year_indicator_instance)) {
