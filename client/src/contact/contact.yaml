@@ -1,6 +1,7 @@
 contact_us_title:
+  transform: [markdown]
   en: Contact Us
-  fr: Contactez-Nous
+  fr: Contactez-nous
 
 contact_us_intro:
   transform: [markdown]
@@ -8,16 +9,16 @@ contact_us_intro:
     We value your questions and comments. As such, we have provided multiple methods of communication.
 
 
-    If you need to contact us, please email us at questions@tbs-sct.gc.ca. We'll do our best to get back to you quickly.
+    If you need to contact us, please email us at questions@tbs-sct.gc.ca.
   fr: |
-    Vos questions et commentaires sont importants. Ainsi, Nous fournissons plusieurs des méthodes de communication.
+    Vos questions et commentaires nous intéressent. C'est pourquoi nous avons prévu plusieurs méthodes de communication.
 
 
-    Si vous avez besoin de nous contacter, faites-le par courriel a question@tbs-sct.gc.ca. Nous ferons de notre mieux pour y repondre rapidement
+    Si vous avez besoin de communiquer avec nous, envoyez-nous un courriel à question@tbs-sct.gc.ca.
 
 feedback_title:
   en: Have Feedback?
-  fr: Avez-Vous du Commentaire?
+  fr: Avez-vous des commentaires?
 
 feedback_text:
   transform: [handlebars, markdown]
