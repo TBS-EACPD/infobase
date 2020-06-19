@@ -106,7 +106,7 @@ const index_lang_lookups = {
      <li><a target="_blank" rel="noopener noreferrer" href="https://open.canada.ca/en/">Open government</a></li>
     `,
     fr: `
-      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/contact.html">Contactez-nous</a></li>
+      <li><a href="#contact">Contactez-nous</a></li>
       <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/gouvernement/min.html">Ministères et organismes</a></li>
       <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/gouvernement/fonctionpublique.html">Fonction publique et force militaire</a></li>
       <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr/nouvelles.html">Nouvelles</a></li>
