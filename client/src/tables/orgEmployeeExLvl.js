@@ -62,7 +62,7 @@ export default {
             "Corresponds to the active employee population by Executive Level, as of March 31 " +
             people_years_short_second[ix],
           fr:
-            "Correspond à l'effectif actif par direction niveaux, au 31 mars " +
+            "Correspond à personnel actif par direction niveaux, au 31 mars " +
             people_years_short_second[ix],
         },
       });

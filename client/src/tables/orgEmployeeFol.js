@@ -62,7 +62,7 @@ export default {
             "Corresponds to the active employee population by First Official Language, as of March 31 " +
             people_years_short_second[ix],
           fr:
-            "Correspond à l'effectif actif par première langue officielle, au 31 mars " +
+            "Correspond à personnel actif par première langue officielle, au 31 mars " +
             people_years_short_second[ix],
         },
       });
