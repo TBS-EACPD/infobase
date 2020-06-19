@@ -53,14 +53,12 @@ export default async function ({ models }) {
       const doc_index = _.indexOf(time_period_ordered_doc_keys, doc);
       if (doc_index > 0) {
         // Look for corresponding indicator, by stable_id, from the previous documents. Pick most recent previous version
-        const previous_year_indicator_instance = _.chain(indicator_records)
-          .filter(
-            (indicator) =>
-              indicator.stable_id === stable_id &&
-              _.indexOf(time_period_ordered_doc_keys, indicator.doc) < doc_index
-          )
-          .first()
-          .value();
+        const previous_year_indicator_instance = _.find(
+          indicator_records,
+          (indicator) =>
+            indicator.stable_id === stable_id &&
+            indicator.doc === time_period_ordered_doc_keys[doc_index - 1]
+        );
 
         if (!_.isUndefined(previous_year_indicator_instance)) {
           return {
