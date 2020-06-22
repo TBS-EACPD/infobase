@@ -35,7 +35,11 @@ import FootNote from "../../models/footnotes/footnotes.js";
 import { GlossaryEntry } from "../../models/glossary.js";
 
 import { A11yTable } from "../../charts/A11yTable.js";
-import { StandardLegend, SelectAllControl } from "../../charts/legends";
+import {
+  StandardLegend,
+  SelectAllControl,
+  TabularLegend,
+} from "../../charts/legends";
 import {
   NivoResponsiveBar,
   NivoResponsiveHBar,
@@ -196,6 +200,7 @@ export {
   A11yTable,
   StandardLegend,
   SelectAllControl,
+  TabularLegend,
   NivoResponsiveBar,
   NivoResponsiveHBar,
   NivoResponsiveLine,

@@ -7,8 +7,8 @@ import {
   declare_panel,
   InfographicPanel,
   NivoResponsiveHeatMap,
-  StandardLegend,
-  formats,
+  TabularLegend,
+  Format,
 } from "../shared.js";
 
 import { Fragment } from "react";
@@ -35,22 +35,40 @@ const ServicesDigitalPanel = ({ panel_args }) => {
         .value()
     )
     .value();
-
+  const digital_status_sum = _.reduce(
+    heatmap_data,
+    (sum, service) => {
+      const service_sum = _.chain(service)
+        .omit(text_maker("name"))
+        .flatMap()
+        .countBy()
+        .value();
+      return {
+        true: service_sum.true ? sum.true + service_sum.true : sum.true,
+        false: service_sum.false ? sum.false + service_sum.false : sum.false,
+        NaN: service_sum.NaN ? sum.NaN + service_sum.NaN : sum.NaN,
+      };
+    },
+    { true: 0, false: 0, NaN: 0 }
+  );
   const legend_items = [
     {
       id: "legend_true",
       label: text_maker("digital_option_available"),
       color: window.infobase_color_constants.secondaryColor,
+      value: digital_status_sum.true,
     },
     {
       id: "legend_false",
       label: text_maker("digital_option_not_available"),
       color: "#4abbc4",
+      value: digital_status_sum.false,
     },
     {
       id: "legend_NaN",
       label: text_maker("services_unknown"),
       color: window.infobase_color_constants.tertiaryColor,
+      value: digital_status_sum.NaN,
     },
   ];
 
@@ -59,7 +77,7 @@ const ServicesDigitalPanel = ({ panel_args }) => {
     return obj.label;
   };
 
-  const tooltip = (tooltip_items, formatter) => (
+  const tooltip = (tooltip_items) => (
     <div style={{ color: window.infobase_color_constants.textColor }}>
       <table style={{ width: "100%" }}>
         <tbody>
@@ -104,9 +122,7 @@ const ServicesDigitalPanel = ({ panel_args }) => {
               data={heatmap_data}
               keys={_.map(data_keys, (key) => text_maker(key))}
               indexBy="Name"
-              tooltip={(d) =>
-                tooltip([d], (value) => formats.big_int(value, { raw: true }))
-              }
+              tooltip={(d) => tooltip([d])}
               colors={[
                 "#4abbc4",
                 window.infobase_color_constants.secondaryColor,
@@ -132,7 +148,25 @@ const ServicesDigitalPanel = ({ panel_args }) => {
             />
           </div>
           <div className="fcol-md-3" style={{ paddingTop: "80px" }}>
-            <StandardLegend items={legend_items} />
+            <TabularLegend
+              items={legend_items}
+              get_right_content={(item) => (
+                <div>
+                  <span className="infobase-pie__legend-data">
+                    <Format type="int" content={item.value} />
+                  </span>
+                  <span className="infobase-pie__legend-data">
+                    <Format
+                      type="percentage1"
+                      content={
+                        item.value /
+                        _.chain(digital_status_sum).flatMap().sum().value()
+                      }
+                    />
+                  </span>
+                </div>
+              )}
+            />
           </div>
         </div>
       )}

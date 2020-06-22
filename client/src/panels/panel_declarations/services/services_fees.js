@@ -41,7 +41,7 @@ const ServicesFeesPanel = ({ panel_args }) => {
       {!window.is_a11y_mode && (
         <Fragment>
           <NivoResponsivePie
-            graph_data={data_fees}
+            data={data_fees}
             legend_data={data_fees}
             graph_height="300px"
             data_format="int"
