@@ -1,6 +1,6 @@
 employee_gender_title:
   transform: [handlebars]
-  en: Population by Gender ({{ppl_last_year_5}} to {{ppl_last_year}})
+  en: Gender ({{ppl_last_year_5}} to {{ppl_last_year}})
   fr: Population selon le sexe ({{ppl_last_year_5}} à {{ppl_last_year}})
 
 gov_employee_gender_text:
