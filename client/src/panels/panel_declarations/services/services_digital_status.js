@@ -147,7 +147,14 @@ const ServicesDigitalPanel = ({ panel_args }) => {
               label_col_header={text_maker("service_name")}
             />
           </div>
-          <div className="fcol-md-3" style={{ paddingTop: "80px" }}>
+          <div
+            className="fcol-md-3"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              paddingBottom: 10,
+            }}
+          >
             <TabularLegend
               items={legend_items}
               get_right_content={(item) => (
