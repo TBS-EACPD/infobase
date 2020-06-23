@@ -1,5 +1,21 @@
 import { run_template } from "./text.js";
 
+const fiscal_year_to_year = (fy_string) =>
+  _.chain(fy_string).split("-").first().toNumber().value() || null;
+
+const year_to_fiscal_year = (year) => {
+  if (year) {
+    const second_year = {
+      en: year + 1,
+      fr: (year + 1).toString().substring(2),
+    }[window.lang];
+
+    return `${year}-${second_year}`;
+  } else {
+    return "";
+  }
+};
+
 const year_templates = {
   current_fiscal_year: "{{current_fiscal_year}}",
   std_years: [
@@ -78,4 +94,9 @@ const actual_to_planned_gap_year = _.chain(year_templates)
   })
   .value();
 
-export { year_templates, actual_to_planned_gap_year };
+export {
+  fiscal_year_to_year,
+  year_to_fiscal_year,
+  year_templates,
+  actual_to_planned_gap_year,
+};

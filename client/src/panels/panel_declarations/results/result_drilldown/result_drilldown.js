@@ -31,6 +31,7 @@ import redux_promise_middleware from "redux-promise-middleware";
 import { Provider, connect } from "react-redux";
 
 import { Explorer } from "../../../../explorer_common/explorer_components.js";
+import "../../../../explorer_common/explorer-styles.scss";
 import { get_root } from "../../../../explorer_common/hierarchy_tools.js";
 import {
   get_memoized_funcs,
@@ -216,6 +217,8 @@ class SingleSubjExplorer extends React.Component {
       this.debounced_set_query.cancel();
     !_.isUndefined(this.timedOutStateChange) &&
       clearTimeout(this.timedOutStateChange);
+    !_.isUndefined(this.expandTimout) && clearTimeout(this.expandTimout);
+    !_.isUndefined(this.collapseTimout) && clearTimeout(this.collapseTimout);
   }
   render() {
     const {
@@ -226,6 +229,9 @@ class SingleSubjExplorer extends React.Component {
 
       set_query,
       toggle_node,
+      expand_all,
+      collapse_all,
+      clear_expanded_collapsed,
 
       subject,
 
@@ -309,6 +315,48 @@ class SingleSubjExplorer extends React.Component {
                 onChange={(evt) => this.handleQueryChange(evt.target.value)}
                 value={query}
               />
+              <div style={{ display: "flex" }}>
+                <button
+                  type="button"
+                  className="btn btn-ib-primary"
+                  style={{
+                    height: "40px",
+                    width: "50%",
+                    margin: "5px 2px",
+                  }}
+                  onClick={() => {
+                    // Inside an event handler setState batches all state changes asychronously,
+                    // to ensure the spinner shows when we want it to, we need to use setTimeout to force the code
+                    // to act asynchronously
+                    this.setState({ loading_query: true });
+                    this.expandTimout = setTimeout(() => {
+                      expand_all(root);
+                      this.setState({ loading_query: false });
+                    }, 0);
+                  }}
+                >
+                  <span>{text_maker("expand_all")}</span>
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-ib-primary"
+                  style={{
+                    height: "40px",
+                    width: "50%",
+                    margin: "5px 2px",
+                  }}
+                  onClick={() => {
+                    // Same explanation as the expand all button
+                    this.setState({ loading_query: true });
+                    this.collapseTimout = setTimeout(() => {
+                      collapse_all(root);
+                      this.setState({ loading_query: false });
+                    }, 0);
+                  }}
+                >
+                  <span>{text_maker("collapse_all")}</span>
+                </button>
+              </div>
               {window.is_a11y_mode && (
                 <input
                   type="submit"
@@ -349,7 +397,8 @@ class SingleSubjExplorer extends React.Component {
       );
     }
 
-    const tab_on_click = (doc) => set_doc !== doc && set_doc(doc, subject);
+    const tab_on_click = (doc) =>
+      set_doc !== doc && clear_expanded_collapsed() && set_doc(doc, subject);
     return (
       <div className="tabbed-content">
         <TabbedControls

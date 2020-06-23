@@ -27,6 +27,7 @@ let year;
 const get_year = (presentation_scheme) => {
   switch (presentation_scheme) {
     case "est_doc_mains":
+    case "est_doc_sea":
     case "est_type":
     case "vs_type":
     case "org_estimates":
@@ -333,11 +334,9 @@ const estimates_post_traversal_rule_set = (
   const default_rpb_link_options = {
     columns: [year],
     subject: get_rpb_subject_code_from_context(node, presentation_scheme),
-    mode: "details",
     dimension: "voted_stat",
     filter: text_maker("all"),
     table: orgVoteStatEstimates.id,
-    preferDeptBreakout: true,
     descending: false,
   };
 

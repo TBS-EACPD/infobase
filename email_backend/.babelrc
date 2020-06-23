@@ -1,9 +1,8 @@
 {
   "plugins": [
-    "@babel/plugin-proposal-object-rest-spread",
     "@babel/plugin-transform-modules-commonjs"
   ],
   "presets": [
-      ["@babel/preset-env", { "targets": { "node": "8.15.0" } }]
+      ["@babel/preset-env", { "targets": { "node": "10.18.1" } }]
     ]
 }

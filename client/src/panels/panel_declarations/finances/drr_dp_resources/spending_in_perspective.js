@@ -48,8 +48,8 @@ class SpendInTagPerspective extends React.Component {
         value: prog_exp,
       },
       {
-        id: text_maker("other"),
-        label: text_maker("other"),
+        id: text_maker("other_s"),
+        label: text_maker("other_s"),
         value: active_tag_exp - prog_exp,
       },
     ];
@@ -97,7 +97,6 @@ class SpendInTagPerspective extends React.Component {
           )}
           <NivoResponsivePie
             data={data}
-            legend_data={data}
             colorBy={(obj) => color_scale(obj.label)}
           />
         </div>

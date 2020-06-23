@@ -123,7 +123,6 @@ export default {
           },
         },
         {
-          simple_default: i === 4,
           type: "big_int",
           nick: header + "exp",
           header: {

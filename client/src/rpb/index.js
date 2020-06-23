@@ -19,23 +19,15 @@ import {
 import { createStore } from "redux";
 import { Provider, connect } from "react-redux";
 import { ensure_loaded } from "../core/lazy_loader.js";
-import { Subject } from "../models/subject.js";
-
-const { Gov } = Subject;
 
 //re-usable view stuff
-import {
-  SpinnerWrapper,
-  RadioButtons,
-  LabeledBox,
-} from "../components/index.js";
+import { SpinnerWrapper, LabeledBox } from "../components/index.js";
 import AriaModal from "react-aria-modal";
 
 //specific view stuff
 import { AccessibleTablePicker, TablePicker } from "./TablePicker.js";
-import { SimpleView } from "./simple_view.js";
 import { GranularView } from "./granular_view.js";
-import { SubjectFilterPicker } from "./shared.js";
+import { ShareReport } from "./shared.js";
 import { Table } from "../core/TableClass.js";
 
 //misc app stuff
@@ -68,34 +60,6 @@ const url_state_selector = createSelector(_.identity, (str) => {
 
   return state;
 });
-
-const RPBTitle = ({ table_name, subject_name }) => {
-  const title_prefix = text_maker("report_builder_title");
-  if (!table_name) {
-    return <h1>{title_prefix}</h1>;
-  }
-  if (!subject_name) {
-    return <h1>{`${title_prefix} - ${table_name}`}</h1>;
-  }
-  return <h1>{`${title_prefix} - ${table_name} - ${subject_name}`}</h1>;
-};
-
-function slowScrollDown() {
-  const el = document.getElementById("rpb-main-content");
-  if (!_.isElement(el)) {
-    return;
-  }
-  el.focus();
-  d3.select(el)
-    .transition()
-    .duration(1000)
-    .tween("uniquetweenname2", () => {
-      const i = d3.interpolateNumber(0, el.getBoundingClientRect().top);
-      return (t) => {
-        window.scrollTo(0, i(t));
-      };
-    });
-}
 
 class Root extends React.Component {
   constructor(props) {
@@ -142,14 +106,11 @@ class RPB extends React.Component {
       this.state = {
         table_picking: false,
       };
-
-      setTimeout(() => {
-        slowScrollDown();
-      });
     } else {
       this.state = {
         loading: false,
         table_picking: true,
+        selected_subject: null,
       };
     }
   }
@@ -167,22 +128,11 @@ class RPB extends React.Component {
     }).then(() => {
       this.props.on_switch_table(table_id);
       this.setState({ loading: false });
-      setTimeout(() => {
-        slowScrollDown();
-      });
     });
   }
 
   render() {
-    const {
-      table,
-      mode,
-      subject,
-      broken_url,
-
-      on_switch_mode,
-      on_set_subject,
-    } = this.props;
+    const { table, broken_url } = this.props;
 
     return (
       <div style={{ minHeight: "800px", marginBottom: "100px" }} id="">
@@ -199,62 +149,48 @@ class RPB extends React.Component {
             }
           }}
         />
-        <RPBTitle
-          subject_name={subject !== Gov && subject && subject.name}
-          table_name={table && table.name}
-        />
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <h1> {text_maker("report_builder_title")} </h1>
+          <ShareReport />
+        </div>
         <LabeledBox label={<TextMaker text_key="rpb_pick_data" />}>
-          <div>
-            <div className="centerer">
-              <p
-                id="picker-label"
-                className="md-half-width md-gutter-right"
-                style={{ margin: 0 }}
-              >
-                {table ? (
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <div className="centerer md-half-width">
+              {window.is_a11y_mode ? (
+                <AccessibleTablePicker
+                  onSelect={(id) => this.pickTable(id)}
+                  tables={_.reject(Table.get_all(), "reference_table")}
+                  selected={_.get(table, "id")}
+                  broken_url={broken_url}
+                />
+              ) : (
+                <button
+                  className="btn btn-ib-primary"
+                  style={{ width: "100%" }}
+                  onClick={() => {
+                    this.setState({ table_picking: true });
+                  }}
+                >
                   <TextMaker
-                    text_key="table_picker_select_different_summary"
-                    args={{ name: table.name }}
+                    text_key={
+                      table
+                        ? "select_another_table_button"
+                        : "select_table_button"
+                    }
                   />
-                ) : (
-                  <TextMaker text_key="table_picker_none_selected_summary" />
-                )}
-              </p>
-              <div className="md-half-width md-gutter-left">
-                {window.is_a11y_mode ? (
-                  <AccessibleTablePicker
-                    onSelect={(id) => this.pickTable(id)}
-                    tables={_.reject(Table.get_all(), "reference_table")}
-                    selected={_.get(table, "id")}
-                    broken_url={broken_url}
-                  />
-                ) : (
-                  <button
-                    className="btn btn-ib-primary"
-                    style={{ width: "100%" }}
-                    onClick={() => {
-                      this.setState({ table_picking: true });
-                    }}
-                  >
-                    <TextMaker
-                      text_key={
-                        table
-                          ? "select_another_table_button"
-                          : "select_table_button"
-                      }
-                    />
-                  </button>
-                )}
-              </div>
+                </button>
+              )}
             </div>
             {!window.is_a11y_mode && (
               <AriaModal
                 mounted={this.state.table_picking}
                 onExit={() => {
                   if (this.state.table_picking) {
-                    this.setState({ table_picking: false });
+                    this.setState({
+                      table_picking: false,
+                      selected_subject: null,
+                    });
                     setTimeout(() => {
-                      slowScrollDown();
                       const sub_app_node = document.querySelector(
                         "#" + sub_app_name
                       );
@@ -266,7 +202,6 @@ class RPB extends React.Component {
                 }}
                 titleId="tbp-title"
                 getApplicationNode={() => document.getElementById("app")}
-                verticallyCenter={true}
                 underlayStyle={{
                   paddingTop: "50px",
                   paddingBottom: "50px",
@@ -276,20 +211,13 @@ class RPB extends React.Component {
                 <div
                   tabIndex={-1}
                   id="modal-child"
-                  className="container app-font"
-                  style={{
-                    backgroundColor: "white",
-                    overflow: "auto",
-                    lineHeight: 1.5,
-                    padding: "0px 20px 0px 20px",
-                    borderRadius: "5px",
-                    fontWeight: 400,
-                  }}
+                  className="container app-font rpb-modal-container"
                 >
                   <TablePicker
                     onSelect={(id) => this.pickTable(id)}
                     broken_url={broken_url}
                   />
+                  }
                 </div>
               </AriaModal>
             )}
@@ -298,42 +226,7 @@ class RPB extends React.Component {
         {this.state.loading ? (
           <SpinnerWrapper config_name={"route"} />
         ) : (
-          <Fragment>
-            <LabeledBox label={<TextMaker text_key="rpb_pick_org" />}>
-              <SubjectFilterPicker
-                subject={subject}
-                onSelect={(subj) => on_set_subject(subj)}
-              />
-            </LabeledBox>
-            <LabeledBox label={<TextMaker text_key="rpb_select_mode" />}>
-              <div className="centerer">
-                <RadioButtons
-                  options={[
-                    {
-                      id: "simple",
-                      display: <TextMaker text_key="simple_view_title" />,
-                      active: mode === "simple",
-                    },
-                    {
-                      id: "details",
-                      display: <TextMaker text_key="granular_view_title" />,
-                      active: mode === "details",
-                    },
-                  ]}
-                  onChange={(id) => {
-                    on_switch_mode(id);
-                  }}
-                />
-              </div>
-            </LabeledBox>
-            {table ? (
-              mode === "simple" ? (
-                <SimpleView {...this.props} />
-              ) : (
-                <GranularView {...this.props} />
-              )
-            ) : null}
-          </Fragment>
+          <Fragment>{table ? <GranularView {...this.props} /> : null}</Fragment>
         )}
       </div>
     );
@@ -349,10 +242,8 @@ class AnalyticsSynchronizer extends React.Component {
   }
   shouldComponentUpdate(new_props) {
     const table_has_changed = new_props.table !== this.props.table;
-    const subject_has_changed = new_props.subject !== this.props.subject;
-    const mode_has_changed = new_props.mode !== this.props.mode;
 
-    return mode_has_changed || table_has_changed || subject_has_changed;
+    return table_has_changed;
   }
   componentDidUpdate() {
     if (this.props.table) {
@@ -367,9 +258,7 @@ class AnalyticsSynchronizer extends React.Component {
   send_event() {
     log_standard_event({
       SUBAPP: sub_app_name,
-      SUBJECT_GUID: this.props.subject,
       MISC1: this.props.table,
-      MISC2: this.props.mode,
     });
   }
 }

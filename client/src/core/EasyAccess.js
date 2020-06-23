@@ -1,7 +1,12 @@
 import { TrivialTM } from "../components/index.js";
 import { trivial_text_maker } from "../models/text.js";
 import { Fragment } from "react";
-import { IconAbout, IconGlossary, IconDataset } from "../icons/icons.js";
+import {
+  IconAbout,
+  IconGlossary,
+  IconDataset,
+  IconQuestion,
+} from "../icons/icons.js";
 import "./NavComponents.scss";
 
 export class EasyAccess extends React.Component {
@@ -44,6 +49,16 @@ const EasyAccess_ = () => (
       />
       <span className="mrgn-lft-sm">
         <TM k="about_title" />
+      </span>
+    </a>
+    <a href="#faq" className="link-unstyled nav-item">
+      <IconQuestion
+        title={trivial_text_maker("faq_title")}
+        inline={true}
+        aria_hide={true}
+      />
+      <span className="mrgn-lft-sm">
+        <TM k="faq_title" />
       </span>
     </a>
   </Fragment>

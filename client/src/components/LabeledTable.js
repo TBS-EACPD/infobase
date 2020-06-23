@@ -1,63 +1,46 @@
 import "./LabeledTable.scss";
-import classNames from "classnames";
 
-export class LabeledTable extends React.Component {
-  render() {
-    const { title, content, styles } = this.props;
-    return (
-      <div className="labeled-table">
-        <div className="labeled-table__header">{title}</div>
-        <div className="labeled-table__items">
-          {_.map(content, (item) =>
-            item.href ? (
-              <a
-                href={item.href}
-                role="radio"
-                title={title}
-                className={classNames(
-                  "labeled-table__item",
-                  item.active && "active"
-                )}
-                tabIndex={0}
-                aria-checked={item.active}
-                key={item.name}
-              >
-                <div className="labeled-table__item-label">
-                  {styles && styles.header ? (
-                    <span className={styles.header}>{item.name}</span>
-                  ) : (
-                    item.name
-                  )}
-                </div>
-                <div className="labeled-table__item-description">
-                  {styles && styles.desc ? (
-                    <span className={styles.desc}>{item.desc}</span>
-                  ) : (
-                    item.desc
-                  )}
-                </div>
-              </a>
-            ) : (
-              <div className="labeled-table__item" key={item.name}>
-                <div className="labeled-table__item-label">
-                  {styles && styles.header ? (
-                    <span className={styles.header}>{item.name}</span>
-                  ) : (
-                    item.name
-                  )}
-                </div>
-                <div className="labeled-table__item-description">
-                  {styles && styles.desc ? (
-                    <span className={styles.desc}>{item.desc}</span>
-                  ) : (
-                    item.desc
-                  )}
-                </div>
-              </div>
-            )
-          )}
-        </div>
+import PropTypes from "prop-types";
+
+export const LabeledTable = ({ title, TitleComponent, contents }) => (
+  <section className="labeled-table" aria-label={title}>
+    {title && (
+      <div className="labeled-table__header" aria-hidden={true}>
+        {TitleComponent ? <TitleComponent>{title}</TitleComponent> : title}
       </div>
+    )}
+    <div className="labeled-table__items">
+      {_.map(contents, ({ id, label, content }, ix) => (
+        <div
+          className="labeled-table__item"
+          key={id || ix}
+          id={id}
+          tabIndex={0}
+          aria-label={label}
+        >
+          <div className="labeled-table__item-label" aria-hidden={true}>
+            {label}
+          </div>
+          <div className="labeled-table__item-description">{content}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+);
+
+LabeledTable.propTypes = {
+  title: PropTypes.string,
+  contents: (props, propName, componentName) => {
+    const contents = props[propName];
+    const all_labels_are_strings = !_.some(
+      contents,
+      ({ label }) => !_.isString(label)
     );
-  }
-}
+
+    if (!all_labels_are_strings) {
+      return new Error(
+        `\`${componentName}\`: \`${propName}\` prop's \`label\` values must be strings`
+      );
+    }
+  },
+};

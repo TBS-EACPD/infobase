@@ -10,11 +10,6 @@ rpb_pick_data:
   en: Select your data
   fr: Sélectionnez vos données
 
-rpb_pick_org:
-  en: Select organization
-  fr: Sélectionnez une organisation
-
-
 table_picker_broken_link_warning:
   en: The link that brought you here contains errors and your report could not be generated. If you know what data you were looking for, please select it from the options below.
   fr: Le lien qui vous a amené ici est erroné. C'est pourquoi votre rapport n'a pas pu être généré. Si vous connaissez les données que vous recherchez, sélectionnez-les parmi les options ci-dessous.
@@ -23,6 +18,9 @@ table_picker_none_selected_summary:
   en: To see data, select a table
   fr: Pour voir des données, veuillez choisir un tableau 
 
+select_dataset_type:
+  en: Select type of Dataset
+  fr: TODO
 
 select_table_button:
   en: Select a table or topic
@@ -43,10 +41,6 @@ rpb_select_mode:
   en: Select the type of report you want 
   fr: Sélectionner le type de rapport que vous voulez 
 
-simple_view_title:
-  en: Build a summary report
-  fr: Créer un rapport sommaire
-
 granular_view_title:
   en: Build a detailed report 
   fr: Créer un rapport détaillé
@@ -58,14 +52,6 @@ rpb_report_details:
 rpb_report_data_sources:
  en: Datasets and data sources
  fr: Données et sources des données
-
-rpb_table_controls:
-  en: Sort and filter your report
-  fr: Trier et filtrer votre rapport
-
-select_columns:
-  en: Select column(s) to display
-  fr: Sélectionner les colonnes à afficher
 
 col_name:
   en: Column Name
@@ -79,11 +65,6 @@ col_defs:
   en: Selected column definitions
   fr: Définitions des colonnes choisies
 
-
-show_dept_breakout:
-  en: Show a breakdown by organization
-  fr: Afficher une répartition par organisation
-
 dimension:
   en: Dimension
   fr: Dimension
@@ -92,9 +73,9 @@ sort_by:
   en: Sort By
   fr: Trier par
 
-group_by:
-  en: Group By
-  fr: Grouper
+group_data:
+  en: Group data
+  fr: TODO
 
 filter:
   en: Filter
@@ -168,14 +149,6 @@ table_picker_no_tables_found:
   en: No tables are available for the selected combination of tags. 
   fr: Aucun tableau n'est disponible pour la combinaison d'étiquette choisie. 
 
-rpb_no_data:
-  transform: [markdown]
-  en: |
-    There is no data for the selected options
-  fr: | 
-    Il n'y a pas de donées pour les options sélectionnées
-
-
 please_use_table_option_a11y:
   transform: [handlebars]
   en: You are viewing a graph, to see a plain table, select '{{gt "select_table"}}' in the previous options
@@ -184,11 +157,6 @@ please_use_table_option_a11y:
 total_all_pages:
   en: Total (all pages)
   fr: total (toutes les pages)
-
-pagination_a11y:
-  transform: [handlebars]
-  en: There is too much data to show in a single table, the table above is showing page {{current}} of {{total}}. To view another page, select its number in the navigation list below.
-  fr: Il y a trop de données pour les montrer dans une table. La table ci-dessus représente la page numéro {{current}} de {{total}} pages. Pour voir la prochaine page, sélectionnez là de la liste ci-dessous.
 
 concept_category_timing:
   en: Release frequency
@@ -209,116 +177,3 @@ concept_category_other:
 concept_category_source:
   en: Public reports
   fr: Rapports publics
-
-
-GENDER:
-  en: Employee gender
-  fr: Sexe
-
-QFR:
-  en: Quarterly Financial Reports (QFRs)
-  fr: Rapports financiers trimestriels (RFT)
-
-PA:
-  en: Public Accounts of Canada
-  fr: Comptes publics du Canada
-
-EST_PROC:
-  en: Estimates Process
-  fr: Processus du budget des dépenses
-
-AUTH:
-  en: Authorities
-  fr: Autorisations
-
-EXP:
-  en: Expenditures
-  fr: Dépenses
-
-VOTED:
-  en: Voted amounts
-  fr: Montants votés
-
-STAT:
-  en: Statutory authorities
-  fr: Autorisations législatives
-
-PLANNED_EXP:
-  en: Planned spending
-  fr: Dépenses prévues
-
-SOBJ10:
-  en: Transfer payments
-  fr: Paiements de transfert
-
-PEOPLE:
-  en: Data about Public Servants
-  fr: Données sur les fonctionaires
-
-FTE:
-  en: Full-Time Equivalent (FTE)
-  fr: Équivalent temps plein (ETP)
-
-FPS:
-  en: Federal Public Service (FPS)
-  fr: Fonction publique fédérale (FPF)
-
-AGE:
-  en: Employee Age
-  fr: Âge des employés
-
-GOV_FRAM:
-  en: Whole-of-government framework
-  fr: Cadre pangouvernemental
-
-SOBJ:
-  en: Standard Objects
-  fr: Articles courants
-
-PROG:
-  en: Program
-  fr: Programme
-
-GEO:
-  en: Geographic Data
-  fr: Données géographique
-
-FOL:
-  en: First Official Language
-  fr: Première langue officielle
-
-PLAN_DATA:
-  en: Planning Data
-  fr: Données relatives à la planification
-
-ESTIMATES:
-  en: Estimates
-  fr: Budget des dépenses
-
-EX_LVL:
-  en: Executive Level
-  fr: Niveaux des cadres supérieurs
-
-SUPPRESSED_DATA:
-  en: Suppressed Data
-  fr: Données supprimées
-
-GOCO:
-  en: Government of Canada Spending areas and Activities
-  fr: Secteurs de dépenses et d’activités du gouvernement du Canada
-
-ANNUAL:
-  en: Annual
-  fr: Annuelle
-
-QUARTERLY:
-  en: Quarterly
-  fr: Trimestrielle
-
-DP:
-  en: Departmental Plans
-  fr: Plans ministériels
-
-DRR:
-  en: Departmental Results Reports
-  fr: Rapport sur les résultats ministériels

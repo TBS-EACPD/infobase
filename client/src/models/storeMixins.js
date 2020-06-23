@@ -71,12 +71,29 @@ export const SubjectMixin = (superclass) => {
   return class SubjectMixin extends baseclass {
     constructor() {
       super();
+
+      const required_constructor_keys = ["subject_type", "singular", "plural"];
+      const missing_required_constructor_properties = _.filter(
+        required_constructor_keys,
+        (key) => _.chain(this.constructor).get(key).isUndefined().value()
+      );
+
+      if (!_.isEmpty(missing_required_constructor_properties)) {
+        throw new Error(
+          `${
+            this.constructor.name
+          } subject constructor is missing the required properties {${_.join(
+            missing_required_constructor_properties,
+            ", "
+          )}}`
+        );
+      }
     }
     get guid() {
       return this.level + "_" + this.id;
     }
     get level() {
-      return this.constructor.type_name;
+      return this.constructor.subject_type;
     }
     is(comparator) {
       if (_.isString(comparator)) {

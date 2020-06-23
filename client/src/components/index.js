@@ -11,6 +11,7 @@ export { SortDirections } from "./SortDirection.js";
 export { TabbedControls, TabbedContent } from "./TabbedContent.js";
 export { LabeledBox } from "./LabeledBox.js";
 export { TextMaker, TM } from "./TextMaker.js";
+export { TrinityItem } from "./TrinityItem.js";
 export { TwoLevelSelect } from "./TwoLevelSelect.js";
 export { CardTopImage } from "./CardTopImage.js";
 export { CardLeftImage } from "./CardLeftImage.js";
@@ -21,7 +22,6 @@ export { ContainerEscapeHatch } from "./ContainerEscapeHatch.js";
 export { FilterTable } from "./FilterTable.js";
 export { CheckBox } from "./CheckBox.js";
 export { Details } from "./Details.js";
-export { EmbeddedVideo } from "./EmbeddedVideo.js";
 export { SpinnerWrapper } from "./SpinnerWrapper.js";
 export { KeyConceptList } from "./KeyConceptList.js";
 export { BackToTop } from "./BackToTop.js";
@@ -38,17 +38,19 @@ export { WellList } from "./WellList.js";
 export { LabeledTable } from "./LabeledTable.js";
 export { FootnoteList } from "./FootnoteList.js";
 export { AlertBanner } from "./AlertBanner.js";
+export { FancyUL } from "./FancyUL.js";
+export { DropdownMenu } from "./DropdownMenu.js";
 
 export { StatelessModal, FixedPopover } from "./modals_and_popovers";
 export {
   DisplayTable,
+  default_subject_name_sort_func,
   default_dept_name_sort_func,
   sort_func_template,
-} from "./DisplayTable.js";
+} from "./DisplayTable/index.js";
 
 export {
   Format,
-  FancyUL,
   TrivialTextMaker,
   TrivialTM,
   ExternalLink,

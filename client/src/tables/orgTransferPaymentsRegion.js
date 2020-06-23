@@ -7,7 +7,7 @@ const { std_years } = year_templates;
 export default {
   text,
   id: "orgTransferPaymentsRegion",
-  source: ["PA"],
+  source: ["RTP", "PA"],
   tags: ["TP_GEO", "SOBJ10"],
 
   link: {
@@ -54,7 +54,6 @@ export default {
     });
     _.each(std_years, (header, ix) => {
       this.add_col({
-        simple_default: ix === 4,
         type: "big_int",
         nick: header,
         header: header,

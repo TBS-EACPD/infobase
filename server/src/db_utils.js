@@ -25,6 +25,7 @@ function get_connection_str() {
 export async function connect_db() {
   return await mongoose
     .connect(get_connection_str(), {
+      useUnifiedTopology: true,
       useCreateIndex: true,
       useNewUrlParser: true,
       poolSize: 10,

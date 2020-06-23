@@ -102,6 +102,7 @@ export class CircleProportionChart extends React.Component {
       parent_value,
       parent_name,
       disable_table_view,
+      table_name,
     } = this.props;
 
     const color_scale = d3.scaleOrdinal().range(newIBCategoryColors);
@@ -209,26 +210,27 @@ export class CircleProportionChart extends React.Component {
       </Fragment>
     );
 
-    const ordered_column_keys = ["label", "value"];
-    const column_names = _.map(ordered_column_keys, text_maker);
-    const table_data = _.map(
-      [
-        [parent_name, parent_value],
-        [child_name, child_value],
-      ],
-      ([label, value]) => ({
-        display_values: {
-          label,
-          value: value_formatter(value),
+    const column_configs = _.chain(["label", "value"])
+      .map((key, idx) => [
+        key,
+        {
+          index: idx,
+          header: text_maker(key),
+          formatter: (value) =>
+            _.isUndefined(value) ? "" : value_formatter(value),
         },
-        sort_values: { label, value },
-      })
-    );
+      ])
+      .fromPairs()
+      .value();
+    const table_data = [
+      { label: parent_name, value: parent_value },
+      { label: child_name, value: child_value },
+    ];
     const table = !disable_table_view && (
       <DisplayTable
-        rows={table_data}
-        column_names={column_names}
-        ordered_column_keys={ordered_column_keys}
+        table_name={table_name || text_maker("default_table_name")}
+        column_configs={column_configs}
+        data={table_data}
       />
     );
 

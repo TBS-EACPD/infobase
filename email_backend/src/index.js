@@ -1,9 +1,14 @@
 // entry-point, for both dev and GCF
+import { connect_db } from "./db_utils";
 import { make_email_backend } from "./email_backend.js";
 import { get_templates } from "./template_utils";
 
 const email_backend = (() => {
   const templates = get_templates();
+
+  // Start connecting to the db early and let it happen fully async. Attempts to write to the DB
+  // before the connection is ready will buffer until the connection is made
+  connect_db(); // Note: async func, but not awaited
 
   const email_backend = make_email_backend(templates);
 

@@ -1,7 +1,32 @@
-@import '../common_css/common-variables';
+@import '../../common_css/common-variables';
+
+.display-table-container {
+  overflow-x: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  &.display-table-container--with-utils {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: $primaryColor;
+  }
+}
+
+.display-table-container__utils {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 10px 2px;
+}
+.no-data-msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 350px;
+}
 
 table.display-table {
-  width: 99%; // avoid annoying 1px scroll caused by border
+  width: 99.9%; // avoid annoying always-there x-overflow caused by sub-pixel table border
+  margin-bottom: 0px;
 }
 
 table.display-table > thead > tr {

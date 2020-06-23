@@ -1,0 +1,9 @@
+copy_table_data_desc:
+  en: Copy table data to clipboard
+  fr: TODO
+download_table_data_desc:
+  en: Download table data as CSV
+  fr: TODO
+select_columns:
+  en: Select columns
+  fr: TODO

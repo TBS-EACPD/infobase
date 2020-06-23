@@ -45,7 +45,12 @@ div.ordinal {
 .success {
   background-color: $successLightColor;
 }
-
+.no-right {
+  right: 0;
+}
+.full-width {
+  width: 100%;
+}
 /* added for IE9, this adds a transparents 1x1 png file
  * so that mouseneter events can be registered on 
  * empty divs */
@@ -70,49 +75,6 @@ div.ordinal {
   @media (max-width:$maxSmallDevice) {
     max-width: 150px;
   }
-}
-
-
-/* similar to bootstrap list-group but without the hover/active colors.*/
-ul.fancy-ul {
-  margin-bottom: 20px;
-  padding-left: 0;  
-}
-
-ul.fancy-ul > li {
-  position: relative;
-  display: block;
-  padding: 10px 15px;
-  margin-bottom: -1px;
-  background-color: $backgroundColor;
-  border: 1px solid $separatorColor;
-  font-size: 16px;
-}
-
-ul.fancy-ul > li:first-child {
-  border-top-right-radius: $standardBorderRadius;
-  border-top-left-radius: $standardBorderRadius;
-}
-
-ul.fancy-ul > li:last-child {
-  margin-bottom: 0;
-  border-bottom-right-radius: $standardBorderRadius;
-  border-bottom-left-radius: $standardBorderRadius;
-}
-
-.fancy-ul-span-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: nowrap;
-  flex-direction: row;
-}
-
-.fancy-ul-title-row {
-  width: 100%;
-  text-align: center;
-  font-weight: bold; 
-  font-size: 16px;
 }
 
 .dead-element {
@@ -148,6 +110,14 @@ body {
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-weight: $lightFontWeight;
   font-family: $fontFamily;
+
+  &.heading-unstyled {
+    margin: 0px;
+    text-transform: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    font-family: inherit;
+  }
 }
 
 b, strong, .heavy-weight {
@@ -217,4 +187,16 @@ b, strong, .heavy-weight {
   color: $textColor;
 }
 
+// alternate to bootstrap badges
+.tag-badge {
+  padding: 0.3em.6em;
+  color: $textColor;
+  border-radius: 0px $standardBorderRadius/2 $standardBorderRadius/2 0px;
+  border-style: solid;
+  border-width: 1px 1px 1px 3px;
+  border-color: lighten($tertiaryColor, 20%) lighten($tertiaryColor, 20%) lighten($tertiaryColor, 20%) $secondaryColor;
 
+  &.tag-badge--solid {
+    background-color: lighten($tertiaryColor, 20%);
+  }
+}

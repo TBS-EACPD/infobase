@@ -1,0 +1,26 @@
+subject_footnote_title:
+  transform: [handlebars]
+  text: |
+    {{subject_name}}
+
+class_footnote_title:
+  transform: [handlebars]
+  en: General notes — {{subject_name}}
+  fr: Notes générales — {{subject_name}}
+
+footnote_year:
+  transform: [handlebars]
+  en: Applies in {{fmt_year_to_fiscal_year year}}
+  fr: S'applique en {{fmt_year_to_fiscal_year year}}
+
+footnote_years:
+  transform: [handlebars]
+  en: Applies from {{fmt_year_to_fiscal_year year1}} to {{fmt_year_to_fiscal_year year2}}
+  fr: S'applique de {{fmt_year_to_fiscal_year year1}} à {{fmt_year_to_fiscal_year year2}}
+
+footnote_meta:
+  transform: [handlebars]
+  en: |
+    Footnote tags:
+  fr: |
+    Tags de note de bas de page :

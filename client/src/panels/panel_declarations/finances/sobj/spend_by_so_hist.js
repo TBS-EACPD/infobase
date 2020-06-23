@@ -16,7 +16,7 @@ import { text_maker, TM } from "./sobj_text_provider.js";
 
 const { sos } = businessConstants;
 const { std_years } = year_templates;
-const { Format } = util_components;
+const { Format, DisplayTable } = util_components;
 
 class SobjLine extends React.Component {
   constructor(props) {
@@ -60,6 +60,32 @@ class SobjLine extends React.Component {
         })),
       })
     );
+    const custom_table_data = _.chain(data)
+      .filter(({ label }) => _.includes(active_sobjs, label))
+      .map(({ label, data }) => ({
+        label: label,
+        ..._.chain().zip(years, data).fromPairs().value(),
+      }))
+      .value();
+    const column_configs = {
+      label: {
+        index: 0,
+        header: text_maker("sos"),
+        is_searchable: true,
+      },
+      ..._.chain(years)
+        .map((year, idx) => [
+          year,
+          {
+            index: idx + 1,
+            header: year,
+            is_summable: true,
+            formatter: "dollar",
+          },
+        ])
+        .fromPairs()
+        .value(),
+    };
 
     return (
       <div className="frow">
@@ -100,6 +126,12 @@ class SobjLine extends React.Component {
             }}
             graph_height="500px"
             colorBy={(d) => colors(d.id)}
+            custom_table={
+              <DisplayTable
+                data={custom_table_data}
+                column_configs={column_configs}
+              />
+            }
           />
         </div>
       </div>

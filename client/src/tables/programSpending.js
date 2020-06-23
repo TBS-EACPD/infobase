@@ -81,7 +81,6 @@ export default {
       this.add_col(header).add_child([
         {
           type: "big_int",
-          simple_default: ix === 4,
           nick: `${header}exp`,
           header: {
             en: "Expenditures",

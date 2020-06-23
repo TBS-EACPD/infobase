@@ -1,0 +1,35 @@
+@import '../common_css/common-variables';
+
+ul.fancy-ul {
+  margin-bottom: 20px;
+  padding-left: 0;
+
+  & > li {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: $backgroundColor;
+    border: 1px solid $separatorColor;
+    font-size: 16px;
+
+    &:first-child {
+      border-top-right-radius: $standardBorderRadius;
+      border-top-left-radius: $standardBorderRadius;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+      border-bottom-right-radius: $standardBorderRadius;
+      border-bottom-left-radius: $standardBorderRadius;
+    }
+
+    &.fancy-ul__title,
+    & > .fancy-ul__title {
+      display: flex;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: $heavyFontWeight; 
+    }
+  }
+}

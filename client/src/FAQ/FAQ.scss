@@ -1,0 +1,17 @@
+@import "../common_css/common-variables";
+
+ul.fancy-ul.faq-index {
+  & > li {
+    border-color: $primaryColor;
+    padding: 0px 15px;
+
+    &:first-child {
+      background-color: $primaryColor;
+      color: $textLightColor;
+      text-align: center;
+      font-size: 1.4em;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    } 
+  }
+}

@@ -1,0 +1,25 @@
+@import '../common_css/common-variables';
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown__content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 260px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+}
+.dropdown__content__is-open {
+  display: block;
+}
+.close-dropdown {
+  &:hover, &:hover .close-dropdown__x {
+    color: $tertiaryColor;
+  }
+}
+.close-dropdown__x {
+  color: $highlightColor;
+}

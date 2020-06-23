@@ -98,6 +98,10 @@ const indicator_table_from_list = (indicator_list) => {
     ])
     .fromPairs()
     .value();
+  const fmt_plain_string_date = (date_obj) =>
+    _.isDate(date_obj)
+      ? `${months[date_obj.getMonth() + 1].text} ${date_obj.getFullYear()}`
+      : date_obj;
 
   const column_configs = {
     cr_or_program: {
@@ -105,7 +109,7 @@ const indicator_table_from_list = (indicator_list) => {
       header: text_maker("cr_or_program"),
       is_searchable: true,
       formatter: (value) => ind_map[value].subject_link,
-      search_formatter: (value) => ind_map[value].subject_full_name,
+      raw_formatter: (value) => ind_map[value].subject_full_name,
       sort_func: (a, b) => {
         if (a && b) {
           const a_name = ind_map[a].subject_full_name.toUpperCase();
@@ -130,7 +134,7 @@ const indicator_table_from_list = (indicator_list) => {
         }
         return 0;
       },
-      search_formatter: (value) => ind_map[value].name,
+      raw_formatter: (value) => ind_map[value].name,
     },
     target: {
       index: 2,
@@ -145,10 +149,8 @@ const indicator_table_from_list = (indicator_list) => {
     date_to_achieve: {
       index: 4,
       header: text_maker("date_to_achieve"),
-      formatter: (val) =>
-        _.isDate(val)
-          ? `${months[val.getMonth() + 1].text} ${val.getFullYear()}`
-          : val,
+      formatter: (val) => fmt_plain_string_date(val),
+      raw_formatter: (val) => fmt_plain_string_date(val),
     },
     status: {
       index: 5,
@@ -161,6 +163,7 @@ const indicator_table_from_list = (indicator_list) => {
           {large_status_icons[value]}
         </Fragment>
       ),
+      raw_formatter: (value) => result_statuses[value].text,
     },
   };
 
