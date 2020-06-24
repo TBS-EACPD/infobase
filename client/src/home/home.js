@@ -27,6 +27,7 @@ import {
   IconEmployeesAlt,
   IconClipboardAlt,
   IconHelpAlt,
+  IconServices,
   IconFlagLine,
 } from "src/icons/icons.js";
 
@@ -131,6 +132,17 @@ const HomeLayout = (props) => (
           href="#orgs/gov/gov/infograph/people"
           svg={
             <IconEmployeesAlt
+              width="100%"
+              color="#FFFFFF"
+              alternate_color={false}
+            />
+          }
+          title={<TM k="home_ppl_title" />}
+        />
+        <TrinityItem
+          href="#orgs/gov/gov/infograph/services"
+          svg={
+            <IconServices
               width="100%"
               color="#FFFFFF"
               alternate_color={false}

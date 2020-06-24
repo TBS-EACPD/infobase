@@ -83,3 +83,4 @@ export {
   declare_covid_estimates_panel,
   declare_covid_expenditures_panel,
 } from "./covid/index.js";
+export { declare_provided_services_list_panel } from "./services/index.js";

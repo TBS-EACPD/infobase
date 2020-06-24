@@ -3,12 +3,15 @@ import React from "react";
 
 import { create_text_maker } from "src/models/text.js";
 
+import { lang } from "src/core/injected_build_constants.js";
+
 import {
   IconInfo,
   IconRelatedBubble,
   IconDataset,
   IconFinances,
   IconEmployees,
+  IconServices,
   IconClipboard,
   IconTag,
   IconHelp,
@@ -53,6 +56,13 @@ const base_configs = [
     description: text_maker("people_desc"),
     enable_panel_filter: true,
     Icon: IconEmployees,
+  },
+  {
+    id: "services",
+    title: _.constant(text.services_title[lang]),
+    description: _.constant(text.services_desc[lang]),
+    enable_panel_filter: true,
+    svg: IconServices,
   },
   {
     id: "results",

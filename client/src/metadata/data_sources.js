@@ -243,6 +243,19 @@ const sources = _.mapValues(
         ];
       },
     },
+    SERVICES: {
+      title() {
+        return "TODO";
+      },
+      description() {
+        return "TODO";
+      },
+      frequency: frequencies.y,
+      open_data: infobase_open_data_page,
+      items() {
+        return _.map(tables_from_source_key("SERVICES"), table_to_row_item);
+      },
+    },
   },
   (obj, key) => ({ ...obj, key })
 );
