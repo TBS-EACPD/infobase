@@ -23,7 +23,7 @@ const sub_module_defs = _.compact([
   results,
   budget_measures,
   resources,
-  !process.env.USE_REMOTE_DB && services, // Dev only ATM
+  services,
   // pses,
   // sobjs,
   // search,

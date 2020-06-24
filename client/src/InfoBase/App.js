@@ -113,6 +113,9 @@ const FootnoteInventory = retrying_react_lazy(() =>
     /* webpackChunkName: "FootnoteInventory" */ "../models/footnotes/FootnoteInventory.js"
   )
 );
+const ServicePanels = retrying_react_lazy(() =>
+  import("../panels/panel_routes/ServicePanels.js")
+);
 
 export class App extends React.Component {
   constructor() {
@@ -171,6 +174,10 @@ export class App extends React.Component {
               <Route path="/rpb/:config?" component={ReportBuilder} />
               <Route path="/about" component={About} />
               <Route path="/faq/:selected_qa_key?" component={FAQ} />
+              <Route
+                path="/dept/:subject_id/service-panels/:service_id?"
+                component={ServicePanels}
+              />
               <Route
                 path="/compare_estimates/:h7y_layout?"
                 component={EstimatesComparison}
