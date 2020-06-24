@@ -6,9 +6,11 @@ import {
   IconDataset,
   IconMoney,
   IconEmployee,
+  IconServices,
   IconClipboard,
 } from "src/icons/icons.js";
 
+import { lang } from "../core/injected_build_constants.js";
 import { create_text_maker } from "../models/text.js";
 
 import { infograph_href_template } from "./infographic_link.js";
@@ -43,6 +45,13 @@ const base_configs = [
     description: text_maker("people_desc"),
     enable_panel_filter: true,
     svg: IconEmployee,
+  },
+  {
+    id: "services",
+    title: _.constant(text.services_title[lang]),
+    description: _.constant(text.services_desc[lang]),
+    enable_panel_filter: true,
+    svg: IconServices,
   },
   {
     id: "results",

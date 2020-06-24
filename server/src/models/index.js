@@ -23,7 +23,7 @@ const sub_module_defs = _.compact([
   results,
   resources,
   covid,
-  !process.env.USE_REMOTE_DB && services, // Dev only ATM
+  !process.env.USE_REMOTE_DB && services, // TODO Dev only ATM
   // pses,
   // sobjs,
   // search,

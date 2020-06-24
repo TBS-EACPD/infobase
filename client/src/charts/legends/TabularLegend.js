@@ -5,7 +5,7 @@ import { CheckBox } from "../../components/index.js";
 import "./TabularLegend.scss";
 
 export const TabularLegend = ({
-  items, // [ { active, id, label, color }]
+  items, // [ { id, label, color }]
   get_right_content, //item => react element
 }) => (
   <ul className="list-unstyled">
@@ -17,7 +17,6 @@ export const TabularLegend = ({
           color={item.color}
           label={item.label}
           isSolidBox={true}
-          active={true}
         />
         <span className="tabular-legend__right-column">
           {get_right_content(item)}
