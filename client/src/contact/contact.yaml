@@ -50,36 +50,36 @@ general_enquiries_text:
 general_enquiries_contact:
   transform: [markdown]
   en: |
-    Email: <a href="mailto:publicenquiries-demandesderenseignement@tbs-sct.gc.ca">Public Enquiries</a><br/>
-    Toll free: 1-877-636-0656<br/>
+    Email: <a href="mailto:publicenquiries-demandesderenseignement@tbs-sct.gc.ca">Public Enquiries</a>  
+    Toll free: 1-877-636-0656  
     Teletypewriter (TTY): 613-369-9371
   fr: |
-    Courriel: <a href="mailto:publicenquiries-demandesderenseignement@tbs-sct.gc.ca">Demandes de renseignment</a><br/>
-    Sans frais: 1-877-636-0656<br/>
+    Courriel: <a href="mailto:publicenquiries-demandesderenseignement@tbs-sct.gc.ca">Demandes de renseignment</a>  
+    Sans frais: 1-877-636-0656  
     Telescripteur (ATS): 613-369-9371
 
 general_enquiries_social_media:
   transform: [handlebars, markdown]
   en: |
-    You can also reach us through social media at the following channels:<br/>
-    {{ext_link "Twitter" "https://twitter.com/TBS_Canada?lang=en"}}<br/>
-    {{ext_link "Facebook" "https://www.facebook.com/YourGovernmentatWork/"}}<br/>
+    You can also reach us through social media at the following channels:  
+    {{ext_link "Twitter" "https://twitter.com/TBS_Canada?lang=en"}}  
+    {{ext_link "Facebook" "https://www.facebook.com/YourGovernmentatWork/"}}  
     {{ext_link "LinkedIn" "https://www.linkedin.com/company/tbs-sct/"}}
   fr: |
-    Vous pouvez egalement nouse rejoindre dans ces medias sociaux:<br/>
-    {{ext_link "Twitter" "https://twitter.com/SCT_Canada?lang=fr"}}<br/>
-    {{ext_link "Facebook" "https://www.facebook.com/Votregouvernementaloeuvre/"}}<br/>
+    Vous pouvez egalement nouse rejoindre dans ces medias sociaux:  
+    {{ext_link "Twitter" "https://twitter.com/SCT_Canada?lang=fr"}}  
+    {{ext_link "Facebook" "https://www.facebook.com/Votregouvernementaloeuvre/"}}  
     {{ext_link "LinkedIn" "https://www.linkedin.com/company/tbs-sct/"}}
 
 general_enquiries_address:
   transform: [markdown]
   en: |
-    Treasury Board of Canada Secretariat<br/>
-    Strategic Communications and Ministerial Affairs<br/>
-    90 Elgin Street, 8th Floor<br/>
+    Treasury Board of Canada Secretariat  
+    Strategic Communications and Ministerial Affairs  
+    90 Elgin Street, 8th Floor  
     Ottawa, Canada K1A 0R5
   fr: |
-    Secrétariat du Conseil du Trésor du Canada<br/>
-    Communications stratégiques et affaires ministérielles<br/>
-    90 rue Elgin, 8ième étage<br/>
+    Secrétariat du Conseil du Trésor du Canada  
+    Communications stratégiques et affaires ministérielles  
+    90 rue Elgin, 8ième étage  
     Ottawa, Canada K1A 0R5
