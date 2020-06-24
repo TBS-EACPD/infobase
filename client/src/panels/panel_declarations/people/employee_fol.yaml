@@ -1,7 +1,7 @@
 employee_fol_title:
   transform: [handlebars]
   en: First Official Language ({{ppl_last_year_5}} to {{ppl_last_year}})
-  fr: Population selon la première langue officielle ({{ppl_last_year_5}} to {{ppl_last_year}})
+  fr: Première langue officielle ({{ppl_last_year_5}} to {{ppl_last_year}})
 
 gov_employee_fol_text:
   transform: [handlebars,markdown]

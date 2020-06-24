@@ -1,7 +1,7 @@
 employee_executive_level_title:
   transform: [handlebars]
   en: Executive Level ({{ppl_last_year_5}} to {{ppl_last_year}})
-  fr: Population selon les niveaux des cadres supérieurs ({{ppl_last_year_5}} à {{ppl_last_year}})
+  fr: Niveaux des cadres supérieurs ({{ppl_last_year_5}} à {{ppl_last_year}})
 
 gov_employee_executive_level_text:
   transform: [handlebars,markdown]
