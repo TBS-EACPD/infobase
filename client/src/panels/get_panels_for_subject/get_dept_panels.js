@@ -55,6 +55,7 @@ import {
   declare_internal_services_panel,
   declare_employee_last_year_totals_panel,
   declare_detailed_program_spending_split_panel,
+  declare_provided_services_list_panel,
 } from "src/panels/panel_declarations/index.js";
 
 import { ensure_loaded } from "src/core/ensure_loaded.js";
@@ -65,6 +66,7 @@ export const get_dept_panels = (subject) =>
     subject: subject,
     has_results: true,
     has_covid_data: true,
+    has_services: true,
   }).then(() => ({
     intro: [declare_profile_panel(), declare_portfolio_structure_intro_panel()],
     financial: _.includes(subject.tables, "programSpending") && [
@@ -102,6 +104,9 @@ export const get_dept_panels = (subject) =>
       declare_employee_executive_level_panel(),
       declare_employee_fol_panel(),
       declare_employee_gender_panel(),
+    ],
+    services: subject.has_data("services_data") && [
+      declare_provided_services_list_panel(),
     ],
     results: subject.has_data("results") && [
       declare_results_key_concepts_panel(),
