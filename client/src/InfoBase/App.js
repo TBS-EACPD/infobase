@@ -49,9 +49,9 @@ const About = retrying_react_lazy(() =>
   import(/* webpackChunkName: "About" */ "../about/about.js")
 );
 
-const Contact = retrying_react_lazy(() => 
-  import("../contact/contact.js")
-)
+const Contact = retrying_react_lazy(() =>
+  import(/* webpackChunkName: "Contact" */ "../contact/contact.js")
+);
 const FAQ = retrying_react_lazy(() =>
   import(/* webpackChunkName: "FAQ" */ "../FAQ/FAQ.js")
 );
