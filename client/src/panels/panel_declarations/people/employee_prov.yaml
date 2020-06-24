@@ -22,7 +22,7 @@ gov_employee_prov_text:
 employee_prov_title: 
   transform: [handlebars]
   en: Geographic Region ({{ppl_last_year_5}} to {{ppl_last_year}})
-  fr: Population selon la région géographique ({{ppl_last_year_5}} à {{ppl_last_year}})
+  fr: Région géographique ({{ppl_last_year_5}} à {{ppl_last_year}})
 
 
 dept_employee_prov_text:
