@@ -157,6 +157,12 @@ historical:
 planning:
   en: Planned
   fr: Prévue
+yes:
+  en: Yes
+  fr: Oui
+no:
+  en: No
+  fr: Non
 all:
   en: All
   fr: Tout
