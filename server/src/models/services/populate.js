@@ -98,8 +98,6 @@ export default async function ({ models }) {
       program_ids,
       feedback_channels_en,
       feedback_channels_fr,
-      urls_en,
-      urls_fr,
 
       ...other_fields
     }) => ({
@@ -151,8 +149,6 @@ export default async function ({ models }) {
         target_groups_fr,
         feedback_channels_en,
         feedback_channels_fr,
-        urls_en,
-        urls_fr,
       }),
       ...other_fields,
 
