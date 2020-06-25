@@ -22,11 +22,11 @@ const schema = `
 
     name: String
     description: String
-    service_type: [String]
+    service_type: String
     scope: [String]
     target_groups: [String]
     feedback_channels: [String]
-    urls: [String]
+    url: String
     comment: String
 
     last_gender_analysis: String
@@ -109,7 +109,7 @@ export default function ({ models, loaders }) {
       scope: bilingual_field("scope"),
       target_groups: bilingual_field("target_groups"),
       feedback_channels: bilingual_field("feedback_channels"),
-      urls: bilingual_field("urls"),
+      url: bilingual_field("url"),
       comment: bilingual_field("comment"),
       digital_enablement_comment: bilingual_field("digital_enablement_comment"),
     },

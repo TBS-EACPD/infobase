@@ -46,16 +46,12 @@ export default async function ({ models }) {
       dept: org_id,
 
       program_ids,
-      service_type_en,
-      service_type_fr,
       scope_en,
       scope_fr,
       target_groups_en,
       target_groups_fr,
       feedback_channels_en,
       feedback_channels_fr,
-      urls_en,
-      urls_fr,
 
       ...other_fields
     }) => ({
@@ -64,16 +60,12 @@ export default async function ({ models }) {
 
       ...multi_value_string_fields_to_arrays({
         program_ids,
-        service_type_en,
-        service_type_fr,
         scope_en,
         scope_fr,
         target_groups_en,
         target_groups_fr,
         feedback_channels_en,
         feedback_channels_fr,
-        urls_en,
-        urls_fr,
       }),
 
       ...other_fields,
