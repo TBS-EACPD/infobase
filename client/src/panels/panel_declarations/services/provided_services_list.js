@@ -1,4 +1,4 @@
-import text from "./services.yaml";
+import text from "./provided_services_list.yaml";
 import { Service } from "../../../models/services.js";
 
 import {

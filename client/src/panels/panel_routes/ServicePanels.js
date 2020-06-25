@@ -9,15 +9,10 @@ import { ensure_loaded } from "../../core/lazy_loader.js";
 import { Service } from "../../models/services";
 import { Subject } from "../../models/subject";
 import { infograph_href_template } from "../../link_utils.js";
+import { ServiceOverview } from "../panel_declarations/services";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const ServiceOverviewPanel = (panel_args) => {
-  const service = panel_args.service;
-  return (
-    <Panel title={text_maker("service_overview_title")}>This is overview</Panel>
-  );
-};
 const ServiceChannelPanel = (panel_args) => {
   const service = panel_args.service;
   return (
@@ -82,7 +77,7 @@ export default class ServicePanels extends React.Component {
         ) : (
           <div>
             <h1>{service.name}</h1>
-            <ServiceOverviewPanel service={service} />
+            <ServiceOverview service={service} />
             <ServiceChannelPanel service={service} />
             <ServiceStandardsPanel service={service} />
           </div>

@@ -199,3 +199,19 @@
 .grid-row:last-child > .key_concept_def {
   border: none;
 }
+.px-max-lg-0 {
+  @media (max-width: $maxMediumDevice){
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+.pl-min-lg-0 {
+  @media (min-width: $minMediumDevice){
+    padding-left: 0 !important;
+  }
+}
+.pr-min-lg-0 {
+  @media (min-width: $minMediumDevice){
+    padding-right: 0 !important;
+  }
+}
