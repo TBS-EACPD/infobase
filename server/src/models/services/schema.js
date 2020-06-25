@@ -44,7 +44,7 @@ const schema = `
 
     name: String
     description: String
-    service_type: [String]
+    service_type: String
     scope: [String]
     target_groups: [String]
     feedback_channels: [String]
