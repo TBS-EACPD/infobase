@@ -115,7 +115,8 @@ const dept_service_fragment = `org_id
         scope
         target_groups
         feedback_channels
-        urls
+        url
+        comment
 
         last_gender_analysis
 
