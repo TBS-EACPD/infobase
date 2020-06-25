@@ -1,0 +1,38 @@
+@import "../common_css/common-variables.scss";
+
+.gauge {
+  position: relative;
+  border-radius: 50%/100% 100% 0 0;
+  overflow: hidden;
+  width: 200px;
+}
+.gauge:before {
+  content: "";
+  display: block;
+  padding-top: 50%;
+}
+.gauge_mask {
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  bottom: 0;
+  top: 40%;
+  background-color: lighten($tertiaryColor, 37%);;
+  border-radius: 50%/100% 100% 0 0;
+}
+.gauge_percentage {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: 0;
+  background-color: lighten($tertiaryColor, 30%);;
+  width: 100%;
+  transform-origin: bottom center;
+}
+.gauge_value {
+  position: absolute;
+  bottom: 0%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}

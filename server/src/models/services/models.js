@@ -44,11 +44,11 @@ export default function (model_singleton) {
 
     ...bilingual_str("name"),
     ...bilingual_str("description"),
-    ...bilingual("service_type", [str_type]),
+    ...bilingual_str("service_type"),
     ...bilingual("scope", [str_type]),
     ...bilingual("target_groups", [str_type]),
     ...bilingual("feedback_channels", [str_type]),
-    ...bilingual("urls", [str_type]),
+    ...bilingual_str("url"),
     ...bilingual_str("comment"),
 
     last_gender_analysis: str_type,
