@@ -1,32 +1,17 @@
 import text from "./ServicePanels.yaml";
 import { StandardRouteContainer } from "../../core/NavComponents.js";
-import {
-  create_text_maker_component,
-  Panel,
-  SpinnerWrapper,
-} from "../../components";
+import { create_text_maker_component, SpinnerWrapper } from "../../components";
 import { ensure_loaded } from "../../core/lazy_loader.js";
 import { Service } from "../../models/services";
 import { Subject } from "../../models/subject";
 import { infograph_href_template } from "../../link_utils.js";
-import { ServiceOverview } from "../panel_declarations/services";
+import {
+  ServiceOverview,
+  ServiceChannels,
+  ServiceStandards,
+} from "../panel_declarations/services";
 
-const { text_maker, TM } = create_text_maker_component(text);
-
-const ServiceChannelPanel = (panel_args) => {
-  const service = panel_args.service;
-  return (
-    <Panel title={text_maker("service_channels_title")}>This is channels</Panel>
-  );
-};
-const ServiceStandardsPanel = (panel_args) => {
-  const service = panel_args.service;
-  return (
-    <Panel title={text_maker("service_standards_title")}>
-      This is standards
-    </Panel>
-  );
-};
+const { text_maker } = create_text_maker_component(text);
 
 export default class ServicePanels extends React.Component {
   constructor(props) {
@@ -78,8 +63,8 @@ export default class ServicePanels extends React.Component {
           <div>
             <h1>{service.name}</h1>
             <ServiceOverview service={service} />
-            <ServiceChannelPanel service={service} />
-            <ServiceStandardsPanel service={service} />
+            <ServiceChannels service={service} />
+            <ServiceStandards service={service} />
           </div>
         )}
       </StandardRouteContainer>

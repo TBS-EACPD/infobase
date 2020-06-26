@@ -1,0 +1,30 @@
+service_standards_title:
+  en: Service Standards
+  fr: TODO
+service_standards_text:
+  en: Below are standard(s) for this service
+  fr: TODO
+standard_name:
+  en: Standard name
+  fr: TODO
+standard_type:
+  en: Standard type
+  fr: TODO
+standard_channel:
+  en: Standard channel
+  fr: TODO
+stanndard_count:
+  en: Target
+  fr: TODO
+stanndard_met_count:
+  en: Actual results
+  fr: TODO
+stanndard_status:
+  en: Status
+  fr: TODO
+standard_met:
+  en: Met
+  fr: TODO
+standard_not_met:
+  en: Not met
+  fr: TODO
