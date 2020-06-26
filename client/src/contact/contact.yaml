@@ -1,0 +1,85 @@
+contact_us_title:
+  en: Contact Us
+  fr: Contactez-nous
+
+contact_us_intro:
+  transform: [markdown]
+  en: |
+    We value your questions and comments. As such, we have provided multiple methods of communication.
+
+
+    If you need to contact us, please email us at questions@tbs-sct.gc.ca.
+  fr: |
+    Vos questions et commentaires nous intéressent. C'est pourquoi nous avons prévu plusieurs méthodes de communication.
+
+
+    Si vous avez besoin de communiquer avec nous, envoyez-nous un courriel à question@tbs-sct.gc.ca.
+
+feedback_title:
+  en: Have Feedback?
+  fr: Avez-vous des commentaires?
+
+feedback_text:
+  transform: [handlebars, markdown]
+  en: |
+    We are always looking for ideas and suggestions to help us improve the current version of the InfoBase. If you would like to share some ideas or comments regarding your experience 
+    with the tool, please take a few minutes to complete our {{ext_link "online survey" survey_link }}. The feedback you provide will be used
+    to improve the current version of GC InfoBase and prioritize new features.
+  fr: |
+    Nous sommes constamment à la recherche d’idées et de suggestions pour améliorer la version actuelle de l’InfoBase. Le cas échéant, veuillez prendre quelques minutes pour remplir 
+    notre {{ext_link "sondage en ligne" survey_link }}. En répondant aux quelques questions qui suivent, vous nous aiderez à améliorer
+    l’InfoBase du GC et à fixer l’ordre de priorité pour les nouvelles caractéristiques.
+
+general_enquiries_title:
+  en: General and Technical Enquiries
+  fr: Questions de nature generale et techniques
+
+general_enquiries_text:
+  transform: [handlebars, markdown]
+  en: |
+    Provision of the information requested on this form is voluntary. The information is being collected for the purpose of responding to your query/comments, 
+    and to improve our Internet suite of products and services. Personal information that you provide is protected under the provisions of the Privacy Act. 
+    Your personal information will be stored in {{ext_link "PSU 914 Public Communications" "http://www.infosource.gc.ca/emp/emp03-eng.asp#psu914"}}. 
+    The act provides you with a right of access to your information.
+  fr: |
+    Les réponses à ce formulaire sont données sur une base volontaire. Nous recueillons ces renseignements en vue de répondre à vos demandes et commentaires et 
+    d’améliorer notre série de produits et de services Internet. Vos réponses sont protégées en vertu des dispositions de la Loi sur la protection des renseignements 
+    personnels et seront conservées dans le répertoire des {{ext_link "POU 914 Communications publiques" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/acces-information-protection-reseignements-personnels/acces-information/renseignements-programmes-fonds-renseignements.html"}}. 
+    La Loi vous donne le droit de consulter vos renseignements personnels.
+
+general_enquiries_contact:
+  transform: [markdown]
+  en: |
+    Email: <a href="mailto:publicenquiries-demandesderenseignement@tbs-sct.gc.ca">Public Enquiries</a>  
+    Toll free: 1-877-636-0656  
+    Teletypewriter (TTY): 613-369-9371
+  fr: |
+    Courriel: <a href="mailto:publicenquiries-demandesderenseignement@tbs-sct.gc.ca">Demandes de renseignment</a>  
+    Sans frais: 1-877-636-0656  
+    Telescripteur (ATS): 613-369-9371
+
+general_enquiries_social_media:
+  transform: [handlebars, markdown]
+  en: |
+    You can also reach us through social media at the following channels:  
+    {{ext_link "Twitter" "https://twitter.com/TBS_Canada?lang=en"}}  
+    {{ext_link "Facebook" "https://www.facebook.com/YourGovernmentatWork/"}}  
+    {{ext_link "LinkedIn" "https://www.linkedin.com/company/tbs-sct/"}}
+  fr: |
+    Vous pouvez egalement nouse rejoindre dans ces medias sociaux:  
+    {{ext_link "Twitter" "https://twitter.com/SCT_Canada?lang=fr"}}  
+    {{ext_link "Facebook" "https://www.facebook.com/Votregouvernementaloeuvre/"}}  
+    {{ext_link "LinkedIn" "https://www.linkedin.com/company/tbs-sct/"}}
+
+general_enquiries_address:
+  transform: [markdown]
+  en: |
+    Treasury Board of Canada Secretariat  
+    Strategic Communications and Ministerial Affairs  
+    90 Elgin Street, 8th Floor  
+    Ottawa, Canada K1A 0R5
+  fr: |
+    Secrétariat du Conseil du Trésor du Canada  
+    Communications stratégiques et affaires ministérielles  
+    90 rue Elgin, 8ième étage  
+    Ottawa, Canada K1A 0R5
