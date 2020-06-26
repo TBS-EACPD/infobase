@@ -76,6 +76,7 @@ export class WrappedNivoPie extends React.Component {
       percentage: row.value / graph_total,
       value: row.value,
     }));
+    const value_formatter = get_formatter(is_money, text_formatter, true, true);
     const column_configs = {
       label: {
         index: 0,
@@ -85,10 +86,7 @@ export class WrappedNivoPie extends React.Component {
       value: {
         index: 1,
         header: nivo_common_text_maker("value"),
-        formatter: (value) =>
-          value
-            ? get_formatter(is_money, text_formatter, true, false)(value)
-            : "",
+        formatter: (value) => (value ? value_formatter(value) : ""),
       },
       percentage: {
         index: 2,
@@ -157,7 +155,7 @@ export class WrappedNivoPie extends React.Component {
                   get_right_content={(item) => (
                     <div>
                       <span className="infobase-pie__legend-data">
-                        <Format type="compact1" content={item.value} />
+                        {value_formatter(item.value)}
                       </span>
                       <span className="infobase-pie__legend-data">
                         <Format
