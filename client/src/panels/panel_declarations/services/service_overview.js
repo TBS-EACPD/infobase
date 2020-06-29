@@ -4,7 +4,10 @@ import {
   create_text_maker_component,
   Panel,
   DisplayTable,
+  FancyUL,
 } from "../../../components";
+import { Subject } from "../../../models/subject.js";
+import { infograph_href_template } from "../../../link_utils.js";
 import { IconX, IconCheck } from "../../../icons/icons.js";
 import Gauge from "../../../charts/gauge.js";
 
@@ -105,11 +108,16 @@ export class ServiceOverview extends React.Component {
               />
             </div>
             <div className="service_overview-rect">
-              <TM
-                el="h2"
-                k={"service_link_text"}
-                args={{ service_url: service.url }}
-              />
+              <FancyUL title={text_maker("related_programs")}>
+                {_.map(service.program_ids, (program_id) => {
+                  const program = Subject.Program.lookup(program_id);
+                  return (
+                    <a key={program_id} href={infograph_href_template(program)}>
+                      {program.name}
+                    </a>
+                  );
+                })}
+              </FancyUL>
             </div>
           </div>
           <div className="fcol-md-5">
@@ -126,6 +134,13 @@ export class ServiceOverview extends React.Component {
                   downloadCsvUtil: null,
                   columnToggleUtil: null,
                 }}
+              />
+            </div>
+            <div className="service_overview-rect">
+              <TM
+                el="h2"
+                k={"service_link_text"}
+                args={{ service_url: service.url }}
               />
             </div>
           </div>
