@@ -41,7 +41,7 @@ standards_performance_text:
   fr: TODO
 service_link_text:
   transform: [handlebars, markdown]
-  en: More details on this service can be found {{ext_link "here" service_url }}
+  en: More details on this service can be found **{{ext_link "here" service_url }}**
   fr: TODO
 standard_target_met:
   transform: [handlebars, markdown]
@@ -50,4 +50,7 @@ standard_target_met:
 standard_target_not_met:
   transform: [handlebars, markdown]
   en: Service Standard **targets** were **not met**
+  fr: TODO
+related_programs:
+  en: Related Programs
   fr: TODO
