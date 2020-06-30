@@ -1,4 +1,4 @@
-import text from "./ServicePanels.yaml";
+import text from "./SingleServiceRoute.yaml";
 import { StandardRouteContainer } from "../../core/NavComponents.js";
 import { create_text_maker_component, SpinnerWrapper } from "../../components";
 import { ensure_loaded } from "../../core/lazy_loader.js";
@@ -13,7 +13,7 @@ import {
 
 const { text_maker } = create_text_maker_component(text);
 
-export default class ServicePanels extends React.Component {
+export default class SingleServiceRoute extends React.Component {
   constructor(props) {
     super(props);
     this.state = { loading: true, service: null };
@@ -47,15 +47,15 @@ export default class ServicePanels extends React.Component {
 
     return (
       <StandardRouteContainer
-        title={text_maker("service_page_title")}
+        title={text_maker("single_service_route_title")}
         breadcrumbs={[
           <a href={infograph_href_template(subject, "services")}>
             {subject.name}
           </a>,
-          text_maker("service_page_title"),
+          text_maker("single_service_route_title"),
         ]}
-        description={text_maker("service_page_desc")}
-        route_key="service_panels"
+        description={text_maker("single_service_route_desc")}
+        route_key="single_service_route"
       >
         {loading ? (
           <SpinnerWrapper ref="spinner" config_name={"sub_route"} />

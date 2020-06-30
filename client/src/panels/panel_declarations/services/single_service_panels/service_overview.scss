@@ -1,4 +1,4 @@
-@import '../../../common_css/common-variables';
+@import '../../../../common_css/common-variables';
 
 .service_overview-container {
   display: flex;
@@ -6,7 +6,6 @@
     flex-direction:column;
   }
 }
-
 .service_overview-rect {
   background-color: lighten($tertiaryColor, 37%);
   border: 2px solid $primaryColor;
@@ -14,4 +13,8 @@
   padding: 0px 5px 0px;
   margin-bottom: 10px;
   min-height: 65px;
+}
+.identifier-li {
+  display: flex;
+  justify-content: space-between;
 }
