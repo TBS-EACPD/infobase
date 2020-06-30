@@ -82,8 +82,8 @@ const FootnoteInventory = retrying_react_lazy(() =>
 const Survey = retrying_react_lazy(() =>
   import(/* webpackChunkName: "Survey" */ "src/Survey/Survey.js")
 );
-const ServicePanels = retrying_react_lazy(() =>
-  import("../panels/panel_routes/ServicePanels.js")
+const SingleServiceRoute = retrying_react_lazy(() =>
+  import("../panels/panel_routes/SingleServiceRoute.js")
 );
 
 const store = createStore(app_reducer);
@@ -173,7 +173,7 @@ export class App extends React.Component {
                 />
                 <Route
                   path="/dept/:subject_id/service-panels/:service_id?"
-                  component={ServicePanels}
+                  component={SingleServiceRoute}
                 />
                 <Route
                   path="/orgs/:level/:subject_id/infograph/:active_bubble_id?/:options?/"
