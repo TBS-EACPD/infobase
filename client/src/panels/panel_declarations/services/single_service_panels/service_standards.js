@@ -3,9 +3,9 @@ import {
   create_text_maker_component,
   Panel,
   DisplayTable,
-} from "../../../components";
-import { newIBCategoryColors } from "../shared.js";
-import { IconAttention, IconCheck } from "../../../icons/icons.js";
+} from "../../../../components";
+import { newIBCategoryColors } from "../../shared.js";
+import { IconAttention, IconCheck } from "../../../../icons/icons.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -79,7 +79,11 @@ export class ServiceStandards extends React.Component {
     };
     return (
       <Panel title={text_maker("service_standards_title")}>
-        <TM className="medium_panel_text" k="service_standards_text" />
+        <TM
+          className="medium_panel_text"
+          k="service_standards_text"
+          args={{}}
+        />
         <DisplayTable data={data} column_configs={column_configs} />
       </Panel>
     );

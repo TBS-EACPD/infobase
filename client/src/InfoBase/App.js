@@ -119,8 +119,8 @@ const FootnoteInventory = retrying_react_lazy(() =>
     /* webpackChunkName: "FootnoteInventory" */ "../models/footnotes/FootnoteInventory.js"
   )
 );
-const ServicePanels = retrying_react_lazy(() =>
-  import("../panels/panel_routes/ServicePanels.js")
+const SingleServiceRoute = retrying_react_lazy(() =>
+  import("../panels/panel_routes/SingleServiceRoute.js")
 );
 
 export class App extends React.Component {
@@ -215,7 +215,7 @@ export class App extends React.Component {
               <Route path="/faq/:selected_qa_key?" component={FAQ} />
               <Route
                 path="/dept/:subject_id/service-panels/:service_id?"
-                component={ServicePanels}
+                component={SingleServiceRoute}
               />
               <Route
                 path="/compare_estimates/:h7y_layout?"

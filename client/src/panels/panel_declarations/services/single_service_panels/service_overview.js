@@ -5,11 +5,11 @@ import {
   Panel,
   DisplayTable,
   FancyUL,
-} from "../../../components";
-import { Subject } from "../../../models/subject.js";
-import { infograph_href_template } from "../../../link_utils.js";
-import { IconX, IconCheck } from "../../../icons/icons.js";
-import Gauge from "../../../charts/gauge.js";
+} from "../../../../components";
+import { Subject } from "../../../../models/subject.js";
+import { infograph_href_template } from "../../../../link_utils.js";
+import { IconX, IconCheck } from "../../../../icons/icons.js";
+import Gauge from "../../../../charts/gauge.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
 const digital_status_keys = [
@@ -25,6 +25,22 @@ export class ServiceOverview extends React.Component {
   render() {
     const { service } = this.props;
     const standards = service.standards;
+    const get_icon = (value) =>
+      value ? (
+        <IconCheck
+          title={text_maker("yes")}
+          color={window.infobase_color_constants.successDarkColor}
+          width={30}
+          alternate_color={false}
+        />
+      ) : (
+        <IconX
+          title={text_maker("no")}
+          color={window.infobase_color_constants.highlightDark}
+          width={30}
+          alternate_color={false}
+        />
+      );
 
     const column_configs = {
       digital_status_desc: {
@@ -34,36 +50,7 @@ export class ServiceOverview extends React.Component {
       digital_status: {
         index: 1,
         header: text_maker("online_status"),
-        formatter: (value) =>
-          value ? (
-            <span>
-              <IconCheck
-                title={value}
-                color={window.infobase_color_constants.successDarkColor}
-                width={30}
-                alternate_color={false}
-              />
-              <TM
-                style={{
-                  color: window.infobase_color_constants.successDarkColor,
-                }}
-                k="yes"
-              />
-            </span>
-          ) : (
-            <span>
-              <IconX
-                title={value}
-                color={window.infobase_color_constants.highlightDark}
-                width={30}
-                alternate_color={false}
-              />
-              <TM
-                style={{ color: window.infobase_color_constants.highlightDark }}
-                k="no"
-              />
-            </span>
-          ),
+        formatter: (value) => get_icon(value),
       },
     };
     return (
@@ -106,6 +93,23 @@ export class ServiceOverview extends React.Component {
                 value={_.countBy(standards, "is_target_met").true}
                 total_value={standards.length}
               />
+            </div>
+            <div className="service_overview-rect">
+              <FancyUL
+                className="service_overview-fancy-ul"
+                title={text_maker("identification_methods")}
+              >
+                {[
+                  <div key="cra_as_identifier" className="identifier-li">
+                    <TM style={{ lineHeight: 2 }} k="cra_as_identifier" />
+                    {get_icon(service.cra_buisnss_number_is_identifier)}
+                  </div>,
+                  <div key="sin_as_identifier" className="identifier-li">
+                    <TM style={{ lineHeight: 2 }} k="sin_as_identifier" />
+                    {get_icon(service.sin_is_identifier)}
+                  </div>,
+                ]}
+              </FancyUL>
             </div>
             <div className="service_overview-rect">
               <FancyUL title={text_maker("related_programs")}>
