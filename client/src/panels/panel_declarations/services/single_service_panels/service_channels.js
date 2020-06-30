@@ -1,6 +1,6 @@
 import text from "./service_channels.yaml";
-import { create_text_maker_component, Panel } from "../../../components";
-import { NivoResponsivePie } from "../../../charts/wrapped_nivo";
+import { create_text_maker_component, Panel } from "../../../../components";
+import { NivoResponsivePie } from "../../../../charts/wrapped_nivo";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
