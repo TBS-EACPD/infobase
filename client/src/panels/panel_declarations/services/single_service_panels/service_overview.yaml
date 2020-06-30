@@ -54,3 +54,14 @@ standard_target_not_met:
 related_programs:
   en: Related Programs
   fr: TODO
+identification_methods:
+  en: Identification Methods
+  fr: TODO
+cra_as_identifier:
+  transform: [handlebars, markdown]
+  en: Uses **CRA business number** as identifier
+  fr: TODO
+sin_as_identifier:
+  transform: [handlebars, markdown]
+  en: Uses **SIN** as identifier
+  fr: TODO
