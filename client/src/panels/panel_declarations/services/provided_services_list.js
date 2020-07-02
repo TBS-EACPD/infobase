@@ -1,12 +1,10 @@
-import text from "./provided_services_list.yaml";
+import text from "./services.yaml";
 import { Service } from "../../../models/services.js";
 import {
   create_text_maker_component,
   InfographicPanel,
   declare_panel,
 } from "../shared.js";
-import { FancyUL } from "../../../components";
-
 import { FancyUL } from "../../../components";
 
 const { text_maker, TM } = create_text_maker_component(text);
