@@ -18,11 +18,19 @@ const ProvidedServicesListPanel = ({ panel_args }) => (
         num_of_services: panel_args.services.length,
       }}
     />
-    {_.map(panel_args.services, ({ name, id, org_id }) => (
-      <a key={id} href={`#dept/${org_id}/service-panels/${id}`}>
-        {name}
-      </a>
-    ))}
+    <FancyUL>
+      {_.map(
+        panel_args.services,
+        ({ name, id, org_id, service_type, description }) => (
+          <React.Fragment key={id}>
+            <a href={`#dept/${org_id}/service-panels/${id}`}>{name}</a>
+            <p>
+              <strong>{service_type}:</strong> {description}
+            </p>
+          </React.Fragment>
+        )
+      )}
+    </FancyUL>
   </div>
 );
 
