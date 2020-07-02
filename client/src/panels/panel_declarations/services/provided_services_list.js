@@ -26,8 +26,17 @@ const ProvidedServicesListPanel = ({ panel_args }) => (
           <React.Fragment key={id}>
             <a href={`#dept/${org_id}/service-panels/${id}`}>{name}</a>
             <p>{description}</p>
-            <div style={{ display: "flex", fontSize: "14px" }}>
+            <div
+              style={{
+                display: "flex",
+                fontSize: "14px",
+                justifyContent: "space-between",
+              }}
+            >
               <div className="tag-badge">{service_type}</div>
+              <a href={`#dept/${org_id}/service-panels/${id}`}>
+                See this service.
+              </a>
             </div>
           </React.Fragment>
         )
