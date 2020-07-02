@@ -5,6 +5,7 @@ import {
   InfographicPanel,
   declare_panel,
 } from "../shared.js";
+import { FancyUL } from "../../../components";
 
 import { FancyUL } from "../../../components";
 
