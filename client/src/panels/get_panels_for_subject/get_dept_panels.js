@@ -56,6 +56,10 @@ import {
   declare_employee_last_year_totals_panel,
   declare_detailed_program_spending_split_panel,
   declare_provided_services_list_panel,
+  declare_services_fees_panel,
+  declare_services_id_methods_panel,
+  declare_services_channels_panel,
+  declare_services_digital_status_panel,
 } from "src/panels/panel_declarations/index.js";
 
 import { ensure_loaded } from "src/core/ensure_loaded.js";
@@ -107,6 +111,10 @@ export const get_dept_panels = (subject) =>
     ],
     services: subject.has_data("services_data") && [
       declare_provided_services_list_panel(),
+      declare_services_digital_status_panel(),
+      declare_services_fees_panel(),
+      declare_services_id_methods_panel(),
+      declare_services_channels_panel(),
     ],
     results: subject.has_data("results") && [
       declare_results_key_concepts_panel(),
