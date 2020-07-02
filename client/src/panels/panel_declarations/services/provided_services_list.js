@@ -6,6 +6,7 @@ import {
   InfographicPanel,
   declare_panel,
 } from "../shared.js";
+import { FancyUL } from "../../../components";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -24,9 +25,10 @@ const ProvidedServicesListPanel = ({ panel_args }) => (
         ({ name, id, org_id, service_type, description }) => (
           <React.Fragment key={id}>
             <a href={`#dept/${org_id}/service-panels/${id}`}>{name}</a>
-            <p>
-              <strong>{service_type}:</strong> {description}
-            </p>
+            <p>{description}</p>
+            <div style={{ display: "flex", fontSize: "14px" }}>
+              <div className="tag-badge">{service_type}</div>
+            </div>
           </React.Fragment>
         )
       )}
