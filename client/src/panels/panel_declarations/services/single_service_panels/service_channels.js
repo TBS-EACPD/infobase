@@ -1,17 +1,9 @@
-import text from "./service_channels.yaml";
+import text from "../services.yaml";
+import { service_channels_keys } from "../shared.js";
 import { create_text_maker_component, Panel } from "../../../../components";
 import { NivoResponsivePie } from "../../../../charts/wrapped_nivo";
 
 const { text_maker, TM } = create_text_maker_component(text);
-
-const service_channels_keys = [
-  "in_person_applications",
-  "mail_applications",
-  "online_applications",
-  "other_channel_applications",
-  "telephone_enquires",
-  "website_visits",
-];
 
 export class ServiceChannels extends React.Component {
   render() {

@@ -1,5 +1,5 @@
 import "./service_overview.scss";
-import text from "./service_overview.yaml";
+import text from "../services.yaml";
 import {
   create_text_maker_component,
   Panel,
@@ -10,16 +10,9 @@ import { Subject } from "../../../../models/subject.js";
 import { infograph_href_template } from "../../../../link_utils.js";
 import { IconX, IconCheck } from "../../../../icons/icons.js";
 import Gauge from "../../../../charts/gauge.js";
+import { digital_status_keys } from "../shared.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
-const digital_status_keys = [
-  "account_reg_digital",
-  "application_digital",
-  "authentication",
-  "decision_digital",
-  "issuance_digital",
-  "issue_res_digital",
-];
 
 export class ServiceOverview extends React.Component {
   render() {

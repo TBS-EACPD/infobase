@@ -77,4 +77,10 @@ export {
   declare_gov_drr_panel,
   declare_gov_dp_panel,
 } from "./results/index.js";
-export { declare_provided_services_list_panel } from "./services/index.js";
+export {
+  declare_provided_services_list_panel,
+  declare_services_fees_panel,
+  declare_services_id_methods_panel,
+  declare_services_channels_panel,
+  declare_services_digital_status_panel,
+} from "./services";
