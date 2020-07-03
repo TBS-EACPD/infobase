@@ -157,12 +157,6 @@ historical:
 planning:
   en: Planned
   fr: Prévue
-yes:
-  en: Yes
-  fr: Oui
-no:
-  en: No
-  fr: Non
 all:
   en: All
   fr: Tout
@@ -422,6 +416,9 @@ pie_filtered_groups_note:
 see_the_infographic:
   en: See the Infographic
   fr: Voir l’infographie
+available:
+  en: Available
+  fr: Disponible
 not_available:
   en: Not Available
   fr: Non disponible
