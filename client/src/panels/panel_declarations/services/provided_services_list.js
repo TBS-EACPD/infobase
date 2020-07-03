@@ -90,6 +90,14 @@ const ProvidedServicesListPanel = ({ panel_args }) => (
         num_of_services: panel_args.services.length,
       }}
     />
+    <input
+      aria-label={text_maker("explorer_search_is_optional")}
+      className="form-control input-lg"
+      type="text"
+      style={{ width: "100%", marginBottom: "1rem" }}
+      placeholder={text_maker("filter_results")}
+      onChange={(evt) => null}
+    />
     <FancyUL>
       {_.map(
         panel_args.services,
@@ -106,7 +114,7 @@ const ProvidedServicesListPanel = ({ panel_args }) => (
             >
               <div className="tag-badge">{service_type}</div>
               <a href={`#dept/${org_id}/service-panels/${id}`}>
-                See this service.
+                See this service
               </a>
             </div>
           </React.Fragment>
