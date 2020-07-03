@@ -101,6 +101,11 @@ module.exports.route_load_tests_config = [
     test_on: ["eng", "fra", "basic-eng"],
   },
   {
+    name: "Infographic - Dept - Services",
+    route: "orgs/dept/326/infograph/services",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
     name: "Infographic - Dept - Results",
     route: "orgs/dept/326/infograph/results",
     test_on: ["eng", "basic-eng"],
