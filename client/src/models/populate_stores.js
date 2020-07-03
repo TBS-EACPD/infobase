@@ -91,6 +91,7 @@ function populate_igoc_models({
       article2,
       other_lang_abbr,
       other_lang_applied_title,
+      other_lang_legal_title,
     ] = row;
 
     const [qfr_url, eval_url, dp_url, website_url] = _.map(
@@ -126,6 +127,7 @@ function populate_igoc_models({
       du_de_la: article2 || "",
       other_lang_abbr,
       other_lang_applied_title,
+      other_lang_legal_title,
     };
 
     const org_instance = Dept.create_and_register(def_obj);
