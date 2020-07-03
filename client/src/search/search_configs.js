@@ -51,6 +51,7 @@ const org_attributes_to_match = [
   "abbr",
   "other_lang_abbr",
   "other_lang_applied_title",
+  "other_lang_legal_title",
   "pas_code",
 ];
 const LimitedDataDisplay = (search, name) => (
