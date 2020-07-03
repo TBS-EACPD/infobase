@@ -20,6 +20,13 @@ services_fees_text:
   transform: [handlebars, markdown]
   en: Out of the services that **{{subject_name}}** provide, **{{fmt_percentage1 charge_fees_percentage}}** of the services charge fees.
   fr: TODO
+services_digital_status_text:
+  transform: [handlebars, markdown]
+  en: |
+    In **{{subject_name}}, {{fmt_percentage1 total_online_digital_status_percentage}}** of service components can be performed online / electronically
+  fr: TODO
+
+# Channels
 service_channels_title:
   en: Communication channels
   fr: TODO
@@ -44,11 +51,51 @@ telephone_enquires:
 website_visits:
   en: Website visits
   fr: TODO
+
+# Overview
+digital_status_title:
+  en: What components of this service are available online?
+  fr: TODO
+digital_status_desc:
+  en: Online component of this service
+  fr: TODO
+online_status:
+  en: Online status
+  fr: TODO
 service_overview_title:
   en: Overview
   fr: TODO
-digital_status_title:
-  en: What components of this service are available online?
+identification_methods:
+  en: Identification Methods
+  fr: TODO
+related_programs:
+  en: Related Programs
+  fr: TODO
+does_charge_fees:
+  transform: [handlebars, markdown]
+  en: This service **does** charge **fees**
+  fr: TODO
+does_not_charge_fees:
+  transform: [handlebars, markdown]
+  en: This service **does not** charge **fees**
+  fr: TODO
+standards_performance_text:
+  en: Overall standards performance for this service
+  fr: TODO
+cra_as_identifier:
+  transform: [handlebars, markdown]
+  en: Uses **CRA business number** as identifier
+  fr: TODO
+sin_as_identifier:
+  transform: [handlebars, markdown]
+  en: Uses **SIN** as identifier
+  fr: TODO
+digital_status:
+  en: Digital status of services
+  fr: TODO
+service_link_text:
+  transform: [handlebars, markdown]
+  en: More details on this service can be found **{{ext_link "here" service_url }}**
   fr: TODO
 account_reg_digital_desc:
   en: A person or business can register a person, place or thing online
@@ -67,55 +114,4 @@ issuance_digital_desc:
   fr: TODO
 issue_res_digital_desc:
   en: They can provide feedback online
-  fr: TODO
-digital_status_desc:
-  en: Online component of this service
-  fr: TODO
-online_status:
-  en: Online status
-  fr: TODO
-does_charge_fees:
-  transform: [handlebars, markdown]
-  en: This service **does** charge **fees**
-  fr: TODO
-does_not_charge_fees:
-  transform: [handlebars, markdown]
-  en: This service **does not** charge **fees**
-  fr: TODO
-standards_performance_text:
-  en: Overall standards performance for this service
-  fr: TODO
-service_link_text:
-  transform: [handlebars, markdown]
-  en: More details on this service can be found **{{ext_link "here" service_url }}**
-  fr: TODO
-standard_target_met:
-  transform: [handlebars, markdown]
-  en: Service Standard **targets** were **met**
-  fr: TODO
-standard_target_not_met:
-  transform: [handlebars, markdown]
-  en: Service Standard **targets** were **not met**
-  fr: TODO
-related_programs:
-  en: Related Programs
-  fr: TODO
-identification_methods:
-  en: Identification Methods
-  fr: TODO
-cra_as_identifier:
-  transform: [handlebars, markdown]
-  en: Uses **CRA business number** as identifier
-  fr: TODO
-sin_as_identifier:
-  transform: [handlebars, markdown]
-  en: Uses **SIN** as identifier
-  fr: TODO
-digital_status:
-  en: Digital status of services
-  fr: TODO
-services_digital_status_text:
-  transform: [handlebars, markdown]
-  en: |
-    In **{{subject_name}}, {{fmt_percentage1 total_online_digital_status_percentage}}** of service components can be performed online / electronically
   fr: TODO

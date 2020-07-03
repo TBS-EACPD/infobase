@@ -1,7 +1,7 @@
 import text from "./services.yaml";
 import { Service } from "../../../models/services.js";
 import { service_channels_keys } from "./shared.js";
-import { StandardLegend } from "../../../charts/legends";
+import { StandardLegend, SelectAllControl } from "../../../charts/legends";
 
 import {
   create_text_maker_component,
@@ -58,6 +58,19 @@ class ServicesChannelsPanel extends React.Component {
                 [id]: !active_services[id],
               },
             })
+          }
+          Controls={
+            <SelectAllControl
+              SelectAllOnClick={() =>
+                this.setState({
+                  active_services: _.chain(services)
+                    .map(({ service_id }) => [service_id, true])
+                    .fromPairs()
+                    .value(),
+                })
+              }
+              SelectNoneOnClick={() => this.setState({ active_services: {} })}
+            />
           }
         />
         <NivoResponsiveBar
