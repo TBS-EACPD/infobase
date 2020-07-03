@@ -9,6 +9,7 @@ const lighthouse_test_routes = [
   "orgs/dept/326/infograph/financial",
   "orgs/dept/326/infograph/people",
   "orgs/dept/326/infograph/results",
+  "orgs/dept/326/infograph/services",
   "rpb/~(columns~(~'thisyearexpenditures)~subject~'gov_gov~'dimension~'major_voted_stat~table~'orgVoteStatQfr~sort_col~'dept~descending~false~filter~'All)",
 ];
 
