@@ -79,11 +79,7 @@ export class ServiceStandards extends React.Component {
     };
     return (
       <Panel title={text_maker("service_standards_title")}>
-        <TM
-          className="medium_panel_text"
-          k="service_standards_text"
-          args={{}}
-        />
+        <TM className="medium_panel_text" k="service_standards_text" />
         <DisplayTable data={data} column_configs={column_configs} />
       </Panel>
     );
