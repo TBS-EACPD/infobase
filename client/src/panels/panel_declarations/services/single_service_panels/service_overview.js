@@ -3,14 +3,12 @@ import text from "../services.yaml";
 import {
   create_text_maker_component,
   Panel,
-  DisplayTable,
   FancyUL,
 } from "../../../../components";
 import { Subject } from "../../../../models/subject.js";
+import { get_available_icon } from "../shared";
 import { infograph_href_template } from "../../../../link_utils.js";
-import { IconX, IconCheck } from "../../../../icons/icons.js";
 import Gauge from "../../../../charts/gauge.js";
-import { digital_status_keys } from "../shared.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -18,59 +16,13 @@ export class ServiceOverview extends React.Component {
   render() {
     const { service } = this.props;
     const standards = service.standards;
-    const get_available_icon = (value) =>
-      value ? (
-        <IconCheck
-          title={text_maker("available")}
-          color={window.infobase_color_constants.successDarkColor}
-          width={30}
-          alternate_color={false}
-        />
-      ) : (
-        <IconX
-          title={text_maker("not_available")}
-          color={window.infobase_color_constants.highlightDark}
-          width={30}
-          alternate_color={false}
-        />
-      );
 
-    const column_configs = {
-      overview_digital_status_desc: {
-        index: 0,
-        header: text_maker("overview_digital_status_desc"),
-      },
-      digital_status: {
-        index: 1,
-        header: text_maker("online_status"),
-        formatter: (value) => get_available_icon(value),
-      },
-    };
     return (
       <Panel title={text_maker("service_overview_title")}>
         <div className={"col-container"}>
           <div className="fcol-md-7">
             <div className="service-overview-rect">
               <h3>{service.description}</h3>
-            </div>
-            <div className={"col-container"}>
-              <div className="fcol-md-6 px-lg-0 pl-min-lg-0">
-                <div className="service-overview-rect">
-                  <h2>{service.service_type}</h2>
-                </div>
-              </div>
-              <div className="fcol-md-6 px-lg-0 pr-min-lg-0">
-                <div className="service-overview-rect">
-                  <TM
-                    el="h4"
-                    k={
-                      service.collects_fees
-                        ? "does_charge_fees"
-                        : "does_not_charge_fees"
-                    }
-                  />
-                </div>
-              </div>
             </div>
             <div
               style={{
@@ -106,6 +58,27 @@ export class ServiceOverview extends React.Component {
                 ]}
               </FancyUL>
             </div>
+          </div>
+          <div className="fcol-md-5">
+            <div className={"col-container"}>
+              <div className="fcol-md-6 px-lg-0 pl-min-lg-0">
+                <div className="service-overview-rect">
+                  <h3>{service.service_type}</h3>
+                </div>
+              </div>
+              <div className="fcol-md-6 px-lg-0 pr-min-lg-0">
+                <div className="service-overview-rect">
+                  <TM
+                    el="h3"
+                    k={
+                      service.collects_fees
+                        ? "does_charge_fees"
+                        : "does_not_charge_fees"
+                    }
+                  />
+                </div>
+              </div>
+            </div>
             <div className="service-overview-rect">
               <FancyUL title={text_maker("related_programs")}>
                 {_.map(service.program_ids, (program_id) => {
@@ -117,23 +90,6 @@ export class ServiceOverview extends React.Component {
                   );
                 })}
               </FancyUL>
-            </div>
-          </div>
-          <div className="fcol-md-5">
-            <div className="service-overview-rect">
-              <TM el="h4" k="overview_digital_status_title" />
-              <DisplayTable
-                data={_.map(digital_status_keys, (key) => ({
-                  overview_digital_status_desc: text_maker(`${key}_desc`),
-                  digital_status: service[`${key}_status`],
-                }))}
-                column_configs={column_configs}
-                util_components={{
-                  copyCsvUtil: null,
-                  downloadCsvUtil: null,
-                  columnToggleUtil: null,
-                }}
-              />
             </div>
             <div className="service-overview-rect">
               <TM

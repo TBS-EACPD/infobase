@@ -55,8 +55,11 @@ services_digital_status_text:
   en: |
     In **{{subject_name}}, {{fmt_percentage1 total_online_digital_status_percentage}}** of service components can be performed online / electronically
   fr: TODO
-digital_status:
+services_digital_status:
   en: Digital status of services
+  fr: TODO
+digital_status:
+  en: Digital status
   fr: TODO
 account_reg_digital_desc:
   en: A person or business can register a person, place or thing online
