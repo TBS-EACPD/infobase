@@ -10,7 +10,7 @@ import {
   NivoResponsiveBar,
 } from "../shared.js";
 
-const { text_maker, TM } = create_text_maker_component(text);
+const { text_maker } = create_text_maker_component(text);
 const colors = infobase_colors();
 
 class ServicesChannelsPanel extends React.Component {

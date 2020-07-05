@@ -1,9 +1,9 @@
-@import '../../../../common_css/common-variables';
+@import '../../../common_css/common-variables';
 
-.service-overview-container {
+.col-container {
   display: flex;
   @media (max-width: $maxMediumDevice){
-    flex-direction:column;
+    flex-direction: column;
   }
 }
 .service-overview-rect {
@@ -17,4 +17,8 @@
 .identifier-item {
   display: flex;
   justify-content: space-between;
+}
+.id-method-text {
+  text-align: center;
+  min-height: 40px;
 }
