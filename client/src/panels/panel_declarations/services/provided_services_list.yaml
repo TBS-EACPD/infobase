@@ -1,9 +1,0 @@
-list_of_provided_services_title:
-  en: List of provided services
-  fr: TODO
-list_of_provided_services_desc:
-  transform: [handlebars, markdown]
-  en: |
-    **{{subject_name}}** is reporting on **{{num_of_services}}** services:
-  fr: |
-    TODO

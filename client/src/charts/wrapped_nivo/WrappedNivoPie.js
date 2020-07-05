@@ -36,6 +36,7 @@ export class WrappedNivoPie extends React.Component {
       table_name,
       show_legend,
       theme,
+      custom_legend_items,
     } = this.props;
 
     const color_scale = infobase_colors_smart(
@@ -43,16 +44,18 @@ export class WrappedNivoPie extends React.Component {
     );
     const color_func = colors || ((d) => color_scale(d.label));
 
-    const legend_items = _.chain(data)
-      .sortBy("value")
-      .reverse()
-      .map(({ value, label }) => ({
-        value,
-        label,
-        color: color_scale(label),
-        id: label,
-      }))
-      .value();
+    const legend_items =
+      custom_legend_items ||
+      _.chain(data)
+        .sortBy("value")
+        .reverse()
+        .map(({ value, label }) => ({
+          value,
+          label,
+          color: color_scale(label),
+          id: label,
+        }))
+        .value();
 
     const data_with_absolute_values = _.map(data, (data) => ({
       ...data,

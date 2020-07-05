@@ -32,13 +32,10 @@ export const declare_provided_services_list_panel = () =>
     levels: ["dept"],
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
-      calculate: (subject) => {
-        const services =
-          level === "dept"
-            ? Service.get_by_dept(subject.id)
-            : Service.get_all();
-        return { subject, services };
-      },
+      calculate: (subject) => ({
+        subject,
+        services: Service.get_by_dept(subject.id),
+      }),
       footnotes: false,
       render({ calculations, sources }) {
         const { panel_args } = calculations;

@@ -102,9 +102,9 @@ export const get_dept_panels = (subject) =>
     services: subject.has_data("services_data") && [
       declare_provided_services_list_panel(),
       declare_services_digital_status_panel(),
+      declare_services_channels_panel(),
       declare_services_fees_panel(),
       declare_services_id_methods_panel(),
-      declare_services_channels_panel(),
     ],
     results: subject.has_data("results_data") && [
       declare_results_key_concepts_panel(),
