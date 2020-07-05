@@ -9,6 +9,7 @@ import {
   ServiceOverview,
   ServiceChannels,
   ServiceStandards,
+  ServiceDigitalStatus,
 } from "../panel_declarations/services";
 
 const { text_maker } = create_text_maker_component(text);
@@ -63,6 +64,7 @@ export default class SingleServiceRoute extends React.Component {
           <div>
             <h1>{service.name}</h1>
             <ServiceOverview service={service} />
+            <ServiceDigitalStatus service={service} />
             <ServiceChannels service={service} />
             <ServiceStandards service={service} />
           </div>
