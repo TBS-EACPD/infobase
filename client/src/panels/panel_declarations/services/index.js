@@ -6,3 +6,4 @@ export { declare_services_digital_status_panel } from "./services_digital_status
 export { ServiceOverview } from "./single_service_panels/service_overview.js";
 export { ServiceChannels } from "./single_service_panels/service_channels.js";
 export { ServiceStandards } from "./single_service_panels/service_standards.js";
+export { ServiceDigitalStatus } from "./single_service_panels/service_digital_status.js";

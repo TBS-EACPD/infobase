@@ -56,7 +56,7 @@ export const declare_services_digital_status_panel = () =>
         const { panel_args } = calculations;
         return (
           <InfographicPanel
-            title={text_maker("digital_status")}
+            title={text_maker("services_digital_status")}
             sources={sources}
           >
             <ServicesDigitalStatusPanel panel_args={panel_args} />
