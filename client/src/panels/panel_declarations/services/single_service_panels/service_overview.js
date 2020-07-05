@@ -1,4 +1,4 @@
-import "./service_overview.scss";
+import "../services.scss";
 import text from "../services.yaml";
 import {
   create_text_maker_component,
@@ -36,9 +36,9 @@ export class ServiceOverview extends React.Component {
       );
 
     const column_configs = {
-      digital_status_desc: {
+      overview_digital_status_desc: {
         index: 0,
-        header: text_maker("digital_status_desc"),
+        header: text_maker("overview_digital_status_desc"),
       },
       digital_status: {
         index: 1,
@@ -48,12 +48,12 @@ export class ServiceOverview extends React.Component {
     };
     return (
       <Panel title={text_maker("service_overview_title")}>
-        <div className={"service-overview-container"}>
+        <div className={"col-container"}>
           <div className="fcol-md-7">
             <div className="service-overview-rect">
               <h3>{service.description}</h3>
             </div>
-            <div className={"service-overview-container"}>
+            <div className={"col-container"}>
               <div className="fcol-md-6 px-lg-0 pl-min-lg-0">
                 <div className="service-overview-rect">
                   <h2>{service.service_type}</h2>
@@ -93,14 +93,14 @@ export class ServiceOverview extends React.Component {
                 title={text_maker("identification_methods")}
               >
                 {[
-                  <div key="cra_as_identifier" className="identifier-item">
-                    <TM style={{ lineHeight: 2 }} k="cra_as_identifier" />
+                  <div key="uses_cra_as_identifier" className="identifier-item">
+                    <TM style={{ lineHeight: 2 }} k="uses_cra_as_identifier" />
                     {get_available_icon(
                       service.cra_buisnss_number_is_identifier
                     )}
                   </div>,
-                  <div key="sin_as_identifier" className="identifier-item">
-                    <TM style={{ lineHeight: 2 }} k="sin_as_identifier" />
+                  <div key="uses_sin_as_identifier" className="identifier-item">
+                    <TM style={{ lineHeight: 2 }} k="uses_sin_as_identifier" />
                     {get_available_icon(service.sin_is_identifier)}
                   </div>,
                 ]}
@@ -121,10 +121,10 @@ export class ServiceOverview extends React.Component {
           </div>
           <div className="fcol-md-5">
             <div className="service-overview-rect">
-              <TM el="h4" k="digital_status_title" />
+              <TM el="h4" k="overview_digital_status_title" />
               <DisplayTable
                 data={_.map(digital_status_keys, (key) => ({
-                  digital_status_desc: text_maker(`${key}_desc`),
+                  overview_digital_status_desc: text_maker(`${key}_desc`),
                   digital_status: service[`${key}_status`],
                 }))}
                 column_configs={column_configs}

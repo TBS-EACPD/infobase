@@ -33,6 +33,7 @@ export class NivoResponsivePie extends React.Component {
       disable_table_view,
       table_name,
       show_legend,
+      custom_legend_items,
     } = this.props;
 
     const color_scale = infobase_colors_smart(
@@ -40,16 +41,18 @@ export class NivoResponsivePie extends React.Component {
     );
     const color_func = colorBy || ((d) => color_scale(d.label));
 
-    const legend_items = _.chain(data)
-      .sortBy("value")
-      .reverse()
-      .map(({ value, label }) => ({
-        value,
-        label,
-        color: color_scale(label),
-        id: label,
-      }))
-      .value();
+    const legend_items =
+      custom_legend_items ||
+      _.chain(data)
+        .sortBy("value")
+        .reverse()
+        .map(({ value, label }) => ({
+          value,
+          label,
+          color: color_scale(label),
+          id: label,
+        }))
+        .value();
 
     const data_with_absolute_values = _.map(data, (data) => ({
       ...data,
