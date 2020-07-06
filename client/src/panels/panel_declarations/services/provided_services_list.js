@@ -1,12 +1,14 @@
 import text from "./provided_services_list.yaml";
 import { Service } from "../../../models/services.js";
-import { create_text_maker } from "../../../models/text.js";
-import { TM } from "../../../components/index.js";
+import {
+  create_text_maker_component,
+  InfographicPanel,
+  declare_panel,
+} from "../shared.js";
 
-import { InfographicPanel, declare_panel } from "../shared.js";
 import { FancyUL } from "../../../components";
 
-const text_maker = create_text_maker(text);
+const { text_maker, TM } = create_text_maker_component(text);
 
 class ProvidedServicesListPanel extends React.Component {
   constructor(props) {
@@ -21,7 +23,6 @@ class ProvidedServicesListPanel extends React.Component {
     return (
       <div>
         <TM
-          tmf={text_maker}
           k="list_of_provided_services_desc"
           args={{
             subject_name: panel_args.subject.name,
@@ -62,9 +63,9 @@ class ProvidedServicesListPanel extends React.Component {
                     justifyContent: "space-between",
                   }}
                 >
-                  <div className="tag-badge btn-ib-primary">{service_type}</div>
+                  <div className="tag-badge">{service_type}</div>
                   <a href={`#dept/${org_id}/service-panels/${id}`}>
-                    <TM tmf={text_maker} k="view_service" />
+                    <TM k="view_service" />
                   </a>
                 </div>
               </React.Fragment>
