@@ -17,21 +17,18 @@ class ProvidedServicesListPanel extends React.Component {
   render() {
     const { panel_args } = this.props;
 
-    const filtered_services = _.filter(panel_args.services, (service) => {
-      if (
-        _.includes(service.name.toLowerCase(), this.state.query.toLowerCase())
-      ) {
-        return true;
-      } else if (
+    const filtered_services = _.filter(
+      panel_args.services,
+      (service) =>
+        _.includes(
+          service.name.toLowerCase(),
+          this.state.query.toLowerCase()
+        ) ||
         _.includes(
           service.service_type.toLowerCase(),
           this.state.query.toLowerCase()
         )
-      ) {
-        return true;
-      }
-      return false;
-    });
+    );
 
     return (
       <div>
