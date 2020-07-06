@@ -11,24 +11,12 @@ const text_maker = create_text_maker(text);
 class ProvidedServicesListPanel extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { query: "" };
+    this.state = { service_query: "" };
   }
 
   render() {
     const { panel_args } = this.props;
-
-    const filtered_services = _.filter(
-      panel_args.services,
-      (service) =>
-        _.includes(
-          service.name.toLowerCase(),
-          this.state.query.toLowerCase()
-        ) ||
-        _.includes(
-          service.service_type.toLowerCase(),
-          this.state.query.toLowerCase()
-        )
-    );
+    const { service_query } = this.state;
 
     return (
       <div>
@@ -46,12 +34,23 @@ class ProvidedServicesListPanel extends React.Component {
           type="text"
           style={{ width: "100%", marginBottom: "1rem" }}
           placeholder={text_maker("filter_results")}
-          onChange={(evt) => this.setState({ query: evt.target.value })}
-          value={this.state.query}
+          onChange={(evt) => this.setState({ service_query: evt.target.value })}
+          value={service_query}
         />
         <FancyUL>
           {_.map(
-            filtered_services,
+            _.filter(
+              panel_args.services,
+              (service) =>
+                _.includes(
+                  service.name.toLowerCase(),
+                  service_query.toLowerCase()
+                ) ||
+                _.includes(
+                  service.service_type.toLowerCase(),
+                  service_query.toLowerCase()
+                )
+            ),
             ({ name, id, org_id, service_type, description }) => (
               <React.Fragment key={id}>
                 <a href={`#dept/${org_id}/service-panels/${id}`}>{name}</a>
