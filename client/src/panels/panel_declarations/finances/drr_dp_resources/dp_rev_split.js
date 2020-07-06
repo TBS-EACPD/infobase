@@ -73,13 +73,13 @@ export const declare_dp_rev_split_panel = () =>
           },
           net: {
             index: 1,
-            header: text_maker("dp_gross"),
+            header: text_maker("dp_net"),
             is_summable: true,
             formatter: "dollar",
           },
           gross: {
             index: 2,
-            header: text_maker("dp_revenue"),
+            header: text_maker("dp_gross"),
             is_summable: true,
             formatter: "dollar",
           },
@@ -91,7 +91,7 @@ export const declare_dp_rev_split_panel = () =>
           },
           rev: {
             index: 4,
-            header: text_maker("dp_net"),
+            header: text_maker("dp_revenue"),
             is_summable: true,
             formatter: "dollar",
           },
