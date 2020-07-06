@@ -5,9 +5,10 @@ import {
   InfographicPanel,
   declare_panel,
 } from "../shared.js";
+
 import { FancyUL } from "../../../components";
 
-const text_maker = create_text_maker(text);
+const { text_maker, TM } = create_text_maker_component(text);
 
 class ProvidedServicesListPanel extends React.Component {
   constructor(props) {
@@ -22,7 +23,6 @@ class ProvidedServicesListPanel extends React.Component {
     return (
       <div>
         <TM
-          tmf={text_maker}
           k="list_of_provided_services_desc"
           args={{
             subject_name: panel_args.subject.name,
@@ -63,7 +63,7 @@ class ProvidedServicesListPanel extends React.Component {
                     justifyContent: "space-between",
                   }}
                 >
-                  <div className="tag-badge btn-ib-primary">{service_type}</div>
+                  <div className="tag-badge">{service_type}</div>
                   <a href={`#dept/${org_id}/service-panels/${id}`}>
                     <button className="btn-ib-primary">
                       <TM k="view_service" />
