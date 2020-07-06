@@ -134,21 +134,18 @@ const ProvidedServicesListPanel = ({ panel_args }) => (
 >>>>>>> 9fa26043... Display service as a tag
 =======
 
-    const filtered_services = _.filter(panel_args.services, (service) => {
-      if (
-        _.includes(service.name.toLowerCase(), this.state.query.toLowerCase())
-      ) {
-        return true;
-      } else if (
+    const filtered_services = _.filter(
+      panel_args.services,
+      (service) =>
+        _.includes(
+          service.name.toLowerCase(),
+          this.state.query.toLowerCase()
+        ) ||
         _.includes(
           service.service_type.toLowerCase(),
           this.state.query.toLowerCase()
         )
-      ) {
-        return true;
-      }
-      return false;
-    });
+    );
 
     return (
       <div>
