@@ -6,7 +6,6 @@ import {
   declare_panel,
 } from "../shared.js";
 import { FancyUL } from "../../../components";
-import { filter } from "lodash";
 
 import { FancyUL } from "../../../components";
 
@@ -135,7 +134,6 @@ const ProvidedServicesListPanel = ({ panel_args }) => (
 >>>>>>> 9fa26043... Display service as a tag
 =======
 
-    console.log(panel_args.services);
     const filtered_services = _.filter(panel_args.services, (service) => {
       if (
         _.includes(service.name.toLowerCase(), this.state.query.toLowerCase())
