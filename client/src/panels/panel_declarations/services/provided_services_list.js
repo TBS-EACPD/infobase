@@ -7,7 +7,7 @@ import {
 } from "../shared.js";
 import { FancyUL } from "../../../components";
 
-const { text_maker, TM } = create_text_maker_component(text);
+const text_maker = create_text_maker(text);
 
 class ProvidedServicesListPanel extends React.Component {
   constructor(props) {
@@ -22,6 +22,7 @@ class ProvidedServicesListPanel extends React.Component {
     return (
       <div>
         <TM
+          tmf={text_maker}
           k="list_of_provided_services_desc"
           args={{
             subject_name: panel_args.subject.name,
