@@ -7,7 +7,6 @@ import {
   declare_panel,
 } from "../shared.js";
 import { FancyUL } from "../../../components";
-import { filter } from "lodash";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -20,7 +19,6 @@ class ProvidedServicesListPanel extends React.Component {
   render() {
     const { panel_args } = this.props;
 
-    console.log(panel_args.services);
     const filtered_services = _.filter(panel_args.services, (service) => {
       if (
         _.includes(service.name.toLowerCase(), this.state.query.toLowerCase())
