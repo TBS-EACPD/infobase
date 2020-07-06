@@ -7,51 +7,81 @@ import {
   declare_panel,
 } from "../shared.js";
 import { FancyUL } from "../../../components";
+import { filter } from "lodash";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const ProvidedServicesListPanel = ({ panel_args }) => (
-  <div>
-    <TM
-      k="list_of_provided_services_desc"
-      args={{
-        subject_name: panel_args.subject.name,
-        num_of_services: panel_args.services.length,
-      }}
-    />
-    <input
-      aria-label={text_maker("explorer_search_is_optional")}
-      className="form-control input-lg"
-      type="text"
-      style={{ width: "100%", marginBottom: "1rem" }}
-      placeholder={text_maker("filter_results")}
-      onChange={(evt) => null}
-    />
-    <FancyUL>
-      {_.map(
-        panel_args.services,
-        ({ name, id, org_id, service_type, description }) => (
-          <React.Fragment key={id}>
-            <a href={`#dept/${org_id}/service-panels/${id}`}>{name}</a>
-            <p>{description}</p>
-            <div
-              style={{
-                display: "flex",
-                fontSize: "14px",
-                justifyContent: "space-between",
-              }}
-            >
-              <div className="tag-badge">{service_type}</div>
-              <a href={`#dept/${org_id}/service-panels/${id}`}>
-                See this service
-              </a>
-            </div>
-          </React.Fragment>
+class ProvidedServicesListPanel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { query: "" };
+  }
+
+  render() {
+    const { panel_args } = this.props;
+
+    console.log(panel_args.services);
+    const filtered_services = _.filter(panel_args.services, (service) => {
+      if (
+        _.includes(service.name.toLowerCase(), this.state.query.toLowerCase())
+      ) {
+        return true;
+      } else if (
+        _.includes(
+          service.service_type.toLowerCase(),
+          this.state.query.toLowerCase()
         )
-      )}
-    </FancyUL>
-  </div>
-);
+      ) {
+        return true;
+      }
+      return false;
+    });
+
+    return (
+      <div>
+        <TM
+          k="list_of_provided_services_desc"
+          args={{
+            subject_name: panel_args.subject.name,
+            num_of_services: panel_args.services.length,
+          }}
+        />
+        <input
+          aria-label={text_maker("explorer_search_is_optional")}
+          className="form-control input-lg"
+          type="text"
+          style={{ width: "100%", marginBottom: "1rem" }}
+          placeholder={text_maker("filter_results")}
+          onChange={(evt) => this.setState({ query: evt.target.value })}
+          value={this.state.query}
+        />
+        <FancyUL>
+          {_.map(
+            filtered_services,
+            ({ name, id, org_id, service_type, description }) => (
+              <React.Fragment key={id}>
+                <a href={`#dept/${org_id}/service-panels/${id}`}>{name}</a>
+                <p>{description}</p>
+                <div
+                  style={{
+                    display: "flex",
+                    fontSize: "14px",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div className="tag-badge">{service_type}</div>
+                  <a href={`#dept/${org_id}/service-panels/${id}`}>
+                    See this service
+                  </a>
+                </div>
+              </React.Fragment>
+            )
+          )}
+        </FancyUL>
+      </div>
+    );
+  }
+}
 
 export const declare_provided_services_list_panel = () =>
   declare_panel({
