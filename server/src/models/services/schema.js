@@ -29,7 +29,10 @@ const schema = `
     lower: Float,
     count: Float,
     met_count: Float,
+<<<<<<< HEAD
     is_target_met: Boolean,
+=======
+>>>>>>> real data update, MOST viz to accomodate the data update, still some errors with program_ids and standards keep getting inserted
     standard_report_comment: String
   }
   type Service{
@@ -38,13 +41,16 @@ const schema = `
     org: Org
     program_ids: [String]
     programs: [Program]
+<<<<<<< HEAD
     first_active_year: String
     last_active_year: String
     is_active: Boolean
+=======
+>>>>>>> real data update, MOST viz to accomodate the data update, still some errors with program_ids and standards keep getting inserted
 
     name: String
     description: String
-    service_type: String
+    service_type: [String]
     scope: [String]
     target_groups: [String]
     feedback_channels: [String]
