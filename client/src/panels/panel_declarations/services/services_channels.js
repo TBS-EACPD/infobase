@@ -34,7 +34,14 @@ class ServicesChannelsPanel extends React.Component {
       ..._.chain(services)
         .map((service) =>
           active_services[service.service_id] && !_.isNull(service[key])
-            ? [service.name, service[key]]
+            ? [
+                service.name,
+                _.reduce(
+                  service.service_report,
+                  (sum, report) => sum + report[`${key}_count`],
+                  0
+                ),
+              ]
             : []
         )
         .fromPairs()
