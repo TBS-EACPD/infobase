@@ -63,6 +63,7 @@ export const declare_dp_rev_split_panel = () =>
             rev: find_year_data_ends_with(year_data, "_rev"),
           };
         });
+
         const column_configs = {
           year: {
             index: 0,
@@ -84,6 +85,15 @@ export const declare_dp_rev_split_panel = () =>
             is_summable: true,
             formatter: "dollar",
             color: "spending",
+            initial_visible: (() => {
+              for (const data of table_data) {
+                if (data.spa != 0) {
+                  return true;
+                }
+              }
+
+              return false;
+            })(),
           },
           rev: {
             index: 3,
