@@ -92,6 +92,7 @@ export class DisplayTable extends React.Component {
           sum_func: (sum, value) => ... <- (function) Custom sum func. Default to sum + value
           sort_func: (a, b) => ... <- (function) Custom sort func. Default to _.sortBy
           sum_initial_value: 0 <- (number) Default to 0
+          color: "class name"
         },
       }
       */,
@@ -343,6 +344,7 @@ export class DisplayTable extends React.Component {
                 <tr key={i}>
                   {_.map(visible_ordered_col_keys, (col_key) => (
                     <td
+                      className={col_configs_with_defaults[col_key].color}
                       style={{
                         fontSize: "14px",
                         textAlign: determine_text_align(row, col_key),

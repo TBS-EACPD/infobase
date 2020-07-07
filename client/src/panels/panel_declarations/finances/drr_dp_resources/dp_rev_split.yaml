@@ -6,11 +6,11 @@ dp_rev_split_title:
     Dépenses prévues brutes et nettes ({{planning_year_1}} à {{planning_year_3}})
 
 dp_net:
-  en: Planned Spending (net)
-  fr: Dépenses prévues (nettes)
+  en: Net Planned Spending
+  fr: Dépenses nettes prévues
 
 dp_gross:
-  en: Gross planned spending
+  en: Gross Planned Spending
   fr: Dépenses brutes prévues
 
 dp_revenue:
