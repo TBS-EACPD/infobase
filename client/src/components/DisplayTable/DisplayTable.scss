@@ -1,5 +1,9 @@
 @import '../../common_css/common-variables';
 
+td {
+  background-color: inherit;
+}
+
 .display-table-container {
   overflow-x: auto;
   margin-top: 20px;
@@ -90,11 +94,11 @@ table.display-table:not(.no-total-row) > tbody > tr:last-child > td:not(:last-ch
 }
 
 td.spending {
-  color: $successDarkColor;
+  color: $textGreen;
 }
 
 td.revenue {
-  color: $highlightDarkColor;
+  color: $textRed;
 }
 
 ::placeholder{
