@@ -110,7 +110,6 @@ const dept_service_fragment = `org_id
         service_id
         org_id
         program_ids
-        is_active
 
         name
         description
@@ -118,14 +117,11 @@ const dept_service_fragment = `org_id
         scope
         target_groups
         feedback_channels
-        url
-        comment
+        urls
 
         last_gender_analysis
 
         collects_fees
-        cra_buisnss_number_is_identifier
-        sin_is_identifier
         account_reg_digital_status
         authentication_status
         application_digital_status
@@ -134,17 +130,23 @@ const dept_service_fragment = `org_id
         issue_res_digital_status
         digital_enablement_comment
 
-        telephone_enquires
-        website_visits
-        online_applications
-        in_person_applications
-        mail_applications
-        other_channel_applications
+        service_report {
+          service_id
+          year
+          cra_business_ids_collected
+          SIN_collected
+          phone_inquiry_count
+          online_inquiry_count
+          online_application_count
+          live_application_count
+          mail_application_count
+          other_application_count
+          service_report_comment
+        }
 
         standards {
           standard_id
           service_id
-          is_active
       
           name
       
@@ -154,14 +156,16 @@ const dept_service_fragment = `org_id
           other_type_comment
       
           target_type
-          lower
-          upper
-          count
-          met_count
-          is_target_met
-          target_comment
           urls
           rtp_urls
+          standard_report {
+            standard_id
+            year
+            lower
+            count
+            met_count
+            standard_report_comment
+          }
         }
       }
   `;

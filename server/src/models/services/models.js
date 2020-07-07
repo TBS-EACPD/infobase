@@ -12,50 +12,67 @@ import {
 } from "../model_utils.js";
 
 export default function (model_singleton) {
+  const ServiceReportSchema = mongoose.Schema({
+    service_id: parent_fkey_type(),
+    year: str_type,
+    cra_business_ids_collected: { type: Boolean },
+    SIN_collected: { type: Boolean },
+    phone_inquiry_count: { type: Number },
+    online_inquiry_count: { type: Number },
+    online_application_count: { type: Number },
+    live_application_count: { type: Number },
+    mail_application_count: { type: Number },
+    other_application_count: { type: Number },
+    ...bilingual_str("service_report_comment"),
+  });
+
+  const StandardReportSchema = mongoose.Schema({
+    standard_id: parent_fkey_type(),
+    year: str_type,
+    lower: { type: Number },
+    count: { type: Number },
+    met_count: { type: Number },
+    ...bilingual_str("standard_report_comment"),
+  });
+
   const ServiceStandardSchema = mongoose.Schema({
     standard_id: pkey_type(),
     service_id: parent_fkey_type(),
-    is_active: { type: Boolean },
+    //is_active: { type: Boolean },
 
     ...bilingual_str("name"),
 
     last_gcss_tool_year: str_type,
-    channel: str_type, // TODO should be an enum, get possible values
-    standard_type: str_type, // TODO should be an enum, get possible values
+    target_type: str_type,
+    ...bilingual_str("channel"),
+    ...bilingual_str("type"),
     ...bilingual_str("other_type_comment"),
 
-    target_type: str_type, // TODO should be an enum, get possible values
-    lower: { type: Number },
-    upper: { type: Number },
-    count: { type: Number },
-    met_count: { type: Number },
-    is_target_met: { type: Boolean },
-    ...bilingual_str("target_comment"),
-    ...bilingual("urls", [str_type]),
+    //is_target_met: { type: Boolean },
+    ...bilingual("standard_urls_en", [str_type]),
     ...bilingual("rtp_urls", [str_type]),
+    standard_report: [StandardReportSchema],
   });
 
   const ServiceSchema = mongoose.Schema({
     service_id: pkey_type(),
     org_id: parent_fkey_type(),
-    program_ids: [parent_fkey_type()],
-    year: str_type,
-    is_active: { type: Boolean },
+    ...bilingual("program_ids", [str_type]),
+    //year: str_type,
+    //is_active: { type: Boolean },
 
     ...bilingual_str("name"),
     ...bilingual_str("description"),
-    ...bilingual_str("service_type"),
+    ...bilingual("service_type", [str_type]),
     ...bilingual("scope", [str_type]),
+    ...bilingual("designations", [str_type]),
     ...bilingual("target_groups", [str_type]),
     ...bilingual("feedback_channels", [str_type]),
-    ...bilingual_str("url"),
-    ...bilingual_str("comment"),
+    ...bilingual("urls", [str_type]),
 
     last_gender_analysis: str_type,
 
     collects_fees: { type: Boolean },
-    cra_buisnss_number_is_identifier: { type: Boolean },
-    sin_is_identifier: { type: Boolean },
     account_reg_digital_status: { type: Boolean },
     authentication_status: { type: Boolean },
     application_digital_status: { type: Boolean },
@@ -63,17 +80,12 @@ export default function (model_singleton) {
     issuance_digital_status: { type: Boolean },
     issue_res_digital_status: { type: Boolean },
     ...bilingual_str("digital_enablement_comment"),
-
-    telephone_enquires: { type: Number },
-    website_visits: { type: Number },
-    online_applications: { type: Number },
-    in_person_applications: { type: Number },
-    mail_applications: { type: Number },
-    other_channel_applications: { type: Number },
-
     standards: [ServiceStandardSchema],
+    service_report: [ServiceReportSchema],
   });
 
+  model_singleton.define_model("ServiceReport", ServiceReportSchema);
+  model_singleton.define_model("StandardReport", StandardReportSchema);
   model_singleton.define_model("ServiceStandard", ServiceStandardSchema);
   model_singleton.define_model("Service", ServiceSchema);
 

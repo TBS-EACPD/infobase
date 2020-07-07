@@ -20,7 +20,11 @@ export class ServiceChannels extends React.Component {
                 .map((key) => ({
                   id: key,
                   label: text_maker(key),
-                  value: service[key],
+                  value: _.reduce(
+                    service.service_report,
+                    (sum, report) => sum + report[`${key}_count`],
+                    0
+                  ),
                 }))
                 .filter((row) => row.value)
                 .value()}
