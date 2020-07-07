@@ -66,7 +66,7 @@ export default function (model_singleton) {
 
     ...bilingual_str("name"),
     ...bilingual_str("description"),
-    ...bilingual_str("service_type"),
+    ...bilingual("service_type", [str_type]),
     ...bilingual("scope", [str_type]),
     ...bilingual("designations", [str_type]),
     ...bilingual("target_groups", [str_type]),
