@@ -65,7 +65,9 @@ class ProvidedServicesListPanel extends React.Component {
                 >
                   <div className="tag-badge">{service_type}</div>
                   <a href={`#dept/${org_id}/service-panels/${id}`}>
-                    <TM k="view_service" />
+                    <button className="btn-ib-primary">
+                      <TM k="view_service" />
+                    </button>
                   </a>
                 </div>
               </React.Fragment>
