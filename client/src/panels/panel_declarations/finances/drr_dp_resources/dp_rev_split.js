@@ -71,27 +71,27 @@ export const declare_dp_rev_split_panel = () =>
               <span style={{ fontWeight: "bold" }}> {value} </span>
             ),
           },
-          net: {
-            index: 1,
-            header: text_maker("dp_net"),
-            is_summable: true,
-            formatter: "dollar",
-          },
           gross: {
-            index: 2,
+            index: 1,
             header: text_maker("dp_gross"),
             is_summable: true,
             formatter: "dollar",
           },
           spa: {
-            index: 3,
+            index: 2,
             header: text_maker("dp_spa"),
             is_summable: true,
             formatter: "dollar",
           },
           rev: {
-            index: 4,
+            index: 3,
             header: text_maker("dp_revenue"),
+            is_summable: true,
+            formatter: "dollar",
+          },
+          net: {
+            index: 4,
+            header: text_maker("dp_net"),
             is_summable: true,
             formatter: "dollar",
           },
