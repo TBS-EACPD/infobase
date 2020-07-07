@@ -76,18 +76,21 @@ export const declare_dp_rev_split_panel = () =>
             header: text_maker("dp_gross"),
             is_summable: true,
             formatter: "dollar",
+            color: "spending",
           },
           spa: {
             index: 2,
             header: text_maker("dp_spa"),
             is_summable: true,
             formatter: "dollar",
+            color: "spending",
           },
           rev: {
             index: 3,
             header: text_maker("dp_revenue"),
             is_summable: true,
             formatter: "dollar",
+            color: "revenue",
           },
           net: {
             index: 4,

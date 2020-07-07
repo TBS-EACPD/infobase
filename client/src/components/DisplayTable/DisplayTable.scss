@@ -89,6 +89,14 @@ table.display-table:not(.no-total-row) > tbody > tr:last-child > td:not(:last-ch
   border-right: 1px solid $separatorColor !important;
 }
 
+td.spending {
+  color: $successDarkColor;
+}
+
+td.revenue {
+  color: $highlightDarkColor;
+}
+
 ::placeholder{
   font-weight: normal;
 }
