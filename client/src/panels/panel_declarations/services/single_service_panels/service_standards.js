@@ -18,40 +18,48 @@ export class ServiceStandards extends React.Component {
   render() {
     const { service } = this.props;
     const standards = service.standards;
-    const data = _.map(
-      standards,
-      ({ name, standard_type, channel, count, met_count, is_target_met }) => ({
-        name: name,
-        standard_type: standard_type,
-        channel: channel,
-        count: count,
-        met_count: met_count,
-        is_target_met: is_target_met,
-      })
-    );
+    const data = _.chain(standards)
+      .map(({ name, standard_type, channel, standard_report }) =>
+        _.map(standard_report, ({ year, count, met_count }) => ({
+          name: name,
+          year: year,
+          standard_type: standard_type,
+          channel: channel,
+          count: count,
+          met_count: met_count,
+          //TODO need is_target_met field from Titan
+          is_target_met: count === met_count,
+        }))
+      )
+      .flatten()
+      .value();
     const column_configs = {
       name: {
         index: 0,
         header: text_maker("standard_name"),
       },
-      standard_type: {
+      year: {
         index: 1,
+        header: text_maker("year"),
+      },
+      standard_type: {
+        index: 2,
         header: text_maker("standard_type"),
       },
       channel: {
-        index: 2,
+        index: 3,
         header: text_maker("standard_channel"),
       },
       count: {
-        index: 3,
+        index: 4,
         header: text_maker("stanndard_count"),
       },
       met_count: {
-        index: 4,
+        index: 5,
         header: text_maker("stanndard_met_count"),
       },
       is_target_met: {
-        index: 5,
+        index: 6,
         header: text_maker("stanndard_status"),
         formatter: (value) =>
           value ? (

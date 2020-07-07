@@ -17,31 +17,51 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
     .domain(["uses_identifier", "does_not_identifier"])
     .range(_.take(newIBCategoryColors, 2));
 
-  const sin_id = _.countBy(services, "sin_is_identifier");
-  const cra_id = _.countBy(services, "cra_buisnss_number_is_identifier");
+  const get_id_method_count = (method) =>
+    _.reduce(
+      services,
+      (sum, service) => {
+        const service_id_count = _.countBy(service.service_report, method);
+        return {
+          true: service_id_count.true
+            ? sum.true + service_id_count.true
+            : sum.true,
+          false: service_id_count.false
+            ? sum.false + service_id_count.false
+            : sum.false,
+        };
+      },
+      {
+        true: 0,
+        false: 0,
+      }
+    );
+
+  const sin_count = get_id_method_count("SIN_collected");
+  const cra_count = get_id_method_count("cra_business_ids_collected");
 
   const sin_data = [
     {
       id: "uses_identifier",
       label: text_maker("uses_sin_as_identifier"),
-      value: sin_id.true,
+      value: sin_count.true,
     },
     {
       id: "does_not_identifier",
       label: text_maker("does_not_use_sin_as_identifier"),
-      value: sin_id.false,
+      value: sin_count.false,
     },
   ];
   const cra_data = [
     {
       id: "uses_identifier",
       label: text_maker("uses_cra_as_identifier"),
-      value: cra_id.true,
+      value: cra_count.true,
     },
     {
       id: "does_not_identifier",
       label: text_maker("does_not_use_cra_as_identifier"),
-      value: cra_id.false,
+      value: cra_count.false,
     },
   ];
 
