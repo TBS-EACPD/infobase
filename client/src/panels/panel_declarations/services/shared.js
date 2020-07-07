@@ -10,12 +10,12 @@ const digital_status_keys = [
   "issue_res_digital",
 ];
 const service_channels_keys = [
-  "in_person_applications",
-  "mail_applications",
-  "online_applications",
-  "other_channel_applications",
-  "telephone_enquires",
-  "website_visits",
+  "phone_inquiry",
+  "online_inquiry",
+  "online_application",
+  "live_application",
+  "mail_application",
+  "other_application",
 ];
 const get_available_icon = (value) =>
   value ? (

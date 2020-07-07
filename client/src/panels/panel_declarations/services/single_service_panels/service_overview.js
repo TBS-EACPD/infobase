@@ -16,6 +16,10 @@ export class ServiceOverview extends React.Component {
   render() {
     const { service } = this.props;
     const standards = service.standards;
+    const most_recent_report = _.chain(service.service_report)
+      .sortBy((report) => _.toInteger(report.year))
+      .reverse()
+      .value()[0];
 
     return (
       <Panel title={text_maker("service_overview_title")}>
@@ -24,36 +28,41 @@ export class ServiceOverview extends React.Component {
             <div className="service-overview-rect">
               <h3>{service.description}</h3>
             </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                paddingBottom: "10px",
-              }}
-              className="service-overview-rect"
-            >
-              <TM el="h2" k={"standards_performance_text"} />
-              <Gauge
-                value={_.countBy(standards, "is_target_met").true}
-                total_value={standards.length}
-              />
-            </div>
+            {standards && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  paddingBottom: "10px",
+                }}
+                className="service-overview-rect"
+              >
+                <TM el="h2" k={"standards_performance_text"} />
+                <Gauge
+                  //TODO need is_target_met column from Titan
+                  value={0 /*_.countBy(standards, "is_target_met").true*/}
+                  total_value={standards.length}
+                />
+              </div>
+            )}
             <div className="service-overview-rect">
               <FancyUL
                 className="service_overview-fancy-ul"
-                title={text_maker("identification_methods")}
+                title={`${text_maker("identification_methods")} (${
+                  most_recent_report.year
+                })`}
               >
                 {[
                   <div key="uses_cra_as_identifier" className="identifier-item">
                     <TM style={{ lineHeight: 2 }} k="uses_cra_as_identifier" />
                     {get_available_icon(
-                      service.cra_buisnss_number_is_identifier
+                      most_recent_report.cra_business_ids_collected
                     )}
                   </div>,
                   <div key="uses_sin_as_identifier" className="identifier-item">
                     <TM style={{ lineHeight: 2 }} k="uses_sin_as_identifier" />
-                    {get_available_icon(service.sin_is_identifier)}
+                    {get_available_icon(most_recent_report.SIN_collected)}
                   </div>,
                 ]}
               </FancyUL>

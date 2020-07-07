@@ -87,23 +87,23 @@ service_channels_title:
 service_channels_text:
   en: Communication channels that this service use for handling applications and enquiries
   fr: TODO
-in_person_applications:
+live_application:
   en: In person applications
   fr: TODO
-mail_applications:
+mail_application:
   en: Applications by mail
   fr: TODO
-online_applications:
+online_application:
   en: Online applications
   fr: TODO
-other_channel_applications:
+other_application:
   en: Applications by other channels
   fr: TODO
-telephone_enquires:
+phone_inquiry:
   en: Telephone enquiries
   fr: TODO
-website_visits:
-  en: Website visits
+online_inquiry:
+  en: Online enquiries
   fr: TODO
 
 # Overview
