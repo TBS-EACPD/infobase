@@ -28,8 +28,14 @@ Object {
               "name": "Treasury Board of Canada Secretariat",
             },
             "org_id": "326",
-            "program_ids": null,
-            "programs": Array [],
+            "program_ids": Array [
+              "TBC-ISS07",
+            ],
+            "programs": Array [
+              Object {
+                "name": "Information Technology Services - Treasury Board Secretariat",
+              },
+            ],
             "scope": Array [
               "Internal Enterprise Service",
             ],
@@ -80,8 +86,14 @@ Object {
               "name": "Treasury Board of Canada Secretariat",
             },
             "org_id": "326",
-            "program_ids": null,
-            "programs": Array [],
+            "program_ids": Array [
+              "TBC-ISS02",
+            ],
+            "programs": Array [
+              Object {
+                "name": "Communications Services - Treasury Board Secretariat",
+              },
+            ],
             "scope": Array [
               "External Service",
             ],
@@ -139,8 +151,14 @@ Object {
               "name": "Treasury Board of Canada Secretariat",
             },
             "org_id": "326",
-            "program_ids": null,
-            "programs": Array [],
+            "program_ids": Array [
+              "TBC-BXB01",
+            ],
+            "programs": Array [
+              Object {
+                "name": "Financial Management Policies and Initiatives",
+              },
+            ],
             "scope": Array [
               "Internal Enterprise Service",
             ],
@@ -292,8 +310,14 @@ Object {
               "name": "Treasury Board of Canada Secretariat",
             },
             "org_id": "326",
-            "program_ids": null,
-            "programs": Array [],
+            "program_ids": Array [
+              "TBC-ISS01",
+            ],
+            "programs": Array [
+              Object {
+                "name": "Management and Oversight Services - Treasury Board Secretariat",
+              },
+            ],
             "scope": Array [
               "External Service",
             ],
@@ -376,8 +400,12 @@ Object {
               "name": "Treasury Board of Canada Secretariat",
             },
             "org_id": "326",
-            "program_ids": null,
-            "programs": Array [],
+            "program_ids": Array [
+              "TBC-BXC03,ISS04",
+            ],
+            "programs": Array [
+              null,
+            ],
             "scope": Array [
               "Internal Enterprise Service",
             ],
@@ -428,8 +456,14 @@ Object {
               "name": "Treasury Board of Canada Secretariat",
             },
             "org_id": "326",
-            "program_ids": null,
-            "programs": Array [],
+            "program_ids": Array [
+              "TBC-ISS07",
+            ],
+            "programs": Array [
+              Object {
+                "name": "Information Technology Services - Treasury Board Secretariat",
+              },
+            ],
             "scope": Array [
               "External Service",
             ],
@@ -488,8 +522,12 @@ The classification accreditation responds to the requirement of the Policy on Cl
               "name": "Treasury Board of Canada Secretariat",
             },
             "org_id": "326",
-            "program_ids": null,
-            "programs": Array [],
+            "program_ids": Array [
+              "TBC-BXC01,ISS04",
+            ],
+            "programs": Array [
+              null,
+            ],
             "scope": Array [
               "Internal Enterprise Service",
             ],
@@ -518,6 +556,175 @@ The classification accreditation responds to the requirement of the Policy on Cl
             ],
             "urls": Array [
               "",
+            ],
+          },
+        ],
+      },
+    },
+  },
+}
+`;
+
+exports[`services data All services and standards for program 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "program": Object {
+        "services": Array [
+          Object {
+            "account_reg_digital_status": null,
+            "application_digital_status": true,
+            "authentication_status": true,
+            "collects_fees": false,
+            "decision_digital_status": true,
+            "description": "This service is in place to compensate employees who have incurred expenses or financial losses because of the implementation of the Phoenix pay system.",
+            "digital_enablement_comment": "This service does not use online account registration and enrolment.",
+            "feedback_channels": Array [
+              "Telephone",
+              "Email",
+            ],
+            "issuance_digital_status": true,
+            "issue_res_digital_status": true,
+            "last_gender_analysis": null,
+            "name": "Treasury Board of Canada Secretariat’s Claims Office",
+            "org": Object {
+              "name": "Treasury Board of Canada Secretariat",
+            },
+            "org_id": "326",
+            "program_ids": Array [
+              "TBC-BXB01",
+            ],
+            "programs": Array [
+              Object {
+                "name": "Financial Management Policies and Initiatives",
+              },
+            ],
+            "scope": Array [
+              "Internal Enterprise Service",
+            ],
+            "service_id": "1348",
+            "service_report": Array [
+              Object {
+                "SIN_collected": null,
+                "cra_business_ids_collected": null,
+                "live_application_count": null,
+                "mail_application_count": null,
+                "online_application_count": 2014,
+                "online_inquiry_count": null,
+                "other_application_count": null,
+                "phone_inquiry_count": null,
+                "service_id": "1348",
+                "service_report_comment": null,
+                "year": "2018",
+              },
+            ],
+            "service_type": Array [
+              "Advisory Services",
+            ],
+            "standards": Array [
+              Object {
+                "channel": null,
+                "last_gcss_tool_year": "2017",
+                "name": "Acknowledge the receipt of all claims within one business day.",
+                "other_type_comment": "The service standard is administered by email.",
+                "rtp_urls": Array [
+                  "",
+                ],
+                "service_id": "1348",
+                "standard_id": "1361",
+                "standard_report": Array [
+                  Object {
+                    "count": 0,
+                    "lower": 90,
+                    "met_count": 0,
+                    "standard_id": "1361",
+                    "standard_report_comment": null,
+                    "year": "2018",
+                  },
+                ],
+                "standard_type": null,
+                "target_type": "Percentage of outcomes",
+                "urls": null,
+              },
+              Object {
+                "channel": null,
+                "last_gcss_tool_year": "2017",
+                "name": "Provide a recommendation within 10 business days.",
+                "other_type_comment": "The service standard is administered by email.",
+                "rtp_urls": Array [
+                  "",
+                ],
+                "service_id": "1348",
+                "standard_id": "1577",
+                "standard_report": Array [
+                  Object {
+                    "count": 0,
+                    "lower": 90,
+                    "met_count": 0,
+                    "standard_id": "1577",
+                    "standard_report_comment": null,
+                    "year": "2018",
+                  },
+                ],
+                "standard_type": null,
+                "target_type": "Percentage of outcomes",
+                "urls": null,
+              },
+              Object {
+                "channel": null,
+                "last_gcss_tool_year": "2017",
+                "name": "Provide a recommendation within 60 business days for claims related to income taxes and benefits.",
+                "other_type_comment": "The service standard is administered by email.",
+                "rtp_urls": Array [
+                  "",
+                ],
+                "service_id": "1348",
+                "standard_id": "1578",
+                "standard_report": Array [
+                  Object {
+                    "count": 0,
+                    "lower": 90,
+                    "met_count": 0,
+                    "standard_id": "1578",
+                    "standard_report_comment": null,
+                    "year": "2018",
+                  },
+                ],
+                "standard_type": null,
+                "target_type": "Percentage of outcomes",
+                "urls": null,
+              },
+              Object {
+                "channel": null,
+                "last_gcss_tool_year": "2017",
+                "name": "Provide a recommendation within 60 business days for very complex claims.",
+                "other_type_comment": "The service standard is administered by email.",
+                "rtp_urls": Array [
+                  "",
+                ],
+                "service_id": "1348",
+                "standard_id": "1579",
+                "standard_report": Array [
+                  Object {
+                    "count": 0,
+                    "lower": 90,
+                    "met_count": 0,
+                    "standard_id": "1579",
+                    "standard_report_comment": null,
+                    "year": "2018",
+                  },
+                ],
+                "standard_type": null,
+                "target_type": "Percentage of outcomes",
+                "urls": null,
+              },
+            ],
+            "target_groups": Array [
+              "Internal to Government",
+              "Persons",
+            ],
+            "urls": Array [
+              "https://www.canada.ca/en/treasury-board-secretariat/topics/pay/phoenix-pay-system/phoenix.html",
             ],
           },
         ],

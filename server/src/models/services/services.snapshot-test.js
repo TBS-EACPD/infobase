@@ -79,7 +79,6 @@ query{
   }
 }`;
 
-/* TODO when program_ids fixed
 const all_services_and_standards_for_program = `
 query{
   root(lang: "en"){
@@ -87,7 +86,7 @@ query{
       ${services_fields}
     }
   }
-}`;*/
+}`;
 
 const { execQuery } = global;
 
@@ -96,9 +95,8 @@ describe("services data", function () {
     const data = await execQuery(all_services_and_standards_for_org, {});
     return expect(data).toMatchSnapshot();
   });
-  /* TODO when program_ids fixed
   it("All services and standards for program", async () => {
     const data = await execQuery(all_services_and_standards_for_program, {});
     return expect(data).toMatchSnapshot();
-  });*/
+  });
 });
