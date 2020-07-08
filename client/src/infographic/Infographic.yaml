@@ -19,7 +19,7 @@ people_data_intro_text:
   fr: |
     <div class='embeded-markdown'>
     Le gouvernement du Canada est le plus important employeur au Canada. Les tableaux suivants offrent une introduction aux données sur la 
-    gestion des personnes au gouvernement du Canada ([relevé des effectifs]{{gl "HEAD"}}).
+    gestion des personnes au gouvernement du Canada ([relevé des personnels]{{gl "HEAD"}}).
     </div>
 
     {{> ochro_includes_excludes_fr}}

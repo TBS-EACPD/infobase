@@ -10,7 +10,7 @@ gov_employee_age_text:
    
    Over this period, the **average age** of **Federal Public Service** employees **{{two_value_changed_to gov_avgage_last_year_5 gov_avgage_last_year "fmt_decimal1"}}**.
   fr: |
-   De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, les personnes âgées de **{{fmt_big_int gov_head_count_age_top}}** constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 gov_head_count_age_top_avg_percent}}**) de l’effectif de la **fonction publique fédérale**.
+   De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, les personnes âgées de **{{fmt_big_int gov_head_count_age_top}}** constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 gov_head_count_age_top_avg_percent}}**) du personnel de la **fonction publique fédérale**.
 
    Au cours de cette période, **l’âge moyen** des employés de la **fonction publique fédérale** **{{fr_two_value_changed_to gov_avgage_last_year_5 gov_avgage_last_year "m" "s" "fmt_decimal1"}}**.
 
@@ -33,7 +33,7 @@ gov_employee_age_text_temporary_no_avg_age:
    From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, people aged **{{fmt_big_int gov_head_count_age_top}}** accounted for the largest average share (**{{fmt_percentage1 gov_head_count_age_top_avg_percent}}**) of **Federal Public Service** employees.
    
   fr: |
-   De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, les personnes âgées de **{{fmt_big_int gov_head_count_age_top}}** constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 gov_head_count_age_top_avg_percent}}**) de l’effectif de la **fonction publique fédérale**.
+   De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, les personnes âgées de **{{fmt_big_int gov_head_count_age_top}}** constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 gov_head_count_age_top_avg_percent}}**) du personnel de la **fonction publique fédérale**.
 
 dept_employee_age_text_temporary_no_avg_age:
   transform: [handlebars,markdown]

@@ -65,7 +65,7 @@ export default {
             "Corresponds to the active employee population by Employee Type, as of March 31 " +
             people_years_short_second[ix],
           fr:
-            "Correspond à l'effectif actif par type d'employé, au 31 mars " +
+            "Correspond à le personnel actif par type d'employé, au 31 mars " +
             people_years_short_second[ix],
         },
       });

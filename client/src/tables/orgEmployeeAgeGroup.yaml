@@ -5,7 +5,7 @@ orgEmployeeAgeGroup_short:
     This information is sourced from the Regional and Phoenix Pay Systems as of March 31 of each fiscal year.
 
   fr: |
-    Ce tableau présente le {{gl_tt "relevé des effectifs actifs" "ACTIV_PEOPLE"}} du gouvernement du Canada selon le groupe d’âge de {{ppl_last_year_5}} à {{ppl_last_year}}. 
+    Ce tableau présente le {{gl_tt "relevé des personnels actifs" "ACTIV_PEOPLE"}} du gouvernement du Canada selon le groupe d’âge de {{ppl_last_year_5}} à {{ppl_last_year}}. 
     Ces renseignements proviennent des systèmes de paye regional et Phénix au 31 mars de chaque exercice financier.
 
 orgEmployeeAgeGroup:

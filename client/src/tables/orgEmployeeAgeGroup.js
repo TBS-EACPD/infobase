@@ -67,7 +67,7 @@ export default {
             "Corresponds to the active employee population by Age Group, as of March 31 " +
             people_years_short_second[ix],
           fr:
-            "Correspond à l'effectif actif par groupe d'âge, au 31 mars " +
+            "Correspond à le personnel actif par groupe d'âge, au 31 mars " +
             people_years_short_second[ix],
         },
       });

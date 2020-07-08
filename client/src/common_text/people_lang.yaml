@@ -129,8 +129,8 @@ ochro_includes_excludes_fr:
     </div>
     
     **Remarques:**
-    1. Le relevé des effectifs diffère du {{gl_tt "nombre d’équivalents temps plein (ETP)" "FTE"}} pour plusieurs raisons :  
-     * Le **relevé des effectifs** comprend toutes les personnes à l’emploi des organismes figurant aux annexes I, IV et V de la _Loi sur la gestion des finances publiques_, 
+    1. Le relevé des personnels diffère du {{gl_tt "nombre d’équivalents temps plein (ETP)" "FTE"}} pour plusieurs raisons :  
+     * Le **relevé des personnels** comprend toutes les personnes à l’emploi des organismes figurant aux annexes I, IV et V de la _Loi sur la gestion des finances publiques_, 
      quelle que soit la période d’emploi (nommés pour une période indéterminée, nommés pour une période déterminée, occasionnels et étudiants), de même que 
      les personnes nommées par le gouverneur en conseil, les sous-ministres et les juges fédéraux, au 31 mars de chaque année. 
      Les employés en congé sans solde ne sont pas inclus. Aucun rajustement n’est fait pour tenir compte des heures de travail.
