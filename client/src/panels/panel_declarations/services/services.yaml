@@ -8,6 +8,9 @@ list_of_provided_services_desc:
     **{{subject_name}}** is reporting on **{{num_of_services}}** services:
   fr: |
     TODO
+view_service:
+  en: See the service
+  fr: Voir le service    
 
 # Fees
 services_fees:
