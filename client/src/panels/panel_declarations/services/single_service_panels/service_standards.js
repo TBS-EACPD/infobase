@@ -105,13 +105,14 @@ export class ServiceStandards extends React.Component {
 
     const num_met = (() => {
       let total = 0;
-      for (const standard in data) {
+      for (const standard of data) {
         if (standard.is_target_met) {
           total++;
         }
       }
       return total;
     })();
+
     const large_icons = {
       met: (
         <IconCheck
@@ -137,6 +138,15 @@ export class ServiceStandards extends React.Component {
       ),
     };
 
+    const filtered_data =
+      active_list.length == 1
+        ? _.filter(
+            data,
+            _.includes(active_list, "met")
+              ? { is_target_met: true }
+              : { is_target_met: false }
+          )
+        : data;
     console.log(data);
     return (
       <Panel title={text_maker("service_standards_title")}>
@@ -161,7 +171,7 @@ export class ServiceStandards extends React.Component {
           click_callback={(status_key) => toggle_active_status_key(status_key)}
           show_eyes_override={active_list.length === ["met", "not_met"].length}
         />
-        <DisplayTable data={data} column_configs={column_configs} />
+        <DisplayTable data={filtered_data} column_configs={column_configs} />
       </Panel>
     );
   }
