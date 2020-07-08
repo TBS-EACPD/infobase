@@ -5,7 +5,7 @@ import { create_resource_by_foreignkey_attr_dataloader } from "../loader_utils.j
 import {
   pkey_type,
   parent_fkey_type,
-  sparse_parent_fkey_type,
+  sparse_pkey_type,
   str_type,
   bilingual_str,
   bilingual,
@@ -36,7 +36,7 @@ export default function (model_singleton) {
   });
 
   const ServiceStandardSchema = mongoose.Schema({
-    standard_id: pkey_type(),
+    standard_id: sparse_pkey_type(),
     service_id: parent_fkey_type(),
     //is_active: { type: Boolean },
 
