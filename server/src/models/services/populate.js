@@ -159,7 +159,6 @@ export default async function ({ models }) {
       ),
     })
   );
-  ServiceStandard.dropIndexes();
 
   return await Promise.all([
     ServiceReport.insertMany(service_report_rows),
