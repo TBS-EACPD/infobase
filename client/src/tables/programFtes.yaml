@@ -38,7 +38,7 @@ programFtes:
 
 
    **Remarques:**
-   * Les nombres d’ETP diffèrent du {{gl_tt "relevé des effectifs" "HEAD"}} pour les raisons suivantes : 
+   * Les nombres d’ETP diffèrent du {{gl_tt "relevé des personnels" "HEAD"}} pour les raisons suivantes : 
     * Les **équivalents temps plein (ETP)** correspondent à la mesure dans laquelle un employé représente une année-personne complète dans les 
     budgets ministériels. Les ETP sont calculés en fonction du coefficient des heures de travail assignées et des heures de travail prescrites, 
     comme cela se fait dans les conventions collectives. Des rajustements sont apportés aux calculs pour les travailleurs à période déterminée et 

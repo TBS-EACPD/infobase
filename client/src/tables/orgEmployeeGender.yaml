@@ -10,7 +10,7 @@ orgEmployeeGender_short:
     This information is sourced from the Regional Pay System on March 31 (the last day of each fiscal year).
 
   fr: |
-    Ce tableau présente le {{gl_tt "relevé des effectifs actifs" "ACTIV_PEOPLE"}} du gouvernement du Canada selon selon le sexe de {{ppl_last_year_5}} à {{ppl_last_year}}. 
+    Ce tableau présente le {{gl_tt "relevé des personnels actifs" "ACTIV_PEOPLE"}} du gouvernement du Canada selon selon le sexe de {{ppl_last_year_5}} à {{ppl_last_year}}. 
     Ces renseignements sont ceux du système régional de paye, au 31 mars de chaque année (soit le dernier jour de l’exercice financier).
    
 orgEmployeeGender:
