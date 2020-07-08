@@ -76,6 +76,7 @@ export default async function ({ models }) {
     get_standard_csv_file_rows("services.csv"),
     ({
       id: service_id,
+      dept_code,
       collects_fees,
       account_reg_digital_status,
       authentication_status,
@@ -132,6 +133,10 @@ export default async function ({ models }) {
         "Enabled",
         "Not Enabled"
       ),
+      program_ids: _.map(
+        multi_value_string_fields_to_arrays({ program_ids }),
+        (program_id) => `${dept_code}-${program_id}`
+      ),
       ...multi_value_string_fields_to_arrays({
         service_type_en,
         service_type_fr,
@@ -141,7 +146,6 @@ export default async function ({ models }) {
         designations_fr,
         target_groups_en,
         target_groups_fr,
-        program_ids,
         feedback_channels_en,
         feedback_channels_fr,
         urls_en,
