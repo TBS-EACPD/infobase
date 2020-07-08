@@ -32,8 +32,8 @@ class ProvidedServicesListPanel extends React.Component {
           aria-label={text_maker("explorer_search_is_optional")}
           className="form-control input-lg"
           type="text"
-          style={{ width: "100%", marginBottom: "1rem" }}
-          placeholder={text_maker("filter_results")}
+          style={{ width: "100%", marginBottom: "1rem", marginTop: "2rem" }}
+          placeholder={text_maker("filter_results_service")}
           onChange={(evt) => this.setState({ service_query: evt.target.value })}
           value={service_query}
         />
@@ -62,7 +62,7 @@ class ProvidedServicesListPanel extends React.Component {
                     justifyContent: "space-between",
                   }}
                 >
-                  <div className="tag-badge">{service_type}</div>
+                  <div className="tag-badge btn-ib-primary">{service_type}</div>
                   <a href={`#dept/${org_id}/service-panels/${id}`}>
                     <TM tmf={text_maker} k="view_service" />
                   </a>
