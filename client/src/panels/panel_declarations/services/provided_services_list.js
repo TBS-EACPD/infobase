@@ -63,7 +63,7 @@ class ProvidedServicesListPanel extends React.Component {
                     justifyContent: "space-between",
                   }}
                 >
-                  <div className="tag-badge">{service_type}</div>
+                  <div className="tag-badge btn-ib-primary">{service_type}</div>
                   <a href={`#dept/${org_id}/service-panels/${id}`}>
                     <button className="btn-ib-primary">
                       <TM k="view_service" />
