@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import {
   pkey_type,
   parent_fkey_type,
+  sparse_parent_fkey_type,
   sparse_pkey_type,
   str_type,
   bilingual_str,
@@ -58,7 +59,7 @@ export default function (model_singleton) {
   const ServiceSchema = mongoose.Schema({
     service_id: pkey_type(),
     org_id: parent_fkey_type(),
-    ...bilingual("program_ids", [str_type]),
+    program_ids: [sparse_parent_fkey_type()],
     //year: str_type,
     //is_active: { type: Boolean },
 
