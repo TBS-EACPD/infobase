@@ -10,7 +10,10 @@ list_of_provided_services_desc:
     TODO
 view_service:
   en: See the service
-  fr: Voir le service    
+  fr: Voir le service
+filter_results_service:
+  en: Filter services by name or type
+  fr: Filtrer les services par nom ou type   
 
 # Fees
 services_fees:
