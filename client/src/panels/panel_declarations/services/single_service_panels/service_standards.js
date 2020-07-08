@@ -3,8 +3,9 @@ import {
   create_text_maker_component,
   Panel,
   DisplayTable,
+  FilterTable,
 } from "../../../../components";
-import { newIBCategoryColors } from "../../shared.js";
+import { newIBCategoryColors, businessConstants } from "../../shared.js";
 import { IconAttention, IconCheck } from "../../../../icons/icons.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -15,8 +16,17 @@ const color_scale = d3
   .range(_.take(newIBCategoryColors, 2));
 
 export class ServiceStandards extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      active_list: [],
+    };
+  }
+
   render() {
     const { service } = this.props;
+    const { active_list } = this.state;
+    const { result_simple_statuses } = businessConstants;
     const standards = service.standards;
     const data = _.chain(standards)
       .map(({ name, type, channel, standard_report }) =>
@@ -87,9 +97,70 @@ export class ServiceStandards extends React.Component {
         raw_formatter: (value) => String(value),
       },
     };
+
+    const toggle_active_status_key = (status_key) =>
+      this.setState({
+        active_list: _.toggle_list(active_list, status_key),
+      });
+
+    const num_met = (() => {
+      let total = 0;
+      for (const standard in data) {
+        if (standard.is_target_met) {
+          total++;
+        }
+      }
+      return total;
+    })();
+    const large_icons = {
+      met: (
+        <IconCheck
+          key="met"
+          title={text_maker("standard_met")}
+          color={color_scale("standard_met")}
+          width={41}
+          vertical_align={"0em"}
+          alternate_color={false}
+          inline={false}
+        />
+      ),
+      not_met: (
+        <IconAttention
+          key="not_met"
+          title={text_maker("standard_not_met")}
+          color={color_scale("standard_not_met")}
+          width={41}
+          vertical_align={"0em"}
+          alternate_color={false}
+          inline={false}
+        />
+      ),
+    };
+
+    console.log(data);
     return (
       <Panel title={text_maker("service_standards_title")}>
         <TM className="medium_panel_text" k="service_standards_text" />
+        <FilterTable
+          items={_.map(["met", "not_met"], (status_key) => ({
+            key: status_key,
+            count: status_key === "met" ? num_met : data.length - num_met,
+            active:
+              active_list.length === 0 ||
+              _.indexOf(active_list, status_key) !== -1,
+            text: !window.is_a11y_mode ? (
+              <span className="link-unstyled" tabIndex={0} aria-hidden="true">
+                {result_simple_statuses[status_key].text}
+              </span>
+            ) : (
+              result_simple_statuses[status_key].text
+            ),
+            icon: large_icons[status_key],
+          }))}
+          item_component_order={["count", "icon", "text"]}
+          click_callback={(status_key) => toggle_active_status_key(status_key)}
+          show_eyes_override={active_list.length === ["met", "not_met"].length}
+        />
         <DisplayTable data={data} column_configs={column_configs} />
       </Panel>
     );
