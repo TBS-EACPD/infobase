@@ -1,6 +1,6 @@
 internal_service_panel_title:
   en: Full-time employees in Internal Services
-  fr: L'effectif des services internes
+  fr: Le personnel des services internes
 
 internal_service_panel_text:
   transform: [handlebars, markdown]
