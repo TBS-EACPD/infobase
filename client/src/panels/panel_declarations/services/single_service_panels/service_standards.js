@@ -1,4 +1,4 @@
-import text from "./service_standards.yaml";
+import text from "../services.yaml";
 import {
   create_text_maker_component,
   Panel,
@@ -11,7 +11,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const color_scale = d3
   .scaleOrdinal()
-  .domain(["standard_met", "standard_not_met"])
+  .domain(["met", "not_met"])
   .range(_.take(newIBCategoryColors, 2));
 
 export class ServiceStandards extends React.Component {
@@ -52,21 +52,21 @@ export class ServiceStandards extends React.Component {
       },
       count: {
         index: 4,
-        header: text_maker("stanndard_count"),
+        header: text_maker("target"),
       },
       met_count: {
         index: 5,
-        header: text_maker("stanndard_met_count"),
+        header: text_maker("actual_result"),
       },
       is_target_met: {
         index: 6,
-        header: text_maker("stanndard_status"),
+        header: text_maker("status"),
         formatter: (value) =>
           value ? (
             <IconCheck
               key="met"
-              title={text_maker("standard_met")}
-              color={color_scale("standard_met")}
+              title={text_maker("met")}
+              color={color_scale("met")}
               width={38}
               vertical_align={"0em"}
               alternate_color={false}
@@ -75,8 +75,8 @@ export class ServiceStandards extends React.Component {
           ) : (
             <IconAttention
               key="not_met"
-              title={text_maker("standard_not_met")}
-              color={color_scale("standard_not_met")}
+              title={text_maker("not_met")}
+              color={color_scale("not_met")}
               width={38}
               vertical_align={"0em"}
               alternate_color={false}

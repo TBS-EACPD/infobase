@@ -432,7 +432,21 @@ value:
 percentage:
   en: Percentage
   fr: Pourcentage
-
+status:
+  en: Status
+  fr: TODO
+target:
+  en: Target
+  fr: Cible
+targets:
+  en: Targets
+  fr: Cibles
+met:
+  en: Met
+  fr: Atteint
+not_met:
+  en: Not met
+  fr: Non atteint
 
 #######################################
 # Data types
@@ -792,6 +806,9 @@ difference:
 difference_planned_actual:
   en: Difference (Actual - Planned)
   fr: Différence (Réel - prévu)
+actual_result:
+  en: Actual result 
+  fr: Résultat réel
 
 
 MtoM_tag_warning_reporting_level_q:
