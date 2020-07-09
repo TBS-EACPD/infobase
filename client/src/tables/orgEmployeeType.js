@@ -27,13 +27,13 @@ export default {
   },
 
   name: {
-    en: "Population by Employee Type",
-    fr: "Population selon le type d’employé",
+    en: "Employee Type",
+    fr: "Type d’employé",
   },
 
   title: {
-    en: "Population by Employee Type",
-    fr: "Population selon le type d’employé",
+    en: "Employee Type",
+    fr: "Type d’employé",
   },
 
   add_cols: function () {

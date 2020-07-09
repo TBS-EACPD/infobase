@@ -1,7 +1,7 @@
 orgEmployeeExLvl_title:
   transform: [handlebars]
-  en: Population by Executive Level
-  fr: Population selon les niveaux des cadres supérieurs
+  en: Executive Level
+  fr: Nveaux des cadres supérieurs
 
 orgEmployeeExLvl_short:
   transform: [handlebars,embeded-markdown, markdown]

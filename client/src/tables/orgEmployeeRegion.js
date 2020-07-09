@@ -29,13 +29,13 @@ export default {
   },
 
   name: {
-    en: "Population by Geographic Region",
-    fr: "Population selon la région géographique",
+    en: "Geographic Region",
+    fr: "Région géographique",
   },
 
   title: {
-    en: "Population by Geographic Region",
-    fr: "Population selon la région géographique",
+    en: "Geographic Region",
+    fr: "Région géographique",
   },
 
   add_cols: function () {

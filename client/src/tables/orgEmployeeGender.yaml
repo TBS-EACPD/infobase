@@ -1,7 +1,7 @@
 orgEmployeeGender_title:
   transform: [handlebars]
-  en: Population by Gender
-  fr: Population selon le sexe
+  en: Gender
+  fr: Sexe
 
 orgEmployeeGender_short:
   transform: [handlebars,embeded-markdown,markdown]
