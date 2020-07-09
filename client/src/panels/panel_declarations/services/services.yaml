@@ -8,6 +8,12 @@ list_of_provided_services_desc:
     **{{subject_name}}** is reporting on **{{num_of_services}}** services:
   fr: |
     TODO
+view_service:
+  en: See the service
+  fr: Voir le service
+filter_results_service:
+  en: Filter services by name or type
+  fr: Filtrer les services par nom ou par type   
 
 # Fees
 services_fees:
