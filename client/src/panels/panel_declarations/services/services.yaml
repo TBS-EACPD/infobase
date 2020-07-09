@@ -13,7 +13,7 @@ view_service:
   fr: Voir le service
 filter_results_service:
   en: Filter services by name or type
-  fr: Filtrer les services par nom ou par type
+  fr: Filtrer les services par nom ou type   
 
 # Fees
 services_fees:
