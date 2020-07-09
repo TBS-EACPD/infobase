@@ -180,7 +180,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
     },
     target_result: {
       index: 3,
-      header: text_maker("target_result"),
+      header: text_maker("actual_result"),
       is_sortable: false,
     },
     date_to_achieve: {
