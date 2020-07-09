@@ -344,7 +344,6 @@ export class DisplayTable extends React.Component {
                 <tr key={i}>
                   {_.map(visible_ordered_col_keys, (col_key) => (
                     <td
-                      className={col_configs_with_defaults[col_key].color}
                       style={{
                         fontSize: "14px",
                         textAlign: determine_text_align(row, col_key),

@@ -8,6 +8,8 @@ import {
   get_source_links,
   declare_panel,
 } from "../../shared.js";
+import { Format } from "../../../../components";
+import styles from "../../../../common_css/_common-variables.scss";
 
 const { text_maker } = create_text_maker_component(text);
 
@@ -21,6 +23,14 @@ const special_cols = _.flatMap(planning_years, (year) => [
   `${year}_spa`,
 ]);
 const dp_cols = [...planning_years, ...special_cols];
+
+const spending = (value) => (
+  <Format style={{ color: "#008000" }} type={"dollar"} content={value} />
+);
+
+const revenue = (value) => (
+  <Format style={{ color: "#cc0000" }} type={"dollar"} content={value} />
+);
 
 export const declare_dp_rev_split_panel = () =>
   declare_panel({
@@ -76,31 +86,21 @@ export const declare_dp_rev_split_panel = () =>
             index: 1,
             header: text_maker("dp_gross"),
             is_summable: true,
-            formatter: "dollar",
-            color: "spending",
+            formatter: spending,
           },
           spa: {
             index: 2,
             header: text_maker("dp_spa"),
             is_summable: true,
-            formatter: "dollar",
-            color: "spending",
-            initial_visible: (() => {
-              for (const data of table_data) {
-                if (data.spa != 0) {
-                  return true;
-                }
-              }
-
-              return false;
-            })(),
+            formatter: spending,
+            initial_visible:
+              _.filter(table_data, (row) => row.spa === 0).length === 0,
           },
           rev: {
             index: 3,
             header: text_maker("dp_revenue"),
             is_summable: true,
-            formatter: "dollar",
-            color: "revenue",
+            formatter: revenue,
           },
           net: {
             index: 4,

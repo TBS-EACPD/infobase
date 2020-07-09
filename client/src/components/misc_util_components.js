@@ -25,10 +25,13 @@ function lang(obj) {
 
 class Format extends React.PureComponent {
   render() {
-    const { type, content } = this.props;
+    const { type, content, style } = this.props;
 
     return (
-      <span dangerouslySetInnerHTML={{ __html: formats[type](content) }} />
+      <span
+        style={style}
+        dangerouslySetInnerHTML={{ __html: formats[type](content) }}
+      />
     );
   }
 }
