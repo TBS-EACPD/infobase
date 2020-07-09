@@ -28,7 +28,7 @@ export class ServiceOverview extends React.Component {
             <div className="service-overview-rect">
               <h3>{service.description}</h3>
             </div>
-            {standards && (
+            {!_.isEmpty(standards) && (
               <div
                 style={{
                   display: "flex",
@@ -88,25 +88,50 @@ export class ServiceOverview extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="service-overview-rect">
-              <FancyUL title={text_maker("related_programs")}>
-                {_.map(service.program_ids, (program_id) => {
-                  const program = Subject.Program.lookup(program_id);
-                  return (
-                    <a key={program_id} href={infograph_href_template(program)}>
-                      {program.name}
-                    </a>
-                  );
-                })}
-              </FancyUL>
-            </div>
-            <div className="service-overview-rect">
-              <TM
-                el="h2"
-                k={"service_link_text"}
-                args={{ service_url: service.url }}
-              />
-            </div>
+            {!_.isEmpty(service.program_ids) && (
+              <div className="service-overview-rect">
+                <FancyUL title={text_maker("related_programs")}>
+                  {_.map(service.program_ids, (program_id) => {
+                    const program = Subject.Program.lookup(program_id);
+                    return (
+                      <a
+                        key={program_id}
+                        href={infograph_href_template(program)}
+                      >
+                        {program.name}
+                      </a>
+                    );
+                  })}
+                </FancyUL>
+              </div>
+            )}
+            {!_.isEmpty(service.urls) && (
+              <div className="service-overview-rect">
+                {service.urls.length === 1 ? (
+                  <TM
+                    el="h2"
+                    k={"service_single_link_text"}
+                    args={{ service_url: service.urls[0] }}
+                  />
+                ) : (
+                  <div>
+                    <TM el="h2" k={"service_links_text"} />
+                    <FancyUL>
+                      {_.map(service.urls, (url, i) => (
+                        <a
+                          key={url}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {`${text_maker("link")} ${i + 1}`}
+                        </a>
+                      ))}
+                    </FancyUL>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </Panel>

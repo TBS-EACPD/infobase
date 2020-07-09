@@ -133,9 +133,12 @@ does_not_charge_fees:
 standards_performance_text:
   en: Overall standards performance for this service
   fr: TODO
-service_link_text:
+service_single_link_text:
   transform: [handlebars, markdown]
   en: More details on this service can be found **{{ext_link "here" service_url }}**
+  fr: TODO
+service_links_text:
+  en: More details on this service can be found in the links below
   fr: TODO
 
 # Standard
