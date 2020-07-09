@@ -20,18 +20,6 @@ previous_year_target:
   en: Last year's target
   fr: Cible de l'an dernier
 
-target:
-  en: Target
-  fr: Cible
-
-targets:
-  en: Targets
-  fr: Cibles 
-
-target_result:
-  en: Actual result 
-  fr: Résultat réel
-
 target_result_interim:
   en: Actual result (interim)
   fr: Résultat réel (provisoire)

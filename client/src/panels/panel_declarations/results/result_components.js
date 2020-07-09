@@ -112,7 +112,7 @@ const IndicatorDisplay = ({ indicator, show_doc }) => {
               {indicator.status_key === "future" ? (
                 <TM k="target_result_interim" />
               ) : (
-                <TM k="target_result" />
+                <TM k="actual_result" />
               )}
             </dt>
             <dd>
