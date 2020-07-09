@@ -117,7 +117,7 @@ export class DisplayTable extends React.Component {
       const current_col_formatter = col_configs_with_defaults[col].formatter;
       const current_col_raw_formatter =
         col_configs_with_defaults[col].raw_formatter;
-      if (current_col_formatter) {
+      if (current_col_formatter && !_.isFunction(current_col_formatter)) {
         if (_.isString(current_col_formatter) && _.isNumber(row[col])) {
           return "right";
         }
