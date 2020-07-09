@@ -29,13 +29,13 @@ export default {
   },
 
   name: {
-    en: "Population by Employee Age Group",
-    fr: "Population selon le groupe d’âge",
+    en: "Employee Age Group",
+    fr: "Groupe d’âge",
   },
 
   title: {
-    en: "Population by Employee Age Group",
-    fr: "Population selon le groupe d’âge",
+    en: "Employee Age Group",
+    fr: "Groupe d’âge",
   },
 
   add_cols: function () {

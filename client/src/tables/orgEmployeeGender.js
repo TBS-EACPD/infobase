@@ -27,13 +27,13 @@ export default {
   },
 
   name: {
-    en: "Population by Employee Gender",
-    fr: "Population selon le sexe",
+    en: "Employee Gender",
+    fr: "Sexe",
   },
 
   title: {
-    en: "Population by Employee Gender",
-    fr: "Population selon le sexe",
+    en: "Employee Gender",
+    fr: "Sexe",
   },
 
   add_cols: function () {

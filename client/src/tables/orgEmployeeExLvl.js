@@ -27,13 +27,13 @@ export default {
   },
 
   name: {
-    en: "Population by Executive Level",
-    fr: "Population selon les niveaux des cadres supérieurs",
+    en: "Executive Level",
+    fr: "Niveaux des cadres supérieurs",
   },
 
   title: {
-    en: "Population by Executive Level",
-    fr: "Population selon les niveaux des cadres supérieurs",
+    en: "Executive Level",
+    fr: "Niveaux des cadres supérieurs",
   },
 
   add_cols: function () {

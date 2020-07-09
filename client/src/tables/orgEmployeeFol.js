@@ -27,13 +27,13 @@ export default {
   },
 
   name: {
-    en: "Population by First Official Language",
-    fr: "Population selon la première langue officielle",
+    en: "First Official Language",
+    fr: "Première langue officielle",
   },
 
   title: {
-    en: "Population by First Official Language",
-    fr: "Population selon la première langue officielle",
+    en: "First Official Language",
+    fr: "Première langue officielle",
   },
 
   add_cols: function () {

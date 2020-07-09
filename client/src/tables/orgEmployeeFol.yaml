@@ -1,7 +1,7 @@
 orgEmployeeFol_title:
   transform: [handlebars]
-  en: Population by First Official Language
-  fr: Population selon la première langue officielle
+  en: First Official Language
+  fr: Première langue officielle
 
 orgEmployeeFol_short:
   transform: [handlebars,embeded-markdown,markdown]
