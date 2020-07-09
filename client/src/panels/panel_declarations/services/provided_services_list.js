@@ -63,7 +63,22 @@ class ProvidedServicesListPanel extends React.Component {
                     justifyContent: "space-between",
                   }}
                 >
-                  <div className="tag-badge">{service_type}</div>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    {_.map(service_type, (type) => (
+                      <div
+                        className="tag-badge"
+                        style={{ marginRight: "1rem" }}
+                      >
+                        {type}
+                      </div>
+                    ))}
+                  </div>
                   <a href={`#dept/${org_id}/service-panels/${id}`}>
                     <button className="btn-ib-primary">
                       <TM k="view_service" />
