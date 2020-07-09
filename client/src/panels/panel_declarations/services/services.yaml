@@ -137,3 +137,20 @@ service_link_text:
   transform: [handlebars, markdown]
   en: More details on this service can be found **{{ext_link "here" service_url }}**
   fr: TODO
+
+# Standard
+service_standards_title:
+  en: Service Standards
+  fr: TODO
+service_standards_text:
+  en: Service Standards are used as metrics to indicate how service is doing.
+  fr: TODO
+standard_name:
+  en: Standard name
+  fr: TODO
+standard_type:
+  en: Standard type
+  fr: TODO
+standard_channel:
+  en: Standard channel
+  fr: TODO
