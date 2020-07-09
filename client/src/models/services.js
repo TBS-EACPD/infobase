@@ -51,10 +51,6 @@ const Service = class Service extends static_subject_store() {
     return _.map(this.program_ids, (prog_id) => Program.lookup(prog_id));
   }
 
-  get standards() {
-    return service_indexed_standards[this.id];
-  }
-
   constructor(serv) {
     super();
 
@@ -64,7 +60,6 @@ const Service = class Service extends static_subject_store() {
   }
 };
 
-const service_indexed_standards = [];
 const ServiceStandard = class ServiceStandard extends static_subject_store() {
   static get subject_type() {
     return "service_standard";
@@ -83,17 +78,12 @@ const ServiceStandard = class ServiceStandard extends static_subject_store() {
   }
 
   static create_and_register(def) {
-    const { standard_id, service_id } = def;
+    const { standard_id } = def;
     // duplicate service_id as id since it makes sense for each subject-like object to have an id
     def.id = def.standard_id;
 
     const inst = new ServiceStandard(def);
     this.register(standard_id, inst);
-
-    if (!service_indexed_standards[service_id]) {
-      service_indexed_standards[service_id] = [];
-    }
-    service_indexed_standards[service_id].push(inst);
   }
 
   get service() {
