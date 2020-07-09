@@ -147,7 +147,7 @@ export class ServiceStandards extends React.Component {
               : { is_target_met: false }
           )
         : data;
-    console.log(data);
+
     return (
       <Panel title={text_maker("service_standards_title")}>
         <TM className="medium_panel_text" k="service_standards_text" />
