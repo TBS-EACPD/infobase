@@ -21,6 +21,7 @@ class ServicesChannelsPanel extends React.Component {
     this.state = {
       active_services: _.chain(services)
         .map(({ service_id }) => [service_id, true])
+        .take(3)
         .fromPairs()
         .value(),
     };
