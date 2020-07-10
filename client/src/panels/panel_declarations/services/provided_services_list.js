@@ -47,9 +47,8 @@ class ProvidedServicesListPanel extends React.Component {
                   service.name.toLowerCase(),
                   service_query.toLowerCase()
                 ) ||
-                _.includes(
-                  service.service_type.toLowerCase(),
-                  service_query.toLowerCase()
+                _.find(service.service_type, (type) =>
+                  _.includes(type.toLowerCase(), service_query.toLowerCase())
                 )
             ),
             ({ name, id, org_id, service_type, description }) => (
