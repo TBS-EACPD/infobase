@@ -93,14 +93,6 @@ table.display-table:not(.no-total-row) > tbody > tr:last-child > td:not(:last-ch
   border-right: 1px solid $separatorColor !important;
 }
 
-td.spending {
-  color: $textGreen;
-}
-
-td.revenue {
-  color: $textRed;
-}
-
 ::placeholder{
   font-weight: normal;
 }

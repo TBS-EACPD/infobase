@@ -92,7 +92,6 @@ export class DisplayTable extends React.Component {
           sum_func: (sum, value) => ... <- (function) Custom sum func. Default to sum + value
           sort_func: (a, b) => ... <- (function) Custom sort func. Default to _.sortBy
           sum_initial_value: 0 <- (number) Default to 0
-          color: "class name"
         },
       }
       */,

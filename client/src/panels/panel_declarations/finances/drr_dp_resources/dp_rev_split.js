@@ -9,7 +9,6 @@ import {
   declare_panel,
 } from "../../shared.js";
 import { Format } from "../../../../components";
-import styles from "../../../../common_css/_common-variables.scss";
 
 const { text_maker } = create_text_maker_component(text);
 
@@ -25,11 +24,19 @@ const special_cols = _.flatMap(planning_years, (year) => [
 const dp_cols = [...planning_years, ...special_cols];
 
 const spending = (value) => (
-  <Format style={{ color: "#008000" }} type={"dollar"} content={value} />
+  <Format
+    style={{ color: window.infobase_color_constants.textGreen }}
+    type={"dollar"}
+    content={value}
+  />
 );
 
 const revenue = (value) => (
-  <Format style={{ color: "#cc0000" }} type={"dollar"} content={value} />
+  <Format
+    style={{ color: window.infobase_color_constants.textRed }}
+    type={"dollar"}
+    content={value}
+  />
 );
 
 export const declare_dp_rev_split_panel = () =>
