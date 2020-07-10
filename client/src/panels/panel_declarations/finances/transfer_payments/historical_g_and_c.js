@@ -285,9 +285,7 @@ class DetailedHistTPItems extends React.Component {
                   SelectAllOnClick={() =>
                     this.setState({ active_indices: all_tp_idx })
                   }
-                  SelectNoneOnClick={() =>
-                    this.setState({ active_indices: [] })
-                  }
+                  ResetOnClick={() => this.setState({ active_indices: [0] })}
                 />
               }
             />
