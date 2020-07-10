@@ -37,6 +37,7 @@ export class ServiceStandards extends React.Component {
       name: {
         index: 0,
         header: text_maker("standard_name"),
+        is_searchable: true,
       },
       year: {
         index: 1,
