@@ -19,7 +19,8 @@ const ServicesFeesPanel = ({ panel_args }) => {
         k="services_fees_text"
         args={{
           subject_name: subject.name,
-          charge_fees_percentage: service_charges_fees.true / services.length,
+          charge_fees_percentage:
+            service_charges_fees.true / services.length || 0,
         }}
         className="medium_panel_text"
       />
@@ -28,12 +29,12 @@ const ServicesFeesPanel = ({ panel_args }) => {
           {
             id: "fees",
             label: text_maker("service_charges_fees"),
-            value: service_charges_fees.true,
+            value: service_charges_fees.true || 0,
           },
           {
             id: "no_fees",
             label: text_maker("service_does_not_charge_fees"),
-            value: service_charges_fees.false,
+            value: service_charges_fees.false || 0,
           },
         ]}
         is_money={false}

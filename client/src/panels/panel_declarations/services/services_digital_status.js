@@ -15,9 +15,20 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
   const services = panel_args.services;
   const total_online_digital_statuses = _.reduce(
     digital_status_keys,
-    (sum, key) => sum + _.countBy(services, `${key}_status`).true,
+    (sum, key) => {
+      const current_count = _.countBy(services, `${key}_status`).true || 0;
+      return sum + current_count;
+    },
     0
   );
+  const data = _.map(digital_status_keys, (key) => {
+    const current_status_count = _.countBy(services, `${key}_status`).true || 0;
+    return {
+      label: text_maker(`${key}_desc`),
+      id: key,
+      value: current_status_count,
+    };
+  });
   return (
     <div>
       <TM
@@ -29,14 +40,7 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
             total_online_digital_statuses / (services.length * 6),
         }}
       />
-      <NivoResponsivePie
-        data={_.map(digital_status_keys, (key) => ({
-          label: text_maker(`${key}_desc`),
-          id: key,
-          value: _.countBy(services, `${key}_status`).true,
-        }))}
-        is_money={false}
-      />
+      <NivoResponsivePie data={data} is_money={false} />
     </div>
   );
 };
