@@ -19,11 +19,11 @@ export class ServiceStandards extends React.Component {
     const { service } = this.props;
     const standards = service.standards;
     const data = _.chain(standards)
-      .map(({ name, standard_type, channel, standard_report }) =>
+      .map(({ name, type, channel, standard_report }) =>
         _.map(standard_report, ({ year, count, met_count }) => ({
           name: name,
           year: year,
-          standard_type: standard_type,
+          standard_type: type,
           channel: channel,
           count: count,
           met_count: met_count,
