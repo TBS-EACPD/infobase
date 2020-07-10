@@ -461,12 +461,6 @@ target:
 targets:
   en: Targets
   fr: Cibles
-met:
-  en: Met
-  fr: Atteint
-not_met:
-  en: Not met
-  fr: Non atteint
 
 #######################################
 # Data types
