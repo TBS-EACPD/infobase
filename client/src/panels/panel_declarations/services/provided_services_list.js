@@ -23,6 +23,16 @@ class ProvidedServicesListPanel extends React.Component {
     const { services } = panel_args;
     const includes_lowercase = (value, query) =>
       _.includes(value.toLowerCase(), query.toLowerCase());
+    const filtered_sorted_data = _.chain(services)
+      .filter(
+        ({ name, service_type }) =>
+          includes_lowercase(name, service_query) ||
+          _.find(service_type, (type) =>
+            includes_lowercase(type, service_query)
+          )
+      )
+      .sortBy("name")
+      .value();
 
     return (
       <div>
@@ -45,14 +55,7 @@ class ProvidedServicesListPanel extends React.Component {
         <HeightClippedGraph clipHeight={400}>
           <FancyUL>
             {_.map(
-              _.filter(
-                services,
-                ({ name, service_type }) =>
-                  includes_lowercase(name, service_query) ||
-                  _.find(service_type, (type) =>
-                    includes_lowercase(type, service_query)
-                  )
-              ),
+              filtered_sorted_data,
               ({ name, id, org_id, service_type, description }) => (
                 <React.Fragment key={id}>
                   <a href={`#dept/${org_id}/service-panels/${id}`}>{name}</a>
