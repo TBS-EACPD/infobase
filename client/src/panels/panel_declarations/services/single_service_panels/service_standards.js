@@ -100,13 +100,17 @@ export class ServiceStandards extends React.Component {
       },
     };
 
-    const num_met = _.reduce(
-      data,
-      (accumulator, standard) => {
-        return standard.is_target_met ? accumulator + 1 : accumulator;
-      },
-      0
-    );
+    const get_status_met = (is_status_met) => {
+      return _.reduce(
+        data,
+        (accumulator, standard) => {
+          return standard.is_target_met === is_status_met
+            ? accumulator + 1
+            : accumulator;
+        },
+        0
+      );
+    };
 
     const large_icons = {
       met: (
@@ -147,7 +151,7 @@ export class ServiceStandards extends React.Component {
         <FilterTable
           items={_.map(standard_statuses, (status_key) => ({
             key: status_key,
-            count: status_key === "met" ? num_met : data.length - num_met,
+            count: get_status_met(status_key === "met"),
             active:
               active_list.length === standard_statuses.length ||
               _.indexOf(active_list, status_key) !== -1,
