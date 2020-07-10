@@ -119,6 +119,9 @@ overview_digital_status_title:
 overview_digital_status_desc:
   en: Online component of this service
   fr: TODO
+service_types:
+  en: Service Types
+  fr: TODO
 online_status:
   en: Online status
   fr: TODO
