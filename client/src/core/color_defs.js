@@ -20,6 +20,8 @@ const buttonSecondaryColor = "#76a4df";
 
 const textColor = "#333";
 const textLightColor = "#fff";
+const textGreen = "#008000";
+const textRed = "#cc0000";
 
 const linkColor = "#2b438c";
 const linkFocusColor = "#0535d2";
@@ -49,6 +51,8 @@ export {
   buttonSecondaryColor,
   textColor,
   textLightColor,
+  textGreen,
+  textRed,
   linkColor,
   linkFocusColor,
   linkVisitedColor,
