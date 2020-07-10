@@ -54,6 +54,12 @@ class HistoricalProgramBars extends React.Component {
     const ticks = std_years.map((yr) => run_template(yr));
     const { selected } = this.state;
 
+    const active_last_year_progs = _.chain(data)
+      .sortBy(({ data }) => _.last(data) || 0)
+      .takeRight(3)
+      .map("id")
+      .value();
+
     const colors = d3
       .scaleOrdinal()
       .range(_.concat(newIBLightCategoryColors, newIBDarkCategoryColors));
@@ -153,7 +159,9 @@ class HistoricalProgramBars extends React.Component {
               Controls={
                 <SelectAllControl
                   SelectAllOnClick={() => this.setState({ selected: all_keys })}
-                  SelectNoneOnClick={() => this.setState({ selected: [] })}
+                  ResetOnClick={() =>
+                    this.setState({ selected: active_last_year_progs })
+                  }
                 />
               }
             />

@@ -106,7 +106,9 @@ class SobjLine extends React.Component {
                 SelectAllOnClick={() =>
                   this.setState({ active_sobjs: all_labels })
                 }
-                SelectNoneOnClick={() => this.setState({ active_sobjs: [] })}
+                ResetOnClick={() =>
+                  this.setState({ active_sobjs: [_.first(data).label] })
+                }
               />
             }
           />

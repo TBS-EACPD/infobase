@@ -1,6 +1,6 @@
 import { TrivialTM } from "../../components/index.js";
 
-export const SelectAllControl = ({ SelectAllOnClick, SelectNoneOnClick }) => (
+export const SelectAllControl = ({ SelectAllOnClick, ResetOnClick }) => (
   <div
     role="group"
     aria-labelledby={"SelectAllControlGroup"}
@@ -20,9 +20,9 @@ export const SelectAllControl = ({ SelectAllOnClick, SelectNoneOnClick }) => (
     <button
       style={{ marginLeft: "5px" }}
       className="btn-ib-primary"
-      onClick={SelectNoneOnClick}
+      onClick={ResetOnClick}
     >
-      <TrivialTM k="none" />
+      <TrivialTM k="reset" />
     </button>
   </div>
 );
