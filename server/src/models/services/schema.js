@@ -68,7 +68,7 @@ const schema = `
 
     last_gcss_tool_year: String
     channel: String
-    standard_type: String
+    type: String
     other_type_comment: String
 
     target_type: String
@@ -119,6 +119,8 @@ export default function ({ models, loaders }) {
       name: bilingual_field("name"),
       other_type_comment: bilingual_field("other_type_comment"),
       //target_comment: bilingual_field("comment"),
+      channel: bilingual_field("channel"),
+      type: bilingual_field("type"),
       urls: bilingual_field("urls"),
       rtp_urls: bilingual_field("rtp_urls"),
     },
