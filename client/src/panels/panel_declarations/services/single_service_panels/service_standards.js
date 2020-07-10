@@ -84,6 +84,7 @@ export class ServiceStandards extends React.Component {
               inline={false}
             />
           ),
+        raw_formatter: (value) => String(value),
       },
     };
     return (
