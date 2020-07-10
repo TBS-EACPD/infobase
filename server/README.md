@@ -26,8 +26,8 @@ GraphQL API for InfoBase data.
 
 ### Running the API server locally
 1. Install node ^9.0.0, npm ^5.7.1, and mongo
-2. run `mongod` in the background/a spare shell
-3. open a shell in `/server`
+2. open a shell in `/server`
+3. `npm run mongod`, either background this process or open another shell in `/server` for further steps
 4. `npm ci` to load the required node_modules
 5. `npm run populate_db` to populate a local mongo database (named `infobase`). Can be left running to watch for changes in `../data`
 6. `npm start` to start the express/GraphQL server listening on `localhost:1337`. Watches for changes in `src`
