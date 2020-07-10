@@ -4,7 +4,7 @@ import {
   Panel,
   DisplayTable,
 } from "../../../../components";
-import { digital_status_keys, get_available_icon } from "../shared.js";
+import { digital_status_keys, available_icons } from "../shared.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -15,11 +15,13 @@ export class ServiceDigitalStatus extends React.Component {
       overview_digital_status_desc: {
         index: 0,
         header: text_maker("overview_digital_status_desc"),
+        is_searchable: true,
       },
       digital_status: {
         index: 1,
         header: text_maker("online_status"),
-        formatter: (value) => get_available_icon(value),
+        formatter: (value) => available_icons[value],
+        raw_formatter: (value) => String(value),
       },
     };
 

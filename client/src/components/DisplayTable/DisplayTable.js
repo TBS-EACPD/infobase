@@ -99,7 +99,7 @@ export class DisplayTable extends React.Component {
             "big_int" <- (string) If it's string, auto formats using types_to_format
             OR
             (value) => <span> {value} </span>, <- (function)  If it's function, column value is passed in
-          raw_formatter: (value) => Dept.lookup(value).name <- (function) Actual raw value from data. Used for searching/csv string Default to value
+          raw_formatter: (value) => Dept.lookup(value).name <- (function) Actual raw value from data. Used for sorting/searching/csv string. Default to value
           sum_func: (sum, value) => ... <- (function) Custom sum func. Default to sum + value
           sort_func: (a, b) => ... <- (function) Custom sort func. Default to _.sortBy
           sum_initial_value: 0 <- (number) Default to 0
@@ -164,19 +164,18 @@ export class DisplayTable extends React.Component {
       )
       .thru((unsorted_array) => {
         if (_.has(col_configs_with_defaults, sort_by)) {
-          return col_configs_with_defaults[sort_by].sort_func
-            ? _.map(unsorted_array).sort((a, b) =>
-                col_configs_with_defaults[sort_by].sort_func(
-                  a[sort_by],
-                  b[sort_by]
-                )
+          const sorting_config = col_configs_with_defaults[sort_by];
+          return sorting_config.sort_func
+            ? _.sortWith(unsorted_array, (a, b) =>
+                sorting_config.sort_func(a[sort_by], b[sort_by])
               )
             : _.sortBy(unsorted_array, (row) =>
-                is_number_string_date(row[sort_by])
-                  ? /*Please Leave On: sorting data containing BOTH string and date is not consistent 
+                is_number_string_date(
+                  sorting_config.raw_formatter(row[sort_by])
+                ) /*Please Leave On: sorting data containing BOTH string and date is not consistent 
                  It's probably trying to cast string into date object and if that fails, it probably stops sorting.
                  Better off just building a sort function to handle it*/
-                    row[sort_by]
+                  ? sorting_config.raw_formatter(row[sort_by])
                   : Number.NEGATIVE_INFINITY
               );
         }

@@ -14,9 +14,8 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
   const services = panel_args.services;
   const colors = d3
     .scaleOrdinal()
-    .domain(["uses_identifier", "does_not_identifier"])
-    .range(_.take(newIBCategoryColors, 2));
-
+    .domain(["uses_identifier", "does_not_identifier", "na"])
+    .range(_.take(newIBCategoryColors, 3));
   const get_id_method_count = (method) =>
     _.reduce(
       services,
@@ -29,11 +28,15 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
           false: service_id_count.false
             ? sum.false + service_id_count.false
             : sum.false,
+          null: service_id_count.null
+            ? sum.null + service_id_count.null
+            : sum.null,
         };
       },
       {
         true: 0,
         false: 0,
+        null: 0,
       }
     );
 
@@ -51,6 +54,11 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
       label: text_maker("does_not_use_sin_as_identifier"),
       value: sin_count.false,
     },
+    {
+      id: "na",
+      label: text_maker("data_not_provided_or_applicable"),
+      value: sin_count.null,
+    },
   ];
   const cra_data = [
     {
@@ -62,6 +70,11 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
       id: "does_not_identifier",
       label: text_maker("does_not_use_cra_as_identifier"),
       value: cra_count.false,
+    },
+    {
+      id: "na",
+      label: text_maker("data_not_provided_or_applicable"),
+      value: cra_count.null,
     },
   ];
 
