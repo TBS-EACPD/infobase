@@ -15,11 +15,13 @@ const color_scale = d3
   .domain(["met", "not_met"])
   .range(_.take(newIBCategoryColors, 2));
 
+const standard_statuses = ["met", "not_met"];
+
 export class ServiceStandards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      active_list: [],
+      active_list: standard_statuses,
     };
   }
 
@@ -138,25 +140,23 @@ export class ServiceStandards extends React.Component {
       ),
     };
 
-    const filtered_data =
-      active_list.length == 1
-        ? _.filter(
-            data,
-            _.includes(active_list, "met")
-              ? { is_target_met: true }
-              : { is_target_met: false }
-          )
-        : data;
+    const filtered_data = _.filter(
+      data,
+      ({ is_target_met }) =>
+        !_.isEmpty(active_list) &&
+        (active_list.length === standard_statuses.length ||
+          is_target_met === _.includes(active_list, "met"))
+    );
 
     return (
       <Panel title={text_maker("service_standards_title")}>
         <TM className="medium_panel_text" k="service_standards_text" />
         <FilterTable
-          items={_.map(["met", "not_met"], (status_key) => ({
+          items={_.map(standard_statuses, (status_key) => ({
             key: status_key,
             count: status_key === "met" ? num_met : data.length - num_met,
             active:
-              active_list.length === 0 ||
+              active_list.length === standard_statuses.length ||
               _.indexOf(active_list, status_key) !== -1,
             text: !window.is_a11y_mode ? (
               <span className="link-unstyled" tabIndex={0} aria-hidden="true">
@@ -169,7 +169,7 @@ export class ServiceStandards extends React.Component {
           }))}
           item_component_order={["count", "icon", "text"]}
           click_callback={(status_key) => toggle_active_status_key(status_key)}
-          show_eyes_override={active_list.length === ["met", "not_met"].length}
+          show_eyes_override={active_list.length === standard_statuses.length}
         />
         <DisplayTable data={filtered_data} column_configs={column_configs} />
       </Panel>
