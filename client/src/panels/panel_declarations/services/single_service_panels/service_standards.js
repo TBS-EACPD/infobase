@@ -100,20 +100,13 @@ export class ServiceStandards extends React.Component {
       },
     };
 
-    const toggle_active_status_key = (status_key) =>
-      this.setState({
-        active_list: _.toggle_list(active_list, status_key),
-      });
-
-    const num_met = (() => {
-      let total = 0;
-      for (const standard of data) {
-        if (standard.is_target_met) {
-          total++;
-        }
-      }
-      return total;
-    })();
+    const num_met = _.reduce(
+      data,
+      (accumulator, standard) => {
+        return standard.is_target_met ? accumulator + 1 : accumulator;
+      },
+      0
+    );
 
     const large_icons = {
       met: (
@@ -168,7 +161,11 @@ export class ServiceStandards extends React.Component {
             icon: large_icons[status_key],
           }))}
           item_component_order={["count", "icon", "text"]}
-          click_callback={(status_key) => toggle_active_status_key(status_key)}
+          click_callback={(status_key) =>
+            this.setState({
+              active_list: _.toggle_list(active_list, status_key),
+            })
+          }
           show_eyes_override={active_list.length === standard_statuses.length}
         />
         <DisplayTable data={filtered_data} column_configs={column_configs} />
