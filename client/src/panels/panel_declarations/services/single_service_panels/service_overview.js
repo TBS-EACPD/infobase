@@ -28,6 +28,11 @@ export class ServiceOverview extends React.Component {
             <div className="service-overview-rect">
               <h3>{service.description}</h3>
             </div>
+            <div className="service-overview-rect">
+              <FancyUL title={text_maker("service_types")}>
+                {_.map(service.service_type)}
+              </FancyUL>
+            </div>
             {!_.isEmpty(standards) && (
               <div
                 style={{
@@ -46,6 +51,8 @@ export class ServiceOverview extends React.Component {
                 />
               </div>
             )}
+          </div>
+          <div className="fcol-md-5">
             <div className="service-overview-rect">
               <FancyUL
                 className="service_overview-fancy-ul"
@@ -69,27 +76,6 @@ export class ServiceOverview extends React.Component {
                 ]}
               </FancyUL>
             </div>
-          </div>
-          <div className="fcol-md-5">
-            <div className={"col-container"}>
-              <div className="fcol-md-6 px-lg-0 pl-min-lg-0">
-                <div className="service-overview-rect">
-                  <h3>{service.service_type}</h3>
-                </div>
-              </div>
-              <div className="fcol-md-6 px-lg-0 pr-min-lg-0">
-                <div className="service-overview-rect">
-                  <TM
-                    el="h3"
-                    k={
-                      service.collects_fees
-                        ? "does_charge_fees"
-                        : "does_not_charge_fees"
-                    }
-                  />
-                </div>
-              </div>
-            </div>
             {!_.isEmpty(service.program_ids) && (
               <div className="service-overview-rect">
                 <FancyUL title={text_maker("related_programs")}>
@@ -107,6 +93,16 @@ export class ServiceOverview extends React.Component {
                 </FancyUL>
               </div>
             )}
+            <div className="service-overview-rect">
+              <TM
+                el="h4"
+                k={
+                  service.collects_fees
+                    ? "does_charge_fees"
+                    : "does_not_charge_fees"
+                }
+              />
+            </div>
             {!_.isEmpty(service.urls) && (
               <div className="service-overview-rect">
                 {service.urls.length === 1 ? (
