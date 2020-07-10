@@ -23,15 +23,9 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
       (sum, service) => {
         const service_id_count = _.countBy(service.service_report, method);
         return {
-          true: service_id_count.true
-            ? sum.true + service_id_count.true
-            : sum.true,
-          false: service_id_count.false
-            ? sum.false + service_id_count.false
-            : sum.false,
-          null: service_id_count.null
-            ? sum.null + service_id_count.null
-            : sum.null,
+          true: sum.true + service_id_count.true || sum.true,
+          false: sum.false + service_id_count.false || sum.false,
+          null: sum.null + service_id_count.null || sum.null,
         };
       },
       {
