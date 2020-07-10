@@ -4,6 +4,7 @@ import {
   create_text_maker_component,
   InfographicPanel,
   declare_panel,
+  HeightClippedGraph,
 } from "../shared.js";
 
 import { FancyUL } from "../../../components";
@@ -19,6 +20,9 @@ class ProvidedServicesListPanel extends React.Component {
   render() {
     const { panel_args } = this.props;
     const { service_query } = this.state;
+    const { services } = panel_args;
+    const includes_lowercase = (value, query) =>
+      _.includes(value.toLowerCase(), query.toLowerCase());
 
     return (
       <div>
@@ -26,7 +30,7 @@ class ProvidedServicesListPanel extends React.Component {
           k="list_of_provided_services_desc"
           args={{
             subject_name: panel_args.subject.name,
-            num_of_services: panel_args.services.length,
+            num_of_services: services.length,
           }}
         />
         <input
@@ -38,56 +42,56 @@ class ProvidedServicesListPanel extends React.Component {
           onChange={(evt) => this.setState({ service_query: evt.target.value })}
           value={service_query}
         />
-        <FancyUL>
-          {_.map(
-            _.filter(
-              panel_args.services,
-              (service) =>
-                _.includes(
-                  service.name.toLowerCase(),
-                  service_query.toLowerCase()
-                ) ||
-                _.find(service.service_type, (type) =>
-                  _.includes(type.toLowerCase(), service_query.toLowerCase())
-                )
-            ),
-            ({ name, id, org_id, service_type, description }) => (
-              <React.Fragment key={id}>
-                <a href={`#dept/${org_id}/service-panels/${id}`}>{name}</a>
-                <p>{description}</p>
-                <div
-                  style={{
-                    display: "flex",
-                    fontSize: "14px",
-                    justifyContent: "space-between",
-                  }}
-                >
+        <HeightClippedGraph clipHeight={400}>
+          <FancyUL>
+            {_.map(
+              _.filter(
+                services,
+                ({ name, service_type }) =>
+                  includes_lowercase(name, service_query) ||
+                  _.find(service_type, (type) =>
+                    includes_lowercase(type, service_query)
+                  )
+              ),
+              ({ name, id, org_id, service_type, description }) => (
+                <React.Fragment key={id}>
+                  <a href={`#dept/${org_id}/service-panels/${id}`}>{name}</a>
+                  <p>{description}</p>
                   <div
                     style={{
                       display: "flex",
-                      flexDirection: "row",
-                      flexWrap: "wrap",
+                      fontSize: "14px",
+                      justifyContent: "space-between",
                     }}
                   >
-                    {_.map(service_type, (type) => (
-                      <div
-                        className="tag-badge"
-                        style={{ marginRight: "1rem" }}
-                      >
-                        {type}
-                      </div>
-                    ))}
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      {_.map(service_type, (type) => (
+                        <div
+                          key={type}
+                          className="tag-badge"
+                          style={{ marginRight: "1rem" }}
+                        >
+                          {type}
+                        </div>
+                      ))}
+                    </div>
+                    <a href={`#dept/${org_id}/service-panels/${id}`}>
+                      <button className="btn-ib-primary">
+                        <TM k="view_service" />
+                      </button>
+                    </a>
                   </div>
-                  <a href={`#dept/${org_id}/service-panels/${id}`}>
-                    <button className="btn-ib-primary">
-                      <TM k="view_service" />
-                    </button>
-                  </a>
-                </div>
-              </React.Fragment>
-            )
-          )}
-        </FancyUL>
+                </React.Fragment>
+              )
+            )}
+          </FancyUL>
+        </HeightClippedGraph>
       </div>
     );
   }
