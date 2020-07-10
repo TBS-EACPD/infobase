@@ -2,6 +2,7 @@
 
 .col-container {
   display: flex;
+  flex-direction: row;
   @media (max-width: $maxMediumDevice){
     flex-direction: column;
   }
