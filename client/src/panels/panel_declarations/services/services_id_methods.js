@@ -1,3 +1,4 @@
+import "./services.scss";
 import text from "./services.yaml";
 import { Service } from "../../../models/services.js";
 import {
