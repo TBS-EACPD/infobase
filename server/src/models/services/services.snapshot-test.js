@@ -50,7 +50,7 @@ services {
     name
     last_gcss_tool_year
     channel
-    standard_type
+    type
     other_type_comment
 
     target_type
