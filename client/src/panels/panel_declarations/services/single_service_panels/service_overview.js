@@ -6,7 +6,7 @@ import {
   FancyUL,
 } from "../../../../components";
 import { Subject } from "../../../../models/subject.js";
-import { get_available_icon } from "../shared";
+import { available_icons } from "../shared";
 import { infograph_href_template } from "../../../../link_utils.js";
 import Gauge from "../../../../charts/gauge.js";
 
@@ -56,13 +56,15 @@ export class ServiceOverview extends React.Component {
                 {[
                   <div key="uses_cra_as_identifier" className="identifier-item">
                     <TM style={{ lineHeight: 2 }} k="uses_cra_as_identifier" />
-                    {get_available_icon(
-                      most_recent_report.cra_business_ids_collected
-                    )}
+                    {
+                      available_icons[
+                        most_recent_report.cra_business_ids_collected
+                      ]
+                    }
                   </div>,
                   <div key="uses_sin_as_identifier" className="identifier-item">
                     <TM style={{ lineHeight: 2 }} k="uses_sin_as_identifier" />
-                    {get_available_icon(most_recent_report.SIN_collected)}
+                    {available_icons[most_recent_report.SIN_collected]}
                   </div>,
                 ]}
               </FancyUL>
