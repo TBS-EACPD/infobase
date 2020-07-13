@@ -17,26 +17,31 @@ const service_channels_keys = [
   "mail_application",
   "other_application",
 ];
+const available_keys = {
+  true: "yes",
+  false: "no",
+  null: "not_applicable",
+};
 const available_icons = {
-  true: (
+  yes: (
     <IconCheck
-      title={trivial_text_maker("available")}
+      title={trivial_text_maker("yes")}
       color={window.infobase_color_constants.successDarkColor}
       width={30}
       alternate_color={false}
     />
   ),
-  false: (
+  no: (
     <IconX
-      title={trivial_text_maker("not_available")}
+      title={trivial_text_maker("no")}
       color={window.infobase_color_constants.highlightDark}
       width={30}
       alternate_color={false}
     />
   ),
-  null: (
+  not_applicable: (
     <IconNotApplicable
-      title={trivial_text_maker("data_not_provided_or_applicable")}
+      title={trivial_text_maker("not_applicable")}
       color={window.infobase_color_constants.warnDarkColor}
       width={30}
       alternate_color={false}
@@ -44,4 +49,9 @@ const available_icons = {
   ),
 };
 
-export { digital_status_keys, service_channels_keys, available_icons };
+export {
+  digital_status_keys,
+  service_channels_keys,
+  available_keys,
+  available_icons,
+};

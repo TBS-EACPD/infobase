@@ -21,7 +21,7 @@ services_fees:
   fr: TODO
 services_fees_text:
   transform: [handlebars, markdown]
-  en: Out of the services that **{{subject_name}}** provide, **{{fmt_percentage1 charge_fees_percentage}}** of the services charge fees.
+  en: Out of the **{{services_count}}** services that **{{subject_name}}** provides, **{{fmt_percentage1 charge_fees_percentage}}** charge fees.
   fr: TODO
 service_charges_fees:
   en: Service charges fees
@@ -85,13 +85,31 @@ issuance_digital_desc:
 issue_res_digital_desc:
   en: They can provide feedback online
   fr: TODO
+account_reg_digital:
+  en: Registeration
+  fr: TODO
+application_digital:
+  en: Application
+  fr: TODO
+authentication:
+  en: Authentication
+  fr: TODO
+decision_digital:
+  en: Decision
+  fr: TODO
+issuance_digital:
+  en: Issuance
+  fr: TODO
+issue_res_digital:
+  en: Feedback
+  fr: TODO
 
 # Channels
 service_channels_title:
   en: Communication channels
   fr: TODO
 service_channels_text:
-  en: Communication channels that this service use for handling applications and enquiries
+  en: Communication channels that this service uses for handling applications and enquiries
   fr: TODO
 live_application:
   en: In person applications
@@ -155,7 +173,10 @@ service_standards_title:
   en: Service Standards
   fr: TODO
 service_standards_text:
-  en: Service Standards are used as metrics to indicate how service is doing.
+  en: Service Standards are used as metrics to indicate how the service is doing.
+  fr: TODO
+no_service_standards_text:
+  en: This service does not have any service standards
   fr: TODO
 standard_name:
   en: Standard name
