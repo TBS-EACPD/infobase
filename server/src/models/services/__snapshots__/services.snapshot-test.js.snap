@@ -401,10 +401,16 @@ Object {
             },
             "org_id": "326",
             "program_ids": Array [
-              "TBC-BXC03,ISS04",
+              "TBC-BXC03",
+              "TBC-ISS04",
             ],
             "programs": Array [
-              null,
+              Object {
+                "name": "People Management Policies and Initiatives",
+              },
+              Object {
+                "name": "Human Resources Management Services - Treasury Board Secretariat",
+              },
             ],
             "scope": Array [
               "Internal Enterprise Service",
@@ -523,10 +529,16 @@ The classification accreditation responds to the requirement of the Policy on Cl
             },
             "org_id": "326",
             "program_ids": Array [
-              "TBC-BXC01,ISS04",
+              "TBC-BXC01",
+              "TBC-ISS04",
             ],
             "programs": Array [
-              null,
+              Object {
+                "name": "Compensation and Labour Relations",
+              },
+              Object {
+                "name": "Human Resources Management Services - Treasury Board Secretariat",
+              },
             ],
             "scope": Array [
               "Internal Enterprise Service",
