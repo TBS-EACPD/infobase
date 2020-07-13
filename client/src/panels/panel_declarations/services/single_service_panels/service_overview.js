@@ -6,7 +6,7 @@ import {
   FancyUL,
 } from "../../../../components";
 import { Subject } from "../../../../models/subject.js";
-import { available_icons } from "../shared";
+import { available_icons, available_keys } from "../shared";
 import { infograph_href_template } from "../../../../link_utils.js";
 import Gauge from "../../../../charts/gauge.js";
 
@@ -65,13 +65,19 @@ export class ServiceOverview extends React.Component {
                     <TM style={{ lineHeight: 2 }} k="uses_cra_as_identifier" />
                     {
                       available_icons[
-                        most_recent_report.cra_business_ids_collected
+                        available_keys[
+                          most_recent_report.cra_business_ids_collected
+                        ]
                       ]
                     }
                   </div>,
                   <div key="uses_sin_as_identifier" className="identifier-item">
                     <TM style={{ lineHeight: 2 }} k="uses_sin_as_identifier" />
-                    {available_icons[most_recent_report.SIN_collected]}
+                    {
+                      available_icons[
+                        available_keys[most_recent_report.SIN_collected]
+                      ]
+                    }
                   </div>,
                 ]}
               </FancyUL>
@@ -82,12 +88,14 @@ export class ServiceOverview extends React.Component {
                   {_.map(service.program_ids, (program_id) => {
                     const program = Subject.Program.lookup(program_id);
                     return (
-                      <a
-                        key={program_id}
-                        href={infograph_href_template(program)}
-                      >
-                        {program.name}
-                      </a>
+                      program && (
+                        <a
+                          key={program_id}
+                          href={infograph_href_template(program)}
+                        >
+                          {program.name}
+                        </a>
+                      )
                     );
                   })}
                 </FancyUL>
