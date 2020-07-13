@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import text from "../services.yaml";
 import {
   create_text_maker_component,
@@ -102,34 +103,47 @@ export class ServiceStandards extends React.Component {
 
     return (
       <Panel title={text_maker("service_standards_title")}>
-        <TM className="medium_panel_text" k="service_standards_text" />
-        <FilterTable
-          items={_.map(standard_statuses, (status_key) => ({
-            key: status_key,
-            count: _.countBy(data, "is_target_met")[status_key] || 0,
-            active:
-              active_statuses.length === standard_statuses.length ||
-              _.indexOf(active_statuses, status_key) !== -1,
-            text: !window.is_a11y_mode ? (
-              <span className="link-unstyled" tabIndex={0} aria-hidden="true">
-                {result_simple_statuses[status_key].text}
-              </span>
-            ) : (
-              result_simple_statuses[status_key].text
-            ),
-            icon: status_icons[status_key],
-          }))}
-          item_component_order={["count", "icon", "text"]}
-          click_callback={(status_key) =>
-            this.setState({
-              active_statuses: _.toggle_list(active_statuses, status_key),
-            })
-          }
-          show_eyes_override={
-            active_statuses.length === standard_statuses.length
-          }
-        />
-        <DisplayTable data={filtered_data} column_configs={column_configs} />
+        {!_.isEmpty(data) ? (
+          <Fragment>
+            <TM className="medium_panel_text" k="service_standards_text" />
+            <FilterTable
+              items={_.map(standard_statuses, (status_key) => ({
+                key: status_key,
+                count: _.countBy(data, "is_target_met")[status_key] || 0,
+                active:
+                  active_statuses.length === standard_statuses.length ||
+                  _.indexOf(active_statuses, status_key) !== -1,
+                text: !window.is_a11y_mode ? (
+                  <span
+                    className="link-unstyled"
+                    tabIndex={0}
+                    aria-hidden="true"
+                  >
+                    {result_simple_statuses[status_key].text}
+                  </span>
+                ) : (
+                  result_simple_statuses[status_key].text
+                ),
+                icon: status_icons[status_key],
+              }))}
+              item_component_order={["count", "icon", "text"]}
+              click_callback={(status_key) =>
+                this.setState({
+                  active_statuses: _.toggle_list(active_statuses, status_key),
+                })
+              }
+              show_eyes_override={
+                active_statuses.length === standard_statuses.length
+              }
+            />
+            <DisplayTable
+              data={filtered_data}
+              column_configs={column_configs}
+            />
+          </Fragment>
+        ) : (
+          <TM className="medium_panel_text" k="no_service_standards_text" />
+        )}
       </Panel>
     );
   }

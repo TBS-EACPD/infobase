@@ -133,10 +133,10 @@ export default async function ({ models }) {
         "Enabled",
         "Not Enabled"
       ),
-      program_ids: _.map(
-        multi_value_string_fields_to_arrays({ program_ids }),
-        (program_id) => `${dept_code}-${program_id}`
-      ),
+      program_ids: _.chain(program_ids)
+        .split("<>")
+        .map((id) => `${dept_code}-${id}`)
+        .value(),
       ...multi_value_string_fields_to_arrays({
         service_type_en,
         service_type_fr,

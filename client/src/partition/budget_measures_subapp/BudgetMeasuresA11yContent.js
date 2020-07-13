@@ -151,7 +151,7 @@ export class BudgetMeasuresA11yContent extends React.Component {
                   )}
                 </td>
               )}
-              {!has_grandchildren && <td>{text_maker("notapplicable")}</td>}
+              {!has_grandchildren && <td>{text_maker("not_applicable")}</td>}
             </tr>
           );
 
@@ -185,7 +185,7 @@ export class BudgetMeasuresA11yContent extends React.Component {
                           </td>
                         )}
                         {!has_program_allocations && (
-                          <td>{text_maker("notapplicable")}</td>
+                          <td>{text_maker("not_applicable")}</td>
                         )}
                       </tr>
                     )}
@@ -297,7 +297,7 @@ export class BudgetMeasuresA11yContent extends React.Component {
                   )}
                 </td>
               )}
-              {!has_grandchildren && <td>{text_maker("notapplicable")}</td>}
+              {!has_grandchildren && <td>{text_maker("not_applicable")}</td>}
             </tr>
           );
 
@@ -345,7 +345,7 @@ export class BudgetMeasuresA11yContent extends React.Component {
                           </td>
                         )}
                         {!has_program_allocations && (
-                          <td>{text_maker("notapplicable")}</td>
+                          <td>{text_maker("not_applicable")}</td>
                         )}
                       </tr>
                     )}
