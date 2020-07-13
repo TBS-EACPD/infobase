@@ -135,23 +135,8 @@ class SobjLine extends React.Component {
       } else {
         return (
           <NivoResponsiveLine
-            data={
-              !_.isEmpty(spending_data.reverse())
-                ? spending_data.reverse()
-                : [
-                    {
-                      id: "none",
-                      data: [
-                        { x: "2014-2015", y: 7000000000 },
-                        { x: "2015-2016", y: 6000000000 },
-                        { x: "2016-2017", y: 7000000000 },
-                        { x: "2017-2018", y: 7000000000 },
-                        { x: "2018-2019", y: 0 },
-                      ],
-                    },
-                  ]
-            }
-            raw_data={!_.isEmpty(raw_data) ? raw_data : [7000000000]}
+            data={spending_data.reverse()}
+            raw_data={raw_data}
             margin={{
               top: 10,
               right: 30,
