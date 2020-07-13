@@ -10,28 +10,22 @@ export class ServiceChannels extends React.Component {
     const { service } = this.props;
     return (
       <Panel title={text_maker("service_channels_title")}>
-        <div style={{ display: "flex" }}>
-          <div className="fcol-md-5">
-            <TM k="service_channels_text" className="medium_panel_text" />
-          </div>
-          <div className="fcol-md-7">
-            <NivoResponsivePie
-              data={_.chain(service_channels_keys)
-                .map((key) => ({
-                  id: key,
-                  label: text_maker(key),
-                  value: _.reduce(
-                    service.service_report,
-                    (sum, report) => sum + report[`${key}_count`],
-                    0
-                  ),
-                }))
-                .filter((row) => row.value)
-                .value()}
-              is_money={false}
-            />
-          </div>
-        </div>
+        <TM k="service_channels_text" className="medium_panel_text" />
+        <NivoResponsivePie
+          data={_.chain(service_channels_keys)
+            .map((key) => ({
+              id: key,
+              label: text_maker(key),
+              value: _.reduce(
+                service.service_report,
+                (sum, report) => sum + report[`${key}_count`],
+                0
+              ),
+            }))
+            .filter((row) => row.value)
+            .value()}
+          is_money={false}
+        />
       </Panel>
     );
   }

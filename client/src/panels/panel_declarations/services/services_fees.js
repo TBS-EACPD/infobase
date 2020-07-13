@@ -19,6 +19,7 @@ const ServicesFeesPanel = ({ panel_args }) => {
         k="services_fees_text"
         args={{
           subject_name: subject.name,
+          services_count: services.length,
           charge_fees_percentage:
             service_charges_fees.true / services.length || 0,
         }}

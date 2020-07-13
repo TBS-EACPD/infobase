@@ -51,7 +51,7 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
     },
     {
       id: "na",
-      label: text_maker("data_not_provided_or_applicable"),
+      label: text_maker("not_applicable"),
       value: sin_count.null,
     },
   ];
@@ -68,7 +68,7 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
     },
     {
       id: "na",
-      label: text_maker("data_not_provided_or_applicable"),
+      label: text_maker("not_applicable"),
       value: cra_count.null,
     },
   ];
