@@ -192,25 +192,39 @@ class DetailedHistTPItems extends React.Component {
       .fromPairs()
       .value();
 
+    const max_value = _.max(
+      _.flatten(_.map(prepped_rows, (row) => _.map(exp_years, (yr) => row[yr])))
+    );
+
     const raw_data = _.flatMap(graph_series, (value) => value);
 
     const all_tp_idx = _.range(prepped_rows.length);
-    const legend_items = _.map(prepped_rows, (row, ix) => ({
-      id: ix,
-      label: row.tp,
-      color: color_scale(row.tp),
-      active: _.includes(active_indices, ix),
-    }));
+    const legend_items = _.concat(
+      _.map(prepped_rows, (row, ix) => ({
+        id: ix,
+        label: row.tp,
+        color: color_scale(row.tp),
+        active: _.includes(active_indices, ix),
+      })),
+      {
+        label: "none",
+        id: "none",
+        active: true,
+        color: "black",
+      }
+    );
 
     const detail_expend_data = _.map(
       graph_series,
-      (expend_array, expend_label) => ({
-        id: expend_label,
-        data: expend_array.map((expend_value, year_index) => ({
-          y: expend_value,
-          x: text_years[year_index],
-        })),
-      })
+      (expend_array, expend_label) => {
+        return {
+          id: expend_label,
+          data: expend_array.map((expend_value, year_index) => ({
+            y: expend_value,
+            x: text_years[year_index],
+          })),
+        };
+      }
     );
 
     const title_el = (
@@ -240,6 +254,63 @@ class DetailedHistTPItems extends React.Component {
         </div>
       );
     }
+
+    const get_line_graph = (() => {
+      if (_.isEmpty(detail_expend_data) && _.isEmpty(raw_data)) {
+        const filler_data = [
+          {
+            id: "none",
+            data: _.map(text_years, (year) => ({
+              x: year,
+              y: max_value,
+            })),
+          },
+        ];
+
+        return (
+          <NivoResponsiveLine
+            data={filler_data}
+            raw_data={[max_value]}
+            enableDots={false}
+            lineWidth={0}
+            margin={{
+              top: 10,
+              right: 30,
+              bottom: 90,
+              left: 70,
+            }}
+            graph_height="500px"
+            colorBy={(d) => color_scale(d.id)}
+            custom_table={
+              <DisplayTable
+                data={custom_table_data}
+                column_configs={column_configs}
+              />
+            }
+          />
+        );
+      } else {
+        return (
+          <NivoResponsiveLine
+            data={detail_expend_data}
+            raw_data={raw_data}
+            margin={{
+              top: 50,
+              right: 30,
+              bottom: 50,
+              left: 70,
+            }}
+            colorBy={(d) => color_scale(d.id)}
+            custom_table={
+              <DisplayTable
+                data={custom_table_data}
+                column_configs={column_configs}
+              />
+            }
+          />
+        );
+      }
+    })();
 
     return (
       <div>
@@ -293,23 +364,7 @@ class DetailedHistTPItems extends React.Component {
             />
           </div>
           <div className="fcol-md-8" style={{ position: "relative" }}>
-            <NivoResponsiveLine
-              data={detail_expend_data}
-              raw_data={raw_data}
-              margin={{
-                top: 50,
-                right: 30,
-                bottom: 50,
-                left: 70,
-              }}
-              colorBy={(d) => color_scale(d.id)}
-              custom_table={
-                <DisplayTable
-                  data={custom_table_data}
-                  column_configs={column_configs}
-                />
-              }
-            />
+            {get_line_graph}
           </div>
         </div>
       </div>
