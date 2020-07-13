@@ -13,7 +13,6 @@ import {
   declare_panel,
 } from "../../shared.js";
 import { text_maker, TM } from "./sobj_text_provider.js";
-import { fill } from "lodash";
 
 const { sos } = businessConstants;
 const { std_years } = year_templates;
@@ -108,7 +107,6 @@ class SobjLine extends React.Component {
             })),
           },
         ];
-        console.log(filler_data);
 
         return (
           <NivoResponsiveLine
