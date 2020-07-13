@@ -274,12 +274,11 @@ class DetailedHistTPItems extends React.Component {
             enableDots={false}
             lineWidth={0}
             margin={{
-              top: 10,
+              top: 50,
               right: 30,
-              bottom: 90,
+              bottom: 50,
               left: 70,
             }}
-            graph_height="500px"
             colorBy={(d) => color_scale(d.id)}
             custom_table={
               <DisplayTable
