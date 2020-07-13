@@ -13,6 +13,7 @@ import {
   declare_panel,
 } from "../../shared.js";
 import { text_maker, TM } from "./sobj_text_provider.js";
+import { fill } from "lodash";
 
 const { sos } = businessConstants;
 const { std_years } = year_templates;
@@ -34,12 +35,20 @@ class SobjLine extends React.Component {
     const { colors } = this;
 
     const all_labels = _.map(data, "label");
-    const legend_items = _.map(data, ({ label }) => ({
-      label,
-      id: label,
-      active: _.includes(active_sobjs, label),
-      color: colors(label),
-    }));
+    const legend_items = _.concat(
+      _.map(data, ({ label }) => ({
+        label,
+        id: label,
+        active: _.includes(active_sobjs, label),
+        color: colors(label),
+      })),
+      {
+        label: "none",
+        id: "none",
+        active: true,
+        color: "black",
+      }
+    );
 
     const graph_series = _.chain(data)
       .filter(({ label }) => _.includes(active_sobjs, label))
@@ -87,6 +96,81 @@ class SobjLine extends React.Component {
         .value(),
     };
 
+    const get_line_graph = (() => {
+      if (_.isEmpty(spending_data) && _.isEmpty(raw_data)) {
+        const max_y = _.max(_.map(data, (obj) => _.max(obj.data)));
+        const filler_data = [
+          {
+            id: "none",
+            data: _.map(years, (year) => ({
+              x: year,
+              y: max_y,
+            })),
+          },
+        ];
+        console.log(filler_data);
+
+        return (
+          <NivoResponsiveLine
+            data={filler_data}
+            raw_data={[max_y]}
+            enableDots={false}
+            lineWidth={0}
+            margin={{
+              top: 10,
+              right: 30,
+              bottom: 90,
+              left: 70,
+            }}
+            graph_height="500px"
+            colorBy={(d) => colors(d.id)}
+            custom_table={
+              <DisplayTable
+                data={custom_table_data}
+                column_configs={column_configs}
+              />
+            }
+          />
+        );
+      } else {
+        return (
+          <NivoResponsiveLine
+            data={
+              !_.isEmpty(spending_data.reverse())
+                ? spending_data.reverse()
+                : [
+                    {
+                      id: "none",
+                      data: [
+                        { x: "2014-2015", y: 7000000000 },
+                        { x: "2015-2016", y: 6000000000 },
+                        { x: "2016-2017", y: 7000000000 },
+                        { x: "2017-2018", y: 7000000000 },
+                        { x: "2018-2019", y: 0 },
+                      ],
+                    },
+                  ]
+            }
+            raw_data={!_.isEmpty(raw_data) ? raw_data : [7000000000]}
+            margin={{
+              top: 10,
+              right: 30,
+              bottom: 90,
+              left: 70,
+            }}
+            graph_height="500px"
+            colorBy={(d) => colors(d.id)}
+            custom_table={
+              <DisplayTable
+                data={custom_table_data}
+                column_configs={column_configs}
+              />
+            }
+          />
+        );
+      }
+    })();
+
     return (
       <div className="frow">
         <div className="fcol-md-4">
@@ -115,24 +199,7 @@ class SobjLine extends React.Component {
           className="fcol-md-8"
           style={{ position: "relative", marginTop: "10px" }}
         >
-          <NivoResponsiveLine
-            data={spending_data.reverse()}
-            raw_data={raw_data}
-            margin={{
-              top: 10,
-              right: 30,
-              bottom: 90,
-              left: 70,
-            }}
-            graph_height="500px"
-            colorBy={(d) => colors(d.id)}
-            custom_table={
-              <DisplayTable
-                data={custom_table_data}
-                column_configs={column_configs}
-              />
-            }
-          />
+          {get_line_graph}
         </div>
       </div>
     );
