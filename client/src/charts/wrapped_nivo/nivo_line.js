@@ -77,6 +77,8 @@ export class NivoResponsiveLine extends React.Component {
       motionDamping,
       motionStiffness,
       custom_table,
+      enableDots,
+      lineWidth,
     } = this.props;
 
     const { y_scale_zoomed } = this.state;
@@ -175,6 +177,8 @@ export class NivoResponsiveLine extends React.Component {
             isInteractive,
             motionDamping,
             motionStiffness,
+            enableDots,
+            lineWidth,
           }}
           legends={fix_legend_symbols(legends)}
           tooltip={(d) =>
