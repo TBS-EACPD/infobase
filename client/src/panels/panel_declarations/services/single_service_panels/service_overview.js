@@ -4,7 +4,7 @@ import { create_text_maker_component, FancyUL } from "../../../../components";
 import { Subject } from "../../../../models/subject.js";
 import { available_icons, available_keys } from "../shared";
 import { infograph_href_template } from "../../../../link_utils.js";
-import Gauge from "../../../../charts/gauge.js";
+import Progress from "../../../../charts/progress.js";
 import { Fragment } from "react";
 import { TextPanel } from "../../shared.js";
 
@@ -60,7 +60,7 @@ export class ServiceOverview extends React.Component {
                   }}
                   className="service-overview-rect"
                 >
-                  <Gauge
+                  <Progress
                     //TODO need is_target_met column from Titan
                     value={0 /*_.countBy(standards, "is_target_met").true*/}
                     total_value={standards.length}
