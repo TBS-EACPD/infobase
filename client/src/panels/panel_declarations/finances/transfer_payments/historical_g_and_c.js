@@ -273,6 +273,7 @@ class DetailedHistTPItems extends React.Component {
             raw_data={[max_value]}
             enableDots={false}
             lineWidth={0}
+            isInteractive={false}
             margin={{
               top: 50,
               right: 30,
