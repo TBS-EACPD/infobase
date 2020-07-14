@@ -114,6 +114,7 @@ class SobjLine extends React.Component {
             raw_data={[max_y]}
             enableDots={false}
             lineWidth={0}
+            isInteractive={false}
             margin={{
               top: 10,
               right: 30,
