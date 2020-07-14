@@ -1,15 +1,12 @@
 import "../services.scss";
 import text from "../services.yaml";
-import {
-  create_text_maker_component,
-  Panel,
-  FancyUL,
-} from "../../../../components";
+import { create_text_maker_component, FancyUL } from "../../../../components";
 import { Subject } from "../../../../models/subject.js";
 import { available_icons, available_keys } from "../shared";
 import { infograph_href_template } from "../../../../link_utils.js";
 import Gauge from "../../../../charts/gauge.js";
 import { Fragment } from "react";
+import { TextPanel } from "../../shared.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -36,10 +33,12 @@ export class ServiceOverview extends React.Component {
       .value()[0];
 
     return (
-      <Panel title={text_maker("service_overview_title")}>
+      <TextPanel title={text_maker("service_overview_title")}>
         <dl className="dl-horizontal tombstone-data-list">
           <dt>Description/Raison d'être</dt>
-          <dd>{service.description}</dd>
+          <dd>
+            <p>{service.description}</p>
+          </dd>
           <dt>{text_maker("service_types")}</dt>
           <dd>
             {_.map(service.service_type, (type) => (
@@ -140,7 +139,7 @@ export class ServiceOverview extends React.Component {
               ))}
           </dd>
         </dl>
-      </Panel>
+      </TextPanel>
     );
   }
 }
