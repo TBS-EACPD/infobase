@@ -28,12 +28,12 @@ export default {
 
   name: {
     en: "Employee Gender",
-    fr: "Sexe",
+    fr: "Sexe des employés",
   },
 
   title: {
     en: "Employee Gender",
-    fr: "Sexe",
+    fr: "Sexe des employés",
   },
 
   add_cols: function () {
