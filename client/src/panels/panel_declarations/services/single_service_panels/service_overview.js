@@ -4,7 +4,6 @@ import {
   create_text_maker_component,
   Panel,
   FancyUL,
-  LabeledTombstone,
 } from "../../../../components";
 import { Subject } from "../../../../models/subject.js";
 import { available_icons, available_keys } from "../shared";
@@ -35,16 +34,6 @@ export class ServiceOverview extends React.Component {
       .sortBy((report) => _.toInteger(report.year))
       .reverse()
       .value()[0];
-    const data_names = [
-      "description",
-      "service_type",
-      "standards",
-      "service_report",
-      "program_ids",
-      "collects_fees",
-      "urls",
-    ];
-    //description, service types, standards, identification method, programs, fees, url
 
     return (
       <Panel title={text_maker("service_overview_title")}>
@@ -137,10 +126,7 @@ export class ServiceOverview extends React.Component {
           <dd>
             {!_.isEmpty(service.urls) &&
               (service.urls.length === 1 ? (
-                <TM
-                  k={"service_single_link_text"}
-                  args={{ service_url: service.urls[0] }}
-                />
+                <a>{service.urls[0]}</a>
               ) : (
                 <div>
                   {_.map(service.urls, (url, i) => (

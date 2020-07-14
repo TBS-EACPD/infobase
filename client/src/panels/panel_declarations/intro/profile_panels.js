@@ -185,8 +185,6 @@ export const declare_profile_panel = () =>
           .filter(([label, item]) => item)
           .value();
 
-        console.log(labels_and_items);
-
         return (
           <TextPanel title={text_maker(`profile`)}>
             <LabeledTombstone labels_and_items={labels_and_items} />
