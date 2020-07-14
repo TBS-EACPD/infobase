@@ -77,21 +77,37 @@ export class ServiceOverview extends React.Component {
               {[
                 <div key="uses_cra_as_identifier" className="identifier-item">
                   <TM style={{ lineHeight: 2 }} k="uses_cra_as_identifier" />
-                  {
-                    available_icons[
-                      available_keys[
-                        most_recent_report.cra_business_ids_collected
+                  <div>
+                    {
+                      available_icons[
+                        available_keys[
+                          most_recent_report.cra_business_ids_collected
+                        ]
                       ]
-                    ]
-                  }
+                    }
+                    <TM
+                      style={{ marginLeft: 5 }}
+                      k={
+                        available_keys[
+                          most_recent_report.cra_business_ids_collected
+                        ]
+                      }
+                    />
+                  </div>
                 </div>,
                 <div key="uses_sin_as_identifier" className="identifier-item">
                   <TM style={{ lineHeight: 2 }} k="uses_sin_as_identifier" />
-                  {
-                    available_icons[
-                      available_keys[most_recent_report.SIN_collected]
-                    ]
-                  }
+                  <div>
+                    {
+                      available_icons[
+                        available_keys[most_recent_report.SIN_collected]
+                      ]
+                    }
+                    <TM
+                      style={{ marginLeft: 5 }}
+                      k={available_keys[most_recent_report.SIN_collected]}
+                    />
+                  </div>
                 </div>,
               ]}
             </FancyUL>
