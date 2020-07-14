@@ -37,7 +37,6 @@ export default class Progress extends React.Component {
       return circles;
     })();
 
-    console.log(progress);
     return (
       <div>
         <h4 style={{ textAlign: "center" }}>
