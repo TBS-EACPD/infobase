@@ -1,7 +1,7 @@
 orgEmployeeGender_title:
   transform: [handlebars]
-  en: Gender
-  fr: Sexe
+  en: Employee Gender
+  fr: Sexe des employés
 
 orgEmployeeGender_short:
   transform: [handlebars,embeded-markdown,markdown]

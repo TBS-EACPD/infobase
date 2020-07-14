@@ -1,7 +1,7 @@
 employee_gender_title:
   transform: [handlebars]
-  en: Gender ({{ppl_last_year_5}} to {{ppl_last_year}})
-  fr: Sexe ({{ppl_last_year_5}} à {{ppl_last_year}})
+  en: Employee Gender ({{ppl_last_year_5}} to {{ppl_last_year}})
+  fr: Sexe des employés ({{ppl_last_year_5}} à {{ppl_last_year}})
 
 gov_employee_gender_text:
   transform: [handlebars,markdown]
