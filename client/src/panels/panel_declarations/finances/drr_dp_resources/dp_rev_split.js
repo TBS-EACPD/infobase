@@ -23,17 +23,17 @@ const special_cols = _.flatMap(planning_years, (year) => [
 ]);
 const dp_cols = [...planning_years, ...special_cols];
 
-const spending = (value) => (
+const spending = (value, custom_color = null) => (
   <Format
-    style={{ color: window.infobase_color_constants.textGreen }}
+    style={{ color: custom_color || window.infobase_color_constants.textGreen }}
     type={"dollar"}
     content={value}
   />
 );
 
-const revenue = (value) => (
+const revenue = (value, custom_color = null) => (
   <Format
-    style={{ color: window.infobase_color_constants.textRed }}
+    style={{ color: custom_color || window.infobase_color_constants.textRed }}
     type={"dollar"}
     content={value}
   />
