@@ -40,13 +40,7 @@ class SobjLine extends React.Component {
         id: label,
         active: _.includes(active_sobjs, label),
         color: colors(label),
-      })),
-      {
-        label: "none",
-        id: "none",
-        active: true,
-        color: "black",
-      }
+      }))
     );
 
     const graph_series = _.chain(data)
