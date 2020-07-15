@@ -205,13 +205,7 @@ class DetailedHistTPItems extends React.Component {
         label: row.tp,
         color: color_scale(row.tp),
         active: _.includes(active_indices, ix),
-      })),
-      {
-        label: "none",
-        id: "none",
-        active: true,
-        color: "black",
-      }
+      }))
     );
 
     const detail_expend_data = _.map(

@@ -18,25 +18,20 @@ export const LegendList = ({
       !window.is_a11y_mode && isHorizontal && "legend-list--horizontal"
     )}
   >
-    {_.map(
-      _.filter(items, ({ id }) => {
-        return id !== "none";
-      }),
-      ({ color, label, id, active }) => (
-        <li
-          key={id}
-          className={window.is_a11y_mode ? "checkbox" : "legend-list__item"}
-        >
-          <CheckBox
-            onClick={onClick}
-            {...LegendCheckBoxProps}
-            id={id}
-            color={color}
-            label={label}
-            active={active}
-          />
-        </li>
-      )
-    )}
+    {_.map(items, ({ color, label, id, active }) => (
+      <li
+        key={id}
+        className={window.is_a11y_mode ? "checkbox" : "legend-list__item"}
+      >
+        <CheckBox
+          onClick={onClick}
+          {...LegendCheckBoxProps}
+          id={id}
+          color={color}
+          label={label}
+          active={active}
+        />
+      </li>
+    ))}
   </ul>
 );
