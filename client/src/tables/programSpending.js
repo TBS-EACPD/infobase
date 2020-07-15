@@ -96,8 +96,8 @@ export default {
     this.add_col({
       type: "big_int",
       nick: "pa_last_year_planned",
-      /* TODO hidden needs to be manually toggled on when DPs are tabled,
-              hidden needs to be manually toggled off when DRRs are tabled.
+      /* TODO hidden needs to be manually toggled off when DPs are tabled,
+              hidden needs to be manually toggled on when DRRs are tabled.
       */
       hidden: false,
       header: {
