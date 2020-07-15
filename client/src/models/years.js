@@ -40,7 +40,7 @@ const year_templates = {
     "{{est_in_year}}",
     //"{{est_next_year}}",
   ],
-  planning_last_year: "{{planning_last_year_1}}",
+  pa_last_year_planned: "{{pa_last_year_planned}}",
   planning_years: [
     "{{planning_year_1}}",
     "{{planning_year_2}}",

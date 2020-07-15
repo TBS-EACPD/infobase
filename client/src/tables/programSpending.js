@@ -96,14 +96,17 @@ export default {
     this.add_col({
       type: "big_int",
       nick: "pa_last_year_planned",
-      hidden: true,
+      /* TODO hidden needs to be manually toggled on when DPs are tabled,
+              hidden needs to be manually toggled off when DRRs are tabled.
+      */
+      hidden: false,
       header: {
-        en: "{{pa_last_year}} - Planned Spending",
-        fr: "{{pa_last_year}} - Dépenses prévues",
+        en: "{{pa_last_year_planned}} - Planned Spending",
+        fr: "{{pa_last_year_planned}} - Dépenses prévues",
       },
       description: {
-        en: `Corresponds to total planned spending for the fiscal year {{pa_last_year}}, including additional funds approved by Treasury Board.`,
-        fr: `Correspondent au total des dépenses prévues pour l'exercice {{pa_last_year}}, y compris les fonds approuvés par le Conseil du Trésor.`,
+        en: `Corresponds to total planned spending for the fiscal year {{pa_last_year_planned}}, including additional funds approved by Treasury Board.`,
+        fr: `Correspondent au total des dépenses prévues pour l'exercice {{pa_last_year_planned}}, y compris les fonds approuvés par le Conseil du Trésor.`,
       },
     });
     _.each(planning_years, (header) => {
