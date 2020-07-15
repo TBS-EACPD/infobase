@@ -250,8 +250,10 @@ class DetailedHistTPItems extends React.Component {
     }
 
     const get_line_graph = (() => {
-      if (_.isEmpty(detail_expend_data) && _.isEmpty(raw_data)) {
-        const filler_data = [
+      const is_data_empty =
+        _.isEmpty(detail_expend_data) && _.isEmpty(raw_data);
+      const empty_data_nivo_props = is_data_empty && {
+        data: [
           {
             id: "none",
             data: _.map(text_years, (year) => ({
@@ -259,51 +261,33 @@ class DetailedHistTPItems extends React.Component {
               y: max_value,
             })),
           },
-        ];
+        ],
+        raw_data: [max_value],
+        enableDots: false,
+        lineWidth: 0,
+        isInteractive: false,
+      };
 
-        return (
-          <NivoResponsiveLine
-            data={filler_data}
-            raw_data={[max_value]}
-            enableDots={false}
-            lineWidth={0}
-            isInteractive={false}
-            margin={{
-              top: 50,
-              right: 30,
-              bottom: 50,
-              left: 70,
-            }}
-            colorBy={(d) => color_scale(d.id)}
-            custom_table={
-              <DisplayTable
-                data={custom_table_data}
-                column_configs={column_configs}
-              />
-            }
+      const nivo_props = {
+        data: detail_expend_data,
+        raw_data: raw_data,
+        margin: {
+          top: 50,
+          right: 30,
+          bottom: 50,
+          left: 70,
+        },
+        colorBy: (d) => color_scale(d.id),
+        custom_table: (
+          <DisplayTable
+            data={custom_table_data}
+            column_configs={column_configs}
           />
-        );
-      } else {
-        return (
-          <NivoResponsiveLine
-            data={detail_expend_data}
-            raw_data={raw_data}
-            margin={{
-              top: 50,
-              right: 30,
-              bottom: 50,
-              left: 70,
-            }}
-            colorBy={(d) => color_scale(d.id)}
-            custom_table={
-              <DisplayTable
-                data={custom_table_data}
-                column_configs={column_configs}
-              />
-            }
-          />
-        );
-      }
+        ),
+        ...empty_data_nivo_props,
+      };
+
+      return <NivoResponsiveLine {...nivo_props} />;
     })();
 
     return (
