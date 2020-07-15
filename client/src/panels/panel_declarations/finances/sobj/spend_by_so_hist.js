@@ -90,9 +90,13 @@ class SobjLine extends React.Component {
     };
 
     const get_line_graph = (() => {
-      if (_.isEmpty(spending_data) && _.isEmpty(raw_data)) {
-        const max_y = _.max(_.map(data, (obj) => _.max(obj.data)));
-        const filler_data = [
+      const is_data_empty = _.isEmpty(spending_data) && _.isEmpty(raw_data);
+      const max_y = _.chain(data)
+        .map((row) => _.max(row.data))
+        .max()
+        .value();
+      const empty_data_nivo_props = is_data_empty && {
+        data: [
           {
             id: "none",
             data: _.map(years, (year) => ({
@@ -100,53 +104,34 @@ class SobjLine extends React.Component {
               y: max_y,
             })),
           },
-        ];
+        ],
+        raw_data: [max_y],
+        enableDots: false,
+        lineWidth: 0,
+        isInteractive: false,
+      };
 
-        return (
-          <NivoResponsiveLine
-            data={filler_data}
-            raw_data={[max_y]}
-            enableDots={false}
-            lineWidth={0}
-            isInteractive={false}
-            margin={{
-              top: 10,
-              right: 30,
-              bottom: 90,
-              left: 70,
-            }}
-            graph_height="500px"
-            colorBy={(d) => colors(d.id)}
-            custom_table={
-              <DisplayTable
-                data={custom_table_data}
-                column_configs={column_configs}
-              />
-            }
+      const nivo_props = {
+        data: spending_data.reverse(),
+        raw_data: raw_data,
+        margin: {
+          top: 10,
+          right: 30,
+          bottom: 90,
+          left: 70,
+        },
+        graph_height: "500px",
+        colorBy: (d) => colors(d.id),
+        custom_table: (
+          <DisplayTable
+            data={custom_table_data}
+            column_configs={column_configs}
           />
-        );
-      } else {
-        return (
-          <NivoResponsiveLine
-            data={spending_data.reverse()}
-            raw_data={raw_data}
-            margin={{
-              top: 10,
-              right: 30,
-              bottom: 90,
-              left: 70,
-            }}
-            graph_height="500px"
-            colorBy={(d) => colors(d.id)}
-            custom_table={
-              <DisplayTable
-                data={custom_table_data}
-                column_configs={column_configs}
-              />
-            }
-          />
-        );
-      }
+        ),
+        ...empty_data_nivo_props,
+      };
+
+      return <NivoResponsiveLine {...nivo_props} />;
     })();
 
     return (
