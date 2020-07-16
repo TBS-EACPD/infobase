@@ -14,7 +14,7 @@ export default class Progress extends React.Component {
           circles.push(
             <div
               key={i}
-              className="progress_circle"
+              className="progress-circle"
               style={{
                 backgroundColor: finished_color || successDarkColor,
               }}
@@ -26,7 +26,7 @@ export default class Progress extends React.Component {
           circles.push(
             <div
               key={i}
-              className="progress_circle"
+              className="progress-circle"
               style={{
                 backgroundColor: remaining_color || highlightDark,
               }}
