@@ -1,4 +1,4 @@
-import "./nivo_pie.scss";
+import "./wrapped_nivo_pie.scss";
 
 import { ResponsivePie } from "@nivo/pie";
 import classNames from "classnames";
