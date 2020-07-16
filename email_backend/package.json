@@ -32,8 +32,8 @@
   "scripts": {
     "prebuild": "rm -rf transpiled_build",
     "build": "babel src/ --out-dir transpiled_build --copy-files --ignore node_modules",
-    "prestart": "npm run build",
-    "start": "nodemon --watch src --watch package-lock.json --watch templates -e js,json --exec babel-node transpiled_build/index.js",
+    "start:transpiled": "nodemon --watch src --watch package-lock.json --watch templates -e js,json --exec npm run build && babel-node transpiled_build/index.js",
+    "start": "nodemon --watch src --watch package-lock.json --watch templates -e js,json --exec babel-node src/index.js",
     "start:debug": "nodemon --watch src --watch package-lock.json --watch templates -e js.json --exec babel-node --inspect-brk src/index.js",
     "unit_tests": "jest --coverage --forceExit  --config jest_configs/unit_tests.config.js",
     "unit_tests:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --coverage --forceExit  --config jest_configs/unit_tests.config.js",
