@@ -1,31 +1,18 @@
 import nodemailer from "nodemailer";
-import { google } from "googleapis";
-const OAuth2 = google.auth.OAuth2;
 
 const get_prod_auth = async () => {
   const {
     EMAIL_BACKEND_SENDING_ADDRESS: email_address,
     EMAIL_BACKEND_CLIENT_ID: client_id,
-    EMAIL_BACKEND_CLIENT_SECRET: client_secret,
-    EMAIL_BACKEND_REFRESH_TOKEN: refresh_token,
+    EMAIL_BACKEND_OAUTH_SERVICE_ID: service_client,
+    EMAIL_BACKEND_OAUTH_SERVICE_PRIVATE_KEY: service_private_key,
   } = process.env;
-
-  const oauth2Client = new OAuth2(
-    client_id,
-    client_secret,
-    "https://developers.google.com/oauthplayground"
-  );
-  oauth2Client.setCredentials({ refresh_token });
-
-  const accessToken = await oauth2Client.getAccessToken();
 
   return {
     type: "OAuth2",
     user: email_address,
-    clientId: client_id,
-    clientSecret: client_secret,
-    refreshToken: refresh_token,
-    accessToken,
+    serviceClient: service_client,
+    privateKey: service_private_key,
   };
 };
 
