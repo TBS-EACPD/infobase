@@ -123,59 +123,68 @@ const make_email_backend = (templates) => {
         completed_template
       );
 
-      const transport_config = await get_transport_config().catch(
-        console.error
-      );
-      const transporter = nodemailer.createTransport(transport_config);
+      const transport_config = await get_transport_config().catch((error) => {
+        console.error(JSON.stringify(error));
+        return false;
+      });
+      if (transport_config) {
+        const transporter = nodemailer.createTransport(transport_config);
 
-      const sent_mail_info = await transporter
-        .sendMail({
-          ...email_config,
-          subject: email_subject,
-          text: email_body,
-        })
-        .catch(console.error);
+        const sent_mail_info = await transporter
+          .sendMail({
+            ...email_config,
+            subject: email_subject,
+            text: email_body,
+          })
+          .catch((error) => console.error(JSON.stringify(error)));
 
-      if (!process.env.IS_PROD_SERVER) {
-        // eslint-disable-next-line no-console
-        console.log(
-          `Test mail URL: ${nodemailer.getTestMessageUrl(sent_mail_info)}`
-        );
-      }
+        if (!process.env.IS_PROD_SERVER) {
+          // eslint-disable-next-line no-console
+          console.log(
+            `Test mail URL: ${nodemailer.getTestMessageUrl(sent_mail_info)}`
+          );
+        }
 
-      const mail_sent_successfully =
-        sent_mail_info &&
-        /^2[0-9][0-9]/.test(sent_mail_info.response) &&
-        _.isEmpty(sent_mail_info.rejected);
-      if (mail_sent_successfully) {
-        response.send("200");
+        const mail_sent_successfully =
+          sent_mail_info &&
+          /^2[0-9][0-9]/.test(sent_mail_info.response) &&
+          _.isEmpty(sent_mail_info.rejected);
 
-        // Note: async func but not awaited, free up the function to keep handling requests in cases where the DB
-        // communication becomes a choke point. Also, this all happens post-reponse, so the client isn't waiting on
-        // DB write either
-        log_email_and_meta_to_db(
-          request,
-          template_name,
-          original_template,
-          completed_template,
-          email_config
-        ).catch(console.error);
+        if (mail_sent_successfully) {
+          response.send("200");
+        } else {
+          const error_message = `Internal Server Error: mail was unable to send. ${
+            sent_mail_info.err
+              ? `Had error: ${sent_mail_info.err}`
+              : "Rejected by recipient"
+          }`;
+          response.status("500").send(error_message);
+          log_email_request(request, error_message);
+        }
       } else {
-        const error_message = `Internal Server Error: mail was unable to send. ${
-          sent_mail_info.err
-            ? `Had error: ${sent_mail_info.err}`
-            : "Rejected by recipient"
-        }`;
+        const error_message = `Internal Server Error: failed to procure email transport config`;
         response.status("500").send(error_message);
         log_email_request(request, error_message);
       }
+
+      // Note: async func but not awaited, free up the function to keep handling requests in cases where the DB
+      // communication becomes a choke point. Also, this all happens post-reponse, so the client isn't waiting on
+      // DB write either
+      // Note: log to DB even if email fails to send
+      log_email_and_meta_to_db(
+        request,
+        template_name,
+        original_template,
+        completed_template,
+        email_config
+      ).catch(console.error);
     }
   });
 
   email_backend.use((err, req, res, next) => {
     if (process.env.IS_PROD_SERVER) {
       // eslint-disable-next-line no-console
-      console.error(err.stack);
+      console.error(JSON.stringify(err));
     }
     next(err);
   });
