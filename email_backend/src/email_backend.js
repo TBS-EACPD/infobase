@@ -123,11 +123,10 @@ const make_email_backend = (templates) => {
         completed_template
       );
 
-      const transport_config = await get_transport_config().catch((error) => {
-        console.error(JSON.stringify(error));
-        return false;
-      });
-      if (transport_config) {
+      const transport_config = await get_transport_config().catch(
+        console.error
+      );
+      if (!_.isUndefined(transport_config)) {
         const transporter = nodemailer.createTransport(transport_config);
 
         const sent_mail_info = await transporter
@@ -136,7 +135,7 @@ const make_email_backend = (templates) => {
             subject: email_subject,
             text: email_body,
           })
-          .catch((error) => console.error(JSON.stringify(error)));
+          .catch(console.error);
 
         if (!process.env.IS_PROD_SERVER) {
           // eslint-disable-next-line no-console
@@ -146,7 +145,7 @@ const make_email_backend = (templates) => {
         }
 
         const mail_sent_successfully =
-          sent_mail_info &&
+          !_.isUndefined(sent_mail_info) &&
           /^2[0-9][0-9]/.test(sent_mail_info.response) &&
           _.isEmpty(sent_mail_info.rejected);
 
@@ -154,7 +153,9 @@ const make_email_backend = (templates) => {
           response.send("200");
         } else {
           const error_message = `Internal Server Error: mail was unable to send. ${
-            sent_mail_info.err
+            _.isUndefined(sent_mail_info)
+              ? ""
+              : sent_mail_info.err
               ? `Had error: ${sent_mail_info.err}`
               : "Rejected by recipient"
           }`;
