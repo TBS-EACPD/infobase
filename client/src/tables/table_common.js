@@ -1,7 +1,7 @@
 import { stats } from "../core/tables/stats.js";
 import {
   year_templates,
-  is_pa_last_year_planned_exist,
+  IS_PA_LAST_YEAR_PLANNED_ACTIVE,
 } from "../models/years.js";
 import { Subject } from "../models/subject";
 import { Statistics } from "../core/Statistics.js";
@@ -266,7 +266,7 @@ export {
   Statistics,
   format,
   year_templates,
-  is_pa_last_year_planned_exist,
+  IS_PA_LAST_YEAR_PLANNED_ACTIVE,
   rows_to_rev_split,
   is_non_revenue,
   collapse_by_so,

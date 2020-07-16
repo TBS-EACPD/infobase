@@ -10,7 +10,7 @@ import {
   trivial_text_maker,
   Statistics,
   year_templates,
-  is_pa_last_year_planned_exist,
+  IS_PA_LAST_YEAR_PLANNED_ACTIVE,
 } from "./table_common";
 
 const { Program, Gov, Dept } = Subject;
@@ -97,7 +97,7 @@ export default {
     this.add_col({
       type: "big_int",
       nick: "{{pa_last_year_planned}}",
-      hidden: !is_pa_last_year_planned_exist,
+      hidden: !IS_PA_LAST_YEAR_PLANNED_ACTIVE,
       header: {
         en: "{{pa_last_year_planned}} - Planned Spending",
         fr: "{{pa_last_year_planned}} - Dépenses prévues",

@@ -11,7 +11,7 @@ import {
   m,
   Statistics,
   year_templates,
-  is_pa_last_year_planned_exist,
+  IS_PA_LAST_YEAR_PLANNED_ACTIVE,
 } from "./table_common";
 
 const { std_years, correct_planning_years, planning_years } = year_templates;
@@ -92,7 +92,7 @@ export default {
     this.add_col({
       type: "big_int",
       nick: "{{pa_last_year_planned}}",
-      hidden: !is_pa_last_year_planned_exist,
+      hidden: !IS_PA_LAST_YEAR_PLANNED_ACTIVE,
       header: {
         en: "{{pa_last_year_planned}} - " + m("Planned FTEs"),
         fr: "{{pa_last_year_planned}} - " + m("ETP prévus"),
