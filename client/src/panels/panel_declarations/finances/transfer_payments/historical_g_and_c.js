@@ -11,7 +11,7 @@ import {
   A11yTable,
   InfographicPanel,
   util_components,
-  NivoResponsiveLine,
+  WrappedNivoLine,
 } from "../../shared.js";
 
 const { transfer_payments } = businessConstants;
@@ -111,7 +111,7 @@ class HistTPTypes extends React.Component {
             }
           />
           <div style={{ position: "relative" }}>
-            <NivoResponsiveLine
+            <WrappedNivoLine
               enableArea={true}
               disable_y_axis_zoom={true}
               data={expenditure_data}
@@ -289,7 +289,7 @@ class DetailedHistTPItems extends React.Component {
         ...empty_data_nivo_props,
       };
 
-      return <NivoResponsiveLine {...nivo_props} />;
+      return <WrappedNivoLine {...nivo_props} />;
     })();
 
     return (

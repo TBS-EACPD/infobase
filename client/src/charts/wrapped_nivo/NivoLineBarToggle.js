@@ -3,8 +3,8 @@ import text from "./NivoLineBarToggle.yaml";
 import classNames from "classnames";
 
 import { infobase_colors_smart } from "./nivo_common.js";
-import { NivoResponsiveBar } from "./nivo_bar.js";
-import { NivoResponsiveLine } from "./nivo_line.js";
+import { WrappedNivoBar } from "./nivo_bar.js";
+import { WrappedNivoLine } from "./nivo_line.js";
 
 import { StandardLegend } from "../legends";
 import { newIBCategoryColors } from "../../core/color_schemes.js";
@@ -228,9 +228,9 @@ export class NivoLineBarToggle extends React.Component {
         >
           <div aria-hidden={true}>
             {extra_graph_options.bar ? (
-              <NivoResponsiveBar {...extended_graph_options_bar} />
+              <WrappedNivoBar {...extended_graph_options_bar} />
             ) : (
-              <NivoResponsiveLine {...extended_graph_options_line} />
+              <WrappedNivoLine {...extended_graph_options_line} />
             )}
           </div>
         </div>

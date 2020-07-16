@@ -1,8 +1,8 @@
 import text from "./detailed_program_spending_split.yaml";
 
 import {
-  NivoResponsiveBar,
-  NivoResponsiveHBar,
+  WrappedNivoBar,
+  WrappedNivoHBar,
   Subject,
   formats,
   run_template,
@@ -159,7 +159,7 @@ class HistoricalProgramBars extends React.Component {
             />
           </div>
           <div className="fcol-md-8">
-            <NivoResponsiveBar
+            <WrappedNivoBar
               data={graph_data}
               keys={Object.keys(processed_data)}
               indexBy="year"
@@ -349,7 +349,7 @@ class DetailedProgramSplit extends React.Component {
             )}
           </div>
           <div className="fcol-md-9" style={{ width: "100%" }}>
-            <NivoResponsiveHBar
+            <WrappedNivoHBar
               data={graph_ready_data}
               indexBy="label"
               keys={so_label_list}

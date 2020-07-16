@@ -7,7 +7,7 @@ import {
   A11yTable,
   StdPanel,
   Col,
-  NivoResponsiveLine,
+  WrappedNivoLine,
   businessConstants,
   declare_panel,
 } from "../shared.js";
@@ -64,7 +64,7 @@ export const declare_employee_totals_panel = () =>
             </Col>
             {!window.is_a11y_mode && (
               <Col size={8} isGraph>
-                <NivoResponsiveLine
+                <WrappedNivoLine
                   data={data_formatter()}
                   raw_data={series}
                   colors={window.infobase_color_constants.primaryColor}

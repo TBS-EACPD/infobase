@@ -4,7 +4,7 @@ import {
   util_components,
   InfographicPanel,
   create_text_maker_component,
-  NivoResponsivePie,
+  WrappedNivoPie,
 } from "../../shared.js";
 
 const { Select } = util_components;
@@ -95,7 +95,7 @@ class SpendInTagPerspective extends React.Component {
               />
             </div>
           )}
-          <NivoResponsivePie
+          <WrappedNivoPie
             data={data}
             colorBy={(obj) => color_scale(obj.label)}
           />

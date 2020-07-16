@@ -4,7 +4,7 @@ import text from "./canada.yaml";
 import { CanadaD3Component } from "./CanadaD3Component.js";
 
 import { StandardLegend } from "../legends";
-import { NivoResponsiveHBar } from "../wrapped_nivo/index.js";
+import { WrappedNivoHBar } from "../wrapped_nivo/index.js";
 import { hex_to_rgb } from "../../general_utils.js";
 import { secondaryColor, tertiaryColor } from "../../core/color_defs.js";
 import { run_template } from "../../models/text.js";
@@ -45,7 +45,7 @@ class CanadaGraphBarLegend extends React.Component {
         <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
           {province_graph_title(prov)}
         </p>
-        <NivoResponsiveHBar
+        <WrappedNivoHBar
           data={graph_data}
           indexBy="year"
           keys={["value"]}

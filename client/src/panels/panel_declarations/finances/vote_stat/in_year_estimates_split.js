@@ -5,7 +5,7 @@ import {
   A11yTable,
   StdPanel,
   Col,
-  NivoResponsiveBar,
+  WrappedNivoBar,
   declare_panel,
 } from "../../shared.js";
 import { formats } from "../../../../core/format.js";
@@ -70,7 +70,7 @@ const estimates_split_render_w_text_key = (text_key) => ({
     }));
 
     content = (
-      <NivoResponsiveBar
+      <WrappedNivoBar
         data={estimate_data}
         keys={keys}
         label_format={(d) => <tspan y={-4}>{formats.compact2_raw(d)}</tspan>}

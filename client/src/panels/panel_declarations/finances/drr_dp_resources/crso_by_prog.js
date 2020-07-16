@@ -1,6 +1,6 @@
 import text from "./crso_by_prog.yaml";
 import {
-  NivoResponsiveBar,
+  WrappedNivoBar,
   year_templates,
   StandardLegend,
   A11yTable,
@@ -161,7 +161,7 @@ class PlannedProgramResources extends React.Component {
             />
           </div>
           <div className="fcol-md-8">
-            <NivoResponsiveBar
+            <WrappedNivoBar
               data={data_by_year}
               keys={Object.keys(graph_data)}
               indexBy="year"

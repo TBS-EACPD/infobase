@@ -2,7 +2,7 @@ import { text_maker, TM } from "./vote_stat_text_provider.js";
 import {
   StdPanel,
   Col,
-  NivoResponsivePie,
+  WrappedNivoPie,
   declare_panel,
 } from "../../shared.js";
 
@@ -29,7 +29,7 @@ const render_w_options = ({ text_key, graph_col, text_col }) => ({
       </Col>
       {!window.is_a11y_mode && (
         <Col isGraph size={graph_col}>
-          <NivoResponsivePie data={data} />
+          <WrappedNivoPie data={data} />
         </Col>
       )}
     </StdPanel>

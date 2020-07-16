@@ -13,7 +13,7 @@ import {
   A11yTable,
   create_text_maker_component,
   InfographicPanel,
-  NivoResponsiveHBar,
+  WrappedNivoHBar,
   newIBLightCategoryColors,
   infograph_href_template,
   ensure_loaded,
@@ -881,13 +881,13 @@ class BudgetMeasureHBars extends React.Component {
             </div>
           </div>
           <MediaQuery minWidth={992}>
-            <NivoResponsiveHBar
+            <WrappedNivoHBar
               {...nivo_default_props}
               graph_height={`${data.length * 30 + 150}px`}
             />
           </MediaQuery>
           <MediaQuery maxWidth={992}>
-            <NivoResponsiveHBar
+            <WrappedNivoHBar
               {...nivo_mobile_props}
               graph_height={`${data.length * 40 + 150}px`}
             />

@@ -34,7 +34,7 @@ const get_scale_bounds = (stacked, raw_data, zoomed) => {
   };
 };
 
-export class NivoResponsiveLine extends React.Component {
+export class WrappedNivoLine extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -228,7 +228,7 @@ export class NivoResponsiveLine extends React.Component {
     );
   }
 }
-NivoResponsiveLine.defaultProps = {
+WrappedNivoLine.defaultProps = {
   ...general_default_props,
   tooltip: (slice, formatter) => {
     const tooltip_items = slice.data.map((d) => ({

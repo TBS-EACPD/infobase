@@ -47,7 +47,7 @@ const bar_table = (
   );
 };
 
-export class NivoResponsiveBar extends React.Component {
+export class WrappedNivoBar extends React.Component {
   render() {
     const {
       data,
@@ -154,7 +154,7 @@ export class NivoResponsiveBar extends React.Component {
     );
   }
 }
-NivoResponsiveBar.defaultProps = {
+WrappedNivoBar.defaultProps = {
   ...general_default_props,
   padding: 0.3,
   bttm_axis: {
@@ -164,7 +164,7 @@ NivoResponsiveBar.defaultProps = {
   },
 };
 
-export class NivoResponsiveHBar extends React.Component {
+export class WrappedNivoHBar extends React.Component {
   render() {
     const {
       data,
@@ -271,7 +271,7 @@ export class NivoResponsiveHBar extends React.Component {
     );
   }
 }
-NivoResponsiveHBar.defaultProps = {
+WrappedNivoHBar.defaultProps = {
   ...general_default_props,
   bttm_axis: {
     tickSize: 7,
