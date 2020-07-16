@@ -9,7 +9,7 @@ import {
   general_default_props,
   infobase_colors_smart,
   get_formatter,
-} from "./nivo_common.js";
+} from "./wrapped_nivo_common.js";
 
 import { TabularLegend } from "../legends";
 import { formats } from "../../core/format.js";

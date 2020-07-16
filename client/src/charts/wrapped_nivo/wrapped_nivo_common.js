@@ -1,5 +1,5 @@
-import "./nivo_common.scss";
-import graph_text from "./nivo_common.yaml";
+import "./wrapped_nivo_common.scss";
+import graph_text from "./wrapped_nivo_common.yaml";
 
 import { Fragment } from "react";
 import MediaQuery from "react-responsive";

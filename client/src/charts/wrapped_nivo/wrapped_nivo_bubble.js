@@ -11,7 +11,7 @@ import {
   general_default_props,
   get_formatter,
   TooltipFactory,
-} from "./nivo_common.js";
+} from "./wrapped_nivo_common.js";
 
 import { formats } from "../../core/format.js";
 import { breakpoints } from "../../core/breakpoint_defs.js";
