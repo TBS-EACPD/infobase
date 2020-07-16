@@ -23,8 +23,8 @@ import {
   default_scheme_id,
 } from "./hierarchy_scheme_configs.js";
 
-const { correct_planning_years } = year_templates;
-const planning_year = _.first(correct_planning_years);
+const { extended_planning_years } = year_templates;
+const planning_year = _.first(extended_planning_years);
 
 function create_resource_hierarchy({ hierarchy_scheme, year }) {
   const hierarchy_scheme_config = hierarchy_scheme_configs[hierarchy_scheme];
