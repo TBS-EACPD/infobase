@@ -3,7 +3,6 @@ import nodemailer from "nodemailer";
 const get_prod_auth = async () => {
   const {
     EMAIL_BACKEND_SENDING_ADDRESS: email_address,
-    EMAIL_BACKEND_CLIENT_ID: client_id,
     EMAIL_BACKEND_OAUTH_SERVICE_ID: service_client,
     EMAIL_BACKEND_OAUTH_SERVICE_PRIVATE_KEY: service_private_key,
   } = process.env;
