@@ -60,6 +60,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
 
   const history_ticks = _.map(std_years, run_template);
   const plan_ticks = _.map(correct_planning_years, run_template);
+  const all_ticks = _.concat(history_ticks, plan_ticks);
 
   const gap_year =
     (subject.has_planned_spending && actual_to_planned_gap_year) || null;
@@ -134,7 +135,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
         return tick === _.first(plan_ticks) || tick === _.last(plan_ticks);
       } else {
         return (
-          tick === gap_year ||
+          tick === _.nth(all_ticks, _.round(all_ticks.length / 2)) ||
           tick === _.first(history_ticks) ||
           tick === _.last(plan_ticks)
         );
