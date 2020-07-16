@@ -10,7 +10,7 @@ import {
   DefaultTooltip,
   get_formatter,
   fix_legend_symbols,
-} from "./nivo_common.js";
+} from "./wrapped_nivo_common.js";
 
 import { DisplayTable } from "../../components/index.js";
 import { IconZoomIn, IconZoomOut } from "../../icons/icons.js";
