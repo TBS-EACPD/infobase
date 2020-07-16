@@ -9,7 +9,7 @@ import {
   InfographicPanel,
   Table,
   newIBCategoryColors,
-  NivoResponsiveBar,
+  WrappedNivoBar,
   get_formatter,
   declare_panel,
   TspanLineWrapper,
@@ -411,7 +411,7 @@ class Goco extends React.Component {
         const child_graph = (
           <Fragment>
             <h4 style={{ textAlign: "center" }}>{node.indexValue}</h4>
-            <NivoResponsiveBar
+            <WrappedNivoBar
               {...nivo_default_props}
               data={node.data.children}
               custom_table={
@@ -476,7 +476,7 @@ class Goco extends React.Component {
             />
           </div>
           <div>
-            <NivoResponsiveBar
+            <WrappedNivoBar
               {...nivo_default_props}
               data={graph_data}
               custom_table={custom_table}

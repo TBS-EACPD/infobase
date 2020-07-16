@@ -7,7 +7,7 @@ import {
   SelectAllControl,
   A11yTable,
   run_template,
-  NivoResponsiveLine,
+  WrappedNivoLine,
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
   declare_panel,
@@ -131,7 +131,7 @@ class SobjLine extends React.Component {
         ...empty_data_nivo_props,
       };
 
-      return <NivoResponsiveLine {...nivo_props} />;
+      return <WrappedNivoLine {...nivo_props} />;
     })();
 
     return (

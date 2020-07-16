@@ -12,7 +12,7 @@ import {
   StdPanel,
   Col,
   create_text_maker_component,
-  NivoResponsiveLine,
+  WrappedNivoLine,
   newIBCategoryColors,
   util_components,
   declare_panel,
@@ -150,7 +150,7 @@ class AuthExpPlannedSpendingGraph extends React.Component {
       .compact()
       .value();
 
-    // TODO: is it worth hoisting this pattern in to NivoResponsiveLine? Doesn't account for more than two lines overlapping but that would be easy enough to add
+    // TODO: is it worth hoisting this pattern in to WrappedNivoLine? Doesn't account for more than two lines overlapping but that would be easy enough to add
     const line_segments = _.chain(graph_data)
       .flatMap(({ id, data }, z_index) =>
         _.chain(data)
@@ -266,7 +266,7 @@ class AuthExpPlannedSpendingGraph extends React.Component {
             }}
           />
         </div>
-        <NivoResponsiveLine {...nivo_props} />
+        <WrappedNivoLine {...nivo_props} />
       </Fragment>
     );
   }

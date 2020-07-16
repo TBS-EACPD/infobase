@@ -7,7 +7,7 @@ import {
   A11yTable,
   StdPanel,
   Col,
-  NivoResponsiveLine,
+  WrappedNivoLine,
   run_template,
 } from "../../shared.js";
 const { sos } = businessConstants;
@@ -68,7 +68,7 @@ export const declare_personnel_spend_panel = () =>
 
           graph_content = (
             <div position="relative">
-              <NivoResponsiveLine
+              <WrappedNivoLine
                 raw_data={panel_args.series[0]}
                 data={personnel_data()}
                 margin={{

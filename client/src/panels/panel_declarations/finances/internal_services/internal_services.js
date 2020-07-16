@@ -8,7 +8,7 @@ import {
   year_templates,
   StandardLegend,
   A11yTable,
-  NivoResponsiveBar,
+  WrappedNivoBar,
   declare_panel,
 } from "../../shared.js";
 
@@ -156,7 +156,7 @@ export const declare_internal_services_panel = () =>
                   />
                 </div>
                 <div className="fcol-md-9">
-                  <NivoResponsiveBar
+                  <WrappedNivoBar
                     data={bar_data}
                     indexBy="date"
                     colorBy={(d) => colors(d.id)}

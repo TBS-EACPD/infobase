@@ -10,7 +10,7 @@ import {
   create_text_maker_component,
   table_common,
   declare_panel,
-  NivoResponsivePie,
+  WrappedNivoPie,
 } from "../../shared.js";
 
 const { is_non_revenue, collapse_by_so } = table_common;
@@ -80,7 +80,7 @@ const render_w_options = ({ text_key }) => ({
             }}
           />
         ) : (
-          <NivoResponsivePie data={graph_data} graph_height="450px" />
+          <WrappedNivoPie data={graph_data} graph_height="450px" />
         )}
       </Col>
     </StdPanel>

@@ -4,7 +4,7 @@ import {
   create_text_maker_component,
   StdPanel,
   Col,
-  NivoResponsiveBar,
+  WrappedNivoBar,
   table_common,
   declare_panel,
 } from "../../shared.js";
@@ -43,7 +43,7 @@ function render({ calculations, footnotes, sources }) {
     } else {
       return (
         <div>
-          <NivoResponsiveBar
+          <WrappedNivoBar
             data={spend_rev_data}
             keys={ticks}
             indexBy="title"

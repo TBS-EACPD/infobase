@@ -6,7 +6,7 @@ import {
   year_templates,
   actual_to_planned_gap_year,
   A11yTable,
-  NivoResponsiveLine,
+  WrappedNivoLine,
   newIBCategoryColors,
   formatter,
   trivial_text_maker,
@@ -209,10 +209,10 @@ export const format_and_get_fte = (type, info, subject) => {
     fte_graph = (
       <Fragment>
         <MediaQuery minWidth={1199}>
-          <NivoResponsiveLine {...nivo_fte_props} />
+          <WrappedNivoLine {...nivo_fte_props} />
         </MediaQuery>
         <MediaQuery maxWidth={1198}>
-          <NivoResponsiveLine {...nivo_mobile_fte_props} />
+          <WrappedNivoLine {...nivo_mobile_fte_props} />
         </MediaQuery>
       </Fragment>
     );

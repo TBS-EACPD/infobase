@@ -16,7 +16,7 @@ import { formats } from "../../core/format.js";
 import { newIBCategoryColors } from "../../core/color_schemes.js";
 import { DisplayTable, Format } from "../../components/index.js";
 
-export class NivoResponsivePie extends React.Component {
+export class WrappedNivoPie extends React.Component {
   render() {
     const {
       data,
@@ -171,7 +171,7 @@ export class NivoResponsivePie extends React.Component {
     );
   }
 }
-NivoResponsivePie.defaultProps = {
+WrappedNivoPie.defaultProps = {
   ...general_default_props,
   margin: {
     top: 30,

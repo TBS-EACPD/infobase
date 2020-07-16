@@ -37,10 +37,10 @@ import { GlossaryEntry } from "../../models/glossary.js";
 import { A11yTable } from "../../charts/A11yTable.js";
 import { StandardLegend, SelectAllControl } from "../../charts/legends";
 import {
-  NivoResponsiveBar,
-  NivoResponsiveHBar,
-  NivoResponsiveLine,
-  NivoResponsivePie,
+  WrappedNivoBar,
+  WrappedNivoHBar,
+  WrappedNivoLine,
+  WrappedNivoPie,
   CircleProportionChart,
   NivoLineBarToggle,
 } from "../../charts/wrapped_nivo/index.js";
@@ -195,10 +195,10 @@ export {
   A11yTable,
   StandardLegend,
   SelectAllControl,
-  NivoResponsiveBar,
-  NivoResponsiveHBar,
-  NivoResponsiveLine,
-  NivoResponsivePie,
+  WrappedNivoBar,
+  WrappedNivoHBar,
+  WrappedNivoLine,
+  WrappedNivoPie,
   CircleProportionChart,
   FlatTreeMapViz,
   Canada,

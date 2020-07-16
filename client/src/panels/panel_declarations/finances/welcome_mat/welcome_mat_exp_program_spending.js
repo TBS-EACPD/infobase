@@ -6,7 +6,7 @@ import {
   actual_to_planned_gap_year,
   A11yTable,
   trivial_text_maker,
-  NivoResponsiveLine,
+  WrappedNivoLine,
   newIBCategoryColors,
   formatter,
   Table,
@@ -196,10 +196,10 @@ export const format_and_get_exp_program_spending = (type, subject) => {
     exp_program_spending_graph = (
       <Fragment>
         <MediaQuery minWidth={1199}>
-          <NivoResponsiveLine {...nivo_exp_program_spending_props} />
+          <WrappedNivoLine {...nivo_exp_program_spending_props} />
         </MediaQuery>
         <MediaQuery maxWidth={1198}>
-          <NivoResponsiveLine {...nivo_mobile_exp_program_spending_props} />
+          <WrappedNivoLine {...nivo_mobile_exp_program_spending_props} />
         </MediaQuery>
       </Fragment>
     );

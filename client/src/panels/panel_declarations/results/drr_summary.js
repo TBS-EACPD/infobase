@@ -12,7 +12,7 @@ import {
   get_source_links,
   Results,
   declare_panel,
-  NivoResponsivePie,
+  WrappedNivoPie,
 } from "../shared.js";
 import {
   row_to_drr_status_counts,
@@ -262,7 +262,7 @@ class PercentageViz extends React.Component {
           </div>
           <div className="fcol-md-1 fcol-xs-0" />
           <div className="fcol-md-6 fcol-xs-12 medium_panel_text">
-            <NivoResponsivePie
+            <WrappedNivoPie
               data={graph_data}
               graph_height="300px"
               is_money={false}
