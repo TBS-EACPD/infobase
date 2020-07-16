@@ -400,7 +400,7 @@ export class DisplayTable extends React.Component {
                               } else {
                                 return col_configs_with_defaults[
                                   col_key
-                                ].formatter(total_row[col_key], "white");
+                                ].formatter(total_row[col_key]);
                               }
                             } else {
                               return total_row[col_key];
@@ -410,7 +410,8 @@ export class DisplayTable extends React.Component {
                           }
                         })()}
                       </td>
-                    )).value()}
+                    ))
+                    .value()}
                 </tr>
               )}
             </tbody>
