@@ -86,7 +86,7 @@ table.display-table:not(.no-total-row) > tbody > tr:last-child {
   background-color: $primaryColor;
 }
 table.display-table:not(.no-total-row) > tbody > tr:last-child > td {
-  color: $textLightColor;
+  color: $textLightColor !important;
 }
 
 table.display-table:not(.no-total-row) > tbody > tr:last-child > td:not(:last-child) {

@@ -23,17 +23,17 @@ const special_cols = _.flatMap(planning_years, (year) => [
 ]);
 const dp_cols = [...planning_years, ...special_cols];
 
-const spending = (value, custom_color = null) => (
+const spending_formatter = (value) => (
   <Format
-    style={{ color: custom_color || window.infobase_color_constants.textGreen }}
+    style={{ color: window.infobase_color_constants.textGreen }}
     type={"dollar"}
     content={value}
   />
 );
 
-const revenue = (value, custom_color = null) => (
+const revenue_formatter = (value, custom_color = null) => (
   <Format
-    style={{ color: custom_color || window.infobase_color_constants.textRed }}
+    style={{ color: window.infobase_color_constants.textRed }}
     type={"dollar"}
     content={value}
   />
@@ -93,13 +93,13 @@ export const declare_dp_rev_split_panel = () =>
             index: 1,
             header: text_maker("dp_gross"),
             is_summable: true,
-            formatter: spending,
+            formatter: spending_formatter,
           },
           spa: {
             index: 2,
             header: text_maker("dp_spa"),
             is_summable: true,
-            formatter: spending,
+            formatter: spending_formatter,
             initial_visible:
               _.filter(table_data, (row) => row.spa === 0).length === 0,
           },
@@ -107,7 +107,7 @@ export const declare_dp_rev_split_panel = () =>
             index: 3,
             header: text_maker("dp_revenue"),
             is_summable: true,
-            formatter: revenue,
+            formatter: revenue_formatter,
           },
           net: {
             index: 4,
