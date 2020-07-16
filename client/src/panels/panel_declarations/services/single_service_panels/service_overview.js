@@ -4,7 +4,7 @@ import { create_text_maker_component, FancyUL } from "../../../../components";
 import { Subject } from "../../../../models/subject.js";
 import { available_icons, available_keys } from "../shared";
 import { infograph_href_template } from "../../../../link_utils.js";
-import Progress from "../../../../charts/progress.js";
+import ProgressGauge from "../../../../charts/progressGauge.js";
 import { Fragment } from "react";
 import { TextPanel } from "../../shared.js";
 
@@ -35,7 +35,9 @@ export class ServiceOverview extends React.Component {
     return (
       <TextPanel title={text_maker("service_overview_title")}>
         <dl className="dl-horizontal tombstone-data-list">
-          <dt>Description/Raison d'être</dt>
+          <dt>
+            <TM k={"description"} />
+          </dt>
           <dd>
             <p>{service.description}</p>
           </dd>
@@ -60,7 +62,7 @@ export class ServiceOverview extends React.Component {
                   }}
                   className="service-overview-rect"
                 >
-                  <Progress
+                  <ProgressGauge
                     //TODO need is_target_met column from Titan
                     value={0 /*_.countBy(standards, "is_target_met").true*/}
                     total_value={standards.length}
@@ -70,7 +72,9 @@ export class ServiceOverview extends React.Component {
             </Fragment>
           )}
           <dt>
-            {text_maker("identification_methods")} ({most_recent_report.year})
+            {`${text_maker("identification_methods")} (${
+              most_recent_report.year
+            })`}
           </dt>
           <dd>
             <FancyUL className="service_overview-fancy-ul">
