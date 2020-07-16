@@ -11,9 +11,10 @@ import {
   m,
   Statistics,
   year_templates,
+  is_pa_last_year_planned_exist,
 } from "./table_common";
 
-const { std_years, planning_years } = year_templates;
+const { std_years, correct_planning_years, planning_years } = year_templates;
 const { Program, Gov } = Subject;
 
 export default {
@@ -90,15 +91,15 @@ export default {
 
     this.add_col({
       type: "big_int",
-      nick: "pa_last_year_planned",
-      hidden: true,
+      nick: "{{pa_last_year_planned}}",
+      hidden: !is_pa_last_year_planned_exist,
       header: {
-        en: "{{pa_last_year}} - " + m("Planned FTEs"),
-        fr: "{{pa_last_year}} - " + m("ETP prévus"),
+        en: "{{pa_last_year_planned}} - " + m("Planned FTEs"),
+        fr: "{{pa_last_year_planned}} - " + m("ETP prévus"),
       },
       description: {
-        en: `Corresponds to the total number of planned FTEs for the fiscal year {{pa_last_year}}`,
-        fr: `Correspond au nombre total d'équivalents temps plein (ETP) prévus pour l'exercice {{pa_last_year}}`,
+        en: `Corresponds to the total number of planned FTEs for the fiscal year {{pa_last_year_planned}}`,
+        fr: `Correspond au nombre total d'équivalents temps plein (ETP) prévus pour l'exercice {{pa_last_year_planned}}`,
       },
     });
     _.each(planning_years, (header) => {
@@ -213,7 +214,12 @@ Statistics.create_and_register({
     const table = tables.programFtes;
     const row = _.first(table.programs.get(subject));
     stats.add_all_years(add, "fte", std_years, (year, i) => row[year]);
-    stats.add_all_years(add, "fte", planning_years, (year, i) => row[year]);
+    stats.add_all_years(
+      add,
+      "fte",
+      correct_planning_years,
+      (year, i) => row[year]
+    );
   },
 });
 
@@ -225,7 +231,9 @@ Statistics.create_and_register({
     const table = tables.programFtes;
     const q = table.q(subject);
     c.dept = subject;
-    stats.add_all_years(add, "fte", planning_years, (year, i) => q.sum(year));
+    stats.add_all_years(add, "fte", correct_planning_years, (year, i) =>
+      q.sum(year)
+    );
     const planned_fte_avg = c.dept_fte_average;
     add("planned_fte_average", planned_fte_avg);
 
@@ -243,7 +251,9 @@ Statistics.create_and_register({
     const table = tables.programFtes;
     const q = table.q(Gov);
 
-    stats.add_all_years(add, "fte", planning_years, (year, i) => q.sum(year));
+    stats.add_all_years(add, "fte", correct_planning_years, (year, i) =>
+      q.sum(year)
+    );
     const planned_fte_average = c.gov_fte_average;
     add("planned_fte_average", planned_fte_average);
 
@@ -262,14 +272,14 @@ Statistics.create_and_register({
     const q = programFtes.q(subject);
 
     var first_year_prg_num = _.filter(q.data, function (d) {
-      return d[_.first(planning_years)] !== 0;
+      return d[_.first(correct_planning_years)] !== 0;
     }).length;
 
     add("fte_prg_num", first_year_prg_num);
 
     const min_planning_yr =
       "{{planning_year_" +
-      _.min(_.map(planning_years, (XX) => Number(XX.match(/\d+/)))) +
+      _.min(_.map(correct_planning_years, (XX) => Number(XX.match(/\d+/)))) +
       "}}";
 
     const sorted_first_yr = q.get_top_x(["prgm", min_planning_yr], Infinity, {
@@ -281,7 +291,9 @@ Statistics.create_and_register({
 
     stats.add_all_years(add, "fte", std_years, (year, i) => q.sum(year));
 
-    stats.add_all_years(add, "fte", planning_years, (year, i) => q.sum(year));
+    stats.add_all_years(add, "fte", correct_planning_years, (year, i) =>
+      q.sum(year)
+    );
     add("planned_fte_average", c.crso_fte_average);
   },
 });

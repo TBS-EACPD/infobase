@@ -16,10 +16,10 @@ import {
 
 import { trivial_text_maker, year_templates } from "../../shared.js";
 
-const { std_years, planning_years } = year_templates;
+const { std_years, correct_planning_years } = year_templates;
 
 const actual_year = _.last(std_years);
-const planning_year = _.first(planning_years);
+const planning_year = _.first(correct_planning_years);
 
 function create_rooted_resource_hierarchy({ year, root_subject }) {
   const get_resources = (subject) => get_resources_for_subject(subject, year);

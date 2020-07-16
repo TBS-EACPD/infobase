@@ -15,7 +15,7 @@ import {
 
 const { Format } = util_components;
 
-const { planning_years } = year_templates;
+const { correct_planning_years } = year_templates;
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -88,7 +88,7 @@ class PlannedProgramResources extends React.Component {
   render() {
     const { text, programs, colors, is_fte } = this.props;
 
-    const ticks = _.map(planning_years, run_template);
+    const ticks = _.map(correct_planning_years, run_template);
 
     const { active_programs } = this.state;
 
@@ -183,10 +183,10 @@ const get_calculate_func = (is_fte) => {
 
     const { programSpending, programFtes } = this.tables;
 
-    const all_exp = _.sumBy(planning_years, (col) =>
+    const all_exp = _.sumBy(correct_planning_years, (col) =>
       programSpending.q(subject).sum(col)
     );
-    const all_fte = _.sumBy(planning_years, (col) =>
+    const all_fte = _.sumBy(correct_planning_years, (col) =>
       programFtes.q(subject).sum(col)
     );
 
@@ -194,15 +194,14 @@ const get_calculate_func = (is_fte) => {
     if (should_bail) {
       return false;
     }
-
     const exp_data = _.map(programSpending.q(subject).data, (row) => ({
       label: row.prgm,
-      data: planning_years.map((col) => row[col]),
+      data: correct_planning_years.map((col) => row[col]),
     }));
 
     const fte_data = _.map(programFtes.q(subject).data, (row) => ({
       label: row.prgm,
-      data: planning_years.map((col) => row[col]),
+      data: correct_planning_years.map((col) => row[col]),
     }));
 
     return {
