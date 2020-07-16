@@ -12,7 +12,7 @@ import {
   trivial_text_maker,
 } from "../../shared.js";
 
-const { std_years, correct_planning_years } = year_templates;
+const { std_years, extended_planning_years } = year_templates;
 
 export const format_and_get_fte = (type, info, subject) => {
   const colors = d3.scaleOrdinal().range(newIBCategoryColors);
@@ -21,7 +21,7 @@ export const format_and_get_fte = (type, info, subject) => {
     trivial_text_maker("planned_ftes"),
   ];
   const history_ticks = _.map(std_years, run_template);
-  const plan_ticks = _.map(correct_planning_years, run_template);
+  const plan_ticks = _.map(extended_planning_years, run_template);
   const all_ticks = _.concat(history_ticks, plan_ticks);
 
   const gap_year =
@@ -32,7 +32,7 @@ export const format_and_get_fte = (type, info, subject) => {
     (std_year) => `${subject.level}_fte_${std_year.replace(/{|}/g, "")}`
   );
   const planned_data_index = _.map(
-    correct_planning_years,
+    extended_planning_years,
     (planned_year) => `${subject.level}_fte_${planned_year.replace(/{|}/g, "")}`
   );
 

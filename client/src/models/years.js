@@ -52,7 +52,7 @@ const year_templates = {
   ],
   pa_last_year_planned,
   planning_years,
-  correct_planning_years: IS_PA_LAST_YEAR_PLANNED_ACTIVE
+  extended_planning_years: IS_PA_LAST_YEAR_PLANNED_ACTIVE
     ? _.concat(pa_last_year_planned, planning_years)
     : planning_years,
   people_years: [
@@ -72,9 +72,9 @@ const year_templates = {
 };
 
 const actual_to_planned_gap_year = _.chain(year_templates)
-  .thru(({ std_years, correct_planning_years }) => [
+  .thru(({ std_years, extended_planning_years }) => [
     _.last(std_years),
-    _.first(correct_planning_years),
+    _.first(extended_planning_years),
   ])
   .map((fiscal_year) =>
     _.chain(fiscal_year)
