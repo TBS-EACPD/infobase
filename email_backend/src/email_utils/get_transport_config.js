@@ -3,6 +3,7 @@ import { google } from "googleapis";
 const OAuth2 = google.auth.OAuth2;
 
 const get_prod_auth = async () => {
+  // See ./transport_config_auth.md for some documentation on this stuff
   const {
     EMAIL_BACKEND_SENDING_ADDRESS: email_address,
     EMAIL_BACKEND_CLIENT_ID: client_id,
