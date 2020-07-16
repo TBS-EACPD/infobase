@@ -12,7 +12,7 @@ const email_backend = (() => {
 
   const email_backend = make_email_backend(templates);
 
-  if (!process.env.IS_PROD_SERVER) {
+  if (!process.env.IS_PROD_SERVER || process.env.IS_FAKE_PROD_SERVER) {
     email_backend.set("port", 7331);
     email_backend.listen(email_backend.get("port"), () => {
       const port = email_backend.get("port");
