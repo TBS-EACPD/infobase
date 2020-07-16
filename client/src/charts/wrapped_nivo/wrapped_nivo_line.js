@@ -1,4 +1,4 @@
-import text from "./nivo_line.yaml";
+import text from "./wrapped_nivo_line.yaml";
 
 import { ResponsiveLine } from "@nivo/line";
 import classNames from "classnames";

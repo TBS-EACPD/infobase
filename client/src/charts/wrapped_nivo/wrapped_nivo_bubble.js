@@ -1,5 +1,5 @@
-import "./nivo_bubble.scss";
-import text from "./nivo_bubble.yaml";
+import "./wrapped_nivo_bubble.scss";
+import text from "./wrapped_nivo_bubble.yaml";
 
 import { ResponsiveBubble } from "@nivo/circle-packing";
 import { Fragment } from "react";
