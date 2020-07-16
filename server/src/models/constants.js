@@ -8,7 +8,7 @@ export const public_account_years = [
   "pa_last_year",
 ];
 
-export const planning_years = [
+export const correct_planning_years = [
   "planning_year_1",
   "planning_year_2",
   "planning_year_3",

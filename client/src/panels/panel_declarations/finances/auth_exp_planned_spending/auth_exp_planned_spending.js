@@ -20,7 +20,7 @@ import {
 
 const { Details } = util_components;
 
-const { std_years, planning_years, estimates_years } = year_templates;
+const { std_years, correct_planning_years, estimates_years } = year_templates;
 const { text_maker, TM } = create_text_maker_component(text);
 
 const auth_cols = _.map(std_years, (yr) => `${yr}auth`);
@@ -344,7 +344,7 @@ const calculate = function (subject, info, options) {
 
   const planned_spending_values = programSpending
     .q(query_subject)
-    .sum(planning_years, { as_object: false });
+    .sum(correct_planning_years, { as_object: false });
 
   const data_series = _.chain([
     {
@@ -359,9 +359,9 @@ const calculate = function (subject, info, options) {
     },
     subject.has_planned_spending && {
       key: "planned_spending",
-      untrimmed_year_templates: planning_years,
+      untrimmed_year_templates: correct_planning_years,
       untrimmed_values: planned_spending_values,
-      year_templates: planning_years,
+      year_templates: correct_planning_years,
       values: planned_spending_values,
     },
   ])
@@ -401,7 +401,7 @@ const calculate = function (subject, info, options) {
   const additional_info = {
     has_planned_spending: subject.has_planned_spending,
     last_history_year: run_template(_.last(std_years)),
-    last_planned_year: run_template(_.last(planning_years)),
+    last_planned_year: run_template(_.last(correct_planning_years)),
     gap_year:
       (subject.has_planned_spending && actual_to_planned_gap_year) || null,
     plan_change:
