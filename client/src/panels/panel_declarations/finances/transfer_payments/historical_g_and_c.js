@@ -195,7 +195,8 @@ class DetailedHistTPItems extends React.Component {
     const max_value = _.chain(prepped_rows)
       .map((row) => _.map(exp_years, (yr) => row[yr]))
       .flatten()
-      .max();
+      .max()
+      .value();
 
     const raw_data = _.flatMap(graph_series, (value) => value);
 
