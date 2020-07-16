@@ -123,14 +123,18 @@ const make_email_backend = (templates) => {
         completed_template
       );
 
-      const transport_config = await get_transport_config();
+      const transport_config = await get_transport_config().catch(
+        console.error
+      );
       const transporter = nodemailer.createTransport(transport_config);
 
-      const sent_mail_info = await transporter.sendMail({
-        ...email_config,
-        subject: email_subject,
-        text: email_body,
-      });
+      const sent_mail_info = await transporter
+        .sendMail({
+          ...email_config,
+          subject: email_subject,
+          text: email_body,
+        })
+        .catch(console.error);
 
       if (!process.env.IS_PROD_SERVER) {
         // eslint-disable-next-line no-console
@@ -155,7 +159,7 @@ const make_email_backend = (templates) => {
           original_template,
           completed_template,
           email_config
-        ).catch(console.log);
+        ).catch(console.error);
       } else {
         const error_message = `Internal Server Error: mail was unable to send. ${
           sent_mail_info.err
