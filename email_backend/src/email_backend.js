@@ -55,8 +55,10 @@ const make_email_backend = (templates) => {
     );
 
     if (request.method === "OPTIONS") {
+      console.log("Request type: CORS preflight");
       response.sendStatus(200);
     } else {
+      console.log(`Request type: ${request.originalUrl}, ${request.method}`);
       next();
     }
   });
@@ -164,6 +166,14 @@ const make_email_backend = (templates) => {
         log_email_request(request, error_message);
       }
     }
+  });
+
+  email_backend.use((err, req, res, next) => {
+    if (process.env.IS_PROD_SERVER) {
+      // eslint-disable-next-line no-console
+      console.error(err.stack);
+    }
+    next(err);
   });
 
   return email_backend;
