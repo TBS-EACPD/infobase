@@ -2,7 +2,7 @@ import { run_template } from "./text.js";
 
 /* TODO Needs to be manually toggled on when DPs are tabled
         Needs to be manually toggled off when DRRs are tabled. */
-const is_pa_last_year_planned_exist = true;
+const IS_PA_LAST_YEAR_PLANNED_ACTIVE = true;
 
 const fiscal_year_to_year = (fy_string) =>
   _.chain(fy_string).split("-").first().toNumber().value() || null;
@@ -52,7 +52,7 @@ const year_templates = {
   ],
   pa_last_year_planned,
   planning_years,
-  correct_planning_years: is_pa_last_year_planned_exist
+  correct_planning_years: IS_PA_LAST_YEAR_PLANNED_ACTIVE
     ? _.concat(pa_last_year_planned, planning_years)
     : planning_years,
   people_years: [
@@ -108,5 +108,5 @@ export {
   year_to_fiscal_year,
   year_templates,
   actual_to_planned_gap_year,
-  is_pa_last_year_planned_exist,
+  IS_PA_LAST_YEAR_PLANNED_ACTIVE,
 };

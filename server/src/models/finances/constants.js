@@ -6,7 +6,6 @@ import {
 } from "../constants";
 
 export const financial_cols = public_account_years_auth_exp.concat([
-  "pa_last_year_planned",
   ...correct_planning_years,
 ]);
 

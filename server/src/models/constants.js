@@ -8,6 +8,16 @@ export const public_account_years = [
   "pa_last_year",
 ];
 
+export const planning_years = [
+  "planning_year_1",
+  "planning_year_2",
+  "planning_year_3",
+];
+export const correct_planning_years = _.concat(
+  ["pa_last_year_planned"],
+  planning_years
+);
+
 export const people_years = [
   "ppl_last_year_5",
   "ppl_last_year_4",
