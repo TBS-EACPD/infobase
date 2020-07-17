@@ -91,14 +91,17 @@ export default {
     this.add_col({
       type: "big_int",
       nick: "pa_last_year_planned",
-      hidden: true,
+      /* TODO hidden needs to be manually toggled off when DPs are tabled,
+              hidden needs to be manually toggled on when DRRs are tabled.
+      */
+      hidden: false,
       header: {
-        en: "{{pa_last_year}} - " + m("Planned FTEs"),
-        fr: "{{pa_last_year}} - " + m("ETP prévus"),
+        en: "{{pa_last_year_planned}} - " + m("Planned FTEs"),
+        fr: "{{pa_last_year_planned}} - " + m("ETP prévus"),
       },
       description: {
-        en: `Corresponds to the total number of planned FTEs for the fiscal year {{pa_last_year}}`,
-        fr: `Correspond au nombre total d'équivalents temps plein (ETP) prévus pour l'exercice {{pa_last_year}}`,
+        en: `Corresponds to the total number of planned FTEs for the fiscal year {{pa_last_year_planned}}`,
+        fr: `Correspond au nombre total d'équivalents temps plein (ETP) prévus pour l'exercice {{pa_last_year_planned}}`,
       },
     });
     _.each(planning_years, (header) => {
