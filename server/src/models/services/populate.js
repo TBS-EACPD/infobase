@@ -149,7 +149,6 @@ export default async function ({ models }) {
         designations_fr,
         target_groups_en,
         target_groups_fr,
-        program_ids,
         feedback_channels_en,
         feedback_channels_fr,
         urls_en,
