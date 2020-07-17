@@ -68,7 +68,8 @@ export class ServiceOverview extends React.Component {
                 >
                   <ProgressGauge
                     value={
-                      _.countBy(flat_standard_reports, "is_target_met").true
+                      _.countBy(flat_standard_reports, "is_target_met").true ||
+                      0
                     }
                     total_value={flat_standard_reports.length}
                   />
