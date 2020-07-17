@@ -15,11 +15,14 @@ const { text_maker, TM } = create_text_maker_component(text);
 export class ServiceOverview extends React.Component {
   render() {
     const { service } = this.props;
-    const standards = service.standards;
     const most_recent_report = _.chain(service.service_report)
       .sortBy((report) => _.toInteger(report.year))
       .reverse()
       .value()[0];
+    const flat_standard_reports = _.chain(service.standards)
+      .map(({ standard_report }) => standard_report)
+      .flatten()
+      .value();
 
     return (
       <Panel title={text_maker("service_overview_title")}>
@@ -33,7 +36,7 @@ export class ServiceOverview extends React.Component {
                 {_.map(service.service_type)}
               </FancyUL>
             </div>
-            {!_.isEmpty(standards) && (
+            {!_.isEmpty(flat_standard_reports) && (
               <div
                 style={{
                   display: "flex",
@@ -45,9 +48,8 @@ export class ServiceOverview extends React.Component {
               >
                 <TM el="h2" k={"standards_performance_text"} />
                 <Gauge
-                  //TODO need is_target_met column from Titan
-                  value={0 /*_.countBy(standards, "is_target_met").true*/}
-                  total_value={standards.length}
+                  value={_.countBy(flat_standard_reports, "is_target_met").true}
+                  total_value={flat_standard_reports.length}
                 />
               </div>
             )}
