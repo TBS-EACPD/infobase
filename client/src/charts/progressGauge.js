@@ -22,15 +22,7 @@ export default class ProgressGauge extends React.Component {
           </div>
         );
       } else {
-        return (
-          <div
-            key={i}
-            className="progress-circle"
-            style={{
-              backgroundColor: remaining_color || highlightDark,
-            }}
-          />
-        );
+        return <div key={i} className="progress-circle empty" />;
       }
     });
 
