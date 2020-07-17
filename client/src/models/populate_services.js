@@ -168,10 +168,7 @@ const dept_service_fragment = `org_id
             lower
             count
             met_count
-<<<<<<< HEAD
             is_target_met
-=======
->>>>>>> real data update, MOST viz to accomodate the data update, still some errors with program_ids and standards keep getting inserted
             standard_report_comment
           }
         }
