@@ -105,6 +105,10 @@ const dept_service_fragment = `org_id
         org_id
         program_ids
 
+        first_active_year
+        last_active_year
+        is_active      
+
         name
         description
         service_type
@@ -158,6 +162,7 @@ const dept_service_fragment = `org_id
             lower
             count
             met_count
+            is_target_met
             standard_report_comment
           }
         }

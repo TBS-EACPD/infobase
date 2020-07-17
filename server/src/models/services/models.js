@@ -34,6 +34,7 @@ export default function (model_singleton) {
     lower: { type: Number },
     count: { type: Number },
     met_count: { type: Number },
+    is_target_met: { type: Boolean },
     ...bilingual_str("standard_report_comment"),
   });
 
@@ -60,8 +61,9 @@ export default function (model_singleton) {
     service_id: pkey_type(),
     org_id: parent_fkey_type(),
     program_ids: [sparse_parent_fkey_type()],
-    //year: str_type,
-    //is_active: { type: Boolean },
+    first_active_year: str_type,
+    last_active_year: str_type,
+    is_active: { type: Boolean },
 
     ...bilingual_str("name"),
     ...bilingual_str("description"),

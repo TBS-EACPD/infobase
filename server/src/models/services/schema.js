@@ -29,6 +29,7 @@ const schema = `
     lower: Float,
     count: Float,
     met_count: Float,
+    is_target_met: Boolean,
     standard_report_comment: String
   }
   type Service{
@@ -37,6 +38,9 @@ const schema = `
     org: Org
     program_ids: [String]
     programs: [Program]
+    first_active_year: String
+    last_active_year: String
+    is_active: Boolean
 
     name: String
     description: String

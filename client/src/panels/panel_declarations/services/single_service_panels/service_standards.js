@@ -32,15 +32,14 @@ export class ServiceStandards extends React.Component {
     const standards = service.standards;
     const data = _.chain(standards)
       .map(({ name, type, channel, standard_report }) =>
-        _.map(standard_report, ({ year, count, met_count }) => ({
+        _.map(standard_report, ({ year, count, met_count, is_target_met }) => ({
           name: name,
           year: year,
           standard_type: type,
           channel: channel,
           count: count,
           met_count: met_count,
-          //TODO need is_target_met field from Titan
-          is_target_met: count === met_count ? "met" : "not_met",
+          is_target_met: is_target_met ? "met" : "not_met",
         }))
       )
       .flatten()
@@ -89,7 +88,6 @@ export class ServiceStandards extends React.Component {
         index: 6,
         header: text_maker("status"),
         formatter: (value) => status_icons[value],
-        //raw_formatter: (value) => String(value),
       },
     };
 

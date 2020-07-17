@@ -17,7 +17,7 @@ export default async function ({ models }) {
   const { ServiceStandard, Service, ServiceReport, StandardReport } = models;
 
   const service_report_rows = _.map(
-    get_standard_csv_file_rows("service_report.csv"),
+    get_standard_csv_file_rows("service-report.csv"),
     ({
       id: standard_id,
       cra_business_ids_collected,
@@ -38,15 +38,16 @@ export default async function ({ models }) {
     })
   );
   const standard_report_rows = _.map(
-    get_standard_csv_file_rows("standard_report.csv"),
-    ({ comment: standard_report_comment, ...other_fields }) => ({
+    get_standard_csv_file_rows("standard-report.csv"),
+    ({ is_target_met, comment: standard_report_comment, ...other_fields }) => ({
+      is_target_met: convert_to_bool_or_null(_.toInteger(is_target_met), 1, 0),
       standard_report_comment,
       ...other_fields,
     })
   );
 
   const service_standard_rows = _.map(
-    get_standard_csv_file_rows("service_standards.csv"),
+    get_standard_csv_file_rows("standards.csv"),
     ({
       id: standard_id,
 
@@ -78,6 +79,7 @@ export default async function ({ models }) {
       id: service_id,
       dept_code,
       collects_fees,
+      is_active,
       account_reg_digital_status,
       authentication_status,
       application_digital_status,
@@ -102,6 +104,7 @@ export default async function ({ models }) {
       ...other_fields
     }) => ({
       service_id,
+      is_active: convert_to_bool_or_null(_.toInteger(is_active), 1, 0),
       collects_fees: convert_to_bool_or_null(collects_fees, "Yes", "No"),
       account_reg_digital_status: convert_to_bool_or_null(
         account_reg_digital_status,
