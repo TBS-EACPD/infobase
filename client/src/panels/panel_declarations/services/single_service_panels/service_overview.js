@@ -31,6 +31,10 @@ export class ServiceOverview extends React.Component {
       .sortBy((report) => _.toInteger(report.year))
       .reverse()
       .value()[0];
+    const flat_standard_reports = _.chain(service.standards)
+      .map(({ standard_report }) => standard_report)
+      .flatten()
+      .value();
 
     return (
       <TextPanel title={text_maker("service_overview_title")}>
@@ -47,7 +51,7 @@ export class ServiceOverview extends React.Component {
               <p>{type}</p>
             ))}
           </dd>
-          {!_.isEmpty(standards) && (
+          {!_.isEmpty(flat_standard_reports) && (
             <Fragment>
               <dt>
                 <TM k={"standards_performance_text"} />
@@ -63,9 +67,10 @@ export class ServiceOverview extends React.Component {
                   className="service-overview-rect"
                 >
                   <ProgressGauge
-                    //TODO need is_target_met column from Titan
-                    value={0 /*_.countBy(standards, "is_target_met").true*/}
-                    total_value={standards.length}
+                    value={
+                      _.countBy(flat_standard_reports, "is_target_met").true
+                    }
+                    total_value={flat_standard_reports.length}
                   />
                 </div>
               </dd>
