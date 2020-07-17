@@ -1,2 +1,45 @@
-2020-07-16T19:09:28.610-0400 E -        [main] file [generate_csv.js] doesn't exist
-failed to load: generate_csv.js
+[
+	{
+		"_id" : "5f0f79905501c048a82130a2",
+		"issue_type" : [
+			"bug"
+		],
+		"issue_details" : "test",
+		"sha" : "c29864d",
+		"route" : "start",
+		"lang" : "en",
+		"app_version" : "standard",
+		"client_id" : "701659143.1594846137",
+		"email_meta" : {
+			"to" : "Recipient <recipient@example.com>",
+			"from" : "Sender Name <sender@example.com>",
+			"referer" : "http://localhost:8080/build/InfoBase/index-eng.html",
+			"server_time" : 1594849680392,
+			"date" : "7/15/2020",
+			"time" : "5:48:00 PM"
+		},
+		"__v" : 0
+	},
+	{
+		"_id" : "5f109934a9c6222fc809e7a2",
+		"issue_type" : [
+			"bug",
+			"navigation"
+		],
+		"issue_details" : "test",
+		"sha" : "c29864d",
+		"route" : "orgs/dept/326/infograph/financial",
+		"lang" : "en",
+		"app_version" : "standard",
+		"client_id" : "701659143.1594846137",
+		"email_meta" : {
+			"to" : "Recipient <recipient@example.com>",
+			"from" : "Sender Name <sender@example.com>",
+			"referer" : "http://localhost:8080/build/InfoBase/index-eng.html",
+			"server_time" : 1594923316063,
+			"date" : "7/16/2020",
+			"time" : "2:15:16 PM"
+		},
+		"__v" : 0
+	}
+]
