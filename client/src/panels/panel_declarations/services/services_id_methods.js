@@ -35,29 +35,6 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
       }
     );
 
-<<<<<<< HEAD
-=======
-  const get_id_method_count = (method) =>
-    _.reduce(
-      services,
-      (sum, service) => {
-        const service_id_count = _.countBy(service.service_report, method);
-        return {
-          true: service_id_count.true
-            ? sum.true + service_id_count.true
-            : sum.true,
-          false: service_id_count.false
-            ? sum.false + service_id_count.false
-            : sum.false,
-        };
-      },
-      {
-        true: 0,
-        false: 0,
-      }
-    );
-
->>>>>>> real data update, MOST viz to accomodate the data update, still some errors with program_ids and standards keep getting inserted
   const sin_count = get_id_method_count("SIN_collected");
   const cra_count = get_id_method_count("cra_business_ids_collected");
 
@@ -71,14 +48,11 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
       id: "does_not_identifier",
       label: text_maker("does_not_use_sin_as_identifier"),
       value: sin_count.false,
-<<<<<<< HEAD
     },
     {
       id: "na",
       label: text_maker("not_applicable"),
       value: sin_count.null,
-=======
->>>>>>> real data update, MOST viz to accomodate the data update, still some errors with program_ids and standards keep getting inserted
     },
   ];
   const cra_data = [
@@ -91,14 +65,11 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
       id: "does_not_identifier",
       label: text_maker("does_not_use_cra_as_identifier"),
       value: cra_count.false,
-<<<<<<< HEAD
     },
     {
       id: "na",
       label: text_maker("not_applicable"),
       value: cra_count.null,
-=======
->>>>>>> real data update, MOST viz to accomodate the data update, still some errors with program_ids and standards keep getting inserted
     },
   ];
 
