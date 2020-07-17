@@ -1,16 +1,26 @@
 import "../services.scss";
 import text from "../services.yaml";
-import {
-  create_text_maker_component,
-  Panel,
-  FancyUL,
-} from "../../../../components";
+import { create_text_maker_component, Panel } from "../../../../components";
 import { Subject } from "../../../../models/subject.js";
 import { available_icons, available_keys } from "../shared";
 import { infograph_href_template } from "../../../../link_utils.js";
 import Gauge from "../../../../charts/gauge.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
+
+const OverviewUL = ({ title, children }) => (
+  <ul className={"overview-ul"} aria-label={title}>
+    {title && (
+      <li className={"overview-ul__title"} aria-hidden={true}>
+        {title}
+      </li>
+    )}
+    {_.chain(children)
+      .compact()
+      .map((item, i) => <li key={i}>{item}</li>)
+      .value()}
+  </ul>
+);
 
 export class ServiceOverview extends React.Component {
   render() {
@@ -28,13 +38,43 @@ export class ServiceOverview extends React.Component {
       <Panel title={text_maker("service_overview_title")}>
         <div className={"col-container"}>
           <div className="fcol-md-7">
-            <div className="service-overview-rect">
-              <h3>{service.description}</h3>
+            <div className="service-overview-rect medium_panel_text">
+              {service.description}
             </div>
             <div className="service-overview-rect">
-              <FancyUL title={text_maker("service_types")}>
-                {_.map(service.service_type)}
-              </FancyUL>
+              <OverviewUL
+                className="service_overview-fancy-ul"
+                title={`${text_maker("identification_methods")} (${
+                  most_recent_report.year
+                })`}
+              >
+                {[
+                  <div key="uses_cra_as_identifier" className="identifier-item">
+                    <TM
+                      className="medium_panel_text"
+                      k="uses_cra_as_identifier"
+                    />
+                    {
+                      available_icons[
+                        available_keys[
+                          most_recent_report.cra_business_ids_collected
+                        ]
+                      ]
+                    }
+                  </div>,
+                  <div key="uses_sin_as_identifier" className="identifier-item">
+                    <TM
+                      className="medium_panel_text"
+                      k="uses_sin_as_identifier"
+                    />
+                    {
+                      available_icons[
+                        available_keys[most_recent_report.SIN_collected]
+                      ]
+                    }
+                  </div>,
+                ]}
+              </OverviewUL>
             </div>
             {!_.isEmpty(flat_standard_reports) && (
               <div
@@ -46,7 +86,10 @@ export class ServiceOverview extends React.Component {
                 }}
                 className="service-overview-rect"
               >
-                <TM el="h2" k={"standards_performance_text"} />
+                <TM
+                  className="medium_panel_text"
+                  k={"standards_performance_text"}
+                />
                 <Gauge
                   value={_.countBy(flat_standard_reports, "is_target_met").true}
                   total_value={flat_standard_reports.length}
@@ -55,38 +98,14 @@ export class ServiceOverview extends React.Component {
             )}
           </div>
           <div className="fcol-md-5">
-            <div className="service-overview-rect">
-              <FancyUL
-                className="service_overview-fancy-ul"
-                title={`${text_maker("identification_methods")} (${
-                  most_recent_report.year
-                })`}
-              >
-                {[
-                  <div key="uses_cra_as_identifier" className="identifier-item">
-                    <TM style={{ lineHeight: 2 }} k="uses_cra_as_identifier" />
-                    {
-                      available_icons[
-                        available_keys[
-                          most_recent_report.cra_business_ids_collected
-                        ]
-                      ]
-                    }
-                  </div>,
-                  <div key="uses_sin_as_identifier" className="identifier-item">
-                    <TM style={{ lineHeight: 2 }} k="uses_sin_as_identifier" />
-                    {
-                      available_icons[
-                        available_keys[most_recent_report.SIN_collected]
-                      ]
-                    }
-                  </div>,
-                ]}
-              </FancyUL>
+            <div className="medium_panel_text service-overview-rect">
+              <OverviewUL title={text_maker("service_types")}>
+                {_.map(service.service_type)}
+              </OverviewUL>
             </div>
             {!_.isEmpty(service.program_ids) && (
               <div className="service-overview-rect">
-                <FancyUL title={text_maker("related_programs")}>
+                <OverviewUL title={text_maker("related_programs")}>
                   {_.map(service.program_ids, (program_id) => {
                     const program = Subject.Program.lookup(program_id);
                     return (
@@ -94,18 +113,19 @@ export class ServiceOverview extends React.Component {
                         <a
                           key={program_id}
                           href={infograph_href_template(program)}
+                          className="medium_panel_text"
                         >
                           {program.name}
                         </a>
                       )
                     );
                   })}
-                </FancyUL>
+                </OverviewUL>
               </div>
             )}
             <div className="service-overview-rect">
               <TM
-                el="h4"
+                className="medium_panel_text"
                 k={
                   service.collects_fees
                     ? "does_charge_fees"
@@ -117,14 +137,17 @@ export class ServiceOverview extends React.Component {
               <div className="service-overview-rect">
                 {service.urls.length === 1 ? (
                   <TM
-                    el="h2"
+                    className="medium_panel_text"
                     k={"service_single_link_text"}
                     args={{ service_url: service.urls[0] }}
                   />
                 ) : (
                   <div>
-                    <TM el="h2" k={"service_links_text"} />
-                    <FancyUL>
+                    <TM
+                      className="medium_panel_text"
+                      k={"service_links_text"}
+                    />
+                    <OverviewUL>
                       {_.map(service.urls, (url, i) => (
                         <a
                           key={url}
@@ -135,7 +158,7 @@ export class ServiceOverview extends React.Component {
                           {`${text_maker("link")} ${i + 1}`}
                         </a>
                       ))}
-                    </FancyUL>
+                    </OverviewUL>
                   </div>
                 )}
               </div>
