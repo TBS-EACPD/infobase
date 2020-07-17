@@ -1,4 +1,4 @@
-import "./progress.scss";
+import "./progressGauge.scss";
 import { successDarkColor, highlightDark } from "../core/color_defs";
 import { Format } from "../components";
 
