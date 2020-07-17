@@ -20,9 +20,12 @@ Object {
               "Postal Mail",
               "Online",
             ],
+            "first_active_year": "2018",
+            "is_active": true,
             "issuance_digital_status": true,
             "issue_res_digital_status": true,
-            "last_gender_analysis": "2017",
+            "last_active_year": null,
+            "last_gender_analysis": "2017.0",
             "name": "ATIP Online Request Service",
             "org": Object {
               "name": "Treasury Board of Canada Secretariat",
@@ -78,8 +81,11 @@ Object {
             "feedback_channels": Array [
               "Other",
             ],
+            "first_active_year": "2018",
+            "is_active": true,
             "issuance_digital_status": null,
             "issue_res_digital_status": null,
+            "last_active_year": null,
             "last_gender_analysis": null,
             "name": "Public Enquiries",
             "org": Object {
@@ -143,8 +149,11 @@ Object {
               "Telephone",
               "Email",
             ],
+            "first_active_year": "2018",
+            "is_active": true,
             "issuance_digital_status": true,
             "issue_res_digital_status": true,
+            "last_active_year": null,
             "last_gender_analysis": null,
             "name": "Treasury Board of Canada Secretariat’s Claims Office",
             "org": Object {
@@ -195,6 +204,7 @@ Object {
                 "standard_report": Array [
                   Object {
                     "count": 0,
+                    "is_target_met": true,
                     "lower": 90,
                     "met_count": 0,
                     "standard_id": "1361",
@@ -219,6 +229,7 @@ Object {
                 "standard_report": Array [
                   Object {
                     "count": 0,
+                    "is_target_met": true,
                     "lower": 90,
                     "met_count": 0,
                     "standard_id": "1577",
@@ -243,6 +254,7 @@ Object {
                 "standard_report": Array [
                   Object {
                     "count": 0,
+                    "is_target_met": true,
                     "lower": 90,
                     "met_count": 0,
                     "standard_id": "1578",
@@ -267,6 +279,7 @@ Object {
                 "standard_report": Array [
                   Object {
                     "count": 0,
+                    "is_target_met": true,
                     "lower": 90,
                     "met_count": 0,
                     "standard_id": "1579",
@@ -290,97 +303,6 @@ Object {
           Object {
             "account_reg_digital_status": true,
             "application_digital_status": true,
-            "authentication_status": false,
-            "collects_fees": true,
-            "decision_digital_status": false,
-            "description": "The Access to Information Act gives Canadian citizens, permanent residents, and any person or corporation present in Canada a right to access records of government institutions that are subject to the Act. The Privacy Act gives Canadian citizens, permanent residents, and individuals present in Canada the right to access their personal information held by government institutions that are subject to the Act, and protects that information against unauthorized collection, use, retention and disclosure. This service responds to Access to Information and Privacy requests received by the Treasury Board Secretariat (TBS).",
-            "digital_enablement_comment": null,
-            "feedback_channels": Array [
-              "Telephone",
-              "Email",
-              "Postal Mail",
-              "Online",
-              "Other",
-            ],
-            "issuance_digital_status": false,
-            "issue_res_digital_status": false,
-            "last_gender_analysis": null,
-            "name": "Access to Information and Privacy",
-            "org": Object {
-              "name": "Treasury Board of Canada Secretariat",
-            },
-            "org_id": "326",
-            "program_ids": Array [
-              "TBC-ISS01",
-            ],
-            "programs": Array [
-              Object {
-                "name": "Management and Oversight Services - Treasury Board Secretariat",
-              },
-            ],
-            "scope": Array [
-              "External Service",
-            ],
-            "service_id": "1347",
-            "service_report": Array [
-              Object {
-                "SIN_collected": null,
-                "cra_business_ids_collected": null,
-                "live_application_count": 0,
-                "mail_application_count": 69,
-                "online_application_count": 572,
-                "online_inquiry_count": null,
-                "other_application_count": 0,
-                "phone_inquiry_count": null,
-                "service_id": "1347",
-                "service_report_comment": null,
-                "year": "2018",
-              },
-            ],
-            "service_type": Array [
-              "Advisory Services",
-            ],
-            "standards": Array [
-              Object {
-                "channel": "Other",
-                "last_gcss_tool_year": null,
-                "name": "The legislated timeframe for responding to an access to information request or a request for personal information is 30 days.",
-                "other_type_comment": "This service standard is administered by mail and email.",
-                "rtp_urls": Array [
-                  "",
-                ],
-                "service_id": "1347",
-                "standard_id": "1359",
-                "standard_report": Array [
-                  Object {
-                    "count": 594,
-                    "lower": 90,
-                    "met_count": 575,
-                    "standard_id": "1359",
-                    "standard_report_comment": null,
-                    "year": "2018",
-                  },
-                ],
-                "target_type": "Percentage of outcomes",
-                "type": "Timeliness",
-                "urls": null,
-              },
-            ],
-            "target_groups": Array [
-              "Economic Segments",
-              "Environmental",
-              "Internal to Government",
-              "Non-Profit Institutions and Organizations",
-              "Persons",
-              "Provinces, Territories and Communities",
-            ],
-            "urls": Array [
-              "https://atip-aiprp.apps.gc.ca/atip/welcome.do",
-            ],
-          },
-          Object {
-            "account_reg_digital_status": true,
-            "application_digital_status": true,
             "authentication_status": true,
             "collects_fees": false,
             "decision_digital_status": null,
@@ -392,8 +314,11 @@ Object {
               "Email",
               "Online",
             ],
+            "first_active_year": "2018",
+            "is_active": true,
             "issuance_digital_status": null,
             "issue_res_digital_status": true,
+            "last_active_year": null,
             "last_gender_analysis": null,
             "name": "People Management Information/Data Request Service",
             "org": Object {
@@ -454,8 +379,11 @@ Object {
             "feedback_channels": Array [
               "Email",
             ],
+            "first_active_year": "2018",
+            "is_active": true,
             "issuance_digital_status": null,
             "issue_res_digital_status": true,
+            "last_active_year": null,
             "last_gender_analysis": null,
             "name": "Open Government Database and Information Requests",
             "org": Object {
@@ -520,8 +448,11 @@ The classification accreditation responds to the requirement of the Policy on Cl
               "Postal Mail",
               "Online",
             ],
+            "first_active_year": "2018",
+            "is_active": true,
             "issuance_digital_status": null,
             "issue_res_digital_status": null,
+            "last_active_year": null,
             "last_gender_analysis": null,
             "name": "Classification Accreditation",
             "org": Object {
@@ -595,8 +526,11 @@ Object {
               "Telephone",
               "Email",
             ],
+            "first_active_year": "2018",
+            "is_active": true,
             "issuance_digital_status": true,
             "issue_res_digital_status": true,
+            "last_active_year": null,
             "last_gender_analysis": null,
             "name": "Treasury Board of Canada Secretariat’s Claims Office",
             "org": Object {
@@ -647,6 +581,7 @@ Object {
                 "standard_report": Array [
                   Object {
                     "count": 0,
+                    "is_target_met": true,
                     "lower": 90,
                     "met_count": 0,
                     "standard_id": "1361",
@@ -671,6 +606,7 @@ Object {
                 "standard_report": Array [
                   Object {
                     "count": 0,
+                    "is_target_met": true,
                     "lower": 90,
                     "met_count": 0,
                     "standard_id": "1577",
@@ -695,6 +631,7 @@ Object {
                 "standard_report": Array [
                   Object {
                     "count": 0,
+                    "is_target_met": true,
                     "lower": 90,
                     "met_count": 0,
                     "standard_id": "1578",
@@ -719,6 +656,7 @@ Object {
                 "standard_report": Array [
                   Object {
                     "count": 0,
+                    "is_target_met": true,
                     "lower": 90,
                     "met_count": 0,
                     "standard_id": "1579",
