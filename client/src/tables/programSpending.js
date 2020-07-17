@@ -10,11 +10,10 @@ import {
   trivial_text_maker,
   Statistics,
   year_templates,
-  IS_PA_LAST_YEAR_PLANNED_ACTIVE,
 } from "./table_common";
 
 const { Program, Gov, Dept } = Subject;
-const { std_years, extended_planning_years, planning_years } = year_templates;
+const { std_years, planning_years } = year_templates;
 const exp_cols = _.map(std_years, (yr) => yr + "exp");
 
 export default {
@@ -96,8 +95,11 @@ export default {
     });
     this.add_col({
       type: "big_int",
-      nick: "{{pa_last_year_planned}}",
-      hidden: !IS_PA_LAST_YEAR_PLANNED_ACTIVE,
+      nick: "pa_last_year_planned",
+      /* TODO hidden needs to be manually toggled off when DPs are tabled,
+              hidden needs to be manually toggled on when DRRs are tabled.
+      */
+      hidden: false,
       header: {
         en: "{{pa_last_year_planned}} - Planned Spending",
         fr: "{{pa_last_year_planned}} - Dépenses prévues",
@@ -254,9 +256,7 @@ Statistics.create_and_register({
 
     add("prg_num", last_year_prg_num);
 
-    stats.add_all_years(add, "exp", extended_planning_years, (year, i) =>
-      q.sum(year)
-    );
+    stats.add_all_years(add, "exp", planning_years, (year, i) => q.sum(year));
     const planned_exp_avg = c.dept_exp_average;
     add("planned_exp_average", planned_exp_avg);
 
@@ -291,9 +291,7 @@ Statistics.create_and_register({
     const table = tables.programSpending;
     const q = table.q(Gov);
 
-    stats.add_all_years(add, "exp", extended_planning_years, (year, i) =>
-      q.sum(year)
-    );
+    stats.add_all_years(add, "exp", planning_years, (year, i) => q.sum(year));
     const planned_exp_avg = c.gov_exp_average;
     add("planned_exp_average", planned_exp_avg);
   },
@@ -325,12 +323,7 @@ Statistics.create_and_register({
 
     const five_yr_exp_avg = c.program_exp_average;
     add("hist_exp_average", five_yr_exp_avg);
-    stats.add_all_years(
-      add,
-      "exp",
-      extended_planning_years,
-      (year, i) => row[year]
-    );
+    stats.add_all_years(add, "exp", planning_years, (year, i) => row[year]);
     add(
       "pct_of_dept_exp_planning_year_1",
       c.program_exp_planning_year_1 /
@@ -392,9 +385,7 @@ Statistics.create_and_register({
     const five_yr_exp_avg = c.tag_exp_average;
     add("hist_exp_average", five_yr_exp_avg);
 
-    stats.add_all_years(add, "exp", extended_planning_years, (year, i) =>
-      q.sum(year)
-    );
+    stats.add_all_years(add, "exp", planning_years, (year, i) => q.sum(year));
     add("prg_num", last_year_prg_num);
 
     stats.year_over_year_multi_stats(add, "prg_five_year", all_years);
@@ -410,12 +401,15 @@ Statistics.create_and_register({
     const q = table.q(subject);
 
     var first_year_prg_num = _.filter(q.data, function (d) {
-      return d[_.first(extended_planning_years)] !== 0;
+      return d[_.first(planning_years)] !== 0;
     }).length;
 
     add("exp_prg_num", first_year_prg_num);
 
-    const min_planning_yr = extended_planning_years[0];
+    const min_planning_yr =
+      "{{planning_year_" +
+      _.min(_.map(planning_years, (yr) => Number(yr.match(/\d+/)))) +
+      "}}";
 
     const sorted_first_yr = q.get_top_x(["prgm", min_planning_yr], Infinity, {
       zip: true,
@@ -431,9 +425,7 @@ Statistics.create_and_register({
     const five_yr_exp_avg = c.crso_exp_average;
     add("hist_exp_average", five_yr_exp_avg);
 
-    stats.add_all_years(add, "exp", extended_planning_years, (year, i) =>
-      q.sum(year)
-    );
+    stats.add_all_years(add, "exp", planning_years, (year, i) => q.sum(year));
     add("planned_exp_average", c.crso_exp_average);
     add("planned_exp_total", c.crso_exp_total);
 

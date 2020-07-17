@@ -23,7 +23,7 @@ import { format_and_get_fte } from "./welcome_mat_fte.js";
 
 const { Format } = util_components;
 
-const { std_years, extended_planning_years } = year_templates;
+const { std_years, planning_years } = year_templates;
 const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
 const actual_history_years = _.map(std_years, run_template);
 
@@ -873,7 +873,7 @@ function has_planning_data(subject, q6) {
 
   return (
     has_dp &&
-    _.chain(extended_planning_years)
+    _.chain(planning_years)
       .map((yr) => q6.sum(yr) || 0)
       .some()
       .value()
@@ -885,17 +885,11 @@ function get_calcs(subject, q6, q12) {
   const has_hist = has_hist_data(subject, q6);
 
   const hist_spend_data = _.map(exp_cols, (col) => q6.sum(col) || 0);
-  const planned_spend_data = _.map(
-    extended_planning_years,
-    (col) => q6.sum(col) || 0
-  );
+  const planned_spend_data = _.map(planning_years, (col) => q6.sum(col) || 0);
   const spend_data = _.concat(hist_spend_data, planned_spend_data);
 
   const hist_fte_data = _.map(std_years, (col) => q12.sum(col) || 0);
-  const planned_fte_data = _.map(
-    extended_planning_years,
-    (col) => q12.sum(col) || 0
-  );
+  const planned_fte_data = _.map(planning_years, (col) => q12.sum(col) || 0);
   const fte_data = _.concat(hist_fte_data, planned_fte_data);
 
   const has_data = (data) =>

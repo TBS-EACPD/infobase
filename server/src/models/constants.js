@@ -13,10 +13,6 @@ export const planning_years = [
   "planning_year_2",
   "planning_year_3",
 ];
-export const extended_planning_years = _.concat(
-  ["pa_last_year_planned"],
-  planning_years
-);
 
 export const people_years = [
   "ppl_last_year_5",

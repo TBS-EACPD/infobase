@@ -1,8 +1,5 @@
 import { stats } from "../core/tables/stats.js";
-import {
-  year_templates,
-  IS_PA_LAST_YEAR_PLANNED_ACTIVE,
-} from "../models/years.js";
+import { year_templates } from "../models/years.js";
 import { Subject } from "../models/subject";
 import { Statistics } from "../core/Statistics.js";
 import * as format from "../core/format";
@@ -266,7 +263,6 @@ export {
   Statistics,
   format,
   year_templates,
-  IS_PA_LAST_YEAR_PLANNED_ACTIVE,
   rows_to_rev_split,
   is_non_revenue,
   collapse_by_so,

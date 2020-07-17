@@ -1,9 +1,5 @@
 import { run_template } from "./text.js";
 
-/* TODO Needs to be manually toggled on when DPs are tabled
-        Needs to be manually toggled off when DRRs are tabled. */
-const IS_PA_LAST_YEAR_PLANNED_ACTIVE = true;
-
 const fiscal_year_to_year = (fy_string) =>
   _.chain(fy_string).split("-").first().toNumber().value() || null;
 
@@ -19,12 +15,6 @@ const year_to_fiscal_year = (year) => {
     return "";
   }
 };
-const pa_last_year_planned = "{{pa_last_year_planned}}";
-const planning_years = [
-  "{{planning_year_1}}",
-  "{{planning_year_2}}",
-  "{{planning_year_3}}",
-];
 
 const year_templates = {
   current_fiscal_year: "{{current_fiscal_year}}",
@@ -50,11 +40,12 @@ const year_templates = {
     "{{est_in_year}}",
     //"{{est_next_year}}",
   ],
-  pa_last_year_planned,
-  planning_years,
-  extended_planning_years: IS_PA_LAST_YEAR_PLANNED_ACTIVE
-    ? _.concat(pa_last_year_planned, planning_years)
-    : planning_years,
+  pa_last_year_planned: "{{pa_last_year_planned}}",
+  planning_years: [
+    "{{planning_year_1}}",
+    "{{planning_year_2}}",
+    "{{planning_year_3}}",
+  ],
   people_years: [
     "{{ppl_last_year_5}}",
     "{{ppl_last_year_4}}",
@@ -72,9 +63,9 @@ const year_templates = {
 };
 
 const actual_to_planned_gap_year = _.chain(year_templates)
-  .thru(({ std_years, extended_planning_years }) => [
+  .thru(({ std_years, planning_years }) => [
     _.last(std_years),
-    _.first(extended_planning_years),
+    _.first(planning_years),
   ])
   .map((fiscal_year) =>
     _.chain(fiscal_year)
@@ -108,5 +99,4 @@ export {
   year_to_fiscal_year,
   year_templates,
   actual_to_planned_gap_year,
-  IS_PA_LAST_YEAR_PLANNED_ACTIVE,
 };

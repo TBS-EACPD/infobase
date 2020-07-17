@@ -36,8 +36,8 @@ export const declare_planned_actual_comparison_panel = () =>
         const spend_q = programSpending.q(subject);
         const fte_q = programFtes.q(subject);
 
-        const planned_spend = spend_q.sum("{{pa_last_year_planned}}");
-        const planned_ftes = fte_q.sum("{{pa_last_year_planned}}");
+        const planned_spend = spend_q.sum("pa_last_year_planned");
+        const planned_ftes = fte_q.sum("pa_last_year_planned");
 
         const actual_spend = spend_q.sum("{{pa_last_year}}exp");
         const actual_ftes = fte_q.sum("{{pa_last_year}}");

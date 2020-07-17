@@ -12,7 +12,7 @@ import {
   Table,
 } from "../../shared.js";
 
-const { std_years, extended_planning_years } = year_templates;
+const { std_years, planning_years } = year_templates;
 const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
 
 const calculate = (type, subject) => {
@@ -30,7 +30,7 @@ const calculate = (type, subject) => {
     type != "hist" ? programSpending.q(query_subject) : null;
   const progSpending =
     qProgSpending && subject.has_planned_spending
-      ? qProgSpending.sum(extended_planning_years, { as_object: false })
+      ? qProgSpending.sum(planning_years, { as_object: false })
       : null;
 
   return { exp, progSpending };
@@ -59,8 +59,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
   ];
 
   const history_ticks = _.map(std_years, run_template);
-  const plan_ticks = _.map(extended_planning_years, run_template);
-  const all_ticks = _.concat(history_ticks, plan_ticks);
+  const plan_ticks = _.map(planning_years, run_template);
 
   const gap_year =
     (subject.has_planned_spending && actual_to_planned_gap_year) || null;
@@ -135,7 +134,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
         return tick === _.first(plan_ticks) || tick === _.last(plan_ticks);
       } else {
         return (
-          tick === _.nth(all_ticks, _.round(all_ticks.length / 2)) ||
+          tick === gap_year ||
           tick === _.first(history_ticks) ||
           tick === _.last(plan_ticks)
         );
