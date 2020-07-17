@@ -6,6 +6,7 @@ export default class ProgressGauge extends React.Component {
   render() {
     const { value, total_value, finished_color, remaining_color } = this.props;
     const percentage = value / total_value;
+    console.log(value, total_value);
 
     const progress = _.times(total_value, (i) => {
       if (i < value) {
