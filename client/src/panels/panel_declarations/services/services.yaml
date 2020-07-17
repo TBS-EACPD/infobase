@@ -1,0 +1,189 @@
+# Services list
+list_of_provided_services_title:
+  en: List of provided services
+  fr: TODO
+list_of_provided_services_desc:
+  transform: [handlebars, markdown]
+  en: |
+    **{{subject_name}}** is reporting on **{{num_of_services}}** services:
+  fr: |
+    TODO
+view_service:
+  en: See the service
+  fr: Voir le service
+filter_results_service:
+  en: Filter services by name or type
+  fr: Filtrer les services par nom ou par type   
+
+# Fees
+services_fees:
+  en: Service fees
+  fr: TODO
+services_fees_text:
+  transform: [handlebars, markdown]
+  en: Out of the **{{services_count}}** services that **{{subject_name}}** provides, **{{fmt_percentage1 charge_fees_percentage}}** charge fees.
+  fr: TODO
+service_charges_fees:
+  en: Service charges fees
+  fr: TODO
+service_does_not_charge_fees:
+  en: Service does not charge fees
+  fr: TODO
+
+# Identification methods
+identification_methods:
+  en: Identification Methods
+  fr: TODO
+uses_cra_as_identifier:
+  en: Uses CRA business number as identifier
+  fr: TODO
+uses_sin_as_identifier:
+  en: Uses SIN as identifier
+  fr: TODO
+does_not_use_cra_as_identifier:
+  en: Does not use CRA business number as identifier
+  fr: TODO
+does_not_use_sin_as_identifier:
+  en: Does not use SIN as identifier
+  fr: TODO
+sin_sub_title:
+  transform: [handlebars, markdown]
+  en: How many services use **SIN** as identifier?
+  fr: TODO
+cra_sub_title:
+  transform: [handlebars, markdown]
+  en: How many services use **CRA business number** as identifier?
+  fr: TODO
+
+# Digital Status
+services_digital_status_text:
+  transform: [handlebars, markdown]
+  en: |
+    In **{{subject_name}}, {{fmt_percentage1 total_online_digital_status_percentage}}** of service components can be performed online / electronically
+  fr: TODO
+services_digital_status:
+  en: Digital status of services
+  fr: TODO
+digital_status:
+  en: Digital status
+  fr: TODO
+account_reg_digital_desc:
+  en: A person or business can register a person, place or thing online
+  fr: TODO
+application_digital_desc:
+  en: They can apply online for this service
+  fr: TODO
+authentication_desc:
+  en: They can authenticate themselves online
+  fr: TODO
+decision_digital_desc:
+  en: They can be informed of the department's decision electronically
+  fr: TODO
+issuance_digital_desc:
+  en: They can be issued documentation online
+  fr: TODO
+issue_res_digital_desc:
+  en: They can provide feedback online
+  fr: TODO
+account_reg_digital:
+  en: Registeration
+  fr: TODO
+application_digital:
+  en: Application
+  fr: TODO
+authentication:
+  en: Authentication
+  fr: TODO
+decision_digital:
+  en: Decision
+  fr: TODO
+issuance_digital:
+  en: Issuance
+  fr: TODO
+issue_res_digital:
+  en: Feedback
+  fr: TODO
+
+# Channels
+service_channels_title:
+  en: Communication channels
+  fr: TODO
+service_channels_text:
+  en: Communication channels that this service uses for handling applications and enquiries
+  fr: TODO
+live_application:
+  en: In person applications
+  fr: TODO
+mail_application:
+  en: Applications by mail
+  fr: TODO
+online_application:
+  en: Online applications
+  fr: TODO
+other_application:
+  en: Applications by other channels
+  fr: TODO
+phone_inquiry:
+  en: Telephone enquiries
+  fr: TODO
+online_inquiry:
+  en: Online enquiries
+  fr: TODO
+
+# Overview
+overview_digital_status_title:
+  en: What components of this service are available online?
+  fr: TODO
+overview_digital_status_desc:
+  en: Online component of this service
+  fr: TODO
+service_types:
+  en: Service Types
+  fr: TODO
+online_status:
+  en: Online status
+  fr: TODO
+service_overview_title:
+  en: Overview
+  fr: TODO
+related_programs:
+  en: Related Programs
+  fr: TODO
+does_charge_fees:
+  transform: [handlebars, markdown]
+  en: This service **does** charge **fees**
+  fr: TODO
+does_not_charge_fees:
+  transform: [handlebars, markdown]
+  en: This service **does not** charge **fees**
+  fr: TODO
+standards_performance_text:
+  en: Overall standards performance for this service
+  fr: TODO
+service_single_link_text:
+  transform: [handlebars, markdown]
+  en: More details on this service can be found **{{ext_link "here" service_url }}**
+  fr: TODO
+service_links_text:
+  en: More details on this service can be found in the links below
+  fr: TODO
+
+# Standard
+service_standards_title:
+  en: Service Standards
+  fr: TODO
+service_standards_text:
+  en: Service Standards are used as metrics to indicate how the service is doing.
+  fr: TODO
+no_service_standards_text:
+  en: This service does not have any service standards
+  fr: TODO
+standard_name:
+  en: Standard name
+  fr: TODO
+standard_type:
+  en: Standard type
+  fr: TODO
+standard_channel:
+  en: Standard channel
+  fr: TODO
