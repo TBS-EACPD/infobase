@@ -10,6 +10,10 @@ services {
     name
   }
 
+  first_active_year
+  last_active_year
+  is_active
+
   name
   description
   service_type
@@ -64,6 +68,7 @@ services {
       lower
       count
       met_count
+      is_target_met
       standard_report_comment  
     }
   },
