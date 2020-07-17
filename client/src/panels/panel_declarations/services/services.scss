@@ -11,13 +11,38 @@
   background-color: lighten($tertiaryColor, 37%);
   border: 2px solid $primaryColor;
   border-radius: 5px;
-  padding: 0px 5px 0px;
   margin-bottom: 10px;
-  min-height: 60px;
+  padding: 5px;
 }
 .identifier-item {
   display: flex;
   justify-content: space-between;
+}
+ul.overview-ul {
+  margin: 0;
+  padding: 0;
+
+  & > li {
+    position: relative;
+    display: block;
+    padding: 8px;
+    background-color: inherit;
+
+    &:not(:first-child) {
+      border-top: 1px solid $tertiaryColor;
+    }
+    &:not(:last-child) {
+      border-bottom: 1px solid $tertiaryColor;
+    }
+
+    &.overview-ul__title,
+    & > .overview-ul__title {
+      display: flex;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: $heavyFontWeight;     
+    }
+  }
 }
 .id-method-text {
   text-align: center;
