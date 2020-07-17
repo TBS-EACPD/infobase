@@ -277,11 +277,7 @@ Statistics.create_and_register({
 
     add("fte_prg_num", first_year_prg_num);
 
-    const min_planning_yr =
-      "{{planning_year_" +
-      _.min(_.map(extended_planning_years, (XX) => Number(XX.match(/\d+/)))) +
-      "}}";
-
+    const min_planning_yr = extended_planning_years[0];
     const sorted_first_yr = q.get_top_x(["prgm", min_planning_yr], Infinity, {
       zip: true,
       sort_col: min_planning_yr,
