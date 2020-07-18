@@ -1,5 +1,5 @@
-import "./service_overview.scss";
-import text from "./service_overview.yaml";
+import "./services.scss";
+import text from "./services.yaml";
 import {
   create_text_maker_component,
   Panel,
