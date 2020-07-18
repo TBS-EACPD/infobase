@@ -10,20 +10,6 @@ import { TextPanel } from "../../shared.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const OverviewUL = ({ title, children }) => (
-  <ul className={"overview-ul"} aria-label={title}>
-    {title && (
-      <li className={"overview-ul__title"} aria-hidden={true}>
-        {title}
-      </li>
-    )}
-    {_.chain(children)
-      .compact()
-      .map((item, i) => <li key={i}>{item}</li>)
-      .value()}
-  </ul>
-);
-
 export class ServiceOverview extends React.Component {
   render() {
     const { service } = this.props;
