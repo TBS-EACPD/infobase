@@ -7,6 +7,7 @@ import { Subject } from "../../models/subject";
 import { infograph_href_template } from "../../link_utils.js";
 import {
   ServiceOverview,
+  ServiceOverviewV2,
   ServiceChannels,
   ServiceStandards,
   ServiceDigitalStatus,
@@ -63,6 +64,7 @@ export default class SingleServiceRoute extends React.Component {
         ) : (
           <div>
             <h1>{service.name}</h1>
+            <ServiceOverviewV2 service={service} />
             <ServiceOverview service={service} />
             <ServiceDigitalStatus service={service} />
             <ServiceChannels service={service} />
