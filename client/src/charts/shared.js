@@ -9,15 +9,32 @@ export const infobase_colors_smart = (col_scale) => (label) => {
   return col_scale(label);
 };
 
-export const get_formatter = (is_money, formatter, raw = true, full = false) =>
-  _.isUndefined(formatter)
-    ? !is_money
-      ? (value) => formats.big_int(value, { raw })
-      : raw
-      ? full
-        ? (value) => formats.dollar_raw(value)
-        : (value) => formats.compact2_raw(value)
-      : full
-      ? (value) => formats.dollar(value)
-      : (value) => formats.compact2(value)
-    : (value) => (raw ? formatter(value, { raw: true }) : formatter(value));
+export const get_formatter = (
+  is_money,
+  formatter,
+  raw = true,
+  full = false
+) => {
+  console.log(!is_money ? (value) => formats.big_int(value, { raw }) : raw);
+  if (_.isUndefined(formatter)) {
+    if (!is_money) {
+      return (value) => formats.big_int(value, { raw });
+    } else {
+      if (raw) {
+        if (full) {
+          return (value) => formats.dollar_raw(value);
+        } else {
+          return (value) => formats.compact2_raw(value);
+        }
+      } else {
+        if (full) {
+          return (value) => formats.dollar(value);
+        } else {
+          return (value) => formats.compact2(value);
+        }
+      }
+    }
+  } else {
+    return (value) => (raw ? formatter(value, { raw }) : formatter(value));
+  }
+};
