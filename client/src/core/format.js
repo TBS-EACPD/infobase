@@ -314,14 +314,14 @@ _.each(_.toPairs(types_to_format), (key_formatter) => {
   const key = key_formatter[0];
 
   formats[key] = (val, options) => {
-    if (!_.isObject(options) || _.isUndefined(options)) {
+    if (!_.isObject(options)) {
       options = {};
     }
     return formatter(key, val, options);
   };
 
   formats[key + "_raw"] = (val, options) => {
-    if (!_.isObject(options) || _.isUndefined(options)) {
+    if (!_.isObject(options)) {
       options = {};
     }
     options.raw = true;
