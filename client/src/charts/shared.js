@@ -15,7 +15,6 @@ export const get_formatter = (
   raw = true,
   full = false
 ) => {
-  console.log(!is_money ? (value) => formats.big_int(value, { raw }) : raw);
   if (_.isUndefined(formatter)) {
     if (!is_money) {
       return (value) => formats.big_int(value, { raw });
