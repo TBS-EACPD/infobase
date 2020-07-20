@@ -1,0 +1,3 @@
+ID,Issue types,Issue Details,Commit SHA,Route,Language,App Version,Client ID,Recipient,Sender,Referer,Server Time,Date,Time
+5f0f79905501c048a82130a2,bug,test,c29864d,start,en,standard,701659143.1594846137,Recipient <recipient@example.com>,Sender Name <sender@example.com>,http://localhost:8080/build/InfoBase/index-eng.html,Wed, 15 Jul 2020 21:48:00 GMT,7/15/2020,5:48:00 PM
+5f109934a9c6222fc809e7a2,bug & navigation,test,c29864d,orgs/dept/326/infograph/financial,en,standard,701659143.1594846137,Recipient <recipient@example.com>,Sender Name <sender@example.com>,http://localhost:8080/build/InfoBase/index-eng.html,Thu, 16 Jul 2020 18:15:16 GMT,7/16/2020,2:15:16 PM

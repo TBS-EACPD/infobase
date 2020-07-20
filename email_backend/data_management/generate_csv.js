@@ -1,6 +1,8 @@
 const fs = require("fs");
 const _ = require("lodash");
-var json = JSON.parse(fs.readFileSync("email_data.json", "utf8"));
+const json = JSON.parse(
+  fs.readFileSync("./data_management/email_data.json", "utf8")
+);
 const csv_format = [
   [
     "ID",
@@ -41,13 +43,16 @@ const reduced_json = _.map(json, function (report) {
 });
 
 _.map(reduced_json, function (report) {
-  report[server_time] = new Date(report[server_time]).csv_format.push(
-    _.values(report)
-  );
+  report["server_time"] = new Date(report["server_time"]).toUTCString();
+  csv_format.push(_.values(report));
 });
 
 const csv = _.map(csv_format, function (format) {
   return format.join(",");
 });
 
-console.log(csv);
+fs.writeFile("./data_management/email_data.csv", csv.join("\r\n"), function (
+  err
+) {
+  console.log(err || "Successfully Saved.");
+});
