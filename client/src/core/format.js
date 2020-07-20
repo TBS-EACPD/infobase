@@ -113,10 +113,9 @@ const compact = (precision, val, lang, options) => {
           return [abbrev[breakpoint][lang], val / breakpoint];
         }
       }
-      return pair || [abbrev[999][lang], val];
+      return [abbrev[999][lang], val];
     }
   })();
-  console.log(symbol, new_val);
 
   // for now, can't use the money formatter if we want to insert
   // custom symbols in the string. There is an experimental
@@ -151,33 +150,28 @@ const compact_written = (precision, val, lang, options) => {
   };
 
   const abs = Math.abs(val);
-  let rtn = "0";
-  let abbrev = "";
-  if (abs >= 50000) {
-    // "small numbers" is arbitrarily defined as < 50,000
-    let reduced_val;
 
-    if (abs >= 1000000000) {
-      reduced_val = val / 1000000000;
-      abbrev = abbrevs[1000000000][lang];
-    } else if (abs >= 1000000) {
-      reduced_val = val / 1000000;
-      abbrev = abbrevs[1000000][lang];
-    } else {
-      reduced_val = val / 1000;
-      abbrev = abbrevs[1000][lang];
-      if (precision < 2) {
-        precision = 0;
+  const [rtn, abbrev] = (() => {
+    if (abs >= 50000) {
+      for (let i = 0; i < 3; i++) {
+        //can't break out of a lodash loop
+        const breakpoint = 1000000000 / Math.pow(10, i * 3); //checking 1B, 1M, and 1K
+        precision = i === 2 && precision < 2 ? 0 : precision;
+        if (abs >= breakpoint) {
+          return [
+            number_formatter[lang][precision].format(val / breakpoint),
+            abbrevs[breakpoint][lang],
+          ];
+        }
       }
+    } else {
+      precision = precision < 2 ? 0 : precision;
+      return [
+        number_formatter[lang][precision].format(val),
+        abbrevs[999][lang],
+      ];
     }
-    rtn = number_formatter[lang][precision].format(reduced_val);
-  } else {
-    if (precision < 2) {
-      precision = 0;
-    }
-    abbrev = abbrevs[999][lang];
-    rtn = number_formatter[lang][precision].format(val);
-  }
+  })();
 
   if (options.raw) {
     return lang === "fr" ? `${rtn}${abbrev} de dollars` : `$${rtn}${abbrev}`;
