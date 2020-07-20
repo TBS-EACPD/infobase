@@ -102,24 +102,21 @@ const compact = (precision, val, lang, options) => {
   };
 
   const abs = Math.abs(val);
-  let symbol;
-  let new_val;
-  if (val === 0) {
-    new_val = 0;
-    symbol = "";
-  } else if (abs >= 1000000000) {
-    new_val = val / 1000000000;
-    symbol = abbrev[1000000000][lang];
-  } else if (abs >= 1000000) {
-    new_val = val / 1000000;
-    symbol = abbrev[1000000][lang];
-  } else if (abs >= 1000) {
-    new_val = val / 1000;
-    symbol = abbrev[1000][lang];
-  } else {
-    new_val = val;
-    symbol = abbrev[999][lang];
-  }
+  const [symbol, new_val] = (() => {
+    if (val === 0) {
+      return ["", 0];
+    } else {
+      for (let i = 0; i < 3; i++) {
+        //can't break out of a lodash loop
+        const breakpoint = 1000000000 / Math.pow(10, i * 3); //checking 1B, 1M, and 1K
+        if (abs >= breakpoint) {
+          return [abbrev[breakpoint][lang], val / breakpoint];
+        }
+      }
+      return pair || [abbrev[999][lang], val];
+    }
+  })();
+  console.log(symbol, new_val);
 
   // for now, can't use the money formatter if we want to insert
   // custom symbols in the string. There is an experimental
