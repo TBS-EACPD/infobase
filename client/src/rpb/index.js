@@ -294,21 +294,29 @@ class RPB extends React.Component {
                   broken_url={broken_url}
                 />
               ) : (
-                <button
-                  className="btn btn-ib-primary"
-                  style={{ width: "100%" }}
-                  onClick={() => {
-                    this.setState({ table_picking: true });
-                  }}
-                >
-                  <TextMaker
-                    text_key={
-                      table
-                        ? "select_another_table_button"
-                        : "select_table_button"
-                    }
-                  />
-                </button>
+                <React.Fragment>
+                  <button
+                    className="btn btn-ib-primary"
+                    style={{ width: "100%" }}
+                    onClick={() => {
+                      this.setState({ table_picking: true });
+                    }}
+                  >
+                    <TextMaker
+                      text_key={
+                        table
+                          ? "select_another_table_button"
+                          : "select_table_button"
+                      }
+                    />
+                  </button>
+                  <button
+                    className="btn btn-ib-secondary"
+                    style={{ width: "100%", marginTop: "5px" }}
+                  >
+                    <TextMaker text_key="use_legal_title" />
+                  </button>
+                </React.Fragment>
               )}
             </div>
             {!window.is_a11y_mode && (
