@@ -33,7 +33,7 @@ export class ServiceChannels extends React.Component {
       .value();
 
     return (
-      <Panel title={text_maker("service_channels_title")}>
+      <Panel title={text_maker("single_service_channels_title")}>
         <TM k="service_channels_text" className="medium_panel_text" />
         <NivoResponsiveHBar
           data={data}

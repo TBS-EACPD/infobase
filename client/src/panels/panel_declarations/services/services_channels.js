@@ -53,12 +53,15 @@ class ServicesChannelsPanel extends React.Component {
     return (
       <div>
         <StandardLegend
-          items={_.map(services, ({ service_id, name }) => ({
-            id: service_id,
-            label: name,
-            color: colors(name),
-            active: active_services[service_id],
-          }))}
+          items={_.chain(services)
+            .map(({ service_id, name }) => ({
+              id: service_id,
+              label: name,
+              color: colors(name),
+              active: active_services[service_id],
+            }))
+            .sortBy("label")
+            .value()}
           onClick={(id) =>
             this.setState({
               active_services: {
@@ -120,7 +123,7 @@ export const declare_services_channels_panel = () =>
         const { panel_args } = calculations;
         return (
           <InfographicPanel
-            title={text_maker("service_channels_title")}
+            title={text_maker("services_channels_title")}
             sources={sources}
           >
             <ServicesChannelsPanel panel_args={panel_args} />
