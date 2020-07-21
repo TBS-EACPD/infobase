@@ -74,11 +74,15 @@ _.map(templates, (template_value, template_name) => {
   //will be cleaner if we flatten the "key.value" to "value"
 
   collection.find({}, function (err, submissions) {
-    const csv_format = _.map(_.keys(collection.schema.paths), (key) => {
-      const key_split = key.split(".");
-      return key_split.length > 1 ? key_split[1] : key;
-    });
-    const csv = [csv_format];
+    const csv_format = _.chain(_.keys(collection.schema.paths))
+      .filter((key) => {
+        return key !== "__v";
+      })
+      .map((key) => {
+        const key_split = key.split(".");
+        return key_split.length > 1 ? key_split[1] : key;
+      })
+      .value();
 
     const reduced_json = _.map(submissions, function (sub) {
       return _.reduce(
@@ -105,14 +109,16 @@ _.map(templates, (template_value, template_name) => {
       return report;
     });
 
-    _.map(time_fixed_json, (submission) => {
-      csv_format.push(
-        _.map(csv_format, (key) => {
-          console.log(key);
+    const csv = _.concat(
+      [csv_format],
+      _.map(time_fixed_json, (submission) => {
+        return _.map(csv_format, (key) => {
           return _.has(submission, key) ? submission[key] : "";
-        })
-      );
-    });
+        });
+      })
+    );
+
+    console.log(csv);
 
     // console.log(csv_format);
   });
