@@ -135,20 +135,17 @@ export class ServiceOverviewV2 extends React.Component {
           </dd>
           <dt>{text_maker("service_link_text")}</dt>
           <dd>
-            {!_.isEmpty(service.urls) &&
-              (service.urls.length === 1 ? (
-                <a>{service.urls[0]}</a>
-              ) : (
-                <div>
-                  {_.map(service.urls, (url, i) => (
-                    <p key={url}>
-                      <a href={url} target="_blank" rel="noopener noreferrer">
-                        {`${text_maker("link")} ${i + 1}`}
-                      </a>
-                    </p>
-                  ))}
-                </div>
-              ))}
+            {service.urls.length === 1 ? (
+              <a>{service.urls[0]}</a>
+            ) : (
+              _.map(service.urls, (url, i) => (
+                <p key={url}>
+                  <a href={url} target="_blank" rel="noopener noreferrer">
+                    {`${text_maker("link")} ${i + 1}`}
+                  </a>
+                </p>
+              ))
+            )}
           </dd>
         </dl>
       </TextPanel>
