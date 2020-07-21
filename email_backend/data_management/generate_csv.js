@@ -69,22 +69,17 @@ _.map(templates, (template_value, template_name) => {
     template_name,
   });
 
-  // if (template_name === "report_a_problem") {
-  //   collection.find({}, function (err, report) {
-  //     console.log(report);
-  //   });
-  // }
-
   //if it happens that later on we add another key with a json value,
   //change reduced json to handle "key.value". For the time being, the CSV
   //will be cleaner if we flatten the "key.value" to "value"
-  const csv_format = _.map(_.keys(collection.schema.paths), (key) => {
-    const key_split = key.split(".");
-    return key_split.length > 1 ? key_split[1] : key;
-  });
-  const csv = [csv_format];
 
   collection.find({}, function (err, submissions) {
+    const csv_format = _.map(_.keys(collection.schema.paths), (key) => {
+      const key_split = key.split(".");
+      return key_split.length > 1 ? key_split[1] : key;
+    });
+    const csv = [csv_format];
+
     const reduced_json = _.map(submissions, function (sub) {
       return _.reduce(
         sub._doc,
@@ -105,9 +100,21 @@ _.map(templates, (template_value, template_name) => {
       );
     });
 
-    console.log(reduced_json);
+    const time_fixed_json = _.map(reduced_json, function (report) {
+      report["server_time"] = new Date(report["server_time"]).toUTCString();
+      return report;
+    });
 
-    // console.log(csv);
+    _.map(time_fixed_json, (submission) => {
+      csv_format.push(
+        _.map(csv_format, (key) => {
+          console.log(key);
+          return _.has(submission, key) ? submission[key] : "";
+        })
+      );
+    });
+
+    // console.log(csv_format);
   });
 });
 // const original_template = templates["report_a_problem"];
