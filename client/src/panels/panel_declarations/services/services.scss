@@ -8,11 +8,14 @@
   }
 }
 .service-overview-rect {
-  background-color: $backgroundColor;
+  background-color: lighten($tertiaryColor, 37%);
   border: 2px solid $primaryColor;
   border-radius: 5px;
   margin-bottom: 10px;
   padding: 5px;
+}
+.service-overview-rect-progress {
+  background-color: $backgroundColor;
 }
 .identifier-item {
   display: flex;
