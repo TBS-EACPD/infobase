@@ -7,7 +7,9 @@ export default class ProgressGauge extends React.Component {
     const { value, total_value, circle_color } = this.props;
     const percentage = value / total_value;
 
-    const progress_gauge = _.times(10, (i) => {
+    const num_circles = total_value < 10 ? total_value : 10;
+
+    const progress_gauge = _.times(num_circles, (i) => {
       const filled_circle_style = {
         background:
           circle_color || (percentage > 0.5 ? successDarkColor : highlightDark),
@@ -19,7 +21,11 @@ export default class ProgressGauge extends React.Component {
         <span
           key={i}
           className="progress-circle"
-          style={i < percentage * 10 ? filled_circle_style : empty_circle_style}
+          style={
+            i < percentage * num_circles
+              ? filled_circle_style
+              : empty_circle_style
+          }
         />
       );
     });
