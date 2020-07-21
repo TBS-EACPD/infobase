@@ -3,8 +3,8 @@ import { IconX, IconCheck, IconNotApplicable } from "../../../icons/icons.js";
 
 const digital_status_keys = [
   "account_reg_digital",
-  "application_digital",
   "authentication",
+  "application_digital",
   "decision_digital",
   "issuance_digital",
   "issue_res_digital",
