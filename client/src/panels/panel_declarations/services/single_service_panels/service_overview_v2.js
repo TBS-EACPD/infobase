@@ -50,7 +50,7 @@ export class ServiceOverviewV2 extends React.Component {
                     alignItems: "center",
                     paddingBottom: "10px",
                   }}
-                  className="service-overview-rect"
+                  className="service-overview-rect service-overview-progress-rect"
                 >
                   <ProgressGauge
                     value={
@@ -135,17 +135,14 @@ export class ServiceOverviewV2 extends React.Component {
           </dd>
           <dt>{text_maker("service_link_text")}</dt>
           <dd>
-            {service.urls.length === 1 ? (
-              <a>{service.urls[0]}</a>
-            ) : (
+            {!_.isEmpty(service.urls) &&
               _.map(service.urls, (url, i) => (
                 <p key={url}>
                   <a href={url} target="_blank" rel="noopener noreferrer">
                     {`${text_maker("link")} ${i + 1}`}
                   </a>
                 </p>
-              ))
-            )}
+              ))}
           </dd>
         </dl>
       </TextPanel>
