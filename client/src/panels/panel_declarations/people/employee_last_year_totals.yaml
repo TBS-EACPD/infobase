@@ -1,7 +1,7 @@
 dept_employee_last_year_totals_title:
   transform: [handlebars]
   en: Total Population ({{ppl_last_year}})
-  fr: Total des personnels ({{ppl_last_year}})
+  fr: Total du personnel ({{ppl_last_year}})
 
 dept_employee_last_year_totals_text:
   transform: [handlebars,markdown]
