@@ -9,8 +9,8 @@ list_of_provided_services_desc:
   fr: |
     TODO
 view_service:
-  en: See the service
-  fr: Voir le service
+  en: Explore the service
+  fr: TODO
 filter_results_service:
   en: Filter services by name or type
   fr: Filtrer les services par nom ou par type   
@@ -21,7 +21,7 @@ services_fees:
   fr: TODO
 services_fees_text:
   transform: [handlebars, markdown]
-  en: Out of the **{{services_count}}** services that **{{subject_name}}** provides, **{{fmt_percentage1 charge_fees_percentage}}** charge fees.
+  en: Out of the **{{services_count}}** services that **{{subject_name}}** provides, **{{charge_fees_count}}** services charge fees.
   fr: TODO
 service_charges_fees:
   en: Service charges fees
@@ -48,11 +48,11 @@ does_not_use_sin_as_identifier:
   fr: TODO
 sin_sub_title:
   transform: [handlebars, markdown]
-  en: How many services use **SIN** as identifier?
+  en: How many services use **SIN** as a standard identifier?
   fr: TODO
 cra_sub_title:
   transform: [handlebars, markdown]
-  en: How many services use **CRA business number** as identifier?
+  en: How many services use **CRA business number** as a standard identifier?
   fr: TODO
 
 # Digital Status
@@ -62,10 +62,10 @@ services_digital_status_text:
     In **{{subject_name}}, {{fmt_percentage1 total_online_digital_status_percentage}}** of service components can be performed online / electronically
   fr: TODO
 services_digital_status:
-  en: Digital status of services
+  en: Digital Status of services
   fr: TODO
 digital_status:
-  en: Digital status
+  en: Digital Status of this service
   fr: TODO
 account_reg_digital_desc:
   en: A person or business can register a person, place or thing online
@@ -105,8 +105,11 @@ issue_res_digital:
   fr: TODO
 
 # Channels
-service_channels_title:
-  en: Communication channels
+services_channels_title:
+  en: Delivery Channels of services
+  fr: TODO
+single_service_channels_title:
+  en: Delivery Channels of this service
   fr: TODO
 service_channels_text:
   en: Communication channels that this service uses for handling applications and enquiries
@@ -151,17 +154,14 @@ related_programs:
   fr: TODO
 does_charge_fees:
   transform: [handlebars, markdown]
-  en: This service **does** charge **fees**
+  en: This service **does** charge fees
   fr: TODO
 does_not_charge_fees:
   transform: [handlebars, markdown]
-  en: This service **does not** charge **fees**
+  en: This service **does not** charge fees
   fr: TODO
 standards_performance_text:
   en: Overall standards performance for this service
-  fr: TODO
-service_link_text:
-  en: More details (external links)
   fr: TODO
 service_single_link_text:
   transform: [handlebars, markdown]
