@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 import { infobase_colors_smart } from "./wrapped_nivo_common.js";
 import { WrappedNivoBar } from "././wrapped_nivo_bar.js";
-import { WrappedNivoLine } from "./wrapped_nivo_line.js";
+import { WrappedNivoLine } from "./WrappedNivoLine.js";
 
 import { StandardLegend } from "../legends";
 import { newIBCategoryColors } from "../../core/color_schemes.js";
