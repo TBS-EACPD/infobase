@@ -38,7 +38,7 @@ const template_type_to_schema_type = (value_type) => {
       return String;
   }
 };
-const make_mongoose_model_from_original_template = _.memoize(
+export const make_mongoose_model_from_original_template = _.memoize(
   ({ original_template, template_name }) => {
     const template_schema = _.chain(original_template)
       .mapValues(({ required, value_type }) => ({

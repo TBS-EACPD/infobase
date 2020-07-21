@@ -43,7 +43,8 @@
     "merge_coverage_reports": "merge-coverage-reports --report ./coverage/*/coverage-final.json",
     "create_coverage_shield_badge": "create-coverage-shield-badge --report ./coverage/coverage-final.json > ./coverage/coverage-shield-badge.svg",
     "mongod": "sh ../scripts/dev_scripts/local_mongod.sh -p 27018",
-    "extract_emails": "mongo --quiet data_management/generate_json.js > data_management/email_data.json; node data_management/generate_csv.js"
+    "extract_emails": "mongo --quiet data_management/generate_json.js > data_management/email_data.json; node data_management/generate_csv.js",
+    "extract": "npm run prebuild; npm run build; node transpiled_build/generate_csv.js"
   },
   "authors": [
     "Stephen O'Neil"
