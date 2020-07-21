@@ -62,7 +62,7 @@ export default {
             "Corresponds to the active employee population by Gender, as of March 31 " +
             people_years_short_second[ix],
           fr:
-            "Correspond à le personnel actif par sexe, au 31 mars " +
+            "Correspond au personnel actif par sexe, au 31 mars " +
             people_years_short_second[ix],
         },
       });
