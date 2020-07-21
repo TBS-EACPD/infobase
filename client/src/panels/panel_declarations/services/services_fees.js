@@ -20,8 +20,7 @@ const ServicesFeesPanel = ({ panel_args }) => {
         args={{
           subject_name: subject.name,
           services_count: services.length,
-          charge_fees_percentage:
-            service_charges_fees.true / services.length || 0,
+          charge_fees_count: service_charges_fees.true || 0,
         }}
         className="medium_panel_text"
       />

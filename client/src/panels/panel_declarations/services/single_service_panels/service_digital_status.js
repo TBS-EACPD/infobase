@@ -46,6 +46,7 @@ export class ServiceDigitalStatus extends React.Component {
       <Panel title={text_maker("digital_status")}>
         <TM className="medium_panel_text" k="overview_digital_status_title" />
         <DisplayTable
+          unsorted_initial={true}
           data={_.map(digital_status_keys, (key) => ({
             overview_digital_status_desc: key,
             digital_status: service[`${key}_status`],
