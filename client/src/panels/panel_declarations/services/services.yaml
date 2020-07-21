@@ -170,6 +170,9 @@ service_single_link_text:
 service_links_text:
   en: More details on this service can be found in the links below
   fr: TODO
+service_link_text:
+  en: More details (external links)
+  fr: TODO
 
 # Standard
 service_standards_title:
