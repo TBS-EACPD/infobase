@@ -52,6 +52,7 @@ class GranularView extends React.Component {
       filters_by_dimension,
       dimension,
       filter,
+      use_legal_titles,
     } = this.props;
 
     const non_dept_key_cols = _.reject(sorted_key_columns, { nick: "dept" });
@@ -81,13 +82,19 @@ class GranularView extends React.Component {
         .fromPairs()
         .value(),
     };
-    const table_data = _.map(flat_data, (row) => ({
-      dept: Dept.lookup(row.dept).name,
-      ..._.chain(cols)
-        .map(({ nick }) => [nick, row[nick]])
-        .fromPairs()
-        .value(),
-    }));
+    const table_data = _.map(flat_data, (row) => {
+      const org = Dept.lookup(row.dept);
+      return {
+        dept:
+          use_legal_titles && _.has(org, "legal_title")
+            ? org.legal_title
+            : org.name,
+        ..._.chain(cols)
+          .map(({ nick }) => [nick, row[nick]])
+          .fromPairs()
+          .value(),
+      };
+    });
 
     const group_filter_options = _.map(
       filters_by_dimension,
