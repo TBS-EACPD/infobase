@@ -1,4 +1,4 @@
 meta,issue_type,issue_details,sha,route,lang,app_version,client_id,additional,to,from,referer,server_time,date,time,_id
-
-,
-,,
+,bug,test,c29864d,start,en,standard,701659143.1594846137,,Recipient <recipient@example.com>,Sender Name <sender@example.com>,http://localhost:8080/build/InfoBase/index-eng.html,Wed, 15 Jul 2020 21:48:00 GMT,7/15/2020,5:48:00 PM,5f0f79905501c048a82130a2
+,bug & navigation,test,c29864d,orgs/dept/326/infograph/financial,en,standard,701659143.1594846137,,Recipient <recipient@example.com>,Sender Name <sender@example.com>,http://localhost:8080/build/InfoBase/index-eng.html,Thu, 16 Jul 2020 18:15:16 GMT,7/16/2020,2:15:16 PM,5f109934a9c6222fc809e7a2
+,navigation,test,7a9132a,start,en,standard,701659143.1594846137,,Recipient <recipient@example.com>,Sender Name <sender@example.com>,http://localhost:8080/build/InfoBase/index-eng.html,Tue, 21 Jul 2020 16:56:28 GMT,7/21/2020,12:56:28 PM,5f171e3cae8c8a44f1d2a71a
