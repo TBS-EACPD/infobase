@@ -106,7 +106,7 @@ const compact = (precision, val, lang, options) => {
     if (val === 0) {
       return ["", 0];
     } else {
-      const compactted = _.filter(
+      const compacted = _.filter(
         _.times(3, (i) => {
           //can't break out of a lodash loop
           const breakpoint = 1000000000 / Math.pow(10, i * 3); //checking 1B, 1M, and 1K
@@ -118,7 +118,7 @@ const compact = (precision, val, lang, options) => {
           return !_.isUndefined(pair);
         }
       );
-      return compactted.length > 0 ? compactted[0] : [abbrev[999][lang], val];
+      return compacted.length > 0 ? compacted[0] : [abbrev[999][lang], val];
     }
   })();
 
@@ -158,17 +158,24 @@ const compact_written = (precision, val, lang, options) => {
 
   const [rtn, abbrev] = (() => {
     if (abs >= 50000) {
-      for (let i = 0; i < 3; i++) {
-        //can't break out of a lodash loop
-        const breakpoint = 1000000000 / Math.pow(10, i * 3); //checking 1B, 1M, and 1K
-        precision = i === 2 && precision < 2 ? 0 : precision;
-        if (abs >= breakpoint) {
-          return [
-            number_formatter[lang][precision].format(val / breakpoint),
-            abbrevs[breakpoint][lang],
-          ];
+      const compacted = _.filter(
+        _.times(3, (i) => {
+          //can't break out of a lodash loop
+          const breakpoint = 1000000000 / Math.pow(10, i * 3); //checking 1B, 1M, and 1K
+          precision = i === 2 && precision < 2 ? 0 : precision;
+          if (abs >= breakpoint) {
+            return [
+              number_formatter[lang][precision].format(val / breakpoint),
+              abbrevs[breakpoint][lang],
+            ];
+          }
+        }),
+        (pair) => {
+          return !_.isUndefined(pair);
         }
-      }
+      );
+
+      return compacted[0];
     } else {
       precision = precision < 2 ? 0 : precision;
       return [
