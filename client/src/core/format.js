@@ -106,14 +106,19 @@ const compact = (precision, val, lang, options) => {
     if (val === 0) {
       return ["", 0];
     } else {
-      for (let i = 0; i < 3; i++) {
-        //can't break out of a lodash loop
-        const breakpoint = 1000000000 / Math.pow(10, i * 3); //checking 1B, 1M, and 1K
-        if (abs >= breakpoint) {
-          return [abbrev[breakpoint][lang], val / breakpoint];
+      const compactted = _.filter(
+        _.times(3, (i) => {
+          //can't break out of a lodash loop
+          const breakpoint = 1000000000 / Math.pow(10, i * 3); //checking 1B, 1M, and 1K
+          if (abs >= breakpoint) {
+            return [abbrev[breakpoint][lang], val / breakpoint];
+          }
+        }),
+        (pair) => {
+          return !_.isUndefined(pair);
         }
-      }
-      return [abbrev[999][lang], val];
+      );
+      return compactted.length > 0 ? compactted[0] : [abbrev[999][lang], val];
     }
   })();
 
