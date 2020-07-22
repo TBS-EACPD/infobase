@@ -27,6 +27,9 @@ td {
   justify-content: center;
   height: 350px;
 }
+.total_color, .total_color * {
+  color: $textLightColor !important
+}
 
 table.display-table {
   width: 99.9%; // avoid annoying always-there x-overflow caused by sub-pixel table border
@@ -84,9 +87,6 @@ table.display-table:not(.no-total-row) > tbody > tr > td {
 
 table.display-table:not(.no-total-row) > tbody > tr:last-child {
   background-color: $primaryColor;
-}
-table.display-table:not(.no-total-row) > tbody > tr:last-child > td {
-  color: $textLightColor !important;
 }
 
 table.display-table:not(.no-total-row) > tbody > tr:last-child > td:not(:last-child) {
