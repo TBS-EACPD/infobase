@@ -3,6 +3,7 @@ import { get_templates } from "../transpiled_build/template_utils";
 import { make_mongoose_model_from_original_template } from "../transpiled_build/db_utils/log_email_and_meta_to_db";
 import _ from "lodash";
 import fs from "fs";
+import mongoose from "mongoose";
 connect_db();
 const templates = get_templates();
 _.map(templates, (template_value, template_name) => {
@@ -47,7 +48,9 @@ _.map(templates, (template_value, template_name) => {
     });
 
     const time_fixed_json = _.map(reduced_json, function (report) {
-      report["server_time"] = new Date(report["server_time"]).toUTCString();
+      report["server_time"] = new Date(report["server_time"])
+        .toUTCString()
+        .replace(/,/g, "");
       return report;
     });
 
@@ -60,14 +63,12 @@ _.map(templates, (template_value, template_name) => {
       })
     );
 
-    console.log(csv_format);
-
     const csv = _.map(csv_format, function (format) {
       return format.join(",");
     });
 
     fs.writeFile(
-      `./data_management/${template_name}_emails.csv`,
+      `./data_management/CSVs/${template_name}_emails.csv`,
       csv.join("\r\n"),
       function (err) {
         console.log(err || "Successfully Saved.");
@@ -75,3 +76,5 @@ _.map(templates, (template_value, template_name) => {
     );
   });
 });
+
+mongoose.connection.close();
