@@ -187,7 +187,9 @@ class InteractiveGraph extends React.Component {
     return (
       <Fragment>
         <div>
-          {/* Don't get rid of this div, need it for proper functioning of the child selectors on the buttons (editors note: huh???)*/}
+          {/* don't remove this div: btn-ib-array requires a parent to determine its 
+          position as a child which allows for the pseudo-classes :first-child
+          and :last-child to be added to the required buttons*/}
           {table && (
             <button
               className={classNames("btn-ib-primary", "btn-ib-array")}
@@ -205,9 +207,7 @@ class InteractiveGraph extends React.Component {
               />
             </button>
           )}
-          {_.map(other_buttons, (button, i) => (
-            <Fragment key={i}>{button}</Fragment>
-          ))}
+          {_.map(other_buttons, (button, i) => button)}
         </div>
         {graph}
         <StatelessModal
