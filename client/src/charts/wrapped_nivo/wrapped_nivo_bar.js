@@ -212,8 +212,6 @@ export class WrappedNivoHBar extends React.Component {
         table_first_column_name
       );
 
-    //have to have an empty string in key to make sure
-    //that negative bars will be displayed
     const graph = (
       <div
         className="centerer"
@@ -242,7 +240,7 @@ export class WrappedNivoHBar extends React.Component {
           }}
           legends={fix_legend_symbols(legends)}
           layout="horizontal"
-          keys={_.union([""], keys)}
+          keys={keys}
           labelTextColor={window.infobase_color_constants.textColor}
           labelFormat={_.isUndefined(label_format) ? null : label_format}
           tooltip={(d) =>
