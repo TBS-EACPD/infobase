@@ -99,7 +99,6 @@ export class WrappedNivoBar extends React.Component {
           table_first_column_name
         ));
 
-    // have to have an empty string in key to make sure that negative bars will be displayed
     const graph = (
       <div style={{ height: graph_height }} aria-hidden="true">
         <ResponsiveBar
@@ -127,7 +126,7 @@ export class WrappedNivoBar extends React.Component {
             motionStiffness,
           }}
           legends={fix_legend_symbols(legends)}
-          keys={_.union([""], keys)}
+          keys={keys}
           labelFormat={_.isUndefined(label_format) ? null : label_format}
           labelTextColor={window.infobase_color_constants.textColor}
           tooltip={(d) =>
