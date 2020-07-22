@@ -382,6 +382,7 @@ class RPB extends React.Component {
                 {...this.props.state}
                 {...this.table_handlers}
                 {...options}
+                use_legal_titles={use_legal_titles}
               />
             ) : null}
           </Fragment>
