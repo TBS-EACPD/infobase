@@ -31,6 +31,7 @@ const column_config_defaults = {
 /* Assumption: DisplayTable assumes 1st column to be string that describes its row
   - If total row exists, 1st column will have the word "Total"
   - 1st column cannot be toggled off by user
+  - Total row color is set to $textLightColor, see total_color
 */
 export class DisplayTable extends React.Component {
   constructor(props) {
@@ -368,11 +369,12 @@ export class DisplayTable extends React.Component {
               ))}
               {is_total_exist && (
                 <tr key="total_row">
-                  <td>{text_maker("total")}</td>
+                  <td className="total_color">{text_maker("total")}</td>
                   {_.chain(visible_ordered_col_keys)
                     .tail()
                     .map((col_key) => (
                       <td
+                        className="total_color"
                         style={{
                           textAlign: determine_text_align(total_row, col_key),
                         }}
