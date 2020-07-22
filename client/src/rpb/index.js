@@ -96,6 +96,7 @@ class RPB extends React.Component {
     if (props.state.table) {
       this.state = {
         table_picking: false,
+        use_legal_titles: false,
         ...props.state,
       };
     } else {
@@ -103,6 +104,7 @@ class RPB extends React.Component {
         loading: false,
         table_picking: true,
         selected_subject: null,
+        use_legal_titles: false,
         ...props.state,
       };
     }
@@ -164,6 +166,8 @@ class RPB extends React.Component {
 
   render() {
     const { broken_url } = this.props;
+
+    const { use_legal_titles } = this.state;
 
     const table = this.state.table && Table.lookup(this.state.table);
 
@@ -313,8 +317,17 @@ class RPB extends React.Component {
                   <button
                     className="btn btn-ib-secondary"
                     style={{ width: "100%", marginTop: "5px" }}
+                    onClick={() => {
+                      this.setState({ use_legal_titles: !use_legal_titles });
+                    }}
                   >
-                    <TextMaker text_key="use_legal_title" />
+                    <TextMaker
+                      text_key={
+                        use_legal_titles
+                          ? "use_applied_title"
+                          : "use_legal_title"
+                      }
+                    />
                   </button>
                 </React.Fragment>
               )}
@@ -355,7 +368,6 @@ class RPB extends React.Component {
                     onSelect={(id) => this.pickTable(id)}
                     broken_url={broken_url}
                   />
-                  }
                 </div>
               </AriaModal>
             )}
