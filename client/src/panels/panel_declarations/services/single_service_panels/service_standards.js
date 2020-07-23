@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import text from "../services.yaml";
+import FootNote from "../../../../models/footnotes/footnotes.js";
 import {
   create_text_maker_component,
   Panel,
@@ -30,6 +31,21 @@ export class ServiceStandards extends React.Component {
     const { active_statuses } = this.state;
     const { result_simple_statuses } = businessConstants;
     const standards = service.standards;
+
+    const footnotes = _.chain(standards)
+      .map(
+        (standard) =>
+          standard.other_type_comment &&
+          FootNote.create_and_register({
+            id: `other_type_comment_${standard.standard_id}`,
+            topic_keys: ["OTHER_TYPE_COMMENT"],
+            subject: service,
+            text: standard.other_type_comment,
+          })
+      )
+      .filter()
+      .value();
+
     const data = _.chain(standards)
       .map(({ name, type, channel, standard_report }) =>
         _.map(standard_report, ({ year, count, met_count, is_target_met }) => ({
@@ -100,7 +116,10 @@ export class ServiceStandards extends React.Component {
     );
 
     return (
-      <Panel title={text_maker("service_standards_title")}>
+      <Panel
+        title={text_maker("service_standards_title")}
+        footnotes={footnotes}
+      >
         {!_.isEmpty(data) ? (
           <Fragment>
             <TM className="medium_panel_text" k="service_standards_text" />

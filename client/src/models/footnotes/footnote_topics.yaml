@@ -136,6 +136,14 @@ MACHINERY:
   en: Machinery of Government Changes
   fr: Changement à l'appareil gouvernemental
 
+DIGITAL_STATUS:
+  en: Digital Status
+  fr: TODO
+
+OTHER_TYPE_COMMENT:
+  en: Other type comment
+  fr: TODO
+
 ANY:
   en: Any
   fr: Tout
