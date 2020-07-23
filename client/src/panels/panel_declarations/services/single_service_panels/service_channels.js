@@ -9,6 +9,23 @@ export class ServiceChannels extends React.Component {
   render() {
     const { service } = this.props;
     const colors = infobase_colors();
+    const { max_channel_key, max_value } = _.reduce(
+      service_channels_keys,
+      (max_data, key) => {
+        const key_count = `${key}_count`;
+        const max_object_for_key = _.maxBy(service.service_report, key_count);
+        const max_value_for_key = max_object_for_key
+          ? max_object_for_key[key_count]
+          : 0;
+        return max_value_for_key > max_data.max_value
+          ? {
+              max_channel_key: key,
+              max_value: max_value_for_key,
+            }
+          : max_data;
+      },
+      { max_channel_key: "", max_value: 0 }
+    );
 
     const data = _.chain(service_channels_keys)
       .filter((key) =>
@@ -34,7 +51,14 @@ export class ServiceChannels extends React.Component {
 
     return (
       <Panel title={text_maker("single_service_channels_title")}>
-        <TM k="service_channels_text" className="medium_panel_text" />
+        <TM
+          k="service_channels_text"
+          className="medium_panel_text"
+          args={{
+            max_channel_key: text_maker(max_channel_key),
+            max_value: max_value,
+          }}
+        />
         <WrappedNivoHBar
           data={data}
           indexBy="label"
