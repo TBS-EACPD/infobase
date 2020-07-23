@@ -1,4 +1,5 @@
 import text from "../services.yaml";
+import FootNote from "../../../../models/footnotes/footnotes.js";
 import {
   create_text_maker_component,
   Panel,
@@ -15,6 +16,14 @@ const { text_maker, TM } = create_text_maker_component(text);
 export class ServiceDigitalStatus extends React.Component {
   render() {
     const { service } = this.props;
+    const footnote = service.digital_enablement_comment && [
+      FootNote.create_and_register({
+        id: `digital_enablement_comment_${service.id}`,
+        topic_keys: ["DIGITAL_STATUS"],
+        subject: service,
+        text: service.digital_enablement_comment,
+      }),
+    ];
 
     const column_configs = {
       overview_digital_status_desc: {
@@ -43,7 +52,7 @@ export class ServiceDigitalStatus extends React.Component {
     };
 
     return (
-      <Panel title={text_maker("digital_status")}>
+      <Panel title={text_maker("digital_status")} footnotes={footnote}>
         <TM className="medium_panel_text" k="overview_digital_status_title" />
         <DisplayTable
           unsorted_initial={true}

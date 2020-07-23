@@ -10,7 +10,7 @@ export default class FootNote extends mix().with(staticStoreMixin) {
   static create_and_register(def) {
     const { id } = def;
     if (footnotes_by_id[id]) {
-      return footnotes_by_id;
+      return footnotes_by_id[id];
     } else {
       const key = def.subject_class ? def.subject_class : def.subject;
       const inst = new this(def);
