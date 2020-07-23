@@ -2,7 +2,11 @@ import "../services.scss";
 import text from "../services.yaml";
 import { create_text_maker_component, FancyUL } from "../../../../components";
 import { Subject } from "../../../../models/subject.js";
-import { available_icons, available_keys } from "../shared";
+import {
+  available_icons,
+  available_keys,
+  service_channels_keys,
+} from "../shared";
 import { infograph_href_template } from "../../../../link_utils.js";
 import ProgressGauge from "../../../../charts/progressGauge.js";
 import { Fragment } from "react";
@@ -21,6 +25,15 @@ export class ServiceOverviewV2 extends React.Component {
       .map(({ standard_report }) => standard_report)
       .flatten()
       .value();
+    const total_business_vol = _.reduce(
+      service_channels_keys,
+      (total, key) => {
+        const sum_for_key =
+          _.sumBy(service.service_report, `${key}_count`) || 0;
+        return total + sum_for_key;
+      },
+      0
+    );
 
     return (
       <TextPanel title={text_maker("service_overview_title")}>
@@ -135,6 +148,8 @@ export class ServiceOverviewV2 extends React.Component {
               }
             />
           </dd>
+          <dt>{text_maker("total_business_vol")}</dt>
+          <dd>{total_business_vol}</dd>
           <dt>{text_maker("service_link_text")}</dt>
           <dd>
             {!_.isEmpty(service.urls) &&
