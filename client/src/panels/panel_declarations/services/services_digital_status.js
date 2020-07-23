@@ -5,7 +5,7 @@ import {
   create_text_maker_component,
   InfographicPanel,
   declare_panel,
-  NivoResponsivePie,
+  WrappedNivoPie,
 } from "../shared.js";
 import { digital_status_keys } from "./shared.js";
 
@@ -40,7 +40,7 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
             total_online_digital_statuses / (services.length * 6),
         }}
       />
-      <NivoResponsivePie data={data} is_money={false} />
+      <WrappedNivoPie data={data} is_money={false} />
     </div>
   );
 };

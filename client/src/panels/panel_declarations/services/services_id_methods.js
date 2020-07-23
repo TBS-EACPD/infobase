@@ -5,7 +5,7 @@ import {
   create_text_maker_component,
   InfographicPanel,
   declare_panel,
-  NivoResponsivePie,
+  WrappedNivoPie,
   newIBCategoryColors,
 } from "../shared.js";
 
@@ -82,7 +82,7 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
     <div className={"col-container"}>
       <div className="fcol-md-6 p-20">
         <TM className="id-method-text" k="sin_sub_title" el="h4" />
-        <NivoResponsivePie
+        <WrappedNivoPie
           {...nivo_common_props}
           custom_legend_items={_.map(sin_data, (row) => ({
             ...row,
@@ -93,7 +93,7 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
       </div>
       <div className="fcol-md-6 p-20">
         <TM className="id-method-text" k="cra_sub_title" el="h4" />
-        <NivoResponsivePie
+        <WrappedNivoPie
           {...nivo_common_props}
           custom_legend_items={_.map(cra_data, (row) => ({
             ...row,

@@ -34,7 +34,7 @@ export class ServiceOverviewV2 extends React.Component {
           <dt>{text_maker("service_types")}</dt>
           <dd>
             {_.map(service.service_type, (type) => (
-              <p>{type}</p>
+              <p key={type}>{type}</p>
             ))}
           </dd>
           {!_.isEmpty(flat_standard_reports) && (
@@ -49,8 +49,10 @@ export class ServiceOverviewV2 extends React.Component {
                     flexDirection: "column",
                     alignItems: "center",
                     paddingBottom: "10px",
+                    backgroundColor:
+                      window.infobase_color_constants.backgroundColor,
                   }}
-                  className="service-overview-rect service-overview-progress-rect"
+                  className="service-overview-rect"
                 >
                   <ProgressGauge
                     value={

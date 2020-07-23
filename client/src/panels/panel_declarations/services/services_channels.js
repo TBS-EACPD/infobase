@@ -7,7 +7,7 @@ import {
   create_text_maker_component,
   InfographicPanel,
   declare_panel,
-  NivoResponsiveBar,
+  WrappedNivoBar,
 } from "../shared.js";
 
 const { text_maker } = create_text_maker_component(text);
@@ -84,7 +84,7 @@ class ServicesChannelsPanel extends React.Component {
             />
           }
         />
-        <NivoResponsiveBar
+        <WrappedNivoBar
           data={bar_data}
           is_money={false}
           keys={_.map(services, "name")}

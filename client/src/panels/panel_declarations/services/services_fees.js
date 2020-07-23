@@ -5,7 +5,7 @@ import {
   create_text_maker_component,
   InfographicPanel,
   declare_panel,
-  NivoResponsivePie,
+  WrappedNivoPie,
 } from "../shared.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -24,7 +24,7 @@ const ServicesFeesPanel = ({ panel_args }) => {
         }}
         className="medium_panel_text"
       />
-      <NivoResponsivePie
+      <WrappedNivoPie
         data={[
           {
             id: "fees",

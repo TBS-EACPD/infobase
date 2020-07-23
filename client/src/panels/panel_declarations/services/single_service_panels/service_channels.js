@@ -1,7 +1,7 @@
 import text from "../services.yaml";
 import { service_channels_keys } from "../shared.js";
 import { create_text_maker_component, Panel } from "../../../../components";
-import { NivoResponsiveHBar } from "../../../../charts/wrapped_nivo";
+import { WrappedNivoHBar } from "../../../../charts/wrapped_nivo";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -35,7 +35,7 @@ export class ServiceChannels extends React.Component {
     return (
       <Panel title={text_maker("single_service_channels_title")}>
         <TM k="service_channels_text" className="medium_panel_text" />
-        <NivoResponsiveHBar
+        <WrappedNivoHBar
           data={data}
           indexBy="label"
           keys={_.map(service_channels_keys, (key) => text_maker(key))}
