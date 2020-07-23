@@ -4,6 +4,10 @@ import { make_mongoose_model_from_original_template } from "../src/db_utils/log_
 import _ from "lodash";
 import fs from "fs";
 import mongoose from "mongoose";
+import { Parser } from "json2csv";
+
+const json2csv_parser = new Parser();
+
 connect_db()
   .then(() => {
     const templates = get_templates();
@@ -18,7 +22,7 @@ connect_db()
       //change reduced json to handle "key.value". For the time being, the CSV
       //will be cleaner if we flatten the "key.value" to "value"
 
-      collection.find({}, function (err, submissions) {
+      collection.find({}, function (err, email_logs) {
         if (err) {
           console.log(err);
         }
@@ -33,59 +37,53 @@ connect_db()
           })
           .value();
 
-        const reduced_json = _.map(submissions, function (sub) {
+        const flattened_email_logs = _.map(email_logs, function (sub) {
           return _.reduce(
             sub._doc,
-            function (result, value, key) {
+            function (result, email_log_field, key) {
               if (key === "__v") {
                 return result;
               }
-              if (_.isPlainObject(value)) {
-                return { ...result, ...value };
-              } else if (_.isArray(value)) {
-                return { ...result, [key]: value.join(", ") };
+              if (_.isPlainObject(email_log_field)) {
+                return { ...result, ...email_log_field };
+              } else if (_.isArray(email_log_field)) {
+                return { ...result, [key]: email_log_field.join(", ") };
               } else {
-                return { ...result, [key]: value };
+                return { ...result, [key]: email_log_field };
               }
             },
             {}
           );
         });
 
-        const time_fixed_json = _.map(reduced_json, function (report) {
+        const time_corrected_email_logs = _.map(flattened_email_logs, function (
+          sub
+        ) {
           return {
-            ...report,
-            server_time: new Date(report["server_time"])
+            ...sub,
+            server_time: new Date(sub["server_time"])
               .toUTCString()
               .replace(/,/g, ""),
           };
         });
 
-        const csv_format = _.concat(
-          [column_names],
-          _.map(time_fixed_json, (submission) => {
-            return _.map(column_names, (key) => {
-              return _.has(submission, key) ? submission[key] : "";
-            });
-          })
-        );
+        if (time_corrected_email_logs.length > 0) {
+          const csv = json2csv_parser.parse(time_corrected_email_logs, {
+            fields: column_names,
+          });
 
-        const csv = _.map(csv_format, function (format) {
-          return format.join(",");
-        });
-
-        const file_name = `${template_name}_emails_${new Date().getTime()}.csv`;
-        fs.writeFile(
-          `./data_management/CSVs/${file_name}`,
-          csv.join("\r\n"),
-          function (err) {
+          const file_name = `${template_name}_emails_${new Date().getTime()}.csv`;
+          fs.writeFile(`./data_management/CSVs/${file_name}`, csv, function (
+            err
+          ) {
             console.log(err || `Successfully saved ${file_name}.`);
-            templates_left--;
-            if (templates_left === 0) {
-              mongoose.connection.close();
-            }
-          }
-        );
+          });
+        }
+
+        templates_left--;
+        if (templates_left === 0) {
+          mongoose.connection.close();
+        }
       });
     });
   })
