@@ -62,28 +62,28 @@ services_digital_status_text:
     In **{{subject_name}}, {{fmt_percentage1 total_online_digital_status_percentage}}** of service components can be performed online / electronically
   fr: TODO
 services_digital_status:
-  en: Digital Status of services
+  en: Online status of services
   fr: TODO
 digital_status:
-  en: Digital Status of this service
+  en: Online status of this service
   fr: TODO
 account_reg_digital_desc:
-  en: A person or business can register a person, place or thing online
+  en: Clients can register online
   fr: TODO
 application_digital_desc:
-  en: They can apply online for this service
+  en: Clients can apply online for this service
   fr: TODO
 authentication_desc:
-  en: They can authenticate themselves online
+  en: Clients can authenticate themselves online
   fr: TODO
 decision_digital_desc:
-  en: They can be informed of the department's decision electronically
+  en: Clients can be informed of the department's decision electronically
   fr: TODO
 issuance_digital_desc:
-  en: They can be issued documentation online
+  en: Clients can be issued documentation online
   fr: TODO
 issue_res_digital_desc:
-  en: They can provide feedback online
+  en: Clients can provide feedback online
   fr: TODO
 account_reg_digital:
   en: Registration
@@ -112,7 +112,11 @@ single_service_channels_title:
   en: Delivery Channels of this service
   fr: TODO
 service_channels_text:
-  en: Communication channels that this service uses for handling applications and enquiries
+  transform: [handlebars, markdown]
+  en: |
+    Delivery channels that this service uses for handling applications and enquiries.
+    
+    There were **{{max_value}} {{max_channel_key}}**, which is the highest delivery channel volume for this service
   fr: TODO
 live_application:
   en: In person applications
@@ -130,7 +134,7 @@ phone_inquiry:
   en: Telephone enquiries
   fr: TODO
 online_inquiry:
-  en: Online enquiries
+  en: Website visits
   fr: TODO
 
 # Overview
@@ -172,6 +176,9 @@ service_links_text:
   fr: TODO
 service_link_text:
   en: More details (external links)
+  fr: TODO
+total_business_vol:
+  en: Total business volume
   fr: TODO
 
 # Standard

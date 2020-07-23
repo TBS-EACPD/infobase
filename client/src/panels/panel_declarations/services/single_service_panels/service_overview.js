@@ -2,7 +2,11 @@ import "../services.scss";
 import text from "../services.yaml";
 import { create_text_maker_component, Panel } from "../../../../components";
 import { Subject } from "../../../../models/subject.js";
-import { available_icons, available_keys } from "../shared";
+import {
+  available_icons,
+  available_keys,
+  service_channels_keys,
+} from "../shared";
 import { infograph_href_template } from "../../../../link_utils.js";
 import Gauge from "../../../../charts/gauge.js";
 
@@ -33,6 +37,15 @@ export class ServiceOverview extends React.Component {
       .map(({ standard_report }) => standard_report)
       .flatten()
       .value();
+    const total_business_vol = _.reduce(
+      service_channels_keys,
+      (total, key) => {
+        const sum_for_key =
+          _.sumBy(service.service_report, `${key}_count`) || 0;
+        return total + sum_for_key;
+      },
+      0
+    );
 
     return (
       <Panel title={text_maker("service_overview_title")}>
@@ -123,6 +136,9 @@ export class ServiceOverview extends React.Component {
                 </OverviewUL>
               </div>
             )}
+            <div className="service-overview-rect medium_panel_text">
+              {`${text_maker("total_business_vol")}: ${total_business_vol}`}
+            </div>
             <div className="service-overview-rect">
               <TM
                 className="medium_panel_text"
