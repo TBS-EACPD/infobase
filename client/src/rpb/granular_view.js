@@ -6,14 +6,20 @@ import {
   DisplayTable,
   Details,
   DropdownMenu,
+  CheckBox,
 } from "../components/index.js";
 import { Subject } from "../models/subject.js";
 
 const { Dept } = Subject;
 
 class GranularView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { use_legal_titles: false };
+  }
   render() {
     const { subject, table } = this.props;
+    const { use_legal_titles } = this.state;
     return (
       <div>
         <LabeledBox
@@ -36,6 +42,12 @@ class GranularView extends React.Component {
         <LabeledBox label={<TextMaker text_key="rpb_report_data_sources" />}>
           <ReportDatasets {...this.props} />
         </LabeledBox>
+        <CheckBox
+          active={use_legal_titles}
+          onClick={() => this.setState({ use_legal_titles: !use_legal_titles })}
+          label={text_maker("use_legal_title")}
+        />
+
         {table.rpb_banner && <AlertBanner>{table.rpb_banner}</AlertBanner>}
         <div id="rpb-main-content">{this.get_table_content()}</div>
       </div>
@@ -52,8 +64,9 @@ class GranularView extends React.Component {
       filters_by_dimension,
       dimension,
       filter,
-      use_legal_titles,
     } = this.props;
+
+    const { use_legal_titles } = this.state;
 
     const non_dept_key_cols = _.reject(sorted_key_columns, { nick: "dept" });
 

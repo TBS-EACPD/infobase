@@ -166,7 +166,6 @@ class RPB extends React.Component {
 
   render() {
     const { broken_url } = this.props;
-
     const { use_legal_titles } = this.state;
 
     const table = this.state.table && Table.lookup(this.state.table);
@@ -298,38 +297,21 @@ class RPB extends React.Component {
                   broken_url={broken_url}
                 />
               ) : (
-                <React.Fragment>
-                  <button
-                    className="btn btn-ib-primary"
-                    style={{ width: "100%" }}
-                    onClick={() => {
-                      this.setState({ table_picking: true });
-                    }}
-                  >
-                    <TextMaker
-                      text_key={
-                        table
-                          ? "select_another_table_button"
-                          : "select_table_button"
-                      }
-                    />
-                  </button>
-                  <button
-                    className="btn btn-ib-secondary"
-                    style={{ width: "100%", marginTop: "5px" }}
-                    onClick={() => {
-                      this.setState({ use_legal_titles: !use_legal_titles });
-                    }}
-                  >
-                    <TextMaker
-                      text_key={
-                        use_legal_titles
-                          ? "use_applied_title"
-                          : "use_legal_title"
-                      }
-                    />
-                  </button>
-                </React.Fragment>
+                <button
+                  className="btn btn-ib-primary"
+                  style={{ width: "100%" }}
+                  onClick={() => {
+                    this.setState({ table_picking: true });
+                  }}
+                >
+                  <TextMaker
+                    text_key={
+                      table
+                        ? "select_another_table_button"
+                        : "select_table_button"
+                    }
+                  />
+                </button>
               )}
             </div>
             {!window.is_a11y_mode && (
