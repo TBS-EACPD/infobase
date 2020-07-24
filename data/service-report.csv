@@ -1,4 +1,4 @@
-service_id,year,cra_business_ids_collected,sin_collected,phone_inquiry_count,online_inquiry_count,online_application_count,live_application_count,mail_application_count,other_application_count,comment_en,comment_fr
+service_id,year,cra_business_ids_collected,SIN_collected,phone_inquiry_count,online_inquiry_count,online_application_count,live_application_count,mail_application_count,other_application_count,comment_en,comment_fr
 1,2018,Yes,Not Applicable,,,4789.0,0.0,,8044.0,"Our data tracking mechanism did not allow for detailed tracking of website visits, telephone enquiries and application by mail by service type.","Nos mécanismes de suivi des données ne nous permettaient pas d'enregistrer les données liées aux visites du site web, demandes d'information par telephone et applications par la poste par type de service."
 1026,2018,No,Not Applicable,30000.0,442967.0,134939.0,0.0,0.0,0.0,"Columns AA and AB are for FY 2018-19
 
