@@ -53,8 +53,6 @@ export const SurveyPopup = withRouter(
     constructor(props) {
       super(props);
 
-      this.handleButtonPress.bind(this);
-
       props.history.listen(({ pathname }) => {
         if (
           this.state.active &&
@@ -85,7 +83,7 @@ export const SurveyPopup = withRouter(
         previous_path_root: null,
       };
     }
-    handleButtonPress(button_type) {
+    handleButtonPress = (button_type) => {
       if (_.includes(["yes", "no"], button_type)) {
         localStorage.setItem(`infobase_survey_popup_deactivated`, "true");
         localStorage.setItem(
@@ -101,7 +99,7 @@ export const SurveyPopup = withRouter(
       });
 
       this.setState({ active: false });
-    }
+    };
     shouldComponentUpdate(nextProps, nextState) {
       const chance_to_open_changed = this.state.chance !== nextState.chance;
       const is_closing = this.state.active !== nextState.active;
