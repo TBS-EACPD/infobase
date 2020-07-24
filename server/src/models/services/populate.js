@@ -21,7 +21,7 @@ export default async function ({ models }) {
     ({
       id: standard_id,
       cra_business_ids_collected,
-      SIN_collected,
+      sin_collected,
       comment: service_report_comment,
 
       ...other_fields
@@ -32,7 +32,7 @@ export default async function ({ models }) {
         "Yes",
         "No"
       ),
-      SIN_collected: convert_to_bool_or_null(SIN_collected, "Yes", "No"),
+      sin_collected: convert_to_bool_or_null(sin_collected, "Yes", "No"),
       service_report_comment,
       ...other_fields,
     })

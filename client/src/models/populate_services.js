@@ -138,7 +138,7 @@ const dept_service_fragment = `org_id
           service_id
           year
           cra_business_ids_collected
-          SIN_collected
+          sin_collected
           phone_inquiry_count
           online_inquiry_count
           online_application_count
