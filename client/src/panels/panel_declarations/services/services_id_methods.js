@@ -35,7 +35,7 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
       }
     );
 
-  const sin_count = get_id_method_count("SIN_collected");
+  const sin_count = get_id_method_count("sin_collected");
   const cra_count = get_id_method_count("cra_business_ids_collected");
 
   const sin_data = [

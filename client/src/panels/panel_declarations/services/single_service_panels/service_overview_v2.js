@@ -111,12 +111,12 @@ export class ServiceOverviewV2 extends React.Component {
                   <div>
                     {
                       available_icons[
-                        available_keys[most_recent_report.SIN_collected]
+                        available_keys[most_recent_report.sin_collected]
                       ]
                     }
                     <TM
                       style={{ marginLeft: 5 }}
-                      k={available_keys[most_recent_report.SIN_collected]}
+                      k={available_keys[most_recent_report.sin_collected]}
                     />
                   </div>
                 </div>,

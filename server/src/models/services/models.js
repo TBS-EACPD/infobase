@@ -17,7 +17,7 @@ export default function (model_singleton) {
     service_id: parent_fkey_type(),
     year: str_type,
     cra_business_ids_collected: { type: Boolean },
-    SIN_collected: { type: Boolean },
+    sin_collected: { type: Boolean },
     phone_inquiry_count: { type: Number },
     online_inquiry_count: { type: Number },
     online_application_count: { type: Number },
