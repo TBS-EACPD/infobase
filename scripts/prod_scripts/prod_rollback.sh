@@ -15,4 +15,4 @@ mongo $(lpass show MDB_SHELL_CONNECT_STRING --notes) \
   --username $(lpass show MDB_WRITE_USER --notes) --password $(lpass show MDB_WRITE_PW --notes) \
   scripts/prod_scripts/mongo_post_rollback_cleanup.js
 
-curl -X POST -H 'Content-type: application/json' --data '{"text":"New update has been rolled back!"}' $(heroku config:get UPDATE_DEPLOYED_BOT_SERVICE_LINK)
+curl -X POST -H 'Content-type: application/json' --data '{"text":"New update has been rolled back!"}' $(lpass show UPDATE_DEPLOYED_BOT_SERVICE_LINK --notes)
