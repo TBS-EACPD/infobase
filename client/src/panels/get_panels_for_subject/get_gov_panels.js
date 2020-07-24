@@ -24,6 +24,9 @@ import {
   declare_employee_executive_level_panel,
   declare_employee_fol_panel,
   declare_employee_gender_panel,
+  declare_services_digital_status_panel,
+  declare_services_fees_panel,
+  declare_services_id_methods_panel,
   declare_results_intro_panel,
   declare_covid_key_concepts_panel,
   declare_covid_intro_panel,
@@ -73,6 +76,11 @@ export const get_gov_panels = (subject) => ({
     declare_employee_executive_level_panel(),
     declare_employee_fol_panel(),
     declare_employee_gender_panel(),
+  ],
+  services: [
+    declare_services_digital_status_panel(),
+    declare_services_fees_panel(),
+    declare_services_id_methods_panel(),
   ],
   results: [
     declare_results_key_concepts_panel(),
