@@ -1,0 +1,13 @@
+.ib-header {
+    position: absolute;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;    
+    border: 0;
+    transition: transform 1s ease-out;
+}
+
+.ib-header > button {
+    float: right;
+}
