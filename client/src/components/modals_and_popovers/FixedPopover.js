@@ -19,8 +19,6 @@ export class FixedPopover extends React.Component {
   constructor(props) {
     super(props);
 
-    this.closeModal = this.closeModal.bind(this);
-
     this.state = { timeout_stopped: false };
   }
   componentDidUpdate() {
@@ -35,13 +33,13 @@ export class FixedPopover extends React.Component {
   componentWillUnmount() {
     this.closeModal();
   }
-  closeModal() {
+  closeModal = () => {
     // Reset
     document.body.classList.remove("modal-open--allow-scroll");
     this.setState({ timeout_stopped: false });
 
     this.props.on_close_callback();
-  }
+  };
   render() {
     const {
       show,

@@ -60,8 +60,6 @@ class TablePicker extends React.Component {
       active_concepts: [],
     };
 
-    this.fadeOutAndSelectTable = _.bind(this.fadeOutAndSelectTable, this);
-
     this.tables = _.chain(Table.get_all())
       .reject("reference_table")
       .map((t) => ({
@@ -161,7 +159,7 @@ class TablePicker extends React.Component {
       </div>
     );
   }
-  fadeOutAndSelectTable(table_id) {
+  fadeOutAndSelectTable = (table_id) => {
     this.setState({ exiting: true });
     const initialHeight = this.refs.main.offsetHeight;
     d3.select(this.refs.main)
@@ -174,7 +172,7 @@ class TablePicker extends React.Component {
       .on("end", () => {
         this.props.onSelect(table_id);
       });
-  }
+  };
   selectConcept(concept_id) {
     const new_active_concepts = toggleArrayElement(
       this.state.active_concepts,

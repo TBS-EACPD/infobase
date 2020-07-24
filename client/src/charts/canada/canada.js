@@ -141,18 +141,18 @@ export class Canada extends React.Component {
   constructor(props) {
     super(props);
 
-    this.prov_select_callback = this.prov_select_callback.bind(this);
+    this.prov_select_callback = this.prov_select_callback;
 
     this.state = {
       prov: null,
     };
   }
 
-  prov_select_callback(selected_prov) {
+  prov_select_callback = (selected_prov) => {
     if (selected_prov !== this.state.prov) {
       this.setState({ prov: selected_prov });
     }
-  }
+  };
 
   render() {
     const { graph_args } = this.props;

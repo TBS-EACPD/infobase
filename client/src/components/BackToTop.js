@@ -11,13 +11,11 @@ export class BackToTop extends React.Component {
       caught_by_footer: false,
     };
 
-    this.handleScroll = this.handleScroll.bind(this);
-
     this.page_header = document.getElementById("ib-site-header-area");
     this.page_footer = document.getElementById("wb-info");
   }
 
-  handleScroll() {
+  handleScroll = () => {
     const should_be_shown =
       window.pageYOffset >
       this.page_header.offsetTop + this.page_header.offsetHeight;
@@ -30,7 +28,7 @@ export class BackToTop extends React.Component {
       shown: should_be_shown,
       caught_by_footer: should_be_caught,
     });
-  }
+  };
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);

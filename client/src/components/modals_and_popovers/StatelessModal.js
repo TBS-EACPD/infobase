@@ -8,15 +8,13 @@ import { trivial_text_maker } from "../../models/text.js";
 export class StatelessModal extends React.Component {
   constructor(props) {
     super(props);
-
-    this.closeModal = this.closeModal.bind(this);
   }
   componentWillUnmount() {
     this.closeModal();
   }
-  closeModal() {
+  closeModal = () => {
     this.props.on_close_callback();
-  }
+  };
   render() {
     const {
       show,
