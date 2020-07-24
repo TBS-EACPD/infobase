@@ -89,11 +89,11 @@ function node_name(node, width) {
 }
 
 function get_node_size(node) {
-  if (this.offsetHeight <= 30 || this.offsetWidth <= 50) {
+  if (node.offsetHeight <= 30 || node.offsetWidth <= 50) {
     return "tiny";
-  } else if (this.offsetHeight < 100 || this.offsetWidth < 150) {
+  } else if (node.offsetHeight < 100 || node.offsetWidth < 150) {
     return "small";
-  } else if (this.offsetHeight > 150 && this.offsetWidth > 300) {
+  } else if (node.offsetHeight > 150 && node.offsetWidth > 300) {
     return "large";
   } else {
     return "medium";
@@ -102,7 +102,7 @@ function get_node_size(node) {
 
 function std_node_render(is_fte, foreign_sel) {
   foreign_sel.html(function (node) {
-    const node_size = get_node_size.bind(this)();
+    const node_size = get_node_size(this);
     if (node_size === "tiny") {
       return;
     } //no contents on tiny nodes
@@ -426,8 +426,6 @@ export default class TreeMapper extends React.Component {
     super(props);
     this.props = check_props(props);
 
-    this.setRoute = this.setRoute.bind(this);
-
     this.state = {
       loading: true,
       data: false,
@@ -465,7 +463,7 @@ export default class TreeMapper extends React.Component {
       org_route: [],
     });
   }
-  setRoute(new_route, reset = false) {
+  setRoute = (new_route, reset = false) => {
     let next_route = this.state.org_route;
     reset
       ? (next_route = new_route)
@@ -473,7 +471,7 @@ export default class TreeMapper extends React.Component {
     this.setState({
       org_route: next_route,
     });
-  }
+  };
   render() {
     const {
       history,
