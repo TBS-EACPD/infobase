@@ -35,7 +35,6 @@ const get_rules = ({ should_use_babel, language, is_prod_build }) => {
             },
           ],
           "@babel/preset-react",
-          ["babel-preset-es2015", { modules: false }],
         ],
       },
     },
