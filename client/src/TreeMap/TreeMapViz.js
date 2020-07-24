@@ -13,11 +13,10 @@ export class TreeMap extends React.Component {
   render() {
     return <div ref={(div) => (this.el = div)} />;
   }
-  _update() {
+  _update = () => {
     this._imperative_render();
-  }
+  };
   componentDidMount() {
-    this._update = _.bind(this._update, this);
     this._update();
   }
   componentDidUpdate() {

@@ -19,11 +19,8 @@ const defaultMaxHeight = "300px";
 class AccordionEnterExit extends React.Component {
   constructor() {
     super();
-
-    this.onExiting = this.onExiting.bind(this);
-    this.onEntering = this.onEntering.bind(this);
   }
-  onExiting(component) {
+  onExiting = (component) => {
     const node = ReactDOM.findDOMNode(component);
     const initialHeight = node.offsetHeight;
 
@@ -35,8 +32,8 @@ class AccordionEnterExit extends React.Component {
       .duration(this.props.collapseDuration)
       .style("opacity", 1e-6)
       .style("max-height", "1px");
-  }
-  onEntering(component) {
+  };
+  onEntering = (component) => {
     const node = ReactDOM.findDOMNode(component);
 
     d3.select(node)
@@ -50,7 +47,7 @@ class AccordionEnterExit extends React.Component {
       .on("end", function () {
         d3.select(node).style("max-height", "none");
       });
-  }
+  };
   render() {
     const {
       expandDuration,
