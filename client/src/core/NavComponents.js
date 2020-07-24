@@ -1,3 +1,5 @@
+import text from "./NavComponents.yaml";
+
 import { Fragment } from "react";
 import { withRouter } from "react-router";
 import { reactAdapter } from "./reactAdapter.js";
@@ -6,6 +8,8 @@ import { index_lang_lookups } from "../InfoBase/index_data.js";
 import { trivial_text_maker } from "../models/text.js";
 import { IconHome } from "../icons/icons.js";
 import { AlertBanner } from "../components/index.js";
+import { HeaderNotification } from "../components/HeaderNotification";
+import { create_text_maker } from "../models/text.js";
 
 import "./NavComponents.scss";
 
@@ -13,6 +17,8 @@ const {
   page_title: default_title,
   meta_description: default_description,
 } = index_lang_lookups;
+
+const text_maker = create_text_maker(text);
 
 //note: This must be manually kept consistent with index.hbs.html
 let is_initial_markup_cleared = false;
@@ -168,6 +174,7 @@ export class StandardRouteContainer extends React.Component {
 
     return (
       <div>
+        <HeaderNotification text={text_maker("ib_outage")} />
         <DocumentTitle title_str={title} />
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
