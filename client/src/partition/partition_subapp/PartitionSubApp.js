@@ -78,30 +78,28 @@ export class PartitionSubApp {
         d3.event.preventDefault();
       }
     });
-    this.container
-      .select("input.search")
-      .on("keyup", this.search_handler.bind(this));
+    this.container.select("input.search").on("keyup", this.search_handler);
 
     this.container
       .select(".select_data_type")
-      .on("change", this.change_data_type.bind(this));
+      .on("change", this.change_data_type);
     this.container
       .select(".select_perspective")
-      .on("change", this.change_perspective.bind(this));
+      .on("change", this.change_perspective);
     this.container
       .select(".partition-controls--control > .partition-info-icon")
-      .on("click", this.add_intro_popup.bind(this));
+      .on("click", this.add_intro_popup);
     this.container
       .select(".partition-controls--control > .partition-info-icon")
       .on("keydown", () => {
         if (d3.event.which == 13) {
-          this.add_intro_popup.call(this);
+          this.add_intro_popup();
         }
       });
 
     this.update();
   }
-  change_data_type() {
+  change_data_type = () => {
     this.current_data_type = d3.event.target.value;
 
     const current_perspective_options = _.chain(this.all_perspectives)
@@ -147,11 +145,11 @@ export class PartitionSubApp {
       );
 
     this.update();
-  }
-  change_perspective() {
+  };
+  change_perspective = () => {
     this.current_perspective_id = d3.event.target.value;
     this.update();
-  }
+  };
   update() {
     this.url_update_callback(
       this.current_perspective_id,
@@ -296,7 +294,7 @@ export class PartitionSubApp {
     this.render_diagram(search_tree, search_data_wrapper_node_rules);
   }
   // Deals with event details and debouncing
-  search_handler() {
+  search_handler = () => {
     d3.event.stopImmediatePropagation();
     d3.event.preventDefault();
     const query = d3.event.target.value.toLowerCase();
@@ -334,8 +332,8 @@ export class PartitionSubApp {
       this.debounced_refresh.cancel();
       this.debounced_search.call(this, query);
     }
-  }
-  add_intro_popup() {
+  };
+  add_intro_popup = () => {
     const partition_control_info = this.container.select(
       "#partition-control-info-button"
     );
@@ -378,7 +376,7 @@ export class PartitionSubApp {
       this.container.select("div.partition-fader").remove();
       partition_control_info.select("a.tab-catch-after").remove();
     }
-  }
+  };
   update_diagram_notes(note_content) {
     const diagram_note_div = this.container.select(".partition-notes");
     if (!note_content) {

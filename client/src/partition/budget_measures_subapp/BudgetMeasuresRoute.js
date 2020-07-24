@@ -154,9 +154,9 @@ export default class BudgetMeasuresRoute extends React.Component {
   componentDidUpdate() {
     this.conditionallyLoadOnMountAndUpdate();
   }
-  setFilterString(new_filter_string) {
+  setFilterString = (new_filter_string) => {
     this.setState({ filter_string: new_filter_string });
-  }
+  };
   render() {
     const { loading, filter_string } = this.state;
 
@@ -227,7 +227,7 @@ export default class BudgetMeasuresRoute extends React.Component {
                   budget_year={budget_year}
                   group_by_items={first_column_options}
                   filter_string={filter_string}
-                  setFilterString={this.setFilterString.bind(this)}
+                  setFilterString={this.setFilterString}
                 />
                 <BudgetMeasuresPartition
                   selected_value={selected_value}
