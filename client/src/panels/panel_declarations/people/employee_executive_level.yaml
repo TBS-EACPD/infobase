@@ -11,7 +11,7 @@ gov_employee_executive_level_text:
    Over this period, employees at the **{{fmt_big_int gov_head_count_ex_level_top}}** level accounted for the largest executive group with an average share of **{{fmt_percentage1 gov_head_count_ex_level_top_avg_percent}}** of the total executive population.
    The smallest executive group was the **{{fmt_big_int gov_head_count_ex_level_bottom}}** level, with an average share of **{{fmt_percentage1 gov_head_count_ex_level_bottom_avg_percent}}** of the total executive population.
   fr: |
-   De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, en moyenne, **{{fmt_big_int gov_head_count_ex_level_avg_ex}}** employés de la **fonction publique fédérale** occupaient un poste de direction, soit **{{fmt_percentage1 gov_head_count_ex_avg_share}}** du personnel moyen. 
+   De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, en moyenne, **{{fmt_big_int gov_head_count_ex_level_avg_ex}}** employés de la **fonction publique fédérale** occupaient un poste de direction, soit **{{fmt_percentage1 gov_head_count_ex_avg_share}}** du nombre moyen de personnel. 
    
    Au cours de cette période, les employés de niveau **{{fmt_big_int gov_head_count_ex_level_top}}** constituaient le plus fort contingent, avec une moyenne de **{{fmt_percentage1 gov_head_count_ex_level_top_avg_percent}}** du nombre total de cadres de direction. 
    Le niveau **{{fmt_big_int gov_head_count_ex_level_bottom}}** formait le plus petit contingent, avec une moyenne de **{{fmt_percentage1 gov_head_count_ex_level_bottom_avg_percent}}** du numbre total de cadres de direction.
@@ -27,7 +27,7 @@ dept_employee_executive_level_text:
      The smallest executive group was the **{{fmt_big_int dept_head_count_ex_level_bottom}}** level, with an average share of **{{fmt_percentage1 dept_head_count_ex_level_bottom_avg_percent}}** of **{{subject.name}}'s** executive population.
    {{/if}}
   fr: |
-   De **{{fmt_big_int dept_head_count_ex_level_years_first_active_year}}** à **{{fmt_big_int dept_head_count_ex_level_years_last_active_year}}**, en moyenne, **{{fmt_big_int dept_head_count_ex_level_avg_ex}}** employés **{{de_dept dept}}** occupaient un poste de direction, soit **{{fmt_percentage1 dept_head_count_ex_avg_share}}** du personnel moyen.
+   De **{{fmt_big_int dept_head_count_ex_level_years_first_active_year}}** à **{{fmt_big_int dept_head_count_ex_level_years_last_active_year}}**, en moyenne, **{{fmt_big_int dept_head_count_ex_level_avg_ex}}** employés **{{de_dept dept}}** occupaient un poste de direction, soit **{{fmt_percentage1 dept_head_count_ex_avg_share}}** du nombre moyen de personnel.
    
    Au cours de cette période, les employés de niveau **{{fmt_big_int dept_head_count_ex_level_top}}** constituaient le plus fort contingent, avec une moyenne de **{{fmt_percentage1 dept_head_count_ex_level_top_avg_percent}}** du nombre total de cadres de direction **{{de_dept dept}}**. 
    {{#if dept_head_count_ex_level_bottom}}
