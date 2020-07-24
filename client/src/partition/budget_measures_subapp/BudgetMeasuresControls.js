@@ -103,7 +103,7 @@ export class BudgetMeasuresControls extends React.Component {
                   "budget_measure_filter_by_name_and_desc_placeholder"
                 )}
                 defaultValue={filter_string}
-                updateCallback={update_filter_string.bind(this)}
+                updateCallback={update_filter_string}
               />
             </div>
           </div>

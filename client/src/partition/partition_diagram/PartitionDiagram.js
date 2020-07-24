@@ -38,14 +38,14 @@ export class PartitionDiagram {
     this.html
       .style("position", "relative")
       .style("zoom", 0.4)
-      .on("keydown", this.keydown_dispatch.bind(this))
-      .on("click", this.click_dispatch.bind(this))
+      .on("keydown", this.keydown_dispatch)
+      .on("click", this.click_dispatch)
       .transition()
       .duration(500)
       .style("zoom", 1)
-      .on("end", this.configure_then_render.bind(this));
+      .on("end", this.configure_then_render);
   }
-  configure_then_render(options = {}) {
+  configure_then_render = (options = {}) => {
     this.options = _.extend(this.options, options);
 
     this.data = new PartitionDataWrapper(
@@ -83,7 +83,7 @@ export class PartitionDiagram {
     this.options.html_func = this.options.html_func || default_html_func;
 
     this.render();
-  }
+  };
   render() {
     if (this.pop_up) {
       this.pop_up = false;
@@ -641,12 +641,12 @@ export class PartitionDiagram {
       .classed("highlighted", false);
     this.pop_up = false;
   }
-  keydown_dispatch() {
+  keydown_dispatch = () => {
     if (d3.event.keyCode === 13) {
       this.click_dispatch();
     }
-  }
-  click_dispatch() {
+  };
+  click_dispatch = () => {
     // hold a reference to the current target
     const target = d3.select(d3.event.target);
     // get a reference to the content
@@ -720,7 +720,7 @@ export class PartitionDiagram {
     }
     d3.event.stopImmediatePropagation();
     d3.event.preventDefault();
-  }
+  };
   unmagnify_all() {
     if (this.pop_up) {
       this.remove_pop_up();
