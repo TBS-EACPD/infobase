@@ -1,4 +1,4 @@
-service_id,year,cra_business_ids_collected,SIN_collected,phone_inquiry_count,online_inquiry_count,online_application_count,live_application_count,mail_application_count,other_application_count,comment_en,comment_fr
+service_id,year,cra_business_ids_collected,sin_collected,phone_inquiry_count,online_inquiry_count,online_application_count,live_application_count,mail_application_count,other_application_count,comment_en,comment_fr
 1094,2018,Not Applicable,Not Applicable,,,420,,,0,"Departmental Human Resources (HR) contacts and respondents may email the generic mailbox for any questions, information, or data requests regarding HR demographics and capabilities. 
 
 This service is not offered by telephone, in person, or by mail.","Les personnes-ressources et les répondants ministériels des ressources humaines (RH) peuvent envoyer un courriel à la boîte aux lettres générale pour toute question, demande de renseignements ou demande de données concernant la démographie et les capacités des RH.

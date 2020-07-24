@@ -14,7 +14,7 @@ const schema = `
     service_id: String
     year: String,
     cra_business_ids_collected: Boolean,
-    SIN_collected: Boolean,
+    sin_collected: Boolean,
     phone_inquiry_count: Float,
     online_inquiry_count: Float,
     online_application_count: Float,

@@ -45,7 +45,6 @@ Object {
             "service_id": "1297",
             "service_report": Array [
               Object {
-                "SIN_collected": null,
                 "cra_business_ids_collected": null,
                 "live_application_count": null,
                 "mail_application_count": null,
@@ -55,6 +54,7 @@ Object {
                 "phone_inquiry_count": null,
                 "service_id": "1297",
                 "service_report_comment": null,
+                "sin_collected": null,
                 "year": "2018",
               },
             ],
@@ -106,7 +106,6 @@ Object {
             "service_id": "1114",
             "service_report": Array [
               Object {
-                "SIN_collected": null,
                 "cra_business_ids_collected": null,
                 "live_application_count": null,
                 "mail_application_count": 17,
@@ -116,6 +115,7 @@ Object {
                 "phone_inquiry_count": 611,
                 "service_id": "1114",
                 "service_report_comment": null,
+                "sin_collected": null,
                 "year": "2018",
               },
             ],
@@ -174,7 +174,6 @@ Object {
             "service_id": "1348",
             "service_report": Array [
               Object {
-                "SIN_collected": null,
                 "cra_business_ids_collected": null,
                 "live_application_count": null,
                 "mail_application_count": null,
@@ -184,6 +183,7 @@ Object {
                 "phone_inquiry_count": null,
                 "service_id": "1348",
                 "service_report_comment": null,
+                "sin_collected": null,
                 "year": "2018",
               },
             ],
@@ -343,7 +343,6 @@ Object {
             "service_id": "1094",
             "service_report": Array [
               Object {
-                "SIN_collected": null,
                 "cra_business_ids_collected": null,
                 "live_application_count": null,
                 "mail_application_count": null,
@@ -353,6 +352,7 @@ Object {
                 "phone_inquiry_count": null,
                 "service_id": "1094",
                 "service_report_comment": null,
+                "sin_collected": null,
                 "year": "2018",
               },
             ],
@@ -404,7 +404,6 @@ Object {
             "service_id": "1349",
             "service_report": Array [
               Object {
-                "SIN_collected": null,
                 "cra_business_ids_collected": null,
                 "live_application_count": null,
                 "mail_application_count": null,
@@ -414,6 +413,7 @@ Object {
                 "phone_inquiry_count": null,
                 "service_id": "1349",
                 "service_report_comment": null,
+                "sin_collected": null,
                 "year": "2018",
               },
             ],
@@ -477,7 +477,6 @@ The classification accreditation responds to the requirement of the Policy on Cl
             "service_id": "1350",
             "service_report": Array [
               Object {
-                "SIN_collected": null,
                 "cra_business_ids_collected": null,
                 "live_application_count": null,
                 "mail_application_count": 8,
@@ -487,6 +486,7 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "phone_inquiry_count": null,
                 "service_id": "1350",
                 "service_report_comment": null,
+                "sin_collected": null,
                 "year": "2018",
               },
             ],
@@ -551,7 +551,6 @@ Object {
             "service_id": "1348",
             "service_report": Array [
               Object {
-                "SIN_collected": null,
                 "cra_business_ids_collected": null,
                 "live_application_count": null,
                 "mail_application_count": null,
@@ -561,6 +560,7 @@ Object {
                 "phone_inquiry_count": null,
                 "service_id": "1348",
                 "service_report_comment": null,
+                "sin_collected": null,
                 "year": "2018",
               },
             ],

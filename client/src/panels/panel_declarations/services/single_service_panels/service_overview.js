@@ -82,7 +82,7 @@ export class ServiceOverview extends React.Component {
                     />
                     {
                       available_icons[
-                        available_keys[most_recent_report.SIN_collected]
+                        available_keys[most_recent_report.sin_collected]
                       ]
                     }
                   </div>,
