@@ -8,36 +8,29 @@ import { Parser } from "json2csv";
 
 const json2csv_parser = new Parser();
 
+const templates = get_templates();
 connect_db()
-  .then(() => {
-    const templates = get_templates();
-    let templates_left = _.keys(templates).length;
-    _.forEach(templates, (template_value, template_name) => {
-      const collection = make_mongoose_model_from_original_template({
-        original_template: template_value,
-        template_name,
-      });
+  .then(() =>
+    _.chain(templates)
+      .map((template_value, template_name) => {
+        return make_mongoose_model_from_original_template({
+          original_template: template_value,
+          template_name,
+        });
+      })
+      .map((model) => model.find({}).exec())
+      .thru((promises) => Promise.all(promises))
+      .value()
+  )
+  .then((all_email_logs) => {
+    //if it happens that later on we add another key with a json value,
+    //change reduced json to handle "key.value". For the time being, the CSV
+    //will be cleaner if we flatten the "key.value" to "value"
+    _.forEach(all_email_logs, (collection, index) => {
+      if (collection.length > 0) {
+        const template_name = _.keys(templates)[index];
 
-      //if it happens that later on we add another key with a json value,
-      //change reduced json to handle "key.value". For the time being, the CSV
-      //will be cleaner if we flatten the "key.value" to "value"
-
-      collection.find({}, function (err, email_logs) {
-        if (err) {
-          console.log(err);
-        }
-        const column_names = _.chain(collection.schema.paths)
-          .keys()
-          .filter((key) => {
-            return key !== "__v";
-          })
-          .map((key) => {
-            const key_split = key.split(".");
-            return key_split.length > 1 ? key_split[1] : key;
-          })
-          .value();
-
-        const flattened_email_logs = _.map(email_logs, function (sub) {
+        const flattened_email_logs = _.map(collection, function (sub) {
           return _.reduce(
             sub._doc,
             function (result, email_log_field, key) {
@@ -55,6 +48,8 @@ connect_db()
             {}
           );
         });
+
+        const column_names = _.keys(flattened_email_logs[0]);
 
         const time_corrected_email_logs = _.map(flattened_email_logs, function (
           sub
@@ -79,12 +74,7 @@ connect_db()
             console.log(err || `Successfully saved ${file_name}.`);
           });
         }
-
-        templates_left--;
-        if (templates_left === 0) {
-          mongoose.connection.close();
-        }
-      });
+      }
     });
   })
   .catch((err) => {
