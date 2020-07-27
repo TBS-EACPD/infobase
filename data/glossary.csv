@@ -1,5 +1,7 @@
-id,name_en,name_fr,def_en,def_fr
-ACTIV_PEOPLE,Active employees,Employés actifs,Active employees are employees who are not on leave without pay.,"Par « employés actifs », on entend les employés qui ne sont pas en congé non payé."
+﻿id,name_en,name_fr,def_en,def_fr
+SERVICE,Service,Service,Provision of a specific final output that addresses one or more needs of an intended recipient and contributes to the achievement of an outcome.,Extrant final précis qui comble un ou plusieurs besoins d’un bénéficiaire visé et qui contribue à l’obtention d’un résultat.
+STANDARD,Service Standard,Normes de service,Public commitment to a measurable level of performance that clients can expect under normal circumstances.,Engagement public à fournir un niveau de rendement mesurable auquel les clients peuvent s’attendre dans des conditions normale.
+ACTIV_PEOPLE,Active employees,Employés actifs,Active employees are employees who are not on leave without pay.,"Par « employés actifs », on entend les employés qui ne sont pas en congé non payé."
 ADJUS,"Adjustments, warrants and transfers","Redressements, mandats et virements","Adjustments, warrants and transfers include:
 * transfers from or to other ministries such as Treasury Board Votes 5, 10, 15, 25, 30 and 35 or changes in ministry responsibility;
 * transfers within the ministry from one vote to another (under Parliamentary authority), or between transfer payments;
