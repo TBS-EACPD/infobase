@@ -99,32 +99,30 @@ class Root extends React.Component {
     super(props);
 
     const { state } = this.props; //done
-    console.log(state);
 
     this.state = {
       ...props.state,
     };
   }
 
-  shouldComponentUpdate(newProps) {
+  shouldComponentUpdate(newProps, newState) {
     //done
-    return rpb_link(this.state) !== rpb_link(newProps.state);
+    console.log(this.state, newProps.state);
+    return rpb_link(this.state) !== rpb_link(newState);
   }
   render() {
     const on_set_filter = ({ dimension, filter }) => {
       this.setState((prevState, props) => {
-        return { url_state: { ...prevState.url_state, dimension, filter } };
+        return { ...prevState, dimension, filter };
       });
     };
 
     const on_set_dimension = (dim_key) => {
       this.setState((prevState, props) => {
         return {
-          url_state: {
-            ...prevState.url_state,
-            dim_key,
-            filter: text_maker("all"),
-          },
+          ...prevState,
+          dim_key,
+          filter: text_maker("all"),
         };
       });
     };
@@ -134,10 +132,8 @@ class Root extends React.Component {
       this.setState(
         (prevState, props) => {
           return {
-            url_state: {
-              ...prevState.url_state,
-              ...get_default_state_for_new_table(table_id),
-            },
+            ...prevState,
+            ...get_default_state_for_new_table(table_id),
           };
         },
         () => {
@@ -270,6 +266,7 @@ class Root extends React.Component {
 
     return (
       <RPB
+        {...this.state}
         table={this.state.table && get_table(this.state)}
         subject={this.state.subject && get_subject(this.state)}
         columns={
@@ -336,6 +333,7 @@ class RPB extends React.Component {
 
   render() {
     const { table, broken_url } = this.props;
+    console.log(this.props);
 
     return (
       <div style={{ minHeight: "800px", marginBottom: "100px" }} id="">
@@ -535,7 +533,6 @@ export default class ReportBuilder extends React.Component {
     }
   }
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(this.state.url_state, nextState.url_state);
     return (
       this.state.loading !== nextState.loading ||
       this.state.config_str !== nextState.config_str ||
@@ -549,7 +546,6 @@ export default class ReportBuilder extends React.Component {
   }
   render() {
     const { url_state } = this.state;
-    console.log(url_state);
 
     return (
       <StandardRouteContainer
