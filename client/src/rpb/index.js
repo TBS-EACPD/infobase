@@ -10,9 +10,6 @@ import { TextMaker, text_maker } from "./rpb_text_provider.js";
 import "./rpb.scss";
 
 //data and state stuff
-import { reducer, mapDispatchToProps } from "./state_and_data.js";
-import { createStore } from "redux";
-import { Provider, connect } from "react-redux";
 import { ensure_loaded } from "../core/lazy_loader.js";
 
 //re-usable view stuff
@@ -98,16 +95,14 @@ class Root extends React.Component {
   constructor(props) {
     super(props);
 
-    const { state } = this.props; //done
+    const { state } = this.props;
 
     this.state = {
-      ...props.state,
+      ...state,
     };
   }
 
   shouldComponentUpdate(newProps, newState) {
-    //done
-    console.log(this.state, newProps.state);
     return rpb_link(this.state) !== rpb_link(newState);
   }
   render() {
@@ -128,18 +123,12 @@ class Root extends React.Component {
     };
 
     const on_switch_table = (table_id) => {
-      console.log(this.state);
-      this.setState(
-        (prevState, props) => {
-          return {
-            ...prevState,
-            ...get_default_state_for_new_table(table_id),
-          };
-        },
-        () => {
-          console.log(this.state);
-        }
-      );
+      this.setState((prevState, props) => {
+        return {
+          ...prevState,
+          ...get_default_state_for_new_table(table_id),
+        };
+      });
     };
 
     function get_key_columns_for_table(table) {
@@ -333,7 +322,6 @@ class RPB extends React.Component {
 
   render() {
     const { table, broken_url } = this.props;
-    console.log(this.props);
 
     return (
       <div style={{ minHeight: "800px", marginBottom: "100px" }} id="">
@@ -471,7 +459,6 @@ const URLSynchronizer = withRouter(
     }
     shouldComponentUpdate(new_props) {
       // return rpb_link(this.props.state) !== rpb_link(new_props.state);
-      console.log(new_props.state, window.location.hash);
       return rpb_link(new_props.state) !== window.location.hash;
     }
     componentDidMount() {
