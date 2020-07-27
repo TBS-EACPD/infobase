@@ -11,6 +11,8 @@ const initial_state = {
   subject: "gov_gov",
 };
 
+console.log("new redux");
+
 function get_all_data_columns_for_table(table) {
   return _.chain(table.unique_headers)
     .map((nick) => table.col_from_nick(nick))
@@ -63,6 +65,7 @@ const get_filters_for_dim = _.memoize(
 
 const reducer = (state = initial_state, action) => {
   const { type, payload } = action;
+  console.log(state);
 
   switch (type) {
     case "navigate_to_new_state": {
