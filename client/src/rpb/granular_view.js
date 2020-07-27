@@ -6,20 +6,14 @@ import {
   DisplayTable,
   Details,
   DropdownMenu,
-  CheckBox,
 } from "../components/index.js";
 import { Subject } from "../models/subject.js";
 
 const { Dept } = Subject;
 
 class GranularView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { use_legal_titles: false };
-  }
   render() {
     const { subject, table } = this.props;
-    const { use_legal_titles } = this.state;
     return (
       <div>
         <LabeledBox
@@ -42,11 +36,6 @@ class GranularView extends React.Component {
         <LabeledBox label={<TextMaker text_key="rpb_report_data_sources" />}>
           <ReportDatasets {...this.props} />
         </LabeledBox>
-        <CheckBox
-          active={use_legal_titles}
-          onClick={() => this.setState({ use_legal_titles: !use_legal_titles })}
-          label={text_maker("use_legal_title")}
-        />
 
         {table.rpb_banner && <AlertBanner>{table.rpb_banner}</AlertBanner>}
         <div id="rpb-main-content">{this.get_table_content()}</div>
@@ -66,8 +55,6 @@ class GranularView extends React.Component {
       filter,
     } = this.props;
 
-    const { use_legal_titles } = this.state;
-
     const non_dept_key_cols = _.reject(sorted_key_columns, { nick: "dept" });
 
     const cols = [...non_dept_key_cols, ...data_columns];
@@ -80,6 +67,13 @@ class GranularView extends React.Component {
         header: text_maker("org"),
         is_searchable: true,
         formatter: "wide-str",
+      },
+      legal_title: {
+        index: 1,
+        header: text_maker("legal_title"),
+        is_searchable: true,
+        formatter: "wide-str",
+        initial_visible: false,
       },
       ..._.chain(cols)
         .map(({ nick, type, fully_qualified_name }, idx) => [
@@ -98,10 +92,8 @@ class GranularView extends React.Component {
     const table_data = _.map(flat_data, (row) => {
       const org = Dept.lookup(row.dept);
       return {
-        dept:
-          use_legal_titles && _.has(org, "legal_title")
-            ? org.legal_title
-            : org.name,
+        dept: org.name,
+        legal_title: org.legal_title ? org.legal_title : org.name,
         ..._.chain(cols)
           .map(({ nick }) => [nick, row[nick]])
           .fromPairs()
