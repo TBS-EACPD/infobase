@@ -178,6 +178,6 @@ concept_category_source:
   en: Public reports
   fr: Rapports publics
 
-use_legal_title: 
-  en: Use legal titles for organizations
-  fr: Utilisez des titres légaux pour les organisations
+org_legal_title:
+  en: Organization (Legal Title)
+  fr: Organisation (titre légal)
