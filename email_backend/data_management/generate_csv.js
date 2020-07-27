@@ -31,22 +31,28 @@ connect_db()
         const template_name = _.keys(templates)[index];
 
         const flattened_email_logs = _.map(collection, function (sub) {
-          return _.reduce(
-            sub._doc,
-            function (result, email_log_field, key) {
-              if (key === "__v") {
-                return result;
-              }
-              if (_.isPlainObject(email_log_field)) {
-                return { ...result, ...email_log_field };
-              } else if (_.isArray(email_log_field)) {
-                return { ...result, [key]: email_log_field.join(", ") };
-              } else {
-                return { ...result, [key]: email_log_field };
-              }
-            },
-            {}
-          );
+          return _.chain(
+            _.reduce(
+              sub._doc,
+              function (result, email_log_field, key) {
+                if (key === "__v") {
+                  return result;
+                }
+                if (_.isPlainObject(email_log_field)) {
+                  return { ...result, ...email_log_field };
+                } else if (_.isArray(email_log_field)) {
+                  return { ...result, [key]: email_log_field.join(", ") };
+                } else {
+                  return { ...result, [key]: email_log_field };
+                }
+              },
+              {}
+            )
+          )
+            .toPairs()
+            .sort()
+            .fromPairs()
+            .value();
         });
 
         const column_names = _.keys(flattened_email_logs[0]);
