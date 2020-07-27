@@ -5,7 +5,7 @@ list_of_provided_services_title:
 list_of_provided_services_desc:
   transform: [handlebars, markdown]
   en: |
-    **{{subject_name}}** is reporting on **{{num_of_services}}** services:
+    **{{subject_name}}** is reporting on **{{num_of_services}}** {{gl_tt "services" "SERVICE"}}:
   fr: |
     TODO
 view_service:
@@ -21,7 +21,7 @@ services_fees:
   fr: TODO
 services_fees_text:
   transform: [handlebars, markdown]
-  en: Out of the **{{services_count}}** services that **{{subject_name}}** provides, **{{charge_fees_count}}** services charge fees.
+  en: Out of the **{{services_count}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{charge_fees_count}}** services charge fees.
   fr: TODO
 service_charges_fees:
   en: Service charges fees
@@ -48,7 +48,7 @@ does_not_use_sin_as_identifier:
   fr: TODO
 sin_sub_title:
   transform: [handlebars, markdown]
-  en: How many services use **SIN** as a standard identifier?
+  en: How many {{gl_tt "services" "SERVICE"}} use **SIN** as a standard identifier?
   fr: TODO
 cra_sub_title:
   transform: [handlebars, markdown]
@@ -59,7 +59,7 @@ cra_sub_title:
 services_digital_status_text:
   transform: [handlebars, markdown]
   en: |
-    In **{{subject_name}}, {{fmt_percentage1 total_online_digital_status_percentage}}** of service components can be performed online / electronically
+    In **{{subject_name}}, {{fmt_percentage1 total_online_digital_status_percentage}}** of {{gl_tt "services" "SERVICE"}} components can be performed online / electronically
   fr: TODO
 services_digital_status:
   en: Online status of services
@@ -114,7 +114,7 @@ single_service_channels_title:
 service_channels_text:
   transform: [handlebars, markdown]
   en: |
-    Delivery channels that this service uses for handling applications and enquiries.
+    Delivery channels that this {{gl_tt "service" "SERVICE"}} uses for handling applications and enquiries.
     
     There were **{{max_value}} {{max_channel_key}}**, which is the highest delivery channel volume for this service
   fr: TODO
@@ -139,7 +139,8 @@ online_inquiry:
 
 # Overview
 overview_digital_status_title:
-  en: What components of this service are available online?
+  transform: [handlebars, markdown]
+  en: What components of this {{gl_tt "service" "SERVICE"}} are available online?
   fr: TODO
 overview_digital_status_desc:
   en: Online component of this service
@@ -158,21 +159,23 @@ related_programs:
   fr: TODO
 does_charge_fees:
   transform: [handlebars, markdown]
-  en: This service **does** charge fees
+  en: This {{gl_tt "service" "SERVICE"}} **does** charge fees
   fr: TODO
 does_not_charge_fees:
   transform: [handlebars, markdown]
-  en: This service **does not** charge fees
+  en: This {{gl_tt "service" "SERVICE"}} **does not** charge fees
   fr: TODO
 standards_performance_text:
-  en: Overall standards performance for this service
+  transform: [handlebars, markdown]
+  en: Overall standards performance for this {{gl_tt "service" "SERVICE"}}
   fr: TODO
 service_single_link_text:
   transform: [handlebars, markdown]
-  en: More details on this service can be found **{{ext_link "here" service_url }}**
+  en: More details on this {{gl_tt "service" "SERVICE"}} can be found **{{ext_link "here" service_url }}**
   fr: TODO
 service_links_text:
-  en: More details on this service can be found in the links below
+  transform: [handlebars, markdown]
+  en: More details on this {{gl_tt "service" "SERVICE"}} can be found in the links below
   fr: TODO
 service_link_text:
   en: More details (external links)
@@ -186,7 +189,9 @@ service_standards_title:
   en: Service Standards
   fr: TODO
 service_standards_text:
-  en: Service Standards are used as metrics to indicate how the service is doing.
+  transform: [handlebars, markdown]
+  en: |
+    {{gl_tt "Service Standards" "STANDARD"}} are used as metrics to indicate how the service is doing.
   fr: TODO
 no_service_standards_text:
   en: This service does not have any service standards
