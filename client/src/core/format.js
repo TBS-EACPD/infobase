@@ -106,19 +106,21 @@ const compact = (precision, val, lang, options) => {
     if (val === 0) {
       return ["", 0];
     } else {
-      const compacted = _.filter(
-        _.times(3, (i) => {
-          //can't break out of a lodash loop
-          const breakpoint = 1000000000 / Math.pow(10, i * 3); //checking 1B, 1M, and 1K
-          if (abs >= breakpoint) {
-            return [abbrev[breakpoint][lang], val / breakpoint];
-          }
-        }),
-        (pair) => {
-          return !_.isUndefined(pair);
+      const compacted = _.times(3, (i) => {
+        //can't break out of a lodash loop
+        const breakpoint = 1000000000 / Math.pow(10, i * 3); //checking 1B, 1M, and 1K
+        if (abs >= breakpoint) {
+          return [abbrev[breakpoint][lang], val / breakpoint];
         }
-      );
-      return compacted.length > 0 ? compacted[0] : [abbrev[999][lang], val];
+      });
+
+      const defined_compacted = _.filter(compacted, (pair) => {
+        return !_.isUndefined(pair);
+      });
+
+      return defined_compacted.length > 0
+        ? defined_compacted[0]
+        : [abbrev[999][lang], val];
     }
   })();
 
@@ -158,24 +160,23 @@ const compact_written = (precision, val, lang, options) => {
 
   const [rtn, abbrev] = (() => {
     if (abs >= 50000) {
-      const compacted = _.filter(
-        _.times(3, (i) => {
-          //can't break out of a lodash loop
-          const breakpoint = 1000000000 / Math.pow(10, i * 3); //checking 1B, 1M, and 1K
-          precision = i === 2 && precision < 2 ? 0 : precision;
-          if (abs >= breakpoint) {
-            return [
-              number_formatter[lang][precision].format(val / breakpoint),
-              abbrevs[breakpoint][lang],
-            ];
-          }
-        }),
-        (pair) => {
-          return !_.isUndefined(pair);
+      const compacted = _.times(3, (i) => {
+        //can't break out of a lodash loop
+        const breakpoint = 1000000000 / Math.pow(10, i * 3); //checking 1B, 1M, and 1K
+        precision = i === 2 && precision < 2 ? 0 : precision;
+        if (abs >= breakpoint) {
+          return [
+            number_formatter[lang][precision].format(val / breakpoint),
+            abbrevs[breakpoint][lang],
+          ];
         }
-      );
+      });
 
-      return compacted[0];
+      const defined_compacted = _.filter(compacted, (pair) => {
+        return !_.isUndefined(pair);
+      });
+
+      return defined_compacted[0];
     } else {
       precision = precision < 2 ? 0 : precision;
       return [
