@@ -1,9 +1,9 @@
 copy_table_data_desc:
   en: Copy table data to clipboard
-  fr: TODO
+  fr: Copier les données du tableau au presse-papier
 download_table_data_desc:
   en: Download table data as CSV
-  fr: TODO
+  fr: Télécharger les données du tableau au format CSV
 select_columns:
   en: Select columns
-  fr: TODO
+  fr: Choisir les colonnes
