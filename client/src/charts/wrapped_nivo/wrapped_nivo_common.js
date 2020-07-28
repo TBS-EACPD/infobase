@@ -207,7 +207,9 @@ class InteractiveGraph extends React.Component {
               />
             </button>
           )}
-          {_.map(other_buttons, (button, i) => button)}
+          {_.map(other_buttons, (button, i) => (
+            <Fragment key={i}>{button}</Fragment> //Keep this fragment, it is used to give button a key
+          ))}
         </div>
         {graph}
         <StatelessModal
