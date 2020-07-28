@@ -412,7 +412,7 @@ export const declare_detailed_program_spending_split_panel = () =>
       depends_on: ["programSobjs", "programSpending"],
 
       footnotes: footnote_topics,
-      calculate(subject, info, options) {
+      calculate(subject, options) {
         const { programSobjs, programSpending } = this.tables;
 
         const table_data = programSobjs.q(subject).data;
@@ -457,10 +457,23 @@ export const declare_detailed_program_spending_split_panel = () =>
         };
 
         const exp_cols = _.map(std_years, (yr) => yr + "exp");
-        const programSpending_data = _.chain(programSpending.q(subject).data)
-          .filter((row) => {
-            return d3.sum(exp_cols, (col) => row[col]) !== 0;
-          })
+        const filtered_prog_spending_data = _.filter(
+          programSpending.q(subject).data,
+          (row) => d3.sum(exp_cols, (col) => row[col]) !== 0
+        );
+
+        const top_2_prgms = _.chain(filtered_prog_spending_data)
+          .sortBy((row) => row["{{pa_last_year}}exp"])
+          .takeRight(2)
+          .reverse()
+          .value();
+
+        const top_1_prgm_five_yr_avg = _.chain(exp_cols)
+          .sumBy((col) => top_2_prgms[0][col])
+          .divide(exp_cols.length)
+          .value();
+
+        const processed_spending_data = _.chain(filtered_prog_spending_data)
           .map((row) => ({
             label: row.prgm,
             data: exp_cols.map((col) => row[col]),
@@ -468,6 +481,16 @@ export const declare_detailed_program_spending_split_panel = () =>
           }))
           .sortBy((x) => -d3.sum(x.data))
           .value();
+
+        const text_calculations = {
+          subject,
+          dept_num_of_progs: filtered_prog_spending_data.length,
+          top_1_prgm_name: top_2_prgms[0].prgm,
+          top_1_prgm_amt: top_2_prgms[0]["{{pa_last_year}}exp"],
+          top_2_prgm_name: top_2_prgms[1].prgm,
+          top_2_prgm_amt: top_2_prgms[1]["{{pa_last_year}}exp"],
+          top_1_prgm_five_yr_avg: top_1_prgm_five_yr_avg,
+        };
 
         const program_footnotes = _.chain(flat_data)
           .map(({ program }) => program)
@@ -479,10 +502,11 @@ export const declare_detailed_program_spending_split_panel = () =>
           .value();
 
         return {
+          text_calculations,
           top_3_so_nums,
           flat_data,
           higher_level_mapping,
-          programSpending_data,
+          processed_spending_data,
           program_footnotes,
         };
       },
@@ -490,13 +514,13 @@ export const declare_detailed_program_spending_split_panel = () =>
       render({ calculations, footnotes, sources }) {
         const {
           panel_args: {
+            text_calculations,
             flat_data,
             higher_level_mapping,
             top_3_so_nums,
-            programSpending_data,
+            processed_spending_data,
             program_footnotes,
           },
-          info,
         } = calculations;
 
         const filter_to_specific_so = (so_num) => (test_so_num) =>
@@ -527,16 +551,22 @@ export const declare_detailed_program_spending_split_panel = () =>
             {...{ sources, footnotes: [...footnotes, ...program_footnotes] }}
           >
             <div className="medium_panel_text">
-              <TM k={"dept_historical_program_spending_text"} args={info} />
+              <TM
+                k={"dept_historical_program_spending_text"}
+                args={text_calculations}
+              />
             </div>
             <div>
               <div>
                 <HistoricalProgramBars
-                  data={_.map(programSpending_data, ({ label, data }, ix) => ({
-                    label,
-                    data,
-                    id: `${ix}-${label}`, //need unique id, program names don't always work!
-                  }))}
+                  data={_.map(
+                    processed_spending_data,
+                    ({ label, data }, ix) => ({
+                      label,
+                      data,
+                      id: `${ix}-${label}`, //need unique id, program names don't always work!
+                    })
+                  )}
                 />
               </div>
               <div>
