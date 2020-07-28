@@ -97,7 +97,7 @@ const StatusGrid = (props) => {
   );
 
   const data = _.chain(props)
-    .pickBy((val, key) => key && val > 0)
+    .pickBy((val, key) => key)
     .toPairs()
     .groupBy(([key, val]) => key)
     .map((amounts, status_key) => {
@@ -152,7 +152,7 @@ const StatusGrid = (props) => {
     <div>
       <div>
         <MiniLegend items={legend_data} />
-        <div>
+        <div style={{ marginTop: "3rem" }}>
           {_.chain(viz_data)
             .groupBy("status_key")
             .map((group, status_key) => [group, status_key])
@@ -185,9 +185,16 @@ class PercentageViz extends React.Component {
     const { counts } = this.props;
 
     const all_ids = _.keys(counts);
+    const present_ids = _.chain(counts)
+      .toPairs()
+      .filter((count) => count[1] !== 0)
+      .fromPairs()
+      .value();
 
     const default_selected =
-      all_ids.length > 1 ? _.without(all_ids, "future") : all_ids;
+      _.without(present_ids, "future").length > 1
+        ? _.without(all_ids, "future")
+        : all_ids;
 
     this.state = {
       selected: default_selected,
