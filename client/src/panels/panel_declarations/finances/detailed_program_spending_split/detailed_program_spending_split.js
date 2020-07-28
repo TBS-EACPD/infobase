@@ -408,7 +408,6 @@ export const declare_detailed_program_spending_split_panel = () =>
     panel_key: "detailed_program_spending_split",
     levels: ["dept"],
     panel_config_func: (level, panel_key) => ({
-      info_deps: ["programSpending_dept_info"],
       depends_on: ["programSobjs", "programSpending"],
 
       footnotes: footnote_topics,
