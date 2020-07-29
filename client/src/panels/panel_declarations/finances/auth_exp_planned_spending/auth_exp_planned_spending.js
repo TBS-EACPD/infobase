@@ -412,6 +412,24 @@ const calculate = function (subject, info, options) {
     })
     .value();
 
+  const last_shared_index = _.min([exp_values.length, auth_values.length]) - 1;
+
+  const hist_unspent_avg_pct =
+    _.reduce(
+      exp_values,
+      (result, value, i) => result + auth_values[i] - value,
+      0
+    ) /
+    _.reduce(
+      auth_values,
+      (result, value, index) =>
+        index <= last_shared_index ? result + value : result,
+      0
+    );
+
+  const unspent_last_year =
+    auth_values[last_shared_index] - exp_values[last_shared_index];
+
   const additional_info = {
     has_planned_spending: subject.has_planned_spending,
     last_history_year: run_template(_.last(std_years)),
@@ -419,21 +437,12 @@ const calculate = function (subject, info, options) {
     gap_year:
       (subject.has_planned_spending && actual_to_planned_gap_year) || null,
     plan_change:
-      info[`${subject.level}_exp_planning_year_3`] -
-      info[`${subject.level}_auth_average`],
-    hist_avg_tot_pct: _.chain(auth_values)
-      .dropRight(auth_values.length - exp_values.length)
-      .isEqual(exp_values)
-      .value()
-      ? 0
-      : info[`${subject.level}_hist_avg_tot_pct`],
-    last_year_lapse_amt:
-      info[`${subject.level}_auth_pa_last_year`] -
-        info[`${subject.level}_exp_pa_last_year`] || 0,
+      planned_spending_values[planned_spending_values.length - 1] -
+      _.sum(auth_values) / auth_values.length,
+    hist_avg_tot_pct: hist_unspent_avg_pct,
+    last_year_lapse_amt: unspent_last_year || 0,
     last_year_lapse_pct:
-      (info[`${subject.level}_auth_pa_last_year`] -
-        info[`${subject.level}_exp_pa_last_year`] || 0) /
-      info[`${subject.level}_auth_pa_last_year`],
+      (unspent_last_year || 0) / auth_values[last_shared_index],
   };
 
   return { data_series, additional_info };
