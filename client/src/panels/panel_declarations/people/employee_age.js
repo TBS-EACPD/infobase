@@ -13,6 +13,7 @@ import {
   declare_panel,
   NivoLineBarToggle,
 } from "../shared.js";
+import { text_calculate } from "./text_calculator.js";
 
 import text from "./employee_age.yaml";
 
@@ -120,38 +121,6 @@ export const declare_employee_age_panel = () =>
 
         const { avg_age, age_group } = panel_args;
 
-        const age_group_data = _.map(age_group, (group) => group.data);
-        const age_group_by_year = _.zip(...age_group_data);
-        const age_group_sums_by_year = _.map(age_group_by_year, (year_group) =>
-          _.sum(year_group)
-        );
-        const first_active_year_index = _.findIndex(
-          age_group_sums_by_year,
-          (year_group) => year_group !== 0
-        );
-        const last_active_year_index = _.findLastIndex(
-          age_group_sums_by_year,
-          (year_group) => year_group !== 0
-        );
-
-        const first_active_year = run_template(
-          `${people_years[first_active_year_index]}`
-        );
-        const last_active_year = run_template(
-          `${people_years[last_active_year_index]}`
-        );
-
-        const top_age_group_pct = _.chain(age_group)
-          .map((group) => group.five_year_percent)
-          .max()
-          .value();
-        const top_age_group = _.chain(age_group)
-          .find((group) => group.five_year_percent === top_age_group_pct)
-          .thru((group) =>
-            lang === "en" ? group.label.replace("Age ", "") : group.label
-          )
-          .value();
-
         const dept_avg_first_active_year =
           avg_age.length > 1 ? _.first(avg_age[1].data) : null;
         const dept_avg_last_active_year =
@@ -160,14 +129,11 @@ export const declare_employee_age_panel = () =>
         const gov_avgage_last_year = _.last(avg_age[0].data);
 
         const text_calculations = {
-          first_active_year,
-          last_active_year,
+          ...text_calculate(age_group),
           dept_avg_first_active_year,
           dept_avg_last_active_year,
           gov_avgage_last_year_5,
           gov_avgage_last_year,
-          top_age_group_pct,
-          top_age_group,
           subject,
         };
 
