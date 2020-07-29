@@ -263,10 +263,38 @@ class AuthExpPlannedSpendingGraph extends React.Component {
 }
 
 const render = function ({ calculations, footnotes, sources, glossary_keys }) {
-  const { info, panel_args, subject } = calculations;
+  const { panel_args, subject } = calculations;
   const { data_series, additional_info } = panel_args;
 
-  const final_info = { ...info, ...additional_info };
+  const array_avg = _.chain(data_series)
+    .map((type) => [
+      type.key,
+      _.reduce(
+        type.values,
+        (result, year_spending) => result + year_spending,
+        0
+      ) / type.values.length,
+    ])
+    .fromPairs()
+    .value();
+
+  const planned_spending = _.chain(data_series)
+    .filter((type) => type.key === "planned_spending")
+    .thru((spending) => spending[0].values)
+    .thru((values) => values[values.length - 1])
+    .value();
+
+  const text_calculations = {
+    five_year_auth_average: array_avg["authorities"],
+    five_year_exp_average: array_avg["budgetary_expenditures"],
+    next_planned_spending: planned_spending,
+  };
+
+  const final_info = {
+    ...text_calculations,
+    ...additional_info,
+    dept: subject,
+  };
 
   return (
     <StdPanel
