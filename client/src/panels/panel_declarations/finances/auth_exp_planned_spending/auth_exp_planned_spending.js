@@ -328,7 +328,7 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
   );
 };
 
-const calculate = function (subject, info, options) {
+const calculate = function (subject, options) {
   const { orgVoteStatPa, programSpending, orgVoteStatEstimates } = this.tables;
 
   const query_subject = subject.is("gov") ? undefined : subject;
@@ -454,10 +454,6 @@ export const declare_auth_exp_planned_spending_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgVoteStatPa", "programSpending", "orgVoteStatEstimates"],
-      info_deps: [
-        `orgVoteStatPa_${level}_info`,
-        `programSpending_${level}_info`,
-      ],
       glossary_keys: ["BUD_EXP", "NB_EXP"],
       calculate,
       render,
