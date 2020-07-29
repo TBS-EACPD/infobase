@@ -21,18 +21,8 @@ const { text_maker, TM } = create_text_maker_component(text);
 const { people_years } = year_templates;
 const { compact_age_groups } = businessConstants;
 
-const info_deps_by_level = {
-  gov: ["orgEmployeeAgeGroup_gov_info", "orgEmployeeAvgAge_gov_info"],
-  dept: [
-    "orgEmployeeAgeGroup_dept_info",
-    "orgEmployeeAgeGroup_gov_info",
-    "orgEmployeeAvgAge_dept_info",
-    "orgEmployeeAvgAge_gov_info",
-  ],
-};
-
 const calculate_funcs_by_level = {
-  gov: function (gov, info) {
+  gov: function (gov) {
     const { orgEmployeeAgeGroup } = this.tables;
     const { orgEmployeeAvgAge } = this.tables;
 
@@ -123,11 +113,63 @@ export const declare_employee_age_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgEmployeeAgeGroup", "orgEmployeeAvgAge"],
-      info_deps: info_deps_by_level[level],
       calculate: calculate_funcs_by_level[level],
 
       render({ calculations, footnotes, sources }) {
-        const { info, panel_args } = calculations;
+        const { panel_args, subject } = calculations;
+
+        const { avg_age, age_group } = panel_args;
+
+        const age_group_data = _.map(age_group, (group) => group.data);
+        const age_group_by_year = _.zip(...age_group_data);
+        const age_group_sums_by_year = _.map(age_group_by_year, (year_group) =>
+          _.sum(year_group)
+        );
+        const first_active_year_index = _.findIndex(
+          age_group_sums_by_year,
+          (year_group) => year_group !== 0
+        );
+        const last_active_year_index = _.findLastIndex(
+          age_group_sums_by_year,
+          (year_group) => year_group !== 0
+        );
+
+        const first_active_year = run_template(
+          `${people_years[first_active_year_index]}`
+        );
+        const last_active_year = run_template(
+          `${people_years[last_active_year_index]}`
+        );
+
+        const top_age_group_pct = _.chain(age_group)
+          .map((group) => group.five_year_percent)
+          .max()
+          .value();
+        const top_age_group = _.chain(age_group)
+          .find((group) => group.five_year_percent === top_age_group_pct)
+          .thru((group) =>
+            lang === "en" ? group.label.replace("Age ", "") : group.label
+          )
+          .value();
+
+        const dept_avg_first_active_year =
+          avg_age.length > 1 ? _.first(avg_age[1].data) : null;
+        const dept_avg_last_active_year =
+          avg_age.length > 1 ? _.last(avg_age[1].data) : null;
+        const gov_avgage_last_year_5 = _.first(avg_age[0].data);
+        const gov_avgage_last_year = _.last(avg_age[0].data);
+
+        const text_calculations = {
+          first_active_year,
+          last_active_year,
+          dept_avg_first_active_year,
+          dept_avg_last_active_year,
+          gov_avgage_last_year_5,
+          gov_avgage_last_year,
+          top_age_group_pct,
+          top_age_group,
+          subject,
+        };
 
         const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
@@ -163,7 +205,7 @@ export const declare_employee_age_panel = () =>
             {...{ footnotes, sources }}
           >
             <Col size={12} isText>
-              <TM k={level + "_employee_age_text"} args={info} />
+              <TM k={level + "_employee_age_text"} args={text_calculations} />
             </Col>
             <Col size={12} isGraph extraClasses="zero-padding">
               <TabbedContent
