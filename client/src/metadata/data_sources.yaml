@@ -50,3 +50,11 @@ transfer_payments_source_title:
 transfer_payments_source_desc:
   en: A transfer payment is a grant, contribution or other payment made by the Government for which no goods or services are received. This data shows the ministry, department, the name and location of the recipient, together with the total amount paid.
   fr: Un paiement de transfert est une subvention, une contribution ou un autre paiement effectué par le gouvernement à l'égard duquel il ne reçoit ni produit, ni service en contrepartie. Cette information comprend le portefeuille ministériel, le ministère, nom et le lieu du bénéficiaire, ainsi que le montant total versé. Les annexes mentionnées dans le jeu de données peuvent être trouvées dans la version officielle de l’enregistrement.
+
+services_title: 
+  en: Services
+  fr: TODO
+
+services_desc:
+  en : Provision of a specific final output that addresses one or more needs of an intended recipient and contributes to the achievement of an outcome.
+  fr : Extrant final précis qui comble un ou plusieurs besoins d’un bénéficiaire visé et qui contribue à l’obtention d’un résultat.
