@@ -437,8 +437,6 @@ const calculate = function (subject, options) {
       (unspent_last_year || 0) / auth_values[last_shared_index],
   };
 
-  console.log(data_series);
-
   return { data_series, additional_info };
 };
 
