@@ -4,11 +4,12 @@ import { Format } from "../components";
 export default class Gauge extends React.Component {
   render() {
     const { total_value, value, color } = this.props;
-    const percentage = value / total_value || 0;
+    const gauge_value = value || 0;
+    const percentage = gauge_value / total_value;
     return (
       <div>
         <h4 style={{ textAlign: "center" }}>
-          {value || 0} / {total_value}
+          {gauge_value} / {total_value}
         </h4>
         <div
           style={{

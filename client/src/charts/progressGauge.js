@@ -5,7 +5,8 @@ import { Format } from "../components";
 export default class ProgressGauge extends React.Component {
   render() {
     const { value, total_value, circle_color } = this.props;
-    const percentage = value / total_value;
+    const gauge_value = value || 0;
+    const percentage = gauge_value / total_value;
 
     const num_circles = total_value < 10 ? total_value : 10;
 
@@ -33,7 +34,7 @@ export default class ProgressGauge extends React.Component {
     return (
       <div>
         <h4 style={{ textAlign: "center" }}>
-          {value} / {total_value}
+          {gauge_value} / {total_value}
         </h4>
         <div>{progress_gauge}</div>
         <h2 style={{ textAlign: "center", margin: "0" }}>
