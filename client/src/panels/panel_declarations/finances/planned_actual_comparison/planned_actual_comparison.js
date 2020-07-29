@@ -20,12 +20,8 @@ export const declare_planned_actual_comparison_panel = () =>
     levels: ["dept", "crso", "program"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["programSpending", "programFtes"],
-      info_deps:
-        level === "crso"
-          ? ["programSpending_crso_info", "programFtes_crso_info"]
-          : [],
       source: (subject) => get_source_links(["DP", "DRR", "PA"]),
-      calculate(subject, info) {
+      calculate(subject) {
         if (subject.level === "dept") {
           if (!subject.is_rpp_org) {
             return false;
@@ -54,7 +50,16 @@ export const declare_planned_actual_comparison_panel = () =>
           "DRR_FTE",
         ]);
 
+        const text_calculations = {
+          subject,
+          planned_spend: planned_spend,
+          planned_ftes: planned_ftes,
+          actual_spend: actual_spend,
+          actual_ftes: actual_ftes,
+        };
+
         return {
+          text_calculations,
           planned_ftes,
           planned_spend,
           actual_ftes,
@@ -66,7 +71,7 @@ export const declare_planned_actual_comparison_panel = () =>
       },
 
       render({ calculations, sources }) {
-        const { panel_args, subject, info } = calculations;
+        const { panel_args, subject } = calculations;
 
         const {
           actual_spend,
@@ -76,6 +81,7 @@ export const declare_planned_actual_comparison_panel = () =>
           diff_ftes,
           diff_spend,
           footnotes,
+          text_calculations,
         } = panel_args;
 
         return (
@@ -86,13 +92,7 @@ export const declare_planned_actual_comparison_panel = () =>
           >
             <TM
               k={`${subject.level}_planned_actual_text`}
-              args={{
-                ...panel_args,
-                subject,
-                crso_prg_num:
-                  subject.level === "crso" &&
-                  _.max([info.crso_fte_prg_num, info.crso_exp_prg_num]),
-              }}
+              args={text_calculations}
             />
             <PlannedActualTable
               {...{
