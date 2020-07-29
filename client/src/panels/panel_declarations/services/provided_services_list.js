@@ -75,13 +75,13 @@ class ProvidedServicesListPanel extends React.Component {
                       }}
                     >
                       {_.map(service_type, (type) => (
-                        <div
+                        <span
                           key={type}
                           className="tag-badge"
                           style={{ marginRight: "1rem" }}
                         >
                           {type}
-                        </div>
+                        </span>
                       ))}
                     </div>
                     <a href={`#dept/${org_id}/service-panels/${id}`}>

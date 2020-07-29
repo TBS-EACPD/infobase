@@ -245,10 +245,10 @@ const sources = _.mapValues(
     },
     SERVICES: {
       title() {
-        return "TODO";
+        return tm("services_title");
       },
       description() {
-        return "TODO";
+        return tm("services_desc");
       },
       frequency: frequencies.y,
       open_data: infobase_open_data_page,
