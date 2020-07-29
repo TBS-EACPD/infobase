@@ -267,20 +267,12 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
   const { data_series, additional_info } = panel_args;
 
   const array_avg = _.chain(data_series)
-    .map((type) => [
-      type.key,
-      _.reduce(
-        type.values,
-        (result, year_spending) => result + year_spending,
-        0
-      ) / type.values.length,
-    ])
+    .map((type) => [type.key, _.sum(type.values) / type.values.length])
     .fromPairs()
     .value();
 
   const planned_spending = _.chain(data_series)
-    .filter((type) => type.key === "planned_spending")
-    .thru((spending) => spending[0].values)
+    .thru((data_series) => data_series[data_series.length - 1].values)
     .thru((values) => values[values.length - 1])
     .value();
 
@@ -444,6 +436,8 @@ const calculate = function (subject, options) {
     last_year_lapse_pct:
       (unspent_last_year || 0) / auth_values[last_shared_index],
   };
+
+  console.log(data_series);
 
   return { data_series, additional_info };
 };
