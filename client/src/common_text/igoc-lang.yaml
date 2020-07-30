@@ -59,9 +59,6 @@ pas_code:
 incorp_yr:
   en: Year of Incorporation
   fr: Année de constitution en société
-status:
-  en: Status
-  fr: État
 rpp_links:
   en: Departmental Plans (DP)
   fr: Plan ministériels (PM)

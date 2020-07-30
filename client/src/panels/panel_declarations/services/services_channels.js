@@ -49,12 +49,17 @@ class ServicesChannelsPanel extends React.Component {
   render() {
     const { panel_args } = this.props;
     const { active_services } = this.state;
-    const services = panel_args.services;
+    const { services, subject } = panel_args;
+
+    const filtered_channel_keys = _.filter(
+      service_channels_keys,
+      (key) => !(key === "phone_inquiry" || key === "online_inquiry")
+    );
 
     const { max_vol_service_name, max_vol_service_value } = _.chain(services)
       .map(({ name, service_report }) => ({
         max_vol_service_name: name,
-        max_vol_service_value: _.chain(service_channels_keys)
+        max_vol_service_value: _.chain(filtered_channel_keys)
           .map((key) => _.sumBy(service_report, `${key}_count`))
           .sum()
           .value(),
@@ -62,7 +67,7 @@ class ServicesChannelsPanel extends React.Component {
       .maxBy("max_vol_service_value")
       .value();
     const { max_vol_channel_name, max_vol_channel_value } = _.chain(
-      service_channels_keys
+      filtered_channel_keys
     )
       .map((key) => ({
         max_vol_channel_name: text_maker(key),
@@ -92,6 +97,7 @@ class ServicesChannelsPanel extends React.Component {
           className="medium_panel_text"
           k="services_channels_text"
           args={{
+            subject,
             max_vol_service_name,
             max_vol_service_value,
             max_vol_channel_name,
