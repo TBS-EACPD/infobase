@@ -18,12 +18,32 @@ class ServicesChannelsPanel extends React.Component {
     super(props);
 
     const services = props.panel_args.services;
+    // Get 3 median of each report's maximum channel volume
+    const median_3_values = _.chain(services)
+      .map((service) => ({
+        id: service.id,
+        value: _.chain(service_channels_keys)
+          .map((key) =>
+            _.map(service.service_report, (report) => report[`${key}_count`])
+          )
+          .flatten()
+          .max()
+          .value(),
+      }))
+      .filter("value")
+      .sortBy("value")
+      .map("id")
+      .thru((processed_services) =>
+        _.times(3, (i) =>
+          _.nth(processed_services, _.floor(processed_services.length / 2) - i)
+        )
+      )
+      .map((id) => [id, true])
+      .fromPairs()
+      .value();
+
     this.state = {
-      active_services: _.chain(services)
-        .map(({ service_id }) => [service_id, true])
-        .take(3)
-        .fromPairs()
-        .value(),
+      active_services: median_3_values,
     };
   }
   render() {
