@@ -59,7 +59,7 @@ cra_sub_title:
 services_digital_status_text:
   transform: [handlebars, markdown]
   en: |
-    In **{{subject_name}}, {{fmt_percentage1 total_online_digital_status_percentage}}** of {{gl_tt "services" "SERVICE"}} components can be performed online / electronically
+    In **{{subject_name}}, {{fmt_percentage1 total_online_digital_status_percentage}}** of {{gl_tt "services" "SERVICE"}} components can be performed online / electronically.
   fr: TODO
 services_digital_status:
   en: Online status of services
@@ -110,6 +110,15 @@ services_channels_title:
   fr: TODO
 single_service_channels_title:
   en: Delivery Channels of this service
+  fr: TODO
+services_channels_text:
+  transform: [handlebars, markdown]
+  en: |
+    Delivery channels that {{gl_tt "services" "SERVICE"}} use for handling applications and enquiries.
+    
+    **{{max_vol_service_name}}** was the service with the most business volume of **{{fmt_big_int max_vol_service_value}}**.
+
+    **{{max_vol_channel_name}}** was the channel that had the most traffic with **{{fmt_big_int max_vol_channel_value}}**.
   fr: TODO
 service_channels_text:
   transform: [handlebars, markdown]
