@@ -27,9 +27,9 @@ dept_employee_executive_level_text:
      The smallest executive group was the **{{fmt_big_int bottom_group}}** level, with an average share of **{{fmt_percentage1 bottom_group_avg_pct}}** of **{{subject.name}}'s** executive population.
    {{/if}}
   fr: |
-   De **{{fmt_big_int first_active_year}}** à **{{fmt_big_int last_active_year}}**, en moyenne, **{{fmt_big_int avg_num_execs}}** employés **{{de_dept dept}}** occupaient un poste de direction, soit **{{fmt_percentage1 avg_pct_execs}}** du nombre moyen de personnel.
+   De **{{fmt_big_int first_active_year}}** à **{{fmt_big_int last_active_year}}**, en moyenne, **{{fmt_big_int avg_num_execs}}** employés **{{subject.name}}** occupaient un poste de direction, soit **{{fmt_percentage1 avg_pct_execs}}** du nombre moyen de personnel.
    
-   Au cours de cette période, les employés de niveau **{{fmt_big_int top_group}}** constituaient le plus fort contingent, avec une moyenne de **{{fmt_percentage1 top_group_avg_pct}}** du nombre total de cadres de direction **{{de_dept dept}}**. 
+   Au cours de cette période, les employés de niveau **{{fmt_big_int top_group}}** constituaient le plus fort contingent, avec une moyenne de **{{fmt_percentage1 top_group_avg_pct}}** du nombre total de cadres de direction **{{subject.name}}**. 
    {{#if bottom_group}}
      Le niveau **{{fmt_big_int bottom_group}}** formait le plus petit contingent, avec une moyenne de **{{fmt_percentage1 bottom_group_avg_pct}}** du numbre total de cadres de direction.
    {{/if}}
