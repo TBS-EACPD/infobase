@@ -9,6 +9,7 @@ import {
   declare_panel,
   NivoLineBarToggle,
 } from "../shared.js";
+import { text_calculate } from "./text_calculator";
 
 import text from "./employee_type.yaml";
 
@@ -17,13 +18,8 @@ const { text_maker, TM } = create_text_maker_component(text);
 const { people_years } = year_templates;
 const { tenure } = businessConstants;
 
-const info_deps_by_level = {
-  gov: ["orgEmployeeType_gov_info"],
-  dept: ["orgEmployeeType_gov_info", "orgEmployeeType_dept_info"],
-};
-
 const calculate_funcs_by_level = {
-  gov: function (gov, info) {
+  gov: function (gov) {
     const { orgEmployeeType } = this.tables;
     return _.chain(tenure)
       .values()
@@ -38,14 +34,15 @@ const calculate_funcs_by_level = {
           five_year_percent:
             yearly_values.reduce(function (sum, val) {
               return sum + val;
-            }, 0) / info.gov_five_year_total_head_count,
+            }, 0) /
+            _.sum(orgEmployeeType.q().sum(people_years, { as_object: false })),
           active: true,
         };
       })
       .sortBy((d) => -d3.sum(d.data))
       .value();
   },
-  dept: function (dept, info) {
+  dept: function (dept) {
     const { orgEmployeeType } = this.tables;
     return _.chain(orgEmployeeType.q(dept).data)
       .map((row) => ({
@@ -66,7 +63,6 @@ export const declare_employee_type_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgEmployeeType"],
-      info_deps: info_deps_by_level[level],
       glossary_keys: [
         "INDET_PEOPLE",
         "TERM_PEOPLE",
@@ -76,7 +72,42 @@ export const declare_employee_type_panel = () =>
       calculate: calculate_funcs_by_level[level],
 
       render({ calculations, footnotes, sources, glossary_keys }) {
-        const { info, panel_args } = calculations;
+        const { panel_args, subject } = calculations;
+
+        const student_data = _.find(
+          panel_args,
+          (type) => type.label === "Student" || type.label === "Étudiant"
+        ).data;
+
+        const pre_text_calculations = text_calculate(panel_args);
+
+        const sum_emp_first_active_year = _.chain(panel_args)
+          .map(
+            (type) => type.data[pre_text_calculations.first_active_year_index]
+          )
+          .sum()
+          .value();
+
+        const sum_emp_last_active_year = _.chain(panel_args)
+          .map(
+            (type) => type.data[pre_text_calculations.last_active_year_index]
+          )
+          .sum()
+          .value();
+
+        const student_first_active_year_pct =
+          student_data[pre_text_calculations.first_active_year_index] /
+          sum_emp_first_active_year;
+        const student_last_active_year_pct =
+          student_data[pre_text_calculations.last_active_year_index] /
+          sum_emp_last_active_year;
+
+        const text_calculations = {
+          ...pre_text_calculations,
+          student_first_active_year_pct,
+          student_last_active_year_pct,
+          subject,
+        };
 
         const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
@@ -86,7 +117,7 @@ export const declare_employee_type_panel = () =>
             {...{ footnotes, sources, glossary_keys }}
           >
             <Col size={12} isText>
-              <TM k={level + "_employee_type_text"} args={info} />
+              <TM k={level + "_employee_type_text"} args={text_calculations} />
             </Col>
             <Col size={12} isGraph>
               <NivoLineBarToggle
