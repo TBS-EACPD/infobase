@@ -18,18 +18,26 @@ export const declare_employee_last_year_totals_panel = () =>
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgEmployeeType"],
 
-      info_deps: ["orgEmployeeType_dept_info", "orgEmployeeType_gov_info"],
+      calculate(subject) {
+        const { orgEmployeeType } = this.tables;
+        const dept_last_year_emp = _.chain(orgEmployeeType.q(subject).data)
+          .map((emp_type) => emp_type["{{ppl_last_year}}"])
+          .sum()
+          .value();
+        const gov_last_year_emp = _.chain(orgEmployeeType.q().data)
+          .map((dept) => dept["{{ppl_last_year}}"])
+          .sum()
+          .value();
 
-      calculate(subject, info) {
         return {
           vals: [
             {
               name: "gov_last_year_emp",
-              value: info.gov_head_count_ppl_last_year,
+              value: gov_last_year_emp,
             },
             {
               name: "dept_last_year_emp",
-              value: info.dept_head_count_ppl_last_year,
+              value: dept_last_year_emp,
             },
           ],
           center: true,
@@ -37,10 +45,14 @@ export const declare_employee_last_year_totals_panel = () =>
       },
 
       render({ calculations, footnotes, sources }) {
-        const { subject, info, panel_args } = calculations;
+        const { subject, panel_args } = calculations;
 
         const dept_emp_value = panel_args.vals[1].value;
         const gov_emp_value = panel_args.vals[0].value;
+
+        const dept_emp_pct = dept_emp_value / gov_emp_value;
+
+        const text_calculations = { dept_emp_value, dept_emp_pct, subject };
         return (
           <StdPanel
             title={text_maker("dept_employee_last_year_totals_title")}
@@ -48,7 +60,10 @@ export const declare_employee_last_year_totals_panel = () =>
             allowOverflow={true}
           >
             <Col size={!window.is_a11y_mode ? 5 : 12} isText>
-              <TM k="dept_employee_last_year_totals_text" args={info} />
+              <TM
+                k="dept_employee_last_year_totals_text"
+                args={text_calculations}
+              />
             </Col>
             {!window.is_a11y_mode && (
               <Col size={7} isGraph>
