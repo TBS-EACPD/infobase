@@ -5,9 +5,11 @@ import {
   Col,
   CircleProportionChart,
   declare_panel,
+  year_templates,
 } from "../shared.js";
 
 import text1 from "./employee_last_year_totals.yaml";
+const { people_years } = year_templates;
 
 const { text_maker, TM } = create_text_maker_component([text1, text2]);
 
@@ -20,14 +22,13 @@ export const declare_employee_last_year_totals_panel = () =>
 
       calculate(subject) {
         const { orgEmployeeType } = this.tables;
-        const dept_last_year_emp = _.chain(orgEmployeeType.q(subject).data)
-          .map((emp_type) => emp_type["{{ppl_last_year}}"])
-          .sum()
-          .value();
-        const gov_last_year_emp = _.chain(orgEmployeeType.q().data)
-          .map((dept) => dept["{{ppl_last_year}}"])
-          .sum()
-          .value();
+        const dept_last_year_emp = orgEmployeeType
+          .q(subject)
+          .sum(people_years, { as_object: true })["{{ppl_last_year}}"];
+
+        const gov_last_year_emp = orgEmployeeType
+          .q()
+          .sum(people_years, { as_object: true })["{{ppl_last_year}}"];
 
         return {
           vals: [
