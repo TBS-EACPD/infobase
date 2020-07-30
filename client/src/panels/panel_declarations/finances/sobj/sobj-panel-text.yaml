@@ -25,15 +25,15 @@ personnel_spend_text:
   transform: [handlebars,markdown]
   en: |
    Another major portion of government budgetary spending is on {{gl_tt "Personnel" "SOBJ1"}}. Over the past five 
-   years, the government has spent an average **{{fmt_compact1_written gov_personnel_average}}** per year in this {{gl_tt "Standard Object" "SOBJ"}}. 
+   years, the government has spent an average **{{fmt_compact1_written five_year_avg}}** per year in this {{gl_tt "Standard Object" "SOBJ"}}. 
 
 
-   During this five-year time frame, the highest annual expenditure on Personnel was **{{fmt_compact1_written gov_personnel_max}}**, recorded in {{fmt_compact1_written gov_personnel_max_year}}.
-   The lowest annual expenditure was **{{fmt_compact1_written gov_personnel_min}}**, recorded in {{fmt_compact1_written gov_personnel_min_year}}.
+   During this five-year time frame, the highest annual expenditure on Personnel was **{{fmt_compact1_written max_spend}}**, recorded in {{fmt_compact1_written max_year}}.
+   The lowest annual expenditure was **{{fmt_compact1_written min_spend}}**, recorded in {{fmt_compact1_written min_year}}.
   fr: |
    Une autre partie importante des dépenses budgétaires du gouvernement est consacrée au {{gl_tt "personnel" "SOBJ1"}}. 
-   Au cours des cinq derniers exercices, le gouvernement a dépensé en moyenne **{{fmt_compact1_written gov_personnel_average}}** par an pour cet {{gl_tt "article courant" "SOBJ"}}. 
+   Au cours des cinq derniers exercices, le gouvernement a dépensé en moyenne **{{fmt_compact1_written five_year_avg}}** par an pour cet {{gl_tt "article courant" "SOBJ"}}. 
 
 
-   Au cours de cette période quinquennale, les dépenses annuelles les plus élevées en personnel ont été engagées en {{fmt_compact1_written gov_personnel_max_year}} et se sont chiffrées 
-   à **{{fmt_compact1_written gov_personnel_max}}**. Les dépenses annuelles les plus faibles étaient de **{{fmt_compact1_written gov_personnel_min}}** et ont été engagées en {{fmt_compact1_written gov_personnel_min_year}}.
+   Au cours de cette période quinquennale, les dépenses annuelles les plus élevées en personnel ont été engagées en {{fmt_compact1_written max_year}} et se sont chiffrées 
+   à **{{fmt_compact1_written max_spend}}**. Les dépenses annuelles les plus faibles étaient de **{{fmt_compact1_written min_spend}}** et ont été engagées en {{fmt_compact1_written min_year}}.
