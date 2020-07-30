@@ -11,6 +11,8 @@ import {
   util_components,
 } from "../shared.js";
 
+import { text_calculate } from "./text_calculator";
+
 import text from "./employee_prov.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -61,8 +63,55 @@ class ProvPanel extends React.Component {
   render() {
     const { calculations, footnotes, sources, level } = this.props.render_args;
 
-    const { info, panel_args } = calculations;
+    const { panel_args, subject } = calculations;
     const { data } = panel_args;
+
+    const employees_by_year = _.map(data, (year) =>
+      _.chain(year).values().sum().value()
+    );
+
+    const first_active_year_index = _.findIndex(
+      employees_by_year,
+      (year) => year !== 0
+    );
+
+    const last_active_year_index = _.findLastIndex(
+      employees_by_year,
+      (year) => year !== 0
+    );
+
+    const duration = last_active_year_index - first_active_year_index + 1;
+
+    const pre_formatted_data = _.reduce(
+      data,
+      (result, year) => {
+        if (_.isEmpty(result)) {
+          return _.map(year, (region_value, region) => ({
+            label: region,
+            data: [region_value],
+          }));
+        }
+        return _.map(result, (region) => ({
+          label: region.label,
+          data: [...region.data, year[region.label]],
+        }));
+      },
+      []
+    );
+
+    const formatted_data = _.map(pre_formatted_data, (region) => ({
+      ...region,
+      five_year_percent:
+        _.sum(region.data) / duration / (_.sum(employees_by_year) / duration),
+    }));
+
+    const pre_text_calculations = text_calculate(formatted_data);
+
+    const text_calculations = {
+      ...pre_text_calculations,
+      subject,
+      top_group: provinces[pre_text_calculations.top_group].text,
+    };
 
     return (
       <StdPanel
@@ -70,7 +119,7 @@ class ProvPanel extends React.Component {
         {...{ footnotes, sources }}
       >
         <Col size={12} isText>
-          <TM k={level + "_employee_prov_text"} args={info} />
+          <TM k={level + "_employee_prov_text"} args={text_calculations} />
         </Col>
         {!window.is_a11y_mode && (
           <Col size={12} isGraph>
@@ -112,11 +161,6 @@ class ProvPanel extends React.Component {
   }
 }
 
-const info_deps_by_level = {
-  gov: ["orgEmployeeRegion_gov_info"],
-  dept: ["orgEmployeeRegion_gov_info", "orgEmployeeRegion_dept_info"],
-};
-
 const calculate_common = (data) => {
   const max = d3.max(d3.values(_.last(data)));
   const color_scale = d3.scaleLinear().domain([0, max]).range([0.2, 1]);
@@ -151,7 +195,6 @@ export const declare_employee_prov_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgEmployeeRegion"],
-      info_deps: info_deps_by_level[level],
       calculate: calculate_funcs_by_level[level],
 
       render(render_args) {
