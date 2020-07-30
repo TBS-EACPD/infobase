@@ -49,12 +49,12 @@ export class ServiceStandards extends React.Component {
     const data = _.chain(standards)
       .map(({ name, type, channel, standard_report }) =>
         _.map(standard_report, ({ year, count, met_count, is_target_met }) => ({
-          name: name,
-          year: year,
+          name,
+          year,
           standard_type: type,
-          channel: channel,
-          count: count,
-          met_count: met_count,
+          channel,
+          count,
+          met_count,
           is_target_met: is_target_met ? "met" : "not_met",
         }))
       )

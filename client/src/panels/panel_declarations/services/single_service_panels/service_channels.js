@@ -31,21 +31,15 @@ export class ServiceChannels extends React.Component {
       .filter((key) =>
         _.reduce(
           service.service_report,
-          (previous_is_not_null, report) => {
-            const current_is_null = _.isNull(report[`${key}_count`]);
-            return previous_is_not_null || !current_is_null;
-          },
+          (previous_is_not_null, report) =>
+            previous_is_not_null || !_.isNull(report[`${key}_count`]),
           false
         )
       )
       .map((key) => ({
         id: key,
         label: text_maker(key),
-        [text_maker(key)]: _.reduce(
-          service.service_report,
-          (sum, report) => sum + report[`${key}_count`],
-          0
-        ),
+        [text_maker(key)]: _.sumBy(service.service_report, `${key}_count`),
       }))
       .value();
 

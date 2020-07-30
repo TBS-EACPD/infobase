@@ -10,6 +10,7 @@ import {
   available_icons,
   available_keys,
 } from "../shared.js";
+import { Fragment } from "react";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -30,10 +31,10 @@ export class ServiceDigitalStatus extends React.Component {
         index: 0,
         header: text_maker("overview_digital_status_desc"),
         formatter: (key) => (
-          <div>
+          <Fragment>
             <TM k={key} el="h4" />
             <TM k={`${key}_desc`} />
-          </div>
+          </Fragment>
         ),
         raw_formatter: (key) =>
           `${text_maker(key)} ${text_maker(`${key}_desc`)}}`,
@@ -42,10 +43,10 @@ export class ServiceDigitalStatus extends React.Component {
         index: 1,
         header: text_maker("online_status"),
         formatter: (value) => (
-          <div>
+          <Fragment>
             {available_icons[available_keys[value]]}
             <TM style={{ marginLeft: 5 }} k={available_keys[value]} />
-          </div>
+          </Fragment>
         ),
         raw_formatter: (value) => available_keys[value],
       },

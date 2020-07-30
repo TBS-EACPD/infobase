@@ -37,11 +37,7 @@ class ServicesChannelsPanel extends React.Component {
           active_services[service.service_id] && !_.isNull(service[key])
             ? [
                 service.name,
-                _.reduce(
-                  service.service_report,
-                  (sum, report) => sum + report[`${key}_count`],
-                  0
-                ),
+                _.sumBy(service.service_report, `${key}_count`) || 0,
               ]
             : []
         )
@@ -112,10 +108,7 @@ export const declare_services_channels_panel = () =>
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
       calculate: (subject) => {
-        const services =
-          level === "dept"
-            ? Service.get_by_dept(subject.id)
-            : Service.get_all();
+        const services = Service.get_by_dept(subject.id);
         return { subject, services };
       },
       footnotes: false,
