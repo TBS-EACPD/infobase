@@ -13,22 +13,18 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesDigitalStatusPanel = ({ panel_args }) => {
   const services = panel_args.services;
-  const total_online_digital_statuses = _.reduce(
-    digital_status_keys,
-    (sum, key) => {
-      const current_count = _.countBy(services, `${key}_status`).true || 0;
-      return sum + current_count;
-    },
-    0
+
+  const get_current_status_count = (key) =>
+    _.countBy(services, `${key}_status`).true || 0;
+
+  const total_online_digital_statuses = _.sumBy(digital_status_keys, (key) =>
+    get_current_status_count(key)
   );
-  const data = _.map(digital_status_keys, (key) => {
-    const current_status_count = _.countBy(services, `${key}_status`).true || 0;
-    return {
-      label: text_maker(`${key}_desc`),
-      id: key,
-      value: current_status_count,
-    };
-  });
+  const data = _.map(digital_status_keys, (key) => ({
+    label: text_maker(`${key}_desc`),
+    id: key,
+    value: get_current_status_count(key),
+  }));
   return (
     <div>
       <TM
