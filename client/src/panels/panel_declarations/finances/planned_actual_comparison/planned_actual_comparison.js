@@ -56,6 +56,7 @@ export const declare_planned_actual_comparison_panel = () =>
           planned_ftes: planned_ftes,
           actual_spend: actual_spend,
           actual_ftes: actual_ftes,
+          crso_prg_num: subject.level === "crso" && subject.programs.length,
         };
 
         return {
