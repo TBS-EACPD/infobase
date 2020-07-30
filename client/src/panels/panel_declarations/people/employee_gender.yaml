@@ -6,15 +6,15 @@ employee_gender_title:
 gov_employee_gender_text:
   transform: [handlebars,markdown]
   en: |
-    From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, **{{gov_head_count_gender_top}}** accounted for an average of **{{fmt_percentage1 gov_head_count_gender_top_avg_percent_NA_included}}** of the **Federal Public Service**,
-    while **{{gov_head_count_gender_bottom}}** accounted for an average of **{{fmt_percentage1 gov_head_count_gender_bottom_avg_percent_NA_included}}**.
+    From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, **{{top_group}}** accounted for an average of **{{fmt_percentage1 top_group_avg_pct}}** of the **Federal Public Service**,
+    while **{{bottom_group}}** accounted for an average of **{{fmt_percentage1 bottom_group_avg_pct}}**.
   fr: |
-    De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, les **{{gov_head_count_gender_top}}** constituaient en moyenne **{{fmt_percentage1 gov_head_count_gender_top_avg_percent_NA_included}}** de la **fonction publique fédérale**, 
-    comparativement à **{{fmt_percentage1 gov_head_count_gender_bottom_avg_percent_NA_included}}** pour les **{{gov_head_count_gender_bottom}}**.
+    De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, les **{{top_group}}** constituaient en moyenne **{{fmt_percentage1 top_group_avg_pct}}** de la **fonction publique fédérale**, 
+    comparativement à **{{fmt_percentage1 bottom_group_avg_pct}}** pour les **{{bottom_group}}**.
 
 dept_employee_gender_text:
   transform: [handlebars,markdown]
   en: |
-    From **{{dept_head_count_gender_first_active_year}}** to **{{dept_head_count_gender_last_active_year}}**, **{{dept_head_count_gender_top}}** accounted for an average of **{{fmt_percentage1 dept_head_count_gender_top_avg_percent_NA_included}}** of **{{subject.name}}**’s workforce{{#isEqual dept_head_count_gender_single_type_flag true}}.{{else}}, while **{{dept_head_count_gender_bottom}}** accounted for an average of **{{fmt_percentage1 dept_head_count_gender_bottom_avg_percent_NA_included}}**.{{/isEqual}}
+    From **{{first_active_year}}** to **{{last_active_year}}**, **{{top_group}}** accounted for an average of **{{fmt_percentage1 top_group_avg_pct}}** of **{{subject.name}}**’s workforce{{#isEqual single_type_flag true}}.{{else}}, while **{{bottom_group}}** accounted for an average of **{{fmt_percentage1 bottom_group_avg_pct}}**.{{/isEqual}}
   fr: |
-    De **{{dept_head_count_gender_first_active_year}}** à **{{dept_head_count_gender_last_active_year}}**, les **{{dept_head_count_gender_top}}** constituaient en moyenne **{{fmt_percentage1 dept_head_count_gender_top_avg_percent_NA_included}}** du personnel **{{de_dept dept}}**{{#isEqual dept_head_count_gender_single_type_flag true}}.{{else}}, comparativement à **{{fmt_percentage1 dept_head_count_gender_bottom_avg_percent_NA_included}}** pour les **{{dept_head_count_gender_bottom}}**.{{/isEqual}}
+    De **{{first_active_year}}** à **{{last_active_year}}**, les **{{top_group}}** constituaient en moyenne **{{fmt_percentage1 top_group_avg_pct}}** du personnel **{{de_dept dept}}**{{#isEqual single_type_flag true}}.{{else}}, comparativement à **{{fmt_percentage1 bottom_group_avg_pct}}** pour les **{{bottom_group}}**.{{/isEqual}}

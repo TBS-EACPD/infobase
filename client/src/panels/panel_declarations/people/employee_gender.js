@@ -9,6 +9,7 @@ import {
   declare_panel,
   NivoLineBarToggle,
 } from "../shared.js";
+import { text_calculate } from "./text_calculator";
 
 import text from "./employee_gender.yaml";
 
@@ -17,13 +18,8 @@ const { text_maker, TM } = create_text_maker_component(text);
 const { people_years } = year_templates;
 const { gender } = businessConstants;
 
-const info_deps_by_level = {
-  gov: ["orgEmployeeGender_gov_info"],
-  dept: ["orgEmployeeGender_dept_info"],
-};
-
 const calculate_funcs_by_level = {
-  gov: function (gov, info) {
+  gov: function (gov) {
     const { orgEmployeeGender } = this.tables;
 
     const gov_five_year_total_head_count = _.chain(
@@ -53,7 +49,7 @@ const calculate_funcs_by_level = {
       .sortBy((d) => -d3.sum(d.data))
       .value();
   },
-  dept: function (dept, info) {
+  dept: function (dept) {
     const { orgEmployeeGender } = this.tables;
     return _.chain(orgEmployeeGender.q(dept).data)
       .map((row) => ({
@@ -74,11 +70,18 @@ export const declare_employee_gender_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgEmployeeGender"],
-      info_deps: info_deps_by_level[level],
       calculate: calculate_funcs_by_level[level],
 
       render({ calculations, footnotes, sources }) {
-        const { info, panel_args } = calculations;
+        const { panel_args, subject } = calculations;
+
+        const [women, men] = panel_args;
+        const women_men_only = [women, men];
+
+        const text_calculations = {
+          ...text_calculate(women_men_only),
+          subject,
+        };
 
         const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
@@ -103,7 +106,10 @@ export const declare_employee_gender_panel = () =>
             {...{ footnotes: required_footnotes, sources }}
           >
             <Col size={12} isText>
-              <TM k={level + "_employee_gender_text"} args={info} />
+              <TM
+                k={level + "_employee_gender_text"}
+                args={text_calculations}
+              />
             </Col>
             <Col size={12} isGraph>
               <NivoLineBarToggle
