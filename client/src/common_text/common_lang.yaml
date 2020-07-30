@@ -174,10 +174,10 @@ and:
   fr: et
 yes:
   en: Yes
-  fr: TODO
+  fr: Oui
 no:
   en: No
-  fr: TODO
+  fr: Non
 inclusive:
   en: inclusive
   fr: inclus
@@ -457,7 +457,7 @@ common_redirect_msg:
 
 status:
   en: Status
-  fr: TODO
+  fr: État
 target:
   en: Target
   fr: Cible

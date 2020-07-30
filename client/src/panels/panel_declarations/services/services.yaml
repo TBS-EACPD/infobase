@@ -106,19 +106,19 @@ issue_res_digital:
 
 # Channels
 services_channels_title:
-  en: Delivery Channels of services
+  en: Delivery channels of services
   fr: TODO
 single_service_channels_title:
-  en: Delivery Channels of this service
+  en: Delivery channels of this service
   fr: TODO
 services_channels_text:
   transform: [handlebars, markdown]
   en: |
     Delivery channels that {{gl_tt "services" "SERVICE"}} use for handling applications and enquiries.
     
-    **{{max_vol_service_name}}** was the service with the most business volume of **{{fmt_big_int max_vol_service_value}}**.
+    In **{{subject.name}}**, the most traffic was generated through **{{max_vol_channel_name}}** channel with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
 
-    **{{max_vol_channel_name}}** was the channel that had the most traffic with **{{fmt_big_int max_vol_channel_value}}**.
+    The **{{max_vol_service_name}}** service received **{{fmt_big_int max_vol_service_value}}** applications, the highest among all of the department's services.
   fr: TODO
 service_channels_text:
   transform: [handlebars, markdown]
@@ -213,4 +213,10 @@ standard_type:
   fr: TODO
 standard_channel:
   en: Standard channel
+  fr: TODO
+total_business_volume:
+  en: Total Business Volume
+  fr: TODO
+satisfied_business_volume:
+  en: Satisfied Business Volume
   fr: TODO
