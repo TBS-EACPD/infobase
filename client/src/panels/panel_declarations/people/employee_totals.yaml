@@ -11,17 +11,17 @@ dept_employee_totals_title:
 gov_employee_totals_text:
   transform: [handlebars, markdown]
   en: |
-   In **{{ppl_last_year}}**, there were **{{fmt_big_int gov_head_count_ppl_last_year}}** {{gl_tt "employees" "HEAD"}} in the 
+   In **{{ppl_last_year}}**, there were **{{fmt_big_int last_year_num_emp}}** {{gl_tt "employees" "HEAD"}} in the 
    **{{gl_tt "Federal Public Service" "FPS"}}**. 
-   From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, the **Federal Public Service** employed an average of **{{fmt_big_int gov_head_count_avg}}** people.
+   From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, the **Federal Public Service** employed an average of **{{fmt_big_int avg_num_emp}}** people.
   fr: |
-   En **{{ppl_last_year}}**, la {{gl_tt "fonction publique fédérale" "FPS"}} comptait **{{fmt_big_int gov_head_count_ppl_last_year}}** {{gl_tt "employés" "HEAD"}}.
-   Le nombre moyen de personnel de la **fonction publique fédérale** de **{{ppl_last_year_5}}** à **{{ppl_last_year}}** est de **{{fmt_big_int gov_head_count_avg}}** employés.
+   En **{{ppl_last_year}}**, la {{gl_tt "fonction publique fédérale" "FPS"}} comptait **{{fmt_big_int last_year_num_emp}}** {{gl_tt "employés" "HEAD"}}.
+   Le nombre moyen de personnel de la **fonction publique fédérale** de **{{ppl_last_year_5}}** à **{{ppl_last_year}}** est de **{{fmt_big_int avg_num_emp}}** employés.
 
 dept_employee_totals_text:
   transform: [handlebars,markdown]
   en: |
-   From **{{fmt_big_int dept_head_count_type_first_active_year}}** to **{{fmt_big_int dept_head_count_type_last_active_year}}**, **{{subject.name}}** employed an average of 
-   **{{fmt_big_int dept_head_count_avg}}** people.
+   From **{{fmt_big_int first_active_year}}** to **{{fmt_big_int last_active_year}}**, **{{subject.name}}** employed an average of 
+   **{{fmt_big_int avg_num_emp}}** people.
   fr: |
-   De **{{fmt_big_int dept_head_count_type_first_active_year}}** à **{{fmt_big_int dept_head_count_type_last_active_year}}**, **{{le_dept dept}}** comptait en moyenne **{{fmt_big_int dept_head_count_avg}}** employés. 
+   De **{{fmt_big_int first_active_year}}** à **{{fmt_big_int last_active_year}}**, **{{subject.name}}** comptait en moyenne **{{fmt_big_int avg_num_emp}}** employés. 
