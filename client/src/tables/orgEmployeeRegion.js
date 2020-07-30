@@ -137,7 +137,6 @@ export default {
       var groups = _.groupBy(
         this.data,
         function (x) {
-          console.log(x);
           if (x.region_code === "ncr") {
             return ncr;
           } else if (x.region_code === "abroad") {

@@ -6,21 +6,21 @@ employee_type_title:
 gov_employee_type_text:
   transform: [handlebars,markdown]
   en: |
-   From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, the **{{fmt_big_int gov_head_count_type_top}}** workforce accounted for the largest average share (**{{fmt_percentage1 gov_head_count_type_top_avg_percent}}**) of the **Federal Public Service** population. 
+   From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, the **{{fmt_big_int top_group}}** workforce accounted for the largest average share (**{{fmt_percentage1 top_group_avg_pct}}**) of the **Federal Public Service** population. 
    
-   Over this period, the proportion of **Students** in the **Federal Public Service** **{{two_value_changed_to gov_student_share_last_year_five gov_student_share_last_year "fmt_percentage1"}}**.
+   Over this period, the proportion of **Students** in the **Federal Public Service** **{{two_value_changed_to student_first_active_year_pct student_last_active_year_pct "fmt_percentage1"}}**.
   fr: |
-   De **{{ppl_last_year_5}}** à  **{{ppl_last_year}}**, les employés nommés pour une «**{{fmt_big_int gov_head_count_type_top}}**» constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 gov_head_count_type_top_avg_percent}}**) du personnel de la **fonction publique fédérale**.
+   De **{{ppl_last_year_5}}** à  **{{ppl_last_year}}**, les employés nommés pour une «**{{fmt_big_int top_group}}**» constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 top_group_avg_pct}}**) du personnel de la **fonction publique fédérale**.
    
-   Au cours de cette période, le personnel **« d’étudiants »** dans la **fonction publique fédérale** **{{fr_two_value_changed_to gov_student_share_last_year_five gov_student_share_last_year "m" "s" "fmt_percentage1"}}**.
+   Au cours de cette période, le personnel **« d’étudiants »** dans la **fonction publique fédérale** **{{fr_two_value_changed_to student_first_active_year_pct student_last_active_year_pct "m" "s" "fmt_percentage1"}}**.
 
 dept_employee_type_text:
   transform: [handlebars,markdown] 
   en: |
-   From **{{fmt_big_int dept_head_count_type_first_active_year}}** to **{{fmt_big_int dept_head_count_type_last_active_year}}**, the **{{fmt_big_int dept_head_count_type_top}}** workforce accounted for the largest average share (**{{fmt_percentage1 dept_head_count_type_top_avg_percent}}**) of **{{subject.name}}'s** total population.
+   From **{{fmt_big_int first_active_year}}** to **{{fmt_big_int last_active_year}}**, the **{{fmt_big_int top_group}}** workforce accounted for the largest average share (**{{fmt_percentage1 top_group_avg_pct}}**) of **{{subject.name}}'s** total population.
    
-   Over this period, the proportion of **Students** in **{{subject.name}}'s** workforce **{{two_value_changed_to dept_student_share_first_active_year dept_student_share_last_active_year "fmt_percentage1"}}**.
+   Over this period, the proportion of **Students** in **{{subject.name}}'s** workforce **{{two_value_changed_to student_first_active_year_pct student_last_active_year_pct "fmt_percentage1"}}**.
   fr: |
-   De **{{fmt_big_int dept_head_count_type_first_active_year}}** à **{{fmt_big_int dept_head_count_type_last_active_year}}**, les employés nommés pour une «**{{fmt_big_int dept_head_count_type_top}}**» constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 dept_head_count_type_top_avg_percent}}**) du personnel **{{de_dept dept}}**.
+   De **{{fmt_big_int first_active_year}}** à **{{fmt_big_int last_active_year}}**, les employés nommés pour une «**{{fmt_big_int top_group}}**» constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 top_group_avg_pct}}**) du personnel **{{subject.name}}**.
    
-   Au cours de cette période, le personnel **« d’étudiants »** **{{de_dept dept}}** **{{fr_two_value_changed_to dept_student_share_first_active_year dept_student_share_last_active_year "m" "s" "fmt_percentage1"}}**.
+   Au cours de cette période, le personnel **« d’étudiants »** **{{subject.name}}** **{{fr_two_value_changed_to student_first_active_year_pct student_last_active_year_pct "m" "s" "fmt_percentage1"}}**.
