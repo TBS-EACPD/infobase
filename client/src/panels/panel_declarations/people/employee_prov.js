@@ -72,12 +72,12 @@ class ProvPanel extends React.Component {
 
     const first_active_year_index = _.findIndex(
       employees_by_year,
-      (year) => year !== 0
+      (employees) => employees !== 0
     );
 
     const last_active_year_index = _.findLastIndex(
       employees_by_year,
-      (year) => year !== 0
+      (employees) => employees !== 0
     );
 
     const duration = last_active_year_index - first_active_year_index + 1;

@@ -44,6 +44,31 @@ export const declare_employee_totals_panel = () =>
         const { info, panel_args } = calculations;
         const { series, ticks } = panel_args;
 
+        console.log(panel_args);
+        const first_active_year_index = _.findIndex(series, (pop) => pop !== 0);
+        const last_active_year_index = _.findLastIndex(
+          series,
+          (pop) => pop !== 0
+        );
+        const first_active_year = run_template(
+          `${people_years[first_active_year_index]}`
+        );
+        const last_active_year = run_template(
+          `${people_years[last_active_year_index]}`
+        );
+        const avg_num_emp =
+          _.sum(series) /
+          (last_active_year_index - first_active_year_index + 1);
+        const last_year_num_emp = series[last_active_year_index];
+
+        const text_calculations = {
+          first_active_year,
+          last_active_year,
+          avg_num_emp,
+          subject,
+          last_year_num_emp,
+        };
+
         const data_formatter = () => [
           {
             id: months[3].text,
@@ -60,7 +85,10 @@ export const declare_employee_totals_panel = () =>
             {...{ footnotes, sources }}
           >
             <Col size={4} isText>
-              <TM k={level + "_employee_totals_text"} args={info} />
+              <TM
+                k={level + "_employee_totals_text"}
+                args={text_calculations}
+              />
             </Col>
             <Col size={8} isGraph>
               <WrappedNivoLine
