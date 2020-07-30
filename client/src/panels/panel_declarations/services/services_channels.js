@@ -10,7 +10,7 @@ import {
   WrappedNivoBar,
 } from "../shared.js";
 
-const { text_maker } = create_text_maker_component(text);
+const { text_maker, TM } = create_text_maker_component(text);
 const colors = infobase_colors();
 
 class ServicesChannelsPanel extends React.Component {
@@ -51,23 +51,53 @@ class ServicesChannelsPanel extends React.Component {
     const { active_services } = this.state;
     const services = panel_args.services;
 
+    const { max_vol_service_name, max_vol_service_value } = _.chain(services)
+      .map(({ name, service_report }) => ({
+        max_vol_service_name: name,
+        max_vol_service_value: _.chain(service_channels_keys)
+          .map((key) => _.sumBy(service_report, `${key}_count`))
+          .sum()
+          .value(),
+      }))
+      .maxBy("max_vol_service_value")
+      .value();
+    const { max_vol_channel_name, max_vol_channel_value } = _.chain(
+      service_channels_keys
+    )
+      .map((key) => ({
+        max_vol_channel_name: text_maker(key),
+        max_vol_channel_value: _.chain(services)
+          .map(({ service_report }) => _.sumBy(service_report, `${key}_count`))
+          .sum()
+          .value(),
+      }))
+      .maxBy("max_vol_channel_value")
+      .value();
+
     const bar_data = _.map(service_channels_keys, (key) => ({
+      id: text_maker(key),
       ..._.chain(services)
-        .map((service) =>
-          active_services[service.service_id] && !_.isNull(service[key])
-            ? [
-                service.name,
-                _.sumBy(service.service_report, `${key}_count`) || 0,
-              ]
-            : []
-        )
+        .filter(({ id }) => active_services[id])
+        .map((service) => [
+          service.name,
+          _.sumBy(service.service_report, `${key}_count`) || 0,
+        ])
         .fromPairs()
         .value(),
-      id: text_maker(key),
     }));
 
     return (
       <div>
+        <TM
+          className="medium_panel_text"
+          k="services_channels_text"
+          args={{
+            max_vol_service_name,
+            max_vol_service_value,
+            max_vol_channel_name,
+            max_vol_channel_value,
+          }}
+        />
         <StandardLegend
           items={_.chain(services)
             .map(({ service_id, name }) => ({
