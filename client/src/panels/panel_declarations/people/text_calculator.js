@@ -2,7 +2,7 @@ import _ from "lodash";
 import { run_template, year_templates } from "../shared.js";
 const { people_years } = year_templates;
 
-export const text_calculate = (all_data) => {
+export const text_calculate = (all_data, custom_group_pop = null) => {
   const group_data = _.map(all_data, (group) => group.data);
   const group_data_by_year = _.zip(...group_data);
   const group_data_sums_by_year = _.map(group_data_by_year, (year_group) =>
@@ -24,21 +24,54 @@ export const text_calculate = (all_data) => {
     `${people_years[last_active_year_index]}`
   );
 
-  const top_group_pct = _.chain(all_data)
-    .map((group) => group.five_year_percent)
+  const top_group_avg_pct = _.chain(all_data)
+    .map((group) =>
+      !custom_group_pop
+        ? group.five_year_percent
+        : _.sum(group.data) / custom_group_pop
+    )
     .max()
     .value();
   const top_group = _.chain(all_data)
-    .find((group) => group.five_year_percent === top_group_pct)
+    .find((group) =>
+      !custom_group_pop
+        ? group.five_year_percent === top_group_avg_pct
+        : _.sum(group.data) / custom_group_pop === top_group_avg_pct
+    )
+    .thru((group) =>
+      lang === "en" ? group.label.replace("Age ", "") : group.label
+    )
+    .value();
+
+  const bottom_group_avg_pct = _.chain(all_data)
+    .map((group) =>
+      !custom_group_pop
+        ? group.five_year_percent
+        : _.sum(group.data) / custom_group_pop
+    )
+
+    .min()
+    .value();
+  const bottom_group = _.chain(all_data)
+    .find((group) =>
+      !custom_group_pop
+        ? group.five_year_percent === bottom_group_avg_pct
+        : _.sum(group.data) / custom_group_pop === bottom_group_avg_pct
+    )
+
     .thru((group) =>
       lang === "en" ? group.label.replace("Age ", "") : group.label
     )
     .value();
 
   return {
+    first_active_year_index,
+    last_active_year_index,
     first_active_year,
     last_active_year,
-    top_group_pct,
+    top_group_avg_pct,
     top_group,
+    bottom_group_avg_pct,
+    bottom_group,
   };
 };

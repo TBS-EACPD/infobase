@@ -9,6 +9,7 @@ import {
   declare_panel,
   NivoLineBarToggle,
 } from "../shared.js";
+import { text_calculate } from "./text_calculator";
 
 import text from "./employee_executive_level.yaml";
 
@@ -17,13 +18,8 @@ const { text_maker, TM } = create_text_maker_component(text);
 const { people_years } = year_templates;
 const { ex_levels } = businessConstants;
 
-const info_deps_by_level = {
-  gov: ["orgEmployeeExLvl_gov_info"],
-  dept: ["orgEmployeeExLvl_gov_info", "orgEmployeeExLvl_dept_info"],
-};
-
 const calculate_funcs_by_level = {
-  gov: function (gov, info) {
+  gov: function (gov) {
     const { orgEmployeeExLvl } = this.tables;
 
     const gov_five_year_total_head_count = _.chain(
@@ -53,7 +49,7 @@ const calculate_funcs_by_level = {
       .sortBy((d) => d.label)
       .value();
   },
-  dept: function (dept, info) {
+  dept: function (dept) {
     const { orgEmployeeExLvl } = this.tables;
     return _.chain(orgEmployeeExLvl.q(dept).data)
       .map((row) => ({
@@ -74,11 +70,51 @@ export const declare_employee_executive_level_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgEmployeeExLvl"],
-      info_deps: info_deps_by_level[level],
       calculate: calculate_funcs_by_level[level],
 
       render({ calculations, footnotes, sources }) {
-        const { info, panel_args } = calculations;
+        const { panel_args, subject } = calculations;
+
+        const data_without_nonex = _.chain([...panel_args])
+          .reverse()
+          .tail()
+          .reverse()
+          .value();
+
+        const sum_exec = _.reduce(
+          data_without_nonex,
+          (result, ex_lvl) => result + _.sum(ex_lvl.data),
+          0
+        );
+
+        const pre_text_calculations = text_calculate(
+          data_without_nonex,
+          sum_exec
+        );
+
+        const {
+          first_active_year_index,
+          last_active_year_index,
+        } = pre_text_calculations;
+
+        const avg_num_execs =
+          sum_exec / (last_active_year_index - first_active_year_index + 1);
+
+        const avg_num_employees =
+          _.reduce(
+            panel_args,
+            (result, ex_lvl) => result + _.sum(ex_lvl.data),
+            0
+          ) /
+          (last_active_year_index - first_active_year_index + 1);
+        const avg_pct_execs = avg_num_execs / avg_num_employees;
+
+        const text_calculations = {
+          ...pre_text_calculations,
+          avg_num_execs,
+          avg_pct_execs,
+          subject,
+        };
 
         const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
@@ -88,7 +124,10 @@ export const declare_employee_executive_level_panel = () =>
             {...{ footnotes, sources }}
           >
             <Col size={12} isText>
-              <TM k={level + "_employee_executive_level_text"} args={info} />
+              <TM
+                k={level + "_employee_executive_level_text"}
+                args={text_calculations}
+              />
             </Col>
             <Col size={12} isGraph>
               <NivoLineBarToggle
