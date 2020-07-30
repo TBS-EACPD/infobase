@@ -18,18 +18,12 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const { people_years, people_years_short_second } = year_templates;
 
-const info_deps_by_level = {
-  gov: ["orgEmployeeType_gov_info"],
-  dept: ["orgEmployeeType_gov_info", "orgEmployeeType_dept_info"],
-};
-
 export const declare_employee_totals_panel = () =>
   declare_panel({
     panel_key: "employee_totals",
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgEmployeeType"],
-      info_deps: info_deps_by_level[level],
 
       calculate(subject) {
         const { orgEmployeeType } = this.tables;
@@ -41,10 +35,9 @@ export const declare_employee_totals_panel = () =>
       },
 
       render({ calculations, footnotes, sources }) {
-        const { info, panel_args } = calculations;
+        const { subject, panel_args } = calculations;
         const { series, ticks } = panel_args;
 
-        console.log(panel_args);
         const first_active_year_index = _.findIndex(series, (pop) => pop !== 0);
         const last_active_year_index = _.findLastIndex(
           series,
