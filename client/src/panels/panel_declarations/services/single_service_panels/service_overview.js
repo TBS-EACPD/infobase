@@ -49,11 +49,9 @@ export class ServiceOverview extends React.Component {
 
     return (
       <Panel title={text_maker("service_overview_title")}>
-        <div className={"col-container"}>
+        <div className={"col-container medium_panel_text"}>
           <div className="fcol-md-7">
-            <div className="service-overview-rect medium_panel_text">
-              {service.description}
-            </div>
+            <div className="service-overview-rect">{service.description}</div>
             <div className="service-overview-rect">
               <OverviewUL
                 className="service_overview-fancy-ul"
@@ -61,32 +59,18 @@ export class ServiceOverview extends React.Component {
                   most_recent_report.year
                 })`}
               >
-                {[
-                  <div key="uses_cra_as_identifier" className="identifier-item">
-                    <TM
-                      className="medium_panel_text"
-                      k="uses_cra_as_identifier"
-                    />
-                    {
-                      available_icons[
-                        available_keys[
-                          most_recent_report.cra_business_ids_collected
-                        ]
-                      ]
-                    }
-                  </div>,
-                  <div key="uses_sin_as_identifier" className="identifier-item">
-                    <TM
-                      className="medium_panel_text"
-                      k="uses_sin_as_identifier"
-                    />
-                    {
-                      available_icons[
-                        available_keys[most_recent_report.sin_collected]
-                      ]
-                    }
-                  </div>,
-                ]}
+                {_.map(
+                  {
+                    uses_sin_as_identifier: "sin_collected",
+                    uses_cra_as_identifier: "cra_business_ids_collected",
+                  },
+                  (id, id_key) => (
+                    <div key={id_key} className="identifier-item">
+                      <TM k={id_key} />
+                      {available_icons[available_keys[most_recent_report[id]]]}
+                    </div>
+                  )
+                )}
               </OverviewUL>
             </div>
             {!_.isEmpty(flat_standard_reports) && (
@@ -99,10 +83,7 @@ export class ServiceOverview extends React.Component {
                 }}
                 className="service-overview-rect"
               >
-                <TM
-                  className="medium_panel_text"
-                  k={"standards_performance_text"}
-                />
+                <TM k={"standards_performance_text"} />
                 <Gauge
                   value={_.countBy(flat_standard_reports, "is_target_met").true}
                   total_value={flat_standard_reports.length}
@@ -111,7 +92,7 @@ export class ServiceOverview extends React.Component {
             )}
           </div>
           <div className="fcol-md-5">
-            <div className="medium_panel_text service-overview-rect">
+            <div className="service-overview-rect">
               <OverviewUL title={text_maker("service_types")}>
                 {_.map(service.service_type)}
               </OverviewUL>
@@ -126,7 +107,6 @@ export class ServiceOverview extends React.Component {
                         <a
                           key={program_id}
                           href={infograph_href_template(program)}
-                          className="medium_panel_text"
                         >
                           {program.name}
                         </a>
@@ -136,12 +116,11 @@ export class ServiceOverview extends React.Component {
                 </OverviewUL>
               </div>
             )}
-            <div className="service-overview-rect medium_panel_text">
+            <div className="service-overview-rect">
               {`${text_maker("total_business_vol")}: ${total_business_vol}`}
             </div>
             <div className="service-overview-rect">
               <TM
-                className="medium_panel_text"
                 k={
                   service.collects_fees
                     ? "does_charge_fees"
@@ -153,16 +132,12 @@ export class ServiceOverview extends React.Component {
               <div className="service-overview-rect">
                 {service.urls.length === 1 ? (
                   <TM
-                    className="medium_panel_text"
                     k={"service_single_link_text"}
                     args={{ service_url: service.urls[0] }}
                   />
                 ) : (
                   <div>
-                    <TM
-                      className="medium_panel_text"
-                      k={"service_links_text"}
-                    />
+                    <TM k={"service_links_text"} />
                     <OverviewUL>
                       {_.map(service.urls, (url, i) => (
                         <a

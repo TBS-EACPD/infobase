@@ -85,42 +85,24 @@ export class ServiceOverviewV2 extends React.Component {
           </dt>
           <dd>
             <FancyUL className="service_overview-fancy-ul">
-              {[
-                <div key="uses_cra_as_identifier" className="identifier-item">
-                  <TM style={{ lineHeight: 2 }} k="uses_cra_as_identifier" />
-                  <div>
-                    {
-                      available_icons[
-                        available_keys[
-                          most_recent_report.cra_business_ids_collected
-                        ]
-                      ]
-                    }
-                    <TM
-                      style={{ marginLeft: 5 }}
-                      k={
-                        available_keys[
-                          most_recent_report.cra_business_ids_collected
-                        ]
-                      }
-                    />
+              {_.map(
+                {
+                  uses_sin_as_identifier: "sin_collected",
+                  uses_cra_as_identifier: "cra_business_ids_collected",
+                },
+                (id, id_key) => (
+                  <div key={id_key} className="identifier-item">
+                    <TM style={{ lineHeight: 2 }} k={id_key} />
+                    <div>
+                      {available_icons[available_keys[most_recent_report[id]]]}
+                      <TM
+                        style={{ marginLeft: 5 }}
+                        k={available_keys[most_recent_report[id]]}
+                      />
+                    </div>
                   </div>
-                </div>,
-                <div key="uses_sin_as_identifier" className="identifier-item">
-                  <TM style={{ lineHeight: 2 }} k="uses_sin_as_identifier" />
-                  <div>
-                    {
-                      available_icons[
-                        available_keys[most_recent_report.sin_collected]
-                      ]
-                    }
-                    <TM
-                      style={{ marginLeft: 5 }}
-                      k={available_keys[most_recent_report.sin_collected]}
-                    />
-                  </div>
-                </div>,
-              ]}
+                )
+              )}
             </FancyUL>
           </dd>
           <dt>{text_maker("related_programs")}</dt>
