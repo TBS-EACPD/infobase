@@ -38,6 +38,7 @@ class ProvidedServicesListPanel extends React.Component {
       <div>
         <TM
           k="list_of_provided_services_desc"
+          className="medium_panel_text"
           args={{
             subject_name: panel_args.subject.name,
             num_of_services: services.length,
