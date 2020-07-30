@@ -17,4 +17,4 @@ dept_employee_gender_text:
   en: |
     From **{{first_active_year}}** to **{{last_active_year}}**, **{{top_group}}** accounted for an average of **{{fmt_percentage1 top_group_avg_pct}}** of **{{subject.name}}**’s workforce{{#isEqual single_type_flag true}}.{{else}}, while **{{bottom_group}}** accounted for an average of **{{fmt_percentage1 bottom_group_avg_pct}}**.{{/isEqual}}
   fr: |
-    De **{{first_active_year}}** à **{{last_active_year}}**, les **{{top_group}}** constituaient en moyenne **{{fmt_percentage1 top_group_avg_pct}}** du personnel **{{de_dept dept}}**{{#isEqual single_type_flag true}}.{{else}}, comparativement à **{{fmt_percentage1 bottom_group_avg_pct}}** pour les **{{bottom_group}}**.{{/isEqual}}
+    De **{{first_active_year}}** à **{{last_active_year}}**, les **{{top_group}}** constituaient en moyenne **{{fmt_percentage1 top_group_avg_pct}}** du personnel **{{subject.name}}**{{#isEqual single_type_flag true}}.{{else}}, comparativement à **{{fmt_percentage1 bottom_group_avg_pct}}** pour les **{{bottom_group}}**.{{/isEqual}}

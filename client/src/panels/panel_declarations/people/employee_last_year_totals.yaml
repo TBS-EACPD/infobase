@@ -9,7 +9,7 @@ dept_employee_last_year_totals_text:
     In **{{ppl_last_year}}**, **{{fmt_big_int dept_emp_value}}**  {{gl_tt "people" "HEAD"}} were employed by **{{subject.name}} ({{subject.abbr}})**,
     representing **{{fmt_smart_percentage1 dept_emp_pct}}** of the total {{gl_tt "Federal Public Service" "FPS"}} population.
   fr: |
-    En **{{ppl_last_year}}**, **{{fmt_big_int dept_emp_value}}** {{gl_tt "personnes" "HEAD"}}  étaient à l’emploi **{{de_dept dept}} ({{subject.abbr}})**,
+    En **{{ppl_last_year}}**, **{{fmt_big_int dept_emp_value}}** {{gl_tt "personnes" "HEAD"}}  étaient à l’emploi **{{subject.name}} ({{subject.abbr}})**,
     soit **{{fmt_smart_percentage1 dept_emp_pct}}** du personnel de la {{gl_tt "fonction publique fédérale" "FPS"}}.
 
 dept_headcount:
