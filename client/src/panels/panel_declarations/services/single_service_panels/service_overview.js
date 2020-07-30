@@ -7,6 +7,7 @@ import {
   available_keys,
   service_channels_keys,
 } from "../shared";
+import { formatter } from "../../shared.js";
 import { infograph_href_template } from "../../../../link_utils.js";
 import Gauge from "../../../../charts/gauge.js";
 
@@ -46,6 +47,9 @@ export class ServiceOverview extends React.Component {
       },
       0
     );
+    const formatted_business_vol = formatter("big_int", total_business_vol, {
+      raw: true,
+    });
 
     return (
       <Panel title={text_maker("service_overview_title")}>
@@ -117,7 +121,7 @@ export class ServiceOverview extends React.Component {
               </div>
             )}
             <div className="service-overview-rect">
-              {`${text_maker("total_business_vol")}: ${total_business_vol}`}
+              {`${text_maker("total_business_vol")}: ${formatted_business_vol}`}
             </div>
             <div className="service-overview-rect">
               <TM

@@ -10,7 +10,7 @@ import {
 import { infograph_href_template } from "../../../../link_utils.js";
 import ProgressGauge from "../../../../charts/progressGauge.js";
 import { Fragment } from "react";
-import { TextPanel } from "../../shared.js";
+import { TextPanel, formatter } from "../../shared.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -34,6 +34,9 @@ export class ServiceOverviewV2 extends React.Component {
       },
       0
     );
+    const formatted_business_vol = formatter("big_int", total_business_vol, {
+      raw: true,
+    });
 
     return (
       <TextPanel title={text_maker("service_overview_title")}>
@@ -131,7 +134,7 @@ export class ServiceOverviewV2 extends React.Component {
             />
           </dd>
           <dt>{text_maker("total_business_vol")}</dt>
-          <dd>{total_business_vol}</dd>
+          <dd>{formatted_business_vol}</dd>
           <dt>{text_maker("service_link_text")}</dt>
           <dd>
             {!_.isEmpty(service.urls) &&
