@@ -59,53 +59,15 @@ export const declare_personnel_spend_panel = () =>
 
         const { text_calculations } = panel_args;
 
-        let graph_content;
-        if (window.is_a11y_mode) {
-          graph_content = (
-            <A11yTable
-              data_col_headers={[text_maker("spending")]}
-              data={_.chain(std_years)
-                .map(run_template)
-                .zip(panel_args.series["0"])
-                .map(([label, amt]) => ({
-                  label,
-                  data: <Format type="compact1_written" content={amt} />,
-                }))
-                .value()}
-            />
-          );
-        } else {
-          const personnel_data = () => [
-            {
-              id: "Personnel",
-              data: _.map(
-                panel_args.series[0],
-                (spending_data, year_index) => ({
-                  y: spending_data,
-                  x: run_template(std_years[year_index]),
-                })
-              ),
-            },
-          ];
-
-          graph_content = (
-            <div position="relative">
-              <GraphOverlay>
-                <WrappedNivoLine
-                  raw_data={panel_args.series}
-                  data={personnel_data()}
-                  margin={{
-                    top: 50,
-                    right: 40,
-                    bottom: 50,
-                    left: 65,
-                  }}
-                  colors={window.infobase_color_constants.primaryColor}
-                />
-              </GraphOverlay>
-            </div>
-          );
-        }
+        const personnel_data = [
+          {
+            id: "Personnel",
+            data: _.map(panel_args.series[0], (spending_data, year_index) => ({
+              y: spending_data,
+              x: run_template(std_years[year_index]),
+            })),
+          },
+        ];
 
         return (
           <StdPanel

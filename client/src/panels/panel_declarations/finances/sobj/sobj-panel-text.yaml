@@ -8,13 +8,13 @@ dept_fin_spend_by_so_hist_text:
   en: |
    {{gl_tt "Standard objects" "SOBJ"}} are the highest level of classification for categorizing 
    expenditures. From {{pa_last_year_5}} to {{pa_last_year}}, the largest share of **{{subject.name}}'s** expenditures were reported 
-   under the **{{ dept_so_five_year_top}}** standard object - representing an average amount of **{{fmt_compact1_written dept_so_five_year_top_avg}}** 
-   out of an average total annual spending of **{{fmt_compact1_written dept_five_year_exp_average}}**.  
+   under the **{{ max_share }}** standard object - representing an average amount of **{{fmt_compact1_written max_avg}}** 
+   out of an average total annual spending of **{{fmt_compact1_written five_year_avg_spending}}**.  
 
   fr: |
    Les {{gl_tt "articles courants" "SOBJ"}} représentent le niveau le plus élevé de classification des dépenses. 
    De {{pa_last_year_5}} à {{pa_last_year}}, **{{le_dept dept}}** a comptabilisé la proportion la plus élevée de ses dépenses dans l'article courant 
-   **{{fmt_compact1_written dept_so_five_year_top}}**, soit une somme moyenne de **{{fmt_compact1_written dept_so_five_year_top_avg}}** sur des dépenses annuelles moyennes de **{{fmt_compact1_written dept_five_year_exp_average}}**.
+   **{{fmt_compact1_written max_share}}**, soit une somme moyenne de **{{fmt_compact1_written max_avg}}** sur des dépenses annuelles moyennes de **{{fmt_compact1_written five_year_avg_spending}}**.
 
 personnel_spend_title:
   transform: [handlebars]
