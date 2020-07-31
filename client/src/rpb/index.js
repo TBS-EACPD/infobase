@@ -2,7 +2,6 @@ import {
   StandardRouteContainer,
   LangSynchronizer,
 } from "../core/NavComponents";
-import { createSelector } from "reselect";
 import { withRouter } from "react-router";
 import { log_standard_event } from "../core/analytics.js";
 import { Fragment } from "react";
@@ -66,7 +65,7 @@ function naive_to_real_state(naive_state) {
   };
 }
 
-const url_state_selector = createSelector(_.identity, (str) => {
+const url_state_selector = (str) => {
   const state = (() => {
     if (_.isEmpty(str)) {
       return naive_to_real_state({});
@@ -89,7 +88,7 @@ const url_state_selector = createSelector(_.identity, (str) => {
   })();
 
   return state;
-});
+};
 
 class Root extends React.Component {
   constructor(props) {
