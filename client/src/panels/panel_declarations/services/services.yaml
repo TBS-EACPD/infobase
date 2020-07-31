@@ -24,7 +24,7 @@ services_fees_text:
   en: Out of the **{{services_count}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{charge_fees_count}}** services charge fees.
   fr: TODO
 service_charges_fees:
-  en: Service charges fees
+  en: Service does charge fees
   fr: TODO
 service_does_not_charge_fees:
   en: Service does not charge fees
@@ -122,9 +122,9 @@ services_channels_text:
   en: |
     Delivery channels that {{gl_tt "services" "SERVICE"}} use for handling applications and enquiries.
     
-    In **{{subject.name}}**, the most traffic was generated through **{{max_vol_channel_name}}** channel with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
+    In **{{subject.name}}**, the most traffic was generated through "**{{max_vol_channel_name}}**" channel with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
 
-    The **{{max_vol_service_name}}** service received **{{fmt_big_int max_vol_service_value}}** applications, the highest among all of the department's services.
+    The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** applications, the highest among all of the department's services.
   fr: TODO
 service_channels_text:
   transform: [handlebars, markdown]
@@ -155,7 +155,7 @@ online_inquiry:
 # Overview
 overview_digital_status_title:
   transform: [handlebars, markdown]
-  en: What {{gl_tt "component" "SERVICE_COMPONENT"}} of this {{gl_tt "service" "SERVICE"}} are available online?
+  en: What {{gl_tt "components" "SERVICE_COMPONENT"}} of this {{gl_tt "service" "SERVICE"}} are available online?
   fr: TODO
 overview_digital_status_desc:
   en: Online component of this service
