@@ -13,25 +13,32 @@ import { digital_status_keys } from "./shared.js";
 const { text_maker, TM } = create_text_maker_component(text);
 const can_online = text_maker("can_online");
 const cannot_online = text_maker("cannot_online");
+const not_applicable = text_maker("not_applicable");
+
 const colors = d3
   .scaleOrdinal()
   .range([
     window.infobase_color_constants.secondaryColor,
+    window.infobase_color_constants.highlightOrangeColor,
     window.infobase_color_constants.separatorColor,
   ]);
 
 const ServicesDigitalStatusPanel = ({ panel_args }) => {
   const services = panel_args.services;
 
-  const get_current_status_count = (key) =>
-    _.countBy(services, `${key}_status`).true || 0;
+  const get_current_status_count = (key, value) =>
+    _.countBy(services, `${key}_status`)[value] || 0;
 
-  const data = _.map(digital_status_keys, (key) => ({
-    id: text_maker(`${key}_desc`),
-    key,
-    [can_online]: get_current_status_count(key),
-    [cannot_online]: services.length - get_current_status_count(key),
-  }));
+  const data = _.chain(digital_status_keys)
+    .map((key) => ({
+      id: text_maker(`${key}_desc`),
+      key,
+      [can_online]: get_current_status_count(key, true),
+      [cannot_online]: get_current_status_count(key, false),
+      [not_applicable]: get_current_status_count(key, null),
+    }))
+    .sortBy(can_online)
+    .value();
 
   const most_digital_component = _.maxBy(data, can_online);
   const least_digital_component = _.minBy(data, can_online);
@@ -42,6 +49,7 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
         className="medium_panel_text"
         k="services_digital_status_text"
         args={{
+          num_of_services: services.length,
           subject_name: panel_args.subject.name,
           most_digital_name: text_maker(most_digital_component.key),
           most_digital_pct:
@@ -52,9 +60,9 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
         }}
       />
       <StandardLegend
-        items={_.map(["can_online", "cannot_online"], (key) => ({
+        items={_.map([can_online, cannot_online, not_applicable], (key) => ({
           id: key,
-          label: text_maker(key),
+          label: key,
           color: colors(key),
         }))}
         isHorizontal
@@ -64,7 +72,7 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
         data={data}
         is_money={false}
         indexBy={"id"}
-        keys={[text_maker("can_online"), text_maker("cannot_online")]}
+        keys={[can_online, cannot_online, not_applicable]}
         margin={{
           top: 20,
           right: 10,

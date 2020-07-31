@@ -59,7 +59,7 @@ cra_sub_title:
 services_digital_status_text:
   transform: [handlebars, markdown]
   en: |
-    In all of the services that **{{subject_name}}** provide, **{{most_digital_name}}** component is the most online-available component (**{{fmt_percentage1 most_digital_pct}}**). On the other hand, **{{least_digital_name}}** component is the least online-available component (**{{fmt_percentage1 least_digital_pct}}**)
+    Among the **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{most_digital_name}}** is the most online-available {{gl_tt "service component" "SERVICE_COMPONENT"}} (**{{fmt_percentage1 most_digital_pct}}**) while **{{least_digital_name}}** is the least online-available {{gl_tt "service component" "SERVICE_COMPONENT"}} (**{{fmt_percentage1 least_digital_pct}}**).
   fr: TODO
 services_digital_status:
   en: Online status of services
@@ -155,7 +155,7 @@ online_inquiry:
 # Overview
 overview_digital_status_title:
   transform: [handlebars, markdown]
-  en: What components of this {{gl_tt "service" "SERVICE"}} are available online?
+  en: What {{gl_tt "component" "SERVICE_COMPONENT"}} of this {{gl_tt "service" "SERVICE"}} are available online?
   fr: TODO
 overview_digital_status_desc:
   en: Online component of this service
