@@ -59,7 +59,7 @@ cra_sub_title:
 services_digital_status_text:
   transform: [handlebars, markdown]
   en: |
-    In **{{subject_name}}, {{fmt_percentage1 total_online_digital_status_percentage}}** of {{gl_tt "services" "SERVICE"}} components can be performed online / electronically.
+    In all of the services that **{{subject_name}}** provide, **{{most_digital_name}}** component is the most online-available component (**{{fmt_percentage1 most_digital_pct}}**). On the other hand, **{{least_digital_name}}** component is the least online-available component (**{{fmt_percentage1 least_digital_pct}}**)
   fr: TODO
 services_digital_status:
   en: Online status of services
@@ -71,16 +71,16 @@ account_reg_digital_desc:
   en: Clients can register online
   fr: TODO
 application_digital_desc:
-  en: Clients can apply online for this service
+  en: Clients can apply online
   fr: TODO
 authentication_desc:
-  en: Clients can authenticate themselves online
+  en: Clients can authenticate online
   fr: TODO
 decision_digital_desc:
-  en: Clients can be informed of the department's decision electronically
+  en: Department can inform decisions online
   fr: TODO
 issuance_digital_desc:
-  en: Clients can be issued documentation online
+  en: Documentation can be issued online
   fr: TODO
 issue_res_digital_desc:
   en: Clients can provide feedback online
@@ -102,6 +102,12 @@ issuance_digital:
   fr: TODO
 issue_res_digital:
   en: Feedback
+  fr: TODO
+can_online:
+  en: Can be done online
+  fr: TODO
+cannot_online:
+  en: Cannot be done online
   fr: TODO
 
 # Channels

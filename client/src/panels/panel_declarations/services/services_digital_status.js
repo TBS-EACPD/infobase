@@ -5,11 +5,20 @@ import {
   create_text_maker_component,
   InfographicPanel,
   declare_panel,
-  WrappedNivoPie,
+  WrappedNivoHBar,
+  StandardLegend,
 } from "../shared.js";
 import { digital_status_keys } from "./shared.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
+const can_online = text_maker("can_online");
+const cannot_online = text_maker("cannot_online");
+const colors = d3
+  .scaleOrdinal()
+  .range([
+    window.infobase_color_constants.secondaryColor,
+    window.infobase_color_constants.separatorColor,
+  ]);
 
 const ServicesDigitalStatusPanel = ({ panel_args }) => {
   const services = panel_args.services;
@@ -17,14 +26,16 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
   const get_current_status_count = (key) =>
     _.countBy(services, `${key}_status`).true || 0;
 
-  const total_online_digital_statuses = _.sumBy(digital_status_keys, (key) =>
-    get_current_status_count(key)
-  );
   const data = _.map(digital_status_keys, (key) => ({
-    label: text_maker(`${key}_desc`),
-    id: key,
-    value: get_current_status_count(key),
+    id: text_maker(`${key}_desc`),
+    key,
+    [can_online]: get_current_status_count(key),
+    [cannot_online]: services.length - get_current_status_count(key),
   }));
+
+  const most_digital_component = _.maxBy(data, can_online);
+  const least_digital_component = _.minBy(data, can_online);
+
   return (
     <div>
       <TM
@@ -32,11 +43,36 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
         k="services_digital_status_text"
         args={{
           subject_name: panel_args.subject.name,
-          total_online_digital_status_percentage:
-            total_online_digital_statuses / (services.length * 6),
+          most_digital_name: text_maker(most_digital_component.key),
+          most_digital_pct:
+            most_digital_component[can_online] / services.length,
+          least_digital_name: text_maker(least_digital_component.key),
+          least_digital_pct:
+            least_digital_component[can_online] / services.length,
         }}
       />
-      <WrappedNivoPie data={data} is_money={false} />
+      <StandardLegend
+        items={_.map(["can_online", "cannot_online"], (key) => ({
+          id: key,
+          label: text_maker(key),
+          color: colors(key),
+        }))}
+        isHorizontal
+        LegendCheckBoxProps={{ isSolidBox: true }}
+      />
+      <WrappedNivoHBar
+        data={data}
+        is_money={false}
+        indexBy={"id"}
+        keys={[text_maker("can_online"), text_maker("cannot_online")]}
+        margin={{
+          top: 20,
+          right: 10,
+          bottom: 50,
+          left: 210,
+        }}
+        colorBy={(d) => colors(d.id)}
+      />
     </div>
   );
 };
