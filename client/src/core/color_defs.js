@@ -11,6 +11,7 @@ const highlightColor = "#da3a38";
 const separatorColor = "#bbc1c9";
 
 const highlightPale = "#ffa8a8";
+const highlightOrangeColor = "#e89a40";
 const highlightDark = "#B12320";
 
 const tooltipColor = primaryColor;
@@ -44,6 +45,7 @@ export {
   backgroundColor,
   highlightColor,
   highlightPale,
+  highlightOrangeColor,
   highlightDark,
   separatorColor,
   tooltipColor,
