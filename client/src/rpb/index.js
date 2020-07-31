@@ -193,11 +193,14 @@ class Root extends React.Component {
       ? _.map(dimensions, ({ id: dim_key, display }) => ({
           display,
           id: dim_key,
-          children: _.map(get_filters_for_dim(table, dim_key), (filter) => ({
-            filter: filter,
-            dimension: dim_key,
-            display: filter,
-          })),
+          children: _.map(
+            this.get_filters_for_dim(table, dim_key),
+            (filter) => ({
+              filter: filter,
+              dimension: dim_key,
+              display: filter,
+            })
+          ),
         }))
       : undefined;
 
