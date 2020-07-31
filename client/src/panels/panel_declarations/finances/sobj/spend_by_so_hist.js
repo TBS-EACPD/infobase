@@ -186,10 +186,10 @@ export const declare_spend_by_so_hist_panel = () =>
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgSobjs"],
       footnotes: ["SOBJ", "EXP"],
-      info_deps: ["orgSobjs_dept_info", "orgSobjs_gov_info"],
-      calculate(subject, info) {
+      calculate(subject) {
         const { orgSobjs } = this.tables;
-        return _.chain(sos)
+
+        const data = _.chain(sos)
           .sortBy((sobj) => sobj.so_num)
           .map((sobj) => ({
             label: sobj.text,
@@ -199,9 +199,36 @@ export const declare_spend_by_so_hist_panel = () =>
           }))
           .filter((d) => d3.sum(d.data))
           .value();
+
+        const ticks = _.map(std_years, run_template);
+
+        const avg_data = _.map(
+          data,
+          (object) => _.sum(object.data) / object.data.length
+        );
+
+        const max_avg = _.max(avg_data);
+        const max_index = avg_data.indexOf(max_avg);
+        const max_share = data[max_index].label;
+
+        const five_year_avg_spending = _.sum(avg_data);
+
+        const text_calculations = {
+          subject,
+          max_avg,
+          max_share,
+          five_year_avg_spending,
+        };
+
+        return {
+          data,
+          ticks,
+          text_calculations,
+        };
       },
       render({ calculations, footnotes, sources }) {
-        const { panel_args, info } = calculations;
+        const { panel_args } = calculations;
+        const { text_calculations } = panel_args;
 
         const graph_content = (() => {
           if (window.is_a11y_mode) {
@@ -217,7 +244,7 @@ export const declare_spend_by_so_hist_panel = () =>
             {...{ sources, footnotes }}
           >
             <div className="medium_panel_text">
-              <TM k="dept_fin_spend_by_so_hist_text" args={info} />
+              <TM k="dept_fin_spend_by_so_hist_text" args={text_calculations} />
             </div>
             <div>{graph_content}</div>
           </InfographicPanel>
