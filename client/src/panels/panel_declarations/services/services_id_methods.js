@@ -81,7 +81,7 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
   return (
     <div className={"col-container"}>
       <div className="fcol-md-6 p-20">
-        <TM className="id-method-text" k="sin_sub_title" el="h4" />
+        <TM className="double-pie-text" k="sin_sub_title" el="h4" />
         <WrappedNivoPie
           {...nivo_common_props}
           custom_legend_items={_.map(sin_data, (row) => ({
@@ -92,7 +92,7 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
         />
       </div>
       <div className="fcol-md-6 p-20">
-        <TM className="id-method-text" k="cra_sub_title" el="h4" />
+        <TM className="double-pie-text" k="cra_sub_title" el="h4" />
         <WrappedNivoPie
           {...nivo_common_props}
           custom_legend_items={_.map(cra_data, (row) => ({

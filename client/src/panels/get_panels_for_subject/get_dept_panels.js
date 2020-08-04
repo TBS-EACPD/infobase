@@ -44,6 +44,7 @@ import {
   declare_services_digital_status_panel,
   declare_services_fees_panel,
   declare_services_id_methods_panel,
+  declare_services_standards_panel,
   declare_results_intro_panel,
 
   // dept only panels
@@ -104,6 +105,7 @@ export const get_dept_panels = (subject) =>
       declare_services_channels_panel(),
       declare_services_fees_panel(),
       declare_services_id_methods_panel(),
+      declare_services_standards_panel(),
     ],
     results: subject.has_data("results_data") && [
       declare_results_key_concepts_panel(),
