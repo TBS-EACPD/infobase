@@ -44,7 +44,8 @@
     "merge_coverage_reports": "merge-coverage-reports --report ./coverage/*/coverage-final.json",
     "create_coverage_shield_badge": "create-coverage-shield-badge --report ./coverage/coverage-final.json > ./coverage/coverage-shield-badge.svg",
     "mongod": "sh ../scripts/dev_scripts/local_mongod.sh -p 27018",
-    "extract_emails": "mkdir -p ./data_management/CSVs; babel-node data_management/generate_csv.js"
+    "extract_emails": "mkdir -p ./data_management/CSVs; babel-node -e 'require(\"./data_management/generate_csv.js\").get_output()'",
+    "integration_tests": "babel-node data_management/generate_csv.integration-test.js"
   },
   "authors": [
     "Stephen O'Neil"
