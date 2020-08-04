@@ -154,12 +154,14 @@ export class WrappedNivoPie extends React.Component {
                       <span className="infobase-pie__legend-data">
                         {value_formatter(item.value)}
                       </span>
-                      <span className="infobase-pie__legend-data">
-                        <Format
-                          type="percentage1"
-                          content={item.value / graph_total}
-                        />
-                      </span>
+                      {include_percent && (
+                        <span className="infobase-pie__legend-data">
+                          <Format
+                            type="percentage1"
+                            content={item.value / graph_total}
+                          />
+                        </span>
+                      )}
                     </div>
                   )}
                 />
