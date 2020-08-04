@@ -5,12 +5,12 @@
   margin-top: 25px;
   margin-bottom: 15px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: baseline;
   justify-content: space-between;
 
-  @media (max-width: $maxSmallDevice) {
-    flex-direction: column;
+  @media (min-width: $minSmallDevice) {
+    flex-direction: row;
   }
 
   & > .pagedetails__report-a-problem {
@@ -18,13 +18,11 @@
     border-radius: $standardBorderRadius;
     border: 2px solid $primaryColor;
     padding: 5px 15px;
+    min-width: 100%;
 
     @media (min-width: $minExtraSmallDevice) {
       max-width: 50%;
       min-width: 390px;
-    }
-    @media (max-width: $maxExtraSmallDevice) {
-      min-width: 100%;
     }
 
     & > .IBDetails {
