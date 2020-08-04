@@ -203,9 +203,6 @@ total_business_vol:
 service_standards_title:
   en: Service Standards
   fr: TODO
-services_standards:
-  en: Services standards
-  fr: TODO
 service_standards_text:
   transform: [handlebars, markdown]
   en: |
@@ -256,5 +253,5 @@ services_types:
   fr: TODO
 services_types_desc:
   transform: [handlebars, markdown]
-  en: There are **{{num_of_types}}** different types of {{gl_tt "services" "SERVICE"}} within **{{subject.name}}**. The service type "**{{max_type}}**" is the most commonly offered service type **({{max_type_count}} out of {{num_of_services}})**.
+  en: There are **{{num_of_types}}** different types of {{gl_tt "services" "SERVICE"}} within **{{subject.name}}**. The most common service type is "**{{max_type}}**", making up **{{max_type_count}} of {{num_of_services}}** department's services.
   fr: TODO
