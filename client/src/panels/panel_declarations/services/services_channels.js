@@ -159,7 +159,7 @@ class ServicesChannelsPanel extends React.Component {
 
 export const declare_services_channels_panel = () =>
   declare_panel({
-    panel_key: "dept_services_channels",
+    panel_key: "services_channels",
     levels: ["dept"],
     panel_config_func: (level, panel_key) => ({
       requires_services: true,

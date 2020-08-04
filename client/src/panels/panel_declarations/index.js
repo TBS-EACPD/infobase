@@ -85,6 +85,7 @@ export {
 } from "./covid/index.js";
 export {
   declare_provided_services_list_panel,
+  declare_services_types_panel,
   declare_services_fees_panel,
   declare_services_id_methods_panel,
   declare_services_channels_panel,
