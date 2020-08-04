@@ -105,7 +105,7 @@ export const declare_services_standards_panel = () =>
         const { panel_args } = calculations;
         return (
           <InfographicPanel
-            title={text_maker("services_standards")}
+            title={text_maker("service_standards_title")}
             sources={sources}
           >
             <ServicesStandardsPanel panel_args={panel_args} />
