@@ -148,7 +148,6 @@ class RPB extends React.Component {
       footnotes_for: "all",
     }).then(() => {
       this.table_handlers.on_switch_table(table_id);
-      this.setState({ loading: false });
     });
   }
 
