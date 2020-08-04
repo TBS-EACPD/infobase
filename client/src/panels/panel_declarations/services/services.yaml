@@ -256,5 +256,5 @@ services_types:
   fr: TODO
 services_types_desc:
   transform: [handlebars, markdown]
-  en: There are **{{num_of_types}}** different types of {{gl_tt "services" "SERVICE"}} within **{{subject.name}}**. The service type "**{{max_type}}**" is the most commonly offered service type **({{fmt_percentage1 max_type_pct}})**.
+  en: There are **{{num_of_types}}** different types of {{gl_tt "services" "SERVICE"}} within **{{subject.name}}**. The service type "**{{max_type}}**" is the most commonly offered service type **({{max_type_count}} out of {{num_of_services}})**.
   fr: TODO
