@@ -24,6 +24,7 @@ import {
   declare_employee_executive_level_panel,
   declare_employee_fol_panel,
   declare_employee_gender_panel,
+  declare_services_types_panel,
   declare_services_digital_status_panel,
   declare_services_fees_panel,
   declare_services_id_methods_panel,
@@ -70,6 +71,7 @@ export const get_gov_panels = (subject) => ({
     declare_employee_gender_panel(),
   ],
   services: [
+    declare_services_types_panel(),
     declare_services_digital_status_panel(),
     declare_services_fees_panel(),
     declare_services_id_methods_panel(),

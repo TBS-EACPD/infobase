@@ -103,7 +103,7 @@ class ProvidedServicesListPanel extends React.Component {
 
 export const declare_provided_services_list_panel = () =>
   declare_panel({
-    panel_key: "dept_provided_services_list",
+    panel_key: "provided_services_list",
     levels: ["dept"],
     panel_config_func: (level, panel_key) => ({
       requires_services: true,

@@ -87,7 +87,7 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
 
 export const declare_services_digital_status_panel = () =>
   declare_panel({
-    panel_key: "dept_services_digital_status",
+    panel_key: "services_digital_status",
     levels: ["dept", "gov"],
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
