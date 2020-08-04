@@ -10,42 +10,39 @@ import {
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const ServicesFeesPanel = ({ panel_args }) => {
+const ServicesTypesPanel = ({ panel_args }) => {
   const { services, subject } = panel_args;
-  const service_charges_fees = _.countBy(services, "collects_fees");
+  const data = _.chain(services)
+    .flatMap("service_type")
+    .countBy()
+    .map((value, type) => ({
+      id: type,
+      label: type,
+      value,
+    }))
+    .value();
+  const max_type = _.maxBy(data, "value");
+
   return (
     <div>
       <TM
-        k="services_fees_text"
         args={{
-          subject_name: subject.name,
-          services_count: services.length,
-          charge_fees_count: service_charges_fees.true || 0,
+          num_of_types: data.length,
+          subject,
+          max_type: max_type.label,
+          max_type_pct: max_type.value / services.length,
         }}
         className="medium_panel_text"
+        k="services_types_desc"
       />
-      <WrappedNivoPie
-        data={[
-          {
-            id: "fees",
-            label: text_maker("service_charges_fees"),
-            value: service_charges_fees.true || 0,
-          },
-          {
-            id: "no_fees",
-            label: text_maker("service_does_not_charge_fees"),
-            value: service_charges_fees.false || 0,
-          },
-        ]}
-        is_money={false}
-      />
+      <WrappedNivoPie data={data} is_money={false} />
     </div>
   );
 };
 
-export const declare_services_fees_panel = () =>
+export const declare_services_types_panel = () =>
   declare_panel({
-    panel_key: "services_fees",
+    panel_key: "services_types",
     levels: ["dept", "gov"],
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
@@ -61,10 +58,10 @@ export const declare_services_fees_panel = () =>
         const { panel_args } = calculations;
         return (
           <InfographicPanel
-            title={text_maker("services_fees")}
+            title={text_maker("services_types")}
             sources={sources}
           >
-            <ServicesFeesPanel panel_args={panel_args} />
+            <ServicesTypesPanel panel_args={panel_args} />
           </InfographicPanel>
         );
       },

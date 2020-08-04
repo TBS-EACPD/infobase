@@ -32,7 +32,7 @@ service_does_not_charge_fees:
 
 # Identification methods
 identification_methods:
-  en: Identification Methods
+  en: Identification methods
   fr: TODO
 uses_cra_as_identifier:
   en: Uses CRA business number as identifier
@@ -225,4 +225,13 @@ total_business_volume:
   fr: TODO
 satisfied_business_volume:
   en: Satisfied Business Volume
+  fr: TODO
+
+# Types
+services_types:
+  en: Services types
+  fr: TODO
+services_types_desc:
+  transform: [handlebars, markdown]
+  en: There are **{{num_of_types}}** different types of services within **{{subject.name}}**. **{{max_type}}** is the most commonly offered service type **({{fmt_percentage1 max_type_pct}})**.
   fr: TODO

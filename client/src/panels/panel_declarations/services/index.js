@@ -1,4 +1,5 @@
 export { declare_provided_services_list_panel } from "./provided_services_list.js";
+export { declare_services_types_panel } from "./services_types.js";
 export { declare_services_fees_panel } from "./services_fees.js";
 export { declare_services_id_methods_panel } from "./services_id_methods.js";
 export { declare_services_channels_panel } from "./services_channels.js";
