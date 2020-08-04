@@ -84,4 +84,5 @@ export {
   declare_services_id_methods_panel,
   declare_services_channels_panel,
   declare_services_digital_status_panel,
+  declare_services_standards_panel,
 } from "./services";
