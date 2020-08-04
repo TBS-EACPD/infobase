@@ -90,45 +90,67 @@ const url_state_selector = (str) => {
   return state;
 };
 
-class Root extends React.Component {
+class RPB extends React.Component {
   constructor(props) {
     super(props);
-
-    const { state } = this.props;
-
-    this.state = {
-      ...state,
-    };
+    if (props.state.table) {
+      this.state = {
+        table_picking: false,
+        ...props.state,
+      };
+    } else {
+      this.state = {
+        loading: false,
+        table_picking: true,
+        selected_subject: null,
+        ...props.state,
+      };
+    }
   }
 
-  shouldComponentUpdate(newProps, newState) {
-    return rpb_link(this.state) !== rpb_link(newState);
+  table_handlers = {
+    on_set_filter: ({ dimension, filter }) => {
+      this.setState((prevState, props) => {
+        return { ...prevState, dimension, filter };
+      });
+    },
+
+    on_set_dimension: (dim_key) => {
+      this.setState((prevState, props) => {
+        return {
+          ...prevState,
+          dim_key,
+          filter: text_maker("all"),
+        };
+      });
+    },
+
+    on_switch_table: (table_id) => {
+      this.setState((prevState, props) => {
+        return {
+          ...prevState,
+          ...get_default_state_for_new_table(table_id),
+        };
+      });
+    },
+  };
+
+  pickTable(table_id) {
+    if (this.state.loading) {
+      return;
+    }
+    this.setState({
+      loading: true,
+      table_picking: false,
+    });
+    ensure_loaded({
+      table_keys: [table_id],
+      footnotes_for: "all",
+    }).then(() => {
+      this.table_handlers.on_switch_table(table_id);
+      this.setState({ loading: false });
+    });
   }
-
-  on_set_filter = ({ dimension, filter }) => {
-    this.setState((prevState, props) => {
-      return { ...prevState, dimension, filter };
-    });
-  };
-
-  on_set_dimension = (dim_key) => {
-    this.setState((prevState, props) => {
-      return {
-        ...prevState,
-        dim_key,
-        filter: text_maker("all"),
-      };
-    });
-  };
-
-  on_switch_table = (table_id) => {
-    this.setState((prevState, props) => {
-      return {
-        ...prevState,
-        ...get_default_state_for_new_table(table_id),
-      };
-    });
-  };
 
   get_key_columns_for_table = (table) => {
     return _.chain(table.unique_headers)
@@ -137,10 +159,13 @@ class Root extends React.Component {
       .value();
   };
 
-  get_filters_for_dim = (table, dim_key) =>
-    _.uniq([text_maker("all"), ..._.keys(table[dim_key]("*", true))]);
+  get_filters_for_dim = (table, dim_key) => {
+    return _.uniq([text_maker("all"), ..._.keys(table[dim_key]("*", true))]);
+  };
 
   render() {
+    const { broken_url } = this.props;
+
     const table = this.state.table ? Table.lookup(this.state.table) : undefined;
 
     const subject = this.state.subject
@@ -182,9 +207,8 @@ class Root extends React.Component {
           }))
           .value()
       : undefined;
-
     const filters =
-      this.state.table && this.state.dimension
+      table && this.state.dimension
         ? this.get_filters_for_dim(table, this.state.dimension)
         : undefined;
 
@@ -247,57 +271,8 @@ class Root extends React.Component {
     };
 
     return (
-      <RPB
-        {...this.state}
-        {...options}
-        on_set_filter={this.on_set_filter}
-        on_set_dimension={this.on_set_dimension}
-        on_switch_table={this.on_switch_table}
-      />
-    );
-  }
-}
-
-class RPB extends React.Component {
-  constructor(props) {
-    super(props);
-    if (props.table) {
-      this.state = {
-        table_picking: false,
-        ...props.state,
-      };
-    } else {
-      this.state = {
-        loading: false,
-        table_picking: true,
-        selected_subject: null,
-        ...props.state,
-      };
-    }
-  }
-  pickTable(table_id) {
-    if (this.state.loading) {
-      return;
-    }
-    this.setState({
-      loading: true,
-      table_picking: false,
-    });
-    ensure_loaded({
-      table_keys: [table_id],
-      footnotes_for: "all",
-    }).then(() => {
-      this.props.on_switch_table(table_id);
-      this.setState({ loading: false });
-    });
-  }
-
-  render() {
-    const { table, broken_url } = this.props;
-
-    return (
       <div style={{ minHeight: "800px", marginBottom: "100px" }} id="">
-        <URLSynchronizer state={this.props} />
+        <URLSynchronizer state={{ ...this.props, ...options }} />
         <LangSynchronizer
           lang_modifier={(hash) => {
             const config_str = hash.split("rpb/")[1];
@@ -387,7 +362,15 @@ class RPB extends React.Component {
         {this.state.loading ? (
           <SpinnerWrapper config_name={"route"} />
         ) : (
-          <Fragment>{table ? <GranularView {...this.props} /> : null}</Fragment>
+          <Fragment>
+            {table ? (
+              <GranularView
+                {...this.props}
+                {...this.table_handlers}
+                {...options}
+              />
+            ) : null}
+          </Fragment>
         )}
       </div>
     );
@@ -494,8 +477,7 @@ export default class ReportBuilder extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     return (
       this.state.loading !== nextState.loading ||
-      this.state.config_str !== nextState.config_str ||
-      rpb_link(this.state.url_state) !== rpb_link(nextState.url_state)
+      this.state.config_str !== nextState.config_str
     );
   }
   componentDidUpdate() {
@@ -518,7 +500,7 @@ export default class ReportBuilder extends React.Component {
         {this.state.loading ? (
           <SpinnerWrapper config_name={"route"} />
         ) : (
-          <Root state={url_state} />
+          <RPB state={url_state} />
         )}
       </StandardRouteContainer>
     );
