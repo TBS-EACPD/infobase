@@ -203,6 +203,9 @@ total_business_vol:
 service_standards_title:
   en: Service Standards
   fr: TODO
+services_standards:
+  en: Services standards
+  fr: TODO
 service_standards_text:
   transform: [handlebars, markdown]
   en: |
@@ -226,6 +229,26 @@ total_business_volume:
 satisfied_business_volume:
   en: Satisfied Business Volume
   fr: TODO
+has_standards:
+  en: Has standards
+  fr: TODO
+no_standards:
+  en: Does not have standards
+  fr: TODO
+target_met_true:
+  en: Standard target is met
+  fr: TODO
+target_met_false:
+  en: Standard target is not met
+  fr: TODO
+has_standards_text:
+  transform: [handlebars, markdown]
+  en: How many {{gl_tt "services" "SERVICE"}} have {{gl_tt "standards" "STANDARD"}}?
+  fr: TODO
+target_met_text:
+  transform: [handlebars, markdown]
+  en: How many {{gl_tt "standards" "STANDARD"}} targets' were met?
+  fr: TODO
 
 # Types
 services_types:
@@ -233,5 +256,5 @@ services_types:
   fr: TODO
 services_types_desc:
   transform: [handlebars, markdown]
-  en: There are **{{num_of_types}}** different types of services within **{{subject.name}}**. **{{max_type}}** is the most commonly offered service type **({{fmt_percentage1 max_type_pct}})**.
+  en: There are **{{num_of_types}}** different types of {{gl_tt "services" "SERVICE"}} within **{{subject.name}}**. The service type "**{{max_type}}**" is the most commonly offered service type **({{fmt_percentage1 max_type_pct}})**.
   fr: TODO
