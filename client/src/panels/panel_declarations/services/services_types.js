@@ -30,12 +30,13 @@ const ServicesTypesPanel = ({ panel_args }) => {
           num_of_types: data.length,
           subject,
           max_type: max_type.label,
-          max_type_pct: max_type.value / services.length,
+          max_type_count: max_type.value,
+          num_of_services: services.length,
         }}
         className="medium_panel_text"
         k="services_types_desc"
       />
-      <WrappedNivoPie data={data} is_money={false} />
+      <WrappedNivoPie data={data} include_percent={false} is_money={false} />
     </div>
   );
 };
