@@ -34,10 +34,10 @@ $minSmallDevice: 768px;
 $minMediumDevice: 992px;
 $minLargeDevice: 1200px;
 /*media breakpoints -1 for max-width queries*/
-$maxExtraSmallDevice: 575px;
-$maxSmallDevice: 767px;
-$maxMediumDevice: 991px;
-$maxLargeDevice: 1199px;
+$maxExtraSmallDevice: 575.98px;
+$maxSmallDevice: 767.98px;
+$maxMediumDevice: 991.98px;
+$maxLargeDevice: 1199.98px;
 
 
 /* dark and light colours don't have enough contrast between them for text, so don't use them that way! Use black text on light, or (check contrast) white text on dark*/
