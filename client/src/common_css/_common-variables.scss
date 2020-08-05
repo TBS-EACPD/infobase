@@ -34,6 +34,16 @@ $minSmallDevice: 768px;
 $minMediumDevice: 992px;
 $minLargeDevice: 1200px;
 /*media breakpoints -1 for max-width queries*/
+/*
+.98px is used for styling consistancy reasons.
+Previously, the values were rounded down.
+In the odd event that a screen size lied right between 
+the max and min, (ex: a screen that scaled by a non-int multiplier), the styling
+for the device could take neither max-width and min-width styling (ex: screen 
+width that lied between 575px and 576px).
+Now, it should not be possible (by likelyhood) for any device to take on 0 media queries.
+.98 is also used because safari has a rounding bug causing
+.99 to treated as an exact value*/
 $maxExtraSmallDevice: 575.98px;
 $maxSmallDevice: 767.98px;
 $maxMediumDevice: 991.98px;
