@@ -41,9 +41,14 @@ export class ServiceOverview extends React.Component {
     const total_business_vol = _.reduce(
       service_channels_keys,
       (total, key) => {
-        const sum_for_key =
-          _.sumBy(service.service_report, `${key}_count`) || 0;
-        return total + sum_for_key;
+        // Total business volume is sum of all channels except website visits
+        if (key !== "online_inquiry") {
+          const sum_for_key =
+            _.sumBy(service.service_report, `${key}_count`) || 0;
+          return total + sum_for_key;
+        } else {
+          return total;
+        }
       },
       0
     );

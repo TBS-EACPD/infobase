@@ -95,10 +95,12 @@ export class ServiceStandards extends React.Component {
       count: {
         index: 4,
         header: text_maker("total_business_volume"),
+        formatter: "big_int",
       },
       met_count: {
         index: 5,
         header: text_maker("satisfied_business_volume"),
+        formatter: "big_int",
       },
       is_target_met: {
         index: 6,
