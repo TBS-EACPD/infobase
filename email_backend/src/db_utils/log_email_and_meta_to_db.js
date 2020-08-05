@@ -34,6 +34,8 @@ const template_type_to_schema_type = (value_type) => {
       return [String];
     case "json":
       return Object;
+    case "number":
+      return Number;
     default:
       return String;
   }
