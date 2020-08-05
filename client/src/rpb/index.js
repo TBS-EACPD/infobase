@@ -165,95 +165,90 @@ class RPB extends React.Component {
   render() {
     const { broken_url } = this.props;
 
-    const table = this.state.table ? Table.lookup(this.state.table) : undefined;
+    const table = this.state.table && Table.lookup(this.state.table);
 
-    const subject = this.state.subject
-      ? Subject.get_by_guid(this.state.subject)
-      : undefined;
+    const subject =
+      this.state.subject && Subject.get_by_guid(this.state.subject);
 
-    const all_data_columns = this.state.table
-      ? get_all_data_columns_for_table(table)
-      : undefined;
+    const all_data_columns =
+      this.state.table && get_all_data_columns_for_table(table);
 
-    const columns = !_.isEmpty(all_data_columns)
-      ? _.filter(all_data_columns, ({ nick }) =>
-          _.includes(this.state.columns, nick)
-        )
-      : undefined;
+    const columns =
+      !_.isEmpty(all_data_columns) &&
+      _.filter(all_data_columns, ({ nick }) =>
+        _.includes(this.state.columns, nick)
+      );
 
-    const sorted_key_columns = this.state.table
-      ? this.get_key_columns_for_table(table)
-      : undefined;
+    const sorted_key_columns =
+      this.state.table && this.get_key_columns_for_table(table);
 
-    const def_ready_columns = !_.isEmpty(columns)
-      ? _.map(columns, (col) => ({
-          name: col.fully_qualified_name,
-          def: table.column_description(col.nick),
-        }))
-      : undefined;
+    const def_ready_columns =
+      !_.isEmpty(columns) &&
+      _.map(columns, (col) => ({
+        name: col.fully_qualified_name,
+        def: table.column_description(col.nick),
+      }));
 
     const footnotes =
-      subject && table
-        ? Footnote.get_for_subject(subject, table.tags.concat(["MACHINERY"]))
-        : undefined;
+      subject &&
+      table &&
+      Footnote.get_for_subject(subject, table.tags.concat(["MACHINERY"]));
 
-    const dimensions = this.state.table
-      ? _.chain(table.dimensions)
-          .filter("include_in_report_builder")
-          .map(({ title_key }) => ({
-            id: title_key,
-            display: text_maker(title_key),
-          }))
-          .value()
-      : undefined;
-    const filters =
-      table && this.state.dimension
-        ? this.get_filters_for_dim(table, this.state.dimension)
-        : undefined;
-
-    const filters_by_dimension = !_.isEmpty(dimensions)
-      ? _.map(dimensions, ({ id: dim_key, display }) => ({
-          display,
-          id: dim_key,
-          children: _.map(
-            this.get_filters_for_dim(table, dim_key),
-            (filter) => ({
-              filter: filter,
-              dimension: dim_key,
-              display: filter,
-            })
-          ),
+    const dimensions =
+      this.state.table &&
+      _.chain(table.dimensions)
+        .filter("include_in_report_builder")
+        .map(({ title_key }) => ({
+          id: title_key,
+          display: text_maker(title_key),
         }))
-      : undefined;
+        .value();
 
-    const table_data = this.state.table
-      ? (() => {
-          table.fill_dimension_columns();
-          return table.data;
-        })()
-      : undefined;
+    const filters =
+      table &&
+      this.state.dimension &&
+      this.get_filters_for_dim(table, this.state.dimension);
+
+    const filters_by_dimension =
+      !_.isEmpty(dimensions) &&
+      _.map(dimensions, ({ id: dim_key, display }) => ({
+        display,
+        id: dim_key,
+        children: _.map(this.get_filters_for_dim(table, dim_key), (filter) => ({
+          filter: filter,
+          dimension: dim_key,
+          display: filter,
+        })),
+      }));
+
+    const table_data =
+      this.state.table &&
+      (() => {
+        table.fill_dimension_columns();
+        return table.data;
+      })();
 
     const cat_filter_func =
-      this.state.filter && this.state.dimension
-        ? this.state.filter === text_maker("all")
-          ? _.constant(true)
-          : { [this.state.dimension]: this.state.filter }
-        : undefined;
+      this.state.filter &&
+      this.state.dimension &&
+      this.state.filter === text_maker("all")
+        ? _.constant(true)
+        : { [this.state.dimension]: this.state.filter };
 
-    const zero_filter_func = this.state.columns
-      ? _.chain(this.state.columns)
-          .map((nick) => this.state.columns[nick])
-          .compact()
-          .isEmpty()
-          .value()
-      : undefined;
+    const zero_filter_func =
+      this.state.columns &&
+      _.chain(this.state.columns)
+        .map((nick) => this.state.columns[nick])
+        .compact()
+        .isEmpty()
+        .value();
 
-    const flat_data = !_.isEmpty(table_data)
-      ? _.chain(table_data)
-          .filter(cat_filter_func)
-          .reject(zero_filter_func)
-          .value()
-      : undefined;
+    const flat_data =
+      !_.isEmpty(table_data) &&
+      _.chain(table_data)
+        .filter(cat_filter_func)
+        .reject(zero_filter_func)
+        .value();
 
     const options = {
       table,
