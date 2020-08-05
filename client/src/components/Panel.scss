@@ -48,15 +48,14 @@
   }
   
   .panel-heading {
+    /* on mobile, we need way less padding */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    
     @media (min-width:$minLargeDevice){
       padding: 15px 15px 12px; /* bootstrap default is 10 15 */
-    }
-    @media (max-width:$maxLargeDevice){
-      /* on mobile, we need way less padding */
-      padding-top: 10px;
-      padding-bottom: 10px;
-      padding-right: 1rem;
-      padding-left: 1rem;
     }
   }
   
