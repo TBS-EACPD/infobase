@@ -20,15 +20,20 @@ const text_keys_by_level = {
 };
 
 function render({ calculations, footnotes, sources }) {
-  const { panel_args, info, subject } = calculations;
-  const { neg_exp, gross_exp, net_exp } = panel_args;
+  const { panel_args, subject } = calculations;
+  const { text_calculations } = panel_args;
+  const {
+    last_year_gross_exp,
+    last_year_net_exp,
+    last_year_rev,
+  } = text_calculations;
 
-  const series = [gross_exp, neg_exp];
+  const series = [last_year_gross_exp, last_year_rev];
   const _ticks = ["gross", "revenues"];
 
   // if neg_exp is 0, then no point in showing the net bar
-  if (neg_exp !== 0) {
-    series.push(net_exp);
+  if (last_year_rev !== 0) {
+    series.push(last_year_net_exp);
     _ticks.push("net");
   }
 
@@ -71,7 +76,7 @@ function render({ calculations, footnotes, sources }) {
       {...{ footnotes, sources }}
     >
       <Col size={5} isText>
-        <TM k={text_keys_by_level[subject.level]} args={info} />
+        <TM k={text_keys_by_level[subject.level]} args={text_calculations} />
       </Col>
       <Col size={7} isGraph>
         {graph_content}
@@ -88,18 +93,37 @@ export const declare_spend_rev_split_panel = () =>
       switch (level) {
         case "dept":
           return {
-            depends_on: ["orgVoteStatPa", "orgSobjs"],
+            depends_on: ["orgSobjs"],
             footnotes: ["SOBJ_REV"],
-            info_deps: ["orgSobjs_dept_info", "orgVoteStatPa_dept_info"],
-
-            calculate(subject, info, options) {
-              if (info.dept_pa_last_year_rev === 0) {
+            calculate(subject, options) {
+              const { orgSobjs } = this.tables;
+              const last_year_spend = orgSobjs.so_num(
+                "{{pa_last_year}}",
+                subject.id,
+                true
+              );
+              const last_year_rev =
+                (last_year_spend[22] || 0) + (last_year_spend[21] || 0);
+              const minus_last_year_rev = -last_year_rev;
+              const last_year_gross_exp = _.sum(
+                _.map(_.range(1, 13), (i) => last_year_spend[i] || 0)
+              );
+              if (last_year_rev === 0) {
                 return false;
               }
+              const last_year_net_exp =
+                last_year_gross_exp - minus_last_year_rev;
+
+              const text_calculations = {
+                subject,
+                last_year_rev,
+                minus_last_year_rev,
+                last_year_gross_exp,
+                last_year_net_exp,
+              };
+
               return {
-                neg_exp: info.dept_pa_last_year_rev,
-                gross_exp: info.dept_pa_last_year_gross_exp,
-                net_exp: info.dept_exp_pa_last_year,
+                text_calculations,
               };
             },
             render,
@@ -107,15 +131,21 @@ export const declare_spend_rev_split_panel = () =>
         case "program":
           return {
             depends_on: ["programSobjs"],
-            info_deps: ["program_revenue"],
-            calculate(subject, info, options) {
+            calculate(subject, options) {
               const { programSobjs } = this.tables;
               const prog_rows = programSobjs.programs.get(subject);
               const rev_split = rows_to_rev_split(prog_rows);
               if (rev_split.neg_exp === 0) {
                 return false;
               }
-              return rev_split;
+              const text_calculations = {
+                subject,
+                last_year_rev: rev_split.neg_exp,
+                minus_last_year_rev: -rev_split.neg_exp,
+                last_year_gross_exp: rev_split.gross_exp,
+                last_year_net_exp: rev_split.net_exp,
+              };
+              return { text_calculations };
             },
             render,
           };
