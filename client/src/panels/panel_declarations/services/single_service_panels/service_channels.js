@@ -49,7 +49,7 @@ export class ServiceChannels extends React.Component {
           k="service_channels_text"
           className="medium_panel_text"
           args={{
-            max_channel_key: text_maker(max_channel_key),
+            max_channel_key: max_channel_key ? text_maker(max_channel_key) : "",
             max_value: max_value,
           }}
         />
