@@ -171,6 +171,7 @@ class DetailedHistTPItems extends React.Component {
         index: 0,
         header: text_maker("label"),
         is_searchable: true,
+        is_toggleable: false,
       },
       ..._.chain(text_years)
         .map((year, idx) => [
