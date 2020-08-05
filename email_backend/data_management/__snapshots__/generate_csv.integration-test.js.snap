@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check that CSV output and JSON output are correct Snapshot of JSON output 1`] = `
+Object {
+  "_id": Any<Object>,
+  "a": 1,
+  "bleh": "bleh",
+  "date": "8/5/2020",
+  "enums": "bug, other",
+  "from": "Sender Name <sender@example.com>",
+  "number": 1,
+  "optional_automatic": "bluh",
+  "radio": "yes",
+  "referer": "http://localhost:8080/build/InfoBase/index-eng.html",
+  "required_automatic": "blah",
+  "server_time": Any<String>,
+  "text": "a",
+  "time": Any<String>,
+  "to": "Recipient <recipient@example.com>",
+}
+`;
