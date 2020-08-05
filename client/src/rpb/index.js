@@ -198,7 +198,7 @@ class RPB extends React.Component {
         : undefined;
 
     const dimensions = this.state.table
-      ? _.chain(table)
+      ? _.chain(table.dimensions)
           .filter("include_in_report_builder")
           .map(({ title_key }) => ({
             id: title_key,
@@ -364,7 +364,7 @@ class RPB extends React.Component {
           <Fragment>
             {table ? (
               <GranularView
-                {...this.props}
+                {...this.props.state}
                 {...this.table_handlers}
                 {...options}
               />
