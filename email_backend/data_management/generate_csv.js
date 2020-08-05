@@ -6,11 +6,10 @@ import fs from "fs";
 import mongoose from "mongoose";
 import { Parser } from "json2csv";
 
-const json2csv_parser = new Parser();
-
 const templates = get_templates();
-const csv_output = [];
-const extractor = () =>
+const json_output = [];
+const csv_name = [];
+export const extractor = () =>
   connect_db()
     .then(() =>
       _.chain(templates)
@@ -64,21 +63,27 @@ const extractor = () =>
             function (sub) {
               return {
                 ...sub,
-                server_time: new Date(sub["server_time"])
-                  .toUTCString()
-                  .replace(/,/g, ""),
+                server_time: new Date(sub["server_time"]).toUTCString(),
               };
             }
           );
 
           if (time_corrected_email_logs.length > 0) {
+            //check if there is actually any content to be writing
+
+            const json2csv_parser = new Parser();
+
             const csv = json2csv_parser.parse(time_corrected_email_logs, {
               fields: column_names,
             });
 
-            csv_output.push(csv);
-
             const file_name = `${template_name}_emails_${new Date().getTime()}.csv`;
+
+            if (template_name === "test_template.test") {
+              json_output.push(time_corrected_email_logs);
+              csv_name.push(file_name);
+            }
+
             fs.writeFile(`./data_management/CSVs/${file_name}`, csv, function (
               err
             ) {
@@ -97,6 +102,5 @@ const extractor = () =>
 
 export async function get_output() {
   const wait = await extractor();
-  console.log(csv_output);
-  return csv_output;
+  return { csv_name: csv_name[0], json_output: json_output[0][0] };
 }
