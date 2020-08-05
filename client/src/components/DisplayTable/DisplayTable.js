@@ -26,6 +26,7 @@ const column_config_defaults = {
   sum_func: (sum, value) => sum + value,
   raw_formatter: _.identity,
   sum_initial_value: 0,
+  is_toggleable: true,
 };
 
 /* Assumption: DisplayTable assumes 1st column to be string that describes its row
@@ -65,11 +66,17 @@ export class DisplayTable extends React.Component {
       .mapValues(() => "")
       .value();
 
+    const toggleable_col_keys = _.chain(col_configs_with_defaults)
+      .pickBy((col) => col.is_toggleable)
+      .keys()
+      .value();
+
     this.state = {
       visible_col_keys,
       sort_by,
       descending: false,
       searches,
+      toggleable_col_keys,
     };
   }
 
@@ -93,12 +100,19 @@ export class DisplayTable extends React.Component {
           sum_func: (sum, value) => ... <- (function) Custom sum func. Default to sum + value
           sort_func: (a, b) => ... <- (function) Custom sort func. Default to _.sortBy
           sum_initial_value: 0 <- (number) Default to 0
+          is_toggleable: true <- (boolean) Default to true
         },
       }
       */,
       util_components,
     } = this.props;
-    const { sort_by, descending, searches, visible_col_keys } = this.state;
+    const {
+      sort_by,
+      descending,
+      searches,
+      visible_col_keys,
+      toggleable_col_keys,
+    } = this.state;
 
     const col_configs_with_defaults = _.mapValues(
       column_configs,
@@ -224,7 +238,7 @@ export class DisplayTable extends React.Component {
               }))}
               onClick={(clicked_key) => {
                 // 1st column cannot be toggled off
-                !(visible_ordered_col_keys[0] === clicked_key) &&
+                _.includes(toggleable_col_keys, clicked_key) &&
                   this.setState({
                     visible_col_keys: _.toggle_list(
                       visible_col_keys,
