@@ -74,6 +74,7 @@ class SobjLine extends React.Component {
         index: 0,
         header: text_maker("sos"),
         is_searchable: true,
+        is_toggleable: false,
       },
       ..._.chain(years)
         .map((year, idx) => [

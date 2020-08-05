@@ -66,17 +66,11 @@ export class DisplayTable extends React.Component {
       .mapValues(() => "")
       .value();
 
-    const toggleable_col_keys = _.chain(col_configs_with_defaults)
-      .pickBy((col) => col.is_toggleable)
-      .keys()
-      .value();
-
     this.state = {
       visible_col_keys,
       sort_by,
       descending: false,
       searches,
-      toggleable_col_keys,
     };
   }
 
@@ -106,13 +100,7 @@ export class DisplayTable extends React.Component {
       */,
       util_components,
     } = this.props;
-    const {
-      sort_by,
-      descending,
-      searches,
-      visible_col_keys,
-      toggleable_col_keys,
-    } = this.state;
+    const { sort_by, descending, searches, visible_col_keys } = this.state;
 
     const col_configs_with_defaults = _.mapValues(
       column_configs,
@@ -246,8 +234,7 @@ export class DisplayTable extends React.Component {
                 active: _.includes(visible_ordered_col_keys, key),
               }))}
               onClick={(clicked_key) => {
-                // 1st column cannot be toggled off
-                _.includes(toggleable_col_keys, clicked_key) &&
+                col_configs_with_defaults[clicked_key].is_toggleable &&
                   this.setState({
                     visible_col_keys: _.toggle_list(
                       visible_col_keys,

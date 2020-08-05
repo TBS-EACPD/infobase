@@ -88,6 +88,7 @@ export const declare_dp_rev_split_panel = () =>
             formatter: (value) => (
               <span style={{ fontWeight: "bold" }}> {value} </span>
             ),
+            is_toggleable: false,
           },
           gross: {
             index: 1,

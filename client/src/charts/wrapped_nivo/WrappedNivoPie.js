@@ -73,6 +73,7 @@ export class WrappedNivoPie extends React.Component {
         index: 0,
         header: nivo_common_text_maker("label"),
         is_searchable: true,
+        is_toggleable: false,
       },
       value: {
         index: 1,

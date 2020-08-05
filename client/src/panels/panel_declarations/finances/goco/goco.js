@@ -118,6 +118,7 @@ class Goco extends React.Component {
         index: 0,
         header: sa_text,
         is_searchable: true,
+        is_toggleable: false,
       },
       [spending_text]: {
         index: 1,

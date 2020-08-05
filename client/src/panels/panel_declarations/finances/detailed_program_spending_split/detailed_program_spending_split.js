@@ -86,6 +86,7 @@ class HistoricalProgramBars extends React.Component {
         index: 0,
         header: text_maker("program"),
         is_searchable: true,
+        is_toggleable: false,
       },
       ..._.chain(ticks)
         .map((tick, idx) => [
