@@ -131,7 +131,7 @@ service_channels_text:
   en: |
     Delivery channels that this {{gl_tt "service" "SERVICE"}} uses for handling applications and enquiries.
     
-    There were **{{fmt_big_int max_value}} {{max_channel_key}}**, which is the highest delivery channel volume for this service
+    {{#if max_channel_key}}There were **{{fmt_big_int max_value}} {{max_channel_key}}**, which is the highest delivery channel volume for this service{{/if}}
   fr: TODO
 live_application:
   en: In person applications
