@@ -120,9 +120,9 @@
     font-size: 1em;
   }
   &.mat-grid__inner-panel--medium {
-    font-size: 1.6em;
-    @media (max-width: $maxLargeDevice){
-      font-size: 1.4em;
+    font-size: 1.4em;
+    @media (min-width: $minLargeDevice){
+      font-size: 1.6em;
     }
   }
 
