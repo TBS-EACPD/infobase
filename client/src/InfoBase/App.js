@@ -129,12 +129,12 @@ export class App extends React.Component {
     initialize_analytics();
 
     ensure_linked_stylesheets_load();
-  }
 
-  state = {
-    showNotification: false,
-    message: "",
-  };
+    this.state = {
+      showNotification: false,
+      message: "",
+    };
+  }
 
   hideNotification = () => {
     this.setState({ showNotification: false });
