@@ -134,11 +134,11 @@ MACHINERY:
 
 DIGITAL_STATUS:
   en: Digital Status
-  fr: TODO
+  fr: État numérique
 
 OTHER_TYPE_COMMENT:
   en: Other type comment
-  fr: TODO
+  fr: Autre type de commentaire
 
 ANY:
   en: Any

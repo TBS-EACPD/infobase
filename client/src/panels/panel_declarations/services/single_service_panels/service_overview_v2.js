@@ -25,10 +25,10 @@ export class ServiceOverviewV2 extends React.Component {
       .map(({ standard_report }) => standard_report)
       .flatten()
       .value();
-    const total_business_vol = _.reduce(
+    const applications_and_calls = _.reduce(
       service_channels_keys,
       (total, key) => {
-        // Total business volume is sum of all channels except website visits
+        // applications_and_calls is sum of all channels except website visits
         if (key !== "online_inquiry") {
           const sum_for_key =
             _.sumBy(service.service_report, `${key}_count`) || 0;
@@ -39,10 +39,6 @@ export class ServiceOverviewV2 extends React.Component {
       },
       0
     );
-    const formatted_business_vol = formatter("big_int", total_business_vol, {
-      raw: true,
-    });
-
     return (
       <TextPanel title={text_maker("service_overview_title")}>
         <dl className="dl-horizontal tombstone-data-list">
@@ -138,8 +134,12 @@ export class ServiceOverviewV2 extends React.Component {
               }
             />
           </dd>
-          <dt>{text_maker("total_business_vol")}</dt>
-          <dd>{formatted_business_vol}</dd>
+          <dt>{text_maker("applications_and_calls")}</dt>
+          <dd>
+            {formatter("big_int", applications_and_calls, {
+              raw: true,
+            })}
+          </dd>
           <dt>{text_maker("service_link_text")}</dt>
           <dd>
             {!_.isEmpty(service.urls) &&
