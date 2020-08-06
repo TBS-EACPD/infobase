@@ -6,7 +6,6 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 import { initialize_analytics } from "../core/analytics.js";
 import { has_local_storage } from "../core/feature_detection.js";
-import { create_text_maker } from "../models/text.js";
 
 import {
   ensure_linked_stylesheets_load,
@@ -20,8 +19,6 @@ export const app_reducer = (
   //doesn't do anything yet...
   return state;
 };
-
-import text from "./App.yaml";
 
 import { ErrorBoundary } from "../core/ErrorBoundary.js";
 import { DevFip } from "../core/DevFip.js";
