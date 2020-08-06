@@ -38,10 +38,10 @@ export class ServiceOverview extends React.Component {
       .map(({ standard_report }) => standard_report)
       .flatten()
       .value();
-    const total_business_vol = _.reduce(
+    const applications_and_calls = _.reduce(
       service_channels_keys,
       (total, key) => {
-        // Total business volume is sum of all channels except website visits
+        // applications_and_calls is sum of all channels except website visits
         if (key !== "online_inquiry") {
           const sum_for_key =
             _.sumBy(service.service_report, `${key}_count`) || 0;
@@ -52,9 +52,6 @@ export class ServiceOverview extends React.Component {
       },
       0
     );
-    const formatted_business_vol = formatter("big_int", total_business_vol, {
-      raw: true,
-    });
 
     return (
       <Panel title={text_maker("service_overview_title")}>
@@ -126,7 +123,13 @@ export class ServiceOverview extends React.Component {
               </div>
             )}
             <div className="service-overview-rect">
-              {`${text_maker("total_business_vol")}: ${formatted_business_vol}`}
+              {`${text_maker("applications_and_calls")}: ${formatter(
+                "big_int",
+                applications_and_calls,
+                {
+                  raw: true,
+                }
+              )}`}
             </div>
             <div className="service-overview-rect">
               <TM

@@ -1,16 +1,17 @@
 # Services list
 list_of_provided_services_title:
   en: List of provided services
-  fr: TODO
+  fr: Liste des services offerts
 list_of_provided_services_desc:
   transform: [handlebars, markdown]
   en: |
     **{{subject_name}}** is reporting on **{{num_of_services}}** {{gl_tt "services" "SERVICE"}}:
   fr: |
-    TODO
+    **{{subject_name}}** rend compte de **{{num_of_services}}** {{gl_tt "services" "SERVICE"}}:
+
 view_service:
   en: Explore the service
-  fr: TODO
+  fr: Découvrez le service
 filter_results_service:
   en: Filter services by name or type
   fr: Filtrer les services par nom ou par type   
@@ -18,105 +19,107 @@ filter_results_service:
 # Fees
 services_fees:
   en: Service fees
-  fr: TODO
+  fr: Frais de service
 services_fees_text:
   transform: [handlebars, markdown]
   en: Out of the **{{services_count}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{charge_fees_count}}** services charge fees.
-  fr: TODO
+  fr: Sur les **{{services_count}}** {{gl_tt "services" "SERVICE"}} offerts par **{{subject_name}}**, **{{charge_fees_count}}** sont payants.
 service_charges_fees:
   en: Service does charge fees
-  fr: TODO
+  fr: Service payant
 service_does_not_charge_fees:
   en: Service does not charge fees
-  fr: TODO
+  fr: Service sans frais
 
 # Identification methods
 identification_methods:
   en: Identification methods
-  fr: TODO
+  fr: Méthodes d'identification
 uses_cra_as_identifier:
   en: Uses CRA business number as identifier
-  fr: TODO
+  fr: Le numéro d'entreprise de l'ARC est utilisé comme identifiant
 uses_sin_as_identifier:
   en: Uses SIN as identifier
-  fr: TODO
+  fr: Le NAS est utilisé comme identifiant
 does_not_use_cra_as_identifier:
   en: Does not use CRA business number as identifier
-  fr: TODO
+  fr: Le numéro d'entreprise de l'ARC n'est pas utilisé comme identifiant
 does_not_use_sin_as_identifier:
   en: Does not use SIN as identifier
-  fr: TODO
+  fr: Le NAS n'est pas utilisé comme identifiant
 sin_sub_title:
   transform: [handlebars, markdown]
   en: How many {{gl_tt "services" "SERVICE"}} use **SIN** as a standard identifier?
-  fr: TODO
+  fr: Combien de services utilisent le NAS comme identifiant standard?
 cra_sub_title:
   transform: [handlebars, markdown]
   en: How many services use **CRA business number** as a standard identifier?
-  fr: TODO
+  fr: Combien de services utilisent le numéro d'entreprise de l'ARC comme identifiant standard?
 
 # Digital Status
+# TODO: no component in french translation
 services_digital_status_text:
   transform: [handlebars, markdown]
   en: |
     Among the **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{most_digital_name}}** is the most online-available {{gl_tt "service component" "SERVICE_COMPONENT"}} (**{{fmt_percentage1 most_digital_pct}}**) while **{{least_digital_name}}** is the least online-available {{gl_tt "service component" "SERVICE_COMPONENT"}} (**{{fmt_percentage1 least_digital_pct}}**).
-  fr: TODO
+  fr: |
+    Parmi les **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} offerts par **{{subject_name}}**, **{{most_digital_name}}** est le service en ligne le plus disponible (**{{fmt_percentage1 most_digital_pct}}**) tandis que **{{least_digital_name}}** est le service en ligne le moins disponsible (**{{fmt_percentage1 least_digital_pct}}**).
 services_digital_status:
   en: Online status of services
-  fr: TODO
+  fr: État des services en ligne
 digital_status:
   en: Online status of this service
-  fr: TODO
+  fr: État en ligne de ce service
 account_reg_digital_desc:
   en: Clients can register online
-  fr: TODO
+  fr: Les client peuvent s'inscire en ligne
 application_digital_desc:
   en: Clients can apply online
-  fr: TODO
+  fr: Les clients peuvent présenter leur demande en ligne
 authentication_desc:
   en: Clients can authenticate online
-  fr: TODO
+  fr: L'authentification du client peut se faire en lignne
 decision_digital_desc:
   en: Department can inform decisions online
-  fr: TODO
+  fr: Le ministére peut transmettre ses décisions en ligne
 issuance_digital_desc:
   en: Documentation can be issued online
-  fr: TODO
+  fr: La documentation peut être transmise en ligne
 issue_res_digital_desc:
   en: Clients can provide feedback online
-  fr: TODO
+  fr: Les clients peuvent faire des commentaires en ligne
 account_reg_digital:
   en: Registration
-  fr: TODO
+  fr: Inscription
 application_digital:
   en: Application
-  fr: TODO
+  fr: Demande
 authentication:
   en: Authentication
-  fr: TODO
+  fr: Authentification
 decision_digital:
   en: Decision
-  fr: TODO
+  fr: Décision
 issuance_digital:
   en: Issuance
-  fr: TODO
+  fr: Transmission
 issue_res_digital:
   en: Feedback
-  fr: TODO
+  fr: Rétroaction
 can_online:
   en: Can be done online
-  fr: TODO
+  fr: Peut se faire en ligne
 cannot_online:
   en: Cannot be done online
-  fr: TODO
+  fr: Ne peut pas se faire en ligne
 
 # Channels
 services_channels_title:
   en: Delivery channels of services
-  fr: TODO
+  fr: Modes de prestation des services
 single_service_channels_title:
   en: Delivery channels of this service
-  fr: TODO
+  fr: Modes de prestation de ce service
 services_channels_text:
   transform: [handlebars, markdown]
   en: |
@@ -125,32 +128,41 @@ services_channels_text:
     In **{{subject.name}}**, the most traffic was generated through "**{{max_vol_channel_name}}**" channel with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
 
     The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** applications, the highest among all of the department's services.
-  fr: TODO
+  fr: |
+    Modes de prestation utilisés par les services pout traiter les demandes et les renseignements.
+
+    À **{{subject.name}}**, le plus grand nombre de demandes a ètès gènèrè par les mode "**{{max_vol_channel_name}}**" avec un total de **{{fmt_big_int max_vol_channel_value}}** demandes.
+
+    Le service "**{{max_vol_service_name}}**" a reçu **{{fmt_big_int max_vol_service_value}}** demandes, le plus grand nombre parmi les services du ministére.
+#TODO check French over.
 service_channels_text:
   transform: [handlebars, markdown]
   en: |
     Delivery channels that this {{gl_tt "service" "SERVICE"}} uses for handling applications and enquiries.
     
-    {{#if max_channel_key}}There were **{{fmt_big_int max_value}} {{max_channel_key}}**, which is the highest delivery channel volume for this service{{/if}}
-  fr: TODO
+    {{#if max_channel_key}}There were **{{fmt_big_int max_value}} {{max_channel_key}}**, which is the highest delivery channel volume for this service.{{/if}}
+  fr: |
+    Les modes de prestationn utilisés par ce service pout traiter les demandes et les renseignements.
+    
+    {{#if max_channel_key}}Il y a eu **{{fmt_big_int max_value}} {{max_channel_key}}**, soit le plus grand nombre pour ce service.{{/if}}
 live_application:
   en: In person applications
-  fr: TODO
+  fr: Demandes en personne
 mail_application:
   en: Applications by mail
-  fr: TODO
+  fr: Demandes par la poste
 online_application:
   en: Online applications
-  fr: TODO
+  fr: Demandes en ligne
 other_application:
   en: Applications by other channels
-  fr: TODO
+  fr: Demandes par d'autres moyens
 phone_inquiry:
   en: Telephone enquiries
-  fr: TODO
+  fr: Demandes de renseignements par téléphone
 online_inquiry:
   en: Website visits
-  fr: TODO
+  fr: Visites sur le site web
 
 # Overview
 overview_digital_status_title:
@@ -159,73 +171,76 @@ overview_digital_status_title:
   fr: TODO
 overview_digital_status_desc:
   en: Online component of this service
-  fr: TODO
+  fr: Volet en ligne de ce service
 service_types:
   en: Service Types
-  fr: TODO
+  fr: Types de service
 online_status:
   en: Online status
-  fr: TODO
+  fr: État en ligne
 service_overview_title:
   en: Overview
-  fr: TODO
+  fr: Aperçu
 related_programs:
   en: Related Programs
-  fr: TODO
+  fr: Programmes connexes
 does_charge_fees:
   transform: [handlebars, markdown]
   en: This {{gl_tt "service" "SERVICE"}} **does** charge fees
-  fr: TODO
+  fr: |
+    {{gl_tt "Service" "SERVICE"}} **payant**
 does_not_charge_fees:
   transform: [handlebars, markdown]
   en: This {{gl_tt "service" "SERVICE"}} **does not** charge fees
-  fr: TODO
+  fr: |
+    {{gl_tt "service" "SERVICE"}} **sans frais**
 standards_performance_text:
   transform: [handlebars, markdown]
   en: Overall standards performance for this {{gl_tt "service" "SERVICE"}}
-  fr: TODO
+  fr: Rendement global des normes pour ce {{gl_tt "service" "SERVICE"}}
 service_single_link_text:
   transform: [handlebars, markdown]
   en: More details on this {{gl_tt "service" "SERVICE"}} can be found **{{ext_link "here" service_url }}**
-  fr: TODO
+  fr: Pour en savoir plus sur ce {{gl_tt "service" "SERVICE"}}, cliquez **{{ext_link "ici" service_url }}**
 service_links_text:
   transform: [handlebars, markdown]
   en: More details on this {{gl_tt "service" "SERVICE"}} can be found in the links below
-  fr: TODO
+  fr: Pour en savoir plus sur ce {{gl_tt "service" "SERVICE"}}, voir les lienns ci-dessous
 service_link_text:
   en: More details (external links)
-  fr: TODO
-total_business_vol:
-  en: Total business volume
+  fr: Pour en savoir plus (liens externes)
+applications_and_calls:
+  en: Applications and telephone calls
   fr: TODO
 
 # Standard
 service_standards_title:
   en: Service Standards
-  fr: TODO
+  fr: Normes de service
 service_standards_text:
   transform: [handlebars, markdown]
   en: |
-    {{gl_tt "Service Standards" "STANDARD"}} are used as metrics to indicate how the service is doing.
-  fr: TODO
+    {{gl_tt "Service standards" "STANDARD"}} are used as metrics to indicate how the {{gl_tt "service" "SERVICE"}} is doing.
+  fr: |
+    Les {{gl_tt "normes de service" "STANDARD"}} permettent de mesurer l'efficacité du {{gl_tt "service" "SERVICE"}}.
 no_service_standards_text:
   en: This service does not have any service standards
-  fr: TODO
+  fr: Ce service n'a pas de normes de service
 standard_name:
   en: Standard name
-  fr: TODO
+  fr: Nom usuel
 standard_type:
   en: Standard type
-  fr: TODO
+  fr: Type standard
 standard_channel:
   en: Standard channel
-  fr: TODO
+  fr: Mode standard
 total_business_volume:
   en: Total Business Volume
-  fr: TODO
+  fr: Volume d'activités total
 satisfied_business_volume:
   en: Satisfied Business Volume
-  fr: TODO
+  fr: Volume d'activités satisfaisant
 has_standards:
   en: Has standards
   fr: TODO
