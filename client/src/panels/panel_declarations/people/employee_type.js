@@ -74,10 +74,12 @@ export const declare_employee_type_panel = () =>
       render({ calculations, footnotes, sources, glossary_keys }) {
         const { panel_args, subject } = calculations;
 
-        const student_data = _.find(
+        const student = _.find(
           panel_args,
           (type) => type.label === "Student" || type.label === "Étudiant"
-        ).data;
+        );
+
+        const student_data = student && student.data;
 
         const pre_text_calculations = text_calculate(panel_args);
 
@@ -95,12 +97,14 @@ export const declare_employee_type_panel = () =>
           .sum()
           .value();
 
-        const student_first_active_year_pct =
-          student_data[pre_text_calculations.first_active_year_index] /
-          sum_emp_first_active_year;
-        const student_last_active_year_pct =
-          student_data[pre_text_calculations.last_active_year_index] /
-          sum_emp_last_active_year;
+        const student_first_active_year_pct = student_data
+          ? student_data[pre_text_calculations.first_active_year_index] /
+            sum_emp_first_active_year
+          : 0;
+        const student_last_active_year_pct = student_data
+          ? student_data[pre_text_calculations.last_active_year_index] /
+            sum_emp_last_active_year
+          : 0;
 
         const text_calculations = {
           ...pre_text_calculations,
