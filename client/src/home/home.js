@@ -115,16 +115,25 @@ const HomeLayout = (props) => (
           href="#orgs/gov/gov/infograph/financial"
           img_url={get_static_url("svg/expend.svg")}
           title={<TM k="home_finance_title" />}
+          className="TrinityItem__Img"
         />
         <TrinityItem
           href="#orgs/gov/gov/infograph/people"
           img_url={get_static_url("svg/people.svg")}
           title={<TM k="home_ppl_title" />}
+          className="TrinityItem__Img"
+        />
+        <TrinityItem
+          href="#orgs/gov/gov/infograph/services"
+          img_url={get_static_url("svg/service.svg")}
+          title={<TM k="home_services_title" />}
+          className="TrinityItem__service-Img"
         />
         <TrinityItem
           href="#orgs/gov/gov/infograph/results"
           img_url={get_static_url("svg/results.svg")}
           title={<TM k="home_results_title" />}
+          className="TrinityItem__Img"
         />
       </div>
       <div className="frow featured-home-cols">
