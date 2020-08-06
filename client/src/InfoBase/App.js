@@ -144,14 +144,14 @@ export class App extends React.Component {
     axios
       .get("https://storage.googleapis.com/ib-outage-bucket/outage_msg.json")
       .then((res) => {
-        if (res.outage) {
+        const data = res.data;
+        if (data.outage) {
           this.setState({
             showNotification: true,
-            message: window.lang === "en" ? res.en : res.fr,
+            message: window.lang === "en" ? data.en : data.fr,
           });
         }
-      })
-      .catch((err) => console.log);
+      });
   }
 
   render() {
