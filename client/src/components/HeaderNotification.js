@@ -2,13 +2,9 @@ import "./HeaderNotification.scss";
 import { trivial_text_maker } from "../models/text.js";
 
 export class HeaderNotification extends React.Component {
-  constructor(props) {
-    super(props);
-
-    state = {
-      show: false,
-    };
-  }
+  state = {
+    show: false,
+  };
 
   componentDidMount() {
     setTimeout(() => this.setState({ show: true }), 500);
