@@ -46,6 +46,8 @@ import {
   ResultCounts as ResultCountsComponent,
 } from "./result_displays.js";
 
+import redux_promise_middleware from "redux-promise-middleware";
+
 const get_non_col_content_func = createSelector(_.property("doc"), (doc) => {
   return ({ node }) => {
     const {
@@ -509,6 +511,7 @@ export const declare_explore_results_panel = () =>
           map_state_to_props_from_memoized_funcs,
           data: { subject, docs_with_data, latest_doc_with_data },
           load_requirements,
+          middleware: redux_promise_middleware,
         };
 
         return (

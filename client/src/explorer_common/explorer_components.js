@@ -24,8 +24,6 @@ import { connect, Provider } from "react-redux";
 import { ensure_loaded } from "../core/lazy_loader";
 import { SpinnerWrapper } from "../panels/panel_declarations/shared";
 
-import redux_promise_middleware from "redux-promise-middleware";
-
 const INDENT_SIZE = 24;
 
 function get_mod_class(node, sibling_index, explorer_context) {
@@ -353,6 +351,7 @@ export class Explorer extends React.Component {
 // map_state_to_props_from_memoized_funcs (function)
 // data (objet): Any data to pass as props to explorer
 // load_requirements (object): Data required to be loaded
+// middlware (functions): Middleware functions to apply to the redux store
 
 export class ExplorerContainer extends React.Component {
   constructor(props) {
@@ -368,6 +367,7 @@ export class ExplorerContainer extends React.Component {
       get_initial_state,
       map_state_to_props_from_memoized_funcs,
       data,
+      middleware,
     } = props;
     const scheme_key = scheme.key;
 
@@ -394,7 +394,7 @@ export class ExplorerContainer extends React.Component {
     const store = createStore(
       reducer,
       initialState,
-      applyMiddleware(redux_promise_middleware)
+      middleware && applyMiddleware(middleware)
     );
 
     this.Container = Container;
