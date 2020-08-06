@@ -428,3 +428,8 @@ export class ExplorerContainer extends React.Component {
     }
   }
 }
+
+ExplorerContainer.defaultProps = {
+  data: {},
+  load_requirements: {},
+};
