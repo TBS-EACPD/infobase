@@ -21,9 +21,12 @@ $smallMargin: 10px;
   @media(min-width: $minExtraSmallDevice) {
     flex-basis: 23%;
     max-width: 23%;
+  @media(min-width: $minSmallDevice) {
+    flex-basis: 30%;
+    max-width: 24%;
   }
 
-  @media(max-width: $maxExtraSmallDevice) {
+  @media(max-width: $maxSmallDevice) {
     flex-flow: row-reverse;
     justify-content: space-around;
     &:first-child {
@@ -42,7 +45,7 @@ $smallMargin: 10px;
   text-transform: uppercase;
   color: $textLightColor;
 
-  @media(min-width: $minExtraSmallDevice) {
+  @media(min-width: $minSmallDevice) {
     width: 100%; /* IE fix */
   }
   @media(max-width: $maxMediumDevice) {
@@ -52,13 +55,30 @@ $smallMargin: 10px;
     font-size: 0.79em;
   }
 }
+.TrinityItem__service-Img {
+  width: 46.3%;
+  height: 100%;
+  margin-bottom: $smallMargin;
+
+  @media(max-width: $maxSmallDevice) {
+    width: 6em;
+    height: 5em;
+    margin: $smallMargin;
+  }
+
+  & > img {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 
 .TrinityItem__Img {
   width: 40%;
   height: 100%;
   margin-bottom: $smallMargin;
 
-  @media(max-width: $maxExtraSmallDevice) {
+  @media(max-width: $maxSmallDevice) {
     width: 5em;
     height: 5em;
     margin: $smallMargin;
