@@ -5,7 +5,7 @@ Object {
   "_id": Any<Object>,
   "a": 1,
   "bleh": "bleh",
-  "date": "8/5/2020",
+  "date": Any<String>,
   "enums": "bug, other",
   "from": "Sender Name <sender@example.com>",
   "number": 1,
