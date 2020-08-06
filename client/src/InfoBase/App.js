@@ -5,6 +5,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 import { initialize_analytics } from "../core/analytics.js";
 import { has_local_storage } from "../core/feature_detection.js";
+import { create_text_maker } from "../models/text.js";
 
 import {
   ensure_linked_stylesheets_load,
@@ -19,6 +20,8 @@ export const app_reducer = (
   return state;
 };
 
+import text from "./App.yaml";
+
 import { ErrorBoundary } from "../core/ErrorBoundary.js";
 import { DevFip } from "../core/DevFip.js";
 import { TooltipActivator } from "../glossary/TooltipActivator.js";
@@ -27,6 +30,7 @@ import { ReactUnmounter } from "../core/NavComponents.js";
 import { EasyAccess } from "../core/EasyAccess.js";
 import { SurveyPopup } from "../core/SurveyPopup.js";
 import { SpinnerWrapper } from "../components/SpinnerWrapper.js";
+import { HeaderNotification } from "../components/HeaderNotification";
 import { PageDetails } from "../components/PageDetails.js";
 
 const Home = retrying_react_lazy(() =>
@@ -126,6 +130,8 @@ export class App extends React.Component {
     ensure_linked_stylesheets_load();
   }
   render() {
+    const text_maker = create_text_maker(text);
+
     return (
       <div
         tabIndex={-1}
@@ -138,6 +144,8 @@ export class App extends React.Component {
           <DevFip />
           <InsertRuntimeFooterLinks />
           <EasyAccess />
+          <HeaderNotification text={text_maker("ib_outage")} />
+
           {has_local_storage && <SurveyPopup />}
           <ReactUnmounter />
           {!window.is_a11y_mode && <TooltipActivator />}
