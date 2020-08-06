@@ -114,6 +114,7 @@ const HomeLayout = (props) => (
             <IconExpend width="100%" color="#FFFFFF" alternate_color={false} />
           }
           title={<TM k="home_finance_title" />}
+          className="TrinityItem__Img"
         />
         <TrinityItem
           href="#orgs/gov/gov/infograph/people"
@@ -132,6 +133,13 @@ const HomeLayout = (props) => (
             />
           }
           title={<TM k="home_ppl_title" />}
+          className="TrinityItem__Img"
+        />
+        <TrinityItem
+          href="#orgs/gov/gov/infograph/services"
+          img_url={get_static_url("svg/service.svg")}
+          title={<TM k="home_services_title" />}
+          className="TrinityItem__service-Img"
         />
         <TrinityItem
           href="#orgs/gov/gov/infograph/results"
@@ -139,6 +147,7 @@ const HomeLayout = (props) => (
             <IconResults width="100%" color="#FFFFFF" alternate_color={false} />
           }
           title={<TM k="home_results_title" />}
+          className="TrinityItem__Img"
         />
       </div>
       <div className="frow featured-home-cols">
