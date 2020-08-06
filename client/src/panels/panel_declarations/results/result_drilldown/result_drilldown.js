@@ -9,7 +9,6 @@ import {
   TabbedControls,
   DlItem,
   get_source_links,
-  ensure_loaded,
   declare_panel,
 } from "../../shared.js";
 const { SpinnerWrapper, Format, TextAbbrev } = util_components;
@@ -26,20 +25,14 @@ import { TM, text_maker } from "../result_text_provider.js";
 
 //drilldown stuff
 import { createSelector } from "reselect";
-import { combineReducers, createStore, applyMiddleware } from "redux";
-import redux_promise_middleware from "redux-promise-middleware";
-import { Provider, connect } from "react-redux";
 
-import { Explorer } from "../../../../explorer_common/explorer_components.js";
+import {
+  Explorer,
+  ExplorerContainer,
+} from "../../../../explorer_common/explorer_components.js";
 import "../../../../explorer_common/explorer-styles.scss";
 import { get_root } from "../../../../explorer_common/hierarchy_tools.js";
-import {
-  get_memoized_funcs,
-  initial_root_state,
-  root_reducer,
-  map_state_to_root_props_from_memoized_funcs,
-  map_dispatch_to_root_props,
-} from "../../../../explorer_common/state_and_memoizing.js";
+import { map_state_to_root_props_from_memoized_funcs } from "../../../../explorer_common/state_and_memoizing.js";
 
 import {
   single_subj_results_scheme,
@@ -245,6 +238,7 @@ class SingleSubjExplorer extends React.Component {
       is_status_filter_enabled,
       status_key_whitelist,
     } = this.props;
+
     const { loading_query, query } = this.state;
 
     // Weird padding and margins here to get the spinner centered well and cover the "see the data" text while loading
@@ -437,84 +431,11 @@ const map_state_to_props_from_memoized_funcs = (memoized_funcs) => {
   });
 };
 
-class SingleSubjResultsContainer extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      loading: true,
-    };
-  }
-  componentDidMount() {
-    const { subject, latest_doc_with_data } = this.props;
-
-    ensure_loaded({
-      subject,
-      results: true,
-      result_docs: [latest_doc_with_data],
-    }).then(() => this.setState({ loading: false }));
-  }
-  render() {
-    const { subject, docs_with_data, latest_doc_with_data } = this.props;
-    const { loading } = this.state;
-
-    if (loading) {
-      return (
-        <div
-          style={{
-            position: "relative",
-            height: "80px",
-            marginBottom: "-10px",
-          }}
-        >
-          <SpinnerWrapper config_name={"tabbed_content"} />
-        </div>
-      );
-    } else {
-      const scheme = single_subj_results_scheme;
-      const scheme_key = scheme.key;
-
-      const reducer = combineReducers({
-        root: root_reducer,
-        [scheme_key]: scheme.reducer,
-      });
-
-      const mapDispatchToProps = (dispatch) => ({
-        ...map_dispatch_to_root_props(dispatch),
-        ...scheme.dispatch_to_props(dispatch),
-      });
-
-      const mapStateToProps = map_state_to_props_from_memoized_funcs(
-        get_memoized_funcs([scheme])
-      );
-
-      const initialState = {
-        root: { ...initial_root_state, scheme_key },
-        [scheme_key]: get_initial_single_subj_results_state({
-          subj_guid: subject.guid,
-          doc: latest_doc_with_data,
-        }),
-      };
-
-      const Container = connect(
-        mapStateToProps,
-        mapDispatchToProps
-      )(SingleSubjExplorer);
-
-      return (
-        <Provider
-          store={createStore(
-            reducer,
-            initialState,
-            applyMiddleware(redux_promise_middleware)
-          )}
-        >
-          <Container subject={subject} docs_with_data={docs_with_data} />
-        </Provider>
-      );
-    }
-  }
-}
+const get_initial_state = ({ subject, latest_doc_with_data }) =>
+  get_initial_single_subj_results_state({
+    subj_guid: subject.guid,
+    doc: latest_doc_with_data,
+  });
 
 export const declare_explore_results_panel = () =>
   declare_panel({
@@ -575,6 +496,21 @@ export const declare_explore_results_panel = () =>
           }))
           .value();
 
+        const load_requirements = {
+          subject,
+          results: true,
+          result_docs: [latest_doc_with_data],
+        };
+
+        const explorer_container_config = {
+          scheme: single_subj_results_scheme,
+          explorer: SingleSubjExplorer,
+          get_initial_state,
+          map_state_to_props_from_memoized_funcs,
+          data: { subject, docs_with_data, latest_doc_with_data },
+          load_requirements,
+        };
+
         return (
           <InfographicPanel
             title={text_maker("result_drilldown_title", {
@@ -583,13 +519,7 @@ export const declare_explore_results_panel = () =>
             sources={sources}
             footnotes={footnotes}
           >
-            <SingleSubjResultsContainer
-              {...{
-                subject,
-                docs_with_data,
-                latest_doc_with_data,
-              }}
-            />
+            <ExplorerContainer {...explorer_container_config} />
           </InfographicPanel>
         );
       },

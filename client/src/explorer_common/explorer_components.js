@@ -12,6 +12,17 @@ import {
 } from "../components/index.js";
 
 import { trivial_text_maker } from "../models/text.js";
+import { combineReducers, createStore } from "redux";
+import {
+  root_reducer,
+  get_memoized_funcs,
+  map_dispatch_to_root_props,
+  initial_root_state,
+} from "./state_and_memoizing";
+import { connect, Provider } from "react-redux";
+
+import { ensure_loaded } from "../core/lazy_loader";
+import { SpinnerWrapper } from "../panels/panel_declarations/shared";
 
 const INDENT_SIZE = 24;
 
@@ -330,5 +341,90 @@ export class Explorer extends React.Component {
         </div>
       </div>
     );
+  }
+}
+
+// API
+// scheme (object): Scheme for the explorer to use
+// explorer (Component): Component to handle explorer logic/rendering
+// get_initial_state (function): Function that generates the initial explorer state
+// map_state_to_props_from_memoized_funcs (function)
+// data (objet): Any data to pass as props to explorer
+// load_requirements (object): Data required to be loaded
+
+export class ExplorerContainer extends React.Component {
+  constructor(props) {
+    super();
+
+    this.state = {
+      loading: true,
+    };
+
+    const {
+      scheme,
+      explorer,
+      get_initial_state,
+      map_state_to_props_from_memoized_funcs,
+      data,
+    } = props;
+    const scheme_key = scheme.key;
+
+    const reducer = combineReducers({
+      root: root_reducer,
+      [scheme_key]: scheme.reducer,
+    });
+
+    const mapStateToProps = map_state_to_props_from_memoized_funcs(
+      get_memoized_funcs([scheme])
+    );
+
+    const mapDispatchToProps = (dispatch) => ({
+      ...map_dispatch_to_root_props(dispatch),
+      ...scheme.dispatch_to_props(dispatch),
+    });
+
+    const initialState = {
+      root: { ...initial_root_state, scheme_key },
+      [scheme_key]: get_initial_state(data),
+    };
+
+    const Container = connect(mapStateToProps, mapDispatchToProps)(explorer);
+    const store = createStore(reducer, initialState);
+
+    this.Container = Container;
+    this.store = store;
+  }
+
+  componentDidMount() {
+    const { load_requirements } = this.props;
+    ensure_loaded({ ...load_requirements }).then(() =>
+      this.setState({ loading: false })
+    );
+  }
+
+  render() {
+    const { store, Container } = this;
+    const { data } = this.props;
+
+    const { loading } = this.state;
+    if (loading) {
+      return (
+        <div
+          style={{
+            position: "relative",
+            height: "80px",
+            marginBottom: "-10px",
+          }}
+        >
+          <SpinnerWrapper config_name={"tabbed_content"} />
+        </div>
+      );
+    } else {
+      return (
+        <Provider store={store}>
+          <Container {...data} />
+        </Provider>
+      );
+    }
   }
 }
