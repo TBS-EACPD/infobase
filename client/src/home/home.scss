@@ -130,14 +130,14 @@ li.list-group-item--home {
 .home-trinity-container {
   margin-top: $largeMargin;
   margin-bottom: $largeMargin;
-  @media(max-width: $maxExtraSmallDevice) {
+  @media(max-width: $maxSmallDevice) {
     margin-top: $smallMargin;
     margin-bottom: $smallMargin;
   }
 
   justify-content: space-between;
   
-  @media(max-width: $maxExtraSmallDevice) {
+  @media(max-width: $maxSmallDevice) {
     flex-direction: column;
   }
 }
