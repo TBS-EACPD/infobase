@@ -141,14 +141,17 @@ export class App extends React.Component {
   };
 
   componentDidMount() {
-    axios.get("TODO: set up google bucket link").then((res) => {
-      if (res.outage) {
-        this.setState({
-          showNotification: true,
-          message: window.lang === "en" ? res.en : res.fr,
-        });
-      }
-    });
+    axios
+      .get("https://storage.googleapis.com/ib-outage-bucket/outage_msg.json")
+      .then((res) => {
+        if (res.outage) {
+          this.setState({
+            showNotification: true,
+            message: window.lang === "en" ? res.en : res.fr,
+          });
+        }
+      })
+      .catch((err) => console.log);
   }
 
   render() {
