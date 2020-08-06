@@ -115,15 +115,18 @@ export class CircleProportionChart extends React.Component {
       // so we need to remove the inner portion from the total here
       value: parent_value - child_value,
       color: color_scale(parent_name),
-      children: [
-        {
-          id: child_name,
-          name: child_name,
-          value: child_value,
-          color: color_scale(child_name),
-        },
-      ],
     };
+
+    child_value !== 0
+      ? (graph_data.children = [
+          {
+            id: child_name,
+            name: child_name,
+            value: child_value,
+            color: color_scale(child_name),
+          },
+        ])
+      : 0;
 
     const tooltip = () => (
       <TooltipFactory
