@@ -1,4 +1,5 @@
 import "./App.scss";
+import axios from "axios";
 
 import { Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
@@ -129,9 +130,28 @@ export class App extends React.Component {
 
     ensure_linked_stylesheets_load();
   }
-  render() {
-    const text_maker = create_text_maker(text);
 
+  state = {
+    showNotification: false,
+    message: "",
+  };
+
+  hideNotification = () => {
+    this.setState({ showNotification: false });
+  };
+
+  componentDidMount() {
+    axios.get("TODO: set up google bucket link").then((res) => {
+      if (res.outage) {
+        this.setState({
+          showNotification: true,
+          message: window.lang === "en" ? res.en : res.fr,
+        });
+      }
+    });
+  }
+
+  render() {
     return (
       <div
         tabIndex={-1}
@@ -144,8 +164,12 @@ export class App extends React.Component {
           <DevFip />
           <InsertRuntimeFooterLinks />
           <EasyAccess />
-          <HeaderNotification text={text_maker("ib_outage")} />
-
+          {this.state.showNotification ? (
+            <HeaderNotification
+              text={this.state.message}
+              hideNotification={this.hideNotification}
+            />
+          ) : null}
           {has_local_storage && <SurveyPopup />}
           <ReactUnmounter />
           {!window.is_a11y_mode && <TooltipActivator />}
