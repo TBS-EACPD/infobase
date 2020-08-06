@@ -12,7 +12,7 @@ import {
 } from "../components/index.js";
 
 import { trivial_text_maker } from "../models/text.js";
-import { combineReducers, createStore } from "redux";
+import { combineReducers, createStore, applyMiddleware } from "redux";
 import {
   root_reducer,
   get_memoized_funcs,
@@ -23,6 +23,8 @@ import { connect, Provider } from "react-redux";
 
 import { ensure_loaded } from "../core/lazy_loader";
 import { SpinnerWrapper } from "../panels/panel_declarations/shared";
+
+import redux_promise_middleware from "redux-promise-middleware";
 
 const INDENT_SIZE = 24;
 
@@ -389,7 +391,11 @@ export class ExplorerContainer extends React.Component {
     };
 
     const Container = connect(mapStateToProps, mapDispatchToProps)(explorer);
-    const store = createStore(reducer, initialState);
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(redux_promise_middleware)
+    );
 
     this.Container = Container;
     this.store = store;
