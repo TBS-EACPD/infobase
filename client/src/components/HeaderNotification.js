@@ -11,11 +11,7 @@ export class HeaderNotification extends React.Component {
   }
 
   render() {
-    const { text } = this.props;
-
-    const closeNotification = () => {
-      this.setState({ show: false });
-    };
+    const { text, hideNotification } = this.props;
 
     return (
       <div
@@ -25,7 +21,7 @@ export class HeaderNotification extends React.Component {
         className="ib-header alert alert-warning"
       >
         <p style={{ marginBottom: "1.2rem" }}>{text}</p>
-        <button className="btn btn-ib-primary" onClick={closeNotification}>
+        <button className="btn btn-ib-primary" onClick={hideNotification}>
           {trivial_text_maker("close")}
         </button>
       </div>
