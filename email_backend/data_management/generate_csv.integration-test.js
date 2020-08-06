@@ -4,6 +4,7 @@ import { get_output } from "./generate_csv";
 import { connect_db } from "../src/db_utils/connect_db";
 import { make_mongoose_model_from_original_template } from "../src/db_utils/log_email_and_meta_to_db";
 import { get_templates } from "../src/template_utils";
+import fs from "fs";
 
 //Make sure there is test data to work with
 const test_template_name = "test_template.test";
@@ -23,7 +24,7 @@ const instance = axios.create({
     referer: "http://localhost:8080/build/InfoBase/index-eng.html",
   },
 });
-let csv, json;
+let csv, json, csv_title;
 
 beforeAll((done) => {
   instance
@@ -32,10 +33,17 @@ beforeAll((done) => {
       completed_template: completed_test_template,
     })
     .then(() => {
-      get_output().then(({ csv_output, json_output }) => {
-        csv = csv_output;
+      get_output().then(({ csv_name, json_output }) => {
         json = json_output;
-        done();
+        fs.readFile(__dirname + `/CSVs/${csv_name}`, "utf-8", (err, data) => {
+          if (err) {
+            console.log(err);
+          } else {
+            csv_title = csv_name;
+            csv = data;
+            done();
+          }
+        });
       });
     });
 });
@@ -48,12 +56,15 @@ afterAll((done) => {
       template_name: test_template_name,
     })
       .collection.drop()
-      .then(() => done());
+      .then(() => {
+        fs.unlinkSync(__dirname + `/CSVs/${csv_title}`);
+        done();
+      });
   });
 });
 
 describe("Check that CSV output and JSON output are correct", () => {
-  it.only("Snapshot of JSON output", () => {
+  it("Snapshot of JSON output", () => {
     expect(json).toMatchSnapshot({
       _id: expect.any(Object),
       a: 1,
@@ -71,5 +82,9 @@ describe("Check that CSV output and JSON output are correct", () => {
       time: expect.any(String),
       to: "Recipient <recipient@example.com>",
     });
+  });
+
+  it("Testing CSV for data", () => {
+    expect(csv.split("\n").length).toBe(2);
   });
 });
