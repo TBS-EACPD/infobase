@@ -8,6 +8,7 @@ npm-debug*
 coverage
 *credentials*.json
 transpiled_build/
+outage_msg.json
 
 # for old local dev dbs, might still be generated if checking out an old commit
 mongo/mongo.log
