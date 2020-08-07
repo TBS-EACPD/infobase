@@ -3,7 +3,7 @@
     "react",
     "lodash"
   ],
-  "extends": ["plugin:lodash/recommended"],
+  "extends": ["plugin:lodash/canonical"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2017,
