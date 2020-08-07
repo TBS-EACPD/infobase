@@ -55,7 +55,7 @@ export default {
         fr: "Groupe d’âge",
       },
     });
-    _.each(people_years, (header, ix) => {
+    _.forEach(people_years, (header, ix) => {
       this.add_col({
         type: "big_int",
         nick: header,
@@ -167,11 +167,11 @@ export default {
 
   sort: function (mapped_rows, lang) {
     return _.sortBy(mapped_rows, function (row) {
-      var split = row.age.replace(/>|</, "").split("-");
+      var split = _.chain(row.age).replace(/>|</, "").split("-").value();
       if (split.length === 2) {
         return +split[1];
       } else {
-        split = row.age.split(" ");
+        split = _.split(row.age, " ");
         return +split[1] || +split[0];
       }
     });
@@ -189,7 +189,7 @@ Statistics.create_and_register({
 
     var all_years = _.map(q.high_level_rows(), (d) => {
       if (lang === "en") {
-        d[0] = d[0].replace("Age ", "");
+        d[0] = _.replace(d[0], "Age ", "");
       }
       return d;
     });
@@ -213,7 +213,7 @@ Statistics.create_and_register({
 
     var all_years = _.map(q.high_level_rows(), (d) => {
       if (lang === "en") {
-        d[0] = d[0].replace("Age ", "");
+        d[0] = _.replace(d[0], "Age ", "");
       }
       return d;
     });

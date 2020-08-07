@@ -53,7 +53,7 @@ export default {
         fr: "Type d'employé",
       },
     });
-    _.each(people_years, (header, ix) => {
+    _.forEach(people_years, (header, ix) => {
       this.add_col({
         type: "big_int",
         nick: header,
@@ -161,9 +161,9 @@ Statistics.create_and_register({
       people_years
     );
 
-    const total_head_count_by_year = _.chain(people_years)
-      .map((y) => d3.sum(_.map(q.data, _.property(y))))
-      .value();
+    const total_head_count_by_year = _.map(people_years, (y) =>
+      d3.sum(_.map(q.data, _.property(y)))
+    );
 
     add(
       "head_count_avg",

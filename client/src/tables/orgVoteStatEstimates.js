@@ -104,7 +104,7 @@ export default {
         fr: "Instrument des dépenses",
       },
     });
-    _.each(estimates_years, (yr, ix) => {
+    _.forEach(estimates_years, (yr, ix) => {
       this.add_col({
         type: "big_int",
         nick: yr + "_estimates",
@@ -259,7 +259,7 @@ Statistics.create_and_register({
       "stat_est_in_year",
       table.voted_stat(in_year_col, c.dept, true)[stat] || 0
     );
-    _.each(est_cols, (yr) => {
+    _.forEach(est_cols, (yr) => {
       add("tabled_" + yr, q.sum(yr));
     });
 
@@ -318,21 +318,23 @@ Statistics.create_and_register({
         return table.q(key).sum("est_in_year_estimates") !== 0;
       })
       .value().length;
-    const _voted_num_in_year = _.chain(
+    const pre_voted_num_in_year = _.chain(
       table.voted_stat("est_in_year_estimates", false, false)[voted]
     )
-      .filter(function (row) {
-        return row.est_in_year_estimates !== 0;
+      .reject(function (row) {
+        return row.est_in_year_estimates === 0;
       })
       .groupBy(function (row) {
         return row.dept + row.votenum;
-      });
-    const voted_num_in_year = _voted_num_in_year.keys().value().length;
-    const voted_central_num_in_year = _voted_num_in_year
-      .filter(function (lines, key) {
-        return lines[0].votestattype === 6;
       })
-      .value().length;
+      .value();
+    const voted_num_in_year = _.keys(pre_voted_num_in_year).length;
+    const voted_central_num_in_year = _.filter(pre_voted_num_in_year, function (
+      lines,
+      key
+    ) {
+      return lines[0].votestattype === 6;
+    }).length;
 
     const voted_in_mains = d3.sum(
       _.filter(
@@ -372,7 +374,7 @@ Statistics.create_and_register({
       })
     );
 
-    _.each(estimates_years, (yr) => {
+    _.forEach(estimates_years, (yr) => {
       add("tabled_" + yr, q.sum(yr + "_estimates"));
     });
 

@@ -29,7 +29,8 @@
       "react/no-children-prop": [ "off" ],
       "lodash/chaining": ["error","always", 2],
       "lodash/chain-style": ["error","explicit"],
-      "lodash/prop-shorthand": ["off"]
+      "lodash/prop-shorthand": ["off"],
+      "lodash/matches-prop-shorthand": ["off"]
   },
   "settings": {
     "react": {

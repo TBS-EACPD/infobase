@@ -63,7 +63,7 @@ export default {
         fr: "Région géographique",
       },
     });
-    _.each(people_years, (header, ix) => {
+    _.forEach(people_years, (header, ix) => {
       this.add_col({
         type: "big_int",
         nick: header,
@@ -133,19 +133,15 @@ export default {
         dept_total = d3.sum(this.data, function (d) {
           return d[year];
         });
-      var groups = _.groupBy(
-        this.data,
-        function (x) {
-          if (x.region_code === "ncr") {
-            return ncr;
-          } else if (x.region_code === "abroad") {
-            return abroad;
-          } else {
-            return non_ncr;
-          }
-        },
-        this
-      );
+      var groups = _.groupBy(this.data, function (x) {
+        if (x.region_code === "ncr") {
+          return ncr;
+        } else if (x.region_code === "abroad") {
+          return abroad;
+        } else {
+          return non_ncr;
+        }
+      }).bind(this);
       return _.map([ncr, non_ncr, abroad], function (key) {
         var relevant_group = groups[key];
         var sub_column = _.map(relevant_group, year);
@@ -162,11 +158,13 @@ export default {
   dimensions: [
     {
       title_key: "prov",
+      // eslint-disable-next-line
       filter_func: _.constant(_.property("region")),
       include_in_report_builder: true,
     },
     {
       title_key: "prov_code",
+      // eslint-disable-next-line
       filter_func: _.constant(_.property("region_code")),
     },
   ],

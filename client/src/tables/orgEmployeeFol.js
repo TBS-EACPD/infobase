@@ -50,7 +50,7 @@ export default {
       nick: "fol",
       header: trivial_text_maker("FOL"),
     });
-    _.each(people_years, (header, ix) => {
+    _.forEach(people_years, (header, ix) => {
       this.add_col({
         type: "big_int",
         nick: header,

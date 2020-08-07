@@ -70,7 +70,7 @@ export default {
         },
       },
     ]);
-    _.each(std_years, (header, i) => {
+    _.forEach(std_years, (header, i) => {
       this.add_col(header).add_child([
         {
           type: "big_int",
@@ -180,21 +180,16 @@ Statistics.create_and_register({
     });
     var all_years = q.get_cols(["tp"].concat(cols), { zip: true });
     stats.year_over_year_multi_stats(add, "tp_exp", all_years);
-    var all_years_type = _.chain(q.types())
-      .map(function (type) {
-        return _.chain(std_years)
-          .map(function (year, i) {
-            var val = table.payment_types(year + "exp", false)[type];
-            if (i === 0) {
-              return [type, val];
-            } else {
-              return val;
-            }
-          })
-          .flatten()
-          .value();
-      })
-      .value();
+    var all_years_type = _.map(q.types(), function (type) {
+      return _.flatMap(std_years, function (year, i) {
+        var val = table.payment_types(year + "exp", false)[type];
+        if (i === 0) {
+          return [type, val];
+        } else {
+          return val;
+        }
+      });
+    });
 
     stats.year_over_year_multi_stats(add, "tp_type_exp", all_years_type);
     stats.add_all_years(add, "tp_exp", std_years, (year) =>
@@ -219,25 +214,20 @@ Statistics.create_and_register({
     var all_years = q.get_cols(["tp"].concat(cols), { zip: true });
     stats.year_over_year_multi_stats(add, "tp_exp", all_years);
 
-    var all_years_type = _.chain(q.types())
-      .map(function (type) {
-        return _.chain(std_years)
-          .map(function (year, i) {
-            var val = orgTransferPayments.payment_types(
-              year + "exp",
-              subject,
-              true
-            )[type];
-            if (i === 0) {
-              return [type, val];
-            } else {
-              return val;
-            }
-          })
-          .flatten()
-          .value();
-      })
-      .value();
+    var all_years_type = _.map(q.types(), function (type) {
+      return _.flatMap(std_years, function (year, i) {
+        var val = orgTransferPayments.payment_types(
+          year + "exp",
+          subject,
+          true
+        )[type];
+        if (i === 0) {
+          return [type, val];
+        } else {
+          return val;
+        }
+      });
+    });
 
     stats.year_over_year_multi_stats(add, "tp_type_exp", all_years_type);
 

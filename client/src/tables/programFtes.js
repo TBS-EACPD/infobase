@@ -73,7 +73,7 @@ export default {
         fr: "Programme",
       },
     });
-    _.each(std_years, (header, ix) => {
+    _.forEach(std_years, (header, ix) => {
       this.add_col({
         type: "big_int",
         nick: header,
@@ -104,7 +104,7 @@ export default {
         fr: `Correspond au nombre total d'équivalents temps plein (ETP) prévus pour l'exercice {{pa_last_year_planned}}`,
       },
     });
-    _.each(planning_years, (header) => {
+    _.forEach(planning_years, (header) => {
       this.add_col({
         type: "big_int",
         nick: header,
@@ -160,7 +160,7 @@ export default {
           const prog = Program.lookup(
             Program.unique_id(row.dept, row.activity_code)
           );
-          const goco = _.first(prog.tags_by_scheme.GOCO);
+          const goco = _.head(prog.tags_by_scheme.GOCO);
           return goco && goco.id;
         };
         return func;
@@ -214,7 +214,7 @@ Statistics.create_and_register({
   level: "program",
   compute: (subject, tables, infos, add, c) => {
     const table = tables.programFtes;
-    const row = _.first(table.programs.get(subject));
+    const row = _.head(table.programs.get(subject));
     stats.add_all_years(add, "fte", std_years, (year, i) => row[year]);
     stats.add_all_years(add, "fte", planning_years, (year, i) => row[year]);
   },
@@ -265,14 +265,17 @@ Statistics.create_and_register({
     const q = programFtes.q(subject);
 
     var first_year_prg_num = _.filter(q.data, function (d) {
-      return d[_.first(planning_years)] !== 0;
+      return d[_.head(planning_years)] !== 0;
     }).length;
 
     add("fte_prg_num", first_year_prg_num);
 
     const min_planning_yr =
       "{{planning_year_" +
-      _.min(_.map(planning_years, (XX) => Number(XX.match(/\d+/)))) +
+      _.chain(planning_years)
+        .map((XX) => Number(XX.match(/\d+/)))
+        .min()
+        .value() +
       "}}";
 
     const sorted_first_yr = q.get_top_x(["prgm", min_planning_yr], Infinity, {

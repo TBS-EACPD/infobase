@@ -50,7 +50,7 @@ export default {
       nick: "ex_lvl",
       header: trivial_text_maker("ex_level"),
     });
-    _.each(people_years, (header, ix) => {
+    _.forEach(people_years, (header, ix) => {
       this.add_col({
         type: "big_int",
         nick: header,
@@ -147,14 +147,15 @@ Statistics.create_and_register({
     );
 
     const num_active_years = _.chain(all_years)
-      .map((group) => _.tail(group))
-      .pipe((groups) => _.zip.apply(null, groups))
+      .map()
+      .tail()
+      .thru((groups) => _.zip.apply(null, groups))
       .map((zipped_groups) => d3.sum(zipped_groups))
       .countBy((total) => (total === 0 ? "inactive" : "active"))
-      .pipe(_.property("active"))
+      .thru(_.property("active"))
       .value();
 
-    const all_years_only_ex = _.filter(all_years, (a) => a[0] !== "Non-EX");
+    const all_years_only_ex = _.reject(all_years, (a) => a[0] === "Non-EX");
     if (!_.isEmpty(all_years_only_ex)) {
       stats.year_over_year_multi_stats_active_years(
         add,
@@ -167,11 +168,11 @@ Statistics.create_and_register({
         window.lang === "en" ? "Executive" : "Cadres supérieurs";
 
       const ex_lev_EX_avg = _.chain(q.summed_levels())
-        .pipe(_.property(ex_string))
-        .pipe((ex_levels) =>
+        .thru(_.property(ex_string))
+        .thru((ex_levels) =>
           _.map(people_years, (y) => d3.sum(_.map(ex_levels, _.property(y))))
         )
-        .pipe((totals_by_year) => d3.sum(totals_by_year) / num_active_years)
+        .thru((totals_by_year) => d3.sum(totals_by_year) / num_active_years)
         .value();
 
       add("head_count_ex_level_avg_ex", ex_lev_EX_avg);
@@ -185,7 +186,7 @@ Statistics.create_and_register({
 
       add("head_count_count_ex_level_first_active_year", people_years[0]);
       add("head_count_count_ex_level_last_active_year", people_years[4]);
-      _.each(
+      _.forEach(
         [
           "head_count_ex_level_top",
           "head_count_ex_level_top_avg",
@@ -211,7 +212,7 @@ Statistics.create_and_register({
     const q = table.q(subject);
 
     const all_years_unfiltered = q.gov_grouping();
-    const all_years = _.filter(all_years_unfiltered, (a) => a[0] !== "Non-EX");
+    const all_years = _.reject(all_years_unfiltered, (a) => a[0] === "Non-EX");
     stats.year_over_year_multi_stats(add, "head_count_ex_level", all_years);
     const year_group_vals = _.map(all_years, (group) => _.tail(group));
     const year_totals = _.map(year_group_vals, (d) => d3.sum(d));

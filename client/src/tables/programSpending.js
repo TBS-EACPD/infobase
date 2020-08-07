@@ -76,7 +76,7 @@ export default {
         },
       },
     ]);
-    _.each(std_years, (header, ix) => {
+    _.forEach(std_years, (header, ix) => {
       //TODO: the col definitions here are copied from orgVoteStatPa, either change them or make it DRY
       this.add_col(header).add_child([
         {
@@ -109,7 +109,7 @@ export default {
         fr: `Correspondent au total des dépenses prévues pour l'exercice {{pa_last_year_planned}}, y compris les fonds approuvés par le Conseil du Trésor.`,
       },
     });
-    _.each(planning_years, (header) => {
+    _.forEach(planning_years, (header) => {
       this.add_col(header).add_child([
         {
           type: "big_int",
@@ -181,7 +181,7 @@ export default {
           const prog = Program.lookup(
             Program.unique_id(row.dept, row.activity_code)
           );
-          const goco = _.first(prog.tags_by_scheme.GOCO);
+          const goco = _.head(prog.tags_by_scheme.GOCO);
           return goco && goco.id;
         };
         return func;
@@ -241,11 +241,12 @@ Statistics.create_and_register({
     var all_years = q.get_top_x(["prgm"].concat(exp_cols), Infinity, {
       zip: true,
     });
-    var all_years_spend_areas = _.chain(table.gov_goco(exp_cols, c.dept, true))
-      .map(function (vals, key) {
+    var all_years_spend_areas = _.map(
+      table.gov_goco(exp_cols, c.dept, true),
+      function (vals, key) {
         return [key].concat(vals);
-      })
-      .value();
+      }
+    );
     stats.one_year_top3(add, "prg", last_year);
     stats.year_over_year_multi_stats(add, "prg_five_year", all_years);
     stats.year_over_year_multi_stats(
@@ -275,7 +276,7 @@ Statistics.create_and_register({
       ),
     }));
 
-    const max_crso = _.first(
+    const max_crso = _.head(
       _.chain(CRSO_data).sortBy("data").reverse().value()
     );
 
@@ -304,7 +305,7 @@ Statistics.create_and_register({
   level: "program",
   compute: (subject, tables, infos, add, c) => {
     const table = tables.programSpending;
-    const row = _.first(table.programs.get(subject));
+    const row = _.head(table.programs.get(subject));
 
     // Expenditure Calculations
     // Since average is ambiguous, we specified that the
@@ -401,14 +402,17 @@ Statistics.create_and_register({
     const q = table.q(subject);
 
     var first_year_prg_num = _.filter(q.data, function (d) {
-      return d[_.first(planning_years)] !== 0;
+      return d[_.head(planning_years)] !== 0;
     }).length;
 
     add("exp_prg_num", first_year_prg_num);
 
     const min_planning_yr =
       "{{planning_year_" +
-      _.min(_.map(planning_years, (yr) => Number(yr.match(/\d+/)))) +
+      _.chain(planning_years)
+        .map((yr) => Number(yr.match(/\d+/)))
+        .min()
+        .value() +
       "}}";
 
     const sorted_first_yr = q.get_top_x(["prgm", min_planning_yr], Infinity, {

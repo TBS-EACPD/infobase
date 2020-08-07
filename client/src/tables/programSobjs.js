@@ -24,7 +24,7 @@ const { std_years } = year_templates;
 // data is tied to public accounts (std_years), but only exists from 2014-15 onwards
 const years = _.filter(
   std_years,
-  (year) => _.chain(year).thru(run_template).split("-").first().value() >= 2015
+  (year) => _.chain(year).thru(run_template).split("-").head().value() >= 2015
 );
 
 export default {
@@ -81,7 +81,7 @@ export default {
         fr: "Article courant",
       },
     });
-    years.forEach((yr) => {
+    _.forEach(years, (yr) => {
       this.add_col({
         type: "big_int",
         nick: yr,
@@ -257,7 +257,7 @@ Statistics.create_and_register({
       return false;
     }
 
-    const { label: top_so_name, value: top_so_amount } = _.first(rows_by_so);
+    const { label: top_so_name, value: top_so_amount } = _.head(rows_by_so);
 
     const total_spent = d3.sum(rows_by_so, _.property("value"));
     const top_so_pct = top_so_amount / total_spent;
@@ -281,7 +281,7 @@ Statistics.create_and_register({
       programSobjs,
       is_non_revenue
     );
-    const { label: top_so_name, value: top_so_amount } = _.first(rows_by_so);
+    const { label: top_so_name, value: top_so_amount } = _.head(rows_by_so);
 
     const total_spent = d3.sum(rows_by_so, _.property("value"));
 

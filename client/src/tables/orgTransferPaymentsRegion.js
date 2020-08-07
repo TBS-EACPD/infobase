@@ -52,7 +52,7 @@ export default {
         fr: "Région géographique",
       },
     });
-    _.each(std_years, (header, ix) => {
+    _.forEach(std_years, (header, ix) => {
       this.add_col({
         type: "big_int",
         nick: header,
@@ -93,11 +93,13 @@ export default {
   dimensions: [
     {
       title_key: "prov",
+      // eslint-disable-next-line
       filter_func: _.constant(_.property("region")),
       include_in_report_builder: true,
     },
     {
       title_key: "prov_code",
+      // eslint-disable-next-line
       filter_func: _.constant(_.property("region_code")),
     },
   ],

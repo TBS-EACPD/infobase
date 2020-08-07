@@ -21,9 +21,10 @@ const vote_stat_query = function (vote_or_stat, cut_off) {
   var cut_off_counter = 0;
   var dept = this.dept || true;
 
-  return _.chain(this.table.voted_stat(undefined, dept, false)[vote_or_stat])
-    .map(_.clone)
-    .flatten()
+  const rtn = _.chain(
+    this.table.voted_stat(undefined, dept, false)[vote_or_stat]
+  )
+    .flatMap(_.clone)
     .sortBy(function (d) {
       d.total = d3.sum(
         _.map(std_years, function (year) {
@@ -33,17 +34,20 @@ const vote_stat_query = function (vote_or_stat, cut_off) {
       total += d.total;
       return -d.total;
     })
-    .each(function (d) {
-      d.percent = d.total / total;
-    })
-    .each(function (d) {
-      if (!cut_off) {
-        return;
-      }
-      cut_off_counter += d.percent;
-      d.cut_off = cut_off_counter >= cut_off ? true : false;
-    })
     .value();
+
+  _.forEach(rtn, function (d) {
+    d.percent = d.total / total;
+  });
+  _.forEach(rtn, function (d) {
+    if (!cut_off) {
+      return;
+    }
+    cut_off_counter += d.percent;
+    d.cut_off = cut_off_counter >= cut_off ? true : false;
+  });
+
+  return rtn;
 };
 
 export default {
@@ -106,7 +110,7 @@ export default {
         },
       },
     ]);
-    _.each(std_years, (header, i) => {
+    _.forEach(std_years, (header, i) => {
       this.add_col(header).add_child([
         {
           type: "big_int",
@@ -219,31 +223,25 @@ Statistics.create_and_register({
       add,
       "voted_five_year_auth",
       _.map(std_years, m),
-      _.chain(std_years)
-        .map(function (year) {
-          return table.voted_stat(year + "auth", subject)[voted_label];
-        })
-        .value()
+      _.map(std_years, function (year) {
+        return table.voted_stat(year + "auth", subject)[voted_label];
+      })
     );
     stats.year_over_year_single_stats(
       add,
       "stat_five_year_auth",
       _.map(std_years, m),
-      _.chain(std_years)
-        .map(function (year) {
-          return table.voted_stat(year + "auth", subject)[stat_label];
-        })
-        .value()
+      _.map(std_years, function (year) {
+        return table.voted_stat(year + "auth", subject)[stat_label];
+      })
     );
     stats.year_over_year_single_stats(
       add,
       "five_year_auth",
       _.map(std_years, m),
-      _.chain(std_years)
-        .map(function (year) {
-          return q.sum([year + "auth"]);
-        })
-        .value()
+      _.map(std_years, function (year) {
+        return q.sum([year + "auth"]);
+      })
     );
 
     const unused_auth_diff = _.map(std_years, (year) =>
@@ -268,11 +266,9 @@ Statistics.create_and_register({
       add,
       "five_year_exp",
       _.map(std_years, m),
-      _.chain(std_years)
-        .map(function (year) {
-          return q.sum([year + "exp"]);
-        })
-        .value()
+      _.map(std_years, function (year) {
+        return q.sum([year + "exp"]);
+      })
     );
 
     stats.add_all_years(add, "auth", std_years, function (year, i) {
@@ -316,32 +312,26 @@ Statistics.create_and_register({
       add,
       "five_year_auth",
       _.map(std_years, m),
-      _.chain(std_years)
-        .map(function (year) {
-          return q.sum([year + "auth"]);
-        })
-        .value()
+      _.map(std_years, function (year) {
+        return q.sum([year + "auth"]);
+      })
     );
 
     stats.year_over_year_single_stats(
       add,
       "five_year_exp",
       _.map(std_years, m),
-      _.chain(std_years)
-        .map(function (year) {
-          return q.sum([year + "exp"]);
-        })
-        .value()
+      _.map(std_years, function (year) {
+        return q.sum([year + "exp"]);
+      })
     );
     stats.year_over_year_single_stats(
       add,
       "five_year_unused_auth",
       _.map(std_years, m),
-      _.chain(std_years)
-        .map(function (year) {
-          return q.sum([year + "auth"]) - q.sum([year + "exp"]);
-        })
-        .value()
+      _.map(std_years, function (year) {
+        return q.sum([year + "auth"]) - q.sum([year + "exp"]);
+      })
     );
 
     stats.add_all_years(add, "auth", std_years, function (year, i) {

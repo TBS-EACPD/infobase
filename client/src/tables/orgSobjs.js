@@ -60,7 +60,7 @@ export default {
         fr: "Article courtant",
       },
     });
-    _.each(std_years, (header, i) => {
+    _.forEach(std_years, (header, i) => {
       this.add_col({
         type: "big_int",
         nick: header,
@@ -143,6 +143,7 @@ Statistics.create_and_register({
 
     add(
       "pa_last_year_gross_exp",
+      // eslint-disable-next-line
       d3.sum(_.map(_.range(1, 13), (i) => last_year_spend[i] || 0))
     );
     const last_year = q.get_top_x(["so", "{{pa_last_year}}"], Infinity, {

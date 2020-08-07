@@ -17,7 +17,7 @@ const { std_years } = year_templates;
 // data is tied to public accounts (std_years), but only exists from 2014-15 onwards
 const years = _.filter(
   std_years,
-  (year) => _.chain(year).thru(run_template).split("-").first().value() >= 2015
+  (year) => _.chain(year).thru(run_template).split("-").head().value() >= 2015
 );
 
 export default {
@@ -69,7 +69,7 @@ export default {
         fr: "Crédit / législatif",
       },
     });
-    years.forEach((yr) => {
+    _.forEach(years, (yr) => {
       this.add_col({
         type: "big_int",
         nick: yr,
@@ -167,9 +167,9 @@ Statistics.create_and_register({
     } = _.groupBy(rows, type_col);
 
     const voted_amount =
-      (_.first(voted_rows) && _.first(voted_rows)[last_year_col]) || 0;
+      (_.head(voted_rows) && _.head(voted_rows)[last_year_col]) || 0;
     const stat_amount =
-      (_.first(stat_rows) && _.first(stat_rows)[last_year_col]) || 0;
+      (_.head(stat_rows) && _.head(stat_rows)[last_year_col]) || 0;
     const total = voted_amount + stat_amount;
     const voted_pct = voted_amount / total;
     const stat_pct = stat_amount / total;
