@@ -158,8 +158,8 @@ function people_five_year_percentage_formula(
             return d[col_name] === cats[0];
           }).length === row.length;
       }
-      _.each(col_names_to_be_averaged, function (year, i) {
-        _.each(table.data, function (d) {
+      _.forEach(col_names_to_be_averaged, function (year, i) {
+        _.forEach(table.data, function (d) {
           // scenario 2
           if (all_cat_lines) {
             total_totals[i] = total_totals[i] + d[year] || d[year];
@@ -210,7 +210,7 @@ const sum_last_year_exp = (rows) =>
 //given rows of std-obj-expenditure rows,  sums it up to return gross expenditures, net expenditures and revenue
 const rows_to_rev_split = (rows) => {
   const [neg_exp, gross_exp] = _.chain(rows)
-    .filter((x) => x) //TODO remove this
+    .compact()
     .partition((row) => is_revenue(row.so_num))
     .map(sum_last_year_exp)
     .value();
@@ -238,7 +238,7 @@ const collapse_by_so = function (programs, table, filter) {
       so_num: key_value[1][0].so_num,
       value: d3.sum(key_value[1], (d) => d["{{pa_last_year}}"]),
     }))
-    .filter(filter || (() => true))
+    .filter(filter || _.constant(true))
     .sortBy((d) => -d.value)
     .value();
 };

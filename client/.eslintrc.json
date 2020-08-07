@@ -26,7 +26,10 @@
       "react/no-string-refs": [ "off" ],
       "react/display-name": [ "off" ],
       "react/no-find-dom-node": [ "off" ],
-      "react/no-children-prop": [ "off" ]
+      "react/no-children-prop": [ "off" ],
+      "lodash/chaining": ["error","always", 2],
+      "lodash/chain-style": ["error","explicit"],
+      "lodash/prop-shorthand": ["off"]
   },
   "settings": {
     "react": {
