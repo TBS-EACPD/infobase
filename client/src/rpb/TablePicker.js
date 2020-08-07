@@ -74,13 +74,15 @@ class TablePicker extends React.Component {
     //note that a concept without tables will not get included here.
     this.linkage = _.chain(Table.get_all())
       .reject("reference_table")
-      .map((table_obj) =>
-        _.map(_.filter(table_obj.tags, concept_filter), (concept) => ({
-          table_id: table_obj.id,
-          concept_id: concept,
-        }))
+      .flatMap((table_obj) =>
+        _.chain(table_obj.tags)
+          .filter(concept_filter)
+          .map((concept) => ({
+            table_id: table_obj.id,
+            concept_id: concept,
+          }))
+          .value()
       )
-      .flatten()
       .value();
 
     //note that this will only include concepts that are actually linked to stuff.
@@ -105,7 +107,7 @@ class TablePicker extends React.Component {
           .map((concept_id) =>
             _.chain(linkage).filter({ concept_id }).map("table_id").value()
           )
-          .pipe((groups) => _.intersection.apply(null, groups))
+          .thru((groups) => _.intersection.apply(null, groups))
           .map((id) => _.find(tables, { id }))
           .compact()
           .value();
@@ -268,15 +270,13 @@ class TaggedItemCloud extends React.Component {
       )
       .value();
 
-    const tags_by_category = _.fromPairs(
-      _.map(categories, (cat) => [
+    const tags_by_category = _.chain(categories)
+      .map((cat) => [
         cat,
-        _.chain(concepts_by_category[cat])
-          .map((c) => _.filter(tags, { id: c }))
-          .flatten()
-          .value(),
+        _.flatMap(concepts_by_category[cat], (c) => _.filter(tags, { id: c })),
       ])
-    );
+      .fromPairs()
+      .value();
 
     return (
       <div>

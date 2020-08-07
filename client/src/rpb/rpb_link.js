@@ -3,7 +3,7 @@ import { SafeJSURL } from "../general_utils.js";
 
 const rpb_link = (naive_state, first_character = "#") =>
   _.chain(naive_state)
-    .pipe((obj) => {
+    .thru((obj) => {
       const { table, subject, columns } = obj;
 
       return {
@@ -11,7 +11,7 @@ const rpb_link = (naive_state, first_character = "#") =>
         table: table && table.is_table ? table.id : table,
         subject: subject && subject.level ? subject.guid : subject,
         columns:
-          _.first(columns) && _.first(columns).nick
+          _.head(columns) && _.head(columns).nick
             ? _.map(columns, "nick")
             : columns,
       };
@@ -24,8 +24,8 @@ const rpb_link = (naive_state, first_character = "#") =>
         ) ||
         (key === "broken_url" && value) // need to store broken_url in route state while true so it isn't lost, fine to drop it once it has been cleared (becomes false) to keep the URL clean
     )
-    .pipe((obj) => SafeJSURL.stringify(obj))
-    .pipe(
+    .thru((obj) => SafeJSURL.stringify(obj))
+    .thru(
       (jsurl_representation) => `${first_character}rpb/${jsurl_representation}`
     )
     .value();

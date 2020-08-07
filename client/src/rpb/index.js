@@ -72,8 +72,8 @@ const url_state_selector = (str) => {
     } else {
       try {
         return _.chain(str)
-          .pipe((str) => SafeJSURL.parse(str))
-          .pipe((naive) => naive_to_real_state(naive))
+          .thru((str) => SafeJSURL.parse(str))
+          .thru((naive) => naive_to_real_state(naive))
           .value();
       } catch (e) {
         log_standard_event({
@@ -245,6 +245,7 @@ class RPB extends React.Component {
 
     const flat_data =
       !_.isEmpty(table_data) &&
+      // eslint-disable-next-line
       _.chain(table_data)
         .filter(cat_filter_func)
         .reject(zero_filter_func)
@@ -269,7 +270,7 @@ class RPB extends React.Component {
         <URLSynchronizer state={{ ...this.props, ...options }} />
         <LangSynchronizer
           lang_modifier={(hash) => {
-            const config_str = hash.split("rpb/")[1];
+            const config_str = _.split(hash, "rpb/")[1];
             if (_.isEmpty(config_str)) {
               return hash;
             } else {
@@ -375,6 +376,7 @@ class AnalyticsSynchronizer extends React.Component {
   //note that we do not update the URL when componentDidMount().
   //this is so that the URL isn't printed too often
   //alternatively, we *can* overwrite the URL in componentDidMount() using replaceState().
+  // eslint-disable-next-line
   render() {
     return null;
   }
@@ -403,6 +405,7 @@ class AnalyticsSynchronizer extends React.Component {
 
 const URLSynchronizer = withRouter(
   class URLSynchronizer_ extends React.Component {
+    // eslint-disable-next-line
     render() {
       return null;
     }
@@ -414,6 +417,7 @@ const URLSynchronizer = withRouter(
       //on the first render, it's possible the url is naive
       const { history } = this.props;
       const new_url = rpb_link(this.props.state, "/");
+      // eslint-disable-next-line
       history.replace(new_url);
     }
     componentDidUpdate() {

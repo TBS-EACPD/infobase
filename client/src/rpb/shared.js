@@ -108,15 +108,16 @@ const ReportDatasets = ({ table, subject }) => {
           false
         );
       })
-      .filter((span) => span)
+      .compact()
       .value(),
   ];
 
   return (
     <FancyUL className={"rpb-option-fancy-ul"}>
-      {_.flatten(
-        [dataset_spans, data_source_spans].filter((d) => d.length > 1)
-      )}
+      {_.chain([dataset_spans, data_source_spans])
+        .filter((d) => d.length > 1)
+        .flatten()
+        .value()}
     </FancyUL>
   );
 };
