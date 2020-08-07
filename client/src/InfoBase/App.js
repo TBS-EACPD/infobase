@@ -164,12 +164,12 @@ export class App extends React.Component {
           <DevFip />
           <InsertRuntimeFooterLinks />
           <EasyAccess />
-          {this.state.showNotification ? (
+          {this.state.showNotification && (
             <HeaderNotification
               text={this.state.message}
               hideNotification={this.hideNotification}
             />
-          ) : null}
+          )}
           {has_local_storage && <SurveyPopup />}
           <ReactUnmounter />
           {!window.is_a11y_mode && <TooltipActivator />}
