@@ -1,7 +1,9 @@
 {
   "plugins": [
-    "react"
+    "react",
+    "lodash"
   ],
+  "extends": ["plugin:lodash/recommended"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2017,
