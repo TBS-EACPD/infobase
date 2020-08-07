@@ -338,7 +338,7 @@ class EstimatesExplorer extends React.Component {
             min_width={525}
           />
         </div>
-        <div className="h3">
+        <div className="h3" style={{ textAlign: "center" }}>
           <TM
             k="estimates_rpb_link"
             args={{
