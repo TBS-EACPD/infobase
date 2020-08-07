@@ -266,7 +266,7 @@ const datasets = {
           .compact()
           .map("title")
           .compact()
-          .pipe((titles) => titles.join(" "))
+          .thru((titles) => titles.join(" "))
           .value(),
         table: t,
       }))

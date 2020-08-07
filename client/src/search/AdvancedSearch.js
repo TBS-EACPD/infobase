@@ -102,7 +102,7 @@ export class AdvancedSearch extends React.Component {
 
         const has_children_to_display = !(
           _.size(option_node.child_options) === 1 &&
-          _.chain(option_node.child_options).map("label").first().value() ===
+          _.chain(option_node.child_options).map("label").head().value() ===
             option_node.label
         );
 

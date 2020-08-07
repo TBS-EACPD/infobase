@@ -68,7 +68,7 @@ export class BaseTypeahead extends React.Component {
     const debounceOnNewQuery = _.debounce((query) => {
       onNewQuery();
       log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
+        SUBAPP: _.replace(window.location.hash, "#", ""),
         MISC1: `TYPEAHEAD_SEARCH_QUERY`,
         MISC2: `query: ${query}, search_configs: ${_.map(
           search_configs,
@@ -174,7 +174,7 @@ export class BaseTypeahead extends React.Component {
             }
 
             log_standard_event({
-              SUBAPP: window.location.hash.replace("#", ""),
+              SUBAPP: _.replace(window.location.hash, "#", ""),
               MISC1: `TYPEAHEAD_SEARCH_SELECT`,
               MISC2: `selected: ${selected[0].name}`,
             });
@@ -196,15 +196,15 @@ export class BaseTypeahead extends React.Component {
           } else {
             // for click events, need to find the targeted li, possibly an ancestor of the event target
             selected_item =
-              e.target.tagName.toLowerCase() === "li"
+              _.toLowerCase(e.target.tagName) === "li"
                 ? e.target
                 : e.target.closest("li");
           }
 
           if (selected_item) {
-            if (selected_item.className.includes("previous")) {
+            if (_.includes(selected_item.className, "previous")) {
               this.pagination_index--;
-            } else if (selected_item.className.includes("next")) {
+            } else if (_.includes(selected_item.className, "next")) {
               this.pagination_index++;
             }
             this.refresh_dropdown_menu();

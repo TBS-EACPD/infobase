@@ -1,7 +1,7 @@
 import { escapeRegExp } from "../general_utils.js";
 
 const query_to_regexps_func = (query) => {
-  const raw_tokens = _.filter(query.split(" "));
+  const raw_tokens = _.chain(query).split(" ").compact().value();
   const reg_exps = _.map(
     raw_tokens,
     (token) => new RegExp(`${escapeRegExp(_.deburr(token))}(?![^<]*>)`, "gi")
@@ -16,10 +16,11 @@ const highlight_search_match = (search, content) => {
   const reg_exps = query_to_reg_exps(search);
 
   let modified_string = _.clone(content);
-  _.each(
+  _.forEach(
     reg_exps,
     (reg_exp) =>
-      (modified_string = modified_string.replace(
+      (modified_string = _.replace(
+        modified_string,
         reg_exp,
         (match) => `<strong>${match}</strong>`
       ))
@@ -34,10 +35,11 @@ const split_matched_search_tokens = (search, content) => {
   const split_token = "Ø";
 
   let modified_string = _.clone(content);
-  _.each(
+  _.foreach(
     reg_exps,
     (reg_exp) =>
-      (modified_string = modified_string.replace(
+      (modified_string = _.replace(
+        modified_string,
         reg_exp,
         (match) => `${split_token}${match}${split_token}`
       ))
