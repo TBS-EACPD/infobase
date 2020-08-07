@@ -1,8 +1,6 @@
 import "./EstimatesComparison.scss";
 import classNames from "classnames";
 import { text_maker, TM } from "./text-provider.js";
-import { combineReducers, createStore } from "redux";
-import { Provider, connect } from "react-redux";
 import { StandardRouteContainer } from "../core/NavComponents";
 import { infograph_href_template, rpb_link } from "../link_utils.js";
 import { sources } from "../metadata/data_sources.js";
@@ -17,14 +15,11 @@ import {
   Details,
 } from "../components/index.js";
 import { get_root } from "../explorer_common/hierarchy_tools.js";
+import { map_state_to_root_props_from_memoized_funcs } from "../explorer_common/state_and_memoizing";
 import {
-  get_memoized_funcs,
-  initial_root_state,
-  root_reducer,
-  map_state_to_root_props_from_memoized_funcs,
-  map_dispatch_to_root_props,
-} from "../explorer_common/state_and_memoizing";
-import { Explorer } from "../explorer_common/explorer_components.js";
+  Explorer,
+  ExplorerContainer,
+} from "../explorer_common/explorer_components.js";
 import { ensure_loaded } from "../core/lazy_loader.js";
 import {
   estimates_diff_scheme,
@@ -35,59 +30,6 @@ import {
 import { businessConstants } from "../models/businessConstants.js";
 
 const { estimates_docs } = businessConstants;
-
-export default class EstimatesComparison extends React.Component {
-  constructor() {
-    super();
-    this.state = { loading: true };
-  }
-  componentDidMount() {
-    ensure_loaded({
-      table_keys: ["orgVoteStatEstimates"],
-      footnotes_for: "estimates",
-    }).then(() => {
-      this.setState({ loading: false });
-    });
-  }
-  render() {
-    const {
-      history,
-      match: {
-        params: { h7y_layout },
-      },
-    } = this.props;
-
-    const title = text_maker("diff_view_title");
-
-    return (
-      <StandardRouteContainer
-        title={title}
-        breadcrumbs={[title]}
-        description={text_maker("estimates_comparison_desc_meta_attr")}
-        route_key="_dev"
-      >
-        <h1>
-          <TM k="diff_view_title" />
-        </h1>
-        {this.state.loading ? (
-          <SpinnerWrapper config_name={"sub_route"} />
-        ) : (
-          <ExplorerContainer history={history} route_h7y_layout={h7y_layout} />
-        )}
-      </StandardRouteContainer>
-    );
-  }
-}
-
-const map_state_to_props_from_memoized_funcs = (memoized_funcs) => {
-  const { get_scheme_props } = memoized_funcs;
-  const mapRootStateToRootProps = map_state_to_root_props_from_memoized_funcs(
-    memoized_funcs
-  );
-
-  return (state) =>
-    _.immutate(mapRootStateToRootProps(state), get_scheme_props(state));
-};
 
 const DetailedAmountsByDoc = ({ amounts_by_doc }) => {
   const sorted_items = _.sortBy(
@@ -101,7 +43,7 @@ const DetailedAmountsByDoc = ({ amounts_by_doc }) => {
         <div className="h6 heavy-weight">
           <TM k="doc_breakout_details" />
         </div>
-        <table className="table table-condensed">
+        <table className="table tale-condensed">
           <thead>
             <tr>
               <th scope="column">
@@ -177,41 +119,49 @@ const get_non_col_content = ({ node }) => {
 class EstimatesExplorer extends React.Component {
   constructor() {
     super();
+<<<<<<< HEAD
     this.state = { _query: "", show_inactive: false };
+=======
+
+    this.state = { query: "" };
+>>>>>>> Port EstimatesComparison to common ExplorerContainer
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
-  handleQueryChange(new_query) {
+
+  handle_query_change = (new_query) => {
     this.setState({
-      _query: new_query,
+      query: new_query,
       loading: new_query.length > 3 ? true : undefined,
     });
     this.debounced_set_query(new_query);
-  }
-  debounced_set_query(new_query) {
+  };
+  debounced_set_query = (new_query) => {
     this.props.set_query(new_query);
     this.timedOutStateChange = setTimeout(() => {
-      this.setState({
-        loading: false,
-      });
+      this.setState({ loading: false });
     }, 500);
-  }
-  componentWillUnmount() {
+  };
+
+  componentWillUnmount = () => {
     !_.isUndefined(this.debounced_set_query) &&
       this.debounced_set_query.cancel();
     !_.isUndefined(this.timedOutStateChange) &&
       clearTimeout(this.timedOutStateChange);
-  }
-  clearQuery() {
-    this.setState({ _query: "" });
+  };
+
+  clearQuery = () => {
+    this.setState({ query: "" });
     this.props.clear_query("");
-  }
-  componentDidUpdate() {
+  };
+
+  componentDidUpdate = () => {
     const { route_h7y_layout, h7y_layout, set_h7y_layout } = this.props;
 
-    if (route_h7y_layout && route_h7y_layout !== h7y_layout) {
+    if (h7y_layout && route_h7y_layout !== h7y_layout) {
       set_h7y_layout(route_h7y_layout);
     }
-  }
+  };
+
   render() {
     const {
       history,
@@ -265,24 +215,8 @@ class EstimatesExplorer extends React.Component {
         };
 
     return (
-      <div>
-        <div className="medium_panel_text mrgn-tp-lg">
-          <TM
-            k="diff_view_top_text"
-            args={{ current_doc_is_mains, current_sups_letter }}
-          />
-        </div>
-        <h2>
-          <TM k="general_info" />
-        </h2>
-        <div className="medium_panel_text">
-          <TM k="estimates_expl" />
-        </div>
-        <div
-          style={{
-            marginBottom: "15px",
-          }}
-        >
+      <React.Fragment>
+        <div style={{ marginBottom: "15px" }}>
           <LabeledBox label={<TM k="choose_grouping_scheme" />}>
             <div className="centerer">
               <RadioButtons
@@ -319,7 +253,7 @@ class EstimatesExplorer extends React.Component {
               type="text"
               style={{ width: "100%" }}
               placeholder={text_maker("everything_search_placeholder")}
-              onChange={(evt) => this.handleQueryChange(evt.target.value)}
+              onChange={(evt) => this.handle_query_change(evt.target.value)}
             />
             {window.is_a11y_mode && (
               <input
@@ -391,15 +325,20 @@ class EstimatesExplorer extends React.Component {
           )}
           <Explorer
             config={explorer_config}
+<<<<<<< HEAD
             root={filtered_root}
             col_state={{
               sort_col,
               is_descending,
             }}
+=======
+            root={root}
+            col_state={{ sort_col, is_descending }}
+>>>>>>> Port EstimatesComparison to common ExplorerContainer
             min_width={525}
           />
         </div>
-        <div className="h3" style={{ textAlign: "center" }}>
+        <div className="h3">
           <TM
             k="estimates_rpb_link"
             args={{
@@ -421,53 +360,94 @@ class EstimatesExplorer extends React.Component {
             args={{ href: sources.ESTIMATES.open_data[window.lang] }}
           />
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
 
-class ExplorerContainer extends React.Component {
-  constructor(props) {
+const map_state_to_props_from_memoized_funcs = (memoized_funcs) => {
+  const { get_scheme_props } = memoized_funcs;
+  const mapRootStateToProps = map_state_to_root_props_from_memoized_funcs(
+    memoized_funcs
+  );
+
+  return (state) => ({
+    ...mapRootStateToProps(state),
+    ...get_scheme_props(state),
+  });
+};
+
+const get_initial_state = ({ route_h7y_layout }) =>
+  get_initial_scheme_state(route_h7y_layout);
+
+export default class EstimatesComparison extends React.Component {
+  constructor() {
     super();
 
-    const { route_h7y_layout } = props;
+    this.state = { loading: true };
+  }
 
-    const scheme = estimates_diff_scheme;
-    const scheme_key = estimates_diff_scheme.key;
-
-    const reducer = combineReducers({
-      root: root_reducer,
-      [scheme_key]: scheme.reducer,
+  componentDidMount() {
+    ensure_loaded({
+      table_keys: ["orgVoteStatEstimates"],
+      footnotes_for: "estimates",
+    }).then(() => {
+      this.setState({ loading: false });
     });
+  }
 
-    const mapStateToProps = map_state_to_props_from_memoized_funcs(
-      get_memoized_funcs([scheme])
-    );
+  render() {
+    const {
+      history,
+      match: {
+        params: { h7y_layout },
+      },
+    } = this.props;
 
-    const mapDispatchToProps = (dispatch) =>
-      _.immutate(
-        map_dispatch_to_root_props(dispatch),
-        scheme.dispatch_to_props(dispatch)
-      );
+    const title = text_maker("diff_view_title");
 
-    const initialState = {
-      root: _.immutate(initial_root_state, { scheme_key }),
-      [scheme_key]: get_initial_scheme_state(route_h7y_layout),
+    const explorer_container_config = {
+      scheme: estimates_diff_scheme,
+      explorer: EstimatesExplorer,
+      get_initial_state,
+      map_state_to_props_from_memoized_funcs,
+      data: {
+        history,
+        route_h7y_layout: h7y_layout,
+        h7y_layout,
+      },
     };
 
-    const connecter = connect(mapStateToProps, mapDispatchToProps);
-    const Container = connecter(EstimatesExplorer);
-    const store = createStore(reducer, initialState);
-
-    this.Container = Container;
-    this.store = store;
-  }
-  render() {
-    const { store, Container } = this;
     return (
-      <Provider store={store}>
-        <Container {...this.props} />
-      </Provider>
+      <StandardRouteContainer
+        title={title}
+        breadcrumbs={[title]}
+        description={text_maker("estimates_comparison_desc_meta_attr")}
+        route_key="_dev"
+      >
+        <h1>
+          <TM k="diff_view_title" />
+        </h1>
+        {this.state.loading ? (
+          <SpinnerWrapper config_name={"sub_route"} />
+        ) : (
+          <div>
+            <div className="medium_panel_text mrgn-tp-lg">
+              <TM
+                k="diff_view_top_text"
+                args={{ current_doc_is_mains, current_sups_letter }}
+              />
+            </div>
+            <h2>
+              <TM k="general_info" />
+            </h2>
+            <div className="medium_panel_text">
+              <TM k="estimates_expl" />
+            </div>
+            <ExplorerContainer {...explorer_container_config} />
+          </div>
+        )}
+      </StandardRouteContainer>
     );
   }
 }
