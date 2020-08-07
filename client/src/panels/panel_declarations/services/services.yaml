@@ -63,7 +63,7 @@ services_digital_status_text:
   en: |
     Among the **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{most_digital_name}}** is the most online-available {{gl_tt "service component" "SERVICE_COMPONENT"}} (**{{fmt_percentage1 most_digital_pct}}**) while **{{least_digital_name}}** is the least online-available {{gl_tt "service component" "SERVICE_COMPONENT"}} (**{{fmt_percentage1 least_digital_pct}}**).
   fr: |
-    Parmi les **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} offerts par **{{subject_name}}**, **{{most_digital_name}}** est le service en ligne le plus disponible (**{{fmt_percentage1 most_digital_pct}}**) tandis que **{{least_digital_name}}** est le service en ligne le moins disponsible (**{{fmt_percentage1 least_digital_pct}}**).
+    Parmi les **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} offerts par **{{subject_name}}**, **{{most_digital_name}}** est le service en ligne le plus disponible (**{{fmt_percentage1 most_digital_pct}}**) tandis que **{{least_digital_name}}** est le service en ligne le moins disponible (**{{fmt_percentage1 least_digital_pct}}**).
 services_digital_status:
   en: Online status of services
   fr: État des services en ligne
@@ -134,7 +134,6 @@ services_channels_text:
     À **{{subject.name}}**, le plus grand nombre de demandes a ètès gènèrè par les mode "**{{max_vol_channel_name}}**" avec un total de **{{fmt_big_int max_vol_channel_value}}** demandes.
 
     Le service "**{{max_vol_service_name}}**" a reçu **{{fmt_big_int max_vol_service_value}}** demandes, le plus grand nombre parmi les services du ministére.
-#TODO check French over.
 service_channels_text:
   transform: [handlebars, markdown]
   en: |
@@ -168,10 +167,10 @@ online_inquiry:
 overview_digital_status_title:
   transform: [handlebars, markdown]
   en: What {{gl_tt "components" "SERVICE_COMPONENT"}} of this {{gl_tt "service" "SERVICE"}} are available online?
-  fr: TODO
+  fr: TODO Quels volets de ce service sont disponibles en ligne?
 overview_digital_status_desc:
   en: Online component of this service
-  fr: Volet en ligne de ce service
+  fr: TODO Volet en ligne de ce service
 service_types:
   en: Service Types
   fr: Types de service
