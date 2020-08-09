@@ -42,6 +42,27 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
 
   const most_digital_component = _.maxBy(data, can_online);
   const least_digital_component = _.minBy(data, can_online);
+  const nivo_lang_props = {
+    en: {
+      margin: {
+        top: 20,
+        right: 10,
+        bottom: 50,
+        left: 210,
+      },
+    },
+    fr: {
+      left_axis: {
+        tickRotation: 45,
+      },
+      margin: {
+        top: 170,
+        right: 10,
+        bottom: 50,
+        left: 235,
+      },
+    },
+  };
 
   return (
     <div>
@@ -73,13 +94,8 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
         is_money={false}
         indexBy={"id"}
         keys={[can_online, cannot_online, not_applicable]}
-        margin={{
-          top: 20,
-          right: 10,
-          bottom: 50,
-          left: 210,
-        }}
         colorBy={(d) => colors(d.id)}
+        {...nivo_lang_props[window.lang]}
       />
     </div>
   );
