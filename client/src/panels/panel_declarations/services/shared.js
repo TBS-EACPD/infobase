@@ -12,10 +12,10 @@ const digital_status_keys = [
 const service_channels_keys = [
   "phone_inquiry",
   "online_inquiry",
-  "online_application",
+  "other_application",
   "live_application",
   "mail_application",
-  "other_application",
+  "online_application",
 ];
 const available_keys = {
   true: "yes",

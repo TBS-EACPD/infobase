@@ -143,12 +143,12 @@ class ServicesChannelsPanel extends React.Component {
           indexBy={"id"}
           colorBy={(d) => colors(d.id)}
           bttm_axis={{
-            tickRotation: 45,
+            tickRotation: 35,
           }}
           margin={{
             top: 15,
             right: 60,
-            bottom: 130,
+            bottom: 160,
             left: 60,
           }}
         />

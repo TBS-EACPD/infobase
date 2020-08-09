@@ -123,9 +123,9 @@ single_service_channels_title:
 services_channels_text:
   transform: [handlebars, markdown]
   en: |
-    Delivery channels that {{gl_tt "services" "SERVICE"}} use for handling applications and enquiries.
+    {{gl_tt "Delivery channels" "CHANNELS"}} that {{gl_tt "services" "SERVICE"}} use for handling applications and enquiries.
     
-    In **{{subject.name}}**, the most traffic was generated through "**{{max_vol_channel_name}}**" channel with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
+    In **{{subject.name}}**, the most traffic was generated through "**{{max_vol_channel_name}}**" {{gl_tt "channel" "CHANNELS"}} with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
 
     The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** applications, the highest among all of the department's services.
   fr: |
@@ -137,9 +137,9 @@ services_channels_text:
 service_channels_text:
   transform: [handlebars, markdown]
   en: |
-    Delivery channels that this {{gl_tt "service" "SERVICE"}} uses for handling applications and enquiries.
+    {{gl_tt "Delivery channels" "CHANNELS"}} that this {{gl_tt "service" "SERVICE"}} uses for handling applications and enquiries.
     
-    {{#if max_channel_key}}There were **{{fmt_big_int max_value}} {{max_channel_key}}**, which is the highest delivery channel volume for this service.{{/if}}
+    {{#if max_channel_key}}There were **{{fmt_big_int max_value}} {{max_channel_key}}**, which is the highest delivery {{gl_tt "channel" "CHANNELS"}} volume for this service.{{/if}}
   fr: |
     Les modes de prestationn utilisés par ce service pout traiter les demandes et les renseignements.
     
