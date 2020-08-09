@@ -46,23 +46,6 @@ $smallMargin: 10px;
     width: 100%; /* IE fix */
   }
 }
-.TrinityItem__service-Img {
-  width: 46.3%;
-  height: 100%;
-  margin-bottom: $smallMargin;
-
-  @media(max-width: $maxSmallDevice) {
-    width: 6em;
-    height: 5em;
-    margin: $smallMargin;
-  }
-
-  & > img {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
 
 .TrinityItem__Img {
   width: 40%;
