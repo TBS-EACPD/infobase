@@ -61,7 +61,7 @@ export class ServiceChannels extends React.Component {
           colorBy={(d) => colors(d.id)}
           margin={{
             right: 10,
-            left: 180,
+            left: 227,
             top: 0,
             bottom: 50,
           }}
