@@ -156,15 +156,12 @@ export class PartitionSubApp {
       this.current_data_type
     );
 
-    this.current_perspective = _.chain(this.all_perspectives)
-      .filter((perspective) => {
-        return (
-          perspective.id === this.current_perspective_id &&
-          perspective.data_type === this.current_data_type
-        );
-      })
-      .head()
-      .value();
+    this.current_perspective = _.find(this.all_perspectives, (perspective) => {
+      return (
+        perspective.id === this.current_perspective_id &&
+        perspective.data_type === this.current_data_type
+      );
+    });
 
     this.update_diagram_notes(this.current_perspective.diagram_note_content);
 
@@ -176,7 +173,7 @@ export class PartitionSubApp {
 
     // If search active then reapply to new hierarchy, else normal render
     const search_node = this.container.select("input.search").node();
-    const query = search_node.value.toLowerCase();
+    const query = _.toLower(search_node.value);
 
     if (!search_node.disabled && query.length >= this.search_required_chars) {
       this.search_actual(query);
@@ -203,9 +200,11 @@ export class PartitionSubApp {
     });
   }
   enable_search_bar() {
+    // eslint-disable-next-line
     const partition_control_search_block = this.container
       .selectAll(".partition-controls--control")
       .filter(function () {
+        //can this one be fixed?
         return this.querySelectorAll(".form-control.search").length;
       });
     const partition_control_search_input = partition_control_search_block.select(
@@ -227,9 +226,11 @@ export class PartitionSubApp {
     }
   }
   disable_search_bar() {
+    // eslint-disable-next-line
     const partition_control_search_block = this.container
       .selectAll(".partition-controls--control")
       .filter(function () {
+        //can this also be fixed?
         return this.querySelectorAll(".form-control.search").length;
       });
     const partition_control_search_input = partition_control_search_block.select(
@@ -257,7 +258,7 @@ export class PartitionSubApp {
     let nonunique_dont_fade_arrays = [];
     search_tree.each((node) => {
       if (!_.isNull(node.parent)) {
-        if (node.data.search_string.indexOf(deburred_query) !== -1) {
+        if (_.includes(node.data.search_string, deburred_query)) {
           search_matching.push(node);
 
           nonunique_dont_fade_arrays = [
@@ -297,7 +298,7 @@ export class PartitionSubApp {
   search_handler = () => {
     d3.event.stopImmediatePropagation();
     d3.event.preventDefault();
-    const query = d3.event.target.value.toLowerCase();
+    const query = _.toLower(d3.event.target.value);
     this.search_matching = [] || this.search_matching;
 
     this.debounced_search =

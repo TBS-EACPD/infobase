@@ -23,7 +23,7 @@ export default class PartitionRoute extends React.Component {
         this.props.history.push("/" + new_path);
 
         const el_to_update = document.querySelector("#wb-lng a");
-        const link = _.first(el_to_update.href.split("#"));
+        const link = _.chain(el_to_update.href).split("#").head().value();
         if (link) {
           el_to_update.href = `${link}#${new_path}`;
         }
