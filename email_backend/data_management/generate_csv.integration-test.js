@@ -1,50 +1,85 @@
 import _ from "lodash";
-import axios from "axios";
-import { get_output } from "./generate_csv";
+import mongoose from "mongoose";
+import { get_csv_strings } from "./generate_csv";
 import { connect_db } from "../src/db_utils/connect_db";
 import { make_mongoose_model_from_original_template } from "../src/db_utils/log_email_and_meta_to_db";
 import { get_templates } from "../src/template_utils";
-import fs from "fs";
 
 //Make sure there is test data to work with
 const test_template_name = "test_template.test";
-const completed_test_template = {
-  enums: ["bug", "other"],
-  radio: ["yes"],
-  text: "a",
-  number: 1,
-  json: { bleh: "bleh", a: 1 },
+const test_template = [
+  {
+    enums: ["bug", "other"],
+    radio: ["yes"],
+    text: "a",
+    number: 1,
+    json: { bleh: "bleh", a: 1 },
 
-  required_automatic: "blah",
-  optional_automatic: "bluh",
-};
-
-const instance = axios.create({
-  headers: {
-    referer: "http://localhost:8080/build/InfoBase/index-eng.html",
+    required_automatic: "blah",
+    optional_automatic: "bluh",
+    email_meta: {
+      to: "<Recipient> recipient@email.com",
+      from: "<Sender> sender@email.com",
+      server_time: "2020-08-04T17:23:05.258Z",
+      date: "8/4/2020",
+      time: "1:23:05 PM",
+      referer: "http://localhost:8080/build/InfoBase/index-eng.html",
+    },
   },
-});
-let csv, json, csv_title;
+  {
+    enums: ["bug"],
+    radio: ["no"],
+    text: "b",
+    number: 2,
+    json: { bleh: "bleh", a: 2 },
+
+    required_automatic: "blah",
+    optional_automatic: "bluh",
+    email_meta: {
+      to: "<Recipient> recipient@email.com",
+      from: "<Sender> sender@email.com",
+      server_time: "2020-07-21T16:56:28.611Z",
+      date: "7/21/2020",
+      time: "12:56:28 PM",
+      referer: "http://localhost:8080/build/InfoBase/index-eng.html",
+    },
+  },
+  {
+    enums: [],
+    radio: [],
+    text: "b",
+    number: 2,
+    json: { bleh: "bleh", a: 2 },
+
+    required_automatic: "blah",
+    email_meta: {
+      to: "<Recipient> recipient@email.com",
+      from: "<Sender> sender@email.com",
+      server_time: "2020-07-16T18:15:16.063Z",
+      date: "7/16/2020",
+      time: "2:15:16 PM",
+      referer: "http://localhost:8080/build/InfoBase/index-eng.html",
+    },
+  },
+];
 
 beforeAll((done) => {
-  instance
-    .post("http://127.0.0.1:7331/submit_email", {
-      template_name: test_template_name,
-      completed_template: completed_test_template,
-    })
+  const template = get_templates()[test_template_name];
+  connect_db()
     .then(() => {
-      get_output().then(({ csv_name, json_output }) => {
-        json = json_output;
-        fs.readFile(__dirname + `/CSVs/${csv_name}`, "utf-8", (err, data) => {
-          if (err) {
-            console.log(err);
-          } else {
-            csv_title = csv_name;
-            csv = data;
-            done();
-          }
-        });
+      const model = make_mongoose_model_from_original_template({
+        original_template: template,
+        template_name: test_template_name,
       });
+
+      return _.chain(test_template)
+        .map((template) => model.create(template))
+        .thru((promises) => Promise.all(promises))
+        .value();
+    })
+    .finally(() => {
+      mongoose.connection.close();
+      done();
     });
 });
 
@@ -54,37 +89,25 @@ afterAll((done) => {
     make_mongoose_model_from_original_template({
       original_template: template,
       template_name: test_template_name,
-    })
-      .collection.drop()
-      .then(() => {
-        fs.unlinkSync(__dirname + `/CSVs/${csv_title}`);
-        done();
-      });
+    }).collection.drop();
+    done();
   });
 });
 
-describe("Check that CSV output and JSON output are correct", () => {
-  it("Snapshot of JSON output", () => {
-    expect(json).toMatchSnapshot({
-      _id: expect.any(Object),
-      a: 1,
-      bleh: "bleh",
-      date: expect.any(String),
-      enums: "bug, other",
-      from: "Sender Name <sender@example.com>",
-      number: 1,
-      optional_automatic: "bluh",
-      radio: "yes",
-      referer: "http://localhost:8080/build/InfoBase/index-eng.html",
-      required_automatic: "blah",
-      server_time: expect.any(String),
-      text: "a",
-      time: expect.any(String),
-      to: "Recipient <recipient@example.com>",
-    });
+let csv;
+
+describe("Testing generate_csv.js", () => {
+  it("Getting csv output from db", (done) => {
+    get_csv_strings()
+      .then(({ csv_strings }) => {
+        csv = csv_strings;
+        expect(true).toBe(true);
+        done();
+      })
+      .catch(fail);
   });
 
-  it("Testing CSV for data", () => {
-    expect(csv.split("\n").length).toBe(2);
+  it("Testing csv outputs with snapshot", () => {
+    expect(csv).toMatchSnapshot();
   });
 });

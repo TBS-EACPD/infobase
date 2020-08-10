@@ -7,9 +7,8 @@ import mongoose from "mongoose";
 import { Parser } from "json2csv";
 
 const templates = get_templates();
-const json_output = [];
-const csv_name = [];
-export const extractor = () =>
+const csv_strings = [];
+export const extractor = (testing = false) =>
   connect_db()
     .then(() =>
       _.chain(templates)
@@ -31,13 +30,16 @@ export const extractor = () =>
         if (collection.length > 0) {
           const template_name = _.keys(templates)[index];
 
-          const flattened_email_logs = _.map(collection, function (sub) {
+          const flattened_email_logs = _.map(collection, function (sub, ind) {
             return _.chain(
               _.reduce(
                 sub._doc,
                 function (result, email_log_field, key) {
                   if (key === "__v") {
                     return result;
+                  }
+                  if (testing && key === "_id") {
+                    return { ...result, [key]: ind };
                   }
                   if (_.isPlainObject(email_log_field)) {
                     return { ...result, ...email_log_field };
@@ -80,15 +82,18 @@ export const extractor = () =>
             const file_name = `${template_name}_emails_${new Date().getTime()}.csv`;
 
             if (template_name === "test_template.test") {
-              json_output.push(time_corrected_email_logs);
-              csv_name.push(file_name);
+              csv_strings.push(csv);
             }
 
-            fs.writeFile(`./data_management/CSVs/${file_name}`, csv, function (
-              err
-            ) {
-              console.log(err || `Successfully saved ${file_name}.`);
-            });
+            if (!testing) {
+              fs.writeFile(
+                `./data_management/CSVs/${file_name}`,
+                csv,
+                function (err) {
+                  console.log(err || `Successfully saved ${file_name}.`);
+                }
+              );
+            }
           }
         }
       });
@@ -100,7 +105,7 @@ export const extractor = () =>
       mongoose.connection.close();
     });
 
-export async function get_output() {
-  const wait = await extractor();
-  return { csv_name: csv_name[0], json_output: json_output[0][0] };
+export async function get_csv_strings() {
+  const wait = await extractor(true);
+  return { csv_strings: csv_strings[0] };
 }
