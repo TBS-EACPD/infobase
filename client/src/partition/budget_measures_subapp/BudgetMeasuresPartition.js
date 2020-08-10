@@ -145,7 +145,7 @@ const popup_template = (year_value, node) => {
       !_.isEmpty(node.submeasures) &&
         text_maker("budget_measure_submeasure_note"),
     ])
-    .filter()
+    .compact()
     .value();
 
   const popup_options = {
@@ -282,7 +282,7 @@ const update_with_search = (diagram, props) => {
   let nonunique_dont_fade_arrays = [];
   search_tree.each((node) => {
     if (!_.isNull(node.parent)) {
-      if (node.data.search_string.indexOf(deburred_query) !== -1) {
+      if (_.includes(node.data.search_string, deburred_query)) {
         search_matching.push(node);
         nonunique_dont_fade_arrays = [
           nonunique_dont_fade_arrays,

@@ -101,7 +101,7 @@ const calculate_budget_stats = (year) => {
     no_remaining_funds_count - fully_withheld_funds_count;
 
   const less_one_percent_remaining_funds_count = _.chain(rolled_up_data_rows)
-    .filter((data_row) => data_row.remaining !== 0)
+    .reject((data_row) => data_row.remaining === 0)
     .map((data_row) => Math.abs(data_row.remaining / data_row.funding))
     .filter((percent_remaining) => percent_remaining < 0.01)
     .value().length;

@@ -158,56 +158,52 @@ export class BudgetMeasuresA11yContent extends React.Component {
           if (!has_children) {
             return main_row;
           } else {
-            const sub_rows = _.chain(budget_measure.children)
-              .map((org, ix) => {
-                const has_program_allocations =
-                  !_.isUndefined(org.children) && org.children.length > 0;
+            const sub_rows = _.map(budget_measure.children, (org, ix) => {
+              const has_program_allocations =
+                !_.isUndefined(org.children) && org.children.length > 0;
 
-                return (
-                  <Fragment key={ix}>
-                    {ix !== 0 && (
-                      <tr
-                        key={`measure${budget_measure.data.id}-org${org.data.id}`}
+              return (
+                <Fragment key={ix}>
+                  {ix !== 0 && (
+                    <tr
+                      key={`measure${budget_measure.data.id}-org${org.data.id}`}
+                      rowSpan={
+                        has_program_allocations ? org.children.length : 1
+                      }
+                    >
+                      <td
                         rowSpan={
                           has_program_allocations ? org.children.length : 1
                         }
                       >
-                        <td
-                          rowSpan={
-                            has_program_allocations ? org.children.length : 1
-                          }
-                        >
-                          {name_and_value_cell_formatter(org)}
+                        {name_and_value_cell_formatter(org)}
+                      </td>
+                      {has_program_allocations && (
+                        <td>
+                          {name_and_value_cell_formatter(org.children[0])}
                         </td>
-                        {has_program_allocations && (
+                      )}
+                      {!has_program_allocations && (
+                        <td>{text_maker("notapplicable")}</td>
+                      )}
+                    </tr>
+                  )}
+                  {has_program_allocations &&
+                    _.chain(org.children)
+                      .tail()
+                      .map((program_allocation) => (
+                        <tr
+                          key={`measure${budget_measure.data.id}-org${org.data.id}-prog${program_allocation.data.id}`}
+                        >
                           <td>
-                            {name_and_value_cell_formatter(org.children[0])}
+                            {name_and_value_cell_formatter(program_allocation)}
                           </td>
-                        )}
-                        {!has_program_allocations && (
-                          <td>{text_maker("notapplicable")}</td>
-                        )}
-                      </tr>
-                    )}
-                    {has_program_allocations &&
-                      _.chain(org.children)
-                        .tail()
-                        .map((program_allocation) => (
-                          <tr
-                            key={`measure${budget_measure.data.id}-org${org.data.id}-prog${program_allocation.data.id}`}
-                          >
-                            <td>
-                              {name_and_value_cell_formatter(
-                                program_allocation
-                              )}
-                            </td>
-                          </tr>
-                        ))
-                        .value()}
-                  </Fragment>
-                );
-              })
-              .value();
+                        </tr>
+                      ))
+                      .value()}
+                </Fragment>
+              );
+            });
 
             return [main_row, ...sub_rows];
           }
@@ -304,70 +300,66 @@ export class BudgetMeasuresA11yContent extends React.Component {
           if (!has_children) {
             return main_row;
           } else {
-            const sub_rows = _.chain(budget_measure.children)
-              .map((org, ix) => {
-                const has_program_allocations =
-                  !_.isUndefined(org.children) && org.children.length > 0;
+            const sub_rows = _.map(budget_measure.children, (org, ix) => {
+              const has_program_allocations =
+                !_.isUndefined(org.children) && org.children.length > 0;
 
-                return (
-                  <Fragment key={ix}>
-                    {ix !== 0 && (
-                      <tr
-                        key={`measure${budget_measure.data.id}-org${org.data.id}`}
+              return (
+                <Fragment key={ix}>
+                  {ix !== 0 && (
+                    <tr
+                      key={`measure${budget_measure.data.id}-org${org.data.id}`}
+                      rowSpan={
+                        has_program_allocations ? org.children.length : 1
+                      }
+                    >
+                      <td
                         rowSpan={
                           has_program_allocations ? org.children.length : 1
                         }
                       >
-                        <td
-                          rowSpan={
-                            has_program_allocations ? org.children.length : 1
-                          }
-                        >
-                          {name_and_value_cell_formatter(org)}
+                        {name_and_value_cell_formatter(org)}
+                      </td>
+                      <td
+                        key={`measure_description${budget_measure.data.id}`}
+                        rowSpan={
+                          has_program_allocations ? org.children.length : 1
+                        }
+                      >
+                        {!_.isEmpty(org.data.description) && (
+                          <div
+                            dangerouslySetInnerHTML={sanitized_dangerous_inner_html(
+                              org.data.description
+                            )}
+                          />
+                        )}
+                      </td>
+                      {has_program_allocations && (
+                        <td>
+                          {name_and_value_cell_formatter(org.children[0])}
                         </td>
-                        <td
-                          key={`measure_description${budget_measure.data.id}`}
-                          rowSpan={
-                            has_program_allocations ? org.children.length : 1
-                          }
+                      )}
+                      {!has_program_allocations && (
+                        <td>{text_maker("notapplicable")}</td>
+                      )}
+                    </tr>
+                  )}
+                  {has_program_allocations &&
+                    _.chain(org.children)
+                      .tail()
+                      .map((program_allocation) => (
+                        <tr
+                          key={`measure${budget_measure.data.id}-org${org.data.id}-prog${program_allocation.data.id}`}
                         >
-                          {!_.isEmpty(org.data.description) && (
-                            <div
-                              dangerouslySetInnerHTML={sanitized_dangerous_inner_html(
-                                org.data.description
-                              )}
-                            />
-                          )}
-                        </td>
-                        {has_program_allocations && (
                           <td>
-                            {name_and_value_cell_formatter(org.children[0])}
+                            {name_and_value_cell_formatter(program_allocation)}
                           </td>
-                        )}
-                        {!has_program_allocations && (
-                          <td>{text_maker("notapplicable")}</td>
-                        )}
-                      </tr>
-                    )}
-                    {has_program_allocations &&
-                      _.chain(org.children)
-                        .tail()
-                        .map((program_allocation) => (
-                          <tr
-                            key={`measure${budget_measure.data.id}-org${org.data.id}-prog${program_allocation.data.id}`}
-                          >
-                            <td>
-                              {name_and_value_cell_formatter(
-                                program_allocation
-                              )}
-                            </td>
-                          </tr>
-                        ))
-                        .value()}
-                  </Fragment>
-                );
-              })
-              .value();
+                        </tr>
+                      ))
+                      .value()}
+                </Fragment>
+              );
+            });
 
             return [main_row, ...sub_rows];
           }

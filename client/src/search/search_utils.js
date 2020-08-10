@@ -35,7 +35,7 @@ const split_matched_search_tokens = (search, content) => {
   const split_token = "Ø";
 
   let modified_string = _.clone(content);
-  _.foreach(
+  _.forEach(
     reg_exps,
     (reg_exp) =>
       (modified_string = _.replace(

@@ -43,7 +43,7 @@ const first_column_options = [
 ];
 const first_column_ids = _.map(first_column_options, (option) => option.id);
 
-const budget_year_options = budget_years.map((year) => `budget-${year}`);
+const budget_year_options = _.map(budget_years, (year) => `budget-${year}`);
 const get_year_value_from_budget_year = (budget_year) =>
   _.chain(budget_year_options)
     .indexOf(budget_year)
@@ -85,13 +85,14 @@ const validate_route = (props) => {
   } else {
     const valid_first_column = first_column_is_valid
       ? first_column
-      : _.first(first_column_options).id;
+      : _.head(first_column_options).id;
     const valid_value = selected_value_is_valid ? selected_value : "overview";
     const valid_year = budget_year_is_valid
       ? budget_year
       : _.last(budget_year_options);
 
     const corrected_route = `/budget-tracker/${valid_first_column}/${valid_value}/${valid_year}`;
+    // eslint-disable-next-line
     history.replace(corrected_route);
 
     return false;

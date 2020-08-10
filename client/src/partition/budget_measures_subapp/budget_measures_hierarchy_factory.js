@@ -111,17 +111,25 @@ const post_traversal_children_filter = (node) => {
 const post_traversal_search_string_set = (node) => {
   node.data.search_string = "";
   if (node.data.name) {
-    node.data.search_string += _.deburr(node.data.name.toLowerCase());
+    node.data.search_string += _.chain(node.data.name)
+      .toLower()
+      .deburr()
+      .value();
   }
   if (node.data.description) {
-    node.data.search_string += _.deburr(
-      node.data.description.replace(/<(?:.|\n)*?>/gm, "").toLowerCase()
-    );
+    node.data.search_string += _.chain(node.data.description)
+      .replace(/<(?:.|\n)*?>/gm, "")
+      .toLower()
+      .deburr()
+      .value();
   }
   if (node.data.type === "dept" && node.data.id !== 9999) {
-    node.data.search_string += _.deburr(
-      `${node.data.dept_code} ${node.data.abbr} ${node.data.name}`.toLowerCase()
-    );
+    node.data.search_string += _.chain(
+      `${node.data.dept_code} ${node.data.abbr} ${node.data.name}`
+    )
+      .toLower()
+      .deburr()
+      .value();
   }
 };
 
@@ -239,7 +247,7 @@ const budget_measure_first_hierarchy_factory = (year_value, selected_value) => {
           return budgetMeasureNodes;
         } else if (node.type === "budget_measure") {
           const orgNodes = _.chain(node.data)
-            .filter((data_row) => data_row.org_id !== "net_adjust")
+            .reject((data_row) => data_row.org_id === "net_adjust")
             .map((data_row) => {
               if (data_row.org_id === "non_allocated") {
                 return {
@@ -419,7 +427,7 @@ const budget_overview_hierarchy_factory = (year_value) => {
                 chapter_key: budgetMeasure.chapter_key,
               };
             })
-            .filter((node) => node.value !== 0)
+            .reject((node) => node.value === 0)
             .sortBy((node) =>
               node.type === "net_adjust" ? Infinity : -Math.abs(node.value)
             )
@@ -484,13 +492,13 @@ const budget_overview_hierarchy_factory = (year_value) => {
           };
 
           if (measure_remaining_node.value !== node.value) {
-            return _.filter(
+            return _.reject(
               [
                 ...allocated_org_nodes,
                 measure_withheld_node,
                 measure_remaining_node,
               ],
-              (node) => node.value !== 0
+              (node) => node.value === 0
             );
           } else {
             return []; // Don't return any nodes if 100% remaining
