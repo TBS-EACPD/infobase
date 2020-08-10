@@ -67,7 +67,7 @@ const subject_link = (node) => (
   <span>
     <a href={infograph_href_template(node.data.subject, "results")}>
       {node.data.name}
-    </a>{" "}
+    </a>
     <span className="text-nowrap">
       (
       {text_maker(
@@ -80,7 +80,7 @@ const subject_link = (node) => (
   </span>
 );
 
-const indicator_table_from_list = (indicator_list) => {
+const indicator_table_from_list = (indicator_list, subject) => {
   const ind_map = _.chain(indicator_list)
     .map((ind) => [
       ind.indicator.id,
@@ -92,7 +92,7 @@ const indicator_table_from_list = (indicator_list) => {
             ? ind.parent_node.data.subject.level
             : "core_resp"
         )}`,
-        href: `#indicator/${ind.indicator.id}`,
+        href: `#dept/${subject.id}/indicator/${ind.indicator.id}`,
         name: ind.indicator.name,
       },
     ])
@@ -273,7 +273,7 @@ class ResultsTable extends React.Component {
           </div>
           <HeightClippedGraph clipHeight={200}>
             <div className="results-flat-table">
-              {indicator_table_from_list(filtered_indicators)}
+              {indicator_table_from_list(filtered_indicators, subject)}
             </div>
           </HeightClippedGraph>
         </div>

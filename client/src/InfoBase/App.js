@@ -190,7 +190,10 @@ export class App extends React.Component {
                 path="/panel/:level?/:subject_id?/:panel_key?"
                 component={IsolatedPanel}
               />
-              <Route path="/indicator/:id?" component={IndicatorPanel} />
+              <Route
+                path="/dept/:org_id/indicator/:id?"
+                component={IndicatorPanel}
+              />
               <Redirect
                 from="/graph/:level?/:panel?/:id?"
                 to="/panel-inventory/:level?/:panel?/:id?"

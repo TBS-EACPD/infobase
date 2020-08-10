@@ -7,6 +7,8 @@ import { StandardRouteContainer } from "../../core/NavComponents.js";
 import { Panel, SpinnerWrapper } from "../../components/index.js";
 
 import { Indicator } from "../../models/results.js";
+import { Subject } from "../../models/subject";
+import { infograph_href_template } from "../../link_utils.js";
 
 import { IndicatorDisplay } from "../panel_declarations/results/result_components.js";
 import {
@@ -115,18 +117,24 @@ export default class IndicatorPanel extends React.Component {
   render() {
     const {
       match: {
-        params: { id },
+        params: { org_id, id },
       },
     } = this.props;
 
     const { loading } = this.state;
 
+    const subject = Subject.Dept.lookup(org_id);
     const indicator = Indicator.lookup(id);
 
     return (
       <StandardRouteContainer
         title={text_maker("indicator_display_title")}
-        breadcrumbs={[text_maker("indicator_display_title")]}
+        breadcrumbs={[
+          <a href={infograph_href_template(subject, "results")}>
+            {subject.name}
+          </a>,
+          text_maker("indicator_display_title"),
+        ]}
         description={text_maker("indicator_display_desc")}
         route_key="_inddisp"
       >
