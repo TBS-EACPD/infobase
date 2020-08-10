@@ -32,8 +32,7 @@ export class WriteToClipboard extends React.Component {
 
     const modal_active = _.isString(copy_status_message);
     const copy_success = copy_status_message === text_maker("copy_success");
-    const BOM_text_to_copy = `\uFEFF${text_to_copy}`;
-
+    const BOM_text_to_copy = `data:text/csv;charset=utf-8,%EF%BB%BF${text_to_copy}`;
     return (
       <Fragment>
         <button
