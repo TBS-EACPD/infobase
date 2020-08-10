@@ -76,7 +76,7 @@ const dept_perspective_popup_template = function (d) {
   if (d.data.is("program")) {
     return text_maker(
       "partition_program_popup",
-      _.extend(common_popup_options, {
+      _.assignIn(common_popup_options, {
         description: d.data.description,
         dept_name: d.data.dept.name,
         dept_id: d.data.dept.id,
@@ -85,7 +85,7 @@ const dept_perspective_popup_template = function (d) {
   } else if (d.data.is("dept")) {
     return text_maker(
       "partition_org_or_goco_popup",
-      _.extend(common_popup_options, {
+      _.assignIn(common_popup_options, {
         description: d.data.mandate,
       })
     );

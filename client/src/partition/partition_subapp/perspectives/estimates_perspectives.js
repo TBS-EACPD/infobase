@@ -82,7 +82,7 @@ const estimates_common_node_mapping = ({
       );
       const data_for_children = _.chain(grouped_rows)
         .map((row) => row.data_for_children)
-        .filter((data) => data)
+        .compact()
         .value();
 
       return {
@@ -94,7 +94,7 @@ const estimates_common_node_mapping = ({
         data_for_children,
       };
     })
-    .filter((node) => node.value !== 0)
+    .reject((node) => node.value === 0)
     .value();
 };
 
@@ -136,7 +136,11 @@ const subject_to_vs_type_nodes_common = (estimates_data) => {
   });
 
   return estimates_common_node_mapping(
-    _.extend({}, { data_for_node_mapping }, vs_type_node_mapping_common_options)
+    _.assignIn(
+      {},
+      { data_for_node_mapping },
+      vs_type_node_mapping_common_options
+    )
   );
 };
 
@@ -151,9 +155,10 @@ const subject_to_vs_type_nodes_filtered_by_est_doc_code = (
   est_doc_code
 ) => {
   const orgVoteStatEstimates = Table.lookup("orgVoteStatEstimates");
-  const estimates_data = _.chain(orgVoteStatEstimates.q(node).data)
-    .filter((row) => row.est_doc_code === est_doc_code)
-    .value();
+  const estimates_data = _.filter(
+    orgVoteStatEstimates.q(node).data,
+    (row) => row.est_doc_code === est_doc_code
+  );
 
   return estimates_data.length === 0
     ? false
@@ -194,7 +199,7 @@ const subject_to_est_type_nodes = (node) => {
   });
 
   return estimates_common_node_mapping(
-    _.extend(
+    _.assignIn(
       {},
       { data_for_node_mapping },
       est_type_node_mapping_common_options
@@ -220,7 +225,7 @@ const est_type_or_vs_type_node_to_stat_item_nodes = (node) => {
     : estimates_common_node_mapping({
         data_for_node_mapping,
         is: (__type__) => __type__ === "stat_item",
-        glossary_entry_by_id_func: () => false,
+        glossary_entry_by_id_func: _.constant(false),
       });
 };
 
@@ -238,15 +243,18 @@ const est_type_node_to_vs_type_nodes = (node) => {
   });
 
   return estimates_common_node_mapping(
-    _.extend({}, { data_for_node_mapping }, vs_type_node_mapping_common_options)
+    _.assignIn(
+      {},
+      { data_for_node_mapping },
+      vs_type_node_mapping_common_options
+    )
   );
 };
 
 const orgs_with_estimates = () => {
   return _.chain(Subject.Ministry.get_all())
-    .map((ministry) => ministry.orgs)
-    .flatten()
-    .filter((org) => _.indexOf(org.table_ids, "orgVoteStatEstimates") !== -1)
+    .flatMap((ministry) => ministry.orgs)
+    .filter((org) => _.includes(org.table_ids, "orgVoteStatEstimates"))
     .value();
 };
 
@@ -254,9 +262,8 @@ const orgs_in_est_doc = (est_doc_code) => {
   const orgVoteStatEstimates = Table.lookup("orgVoteStatEstimates");
 
   return _.chain(Subject.Ministry.get_all())
-    .map((ministry) => ministry.orgs)
-    .flatten()
-    .filter((org) => _.indexOf(org.table_ids, "orgVoteStatEstimates") !== -1)
+    .flatMap((ministry) => ministry.orgs)
+    .filter((org) => _.includes(org.table_ids, "orgVoteStatEstimates"))
     .filter((org) =>
       _.some(
         orgVoteStatEstimates.q(org).data,
@@ -309,7 +316,7 @@ const get_rpb_subject_code_from_context = (node, presentation_scheme) => {
   if (
     node.depth !== 0 &&
     (presentation_scheme === "org_estimates" ||
-      presentation_scheme.startsWith("est_doc_"))
+      _.startsWith(presentation_scheme, "est_doc_"))
   ) {
     return (
       "dept_" +
@@ -348,21 +355,21 @@ const estimates_post_traversal_rule_set = (
     node[data_type] = node.value = node.data.value;
     if (node.data.is("vs_type")) {
       node.data.rpb_link = rpb_link(
-        _.extend({}, default_rpb_link_options, {
+        _.assignIn({}, default_rpb_link_options, {
           dimension: "voted_stat",
           filter: node.data.id === 999 ? text_maker("stat") : node.data.name,
         })
       );
     } else if (node.data.is("est_type")) {
       node.data.rpb_link = rpb_link(
-        _.extend({}, default_rpb_link_options, {
+        _.assignIn({}, default_rpb_link_options, {
           dimension: "by_estimates_doc",
           filter: node.data.name,
         })
       );
     } else if (node.data.is("stat_item")) {
       node.data.rpb_link = rpb_link(
-        _.extend({}, default_rpb_link_options, {
+        _.assignIn({}, default_rpb_link_options, {
           dimension: "voted_stat",
           filter: text_maker("stat"),
         })
@@ -391,10 +398,11 @@ const create_estimates_hierarchy = function (data_type, presentation_scheme) {
         return vs_type_node_rules(node);
       } else if (presentation_scheme === "org_estimates") {
         return org_estimates_node_rules(node);
-      } else if (presentation_scheme.startsWith("est_doc_")) {
-        const est_doc_code = presentation_scheme
+      } else if (_.startsWith(presentation_scheme, "est_doc_")) {
+        const est_doc_code = _.chain(presentation_scheme)
           .replace("est_doc_", "")
-          .toUpperCase();
+          .toUpper()
+          .value();
         return specific_est_doc_node_rules(node, est_doc_code);
       }
     })
@@ -416,7 +424,7 @@ const estimates_popup_template = function (presentation_scheme, d) {
   if (d.data.is("stat_item")) {
     return text_maker(
       "partition_estimates_vs_type_or_est_type",
-      _.extend(common_popup_options, {
+      _.assignIn(common_popup_options, {
         description: d.data.description,
         dept_name: d.parent.data.name,
         dept_id: d.parent.data.id,
@@ -435,7 +443,7 @@ const estimates_popup_template = function (presentation_scheme, d) {
     }
     return text_maker(
       "partition_estimates_vs_type_or_est_type",
-      _.extend(common_popup_options, {
+      _.assignIn(common_popup_options, {
         description: d.data.description,
         show_parent_dept_name: presentation_scheme === "org_estimates",
         dept_name,
@@ -445,7 +453,7 @@ const estimates_popup_template = function (presentation_scheme, d) {
   } else if (d.data.is("dept")) {
     return text_maker(
       "partition_estimates_spending_org_popup",
-      _.extend(common_popup_options, {
+      _.assignIn(common_popup_options, {
         description: d.data.mandate,
       })
     );
@@ -545,7 +553,7 @@ const estimates_perspective_factory = (presentation_scheme) =>
         x: root_value,
         name: get_name_text_fragment(presentation_scheme),
         year: get_year(presentation_scheme),
-        clean_year: get_year(presentation_scheme).replace(/(\{)|(\})/g, ""),
+        clean_year: _.replace(get_year(presentation_scheme), /(\{)|(\})/g, ""),
         past_tense: !/est_in_year/.test(get_year(presentation_scheme)),
         rpb_filter: get_rpb_filter(presentation_scheme),
       }),

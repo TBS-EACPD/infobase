@@ -41,7 +41,7 @@ const orgs_to_inst_form_nodes = (orgs) => {
   return _.chain(orgs)
     .reject("is_dead")
     .groupBy("inst_form.id")
-    .map((orgs, parent_form_id) => {
+    .flatMap((orgs, parent_form_id) => {
       return _.chain(orgs)
         .groupBy("inst_form.id")
         .map((orgs, type_id) => ({
@@ -53,7 +53,6 @@ const orgs_to_inst_form_nodes = (orgs) => {
         }))
         .value();
     })
-    .flatten()
     .value();
 };
 
@@ -101,8 +100,7 @@ const create_org_info_inst_form_hierarchy = function (
     .hierarchy(Subject.gov, (node) => {
       if (node.is("gov")) {
         const orgs = _.chain(Subject.Ministry.get_all())
-          .map((ministry) => ministry.orgs)
-          .flatten()
+          .flatMap((ministry) => ministry.orgs)
           .filter(
             (org) =>
               org.inst_form.parent_form.parent_form.id ===
@@ -162,7 +160,7 @@ const org_info_perspective_popup_template = function (d) {
   if (d.data.is("dept")) {
     return text_maker(
       "partition_org_info_org_popup",
-      _.extend(common_popup_options, {
+      _.assignIn(common_popup_options, {
         description: d.data.mandate,
         inst_form_name: d.parent.data.name,
         ministry_name: d.data.ministry.name,
@@ -171,7 +169,7 @@ const org_info_perspective_popup_template = function (d) {
   } else if (d.data.is("inst_form")) {
     return text_maker(
       "partition_org_info_inst_form_popup",
-      _.extend(common_popup_options, {
+      _.assignIn(common_popup_options, {
         description: d.data.description,
         ministry_name: d.parent.data.is("ministry")
           ? d.parent.data.name
@@ -182,7 +180,7 @@ const org_info_perspective_popup_template = function (d) {
   } else if (d.data.is("ministry")) {
     return text_maker(
       "partition_org_info_ministry_or_inst_form_groups_popup",
-      _.extend(common_popup_options, {
+      _.assignIn(common_popup_options, {
         plural_child_orgs: d.value !== 1,
       })
     );

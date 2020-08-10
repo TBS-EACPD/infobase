@@ -112,9 +112,11 @@ const create_spend_type_hierarchy = function () {
             }
           );
         };
-        return Table.lookup("programSobjs")
-          .data.filter((row) => row.so_num === node.so_num)
-          .map(_mock_model);
+
+        return _.chain(Table.lookup("programSobjs").data)
+          .filter((row) => row.so_num === node.so_num)
+          .map(_mock_model)
+          .value();
       }
     })
     .eachAfter((node) => {
@@ -160,7 +162,7 @@ const spend_type_perspective_popup_template = function (d) {
   if (d.data.is("program_fragment")) {
     return text_maker(
       "partition_program_popup",
-      _.extend(common_popup_options, {
+      _.assignIn(common_popup_options, {
         up_to: false,
         dept_name: d.data.dept.name,
         dept_id: d.data.dept.id,
@@ -172,7 +174,7 @@ const spend_type_perspective_popup_template = function (d) {
   } else if (d.data.is("so")) {
     return text_maker(
       "partition_so_popup",
-      _.extend(common_popup_options, {
+      _.assignIn(common_popup_options, {
         description: d.data.description,
       })
     );

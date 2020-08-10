@@ -3,7 +3,7 @@ import { Table } from "../../../core/TableClass.js";
 
 const absolute_value_sort = (a, b) => -(Math.abs(a.value) - Math.abs(b.value));
 const alphabetic_name_sort = (a, b) =>
-  a.data.name.toLowerCase().localeCompare(b.data.name.toLowerCase());
+  _.toLower(a.data.name).localeCompare(_.toLower(b.data.name));
 
 const get_glossary_entry = (glossary_key) =>
   GlossaryEntry.lookup(glossary_key)
@@ -16,14 +16,14 @@ const value_functions = {
     if (!programSpending.programs.has(node)) {
       return false;
     }
-    return _.first(programSpending.programs.get(node))["{{pa_last_year}}exp"];
+    return _.head(programSpending.programs.get(node))["{{pa_last_year}}exp"];
   },
   fte: function (node) {
     const programFtes = Table.lookup("programFtes");
     if (!programFtes.programs.has(node)) {
       return false;
     }
-    return _.first(programFtes.programs.get(node))["{{pa_last_year}}"];
+    return _.head(programFtes.programs.get(node))["{{pa_last_year}}"];
   },
 };
 
@@ -48,16 +48,19 @@ const post_traversal_value_set = function (node, data_type) {
 const post_traversal_search_string_set = function (node) {
   node.data.search_string = "";
   if (node.data.name) {
-    node.data.search_string += _.deburr(node.data.name.toLowerCase());
+    node.data.search_string += _.deburr(_.toLower(node.data.name));
   }
   if (node.data.description) {
     node.data.search_string += _.deburr(
-      node.data.description.replace(/<(?:.|\n)*?>/gm, "").toLowerCase()
+      _.chain(node.data.description)
+        .replace(/<(?:.|\n)*?>/gm, "")
+        .toLower()
+        .value()
     );
   }
   if (node.data.is("dept")) {
     node.data.search_string += _.deburr(
-      `${node.data.dept_code} ${node.data.abbr} ${node.data.name}`.toLowerCase()
+      _.toLower(`${node.data.dept_code} ${node.data.abbr} ${node.data.name}`)
     );
   }
 };

@@ -11,10 +11,10 @@ export class PartitionPerspective {
       level_headers: args.level_headers,
     };
 
-    const required_arg_is_missing = _.some(
-      _.values(required_args),
-      (arg) => _.isNull(arg) || _.isUndefined(arg)
-    );
+    const required_arg_is_missing = _.chain(required_args)
+      .values()
+      .some((arg) => _.isNil(arg))
+      .value();
 
     if (required_arg_is_missing) {
       throw `Partition diagram perspective ${args.name} is missing required arguments.`;
@@ -24,7 +24,7 @@ export class PartitionPerspective {
         diagram_note_content: args.diagram_note_content || false,
         disable_search_bar: args.disable_search_bar || false,
       };
-      Object.assign(this, required_args, optional_args);
+      _.assign(this, required_args, optional_args);
     }
   }
 }
