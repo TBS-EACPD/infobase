@@ -145,7 +145,7 @@ export class App extends React.Component {
         if (data.outage) {
           this.setState({
             showNotification: true,
-            message: window.lang === "en" ? data.en : data.fr,
+            message: data[window.lang],
           });
         }
       });
