@@ -147,8 +147,7 @@ Statistics.create_and_register({
     );
 
     const num_active_years = _.chain(all_years)
-      .map()
-      .tail()
+      .map((group) => _.tail(group))
       .thru((groups) => _.zip.apply(null, groups))
       .map((zipped_groups) => d3.sum(zipped_groups))
       .countBy((total) => (total === 0 ? "inactive" : "active"))

@@ -196,7 +196,7 @@ export class BaseTypeahead extends React.Component {
           } else {
             // for click events, need to find the targeted li, possibly an ancestor of the event target
             selected_item =
-              _.toLowerCase(e.target.tagName) === "li"
+              _.toLower(e.target.tagName) === "li"
                 ? e.target
                 : e.target.closest("li");
           }
