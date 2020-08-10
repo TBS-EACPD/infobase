@@ -112,8 +112,8 @@ const indicator_table_from_list = (indicator_list, subject) => {
       raw_formatter: (value) => ind_map[value].subject_full_name,
       sort_func: (a, b) => {
         if (a && b) {
-          const a_name = ind_map[a].subject_full_name.toUpperCase();
-          const b_name = ind_map[b].subject_full_name.toUpperCase();
+          const a_name = _.toUpper(ind_map[a].subject_full_name);
+          const b_name = _.toUpper(ind_map[b].subject_full_name);
           return sort_func_template(a_name, b_name);
         }
         return 0;
@@ -128,8 +128,8 @@ const indicator_table_from_list = (indicator_list, subject) => {
       ),
       sort_func: (a, b) => {
         if (a && b) {
-          const a_name = ind_map[a].name.toUpperCase();
-          const b_name = ind_map[b].name.toUpperCase();
+          const a_name = _.toUpper(ind_map[a].name);
+          const b_name = _.toUpper(ind_map[b].name);
           return sort_func_template(a_name, b_name);
         }
         return 0;

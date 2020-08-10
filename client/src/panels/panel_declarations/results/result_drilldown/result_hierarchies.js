@@ -129,8 +129,8 @@ export function create_full_results_hierarchy({
       }
 
       case "cr": {
-        const programs = subject.programs
-          .filter((prog) => !prog.is_fake)
+        const programs = _.chain(subject.programs)
+          .reject((prog) => prog.is_fake)
           .map((prog) => ({
             id: `${parent_id}-${prog.guid}`,
             data: {
@@ -139,7 +139,8 @@ export function create_full_results_hierarchy({
               type: "program",
               resources: get_resources(prog),
             },
-          }));
+          }))
+          .value();
 
         const results = _.map(Result.get_entity_results(subject.id), (result) =>
           result_to_node(result, parent_id, doc)

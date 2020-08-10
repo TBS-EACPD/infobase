@@ -91,7 +91,7 @@ const query_api = (id) => {
     .catch(function (error) {
       const resp_time = Date.now() - time_at_request;
       log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
+        SUBAPP: _.replace(window.location.hash, "#", ""),
         MISC1: "API_QUERY_FAILURE",
         MISC2: `Single indicator, took  ${resp_time} ms - ${error.toString()}`,
       });

@@ -223,7 +223,7 @@ const IndicatorList = ({ indicators }) => (
 const QuadrantDefList = ({ defs }) => (
   <div>
     <dl className="quadrant-dl">
-      {defs.map(({ key, val }, ix) => (
+      {_.map(defs, ({ key, val }, ix) => (
         <div key={key} className="number-box">
           <dt>{key}</dt>
           <dd>
@@ -311,8 +311,7 @@ const StatusIconTable = ({
         items={_.map(ordered_status_keys, (status_key) => ({
           key: status_key,
           active:
-            active_list.length === 0 ||
-            _.indexOf(active_list, status_key) !== -1,
+            active_list.length === 0 || _.includes(active_list, status_key),
           count: icon_counts[status_key] || 0,
           text: !window.is_a11y_mode ? (
             <span
@@ -399,11 +398,11 @@ function indicators_period_span_str(indicators) {
     .uniq()
     .reject((num) => !_.isNumber(num)) //filter out 'other', 'ongoing' and blanks
     .sortBy() //sort by year (no arg needed)
-    .pipe((nums) => {
+    .thru((nums) => {
       if (nums.length > 1) {
-        return `${_.first(nums)} - ${_.last(nums)}`;
+        return `${_.head(nums)} - ${_.last(nums)}`;
       } else if (nums.length === 1) {
-        return _.first(nums);
+        return _.head(nums);
       } else {
         return "";
       }

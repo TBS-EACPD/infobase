@@ -67,7 +67,9 @@ function panels_of_interest(panel) {
   const similar_dependencies = _.chain(PanelRegistry.panels)
     .filter(
       (g) =>
+        // eslint-disable-next-line
         !_.isEmpty(
+          // eslint-disable-next-line
           _.union(
             _.intersection(g.depends_on, depends_on),
             _.intersection(g.info_deps, info_deps)

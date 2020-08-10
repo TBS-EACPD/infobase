@@ -71,7 +71,8 @@ const {
 
 const declare_panel = ({ panel_key, levels, panel_config_func }) => {
   if (!PanelRegistry.is_registered_panel_key(panel_key)) {
-    levels.forEach(
+    _.forEach(
+      levels,
       (level) =>
         new PanelRegistry({
           level,
@@ -114,7 +115,7 @@ const get_planned_fte_source_link = (subject) => {
 const TspanLineWrapper = ({ text, width, line_height = 1 }) => (
   <Fragment>
     {_.chain(text)
-      .thru((text) => text.split(/\s+/))
+      .thru((text) => _.split(text, /\s+/))
       .reduce(
         (lines, word) => {
           const [current_line, ...finished_lines] = _.reverse(lines);
