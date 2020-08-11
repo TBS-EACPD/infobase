@@ -993,7 +993,7 @@ planned_spending_header:
 planned_ftes_header:
   transform: [handlebars]
   en: |
-    {{year}} Number of Planned FTEs
+    {{year}} Number of Planned Full Time Equivalents
   fr: |
     Nombre d'ETP prévus pour {{year}} 
 
@@ -1007,7 +1007,7 @@ actual_spending_header:
 actual_ftes_header:
   transform: [handlebars]
   en: |
-    {{year}} Number of FTEs
+    {{year}} Number of Full Time Equivalents
   fr: |
     Nombre d'ETP pour {{year}} 
 
