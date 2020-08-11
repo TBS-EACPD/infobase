@@ -19,7 +19,7 @@ import { trivial_text_maker, year_templates } from "../../shared.js";
 const { std_years, planning_years } = year_templates;
 
 const actual_year = _.last(std_years);
-const planning_year = _.first(planning_years);
+const planning_year = _.head(planning_years);
 
 function create_rooted_resource_hierarchy({ year, root_subject }) {
   const get_resources = (subject) => get_resources_for_subject(subject, year);
@@ -48,7 +48,7 @@ function create_rooted_resource_hierarchy({ year, root_subject }) {
 
         return _.chain(subject.programs)
           .groupBy((prog) => prog.dept.name)
-          .map((progs, org_name) =>
+          .flatMap((progs, org_name) =>
             _.map(progs, (prog) => ({
               id: `${parent_id}-${prog.guid}`,
               data: {
@@ -71,39 +71,36 @@ function create_rooted_resource_hierarchy({ year, root_subject }) {
               },
             }))
           )
-          .flatten()
           .value();
       }
       case "dept": {
-        return _.chain(subject.crsos)
-          .map((crso) => ({
-            id: crso.guid,
-            data: {
-              subject: crso,
-              name: crso.name,
-              resources: get_resources(crso),
-              header: crso.plural,
-              defs: _.isEmpty(crso.description)
-                ? null
-                : [
-                    {
-                      term: description_term,
-                      def: (
-                        <div
-                          dangerouslySetInnerHTML={sanitized_dangerous_inner_html(
-                            crso.description
-                          )}
-                        />
-                      ),
-                    },
-                  ],
-            },
-          }))
-          .value();
+        return _.map(subject.crsos, (crso) => ({
+          id: crso.guid,
+          data: {
+            subject: crso,
+            name: crso.name,
+            resources: get_resources(crso),
+            header: crso.plural,
+            defs: _.isEmpty(crso.description)
+              ? null
+              : [
+                  {
+                    term: description_term,
+                    def: (
+                      <div
+                        dangerouslySetInnerHTML={sanitized_dangerous_inner_html(
+                          crso.description
+                        )}
+                      />
+                    ),
+                  },
+                ],
+          },
+        }));
       }
 
       case "crso": {
-        return subject.programs.map((prog) => ({
+        return _.map(subject.programs, (prog) => ({
           id: `${parent_id}-${prog.guid}`, //due to m2m tagging, we need to include parent id here
           data: {
             resources: get_resources(prog),

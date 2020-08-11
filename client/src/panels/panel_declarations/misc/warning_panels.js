@@ -194,8 +194,7 @@ export const declare_late_results_warning_panel = () =>
 // Assume that ONLY the most recent DP could possibly have late resources (or at least we only care about a banner for them). DRR resources are decoupled
 // from the document tabling, and it would be extreme (illegal, if results ever graduates from policy to law) for us to not get planned resources from a DP org for a full year.
 const depts_with_late_resources = _.chain(result_docs_in_tabling_order)
-  .filter(({ doc_type }) => doc_type === "dp")
-  .last()
+  .findLast(({ doc_type }) => doc_type === "dp")
   .get("late_resources_orgs")
   .value();
 export const declare_late_resources_panel = () =>

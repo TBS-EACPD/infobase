@@ -196,7 +196,7 @@ export const org_internal_hierarchy = ({
       href: crso.is_cr && href_generator(crso),
       dead: !crso.is_active,
       children: _.chain(crso.programs)
-        .filter((program) => !program.is_fake)
+        .reject((program) => program.is_fake)
         .map((prog) => ({
           name: prog.name,
           href: href_generator(prog),
@@ -239,7 +239,7 @@ export const program_hierarchy = ({
             show_cousins || is_parent(crso)
               ? _.chain(crso.programs)
                   .filter(show_siblings ? _.constant(true) : is_subject)
-                  .filter((program) => !program.is_fake)
+                  .reject((program) => program.is_fake)
                   .map((prog) => ({
                     name: prog.name,
                     current_subject: is_subject(prog),
@@ -292,7 +292,7 @@ export const tag_hierarchy = ({
         showChildren &&
         is_subject(tag) &&
         _.chain(tag.programs)
-          .filter((program) => !program.is_fake)
+          .reject((program) => program.is_fake)
           .map((prog) => ({
             name: prog.name,
             href: href_generator(prog),
@@ -364,7 +364,7 @@ export const crso_hierarchy = ({
                 dead: !crso.is_active,
                 //program
                 children: _.chain(crso.programs)
-                  .filter((program) => !program.is_fake)
+                  .reject((program) => program.is_fake)
                   .map((prg) => ({
                     level: prg.level,
                     name: prg.name,
@@ -415,7 +415,7 @@ export const crso_pi_hierarchy = ({
               href: href_generator(subject),
               // program
               children: _.chain(subject.programs)
-                .filter((program) => !program.is_fake)
+                .reject((program) => program.is_fake)
                 .map((prg) => ({
                   level: prg.level,
                   name: prg.name,
