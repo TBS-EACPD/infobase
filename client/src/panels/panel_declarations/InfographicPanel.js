@@ -51,7 +51,8 @@ class Panel_ extends React.Component {
         context.active_bubble_id,
         context.panel_key
       ) &&
-      window.location.href.replace(
+      _.replace(
+        window.location.href,
         window.location.hash,
         panel_href_template(
           subject,
@@ -168,6 +169,7 @@ export const TextPanel = (props) => {
 */
 
 //Dummy component that will be remapped to flexboxgrid columns
+// eslint-disable-next-line
 const Col = ({ children, size }) => null;
 Col.propTypes = {
   size: PropTypes.number.isRequired,

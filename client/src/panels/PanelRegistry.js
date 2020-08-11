@@ -34,6 +34,7 @@ class PanelRegistry {
   }
 
   static is_registered_panel_key(test_key) {
+    // eslint-disable-next-line
     return _.chain(panels)
       .keys(panels)
       .join()
@@ -47,8 +48,7 @@ class PanelRegistry {
     return _.filter(panels, (panel_obj) => {
       const tables_from_info_deps = _.chain(panel_obj.info_deps)
         .compact()
-        .map((stat_key) => tables_for_statistics(stat_key))
-        .flatten()
+        .flatMap((stat_key) => tables_for_statistics(stat_key))
         .value();
 
       return _.chain(panel_obj.depends_on)
@@ -77,7 +77,7 @@ class PanelRegistry {
 
   new_api_warnings() {
     if (window.is_dev) {
-      _.each(["layout_def", "text", "title"], (property) => {
+      _.forEach(["layout_def", "text", "title"], (property) => {
         if (this[property]) {
           // eslint-disable-next-line no-console
           console.warning(`PanelRegistry redundant property: ${property}`);
@@ -93,11 +93,11 @@ class PanelRegistry {
     //Additionally, every panel only has one object like this, so this object contains nothing about
 
     //we copy every thing except render and calculate, which follow a specific API
-    this._inner_calculate = def.calculate || (() => true);
+    this._inner_calculate = def.calculate || _.constant(true);
     this._inner_render = def.render;
     const to_assign = _.omit(def, ["render", "calculate"]);
     const full_key = create_panel_key(def.key, def.level);
-    Object.assign(this, default_args, to_assign, { full_key });
+    _.assign(this, default_args, to_assign, { full_key });
     this.constructor.register_instance(this);
   }
 
@@ -223,11 +223,9 @@ function panels_with_key(key, level) {
 function tables_for_panel(panel_key, subject_level) {
   const panel_objs = panels_with_key(panel_key, subject_level);
   return _.chain(panel_objs)
-    .map("info_deps")
-    .flatten()
-    .map(tables_for_statistics)
-    .flatten()
-    .union(_.chain(panel_objs).map("depends_on").flatten().value())
+    .flatMap("info_deps")
+    .flatMap(tables_for_statistics)
+    .union(_.flatMap(panel_objs, "depends_on"))
     .uniqBy()
     .value();
 }
