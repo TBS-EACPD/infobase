@@ -18,7 +18,7 @@ class Queries {
     this.dept = subject && subject.level === "dept" && subject.id;
     this.subject = subject;
     this.data = data;
-    _.extend(this, table.queries);
+    _.assignIn(this, table.queries);
   }
 
   sort(func, reverse) {
@@ -41,24 +41,23 @@ class Queries {
   sum_cols(rows, cols) {
     // ar will be an array of
 
-    var initial = _.map(cols, function () {
-      return 0;
-    });
+    var initial = _.map(cols, _.constant(0));
     function reducer(x, y) {
       return _.map(x, function (__, i) {
         return x[i] + y[i];
       });
     }
-    var total = _(rows)
+    var total = _.chain(rows)
       .map(function (row) {
         return _.map(cols, function (col) {
           return row[col];
         });
       })
-      .reduce(reducer, initial);
+      .reduce(reducer, initial)
+      .value();
 
     // deal with percentage columns
-    _.each(cols, (col, i) => {
+    _.forEach(cols, (col, i) => {
       // jump to [col_from_nick](base_tables.html#col_from_nick)
       var type = this.table.col_from_nick(col).type;
       if (type === "percentage") {
@@ -94,7 +93,7 @@ class Queries {
     }
     var vals = this.sum_cols(data, cols);
     if (format) {
-      _.each(cols, (col) => {
+      _.forEach(cols, (col) => {
         // jump to [col_from_nick](base_tables.html#col_from_nick)
         var type = this.table.col_from_nick(col).type;
         vals[col] = FORMAT.formatter(type, vals[col]);
@@ -173,12 +172,12 @@ class Queries {
             return x + y;
           })
           .value() + 1;
-      _.each(vals[gross_percentage], function (val, i, list) {
+      _.forEach(vals[gross_percentage], function (val, i, list) {
         vals[gp_colname][i] = val / sum;
       });
     }
     if (format) {
-      _.each(cols, (col) => {
+      _.forEach(cols, (col) => {
         var type = this.table.col_from_nick(col).type;
         vals[col] = FORMAT.formatter(type, vals[col]);
       });
@@ -205,13 +204,13 @@ class Queries {
     // x is the number of rows requested
     // sorts by the first col
     options = options || {};
-    _.extend(options, { sorted: true, reverse: true });
+    _.assignIn(options, { sorted: true, reverse: true });
     // call ['this.get_cols'](#get_cols)
     var all_vals = this.get_cols(cols, options);
     if (options.zip) {
       all_vals = _.take(all_vals, x);
     } else {
-      _.each(all_vals, function (list, key) {
+      _.forEach(all_vals, function (list, key) {
         all_vals[key] = _.take(list, x);
       });
     }
@@ -225,9 +224,12 @@ class Queries {
     // * `options` :
     //
     var each_mapped_obj = (obj) =>
-      _.every(
-        _.toPairs(criteria).map(([key, val]) => obj[key] === criteria[key])
-      );
+      _.chain(criteria)
+        .toPairs()
+        .map(([key, val]) => obj[key] === criteria[key])
+        .every()
+        .value();
+
     return _.find(this.data, each_mapped_obj);
   }
 
@@ -238,15 +240,17 @@ class Queries {
     // * `options` :
     //
     var each_mapped_obj = (obj) =>
-      _.every(
-        _.toPairs(criteria).map(([key, val]) => {
+      _.chain(criteria)
+        .toPairs()
+        .map(([key, val]) => {
           if (_.isArray(criteria[key])) {
             return _.includes(criteria[key], obj[key]);
           } else {
             return obj[key] === criteria[key];
           }
         })
-      );
+        .every()
+        .value();
     return _.filter(this.data, each_mapped_obj);
   }
 
@@ -287,8 +291,7 @@ function query_adapter(subject) {
     _.includes(["tag", "crso"], subject.level)
   ) {
     const rows = _.chain(subject.programs)
-      .map((program) => this.programs.get(program))
-      .flatten()
+      .flatMap((program) => this.programs.get(program))
       .compact()
       .value();
     return new Queries(this, rows, subject);

@@ -24,7 +24,7 @@ export class ErrorBoundary extends React.Component {
   }
   catch_stale_client_error_case() {
     const unique_query_param =
-      Date.now() + Math.random().toString().replace(".", "");
+      Date.now() + _.replace(Math.random().toString(), ".", "");
 
     // Stale clients are our most likely production errors, always check for and attempt to handle them
     // That is, reload the page without cache if the client/CDN sha's are mismatched (and the build is non-dev)
@@ -47,7 +47,7 @@ export class ErrorBoundary extends React.Component {
   log_error_and_display_error_page() {
     if (!window.is_dev) {
       log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
+        SUBAPP: _.replace(window.location.hash, "#", ""),
         MISC1: "ERROR_IN_PROD",
         MISC2: this.state.error.toString(),
       });
@@ -106,6 +106,7 @@ export class ErrorBoundary extends React.Component {
               href="#start"
               onClick={() => {
                 // React router's dead at this point, so hack our way home
+                // eslint-disable-next-line
                 window.location.replace("#start");
                 window.location.reload();
               }}

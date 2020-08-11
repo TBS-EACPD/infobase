@@ -45,7 +45,7 @@ function add_child(x) {
   if (!_.isArray(x)) {
     x = [x];
   }
-  _.each(x, (col) => {
+  _.forEach(x, (col) => {
     if (_.isString(col)) {
       col = { header: { en: col, fr: col } };
     }
@@ -122,7 +122,7 @@ export class Table extends mix().with(staticStoreMixin) {
 
     const name = name_def[window.lang];
 
-    Object.assign(
+    _.assign(
       this,
       this.constructor.default_props(),
       _.omit(table_def, ["title", "name", "tags"]),
@@ -158,11 +158,13 @@ export class Table extends mix().with(staticStoreMixin) {
       this.dimensions = [trivial_dimension];
     }
 
+    /* eslint-disable */
+    //this line right here causes eslint to go crazy
     const to_chain = _.chain(this.flat_headers);
 
     to_chain
       .filter((col) => !_.isUndefined(col.formula))
-      .each((col) => {
+      .forEach((col) => {
         var formula = col.formula;
         col.formula = (data) => formula(this, data);
       })
@@ -177,7 +179,7 @@ export class Table extends mix().with(staticStoreMixin) {
           _.isUndefined(col.formula)
         );
       })
-      .each(function (col) {
+      .forEach(function (col) {
         col.formula = function (data) {
           if (_.isArray(data)) {
             const to_sum = _.map(data, col.nick || col.wcag);
@@ -261,8 +263,7 @@ export class Table extends mix().with(staticStoreMixin) {
     //const depth = _.max(this.flat_headers,
     const col_structure = _.chain(col_nicks)
       .map((nick) => this.col_from_nick(nick))
-      .map(ancestor_cols)
-      .flatten()
+      .flatMap(ancestor_cols)
       .uniqBy()
       .map((col) => ({
         colspan: colspan_for_col(col),
@@ -298,7 +299,7 @@ export class Table extends mix().with(staticStoreMixin) {
   old_presentation_ready_headers() {
     var flat_headers = this.flat_headers;
     var headers = [];
-    _.each(flat_headers, function (header) {
+    _.forEach(flat_headers, function (header) {
       if (all_children_hidden(header)) {
         return;
       }
@@ -392,7 +393,7 @@ export class Table extends mix().with(staticStoreMixin) {
     data = _.chain(parsed_data)
       .tail()
       .map(row_transf)
-      .each((row) => this.process_mapped_row(row))
+      .forEach((row) => this.process_mapped_row(row))
       .groupBy((row) => row.dept === "ZGOC")
       .value();
     this.csv_headers = _.head(parsed_data);
@@ -401,7 +402,7 @@ export class Table extends mix().with(staticStoreMixin) {
 
     this.depts = {};
 
-    _.each(this.data, (row) => {
+    _.forEach(this.data, (row) => {
       if (!this.depts[row.dept]) {
         this.depts[row.dept] = [row];
       } else {
@@ -421,49 +422,61 @@ export class Table extends mix().with(staticStoreMixin) {
       var mapped_row = mapper.map(row);
       // turn the array of data into an object with keys based on the defined columns
       var row_obj = _.zipObject(this.unique_headers, mapped_row);
-      _.toPairs(row_obj).forEach((pair) => {
-        const [key, val] = pair;
-        const type = this.col_from_nick(key).type;
-        // in case we have numbers represented as string, we'll convert them to integers
-        // need to handle special cases of '.', '', and '-'
-        if (
-          _.includes(
-            ["percentage", "decimal", "decimal1", "percentage1", "percentage2"],
-            type
-          ) &&
-          !_.isNaN(parseFloat(val))
-        ) {
-          row_obj[key] = parseFloat(val);
-        } else if (
-          (type === "big_int" || type === "int") &&
-          !_.isNaN(parseFloat(val))
-        ) {
-          row_obj[key] = parseFloat(val);
-        } else if (
-          _.includes([".", "", "-"], val) &&
-          _.includes(
-            [
-              "percentage",
-              "decimal",
-              "decimal1",
-              "percentage1",
-              "percentage2",
-              "big_int",
-              "big_int",
-              "int",
-            ],
-            type
-          )
-        ) {
-          row_obj[key] = 0;
-        }
-      });
-      _.toPairs(row_obj).forEach(([key, val]) => {
-        const col = this.col_from_nick(key);
-        if (col.formula && _.isUndefined(col.formula.default)) {
-          row_obj[key] = col.formula(row_obj);
-        }
-      });
+      _.chain(row_obj)
+        .toPairs()
+        .forEach((pair) => {
+          const [key, val] = pair;
+          const type = this.col_from_nick(key).type;
+          // in case we have numbers represented as string, we'll convert them to integers
+          // need to handle special cases of '.', '', and '-'
+          if (
+            _.includes(
+              [
+                "percentage",
+                "decimal",
+                "decimal1",
+                "percentage1",
+                "percentage2",
+              ],
+              type
+            ) &&
+            !_.isNaN(parseFloat(val))
+          ) {
+            row_obj[key] = parseFloat(val);
+          } else if (
+            (type === "big_int" || type === "int") &&
+            !_.isNaN(parseFloat(val))
+          ) {
+            row_obj[key] = parseFloat(val);
+          } else if (
+            _.includes([".", "", "-"], val) &&
+            _.includes(
+              [
+                "percentage",
+                "decimal",
+                "decimal1",
+                "percentage1",
+                "percentage2",
+                "big_int",
+                "big_int",
+                "int",
+              ],
+              type
+            )
+          ) {
+            row_obj[key] = 0;
+          }
+        })
+        .value();
+      _.chain(row_obj)
+        .toPairs()
+        .forEach(([key, val]) => {
+          const col = this.col_from_nick(key);
+          if (col.formula && _.isUndefined(col.formula.default)) {
+            row_obj[key] = col.formula(row_obj);
+          }
+        })
+        .value();
 
       row_obj.csv_index = index;
 

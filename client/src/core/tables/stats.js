@@ -6,7 +6,7 @@ const stats = {
   add_all_years(add, context_prefix, years, amounts) {
     let total = 0;
     let prefix = context_prefix === "" ? "" : context_prefix + "_";
-    _.each(years, (year, i) => {
+    _.forEach(years, (year, i) => {
       var amount;
       if (_.isFunction(amounts)) {
         amount = amounts(year, i);
@@ -38,7 +38,7 @@ const stats = {
     var std_dev;
     var co_var;
     // find the min and max amouts and the years in which they occurred
-    _.each(amounts, function (amount, index) {
+    _.forEach(amounts, function (amount, index) {
       total += amount;
       if (amount > max) {
         max = amount;
@@ -104,13 +104,12 @@ const stats = {
     var max_avg = averages[max_index];
     var max_co_var =
       Math.sqrt(
-        _.reduce(
-          _.tail(max_row),
-          function (x, y) {
+        _.chain(max_row)
+          .tail()
+          .reduce(function (x, y) {
             return x + Math.pow(y - max_avg, 2);
-          },
-          0
-        ) / _.tail(amounts[0]).length
+          }, 0)
+          .value() / _.tail(amounts[0]).length
       ) / max_avg;
 
     add(context_prefix + "_top", max_label);
@@ -136,13 +135,12 @@ const stats = {
 
       var min_co_var =
         Math.sqrt(
-          _.reduce(
-            _.tail(min_row),
-            function (x, y) {
+          _.chain(min_row)
+            .tail()
+            .reduce(function (x, y) {
               return x + Math.pow(y - min_avg, 2);
-            },
-            0
-          ) / _.tail(amounts[0]).length
+            }, 0)
+            .value() / _.tail(amounts[0]).length
         ) / min_avg;
       add({
         key: context_prefix + "_bottom_high_var",
@@ -233,13 +231,12 @@ const stats = {
     var max_avg = averages[max_index];
     var max_co_var =
       Math.sqrt(
-        _.reduce(
-          _.tail(max_row),
-          function (x, y) {
+        _.chain(max_row)
+          .tail()
+          .reduce(function (x, y) {
             return x + Math.pow(y - max_avg, 2);
-          },
-          0
-        ) / _.tail(amounts[0]).length
+          }, 0)
+          .value() / _.tail(amounts[0]).length
       ) / max_avg;
 
     add(context_prefix + "_top", max_label);
@@ -265,13 +262,12 @@ const stats = {
 
       var min_co_var =
         Math.sqrt(
-          _.reduce(
-            _.tail(min_row),
-            function (x, y) {
+          _.chain(min_row)
+            .tail()
+            .reduce(function (x, y) {
               return x + Math.pow(y - min_avg, 2);
-            },
-            0
-          ) / _.tail(amounts[0]).length
+            }, 0)
+            .value() / _.tail(amounts[0]).length
         ) / min_avg;
 
       add({

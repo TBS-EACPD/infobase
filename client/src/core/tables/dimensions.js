@@ -168,7 +168,7 @@ export const trivial_dimension = {
 
 export function attach_dimensions(table) {
   // create additional, more specialized horizontal dimensions
-  _.each(table.dimensions, (dimension, ix) => {
+  _.forEach(table.dimensions, (dimension, ix) => {
     const table_attr_name = dimension.title_key;
     table[table_attr_name] = make_horizontal_func(dimension.filter_func, table);
 
@@ -197,10 +197,10 @@ export function fill_dimension_columns(table) {
   if (!enhanced_tables_by_id[table.id]) {
     _.chain(table.dimensions)
       .reject("exclude_from_rpb")
-      .each((dim_obj) => {
+      .forEach((dim_obj) => {
         const dim_key = dim_obj.title_key;
         const bound_filter_func = dim_obj.filter_func({ table });
-        _.each(table.data, (row) => {
+        _.forEach(table.data, (row) => {
           row[dim_key] = bound_filter_func(row);
         });
       })

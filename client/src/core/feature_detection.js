@@ -1,8 +1,8 @@
 const is_IE = function () {
-  const user_agent = navigator.userAgent.toLowerCase();
-  return user_agent.indexOf("msie") !== -1
-    ? parseInt(user_agent.split("msie")[1])
-    : user_agent.indexOf("trident") !== -1;
+  const user_agent = _.toLower(navigator.userAgent);
+  return _.includes(user_agent, "msie")
+    ? parseInt(_.split(user_agent, "msie")[1])
+    : _.includes(user_agent, "trident");
 };
 
 const is_mobile = function () {

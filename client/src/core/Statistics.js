@@ -43,7 +43,7 @@ function get_info(subject, infokeys) {
 class Statistics extends mix().with(staticStoreMixin) {
   constructor(def) {
     super();
-    Object.assign(this, def);
+    _.assign(this, def);
   }
   static create_and_register(def) {
     const instance = new Statistics(def);
@@ -95,7 +95,7 @@ class Statistics extends mix().with(staticStoreMixin) {
     const prefix = this.level + "_";
     //add has two API, add({ key: ... , val: ... }) or add('key', val)
     const add = (obj, num) => {
-      const key = (prefix + (obj.key || obj)).replace(/(\{|\})/g, ""); //turn stuff like {{last_year}} into last_year
+      const key = _.replace(prefix + (obj.key || obj), /(\{|\})/g, ""); //turn stuff like {{last_year}} into last_year
       const val = obj.value || num;
       stats[key] = val;
     };
@@ -115,8 +115,7 @@ class Statistics extends mix().with(staticStoreMixin) {
 function tables_for_statistics(stat_key) {
   const stat_obj = Statistics.lookup(stat_key);
   return _.chain(stat_obj.info_deps)
-    .map(tables_for_statistics)
-    .flatten()
+    .flatMap(tables_for_statistics)
     .union(stat_obj.table_deps)
     .uniqBy()
     .value();

@@ -243,10 +243,10 @@ const synchronize_link = (target_el_selector, link_modifier_func) => {
   let newHash = _.isFunction(link_modifier_func)
     ? link_modifier_func(document.location.hash)
     : document.location.hash;
-  newHash = newHash.split("#")[1] || "";
+  newHash = _.split(newHash, "#")[1] || "";
 
   if (_.get(el_to_update, "href")) {
-    const link = _.first(el_to_update.href.split("#"));
+    const link = _.chain(el_to_update.href).split("#").head().value();
     if (link) {
       el_to_update.href = `${link}#${newHash}`;
     }

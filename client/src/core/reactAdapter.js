@@ -8,7 +8,7 @@ class ReactContentRenderer {
     this.nodes.push(node);
   }
   unmountAll() {
-    _.each(this.nodes, (node) => ReactDOM.unmountComponentAtNode(node));
+    _.forEach(this.nodes, (node) => ReactDOM.unmountComponentAtNode(node));
     this.nodes = [];
   }
 }

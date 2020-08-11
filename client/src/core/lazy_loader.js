@@ -22,7 +22,7 @@ function load(table_objs) {
   return Promise.all(
     _.chain(table_objs)
       .reject(_.property("loaded")) //ignore tables that are already loaded
-      .map((table) => table.load())
+      .invokeMap("load")
       .value()
   );
 }
@@ -46,13 +46,8 @@ function ensure_loaded({
   footnotes_for: footnotes_subject,
 }) {
   const table_set = _.chain(table_keys)
-    .union(
-      _.chain(panel_keys)
-        .map((key) => tables_for_panel(key, subject_level))
-        .flatten()
-        .value()
-    )
-    .union(_.chain(stat_keys).map(tables_for_statistics).flatten().value())
+    .union(_.flatMap(panel_keys, (key) => tables_for_panel(key, subject_level)))
+    .union(_.flatMap(stat_keys, tables_for_statistics))
     .uniqBy()
     .map((table_key) => Table.lookup(table_key))
     .value();

@@ -16,7 +16,7 @@ const chance_increment = 0.2;
 const survey_campaign_end_date = new Date(2020, 3, 31).getTime();
 
 const get_path_root = (path) =>
-  _.chain(path).replace(/^\//, "").split("/").first().value();
+  _.chain(path).replace(/^\//, "").split("/").head().value();
 
 const seconds_in_a_half_year = 60 * 60 * 24 * (365 / 2);
 const should_reset_local_storage = () =>
@@ -93,7 +93,7 @@ export const SurveyPopup = withRouter(
       }
 
       log_standard_event({
-        SUBAPP: window.location.hash.replace("#", "") || "start",
+        SUBAPP: _.replace(window.location.hash, "#", "") || "start",
         MISC1: "SURVEY_POPUP",
         MISC2: `interaction: ${button_type}`,
       });
@@ -121,7 +121,7 @@ export const SurveyPopup = withRouter(
 
       if (should_show) {
         log_standard_event({
-          SUBAPP: window.location.hash.replace("#", "") || "start",
+          SUBAPP: _.replace(window.location.hash, "#", "") || "start",
           MISC1: "SURVEY_POPUP",
           MISC2: "displayed",
         });
