@@ -9,6 +9,10 @@ import { IconDownload } from "../icons/icons.js";
 
 const { text_maker } = create_text_maker_component(text);
 
+/* eslint-disable */
+//map(_.identity) causes lint errors
+//maybe we could change that to values()?
+
 // USAGE NOTE:
 // This component is somewhat generalized, but was developed primarily for printing panels and is untested elsewhere.
 // Use with caution, and note that it already contains a lot of code for handling secial cases that occur in panels.
@@ -141,10 +145,13 @@ export class PDFGenerator extends React.Component {
       );
       _.forEach(textElements, (text) => {
         if (text.tagName === "UL") {
-          _.forEach(_.map(text.children, _.identity), (li) => {
-            pdf.fromHTML(li, 10, this.current_height, { width: width });
-            this.current_height += get_text_height(pdf, li.innerText);
-          });
+          _.chain(text.children)
+            .map(_.identity)
+            .forEach((li) => {
+              pdf.fromHTML(li, 10, this.current_height, { width: width });
+              this.current_height += get_text_height(pdf, li.innerText);
+            })
+            .value();
         } else {
           pdf.fromHTML(text, 1, this.current_height, { width: width });
           this.current_height += get_text_height(pdf, text.innerText);

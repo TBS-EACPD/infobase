@@ -9,7 +9,7 @@ export const LogInteractionEvents = ({
   const log_event = _.debounce(
     (event) =>
       log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
+        SUBAPP: _.replace(window.location.hash, "#", ""),
         MISC1: _.isFunction(event_type) ? event_type(event) : event_type,
         MISC2: _.isFunction(event_details)
           ? event_details(event)

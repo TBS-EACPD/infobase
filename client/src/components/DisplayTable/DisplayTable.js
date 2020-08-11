@@ -57,7 +57,7 @@ export class DisplayTable extends React.Component {
       : _.chain(col_configs_with_defaults)
           .pickBy((col) => col.is_sortable)
           .keys()
-          .first()
+          .head()
           .value();
 
     const searches = _.chain(col_configs_with_defaults)
@@ -181,7 +181,7 @@ export class DisplayTable extends React.Component {
 
     const all_ordered_col_keys = _.chain(col_configs_with_defaults)
       .map(({ index }, key) => [index, key])
-      .sortBy(_.first)
+      .sortBy(_.head)
       .map(_.last)
       .value();
     const visible_ordered_col_keys = _.intersection(

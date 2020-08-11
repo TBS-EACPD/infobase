@@ -5,6 +5,11 @@ import { TM } from "./TextMaker.js";
   children : JSX (content to be clipped), 
   clipHeight: css height string,
 */
+
+/* eslint-disable */
+//map(_.identity) causing lint errors
+//maybe we could replace that with values()
+
 export class HeightClipper extends React.Component {
   constructor() {
     super();
@@ -28,13 +33,10 @@ export class HeightClipper extends React.Component {
     // do not want any of that node's children to be tab-selectable
     // if no .untabbable_children div, then need to reset the tabindex/focusable attributes of the height clipper children
     if (untabbable_children_node) {
-      _.map(untabbable_children_node.querySelectorAll("*"), _.identity).forEach(
-        (node) => {
-          if (
-            !_.isUndefined(node.tabIndex) &&
-            !_.isNull(node.tabIndex) &&
-            node.tabIndex >= 0
-          ) {
+      _.chain(untabbable_children_node.querySelectorAll("*"))
+        .map(_.identity)
+        .forEach((node) => {
+          if (!_.isNil(node.tabIndex) && node.tabIndex >= 0) {
             const tabindex_attr = node.getAttribute("tabindex");
             if (tabindex_attr) {
               node.setAttribute("prev-tabindex", tabindex_attr);
@@ -42,32 +44,32 @@ export class HeightClipper extends React.Component {
 
             node.setAttribute("tabindex", "-999");
           }
-        }
-      );
+        })
+        .value();
 
-      _.map(
-        untabbable_children_node.querySelectorAll("svg"),
-        _.identity
-      ).forEach((node) => node.setAttribute("focusable", "false"));
+      _.chain(untabbable_children_node.querySelectorAll("svg"))
+        .map(_.identity)
+        .forEach((node) => node.setAttribute("focusable", "false"))
+        .value();
     } else {
-      _.map(
-        height_clipper_node.querySelectorAll('[tabindex="-999"]'),
-        _.identity
-      ).forEach((node) => node.removeAttribute("tabindex"));
+      _.chain(height_clipper_node.querySelectorAll('[tabindex="-999"]'))
+        .map(_.identity)
+        .forEach((node) => node.removeAttribute("tabindex"))
+        .value();
 
-      _.map(
-        height_clipper_node.querySelectorAll("[prev-tabindex]"),
-        _.identity
-      ).forEach((node) => {
-        const previous_tabindex = node.getAttribute("prev-tabindex");
-        node.setAttribute("tabindex", previous_tabindex);
-        node.removeAttribute("prev-tabindex");
-      });
+      _.chain(height_clipper_node.querySelectorAll("[prev-tabindex]"))
+        .map(_.identity)
+        .forEach((node) => {
+          const previous_tabindex = node.getAttribute("prev-tabindex");
+          node.setAttribute("tabindex", previous_tabindex);
+          node.removeAttribute("prev-tabindex");
+        })
+        .value();
 
-      _.map(
-        height_clipper_node.querySelectorAll("svg"),
-        _.identity
-      ).forEach((node) => node.removeAttribute("focusable"));
+      _.chain(height_clipper_node.querySelectorAll("svg"))
+        .map(_.identity)
+        .forEach((node) => node.removeAttribute("focusable"))
+        .value();
     }
   }
   measureHeightAndUpdateState() {

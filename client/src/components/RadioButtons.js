@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 export const RadioButtons = ({ options, onChange }) => (
   <div className="radio-buttons">
-    {options.map(({ display, id, active }) => (
+    {_.map(options, ({ display, id, active }) => (
       <button
         key={id}
         aria-pressed={active}

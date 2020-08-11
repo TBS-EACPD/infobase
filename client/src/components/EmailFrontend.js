@@ -19,7 +19,7 @@ const { TM, text_maker } = create_text_maker_component(text);
 const get_values_for_automatic_fields = (automatic_fields) => {
   const automatic_field_getters = {
     sha: () => window.sha,
-    route: () => window.location.hash.replace("#", "") || "start",
+    route: () => _.replace(window.location.hash, "#", "") || "start",
     lang: () => window.lang,
     app_version: () => (window.is_a11y_mode ? "a11y" : "standard"),
     client_id: () => get_client_id(),
@@ -131,7 +131,7 @@ class EmailFrontend extends React.Component {
     // log server response to submitted completed template
     if (!awaiting_backend_response && sent_to_backend) {
       log_standard_event({
-        SUBAPP: window.location.hash.replace("#", "") || "start",
+        SUBAPP: _.replace(window.location.hash, "#", "") || "start",
         MISC1: "EMAIL_FRONTEND",
         MISC2: `${template_name}: ${backend_response.error_message}`,
       });

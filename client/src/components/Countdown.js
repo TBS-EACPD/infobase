@@ -18,7 +18,7 @@ export class Countdown extends React.Component {
     }
   }
   componentWillUnmount() {
-    this.countdown_timeouts.forEach((countdown_timeout) =>
+    _.forEach(this.countdown_timeouts, (countdown_timeout) =>
       clearTimeout(countdown_timeout)
     );
   }

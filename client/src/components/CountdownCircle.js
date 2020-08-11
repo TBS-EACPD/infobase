@@ -6,7 +6,7 @@ import { Countdown } from "./Countdown.js";
 
 const split_value_and_units = (size) => {
   const unit = /[a-z]+$/.exec(size);
-  const value = size.replace(unit, "");
+  const value = _.replace(size, unit, "");
   return [value, unit];
 };
 

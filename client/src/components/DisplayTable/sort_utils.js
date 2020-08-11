@@ -16,8 +16,8 @@ export const default_subject_name_sort_func = (
   subject_id_b
 ) => {
   if (subject_class && subject_id_a && subject_id_b) {
-    const a_name = subject_class.lookup(subject_id_a).name.toUpperCase();
-    const b_name = subject_class.lookup(subject_id_b).name.toUpperCase();
+    const a_name = _.toUpper(subject_class.lookup(subject_id_a).name);
+    const b_name = _.toUpper(subject_class.lookup(subject_id_b).name);
     return sort_func_template(a_name, b_name);
   }
   return 0;

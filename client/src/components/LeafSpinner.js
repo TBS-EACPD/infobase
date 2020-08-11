@@ -33,7 +33,7 @@ export const LeafSpinner = ({ config_name }) => {
         left: "-50%",
       },
       svg_modifier: (svg) =>
-        svg
+        _.chain(svg)
           .replace(
             `stroke="${window.infobase_color_constants.primaryColor}"`,
             'stroke="#FFF"'
@@ -43,13 +43,14 @@ export const LeafSpinner = ({ config_name }) => {
             'stroke="#FFF"'
           )
           .replace('fill="#FF0000"', 'fill="#FFF"')
-          .replace("faded-background--true", "faded-background--false"),
+          .replace("faded-background--true", "faded-background--false")
+          .value(),
     },
   };
 
   const default_config_name = _.chain(leaf_spinner_configs)
     .keys()
-    .first()
+    .head()
     .value();
 
   const {
