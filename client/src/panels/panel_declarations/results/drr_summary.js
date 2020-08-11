@@ -97,7 +97,7 @@ const StatusGrid = (props) => {
   );
 
   const data = _.chain(props)
-    .pickBy((val, key) => key)
+    .pickBy((val, key) => (key && val > 0) || future === total)
     .toPairs()
     .groupBy(([key, val]) => key)
     .map((amounts, status_key) => {
@@ -192,7 +192,7 @@ class PercentageViz extends React.Component {
       .value();
 
     const default_selected =
-      _.without(present_ids, "future").length > 1
+      _.reject(present_ids, (value, key) => key === "future").length > 0
         ? _.without(all_ids, "future")
         : all_ids;
 
