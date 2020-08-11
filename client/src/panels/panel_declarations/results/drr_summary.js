@@ -96,8 +96,10 @@ const StatusGrid = (props) => {
     total < 100 && "IconArrayItem__Large"
   );
 
+  const is_single_indicator = _.some(props, (value) => value === total);
+
   const data = _.chain(props)
-    .pickBy((val, key) => (key && val > 0) || future === total)
+    .pickBy((val, key) => val > 0 || is_single_indicator)
     .toPairs()
     .groupBy(([key, val]) => key)
     .map((amounts, status_key) => {
