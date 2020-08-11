@@ -119,7 +119,7 @@ function create_new_path(cur_params, new_param, new_val) {
       new_val ? (new_get_changes = new_val) : (new_get_changes = "");
       new_val
         ? (new_year = year_to_year_changes[cur_params.year])
-        : (new_year = cur_params.year.split(":")[0]);
+        : (new_year = _.split(cur_params.year, ":")[0]);
       break;
   }
   const new_path = `/treemap/${new_perspective}/${new_color_var}/${new_filter_var}/${new_year}/${new_get_changes}`;
@@ -204,9 +204,9 @@ export class TreeMapControls extends React.Component {
                   ? _.map(year_changes[perspective], (id) => ({
                       id,
                       display: `${run_template(
-                        "{{" + id.split(":")[0] + "}}"
+                        "{{" + _.split(id, ":")[0] + "}}"
                       )} ${text_maker("to")} ${run_template(
-                        "{{" + id.split(":")[1] + "}}"
+                        "{{" + _.split(id, ":")[1] + "}}"
                       )}`,
                       active: id === year,
                     }))
@@ -310,7 +310,7 @@ class TreeMapLabeledBox extends React.Component {
 
 const TreeMapRadioButtons = ({ options, onChange }) => (
   <div className="treemap-options">
-    {options.map(({ display, id, active }) => (
+    {_.map(options, ({ display, id, active }) => (
       <button
         key={id}
         aria-pressed={!!active}

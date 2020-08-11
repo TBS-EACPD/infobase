@@ -11,7 +11,7 @@ const funcs = {
     _.includes(arr, el) ? _.without(arr, el) : arr.concat([el]),
 
   //shortcut for Object.assign
-  immutate: (obj, ...to_merge) => Object.assign({}, obj, ...to_merge),
+  immutate: (obj, ...to_merge) => _.assign({}, obj, ...to_merge),
 
   //in an array, return all the indices of elements that match a predicate
   findIndices: (arr, predicate) => {

@@ -124,7 +124,7 @@ export class TreeMap extends React.Component {
       if (d.children && d.data.value2 !== _.sumBy(d.children, "data.value2")) {
         const difference = d.data.value2 - _.sumBy(d.children, "data.value2");
         const total_sum = _.sumBy(d.children, "data.value2");
-        _.each(d.children, (child) => {
+        _.forEach(d.children, (child) => {
           const frac_of_total = child.data.value2 / total_sum;
           child.data.value2 += difference * frac_of_total;
         });
@@ -236,6 +236,7 @@ export class TreeMap extends React.Component {
 
       // add class and click handler to all divs with children
       if (!window.feature_detection.is_mobile()) {
+        // eslint-disable-next-line
         main
           .filter((d) => d.children)
           .classed("TreeMap__Division", true)
@@ -253,6 +254,7 @@ export class TreeMap extends React.Component {
             transition(d);
           });
       } else {
+        // eslint-disable-next-line
         main.filter((d) => d.children).classed("TreeMap__Division", true);
       }
 

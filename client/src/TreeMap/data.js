@@ -29,7 +29,7 @@ function header_col(perspective, year) {
     perspective === "tp" ||
     perspective === "vote_stat"
   ) {
-    return `{{${year}}}${year.startsWith("pa_") ? "exp" : ""}`; // ignore auth
+    return `{{${year}}}${_.startsWith(year, "pa_") ? "exp" : ""}`; // ignore auth
   } else if (perspective === "ftes" || perspective === "so") {
     return `{{${year}}}`;
   }
@@ -39,7 +39,7 @@ function header_col(perspective, year) {
 function recurse_adjust_size(node, parent_ratio) {
   const new_size = node.size * parent_ratio;
   _.set(node, "size", new_size);
-  _.each(node.children, (child) => {
+  _.forEach(node.children, (child) => {
     recurse_adjust_size(child, new_size / node.amount);
   });
 }
@@ -56,7 +56,7 @@ function group_smallest(
   }
   if (should_recurse) {
     //apply recursion first
-    _.each(node_list, (child) => {
+    _.forEach(node_list, (child) => {
       child.children = group_smallest(
         child.children,
         node_creator,
@@ -82,7 +82,7 @@ function group_smallest(
     if (new_node.size < cutoff && should_adjust_size) {
       const old_size = new_node.size;
       _.set(new_node, "size", cutoff);
-      _.each(new_node.children, (child) => {
+      _.forEach(new_node.children, (child) => {
         recurse_adjust_size(child, cutoff / old_size);
       });
     }
@@ -104,10 +104,11 @@ function group_smallest(
     // we want to avoid cases where there are nodes that are too tiny to see
     // e.g. DRF > treasury board > PSIC
     const old_node_list = _.without(node_list, ...tiny_nodes);
-    tiny_nodes = _.each(tiny_nodes, function (item) {
+    // eslint-disable-next-line
+    tiny_nodes = _.forEach(tiny_nodes, function (item) {
       const old_size = item.size;
       _.set(item, "size", cutoff);
-      _.each(item.children, (child) => {
+      _.forEach(item.children, (child) => {
         recurse_adjust_size(child, cutoff / old_size);
       });
     });
@@ -121,7 +122,7 @@ function group_smallest(
 function prep_nodes(node, perspective, get_changes) {
   const { children } = node;
   if (!_.isEmpty(children)) {
-    _.each(children, (child) => {
+    _.forEach(children, (child) => {
       prep_nodes(child, perspective, get_changes);
     });
     if (!node.amount) {
@@ -129,15 +130,17 @@ function prep_nodes(node, perspective, get_changes) {
     }
     if (!node.ftes) {
       // ok this is terrible but I swear to god nothing I tried that was more concise worked
-      node.ftes = _.chain(children)
-        .reduce(function (memo, item) {
+      node.ftes = _.reduce(
+        children,
+        function (memo, item) {
           if (item.ftes) {
             return memo + item.ftes;
           } else {
             return memo;
           }
-        }, 0)
-        .value();
+        },
+        0
+      );
     }
     if (get_changes) {
       perspective === "drf_ftes"
@@ -146,7 +149,7 @@ function prep_nodes(node, perspective, get_changes) {
     } else {
       node.size = _.sumBy(children, "size");
     }
-    _.each(children, (n) => {
+    _.forEach(children, (n) => {
       _.set(n, "parent_amount", node.amount);
       _.set(n, "parent_name", node.name);
       if (node.ftes) {
@@ -176,7 +179,7 @@ export async function load_data() {
 }
 
 function spending_change_year_split(year_string) {
-  return year_string.split(":");
+  return _.split(year_string, ":");
 }
 
 function get_data_drf(
@@ -251,8 +254,8 @@ function get_data_drf(
         children: orgs,
       }))
       .value(),
-    _.filter(orgs, (o) => {
-      return !o.subject.ministry;
+    _.reject(orgs, (o) => {
+      return o.subject.ministry;
     })
   );
   if (data.length == 0) {
@@ -307,18 +310,15 @@ function get_data_so(
           so_num: so,
           amount: _.filter(org_sobj_table.q(org).data, { so_num: so }).length
             ? get_changes
-              ? _.chain(org_sobj_table.q(org).data)
-                  .filter({ so_num: so })
-                  .head()
-                  .value()[header_col(perspective, year_2)] -
-                _.chain(org_sobj_table.q(org).data)
-                  .filter({ so_num: so })
-                  .head()
-                  .value()[header_col(perspective, year_1)]
-              : _.chain(org_sobj_table.q(org).data)
-                  .filter({ so_num: so })
-                  .head()
-                  .value()[header_col(perspective, year)]
+              ? _.find(org_sobj_table.q(org).data, { so_num: so })[
+                  header_col(perspective, year_2)
+                ] -
+                _.find(org_sobj_table.q(org).data, { so_num: so })[
+                  header_col(perspective, year_1)
+                ]
+              : _.find(org_sobj_table.q(org).data, { so_num: so })[
+                  header_col(perspective, year)
+                ]
             : 0,
         }))
         .filter((n) => has_non_zero_or_non_zero_children(n, perspective))
@@ -338,8 +338,8 @@ function get_data_so(
         children: orgs,
       }))
       .value(),
-    _.filter(all_orgs, (o) => {
-      return !o.subject.ministry;
+    _.reject(all_orgs, (o) => {
+      return o.subject.ministry;
     })
   );
   if (data.length == 0) {
@@ -406,8 +406,8 @@ function get_data_tp(
         children: orgs,
       }))
       .value(),
-    _.filter(all_orgs, (o) => {
-      return !o.subject.ministry;
+    _.reject(all_orgs, (o) => {
+      return o.subject.ministry;
     })
   );
   if (data.length == 0) {
@@ -463,7 +463,7 @@ function get_data_vs(
             : get_changes
             ? _.sumBy(rows, header_col(perspective, year_2)) -
               _.sumBy(rows, header_col(perspective, year_1))
-            : _.chain(rows).sumBy(header_col(perspective, year)).value(),
+            : _.sumBy(rows, header_col(perspective, year)),
         }))
         .filter(has_non_zero_or_non_zero_children)
         .value(),
@@ -482,8 +482,8 @@ function get_data_vs(
         children: orgs,
       }))
       .value(),
-    _.filter(orgs, (o) => {
-      return !o.subject.ministry;
+    _.reject(orgs, (o) => {
+      return o.subject.ministry;
     })
   );
   if (data.length == 0) {

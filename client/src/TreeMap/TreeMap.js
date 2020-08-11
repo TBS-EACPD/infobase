@@ -220,12 +220,15 @@ function get_legend_cols(color_var, get_changes, colorScale) {
     data: { ftes: v, parent_ftes: 1, amount: v, parent_amount: 1 },
   }));
   const color_vals = _.map(nodes, (n) => colorScale(n));
-  const output = _.map(_.zip(raw_vals, color_vals), (pair) => ({
-    val: get_changes
-      ? format_display_number(pair[0], color_var === "ftes", true)
-      : formats.percentage_raw(Math.round(pair[0] * 100) / 100),
-    col: pair[1],
-  }));
+  const output = _.chain(raw_vals)
+    .zip(color_vals)
+    .map((pair) => ({
+      val: get_changes
+        ? format_display_number(pair[0], color_var === "ftes", true)
+        : formats.percentage_raw(Math.round(pair[0] * 100) / 100),
+      col: pair[1],
+    }))
+    .value();
   if (get_changes) {
     output[0].val = undefined;
   }
