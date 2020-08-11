@@ -32,14 +32,13 @@ export class WriteToClipboard extends React.Component {
 
     const modal_active = _.isString(copy_status_message);
     const copy_success = copy_status_message === text_maker("copy_success");
-    const BOM_text_to_copy = `data:text/csv;charset=utf-8,%EF%BB%BF${text_to_copy}`;
     return (
       <Fragment>
         <button
           className={button_class_name}
           onClick={() =>
             clipboard
-              .writeText(BOM_text_to_copy)
+              .writeText(text_to_copy)
               .then(() =>
                 this.setState({
                   copy_status_message: text_maker("copy_success"),
@@ -81,7 +80,7 @@ export class WriteToClipboard extends React.Component {
           subtitle={modal_active && !copy_success && copy_status_message}
           body={
             modal_active &&
-            !copy_success && <div tabIndex="0">{BOM_text_to_copy}</div>
+            !copy_success && <div tabIndex="0">{text_to_copy}</div>
           }
           dialog_position="left"
           auto_close_time={

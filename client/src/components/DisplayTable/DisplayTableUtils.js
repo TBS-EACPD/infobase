@@ -32,7 +32,8 @@ export const DisplayTableColumnToggle = ({ columns }) => (
 );
 
 const download_csv = (csv_string, table_name) => {
-  const uri = "data:text/csv;charset=UTF-8," + encodeURIComponent(csv_string);
+  const uri =
+    "data:text/csv;charset=UTF-8,\uFEFF" + encodeURIComponent(csv_string);
 
   const temporary_anchor = document.createElement("a");
   temporary_anchor.setAttribute(
