@@ -162,7 +162,7 @@ const TooltipActivator = _.isUndefined(MutationObserver)
           const remaining_tooltips = [];
           const outgoing_tooltips = [];
 
-          this.tooltip_instances.forEach((tooltip_instance) => {
+          _.forEach(this.tooltip_instances, (tooltip_instance) => {
             const is_remaining_tooltip = _.chain(current_tooltip_nodes)
               .map((node) =>
                 compare_current_node_and_tooltip_instance(
@@ -180,7 +180,7 @@ const TooltipActivator = _.isUndefined(MutationObserver)
             }
           });
 
-          outgoing_tooltips.forEach((outgoing_instance) =>
+          _.forEach(outgoing_tooltips, (outgoing_instance) =>
             outgoing_instance.tooltip.dispose()
           );
 
@@ -202,7 +202,7 @@ const TooltipActivator = _.isUndefined(MutationObserver)
       componentWillUnmount() {
         this.observer.disconnect();
         this.debounced_mutation_callback.cancel();
-        this.tooltip_instances.forEach((tooltip_instance) =>
+        _.forEach(this.tooltip_instances, (tooltip_instance) =>
           tooltip_instance.tooltip.dispose()
         );
       }

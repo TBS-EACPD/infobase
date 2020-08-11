@@ -41,7 +41,7 @@ export default class _GraphiQL extends React.Component {
           // side-effects of the query being made (logging, updating route params, etc.)
           // skipped for introspection queries because one is made on every load to populate the doc explorer drawer
           log_standard_event({
-            SUBAPP: window.location.hash.replace("#", ""),
+            SUBAPP: _.replace(window.location.hash, "#", ""),
             MISC1: "GraphiQL query",
             MISC2: graphql_params,
           });

@@ -31,7 +31,8 @@
       "lodash/chain-style": ["error","explicit"],
       "lodash/prop-shorthand": ["off"],
       "lodash/matches-prop-shorthand": ["off"],
-      "lodash/matches-shorthand": ["off"]
+      "lodash/matches-shorthand": ["off"],
+      "lodash/prefer-constant": ["off"]
   },
   "settings": {
     "react": {

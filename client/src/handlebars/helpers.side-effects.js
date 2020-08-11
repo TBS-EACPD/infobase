@@ -669,7 +669,7 @@ Handlebars.registerHelper("pluralize", function (number, single) {
   } else {
     if (/[[]/g.test(single)) {
       return (
-        number + " [" + single.replace(/[^a-zA-Z\u00C0-\u017F ]/g, "") + "s]"
+        number + " [" + _.replace(single, /[^a-zA-Z\u00C0-\u017F ]/g, "") + "s]"
       );
     } else {
       return number + " " + single + "s";

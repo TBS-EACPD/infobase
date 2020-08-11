@@ -26,6 +26,7 @@ const sub_app_name = "infographic_org";
 const { text_maker, TM } = create_text_maker_component(text);
 
 class AnalyticsSynchronizer extends React.Component {
+  // eslint-disable-next-line
   render() {
     return null;
   }

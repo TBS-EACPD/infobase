@@ -41,7 +41,7 @@ export const query_length_tolerant_fetch = async (uri, options) => {
   // important, this regex lazy matches up to and including FIRST ? occurence, which (in a URI)
   // should be where the query string starts. I've complicated it slightly just in case there's ever a ? IN
   // the query string (well, that'd be an encoding error anyway)
-  const url_encoded_query = uri.replace(/^(.*?)\?/, "");
+  const url_encoded_query = _.replace(uri, /^(.*?)\?/, "");
 
   const query_string_hash = string_hash(url_encoded_query);
 

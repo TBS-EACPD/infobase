@@ -30,7 +30,7 @@ export const make_unique = make_unique_func();
 
 export const escapeRegExp = function (str) {
   /* eslint-disable no-useless-escape */
-  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+  return _.replace(str, /[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 };
 
 export const shallowEqualObjectsOverKeys = (obj1, obj2, keys_to_compare) =>
@@ -64,13 +64,16 @@ export const retry_promise = (promise_to_try, retries = 2, interval = 500) => {
 // "This is an assign function that copies full descriptors"
 // Here, used to preserve getters (like d3-selection.event), as opposed to Object.assign which just copies the value once (null for most)
 export function completeAssign(target, ...sources) {
-  sources.forEach((source) => {
-    let descriptors = Object.keys(source).reduce((descriptors, key) => {
-      descriptors[key] = Object.getOwnPropertyDescriptor(source, key);
-      return descriptors;
-    }, {});
+  _.forEach(sources, (source) => {
+    let descriptors = _.chain(source)
+      .keys()
+      .reduce((descriptors, key) => {
+        descriptors[key] = Object.getOwnPropertyDescriptor(source, key);
+        return descriptors;
+      }, {})
+      .value();
     // by default, Object.assign copies enumerable Symbols too
-    Object.getOwnPropertySymbols(source).forEach((sym) => {
+    _.forEach(Object.getOwnPropertySymbols(source), (sym) => {
       let descriptor = Object.getOwnPropertyDescriptor(source, sym);
       if (descriptor.enumerable) {
         descriptors[sym] = descriptor;
@@ -85,7 +88,7 @@ export function completeAssign(target, ...sources) {
 export const hex_to_rgb = (hex) => {
   // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
   var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, function (m, r, g, b) {
+  hex = _.replace(hex, shorthandRegex, function (m, r, g, b) {
     return r + r + g + g + b + b;
   });
 
@@ -119,4 +122,4 @@ export const SafeJSURL = {
 };
 
 export const generate_href = (url) =>
-  url.startsWith("http") ? url : `https://${url}`;
+  _.startsWith(url, "http") ? url : `https://${url}`;
