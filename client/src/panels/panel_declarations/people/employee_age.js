@@ -37,7 +37,7 @@ const calculate_funcs_by_level = {
     const avg_age = [
       {
         label: text_maker("fps"),
-        data: people_years.map((year) => orgEmployeeAvgAge.GOC[0][year]),
+        data: _.map(people_years, (year) => orgEmployeeAvgAge.GOC[0][year]),
         active: true,
       },
     ];
@@ -49,8 +49,9 @@ const calculate_funcs_by_level = {
       .reduce((sum, val) => sum + val, 0)
       .value();
 
-    const age_group = compact_age_groups.map((age_range) => {
-      const yearly_values = people_years.map(
+    const age_group = _.map(compact_age_groups, (age_range) => {
+      const yearly_values = _.map(
+        people_years,
         (year) => orgEmployeeAgeGroup.horizontal(year, false)[age_range]
       );
       return {
@@ -58,9 +59,13 @@ const calculate_funcs_by_level = {
         active: true,
         data: yearly_values,
         five_year_percent:
-          yearly_values.reduce(function (sum, val) {
-            return sum + val;
-          }, 0) / gov_five_year_total_head_count,
+          _.reduce(
+            yearly_values,
+            function (sum, val) {
+              return sum + val;
+            },
+            0
+          ) / gov_five_year_total_head_count,
       };
     });
 
@@ -77,13 +82,13 @@ const calculate_funcs_by_level = {
     const avg_age = _.chain(orgEmployeeAvgAge.q(dept).data)
       .map((row) => ({
         label: Subject.Dept.lookup(row.dept).name,
-        data: people_years.map((year) => row[year]),
+        data: _.map(people_years, (year) => row[year]),
         active: true,
       }))
       .filter((d) => d3.sum(d.data) !== 0)
       .concat({
         label: text_maker("fps"),
-        data: people_years.map((year) => orgEmployeeAvgAge.GOC[0][year]),
+        data: _.map(people_years, (year) => orgEmployeeAvgAge.GOC[0][year]),
         active: true,
       })
       .sortBy((d) => -d3.sum(d.data))

@@ -37,16 +37,21 @@ const calculate_funcs_by_level = {
       .values()
       .map((gender_type) => {
         const gender_text = gender_type.text;
-        const yearly_values = people_years.map(
+        const yearly_values = _.map(
+          people_years,
           (year) => orgEmployeeGender.horizontal(year, false)[gender_text]
         );
         return {
           label: gender_text,
           data: yearly_values,
           five_year_percent:
-            yearly_values.reduce(function (sum, val) {
-              return sum + val;
-            }, 0) / gov_five_year_total_head_count,
+            _.reduce(
+              yearly_values,
+              function (sum, val) {
+                return sum + val;
+              },
+              0
+            ) / gov_five_year_total_head_count,
           active: true,
         };
       })
@@ -58,7 +63,7 @@ const calculate_funcs_by_level = {
     return _.chain(orgEmployeeGender.q(dept).data)
       .map((row) => ({
         label: row.gender,
-        data: people_years.map((year) => row[year]),
+        data: _.map(people_years, (year) => row[year]),
         five_year_percent: row.five_year_percent,
         active: true,
       }))

@@ -110,13 +110,13 @@ const calculate_funcs_by_level = {
   gov: function () {
     const { orgEmployeeRegion } = this.tables;
     return calculate_common(
-      people_years.map((year) => orgEmployeeRegion.prov_code(year, false))
+      _.map(people_years, (year) => orgEmployeeRegion.prov_code(year, false))
     );
   },
   dept: function (subject) {
     const { orgEmployeeRegion } = this.tables;
     return calculate_common(
-      people_years.map((year) =>
+      _.map(people_years, (year) =>
         orgEmployeeRegion.prov_code(year, subject.unique_id)
       )
     );

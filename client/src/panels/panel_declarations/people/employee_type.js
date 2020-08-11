@@ -29,16 +29,21 @@ const calculate_funcs_by_level = {
       .values()
       .map((tenure_type) => {
         const tenure_text = tenure_type.text;
-        const yearly_values = people_years.map(
+        const yearly_values = _.map(
+          people_years,
           (year) => orgEmployeeType.horizontal(year, false)[tenure_text]
         );
         return {
           label: tenure_text,
           data: yearly_values,
           five_year_percent:
-            yearly_values.reduce(function (sum, val) {
-              return sum + val;
-            }, 0) / info.gov_five_year_total_head_count,
+            _.reduce(
+              yearly_values,
+              function (sum, val) {
+                return sum + val;
+              },
+              0
+            ) / info.gov_five_year_total_head_count,
           active: true,
         };
       })
@@ -50,7 +55,7 @@ const calculate_funcs_by_level = {
     return _.chain(orgEmployeeType.q(dept).data)
       .map((row) => ({
         label: row.employee_type,
-        data: people_years.map((year) => row[year]),
+        data: _.map(people_years, (year) => row[year]),
         five_year_percent: row.five_year_percent,
         active: true,
       }))

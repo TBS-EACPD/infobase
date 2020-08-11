@@ -35,7 +35,7 @@ export const declare_employee_totals_panel = () =>
         const { orgEmployeeType } = this.tables;
         const q = orgEmployeeType.q(subject);
         return {
-          series: people_years.map((y) => q.sum(y)),
+          series: _.map(people_years, (y) => q.sum(y)),
           ticks: _.map(people_years_short_second, (y) => `${run_template(y)}`),
         };
       },
@@ -80,7 +80,7 @@ export const declare_employee_totals_panel = () =>
                         style={{ width: "100%", borderCollapse: "collapse" }}
                       >
                         <tbody>
-                          {slice.data.map((tooltip_item) => (
+                          {_.map(slice.data, (tooltip_item) => (
                             <tr key={tooltip_item.serie.id}>
                               <td className="nivo-tooltip__icon">
                                 <div

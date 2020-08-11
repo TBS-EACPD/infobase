@@ -37,16 +37,21 @@ const calculate_funcs_by_level = {
       .values()
       .map((ex_level) => {
         const ex_level_name = ex_level.text;
-        const yearly_values = people_years.map(
+        const yearly_values = _.map(
+          people_years,
           (year) => orgEmployeeExLvl.horizontal(year, false)[ex_level_name]
         );
         return {
           label: ex_level_name,
           data: yearly_values,
           five_year_percent:
-            yearly_values.reduce(function (sum, val) {
-              return sum + val;
-            }, 0) / gov_five_year_total_head_count,
+            _.reduce(
+              yearly_values,
+              function (sum, val) {
+                return sum + val;
+              },
+              0
+            ) / gov_five_year_total_head_count,
           active: ex_level_name !== "Non-EX",
         };
       })
@@ -58,7 +63,7 @@ const calculate_funcs_by_level = {
     return _.chain(orgEmployeeExLvl.q(dept).data)
       .map((row) => ({
         label: row.ex_lvl,
-        data: people_years.map((year) => row[year]),
+        data: _.map(people_years, (year) => row[year]),
         five_year_percent: row.five_year_percent,
         active: row.ex_lvl !== "Non-EX",
       }))
