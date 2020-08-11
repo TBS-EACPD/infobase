@@ -216,12 +216,11 @@ class TPMap extends React.Component {
           _.isUndefined(population_data[prov_code])
         )
         .mapValues((transfer_payment_values, prov_code) =>
-          _.chain(transfer_payment_values)
-            .zipWith(
-              population_data[prov_code],
-              (transfer_payment, population) => transfer_payment / population
-            )
-            .value()
+          _.zipWith(
+            transfer_payment_values,
+            population_data[prov_code],
+            (transfer_payment, population) => transfer_payment / population
+          )
         )
         .value();
 

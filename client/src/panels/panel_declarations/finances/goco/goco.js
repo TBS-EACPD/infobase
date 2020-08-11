@@ -241,7 +241,7 @@ class Goco extends React.Component {
           <div style={{ color: window.infobase_color_constants.textColor }}>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <tbody>
-                {slice.map((tooltip_item) => (
+                {_.map(slice, (tooltip_item) => (
                   <tr key={tooltip_item.id}>
                     <td className="nivo-tooltip__icon">
                       <div
@@ -297,6 +297,7 @@ class Goco extends React.Component {
             return hoverIndex++;
           }
         });
+        // eslint-disable-next-line
         return _.zipObject(
           _.map(data, "label"),
           _.zip(hover_index_spending, hover_index_ftes)
@@ -306,9 +307,9 @@ class Goco extends React.Component {
       const handleHover = (node, targetElement, data) => {
         targetElement.style.cursor = "pointer";
         const allGroupedElements = targetElement.parentNode.parentNode;
-        const childrenGroupedElements = _.map(
-          _.drop(allGroupedElements.childNodes, 2),
-          _.identity
+        const childrenGroupedElements = _.drop(
+          allGroupedElements.childNodes,
+          2
         );
         const hover_index_map = generate_index_map(data);
         const target_spending =
@@ -325,18 +326,26 @@ class Goco extends React.Component {
           _.forEach(
             allGroupedElements.parentNode.querySelectorAll("text"),
             (textElement) => {
-              const currentText = textElement.textContent.replace(/\s+/g, "");
-              const target_text = node.indexValue.replace(/\s+/g, "");
+              const currentText = _.replace(
+                textElement.textContent,
+                /\s+/g,
+                ""
+              );
+              const target_text = _.replace(node.indexValue, /\s+/g, "");
               const spending_text =
                 target_spending &&
-                target_spending
-                  .getElementsByTagName("text")[0]
-                  .textContent.replace(/\s+/g, "");
+                _.replace(
+                  target_spending.getElementsByTagName("text")[0].textContent,
+                  /\s+/g,
+                  ""
+                );
               const fte_text =
                 target_fte &&
-                target_fte
-                  .getElementsByTagName("text")[0]
-                  .textContent.replace(/\s+/g, "");
+                _.replace(
+                  target_fte.getElementsByTagName("text")[0].textContent,
+                  /\s+/g,
+                  ""
+                );
               if (
                 currentText === target_text ||
                 currentText === spending_text ||
@@ -368,9 +377,9 @@ class Goco extends React.Component {
 
       const handleClick = (node, targetElement, data) => {
         const allGroupedElements = targetElement.parentNode.parentNode;
-        const childrenGroupedElements = _.map(
-          _.drop(allGroupedElements.childNodes, 2),
-          _.identity
+        const childrenGroupedElements = _.drop(
+          allGroupedElements.childNodes,
+          2
         );
 
         const click_index_map = generate_index_map(data);
@@ -385,18 +394,22 @@ class Goco extends React.Component {
         _.forEach(
           allGroupedElements.parentNode.querySelectorAll("text"),
           (textElement) => {
-            const currentText = textElement.textContent.replace(/\s+/g, "");
-            const target_text = node.indexValue.replace(/\s+/g, "");
+            const currentText = _.replace(textElement.textContent, /\s+/g, "");
+            const target_text = _.replace(node.indexValue, /\s+/g, "");
             const spending_text =
               target_spending &&
-              target_spending
-                .getElementsByTagName("text")[0]
-                .textContent.replace(/\s+/g, "");
+              _.replace(
+                target_spending.getElementsByTagName("text")[0].textContent,
+                /\s+/g,
+                ""
+              );
             const fte_text =
               target_fte &&
-              target_fte
-                .getElementsByTagName("text")[0]
-                .textContent.replace(/\s+/g, "");
+              _.replace(
+                target_fte.getElementsByTagName("text")[0].textContent,
+                /\s+/g,
+                ""
+              );
             textElement.style.opacity =
               currentText === target_text ||
               currentText === spending_text ||

@@ -28,11 +28,12 @@ export const format_and_get_fte = (type, info, subject) => {
 
   const history_data_index = _.map(
     std_years,
-    (std_year) => `${subject.level}_fte_${std_year.replace(/{|}/g, "")}`
+    (std_year) => `${subject.level}_fte_${_.replace(std_year, /{|}/g, "")}`
   );
   const planned_data_index = _.map(
     planning_years,
-    (planned_year) => `${subject.level}_fte_${planned_year.replace(/{|}/g, "")}`
+    (planned_year) =>
+      `${subject.level}_fte_${_.replace(planned_year, /{|}/g, "")}`
   );
 
   const planned_fte_exists =
@@ -96,6 +97,7 @@ export const format_and_get_fte = (type, info, subject) => {
       />
     );
   } else {
+    // eslint-disable-next-line
     const raw_data = _.concat(
       _.map(history_data_index, (idx) => info[idx]),
       _.map(planned_data_index, (idx) => info[idx])
@@ -114,7 +116,7 @@ export const format_and_get_fte = (type, info, subject) => {
             return true;
           }
         })
-        .map((filtered_row) => filtered_row)
+        .map()
         .value();
 
     const historical_graph_data = prepare_graph_data(
@@ -140,15 +142,13 @@ export const format_and_get_fte = (type, info, subject) => {
 
     const shouldTickRender = (tick) => {
       if (type === "hist" || type === "hist_estimates") {
-        return (
-          tick === _.first(history_ticks) || tick === _.last(history_ticks)
-        );
+        return tick === _.head(history_ticks) || tick === _.last(history_ticks);
       } else if (type === "planned") {
-        return tick === _.first(plan_ticks) || tick === _.last(plan_ticks);
+        return tick === _.head(plan_ticks) || tick === _.last(plan_ticks);
       } else {
         return (
           tick === gap_year ||
-          tick === _.first(history_ticks) ||
+          tick === _.head(history_ticks) ||
           tick === _.last(plan_ticks)
         );
       }

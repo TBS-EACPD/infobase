@@ -38,7 +38,7 @@ const { text_maker, TM } = create_text_maker_component([text1, text2]);
 const TOP_TO_SHOW = 25;
 
 const treatAsProgram = (subject) =>
-  _.indexOf(["program", "crso"], subject.level) !== -1;
+  _.includes(["program", "crso"], subject.level);
 
 const get_grouping_options = (subject, data) => {
   const common_options = [
@@ -94,7 +94,7 @@ const calculate_stats_common = (data, subject) => {
 
   const measure_count = data.length;
 
-  const year_from_data = _.first(data).year;
+  const year_from_data = _.head(data).year;
   const vote_count =
     subject.level === "gov"
       ? year_from_data === "2018"
@@ -119,7 +119,7 @@ const crso_program_calculate = (subject, info, options, years_with_data) => {
     _.chain(BudgetMeasure.get_all())
       .filter(
         (measure) =>
-          _.indexOf(measure.orgs, org_id_string) !== -1 && measure.year === year
+          _.includes(measure.orgs, org_id_string) && measure.year === year
       )
       .map((measure) => ({
         ...measure,
@@ -128,7 +128,7 @@ const crso_program_calculate = (subject, info, options, years_with_data) => {
           .thru(([program_allocations]) => program_allocations)
           .value(),
       }))
-      .filter((measure) => measure.measure_data.allocated !== 0)
+      .reject((measure) => measure.measure_data.allocated === 0)
       .value();
 
   return {
@@ -178,15 +178,14 @@ const calculate_functions = {
       _.chain(BudgetMeasure.get_all())
         .filter(
           (measure) =>
-            _.indexOf(measure.orgs, org_id_string) !== -1 &&
-            measure.year === year
+            _.includes(measure.orgs, org_id_string) && measure.year === year
         )
         .map((measure) => ({
           ...measure,
-          measure_data: _.filter(
+          measure_data: _.find(
             measure.data,
             (data) => data.org_id === org_id_string
-          )[0],
+          ),
         }))
         .value();
 
@@ -420,7 +419,7 @@ class BudgetMeasureHBars extends React.Component {
             .value()
         )
         .reduce((memo, program_allocations) => {
-          _.each(program_allocations, ({ subject_id, allocated }) => {
+          _.forEach(program_allocations, ({ subject_id, allocated }) => {
             const memo_value = memo[subject_id] || 0;
             memo[subject_id] = memo_value + allocated;
           });
@@ -469,15 +468,18 @@ class BudgetMeasureHBars extends React.Component {
               name: dept.name,
               href: infograph_href_template(dept, "financial"),
             };
-            _.each(org_group, (item) => {
-              _.each(_.keys(budget_values), (amount) => {
-                summed[amount] = (summed[amount] || 0) + item[amount];
-              });
+            _.forEach(org_group, (item) => {
+              _.chain(budget_values)
+                .keys()
+                .forEach((amount) => {
+                  summed[amount] = (summed[amount] || 0) + item[amount];
+                })
+                .value();
             });
             return summed;
           }
         })
-        .filter()
+        .compact()
         .value();
     };
 
@@ -501,17 +503,20 @@ class BudgetMeasureHBars extends React.Component {
         year: selected_year,
       };
 
-      _.each(
-        _.chain(sorted_data)
-          .tail(TOP_TO_SHOW)
-          .map((measure) => ({ ...measure, ...measure.measure_data }))
-          .value(),
-        (item) => {
-          _.each(_.keys(budget_values), (amount) => {
-            others[amount] = (others[amount] || 0) + item[amount];
-          });
-        }
-      );
+      // eslint-disable-next-line
+      _.chain(sorted_data)
+        .tail(TOP_TO_SHOW)
+        .map((measure) => ({ ...measure, ...measure.measure_data }))
+        .forEach((item) => {
+          _.chain(budget_values)
+            .keys()
+            .forEach((amount) => {
+              others[amount] = (others[amount] || 0) + item[amount];
+            })
+            .value();
+        })
+        .value();
+
       return _.reverse(
         sorted_data.length > TOP_TO_SHOW
           ? _.concat(top_data, others)
@@ -624,7 +629,7 @@ class BudgetMeasureHBars extends React.Component {
             table_name={text_maker("budget_measure_a11y_table_title")}
             data={_.map(data, (budget_measure_item) => ({
               label: budget_measure_item.name,
-              data: _.filter([
+              data: _.compact([
                 !treatAsProgram(subject) && (
                   <Format
                     key={budget_measure_item.id + "col2"}
@@ -671,7 +676,7 @@ class BudgetMeasureHBars extends React.Component {
               ]),
             }))}
             label_col_header={text_maker("budget_measure")}
-            data_col_headers={_.filter([
+            data_col_headers={_.compact([
               !treatAsProgram(subject) && budget_values.funding.text,
               budget_values.allocated.text,
               !treatAsProgram(subject) && budget_values.withheld.text,
@@ -686,7 +691,7 @@ class BudgetMeasureHBars extends React.Component {
                 get_org_budget_data_from_all_measure_data(data),
                 (org_item) => ({
                   label: org_item.name,
-                  data: _.filter([
+                  data: _.compact([
                     <Format
                       key={org_item.key + "col3"}
                       type="compact1_written"
@@ -711,7 +716,7 @@ class BudgetMeasureHBars extends React.Component {
                 })
               )}
               label_col_header={text_maker("org")}
-              data_col_headers={_.filter([
+              data_col_headers={_.compact([
                 budget_values.funding.text,
                 budget_values.allocated.text,
                 budget_values.withheld.text,
@@ -724,7 +729,7 @@ class BudgetMeasureHBars extends React.Component {
               table_name={text_maker("budget_program_a11y_table_title")}
               data={_.map(program_allocation_data, (program_item) => ({
                 label: program_item.name,
-                data: _.filter([
+                data: _.compact([
                   <Format
                     key={program_item.key + "col3"}
                     type="compact1_written"
@@ -733,7 +738,7 @@ class BudgetMeasureHBars extends React.Component {
                 ]),
               }))}
               label_col_header={text_maker("program")}
-              data_col_headers={_.filter([budget_values.allocated.text])}
+              data_col_headers={_.compact([budget_values.allocated.text])}
             />
           )}
         </div>

@@ -56,7 +56,7 @@ const auth_exp_planned_spending_tooltip = (graph_slice, tooltip_formatter) => {
     <div style={{ color: window.infobase_color_constants.textColor }}>
       <table className="auth-exp-planned-spend-tooltip">
         <tbody>
-          {null_filtered_slice_data.map((tooltip_item) => (
+          {_.map(null_filtered_slice_data, (tooltip_item) => (
             <tr key={tooltip_item.serie.id}>
               <td>
                 <div

@@ -31,7 +31,7 @@ function render({ calculations, footnotes, sources }) {
     _ticks.push("net");
   }
 
-  const ticks = _ticks.map(text_maker);
+  const ticks = _.map(_ticks, text_maker);
   const spend_rev_data = _.map(series, (spend_rev_value, tick_index) => ({
     title: ticks[tick_index],
     [ticks[tick_index]]: spend_rev_value,

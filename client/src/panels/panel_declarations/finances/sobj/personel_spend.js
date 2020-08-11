@@ -26,7 +26,8 @@ export const declare_personnel_spend_panel = () =>
       calculate(subject, info, data) {
         return {
           series: {
-            "0": std_years.map(
+            "0": _.map(
+              std_years,
               (year) =>
                 this.tables.orgSobjs.horizontal(year, false)[sos[1].text]
             ),

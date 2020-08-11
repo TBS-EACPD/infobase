@@ -51,7 +51,7 @@ class HistoricalProgramBars extends React.Component {
   }
   render() {
     const { data } = this.props;
-    const ticks = std_years.map((yr) => run_template(yr));
+    const ticks = _.map(std_years, (yr) => run_template(yr));
     const { selected } = this.state;
 
     const colors = d3
@@ -64,7 +64,8 @@ class HistoricalProgramBars extends React.Component {
       .map(({ label, data }) => ({
         label: label,
         ..._.chain().zip(ticks, data).fromPairs().value(),
-      }));
+      }))
+      .value();
 
     const processed_data = _.chain(data)
       .filter(({ id }) => _.includes(selected, id))
@@ -109,7 +110,7 @@ class HistoricalProgramBars extends React.Component {
             data={_.map(data, ({ label, data }) => ({
               label,
               /* eslint-disable react/jsx-key */
-              data: data.map((amt) => (
+              data: _.map(data, (amt) => (
                 <Format type="compact1_written" content={amt} />
               )),
             }))}
@@ -145,7 +146,7 @@ class HistoricalProgramBars extends React.Component {
                 }))
                 .value()}
               onClick={(id) => {
-                !(selected.length === 1 && selected.includes(id)) &&
+                !(selected.length === 1 && _.includes(selected, id)) &&
                   this.setState({
                     selected: _.toggle_list(selected, id),
                   });
@@ -161,7 +162,7 @@ class HistoricalProgramBars extends React.Component {
           <div className="fcol-md-8">
             <WrappedNivoBar
               data={graph_data}
-              keys={Object.keys(processed_data)}
+              keys={_.keys(processed_data)}
               indexBy="year"
               colorBy={(d) => colors(d.id)}
               margin={{
@@ -267,7 +268,7 @@ class DetailedProgramSplit extends React.Component {
       )
       .groupBy((row) => row.program.name)
       .map((group) => ({
-        label: _.first(group).program.name,
+        label: _.head(group).program.name,
 
         ..._.chain(group)
           .groupBy("so_label")
@@ -469,7 +470,7 @@ export const declare_detailed_program_spending_split_panel = () =>
           })
           .map((row) => ({
             label: row.prgm,
-            data: exp_cols.map((col) => row[col]),
+            data: _.map(exp_cols, (col) => row[col]),
             active: false,
           }))
           .sortBy((x) => -d3.sum(x.data))
@@ -481,7 +482,7 @@ export const declare_detailed_program_spending_split_panel = () =>
           .flatMap((program) =>
             FootNote.get_for_subject(program, [...footnote_topics, "EXP"])
           )
-          .filter()
+          .compact()
           .value();
 
         return {

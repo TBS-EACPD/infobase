@@ -36,6 +36,7 @@ const common_cal = (programs, programSobjs) => {
     top_3_sos.length > cut_off_index - 1
       ? {
           label: text_maker("other_s"),
+          // eslint-disable-next-line
           value: d3.sum(_.tail(rows_by_so, cut_off_index), _.property("value")),
         }
       : [];
@@ -51,7 +52,7 @@ const render_w_options = ({ text_key }) => ({
   const { panel_args, info } = calculations;
   const { top_3_sos_and_remainder } = panel_args;
 
-  const graph_data = panel_args.map((d) => ({
+  const graph_data = _.map(panel_args, (d) => ({
     label: d["label"],
     id: d["label"],
     value: d["value"],

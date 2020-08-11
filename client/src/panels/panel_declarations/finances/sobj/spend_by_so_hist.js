@@ -22,7 +22,7 @@ class SobjLine extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      active_sobjs: [_.first(props.data).label],
+      active_sobjs: [_.head(props.data).label],
     };
     this.colors = d3
       .scaleOrdinal()
@@ -34,14 +34,15 @@ class SobjLine extends React.Component {
     const { colors } = this;
 
     const all_labels = _.map(data, "label");
-    const legend_items = _.concat(
-      _.map(data, ({ label }) => ({
+    const legend_items = _.chain(data)
+      .map(({ label }) => ({
         label,
         id: label,
         active: _.includes(active_sobjs, label),
         color: colors(label),
       }))
-    );
+      .concat()
+      .value();
 
     const graph_series = _.chain(data)
       .filter(({ label }) => _.includes(active_sobjs, label))
@@ -49,14 +50,14 @@ class SobjLine extends React.Component {
       .fromPairs()
       .value();
 
-    const raw_data = _.flatMap(graph_series, (value) => value);
+    const raw_data = _.chain(graph_series).values().flatten().value();
 
     const years = _.map(std_years, run_template);
     const spending_data = _.map(
       graph_series,
       (spending_array, spending_label) => ({
         id: spending_label,
-        data: spending_array.map((spending_value, year_index) => ({
+        data: _.map(spending_array, (spending_value, year_index) => ({
           x: years[year_index],
           y: spending_value,
         })),
@@ -142,7 +143,10 @@ class SobjLine extends React.Component {
             onClick={(id) => {
               !(
                 spending_data.length === 1 &&
-                spending_data.map((o) => o.id).includes(id)
+                _.chain(spending_data)
+                  .map((o) => o.id)
+                  .includes(id)
+                  .value()
               ) &&
                 this.setState({
                   active_sobjs: _.toggle_list(active_sobjs, id),
@@ -184,7 +188,8 @@ export const declare_spend_by_so_hist_panel = () =>
             .sortBy((sobj) => sobj.so_num)
             .map((sobj) => ({
               label: sobj.text,
-              data: std_years.map(
+              data: _.map(
+                std_years,
                 (year) => orgSobjs.so_num(year, subject)[sobj.so_num]
               ),
             }))
@@ -204,7 +209,7 @@ export const declare_spend_by_so_hist_panel = () =>
                 data={_.map(data, ({ label, data }) => ({
                   label,
                   /* eslint-disable react/jsx-key */
-                  data: data.map((amt) => (
+                  data: _.map(data, (amt) => (
                     <Format type="compact1_written" content={amt} />
                   )),
                 }))}

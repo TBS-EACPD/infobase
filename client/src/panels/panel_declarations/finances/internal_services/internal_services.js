@@ -36,9 +36,10 @@ export const declare_internal_services_panel = () =>
         const isc = text_maker("internal_services");
         const non_isc = text_maker("other_programs");
         const series = _.map(std_years, (yr) => {
-          const isc_amt = _.sum(
-            _.map(isc_crsos, (crso) => programFtes.q(crso).sum(yr))
-          );
+          const isc_amt = _.chain(isc_crsos)
+            .map((crso) => programFtes.q(crso).sum(yr))
+            .sum()
+            .value();
           return {
             [isc]: isc_amt,
             [non_isc]: programFtes.q(subject).sum(yr) - isc_amt,
@@ -136,14 +137,14 @@ export const declare_internal_services_panel = () =>
                 data={_.chain(bar_data)
                   .flatMap(_.keys)
                   .uniq()
-                  .pull("date")
+                  .without("date")
                   .map((label) => ({
                     label,
                     data: _.map(bar_data, label),
                   }))
                   .value()}
                 label_col_header={text_maker("program")}
-                data_col_headers={std_years.map((yr) => run_template(yr))}
+                data_col_headers={_.map(std_years, (yr) => run_template(yr))}
               />
             );
           } else {

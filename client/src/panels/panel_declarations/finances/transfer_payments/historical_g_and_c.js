@@ -18,7 +18,7 @@ const { transfer_payments } = businessConstants;
 const { std_years } = year_templates;
 const { Format, DisplayTable } = util_components;
 
-const exp_years = std_years.map((year) => year + "exp");
+const exp_years = _.map(std_years, (year) => year + "exp");
 
 const text_years = _.map(std_years, run_template);
 const years_map = _.zipObject(exp_years, text_years);
@@ -90,7 +90,7 @@ class HistTPTypes extends React.Component {
         filtered_series,
         (expenditure_array, expenditure_label) => ({
           id: expenditure_label,
-          data: expenditure_array.map((expenditure_value, year_index) => ({
+          data: _.map(expenditure_array, (expenditure_value, year_index) => ({
             x: text_years[year_index],
             y: expenditure_value,
           })),
@@ -139,7 +139,7 @@ class DetailedHistTPItems extends React.Component {
     const { rows } = props;
     this.state = {
       active_indices: [0],
-      active_type: _.first(rows, "type_id").type_id,
+      active_type: _.head(rows).type_id,
     };
 
     this.color_scale = infobase_colors();
@@ -149,7 +149,7 @@ class DetailedHistTPItems extends React.Component {
     const { active_indices, active_type } = this.state;
     const { color_scale } = this;
 
-    const order_type_id = _.uniq(_.map(rows, "type_id"));
+    const order_type_id = _.chain(rows).map("type_id").uniq().value();
     const prepped_rows = _.chain(rows)
       .filter({ type_id: active_type })
       .sortBy((row) => row["{{pa_last_year}}exp"])
@@ -193,29 +193,29 @@ class DetailedHistTPItems extends React.Component {
       .value();
 
     const max_value = _.chain(prepped_rows)
-      .map((row) => _.map(exp_years, (yr) => row[yr]))
-      .flatten()
+      .flatMap((row) => _.map(exp_years, (yr) => row[yr]))
       .max()
       .value();
 
-    const raw_data = _.flatMap(graph_series, (value) => value);
+    const raw_data = _.chain(graph_series).values().flatten().value();
 
     const all_tp_idx = _.range(prepped_rows.length);
-    const legend_items = _.concat(
-      _.map(prepped_rows, (row, ix) => ({
+    const legend_items = _.chain(prepped_rows)
+      .map((row, ix) => ({
         id: ix,
         label: row.tp,
         color: color_scale(row.tp),
         active: _.includes(active_indices, ix),
       }))
-    );
+      .concat()
+      .value();
 
     const detail_expend_data = _.map(
       graph_series,
       (expend_array, expend_label) => {
         return {
           id: expend_label,
-          data: expend_array.map((expend_value, year_index) => ({
+          data: _.map(expend_array, (expend_value, year_index) => ({
             y: expend_value,
             x: text_years[year_index],
           })),
@@ -326,7 +326,9 @@ class DetailedHistTPItems extends React.Component {
             <StandardLegend
               items={legend_items}
               onClick={(id) =>
-                !(active_indices.length == 1 && active_indices.includes(id)) &&
+                !(
+                  active_indices.length == 1 && _.includes(active_indices, id)
+                ) &&
                 this.setState({
                   active_indices: _.toggle_list(active_indices, id),
                 })

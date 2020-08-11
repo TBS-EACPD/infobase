@@ -15,8 +15,7 @@ const col = "{{planning_year_1}}";
 
 const sum_a_tag_col = (tag, table, col) =>
   _.chain(tag.programs)
-    .map((p) => table.programs.get(p))
-    .flatten()
+    .flatMap((p) => table.programs.get(p))
     .compact()
     .filter(col)
     .map(col)
@@ -123,7 +122,7 @@ export const declare_spending_in_tag_perspective_panel = () =>
         }
         const { programSpending } = this.tables;
         //analysis: as of writing this (oct 2016) the max number of tags encountered is 13.
-        const prog_row = _.first(programSpending.programs.get(subject));
+        const prog_row = _.head(programSpending.programs.get(subject));
 
         if (!(prog_row[col] > 0)) {
           return false;

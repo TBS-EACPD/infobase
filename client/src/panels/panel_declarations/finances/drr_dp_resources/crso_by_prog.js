@@ -37,7 +37,7 @@ const render_resource_type = (is_fte) => ({ calculations, footnotes }) => {
     .uniq()
     .value();
   const colors = infobase_colors();
-  _.each(all_program_names, (name) => colors(name));
+  _.forEach(all_program_names, (name) => colors(name));
 
   const text = (
     <TM
@@ -106,10 +106,10 @@ class PlannedProgramResources extends React.Component {
                     is_fte ? text_maker("ftes") : text_maker("spending")
                   }`
               )}
-              data={programs.map(({ data, label }) => ({
+              data={_.map(programs, ({ data, label }) => ({
                 label,
                 /* eslint-disable react/jsx-key */
-                data: data.map((amt) => (
+                data: _.map(data, (amt) => (
                   <Format
                     type={is_fte ? "big_int" : "compact1_written"}
                     content={amt}
@@ -152,7 +152,8 @@ class PlannedProgramResources extends React.Component {
               }))}
               onClick={(id) => {
                 !(
-                  active_programs.length === 1 && active_programs.includes(id)
+                  active_programs.length === 1 &&
+                  _.includes(active_programs, id)
                 ) &&
                   this.setState({
                     active_programs: _.toggle_list(active_programs, id),
@@ -163,7 +164,7 @@ class PlannedProgramResources extends React.Component {
           <div className="fcol-md-8">
             <WrappedNivoBar
               data={data_by_year}
-              keys={Object.keys(graph_data)}
+              keys={_.keys(graph_data)}
               indexBy="year"
               colorBy={(d) => colors(d.id)}
               is_money={!is_fte}
@@ -197,12 +198,12 @@ const get_calculate_func = (is_fte) => {
 
     const exp_data = _.map(programSpending.q(subject).data, (row) => ({
       label: row.prgm,
-      data: planning_years.map((col) => row[col]),
+      data: _.map(planning_years, (col) => row[col]),
     }));
 
     const fte_data = _.map(programFtes.q(subject).data, (row) => ({
       label: row.prgm,
-      data: planning_years.map((col) => row[col]),
+      data: _.map(planning_years, (col) => row[col]),
     }));
 
     return {

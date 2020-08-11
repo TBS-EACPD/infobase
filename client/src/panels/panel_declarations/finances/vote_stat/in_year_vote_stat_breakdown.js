@@ -143,7 +143,7 @@ const planned_vote_or_stat_render = (vs) =>
     const packing_data = {
       name: "",
       children: _.map(data, (d, i) =>
-        _.extend(
+        _.assignIn(
           {
             id: i,
             total: total_amt,
@@ -218,14 +218,17 @@ const planned_vote_or_stat_calculate = (vs) =>
     if (vs === "voted") {
       //vote descriptions are of the form "<vote desc> - <vote num>"
       //lets strip out the hyphen and everything that follows
-      ret.data.forEach((row) => (row.desc = row.desc.replace(/-.+$/, "")));
+      _.forEach(
+        ret.data,
+        (row) => (row.desc = _.replace(row.desc, /-.+$/, ""))
+      );
     }
     ret.data.push({
       desc: text_maker(`all_other_${vs}_items`),
       others: true,
+      // eslint-disable-next-line
       [main_col]: d3.sum(_.tail(all_rows, 10), (d) => d[main_col]),
     });
-
     return ret;
   };
 
