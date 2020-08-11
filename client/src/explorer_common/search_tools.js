@@ -11,13 +11,12 @@ function node_to_match_tokens(node) {
   if (_.includes(["result", "dr"], type)) {
     return _.chain(node.children)
       .map("data.indicator")
-      .map((indicator) => [
+      .flatMap((indicator) => [
         indicator.name,
         indicator.target_explanation,
         indicator.narrative,
         indicator.measure,
       ])
-      .flatten()
       .compact()
       .concat([name])
       .value();
@@ -63,16 +62,17 @@ function node_to_match_tokens(node) {
 }
 
 function substr_search_generator(flat_nodes) {
-  const search_nodes = flat_nodes.map((node) => ({
+  const search_nodes = _.map(flat_nodes, (node) => ({
     id: node.id,
     text_to_search: node_to_match_tokens(node).join(" "),
   }));
 
   return (query) => {
-    let raw_tokens = query.split(" ");
+    let raw_tokens = _.split(query, " ");
     let matches_by_id;
 
-    const regexps = raw_tokens.map(
+    const regexps = _.map(
+      raw_tokens,
       (str) => new RegExp(escapeRegExp(str), "gi")
     );
 

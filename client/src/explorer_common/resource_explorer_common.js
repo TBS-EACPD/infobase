@@ -30,20 +30,17 @@ const get_rows_for_subject_from_table = _.memoize(
     ) {
       return table.q(subject).data;
     } else if (!_.isEmpty(subject.programs)) {
-      return _.chain(subject.programs)
-        .map((prog) => get_rows_for_subject_from_table(prog, type, year))
-        .flatten()
-        .value();
+      return _.flatMap(subject.programs, (prog) =>
+        get_rows_for_subject_from_table(prog, type, year)
+      );
     } else if (subject.level === "ministry") {
       return _.chain(subject.orgs)
-        .map((org) => get_rows_for_subject_from_table(org, type, year))
-        .flatten(true)
+        .flatMap((org) => get_rows_for_subject_from_table(org, type, year))
         .compact()
         .value();
     } else if (!_.isEmpty(subject.children_tags)) {
       return _.chain(subject.children_tags)
-        .map((tag) => get_rows_for_subject_from_table(tag, type, year))
-        .flatten(true)
+        .flatMap((tag) => get_rows_for_subject_from_table(tag, type, year))
         .uniqBy()
         .compact()
         .value();
@@ -151,7 +148,7 @@ export const provide_sort_func_selector = (scheme_key) => {
       return (list) =>
         _.chain(list) //sort by search relevance, than the initial sort func
           .sortBy(attr_getter)
-          .pipe(is_descending ? reverse_array : _.identity)
+          .thru(is_descending ? reverse_array : _.identity)
           .value();
     }
   );

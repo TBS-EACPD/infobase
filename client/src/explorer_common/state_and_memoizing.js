@@ -271,7 +271,7 @@ function get_memoized_funcs(schemes) {
     [get_fully_filtered_hierarchy, get_scheme_sort_func],
     (filtered_hierarchy, sort_func) => {
       return _.chain(filtered_hierarchy)
-        .pipe((h7y) => sort_hierarchy(h7y, sort_func))
+        .thru((h7y) => sort_hierarchy(h7y, sort_func))
         .sortBy(negative_search_relevance_func) //search results always take precedence
         .value();
     }
@@ -312,6 +312,7 @@ function get_memoized_funcs(schemes) {
       oldState.root.userExpanded !== state.root.userExpanded
     ) {
       //union the SYMMETRIC differences
+      // eslint-disable-next-line
       const potential_to_toggle = _.union(
         _.difference(oldState.root.userCollapsed, state.root.userCollapsed),
         _.difference(state.root.userCollapsed, oldState.root.userCollapsed),
