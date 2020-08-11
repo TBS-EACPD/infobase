@@ -67,7 +67,7 @@ const get_non_col_content_func = createSelector(_.property("doc"), (doc) => {
       result_docs[doc].has_resources && (
         <DlItem
           key={1}
-          term={<span className="nowrap">{spending_header(doc)}</span>}
+          term={<span>{spending_header(doc)}</span>}
           def={
             <Format
               type="compact1"
@@ -79,7 +79,7 @@ const get_non_col_content_func = createSelector(_.property("doc"), (doc) => {
       result_docs[doc].has_resources && (
         <DlItem
           key={2}
-          term={<span className="nowrap">{fte_header(doc)}</span>}
+          term={<span>{fte_header(doc)}</span>}
           def={
             <Format
               type="big_int"
