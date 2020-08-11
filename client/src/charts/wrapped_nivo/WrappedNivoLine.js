@@ -85,17 +85,14 @@ export class WrappedNivoLine extends React.Component {
 
     const get_table = () => {
       const table_data = _.chain(data)
-        .map((row) => {
+        .flatMap((row) => {
           const series_name = row.id;
-          return _.chain(row.data)
-            .map((series) =>
-              _.isNil(series.y)
-                ? undefined
-                : { label: series.x, [series_name]: series.y }
-            )
-            .value();
+          return _.map(row.data, (series) =>
+            _.isNil(series.y)
+              ? undefined
+              : { label: series.x, [series_name]: series.y }
+          );
         })
-        .flatten()
         .compact()
         .groupBy("label")
         .map(_.spread(_.merge))
@@ -231,7 +228,7 @@ export class WrappedNivoLine extends React.Component {
 WrappedNivoLine.defaultProps = {
   ...general_default_props,
   tooltip: (slice, formatter) => {
-    const tooltip_items = slice.data.map((d) => ({
+    const tooltip_items = _.map(slice.data, (d) => ({
       id: d.serie.id,
       color: d.serie.color,
       value: d.data.y,

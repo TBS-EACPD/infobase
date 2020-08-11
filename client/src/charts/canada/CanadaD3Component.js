@@ -10,6 +10,9 @@
 //  with the array ordered by fiscal year
 //
 
+/* eslint-disable */
+//html elements using filter, etc... causing linter to error
+
 import graphRegistry from "../graphRegistry.js";
 import { businessConstants } from "../../models/businessConstants.js";
 import { canada_svg } from "./canada_svg.yaml";
@@ -63,7 +66,7 @@ export class CanadaD3Component {
   }
 
   render(options) {
-    this.options = _.extend(this.options, options);
+    this.options = _.assignIn(this.options, options);
 
     const x_scale_factor = 1396;
     const y_scale_factor = 1346;
@@ -93,12 +96,12 @@ export class CanadaD3Component {
         .value()
     );
     if (data_has_ncr_broken_out) {
-      _.each(["on", "qc"], (prov_key) =>
+      _.forEach(["on", "qc"], (prov_key) =>
         svg
           .select(get_province_element_id(prov_key))
           .attr(
             "id",
-            get_province_element_id(`${prov_key}lessncr`).replace("#", "")
+            _.replace(get_province_element_id(`${prov_key}lessncr`), "#", "")
           )
       );
     }
@@ -166,7 +169,7 @@ export class CanadaD3Component {
       .selectAll(".province")
       .each(function (d) {
         var that = d3.select(this);
-        var prov_key = that.attr("id").split("-")[1];
+        var prov_key = _.split(that.attr("id"), "-")[1];
         d3.select(this).datum(prov_key);
       })
       .styles({
@@ -184,7 +187,7 @@ export class CanadaD3Component {
     // Add labels to provinces with data, attach event dispatchers
     const provinces_to_label = _.chain(ordering)
       .keys()
-      .pullAll(
+      .difference(
         data_has_ncr_broken_out
           ? ["on", "qc"]
           : ["onlessncr", "qclessncr", "ncr"]
@@ -247,7 +250,7 @@ export class CanadaD3Component {
         visibility: "hidden",
       });
     const hide_optional_components = (prov_keys, selector_template) =>
-      _.each(prov_keys, (prov_key) => {
+      _.forEach(prov_keys, (prov_key) => {
         const corresponding_province_has_data = _.some(
           data,
           (yearly_data) => yearly_data[prov_key]

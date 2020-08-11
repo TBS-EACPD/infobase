@@ -33,7 +33,7 @@ class GraphRegistry {
   }
 
   update_registry() {
-    const new_registry = this.registry.filter((panel_obj) =>
+    const new_registry = _.filter(this.registry, (panel_obj) =>
       document.body.contains(panel_obj.html.node())
     );
     this.registry = new_registry;
@@ -42,7 +42,7 @@ class GraphRegistry {
   update_graphs() {
     this.window_width_last_updated_at = window.innerWidth;
 
-    this.registry.forEach((panel_obj) => {
+    _.forEach(this.registry, (panel_obj) => {
       panel_obj.outside_width = panel_obj.html.node().offsetWidth;
       panel_obj.outside_height = panel_obj.options.height || 400;
 
@@ -50,12 +50,19 @@ class GraphRegistry {
 
       // forEach directly on a nodeList has spoty support even with polyfils,
       // mapping it through to an array first works consistently though
-      _.map(html_container.childNodes, _.identity).forEach((child) => {
-        // Remove all labels associated with the graph (that is, all siblings of the svg's container).
-        if (!_.isUndefined(child) && !child.className.includes("__svg__")) {
-          html_container.removeChild(child);
-        }
-      });
+      _.chain(html_container.childNodes)
+        // eslint-disable-next-line
+        .map(_.identity)
+        .forEach((child) => {
+          // Remove all labels associated with the graph (that is, all siblings of the svg's container).
+          if (
+            !_.isUndefined(child) &&
+            !_.includes(child.className, "__svg__")
+          ) {
+            html_container.removeChild(child);
+          }
+        })
+        .value();
 
       panel_obj.render(panel_obj.options);
     });

@@ -53,7 +53,8 @@ export class NivoLineBarToggle extends React.Component {
     // so this ensures that the mapping will be the same for
     // each sub-graph
     const set_graph_colors = (items) =>
-      _.each(items, (item) => colors(item.label));
+      // eslint-disable-next-line
+      _.forEach(items, (item) => colors(item.label));
     set_graph_colors(props.data);
 
     this.state = {
@@ -91,6 +92,8 @@ export class NivoLineBarToggle extends React.Component {
       .fromPairs()
       .value();
 
+    // could we use values()?
+    // eslint-disable-next-line
     const raw_data = _.flatMap(series, (value) => value);
 
     const data_bar = _.map(graph_options.ticks, (date, date_index) => ({
@@ -124,7 +127,7 @@ export class NivoLineBarToggle extends React.Component {
     }));
 
     const extended_graph_options_bar = {
-      keys: Object.keys(series),
+      keys: _.keys(series),
       data: extra_graph_options.normalized
         ? data_formatter_bar(normalize(data_bar))
         : data_formatter_bar(data_bar),
@@ -190,7 +193,7 @@ export class NivoLineBarToggle extends React.Component {
               color: colors(label),
             }))}
             onClick={(label) => {
-              !(selected.length === 1 && selected.includes(label)) &&
+              !(selected.length === 1 && _.includes(selected, label)) &&
                 this.setState({
                   selected: _.toggle_list(selected, label),
                 });

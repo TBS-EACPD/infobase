@@ -63,7 +63,7 @@ const TooltipFactory = ({
   >
     <table className="nivo-tooltip">
       <tbody>
-        {tooltip_items.map((tooltip_item) => (
+        {_.map(tooltip_items, (tooltip_item) => (
           <tr key={tooltip_item.id}>
             {LegendIconComponent && (
               <LegendIconComponent tooltip_item={tooltip_item} />
