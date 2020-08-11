@@ -42,6 +42,7 @@ const BudgetMeasure = class BudgetMeasure extends static_subject_store() {
       }[window.lang],
     };
   }
+  // eslint-disable-next-line
   static get subject_type() {
     return "budget_measure";
   }

@@ -46,7 +46,7 @@ const template_globals_parsed = d3.csvParse(template_globals_file);
 
 const additionnal_globals = _.chain(template_globals_parsed)
   .filter(({ key }) => key.match(/year?.?.$/))
-  .map(({ key, en, fr }) => {
+  .flatMap(({ key, en, fr }) => {
     const short_year_first = fr.slice(0, 4);
     const short_year_second = fr.slice(5, 9);
     return [
@@ -67,7 +67,6 @@ const additionnal_globals = _.chain(template_globals_parsed)
       },
     ];
   })
-  .flatten()
   .value();
 
 const full_template_global_records = [
@@ -85,7 +84,7 @@ const app_constants = {
 const template_globals = _.chain(full_template_global_records)
   .map(({ key, en, fr }) => [key, window.lang === "en" ? en : fr])
   .fromPairs()
-  .extend(app_constants)
+  .assignIn(app_constants)
   .value();
 
 //calls handlebars templates with standard args,
@@ -104,7 +103,7 @@ const run_template = function (s, extra_args = {}) {
   }
   // build common arguments object which will be passed
   // to all templates
-  const args = _.extend({}, extra_args, template_globals); //FIXME: extra_args should take precedence over template globals. Don't have time to test this right now.
+  const args = _.assignIn({}, extra_args, template_globals); //FIXME: extra_args should take precedence over template globals. Don't have time to test this right now.
   // combine the `extra_args` with the common arguments
   if (s) {
     let _template;
@@ -144,41 +143,43 @@ const text_bundles_by_filename = {};
 const add_text_bundle = (text_bundle) => {
   const { __file_name__ } = text_bundle;
   const to_add = {};
-  _.each(_.omit(text_bundle, "__file_name__"), (text_obj, key) => {
-    if (text_obj.handlebars_partial) {
-      Handlebars.registerPartial(key, text_obj.text);
-      return;
-    }
+  _.chain(text_bundle)
+    .omit("__file_name__")
+    .forEach((text_obj, key) => {
+      if (text_obj.handlebars_partial) {
+        Handlebars.registerPartial(key, text_obj.text);
+        return;
+      }
 
-    //partials are the only case we don't add to the global text registry
-    to_add[key] = text_obj;
+      //partials are the only case we don't add to the global text registry
+      to_add[key] = text_obj;
 
-    //get rid of language specific props
-    text_obj.text = text_obj[window.lang] || text_obj.text;
-    delete text_obj.en;
-    delete text_obj.fr;
+      //get rid of language specific props
+      text_obj.text = text_obj[window.lang] || text_obj.text;
+      delete text_obj.en;
+      delete text_obj.fr;
 
-    if (text_obj.pre_compile === true) {
-      const hbs_content = text_obj[window.lang] || text_obj.text;
-      text_obj.text = Handlebars.compile(hbs_content);
-      text_obj.handlebars_compiled = true;
-    }
-  });
-  _.extend(template_store, to_add);
+      if (text_obj.pre_compile === true) {
+        const hbs_content = text_obj[window.lang] || text_obj.text;
+        text_obj.text = Handlebars.compile(hbs_content);
+        text_obj.handlebars_compiled = true;
+      }
+    })
+    .value();
+  _.assignIn(template_store, to_add);
 
   text_bundles_by_filename[__file_name__] = to_add;
 };
 
 const combine_bundles = (bundles) => {
   return _.chain(bundles)
-    .map((bundle) => {
+    .flatMap((bundle) => {
       const { __file_name__ } = bundle;
       if (!_.has(text_bundles_by_filename, __file_name__)) {
         add_text_bundle(bundle);
       }
       return _.toPairs(text_bundles_by_filename[__file_name__]);
     })
-    .flatten()
     .fromPairs()
     .value();
 };
@@ -211,7 +212,7 @@ const _create_text_maker = (deps = template_store) => (key, context = {}) => {
   }
 
   let rtn = text_obj.text;
-  _.each(text_obj.transform, (transform) => {
+  _.forEach(text_obj.transform, (transform) => {
     if (transform === "handlebars") {
       if (!text_obj.handlebars_compiled) {
         text_obj.text = Handlebars.compile(rtn);
@@ -230,7 +231,8 @@ const _create_text_maker = (deps = template_store) => (key, context = {}) => {
       );
 
       if (embedded_markdown_nodes.length) {
-        _.map(embedded_markdown_nodes, _.idenity).forEach(
+        _.forEach(
+          embedded_markdown_nodes,
           (node) =>
             (node.innerHTML = marked(node.innerHTML, {
               sanitize: false,
@@ -261,7 +263,7 @@ const create_text_maker = (bundles) => {
   }
 
   const combined = combine_bundles(bundles);
-  _.extend(combined, combined_global_bundle);
+  _.assignIn(combined, combined_global_bundle);
   const func = _create_text_maker(combined);
   combined.__text_maker_func__ = func;
 

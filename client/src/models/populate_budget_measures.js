@@ -70,7 +70,7 @@ export function api_load_subject_has_measures(subject, years) {
 
   if (is_loaded) {
     // ensure that subject.has_data matches _subject_has_measures, since _subject_has_measures hay have been updated via side-effect
-    _.each(years_to_load, (year) =>
+    _.forEach(years_to_load, (year) =>
       subject.set_has_data(
         `budget${year}_data`,
         _.get(_subject_has_measures, `${year}.${level}.${id}`)
@@ -98,19 +98,19 @@ export function api_load_subject_has_measures(subject, years) {
       if (!_.isEmpty(response_data)) {
         // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
         log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
+          SUBAPP: _.replace(window.location.hash, "#", ""),
           MISC1: "API_QUERY_SUCCESS",
           MISC2: `Has budget measures, took ${resp_time} ms`,
         });
       } else {
         log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
+          SUBAPP: _.replace(window.location.hash, "#", ""),
           MISC1: "API_QUERY_UNEXPECTED",
           MISC2: `Has budget measures, took ${resp_time} ms`,
         });
       }
 
-      _.each(years_to_load, (year) => {
+      _.forEach(years_to_load, (year) => {
         subject.set_has_data(
           `budget${year}_data`,
           response_data[`hasMeasures${year}`]
@@ -131,7 +131,7 @@ export function api_load_subject_has_measures(subject, years) {
     .catch(function (error) {
       const resp_time = Date.now() - time_at_request;
       log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
+        SUBAPP: _.replace(window.location.hash, "#", ""),
         MISC1: "API_QUERY_FAILURE",
         MISC2: `Has budget measures, took ${resp_time} ms - ${error.toString()}`,
       });
@@ -265,23 +265,23 @@ export function api_load_budget_measures(subject, years) {
       if (!_.isEmpty(response_data)) {
         // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
         log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
+          SUBAPP: _.replace(window.location.hash, "#", ""),
           MISC1: "API_QUERY_SUCCESS",
           MISC2: `Budget measures, took ${resp_time} ms`,
         });
       } else {
         log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
+          SUBAPP: _.replace(window.location.hash, "#", ""),
           MISC1: "API_QUERY_UNEXPECTED",
           MISC2: `Budget measures, took ${resp_time} ms`,
         });
       }
 
-      _.each(years_to_load, (year) => {
+      _.forEach(years_to_load, (year) => {
         const measures_in_year = response_data[`measures${year}`];
 
         if (!_.isEmpty(measures_in_year)) {
-          _.each(measures_in_year, (measure) =>
+          _.forEach(measures_in_year, (measure) =>
             BudgetMeasure.create_and_register({ ...measure, year })
           );
         }
@@ -309,7 +309,7 @@ export function api_load_budget_measures(subject, years) {
     .catch(function (error) {
       const resp_time = Date.now() - time_at_request;
       log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
+        SUBAPP: _.replace(window.location.hash, "#", ""),
         MISC1: "API_QUERY_FAILURE",
         MISC2: `Budget measures, took ${resp_time} ms - ${error.toString()}`,
       });

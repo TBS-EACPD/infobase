@@ -45,11 +45,11 @@ export default class FootNote extends mix().with(staticStoreMixin) {
     return _.uniqBy(ret, "text");
   }
   static get_all_flat() {
-    return _.chain(this.get_all()).flatten().value();
+    return _.flatten(this.get_all());
   }
   constructor(def) {
     super();
-    Object.assign(this, def);
+    _.assign(this, def);
   }
 }
 

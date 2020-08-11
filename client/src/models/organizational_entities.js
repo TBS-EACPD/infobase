@@ -7,6 +7,9 @@ import {
 } from "./storeMixins.js";
 import { trivial_text_maker } from "../models/text.js";
 
+/* eslint-disable */
+//this  file  has a lot of get functions that triggers the lodash prefer-constant
+
 const static_subject_store = () =>
   mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
 const static_subject_store_with_API_data = () =>
@@ -108,7 +111,7 @@ const Dept = class Dept extends static_subject_store_with_API_data() {
   }
   constructor(def) {
     super();
-    Object.assign(
+    _.assign(
       this,
       {
         id: def.unique_id,
@@ -123,7 +126,7 @@ const Dept = class Dept extends static_subject_store_with_API_data() {
   }
 
   get programs() {
-    return _.chain(this.crsos).map("programs").flatten().compact().value();
+    return _.chain(this.crsos).flatMap("programs").compact().value();
   }
   // TODO: these hardcoded rules are horrible, need the pipeline to include flags somewhere so planned spending status can be managed as data
   get has_planned_spending() {
@@ -250,7 +253,7 @@ const CRSO = class CRSO extends static_subject_store_with_API_data() {
   }
   constructor(attrs) {
     super();
-    Object.assign(
+    _.assign(
       this,
       {
         programs: [],
@@ -294,7 +297,7 @@ const Program = class Program extends static_subject_store_with_API_data() {
   }
   constructor(attrs) {
     super();
-    Object.assign(
+    _.assign(
       this,
       {
         tags: [],
@@ -371,7 +374,7 @@ const InstForm = class InstForm extends static_subject_store() {
   }
   constructor(id, name) {
     super();
-    Object.assign(this, {
+    _.assign(this, {
       id,
       name,
       //Below will be populated by the creator

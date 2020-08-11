@@ -6,7 +6,7 @@ class MixinBuilder {
     this.superclass = superclass;
   }
   with(...mixins) {
-    return mixins.reduce((c, mixin) => mixin(c), this.superclass);
+    return _.reduce(mixins, (c, mixin) => mixin(c), this.superclass);
   }
 }
 

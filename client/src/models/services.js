@@ -9,7 +9,7 @@ import { trivial_text_maker } from "../models/text.js";
 import { Program } from "./organizational_entities.js";
 
 // dependencies are tangled up too much here, disable it for the whole file
-/* eslint-disable no-use-before-define */
+/* eslint-disable */
 
 const static_subject_store = () =>
   mix().with(staticStoreMixin, PluralSingular, SubjectMixin);

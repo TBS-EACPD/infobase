@@ -116,7 +116,7 @@ export const format_and_get_fte = (type, info, subject) => {
             return true;
           }
         })
-        .map()
+        .values()
         .value();
 
     const historical_graph_data = prepare_graph_data(

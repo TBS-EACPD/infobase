@@ -64,8 +64,9 @@ const get_dynamic_footnotes = () => {
         })
       );
 
-      const dept_footnotes = _.chain(docs_with_late_orgs)
-        .flatMap(({ [late_org_property]: late_orgs, doc_type, year }) =>
+      const dept_footnotes = _.flatMap(
+        docs_with_late_orgs,
+        ({ [late_org_property]: late_orgs, doc_type, year }) =>
           _.chain(late_orgs)
             .map(Dept.lookup)
             .flatMap(expand_dept_cr_and_programs)
@@ -84,8 +85,7 @@ const get_dynamic_footnotes = () => {
                 }
             )
             .value()
-        )
-        .value();
+      );
 
       return [...gov_footnotes, ...dept_footnotes];
     }

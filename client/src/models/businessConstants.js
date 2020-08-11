@@ -19,16 +19,16 @@ const unlangify = (obj) => {
 //remove nested lang properties
 //there aren't enough to warrant
 //the complexity of removing them at build-time
-_.each(yaml, (collection) => {
-  _.each(collection, (obj) => unlangify(obj));
+_.forEach(yaml, (collection) => {
+  _.forEach(collection, (obj) => unlangify(obj));
 });
 
-_.each(yaml.sos, (val, key) => {
+_.forEach(yaml.sos, (val, key) => {
   val.so_num = +key;
 });
 
 //for sorting convenience, attach the index of each month
-_.each(yaml.months, (obj, ix) => {
+_.forEach(yaml.months, (obj, ix) => {
   obj.ix = ix;
 });
 

@@ -30,7 +30,7 @@ function extend_hi_tags(hi_lookups) {
     .fromPairs()
     .value();
 
-  _.each(Tag.tag_roots.HI.children_tags, ({ id }) =>
+  _.forEach(Tag.tag_roots.HI.children_tags, ({ id }) =>
     Tag.extend(id, {
       lookups: {
         ...(processed_hi_lookups[id] || {}),

@@ -17,23 +17,22 @@ function _get_flat_results(subject) {
   }
   switch (subject.level) {
     case "program":
-      return _.chain(Result.get_entity_results(subject.id))
+      return _.chain(Result)
+        .thru((result) => result.get_entity_results(subject.id))
         .uniqBy("id")
         .compact()
         .value();
 
     case "crso":
       return _.chain(subject.programs)
-        .map(_get_flat_results)
-        .flatten()
+        .flatMap(_get_flat_results)
         .concat(Result.get_entity_results(subject.id))
         .compact()
         .value();
 
     case "dept":
       return _.chain(subject.crsos)
-        .map(_get_flat_results)
-        .flatten()
+        .flatMap(_get_flat_results)
         .compact()
         .value();
 
@@ -51,7 +50,7 @@ const entity_indexed_results = {};
 const id_indexed_results = {};
 class Result {
   static get_all() {
-    return _.map(id_indexed_results, _.identity);
+    return _.values(id_indexed_results);
   }
   static lookup(id) {
     return id_indexed_results[id];
@@ -85,13 +84,12 @@ class Result {
   static get_departmental_results(dept_obj) {
     return _.chain(dept_obj.crsos)
       .filter("is_cr")
-      .map(({ id }) => Result.get_entity_results(id))
-      .flatten()
+      .flatMap(({ id }) => Result.get_entity_results(id))
       .filter("is_dr")
       .value();
   }
   constructor(fields) {
-    Object.assign(this, fields);
+    _.assign(this, fields);
   }
   get indicators() {
     return Indicator.lookup_by_result_id(this.id);
@@ -102,6 +100,7 @@ class Result {
   plural() {
     return trivial_text_maker("results");
   }
+  // eslint-disable-next-line
   get level() {
     return "result";
   }
@@ -127,7 +126,8 @@ class Result {
     return this.parent_level === "cr";
   }
   get contributing_programs() {
-    return _.chain(PI_DR_Links.get_contributing_program_ids_for_result(this.id))
+    return _.chain(PI_DR_Links)
+      .thru((link) => link.get_contributing_program_ids_for_result(this.id))
       .map((prog_id) => Program.lookup(prog_id))
       .compact()
       .value();
@@ -141,7 +141,7 @@ const result_indexed_indicators = {};
 const id_indexed_indicators = {};
 class Indicator {
   static get_all() {
-    return _.map(id_indexed_indicators, _.identity);
+    return _.values(id_indexed_indicators);
   }
   static lookup(id) {
     return id_indexed_indicators[id];
@@ -150,7 +150,7 @@ class Indicator {
     return result_indexed_indicators[result_id] || [];
   }
   constructor(def) {
-    Object.assign(this, def);
+    _.assign(this, def);
   }
   static create_and_register(def) {
     const { id, result_id } = def;
@@ -168,6 +168,7 @@ class Indicator {
     }
     result_indexed_indicators[result_id].push(inst);
   }
+  // eslint-disable-next-line
   get level() {
     return "indicator";
   }
@@ -193,9 +194,9 @@ class Indicator {
     }
   }
   static get_flat_indicators(subject) {
-    return _.chain(Result.get_flat_results(subject))
-      .map("indicators")
-      .flatten()
+    return _.chain(Result)
+      .thru((result) => result.get_flat_results(subject))
+      .flatMap("indicators")
       .compact()
       .uniqBy("id")
       .value();
@@ -243,13 +244,13 @@ const ResultCounts = {
     if (_.isEmpty(this.data)) {
       throw results_counts_not_loaded_error;
     }
-    return _.chain(this.data).find({ id: org_id.toString() }).value();
+    return _.find(this.data, { id: org_id.toString() });
   },
   get_gov_counts() {
     if (_.isEmpty(this.data)) {
       throw results_counts_not_loaded_error;
     }
-    return _.chain(this.data).find({ id: "total" }).value();
+    return _.find(this.data, { id: "total" });
   },
   get_data() {
     if (_.isEmpty(this.data)) {
@@ -277,7 +278,7 @@ const GranularResultCounts = {
     if (_.isEmpty(this.data)) {
       throw granular_results_counts_not_loaded_error;
     }
-    return _.chain(this.data).find({ id: subject_id }).value();
+    return _.find(this.data, { id: subject_id });
   },
   get_data() {
     if (_.isEmpty(this.data)) {
@@ -326,7 +327,7 @@ const build_doc_info_objects = (doc_type, docs) =>
 
       const primary_resource_year = is_drr
         ? _.last(resource_years)
-        : _.first(resource_years);
+        : _.head(resource_years);
 
       return {
         doc_type,
@@ -431,7 +432,7 @@ export {
   current_dp_key,
 };
 
-Object.assign(window._DEV_HELPERS, {
+_.assign(window._DEV_HELPERS, {
   Result,
   Indicator,
   PI_DR_Links,

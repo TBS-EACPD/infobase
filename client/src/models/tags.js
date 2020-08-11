@@ -18,6 +18,7 @@ const Tag = class Tag extends extensible_subject_store() {
       .fromPairs()
       .value();
   }
+  // eslint-disable-next-line
   static get subject_type() {
     return "tag";
   }
@@ -44,7 +45,7 @@ const Tag = class Tag extends extensible_subject_store() {
   }
   constructor(attrs) {
     super();
-    Object.assign(
+    _.assign(
       this,
       {
         programs: [],
@@ -122,8 +123,7 @@ const Tag = class Tag extends extensible_subject_store() {
   }
   related_tags() {
     return _.chain(this.programs)
-      .map((prog) => prog.tags)
-      .flatten()
+      .flatMap((prog) => prog.tags)
       .filter((tag) => tag.root.id === this.root.id)
       .uniqBy()
       .without(this)

@@ -202,7 +202,7 @@ export class PartitionDataWrapper {
     node.magnified = false;
     const parent = node.parent;
     if (!_.some(parent.children, (d) => d.magnified)) {
-      _.forEach((d) => {
+      _.forEach(parent.children, (d) => {
         this.restore(d);
         this.unhide_all_children(d);
       });

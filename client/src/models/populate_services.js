@@ -63,13 +63,13 @@ export function api_load_subject_has_services(subject) {
       if (!_.isEmpty(response_data)) {
         // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
         log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
+          SUBAPP: _.replace(window.location.hash, "#", ""),
           MISC1: "API_QUERY_SUCCESS",
           MISC2: `Has services, took ${resp_time} ms`,
         });
       } else {
         log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
+          SUBAPP: _.replace(window.location.hash, "#", ""),
           MISC1: "API_QUERY_UNEXPECTED",
           MISC2: `Has services, took ${resp_time} ms`,
         });
@@ -91,7 +91,7 @@ export function api_load_subject_has_services(subject) {
     .catch(function (error) {
       const resp_time = Date.now() - time_at_request;
       log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
+        SUBAPP: _.replace(window.location.hash, "#", ""),
         MISC1: "API_QUERY_FAILURE",
         MISC2: `Has services, took ${resp_time} ms - ${error.toString()}`,
       });
@@ -182,12 +182,14 @@ query($lang: String!) {
 
 const extract_flat_data_from_hierarchical_response = (response) => {
   const serviceStandards = [];
+  // eslint-disable-next-line
   const services = _.chain(_.isArray(response) ? response : [response])
     .map((resp) => resp.services)
     .compact()
-    .flatten(true)
-    .each((service) =>
-      _.each(service.standards, (standard) =>
+    .flatten()
+    .forEach((service) =>
+      // eslint-disable-next-line
+      _.forEach(service.standards, (standard) =>
         serviceStandards.push(_.omit(standard, "__typename"))
       )
     )
@@ -246,13 +248,13 @@ export function api_load_services(subject) {
       if (!_.isEmpty(response_data)) {
         // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
         log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
+          SUBAPP: _.replace(window.location.hash, "#", ""),
           MISC1: "API_QUERY_SUCCESS",
           MISC2: `Services, took ${resp_time} ms`,
         });
       } else {
         log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
+          SUBAPP: _.replace(window.location.hash, "#", ""),
           MISC1: "API_QUERY_UNEXPECTED",
           MISC2: `Services, took ${resp_time} ms`,
         });
@@ -264,10 +266,10 @@ export function api_load_services(subject) {
       } = extract_flat_data_from_hierarchical_response(response_data);
 
       if (!_.isEmpty(services)) {
-        _.each(services, (service) => Service.create_and_register(service));
+        _.forEach(services, (service) => Service.create_and_register(service));
       }
       if (!_.isEmpty(serviceStandards)) {
-        _.each(serviceStandards, (standard) =>
+        _.forEach(serviceStandards, (standard) =>
           ServiceStandard.create_and_register(standard)
         );
       }
@@ -294,7 +296,7 @@ export function api_load_services(subject) {
     .catch(function (error) {
       const resp_time = Date.now() - time_at_request;
       log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
+        SUBAPP: _.replace(window.location.hash, "#", ""),
         MISC1: "API_QUERY_FAILURE",
         MISC2: `Services, took ${resp_time} ms - ${error.toString()}`,
       });

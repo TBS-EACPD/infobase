@@ -17,7 +17,7 @@ function populate_footnotes_info(csv_str) {
     _.mapValues(row, (item) => _.trim(item))
   );
 
-  _.each(rows, (obj) => {
+  _.forEach(rows, (obj) => {
     const {
       id,
       subject_class,
@@ -28,9 +28,10 @@ function populate_footnotes_info(csv_str) {
       footnote,
     } = obj;
 
-    const split_topic_keys = topic_keys
+    const split_topic_keys = _.chain(topic_keys)
       .split(",")
-      .map((key) => key.replace(" ", ""));
+      .map((key) => _.replace(key, " ", ""))
+      .value();
 
     const invalid_keys = _.difference(split_topic_keys, footnote_topic_keys);
     if (invalid_keys.length > 0) {
@@ -123,7 +124,7 @@ function load_footnotes_bundle(subject) {
 function populate_global_footnotes(csv_str) {
   populate_footnotes_info(csv_str);
 
-  _.each(get_dynamic_footnotes(), function (footnote_config) {
+  _.forEach(get_dynamic_footnotes(), function (footnote_config) {
     FootNote.create_and_register(footnote_config);
   });
 }

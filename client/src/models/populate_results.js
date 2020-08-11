@@ -70,13 +70,13 @@ export const subject_has_results = (subject) => {
 
           if (_.isBoolean(has_results)) {
             log_standard_event({
-              SUBAPP: window.location.hash.replace("#", ""),
+              SUBAPP: _.replace(window.location.hash, "#", ""),
               MISC1: "API_QUERY_SUCCESS",
               MISC2: `Has results, took ${resp_time} ms`,
             });
           } else {
             log_standard_event({
-              SUBAPP: window.location.hash.replace("#", ""),
+              SUBAPP: _.replace(window.location.hash, "#", ""),
               MISC1: "API_QUERY_UNEXPECTED",
               MISC2: `Has results, took ${resp_time} ms`,
             });
@@ -90,7 +90,7 @@ export const subject_has_results = (subject) => {
         .catch(function (error) {
           const resp_time = Date.now() - time_at_request;
           log_standard_event({
-            SUBAPP: window.location.hash.replace("#", ""),
+            SUBAPP: _.replace(window.location.hash, "#", ""),
             MISC1: "API_QUERY_FAILURE",
             MISC2: `Has results, took  ${resp_time} ms - ${error.toString()}`,
           });
@@ -227,8 +227,9 @@ function extract_flat_data_from_results_hierarchies(
     pi_dr_links = [];
 
   const crawl_hierachy_level = (subject_node) =>
-    _.each(subject_node, (subject) => {
-      _.each(
+    // eslint-disable-next-line
+    _.forEach(subject_node, (subject) => {
+      _.forEach(
         _.chain(subject)
           .pickBy((value, key) => /(drr|dp)[0-9][0-9]_results/.test(key))
           .reduce((memo, doc_results) => [...memo, ...doc_results], [])
@@ -241,7 +242,7 @@ function extract_flat_data_from_results_hierarchies(
             doc: result.doc,
           });
 
-          _.each(result.indicators, (indicator) => {
+          _.forEach(result.indicators, (indicator) => {
             indicator.target_year = _.isEmpty(indicator.target_year)
               ? null
               : parseInt(indicator.target_year);
@@ -253,7 +254,7 @@ function extract_flat_data_from_results_hierarchies(
             // a header in a methodology would be invalid Titan input anyway, so safe to escape all those cases ourselves
             indicator.methodology =
               indicator.methodology &&
-              indicator.methodology.replace(/^#/g, "\\#");
+              _.replace(indicator.methodology, /^#/g, "\\#");
 
             indicators.push(_.omit(indicator, "__typename"));
           });
@@ -261,11 +262,12 @@ function extract_flat_data_from_results_hierarchies(
       );
 
       if (!_.isEmpty(subject.pidrlinks)) {
-        _.each(subject.pidrlinks, (pidrlink) => pi_dr_links.push(pidrlink));
+        // eslint-disable-next-line
+        _.forEach(subject.pidrlinks, (pidrlink) => pi_dr_links.push(pidrlink));
       }
     });
 
-  _.each(hierarchical_response_data, (response) => {
+  _.forEach(hierarchical_response_data, (response) => {
     switch (response.__typename) {
       case "Program":
         crawl_hierachy_level([response]);
@@ -359,13 +361,13 @@ export function api_load_results_bundle(subject, result_docs) {
       if (!_.isEmpty(hierarchical_response_data)) {
         // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
         log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
+          SUBAPP: _.replace(window.location.hash, "#", ""),
           MISC1: "API_QUERY_SUCCESS",
           MISC2: `Results, took ${resp_time} ms`,
         });
       } else {
         log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
+          SUBAPP: _.replace(window.location.hash, "#", ""),
           MISC1: "API_QUERY_UNEXPECTED",
           MISC2: `Results, took ${resp_time} ms`,
         });
@@ -379,13 +381,13 @@ export function api_load_results_bundle(subject, result_docs) {
         hierarchical_response_data
       );
 
-      _.each(results, (obj) => Result.create_and_register(obj));
-      _.each(indicators, (obj) => Indicator.create_and_register(obj));
-      _.each(pi_dr_links, ({ program_id, result_id }) =>
+      _.forEach(results, (obj) => Result.create_and_register(obj));
+      _.forEach(indicators, (obj) => Indicator.create_and_register(obj));
+      _.forEach(pi_dr_links, ({ program_id, result_id }) =>
         PI_DR_Links.add(program_id, result_id)
       );
 
-      _.each(
+      _.forEach(
         docs_to_load,
         // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
         // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh
@@ -408,7 +410,7 @@ export function api_load_results_bundle(subject, result_docs) {
     .catch(function (error) {
       const resp_time = Date.now() - time_at_request;
       log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
+        SUBAPP: _.replace(window.location.hash, "#", ""),
         MISC1: "API_QUERY_FAILURE",
         MISC2: `Results, took  ${resp_time} ms - ${error.toString()}`,
       });
@@ -477,13 +479,13 @@ export function api_load_results_counts(level = "summary") {
         if (!_.isEmpty(response_rows)) {
           // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
           log_standard_event({
-            SUBAPP: window.location.hash.replace("#", ""),
+            SUBAPP: _.replace(window.location.hash, "#", ""),
             MISC1: "API_QUERY_SUCCESS",
             MISC2: `Results counts, took ${resp_time} ms`,
           });
         } else {
           log_standard_event({
-            SUBAPP: window.location.hash.replace("#", ""),
+            SUBAPP: _.replace(window.location.hash, "#", ""),
             MISC1: "API_QUERY_UNEXPECTED",
             MISC2: `Results counts, took ${resp_time} ms`,
           });
@@ -532,14 +534,14 @@ export function api_load_results_counts(level = "summary") {
         api_is_results_count_loaded[level] = true;
 
         // if it's in the results count set, it has results data
-        _.each(mapped_rows, ({ id }) => (_subject_has_results[id] = true)); // side effect
+        _.forEach(mapped_rows, ({ id }) => (_subject_has_results[id] = true)); // side effect
 
         return Promise.resolve();
       })
       .catch(function (error) {
         const resp_time = Date.now() - time_at_request;
         log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
+          SUBAPP: _.replace(window.location.hash, "#", ""),
           MISC1: "API_QUERY_FAILURE",
           MISC2: `Results counts, took  ${resp_time} ms - ${error.toString()}`,
         });
