@@ -176,7 +176,7 @@ const get_non_col_content = ({ node }) => {
 class EstimatesExplorer extends React.Component {
   constructor() {
     super();
-    this.state = { _query: "" };
+    this.state = { _query: "", show_inactive: false };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
   handleQueryChange(new_query) {
@@ -237,7 +237,7 @@ class EstimatesExplorer extends React.Component {
 
     const { loading } = this.state;
 
-    const root = get_root(flat_nodes);
+    const root = _.cloneDeep(get_root(flat_nodes));
 
     const explorer_config = {
       column_defs,
@@ -248,16 +248,17 @@ class EstimatesExplorer extends React.Component {
       col_click,
     };
 
-    _.forEach(
-      root.children,
-      (org) =>
-        (org.children = _.reject(
-          org.children,
-          (estimate) =>
-            estimate.data.current_value === 0 &&
-            estimate.data.percent_value === -Infinity
-        ))
-    );
+    !this.state.show_inactive &&
+      _.forEach(
+        root.children,
+        (org) =>
+          (org.children = _.reject(
+            org.children,
+            (estimate) =>
+              estimate.data.current_value === 0 &&
+              estimate.data.percent_value === -Infinity
+          ))
+      );
 
     return (
       <div>
@@ -325,6 +326,17 @@ class EstimatesExplorer extends React.Component {
             )}
             {h7y_layout === "org" && (
               <div className="estimates-checkbox-row medium_panel_text">
+                <CheckBox
+                  label={text_maker("show_inactive_votes")}
+                  active={this.state.show_inactive}
+                  onClick={() =>
+                    this.setState((prevState) => {
+                      return { show_inactive: !prevState.show_inactive };
+                    })
+                  }
+                  checkmark_vertical_align={6}
+                  checkbox_style={{ marginTop: 4 }}
+                />
                 <CheckBox
                   label={text_maker("show_only_votes")}
                   active={!show_stat}
