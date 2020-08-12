@@ -18,7 +18,6 @@ const Tag = class Tag extends extensible_subject_store() {
       .fromPairs()
       .value();
   }
-  // eslint-disable-next-line
   static get subject_type() {
     return "tag";
   }

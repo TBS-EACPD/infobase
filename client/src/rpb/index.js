@@ -376,7 +376,7 @@ class AnalyticsSynchronizer extends React.Component {
   //note that we do not update the URL when componentDidMount().
   //this is so that the URL isn't printed too often
   //alternatively, we *can* overwrite the URL in componentDidMount() using replaceState().
-  // eslint-disable-next-line
+
   render() {
     return null;
   }
@@ -405,7 +405,6 @@ class AnalyticsSynchronizer extends React.Component {
 
 const URLSynchronizer = withRouter(
   class URLSynchronizer_ extends React.Component {
-    // eslint-disable-next-line
     render() {
       return null;
     }

@@ -99,7 +99,6 @@ class Result {
   plural() {
     return trivial_text_maker("results");
   }
-  // eslint-disable-next-line
   get level() {
     return "result";
   }
@@ -166,7 +165,6 @@ class Indicator {
     }
     result_indexed_indicators[result_id].push(inst);
   }
-  // eslint-disable-next-line
   get level() {
     return "indicator";
   }

@@ -7,9 +7,6 @@ import {
 } from "./storeMixins.js";
 import { trivial_text_maker } from "../models/text.js";
 
-/* eslint-disable */
-//this  file  has a lot of get functions that triggers the lodash prefer-constant
-
 const static_subject_store = () =>
   mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
 const static_subject_store_with_API_data = () =>

@@ -169,7 +169,6 @@ export const TextPanel = (props) => {
 */
 
 //Dummy component that will be remapped to flexboxgrid columns
-// eslint-disable-next-line
 const Col = ({ children, size }) => null;
 Col.propTypes = {
   size: PropTypes.number.isRequired,
