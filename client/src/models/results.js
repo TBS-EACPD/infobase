@@ -17,8 +17,7 @@ function _get_flat_results(subject) {
   }
   switch (subject.level) {
     case "program":
-      return _.chain(Result)
-        .thru((result) => result.get_entity_results(subject.id))
+      return _.chain(Result.get_entity_results(subject.id))
         .uniqBy("id")
         .compact()
         .value();
@@ -126,8 +125,7 @@ class Result {
     return this.parent_level === "cr";
   }
   get contributing_programs() {
-    return _.chain(PI_DR_Links)
-      .thru((link) => link.get_contributing_program_ids_for_result(this.id))
+    return _.chain(PI_DR_Links.get_contributing_program_ids_for_result(this.id))
       .map((prog_id) => Program.lookup(prog_id))
       .compact()
       .value();
@@ -194,8 +192,7 @@ class Indicator {
     }
   }
   static get_flat_indicators(subject) {
-    return _.chain(Result)
-      .thru((result) => result.get_flat_results(subject))
+    return _.chain(Result.get_flat_results(subject))
       .flatMap("indicators")
       .compact()
       .uniqBy("id")

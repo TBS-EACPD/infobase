@@ -75,8 +75,7 @@ export const single_subj_results_scheme = {
 
       const icon_counts =
         !data_loading &&
-        _.chain(Indicator)
-          .thru((ind) => ind.get_flat_indicators(subject))
+        _.chain(Indicator.get_flat_indicators(subject))
           .filter({ doc: doc })
           .groupBy("status_key")
           .mapValues((group, status_key) => group.length)
