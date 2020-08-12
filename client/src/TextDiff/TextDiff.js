@@ -81,8 +81,7 @@ const get_indicators = (subject) => {
         ? res_subject.dept === subject
         : res_subject === subject || res_subject.crso === subject;
     })
-    .map((res) => res.indicators)
-    .flatten()
+    .flatMap((res) => res.indicators)
     .groupBy("stable_id")
     .map((pair) => _.sortBy(pair, "doc"))
     .value();
@@ -548,8 +547,7 @@ export default class TextDiffApp extends React.Component {
                 ? [subject]
                 : [subject.crso]
             )
-              .map("programs")
-              .flatten()
+              .flatMap("programs")
               .compact()
               .map((prog) => ({ id: prog.id, display: prog.name }))
               .concat([{ id: "all", display: text_maker("all_programs") }])

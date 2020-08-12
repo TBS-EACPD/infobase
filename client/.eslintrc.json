@@ -32,7 +32,8 @@
       "lodash/prop-shorthand": ["off"],
       "lodash/matches-prop-shorthand": ["off"],
       "lodash/matches-shorthand": ["off"],
-      "lodash/prefer-constant": ["off"]
+      "lodash/prefer-constant": ["off"],
+      "lodash/prefer-thru": ["off"]
   },
   "settings": {
     "react": {

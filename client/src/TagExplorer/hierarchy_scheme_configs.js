@@ -59,17 +59,15 @@ const min_config = {
   is_m2m: false,
   can_roll_up: true,
   get_depth_one_nodes: (year) =>
-    _.chain(Ministry.get_all())
-      .map((min) => ({
-        id: min.guid,
-        data: {
-          name: min.name,
-          subject: min,
-          resources: get_resources_for_subject(min, year),
-        },
-        children: _.map(min.orgs, (org) => get_org_nodes(org, year)),
-      }))
-      .value(),
+    _.map(Ministry.get_all(), (min) => ({
+      id: min.guid,
+      data: {
+        name: min.name,
+        subject: min,
+        resources: get_resources_for_subject(min, year),
+      },
+      children: _.map(min.orgs, (org) => get_org_nodes(org, year)),
+    })),
 };
 const dept_config = {
   id: "dept",

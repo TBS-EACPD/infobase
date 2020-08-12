@@ -9,6 +9,7 @@ const linked_stylesheets_loaded = () => {
         `link[rel='stylesheet'][href^='${window.cdn_url}']`
       )
     )
+      // eslint-disable-next-line
       .map(_.identity)
       .every((link_tag) => !_.isNull(link_tag.sheet))
       .value();
@@ -27,7 +28,7 @@ const linked_stylesheets_loaded = () => {
 const ensure_linked_stylesheets_load = () => {
   if (!linked_stylesheets_loaded() && !window.is_dev) {
     log_standard_event({
-      SUBAPP: window.location.hash.replace("#", ""),
+      SUBAPP: _.replace(window.location.hash, "#", ""),
       MISC1: "ERROR_IN_PROD",
       MISC2: "Linked style sheets failed to load!",
     });

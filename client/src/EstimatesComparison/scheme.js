@@ -111,7 +111,7 @@ const key_for_table_row = (row) => `${row.dept}-${row.votenum}-${row.desc}`;
 
 const get_keys_in_sups = (include_stat) =>
   _.chain(Table.lookup("orgVoteStatEstimates").data)
-    .pipe(
+    .thru(
       include_stat
         ? _.identity
         : (rows) => _.reject(rows, { votestattype: 999 })
@@ -141,12 +141,12 @@ function get_data_by_org(include_stat) {
   const keys_in_sups = get_keys_in_sups(include_stat);
 
   const data = _.chain(Table.lookup("orgVoteStatEstimates").data)
-    .pipe(
+    .thru(
       include_stat
         ? _.identity
         : (rows) => _.reject(rows, { votestattype: 999 })
     )
-    .pipe(reduce_by_current_doc_dim)
+    .thru(reduce_by_current_doc_dim)
     .groupBy("dept")
     .toPairs()
     .map(([org_id, rows]) => {
@@ -241,10 +241,10 @@ function get_data_by_org(include_stat) {
 }
 
 const strip_stat_marker = (str) =>
-  str.indexOf("(S) ") > -1 ? str.split("(S) ")[1] : str;
+  _.includes(str, "(S) ") ? _.split(str, "(S) ")[1] : str;
 const get_category_children = (rows) =>
   _.chain(rows)
-    .pipe(reduce_by_current_doc_dim)
+    .thru(reduce_by_current_doc_dim)
     .map((new_row) => {
       const { votenum, desc, dept } = new_row;
       const current_value = new_row.current_value || 0;
@@ -307,7 +307,7 @@ function get_data_by_item_types() {
         }
       }
 
-      const is_voted = _.isNumber(_.first(rows).votenum);
+      const is_voted = _.isNumber(_.head(rows).votenum);
 
       const is_single_item =
         _.chain(rows).map(row_identifier_func).uniq().value().length === 1;
@@ -477,7 +477,7 @@ export const estimates_diff_scheme = {
         return (list) =>
           _.chain(list) //sort by search relevance, than the initial sort func
             .sortBy(attr_getter)
-            .pipe(is_descending ? _.reverse : _.identity)
+            .thru(is_descending ? _.reverse : _.identity)
             .value();
       }
     );

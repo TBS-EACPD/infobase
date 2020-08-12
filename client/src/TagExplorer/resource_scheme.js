@@ -24,7 +24,7 @@ import {
 } from "./hierarchy_scheme_configs.js";
 
 const { planning_years } = year_templates;
-const planning_year = _.first(planning_years);
+const planning_year = _.head(planning_years);
 
 function create_resource_hierarchy({ hierarchy_scheme, year }) {
   const hierarchy_scheme_config = hierarchy_scheme_configs[hierarchy_scheme];
@@ -54,8 +54,8 @@ function create_resource_hierarchy({ hierarchy_scheme, year }) {
     switch (subject.level) {
       case "tag": {
         if (subject.is_lowest_level_tag) {
-          return _.chain(subject.programs)
-            .map((prog) => ({
+          return _.map(subject.programs, (prog) => {
+            return {
               id: `${parent_id}-${prog.guid}`,
               data: {
                 name: `${prog.name} (${prog.dept.abbr || prog.dept.name})`,
@@ -81,23 +81,21 @@ function create_resource_hierarchy({ hierarchy_scheme, year }) {
                     ),
                   },
                   subject.is_m2m &&
-                    !_.isEmpty(
-                      _.filter(
-                        prog.tags_by_scheme[subject.root.id],
-                        (tag) => tag.id !== subject.id
-                      )
-                    ) &&
+                    !_.chain(prog.tags_by_scheme[subject.root.id])
+                      .reject((tag) => tag.id === subject.id)
+                      .isEmpty()
+                      .value() &&
                     related_tags_row(
-                      _.filter(
+                      _.reject(
                         prog.tags_by_scheme[subject.root.id],
-                        (tag) => tag.id !== subject.id
+                        (tag) => tag.id === subject.id
                       ),
                       "program"
                     ),
                 ]),
               },
-            }))
-            .value();
+            };
+          });
         } else if (!_.isEmpty(subject.children_tags)) {
           return _.map(subject.children_tags, (tag) => ({
             id: tag.guid,
@@ -125,34 +123,32 @@ function create_resource_hierarchy({ hierarchy_scheme, year }) {
       }
 
       case "dept": {
-        return _.chain(subject.crsos)
-          .map((crso) => ({
-            id: crso.guid,
-            data: {
-              subject: crso,
-              name: crso.name,
-              resources: get_resources(crso),
-              defs: _.isEmpty(crso.description)
-                ? null
-                : [
-                    {
-                      term: text_maker("description"),
-                      def: (
-                        <div
-                          dangerouslySetInnerHTML={sanitized_dangerous_inner_html(
-                            crso.description
-                          )}
-                        />
-                      ),
-                    },
-                  ],
-            },
-          }))
-          .value();
+        return _.map(subject.crsos, (crso) => ({
+          id: crso.guid,
+          data: {
+            subject: crso,
+            name: crso.name,
+            resources: get_resources(crso),
+            defs: _.isEmpty(crso.description)
+              ? null
+              : [
+                  {
+                    term: text_maker("description"),
+                    def: (
+                      <div
+                        dangerouslySetInnerHTML={sanitized_dangerous_inner_html(
+                          crso.description
+                        )}
+                      />
+                    ),
+                  },
+                ],
+          },
+        }));
       }
 
       case "crso": {
-        return subject.programs.map((prog) => ({
+        return _.map(subject.programs, (prog) => ({
           id: `${parent_id}-${prog.guid}`, //due to m2m tagging, we need to include parent id here
           data: {
             resources: get_resources(prog),
