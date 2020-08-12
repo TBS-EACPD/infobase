@@ -94,20 +94,28 @@ afterAll((done) => {
   });
 });
 
-let csv;
-
 describe("Testing generate_csv.js", () => {
   it("Getting csv output from db", (done) => {
     get_csv_strings()
       .then(({ csv_strings }) => {
-        csv = csv_strings;
-        expect(true).toBe(true);
+        expect(csv_strings).toEqual(expect.any(Object));
         done();
       })
-      .catch(fail);
+      .catch(() => {
+        expect(false).toBe(true);
+        done();
+      });
   });
 
-  it("Testing csv outputs with snapshot", () => {
-    expect(csv).toMatchSnapshot();
+  it("Testing csv outputs with snapshot", (done) => {
+    get_csv_strings()
+      .then(({ csv_strings }) => {
+        expect(csv_strings[test_template_name]).toMatchSnapshot();
+        done();
+      })
+      .catch(() => {
+        expect(false).toBe(true);
+        done();
+      });
   });
 });
