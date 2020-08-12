@@ -248,6 +248,17 @@ class EstimatesExplorer extends React.Component {
       col_click,
     };
 
+    _.forEach(
+      root.children,
+      (org) =>
+        (org.children = _.reject(
+          org.children,
+          (estimate) =>
+            estimate.data.current_value === 0 &&
+            estimate.data.percent_value === -Infinity
+        ))
+    );
+
     return (
       <div>
         <div className="medium_panel_text mrgn-tp-lg">
