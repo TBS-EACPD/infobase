@@ -7,9 +7,9 @@ import mongoose from "mongoose";
 import { Parser } from "json2csv";
 
 const templates = get_templates();
-const csv_strings = [];
-export const extractor = (testing = false) =>
-  connect_db()
+async function extractor() {
+  const csv_strings = {};
+  await connect_db()
     .then(() =>
       _.chain(templates)
         .map((template_value, template_name) => {
@@ -35,11 +35,8 @@ export const extractor = (testing = false) =>
               _.reduce(
                 sub._doc,
                 function (result, email_log_field, key) {
-                  if (key === "__v") {
+                  if (key === "__v" || key === "_id") {
                     return result;
-                  }
-                  if (testing && key === "_id") {
-                    return { ...result, [key]: ind };
                   }
                   if (_.isPlainObject(email_log_field)) {
                     return { ...result, ...email_log_field };
@@ -79,21 +76,7 @@ export const extractor = (testing = false) =>
               fields: column_names,
             });
 
-            const file_name = `${template_name}_emails_${new Date().getTime()}.csv`;
-
-            if (template_name === "test_template.test") {
-              csv_strings.push(csv);
-            }
-
-            if (!testing) {
-              fs.writeFile(
-                `./data_management/CSVs/${file_name}`,
-                csv,
-                function (err) {
-                  console.log(err || `Successfully saved ${file_name}.`);
-                }
-              );
-            }
+            csv_strings[template_name] = csv;
           }
         }
       });
@@ -103,9 +86,23 @@ export const extractor = (testing = false) =>
     })
     .finally(() => {
       mongoose.connection.close();
+      return csv_strings;
     });
 
+  return csv_strings;
+}
+
 export async function get_csv_strings() {
-  const wait = await extractor(true);
-  return { csv_strings: csv_strings[0] };
+  const csv_strings = await extractor();
+  return { csv_strings };
+}
+
+export async function write_csvs() {
+  const csv_strings = await extractor();
+  _.forEach(csv_strings, (csv, template_name) => {
+    const file_name = `${template_name}_emails_${new Date().getTime()}.csv`;
+    fs.writeFile(`./data_management/CSVs/${file_name}`, csv, function (err) {
+      console.log(err || `Successfully saved ${file_name}.`);
+    });
+  });
 }
