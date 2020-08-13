@@ -127,10 +127,10 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
                   </p>
 
                   {table_links_by_tag[item.id] && (
-                    <p>
+                    <span>
                       {text_maker("glossary_related_data")}{" "}
                       {table_links_by_tag[item.id]}
-                    </p>
+                    </span>
                   )}
 
                   <div className="glossary-top-link-container">
