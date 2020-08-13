@@ -237,7 +237,7 @@ class EstimatesExplorer extends React.Component {
 
     const { loading } = this.state;
 
-    const root = _.cloneDeep(get_root(flat_nodes));
+    const root = get_root(flat_nodes);
 
     const explorer_config = {
       column_defs,
@@ -248,17 +248,20 @@ class EstimatesExplorer extends React.Component {
       col_click,
     };
 
-    !this.state.show_inactive &&
-      _.forEach(
-        root.children,
-        (org) =>
-          (org.children = _.reject(
-            org.children,
-            (estimate) =>
-              estimate.data.current_value === 0 &&
-              estimate.data.percent_value === -Infinity
-          ))
-      );
+    const filtered_root = this.state.show_inactive
+      ? root
+      : {
+          ...root,
+          children: _.map(root.children, (org) => ({
+            ...org,
+            children: _.reject(
+              org.children,
+              (estimate) =>
+                estimate.data.current_value === 0 &&
+                estimate.data.percent_value === -Infinity
+            ),
+          })),
+        };
 
     return (
       <div>
@@ -369,7 +372,7 @@ class EstimatesExplorer extends React.Component {
               </div>
             </div>
           )}
-          {is_filtering && _.isEmpty(root.children) && (
+          {is_filtering && _.isEmpty(filtered_root.children) && (
             <div
               style={{
                 fontWeight: "500",
@@ -387,7 +390,7 @@ class EstimatesExplorer extends React.Component {
           )}
           <Explorer
             config={explorer_config}
-            root={root}
+            root={filtered_root}
             col_state={{
               sort_col,
               is_descending,
