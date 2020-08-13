@@ -128,7 +128,7 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
 
                   {table_links_by_tag[item.id] && (
                     <span>
-                      {text_maker("glossary_related_data")}{" "}
+                      {text_maker("glossary_related_data")}
                       {table_links_by_tag[item.id]}
                     </span>
                   )}
