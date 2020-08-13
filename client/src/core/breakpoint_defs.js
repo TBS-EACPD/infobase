@@ -10,7 +10,7 @@ const base_breakpoints = {
   largeDevice: 1200,
 };
 
-// Note max breakpoints are base breakpoints -1
+// Note max breakpoints are base breakpoints -0.02
 const breakpoints = {
   ..._.chain(base_breakpoints)
     .mapKeys((value, key) => `min${_.upperFirst(key)}`)
@@ -18,7 +18,7 @@ const breakpoints = {
 
   ..._.chain(base_breakpoints)
     .mapKeys((value, key) => `max${_.upperFirst(key)}`)
-    .mapValues((value) => value - 1)
+    .mapValues((value) => value - 0.02)
     .value(),
 };
 
