@@ -39,7 +39,9 @@ const ServicesStandardsPanel = ({ panel_args }) => {
   ];
   const standards_met_count = _.chain(services)
     .flatMap("standards")
+    .reject(({ target_type }) => target_type === "Other type of target")
     .flatMap("standard_report")
+    .filter("count" || "lower" || "met_count")
     .countBy("is_target_met")
     .value();
   const standards_met_data = [
