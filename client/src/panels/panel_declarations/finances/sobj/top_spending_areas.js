@@ -41,9 +41,10 @@ const render_w_options = ({ text_key }) => ({
   footnotes,
   sources,
 }) => {
-  const { panel_args, info } = calculations;
+  const { panel_args } = calculations;
+  const { top_3_sos_and_remainder, text_calculations } = panel_args;
 
-  const graph_data = panel_args.map((d) => ({
+  const graph_data = top_3_sos_and_remainder.map((d) => ({
     label: d["label"],
     id: d["label"],
     value: d["value"],
@@ -55,7 +56,7 @@ const render_w_options = ({ text_key }) => ({
       {...{ footnotes, sources }}
     >
       <Col isText size={5}>
-        <TM k={text_key} args={info} />
+        <TM k={text_key} args={text_calculations} />
       </Col>
       <Col isGraph={!window.is_a11y_mode} size={7}>
         <WrappedNivoPie data={graph_data} graph_height="450px" />
@@ -70,13 +71,36 @@ export const declare_top_spending_areas_panel = () =>
     levels: ["program"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["programSobjs"],
-      info_deps: ["program_std_obj"],
       footnotes: ["SOBJ"],
-      calculate(subject, info, options) {
+      calculate(subject, options) {
         if (_.isEmpty(this.tables.programSobjs.programs.get(subject))) {
           return false;
         }
-        return common_cal([subject], this.tables.programSobjs);
+
+        const top_3_sos_and_remainder = common_cal(
+          [subject],
+          this.tables.programSobjs
+        );
+
+        const total_spent = _.sum(
+          _.map(top_3_sos_and_remainder, (so) => so.value)
+        );
+
+        const top_so_pct = top_3_sos_and_remainder[0].value / total_spent;
+
+        const text_calculations = {
+          subject,
+          top_3_sos_and_remainder,
+          top_so_name: top_3_sos_and_remainder[0].label,
+          top_so_spent: top_3_sos_and_remainder[0].value,
+          total_spent,
+          top_so_pct,
+        };
+
+        return {
+          text_calculations,
+          top_3_sos_and_remainder,
+        };
       },
       render: render_w_options({ text_key: "program_top_spending_areas_text" }),
     }),

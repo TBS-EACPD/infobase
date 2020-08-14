@@ -17,13 +17,13 @@ tag_top_spending_areas_text:
     {{{gt "std_obj_quick_def"}}}
 
     In {{pa_last_year}}, the largest share of expenditures recorded by programs tagged under the "**{{subject.name}}**" tag were recorded under the 
-    "**{{tag_top_so_name}}**" standard object **({{fmt_compact1_written tag_top_so_spent}})**, representing **{{fmt_percentage1 tag_top_so_pct}}** of the maximum _gross_ total of **{{fmt_compact1_written tag_total_spent}}**.
+    "**{{top_so_name}}**" standard object **({{fmt_compact1_written top_so_spent}})**, representing **{{fmt_percentage1 top_so_pct}}** of the maximum _gross_ total of **{{fmt_compact1_written total_spent}}**.
 
   fr: |
     {{{gt "std_obj_quick_def"}}}
     
     En {{pa_last_year}}, la partie la plus importante des dépenses des programmes étiquetés sous l'étiquette «**{{subject.name}}**» a été enregistrée
-    sous l'article courant «**{{tag_top_so_name}}**» **({{fmt_compact1_written tag_top_so_spent}})**, représentant **{{fmt_percentage1 tag_top_so_pct}}** des dépenses _brutes_ maximales de **{{fmt_compact1_written tag_total_spent}}**.
+    sous l'article courant «**{{top_so_name}}**» **({{fmt_compact1_written top_so_spent}})**, représentant **{{fmt_percentage1 top_so_pct}}** des dépenses _brutes_ maximales de **{{fmt_compact1_written total_spent}}**.
 
 
 program_top_spending_areas_text:
@@ -32,10 +32,10 @@ program_top_spending_areas_text:
     {{{gt "std_obj_quick_def"}}}
     
     In {{pa_last_year}}, the largest share of expenditures for "**{{subject.name}}**" were recorded under the 
-    "**{{program_top_so_name}}**" standard object **({{fmt_compact1_written program_top_so_spent}})**, representing **{{fmt_percentage1 program_top_so_pct}}** of the program's total _gross_ expenditures of **{{fmt_compact1_written program_total_spent}}**.
+    "**{{top_so_name}}**" standard object **({{fmt_compact1_written top_so_spent}})**, representing **{{fmt_percentage1 top_so_pct}}** of the program's total _gross_ expenditures of **{{fmt_compact1_written total_spent}}**.
   
   fr: |
     {{{gt "std_obj_quick_def"}}}
     
     En {{pa_last_year}}, la partie la plus importante des dépenses du programme «**{{subject.name}}**» a été enregistrée 
-    sous l'article courant «**{{program_top_so_name}}**» **({{fmt_compact1_written program_top_so_spent}})**, soit **{{fmt_percentage1 program_top_so_pct}}** des dépenses _brutes_ du programme totalisant **{{fmt_compact1_written program_total_spent}}**.
+    sous l'article courant «**{{top_so_name}}**» **({{fmt_compact1_written top_so_spent}})**, soit **{{fmt_percentage1 top_so_pct}}** des dépenses _brutes_ du programme totalisant **{{fmt_compact1_written total_spent}}**.
