@@ -116,7 +116,6 @@ const planned_vote_or_stat_render = (vs) =>
           ),
         raw_formatter: (value) => (value ? Dept.lookup(value).name : value),
         sort_func: (a, b) => default_dept_name_sort_func(a, b),
-        is_toggleable: false,
       },
       voted_stat: {
         index: 1,

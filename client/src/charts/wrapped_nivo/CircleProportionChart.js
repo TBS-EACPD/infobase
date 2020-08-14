@@ -220,7 +220,6 @@ export class CircleProportionChart extends React.Component {
           header: text_maker(key),
           formatter: (value) =>
             _.isUndefined(value) ? "" : value_formatter(value),
-          is_toggleable: idx !== 0,
         },
       ])
       .fromPairs()

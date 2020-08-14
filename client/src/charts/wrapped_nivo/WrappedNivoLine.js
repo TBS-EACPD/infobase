@@ -109,7 +109,6 @@ export class WrappedNivoLine extends React.Component {
           index: 0,
           header: table_first_column_name || text_maker("label"),
           is_searchable: true,
-          is_toggleable: false,
         },
         ..._.chain(table_ordered_column_keys || _.map(data, "id"))
           .map((col, idx) => [

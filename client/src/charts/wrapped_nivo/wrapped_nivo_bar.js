@@ -23,7 +23,6 @@ const bar_table = (
       index: 0,
       header: table_first_column_name || nivo_common_text_maker("label"),
       is_searchable: true,
-      is_toggleable: false,
     },
     ..._.chain(keys)
       .map((key, idx) => [
