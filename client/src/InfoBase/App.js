@@ -138,17 +138,19 @@ export class App extends React.Component {
   };
 
   componentDidMount() {
-    axios
-      .get("https://storage.googleapis.com/ib-outage-bucket/outage_msg.json")
-      .then((res) => {
-        const data = res.data;
-        if (data.outage) {
-          this.setState({
-            showNotification: true,
-            message: data[window.lang],
-          });
-        }
-      });
+    if (!window.is_dev) {
+      axios
+        .get("https://storage.googleapis.com/ib-outage-bucket/outage_msg.json")
+        .then((res) => {
+          const data = res.data;
+          if (data.outage) {
+            this.setState({
+              showNotification: true,
+              message: data[window.lang],
+            });
+          }
+        });
+    }
   }
 
   render() {
