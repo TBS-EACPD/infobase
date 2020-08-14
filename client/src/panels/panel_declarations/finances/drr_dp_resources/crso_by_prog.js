@@ -16,7 +16,7 @@ const { planning_years } = year_templates;
 const { text_maker, TM } = create_text_maker_component(text);
 
 const render_resource_type = (is_fte) => ({ calculations, footnotes }) => {
-  const { panel_args, subject, info } = calculations;
+  const { panel_args, subject } = calculations;
 
   const sources = [
     is_fte
@@ -40,15 +40,15 @@ const render_resource_type = (is_fte) => ({ calculations, footnotes }) => {
       k="crso_by_prog_exp_or_ftes"
       args={{
         subject,
-        crso_prg_num: _.max([info.crso_fte_prg_num, info.crso_exp_prg_num]),
-        crso_prg_top1: is_fte ? info.crso_fte_prg_top1 : info.crso_exp_prg_top1,
-        crso_prg_top1_amnt: is_fte
-          ? info.crso_fte_prg_top1_amnt
-          : info.crso_exp_prg_top1_amnt,
-        crso_prg_top2: is_fte ? info.crso_fte_prg_top2 : info.crso_exp_prg_top2,
-        crso_prg_top2_amnt: is_fte
-          ? info.crso_fte_prg_top2_amnt
-          : info.crso_exp_prg_top2_amnt,
+        crso_prg_num: subject.programs.length,
+        crso_prg_top1: is_fte
+          ? panel_args.max_fte_name
+          : panel_args.max_exp_name,
+        crso_prg_top1_amnt: is_fte ? panel_args.max_ftes : panel_args.max_exp,
+        crso_prg_top2: is_fte
+          ? panel_args.top2_fte_name
+          : panel_args.top2_exp_name,
+        crso_prg_top2_amnt: is_fte ? panel_args.top2_ftes : panel_args.top2_exp,
         is_fte: is_fte,
       }}
     />
@@ -147,7 +147,7 @@ class PlannedProgramResources extends React.Component {
 }
 
 const get_calculate_func = (is_fte) => {
-  return function (subject, info) {
+  return function (subject) {
     if (subject.is_dead) {
       return false;
     }
@@ -176,9 +176,31 @@ const get_calculate_func = (is_fte) => {
       data: planning_years.map((col) => row[col]),
     }));
 
+    const ftes = _.map(fte_data, (prg) => prg.data[0]);
+    const sorted_ftes = ftes.slice().sort((a, b) => b - a);
+    const max_ftes = sorted_ftes[0];
+    const max_fte_name = fte_data[_.indexOf(ftes, max_ftes)].label;
+    const top2_ftes = sorted_ftes.length > 1 && sorted_ftes[1];
+    const top2_fte_name =
+      top2_ftes && fte_data[_.indexOf(ftes, top2_ftes)].label;
+
+    const exps = _.map(exp_data, (prg) => prg.data[0]);
+    const sorted_exps = exps.slice().sort((a, b) => b - a);
+    const max_exp = sorted_exps[0];
+    const max_exp_name = exp_data[_.indexOf(exps, max_exp)].label;
+    const top2_exp = sorted_exps.length > 1 && sorted_exps[1];
+    const top2_exp_name = top2_exp && exp_data[_.indexOf(exps, top2_exp)].label;
     return {
       exp_data,
       fte_data,
+      max_ftes,
+      max_fte_name,
+      top2_ftes,
+      top2_fte_name,
+      max_exp,
+      max_exp_name,
+      top2_exp,
+      top2_exp_name,
     };
   };
 };
@@ -190,7 +212,6 @@ export const declare_crso_by_prog_fte_panel = () =>
     panel_config_func: (level, panel_key) => ({
       footnotes: ["PLANNED_EXP"],
       depends_on: ["programSpending", "programFtes"],
-      info_deps: ["programSpending_crso_info", "programFtes_crso_info"],
       calculate: get_calculate_func(true),
       render: render_resource_type(true),
     }),
@@ -202,7 +223,6 @@ export const declare_crso_by_prog_exp_panel = () =>
     panel_config_func: (level, panel_key) => ({
       footnotes: ["PLANNED_EXP"],
       depends_on: ["programSpending", "programFtes"],
-      info_deps: ["programSpending_crso_info", "programFtes_crso_info"],
       calculate: get_calculate_func(false),
       render: render_resource_type(false),
     }),
