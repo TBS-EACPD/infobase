@@ -113,8 +113,7 @@ export const declare_spending_in_tag_perspective_panel = () =>
     levels: ["program"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["programSpending"],
-      info_deps: ["programSpending_program_info"],
-      calculate(subject, info, options) {
+      calculate(subject, options) {
         if (window.is_a11y_mode) {
           //turn off this panel in a11y mode
           return false;
@@ -129,20 +128,22 @@ export const declare_spending_in_tag_perspective_panel = () =>
         if (!(prog_row[col] > 0)) {
           return false;
         }
+
+        const prog_exp = prog_row["{{planning_year_1}}"];
+
         const tags = subject.tags;
 
         const tag_exps = _.map(tags, (tag) => ({
           tag,
           amount: sum_a_tag_col(tag, programSpending, col),
         }));
-        return { tag_exps };
+        return { tag_exps, prog_exp };
       },
 
       render({ calculations, footnotes, sources }) {
-        const { panel_args, subject, info } = calculations;
+        const { panel_args, subject } = calculations;
 
-        const { tag_exps } = panel_args;
-        const prog_exp = info.program_exp_planning_year_1;
+        const { tag_exps, prog_exp } = panel_args;
 
         return (
           <InfographicPanel
