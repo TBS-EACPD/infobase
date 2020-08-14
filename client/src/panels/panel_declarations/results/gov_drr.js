@@ -122,7 +122,6 @@ export const declare_gov_drr_panel = () =>
               ),
             sort_func: (a, b) => default_dept_name_sort_func(a, b),
             raw_formatter: (value) => (value ? Dept.lookup(value).name : value),
-            is_toggleable: false,
           },
           ..._.chain(column_keys)
             .keys()

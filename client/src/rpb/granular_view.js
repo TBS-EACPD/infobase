@@ -67,6 +67,7 @@ class GranularView extends React.Component {
         header: text_maker("org"),
         is_searchable: true,
         formatter: "wide-str",
+        is_toggleable: true,
       },
       legal_title: {
         index: 1,

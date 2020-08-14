@@ -118,7 +118,6 @@ const indicator_table_from_list = (indicator_list) => {
         }
         return 0;
       },
-      is_toggleable: false,
     },
     indicator: {
       index: 1,

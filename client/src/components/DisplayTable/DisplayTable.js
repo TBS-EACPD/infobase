@@ -26,7 +26,6 @@ const column_config_defaults = {
   sum_func: (sum, value) => sum + value,
   raw_formatter: _.identity,
   sum_initial_value: 0,
-  is_toggleable: true,
 };
 
 /* Assumption: DisplayTable assumes 1st column to be string that describes its row
@@ -45,6 +44,12 @@ export class DisplayTable extends React.Component {
       (supplied_column_config) => ({
         ...column_config_defaults,
         ...supplied_column_config,
+        // Set is_toggleable default based off index
+        is_toggleable:
+          _.isUndefined(supplied_column_config.is_toggleable) &&
+          supplied_column_config.index === 0
+            ? false
+            : true,
       })
     );
 
@@ -107,6 +112,11 @@ export class DisplayTable extends React.Component {
       (supplied_column_config) => ({
         ...column_config_defaults,
         ...supplied_column_config,
+        is_toggleable:
+          _.isUndefined(supplied_column_config.is_toggleable) &&
+          supplied_column_config.index === 0
+            ? false
+            : true,
       })
     );
     const NoDataMessage = () => (
