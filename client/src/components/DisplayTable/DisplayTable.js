@@ -44,9 +44,9 @@ export class DisplayTable extends React.Component {
       (supplied_column_config) => ({
         ...column_config_defaults,
         ...supplied_column_config,
-        // Set is_toggleable default based off index
-        is_toggleable:
-          _.isUndefined(supplied_column_config.is_toggleable) &&
+        // Set visibility_toggleable default based off index
+        visibility_toggleable:
+          _.isUndefined(supplied_column_config.visibility_toggleable) &&
           supplied_column_config.index === 0
             ? false
             : true,
@@ -99,7 +99,7 @@ export class DisplayTable extends React.Component {
           sum_func: (sum, value) => ... <- (function) Custom sum func. Default to sum + value
           sort_func: (a, b) => ... <- (function) Custom sort func. Default to _.sortBy
           sum_initial_value: 0 <- (number) Default to 0
-          is_toggleable: true <- (boolean) Default to true
+          visibility_toggleable: true <- (boolean) Default to true
         },
       }
       */,
@@ -112,8 +112,8 @@ export class DisplayTable extends React.Component {
       (supplied_column_config) => ({
         ...column_config_defaults,
         ...supplied_column_config,
-        is_toggleable:
-          _.isUndefined(supplied_column_config.is_toggleable) &&
+        visibility_toggleable:
+          _.isUndefined(supplied_column_config.visibility_toggleable) &&
           supplied_column_config.index === 0
             ? false
             : true,
@@ -235,7 +235,7 @@ export class DisplayTable extends React.Component {
                 active: _.includes(visible_ordered_col_keys, key),
               }))}
               onClick={(clicked_key) => {
-                col_configs_with_defaults[clicked_key].is_toggleable &&
+                col_configs_with_defaults[clicked_key].visibility_toggleable &&
                   this.setState({
                     visible_col_keys: _.toggle_list(
                       visible_col_keys,
