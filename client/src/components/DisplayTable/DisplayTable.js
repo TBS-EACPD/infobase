@@ -110,7 +110,7 @@ export class DisplayTable extends React.Component {
     const NoDataMessage = () => (
       <tbody>
         <tr>
-          <td style={{ padding: 0 }} colSpan={_.size(data[0])}>
+          <td style={{ padding: 0 }} colSpan={_.size(visible_col_keys)}>
             <div
               style={{ borderRadius: 0, margin: 0 }}
               className="well large_panel_text no-data-msg"
