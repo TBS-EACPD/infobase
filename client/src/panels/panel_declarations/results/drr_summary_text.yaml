@@ -54,8 +54,7 @@ drr_summary_stats:
 gov_drr_summary_org_table_text:
   transform: [handlebars,markdown]
   en: |
-    To learn more on the result and their associated performance indicators for an organization, 
-    simply click on the name of the organization you want to explore to be redirected toward their specific results infographic.
+    Click on the name of the organization you wish to explore to learn more about its results and performance indicators.
     
   fr: |
     Pour en savoir plus sur les résultats et les indicateurs de rendement d'une organisation, 
