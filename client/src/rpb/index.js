@@ -96,7 +96,6 @@ class RPB extends React.Component {
     if (props.state.table) {
       this.state = {
         table_picking: false,
-        use_legal_titles: false,
         ...props.state,
       };
     } else {
@@ -104,7 +103,6 @@ class RPB extends React.Component {
         loading: false,
         table_picking: true,
         selected_subject: null,
-        use_legal_titles: false,
         ...props.state,
       };
     }
@@ -166,7 +164,6 @@ class RPB extends React.Component {
 
   render() {
     const { broken_url } = this.props;
-    const { use_legal_titles } = this.state;
 
     const table = this.state.table && Table.lookup(this.state.table);
 
@@ -364,7 +361,6 @@ class RPB extends React.Component {
                 {...this.props.state}
                 {...this.table_handlers}
                 {...options}
-                use_legal_titles={use_legal_titles}
               />
             ) : null}
           </Fragment>
