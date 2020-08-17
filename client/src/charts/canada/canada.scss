@@ -1,0 +1,35 @@
+@import "../../common_css/common-variables";
+
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 0px 40px;
+}
+.rs-label {
+  position: relative;
+  margin-left: auto;
+  transform-origin: center center;
+  display: block;
+  width: 90px;
+  height: 90px;
+  background: transparent;
+  border-radius: 50%;
+  line-height: 40px;
+  text-align: center;
+  font-weight: bold;
+  padding-top: 25px;
+  box-sizing: border-box;
+  border: 2px solid #fff;
+  margin-top: 20px;
+  margin-left: -38px;
+  margin-bottom: 10px;
+  color: #fff;
+  background-color: $secondaryColor;
+  &::after {
+    display: block;
+    font-size: 20px;
+    letter-spacing: 0.07em;
+    margin-top: -2px;
+  }
+}

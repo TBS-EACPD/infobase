@@ -5,3 +5,7 @@ five_year_history:
   transform: [handlebars]
   en: Five year history — {{province}}
   fr: Historique quinquennal — {{province}}
+showing_year_data:
+  transform: [handlebars]
+  en: Showing "{{selected_year}}" data
+  fr: TODO

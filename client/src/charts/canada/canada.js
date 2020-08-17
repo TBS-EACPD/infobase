@@ -1,15 +1,16 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
+import "./canada.scss";
 
 import ReactDOM from "react-dom";
 
 import d3 from "src/core/d3-bundle.js";
 
-import { GraphOverlay } from "../../components";
+import { GraphOverlay, create_text_maker_component } from "../../components";
 import { secondaryColor, tertiaryColor } from "../../core/color_defs.js";
 import { hex_to_rgb } from "../../general_utils.js";
 import { businessConstants } from "../../models/businessConstants.js";
-import { run_template, create_text_maker } from "../../models/text.js";
+import { run_template } from "../../models/text.js";
 import { StandardLegend } from "../legends";
 import { WrappedNivoHBar } from "../wrapped_nivo/index.js";
 
@@ -17,7 +18,7 @@ import { CanadaD3Component } from "./CanadaD3Component.js";
 
 import text from "./canada.yaml";
 
-const text_maker = create_text_maker(text);
+const { text_maker, TM } = create_text_maker_component(text);
 
 const { provinces } = businessConstants;
 
@@ -107,8 +108,8 @@ class CanadaGraph extends React.PureComponent {
     this._render();
   }
   _render() {
-    const { graph_args, prov_select_callback } = this.props;
-    const { data, color_scale, years, formatter } = graph_args;
+    const { graph_args, prov_select_callback, data } = this.props;
+    const { color_scale, years, formatter } = graph_args;
 
     const graph_area_sel = d3.select(
       ReactDOM.findDOMNode(this.graph_area.current)
@@ -149,6 +150,7 @@ export class Canada extends React.Component {
 
     this.state = {
       prov: null,
+      selected_year_index: props.graph_args.years.length - 1,
     };
   }
 
@@ -157,10 +159,24 @@ export class Canada extends React.Component {
       this.setState({ prov: selected_prov });
     }
   };
+  componentDidMount() {
+    const rangeBullet = document.getElementsByClassName("rs-label")[0];
+    const slider = document.getElementsByClassName("slider")[0];
+    const range_width = slider.getBoundingClientRect().width - 15;
+    const percent = slider.value / (this.props.graph_args.years.length - 1);
+
+    // the position of the output
+    const newPosition = range_width * percent;
+    rangeBullet.style.left = `${newPosition}px`;
+  }
 
   render() {
+    const { prov, selected_year_index } = this.state;
     const { graph_args } = this.props;
     const { data, color_scale, years, formatter } = graph_args;
+
+    const get_year = (year_index) => run_template(years[year_index]);
+    const selected_year_data = data[selected_year_index];
 
     const legend_items = _.map(
       color_scale.ticks(5).reverse(),
@@ -176,6 +192,16 @@ export class Canada extends React.Component {
     );
     return (
       <div className="frow no-container">
+        <div
+          className="fcol-md-12"
+          style={{ marginBottom: "10px", textAlign: "center" }}
+        >
+          <TM
+            el="h2"
+            k="showing_year_data"
+            args={{ selected_year: get_year(selected_year_index) }}
+          />
+        </div>
         <div className="fcol-md-3">
           <StandardLegend
             title={text_maker("legend")}
@@ -192,7 +218,7 @@ export class Canada extends React.Component {
             }}
           >
             <CanadaGraphBarLegend
-              prov={this.state.prov}
+              prov={prov}
               data={data}
               years={years}
               formatter={formatter}
@@ -203,9 +229,47 @@ export class Canada extends React.Component {
           <GraphOverlay>
             <CanadaGraph
               graph_args={graph_args}
+              data={selected_year_data}
               prov_select_callback={this.prov_select_callback}
             />
           </GraphOverlay>
+        </div>
+        <div className="fcol-md-12 slider-container">
+          <span className="rs-label">{get_year(selected_year_index)}</span>
+          <input
+            className="slider"
+            type="range"
+            min={0}
+            max={years.length - 1}
+            defaultValue={years.length - 1}
+            step={1}
+            onChange={(e) => {
+              const rangeBullet = document.getElementsByClassName(
+                "rs-label"
+              )[0];
+              const range_width =
+                e.currentTarget.getBoundingClientRect().width - 15;
+              const percent = e.target.value / (years.length - 1);
+
+              // the position of the output
+              const newPosition = range_width * percent;
+              rangeBullet.style.left = `${newPosition}px`;
+
+              this.setState({
+                selected_year_index: e.target.value,
+              });
+            }}
+          />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: "10px",
+            }}
+          >
+            <span>{get_year(0)}</span>
+            <span>{get_year(years.length - 1)}</span>
+          </div>
         </div>
       </div>
     );
