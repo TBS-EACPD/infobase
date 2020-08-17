@@ -57,13 +57,12 @@ cra_sub_title:
   fr: Combien de services utilisent le numéro d'entreprise de l'ARC comme identifiant standard?
 
 # Digital Status
-# TODO: no component in french translation
 services_digital_status_text:
   transform: [handlebars, markdown]
   en: |
-    Among the **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{most_digital_name}}** is the most online-available {{gl_tt "service component" "SERVICE_COMPONENT"}} (**{{fmt_percentage1 most_digital_pct}}**) while **{{least_digital_name}}** is the least online-available {{gl_tt "service component" "SERVICE_COMPONENT"}} (**{{fmt_percentage1 least_digital_pct}}**).
+    Among the **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{most_digital_name}}** is the most online-available {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 most_digital_pct}}**) while **{{least_digital_name}}** is the least online-available {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 least_digital_pct}}**).
   fr: |
-    Parmi les **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} offerts par **{{subject_name}}**, **{{most_digital_name}}** est le service en ligne le plus disponible (**{{fmt_percentage1 most_digital_pct}}**) tandis que **{{least_digital_name}}** est le service en ligne le moins disponible (**{{fmt_percentage1 least_digital_pct}}**).
+    TODO
 services_digital_status:
   en: Online status of services
   fr: État des services en ligne
@@ -166,11 +165,11 @@ online_inquiry:
 # Overview
 overview_digital_status_title:
   transform: [handlebars, markdown]
-  en: What {{gl_tt "components" "SERVICE_COMPONENT"}} of this {{gl_tt "service" "SERVICE"}} are available online?
-  fr: TODO Quels volets de ce service sont disponibles en ligne?
+  en: What {{gl_tt "client interaction points" "CLIENT_INTERACTION"}} of this {{gl_tt "service" "SERVICE"}} are available online?
+  fr: TODO
 overview_digital_status_desc:
-  en: Online component of this service
-  fr: TODO Volet en ligne de ce service
+  en: Online client interaction points of this service
+  fr: TODO
 service_types:
   en: Service Types
   fr: Types de service
@@ -258,7 +257,7 @@ has_standards_text:
   fr: TODO
 target_met_text:
   transform: [handlebars, markdown]
-  en: How many {{gl_tt "standards" "STANDARD"}} targets' were met?
+  en: How many {{gl_tt "standards'" "STANDARD"}} targets were met?
   fr: TODO
 
 # Types
