@@ -169,7 +169,6 @@ export class Canada extends React.Component {
     const { data, color_scale, years, formatter } = graph_args;
 
     const get_year = (year_index) => run_template(years[year_index]);
-    const selected_year_data = data[selected_year_index];
 
     const legend_items = _.map(
       color_scale.ticks(5).reverse(),
@@ -222,7 +221,7 @@ export class Canada extends React.Component {
           <GraphOverlay>
             <CanadaGraph
               graph_args={graph_args}
-              data={selected_year_data}
+              data={data[selected_year_index]}
               prov_select_callback={this.prov_select_callback}
             />
           </GraphOverlay>
