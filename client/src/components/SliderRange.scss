@@ -1,4 +1,4 @@
-@import "../../common_css/common-variables";
+@import "../common_css/common-variables";
 
 .slider-container {
   display: flex;
@@ -6,7 +6,7 @@
   text-align: center;
   padding: 0px 40px;
 }
-.rs-label {
+.slider-label {
   position: relative;
   margin-left: auto;
   transform-origin: center center;

@@ -5,6 +5,7 @@ export {
   AutoAccordion,
 } from "./Accordions.js";
 export { EmailFrontend } from "./EmailFrontend.js";
+export { SliderRange } from "./SliderRange.js";
 export { HeightClipper } from "./HeightClipper.js";
 export { RadioButtons } from "./RadioButtons.js";
 export { Select } from "./Select.js";
