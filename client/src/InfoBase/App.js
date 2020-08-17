@@ -103,11 +103,6 @@ const PanelInventory = retrying_react_lazy(() =>
     /* webpackChunkName: "PanelInventory" */ "../panels/panel_routes/PanelInventory.js"
   )
 );
-const IndicatorPanel = retrying_react_lazy(() =>
-  import(
-    /* webpackChunkName: "IndicatorDisplay" */ "../panels/panel_routes/IndicatorPanel.js"
-  )
-);
 const GraphiQL = retrying_react_lazy(() =>
   import(/* webpackChunkName: "GraphiQL" */ "../graphql_utils/GraphiQL.js")
 );
@@ -243,10 +238,6 @@ export class App extends React.Component {
                 <Route
                   path="/panel/:level?/:subject_id?/:panel_key?"
                   component={IsolatedPanel}
-                />
-                <Route
-                  path="/:org_level/:org_id/indicator/:id?"
-                  component={IndicatorPanel}
                 />
                 <Redirect
                   from="/graph/:level?/:panel?/:id?"

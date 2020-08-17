@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-
+import IndicatorPanel from "./IndicatorPanel";
 import { businessConstants } from "../../../models/businessConstants.js";
 import {
   util_components,
@@ -104,7 +104,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
             ? ind.parent_node.data.subject.level
             : "core_resp"
         )}`,
-        href: `#${subject.level}/${subject.id}/indicator/${ind.indicator.id}`,
+        id: ind.indicator.id,
         name: ind.indicator.name,
       },
     ])
@@ -135,9 +135,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
       index: 1,
       header: text_maker("indicator"),
       is_searchable: true,
-      formatter: (value) => (
-        <a href={ind_map[value].href}> {ind_map[value].name} </a>
-      ),
+      formatter: (value) => <IndicatorPanel id={ind_map[value].id} />,
       sort_func: (a, b) => {
         if (a && b) {
           const a_name = ind_map[a].name.toUpperCase();
