@@ -1,20 +1,19 @@
 import gql from "graphql-tag";
 
-import { Panel, SpinnerWrapper } from "../../components/index.js";
-import { log_standard_event } from "../../core/analytics.js";
-import { StandardRouteContainer } from "../../core/NavComponents.js";
-import { get_client } from "../../graphql_utils/graphql_utils.js";
+import { get_client } from "../../../graphql_utils/graphql_utils.js";
+import { log_standard_event } from "../../../core/analytics.js";
 
-
-import { infograph_href_template } from "../../link_utils.js";
-import { Indicator } from "../../models/results.js";
-import { Subject } from "../../models/subject";
-
-import { IndicatorDisplay } from "../panel_declarations/results/result_components.js";
 import {
-  TM,
-  text_maker,
-} from "../panel_declarations/results/result_text_provider.js";
+  Panel,
+  SpinnerWrapper,
+  StatelessModal,
+} from "../../../components/index.js";
+
+import { Indicator } from "../../../models/results.js";
+
+import { IndicatorDisplay } from "./result_components.js";
+import { text_maker } from "./result_text_provider.js";
+import { Fragment } from "react";
 
 const indicators_fields_fragment = `  id
   stable_id
@@ -102,56 +101,42 @@ const query_api = (id) => {
 export default class IndicatorPanel extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true };
+    this.state = { loading: true, show_table: false };
   }
 
   componentDidMount() {
-    const {
-      match: {
-        params: { id },
-      },
-    } = this.props;
+    const { id } = this.props;
     query_api(id).then(() => this.setState({ loading: false }));
   }
 
   render() {
-    const {
-      match: {
-        params: { org_level, org_id, id },
-      },
-    } = this.props;
+    const { id } = this.props;
 
     const { loading } = this.state;
 
     const indicator = Indicator.lookup(id);
-    const subject =
-      org_level === "dept"
-        ? Subject.Dept.lookup(org_id)
-        : org_level === "program"
-        ? Subject.Program.lookup(org_id)
-        : Subject.CRSO.lookup(org_id);
 
     return (
-      <StandardRouteContainer
-        title={text_maker("indicator_display_title")}
-        breadcrumbs={[
-          <a href={infograph_href_template(subject, "results")}>
-            {subject.name}
-          </a>,
-          text_maker("indicator_display_title"),
-        ]}
-        description={text_maker("indicator_display_desc")}
-        route_key="_inddisp"
-      >
-        <TM k="indicator_display_title" el="h1" />
-        {loading ? (
-          <SpinnerWrapper ref="spinner" config_name={"sub_route"} />
-        ) : (
-          <Panel title={indicator.name}>
-            <IndicatorDisplay indicator={indicator} show_doc={true} />
-          </Panel>
-        )}
-      </StandardRouteContainer>
+      <Fragment>
+        <a role="button" onClick={() => this.setState({ show_table: true })}>
+          {indicator.name}
+        </a>
+        <StatelessModal
+          show={this.state.show_table}
+          title={text_maker("indicator_display_title")}
+          body={
+            loading ? (
+              <SpinnerWrapper ref="spinner" config_name={"sub_route"} />
+            ) : (
+              <Panel title={indicator.name}>
+                <IndicatorDisplay indicator={indicator} show_doc={true} />
+              </Panel>
+            )
+          }
+          on_close_callback={() => this.setState({ show_table: false })}
+          additional_dialog_class={"modal-responsive"}
+        />
+      </Fragment>
     );
   }
 }
