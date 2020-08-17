@@ -44,7 +44,7 @@ drr_summary_stats:
       {{#if drr_indicators_future}}* **{{fmt_big_int drr_indicators_future}}** (**{{fmt_percentage1 (divide drr_indicators_future drr_subset)}}**) are {{gl_tt "to be achieved in the future" "RESULTS_ONGOING"}}{{/if}}
   fr: |
     {{#if drr_total}}
-    En **{{year}}**, de ces **{{fmt_big_int drr_subset}}** indicateurs {{#isEqual drr_subset drr_total}}{{else}}sélectionnés ci-dessus (sur un total de **{{fmt_big_int drr_total}}**) {{/isEqual}}:
+    En **{{year}}**, il y avait **{{fmt_big_int drr_total}}** indicateurs au total. Sur les **{{fmt_big_int drr_subset}}** susmentionnés:
       {{#if drr_indicators_met}}* **{{fmt_big_int drr_indicators_met}}** (**{{fmt_percentage1 (divide drr_indicators_met drr_subset)}}**) {{gl_tt "ont atteint" "RESULTS_MET"}} leur cible{{/if}}
       {{#if drr_indicators_not_met}}* **{{fmt_big_int drr_indicators_not_met}}** (**{{fmt_percentage1 (divide drr_indicators_not_met drr_subset)}}**) {{gl_tt "n’ont pas atteint" "RESULTS_NOT_MET"}} leur cible{{/if}}
       {{#if drr_indicators_not_available}}* **{{fmt_big_int drr_indicators_not_available}}** (**{{fmt_percentage1 (divide drr_indicators_not_available drr_subset)}}**) {{gl_tt "n’ont pas de résultat disponible" "RESULTS_NOT_AVAILABLE"}}{{/if}}
@@ -57,8 +57,7 @@ gov_drr_summary_org_table_text:
     Click on the name of the organization you wish to explore to learn more about its results and performance indicators.
     
   fr: |
-    Pour en savoir plus sur les résultats et les indicateurs de rendement d'une organisation, 
-    il suffit de cliquer sur le nom de l'organisation pour être dirigé vers l'infographie où figurent ses résultats particuliers.
+    Cliquez sur le nom de l'organisation qui vous intéresse pour en savoir plus sur ses résultats et ses indicateurs du rendement.
 
 results_icon_array_title:
   transform: [handlebars]
