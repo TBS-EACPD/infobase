@@ -1,12 +1,15 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
-import "./canada.scss";
 
 import ReactDOM from "react-dom";
 
 import d3 from "src/core/d3-bundle.js";
 
-import { GraphOverlay, create_text_maker_component } from "../../components";
+import {
+  GraphOverlay,
+  create_text_maker_component,
+  SliderRange,
+} from "../../components";
 import { secondaryColor, tertiaryColor } from "../../core/color_defs.js";
 import { hex_to_rgb } from "../../general_utils.js";
 import { businessConstants } from "../../models/businessConstants.js";
@@ -159,16 +162,6 @@ export class Canada extends React.Component {
       this.setState({ prov: selected_prov });
     }
   };
-  componentDidMount() {
-    const rangeBullet = document.getElementsByClassName("rs-label")[0];
-    const slider = document.getElementsByClassName("slider")[0];
-    const range_width = slider.getBoundingClientRect().width - 15;
-    const percent = slider.value / (this.props.graph_args.years.length - 1);
-
-    // the position of the output
-    const newPosition = range_width * percent;
-    rangeBullet.style.left = `${newPosition}px`;
-  }
 
   render() {
     const { prov, selected_year_index } = this.state;
@@ -235,41 +228,14 @@ export class Canada extends React.Component {
           </GraphOverlay>
         </div>
         <div className="fcol-md-12 slider-container">
-          <span className="rs-label">{get_year(selected_year_index)}</span>
-          <input
-            className="slider"
-            type="range"
-            min={0}
-            max={years.length - 1}
-            defaultValue={years.length - 1}
-            step={1}
-            onChange={(e) => {
-              const rangeBullet = document.getElementsByClassName(
-                "rs-label"
-              )[0];
-              const range_width =
-                e.currentTarget.getBoundingClientRect().width - 15;
-              const percent = e.target.value / (years.length - 1);
-
-              // the position of the output
-              const newPosition = range_width * percent;
-              rangeBullet.style.left = `${newPosition}px`;
-
-              this.setState({
-                selected_year_index: e.target.value,
-              });
-            }}
+          <SliderRange
+            slider_data={years}
+            value_formatter={get_year}
+            slider_callback={(value) =>
+              this.setState({ selected_year_index: value })
+            }
+            selected_data_index={selected_year_index}
           />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginTop: "10px",
-            }}
-          >
-            <span>{get_year(0)}</span>
-            <span>{get_year(years.length - 1)}</span>
-          </div>
         </div>
       </div>
     );
