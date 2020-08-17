@@ -110,13 +110,9 @@ export class DisplayTable extends React.Component {
     const col_configs_with_defaults = _.mapValues(
       column_configs,
       (supplied_column_config) => ({
+        visibility_toggleable: supplied_column_config.index !== 0,
         ...column_config_defaults,
         ...supplied_column_config,
-        visibility_toggleable:
-          _.isUndefined(supplied_column_config.visibility_toggleable) &&
-          supplied_column_config.index === 0
-            ? false
-            : true,
       })
     );
     const NoDataMessage = () => (
