@@ -42,14 +42,10 @@ export class DisplayTable extends React.Component {
     const col_configs_with_defaults = _.mapValues(
       column_configs,
       (supplied_column_config) => ({
+        // Set visibility_toggleable default based off index
+        visibility_toggleable: supplied_column_config.index !== 0,
         ...column_config_defaults,
         ...supplied_column_config,
-        // Set visibility_toggleable default based off index
-        visibility_toggleable:
-          _.isUndefined(supplied_column_config.visibility_toggleable) &&
-          supplied_column_config.index === 0
-            ? false
-            : true,
       })
     );
 
@@ -99,7 +95,7 @@ export class DisplayTable extends React.Component {
           sum_func: (sum, value) => ... <- (function) Custom sum func. Default to sum + value
           sort_func: (a, b) => ... <- (function) Custom sort func. Default to _.sortBy
           sum_initial_value: 0 <- (number) Default to 0
-          visibility_toggleable: true <- (boolean) Default to true
+          visibility_toggleable: true <- (boolean) Defaults to false for index 0, true for all other indexes.
         },
       }
       */,
