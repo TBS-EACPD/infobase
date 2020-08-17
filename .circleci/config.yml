@@ -372,6 +372,11 @@ jobs:
 
 workflows:
   version: 2
+  
+  audit_ci:
+    jobs:
+      - audit_ci
+
   test_email_backend:
     jobs:
       - test_email_backend
