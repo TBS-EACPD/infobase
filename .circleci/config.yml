@@ -22,7 +22,6 @@ jobs:
     steps:
       - checkout:
           path: "~/InfoBase"
-      - run: npm i audit-ci
       - restore_cache:
           keys: 
             - main-dependencies-{{ checksum "package-lock.json" }}
