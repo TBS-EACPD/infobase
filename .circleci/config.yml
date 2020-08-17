@@ -14,6 +14,25 @@ deploy_filter: &deploy_filter
 version: 2
 jobs:
 
+  audit_ci:
+    docker:
+      - image: eaadtbs/ib-ci-build:v1.2
+        <<: *dockerhub_auth
+    working_directory: "~/InfoBase"
+    steps:
+      - checkout:
+          path: "~/InfoBase"
+      - run: sudo npm install -g npm
+      - run: npm i audit-ci
+      - restore_cache:
+          keys: 
+            - main-dependencies-{{ checksum "package-lock.json" }}
+            - client-dependencies-{{ checksum "client/package-lock.json" }}
+            - email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}
+            - server-dependencies-{{ checksum "server/package-lock.json" }}
+      - run: if [[ $CIRCLE_BRANCH == "master" || $(git diff-tree --no-commit-id --name-only -r HEAD) =~ "package"]] ; then ./scripts/ci_scripts/audit_ci.sh ; fi
+      
+
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   test_email_backend:
     docker:
