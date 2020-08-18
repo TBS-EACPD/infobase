@@ -58,6 +58,7 @@ function render({ calculations, footnotes, sources }) {
                 : window.infobase_color_constants.secondaryColor
             }
             enableGridX={false}
+            amount_table={true}
           />
         </div>
       );

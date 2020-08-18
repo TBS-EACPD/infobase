@@ -109,6 +109,7 @@ const estimates_split_render_w_text_key = (text_key) => ({
             },
           },
         }}
+        amount_table={true}
       />
     );
   }
