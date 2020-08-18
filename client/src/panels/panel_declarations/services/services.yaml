@@ -39,22 +39,28 @@ uses_cra_as_identifier:
   en: Uses CRA business number as identifier
   fr: Le numéro d'entreprise de l'ARC est utilisé comme identifiant
 uses_sin_as_identifier:
-  en: Uses SIN as identifier
+  en: Uses Social Insurance Number as identifier
   fr: Le NAS est utilisé comme identifiant
 does_not_use_cra_as_identifier:
   en: Does not use CRA business number as identifier
   fr: Le numéro d'entreprise de l'ARC n'est pas utilisé comme identifiant
 does_not_use_sin_as_identifier:
-  en: Does not use SIN as identifier
+  en: Does not use Social Insurance Number as identifier
   fr: Le NAS n'est pas utilisé comme identifiant
 sin_sub_title:
   transform: [handlebars, markdown]
-  en: How many {{gl_tt "services" "SERVICE"}} use **SIN** as a standard identifier?
+  en: How many {{gl_tt "services" "SERVICE"}} use **Social Insurance Number** as a standard identifier?
   fr: Combien de services utilisent le NAS comme identifiant standard?
 cra_sub_title:
   transform: [handlebars, markdown]
   en: How many services use **CRA business number** as a standard identifier?
   fr: Combien de services utilisent le numéro d'entreprise de l'ARC comme identifiant standard?
+sin_not_applicable:
+  en: Not applicable (not a service to an individual)
+  fr: TODO
+cra_not_applicable:
+  en: Not applicable (not a service to business)
+  fr: TODO
 
 # Digital Status
 services_digital_status_text:
@@ -166,10 +172,10 @@ online_inquiry:
 overview_digital_status_title:
   transform: [handlebars, markdown]
   en: What {{gl_tt "client interaction points" "CLIENT_INTERACTION"}} of this {{gl_tt "service" "SERVICE"}} are available online?
-  fr: TODO
+  fr: Quels {{gl_tt "points d'interaction liés aux clients" "CLIENT_INTERACTION"}} de ce service sont disponibles en ligne?
 overview_digital_status_desc:
   en: Online client interaction points of this service
-  fr: TODO
+  fr: Points d'interaction en ligne liés aux clients de ce service
 service_types:
   en: Service Types
   fr: Types de service
@@ -194,8 +200,8 @@ does_not_charge_fees:
     {{gl_tt "service" "SERVICE"}} **sans frais**
 standards_performance_text:
   transform: [handlebars, markdown]
-  en: Overall standards performance for this {{gl_tt "service" "SERVICE"}}
-  fr: Rendement global des normes pour ce {{gl_tt "service" "SERVICE"}}
+  en: Overall {{gl_tt "standards" "STANDARD"}} performance for this {{gl_tt "service" "SERVICE"}}
+  fr: Rendement global des {{gl_tt "normes" "STANDARD"}} pour ce {{gl_tt "service" "SERVICE"}}
 service_single_link_text:
   transform: [handlebars, markdown]
   en: More details on this {{gl_tt "service" "SERVICE"}} can be found **{{ext_link "here" service_url }}**
@@ -209,7 +215,7 @@ service_link_text:
   fr: Pour en savoir plus (liens externes)
 applications_and_calls:
   en: Applications and telephone calls
-  fr: TODO
+  fr: Applications et appels téléhoniques
 
 # Standard
 service_standards_title:
@@ -241,24 +247,24 @@ satisfied_business_volume:
   fr: Volume d'activités satisfaisant
 has_standards:
   en: Has standards
-  fr: TODO
+  fr: A des normes
 no_standards:
   en: Does not have standards
-  fr: TODO
+  fr: N’a pas de normes
 target_met_true:
   en: Standard target is met
-  fr: TODO
+  fr: La cible standard est atteinte
 target_met_false:
   en: Standard target is not met
-  fr: TODO
+  fr: La cible standard n’est pas atteinte
 has_standards_text:
   transform: [handlebars, markdown]
   en: How many {{gl_tt "services" "SERVICE"}} have {{gl_tt "standards" "STANDARD"}}?
-  fr: TODO
+  fr: Combien de {{gl_tt "services" "SERVICE"}} ont des {{gl_tt "normes" "STANDARD"}}?
 target_met_text:
   transform: [handlebars, markdown]
   en: How many {{gl_tt "standards'" "STANDARD"}} targets were met?
-  fr: TODO
+  fr: Combien de cibles {{gl_tt "standard" "STANDARD"}} ont été atteintes?
 
 # Types
 services_types:
