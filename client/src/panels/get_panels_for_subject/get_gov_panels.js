@@ -82,8 +82,8 @@ export const get_gov_panels = (subject) => ({
   services: [
     declare_services_types_panel(),
     declare_services_digital_status_panel(),
-    declare_services_fees_panel(),
     declare_services_id_methods_panel(),
+    declare_services_fees_panel(),
     declare_services_standards_panel(),
   ],
   results: [
