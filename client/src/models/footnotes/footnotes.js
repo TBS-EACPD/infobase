@@ -36,7 +36,7 @@ export default class FootNote extends mix().with(staticStoreMixin) {
       ret = this.lookup(subject);
     } else {
       ret = _.filter(this.lookup(subject), (note) =>
-        _.some([...topics, "ANY"], (topic) =>
+        _.some([...topics, "ANY", "MACHINERY"], (topic) =>
           _.includes(note.topic_keys, topic)
         )
       );
