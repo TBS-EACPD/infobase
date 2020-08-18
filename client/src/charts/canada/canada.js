@@ -111,7 +111,12 @@ class CanadaGraph extends React.PureComponent {
     this._render();
   }
   _render() {
-    const { graph_args, prov_select_callback, data } = this.props;
+    const {
+      graph_args,
+      prov_select_callback,
+      data,
+      selected_year_index,
+    } = this.props;
     const { color_scale, years, formatter } = graph_args;
 
     const graph_area_sel = d3.select(
@@ -123,6 +128,7 @@ class CanadaGraph extends React.PureComponent {
     const canada_graph = new CanadaD3Component(graph_area_sel.node(), {
       main_color: get_graph_color(1),
       secondary_color: tertiaryColor,
+      selected_year_index,
       data,
       ticks,
       color_scale,
@@ -221,7 +227,8 @@ export class Canada extends React.Component {
           <GraphOverlay>
             <CanadaGraph
               graph_args={graph_args}
-              data={data[selected_year_index]}
+              selected_year_index={selected_year_index}
+              data={data}
               prov_select_callback={this.prov_select_callback}
             />
           </GraphOverlay>
