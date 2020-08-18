@@ -59,8 +59,8 @@ cra_sub_title:
 # Digital Status
 services_digital_status_text:
   transform: [handlebars, markdown]
-  en: |
-    Among the **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{most_digital_name}}** is the most online-available {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 most_digital_pct}}**) while **{{least_digital_name}}** is the least online-available {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 least_digital_pct}}**).
+  en: | #TODO TEXT CHANGED AGAIN
+    Among the **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{most_digital_name}}** is the most commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 most_digital_pct}}**) while **{{least_digital_name}}** is the least commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 least_digital_pct}}**).
   fr: |
     TODO
 services_digital_status:
