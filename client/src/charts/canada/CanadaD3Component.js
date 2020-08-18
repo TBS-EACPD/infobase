@@ -89,15 +89,18 @@ export class CanadaD3Component {
     const formatter = this.options.formatter;
 
     const data = this.options.data;
+    const selected_year_data = data[this.options.selected_year_index];
 
     const html = this.html;
     const svg = this.svg;
     const graph_dispatcher = this.dispatch;
 
-    const data_has_ncr_broken_out = _.chain(data)
-      .keys()
-      .some((key) => /^ncr$|^.*lessncr$/.test(key))
-      .value();
+    const data_has_ncr_broken_out = _.some(data, (row) =>
+      _.chain(row)
+        .keys()
+        .some((key) => /^ncr$|^.*lessncr$/.test(key))
+        .value()
+    );
     if (data_has_ncr_broken_out) {
       _.each(["on", "qc"], (prov_key) =>
         svg
@@ -146,7 +149,7 @@ export class CanadaD3Component {
             stroke: main_color,
           });
       }
-      if (!_.isUndefined(data[prov_key])) {
+      if (!_.isUndefined(selected_year_data[prov_key])) {
         previous_event_target_prov_key = prov_key;
         svg.select(get_province_element_id(prov_key)).styles({
           "stroke-width":
@@ -159,11 +162,14 @@ export class CanadaD3Component {
     };
 
     // Set province colours, attach event dispatchers
-    const province_is_active = (prov_key) => data[prov_key];
+    const province_is_active = (prov_key) =>
+      _.some(data, (year) => year[prov_key]);
     const get_color = (prov_key) =>
       province_is_active(prov_key) ? main_color : secondary_color;
     const get_opacity = (prov_key) =>
-      province_is_active(prov_key) ? color_scale(data[prov_key] || 0) : 0.5;
+      province_is_active(prov_key)
+        ? color_scale(selected_year_data[prov_key] || 0)
+        : 0.5;
 
     svg
       .selectAll(".province")
@@ -192,7 +198,9 @@ export class CanadaD3Component {
           ? ["on", "qc"]
           : ["onlessncr", "qclessncr", "ncr"]
       )
-      .filter((prov_key) => data[prov_key])
+      .filter((prov_key) =>
+        _.some(data, (yearly_data) => yearly_data[prov_key])
+      )
       .value();
 
     html
@@ -242,7 +250,7 @@ export class CanadaD3Component {
           .style("margin-bottom", "0px");
       });
     html.selectAll("p.label-value").each(function (prov_key, i) {
-      d3.select(this).html(formatter(data[prov_key] || 0));
+      d3.select(this).html(formatter(selected_year_data[prov_key] || 0));
     });
 
     // Hide optional map components based on data availability
@@ -252,7 +260,10 @@ export class CanadaD3Component {
       });
     const hide_optional_components = (prov_keys, selector_template) =>
       _.each(prov_keys, (prov_key) => {
-        const corresponding_province_has_data = data[prov_key];
+        const corresponding_province_has_data = _.some(
+          data,
+          (yearly_data) => yearly_data[prov_key]
+        );
         if (!corresponding_province_has_data) {
           hide_map_components(selector_template(prov_key));
         }
