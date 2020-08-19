@@ -189,12 +189,15 @@ function get_data_by_org(include_stat) {
             current_value,
             comparison_value
           ),
-          footnotes: FootNote.get_for_subject(org, [
-            "AUTH",
-            "EST_PROC",
-            "VOTED",
-            "STAT",
-          ]),
+          footnotes: _.reject(
+            FootNote.get_for_subject(org, [
+              "AUTH",
+              "EST_PROC",
+              "VOTED",
+              "STAT",
+            ]),
+            (footnote) => _.includes(footnote.text, "Salary and Motor Car")
+          ),
           amounts_by_doc,
         },
         children: _.chain(rows)
@@ -206,6 +209,21 @@ function get_data_by_org(include_stat) {
               return null;
             }
 
+            const child_footnotes = _.union(
+              _.includes(row.desc, "Salary and Motor Car")
+                ? _.filter(
+                    FootNote.get_for_subject(org, ["STAT"]),
+                    (footnote) =>
+                      _.includes(footnote.text, "Salary and Motor Car")
+                  )
+                : [],
+              get_footnotes_for_votestat_item({
+                desc: row.desc,
+                org_id,
+                votenum: row.votenum,
+              })
+            );
+
             return {
               id: `${org_id}-${row.desc}`,
               data: {
@@ -216,11 +234,7 @@ function get_data_by_org(include_stat) {
                   current_value,
                   comparison_value
                 ),
-                footnotes: get_footnotes_for_votestat_item({
-                  desc: row.desc,
-                  org_id,
-                  votenum: row.votenum,
-                }),
+                footnotes: child_footnotes,
                 amounts_by_doc: get_doc_code_breakdowns(row._rows),
               },
             };
