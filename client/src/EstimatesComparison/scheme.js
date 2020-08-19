@@ -45,9 +45,11 @@ function get_footnotes_for_votestat_item({ desc, org_id, votenum }) {
     );
     if (central_vote_footnote) {
       return [
-        {
+        new FootNote({
+          id: "326",
           text: central_vote_footnote[1](),
-        },
+          subject: Dept.lookup(326),
+        }),
       ];
     }
   }
