@@ -47,41 +47,6 @@ const bar_table = (
   );
 };
 
-const amount_bar_table = (
-  data,
-  indexBy,
-  table_view_format,
-  table_name,
-  table_first_column_name
-) => {
-  const adjusted_data = _.map(data, (row) =>
-    _.mapKeys(row, (value, key) => {
-      return key !== indexBy ? "amount" : indexBy;
-    })
-  );
-  const column_configs = {
-    [indexBy]: {
-      index: 0,
-      header: table_first_column_name || nivo_common_text_maker("label"),
-      is_searchable: true,
-    },
-    amount: {
-      index: 1,
-      header: nivo_common_text_maker("value"),
-      formatter: (value) =>
-        _.isUndefined(value) ? "" : table_view_format(value),
-    },
-  };
-
-  return (
-    <DisplayTable
-      data={adjusted_data}
-      column_configs={column_configs}
-      table_name={table_name || nivo_common_text_maker("default_table_name")}
-    />
-  );
-};
-
 export class WrappedNivoBar extends React.Component {
   render() {
     const {
@@ -120,20 +85,11 @@ export class WrappedNivoBar extends React.Component {
       animate,
       motionDamping,
       motionStiffness,
-      amount_table,
     } = this.props;
 
     const table =
       !disable_table_view &&
       (custom_table ||
-        (amount_table &&
-          amount_bar_table(
-            data,
-            indexBy,
-            get_formatter(is_money, text_formatter, true, true),
-            table_name,
-            table_first_column_name
-          )) ||
         bar_table(
           data,
           keys,
@@ -170,7 +126,8 @@ export class WrappedNivoBar extends React.Component {
             motionStiffness,
           }}
           legends={fix_legend_symbols(legends)}
-          keys={keys}
+          keys={_.union(keys, [""])} //extra key allows negative bar to render (only needed when 1 type of key
+          //and the key takes both negative or positive values)
           labelFormat={_.isUndefined(label_format) ? null : label_format}
           labelTextColor={window.infobase_color_constants.textColor}
           tooltip={(d) =>
