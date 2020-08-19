@@ -344,22 +344,52 @@ export const declare_historical_g_and_c_panel = () =>
       switch (level) {
         case "gov":
           return {
-            info_deps: ["orgTransferPayments_gov_info"],
-
             depends_on: ["orgTransferPayments"],
             calculate(subject) {
               const { orgTransferPayments } = this.tables;
-              return orgTransferPayments.payment_type_ids(exp_years, false);
+
+              const payments = orgTransferPayments.payment_type_ids(
+                exp_years,
+                false
+              );
+
+              const payment_types = [
+                "Grant",
+                "Contribution",
+                "Other Transfer Payment",
+              ];
+
+              const five_year_avg =
+                (_.sum(payments.c) + _.sum(payments.g) + _.sum(payments.o)) / 5;
+
+              const avgs = _.map(payments, (type) => _.sum(type) / type.length);
+
+              const largest_avg = _.max(avgs);
+
+              const largest_type = payment_types[_.indexOf(avgs, largest_avg)];
+
+              return { payments, five_year_avg, largest_avg, largest_type };
             },
             render({ calculations, footnotes, sources }) {
-              const { info, panel_args: series } = calculations;
+              const { panel_args } = calculations;
+              const {
+                payments: series,
+                five_year_avg,
+                largest_avg,
+                largest_type,
+              } = panel_args;
               return (
                 <InfographicPanel
                   title={text_maker("historical_g_and_c_title")}
                   {...{ footnotes, sources }}
                 >
                   <HistTPTypes
-                    text={<TM k="gov_historical_g_and_c_text" args={info} />}
+                    text={
+                      <TM
+                        k="gov_historical_g_and_c_text"
+                        args={{ five_year_avg, largest_avg, largest_type }}
+                      />
+                    }
                     text_split={4}
                     series={series}
                   />
@@ -369,11 +399,6 @@ export const declare_historical_g_and_c_panel = () =>
           };
         case "dept":
           return {
-            info_deps: [
-              "orgTransferPayments_gov_info",
-              "orgTransferPayments_dept_info",
-            ],
-
             depends_on: ["orgTransferPayments"],
             key: "historical_g_and_c",
             footnotes: ["SOBJ10"],
@@ -385,29 +410,86 @@ export const declare_historical_g_and_c_panel = () =>
                 dept.unique_id
               );
 
+              const five_year_avg =
+                (_.sum(rolled_up_transfer_payments.c) +
+                  _.sum(rolled_up_transfer_payments.g) +
+                  _.sum(rolled_up_transfer_payments.o)) /
+                5;
+
+              const payment_types = [
+                "Contribution",
+                "Grant",
+                "Other Transfer Payment",
+              ];
+
+              const c_avg =
+                rolled_up_transfer_payments.c &&
+                _.sum(rolled_up_transfer_payments.c) /
+                  rolled_up_transfer_payments.c.length;
+
+              const g_avg =
+                rolled_up_transfer_payments.g &&
+                _.sum(rolled_up_transfer_payments.g) /
+                  rolled_up_transfer_payments.g.length;
+
+              const o_avg =
+                rolled_up_transfer_payments.o &&
+                _.sum(rolled_up_transfer_payments.o) /
+                  rolled_up_transfer_payments.o.length;
+
+              const avgs = [c_avg, g_avg, o_avg];
+              const max_avg = _.max(avgs);
+              const max_type = payment_types[_.indexOf(avgs, max_avg)];
+
               const has_transfer_payments = _.chain(rolled_up_transfer_payments)
                 .values()
                 .flatten()
                 .some((value) => value !== 0)
                 .value();
 
+              const rows = _.chain(orgTransferPayments.q(dept).data)
+                .sortBy("{{pa_last_year}}exp")
+                .reverse()
+                .value();
+
+              const tp_average_payments = _.map(
+                rows,
+                (row) =>
+                  (row["{{pa_last_year}}exp"] +
+                    row["{{pa_last_year_2}}exp"] +
+                    row["{{pa_last_year_3}}exp"] +
+                    row["{{pa_last_year_4}}exp"] +
+                    row["{{pa_last_year_5}}exp"]) /
+                  5
+              );
+
+              const max_tp_avg = _.max(tp_average_payments);
+              const max_tp =
+                rows[_.indexOf(tp_average_payments, max_tp_avg)].tp;
+
+              const text_calculations = {
+                dept,
+                five_year_avg,
+                max_avg,
+                max_type,
+                max_tp_avg,
+                max_tp,
+              };
+
               return (
                 has_transfer_payments && {
                   rolled_up: rolled_up_transfer_payments,
-                  rows: _.chain(orgTransferPayments.q(dept).data)
-                    .sortBy("{{pa_last_year}}exp")
-                    .reverse()
-                    .value(),
+                  rows: rows,
+                  text_calculations,
                 }
               );
             },
             render({ calculations, footnotes, sources }) {
               const {
-                info,
-                panel_args: { rows, rolled_up },
+                panel_args: { rows, rolled_up, text_calculations },
               } = calculations;
               const text_content = (
-                <TM k="dept_historical_g_and_c_text" args={info} />
+                <TM k="dept_historical_g_and_c_text" args={text_calculations} />
               );
 
               return (
