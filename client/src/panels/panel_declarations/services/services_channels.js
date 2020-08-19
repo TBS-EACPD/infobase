@@ -8,6 +8,8 @@ import {
   InfographicPanel,
   declare_panel,
   WrappedNivoBar,
+  WrappedNivoPie,
+  HeightClippedGraph,
 } from "../shared.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -90,6 +92,19 @@ class ServicesChannelsPanel extends React.Component {
         .fromPairs()
         .value(),
     }));
+    const pie_data = _.chain(service_channels_keys)
+      .map((key) => ({
+        id: key,
+        label: text_maker(key),
+        value: _.reduce(
+          services,
+          (sum, service) =>
+            sum + (_.sumBy(service.service_report, `${key}_count`) || 0),
+          0
+        ),
+      }))
+      .filter("value")
+      .value();
 
     return (
       <div>
@@ -104,54 +119,84 @@ class ServicesChannelsPanel extends React.Component {
             max_vol_channel_value,
           }}
         />
-        <StandardLegend
-          items={_.chain(services)
-            .map(({ service_id, name }) => ({
-              id: service_id,
-              label: name,
-              color: colors(name),
-              active: active_services[service_id],
-            }))
-            .sortBy("label")
-            .value()}
-          onClick={(id) =>
-            this.setState({
-              active_services: {
-                ...active_services,
-                [id]: !active_services[id],
-              },
-            })
-          }
-          Controls={
-            <SelectAllControl
-              SelectAllOnClick={() =>
+        <div className="frow">
+          <div
+            className="fcol-md-12"
+            style={{ textAlign: "center", fontWeight: 700, marginTop: "50px" }}
+          >
+            <TM className="medium_panel_text" k="services_channels_title" />
+          </div>
+          <div className="fcol-md-4">
+            <StandardLegend
+              items={_.chain(services)
+                .map(({ service_id, name }) => ({
+                  id: service_id,
+                  label: name,
+                  color: colors(name),
+                  active: active_services[service_id],
+                }))
+                .sortBy("label")
+                .value()}
+              onClick={(id) =>
                 this.setState({
-                  active_services: _.chain(services)
-                    .map(({ service_id }) => [service_id, true])
-                    .fromPairs()
-                    .value(),
+                  active_services: {
+                    ...active_services,
+                    [id]: !active_services[id],
+                  },
                 })
               }
-              SelectNoneOnClick={() => this.setState({ active_services: {} })}
+              Controls={
+                <SelectAllControl
+                  SelectAllOnClick={() =>
+                    this.setState({
+                      active_services: _.chain(services)
+                        .map(({ service_id }) => [service_id, true])
+                        .fromPairs()
+                        .value(),
+                    })
+                  }
+                  SelectNoneOnClick={() =>
+                    this.setState({ active_services: {} })
+                  }
+                />
+              }
             />
-          }
-        />
-        <WrappedNivoBar
-          data={bar_data}
-          is_money={false}
-          keys={_.map(services, "name")}
-          indexBy={"id"}
-          colorBy={(d) => colors(d.id)}
-          bttm_axis={{
-            tickRotation: 35,
-          }}
-          margin={{
-            top: 15,
-            right: 60,
-            bottom: 160,
-            left: 60,
-          }}
-        />
+          </div>
+          <div className="fcol-md-8">
+            <WrappedNivoBar
+              data={bar_data}
+              is_money={false}
+              keys={_.map(services, "name")}
+              indexBy={"id"}
+              colorBy={(d) => colors(d.id)}
+              bttm_axis={{
+                tickRotation: 35,
+              }}
+              margin={{
+                top: 15,
+                right: 60,
+                bottom: 120,
+                left: 60,
+              }}
+            />
+          </div>
+        </div>
+        <HeightClippedGraph clipHeight={300}>
+          <div style={{ marginTop: "50px" }} className="fcol-md-12">
+            <div style={{ textAlign: "center" }}>
+              <TM
+                style={{ fontWeight: 700 }}
+                className="medium_panel_text"
+                k="services_channels_title"
+              />
+            </div>
+            <WrappedNivoPie
+              data={pie_data}
+              is_money={false}
+              display_horizontal={true}
+            />
+          </div>
+        </HeightClippedGraph>
       </div>
     );
   }
