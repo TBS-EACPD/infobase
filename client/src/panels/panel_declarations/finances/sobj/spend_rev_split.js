@@ -34,9 +34,10 @@ function render({ calculations, footnotes, sources }) {
   const ticks = _ticks.map(text_maker);
   const spend_rev_data = _.map(series, (spend_rev_value, tick_index) => ({
     title: ticks[tick_index],
-    [ticks[tick_index]]: spend_rev_value,
+    [text_maker("value")]: spend_rev_value,
   }));
 
+  console.log(spend_rev_data);
   const graph_content = (() => {
     if (window.is_a11y_mode) {
       return null;
@@ -45,7 +46,7 @@ function render({ calculations, footnotes, sources }) {
         <div>
           <WrappedNivoBar
             data={spend_rev_data}
-            keys={ticks}
+            keys={[text_maker("value")]}
             indexBy="title"
             enableLabel={true}
             isInteractive={false}
@@ -58,7 +59,6 @@ function render({ calculations, footnotes, sources }) {
                 : window.infobase_color_constants.secondaryColor
             }
             enableGridX={false}
-            amount_table={true}
           />
         </div>
       );

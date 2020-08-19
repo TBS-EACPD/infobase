@@ -66,13 +66,13 @@ const estimates_split_render_w_text_key = (text_key) => ({
     const keys = in_year_bar_args.ticks;
     const estimate_data = _.map(in_year_bar_args.series, (data, index) => ({
       label: keys[index],
-      [keys[index]]: data,
+      [text_maker("value")]: data,
     }));
 
     content = (
       <WrappedNivoBar
         data={estimate_data}
-        keys={keys}
+        keys={[text_maker("value")]}
         label_format={(d) => <tspan y={-4}>{formats.compact2_raw(d)}</tspan>}
         isInteractive={false}
         enableLabel={true}
@@ -109,7 +109,6 @@ const estimates_split_render_w_text_key = (text_key) => ({
             },
           },
         }}
-        amount_table={true}
       />
     );
   }
