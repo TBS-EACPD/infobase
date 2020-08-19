@@ -37,7 +37,6 @@ function render({ calculations, footnotes, sources }) {
     [text_maker("value")]: spend_rev_value,
   }));
 
-  console.log(spend_rev_data);
   const graph_content = (() => {
     if (window.is_a11y_mode) {
       return null;
