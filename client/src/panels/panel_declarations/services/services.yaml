@@ -272,5 +272,8 @@ services_types:
   fr: TODO
 services_types_desc:
   transform: [handlebars, markdown]
-  en: There are **{{num_of_types}}** different types of {{gl_tt "services" "SERVICE"}} within **{{subject.name}}**. The most common service type is "**{{max_type}}**", making up **{{max_type_count}} of {{num_of_services}}** department's services.
+  en: |
+    There are **{{num_of_types}}** different types of {{gl_tt "services" "SERVICE"}} within **{{subject.name}}**. The most common service type is "**{{max_type}}**", making up **{{max_type_count}} of {{num_of_services}}** department's services.
+    
+    Note that a service can have multiple types.
   fr: TODO
