@@ -42,17 +42,17 @@ gov_historical_g_and_c_text:
   transform: [handlebars,markdown]
   en: |
    A major portion of the government’s spending is {{gl_tt "Transfer Payments" "TP"}}. Over the last 
-   five years, the government has spent an average of **{{fmt_compact1_written gov_tp_exp_average}}** in transfer payments per year. Transfer payments can be divided into three categories: 
+   five years, the government has spent an average of **{{fmt_compact1_written five_year_avg}}** in transfer payments per year. Transfer payments can be divided into three categories: 
    {{gl_tt "grants" "GRANT_TP"}}, {{gl_tt "contributions" "CONT_TP"}} and 
    {{gl_tt "other transfer payments" "OTHER_TP"}}. 
 
 
-   From {{pa_last_year_5}} to {{pa_last_year}}, the largest type of government transfer payments was **{{fmt_compact1_written gov_tp_type_exp_top}}** with an 
-   average of **{{fmt_compact1_written gov_tp_type_exp_top_avg}}** in spending per year.
+   From {{pa_last_year_5}} to {{pa_last_year}}, the largest type of government transfer payments was **{{fmt_compact1_written largest_type}}** with an 
+   average of **{{fmt_compact1_written largest_avg}}** in spending per year.
 
   fr: |
    Les {{gl_tt "paiements de transfert" "TP"}} sont une part importante des dépenses gouvernementales. Au cours des cinq derniers exercices financiers, 
-   le gouvernement a dépensé en moyenne **{{fmt_compact1_written gov_tp_exp_average}}** par an en paiements de transfert. Les paiements de transfert peuvent être classés en trois catégories :
+   le gouvernement a dépensé en moyenne **{{fmt_compact1_written five_year_avg}}** par an en paiements de transfert. Les paiements de transfert peuvent être classés en trois catégories :
    « {{gl_tt "subventions" "GRANT_TP"}} », « {{gl_tt "contributions" "CONT_TP"}} » et « {{gl_tt "autres paiements de transfert" "OTHER_TP"}} ».
 
 
@@ -72,22 +72,22 @@ historical_g_and_c_detailed_title:
 dept_historical_g_and_c_text:
   transform: [handlebars,markdown]
   en: |
-   Over the last five years ({{pa_last_year_5}} to {{pa_last_year}}), **{{subject.name}}** spent an average of **{{fmt_compact1_written dept_tp_exp_average}}** in {{gl_tt "Transfer Payments" "TP"}} per year.
+   Over the last five years ({{pa_last_year_5}} to {{pa_last_year}}), **{{dept.name}}** spent an average of **{{fmt_compact1_written five_year_avg}}** in {{gl_tt "Transfer Payments" "TP"}} per year.
 
-   During this same period, **{{fmt_compact1_written dept_tp_type_exp_top}}** payments accounted for 
-   the largest share of transfer payments with an average of **{{fmt_compact1_written dept_tp_type_exp_top_avg}}** in spending per year. 
+   During this same period, **{{fmt_compact1_written max_type}}** payments accounted for 
+   the largest share of transfer payments with an average of **{{fmt_compact1_written max_avg}}** in spending per year. 
    
    
-   Of these payments, **{{dept_tp_exp_top}}** accounted for the largest share with an average of **{{fmt_compact1_written dept_tp_exp_top_avg}}** in spending per year.
+   Of these payments, **{{max_tp}}** accounted for the largest share with an average of **{{fmt_compact1_written max_tp_avg}}** in spending per year.
 
   fr: |
-   Au cours des cinq derniers exercices ({{pa_last_year_5}} à {{pa_last_year}}), **{{le_dept dept}}** a dépensé en moyenne **{{fmt_compact1_written dept_tp_exp_average}}** par an en {{gl_tt "paiements de transfert" "TP"}}.
-   Durant cette même période, les **{{fmt_compact1_written dept_tp_type_exp_top}}** ont constitué le plus important type de paiements de transfert, avec des dépenses annuelles moyennes
-   de **{{fmt_compact1_written dept_tp_type_exp_top_avg}}**.
+   Au cours des cinq derniers exercices ({{pa_last_year_5}} à {{pa_last_year}}), **{{dept.name}}** a dépensé en moyenne **{{fmt_compact1_written five_year_avg}}** par an en {{gl_tt "paiements de transfert" "TP"}}.
+   Durant cette même période, les **{{fmt_compact1_written max_type}}** ont constitué le plus important type de paiements de transfert, avec des dépenses annuelles moyennes
+   de **{{fmt_compact1_written max_avg}}**.
 
 
-   De {{pa_last_year_5}} à {{pa_last_year}}, le plus important paiement de transfert pour **{{subject.name}}** était constitué de **{{fmt_compact1_written dept_tp_exp_top}}**, avec des dépenses annuelles moyennes 
-   de **{{fmt_compact1_written dept_tp_exp_top_avg}}**.
+   De {{pa_last_year_5}} à {{pa_last_year}}, le plus important paiement de transfert pour **{{dept.name}}** était constitué de **{{fmt_compact1_written max_tp}}**, avec des dépenses annuelles moyennes 
+   de **{{fmt_compact1_written max_tp_avg}}**.
 historical_g_and_c_custom_new_row:
   transform: [handlebars]
   text: |
