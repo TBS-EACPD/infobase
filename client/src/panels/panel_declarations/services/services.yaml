@@ -168,6 +168,32 @@ online_inquiry:
   en: Website visits
   fr: Visites sur le site web
 
+# Top 10 volume
+top10_services_volume_title:
+  en: Top 10 services with highest application volume
+  fr: TODO
+service_name:
+  en: Service name
+  fr: TODO
+top10_services_volume_text:
+  transform: [handlebars, markdown]
+  en: |
+    Below are the top 10 services with the highest application and telephone volume. **{{highest_service_name}}** had the most traffic with **{{fmt_big_int highest_service_value}}** applications and telephone calls.
+  fr: TODO
+
+
+# High application volume
+high_application_volume_title:
+  en: Organizations with high application volume
+  fr: TODO
+high_application_volume_text:
+  transform: [handlebars, markdown]
+  en: |
+    Below are the list of organizations with **high volume** data, where their application and telephone volume is greater than **45,000**.
+    
+    Among **{{num_of_high_volume_depts}}** departments with high volume data, **{{highest_volume_dept}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** of applications and telephone calls.
+  fr: TODO
+
 # Overview
 overview_digital_status_title:
   transform: [handlebars, markdown]
