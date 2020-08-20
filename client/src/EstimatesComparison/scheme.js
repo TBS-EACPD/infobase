@@ -189,12 +189,7 @@ function get_data_by_org(include_stat) {
             current_value,
             comparison_value
           ),
-          footnotes: FootNote.get_for_subject(org, [
-            "AUTH",
-            "EST_PROC",
-            "VOTED",
-            "STAT",
-          ]),
+          footnotes: FootNote.get_for_subject(org, ["VOTED", "STAT"]),
           amounts_by_doc,
         },
         children: _.chain(rows)
