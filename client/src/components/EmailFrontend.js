@@ -42,8 +42,9 @@ const EnumField = ({
   selected_enums_for_field,
   disabled,
   state_update_callback,
+  classes,
 }) => (
-  <div className={form_type}>
+  <div className={form_type + " " + classes}>
     <label htmlFor={`${field_id}--${enum_key}`}>
       <input
         id={`${field_id}--${enum_key}`}
@@ -186,6 +187,13 @@ class EmailFrontend extends React.Component {
               <legend>{field_info.form_label[window.lang]}</legend>
               {_.map(field_info.enum_values, (label_by_lang, key) => (
                 <EnumField
+                  classes={
+                    _.size(field_info.enum_values) <= 5
+                      ? `col-sm-${_.floor(
+                          12 / _.size(field_info.enum_values)
+                        )} inline`
+                      : ""
+                  }
                   key={`${key}_${field_info.form_type}`}
                   form_type={field_info.form_type}
                   label={label_by_lang[window.lang]}
