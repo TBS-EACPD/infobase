@@ -41,6 +41,7 @@ import {
   declare_in_year_stat_breakdown_panel,
   declare_gocographic_panel,
   declare_personnel_spend_panel,
+  declare_high_application_volume_panel,
 } from "../panel_declarations/index.js";
 
 export const get_gov_panels = (subject) => ({
@@ -75,6 +76,7 @@ export const get_gov_panels = (subject) => ({
     declare_services_types_panel(),
     declare_services_digital_status_panel(),
     declare_services_id_methods_panel(),
+    declare_high_application_volume_panel(),
     declare_services_fees_panel(),
     declare_services_standards_panel(),
   ],

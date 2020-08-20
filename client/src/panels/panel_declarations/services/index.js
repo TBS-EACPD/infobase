@@ -5,6 +5,8 @@ export { declare_services_id_methods_panel } from "./services_id_methods.js";
 export { declare_services_channels_panel } from "./services_channels.js";
 export { declare_services_digital_status_panel } from "./services_digital_status.js";
 export { declare_services_standards_panel } from "./services_standards.js";
+export { declare_top10_services_application_volume_panel } from "./top10_services_application_volume.js";
+export { declare_high_application_volume_panel } from "./high_application_volume.js";
 export { ServiceOverview } from "./single_service_panels/service_overview.js";
 export { ServiceOverviewV2 } from "./single_service_panels/service_overview_v2.js";
 export { ServiceChannels } from "./single_service_panels/service_channels.js";
