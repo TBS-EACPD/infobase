@@ -14,6 +14,7 @@ import {
   RadioButtons,
   LabeledBox,
   CheckBox,
+  Details,
 } from "../components/index.js";
 import { get_root } from "../explorer_common/hierarchy_tools.js";
 import {
@@ -158,7 +159,10 @@ const get_non_col_content = ({ node }) => {
             <div className="h6 heavy-weight">
               <TM k="notes" />
             </div>
-            <FootnoteList footnotes={footnotes} />
+            <Details
+              summary_content={<TM k="footnotes" />}
+              content={<FootnoteList footnotes={footnotes} />}
+            />
           </HeightClipper>
         </div>
       )}
