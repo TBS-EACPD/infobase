@@ -40,11 +40,8 @@ class VersionNumber extends React.Component {
 }
 
 export class PageDetails extends React.Component {
-  state = {
-    show_feedback: false,
-  };
-
   render() {
+    const { toggleSurvey, showSurvey } = this.props;
     return (
       <div className="pagedetails frow">
         <div className="pagedetails__report-a-problem fcol-md-8 fcol-sm-12">
@@ -55,17 +52,14 @@ export class PageDetails extends React.Component {
           />
         </div>
         <div className="pagedetails__report-a-problem fcol-md-8 fcol-sm-12">
-          <a
-            role="button"
-            onClick={() => this.setState({ show_feedback: true })}
-          >
+          <a role="button" onClick={() => toggleSurvey()}>
             {text_maker("feedback")}
           </a>
           <StatelessModal
             title={text_maker("feedback")}
-            show={this.state.show_feedback}
+            show={showSurvey}
             body={<EmailFrontend top_border={false} template_name="feedback" />}
-            on_close_callback={() => this.setState({ show_feedback: false })}
+            on_close_callback={() => toggleSurvey()}
           />
         </div>
         <div className="pagedetails__version-number fcol-md-4 fcol-sm-6">
