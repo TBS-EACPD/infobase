@@ -131,10 +131,17 @@ export class App extends React.Component {
   state = {
     showNotification: false,
     message: "",
+    showSurvey: false,
   };
 
   hideNotification = () => {
     this.setState({ showNotification: false });
+  };
+
+  toggleSurvey = () => {
+    this.setState((prevState) => {
+      return { showSurvey: !prevState.showSurvey };
+    });
   };
 
   componentDidMount() {
@@ -208,7 +215,10 @@ export class App extends React.Component {
               />
               <Route path="/rpb/:config?" component={ReportBuilder} />
               <Route path="/about" component={About} />
-              <Route path="/contact" component={Contact} />
+              <Route
+                path="/contact"
+                render={() => <Contact toggleSurvey={this.toggleSurvey} />}
+              />
               <Route path="/faq/:selected_qa_key?" component={FAQ} />
               <Route
                 path="/compare_estimates/:h7y_layout?"
@@ -265,7 +275,10 @@ export class App extends React.Component {
                 component={window.is_a11y_mode ? A11yHome : Home}
               />
             </Switch>
-            <PageDetails />
+            <PageDetails
+              showSurvey={this.state.showSurvey}
+              toggleSurvey={this.toggleSurvey}
+            />
           </Suspense>
         </ErrorBoundary>
       </div>
