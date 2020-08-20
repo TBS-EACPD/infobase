@@ -7,6 +7,7 @@ import { ExternalLink } from "./misc_util_components.js";
 import { create_text_maker } from "../models/text.js";
 import { IconGitHub } from "../icons/icons.js";
 import { EmailFrontend } from "./EmailFrontend.js";
+import { StatelessModal } from "./modals_and_popovers";
 
 const text_maker = create_text_maker(text);
 
@@ -39,6 +40,10 @@ class VersionNumber extends React.Component {
 }
 
 export class PageDetails extends React.Component {
+  state = {
+    show_feedback: false,
+  };
+
   render() {
     return (
       <div className="pagedetails frow">
@@ -49,15 +54,20 @@ export class PageDetails extends React.Component {
             persist_content={true}
           />
         </div>
-        {false && ( // disabled until ready to fully shutter external survey
-          <div className="pagedetails__report-a-problem fcol-md-8 fcol-sm-12">
-            <Details
-              summary_content={text_maker("feedback")}
-              content={<EmailFrontend template_name="feedback" />}
-              persist_content={true}
-            />
-          </div>
-        )}
+        <div className="pagedetails__report-a-problem fcol-md-8 fcol-sm-12">
+          <a
+            role="button"
+            onClick={() => this.setState({ show_feedback: true })}
+          >
+            {text_maker("feedback")}
+          </a>
+          <StatelessModal
+            title={text_maker("feedback")}
+            show={this.state.show_feedback}
+            body={<EmailFrontend top_border={false} template_name="feedback" />}
+            on_close_callback={() => this.setState({ show_feedback: false })}
+          />
+        </div>
         <div className="pagedetails__version-number fcol-md-4 fcol-sm-6">
           <VersionNumber />
         </div>

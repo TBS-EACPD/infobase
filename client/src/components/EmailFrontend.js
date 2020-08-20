@@ -148,6 +148,8 @@ class EmailFrontend extends React.Component {
       completed_template,
     } = this.state;
 
+    const { top_border } = this.props;
+
     const user_fields = _.omitBy(
       template,
       ({ form_type }, key) => key === "meta" || !form_type
@@ -231,7 +233,10 @@ class EmailFrontend extends React.Component {
     };
 
     return (
-      <div className="email-backend-form">
+      <div
+        style={top_border ? {} : { borderTop: "none" }}
+        className="email-backend-form"
+      >
         {loading && (
           <div style={{ height: "50px" }}>
             <SpinnerWrapper config_name="small_inline" />
@@ -357,3 +362,7 @@ class EmailFrontend extends React.Component {
 }
 
 export { EmailFrontend };
+
+EmailFrontend.defaultProps = {
+  top_border: true,
+};
