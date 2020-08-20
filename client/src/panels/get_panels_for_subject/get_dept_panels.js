@@ -62,6 +62,7 @@ import {
   declare_detailed_program_spending_split_panel,
   declare_provided_services_list_panel,
   declare_services_channels_panel,
+  declare_top10_services_application_volume_panel,
 } from "src/panels/panel_declarations/index.js";
 
 import { ensure_loaded } from "src/core/ensure_loaded.js";
@@ -117,6 +118,7 @@ export const get_dept_panels = (subject) =>
       declare_services_digital_status_panel(),
       declare_services_id_methods_panel(),
       declare_services_channels_panel(),
+      declare_top10_services_application_volume_panel(),
       declare_services_fees_panel(),
       declare_services_standards_panel(),
     ],
