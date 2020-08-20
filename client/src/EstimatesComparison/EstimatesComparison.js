@@ -156,9 +156,6 @@ const get_non_col_content = ({ node }) => {
       {!_.isEmpty(footnotes) && (
         <div className={classNames(subject && "mrgn-bttm-lg")}>
           <HeightClipper allowReclip={true} clipHeight={150}>
-            <div className="h6 heavy-weight">
-              <TM k="notes" />
-            </div>
             <Details
               summary_content={<TM k="footnotes" />}
               content={<FootnoteList footnotes={footnotes} />}
