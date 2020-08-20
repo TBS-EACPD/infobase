@@ -31,6 +31,12 @@ elif [[ $CURRENT_PROD_MDB_NAME = $NEW_PROD_MDB_NAME ]] ; then
   exit
 fi
 
+CDN_URL="https://cdn-rdc.ea-ad.ca/InfoBase"
+PREVIOUS_DEPLOY_SHA=$(curl --fail $CDN_URL/build_sha | cut -c1-7)
+
+GITHUB_LINK="https://github.com/TBS-EACPD/infobase/compare/$PREVIOUS_DEPLOY_SHA...$CURRENT_SHA"  && [[ -z $PREVIOUS_DEPLOY_SHA ]] && GITHUB_LINK="https://github.com/TBS-EACPD/infobase/commit/$CURRENT_SHA"
+
+curl -X POST -H 'Content-type: application/json' --data '{"text":"New update deployed! View changes: '$GITHUB_LINK'"}' $(lpass show UPDATE_DEPLOYED_BOT_SERVICE_LINK --notes)
 
 (cd server && sh deploy_scripts/prod_deploy_data.sh)
 (cd server && sh deploy_scripts/prod_deploy_function.sh)
@@ -42,10 +48,3 @@ mongo $(lpass show MDB_SHELL_CONNECT_STRING --notes) \
   --username $(lpass show MDB_WRITE_USER --notes) --password $(lpass show MDB_WRITE_PW --notes) \
   --eval "const new_prod_db_name = '$NEW_PROD_MDB_NAME';" \
   scripts/prod_scripts/mongo_post_deploy_cleanup.js
-
-CDN_URL="https://cdn-rdc.ea-ad.ca/InfoBase"
-PREVIOUS_DEPLOY_SHA=$(curl --fail $CDN_URL/build_sha | cut -c1-7)
-
-GITHUB_LINK="https://github.com/TBS-EACPD/infobase/compare/$PREVIOUS_DEPLOY_SHA...$CURRENT_SHA"  && [[ -z $PREVIOUS_DEPLOY_SHA ]] && GITHUB_LINK="https://github.com/TBS-EACPD/infobase/commit/$CURRENT_SHA"
-
-curl -X POST -H 'Content-type: application/json' --data '{"text":"New update deployed! View changes: '$GITHUB_LINK'"}' $(lpass show UPDATE_DEPLOYED_BOT_SERVICE_LINK --notes)
