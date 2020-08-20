@@ -5,7 +5,7 @@ import { Subject } from "../../../../models/subject.js";
 import {
   available_icons,
   available_keys,
-  service_channels_keys,
+  application_channels_keys,
 } from "../shared";
 import { infograph_href_template } from "../../../../link_utils.js";
 import ProgressGauge from "../../../../charts/progressGauge.js";
@@ -26,16 +26,11 @@ export class ServiceOverviewV2 extends React.Component {
       .flatten()
       .value();
     const applications_and_calls = _.reduce(
-      service_channels_keys,
+      application_channels_keys,
       (total, key) => {
-        // applications_and_calls is sum of all channels except website visits
-        if (key !== "online_inquiry") {
-          const sum_for_key =
-            _.sumBy(service.service_report, `${key}_count`) || 0;
-          return total + sum_for_key;
-        } else {
-          return total;
-        }
+        const sum_for_key =
+          _.sumBy(service.service_report, `${key}_count`) || 0;
+        return total + sum_for_key;
       },
       0
     );

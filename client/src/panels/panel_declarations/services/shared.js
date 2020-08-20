@@ -9,9 +9,16 @@ const digital_status_keys = [
   "issuance_digital",
   "issue_res_digital",
 ];
-const service_channels_keys = [
+const delivery_channels_keys = [
   "phone_inquiry",
   "online_inquiry",
+  "other_application",
+  "live_application",
+  "mail_application",
+  "online_application",
+];
+const application_channels_keys = [
+  "phone_inquiry",
   "other_application",
   "live_application",
   "mail_application",
@@ -51,7 +58,8 @@ const available_icons = {
 
 export {
   digital_status_keys,
-  service_channels_keys,
+  delivery_channels_keys,
+  application_channels_keys,
   available_keys,
   available_icons,
 };

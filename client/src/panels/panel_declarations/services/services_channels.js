@@ -1,6 +1,6 @@
 import text from "./services.yaml";
 import { Service } from "../../../models/services.js";
-import { service_channels_keys } from "./shared.js";
+import { delivery_channels_keys, application_channels_keys } from "./shared.js";
 import { StandardLegend, SelectAllControl } from "../../../charts/legends";
 
 import {
@@ -24,7 +24,7 @@ class ServicesChannelsPanel extends React.Component {
     const median_3_values = _.chain(services)
       .map((service) => ({
         id: service.id,
-        value: _.chain(service_channels_keys)
+        value: _.chain(delivery_channels_keys)
           .map((key) =>
             _.map(service.service_report, (report) => report[`${key}_count`])
           )
@@ -53,15 +53,10 @@ class ServicesChannelsPanel extends React.Component {
     const { active_services } = this.state;
     const { services, subject } = panel_args;
 
-    const filtered_channel_keys = _.filter(
-      service_channels_keys,
-      (key) => !(key === "phone_inquiry" || key === "online_inquiry")
-    );
-
     const { max_vol_service_name, max_vol_service_value } = _.chain(services)
       .map(({ name, service_report }) => ({
         max_vol_service_name: name,
-        max_vol_service_value: _.chain(filtered_channel_keys)
+        max_vol_service_value: _.chain(application_channels_keys)
           .map((key) => _.sumBy(service_report, `${key}_count`))
           .sum()
           .value(),
@@ -69,7 +64,7 @@ class ServicesChannelsPanel extends React.Component {
       .maxBy("max_vol_service_value")
       .value();
     const { max_vol_channel_name, max_vol_channel_value } = _.chain(
-      filtered_channel_keys
+      application_channels_keys
     )
       .map((key) => ({
         max_vol_channel_name: text_maker(key),
@@ -81,7 +76,7 @@ class ServicesChannelsPanel extends React.Component {
       .maxBy("max_vol_channel_value")
       .value();
 
-    const bar_data = _.map(service_channels_keys, (key) => ({
+    const bar_data = _.map(delivery_channels_keys, (key) => ({
       id: text_maker(key),
       ..._.chain(services)
         .filter(({ id }) => active_services[id])
@@ -92,7 +87,7 @@ class ServicesChannelsPanel extends React.Component {
         .fromPairs()
         .value(),
     }));
-    const pie_data = _.chain(service_channels_keys)
+    const pie_data = _.chain(delivery_channels_keys)
       .map((key) => ({
         id: key,
         label: text_maker(key),

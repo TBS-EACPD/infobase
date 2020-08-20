@@ -1,5 +1,5 @@
 import text from "../services.yaml";
-import { service_channels_keys } from "../shared.js";
+import { delivery_channels_keys } from "../shared.js";
 import { create_text_maker_component, Panel } from "../../../../components";
 import { WrappedNivoHBar } from "../../../../charts/wrapped_nivo";
 
@@ -10,7 +10,7 @@ export class ServiceChannels extends React.Component {
     const { service } = this.props;
     const colors = infobase_colors();
     const { max_channel_key, max_value } = _.reduce(
-      service_channels_keys,
+      delivery_channels_keys,
       (max_data, key) => {
         const key_count = `${key}_count`;
         const max_object_for_key = _.maxBy(service.service_report, key_count);
@@ -27,7 +27,7 @@ export class ServiceChannels extends React.Component {
       { max_channel_key: "", max_value: 0 }
     );
 
-    const data = _.chain(service_channels_keys)
+    const data = _.chain(delivery_channels_keys)
       .filter((key) =>
         _.reduce(
           service.service_report,
@@ -56,7 +56,7 @@ export class ServiceChannels extends React.Component {
         <WrappedNivoHBar
           data={data}
           indexBy="label"
-          keys={_.map(service_channels_keys, (key) => text_maker(key))}
+          keys={_.map(delivery_channels_keys, (key) => text_maker(key))}
           is_money={false}
           colorBy={(d) => colors(d.id)}
           margin={{
