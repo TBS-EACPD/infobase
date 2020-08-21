@@ -12,8 +12,8 @@ import {
 
 const { TM, text_maker } = create_text_maker_component(text);
 
-const chance_increment = 0.2;
-const survey_campaign_end_date = new Date(2020, 3, 31).getTime();
+const page_visit_increment = 1;
+const survey_campaign_end_date = new Date(2021, 3, 31).getTime();
 
 const get_path_root = (path) =>
   _.chain(path).replace(/^\//, "").split("/").first().value();
@@ -26,13 +26,13 @@ const should_reset_local_storage = () =>
 
 const get_state_defaults = () => {
   const default_active = true;
-  const default_chance = 0;
+  const default_page_visited = 1;
 
   const local_storage_deactivated = localStorage.getItem(
     `infobase_survey_popup_deactivated`
   );
-  const local_storage_chance = localStorage.getItem(
-    `infobase_survey_popup_chance`
+  const local_storage_page_visited = localStorage.getItem(
+    `infobase_survey_popup_page_visited`
   );
 
   // localStorage is all strings, note that we cast the values read from it to a boolean and a number below
@@ -40,9 +40,9 @@ const get_state_defaults = () => {
     active: !_.isNull(local_storage_deactivated)
       ? !local_storage_deactivated
       : default_active,
-    chance: !_.isNull(local_storage_chance)
-      ? +local_storage_chance
-      : default_chance,
+    page_visited: !_.isNull(local_storage_page_visited)
+      ? +local_storage_page_visited
+      : default_page_visited,
   };
 };
 
@@ -58,29 +58,38 @@ export const SurveyPopup = withRouter(
           this.state.active &&
           this.state.previous_path_root !== get_path_root(pathname)
         ) {
-          const new_chance = this.state.chance + chance_increment;
+          const new_page_visited =
+            this.state.page_visited + page_visit_increment;
 
-          localStorage.setItem(`infobase_survey_popup_chance`, new_chance);
+          localStorage.setItem(
+            `infobase_survey_popup_page_visited`,
+            new_page_visited
+          );
 
           this.setState({
-            chance: new_chance,
+            page_visited: new_page_visited,
             previous_path_root: get_path_root(pathname),
           });
         }
       });
 
       if (should_reset_local_storage()) {
-        localStorage.removeItem("infobase_survey_popup_chance");
+        localStorage.removeItem("infobase_survey_popup_page_visited");
         localStorage.removeItem("infobase_survey_popup_deactivated");
         localStorage.removeItem("infobase_survey_popup_deactivated_since");
       }
 
-      const { active, chance } = get_state_defaults();
+      const { active, page_visited } = get_state_defaults();
+
+      this.timeout = setTimeout(() => {
+        this.setState({ show_popup: true });
+      }, 180000);
 
       this.state = {
         active: active,
-        chance: chance,
+        page_visited: page_visited,
         previous_path_root: null,
+        show_popup: false,
       };
     }
     handleButtonPress = (button_type) => {
@@ -90,6 +99,10 @@ export const SurveyPopup = withRouter(
           `infobase_survey_popup_deactivated_since`,
           Date.now()
         );
+      } else {
+        this.timeout = setTimeout(() => {
+          this.setState({ show_popup: true, active: true });
+        }, 300000);
       }
 
       log_standard_event({
@@ -98,28 +111,34 @@ export const SurveyPopup = withRouter(
         MISC2: `interaction: ${button_type}`,
       });
 
-      this.setState({ active: false });
+      this.setState({ active: false, show_popup: false });
     };
-    shouldComponentUpdate(nextProps, nextState) {
-      const chance_to_open_changed = this.state.chance !== nextState.chance;
-      const is_closing = this.state.active !== nextState.active;
-
-      return chance_to_open_changed || is_closing;
-    }
-    componentDidMount() {
-      // if a new user bounces from the first page they see, want them to have some chance of getting the popup if they ever return
-      // this is clobered by the properly incrementing value for users who don't bounce though
-      if (this.state.chance === 0) {
-        localStorage.setItem(`infobase_survey_popup_chance`, chance_increment);
+    static getDerivedStateFromProps(props) {
+      if (props.showSurvey) {
+        return { active: false };
       }
+
+      return null;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+      const page_changed = this.state.page_visited !== nextState.page_visited;
+      const is_closing = this.state.active !== nextState.active;
+      const state_show_popup = this.state.show_popup !== nextState.show_popup;
+
+      return page_changed || is_closing || state_show_popup;
     }
     render() {
-      const { active, chance } = this.state;
+      const { active, page_visited } = this.state;
+      const { toggleSurvey } = this.props;
 
       const should_show =
-        !is_survey_campaign_over() && active && Math.random() < chance;
+        !is_survey_campaign_over() &&
+        (page_visited >= 3 || this.state.show_popup) &&
+        active;
 
       if (should_show) {
+        clearTimeout(this.timeout);
+        this.timeout = null;
         log_standard_event({
           SUBAPP: window.location.hash.replace("#", "") || "start",
           MISC1: "SURVEY_POPUP",
@@ -143,15 +162,15 @@ export const SurveyPopup = withRouter(
           body={<TM k="survey_popup_body" />}
           footer={
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <a
-                href={text_maker("survey_link")}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
                 className="btn btn-ib-primary"
-                onClick={() => this.handleButtonPress("yes")}
+                onClick={() => {
+                  this.handleButtonPress("yes");
+                  toggleSurvey();
+                }}
               >
                 {text_maker("survey_popup_yes")}
-              </a>
+              </button>
               {_.map(["later", "no"], (button_type) => (
                 <button
                   key={button_type}
