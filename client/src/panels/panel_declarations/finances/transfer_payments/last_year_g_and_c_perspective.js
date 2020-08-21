@@ -14,34 +14,55 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
     panel_key: "last_year_g_and_c_perspective",
     levels: ["dept"],
     panel_config_func: (level, panel_key) => ({
-      depends_on: ["orgTransferPayments"],
+      depends_on: ["orgTransferPayments", "programSpending"],
       footnotes: ["SOBJ10"],
-      info_deps: [
-        "orgTransferPayments_gov_info",
-        "orgTransferPayments_dept_info",
-        "orgVoteStatPa_dept_info",
-      ],
-      calculate(subject, info, options) {
-        const panel_args = {
-          dept_in_gov: [
-            { value: info.gov_tp_exp_pa_last_year, name: "y" },
-            { value: info.dept_tp_exp_pa_last_year, name: "x" },
-          ],
-          tp_in_exp: [
-            { value: info.dept_exp_pa_last_year, name: "z" },
-            { value: info.dept_tp_exp_pa_last_year, name: "x" },
-          ],
+      calculate(subject, options) {
+        const { orgTransferPayments, programSpending } = this.tables;
+
+        const gov_tp = _.sum(
+          _.map(
+            orgTransferPayments.payment_type_ids(
+              ["{{pa_last_year}}exp"],
+              false
+            ),
+            (payment_type) => _.sum(payment_type)
+          )
+        );
+
+        const org_tp = _.sum(
+          _.map(
+            orgTransferPayments.payment_type_ids(
+              ["{{pa_last_year}}exp"],
+              subject.id
+            ),
+            (payment_type) => _.sum(payment_type)
+          )
+        );
+
+        const dept_spending = programSpending
+          .q(subject)
+          .sum("{{pa_last_year}}exp");
+
+        const dept_pct = org_tp / dept_spending;
+        const total_pct = org_tp / gov_tp;
+
+        const text_calculations = {
+          subject,
+          gov_tp,
+          org_tp,
+          dept_spending,
+          dept_pct,
+          total_pct,
         };
 
-        const has_transfer_payments = info.dept_tp_exp_pa_last_year !== 0;
-
-        return has_transfer_payments && panel_args;
+        return { gov_tp, org_tp, dept_spending, text_calculations };
       },
       render({ calculations, footnotes, sources }) {
-        const { subject, panel_args, info } = calculations;
-        const gov_tp_exp_pa_last_year = panel_args.dept_in_gov[0].value;
-        const dept_tp_exp_pa_last_year = panel_args.dept_in_gov[1].value;
-        const dept_exp_pa_last_year = panel_args.tp_in_exp[0].value;
+        const { subject, panel_args } = calculations;
+        const { text_calculations } = panel_args;
+        const gov_tp_exp_pa_last_year = panel_args.gov_tp;
+        const dept_tp_exp_pa_last_year = panel_args.org_tp;
+        const dept_exp_pa_last_year = panel_args.dept_spending;
 
         return (
           <StdPanel
@@ -51,7 +72,10 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
             allowOverflow={true}
           >
             <Col size={!window.is_a11y_mode ? 6 : 12} isText>
-              <TM k="dept_last_year_g_and_c_perspective_text" args={info} />
+              <TM
+                k="dept_last_year_g_and_c_perspective_text"
+                args={text_calculations}
+              />
             </Col>
             {!window.is_a11y_mode && (
               <Fragment>
