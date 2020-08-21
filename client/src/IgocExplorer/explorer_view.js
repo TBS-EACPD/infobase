@@ -247,7 +247,10 @@ class ExplorerForIgoc extends React.Component {
         <div>
           <ul className="nav nav-justified nav-pills">
             {_.map(grouping_options, ({ option_name }, option_key) => (
-              <li className={classNames(option_key === grouping && "active")}>
+              <li
+                key={option_key}
+                className={classNames(option_key === grouping && "active")}
+              >
                 <a href={`#igoc/${option_key}`}>{option_name}</a>
               </li>
             ))}
