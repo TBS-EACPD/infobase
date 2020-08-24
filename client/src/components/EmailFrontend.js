@@ -183,7 +183,7 @@ class EmailFrontend extends React.Component {
         case "checkbox":
         case "radio":
           return (
-            <fieldset>
+            <fieldset style={{ marginBottom: "1rem" }}>
               <legend>{field_info.form_label[window.lang]}</legend>
               {_.map(field_info.enum_values, (label_by_lang, key) => (
                 <EnumField
@@ -218,6 +218,7 @@ class EmailFrontend extends React.Component {
                 {field_info.form_label[window.lang]}
               </label>
               <textarea
+                style={{ marginBottom: "1rem" }}
                 id={get_field_id(field_key)}
                 disabled={disable_forms}
                 rows="5"
