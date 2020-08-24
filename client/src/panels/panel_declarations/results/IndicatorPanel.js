@@ -101,7 +101,7 @@ const query_api = (id) => {
 export default class IndicatorPanel extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true, show_table: false };
+    this.state = { loading: true, show_modal: false };
   }
 
   componentDidMount() {
@@ -118,11 +118,11 @@ export default class IndicatorPanel extends React.Component {
 
     return (
       <Fragment>
-        <a role="button" onClick={() => this.setState({ show_table: true })}>
+        <a role="button" onClick={() => this.setState({ show_modal: true })}>
           {indicator.name}
         </a>
         <StatelessModal
-          show={this.state.show_table}
+          show={this.state.show_modal}
           title={text_maker("indicator_display_title")}
           body={
             loading ? (
@@ -133,7 +133,7 @@ export default class IndicatorPanel extends React.Component {
               </Panel>
             )
           }
-          on_close_callback={() => this.setState({ show_table: false })}
+          on_close_callback={() => this.setState({ show_modal: false })}
           additional_dialog_class={"modal-responsive"}
         />
       </Fragment>
