@@ -14,6 +14,7 @@ import {
   util_components,
   declare_panel,
 } from "../../shared.js";
+import FootNote from "../../../../models/footnotes/footnotes";
 
 import text from "./auth_exp_planned_spending.yaml";
 import "./auth_exp_planned_spending.scss";
@@ -270,6 +271,14 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
     ...additional_info,
     dept: subject,
   };
+  footnotes = _.concat(
+    new FootNote({
+      subject,
+      text: text_maker("actual_spending_footnote"),
+      topic_keys: ["EXP"],
+    }),
+    footnotes
+  );
 
   return (
     <StdPanel

@@ -75,5 +75,10 @@ dept_auth_exp_planned_spending_body:
     {{#if has_planned_spending}}Les dépenses {{fr_will_change_to plan_change "f" "p" ""}} **{{fmt_compact2_written last_planned_spending}}** d'ici à {{last_planned_year}}. {{/if}}
 
 budgetary_expenditures:
-  en: Budgetary Expenditures
-  fr: Dépenses budgétaires
+  en: Actual Spending
+  fr: Dépenses Réelles
+
+actual_spending_footnote:
+  transform: [handlebars]
+  en: '"Actual Spending" numbers are technically {{gl_tt "Budgetary Expenditures" "BUD_EXP"}}.'
+  fr: 'Les nombres de "Dépenses Réelles" sont techniquement {{gl_tt "Dépenses budgétaires" "BUD_EXP"}}.'
