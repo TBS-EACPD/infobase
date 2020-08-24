@@ -100,6 +100,10 @@ export class DisplayTable extends React.Component {
       }
       */,
       util_components,
+      show_search,
+      show_sort,
+      show_column_select,
+      show_export_icons,
     } = this.props;
     const { sort_by, descending, searches, visible_col_keys } = this.state;
 
@@ -214,18 +218,31 @@ export class DisplayTable extends React.Component {
       .thru((csv_data) => d3.csvFormatRows(csv_data))
       .value();
 
+    const showing_search = _.isUndefined(show_search)
+      ? _.size(data) > 6
+      : show_search;
+    const showing_sort = _.isUndefined(show_sort)
+      ? _.size(data) > 2
+      : show_sort;
+    const showing_column_select = _.isUndefined(show_column_select)
+      ? _.size(all_ordered_col_keys) > 2
+      : show_column_select;
+    const showing_export_icons = _.isUndefined(show_export_icons)
+      ? _.size(all_ordered_col_keys) * _.size(data) > 15
+      : show_export_icons;
+
     const util_components_default = {
-      copyCsvUtil: (
+      copyCsvUtil: showing_export_icons && (
         <DisplayTableCopyCsv key="copyCsvUtil" csv_string={csv_string} />
       ),
-      downloadCsvUtil: (
+      downloadCsvUtil: showing_export_icons && (
         <DisplayTableDownloadCsv
           key="downloadCsvUtil"
           csv_string={csv_string}
           table_name={table_name}
         />
       ),
-      columnToggleUtil: (
+      columnToggleUtil: showing_column_select && (
         <DisplayTableColumnToggle
           key="columnToggleUtil"
           columns={
@@ -306,7 +323,7 @@ export class DisplayTable extends React.Component {
 
                 return (
                   <th key={column_key} style={{ textAlign: "center" }}>
-                    {sortable && (
+                    {sortable && showing_sort && (
                       <div
                         onClick={() =>
                           this.setState({
@@ -324,7 +341,7 @@ export class DisplayTable extends React.Component {
                         />
                       </div>
                     )}
-                    {searchable && (
+                    {searchable && showing_search && (
                       <DebouncedTextInput
                         inputClassName={"search input-sm"}
                         placeHolder={text_maker("filter_data")}
