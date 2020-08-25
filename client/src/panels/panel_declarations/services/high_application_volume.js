@@ -1,7 +1,7 @@
 import text from "./services.yaml";
 import { Service } from "../../../models/services.js";
 import { Subject } from "../../../models/subject.js";
-import { application_channels_keys } from "./shared.js";
+import { delivery_channels_keys } from "./shared.js";
 import {
   create_text_maker_component,
   InfographicPanel,
@@ -22,7 +22,7 @@ const HighApplicationVolumePanel = ({ panel_args }) => {
       org_id,
       total_volume: _.sumBy(org_services, (service) =>
         _.reduce(
-          application_channels_keys,
+          delivery_channels_keys,
           (sum, key) =>
             sum + _.sumBy(service.service_report, `${key}_count`) || 0,
           0

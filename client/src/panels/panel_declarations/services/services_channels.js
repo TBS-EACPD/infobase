@@ -1,6 +1,6 @@
 import text from "./services.yaml";
 import { Service } from "../../../models/services.js";
-import { delivery_channels_keys, application_channels_keys } from "./shared.js";
+import { delivery_channels_keys } from "./shared.js";
 import { StandardLegend, SelectAllControl } from "../../../charts/legends";
 
 import {
@@ -56,7 +56,7 @@ class ServicesChannelsPanel extends React.Component {
     const { max_vol_service_name, max_vol_service_value } = _.chain(services)
       .map(({ name, service_report }) => ({
         max_vol_service_name: name,
-        max_vol_service_value: _.chain(application_channels_keys)
+        max_vol_service_value: _.chain(delivery_channels_keys)
           .map((key) => _.sumBy(service_report, `${key}_count`))
           .sum()
           .value(),
@@ -64,7 +64,7 @@ class ServicesChannelsPanel extends React.Component {
       .maxBy("max_vol_service_value")
       .value();
     const { max_vol_channel_name, max_vol_channel_value } = _.chain(
-      application_channels_keys
+      delivery_channels_keys
     )
       .map((key) => ({
         max_vol_channel_name: text_maker(key),

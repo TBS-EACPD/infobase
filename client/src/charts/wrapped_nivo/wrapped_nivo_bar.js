@@ -196,6 +196,7 @@ export class WrappedNivoHBar extends React.Component {
       markers,
       disable_table_view,
       table_name,
+      custom_table,
       table_first_column_name,
       isInteractive,
       motionDamping,
@@ -204,14 +205,15 @@ export class WrappedNivoHBar extends React.Component {
 
     const table =
       !disable_table_view &&
-      bar_table(
-        data,
-        keys,
-        indexBy,
-        get_formatter(is_money, text_formatter, true, true),
-        table_name,
-        table_first_column_name
-      );
+      (custom_table ||
+        bar_table(
+          data,
+          keys,
+          indexBy,
+          get_formatter(is_money, text_formatter, true, true),
+          table_name,
+          table_first_column_name
+        ));
 
     const graph = (
       <div

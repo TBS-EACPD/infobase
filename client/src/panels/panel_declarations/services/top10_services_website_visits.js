@@ -1,7 +1,7 @@
 import text from "./services.yaml";
-import MediaQuery from "react-responsive";
+import { Subject } from "../../../models/subject.js";
 import { Service } from "../../../models/services.js";
-import { delivery_channels_keys } from "./shared.js";
+import MediaQuery from "react-responsive";
 import {
   create_text_maker_component,
   InfographicPanel,
@@ -10,27 +10,43 @@ import {
   TspanLineWrapper,
   formatter,
   newIBLightCategoryColors,
+  infograph_href_template,
 } from "../shared.js";
 import { DisplayTable } from "../../../components";
 
 const { text_maker, TM } = create_text_maker_component(text);
+const Dept = Subject.Dept;
 
 const colors = d3.scaleOrdinal().range(_.at(newIBLightCategoryColors, [0]));
-const total_volume = text_maker("applications_and_calls");
+
+const website_visits_key = "online_inquiry";
+const total_volume = text_maker(website_visits_key);
 const volume_formatter = (val) =>
   formatter("compact", val, { raw: true, noMoney: true });
 
-const Top10ServicesApplicationVolumePanel = ({ panel_args }) => {
+const Top10WebsiteVisitsPanel = ({ panel_args }) => {
   const { services, subject } = panel_args;
-  const data = _.chain(services)
-    .map(({ id, service_report }) => ({
-      id,
-      [total_volume]: _.reduce(
-        delivery_channels_keys,
-        (sum, key) => sum + _.sumBy(service_report, `${key}_count`) || 0,
-        0
-      ),
-    }))
+  const is_gov = subject.level === "gov";
+
+  const preprocessed_data = is_gov
+    ? _.chain(services)
+        .groupBy("org_id")
+        .map((org_services, org_id) => ({
+          id: org_id,
+          [total_volume]: _.sumBy(
+            org_services,
+            ({ service_report }) =>
+              _.sumBy(service_report, `${website_visits_key}_count`) || 0
+          ),
+        }))
+        .value()
+    : _.map(services, ({ id, service_report }) => ({
+        id,
+        [total_volume]:
+          _.sumBy(service_report, `${website_visits_key}_count`) || 0,
+      }));
+
+  const data = _.chain(preprocessed_data)
     .filter(total_volume)
     .sortBy(total_volume)
     .takeRight(10)
@@ -38,14 +54,20 @@ const Top10ServicesApplicationVolumePanel = ({ panel_args }) => {
   const column_configs = {
     id: {
       index: 0,
-      header: text_maker("service_name"),
+      header: is_gov ? text_maker("org") : text_maker("service_name"),
       is_searchable: true,
-      formatter: (id) => (
-        <a href={`#dept/${subject.id}/service-panels/${id}`}>
-          {Service.lookup(id).name}
-        </a>
-      ),
-      raw_formatter: (id) => Service.lookup(id).name,
+      formatter: (id) =>
+        is_gov ? (
+          <a href={infograph_href_template(Dept.lookup(id), "services")}>
+            {Dept.lookup(id).name}
+          </a>
+        ) : (
+          <a href={`#dept/${subject.id}/service-panels/${id}`}>
+            {Service.lookup(id).name}
+          </a>
+        ),
+      raw_formatter: (id) =>
+        is_gov ? Dept.lookup(id).name : Service.lookup(id).name,
     },
     [total_volume]: {
       index: 1,
@@ -58,10 +80,12 @@ const Top10ServicesApplicationVolumePanel = ({ panel_args }) => {
     <div>
       <TM
         className="medium_panel_text"
-        k="top10_services_volume_text"
+        k={`top10_${subject.level}_website_visits_text`}
         args={{
-          highest_service_name: Service.lookup(_.last(data).id).name,
-          highest_service_value: _.last(data)[total_volume],
+          highest_volume_name: is_gov
+            ? Dept.lookup(_.last(data).id).name
+            : Service.lookup(_.last(data).id).name,
+          highest_volume_value: _.last(data)[total_volume],
         }}
       />
       <MediaQuery minWidth={992}>
@@ -104,7 +128,16 @@ const Top10ServicesApplicationVolumePanel = ({ panel_args }) => {
                 key={tick.key}
                 transform={`translate(${tick.x - 10},${tick.y})`}
               >
-                <a href={`#dept/${subject.id}/service-panels/${tick.key}`}>
+                <a
+                  href={
+                    is_gov
+                      ? infograph_href_template(
+                          Dept.lookup(tick.key),
+                          "services"
+                        )
+                      : `#dept/${subject.id}/service-panels/${tick.key}`
+                  }
+                >
                   <text
                     textAnchor="end"
                     dominantBaseline="end"
@@ -113,7 +146,11 @@ const Top10ServicesApplicationVolumePanel = ({ panel_args }) => {
                     }}
                   >
                     <TspanLineWrapper
-                      text={Service.lookup(tick.key).name}
+                      text={
+                        is_gov
+                          ? Dept.lookup(tick.key).name
+                          : Service.lookup(tick.key).name
+                      }
                       width={70}
                     />
                   </text>
@@ -134,25 +171,28 @@ const Top10ServicesApplicationVolumePanel = ({ panel_args }) => {
   );
 };
 
-export const declare_top10_services_application_volume_panel = () =>
+export const declare_top10_website_visits_panel = () =>
   declare_panel({
-    panel_key: "top10_services_application_volume",
-    levels: ["dept"],
+    panel_key: "top10_website_visits",
+    levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
       calculate: (subject) => ({
         subject,
-        services: Service.get_by_dept(subject.id),
+        services:
+          level === "dept"
+            ? Service.get_by_dept(subject.id)
+            : Service.get_all(),
       }),
       footnotes: false,
       render({ calculations, sources }) {
         const { panel_args } = calculations;
         return (
           <InfographicPanel
-            title={text_maker("top10_services_volume_title")}
+            title={text_maker("top10_website_visits_title")}
             sources={sources}
           >
-            <Top10ServicesApplicationVolumePanel panel_args={panel_args} />
+            <Top10WebsiteVisitsPanel panel_args={panel_args} />
           </InfographicPanel>
         );
       },

@@ -6,18 +6,13 @@ import {
   create_text_maker_component,
   InfographicPanel,
   declare_panel,
-  WrappedNivoPie,
-  newIBCategoryColors,
 } from "../shared.js";
+import Gauge from "../../../charts/gauge.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesStandardsPanel = ({ panel_args }) => {
   const { services } = panel_args;
-  const colors = d3
-    .scaleOrdinal()
-    .domain(["positive", "negative"])
-    .range(_.take(newIBCategoryColors, 2));
 
   const has_standards_count = _.chain(services)
     .countBy("standards")
@@ -25,18 +20,6 @@ const ServicesStandardsPanel = ({ panel_args }) => {
     .map()
     .sum()
     .value();
-  const has_standards_data = [
-    {
-      id: "positive",
-      label: text_maker("has_standards"),
-      value: has_standards_count,
-    },
-    {
-      id: "negative",
-      label: text_maker("no_standards"),
-      value: services.length - has_standards_count,
-    },
-  ];
   const standards_met_count = _.chain(services)
     .flatMap("standards")
     .reject(({ target_type }) => target_type === "Other type of target")
@@ -44,46 +27,44 @@ const ServicesStandardsPanel = ({ panel_args }) => {
     .filter("count" || "lower" || "met_count")
     .countBy("is_target_met")
     .value();
-  const standards_met_data = [
-    {
-      id: "positive",
-      label: text_maker("target_met_true"),
-      value: standards_met_count.true || 0,
-    },
-    {
-      id: "negative",
-      label: text_maker("target_met_false"),
-      value: standards_met_count.false || 0,
-    },
-  ];
-  const nivo_common_props = {
-    is_money: false,
-    colorBy: (d) => colors(d.id),
-  };
+  const standards_met_value = standards_met_count.true || 0;
+  const standards_not_met_value = standards_met_count.false || 0;
 
   return (
     <div className={"col-container"}>
-      <div className="fcol-md-6 p-20">
+      <div className="services-standards-gauge-container fcol-md-6 p-20">
         <TM className="double-pie-text" k="has_standards_text" el="h4" />
-        <WrappedNivoPie
-          {...nivo_common_props}
-          custom_legend_items={_.map(has_standards_data, (row) => ({
-            ...row,
-            color: colors(row.id),
-          }))}
-          data={has_standards_data}
+        <Gauge
+          value={has_standards_count}
+          total_value={services.length}
+          show_pct={false}
         />
+        <h2>
+          <TM
+            k="gauge_has_standards_text"
+            args={{
+              has_standards_pct: has_standards_count / services.length,
+            }}
+          />
+        </h2>
       </div>
-      <div className="fcol-md-6 p-20">
+      <div className="services-standards-gauge-container fcol-md-6 p-20">
         <TM className="double-pie-text" k="target_met_text" el="h4" />
-        <WrappedNivoPie
-          {...nivo_common_props}
-          custom_legend_items={_.map(standards_met_data, (row) => ({
-            ...row,
-            color: colors(row.id),
-          }))}
-          data={standards_met_data}
+        <Gauge
+          value={standards_met_value}
+          total_value={standards_met_value + standards_not_met_value}
+          show_pct={false}
         />
+        <h2>
+          <TM
+            k="gauge_standards_met_text"
+            args={{
+              standards_met_pct:
+                standards_met_value /
+                (standards_met_value + standards_not_met_value),
+            }}
+          />
+        </h2>
       </div>
     </div>
   );
