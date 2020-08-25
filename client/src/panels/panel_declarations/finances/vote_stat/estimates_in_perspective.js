@@ -5,6 +5,7 @@ import {
   declare_panel,
   Subject,
 } from "../../shared.js";
+import FootNote from "../../../../models/footnotes/footnotes.js";
 
 import { TM, text_maker } from "./vote_stat_text_provider.js";
 const { Gov } = Subject;
@@ -42,6 +43,14 @@ export const declare_estimates_in_perspective_panel = () =>
           dept_tabled_est_in_year,
         } = panel_args;
 
+        footnotes = _.concat(
+          new FootNote({
+            subject,
+            text: text_maker("auth_footnote"),
+            topic_keys: ["AUTH"],
+          }),
+          footnotes
+        );
         return (
           <StdPanel
             title={text_maker("estimates_perspective_title")}
