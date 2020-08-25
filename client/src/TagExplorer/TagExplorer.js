@@ -18,21 +18,14 @@ import {
   GlossaryIcon,
 } from "../components/index.js";
 
-//drilldown stuff
-import { combineReducers, createStore } from "redux";
-import { Provider, connect } from "react-redux";
-
 import "../explorer_common/explorer-styles.scss";
 import { get_col_defs } from "../explorer_common/resource_explorer_common.js";
 import { get_root } from "../explorer_common/hierarchy_tools.js";
+import { map_state_to_root_props_from_memoized_funcs } from "../explorer_common/state_and_memoizing.js";
 import {
-  get_memoized_funcs,
-  initial_root_state,
-  root_reducer,
-  map_state_to_root_props_from_memoized_funcs,
-  map_dispatch_to_root_props,
-} from "../explorer_common/state_and_memoizing.js";
-import { Explorer } from "../explorer_common/explorer_components.js";
+  Explorer,
+  ExplorerContainer,
+} from "../explorer_common/explorer_components.js";
 
 import {
   resource_scheme,
@@ -48,7 +41,6 @@ const { text_maker, TM } = create_text_maker_component(text);
 const { std_years, planning_years } = year_templates;
 const actual_year = _.last(std_years);
 const planning_year = _.first(planning_years);
-
 const route_arg_to_year_map = {
   actual: actual_year,
   planned: planning_year,
@@ -69,7 +61,7 @@ const children_grouper = (node, children) => {
     .value();
 };
 
-function render_non_col_content({ node }) {
+const render_non_col_content = ({ node }) => {
   const {
     data: { subject, defs },
   } = node;
@@ -109,40 +101,43 @@ function render_non_col_content({ node }) {
       )}
     </div>
   );
-}
+};
 
-class ExplorerPage extends React.Component {
+class ExplorerForTags extends React.Component {
   constructor() {
     super();
-    this.state = { _query: "" };
+    this.state = { query: "" };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
-  handleQueryChange(new_query) {
+
+  handleQueryChange = (new_query) => {
     this.setState({
-      _query: new_query,
-      loading: new_query.length > 3 ? true : undefined,
+      query: new_query,
+      loading: new_query.length.length > 3 ? true : undefined,
     });
     this.debounced_set_query(new_query);
-  }
-  debounced_set_query(new_query) {
+  };
+
+  debounced_set_query = (new_query) => {
     this.props.set_query(new_query);
     this.timedOutStateChange = setTimeout(() => {
-      this.setState({
-        loading: false,
-      });
+      this.setState({ loading: false });
     }, 500);
-  }
-  componentWillUnmount() {
+  };
+
+  componentWillUnmount = () => {
     !_.isUndefined(this.debounced_set_query) &&
       this.debounced_set_query.cancel();
     !_.isUndefined(this.timedOutStateChange) &&
       clearTimeout(this.timedOutStateChange);
-  }
-  clearQuery() {
-    this.setState({ _query: "" });
-    this.props.clear_query("");
-  }
-  render() {
+  };
+
+  clearQuery = () => {
+    this.setState({ query: "" });
+    this.props.clearQuery("");
+  };
+
+  render = () => {
     const {
       flat_nodes,
       is_filtering,
@@ -244,10 +239,7 @@ class ExplorerPage extends React.Component {
           <Explorer
             config={explorer_config}
             root={root}
-            col_state={{
-              sort_col,
-              is_descending,
-            }}
+            col_state={{ sort_col, is_descending }}
           />
         </div>
       </div>
@@ -331,8 +323,8 @@ class ExplorerPage extends React.Component {
                       "MtoM_tag_warning_double_counting",
                     ],
                     (key) => [
-                      <TM key={key + "_q"} k={key + "_q"} />,
-                      <TM key={key + "_a"} k={key + "_a"} />,
+                      <TM key={`${key}_q`} k={`${key}_q`} />,
+                      <TM key={`${key}_a`} k={`${key}_a`} />,
                     ]
                   )}
                 />
@@ -343,8 +335,11 @@ class ExplorerPage extends React.Component {
         </div>
       </div>
     );
-  }
+  };
 }
+
+const get_initial_state = ({ hierarchy_scheme, year }) =>
+  get_initial_resource_state({ hierarchy_scheme, year });
 
 const map_state_to_props_from_memoized_funcs = (memoized_funcs) => {
   const { get_scheme_props } = memoized_funcs;
@@ -358,72 +353,26 @@ const map_state_to_props_from_memoized_funcs = (memoized_funcs) => {
   });
 };
 
-class OldExplorerContainer extends React.Component {
-  constructor(props) {
-    super();
-    const { hierarchy_scheme, year } = props;
-    const scheme = resource_scheme;
-    const scheme_key = scheme.key;
-
-    const reducer = combineReducers({
-      root: root_reducer,
-      [scheme_key]: scheme.reducer,
-    });
-
-    const mapStateToProps = map_state_to_props_from_memoized_funcs(
-      get_memoized_funcs([scheme])
-    );
-
-    const mapDispatchToProps = (dispatch) => ({
-      ...map_dispatch_to_root_props(dispatch),
-      ...scheme.dispatch_to_props(dispatch),
-    });
-
-    const initialState = {
-      root: { ...initial_root_state, scheme_key },
-      [scheme_key]: get_initial_resource_state({ hierarchy_scheme, year }),
-    };
-
-    const connecter = connect(mapStateToProps, mapDispatchToProps);
-    const Container = connecter(ExplorerPage);
-    const store = createStore(reducer, initialState);
-
-    this.state = {
-      store,
-      Container,
-    };
-  }
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { hierarchy_scheme, year } = nextProps;
-    const { store } = prevState;
-
-    resource_scheme.set_hierarchy_and_year(store, hierarchy_scheme, year);
-
-    return null;
-  }
-  render() {
-    const { store, Container } = this.state;
-    return (
-      <Provider store={store}>
-        <Container />
-      </Provider>
-    );
-  }
-}
+const update_explorer = ({ data, store }) => {
+  const { hierarchy_scheme, year } = data;
+  resource_scheme.set_hierarchy_and_year(store, hierarchy_scheme, year);
+};
 
 export default class TagExplorer extends React.Component {
   constructor() {
     super();
     this.state = { loading: true };
   }
-  componentDidMount() {
+
+  componentWillMount = () => {
     ensure_loaded({
       table_keys: ["programSpending", "programFtes"],
     }).then(() => {
       this.setState({ loading: false });
     });
-  }
-  render() {
+  };
+
+  render = () => {
     const { match } = this.props;
     const route_container_args = {
       title: text_maker("tag_nav"),
@@ -445,6 +394,7 @@ export default class TagExplorer extends React.Component {
         </StandardRouteContainer>
       );
     }
+
     let {
       params: { hierarchy_scheme, period },
     } = match;
@@ -458,11 +408,20 @@ export default class TagExplorer extends React.Component {
 
     const year = route_arg_to_year_map[period] || planning_year;
 
+    const explorer_container_config = {
+      scheme: resource_scheme,
+      explorer: ExplorerForTags,
+      get_initial_state,
+      map_state_to_props_from_memoized_funcs,
+      data: { hierarchy_scheme, year },
+      update_explorer,
+    };
+
     return (
       <StandardRouteContainer {...route_container_args}>
         {header}
-        <OldExplorerContainer {...{ hierarchy_scheme, year }} />
+        <ExplorerContainer {...explorer_container_config} />
       </StandardRouteContainer>
     );
-  }
+  };
 }
