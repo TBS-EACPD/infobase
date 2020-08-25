@@ -10,6 +10,10 @@ import {
   fix_legend_symbols,
 } from "./wrapped_nivo_common.js";
 
+import { DisplayTable } from "../../components/index.js";
+import { Fragment } from "react";
+import MobileOverlay from "../../components/MobileOverlay.js";
+
 const bar_table = (
   data,
   keys,
@@ -200,6 +204,7 @@ export class WrappedNivoHBar extends React.Component {
       isInteractive,
       motionDamping,
       motionStiffness,
+      mobile_overlay,
     } = this.props;
 
     const table =
@@ -265,7 +270,10 @@ export class WrappedNivoHBar extends React.Component {
     );
 
     return (
-      <InteractiveGraph graph={graph} table={table} table_name={table_name} />
+      <Fragment>
+        {!mobile_overlay && <MobileOverlay />}
+        <InteractiveGraph graph={graph} table={table} table_name={table_name} />
+      </Fragment>
     );
   }
 }
