@@ -93,12 +93,22 @@ const IgocExplorer = ({ match }) => {
     should_show_orgs_without_data: true,
   });
 
+  const update_explorer = ({ data, store }) => {
+    const { grouping } = data;
+    console.log("Hi");
+    store.dispatch({
+      type: "set_grouping",
+      payload: grouping,
+    });
+  };
+
   const explorer_config = {
     scheme,
     explorer: ExplorerForIgoc,
     get_initial_state,
     map_state_to_props_from_memoized_funcs,
     data: { grouping },
+    update_explorer,
   };
 
   //sanitize grouping param

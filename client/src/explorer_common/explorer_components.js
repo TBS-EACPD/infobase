@@ -408,9 +408,12 @@ export class ExplorerContainer extends React.Component {
     );
   }
 
-  componentDidUpdate = (prevProps, prevState, snapshot) => {
+  componentDidUpdate = () => {
     this.props.update_explorer &&
-      this.props.update_explorer({ data: this.props.data, store: this.store });
+      this.props.update_explorer({
+        data: this.props.data,
+        store: this.store,
+      });
   };
 
   render() {
