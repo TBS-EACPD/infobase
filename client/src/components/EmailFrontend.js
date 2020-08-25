@@ -92,7 +92,6 @@ class EmailFrontend extends React.Component {
   componentDidMount() {
     get_email_template(this.state.template_name).then((template) => {
       this.setState({ loading: false, template: template });
-      console.log(template);
     });
   }
   componentDidUpdate() {
@@ -189,7 +188,7 @@ class EmailFrontend extends React.Component {
               {_.map(field_info.enum_values, (label_by_lang, key) => (
                 <EnumField
                   classes={
-                    _.size(field_info.enum_values) <= 5
+                    field_info.style && field_info.style === "horizontal"
                       ? `col-sm-${_.floor(
                           12 / _.size(field_info.enum_values)
                         )} inline`
