@@ -92,5 +92,6 @@ export {
   declare_services_digital_status_panel,
   declare_services_standards_panel,
   declare_top10_services_application_volume_panel,
+  declare_top10_website_visits_panel,
   declare_high_application_volume_panel,
 } from "./services/index.js";

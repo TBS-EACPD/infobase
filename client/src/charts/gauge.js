@@ -3,7 +3,7 @@ import { Format } from "../components";
 
 export default class Gauge extends React.Component {
   render() {
-    const { total_value, value, color } = this.props;
+    const { total_value, value, color, show_pct } = this.props;
     const gauge_value = value || 0;
     const percentage = gauge_value / total_value;
     return (
@@ -13,8 +13,7 @@ export default class Gauge extends React.Component {
         </h4>
         <div
           style={{
-            backgroundColor:
-              color || window.infobase_color_constants.successDarkColor,
+            backgroundColor: color,
           }}
           className="gauge"
         >
@@ -23,11 +22,17 @@ export default class Gauge extends React.Component {
             className="gauge_percentage"
           ></div>
           <div className="gauge_mask"></div>
-          <h2 className="gauge_value">
-            <Format type={"percentage"} content={percentage} />
-          </h2>
+          {show_pct && (
+            <h2 className="gauge_value">
+              <Format type={"percentage"} content={percentage} />
+            </h2>
+          )}
         </div>
       </div>
     );
   }
 }
+Gauge.defaultProps = {
+  show_pct: true,
+  color: window.infobase_color_constants.successDarkColor,
+};
