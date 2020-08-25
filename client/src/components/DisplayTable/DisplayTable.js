@@ -122,7 +122,7 @@ export class DisplayTable extends React.Component {
               style={{ borderRadius: 0, margin: 0 }}
               className="card large_panel_text no-data-msg"
             >
-              {text_maker("no_data")}
+              {text_maker("no_data_table")}
             </div>
           </td>
         </tr>
@@ -461,7 +461,7 @@ export class DisplayTable extends React.Component {
 
         {sorted_filtered_data.length === 0 && (
           <TM
-            k="no_data"
+            k="no_data_table"
             el="div"
             style={{ width: "100%", textAlign: "center" }}
           />

@@ -283,6 +283,9 @@ ministries:
   en: Ministerial Portfolios
   fr: Portefeuilles ministériels
 no_data:
+  en: No data available
+  fr: Aucune donnée n'est disponible
+no_data_table:
   en: No data available for this table
   fr: Aucune donnée n'est disponible pour ce tableau
 open_data_link:

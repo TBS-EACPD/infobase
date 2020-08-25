@@ -61,7 +61,7 @@ const ServicesStandardsPanel = ({ panel_args }) => {
             args={{
               standards_met_pct:
                 standards_met_value /
-                (standards_met_value + standards_not_met_value),
+                  (standards_met_value + standards_not_met_value) || 0,
             }}
           />
         </h2>
