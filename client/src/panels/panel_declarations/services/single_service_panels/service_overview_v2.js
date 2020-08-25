@@ -5,7 +5,7 @@ import { Subject } from "../../../../models/subject.js";
 import {
   available_icons,
   available_keys,
-  application_channels_keys,
+  delivery_channels_keys,
 } from "../shared";
 import { infograph_href_template } from "../../../../link_utils.js";
 import ProgressGauge from "../../../../charts/progressGauge.js";
@@ -26,7 +26,7 @@ export class ServiceOverviewV2 extends React.Component {
       .flatten()
       .value();
     const applications_and_calls = _.reduce(
-      application_channels_keys,
+      delivery_channels_keys,
       (total, key) => {
         const sum_for_key =
           _.sumBy(service.service_report, `${key}_count`) || 0;
@@ -134,6 +134,16 @@ export class ServiceOverviewV2 extends React.Component {
             {formatter("big_int", applications_and_calls, {
               raw: true,
             })}
+          </dd>
+          <dt>{text_maker("online_inquiry")}</dt>
+          <dd>
+            {formatter(
+              "big_int",
+              _.sumBy(service.service_report, "online_inquiry_count"),
+              {
+                raw: true,
+              }
+            )}
           </dd>
           <dt>{text_maker("service_link_text")}</dt>
           <dd>
