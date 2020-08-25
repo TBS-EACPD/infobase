@@ -26,6 +26,7 @@ const column_config_defaults = {
   sum_func: (sum, value) => sum + value,
   raw_formatter: _.identity,
   sum_initial_value: 0,
+  show_search: true,
 };
 
 /* Assumption: DisplayTable assumes 1st column to be string that describes its row
@@ -96,14 +97,11 @@ export class DisplayTable extends React.Component {
           sort_func: (a, b) => ... <- (function) Custom sort func. Default to _.sortBy
           sum_initial_value: 0 <- (number) Default to 0
           visibility_toggleable: true <- (boolean) Defaults to false for index 0, true for all other indexes.
+          show_search: (boolean) Default to true
         },
       }
       */,
       util_components,
-      show_search,
-      show_sort,
-      show_column_select,
-      show_export_icons,
     } = this.props;
     const { sort_by, descending, searches, visible_col_keys } = this.state;
 
@@ -218,24 +216,18 @@ export class DisplayTable extends React.Component {
       .thru((csv_data) => d3.csvFormatRows(csv_data))
       .value();
 
-    const showing_search = _.isUndefined(show_search)
-      ? _.size(data) > 6
-      : show_search;
-    const showing_sort = _.isUndefined(show_sort)
-      ? _.size(data) > 2
-      : show_sort;
-    const showing_column_select = _.isUndefined(show_column_select)
-      ? _.size(all_ordered_col_keys) > 2
-      : show_column_select;
-    const showing_export_icons = _.isUndefined(show_export_icons)
-      ? _.size(all_ordered_col_keys) * _.size(data) > 15
-      : show_export_icons;
-
+    const showing_sort = _.size(data) > 2;
+    const showing_column_select =
+      _.size(all_ordered_col_keys) > 2 &&
+      _.every(
+        col_configs_with_defaults,
+        (column_key) => column_key.initial_visible
+      );
     const util_components_default = {
-      copyCsvUtil: showing_export_icons && (
+      copyCsvUtil: (
         <DisplayTableCopyCsv key="copyCsvUtil" csv_string={csv_string} />
       ),
-      downloadCsvUtil: showing_export_icons && (
+      downloadCsvUtil: (
         <DisplayTableDownloadCsv
           key="downloadCsvUtil"
           csv_string={csv_string}
@@ -316,7 +308,8 @@ export class DisplayTable extends React.Component {
                 const sortable =
                   col_configs_with_defaults[column_key].is_sortable;
                 const searchable =
-                  col_configs_with_defaults[column_key].is_searchable;
+                  col_configs_with_defaults[column_key].is_searchable &&
+                  col_configs_with_defaults[column_key].show_search;
 
                 const current_search_input =
                   (searchable && searches[column_key]) || null;
@@ -341,7 +334,7 @@ export class DisplayTable extends React.Component {
                         />
                       </div>
                     )}
-                    {searchable && showing_search && (
+                    {searchable && (
                       <DebouncedTextInput
                         inputClassName={"search input-sm"}
                         placeHolder={text_maker("filter_data")}
