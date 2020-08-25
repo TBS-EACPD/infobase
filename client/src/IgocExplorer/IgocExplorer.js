@@ -3,19 +3,12 @@ import { StandardRouteContainer } from "../core/NavComponents.js";
 import { createSelector } from "reselect";
 
 //drilldown stuff
-import { combineReducers, createStore } from "redux";
-import { Provider, connect } from "react-redux";
 import { create_igoc_hierarchy } from "./hierarchies.js";
 import { ExplorerForIgoc } from "./explorer_view.js";
 import { filter_hierarchy } from "../explorer_common/hierarchy_tools.js";
 import { igoc_tmf as text_maker, TM } from "./igoc_explorer_text.js";
-import {
-  get_memoized_funcs,
-  initial_root_state,
-  root_reducer,
-  map_state_to_root_props_from_memoized_funcs,
-  map_dispatch_to_root_props,
-} from "../explorer_common/state_and_memoizing";
+import { map_state_to_root_props_from_memoized_funcs } from "../explorer_common/state_and_memoizing";
+import { ExplorerContainer } from "../explorer_common/explorer_components";
 
 const map_state_to_props_from_memoized_funcs = (memoized_funcs) => {
   const { get_scheme_props } = memoized_funcs;
@@ -36,24 +29,23 @@ const scheme = {
     createSelector(
       _.property("igoc.grouping"),
       _.property("igoc.should_show_orgs_without_data"),
-      (grouping, should_show_orgs_without_data) => {
-        return {
-          sort_func: _.identity,
-          grouping,
-          should_show_orgs_without_data,
-        };
-      }
+      (grouping, should_show_orgs_without_data) => ({
+        sort_func: _.identity,
+        grouping,
+        should_show_orgs_without_data,
+      })
     ),
 
   dispatch_to_props: (dispatch) => ({
     on_toggle_orgs_without_data: () =>
-      dispatch({
-        type: "toggle_orgs_without_data",
-      }),
+      dispatch({ type: "toggle_orgs_without_data" }),
   }),
 
   reducer: (
-    state = { grouping: "portfolio", should_show_orgs_without_data: true },
+    state = {
+      grouping: "portfolio",
+      should_show_orgs_without_data: true,
+    },
     action
   ) => {
     const { type, payload } = action;
@@ -90,72 +82,25 @@ const scheme = {
     ),
 };
 
-//This code is a little strange. This components exists as an intermediary between redux and react-router.
-//Trying to use a functional component here results in re-creating the redux store, connecter functions and Container component.
-//Instead, this component will own those long-term objects and keep the store updated with URL changes.
-class ExplorerContainer extends React.Component {
-  constructor(props) {
-    super();
-
-    const { grouping } = props;
-
-    const scheme_key = scheme.key;
-
-    const reducer = combineReducers({
-      root: root_reducer,
-      [scheme_key]: scheme.reducer,
-    });
-
-    const mapStateToProps = map_state_to_props_from_memoized_funcs(
-      get_memoized_funcs([scheme])
-    );
-
-    const mapDispatchToProps = (dispatch) => ({
-      ...map_dispatch_to_root_props(dispatch),
-      ...scheme.dispatch_to_props(dispatch),
-    });
-
-    const initialState = {
-      root: { ...initial_root_state, scheme_key },
-      [scheme_key]: {
-        grouping,
-        should_show_orgs_without_data: true,
-      },
-    };
-
-    const connecter = connect(mapStateToProps, mapDispatchToProps);
-    const Container = connecter(ExplorerForIgoc);
-    const store = createStore(reducer, initialState);
-
-    this.state = {
-      store,
-      Container,
-    };
-  }
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { grouping } = nextProps;
-    prevState.store.dispatch({
-      type: "set_grouping",
-      payload: grouping,
-    });
-    return null;
-  }
-  render() {
-    const { store, Container } = this.state;
-
-    return (
-      <Provider store={store}>
-        <Container />
-      </Provider>
-    );
-  }
-}
-
 const IgocExplorer = ({ match }) => {
   let grouping = _.get(match, "params.grouping");
   if (_.isEmpty(grouping)) {
     grouping = "portfolio";
   }
+
+  const get_initial_state = ({ grouping }) => ({
+    grouping,
+    should_show_orgs_without_data: true,
+  });
+
+  const explorer_config = {
+    scheme,
+    explorer: ExplorerForIgoc,
+    get_initial_state,
+    map_state_to_props_from_memoized_funcs,
+    data: { grouping },
+  };
+
   //sanitize grouping param
   return (
     <StandardRouteContainer
@@ -173,9 +118,10 @@ const IgocExplorer = ({ match }) => {
         <div style={{ marginBottom: "1.5em" }}>
           <TM k="about_inventory" />
         </div>
-        <ExplorerContainer grouping={grouping} />
+        <ExplorerContainer {...explorer_config} />
       </div>
     </StandardRouteContainer>
   );
 };
+
 export { IgocExplorer as default };
