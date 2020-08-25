@@ -30,6 +30,10 @@
       "form_label": {
         "en": "If no, please specify what you were looking for.",
         "fr": "Dans la négative, veuillez préciser ce que vous cherchiez."
+      },
+      "connection": {
+        "name": "found_info",
+        "enable": "no"
       }
     },
     
@@ -38,8 +42,8 @@
       "required": true,
       "form_type": "radio",
       "form_label": {
-        "en": "To what extent did you find GC InfoBase easy to navigate? (1=not at all useful and 5=very useful)",
-        "fr": "Dans quelle mesure la navigation est-elle facile dans l’InfoBase du GC? (1=inutile et 5=très utile)"
+        "en": "To what extent did you find GC InfoBase easy to navigate? (1=not at all easy and 5=very easy)",
+        "fr": "Dans quelle mesure la navigation est-elle facile dans l’InfoBase du GC? (1=difficile et 5=très facile)"
       },
       "value_type": "enums",
       "enum_values": {
@@ -80,8 +84,8 @@
       "required": true,
       "form_type": "radio",
       "form_label": {
-        "en": "To what extent did you find the spending information on GC InfoBase useful? (1=not at all easy and 5=very easy)",
-        "fr": "Dans quelle mesure avez-vous trouvé les renseignements financiers utiles dans l’InfoBase du GC? (1=difficile et 5=très facile)"
+        "en": "To what extent did you find the spending information on GC InfoBase useful? (1=not at all useful and 5=very useful)",
+        "fr": "Dans quelle mesure avez-vous trouvé les renseignements financiers utiles dans l’InfoBase du GC? (1=inutile et 5=très utile)"
       },
       "value_type": "enums",
       "enum_values": {
@@ -164,6 +168,10 @@
       "form_label": {
         "en": "",
         "fr": ""
+      },
+      "connection": {
+        "name": "user_type",
+        "enable": "other"
       }
     },
 
@@ -202,6 +210,10 @@
       "form_label": {
         "en": "",
         "fr": ""
+      },
+      "connection": {
+        "name": "device_type",
+        "enable": "other"
       }
     },
 

@@ -90,9 +90,10 @@ class EmailFrontend extends React.Component {
     };
   }
   componentDidMount() {
-    get_email_template(this.state.template_name).then((template) =>
-      this.setState({ loading: false, template: template })
-    );
+    get_email_template(this.state.template_name).then((template) => {
+      this.setState({ loading: false, template: template });
+      console.log(template);
+    });
   }
   componentDidUpdate() {
     const {
@@ -220,7 +221,18 @@ class EmailFrontend extends React.Component {
               <textarea
                 style={{ marginBottom: "1rem" }}
                 id={get_field_id(field_key)}
-                disabled={disable_forms}
+                disabled={
+                  disable_forms ||
+                  (field_info.connection &&
+                    !_.includes(
+                      completed_template,
+                      field_info.connection.name
+                    ) &&
+                    !_.includes(
+                      completed_template[field_info.connection.name],
+                      field_info.connection.enable
+                    ))
+                }
                 rows="5"
                 cols="33"
                 defaultValue={completed_template[field_key] || ""}
