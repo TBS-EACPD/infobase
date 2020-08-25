@@ -5,7 +5,7 @@ import { Subject } from "../../../../models/subject.js";
 import {
   available_icons,
   available_keys,
-  application_channels_keys,
+  delivery_channels_keys,
 } from "../shared";
 import { formatter } from "../../shared.js";
 import { infograph_href_template } from "../../../../link_utils.js";
@@ -39,7 +39,7 @@ export class ServiceOverview extends React.Component {
       .flatten()
       .value();
     const applications_and_calls = _.reduce(
-      application_channels_keys,
+      delivery_channels_keys,
       (total, key) => {
         const sum_for_key =
           _.sumBy(service.service_report, `${key}_count`) || 0;
@@ -121,6 +121,15 @@ export class ServiceOverview extends React.Component {
               {`${text_maker("applications_and_calls")}: ${formatter(
                 "big_int",
                 applications_and_calls,
+                {
+                  raw: true,
+                }
+              )}`}
+            </div>
+            <div className="service-overview-rect">
+              {`${text_maker("online_inquiry")}: ${formatter(
+                "big_int",
+                _.sumBy(service.service_report, "online_inquiry_count"),
                 {
                   raw: true,
                 }

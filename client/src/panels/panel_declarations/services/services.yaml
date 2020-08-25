@@ -112,11 +112,11 @@ issue_res_digital:
   en: Feedback
   fr: Rétroaction
 can_online:
-  en: Can be done online
-  fr: Peut se faire en ligne
+  en: Yes (can be done online)
+  fr: Oui (Peut se faire en ligne)
 cannot_online:
-  en: Cannot be done online
-  fr: Ne peut pas se faire en ligne
+  en: No (cannot be done online)
+  fr: Non (Ne peut pas se faire en ligne)
 
 # Channels
 services_channels_title:
@@ -180,7 +180,19 @@ top10_services_volume_text:
   en: |
     Below are the top 10 services with the highest application and telephone volume. **{{highest_service_name}}** had the most traffic with **{{fmt_big_int highest_service_value}}** applications and telephone calls.
   fr: TODO
-
+top10_website_visits_title:
+  en: Top 10 services with highest website visits
+  fr: TODO
+top10_gov_website_visits_text:
+  transform: [handlebars, markdown]
+  en: |
+    Below are the top 10 organizations with the highest website visit volume. **{{highest_volume_name}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** website visits.
+  fr: TODO
+top10_dept_website_visits_text:
+  transform: [handlebars, markdown]
+  en: |
+    Below are the top 10 services with the highest website visit volume. **{{highest_volume_name}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** website visits.
+  fr: TODO
 
 # High application volume
 high_application_volume_title:
@@ -291,6 +303,16 @@ target_met_text:
   transform: [handlebars, markdown]
   en: How many {{gl_tt "standards'" "STANDARD"}} targets were met?
   fr: Combien de cibles {{gl_tt "standard" "STANDARD"}} ont été atteintes?
+gauge_has_standards_text:
+  transform: [handlebars, markdown]
+  en: |
+    **{{fmt_percentage1 has_standards_pct}}** of services have standards
+  fr: TODO
+gauge_standards_met_text:
+  transform: [handlebars, markdown]
+  en: |
+    **{{fmt_percentage1 standards_met_pct}}** of standards' targets were met
+  fr: TODO
 
 # Types
 services_types:
