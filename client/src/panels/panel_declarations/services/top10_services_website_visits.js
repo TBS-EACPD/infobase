@@ -27,6 +27,15 @@ const volume_formatter = (val) =>
 const Top10WebsiteVisitsPanel = ({ panel_args }) => {
   const { services, subject } = panel_args;
   const is_gov = subject.level === "gov";
+  const get_name = (id) => {
+    if (is_gov) {
+      const dept = Dept.lookup(id);
+      return dept ? dept.name : "";
+    } else {
+      const srvce = Service.lookup(id);
+      return srvce ? srvce.name : "";
+    }
+  };
 
   const preprocessed_data = is_gov
     ? _.chain(services)
@@ -56,18 +65,18 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
       index: 0,
       header: is_gov ? text_maker("org") : text_maker("service_name"),
       is_searchable: true,
-      formatter: (id) =>
-        is_gov ? (
-          <a href={infograph_href_template(Dept.lookup(id), "services")}>
-            {Dept.lookup(id).name}
-          </a>
-        ) : (
-          <a href={`#dept/${subject.id}/service-panels/${id}`}>
-            {Service.lookup(id).name}
-          </a>
-        ),
-      raw_formatter: (id) =>
-        is_gov ? Dept.lookup(id).name : Service.lookup(id).name,
+      formatter: (id) => (
+        <a
+          href={
+            is_gov
+              ? infograph_href_template(Dept.lookup(id), "services")
+              : `#dept/${subject.id}/service-panels/${id}`
+          }
+        >
+          {get_name(id)}
+        </a>
+      ),
+      raw_formatter: (id) => get_name(id),
     },
     [total_volume]: {
       index: 1,
@@ -76,15 +85,15 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
       formatter: "big_int",
     },
   };
-  return (
+  return _.isEmpty(data) ? (
+    <TM k="no_data" el="h2" />
+  ) : (
     <div>
       <TM
         className="medium_panel_text"
         k={`top10_${subject.level}_website_visits_text`}
         args={{
-          highest_volume_name: is_gov
-            ? Dept.lookup(_.last(data).id).name
-            : Service.lookup(_.last(data).id).name,
+          highest_volume_name: get_name(_.last(data).id),
           highest_volume_value: _.last(data)[total_volume],
         }}
       />
@@ -145,14 +154,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
                       ...tick.theme.axis.ticks.text,
                     }}
                   >
-                    <TspanLineWrapper
-                      text={
-                        is_gov
-                          ? Dept.lookup(tick.key).name
-                          : Service.lookup(tick.key).name
-                      }
-                      width={70}
-                    />
+                    <TspanLineWrapper text={get_name(tick.key)} width={70} />
                   </text>
                 </a>
               </g>
