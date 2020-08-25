@@ -352,6 +352,7 @@ export class Explorer extends React.Component {
 // data (objet): Any data to pass as props to explorer
 // load_requirements (object): Data required to be loaded
 // middlware (functions): Middleware functions to apply to the redux store
+// update_explorer (function): Function to be called by ComponentDidUpdate()
 
 export class ExplorerContainer extends React.Component {
   constructor(props) {
