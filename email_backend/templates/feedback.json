@@ -67,7 +67,8 @@
           "en": "5",
           "fr": "5"
         }
-      }
+      },
+      "style": "horizontal"
     },
     "easily_nav_details": {
       "required": false,
@@ -109,7 +110,8 @@
           "en": "5",
           "fr": "5"
         }
-      }
+      },
+      "style": "horizontal"
     },
     "useful_info_details": {
       "required": false,
