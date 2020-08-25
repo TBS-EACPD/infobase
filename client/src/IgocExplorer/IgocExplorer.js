@@ -95,7 +95,6 @@ const IgocExplorer = ({ match }) => {
 
   const update_explorer = ({ data, store }) => {
     const { grouping } = data;
-    console.log("Hi");
     store.dispatch({
       type: "set_grouping",
       payload: grouping,
