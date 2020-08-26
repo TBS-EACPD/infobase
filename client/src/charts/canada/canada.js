@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 
-
 import { secondaryColor, tertiaryColor } from "../../core/color_defs.js";
 import { hex_to_rgb } from "../../general_utils.js";
 import { businessConstants } from "../../models/businessConstants.js";
@@ -11,6 +10,7 @@ import { WrappedNivoHBar } from "../wrapped_nivo/index.js";
 import { CanadaD3Component } from "./CanadaD3Component.js";
 
 import text from "./canada.yaml";
+import RotateLandscape from "../../components/RotateLandscape/RotateLandscape";
 
 const text_maker = create_text_maker(text);
 
@@ -197,10 +197,12 @@ export class Canada extends React.Component {
           </div>
         </div>
         <div className="fcol-md-9" style={{ position: "relative" }}>
-          <CanadaGraph
-            graph_args={graph_args}
-            prov_select_callback={this.prov_select_callback}
-          />
+          <RotateLandscape>
+            <CanadaGraph
+              graph_args={graph_args}
+              prov_select_callback={this.prov_select_callback}
+            />
+          </RotateLandscape>
         </div>
       </div>
     );

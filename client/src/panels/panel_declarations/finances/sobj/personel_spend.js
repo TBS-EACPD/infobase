@@ -11,6 +11,7 @@ import {
 } from "../../shared.js";
 
 import { text_maker, TM } from "./sobj_text_provider.js";
+import RotateLandscape from "../../../../components/RotateLandscape/RotateLandscape.js";
 const { sos } = businessConstants;
 const { std_years } = year_templates;
 const { Format } = util_components;
@@ -69,17 +70,19 @@ export const declare_personnel_spend_panel = () =>
 
           graph_content = (
             <div position="relative">
-              <WrappedNivoLine
-                raw_data={panel_args.series[0]}
-                data={personnel_data()}
-                margin={{
-                  top: 50,
-                  right: 40,
-                  bottom: 50,
-                  left: 65,
-                }}
-                colors={window.infobase_color_constants.primaryColor}
-              />
+              <RotateLandscape>
+                <WrappedNivoLine
+                  raw_data={panel_args.series[0]}
+                  data={personnel_data()}
+                  margin={{
+                    top: 50,
+                    right: 40,
+                    bottom: 50,
+                    left: 65,
+                  }}
+                  colors={window.infobase_color_constants.primaryColor}
+                />
+              </RotateLandscape>
             </div>
           );
         }

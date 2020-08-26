@@ -9,6 +9,7 @@ import {
   WrappedNivoBar,
   declare_panel,
 } from "../../shared.js";
+import RotateLandscape from "../../../../components/RotateLandscape/RotateLandscape";
 
 import text from "./internal_services.yaml";
 
@@ -157,20 +158,22 @@ export const declare_internal_services_panel = () =>
                   />
                 </div>
                 <div className="fcol-md-9">
-                  <WrappedNivoBar
-                    data={bar_data}
-                    indexBy="date"
-                    colorBy={(d) => colors(d.id)}
-                    keys={label_keys}
-                    is_money={false}
-                    margin={{
-                      top: 15,
-                      right: 30,
-                      bottom: 40,
-                      left: 50,
-                    }}
-                    graph_height="300px"
-                  />
+                  <RotateLandscape>
+                    <WrappedNivoBar
+                      data={bar_data}
+                      indexBy="date"
+                      colorBy={(d) => colors(d.id)}
+                      keys={label_keys}
+                      is_money={false}
+                      margin={{
+                        top: 15,
+                        right: 30,
+                        bottom: 40,
+                        left: 50,
+                      }}
+                      graph_height="300px"
+                    />
+                  </RotateLandscape>
                 </div>
               </div>
             );

@@ -22,6 +22,8 @@ import {
 } from "../../shared.js";
 
 import text from "./detailed_program_spending_split.yaml";
+import { DisplayTable } from "../../../../components";
+import RotateLandscape from "../../../../components/RotateLandscape/RotateLandscape";
 
 const { std_years } = year_templates;
 
@@ -159,24 +161,26 @@ class HistoricalProgramBars extends React.Component {
             />
           </div>
           <div className="fcol-md-8">
-            <WrappedNivoBar
-              data={graph_data}
-              keys={Object.keys(processed_data)}
-              indexBy="year"
-              colorBy={(d) => colors(d.id)}
-              margin={{
-                top: 50,
-                right: 20,
-                bottom: 50,
-                left: 70,
-              }}
-              custom_table={
-                <SmartDisplayTable
-                  column_configs={column_configs}
-                  data={custom_table_data}
-                />
-              }
-            />
+            <RotateLandscape>
+              <WrappedNivoBar
+                data={graph_data}
+                keys={Object.keys(processed_data)}
+                indexBy="year"
+                colorBy={(d) => colors(d.id)}
+                margin={{
+                  top: 50,
+                  right: 20,
+                  bottom: 50,
+                  left: 70,
+                }}
+                custom_table={
+                  <SmartDisplayTable
+                    column_configs={column_configs}
+                    data={custom_table_data}
+                  />
+                }
+              />
+            </RotateLandscape>
           </div>
         </div>
       </div>
@@ -349,59 +353,61 @@ class DetailedProgramSplit extends React.Component {
             )}
           </div>
           <div className="fcol-md-9" style={{ width: "100%" }}>
-            <WrappedNivoHBar
-              data={graph_ready_data}
-              indexBy="label"
-              keys={so_label_list}
-              margin={{
-                top: 10,
-                right: 70,
-                bottom: 30,
-                left: 215,
-              }}
-              graph_height={divHeight}
-              colorBy={(d) => colors(d.id)}
-              bttm_axis={{
-                tickSize: 5,
-                tickPadding: 5,
-                tickValues: 6,
-                format: (d) => formatter(d),
-              }}
-              left_axis={{
-                tickSize: 5,
-                tickPadding: 5,
-                renderTick: (tick) => (
-                  <g
-                    key={tick.key}
-                    transform={`translate(${tick.x - 5},${tick.y + 1.5})`}
-                  >
-                    <a
-                      href={
-                        programs_by_name[tick.value]
-                          ? infograph_href_template(
-                              programs_by_name[tick.value]
-                            )
-                          : null
-                      }
-                      target="_blank"
-                      rel="noopener noreferrer"
+            <RotateLandscape>
+              <WrappedNivoHBar
+                data={graph_ready_data}
+                indexBy="label"
+                keys={so_label_list}
+                margin={{
+                  top: 10,
+                  right: 70,
+                  bottom: 30,
+                  left: 215,
+                }}
+                graph_height={divHeight}
+                colorBy={(d) => colors(d.id)}
+                bttm_axis={{
+                  tickSize: 5,
+                  tickPadding: 5,
+                  tickValues: 6,
+                  format: (d) => formatter(d),
+                }}
+                left_axis={{
+                  tickSize: 5,
+                  tickPadding: 5,
+                  renderTick: (tick) => (
+                    <g
+                      key={tick.key}
+                      transform={`translate(${tick.x - 5},${tick.y + 1.5})`}
                     >
-                      <text
-                        textAnchor="end"
-                        dominantBaseline="end"
-                        style={{
-                          ...tick.theme.axis.ticks.text,
-                        }}
+                      <a
+                        href={
+                          programs_by_name[tick.value]
+                            ? infograph_href_template(
+                                programs_by_name[tick.value]
+                              )
+                            : null
+                        }
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
-                        <TspanLineWrapper text={tick.value} width={40} />
-                      </text>
-                    </a>
-                  </g>
-                ),
-              }}
-              markers={markers}
-              padding={0.05}
-            />
+                        <text
+                          textAnchor="end"
+                          dominantBaseline="end"
+                          style={{
+                            ...tick.theme.axis.ticks.text,
+                          }}
+                        >
+                          <TspanLineWrapper text={tick.value} width={40} />
+                        </text>
+                      </a>
+                    </g>
+                  ),
+                }}
+                markers={markers}
+                padding={0.05}
+              />
+            </RotateLandscape>
           </div>
         </div>
       </div>

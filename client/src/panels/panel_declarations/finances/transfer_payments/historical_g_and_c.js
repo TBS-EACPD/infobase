@@ -12,6 +12,7 @@ import {
   util_components,
   WrappedNivoLine,
 } from "../../shared.js";
+import RotateLandscape from "../../../../components/RotateLandscape/RotateLandscape.js";
 
 import { text_maker, TM } from "./gnc_text_provider.js";
 
@@ -112,13 +113,15 @@ class HistTPTypes extends React.Component {
             }
           />
           <div style={{ position: "relative" }}>
-            <WrappedNivoLine
-              enableArea={true}
-              disable_y_axis_zoom={true}
-              data={expenditure_data}
-              colorBy={(d) => colors(d.id)}
-              stacked={true}
-            />
+            <RotateLandscape>
+              <WrappedNivoLine
+                enableArea={true}
+                disable_y_axis_zoom={true}
+                data={expenditure_data}
+                colorBy={(d) => colors(d.id)}
+                stacked={true}
+              />
+            </RotateLandscape>
           </div>
         </Fragment>
       );
@@ -290,7 +293,11 @@ class DetailedHistTPItems extends React.Component {
         ...empty_data_nivo_props,
       };
 
-      return <WrappedNivoLine {...nivo_props} />;
+      return (
+        <RotateLandscape>
+          <WrappedNivoLine {...nivo_props} />;
+        </RotateLandscape>
+      );
     })();
 
     return (
