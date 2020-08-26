@@ -117,14 +117,19 @@ export default class IndicatorPanel extends React.Component {
   render() {
     const {
       match: {
-        params: { org_id, id },
+        params: { org_level, org_id, id },
       },
     } = this.props;
 
     const { loading } = this.state;
 
-    const subject = Subject.Dept.lookup(org_id);
     const indicator = Indicator.lookup(id);
+    const subject =
+      org_level === "dept"
+        ? Subject.Dept.lookup(org_id)
+        : org_level === "program"
+        ? Subject.Program.lookup(org_id)
+        : Subject.CRSO.lookup(org_id);
 
     return (
       <StandardRouteContainer
