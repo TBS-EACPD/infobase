@@ -885,12 +885,14 @@ class BudgetMeasureHBars extends React.Component {
             <WrappedNivoHBar
               {...nivo_default_props}
               graph_height={`${data.length * 30 + 150}px`}
+              rotate_landscape={true}
             />
           </MediaQuery>
           <MediaQuery maxWidth={992}>
             <WrappedNivoHBar
               {...nivo_mobile_props}
               graph_height={`${data.length * 40 + 150}px`}
+              rotate_landscape={true}
             />
           </MediaQuery>
         </Fragment>
