@@ -14,6 +14,7 @@ import {
   util_components,
   declare_panel,
 } from "../../shared.js";
+import RotateLandscape from "../../../../components/RotateLandscape/RotateLandscape";
 
 import text from "./auth_exp_planned_spending.yaml";
 import "./auth_exp_planned_spending.scss";
@@ -266,7 +267,10 @@ class AuthExpPlannedSpendingGraph extends React.Component {
             }}
           />
         </div>
-        <WrappedNivoLine {...nivo_props} />
+
+        <RotateLandscape>
+          <WrappedNivoLine {...nivo_props} />
+        </RotateLandscape>
       </Fragment>
     );
   }

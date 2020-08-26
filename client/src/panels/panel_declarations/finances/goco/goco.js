@@ -17,6 +17,8 @@ import {
 } from "../../shared.js";
 
 import text from "./goco.yaml";
+import { DisplayTable } from "../../../../components";
+import RotateLandscape from "../../../../components/RotateLandscape/RotateLandscape";
 
 const { SmartDisplayTable } = util_components;
 const { Tag } = Subject;
@@ -478,38 +480,40 @@ class Goco extends React.Component {
             />
           </div>
           <div>
-            <WrappedNivoBar
-              {...nivo_default_props}
-              data={graph_data}
-              custom_table={custom_table}
-              onMouseEnter={(node, e) =>
-                handleHover(node, e.target, graph_data)
-              }
-              onMouseLeave={(node, e) =>
-                handleHover(node, e.target, graph_data)
-              }
-              onClick={(node, e) => handleClick(node, e.target, graph_data)}
-              bttm_axis={{
-                renderTick: (tick) => {
-                  return (
-                    <g
-                      key={tick.key}
-                      transform={`translate(${tick.x},${tick.y + 16})`}
-                    >
-                      <text
-                        textAnchor="middle"
-                        dominantBaseline="middle"
-                        style={{
-                          ...tick.theme.axis.ticks.text,
-                        }}
+            <RotateLandscape>
+              <WrappedNivoBar
+                {...nivo_default_props}
+                data={graph_data}
+                custom_table={custom_table}
+                onMouseEnter={(node, e) =>
+                  handleHover(node, e.target, graph_data)
+                }
+                onMouseLeave={(node, e) =>
+                  handleHover(node, e.target, graph_data)
+                }
+                onClick={(node, e) => handleClick(node, e.target, graph_data)}
+                bttm_axis={{
+                  renderTick: (tick) => {
+                    return (
+                      <g
+                        key={tick.key}
+                        transform={`translate(${tick.x},${tick.y + 16})`}
                       >
-                        <TspanLineWrapper text={tick.value} width={15} />
-                      </text>
-                    </g>
-                  );
-                },
-              }}
-            />
+                        <text
+                          textAnchor="middle"
+                          dominantBaseline="middle"
+                          style={{
+                            ...tick.theme.axis.ticks.text,
+                          }}
+                        >
+                          <TspanLineWrapper text={tick.value} width={15} />
+                        </text>
+                      </g>
+                    );
+                  },
+                }}
+              />
+            </RotateLandscape>
           </div>
         </Fragment>
       );

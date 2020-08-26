@@ -11,7 +11,6 @@ import {
 } from "./wrapped_nivo_common.js";
 
 import { DisplayTable } from "../../components/index.js";
-import RotateLandscape from "../../components/RotateLandscape/RotateLandscape.js";
 
 const bar_table = (
   data,
@@ -203,7 +202,7 @@ export class WrappedNivoHBar extends React.Component {
       isInteractive,
       motionDamping,
       motionStiffness,
-      rotate_landscape,
+      mobile_overlay,
     } = this.props;
 
     const table =
@@ -269,9 +268,7 @@ export class WrappedNivoHBar extends React.Component {
     );
 
     return (
-      <RotateLandscape rotate_landscape={rotate_landscape}>
-        <InteractiveGraph graph={graph} table={table} table_name={table_name} />
-      </RotateLandscape>
+      <InteractiveGraph graph={graph} table={table} table_name={table_name} />
     );
   }
 }

@@ -9,9 +9,9 @@ const { TM } = create_text_maker_component(text);
 
 export default class RotateLandscape extends React.Component {
   render() {
-    const { rotate_landscape, children } = this.props;
+    const { children } = this.props;
 
-    return rotate_landscape ? (
+    return (
       <Fragment>
         <MediaQuery maxDeviceWidth={567.98}>
           <MediaQuery orientation="portrait">
@@ -38,8 +38,6 @@ export default class RotateLandscape extends React.Component {
           <MediaQuery minWidth={568}>{children}</MediaQuery>
         </MediaQuery>
       </Fragment>
-    ) : (
-      children
     );
   }
 }

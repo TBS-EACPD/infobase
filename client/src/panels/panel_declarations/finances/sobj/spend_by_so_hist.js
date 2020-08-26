@@ -14,6 +14,7 @@ import {
 } from "../../shared.js";
 
 import { text_maker, TM } from "./sobj_text_provider.js";
+import RotateLandscape from "../../../../components/RotateLandscape/RotateLandscape.js";
 
 const { sos } = businessConstants;
 const { std_years } = year_templates;
@@ -132,7 +133,11 @@ class SobjLine extends React.Component {
         ...empty_data_nivo_props,
       };
 
-      return <WrappedNivoLine {...nivo_props} />;
+      return (
+        <RotateLandscape>
+          <WrappedNivoLine {...nivo_props} />;
+        </RotateLandscape>
+      );
     })();
 
     return (
