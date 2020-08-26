@@ -92,7 +92,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
             ? ind.parent_node.data.subject.level
             : "core_resp"
         )}`,
-        href: `#dept/${subject.id}/indicator/${ind.indicator.id}`,
+        href: `#${subject.level}/${subject.id}/indicator/${ind.indicator.id}`,
         name: ind.indicator.name,
       },
     ])

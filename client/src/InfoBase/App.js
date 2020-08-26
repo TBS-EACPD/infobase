@@ -225,7 +225,7 @@ export class App extends React.Component {
                 component={IsolatedPanel}
               />
               <Route
-                path="/dept/:org_id/indicator/:id?"
+                path="/:org_level/:org_id/indicator/:id?"
                 component={IndicatorPanel}
               />
               <Redirect
