@@ -119,18 +119,13 @@ const get_non_col_content = ({ node }) => {
 class EstimatesExplorer extends React.Component {
   constructor() {
     super();
-<<<<<<< HEAD
     this.state = { _query: "", show_inactive: false };
-=======
-
-    this.state = { query: "" };
->>>>>>> Port EstimatesComparison to common ExplorerContainer
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
 
   handle_query_change = (new_query) => {
     this.setState({
-      query: new_query,
+      _query: new_query,
       loading: new_query.length > 3 ? true : undefined,
     });
     this.debounced_set_query(new_query);
@@ -150,7 +145,7 @@ class EstimatesExplorer extends React.Component {
   };
 
   clearQuery = () => {
-    this.setState({ query: "" });
+    this.setState({ _query: "" });
     this.props.clear_query("");
   };
 
@@ -325,16 +320,11 @@ class EstimatesExplorer extends React.Component {
           )}
           <Explorer
             config={explorer_config}
-<<<<<<< HEAD
             root={filtered_root}
             col_state={{
               sort_col,
               is_descending,
             }}
-=======
-            root={root}
-            col_state={{ sort_col, is_descending }}
->>>>>>> Port EstimatesComparison to common ExplorerContainer
             min_width={525}
           />
         </div>
