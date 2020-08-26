@@ -12,6 +12,7 @@ import {
   declare_panel,
   NivoLineBarToggle,
 } from "../shared.js";
+import RotateLandscape from "../../../components/RotateLandscape/RotateLandscape";
 
 import text from "./employee_age.yaml";
 
@@ -176,7 +177,9 @@ export const declare_employee_age_panel = () =>
                     tab_pane_contents={{
                       age_group: (
                         <div id={"emp_age_tab_pane"}>
-                          <NivoLineBarToggle {...age_group_options} />
+                          <RotateLandscape>
+                            <NivoLineBarToggle {...age_group_options} />
+                          </RotateLandscape>
                           <div className="clearfix"></div>
                         </div>
                       ),
