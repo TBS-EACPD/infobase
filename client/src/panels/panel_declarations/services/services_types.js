@@ -59,7 +59,7 @@ export const declare_services_types_panel = () =>
         const { panel_args } = calculations;
         return (
           <InfographicPanel
-            title={text_maker("services_types")}
+            title={text_maker("service_types")}
             sources={sources}
           >
             <ServicesTypesPanel panel_args={panel_args} />

@@ -36,24 +36,24 @@ identification_methods:
   en: Identification methods
   fr: Méthodes d'identification
 uses_cra_as_identifier:
-  en: Uses CRA business number as identifier
+  en: Uses CRA business number as an identifier
   fr: Le numéro d'entreprise de l'ARC est utilisé comme identifiant
 uses_sin_as_identifier:
-  en: Uses Social Insurance Number as identifier
+  en: Uses Social Insurance Number as an identifier
   fr: Le NAS est utilisé comme identifiant
 does_not_use_cra_as_identifier:
-  en: Does not use CRA business number as identifier
+  en: Does not use CRA business number as an identifier
   fr: Le numéro d'entreprise de l'ARC n'est pas utilisé comme identifiant
 does_not_use_sin_as_identifier:
-  en: Does not use Social Insurance Number as identifier
+  en: Does not use Social Insurance Number as an identifier
   fr: Le NAS n'est pas utilisé comme identifiant
 sin_sub_title:
   transform: [handlebars, markdown]
-  en: How many {{gl_tt "services" "SERVICE"}} use **Social Insurance Number** as a standard identifier?
+  en: How many {{gl_tt "services" "SERVICE"}} use the **Social Insurance Number** as a standard identifier?
   fr: Combien de services utilisent le NAS comme identifiant standard?
 cra_sub_title:
   transform: [handlebars, markdown]
-  en: How many services use **CRA business number** as a standard identifier?
+  en: How many services use the **CRA business number** as a standard identifier?
   fr: Combien de services utilisent le numéro d'entreprise de l'ARC comme identifiant standard?
 sin_not_applicable:
   en: Not applicable (not a service to an individual)
@@ -65,7 +65,7 @@ cra_not_applicable:
 # Digital Status
 services_digital_status_text:
   transform: [handlebars, markdown]
-  en: | #TODO TEXT CHANGED AGAIN
+  en: |
     Among the **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{most_digital_name}}** is the most commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 most_digital_pct}}**) while **{{least_digital_name}}** is the least commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 least_digital_pct}}**).
   fr: |
     TODO
@@ -196,14 +196,14 @@ top10_dept_website_visits_text:
 
 # High application volume
 high_application_volume_title:
-  en: Organizations with high application volume
+  en: Organizations with high volume services
   fr: TODO
 high_application_volume_text:
   transform: [handlebars, markdown]
   en: |
-    Below are the list of organizations with **high volume** data, where their application and telephone volume is greater than **45,000**.
+    Below are the list of organizations with **high volume** services, where their total application and telephone calls received is greater than **45,000**.
     
-    Among **{{num_of_high_volume_depts}}** departments with high volume data, **{{highest_volume_dept}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** of applications and telephone calls.
+    Among **{{num_of_high_volume_depts}}** departments with high volume services, **{{highest_volume_dept}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** of applications and telephone calls received.
   fr: TODO
 
 # Overview
@@ -214,9 +214,6 @@ overview_digital_status_title:
 overview_digital_status_desc:
   en: Online client interaction points of this service
   fr: Points d'interaction en ligne liés aux clients de ce service
-service_types:
-  en: Service Types
-  fr: Types de service
 online_status:
   en: Online status
   fr: État en ligne
@@ -315,9 +312,9 @@ gauge_standards_met_text:
   fr: TODO
 
 # Types
-services_types:
-  en: Services types
-  fr: TODO
+service_types:
+  en: Service Types
+  fr: Types de service
 services_types_desc:
   transform: [handlebars, markdown]
   en: |
