@@ -13,6 +13,7 @@ import {
 
 import text from "./EmailFrontend.yaml";
 import "./EmailFrontend.scss";
+import { has_local_storage } from "../core/feature_detection.js";
 
 const { TM, text_maker } = create_text_maker_component(text);
 
@@ -302,6 +303,19 @@ class EmailFrontend extends React.Component {
                   disabled={!ready_to_send}
                   onClick={(event) => {
                     event.preventDefault();
+                    if (
+                      this.state.template_name === "feedback" &&
+                      has_local_storage
+                    ) {
+                      localStorage.setItem(
+                        `infobase_survey_popup_deactivated`,
+                        "true"
+                      );
+                      localStorage.setItem(
+                        `infobase_survey_popup_deactivated_since`,
+                        Date.now()
+                      );
+                    }
                     this.setState({
                       awaiting_backend_response: true,
                       backend_response: {},
