@@ -128,12 +128,12 @@ export const SurveyPopup = withRouter(
       return page_changed || is_closing || state_show_popup;
     }
     render() {
-      const { active, page_visited } = this.state;
+      const { active, page_visited, show_popup } = this.state;
       const { toggleSurvey } = this.props;
 
       const should_show =
         !is_survey_campaign_over() &&
-        (page_visited >= 3 || this.state.show_popup) &&
+        (page_visited >= 3 || show_popup) &&
         active;
 
       if (should_show) {
