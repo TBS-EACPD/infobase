@@ -8,6 +8,7 @@ import {
   WrappedNivoPie,
   newIBCategoryColors,
 } from "../shared.js";
+import { DisplayTable } from "../../../components";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -77,30 +78,48 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
     is_money: false,
     colorBy: (d) => colors(d.id),
   };
+  const column_configs = {
+    label: {
+      index: 0,
+      header: text_maker("identification_methods"),
+    },
+    value: {
+      index: 1,
+      header: text_maker("value"),
+    },
+  };
 
   return (
     <div className={"col-container"}>
       <div className="fcol-md-6 p-20">
         <TM className="double-pie-text" k="sin_sub_title" el="h4" />
-        <WrappedNivoPie
-          {...nivo_common_props}
-          custom_legend_items={_.map(sin_data, (row) => ({
-            ...row,
-            color: colors(row.id),
-          }))}
-          data={sin_data}
-        />
+        {window.is_a11y_mode ? (
+          <DisplayTable data={sin_data} column_configs={column_configs} />
+        ) : (
+          <WrappedNivoPie
+            {...nivo_common_props}
+            custom_legend_items={_.map(sin_data, (row) => ({
+              ...row,
+              color: colors(row.id),
+            }))}
+            data={sin_data}
+          />
+        )}
       </div>
       <div className="fcol-md-6 p-20">
         <TM className="double-pie-text" k="cra_sub_title" el="h4" />
-        <WrappedNivoPie
-          {...nivo_common_props}
-          custom_legend_items={_.map(cra_data, (row) => ({
-            ...row,
-            color: colors(row.id),
-          }))}
-          data={cra_data}
-        />
+        {window.is_a11y_mode ? (
+          <DisplayTable data={cra_data} column_configs={column_configs} />
+        ) : (
+          <WrappedNivoPie
+            {...nivo_common_props}
+            custom_legend_items={_.map(cra_data, (row) => ({
+              ...row,
+              color: colors(row.id),
+            }))}
+            data={cra_data}
+          />
+        )}
       </div>
     </div>
   );

@@ -117,6 +117,9 @@ can_online:
 cannot_online:
   en: No (cannot be done online)
   fr: Non (Ne peut pas se faire en ligne)
+client_interaction_point:
+  en: Client Interaction Points
+  fr: Points d'interaction liés aux clients
 
 # Channels
 services_channels_title:
@@ -281,11 +284,11 @@ satisfied_business_volume:
   en: Satisfied Business Volume
   fr: Volume d'activités satisfaisant
 has_standards:
-  en: Has standards
-  fr: A des normes
+  en: Service has standards
+  fr: TODO
 no_standards:
-  en: Does not have standards
-  fr: N’a pas de normes
+  en: Service does not have standards
+  fr: TODO
 target_met_true:
   en: Standard target is met
   fr: La cible standard est atteinte
@@ -296,10 +299,16 @@ has_standards_text:
   transform: [handlebars, markdown]
   en: How many {{gl_tt "services" "SERVICE"}} have {{gl_tt "standards" "STANDARD"}}?
   fr: Combien de {{gl_tt "services" "SERVICE"}} ont des {{gl_tt "normes" "STANDARD"}}?
+has_standards_table_text:
+  en: How many services have standards?
+  fr: Combien de services ont des normes?
 target_met_text:
   transform: [handlebars, markdown]
   en: How many {{gl_tt "standards'" "STANDARD"}} targets were met?
-  fr: Combien de cibles {{gl_tt "standard" "STANDARD"}} ont été atteintes?
+  fr: Combien de cibles {{gl_tt "normes de service" "STANDARD"}} ont été atteintes?
+target_met_table_text:
+  en: How many standards' targets were met?
+  fr: Combien de cibles normes ont été atteintes?
 gauge_has_standards_text:
   transform: [handlebars, markdown]
   en: |
