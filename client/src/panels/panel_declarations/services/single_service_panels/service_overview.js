@@ -1,31 +1,18 @@
 import "../services.scss";
 import text from "../services.yaml";
-import { create_text_maker_component, Panel } from "../../../../components";
+import { create_text_maker_component, FancyUL } from "../../../../components";
 import { Subject } from "../../../../models/subject.js";
 import {
   available_icons,
   available_keys,
   delivery_channels_keys,
 } from "../shared";
-import { formatter } from "../../shared.js";
 import { infograph_href_template } from "../../../../link_utils.js";
 import Gauge from "../../../../charts/gauge.js";
+import { Fragment } from "react";
+import { TextPanel, formatter } from "../../shared.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
-
-const OverviewUL = ({ title, children }) => (
-  <ul className={"overview-ul"} aria-label={title}>
-    {title && (
-      <li className={"overview-ul__title"} aria-hidden={true}>
-        {title}
-      </li>
-    )}
-    {_.chain(children)
-      .compact()
-      .map((item, i) => <li key={i}>{item}</li>)
-      .value()}
-  </ul>
-);
 
 export class ServiceOverview extends React.Component {
   render() {
@@ -47,132 +34,130 @@ export class ServiceOverview extends React.Component {
       },
       0
     );
-
     return (
-      <Panel title={text_maker("service_overview_title")}>
-        <div className={"col-container medium_panel_text"}>
-          <div className="fcol-md-7">
-            <div className="service-overview-rect">{service.description}</div>
-            <div className="service-overview-rect">
-              <OverviewUL
-                className="service_overview-fancy-ul"
-                title={`${text_maker("identification_methods")} (${
-                  most_recent_report.year
-                })`}
-              >
-                {_.map(
-                  {
-                    uses_sin_as_identifier: "sin_collected",
-                    uses_cra_as_identifier: "cra_business_ids_collected",
-                  },
-                  (id, id_key) => (
-                    <div key={id_key} className="identifier-item">
-                      <TM k={id_key} />
-                      {available_icons[available_keys[most_recent_report[id]]]}
-                    </div>
-                  )
-                )}
-              </OverviewUL>
-            </div>
-            {!_.isEmpty(flat_standard_reports) && (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  paddingBottom: "10px",
-                }}
-                className="service-overview-rect"
-              >
+      <TextPanel title={text_maker("service_overview_title")}>
+        <dl className="dl-horizontal tombstone-data-list">
+          <dt>
+            <TM k={"description"} />
+          </dt>
+          <dd>
+            <p>{service.description}</p>
+          </dd>
+          <dt>{text_maker("service_types")}</dt>
+          <dd>
+            {_.map(service.service_type, (type) => (
+              <p key={type}>{type}</p>
+            ))}
+          </dd>
+          {!_.isEmpty(flat_standard_reports) && (
+            <Fragment>
+              <dt>
                 <TM k={"standards_performance_text"} />
-                <Gauge
-                  value={_.countBy(flat_standard_reports, "is_target_met").true}
-                  total_value={flat_standard_reports.length}
-                />
-              </div>
-            )}
-          </div>
-          <div className="fcol-md-5">
-            <div className="service-overview-rect">
-              <OverviewUL title={text_maker("service_types")}>
-                {_.map(service.service_type)}
-              </OverviewUL>
-            </div>
-            {!_.isEmpty(service.program_ids) && (
-              <div className="service-overview-rect">
-                <OverviewUL title={text_maker("related_programs")}>
-                  {_.map(service.program_ids, (program_id) => {
-                    const program = Subject.Program.lookup(program_id);
-                    return (
-                      program && (
-                        <a
-                          key={program_id}
-                          href={infograph_href_template(program)}
-                        >
-                          {program.name}
-                        </a>
-                      )
-                    );
-                  })}
-                </OverviewUL>
-              </div>
-            )}
-            <div className="service-overview-rect">
-              {`${text_maker("applications_and_calls")}: ${formatter(
-                "big_int",
-                applications_and_calls,
-                {
-                  raw: true,
-                }
-              )}`}
-            </div>
-            <div className="service-overview-rect">
-              {`${text_maker("online_inquiry")}: ${formatter(
-                "big_int",
-                _.sumBy(service.service_report, "online_inquiry_count"),
-                {
-                  raw: true,
-                }
-              )}`}
-            </div>
-            <div className="service-overview-rect">
-              <TM
-                k={
-                  service.collects_fees
-                    ? "does_charge_fees"
-                    : "does_not_charge_fees"
-                }
-              />
-            </div>
-            {!_.isEmpty(service.urls) && (
-              <div className="service-overview-rect">
-                {service.urls.length === 1 ? (
-                  <TM
-                    k={"service_single_link_text"}
-                    args={{ service_url: service.urls[0] }}
+              </dt>
+              <dd>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    paddingBottom: "10px",
+                    backgroundColor:
+                      window.infobase_color_constants.backgroundColor,
+                  }}
+                  className="service-overview-rect"
+                >
+                  <Gauge
+                    value={
+                      _.countBy(flat_standard_reports, "is_target_met").true ||
+                      0
+                    }
+                    total_value={flat_standard_reports.length}
                   />
-                ) : (
-                  <div>
-                    <TM k={"service_links_text"} />
-                    <OverviewUL>
-                      {_.map(service.urls, (url, i) => (
-                        <a
-                          key={url}
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {`${text_maker("link")} ${i + 1}`}
-                        </a>
-                      ))}
-                    </OverviewUL>
+                </div>
+              </dd>
+            </Fragment>
+          )}
+          <dt>
+            {`${text_maker("identification_methods")} (${
+              most_recent_report.year
+            })`}
+          </dt>
+          <dd>
+            <FancyUL>
+              {_.map(
+                {
+                  uses_sin_as_identifier: "sin_collected",
+                  uses_cra_as_identifier: "cra_business_ids_collected",
+                },
+                (id, id_key) => (
+                  <div key={id_key} className="identifier-item">
+                    <TM style={{ lineHeight: 2 }} k={id_key} />
+                    <div>
+                      {available_icons[available_keys[most_recent_report[id]]]}
+                      <TM
+                        style={{ marginLeft: 5 }}
+                        k={available_keys[most_recent_report[id]]}
+                      />
+                    </div>
                   </div>
-                )}
-              </div>
+                )
+              )}
+            </FancyUL>
+          </dd>
+          <dt>{text_maker("related_programs")}</dt>
+          <dd>
+            {_.map(service.program_ids, (program_id) => {
+              const program = Subject.Program.lookup(program_id);
+              return (
+                program && (
+                  <p key={program_id}>
+                    <a href={infograph_href_template(program)}>
+                      {program.name}
+                    </a>
+                  </p>
+                )
+              );
+            })}
+          </dd>
+          <dt>{text_maker("services_fees")}</dt>
+          <dd>
+            <TM
+              k={
+                service.collects_fees
+                  ? "does_charge_fees"
+                  : "does_not_charge_fees"
+              }
+            />
+          </dd>
+          <dt>{text_maker("applications_and_calls")}</dt>
+          <dd>
+            {formatter("big_int", applications_and_calls, {
+              raw: true,
+            })}
+          </dd>
+          <dt>{text_maker("online_inquiry")}</dt>
+          <dd>
+            {formatter(
+              "big_int",
+              _.sumBy(service.service_report, "online_inquiry_count"),
+              {
+                raw: true,
+              }
             )}
-          </div>
-        </div>
-      </Panel>
+          </dd>
+          <dt>{text_maker("service_link_text")}</dt>
+          <dd>
+            {!_.isEmpty(service.urls) &&
+              _.map(service.urls, (url, i) => (
+                <p key={url}>
+                  <a href={url} target="_blank" rel="noopener noreferrer">
+                    {`${text_maker("link")} ${i + 1}`}
+                  </a>
+                </p>
+              ))}
+          </dd>
+        </dl>
+      </TextPanel>
     );
   }
 }
