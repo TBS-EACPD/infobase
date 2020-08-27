@@ -45,7 +45,7 @@ const EnumField = ({
   state_update_callback,
   classes,
 }) => (
-  <div className={form_type + " " + classes}>
+  <div className={`${form_type} ${classes}`}>
     <label htmlFor={`${field_id}--${enum_key}`}>
       <input
         id={`${field_id}--${enum_key}`}
