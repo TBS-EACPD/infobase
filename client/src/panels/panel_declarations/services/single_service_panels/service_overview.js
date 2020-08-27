@@ -1,6 +1,10 @@
 import "../services.scss";
 import text from "../services.yaml";
-import { create_text_maker_component, FancyUL } from "../../../../components";
+import {
+  create_text_maker_component,
+  FancyUL,
+  DisplayTable,
+} from "../../../../components";
 import { Subject } from "../../../../models/subject.js";
 import {
   available_icons,
@@ -34,6 +38,10 @@ export class ServiceOverview extends React.Component {
       },
       0
     );
+    const standards_met_data = _.countBy(
+      flat_standard_reports,
+      "is_target_met"
+    );
     return (
       <TextPanel title={text_maker("service_overview_title")}>
         <dl className="dl-horizontal tombstone-data-list">
@@ -66,13 +74,51 @@ export class ServiceOverview extends React.Component {
                   }}
                   className="service-overview-rect"
                 >
-                  <Gauge
-                    value={
-                      _.countBy(flat_standard_reports, "is_target_met").true ||
-                      0
-                    }
-                    total_value={flat_standard_reports.length}
-                  />
+                  {window.is_a11y_mode ? (
+                    <DisplayTable
+                      util_components={{
+                        copyCsvUtil: null,
+                        downloadCsvUtil: null,
+                        columnToggleUtil: null,
+                      }}
+                      column_configs={{
+                        id: {
+                          index: 0,
+                          header: text_maker("target_met_table_text"),
+                        },
+                        value: {
+                          index: 1,
+                          header: text_maker("value"),
+                        },
+                        pct: {
+                          index: 2,
+                          header: text_maker("percentage"),
+                          formatter: "percentage1",
+                        },
+                      }}
+                      data={[
+                        {
+                          id: text_maker("target_met_false"),
+                          value: standards_met_data.false || 0,
+                          pct:
+                            standards_met_data.false /
+                              flat_standard_reports.length || 0,
+                        },
+                        {
+                          id: text_maker("target_met_true"),
+                          value: standards_met_data.true || 0,
+                          pct:
+                            standards_met_data.true /
+                              flat_standard_reports.length || 0,
+                        },
+                      ]}
+                    />
+                  ) : (
+                    <Gauge
+                      value={standards_met_data.true || 0}
+                      total_value={flat_standard_reports.length}
+                    />
+                  )}
                 </div>
               </dd>
             </Fragment>
