@@ -93,13 +93,13 @@ export const SurveyPopup = withRouter(
       };
     }
     handleButtonPress = (button_type) => {
-      if (_.includes(["yes", "no"], button_type)) {
+      if (_.includes(["no"], button_type)) {
         localStorage.setItem(`infobase_survey_popup_deactivated`, "true");
         localStorage.setItem(
           `infobase_survey_popup_deactivated_since`,
           Date.now()
         );
-      } else {
+      } else if (_.includes(["later"], button_type)) {
         this.timeout = setTimeout(() => {
           this.setState({ show_popup: true, active: true });
         }, 300000);
