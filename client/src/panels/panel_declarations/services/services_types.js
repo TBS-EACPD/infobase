@@ -6,8 +6,10 @@ import {
   InfographicPanel,
   declare_panel,
   WrappedNivoPie,
+  util_components,
 } from "../shared.js";
 
+const { DisplayTable } = util_components;
 const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesTypesPanel = ({ panel_args }) => {
@@ -36,7 +38,24 @@ const ServicesTypesPanel = ({ panel_args }) => {
         className="medium_panel_text"
         k="services_types_desc"
       />
-      <WrappedNivoPie data={data} include_percent={false} is_money={false} />
+      {is_a11y_mode ? (
+        <DisplayTable
+          data={data}
+          column_configs={{
+            label: {
+              index: 0,
+              header: text_maker("service_types"),
+              is_searchable: true,
+            },
+            value: {
+              index: 1,
+              header: text_maker("value"),
+            },
+          }}
+        />
+      ) : (
+        <WrappedNivoPie data={data} include_percent={false} is_money={false} />
+      )}
     </div>
   );
 };

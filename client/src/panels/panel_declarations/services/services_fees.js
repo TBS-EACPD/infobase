@@ -6,13 +6,27 @@ import {
   InfographicPanel,
   declare_panel,
   WrappedNivoPie,
+  util_components,
 } from "../shared.js";
 
+const { DisplayTable } = util_components;
 const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesFeesPanel = ({ panel_args }) => {
   const { services, subject } = panel_args;
   const service_charges_fees = _.countBy(services, "collects_fees");
+  const data = [
+    {
+      id: "fees",
+      label: text_maker("service_charges_fees"),
+      value: service_charges_fees.true || 0,
+    },
+    {
+      id: "no_fees",
+      label: text_maker("service_does_not_charge_fees"),
+      value: service_charges_fees.false || 0,
+    },
+  ];
   return (
     <div>
       <TM
@@ -24,21 +38,23 @@ const ServicesFeesPanel = ({ panel_args }) => {
         }}
         className="medium_panel_text"
       />
-      <WrappedNivoPie
-        data={[
-          {
-            id: "fees",
-            label: text_maker("service_charges_fees"),
-            value: service_charges_fees.true || 0,
-          },
-          {
-            id: "no_fees",
-            label: text_maker("service_does_not_charge_fees"),
-            value: service_charges_fees.false || 0,
-          },
-        ]}
-        is_money={false}
-      />
+      {window.is_a11y_mode ? (
+        <DisplayTable
+          data={data}
+          column_configs={{
+            label: {
+              index: 0,
+              header: text_maker("services_fees"),
+            },
+            value: {
+              index: 1,
+              header: text_maker("value"),
+            },
+          }}
+        />
+      ) : (
+        <WrappedNivoPie data={data} is_money={false} />
+      )}
     </div>
   );
 };
