@@ -118,9 +118,13 @@ export default class IndicatorPanel extends React.Component {
 
     return (
       <Fragment>
-        <a role="button" onClick={() => this.setState({ show_modal: true })}>
+        <button
+          className="btn-link"
+          onClick={() => this.setState({ show_modal: true })}
+          aria-label={`Discover more about ${indicator.name}`}
+        >
           {indicator.name}
-        </a>
+        </button>
         <StatelessModal
           show={this.state.show_modal}
           title={text_maker("indicator_display_title")}
