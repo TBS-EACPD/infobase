@@ -1,6 +1,10 @@
 import text from "../services.yaml";
 import { delivery_channels_keys } from "../shared.js";
-import { create_text_maker_component, Panel } from "../../../../components";
+import {
+  create_text_maker_component,
+  Panel,
+  DisplayTable,
+} from "../../../../components";
 import { WrappedNivoHBar } from "../../../../charts/wrapped_nivo";
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -26,22 +30,14 @@ export class ServiceChannels extends React.Component {
       },
       { max_channel_key: "", max_value: 0 }
     );
-
-    const data = _.chain(delivery_channels_keys)
-      .filter((key) =>
-        _.reduce(
-          service.service_report,
-          (previous_is_not_null, report) =>
-            previous_is_not_null || !_.isNull(report[`${key}_count`]),
-          false
-        )
+    const filtered_keys = _.filter(delivery_channels_keys, (key) =>
+      _.reduce(
+        service.service_report,
+        (previous_is_not_null, report) =>
+          previous_is_not_null || !_.isNull(report[`${key}_count`]),
+        false
       )
-      .map((key) => ({
-        id: key,
-        label: text_maker(key),
-        [text_maker(key)]: _.sumBy(service.service_report, `${key}_count`),
-      }))
-      .value();
+    );
 
     return (
       <Panel title={text_maker("single_service_channels_title")}>
@@ -53,22 +49,49 @@ export class ServiceChannels extends React.Component {
             max_value: max_value,
           }}
         />
-        <WrappedNivoHBar
-          data={data}
-          indexBy="label"
-          keys={_.map(delivery_channels_keys, (key) => text_maker(key))}
-          is_money={false}
-          colorBy={(d) => colors(d.id)}
-          margin={{
-            right: 10,
-            left: 227,
-            top: 0,
-            bottom: 50,
-          }}
-          bttm_axis={{
-            tickValues: 6,
-          }}
-        />
+        {window.is_a11y_mode ? (
+          <DisplayTable
+            data={_.map(filtered_keys, (key) => ({
+              label: text_maker(key),
+              value: _.sumBy(service.service_report, `${key}_count`),
+            }))}
+            column_configs={{
+              label: {
+                index: 0,
+                is_searchable: true,
+                header: text_maker("single_service_channels_title"),
+              },
+              value: {
+                index: 1,
+                header: text_maker("value"),
+              },
+            }}
+          />
+        ) : (
+          <WrappedNivoHBar
+            data={_.map(filtered_keys, (key) => ({
+              id: key,
+              label: text_maker(key),
+              [text_maker(key)]: _.sumBy(
+                service.service_report,
+                `${key}_count`
+              ),
+            }))}
+            indexBy="label"
+            keys={_.map(delivery_channels_keys, (key) => text_maker(key))}
+            is_money={false}
+            colorBy={(d) => colors(d.id)}
+            margin={{
+              right: 10,
+              left: 227,
+              top: 0,
+              bottom: 50,
+            }}
+            bttm_axis={{
+              tickValues: 6,
+            }}
+          />
+        )}
       </Panel>
     );
   }
