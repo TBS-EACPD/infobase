@@ -9,7 +9,6 @@ export { declare_top10_services_application_volume_panel } from "./top10_service
 export { declare_top10_website_visits_panel } from "./top10_services_website_visits.js";
 export { declare_high_application_volume_panel } from "./high_application_volume.js";
 export { ServiceOverview } from "./single_service_panels/service_overview.js";
-export { ServiceOverviewV2 } from "./single_service_panels/service_overview_v2.js";
 export { ServiceChannels } from "./single_service_panels/service_channels.js";
 export { ServiceStandards } from "./single_service_panels/service_standards.js";
 export { ServiceDigitalStatus } from "./single_service_panels/service_digital_status.js";
