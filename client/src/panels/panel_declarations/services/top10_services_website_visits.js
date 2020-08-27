@@ -13,6 +13,7 @@ import {
   infograph_href_template,
 } from "../shared.js";
 import { DisplayTable } from "../../../components";
+import { Fragment } from "react";
 
 const { text_maker, TM } = create_text_maker_component(text);
 const Dept = Subject.Dept;
@@ -85,6 +86,14 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
       formatter: "big_int",
     },
   };
+  const table_content = (
+    <DisplayTable
+      data={[...data].reverse()}
+      column_configs={column_configs}
+      unsorted_initial={true}
+    />
+  );
+
   return _.isEmpty(data) ? (
     <TM k="no_data" el="h2" />
   ) : (
@@ -97,78 +106,75 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
           highest_volume_value: _.last(data)[total_volume],
         }}
       />
-      <MediaQuery minWidth={992}>
-        <WrappedNivoHBar
-          indexBy={"id"}
-          custom_table={
-            <DisplayTable
-              data={[...data].reverse()}
-              column_configs={column_configs}
-              unsorted_initial={true}
-            />
-          }
-          keys={[total_volume]}
-          isInteractive={true}
-          enableLabel={true}
-          labelSkipWidth={30}
-          label={(d) => volume_formatter(d.value)}
-          data={data}
-          is_money={false}
-          colorBy={(d) => colors(d.id)}
-          padding={0.1}
-          enableGridY={false}
-          enableGridX={false}
-          margin={{
-            top: 20,
-            right: 20,
-            bottom: 50,
-            left: 370,
-          }}
-          bttm_axis={{
-            tickSize: 5,
-            tickValues: 4,
-            format: (d) => volume_formatter(d),
-          }}
-          left_axis={{
-            tickSize: 5,
-            tickValues: 6,
-            renderTick: (tick) => (
-              <g
-                key={tick.key}
-                transform={`translate(${tick.x - 10},${tick.y})`}
-              >
-                <a
-                  href={
-                    is_gov
-                      ? infograph_href_template(
-                          Dept.lookup(tick.key),
-                          "services"
-                        )
-                      : `#dept/${subject.id}/service-panels/${tick.key}`
-                  }
-                >
-                  <text
-                    textAnchor="end"
-                    dominantBaseline="end"
-                    style={{
-                      ...tick.theme.axis.ticks.text,
-                    }}
+      {window.is_a11y_mode ? (
+        table_content
+      ) : (
+        <Fragment>
+          <MediaQuery minWidth={992}>
+            <WrappedNivoHBar
+              indexBy={"id"}
+              custom_table={table_content}
+              keys={[total_volume]}
+              isInteractive={true}
+              enableLabel={true}
+              labelSkipWidth={30}
+              label={(d) => volume_formatter(d.value)}
+              data={data}
+              is_money={false}
+              colorBy={(d) => colors(d.id)}
+              padding={0.1}
+              enableGridY={false}
+              enableGridX={false}
+              margin={{
+                top: 20,
+                right: 20,
+                bottom: 50,
+                left: 370,
+              }}
+              bttm_axis={{
+                tickSize: 5,
+                tickValues: 4,
+                format: (d) => volume_formatter(d),
+              }}
+              left_axis={{
+                tickSize: 5,
+                tickValues: 6,
+                renderTick: (tick) => (
+                  <g
+                    key={tick.key}
+                    transform={`translate(${tick.x - 10},${tick.y})`}
                   >
-                    <TspanLineWrapper text={get_name(tick.key)} width={70} />
-                  </text>
-                </a>
-              </g>
-            ),
-          }}
-        />
-      </MediaQuery>
-      <MediaQuery maxWidth={991}>
-        <DisplayTable
-          data={[...data].reverse()}
-          column_configs={column_configs}
-          unsorted_initial={true}
-        />
-      </MediaQuery>
+                    <a
+                      href={
+                        is_gov
+                          ? infograph_href_template(
+                              Dept.lookup(tick.key),
+                              "services"
+                            )
+                          : `#dept/${subject.id}/service-panels/${tick.key}`
+                      }
+                    >
+                      <text
+                        textAnchor="end"
+                        dominantBaseline="end"
+                        style={{
+                          ...tick.theme.axis.ticks.text,
+                        }}
+                      >
+                        <TspanLineWrapper
+                          text={get_name(tick.key)}
+                          width={70}
+                        />
+                      </text>
+                    </a>
+                  </g>
+                ),
+              }}
+            />
+          </MediaQuery>
+          <MediaQuery maxWidth={991}>{table_content}</MediaQuery>
+        </Fragment>
+      )}
     </div>
   );
 };

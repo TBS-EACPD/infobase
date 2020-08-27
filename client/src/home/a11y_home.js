@@ -58,6 +58,11 @@ const Home = (props) => {
             </a>
           </li>
           <li>
+            <a href="#orgs/gov/gov/infograph/services">
+              <TM k="home_a11y_gov_services" />
+            </a>
+          </li>
+          <li>
             <a href="#orgs/gov/gov/infograph/results">
               <TM k="home_a11y_gov_results" />
             </a>

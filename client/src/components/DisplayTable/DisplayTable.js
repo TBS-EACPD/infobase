@@ -148,9 +148,10 @@ export class DisplayTable extends React.Component {
         _.chain(row)
           .map((column_value, column_key) => {
             const col_config = col_configs_with_defaults[column_key];
-            const col_search_value = col_config.raw_formatter
-              ? col_config.raw_formatter(column_value)
-              : column_value;
+            const col_search_value =
+              col_config && col_config.raw_formatter
+                ? col_config.raw_formatter(column_value)
+                : column_value;
             return (
               _.isEmpty(searches[column_key]) ||
               _.includes(

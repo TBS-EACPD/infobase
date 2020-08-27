@@ -1,4 +1,5 @@
 import text from "./services.yaml";
+import { Fragment } from "react";
 import { Service } from "../../../models/services.js";
 
 import {
@@ -7,9 +8,11 @@ import {
   declare_panel,
   WrappedNivoHBar,
   StandardLegend,
+  util_components,
 } from "../shared.js";
 import { digital_status_keys } from "./shared.js";
 
+const { DisplayTable } = util_components;
 const { text_maker, TM } = create_text_maker_component(text);
 const can_online = text_maker("can_online");
 const cannot_online = text_maker("cannot_online");
@@ -80,23 +83,53 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
             least_digital_component[can_online] / services.length,
         }}
       />
-      <StandardLegend
-        items={_.map([can_online, cannot_online, not_applicable], (key) => ({
-          id: key,
-          label: key,
-          color: colors(key),
-        }))}
-        isHorizontal
-        LegendCheckBoxProps={{ isSolidBox: true }}
-      />
-      <WrappedNivoHBar
-        data={data}
-        is_money={false}
-        indexBy={"id"}
-        keys={[can_online, cannot_online, not_applicable]}
-        colorBy={(d) => colors(d.id)}
-        {...nivo_lang_props[window.lang]}
-      />
+      {window.is_a11y_mode ? (
+        <DisplayTable
+          data={data}
+          column_configs={{
+            id: {
+              index: 0,
+              is_searchable: true,
+              header: text_maker("client_interaction_point"),
+            },
+            [can_online]: {
+              index: 1,
+              header: can_online,
+            },
+            [cannot_online]: {
+              index: 2,
+              header: cannot_online,
+            },
+            [not_applicable]: {
+              index: 3,
+              header: not_applicable,
+            },
+          }}
+        />
+      ) : (
+        <Fragment>
+          <StandardLegend
+            items={_.map(
+              [can_online, cannot_online, not_applicable],
+              (key) => ({
+                id: key,
+                label: key,
+                color: colors(key),
+              })
+            )}
+            isHorizontal
+            LegendCheckBoxProps={{ isSolidBox: true }}
+          />
+          <WrappedNivoHBar
+            data={data}
+            is_money={false}
+            indexBy={"id"}
+            keys={[can_online, cannot_online, not_applicable]}
+            colorBy={(d) => colors(d.id)}
+            {...nivo_lang_props[window.lang]}
+          />
+        </Fragment>
+      )}
     </div>
   );
 };
