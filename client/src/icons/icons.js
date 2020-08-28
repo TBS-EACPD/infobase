@@ -736,6 +736,65 @@ const IconTable = (props) => {
   return <_IconWrapper {...props} viewbox_width={24} ChildSVG={SVGTable} />;
 };
 
+const IconRotatePhone = (props) => {
+  const SVGRotatePhone = () => (
+    <Fragment>
+      <path
+        d="M51.043,6.173c0,-2.759 -2.24,-5 -5,-5l-40,0c-2.76,0 -5,2.241 -5,5l0,69.27c0,2.76 2.24,5 5,5l40,0c2.76,0 5,-2.24 5,-5l0,-69.27Z"
+        style={{ fill: "#ebebeb", stroke: "#000", strokeWidth: "2px" }}
+      />
+      <path
+        d="M98.696,53.957c0,-2.76 -2.24,-5 -5,-5l-87.653,0c-2.76,0 -5,2.24 -5,5l0,40c0,2.76 2.24,5 5,5l87.653,0c2.76,0 5,-2.24 5,-5l0,-40Z"
+        style={{ fill: "#ebebeb", stroke: "#000", strokeWidth: "2px" }}
+      />
+      <path
+        d="M36.053,2.169c0,-0.549 -0.446,-0.996 -0.995,-0.996l-18.03,0c-0.549,0 -0.995,0.447 -0.995,0.996l0,1.992c0,0.549 0.446,0.995 0.995,0.995l18.03,0c0.549,0 0.995,-0.446 0.995,-0.995l0,-1.992Z"
+        style={{ stroke: "#000", strokeWidth: "2px", fill: "#000" }}
+      />
+      <path
+        d="M97.7,83.801c0.55,0 0.996,-0.447 0.996,-0.996l0,-17.696c0,-0.549 -0.446,-0.996 -0.996,-0.996l-1.991,0c-0.55,0 -0.996,0.447 -0.996,0.996l0,17.696c0,0.549 0.446,0.996 0.996,0.996l1.991,0Z"
+        style={{ stroke: "#000", strokeWidth: "2px", fill: "#000" }}
+      />
+      <path
+        id="Reply--small-"
+        d="M84.245,29.308l6.5,0l-11,11.5l-11,-11.5l6.5,0c0,-5.5 -4.5,-10 -10,-10c-2.8,0 -5.3,1.1 -7.1,2.9c2.4,-4.1 6.9,-6.9 12.1,-6.9c7.8,0 14,6.3 14,14Z"
+        style={{ fillRule: "nonzero", fill: "#000", stroke: "#000" }}
+      />
+    </Fragment>
+  );
+
+  return (
+    <_IconWrapper {...props} viewbox_width={100} ChildSVG={SVGRotatePhone} />
+  );
+};
+
+const IconExpandWindowWidth = (props) => {
+  const SVGExpandWindowWidth = () => (
+    <Fragment>
+      <path
+        d="M98.827,25.489c0,-13.492 -10.954,-24.446 -24.446,-24.446l-48.892,0c-13.492,0 -24.446,10.954 -24.446,24.446l0,49.022c0,13.492 10.954,24.446 24.446,24.446l48.892,0c13.492,0 24.446,-10.954 24.446,-24.446l0,-49.022Z"
+        style={{ fill: "#ebebeb", stroke: "#000", strokeWidth: "2px" }}
+      />
+      <path
+        d="M12.326,52.989l0,5.551l-8.54,-8.54l8.54,-8.54l0,5.551l26.402,0l0,5.978l-26.402,0Z"
+        style={{ fill: "#ebebeb", stroke: "#000", strokeWidth: "2px" }}
+      />
+      <path
+        d="M87.666,52.989l0,5.551l8.54,-8.54l-8.54,-8.54l0,5.551l-26.401,0l0,5.978l26.401,0Z"
+        style={{ fill: "#ebebeb", stroke: "#000", strokeWidth: "2px" }}
+      />
+    </Fragment>
+  );
+
+  return (
+    <_IconWrapper
+      {...props}
+      viewbox_width={100}
+      ChildSVG={SVGExpandWindowWidth}
+    />
+  );
+};
+
 export {
   IconHome,
   IconFeedback,
@@ -764,4 +823,6 @@ export {
   IconGitHub,
   IconQuestion,
   IconTable,
+  IconRotatePhone,
+  IconExpandWindowWidth,
 };
