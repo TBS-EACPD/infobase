@@ -62,14 +62,14 @@ general_enquiries_social_media:
   transform: [handlebars, markdown]
   en: |
     You can also reach us through social media at the following channels:  
-    Twitter" "https://twitter.com/TBS_Canada?lang=en"}}  
-    Facebook" "https://www.facebook.com/YourGovernmentatWork/"}}  
-    LinkedIn" "https://www.linkedin.com/company/tbs-sct/"}}
+    {{ext_link "Twitter" "https://twitter.com/TBS_Canada?lang=en"}}  
+    {{ext_link "Facebook" "https://www.facebook.com/YourGovernmentatWork/"}}  
+    {{ext_link "LinkedIn" "https://www.linkedin.com/company/tbs-sct/"}}
   fr: |
     Vous pouvez egalement nouse rejoindre dans ces medias sociaux:  
-    Twitter" "https://twitter.com/SCT_Canada?lang=fr"}}  
-    Facebook" "https://www.facebook.com/Votregouvernementaloeuvre/"}}  
-    LinkedIn" "https://www.linkedin.com/company/tbs-sct/"}}
+    {{ext_link "Twitter" "https://twitter.com/SCT_Canada?lang=fr"}}  
+    {{ext_link "Facebook" "https://www.facebook.com/Votregouvernementaloeuvre/"}}  
+    {{ext_link "LinkedIn" "https://www.linkedin.com/company/tbs-sct/"}}
 
 general_enquiries_address:
   transform: [markdown]
