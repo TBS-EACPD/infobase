@@ -11,11 +11,15 @@
     z-index: 100;
     align-items: center;
     flex-direction: column;
-    padding: 5rem;
+    justify-content: space-evenly;
+
+    & > h2 {
+        margin: 0;
+        text-align: center;
+    }
 }
 
 .icon {
     width: 50%;
     display: block;
-    padding: 3rem 0;
 }
