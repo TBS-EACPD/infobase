@@ -11,6 +11,7 @@ import { SpinnerWrapper } from "../components/SpinnerWrapper.js";
 import { initialize_analytics } from "../core/analytics.js";
 
 export const app_reducer = (
+  //export not needed but dev tools will throw error about no key
   state = { lang: window.lang, show_rotate_landscape: true },
   { type, payload }
 ) => {

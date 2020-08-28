@@ -9,7 +9,7 @@ import {
   WrappedNivoBar,
   declare_panel,
 } from "../../shared.js";
-import RotateLandscape from "../../../../components/RotateLandscape/RotateLandscape";
+import { RotateLandscape } from "../../../../components";
 
 import text from "./internal_services.yaml";
 

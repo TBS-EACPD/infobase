@@ -10,7 +10,7 @@ import { WrappedNivoHBar } from "../wrapped_nivo/index.js";
 import { CanadaD3Component } from "./CanadaD3Component.js";
 
 import text from "./canada.yaml";
-import RotateLandscape from "../../components/RotateLandscape/RotateLandscape";
+import { RotateLandscape } from "../../components";
 
 const text_maker = create_text_maker(text);
 

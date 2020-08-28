@@ -12,7 +12,7 @@ import {
   declare_panel,
   NivoLineBarToggle,
 } from "../shared.js";
-import RotateLandscape from "../../../components/RotateLandscape/RotateLandscape";
+import { RotateLandscape } from "../../../components";
 
 import text from "./employee_age.yaml";
 

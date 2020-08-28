@@ -9,7 +9,7 @@ import { Fragment } from "react";
 
 const { TM, text_maker } = create_text_maker_component(text);
 
-class RotateLandscape extends React.Component {
+class LandscapeOverlay extends React.Component {
   render() {
     const { children, rotate_landscape, rotate_landscape_off } = this.props;
 
@@ -60,4 +60,7 @@ const mapDispatchToProps = (dispatch) => ({
   rotate_landscape_off: () => dispatch(rotate_landscape_off()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RotateLandscape);
+export const RotateLandscape = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LandscapeOverlay);
