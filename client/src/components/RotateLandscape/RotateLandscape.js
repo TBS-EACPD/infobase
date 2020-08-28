@@ -1,9 +1,9 @@
 import MediaQuery from "react-responsive";
 import "./RotateLandscape.scss";
 import text from "./RotateLandscape.yaml";
-import svgs from "./RotateLandscapeSVG.yaml";
+import { IconRotatePhone, IconExpandWindowWidth } from "../../icons/icons.js";
 import { create_text_maker_component } from "../misc_util_components";
-import { Fragment } from "react";
+import { get_static_url } from "../../request_utils";
 
 const { TM, text_maker } = create_text_maker_component(text);
 
@@ -17,10 +17,7 @@ export default class RotateLandscape extends React.Component {
         <MediaQuery maxDeviceWidth={567.98} orientation="portrait">
           <div className="overlay">
             <TM k="rotate_text" el="h2" style={{ color: "white" }} />
-            <div
-              className="icon"
-              dangerouslySetInnerHTML={{ __html: svgs.rotate_icon }}
-            />
+            <IconRotatePhone width="50%" />
             <button className="btn btn-ib-primary">
               {text_maker("close")}
             </button>
@@ -29,10 +26,7 @@ export default class RotateLandscape extends React.Component {
         <MediaQuery minDeviceWidth={568} maxWidth={567.98}>
           <div className="overlay">
             <TM k="expand_width_text" el="h2" style={{ color: "white" }} />
-            <div
-              className="icon"
-              dangerouslySetInnerHTML={{ __html: svgs.expand_width_icon }}
-            />
+            <IconExpandWindowWidth width="50%" />
           </div>
           <button className="btn btn-ib-primary">{text_maker("close")}</button>
         </MediaQuery>
