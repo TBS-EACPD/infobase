@@ -5,7 +5,7 @@ import svgs from "./RotateLandscapeSVG.yaml";
 import { create_text_maker_component } from "../misc_util_components";
 import { Fragment } from "react";
 
-const { TM } = create_text_maker_component(text);
+const { TM, text_maker } = create_text_maker_component(text);
 
 export default class RotateLandscape extends React.Component {
   render() {
@@ -21,6 +21,9 @@ export default class RotateLandscape extends React.Component {
               className="icon"
               dangerouslySetInnerHTML={{ __html: svgs.rotate_icon }}
             />
+            <button className="btn btn-ib-primary">
+              {text_maker("close")}
+            </button>
           </div>
         </MediaQuery>
         <MediaQuery minDeviceWidth={568} maxWidth={567.98}>
@@ -31,6 +34,7 @@ export default class RotateLandscape extends React.Component {
               dangerouslySetInnerHTML={{ __html: svgs.expand_width_icon }}
             />
           </div>
+          <button className="btn btn-ib-primary">{text_maker("close")}</button>
         </MediaQuery>
       </div>
     );
