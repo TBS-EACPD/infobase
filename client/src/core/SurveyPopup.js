@@ -13,7 +13,7 @@ import {
 const { TM, text_maker } = create_text_maker_component(text);
 
 const page_visit_increment = 1;
-const survey_campaign_end_date = new Date(2021, 3, 31).getTime();
+const survey_campaign_end_date = new Date(2020, 3, 31).getTime();
 
 const get_path_root = (path) =>
   _.chain(path).replace(/^\//, "").split("/").first().value();
