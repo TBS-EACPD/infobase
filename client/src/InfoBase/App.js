@@ -2,6 +2,8 @@ import axios from "axios";
 
 import { Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 
 import { HeaderNotification } from "../components/HeaderNotification";
 import { PageDetails } from "../components/PageDetails.js";
@@ -9,16 +11,27 @@ import { SpinnerWrapper } from "../components/SpinnerWrapper.js";
 import { initialize_analytics } from "../core/analytics.js";
 
 export const app_reducer = (
-  state = { lang: window.lang },
+  state = { lang: window.lang, show_rotate_landscape: true },
   { type, payload }
 ) => {
-  //doesn't do anything yet...
+  switch (type) {
+    case "rotate_landscape":
+      return { ...state, show_rotate_landscape: false };
+  }
   return state;
 };
 
+export const rotate_landscape_off = () => {
+  return {
+    type: "rotate_landscape",
+  };
+};
+
+const store = createStore(app_reducer);
+
+import { ErrorBoundary } from "../core/ErrorBoundary.js";
 import { DevFip } from "../core/DevFip.js";
 import { EasyAccess } from "../core/EasyAccess.js";
-import { ErrorBoundary } from "../core/ErrorBoundary.js";
 import { has_local_storage } from "../core/feature_detection.js";
 import { InsertRuntimeFooterLinks } from "../core/InsertRuntimeFooterLinks.js";
 import { ReactUnmounter } from "../core/NavComponents.js";
@@ -172,141 +185,146 @@ export class App extends React.Component {
           window.is_a11y_mode ? "a11y" : "standard"
         }`}
       >
-        <ErrorBoundary>
-          <DevFip />
-          <InsertRuntimeFooterLinks />
-          <EasyAccess />
-          {this.state.showNotification && (
-            <HeaderNotification
-              text={this.state.message}
-              hideNotification={this.hideNotification}
-            />
-          )}
-          {has_local_storage && (
-            <SurveyPopup
-              toggleSurvey={this.toggleSurvey}
-              showSurvey={this.state.showSurvey}
-            />
-          )}
-          <ReactUnmounter />
-          {!window.is_a11y_mode && <TooltipActivator />}
-          <Suspense fallback={<SpinnerWrapper config_name={"route"} />}>
-            <Switch>
-              <Route
-                path="/error-boundary-test"
-                component={() => {
-                  throw "This route throws errors!";
-                }}
+        <Provider store={store}>
+          <ErrorBoundary>
+            <DevFip />
+            <InsertRuntimeFooterLinks />
+            <EasyAccess />
+            {this.state.showNotification && (
+              <HeaderNotification
+                text={this.state.message}
+                hideNotification={this.hideNotification}
               />
-              <Route path="/metadata/:data_source?" component={MetaData} />
-              <Route path="/igoc/:grouping?" component={IgocExplorer} />
-              <Redirect
-                from="/resource-explorer/:hierarchy_scheme?/:doc?"
-                to="/tag-explorer/:hierarchy_scheme?"
+            )}
+            {has_local_storage && (
+              <SurveyPopup
+                toggleSurvey={this.toggleSurvey}
+                showSurvey={this.state.showSurvey}
               />
-              <Route
-                path="/tag-explorer/:hierarchy_scheme?/:period?"
-                component={TagExplorer}
-              />
-              <Route
-                path="/orgs/:level/:subject_id/infograph/:active_bubble_id?/:options?/"
-                component={Infographic}
-              />
-              <Route path="/glossary/:active_key?" component={Glossary} />
-              <Redirect
-                from="/budget-measures/:first_column?/:selected_value?/:budget_year?"
-                to="/budget-tracker/:first_column?/:selected_value?/:budget_year?"
-              />
-              <Route
-                path="/budget-tracker/:first_column?/:selected_value?/:budget_year?"
-                component={BudgetMeasuresRoute}
-              />
-              <Route path="/rpb/:config?" component={ReportBuilder} />
-              <Route path="/about" component={About} />
-              <Route
-                path="/contact"
-                render={() => <Contact toggleSurvey={this.toggleSurvey} />}
-              />
-              <Route path="/faq/:selected_qa_key?" component={FAQ} />
-              <Route
-                path="/compare_estimates/:h7y_layout?"
-                component={EstimatesComparison}
-              />
-              <Route path="/privacy" component={PrivacyStatement} />
-              <Route
-                path="/diff/:org_id?/:crso_id?/:program_id?"
-                component={TextDiff}
-              />
-              <Route
-                path="/lab"
-                render={() => <Lab toggleSurvey={this.toggleSurvey} />}
-              />
-              <Route
-                path="/panel/:level?/:subject_id?/:panel_key?"
-                component={IsolatedPanel}
-              />
-              <Route
-                path="/:org_level/:org_id/indicator/:id?"
-                component={IndicatorPanel}
-              />
-              <Redirect
-                from="/graph/:level?/:panel?/:id?"
-                to="/panel-inventory/:level?/:panel?/:id?"
-              />
-              <Route
-                path="/panel-inventory/:level?/:panel?/:id?"
-                component={PanelInventory}
-              />
-              <Route path="/footnote-inventory" component={FootnoteInventory} />
-              <Route
-                path="/graphiql/:encoded_query?/:encoded_variables?"
-                component={GraphiQL}
-              />
-              {!window.is_a11y_mode && (
+            )}
+            <ReactUnmounter />
+            {!window.is_a11y_mode && <TooltipActivator />}
+            <Suspense fallback={<SpinnerWrapper config_name={"route"} />}>
+              <Switch>
                 <Route
-                  path="/partition/:perspective?/:data_type?"
-                  component={PartitionRoute}
+                  path="/error-boundary-test"
+                  component={() => {
+                    throw "This route throws errors!";
+                  }}
                 />
-              )}
-              {!window.is_a11y_mode && (
+                <Route path="/metadata/:data_source?" component={MetaData} />
+                <Route path="/igoc/:grouping?" component={IgocExplorer} />
+                <Redirect
+                  from="/resource-explorer/:hierarchy_scheme?/:doc?"
+                  to="/tag-explorer/:hierarchy_scheme?"
+                />
                 <Route
-                  path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?"
-                  component={TreeMap}
+                  path="/tag-explorer/:hierarchy_scheme?/:period?"
+                  component={TagExplorer}
                 />
-              )}
-              {window.is_a11y_mode && (
                 <Route
-                  path="/start/:no_basic_equiv?"
-                  render={() => <A11yHome toggleSurvey={this.toggleSurvey} />}
+                  path="/orgs/:level/:subject_id/infograph/:active_bubble_id?/:options?/"
+                  component={Infographic}
                 />
-              )}
-              <Route
-                path="/start"
-                render={() =>
-                  window.is_a11y_mode ? (
-                    <A11yHome toggleSurvey={this.toggleSurvey} />
-                  ) : (
-                    <Home />
-                  )
-                }
+                <Route path="/glossary/:active_key?" component={Glossary} />
+                <Redirect
+                  from="/budget-measures/:first_column?/:selected_value?/:budget_year?"
+                  to="/budget-tracker/:first_column?/:selected_value?/:budget_year?"
+                />
+                <Route
+                  path="/budget-tracker/:first_column?/:selected_value?/:budget_year?"
+                  component={BudgetMeasuresRoute}
+                />
+                <Route path="/rpb/:config?" component={ReportBuilder} />
+                <Route path="/about" component={About} />
+                <Route
+                  path="/contact"
+                  render={() => <Contact toggleSurvey={this.toggleSurvey} />}
+                />
+                <Route path="/faq/:selected_qa_key?" component={FAQ} />
+                <Route
+                  path="/compare_estimates/:h7y_layout?"
+                  component={EstimatesComparison}
+                />
+                <Route path="/privacy" component={PrivacyStatement} />
+                <Route
+                  path="/diff/:org_id?/:crso_id?/:program_id?"
+                  component={TextDiff}
+                />
+                <Route
+                  path="/lab"
+                  render={() => <Lab toggleSurvey={this.toggleSurvey} />}
+                />
+                <Route
+                  path="/panel/:level?/:subject_id?/:panel_key?"
+                  component={IsolatedPanel}
+                />
+                <Route
+                  path="/:org_level/:org_id/indicator/:id?"
+                  component={IndicatorPanel}
+                />
+                <Redirect
+                  from="/graph/:level?/:panel?/:id?"
+                  to="/panel-inventory/:level?/:panel?/:id?"
+                />
+                <Route
+                  path="/panel-inventory/:level?/:panel?/:id?"
+                  component={PanelInventory}
+                />
+                <Route
+                  path="/footnote-inventory"
+                  component={FootnoteInventory}
+                />
+                <Route
+                  path="/graphiql/:encoded_query?/:encoded_variables?"
+                  component={GraphiQL}
+                />
+                {!window.is_a11y_mode && (
+                  <Route
+                    path="/partition/:perspective?/:data_type?"
+                    component={PartitionRoute}
+                  />
+                )}
+                {!window.is_a11y_mode && (
+                  <Route
+                    path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?"
+                    component={TreeMap}
+                  />
+                )}
+                {window.is_a11y_mode && (
+                  <Route
+                    path="/start/:no_basic_equiv?"
+                    render={() => <A11yHome toggleSurvey={this.toggleSurvey} />}
+                  />
+                )}
+                <Route
+                  path="/start"
+                  render={() =>
+                    window.is_a11y_mode ? (
+                      <A11yHome toggleSurvey={this.toggleSurvey} />
+                    ) : (
+                      <Home />
+                    )
+                  }
+                />
+                <Route
+                  path="/"
+                  render={() =>
+                    window.is_a11y_mode ? (
+                      <A11yHome toggleSurvey={this.toggleSurvey} />
+                    ) : (
+                      <Home />
+                    )
+                  }
+                />
+              </Switch>
+              <PageDetails
+                showSurvey={this.state.showSurvey}
+                toggleSurvey={this.toggleSurvey}
               />
-              <Route
-                path="/"
-                render={() =>
-                  window.is_a11y_mode ? (
-                    <A11yHome toggleSurvey={this.toggleSurvey} />
-                  ) : (
-                    <Home />
-                  )
-                }
-              />
-            </Switch>
-            <PageDetails
-              showSurvey={this.state.showSurvey}
-              toggleSurvey={this.toggleSurvey}
-            />
-          </Suspense>
-        </ErrorBoundary>
+            </Suspense>
+          </ErrorBoundary>
+        </Provider>
       </div>
     );
   }

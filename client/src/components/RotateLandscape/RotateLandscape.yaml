@@ -5,3 +5,7 @@ rotate_text:
 expand_width_text:
   en: Please expand the width of the window
   fr: TODO
+
+show_anyway:
+  en: Show Anyway
+  fr: TODO
