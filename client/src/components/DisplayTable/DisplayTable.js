@@ -172,9 +172,9 @@ export class DisplayTable extends React.Component {
               )
             : _.sortBy(unsorted_array, (row) =>
                 is_number_string_date(row[sort_by])
-                  ? /*FIXME: sorting data containing BOTH string and date is not consistent 
+                  ? /*Please Leave On: sorting data containing BOTH string and date is not consistent 
                  It's probably trying to cast string into date object and if that fails, it probably stops sorting.
-                 We'll have to find all locations of where date is used and update it.*/
+                 Better off just building a sort function to handle it*/
                     row[sort_by]
                   : Number.NEGATIVE_INFINITY
               );
