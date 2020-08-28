@@ -43,7 +43,7 @@ const DetailedAmountsByDoc = ({ amounts_by_doc }) => {
         <div className="h6 heavy-weight">
           <TM k="doc_breakout_details" />
         </div>
-        <table className="table tale-condensed">
+        <table className="table table-condensed">
           <thead>
             <tr>
               <th scope="column">

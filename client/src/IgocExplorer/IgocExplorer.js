@@ -83,10 +83,7 @@ const scheme = {
 };
 
 const IgocExplorer = ({ match }) => {
-  let grouping = _.get(match, "params.grouping");
-  if (_.isEmpty(grouping)) {
-    grouping = "portfolio";
-  }
+  const grouping = _.get(match, "params.grouping") || "portfolio";
 
   const get_initial_state = ({ grouping }) => ({
     grouping,

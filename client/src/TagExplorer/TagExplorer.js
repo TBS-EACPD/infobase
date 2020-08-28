@@ -113,7 +113,7 @@ class ExplorerForTags extends React.Component {
   handleQueryChange = (new_query) => {
     this.setState({
       query: new_query,
-      loading: new_query.length.length > 3 ? true : undefined,
+      loading: new_query.length > 3 ? true : undefined,
     });
     this.debounced_set_query(new_query);
   };
