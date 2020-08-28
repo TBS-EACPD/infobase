@@ -26,7 +26,7 @@ class LandscapeOverlay extends React.Component {
                   className="btn btn-ib-primary"
                   onClick={rotate_landscape_off}
                 >
-                  {text_maker("close")}
+                  {text_maker("show_anyway")}
                 </button>
               </div>
             </MediaQuery>
@@ -38,12 +38,9 @@ class LandscapeOverlay extends React.Component {
                   className="btn btn-ib-primary"
                   onClick={rotate_landscape_off}
                 >
-                  {text_maker("close")}
+                  {text_maker("show_anyway")}
                 </button>
               </div>
-              <button className="btn btn-ib-primary">
-                {text_maker("close")}
-              </button>
             </MediaQuery>
           </Fragment>
         ) : null}
