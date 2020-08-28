@@ -349,9 +349,9 @@ export class Explorer extends React.Component {
 // explorer (Component): Component to handle explorer logic/rendering
 // get_initial_state (function): Function that generates the initial explorer state
 // map_state_to_props_from_memoized_funcs (function)
-// data (objet): Any data to pass as props to explorer
+// data (object): Any data to pass as props to explorer
 // load_requirements (object): Data required to be loaded
-// middlware (functions): Middleware functions to apply to the redux store
+// middleware (functions): Middleware functions to apply to the redux store
 // update_explorer (function): Function to be called by ComponentDidUpdate()
 
 export class ExplorerContainer extends React.Component {
