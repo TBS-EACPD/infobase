@@ -202,7 +202,6 @@ export class WrappedNivoHBar extends React.Component {
       isInteractive,
       motionDamping,
       motionStiffness,
-      mobile_overlay,
     } = this.props;
 
     const table =
