@@ -80,6 +80,11 @@ const subject_link = (node) => (
   </span>
 );
 
+const date_as_number = (value) => {
+  const time = new Date(value).getTime();
+  return _.isNaN(time) ? Number.POSITIVE_INFINITY : time;
+};
+
 const indicator_table_from_list = (indicator_list, subject) => {
   const ind_map = _.chain(indicator_list)
     .map((ind) => [
@@ -151,6 +156,14 @@ const indicator_table_from_list = (indicator_list, subject) => {
       header: text_maker("date_to_achieve"),
       formatter: (val) => fmt_plain_string_date(val),
       raw_formatter: (val) => fmt_plain_string_date(val),
+      sort_func: (a, b) => {
+        if (a && b) {
+          const a_time = date_as_number(a);
+          const b_time = date_as_number(b);
+          return sort_func_template(a_time, b_time);
+        }
+        return 0;
+      },
     },
     status: {
       index: 5,
