@@ -18,7 +18,7 @@ import {
   declare_panel,
   TspanLineWrapper,
 } from "../../shared.js";
-import RotateLandscape from "../../../../components/RotateLandscape/RotateLandscape";
+import { RotateLandscape } from "../../../../components";
 
 import text1 from "./budget_measures_panel.yaml";
 import "./budget_measures_panel.scss";

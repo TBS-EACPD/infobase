@@ -18,7 +18,7 @@ import {
 
 import text from "./goco.yaml";
 import { DisplayTable } from "../../../../components";
-import RotateLandscape from "../../../../components/RotateLandscape/RotateLandscape";
+import { RotateLandscape } from "../../../../components";
 
 const { SmartDisplayTable } = util_components;
 const { Tag } = Subject;

@@ -12,7 +12,7 @@ import {
   util_components,
   WrappedNivoLine,
 } from "../../shared.js";
-import RotateLandscape from "../../../../components/RotateLandscape/RotateLandscape.js";
+import { RotateLandscape } from "../../../../components";
 
 import { text_maker, TM } from "./gnc_text_provider.js";
 

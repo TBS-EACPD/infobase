@@ -14,7 +14,7 @@ import {
   util_components,
   declare_panel,
 } from "../../shared.js";
-import RotateLandscape from "../../../../components/RotateLandscape/RotateLandscape";
+import { RotateLandscape } from "../../../../components";
 
 import text from "./auth_exp_planned_spending.yaml";
 import "./auth_exp_planned_spending.scss";
