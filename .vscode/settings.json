@@ -2,4 +2,5 @@
   "[javascript]": {
     "editor.formatOnSave": true
   },
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
 }
