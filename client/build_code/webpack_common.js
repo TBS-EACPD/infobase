@@ -1,3 +1,4 @@
+const std_lib_path = require("path");
 const _ = require("lodash");
 const webpack = require("webpack");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
@@ -251,6 +252,9 @@ function create_config({
     }),
     optimization: get_optimizations(is_prod_build, bundle_stats),
     devtool: is_prod_build ? false : "inline-source-map",
+    resolve: {
+      modules: [std_lib_path.resolve(__dirname, "../src/"), "node_modules/"],
+    },
   };
 }
 
