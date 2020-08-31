@@ -40,6 +40,14 @@ export const shallowEqualObjectsOverKeys = (obj1, obj2, keys_to_compare) =>
     true
   );
 
+export const shallowEqualObjectsExceptKeys = (obj1, obj2, keys_to_ignore) => {
+  return _.isEqualWith(
+    obj1,
+    obj2,
+    (val1, val2, key) => val1 === val2 || _.includes(keys_to_ignore, key)
+  );
+};
+
 export const retry_promise = (promise_to_try, retries = 2, interval = 500) => {
   return new Promise((resolve, reject) => {
     promise_to_try()
@@ -120,3 +128,65 @@ export const SafeJSURL = {
 
 export const generate_href = (url) =>
   url.startsWith("http") ? url : `https://${url}`;
+
+export function cached_property(elementDescriptor) {
+  const { kind, key, descriptor } = elementDescriptor;
+  if (kind !== "method") {
+    throw Error("@bound decorator can only be used on methods");
+  }
+  const og_method = descriptor.value;
+  const cache_name = `_${key}_cached_val`;
+  function new_method() {
+    if (!this[cache_name]) {
+      this[cache_name] = og_method.call(this);
+    }
+    return this[cache_name];
+  }
+  descriptor.value = new_method;
+  return elementDescriptor;
+}
+
+export function abstract(elementDescriptor) {
+  const { kind, key, descriptor } = elementDescriptor;
+  if (kind !== "method") {
+    throw Error("@bound decorator can only be used on methods");
+  }
+  descriptor.value = function () {
+    throw `NotImplemented: ${key}`;
+  };
+  return elementDescriptor;
+}
+
+export function bound(elementDescriptor) {
+  //see https://github.com/mbrowne/bound-decorator/blob/master/src/bound.js
+  const { kind, key, descriptor } = elementDescriptor;
+  if (kind !== "method") {
+    throw Error("@bound decorator can only be used on methods");
+  }
+  const method = descriptor.value;
+  const initializer =
+    // check for private method
+    typeof key === "object"
+      ? function () {
+          return method.bind(this);
+        }
+      : // For public and symbol-keyed methods (which are technically public),
+        // we defer method lookup until construction to respect the prototype chain.
+        function () {
+          return this[key].bind(this);
+        };
+
+  // Return both the original method and a bound function field that calls the method.
+  // (That way the original method will still exist on the prototype, avoiding
+  // confusing side-effects.)
+  elementDescriptor.extras = [
+    {
+      kind: "field",
+      key,
+      placement: "own",
+      initializer,
+      descriptor: { ...descriptor, value: undefined },
+    },
+  ];
+  return elementDescriptor;
+}

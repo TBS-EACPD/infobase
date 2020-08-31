@@ -3,56 +3,24 @@ import { StandardRouteContainer } from "../core/NavComponents.js";
 import { createSelector } from "reselect";
 
 //drilldown stuff
-import { combineReducers, createStore } from "redux";
-import { Provider, connect } from "react-redux";
 import { create_igoc_hierarchy } from "./hierarchies.js";
 import { ExplorerForIgoc } from "./explorer_view.js";
 import { filter_hierarchy } from "../explorer_common/hierarchy_tools.js";
 import { igoc_tmf as text_maker, TM } from "./igoc_explorer_text.js";
-import {
-  get_memoized_funcs,
-  initial_root_state,
-  root_reducer,
-  map_state_to_root_props_from_memoized_funcs,
-  map_dispatch_to_root_props,
-} from "../explorer_common/state_and_memoizing";
+import { AbstractExplorerScheme } from "explorer_common/abstract_explorer_scheme";
+import { cached_property, bound } from "general_utils.js";
 
-const map_state_to_props_from_memoized_funcs = (memoized_funcs) => {
-  const { get_scheme_props } = memoized_funcs;
-  const mapRootStateToRootProps = map_state_to_root_props_from_memoized_funcs(
-    memoized_funcs
-  );
+class IgocExplorerScheme extends AbstractExplorerScheme {
+  Component = ExplorerForIgoc;
+  constructor(grouping = "portfolio") {
+    super();
+    this.initial_scheme_state = {
+      grouping,
+      should_show_orgs_without_data: false,
+    };
+  }
 
-  return (state) => ({
-    ...mapRootStateToRootProps(state),
-    ...get_scheme_props(state),
-  });
-};
-
-const scheme = {
-  key: "igoc",
-
-  get_props_selector: () =>
-    createSelector(
-      _.property("igoc.grouping"),
-      _.property("igoc.should_show_orgs_without_data"),
-      (grouping, should_show_orgs_without_data) => {
-        return {
-          sort_func: _.identity,
-          grouping,
-          should_show_orgs_without_data,
-        };
-      }
-    ),
-
-  dispatch_to_props: (dispatch) => ({
-    on_toggle_orgs_without_data: () =>
-      dispatch({
-        type: "toggle_orgs_without_data",
-      }),
-  }),
-
-  reducer: (
+  scheme_reducer = (
     state = { grouping: "portfolio", should_show_orgs_without_data: true },
     action
   ) => {
@@ -68,86 +36,82 @@ const scheme = {
       default:
         return state;
     }
-  },
+  };
 
-  get_base_hierarchy_selector: () =>
-    createSelector(_.property("igoc.grouping"), (grouping) =>
-      create_igoc_hierarchy(grouping)
-    ),
-
-  get_filter_func_selector: () =>
-    createSelector(
-      _.property("igoc.should_show_orgs_without_data"),
-      (should_show_orgs_without_data) =>
-        should_show_orgs_without_data
-          ? _.identity
-          : (nodes) =>
-              filter_hierarchy(
-                nodes,
-                (node) => (_.get(node, "data.subject.tables.length") || 0) > 1,
-                { leaves_only: false, markSearchResults: false }
-              )
-    ),
-};
-
-//This code is a little strange. This components exists as an intermediary between redux and react-router.
-//Trying to use a functional component here results in re-creating the redux store, connecter functions and Container component.
-//Instead, this component will own those long-term objects and keep the store updated with URL changes.
-class ExplorerContainer extends React.Component {
-  constructor(props) {
-    super();
-
-    const { grouping } = props;
-
-    const scheme_key = scheme.key;
-
-    const reducer = combineReducers({
-      root: root_reducer,
-      [scheme_key]: scheme.reducer,
-    });
-
-    const mapStateToProps = map_state_to_props_from_memoized_funcs(
-      get_memoized_funcs([scheme])
+  @cached_property
+  get_base_hierarchy_selector() {
+    return createSelector(
+      (state) => state.scheme.grouping,
+      (grouping) => create_igoc_hierarchy(grouping)
     );
+  }
 
-    const mapDispatchToProps = (dispatch) => ({
-      ...map_dispatch_to_root_props(dispatch),
-      ...scheme.dispatch_to_props(dispatch),
-    });
+  @cached_property
+  get_filter_func_selector() {
+    return createSelector(
+      (state) => state.scheme.should_show_orgs_without_data,
+      (should_show_orgs_without_data) => {
+        if (should_show_orgs_without_data) {
+          // no filtering at all
+          return _.identity;
+        }
+        //a function like this can easily be split off from the class
+        return (nodes) =>
+          filter_hierarchy(
+            nodes,
+            (node) => (_.get(node, "data.subject.tables.length") || 0) > 1,
+            { leaves_only: false, markSearchResults: false }
+          );
+      }
+    );
+  }
 
-    const initialState = {
-      root: { ...initial_root_state, scheme_key },
-      [scheme_key]: {
-        grouping,
-        should_show_orgs_without_data: true,
-      },
-    };
+  @bound
+  map_dispatch_to_props(dispatch) {
+    const on_toggle_orgs_without_data = () =>
+      dispatch({
+        type: "toggle_orgs_without_data",
+      });
 
-    const connecter = connect(mapStateToProps, mapDispatchToProps);
-    const Container = connecter(ExplorerForIgoc);
-    const store = createStore(reducer, initialState);
-
-    this.state = {
-      store,
-      Container,
+    return {
+      ...super.map_dispatch_to_props(dispatch),
+      on_toggle_orgs_without_data,
     };
   }
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { grouping } = nextProps;
-    prevState.store.dispatch({
+
+  @bound
+  map_state_to_props(state) {
+    return {
+      ...super.map_state_to_props(state),
+      grouping: state.scheme.grouping,
+      should_show_orgs_without_data: state.scheme.should_show_orgs_without_data,
+    };
+  }
+
+  //This is a wrapper around dispatch to encapsulate the store
+  update_grouping(grouping) {
+    this.get_store().dispatch({
       type: "set_grouping",
       payload: grouping,
     });
-    return null;
+  }
+}
+
+//This component serves as a way to keep an explorer accross route changes
+class ExplorerContainer extends React.Component {
+  constructor(props) {
+    super();
+    const { grouping } = props;
+
+    this.explorer_scheme = new IgocExplorerScheme(grouping);
+  }
+  componentDidUpdate(_prevProps, _prevState, _snapshot) {
+    if (this.props.grouping !== _prevProps.grouping) {
+      this.explorer_scheme.update_grouping(this.props.grouping);
+    }
   }
   render() {
-    const { store, Container } = this.state;
-
-    return (
-      <Provider store={store}>
-        <Container />
-      </Provider>
-    );
+    return this.explorer_scheme.to_react_element();
   }
 }
 
@@ -156,7 +120,6 @@ const IgocExplorer = ({ match }) => {
   if (_.isEmpty(grouping)) {
     grouping = "portfolio";
   }
-  //sanitize grouping param
   return (
     <StandardRouteContainer
       breadcrumbs={[text_maker("igoc")]}
