@@ -1,115 +1,20 @@
 import { createSelector } from "reselect";
 
-import { filter_hierarchy } from "../../../../explorer_common/hierarchy_tools.js";
+import { ensure_loaded } from "core/lazy_loader.js";
+
+import { Subject } from "models/subject";
+import { Indicator } from "models/results";
+
+import { filter_hierarchy } from "explorer_common/hierarchy_tools.js";
+import { AbstractExplorerScheme } from "explorer_common/abstract_explorer_scheme";
+import { cached_property, bound } from "general_utils.js";
 
 import { create_full_results_hierarchy } from "./result_hierarchies.js";
+import ResultsExplorerDisplay from "./result_drilldown_display";
 
-import { ensure_loaded, Subject, Results } from "../../shared.js";
-
-const { get_by_guid } = Subject;
-
-const { Indicator } = Results;
-
-export const get_initial_single_subj_results_state = ({ subj_guid, doc }) => ({
-  data_loading: false, // smoother if responsibility for loading initial state data falls outside redux, so assume start with data loaded
-  doc,
-  subject_guid: subj_guid || "dept_1",
-  status_key_whitelist: [],
-});
-
-export const single_subj_results_scheme = {
-  key: "single_subj_results",
-  title: "Single Subject Results",
-  initial_state: get_initial_single_subj_results_state({}),
-  get_sort_func_selector: () =>
-    _.constant((list) => _.sortBy(list, "data.name")),
-  get_base_hierarchy_selector: () =>
-    createSelector(
-      [
-        (state) => state.single_subj_results.doc,
-        (state) => state.single_subj_results.subject_guid,
-      ],
-      (doc, subject_guid) =>
-        create_full_results_hierarchy({
-          subject_guid,
-          doc,
-          allow_no_result_branches: false,
-        })
-    ),
-  get_filter_func_selector: () =>
-    createSelector(
-      _.property("single_subj_results.status_key_whitelist"),
-      (status_key_whitelist) => {
-        if (_.isEmpty(status_key_whitelist)) {
-          return _.identity;
-        }
-        return (nodes) =>
-          filter_hierarchy(
-            nodes,
-            (node) =>
-              _.includes(
-                status_key_whitelist,
-                _.get(node, "data.indicator.status_key")
-              ),
-            { leaves_only: false, markSearchResults: false }
-          );
-      }
-    ),
-  get_props_selector: () => {
-    const is_status_filter_enabled_selector = createSelector(
-      _.property("single_subj_results.status_key_whitelist"),
-      (whitelist) => _.nonEmpty(whitelist)
-    );
-
-    const get_subj = createSelector(
-      _.property("single_subj_results.subject_guid"),
-      (guid) => get_by_guid(guid)
-    );
-
-    return (augmented_state) => {
-      const {
-        single_subj_results: { data_loading, mode, doc, status_key_whitelist },
-      } = augmented_state;
-
-      const subject = get_subj(augmented_state);
-
-      const icon_counts =
-        !data_loading &&
-        _.chain(Indicator.get_flat_indicators(subject))
-          .filter({ doc: doc })
-          .groupBy("status_key")
-          .mapValues((group, status_key) => group.length)
-          .value();
-
-      return {
-        data_loading,
-        mode,
-        doc,
-        status_key_whitelist,
-
-        subject,
-        icon_counts,
-        is_status_filter_enabled: is_status_filter_enabled_selector(
-          augmented_state
-        ),
-      };
-    };
-  },
-  dispatch_to_props: (dispatch) => ({
-    set_doc: (doc, subject) =>
-      dispatch({
-        type: "set_doc",
-        payload: ensure_loaded({
-          subject: subject,
-          results: true,
-          result_docs: [doc],
-        }).then(() => doc),
-      }),
-    toggle_status_status_key: (key) =>
-      dispatch({ type: "status_click", payload: key }),
-    clear_status_filter: () => dispatch({ type: "clear_status_filter" }),
-  }),
-  reducer: (state = get_initial_single_subj_results_state({}), action) => {
+export default class ResultsExplorer extends AbstractExplorerScheme {
+  Component = ResultsExplorerDisplay;
+  scheme_reducer = (state = {}, action) => {
     const { type, payload } = action;
 
     switch (type) {
@@ -143,5 +48,126 @@ export const single_subj_results_scheme = {
       default:
         return state;
     }
-  },
-};
+  };
+
+  constructor(subject_guid, doc) {
+    super();
+    this.initial_scheme_state = {
+      data_loading: false,
+      doc,
+      status_key_whitelist: [],
+      subject_guid: subject_guid,
+    };
+  }
+
+  @cached_property
+  get_base_hierarchy_selector() {
+    return createSelector(
+      [(state) => state.scheme.doc, (state) => state.scheme.subject_guid],
+      (doc, subject_guid) =>
+        create_full_results_hierarchy({
+          subject_guid,
+          doc,
+          allow_no_result_branches: false,
+        })
+    );
+  }
+
+  @cached_property
+  get_sort_func_selector() {
+    const sort_func = (list) => _.sortBy(list, "data.name");
+    return (_state) => sort_func;
+  }
+
+  @cached_property
+  get_filter_func_selector() {
+    return createSelector(
+      (state) => state.scheme.status_key_whitelist,
+      (status_key_whitelist) => {
+        if (_.isEmpty(status_key_whitelist)) {
+          return _.identity;
+        }
+        return (nodes) =>
+          filter_hierarchy(
+            nodes,
+            (node) =>
+              _.includes(
+                status_key_whitelist,
+                _.get(node, "data.indicator.status_key")
+              ),
+            { leaves_only: false, markSearchResults: false }
+          );
+      }
+    );
+  }
+
+  @cached_property
+  get_subject_selector() {
+    return createSelector(
+      (state) => state.scheme.subject_guid,
+      (guid) => Subject.get_by_guid(guid)
+    );
+  }
+
+  @cached_property
+  get_icon_counts_selector() {
+    return createSelector(
+      (state) => state.scheme.data_loading,
+      this.get_subject_selector(),
+      (state) => state.scheme.doc,
+      (is_loading, subject, doc) => {
+        if (is_loading) {
+          return false;
+        }
+        return _.chain(Indicator.get_flat_indicators(subject))
+          .filter({ doc: doc })
+          .groupBy("status_key")
+          .mapValues((group, status_key) => group.length)
+          .value();
+      }
+    );
+  }
+
+  @bound
+  map_state_to_props(state) {
+    const scheme_state = state.scheme;
+    const { status_key_whitelist, mode, data_loading, doc } = scheme_state;
+
+    const get_subject = this.get_subject_selector();
+    const get_icon_counts = this.get_icon_counts_selector();
+
+    return {
+      ...super.map_state_to_props(state),
+      data_loading,
+      mode,
+      doc,
+      status_key_whitelist,
+      subject: get_subject(state),
+      icon_counts: get_icon_counts(state),
+      is_status_filter_enabled: _.nonEmpty(status_key_whitelist),
+    };
+  }
+
+  @bound
+  map_dispatch_to_props(dispatch) {
+    const set_doc = (doc, subject) =>
+      dispatch({
+        type: "set_doc",
+        payload: ensure_loaded({
+          subject: subject,
+          results: true,
+          result_docs: [doc],
+        }).then(() => doc),
+      });
+    const toggle_status_status_key = (key) =>
+      dispatch({ type: "status_click", payload: key });
+    const clear_status_filter = () => dispatch({ type: "clear_status_filter" });
+
+    return {
+      ...super.map_dispatch_to_props(dispatch),
+      set_doc,
+      toggle_status_status_key,
+      clear_status_filter,
+    };
+  }
+}

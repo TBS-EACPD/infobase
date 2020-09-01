@@ -164,12 +164,12 @@ export class AbstractExplorerScheme {
     return connecter(this.Component);
   }
 
-  to_react_element() {
+  to_react_element(props) {
     const ContainerComponent = this.get_container_component();
     const store = this.get_store();
     return (
       <Provider store={store}>
-        <ContainerComponent />
+        <ContainerComponent {...props} />
       </Provider>
     );
   }
