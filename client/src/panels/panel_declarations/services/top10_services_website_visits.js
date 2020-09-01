@@ -197,7 +197,9 @@ export const declare_top10_website_visits_panel = () =>
         const { panel_args } = calculations;
         return (
           <InfographicPanel
-            title={text_maker("top10_website_visits_title")}
+            title={text_maker(
+              `top10_${panel_args.subject.level}_website_visits`
+            )}
             sources={sources}
           >
             <Top10WebsiteVisitsPanel panel_args={panel_args} />

@@ -183,7 +183,10 @@ top10_services_volume_text:
   en: |
     Below are the top 10 services with the highest application and telephone volume. **{{highest_service_name}}** had the most traffic with **{{fmt_big_int highest_service_value}}** applications and telephone calls.
   fr: TODO
-top10_website_visits_title:
+top10_gov_website_visits:
+  en: Top 10 organizations with highest website visits
+  fr: TODO
+top10_dept_website_visits:
   en: Top 10 services with highest website visits
   fr: TODO
 top10_gov_website_visits_text:
