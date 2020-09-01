@@ -16,7 +16,7 @@ import { text_maker, TM } from "./sobj_text_provider.js";
 
 const { sos } = businessConstants;
 const { std_years } = year_templates;
-const { Format, DisplayTable } = util_components;
+const { Format, SmartDisplayTable } = util_components;
 
 class SobjLine extends React.Component {
   constructor(props) {
@@ -123,7 +123,7 @@ class SobjLine extends React.Component {
         graph_height: "500px",
         colorBy: (d) => colors(d.id),
         custom_table: (
-          <DisplayTable
+          <SmartDisplayTable
             data={custom_table_data}
             column_configs={column_configs}
           />

@@ -26,8 +26,14 @@ const column_config_defaults = {
   sum_func: (sum, value) => sum + value,
   raw_formatter: _.identity,
   sum_initial_value: 0,
-  show_search: true,
 };
+const get_col_configs_with_defaults = (column_configs) =>
+  _.mapValues(column_configs, (supplied_column_config) => ({
+    // Set visibility_toggleable default based off index
+    visibility_toggleable: supplied_column_config.index !== 0,
+    ...column_config_defaults,
+    ...supplied_column_config,
+  }));
 
 /* Assumption: DisplayTable assumes 1st column to be string that describes its row
   - If total row exists, 1st column will have the word "Total"
@@ -40,14 +46,8 @@ export class DisplayTable extends React.Component {
 
     const { unsorted_initial, column_configs } = props;
 
-    const col_configs_with_defaults = _.mapValues(
-      column_configs,
-      (supplied_column_config) => ({
-        // Set visibility_toggleable default based off index
-        visibility_toggleable: supplied_column_config.index !== 0,
-        ...column_config_defaults,
-        ...supplied_column_config,
-      })
+    const col_configs_with_defaults = get_col_configs_with_defaults(
+      column_configs
     );
 
     const visible_col_keys = _.chain(col_configs_with_defaults)
@@ -97,7 +97,6 @@ export class DisplayTable extends React.Component {
           sort_func: (a, b) => ... <- (function) Custom sort func. Default to _.sortBy
           sum_initial_value: 0 <- (number) Default to 0
           visibility_toggleable: true <- (boolean) Defaults to false for index 0, true for all other indexes.
-          show_search: (boolean) Default to true
         },
       }
       */,
@@ -105,13 +104,8 @@ export class DisplayTable extends React.Component {
     } = this.props;
     const { sort_by, descending, searches, visible_col_keys } = this.state;
 
-    const col_configs_with_defaults = _.mapValues(
-      column_configs,
-      (supplied_column_config) => ({
-        visibility_toggleable: supplied_column_config.index !== 0,
-        ...column_config_defaults,
-        ...supplied_column_config,
-      })
+    const col_configs_with_defaults = get_col_configs_with_defaults(
+      column_configs
     );
     const NoDataMessage = () => (
       <tbody>
@@ -219,7 +213,6 @@ export class DisplayTable extends React.Component {
       .thru((csv_data) => d3.csvFormatRows(csv_data))
       .value();
 
-    const showing_sort = _.size(data) > 2;
     const showing_column_select =
       _.size(all_ordered_col_keys) > 2 &&
       _.every(
@@ -311,15 +304,14 @@ export class DisplayTable extends React.Component {
                 const sortable =
                   col_configs_with_defaults[column_key].is_sortable;
                 const searchable =
-                  col_configs_with_defaults[column_key].is_searchable &&
-                  col_configs_with_defaults[column_key].show_search;
+                  col_configs_with_defaults[column_key].is_searchable;
 
                 const current_search_input =
                   (searchable && searches[column_key]) || null;
 
                 return (
                   <th key={column_key} style={{ textAlign: "center" }}>
-                    {sortable && showing_sort && (
+                    {sortable && (
                       <div
                         onClick={() =>
                           this.setState({
@@ -454,6 +446,29 @@ export class DisplayTable extends React.Component {
           />
         )}
       </div>
+    );
+  }
+}
+// Wrapper component that picks column configs based on the size of data. Currently cannot pick table utils
+export class SmartDisplayTable extends React.Component {
+  render() {
+    const { data, show_search, show_sort, column_configs } = this.props;
+    const col_configs_with_defaults = get_col_configs_with_defaults(
+      column_configs
+    );
+
+    const showing_sort = show_sort || _.size(data) > 2;
+    const showing_search = show_search || _.size(data) > 5;
+    const smart_column_configs = _.mapValues(
+      col_configs_with_defaults,
+      (supplied_column_config) => ({
+        ...supplied_column_config,
+        is_searchable: supplied_column_config.is_searchable && showing_search,
+        is_sortable: supplied_column_config.is_sortable && showing_sort,
+      })
+    );
+    return (
+      <DisplayTable {...this.props} column_configs={smart_column_configs} />
     );
   }
 }

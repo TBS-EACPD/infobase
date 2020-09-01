@@ -3,7 +3,7 @@ import { ReportDetails, ReportDatasets } from "./shared.js";
 import {
   LabeledBox,
   AlertBanner,
-  DisplayTable,
+  SmartDisplayTable,
   Details,
   DropdownMenu,
 } from "../components/index.js";
@@ -161,7 +161,7 @@ class GranularView extends React.Component {
     };
 
     return (
-      <DisplayTable
+      <SmartDisplayTable
         data={table_data}
         column_configs={column_configs}
         util_components={display_table_custom_util}

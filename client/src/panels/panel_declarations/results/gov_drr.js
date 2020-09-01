@@ -17,7 +17,7 @@ import {
 import { DrrSummary } from "./drr_summary.js";
 import { LateDepartmentsBanner } from "./result_components.js";
 import {
-  DisplayTable,
+  SmartDisplayTable,
   default_dept_name_sort_func,
 } from "../../../components/index.js";
 
@@ -54,7 +54,7 @@ class GovDRR extends React.Component {
             <TM k="gov_drr_summary_org_table_text" />
           </div>
           <HeightClippedGraph clipHeight={330}>
-            <DisplayTable
+            <SmartDisplayTable
               table_name={"Government DRR"}
               data={rows_of_counts_by_dept}
               column_configs={column_configs}

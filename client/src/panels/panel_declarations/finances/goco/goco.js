@@ -13,9 +13,10 @@ import {
   get_formatter,
   declare_panel,
   TspanLineWrapper,
+  util_components,
 } from "../../shared.js";
 
-import { DisplayTable } from "../../../../components";
+const { SmartDisplayTable } = util_components;
 
 const { Tag } = Subject;
 
@@ -132,7 +133,7 @@ class Goco extends React.Component {
     };
 
     const custom_table = (
-      <DisplayTable
+      <SmartDisplayTable
         data={parent_table_data}
         column_configs={table_column_configs}
       />
@@ -147,7 +148,7 @@ class Goco extends React.Component {
       return {
         key: sa.name,
         table: (
-          <DisplayTable
+          <SmartDisplayTable
             data={child_table_data}
             column_configs={table_column_configs}
           />

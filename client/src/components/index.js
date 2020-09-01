@@ -44,6 +44,7 @@ export { DropdownMenu } from "./DropdownMenu.js";
 export { StatelessModal, FixedPopover } from "./modals_and_popovers";
 export {
   DisplayTable,
+  SmartDisplayTable,
   default_subject_name_sort_func,
   default_dept_name_sort_func,
   sort_func_template,
