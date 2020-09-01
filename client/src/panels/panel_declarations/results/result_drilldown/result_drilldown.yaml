@@ -66,9 +66,9 @@ result_counts_dp_dept:
 result_counts_dp_cr:
   transform: [handlebars,markdown]
   en: |
-    In {{doc_year}}, **{{subject.name.dept}}** is seeking to achieve **{{fmt_big_int num_results}}** {{plural_branch num_results "result" "results"}} under the {{gl_tt "Core Responsibility" "CR"}} **"{{subject.name}}"** comprised of **{{fmt_big_int num_programs}}** {{plural_branch num_programs "program" "programs"}}. {{> "future_tense_results_progress_fragment_en"}}
+    In {{doc_year}}, **{{subject.dept.name}}** is seeking to achieve **{{fmt_big_int num_results}}** {{plural_branch num_results "result" "results"}} under the {{gl_tt "Core Responsibility" "CR"}} **"{{subject.name}}"** comprised of **{{fmt_big_int num_programs}}** {{plural_branch num_programs "program" "programs"}}. {{> "future_tense_results_progress_fragment_en"}}
   fr: |
-    En {{doc_year}}, **{{subject.name.dept}}** cherche à rencontrer **{{fmt_big_int num_results}}** {{plural_branch num_results "résultat" "résultats"}} sous la {{gl_tt "responsabilité essentielle" "CR"}} **«{{subject.name}}»** appuyé par **{{fmt_big_int num_programs}}** {{plural_branch num_programs "programme" "programmes"}}. {{> "future_tense_results_progress_fragment_fr"}}
+    En {{doc_year}}, **{{subject.dept.name}}** cherche à rencontrer **{{fmt_big_int num_results}}** {{plural_branch num_results "résultat" "résultats"}} sous la {{gl_tt "responsabilité essentielle" "CR"}} **«{{subject.name}}»** appuyé par **{{fmt_big_int num_programs}}** {{plural_branch num_programs "programme" "programmes"}}. {{> "future_tense_results_progress_fragment_fr"}}
 result_counts_dp_prog:
   transform: [handlebars,markdown]
   en: |
