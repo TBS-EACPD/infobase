@@ -105,8 +105,8 @@ class ExplorerContainer extends React.Component {
 
     this.explorer_scheme = new IgocExplorerScheme(grouping);
   }
-  componentDidUpdate(_prevProps, _prevState, _snapshot) {
-    if (this.props.grouping !== _prevProps.grouping) {
+  componentDidUpdate(prevProps) {
+    if (this.props.grouping !== prevProps.grouping) {
       this.explorer_scheme.update_grouping(this.props.grouping);
     }
   }
