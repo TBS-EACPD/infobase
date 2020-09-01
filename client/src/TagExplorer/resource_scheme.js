@@ -1,30 +1,27 @@
 import { createSelector } from "reselect";
+import {
+  cached_property,
+  bound,
+  shallowEqualObjectsExceptKeys,
+  sanitized_dangerous_inner_html,
+} from "general_utils";
 
+import { AbstractExplorerScheme } from "explorer_common/abstract_explorer_scheme";
 import {
   provide_sort_func_selector,
   get_resources_for_subject,
-} from "../explorer_common/resource_explorer_common.js";
+} from "explorer_common/resource_explorer_common.js";
 import {
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,
-} from "../explorer_common/hierarchy_tools.js";
+} from "explorer_common/hierarchy_tools.js";
 
-import { infograph_href_template } from "../link_utils.js";
-import {
-  shallowEqualObjectsOverKeys,
-  sanitized_dangerous_inner_html,
-} from "../general_utils.js";
-import { year_templates } from "../models/years.js";
-import { trivial_text_maker as text_maker } from "../models/text.js";
+import { infograph_href_template } from "link_utils.js";
+import { trivial_text_maker as text_maker } from "models/text.js";
 
 import { related_tags_row } from "./tag_hierarchy_utils.js";
-import {
-  hierarchy_scheme_configs,
-  default_scheme_id,
-} from "./hierarchy_scheme_configs.js";
-
-const { planning_years } = year_templates;
-const planning_year = _.first(planning_years);
+import { hierarchy_scheme_configs } from "./hierarchy_scheme_configs.js";
+import TagExplorerComponent from "./TagExplorerComponent.js";
 
 function create_resource_hierarchy({ hierarchy_scheme, year }) {
   const hierarchy_scheme_config = hierarchy_scheme_configs[hierarchy_scheme];
@@ -195,37 +192,74 @@ function create_resource_hierarchy({ hierarchy_scheme, year }) {
   return flat_nodes;
 }
 
-const get_initial_resource_state = ({ hierarchy_scheme, year }) => {
-  const scheme_id = hierarchy_scheme || default_scheme_id;
+export class ResourceScheme extends AbstractExplorerScheme {
+  Component = TagExplorerComponent;
+  constructor(initial_hierarchy_key, initial_year) {
+    super();
 
-  const can_roll_up = hierarchy_scheme_configs[scheme_id].can_roll_up;
+    const can_roll_up =
+      hierarchy_scheme_configs[initial_hierarchy_key].can_roll_up;
 
-  return {
-    hierarchy_scheme: scheme_id,
-    year: year || planning_year,
-    sort_col: can_roll_up ? "spending" : "name",
-    is_descending: can_roll_up,
-  };
-};
+    this.initial_scheme_state = {
+      hierarchy_scheme: initial_hierarchy_key,
+      year: initial_year,
+      sort_col: can_roll_up ? "spending" : "name",
+      is_descending: can_roll_up,
+    };
+  }
 
-const resource_scheme = {
-  key: "resources",
-  get_sort_func_selector: () => provide_sort_func_selector("resources"),
-  get_props_selector: () => {
-    return (augmented_state) => augmented_state.resources;
-  },
-  dispatch_to_props: (dispatch) => ({
-    col_click: (col_key) =>
-      dispatch({ type: "column_header_click", payload: col_key }),
-  }),
-  //this helps the URL override store actions
-  set_hierarchy_and_year(store, hierarchy_scheme, year) {
-    store.dispatch({
+  @cached_property
+  get_sort_func_selector() {
+    return provide_sort_func_selector("scheme");
+  }
+
+  @bound
+  map_state_to_props(state) {
+    return {
+      ...super.map_state_to_props(state),
+      ...state.scheme,
+    };
+  }
+
+  @bound
+  map_dispatch_to_props(dispatch) {
+    const col_click = (col_key) =>
+      dispatch({ type: "column_header_click", payload: col_key });
+
+    return {
+      ...super.map_dispatch_to_props(dispatch),
+      col_click,
+    };
+  }
+
+  @cached_property
+  get_base_hierarchy_selector() {
+    return createSelector(
+      (state) => state.scheme.hierarchy_scheme,
+      (state) => state.scheme.year,
+      (hierarchy_scheme, year) =>
+        create_resource_hierarchy({
+          hierarchy_scheme,
+          year,
+        })
+    );
+  }
+
+  should_regenerate_hierarchy(old_state, new_state) {
+    return !shallowEqualObjectsExceptKeys(old_state.scheme, new_state.scheme, [
+      "sort_col",
+      "is_descending",
+    ]);
+  }
+
+  set_hierarchy_and_year(hierarchy_scheme, year) {
+    this.get_store().dispatch({
       type: "set_hierarchy_and_year",
       payload: { hierarchy_scheme, year },
     });
-  },
-  reducer: (state = get_initial_resource_state({}), action) => {
+  }
+
+  scheme_reducer = (state = {}, action) => {
     const { type, payload } = action;
     if (type === "set_hierarchy_and_year") {
       const { hierarchy_scheme, year } = payload;
@@ -247,23 +281,5 @@ const resource_scheme = {
     } else {
       return state;
     }
-  },
-  get_base_hierarchy_selector: () =>
-    createSelector(
-      (state) => state.resources.hierarchy_scheme,
-      (state) => state.resources.year,
-      (hierarchy_scheme, year) =>
-        create_resource_hierarchy({
-          hierarchy_scheme,
-          year,
-        })
-    ),
-  shouldUpdateFlatNodes(oldSchemeState, newSchemeState) {
-    return !shallowEqualObjectsOverKeys(oldSchemeState, newSchemeState, [
-      "hierarchy_scheme",
-      "year",
-    ]);
-  },
-};
-
-export { resource_scheme, get_initial_resource_state };
+  };
+}
