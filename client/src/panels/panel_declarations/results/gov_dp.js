@@ -18,7 +18,10 @@ import {
   link_to_results_infograph,
 } from "./results_common.js";
 import { LateDepartmentsBanner } from "./result_components.js";
-import { DisplayTable, default_dept_name_sort_func } from "../../../components";
+import {
+  SmartDisplayTable,
+  default_dept_name_sort_func,
+} from "../../../components";
 
 const { Dept } = Subject;
 const { text_maker, TM } = create_text_maker_component(text);
@@ -54,7 +57,7 @@ const DpSummary = ({
         />
       </div>
       <HeightClippedGraph clipHeight={330}>
-        <DisplayTable
+        <SmartDisplayTable
           table_name={"Government DP"}
           data={rows_of_counts_by_dept}
           column_configs={column_configs}

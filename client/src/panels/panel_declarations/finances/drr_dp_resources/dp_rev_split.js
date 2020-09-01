@@ -1,6 +1,5 @@
 import text from "./dp_rev_split.yaml";
 import {
-  util_components,
   year_templates,
   run_template,
   InfographicPanel,
@@ -8,13 +7,11 @@ import {
   get_source_links,
   declare_panel,
 } from "../../shared.js";
-import { Format } from "../../../../components";
+import { SmartDisplayTable, Format } from "../../../../components";
 
 const { text_maker } = create_text_maker_component(text);
 
 const { planning_years } = year_templates;
-
-const { DisplayTable } = util_components;
 
 const special_cols = _.flatMap(planning_years, (year) => [
   `${year}_gross`,
@@ -131,7 +128,7 @@ export const declare_dp_rev_split_panel = () =>
             title={text_maker("dp_rev_split_title")}
             {...{ footnotes, sources, glossary_keys }}
           >
-            <DisplayTable
+            <SmartDisplayTable
               table_name={text_maker("dp_rev_split_title")}
               data={table_data}
               column_configs={column_configs}

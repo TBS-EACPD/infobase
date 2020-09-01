@@ -10,7 +10,7 @@ import {
   FlatTreeMapViz,
   declare_panel,
 } from "../../shared.js";
-const { DisplayTable, default_dept_name_sort_func } = util_components;
+const { SmartDisplayTable, default_dept_name_sort_func } = util_components;
 
 const main_col = "{{est_in_year}}_estimates";
 
@@ -178,7 +178,7 @@ const planned_vote_or_stat_render = (vs) =>
           />
         </Col>
         <Col isGraph size={6}>
-          <DisplayTable
+          <SmartDisplayTable
             data={data_with_complement_amt}
             column_configs={column_configs}
             unsorted_initial={true}

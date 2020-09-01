@@ -21,7 +21,7 @@ import {
   TspanLineWrapper,
   HeightClippedGraph,
 } from "../../shared.js";
-import { DisplayTable } from "../../../../components";
+import { SmartDisplayTable } from "../../../../components";
 
 const { std_years } = year_templates;
 
@@ -171,7 +171,7 @@ class HistoricalProgramBars extends React.Component {
                 left: 70,
               }}
               custom_table={
-                <DisplayTable
+                <SmartDisplayTable
                   column_configs={column_configs}
                   data={custom_table_data}
                 />

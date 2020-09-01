@@ -16,7 +16,7 @@ import {
 
 const { transfer_payments } = businessConstants;
 const { std_years } = year_templates;
-const { Format, DisplayTable } = util_components;
+const { Format, SmartDisplayTable } = util_components;
 
 const exp_years = std_years.map((year) => year + "exp");
 
@@ -281,7 +281,7 @@ class DetailedHistTPItems extends React.Component {
         },
         colorBy: (d) => color_scale(d.id),
         custom_table: (
-          <DisplayTable
+          <SmartDisplayTable
             data={custom_table_data}
             column_configs={column_configs}
           />

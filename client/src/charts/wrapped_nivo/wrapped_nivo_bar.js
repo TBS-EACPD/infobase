@@ -8,7 +8,7 @@ import {
   fix_legend_symbols,
 } from "./wrapped_nivo_common.js";
 
-import { DisplayTable } from "../../components/index.js";
+import { SmartDisplayTable } from "../../components/index.js";
 
 const bar_table = (
   data,
@@ -39,7 +39,7 @@ const bar_table = (
   };
 
   return (
-    <DisplayTable
+    <SmartDisplayTable
       data={_.map(data, (row) => _.pick(row, [indexBy, ...keys]))}
       column_configs={column_configs}
       table_name={table_name || nivo_common_text_maker("default_table_name")}

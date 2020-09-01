@@ -14,7 +14,7 @@ import {
 import { TabularLegend } from "../legends";
 import { formats } from "../../core/format.js";
 import { newIBCategoryColors } from "../../core/color_schemes.js";
-import { DisplayTable, Format } from "../../components/index.js";
+import { SmartDisplayTable, Format } from "../../components/index.js";
 
 export class WrappedNivoPie extends React.Component {
   render() {
@@ -90,7 +90,7 @@ export class WrappedNivoPie extends React.Component {
     };
 
     const table = !disable_table_view && (
-      <DisplayTable
+      <SmartDisplayTable
         data={table_data}
         column_configs={column_configs}
         table_name={table_name || nivo_common_text_maker("default_table_name")}

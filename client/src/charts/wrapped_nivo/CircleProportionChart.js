@@ -16,7 +16,7 @@ import {
 import { formats } from "../../core/format.js";
 import { breakpoints } from "../../core/breakpoint_defs.js";
 import { newIBCategoryColors } from "../../core/color_schemes.js";
-import { DisplayTable } from "../../components/index.js";
+import { SmartDisplayTable } from "../../components/index.js";
 
 const { text_maker, TM } = create_text_maker_component_with_nivo_common(text);
 
@@ -229,7 +229,7 @@ export class CircleProportionChart extends React.Component {
       { label: child_name, value: child_value },
     ];
     const table = !disable_table_view && (
-      <DisplayTable
+      <SmartDisplayTable
         table_name={table_name || text_maker("default_table_name")}
         column_configs={column_configs}
         data={table_data}

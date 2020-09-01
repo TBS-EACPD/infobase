@@ -12,7 +12,7 @@ import {
   fix_legend_symbols,
 } from "./wrapped_nivo_common.js";
 
-import { DisplayTable } from "../../components/index.js";
+import { SmartDisplayTable } from "../../components/index.js";
 import { IconZoomIn, IconZoomOut } from "../../icons/icons.js";
 
 const { text_maker } = create_text_maker_component_with_nivo_common(text);
@@ -123,7 +123,7 @@ export class WrappedNivoLine extends React.Component {
           .value(),
       };
       return (
-        <DisplayTable
+        <SmartDisplayTable
           data={table_data}
           column_configs={column_configs}
           table_name={table_name || text_maker("default_table_name")}
