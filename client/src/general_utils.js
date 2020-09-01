@@ -146,17 +146,6 @@ export function cached_property(elementDescriptor) {
   return elementDescriptor;
 }
 
-export function abstract(elementDescriptor) {
-  const { kind, key, descriptor } = elementDescriptor;
-  if (kind !== "method") {
-    throw Error("@bound decorator can only be used on methods");
-  }
-  descriptor.value = function () {
-    throw `NotImplemented: ${key}`;
-  };
-  return elementDescriptor;
-}
-
 export function bound(elementDescriptor) {
   //see https://github.com/mbrowne/bound-decorator/blob/master/src/bound.js
   const { kind, key, descriptor } = elementDescriptor;

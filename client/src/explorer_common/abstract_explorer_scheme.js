@@ -3,7 +3,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import redux_promise_middleware from "redux-promise-middleware";
 import { connect, Provider } from "react-redux";
 
-import { cached_property, abstract, bound } from "general_utils.js";
+import { cached_property, bound } from "general_utils.js";
 
 import {
   filter_hierarchy,
@@ -255,8 +255,9 @@ export class AbstractExplorerScheme {
     };
   }
 
-  @abstract
-  get_base_hierarchy_selector() {}
+  get_base_hierarchy_selector() {
+    throw "NotImplemented";
+  }
 
   @cached_property
   get_is_filtering_selector() {
