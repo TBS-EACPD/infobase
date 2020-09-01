@@ -1,6 +1,8 @@
 import "./PageDetails.scss";
 import text from "./PageDetails.yaml";
 
+import { withRouter } from "react-router";
+
 import { Details } from "./Details.js";
 import { ExternalLink } from "./misc_util_components.js";
 
@@ -39,31 +41,42 @@ class VersionNumber extends React.Component {
   }
 }
 
-export class PageDetails extends React.Component {
-  render() {
-    const { toggleSurvey, showSurvey } = this.props;
-    return (
-      <div className="pagedetails frow">
-        <div className="pagedetails__report-a-problem fcol-md-8 fcol-sm-12">
-          <Details
-            summary_content={text_maker("report_a_problem")}
-            content={<EmailFrontend template_name="report_a_problem" />}
-            persist_content={true}
-          />
-        </div>
-        <button className="btn btn-ib-primary" onClick={() => toggleSurvey()}>
-          {text_maker("feedback")}
-        </button>
-        <StatelessModal
-          title={text_maker("feedback")}
-          show={showSurvey}
-          body={<EmailFrontend top_border={false} template_name="feedback" />}
-          on_close_callback={() => toggleSurvey()}
-        />
-        <div className="pagedetails__version-number fcol-md-4 fcol-sm-6">
-          <VersionNumber />
-        </div>
-      </div>
-    );
+const PageDetails = withRouter(
+  class PageDetails extends React.Component {
+    render() {
+      const { location, toggleSurvey, showSurvey } = this.props;
+      return (
+        location.pathname !== "/contact" && (
+          <div className="pagedetails frow">
+            <div className="pagedetails__report-a-problem fcol-md-8 fcol-sm-12">
+              <Details
+                summary_content={text_maker("report_a_problem")}
+                content={<EmailFrontend template_name="report_a_problem" />}
+                persist_content={true}
+              />
+            </div>
+            <button
+              className="btn btn-ib-primary"
+              onClick={() => toggleSurvey()}
+            >
+              {text_maker("feedback")}
+            </button>
+            <StatelessModal
+              title={text_maker("feedback")}
+              show={showSurvey}
+              body={
+                <EmailFrontend top_border={false} template_name="feedback" />
+              }
+              on_close_callback={() => toggleSurvey()}
+            />
+            <div className="pagedetails__version-number fcol-md-4 fcol-sm-6">
+              <VersionNumber />
+            </div>
+          </div>
+        )
+      );
+    }
   }
-}
+);
+
+export { PageDetails };
