@@ -1,12 +1,28 @@
-import { text_maker, TM } from "./text-provider";
 import { createSelector } from "reselect";
-import { Format } from "../components/index.js";
-import { Table } from "../core/TableClass.js";
-import FootNote from "../models/footnotes/footnotes.js";
-import { GlossaryEntry } from "../models/glossary.js";
-import { Subject } from "../models/subject.js";
-import { convert_d3_hierarchy_to_explorer_hierarchy } from "../explorer_common/hierarchy_tools.js";
-import { shallowEqualObjectsOverKeys } from "../general_utils.js";
+
+import {
+  shallowEqualObjectsOverKeys,
+  cached_property,
+  bound,
+} from "general_utils.js";
+import { Format } from "components/";
+
+import { Table } from "core/TableClass.js";
+
+import FootNote from "models/footnotes/footnotes.js";
+import { GlossaryEntry } from "models/glossary.js";
+import { Subject } from "models/subject.js";
+
+import { convert_d3_hierarchy_to_explorer_hierarchy } from "explorer_common/hierarchy_tools.js";
+import { AbstractExplorerScheme } from "explorer_common/abstract_explorer_scheme.js";
+
+import {
+  text_maker,
+  TM,
+  current_doc_is_mains,
+  current_sups_letter,
+} from "./utils.js";
+import EstimatesExplorerComponent from "./EstimatesExplorerComponent";
 
 const { Dept } = Subject;
 
@@ -14,9 +30,6 @@ const biv_footnote = text_maker("biv_footnote");
 const this_year_col = "{{est_in_year}}_estimates";
 const last_year_col = "{{est_last_year}}_estimates";
 const row_identifier_func = (row) => `${row.dept}-${row.votenum}-${row.desc}`;
-
-export const current_doc_is_mains = false; // Update this when switching between displaying mains and sups!
-export const current_sups_letter = "A"; // Update this on each new sups release!
 
 const current_doc_code = current_doc_is_mains
   ? "MAINS"
@@ -376,7 +389,7 @@ const Green = ({ children }) => (
 const Red = ({ children }) => (
   <span style={{ color: "hsla(0, 100%, 40%, 1)" }}>{children}</span>
 );
-
+//TODO: it's strange to be storing complex column objects in the redux state, we should probably generate within the component
 const get_column_defs = (use_legal_titles) => [
   {
     id: "name",
@@ -445,51 +458,28 @@ const get_column_defs = (use_legal_titles) => [
   },
 ];
 
-const scheme_key = "estimates_diff";
 const h7y_layout_options = ["org", "item_type"];
 const use_legal_titles_default = false;
-export const get_initial_state = (intitial_h7y_layout) => ({
-  doc_code: current_doc_code,
-  sort_col: "current_value",
-  is_descending: true,
-  show_stat: true,
-  use_legal_titles: use_legal_titles_default,
-  column_defs: get_column_defs(use_legal_titles_default),
-  h7y_layout: _.includes(h7y_layout_options, intitial_h7y_layout)
-    ? intitial_h7y_layout
-    : h7y_layout_options[0],
-});
-export const estimates_diff_scheme = {
-  key: scheme_key,
-  get_sort_func_selector: () => {
-    return createSelector(
-      [
-        (aug_state) => aug_state[scheme_key].is_descending,
-        (aug_state) => aug_state[scheme_key].sort_col,
-        (aug_state) => aug_state[scheme_key].column_defs,
-      ],
-      (is_descending, sort_col, column_defs) => {
-        const attr_getter = _.find(column_defs, { id: sort_col }).get_val;
 
-        return (list) =>
-          _.chain(list) //sort by search relevance, than the initial sort func
-            .sortBy(attr_getter)
-            .pipe(is_descending ? _.reverse : _.identity)
-            .value();
-      }
-    );
-  },
-  get_props_selector: () => (augmented_state) =>
-    _.clone(augmented_state.estimates_diff),
-  dispatch_to_props: (dispatch) => ({
-    col_click: (col_key) =>
-      dispatch({ type: "column_header_click", payload: col_key }),
-    toggle_stat_filter: () => dispatch({ type: "toggle_stat_filter" }),
-    toggle_legal_titles: () => dispatch({ type: "toggle_legal_titles" }),
-    set_h7y_layout: (layout_key) =>
-      dispatch({ type: "set_h7y_layout", payload: layout_key }),
-  }),
-  reducer: (state = get_initial_state(), action) => {
+export class EstimatesExplorer extends AbstractExplorerScheme {
+  Component = EstimatesExplorerComponent;
+
+  constructor(intitial_h7y_layout) {
+    super();
+    this.initial_scheme_state = {
+      doc_code: current_doc_code,
+      sort_col: "current_value",
+      is_descending: true,
+      show_stat: true,
+      use_legal_titles: use_legal_titles_default,
+      column_defs: get_column_defs(use_legal_titles_default),
+      h7y_layout: _.includes(h7y_layout_options, intitial_h7y_layout)
+        ? intitial_h7y_layout
+        : h7y_layout_options[0],
+    };
+  }
+
+  scheme_reducer = (state = {}, action) => {
     const { type, payload } = action;
 
     if (type === "set_h7y_layout") {
@@ -528,11 +518,47 @@ export const estimates_diff_scheme = {
     } else {
       return state;
     }
-  },
-  get_base_hierarchy_selector: () =>
-    createSelector(
-      _.property("estimates_diff.show_stat"),
-      _.property("estimates_diff.h7y_layout"),
+  };
+
+  set_h7y_layout(layout_key) {
+    this.get_store().dispatch({ type: "set_h7y_layout", payload: layout_key });
+  }
+
+  @bound
+  map_state_to_props(state) {
+    return {
+      ...super.map_state_to_props(state),
+      ...state.scheme,
+    };
+  }
+
+  @bound
+  map_dispatch_to_props(dispatch) {
+    const col_click = (col_key) =>
+      dispatch({ type: "column_header_click", payload: col_key });
+    const toggle_stat_filter = () => dispatch({ type: "toggle_stat_filter" });
+    const toggle_legal_titles = () => dispatch({ type: "toggle_legal_titles" });
+
+    return {
+      ...super.map_dispatch_to_props(dispatch),
+      col_click,
+      toggle_legal_titles,
+      toggle_stat_filter,
+    };
+  }
+
+  should_regenerate_hierarchy(old_state, new_state) {
+    return !shallowEqualObjectsOverKeys(old_state.scheme, new_state.scheme, [
+      "show_stat",
+      "h7y_layout",
+    ]);
+  }
+
+  @cached_property
+  get_base_hierarchy_selector() {
+    return createSelector(
+      (state) => state.scheme.show_stat,
+      (state) => state.scheme.h7y_layout,
       (should_show_stat, h7y_layout) => {
         if (h7y_layout === "item_type") {
           return get_data_by_item_types();
@@ -540,10 +566,28 @@ export const estimates_diff_scheme = {
           return get_data_by_org(should_show_stat);
         }
       }
-    ),
-  shouldUpdateFlatNodes: (oldSchemeState, newSchemeState) =>
-    !shallowEqualObjectsOverKeys(oldSchemeState, newSchemeState, [
-      "show_stat",
-      "h7y_layout",
-    ]),
-};
+    );
+  }
+
+  @cached_property
+  get_sort_func_selector() {
+    return createSelector(
+      [
+        (state) => state.scheme.is_descending,
+        (state) => state.scheme.sort_col,
+        (state) => state.scheme.column_defs,
+      ],
+      (is_descending, sort_col, column_defs) => {
+        const attr_getter = _.find(column_defs, { id: sort_col }).get_val;
+
+        return (list) => {
+          let sorted = _.sortBy(list, attr_getter);
+          if (is_descending) {
+            sorted = _.reverse(sorted);
+          }
+          return sorted;
+        };
+      }
+    );
+  }
+}
