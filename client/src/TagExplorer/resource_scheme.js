@@ -8,7 +8,7 @@ import {
 
 import { AbstractExplorerScheme } from "explorer_common/abstract_explorer_scheme";
 import {
-  provide_sort_func_selector,
+  create_sort_func_selector,
   get_resources_for_subject,
 } from "explorer_common/resource_explorer_common.js";
 import {
@@ -210,7 +210,7 @@ export class ResourceScheme extends AbstractExplorerScheme {
 
   @cached_property
   get_sort_func_selector() {
-    return provide_sort_func_selector("scheme");
+    return create_sort_func_selector("scheme");
   }
 
   @bound

@@ -131,28 +131,25 @@ export const get_col_defs = ({ year }) => [
   },
 ];
 
-export const provide_sort_func_selector = (scheme_key) => {
+export const create_sort_func_selector = () => {
   const attr_getters = {
     ftes: (node) => _.get(node, "data.resources.ftes") || 0,
     spending: (node) => _.get(node, "data.resources.spending") || 0,
     name: (node) => node.data.name,
   };
 
-  const reverse_array = (arr) => _.clone(arr).reverse();
-
   return createSelector(
-    [
-      (aug_state) => aug_state[scheme_key].is_descending,
-      (aug_state) => aug_state[scheme_key].sort_col,
-    ],
+    [(state) => state.scheme.is_descending, (state) => state.scheme.sort_col],
     (is_descending, sort_col) => {
       const attr_getter = attr_getters[sort_col];
 
-      return (list) =>
-        _.chain(list) //sort by search relevance, than the initial sort func
-          .sortBy(attr_getter)
-          .pipe(is_descending ? reverse_array : _.identity)
-          .value();
+      return (list) => {
+        let sorted = _.sortBy(list, attr_getter);
+        if (is_descending) {
+          sorted = _.reverse(sorted);
+        }
+        return sorted;
+      };
     }
   );
 };

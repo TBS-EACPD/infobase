@@ -1,25 +1,26 @@
 import { createSelector } from "reselect";
 
 import {
+  cached_property,
+  bound,
+  shallowEqualObjectsOverKeys,
+  sanitized_dangerous_inner_html,
+} from "general_utils";
+import {
   get_resources_for_subject,
-  provide_sort_func_selector,
-} from "../../../../explorer_common/resource_explorer_common.js";
+  create_sort_func_selector,
+} from "explorer_common/resource_explorer_common.js";
 import {
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,
-} from "../../../../explorer_common/hierarchy_tools.js";
+} from "explorer_common/hierarchy_tools.js";
+import { AbstractExplorerScheme } from "explorer_common/abstract_explorer_scheme";
 
-import {
-  shallowEqualObjectsOverKeys,
-  sanitized_dangerous_inner_html,
-} from "../../../../general_utils.js";
+import { trivial_text_maker } from "models/text";
 
-import { trivial_text_maker, year_templates } from "../../shared.js";
+import SingleTagResourceExplorerComponent from "./explorer_component.js";
 
-const { std_years, planning_years } = year_templates;
-
-const actual_year = _.last(std_years);
-const planning_year = _.first(planning_years);
+import { planning_year, actual_year } from "./utils.js";
 
 function create_rooted_resource_hierarchy({ year, root_subject }) {
   const get_resources = (subject) => get_resources_for_subject(subject, year);
@@ -146,24 +147,20 @@ function create_rooted_resource_hierarchy({ year, root_subject }) {
   return flat_nodes;
 }
 
-const get_initial_resource_state = ({ subject, has_planning_data }) => ({
-  sort_col: "spending",
-  is_descending: true,
-  year: has_planning_data ? planning_year : actual_year,
-});
+export class SingleTagResourceExplorer extends AbstractExplorerScheme {
+  Component = SingleTagResourceExplorerComponent;
 
-const partial_scheme = {
-  key: "rooted_resources",
-  get_sort_func_selector: () => provide_sort_func_selector("rooted_resources"),
-  get_props_selector: () => {
-    return (augmented_state) => _.clone(augmented_state.rooted_resources);
-  },
-  dispatch_to_props: (dispatch) => ({
-    col_click: (col_key) =>
-      dispatch({ type: "column_header_click", payload: col_key }),
-    set_year: (year) => dispatch({ type: "set_year", payload: year }),
-  }),
-  reducer: (state = get_initial_resource_state({}), action) => {
+  constructor(subject, has_planning_data, has_actual_data) {
+    super();
+    this.subject = subject;
+    this.initial_scheme_state = {
+      sort_col: "spending",
+      is_descending: true,
+      year: has_planning_data ? planning_year : actual_year,
+    };
+  }
+
+  scheme_reducer = (state = {}, action) => {
     const { type, payload } = action;
     if (type === "column_header_click") {
       const { is_descending, sort_col } = state;
@@ -180,28 +177,48 @@ const partial_scheme = {
     } else {
       return state;
     }
-  },
-  shouldUpdateFlatNodes(oldSchemeState, newSchemeState) {
-    return !shallowEqualObjectsOverKeys(oldSchemeState, newSchemeState, [
+  };
+
+  @bound
+  map_dispatch_to_props(dispatch) {
+    const col_click = (col_key) =>
+      dispatch({ type: "column_header_click", payload: col_key });
+    const set_year = (year) => dispatch({ type: "set_year", payload: year });
+
+    return {
+      ...super.map_dispatch_to_props(dispatch),
+      col_click,
+      set_year,
+    };
+  }
+
+  @bound
+  map_state_to_props(state) {
+    return {
+      ...super.map_state_to_props(state),
+      ...state.scheme,
+    };
+  }
+
+  @cached_property
+  get_base_hierarchy_selector() {
+    return createSelector(
+      (state) => state.scheme.year,
+      (year) =>
+        create_rooted_resource_hierarchy({
+          year,
+          root_subject: this.subject,
+        })
+    );
+  }
+
+  @cached_property
+  get_sort_func_selector() {
+    return create_sort_func_selector("scheme");
+  }
+  should_regenerate_hierarchy(old_state, new_state) {
+    return !shallowEqualObjectsOverKeys(old_state.scheme, new_state.scheme, [
       "year",
     ]);
-  },
-};
-
-//given a subject, created a rooted scheme using the above scheme. Hierarchy scheme should be evident from the level of the subject
-function create_rooted_resource_scheme({ subject }) {
-  return {
-    ...partial_scheme,
-    get_base_hierarchy_selector: () =>
-      createSelector(
-        (state) => state.rooted_resources.year,
-        (year) =>
-          create_rooted_resource_hierarchy({
-            year,
-            root_subject: subject,
-          })
-      ),
-  };
+  }
 }
-
-export { create_rooted_resource_scheme, get_initial_resource_state };
