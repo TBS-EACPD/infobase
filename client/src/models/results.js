@@ -1,8 +1,7 @@
-import { trivial_text_maker } from "./text.js";
+import { trivial_text_maker, run_template } from "./text.js";
 import { Program, CRSO } from "./organizational_entities.js";
 import { businessConstants } from "./businessConstants.js";
 import { formats } from "../core/format.js";
-import { run_template } from "../models/text.js";
 
 const { months } = businessConstants;
 const { year_to_fiscal_year } = formats;
