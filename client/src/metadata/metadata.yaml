@@ -36,3 +36,7 @@ refresh_freq:
 rpb_link_text:
   en: Build a report
   fr: Générer un rapport
+
+datasets:
+  en: Datasets
+  fr: Tableaux de données
