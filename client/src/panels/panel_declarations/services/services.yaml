@@ -256,7 +256,7 @@ service_link_text:
   fr: Pour en savoir plus (liens externes)
 applications_and_calls:
   en: Applications and telephone calls
-  fr: Applications et appels téléhoniques
+  fr: Applications et appels téléphoniques
 service_url:
   en: Service Link
   fr: Lien de service
@@ -282,13 +282,13 @@ no_service_standards_text:
   fr: Ce service n'a pas de normes de service
 standard_name:
   en: Standard name
-  fr: Nom usuel
+  fr: Norme de service
 standard_type:
   en: Standard type
-  fr: Type standard
+  fr: Type de norme de service
 standard_channel:
   en: Standard channel
-  fr: Mode standard
+  fr: Mode de prestation
 total_business_volume:
   en: Total Business Volume
   fr: Volume d'activités total
