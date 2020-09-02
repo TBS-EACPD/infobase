@@ -251,9 +251,17 @@ const sources = _.mapValues(
         return tm("services_desc");
       },
       frequency: frequencies.y,
-      open_data: infobase_open_data_page,
       items() {
-        return _.map(tables_from_source_key("SERVICES"), table_to_row_item);
+        return [
+          {
+            id: "service",
+            text: tm("service_inventory"),
+            external_link:
+              window.lang === "en"
+                ? "https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c"
+                : "https://ouvert.canada.ca/data/fr/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c",
+          },
+        ];
       },
     },
   },

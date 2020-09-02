@@ -42,6 +42,13 @@ export class ServiceOverview extends React.Component {
       flat_standard_reports,
       "is_target_met"
     );
+    const get_uniq_flat_standard_urls = (url_field) =>
+      _.chain(service.standards).flatMap(url_field).filter().uniq().value();
+    const all_urls = {
+      service_url: service.urls,
+      standard_url: get_uniq_flat_standard_urls("urls"),
+      rtp_url: get_uniq_flat_standard_urls("rtp_urls"),
+    };
     return (
       <TextPanel title={text_maker("service_overview_title")}>
         <dl className="dl-horizontal tombstone-data-list">
@@ -193,14 +200,15 @@ export class ServiceOverview extends React.Component {
           </dd>
           <dt>{text_maker("service_link_text")}</dt>
           <dd>
-            {!_.isEmpty(service.urls) &&
-              _.map(service.urls, (url, i) => (
+            {_.map(all_urls, (urls, url_type) =>
+              _.map(urls, (url, i) => (
                 <p key={url}>
                   <a href={url} target="_blank" rel="noopener noreferrer">
-                    {`${text_maker("link")} ${i + 1}`}
+                    {`${text_maker(url_type)} ${i + 1}`}
                   </a>
                 </p>
-              ))}
+              ))
+            )}
           </dd>
         </dl>
       </TextPanel>
