@@ -257,6 +257,15 @@ service_link_text:
 applications_and_calls:
   en: Applications and telephone calls
   fr: Applications et appels téléhoniques
+service_url:
+  en: Service Link
+  fr: Lien de service
+standard_url:
+  en: Service Standards and Targets Link
+  fr: Lien des normes de service et les cibles
+rtp_url:
+  en: Real-time Performance Results Link
+  fr: Lien des résultats du rendement en temps réel
 
 # Standard
 service_standards_title:
