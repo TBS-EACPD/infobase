@@ -12,6 +12,7 @@ import * as i from "d3-interpolate";
 import * as j from "d3-path";
 import * as k from "d3-scale";
 import * as l from "d3-selection";
+// eslint-disable-next-line import/namespace
 import * as m from "d3-selection-multi";
 import * as n from "d3-shape";
 import * as o from "d3-transition";

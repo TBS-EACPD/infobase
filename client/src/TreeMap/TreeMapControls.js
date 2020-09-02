@@ -1,7 +1,6 @@
 import "./TreeMap.scss";
-import { run_template } from "../models/text.js";
+import { run_template, create_text_maker } from "../models/text.js";
 import treemap_text from "./TreeMap.yaml";
-import { create_text_maker } from "../models/text.js";
 import { Fragment } from "react";
 import classNames from "classnames";
 

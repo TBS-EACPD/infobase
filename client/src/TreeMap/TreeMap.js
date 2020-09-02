@@ -1,7 +1,10 @@
 //https://gist.github.com/guglielmo/16d880a6615da7f502116220cb551498
 
 import { StandardRouteContainer } from "../core/NavComponents.js";
-import { SpinnerWrapper } from "../components/index.js";
+import {
+  SpinnerWrapper,
+  create_text_maker_component,
+} from "../components/index.js";
 import { get_data, load_data } from "./data.js";
 import { formats } from "../core/format.js";
 import treemap_text from "./TreeMap.yaml";
@@ -14,7 +17,6 @@ import { TreeMapLegend } from "./TreeMapLegend.js";
 import { infograph_href_template } from "../infographic/infographic_link.js";
 import { run_template } from "../models/text.js";
 import { actual_to_planned_gap_year } from "../models/years.js";
-import { create_text_maker_component } from "../components/index.js";
 import {
   sequentialBlues,
   sequentialReds,
