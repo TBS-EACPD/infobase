@@ -147,23 +147,23 @@ export class ServiceStandards extends React.Component {
         formatter: (value) =>
           window.is_a11y_mode ? text_maker(value) : status_icons[value],
       },
-      standard_type: {
-        index: 4,
-        header: text_maker("standard_type"),
-      },
-      channel: {
-        index: 5,
-        header: text_maker("standard_channel"),
-      },
       count: {
-        index: 6,
+        index: 4,
         header: text_maker("total_business_volume"),
         formatter: "big_int",
       },
       met_count: {
-        index: 7,
+        index: 5,
         header: text_maker("satisfied_business_volume"),
         formatter: "big_int",
+      },
+      standard_type: {
+        index: 6,
+        header: text_maker("standard_type"),
+      },
+      channel: {
+        index: 7,
+        header: text_maker("standard_channel"),
       },
     };
 
