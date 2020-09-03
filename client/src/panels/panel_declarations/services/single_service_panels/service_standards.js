@@ -7,12 +7,16 @@ import {
   DisplayTable,
   FilterTable,
 } from "../../../../components";
-import { newIBCategoryColors, businessConstants } from "../../shared.js";
-import { IconAttention, IconCheck } from "../../../../icons/icons.js";
+import { newIBCategoryColors } from "../../shared.js";
+import {
+  IconAttention,
+  IconCheck,
+  IconNotApplicable,
+} from "../../../../icons/icons.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const standard_statuses = ["met", "not_met"];
+const standard_statuses = ["met", "not_met", "no_data"];
 const color_scale = d3
   .scaleOrdinal()
   .domain(standard_statuses)
@@ -29,7 +33,6 @@ export class ServiceStandards extends React.Component {
   render() {
     const { service } = this.props;
     const { active_statuses } = this.state;
-    const { result_simple_statuses } = businessConstants;
     const standards = service.standards;
 
     const footnotes = _.chain(standards)
@@ -46,23 +49,72 @@ export class ServiceStandards extends React.Component {
       .filter()
       .value();
 
+    const get_is_target_met = (
+      is_target_met,
+      target_type,
+      lower,
+      count,
+      met_count
+    ) => {
+      if (is_target_met) {
+        if (
+          target_type !== "Other type of target" &&
+          !lower &&
+          !count &&
+          !met_count
+        ) {
+          return "no_data";
+        } else {
+          return "met";
+        }
+      } else {
+        return "not_met";
+      }
+    };
+    const get_target = (target_type, target) => {
+      if (target_type === "Other type of target") {
+        if (_.isNull(target)) {
+          return "N/A";
+        } else {
+          return target;
+        }
+      } else {
+        if (target === 0) {
+          return target;
+        } else {
+          return `${target}%`;
+        }
+      }
+    };
+
     const data = _.chain(standards)
-      .map(({ name, type, channel, standard_report }) =>
-        _.map(standard_report, ({ year, count, met_count, is_target_met }) => ({
-          name,
-          year,
-          standard_type: type,
-          channel,
-          count,
-          met_count,
-          is_target_met: is_target_met ? "met" : "not_met",
-        }))
+      .map(({ name, type, channel, standard_report, target_type }) =>
+        _.map(
+          standard_report,
+          ({ year, lower, count, met_count, is_target_met }) => ({
+            name,
+            year,
+            standard_type: type,
+            target: get_target(target_type, lower),
+            channel,
+            count: _.isNull(count) ? "N/A" : count,
+            met_count: _.isNull(met_count) ? "N/A" : met_count,
+            is_target_met: get_is_target_met(
+              is_target_met,
+              target_type,
+              lower,
+              count,
+              met_count
+            ),
+          })
+        )
       )
       .flatten()
       .value();
+
     const get_icon_props = (status) => ({
       key: status,
-      title: result_simple_statuses[status].text,
+      title: text_maker(status),
       color: color_scale(status),
       width: 38,
       vertical_align: "0em",
@@ -72,6 +124,7 @@ export class ServiceStandards extends React.Component {
     const status_icons = {
       met: <IconCheck {...get_icon_props("met")} />,
       not_met: <IconAttention {...get_icon_props("not_met")} />,
+      no_data: <IconNotApplicable {...get_icon_props("no_data")} />,
     };
 
     const column_configs = {
@@ -84,31 +137,33 @@ export class ServiceStandards extends React.Component {
         index: 1,
         header: text_maker("year"),
       },
-      standard_type: {
+      target: {
         index: 2,
+        header: text_maker("target"),
+      },
+      is_target_met: {
+        index: 3,
+        header: text_maker("status"),
+        formatter: (value) =>
+          window.is_a11y_mode ? text_maker(value) : status_icons[value],
+      },
+      standard_type: {
+        index: 4,
         header: text_maker("standard_type"),
       },
       channel: {
-        index: 3,
+        index: 5,
         header: text_maker("standard_channel"),
       },
       count: {
-        index: 4,
+        index: 6,
         header: text_maker("total_business_volume"),
         formatter: "big_int",
       },
       met_count: {
-        index: 5,
+        index: 7,
         header: text_maker("satisfied_business_volume"),
         formatter: "big_int",
-      },
-      is_target_met: {
-        index: 6,
-        header: text_maker("status"),
-        formatter: (value) =>
-          window.is_a11y_mode
-            ? result_simple_statuses[value].text
-            : status_icons[value],
       },
     };
 
@@ -142,10 +197,10 @@ export class ServiceStandards extends React.Component {
                       tabIndex={0}
                       aria-hidden="true"
                     >
-                      {result_simple_statuses[status_key].text}
+                      {text_maker(status_key)}
                     </span>
                   ) : (
-                    result_simple_statuses[status_key].text
+                    text_maker(status_key)
                   ),
                   icon: status_icons[status_key],
                 }))}
