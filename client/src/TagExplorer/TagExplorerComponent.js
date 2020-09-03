@@ -7,6 +7,7 @@ import { GlossaryEntry } from "models/glossary.js";
 import { run_template } from "models/text.js";
 
 import {
+  SpinnerWrapper,
   KeyConceptList,
   TabbedControls,
   AlertBanner,
