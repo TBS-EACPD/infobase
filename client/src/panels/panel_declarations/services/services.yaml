@@ -57,10 +57,10 @@ cra_sub_title:
   fr: Combien de services utilisent le numéro d'entreprise de l'ARC comme identifiant standard?
 sin_not_applicable:
   en: Not applicable (not a service to an individual)
-  fr: TODO
+  fr: Sans objet(service non offert à un particulier)
 cra_not_applicable:
   en: Not applicable (not a service to business)
-  fr: TODO
+  fr: Sans objet (service non offert à une entreprise)
 
 # Digital Status
 services_digital_status_text:
@@ -68,7 +68,7 @@ services_digital_status_text:
   en: |
     Among the **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{most_digital_name}}** is the most commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 most_digital_pct}}**) while **{{least_digital_name}}** is the least commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 least_digital_pct}}**).
   fr: |
-    TODO
+    Parmi les **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} offerts par **{{subject_name}}**, **{{most_digital_name}}** est le {{gl_tt "point d'interaction" "CLIENT_INTERACTION"}} en ligne avec les clients le plus courant (**{{fmt_percentage1 most_digital_pct}}**), tandis que **{{least_digital_name}}** est le moins courant (**{{fmt_percentage1 least_digital_pct}}**).
 services_digital_status:
   en: Online status of services
   fr: État des services en ligne
@@ -174,43 +174,49 @@ online_inquiry:
 # Top 10 volume
 top10_services_volume_title:
   en: Top 10 services with highest application volume
-  fr: TODO
+  fr: Les 10 services les plus demandés
 service_name:
   en: Service name
-  fr: TODO
+  fr: Nom du service
 top10_services_volume_text:
   transform: [handlebars, markdown]
   en: |
     Below are the top 10 services with the highest application and telephone volume. **{{highest_service_name}}** had the most traffic with **{{fmt_big_int highest_service_value}}** applications and telephone calls.
-  fr: TODO
+  fr: |
+    Vous trouverez ci-dessous les 10 services ayant le volume de demandes et d'appels téléphoniques le plus élevé. **{{highest_service_name}}** a connu le plus de trafic avec **{{fmt_big_int highest_service_value}}** demandes et appels téléphoniques.
 top10_gov_website_visits:
   en: Top 10 organizations with highest website visits
-  fr: TODO
+  fr: Les 10 organisations les plus visitées sur leur site web
 top10_dept_website_visits:
   en: Top 10 services with highest website visits
-  fr: TODO
+  fr: Les 10 services les plus visités sur leur site web
 top10_gov_website_visits_text:
   transform: [handlebars, markdown]
   en: |
     Below are the top 10 organizations with the highest website visit volume. **{{highest_volume_name}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** website visits.
-  fr: TODO
+  fr: |
+    Vous trouverez ci-dessous les 10 organisations ayant le plus grand nombre de visites sur leur site web. **{{highest_volume_name}}** a connu le trafic le plus important avec **{{fmt_big_int highest_volume_value}}** visites de son site web.
 top10_dept_website_visits_text:
   transform: [handlebars, markdown]
   en: |
     Below are the top 10 services with the highest website visit volume. **{{highest_volume_name}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** website visits.
-  fr: TODO
+  fr: |
+    Vous trouverez ci-dessous les 10 services ayant le plus grand nombre de visites sur leur site web **{{highest_volume_name}}** a connu le trafic le plus important avec **{{fmt_big_int highest_volume_value}}** visites de son site web.
 
 # High application volume
 high_application_volume_title:
   en: Organizations with high volume services
-  fr: TODO
+  fr: Organisations qui fournissent un grand nombre de services
 high_application_volume_text:
   transform: [handlebars, markdown]
   en: |
     Below are the list of organizations with **high volume** services, where their total application and telephone calls received is greater than **45,000**.
     
     Among **{{num_of_high_volume_depts}}** departments with high volume services, **{{highest_volume_dept}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** of applications and telephone calls received.
-  fr: TODO
+  fr: |
+    Vous trouverez ci-dessous la liste des organisations offrant un **grand nombre** de services où le total des demandes et des appels téléphoniques reçus est supérieur à **45 000**.
+    
+    Parmi les **{{num_of_high_volume_depts}}** ministères ayant un grand nombre de services, c'est **{{highest_volume_dept}}** qui a eu le plus de trafic avec **{{fmt_big_int highest_volume_value}}** demandes et appels téléphoniques reçus.
 
 # Overview
 overview_digital_status_title:
@@ -297,10 +303,10 @@ satisfied_business_volume:
   fr: Volume d'activités satisfaisant
 has_standards:
   en: Service has standards
-  fr: TODO
+  fr: Le service a des normes
 no_standards:
   en: Service does not have standards
-  fr: TODO
+  fr: Le service n’a pas de normes
 target_met_true:
   en: Standard target is met
   fr: La cible standard est atteinte
@@ -325,12 +331,14 @@ gauge_has_standards_text:
   transform: [handlebars, markdown]
   en: |
     **{{fmt_percentage1 has_standards_pct}}** of services have standards
-  fr: TODO
+  fr: |
+    **{{fmt_percentage1 has_standards_pct}}** des services ont des normes
 gauge_standards_met_text:
   transform: [handlebars, markdown]
   en: |
     **{{fmt_percentage1 standards_met_pct}}** of standards' targets were met
-  fr: TODO
+  fr: |
+    **{{fmt_percentage1 standards_met_pct}}** des cibles normalisées ont été atteintes
 met:
   en: Met
   fr: Atteint
@@ -347,4 +355,7 @@ services_types_desc:
     There are **{{num_of_types}}** different types of {{gl_tt "services" "SERVICE"}} within **{{subject.name}}**. The most common service type is "**{{max_type}}**", making up **{{max_type_count}} of {{num_of_services}}** department's services.
     
     Note that a service can have multiple types.
-  fr: TODO
+  fr: |
+    Il y a **{{num_of_types}}** types différents de {{gl_tt "services" "SERVICE"}} dans **{{subject.name}}**. Le type de service le plus courant est "**{{max_type}}**", qui regroupe **{{max_type_count}} of {{num_of_services}}** services ministériels.
+    
+    Notez qu’un service peut être de plusieurs types.
