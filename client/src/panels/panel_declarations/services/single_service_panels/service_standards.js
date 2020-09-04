@@ -86,6 +86,7 @@ export class ServiceStandards extends React.Component {
         }
       }
     };
+    const get_counts = (value) => (_.isNull(value) ? "N/A" : value);
 
     const data = _.chain(standards)
       .map(({ name, type, channel, standard_report, target_type }) =>
@@ -97,8 +98,14 @@ export class ServiceStandards extends React.Component {
             standard_type: type,
             target: get_target(target_type, lower),
             channel,
-            count: _.isNull(count) ? "N/A" : count,
-            met_count: _.isNull(met_count) ? "N/A" : met_count,
+            count: get_counts(count),
+            met_count: get_counts(met_count),
+            performance:
+              target_type === "Other type of target"
+                ? met_count / count
+                  ? met_count / count
+                  : "N/A"
+                : met_count / count || 0,
             is_target_met: get_is_target_met(
               is_target_met,
               target_type,
@@ -141,28 +148,33 @@ export class ServiceStandards extends React.Component {
         index: 2,
         header: text_maker("target"),
       },
-      is_target_met: {
+      performance: {
         index: 3,
+        header: text_maker("performance"),
+        formatter: "percentage",
+      },
+      is_target_met: {
+        index: 4,
         header: text_maker("status"),
         formatter: (value) =>
           window.is_a11y_mode ? text_maker(value) : status_icons[value],
       },
       count: {
-        index: 4,
+        index: 5,
         header: text_maker("total_business_volume"),
         formatter: "big_int",
       },
       met_count: {
-        index: 5,
+        index: 6,
         header: text_maker("satisfied_business_volume"),
         formatter: "big_int",
       },
       standard_type: {
-        index: 6,
+        index: 7,
         header: text_maker("standard_type"),
       },
       channel: {
-        index: 7,
+        index: 8,
         header: text_maker("standard_channel"),
       },
     };
