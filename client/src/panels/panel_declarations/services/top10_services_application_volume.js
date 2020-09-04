@@ -140,12 +140,15 @@ const Top10ServicesApplicationVolumePanel = ({ panel_args }) => {
 export const declare_top10_services_application_volume_panel = () =>
   declare_panel({
     panel_key: "top10_services_application_volume",
-    levels: ["dept"],
+    levels: ["dept", "program"],
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
       calculate: (subject) => ({
         subject,
-        services: Service.get_by_dept(subject.id),
+        services:
+          level === "dept"
+            ? Service.get_by_dept(subject.id)
+            : Service.get_by_prog(subject.id),
       }),
       footnotes: false,
       render({ calculations, sources }) {

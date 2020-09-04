@@ -128,16 +128,20 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
 export const declare_services_id_methods_panel = () =>
   declare_panel({
     panel_key: "services_id_methods",
-    levels: ["dept", "gov"],
+    levels: ["gov", "dept", "program"],
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
-      calculate: (subject) => ({
-        subject,
-        services:
-          level === "dept"
-            ? Service.get_by_dept(subject.id)
-            : Service.get_all(),
-      }),
+      calculate: (subject) => {
+        const services = {
+          dept: Service.get_by_dept(subject.id),
+          program: Service.get_by_prog(subject.id),
+          gov: Service.get_all(),
+        };
+        return {
+          subject,
+          services: services[level],
+        };
+      },
       footnotes: false,
       render({ calculations, sources }) {
         const { panel_args } = calculations;
