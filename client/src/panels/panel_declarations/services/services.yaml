@@ -187,7 +187,7 @@ top10_services_volume_text:
 top10_gov_website_visits:
   en: Top 10 organizations with highest website visits
   fr: Les 10 organisations les plus visitées sur leur site web
-top10_dept_website_visits:
+top10_services_website_visits:
   en: Top 10 services with highest website visits
   fr: Les 10 services les plus visités sur leur site web
 top10_gov_website_visits_text:
@@ -196,7 +196,7 @@ top10_gov_website_visits_text:
     Below are the top 10 organizations with the highest website visit volume. **{{highest_volume_name}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** website visits.
   fr: |
     Vous trouverez ci-dessous les 10 organisations ayant le plus grand nombre de visites sur leur site web. **{{highest_volume_name}}** a connu le trafic le plus important avec **{{fmt_big_int highest_volume_value}}** visites de son site web.
-top10_dept_website_visits_text:
+top10_services_website_visits_text:
   transform: [handlebars, markdown]
   en: |
     Below are the top 10 services with the highest website visit volume. **{{highest_volume_name}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** website visits.

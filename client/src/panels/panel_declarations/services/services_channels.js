@@ -256,7 +256,7 @@ class ServicesChannelsPanel extends React.Component {
               />
             </div>
           </HeightClippedGraph>
-        )}{" "}
+        )}
       </div>
     );
   }
@@ -265,13 +265,16 @@ class ServicesChannelsPanel extends React.Component {
 export const declare_services_channels_panel = () =>
   declare_panel({
     panel_key: "services_channels",
-    levels: ["dept"],
+    levels: ["dept", "program"],
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
-      calculate: (subject) => {
-        const services = Service.get_by_dept(subject.id);
-        return { subject, services };
-      },
+      calculate: (subject) => ({
+        subject,
+        services:
+          level === "dept"
+            ? Service.get_by_dept(subject.id)
+            : Service.get_by_prog(subject.id),
+      }),
       footnotes: false,
       render({ calculations, sources }) {
         const { panel_args } = calculations;

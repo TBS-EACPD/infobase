@@ -29,6 +29,11 @@ const Service = class Service extends static_subject_store() {
   static get_by_dept(org_id) {
     return _.filter(Service.get_all(), (serv) => serv.subject.id === org_id);
   }
+  static get_by_prog(program_id) {
+    return _.filter(Service.get_all(), (serv) =>
+      _.includes(serv.program_ids, program_id)
+    );
+  }
   get level() {
     return "service";
   }
