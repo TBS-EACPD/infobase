@@ -50,18 +50,19 @@
           },
           {
             "pattern": "src/components/**/*.js",
-            "group": "external",
-            "position": "after"
+            "group": "internal",
+            "position": "before"
           },
           {
             "pattern": "src/models/**/*.js",
-            "group": "external",
-            "position": "after"
+            "group": "internal",
+            "position": "before"
+
           },
           {
             "pattern": "src/core/**/*.js",
-            "group": "external",
-            "position": "after"
+            "group": "internal",
+            "position": "before"
           }
         ]          
       }
