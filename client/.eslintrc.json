@@ -26,11 +26,55 @@
       "react/no-string-refs": [ "off" ],
       "react/display-name": [ "off" ],
       "react/no-find-dom-node": [ "off" ],
-      "react/no-children-prop": [ "off" ]
+      "react/no-children-prop": [ "off" ],
+    "import/order": [
+      "warn", { 
+        "newlines-between": "always-and-inside-groups",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true 
+        },
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          ["sibling", "index"]
+        ],
+        // We can group imports further by adding rules here, the order they're defined in breaks ties when group and position are equal
+        "pathGroups":[
+          {
+            "pattern": "./*.yaml",
+            "group": "index",
+            "position": "after"
+          },
+          {
+            "pattern": "components/**/*.js",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "models/**/*.js",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "core/**/*.js",
+            "group": "external",
+            "position": "after"
+          }
+        ]          
+      }
+    ]
   },
   "settings": {
     "react": {
       "version": "16"
+    },
+    "import/resolver":{
+      "node": {
+        "moduleDirectory": ["src/","node_modules/"]
+      }
     }
   },
   "globals": {
