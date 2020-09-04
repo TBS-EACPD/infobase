@@ -1,3 +1,5 @@
+import { trivial_text_maker } from "../models/text.js";
+
 import {
   mix,
   staticStoreMixin,
@@ -5,7 +7,6 @@ import {
   SubjectMixin,
   CanHaveAPIData,
 } from "./storeMixins.js";
-import { trivial_text_maker } from "../models/text.js";
 
 const static_subject_store = () =>
   mix().with(staticStoreMixin, PluralSingular, SubjectMixin);

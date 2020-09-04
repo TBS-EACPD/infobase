@@ -1,7 +1,6 @@
-import { Fragment } from "react";
 import classNames from "classnames";
+import { Fragment } from "react";
 
-import { infograph_href_template } from "src/link_utils.js";
 
 import { GlossaryEntry } from "src/models/glossary.js";
 import { run_template } from "src/models/text.js";
@@ -14,10 +13,12 @@ import {
   GlossaryIcon,
 } from "src/components/";
 
-import { get_col_defs } from "src/explorer_common/resource_explorer_common.js";
-import { get_root } from "src/explorer_common/hierarchy_tools.js";
 import { Explorer } from "src/explorer_common/explorer_components.js";
+import { get_root } from "src/explorer_common/hierarchy_tools.js";
+import { get_col_defs } from "src/explorer_common/resource_explorer_common.js";
+import { infograph_href_template } from "src/link_utils.js";
 
+import { hierarchy_scheme_configs } from "./hierarchy_scheme_configs.js";
 import {
   text_maker,
   TM,
@@ -25,7 +26,6 @@ import {
   actual_year,
   year_to_route_arg_map,
 } from "./utils.js";
-import { hierarchy_scheme_configs } from "./hierarchy_scheme_configs.js";
 
 const children_grouper = (node, children) => {
   if (node.root) {

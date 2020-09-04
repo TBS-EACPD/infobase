@@ -1,9 +1,10 @@
-import text from "./orgSobjsQfr.yaml";
 import { businessConstants } from "../models/businessConstants";
 
-const { sos } = businessConstants;
-
 import { trivial_text_maker } from "../models/text";
+
+import text from "./orgSobjsQfr.yaml";
+
+const { sos } = businessConstants;
 
 export default {
   text,

@@ -1,6 +1,6 @@
 import { IconQuestion } from "../icons/icons.js";
-import { GlossaryEntry } from "../models/glossary.js";
 import { glossary_href } from "../link_utils.js";
+import { GlossaryEntry } from "../models/glossary.js";
 import { trivial_text_maker } from "../models/text.js";
 
 const GlossaryTooltipWrapper = ({

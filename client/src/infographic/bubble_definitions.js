@@ -1,6 +1,7 @@
+import { trivial_text_maker as text_maker } from "../models/text.js";
+
 import text from "./bubble_definitions.yaml";
 import svgs from "./bubble_svgs.yaml";
-import { trivial_text_maker as text_maker } from "../models/text.js";
 
 export const bubble_defs = {
   intro: {

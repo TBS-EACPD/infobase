@@ -1,25 +1,31 @@
 import { Redirect } from "react-router";
 
 import "./Infographic.scss";
-import text from "./Infographic.yaml";
 
-import { StandardRouteContainer } from "../core/NavComponents";
-import { log_standard_event } from "../core/analytics.js";
-import { BubbleMenu } from "./BubbleMenu.js";
-import AccessibleBubbleMenu from "./a11y_bubble_menu.js";
-import { shallowEqualObjectsOverKeys, SafeJSURL } from "../general_utils.js";
-import { Subject } from "../models/subject.js";
-import { ensure_loaded } from "../core/lazy_loader.js";
-import { bubble_defs } from "./bubble_definitions.js";
-import { get_panels_for_subject } from "../panels/get_panels_for_subject/index.js";
-import { PanelRenderer } from "../panels/PanelRenderer.js";
 import {
   create_text_maker_component,
   SpinnerWrapper,
   AdvancedSearch,
 } from "../components/index.js";
+import { log_standard_event } from "../core/analytics.js";
+
+
+import { ensure_loaded } from "../core/lazy_loader.js";
+import { StandardRouteContainer } from "../core/NavComponents";
+import { shallowEqualObjectsOverKeys, SafeJSURL } from "../general_utils.js";
+import { Subject } from "../models/subject.js";
+
+
+import { get_panels_for_subject } from "../panels/get_panels_for_subject/index.js";
+import { PanelRenderer } from "../panels/PanelRenderer.js";
+
+import AccessibleBubbleMenu from "./a11y_bubble_menu.js";
+import { bubble_defs } from "./bubble_definitions.js";
+import { BubbleMenu } from "./BubbleMenu.js";
 
 import { infograph_href_template } from "./infographic_link.js";
+
+import text from "./Infographic.yaml";
 
 const sub_app_name = "infographic_org";
 

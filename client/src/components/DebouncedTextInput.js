@@ -1,5 +1,5 @@
-import { Fragment } from "react";
 import classNames from "classnames";
+import { Fragment } from "react";
 
 class DebouncedTextInput extends React.Component {
   render() {

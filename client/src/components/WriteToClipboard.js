@@ -1,12 +1,14 @@
-import text from "./WriteToClipboard.yaml";
 
 import * as clipboard from "clipboard-polyfill";
 import { Fragment } from "react";
 
-import { FixedPopover } from "./modals_and_popovers";
 import { IconCopy } from "../icons/icons.js";
 
 import { create_text_maker } from "../models/text.js";
+
+import { FixedPopover } from "./modals_and_popovers";
+
+import text from "./WriteToClipboard.yaml";
 
 const text_maker = create_text_maker(text);
 

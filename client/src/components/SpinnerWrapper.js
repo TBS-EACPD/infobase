@@ -1,4 +1,5 @@
 import { Spinner, spinner_configs } from "../core/Spinner.js";
+
 import { LeafSpinner } from "./LeafSpinner.js";
 
 export class SpinnerWrapper extends React.Component {

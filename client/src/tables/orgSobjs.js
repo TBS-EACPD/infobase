@@ -1,8 +1,3 @@
-import text from "./orgSobjs.yaml";
-
-// see [here](../table_definition.html) for description
-// of the table spec
-
 import {
   stats,
   trivial_text_maker,
@@ -11,6 +6,12 @@ import {
   businessConstants,
   year_templates,
 } from "./table_common";
+
+import text from "./orgSobjs.yaml";
+
+// see [here](../table_definition.html) for description
+// of the table spec
+
 
 const { sos } = businessConstants;
 const { std_years } = year_templates;

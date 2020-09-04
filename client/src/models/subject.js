@@ -1,3 +1,4 @@
+import { BudgetMeasure } from "./budget_measures.js";
 import {
   Gov,
   Dept,
@@ -7,9 +8,8 @@ import {
   Ministry,
   Minister,
 } from "./organizational_entities.js";
-import { Tag } from "./tags.js";
 import { Result, Indicator } from "./results.js";
-import { BudgetMeasure } from "./budget_measures.js";
+import { Tag } from "./tags.js";
 
 const Subject = {
   Gov,

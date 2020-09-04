@@ -1,10 +1,5 @@
-import { get_static_url, make_request } from "../request_utils.js";
-import { query_adapter } from "./tables/queries.js";
-import {
-  attach_dimensions,
-  fill_dimension_columns,
-  trivial_dimension,
-} from "./tables/dimensions.js";
+import { make_unique_func, make_unique } from "../general_utils.js";
+import { sources as all_sources } from "../metadata/data_sources.js";
 import { mix, staticStoreMixin } from "../models/storeMixins.js";
 import { Subject } from "../models/subject.js";
 import {
@@ -12,8 +7,14 @@ import {
   run_template,
   create_text_maker,
 } from "../models/text.js";
-import { sources as all_sources } from "../metadata/data_sources.js";
-import { make_unique_func, make_unique } from "../general_utils.js";
+import { get_static_url, make_request } from "../request_utils.js";
+
+import {
+  attach_dimensions,
+  fill_dimension_columns,
+  trivial_dimension,
+} from "./tables/dimensions.js";
+import { query_adapter } from "./tables/queries.js";
 
 const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;
 const { Dept } = Subject;

@@ -1,5 +1,5 @@
-import { Subject } from "../models/subject.js";
 import { SafeJSURL } from "../general_utils.js";
+import { Subject } from "../models/subject.js";
 
 const rpb_link = (naive_state, first_character = "#") =>
   _.chain(naive_state)

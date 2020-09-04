@@ -1,7 +1,5 @@
 // see [here](../table_definition.html) for description
 // of the table spec
-import text from "./orgTransferPayments.yaml";
-
 import {
   stats,
   trivial_text_maker,
@@ -9,6 +7,9 @@ import {
   year_templates,
   businessConstants,
 } from "./table_common";
+
+import text from "./orgTransferPayments.yaml";
+
 
 const { std_years } = year_templates;
 const { transfer_payments } = businessConstants;

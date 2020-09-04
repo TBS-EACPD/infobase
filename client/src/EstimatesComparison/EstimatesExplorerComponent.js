@@ -1,7 +1,5 @@
 import classNames from "classnames";
 
-import { infograph_href_template, rpb_link } from "src/link_utils.js";
-import { sources } from "src/metadata/data_sources.js";
 
 import {
   SpinnerWrapper,
@@ -16,6 +14,11 @@ import {
 
 import { Explorer } from "src/explorer_common/explorer_components.js";
 import { get_root } from "src/explorer_common/hierarchy_tools.js";
+import { infograph_href_template, rpb_link } from "src/link_utils.js";
+import { sources } from "src/metadata/data_sources.js";
+
+
+import { businessConstants } from "../models/businessConstants.js";
 
 import {
   text_maker,
@@ -23,8 +26,6 @@ import {
   current_doc_is_mains,
   current_sups_letter,
 } from "./utils.js";
-
-import { businessConstants } from "../models/businessConstants.js";
 
 const { estimates_docs } = businessConstants;
 

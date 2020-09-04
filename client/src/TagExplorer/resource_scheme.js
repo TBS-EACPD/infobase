@@ -1,4 +1,16 @@
 import { createSelector } from "reselect";
+
+import { trivial_text_maker as text_maker } from "src/models/text.js";
+
+import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
+import {
+  filter_hierarchy,
+  convert_d3_hierarchy_to_explorer_hierarchy,
+} from "src/explorer_common/hierarchy_tools.js";
+import {
+  create_sort_func_selector,
+  get_resources_for_subject,
+} from "src/explorer_common/resource_explorer_common.js";
 import {
   cached_property,
   bound,
@@ -6,21 +18,12 @@ import {
   sanitized_dangerous_inner_html,
 } from "src/general_utils";
 
-import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
-import {
-  create_sort_func_selector,
-  get_resources_for_subject,
-} from "src/explorer_common/resource_explorer_common.js";
-import {
-  filter_hierarchy,
-  convert_d3_hierarchy_to_explorer_hierarchy,
-} from "src/explorer_common/hierarchy_tools.js";
 
 import { infograph_href_template } from "src/link_utils.js";
-import { trivial_text_maker as text_maker } from "src/models/text.js";
 
-import { related_tags_row } from "./tag_hierarchy_utils.js";
+
 import { hierarchy_scheme_configs } from "./hierarchy_scheme_configs.js";
+import { related_tags_row } from "./tag_hierarchy_utils.js";
 import TagExplorerComponent from "./TagExplorerComponent.js";
 
 function create_resource_hierarchy({ hierarchy_scheme, year }) {

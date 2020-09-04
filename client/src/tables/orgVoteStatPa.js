@@ -1,6 +1,6 @@
 // see [here](../table_definition.html) for description
 // of the table spec
-import text from "./orgVoteStatPa.yaml";
+import { trivial_text_maker } from "../models/text.js";
 
 import {
   stats,
@@ -10,7 +10,9 @@ import {
   Statistics,
   year_templates,
 } from "./table_common";
-import { trivial_text_maker } from "../models/text.js";
+
+import text from "./orgVoteStatPa.yaml";
+
 
 const { std_years } = year_templates;
 const voted_label = trivial_text_maker("voted");

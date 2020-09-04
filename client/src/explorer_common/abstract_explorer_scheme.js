@@ -1,7 +1,7 @@
-import { createSelector } from "reselect";
+import { connect, Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import redux_promise_middleware from "redux-promise-middleware";
-import { connect, Provider } from "react-redux";
+import { createSelector } from "reselect";
 
 import { cached_property, bound } from "src/general_utils.js";
 

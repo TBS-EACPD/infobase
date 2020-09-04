@@ -1,5 +1,3 @@
-import text from "./orgEmployeeRegion.yaml";
-
 import {
   stats,
   trivial_text_maker,
@@ -9,6 +7,9 @@ import {
   businessConstants,
   year_templates,
 } from "./table_common";
+
+import text from "./orgEmployeeRegion.yaml";
+
 
 const { formats } = format;
 const { provinces } = businessConstants;

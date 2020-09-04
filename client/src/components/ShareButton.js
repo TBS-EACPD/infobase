@@ -1,6 +1,3 @@
-import text from "./ShareButton.yaml";
-import "./ShareButton.scss";
-
 import { Fragment } from "react";
 import {
   TwitterShareButton,
@@ -19,6 +16,9 @@ import { IconShare } from "../icons/icons.js";
 import { create_text_maker } from "../models/text.js";
 
 import { StatelessModal } from "./modals_and_popovers";
+
+import text from "./ShareButton.yaml";
+import "./ShareButton.scss";
 
 const text_maker = create_text_maker(text);
 

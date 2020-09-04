@@ -1,11 +1,14 @@
 import { Fragment } from "react";
 import { withRouter } from "react-router";
-import { reactAdapter } from "./reactAdapter.js";
-import { log_page_view } from "./analytics.js";
-import { index_lang_lookups } from "../InfoBase/index_data.js";
-import { trivial_text_maker } from "../models/text.js";
-import { IconHome } from "../icons/icons.js";
+
 import { AlertBanner } from "../components/index.js";
+import { IconHome } from "../icons/icons.js";
+import { index_lang_lookups } from "../InfoBase/index_data.js";
+
+import { trivial_text_maker } from "../models/text.js";
+
+import { log_page_view } from "./analytics.js";
+import { reactAdapter } from "./reactAdapter.js";
 
 import "./NavComponents.scss";
 

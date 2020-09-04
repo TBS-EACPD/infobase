@@ -1,12 +1,12 @@
+import { trivial_text_maker } from "../models/text.js";
+
+import { Program } from "./organizational_entities.js";
 import {
   mix,
   staticStoreMixin,
   PluralSingular,
   SubjectMixin,
 } from "./storeMixins.js";
-import { trivial_text_maker } from "../models/text.js";
-
-import { Program } from "./organizational_entities.js";
 
 // dependencies are tangled up too much here, disable it for the whole file
 /* eslint-disable no-use-before-define */

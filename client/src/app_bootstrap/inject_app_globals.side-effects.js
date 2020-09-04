@@ -1,3 +1,4 @@
+/* eslint-disable import/order */
 /* eslint-disable no-undef */
 if (typeof APPLICATION_LANGUAGE !== "undefined") {
   window.lang = APPLICATION_LANGUAGE;

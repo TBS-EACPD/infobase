@@ -1,6 +1,6 @@
-import { businessConstants } from "../models/businessConstants.js";
 import { NA_color } from "../core/color_schemes.js";
 import { formats } from "../core/format.js";
+import { businessConstants } from "../models/businessConstants.js";
 
 export const infobase_colors_smart = (col_scale) => (label) => {
   if (_.includes(businessConstants.NA_values, label)) {
