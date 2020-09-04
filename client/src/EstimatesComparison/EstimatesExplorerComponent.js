@@ -1,7 +1,7 @@
 import classNames from "classnames";
 
-import { infograph_href_template, rpb_link } from "link_utils.js";
-import { sources } from "metadata/data_sources.js";
+import { infograph_href_template, rpb_link } from "src/link_utils.js";
+import { sources } from "src/metadata/data_sources.js";
 
 import {
   SpinnerWrapper,
@@ -12,10 +12,10 @@ import {
   LabeledBox,
   CheckBox,
   Details,
-} from "components/index.js";
+} from "src/components/index.js";
 
-import { Explorer } from "explorer_common/explorer_components.js";
-import { get_root } from "explorer_common/hierarchy_tools.js";
+import { Explorer } from "src/explorer_common/explorer_components.js";
+import { get_root } from "src/explorer_common/hierarchy_tools.js";
 
 import {
   text_maker,

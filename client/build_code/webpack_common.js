@@ -1,9 +1,10 @@
 const std_lib_path = require("path");
-const _ = require("lodash");
-const webpack = require("webpack");
-const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
-const CircularDependencyPlugin = require("circular-dependency-plugin");
+
 const { BundleStatsWebpackPlugin } = require("bundle-stats");
+const CircularDependencyPlugin = require("circular-dependency-plugin");
+const _ = require("lodash");
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+const webpack = require("webpack");
 
 const CDN_URL = process.env.CDN_URL || ".";
 const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
@@ -253,7 +254,7 @@ function create_config({
     optimization: get_optimizations(is_prod_build, bundle_stats),
     devtool: is_prod_build ? false : "inline-source-map",
     resolve: {
-      modules: [std_lib_path.resolve(__dirname, "../src/"), "node_modules/"],
+      modules: [std_lib_path.resolve(__dirname, "../"), "node_modules/"],
     },
   };
 }

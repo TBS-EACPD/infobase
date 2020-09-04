@@ -5,18 +5,18 @@ import {
   bound,
   shallowEqualObjectsOverKeys,
   sanitized_dangerous_inner_html,
-} from "general_utils";
+} from "src/general_utils";
 import {
   get_resources_for_subject,
   create_sort_func_selector,
-} from "explorer_common/resource_explorer_common.js";
+} from "src/explorer_common/resource_explorer_common.js";
 import {
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,
-} from "explorer_common/hierarchy_tools.js";
-import { AbstractExplorerScheme } from "explorer_common/abstract_explorer_scheme";
+} from "src/explorer_common/hierarchy_tools.js";
+import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 
-import { trivial_text_maker } from "models/text";
+import { trivial_text_maker } from "src/models/text";
 
 import SingleTagResourceExplorerComponent from "./explorer_component.js";
 

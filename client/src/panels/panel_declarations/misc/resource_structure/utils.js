@@ -1,6 +1,6 @@
-import { create_text_maker_component } from "components";
+import { create_text_maker_component } from "src/components";
 
-import { year_templates } from "models/years";
+import { year_templates } from "src/models/years";
 
 import text from "./resource_structure.yaml";
 
