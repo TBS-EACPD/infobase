@@ -20,8 +20,19 @@ import {
   declare_dp_rev_split_panel,
   declare_drr_summary_panel,
 
+  // shared gov, dept, program
+  declare_services_types_panel,
+  declare_services_digital_status_panel,
+  declare_services_fees_panel,
+  declare_services_id_methods_panel,
+  declare_services_standards_panel,
+  declare_top10_website_visits_panel,
+
   // shared dept, program,
   declare_spend_rev_split_panel,
+  declare_provided_services_list_panel,
+  declare_services_channels_panel,
+  declare_top10_services_application_volume_panel,
 
   // program only panels
   declare_dead_program_warning_panel,
@@ -39,6 +50,7 @@ export const get_program_panels = (subject) =>
   ensure_loaded({
     subject: subject,
     has_results: true,
+    has_services: true,
   }).then(() => ({
     intro: [
       declare_dead_program_warning_panel(),
@@ -57,6 +69,17 @@ export const get_program_panels = (subject) =>
       declare_spending_in_tag_perspective_panel(),
       declare_planned_actual_comparison_panel(),
       declare_dp_rev_split_panel(),
+    ],
+    services: subject.has_data("services_data") && [
+      declare_provided_services_list_panel(),
+      declare_services_types_panel(),
+      declare_services_digital_status_panel(),
+      declare_services_id_methods_panel(),
+      declare_services_channels_panel(),
+      declare_top10_services_application_volume_panel(),
+      declare_top10_website_visits_panel(),
+      declare_services_fees_panel(),
+      declare_services_standards_panel(),
     ],
     results: !subject.is_internal_service &&
       subject.has_data("results") && [

@@ -100,7 +100,11 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
     <div>
       <TM
         className="medium_panel_text"
-        k={`top10_${subject.level}_website_visits_text`}
+        k={
+          subject.level === "gov"
+            ? "top10_gov_website_visits_text"
+            : "top10_services_website_visits_text"
+        }
         args={{
           highest_volume_name: get_name(_.last(data).id),
           highest_volume_value: _.last(data)[total_volume],
@@ -182,24 +186,30 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
 export const declare_top10_website_visits_panel = () =>
   declare_panel({
     panel_key: "top10_website_visits",
-    levels: ["gov", "dept"],
+    levels: ["gov", "dept", "program"],
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
-      calculate: (subject) => ({
-        subject,
-        services:
-          level === "dept"
-            ? Service.get_by_dept(subject.id)
-            : Service.get_all(),
-      }),
+      calculate: (subject) => {
+        const services = {
+          dept: Service.get_by_dept(subject.id),
+          program: Service.get_by_prog(subject.id),
+          gov: Service.get_all(),
+        };
+        return {
+          subject,
+          services: services[level],
+        };
+      },
       footnotes: false,
       render({ calculations, sources }) {
         const { panel_args } = calculations;
         return (
           <InfographicPanel
-            title={text_maker(
-              `top10_${panel_args.subject.level}_website_visits`
-            )}
+            title={
+              panel_args.subject.level === "gov"
+                ? "top10_gov_website_visits"
+                : "top10_services_website_visits"
+            }
             sources={sources}
           >
             <Top10WebsiteVisitsPanel panel_args={panel_args} />
