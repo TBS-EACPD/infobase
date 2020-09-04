@@ -1,11 +1,12 @@
-import "./FootnoteList.scss";
-import footnote_list_text from "./FootnoteList.yaml";
+import { sanitized_dangerous_inner_html } from "../general_utils.js";
 import footnote_topic_text from "../models/footnotes/footnote_topics.yaml";
 
 import { create_text_maker } from "../models/text.js";
-import { sanitized_dangerous_inner_html } from "../general_utils.js";
 
 import { FancyUL } from "./FancyUL.js";
+
+import footnote_list_text from "./FootnoteList.yaml";
+import "./FootnoteList.scss";
 
 const text_maker = create_text_maker([footnote_list_text, footnote_topic_text]);
 

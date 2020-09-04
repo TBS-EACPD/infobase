@@ -1,12 +1,13 @@
+import { IconGrid } from "../components/IconGrid.js";
+import { TM } from "../components/index.js";
+import { LabeledTable } from "../components/LabeledTable.js";
+import { StandardRouteContainer } from "../core/NavComponents.js";
+import { create_text_maker } from "../models/text.js";
+import { get_static_url } from "../request_utils.js";
+
 import about_text_bundle from "./about.yaml";
 import "./about.scss";
 import "../explorer_common/explorer-styles.scss";
-import { StandardRouteContainer } from "../core/NavComponents.js";
-import { TM } from "../components/index.js";
-import { create_text_maker } from "../models/text.js";
-import { LabeledTable } from "../components/LabeledTable.js";
-import { IconGrid } from "../components/IconGrid.js";
-import { get_static_url } from "../request_utils.js";
 
 const text_maker = create_text_maker(about_text_bundle);
 

@@ -9,16 +9,13 @@ import {
   TextAbbrev,
 } from "src/components";
 
-import { infograph_href_template } from "src/infographic/infographic_link.js";
-
 import { Explorer } from "src/explorer_common/explorer_components.js";
 import { get_root } from "src/explorer_common/hierarchy_tools.js";
+import { infograph_href_template } from "src/infographic/infographic_link.js";
 
-import "./result_drilldown.scss";
-
-import { Indicator, result_docs } from "../results_common.js";
 import { StatusIconTable, InlineStatusIconList } from "../result_components.js";
 import { TM, text_maker } from "../result_text_provider.js";
+import { Indicator, result_docs } from "../results_common.js";
 
 import {
   get_type_name,
@@ -27,6 +24,7 @@ import {
   fte_header,
   ResultCounts as ResultCountsComponent,
 } from "./result_displays.js";
+import "./result_drilldown.scss";
 
 const get_non_col_content_func = createSelector(_.property("doc"), (doc) => {
   return ({ node }) => {

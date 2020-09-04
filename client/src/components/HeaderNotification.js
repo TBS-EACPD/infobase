@@ -1,5 +1,5 @@
-import "./HeaderNotification.scss";
 import { trivial_text_maker } from "../models/text.js";
+import "./HeaderNotification.scss";
 
 export class HeaderNotification extends React.Component {
   state = {

@@ -1,6 +1,5 @@
-import "./Tombstones.scss";
-
 import { Fragment } from "react";
+import "./Tombstones.scss";
 
 const UnlabeledTombstone = ({ items }) => (
   <table className="tombstone-table">

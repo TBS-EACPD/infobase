@@ -1,7 +1,3 @@
-import "./home.scss";
-import home_text_bundle from "./home.yaml";
-import { featured_content_items } from "./home-data.js";
-import { log_standard_event } from "../core/analytics.js";
 import MediaQuery from "react-responsive";
 
 import {
@@ -12,10 +8,16 @@ import {
   ContainerEscapeHatch,
   TrinityItem,
 } from "../components/index.js";
+import { log_standard_event } from "../core/analytics.js";
 
-import { smart_href_template } from "../link_utils.js";
 import { StandardRouteContainer } from "../core/NavComponents.js";
+import { smart_href_template } from "../link_utils.js";
 import { get_static_url } from "../request_utils.js";
+
+import { featured_content_items } from "./home-data.js";
+
+import home_text_bundle from "./home.yaml";
+import "./home.scss";
 
 const { text_maker: home_tm, TM } = create_text_maker_component(
   home_text_bundle

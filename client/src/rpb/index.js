@@ -1,31 +1,33 @@
+import { Fragment } from "react";
+
+//data and state stuff
+
+//re-usable view stuff
+import AriaModal from "react-aria-modal";
+import { withRouter } from "react-router";
+
+import { SpinnerWrapper, LabeledBox } from "../components/index.js";
+import { log_standard_event } from "../core/analytics.js";
+import { ensure_loaded } from "../core/lazy_loader.js";
 import {
   StandardRouteContainer,
   LangSynchronizer,
 } from "../core/NavComponents";
-import { withRouter } from "react-router";
-import { log_standard_event } from "../core/analytics.js";
-import { Fragment } from "react";
-import { TextMaker, text_maker } from "./rpb_text_provider.js";
-import "./rpb.scss";
-
-//data and state stuff
-import { ensure_loaded } from "../core/lazy_loader.js";
-
-//re-usable view stuff
-import { SpinnerWrapper, LabeledBox } from "../components/index.js";
-import AriaModal from "react-aria-modal";
 
 //specific view stuff
-import { AccessibleTablePicker, TablePicker } from "./TablePicker.js";
-import { GranularView } from "./granular_view.js";
-import { ShareReport } from "./shared.js";
 import { Table } from "../core/TableClass.js";
-import { Subject } from "../models/subject.js";
-import Footnote from "../models/footnotes/footnotes.js";
 
 //misc app stuff
-import { rpb_link } from "./rpb_link.js";
 import { SafeJSURL } from "../general_utils.js";
+import Footnote from "../models/footnotes/footnotes.js";
+import { Subject } from "../models/subject.js";
+
+import { GranularView } from "./granular_view.js";
+import { rpb_link } from "./rpb_link.js";
+import { TextMaker, text_maker } from "./rpb_text_provider.js";
+import { ShareReport } from "./shared.js";
+import { AccessibleTablePicker, TablePicker } from "./TablePicker.js";
+import "./rpb.scss";
 
 const sub_app_name = "_rpb";
 

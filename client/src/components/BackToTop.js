@@ -1,6 +1,7 @@
-import "./BackToTop.scss";
-import { trivial_text_maker } from "../models/text.js";
 import classNames from "classnames";
+
+import { trivial_text_maker } from "../models/text.js";
+import "./BackToTop.scss";
 
 export class BackToTop extends React.Component {
   constructor(props) {

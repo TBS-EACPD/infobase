@@ -1,24 +1,25 @@
 import "./BudgetMeasuresRoute.yaml";
-import "./BudgetMeasuresRoute.scss";
 import { Fragment } from "react";
-import { Subject } from "../../models/subject";
-import { businessConstants } from "../../models/businessConstants.js";
-import { ensure_loaded } from "../../core/lazy_loader.js";
-import { StandardRouteContainer } from "../../core/NavComponents.js";
+
 import {
   SpinnerWrapper,
   Details,
   TabbedControls,
 } from "../../components/index.js";
+import { ensure_loaded } from "../../core/lazy_loader.js";
+import { StandardRouteContainer } from "../../core/NavComponents.js";
+import { businessConstants } from "../../models/businessConstants.js";
+import { Subject } from "../../models/subject";
 
 import { text_maker, TextMaker } from "./budget_measure_text_provider.js";
 
+import { BudgetMeasuresA11yContent } from "./BudgetMeasuresA11yContent.js";
+import { BudgetMeasuresControls } from "./BudgetMeasuresControls.js";
+import { BudgetMeasuresFooter } from "./BudgetMeasuresFooter.js";
+import { BudgetMeasuresPartition } from "./BudgetMeasuresPartition.js";
 import { calculate_budget_stats } from "./calculate_budget_stats.js";
 
-import { BudgetMeasuresControls } from "./BudgetMeasuresControls.js";
-import { BudgetMeasuresPartition } from "./BudgetMeasuresPartition.js";
-import { BudgetMeasuresFooter } from "./BudgetMeasuresFooter.js";
-import { BudgetMeasuresA11yContent } from "./BudgetMeasuresA11yContent.js";
+import "./BudgetMeasuresRoute.scss";
 
 const { BudgetMeasure } = Subject;
 const {

@@ -1,18 +1,18 @@
-import "./wrapped_nivo_common.scss";
-import graph_text from "./wrapped_nivo_common.yaml";
-
+import classNames from "classnames";
 import { Fragment } from "react";
 import MediaQuery from "react-responsive";
-import classNames from "classnames";
 
-import { breakpoints } from "../../core/breakpoint_defs.js";
-import { formats } from "../../core/format.js";
-import { get_formatter, infobase_colors_smart } from "../shared.js";
-import { IconTable } from "../../icons/icons.js";
 import {
   create_text_maker_component,
   StatelessModal,
 } from "../../components/index.js";
+import { breakpoints } from "../../core/breakpoint_defs.js";
+import { formats } from "../../core/format.js";
+import { IconTable } from "../../icons/icons.js";
+import { get_formatter, infobase_colors_smart } from "../shared.js";
+
+import graph_text from "./wrapped_nivo_common.yaml";
+import "./wrapped_nivo_common.scss";
 
 const { text_maker: nivo_common_text_maker } = create_text_maker_component(
   graph_text

@@ -1,8 +1,10 @@
-import diagram_text from "./PartitionDiagram.yaml";
-import "./PartitionDiagram.scss";
-import { PartitionDataWrapper } from "./PartitionDataWrapper.js";
 import * as general_utils from "../../general_utils";
 import { create_text_maker } from "../../models/text.js";
+
+import { PartitionDataWrapper } from "./PartitionDataWrapper.js";
+
+import diagram_text from "./PartitionDiagram.yaml";
+import "./PartitionDiagram.scss";
 
 const text_maker = create_text_maker(diagram_text);
 

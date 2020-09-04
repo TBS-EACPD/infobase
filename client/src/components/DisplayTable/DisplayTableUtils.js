@@ -1,12 +1,12 @@
-import "./DisplayTableUtils.scss";
-import text from "./DisplayTable.yaml";
-
 import { Fragment } from "react";
 
+import { IconCopy, IconDownload } from "../../icons/icons.js";
+import { DropdownMenu } from "../DropdownMenu.js";
 import { create_text_maker_component } from "../misc_util_components.js";
 import { WriteToClipboard } from "../WriteToClipboard.js";
-import { DropdownMenu } from "../DropdownMenu.js";
-import { IconCopy, IconDownload } from "../../icons/icons.js";
+
+import text from "./DisplayTable.yaml";
+import "./DisplayTableUtils.scss";
 
 const { text_maker } = create_text_maker_component(text);
 

@@ -1,7 +1,7 @@
-import "./CheckBox.scss";
 import classNames from "classnames";
 
 import { IconCheckmark } from "../icons/icons.js";
+import "./CheckBox.scss";
 
 export class CheckBox extends React.Component {
   render() {

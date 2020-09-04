@@ -1,7 +1,6 @@
-import "./FancyUL.scss";
-
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import "./FancyUL.scss";
 
 export const FancyUL = ({ className, title, TitleComponent, children }) => (
   <ul className={classNames("fancy-ul", className)} aria-label={title}>

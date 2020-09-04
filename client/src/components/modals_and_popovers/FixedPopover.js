@@ -1,11 +1,11 @@
+import classNames from "classnames";
+import { Modal } from "react-bootstrap";
+
+import { trivial_text_maker } from "../../models/text.js";
+import { CountdownCircle } from "../CountdownCircle.js";
+
 import "./bootstrap_modal_exstension.scss";
 import "./FixedPopover.scss";
-
-import { Modal } from "react-bootstrap";
-import classNames from "classnames";
-
-import { CountdownCircle } from "../CountdownCircle.js";
-import { trivial_text_maker } from "../../models/text.js";
 
 // Lots of StatlessModal DNA in here, but conciously not DRYed against it! Don't want to couple
 // them, I actually want to encourage them to diverge further in the future to the point that

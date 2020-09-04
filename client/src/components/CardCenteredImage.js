@@ -1,7 +1,7 @@
 import classNames from "classnames";
-import "./CardCenteredImage.scss";
 
 import { TM } from "./TextMaker.js";
+import "./CardCenteredImage.scss";
 
 const CardCenteredImage = ({
   img_src,

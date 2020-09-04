@@ -1,5 +1,5 @@
-import "./BubbleMenu.scss";
 import classNames from "classnames";
+import "./BubbleMenu.scss";
 
 class BubbleMenu extends React.Component {
   render() {

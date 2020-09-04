@@ -1,7 +1,6 @@
-import "./icons.scss";
-
-import { Fragment } from "react";
 import classNames from "classnames";
+import { Fragment } from "react";
+import "./icons.scss";
 
 const svg_default_styles = {
   width: "1.5em",

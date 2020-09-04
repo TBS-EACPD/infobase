@@ -1,6 +1,7 @@
-import "../common_css/grid-system.scss";
 import { Fragment } from "react";
+
 import { Details } from "./Details.js";
+import "../common_css/grid-system.scss";
 
 const KeyConceptList = ({ question_answer_pairs, compact = true }) => (
   <div>

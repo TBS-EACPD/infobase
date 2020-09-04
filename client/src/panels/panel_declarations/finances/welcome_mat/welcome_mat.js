@@ -1,8 +1,5 @@
-import "./welcome-mat.scss";
-import text from "./welcome_mat.yaml";
-
-import { Fragment } from "react";
 import classNames from "classnames";
+import { Fragment } from "react";
 
 import {
   run_template,
@@ -20,6 +17,9 @@ import {
 
 import { format_and_get_exp_program_spending } from "./welcome_mat_exp_program_spending.js";
 import { format_and_get_fte } from "./welcome_mat_fte.js";
+
+import text from "./welcome_mat.yaml";
+import "./welcome-mat.scss";
 
 const { Format } = util_components;
 
