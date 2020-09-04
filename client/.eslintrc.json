@@ -49,17 +49,17 @@
             "position": "after"
           },
           {
-            "pattern": "components/**/*.js",
+            "pattern": "src/components/**/*.js",
             "group": "external",
             "position": "after"
           },
           {
-            "pattern": "models/**/*.js",
+            "pattern": "src/models/**/*.js",
             "group": "external",
             "position": "after"
           },
           {
-            "pattern": "core/**/*.js",
+            "pattern": "src/core/**/*.js",
             "group": "external",
             "position": "after"
           }
@@ -73,7 +73,7 @@
     },
     "import/resolver":{
       "node": {
-        "moduleDirectory": ["src/","node_modules/"]
+        "moduleDirectory": ["./","node_modules/"]
       }
     }
   },
