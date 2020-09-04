@@ -19,6 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "@lhci/server": "^0.4.4",
+    "eslint-import-resolver-node": "^0.3.4",
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3"
   },
