@@ -9,6 +9,7 @@ const schema = `
   }
   extend type Program{
     services: [Service]
+    has_services: Boolean
   }
   type ServiceReport{
     service_id: String
@@ -96,6 +97,10 @@ export default function ({ models, loaders }) {
     const has_service = await Service.findOne({ org_id: org_id });
     return !_.isNull(has_service);
   };
+  const program_has_services = async (program_id) => {
+    const has_service = await Service.find({ program_ids: program_id });
+    return !_.isNull(has_service);
+  };
 
   const resolvers = {
     Org: {
@@ -104,6 +109,7 @@ export default function ({ models, loaders }) {
     },
     Program: {
       services: ({ program_id }) => services_by_program_id.load(program_id),
+      has_services: ({ program_id }) => program_has_services(program_id),
     },
     Service: {
       org: ({ org_id }) => org_id_loader.load(org_id),

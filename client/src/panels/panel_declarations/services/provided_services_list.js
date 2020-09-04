@@ -104,12 +104,15 @@ class ProvidedServicesListPanel extends React.Component {
 export const declare_provided_services_list_panel = () =>
   declare_panel({
     panel_key: "provided_services_list",
-    levels: ["dept"],
+    levels: ["dept", "program"],
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
       calculate: (subject) => ({
         subject,
-        services: Service.get_by_dept(subject.id),
+        services:
+          level === "dept"
+            ? Service.get_by_dept(subject.id)
+            : Service.get_by_prog(subject.id),
       }),
       footnotes: false,
       render({ calculations, sources }) {

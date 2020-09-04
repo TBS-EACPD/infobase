@@ -35,6 +35,15 @@ export function api_load_subject_has_services(subject) {
           query: get_subject_has_services_query("org", "org_id"),
           response_data_accessor: (response) => response.data.root.org,
         };
+      case "program":
+        return {
+          is_loaded: subject_is_loaded(subject),
+          id: subject.id,
+          query: get_subject_has_services_query("program", "id"),
+          response_data_accessor: (response) => {
+            return response.data.root.program;
+          },
+        };
       default:
         return {
           is_loaded: true, // no default case, this is to resolve the promise early
