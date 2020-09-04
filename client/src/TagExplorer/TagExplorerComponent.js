@@ -1,10 +1,10 @@
 import { Fragment } from "react";
 import classNames from "classnames";
 
-import { infograph_href_template } from "link_utils.js";
+import { infograph_href_template } from "src/link_utils.js";
 
-import { GlossaryEntry } from "models/glossary.js";
-import { run_template } from "models/text.js";
+import { GlossaryEntry } from "src/models/glossary.js";
+import { run_template } from "src/models/text.js";
 
 import {
   SpinnerWrapper,
@@ -12,11 +12,11 @@ import {
   TabbedControls,
   AlertBanner,
   GlossaryIcon,
-} from "components/";
+} from "src/components/";
 
-import { get_col_defs } from "explorer_common/resource_explorer_common.js";
-import { get_root } from "explorer_common/hierarchy_tools.js";
-import { Explorer } from "explorer_common/explorer_components.js";
+import { get_col_defs } from "src/explorer_common/resource_explorer_common.js";
+import { get_root } from "src/explorer_common/hierarchy_tools.js";
+import { Explorer } from "src/explorer_common/explorer_components.js";
 
 import {
   text_maker,

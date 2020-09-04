@@ -1,13 +1,13 @@
 import { createSelector } from "reselect";
 
-import { ensure_loaded } from "core/lazy_loader.js";
+import { ensure_loaded } from "src/core/lazy_loader.js";
 
-import { Subject } from "models/subject";
-import { Indicator } from "models/results";
+import { Subject } from "src/models/subject";
+import { Indicator } from "src/models/results";
 
-import { filter_hierarchy } from "explorer_common/hierarchy_tools.js";
-import { AbstractExplorerScheme } from "explorer_common/abstract_explorer_scheme";
-import { cached_property, bound } from "general_utils.js";
+import { filter_hierarchy } from "src/explorer_common/hierarchy_tools.js";
+import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
+import { cached_property, bound } from "src/general_utils.js";
 
 import { create_full_results_hierarchy } from "./result_hierarchies.js";
 import ResultsExplorerDisplay from "./result_drilldown_display";

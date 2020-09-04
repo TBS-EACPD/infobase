@@ -4,20 +4,20 @@ import {
   bound,
   shallowEqualObjectsExceptKeys,
   sanitized_dangerous_inner_html,
-} from "general_utils";
+} from "src/general_utils";
 
-import { AbstractExplorerScheme } from "explorer_common/abstract_explorer_scheme";
+import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 import {
   create_sort_func_selector,
   get_resources_for_subject,
-} from "explorer_common/resource_explorer_common.js";
+} from "src/explorer_common/resource_explorer_common.js";
 import {
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,
-} from "explorer_common/hierarchy_tools.js";
+} from "src/explorer_common/hierarchy_tools.js";
 
-import { infograph_href_template } from "link_utils.js";
-import { trivial_text_maker as text_maker } from "models/text.js";
+import { infograph_href_template } from "src/link_utils.js";
+import { trivial_text_maker as text_maker } from "src/models/text.js";
 
 import { related_tags_row } from "./tag_hierarchy_utils.js";
 import { hierarchy_scheme_configs } from "./hierarchy_scheme_configs.js";

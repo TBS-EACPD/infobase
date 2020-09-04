@@ -7,12 +7,12 @@ import {
   SpinnerWrapper,
   Format,
   TextAbbrev,
-} from "components";
+} from "src/components";
 
-import { infograph_href_template } from "infographic/infographic_link.js";
+import { infograph_href_template } from "src/infographic/infographic_link.js";
 
-import { Explorer } from "explorer_common/explorer_components.js";
-import { get_root } from "explorer_common/hierarchy_tools.js";
+import { Explorer } from "src/explorer_common/explorer_components.js";
+import { get_root } from "src/explorer_common/hierarchy_tools.js";
 
 import "./result_drilldown.scss";
 

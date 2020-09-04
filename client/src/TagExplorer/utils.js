@@ -1,6 +1,6 @@
-import { year_templates } from "models/years.js";
+import { year_templates } from "src/models/years.js";
 
-import { create_text_maker_component } from "components";
+import { create_text_maker_component } from "src/components";
 
 import text from "./TagExplorer.yaml";
 

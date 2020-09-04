@@ -7,8 +7,8 @@ import { create_igoc_hierarchy } from "./hierarchies.js";
 import { ExplorerForIgoc } from "./explorer_view.js";
 import { filter_hierarchy } from "../explorer_common/hierarchy_tools.js";
 import { igoc_tmf as text_maker, TM } from "./igoc_explorer_text.js";
-import { AbstractExplorerScheme } from "explorer_common/abstract_explorer_scheme";
-import { cached_property, bound } from "general_utils.js";
+import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
+import { cached_property, bound } from "src/general_utils.js";
 
 class IgocExplorerScheme extends AbstractExplorerScheme {
   Component = ExplorerForIgoc;

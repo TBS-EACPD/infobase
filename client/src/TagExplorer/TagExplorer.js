@@ -1,8 +1,8 @@
-import "explorer_common/explorer-styles.scss";
+import "src/explorer_common/explorer-styles.scss";
 
-import { StandardRouteContainer } from "core/NavComponents.js";
-import { ensure_loaded } from "core/lazy_loader.js";
-import { SpinnerWrapper } from "components/index.js";
+import { StandardRouteContainer } from "src/core/NavComponents.js";
+import { ensure_loaded } from "src/core/lazy_loader.js";
+import { SpinnerWrapper } from "src/components/index.js";
 
 import { ResourceScheme } from "./resource_scheme.js";
 import {
