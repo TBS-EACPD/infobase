@@ -5,17 +5,21 @@ export class SliderRange extends React.Component {
   constructor(props) {
     super(props);
     this.calculatePosition = this.calculatePosition.bind(this);
+    this.slider = React.createRef();
+    this.slider_label = React.createRef();
   }
-  calculatePosition(slider, slider_label) {
-    const range_width = slider.getBoundingClientRect().width - 15;
-    const percent = slider.value / (this.props.slider_data.length - 1);
-    slider_label.style.left = `${range_width * percent}px`;
+  calculatePosition() {
+    const range_width = this.slider.current.getBoundingClientRect().width - 15;
+    const percent =
+      this.slider.current.value / (this.props.slider_data.length - 1);
+    this.slider_label.current.style.left = `${range_width * percent}px`;
+  }
+  sliderInputOnChange(slider_callback) {
+    this.calculatePosition();
+    slider_callback(this.slider.current.value);
   }
   componentDidMount() {
-    const slider_label = document.getElementsByClassName("slider-label")[0];
-    const slider = document.getElementsByClassName("slider")[0];
-
-    this.calculatePosition(slider, slider_label);
+    this.calculatePosition();
   }
   render() {
     const {
@@ -28,7 +32,7 @@ export class SliderRange extends React.Component {
 
     return (
       <div className="slider-container">
-        <span className="slider-label">
+        <span className="slider-label" ref={this.slider_label}>
           <span
             style={{
               display: "inline-block",
@@ -53,14 +57,8 @@ export class SliderRange extends React.Component {
           max={slider_data.length - 1}
           defaultValue={slider_default_value || slider_data.length - 1}
           step={1}
-          onChange={(e) => {
-            const slider_label = document.getElementsByClassName(
-              "slider-label"
-            )[0];
-            this.calculatePosition(e.target, slider_label);
-
-            slider_callback(e.target.value);
-          }}
+          ref={this.slider}
+          onChange={() => this.sliderInputOnChange(slider_callback)}
         />
         <div
           style={{
