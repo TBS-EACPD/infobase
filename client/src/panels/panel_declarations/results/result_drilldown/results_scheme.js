@@ -2,15 +2,15 @@ import { createSelector } from "reselect";
 
 import { ensure_loaded } from "src/core/lazy_loader.js";
 
-import { Subject } from "src/models/subject";
-import { Indicator } from "src/models/results";
 
-import { filter_hierarchy } from "src/explorer_common/hierarchy_tools.js";
 import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
+import { filter_hierarchy } from "src/explorer_common/hierarchy_tools.js";
 import { cached_property, bound } from "src/general_utils.js";
+import { Indicator } from "src/models/results";
+import { Subject } from "src/models/subject";
 
-import { create_full_results_hierarchy } from "./result_hierarchies.js";
 import ResultsExplorerDisplay from "./result_drilldown_display";
+import { create_full_results_hierarchy } from "./result_hierarchies.js";
 
 export default class ResultsExplorer extends AbstractExplorerScheme {
   Component = ResultsExplorerDisplay;

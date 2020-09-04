@@ -1,7 +1,8 @@
-import text from "./WrappedNivoLine.yaml";
-
 import { ResponsiveLine } from "@nivo/line";
 import classNames from "classnames";
+
+import { SmartDisplayTable } from "../../components/index.js";
+import { IconZoomIn, IconZoomOut } from "../../icons/icons.js";
 
 import {
   create_text_maker_component_with_nivo_common,
@@ -12,8 +13,7 @@ import {
   fix_legend_symbols,
 } from "./wrapped_nivo_common.js";
 
-import { SmartDisplayTable } from "../../components/index.js";
-import { IconZoomIn, IconZoomOut } from "../../icons/icons.js";
+import text from "./WrappedNivoLine.yaml";
 
 const { text_maker } = create_text_maker_component_with_nivo_common(text);
 

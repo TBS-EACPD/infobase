@@ -1,15 +1,17 @@
-import text from "./NivoLineBarToggle.yaml";
 
 import classNames from "classnames";
 
-import { infobase_colors_smart } from "./wrapped_nivo_common.js";
-import { WrappedNivoBar } from "././wrapped_nivo_bar.js";
-import { WrappedNivoLine } from "./WrappedNivoLine.js";
 
-import { StandardLegend } from "../legends";
 import { newIBCategoryColors } from "../../core/color_schemes.js";
 import { formats } from "../../core/format.js";
 import { create_text_maker } from "../../models/text.js";
+import { StandardLegend } from "../legends";
+
+import { WrappedNivoBar } from "././wrapped_nivo_bar.js";
+import { infobase_colors_smart } from "./wrapped_nivo_common.js";
+import { WrappedNivoLine } from "./WrappedNivoLine.js";
+
+import text from "./NivoLineBarToggle.yaml";
 
 const text_maker = create_text_maker(text);
 

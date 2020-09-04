@@ -1,4 +1,4 @@
-import general_utils from "../../general_utils.js";
+import { make_unique } from "../../general_utils.js";
 
 //  Generates all the tables displayed on the page
 //  * no code repetition
@@ -55,7 +55,7 @@ function prepare_data(options) {
     _.each(headers, function (header_row, i) {
       _.each(header_row, function (header, j) {
         var wcag_headers;
-        var id = general_utils.make_unique();
+        var id = make_unique();
         header_links[j] += " " + id;
         if (i > 0) {
           wcag_headers = _.chain(headers)

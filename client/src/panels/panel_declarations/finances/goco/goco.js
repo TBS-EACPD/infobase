@@ -1,5 +1,5 @@
-import text from "./goco.yaml";
 import { Fragment } from "react";
+
 import {
   create_text_maker_component,
   Subject,
@@ -16,8 +16,9 @@ import {
   util_components,
 } from "../../shared.js";
 
-const { SmartDisplayTable } = util_components;
+import text from "./goco.yaml";
 
+const { SmartDisplayTable } = util_components;
 const { Tag } = Subject;
 
 const { text_maker, TM } = create_text_maker_component(text);

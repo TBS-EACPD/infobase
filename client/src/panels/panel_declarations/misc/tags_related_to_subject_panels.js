@@ -1,5 +1,3 @@
-import text from "./tags_related_to_subject_panels.yaml";
-import hierarchy_text from "./hierarchy_panels.yaml";
 
 import classNames from "classnames";
 import { Fragment } from "react";
@@ -12,7 +10,11 @@ import {
   create_text_maker_component,
   declare_panel,
 } from "../shared.js";
+
 import { HierarchyDeadElementIcon } from "./hierarchy_component.js";
+
+import hierarchy_text from "./hierarchy_panels.yaml";
+import text from "./tags_related_to_subject_panels.yaml";
 
 const { text_maker, TM } = create_text_maker_component([text, hierarchy_text]);
 const { Dept, Tag, Program } = Subject;

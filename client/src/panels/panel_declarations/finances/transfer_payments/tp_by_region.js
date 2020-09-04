@@ -1,7 +1,10 @@
-import text from "./tp_by_region.yaml";
 
 import { Fragment } from "react";
 
+
+import { Canada } from "../../../../charts/canada/index.js";
+import { SpinnerWrapper, TabbedContent } from "../../../../components/index.js";
+import { get_static_url, make_request } from "../../../../request_utils.js";
 import {
   formats,
   run_template,
@@ -14,9 +17,7 @@ import {
   A11yTable,
 } from "../../shared.js";
 
-import { Canada } from "../../../../charts/canada/index.js";
-import { SpinnerWrapper, TabbedContent } from "../../../../components/index.js";
-import { get_static_url, make_request } from "../../../../request_utils.js";
+import text from "./tp_by_region.yaml";
 
 const { std_years } = year_templates;
 

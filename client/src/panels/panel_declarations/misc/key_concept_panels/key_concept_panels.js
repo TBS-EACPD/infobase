@@ -1,12 +1,13 @@
-import MediaQuery from "react-responsive";
 import classNames from "classnames";
+import MediaQuery from "react-responsive";
+
+import { util_components, breakpoints, declare_panel } from "../../shared.js";
 
 import common_lang from "./common_questions.yaml";
 import fin_lang from "./financial_questions.yaml";
 import ppl_lang from "./people_questions.yaml";
 import results_lang from "./results_questions.yaml";
 import tag_lang from "./tagging_questions.yaml";
-import { util_components, breakpoints, declare_panel } from "../../shared.js";
 
 const {
   create_text_maker_component,

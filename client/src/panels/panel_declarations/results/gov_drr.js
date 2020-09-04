@@ -1,4 +1,7 @@
-import { TM, text_maker } from "./drr_summary_text.js";
+import {
+  SmartDisplayTable,
+  default_dept_name_sort_func,
+} from "../../../components/index.js";
 import {
   Subject,
   InfographicPanel,
@@ -6,6 +9,10 @@ import {
   declare_panel,
   HeightClippedGraph,
 } from "../shared.js";
+
+import { DrrSummary } from "./drr_summary.js";
+import { TM, text_maker } from "./drr_summary_text.js";
+import { LateDepartmentsBanner } from "./result_components.js";
 import {
   row_to_drr_status_counts,
   ResultCounts,
@@ -14,12 +21,6 @@ import {
   current_drr_key,
   link_to_results_infograph,
 } from "./results_common.js";
-import { DrrSummary } from "./drr_summary.js";
-import { LateDepartmentsBanner } from "./result_components.js";
-import {
-  SmartDisplayTable,
-  default_dept_name_sort_func,
-} from "../../../components/index.js";
 
 const { Gov, Dept } = Subject;
 

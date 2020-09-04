@@ -1,5 +1,5 @@
-import * as FORMAT from "../format";
 import { Subject } from "../../models/subject";
+import * as FORMAT from "../format";
 
 // #Queries
 // This module exists to  provides a common interface for querying

@@ -1,4 +1,3 @@
-import text from "./employee_type.yaml";
 import {
   formats,
   run_template,
@@ -11,6 +10,8 @@ import {
   declare_panel,
   NivoLineBarToggle,
 } from "../shared.js";
+
+import text from "./employee_type.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 

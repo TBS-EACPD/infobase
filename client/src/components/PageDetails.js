@@ -1,7 +1,7 @@
+import { withRouter } from "react-router";
+
 import { IconGitHub } from "../icons/icons.js";
 import { create_text_maker } from "../models/text.js";
-
-import { withRouter } from "react-router";
 
 import { Details } from "./Details.js";
 import { EmailFrontend } from "./EmailFrontend.js";

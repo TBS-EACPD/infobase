@@ -12,6 +12,7 @@ import {
   newIBDarkCategoryColors,
   declare_panel,
 } from "../../shared.js";
+
 import { text_maker, TM } from "./sobj_text_provider.js";
 
 const { sos } = businessConstants;

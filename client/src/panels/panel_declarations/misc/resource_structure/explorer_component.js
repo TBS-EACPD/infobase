@@ -1,15 +1,16 @@
 import "src/explorer_common/explorer-styles.scss";
 
 import { Fragment } from "react";
+
+import { Explorer } from "src/explorer_common/explorer_components.js";
+import { get_root } from "src/explorer_common/hierarchy_tools.js";
+import { get_col_defs } from "src/explorer_common/resource_explorer_common.js";
 import { infograph_href_template } from "src/link_utils.js";
 import {
   TabbedControls,
   run_template,
 } from "src/panels//panel_declarations/shared.js";
 
-import { get_root } from "src/explorer_common/hierarchy_tools.js";
-import { get_col_defs } from "src/explorer_common/resource_explorer_common.js";
-import { Explorer } from "src/explorer_common/explorer_components.js";
 
 import { actual_year, planning_year, TM } from "./utils";
 

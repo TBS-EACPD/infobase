@@ -1,10 +1,11 @@
-import text from "./gov_related.yaml";
 import {
   declare_panel,
   create_text_maker,
   TM,
   InfographicPanel,
 } from "../shared.js";
+
+import text from "./gov_related.yaml";
 
 const text_maker = create_text_maker(text);
 

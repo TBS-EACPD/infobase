@@ -1,4 +1,3 @@
-import { text_maker, TM } from "./sobj_text_provider.js";
 import {
   declare_panel,
   year_templates,
@@ -10,6 +9,8 @@ import {
   WrappedNivoLine,
   run_template,
 } from "../../shared.js";
+
+import { text_maker, TM } from "./sobj_text_provider.js";
 const { sos } = businessConstants;
 const { std_years } = year_templates;
 const { Format } = util_components;

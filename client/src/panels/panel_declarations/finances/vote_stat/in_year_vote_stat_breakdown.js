@@ -1,4 +1,3 @@
-import { text_maker, TM } from "./vote_stat_text_provider.js";
 import {
   Subject,
   formats,
@@ -10,6 +9,9 @@ import {
   FlatTreeMapViz,
   declare_panel,
 } from "../../shared.js";
+
+import { text_maker, TM } from "./vote_stat_text_provider.js";
+
 const { SmartDisplayTable, default_dept_name_sort_func } = util_components;
 
 const main_col = "{{est_in_year}}_estimates";

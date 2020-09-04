@@ -1,4 +1,3 @@
-import text from "./crso_by_prog.yaml";
 import {
   WrappedNivoBar,
   year_templates,
@@ -12,6 +11,8 @@ import {
   get_planned_spending_source_link,
   declare_panel,
 } from "../../shared.js";
+
+import text from "./crso_by_prog.yaml";
 
 const { Format } = util_components;
 
