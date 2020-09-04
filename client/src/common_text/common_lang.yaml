@@ -2,6 +2,9 @@
 ##################################
 # General Section
 ##################################
+performance:
+  en: Performance
+  fr: Performance
 new:
   en: New
   fr: Nouveau
