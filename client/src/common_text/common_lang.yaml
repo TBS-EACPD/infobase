@@ -1058,14 +1058,6 @@ survey_link_text:
   en: Feedback
   fr: Rétroaction
 
-survey_link_href:
-  transform: [handlebars]
-  en: |
-    {{{survey_link}}}
-  fr: |
-    {{{survey_link}}}
-
-
 limited_data:
   en: limited data
   fr: très peu de données
