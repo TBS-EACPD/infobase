@@ -169,8 +169,28 @@ class EmailFrontend extends React.Component {
       )
       .value();
 
+    const all_connected_user_fields_are_filled = _.chain(user_fields)
+      .toPairs()
+      .filter((field) => {
+        return _.includes(_.keys(field[1]), "connection");
+      })
+      .filter((field) => {
+        return (
+          _.includes(_.keys(completed_template), field[1].connection.name) &&
+          _.includes(
+            completed_template[field[1].connection.name],
+            field[1].connection.enable
+          )
+        );
+      })
+      .every((field) => {
+        return !_.isEmpty(completed_template[field[0]]);
+      })
+      .value();
+
     const ready_to_send =
       all_required_user_fields_are_filled &&
+      all_connected_user_fields_are_filled &&
       privacy_acknowledged &&
       (!sent_to_backend || // hasn't been submitted yet
         (sent_to_backend &&
