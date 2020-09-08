@@ -73,14 +73,6 @@ class EmailFrontend extends React.Component {
   constructor(props) {
     super(props);
 
-    this.mergeIntoCompletedTemplateState = (key, value) =>
-      this.setState({
-        completed_template: {
-          ...this.state.completed_template,
-          [key]: value,
-        },
-      });
-
     this.state = {
       template_name: props.template_name,
       loading: true,
@@ -141,6 +133,38 @@ class EmailFrontend extends React.Component {
       });
     }
   }
+  mergeIntoCompletedTemplateState = (key, value) => {
+    const connected_fields = _.chain(this.state.template)
+      .toPairs()
+      .filter(([field_name, field_val]) =>
+        _.includes(_.keys(field_val), "connection")
+      )
+      .value();
+    const reset_field = _.filter(
+      connected_fields,
+      ([field_name, field_val]) =>
+        field_val.connection.name === key &&
+        !_.includes(value, field_val.connection.enable)
+    );
+    const reset_key = !_.isEmpty(reset_field) ? reset_field[0][0] : null;
+
+    if (!reset_key) {
+      this.setState({
+        completed_template: {
+          ...this.state.completed_template,
+          [key]: value,
+        },
+      });
+    } else {
+      this.setState({
+        completed_template: {
+          ...this.state.completed_template,
+          [key]: value,
+          [reset_key]: "",
+        },
+      });
+    }
+  };
   render() {
     const {
       loading,
@@ -171,21 +195,20 @@ class EmailFrontend extends React.Component {
 
     const all_connected_user_fields_are_filled = _.chain(user_fields)
       .toPairs()
-      .filter(([field_name, field_val]) => {
-        return _.includes(_.keys(field_val), "connection");
-      })
-      .filter(([field_name, field_val]) => {
-        return (
+      .filter(([field_name, field_val]) =>
+        _.includes(_.keys(field_val), "connection")
+      )
+      .filter(
+        ([field_name, field_val]) =>
           _.includes(_.keys(completed_template), field_val.connection.name) &&
           _.includes(
             completed_template[field_val.connection.name],
             field_val.connection.enable
           )
-        );
-      })
-      .every(([field_name, field_val]) => {
-        return !_.isEmpty(completed_template[field_name]);
-      })
+      )
+      .every(
+        ([field_name, field_val]) => !_.isEmpty(completed_template[field_name])
+      )
       .value();
 
     const ready_to_send =
