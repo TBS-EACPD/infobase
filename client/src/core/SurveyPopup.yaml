@@ -29,10 +29,3 @@ survey_popup_later:
 survey_popup_no:
   en: No, do not ask again
   fr: Non, ne le demandez plus
-
-survey_link:
-  transform: [handlebars]
-  en: |
-    {{{survey_link}}}
-  fr: |
-    {{{survey_link}}}

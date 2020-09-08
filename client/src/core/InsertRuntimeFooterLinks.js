@@ -1,3 +1,4 @@
+import { trivial_text_maker } from "../models/text.js";
 import { index_lang_lookups } from "../InfoBase/index_data.js";
 import { trivial_text_maker, run_template } from "../models/text.js";
 
@@ -15,10 +16,6 @@ const footer_link_items = _.compact([
     id: "footer-standard-link",
     href: index_lang_lookups.standard_version_url[window.lang],
     text: index_lang_lookups.standard_version_title[window.lang],
-  },
-  {
-    href: run_template("{{survey_link}}"),
-    text: trivial_text_maker("survey_link_text"),
   },
 ]);
 

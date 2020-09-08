@@ -21,8 +21,10 @@ const Home = (props) => {
     match: {
       params: { no_basic_equiv },
     },
+    toggleSurvey,
   } = props;
 
+  console.log(props);
   return (
     <StandardRouteContainer
       route_key="start"
@@ -113,13 +115,9 @@ const Home = (props) => {
 
         <section>
           <h3>
-            <a
-              href={text_maker("survey_link_href")}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <button className="btn btn-ib-primary">
               <TM k="survey_link_text" />
-            </a>
+            </button>
           </h3>
           <TM k="survey_home_desc" />
         </section>
