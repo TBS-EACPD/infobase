@@ -171,20 +171,20 @@ class EmailFrontend extends React.Component {
 
     const all_connected_user_fields_are_filled = _.chain(user_fields)
       .toPairs()
-      .filter((field) => {
-        return _.includes(_.keys(field[1]), "connection");
+      .filter(([field_name, field_val]) => {
+        return _.includes(_.keys(field_val), "connection");
       })
-      .filter((field) => {
+      .filter(([field_name, field_val]) => {
         return (
-          _.includes(_.keys(completed_template), field[1].connection.name) &&
+          _.includes(_.keys(completed_template), field_val.connection.name) &&
           _.includes(
-            completed_template[field[1].connection.name],
-            field[1].connection.enable
+            completed_template[field_val.connection.name],
+            field_val.connection.enable
           )
         );
       })
-      .every((field) => {
-        return !_.isEmpty(completed_template[field[0]]);
+      .every(([field_name, field_val]) => {
+        return !_.isEmpty(completed_template[field_name]);
       })
       .value();
 
