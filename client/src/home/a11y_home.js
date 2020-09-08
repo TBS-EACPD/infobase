@@ -9,7 +9,7 @@ import { featured_content_items } from "./home-data.js";
 import home_text2 from "./a11y-home.yaml";
 import home_text1 from "./home.yaml";
 
-
+import { withRouter } from "react-router-dom";
 
 const { text_maker, TM } = create_text_maker_component([
   home_text1,
@@ -24,7 +24,6 @@ const Home = (props) => {
     toggleSurvey,
   } = props;
 
-  console.log(props);
   return (
     <StandardRouteContainer
       route_key="start"
@@ -115,7 +114,10 @@ const Home = (props) => {
 
         <section>
           <h3>
-            <button className="btn btn-ib-primary">
+            <button
+              className="btn btn-ib-primary"
+              onClick={() => toggleSurvey()}
+            >
               <TM k="survey_link_text" />
             </button>
           </h3>
@@ -140,4 +142,4 @@ const Home = (props) => {
     </StandardRouteContainer>
   );
 };
-export { Home as default };
+export default withRouter(Home);

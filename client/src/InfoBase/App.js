@@ -273,15 +273,30 @@ export class App extends React.Component {
                 />
               )}
               {window.is_a11y_mode && (
-                <Route path="/start/:no_basic_equiv?" component={A11yHome} />
+                <Route
+                  path="/start/:no_basic_equiv?"
+                  render={() => <A11yHome toggleSurvey={this.toggleSurvey} />}
+                />
               )}
               <Route
                 path="/start"
-                component={window.is_a11y_mode ? A11yHome : Home}
+                render={() =>
+                  window.is_a11y_mode ? (
+                    <A11yHome toggleSurvey={this.toggleSurvey} />
+                  ) : (
+                    <Home />
+                  )
+                }
               />
               <Route
                 path="/"
-                component={window.is_a11y_mode ? A11yHome : Home}
+                render={() =>
+                  window.is_a11y_mode ? (
+                    <A11yHome toggleSurvey={this.toggleSurvey} />
+                  ) : (
+                    <Home />
+                  )
+                }
               />
             </Switch>
             <PageDetails
