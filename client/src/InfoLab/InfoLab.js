@@ -20,6 +20,8 @@ export default class InfoLab extends React.Component {
   }
 
   render() {
+    const { toggleSurvey } = this.props;
+
     return (
       <StandardRouteContainer
         title={text_maker("lab_title")}
@@ -31,6 +33,13 @@ export default class InfoLab extends React.Component {
         <TM k="lab_title" el="h1" />
         <div className="medium_panel_text">
           <TM k="lab_intro_text" />
+          <button
+            style={{ marginBottom: "2rem" }}
+            className="btn btn-ib-primary"
+            onClick={() => toggleSurvey()}
+          >
+            {text_maker("lab_intro_survey_button")}
+          </button>
         </div>
         <div className="frow">
           <div className="fcol-md-6 fcol-sm-12">
