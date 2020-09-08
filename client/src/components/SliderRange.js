@@ -42,14 +42,26 @@ export class SliderRange extends React.Component {
           >
             {value_formatter(selected_data_index)}
           </span>
-          <IconArrowDown
-            color={window.infobase_color_constants.secondaryColor}
-            alternate_color={false}
-            width={2}
-            height={2}
-            vertical_align={8}
-          />
         </span>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            paddingLeft: "20px",
+            paddingRight: "20px",
+          }}
+        >
+          {_.map(slider_data, (d, idx) => (
+            <span
+              style={{
+                color: window.infobase_color_constants.backgroundColor,
+                opacity: 0.9,
+              }}
+            >
+              {value_formatter(idx)}
+            </span>
+          ))}
+        </div>
         <input
           className="slider"
           type="range"
