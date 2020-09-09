@@ -1,4 +1,4 @@
-import { text_maker, TM } from "./vote_stat_text_provider.js";
+import { formats } from "../../../../core/format.js";
 import {
   util_components,
   run_template,
@@ -8,7 +8,8 @@ import {
   WrappedNivoBar,
   declare_panel,
 } from "../../shared.js";
-import { formats } from "../../../../core/format.js";
+
+import { text_maker, TM } from "./vote_stat_text_provider.js";
 
 const { Format } = util_components;
 

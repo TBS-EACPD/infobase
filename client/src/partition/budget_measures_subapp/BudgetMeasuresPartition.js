@@ -1,14 +1,15 @@
-import "./BudgetMeasuresPartition.scss";
-import { PartitionDiagram } from "../partition_diagram/PartitionDiagram.js";
-import { text_maker } from "./budget_measure_text_provider.js";
-import { budget_measures_hierarchy_factory } from "./budget_measures_hierarchy_factory.js";
 import { ContainerEscapeHatch } from "../../components/index.js";
-import { Subject } from "../../models/subject";
-import { businessConstants } from "../../models/businessConstants.js";
+import * as color_defs from "../../core/color_defs.js";
+import { newIBLightCategoryColors } from "../../core/color_schemes.js";
 import { formats } from "../../core/format.js";
 import { sanitized_marked } from "../../general_utils.js";
-import { newIBLightCategoryColors } from "../../core/color_schemes.js";
-import * as color_defs from "../../core/color_defs.js";
+import { businessConstants } from "../../models/businessConstants.js";
+import { Subject } from "../../models/subject";
+import { PartitionDiagram } from "../partition_diagram/PartitionDiagram.js";
+
+import { text_maker } from "./budget_measure_text_provider.js";
+import { budget_measures_hierarchy_factory } from "./budget_measures_hierarchy_factory.js";
+import "./BudgetMeasuresPartition.scss";
 
 const { budget_chapters } = businessConstants;
 const { BudgetMeasure, CRSO } = Subject;

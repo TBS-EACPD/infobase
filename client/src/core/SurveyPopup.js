@@ -1,14 +1,16 @@
-import text from "./SurveyPopup.yaml";
 
 import { Fragment } from "react";
 import { withRouter } from "react-router";
 
-import { log_standard_event } from "./analytics.js";
-import { IconFeedback } from "../icons/icons.js";
 import {
   FixedPopover,
   create_text_maker_component,
 } from "../components/index.js";
+import { IconFeedback } from "../icons/icons.js";
+
+import { log_standard_event } from "./analytics.js";
+
+import text from "./SurveyPopup.yaml";
 
 const { TM, text_maker } = create_text_maker_component(text);
 

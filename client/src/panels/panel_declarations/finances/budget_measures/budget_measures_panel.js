@@ -1,9 +1,7 @@
-import "./budget_measures_panel.scss";
-import text1 from "./budget_measures_panel.yaml";
-import text2 from "../../../../partition/budget_measures_subapp/BudgetMeasuresRoute.yaml";
-
 import { Fragment } from "react";
 import MediaQuery from "react-responsive";
+
+import text2 from "../../../../partition/budget_measures_subapp/BudgetMeasuresRoute.yaml";
 
 import {
   formats,
@@ -20,6 +18,9 @@ import {
   declare_panel,
   TspanLineWrapper,
 } from "../../shared.js";
+
+import text1 from "./budget_measures_panel.yaml";
+import "./budget_measures_panel.scss";
 
 const { budget_values } = businessConstants;
 

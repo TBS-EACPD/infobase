@@ -1,6 +1,8 @@
 import { mix, staticStoreMixin } from "../models/storeMixins.js";
-import { Table } from "./TableClass.js";
+
 import { Subject } from "../models/subject.js";
+
+import { Table } from "./TableClass.js";
 
 const { Gov } = Subject;
 

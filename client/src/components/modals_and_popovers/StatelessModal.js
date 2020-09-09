@@ -1,9 +1,8 @@
-import "./bootstrap_modal_exstension.scss";
-
-import { Modal } from "react-bootstrap";
 import classNames from "classnames";
+import { Modal } from "react-bootstrap";
 
 import { trivial_text_maker } from "../../models/text.js";
+import "./bootstrap_modal_exstension.scss";
 
 export class StatelessModal extends React.Component {
   constructor(props) {

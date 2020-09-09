@@ -8,13 +8,13 @@ import {
 
 const { SpinnerWrapper } = util_components;
 
+import { text_maker } from "../result_text_provider.js";
 import {
   ResultCounts,
   GranularResultCounts,
   result_docs,
   result_docs_in_tabling_order,
 } from "../results_common.js";
-import { text_maker } from "../result_text_provider.js";
 
 import ResultsExplorer from "./results_scheme.js";
 

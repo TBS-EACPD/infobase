@@ -1,11 +1,12 @@
-import metadata_text from "./metadata.yaml";
+import { create_text_maker_component, FancyUL, Panel } from "../components";
 import {
   StandardRouteContainer,
   ScrollToTargetContainer,
 } from "../core/NavComponents.js";
-import { create_text_maker_component, FancyUL, Panel } from "../components";
 
 import { sources } from "./data_sources.js";
+
+import metadata_text from "./metadata.yaml";
 
 const { text_maker, TM } = create_text_maker_component(metadata_text);
 

@@ -1,7 +1,8 @@
-import { text_maker } from "./budget_measure_text_provider.js";
-import { Subject } from "../../models/subject.js";
-import { GlossaryEntry } from "../../models/glossary.js";
 import { businessConstants } from "../../models/businessConstants.js";
+import { GlossaryEntry } from "../../models/glossary.js";
+import { Subject } from "../../models/subject.js";
+
+import { text_maker } from "./budget_measure_text_provider.js";
 
 const { budget_values } = businessConstants;
 

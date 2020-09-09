@@ -1,13 +1,14 @@
-import text from "./IsolatedPanel.yaml";
 
-import { PanelRenderer } from "../PanelRenderer.js";
-import { get_panels_for_subject } from "../get_panels_for_subject/index.js";
 
 import { SpinnerWrapper } from "../../components/index.js";
+import { ensure_loaded } from "../../core/lazy_loader";
+import { StandardRouteContainer } from "../../core/NavComponents.js";
 import { Subject } from "../../models/subject";
 import { create_text_maker } from "../../models/text.js";
-import { StandardRouteContainer } from "../../core/NavComponents.js";
-import { ensure_loaded } from "../../core/lazy_loader";
+import { get_panels_for_subject } from "../get_panels_for_subject/index.js";
+import { PanelRenderer } from "../PanelRenderer.js";
+
+import text from "./IsolatedPanel.yaml";
 
 const text_maker = create_text_maker(text);
 

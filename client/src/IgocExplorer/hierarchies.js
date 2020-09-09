@@ -1,6 +1,7 @@
-import { businessConstants } from "../models/businessConstants.js";
 import { convert_d3_hierarchy_to_explorer_hierarchy } from "../explorer_common/hierarchy_tools.js";
+import { businessConstants } from "../models/businessConstants.js";
 import { Subject } from "../models/subject.js";
+
 import { igoc_tmf as text_maker } from "./igoc_explorer_text.js";
 
 const { Dept, InstForm } = Subject;

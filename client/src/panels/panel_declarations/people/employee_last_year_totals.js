@@ -1,4 +1,3 @@
-import text1 from "./employee_last_year_totals.yaml";
 import text2 from "../../../common_text/common_lang.yaml";
 import {
   create_text_maker_component,
@@ -7,6 +6,8 @@ import {
   CircleProportionChart,
   declare_panel,
 } from "../shared.js";
+
+import text1 from "./employee_last_year_totals.yaml";
 
 const { text_maker, TM } = create_text_maker_component([text1, text2]);
 

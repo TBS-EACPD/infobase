@@ -1,18 +1,20 @@
-import "./glossary.scss";
-import glossary_text from "./glossary.yaml";
 import { Fragment } from "react";
-import {
-  StandardRouteContainer,
-  ScrollToTargetContainer,
-} from "../core/NavComponents.js";
-import { Table } from "../core/TableClass.js";
-import { rpb_link } from "../rpb/rpb_link.js";
-import { GlossaryEntry } from "../models/glossary.js";
+
 import {
   create_text_maker_component,
   GlossarySearch,
   BackToTop,
 } from "../components/index.js";
+import {
+  StandardRouteContainer,
+  ScrollToTargetContainer,
+} from "../core/NavComponents.js";
+import { Table } from "../core/TableClass.js";
+import { GlossaryEntry } from "../models/glossary.js";
+import { rpb_link } from "../rpb/rpb_link.js";
+
+import glossary_text from "./glossary.yaml";
+import "./glossary.scss";
 
 const { text_maker, TM } = create_text_maker_component(glossary_text);
 

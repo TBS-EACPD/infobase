@@ -1,6 +1,5 @@
-import "./AlertBanner.scss";
-
 import classNames from "classnames";
+import "./AlertBanner.scss";
 
 const banner_classes = ["info", "success", "warning", "danger"];
 export const AlertBanner = ({

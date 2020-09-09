@@ -1,9 +1,7 @@
-import "./drr_summary.scss";
-import { TM, text_maker } from "./drr_summary_text.js";
-
 import classNames from "classnames";
 import { Fragment } from "react";
 
+import { IconArray } from "../../../charts/IconArray.js";
 import {
   StandardLegend,
   A11yTable,
@@ -14,6 +12,9 @@ import {
   declare_panel,
   WrappedNivoPie,
 } from "../shared.js";
+
+import { TM, text_maker } from "./drr_summary_text.js";
+import { large_status_icons } from "./result_components.js";
 import {
   row_to_drr_status_counts,
   ResultCounts,
@@ -24,9 +25,7 @@ import {
   result_color_scale,
 } from "./results_common.js";
 
-import { large_status_icons } from "./result_components.js";
-
-import { IconArray } from "../../../charts/IconArray.js";
+import "./drr_summary.scss";
 
 const { result_simple_statuses } = businessConstants;
 const { current_drr_key, result_docs } = Results;

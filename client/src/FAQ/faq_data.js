@@ -1,6 +1,7 @@
+import marked from "marked";
+
 import faq_csv_string from "../../../data/faq.csv";
 
-import marked from "marked";
 
 const DISABLED_QUESTIONS = [];
 

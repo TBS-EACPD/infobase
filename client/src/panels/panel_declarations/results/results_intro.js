@@ -1,3 +1,4 @@
+import { get_static_url } from "../../../request_utils.js";
 import {
   Subject,
   declare_panel,
@@ -5,11 +6,7 @@ import {
   get_source_links,
   create_text_maker_component,
 } from "../shared.js";
-const { Dept } = Subject;
 
-import { get_static_url } from "../../../request_utils.js";
-
-import text from "./results_intro_text.yaml";
 import {
   ResultCounts,
   GranularResultCounts,
@@ -17,6 +14,10 @@ import {
   current_drr_key,
   current_dp_key,
 } from "./results_common.js";
+
+import text from "./results_intro_text.yaml";
+
+const { Dept } = Subject;
 
 const { text_maker, TM } = create_text_maker_component(text);
 

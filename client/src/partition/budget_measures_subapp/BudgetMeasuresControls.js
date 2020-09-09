@@ -1,6 +1,3 @@
-import "./BudgetMeasuresControls.scss";
-
-import { text_maker, TextMaker } from "./budget_measure_text_provider.js";
 import {
   LabeledBox,
   RadioButtons,
@@ -8,6 +5,9 @@ import {
 } from "../../components/index.js";
 
 import { businessConstants } from "../../models/businessConstants.js";
+
+import { text_maker, TextMaker } from "./budget_measure_text_provider.js";
+import "./BudgetMeasuresControls.scss";
 
 const { budget_values } = businessConstants;
 

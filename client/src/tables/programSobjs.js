@@ -1,9 +1,7 @@
 //require("../../panels/spend_by_so_hist"); //we arent showing this stuff.
 
-import text from "./programSobjs.yaml";
+import { Subject } from "../models/subject";
 
-// see [here](../table_definition.html) for description
-// of the table spec
 import {
   trivial_text_maker,
   run_template,
@@ -14,7 +12,11 @@ import {
   collapse_by_so,
   is_non_revenue,
 } from "./table_common";
-import { Subject } from "../models/subject";
+
+import text from "./programSobjs.yaml";
+
+// see [here](../table_definition.html) for description
+// of the table spec
 
 const { Program } = Subject;
 const { sos } = businessConstants;

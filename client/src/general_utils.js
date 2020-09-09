@@ -1,6 +1,6 @@
-import marked from "marked";
 import DOMPurify from "dompurify";
 import JSURL from "jsurl";
+import marked from "marked";
 
 export const sanitized_marked = (markdown) =>
   DOMPurify.sanitize(marked(markdown, { sanitize: false, gfm: true }));

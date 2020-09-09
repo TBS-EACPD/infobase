@@ -1,14 +1,15 @@
-import { Table } from "../core/TableClass.js";
 import { ensure_loaded } from "../core/lazy_loader.js";
-import treemap_text from "./TreeMap.yaml";
+import { Table } from "../core/TableClass.js";
+
+import { Subject } from "../models/subject.js";
 import { create_text_maker } from "../models/text.js";
+
+import treemap_text from "./TreeMap.yaml";
+
+const { Dept } = Subject;
 
 const tm = create_text_maker([treemap_text]);
 export const smaller_items_text = tm("smaller_items_text");
-
-import { Subject } from "../models/subject.js";
-
-const { Dept } = Subject;
 
 function has_non_zero_or_non_zero_children(node, perspective = "drf") {
   if (_.isEmpty(node.children)) {

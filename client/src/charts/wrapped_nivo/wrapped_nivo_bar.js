@@ -1,5 +1,7 @@
 import { ResponsiveBar } from "@nivo/bar";
 
+import { SmartDisplayTable } from "../../components/index.js";
+
 import {
   nivo_common_text_maker,
   InteractiveGraph,
@@ -7,8 +9,6 @@ import {
   get_formatter,
   fix_legend_symbols,
 } from "./wrapped_nivo_common.js";
-
-import { SmartDisplayTable } from "../../components/index.js";
 
 const bar_table = (
   data,

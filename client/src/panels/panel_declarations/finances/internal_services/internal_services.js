@@ -1,5 +1,3 @@
-import text from "./internal_services.yaml";
-
 import {
   InfographicPanel,
   Subject,
@@ -11,6 +9,9 @@ import {
   WrappedNivoBar,
   declare_panel,
 } from "../../shared.js";
+
+import text from "./internal_services.yaml";
+
 
 const { Gov, Tag } = Subject;
 const { std_years } = year_templates;

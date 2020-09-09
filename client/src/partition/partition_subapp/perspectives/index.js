@@ -3,18 +3,6 @@ import {
   make_dept_fte_perspective,
 } from "./dept_perspectives.js";
 import {
-  make_goco_exp_perspective,
-  make_goco_fte_perspective,
-  //make_hwh_exp_perspective,
-  //make_hwh_fte_perspective,
-} from "./tag_perspectives.js";
-import { make_spend_type_perspective } from "./spend_type_perspective.js";
-import {
-  make_org_info_ministry_perspective,
-  make_org_info_federal_perspective,
-  make_org_info_interests_perspective,
-} from "./org_info_perspectives.js";
-import {
   make_estimates_est_type_perspective,
   make_estimates_est_doc_sea_perspective,
   make_estimates_est_doc_seb_perspective,
@@ -24,8 +12,20 @@ import {
   make_estimates_org_estimates_perspective,
   //make_estimates_est_doc_im_perspective,
 } from "./estimates_perspectives.js";
+import {
+  make_org_info_ministry_perspective,
+  make_org_info_federal_perspective,
+  make_org_info_interests_perspective,
+} from "./org_info_perspectives.js";
 
 import { data_types, remapped_data_types } from "./perspective_utils.js";
+import { make_spend_type_perspective } from "./spend_type_perspective.js";
+import {
+  make_goco_exp_perspective,
+  make_goco_fte_perspective,
+  //make_hwh_exp_perspective,
+  //make_hwh_fte_perspective,
+} from "./tag_perspectives.js";
 
 const all_data_types = data_types;
 

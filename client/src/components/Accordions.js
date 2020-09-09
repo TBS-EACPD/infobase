@@ -1,8 +1,10 @@
-import "./Accordions.scss";
 import { TransitionGroup, Transition } from "react-transition-group";
+
 import { IconChevron } from "../icons/icons.js";
 
 import { trivial_text_maker } from "../models/text.js";
+
+import "./Accordions.scss";
 
 const get_accordion_label = (isExpanded) =>
   ({

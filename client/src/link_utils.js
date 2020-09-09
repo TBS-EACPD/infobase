@@ -1,8 +1,8 @@
-import { infograph_href_template } from "./infographic/infographic_link.js";
-import { rpb_link } from "./rpb/rpb_link.js";
 import { Table } from "./core/TableClass.js";
-import { Subject } from "./models/subject.js";
+import { infograph_href_template } from "./infographic/infographic_link.js";
 import { GlossaryEntry } from "./models/glossary.js";
+import { Subject } from "./models/subject.js";
+import { rpb_link } from "./rpb/rpb_link.js";
 
 const { Gov, Dept, CRSO, Program, Tag } = Subject;
 const subject_classes_with_infographics = [Gov, Dept, CRSO, Program, Tag];

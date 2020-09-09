@@ -1,8 +1,6 @@
-import "./explorer-components.scss";
-
 import classNames from "classnames";
-import { TransitionGroup } from "react-transition-group";
 import FlipMove from "react-flip-move";
+import { TransitionGroup } from "react-transition-group";
 import { createSelector } from "reselect";
 
 import {
@@ -12,6 +10,8 @@ import {
 } from "../components/index.js";
 
 import { trivial_text_maker } from "../models/text.js";
+
+import "./explorer-components.scss";
 
 const INDENT_SIZE = 24;
 

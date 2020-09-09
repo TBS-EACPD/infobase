@@ -1,6 +1,6 @@
-import { trivial_text_maker } from "../models/text.js";
-import { infograph_href_template } from "../link_utils.js";
 import { HeightClipper } from "../components/index.js";
+import { infograph_href_template } from "../link_utils.js";
+import { trivial_text_maker } from "../models/text.js";
 
 export const related_tags_row = (related_tags, subject_type) => {
   const term =

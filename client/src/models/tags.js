@@ -1,11 +1,12 @@
+import { trivial_text_maker } from "../models/text.js";
+
+import { Dept } from "./organizational_entities.js";
 import {
   mix,
   exstensibleStoreMixin,
   PluralSingular,
   SubjectMixin,
 } from "./storeMixins.js";
-import { trivial_text_maker } from "../models/text.js";
-import { Dept } from "./organizational_entities.js";
 
 const extensible_subject_store = () =>
   mix().with(exstensibleStoreMixin, PluralSingular, SubjectMixin);

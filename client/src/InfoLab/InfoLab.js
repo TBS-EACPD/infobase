@@ -1,12 +1,15 @@
 import "./InfoLab.scss";
-import { StandardRouteContainer } from "../core/NavComponents.js";
-import { create_text_maker } from "../models/text.js";
 import {
   create_text_maker_component,
   CardLeftImage,
 } from "../components/index.js";
-import lab_text from "./InfoLab.yaml";
+import { StandardRouteContainer } from "../core/NavComponents.js";
+import { create_text_maker } from "../models/text.js";
+
 import { get_static_url } from "../request_utils.js";
+
+import lab_text from "./InfoLab.yaml";
+
 
 const { TM } = create_text_maker_component(lab_text);
 const text_maker = create_text_maker(lab_text);

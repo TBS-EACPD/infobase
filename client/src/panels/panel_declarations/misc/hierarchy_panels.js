@@ -1,4 +1,3 @@
-import text from "./hierarchy_panels.yaml";
 
 import {
   util_components,
@@ -7,6 +6,7 @@ import {
   create_text_maker,
   declare_panel,
 } from "../shared.js";
+
 import {
   HierarchyPeek,
   org_external_hierarchy,
@@ -16,6 +16,8 @@ import {
   crso_hierarchy,
   crso_pi_hierarchy,
 } from "./hierarchy_component.js";
+
+import text from "./hierarchy_panels.yaml";
 
 const text_maker = create_text_maker(text);
 const { HeightClipper } = util_components;

@@ -1,14 +1,14 @@
 import "src/explorer_common/explorer-styles.scss";
-
-import { StandardRouteContainer } from "src/core/NavComponents.js";
-import { ensure_loaded } from "src/core/lazy_loader.js";
 import { SpinnerWrapper } from "src/components/index.js";
 
-import { ResourceScheme } from "./resource_scheme.js";
+import { ensure_loaded } from "src/core/lazy_loader.js";
+import { StandardRouteContainer } from "src/core/NavComponents.js";
+
 import {
   hierarchy_scheme_configs,
   default_scheme_id,
 } from "./hierarchy_scheme_configs.js";
+import { ResourceScheme } from "./resource_scheme.js";
 
 import {
   text_maker,

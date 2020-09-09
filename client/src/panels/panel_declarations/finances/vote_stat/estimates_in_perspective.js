@@ -1,10 +1,11 @@
-import { TM, text_maker } from "./vote_stat_text_provider.js";
 import {
   StdPanel,
   Col,
   CircleProportionChart,
   declare_panel,
 } from "../../shared.js";
+
+import { TM, text_maker } from "./vote_stat_text_provider.js";
 
 export const declare_estimates_in_perspective_panel = () =>
   declare_panel({

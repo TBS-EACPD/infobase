@@ -1,14 +1,19 @@
-import "./IgocExplorer.scss";
-import { StandardRouteContainer } from "../core/NavComponents.js";
 import { createSelector } from "reselect";
 
-//drilldown stuff
-import { create_igoc_hierarchy } from "./hierarchies.js";
-import { ExplorerForIgoc } from "./explorer_view.js";
-import { filter_hierarchy } from "../explorer_common/hierarchy_tools.js";
-import { igoc_tmf as text_maker, TM } from "./igoc_explorer_text.js";
 import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
+
 import { cached_property, bound } from "src/general_utils.js";
+
+import { StandardRouteContainer } from "../core/NavComponents.js";
+
+//drilldown stuff
+import { filter_hierarchy } from "../explorer_common/hierarchy_tools.js";
+
+import { ExplorerForIgoc } from "./explorer_view.js";
+import { create_igoc_hierarchy } from "./hierarchies.js";
+import { igoc_tmf as text_maker, TM } from "./igoc_explorer_text.js";
+
+import "./IgocExplorer.scss";
 
 class IgocExplorerScheme extends AbstractExplorerScheme {
   Component = ExplorerForIgoc;

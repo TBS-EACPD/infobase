@@ -1,9 +1,10 @@
-import text from "./dynamic_footnotes.yaml";
 
 import { Gov, Dept, CRSO, Program } from "../organizational_entities.js";
-import { actual_to_planned_gap_year, fiscal_year_to_year } from "../years.js";
 import { result_docs_in_tabling_order } from "../results.js";
 import { create_text_maker } from "../text.js";
+import { actual_to_planned_gap_year, fiscal_year_to_year } from "../years.js";
+
+import text from "./dynamic_footnotes.yaml";
 
 const all_subject_classes = [Gov, Dept, CRSO, Program];
 const text_maker = create_text_maker(text);

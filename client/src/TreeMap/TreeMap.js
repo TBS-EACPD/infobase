@@ -1,28 +1,34 @@
 //https://gist.github.com/guglielmo/16d880a6615da7f502116220cb551498
 
-import { StandardRouteContainer } from "../core/NavComponents.js";
 import {
   SpinnerWrapper,
   create_text_maker_component,
 } from "../components/index.js";
-import { get_data, load_data } from "./data.js";
-import { formats } from "../core/format.js";
-import treemap_text from "./TreeMap.yaml";
-import "./TreeMap.scss";
-import { TreeMap } from "./TreeMapViz.js";
-import { TreeMapSidebar } from "./TreeMapSidebar.js";
-import { TreeMapTopbar } from "./TreeMapTopBar.js";
-import { TreeMapInstructions } from "./TreeMapInstructions.js";
-import { TreeMapLegend } from "./TreeMapLegend.js";
-import { infograph_href_template } from "../infographic/infographic_link.js";
-import { run_template } from "../models/text.js";
-import { actual_to_planned_gap_year } from "../models/years.js";
 import {
   sequentialBlues,
   sequentialReds,
   sequentialGreens,
   sequentialPurples,
 } from "../core/color_schemes.js";
+import { formats } from "../core/format.js";
+import { StandardRouteContainer } from "../core/NavComponents.js";
+import { infograph_href_template } from "../infographic/infographic_link.js";
+
+import { run_template } from "../models/text.js";
+
+import { actual_to_planned_gap_year } from "../models/years.js";
+
+import { get_data, load_data } from "./data.js";
+
+import { TreeMapInstructions } from "./TreeMapInstructions.js";
+import { TreeMapLegend } from "./TreeMapLegend.js";
+import { TreeMapSidebar } from "./TreeMapSidebar.js";
+import { TreeMapTopbar } from "./TreeMapTopBar.js";
+import { TreeMap } from "./TreeMapViz.js";
+
+import treemap_text from "./TreeMap.yaml";
+
+import "./TreeMap.scss";
 
 const { TM, text_maker } = create_text_maker_component([treemap_text]);
 

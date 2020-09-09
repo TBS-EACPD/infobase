@@ -1,3 +1,4 @@
+/* eslint-disable import/order */
 import "dom4";
 import "whatwg-fetch";
 
@@ -8,37 +9,39 @@ import "../handlebars/helpers.side-effects.js";
 
 import "../common_css/common_css_index.side-effects.js";
 
-import ReactDOM from "react-dom";
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
 import {
   ConnectedRouter,
   routerMiddleware,
   connectRouter,
 } from "connected-react-router";
 import { default as createHistory } from "history/createHashHistory";
-import { populate_stores } from "../models/populate_stores.js";
-import { Table } from "../core/TableClass.js";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+
 import WebFont from "webfontloader";
 
-import orgVoteStatQfr from "../tables/orgVoteStatQfr.js";
-import orgSobjsQfr from "../tables/orgSobjsQfr.js";
-import orgVoteStatPa from "../tables/orgVoteStatPa.js";
+import { Table } from "../core/TableClass.js";
+import { populate_stores } from "../models/populate_stores.js";
+
+import orgEmployeeAgeGroup from "../tables/orgEmployeeAgeGroup.js";
+import orgEmployeeAvgAge from "../tables/orgEmployeeAvgAge.js";
+import orgEmployeeExLvl from "../tables/orgEmployeeExLvl.js";
+import orgEmployeeFol from "../tables/orgEmployeeFol.js";
+import orgEmployeeGender from "../tables/orgEmployeeGender.js";
+import orgEmployeeRegion from "../tables/orgEmployeeRegion.js";
+import orgEmployeeType from "../tables/orgEmployeeType.js";
 import orgSobjs from "../tables/orgSobjs.js";
-import programSpending from "../tables/programSpending.js";
+import orgSobjsQfr from "../tables/orgSobjsQfr.js";
 import orgTransferPayments from "../tables/orgTransferPayments.js";
 import orgTransferPaymentsRegion from "../tables/orgTransferPaymentsRegion.js";
 import orgVoteStatEstimates from "../tables/orgVoteStatEstimates.js";
-import orgEmployeeType from "../tables/orgEmployeeType.js";
-import orgEmployeeRegion from "../tables/orgEmployeeRegion.js";
-import orgEmployeeAgeGroup from "../tables/orgEmployeeAgeGroup.js";
+import orgVoteStatPa from "../tables/orgVoteStatPa.js";
+import orgVoteStatQfr from "../tables/orgVoteStatQfr.js";
 import programFtes from "../tables/programFtes.js";
-import orgEmployeeExLvl from "../tables/orgEmployeeExLvl.js";
-import programVoteStat from "../tables/programVoteStat.js";
-import orgEmployeeGender from "../tables/orgEmployeeGender.js";
-import orgEmployeeFol from "../tables/orgEmployeeFol.js";
-import orgEmployeeAvgAge from "../tables/orgEmployeeAvgAge.js";
 import programSobjs from "../tables/programSobjs.js";
+import programSpending from "../tables/programSpending.js";
+import programVoteStat from "../tables/programVoteStat.js";
 
 const table_defs = [
   orgVoteStatQfr,

@@ -1,8 +1,5 @@
-import { text_maker } from "../partition_text_provider.js";
-import { PartitionPerspective } from "./PartitionPerspective.js";
 import { Subject } from "../../../models/subject.js";
-
-const { InstForm } = Subject;
+import { text_maker } from "../partition_text_provider.js";
 
 import {
   absolute_value_sort,
@@ -10,12 +7,15 @@ import {
   get_glossary_entry,
   post_traversal_search_string_set,
 } from "./data_hierarchy_utils";
+import { PartitionPerspective } from "./PartitionPerspective.js";
 
 import {
   get_common_popup_options,
   wrap_in_brackets,
   formats_by_data_type,
 } from "./perspective_utils.js";
+
+const { InstForm } = Subject;
 
 const glossary_entry_from_inst_form_type_id = (type_id) => {
   const type_id_to_glossary_suffix_map = {

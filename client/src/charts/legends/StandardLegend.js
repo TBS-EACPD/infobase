@@ -1,6 +1,6 @@
-import "./StandardLegend.scss";
-
 import { LegendList } from "./LegendList.js";
+
+import "./StandardLegend.scss";
 
 export const StandardLegend = ({
   title,

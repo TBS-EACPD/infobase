@@ -10,8 +10,9 @@
 //  with the array ordered by fiscal year
 //
 
-import graphRegistry from "../graphRegistry.js";
 import { businessConstants } from "../../models/businessConstants.js";
+import graphRegistry from "../graphRegistry.js";
+
 import { canada_svg } from "./canada_svg.yaml";
 
 const { provinces, provinces_short } = businessConstants;

@@ -1,12 +1,12 @@
-import "./AdvancedSearch.scss";
-import text from "./AdvancedSearch.yaml";
+import { CheckBox } from "../components/CheckBox";
+import { Details } from "../components/Details.js";
+
+import { create_text_maker } from "../models/text.js";
 
 import { EverythingSearch } from "./EverythingSearch.js";
 
-import { Details } from "../components/Details.js";
-import { CheckBox } from "../components/CheckBox";
-
-import { create_text_maker } from "../models/text.js";
+import text from "./AdvancedSearch.yaml";
+import "./AdvancedSearch.scss";
 const text_maker = create_text_maker(text);
 
 // Maintenance alert: this will need to be kept in sync with the search config options available on the EverythingSearch

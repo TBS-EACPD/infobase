@@ -1,5 +1,4 @@
-import text from "./detailed_program_spending_split.yaml";
-
+import { SmartDisplayTable } from "../../../../components";
 import {
   WrappedNivoBar,
   WrappedNivoHBar,
@@ -21,7 +20,8 @@ import {
   TspanLineWrapper,
   HeightClippedGraph,
 } from "../../shared.js";
-import { SmartDisplayTable } from "../../../../components";
+
+import text from "./detailed_program_spending_split.yaml";
 
 const { std_years } = year_templates;
 

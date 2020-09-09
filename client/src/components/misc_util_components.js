@@ -1,13 +1,13 @@
 import { Fragment } from "react";
 
+import { formats } from "../core/format.js";
+
+import { text_abbrev } from "../general_utils.js";
 import {
   run_template,
   trivial_text_maker,
   create_text_maker,
 } from "../models/text.js";
-import { formats } from "../core/format.js";
-
-import { text_abbrev } from "../general_utils.js";
 
 import { TextMaker, TM } from "./TextMaker.js";
 

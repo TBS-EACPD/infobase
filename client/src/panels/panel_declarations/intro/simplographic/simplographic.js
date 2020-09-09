@@ -1,15 +1,15 @@
-import "./simplographic.scss";
-import simplographic_text from "./simplographic.yaml";
-
+import { infograph_href_template, rpb_link } from "../../../../link_utils.js";
+import { ResultCounts, current_drr_key } from "../../../../models/results.js";
+import { get_static_url } from "../../../../request_utils.js";
 import {
   Subject,
   declare_panel,
   util_components,
   InfographicPanel,
 } from "../../shared.js";
-import { infograph_href_template, rpb_link } from "../../../../link_utils.js";
-import { ResultCounts, current_drr_key } from "../../../../models/results.js";
-import { get_static_url } from "../../../../request_utils.js";
+
+import simplographic_text from "./simplographic.yaml";
+import "./simplographic.scss";
 
 const { Gov, Dept } = Subject;
 const { create_text_maker_component } = util_components;

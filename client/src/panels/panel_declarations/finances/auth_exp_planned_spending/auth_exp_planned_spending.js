@@ -1,6 +1,3 @@
-import "./auth_exp_planned_spending.scss";
-import text from "./auth_exp_planned_spending.yaml";
-
 import { Fragment } from "react";
 
 import {
@@ -17,6 +14,9 @@ import {
   util_components,
   declare_panel,
 } from "../../shared.js";
+
+import text from "./auth_exp_planned_spending.yaml";
+import "./auth_exp_planned_spending.scss";
 
 const { Details } = util_components;
 

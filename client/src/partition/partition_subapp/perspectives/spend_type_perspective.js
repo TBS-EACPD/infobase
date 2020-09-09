@@ -1,23 +1,24 @@
-import { Subject } from "../../../models/subject.js";
-import { text_maker } from "../partition_text_provider.js";
 import { TextMaker as StandardTextMaker } from "../../../components/index.js";
 import { Table } from "../../../core/TableClass.js";
-import { PartitionPerspective } from "./PartitionPerspective.js";
-import { businessConstants } from "../../../models/businessConstants";
 
-const { sos } = businessConstants;
+import { businessConstants } from "../../../models/businessConstants";
+import { Subject } from "../../../models/subject.js";
+import { text_maker } from "../partition_text_provider.js";
 
 import {
   absolute_value_sort,
   get_glossary_entry,
   post_traversal_search_string_set,
 } from "./data_hierarchy_utils.js";
+import { PartitionPerspective } from "./PartitionPerspective.js";
 
 import {
   get_common_popup_options,
   wrap_in_brackets,
   formats_by_data_type,
 } from "./perspective_utils.js";
+
+const { sos } = businessConstants;
 
 const TextMaker = (props) => (
   <StandardTextMaker text_maker_func={text_maker} {...props} />

@@ -1,4 +1,4 @@
-import text from "./employee_prov.yaml";
+import { Canada } from "../../../charts/canada/index.js";
 import {
   formats,
   run_template,
@@ -10,7 +10,8 @@ import {
   A11yTable,
   declare_panel,
 } from "../shared.js";
-import { Canada } from "../../../charts/canada/index.js";
+
+import text from "./employee_prov.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 

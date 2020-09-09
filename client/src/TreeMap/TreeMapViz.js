@@ -1,7 +1,10 @@
-import text from "./TreeMap.yaml";
-import { create_text_maker } from "../models/text.js";
 import classNames from "classnames";
+
+import { create_text_maker } from "../models/text.js";
+
 import { smaller_items_text } from "./data.js";
+
+import text from "./TreeMap.yaml";
 
 const text_maker = create_text_maker(text);
 

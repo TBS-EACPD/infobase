@@ -1,14 +1,14 @@
 import gql from "graphql-tag";
 
-import { get_client } from "../../graphql_utils/graphql_utils.js";
+import { Panel, SpinnerWrapper } from "../../components/index.js";
 import { log_standard_event } from "../../core/analytics.js";
 import { StandardRouteContainer } from "../../core/NavComponents.js";
+import { get_client } from "../../graphql_utils/graphql_utils.js";
 
-import { Panel, SpinnerWrapper } from "../../components/index.js";
 
+import { infograph_href_template } from "../../link_utils.js";
 import { Indicator } from "../../models/results.js";
 import { Subject } from "../../models/subject";
-import { infograph_href_template } from "../../link_utils.js";
 
 import { IndicatorDisplay } from "../panel_declarations/results/result_components.js";
 import {

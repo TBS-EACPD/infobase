@@ -1,6 +1,7 @@
 import classNames from "classnames";
-import "./FilterTable.scss";
+
 import { IconEyeOpen, IconEyeClosed } from "../icons/icons.js";
+import "./FilterTable.scss";
 
 export class FilterTable extends React.Component {
   render() {

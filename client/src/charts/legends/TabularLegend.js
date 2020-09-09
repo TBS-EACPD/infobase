@@ -1,6 +1,5 @@
-import "./TabularLegend.scss";
-
 import { CheckBox } from "../../components/index.js";
+import "./TabularLegend.scss";
 
 export const TabularLegend = ({
   items, // [ { active, id, label, color }]

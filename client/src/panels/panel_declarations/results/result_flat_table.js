@@ -1,7 +1,5 @@
-import "./result_flat_table.scss";
-
 import { Fragment } from "react";
-import { TM, text_maker } from "./result_text_provider.js";
+
 import { businessConstants } from "../../../models/businessConstants.js";
 import {
   util_components,
@@ -13,6 +11,21 @@ import {
   declare_panel,
   HeightClippedGraph,
 } from "../shared.js";
+
+import { StatusIconTable, large_status_icons } from "./result_components.js";
+
+import { create_full_results_hierarchy } from "./result_drilldown/result_hierarchies.js";
+import { TM, text_maker } from "./result_text_provider.js";
+import {
+  ResultCounts,
+  GranularResultCounts,
+  result_docs,
+  result_statuses,
+  indicator_text_functions,
+} from "./results_common.js";
+
+import "./result_flat_table.scss";
+
 const {
   SpinnerWrapper,
   SmartDisplayTable,
@@ -22,20 +35,10 @@ const {
 const { current_drr_key } = Results;
 const { months } = businessConstants;
 
-import { StatusIconTable, large_status_icons } from "./result_components.js";
-import {
-  ResultCounts,
-  GranularResultCounts,
-  result_docs,
-  result_statuses,
-  indicator_text_functions,
-} from "./results_common.js";
 const {
   indicator_target_text,
   indicator_actual_text,
 } = indicator_text_functions;
-
-import { create_full_results_hierarchy } from "./result_drilldown/result_hierarchies.js";
 
 const current_drr_year = result_docs[current_drr_key].year;
 

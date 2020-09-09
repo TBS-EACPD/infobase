@@ -1,9 +1,10 @@
-import "./EstimatesComparison.scss";
-import { text_maker, TM } from "./utils.js";
-import { StandardRouteContainer } from "../core/NavComponents";
 import { SpinnerWrapper } from "../components/index.js";
 import { ensure_loaded } from "../core/lazy_loader.js";
+import { StandardRouteContainer } from "../core/NavComponents";
+
 import { EstimatesExplorer } from "./scheme.js";
+import { text_maker, TM } from "./utils.js";
+import "./EstimatesComparison.scss";
 
 export default class EstimatesComparison extends React.Component {
   constructor(props) {

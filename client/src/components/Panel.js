@@ -1,12 +1,12 @@
-import "./Panel.scss";
-import text from "./Panel.yaml";
-import { GlossaryItem } from "./glossary_components.js";
-
 import classNames from "classnames";
 
 import { Details } from "./Details.js";
 import { FootnoteList } from "./FootnoteList.js";
+import { GlossaryItem } from "./glossary_components.js";
 import { create_text_maker_component } from "./misc_util_components.js";
+
+import text from "./Panel.yaml";
+import "./Panel.scss";
 
 const { TM } = create_text_maker_component(text);
 
