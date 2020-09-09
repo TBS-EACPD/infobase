@@ -207,8 +207,8 @@ export const declare_top10_website_visits_panel = () =>
           <InfographicPanel
             title={
               panel_args.subject.level === "gov"
-                ? "top10_gov_website_visits"
-                : "top10_services_website_visits"
+                ? text_maker("top10_gov_website_visits")
+                : text_maker("top10_services_website_visits")
             }
             sources={sources}
           >
