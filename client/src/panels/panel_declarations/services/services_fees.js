@@ -30,7 +30,11 @@ const ServicesFeesPanel = ({ panel_args }) => {
   return (
     <div>
       <TM
-        k="services_fees_text"
+        k={
+          subject.level === "program"
+            ? "services_prog_fees_text"
+            : "services_fees_text"
+        }
         args={{
           subject_name: subject.name,
           services_count: services.length,
