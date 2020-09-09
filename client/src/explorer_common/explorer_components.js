@@ -1,4 +1,3 @@
-import "./explorer-styles.scss";
 import "./explorer-components.scss";
 
 import classNames from "classnames";
