@@ -20,7 +20,7 @@ class ProvidedServicesListPanel extends React.Component {
   render() {
     const { panel_args } = this.props;
     const { service_query } = this.state;
-    const { services } = panel_args;
+    const { services, subject } = panel_args;
     const includes_lowercase = (value, query) =>
       _.includes(value.toLowerCase(), query.toLowerCase());
     const filtered_sorted_data = _.chain(services)
@@ -37,10 +37,14 @@ class ProvidedServicesListPanel extends React.Component {
     return (
       <div>
         <TM
-          k="list_of_provided_services_desc"
+          k={
+            subject.level === "program"
+              ? "list_of_provided_services_prog_desc"
+              : "list_of_provided_services_desc"
+          }
           className="medium_panel_text"
           args={{
-            subject_name: panel_args.subject.name,
+            subject_name: subject.name,
             num_of_services: services.length,
           }}
         />

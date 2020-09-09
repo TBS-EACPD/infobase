@@ -22,20 +22,7 @@ const volume_formatter = (val) =>
   formatter("compact", val, { raw: true, noMoney: true });
 
 const Top10ServicesApplicationVolumePanel = ({ panel_args }) => {
-  const { services, subject } = panel_args;
-  const data = _.chain(services)
-    .map(({ id, service_report }) => ({
-      id,
-      [total_volume]: _.reduce(
-        delivery_channels_keys,
-        (sum, key) => sum + _.sumBy(service_report, `${key}_count`) || 0,
-        0
-      ),
-    }))
-    .filter(total_volume)
-    .sortBy(total_volume)
-    .takeRight(10)
-    .value();
+  const { data, subject } = panel_args;
   const column_configs = {
     id: {
       index: 0,
@@ -71,6 +58,7 @@ const Top10ServicesApplicationVolumePanel = ({ panel_args }) => {
         args={{
           highest_service_name: Service.lookup(_.last(data).id).name,
           highest_service_value: _.last(data)[total_volume],
+          num_of_services: data.length,
         }}
       />
       {window.is_a11y_mode ? (
@@ -153,12 +141,30 @@ export const declare_top10_services_application_volume_panel = () =>
       footnotes: false,
       render({ calculations, sources }) {
         const { panel_args } = calculations;
+        const data = _.chain(panel_args.services)
+          .map(({ id, service_report }) => ({
+            id,
+            [total_volume]: _.reduce(
+              delivery_channels_keys,
+              (sum, key) => sum + _.sumBy(service_report, `${key}_count`) || 0,
+              0
+            ),
+          }))
+          .filter(total_volume)
+          .sortBy(total_volume)
+          .takeRight(10)
+          .value();
+
         return (
           <InfographicPanel
-            title={text_maker("top10_services_volume_title")}
+            title={text_maker("top10_services_volume_title", {
+              num_of_services: data.length,
+            })}
             sources={sources}
           >
-            <Top10ServicesApplicationVolumePanel panel_args={panel_args} />
+            <Top10ServicesApplicationVolumePanel
+              panel_args={{ ...panel_args, data }}
+            />
           </InfographicPanel>
         );
       },
