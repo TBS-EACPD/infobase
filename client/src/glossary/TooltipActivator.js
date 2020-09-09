@@ -1,6 +1,7 @@
+import Tooltip from "tooltip.js";
+
 import { get_glossary_item_tooltip_html } from "../models/glossary.js";
 
-import Tooltip from "tooltip.js";
 
 // Patch over Tooltip's _scheduleShow and _scheduleHide to not use setTimeout with a 0 second delay
 // The 0 second delay could still result in the _show call being stuck pending for extended periods (was consistently > 1 second on mobile Chrome)

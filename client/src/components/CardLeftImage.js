@@ -1,6 +1,5 @@
-import "./CardLeftImage.scss";
-
 import { TM } from "./TextMaker.js";
+import "./CardLeftImage.scss";
 
 const CardLeftImage = ({
   img_src,

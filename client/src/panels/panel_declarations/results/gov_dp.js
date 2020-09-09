@@ -1,7 +1,9 @@
-import text from "./gov_dp.yaml";
-
 import { Fragment } from "react";
 
+import {
+  default_dept_name_sort_func,
+  SmartDisplayTable,
+} from "../../../components";
 import {
   Subject,
   create_text_maker_component,
@@ -10,6 +12,8 @@ import {
   declare_panel,
   HeightClippedGraph,
 } from "../shared.js";
+
+import { LateDepartmentsBanner } from "./result_components.js";
 import {
   ResultCounts,
   filter_and_genericize_doc_counts,
@@ -17,11 +21,8 @@ import {
   result_docs,
   link_to_results_infograph,
 } from "./results_common.js";
-import { LateDepartmentsBanner } from "./result_components.js";
-import {
-  SmartDisplayTable,
-  default_dept_name_sort_func,
-} from "../../../components";
+
+import text from "./gov_dp.yaml";
 
 const { Dept } = Subject;
 const { text_maker, TM } = create_text_maker_component(text);

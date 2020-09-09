@@ -1,12 +1,13 @@
 import { Subject } from "../../../models/subject.js";
 import { text_maker } from "../partition_text_provider.js";
-import { PartitionPerspective } from "./PartitionPerspective.js";
 
 import {
   absolute_value_sort,
   post_traversal_value_set,
   post_traversal_search_string_set,
 } from "./data_hierarchy_utils.js";
+import { PartitionPerspective } from "./PartitionPerspective.js";
+
 
 import {
   get_common_popup_options,

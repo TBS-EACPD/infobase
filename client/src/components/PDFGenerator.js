@@ -1,11 +1,13 @@
-import text from "./PDFGenerator.yaml";
+import { Fragment } from "react";
+
+import { IconDownload } from "../icons/icons.js";
 import { get_static_url } from "../request_utils.js";
 
 import { create_text_maker_component } from "./misc_util_components.js";
 import { SpinnerWrapper } from "./SpinnerWrapper.js";
 
-import { Fragment } from "react";
-import { IconDownload } from "../icons/icons.js";
+
+import text from "./PDFGenerator.yaml";
 
 const { text_maker } = create_text_maker_component(text);
 

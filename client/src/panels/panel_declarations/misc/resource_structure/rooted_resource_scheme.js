@@ -1,20 +1,20 @@
 import { createSelector } from "reselect";
 
+import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
+import {
+  filter_hierarchy,
+  convert_d3_hierarchy_to_explorer_hierarchy,
+} from "src/explorer_common/hierarchy_tools.js";
+import {
+  get_resources_for_subject,
+  create_sort_func_selector,
+} from "src/explorer_common/resource_explorer_common.js";
 import {
   cached_property,
   bound,
   shallowEqualObjectsOverKeys,
   sanitized_dangerous_inner_html,
 } from "src/general_utils";
-import {
-  get_resources_for_subject,
-  create_sort_func_selector,
-} from "src/explorer_common/resource_explorer_common.js";
-import {
-  filter_hierarchy,
-  convert_d3_hierarchy_to_explorer_hierarchy,
-} from "src/explorer_common/hierarchy_tools.js";
-import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 
 import { trivial_text_maker } from "src/models/text";
 

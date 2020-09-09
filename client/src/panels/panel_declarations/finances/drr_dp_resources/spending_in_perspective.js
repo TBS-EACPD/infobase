@@ -1,4 +1,3 @@
-import text from "./perspective_text.yaml";
 import {
   declare_panel,
   util_components,
@@ -6,6 +5,8 @@ import {
   create_text_maker_component,
   WrappedNivoPie,
 } from "../../shared.js";
+
+import text from "./perspective_text.yaml";
 
 const { Select } = util_components;
 

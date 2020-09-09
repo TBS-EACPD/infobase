@@ -1,8 +1,8 @@
 /* eslint-disable no-console, no-debugger */
+import { infograph_href_template, glossary_href } from "../link_utils.js";
+import { GlossaryEntry } from "../models/glossary.js";
 import { Subject } from "../models/subject";
 
-import { GlossaryEntry } from "../models/glossary.js";
-import { infograph_href_template, glossary_href } from "../link_utils.js";
 import { trivial_text_maker, run_template } from "../models/text.js";
 
 const change_map = {

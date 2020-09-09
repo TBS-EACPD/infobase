@@ -1,4 +1,5 @@
 import { AutoAccordion } from "../../components/index.js";
+
 import { text_maker } from "./partition_text_provider.js";
 
 export class PartitionNotes extends React.Component {

@@ -1,8 +1,9 @@
-import "./CountdownCircle.scss";
-
 import { Fragment } from "react";
+
 import { is_IE } from "../core/feature_detection.js";
+
 import { Countdown } from "./Countdown.js";
+import "./CountdownCircle.scss";
 
 const split_value_and_units = (size) => {
   const unit = /[a-z]+$/.exec(size);

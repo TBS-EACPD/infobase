@@ -1,16 +1,18 @@
-import "./FAQ.scss";
-import text from "./FAQ.yaml";
-import { faq_data } from "./faq_data.js";
-
-import {
-  StandardRouteContainer,
-  ScrollToTargetContainer,
-} from "../core/NavComponents.js";
 import {
   LabeledTable,
   create_text_maker_component,
   FancyUL,
 } from "../components";
+import {
+  StandardRouteContainer,
+  ScrollToTargetContainer,
+} from "../core/NavComponents.js";
+
+import { faq_data } from "./faq_data.js";
+
+import text from "./FAQ.yaml";
+
+import "./FAQ.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 

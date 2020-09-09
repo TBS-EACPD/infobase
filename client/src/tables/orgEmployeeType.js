@@ -1,5 +1,3 @@
-import text from "./orgEmployeeType.yaml";
-
 import {
   stats,
   trivial_text_maker,
@@ -8,6 +6,9 @@ import {
   businessConstants,
   year_templates,
 } from "./table_common";
+
+import text from "./orgEmployeeType.yaml";
+
 
 const { tenure } = businessConstants;
 const { people_years, people_years_short_second } = year_templates;

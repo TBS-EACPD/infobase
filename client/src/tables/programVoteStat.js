@@ -1,7 +1,3 @@
-import text from "./programVoteStat.yaml";
-
-// see [here](../table_definition.html) for description
-// of the table spec
 import {
   Subject,
   trivial_text_maker,
@@ -9,6 +5,11 @@ import {
   Statistics,
   year_templates,
 } from "./table_common";
+
+import text from "./programVoteStat.yaml";
+
+// see [here](../table_definition.html) for description
+// of the table spec
 
 const { Program } = Subject;
 

@@ -1,5 +1,7 @@
 import { withRouter } from "react-router";
 
+import { trivial_text_maker } from "../models/text.js";
+
 import { BaseTypeahead } from "./BaseTypeahead.js";
 import {
   make_orgs_search_config,
@@ -13,7 +15,6 @@ import {
   glossary_lite as glossary_lite_search_config,
 } from "./search_configs.js";
 
-import { trivial_text_maker } from "../models/text.js";
 
 const get_tag_search_configs = (
   include_tags_goco,

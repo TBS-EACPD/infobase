@@ -1,5 +1,3 @@
-import text from "./top_spending_areas.yaml";
-
 import {
   util_components,
   run_template,
@@ -12,6 +10,9 @@ import {
   declare_panel,
   WrappedNivoPie,
 } from "../../shared.js";
+
+import text from "./top_spending_areas.yaml";
+
 
 const { is_non_revenue, collapse_by_so } = table_common;
 

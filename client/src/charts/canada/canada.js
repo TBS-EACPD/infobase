@@ -1,14 +1,16 @@
 import { Fragment } from "react";
 
-import text from "./canada.yaml";
-import { CanadaD3Component } from "./CanadaD3Component.js";
 
+import { secondaryColor, tertiaryColor } from "../../core/color_defs.js";
+import { hex_to_rgb } from "../../general_utils.js";
+import { businessConstants } from "../../models/businessConstants.js";
+import { run_template, create_text_maker } from "../../models/text.js";
 import { StandardLegend } from "../legends";
 import { WrappedNivoHBar } from "../wrapped_nivo/index.js";
-import { hex_to_rgb } from "../../general_utils.js";
-import { secondaryColor, tertiaryColor } from "../../core/color_defs.js";
-import { run_template, create_text_maker } from "../../models/text.js";
-import { businessConstants } from "../../models/businessConstants.js";
+
+import { CanadaD3Component } from "./CanadaD3Component.js";
+
+import text from "./canada.yaml";
 
 const text_maker = create_text_maker(text);
 

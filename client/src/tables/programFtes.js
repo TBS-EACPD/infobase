@@ -1,9 +1,3 @@
-import text from "./programFtes.yaml";
-
-// see [here](../table_definition.html) for description
-// of the table spec
-//
-
 import {
   stats,
   Subject,
@@ -12,6 +6,13 @@ import {
   Statistics,
   year_templates,
 } from "./table_common";
+
+import text from "./programFtes.yaml";
+
+// see [here](../table_definition.html) for description
+// of the table spec
+//
+
 
 const { std_years, planning_years } = year_templates;
 const { Program, Gov } = Subject;

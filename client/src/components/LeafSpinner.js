@@ -1,5 +1,5 @@
-import "./LeafSpinner.scss";
 import leaf_loading_spinner from "../svg/leaf-loading-spinner.svg";
+import "./LeafSpinner.scss";
 
 export const LeafSpinner = ({ config_name }) => {
   const default_spinner_config_form = (scale) => ({

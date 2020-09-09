@@ -1,6 +1,5 @@
-import "./LabeledTable.scss";
-
 import PropTypes from "prop-types";
+import "./LabeledTable.scss";
 
 export const LabeledTable = ({ title, TitleComponent, contents }) => (
   <section className="labeled-table" aria-label={title}>

@@ -1,4 +1,3 @@
-import text from "./warning_panels.yaml";
 
 import { Fragment } from "react";
 
@@ -11,6 +10,8 @@ import {
   create_text_maker_component,
   declare_panel,
 } from "../shared.js";
+
+import text from "./warning_panels.yaml";
 
 const { TM, text_maker } = create_text_maker_component([
   text,

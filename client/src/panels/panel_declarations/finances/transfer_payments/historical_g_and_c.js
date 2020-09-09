@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 
-import { text_maker, TM } from "./gnc_text_provider.js";
 import {
   run_template,
   declare_panel,
@@ -13,6 +12,8 @@ import {
   util_components,
   WrappedNivoLine,
 } from "../../shared.js";
+
+import { text_maker, TM } from "./gnc_text_provider.js";
 
 const { transfer_payments } = businessConstants;
 const { std_years } = year_templates;

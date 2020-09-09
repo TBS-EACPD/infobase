@@ -1,20 +1,21 @@
-import "./DisplayTable.scss";
-
 import classNames from "classnames";
 
+import { LegendList } from "../../charts/legends/LegendList.js";
+import { DebouncedTextInput } from "../DebouncedTextInput.js";
 import {
   create_text_maker_component,
   Format,
 } from "../misc_util_components.js";
-import { LegendList } from "../../charts/legends/LegendList.js";
+
+import { SortDirections } from "../SortDirection.js";
 
 import {
   DisplayTableCopyCsv,
   DisplayTableDownloadCsv,
   DisplayTableColumnToggle,
 } from "./DisplayTableUtils.js";
-import { SortDirections } from "../SortDirection.js";
-import { DebouncedTextInput } from "../DebouncedTextInput.js";
+
+import "./DisplayTable.scss";
 
 const { text_maker, TM } = create_text_maker_component();
 

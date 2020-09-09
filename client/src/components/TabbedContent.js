@@ -1,5 +1,5 @@
-import "./TabbedContent.scss";
 import classNames from "classnames";
+import "./TabbedContent.scss";
 
 export class TabbedControls extends React.Component {
   render() {

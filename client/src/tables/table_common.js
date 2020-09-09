@@ -1,10 +1,10 @@
-import { stats } from "../core/tables/stats.js";
-import { year_templates } from "../models/years.js";
-import { Subject } from "../models/subject";
-import { Statistics } from "../core/Statistics.js";
 import * as format from "../core/format";
+import { Statistics } from "../core/Statistics.js";
+import { stats } from "../core/tables/stats.js";
 import { businessConstants } from "../models/businessConstants.js";
+import { Subject } from "../models/subject";
 import { trivial_text_maker, run_template } from "../models/text.js";
+import { year_templates } from "../models/years.js";
 
 const m = run_template;
 const text_maker = trivial_text_maker;

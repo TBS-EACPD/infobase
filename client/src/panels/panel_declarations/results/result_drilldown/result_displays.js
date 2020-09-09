@@ -1,10 +1,10 @@
 import { createSelector } from "reselect";
 
-import { TM, text_maker } from "../result_text_provider.js";
-import { IndicatorList } from "../result_components.js";
 
 import { infograph_href_template } from "../../../../link_utils.js";
 import { Indicator, result_docs } from "../../../../models/results.js";
+import { IndicatorList } from "../result_components.js";
+import { TM, text_maker } from "../result_text_provider.js";
 
 const type_text_keys = {
   dept: "orgs",

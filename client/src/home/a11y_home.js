@@ -1,13 +1,15 @@
-import home_text1 from "./home.yaml";
-import home_text2 from "./a11y-home.yaml";
-
-import { featured_content_items } from "./home-data.js";
-
-import { StandardRouteContainer } from "../core/NavComponents.js";
 import {
   create_text_maker_component,
   AlertBanner,
 } from "../components/index.js";
+import { StandardRouteContainer } from "../core/NavComponents.js";
+
+import { featured_content_items } from "./home-data.js";
+
+import home_text2 from "./a11y-home.yaml";
+import home_text1 from "./home.yaml";
+
+
 
 const { text_maker, TM } = create_text_maker_component([
   home_text1,

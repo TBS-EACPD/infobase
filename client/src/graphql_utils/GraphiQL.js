@@ -1,10 +1,14 @@
-import GraphiQL from "graphiql";
 import "graphiql/graphiql.css";
+
 import fetch from "isomorphic-fetch";
 
-import { StandardRouteContainer } from "../core/NavComponents.js";
-import { log_standard_event } from "../core/analytics.js";
+// strange error: "casing of graphiql does not match the underlying filesystem"
+/* eslint-disable-next-line import/no-unresolved */
+import GraphiQL from "graphiql";
+
 import { SpinnerWrapper, ContainerEscapeHatch } from "../components/index.js";
+import { log_standard_event } from "../core/analytics.js";
+import { StandardRouteContainer } from "../core/NavComponents.js";
 
 import { get_api_url } from "./graphql_utils.js";
 

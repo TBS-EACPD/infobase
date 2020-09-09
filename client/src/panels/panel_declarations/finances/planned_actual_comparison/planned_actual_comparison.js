@@ -1,7 +1,3 @@
-import text from "./planned_actual_comparison.yaml";
-
-import { PlannedActualTable } from "./PlannedActualTable.js";
-
 import {
   declare_panel,
   FootNote,
@@ -9,6 +5,12 @@ import {
   TextPanel,
   get_source_links,
 } from "../../shared.js";
+
+import { PlannedActualTable } from "./PlannedActualTable.js";
+
+import text from "./planned_actual_comparison.yaml";
+
+
 
 const { text_maker, TM } = create_text_maker_component(text);
 

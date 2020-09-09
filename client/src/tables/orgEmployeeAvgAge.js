@@ -1,11 +1,12 @@
-import text from "./orgEmployeeAvgAge.yaml";
-
 import {
   trivial_text_maker,
   m,
   Statistics,
   year_templates,
 } from "./table_common";
+
+import text from "./orgEmployeeAvgAge.yaml";
+
 
 const { people_years, people_years_short_second } = year_templates;
 

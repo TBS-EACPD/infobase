@@ -1,9 +1,11 @@
-import "./CircleProportionChart.scss";
-import text from "./CircleProportionChart.yaml";
-
 import { ResponsiveBubble } from "@nivo/circle-packing";
 import { Fragment } from "react";
 import MediaQuery from "react-responsive";
+
+import { SmartDisplayTable } from "../../components/index.js";
+import { breakpoints } from "../../core/breakpoint_defs.js";
+import { newIBCategoryColors } from "../../core/color_schemes.js";
+import { formats } from "../../core/format.js";
 
 import {
   InteractiveGraph,
@@ -13,10 +15,8 @@ import {
   TooltipFactory,
 } from "./wrapped_nivo_common.js";
 
-import { formats } from "../../core/format.js";
-import { breakpoints } from "../../core/breakpoint_defs.js";
-import { newIBCategoryColors } from "../../core/color_schemes.js";
-import { SmartDisplayTable } from "../../components/index.js";
+import text from "./CircleProportionChart.yaml";
+import "./CircleProportionChart.scss";
 
 const { text_maker, TM } = create_text_maker_component_with_nivo_common(text);
 

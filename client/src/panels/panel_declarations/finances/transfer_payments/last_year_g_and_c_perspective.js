@@ -1,12 +1,13 @@
 import { Fragment } from "react";
 
-import { text_maker, TM } from "./gnc_text_provider.js";
 import {
   StdPanel,
   Col,
   CircleProportionChart,
   declare_panel,
 } from "../../shared.js";
+
+import { text_maker, TM } from "./gnc_text_provider.js";
 
 export const declare_last_year_g_and_c_perspective_panel = () =>
   declare_panel({

@@ -2,9 +2,9 @@ import {
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,
 } from "../../../../explorer_common/hierarchy_tools.js";
+import { Subject, Results } from "../../shared.js";
 import { results_resource_fragment } from "../results_common.js";
 
-import { Subject, Results } from "../../shared.js";
 
 const { Dept } = Subject;
 const { Result } = Results;

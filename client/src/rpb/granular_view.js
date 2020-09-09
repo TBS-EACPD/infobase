@@ -1,5 +1,3 @@
-import { TextMaker, text_maker } from "./rpb_text_provider.js";
-import { ReportDetails, ReportDatasets } from "./shared.js";
 import {
   LabeledBox,
   AlertBanner,
@@ -7,7 +5,11 @@ import {
   Details,
   DropdownMenu,
 } from "../components/index.js";
+
 import { Subject } from "../models/subject.js";
+
+import { TextMaker, text_maker } from "./rpb_text_provider.js";
+import { ReportDetails, ReportDatasets } from "./shared.js";
 
 const { Dept } = Subject;
 

@@ -1,4 +1,3 @@
-import text from "./employee_totals.yaml";
 import {
   formats,
   run_template,
@@ -11,6 +10,8 @@ import {
   businessConstants,
   declare_panel,
 } from "../shared.js";
+
+import text from "./employee_totals.yaml";
 
 const { months } = businessConstants;
 

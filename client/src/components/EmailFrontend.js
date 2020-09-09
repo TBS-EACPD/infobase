@@ -1,19 +1,21 @@
-import { Fragment } from "react";
 import classNames from "classnames";
-
-import { create_text_maker_component } from "./misc_util_components.js";
-import { SpinnerWrapper } from "./SpinnerWrapper";
-import { CheckBox } from "./CheckBox.js";
+import { Fragment } from "react";
 
 import { get_client_id, log_standard_event } from "../core/analytics.js";
+
+import { has_local_storage } from "../core/feature_detection.js";
 import {
   get_email_template,
   send_completed_email_template,
 } from "../email_backend_utils.js";
 
+import { CheckBox } from "./CheckBox.js";
+import { create_text_maker_component } from "./misc_util_components.js";
+import { SpinnerWrapper } from "./SpinnerWrapper";
+
 import text from "./EmailFrontend.yaml";
+
 import "./EmailFrontend.scss";
-import { has_local_storage } from "../core/feature_detection.js";
 
 const { TM, text_maker } = create_text_maker_component(text);
 

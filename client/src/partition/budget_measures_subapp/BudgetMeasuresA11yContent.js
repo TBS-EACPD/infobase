@@ -1,10 +1,14 @@
 import { Fragment } from "react";
+
 import { formats } from "../../core/format.js";
+
+import { sanitized_dangerous_inner_html } from "../../general_utils.js";
+import { businessConstants } from "../../models/businessConstants.js";
+
+import { Subject } from "../../models/subject";
+
 import { text_maker, TextMaker } from "./budget_measure_text_provider.js";
 import { budget_measures_hierarchy_factory } from "./budget_measures_hierarchy_factory.js";
-import { businessConstants } from "../../models/businessConstants.js";
-import { Subject } from "../../models/subject";
-import { sanitized_dangerous_inner_html } from "../../general_utils.js";
 
 const { budget_values } = businessConstants;
 const { BudgetMeasure } = Subject;

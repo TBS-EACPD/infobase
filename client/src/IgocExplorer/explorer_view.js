@@ -1,18 +1,18 @@
-import "../explorer_common/explorer-styles.scss";
-import { igoc_tmf as text_maker, TM } from "./igoc_explorer_text.js";
-import { grouping_options } from "./hierarchies.js";
-
+import classNames from "classnames";
 import { Fragment } from "react";
 import { createSelector } from "reselect";
-import classNames from "classnames";
 
-import { get_root } from "../explorer_common/hierarchy_tools.js";
-import { Explorer } from "../explorer_common/explorer_components.js";
-
-import { infograph_href_template } from "../link_utils.js";
-import { sanitized_dangerous_inner_html } from "../general_utils.js";
 import { SpinnerWrapper, DlItem, CheckBox } from "../components/index.js";
+import { Explorer } from "../explorer_common/explorer_components.js";
+import { get_root } from "../explorer_common/hierarchy_tools.js";
+
+import { sanitized_dangerous_inner_html } from "../general_utils.js";
+import { infograph_href_template } from "../link_utils.js";
 import { Subject } from "../models/subject.js";
+
+import { grouping_options } from "./hierarchies.js";
+import { igoc_tmf as text_maker, TM } from "./igoc_explorer_text.js";
+import "../explorer_common/explorer-styles.scss";
 
 const { InstForm } = Subject;
 

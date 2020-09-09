@@ -1,9 +1,3 @@
-import text from "./programSpending.yaml";
-
-// see [here](../table_definition.html) for description
-// of the table spec
-//const {spending_areas} = require('../../models/goco.js');
-
 import {
   stats,
   Subject,
@@ -11,6 +5,13 @@ import {
   Statistics,
   year_templates,
 } from "./table_common";
+
+import text from "./programSpending.yaml";
+
+// see [here](../table_definition.html) for description
+// of the table spec
+//const {spending_areas} = require('../../models/goco.js');
+
 
 const { Program, Gov, Dept } = Subject;
 const { std_years, planning_years } = year_templates;

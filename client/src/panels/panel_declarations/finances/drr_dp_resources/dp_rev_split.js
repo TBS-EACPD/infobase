@@ -1,4 +1,4 @@
-import text from "./dp_rev_split.yaml";
+import { Format, SmartDisplayTable } from "../../../../components";
 import {
   year_templates,
   run_template,
@@ -7,7 +7,8 @@ import {
   get_source_links,
   declare_panel,
 } from "../../shared.js";
-import { SmartDisplayTable, Format } from "../../../../components";
+
+import text from "./dp_rev_split.yaml";
 
 const { text_maker } = create_text_maker_component(text);
 

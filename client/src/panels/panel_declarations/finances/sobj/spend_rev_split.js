@@ -1,4 +1,3 @@
-import text from "./spend_rev_split.yaml";
 import {
   formats,
   create_text_maker_component,
@@ -8,6 +7,8 @@ import {
   table_common,
   declare_panel,
 } from "../../shared.js";
+
+import text from "./spend_rev_split.yaml";
 
 const { rows_to_rev_split } = table_common;
 

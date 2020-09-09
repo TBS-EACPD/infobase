@@ -1,3 +1,5 @@
+/* eslint-disable import/order */
+
 import * as jsPDF from "jspdf";
 import "jspdf-autotable";
 

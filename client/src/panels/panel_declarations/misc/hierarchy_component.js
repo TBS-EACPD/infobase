@@ -1,10 +1,11 @@
-import text from "./hierarchy_panels.yaml";
 
 import classNames from "classnames";
 import { Fragment } from "react";
 
-import { Subject, create_text_maker_component } from "../shared.js";
 import { IconAttentionTriangle } from "../../../icons/icons.js";
+import { Subject, create_text_maker_component } from "../shared.js";
+
+import text from "./hierarchy_panels.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 const { Gov } = Subject;

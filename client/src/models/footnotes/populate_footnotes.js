@@ -1,12 +1,14 @@
-import FootNote from "./footnotes.js";
-import { get_dynamic_footnotes } from "./dynamic_footnotes.js";
-import footnote_topic_text from "./footnote_topics.yaml";
 
 import { sanitized_marked } from "../../general_utils.js";
 import { get_static_url, make_request } from "../../request_utils.js";
 import { Subject } from "../subject.js";
 import { run_template } from "../text.js";
 import { fiscal_year_to_year } from "../years.js";
+
+import { get_dynamic_footnotes } from "./dynamic_footnotes.js";
+import FootNote from "./footnotes.js";
+
+import footnote_topic_text from "./footnote_topics.yaml";
 
 const footnote_topic_keys = _.keys(footnote_topic_text);
 

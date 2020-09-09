@@ -1,29 +1,28 @@
-import "./TextDiff.scss";
-import diff_text from "./TextDiff.yaml";
-
-import { Fragment } from "react";
-import MediaQuery from "react-responsive";
 import classNames from "classnames";
 import * as Diff from "diff";
+import { Fragment } from "react";
+import MediaQuery from "react-responsive";
 
-import { StandardRouteContainer } from "../core/NavComponents.js";
-import { ensure_loaded } from "../core/lazy_loader.js";
-
-import { Subject } from "../models/subject";
-import { result_docs } from "../models/results.js";
-import {
-  Result,
-  indicator_text_functions,
-} from "../panels/panel_declarations/results/results_common.js";
-import result_text from "../panels/panel_declarations/results/result_components.yaml";
 import { LegendList } from "../charts/legends";
-
 import {
   Select,
   Panel,
   create_text_maker_component,
   SpinnerWrapper,
 } from "../components";
+import { ensure_loaded } from "../core/lazy_loader.js";
+import { StandardRouteContainer } from "../core/NavComponents.js";
+
+import { result_docs } from "../models/results.js";
+import { Subject } from "../models/subject";
+import result_text from "../panels/panel_declarations/results/result_components.yaml";
+import {
+  Result,
+  indicator_text_functions,
+} from "../panels/panel_declarations/results/results_common.js";
+
+import diff_text from "./TextDiff.yaml";
+import "./TextDiff.scss";
 
 const { indicator_target_text } = indicator_text_functions;
 const { Dept, CRSO, Program } = Subject;

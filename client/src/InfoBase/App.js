@@ -1,16 +1,12 @@
-import "./App.scss";
 import axios from "axios";
 
 import { Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
+import { HeaderNotification } from "../components/HeaderNotification";
+import { PageDetails } from "../components/PageDetails.js";
+import { SpinnerWrapper } from "../components/SpinnerWrapper.js";
 import { initialize_analytics } from "../core/analytics.js";
-import { has_local_storage } from "../core/feature_detection.js";
-
-import {
-  ensure_linked_stylesheets_load,
-  retrying_react_lazy,
-} from "./common_app_component_utils.js";
 
 export const app_reducer = (
   state = { lang: window.lang },
@@ -20,16 +16,21 @@ export const app_reducer = (
   return state;
 };
 
-import { ErrorBoundary } from "../core/ErrorBoundary.js";
 import { DevFip } from "../core/DevFip.js";
-import { TooltipActivator } from "../glossary/TooltipActivator.js";
+import { EasyAccess } from "../core/EasyAccess.js";
+import { ErrorBoundary } from "../core/ErrorBoundary.js";
+import { has_local_storage } from "../core/feature_detection.js";
 import { InsertRuntimeFooterLinks } from "../core/InsertRuntimeFooterLinks.js";
 import { ReactUnmounter } from "../core/NavComponents.js";
-import { EasyAccess } from "../core/EasyAccess.js";
 import { SurveyPopup } from "../core/SurveyPopup.js";
-import { SpinnerWrapper } from "../components/SpinnerWrapper.js";
-import { HeaderNotification } from "../components/HeaderNotification";
-import { PageDetails } from "../components/PageDetails.js";
+import { TooltipActivator } from "../glossary/TooltipActivator.js";
+
+import {
+  ensure_linked_stylesheets_load,
+  retrying_react_lazy,
+} from "./common_app_component_utils.js";
+
+import "./App.scss";
 
 const Home = retrying_react_lazy(() =>
   import(/* webpackChunkName: "Home" */ "../home/home.js")

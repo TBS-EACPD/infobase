@@ -1,6 +1,8 @@
-import { get_client } from "../graphql_utils/graphql_utils.js";
 import gql from "graphql-tag";
+
 import { log_standard_event } from "../core/analytics.js";
+import { get_client } from "../graphql_utils/graphql_utils.js";
+
 import { Subject } from "./subject.js";
 
 const { BudgetMeasure } = Subject;

@@ -1,5 +1,3 @@
-import { TextMaker } from "./rpb_text_provider.js";
-import { sources as all_sources } from "../metadata/data_sources.js";
 import {
   FancyUL,
   ShareButton,
@@ -7,6 +5,9 @@ import {
   FootnoteList,
 } from "../components/index.js";
 import { IconCopyLink } from "../icons/icons.js";
+import { sources as all_sources } from "../metadata/data_sources.js";
+
+import { TextMaker } from "./rpb_text_provider.js";
 
 const ReportDetails = ({
   table,

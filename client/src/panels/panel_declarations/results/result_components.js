@@ -1,9 +1,15 @@
-import "./result_components.scss";
-import { TM, text_maker } from "./result_text_provider.js";
-
 import { Fragment } from "react";
 
+import {
+  IconCheck,
+  IconAttention,
+  IconNotApplicable,
+  IconClock,
+} from "../../../icons/icons.js";
 import { util_components, general_utils } from "../shared.js";
+
+import { TM, text_maker } from "./result_text_provider.js";
+
 import {
   status_key_to_glossary_key,
   ordered_status_keys,
@@ -14,12 +20,8 @@ import {
   result_docs,
   result_color_scale,
 } from "./results_common.js";
-import {
-  IconCheck,
-  IconAttention,
-  IconNotApplicable,
-  IconClock,
-} from "../../../icons/icons.js";
+
+import "./result_components.scss";
 
 const {
   indicator_target_text,

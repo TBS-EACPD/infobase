@@ -1,7 +1,6 @@
-import text from "./InfographicPanel.yaml";
 
-import PropTypes from "prop-types";
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import { Fragment } from "react";
 
 import {
@@ -17,6 +16,8 @@ import { IconCopyLink } from "../../icons/icons.js";
 import { panel_href_template } from "../../infographic/infographic_link.js";
 
 import { panel_context } from "../PanelRenderer.js";
+
+import text from "./InfographicPanel.yaml";
 
 const { text_maker } = create_text_maker_component(text);
 

@@ -1,18 +1,20 @@
-import "./TablePicker.scss";
 import "../components/LabeledBox.scss";
+import classNames from "classnames";
+import { Fragment } from "react";
+
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+
+import { AlertBanner, GlossaryIcon } from "../components";
 import { Table } from "../core/TableClass.js";
 import { GlossaryEntry } from "../models/glossary.js";
-import { Fragment } from "react";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
-import classNames from "classnames";
-import { AlertBanner, GlossaryIcon } from "../components";
 
+import { TextMaker } from "./rpb_text_provider.js";
 import {
   categories,
   concepts_by_category,
   concept_filter,
 } from "./table_picker_concept_filter.js";
-import { TextMaker } from "./rpb_text_provider.js";
+import "./TablePicker.scss";
 
 const BrokenLinkBanner = () => (
   <AlertBanner banner_class={"warning"}>

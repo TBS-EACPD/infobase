@@ -1,10 +1,12 @@
-import text from "./orgVoteStatQfr.yaml";
 
-import { vote_stat_dimension, major_vote_stat } from "./table_common";
 
 import * as FORMAT from "../core/format";
 
 import { trivial_text_maker } from "../models/text";
+
+import { vote_stat_dimension, major_vote_stat } from "./table_common";
+
+import text from "./orgVoteStatQfr.yaml";
 
 export default {
   text,

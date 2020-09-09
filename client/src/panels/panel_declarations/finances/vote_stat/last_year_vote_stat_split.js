@@ -1,10 +1,11 @@
-import { text_maker, TM } from "./vote_stat_text_provider.js";
 import {
   StdPanel,
   Col,
   WrappedNivoPie,
   declare_panel,
 } from "../../shared.js";
+
+import { text_maker, TM } from "./vote_stat_text_provider.js";
 
 const render_w_options = ({ text_key, graph_col, text_col }) => ({
   calculations,

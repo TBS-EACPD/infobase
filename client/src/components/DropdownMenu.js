@@ -1,5 +1,5 @@
-import "./DropdownMenu.scss";
 import classNames from "classnames";
+import "./DropdownMenu.scss";
 
 export class DropdownMenu extends React.Component {
   constructor(props) {

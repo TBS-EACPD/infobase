@@ -1,5 +1,5 @@
-import { GlossaryEntry } from "../../../models/glossary";
 import { Table } from "../../../core/TableClass.js";
+import { GlossaryEntry } from "../../../models/glossary";
 
 const absolute_value_sort = (a, b) => -(Math.abs(a.value) - Math.abs(b.value));
 const alphabetic_name_sort = (a, b) =>

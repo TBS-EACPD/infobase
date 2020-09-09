@@ -1,7 +1,7 @@
-import { Table } from "../core/TableClass.js";
 import { get_info, tables_for_statistics } from "../core/Statistics.js";
-import { Subject } from "../models/subject.js";
+import { Table } from "../core/TableClass.js";
 import FootNote from "../models/footnotes/footnotes.js";
+import { Subject } from "../models/subject.js";
 import { rpb_link, get_appropriate_rpb_subject } from "../rpb/rpb_link.js";
 
 const subjects = _.keys(Subject);

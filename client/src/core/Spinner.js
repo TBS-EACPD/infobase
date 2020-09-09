@@ -1,5 +1,5 @@
-import "spin.js/spin.css";
 import { Spinner } from "spin.js";
+import "spin.js/spin.css";
 
 const spinner_configs = {
   initial: { scale: 4 },

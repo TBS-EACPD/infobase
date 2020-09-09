@@ -1,15 +1,16 @@
-import "./PageDetails.scss";
-import text from "./PageDetails.yaml";
-
 import { withRouter } from "react-router";
 
+import { IconGitHub } from "../icons/icons.js";
+import { create_text_maker } from "../models/text.js";
+
 import { Details } from "./Details.js";
+import { EmailFrontend } from "./EmailFrontend.js";
 import { ExternalLink } from "./misc_util_components.js";
 
-import { create_text_maker } from "../models/text.js";
-import { IconGitHub } from "../icons/icons.js";
-import { EmailFrontend } from "./EmailFrontend.js";
 import { StatelessModal } from "./modals_and_popovers";
+
+import text from "./PageDetails.yaml";
+import "./PageDetails.scss";
 
 const text_maker = create_text_maker(text);
 

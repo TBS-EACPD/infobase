@@ -1,8 +1,8 @@
 // see [here](../table_definition.html) for description
 // of the table spec
 
-import text from "./orgVoteStatEstimates.yaml";
 import * as FORMAT from "../core/format";
+
 import {
   vote_stat_dimension,
   trivial_text_maker,
@@ -11,6 +11,8 @@ import {
   year_templates,
   businessConstants,
 } from "./table_common";
+
+import text from "./orgVoteStatEstimates.yaml";
 const { estimates_years } = year_templates;
 const est_cols = _.map(estimates_years, (yr) => yr + "_estimates");
 const in_year_col = est_cols[4];

@@ -1,11 +1,12 @@
-import data_source_text from "./data_sources.yaml";
-import freq_text from "./frequencies.yaml";
 
 //circular dependency hack..
 import { Table } from "../core/TableClass.js";
-import { rpb_link } from "../rpb/rpb_link.js";
 import { GlossaryEntry } from "../models/glossary.js";
 import { create_text_maker } from "../models/text.js";
+import { rpb_link } from "../rpb/rpb_link.js";
+
+import data_source_text from "./data_sources.yaml";
+import freq_text from "./frequencies.yaml";
 
 const tm = create_text_maker([data_source_text, freq_text]);
 

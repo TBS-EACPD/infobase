@@ -1,5 +1,3 @@
-import text from "./rpb_links.yaml";
-
 import {
   TextPanel,
   util_components,
@@ -8,6 +6,9 @@ import {
   create_text_maker_component,
   declare_panel,
 } from "../shared.js";
+
+import text from "./rpb_links.yaml";
+
 
 const { WellList } = util_components;
 

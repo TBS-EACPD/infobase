@@ -1,5 +1,3 @@
-import text from "./orgEmployeeAgeGroup.yaml";
-
 import {
   stats,
   trivial_text_maker,
@@ -9,6 +7,9 @@ import {
   businessConstants,
   year_templates,
 } from "./table_common";
+
+import text from "./orgEmployeeAgeGroup.yaml";
+
 
 const { formats } = format;
 const { age_groups, compact_age_groups, emp_age_map } = businessConstants;

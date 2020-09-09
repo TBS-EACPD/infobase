@@ -1,7 +1,10 @@
-import "./WrappedNivoPie.scss";
-
 import { ResponsivePie } from "@nivo/pie";
 import classNames from "classnames";
+
+import { Format, SmartDisplayTable } from "../../components/index.js";
+import { newIBCategoryColors } from "../../core/color_schemes.js";
+import { formats } from "../../core/format.js";
+import { TabularLegend } from "../legends";
 
 import {
   nivo_common_text_maker,
@@ -11,10 +14,7 @@ import {
   get_formatter,
 } from "./wrapped_nivo_common.js";
 
-import { TabularLegend } from "../legends";
-import { formats } from "../../core/format.js";
-import { newIBCategoryColors } from "../../core/color_schemes.js";
-import { SmartDisplayTable, Format } from "../../components/index.js";
+import "./WrappedNivoPie.scss";
 
 export class WrappedNivoPie extends React.Component {
   render() {

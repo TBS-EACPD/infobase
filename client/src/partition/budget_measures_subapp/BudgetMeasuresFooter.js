@@ -1,10 +1,9 @@
-import "./BudgetMeasuresFooter.scss";
-
-import { TextMaker } from "./budget_measure_text_provider.js";
-
 import { LabeledBox, FancyUL } from "../../components/index.js";
 
 import { sources } from "../../metadata/data_sources.js";
+
+import { TextMaker } from "./budget_measure_text_provider.js";
+import "./BudgetMeasuresFooter.scss";
 
 const { BUDGET: budget_source } = sources;
 
