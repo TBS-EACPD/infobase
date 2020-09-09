@@ -98,7 +98,7 @@ export default function ({ models, loaders }) {
     return !_.isNull(has_service);
   };
   const program_has_services = async (program_id) => {
-    const has_service = await Service.find({ program_ids: program_id });
+    const has_service = await Service.findOne({ program_ids: program_id });
     return !_.isNull(has_service);
   };
 
