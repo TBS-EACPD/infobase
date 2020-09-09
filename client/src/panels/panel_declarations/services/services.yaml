@@ -10,7 +10,8 @@ list_of_provided_services_desc:
     **{{subject_name}}** rend compte de **{{num_of_services}}** {{gl_tt "services" "SERVICE"}}:
 list_of_provided_services_prog_desc:
   transform: [handlebars, markdown]
-  en: There are **{{num_of_services}}** services delivered under the **{{subject_name}}** program
+  en: |
+    There are **{{num_of_services}}** services delivered under the **{{subject_name}}** program:
   fr: TODO
 
 view_service:
