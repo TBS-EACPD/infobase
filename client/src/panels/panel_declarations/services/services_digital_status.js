@@ -27,7 +27,7 @@ const colors = d3
   ]);
 
 const ServicesDigitalStatusPanel = ({ panel_args }) => {
-  const services = panel_args.services;
+  const { services, subject } = panel_args;
 
   const get_current_status_count = (key, value) =>
     _.countBy(services, `${key}_status`)[value] || 0;
@@ -71,10 +71,14 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
     <div>
       <TM
         className="medium_panel_text"
-        k="services_digital_status_text"
+        k={
+          subject.level === "program"
+            ? "services_digital_status_prog_text"
+            : "services_digital_status_text"
+        }
         args={{
           num_of_services: services.length,
-          subject_name: panel_args.subject.name,
+          subject_name: subject.name,
           most_digital_name: text_maker(most_digital_component.key),
           most_digital_pct:
             most_digital_component[can_online] / services.length,

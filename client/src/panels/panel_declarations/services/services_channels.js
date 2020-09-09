@@ -65,10 +65,13 @@ class ServicesChannelsPanel extends React.Component {
       }))
       .maxBy("max_vol_service_value")
       .value();
-    const { max_vol_channel_name, max_vol_channel_value } = _.chain(
-      delivery_channels_keys
-    )
+    const {
+      max_vol_channel_key,
+      max_vol_channel_name,
+      max_vol_channel_value,
+    } = _.chain(delivery_channels_keys)
       .map((key) => ({
+        max_vol_channel_key: key,
         max_vol_channel_name: text_maker(key),
         max_vol_channel_value: _.chain(services)
           .map(({ service_report }) => _.sumBy(service_report, `${key}_count`))
@@ -118,13 +121,21 @@ class ServicesChannelsPanel extends React.Component {
       <div>
         <TM
           className="medium_panel_text"
-          k="services_channels_text"
+          k={
+            subject.level === "program"
+              ? "services_channels_program_text"
+              : "services_channels_text"
+          }
           args={{
             subject,
             max_vol_service_name,
             max_vol_service_value,
             max_vol_channel_name,
             max_vol_channel_value,
+            channel_type:
+              max_vol_channel_key === "phone_inquiry"
+                ? text_maker("enquiries")
+                : text_maker("applications"),
           }}
         />
         {window.is_a11y_mode ? (
