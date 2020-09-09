@@ -36,7 +36,11 @@ const ServicesTypesPanel = ({ panel_args }) => {
           num_of_services: services.length,
         }}
         className="medium_panel_text"
-        k="services_types_desc"
+        k={
+          subject.level === "program"
+            ? "services_types_prog_desc"
+            : "services_types_desc"
+        }
       />
       {is_a11y_mode ? (
         <DisplayTable
