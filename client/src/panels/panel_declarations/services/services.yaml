@@ -8,6 +8,10 @@ list_of_provided_services_desc:
     **{{subject_name}}** is reporting on **{{num_of_services}}** {{gl_tt "services" "SERVICE"}}:
   fr: |
     **{{subject_name}}** rend compte de **{{num_of_services}}** {{gl_tt "services" "SERVICE"}}:
+list_of_provided_services_prog_desc:
+  transform: [handlebars, markdown]
+  en: There are **{{num_of_services}}** services delivered under the **{{subject_name}}** program
+  fr: TODO
 
 view_service:
   en: Explore the service
@@ -24,6 +28,10 @@ services_fees_text:
   transform: [handlebars, markdown]
   en: Out of the **{{services_count}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{charge_fees_count}}** services charge fees.
   fr: Sur les **{{services_count}}** {{gl_tt "services" "SERVICE"}} offerts par **{{subject_name}}**, **{{charge_fees_count}}** sont payants.
+services_prog_fees_text:
+  transform: [handlebars, markdown]
+  en: Out of the **{{services_count}}** {{gl_tt "services" "SERVICE"}} that are delivered under the **{{subject_name}}** program, **{{charge_fees_count}}** services charge fees.
+  fr: TODO
 service_charges_fees:
   en: Service does charge fees
   fr: Service payant
@@ -69,6 +77,11 @@ services_digital_status_text:
     Among the **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{most_digital_name}}** is the most commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 most_digital_pct}}**) while **{{least_digital_name}}** is the least commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 least_digital_pct}}**).
   fr: |
     Parmi les **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} offerts par **{{subject_name}}**, **{{most_digital_name}}** est le {{gl_tt "point d'interaction" "CLIENT_INTERACTION"}} en ligne avec les clients le plus courant (**{{fmt_percentage1 most_digital_pct}}**), tandis que **{{least_digital_name}}** est le moins courant (**{{fmt_percentage1 least_digital_pct}}**).
+services_digital_status_prog_text:
+  transform: [handlebars, markdown]
+  en: |
+    Among the **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} that are delivered under the **{{subject_name}}** program, **{{most_digital_name}}** is the most commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 most_digital_pct}}**) while **{{least_digital_name}}** is the least commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 least_digital_pct}}**).
+  fr: TODO  
 services_digital_status:
   en: Online status of services
   fr: État des services en ligne
@@ -133,15 +146,24 @@ services_channels_text:
   en: |
     {{gl_tt "Delivery channels" "CHANNELS"}} that {{gl_tt "services" "SERVICE"}} use for handling applications and enquiries.
     
-    In **{{subject.name}}**, the most traffic was generated through "**{{max_vol_channel_name}}**" {{gl_tt "channel" "CHANNELS"}} with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
+    In **{{subject.name}}**, the most traffic was generated through "**{{max_vol_channel_name}}**" {{gl_tt "channel" "CHANNELS"}} with a total of **{{fmt_big_int max_vol_channel_value}}** {{channel_type}}.
 
-    The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** applications, the highest among all of the department's services.
+    The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** {{channel_type}}, the highest among all of the department's services.
   fr: |
     Modes de prestation utilisés par les services pout traiter les demandes et les renseignements.
 
     À **{{subject.name}}**, le plus grand nombre de demandes a ètès gènèrè par les mode "**{{max_vol_channel_name}}**" avec un total de **{{fmt_big_int max_vol_channel_value}}** demandes.
 
     Le service "**{{max_vol_service_name}}**" a reçu **{{fmt_big_int max_vol_service_value}}** demandes, le plus grand nombre parmi les services du ministére.
+services_channels_program_text:
+  transform: [handlebars, markdown]
+  en: |
+    {{gl_tt "Delivery channels" "CHANNELS"}} that {{gl_tt "services" "SERVICE"}} use for handling applications and enquiries.
+
+    Under the **{{subject.name}}** program, the most traffic was generated through the "**{{max_vol_channel_name}}**" {{gl_tt "channel" "CHANNELS"}} with a total of **{{fmt_big_int max_vol_channel_value}}** {{channel_type}}.
+    
+    The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** {{channel_type}}, the highest among all of the services offered under this program.
+  fr: TODO
 service_channels_text:
   transform: [handlebars, markdown]
   en: |
@@ -170,36 +192,45 @@ phone_inquiry:
 online_inquiry:
   en: Website visits
   fr: Visites sur le site web
+applications:
+  en: applications
+  fr: demandes
+enquiries:
+  en: enquiries
+  fr: demandes de renseignements
 
 # Top 10 volume
 top10_services_volume_title:
-  en: Top 10 services with highest application volume
-  fr: Les 10 services les plus demandés
+  transform: [handlebars]
+  en: Top {{num_of_services}} services with highest application volume
+  fr: Les {{num_of_services}} services les plus demandés
 service_name:
   en: Service name
   fr: Nom du service
 top10_services_volume_text:
   transform: [handlebars, markdown]
   en: |
-    Below are the top 10 services with the highest application and telephone volume. **{{highest_service_name}}** had the most traffic with **{{fmt_big_int highest_service_value}}** applications and telephone calls.
+    Below are the top {{num_of_services}} services with the highest application and telephone volume. **{{highest_service_name}}** had the most traffic with **{{fmt_big_int highest_service_value}}** applications and telephone calls.
   fr: |
-    Vous trouverez ci-dessous les 10 services ayant le volume de demandes et d'appels téléphoniques le plus élevé. **{{highest_service_name}}** a connu le plus de trafic avec **{{fmt_big_int highest_service_value}}** demandes et appels téléphoniques.
+    Vous trouverez ci-dessous les {{num_of_services}} services ayant le volume de demandes et d'appels téléphoniques le plus élevé. **{{highest_service_name}}** a connu le plus de trafic avec **{{fmt_big_int highest_service_value}}** demandes et appels téléphoniques.
 top10_gov_website_visits:
-  en: Top 10 organizations with highest website visits
-  fr: Les 10 organisations les plus visitées sur leur site web
+  transform: [handlebars]
+  en: Top {{num_of_services}} organizations with highest website visits
+  fr: Les {{num_of_services}} organisations les plus visitées sur leur site web
 top10_services_website_visits:
-  en: Top 10 services with highest website visits
-  fr: Les 10 services les plus visités sur leur site web
+  transform: [handlebars]
+  en: Top {{num_of_services}} services with highest website visits
+  fr: Les {{num_of_services}} services les plus visités sur leur site web
 top10_gov_website_visits_text:
   transform: [handlebars, markdown]
   en: |
-    Below are the top 10 organizations with the highest website visit volume. **{{highest_volume_name}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** website visits.
+    Below are the top {{num_of_services}} organizations with the highest website visit volume. **{{highest_volume_name}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** website visits.
   fr: |
-    Vous trouverez ci-dessous les 10 organisations ayant le plus grand nombre de visites sur leur site web. **{{highest_volume_name}}** a connu le trafic le plus important avec **{{fmt_big_int highest_volume_value}}** visites de son site web.
+    Vous trouverez ci-dessous les {{num_of_services}} organisations ayant le plus grand nombre de visites sur leur site web. **{{highest_volume_name}}** a connu le trafic le plus important avec **{{fmt_big_int highest_volume_value}}** visites de son site web.
 top10_services_website_visits_text:
   transform: [handlebars, markdown]
   en: |
-    Below are the top 10 services with the highest website visit volume. **{{highest_volume_name}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** website visits.
+    Below are the top {{num_of_services}} services with the highest website visit volume. **{{highest_volume_name}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** website visits.
   fr: |
     Vous trouverez ci-dessous les 10 services ayant le plus grand nombre de visites sur leur site web **{{highest_volume_name}}** a connu le trafic le plus important avec **{{fmt_big_int highest_volume_value}}** visites de son site web.
 
@@ -359,3 +390,7 @@ services_types_desc:
     Il y a **{{num_of_types}}** types différents de {{gl_tt "services" "SERVICE"}} dans **{{subject.name}}**. Le type de service le plus courant est "**{{max_type}}**", qui regroupe **{{max_type_count}} of {{num_of_services}}** services ministériels.
     
     Notez qu’un service peut être de plusieurs types.
+services_types_prog_desc:
+  transform: [handlebars, markdown]
+  en: There are **{{num_of_types}}** different types of {{gl_tt "services" "SERVICE"}} delivered under the **{{subject.name}}** program. The most common type is "**{{max_type}}**", making up **{{max_type_count}} of {{num_of_services}}** of the program’s services.
+  fr: TODO

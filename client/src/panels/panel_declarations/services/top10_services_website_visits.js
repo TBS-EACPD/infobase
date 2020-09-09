@@ -26,7 +26,7 @@ const volume_formatter = (val) =>
   formatter("compact", val, { raw: true, noMoney: true });
 
 const Top10WebsiteVisitsPanel = ({ panel_args }) => {
-  const { services, subject } = panel_args;
+  const { data, subject } = panel_args;
   const is_gov = subject.level === "gov";
   const get_name = (id) => {
     if (is_gov) {
@@ -38,29 +38,6 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
     }
   };
 
-  const preprocessed_data = is_gov
-    ? _.chain(services)
-        .groupBy("org_id")
-        .map((org_services, org_id) => ({
-          id: org_id,
-          [total_volume]: _.sumBy(
-            org_services,
-            ({ service_report }) =>
-              _.sumBy(service_report, `${website_visits_key}_count`) || 0
-          ),
-        }))
-        .value()
-    : _.map(services, ({ id, service_report }) => ({
-        id,
-        [total_volume]:
-          _.sumBy(service_report, `${website_visits_key}_count`) || 0,
-      }));
-
-  const data = _.chain(preprocessed_data)
-    .filter(total_volume)
-    .sortBy(total_volume)
-    .takeRight(10)
-    .value();
   const column_configs = {
     id: {
       index: 0,
@@ -101,13 +78,14 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
       <TM
         className="medium_panel_text"
         k={
-          subject.level === "gov"
+          is_gov
             ? "top10_gov_website_visits_text"
             : "top10_services_website_visits_text"
         }
         args={{
           highest_volume_name: get_name(_.last(data).id),
           highest_volume_value: _.last(data)[total_volume],
+          num_of_services: data.length,
         }}
       />
       {window.is_a11y_mode ? (
@@ -203,16 +181,45 @@ export const declare_top10_website_visits_panel = () =>
       footnotes: false,
       render({ calculations, sources }) {
         const { panel_args } = calculations;
+        const { subject, services } = panel_args;
+
+        const preprocessed_data =
+          subject.level === "gov"
+            ? _.chain(services)
+                .groupBy("org_id")
+                .map((org_services, org_id) => ({
+                  id: org_id,
+                  [total_volume]: _.sumBy(
+                    org_services,
+                    ({ service_report }) =>
+                      _.sumBy(service_report, `${website_visits_key}_count`) ||
+                      0
+                  ),
+                }))
+                .value()
+            : _.map(services, ({ id, service_report }) => ({
+                id,
+                [total_volume]:
+                  _.sumBy(service_report, `${website_visits_key}_count`) || 0,
+              }));
+
+        const data = _.chain(preprocessed_data)
+          .filter(total_volume)
+          .sortBy(total_volume)
+          .takeRight(10)
+          .value();
+
         return (
           <InfographicPanel
-            title={
-              panel_args.subject.level === "gov"
-                ? text_maker("top10_gov_website_visits")
-                : text_maker("top10_services_website_visits")
-            }
+            title={text_maker(
+              subject.level === "gov"
+                ? "top10_gov_website_visits"
+                : "top10_services_website_visits",
+              { num_of_services: data.length }
+            )}
             sources={sources}
           >
-            <Top10WebsiteVisitsPanel panel_args={panel_args} />
+            <Top10WebsiteVisitsPanel panel_args={{ ...panel_args, data }} />
           </InfographicPanel>
         );
       },
