@@ -1,11 +1,10 @@
-import {
-  StdPanel,
-  Col,
-  WrappedNivoPie,
-  declare_panel,
-} from "../../shared.js";
+import { StdPanel, Col, WrappedNivoPie, declare_panel } from "../../shared.js";
 
 import { text_maker, TM } from "./vote_stat_text_provider.js";
+
+const voted = text_maker("voted");
+const stat = text_maker("stat");
+const main_col = "{{est_in_year}}_estimates";
 
 const render_w_options = ({ graph_col, text_col, text_key }) => ({
   calculations,
@@ -13,9 +12,10 @@ const render_w_options = ({ graph_col, text_col, text_key }) => ({
   sources,
   glossary_keys,
 }) => {
-  const { panel_args, info } = calculations;
+  const { panel_args } = calculations;
+  const { vote_stat_est_in_year, text_calculations } = panel_args;
 
-  const data = _.map(panel_args, (data_set) => ({
+  const data = _.map(vote_stat_est_in_year, (data_set) => ({
     ...data_set,
     id: data_set.label,
   }));
@@ -26,7 +26,7 @@ const render_w_options = ({ graph_col, text_col, text_key }) => ({
       {...{ sources, footnotes, glossary_keys }}
     >
       <Col isText size={text_col}>
-        <TM k={text_key} args={info} />
+        <TM k={text_key} args={text_calculations} />
       </Col>
       {!window.is_a11y_mode && (
         <Col isGraph size={graph_col}>
@@ -35,6 +35,32 @@ const render_w_options = ({ graph_col, text_col, text_key }) => ({
       )}
     </StdPanel>
   );
+};
+
+const get_vote_stat_est_in_year = (table, subject) => {
+  const voted_stat = table.voted_stat(main_col, subject, true);
+  return [
+    { value: voted_stat[stat] || 0, label: stat },
+    {
+      value: voted_stat[voted] || 0,
+      label: voted,
+    },
+  ];
+};
+const get_text_calculations = (table, subject) => {
+  const voted_stat = table.voted_stat(main_col, subject, true);
+  const q = table.q(subject);
+  const stat_est_in_year = voted_stat[stat] || 0;
+  const voted_est_in_year = voted_stat[voted] || 0;
+  const tabled_est_in_year = q.sum(main_col);
+  return {
+    subject,
+    stat_est_in_year,
+    voted_est_in_year,
+    tabled_est_in_year,
+    voted_percent_est_in_year: voted_est_in_year / tabled_est_in_year,
+    stat_percent_est_in_year: stat_est_in_year / tabled_est_in_year,
+  };
 };
 
 export const declare_in_year_voted_stat_split_panel = () =>
@@ -47,17 +73,22 @@ export const declare_in_year_voted_stat_split_panel = () =>
           return {
             depends_on: ["orgVoteStatEstimates"],
             machinery_footnotes: false,
-            info_deps: ["orgVoteStatEstimates_gov_info"],
             glossary_keys: ["AUTH"],
 
-            calculate(subject, info) {
-              return [
-                { value: info.gov_stat_est_in_year, label: text_maker("stat") },
-                {
-                  value: info.gov_voted_est_in_year,
-                  label: text_maker("voted"),
-                },
-              ];
+            calculate(subject) {
+              const { orgVoteStatEstimates } = this.tables;
+              const vote_stat_est_in_year = get_vote_stat_est_in_year(
+                orgVoteStatEstimates,
+                subject
+              );
+              const text_calculations = get_text_calculations(
+                orgVoteStatEstimates,
+                subject
+              );
+              return {
+                vote_stat_est_in_year,
+                text_calculations,
+              };
             },
             render: render_w_options({
               text_key: "gov_in_year_voted_stat_split_text",
@@ -68,34 +99,29 @@ export const declare_in_year_voted_stat_split_panel = () =>
         case "dept":
           return {
             depends_on: ["orgVoteStatEstimates"],
-            info_deps: [
-              "orgVoteStatEstimates_dept_info",
-              "orgVoteStatEstimates_gov_info",
-            ],
             machinery_footnotes: false,
             glossary_keys: ["AUTH"],
-            calculate(subject, info) {
+            calculate(subject) {
+              const { orgVoteStatEstimates } = this.tables;
+              const vote_stat_est_in_year = get_vote_stat_est_in_year(
+                orgVoteStatEstimates,
+                subject
+              );
+              const stat_est_in_year = vote_stat_est_in_year[0].value;
+              const vote_est_in_year = vote_stat_est_in_year[1].value;
+              const text_calculations = get_text_calculations(
+                orgVoteStatEstimates,
+                subject
+              );
               // check for either negative voted or statutory values, or 0 for both
               if (
-                (info.dept_stat_est_in_year < 0 &&
-                  info.dept_voted_est_in_year >= 0) ||
-                (info.dept_voted_est_in_year < 0 &&
-                  info.dept_stat_est_in_year >= 0) ||
-                (info.dept_stat_est_in_year === 0 &&
-                  info.dept_stat_est_in_year === 0)
+                (stat_est_in_year < 0 && vote_est_in_year >= 0) ||
+                (vote_est_in_year < 0 && stat_est_in_year >= 0) ||
+                (stat_est_in_year === 0 && stat_est_in_year === 0)
               ) {
                 return false;
               }
-              return [
-                {
-                  value: info.dept_stat_est_in_year,
-                  label: text_maker("stat"),
-                },
-                {
-                  value: info.dept_voted_est_in_year,
-                  label: text_maker("voted"),
-                },
-              ];
+              return { vote_stat_est_in_year, text_calculations };
             },
             render: render_w_options({
               text_key: "dept_in_year_voted_stat_split_text",
