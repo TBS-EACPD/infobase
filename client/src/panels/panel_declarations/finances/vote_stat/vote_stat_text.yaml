@@ -51,30 +51,30 @@ gov_in_year_voted_stat_split_text:
   transform: [handlebars, markdown]
   en: |
     As of the {{est_in_year}} {{last_estimates}}, 
-    the government has presented Parliament with planned {{gl_tt "budgetary" 'BUD_EXP'}} expenditure estimates totaling **{{fmt_compact1_written gov_tabled_est_in_year}}**.
+    the government has presented Parliament with planned {{gl_tt "budgetary" 'BUD_EXP'}} expenditure estimates totaling **{{fmt_compact1_written tabled_est_in_year}}**.
     
-    Of those planned expenditures, **{{fmt_compact1_written gov_stat_est_in_year}}** (or **{{fmt_percentage1 gov_stat_percent_est_in_year}}**) 
-    will come from {{gl_tt "statutory authorities" "STAT"}} and **{{fmt_compact1_written gov_voted_est_in_year}}** (or **{{fmt_percentage1 gov_voted_percent_est_in_year}}**) 
+    Of those planned expenditures, **{{fmt_compact1_written stat_est_in_year}}** (or **{{fmt_percentage1 stat_percent_est_in_year}}**) 
+    will come from {{gl_tt "statutory authorities" "STAT"}} and **{{fmt_compact1_written voted_est_in_year}}** (or **{{fmt_percentage1 voted_percent_est_in_year}}**) 
     will come from {{gl_tt "voted authorities" "VOTED"}}.
 
   fr: |
-    En date du {{last_estimates}} {{est_in_year}}, le gouvernement a présenté au Parlement des prévisions de dépenses totalisant **{{fmt_compact1_written gov_tabled_est_in_year}}**. 
+    En date du {{last_estimates}} {{est_in_year}}, le gouvernement a présenté au Parlement des prévisions de dépenses totalisant **{{fmt_compact1_written tabled_est_in_year}}**. 
     
-    De ces dépenses prévues, **{{fmt_compact1_written gov_stat_est_in_year}}** (ou **{{fmt_percentage1 gov_stat_percent_est_in_year}}**) proviendront des {{gl_tt "autorisations législatives" "STAT"}}
-    et **{{fmt_compact1_written gov_voted_est_in_year}}** (ou **{{fmt_percentage1 gov_voted_percent_est_in_year}}**) des {{gl_tt "autorisations votées" "VOTED"}}.
+    De ces dépenses prévues, **{{fmt_compact1_written stat_est_in_year}}** (ou **{{fmt_percentage1 stat_percent_est_in_year}}**) proviendront des {{gl_tt "autorisations législatives" "STAT"}}
+    et **{{fmt_compact1_written voted_est_in_year}}** (ou **{{fmt_percentage1 voted_percent_est_in_year}}**) des {{gl_tt "autorisations votées" "VOTED"}}.
 
 dept_in_year_voted_stat_split_text:
   transform: [handlebars,markdown]
   en: |
-   Of the **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** estimated expenditures for 
-   **{{subject.name}}**, **{{fmt_percentage1 dept_stat_percent_est_in_year}}** (or **{{fmt_compact1_written dept_stat_est_in_year}}**) 
-   will be funded from {{gl_tt "statutory authorities" "STAT"}} and **{{fmt_percentage1 dept_voted_percent_est_in_year}}** 
-   (or **{{fmt_compact1_written dept_voted_est_in_year}}**) from {{gl_tt "voted authorities" "VOTED"}}.
+   Of the **{{fmt_compact1_written tabled_est_in_year}}** estimated expenditures for 
+   **{{subject.name}}**, **{{fmt_percentage1 stat_percent_est_in_year}}** (or **{{fmt_compact1_written stat_est_in_year}}**) 
+   will be funded from {{gl_tt "statutory authorities" "STAT"}} and **{{fmt_percentage1 voted_percent_est_in_year}}** 
+   (or **{{fmt_compact1_written voted_est_in_year}}**) from {{gl_tt "voted authorities" "VOTED"}}.
 
   fr: |
-   Sur les **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** en dépenses budgétaires prévues pour **{{le_dept dept}}**, 
-   **{{fmt_compact1_written dept_stat_est_in_year}}** (ou **{{fmt_percentage1 dept_stat_percent_est_in_year}}**) proviendra {{gl_tt "d'autorisations législatives" "STAT"}} et 
-   **{{fmt_compact1_written dept_voted_est_in_year}}** (ou **{{fmt_percentage1 dept_voted_percent_est_in_year}}**) {{gl_tt "d'autorisations votées" "VOTED"}}.
+   Sur les **{{fmt_compact1_written tabled_est_in_year}}** en dépenses budgétaires prévues pour **{{le_dept dept}}**, 
+   **{{fmt_compact1_written stat_est_in_year}}** (ou **{{fmt_percentage1 stat_percent_est_in_year}}**) proviendra {{gl_tt "d'autorisations législatives" "STAT"}} et 
+   **{{fmt_compact1_written voted_est_in_year}}** (ou **{{fmt_percentage1 voted_percent_est_in_year}}**) {{gl_tt "d'autorisations votées" "VOTED"}}.
 
 
 
