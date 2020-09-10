@@ -86,7 +86,7 @@ in_year_estimates_split_title:
 gov_in_year_estimates_split_text:
   transform: [handlebars,markdown]
   en: |
-    This fiscal year ({{est_in_year}}), a total of **{{fmt_compact1_written gov_tabled_est_in_year}}** in planned budgetary expenditures have been presented in the 
+    This fiscal year ({{est_in_year}}), a total of **{{fmt_compact1_written tabled_est_in_year}}** in planned budgetary expenditures have been presented in the 
     following {{gl_tt "estimates processes" "EST_PROC"}} and {{gl_tt "adjustments and transfers" "ADJUS"}}:
     {{#each gov_in_year_estimates_split}}
     * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}** 
@@ -109,9 +109,9 @@ gov_in_year_estimates_split_text:
 dept_in_year_estimates_split_text:
   transform: [handlebars,markdown]
   en: |
-   As of the {{est_in_year}} {{last_estimates}}, **{{subject.name}}**'s planned budgetary expenditures of **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** were presented in the 
+   As of the {{est_in_year}} {{last_estimates}}, **{{subject.name}}**'s planned budgetary expenditures of **{{fmt_compact1_written tabled_est_in_year}}** were presented in the 
    following {{gl_tt "Estimates processes" "EST_PROC"}} and {{gl_tt "adjustments and transfers" "ADJUS"}}: 
-   {{#each dept_in_year_estimates_split}}
+   {{#each in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
    {{/each}}
 
@@ -119,9 +119,9 @@ dept_in_year_estimates_split_text:
      On {{interim_mains_table_date}}, the {{est_next_year}} {{gl_tt "Interim Estimates" "INTER_EST"}} were tabled in Parliament seeking **{{fmt_compact1_written dept_tabled_est_next_year_estimates}}** in {{gl_tt "spending authorities" "AUTH"}} to begin the new fiscal year. This funding supports the organization's financial requirements for the first three months of the year.
    {{/if}}
   fr: |
-   En date du {{est_in_year}} {{last_estimates}}, pour **{{le_dept dept}}**, les dépenses budgétaires prévues de **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** figurent 
+   En date du {{est_in_year}} {{last_estimates}}, pour **{{le_dept dept}}**, les dépenses budgétaires prévues de **{{fmt_compact1_written tabled_est_in_year}}** figurent 
    dans le(s) {{gl_tt "processus budgétaire(s)" "EST_PROC"}}  et {{gl_tt "redressements et virements" "ADJUS"}} suivants: 
-   {{#each dept_in_year_estimates_split}}
+   {{#each in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
    {{/each}}
 
