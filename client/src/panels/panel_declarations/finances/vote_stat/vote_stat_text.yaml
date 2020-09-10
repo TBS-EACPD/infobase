@@ -30,9 +30,9 @@ in_year_stat_breakdown_text:
 program_vote_stat_split_text:
   transform: [handlebars, markdown]
   en: |
-    Organizations receive authority to spend from Parliament through {{gl_tt "statutory" "STAT"}} and {{gl_tt "voted" "VOTED"}} authorities. Of the **{{fmt_compact1_written program_total_exp}}** spent on this program in {{pa_last_year}}, **{{fmt_percentage1 program_stat_pct}} ({{fmt_compact1_written program_stat_exp}})** came from statutory authorities and  **{{fmt_percentage1 program_voted_pct}} ({{fmt_compact1_written program_voted_exp}})** came from voted authorities.
+    Organizations receive authority to spend from Parliament through {{gl_tt "statutory" "STAT"}} and {{gl_tt "voted" "VOTED"}} authorities. Of the **{{fmt_compact1_written total_exp}}** spent on this program in {{pa_last_year}}, **{{fmt_percentage1 stat_pct}} ({{fmt_compact1_written stat_exp}})** came from statutory authorities and  **{{fmt_percentage1 voted_pct}} ({{fmt_compact1_written voted_exp}})** came from voted authorities.
   fr: |
-    Le Parlement accorde des autorisations de dépenser aux ministères au moyen de d’autorisations {{gl_tt "législatives" "STAT"}} et {{gl_tt "votées" "VOTED"}}. Des **{{fmt_compact1_written program_total_exp}}** consacrés à ce programme en {{pa_last_year}}, **{{fmt_percentage1 program_stat_pct}} ({{fmt_compact1_written program_stat_exp}})** proviennent d’autorisations législatives et **{{fmt_percentage1 program_voted_pct}} ({{fmt_compact1_written program_voted_exp}})** d’autorisations votées.
+    Le Parlement accorde des autorisations de dépenser aux ministères au moyen de d’autorisations {{gl_tt "législatives" "STAT"}} et {{gl_tt "votées" "VOTED"}}. Des **{{fmt_compact1_written total_exp}}** consacrés à ce programme en {{pa_last_year}}, **{{fmt_percentage1 stat_pct}} ({{fmt_compact1_written stat_exp}})** proviennent d’autorisations législatives et **{{fmt_percentage1 voted_pct}} ({{fmt_compact1_written voted_exp}})** d’autorisations votées.
 
 
 vote_stat_split_title:

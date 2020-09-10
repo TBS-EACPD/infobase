@@ -3,7 +3,9 @@ import {
   Col,
   WrappedNivoPie,
   declare_panel,
+  year_templates,
 } from "../../shared.js";
+const { std_years } = year_templates;
 
 import { text_maker, TM } from "./vote_stat_text_provider.js";
 
@@ -13,9 +15,10 @@ const render_w_options = ({ text_key, graph_col, text_col }) => ({
   footnotes,
   glossary_keys,
 }) => {
-  const { info, panel_args } = calculations;
+  const { panel_args } = calculations;
+  const { vote_stat, text_calculations } = panel_args;
 
-  const data = _.map(panel_args, (data_set) => ({
+  const data = _.map(vote_stat, (data_set) => ({
     ...data_set,
     id: data_set.label,
   }));
@@ -26,7 +29,7 @@ const render_w_options = ({ text_key, graph_col, text_col }) => ({
       {...{ footnotes, sources, glossary_keys }}
     >
       <Col isText size={text_col}>
-        <TM k={text_key} args={info} />
+        <TM k={text_key} args={text_calculations} />
       </Col>
       {!window.is_a11y_mode && (
         <Col isGraph size={graph_col}>
@@ -43,11 +46,10 @@ export const declare_vote_stat_split_panel = () =>
     levels: ["program"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["programVoteStat"],
-      info_deps: ["programVoteStat_program_info"],
       footnotes: ["VOTED", "STAT"],
       glossary_keys: ["AUTH"],
 
-      calculate(subject, info, options) {
+      calculate(subject, options) {
         const { programVoteStat } = this.tables;
         const vote_stat = _.map(
           programVoteStat.programs.get(subject),
@@ -56,6 +58,26 @@ export const declare_vote_stat_split_panel = () =>
             value: row["{{pa_last_year}}"],
           })
         );
+        const last_year_col = _.last(std_years);
+        const last_year_col_obj = programVoteStat.col_from_nick(last_year_col);
+        const rows = programVoteStat.q(subject).data;
+        const {
+          [text_maker("voted")]: voted_rows,
+          [text_maker("stat")]: stat_rows,
+        } = _.groupBy(rows, "vote_stat");
+        const voted_exp = last_year_col_obj.formula(voted_rows);
+        const stat_exp = last_year_col_obj.formula(stat_rows);
+        const total_exp = voted_exp + stat_exp;
+        const voted_pct = voted_exp / total_exp;
+        const stat_pct = stat_exp / total_exp;
+
+        const text_calculations = {
+          total_exp,
+          stat_pct,
+          voted_pct,
+          stat_exp,
+          voted_exp,
+        };
 
         // check for either negative voted or statutory values, or 0 for both
         if (
@@ -66,7 +88,7 @@ export const declare_vote_stat_split_panel = () =>
           return false;
         }
 
-        return vote_stat;
+        return { vote_stat, text_calculations };
       },
 
       render: render_w_options({
