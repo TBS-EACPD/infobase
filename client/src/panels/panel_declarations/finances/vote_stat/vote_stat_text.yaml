@@ -138,7 +138,7 @@ estimates_perspective_text:
   transform: [handlebars,markdown]
   en: |
    As of the {{est_in_year}} {{last_estimates}}, the government has presented Parliament with planned {{gl_tt "budgetary" 'BUD_EXP'}} expenditure estimates
-   totaling **{{fmt_compact1_written gov_tabled_est_in_year}}**. Of this amount, **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** (or **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}**) will be allocated to **{{subject.name}} ({{subject.abbr}})**.
+   totaling **{{fmt_compact1_written gov_tabled_est_in_year}}**. Of this amount, **{{fmt_compact1_written dept_tabled_est_in_year}}** (or **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year gov_tabled_est_in_year)}}**) will be allocated to **{{subject.name}} ({{subject.abbr}})**.
 
 
    {{! only to be used near year end when a main estimates for the following year has been tabled}}
