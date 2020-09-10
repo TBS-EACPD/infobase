@@ -1,26 +1,45 @@
 import { formats } from "../../../../core/format.js";
-import { StdPanel, Col, WrappedNivoBar, declare_panel } from "../../shared.js";
+import {
+  StdPanel,
+  Col,
+  WrappedNivoBar,
+  declare_panel,
+  businessConstants,
+} from "../../shared.js";
 
 import { text_maker, TM } from "./vote_stat_text_provider.js";
 
-const estimates_split_calculate = function (subject, info, options) {
-  const in_year_estimates_split =
-    info[subject.level + "_in_year_estimates_split"];
-  const last_year_estimates_split =
-    info[subject.level + "_last_year_estimates_split"];
+const { estimates_docs } = businessConstants;
+const est_in_year_col = "{{est_in_year}}_estimates";
+
+const estimates_split_calculate = function (subject) {
+  const { orgVoteStatEstimates } = this.tables;
+  const q = orgVoteStatEstimates.q(subject);
+  const dept_id = subject.level === "gov" ? false : subject.id;
+
+  const in_year_estimates_split = _.chain(
+    orgVoteStatEstimates.by_estimates_doc(est_in_year_col, dept_id, false)
+  )
+    .toPairs()
+    .sortBy(
+      (est_doc_lines) => estimates_docs[est_doc_lines[1][0].est_doc_code].order
+    )
+    .map((est_doc_lines) => {
+      const est_amnt = d3.sum(_.map(est_doc_lines[1], est_in_year_col));
+      return [est_doc_lines[0], est_amnt];
+    })
+    .filter((row) => row[1] !== 0)
+    .value();
+
+  const calculations = {
+    subject,
+    tabled_est_in_year: q.sum(est_in_year_col),
+    in_year_estimates_split,
+  };
   if (_.isEmpty(in_year_estimates_split)) {
     return false;
   }
-  return {
-    in_year: {
-      series: _.map(in_year_estimates_split, 1),
-      ticks: _.map(in_year_estimates_split, 0),
-    },
-    last_year: {
-      series: _.map(last_year_estimates_split, 1),
-      ticks: _.map(last_year_estimates_split, 0),
-    },
-  };
+  return calculations;
 };
 
 const estimates_split_render_w_text_key = (text_key) => ({
@@ -28,20 +47,17 @@ const estimates_split_render_w_text_key = (text_key) => ({
   footnotes,
   sources,
 }) => {
-  const {
-    info,
-    panel_args: { in_year: in_year_bar_args },
-  } = calculations;
-  const keys = in_year_bar_args.ticks;
-  const estimate_data = _.map(in_year_bar_args.series, (data, index) => ({
-    label: keys[index],
-    [text_maker("value")]: data,
+  const { panel_args } = calculations;
+  const { in_year_estimates_split } = panel_args;
+  const estimate_data = _.map(in_year_estimates_split, ([tick, data]) => ({
+    label: tick,
+    [tick]: [data],
   }));
 
   const content = (
     <WrappedNivoBar
       data={estimate_data}
-      keys={[text_maker("value")]}
+      keys={_.map(estimate_data, "label")}
       label_format={(d) => <tspan y={-4}>{formats.compact2_raw(d)}</tspan>}
       isInteractive={false}
       enableLabel={true}
@@ -86,7 +102,7 @@ const estimates_split_render_w_text_key = (text_key) => ({
       {...{ sources, footnotes }}
     >
       <Col isText size={6}>
-        <TM k={text_key} args={info} />
+        <TM k={text_key} args={panel_args} />
       </Col>
       <Col isGraph={window.is_a11y_mode} size={6}>
         {content}
