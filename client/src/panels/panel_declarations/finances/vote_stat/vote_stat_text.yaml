@@ -6,9 +6,9 @@ in_year_voted_breakdown_title:
 in_year_voted_breakdown_text:
   transform: [handlebars, markdown]
   en: |
-   Of the **{{fmt_compact1_written gov_voted_est_in_year}}** sought from Parliament in {{gl_tt "voted" "VOTED"}} budgetary authorities, the **10** largest were:
+   Of the **{{fmt_compact1_written voted_stat_est_in_year}}** sought from Parliament in {{gl_tt "voted" "VOTED"}} budgetary authorities, the **10** largest were:
   fr: |
-   Sur les **{{fmt_compact1_written gov_voted_est_in_year}}** demandés au Parlement pour les autorisations budgétaires {{gl_tt "votées" "VOTED"}}, 
+   Sur les **{{fmt_compact1_written voted_stat_est_in_year}}** demandés au Parlement pour les autorisations budgétaires {{gl_tt "votées" "VOTED"}}, 
    les **10** plus importantes étaient :
 
 
@@ -20,9 +20,9 @@ in_year_stat_breakdown_title:
 in_year_stat_breakdown_text:
   transform: [handlebars, markdown]
   en: |
-   Of the **{{fmt_compact1_written gov_stat_est_in_year}}** the government expects to spend in {{gl_tt "statutory" "STAT"}} authorities, the **10** largest will be:
+   Of the **{{fmt_compact1_written voted_stat_est_in_year}}** the government expects to spend in {{gl_tt "statutory" "STAT"}} authorities, the **10** largest will be:
   fr: |
-   Des **{{fmt_compact1_written gov_stat_est_in_year}}** que le gouvernement prévoit dépenser en autorisations {{gl_tt "législatives" "STAT"}}, 
+   Des **{{fmt_compact1_written voted_stat_est_in_year}}** que le gouvernement prévoit dépenser en autorisations {{gl_tt "législatives" "STAT"}}, 
    les *10* plus importantes seront :
 
 

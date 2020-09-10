@@ -85,14 +85,13 @@ const color_scale = (vs) =>
 
 const planned_vote_or_stat_render = (vs) =>
   function ({ calculations, footnotes, sources }) {
-    const { info, panel_args } = calculations;
+    const { panel_args } = calculations;
     const isVoted = vs === "voted";
 
-    const { data } = panel_args;
+    const { data, voted_stat_est_in_year } = panel_args;
 
-    const col = "{{est_in_year}}_estimates";
     const top_10_rows = _.take(data, 10);
-    const total_amt = d3.sum(data, _.property(col));
+    const total_amt = d3.sum(data, _.property(main_col));
 
     const subj_map = _.chain(top_10_rows)
       .map((obj) => [obj.dept, infograph_href_template(Dept.lookup(obj.dept))])
@@ -101,7 +100,7 @@ const planned_vote_or_stat_render = (vs) =>
     const table_data = _.map(top_10_rows, (obj) => ({
       name: obj.dept,
       voted_stat: obj.desc,
-      amount: obj[col],
+      amount: obj[main_col],
     }));
 
     const column_configs = {
@@ -137,7 +136,7 @@ const planned_vote_or_stat_render = (vs) =>
         voted_stat: text_maker(
           isVoted ? "all_other_voted_items" : "all_other_stat_items"
         ),
-        amount: _.last(data)[col],
+        amount: _.last(data)[main_col],
       },
     ]);
 
@@ -158,7 +157,6 @@ const planned_vote_or_stat_render = (vs) =>
     };
 
     const show_pack = !window.is_a11y_mode;
-
     return (
       <StdPanel
         title={text_maker(
@@ -175,7 +173,7 @@ const planned_vote_or_stat_render = (vs) =>
                 ? "in_year_voted_breakdown_text"
                 : "in_year_stat_breakdown_text"
             }
-            args={info}
+            args={{ voted_stat_est_in_year }}
           />
         </Col>
         <Col isGraph size={6}>
@@ -203,7 +201,7 @@ const planned_vote_or_stat_render = (vs) =>
   };
 
 const planned_vote_or_stat_calculate = (vs) =>
-  function (subject, info) {
+  function (subject) {
     const { orgVoteStatEstimates } = this.tables;
 
     const text = text_maker(vs);
@@ -226,8 +224,10 @@ const planned_vote_or_stat_calculate = (vs) =>
       others: true,
       [main_col]: d3.sum(_.tail(all_rows, 10), (d) => d[main_col]),
     });
+    const voted_stat_est_in_year =
+      orgVoteStatEstimates.voted_stat(main_col, subject, true)[text] || 0;
 
-    return ret;
+    return { ...ret, voted_stat_est_in_year };
   };
 
 const declare_in_year_voted_breakdown_panel = () =>
@@ -236,7 +236,6 @@ const declare_in_year_voted_breakdown_panel = () =>
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgVoteStatEstimates"],
-      info_deps: ["orgVoteStatEstimates_gov_info"],
       calculate: planned_vote_or_stat_calculate("voted"),
       render: planned_vote_or_stat_render("voted"),
     }),
@@ -247,7 +246,6 @@ const declare_in_year_stat_breakdown_panel = () =>
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgVoteStatEstimates"],
-      info_deps: ["orgVoteStatEstimates_gov_info"],
       calculate: planned_vote_or_stat_calculate("stat"),
       render: planned_vote_or_stat_render("stat"),
     }),
