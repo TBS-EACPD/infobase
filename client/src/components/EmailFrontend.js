@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import { Fragment } from "react";
-import { textRed } from "../core/color_defs.js";
 
 import { get_client_id, log_standard_event } from "../core/analytics.js";
-
+import { textRed } from "../core/color_defs.js";
 import { has_local_storage } from "../core/feature_detection.js";
 import {
   get_email_template,
@@ -12,6 +11,7 @@ import {
 
 import { CheckBox } from "./CheckBox.js";
 import { create_text_maker_component } from "./misc_util_components.js";
+
 import { SpinnerWrapper } from "./SpinnerWrapper";
 
 import text from "./EmailFrontend.yaml";
@@ -237,7 +237,7 @@ class EmailFrontend extends React.Component {
               ))}
             </fieldset>
           );
-        case "textarea":
+        case "textarea": {
           const connected_required = //handles red star alerting required
             field_info.connection &&
             _.includes(
@@ -283,6 +283,7 @@ class EmailFrontend extends React.Component {
               />
             </Fragment>
           );
+        }
         case "error":
           return <label>{field_info.form_label[window.lang]}</label>;
       }

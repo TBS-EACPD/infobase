@@ -1,3 +1,5 @@
+import { withRouter } from "react-router-dom";
+
 import {
   create_text_maker_component,
   AlertBanner,
@@ -8,8 +10,6 @@ import { featured_content_items } from "./home-data.js";
 
 import home_text2 from "./a11y-home.yaml";
 import home_text1 from "./home.yaml";
-
-import { withRouter } from "react-router-dom";
 
 const { text_maker, TM } = create_text_maker_component([
   home_text1,
