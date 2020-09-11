@@ -1,7 +1,7 @@
-import { get_info, tables_for_statistics } from "../core/Statistics.js";
 import { Table } from "../core/TableClass.js";
 import FootNote from "../models/footnotes/footnotes.js";
 import { Subject } from "../models/subject.js";
+
 import { rpb_link, get_appropriate_rpb_subject } from "../rpb/rpb_link.js";
 
 const subjects = _.keys(Subject);
@@ -10,7 +10,6 @@ const create_panel_key = (key, level) => `${key}:${level}`;
 
 const default_args = {
   depends_on: [],
-  info_deps: [],
   machinery_footnotes: true,
   layout: {
     full: { graph: 12, text: 12 },
@@ -45,16 +44,7 @@ class PanelRegistry {
 
   static panels_for_table(table_id) {
     return _.filter(panels, (panel_obj) => {
-      const tables_from_info_deps = _.chain(panel_obj.info_deps)
-        .compact()
-        .map((stat_key) => tables_for_statistics(stat_key))
-        .flatten()
-        .value();
-
-      return _.chain(panel_obj.depends_on)
-        .union(tables_from_info_deps)
-        .includes(table_id)
-        .value();
+      return _.includes(panel_obj.depends_on, table_id);
     });
   }
 
@@ -115,21 +105,14 @@ class PanelRegistry {
       return false;
     }
     const calc_func = this._inner_calculate;
-    const info = get_info(subject, this.info_deps);
-    if (info.missing_values && this.missing_info !== "ok") {
-      // dept is missing from table or an exception ocurred during one of the info_deps' computations
-      return false;
-    }
 
-    info.is_a11y_mode = window.is_a11y_mode;
-
-    const panel_args = calc_func.call(this, subject, info, options);
+    const panel_args = calc_func.call(this, subject, options);
     if (panel_args === false) {
       return false;
     }
 
-    //inner_render API : a panel's inner_render fucntion usually wants access to info, panel_args and subject.
-    return { subject, info, panel_args };
+    //inner_render API : a panel's inner_render fucntion usually wants access to panel_args and subject.
+    return { subject, panel_args };
   }
 
   get_source(subject) {
@@ -222,14 +205,7 @@ function panels_with_key(key, level) {
 
 function tables_for_panel(panel_key, subject_level) {
   const panel_objs = panels_with_key(panel_key, subject_level);
-  return _.chain(panel_objs)
-    .map("info_deps")
-    .flatten()
-    .map(tables_for_statistics)
-    .flatten()
-    .union(_.chain(panel_objs).map("depends_on").flatten().value())
-    .uniqBy()
-    .value();
+  return _.chain(panel_objs).map("depends_on").flatten().uniqBy().value();
 }
 
 const layout_types = { full: "full", half: "half" };
