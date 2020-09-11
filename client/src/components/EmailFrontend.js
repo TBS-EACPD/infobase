@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { Fragment } from "react";
+import { textRed } from "../core/color_defs.js";
 
 import { get_client_id, log_standard_event } from "../core/analytics.js";
 
@@ -204,7 +205,12 @@ class EmailFrontend extends React.Component {
         case "radio":
           return (
             <fieldset style={{ marginBottom: "1rem" }}>
-              <legend>{field_info.form_label[window.lang]}</legend>
+              <legend>
+                {field_info.form_label[window.lang]}
+                {field_info.required ? (
+                  <span style={{ color: textRed }}>*</span>
+                ) : null}
+              </legend>
               {_.map(field_info.enum_values, (label_by_lang, key) => (
                 <EnumField
                   classes={
