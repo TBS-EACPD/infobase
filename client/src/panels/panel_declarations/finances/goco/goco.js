@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 
+import { RotateLandscape } from "../../../../components";
 import {
   create_text_maker_component,
   Subject,
@@ -17,8 +18,6 @@ import {
 } from "../../shared.js";
 
 import text from "./goco.yaml";
-import { DisplayTable } from "../../../../components";
-import { RotateLandscape } from "../../../../components";
 
 const { SmartDisplayTable } = util_components;
 const { Tag } = Subject;

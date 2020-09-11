@@ -1,4 +1,4 @@
-import { SmartDisplayTable } from "../../../../components";
+import { SmartDisplayTable, RotateLandscape } from "../../../../components";
 import {
   WrappedNivoBar,
   WrappedNivoHBar,
@@ -22,8 +22,6 @@ import {
 } from "../../shared.js";
 
 import text from "./detailed_program_spending_split.yaml";
-import { DisplayTable } from "../../../../components";
-import { RotateLandscape } from "../../../../components";
 
 const { std_years } = year_templates;
 

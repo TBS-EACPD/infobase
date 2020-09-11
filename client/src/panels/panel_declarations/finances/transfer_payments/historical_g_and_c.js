@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 
+import { RotateLandscape } from "../../../../components";
 import {
   run_template,
   declare_panel,
@@ -12,7 +13,6 @@ import {
   util_components,
   WrappedNivoLine,
 } from "../../shared.js";
-import { RotateLandscape } from "../../../../components";
 
 import { text_maker, TM } from "./gnc_text_provider.js";
 

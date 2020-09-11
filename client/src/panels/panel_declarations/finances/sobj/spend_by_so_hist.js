@@ -1,3 +1,4 @@
+import { RotateLandscape } from "../../../../components";
 import {
   businessConstants,
   year_templates,
@@ -14,7 +15,6 @@ import {
 } from "../../shared.js";
 
 import { text_maker, TM } from "./sobj_text_provider.js";
-import { RotateLandscape } from "../../../../components";
 
 const { sos } = businessConstants;
 const { std_years } = year_templates;

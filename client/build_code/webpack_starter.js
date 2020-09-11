@@ -1,10 +1,13 @@
 /* eslint-disable no-console */
-const webpack = require("webpack");
 const path = require("path");
+
 const gitsha = require("git-bundle-sha");
-const { create_config } = require("./webpack_common.js");
+
 const ip = require("ip");
 const _ = require("lodash");
+const webpack = require("webpack");
+
+const { create_config } = require("./webpack_common.js");
 
 const build_dir_name = process.env.BUILD_DIR || "build";
 const args = process.argv;

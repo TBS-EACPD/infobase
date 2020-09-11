@@ -10,8 +10,6 @@ import {
   fix_legend_symbols,
 } from "./wrapped_nivo_common.js";
 
-import { DisplayTable } from "../../components/index.js";
-
 const bar_table = (
   data,
   keys,

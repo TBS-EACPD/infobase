@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
+import { RotateLandscape } from "../../../../components";
 import text2 from "../../../../partition/budget_measures_subapp/BudgetMeasuresRoute.yaml";
 
 import {
@@ -18,7 +19,6 @@ import {
   declare_panel,
   TspanLineWrapper,
 } from "../../shared.js";
-import { RotateLandscape } from "../../../../components";
 
 import text1 from "./budget_measures_panel.yaml";
 import "./budget_measures_panel.scss";

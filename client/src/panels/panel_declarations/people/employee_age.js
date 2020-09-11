@@ -1,3 +1,5 @@
+import { RotateLandscape } from "../../../components";
+
 import {
   formats,
   run_template,
@@ -12,7 +14,6 @@ import {
   declare_panel,
   NivoLineBarToggle,
 } from "../shared.js";
-import { RotateLandscape } from "../../../components";
 
 import text from "./employee_age.yaml";
 
