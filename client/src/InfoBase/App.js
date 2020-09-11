@@ -139,9 +139,11 @@ export class App extends React.Component {
     this.setState({ showNotification: false });
   };
 
-  toggleSurvey = () => {
+  toggleSurvey = (override = null) => {
     this.setState((prevState) => {
-      return { showSurvey: !prevState.showSurvey };
+      return {
+        showSurvey: !_.isNil(override) ? override : !prevState.showSurvey,
+      }; //add es2020 nullish coalescing when possible
     });
   };
 

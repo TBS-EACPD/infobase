@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { withRouter } from "react-router";
 
 import { IconGitHub } from "../icons/icons.js";
@@ -59,23 +58,19 @@ const PageDetails = withRouter(
           </div>{" "}
           {location.pathname === "/contact" ||
           location.pathname === "/lab" ? null : (
-            <Fragment>
-              <button
-                className="btn btn-ib-primary"
-                onClick={() => toggleSurvey()}
-              >
-                {text_maker("feedback")}
-              </button>
-              <StatelessModal
-                title={text_maker("feedback")}
-                show={showSurvey}
-                body={
-                  <EmailFrontend top_border={false} template_name="feedback" />
-                }
-                on_close_callback={() => toggleSurvey()}
-              />
-            </Fragment>
+            <button
+              className="btn btn-ib-primary"
+              onClick={() => toggleSurvey()}
+            >
+              {text_maker("feedback")}
+            </button>
           )}
+          <StatelessModal
+            title={text_maker("feedback")}
+            show={showSurvey}
+            body={<EmailFrontend top_border={false} template_name="feedback" />}
+            on_close_callback={() => toggleSurvey(false)}
+          />
           <div className="pagedetails__version-number fcol-md-4 fcol-sm-6">
             <VersionNumber />
           </div>
