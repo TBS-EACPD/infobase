@@ -1,10 +1,9 @@
 import "graphiql/graphiql.css";
 
-import fetch from "isomorphic-fetch";
-
 // strange error: "casing of graphiql does not match the underlying filesystem"
 /* eslint-disable-next-line import/no-unresolved */
 import GraphiQL from "graphiql";
+import fetch from "isomorphic-fetch";
 
 import { SpinnerWrapper, ContainerEscapeHatch } from "../components/index.js";
 import { log_standard_event } from "../core/analytics.js";
