@@ -1,5 +1,5 @@
 import { index_lang_lookups } from "../InfoBase/index_data.js";
-import { trivial_text_maker, run_template } from "../models/text.js";
+import { trivial_text_maker } from "../models/text.js";
 
 const footer_link_items = _.compact([
   {
