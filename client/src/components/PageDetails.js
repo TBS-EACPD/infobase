@@ -55,7 +55,7 @@ const PageDetails = withRouter(
               content={<EmailFrontend template_name="report_a_problem" />}
               persist_content={true}
             />
-          </div>{" "}
+          </div>
           {location.pathname === "/contact" ||
           location.pathname === "/lab" ? null : (
             <button
