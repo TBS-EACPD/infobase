@@ -1016,7 +1016,6 @@ export const declare_welcome_mat_panel = () =>
         case "gov":
           return {
             footnotes,
-            info_deps: ["programFtes_gov_info"],
             depends_on,
             missing_info: "ok",
             calculate(subject, info, options) {
@@ -1037,7 +1036,6 @@ export const declare_welcome_mat_panel = () =>
         case "dept":
           return {
             footnotes,
-            info_deps: ["programFtes_dept_info"],
             depends_on: [
               "orgVoteStatEstimates",
               "orgVoteStatPa",
@@ -1104,7 +1102,6 @@ export const declare_welcome_mat_panel = () =>
         case "program":
           return {
             footnotes,
-            info_deps: ["programFtes_program_info"],
             depends_on,
             glossary_keys: ["FTE"],
             missing_info: "ok",
@@ -1114,7 +1111,6 @@ export const declare_welcome_mat_panel = () =>
         case "crso":
           return {
             footnotes,
-            info_deps: ["programFtes_crso_info"],
             depends_on,
             glossary_keys: ["FTE"],
             missing_info: "ok",

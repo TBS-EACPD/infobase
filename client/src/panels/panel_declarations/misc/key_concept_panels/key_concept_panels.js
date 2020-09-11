@@ -26,7 +26,6 @@ const { text_maker, TM } = create_text_maker_component([
 const common_panel_config = {
   static: true,
   footnotes: false,
-  info_deps: [],
   source: false,
   calculate: _.constant(true),
 };

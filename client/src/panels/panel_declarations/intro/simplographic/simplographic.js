@@ -26,9 +26,7 @@ export const declare_simplographic_panel = () =>
 
       depends_on: ["orgVoteStatPa", "orgEmployeeRegion"],
 
-      info_deps: ["orgEmployeeRegion_gov_info"],
-
-      calculate(dept, info) {
+      calculate(dept) {
         const { orgVoteStatPa, orgEmployeeRegion } = this.tables;
         const gov_exp_pa_last_year = orgVoteStatPa
           .q()
@@ -106,7 +104,6 @@ export const declare_simplographic_panel = () =>
           org_employee_type_link,
           org_employee_region_link,
           results_link,
-          ...info,
         };
       },
 

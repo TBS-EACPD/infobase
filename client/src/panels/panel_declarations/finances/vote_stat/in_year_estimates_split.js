@@ -121,7 +121,6 @@ export const declare_in_year_estimates_split_panel = () =>
           return {
             machinery_footnotes: false,
             depends_on: ["orgVoteStatEstimates"],
-            info_deps: ["orgVoteStatEstimates_gov_info"],
             calculate: estimates_split_calculate,
             render: estimates_split_render_w_text_key(
               "gov_in_year_estimates_split_text"
@@ -131,10 +130,6 @@ export const declare_in_year_estimates_split_panel = () =>
           return {
             machinery_footnotes: false,
             depends_on: ["orgVoteStatEstimates"],
-            info_deps: [
-              "orgVoteStatEstimates_gov_info",
-              "orgVoteStatEstimates_dept_info",
-            ],
             calculate: estimates_split_calculate,
             render: estimates_split_render_w_text_key(
               "dept_in_year_estimates_split_text"
