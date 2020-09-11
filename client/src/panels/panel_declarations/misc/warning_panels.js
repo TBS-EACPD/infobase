@@ -125,7 +125,6 @@ export const declare_late_results_warning_panel = () =>
             static: true,
             footnotes: false,
             source: false,
-            info_deps: [],
             calculate: () => !_.isEmpty(docs_with_late_orgs),
             render() {
               const per_doc_inner_content = (result_doc) => (
@@ -167,7 +166,6 @@ export const declare_late_results_warning_panel = () =>
             static: true,
             footnotes: false,
             source: false,
-            info_deps: [],
             calculate: (subject) =>
               _.chain(docs_with_late_orgs)
                 .flatMap("late_results_orgs")
@@ -210,7 +208,6 @@ export const declare_late_resources_panel = () =>
             static: true,
             footnotes: false,
             source: false,
-            info_deps: [],
             calculate: () => !_.isEmpty(depts_with_late_resources),
             render: () => (
               <WarningPanel center_text={false}>
@@ -237,7 +234,6 @@ export const declare_late_resources_panel = () =>
             static: true,
             footnotes: false,
             source: false,
-            info_deps: [],
             calculate: (subject) =>
               _.includes(
                 depts_with_late_resources,

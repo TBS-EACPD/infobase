@@ -15,8 +15,6 @@ export const declare_gov_related_info_panel = () =>
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
-      depends_on: [],
-      info_deps: [],
       calculate: _.constant(true),
       render() {
         return (
