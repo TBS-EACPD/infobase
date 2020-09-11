@@ -207,9 +207,9 @@ class EmailFrontend extends React.Component {
             <fieldset style={{ marginBottom: "1rem" }}>
               <legend>
                 {field_info.form_label[window.lang]}
-                {field_info.required ? (
+                {field_info.required && (
                   <span style={{ color: textRed }}>*</span>
-                ) : null}
+                )}
               </legend>
               {_.map(field_info.enum_values, (label_by_lang, key) => (
                 <EnumField
@@ -260,9 +260,9 @@ class EmailFrontend extends React.Component {
             <Fragment>
               <label htmlFor={get_field_id(field_key)}>
                 {field_info.form_label[window.lang]}
-                {connected_required ? (
+                {connected_required && (
                   <span style={{ color: textRed }}>*</span>
-                ) : null}
+                )}
               </label>
               <textarea
                 style={{ marginBottom: "1rem" }}
@@ -335,6 +335,7 @@ class EmailFrontend extends React.Component {
                     awaiting_backend_response &&
                       "email-backend-form__send-btn--sending"
                   )}
+                  title={text_maker("email_frontend_required")}
                   style={{ width: "100%" }}
                   disabled={!ready_to_send}
                   onClick={(event) => {

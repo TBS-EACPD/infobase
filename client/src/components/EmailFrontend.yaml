@@ -27,3 +27,7 @@ email_frontend_has_sent_failed:
 email_frontend_reset:
   en: Reset
   fr: Réinitialiser
+
+email_frontend_required:
+  en: Please complete all required fields.
+  fr: S'il vous plaît remplir tous les champs requis.
