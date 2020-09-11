@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
-const _ = require("lodash");
 const fs = require("fs");
-const createTestCafe = require("testcafe");
+
+const _ = require("lodash");
 const rimraf = require("rimraf");
+const createTestCafe = require("testcafe");
 const yargs = require("yargs");
 
 const { route_load_tests_config } = require("./route-load-tests-config.js");

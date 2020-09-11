@@ -1,36 +1,15 @@
 import axios from "axios";
 
 import { Suspense } from "react";
+import { Provider } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { createStore } from "redux";
-import { Provider } from "react-redux";
 
 import { HeaderNotification } from "../components/HeaderNotification";
 import { PageDetails } from "../components/PageDetails.js";
 import { SpinnerWrapper } from "../components/SpinnerWrapper.js";
 import { initialize_analytics } from "../core/analytics.js";
 
-export const app_reducer = (
-  //export not needed but dev tools will throw error about no key
-  state = { lang: window.lang, show_rotate_landscape: true },
-  { type, payload }
-) => {
-  switch (type) {
-    case "rotate_landscape":
-      return { ...state, show_rotate_landscape: false };
-  }
-  return state;
-};
-
-export const rotate_landscape_off = () => {
-  return {
-    type: "rotate_landscape",
-  };
-};
-
-const store = createStore(app_reducer);
-
-import { ErrorBoundary } from "../core/ErrorBoundary.js";
 import { DevFip } from "../core/DevFip.js";
 import { EasyAccess } from "../core/EasyAccess.js";
 import { has_local_storage } from "../core/feature_detection.js";
@@ -38,6 +17,8 @@ import { InsertRuntimeFooterLinks } from "../core/InsertRuntimeFooterLinks.js";
 import { ReactUnmounter } from "../core/NavComponents.js";
 import { SurveyPopup } from "../core/SurveyPopup.js";
 import { TooltipActivator } from "../glossary/TooltipActivator.js";
+
+import { app_reducer } from "./AppState.js";
 
 import {
   ensure_linked_stylesheets_load,
@@ -134,6 +115,8 @@ const FootnoteInventory = retrying_react_lazy(() =>
     /* webpackChunkName: "FootnoteInventory" */ "../models/footnotes/FootnoteInventory.js"
   )
 );
+
+const store = createStore(app_reducer);
 
 export class App extends React.Component {
   constructor() {

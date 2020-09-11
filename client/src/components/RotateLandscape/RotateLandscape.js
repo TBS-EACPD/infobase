@@ -1,11 +1,14 @@
-import MediaQuery from "react-responsive";
-import "./RotateLandscape.scss";
-import text from "./RotateLandscape.yaml";
-import { IconRotatePhone, IconExpandWindowWidth } from "../../icons/icons.js";
-import { create_text_maker_component } from "../misc_util_components";
-import { connect } from "react-redux";
-import { rotate_landscape_off } from "../../InfoBase/App";
 import { Fragment } from "react";
+import { connect } from "react-redux";
+import MediaQuery from "react-responsive";
+
+import "./RotateLandscape.scss";
+import { IconRotatePhone, IconExpandWindowWidth } from "../../icons/icons.js";
+
+import { rotate_landscape_off } from "../../InfoBase/AppState.js";
+import { create_text_maker_component } from "../misc_util_components";
+
+import text from "./RotateLandscape.yaml";
 
 const { TM, text_maker } = create_text_maker_component(text);
 

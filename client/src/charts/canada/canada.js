@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 
+import { RotateLandscape } from "../../components";
 import { secondaryColor, tertiaryColor } from "../../core/color_defs.js";
 import { hex_to_rgb } from "../../general_utils.js";
 import { businessConstants } from "../../models/businessConstants.js";
@@ -10,7 +11,6 @@ import { WrappedNivoHBar } from "../wrapped_nivo/index.js";
 import { CanadaD3Component } from "./CanadaD3Component.js";
 
 import text from "./canada.yaml";
-import { RotateLandscape } from "../../components";
 
 const text_maker = create_text_maker(text);
 

@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
-const webpack = require("webpack");
 const path = require("path");
+
+const webpack = require("webpack");
 
 function bundle_extended_bootstrap_css(app_dir) {
   const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");

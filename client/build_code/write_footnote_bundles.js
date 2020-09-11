@@ -1,5 +1,5 @@
-const _ = require("lodash");
 const d3_dsv = require("d3-dsv");
+const _ = require("lodash");
 
 // models/results has no dependencies
 let all_footnotes,

@@ -1,3 +1,4 @@
+import { RotateLandscape } from "../../../../components";
 import {
   InfographicPanel,
   Subject,
@@ -9,7 +10,6 @@ import {
   WrappedNivoBar,
   declare_panel,
 } from "../../shared.js";
-import { RotateLandscape } from "../../../../components";
 
 import text from "./internal_services.yaml";
 

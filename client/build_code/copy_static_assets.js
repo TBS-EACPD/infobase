@@ -1,20 +1,22 @@
 /* eslint-disable no-console */
 
 //fse just adds the ability to do 'cp -r' to the regular filesystem tools for node
-const fse = require("fs-extra");
 const fs = require("fs");
-const _ = require("lodash");
-const Handlebars = require("handlebars");
+
 const d3_dsv = require("d3-dsv");
+const fse = require("fs-extra");
 const gitsha = require("git-bundle-sha");
+const Handlebars = require("handlebars");
+const _ = require("lodash");
 
 global._ = _; //global is the 'window' on the node environment
 
-const { get_footnote_file_defs } = require("./write_footnote_bundles.js");
+const { index_lang_lookups } = require("../src/InfoBase/index_data.js");
+
 const {
   bundle_extended_bootstrap_css,
 } = require("./bundle_extended_bootstrap_css.js");
-const { index_lang_lookups } = require("../src/InfoBase/index_data.js");
+const { get_footnote_file_defs } = require("./write_footnote_bundles.js");
 
 const build_dir_name = process.env.BUILD_DIR || "build";
 
