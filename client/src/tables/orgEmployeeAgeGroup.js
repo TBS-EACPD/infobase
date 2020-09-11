@@ -1,7 +1,5 @@
 import {
-  stats,
   trivial_text_maker,
-  Statistics,
   format,
   people_five_year_percentage_formula,
   businessConstants,
@@ -178,53 +176,3 @@ export default {
     });
   },
 };
-
-Statistics.create_and_register({
-  id: "orgEmployeeAgeGroup_dept_info",
-  table_deps: ["orgEmployeeAgeGroup"],
-  level: "dept",
-  compute: (subject, tables, infos, add, c) => {
-    const table = tables.orgEmployeeAgeGroup;
-    const q = table.q(subject);
-    c.dept = subject;
-
-    var all_years = _.map(q.high_level_rows(), (d) => {
-      if (lang === "en") {
-        d[0] = d[0].replace("Age ", "");
-      }
-      return d;
-    });
-    stats.year_over_year_multi_stats_active_years(
-      add,
-      "head_count_age",
-      all_years,
-      false,
-      people_years
-    );
-  },
-});
-
-Statistics.create_and_register({
-  id: "orgEmployeeAgeGroup_gov_info",
-  table_deps: ["orgEmployeeAgeGroup"],
-  level: "gov",
-  compute: (subject, tables, infos, add, c) => {
-    const table = tables.orgEmployeeAgeGroup;
-    const q = table.q(subject);
-
-    var all_years = _.map(q.high_level_rows(), (d) => {
-      if (lang === "en") {
-        d[0] = d[0].replace("Age ", "");
-      }
-      return d;
-    });
-
-    stats.year_over_year_multi_stats_active_years(
-      add,
-      "head_count_age",
-      all_years,
-      false,
-      people_years
-    );
-  },
-});

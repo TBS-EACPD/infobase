@@ -11,7 +11,6 @@ import {
 } from "../models/populate_services.js";
 import { PanelRegistry, tables_for_panel } from "../panels/PanelRegistry.js";
 
-import { Statistics, tables_for_statistics } from "./Statistics.js";
 import { Table } from "./TableClass.js";
 
 // given an array of tables, returns a promise when they are all loaded.
@@ -46,7 +45,6 @@ function ensure_loaded({
         .flatten()
         .value()
     )
-    .union(_.chain(stat_keys).map(tables_for_statistics).flatten().value())
     .uniqBy()
     .map((table_key) => Table.lookup(table_key))
     .value();
@@ -57,12 +55,6 @@ function ensure_loaded({
     _.chain(panel_keys)
       .map((key) => PanelRegistry.lookup(key, subject_level))
       .map("requires_results")
-      .concat(
-        _.chain(stat_keys)
-          .map((key) => Statistics.lookup(key))
-          .map("requires_results")
-          .value()
-      )
       .some()
       .value();
 
@@ -71,12 +63,6 @@ function ensure_loaded({
     _.chain(panel_keys)
       .map((key) => PanelRegistry.lookup(key, subject_level))
       .map("requires_result_counts")
-      .concat(
-        _.chain(stat_keys)
-          .map((key) => Statistics.lookup(key))
-          .map("requires_result_counts")
-          .value()
-      )
       .some()
       .value();
 
@@ -85,12 +71,6 @@ function ensure_loaded({
     _.chain(panel_keys)
       .map((key) => PanelRegistry.lookup(key, subject_level))
       .map("requires_granular_result_counts")
-      .concat(
-        _.chain(stat_keys)
-          .map((key) => Statistics.lookup(key))
-          .map("requires_granular_result_counts")
-          .value()
-      )
       .some()
       .value();
 
@@ -121,12 +101,6 @@ function ensure_loaded({
     : _.chain(panel_keys)
         .map((key) => PanelRegistry.lookup(key, subject_level))
         .map("required_result_docs")
-        .concat(
-          _.chain(stat_keys)
-            .map((key) => Statistics.lookup(key))
-            .map("required_result_docs")
-            .value()
-        )
         .flatten()
         .uniq()
         .compact()

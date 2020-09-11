@@ -1,12 +1,6 @@
-import {
-  trivial_text_maker,
-  m,
-  Statistics,
-  year_templates,
-} from "./table_common";
+import { trivial_text_maker, year_templates } from "./table_common";
 
 import text from "./orgEmployeeAvgAge.yaml";
-
 
 const { people_years, people_years_short_second } = year_templates;
 
@@ -126,51 +120,3 @@ export default {
     },
   ],
 };
-
-Statistics.create_and_register({
-  id: "orgEmployeeAvgAge_dept_info",
-  table_deps: ["orgEmployeeAvgAge"],
-  level: "dept",
-  compute: (subject, tables, infos, add, c) => {
-    const table = tables.orgEmployeeAvgAge;
-    const q = table.q(subject);
-    c.dept = subject;
-
-    const dept_data = _.map(people_years, (d) => q.data[0][d]);
-    const first_active = _.findIndex(dept_data, (d) => d !== 0);
-    const last_active = _.findLastIndex(dept_data, (d) => d !== 0);
-
-    add("avgage_first_active_year", m(people_years[first_active]));
-    add("avgage_first_active_value", dept_data[first_active]);
-    add("avgage_last_active_year", m(people_years[last_active]));
-    add("avgage_last_active_value", dept_data[last_active]);
-  },
-});
-
-Statistics.create_and_register({
-  id: "orgEmployeeAvgAge_gov_info",
-  table_deps: ["orgEmployeeAvgAge"],
-  level: "gov",
-  compute: (subject, tables, infos, add, c) => {
-    const table = tables.orgEmployeeAvgAge;
-
-    const data = _.map(people_years, (y) => table.GOC[0][y]);
-
-    add("avgage_last_year_5", data[0]);
-    add("avgage_last_year", data[4]);
-
-    const avg_change = _.reduce(
-      data,
-      (memo, val, i, data) => {
-        if (i + 1 < data.length) {
-          return (memo * i + (data[i + 1] - val)) / (i + 1);
-        } else {
-          return memo;
-        }
-      },
-      0
-    );
-
-    add("avgage_avg_change", avg_change);
-  },
-});

@@ -1,20 +1,12 @@
-import {
-  stats,
-  Subject,
-  trivial_text_maker,
-  m,
-  Statistics,
-  year_templates,
-} from "./table_common";
+import { Subject, trivial_text_maker, m, year_templates } from "./table_common";
 
 import text from "./programFtes.yaml";
 
 // see [here](../table_definition.html) for description
 // of the table spec
 //
-
 const { std_years, planning_years } = year_templates;
-const { Program, Gov } = Subject;
+const { Program } = Subject;
 
 export default {
   text,
@@ -207,84 +199,3 @@ export default {
     },
   },
 };
-
-Statistics.create_and_register({
-  id: "programFtes_program_info",
-  table_deps: ["programFtes"],
-  level: "program",
-  compute: (subject, tables, infos, add, c) => {
-    const table = tables.programFtes;
-    const row = _.first(table.programs.get(subject));
-    stats.add_all_years(add, "fte", std_years, (year, i) => row[year]);
-    stats.add_all_years(add, "fte", planning_years, (year, i) => row[year]);
-  },
-});
-
-Statistics.create_and_register({
-  id: "programFtes_dept_info",
-  table_deps: ["programFtes"],
-  level: "dept",
-  compute: (subject, tables, infos, add, c) => {
-    const table = tables.programFtes;
-    const q = table.q(subject);
-    c.dept = subject;
-    stats.add_all_years(add, "fte", planning_years, (year, i) => q.sum(year));
-    const planned_fte_avg = c.dept_fte_average;
-    add("planned_fte_average", planned_fte_avg);
-
-    stats.add_all_years(add, "fte", std_years, (year, i) => q.sum(year));
-    const hist_fte_avg = c.dept_fte_average;
-    add("hist_fte_average", hist_fte_avg);
-  },
-});
-
-Statistics.create_and_register({
-  id: "programFtes_gov_info",
-  table_deps: ["programFtes"],
-  level: "gov",
-  compute: (subject, tables, infos, add, c) => {
-    const table = tables.programFtes;
-    const q = table.q(Gov);
-
-    stats.add_all_years(add, "fte", planning_years, (year, i) => q.sum(year));
-    const planned_fte_average = c.gov_fte_average;
-    add("planned_fte_average", planned_fte_average);
-
-    stats.add_all_years(add, "fte", std_years, (year, i) => q.sum(year));
-    const hist_fte_avg = c.gov_fte_average;
-    add("hist_fte_average", hist_fte_avg);
-  },
-});
-
-Statistics.create_and_register({
-  id: "programFtes_crso_info",
-  table_deps: ["programFtes"],
-  level: "crso",
-  compute: (subject, tables, infos, add, c) => {
-    const programFtes = tables.programFtes;
-    const q = programFtes.q(subject);
-
-    var first_year_prg_num = _.filter(q.data, function (d) {
-      return d[_.first(planning_years)] !== 0;
-    }).length;
-
-    add("fte_prg_num", first_year_prg_num);
-
-    const min_planning_yr =
-      "{{planning_year_" +
-      _.min(_.map(planning_years, (XX) => Number(XX.match(/\d+/)))) +
-      "}}";
-
-    const sorted_first_yr = q.get_top_x(["prgm", min_planning_yr], Infinity, {
-      zip: true,
-      sort_col: min_planning_yr,
-    });
-
-    stats.one_year_top3(add, "fte_prg", sorted_first_yr);
-
-    stats.add_all_years(add, "fte", std_years, (year, i) => q.sum(year));
-
-    stats.add_all_years(add, "fte", planning_years, (year, i) => q.sum(year));
-    add("planned_fte_average", c.crso_fte_average);
-  },
-});

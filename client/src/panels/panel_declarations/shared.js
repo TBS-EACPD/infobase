@@ -24,7 +24,6 @@ import {
 import { formats, formatter } from "../../core/format.js";
 
 import { ensure_loaded } from "../../core/lazy_loader.js";
-import { Statistics } from "../../core/Statistics.js";
 import { Table } from "../../core/TableClass.js";
 
 import * as general_utils from "../../general_utils.js";
@@ -170,7 +169,6 @@ export {
   infograph_href_template,
   glossary_href,
   Results,
-  Statistics,
   ensure_loaded,
   formats,
   formatter,

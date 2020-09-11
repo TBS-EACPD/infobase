@@ -1,8 +1,5 @@
 import {
-  stats,
   trivial_text_maker,
-  m,
-  Statistics,
   businessConstants,
   year_templates,
 } from "./table_common";
@@ -127,68 +124,3 @@ export default {
     },
   ],
 };
-
-Statistics.create_and_register({
-  id: "orgSobjs_dept_info",
-  table_deps: ["orgSobjs"],
-  level: "dept",
-  compute: (subject, tables, infos, add, c) => {
-    c.dept = subject;
-    const table = tables.orgSobjs;
-    const q = table.q(subject);
-    const last_year_spend = table.so_num("{{pa_last_year}}", subject.id, true);
-    const pa_last_year_rev =
-      (last_year_spend[22] || 0) + (last_year_spend[21] || 0);
-    add("pa_last_year_rev", pa_last_year_rev);
-    add("pa_last_year_rev_minus", -pa_last_year_rev);
-
-    add(
-      "pa_last_year_gross_exp",
-      d3.sum(_.map(_.range(1, 13), (i) => last_year_spend[i] || 0))
-    );
-    const last_year = q.get_top_x(["so", "{{pa_last_year}}"], Infinity, {
-      zip: true,
-      sort_col: "{{pa_last_year}}",
-    });
-    const all_years = q.get_top_x(["so"].concat(std_years), Infinity, {
-      zip: true,
-    });
-    stats.one_year_top3(add, "so", last_year);
-    stats.year_over_year_multi_stats(add, "so_five_year", all_years);
-
-    stats.year_over_year_single_stats(
-      add,
-      "five_year_exp",
-      _.map(std_years, m),
-      _.map(std_years, (year) => q.sum([year]))
-    );
-  },
-});
-
-Statistics.create_and_register({
-  id: "orgSobjs_gov_info",
-  table_deps: ["orgSobjs"],
-  level: "gov",
-  compute: (subject, tables, infos, add, c) => {
-    const table = tables.orgSobjs;
-    const q = table.q(subject);
-
-    stats.year_over_year_single_stats(
-      add,
-      "personnel",
-      _.map(std_years, m),
-      _.map(std_years, (year, i) => {
-        return table.horizontal(year, false)[sos[1].text];
-      })
-    );
-    var last_year = q.get_top_x(["so", "{{pa_last_year}}"], Infinity, {
-      zip: true,
-      sort_col: "{{pa_last_year}}",
-    });
-    var all_years = q.get_top_x(["so"].concat(std_years), Infinity, {
-      zip: true,
-    });
-    stats.one_year_top3(add, "so", last_year);
-    stats.year_over_year_multi_stats(add, "so_five_year", all_years);
-  },
-});
