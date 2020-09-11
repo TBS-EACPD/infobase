@@ -238,26 +238,36 @@ class EmailFrontend extends React.Component {
             </fieldset>
           );
         case "textarea":
+          const connected_required = //handles red star alerting required
+            field_info.connection &&
+            _.includes(
+              _.keys(completed_template),
+              field_info.connection.name
+            ) &&
+            _.includes(
+              completed_template[field_info.connection.name],
+              field_info.connection.enable
+            );
+
+          const connected_disabled = //handles disabled for textarea
+            field_info.connection &&
+            !_.includes(completed_template, field_info.connection.name) &&
+            !_.includes(
+              completed_template[field_info.connection.name],
+              field_info.connection.enable
+            );
           return (
             <Fragment>
               <label htmlFor={get_field_id(field_key)}>
                 {field_info.form_label[window.lang]}
+                {connected_required ? (
+                  <span style={{ color: textRed }}>*</span>
+                ) : null}
               </label>
               <textarea
                 style={{ marginBottom: "1rem" }}
                 id={get_field_id(field_key)}
-                disabled={
-                  disable_forms ||
-                  (field_info.connection &&
-                    !_.includes(
-                      completed_template,
-                      field_info.connection.name
-                    ) &&
-                    !_.includes(
-                      completed_template[field_info.connection.name],
-                      field_info.connection.enable
-                    ))
-                }
+                disabled={disable_forms || connected_disabled}
                 rows="5"
                 cols="33"
                 defaultValue={completed_template[field_key] || ""}
