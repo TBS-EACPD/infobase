@@ -1,6 +1,4 @@
 import * as format from "../core/format";
-import { Statistics } from "../core/Statistics.js";
-import { stats } from "../core/tables/stats.js";
 import { businessConstants } from "../models/businessConstants.js";
 import { Subject } from "../models/subject";
 import { trivial_text_maker, run_template } from "../models/text.js";
@@ -253,14 +251,12 @@ export {
   major_vote_big_stat,
   hist_major_vote_stat,
   people_five_year_percentage_formula,
-  stats,
   trivial_text_maker,
   text_maker,
   businessConstants,
   run_template,
   m,
   Subject,
-  Statistics,
   format,
   year_templates,
   rows_to_rev_split,

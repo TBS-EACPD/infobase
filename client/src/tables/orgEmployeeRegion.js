@@ -1,7 +1,5 @@
 import {
-  stats,
   trivial_text_maker,
-  Statistics,
   format,
   people_five_year_percentage_formula,
   businessConstants,
@@ -172,44 +170,3 @@ export default {
     },
   ],
 };
-
-Statistics.create_and_register({
-  id: "orgEmployeeRegion_dept_info",
-  table_deps: ["orgEmployeeRegion"],
-  level: "dept",
-  compute: (subject, tables, infos, add, c) => {
-    const table = tables.orgEmployeeRegion;
-    const q = table.q(subject);
-    c.dept = subject;
-
-    var all_years = q.get_top_x(["region"].concat(people_years), Infinity, {
-      zip: true,
-    });
-    stats.year_over_year_multi_stats_active_years(
-      add,
-      "head_count_region",
-      all_years,
-      false,
-      people_years
-    );
-  },
-});
-
-Statistics.create_and_register({
-  id: "orgEmployeeRegion_gov_info",
-  table_deps: ["orgEmployeeRegion"],
-  level: "gov",
-  compute: (subject, tables, infos, add, c) => {
-    const table = tables.orgEmployeeRegion;
-    const q = table.q(subject);
-
-    var all_years = q.gov_grouping();
-    stats.year_over_year_multi_stats_active_years(
-      add,
-      "head_count_region",
-      all_years,
-      false,
-      people_years
-    );
-  },
-});

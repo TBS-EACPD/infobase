@@ -2,7 +2,6 @@ import {
   Subject,
   trivial_text_maker,
   run_template,
-  Statistics,
   year_templates,
 } from "./table_common";
 
@@ -152,63 +151,3 @@ export default {
     },
   ],
 };
-
-Statistics.create_and_register({
-  id: "programVoteStat_program_info",
-  table_deps: ["programVoteStat"],
-  level: "program",
-  compute: (subject, table_deps, info_deps, add, c) => {
-    const type_col = "vote_stat";
-    const { programVoteStat } = table_deps;
-    const last_year_col = _.last(std_years);
-    const rows = programVoteStat.programs.get(subject);
-    const {
-      [trivial_text_maker("voted")]: voted_rows,
-      [trivial_text_maker("stat")]: stat_rows,
-    } = _.groupBy(rows, type_col);
-
-    const voted_amount =
-      (_.first(voted_rows) && _.first(voted_rows)[last_year_col]) || 0;
-    const stat_amount =
-      (_.first(stat_rows) && _.first(stat_rows)[last_year_col]) || 0;
-    const total = voted_amount + stat_amount;
-    const voted_pct = voted_amount / total;
-    const stat_pct = stat_amount / total;
-
-    add("voted_exp", voted_amount);
-    add("stat_exp", stat_amount);
-    add("voted_pct", voted_pct);
-    add("stat_pct", stat_pct);
-    add("total_exp", total);
-  },
-});
-
-Statistics.create_and_register({
-  id: "programVoteStat_tag_info",
-  table_deps: ["programVoteStat"],
-  level: "tag",
-  compute: (subject, table_deps, info_deps, add, c) => {
-    const type_col = "vote_stat";
-    const { programVoteStat } = table_deps;
-    const last_year_col = _.last(std_years);
-    const last_year_col_obj = programVoteStat.col_from_nick(last_year_col);
-    const rows = programVoteStat.q(subject).data;
-
-    const {
-      [trivial_text_maker("voted")]: voted_rows,
-      [trivial_text_maker("stat")]: stat_rows,
-    } = _.groupBy(rows, type_col);
-
-    const voted_amount = last_year_col_obj.formula(voted_rows);
-    const stat_amount = last_year_col_obj.formula(stat_rows);
-    const total = voted_amount + stat_amount;
-    const voted_pct = voted_amount / total;
-    const stat_pct = stat_amount / total;
-
-    add("voted_exp", voted_amount);
-    add("stat_exp", stat_amount);
-    add("voted_pct", voted_pct);
-    add("stat_pct", stat_pct);
-    add("total_exp", total);
-  },
-});
