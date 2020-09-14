@@ -320,6 +320,7 @@ Statistics.create_and_register({
         return table.q(key).sum("est_in_year_estimates") !== 0;
       })
       .value().length;
+    // eslint-disable-next-line
     const _voted_num_in_year = _.chain(
       table.voted_stat("est_in_year_estimates", false, false)[voted]
     )

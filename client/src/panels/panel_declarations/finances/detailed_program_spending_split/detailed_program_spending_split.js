@@ -64,7 +64,8 @@ class HistoricalProgramBars extends React.Component {
       .map(({ label, data }) => ({
         label: label,
         ..._.chain().zip(ticks, data).fromPairs().value(),
-      }));
+      }))
+      .value();
 
     const processed_data = _.chain(data)
       .filter(({ id }) => _.includes(selected, id))
