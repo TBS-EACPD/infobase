@@ -72,7 +72,7 @@ dept_in_year_voted_stat_split_text:
    (or **{{fmt_compact1_written voted_est_in_year}}**) from {{gl_tt "voted authorities" "VOTED"}}.
 
   fr: |
-   Sur les **{{fmt_compact1_written tabled_est_in_year}}** en dépenses budgétaires prévues pour **{{le_dept dept}}**, 
+   Sur les **{{fmt_compact1_written tabled_est_in_year}}** en dépenses budgétaires prévues pour **{{le_dept subject}}**, 
    **{{fmt_compact1_written stat_est_in_year}}** (ou **{{fmt_percentage1 stat_percent_est_in_year}}**) proviendra {{gl_tt "d'autorisations législatives" "STAT"}} et 
    **{{fmt_compact1_written voted_est_in_year}}** (ou **{{fmt_percentage1 voted_percent_est_in_year}}**) {{gl_tt "d'autorisations votées" "VOTED"}}.
 
@@ -119,7 +119,7 @@ dept_in_year_estimates_split_text:
      On {{interim_mains_table_date}}, the {{est_next_year}} {{gl_tt "Interim Estimates" "INTER_EST"}} were tabled in Parliament seeking **{{fmt_compact1_written dept_tabled_est_next_year_estimates}}** in {{gl_tt "spending authorities" "AUTH"}} to begin the new fiscal year. This funding supports the organization's financial requirements for the first three months of the year.
    {{/if}}
   fr: |
-   En date du {{est_in_year}} {{last_estimates}}, pour **{{le_dept dept}}**, les dépenses budgétaires prévues de **{{fmt_compact1_written tabled_est_in_year}}** figurent 
+   En date du {{est_in_year}} {{last_estimates}}, pour **{{le_dept subject}}**, les dépenses budgétaires prévues de **{{fmt_compact1_written tabled_est_in_year}}** figurent 
    dans le(s) {{gl_tt "processus budgétaire(s)" "EST_PROC"}}  et {{gl_tt "redressements et virements" "ADJUS"}} suivants: 
    {{#each in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
@@ -150,7 +150,7 @@ estimates_perspective_text:
    {{/if}}
 
   fr: |
-   En date du {{last_estimates}} {{est_in_year}}, le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de **{{fmt_compact1_written gov_tabled_est_in_year}}**. De ce montant, **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** (ou **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}**) seront attribués à **{{subject.name}} ({{subject.abbr}})**.
+   En date du {{last_estimates}} {{est_in_year}}, le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de **{{fmt_compact1_written gov_tabled_est_in_year}}**. De ce montant, **{{fmt_compact1_written dept_tabled_est_in_year}}** (ou **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year gov_tabled_est_in_year)}}**) seront attribués à **{{subject.name}} ({{subject.abbr}})**.
 
 
    {{! only to be used near year end when a main estimates for the following year has been tabled}}

@@ -353,22 +353,23 @@ export const declare_historical_g_and_c_panel = () =>
                 false
               );
 
-              const payment_types = [
-                "Grant",
-                "Contribution",
-                "Other Transfer Payment",
-              ];
-
               const five_year_avg =
                 (_.sum(payments.c) + _.sum(payments.g) + _.sum(payments.o)) / 5;
+              const avgs = _.map(payments, (payment, type) => ({
+                type,
+                value: _.sum(payment) / payment.length,
+              }));
+              const largest_avg_payment = _.maxBy(avgs, "value");
 
-              const avgs = _.map(payments, (type) => _.sum(type) / type.length);
+              const largest_type =
+                transfer_payments[largest_avg_payment.type].text;
 
-              const largest_avg = _.max(avgs);
-
-              const largest_type = payment_types[_.indexOf(avgs, largest_avg)];
-
-              return { payments, five_year_avg, largest_avg, largest_type };
+              return {
+                payments,
+                five_year_avg,
+                largest_avg: largest_avg_payment.value,
+                largest_type,
+              };
             },
             render({ calculations, footnotes, sources }) {
               const { panel_args } = calculations;
@@ -416,31 +417,16 @@ export const declare_historical_g_and_c_panel = () =>
                   _.sum(rolled_up_transfer_payments.o)) /
                 5;
 
-              const payment_types = [
-                "Contribution",
-                "Grant",
-                "Other Transfer Payment",
-              ];
+              const avgs = _.map(
+                rolled_up_transfer_payments,
+                (payments, type) => ({
+                  type,
+                  value: _.sum(payments) / payments.length,
+                })
+              );
+              const max_payment = _.maxBy(avgs, "value");
 
-              const c_avg =
-                rolled_up_transfer_payments.c &&
-                _.sum(rolled_up_transfer_payments.c) /
-                  rolled_up_transfer_payments.c.length;
-
-              const g_avg =
-                rolled_up_transfer_payments.g &&
-                _.sum(rolled_up_transfer_payments.g) /
-                  rolled_up_transfer_payments.g.length;
-
-              const o_avg =
-                rolled_up_transfer_payments.o &&
-                _.sum(rolled_up_transfer_payments.o) /
-                  rolled_up_transfer_payments.o.length;
-
-              const avgs = [c_avg, g_avg, o_avg];
-              const max_avg = _.max(avgs);
-              const max_type = payment_types[_.indexOf(avgs, max_avg)];
-
+              const max_type = transfer_payments[max_payment.type].text;
               const has_transfer_payments = _.chain(rolled_up_transfer_payments)
                 .values()
                 .flatten()
@@ -470,7 +456,7 @@ export const declare_historical_g_and_c_panel = () =>
               const text_calculations = {
                 dept,
                 five_year_avg,
-                max_avg,
+                max_avg: max_payment.value,
                 max_type,
                 max_tp_avg,
                 max_tp,
