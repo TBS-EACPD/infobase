@@ -6,7 +6,6 @@ import {
   year_templates,
   TabbedContent,
   create_text_maker_component,
-  A11yTable,
   StdPanel,
   Col,
   declare_panel,
@@ -164,62 +163,31 @@ export const declare_employee_age_panel = () =>
             <Col size={12} isText>
               <TM k={level + "_employee_age_text"} args={info} />
             </Col>
-            {!window.is_a11y_mode && (
-              <Col size={12} isGraph extraClasses="zero-padding">
-                <div aria-hidden="true">
-                  <TabbedContent
-                    tab_keys={["age_group", "avgage"]}
-                    tab_labels={{
-                      age_group: text_maker("age_group"),
-                      avgage: text_maker("avgage"),
-                    }}
-                    tab_pane_contents={{
-                      age_group: (
-                        <div id={"emp_age_tab_pane"}>
-                          <NivoLineBarToggle {...age_group_options} />
-                          <div className="clearfix"></div>
-                        </div>
-                      ),
-                      avgage: (
-                        <div id={"emp_age_tab_pane"}>
-                          <NivoLineBarToggle {...avg_age_options} />
-                          <div className="clearfix"></div>
-                        </div>
-                      ),
-                    }}
-                  />
-                </div>
-              </Col>
-            )}
-            {window.is_a11y_mode && (
-              <Col size={12} isGraph>
-                <A11yTable
-                  label_col_header={text_maker("age_group")}
-                  data_col_headers={[
-                    ...ticks,
-                    text_maker("five_year_percent_header"),
-                  ]}
-                  data={_.map(panel_args.age_group, (dimension) => {
-                    return {
-                      label: dimension.label,
-                      data: [
-                        ...dimension.data,
-                        formats["percentage1_raw"](dimension.five_year_percent),
-                      ],
-                    };
-                  })}
+            <Col size={12} isGraph extraClasses="zero-padding">
+              <div aria-hidden="true">
+                <TabbedContent
+                  tab_keys={["age_group", "avgage"]}
+                  tab_labels={{
+                    age_group: text_maker("age_group"),
+                    avgage: text_maker("avgage"),
+                  }}
+                  tab_pane_contents={{
+                    age_group: (
+                      <div id={"emp_age_tab_pane"}>
+                        <NivoLineBarToggle {...age_group_options} />
+                        <div className="clearfix"></div>
+                      </div>
+                    ),
+                    avgage: (
+                      <div id={"emp_age_tab_pane"}>
+                        <NivoLineBarToggle {...avg_age_options} />
+                        <div className="clearfix"></div>
+                      </div>
+                    ),
+                  }}
                 />
-              </Col>
-            )}
-            {window.is_a11y_mode && (
-              <Col size={12} isGraph>
-                <A11yTable
-                  label_col_header={text_maker("avgage")}
-                  data_col_headers={ticks}
-                  data={panel_args.avg_age}
-                />
-              </Col>
-            )}
+              </div>
+            </Col>
           </StdPanel>
         );
       },

@@ -4,7 +4,6 @@ import {
   businessConstants,
   year_templates,
   create_text_maker_component,
-  A11yTable,
   StdPanel,
   Col,
   declare_panel,
@@ -89,43 +88,21 @@ export const declare_employee_type_panel = () =>
             <Col size={12} isText>
               <TM k={level + "_employee_type_text"} args={info} />
             </Col>
-            {!window.is_a11y_mode && (
-              <Col size={12} isGraph>
-                <NivoLineBarToggle
-                  {...{
-                    legend_title: text_maker("employee_type"),
-                    bar: true,
-                    graph_options: {
-                      ticks: ticks,
-                      y_axis: text_maker("employees"),
-                      formatter: formats.big_int_raw,
-                    },
-                    initial_graph_mode: "bar_stacked",
-                    data: panel_args,
-                  }}
-                />
-              </Col>
-            )}
-            {window.is_a11y_mode && (
-              <Col size={12} isGraph>
-                <A11yTable
-                  label_col_header={text_maker("employee_type")}
-                  data_col_headers={[
-                    ...ticks,
-                    text_maker("five_year_percent_header"),
-                  ]}
-                  data={_.map(panel_args, (dimension) => {
-                    return {
-                      label: dimension.label,
-                      data: [
-                        ...dimension.data,
-                        formats["percentage1_raw"](dimension.five_year_percent),
-                      ],
-                    };
-                  })}
-                />
-              </Col>
-            )}
+            <Col size={12} isGraph>
+              <NivoLineBarToggle
+                {...{
+                  legend_title: text_maker("employee_type"),
+                  bar: true,
+                  graph_options: {
+                    ticks: ticks,
+                    y_axis: text_maker("employees"),
+                    formatter: formats.big_int_raw,
+                  },
+                  initial_graph_mode: "bar_stacked",
+                  data: panel_args,
+                }}
+              />
+            </Col>
           </StdPanel>
         );
       },
