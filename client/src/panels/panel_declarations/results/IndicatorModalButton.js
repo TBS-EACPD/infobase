@@ -1,8 +1,8 @@
-import text from "./IndicatorModalButton.yaml";
 import gql from "graphql-tag";
 
-import { get_client } from "../../../graphql_utils/graphql_utils.js";
-import { log_standard_event } from "../../../core/analytics.js";
+import { Fragment } from "react";
+
+import { withRouter } from "react-router";
 
 import {
   Panel,
@@ -11,14 +11,18 @@ import {
   WriteToClipboard,
   create_text_maker_component,
 } from "../../../components/index.js";
+import { log_standard_event } from "../../../core/analytics.js";
+import { get_client } from "../../../graphql_utils/graphql_utils.js";
 
+
+import { IconCopyLink } from "../../../icons/icons.js";
 import { Indicator } from "../../../models/results.js";
 
 import { IndicatorDisplay } from "./result_components.js";
 import { text_maker as general_text_maker } from "./result_text_provider.js";
-import { Fragment } from "react";
-import { withRouter } from "react-router";
-import { IconCopyLink } from "../../../icons/icons.js";
+
+
+import text from "./IndicatorModalButton.yaml";
 
 const { text_maker } = create_text_maker_component(text);
 

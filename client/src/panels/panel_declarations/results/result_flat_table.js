@@ -1,6 +1,5 @@
 import { Fragment } from "react";
-import IndicatorModalButton from "./IndicatorModalButton";
-import { TM, text_maker } from "./result_text_provider.js";
+
 import { businessConstants } from "../../../models/businessConstants.js";
 import {
   util_components,
@@ -13,9 +12,12 @@ import {
   HeightClippedGraph,
 } from "../shared.js";
 
+import IndicatorModalButton from "./IndicatorModalButton";
+
 import { StatusIconTable, large_status_icons } from "./result_components.js";
 
 import { create_full_results_hierarchy } from "./result_drilldown/result_hierarchies.js";
+import { TM, text_maker } from "./result_text_provider.js";
 import {
   ResultCounts,
   GranularResultCounts,
