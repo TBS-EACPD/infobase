@@ -3,7 +3,6 @@ import {
   run_template,
   year_templates,
   create_text_maker_component,
-  A11yTable,
   StdPanel,
   Col,
   WrappedNivoLine,
@@ -32,7 +31,7 @@ export const declare_employee_totals_panel = () =>
       depends_on: ["orgEmployeeType"],
       info_deps: info_deps_by_level[level],
 
-      calculate(subject, info) {
+      calculate(subject) {
         const { orgEmployeeType } = this.tables;
         const q = orgEmployeeType.q(subject);
         return {
@@ -42,7 +41,7 @@ export const declare_employee_totals_panel = () =>
       },
 
       render({ calculations, footnotes, sources }) {
-        const { subject, info, panel_args } = calculations;
+        const { info, panel_args } = calculations;
         const { series, ticks } = panel_args;
 
         const data_formatter = () => [
@@ -63,70 +62,54 @@ export const declare_employee_totals_panel = () =>
             <Col size={4} isText>
               <TM k={level + "_employee_totals_text"} args={info} />
             </Col>
-            {!window.is_a11y_mode && (
-              <Col size={8} isGraph>
-                <WrappedNivoLine
-                  data={data_formatter()}
-                  raw_data={series}
-                  colors={window.infobase_color_constants.primaryColor}
-                  is_money={false}
-                  yScale={{ toggle: true }}
-                  tooltip={(slice) => (
-                    <div
-                      style={{
-                        color: window.infobase_color_constants.textColor,
-                      }}
+            <Col size={8} isGraph>
+              <WrappedNivoLine
+                data={data_formatter()}
+                raw_data={series}
+                colors={window.infobase_color_constants.primaryColor}
+                is_money={false}
+                yScale={{ toggle: true }}
+                tooltip={(slice) => (
+                  <div
+                    style={{
+                      color: window.infobase_color_constants.textColor,
+                    }}
+                  >
+                    <table
+                      style={{ width: "100%", borderCollapse: "collapse" }}
                     >
-                      <table
-                        style={{ width: "100%", borderCollapse: "collapse" }}
-                      >
-                        <tbody>
-                          {slice.data.map((tooltip_item) => (
-                            <tr key={tooltip_item.serie.id}>
-                              <td className="nivo-tooltip__icon">
-                                <div
-                                  style={{
-                                    height: "12px",
-                                    width: "12px",
-                                    backgroundColor: tooltip_item.serie.color,
-                                  }}
-                                />
-                              </td>
-                              <td className="nivo-tooltip__label">
-                                {tooltip_item.serie.id}
-                              </td>
-                              <td className="nivo-tooltip__label">
-                                {tooltip_item.data.x}
-                              </td>
-                              <td
-                                className="nivo-tooltip__value"
-                                dangerouslySetInnerHTML={{
-                                  __html: formats.big_int(tooltip_item.data.y),
+                      <tbody>
+                        {slice.data.map((tooltip_item) => (
+                          <tr key={tooltip_item.serie.id}>
+                            <td className="nivo-tooltip__icon">
+                              <div
+                                style={{
+                                  height: "12px",
+                                  width: "12px",
+                                  backgroundColor: tooltip_item.serie.color,
                                 }}
                               />
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  )}
-                />
-              </Col>
-            )}
-            {window.is_a11y_mode && (
-              <Col size={12} isGraph>
-                <A11yTable
-                  label_col_header={text_maker("org")}
-                  data_col_headers={ticks}
-                  data={[
-                    {
-                      label: subject.name,
-                      data: series,
-                    },
-                  ]}
-                />
-              </Col>
-            )}
+                            </td>
+                            <td className="nivo-tooltip__label">
+                              {tooltip_item.serie.id}
+                            </td>
+                            <td className="nivo-tooltip__label">
+                              {tooltip_item.data.x}
+                            </td>
+                            <td
+                              className="nivo-tooltip__value"
+                              dangerouslySetInnerHTML={{
+                                __html: formats.big_int(tooltip_item.data.y),
+                              }}
+                            />
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              />
+            </Col>
           </StdPanel>
         );
       },

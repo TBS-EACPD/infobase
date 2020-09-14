@@ -24,7 +24,6 @@ import {
 } from "../../core/color_schemes.js";
 import { formats, formatter } from "../../core/format.js";
 
-
 import { ensure_loaded } from "../../core/lazy_loader.js";
 import { Statistics } from "../../core/Statistics.js";
 import { Table } from "../../core/TableClass.js";
@@ -48,7 +47,6 @@ import {
   actual_to_planned_gap_year,
 } from "../../models/years.js";
 
-
 import { rpb_link, get_appropriate_rpb_subject } from "../../rpb/rpb_link.js";
 import * as table_common from "../../tables/table_common.js";
 import { PanelRegistry, layout_types } from "../PanelRegistry.js";
@@ -59,7 +57,6 @@ import {
   TextPanel,
   Col,
 } from "./InfographicPanel.js";
-
 
 const {
   Format,

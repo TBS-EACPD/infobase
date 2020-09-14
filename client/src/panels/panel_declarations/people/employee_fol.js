@@ -4,7 +4,6 @@ import {
   businessConstants,
   year_templates,
   create_text_maker_component,
-  A11yTable,
   StdPanel,
   Col,
   declare_panel,
@@ -106,43 +105,21 @@ export const declare_employee_fol_panel = () =>
             <Col size={12} isText>
               <TM k={level + "_employee_fol_text"} args={info} />
             </Col>
-            {!window.is_a11y_mode && (
-              <Col size={12} isGraph>
-                <NivoLineBarToggle
-                  {...{
-                    legend_title: text_maker("FOL"),
-                    bar: true,
-                    graph_options: {
-                      y_axis: text_maker("employees"),
-                      ticks: ticks,
-                      formatter: formats.big_int_raw,
-                    },
-                    initial_graph_mode: "bar_grouped",
-                    data: panel_args,
-                  }}
-                />
-              </Col>
-            )}
-            {window.is_a11y_mode && (
-              <Col size={12} isGraph>
-                <A11yTable
-                  label_col_header={text_maker("FOL")}
-                  data_col_headers={[
-                    ...ticks,
-                    text_maker("five_year_percent_header"),
-                  ]}
-                  data={_.map(panel_args, (dimension) => {
-                    return {
-                      label: dimension.label,
-                      data: [
-                        ...dimension.data,
-                        formats["percentage1_raw"](dimension.five_year_percent),
-                      ],
-                    };
-                  })}
-                />
-              </Col>
-            )}
+            <Col size={12} isGraph>
+              <NivoLineBarToggle
+                {...{
+                  legend_title: text_maker("FOL"),
+                  bar: true,
+                  graph_options: {
+                    y_axis: text_maker("employees"),
+                    ticks: ticks,
+                    formatter: formats.big_int_raw,
+                  },
+                  initial_graph_mode: "bar_grouped",
+                  data: panel_args,
+                }}
+              />
+            </Col>
           </StdPanel>
         );
       },
