@@ -159,6 +159,7 @@ export class Table extends mix().with(staticStoreMixin) {
       this.dimensions = [trivial_dimension];
     }
 
+    //eslint-disable-next-line
     const to_chain = _.chain(this.flat_headers);
 
     to_chain
