@@ -1,5 +1,6 @@
 import { Fragment } from "react";
-import IndicatorPanel from "./IndicatorPanel";
+import IndicatorModalButton from "./IndicatorModalButton";
+import { TM, text_maker } from "./result_text_provider.js";
 import { businessConstants } from "../../../models/businessConstants.js";
 import {
   util_components,
@@ -15,7 +16,6 @@ import {
 import { StatusIconTable, large_status_icons } from "./result_components.js";
 
 import { create_full_results_hierarchy } from "./result_drilldown/result_hierarchies.js";
-import { TM, text_maker } from "./result_text_provider.js";
 import {
   ResultCounts,
   GranularResultCounts,
@@ -135,7 +135,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
       index: 1,
       header: text_maker("indicator"),
       is_searchable: true,
-      formatter: (value) => <IndicatorPanel id={ind_map[value].id} />,
+      formatter: (value) => <IndicatorModalButton id={ind_map[value].id} />,
       sort_func: (a, b) => {
         if (a && b) {
           const a_name = ind_map[a].name.toUpperCase();

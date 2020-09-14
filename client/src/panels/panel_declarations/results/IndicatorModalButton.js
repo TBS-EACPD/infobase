@@ -98,15 +98,19 @@ const query_api = (id) => {
     });
 };
 
-export default class IndicatorPanel extends React.Component {
+export default class IndicatorModalButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = { loading: true, show_modal: false };
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     const { id } = this.props;
-    query_api(id).then(() => this.setState({ loading: false }));
+    const { loading, show_modal } = this.state;
+
+    if (loading && show_modal) {
+      query_api(id).then(() => this.setState({ loading: false }));
+    }
   }
 
   render() {
