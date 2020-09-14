@@ -1,3 +1,4 @@
+import text from "./IndicatorModalButton.yaml";
 import gql from "graphql-tag";
 
 import { get_client } from "../../../graphql_utils/graphql_utils.js";
@@ -8,15 +9,18 @@ import {
   SpinnerWrapper,
   StatelessModal,
   WriteToClipboard,
+  create_text_maker_component,
 } from "../../../components/index.js";
 
 import { Indicator } from "../../../models/results.js";
 
 import { IndicatorDisplay } from "./result_components.js";
-import { text_maker } from "./result_text_provider.js";
+import { text_maker as general_text_maker } from "./result_text_provider.js";
 import { Fragment } from "react";
 import { withRouter } from "react-router";
 import { IconCopyLink } from "../../../icons/icons.js";
+
+const { text_maker } = create_text_maker_component(text);
 
 const indicators_fields_fragment = `  id
   stable_id
@@ -155,13 +159,13 @@ class IndicatorModalButton extends React.Component {
           ref={this.buttonRef}
           className="btn-link"
           onClick={() => this.setState({ show_modal: true })}
-          aria-label={`Discover more about ${indicator.name}`}
+          aria-label={`${text_maker("discover_indicator")} ${indicator.name}`}
         >
           {indicator.name}
         </button>
         <StatelessModal
           show={this.state.show_modal}
-          title={text_maker("indicator_display_title")}
+          title={general_text_maker("indicator_display_title")}
           body={
             loading ? (
               <SpinnerWrapper ref="spinner" config_name={"sub_route"} />
@@ -173,7 +177,7 @@ class IndicatorModalButton extends React.Component {
                     <WriteToClipboard
                       text_to_copy={modal_link}
                       button_class_name={"panel-heading-utils"}
-                      button_description={"test"}
+                      button_description={text_maker("copy_indicator_link")}
                       IconComponent={IconCopyLink}
                     />
                   </div>

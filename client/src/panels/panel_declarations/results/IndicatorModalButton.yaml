@@ -1,3 +1,7 @@
 copy_indicator_link:
   en: Copy indicator link to clipboard
-  fr: Copier le lien du indicateur dans le presse-papier
+  fr: Copier le lien de l'indicateur dans le presse-papier
+
+discover_indicator:
+  en: Discover more about
+  fr: Découvrir
