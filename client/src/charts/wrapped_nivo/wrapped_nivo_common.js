@@ -176,7 +176,7 @@ class InteractiveGraph extends React.Component {
 
     const { graph, table, table_name, other_buttons } = this.props;
 
-    return (
+    return !window.is_a11y_mode ? (
       <Fragment>
         <div>
           {/* don't remove this div: btn-ib-array requires a parent to determine its 
@@ -212,6 +212,8 @@ class InteractiveGraph extends React.Component {
           additional_dialog_class={"modal-responsive"}
         />
       </Fragment>
+    ) : (
+      table
     );
   }
 }

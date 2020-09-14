@@ -1,6 +1,4 @@
-
 import classNames from "classnames";
-
 
 import { newIBCategoryColors } from "../../core/color_schemes.js";
 import { formats } from "../../core/format.js";
@@ -176,50 +174,52 @@ export class NivoLineBarToggle extends React.Component {
 
     return (
       <div className="frow">
-        <div
-          className={classNames(
-            `fcol-xs-12 fcol-md-${legend_col_full_size}`,
-            legend_col_class
-          )}
-          style={{ width: "100%", position: "relative" }}
-        >
-          <StandardLegend
-            title={legend_title}
-            items={_.map(data, ({ label }) => ({
-              label,
-              active: _.includes(selected, label),
-              id: label,
-              color: colors(label),
-            }))}
-            onClick={(label) => {
-              !(selected.length === 1 && selected.includes(label)) &&
-                this.setState({
-                  selected: _.toggle_list(selected, label),
-                });
-            }}
-            Controls={
-              !disable_toggle && (
-                <button
-                  className="btn-ib-primary"
-                  onClick={() => {
-                    const current_mode_index = _.indexOf(
-                      this.graph_modes,
-                      graph_mode
-                    );
-                    const name_of_next_graph_mode = this.graph_modes[
-                      (current_mode_index + 1) % this.graph_modes.length
-                    ];
-                    this.setState({
-                      graph_mode: name_of_next_graph_mode,
-                    });
-                  }}
-                >
-                  {text_maker("toggle_graph")}
-                </button>
-              )
-            }
-          />
-        </div>
+        {!window.is_a11y_mode && (
+          <div
+            className={classNames(
+              `fcol-xs-12 fcol-md-${legend_col_full_size}`,
+              legend_col_class
+            )}
+            style={{ width: "100%", position: "relative" }}
+          >
+            <StandardLegend
+              title={legend_title}
+              items={_.map(data, ({ label }) => ({
+                label,
+                active: _.includes(selected, label),
+                id: label,
+                color: colors(label),
+              }))}
+              onClick={(label) => {
+                !(selected.length === 1 && selected.includes(label)) &&
+                  this.setState({
+                    selected: _.toggle_list(selected, label),
+                  });
+              }}
+              Controls={
+                !disable_toggle && (
+                  <button
+                    className="btn-ib-primary"
+                    onClick={() => {
+                      const current_mode_index = _.indexOf(
+                        this.graph_modes,
+                        graph_mode
+                      );
+                      const name_of_next_graph_mode = this.graph_modes[
+                        (current_mode_index + 1) % this.graph_modes.length
+                      ];
+                      this.setState({
+                        graph_mode: name_of_next_graph_mode,
+                      });
+                    }}
+                  >
+                    {text_maker("toggle_graph")}
+                  </button>
+                )
+              }
+            />
+          </div>
+        )}
         <div
           className={classNames(
             `fcol-xs-12 fcol-md-${graph_col_full_size}`,

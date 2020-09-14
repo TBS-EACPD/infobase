@@ -7,15 +7,17 @@ import {
   create_text_maker_component,
   StdPanel,
   Col,
-  A11yTable,
   declare_panel,
+  util_components,
 } from "../shared.js";
 
 import text from "./employee_prov.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
+const { SmartDisplayTable } = util_components;
 
 const { people_years } = year_templates;
+const years = _.map(people_years, (y) => run_template(y));
 const formatter = formats["big_int_raw"];
 
 const { provinces } = businessConstants;
@@ -25,27 +27,28 @@ const prepare_data_for_a11y_table = (data) => {
     .map((row) => d3.sum(_.values(row)))
     .reduce((sum, value) => sum + value, 0)
     .value();
-
-  return _.chain(provinces)
+  const table_data = _.chain(provinces)
     .map((val, key) => ({ key, label: val.text }))
     .reject(({ key }) => _.includes(["qclessncr", "onlessncr"], key))
     .map((province) => {
       const yearly_headcounts = _.map(data, (row) => row[province.key]);
-
+      const zipped_data = _.chain(years)
+        .zip(yearly_headcounts)
+        .fromPairs()
+        .value();
       const five_year_avg_share =
         d3.sum(yearly_headcounts) / all_year_headcount_total;
-      const formated_avg_share =
-        five_year_avg_share > 0
-          ? formats["percentage1_raw"](five_year_avg_share)
-          : undefined;
-
-      return {
-        label: province.label,
-        data: [...yearly_headcounts, formated_avg_share],
-      };
+      return (
+        five_year_avg_share !== 0 && {
+          label: province.label,
+          five_year_avg_share,
+          ...zipped_data,
+        }
+      );
     })
-    .filter((row) => _.some(row.data, (data) => !_.isUndefined(data)))
+    .filter()
     .value();
+  return table_data;
 };
 
 class ProvPanel extends React.Component {
@@ -76,12 +79,30 @@ class ProvPanel extends React.Component {
         )}
         {window.is_a11y_mode && (
           <Col size={12} isGraph>
-            <A11yTable
-              label_col_header={text_maker("prov")}
-              data_col_headers={[
-                ..._.map(people_years, (y) => run_template(y)),
-                text_maker("five_year_percent_header"),
-              ]}
+            <SmartDisplayTable
+              column_configs={{
+                label: {
+                  index: 0,
+                  header: text_maker("prov"),
+                  is_searchable: true,
+                },
+                five_year_avg_share: {
+                  index: years.length + 1,
+                  header: text_maker("five_year_percent_header"),
+                  formatter: "percentage1",
+                },
+                ..._.chain(years)
+                  .map((year, idx) => [
+                    year,
+                    {
+                      index: idx + 1,
+                      header: year,
+                      formatter: "big_int",
+                    },
+                  ])
+                  .fromPairs()
+                  .value(),
+              }}
               data={prepare_data_for_a11y_table(data)}
             />
           </Col>
