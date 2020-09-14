@@ -7,6 +7,7 @@ import {
   Panel,
   SpinnerWrapper,
   StatelessModal,
+  WriteToClipboard,
 } from "../../../components/index.js";
 
 import { Indicator } from "../../../models/results.js";
@@ -14,6 +15,8 @@ import { Indicator } from "../../../models/results.js";
 import { IndicatorDisplay } from "./result_components.js";
 import { text_maker } from "./result_text_provider.js";
 import { Fragment } from "react";
+import { withRouter } from "react-router";
+import { IconCopyLink } from "../../../icons/icons.js";
 
 const indicators_fields_fragment = `  id
   stable_id
@@ -98,10 +101,25 @@ const query_api = (id) => {
     });
 };
 
-export default class IndicatorModalButton extends React.Component {
+class IndicatorModalButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = { loading: true, show_modal: false };
+
+    const {
+      location: { search },
+      id,
+    } = this.props;
+
+    const query = new URLSearchParams(search).get("ind");
+
+    this.buttonRef = query === id ? React.createRef() : null;
+  }
+
+  componentDidMount() {
+    if (this.buttonRef) {
+      this.buttonRef.current.click();
+    }
   }
 
   componentDidUpdate() {
@@ -114,15 +132,27 @@ export default class IndicatorModalButton extends React.Component {
   }
 
   render() {
-    const { id } = this.props;
+    const {
+      id,
+      match: {
+        params: { subject_id },
+      },
+    } = this.props;
 
     const { loading } = this.state;
 
     const indicator = Indicator.lookup(id);
 
+    const modal_link = _.replace(
+      window.location.href,
+      window.location.hash,
+      `#orgs/dept/${subject_id}/infograph/results?ind=${id}`
+    );
+
     return (
       <Fragment>
         <button
+          ref={this.buttonRef}
           className="btn-link"
           onClick={() => this.setState({ show_modal: true })}
           aria-label={`Discover more about ${indicator.name}`}
@@ -136,7 +166,19 @@ export default class IndicatorModalButton extends React.Component {
             loading ? (
               <SpinnerWrapper ref="spinner" config_name={"sub_route"} />
             ) : (
-              <Panel title={indicator.name}>
+              <Panel
+                title={indicator.name}
+                otherHeaderContent={
+                  <div style={{ marginLeft: "auto" }}>
+                    <WriteToClipboard
+                      text_to_copy={modal_link}
+                      button_class_name={"panel-heading-utils"}
+                      button_description={"test"}
+                      IconComponent={IconCopyLink}
+                    />
+                  </div>
+                }
+              >
                 <IndicatorDisplay indicator={indicator} show_doc={true} />
               </Panel>
             )
@@ -148,3 +190,5 @@ export default class IndicatorModalButton extends React.Component {
     );
   }
 }
+
+export default withRouter(IndicatorModalButton);
