@@ -1,7 +1,8 @@
 {
   "plugins": [
     "react",
-    "import"
+    "import",
+    "lodash"
   ],
   "parser": "babel-eslint",
   "parserOptions": {
@@ -27,6 +28,10 @@
       "react/display-name": [ "off" ],
       "react/no-find-dom-node": [ "off" ],
       "react/no-children-prop": [ "off" ],
+      "lodash/collection-return": ["error"],
+      "lodash/no-double-unwrap": ["error"],
+      "lodash/no-unbound-this": ["error"],
+      "lodash/unwrap": ["error"],
     "import/order": [
       "warn", { 
         "newlines-between": "always-and-inside-groups",
@@ -76,6 +81,9 @@
       "node": {
         "moduleDirectory": ["./","node_modules/"]
       }
+    },
+    "lodash": {
+      "pragma": "_"
     }
   },
   "globals": {
