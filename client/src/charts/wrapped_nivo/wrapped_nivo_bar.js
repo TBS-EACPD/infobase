@@ -88,7 +88,7 @@ export class WrappedNivoBar extends React.Component {
     } = this.props;
 
     const table =
-      !disable_table_view &&
+      (window.is_a11y_mode || !disable_table_view) &&
       (custom_table ||
         bar_table(
           data,
@@ -203,7 +203,7 @@ export class WrappedNivoHBar extends React.Component {
     } = this.props;
 
     const table =
-      !disable_table_view &&
+      (window.is_a11y_mode || !disable_table_view) &&
       bar_table(
         data,
         keys,

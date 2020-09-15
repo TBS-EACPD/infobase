@@ -131,7 +131,9 @@ export class WrappedNivoLine extends React.Component {
       );
     };
 
-    const table = !disable_table_view && (custom_table || get_table());
+    const table =
+      (window.is_a11y_mode || !disable_table_view) &&
+      (custom_table || get_table());
 
     const zoom_button =
       !disable_y_axis_zoom && !enableArea ? (
