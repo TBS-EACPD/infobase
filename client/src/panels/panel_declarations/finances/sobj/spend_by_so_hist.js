@@ -6,7 +6,6 @@ import {
   InfographicPanel,
   StandardLegend,
   SelectAllControl,
-  A11yTable,
   run_template,
   WrappedNivoLine,
   newIBLightCategoryColors,
@@ -18,7 +17,44 @@ import { text_maker, TM } from "./sobj_text_provider.js";
 
 const { sos } = businessConstants;
 const { std_years } = year_templates;
-const { Format, SmartDisplayTable } = util_components;
+const { SmartDisplayTable } = util_components;
+
+const years = _.map(std_years, run_template);
+
+const get_custom_table = (data, active_sobjs) => {
+  const custom_table_data = _.chain(data)
+    .filter(({ label }) => _.includes(active_sobjs, label))
+    .map(({ label, data }) => ({
+      label: label,
+      ..._.chain().zip(years, data).fromPairs().value(),
+    }))
+    .value();
+  const column_configs = {
+    label: {
+      index: 0,
+      header: text_maker("sos"),
+      is_searchable: true,
+    },
+    ..._.chain(years)
+      .map((year, idx) => [
+        year,
+        {
+          index: idx + 1,
+          header: year,
+          is_summable: true,
+          formatter: "dollar",
+        },
+      ])
+      .fromPairs()
+      .value(),
+  };
+  return (
+    <SmartDisplayTable
+      data={custom_table_data}
+      column_configs={column_configs}
+    />
+  );
+};
 
 class SobjLine extends React.Component {
   constructor(props) {
@@ -53,7 +89,6 @@ class SobjLine extends React.Component {
 
     const raw_data = _.flatMap(graph_series, (value) => value);
 
-    const years = _.map(std_years, run_template);
     const spending_data = _.map(
       graph_series,
       (spending_array, spending_label) => ({
@@ -64,32 +99,6 @@ class SobjLine extends React.Component {
         })),
       })
     );
-    const custom_table_data = _.chain(data)
-      .filter(({ label }) => _.includes(active_sobjs, label))
-      .map(({ label, data }) => ({
-        label: label,
-        ..._.chain().zip(years, data).fromPairs().value(),
-      }))
-      .value();
-    const column_configs = {
-      label: {
-        index: 0,
-        header: text_maker("sos"),
-        is_searchable: true,
-      },
-      ..._.chain(years)
-        .map((year, idx) => [
-          year,
-          {
-            index: idx + 1,
-            header: year,
-            is_summable: true,
-            formatter: "dollar",
-          },
-        ])
-        .fromPairs()
-        .value(),
-    };
 
     const get_line_graph = (() => {
       const is_data_empty = _.isEmpty(spending_data) && _.isEmpty(raw_data);
@@ -124,12 +133,7 @@ class SobjLine extends React.Component {
         },
         graph_height: "500px",
         colorBy: (d) => colors(d.id),
-        custom_table: (
-          <SmartDisplayTable
-            data={custom_table_data}
-            column_configs={column_configs}
-          />
-        ),
+        custom_table: get_custom_table(data, active_sobjs),
         ...empty_data_nivo_props,
       };
 
@@ -185,41 +189,25 @@ export const declare_spend_by_so_hist_panel = () =>
       info_deps: ["orgSobjs_dept_info", "orgSobjs_gov_info"],
       calculate(subject, info) {
         const { orgSobjs } = this.tables;
-        return {
-          data: _.chain(sos)
-            .sortBy((sobj) => sobj.so_num)
-            .map((sobj) => ({
-              label: sobj.text,
-              data: std_years.map(
-                (year) => orgSobjs.so_num(year, subject)[sobj.so_num]
-              ),
-            }))
-            .filter((d) => d3.sum(d.data))
-            .value(),
-          ticks: _.map(std_years, run_template),
-        };
+        return _.chain(sos)
+          .sortBy((sobj) => sobj.so_num)
+          .map((sobj) => ({
+            label: sobj.text,
+            data: std_years.map(
+              (year) => orgSobjs.so_num(year, subject)[sobj.so_num]
+            ),
+          }))
+          .filter((d) => d3.sum(d.data))
+          .value();
       },
       render({ calculations, footnotes, sources }) {
         const { panel_args, info } = calculations;
-        const { ticks, data } = panel_args;
 
         const graph_content = (() => {
           if (window.is_a11y_mode) {
-            return (
-              <A11yTable
-                data={_.map(data, ({ label, data }) => ({
-                  label,
-                  /* eslint-disable react/jsx-key */
-                  data: data.map((amt) => (
-                    <Format type="compact1_written" content={amt} />
-                  )),
-                }))}
-                label_col_header={text_maker("so")}
-                data_col_headers={ticks}
-              />
-            );
+            return get_custom_table(panel_args, _.map(panel_args, "label"));
           } else {
-            return <SobjLine data={data} />;
+            return <SobjLine data={panel_args} />;
           }
         })();
 

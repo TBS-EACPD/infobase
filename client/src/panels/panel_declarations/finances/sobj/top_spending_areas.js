@@ -1,10 +1,6 @@
 import {
-  util_components,
-  run_template,
-  year_templates,
   StdPanel,
   Col,
-  A11yTable,
   create_text_maker_component,
   table_common,
   declare_panel,
@@ -13,11 +9,7 @@ import {
 
 import text from "./top_spending_areas.yaml";
 
-
 const { is_non_revenue, collapse_by_so } = table_common;
-
-const { std_years } = year_templates;
-const { Format } = util_components;
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -50,7 +42,6 @@ const render_w_options = ({ text_key }) => ({
   sources,
 }) => {
   const { panel_args, info } = calculations;
-  const { top_3_sos_and_remainder } = panel_args;
 
   const graph_data = panel_args.map((d) => ({
     label: d["label"],
@@ -67,22 +58,7 @@ const render_w_options = ({ text_key }) => ({
         <TM k={text_key} args={info} />
       </Col>
       <Col isGraph={!window.is_a11y_mode} size={7}>
-        {window.is_a11y_mode ? (
-          <A11yTable
-            {...{
-              data: _.map(top_3_sos_and_remainder, ({ label, value }) => ({
-                label,
-                data: <Format type="compact1_written" content={value} />,
-              })),
-              label_col_header: text_maker("so"),
-              data_col_headers: [
-                `${run_template(_.last(std_years))} ${text_maker("spending")}`,
-              ],
-            }}
-          />
-        ) : (
-          <WrappedNivoPie data={graph_data} graph_height="450px" />
-        )}
+        <WrappedNivoPie data={graph_data} graph_height="450px" />
       </Col>
     </StdPanel>
   );

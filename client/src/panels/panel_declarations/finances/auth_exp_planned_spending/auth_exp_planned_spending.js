@@ -6,7 +6,6 @@ import {
   year_templates,
   actual_to_planned_gap_year,
   StandardLegend,
-  A11yTable,
   StdPanel,
   Col,
   create_text_maker_component,
@@ -28,22 +27,6 @@ const auth_cols = _.map(std_years, (yr) => `${yr}auth`);
 const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
 
 const include_verbose_gap_year_explanation = false;
-
-const AuthExpPlannedSpendingTable = ({ data_series }) => {
-  const all_years = _.chain(data_series).flatMap("years").uniq().value();
-
-  const series_labels = _.map(data_series, "label");
-
-  const data = _.map(all_years, (year) => ({
-    label: year,
-    data: _.map(data_series, ({ years, values }) => {
-      const current_year_index = _.indexOf(years, year);
-      return current_year_index === -1 ? null : values[current_year_index];
-    }),
-  }));
-
-  return <A11yTable data_col_headers={series_labels} data={data} />;
-};
 
 const get_auth_exp_diff = ([larger_data_point, smaller_data_point]) =>
   Math.abs(larger_data_point.data.y - smaller_data_point.data.y);
@@ -249,23 +232,26 @@ class AuthExpPlannedSpendingGraph extends React.Component {
     return (
       <Fragment>
         <div style={{ padding: "10px 25px 0px 97px" }} aria-hidden={true}>
-          <StandardLegend
-            isHorizontal={true}
-            items={legend_items}
-            onClick={(label) => {
-              const key_corresponding_to_label = _.find(data_series, { label })
-                .key;
+          {!window.is_a11y_mode && (
+            <StandardLegend
+              isHorizontal={true}
+              items={legend_items}
+              onClick={(label) => {
+                const key_corresponding_to_label = _.find(data_series, {
+                  label,
+                }).key;
 
-              this.setState({
-                active_series: {
-                  ...active_series,
-                  [key_corresponding_to_label]:
-                    !active_series[key_corresponding_to_label] ||
-                    !has_multiple_active_series,
-                },
-              });
-            }}
-          />
+                this.setState({
+                  active_series: {
+                    ...active_series,
+                    [key_corresponding_to_label]:
+                      !active_series[key_corresponding_to_label] ||
+                      !has_multiple_active_series,
+                  },
+                });
+              }}
+            />
+          )}
         </div>
 
         <GraphOverlay>
@@ -305,14 +291,10 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
         )}
       </Col>
       <Col size={8} isGraph>
-        {window.is_a11y_mode ? (
-          <AuthExpPlannedSpendingTable data_series={data_series} />
-        ) : (
-          <AuthExpPlannedSpendingGraph
-            data_series={data_series}
-            gap_year={additional_info.gap_year}
-          />
-        )}
+        <AuthExpPlannedSpendingGraph
+          data_series={data_series}
+          gap_year={additional_info.gap_year}
+        />
       </Col>
     </StdPanel>
   );

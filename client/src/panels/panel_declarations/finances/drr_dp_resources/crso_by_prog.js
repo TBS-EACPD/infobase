@@ -2,8 +2,6 @@ import {
   WrappedNivoBar,
   year_templates,
   StandardLegend,
-  A11yTable,
-  util_components,
   run_template,
   InfographicPanel,
   create_text_maker_component,
@@ -14,10 +12,7 @@ import {
 
 import text from "./crso_by_prog.yaml";
 
-const { Format } = util_components;
-
 const { planning_years } = year_templates;
-
 const { text_maker, TM } = create_text_maker_component(text);
 
 const render_resource_type = (is_fte) => ({ calculations, footnotes }) => {
@@ -82,8 +77,11 @@ const render_resource_type = (is_fte) => ({ calculations, footnotes }) => {
 class PlannedProgramResources extends React.Component {
   constructor(props) {
     super(props);
+    const program_labels = _.map(props.programs, "label");
     this.state = {
-      active_programs: _.chain(props.programs).map("label").take(3).value(),
+      active_programs: window.is_a11y_mode
+        ? program_labels
+        : _.take(program_labels, 3),
     };
   }
   render() {
@@ -92,36 +90,6 @@ class PlannedProgramResources extends React.Component {
     const ticks = _.map(planning_years, run_template);
 
     const { active_programs } = this.state;
-
-    if (window.is_a11y_mode) {
-      return (
-        <div>
-          <div className="medium_panel_text mrgn-bttm-lg">{text}</div>
-          <div>
-            <A11yTable
-              label_col_header={text_maker("program")}
-              data_col_headers={_.map(
-                ticks,
-                (tick) =>
-                  `${tick} ${
-                    is_fte ? text_maker("ftes") : text_maker("spending")
-                  }`
-              )}
-              data={programs.map(({ data, label }) => ({
-                label,
-                /* eslint-disable react/jsx-key */
-                data: data.map((amt) => (
-                  <Format
-                    type={is_fte ? "big_int" : "compact1_written"}
-                    content={amt}
-                  />
-                )),
-              }))}
-            />
-          </div>
-        </div>
-      );
-    }
 
     const graph_data = _.chain(programs)
       .filter(({ label }) => _.includes(active_programs, label))
@@ -143,24 +111,26 @@ class PlannedProgramResources extends React.Component {
       <div>
         <div className="medium_panel_text mrgn-bttm-lg">{text}</div>
         <div className="frow">
-          <div className="fcol-md-4" style={{ width: "100%" }}>
-            <StandardLegend
-              items={_.map(programs, ({ label }) => ({
-                label,
-                id: label,
-                active: _.includes(active_programs, label),
-                color: colors(label),
-              }))}
-              onClick={(id) => {
-                !(
-                  active_programs.length === 1 && active_programs.includes(id)
-                ) &&
-                  this.setState({
-                    active_programs: _.toggle_list(active_programs, id),
-                  });
-              }}
-            />
-          </div>
+          {!window.is_a11y_mode && (
+            <div className="fcol-md-4" style={{ width: "100%" }}>
+              <StandardLegend
+                items={_.map(programs, ({ label }) => ({
+                  label,
+                  id: label,
+                  active: _.includes(active_programs, label),
+                  color: colors(label),
+                }))}
+                onClick={(id) => {
+                  !(
+                    active_programs.length === 1 && active_programs.includes(id)
+                  ) &&
+                    this.setState({
+                      active_programs: _.toggle_list(active_programs, id),
+                    });
+                }}
+              />
+            </div>
+          )}
           <div className="fcol-md-8">
             <WrappedNivoBar
               data={data_by_year}

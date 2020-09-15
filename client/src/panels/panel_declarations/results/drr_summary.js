@@ -4,13 +4,13 @@ import { Fragment } from "react";
 import { IconArray } from "../../../charts/IconArray.js";
 import {
   StandardLegend,
-  A11yTable,
   InfographicPanel,
   businessConstants,
   get_source_links,
   Results,
   declare_panel,
   WrappedNivoPie,
+  util_components,
 } from "../shared.js";
 
 import { TM, text_maker } from "./drr_summary_text.js";
@@ -28,6 +28,7 @@ import {
 import "./drr_summary.scss";
 
 const { result_simple_statuses } = businessConstants;
+const { SmartDisplayTable } = util_components;
 const { current_drr_key, result_docs } = Results;
 
 const current_drr_year = result_docs[current_drr_key].year;
@@ -130,22 +131,28 @@ const StatusGrid = (props) => {
     .sortBy("order")
     .value();
 
-  const a11y_data = is_a11y_mode && {
-    label_col_header: text_maker("status"),
-    data: _.map(data, ({ status_key, real_count }) => ({
-      label: result_simple_statuses[status_key].text,
-      data: [real_count],
-    })),
-    data_col_headers: [
-      text_maker("results_icon_array_title", { year: current_drr_year }),
-    ],
-  };
-
   if (is_a11y_mode) {
+    const a11y_data = _.map(data, ({ status_key, real_count }) => ({
+      label: result_simple_statuses[status_key].text,
+      real_count,
+    }));
     return (
-      <div>
-        <A11yTable {...a11y_data} />
-      </div>
+      <SmartDisplayTable
+        data={a11y_data}
+        column_configs={{
+          label: {
+            index: 0,
+            header: text_maker("status"),
+          },
+          real_count: {
+            index: 1,
+            formatter: "big_int",
+            header: text_maker("results_icon_array_title", {
+              year: current_drr_year,
+            }),
+          },
+        }}
+      />
     );
   }
 
@@ -193,7 +200,8 @@ class PercentageViz extends React.Component {
       .value();
 
     const default_selected =
-      _.reject(present_ids, (value, key) => key === "future").length > 0
+      _.reject(present_ids, (value, key) => key === "future").length > 0 &&
+      !window.is_a11y_mode
         ? _.without(all_ids, "future")
         : all_ids;
 
@@ -245,22 +253,24 @@ class PercentageViz extends React.Component {
               justifyContent: "space-evenly",
             }}
           >
-            <StandardLegend
-              items={_.chain(all_data)
-                .map(({ label, id }) => ({
-                  label: label,
-                  active: _.includes(selected, id),
-                  id,
-                  color: result_color_scale(id),
-                }))
-                .value()}
-              onClick={(id) => {
-                !(selected.length === 1 && selected.includes(id)) &&
-                  this.setState({
-                    selected: _.toggle_list(selected, id),
-                  });
-              }}
-            />
+            {!window.is_a11y_mode && (
+              <StandardLegend
+                items={_.chain(all_data)
+                  .map(({ label, id }) => ({
+                    label: label,
+                    active: _.includes(selected, id),
+                    id,
+                    color: result_color_scale(id),
+                  }))
+                  .value()}
+                onClick={(id) => {
+                  !(selected.length === 1 && selected.includes(id)) &&
+                    this.setState({
+                      selected: _.toggle_list(selected, id),
+                    });
+                }}
+              />
+            )}
             <div
               className="standard-legend-container"
               style={{ margin: "5px 0px" }}

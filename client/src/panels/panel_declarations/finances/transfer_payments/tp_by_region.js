@@ -1,9 +1,11 @@
-
 import { Fragment } from "react";
 
-
 import { Canada } from "../../../../charts/canada/index.js";
-import { SpinnerWrapper, TabbedContent } from "../../../../components/index.js";
+import {
+  SpinnerWrapper,
+  TabbedContent,
+  SmartDisplayTable,
+} from "../../../../components/index.js";
 import { get_static_url, make_request } from "../../../../request_utils.js";
 import {
   formats,
@@ -14,7 +16,6 @@ import {
   create_text_maker_component,
   StdPanel,
   Col,
-  A11yTable,
 } from "../../shared.js";
 
 import text from "./tp_by_region.yaml";
@@ -132,43 +133,6 @@ const TransferPaymentsByRegionGraph = ({ data }) => (
   />
 );
 
-const format_data_for_a11y_table = (data, is_per_capita) =>
-  _.chain(data)
-    .flatMap(_.keys)
-    .uniq()
-    .map((prov_code) => {
-      const formatted_data = _.map(data, (row) => {
-        const formatted_value = formats["compact2_written_raw"](
-          row[prov_code] || 0
-        );
-
-        if (is_per_capita) {
-          return `${formatted_value} ${text_maker("per_capita")}`;
-        } else {
-          return formatted_value;
-        }
-      });
-
-      return {
-        label: provinces[prov_code].text,
-        data: formatted_data,
-      };
-    })
-    .filter("data")
-    .value();
-const TransferPaymentsByRegionA11yTable = ({
-  table_name,
-  data,
-  is_per_capita,
-}) => (
-  <A11yTable
-    table_name={table_name}
-    label_col_header={text_maker("geo_region")}
-    data_col_headers={_.map(std_years, run_template)}
-    data={format_data_for_a11y_table(data, is_per_capita)}
-  />
-);
-
 class TPMap extends React.Component {
   constructor(props) {
     super(props);
@@ -230,6 +194,33 @@ class TPMap extends React.Component {
         transfer_payments_by_prov
       );
       const per_capita_data = group_prov_data_by_year(per_capita_by_prov);
+      const format_a11y_data = (data) =>
+        _.map(data, (prov_data, prov_code) => ({
+          prov: provinces[prov_code].text,
+          ..._.chain(std_years).zip(prov_data).fromPairs().value(),
+        }));
+
+      const get_column_configs = (is_per_capita) => ({
+        prov: {
+          index: 0,
+          is_searchable: true,
+          header: text_maker("geo_region"),
+        },
+        ..._.chain(std_years)
+          .map((yr, idx) => [
+            yr,
+            {
+              index: idx + 1,
+              header: run_template(yr),
+              formatter: (value) =>
+                is_per_capita
+                  ? `${formatter(value)} ${text_maker("per_capita")}`
+                  : formatter(value),
+            },
+          ])
+          .fromPairs()
+          .value(),
+      });
 
       const text_args = get_text_args(
         subject,
@@ -275,14 +266,13 @@ class TPMap extends React.Component {
             )}
             {window.is_a11y_mode && (
               <Fragment>
-                <TransferPaymentsByRegionA11yTable
-                  table_name={text_maker("transfer_payments")}
-                  data={transfer_payment_data}
+                <SmartDisplayTable
+                  column_configs={get_column_configs(false)}
+                  data={format_a11y_data(transfer_payments_by_prov)}
                 />
-                <TransferPaymentsByRegionA11yTable
-                  table_name={text_maker("transfer_payments_per_capita")}
-                  data={per_capita_data}
-                  is_per_capita={true}
+                <SmartDisplayTable
+                  column_configs={get_column_configs(true)}
+                  data={format_a11y_data(per_capita_by_prov)}
                 />
               </Fragment>
             )}
