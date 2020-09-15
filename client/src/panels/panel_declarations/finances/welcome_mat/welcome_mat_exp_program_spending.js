@@ -5,11 +5,9 @@ import {
   run_template,
   year_templates,
   actual_to_planned_gap_year,
-  A11yTable,
   trivial_text_maker,
   WrappedNivoLine,
   newIBCategoryColors,
-  formatter,
   Table,
 } from "../../shared.js";
 
@@ -65,145 +63,113 @@ export const format_and_get_exp_program_spending = (type, subject) => {
   const gap_year =
     (subject.has_planned_spending && actual_to_planned_gap_year) || null;
 
-  let exp_program_spending_graph;
-  if (window.is_a11y_mode) {
-    const historical_data = _.chain(exp)
-      .map((exp_value, year_index) => ({
-        label: history_ticks[year_index],
-        data: [formatter("compact1_written", exp_value, { raw: true }), null],
-      }))
-      .filter((d) => d.data[0] != "0")
-      .value();
-
-    const planning_data = _.map(
-      progSpending,
-      (progSpending_value, year_index) => ({
-        label: plan_ticks[year_index],
-        data: [
-          null,
-          formatter("compact1_written", progSpending_value, { raw: true }),
-        ],
+  const zip_years_and_data = (years, data) =>
+    _.chain(years)
+      .map((year, year_ix) => {
+        if (data) {
+          return {
+            x: year,
+            y: data[year_ix],
+          };
+        }
       })
-    );
-
-    const data = _.concat(historical_data, planning_data);
-
-    exp_program_spending_graph = (
-      <A11yTable data_col_headers={series_labels} data={data} />
-    );
-  } else {
-    const zip_years_and_data = (years, data) =>
-      _.chain(years)
-        .map((year, year_ix) => {
-          if (data) {
-            return {
-              x: year,
-              y: data[year_ix],
-            };
-          }
-        })
-        .filter((row) => {
-          if (years === history_ticks) {
-            return row && row.y > 0;
-          } else {
-            return true;
-          }
-        })
-        .value();
-    const graph_data = _.chain(series_labels)
-      .zip([
-        zip_years_and_data(history_ticks, exp),
-        _.compact([
-          gap_year &&
-            both_exists && {
-              x: gap_year,
-              y: null,
-            },
-          ...zip_years_and_data(plan_ticks, progSpending),
-        ]),
-      ])
-      .filter((row) => !_.isNull(row[0]))
-      .map(([id, data]) => ({ id, data }))
+      .filter((row) => {
+        if (years === history_ticks) {
+          return row && row.y > 0;
+        } else {
+          return true;
+        }
+      })
       .value();
+  const graph_data = _.chain(series_labels)
+    .zip([
+      zip_years_and_data(history_ticks, exp),
+      _.compact([
+        gap_year &&
+          both_exists && {
+            x: gap_year,
+            y: null,
+          },
+        ...zip_years_and_data(plan_ticks, progSpending),
+      ]),
+    ])
+    .filter((row) => !_.isNull(row[0]))
+    .map(([id, data]) => ({ id, data }))
+    .value();
 
-    const shouldTickRender = (tick) => {
-      if (type === "hist" || type === "hist_estimates") {
-        return (
-          tick === _.first(history_ticks) || tick === _.last(history_ticks)
-        );
-      } else if (type === "planned") {
-        return tick === _.first(plan_ticks) || tick === _.last(plan_ticks);
-      } else {
-        return (
-          tick === gap_year ||
-          tick === _.first(history_ticks) ||
-          tick === _.last(plan_ticks)
-        );
-      }
-    };
+  const shouldTickRender = (tick) => {
+    if (type === "hist" || type === "hist_estimates") {
+      return tick === _.first(history_ticks) || tick === _.last(history_ticks);
+    } else if (type === "planned") {
+      return tick === _.first(plan_ticks) || tick === _.last(plan_ticks);
+    } else {
+      return (
+        tick === gap_year ||
+        tick === _.first(history_ticks) ||
+        tick === _.last(plan_ticks)
+      );
+    }
+  };
 
-    const nivo_exp_program_spending_props = {
-      raw_data: raw_data,
-      data: graph_data,
-      colorBy: (d) => colors(d.id),
-      enableGridY: false,
-      remove_left_axis: true,
-      disable_y_axis_zoom: true,
-      disable_table_view: true,
-      y_scale_min: _.min(raw_data) * 0.9,
-      y_scale_max: _.max(raw_data) * 1.1,
-      legends: [
-        {
-          anchor: "bottom-right",
-          direction: "row",
-          translateX: -80,
-          translateY: 60,
-          itemDirection: "left-to-right",
-          itemWidth: 2,
-          itemHeight: 20,
-          itemsSpacing: 160,
-          itemOpacity: 0.75,
-          symbolSize: 12,
-        },
-      ],
-      margin: {
-        top: 10,
-        right: 40,
-        bottom: 70,
-        left: 40,
+  const nivo_exp_program_spending_props = {
+    raw_data: raw_data,
+    data: graph_data,
+    colorBy: (d) => colors(d.id),
+    enableGridY: false,
+    remove_left_axis: true,
+    disable_y_axis_zoom: true,
+    disable_table_view: true,
+    y_scale_min: _.min(raw_data) * 0.9,
+    y_scale_max: _.max(raw_data) * 1.1,
+    legends: [
+      {
+        anchor: "bottom-right",
+        direction: "row",
+        translateX: -80,
+        translateY: 60,
+        itemDirection: "left-to-right",
+        itemWidth: 2,
+        itemHeight: 20,
+        itemsSpacing: 160,
+        itemOpacity: 0.75,
+        symbolSize: 12,
       },
-      graph_height: "230px",
-      ...(gap_year &&
-        both_exists &&
-        _.includes(series_labels, trivial_text_maker("planned_spending")) && {
-          markers: [
-            {
-              axis: "x",
-              value: gap_year,
-              lineStyle: {
-                stroke: window.infobase_color_constants.tertiaryColor,
-                strokeWidth: 2,
-                strokeDasharray: "3, 3",
-              },
+    ],
+    margin: {
+      top: 10,
+      right: 40,
+      bottom: 70,
+      left: 40,
+    },
+    graph_height: "230px",
+    ...(gap_year &&
+      both_exists &&
+      _.includes(series_labels, trivial_text_maker("planned_spending")) && {
+        markers: [
+          {
+            axis: "x",
+            value: gap_year,
+            lineStyle: {
+              stroke: window.infobase_color_constants.tertiaryColor,
+              strokeWidth: 2,
+              strokeDasharray: "3, 3",
             },
-          ],
-        }),
-    };
-    const nivo_mobile_exp_program_spending_props = {
-      ...nivo_exp_program_spending_props,
-      bttm_axis: { format: (tick) => (shouldTickRender(tick) ? tick : "") },
-    };
-
-    exp_program_spending_graph = (
-      <Fragment>
-        <MediaQuery minWidth={1199}>
-          <WrappedNivoLine {...nivo_exp_program_spending_props} />
-        </MediaQuery>
-        <MediaQuery maxWidth={1198}>
-          <WrappedNivoLine {...nivo_mobile_exp_program_spending_props} />
-        </MediaQuery>
-      </Fragment>
-    );
-  }
-  return exp_program_spending_graph;
+          },
+        ],
+      }),
+  };
+  const nivo_mobile_exp_program_spending_props = {
+    ...nivo_exp_program_spending_props,
+    bttm_axis: { format: (tick) => (shouldTickRender(tick) ? tick : "") },
+  };
+  return (
+    <Fragment>
+      <MediaQuery minWidth={1199}>
+        <WrappedNivoLine {...nivo_exp_program_spending_props} />
+      </MediaQuery>
+      <MediaQuery maxWidth={1198}>
+        <WrappedNivoLine {...nivo_mobile_exp_program_spending_props} />
+      </MediaQuery>
+    </Fragment>
+  );
 };

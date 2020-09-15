@@ -20,10 +20,6 @@ gov_transfer_payments:
   en: Government transfer payment spending
   fr: Dépenses gouvernementales en paiements de transfert
 
-transfer_payment_type:
-  en: Transfer Payment Type
-  fr: Type de paiements de transfert
-
 payment:
   en: Payment
   fr: Paiment

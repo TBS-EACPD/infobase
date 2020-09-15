@@ -5,10 +5,8 @@ import {
   run_template,
   year_templates,
   actual_to_planned_gap_year,
-  A11yTable,
   WrappedNivoLine,
   newIBCategoryColors,
-  formatter,
   trivial_text_maker,
 } from "../../shared.js";
 
@@ -39,183 +37,121 @@ export const format_and_get_fte = (type, info, subject) => {
     0 !=
     _.reduce(planned_data_index, (fte_sum, index) => fte_sum + info[index], 0);
 
-  let fte_graph;
+  const raw_data = _.concat(
+    _.map(history_data_index, (idx) => info[idx]),
+    _.map(planned_data_index, (idx) => info[idx])
+  );
 
-  if (window.is_a11y_mode) {
-    const history_a11y_data = _.zipWith(
-      history_ticks,
-      history_data_index,
-      (year, idx) => ({
-        label: year,
-        data: info[idx],
+  const prepare_graph_data = (data, data_index, years) =>
+    _.chain(data_index)
+      .zipWith(years, data_index, (idx, year) => ({
+        x: year,
+        y: data[idx],
+      }))
+      .pickBy((prepared_row) => {
+        if (years === history_ticks) {
+          return prepared_row.y > 0;
+        } else {
+          return true;
+        }
       })
-    );
-    const planned_a11y_data = _.zipWith(
-      plan_ticks,
-      planned_data_index,
-      (year, idx) => ({
-        label: year,
-        data: info[idx],
-      })
-    );
-
-    const filter_a11y_data = (a11y_data, null_index) =>
-      _.chain(a11y_data)
-        .map((raw_row) => {
-          const filtered_data = _.chain(raw_row)
-            .filter((value, key) => {
-              if (key === "data") {
-                return value > 0;
-              }
-            })
-            .flatten()
-            .value();
-          const formatted_data = formatter("big_int", filtered_data, {
-            raw: true,
-          });
-          formatted_data.length > 0
-            ? formatted_data.splice(null_index, 0, null)
-            : null;
-          return {
-            label: raw_row.label,
-            data: formatted_data,
-          };
-        })
-        .filter(
-          (formatted_and_filtered_row) =>
-            formatted_and_filtered_row.data.length > 0
-        )
-        .value();
-
-    const filtered_history_a11y_data = filter_a11y_data(history_a11y_data, 1);
-    const filtered_planned_a11y_data = filter_a11y_data(planned_a11y_data, 0);
-    fte_graph = (
-      <A11yTable
-        data_col_headers={series_labels}
-        data={_.concat(filtered_history_a11y_data, filtered_planned_a11y_data)}
-      />
-    );
-  } else {
-    const raw_data = _.concat(
-      _.map(history_data_index, (idx) => info[idx]),
-      _.map(planned_data_index, (idx) => info[idx])
-    );
-
-    const prepare_graph_data = (data, data_index, years) =>
-      _.chain(data_index)
-        .zipWith(years, data_index, (idx, year) => ({
-          x: year,
-          y: data[idx],
-        }))
-        .pickBy((prepared_row) => {
-          if (years === history_ticks) {
-            return prepared_row.y > 0;
-          } else {
-            return true;
-          }
-        })
-        .map((filtered_row) => filtered_row)
-        .value();
-
-    const historical_graph_data = prepare_graph_data(
-      info,
-      history_data_index,
-      history_ticks
-    );
-    const planned_graph_data =
-      planned_fte_exists &&
-      _.compact([
-        gap_year &&
-          historical_graph_data.length > 0 && {
-            x: gap_year,
-            y: null,
-          },
-        ...prepare_graph_data(info, planned_data_index, plan_ticks),
-      ]);
-    const graph_data = _.chain(series_labels)
-      .zip([historical_graph_data, planned_graph_data])
-      .filter(([id, formatted_data_array]) => formatted_data_array.length > 0)
-      .map(([id, data]) => ({ id, data }))
+      .map((filtered_row) => filtered_row)
       .value();
 
-    const shouldTickRender = (tick) => {
-      if (type === "hist" || type === "hist_estimates") {
-        return (
-          tick === _.first(history_ticks) || tick === _.last(history_ticks)
-        );
-      } else if (type === "planned") {
-        return tick === _.first(plan_ticks) || tick === _.last(plan_ticks);
-      } else {
-        return (
-          tick === gap_year ||
-          tick === _.first(history_ticks) ||
-          tick === _.last(plan_ticks)
-        );
-      }
-    };
-
-    const nivo_fte_props = {
-      data: graph_data,
-      raw_data: raw_data,
-      is_money: false,
-      colorBy: (d) => colors(d.id),
-      enableGridY: false,
-      remove_left_axis: true,
-      disable_y_axis_zoom: true,
-      disable_table_view: true,
-      y_scale_min: _.min(raw_data) * 0.9,
-      y_scale_max: _.max(raw_data) * 1.1,
-      margin: {
-        top: 10,
-        right: 40,
-        bottom: 67,
-        left: 40,
-      },
-      graph_height: "230px",
-      legends: [
-        {
-          anchor: "bottom-right",
-          direction: "row",
-          translateX: -77,
-          translateY: 60,
-          itemDirection: "left-to-right",
-          itemWidth: 2,
-          itemHeight: 20,
-          itemsSpacing: 140,
-          itemOpacity: 0.75,
-          symbolSize: 12,
+  const historical_graph_data = prepare_graph_data(
+    info,
+    history_data_index,
+    history_ticks
+  );
+  const planned_graph_data =
+    planned_fte_exists &&
+    _.compact([
+      gap_year &&
+        historical_graph_data.length > 0 && {
+          x: gap_year,
+          y: null,
         },
-      ],
-      ...(gap_year &&
-        graph_data.length > 1 && {
-          markers: [
-            {
-              axis: "x",
-              value: gap_year,
-              lineStyle: {
-                stroke: window.infobase_color_constants.tertiaryColor,
-                strokeWidth: 2,
-                strokeDasharray: "3, 3",
-              },
-            },
-          ],
-        }),
-    };
-    const nivo_mobile_fte_props = {
-      ...nivo_fte_props,
-      bttm_axis: { format: (tick) => (shouldTickRender(tick) ? tick : "") },
-    };
+      ...prepare_graph_data(info, planned_data_index, plan_ticks),
+    ]);
+  const graph_data = _.chain(series_labels)
+    .zip([historical_graph_data, planned_graph_data])
+    .filter(([id, formatted_data_array]) => formatted_data_array.length > 0)
+    .map(([id, data]) => ({ id, data }))
+    .value();
 
-    fte_graph = (
-      <Fragment>
-        <MediaQuery minWidth={1199}>
-          <WrappedNivoLine {...nivo_fte_props} />
-        </MediaQuery>
-        <MediaQuery maxWidth={1198}>
-          <WrappedNivoLine {...nivo_mobile_fte_props} />
-        </MediaQuery>
-      </Fragment>
-    );
-  }
-  return fte_graph;
+  const shouldTickRender = (tick) => {
+    if (type === "hist" || type === "hist_estimates") {
+      return tick === _.first(history_ticks) || tick === _.last(history_ticks);
+    } else if (type === "planned") {
+      return tick === _.first(plan_ticks) || tick === _.last(plan_ticks);
+    } else {
+      return (
+        tick === gap_year ||
+        tick === _.first(history_ticks) ||
+        tick === _.last(plan_ticks)
+      );
+    }
+  };
+
+  const nivo_fte_props = {
+    data: graph_data,
+    raw_data: raw_data,
+    is_money: false,
+    colorBy: (d) => colors(d.id),
+    enableGridY: false,
+    remove_left_axis: true,
+    disable_y_axis_zoom: true,
+    disable_table_view: true,
+    y_scale_min: _.min(raw_data) * 0.9,
+    y_scale_max: _.max(raw_data) * 1.1,
+    margin: {
+      top: 10,
+      right: 40,
+      bottom: 67,
+      left: 40,
+    },
+    graph_height: "230px",
+    legends: [
+      {
+        anchor: "bottom-right",
+        direction: "row",
+        translateX: -77,
+        translateY: 60,
+        itemDirection: "left-to-right",
+        itemWidth: 2,
+        itemHeight: 20,
+        itemsSpacing: 140,
+        itemOpacity: 0.75,
+        symbolSize: 12,
+      },
+    ],
+    ...(gap_year &&
+      graph_data.length > 1 && {
+        markers: [
+          {
+            axis: "x",
+            value: gap_year,
+            lineStyle: {
+              stroke: window.infobase_color_constants.tertiaryColor,
+              strokeWidth: 2,
+              strokeDasharray: "3, 3",
+            },
+          },
+        ],
+      }),
+  };
+  const nivo_mobile_fte_props = {
+    ...nivo_fte_props,
+    bttm_axis: { format: (tick) => (shouldTickRender(tick) ? tick : "") },
+  };
+  return (
+    <Fragment>
+      <MediaQuery minWidth={1199}>
+        <WrappedNivoLine {...nivo_fte_props} />
+      </MediaQuery>
+      <MediaQuery maxWidth={1198}>
+        <WrappedNivoLine {...nivo_mobile_fte_props} />
+      </MediaQuery>
+    </Fragment>
+  );
 };

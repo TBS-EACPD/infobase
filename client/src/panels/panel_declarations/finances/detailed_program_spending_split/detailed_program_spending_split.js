@@ -10,7 +10,6 @@ import {
   year_templates,
   StandardLegend,
   SelectAllControl,
-  A11yTable,
   businessConstants,
   InfographicPanel,
   FootNote,
@@ -25,7 +24,7 @@ import text from "./detailed_program_spending_split.yaml";
 
 const { std_years } = year_templates;
 
-const { create_text_maker_component, Select, Format } = util_components;
+const { create_text_maker_component, Select } = util_components;
 
 const { sos } = businessConstants;
 
@@ -104,20 +103,13 @@ class HistoricalProgramBars extends React.Component {
 
     if (window.is_a11y_mode) {
       return (
-        <div>
-          <A11yTable
-            table_name={text_maker("historical_prog_title")}
-            data={_.map(data, ({ label, data }) => ({
-              label,
-              /* eslint-disable react/jsx-key */
-              data: data.map((amt) => (
-                <Format type="compact1_written" content={amt} />
-              )),
-            }))}
-            label_col_header={text_maker("program")}
-            data_col_headers={ticks}
-          />
-        </div>
+        <SmartDisplayTable
+          column_configs={column_configs}
+          data={_.map(data, ({ label, data }) => ({
+            label,
+            ..._.chain().zip(ticks, data).fromPairs().value(),
+          }))}
+        />
       );
     }
 
@@ -205,40 +197,36 @@ class DetailedProgramSplit extends React.Component {
     const { mapping } = _.find(arrangements, { id: selected_program });
 
     if (window.is_a11y_mode) {
+      const a11y_table_data = _.map(
+        flat_data,
+        ({ so_label, program, value }) => ({
+          program_name: program.name,
+          so_label,
+          value,
+        })
+      );
+      const column_configs = {
+        program_name: {
+          index: 0,
+          is_searchable: true,
+          header: text_maker("program"),
+        },
+        so_label: {
+          index: 1,
+          header: text_maker("so"),
+        },
+        value: {
+          index: 2,
+          header: `${run_template("{{pa_last_year}}")} ${text_maker(
+            "expenditures"
+          )}`,
+        },
+      };
       return (
-        <div className="row">
-          <div className="panel-separator">
-            <table className="table table-striped table-bordered">
-              <caption>
-                <TM k="so_spend_by_prog" />
-              </caption>
-              <thead>
-                <tr>
-                  <th scope="col">
-                    <TM k="program" />
-                  </th>
-                  <th scope="col">
-                    <TM k="so" />
-                  </th>
-                  <th scope="col">
-                    {run_template("{{pa_last_year}}")} <TM k="expenditures" />
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {_.map(flat_data, ({ so_label, program, value }) => (
-                  <tr key={program.id + so_label}>
-                    <td>{program.name}</td>
-                    <td>{so_label}</td>
-                    <td>
-                      <Format type="compact1_written" content={value} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <SmartDisplayTable
+          data={a11y_table_data}
+          column_configs={column_configs}
+        />
       );
     }
 

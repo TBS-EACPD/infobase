@@ -89,7 +89,7 @@ export class WrappedNivoPie extends React.Component {
       },
     };
 
-    const table = !disable_table_view && (
+    const table = (window.is_a11y_mode || !disable_table_view) && (
       <SmartDisplayTable
         data={table_data}
         column_configs={column_configs}

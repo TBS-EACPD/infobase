@@ -4,9 +4,7 @@ import { GraphOverlay } from "../../../../components";
 import {
   create_text_maker_component,
   Subject,
-  formats,
   StandardLegend,
-  A11yTable,
   InfographicPanel,
   Table,
   newIBCategoryColors,
@@ -167,50 +165,14 @@ class Goco extends React.Component {
     };
 
     if (window.is_a11y_mode) {
-      const a11y_data = _.map(graph_data, (row) => {
-        return {
-          label: row.label,
-          data: [
-            formats.compact1_written_raw(row.actual_spending),
-            formats.big_int_raw(row.actual_ftes),
-          ],
-        };
-      });
-
-      const a11y_children = _.reduce(
-        graph_data,
-        (result, row) => {
-          result.push({
-            parent_label: row.label,
-            child_data: _.map(row.children, (child) => {
-              return {
-                label: child.label,
-                data: [
-                  formats.compact1_written_raw(child.actual_spending),
-                  formats.big_int_raw(child.actual_ftes),
-                ],
-              };
-            }),
-          });
-          return result;
-        },
-        []
-      );
-
       graph_content = (
         <Fragment>
-          <A11yTable
-            label_col_header={text_maker("spend_area")}
-            data_col_headers={series_labels}
-            data={a11y_data}
-          />
-          {_.map(a11y_children, (child, i) => (
-            <A11yTable
-              key={i}
-              table_name={child.parent_label}
-              data_col_headers={series_labels}
-              data={child.child_data}
-            />
+          {custom_table}
+          {_.map(child_tables, ({ table, key }) => (
+            <Fragment key={key}>
+              <span style={{ fontWeight: 700 }}>{key}</span>
+              {table}
+            </Fragment>
           ))}
         </Fragment>
       );
