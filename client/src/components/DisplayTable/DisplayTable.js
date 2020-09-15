@@ -214,12 +214,9 @@ export class DisplayTable extends React.Component {
       .thru((csv_data) => d3.csvFormatRows(csv_data))
       .value();
 
-    const showing_column_select =
-      _.size(all_ordered_col_keys) > 2 &&
-      _.every(
-        col_configs_with_defaults,
-        (column_key) => column_key.initial_visible
-      );
+    const hide_column_select =
+      _.size(all_ordered_col_keys) <= 2 &&
+      _.every(col_configs_with_defaults, "initial_visible");
     const util_components_default = {
       copyCsvUtil: (
         <DisplayTableCopyCsv key="copyCsvUtil" csv_string={csv_string} />
@@ -231,7 +228,7 @@ export class DisplayTable extends React.Component {
           table_name={table_name}
         />
       ),
-      columnToggleUtil: showing_column_select && (
+      columnToggleUtil: !hide_column_select && (
         <DisplayTableColumnToggle
           key="columnToggleUtil"
           columns={
