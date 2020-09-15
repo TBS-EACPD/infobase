@@ -8,7 +8,6 @@ import {
   Subject,
   businessConstants,
   util_components,
-  A11yTable,
   create_text_maker_component,
   InfographicPanel,
   WrappedNivoHBar,
@@ -20,6 +19,7 @@ import {
 } from "../../shared.js";
 
 import text1 from "./budget_measures_panel.yaml";
+
 import "./budget_measures_panel.scss";
 
 const { budget_values } = businessConstants;
@@ -32,7 +32,12 @@ const {
   main_estimates_budget_links,
 } = BudgetMeasure;
 
-const { Select, Format, TabbedControls, SpinnerWrapper } = util_components;
+const {
+  Select,
+  TabbedControls,
+  SpinnerWrapper,
+  SmartDisplayTable,
+} = util_components;
 
 const { text_maker, TM } = create_text_maker_component([text1, text2]);
 
@@ -617,125 +622,136 @@ class BudgetMeasureHBars extends React.Component {
         subject.level === "dept"
           ? get_program_allocation_data_from_dept_data(data)
           : [];
+      const budget_measure_a11y_data = _.map(
+        data,
+        ({
+          name,
+          funding,
+          allocated,
+          withheld,
+          remaining,
+          chapter_key,
+          ref_id,
+        }) => ({
+          label: name,
+          allocated,
+          ...(!treatAsProgram(subject) && { funding, withheld, remaining }),
+          ...(has_budget_links && {
+            budget_link: BudgetMeasure.make_budget_link(chapter_key, ref_id),
+          }),
+        })
+      );
+      const budget_measure_column_configs = {
+        label: {
+          index: 0,
+          header: text_maker("budget_measure"),
+          is_searchable: true,
+        },
+        allocated: {
+          index: 1,
+          header: budget_values.allocated.text,
+          formatter: "compact1_written",
+        },
+        ...(!treatAsProgram(subject) && {
+          funding: {
+            index: 2,
+            header: budget_values.funding.text,
+            formatter: "compact1_written",
+          },
+          withheld: {
+            index: 3,
+            header: budget_values.withheld.text,
+            formatter: "compact1_written",
+          },
+          remaining: {
+            index: 4,
+            header: budget_values.remaining.text,
+            formatter: "compact1_written",
+          },
+        }),
+        ...(has_budget_links && {
+          budget_link: {
+            index: !treatAsProgram(subject) ? 5 : 2,
+            header: text_maker("budget_panel_a11y_link_header"),
+            formatter: (href) => <a href={href}>{text_maker("link")}</a>,
+          },
+        }),
+      };
 
       return (
         <div>
           {text_area}
-          <A11yTable
-            table_name={text_maker("budget_measure_a11y_table_title")}
-            data={_.map(data, (budget_measure_item) => ({
-              label: budget_measure_item.name,
-              data: _.filter([
-                !treatAsProgram(subject) && (
-                  <Format
-                    key={budget_measure_item.id + "col2"}
-                    type="compact1_written"
-                    content={budget_measure_item.funding}
-                  />
-                ),
-                <Format
-                  key={
-                    budget_measure_item.id +
-                    (treatAsProgram(subject) ? "col2" : "col3")
-                  }
-                  type="compact1_written"
-                  content={budget_measure_item.allocated}
-                />,
-                !treatAsProgram(subject) && (
-                  <Format
-                    key={budget_measure_item.id + "col4"}
-                    type="compact1_written"
-                    content={budget_measure_item.withheld}
-                  />
-                ),
-                !treatAsProgram(subject) && (
-                  <Format
-                    key={budget_measure_item.id + "col5"}
-                    type="compact1_written"
-                    content={budget_measure_item.remaining}
-                  />
-                ),
-                has_budget_links && (
-                  <a
-                    key={
-                      budget_measure_item.id +
-                      (treatAsProgram(subject) ? "col3" : "col6")
-                    }
-                    href={BudgetMeasure.make_budget_link(
-                      budget_measure_item.chapter_key,
-                      budget_measure_item.ref_id
-                    )}
-                  >
-                    {text_maker("link")}
-                  </a>
-                ),
-              ]),
-            }))}
-            label_col_header={text_maker("budget_measure")}
-            data_col_headers={_.filter([
-              !treatAsProgram(subject) && budget_values.funding.text,
-              budget_values.allocated.text,
-              !treatAsProgram(subject) && budget_values.withheld.text,
-              !treatAsProgram(subject) && budget_values.remaining.text,
-              has_budget_links && text_maker("budget_panel_a11y_link_header"),
-            ])}
+          <SmartDisplayTable
+            data={budget_measure_a11y_data}
+            column_configs={budget_measure_column_configs}
           />
+
           {subject.level === "gov" && (
-            <A11yTable
-              table_name={text_maker("budget_org_a11y_table_title")}
-              data={_.map(
-                get_org_budget_data_from_all_measure_data(data),
-                (org_item) => ({
-                  label: org_item.name,
-                  data: _.filter([
-                    <Format
-                      key={org_item.key + "col3"}
-                      type="compact1_written"
-                      content={org_item.funding}
-                    />,
-                    <Format
-                      key={org_item.key + "col4"}
-                      type="compact1_written"
-                      content={org_item.allocated}
-                    />,
-                    <Format
-                      key={org_item.key + "col5"}
-                      type="compact1_written"
-                      content={org_item.withheld}
-                    />,
-                    <Format
-                      key={org_item.key + "col6"}
-                      type="compact1_written"
-                      content={org_item.remaining}
-                    />,
-                  ]),
-                })
-              )}
-              label_col_header={text_maker("org")}
-              data_col_headers={_.filter([
-                budget_values.funding.text,
-                budget_values.allocated.text,
-                budget_values.withheld.text,
-                budget_values.remaining.text,
-              ])}
-            />
+            <Fragment>
+              {text_maker("budget_org_a11y_table_title")}
+              <SmartDisplayTable
+                data={_.map(
+                  get_org_budget_data_from_all_measure_data(data),
+                  ({ name, funding, allocated, withheld, remaining }) => ({
+                    label: name,
+                    funding,
+                    allocated,
+                    withheld,
+                    remaining,
+                  })
+                )}
+                column_configs={{
+                  label: {
+                    index: 0,
+                    header: text_maker("org"),
+                    is_searchable: true,
+                  },
+                  allocated: {
+                    index: 1,
+                    header: budget_values.allocated.text,
+                    formatter: "compact1_written",
+                  },
+                  funding: {
+                    index: 2,
+                    header: budget_values.funding.text,
+                    formatter: "compact1_written",
+                  },
+                  withheld: {
+                    index: 3,
+                    header: budget_values.withheld.text,
+                    formatter: "compact1_written",
+                  },
+                  remaining: {
+                    index: 4,
+                    header: budget_values.remaining.text,
+                    formatter: "compact1_written",
+                  },
+                }}
+              />
+            </Fragment>
           )}
           {subject.level === "dept" && !_.isEmpty(program_allocation_data) && (
-            <A11yTable
-              table_name={text_maker("budget_program_a11y_table_title")}
-              data={_.map(program_allocation_data, (program_item) => ({
-                label: program_item.name,
-                data: _.filter([
-                  <Format
-                    key={program_item.key + "col3"}
-                    type="compact1_written"
-                    content={program_item.allocated}
-                  />,
-                ]),
-              }))}
-              label_col_header={text_maker("program")}
-              data_col_headers={_.filter([budget_values.allocated.text])}
-            />
+            <Fragment>
+              {text_maker("budget_program_a11y_table_title")}
+              <SmartDisplayTable
+                data={_.map(program_allocation_data, ({ name, allocated }) => ({
+                  label: name,
+                  allocated,
+                }))}
+                column_configs={{
+                  label: {
+                    index: 0,
+                    header: text_maker("program"),
+                    is_searchable: true,
+                  },
+                  allocated: {
+                    index: 1,
+                    header: budget_values.allocated.text,
+                    formatter: "compact1_written",
+                  },
+                }}
+              />
+            </Fragment>
           )}
         </div>
       );

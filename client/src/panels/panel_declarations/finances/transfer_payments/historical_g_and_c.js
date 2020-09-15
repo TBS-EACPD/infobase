@@ -7,7 +7,6 @@ import {
   businessConstants,
   StandardLegend,
   SelectAllControl,
-  A11yTable,
   InfographicPanel,
   util_components,
   WrappedNivoLine,
@@ -17,7 +16,7 @@ import { text_maker, TM } from "./gnc_text_provider.js";
 
 const { transfer_payments } = businessConstants;
 const { std_years } = year_templates;
-const { Format, SmartDisplayTable } = util_components;
+const { SmartDisplayTable } = util_components;
 
 const exp_years = std_years.map((year) => year + "exp");
 
@@ -66,40 +65,20 @@ class HistTPTypes extends React.Component {
         };
       })
       .value();
+    const expenditure_data = _.map(
+      filtered_series,
+      (expenditure_array, expenditure_label) => ({
+        id: expenditure_label,
+        data: expenditure_array.map((expenditure_value, year_index) => ({
+          x: text_years[year_index],
+          y: expenditure_value,
+        })),
+      })
+    );
 
-    let content;
-    if (window.is_a11y_mode) {
-      const a11y_data = _.chain(filtered_series)
-        .toPairs()
-        .map(([label, data]) => ({
-          label,
-          data: _.map(data, (num) => (
-            <Format type="compact1_written" content={num} />
-          )),
-        }))
-        .value();
-
-      content = (
-        <A11yTable
-          data_col_headers={text_years}
-          data={a11y_data}
-          label_col_header={text_maker("transfer_payment_type")}
-        />
-      );
-    } else {
-      const expenditure_data = _.map(
-        filtered_series,
-        (expenditure_array, expenditure_label) => ({
-          id: expenditure_label,
-          data: expenditure_array.map((expenditure_value, year_index) => ({
-            x: text_years[year_index],
-            y: expenditure_value,
-          })),
-        })
-      );
-
-      content = (
-        <Fragment>
+    const content = (
+      <Fragment>
+        {!window.is_a11y_mode && (
           <StandardLegend
             items={legend_items}
             isHorizontal={true}
@@ -111,18 +90,19 @@ class HistTPTypes extends React.Component {
               this.setState({ active_types: _.toggle_list(active_types, id) })
             }
           />
-          <div style={{ position: "relative" }}>
-            <WrappedNivoLine
-              enableArea={true}
-              disable_y_axis_zoom={true}
-              data={expenditure_data}
-              colorBy={(d) => colors(d.id)}
-              stacked={true}
-            />
-          </div>
-        </Fragment>
-      );
-    }
+        )}
+        <div style={{ position: "relative" }}>
+          <WrappedNivoLine
+            enableArea={true}
+            disable_y_axis_zoom={true}
+            data={expenditure_data}
+            colorBy={(d) => colors(d.id)}
+            stacked={true}
+          />
+        </div>
+      </Fragment>
+    );
+
     return (
       <div className="frow middle-xs">
         <div className={`fcol-md-${text_split}`}>
@@ -170,7 +150,7 @@ class DetailedHistTPItems extends React.Component {
     const column_configs = {
       label: {
         index: 0,
-        header: text_maker("label"),
+        header: text_maker("transfer_payment"),
         is_searchable: true,
       },
       ..._.chain(text_years)
@@ -231,22 +211,18 @@ class DetailedHistTPItems extends React.Component {
     );
 
     if (window.is_a11y_mode) {
-      let a11y_data = _.map(prepped_rows, (record) => {
-        const { tp } = record;
-        return {
-          label: tp,
-          data: _.map(std_years, (yr) => (
-            <Format type="compact1_written" content={record[`${yr}exp`] || 0} />
-          )),
-        };
-      });
       return (
         <div>
           {title_el}
-          <A11yTable
-            data={a11y_data}
-            label_col_header={text_maker("transfer_payment")}
-            data_col_headers={text_years}
+          <SmartDisplayTable
+            data={_.map(rows, (record) => ({
+              label: record.tp,
+              ..._.chain(std_years)
+                .map((yr) => [run_template(yr), record[`${yr}exp`] || 0])
+                .fromPairs()
+                .value(),
+            }))}
+            column_configs={column_configs}
           />
         </div>
       );

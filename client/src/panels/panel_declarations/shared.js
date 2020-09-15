@@ -2,7 +2,6 @@ import "./shared.scss";
 
 import { Fragment } from "react";
 
-import { A11yTable } from "../../charts/A11yTable.js";
 import { Canada } from "../../charts/canada/index.js";
 import { FlatTreeMapViz } from "../../charts/flat_treemap/FlatTreeMapViz.js";
 import { StandardLegend, SelectAllControl } from "../../charts/legends";
@@ -192,7 +191,6 @@ export {
   newIBCategoryColors,
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
-  A11yTable,
   StandardLegend,
   SelectAllControl,
   WrappedNivoBar,

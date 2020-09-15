@@ -228,7 +228,7 @@ export class CircleProportionChart extends React.Component {
       { label: parent_name, value: parent_value },
       { label: child_name, value: child_value },
     ];
-    const table = !disable_table_view && (
+    const table = (window.is_a11y_mode || !disable_table_view) && (
       <SmartDisplayTable
         table_name={table_name || text_maker("default_table_name")}
         column_configs={column_configs}
