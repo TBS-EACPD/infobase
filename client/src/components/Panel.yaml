@@ -15,7 +15,7 @@ panel_glossary_text:
     Définitions supplémentaires :
 collapse_panel:
   en: Collapse this panel
-  fr: TODO
+  fr: Fermer ce graphique
 expand_panel:
   en: Expand this panel
-  fr: TODO
+  fr: Ouvrir ce graphique
