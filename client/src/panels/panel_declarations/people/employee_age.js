@@ -13,6 +13,7 @@ import {
   declare_panel,
   NivoLineBarToggle,
 } from "../shared.js";
+
 import { text_calculate } from "./text_calculator.js";
 
 import text from "./employee_age.yaml";

@@ -9,6 +9,7 @@ import {
   declare_panel,
   NivoLineBarToggle,
 } from "../shared.js";
+
 import { text_calculate } from "./text_calculator";
 
 import text from "./employee_fol.yaml";
