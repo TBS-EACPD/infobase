@@ -1,17 +1,17 @@
 export default function app_reducer(
   //export not needed but dev tools will throw error about no key
-  state = { lang: window.lang, show_rotate_landscape: true },
+  state = { lang: window.lang, show_graph_overlay: true },
   { type, payload }
 ) {
   switch (type) {
-    case "rotate_landscape":
-      return { ...state, show_rotate_landscape: false };
+    case "graph_overlay":
+      return { ...state, show_graph_overlay: false };
   }
   return state;
 }
 
-export const rotate_landscape_off = () => {
+export const hide_graph_overlay = () => {
   return {
-    type: "rotate_landscape",
+    type: "graph_overlay",
   };
 };

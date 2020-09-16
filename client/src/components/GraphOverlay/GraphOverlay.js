@@ -5,7 +5,7 @@ import MediaQuery from "react-responsive";
 import "./GraphOverlay.scss";
 import { IconRotatePhone, IconExpandWindowWidth } from "../../icons/icons.js";
 
-import { rotate_landscape_off } from "../../InfoBase/AppState.js";
+import { hide_graph_overlay } from "../../InfoBase/AppState.js";
 import { create_text_maker_component } from "../misc_util_components";
 
 import text from "./GraphOverlay.yaml";
@@ -14,12 +14,12 @@ const { TM, text_maker } = create_text_maker_component(text);
 
 class LandscapeOverlay extends React.Component {
   render() {
-    const { children, rotate_landscape, rotate_landscape_off } = this.props;
+    const { children, show_graph_overlay, hide_graph_overlay } = this.props;
 
     return (
       <div style={{ position: "relative" }}>
         {children}
-        {rotate_landscape ? (
+        {show_graph_overlay ? (
           <Fragment>
             <MediaQuery maxDeviceWidth={567.98} orientation="portrait">
               <div className="overlay">
@@ -27,7 +27,7 @@ class LandscapeOverlay extends React.Component {
                 <IconRotatePhone width="50%" />
                 <button
                   className="btn btn-ib-primary"
-                  onClick={rotate_landscape_off}
+                  onClick={hide_graph_overlay}
                 >
                   {text_maker("show_anyway")}
                 </button>
@@ -39,7 +39,7 @@ class LandscapeOverlay extends React.Component {
                 <IconExpandWindowWidth width="50%" />
                 <button
                   className="btn btn-ib-primary"
-                  onClick={rotate_landscape_off}
+                  onClick={hide_graph_overlay}
                 >
                   {text_maker("show_anyway")}
                 </button>
@@ -53,11 +53,11 @@ class LandscapeOverlay extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  rotate_landscape: state.show_rotate_landscape,
+  show_graph_overlay: state.show_graph_overlay,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  rotate_landscape_off: () => dispatch(rotate_landscape_off()),
+  hide_graph_overlay: () => dispatch(hide_graph_overlay()),
 });
 
 export const GraphOverlay = connect(
