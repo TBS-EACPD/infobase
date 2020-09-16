@@ -26,7 +26,7 @@ export class CheckBox extends React.Component {
             <input
               type="checkbox"
               checked={active}
-              onChange={onClick}
+              onChange={() => !disabled && onClick && onClick(id)}
               style={{ marginRight: 5 }}
             />
             {label}
