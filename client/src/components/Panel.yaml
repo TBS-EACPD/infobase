@@ -13,3 +13,9 @@ panel_glossary_text:
     Additional terms:
   fr: |
     Définitions supplémentaires :
+collapse_panel:
+  en: Collapse this panel
+  fr: TODO
+expand_panel:
+  en: Expand this panel
+  fr: TODO
