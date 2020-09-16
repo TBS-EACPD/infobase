@@ -19,7 +19,7 @@ class LandscapeOverlay extends React.Component {
     return (
       <div style={{ position: "relative" }}>
         {children}
-        {show_graph_overlay ? (
+        {show_graph_overlay && (
           <Fragment>
             <MediaQuery maxDeviceWidth={567.98} orientation="portrait">
               <div className="overlay">
@@ -46,7 +46,7 @@ class LandscapeOverlay extends React.Component {
               </div>
             </MediaQuery>
           </Fragment>
-        ) : null}
+        )}
       </div>
     );
   }
