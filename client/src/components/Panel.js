@@ -8,7 +8,7 @@ import { create_text_maker_component } from "./misc_util_components.js";
 import text from "./Panel.yaml";
 import "./Panel.scss";
 
-const { TM } = create_text_maker_component(text);
+const { text_maker, TM } = create_text_maker_component(text);
 
 const PanelSource = ({ links }) => {
   if (_.isEmpty(links)) {
@@ -91,6 +91,11 @@ export class Panel extends React.Component {
                 className={classNames("panel-heading-utils")}
                 onClick={() => this.setState({ isOpen: !isOpen })}
                 aria-labelledby={label_id}
+                aria-label={
+                  isOpen
+                    ? text_maker("collapse_panel")
+                    : text_maker("expand_panel")
+                }
               >
                 <span aria-hidden>{isOpen ? "▼" : "►"}</span>
               </button>
