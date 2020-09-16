@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import { RotateLandscape } from "../../../../components";
+import { GraphOverlay } from "../../../../components";
 import {
   run_template,
   year_templates,
@@ -268,9 +268,9 @@ class AuthExpPlannedSpendingGraph extends React.Component {
           />
         </div>
 
-        <RotateLandscape>
+        <GraphOverlay>
           <WrappedNivoLine {...nivo_props} />
-        </RotateLandscape>
+        </GraphOverlay>
       </Fragment>
     );
   }

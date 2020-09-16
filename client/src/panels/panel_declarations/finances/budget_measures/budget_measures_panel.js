@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
-import { RotateLandscape } from "../../../../components";
+import { GraphOverlay } from "../../../../components";
 import text2 from "../../../../partition/budget_measures_subapp/BudgetMeasuresRoute.yaml";
 
 import {
@@ -882,7 +882,7 @@ class BudgetMeasureHBars extends React.Component {
               />
             </div>
           </div>
-          <RotateLandscape>
+          <GraphOverlay>
             <MediaQuery minWidth={992}>
               <WrappedNivoHBar
                 {...nivo_default_props}
@@ -895,7 +895,7 @@ class BudgetMeasureHBars extends React.Component {
                 graph_height={`${data.length * 40 + 150}px`}
               />
             </MediaQuery>
-          </RotateLandscape>
+          </GraphOverlay>
         </Fragment>
       );
     }

@@ -41,7 +41,7 @@ export { AlertBanner } from "./AlertBanner.js";
 export { FancyUL } from "./FancyUL.js";
 export { DropdownMenu } from "./DropdownMenu.js";
 
-export { RotateLandscape } from "./RotateLandscape/RotateLandscape.js";
+export { GraphOverlay } from "./GraphOverlay/GraphOverlay.js";
 export { StatelessModal, FixedPopover } from "./modals_and_popovers";
 export {
   DisplayTable,

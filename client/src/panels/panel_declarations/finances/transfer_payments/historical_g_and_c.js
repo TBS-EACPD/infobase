@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import { RotateLandscape } from "../../../../components";
+import { GraphOverlay } from "../../../../components";
 import {
   run_template,
   declare_panel,
@@ -113,7 +113,7 @@ class HistTPTypes extends React.Component {
             }
           />
           <div style={{ position: "relative" }}>
-            <RotateLandscape>
+            <GraphOverlay>
               <WrappedNivoLine
                 enableArea={true}
                 disable_y_axis_zoom={true}
@@ -121,7 +121,7 @@ class HistTPTypes extends React.Component {
                 colorBy={(d) => colors(d.id)}
                 stacked={true}
               />
-            </RotateLandscape>
+            </GraphOverlay>
           </div>
         </Fragment>
       );
@@ -294,9 +294,9 @@ class DetailedHistTPItems extends React.Component {
       };
 
       return (
-        <RotateLandscape>
+        <GraphOverlay>
           <WrappedNivoLine {...nivo_props} />;
-        </RotateLandscape>
+        </GraphOverlay>
       );
     })();
 

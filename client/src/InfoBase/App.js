@@ -18,7 +18,7 @@ import { ReactUnmounter } from "../core/NavComponents.js";
 import { SurveyPopup } from "../core/SurveyPopup.js";
 import { TooltipActivator } from "../glossary/TooltipActivator.js";
 
-import { app_reducer } from "./AppState.js";
+import app_reducer from "./AppState.js";
 
 import {
   ensure_linked_stylesheets_load,
