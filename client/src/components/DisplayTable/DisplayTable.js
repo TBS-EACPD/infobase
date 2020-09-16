@@ -297,57 +297,59 @@ export class DisplayTable extends React.Component {
                 </th>
               ))}
             </tr>
-            <tr className="table-header">
-              {_.map(visible_ordered_col_keys, (column_key) => {
-                const sortable =
-                  col_configs_with_defaults[column_key].is_sortable;
-                const searchable =
-                  col_configs_with_defaults[column_key].is_searchable;
+            {_.some(col_configs_with_defaults, "is_sortable") && (
+              <tr className="table-header">
+                {_.map(visible_ordered_col_keys, (column_key) => {
+                  const sortable =
+                    col_configs_with_defaults[column_key].is_sortable;
+                  const searchable =
+                    col_configs_with_defaults[column_key].is_searchable;
 
-                const current_search_input =
-                  (searchable && searches[column_key]) || null;
+                  const current_search_input =
+                    (searchable && searches[column_key]) || null;
 
-                return (
-                  <th key={column_key} style={{ textAlign: "center" }}>
-                    {sortable && (
-                      <div
-                        onClick={() =>
-                          this.setState({
-                            sort_by: column_key,
-                            descending:
-                              this.state.sort_by === column_key
-                                ? !this.state.descending
-                                : true,
-                          })
-                        }
-                      >
-                        <SortDirections
-                          asc={!descending && sort_by === column_key}
-                          desc={descending && sort_by === column_key}
+                  return (
+                    <th key={column_key} style={{ textAlign: "center" }}>
+                      {sortable && (
+                        <div
+                          onClick={() =>
+                            this.setState({
+                              sort_by: column_key,
+                              descending:
+                                this.state.sort_by === column_key
+                                  ? !this.state.descending
+                                  : true,
+                            })
+                          }
+                        >
+                          <SortDirections
+                            asc={!descending && sort_by === column_key}
+                            desc={descending && sort_by === column_key}
+                          />
+                        </div>
+                      )}
+                      {searchable && (
+                        <DebouncedTextInput
+                          inputClassName={"search input-sm"}
+                          placeHolder={text_maker("filter_data")}
+                          defaultValue={current_search_input}
+                          updateCallback={(search_value) => {
+                            const updated_searches = _.mapValues(
+                              searches,
+                              (value, key) =>
+                                key === column_key ? search_value : value
+                            );
+
+                            this.setState({ searches: updated_searches });
+                          }}
+                          debounceTime={300}
                         />
-                      </div>
-                    )}
-                    {searchable && (
-                      <DebouncedTextInput
-                        inputClassName={"search input-sm"}
-                        placeHolder={text_maker("filter_data")}
-                        defaultValue={current_search_input}
-                        updateCallback={(search_value) => {
-                          const updated_searches = _.mapValues(
-                            searches,
-                            (value, key) =>
-                              key === column_key ? search_value : value
-                          );
-
-                          this.setState({ searches: updated_searches });
-                        }}
-                        debounceTime={300}
-                      />
-                    )}
-                  </th>
-                );
-              })}
-            </tr>
+                      )}
+                    </th>
+                  );
+                })}
+              </tr>
+            )}
           </thead>
           {_.isEmpty(sorted_filtered_data) ? (
             <NoDataMessage />
