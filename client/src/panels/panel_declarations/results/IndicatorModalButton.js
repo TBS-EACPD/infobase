@@ -14,13 +14,11 @@ import {
 import { log_standard_event } from "../../../core/analytics.js";
 import { get_client } from "../../../graphql_utils/graphql_utils.js";
 
-
 import { IconCopyLink } from "../../../icons/icons.js";
 import { Indicator } from "../../../models/results.js";
 
 import { IndicatorDisplay } from "./result_components.js";
 import { text_maker as general_text_maker } from "./result_text_provider.js";
-
 
 import text from "./IndicatorModalButton.yaml";
 
@@ -109,25 +107,10 @@ const query_api = (id) => {
     });
 };
 
-class IndicatorModalButton extends React.Component {
+export default class IndicatorModalButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = { loading: true, show_modal: false };
-
-    const {
-      location: { search },
-      id,
-    } = this.props;
-
-    const query = new URLSearchParams(search).get("ind");
-
-    this.buttonRef = query === id ? React.createRef() : null;
-  }
-
-  componentDidMount() {
-    if (this.buttonRef) {
-      this.buttonRef.current.click();
-    }
   }
 
   componentDidUpdate() {
@@ -140,27 +123,15 @@ class IndicatorModalButton extends React.Component {
   }
 
   render() {
-    const {
-      id,
-      match: {
-        params: { subject_id },
-      },
-    } = this.props;
+    const { id } = this.props;
 
     const { loading } = this.state;
 
     const indicator = Indicator.lookup(id);
 
-    const modal_link = _.replace(
-      window.location.href,
-      window.location.hash,
-      `#orgs/dept/${subject_id}/infograph/results?ind=${id}`
-    );
-
     return (
       <Fragment>
         <button
-          ref={this.buttonRef}
           className="btn-link"
           onClick={() => this.setState({ show_modal: true })}
           aria-label={`${text_maker("discover_indicator")} ${indicator.name}`}
@@ -176,16 +147,16 @@ class IndicatorModalButton extends React.Component {
             ) : (
               <Panel
                 title={indicator.name}
-                otherHeaderContent={
-                  <div style={{ marginLeft: "auto" }}>
-                    <WriteToClipboard
-                      text_to_copy={modal_link}
-                      button_class_name={"panel-heading-utils"}
-                      button_description={text_maker("copy_indicator_link")}
-                      IconComponent={IconCopyLink}
-                    />
-                  </div>
-                }
+                // otherHeaderContent={
+                //   <div style={{ marginLeft: "auto" }}>
+                //     <WriteToClipboard
+                //       text_to_copy={modal_link}
+                //       button_class_name={"panel-heading-utils"}
+                //       button_description={text_maker("copy_indicator_link")}
+                //       IconComponent={IconCopyLink}
+                //     />
+                //   </div>
+                // }
               >
                 <IndicatorDisplay indicator={indicator} show_doc={true} />
               </Panel>
@@ -198,5 +169,3 @@ class IndicatorModalButton extends React.Component {
     );
   }
 }
-
-export default withRouter(IndicatorModalButton);
