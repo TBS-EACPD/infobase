@@ -3,7 +3,7 @@ import {
   trivial_text_maker,
   run_template,
   year_templates,
-} from "./table_common";
+} from "./table_common.js";
 
 import text from "./programVoteStat.yaml";
 
