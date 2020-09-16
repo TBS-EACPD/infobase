@@ -1,4 +1,4 @@
-import { RotateLandscape } from "../../../../components";
+import { GraphOverlay } from "../../../../components";
 import {
   businessConstants,
   year_templates,
@@ -134,9 +134,9 @@ class SobjLine extends React.Component {
       };
 
       return (
-        <RotateLandscape>
+        <GraphOverlay>
           <WrappedNivoLine {...nivo_props} />;
-        </RotateLandscape>
+        </GraphOverlay>
       );
     })();
 

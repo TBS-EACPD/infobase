@@ -1,4 +1,4 @@
-import { SmartDisplayTable, RotateLandscape } from "../../../../components";
+import { SmartDisplayTable, GraphOverlay } from "../../../../components";
 import {
   WrappedNivoBar,
   WrappedNivoHBar,
@@ -159,7 +159,7 @@ class HistoricalProgramBars extends React.Component {
             />
           </div>
           <div className="fcol-md-8">
-            <RotateLandscape>
+            <GraphOverlay>
               <WrappedNivoBar
                 data={graph_data}
                 keys={Object.keys(processed_data)}
@@ -178,7 +178,7 @@ class HistoricalProgramBars extends React.Component {
                   />
                 }
               />
-            </RotateLandscape>
+            </GraphOverlay>
           </div>
         </div>
       </div>
@@ -351,7 +351,7 @@ class DetailedProgramSplit extends React.Component {
             )}
           </div>
           <div className="fcol-md-9" style={{ width: "100%" }}>
-            <RotateLandscape>
+            <GraphOverlay>
               <WrappedNivoHBar
                 data={graph_ready_data}
                 indexBy="label"
@@ -405,7 +405,7 @@ class DetailedProgramSplit extends React.Component {
                 markers={markers}
                 padding={0.05}
               />
-            </RotateLandscape>
+            </GraphOverlay>
           </div>
         </div>
       </div>

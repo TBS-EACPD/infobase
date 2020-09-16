@@ -1,4 +1,4 @@
-import { RotateLandscape } from "../../../components";
+import { GraphOverlay } from "../../../components";
 
 import {
   formats,
@@ -178,9 +178,9 @@ export const declare_employee_age_panel = () =>
                     tab_pane_contents={{
                       age_group: (
                         <div id={"emp_age_tab_pane"}>
-                          <RotateLandscape>
+                          <GraphOverlay>
                             <NivoLineBarToggle {...age_group_options} />
-                          </RotateLandscape>
+                          </GraphOverlay>
                           <div className="clearfix"></div>
                         </div>
                       ),

@@ -1,4 +1,4 @@
-import { RotateLandscape } from "../../../../components";
+import { GraphOverlay } from "../../../../components";
 import {
   InfographicPanel,
   Subject,
@@ -158,7 +158,7 @@ export const declare_internal_services_panel = () =>
                   />
                 </div>
                 <div className="fcol-md-9">
-                  <RotateLandscape>
+                  <GraphOverlay>
                     <WrappedNivoBar
                       data={bar_data}
                       indexBy="date"
@@ -173,7 +173,7 @@ export const declare_internal_services_panel = () =>
                       }}
                       graph_height="300px"
                     />
-                  </RotateLandscape>
+                  </GraphOverlay>
                 </div>
               </div>
             );

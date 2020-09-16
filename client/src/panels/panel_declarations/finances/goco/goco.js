@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import { RotateLandscape } from "../../../../components";
+import { GraphOverlay } from "../../../../components";
 import {
   create_text_maker_component,
   Subject,
@@ -479,7 +479,7 @@ class Goco extends React.Component {
             />
           </div>
           <div>
-            <RotateLandscape>
+            <GraphOverlay>
               <WrappedNivoBar
                 {...nivo_default_props}
                 data={graph_data}
@@ -512,7 +512,7 @@ class Goco extends React.Component {
                   },
                 }}
               />
-            </RotateLandscape>
+            </GraphOverlay>
           </div>
         </Fragment>
       );

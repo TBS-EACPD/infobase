@@ -1,4 +1,4 @@
-import { RotateLandscape } from "../../../../components";
+import { GraphOverlay } from "../../../../components";
 import {
   declare_panel,
   year_templates,
@@ -70,7 +70,7 @@ export const declare_personnel_spend_panel = () =>
 
           graph_content = (
             <div position="relative">
-              <RotateLandscape>
+              <GraphOverlay>
                 <WrappedNivoLine
                   raw_data={panel_args.series[0]}
                   data={personnel_data()}
@@ -82,7 +82,7 @@ export const declare_personnel_spend_panel = () =>
                   }}
                   colors={window.infobase_color_constants.primaryColor}
                 />
-              </RotateLandscape>
+              </GraphOverlay>
             </div>
           );
         }
