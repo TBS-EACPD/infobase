@@ -176,6 +176,37 @@ module.exports.route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
+    name: "Infographic - Crown Corp - About",
+    route: "orgs/dept/146/infograph/intro",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Crown Corp - Finance",
+    route: "orgs/dept/146/infograph/financial",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Crown Corp - Where can I go from here?",
+    route: "orgs/dept/146/infograph/related",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Inactive Program - About",
+    route: "orgs/program/PPP-AHZ00/infograph/intro",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Inactive Program - Finance",
+    route: "orgs/program/PPP-AHZ00/infograph/financial",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Inactive Program - Where can I go from here?",
+    route: "orgs/program/PPP-AHZ00/infograph/related",
+    test_on: ["eng", "basic-eng"],
+  },
+
+  {
     name: "Report Builder - Table Picker",
     route: "rpb",
     test_on: ["eng", "basic-eng"],
