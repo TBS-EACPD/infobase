@@ -1017,6 +1017,7 @@ export const declare_welcome_mat_panel = () =>
           return {
             footnotes,
             depends_on,
+            missing_info: "ok",
             calculate(subject, info, options) {
               const { programSpending, programFtes } = this.tables;
               const q6 = programSpending.q(subject);
@@ -1040,6 +1041,7 @@ export const declare_welcome_mat_panel = () =>
               "orgVoteStatPa",
               ...depends_on,
             ],
+            missing_info: "ok",
             calculate(subject, info, options) {
               const {
                 programSpending,
@@ -1102,6 +1104,7 @@ export const declare_welcome_mat_panel = () =>
             footnotes,
             depends_on,
             glossary_keys: ["FTE"],
+            missing_info: "ok",
             calculate: common_program_crso_calculate,
             render,
           };
@@ -1110,6 +1113,7 @@ export const declare_welcome_mat_panel = () =>
             footnotes,
             depends_on,
             glossary_keys: ["FTE"],
+            missing_info: "ok",
             calculate: common_program_crso_calculate,
             render,
           };

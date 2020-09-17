@@ -104,16 +104,19 @@ class PanelRegistry {
     if (this.level !== subject.level) {
       return false;
     }
+    if (
+      this.level === "dept" &&
+      this.missing_info !== "ok" &&
+      _.some(this.depends_on, (t) => {
+        return !Table.lookup(t).depts[subject.id];
+      })
+    ) {
+      return false;
+    }
     const calc_func = this._inner_calculate;
 
     const panel_args = calc_func.call(this, subject, options);
     if (panel_args === false) {
-      return false;
-    }
-    if (
-      this.level === "dept" &&
-      _.some(this.tables, (t) => !t.depts[subject.id])
-    ) {
       return false;
     }
 
