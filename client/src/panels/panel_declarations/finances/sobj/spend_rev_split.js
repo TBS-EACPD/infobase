@@ -135,7 +135,7 @@ export const declare_spend_rev_split_panel = () =>
               const { programSobjs } = this.tables;
               const prog_rows = programSobjs.programs.get(subject);
               const rev_split = rows_to_rev_split(prog_rows);
-              if (rev_split.neg_exp === 0) {
+              if (!rev_split || rev_split.neg_exp === 0) {
                 return false;
               }
               const text_calculations = {
