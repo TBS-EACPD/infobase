@@ -266,24 +266,7 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
   const { panel_args, subject } = calculations;
   const { data_series, additional_info } = panel_args;
 
-  const array_avg = _.chain(data_series)
-    .map((type) => [type.key, _.sum(type.values) / type.values.length])
-    .fromPairs()
-    .value();
-
-  const planned_spending = _.chain(data_series)
-    .thru((data_series) => data_series[data_series.length - 1].values)
-    .thru((values) => values[values.length - 1])
-    .value();
-
-  const text_calculations = {
-    five_year_auth_average: array_avg["authorities"],
-    five_year_exp_average: array_avg["budgetary_expenditures"],
-    next_planned_spending: planned_spending,
-  };
-
   const final_info = {
-    ...text_calculations,
     ...additional_info,
     dept: subject,
   };
@@ -422,7 +405,22 @@ const calculate = function (subject, options) {
   const unspent_last_year =
     auth_values[last_shared_index] - exp_values[last_shared_index];
 
+  const planned_spending = _.chain(data_series)
+    .thru((data_series) => data_series[data_series.length - 1].values)
+    .thru((values) => values[values.length - 1])
+    .value();
+
+  const get_five_year_auth_average = (auth_or_exp) =>
+    _.chain(std_years)
+      .map((year) => orgVoteStatPa.q(query_subject).sum([year + auth_or_exp]))
+      .sum()
+      .divide(std_years.length)
+      .value();
+
   const additional_info = {
+    five_year_auth_average: get_five_year_auth_average("auth"),
+    five_year_exp_average: get_five_year_auth_average("exp"),
+    next_planned_spending: planned_spending,
     has_planned_spending: subject.has_planned_spending,
     last_history_year: run_template(_.last(std_years)),
     last_planned_year: run_template(_.last(planning_years)),
