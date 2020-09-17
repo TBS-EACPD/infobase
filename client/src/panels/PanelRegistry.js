@@ -110,6 +110,12 @@ class PanelRegistry {
     if (panel_args === false) {
       return false;
     }
+    if (
+      this.level === "dept" &&
+      _.some(this.tables, (t) => !t.depts[subject.id])
+    ) {
+      return false;
+    }
 
     //inner_render API : a panel's inner_render fucntion usually wants access to panel_args and subject.
     return { subject, panel_args };
