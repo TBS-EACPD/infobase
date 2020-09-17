@@ -81,11 +81,13 @@ export const declare_top_spending_areas_panel = () =>
           [subject],
           this.tables.programSobjs
         );
+        if (!top_3_sos_and_remainder) {
+          return false;
+        }
 
         const total_spent = _.sum(
           _.map(top_3_sos_and_remainder, (so) => so.value)
         );
-
         const top_so_pct = top_3_sos_and_remainder[0].value / total_spent;
 
         const text_calculations = {
