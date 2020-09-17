@@ -8,7 +8,6 @@ import {
 
 import text from "./orgTransferPayments.yaml";
 
-
 const { std_years } = year_templates;
 const { transfer_payments } = businessConstants;
 
