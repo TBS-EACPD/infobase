@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+
 import { StatelessModal } from "./StatelessModal";
 
 export class ModalButton extends React.Component {
