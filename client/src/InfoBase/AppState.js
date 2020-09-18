@@ -1,11 +1,11 @@
 export default function app_reducer(
   //export not needed but dev tools will throw error about no key
-  state = { lang: window.lang, show_graph_overlay: true },
+  state = { lang: window.lang, is_showing_graph_overlay: true },
   { type, payload }
 ) {
   switch (type) {
     case "graph_overlay":
-      return { ...state, show_graph_overlay: false };
+      return { ...state, is_showing_graph_overlay: false };
   }
   return state;
 }
