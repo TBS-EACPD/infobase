@@ -1,14 +1,9 @@
 import gql from "graphql-tag";
 
-import { Fragment } from "react";
-
-import { withRouter } from "react-router";
-
 import {
   Panel,
   SpinnerWrapper,
-  StatelessModal,
-  WriteToClipboard,
+  // WriteToClipboard,
   create_text_maker_component,
 } from "../../../components/index.js";
 import { log_standard_event } from "../../../core/analytics.js";
@@ -18,9 +13,8 @@ import { IconCopyLink } from "../../../icons/icons.js";
 import { Indicator } from "../../../models/results.js";
 
 import { IndicatorDisplay } from "./result_components.js";
-import { text_maker as general_text_maker } from "./result_text_provider.js";
 
-import text from "./IndicatorModalButton.yaml";
+import text from "./IndicatorDisplayPanel.yaml";
 
 const { text_maker } = create_text_maker_component(text);
 
@@ -107,25 +101,20 @@ const query_api = (id) => {
     });
 };
 
-export default class IndicatorModalButton extends React.Component {
+export default class IndicatorDisplayPanel extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true, show_modal: false };
+    this.state = { loading: true };
   }
 
   componentDidUpdate() {
     const { id } = this.props;
-    const { loading, show_modal } = this.state;
+    const { loading } = this.state;
 
-    if (loading && show_modal) {
+    if (loading) {
       query_api(id).then(() => this.setState({ loading: false }));
     }
   }
-
-  toggle_modal = () =>
-    this.setState((prev_state) => ({
-      show_modal: !prev_state.show_modal,
-    }));
 
   render() {
     const { id } = this.props;
@@ -134,44 +123,25 @@ export default class IndicatorModalButton extends React.Component {
 
     const indicator = Indicator.lookup(id);
 
-    return (
-      <Fragment>
-        <button
-          className="btn-link"
-          onClick={this.toggle_modal}
-          aria-label={`${text_maker("discover_indicator")} ${indicator.name}`}
-        >
-          {indicator.name}
-        </button>
-        <StatelessModal
-          show={this.state.show_modal}
-          title={general_text_maker("indicator_display_title")}
-          body={
-            loading ? (
-              <SpinnerWrapper ref="spinner" config_name={"sub_route"} />
-            ) : (
-              <Panel
-                title={indicator.name}
-                /* the below content will be used once linking to indicators has been added back*/
-                // otherHeaderContent={
-                //   <div style={{ marginLeft: "auto" }}>
-                //     <WriteToClipboard
-                //       text_to_copy={modal_link}
-                //       button_class_name={"panel-heading-utils"}
-                //       button_description={text_maker("copy_indicator_link")}
-                //       IconComponent={IconCopyLink}
-                //     />
-                //   </div>
-                // }
-              >
-                <IndicatorDisplay indicator={indicator} show_doc={true} />
-              </Panel>
-            )
-          }
-          on_close_callback={this.toggle_modal}
-          additional_dialog_class={"modal-responsive"}
-        />
-      </Fragment>
+    return loading ? (
+      <SpinnerWrapper ref="spinner" config_name={"sub_route"} />
+    ) : (
+      <Panel
+        title={indicator.name}
+        /* the below content will be used once linking to indicators has been added back*/
+        // otherHeaderContent={
+        //   <div style={{ marginLeft: "auto" }}>
+        //     <WriteToClipboard
+        //       text_to_copy={modal_link}
+        //       button_class_name={"panel-heading-utils"}
+        //       button_description={text_maker("copy_indicator_link")}
+        //       IconComponent={IconCopyLink}
+        //     />
+        //   </div>
+        // }
+      >
+        <IndicatorDisplay indicator={indicator} show_doc={true} />
+      </Panel>
     );
   }
 }
