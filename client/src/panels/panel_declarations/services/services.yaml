@@ -82,7 +82,11 @@ services_digital_status_prog_text:
   transform: [handlebars, markdown]
   en: |
     Among the **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} that are delivered under the **{{subject_name}}** program, **{{most_digital_name}}** is the most commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 most_digital_pct}}**) while **{{least_digital_name}}** is the least commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 least_digital_pct}}**).
-  fr: TODO  
+  fr: TODO
+service_digital_status_most_and_least_same_text:
+  transform: [handlebars, markdown]
+  en: All of the services have the same online availability of client interaction points (**{{fmt_percentage1 least_digital_pct}}**).
+  fr: TODO
 services_digital_status:
   en: Online status of services
   fr: État des services en ligne
