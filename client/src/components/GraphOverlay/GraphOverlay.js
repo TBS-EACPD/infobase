@@ -12,14 +12,18 @@ import text from "./GraphOverlay.yaml";
 
 const { TM, text_maker } = create_text_maker_component(text);
 
-class LandscapeOverlay extends React.Component {
+class _GraphOverlay extends React.Component {
   render() {
-    const { children, show_graph_overlay, hide_graph_overlay } = this.props;
+    const {
+      children,
+      is_showing_graph_overlay,
+      hide_graph_overlay,
+    } = this.props;
 
     return (
       <div style={{ position: "relative" }}>
         {children}
-        {show_graph_overlay && (
+        {is_showing_graph_overlay && (
           <Fragment>
             <MediaQuery maxDeviceWidth={567.98} orientation="portrait">
               <div className="overlay">
@@ -53,7 +57,7 @@ class LandscapeOverlay extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  show_graph_overlay: state.show_graph_overlay,
+  is_showing_graph_overlay: state.is_showing_graph_overlay,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -63,4 +67,4 @@ const mapDispatchToProps = (dispatch) => ({
 export const GraphOverlay = connect(
   mapStateToProps,
   mapDispatchToProps
-)(LandscapeOverlay);
+)(_GraphOverlay);
