@@ -149,18 +149,15 @@ export class CircleProportionChart extends React.Component {
         TooltipContentComponent={({ tooltip_item }) => (
           <Fragment>
             <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
-              <Fragment>
-                {/* MediaQuery jank, it will insert a div wrapping its children when it has mutliple of them, need a manual Fragment to avoid that */}
-                <td className="nivo-tooltip__label">{tooltip_item.name}</td>
-                <td className="nivo-tooltip__value">
-                  {value_formatter(tooltip_item.value)}
-                </td>
-                <td className="nivo-tooltip__value">
-                  {`(${formats.smart_percentage1_raw(
-                    tooltip_item.value / parent_value
-                  )})`}
-                </td>
-              </Fragment>
+              <td className="nivo-tooltip__label">{tooltip_item.name}</td>
+              <td className="nivo-tooltip__value">
+                {value_formatter(tooltip_item.value)}
+              </td>
+              <td className="nivo-tooltip__value">
+                {`(${formats.smart_percentage1_raw(
+                  tooltip_item.value / parent_value
+                )})`}
+              </td>
             </MediaQuery>
             <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
               <td>
