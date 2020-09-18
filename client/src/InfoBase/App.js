@@ -10,16 +10,16 @@ import { PageDetails } from "../components/PageDetails.js";
 import { SpinnerWrapper } from "../components/SpinnerWrapper.js";
 import { initialize_analytics } from "../core/analytics.js";
 
-import { ErrorBoundary } from "../core/ErrorBoundary.js";
 import { DevFip } from "../core/DevFip.js";
 import { EasyAccess } from "../core/EasyAccess.js";
+import { ErrorBoundary } from "../core/ErrorBoundary.js";
 import { has_local_storage } from "../core/feature_detection.js";
 import { InsertRuntimeFooterLinks } from "../core/InsertRuntimeFooterLinks.js";
 import { ReactUnmounter } from "../core/NavComponents.js";
 import { SurveyPopup } from "../core/SurveyPopup.js";
 import { TooltipActivator } from "../glossary/TooltipActivator.js";
 
-import app_reducer from "./AppState.js";
+import { app_reducer } from "./AppState.js";
 
 import {
   ensure_linked_stylesheets_load,
