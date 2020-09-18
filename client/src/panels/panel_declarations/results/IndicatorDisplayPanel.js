@@ -4,19 +4,19 @@ import {
   Panel,
   SpinnerWrapper,
   // WriteToClipboard,
-  create_text_maker_component,
+  // create_text_maker_component,
 } from "../../../components/index.js";
 import { log_standard_event } from "../../../core/analytics.js";
 import { get_client } from "../../../graphql_utils/graphql_utils.js";
 
-import { IconCopyLink } from "../../../icons/icons.js";
+// import { IconCopyLink } from "../../../icons/icons.js";
 import { Indicator } from "../../../models/results.js";
 
 import { IndicatorDisplay } from "./result_components.js";
 
-import text from "./IndicatorDisplayPanel.yaml";
+// import text from "./IndicatorDisplayPanel.yaml";
 
-const { text_maker } = create_text_maker_component(text);
+// const { text_maker } = create_text_maker_component(text);
 
 const indicators_fields_fragment = `  id
   stable_id

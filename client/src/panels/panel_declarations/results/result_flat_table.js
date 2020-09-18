@@ -1,5 +1,9 @@
 import { Fragment } from "react";
 
+import { ModalButton } from "src/components/index.js";
+
+import { Indicator } from "src/models/results.js";
+
 import { businessConstants } from "../../../models/businessConstants.js";
 import {
   util_components,
@@ -27,8 +31,6 @@ import {
 } from "./results_common.js";
 
 import "./result_flat_table.scss";
-import { Indicator } from "src/models/results.js";
-import { ModalButton } from "src/components/index.js";
 
 const {
   SpinnerWrapper,
