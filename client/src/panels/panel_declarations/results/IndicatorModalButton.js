@@ -122,6 +122,11 @@ export default class IndicatorModalButton extends React.Component {
     }
   }
 
+  toggle_modal = () =>
+    this.setState((prev_state) => ({
+      show_modal: !prev_state.show_modal,
+    }));
+
   render() {
     const { id } = this.props;
 
@@ -133,7 +138,7 @@ export default class IndicatorModalButton extends React.Component {
       <Fragment>
         <button
           className="btn-link"
-          onClick={() => this.setState({ show_modal: true })}
+          onClick={this.toggle_modal}
           aria-label={`${text_maker("discover_indicator")} ${indicator.name}`}
         >
           {indicator.name}
@@ -147,6 +152,7 @@ export default class IndicatorModalButton extends React.Component {
             ) : (
               <Panel
                 title={indicator.name}
+                /* the below content will be used once linking to indicators has been added back*/
                 // otherHeaderContent={
                 //   <div style={{ marginLeft: "auto" }}>
                 //     <WriteToClipboard
@@ -162,7 +168,7 @@ export default class IndicatorModalButton extends React.Component {
               </Panel>
             )
           }
-          on_close_callback={() => this.setState({ show_modal: false })}
+          on_close_callback={this.toggle_modal}
           additional_dialog_class={"modal-responsive"}
         />
       </Fragment>
