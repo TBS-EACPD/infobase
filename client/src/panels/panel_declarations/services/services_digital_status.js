@@ -72,11 +72,15 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
       <TM
         className="medium_panel_text"
         k={
-          subject.level === "program"
+          most_digital_component.key === least_digital_component.key
+            ? "service_digital_status_most_and_least_same_text"
+            : subject.level === "program"
             ? "services_digital_status_prog_text"
             : "services_digital_status_text"
         }
         args={{
+          is_most_and_least_same:
+            most_digital_component.key === least_digital_component.key,
           num_of_services: services.length,
           subject_name: subject.name,
           most_digital_name: text_maker(most_digital_component.key),
@@ -130,6 +134,23 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
             indexBy={"id"}
             keys={[can_online, cannot_online, not_applicable]}
             colorBy={(d) => colors(d.id)}
+            bttm_axis={{
+              renderTick: (tick) =>
+                tick.value % 1 === 0 && (
+                  <g
+                    key={tick.key}
+                    transform={`translate(${tick.x - 3.5},${tick.y + 12})`}
+                  >
+                    <text
+                      style={{
+                        ...tick.theme.axis.ticks.text,
+                      }}
+                    >
+                      {tick.value}
+                    </text>
+                  </g>
+                ),
+            }}
             {...nivo_lang_props[window.lang]}
           />
         </Fragment>
