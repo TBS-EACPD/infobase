@@ -28,7 +28,6 @@
       "react/display-name": [ "off" ],
       "react/no-find-dom-node": [ "off" ],
       "react/no-children-prop": [ "off" ],
-      "lodash/collection-return": ["error"],
       "lodash/no-double-unwrap": ["error"],
       "lodash/no-unbound-this": ["error"],
       "lodash/unwrap": ["error"],
