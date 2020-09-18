@@ -10,6 +10,7 @@ import { PageDetails } from "../components/PageDetails.js";
 import { SpinnerWrapper } from "../components/SpinnerWrapper.js";
 import { initialize_analytics } from "../core/analytics.js";
 
+import { ErrorBoundary } from "../core/ErrorBoundary.js";
 import { DevFip } from "../core/DevFip.js";
 import { EasyAccess } from "../core/EasyAccess.js";
 import { has_local_storage } from "../core/feature_detection.js";
