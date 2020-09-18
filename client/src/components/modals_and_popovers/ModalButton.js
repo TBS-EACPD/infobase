@@ -10,7 +10,7 @@ export class ModalButton extends React.Component {
     this.setState((prev_state) => ({ show_modal: !prev_state.show_modal }));
 
   render() {
-    const { button_text, title, children } = this.props;
+    const { button_text, title, children, aria_label } = this.props;
     const { show_modal } = this.state;
 
     return (
@@ -18,7 +18,7 @@ export class ModalButton extends React.Component {
         <button
           className="btn-link"
           onClick={this.toggle_modal}
-          aria-label="TODO"
+          aria-label={aria_label}
         >
           {button_text}
         </button>

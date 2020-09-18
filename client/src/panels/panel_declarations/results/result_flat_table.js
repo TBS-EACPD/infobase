@@ -139,14 +139,21 @@ const indicator_table_from_list = (indicator_list, subject) => {
       index: 1,
       header: text_maker("indicator"),
       is_searchable: true,
-      formatter: (value) => (
-        <ModalButton
-          title={text_maker("indicator_display_title")}
-          button_text={Indicator.lookup(ind_map[value].id).name}
-        >
-          <IndicatorDisplayPanel id={ind_map[value].id} />
-        </ModalButton>
-      ),
+      formatter: (value) => {
+        const indicator = Indicator.lookup(ind_map[value].id);
+
+        return (
+          <ModalButton
+            title={text_maker("indicator_display_title")}
+            button_text={indicator.name}
+            aria_label={`${
+              window.lang === "en" ? "Discover more about" : "Découvrir"
+            } ${indicator.name}`}
+          >
+            <IndicatorDisplayPanel id={ind_map[value].id} />
+          </ModalButton>
+        );
+      },
       sort_func: (a, b) => {
         if (a && b) {
           const a_name = ind_map[a].name.toUpperCase();
