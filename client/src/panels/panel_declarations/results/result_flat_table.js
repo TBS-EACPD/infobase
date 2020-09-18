@@ -12,7 +12,7 @@ import {
   HeightClippedGraph,
 } from "../shared.js";
 
-import IndicatorModalButton from "./IndicatorModalButton";
+import IndicatorDisplayPanel from "./IndicatorDisplayPanel";
 
 import { StatusIconTable, large_status_icons } from "./result_components.js";
 
@@ -27,6 +27,8 @@ import {
 } from "./results_common.js";
 
 import "./result_flat_table.scss";
+import { Indicator } from "src/models/results.js";
+import { ModalButton } from "src/components/index.js";
 
 const {
   SpinnerWrapper,
@@ -137,7 +139,14 @@ const indicator_table_from_list = (indicator_list, subject) => {
       index: 1,
       header: text_maker("indicator"),
       is_searchable: true,
-      formatter: (value) => <IndicatorModalButton id={ind_map[value].id} />,
+      formatter: (value) => (
+        <ModalButton
+          title={text_maker("indicator_display_title")}
+          button_text={Indicator.lookup(ind_map[value].id).name}
+        >
+          <IndicatorDisplayPanel id={ind_map[value].id} />
+        </ModalButton>
+      ),
       sort_func: (a, b) => {
         if (a && b) {
           const a_name = ind_map[a].name.toUpperCase();
