@@ -9,12 +9,10 @@ import {
 } from "../components/index.js";
 import { log_standard_event } from "../core/analytics.js";
 
-
 import { ensure_loaded } from "../core/lazy_loader.js";
 import { StandardRouteContainer } from "../core/NavComponents";
 import { shallowEqualObjectsOverKeys, SafeJSURL } from "../general_utils.js";
 import { Subject } from "../models/subject.js";
-
 
 import { get_panels_for_subject } from "../panels/get_panels_for_subject/index.js";
 import { PanelRenderer } from "../panels/PanelRenderer.js";
@@ -23,9 +21,13 @@ import AccessibleBubbleMenu from "./a11y_bubble_menu.js";
 import { bubble_defs } from "./bubble_definitions.js";
 import { BubbleMenu } from "./BubbleMenu.js";
 
-import { infograph_href_template } from "./infographic_link.js";
+import {
+  infograph_href_template,
+  infograph_options_href_template,
+} from "./infographic_link.js";
 
 import text from "./Infographic.yaml";
+import { InfographicContext } from "src/context/InfographicContext";
 
 const sub_app_name = "infographic_org";
 
@@ -166,6 +168,15 @@ class InfoGraph_ extends React.Component {
       }
     }
   }
+
+  get_copy_link = (options) =>
+    infograph_options_href_template(
+      this.state.subject,
+      this.state.active_bubble_id,
+      options
+    );
+  get_link_state = () => SafeJSURL.parse(this.props.options);
+
   render() {
     const { subject, active_bubble_id } = this.props;
     const {
@@ -218,84 +229,91 @@ class InfoGraph_ extends React.Component {
     );
 
     return (
-      <div>
-        <AnalyticsSynchronizer {...this.props} />
-        {window.is_a11y_mode && (
-          <div>
-            <TM k="a11y_search_other_infographs" />
-            {search_component}
-          </div>
-        )}
-        {!window.is_a11y_mode && (
-          <div className="row infographic-search-container">
-            {search_component}
-          </div>
-        )}
+      <InfographicContext.Provider
+        value={{
+          get_copy_link: this.get_copy_link,
+          get_link_state: this.get_link_state,
+        }}
+      >
         <div>
+          <AnalyticsSynchronizer {...this.props} />
+          {window.is_a11y_mode && (
+            <div>
+              <TM k="a11y_search_other_infographs" />
+              {search_component}
+            </div>
+          )}
+          {!window.is_a11y_mode && (
+            <div className="row infographic-search-container">
+              {search_component}
+            </div>
+          )}
           <div>
-            {loading && <SpinnerWrapper config_name={"route"} />}
+            <div>
+              {loading && <SpinnerWrapper config_name={"route"} />}
+              {!loading &&
+                (window.is_a11y_mode ? (
+                  <AccessibleBubbleMenu items={sorted_bubbles} />
+                ) : (
+                  <BubbleMenu items={sorted_bubbles} />
+                ))}
+            </div>
+          </div>
+          <div>
+            {window.is_a11y_mode && (
+              <p
+                id="infographic-explanation-focus"
+                aria-live="polite"
+                tabIndex={0}
+              >
+                {loading
+                  ? "Loading..."
+                  : text_maker("a11y_infograph_description")}
+              </p>
+            )}
             {!loading &&
-              (window.is_a11y_mode ? (
-                <AccessibleBubbleMenu items={sorted_bubbles} />
-              ) : (
-                <BubbleMenu items={sorted_bubbles} />
+              _.map(panel_keys, (panel_key) => (
+                <PanelRenderer
+                  panel_key={panel_key}
+                  subject={subject}
+                  active_bubble_id={active_bubble_id}
+                  key={panel_key + subject.guid}
+                />
               ))}
           </div>
-        </div>
-        <div>
-          {window.is_a11y_mode && (
-            <p
-              id="infographic-explanation-focus"
-              aria-live="polite"
-              tabIndex={0}
-            >
-              {loading
-                ? "Loading..."
-                : text_maker("a11y_infograph_description")}
-            </p>
-          )}
-          {!loading &&
-            _.map(panel_keys, (panel_key) => (
-              <PanelRenderer
-                panel_key={panel_key}
-                subject={subject}
-                active_bubble_id={active_bubble_id}
-                key={panel_key + subject.guid}
-              />
-            ))}
-        </div>
-        {!_.isEmpty(active_bubble_id) && (
-          <div className="row medium_panel_text">
-            <div className="previous_and_next_bubble_link_row">
-              {prev ? (
-                <a
-                  className="previous_bubble_link btn-lg btn-ib-primary"
-                  href={infograph_href_template(subject, prev.id)}
-                  onClick={reset_scroll}
-                  style={{ textDecoration: "none" }}
-                >
-                  {`←  ${prev.title}`}
-                </a>
-              ) : (
-                <a style={{ visibility: "hidden" }}></a>
-              )}
-              {next ? (
-                <a
-                  className="next_bubble_link btn-lg btn-ib-primary"
-                  href={infograph_href_template(subject, next.id)}
-                  onClick={reset_scroll}
-                  style={{ textDecoration: "none" }}
-                >
-                  {`${next.title}  →`}
-                </a>
-              ) : (
-                <a style={{ visibility: "hidden" }}></a>
-              )}
+          {!_.isEmpty(active_bubble_id) && (
+            <div className="row medium_panel_text">
+              <div className="previous_and_next_bubble_link_row">
+                {prev ? (
+                  <a
+                    className="previous_bubble_link btn-lg btn-ib-primary"
+                    href={infograph_href_template(subject, prev.id)}
+                    onClick={reset_scroll}
+                    style={{ textDecoration: "none" }}
+                  >
+                    {`←  ${prev.title}`}
+                  </a>
+                ) : (
+                  <a style={{ visibility: "hidden" }}></a>
+                )}
+                {next ? (
+                  <a
+                    className="next_bubble_link btn-lg btn-ib-primary"
+                    href={infograph_href_template(subject, next.id)}
+                    onClick={reset_scroll}
+                    style={{ textDecoration: "none" }}
+                  >
+                    {`${next.title}  →`}
+                  </a>
+                ) : (
+                  <a style={{ visibility: "hidden" }}></a>
+                )}
+              </div>
+              <div className="clearfix" />
             </div>
-            <div className="clearfix" />
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      </InfographicContext.Provider>
     );
   }
 

@@ -1,22 +1,24 @@
 import gql from "graphql-tag";
 
+import { InfographicContext } from "../../../context/InfographicContext";
+
 import {
   Panel,
   SpinnerWrapper,
-  // WriteToClipboard,
-  // create_text_maker_component,
+  WriteToClipboard,
+  create_text_maker_component,
 } from "../../../components/index.js";
 import { log_standard_event } from "../../../core/analytics.js";
 import { get_client } from "../../../graphql_utils/graphql_utils.js";
 
-// import { IconCopyLink } from "../../../icons/icons.js";
+import { IconCopyLink } from "../../../icons/icons.js";
 import { Indicator } from "../../../models/results.js";
 
 import { IndicatorDisplay } from "./result_components.js";
 
-// import text from "./IndicatorDisplayPanel.yaml";
+import text from "./IndicatorDisplayPanel.yaml";
 
-// const { text_maker } = create_text_maker_component(text);
+const { text_maker } = create_text_maker_component(text);
 
 const indicators_fields_fragment = `  id
   stable_id
@@ -107,6 +109,8 @@ export default class IndicatorDisplayPanel extends React.Component {
     this.state = { loading: true };
   }
 
+  static contextType = InfographicContext;
+
   componentDidUpdate() {
     const { id } = this.props;
     const { loading } = this.state;
@@ -123,22 +127,26 @@ export default class IndicatorDisplayPanel extends React.Component {
 
     const indicator = Indicator.lookup(id);
 
+    const panel_link = window.location.href.replace(
+      window.location.hash,
+      this.context.get_copy_link({ indicator: id })
+    );
+
     return loading ? (
       <SpinnerWrapper ref="spinner" config_name={"sub_route"} />
     ) : (
       <Panel
         title={indicator.name}
-        /* the below content will be used once linking to indicators has been added back*/
-        // otherHeaderContent={
-        //   <div style={{ marginLeft: "auto" }}>
-        //     <WriteToClipboard
-        //       text_to_copy={modal_link}
-        //       button_class_name={"panel-heading-utils"}
-        //       button_description={text_maker("copy_indicator_link")}
-        //       IconComponent={IconCopyLink}
-        //     />
-        //   </div>
-        // }
+        otherHeaderContent={
+          <div style={{ marginLeft: "auto" }}>
+            <WriteToClipboard
+              text_to_copy={panel_link}
+              button_class_name={"panel-heading-utils"}
+              button_description={text_maker("copy_indicator_link")}
+              IconComponent={IconCopyLink}
+            />
+          </div>
+        }
       >
         <IndicatorDisplay indicator={indicator} show_doc={true} />
       </Panel>

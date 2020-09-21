@@ -151,6 +151,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
             aria_label={`${
               window.lang === "en" ? "Discover more about" : "Découvrir"
             } ${indicator.name}`}
+            show_condition={{ name: "indicator", value: ind_map[value].id }}
           >
             <IndicatorDisplayPanel id={ind_map[value].id} />
           </ModalButton>
