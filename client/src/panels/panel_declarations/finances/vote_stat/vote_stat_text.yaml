@@ -83,11 +83,7 @@ in_year_estimates_split_title:
 gov_in_year_estimates_split_text:
   transform: [handlebars,markdown]
   en: |
-<<<<<<< HEAD
-    This fiscal year ({{est_in_year}}), a total of **{{fmt_compact1_written tabled_est_in_year}}** in planned budgetary expenditures have been presented in the 
-=======
-    This fiscal year ({{est_in_year}}), a total of **{{fmt_compact1_written gov_tabled_est_in_year}}** in {{gl_tt "authorized" "AUTH"}} spending has been presented in the 
->>>>>>> Change finance panel text to use authorized spending; add footnote to est_in_perspective
+    This fiscal year ({{est_in_year}}), a total of **{{fmt_compact1_written tabled_est_in_year}}** in {{gl_tt "authorized" "AUTH"}} spending has been presented in the 
     following {{gl_tt "estimates processes" "EST_PROC"}} and {{gl_tt "adjustments and transfers" "ADJUS"}}:
     {{#each in_year_estimates_split}}
     * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}** 
@@ -110,7 +106,7 @@ gov_in_year_estimates_split_text:
 dept_in_year_estimates_split_text:
   transform: [handlebars,markdown]
   en: |
-   As of the {{est_in_year}} {{last_estimates}}, **{{subject.name}}**'s {{gl_tt "authorized" "AUTH"}} spending of **{{fmt_compact1_written tabled_est_in_year_estimates}}** were presented in the 
+   As of the {{est_in_year}} {{last_estimates}}, **{{subject.name}}**'s {{gl_tt "authorized" "AUTH"}} spendings of **{{fmt_compact1_written tabled_est_in_year_estimates}}** were presented in the 
    following {{gl_tt "Estimates processes" "EST_PROC"}} and {{gl_tt "adjustments and transfers" "ADJUS"}}: 
    {{#each in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
@@ -138,8 +134,8 @@ estimates_perspective_title:
 estimates_perspective_text:
   transform: [handlebars,markdown]
   en: |
-   As of the {{est_in_year}} {{last_estimates}}, **{{subject.name}} ({{subject.abbr}})** has been allocated **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** in {{gl_tt "authorized" "AUTH"}} spending.
-   (or **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}** of the **{{fmt_compact1_written gov_tabled_est_in_year}}** in government {{gl_tt "authorized" "AUTH"}} spending)
+   As of the {{est_in_year}} {{last_estimates}}, **{{subject.name}} ({{subject.abbr}})** has been allocated **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** in {{gl_tt "authorized" "AUTH"}} spendings.
+   (or **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}** of the **{{fmt_compact1_written gov_tabled_est_in_year}}** in government {{gl_tt "authorized" "AUTH"}} spendings)
 
 
    {{! only to be used near year end when a main estimates for the following year has been tabled}}
