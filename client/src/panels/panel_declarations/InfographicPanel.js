@@ -12,7 +12,7 @@ import {
 } from "../../components/index.js";
 
 import { IconCopyLink } from "../../icons/icons.js";
-import { panel_href_template } from "../../infographic/infographic_link.js";
+import { infograph_options_href_template } from "../../infographic/infographic_link.js";
 
 import { panel_context } from "../PanelRenderer.js";
 
@@ -46,18 +46,14 @@ class Panel_ extends React.Component {
     const file_name = `${file_name_context}_${title}.pdf`;
     const panel_link =
       context &&
-      panel_href_template(
-        subject,
-        context.active_bubble_id,
-        context.panel_key
-      ) &&
+      infograph_options_href_template(subject, context.active_bubble_id, {
+        panel_key: context.panel_key,
+      }) &&
       window.location.href.replace(
         window.location.hash,
-        panel_href_template(
-          subject,
-          context.active_bubble_id,
-          context.panel_key
-        )
+        infograph_options_href_template(subject, context.active_bubble_id, {
+          panel_key: context.panel_key,
+        })
       );
 
     const share_modal_subject_fragment = subject
