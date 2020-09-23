@@ -175,7 +175,6 @@ class InfoGraph_ extends React.Component {
       this.state.active_bubble_id,
       options
     );
-  get_link_state = () => SafeJSURL.parse(this.props.options);
 
   render() {
     const { subject, active_bubble_id } = this.props;
@@ -232,7 +231,6 @@ class InfoGraph_ extends React.Component {
       <InfographicContext.Provider
         value={{
           get_copy_link: this.get_copy_link,
-          get_link_state: this.get_link_state,
         }}
       >
         <div>

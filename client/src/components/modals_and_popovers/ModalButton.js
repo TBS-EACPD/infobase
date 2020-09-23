@@ -5,7 +5,6 @@ import { StatelessModal } from "./StatelessModal";
 import { SafeJSURL } from "src/general_utils";
 
 class ModalButton_ extends React.Component {
-  state = { show_modal: false };
   constructor(props) {
     super(props);
 
@@ -18,12 +17,11 @@ class ModalButton_ extends React.Component {
 
     const options_object = SafeJSURL.parse(options);
 
-    this.state =
-      show_condition &&
-      options_object[show_condition.name] &&
-      show_condition.value === options_object[show_condition.name]
-        ? { show_modal: true }
-        : { show_modal: false };
+    this.state = (show_condition &&
+      options_object[show_condition.name] && {
+        show_modal:
+          show_condition.value === options_object[show_condition.name],
+      }) || { show_modal: false };
   }
 
   toggle_modal = () =>
