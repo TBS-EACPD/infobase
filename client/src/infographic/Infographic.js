@@ -2,6 +2,8 @@ import { Redirect } from "react-router";
 
 import "./Infographic.scss";
 
+import { InfographicContext } from "src/context/InfographicContext.js";
+
 import {
   create_text_maker_component,
   SpinnerWrapper,
@@ -27,7 +29,6 @@ import {
 } from "./infographic_link.js";
 
 import text from "./Infographic.yaml";
-import { InfographicContext } from "src/context/InfographicContext";
 
 const sub_app_name = "infographic_org";
 
