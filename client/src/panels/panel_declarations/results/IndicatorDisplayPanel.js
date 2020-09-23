@@ -1,13 +1,12 @@
 import gql from "graphql-tag";
 
-import { InfographicContext } from "../../../context/InfographicContext";
-
 import {
   Panel,
   SpinnerWrapper,
   WriteToClipboard,
   create_text_maker_component,
 } from "../../../components/index.js";
+import { InfographicContext } from "../../../context/InfographicContext";
 import { log_standard_event } from "../../../core/analytics.js";
 import { get_client } from "../../../graphql_utils/graphql_utils.js";
 
