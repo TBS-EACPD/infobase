@@ -18,11 +18,12 @@ class ModalButton_ extends React.Component {
 
     const options_object = SafeJSURL.parse(options);
 
-    this.state = (show_condition &&
-      options_object[show_condition.name] && {
-        show_modal:
-          show_condition.value === options_object[show_condition.name],
-      }) || { show_modal: false };
+    this.state = {
+      show_modal:
+        show_condition &&
+        options_object[show_condition.name] &&
+        show_condition.value === options_object[show_condition.name],
+    };
   }
 
   toggle_modal = () =>
