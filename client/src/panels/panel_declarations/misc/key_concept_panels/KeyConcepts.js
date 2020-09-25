@@ -110,7 +110,7 @@ class KeyConcepts_ extends React.Component {
               style={{ fontWeight: 700 }}
             />,
             <TM key={key + "_a"} el="p" k={key + "_a"} args={{ subject }} />,
-            <br />,
+            <br key={key} />,
           ])}
           on_close_callback={disable_popup}
           additional_dialog_class={"modal-responsive"}
