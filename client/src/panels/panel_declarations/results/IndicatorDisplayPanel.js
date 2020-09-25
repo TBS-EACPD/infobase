@@ -119,7 +119,7 @@ export default class IndicatorDisplayPanel extends React.Component {
   }
 
   render() {
-    const { id, subject, active_bubble_id } = this.props;
+    const { id, subject } = this.props;
 
     const { loading } = this.state;
 
@@ -127,7 +127,7 @@ export default class IndicatorDisplayPanel extends React.Component {
 
     const panel_link = window.location.href.replace(
       window.location.hash,
-      infograph_options_href_template(subject, active_bubble_id, {
+      infograph_options_href_template(subject, "results", {
         indicator: id,
       })
     );
