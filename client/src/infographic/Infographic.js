@@ -21,10 +21,7 @@ import AccessibleBubbleMenu from "./a11y_bubble_menu.js";
 import { bubble_defs } from "./bubble_definitions.js";
 import { BubbleMenu } from "./BubbleMenu.js";
 
-import {
-  infograph_href_template,
-  infograph_options_href_template,
-} from "./infographic_link.js";
+import { infograph_href_template } from "./infographic_link.js";
 
 import text from "./Infographic.yaml";
 

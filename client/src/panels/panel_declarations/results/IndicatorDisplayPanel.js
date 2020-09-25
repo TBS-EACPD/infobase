@@ -1,5 +1,7 @@
 import gql from "graphql-tag";
 
+import { infograph_options_href_template } from "src/infographic/infographic_link.js";
+
 import {
   Panel,
   SpinnerWrapper,
@@ -15,7 +17,6 @@ import { Indicator } from "../../../models/results.js";
 import { IndicatorDisplay } from "./result_components.js";
 
 import text from "./IndicatorDisplayPanel.yaml";
-import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
 const { text_maker } = create_text_maker_component(text);
 
