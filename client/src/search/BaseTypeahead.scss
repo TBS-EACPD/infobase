@@ -2,6 +2,7 @@
 
 .rbt-input-hint-container > .form-control {
   width: 100%;
+  padding-left: 40px;
   @media(max-width:$maxMediumDevice){
       font-size: 14px;
   }
@@ -70,7 +71,7 @@
 .rbt-input-hint-container > .search-icon-container {
   position: absolute; 
   height: 100%; 
-  right: 8px; 
+  left: 8px; 
   top: 0px; 
   display: flex; 
   align-items: center;
