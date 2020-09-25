@@ -1,27 +1,6 @@
-import classNames from "classnames";
-import MediaQuery from "react-responsive";
+import { declare_panel } from "../../shared.js";
 
-import { util_components, breakpoints, declare_panel } from "../../shared.js";
-
-import common_lang from "./common_questions.yaml";
-import fin_lang from "./financial_questions.yaml";
-import ppl_lang from "./people_questions.yaml";
-import results_lang from "./results_questions.yaml";
-import tag_lang from "./tagging_questions.yaml";
-
-const {
-  create_text_maker_component,
-  AutoAccordion,
-  KeyConceptList,
-} = util_components;
-
-const { text_maker, TM } = create_text_maker_component([
-  common_lang,
-  fin_lang,
-  ppl_lang,
-  results_lang,
-  tag_lang,
-]);
+import { KeyConcepts } from "./KeyConcepts.js";
 
 const common_panel_config = {
   static: true,
@@ -38,22 +17,7 @@ const curried_render = ({ q_a_keys, omit_name_item }) =>
     ]);
 
     return (
-      <MediaQuery maxWidth={breakpoints.maxMediumDevice}>
-        {(matches) => (
-          <div className={classNames("mrgn-bttm-md", matches && "mrgn-tp-md")}>
-            <AutoAccordion title={text_maker("some_things_to_keep_in_mind")}>
-              <div style={{ paddingLeft: "10px", paddingRight: "10px" }}>
-                <KeyConceptList
-                  question_answer_pairs={_.map(rendered_q_a_keys, (key) => [
-                    <TM key={key + "_q"} k={key + "_q"} args={{ subject }} />,
-                    <TM key={key + "_a"} k={key + "_a"} args={{ subject }} />,
-                  ])}
-                />
-              </div>
-            </AutoAccordion>
-          </div>
-        )}
-      </MediaQuery>
+      <KeyConcepts rendered_q_a_keys={rendered_q_a_keys} subject={subject} />
     );
   };
 
