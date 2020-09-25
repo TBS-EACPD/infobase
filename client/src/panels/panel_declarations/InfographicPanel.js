@@ -117,7 +117,9 @@ class Panel_ extends React.Component {
         allowOverflow={allowOverflow}
         title={title}
         otherHeaderContent={header_utils}
-        children={children}
+        children={React.cloneElement(children, {
+          active_bubble_id: context.active_bubble_id,
+        })}
         sources={sources}
         glossary_keys={glossary_keys}
         footnotes={footnotes}

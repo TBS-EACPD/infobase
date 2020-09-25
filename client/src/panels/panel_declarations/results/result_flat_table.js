@@ -98,7 +98,11 @@ const date_as_number = (value) => {
   return _.isNaN(time) ? Number.POSITIVE_INFINITY : time;
 };
 
-const indicator_table_from_list = (indicator_list, subject) => {
+const indicator_table_from_list = (
+  indicator_list,
+  subject,
+  active_bubble_id
+) => {
   const ind_map = _.chain(indicator_list)
     .map((ind) => [
       ind.indicator.id,
@@ -153,7 +157,11 @@ const indicator_table_from_list = (indicator_list, subject) => {
             } ${indicator.name}`}
             show_condition={{ name: "indicator", value: ind_map[value].id }}
           >
-            <IndicatorDisplayPanel id={ind_map[value].id} />
+            <IndicatorDisplayPanel
+              id={ind_map[value].id}
+              subject={subject}
+              active_bubble_id={active_bubble_id}
+            />
           </ModalButton>
         );
       },
@@ -256,7 +264,12 @@ class ResultsTable extends React.Component {
     }).then(() => this.setState({ loading: false }));
   }
   render() {
-    const { subject, subject_result_counts, last_drr_doc } = this.props;
+    const {
+      subject,
+      subject_result_counts,
+      last_drr_doc,
+      active_bubble_id,
+    } = this.props;
     const { loading, status_active_list } = this.state;
 
     if (loading) {
@@ -312,7 +325,11 @@ class ResultsTable extends React.Component {
           </div>
           <HeightClippedGraph clipHeight={200}>
             <div className="results-flat-table">
-              {indicator_table_from_list(filtered_indicators, subject)}
+              {indicator_table_from_list(
+                filtered_indicators,
+                subject,
+                active_bubble_id
+              )}
             </div>
           </HeightClippedGraph>
         </div>

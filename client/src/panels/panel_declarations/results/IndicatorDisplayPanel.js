@@ -6,7 +6,6 @@ import {
   WriteToClipboard,
   create_text_maker_component,
 } from "../../../components/index.js";
-import { InfographicContext } from "../../../context/InfographicContext";
 import { log_standard_event } from "../../../core/analytics.js";
 import { get_client } from "../../../graphql_utils/graphql_utils.js";
 
@@ -16,6 +15,7 @@ import { Indicator } from "../../../models/results.js";
 import { IndicatorDisplay } from "./result_components.js";
 
 import text from "./IndicatorDisplayPanel.yaml";
+import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
 const { text_maker } = create_text_maker_component(text);
 
@@ -108,8 +108,6 @@ export default class IndicatorDisplayPanel extends React.Component {
     this.state = { loading: true };
   }
 
-  static contextType = InfographicContext;
-
   componentDidUpdate() {
     const { id } = this.props;
     const { loading } = this.state;
@@ -120,7 +118,7 @@ export default class IndicatorDisplayPanel extends React.Component {
   }
 
   render() {
-    const { id } = this.props;
+    const { id, subject, active_bubble_id } = this.props;
 
     const { loading } = this.state;
 
@@ -128,7 +126,9 @@ export default class IndicatorDisplayPanel extends React.Component {
 
     const panel_link = window.location.href.replace(
       window.location.hash,
-      this.context.get_copy_link({ indicator: id })
+      infograph_options_href_template(subject, active_bubble_id, {
+        indicator: id,
+      })
     );
 
     return loading ? (
