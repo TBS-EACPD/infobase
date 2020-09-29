@@ -3,13 +3,21 @@ import _ from "lodash";
 import { bilingual_field } from "../schema_utils";
 
 const schema = `
+  extend type Gov{
+    service_type_stats: [ServiceTypeStats]
+    service_general_stats: ServiceGeneralStats
+  }
   extend type Org{
     services: [Service]
     has_services: Boolean
+    service_general_stats: ServiceGeneralStats
+    service_type_stats: [ServiceTypeStats]
   }
   extend type Program{
     services: [Service]
     has_services: Boolean
+    service_general_stats: ServiceGeneralStats
+    service_type_stats: [ServiceTypeStats]
   }
   type ServiceReport{
     service_id: String
@@ -81,10 +89,18 @@ const schema = `
     rtp_urls: [String]
     standard_report: [StandardReport]
   }
+  type ServiceGeneralStats{
+    num_of_services: Float
+  }
+  type ServiceTypeStats{
+    id: String
+    label: String
+    value: Float
+  }
 `;
 
 export default function ({ models, loaders }) {
-  const { Service } = models;
+  const { Service, ServiceTypeStats } = models;
 
   const {
     services_by_org_id,
@@ -101,15 +117,62 @@ export default function ({ models, loaders }) {
     const has_service = await Service.findOne({ program_ids: program_id });
     return !_.isNull(has_service);
   };
+  const get_service_general_stats = async (id, loader) => {
+    const services = await (id ? loader.load(id) : Service.find());
+    return {
+      num_of_services: services.length,
+    };
+  };
+  const get_service_type_stats = async (id, loader) => {
+    const services = await (id ? loader.load(id) : Service.find());
+    const type_counts = _.reduce(
+      services,
+      (sum, { service_type_en, service_type_fr }) => {
+        const zipped_service_type = _.zip(service_type_en, service_type_fr);
+        _.forEach(zipped_service_type, (type) => {
+          const type_count_idx = _.findIndex(
+            sum,
+            (row) => row.id_en === type[0]
+          );
+          if (type_count_idx === -1) {
+            sum.push({
+              id_en: type[0],
+              id_fr: type[1],
+              label_en: type[0],
+              label_fr: type[1],
+              value: 1,
+            });
+          } else {
+            sum[type_count_idx].value = sum[type_count_idx].value + 1;
+          }
+        });
+        return sum;
+      },
+      []
+    );
+    return type_counts;
+  };
 
   const resolvers = {
+    Gov: {
+      service_general_stats: () => get_service_general_stats(),
+      service_type_stats: () => get_service_type_stats(),
+    },
     Org: {
       services: ({ org_id }) => services_by_org_id.load(org_id),
       has_services: ({ org_id }) => org_has_services(org_id),
+      service_general_stats: ({ org_id }) =>
+        get_service_general_stats(org_id, services_by_org_id),
+      service_type_stats: ({ org_id }) =>
+        get_service_type_stats(org_id, services_by_org_id),
     },
     Program: {
       services: ({ program_id }) => services_by_program_id.load(program_id),
       has_services: ({ program_id }) => program_has_services(program_id),
+      service_general_stats: ({ program_id }) =>
+        get_service_general_stats(program_id, services_by_program_id),
+      service_type_stats: ({ program_id }) =>
+        get_service_type_stats(program_id, services_by_program_id),
     },
     Service: {
       org: ({ org_id }) => org_id_loader.load(org_id),
@@ -139,6 +202,10 @@ export default function ({ models, loaders }) {
     },
     StandardReport: {
       standard_report_comment: bilingual_field("standard_report_comment"),
+    },
+    ServiceTypeStats: {
+      id: bilingual_field("id"),
+      label: bilingual_field("label"),
     },
   };
 

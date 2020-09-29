@@ -1,5 +1,5 @@
 import text from "./services.yaml";
-import { Service } from "../../../models/services.js";
+import { ServiceStats } from "../../../models/services.js";
 
 import {
   create_text_maker_component,
@@ -13,16 +13,7 @@ const { DisplayTable } = util_components;
 const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesTypesPanel = ({ panel_args }) => {
-  const { services, subject } = panel_args;
-  const data = _.chain(services)
-    .flatMap("service_type")
-    .countBy()
-    .map((value, type) => ({
-      id: type,
-      label: type,
-      value,
-    }))
-    .value();
+  const { subject, data } = panel_args;
   const max_type = _.maxBy(data, "value");
 
   return (
@@ -33,7 +24,10 @@ const ServicesTypesPanel = ({ panel_args }) => {
           subject,
           max_type: max_type.label,
           max_type_count: max_type.value,
-          num_of_services: services.length,
+          num_of_services: ServiceStats.get_data(
+            subject,
+            "service_general_stats"
+          ).num_of_services,
         }}
         className="medium_panel_text"
         k={
@@ -71,14 +65,9 @@ export const declare_services_types_panel = () =>
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
       calculate: (subject) => {
-        const services = {
-          dept: Service.get_by_dept(subject.id),
-          program: Service.get_by_prog(subject.id),
-          gov: Service.get_all(),
-        };
         return {
           subject,
-          services: services[level],
+          data: ServiceStats.get_data(subject, "service_type_stats"),
         };
       },
       footnotes: false,

@@ -1,7 +1,7 @@
 import { get_client } from "../graphql_utils/graphql_utils.js";
 import gql from "graphql-tag";
 import { log_standard_event } from "../core/analytics.js";
-import { Service, ServiceStandard } from "./services.js";
+import { Service, ServiceStandard, ServiceStats } from "./services.js";
 
 const get_subject_has_services_query = (level, id_arg_name) => gql`
 query($lang: String! $id: String) {
@@ -198,6 +198,54 @@ query($lang: String!) {
   }
 }
 `;
+const gov_service_stats_query = gql`
+  query($lang: String!) {
+    root(lang: $lang) {
+      gov {
+        service_general_stats {
+          num_of_services
+        }
+        service_type_stats {
+          id
+          label
+          value
+        }
+      }
+    }
+  }
+`;
+const dept_service_stats_query = gql`
+  query($lang: String!, $id: String) {
+    root(lang: $lang) {
+      org(org_id: $id) {
+        service_general_stats {
+          num_of_services
+        }
+        service_type_stats {
+          id
+          label
+          value
+        }
+      }
+    }
+  }
+`;
+const program_service_stats_query = gql`
+  query($lang: String!, $id: String) {
+    root(lang: $lang) {
+      program(id: $id) {
+        service_general_stats {
+          num_of_services
+        }
+        service_type_stats {
+          id
+          label
+          value
+        }
+      }
+    }
+  }
+`;
 
 const extract_flat_data_from_hierarchical_response = (response) => {
   const serviceStandards = [];
@@ -213,6 +261,58 @@ const extract_flat_data_from_hierarchical_response = (response) => {
     .value();
   return { services, serviceStandards };
 };
+export function api_load_service_stats(subject) {
+  if (ServiceStats.get_data(subject)) {
+    return Promise.resolve();
+  }
+  const { query, response_accessor } = (() => {
+    switch (subject.level) {
+      case "gov":
+        return {
+          response_accessor: (response) => response.data.root.gov,
+          query: {
+            query: gov_service_stats_query,
+            variables: {
+              lang: window.lang,
+              _query_name: "gov_service_stats",
+            },
+          },
+        };
+      case "dept":
+        return {
+          response_accessor: (response) => response.data.root.org,
+          query: {
+            query: dept_service_stats_query,
+            variables: {
+              lang: window.lang,
+              id: _.toString(subject.id),
+              _query_name: "dept_service_stats",
+            },
+          },
+        };
+      case "program":
+        return {
+          response_accessor: (response) => response.data.root.program,
+          query: {
+            query: program_service_stats_query,
+            variables: {
+              lang: window.lang,
+              id: _.toString(subject.id),
+              _query_name: "program_service_stats",
+            },
+          },
+        };
+    }
+  })();
+  const client = get_client();
+  return client.query(query).then((response) => {
+    const service_stats = response_accessor(response);
+    if (!_.isEmpty(service_stats)) {
+      ServiceStats.set_data(subject, service_stats);
+    }
+    return Promise.resolve();
+  });
+}
 
 const _subject_ids_with_loaded_services = {};
 export function api_load_services(subject) {

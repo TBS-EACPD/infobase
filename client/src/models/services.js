@@ -14,6 +14,25 @@ import { Program, Dept } from "./organizational_entities.js";
 const static_subject_store = () =>
   mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
 
+const ServiceStats = {
+  data: {},
+  get_data(subject, data_type) {
+    const gov_or_id = subject.level === "gov" ? "gov" : subject.id;
+    if (data_type) {
+      return this.data[gov_or_id][data_type];
+    } else {
+      return this.data[gov_or_id];
+    }
+  },
+  set_data(subject, data) {
+    if (subject.level === "gov") {
+      this.data.gov = data;
+    } else {
+      this.data[subject.id] = data;
+    }
+  },
+};
+
 const Service = class Service extends static_subject_store() {
   static get subject_type() {
     return "service";
@@ -102,4 +121,4 @@ const ServiceStandard = class ServiceStandard extends static_subject_store() {
   }
 };
 
-export { Service, ServiceStandard };
+export { Service, ServiceStandard, ServiceStats };

@@ -14,6 +14,7 @@ import {
 import {
   api_load_subject_has_services,
   api_load_services,
+  api_load_service_stats,
 } from "../models/populate_services.js";
 import { load_horizontal_initiative_lookups } from "../models/populate_horizontal_initiative_lookups.js";
 
@@ -183,6 +184,10 @@ function ensure_loaded({
     ? api_load_budget_measures(subject, budget_years)
     : Promise.resolve();
 
+  const services_stats_prom = should_load_services
+    ? api_load_service_stats(subject)
+    : Promise.resolve();
+
   const has_services_prom =
     should_load_has_services && _.isFunction(subject.set_has_data)
       ? api_load_subject_has_services(subject)
@@ -205,6 +210,7 @@ function ensure_loaded({
     footnotes_prom,
     has_budget_measures_prom,
     budget_measures_prom,
+    services_stats_prom,
     has_services_prom,
     services_prom,
     horizontal_initiative_lookups_prom,
