@@ -141,6 +141,12 @@ class RPB extends React.Component {
     if (this.state.loading) {
       return;
     }
+    if (table_id === this.props.state.table) {
+      this.setState({
+        table_picking: false,
+      });
+      return;
+    }
     this.setState({
       loading: true,
       table_picking: false,
