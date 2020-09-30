@@ -4,11 +4,12 @@ import { IconCheckmark } from "../icons/icons.js";
 import "./CheckBox.scss";
 
 export class CheckBox extends React.Component {
-  handleOnClick = (onClick, disabled, id) => {
+  handleOnClick() {
+    const { disabled, onClick, id } = this.props;
     if (!disabled && onClick) {
       onClick(id);
     }
-  };
+  }
   render() {
     const {
       id,
@@ -31,7 +32,7 @@ export class CheckBox extends React.Component {
             <input
               type="checkbox"
               checked={active}
-              onChange={this.handleOnClick.bind(this, onClick, disabled, id)}
+              onChange={this.handleOnClick}
               style={{ marginRight: 5 }}
             />
             {label}
@@ -56,7 +57,7 @@ export class CheckBox extends React.Component {
               ...checkbox_style,
             }}
             className={classNames("checkbox-span", onClick && "span-hover")}
-            onClick={this.handleOnClick.bind(this, onClick, disabled, id)}
+            onClick={this.handleOnClick}
           >
             {!isSolidBox && (
               <IconCheckmark
@@ -74,7 +75,7 @@ export class CheckBox extends React.Component {
               aria-checked={active}
               tabIndex={0}
               className="link-styled"
-              onClick={this.handleOnClick.bind(this, onClick, disabled, id)}
+              onClick={this.handleOnClick}
               onKeyDown={(e) =>
                 (e.keyCode === 13 || e.keyCode === 32) &&
                 !disabled &&
