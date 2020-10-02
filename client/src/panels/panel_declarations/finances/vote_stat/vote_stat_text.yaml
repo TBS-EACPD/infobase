@@ -69,9 +69,15 @@ dept_in_year_voted_stat_split_text:
    (or **{{fmt_compact1_written voted_est_in_year}}**) from {{gl_tt "voted authorities" "VOTED"}}.
 
   fr: |
+<<<<<<< HEAD
    Sur les **{{fmt_compact1_written tabled_est_in_year}}** en dépenses budgétaires prévues pour **{{le_dept subject}}**, 
    **{{fmt_compact1_written stat_est_in_year}}** (ou **{{fmt_percentage1 stat_percent_est_in_year}}**) proviendra {{gl_tt "d'autorisations législatives" "STAT"}} et 
    **{{fmt_compact1_written voted_est_in_year}}** (ou **{{fmt_percentage1 voted_percent_est_in_year}}**) {{gl_tt "d'autorisations votées" "VOTED"}}.
+=======
+   TODO 
+   **{{fmt_compact1_written dept_stat_est_in_year}}** (ou **{{fmt_percentage1 dept_stat_percent_est_in_year}}**) proviendra {{gl_tt "d'autorisations législatives" "STAT"}} et 
+   **{{fmt_compact1_written dept_voted_est_in_year}}** (ou **{{fmt_percentage1 dept_voted_percent_est_in_year}}**) {{gl_tt "d'autorisations votées" "VOTED"}}.
+>>>>>>> Replace french with TODO if english changed
 
 
 
@@ -93,10 +99,17 @@ gov_in_year_estimates_split_text:
     On {{interim_mains_table_date}}, the {{est_next_year}} {{gl_tt "Interim Estimates" "INTER_EST"}} were tabled in Parliament seeking **{{fmt_compact1_written gov_tabled_est_next_year}}** in {{gl_tt "spending authorities" "AUTH"}} to begin the new fiscal year. This funding supports the government's financial requirements for the first three months of the year.
     {{/if}}
   fr: |
+<<<<<<< HEAD
    Pour l’exercice courant ({{est_in_year}}), le total de dépenses budgétaires prévues s’élève à 
    **{{fmt_compact1_written gov_tabled_est_in_year}}** dans le(s) {{gl_tt "processus budgétaire(s)" "EST_PROC"}} et {{gl_tt "redressements et virements" "ADJUS"}} suivants:
    {{#each in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}** 
+=======
+   TODO
+   
+   {{#each gov_in_year_estimates_split}}
+   * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
+>>>>>>> Replace french with TODO if english changed
    {{/each}}
 
    {{#if gov_tabled_est_next_year}}
@@ -116,9 +129,15 @@ dept_in_year_estimates_split_text:
      On {{interim_mains_table_date}}, the {{est_next_year}} {{gl_tt "Interim Estimates" "INTER_EST"}} were tabled in Parliament seeking **{{fmt_compact1_written dept_tabled_est_next_year_estimates}}** in {{gl_tt "spending authorities" "AUTH"}} to begin the new fiscal year. This funding supports the organization's financial requirements for the first three months of the year.
    {{/if}}
   fr: |
+<<<<<<< HEAD
    En date du {{est_in_year}} {{last_estimates}}, pour **{{le_dept subject}}**, les dépenses autorisées de **{{fmt_compact1_written tabled_est_in_year_estimates}}** figurent 
    dans le(s) {{gl_tt "processus budgétaire(s)" "EST_PROC"}}  et {{gl_tt "redressements et virements" "ADJUS"}} suivants: 
    {{#each in_year_estimates_split}}
+=======
+   TODO
+
+   {{#each dept_in_year_estimates_split}}
+>>>>>>> Replace french with TODO if english changed
    * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
    {{/each}}
 
