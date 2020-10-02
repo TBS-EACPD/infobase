@@ -90,12 +90,12 @@ export class Panel extends React.Component {
               <button
                 className={classNames("panel-heading-utils")}
                 onClick={() => this.setState({ isOpen: !isOpen })}
-                aria-labelledby={label_id}
+                aria-label={label_id}
               >
                 <span aria-hidden>{isOpen ? "▼" : "►"}</span>
               </button>
             }
-            {title && <h3 className="panel-title">{title}</h3>}
+            {title && <h2 className="panel-title">{title}</h2>}
             {isOpen && otherHeaderContent}
           </header>
         )}

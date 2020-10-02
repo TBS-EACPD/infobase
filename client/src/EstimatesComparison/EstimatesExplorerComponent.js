@@ -1,6 +1,5 @@
 import classNames from "classnames";
 
-
 import {
   SpinnerWrapper,
   FootnoteList,
@@ -16,7 +15,6 @@ import { Explorer } from "src/explorer_common/explorer_components.js";
 import { get_root } from "src/explorer_common/hierarchy_tools.js";
 import { infograph_href_template, rpb_link } from "src/link_utils.js";
 import { sources } from "src/metadata/data_sources.js";
-
 
 import { businessConstants } from "../models/businessConstants.js";
 
@@ -44,13 +42,13 @@ const DetailedAmountsByDoc = ({ amounts_by_doc }) => {
         <table className="table table-condensed">
           <thead>
             <tr>
-              <th scope="column">
+              <th scope="col">
                 <TM k="estimates_doc" />
               </th>
-              <th scope="column">
+              <th scope="col">
                 <TM k="last_year_authorities" />
               </th>
-              <th scope="column">
+              <th scope="col">
                 <TM k="this_year_authorities" />
               </th>
             </tr>

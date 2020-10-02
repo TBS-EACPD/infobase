@@ -134,9 +134,9 @@ class TablePicker extends React.Component {
 
     return (
       <div ref="main" id="tbp-main">
-        <h2 id="tbp-title">
+        <h1 id="tbp-title">
           <TextMaker text_key="table_picker_title" />
-        </h2>
+        </h1>
         {broken_url && <BrokenLinkBanner />}
         <p className="medium_panel_text">
           <TextMaker text_key="table_picker_top_instructions" />
