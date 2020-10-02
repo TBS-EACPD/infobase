@@ -24,8 +24,8 @@ const {
 
 const text = {
   click_text: {
-    en: "Click below!",
-    fr: "Cliquer ci-dessous!",
+    en: "Recommended reading",
+    fr: "Lecture recommandée",
   },
 };
 
