@@ -80,9 +80,9 @@ const HomeLayout = (props) => (
         <h1>
           <TM k="welcome" />
         </h1>
-        <h3 style={{ marginTop: 0 }}>
+        <h2 style={{ marginTop: 0 }}>
           <TM k="home_sub_title" />
-        </h3>
+        </h2>
         <div className="flag">
           <img aria-hidden="true" src={get_static_url("svg/flagline.svg")} />
         </div>

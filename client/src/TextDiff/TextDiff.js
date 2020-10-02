@@ -230,7 +230,6 @@ const difference_report = (diff, key) => {
           </span>
           {window.is_a11y_mode && part.added && (
             <span className="text-diff__text-part--added">
-              {" "}
               [{text_maker("a11y_end_added")}]
             </span>
           )}
@@ -557,7 +556,7 @@ export default class TextDiffApp extends React.Component {
         </div>
         <div style={{ padding: "0px 0px 20px 0px" }}>
           <div className="medium_panel_text">
-            <label htmlFor="select_program">
+            <label htmlFor="filter_by_status">
               <TM k="filter_by_status" />
             </label>
             <LegendList

@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import { Fragment } from "react";
 
+import { text_maker } from "../tables/table_common";
+
 class DebouncedTextInput extends React.Component {
   render() {
     const {
@@ -33,6 +35,7 @@ class DebouncedTextInput extends React.Component {
         <input
           id={unique_id}
           type="text"
+          aria_label={a11y_label || text_maker("text_input")}
           className={classNames("form-control", inputClassName)}
           placeholder={placeHolder || ""}
           defaultValue={defaultValue || undefined}

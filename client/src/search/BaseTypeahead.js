@@ -14,7 +14,6 @@ import { InfoBaseHighlighter } from "./search_utils.js";
 
 import text from "./BaseTypeahead.yaml";
 
-
 const text_maker = create_text_maker(text);
 const TextMaker = (props) => <TM tmf={text_maker} {...props} />;
 
@@ -147,6 +146,9 @@ export class BaseTypeahead extends React.Component {
         return false;
       }
     };
+    if (this.typeahead_node) {
+      this.typeahead_node.setAttribute("autocomplete", "off");
+    }
 
     return (
       <Typeahead

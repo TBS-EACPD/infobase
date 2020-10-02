@@ -92,6 +92,9 @@ name:
 table_name:
   en: Name of the dataset table
   fr: Nom du tableau des données
+text_input:
+  en: Text input
+  fr: Saisie de texte
 
 estimates:
   en: Estimates

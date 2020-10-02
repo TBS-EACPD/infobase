@@ -375,7 +375,7 @@ class Goco extends React.Component {
 
         const child_graph = (
           <Fragment>
-            <h4 style={{ textAlign: "center" }}>{node.indexValue}</h4>
+            <h3 style={{ textAlign: "center" }}>{node.indexValue}</h3>
             <WrappedNivoBar
               {...nivo_default_props}
               data={node.data.children}

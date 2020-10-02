@@ -100,7 +100,7 @@ export class Panel extends React.Component {
                 <span aria-hidden>{isOpen ? "▼" : "►"}</span>
               </button>
             }
-            {title && <h3 className="panel-title">{title}</h3>}
+            {title && <h2 className="panel-title">{title}</h2>}
             {isOpen && otherHeaderContent}
           </header>
         )}

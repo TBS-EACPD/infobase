@@ -332,6 +332,7 @@ export class DisplayTable extends React.Component {
                         <DebouncedTextInput
                           inputClassName={"search input-sm"}
                           placeHolder={text_maker("filter_data")}
+                          a11y_label={text_maker("filter_data")}
                           defaultValue={current_search_input}
                           updateCallback={(search_value) => {
                             const updated_searches = _.mapValues(
