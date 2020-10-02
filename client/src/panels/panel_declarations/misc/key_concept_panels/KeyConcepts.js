@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { Fragment } from "react";
+import { ButtonToolbar, Overlay, Popover } from "react-bootstrap";
 import MediaQuery from "react-responsive";
 import { withRouter } from "react-router";
-import { ButtonToolbar, Overlay, Popover } from "react-bootstrap";
 
 import { has_local_storage } from "src/core/feature_detection.js";
 
@@ -123,7 +123,7 @@ class KeyConcepts_ extends React.Component {
                   show={is_showing_tooltip}
                   target={this.accordionRef.current}
                   container={this}
-                  placement="top"
+                  placement="right"
                 >
                   <Popover id="keep_in_mind_tooltip" style={{}}>
                     {text_maker("click_text")}
