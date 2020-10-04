@@ -3,10 +3,13 @@ import { TrivialTM } from "../../components/index.js";
 export const SelectAllControl = ({ SelectAllOnClick, SelectNoneOnClick }) => (
   <div
     role="group"
-    aria-labelledby={"SelectAllControlGroup"}
+    aria-label={"SelectAllControlGroup"}
     style={{ display: "flex", flexDirection: "row" }}
   >
-    <div id={"SelectAllControl"} style={{ lineHeight: 2 }}>
+    <div
+      id={_.uniqueId("SelectAllControl_SelectText")}
+      style={{ lineHeight: 2 }}
+    >
       <TrivialTM k="select" />:
     </div>
     <button

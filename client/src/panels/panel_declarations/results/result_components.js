@@ -308,7 +308,7 @@ const StatusIconTable = ({
   active_list,
 }) => (
   <div>
-    <div aria-hidden={true} className="status-icon-table">
+    <div className="status-icon-table">
       <FilterTable
         items={_.map(ordered_status_keys, (status_key) => ({
           key: status_key,
@@ -319,7 +319,7 @@ const StatusIconTable = ({
           text: !window.is_a11y_mode ? (
             <span
               className="link-unstyled"
-              tabIndex={0}
+              tabIndex={-1}
               aria-hidden="true"
               data-toggle="tooltip"
               data-ibtt-glossary-key={status_key_to_glossary_key[status_key]}
