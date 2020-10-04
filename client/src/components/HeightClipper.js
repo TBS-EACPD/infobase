@@ -138,7 +138,7 @@ export class HeightClipper extends React.Component {
             </button>
           </div>
         )}
-        <div aria-hidden={!!isClipped} tabIndex={-1} ref="content">
+        <div aria-hidden={isClipped} tabIndex={-1} ref="content">
           <div className={isClipped ? "untabbable_children" : ""}>
             {children}
           </div>

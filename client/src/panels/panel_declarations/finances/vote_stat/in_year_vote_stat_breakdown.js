@@ -61,7 +61,6 @@ const tooltip_render = (vs) =>
     sel.attrs({
       className: "link-unstyled",
       tabIndex: "0",
-      "aria-hidden": "true",
       // this can't be called "title" (what tooltip.js uses) because of some other hover effects that fire on titles.
       "data-ibtt-text": ` 
       <div class="FlatTreeMap__ToolTip">
