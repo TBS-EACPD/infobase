@@ -76,10 +76,7 @@ class GraphRegistry {
 
     instance.options = options;
 
-    container
-      .attr("aria-hidden", "true")
-      .append("div")
-      .classed("__svg__", true);
+    container.append("div").classed("__svg__", true);
 
     if (options.alternative_svg) {
       container.select(".__svg__").html(options.alternative_svg);

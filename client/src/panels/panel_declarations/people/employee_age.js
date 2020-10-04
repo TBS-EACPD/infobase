@@ -168,31 +168,29 @@ export const declare_employee_age_panel = () =>
             </Col>
             {!window.is_a11y_mode && (
               <Col size={12} isGraph extraClasses="zero-padding">
-                <div aria-hidden="true">
-                  <TabbedContent
-                    tab_keys={["age_group", "avgage"]}
-                    tab_labels={{
-                      age_group: text_maker("age_group"),
-                      avgage: text_maker("avgage"),
-                    }}
-                    tab_pane_contents={{
-                      age_group: (
-                        <div id={"emp_age_tab_pane"}>
-                          <GraphOverlay>
-                            <NivoLineBarToggle {...age_group_options} />
-                          </GraphOverlay>
-                          <div className="clearfix"></div>
-                        </div>
-                      ),
-                      avgage: (
-                        <div id={"emp_age_tab_pane"}>
-                          <NivoLineBarToggle {...avg_age_options} />
-                          <div className="clearfix"></div>
-                        </div>
-                      ),
-                    }}
-                  />
-                </div>
+                <TabbedContent
+                  tab_keys={["age_group", "avgage"]}
+                  tab_labels={{
+                    age_group: text_maker("age_group"),
+                    avgage: text_maker("avgage"),
+                  }}
+                  tab_pane_contents={{
+                    age_group: (
+                      <div id={"emp_age_tab_pane"}>
+                        <GraphOverlay>
+                          <NivoLineBarToggle {...age_group_options} />
+                        </GraphOverlay>
+                        <div className="clearfix"></div>
+                      </div>
+                    ),
+                    avgage: (
+                      <div id={"emp_age_tab_pane"}>
+                        <NivoLineBarToggle {...avg_age_options} />
+                        <div className="clearfix"></div>
+                      </div>
+                    ),
+                  }}
+                />
               </Col>
             )}
             {window.is_a11y_mode && (

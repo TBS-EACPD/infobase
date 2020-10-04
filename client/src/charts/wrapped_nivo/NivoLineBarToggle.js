@@ -1,6 +1,4 @@
-
 import classNames from "classnames";
-
 
 import { newIBCategoryColors } from "../../core/color_schemes.js";
 import { formats } from "../../core/format.js";
@@ -228,13 +226,11 @@ export class NivoLineBarToggle extends React.Component {
           style={{ width: "100%", position: "relative" }}
           tabIndex="-1"
         >
-          <div aria-hidden={true}>
-            {extra_graph_options.bar ? (
-              <WrappedNivoBar {...extended_graph_options_bar} />
-            ) : (
-              <WrappedNivoLine {...extended_graph_options_line} />
-            )}
-          </div>
+          {extra_graph_options.bar ? (
+            <WrappedNivoBar {...extended_graph_options_bar} />
+          ) : (
+            <WrappedNivoLine {...extended_graph_options_line} />
+          )}
         </div>
       </div>
     );

@@ -248,7 +248,7 @@ class AuthExpPlannedSpendingGraph extends React.Component {
 
     return (
       <Fragment>
-        <div style={{ padding: "10px 25px 0px 97px" }} aria-hidden={true}>
+        <div style={{ padding: "10px 25px 0px 97px" }}>
           <StandardLegend
             isHorizontal={true}
             items={legend_items}
