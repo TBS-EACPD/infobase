@@ -87,21 +87,11 @@ export default function (model_singleton) {
     standards: [ServiceStandardSchema],
     service_report: [ServiceReportSchema],
   });
-  const ServiceGeneralStats = mongoose.Schema({
-    num_of_services: { type: Number },
-  });
-  const ServiceTypeStats = mongoose.Schema({
-    ...bilingual_str("id"),
-    ...bilingual_str("label"),
-    value: { type: Number },
-  });
 
   model_singleton.define_model("ServiceReport", ServiceReportSchema);
   model_singleton.define_model("StandardReport", StandardReportSchema);
   model_singleton.define_model("ServiceStandard", ServiceStandardSchema);
   model_singleton.define_model("Service", ServiceSchema);
-  model_singleton.define_model("ServiceGeneralStats", ServiceGeneralStats);
-  model_singleton.define_model("ServiceTypeStats", ServiceTypeStats);
 
   const { Service } = model_singleton.models;
 
