@@ -75,7 +75,6 @@ export class Panel extends React.Component {
       glossary_keys,
       footnotes,
     } = this.props;
-    const label_id = _.uniqueId("IBDetails__a11yLabel");
 
     return (
       <section
@@ -90,7 +89,6 @@ export class Panel extends React.Component {
               <button
                 className={classNames("panel-heading-utils")}
                 onClick={() => this.setState({ isOpen: !isOpen })}
-                aria-labelledby={label_id}
                 aria-label={
                   isOpen
                     ? text_maker("collapse_panel")
