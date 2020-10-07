@@ -1,21 +1,21 @@
 import _ from "lodash";
 import React from "react";
-import { Typeahead, Menu, MenuItem } from "react-bootstrap-typeahead";
+import { Menu, MenuItem } from "react-bootstrap-typeahead";
 import ReactDOM from "react-dom";
-
 
 import { TM } from "../components/TextMaker.js";
 import { log_standard_event } from "../core/analytics.js";
 import { create_text_maker } from "../models/text.js";
-import { get_static_url } from "../request_utils.js";
 
 import { InfoBaseHighlighter } from "./search_utils.js";
+import { Typeahead } from "./Typeahead.js";
 
 import text from "./BaseTypeahead.yaml";
-import "react-bootstrap-typeahead/css/Typeahead.css";
+
 // Uncomment following line once we've moved to bootstrap4
 // import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
 import "./BaseTypeahead.scss";
+import "react-bootstrap-typeahead/css/Typeahead.css";
 
 const text_maker = create_text_maker(text);
 const TextMaker = (props) => <TM tmf={text_maker} {...props} />;
@@ -39,22 +39,22 @@ export class BaseTypeahead extends React.Component {
       this.typeahead.getInstance().focus();
     }
   }
-  componentDidMount() {
-    this.typeahead_node
-      .querySelector(".rbt-input-hint-container")
-      .insertAdjacentHTML(
-        "beforeend",
-        `<div class="search-icon-container">
-          <span 
-            aria-hidden="true"
-          >
-          <img src="${get_static_url(
-            "svg/search.svg"
-          )}" style="width:30px; height:30px;" />
-          </span>
-        </div>`
-      );
-  }
+  // componentDidMount() {
+  //   this.typeahead_node
+  //     .querySelector(".rbt-input-hint-container")
+  //     .insertAdjacentHTML(
+  //       "beforeend",
+  //       `<div class="search-icon-container">
+  //         <span
+  //           aria-hidden="true"
+  //         >
+  //         <img src="${get_static_url(
+  //           "svg/search.svg"
+  //         )}" style="width:30px; height:30px;" />
+  //         </span>
+  //       </div>`
+  //     );
+  // }
   render() {
     const {
       pagination_size,
@@ -132,13 +132,14 @@ export class BaseTypeahead extends React.Component {
     const filterBy = (option, props) => {
       if (option.pagination_placeholder) {
         if (option.paginate_direction === "previous") {
+          console.log(this.pagination_index > 0);
           return this.pagination_index > 0;
         } else if (option.paginate_direction === "next") {
           return true; // can't yet tell if next button's needed at this point, so always pass it's placeholder through
         }
       }
 
-      const query = props.text;
+      const query = props.search_text;
       const group_filter =
         config_groups[option.config_group_index].group_filter;
       const query_matches = group_filter(query, option.data);
@@ -156,12 +157,12 @@ export class BaseTypeahead extends React.Component {
           this.typeahead = ref;
           this.typeahead_node = ReactDOM.findDOMNode(ref);
         }}
-        labelKey="name"
+        main_filter="name"
         paginate={false} // Turn off built in pagination
         placeholder={placeholder}
         minLength={minLength}
         bsSize={bootstrapSize}
-        options={all_options} // API's a bit vague here, options is the data to search over, not a config object
+        search_values={all_options} // API's a bit vague here, options is the data to search over, not a config object
         filterBy={filterBy}
         // API's a bit vague here, this onChange is "on change" set of options selected from the typeahead dropdown. Selected is an array of selected items,
         // but BaseTypeahead will only ever use single selection, so just picking the first (and, we'd expect, only) item and passing it to onSelect is fine
@@ -186,7 +187,7 @@ export class BaseTypeahead extends React.Component {
         // This is "on change" to the input in the text box
         onInputChange={(text) => {
           this.reset_pagination();
-          this.refresh_dropdown_menu();
+          // this.refresh_dropdown_menu();
           debounceOnNewQuery(text);
         }}
         // receives events selecting an option with the pagination_placeholder: true property
@@ -303,7 +304,7 @@ export class BaseTypeahead extends React.Component {
                               position={index}
                               option={result}
                             >
-                              {result.menu_content(menuProps.text)}
+                              {result.menu_content(menuProps.search_text)}
                             </MenuItem>
                           );
                         }),
