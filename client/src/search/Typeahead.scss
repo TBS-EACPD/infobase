@@ -1,0 +1,21 @@
+@import "../common_css/common-variables";
+
+.search-bar {
+    display: flex;
+    border: 2px $tertiaryColor solid;
+    border-radius: 1rem;
+    height: 4.5rem;
+    padding: 0 1rem;
+    background: $backgroundColor;
+
+    input {
+        font-size: 18px;
+        border: 0;
+        outline: none;
+    }
+
+    > .search-icon-container {
+        display: flex; 
+        align-items: center;
+    }
+}
