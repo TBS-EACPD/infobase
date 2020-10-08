@@ -455,40 +455,44 @@ export const declare_detailed_program_spending_split_panel = () =>
           }
         };
 
-        const exp_cols = _.map(std_years, (yr) => yr + "exp");
-        const filtered_prog_spending_data = _.filter(
-          programSpending.q(subject).data,
-          (row) => d3.sum(exp_cols, (col) => row[col]) !== 0
-        );
+        const exp_years = _.map(std_years, (yr) => yr + "exp");
+        const processed_spending_data = _.chain(programSpending.q(subject).data)
+          .map((row) => ({
+            label: row.prgm,
+            data: exp_years.map((exp_year) => row[exp_year] || 0),
+            active: false,
+          }))
+          .filter(({ data }) => _.some(data))
+          .sortBy((x) => -d3.sum(x.data))
+          .value();
 
-        const top_2_prgms = _.chain(filtered_prog_spending_data)
-          .sortBy((row) => row["{{pa_last_year}}exp"])
+        const in_year_top_2_programs = _.chain(processed_spending_data)
+          .sortBy(({ data }) => _.last(data))
           .takeRight(2)
           .reverse()
           .value();
 
-        const top_1_prgm_five_yr_avg = _.chain(exp_cols)
-          .sumBy((col) => top_2_prgms[0][col])
-          .divide(exp_cols.length)
+        const top_1_prgm_five_yr_avg = _.chain(in_year_top_2_programs)
+          .first()
+          .thru(({ data }) => d3.sum(data) / exp_years.length)
           .value();
 
-        const processed_spending_data = _.chain(filtered_prog_spending_data)
-          .map((row) => ({
-            label: row.prgm,
-            data: exp_cols.map((col) => row[col]),
-            active: false,
-          }))
-          .sortBy((x) => -d3.sum(x.data))
-          .value();
+        const in_year_prog_count = _.filter(
+          processed_spending_data,
+          ({ data }) => _.last(data)
+        ).length;
 
         const text_calculations = {
           subject,
-          dept_num_of_progs: filtered_prog_spending_data.length,
-          top_1_prgm_name: top_2_prgms[0].prgm,
-          top_1_prgm_amt: top_2_prgms[0]["{{pa_last_year}}exp"],
-          top_2_prgm_name: top_2_prgms[1].prgm,
-          top_2_prgm_amt: top_2_prgms[1]["{{pa_last_year}}exp"],
-          top_1_prgm_five_yr_avg: top_1_prgm_five_yr_avg,
+          in_year_prog_count,
+          top_1_prgm_five_yr_avg,
+          ..._.chain(in_year_top_2_programs)
+            .flatMap(({ label, data }, ix) => [
+              [`top_${ix + 1}_prgm_name`, label],
+              [`top_${ix + 1}_prgm_amt`, _.last(data)],
+            ])
+            .fromPairs()
+            .value(),
         };
 
         const program_footnotes = _.chain(flat_data)
