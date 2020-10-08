@@ -8,7 +8,7 @@ import { AlertBanner, GlossaryIcon } from "../components";
 import { Table } from "../core/TableClass.js";
 import { GlossaryEntry } from "../models/glossary.js";
 
-import { TextMaker } from "./rpb_text_provider.js";
+import { TextMaker, text_maker } from "./rpb_text_provider.js";
 import {
   categories,
   concepts_by_category,
@@ -36,6 +36,7 @@ export const AccessibleTablePicker = ({
       value={selected}
       onChange={(evt) => onSelect(evt.target.value)}
     >
+      <option value="select_data">{text_maker("rpb_pick_data")}</option>
       {_.map(tables, ({ id, name }) => (
         <option key={id} value={id}>
           {name}

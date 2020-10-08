@@ -63,10 +63,7 @@ const topic_keys_to_plain_text = (topic_keys) =>
   _.chain(topic_keys).map(text_maker).sort().uniq().value();
 
 const FootnoteMeta = ({ meta_items }) => (
-  <div
-    className={"footnote-list__meta_container"}
-    aria-label={!_.isEmpty(meta_items) ? text_maker("footnote_meta") : null}
-  >
+  <div className={"footnote-list__meta_container"} aria-hidden={true}>
     {_.map(meta_items, (meta_item_text, ix) => (
       <div key={ix} className="footnote-list__meta_item tag-badge">
         {meta_item_text}

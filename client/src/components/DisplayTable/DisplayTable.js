@@ -309,7 +309,7 @@ export class DisplayTable extends React.Component {
                     (searchable && searches[column_key]) || null;
 
                   return (
-                    <th key={column_key} style={{ textAlign: "center" }}>
+                    <td key={column_key} style={{ textAlign: "center" }}>
                       {sortable && (
                         <div
                           onClick={() =>
@@ -346,7 +346,7 @@ export class DisplayTable extends React.Component {
                           debounceTime={300}
                         />
                       )}
-                    </th>
+                    </td>
                   );
                 })}
               </tr>

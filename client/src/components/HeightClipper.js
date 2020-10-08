@@ -73,6 +73,7 @@ export class HeightClipper extends React.Component {
   measureHeightAndUpdateState() {
     const { main } = this.refs;
     if (
+      main &&
       !this.state.exceedsHeight &&
       this.state.shouldClip &&
       main.offsetHeight > this.props.clipHeight
@@ -94,7 +95,9 @@ export class HeightClipper extends React.Component {
 
     const isClipped = exceedsHeight && shouldClip;
 
-    return (
+    return window.is_a11y_mode ? (
+      children
+    ) : (
       <div
         ref="main"
         style={{

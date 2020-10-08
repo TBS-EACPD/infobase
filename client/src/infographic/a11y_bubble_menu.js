@@ -4,7 +4,7 @@ export default class AccessibleBubbleMenu extends React.Component {
   render() {
     const { items } = this.props;
     return (
-      <nav>
+      <nav aria-label="Bubble Menu TODO">
         <ul>
           {_.map(items, ({ id, active, title, a11y_description, href }) => (
             <li key={id}>
@@ -16,10 +16,9 @@ export default class AccessibleBubbleMenu extends React.Component {
                 }
                 href={href}
               >
-                {title}{" "}
+                {title}
                 {active && (
                   <span>
-                    {" "}
                     - <TM k="you_are_here" />
                   </span>
                 )}

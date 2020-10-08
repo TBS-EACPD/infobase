@@ -241,7 +241,7 @@ class InfoGraph_ extends React.Component {
               ))}
           </div>
         </div>
-        <div>
+        <div role="main" aria-label="Main infographic content TODO">
           {window.is_a11y_mode && (
             <p
               id="infographic-explanation-focus"

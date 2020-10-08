@@ -40,7 +40,13 @@ class GranularView extends React.Component {
         </LabeledBox>
 
         {table.rpb_banner && <AlertBanner>{table.rpb_banner}</AlertBanner>}
-        <div id="rpb-main-content">{this.get_table_content()}</div>
+        <div
+          role="main"
+          aria-label="Report Builder content TODO"
+          id="rpb-main-content"
+        >
+          {this.get_table_content()}
+        </div>
       </div>
     );
   }

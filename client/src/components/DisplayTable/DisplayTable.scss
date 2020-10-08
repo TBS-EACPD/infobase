@@ -42,7 +42,7 @@ table.display-table > thead > tr {
   &:not(:last-child) > th {
     border-bottom: none;
   }
-  & > th {
+  & > th, td {
     border-top: none;
 
     color: $textLightColor;
