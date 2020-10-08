@@ -23,23 +23,18 @@ export const declare_personnel_spend_panel = () =>
       calculate(subject, data) {
         const { orgSobjs } = this.tables;
 
-        const series = _.map(
-          std_years,
-          (year) => orgSobjs.horizontal(year, false)[sos[1].text]
-        );
+        const year_value_pairs = _.map(std_years, (year) => [
+          run_template(year),
+          orgSobjs.horizontal(year, false)[sos[1].text],
+        ]);
 
+        const series = _.map(year_value_pairs, _.last);
         const five_year_avg = _.sum(series) / series.length;
 
-        const max_spend = _.max(series);
-        const max_year = run_template(
-          `${std_years[series.indexOf(max_spend)]}`
-        );
+        const sorted_pairs = _.sortBy(year_value_pairs, _.last);
 
-        const min_spend = _.min(series);
-        const min_year = run_template(
-          `${std_years[series.indexOf(min_spend)]}`
-        );
-
+        const [max_year, max_spend] = _.last(sorted_pairs);
+        const [min_year, min_spend] = _.first(sorted_pairs);
         const text_calculations = {
           five_year_avg,
           max_spend,
