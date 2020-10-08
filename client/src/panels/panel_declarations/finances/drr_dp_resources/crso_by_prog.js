@@ -41,15 +41,8 @@ const render_resource_type = (is_fte) => ({ calculations, footnotes }) => {
       args={{
         subject,
         crso_prg_num: subject.programs.length,
-        crso_prg_top1: is_fte
-          ? panel_args.max_fte_name
-          : panel_args.max_exp_name,
-        crso_prg_top1_amnt: is_fte ? panel_args.max_ftes : panel_args.max_exp,
-        crso_prg_top2: is_fte
-          ? panel_args.top2_fte_name
-          : panel_args.top2_exp_name,
-        crso_prg_top2_amnt: is_fte ? panel_args.top2_ftes : panel_args.top2_exp,
         is_fte: is_fte,
+        ...panel_args,
       }}
     />
   );
@@ -154,53 +147,48 @@ const get_calculate_func = (is_fte) => {
 
     const { programSpending, programFtes } = this.tables;
 
-    const all_exp = _.sumBy(planning_years, (col) =>
+    const total_exp = _.sumBy(planning_years, (col) =>
       programSpending.q(subject).sum(col)
     );
-    const all_fte = _.sumBy(planning_years, (col) =>
+    const total_fte = _.sumBy(planning_years, (col) =>
       programFtes.q(subject).sum(col)
     );
 
-    const should_bail = is_fte ? all_fte === 0 : all_exp === 0;
+    const should_bail = is_fte ? total_fte === 0 : total_exp === 0;
     if (should_bail) {
       return false;
     }
 
+    /* 
+      Both exp and fte data is returned in either case so the render can ensure consistency in the association of colour to program names
+      across the two panels
+    */
     const exp_data = _.map(programSpending.q(subject).data, (row) => ({
       label: row.prgm,
       data: planning_years.map((col) => row[col]),
     }));
-
     const fte_data = _.map(programFtes.q(subject).data, (row) => ({
       label: row.prgm,
       data: planning_years.map((col) => row[col]),
     }));
 
-    const ftes = _.map(fte_data, (prg) => prg.data[0]);
-    const sorted_ftes = ftes.slice().sort((a, b) => b - a);
-    const max_ftes = sorted_ftes[0];
-    const max_fte_name = fte_data[_.indexOf(ftes, max_ftes)].label;
-    const top2_ftes = sorted_ftes.length > 1 && sorted_ftes[1];
-    const top2_fte_name =
-      top2_ftes && fte_data[_.indexOf(ftes, top2_ftes)].label;
+    const relevant_data = is_fte ? fte_data : exp_data;
+    const first_year_top_2_programs = _.chain(relevant_data)
+      .sortBy(({ data }) => _.first(data))
+      .takeRight(2)
+      .reverse()
+      .value();
 
-    const exps = _.map(exp_data, (prg) => prg.data[0]);
-    const sorted_exps = exps.slice().sort((a, b) => b - a);
-    const max_exp = sorted_exps[0];
-    const max_exp_name = exp_data[_.indexOf(exps, max_exp)].label;
-    const top2_exp = sorted_exps.length > 1 && sorted_exps[1];
-    const top2_exp_name = top2_exp && exp_data[_.indexOf(exps, top2_exp)].label;
     return {
-      exp_data,
       fte_data,
-      max_ftes,
-      max_fte_name,
-      top2_ftes,
-      top2_fte_name,
-      max_exp,
-      max_exp_name,
-      top2_exp,
-      top2_exp_name,
+      exp_data,
+      ..._.chain(first_year_top_2_programs)
+        .flatMap(({ label, data }, ix) => [
+          [`first_year_top_${ix + 1}_name`, label],
+          [`first_year_top_${ix + 1}_value`, _.first(data)],
+        ])
+        .fromPairs()
+        .value(),
     };
   };
 };
