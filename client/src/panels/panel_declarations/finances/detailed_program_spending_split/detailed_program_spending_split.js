@@ -466,26 +466,20 @@ export const declare_detailed_program_spending_split_panel = () =>
           .sortBy((x) => -d3.sum(x.data))
           .value();
 
+        const in_year_prog_count = _.filter(
+          processed_spending_data,
+          ({ data }) => _.last(data)
+        ).length;
+
         const in_year_top_2_programs = _.chain(processed_spending_data)
           .sortBy(({ data }) => _.last(data))
           .takeRight(2)
           .reverse()
           .value();
 
-        const top_1_prgm_five_yr_avg = _.chain(in_year_top_2_programs)
-          .first()
-          .thru(({ data }) => d3.sum(data) / exp_years.length)
-          .value();
-
-        const in_year_prog_count = _.filter(
-          processed_spending_data,
-          ({ data }) => _.last(data)
-        ).length;
-
         const text_calculations = {
           subject,
           in_year_prog_count,
-          top_1_prgm_five_yr_avg,
           ..._.chain(in_year_top_2_programs)
             .flatMap(({ label, data }, ix) => [
               [`top_${ix + 1}_prgm_name`, label],
