@@ -34,21 +34,16 @@ dept_historical_program_spending_text:
   transform: [handlebars,markdown]
   en: |
    Each organization is responsible for a number of {{gl_tt "Programs" "PROG"}}.
-   {{#if top_2_prgm_name}} In {{pa_last_year}}, **{{subject.name}}** had **{{in_year_prog_count}}** programs.
-   During that fiscal year, the largest program in terms of net spending was
-   "**{{fmt_compact1_written top_1_prgm_name}}**" (**{{fmt_compact1_written top_1_prgm_amt}}**)
-   followed by "**{{fmt_compact1_written top_2_prgm_name}}**" (**{{fmt_compact1_written top_2_prgm_amt}}**). In the past five years, 
-   {{fmt_compact1_written top_1_prgm_name}} spent on average **{{fmt_compact1_written top_1_prgm_five_yr_avg}}**.
-
-   {{else}} In {{pa_last_year}}, **{{subject.name}}** had **{{in_year_prog_count}}** programs. During that fiscal year, the largest program was _**{{fmt_compact1_written top_1_prgm_name}}**_
-   (**{{fmt_compact1_written top_1_prgm_amt}}**). In the past five years, {{fmt_compact1_written top_1_prgm_name}} spent on average **{{fmt_compact1_written top_1_prgm_five_yr_avg}}**.
+   In {{pa_last_year}}, **{{subject.name}}** had **{{in_year_prog_count}}** programs.
+   {{#if top_2_prgm_name}}
+   During that fiscal year, the largest program in terms of net spending was "**{{top_1_prgm_name}}**" (**{{fmt_compact1_written top_1_prgm_amt}}**)
+   followed by "**{{top_2_prgm_name}}**" (**{{fmt_compact1_written top_2_prgm_amt}}**).
    {{/if}}
 
   fr: |
    Chaque organisation a la responsabilité d’un certain nombre de programmes.
-   {{#if top_2_prgm_name}} En {{pa_last_year}}, **{{subject.name}}** comptait **{{in_year_prog_count}}** programmes.
+   En {{pa_last_year}}, **{{subject.name}}** comptait **{{in_year_prog_count}}** programmes.
+   {{#if top_2_prgm_name}}
    Durant cet exercice, le plus important programme en termes de dépenses nettes était « **{{fmt_compact1_written top_1_prgm_name}}** » (**{{fmt_compact1_written top_1_prgm_amt}}**),
-   suivi de « **{{fmt_compact1_written top_2_prgm_name}}** » (**{{fmt_compact1_written top_2_prgm_amt}}**). Durant les cinq dernières années, {{fmt_compact1_written top_1_prgm_name}} a dépensé en moyenne **{{fmt_compact1_written top_1_prgm_five_yr_avg}}**.
-   {{else}} En {{pa_last_year}}, **{{subject.name}}** comptait **{{in_year_prog_count}}** programme. Durant cet exercice, le plus important programme était
-   _**{{fmt_compact1_written top_1_prgm_name}}**_ (**{{fmt_compact1_written top_1_prgm_amt}}**). Durant les cinq dernières années, « **{{fmt_compact1_written top_1_prgm_name}}** » a dépensé en moyenne **{{fmt_compact1_written top_1_prgm_five_yr_avg}}**.
+   suivi de « **{{top_2_prgm_name}}** » (**{{fmt_compact1_written top_2_prgm_amt}}**).
    {{/if}}
