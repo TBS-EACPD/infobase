@@ -143,9 +143,7 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
                       onClick={(evt) => {
                         evt.preventDefault();
                         document.body.scrollTop = document.documentElement.scrollTop = 0;
-                        document
-                          .querySelector("#glossary_search > div > div > input")
-                          .focus();
+                        document.getElementById("app-focus-root").focus();
                       }}
                     >
                       {text_maker("back_to_top")}
@@ -182,7 +180,9 @@ export default class Glossary extends React.Component {
           <TM k="glossary" />
         </h1>
         <ScrollToTargetContainer target_id={active_key}>
-          <BackToTop focus="#glossary_search > div > div > input" />
+          {!window.is_a11y_mode && (
+            <BackToTop focus="#glossary_search > div > div > input" />
+          )}
           <Glossary_
             active_key={active_key}
             items_by_letter={items_by_letter}

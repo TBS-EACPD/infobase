@@ -90,7 +90,7 @@ const StatelessPullDownAccordion = ({
   children,
   onToggle,
 }) => (
-  <div className="pull-down-accordion">
+  <div aria-label={title} className="pull-down-accordion">
     <div className="pull-down-accordion-header" onClick={onToggle}>
       <button aria-label={get_accordion_label(isExpanded)}>{title}</button>
     </div>

@@ -138,7 +138,7 @@ class RPB extends React.Component {
   };
 
   pickTable(table_id) {
-    if (this.state.loading) {
+    if (this.state.loading || table_id === "select_data") {
       return;
     }
     if (table_id === this.props.state.table) {
@@ -293,7 +293,11 @@ class RPB extends React.Component {
         </div>
         <LabeledBox label={<TextMaker text_key="rpb_pick_data" />}>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <div className="centerer md-half-width">
+            <div
+              role="region"
+              aria-label={text_maker("rpb_pick_data")}
+              className="centerer md-half-width"
+            >
               {window.is_a11y_mode ? (
                 <AccessibleTablePicker
                   onSelect={(id) => this.pickTable(id)}

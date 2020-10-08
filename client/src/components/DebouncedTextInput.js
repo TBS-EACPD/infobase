@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import { Fragment } from "react";
 
 import { text_maker } from "../tables/table_common";
 
@@ -26,22 +25,15 @@ class DebouncedTextInput extends React.Component {
     const unique_id = _.uniqueId("input-");
 
     return (
-      <Fragment>
-        {a11y_label && (
-          <label className="sr-only" htmlFor={unique_id}>
-            {a11y_label}
-          </label>
-        )}
-        <input
-          id={unique_id}
-          type="text"
-          aria_label={a11y_label || text_maker("text_input")}
-          className={classNames("form-control", inputClassName)}
-          placeholder={placeHolder || ""}
-          defaultValue={defaultValue || undefined}
-          onChange={handle_change}
-        />
-      </Fragment>
+      <input
+        id={unique_id}
+        type="text"
+        aria_label={a11y_label || text_maker("text_input")}
+        className={classNames("form-control", inputClassName)}
+        placeholder={placeHolder || ""}
+        defaultValue={defaultValue || undefined}
+        onChange={handle_change}
+      />
     );
   }
   componentWillUnmount() {
