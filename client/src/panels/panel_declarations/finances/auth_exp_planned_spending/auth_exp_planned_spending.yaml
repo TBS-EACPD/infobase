@@ -43,7 +43,7 @@ gov_auth_exp_planned_spending_body:
     In **{{last_history_year}}**, **{{fmt_compact1_written last_year_lapse_amt}}** or **{{fmt_percentage1 last_year_lapse_pct}}** of approved
     authorities were unspent at the end of the fiscal year. On average, unused authorities represented **{{fmt_percentage1 hist_avg_tot_pct}}** of authorities.
     
-    {{#if has_planned_spending}}Spending is {{will_change_to plan_change ""}} **{{fmt_compact1_written next_planned_spending}}** by {{last_planned_year}}. {{/if}}
+    {{#if has_planned_spending}}Spending is {{will_change_to plan_change ""}} **{{fmt_compact1_written last_planned_spending}}** by {{last_planned_year}}. {{/if}}
   fr: |
     Au cours des cinq dernières années, le gouvernement a {{gl_tt "autorisé" "AUTH"}} des dépenses moyennes de **{{fmt_compact1_written five_year_auth_average}}**
     alors que les {{gl_tt "dépenses" "BUD_EXP"}} réelles s'élevaient en moyenne à **{{fmt_compact1_written five_year_exp_average}}**.
@@ -52,7 +52,7 @@ gov_auth_exp_planned_spending_body:
     non utilisées au fin de l’exercice financier. En moyenne, les autorisations non utilisées représentaient **{{fmt_percentage1 hist_avg_tot_pct}}**
     des autorisations.
     
-    {{#if has_planned_spending}}Les dépenses {{fr_will_change_to plan_change "f" "p" ""}} **{{fmt_compact1_written next_planned_spending}}** d'ici à {{last_planned_year}}. {{/if}}
+    {{#if has_planned_spending}}Les dépenses {{fr_will_change_to plan_change "f" "p" ""}} **{{fmt_compact1_written last_planned_spending}}** d'ici à {{last_planned_year}}. {{/if}}
 
 dept_auth_exp_planned_spending_body:
   transform: [handlebars, markdown]
@@ -63,7 +63,7 @@ dept_auth_exp_planned_spending_body:
     In **{{last_history_year}}**, **{{fmt_compact1_written last_year_lapse_amt}}** or **{{fmt_percentage1 last_year_lapse_pct}}** of approved
     authorities were unspent at the end of the fiscal year. On average, unused authorities represented **{{fmt_percentage1 hist_avg_tot_pct}}** of authorities.
     
-    {{#if has_planned_spending}}Spending is {{will_change_to plan_change ""}} **{{fmt_compact2_written next_planned_spending}}** by {{last_planned_year}}. {{/if}}
+    {{#if has_planned_spending}}Spending is {{will_change_to plan_change ""}} **{{fmt_compact2_written last_planned_spending}}** by {{last_planned_year}}. {{/if}}
   fr: |
     Au cours des cinq dernières années, **{{dept.name}}** a reçu des {{gl_tt "autorisations" "AUTH"}} moyennes de **{{fmt_compact1_written five_year_auth_average}}**
     alors que les {{gl_tt "dépenses" "BUD_EXP"}} réelles s'élevaient en moyenne à **{{fmt_compact1_written five_year_exp_average}}**.
@@ -72,7 +72,7 @@ dept_auth_exp_planned_spending_body:
     non utilisées au fin de l’exercice financier. En moyenne, les autorisations non utilisées représentaient **{{fmt_percentage1 hist_avg_tot_pct}}**
     des autorisations.
     
-    {{#if has_planned_spending}}Les dépenses {{fr_will_change_to plan_change "f" "p" ""}} **{{fmt_compact2_written next_planned_spending}}** d'ici à {{last_planned_year}}. {{/if}}
+    {{#if has_planned_spending}}Les dépenses {{fr_will_change_to plan_change "f" "p" ""}} **{{fmt_compact2_written last_planned_spending}}** d'ici à {{last_planned_year}}. {{/if}}
 
 budgetary_expenditures:
   en: Budgetary Expenditures

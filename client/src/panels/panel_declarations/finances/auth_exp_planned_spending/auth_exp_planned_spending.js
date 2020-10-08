@@ -405,11 +405,6 @@ const calculate = function (subject, options) {
   const unspent_last_year =
     auth_values[last_shared_index] - exp_values[last_shared_index];
 
-  const planned_spending = _.chain(data_series)
-    .thru((data_series) => data_series[data_series.length - 1].values)
-    .thru((values) => values[values.length - 1])
-    .value();
-
   const get_five_year_auth_average = (auth_or_exp) =>
     _.chain(std_years)
       .map((year) => orgVoteStatPa.q(query_subject).sum([year + auth_or_exp]))
@@ -420,15 +415,13 @@ const calculate = function (subject, options) {
   const additional_info = {
     five_year_auth_average: get_five_year_auth_average("auth"),
     five_year_exp_average: get_five_year_auth_average("exp"),
-    next_planned_spending: planned_spending,
     has_planned_spending: subject.has_planned_spending,
-    last_history_year: run_template(_.last(std_years)),
+    last_planned_spending: _.last(planned_spending_values),
     last_planned_year: run_template(_.last(planning_years)),
+    plan_change: _.last(planned_spending_values) - _.last(auth_values),
+    last_history_year: run_template(_.last(std_years)),
     gap_year:
       (subject.has_planned_spending && actual_to_planned_gap_year) || null,
-    plan_change:
-      planned_spending_values[planned_spending_values.length - 1] -
-      _.sum(auth_values) / auth_values.length,
     hist_avg_tot_pct: hist_unspent_avg_pct,
     last_year_lapse_amt: unspent_last_year || 0,
     last_year_lapse_pct:
