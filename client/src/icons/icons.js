@@ -922,6 +922,16 @@ const IconUnpin = (props) => {
 
   return <_IconWrapper {...props} viewbox_width={100} ChildSVG={SVGUnpin} />;
 };
+const IconFilter = (props) => {
+  const SVGFilter = () => (
+    <path
+      d="M1.304,1.434l97.392,0l-38.728,38.625l0,58.507l-19.682,-18.621l0,-39.759l-38.982,-38.752Z"
+      style={{ stroke: "#000", strokeWidth: "1px" }}
+    />
+  );
+
+  return <_IconWrapper {...props} viewbow_width={100} ChildSVG={SVGFilter} />;
+};
 
 export {
   IconHome,
@@ -959,4 +969,5 @@ export {
   IconEmail,
   IconPin,
   IconUnpin,
+  IconFilter,
 };
