@@ -15,9 +15,10 @@ import {
   DisplayTableColumnToggle,
 } from "./DisplayTableUtils.js";
 
+import text from "./DisplayTable.yaml";
 import "./DisplayTable.scss";
 
-const { text_maker, TM } = create_text_maker_component();
+const { text_maker, TM } = create_text_maker_component(text);
 
 const column_config_defaults = {
   initial_visible: true,
@@ -267,12 +268,6 @@ export class DisplayTable extends React.Component {
           util_components_with_defaults && "display-table-container--with-utils"
         )}
       >
-        {util_components_with_defaults && (
-          <div className={"display-table-container__utils"}>
-            {_.map(util_components_with_defaults)}
-          </div>
-        )}
-
         <table
           className={classNames(
             "table",
@@ -290,6 +285,25 @@ export class DisplayTable extends React.Component {
             </div>
           </caption>
           <thead>
+            {util_components_with_defaults && (
+              <tr>
+                <td
+                  style={{ padding: "8px 8px 0px 0px" }}
+                  colSpan={_.size(visible_col_keys)}
+                >
+                  <div className={"display-table-container__utils"}>
+                    <button
+                      tabIndex={0}
+                      className={"skip-to-data"}
+                      onClick={() => this.refs.first_data.focus()}
+                    >
+                      {text_maker("skip_to_data")}
+                    </button>
+                    {_.map(util_components_with_defaults)}
+                  </div>
+                </td>
+              </tr>
+            )}
             <tr className="table-header">
               {_.map(visible_ordered_col_keys, (column_key, i) => (
                 <th key={i} className={"center-text"}>
@@ -358,13 +372,15 @@ export class DisplayTable extends React.Component {
             <tbody>
               {_.map(sorted_filtered_data, (row, i) => (
                 <tr key={i}>
-                  {_.map(visible_ordered_col_keys, (col_key) => (
+                  {_.map(visible_ordered_col_keys, (col_key, idx) => (
                     <td
                       style={{
                         fontSize: "14px",
                         textAlign: determine_text_align(row, col_key),
                       }}
                       key={col_key}
+                      tabIndex={-1}
+                      ref={idx === 0 && i === 0 ? "first_data" : null}
                     >
                       {col_configs_with_defaults[col_key].formatter ? (
                         _.isString(

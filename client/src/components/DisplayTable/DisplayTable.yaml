@@ -7,3 +7,6 @@ download_table_data_desc:
 select_columns:
   en: Select columns
   fr: Choisir les colonnes
+skip_to_data:
+  en: Skip to main content of this table
+  fr: TODO
