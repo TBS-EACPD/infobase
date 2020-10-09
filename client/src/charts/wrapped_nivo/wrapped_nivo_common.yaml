@@ -3,5 +3,5 @@ show_table:
   fr: Afficher le tableau de données
 
 default_table_name:
-  en: Table for graph
-  fr: Tableau pour graphique
+  en: Table of data
+  fr: Tableau des données

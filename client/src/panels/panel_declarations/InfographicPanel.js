@@ -67,7 +67,7 @@ class Panel_ extends React.Component {
 
     const header_utils = context && (
       <div style={{ marginLeft: "auto" }}>
-        {context.panel_key && (
+        {context.panel_key && !window.is_a11y_mode && (
           <LogInteractionEvents
             event_type={"PANEL_PDF_DOWNLOADED"}
             event_details={title}

@@ -1,5 +1,7 @@
 import classNames from "classnames";
+
 import "./DropdownMenu.scss";
+import { trivial_text_maker } from "../models/text.js";
 
 export class DropdownMenu extends React.Component {
   constructor(props) {
@@ -7,6 +9,12 @@ export class DropdownMenu extends React.Component {
     this.state = {
       isOpen: false,
     };
+  }
+  componentDidUpdate() {
+    const { isOpen } = this.state;
+    if (isOpen) {
+      this.refs.dropdown_area.focus();
+    }
   }
   render() {
     const {
@@ -26,19 +34,37 @@ export class DropdownMenu extends React.Component {
             isOpen ? opened_button_class_name : closed_button_class_name
           }
           style={{ marginRight: 5 }}
-          onClick={() => this.setState({ isOpen: !isOpen })}
+          onClick={() => {
+            this.refs.dropdown_area.focus();
+            this.setState({ isOpen: !isOpen });
+          }}
           title={button_description}
         >
           {isOpen ? (
             <div className="close-dropdown">
-              <span className="close-dropdown__x">X </span>
-              {dropdown_trigger_txt}
+              <span
+                aria-label={`${trivial_text_maker(
+                  "close"
+                )} ${dropdown_trigger_txt}`}
+                className="close-dropdown__x"
+              >
+                X {dropdown_trigger_txt}
+              </span>
             </div>
           ) : (
-            dropdown_trigger_txt
+            <span
+              aria-label={`${trivial_text_maker(
+                "open"
+              )} ${dropdown_trigger_txt}`}
+            >
+              {dropdown_trigger_txt}
+            </span>
           )}
         </button>
         <div
+          tabIndex={0}
+          aria-label={dropdown_trigger_txt}
+          ref={"dropdown_area"}
           className={classNames(
             dropdown_content_class_name,
             "dropdown__content",
@@ -46,6 +72,9 @@ export class DropdownMenu extends React.Component {
           )}
         >
           {dropdown_content}
+          <button onClick={() => this.setState({ isOpen: !isOpen })}>
+            {`${trivial_text_maker("close")} ${dropdown_trigger_txt}`}
+          </button>
         </div>
       </div>
     );

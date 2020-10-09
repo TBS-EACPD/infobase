@@ -1,5 +1,20 @@
 @import '../../common_css/common-variables';
 
+.skip-to-data {
+  color: $textColor;
+  overflow: hidden;
+  height: 0px;
+  width: 0px;
+  padding: 0;
+  border: 0;
+}
+.skip-to-data:focus, .skip-to-data:active {
+  height: auto;
+  width: auto;
+  overflow: auto;
+}
+
+
 td {
   background-color: inherit;
 }
@@ -19,7 +34,6 @@ td {
 .display-table-container__utils {
   display: flex;
   justify-content: flex-end;
-  padding: 8px 10px 2px;
 }
 .no-data-msg {
   display: flex;

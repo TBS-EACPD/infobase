@@ -208,9 +208,12 @@ change:
 click:
   en: Click
   fr: Cliquez
+open:
+  en: Open
+  fr: Ouvert
 close:
-  en: close
-  fr: fermer
+  en: Close
+  fr: Fermer
 people:
   en: People
   fr: Personnes
