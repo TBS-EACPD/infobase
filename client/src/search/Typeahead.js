@@ -7,6 +7,12 @@ export class Typeahead extends React.Component {
     search_text: "",
   };
 
+  constructor(props) {
+    super(props);
+
+    this.typeaheadRef = React.createRef();
+  }
+
   update_search_text = (event) => {
     const { onInputChange } = this.props;
     onInputChange();
@@ -22,16 +28,18 @@ export class Typeahead extends React.Component {
       minLength,
     } = this.props;
 
+    const refresh_dropdown_menu = () => {
+      this.forceUpdate();
+    };
+
     const { search_text } = this.state;
 
     const filtered_results = _.filter(search_values, (res) => {
       return filterBy ? filterBy(res, { ...this.props, ...this.state }) : true;
     });
 
-    console.log(filtered_results);
-
     return (
-      <div>
+      <div className="rbt" style={{ position: "relative" }}>
         <div className="search-bar">
           <div className="search-icon-container">
             <span aria-hidden="true">
@@ -46,13 +54,18 @@ export class Typeahead extends React.Component {
             placeholder={placeholder}
             value={this.state.search_text}
             onChange={this.update_search_text}
+            ref={this.typeaheadRef}
           />
           <button style={{ backgroundColor: "blue", color: "white" }}>
             Filter
           </button>
         </div>
         {search_text.length >= minLength &&
-          renderMenu(filtered_results, { ...this.props, ...this.state })}
+          renderMenu(filtered_results, {
+            ...this.props,
+            ...this.state,
+            refresh_dropdown_menu,
+          })}
       </div>
     );
   }
