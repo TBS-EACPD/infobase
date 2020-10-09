@@ -197,14 +197,9 @@ class InfoGraph_ extends React.Component {
           </div>
         )}
         {!window.is_a11y_mode && (
-          <Fragment>
-            <div className="row infographic-search-container">
-              {search_component}
-            </div>
-            <div className="infographic-search-container">
-              <Typeahead />
-            </div>
-          </Fragment>
+          <div className="row infographic-search-container">
+            {search_component}
+          </div>
         )}
         <div>
           <div>

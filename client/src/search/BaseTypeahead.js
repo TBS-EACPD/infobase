@@ -317,10 +317,7 @@ export class BaseTypeahead extends React.Component {
                             className="dropdown-item"
                             role="button"
                             onClick={(e) => {
-                              console.log(this.pagination_index);
                               this.pagination_index++;
-                              console.log(this.pagination_index);
-
                               menuProps.refresh_dropdown_menu();
                             }}
                           >
