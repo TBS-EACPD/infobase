@@ -94,7 +94,7 @@ class HistoricalProgramBars extends React.Component {
             index: idx + 1,
             header: tick,
             is_summable: true,
-            formatter: "dollar",
+            formatter: "compact2_written",
           },
         ])
         .fromPairs()
@@ -220,6 +220,7 @@ class DetailedProgramSplit extends React.Component {
           header: `${run_template("{{pa_last_year}}")} ${text_maker(
             "expenditures"
           )}`,
+          formatter: "compact2_written",
         },
       };
       return (

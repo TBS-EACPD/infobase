@@ -24,7 +24,7 @@ const dp_cols = [...planning_years, ...special_cols];
 const spending_formatter = (value) => (
   <Format
     style={{ color: window.infobase_color_constants.textGreen }}
-    type={"dollar"}
+    type={"compact2_written"}
     content={value}
   />
 );
@@ -32,7 +32,7 @@ const spending_formatter = (value) => (
 const revenue_formatter = (value, custom_color = null) => (
   <Format
     style={{ color: window.infobase_color_constants.textRed }}
-    type={"dollar"}
+    type={"compact2_written"}
     content={value}
   />
 );
@@ -111,7 +111,7 @@ export const declare_dp_rev_split_panel = () =>
             index: 4,
             header: text_maker("dp_net"),
             is_summable: true,
-            formatter: "dollar",
+            formatter: "compact2_written",
           },
         };
 

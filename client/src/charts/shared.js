@@ -23,13 +23,19 @@ export const get_formatter = (
         if (full) {
           return (value) => formats.dollar_raw(value);
         } else {
-          return (value) => formats.compact2_raw(value);
+          return (value) =>
+            window.is_a11y_mode
+              ? formats.compact2_written_raw(value)
+              : formats.compact2_raw(value);
         }
       } else {
         if (full) {
           return (value) => formats.dollar(value);
         } else {
-          return (value) => formats.compact2(value);
+          return (value) =>
+            window.is_a11y_mode
+              ? formats.compact2_written_raw
+              : formats.compact2(value);
         }
       }
     }

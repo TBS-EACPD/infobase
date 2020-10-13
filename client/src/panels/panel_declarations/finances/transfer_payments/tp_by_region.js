@@ -22,8 +22,6 @@ import text from "./tp_by_region.yaml";
 
 const { std_years } = year_templates;
 
-const formatter = formats["compact2_raw"];
-
 const { text_maker, TM } = create_text_maker_component(text);
 const { provinces, le_provinces, de_provinces } = businessConstants;
 
@@ -128,7 +126,7 @@ const TransferPaymentsByRegionGraph = ({ data }) => (
       data,
       color_scale: get_color_scale(data),
       years: std_years,
-      formatter: formatter,
+      formatter: formats.compact2_raw,
     }}
   />
 );
@@ -214,8 +212,10 @@ class TPMap extends React.Component {
               header: run_template(yr),
               formatter: (value) =>
                 is_per_capita
-                  ? `${formatter(value)} ${text_maker("per_capita")}`
-                  : formatter(value),
+                  ? `${formats.compact1_written_raw(value)} ${text_maker(
+                      "per_capita"
+                    )}`
+                  : formats.compact2_written_raw(value),
             },
           ])
           .fromPairs()

@@ -163,7 +163,7 @@ class DetailedHistTPItems extends React.Component {
             index: idx + 1,
             header: year,
             is_summable: true,
-            formatter: "dollar",
+            formatter: "compact1_written",
           },
         ])
         .fromPairs()
