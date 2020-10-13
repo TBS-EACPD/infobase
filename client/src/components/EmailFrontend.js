@@ -227,6 +227,7 @@ class EmailFrontend extends React.Component {
                   field_id={get_field_id(field_key)}
                   selected_enums_for_field={completed_template[field_key]}
                   disabled={disable_forms}
+                  aria-hidden={disable_forms}
                   state_update_callback={(selected_enums) =>
                     this.mergeIntoCompletedTemplateState(
                       field_key,
@@ -268,6 +269,7 @@ class EmailFrontend extends React.Component {
                 style={{ marginBottom: "1rem" }}
                 id={get_field_id(field_key)}
                 disabled={disable_forms || connected_disabled}
+                aria-hidden={disable_forms || connected_disabled}
                 rows="5"
                 cols="33"
                 defaultValue={completed_template[field_key] || ""}
