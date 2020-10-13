@@ -103,7 +103,7 @@ export class WrappedNivoLine extends React.Component {
       const line_table_value_formatter = (value) =>
         _.isUndefined(value)
           ? ""
-          : get_formatter(is_money, text_formatter, true, true)(value);
+          : get_formatter(is_money, text_formatter, true, false)(value);
       const column_configs = {
         label: {
           index: 0,

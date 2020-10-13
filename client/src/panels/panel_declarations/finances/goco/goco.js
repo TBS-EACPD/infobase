@@ -106,8 +106,8 @@ class Goco extends React.Component {
       .sortBy((d) => -d[spending_text])
       .value();
 
-    const spending_table_formatter = get_formatter(true, undefined, true, true);
-    const fte_table_formatter = get_formatter(false, undefined, true, true);
+    const spend_table_formatter = get_formatter(true, undefined, true, false);
+    const fte_table_formatter = get_formatter(false, undefined, true, false);
 
     const parent_table_data = _.map(Tag.gocos_by_spendarea, (sa) => ({
       [sa_text]: sa.name,
@@ -123,7 +123,7 @@ class Goco extends React.Component {
       [spending_text]: {
         index: 1,
         header: spending_text,
-        formatter: (value) => spending_table_formatter(value),
+        formatter: (value) => spend_table_formatter(value),
       },
       [ftes_text]: {
         index: 2,

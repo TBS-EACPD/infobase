@@ -42,7 +42,7 @@ const get_custom_table = (data, active_sobjs) => {
           index: idx + 1,
           header: year,
           is_summable: true,
-          formatter: "dollar",
+          formatter: "compact2_written",
         },
       ])
       .fromPairs()

@@ -79,7 +79,7 @@ export class WrappedNivoPie extends React.Component {
         header: nivo_common_text_maker("value"),
         formatter: (value) =>
           value
-            ? get_formatter(is_money, text_formatter, true, true)(value)
+            ? get_formatter(is_money, text_formatter, true, false)(value)
             : "",
       },
       percentage: {

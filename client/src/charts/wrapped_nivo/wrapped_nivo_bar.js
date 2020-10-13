@@ -94,7 +94,7 @@ export class WrappedNivoBar extends React.Component {
           data,
           keys,
           indexBy,
-          get_formatter(is_money, text_formatter, true, true),
+          get_formatter(is_money, text_formatter, true, false),
           table_name,
           table_first_column_name
         ));
