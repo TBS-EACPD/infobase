@@ -101,7 +101,7 @@ export const format_and_get_fte = (type, info, subject) => {
     enableGridY: false,
     remove_left_axis: true,
     disable_y_axis_zoom: true,
-    disable_table_view: true,
+    disable_table_view: !window.is_a11y_mode,
     y_scale_min: _.min(raw_data) * 0.9,
     y_scale_max: _.max(raw_data) * 1.1,
     margin: {
