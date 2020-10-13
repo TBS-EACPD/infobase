@@ -4,12 +4,12 @@ import { IconCheckmark } from "../icons/icons.js";
 import "./CheckBox.scss";
 
 export class CheckBox extends React.Component {
-  handleOnClick() {
+  handleOnClick = () => {
     const { disabled, onClick, id } = this.props;
     if (!disabled && onClick) {
       onClick(id);
     }
-  }
+  };
   render() {
     const {
       id,
