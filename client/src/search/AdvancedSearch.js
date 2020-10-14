@@ -4,7 +4,6 @@ import React from "react";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { CheckBox } from "../components/CheckBox";
-import { Details } from "../components/Details.js";
 
 import { create_text_maker } from "../models/text.js";
 
