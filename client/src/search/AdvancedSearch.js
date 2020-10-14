@@ -171,13 +171,7 @@ export class AdvancedSearch extends React.Component {
         <div className="col-md-12">
           <EverythingSearch
             {...{ ...everything_search_config, ...include_configs }}
-          />
-        </div>
-        <div className="col-md-12">
-          <Details
-            summary_content={text_maker("advaced_search_title")}
-            persist_content={true}
-            content={
+            filter_content={
               <fieldset>
                 <legend>{text_maker("advanced_search_description")}:</legend>
                 <div className="advanced-search-options">

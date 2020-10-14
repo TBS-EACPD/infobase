@@ -56,6 +56,8 @@ const EverythingSearch = withRouter(
 
         include_tables,
         include_glossary,
+
+        filter_content,
       } = this.props;
 
       let { onSelect } = this.props;
@@ -107,6 +109,7 @@ const EverythingSearch = withRouter(
           search_configs={search_configs}
           onSelect={onSelect}
           large={!!this.props.large}
+          filter_content={filter_content}
         />
       );
     }
