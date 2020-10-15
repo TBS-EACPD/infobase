@@ -99,7 +99,7 @@ jobs:
     steps:
       - checkout:
           path: "~/InfoBase"
-      - run: sudo npm install @axe-core/cli -g --unsafe-perm=true --allow-root
+      - run: npm install @axe-core/cli -g --unsafe-perm=true --allow-root
       - run: axe https://dev.ea-ad.ca/master/index-eng.html#start --exit
 
   lighthouse:
