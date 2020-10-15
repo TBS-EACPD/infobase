@@ -91,6 +91,16 @@ jobs:
           paths:
             - ./dev-dbs-clean-for-these-branches.txt
           key: dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}
+  axe:
+    working_directory: "~/InfoBase"
+    docker:
+      - image: markhobson/node-chrome:latest
+        <<: *dockerhub_auth
+    steps:
+      - checkout:
+          path: "~/InfoBase"
+      - run: npm install @axe-core/cli -g
+      - run: axe https://dev.ea-ad.ca/master/index-eng.html#start --exit
 
   lighthouse:
     working_directory: "~/InfoBase"
