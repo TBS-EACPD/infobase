@@ -100,7 +100,7 @@ jobs:
       - checkout:
           path: "~/InfoBase"
       - run: npm install @axe-core/cli -g --unsafe-perm=true --allow-root
-      - run: axe https://dev.ea-ad.ca/master/index-eng.html#start --exit
+      - run: axe https://dev.ea-ad.ca/master/index-eng.html#about --disable color-contrast
 
   lighthouse:
     working_directory: "~/InfoBase"
