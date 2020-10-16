@@ -291,14 +291,21 @@ export class BaseTypeahead extends React.Component {
                         </li>,
                         ..._.map(results, (result) => {
                           const index = index_key_counter++;
+                          const selected = menuProps.cursor === index;
                           return (
                             <li
                               key={index}
                               id={`rbt-menu-item-${index}`}
                               role="option"
+                              aria-selected
+                              className={`${
+                                menuProps.cursor === index ? "active" : ""
+                              }`}
                             >
                               <a
-                                className="dropdown-item"
+                                className={`dropdown-item ${
+                                  menuProps.cursor === index ? "active" : ""
+                                }`}
                                 role="button"
                                 onClick={() => menuProps.onChange(result)}
                               >
