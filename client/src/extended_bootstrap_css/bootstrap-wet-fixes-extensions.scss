@@ -373,6 +373,24 @@ li.list-group-item {
   color: lighten($tertiaryColor, 30%);
 }
 
+.list-group-item.disabled {
+  background-color: #fff !important;
+  cursor: not-allowed;
+  color: #777 !important;
+
+  :hover {
+    background-color: #fff !important;
+    cursor: not-allowed;
+    color: #777 !important;
+  }
+
+  :focus {
+    background-color: #fff !important;
+    cursor: not-allowed;
+    color: #777 !important;
+  }
+}
+
 /* for table striped header */
 .table-striped>tbody>tr:nth-child(odd) {
   background-color:lighten($tertiaryColor, 40%);

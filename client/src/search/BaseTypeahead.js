@@ -1,5 +1,6 @@
 import _ from "lodash";
 import React from "react";
+import { ListGroup, ListGroupItem } from "react-bootstrap";
 import ReactDOM from "react-dom";
 
 import { TM } from "../components/TextMaker.js";
@@ -221,17 +222,15 @@ export class BaseTypeahead extends React.Component {
 
           if (_.isEmpty(filtered_results)) {
             return (
-              <ul className="rbt-menu dropdown-menu show">
-                <li className="disabled">
-                  <a className="dropdown-item disabled">
-                    {text_maker("no_matches_found")}
-                  </a>
-                </li>
-              </ul>
+              <ListGroup className="rbt-menu dropdown-menu show">
+                <ListGroupItem disabled className="dropdown-item">
+                  {text_maker("no_matches_found")}
+                </ListGroupItem>
+              </ListGroup>
             );
           } else {
             return (
-              <ul className="rbt-menu dropdown-menu show">
+              <ListGroup className="rbt-menu dropdown-menu show">
                 {_.chain(filtered_results)
                   .groupBy("config_group_index")
                   .thru((grouped_results) => {
@@ -246,7 +245,7 @@ export class BaseTypeahead extends React.Component {
 
                     let index_key_counter = needs_pagination_up_control ? 1 : 0;
                     return [
-                      <li
+                      <ListGroupItem
                         key={`header-pagination-info`}
                         className="dropdown-header"
                       >
@@ -258,90 +257,71 @@ export class BaseTypeahead extends React.Component {
                             total_matching_results,
                           }}
                         />
-                      </li>,
+                      </ListGroupItem>,
                       needs_pagination_up_control && (
-                        <li
+                        <ListGroupItem
                           key={0}
                           id={`rbt-menu-item-${pagination_down_item_index}`}
-                          className="rbt-menu-pagination-option rbt-menu-pagination-option--previous"
+                          className="rbt-menu-pagination-option rbt-menu-pagination-option--previous dropdown-item"
+                          onClick={(e) => {
+                            this.pagination_index--;
+                            menuProps.refresh_dropdown_menu();
+                          }}
                         >
-                          <a
-                            className="dropdown-item"
-                            role="button"
-                            onClick={(e) => {
-                              this.pagination_index--;
-                              menuProps.refresh_dropdown_menu();
-                            }}
-                          >
-                            <span className="aria-hidden">▲</span>
-                            <br />
-                            <TextMaker
-                              k="paginate_previous"
-                              args={{ page_size: pagination_size }}
-                            />
-                          </a>
-                        </li>
+                          <span className="aria-hidden">▲</span>
+                          <br />
+                          <TextMaker
+                            k="paginate_previous"
+                            args={{ page_size: pagination_size }}
+                          />
+                        </ListGroupItem>
                       ),
                       ..._.flatMap(grouped_results, (results, group_index) => [
-                        <li
+                        <ListGroupItem
                           key={`header-${group_index}`}
                           className="dropdown-header"
                         >
                           {config_groups[group_index].group_header}
-                        </li>,
+                        </ListGroupItem>,
                         ..._.map(results, (result) => {
                           const index = index_key_counter++;
                           const selected = menuProps.cursor === index;
                           return (
-                            <li
+                            <ListGroupItem
                               key={index}
                               id={`rbt-menu-item-${index}`}
                               role="option"
                               aria-selected
-                              className={`${
-                                menuProps.cursor === index ? "active" : ""
-                              }`}
+                              className="dropdown-item"
+                              onClick={() => menuProps.onChange(result)}
                             >
-                              <a
-                                className={`dropdown-item ${
-                                  menuProps.cursor === index ? "active" : ""
-                                }`}
-                                role="button"
-                                onClick={() => menuProps.onChange(result)}
-                              >
-                                {result.menu_content(menuProps.search_text)}
-                              </a>
-                            </li>
+                              {result.menu_content(menuProps.search_text)}
+                            </ListGroupItem>
                           );
                         }),
                       ]),
                       needs_pagination_down_control && (
-                        <li
+                        <ListGroupItem
                           key={pagination_down_item_index}
                           id={`rbt-menu-item-${pagination_down_item_index}`}
-                          className="rbt-menu-pagination-option rbt-menu-pagination-option--next"
+                          className="rbt-menu-pagination-option rbt-menu-pagination-option--next dropdown-item"
+                          onClick={(e) => {
+                            this.pagination_index++;
+                            menuProps.refresh_dropdown_menu();
+                          }}
                         >
-                          <a
-                            className="dropdown-item"
-                            role="button"
-                            onClick={(e) => {
-                              this.pagination_index++;
-                              menuProps.refresh_dropdown_menu();
-                            }}
-                          >
-                            <TextMaker
-                              k="paginate_next"
-                              args={{ next_page_size: next_page_size }}
-                            />
-                            <br />
-                            <span className="aria-hidden">▼</span>
-                          </a>
-                        </li>
+                          <TextMaker
+                            k="paginate_next"
+                            args={{ next_page_size: next_page_size }}
+                          />
+                          <br />
+                          <span className="aria-hidden">▼</span>
+                        </ListGroupItem>
                       ),
                     ];
                   })
                   .value()}
-              </ul>
+              </ListGroup>
             );
           }
         }}
