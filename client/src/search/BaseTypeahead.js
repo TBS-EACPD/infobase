@@ -137,10 +137,6 @@ export class BaseTypeahead extends React.Component {
 
     return (
       <Typeahead
-        ref={(ref) => {
-          this.typeahead = ref;
-          this.typeahead_node = ReactDOM.findDOMNode(ref);
-        }}
         main_filter="name"
         paginate={false} // Turn off built in pagination
         placeholder={placeholder}
@@ -168,12 +164,6 @@ export class BaseTypeahead extends React.Component {
             });
           }
         }}
-        // This is "on change" to the input in the text box
-        onInputChange={(text) => {
-          this.reset_pagination();
-          // this.refresh_dropdown_menu();
-          debounceOnNewQuery(text);
-        }}
         // receives events selecting an option with the pagination_placeholder: true property
         onPaginate={(e) => {
           let selected_item;
@@ -198,133 +188,15 @@ export class BaseTypeahead extends React.Component {
             this.refresh_dropdown_menu();
           }
         }}
-        renderMenu={(results, menuProps) => {
-          const filtered_results = _.filter(
-            results,
-            (option) => !_.isUndefined(option.config_group_index)
-          );
-
-          const page_range_start = this.pagination_index * pagination_size + 1;
-          const page_range_end = page_range_start + filtered_results.length - 1;
-
-          const total_matching_results = this.query_matched_counter;
-
-          const remaining_results =
-            total_matching_results -
-            (this.pagination_index + 1) * pagination_size;
-          const next_page_size =
-            remaining_results < pagination_size
-              ? remaining_results
-              : pagination_size;
-
-          // A bit hacky, but need to reset the query_matched_counter here so we can be sure the next filter pass works right
-          this.query_matched_counter = 0;
-
-          if (_.isEmpty(filtered_results)) {
-            return (
-              <ListGroup className="rbt-menu dropdown-menu show">
-                <ListGroupItem disabled className="dropdown-item">
-                  {text_maker("no_matches_found")}
-                </ListGroupItem>
-              </ListGroup>
-            );
-          } else {
-            return (
-              <ListGroup className="rbt-menu dropdown-menu show">
-                {_.chain(filtered_results)
-                  .groupBy("config_group_index")
-                  .thru((grouped_results) => {
-                    const needs_pagination_up_control =
-                      this.pagination_index > 0;
-                    const needs_pagination_down_control =
-                      page_range_end < total_matching_results;
-
-                    const pagination_down_item_index = needs_pagination_up_control
-                      ? filtered_results.length + 1
-                      : filtered_results.length;
-
-                    let index_key_counter = needs_pagination_up_control ? 1 : 0;
-                    return [
-                      <ListGroupItem
-                        key={`header-pagination-info`}
-                        className="dropdown-header"
-                      >
-                        <TextMaker
-                          k="paginate_status"
-                          args={{
-                            page_range_start,
-                            page_range_end,
-                            total_matching_results,
-                          }}
-                        />
-                      </ListGroupItem>,
-                      needs_pagination_up_control && (
-                        <ListGroupItem
-                          key={0}
-                          id={`rbt-menu-item-${pagination_down_item_index}`}
-                          className="rbt-menu-pagination-option rbt-menu-pagination-option--previous dropdown-item"
-                          onClick={(e) => {
-                            this.pagination_index--;
-                            menuProps.refresh_dropdown_menu();
-                          }}
-                        >
-                          <span className="aria-hidden">▲</span>
-                          <br />
-                          <TextMaker
-                            k="paginate_previous"
-                            args={{ page_size: pagination_size }}
-                          />
-                        </ListGroupItem>
-                      ),
-                      ..._.flatMap(grouped_results, (results, group_index) => [
-                        <ListGroupItem
-                          key={`header-${group_index}`}
-                          className="dropdown-header"
-                        >
-                          {config_groups[group_index].group_header}
-                        </ListGroupItem>,
-                        ..._.map(results, (result) => {
-                          const index = index_key_counter++;
-                          const selected = menuProps.cursor === index;
-                          return (
-                            <ListGroupItem
-                              key={index}
-                              id={`rbt-menu-item-${index}`}
-                              role="option"
-                              aria-selected
-                              className="dropdown-item"
-                              onClick={() => menuProps.onChange(result)}
-                            >
-                              {result.menu_content(menuProps.search_text)}
-                            </ListGroupItem>
-                          );
-                        }),
-                      ]),
-                      needs_pagination_down_control && (
-                        <ListGroupItem
-                          key={pagination_down_item_index}
-                          id={`rbt-menu-item-${pagination_down_item_index}`}
-                          className="rbt-menu-pagination-option rbt-menu-pagination-option--next dropdown-item"
-                          onClick={(e) => {
-                            this.pagination_index++;
-                            menuProps.refresh_dropdown_menu();
-                          }}
-                        >
-                          <TextMaker
-                            k="paginate_next"
-                            args={{ next_page_size: next_page_size }}
-                          />
-                          <br />
-                          <span className="aria-hidden">▼</span>
-                        </ListGroupItem>
-                      ),
-                    ];
-                  })
-                  .value()}
-              </ListGroup>
-            );
-          }
-        }}
+        //
+        filter_content={filter_content}
+        onNewQuery={onNewQuery}
+        placeholder={
+          this.props.placeholder ||
+          trivial_text_maker("everything_search_placeholder")
+        }
+        search_configs={search_configs}
+        onSelect={onSelect}
         filter_content={filter_content}
       />
     );
