@@ -2,9 +2,9 @@ import { withRouter } from "react-router";
 
 import { glossary_href } from "../link_utils.js";
 
-import { BaseTypeahead } from "./BaseTypeahead.js";
 import { glossary as glossary_search_config } from "./search_configs.js";
 
+import { Typeahead } from "./Typeahead.js";
 
 const glossary_placeholder = {
   en: "Search for a term used in the InfoBase",
@@ -17,7 +17,7 @@ const GlossarySearch = withRouter(
       const { history } = this.props;
 
       return (
-        <BaseTypeahead
+        <Typeahead
           placeholder={glossary_placeholder}
           search_configs={[glossary_search_config]}
           onSelect={({ id }) =>
