@@ -22,3 +22,7 @@ paginate_next:
     Show next {{next_page_size}} items
   fr: |
     Montrer les {{next_page_size}} items suivants
+
+filter:
+  en: Filter
+  fr: Filtrer
