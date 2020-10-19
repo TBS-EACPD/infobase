@@ -6,21 +6,20 @@ import {
 } from "react-bootstrap";
 import MediaQuery from "react-responsive";
 
-import "./BaseTypeahead.scss";
-
 import { TM } from "../components/TextMaker.js";
 import { log_standard_event } from "../core/analytics.js";
-import { create_text_maker } from "../models/text.js";
 import { breakpoints } from "../core/breakpoint_defs.js";
 
 import { IconFilter } from "../icons/icons.js";
+import { create_text_maker } from "../models/text.js";
+
+import { get_static_url } from "../request_utils.js";
 
 import { InfoBaseHighlighter } from "./search_utils.js";
-import { get_static_url } from "../request_utils.js";
 
 import "./Typeahead.scss";
 
-import text from "./BaseTypeahead.yaml";
+import text from "./Typeahead.yaml";
 
 const text_maker = create_text_maker(text);
 const TextMaker = (props) => <TM tmf={text_maker} {...props} />;
@@ -29,7 +28,6 @@ export class Typeahead extends React.Component {
   state = {
     search_text: "",
     pagination_index: 0,
-    query_matched_counter: 0,
   };
 
   constructor(props) {
@@ -38,31 +36,18 @@ export class Typeahead extends React.Component {
     this.typeaheadRef = React.createRef();
   }
 
-  update_search_text = (event) => {
-    this.debounceOnNewQuery;
-    this.setState({ search_text: event.target.value });
+  reset_query_matched = () => {
+    this.query_matched_counter = 0;
   };
-
-  debounceOnNewQuery = _.debounce((query) => {
-    onNewQuery();
-    log_standard_event({
-      SUBAPP: window.location.hash.replace("#", ""),
-      MISC1: `TYPEAHEAD_SEARCH_QUERY`,
-      MISC2: `query: ${query}, search_configs: ${_.map(
-        search_configs,
-        "config_name"
-      )}`,
-    });
-  }, 500);
 
   on_select_item = (selected) => {
     const { onSelect } = this.props;
 
     const anything_selected = !_.isEmpty(selected);
     if (anything_selected) {
-      // this.reset_pagination();
+      this.reset_query_matched();
 
-      // this.typeahead.getInstance().clear();
+      this.setState({ search_text: "" });
 
       if (_.isFunction(onSelect)) {
         onSelect(selected.data);
@@ -79,25 +64,32 @@ export class Typeahead extends React.Component {
   render() {
     const {
       placeholder,
-      search_values,
-      renderMenu,
       minLength,
       filter_content,
       pagination_size,
       search_configs,
-      onSelect,
       onNewQuery,
     } = this.props;
 
-    const {
-      search_text,
-      cursor,
-      pagination_index,
-      query_matched_counter,
-    } = this.state;
+    const { search_text, cursor, pagination_index } = this.state;
 
-    const refresh_dropdown_menu = () => {
-      this.forceUpdate();
+    const debounceOnNewQuery = _.debounce((query) => {
+      onNewQuery();
+      log_standard_event({
+        SUBAPP: window.location.hash.replace("#", ""),
+        MISC1: `TYPEAHEAD_SEARCH_QUERY`,
+        MISC2: `query: ${query}, search_configs: ${_.map(
+          search_configs,
+          "config_name"
+        )}`,
+      });
+    }, 500);
+
+    const update_search_text = (event) => {
+      const text = _.trimStart(event.target.value);
+      this.reset_query_matched();
+      debounceOnNewQuery(text);
+      this.setState({ search_text: text });
     };
 
     const config_groups = _.map(search_configs, (search_config, ix) => ({
@@ -137,7 +129,7 @@ export class Typeahead extends React.Component {
 
     // Didn't like the default pagination, but due to API rigidness I had to implement my own at the filtering level
     const paginate_results = () => {
-      const page_start = pagination_size * this.pagination_index;
+      const page_start = pagination_size * pagination_index;
       const page_end = page_start + pagination_size;
       const is_on_displayed_page = !(
         this.query_matched_counter < page_start ||
@@ -149,16 +141,16 @@ export class Typeahead extends React.Component {
       return is_on_displayed_page;
     };
 
-    const filterBy = (option, props) => {
+    const filterBy = (option) => {
       if (option.pagination_placeholder) {
         if (option.paginate_direction === "previous") {
-          return this.pagination_index > 0;
+          return pagination_index > 0;
         } else if (option.paginate_direction === "next") {
           return true; // can't yet tell if next button's needed at this point, so always pass it's placeholder through
         }
       }
 
-      const query = props.search_text;
+      const query = this.state.search_text;
       const group_filter =
         config_groups[option.config_group_index].group_filter;
       const query_matches = group_filter(query, option.data);
@@ -170,25 +162,22 @@ export class Typeahead extends React.Component {
       }
     };
 
-    const filtered_results = _.filter(search_values, (res) => {
-      return (
-        filterBy(res, { ...this.props, ...this.state }) &&
-        !_.isUndefined(res.config_group_index)
-      );
+    const filtered_results = _.filter(all_options, (res) => {
+      return filterBy(res) && !_.isUndefined(res.config_group_index);
     });
 
-    const page_range_start = pagination_index * pagination_size + 1;
-    const page_range_end = page_range_start + filtered_results.length - 1;
-
-    const total_matching_results = query_matched_counter;
-
-    const remaining_results =
-      total_matching_results - (pagination_index + 1) * pagination_size;
-    const next_page_size =
-      remaining_results < pagination_size ? remaining_results : pagination_size;
-
     const menu = (() => {
-      const { pagination_index } = this.state;
+      const page_range_start = pagination_index * pagination_size + 1;
+      const page_range_end = page_range_start + filtered_results.length - 1;
+
+      const total_matching_results = this.query_matched_counter;
+
+      const remaining_results =
+        total_matching_results - (pagination_index + 1) * pagination_size;
+      const next_page_size =
+        remaining_results < pagination_size
+          ? remaining_results
+          : pagination_size;
 
       if (_.isEmpty(filtered_results)) {
         return (
@@ -204,7 +193,6 @@ export class Typeahead extends React.Component {
             {_.chain(filtered_results)
               .groupBy("config_group_index")
               .thru((grouped_results) => {
-                console.log(grouped_results);
                 const needs_pagination_up_control = pagination_index > 0;
                 const needs_pagination_down_control =
                   page_range_end < total_matching_results;
@@ -234,8 +222,10 @@ export class Typeahead extends React.Component {
                       id={`rbt-menu-item-${pagination_down_item_index}`}
                       className="rbt-menu-pagination-option rbt-menu-pagination-option--previous dropdown-item"
                       onClick={(e) => {
-                        this.pagination_index--;
-                        menuProps.refresh_dropdown_menu();
+                        this.setState((prev_state) => ({
+                          pagination_index: prev_state.pagination_index - 1,
+                        }));
+                        this.reset_query_matched();
                       }}
                     >
                       <span className="aria-hidden">▲</span>
@@ -262,7 +252,7 @@ export class Typeahead extends React.Component {
                           role="option"
                           aria-selected
                           className="dropdown-item"
-                          onClick={this.on_select_item}
+                          onClick={() => this.on_select_item(result)}
                         >
                           {result.menu_content(search_text)}
                         </ListGroupItem>
@@ -275,8 +265,10 @@ export class Typeahead extends React.Component {
                       id={`rbt-menu-item-${pagination_down_item_index}`}
                       className="rbt-menu-pagination-option rbt-menu-pagination-option--next dropdown-item"
                       onClick={(e) => {
-                        this.pagination_index++;
-                        refresh_dropdown_menu();
+                        this.setState((prev_state) => ({
+                          pagination_index: prev_state.pagination_index + 1,
+                        }));
+                        this.reset_query_matched();
                       }}
                     >
                       <TextMaker
@@ -309,9 +301,10 @@ export class Typeahead extends React.Component {
           <input
             style={{ width: "100%" }}
             placeholder={placeholder}
-            onChange={this.update_search_text}
+            onChange={update_search_text}
             ref={this.typeaheadRef}
             onKeyDown={this.handleKeyDown}
+            value={search_text}
           />
           {filter_content ? (
             <OverlayTrigger
@@ -319,7 +312,9 @@ export class Typeahead extends React.Component {
               rootClose
               placement="bottom"
               overlay={
-                <Popover style={{ maxWidth: "100%" }}>{filter_content}</Popover>
+                <Popover style={{ maxWidth: "100%" }} id="search-filter-button">
+                  {filter_content}
+                </Popover>
               }
             >
               <button

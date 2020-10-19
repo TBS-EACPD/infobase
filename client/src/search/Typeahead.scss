@@ -280,4 +280,88 @@
     }
   }
 
+  //The following was taken from the before BaseTypeahead
+
+  .rbt-input-hint-container > .form-control {
+    width: 100%;
+    @media(max-width:$maxMediumDevice){
+        font-size: 14px;
+    }
+  }
   
+  
+  .rbt-input-hint {
+    visibility: hidden;
+  }
+  
+  .rbt-menu {
+    width: 100%;
+    margin-top: 12px;
+    padding: 8px 0;
+    background-color: $backgroundColor;
+    border: 1px solid $separatorColor;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: $standardBorderRadius;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    max-height: 400px;
+    overflow-y: auto;
+    max-width: 100vw;
+    // list-style-type: none;
+  
+    & > .dropdown-header {
+      margin-top: 0px;
+      padding: 0px 20px 3px 10px;
+      font-size: 1.8em;
+      line-height: 1.8em;
+      white-space: normal;
+      border-bottom: 1px solid $separatorColor;
+      &:not(:first-child) {
+        border-top: 1px solid $separatorColor;
+      }
+    }
+  
+    & > button {
+      padding: 3px 40px;
+      font-size: 1.4em;
+      line-height: 1.8em;
+      cursor: pointer;
+      white-space: normal;
+      color: $linkColor;
+  
+      &:not(:first-child) {
+        border-top: 1px solid $separatorColor;
+      }
+    }
+  }
+  
+  .rbt-menu.dropdown-menu > li.active,
+  .rbt-menu.dropdown-menu > li.active > a,
+  .rbt-menu.dropdown-menu > li:focus:not(.dropdown-header),
+  .rbt-menu.dropdown-menu > li:hover:not(.dropdown-header),
+  .rbt-menu.dropdown-menu > li > a:focus,
+  .rbt-menu.dropdown-menu > li > a:hover {
+    &:not(.disabled){
+      background-color: lighten($tertiaryColor, 30%);
+      color: $linkFocusColor;
+      text-decoration: underline;
+    }
+  }
+  
+  .rbt-input-hint-container > .search-icon-container {
+    position: absolute; 
+    height: 100%; 
+    right: 8px; 
+    top: 0px; 
+    display: flex; 
+    align-items: center;
+  }
+  
+  .search-grayed-out-hint {
+    opacity: 0.8;
+  }
+  
+  input::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+  }
