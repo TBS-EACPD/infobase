@@ -1,12 +1,15 @@
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 
+import { TM } from "../../components/TextMaker.js";
+
 import { create_text_maker } from "../../models/text.js";
+
 import text from "./Typeahead.yaml";
 
 const text_maker = create_text_maker(text);
 const TextMaker = (props) => <TM tmf={text_maker} {...props} />;
 
-class TypeaheadMenu extends React.Component {
+export class TypeaheadMenu extends React.Component {
   state = {
     pagination_index: 0,
   };
@@ -19,8 +22,32 @@ class TypeaheadMenu extends React.Component {
 
   render() {
     const { pagination_index } = this.state;
-    const { pagination_size, paginated_results, queried_results } = this.props;
-    console.log(paginated_results);
+    const {
+      search_text,
+      pagination_size,
+      queried_results,
+      config_groups,
+    } = this.props;
+
+    const paginate_results = (option, index) => {
+      if (option.pagination_placeholder) {
+        if (option.paginate_direction === "previous") {
+          return pagination_index > 0;
+        } else if (option.paginate_direction === "next") {
+          return true; // can't yet tell if next button's needed at this point, so always pass it's placeholder through
+        }
+      }
+      const page_start = pagination_size * pagination_index;
+      const page_end = page_start + pagination_size;
+      const is_on_displayed_page = !(index < page_start || index >= page_end);
+
+      return is_on_displayed_page;
+    };
+
+    const paginated_results = _.filter(
+      queried_results,
+      (queried_result, index) => paginate_results(queried_result, index)
+    );
 
     const page_range_start = pagination_index * pagination_size + 1;
     const page_range_end = page_range_start + paginated_results.length - 1;
