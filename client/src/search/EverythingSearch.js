@@ -17,7 +17,7 @@ import {
   glossary_lite as glossary_lite_search_config,
 } from "./search_configs.js";
 
-import { Typeahead } from "./Typeahead.js";
+import { Typeahead } from "./Typeahead/Typeahead.js";
 
 const get_tag_search_configs = (
   include_tags_goco,

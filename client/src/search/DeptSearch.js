@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 
 import { make_orgs_search_config, all_dp_orgs } from "./search_configs.js";
 
-import { Typeahead } from "./Typeahead.js";
+import { Typeahead } from "./Typeahead/Typeahead.js";
 
 class DeptSearchWithoutRouter extends React.Component {
   render() {
