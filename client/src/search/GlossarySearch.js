@@ -7,7 +7,7 @@ import { glossary_href } from "../link_utils.js";
 
 import { glossary as glossary_search_config } from "./search_configs.js";
 
-import { Typeahead } from "./Typeahead.js";
+import { Typeahead } from "./Typeahead/Typeahead.js";
 
 const glossary_placeholder = {
   en: "Search for a term used in GC InfoBase",
