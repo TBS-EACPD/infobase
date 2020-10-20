@@ -262,8 +262,8 @@ function create_config({
     optimization: get_optimizations(is_prod_build, bundle_stats),
     devtool: is_prod_build ? false : "inline-source-map",
     resolve: {
+      extensions: [".tsx", ".js", ".ts"],
       modules: [std_lib_path.resolve(__dirname, "../"), "node_modules/"],
-      extensions: [".ts", ".js", ".tsx"],
     },
   };
 }

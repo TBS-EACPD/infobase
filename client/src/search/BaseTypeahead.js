@@ -5,7 +5,7 @@ import "./BaseTypeahead.scss";
 
 import { Typeahead, Menu, MenuItem } from "react-bootstrap-typeahead";
 
-import { TM } from "../components/TextMaker.js";
+import { TM } from "../components/TextMaker.tsx";
 import { log_standard_event } from "../core/analytics.js";
 import { create_text_maker } from "../models/text.js";
 import { get_static_url } from "../request_utils.js";
@@ -13,7 +13,6 @@ import { get_static_url } from "../request_utils.js";
 import { InfoBaseHighlighter } from "./search_utils.js";
 
 import text from "./BaseTypeahead.yaml";
-
 
 const text_maker = create_text_maker(text);
 const TextMaker = (props) => <TM tmf={text_maker} {...props} />;

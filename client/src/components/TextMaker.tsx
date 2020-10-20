@@ -1,4 +1,6 @@
 import { trivial_text_maker } from "../models/text.js";
+import React from "react";
+import _ from "lodash";
 
 // I think eslint is wrong here
 /* disable-eslint react/jsx-no-danger-children */

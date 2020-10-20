@@ -1,4 +1,4 @@
-import { TM } from "./TextMaker.js";
+import { TM } from "./TextMaker.tsx";
 
 /*props: 
   maxChildrenHeight as an INT of pixels,

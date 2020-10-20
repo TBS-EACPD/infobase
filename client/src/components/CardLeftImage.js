@@ -1,4 +1,4 @@
-import { TM } from "./TextMaker.js";
+import { TM } from "./TextMaker.tsx";
 import "./CardLeftImage.scss";
 
 const CardLeftImage = ({

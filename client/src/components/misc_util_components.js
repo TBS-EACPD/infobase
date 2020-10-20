@@ -9,7 +9,7 @@ import {
   create_text_maker,
 } from "../models/text.js";
 
-import { TextMaker, TM } from "./TextMaker.js";
+import { TextMaker, TM } from "./TextMaker.tsx";
 
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
 
