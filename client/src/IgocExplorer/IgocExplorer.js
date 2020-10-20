@@ -21,7 +21,7 @@ class IgocExplorerScheme extends AbstractExplorerScheme {
     super();
     this.initial_scheme_state = {
       grouping,
-      should_show_orgs_without_data: false,
+      should_show_orgs_without_data: true,
     };
   }
 
