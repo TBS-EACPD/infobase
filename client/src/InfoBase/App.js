@@ -45,7 +45,7 @@ const BudgetMeasuresRoute = retrying_react_lazy(() =>
   )
 );
 const About = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "About" */ "../about/about.js")
+  import(/* webpackChunkName: "About" */ "../about/about.tsx")
 );
 
 const Contact = retrying_react_lazy(() =>

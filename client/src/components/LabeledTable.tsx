@@ -1,15 +1,19 @@
 import PropTypes from "prop-types";
 import "./LabeledTable.scss";
 
-export const LabeledTable = ({ title, TitleComponent, contents }) => (
-  <section className="labeled-table" aria-label={title}>
-    {title && (
+interface LabeledTableProps {
+  title: string;
+  contents: any;
+  TitleComponent?: any;
+}
+
+export const LabeledTable = (props: LabeledTableProps) => (
+  <section className="labeled-table" aria-label={props.title}>
       <div className="labeled-table__header" aria-hidden={true}>
-        {TitleComponent ? <TitleComponent>{title}</TitleComponent> : title}
+        {props.TitleComponent ? <props.TitleComponent>{props.title}</props.TitleComponent> : props.title}
       </div>
-    )}
     <div className="labeled-table__items">
-      {_.map(contents, ({ id, label, content }, ix) => (
+      {_.map(props.contents, ({ id, label, content }, ix) => (
         <div
           className="labeled-table__item"
           key={id || ix}

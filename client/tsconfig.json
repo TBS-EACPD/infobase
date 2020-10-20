@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+      "outDir": "./build/InfoBase/app",
+      "sourceMap": true,
+      "strictNullChecks": true,
+      "experimentalDecorators": true,
+      "allowSyntheticDefaultImports" : true,
+      "esModuleInterop" : true,
+      "module": "es6",
+      "jsx": "react",
+      "target": "es5",
+      "allowJs": true,
+      "paths": {
+        "/*.yaml":["src/flows/*"],
+      },      
+  },
+  "include": [
+      "./src/"
+  ]
+}

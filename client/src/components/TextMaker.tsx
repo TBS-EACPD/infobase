@@ -21,16 +21,25 @@ const TextMaker = ({
     dangerouslySetInnerHTML: { __html: html },
   });
 };
-
+interface TMProps {
+  k: string;
+  el?: string;
+  args?: any;
+  tmf?: any;
+  style?: any;
+  className?: string;
+  template_str?: any;
+}
 //shorthand for the above
-const TM = ({ k, el, args, tmf, style, className }) => (
+const TM = (props: TMProps) => (
   <TextMaker
-    text_key={k}
-    el={el}
-    args={args}
-    text_maker_func={tmf}
-    style={style}
-    className={className}
+    text_key={props.k}
+    el={props.el}
+    args={props.args}
+    text_maker_func={props.tmf}
+    style={props.style}
+    className={props.className}
+    template_str={props.template_str}
   />
 );
 

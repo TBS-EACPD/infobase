@@ -47,12 +47,20 @@ const get_rules = ({ should_use_babel, language, is_prod_build }) => {
     {
       loader: "eslint-loader",
     },
+    /*{
+      enforce: "pre",
+      loader: "source-map-loader",
+    },*/
+    {
+      loader: "ts-loader",
+    },
   ];
 
   return [
     {
       test: (module_name) =>
-        /\.js$/.test(module_name) && !/\.side-effects\.js$/.test(module_name),
+        /\.(js|ts|tsx)$/.test(module_name) &&
+        !/\.side-effects\.js$/.test(module_name),
       exclude: /node_modules/,
       use: js_module_loader_rules,
     },
@@ -65,7 +73,7 @@ const get_rules = ({ should_use_babel, language, is_prod_build }) => {
     {
       // node modules that specifically require transpilation...
       include: /node_modules\/(graphiql|graphql-language-service-.*|codemirror-graphql|codemirror)/,
-      test: /\.js$/,
+      test: /\.(js|ts|tsx)$/,
       use: js_module_loader_rules,
     },
     {
@@ -255,6 +263,7 @@ function create_config({
     devtool: is_prod_build ? false : "inline-source-map",
     resolve: {
       modules: [std_lib_path.resolve(__dirname, "../"), "node_modules/"],
+      extensions: [".ts", ".js", ".tsx"],
     },
   };
 }
