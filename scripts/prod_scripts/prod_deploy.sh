@@ -14,7 +14,6 @@ while [ $CURRENT_BRANCH != 'master' ]; do
   esac
 done
 
-
 # prod db name convention is "prod-db-{short sha}", this is assumed/relied on in a few places so be careful if you ever want to change that convention
 DB_SUFFIX=prod-db-
 CURRENT_SHA=$(git rev-parse HEAD | cut -c1-7)
