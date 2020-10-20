@@ -20,6 +20,17 @@ done
 DB_SUFFIX=prod-db-
 CURRENT_SHA=$(git rev-parse HEAD | cut -c1-7)
 NEW_PROD_MDB_NAME=$DB_SUFFIX$CURRENT_SHA
+REMOTE_MASTER_SHA = (git rev-parse origin/master | cut -c1-7)
+while [ $CURRENT_SHA != $REMOTE_MASTER_SHA ]; do
+  read -p "You are deploying from a commit that does not match the head of origin/master. Do you want to continue? [YES/oops]" yn
+  case $yn in
+    [YES]* ) break;;
+    [oops]* ) exit;;
+    * ) echo "Please answer YES or oops.";;
+  esac
+done
+exit
+
 
 CURRENT_PROD_MDB_NAME=$(mongo $(lpass show MDB_SHELL_CONNECT_STRING --notes) \
   --username $(lpass show MDB_WRITE_USER --notes) --password $(lpass show MDB_WRITE_PW --notes) \
