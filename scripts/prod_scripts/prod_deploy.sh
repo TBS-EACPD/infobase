@@ -16,10 +16,10 @@ done
 
 # prod db name convention is "prod-db-{short sha}", this is assumed/relied on in a few places so be careful if you ever want to change that convention
 DB_SUFFIX=prod-db-
+REMOTE_MASTER_SHA=$(git rev-parse origin/master | cut -c1-7)
 CURRENT_SHA=$(git rev-parse HEAD | cut -c1-7)
 NEW_PROD_MDB_NAME=$DB_SUFFIX$CURRENT_SHA
 
-REMOTE_MASTER_SHA = (git rev-parse origin/master | cut -c1-7)
 while [ $CURRENT_SHA != $REMOTE_MASTER_SHA ]; do
   read -p "You are deploying from a commit that does not match the head of origin/master. Do you want to continue? [YES/oops]" yn
   case $yn in
