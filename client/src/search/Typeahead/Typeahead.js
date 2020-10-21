@@ -142,6 +142,7 @@ export class Typeahead extends React.Component {
       pagination_size,
       search_text,
       config_groups,
+      on_select_item: this.on_select_item,
     };
 
     return (
