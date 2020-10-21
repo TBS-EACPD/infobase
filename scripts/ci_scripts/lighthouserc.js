@@ -19,7 +19,7 @@ module.exports = {
       url: _.map(
         lighthouse_test_routes,
         (route) =>
-          `https://dev.ea-ad.ca/${process.env.CIRCLE_BRANCH}/index-eng.html#${route}`
+          `${process.env.CDN_BASE_URL}/${process.env.CIRCLE_BRANCH}/index-eng.html#${route}`
       ),
     },
     upload: {
