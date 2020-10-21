@@ -9,6 +9,7 @@ import about_text_bundle from "./about.yaml";
 import "./about.scss";
 import "../explorer_common/explorer-styles.scss";
 import React from "react";
+import _ from "lodash";
 
 const text_maker = create_text_maker(about_text_bundle);
 

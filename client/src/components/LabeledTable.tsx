@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import "./LabeledTable.scss";
 import _ from "lodash";
+import React from "react";
 
 interface LabeledTableProps {
   title: string;

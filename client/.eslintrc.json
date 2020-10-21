@@ -5,7 +5,12 @@
     "lodash",
     "@typescript-eslint"
   ],
-  "parser": "@typescript-eslint/parser",
+  "extends": [
+    //"plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/@typescript-eslint"
+  ],
+  "parser": "babel-parser",
   "parserOptions": {
     "ecmaVersion": 2017,
     "ecmaFeatures": {
