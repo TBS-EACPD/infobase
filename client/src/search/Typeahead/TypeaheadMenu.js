@@ -27,7 +27,13 @@ export class TypeaheadMenu extends React.Component {
       pagination_size,
       queried_results,
       config_groups,
+      on_select_item,
     } = this.props;
+
+    const menu_item_selected = (selected) => {
+      on_select_item(selected);
+      this.setState({ pagination_index: 0 });
+    };
 
     const paginate_results = (option, index) => {
       if (option.pagination_placeholder) {
@@ -131,7 +137,7 @@ export class TypeaheadMenu extends React.Component {
                         role="option"
                         aria-selected
                         className="dropdown-item"
-                        onClick={() => this.on_select_item(result)}
+                        onClick={() => menu_item_selected(result)}
                       >
                         {result.menu_content(search_text)}
                       </ListGroupItem>
