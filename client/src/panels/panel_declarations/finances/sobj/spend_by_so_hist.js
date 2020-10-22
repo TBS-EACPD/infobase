@@ -200,8 +200,6 @@ export const declare_spend_by_so_hist_panel = () =>
           .filter((d) => d3.sum(d.data))
           .value();
 
-        const ticks = _.map(std_years, run_template);
-
         const avg_data = _.map(
           data,
           (object) => _.sum(object.data) / object.data.length
@@ -222,19 +220,19 @@ export const declare_spend_by_so_hist_panel = () =>
 
         return {
           data,
-          ticks,
           text_calculations,
         };
       },
       render({ calculations, footnotes, sources }) {
-        const { panel_args } = calculations;
-        const { text_calculations } = panel_args;
+        const {
+          panel_args: { data, text_calculations },
+        } = calculations;
 
         const graph_content = (() => {
           if (window.is_a11y_mode) {
-            return get_custom_table(panel_args, _.map(panel_args, "label"));
+            return get_custom_table(data, _.map(data, "label"));
           } else {
-            return <SobjLine data={panel_args} />;
+            return <SobjLine data={data} />;
           }
         })();
 
