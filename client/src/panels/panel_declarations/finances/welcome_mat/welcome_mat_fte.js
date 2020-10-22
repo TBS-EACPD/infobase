@@ -8,60 +8,46 @@ import {
   WrappedNivoLine,
   newIBCategoryColors,
   trivial_text_maker,
+  Table,
 } from "../../shared.js";
 
 const { std_years, planning_years } = year_templates;
 
-export const format_and_get_fte = (type, info, subject) => {
+export const format_and_get_fte = (type, subject) => {
   const colors = d3.scaleOrdinal().range(newIBCategoryColors);
-  const series_labels = [
-    trivial_text_maker("actual_ftes"),
-    trivial_text_maker("planned_ftes"),
-  ];
-  const history_ticks = _.map(std_years, run_template);
-  const plan_ticks = _.map(planning_years, run_template);
 
   const gap_year =
     (subject.has_planned_spending && actual_to_planned_gap_year) || null;
 
-  const history_data_index = _.map(
-    std_years,
-    (std_year) => `${subject.level}_fte_${std_year.replace(/{|}/g, "")}`
-  );
-  const planned_data_index = _.map(
-    planning_years,
-    (planned_year) => `${subject.level}_fte_${planned_year.replace(/{|}/g, "")}`
-  );
+  const series_labels = [
+    trivial_text_maker("actual_ftes"),
+    trivial_text_maker("planned_ftes"),
+  ];
+  const historical_ticks = _.map(std_years, run_template);
+  const planned_ticks = _.map(planning_years, run_template);
 
-  const planned_fte_exists =
-    0 !=
-    _.reduce(planned_data_index, (fte_sum, index) => fte_sum + info[index], 0);
+  const programFtes = Table.lookup("programFtes");
+  const q = programFtes.q(subject);
 
-  const raw_data = _.concat(
-    _.map(history_data_index, (idx) => info[idx]),
-    _.map(planned_data_index, (idx) => info[idx])
-  );
+  const historical_ftes = _.chain(std_years)
+    .map((year, i) => [historical_ticks[i], q.sum(year, i)])
+    .fromPairs()
+    .value();
+  const planned_ftes = _.chain(planning_years)
+    .map((year, i) => [planned_ticks[i], q.sum(year, i)])
+    .fromPairs()
+    .value();
 
-  const prepare_graph_data = (data, data_index, years) =>
-    _.chain(data_index)
-      .zipWith(years, data_index, (idx, year) => ({
-        x: year,
-        y: data[idx],
-      }))
-      .pickBy((prepared_row) => {
-        if (years === history_ticks) {
-          return prepared_row.y > 0;
-        } else {
-          return true;
-        }
-      })
-      .map((filtered_row) => filtered_row)
-      .value();
+  const raw_data = _.concat(_.map(historical_ftes), _.map(planned_ftes));
 
-  const historical_graph_data = prepare_graph_data(
-    info,
-    history_data_index,
-    history_ticks
+  const historical_graph_data = _.chain(historical_ftes)
+    .map((value, year) => ({ x: year, y: value }))
+    .filter((prepared_row) => prepared_row.y > 0)
+    .value();
+
+  const planned_fte_exists = _.some(
+    planned_ftes,
+    (planned_ftes_value) => planned_ftes_value != 0
   );
   const planned_graph_data =
     planned_fte_exists &&
@@ -71,8 +57,12 @@ export const format_and_get_fte = (type, info, subject) => {
           x: gap_year,
           y: null,
         },
-      ...prepare_graph_data(info, planned_data_index, plan_ticks),
+      ..._.map(planned_ftes, (value, year) => ({
+        x: year,
+        y: value,
+      })),
     ]);
+
   const graph_data = _.chain(series_labels)
     .zip([historical_graph_data, planned_graph_data])
     .filter(([id, formatted_data_array]) => formatted_data_array.length > 0)
@@ -81,14 +71,16 @@ export const format_and_get_fte = (type, info, subject) => {
 
   const shouldTickRender = (tick) => {
     if (type === "hist" || type === "hist_estimates") {
-      return tick === _.first(history_ticks) || tick === _.last(history_ticks);
+      return (
+        tick === _.first(historical_ticks) || tick === _.last(historical_ticks)
+      );
     } else if (type === "planned") {
-      return tick === _.first(plan_ticks) || tick === _.last(plan_ticks);
+      return tick === _.first(planned_ticks) || tick === _.last(planned_ticks);
     } else {
       return (
         tick === gap_year ||
-        tick === _.first(history_ticks) ||
-        tick === _.last(plan_ticks)
+        tick === _.first(historical_ticks) ||
+        tick === _.last(planned_ticks)
       );
     }
   };

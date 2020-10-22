@@ -256,7 +256,7 @@ const WelcomeMat = (props) => {
   // const no_hist_ftes = <TM k="no_historical_fte__new" />;
   const spending_auths_are = <TM k="spending_authorities_are" />;
 
-  const fte_graph = format_and_get_fte(type, info, subject);
+  const fte_graph = format_and_get_fte(type, subject);
   const exp_program_spending_graph = format_and_get_exp_program_spending(
     type,
     subject
