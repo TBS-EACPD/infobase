@@ -144,7 +144,7 @@ const WelcomeMatShell = ({ header_row, spend_row, fte_row, text_row }) => (
 */
 
 const WelcomeMat = (props) => {
-  const { type, subject, info, calcs } = props;
+  const { type, subject, calcs } = props;
   const {
     latest_hist_spend_data,
     oldest_hist_spend_data,
@@ -981,7 +981,7 @@ function get_calcs(subject, q6, q12) {
   };
 }
 
-const common_program_crso_calculate = function (subject, info, options) {
+const common_program_crso_calculate = function (subject) {
   const { programSpending, programFtes } = this.tables;
   const q6 = programSpending.q(subject);
   const q12 = programFtes.q(subject);
@@ -1002,7 +1002,7 @@ const common_program_crso_calculate = function (subject, info, options) {
     return false;
   }
 
-  return { type, info, calcs };
+  return { type, calcs };
 };
 
 const footnotes = ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"];
@@ -1018,7 +1018,7 @@ export const declare_welcome_mat_panel = () =>
             footnotes,
             depends_on,
             missing_info: "ok",
-            calculate(subject, info, options) {
+            calculate(subject) {
               const { programSpending, programFtes } = this.tables;
               const q6 = programSpending.q(subject);
               const q12 = programFtes.q(subject);
@@ -1027,7 +1027,6 @@ export const declare_welcome_mat_panel = () =>
 
               return {
                 type: "hist_planned",
-                info,
                 calcs,
               };
             },
@@ -1042,7 +1041,7 @@ export const declare_welcome_mat_panel = () =>
               ...depends_on,
             ],
             missing_info: "ok",
-            calculate(subject, info, options) {
+            calculate(subject) {
               const {
                 programSpending,
                 programFtes,
@@ -1078,7 +1077,6 @@ export const declare_welcome_mat_panel = () =>
                 });
                 return {
                   type: "hist_estimates",
-                  info,
                   calcs: proper_calcs,
                 };
               } else {
@@ -1091,7 +1089,6 @@ export const declare_welcome_mat_panel = () =>
                 return (
                   type && {
                     type,
-                    info,
                     calcs,
                   }
                 );

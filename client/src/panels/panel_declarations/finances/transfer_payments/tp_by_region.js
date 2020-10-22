@@ -289,7 +289,7 @@ export const declare_tp_by_region_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgTransferPaymentsRegion"],
-      calculate: function (subject, info) {
+      calculate: function (subject) {
         const { orgTransferPaymentsRegion } = this.tables;
 
         if (
