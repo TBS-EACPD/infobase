@@ -271,7 +271,7 @@ class DetailedHistTPItems extends React.Component {
 
       return (
         <GraphOverlay>
-          <WrappedNivoLine {...nivo_props} />;
+          <WrappedNivoLine {...nivo_props} />
         </GraphOverlay>
       );
     })();
