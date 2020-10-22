@@ -32,7 +32,7 @@ current_doc_this_year:
   en: |
    {{#if current_doc_is_mains}}Main Estimates{{else}}Supplementary Estimates {{current_sups_letter}}{{/if}} <span class="nowrap">{{est_in_year}}</span>
   fr: |
-    {{#if current_doc_is_mains}}Budget principal des dépenses{{else}}supplémentaire des dépenses {{current_sups_letter}}{{/if}} <span class="nowrap">{{est_in_year}}</span>
+    {{#if current_doc_is_mains}}Budget principal des dépenses{{else}}Budget supplémentaire des dépenses {{current_sups_letter}}{{/if}} <span class="nowrap">{{est_in_year}}</span>
 
 new:
   en: New Item
