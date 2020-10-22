@@ -354,8 +354,6 @@ Statistics.create_and_register({
       "voted_non_centralnum_est_in_year",
       voted_num_in_year - voted_central_num_in_year
     );
-    console.log(table);
-    console.log(table.voted_stat(in_year_col, false)[voted]);
     add("voted_est_in_year", table.voted_stat(in_year_col, false)[voted] || 0);
     add("stat_est_in_year", table.voted_stat(in_year_col, false)[stat] || 0);
 
