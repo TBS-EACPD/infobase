@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { createSelector } from "reselect";
 
-
 import { EverythingSearch, SpinnerWrapper } from "../../components/index.js";
 import { ensure_loaded } from "../../core/lazy_loader.js";
 import { StandardRouteContainer } from "../../core/NavComponents.js";
@@ -10,8 +9,6 @@ import { create_text_maker } from "../../models/text.js";
 import { get_panels_for_subject } from "../get_panels_for_subject/index.js";
 import { PanelRegistry } from "../PanelRegistry.js";
 import { PanelRenderer } from "../PanelRenderer.js";
-
-
 
 import panel_text from "./PanelInventory.yaml";
 
@@ -60,21 +57,13 @@ const getSubj = (level, id) => {
 // const link_to_footnotes = ( panel_key, level) => `#footnotes/panel/${panel_key}/${level}`;
 
 function panels_of_interest(panel) {
-  const { depends_on, info_deps, key } = panel;
+  const { depends_on, key } = panel;
   const same_key = _.filter(
     PanelRegistry.panels,
     (g) => g.key === key && g !== panel
   );
   const similar_dependencies = _.chain(PanelRegistry.panels)
-    .filter(
-      (g) =>
-        !_.isEmpty(
-          _.union(
-            _.intersection(g.depends_on, depends_on),
-            _.intersection(g.info_deps, info_deps)
-          )
-        )
-    )
+    .filter((g) => !_.isEmpty(_.intersection(g.depends_on, depends_on)))
     .reject((g) => g === panel)
     .value();
 
@@ -132,7 +121,6 @@ const RelatedInfo = ({ subject, panel, related_panels }) => {
             <th> key </th>
             <th> level </th>
             <th> table deps </th>
-            <th> info deps </th>
             <th> notes </th>
             <th> url </th>
           </tr>
@@ -184,7 +172,6 @@ const PanelTableRow = ({ current_subject, panel, className }) => {
       <td>{panel.key}</td>
       <td>{panel.level}</td>
       <td>{panel.depends_on.join(", ")}</td>
-      <td>{panel.info_deps.join(", ")}</td>
       <td>{panel.notes}</td>
       <td>
         <Link to={url}>link</Link>
