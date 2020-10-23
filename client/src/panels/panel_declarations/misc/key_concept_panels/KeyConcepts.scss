@@ -10,3 +10,8 @@
         border-top-color: $primaryColor;
     }
 }
+
+.sticky {
+    position: fixed;
+    top: 0;
+}
