@@ -1049,7 +1049,9 @@ build_a_report:
 you_are_here:
   en: You are here
   fr: Vous êtes ici
-
+dataset_navigation:
+  en: Dataset navigation
+  fr: TODO
 
 infographic_for:
   transform: [handlebars]

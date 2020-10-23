@@ -44,7 +44,7 @@ const ResultsIntroPanel = ({
             }}
           >
             <img
-              alt={"TODO"}
+              alt={text_maker("results_intro_img_text")}
               src={get_static_url(`png/result-taxonomy-${window.lang}.png`)}
               style={{
                 width: "100%",

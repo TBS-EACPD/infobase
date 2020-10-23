@@ -2,6 +2,10 @@ report_builder_title:
   en: Report Builder
   fr: Outil de création de rapport
 
+main_rpb_content:
+  en: Main Report Builder content
+  fr: Contenu principal de l'outil de création de rapport
+
 report_builder_meta_desc:
   en: Create a customized and exportable report on the data you want to analyze
   fr: Créer un rapport adapté et exportable sur les données que vous voulez analyser
@@ -20,7 +24,7 @@ table_picker_none_selected_summary:
 
 select_dataset_type:
   en: Select type of Dataset
-  fr: TODO
+  fr: Sélectionnez le type de données
 
 select_table_button:
   en: Select a table or topic
@@ -75,7 +79,7 @@ sort_by:
 
 group_data:
   en: Group data
-  fr: TODO
+  fr: Trier les donées
 
 filter:
   en: Filter

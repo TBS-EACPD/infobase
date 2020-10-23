@@ -1,7 +1,9 @@
 ############################################
 # text for infographics
 ############################################
-
+main_infographic_content:
+  en: Main infographic content
+  fr: Contenu principal de l’infographie
 
 bb_menu_title:
   en: Pick a topic to explore
