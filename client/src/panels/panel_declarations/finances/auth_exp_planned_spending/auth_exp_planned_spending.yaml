@@ -41,7 +41,7 @@ gov_auth_exp_planned_spending_body:
     {{gl_tt "actually spending" "BUD_EXP"}} an average of **{{fmt_compact1_written five_year_exp_average}}**.
     
     In **{{last_history_year}}**, **{{fmt_compact1_written last_year_lapse_amt}}** or **{{fmt_percentage1 last_year_lapse_pct}}** of authorized
-    spendings were unused at the end of the fiscal year. On average, **{{fmt_percentage1 hist_avg_tot_pct}}** of authorized spendings go unused.
+    spending was unused at the end of the fiscal year. On average, **{{fmt_percentage1 hist_avg_tot_pct}}** of authorized spending goes unused.
     
     {{#if has_planned_spending}}Spending is {{will_change_to plan_change ""}} **{{fmt_compact1_written last_planned_spending}}** by {{last_planned_year}}. {{/if}}
   fr: |
@@ -62,15 +62,19 @@ dept_auth_exp_planned_spending_body:
   transform: [handlebars, markdown]
   en: |
 <<<<<<< HEAD
+<<<<<<< HEAD
     Over the last 5 years, **{{dept.name}}** has received average {{gl_tt "authorities" "AUTH"}} of **{{fmt_compact2_written five_year_auth_average}}** while
     {{gl_tt "actually spending" "BUD_EXP"}} an average of **{{fmt_compact2_written five_year_exp_average}}**.
 =======
     Over the last 5 years, **{{dept.name}}** has received on average **{{fmt_compact2_written dept_five_year_auth_average}}** in {{gl_tt "authorized" "AUTH"}} spendings while
+=======
+    Over the last 5 years, **{{dept.name}}** has been authorized to spend an average of **{{fmt_compact2_written dept_five_year_auth_average}}**, while
+>>>>>>> Text rework; Correcting handlebars to correct location
     {{gl_tt "actually spending" "BUD_EXP"}} an average of **{{fmt_compact2_written dept_five_year_exp_average}}**.
 >>>>>>> Reword some more sentences
     
     In **{{last_history_year}}**, **{{fmt_compact1_written last_year_lapse_amt}}** or **{{fmt_percentage1 last_year_lapse_pct}}** of authorized
-    spendings were unspent at the end of the fiscal year. On average, **{{fmt_percentage1 hist_avg_tot_pct}}** of authorized spendings go unused.
+    spending went unused at the end of the fiscal year. On average, **{{fmt_percentage1 hist_avg_tot_pct}}** of authorized spending goes unused.
     
     {{#if has_planned_spending}}Spending is {{will_change_to plan_change ""}} **{{fmt_compact2_written last_planned_spending}}** by {{last_planned_year}}. {{/if}}
   fr: |
@@ -93,5 +97,5 @@ budgetary_expenditures:
 
 actual_spending_footnote:
   transform: [handlebars]
-  en: '"Actual Spending" numbers are technically {{gl_tt "Budgetary Expenditures" "BUD_EXP"}}.'
-  fr: 'Les nombres de "Dépenses Réelles" sont techniquement {{gl_tt "Dépenses budgétaires" "BUD_EXP"}}.'
+  en: 'Here, "actual spending" refers to {{gl_tt "budgetary expenditure" "BUD_EXP"}}. values'
+  fr: TODO
