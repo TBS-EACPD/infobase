@@ -9,7 +9,6 @@ import { Typeahead } from "src/search/Typeahead";
 import {
   create_text_maker_component,
   SpinnerWrapper,
-  AdvancedSearch,
 } from "../components/index.js";
 import { log_standard_event } from "../core/analytics.js";
 import { ensure_loaded } from "../core/lazy_loader.js";
@@ -21,6 +20,7 @@ import { Subject } from "../models/subject.js";
 import { get_panels_for_subject } from "../panels/get_panels_for_subject/index.js";
 import { PanelRegistry } from "../panels/PanelRegistry.js";
 import { PanelRenderer } from "../panels/PanelRenderer.js";
+import { AdvancedSearch } from "../search/index.js";
 
 import { bubble_defs } from "./bubble_definitions.js";
 import { BubbleMenu } from "./BubbleMenu.js";
