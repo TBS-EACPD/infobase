@@ -28,6 +28,7 @@ export class TypeaheadMenu extends React.Component {
       queried_results,
       config_groups,
       on_select_item,
+      hide_menu,
     } = this.props;
 
     const menu_item_selected = (selected) => {
@@ -163,6 +164,14 @@ export class TypeaheadMenu extends React.Component {
                     <span className="aria-hidden">▼</span>
                   </ListGroupItem>
                 ),
+                <ListGroupItem
+                  key={pagination_down_item_index + 1}
+                  id={`rbt-menu-item-${pagination_down_item_index + 1}`}
+                  className="rbt-menu-pagination-option rbt-menu-pagination-option--next dropdown-item"
+                  onClick={hide_menu}
+                >
+                  Close menu
+                </ListGroupItem>,
               ];
             })
             .value()}
