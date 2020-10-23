@@ -23,6 +23,7 @@ export class Typeahead extends React.Component {
   state = {
     search_text: "",
     pagination_index: 0,
+    can_show_menu: false,
   };
 
   constructor(props) {
@@ -50,6 +51,17 @@ export class Typeahead extends React.Component {
     }
   };
 
+  handle_key_down = (e) => {
+    if (e.keyCode == 13) {
+      e.preventDefault();
+      this.setState({ can_show_menu: true }, () => {
+        document.getElementById("rbt-menu-item-0").focus();
+      });
+    }
+  };
+
+  hide_menu = () => this.setState({ can_show_menu: false });
+
   render() {
     const {
       placeholder,
@@ -60,7 +72,7 @@ export class Typeahead extends React.Component {
       onNewQuery,
     } = this.props;
 
-    const { search_text, pagination_index } = this.state;
+    const { search_text, pagination_index, can_show_menu } = this.state;
 
     const debounceOnNewQuery = _.debounce((query) => {
       onNewQuery();
@@ -143,6 +155,7 @@ export class Typeahead extends React.Component {
       search_text,
       config_groups,
       on_select_item: this.on_select_item,
+      hide_menu: this.hide_menu,
     };
 
     return (
@@ -163,6 +176,8 @@ export class Typeahead extends React.Component {
             ref={this.typeaheadRef}
             onKeyDown={this.handleKeyDown}
             value={search_text}
+            onFocus={() => this.setState({ can_show_menu: true })}
+            onKeyDown={this.handle_key_down}
           />
           {filter_content ? (
             <OverlayTrigger
@@ -199,7 +214,9 @@ export class Typeahead extends React.Component {
             </OverlayTrigger>
           ) : null}
         </div>
-        {search_text.length >= minLength && <TypeaheadMenu {...menu_props} />}
+        {search_text.length >= minLength && can_show_menu && (
+          <TypeaheadMenu {...menu_props} />
+        )}
       </div>
     );
   }
