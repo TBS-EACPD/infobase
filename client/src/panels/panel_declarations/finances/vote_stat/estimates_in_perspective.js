@@ -1,3 +1,4 @@
+import FootNote from "../../../../models/footnotes/footnotes.js";
 import {
   StdPanel,
   Col,
@@ -5,7 +6,6 @@ import {
   declare_panel,
   Subject,
 } from "../../shared.js";
-import FootNote from "../../../../models/footnotes/footnotes.js";
 
 import { TM, text_maker } from "./vote_stat_text_provider.js";
 const { Gov } = Subject;

@@ -20,8 +20,6 @@ const render_w_options = ({ graph_col, text_col, text_key }) => ({
     id: data_set.label,
   }));
 
-  console.log(info);
-
   return (
     <StdPanel
       title={text_maker("in_year_voted_stat_split_title")}
