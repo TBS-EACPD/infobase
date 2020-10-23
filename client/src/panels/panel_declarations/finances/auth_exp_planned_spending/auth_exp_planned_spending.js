@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 
 import { GraphOverlay } from "../../../../components";
+import FootNote from "../../../../models/footnotes/footnotes";
 import {
   run_template,
   year_templates,
@@ -14,7 +15,6 @@ import {
   util_components,
   declare_panel,
 } from "../../shared.js";
-import FootNote from "../../../../models/footnotes/footnotes";
 
 import text from "./auth_exp_planned_spending.yaml";
 import "./auth_exp_planned_spending.scss";
