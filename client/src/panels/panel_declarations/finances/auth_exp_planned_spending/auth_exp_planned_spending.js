@@ -3,12 +3,10 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import {
-  StdPanel,
-  Col,
-} from "src/panels/panel_declarations/InfographicPanel.js";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
 import {
+  HeightClipper,
   create_text_maker_component,
   Details,
   GraphOverlay,
@@ -29,7 +27,7 @@ import {
 import { newIBCategoryColors } from "src/core/color_schemes.ts";
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
-import { StandardLegend } from "src/charts/legends/index.js";
+import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index.js";
 
 import text from "./auth_exp_planned_spending.yaml";
@@ -37,6 +35,7 @@ import "./auth_exp_planned_spending.scss";
 
 const { std_years, planning_years, estimates_years } = year_templates;
 const { text_maker, TM } = create_text_maker_component(text);
+const colors = scaleOrdinal().range(newIBCategoryColors);
 
 const auth_cols = _.map(std_years, (yr) => `${yr}auth`);
 const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
@@ -113,7 +112,6 @@ class AuthExpPlannedSpendingGraph extends React.Component {
     const { data_series, gap_year } = this.props;
     const { active_series } = this.state;
 
-    const colors = scaleOrdinal().range(newIBCategoryColors);
     const has_multiple_active_series =
       _.chain(active_series).values().compact().value().length > 1;
 
@@ -222,16 +220,109 @@ class AuthExpPlannedSpendingGraph extends React.Component {
     );
   }
 }
+class LapseByVotesGraph extends React.Component {
+  constructor(props) {
+    super(props);
+    const { queried_subject_data } = props;
 
-const render = function ({
-  title,
-  calculations,
-  footnotes,
-  sources,
-  glossary_keys,
-}) {
+    const active_votes = (() => {
+      const vote_exists =
+        _.reject(queried_subject_data, ({ votenum }) => votenum === "S")
+          .length > 0;
+      if (vote_exists) {
+        return this.get_active_votes((vote_row) => vote_row.votenum !== "S");
+      } else {
+        return this.get_active_votes(
+          (vote_row) =>
+            _.chain(std_years)
+              .map((yr) => vote_row[`${yr}auth`] - vote_row[`${yr}exp`])
+              .sum()
+              .value() > 0
+        );
+      }
+    })();
+
+    this.state = {
+      active_votes,
+    };
+  }
+  get_active_votes = (func) =>
+    _.chain(this.props.queried_subject_data)
+      .map((vote_row) => [vote_row.desc, func(vote_row)])
+      .fromPairs()
+      .value();
+
+  render() {
+    const { queried_subject_data } = this.props;
+    const { active_votes } = this.state;
+
+    const lapse_table_data = _.chain(queried_subject_data)
+      .reject(({ desc }) => !active_votes[desc])
+      .map((vote_row) => ({
+        id: vote_row.desc,
+        data: _.map(std_years, (yr) => ({
+          x: run_template(yr),
+          y: vote_row[`${yr}auth`] - vote_row[`${yr}exp`],
+        })),
+      }))
+      .value();
+    const raw_data = _.flatMap(queried_subject_data, (vote_row) =>
+      _.map(std_years, (yr) => vote_row[`${yr}auth`] - vote_row[`${yr}exp`])
+    );
+
+    return (
+      <div>
+        <TM el="h4" k="lapse_by_votes" style={{ textAlign: "center" }} />
+        <HeightClipper allowReclip={true} clipHeight={200}>
+          <div className="frow">
+            <div className="fcol-md-4">
+              <StandardLegend
+                items={_.map(queried_subject_data, ({ desc }) => ({
+                  id: desc,
+                  label: desc,
+                  active: active_votes[desc],
+                  color: colors(desc),
+                }))}
+                onClick={(vote_desc) =>
+                  this.setState({
+                    active_votes: {
+                      ...active_votes,
+                      [vote_desc]: !active_votes[vote_desc],
+                    },
+                  })
+                }
+                Controls={
+                  <SelectAllControl
+                    SelectAllOnClick={() =>
+                      this.setState({
+                        active_votes: this.get_active_votes(() => true),
+                      })
+                    }
+                    SelectNoneOnClick={() =>
+                      this.setState({
+                        active_votes: this.get_active_votes(() => false),
+                      })
+                    }
+                  />
+                }
+              />
+            </div>
+            <div className="fcol-md-8">
+              <WrappedNivoLine
+                data={lapse_table_data}
+                raw_data={raw_data}
+                colorBy={(d) => colors(d.id)}
+              />
+            </div>
+          </div>
+        </HeightClipper>
+      </div>
+    );
+  }
+}
+const render = function ({ calculations, footnotes, sources, glossary_keys }) {
   const { panel_args, subject } = calculations;
-  const { data_series, additional_info } = panel_args;
+  const { data_series, additional_info, queried_subject_data } = panel_args;
 
   const final_info = {
     ...additional_info,
@@ -247,30 +338,44 @@ const render = function ({
   );
 
   return (
-    <StdPanel {...{ title, footnotes, sources, glossary_keys }}>
-      <Col size={4} isText>
-        <TM
-          k={`${subject.level}_auth_exp_planned_spending_body`}
-          args={final_info}
-        />
-        {include_verbose_gap_year_explanation && additional_info.gap_year && (
-          <div className="auth-gap-details">
-            <Details
-              summary_content={<TM k={"gap_explain_title"} args={final_info} />}
-              content={
-                <TM k={`${subject.level}_gap_explain_body`} args={final_info} />
-              }
-            />
-          </div>
-        )}
-      </Col>
-      <Col size={8} isGraph>
-        <AuthExpPlannedSpendingGraph
-          data_series={data_series}
-          gap_year={additional_info.gap_year}
-        />
-      </Col>
-    </StdPanel>
+    <InfographicPanel
+      containerAlign={subject.has_planned_spending ? "top" : "middle"}
+      title={text_maker("auth_exp_planned_spending_title", final_info)}
+      {...{ footnotes, sources, glossary_keys }}
+    >
+      <div className="frow">
+        <div className="fcol-md-4">
+          <TM
+            className="medium_panel_text"
+            k={`${subject.level}_auth_exp_planned_spending_body`}
+            args={final_info}
+          />
+          {include_verbose_gap_year_explanation && additional_info.gap_year && (
+            <div className="auth-gap-details">
+              <Details
+                summary_content={
+                  <TM k={"gap_explain_title"} args={final_info} />
+                }
+                content={
+                  <TM
+                    k={`${subject.level}_gap_explain_body`}
+                    args={final_info}
+                  />
+                }
+              />
+            </div>
+          )}
+        </div>
+        <div className="fcol-md-8">
+          <AuthExpPlannedSpendingGraph
+            data_series={data_series}
+            gap_year={additional_info.gap_year}
+          />
+        </div>
+      </div>
+      <div className="panel-separator" />
+      <LapseByVotesGraph queried_subject_data={queried_subject_data} />
+    </InfographicPanel>
   );
 };
 
@@ -278,10 +383,9 @@ const calculate = function (subject, options) {
   const { orgVoteStatPa, programSpending, orgVoteStatEstimates } = this.tables;
 
   const query_subject = subject.is("gov") ? undefined : subject;
+  const queried_subject = orgVoteStatPa.q(query_subject);
 
-  const exp_values = orgVoteStatPa
-    .q(query_subject)
-    .sum(exp_cols, { as_object: false });
+  const exp_values = queried_subject.sum(exp_cols, { as_object: false });
 
   const history_years_written = _.map(std_years, run_template);
   const future_auth_year_templates = _.takeRightWhile(
@@ -289,9 +393,9 @@ const calculate = function (subject, options) {
     (est_year) => !_.includes(history_years_written, run_template(est_year))
   );
 
-  const historical_auth_values = orgVoteStatPa
-    .q(query_subject)
-    .sum(auth_cols, { as_object: false });
+  const historical_auth_values = queried_subject.sum(auth_cols, {
+    as_object: false,
+  });
   const future_auth_values = _.map(
     future_auth_year_templates,
     (future_auth_year_template) =>
@@ -399,7 +503,11 @@ const calculate = function (subject, options) {
       (unspent_last_year || 0) / auth_values[last_shared_index],
   };
 
-  return { data_series, additional_info };
+  return {
+    data_series,
+    additional_info,
+    queried_subject_data: queried_subject.data,
+  };
 };
 
 export const declare_auth_exp_planned_spending_panel = () =>
