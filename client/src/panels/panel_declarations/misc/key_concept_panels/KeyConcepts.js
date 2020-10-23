@@ -40,7 +40,7 @@ const { text_maker, TM } = create_text_maker_component([
 
 class KeyConcepts_ extends React.Component {
   state = {
-    is_showing_tooltip: false,
+    sticky: false,
   };
   constructor(props) {
     super(props);
@@ -63,6 +63,8 @@ class KeyConcepts_ extends React.Component {
           1000
         );
       }
+
+      this.keyConceptsContainerRef = React.createRef();
     }
   }
 
@@ -75,7 +77,7 @@ class KeyConcepts_ extends React.Component {
       },
     } = this.props;
 
-    const { is_showing_tooltip } = this.state;
+    const { sticky } = this.state;
 
     const disable_popup = () => {
       this.timeout && clearTimeout(this.timeout);
@@ -88,13 +90,16 @@ class KeyConcepts_ extends React.Component {
     };
 
     return (
-      <Fragment>
+      <div style={{ position: "relative" }} ref={this.keyConceptsContainerRef}>
         <MediaQuery maxWidth={breakpoints.maxMediumDevice}>
           {(matches) => (
             <div
-              className={classNames("mrgn-bttm-md", matches && "mrgn-tp-md")}
+              className={classNames(
+                "mrgn-bttm-md",
+                matches && "mrgn-tp-md",
+                sticky && "sticky"
+              )}
               onClick={disable_popup}
-              style={{ position: "relative" }}
             >
               <ButtonToolbar>
                 <AutoAccordion
@@ -119,7 +124,7 @@ class KeyConcepts_ extends React.Component {
                   </div>
                 </AutoAccordion>
 
-                <Overlay
+                {/* <Overlay
                   show={is_showing_tooltip}
                   target={this.accordionRef.current}
                   container={this}
@@ -128,13 +133,26 @@ class KeyConcepts_ extends React.Component {
                   <Popover id="keep_in_mind_tooltip" style={{}}>
                     {text_maker("click_text")}
                   </Popover>
-                </Overlay>
+                </Overlay> */}
               </ButtonToolbar>
             </div>
           )}
         </MediaQuery>
-      </Fragment>
+      </div>
     );
+  }
+
+  componentDidMount() {
+    window.addEventListener("scroll", () => {
+      const keyConceptsContainerTop = this.keyConceptsContainerRef.current.getBoundingClientRect()
+        .top;
+      console.log(keyConceptsContainerTop);
+      if (keyConceptsContainerTop < 0) {
+        !this.state.sticky && this.setState({ sticky: true });
+      } else {
+        this.state.sticky && this.setState({ sticky: false });
+      }
+    });
   }
 }
 
