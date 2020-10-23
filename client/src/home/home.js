@@ -1,18 +1,19 @@
 import MediaQuery from "react-responsive";
 
 import {
-  EverythingSearch,
   create_text_maker_component,
   CardTopImage,
   CardLeftImage,
   ContainerEscapeHatch,
   TrinityItem,
 } from "../components/index.js";
+
 import { log_standard_event } from "../core/analytics.js";
 
 import { StandardRouteContainer } from "../core/NavComponents.js";
 import { smart_href_template } from "../link_utils.js";
 import { get_static_url } from "../request_utils.js";
+import { EverythingSearch } from "../search/index.js";
 
 import { featured_content_items } from "./home-data.js";
 
