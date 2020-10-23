@@ -146,9 +146,6 @@ export class BaseTypeahead extends React.Component {
         return false;
       }
     };
-    if (this.typeahead_node) {
-      this.typeahead_node.setAttribute("autocomplete", "off");
-    }
 
     return (
       <Typeahead
