@@ -18,6 +18,8 @@ import text from "./Typeahead.yaml";
 const text_maker = create_text_maker(text);
 
 import "./Typeahead.scss";
+import { DropdownMenu } from "src/components/index.js";
+import { Fragment as div } from "react";
 
 export class Typeahead extends React.Component {
   state = {
@@ -179,7 +181,34 @@ export class Typeahead extends React.Component {
             onFocus={() => this.setState({ can_show_menu: true })}
             onKeyDown={this.handle_key_down}
           />
-          {filter_content ? (
+          <DropdownMenu
+            dropdown_trigger_txt={
+              <div
+                style={{
+                  textAlign: "start",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                <MediaQuery minWidth={breakpoints.minSmallDevice}>
+                  <div
+                    style={{
+                      whiteSpace: "nowrap",
+                      display: "inline-block",
+                      marginRight: "1.5rem",
+                    }}
+                  >
+                    <IconFilter height="5px" width="5px" vertical_align="top" />
+                  </div>
+                </MediaQuery>
+                <span>{text_maker("filter")}</span>
+              </div>
+            }
+            closed_button_class_name={"btn btn-ib-primary"}
+            opened_button_class_name={"btn btn-ib-primary"}
+            dropdown_content_class_name="no-right"
+            dropdown_content={filter_content}
+          />
+          {/* {filter_content ? (
             <OverlayTrigger
               trigger="click"
               rootClose
@@ -212,7 +241,7 @@ export class Typeahead extends React.Component {
                 <span>{text_maker("filter")}</span>
               </button>
             </OverlayTrigger>
-          ) : null}
+          ) : null} */}
         </div>
         {search_text.length >= minLength && can_show_menu && (
           <TypeaheadMenu {...menu_props} />
