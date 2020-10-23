@@ -3,11 +3,7 @@ import React, { Fragment } from "react";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import {
-  create_text_maker_component,
-  GlossarySearch,
-  BackToTop,
-} from "../components/index.js";
+import { create_text_maker_component, BackToTop } from "../components/index.js";
 import {
   StandardRouteContainer,
   ScrollToTargetContainer,
@@ -15,6 +11,7 @@ import {
 import { Table } from "../core/TableClass.js";
 import { GlossaryEntry } from "../models/glossary.js";
 import { rpb_link } from "../rpb/rpb_link.js";
+import { GlossarySearch } from "../search/index.js";
 
 import glossary_text from "./glossary.yaml";
 import "./glossary.scss";
