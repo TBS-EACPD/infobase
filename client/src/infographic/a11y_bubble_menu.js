@@ -1,10 +1,12 @@
+import { trivial_text_maker } from "src/models/text.js";
+
 import { TM } from "../components/index.js";
 
 export default class AccessibleBubbleMenu extends React.Component {
   render() {
     const { items } = this.props;
     return (
-      <nav aria-label="Bubble Menu TODO">
+      <nav aria-label={trivial_text_maker("dataset_navigation")}>
         <ul>
           {_.map(items, ({ id, active, title, a11y_description, href }) => (
             <li key={id}>

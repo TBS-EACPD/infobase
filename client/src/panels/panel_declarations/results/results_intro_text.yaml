@@ -20,6 +20,14 @@ results_intro_text:
     Les organisations ont des {{gl_tt "responsabilités essentielles" "CR"}} auxquelles des {{gl_tt "programmes" "PROG"}} sont rattachés.
     Les responsabilités essentielles et les programmes donnent des {{gl_tt "résultats" "RESULT"}}. Pour chaque résultat, les progrès
     sont mesurés à l'aide d'un ou de plusieurs {{gl_tt "indicateurs" "IND_RESULT"}}, chacun d'eux comportant une cible.
+results_intro_img_text:
+  en: |
+    Organizations are made up of Core Responsibilities and Programs within each Core Responsibility. Core Responsibilities and Programs
+    have results. Progress for each result is measured by one or more indicators, each of which has a target.
+  fr: |
+    Les organisations ont des responsabilités essentielles auxquelles des programmes sont rattachés.
+    Les responsabilités essentielles et les programmes donnent des résultats. Pour chaque résultat, les progrès
+    sont mesurés à l'aide d'un ou de plusieurs indicateurs, chacun d'eux comportant une cible.
 
 
 dp_summary_text:
