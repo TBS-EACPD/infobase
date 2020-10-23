@@ -1,5 +1,6 @@
-import { OverlayTrigger, Popover } from "react-bootstrap";
 import MediaQuery from "react-responsive";
+
+import { DropdownMenu } from "src/components/index.js";
 
 import { log_standard_event } from "../../core/analytics.js";
 import { breakpoints } from "../../core/breakpoint_defs.js";
@@ -18,8 +19,6 @@ import text from "./Typeahead.yaml";
 const text_maker = create_text_maker(text);
 
 import "./Typeahead.scss";
-import { DropdownMenu } from "src/components/index.js";
-import { Fragment as div } from "react";
 
 export class Typeahead extends React.Component {
   state = {
