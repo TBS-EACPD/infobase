@@ -65,7 +65,6 @@ export class TypeaheadMenu extends React.Component {
                       <ListGroupItem
                         key={index}
                         id={`rbt-menu-item-${index}`}
-                        role="option"
                         aria-selected
                         className="dropdown-item"
                         onClick={() => menu_item_selected(result)}
