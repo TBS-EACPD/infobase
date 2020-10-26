@@ -25,7 +25,7 @@ export class DropdownMenu extends React.Component {
       dropdown_content_class_name,
       button_description,
       dropdown_trigger_txt,
-      dropdown_close_txt,
+      dropdown_raw_txt,
     } = this.props;
     const { isOpen } = this.state;
 
@@ -35,7 +35,7 @@ export class DropdownMenu extends React.Component {
           className={
             isOpen ? opened_button_class_name : closed_button_class_name
           }
-          style={{ marginRight: 5 }}
+          style={{ marginRight: 5, height: "100%" }}
           onClick={() => {
             this.refs.dropdown_area.focus();
             this.setState({ isOpen: !isOpen });
@@ -45,13 +45,16 @@ export class DropdownMenu extends React.Component {
           {isOpen ? (
             <div className="close-dropdown">
               <span
-                aria-label={`${trivial_text_maker(
-                  "close"
-                )} ${dropdown_trigger_txt}`}
+                aria-label={`${trivial_text_maker("close")} ${
+                  _.isObject(dropdown_trigger_txt)
+                    ? dropdown_raw_txt
+                    : dropdown_trigger_txt
+                }`}
                 className="close-dropdown__x"
               >
-                X {dropdown_trigger_txt}
+                X
               </span>
+              <span className="close-dropdown__x">{dropdown_trigger_txt}</span>
             </div>
           ) : (
             <span
@@ -65,7 +68,11 @@ export class DropdownMenu extends React.Component {
         </button>
         <div
           tabIndex={0}
-          aria-label={dropdown_trigger_txt}
+          aria-label={
+            _.isObject(dropdown_trigger_txt)
+              ? dropdown_raw_txt
+              : dropdown_trigger_txt
+          }
           ref={"dropdown_area"}
           className={classNames(
             dropdown_content_class_name,
@@ -77,7 +84,7 @@ export class DropdownMenu extends React.Component {
           <button onClick={() => this.setState({ isOpen: !isOpen })}>
             {`${trivial_text_maker("close")} ${
               _.isObject(dropdown_trigger_txt)
-                ? dropdown_close_txt
+                ? dropdown_raw_txt
                 : dropdown_trigger_txt
             }`}
           </button>
