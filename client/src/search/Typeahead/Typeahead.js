@@ -180,67 +180,40 @@ export class Typeahead extends React.Component {
             onFocus={() => this.setState({ can_show_menu: true })}
             onKeyDown={this.handle_key_down}
           />
-          <DropdownMenu
-            dropdown_trigger_txt={
-              <div
-                style={{
-                  textAlign: "start",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                <MediaQuery minWidth={breakpoints.minSmallDevice}>
-                  <div
-                    style={{
-                      whiteSpace: "nowrap",
-                      display: "inline-block",
-                      marginRight: "1.5rem",
-                    }}
-                  >
-                    <IconFilter height="5px" width="5px" vertical_align="top" />
-                  </div>
-                </MediaQuery>
-                <span>{text_maker("filter")}</span>
-              </div>
-            }
-            closed_button_class_name={"btn btn-ib-primary"}
-            opened_button_class_name={"btn btn-ib-primary"}
-            dropdown_content_class_name="no-right"
-            dropdown_content={filter_content}
-          />
-          {/* {filter_content ? (
-            <OverlayTrigger
-              trigger="click"
-              rootClose
-              placement="bottom"
-              overlay={
-                <Popover style={{ maxWidth: "100%" }} id="search-filter-button">
-                  {filter_content}
-                </Popover>
+          {filter_content && (
+            <DropdownMenu
+              dropdown_trigger_txt={
+                <div
+                  style={{
+                    textAlign: "start",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  <MediaQuery minWidth={breakpoints.minSmallDevice}>
+                    <div
+                      style={{
+                        whiteSpace: "nowrap",
+                        display: "inline-block",
+                        marginRight: "1.5rem",
+                      }}
+                    >
+                      <IconFilter
+                        height="5px"
+                        width="5px"
+                        vertical_align="top"
+                      />
+                    </div>
+                  </MediaQuery>
+                  <span>{text_maker("filter")}</span>
+                </div>
               }
-            >
-              <button
-                className="btn btn-ib-primary"
-                style={{
-                  textAlign: "start",
-                  whiteSpace: "nowrap",
-                  paddingLeft: "0.5rem",
-                }}
-              >
-                <MediaQuery minWidth={breakpoints.minSmallDevice}>
-                  <div
-                    style={{
-                      whiteSpace: "nowrap",
-                      display: "inline-block",
-                      marginRight: "1.5rem",
-                    }}
-                  >
-                    <IconFilter height="5px" width="5px" vertical_align="top" />
-                  </div>
-                </MediaQuery>
-                <span>{text_maker("filter")}</span>
-              </button>
-            </OverlayTrigger>
-          ) : null} */}
+              dropdown_close_txt={text_maker("filter")}
+              closed_button_class_name={"btn btn-ib-primary"}
+              opened_button_class_name={"btn btn-ib-primary"}
+              dropdown_content_class_name="no-right"
+              dropdown_content={filter_content}
+            />
+          )}
         </div>
         {search_text.length >= minLength && can_show_menu && (
           <TypeaheadMenu {...menu_props} />
