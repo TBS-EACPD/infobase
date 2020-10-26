@@ -25,6 +25,7 @@ export class DropdownMenu extends React.Component {
       dropdown_content_class_name,
       button_description,
       dropdown_trigger_txt,
+      dropdown_close_txt,
     } = this.props;
     const { isOpen } = this.state;
 
@@ -74,7 +75,11 @@ export class DropdownMenu extends React.Component {
         >
           {dropdown_content}
           <button onClick={() => this.setState({ isOpen: !isOpen })}>
-            {`${trivial_text_maker("close")} ${dropdown_trigger_txt}`}
+            {`${trivial_text_maker("close")} ${
+              _.isObject(dropdown_trigger_txt)
+                ? dropdown_close_txt
+                : dropdown_trigger_txt
+            }`}
           </button>
         </div>
       </div>
