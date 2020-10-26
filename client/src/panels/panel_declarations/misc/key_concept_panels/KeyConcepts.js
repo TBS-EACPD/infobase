@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { Fragment } from "react";
-import { ButtonToolbar, Overlay, Popover } from "react-bootstrap";
+import { ButtonToolbar, Button, ButtonGroup } from "react-bootstrap";
 import MediaQuery from "react-responsive";
 import { withRouter } from "react-router";
 
@@ -105,6 +105,7 @@ class KeyConcepts_ extends React.Component {
                 <AutoAccordion
                   title={text_maker("some_things_to_keep_in_mind")}
                   ref={this.accordionRef}
+                  showPin
                 >
                   <div style={{ paddingLeft: "10px", paddingRight: "10px" }}>
                     <KeyConceptList
@@ -146,7 +147,6 @@ class KeyConcepts_ extends React.Component {
     window.addEventListener("scroll", () => {
       const keyConceptsContainerTop = this.keyConceptsContainerRef.current.getBoundingClientRect()
         .top;
-      console.log(keyConceptsContainerTop);
       if (keyConceptsContainerTop < 0) {
         !this.state.sticky && this.setState({ sticky: true });
       } else {
