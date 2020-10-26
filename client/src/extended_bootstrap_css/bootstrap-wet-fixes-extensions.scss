@@ -273,6 +273,15 @@ div.label {
   border: 2px solid $backgroundColor;
   color: $primaryColor !important;
   border-radius: $standardBorderRadius;
+
+  &--with-icon{/* used for the typeahead filter*/
+    @extend .btn-ib-light--reversed;
+    border-color: $primaryColor;
+    path {
+      fill: $primaryColor !important;
+      stroke: $primaryColor !important;
+    }
+  }
 }
 
 /* to be used with dark-background */
@@ -287,6 +296,24 @@ div.label {
   &:hover {
     background-color: $backgroundColor;
     color: $primaryColor !important;
+  }
+
+  &--with-icon{/* used for the typeahead filter*/
+    @extend .btn-ib-light;
+    path {
+      fill: $backgroundColor !important;
+      stroke: $backgroundColor !important;
+    }
+
+    &:focus,
+    &:active,
+    &:hover {
+      border-color: $primaryColor;;
+      path {
+      fill: $primaryColor !important;
+      stroke: $primaryColor !important;
+    }
+    }
   }
 }
 a.btn-ib-primary {
