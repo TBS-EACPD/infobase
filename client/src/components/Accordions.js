@@ -89,10 +89,20 @@ const StatelessPullDownAccordion = ({
   isExpanded,
   children,
   onToggle,
+  showPin,
 }) => (
   <div aria-label={title} className="pull-down-accordion">
-    <div className="pull-down-accordion-header" onClick={onToggle}>
-      <button aria-label={get_accordion_label(isExpanded)}>{title}</button>
+    <div className="pull-down-accordion-header" style={{ display: "flex" }}>
+      <button
+        aria-label={get_accordion_label(isExpanded)}
+        onClick={onToggle}
+        style={{ flexGrow: 1, textAlign: "center" }}
+      >
+        {title}
+      </button>
+      {showPin && (
+        <button style={{ float: "right", marginLeft: "2rem" }}>pin</button>
+      )}
     </div>
     <TransitionGroup component={FirstChild}>
       {isExpanded && (
