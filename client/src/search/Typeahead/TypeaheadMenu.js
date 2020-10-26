@@ -10,6 +10,13 @@ const text_maker = create_text_maker(text);
 const TextMaker = (props) => <TM tmf={text_maker} {...props} />;
 
 export class TypeaheadMenu extends React.Component {
+  handleWindowClick = (e) => {
+    const { hide_menu } = this.props;
+    if (!document.getElementsByClassName("rbt")[0].contains(e.target)) {
+      hide_menu();
+    }
+  };
+
   render() {
     const {
       search_text,
@@ -88,5 +95,13 @@ export class TypeaheadMenu extends React.Component {
         </ListGroup>
       );
     }
+  }
+
+  componentDidMount() {
+    window.addEventListener("click", this.handleWindowClick);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("click", this.handleWindowClick);
   }
 }
