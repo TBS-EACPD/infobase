@@ -318,6 +318,11 @@
       &:not(:first-child) {
         border-top: 1px solid $separatorColor;
       }
+
+      &:hover {
+        background-color: $backgroundColor;
+        color: #777;
+      }
     }
   
     & > button {
