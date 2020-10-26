@@ -19,7 +19,7 @@ import { log_standard_event } from "../core/analytics.js";
 import { StandardRouteContainer } from "../core/NavComponents.js";
 import { smart_href_template } from "../link_utils.js";
 import { get_static_url } from "../request_utils.js";
-import { EverythingSearch } from "../search/index.js";
+import { AdvancedSearch } from "../search/index.js";
 
 import { featured_content_items } from "./home-data.js";
 
@@ -94,17 +94,29 @@ const HomeLayout = (props) => (
           <img aria-hidden="true" src={get_static_url("svg/flagline.svg")} />
         </div>
         <div className="search-box">
-          <EverythingSearch
-            include_gov={false}
-            search_text={home_tm("everything_search_placeholder")}
-            large={true}
-            include_tags={true}
-            include_programs={true}
-            include_crsos={true}
-            include_tables={true}
-            include_glossary={true}
-            org_scope="all_orgs_with_gov"
-            href_template={(item) => smart_href_template(item, "/")}
+          <AdvancedSearch
+            everything_search_config={{
+              href_template: (item) => smart_href_template(item, "/"),
+
+              search_text: home_tm("everything_search_placeholder"),
+              large: true,
+            }}
+            initial_configs={{
+              include_orgs_normal_data: true,
+              include_orgs_limited_data: true,
+
+              include_crsos: true,
+              include_programs: true,
+
+              include_tags_goco: true,
+              include_tags_hi: true,
+              include_tags_hwh: true,
+              include_tags_wwh: true,
+            }}
+            invariant_configs={{
+              include_glossary: true,
+              include_tables: true,
+            }}
             onNewQuery={(query) => {
               log_standard_event({
                 SUBAPP: "home",
@@ -113,6 +125,7 @@ const HomeLayout = (props) => (
                 MISC2: query,
               });
             }}
+            include_gov={false}
           />
         </div>
       </header>
