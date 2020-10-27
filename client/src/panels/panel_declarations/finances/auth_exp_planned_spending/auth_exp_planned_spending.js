@@ -223,40 +223,22 @@ class AuthExpPlannedSpendingGraph extends React.Component {
 class LapseByVotesGraph extends React.Component {
   constructor(props) {
     super(props);
-    const { queried_subject_data } = props;
-
-    const active_votes = (() => {
-      const vote_exists =
-        _.reject(queried_subject_data, ({ votenum }) => votenum === "S")
-          .length > 0;
-      if (vote_exists) {
-        return this.get_active_votes((vote_row) => vote_row.votenum !== "S");
-      } else {
-        return this.get_active_votes(
-          (vote_row) =>
-            _.chain(std_years)
-              .map((yr) => vote_row[`${yr}auth`] - vote_row[`${yr}exp`])
-              .sum()
-              .value() > 0
-        );
-      }
-    })();
 
     this.state = {
-      active_votes,
+      active_votes: this.get_active_votes(() => true),
     };
   }
   get_active_votes = (func) =>
-    _.chain(this.props.queried_subject_data)
+    _.chain(this.props.queried_votes)
       .map((vote_row) => [vote_row.desc, func(vote_row)])
       .fromPairs()
       .value();
 
   render() {
-    const { queried_subject_data } = this.props;
+    const { queried_votes } = this.props;
     const { active_votes } = this.state;
 
-    const lapse_table_data = _.chain(queried_subject_data)
+    const lapse_table_data = _.chain(queried_votes)
       .reject(({ desc }) => !active_votes[desc])
       .map((vote_row) => ({
         id: vote_row.desc,
@@ -266,7 +248,7 @@ class LapseByVotesGraph extends React.Component {
         })),
       }))
       .value();
-    const raw_data = _.flatMap(queried_subject_data, (vote_row) =>
+    const raw_data = _.flatMap(queried_votes, (vote_row) =>
       _.map(std_years, (yr) => vote_row[`${yr}auth`] - vote_row[`${yr}exp`])
     );
 
@@ -277,7 +259,7 @@ class LapseByVotesGraph extends React.Component {
           <div className="frow">
             <div className="fcol-md-4">
               <StandardLegend
-                items={_.map(queried_subject_data, ({ desc }) => ({
+                items={_.map(queried_votes, ({ desc }) => ({
                   id: desc,
                   label: desc,
                   active: active_votes[desc],
@@ -322,7 +304,7 @@ class LapseByVotesGraph extends React.Component {
 }
 const render = function ({ calculations, footnotes, sources, glossary_keys }) {
   const { panel_args, subject } = calculations;
-  const { data_series, additional_info, queried_subject_data } = panel_args;
+  const { data_series, additional_info, queried_votes } = panel_args;
 
   const final_info = {
     ...additional_info,
@@ -374,7 +356,7 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
         </div>
       </div>
       <div className="panel-separator" />
-      <LapseByVotesGraph queried_subject_data={queried_subject_data} />
+      <LapseByVotesGraph queried_votes={queried_votes} />
     </InfographicPanel>
   );
 };
@@ -506,7 +488,10 @@ const calculate = function (subject, options) {
   return {
     data_series,
     additional_info,
-    queried_subject_data: queried_subject.data,
+    queried_votes: _.reject(
+      queried_subject.data,
+      ({ votenum }) => votenum === "S"
+    ),
   };
 };
 
