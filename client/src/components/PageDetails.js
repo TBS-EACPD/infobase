@@ -3,7 +3,6 @@ import { withRouter } from "react-router";
 import { IconGitHub } from "../icons/icons.js";
 import { create_text_maker } from "../models/text.js";
 
-import { Details } from "./Details.js";
 import { EmailFrontend } from "./EmailFrontend.js";
 import { ExternalLink } from "./misc_util_components.js";
 
@@ -45,17 +44,26 @@ class VersionNumber extends React.Component {
 
 const PageDetails = withRouter(
   class PageDetails extends React.Component {
+    state = {
+      showReportProblem: false,
+    };
     render() {
+      const { showReportProblem } = this.state;
       const { location, toggleSurvey, showSurvey } = this.props;
+
       return (
         <div className="pagedetails frow">
-          <div className="pagedetails__report-a-problem fcol-md-8 fcol-sm-12">
-            <Details
-              summary_content={text_maker("report_a_problem")}
-              content={<EmailFrontend template_name="report_a_problem" />}
-              persist_content={true}
-            />
+          <div className="fcol-md-8 fcol-sm-12">
+            <button
+              className="btn btn-ib-primary"
+              onClick={() =>
+                this.setState({ showReportProblem: !showReportProblem })
+              }
+            >
+              {text_maker("report_a_problem")}
+            </button>
           </div>
+
           {location.pathname === "/contact" ||
           location.pathname === "/lab" ? null : (
             <button
@@ -65,6 +73,14 @@ const PageDetails = withRouter(
               {text_maker("feedback")}
             </button>
           )}
+          <StatelessModal
+            title={text_maker("report_a_problem")}
+            show={showReportProblem}
+            body={<EmailFrontend template_name="report_a_problem" />}
+            on_close_callback={() =>
+              this.setState({ showReportProblem: false })
+            }
+          />
           <StatelessModal
             title={text_maker("feedback")}
             show={showSurvey}
