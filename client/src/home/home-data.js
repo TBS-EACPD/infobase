@@ -21,10 +21,6 @@ const featured_content_items = _.compact([
     href: "#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_drr)",
   },
   {
-    text_key: "supps_b",
-    href: "#partition/est_doc_seb/estimates",
-  },
-  {
     text_key: "igoc",
     href: "#igoc",
   },
