@@ -86,3 +86,7 @@ actual_spending_footnote:
 lapse_by_votes:
   en: Lapsed Authorities by Vote
   fr: TODO
+
+aggregated_lapse_by_votes:
+  en: Aggregated Lapsed Authorities by Vote
+  fr: TODO

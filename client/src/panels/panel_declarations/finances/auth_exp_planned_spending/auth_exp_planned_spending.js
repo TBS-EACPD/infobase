@@ -235,28 +235,77 @@ class LapseByVotesGraph extends React.Component {
       .value();
 
   render() {
-    const { queried_votes } = this.props;
+    const { subject, queried_votes } = this.props;
     const { active_votes } = this.state;
+    const filtered_votes = _.reject(
+      queried_votes,
+      ({ desc }) => !active_votes[desc]
+    );
 
-    const lapse_table_data = _.chain(queried_votes)
-      .reject(({ desc }) => !active_votes[desc])
-      .map((vote_row) => ({
+    const get_lapse_data = (is_pct) =>
+      _.map(filtered_votes, (vote_row) => ({
         id: vote_row.desc,
         data: _.map(std_years, (yr) => ({
           x: run_template(yr),
-          y: vote_row[`${yr}auth`] - vote_row[`${yr}exp`],
+          y: is_pct
+            ? (vote_row[`${yr}auth`] - vote_row[`${yr}exp`]) /
+              vote_row[`${yr}auth`]
+            : vote_row[`${yr}auth`] - vote_row[`${yr}exp`],
         })),
-      }))
-      .value();
-    const raw_data = _.flatMap(queried_votes, (vote_row) =>
-      _.map(std_years, (yr) => vote_row[`${yr}auth`] - vote_row[`${yr}exp`])
-    );
+      }));
+    const get_lapse_raw_data = (is_pct) =>
+      _.flatMap(filtered_votes, (vote_row) =>
+        _.map(std_years, (yr) =>
+          is_pct
+            ? (vote_row[`${yr}auth`] - vote_row[`${yr}exp`]) /
+              vote_row[`${yr}auth`]
+            : vote_row[`${yr}auth`] - vote_row[`${yr}exp`]
+        )
+      );
 
-    return (
-      <div>
-        <TM el="h4" k="lapse_by_votes" style={{ textAlign: "center" }} />
-        <HeightClipper allowReclip={true} clipHeight={200}>
-          <div className="frow">
+    const get_table_data = (is_pct) =>
+      _.map(filtered_votes, (vote_row) => ({
+        id: vote_row.desc,
+        ..._.chain(std_years)
+          .map((yr) => [
+            run_template(yr),
+            is_pct
+              ? (vote_row[`${yr}auth`] - vote_row[`${yr}exp`]) /
+                vote_row[`${yr}auth`]
+              : vote_row[`${yr}auth`] - vote_row[`${yr}exp`],
+          ])
+          .fromPairs()
+          .value(),
+      }));
+    const get_column_configs = (is_pct) => ({
+      id: {
+        index: 0,
+        header: text_maker("vote"),
+      },
+      ..._.chain(std_years)
+        .map((yr, i) => [
+          run_template(yr),
+          {
+            index: i + 1,
+            header: run_template(yr),
+            is_summable: !is_pct,
+            formatter: is_pct ? "smart_percentage2" : "compact2_written",
+          },
+        ])
+        .fromPairs()
+        .value(),
+    });
+
+    const get_lapse_infograph = (is_pct) => {
+      const nivo_pct_props = is_pct && {
+        is_money: false,
+        left_axis: { format: formats.smart_percentage2_raw },
+        text_formatter: formats.smart_percentage2,
+      };
+
+      return (
+        <div className="frow">
+          {!subject.is("gov") && (
             <div className="fcol-md-4">
               <StandardLegend
                 items={_.map(queried_votes, ({ desc }) => ({
@@ -289,14 +338,44 @@ class LapseByVotesGraph extends React.Component {
                 }
               />
             </div>
-            <div className="fcol-md-8">
-              <WrappedNivoLine
-                data={lapse_table_data}
-                raw_data={raw_data}
-                colorBy={(d) => colors(d.id)}
-              />
-            </div>
+          )}
+          <div className={`fcol-md-${subject.is("gov") ? 12 : 8}`}>
+            <WrappedNivoLine
+              data={get_lapse_data(is_pct)}
+              raw_data={get_lapse_raw_data(is_pct)}
+              colorBy={(d) => colors(d.id)}
+              custom_table={
+                <SmartDisplayTable
+                  column_configs={get_column_configs(is_pct)}
+                  data={get_table_data(is_pct)}
+                />
+              }
+              {...nivo_pct_props}
+            />
           </div>
+        </div>
+      );
+    };
+
+    return (
+      <div>
+        <TM
+          el="h4"
+          k={subject.is("gov") ? "aggregated_lapse_by_votes" : "lapse_by_votes"}
+          style={{ textAlign: "center" }}
+        />
+        <HeightClipper allowReclip={true} clipHeight={200}>
+          <TabbedContent
+            tab_keys={["lapse_dollar", "lapse_pct"]}
+            tab_labels={{
+              lapse_dollar: `${text_maker("lapse_by_votes")} ($)`,
+              lapse_pct: `${text_maker("lapse_by_votes")} (%)`,
+            }}
+            tab_pane_contents={{
+              lapse_dollar: get_lapse_infograph(false),
+              lapse_pct: get_lapse_infograph(true),
+            }}
+          />
         </HeightClipper>
       </div>
     );
@@ -356,7 +435,7 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
         </div>
       </div>
       <div className="panel-separator" />
-      <LapseByVotesGraph queried_votes={queried_votes} />
+      <LapseByVotesGraph subject={subject} queried_votes={queried_votes} />
     </InfographicPanel>
   );
 };
@@ -485,13 +564,36 @@ const calculate = function (subject, options) {
       (unspent_last_year || 0) / auth_values[last_shared_index],
   };
 
+  const flat_auth_exp_years = _.flatMap(["exp", "auth"], (type) =>
+    _.map(std_years, (yr) => `${yr}${type}`)
+  );
+  const queried_votes = subject.is("gov")
+    ? [
+        {
+          desc: text_maker("aggregated_lapse_by_votes"),
+          ..._.chain(queried_subject.data)
+            .reject(({ votenum }) => votenum === "S")
+            .reduce(
+              (result, vote_row) => ({
+                ..._.chain(flat_auth_exp_years)
+                  .map((yr) => [yr, result[yr] + vote_row[yr]])
+                  .fromPairs()
+                  .value(),
+              }),
+              _.chain(flat_auth_exp_years)
+                .map((yr) => [yr, 0])
+                .fromPairs()
+                .value()
+            )
+            .value(),
+        },
+      ]
+    : _.reject(queried_subject.data, ({ votenum }) => votenum === "S");
+
   return {
     data_series,
     additional_info,
-    queried_votes: _.reject(
-      queried_subject.data,
-      ({ votenum }) => votenum === "S"
-    ),
+    queried_votes,
   };
 };
 
