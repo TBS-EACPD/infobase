@@ -241,25 +241,27 @@ class LapseByVotesGraph extends React.Component {
       queried_votes,
       ({ desc }) => !active_votes[desc]
     );
+    const caculate_lapse = (auth, exp, is_pct) => {
+      const lapse = auth - exp;
+      return is_pct ? lapse / auth || 0 : lapse;
+    };
 
     const get_lapse_data = (is_pct) =>
       _.map(filtered_votes, (vote_row) => ({
         id: vote_row.desc,
         data: _.map(std_years, (yr) => ({
           x: run_template(yr),
-          y: is_pct
-            ? (vote_row[`${yr}auth`] - vote_row[`${yr}exp`]) /
-              vote_row[`${yr}auth`]
-            : vote_row[`${yr}auth`] - vote_row[`${yr}exp`],
+          y: caculate_lapse(
+            vote_row[`${yr}auth`],
+            vote_row[`${yr}exp`],
+            is_pct
+          ),
         })),
       }));
     const get_lapse_raw_data = (is_pct) =>
       _.flatMap(filtered_votes, (vote_row) =>
         _.map(std_years, (yr) =>
-          is_pct
-            ? (vote_row[`${yr}auth`] - vote_row[`${yr}exp`]) /
-              vote_row[`${yr}auth`]
-            : vote_row[`${yr}auth`] - vote_row[`${yr}exp`]
+          caculate_lapse(vote_row[`${yr}auth`], vote_row[`${yr}exp`], is_pct)
         )
       );
 
@@ -269,10 +271,7 @@ class LapseByVotesGraph extends React.Component {
         ..._.chain(std_years)
           .map((yr) => [
             run_template(yr),
-            is_pct
-              ? (vote_row[`${yr}auth`] - vote_row[`${yr}exp`]) /
-                vote_row[`${yr}auth`]
-              : vote_row[`${yr}auth`] - vote_row[`${yr}exp`],
+            caculate_lapse(vote_row[`${yr}auth`], vote_row[`${yr}exp`], is_pct),
           ])
           .fromPairs()
           .value(),
