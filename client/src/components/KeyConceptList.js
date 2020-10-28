@@ -1,6 +1,9 @@
 import { Fragment } from "react";
 
 import { Details } from "./Details.js";
+
+import { IconPin } from "../icons/icons.js";
+
 import "../common_css/grid-system.scss";
 
 const KeyConceptList = ({ question_answer_pairs, compact = true }) => (
