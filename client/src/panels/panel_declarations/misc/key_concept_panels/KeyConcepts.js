@@ -1,6 +1,5 @@
 import classNames from "classnames";
-import { Fragment } from "react";
-import { ButtonToolbar, Button, ButtonGroup } from "react-bootstrap";
+import { ButtonToolbar } from "react-bootstrap";
 import MediaQuery from "react-responsive";
 import { withRouter } from "react-router";
 
@@ -39,13 +38,15 @@ class KeyConcepts_ extends React.Component {
     super(props);
     this.accordionRef = React.createRef(null);
 
-    let should_pin = null;
+    let should_pin;
     if (has_local_storage) {
       try {
         should_pin = JSON.parse(
           localStorage.getItem(`should_pin_key_concepts`)
         );
-      } catch {}
+      } catch {
+        should_pin = null;
+      }
     }
 
     this.keyConceptsContainerRef = React.createRef();
