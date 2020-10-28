@@ -23,7 +23,6 @@ import "./Typeahead.scss";
 export class Typeahead extends React.Component {
   state = {
     search_text: "",
-    pagination_index: 0,
     can_show_menu: false,
   };
 
@@ -73,7 +72,7 @@ export class Typeahead extends React.Component {
       onNewQuery,
     } = this.props;
 
-    const { search_text, pagination_index, can_show_menu } = this.state;
+    const { search_text, can_show_menu } = this.state;
 
     const debounceOnNewQuery = _.debounce((query) => {
       onNewQuery();
@@ -90,7 +89,7 @@ export class Typeahead extends React.Component {
     const update_search_text = (event) => {
       const text = _.trimStart(event.target.value); //prevent empty searching that will show all results
       debounceOnNewQuery(text);
-      this.setState({ search_text: text, pagination_index: 0 });
+      this.setState({ search_text: text });
     };
 
     const config_groups = _.map(search_configs, (search_config, ix) => ({
@@ -210,7 +209,6 @@ export class Typeahead extends React.Component {
 }
 
 Typeahead.defaultProps = {
-  pagination_size: 30,
   placeholder: text_maker("org_search"),
   minLength: 3,
   onNewQuery: _.noop,
