@@ -100,6 +100,7 @@ export default async function ({ models }) {
             })
           );
         } catch (error) {
+          console.log(error);
           return [];
         }
       })();
