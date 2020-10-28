@@ -863,6 +863,89 @@ const IconEmail = (props) => {
     />
   );
 };
+const IconPin = (props) => {
+  const SVGPin = () => (
+    <Fragment>
+      <rect
+        x="13.95"
+        y="-0.091"
+        width="70.926"
+        height="10.169"
+        style={{ fill: "#fff", stroke: "#fff" }}
+      />
+      <rect
+        x="29.987"
+        y="10.078"
+        width="40.156"
+        height="29.922"
+        style={{ fill: "#fff", stroke: "#fff" }}
+      />
+      <path
+        d="M29.987,40c0,0 -22.947,7.106 -22.947,26.01"
+        style={{ stroke: "#fff", fill: "#fff", strokeWidth: "1px" }}
+      />
+      <path
+        d="M70.143,40c0,0 22.805,7.106 22.805,26.01"
+        style={{ stroke: "#fff", fill: "#fff", strokeWidth: "1px" }}
+      />
+      <path
+        d="M7.04,66.01l85.908,0"
+        style={{
+          fill: "none",
+          stroke: "#fff",
+          strokeWidth: "1px",
+        }}
+      />
+      <path
+        d="M29.987,40l-22.947,26.01l85.908,0l-22.805,-26.01l-40.156,0Z"
+        style={{ stroke: "#fff", fill: "#fff", strokeWidth: "1px" }}
+      />
+      <path
+        d="M55.02,64.511c0,-2.77 -2.25,-5.019 -5.02,-5.019c-2.77,0 -5.02,2.249 -5.02,5.019l0,30.469c0,2.771 2.25,5.02 5.02,5.02c2.77,0 5.02,-2.249 5.02,-5.02l0,-30.469Z"
+        style={{ fill: "#fff", stroke: "#fff" }}
+      />
+    </Fragment>
+  );
+
+  return <_IconWrapper {...props} viewbox_width={100} ChildSVG={SVGPin} />;
+};
+
+const IconUnpin = (props) => {
+  const SVGUnpin = () => (
+    <Fragment>
+      <path
+        d="M70.214,40c0,0 22.805,7.106 22.805,26.01"
+        style={{ stroke: "#fff", fill: "#fff", strokeWidth: "1px" }}
+      />
+      <path
+        d="M96.488,86.509l-88.901,-78.93l-5.249,5.912l88.901,78.93l5.249,-5.912Z"
+        style={{ stroke: "#fff", fill: "#fff" }}
+      />
+      <path
+        d="M84.876,10.078l-66.879,0l-4.047,-3.592l0,-6.577l70.926,0l0,10.169Z"
+        style={{ stroke: "#fff", fill: "#fff" }}
+      />
+      <path
+        d="M25.703,41.758l1.572,1.396l-20.164,22.856c0,-13.634 11.937,-21.132 18.592,-24.252Z"
+        style={{ stroke: "#fff", fill: "#fff", strokeWidth: "1px" }}
+      />
+      <path
+        d="M46.892,59.894l8.128,7.216l0,27.194c0,2.77 -2.25,5.019 -5.02,5.019c-2.77,0 -5.02,-2.249 -5.02,-5.019l0,-30.47c0,-1.597 0.748,-3.021 1.912,-3.94Z"
+        style={{ stroke: "#fff", fill: "#fff" }}
+      />
+      <path
+        d="M70.143,40l-18.445,0l-21.711,-19.276l0,-10.646l40.156,0l0,29.922Zm-27.871,0l-9.124,0l-3.161,-2.807l0,-8.1l12.285,10.907Z"
+        style={{ stroke: "#fff", fill: "#fff" }}
+      />
+      <path
+        d="M27.031,42.938l25.987,23.072l-45.907,0l19.92,-23.072Zm65.988,23.072l-11.954,0l-29.296,-26.579l18.374,0.569l22.876,26.01Zm-21.451,0l-9.124,0l-29.936,-26.579l9.123,0l29.937,26.579Z"
+        style={{ stroke: "#fff", fill: "#fff", strokeWidth: "1px" }}
+      />
+    </Fragment>
+  );
+
+  return <_IconWrapper {...props} viewbox_width={100} ChildSVG={SVGUnpin} />;
+};
 
 export {
   IconHome,
@@ -898,4 +981,6 @@ export {
   IconFacebook,
   IconReddit,
   IconEmail,
+  IconPin,
+  IconUnpin,
 };

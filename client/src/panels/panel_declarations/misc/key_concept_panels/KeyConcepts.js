@@ -22,71 +22,55 @@ const {
   KeyConceptList,
 } = util_components;
 
-const text = {
-  click_text: {
-    en: "Recommended reading",
-    fr: "Lecture recommandée",
-  },
-};
-
 const { text_maker, TM } = create_text_maker_component([
   common_lang,
   fin_lang,
   ppl_lang,
   results_lang,
   tag_lang,
-  text,
 ]);
 
 class KeyConcepts_ extends React.Component {
   state = {
     sticky: false,
+    should_pin: false,
   };
   constructor(props) {
     super(props);
     this.accordionRef = React.createRef(null);
 
-    const {
-      match: {
-        params: { active_bubble_id },
-      },
-    } = this.props;
-
+    let should_pin = null;
     if (has_local_storage) {
-      const do_not_display = localStorage.getItem(
-        `hide_${active_bubble_id}_key_concepts_popup`
-      );
-
-      if (_.isNull(do_not_display)) {
-        this.timeout = setTimeout(
-          () => this.setState({ is_showing_tooltip: true }),
-          1000
+      try {
+        should_pin = JSON.parse(
+          localStorage.getItem(`should_pin_key_concepts`)
         );
-      }
-
-      this.keyConceptsContainerRef = React.createRef();
+      } catch {}
     }
+
+    this.keyConceptsContainerRef = React.createRef();
+
+    this.state = {
+      sticky: false,
+      should_pin: _.isBoolean(should_pin) ? should_pin : true,
+    };
   }
 
   render() {
-    const {
-      rendered_q_a_keys,
-      subject,
-      match: {
-        params: { active_bubble_id },
-      },
-    } = this.props;
+    const { rendered_q_a_keys, subject } = this.props;
 
-    const { sticky } = this.state;
+    const { sticky, should_pin } = this.state;
 
-    const disable_popup = () => {
-      this.timeout && clearTimeout(this.timeout);
-      this.setState({ is_showing_tooltip: false });
-      has_local_storage &&
-        localStorage.setItem(
-          `hide_${active_bubble_id}_key_concepts_popup`,
-          true
-        );
+    const sticky_data = {
+      should_pin: should_pin,
+      pin_pressed: () =>
+        this.setState((prev_state) => {
+          localStorage.setItem(
+            "should_pin_key_concepts",
+            !prev_state.should_pin
+          );
+          return { should_pin: !prev_state.should_pin };
+        }),
     };
 
     return (
@@ -97,15 +81,15 @@ class KeyConcepts_ extends React.Component {
               className={classNames(
                 "mrgn-bttm-md",
                 matches && "mrgn-tp-md",
-                sticky && "sticky"
+                sticky && should_pin && "sticky"
               )}
-              onClick={disable_popup}
             >
               <ButtonToolbar>
                 <AutoAccordion
                   title={text_maker("some_things_to_keep_in_mind")}
                   ref={this.accordionRef}
                   showPin
+                  sticky_data={sticky_data}
                 >
                   <div style={{ paddingLeft: "10px", paddingRight: "10px" }}>
                     <KeyConceptList

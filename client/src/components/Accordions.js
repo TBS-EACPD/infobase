@@ -1,6 +1,6 @@
 import { TransitionGroup, Transition } from "react-transition-group";
 
-import { IconChevron } from "../icons/icons.js";
+import { IconChevron, IconPin, IconUnpin } from "../icons/icons.js";
 
 import { trivial_text_maker } from "../models/text.js";
 
@@ -90,6 +90,7 @@ const StatelessPullDownAccordion = ({
   children,
   onToggle,
   showPin,
+  sticky_data, //sticky data only applies if show pin is true
 }) => (
   <div aria-label={title} className="pull-down-accordion">
     <div className="pull-down-accordion-header" style={{ display: "flex" }}>
@@ -101,7 +102,26 @@ const StatelessPullDownAccordion = ({
         {title}
       </button>
       {showPin && (
-        <button style={{ float: "right", marginLeft: "2rem" }}>pin</button>
+        <button
+          style={{ float: "right", marginLeft: "2rem" }}
+          onClick={sticky_data.pin_pressed}
+        >
+          {!sticky_data.should_pin ? (
+            <IconPin
+              height="25px"
+              width="25px"
+              vertical_align="top"
+              alternate_color="false"
+            />
+          ) : (
+            <IconUnpin
+              height="25px"
+              width="25px"
+              vertical_align="top"
+              alternate_color="false"
+            />
+          )}
+        </button>
       )}
     </div>
     <TransitionGroup component={FirstChild}>
