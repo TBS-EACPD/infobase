@@ -12,7 +12,6 @@ import text from "./programSpending.yaml";
 // of the table spec
 //const {spending_areas} = require('../../models/goco.js');
 
-
 const { Program, Gov, Dept } = Subject;
 const { std_years, planning_years } = year_templates;
 const exp_cols = _.map(std_years, (yr) => yr + "exp");
@@ -97,10 +96,9 @@ export default {
     this.add_col({
       type: "big_int",
       nick: "pa_last_year_planned",
-      /* TODO hidden needs to be manually toggled off when DPs are tabled,
-              hidden needs to be manually toggled on when DRRs are tabled.
-      */
-      hidden: false,
+      /* should be kept hidden!
+       */
+      hidden: true,
       header: {
         en: "{{pa_last_year_planned}} - Planned Spending",
         fr: "{{pa_last_year_planned}} - Dépenses prévues",

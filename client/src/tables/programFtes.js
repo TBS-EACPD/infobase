@@ -13,7 +13,6 @@ import text from "./programFtes.yaml";
 // of the table spec
 //
 
-
 const { std_years, planning_years } = year_templates;
 const { Program, Gov } = Subject;
 
@@ -95,7 +94,7 @@ export default {
       /* TODO hidden needs to be manually toggled off when DPs are tabled,
               hidden needs to be manually toggled on when DRRs are tabled.
       */
-      hidden: false,
+      hidden: true,
       header: {
         en: "{{pa_last_year_planned}} - " + m("Planned FTEs"),
         fr: "{{pa_last_year_planned}} - " + m("ETP prévus"),
