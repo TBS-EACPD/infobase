@@ -7,7 +7,7 @@ paginate_status:
   en: |
     Showing {{total_matching_results}} results
   fr: |
-    Liste des résultats {{page_range_start}} à {{page_range_end}} des {{total_matching_results}} résultats
+    Liste des {{total_matching_results}} résultats
 
 paginate_previous:
   transform: [handlebars]
