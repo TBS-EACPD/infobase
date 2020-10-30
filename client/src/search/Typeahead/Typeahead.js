@@ -16,9 +16,9 @@ import { TypeaheadMenu } from "./TypeaheadMenu.js";
 
 import text from "./Typeahead.yaml";
 
-const text_maker = create_text_maker(text);
-
 import "./Typeahead.scss";
+
+const text_maker = create_text_maker(text);
 
 export class Typeahead extends React.Component {
   state = {
@@ -52,7 +52,7 @@ export class Typeahead extends React.Component {
   };
 
   handle_key_down = (e) => {
-    if (e.keyCode == 13) {
+    if (e.keyCode === 13) {
       e.preventDefault();
       this.setState({ can_show_menu: true }, () => {
         document.getElementById("rbt-menu-item-0").focus();
@@ -120,10 +120,10 @@ export class Typeahead extends React.Component {
     ];
 
     const matches_query = (option) => {
-      const query = this.state.search_text;
+      const { search_text } = this.state;
       const group_filter =
         config_groups[option.config_group_index].group_filter;
-      const query_matches = group_filter(query, option.data);
+      const query_matches = group_filter(search_text, option.data);
 
       return query_matches;
     };
@@ -156,6 +156,7 @@ export class Typeahead extends React.Component {
           <input
             style={{ width: "100%" }}
             placeholder={placeholder}
+            aria-lable={placeholder}
             onChange={update_search_text}
             ref={this.typeaheadRef}
             onKeyDown={this.handleKeyDown}
@@ -193,6 +194,7 @@ export class Typeahead extends React.Component {
                 </div>
               }
               dropdown_close_txt={text_maker("filter")}
+              dropdown_raw_txt={text_maker("filter")}
               opened_button_class_name={"btn-ib-light--reversed--with-icon"}
               closed_button_class_name={"btn-ib-light--with-icon"}
               dropdown_content_class_name="no-right"
