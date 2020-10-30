@@ -29,6 +29,10 @@ export class DropdownMenu extends React.Component {
     } = this.props;
     const { isOpen } = this.state;
 
+    const aria_label = _.isObject(dropdown_trigger_txt)
+      ? dropdown_raw_txt
+      : dropdown_trigger_txt;
+
     return (
       <div className="dropdown">
         <button
@@ -45,34 +49,24 @@ export class DropdownMenu extends React.Component {
           {isOpen ? (
             <div className="close-dropdown">
               <span
-                aria-label={`${trivial_text_maker("close")} ${
-                  _.isObject(dropdown_trigger_txt)
-                    ? dropdown_raw_txt
-                    : dropdown_trigger_txt
-                }`}
+                aria-label={trivial_text_maker("close")}
                 className="close-dropdown__x"
               >
                 X
               </span>
-              <span className="close-dropdown__x">{dropdown_trigger_txt}</span>
+              <span className="close-dropdown__x" aria-label={aria_label}>
+                {dropdown_trigger_txt}
+              </span>
             </div>
           ) : (
-            <span
-              aria-label={`${trivial_text_maker(
-                "open"
-              )} ${dropdown_trigger_txt}`}
-            >
+            <span aria-label={`${trivial_text_maker("open")} ${aria_label}`}>
               {dropdown_trigger_txt}
             </span>
           )}
         </button>
         <div
           tabIndex={0}
-          aria-label={
-            _.isObject(dropdown_trigger_txt)
-              ? dropdown_raw_txt
-              : dropdown_trigger_txt
-          }
+          aria-label={aria_label}
           ref={"dropdown_area"}
           className={classNames(
             dropdown_content_class_name,

@@ -403,18 +403,15 @@ li.list-group-item {
 .list-group-item.disabled {
   background-color: #fff !important;
   cursor: not-allowed;
-  color: #777 !important;
 
   :hover {
     background-color: #fff !important;
     cursor: not-allowed;
-    color: #777 !important;
   }
 
   :focus {
     background-color: #fff !important;
     cursor: not-allowed;
-    color: #777 !important;
   }
 }
 
