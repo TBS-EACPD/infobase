@@ -33,6 +33,7 @@ class KeyConcepts_ extends React.Component {
   state = {
     sticky: false,
     should_pin: false,
+    key_concepts_width: null,
   };
   constructor(props) {
     super(props);
@@ -60,7 +61,7 @@ class KeyConcepts_ extends React.Component {
   render() {
     const { rendered_q_a_keys, subject } = this.props;
 
-    const { sticky, should_pin } = this.state;
+    const { sticky, should_pin, key_concepts_width } = this.state;
 
     const sticky_data = {
       should_pin: should_pin,
@@ -85,9 +86,7 @@ class KeyConcepts_ extends React.Component {
                 sticky && should_pin && "sticky"
               )}
               style={{
-                width:
-                  this.keyConceptsContainerRef.current &&
-                  this.keyConceptsContainerRef.current.offsetWidth,
+                width: key_concepts_width,
               }}
             >
               <ButtonToolbar>
@@ -143,6 +142,18 @@ class KeyConcepts_ extends React.Component {
         this.state.sticky && this.setState({ sticky: false });
       }
     });
+
+    this.setState({
+      key_concepts_width: this.keyConceptsContainerRef.current.offsetWidth,
+    });
+
+    const key_concepts_observer = new ResizeObserver((entries) => {
+      this.setState({
+        key_concepts_width: this.keyConceptsContainerRef.current.offsetWidth,
+      });
+    });
+
+    key_concepts_observer.observe(this.keyConceptsContainerRef.current);
   }
 }
 
