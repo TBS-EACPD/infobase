@@ -26,16 +26,12 @@ export class TypeaheadMenu extends React.Component {
       hide_menu,
     } = this.props;
 
-    const menu_item_selected = (selected) => {
-      on_select_item(selected);
-    };
-
     const total_matching_results = queried_results.length;
 
     if (_.isEmpty(queried_results)) {
       return (
         <ListGroup className="rbt-menu dropdown-menu show">
-          <ListGroupItem disabled className="dropdown-item">
+          <ListGroupItem className="dropdown-header">
             {text_maker("no_matches_found")}
           </ListGroupItem>
         </ListGroup>
@@ -46,7 +42,6 @@ export class TypeaheadMenu extends React.Component {
           {_.chain(queried_results)
             .groupBy("config_group_index")
             .thru((grouped_results) => {
-              let index_key_counter = 0;
               return [
                 <ListGroupItem
                   key={`header-pagination-info`}
@@ -67,19 +62,26 @@ export class TypeaheadMenu extends React.Component {
                     {config_groups[group_index].group_header}
                   </ListGroupItem>,
                   <div
+                    key={`group-${group_index}`}
                     role="group"
                     aria-label={config_groups[group_index].group_header}
                   >
                     {[
-                      ..._.map(results, (result) => {
-                        const index = index_key_counter++;
+                      ..._.map(results, (result, res_index) => {
+                        const index =
+                          _.chain(grouped_results)
+                            .toPairs()
+                            .slice(0, group_index)
+                            .map((grouped_result) => _.size(grouped_result))
+                            .sum()
+                            .valueOf() + res_index;
                         return (
                           <ListGroupItem
                             key={index}
                             id={`rbt-menu-item-${index}`}
                             aria-selected
                             className="dropdown-item"
-                            onClick={() => menu_item_selected(result)}
+                            onClick={() => on_select_item(result)}
                           >
                             {result.menu_content(search_text)}
                           </ListGroupItem>
