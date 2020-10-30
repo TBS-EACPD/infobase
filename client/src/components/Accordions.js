@@ -91,6 +91,7 @@ const StatelessPullDownAccordion = ({
   onToggle,
   showPin,
   sticky_data, //sticky data only applies if show pin is true
+  closeAccordion,
 }) => (
   <div aria-label={title} className="pull-down-accordion">
     <div className="pull-down-accordion-header" style={{ display: "flex" }}>
@@ -104,9 +105,12 @@ const StatelessPullDownAccordion = ({
       {showPin && (
         <button
           style={{ float: "right", marginLeft: "2rem" }}
-          onClick={sticky_data.pin_pressed}
+          onClick={() => {
+            sticky_data.pin_pressed();
+            sticky_data.should_pin && closeAccordion();
+          }}
         >
-          {!sticky_data.should_pin ? (
+          {sticky_data.should_pin ? (
             <IconPin
               height="25px"
               width="25px"
@@ -161,6 +165,7 @@ class AutoAccordion extends React.Component {
       ...this.props,
       isExpanded,
       onToggle: () => this.setState({ isExpanded: !isExpanded }),
+      closeAccordion: () => this.setState({ isExpanded: false }),
     });
   }
 }
