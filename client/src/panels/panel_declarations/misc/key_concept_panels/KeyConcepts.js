@@ -84,6 +84,11 @@ class KeyConcepts_ extends React.Component {
                 matches && "mrgn-tp-md",
                 sticky && should_pin && "sticky"
               )}
+              style={{
+                width:
+                  this.keyConceptsContainerRef.current &&
+                  this.keyConceptsContainerRef.current.offsetWidth,
+              }}
             >
               <ButtonToolbar>
                 <AutoAccordion
