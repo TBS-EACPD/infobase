@@ -15,6 +15,8 @@ export class DropdownMenu extends React.Component {
     const { isOpen } = this.state;
     if (isOpen) {
       this.refs.dropdown_area.focus();
+    } else {
+      this.refs.toggle_dropdown_button.focus();
     }
   }
   render() {
@@ -39,9 +41,9 @@ export class DropdownMenu extends React.Component {
           className={
             isOpen ? opened_button_class_name : closed_button_class_name
           }
+          ref={"toggle_dropdown_button"}
           style={{ marginRight: 5, height: "100%" }}
           onClick={() => {
-            this.refs.dropdown_area.focus();
             this.setState({ isOpen: !isOpen });
           }}
           title={button_description}
