@@ -136,7 +136,7 @@ const StatelessPullDownAccordion = ({
           expandDuration={600}
           collapseDuration={600}
         >
-          {children}
+          <div style={{ maxHeight: "80vh", overflowY: "auto" }}>{children}</div>
         </AccordionEnterExit>
       )}
     </TransitionGroup>
