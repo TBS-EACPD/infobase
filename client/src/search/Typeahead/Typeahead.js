@@ -156,7 +156,7 @@ export class Typeahead extends React.Component {
           <input
             style={{ width: "100%" }}
             placeholder={placeholder}
-            aria-lable={placeholder}
+            aria-label={placeholder}
             onChange={update_search_text}
             ref={this.typeaheadRef}
             onKeyDown={this.handleKeyDown}
@@ -193,8 +193,7 @@ export class Typeahead extends React.Component {
                   <span>{text_maker("filter")}</span>
                 </div>
               }
-              dropdown_close_txt={text_maker("filter")}
-              dropdown_raw_txt={text_maker("filter")}
+              dropdown_a11y_txt={text_maker("filter")}
               opened_button_class_name={"btn-ib-light--reversed--with-icon"}
               closed_button_class_name={"btn-ib-light--with-icon"}
               dropdown_content_class_name="no-right"
