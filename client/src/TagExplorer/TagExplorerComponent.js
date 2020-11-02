@@ -273,9 +273,10 @@ export default class TagExplorerComponent extends React.Component {
                 {_.map(all_category_props, (props) => (
                   <li
                     key={props.id}
-                    className={classNames(props.active && "active")}
+                    className={classNames(props.active && "active", "nav-item")}
                   >
                     <a
+                      className="nav-link"
                       href={`#tag-explorer/${props.id}/${year_to_route_arg_map[year]}`}
                     >
                       {props.title}
