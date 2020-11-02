@@ -48,7 +48,6 @@ export const text_calculate = (all_data, custom_group_pop = null) => {
         ? group.five_year_percent
         : _.sum(group.data) / custom_group_pop
     )
-
     .min()
     .value();
   const bottom_group = _.chain(all_data)

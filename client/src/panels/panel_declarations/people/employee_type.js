@@ -10,7 +10,7 @@ import {
   NivoLineBarToggle,
 } from "../shared.js";
 
-import { text_calculate } from "./text_calculator";
+import { text_calculate } from "./text_calculator.js";
 
 import text from "./employee_type.yaml";
 
@@ -77,7 +77,7 @@ export const declare_employee_type_panel = () =>
 
         const student = _.find(
           panel_args,
-          (type) => type.label === "Student" || type.label === "Étudiant"
+          (type) => type.label === text_maker("student")
         );
 
         const student_data = student && student.data;

@@ -10,7 +10,7 @@ import {
   NivoLineBarToggle,
 } from "../shared.js";
 
-import { text_calculate } from "./text_calculator";
+import { text_calculate } from "./text_calculator.js";
 
 import text from "./employee_executive_level.yaml";
 
@@ -76,11 +76,7 @@ export const declare_employee_executive_level_panel = () =>
       render({ calculations, footnotes, sources }) {
         const { panel_args, subject } = calculations;
 
-        const data_without_nonex = _.chain([...panel_args])
-          .reverse()
-          .tail()
-          .reverse()
-          .value();
+        const data_without_nonex = _.initial(panel_args);
 
         const sum_exec = _.reduce(
           data_without_nonex,

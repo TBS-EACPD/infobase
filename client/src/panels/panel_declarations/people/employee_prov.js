@@ -11,7 +11,7 @@ import {
   util_components,
 } from "../shared.js";
 
-import { text_calculate } from "./text_calculator";
+import { text_calculate } from "./text_calculator.js";
 
 import text from "./employee_prov.yaml";
 
