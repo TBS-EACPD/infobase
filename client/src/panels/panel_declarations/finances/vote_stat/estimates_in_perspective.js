@@ -26,13 +26,12 @@ export const declare_estimates_in_perspective_panel = () =>
 
         if (!dept_tabled_est_in_year) {
           return false;
-        } else {
-          return {
-            subject,
-            gov_tabled_est_in_year,
-            dept_tabled_est_in_year,
-          };
         }
+        return {
+          subject,
+          gov_tabled_est_in_year,
+          dept_tabled_est_in_year,
+        };
       },
 
       render({ calculations, footnotes, sources }) {
