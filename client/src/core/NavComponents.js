@@ -93,10 +93,7 @@ class BreadCrumbs extends React.Component {
             <li
               style={{
                 position: "relative",
-                top: "-3px",
                 padding: "0px 15px",
-                fontSize: "0.7em",
-                fontFamily: "Glyphicons Halflings",
               }}
               aria-hidden="true"
             >
