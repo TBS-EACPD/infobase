@@ -10,7 +10,7 @@ import {
   NivoLineBarToggle,
 } from "../shared.js";
 
-import { text_calculate } from "./text_calculator";
+import { text_calculate } from "./text_calculator.js";
 
 import text from "./employee_gender.yaml";
 

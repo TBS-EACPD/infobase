@@ -387,6 +387,9 @@ fiscal_year_end:
 hidden_panels:
   en: Hidden Panels
   fr: Graphiques cachées
+student:
+  en: Student
+  fr: Étudiant
 
 data_for_year:
   transform: [handlebars]
