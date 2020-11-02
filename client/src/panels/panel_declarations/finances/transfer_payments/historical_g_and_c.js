@@ -354,7 +354,8 @@ export const declare_historical_g_and_c_panel = () =>
               );
 
               const five_year_avg =
-                (_.sum(payments.c) + _.sum(payments.g) + _.sum(payments.o)) / 5;
+                (_.sum(payments.c) + _.sum(payments.g) + _.sum(payments.o)) /
+                std_years.length;
               const avgs = _.map(payments, (payment, type) => ({
                 type,
                 value: _.sum(payment) / payment.length,
@@ -415,7 +416,7 @@ export const declare_historical_g_and_c_panel = () =>
                 (_.sum(rolled_up_transfer_payments.c) +
                   _.sum(rolled_up_transfer_payments.g) +
                   _.sum(rolled_up_transfer_payments.o)) /
-                5;
+                std_years.length;
 
               const avgs = _.map(
                 rolled_up_transfer_payments,
@@ -441,12 +442,8 @@ export const declare_historical_g_and_c_panel = () =>
               const tp_average_payments = _.map(
                 rows,
                 (row) =>
-                  (row["{{pa_last_year}}exp"] +
-                    row["{{pa_last_year_2}}exp"] +
-                    row["{{pa_last_year_3}}exp"] +
-                    row["{{pa_last_year_4}}exp"] +
-                    row["{{pa_last_year_5}}exp"]) /
-                  5
+                  _.reduce(exp_years, (sum, year) => sum + row[year], 0) /
+                  exp_years.length
               );
 
               const max_tp_avg = _.max(tp_average_payments);
