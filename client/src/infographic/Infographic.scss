@@ -22,6 +22,7 @@ of the advanced search for mobile */
   font-size: 13px;
 }
 .previous_and_next_bubble_link_row {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -43,6 +44,7 @@ of the advanced search for mobile */
   flex-direction: column;
   justify-content: center;
   display: flex;
+  font-size: 1.2em;
 }
 
 .infograph-panel-container {
