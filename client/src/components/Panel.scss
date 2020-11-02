@@ -38,12 +38,10 @@
     Only needed on larger screens. 
   */
   .panel-body {
+    padding: 1rem;
+
     @media (min-width:$minLargeDevice){
       content: none!important;
-    }
-  
-    @media (max-width:$maxLargeDevice){
-      padding: 1rem; /* on mobile, we need way less padding */
     }
   }
   

@@ -268,7 +268,7 @@ class InfoGraph_ extends React.Component {
             <div className="previous_and_next_bubble_link_row">
               {prev ? (
                 <a
-                  className="previous_bubble_link btn-lg btn-ib-primary"
+                  className="previous_bubble_link btn btn-lg btn-ib-primary"
                   href={infograph_href_template(subject, prev.id)}
                   onClick={reset_scroll}
                   style={{ textDecoration: "none" }}
@@ -280,7 +280,7 @@ class InfoGraph_ extends React.Component {
               )}
               {next ? (
                 <a
-                  className="next_bubble_link btn-lg btn-ib-primary"
+                  className="next_bubble_link btn btn-lg btn-ib-primary"
                   href={infograph_href_template(subject, next.id)}
                   onClick={reset_scroll}
                   style={{ textDecoration: "none" }}

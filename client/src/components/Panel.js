@@ -1,5 +1,7 @@
 import classNames from "classnames";
 
+import { textLightColor } from "../core/color_defs.js";
+
 import { Details } from "./Details.js";
 import { FootnoteList } from "./FootnoteList.js";
 import { GlossaryItem } from "./glossary_components.js";
@@ -25,7 +27,7 @@ const PanelSource = ({ links }) => {
       </span>
       <ul className="list-unstyled list-inline" style={{ display: "inline" }}>
         {_.map(links, ({ href, html }, ix) => (
-          <li key={ix}>
+          <li key={ix} className="list-inline-item">
             <a className="source-link" href={href}>
               <span dangerouslySetInnerHTML={{ __html: html }} />
             </a>
@@ -47,7 +49,7 @@ const PanelGlossary = ({ keys }) => {
       <TM k="panel_glossary_text" />
       <ul className="list-unstyled list-inline" style={{ display: "inline" }}>
         {_.map(keys, (key, ix) => (
-          <li key={ix}>
+          <li key={ix} className="list-inline-item">
             <GlossaryItem id={key} item_class="glossary-link" />
             {ix !== last_ix && ", "}
           </li>
@@ -95,7 +97,9 @@ export class Panel extends React.Component {
                     : text_maker("expand_panel")
                 }
               >
-                <span aria-hidden>{isOpen ? "▼" : "►"}</span>
+                <span style={{ color: textLightColor }} aria-hidden>
+                  {isOpen ? "▼" : "►"}
+                </span>
               </button>
             }
             {title && <h2 className="panel-title">{title}</h2>}
