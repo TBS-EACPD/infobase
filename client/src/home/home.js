@@ -65,7 +65,7 @@ export default class Home extends React.Component {
 }
 
 const FeaturedContentItem = ({ text_key, href, is_link_out, is_new }) => (
-  <li className="list-group-item list-group-item--home">
+  <li className="list-group-item list-group-item--home d-flex justify-content-between">
     {is_new && (
       <span className="badge badge--is-new">
         <TM k={"new"} />
@@ -78,6 +78,11 @@ const FeaturedContentItem = ({ text_key, href, is_link_out, is_new }) => (
     >
       <TM k={text_key} />
     </a>
+    {is_new && (
+      <span className="badge badge--is-new">
+        <TM k={"new"} />
+      </span>
+    )}
   </li>
 );
 
