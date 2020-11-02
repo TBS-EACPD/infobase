@@ -91,7 +91,6 @@
     "react-addons-shallow-compare": "^15.4.2",
     "react-aria-modal": "^2.12.3",
     "react-bootstrap": "^0.32.4",
-    "react-bootstrap-typeahead": "3.3.1",
     "react-dom": "^16.8.6",
     "react-flip-move": "^2.10.2",
     "react-intersection-observer": "^8.30.1",
