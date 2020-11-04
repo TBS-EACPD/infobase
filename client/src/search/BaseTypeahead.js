@@ -3,13 +3,7 @@ import "react-bootstrap-typeahead/css/Typeahead.css";
 // import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
 import "./BaseTypeahead.scss";
 
-import {
-  // Typeahead,
-  Menu,
-  MenuItem,
-} from "react-bootstrap-typeahead";
-
-import { Typeahead } from "./Typeahead.js";
+import { Typeahead, Menu, MenuItem } from "react-bootstrap-typeahead";
 
 import { TM } from "../components/TextMaker.js";
 import { log_standard_event } from "../core/analytics.js";
@@ -42,22 +36,22 @@ export class BaseTypeahead extends React.Component {
       this.typeahead.getInstance().focus();
     }
   }
-  // componentDidMount() {
-  //   this.typeahead_node
-  //     .querySelector(".rbt-input-hint-container")
-  //     .insertAdjacentHTML(
-  //       "beforeend",
-  //       `<div class="search-icon-container">
-  //         <span
-  //           aria-hidden="true"
-  //         >
-  //         <img src="${get_static_url(
-  //           "svg/search.svg"
-  //         )}" style="width:30px; height:30px;" />
-  //         </span>
-  //       </div>`
-  //     );
-  // }
+  componentDidMount() {
+    this.typeahead_node
+      .querySelector(".rbt-input-hint-container")
+      .insertAdjacentHTML(
+        "beforeend",
+        `<div class="search-icon-container">
+          <span 
+            aria-hidden="true"
+          >
+          <img src="${get_static_url(
+            "svg/search.svg"
+          )}" style="width:30px; height:30px;" />
+          </span>
+        </div>`
+      );
+  }
   render() {
     const {
       pagination_size,
@@ -135,14 +129,13 @@ export class BaseTypeahead extends React.Component {
     const filterBy = (option, props) => {
       if (option.pagination_placeholder) {
         if (option.paginate_direction === "previous") {
-          console.log(this.pagination_index > 0);
           return this.pagination_index > 0;
         } else if (option.paginate_direction === "next") {
           return true; // can't yet tell if next button's needed at this point, so always pass it's placeholder through
         }
       }
 
-      const query = props.search_text;
+      const query = props.text;
       const group_filter =
         config_groups[option.config_group_index].group_filter;
       const query_matches = group_filter(query, option.data);
@@ -160,12 +153,12 @@ export class BaseTypeahead extends React.Component {
           this.typeahead = ref;
           this.typeahead_node = ReactDOM.findDOMNode(ref);
         }}
-        main_filter="name"
+        labelKey="name"
         paginate={false} // Turn off built in pagination
         placeholder={placeholder}
         minLength={minLength}
         bsSize={bootstrapSize}
-        search_values={all_options} // API's a bit vague here, options is the data to search over, not a config object
+        options={all_options} // API's a bit vague here, options is the data to search over, not a config object
         filterBy={filterBy}
         // API's a bit vague here, this onChange is "on change" set of options selected from the typeahead dropdown. Selected is an array of selected items,
         // but BaseTypeahead will only ever use single selection, so just picking the first (and, we'd expect, only) item and passing it to onSelect is fine
@@ -190,7 +183,7 @@ export class BaseTypeahead extends React.Component {
         // This is "on change" to the input in the text box
         onInputChange={(text) => {
           this.reset_pagination();
-          // this.refresh_dropdown_menu();
+          this.refresh_dropdown_menu();
           debounceOnNewQuery(text);
         }}
         // receives events selecting an option with the pagination_placeholder: true property
@@ -307,7 +300,7 @@ export class BaseTypeahead extends React.Component {
                               position={index}
                               option={result}
                             >
-                              {result.menu_content(menuProps.search_text)}
+                              {result.menu_content(menuProps.text)}
                             </MenuItem>
                           );
                         }),
