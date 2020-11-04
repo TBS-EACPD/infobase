@@ -37,6 +37,10 @@ export async function connect_db() {
     .then(() => console.log("MongoDB connected"));
 }
 
+export function get_db_connection_status() {
+  return mongoose.connection.states[mongoose.connection.readyState];
+}
+
 export async function drop_db() {
   return await mongoose.connection.db.dropDatabase();
 }

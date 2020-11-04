@@ -7,7 +7,7 @@ import _ from "lodash";
 const quiet_failing_json_parse = (json_string) => {
   try {
     return JSON.parse(json_string);
-  } catch (erro) {
+  } catch (error) {
     return {};
   }
 };

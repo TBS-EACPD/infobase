@@ -6,14 +6,18 @@ import cors from "cors";
 import depthLimit from "graphql-depth-limit";
 
 import { create_models, create_schema } from "./models/index.js";
-import { connect_db } from "./db_utils.js";
+import { connect_db, get_db_connection_status } from "./db_utils.js";
 import {
   convert_GET_with_compressed_query_to_POST,
   get_log_object_for_request,
 } from "./server_utils.js";
 
 create_models();
-connect_db();
+
+connect_db().catch((err) => {
+  console.error(err);
+  // just logging, not trying to recover here. DB connection is reattempted per-request below
+});
 
 const schema = create_schema();
 const app = express();
@@ -50,6 +54,16 @@ app.use("/", function (req, res, next) {
   }
 });
 
+// reassert DB connection
+app.use("/", (req, res, next) => {
+  if (!_.includes(["connected", "connecting"], get_db_connection_status())) {
+    console.log("Initial MongoDB connection lost, attempting reconnection");
+    connect_db().catch(next);
+  }
+
+  next();
+});
+
 app.use(
   "/",
   expressGraphQL(() => ({
@@ -59,5 +73,10 @@ app.use(
     validationRules: [depthLimit(15)],
   }))
 );
+
+app.use(function (err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send("Internal server error");
+});
 
 module.exports = app;
