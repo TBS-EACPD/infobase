@@ -15,10 +15,17 @@ export class DropdownMenu extends React.Component {
     const { isOpen } = this.state;
     if (isOpen) {
       this.refs.dropdown_area.focus();
-    } else {
-      this.refs.toggle_dropdown_button.focus();
     }
   }
+  close_dropdown = () =>
+    this.setState(
+      (prev_state) => {
+        return { isOpen: !prev_state.isOpen };
+      },
+      () => {
+        !this.state.isOpen && this.refs.toggle_dropdown_button.focus();
+      }
+    );
   render() {
     const {
       dropdown_content,
@@ -43,9 +50,7 @@ export class DropdownMenu extends React.Component {
           }
           ref={"toggle_dropdown_button"}
           style={{ marginRight: 5, height: "100%" }}
-          onClick={() => {
-            this.setState({ isOpen: !isOpen });
-          }}
+          onClick={this.close_dropdown}
           title={button_description}
         >
           {isOpen ? (
@@ -77,7 +82,7 @@ export class DropdownMenu extends React.Component {
           )}
         >
           {dropdown_content}
-          <button onClick={() => this.setState({ isOpen: !isOpen })}>
+          <button onClick={this.close_dropdown}>
             {`${trivial_text_maker("close")} ${aria_label}`}
           </button>
         </div>
