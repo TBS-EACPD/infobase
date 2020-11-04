@@ -13,7 +13,11 @@ import {
   make_email_body_from_completed_template,
 } from "./template_utils";
 
-import { get_db_connection_status, connect_db, log_email_and_meta_to_db } from "./db_utils";
+import {
+  get_db_connection_status,
+  connect_db,
+  log_email_and_meta_to_db,
+} from "./db_utils";
 
 import { throttle_requests_by_client } from "./throttle_requests_by_client.js";
 
@@ -25,15 +29,13 @@ const log_error_case = (request, error_message) => {
   const request_content = get_request_content(request);
   //eslint-disable-next-line no-console
   console.error(
-    JSON.stringify(
-      {
-        ..._.pickBy({
-          log_message,
-          request_content,
-        }),
-        sha: process.env.CURRENT_SHA || "dev, no sha env var set",
-      },
-    )
+    JSON.stringify({
+      ..._.pickBy({
+        log_message,
+        request_content,
+      }),
+      sha: process.env.CURRENT_SHA || "dev, no sha env var set",
+    })
   );
 };
 
@@ -91,7 +93,7 @@ const make_email_backend = (templates) => {
       console.warn("Initial MongoDB connection lost, attempting reconnection");
       connect_db().catch(next);
     }
-  
+
     next();
   });
 
@@ -120,7 +122,6 @@ const make_email_backend = (templates) => {
         log_error_case(request, error_message);
         return null;
       } else {
-
         const email_config = get_email_config();
         const email_subject = make_email_subject_from_completed_template(
           original_template,
@@ -131,7 +132,9 @@ const make_email_backend = (templates) => {
           completed_template
         );
 
-        const transport_config = await get_transport_config().catch(console.error);
+        const transport_config = await get_transport_config().catch(
+          console.error
+        );
         if (!_.isUndefined(transport_config)) {
           const transporter = nodemailer.createTransport(transport_config);
 

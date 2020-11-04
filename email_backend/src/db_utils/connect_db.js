@@ -23,5 +23,5 @@ export const connect_db = async () => {
       useNewUrlParser: true,
       poolSize: 10,
     })
-    .then(() => console.log("MongoDB connected"))
+    .then(() => console.log("MongoDB connected"));
 };
