@@ -12,6 +12,7 @@ import "./Typeahead.scss";
 export class Typeahead extends React.Component {
   state = {
     search_text: "",
+    cursor: -1,
   };
 
   constructor(props) {
@@ -23,7 +24,17 @@ export class Typeahead extends React.Component {
   update_search_text = (event) => {
     const { onInputChange } = this.props;
     onInputChange();
-    this.setState({ search_text: event.target.value });
+    this.setState({ search_text: event.target.value, cusor: -1 });
+  };
+
+  handleKeyDown = (e) => {
+    const { cursor } = this.state;
+
+    if (e.keyCode === 38) {
+      this.setState((prevState) => ({ cursor: prevState.cursor - 1 }));
+    } else if (e.keyCode === 40) {
+      this.setState((prevState) => ({ cursor: prevState.cursor + 1 }));
+    }
   };
 
   render() {
