@@ -1,13 +1,12 @@
-import { OverlayTrigger, Popover } from "react-bootstrap";
-import MediaQuery from "react-responsive";
+import { get_static_url } from "../request_utils.js";
 
 import { breakpoints } from "../core/breakpoint_defs.js";
 
 import { IconFilter } from "../icons/icons.js";
 
-import { get_static_url } from "../request_utils.js";
-
 import "./Typeahead.scss";
+import MediaQuery from "react-responsive";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 
 export class Typeahead extends React.Component {
   state = {
@@ -35,6 +34,7 @@ export class Typeahead extends React.Component {
       minLength,
       filter_content,
     } = this.props;
+    console.log(filter_content);
 
     const refresh_dropdown_menu = () => {
       this.forceUpdate();
