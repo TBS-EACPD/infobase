@@ -1,7 +1,16 @@
+import { log_standard_event } from "./core/analytics.js";
+
 const email_backend_url =
   window.is_dev && !window.is_ci
     ? `http://${window.local_ip || "127.0.0.1"}:7331`
     : "https://us-central1-report-a-problem-email-244220.cloudfunctions.net/prod-email-backend";
+
+const log_error_to_analytics = (error_message) =>
+  log_standard_event({
+    SUBAPP: window.location.hash.replace("#", ""),
+    MISC1: "EMAIL_BACKEND_ERROR",
+    MISC2: error_message,
+  });
 
 const format_error_as_email_template = (error_message) => ({
   error: {
@@ -22,7 +31,7 @@ const get_email_template_names = () =>
   })
     .then((resp) => resp.text())
     .catch((error) => {
-      console.log(error); // eslint-disable-line no-console
+      log_error_to_analytics(error); // eslint-disable-line no-console
       return [];
     });
 
@@ -34,9 +43,15 @@ const get_email_template = (template_name) =>
     .then((resp) =>
       /2[0-9][0-9]/.test(resp.status)
         ? resp.json()
-        : resp.text().then(format_error_as_email_template)
+        : resp.text().then((error) => {
+            log_error_to_analytics(error);
+            return format_error_as_email_template(error);
+          })
     )
-    .catch(format_error_as_email_template);
+    .catch((error) => {
+      log_error_to_analytics(error);
+      return format_error_as_email_template(error);
+    });
 
 const send_completed_email_template = (template_name, completed_template) =>
   fetch(`${email_backend_url}/submit_email`, {
@@ -47,12 +62,18 @@ const send_completed_email_template = (template_name, completed_template) =>
       template_name,
       completed_template,
     }),
-  }).then((resp) =>
-    resp.text().then((error_message) => ({
-      success: /2[0-9][0-9]/.test(resp.status),
-      error_message: error_message,
-    }))
-  );
+  })
+    .then((resp) =>
+      resp.text().then((response_text) => {
+        const is_error = /2[0-9][0-9]/.test(resp.status);
+        is_error && log_error_to_analytics(response_text);
+        return {
+          success: is_error,
+          error_message: is_error ? response_text : "",
+        };
+      })
+    )
+    .catch(log_error_to_analytics);
 
 export {
   get_email_template_names,
