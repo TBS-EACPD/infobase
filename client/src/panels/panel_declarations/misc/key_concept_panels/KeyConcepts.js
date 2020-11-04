@@ -52,6 +52,32 @@ class KeyConcepts_ extends React.Component {
     };
   }
 
+  componentDidMount() {
+    window.addEventListener("scroll", () => {
+      const keyConceptsContainerTop = this.keyConceptsContainerRef.current.getBoundingClientRect()
+        .top;
+      if (keyConceptsContainerTop < 0) {
+        !this.state.key_concepts_out_of_view &&
+          this.setState({ key_concepts_out_of_view: true });
+      } else {
+        this.state.key_concepts_out_of_view &&
+          this.setState({ key_concepts_out_of_view: false });
+      }
+    });
+
+    this.setState({
+      key_concepts_width: this.keyConceptsContainerRef.current.offsetWidth,
+    });
+
+    const key_concepts_observer = new ResizeObserver((entries) => {
+      this.setState({
+        key_concepts_width: this.keyConceptsContainerRef.current.offsetWidth,
+      });
+    });
+
+    key_concepts_observer.observe(this.keyConceptsContainerRef.current);
+  }
+
   render() {
     const { rendered_q_a_keys, subject } = this.props;
 
@@ -114,32 +140,6 @@ class KeyConcepts_ extends React.Component {
         </MediaQuery>
       </div>
     );
-  }
-
-  componentDidMount() {
-    window.addEventListener("scroll", () => {
-      const keyConceptsContainerTop = this.keyConceptsContainerRef.current.getBoundingClientRect()
-        .top;
-      if (keyConceptsContainerTop < 0) {
-        !this.state.key_concepts_out_of_view &&
-          this.setState({ key_concepts_out_of_view: true });
-      } else {
-        this.state.key_concepts_out_of_view &&
-          this.setState({ key_concepts_out_of_view: false });
-      }
-    });
-
-    this.setState({
-      key_concepts_width: this.keyConceptsContainerRef.current.offsetWidth,
-    });
-
-    const key_concepts_observer = new ResizeObserver((entries) => {
-      this.setState({
-        key_concepts_width: this.keyConceptsContainerRef.current.offsetWidth,
-      });
-    });
-
-    key_concepts_observer.observe(this.keyConceptsContainerRef.current);
   }
 }
 
