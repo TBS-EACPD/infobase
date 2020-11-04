@@ -1,11 +1,12 @@
 import "./BaseTypeahead.scss";
 
+import { Typeahead } from "./Typeahead.js";
+
 import { TM } from "../components/TextMaker.js";
 import { log_standard_event } from "../core/analytics.js";
 import { create_text_maker } from "../models/text.js";
 
 import { InfoBaseHighlighter } from "./search_utils.js";
-import { Typeahead } from "./Typeahead.js";
 
 import text from "./BaseTypeahead.yaml";
 
@@ -310,7 +311,10 @@ export class BaseTypeahead extends React.Component {
                             className="dropdown-item"
                             role="button"
                             onClick={(e) => {
+                              console.log(this.pagination_index);
                               this.pagination_index++;
+                              console.log(this.pagination_index);
+
                               menuProps.refresh_dropdown_menu();
                             }}
                           >

@@ -24,6 +24,8 @@ import { BubbleMenu } from "./BubbleMenu.js";
 import { infograph_href_template } from "./infographic_link.js";
 
 import text from "./Infographic.yaml";
+import { Typeahead } from "src/search/Typeahead";
+import { Fragment } from "react";
 
 const sub_app_name = "infographic_org";
 
@@ -226,9 +228,14 @@ class InfoGraph_ extends React.Component {
           </div>
         )}
         {!window.is_a11y_mode && (
-          <div className="row infographic-search-container">
-            {search_component}
-          </div>
+          <Fragment>
+            <div className="row infographic-search-container">
+              {search_component}
+            </div>
+            <div className="infographic-search-container">
+              <Typeahead />
+            </div>
+          </Fragment>
         )}
         <div>
           <div>
