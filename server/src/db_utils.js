@@ -21,22 +21,22 @@ function get_connection_str() {
   }
 }
 
-// Connect to MongoDB with Mongoose.
+// Connect to MongoDB with Mongoose. Note that this is async, but generally doesn't need to be awaited when called.
+// It's safe to let the connection happen fully async because further mongoose opperations are also async and will
+// buffer until the connection's made
 export async function connect_db() {
   return await mongoose
     .connect(get_connection_str(), {
       useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 7500,
+      heartbeatFrequencyMS: 10000,
       useCreateIndex: true,
       useNewUrlParser: true,
       poolSize: 10,
     })
-    .then(() => console.log("MongoDB connected"))
-    .catch((err) => {
-      console.log(err);
-    });
+    .then(() => console.log("MongoDB connected"));
 }
 
-//make sure this is called after connect_db()
 export async function drop_db() {
   return await mongoose.connection.db.dropDatabase();
 }
