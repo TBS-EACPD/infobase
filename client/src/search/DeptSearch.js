@@ -1,8 +1,7 @@
 import { withRouter } from "react-router";
 
+import { BaseTypeahead } from "./BaseTypeahead.js";
 import { make_orgs_search_config, all_dp_orgs } from "./search_configs.js";
-
-import { Typeahead } from "./Typeahead.js";
 
 class DeptSearchWithoutRouter extends React.Component {
   render() {
@@ -30,7 +29,7 @@ class DeptSearchWithoutRouter extends React.Component {
         });
 
     return (
-      <Typeahead
+      <BaseTypeahead
         onNewQuery={onNewQuery}
         placeholder={placeholder}
         search_configs={[search_config]}
