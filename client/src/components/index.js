@@ -67,3 +67,8 @@ export {
   DlItem,
   MultiColumnList,
 } from "./misc_util_components.js";
+
+export { DeptSearch, DeptSearchWithoutRouter } from "../search/DeptSearch.js";
+export { GlossarySearch } from "../search/GlossarySearch.js";
+export { EverythingSearch } from "../search/EverythingSearch.js";
+export { AdvancedSearch } from "../search/AdvancedSearch.js";
