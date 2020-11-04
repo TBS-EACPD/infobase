@@ -66,27 +66,20 @@ export class TypeaheadMenu extends React.Component {
                   >
                     {config_groups[group_index].group_header}
                   </ListGroupItem>,
-                  <div
-                    role="group"
-                    aria-label={config_groups[group_index].group_header}
-                  >
-                    {[
-                      ..._.map(results, (result) => {
-                        const index = index_key_counter++;
-                        return (
-                          <ListGroupItem
-                            key={index}
-                            id={`rbt-menu-item-${index}`}
-                            aria-selected
-                            className="dropdown-item"
-                            onClick={() => menu_item_selected(result)}
-                          >
-                            {result.menu_content(search_text)}
-                          </ListGroupItem>
-                        );
-                      }),
-                    ]}
-                  </div>,
+                  ..._.map(results, (result) => {
+                    const index = index_key_counter++;
+                    return (
+                      <ListGroupItem
+                        key={index}
+                        id={`rbt-menu-item-${index}`}
+                        aria-selected
+                        className="dropdown-item"
+                        onClick={() => menu_item_selected(result)}
+                      >
+                        {result.menu_content(search_text)}
+                      </ListGroupItem>
+                    );
+                  }),
                 ]),
                 <ListGroupItem
                   key={total_matching_results + 1}
