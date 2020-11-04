@@ -90,14 +90,16 @@ export class TypeaheadMenu extends React.Component {
                     ]}
                   </div>,
                 ]),
-                <ListGroupItem
-                  key={total_matching_results + 1}
-                  id={`rbt-menu-item-${total_matching_results + 1}`}
-                  className="rbt-menu-pagination-option rbt-menu-pagination-option--next dropdown-item"
-                  onClick={hide_menu}
-                >
-                  Close menu
-                </ListGroupItem>,
+                <div>
+                  <ListGroupItem
+                    key={total_matching_results + 1}
+                    id={`rbt-menu-item-${total_matching_results + 1}`}
+                    className="rbt-menu-close-menu-button dropdown-item"
+                    onClick={hide_menu}
+                  >
+                    Close menu
+                  </ListGroupItem>
+                </div>,
               ];
             })
             .value()}
