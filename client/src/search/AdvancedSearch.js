@@ -69,12 +69,7 @@ export class AdvancedSearch extends React.Component {
   render() {
     const optional_configs = this.state;
 
-    const {
-      everything_search_config,
-      invariant_configs,
-      onNewQuery,
-      include_gov,
-    } = this.props;
+    const { everything_search_config, invariant_configs } = this.props;
 
     const include_configs = {
       ...optional_configs,
@@ -170,12 +165,7 @@ export class AdvancedSearch extends React.Component {
       <div>
         <div className="col-md-12">
           <EverythingSearch
-            {...{
-              ...everything_search_config,
-              ...include_configs,
-              onNewQuery,
-              include_gov,
-            }}
+            {...{ ...everything_search_config, ...include_configs }}
             filter_content={
               <fieldset>
                 <legend>{text_maker("advanced_search_description")}:</legend>
