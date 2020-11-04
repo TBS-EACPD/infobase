@@ -6,7 +6,6 @@ import { IconFilter } from "../icons/icons.js";
 
 import "./Typeahead.scss";
 import MediaQuery from "react-responsive";
-import { OverlayTrigger, Popover } from "react-bootstrap";
 
 export class Typeahead extends React.Component {
   state = {
@@ -32,9 +31,7 @@ export class Typeahead extends React.Component {
       renderMenu,
       filterBy,
       minLength,
-      filter_content,
     } = this.props;
-    console.log(filter_content);
 
     const refresh_dropdown_menu = () => {
       this.forceUpdate();
@@ -64,38 +61,27 @@ export class Typeahead extends React.Component {
             onChange={this.update_search_text}
             ref={this.typeaheadRef}
           />
-          {filter_content ? (
-            <OverlayTrigger
-              trigger="click"
-              rootClose
-              placement="bottom"
-              overlay={
-                <Popover style={{ maxWidth: "100%" }}>{filter_content}</Popover>
-              }
-            >
-              <button
-                className="btn btn-ib-primary"
+          <button
+            className="btn btn-ib-primary"
+            style={{
+              textAlign: "start",
+              whiteSpace: "nowrap",
+              paddingLeft: "0.5rem",
+            }}
+          >
+            <MediaQuery minWidth={breakpoints.minSmallDevice}>
+              <div
                 style={{
-                  textAlign: "start",
                   whiteSpace: "nowrap",
-                  paddingLeft: "0.5rem",
+                  display: "inline-block",
+                  marginRight: "1.5rem",
                 }}
               >
-                <MediaQuery minWidth={breakpoints.minSmallDevice}>
-                  <div
-                    style={{
-                      whiteSpace: "nowrap",
-                      display: "inline-block",
-                      marginRight: "1.5rem",
-                    }}
-                  >
-                    <IconFilter height="5px" width="5px" vertical_align="top" />
-                  </div>
-                </MediaQuery>
-                <span>Filter</span>
-              </button>
-            </OverlayTrigger>
-          ) : null}
+                <IconFilter height="5px" width="5px" vertical_align="top" />
+              </div>
+            </MediaQuery>
+            <span>Filter</span>
+          </button>
         </div>
         {search_text.length >= minLength &&
           renderMenu(filtered_results, {

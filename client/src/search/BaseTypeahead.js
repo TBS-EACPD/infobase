@@ -40,7 +40,6 @@ export class BaseTypeahead extends React.Component {
       onNewQuery,
       onSelect,
       search_configs,
-      filter_content,
     } = this.props;
 
     const bootstrapSize = large ? "large" : "small";
@@ -331,7 +330,6 @@ export class BaseTypeahead extends React.Component {
             );
           }
         }}
-        filter_content={filter_content}
       />
     );
   }

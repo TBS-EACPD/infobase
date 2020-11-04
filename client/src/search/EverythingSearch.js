@@ -15,6 +15,7 @@ import {
   glossary_lite as glossary_lite_search_config,
 } from "./search_configs.js";
 
+
 const get_tag_search_configs = (
   include_tags_goco,
   include_tags_hi,
@@ -53,8 +54,6 @@ const EverythingSearch = withRouter(
 
         include_tables,
         include_glossary,
-
-        filter_content,
       } = this.props;
 
       let { onSelect } = this.props;
@@ -106,7 +105,6 @@ const EverythingSearch = withRouter(
           search_configs={search_configs}
           onSelect={onSelect}
           large={!!this.props.large}
-          filter_content={filter_content}
         />
       );
     }
