@@ -30,11 +30,6 @@ const { text_maker, TM } = create_text_maker_component([
 ]);
 
 class KeyConcepts_ extends React.Component {
-  state = {
-    sticky: false,
-    should_pin: false,
-    key_concepts_width: null,
-  };
   constructor(props) {
     super(props);
     this.accordionRef = React.createRef(null);
@@ -55,6 +50,7 @@ class KeyConcepts_ extends React.Component {
     this.state = {
       sticky: false,
       should_pin: _.isBoolean(should_pin) ? should_pin : true,
+      key_concepts_width: null,
     };
   }
 
