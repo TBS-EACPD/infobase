@@ -44,10 +44,12 @@ app.use("/", function (req, res, next) {
       req.method === "GET" &&
       !_.isEmpty(req.headers["encoded-compressed-query"])
     ) {
-      console.log(`Request type: ${req.originalUrl}, GET with compressed query`)
+      console.log(
+        `Request type: ${req.originalUrl}, GET with compressed query`
+      );
       convert_GET_with_compressed_query_to_POST(req); // mutates req, changes made persist to subsequent middleware
     } else {
-      console.log(`Request type: ${req.originalUrl}, ${req.method}`)
+      console.log(`Request type: ${req.originalUrl}, ${req.method}`);
     }
 
     // eslint-disable-next-line no-console
