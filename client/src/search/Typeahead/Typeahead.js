@@ -171,7 +171,6 @@ export class Typeahead extends React.Component {
                   style={{
                     textAlign: "start",
                     whiteSpace: "nowrap",
-                    display: "inline-block",
                   }}
                 >
                   <MediaQuery minWidth={breakpoints.minSmallDevice}>
@@ -186,7 +185,6 @@ export class Typeahead extends React.Component {
                         height="5px"
                         width="5px"
                         vertical_align="top"
-                        alternate_color="false"
                       />
                     </div>
                   </MediaQuery>
@@ -194,8 +192,8 @@ export class Typeahead extends React.Component {
                 </div>
               }
               dropdown_close_txt={text_maker("filter")}
-              opened_button_class_name={"btn-ib-light--reversed--with-icon"}
-              closed_button_class_name={"btn-ib-light--with-icon"}
+              closed_button_class_name={"btn btn-ib-primary"}
+              opened_button_class_name={"btn btn-ib-primary"}
               dropdown_content_class_name="no-right"
               dropdown_content={filter_content}
             />
