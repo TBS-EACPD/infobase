@@ -107,10 +107,10 @@ const StatelessPullDownAccordion = ({
           style={{ float: "right", marginLeft: "2rem" }}
           onClick={() => {
             sticky_data.pin_pressed();
-            sticky_data.should_pin && closeAccordion();
+            sticky_data.can_pin && closeAccordion();
           }}
         >
-          {sticky_data.should_pin ? (
+          {sticky_data.can_pin ? (
             <IconPin
               height="25px"
               width="25px"

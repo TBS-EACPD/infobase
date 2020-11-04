@@ -34,22 +34,20 @@ class KeyConcepts_ extends React.Component {
     super(props);
     this.accordionRef = React.createRef(null);
 
-    let should_pin;
+    let can_pin;
     if (has_local_storage) {
       try {
-        should_pin = JSON.parse(
-          localStorage.getItem(`should_pin_key_concepts`)
-        );
+        can_pin = JSON.parse(localStorage.getItem(`can_pin_key_concepts`));
       } catch {
-        should_pin = null;
+        can_pin = null;
       }
     }
 
     this.keyConceptsContainerRef = React.createRef();
 
     this.state = {
-      sticky: false,
-      should_pin: _.isBoolean(should_pin) ? should_pin : true,
+      add_sticky_class: false,
+      can_pin: _.isBoolean(can_pin) ? can_pin : true,
       key_concepts_width: null,
     };
   }
@@ -57,17 +55,18 @@ class KeyConcepts_ extends React.Component {
   render() {
     const { rendered_q_a_keys, subject } = this.props;
 
-    const { sticky, should_pin, key_concepts_width } = this.state;
+    const {
+      add_sticky_class: add_sticky_class,
+      can_pin: can_pin,
+      key_concepts_width,
+    } = this.state;
 
     const sticky_data = {
-      should_pin: should_pin,
+      can_pin: can_pin,
       pin_pressed: () =>
         this.setState((prev_state) => {
-          localStorage.setItem(
-            "should_pin_key_concepts",
-            !prev_state.should_pin
-          );
-          return { should_pin: !prev_state.should_pin };
+          localStorage.setItem("can_pin_key_concepts", !prev_state.can_pin);
+          return { can_pin: !prev_state.can_pin };
         }),
     };
 
@@ -79,7 +78,7 @@ class KeyConcepts_ extends React.Component {
               className={classNames(
                 "mrgn-bttm-md",
                 matches && "mrgn-tp-md",
-                sticky && should_pin && "sticky"
+                add_sticky_class && can_pin && "sticky"
               )}
               style={{
                 width: key_concepts_width,
@@ -109,17 +108,6 @@ class KeyConcepts_ extends React.Component {
                     />
                   </div>
                 </AutoAccordion>
-
-                {/* <Overlay
-                  show={is_showing_tooltip}
-                  target={this.accordionRef.current}
-                  container={this}
-                  placement="right"
-                >
-                  <Popover id="keep_in_mind_tooltip" style={{}}>
-                    {text_maker("click_text")}
-                  </Popover>
-                </Overlay> */}
               </ButtonToolbar>
             </div>
           )}
@@ -133,9 +121,11 @@ class KeyConcepts_ extends React.Component {
       const keyConceptsContainerTop = this.keyConceptsContainerRef.current.getBoundingClientRect()
         .top;
       if (keyConceptsContainerTop < 0) {
-        !this.state.sticky && this.setState({ sticky: true });
+        !this.state.add_sticky_class &&
+          this.setState({ add_sticky_class: true });
       } else {
-        this.state.sticky && this.setState({ sticky: false });
+        this.state.add_sticky_class &&
+          this.setState({ add_sticky_class: false });
       }
     });
 
