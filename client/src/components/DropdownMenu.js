@@ -26,12 +26,12 @@ export class DropdownMenu extends React.Component {
       dropdown_content_class_name,
       button_description,
       dropdown_trigger_txt,
-      dropdown_a11y_txt, //used if the trigger text is not a string object
+      dropdown_raw_txt,
     } = this.props;
     const { isOpen } = this.state;
 
     const aria_label = _.isObject(dropdown_trigger_txt)
-      ? dropdown_a11y_txt
+      ? dropdown_raw_txt
       : dropdown_trigger_txt;
 
     return (
@@ -77,7 +77,11 @@ export class DropdownMenu extends React.Component {
         >
           {dropdown_content}
           <button onClick={() => this.setState({ isOpen: !isOpen })}>
-            {`${trivial_text_maker("close")} ${aria_label}`}
+            {`${trivial_text_maker("close")} ${
+              _.isObject(dropdown_trigger_txt)
+                ? dropdown_raw_txt
+                : dropdown_trigger_txt
+            }`}
           </button>
         </div>
       </div>
