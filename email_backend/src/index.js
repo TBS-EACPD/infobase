@@ -8,7 +8,7 @@ const email_backend = (() => {
 
   // Start connecting to the db early and let it happen fully async. Attempts to write to the DB
   // before the connection is ready will buffer until the connection is made
-  connect_db(); // Note: async func, but not awaited
+  connect_db().catch(console.error); // Note: async func, but not awaited
 
   const email_backend = make_email_backend(templates);
 

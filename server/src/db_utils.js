@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 
 function get_connection_str() {
   if (process.env.USE_REMOTE_DB) {
-    console.log("using remote db");
     const {
       MDB_CONNECT_STRING,
       MDB_USERNAME, // different usernames in read-mode vs populate-mode
