@@ -56,7 +56,7 @@ class KeyConcepts_ extends React.Component {
     const { rendered_q_a_keys, subject } = this.props;
 
     const {
-      key_concepts_out_of_view: key_concepts_out_of_view,
+      key_concepts_out_of_view: key_concepts_out_of_view, //boolean that can be checked for if the container for the key concepts is within view
       can_pin: can_pin,
       key_concepts_width,
     } = this.state;
