@@ -24,5 +24,4 @@ export const connect_db = async () => {
       poolSize: 10,
     })
     .then(() => console.log("MongoDB connected"))
-    .catch(console.log);
 };

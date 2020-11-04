@@ -34,6 +34,7 @@ app.use("/", function (req, res, next) {
     "Content-Type, Authorization, Content-Length, X-Requested-With, encoded-compressed-query"
   );
   if (req.method === "OPTIONS") {
+    console.log("Request type: CORS preflight");
     res.sendStatus(200);
   } else {
     // Often want to use GET to leverage http caching, but some of out longer queries are too long for a query parameter
@@ -43,7 +44,10 @@ app.use("/", function (req, res, next) {
       req.method === "GET" &&
       !_.isEmpty(req.headers["encoded-compressed-query"])
     ) {
+      console.log(`Request type: ${req.originalUrl}, GET with compressed query`)
       convert_GET_with_compressed_query_to_POST(req); // mutates req, changes made persist to subsequent middleware
+    } else {
+      console.log(`Request type: ${req.originalUrl}, ${req.method}`)
     }
 
     // eslint-disable-next-line no-console
@@ -57,7 +61,7 @@ app.use("/", function (req, res, next) {
 // reassert DB connection
 app.use("/", (req, res, next) => {
   if (!_.includes(["connected", "connecting"], get_db_connection_status())) {
-    console.log("Initial MongoDB connection lost, attempting reconnection");
+    console.warn("Initial MongoDB connection lost, attempting reconnection");
     connect_db().catch(next);
   }
 
