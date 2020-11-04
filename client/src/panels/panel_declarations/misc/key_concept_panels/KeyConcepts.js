@@ -46,7 +46,7 @@ class KeyConcepts_ extends React.Component {
     this.keyConceptsContainerRef = React.createRef();
 
     this.state = {
-      add_sticky_class: false,
+      key_concepts_out_of_view: false,
       can_pin: _.isBoolean(can_pin) ? can_pin : true,
       key_concepts_width: null,
     };
@@ -56,7 +56,7 @@ class KeyConcepts_ extends React.Component {
     const { rendered_q_a_keys, subject } = this.props;
 
     const {
-      add_sticky_class: add_sticky_class,
+      key_concepts_out_of_view: key_concepts_out_of_view,
       can_pin: can_pin,
       key_concepts_width,
     } = this.state;
@@ -78,7 +78,7 @@ class KeyConcepts_ extends React.Component {
               className={classNames(
                 "mrgn-bttm-md",
                 matches && "mrgn-tp-md",
-                add_sticky_class && can_pin && "sticky"
+                key_concepts_out_of_view && can_pin && "sticky"
               )}
               style={{
                 width: key_concepts_width,
@@ -121,11 +121,11 @@ class KeyConcepts_ extends React.Component {
       const keyConceptsContainerTop = this.keyConceptsContainerRef.current.getBoundingClientRect()
         .top;
       if (keyConceptsContainerTop < 0) {
-        !this.state.add_sticky_class &&
-          this.setState({ add_sticky_class: true });
+        !this.state.key_concepts_out_of_view &&
+          this.setState({ key_concepts_out_of_view: true });
       } else {
-        this.state.add_sticky_class &&
-          this.setState({ add_sticky_class: false });
+        this.state.key_concepts_out_of_view &&
+          this.setState({ key_concepts_out_of_view: false });
       }
     });
 
