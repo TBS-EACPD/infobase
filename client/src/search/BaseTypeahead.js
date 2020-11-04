@@ -1,10 +1,20 @@
+import "react-bootstrap-typeahead/css/Typeahead.css";
+// Uncomment following line once we've moved to bootstrap4
+// import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
 import "./BaseTypeahead.scss";
+
+import {
+  // Typeahead,
+  Menu,
+  MenuItem,
+} from "react-bootstrap-typeahead";
 
 import { Typeahead } from "./Typeahead.js";
 
 import { TM } from "../components/TextMaker.js";
 import { log_standard_event } from "../core/analytics.js";
 import { create_text_maker } from "../models/text.js";
+import { get_static_url } from "../request_utils.js";
 
 import { InfoBaseHighlighter } from "./search_utils.js";
 
@@ -32,6 +42,22 @@ export class BaseTypeahead extends React.Component {
       this.typeahead.getInstance().focus();
     }
   }
+  // componentDidMount() {
+  //   this.typeahead_node
+  //     .querySelector(".rbt-input-hint-container")
+  //     .insertAdjacentHTML(
+  //       "beforeend",
+  //       `<div class="search-icon-container">
+  //         <span
+  //           aria-hidden="true"
+  //         >
+  //         <img src="${get_static_url(
+  //           "svg/search.svg"
+  //         )}" style="width:30px; height:30px;" />
+  //         </span>
+  //       </div>`
+  //     );
+  // }
   render() {
     const {
       pagination_size,
@@ -63,7 +89,7 @@ export class BaseTypeahead extends React.Component {
     }));
 
     // Options includes placeholders for pagination items, because the number of results passed to renderMenu
-    // (ie. that get through filterBy) needs to actually match the number of lis ultimately rendered, can't
+    // (ie. that get through filterBy) needs to actually match the number of MenuItems ultimately rendered, can't
     // just insert the pagination items when renderMenu is called
     const all_options = [
       {
@@ -109,6 +135,7 @@ export class BaseTypeahead extends React.Component {
     const filterBy = (option, props) => {
       if (option.pagination_placeholder) {
         if (option.paginate_direction === "previous") {
+          console.log(this.pagination_index > 0);
           return this.pagination_index > 0;
         } else if (option.paginate_direction === "next") {
           return true; // can't yet tell if next button's needed at this point, so always pass it's placeholder through
@@ -147,16 +174,16 @@ export class BaseTypeahead extends React.Component {
           if (anything_selected) {
             this.reset_pagination();
 
-            // this.typeahead.getInstance().clear();
+            this.typeahead.getInstance().clear();
 
             if (_.isFunction(onSelect)) {
-              onSelect(selected.data);
+              onSelect(selected[0].data);
             }
 
             log_standard_event({
               SUBAPP: window.location.hash.replace("#", ""),
               MISC1: `TYPEAHEAD_SEARCH_SELECT`,
-              MISC2: `selected: ${selected.name}`,
+              MISC2: `selected: ${selected[0].name}`,
             });
           }
         }}
@@ -196,8 +223,8 @@ export class BaseTypeahead extends React.Component {
             (option) => !_.isUndefined(option.config_group_index)
           );
 
-          const page_range_start = this.pagination_index * pagination_size + 1;
-          const page_range_end = page_range_start + filtered_results.length - 1;
+          const page_range_start = this.pagination_index * pagination_size;
+          const page_range_end = page_range_start + filtered_results.length;
 
           const total_matching_results = this.query_matched_counter;
 
@@ -214,17 +241,17 @@ export class BaseTypeahead extends React.Component {
 
           if (_.isEmpty(filtered_results)) {
             return (
-              <ul className="rbt-menu dropdown-menu show">
+              <Menu {...menuProps}>
                 <li className="disabled">
                   <a className="dropdown-item disabled">
                     {text_maker("no_matches_found")}
                   </a>
                 </li>
-              </ul>
+              </Menu>
             );
           } else {
             return (
-              <ul className="rbt-menu dropdown-menu show">
+              <Menu {...menuProps}>
                 {_.chain(filtered_results)
                   .groupBy("config_group_index")
                   .thru((grouped_results) => {
@@ -239,10 +266,7 @@ export class BaseTypeahead extends React.Component {
 
                     let index_key_counter = needs_pagination_up_control ? 1 : 0;
                     return [
-                      <li
-                        key={`header-pagination-info`}
-                        className="dropdown-header"
-                      >
+                      <Menu.Header key={`header-pagination-info`}>
                         <TextMaker
                           k="paginate_status"
                           args={{
@@ -251,86 +275,66 @@ export class BaseTypeahead extends React.Component {
                             total_matching_results,
                           }}
                         />
-                      </li>,
+                      </Menu.Header>,
                       needs_pagination_up_control && (
-                        <li
+                        <MenuItem
                           key={0}
-                          id={`rbt-menu-item-${pagination_down_item_index}`}
+                          position={0}
+                          option={{
+                            paginationOption: true,
+                            paginate_direction: "previous",
+                            name: "",
+                          }}
                           className="rbt-menu-pagination-option rbt-menu-pagination-option--previous"
                         >
-                          <a
-                            className="dropdown-item"
-                            role="button"
-                            onClick={(e) => {
-                              this.pagination_index--;
-                              menuProps.refresh_dropdown_menu();
-                            }}
-                          >
-                            <span className="aria-hidden">▲</span>
-                            <br />
-                            <TextMaker
-                              k="paginate_previous"
-                              args={{ page_size: pagination_size }}
-                            />
-                          </a>
-                        </li>
+                          <span className="aria-hidden">▲</span>
+                          <br />
+                          <TextMaker
+                            k="paginate_previous"
+                            args={{ page_size: pagination_size }}
+                          />
+                        </MenuItem>
                       ),
                       ..._.flatMap(grouped_results, (results, group_index) => [
-                        <li
-                          key={`header-${group_index}`}
-                          className="dropdown-header"
-                        >
+                        <Menu.Header key={`header-${group_index}`}>
                           {config_groups[group_index].group_header}
-                        </li>,
+                        </Menu.Header>,
                         ..._.map(results, (result) => {
                           const index = index_key_counter++;
                           return (
-                            <li
+                            <MenuItem
                               key={index}
-                              id={`rbt-menu-item-${index}`}
-                              role="option"
+                              position={index}
+                              option={result}
                             >
-                              <a
-                                className="dropdown-item"
-                                role="button"
-                                onClick={() => menuProps.onChange(result)}
-                              >
-                                {result.menu_content(menuProps.search_text)}
-                              </a>
-                            </li>
+                              {result.menu_content(menuProps.search_text)}
+                            </MenuItem>
                           );
                         }),
                       ]),
                       needs_pagination_down_control && (
-                        <li
+                        <MenuItem
                           key={pagination_down_item_index}
-                          id={`rbt-menu-item-${pagination_down_item_index}`}
+                          position={pagination_down_item_index}
+                          option={{
+                            paginationOption: true,
+                            paginate_direction: "next",
+                            name: "",
+                          }}
                           className="rbt-menu-pagination-option rbt-menu-pagination-option--next"
                         >
-                          <a
-                            className="dropdown-item"
-                            role="button"
-                            onClick={(e) => {
-                              console.log(this.pagination_index);
-                              this.pagination_index++;
-                              console.log(this.pagination_index);
-
-                              menuProps.refresh_dropdown_menu();
-                            }}
-                          >
-                            <TextMaker
-                              k="paginate_next"
-                              args={{ next_page_size: next_page_size }}
-                            />
-                            <br />
-                            <span className="aria-hidden">▼</span>
-                          </a>
-                        </li>
+                          <TextMaker
+                            k="paginate_next"
+                            args={{ next_page_size: next_page_size }}
+                          />
+                          <br />
+                          <span className="aria-hidden">▼</span>
+                        </MenuItem>
                       ),
                     ];
                   })
                   .value()}
-              </ul>
+              </Menu>
             );
           }
         }}
