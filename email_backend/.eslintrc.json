@@ -7,7 +7,8 @@
     "node": true
   },
   "rules": {
-      "node/no-unsupported-features": ["error", {"ignores": ["modules"]}]
+      "node/no-unsupported-features": ["error", {"ignores": ["modules"]}],
+      "no-console": 0
   },
   "globals": {
     "_": true,
