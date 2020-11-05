@@ -1,18 +1,12 @@
 import { Fragment } from "react";
-import {
-  TwitterShareButton,
-  TwitterIcon,
-  FacebookShareButton,
-  FacebookIcon,
-  EmailShareButton,
-  EmailIcon,
-  LinkedinShareButton,
-  LinkedinIcon,
-  RedditShareButton,
-  RedditIcon,
-} from "react-share";
 
-import { IconShare } from "../icons/icons.js";
+import {
+  IconShare,
+  IconFacebook,
+  IconTwitter,
+  IconReddit,
+  IconEmail,
+} from "../icons/icons.js";
 import { create_text_maker } from "../models/text.js";
 
 import { StatelessModal } from "./modals_and_popovers";
@@ -22,6 +16,16 @@ import "./ShareButton.scss";
 
 const text_maker = create_text_maker(text);
 
+const CommonSocialMediaShareButton = ({ complete_url, media_icon }) => (
+  <a
+    href={complete_url}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="link-unstyled"
+  >
+    {media_icon}
+  </a>
+);
 export class ShareButton extends React.Component {
   constructor(props) {
     super();
@@ -46,6 +50,12 @@ export class ShareButton extends React.Component {
       icon_alternate_color,
       icon_size,
     } = this.props;
+
+    const common_icon_props = {
+      width: "50px",
+      height: "50px",
+    };
+    const hashtag_replaced_url = _.replace(url, "#", "%23");
 
     return (
       <Fragment>
@@ -77,25 +87,42 @@ export class ShareButton extends React.Component {
           subtitle={title}
           body={
             <Fragment>
-              <FacebookShareButton className="share-icons" url={url}>
-                <FacebookIcon size={32} />
-              </FacebookShareButton>
-              <TwitterShareButton className="share-icons" url={url}>
-                <TwitterIcon size={32} />
-              </TwitterShareButton>
-              <EmailShareButton className="share-icons" url={url}>
-                <EmailIcon size={32} />
-              </EmailShareButton>
-              <LinkedinShareButton className="share-icons" url={url}>
-                <LinkedinIcon size={32} />
-              </LinkedinShareButton>
-              <RedditShareButton
-                className="share-icons"
-                url={url}
-                title={title}
-              >
-                <RedditIcon size={32} />
-              </RedditShareButton>
+              <CommonSocialMediaShareButton
+                complete_url={`https://www.facebook.com/sharer/sharer.php?u=${hashtag_replaced_url}`}
+                media_icon={
+                  <IconFacebook
+                    {...common_icon_props}
+                    title={`${text_maker("share_on")} Facebook`}
+                  />
+                }
+              />
+              <CommonSocialMediaShareButton
+                complete_url={`https://twitter.com/intent/tweet?url=${hashtag_replaced_url}`}
+                media_icon={
+                  <IconTwitter
+                    {...common_icon_props}
+                    title={`${text_maker("share_on")} Twitter`}
+                  />
+                }
+              />
+              <CommonSocialMediaShareButton
+                complete_url={`https://www.reddit.com/submit?url=${hashtag_replaced_url}&title=${title}`}
+                media_icon={
+                  <IconReddit
+                    {...common_icon_props}
+                    title={`${text_maker("share_on")} Reddit`}
+                  />
+                }
+              />
+              <CommonSocialMediaShareButton
+                complete_url={`mailto:?subject=${title}&body=${hashtag_replaced_url}`}
+                media_icon={
+                  <IconEmail
+                    {...common_icon_props}
+                    title={text_maker("share_via_email")}
+                  />
+                }
+              />
             </Fragment>
           }
           close_text={text_maker("cancel")}
