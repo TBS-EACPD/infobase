@@ -12,7 +12,6 @@ import {
   parent_fkey_type,
 } from "../model_utils.js";
 
-
 export default function define_core_subjects(model_singleton) {
   const OrgSchema = new mongoose.Schema({
     org_id: pkey_type(),

@@ -7,7 +7,6 @@ const _ = require("lodash");
 
 const { people_years } = require("../constants.js");
 
-
 const common_org_and_gov_queries = `
   employee_type_data(dimension: Type = all_dimensions): HeadcountData
   employee_type_info: EmployeeTypeInfo
