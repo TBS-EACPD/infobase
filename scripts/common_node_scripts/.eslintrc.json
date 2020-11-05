@@ -2,37 +2,11 @@
   "plugins": [
     "node"
   ],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
-    },
-    "ecmaVersion": 2017
+  "extends": [ "../../.eslintrc.json", "plugin:node/recommended" ],
+  "env": {
+    "node": true
   },
-  "extends": [ "eslint:recommended", "plugin:node/recommended" ],
   "rules": {
-      "node/no-unsupported-features": ["error", {"ignores": ["modules"]}],
-      "indent": [
-          "warn",
-          2,
-          {
-            "SwitchCase" : 1,
-            "ignoredNodes": ["ConditionalExpression"],
-            "flatTernaryExpressions": true
-          }
-      ],
-      "comma-dangle":[ "warn", "always-multiline" ],
-      "linebreak-style": [
-          "off",
-          "unix"
-      ],
-      "semi": [
-          "off",
-          "always"
-      ],
-      "no-unused-vars": [
-        "warn",
-        { "args": "none" }
-      ],
-      "no-extra-semi": ["off"]
+      "node/no-unsupported-features": ["error", {"ignores": ["modules"]}]
   }
 }
