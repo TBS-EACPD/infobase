@@ -4,6 +4,7 @@ import { StandardRouteContainer } from "../core/NavComponents";
 
 import { EstimatesExplorer } from "./scheme.js";
 import { text_maker, TM } from "./utils.js";
+
 import "./EstimatesComparison.scss";
 
 export default class EstimatesComparison extends React.Component {

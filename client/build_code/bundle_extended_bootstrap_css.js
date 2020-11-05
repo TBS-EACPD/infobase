@@ -4,8 +4,8 @@ const path = require("path");
 const webpack = require("webpack");
 
 function bundle_extended_bootstrap_css(app_dir) {
-  const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
   const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+  const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
   const FilterChunkWebpackPlugin = require("filter-chunk-webpack-plugin");
 
   const config = {
@@ -18,13 +18,8 @@ function bundle_extended_bootstrap_css(app_dir) {
       path: path.resolve(__dirname, `../${app_dir}`),
     },
     optimization: {
-      minimizer: [
-        new OptimizeCSSAssetsPlugin({
-          cssProcessorPluginOptions: {
-            preset: ["default"],
-          },
-        }),
-      ],
+      minimize: true,
+      minimizer: [...new CssMinimizerPlugin({ parallel: true })],
       sideEffects: false,
     },
     module: {

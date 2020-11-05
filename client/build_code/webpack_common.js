@@ -2,8 +2,9 @@ const std_lib_path = require("path");
 
 const { BundleStatsWebpackPlugin } = require("bundle-stats");
 const CircularDependencyPlugin = require("circular-dependency-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
 const _ = require("lodash");
-const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
 
 const CDN_URL = process.env.CDN_URL || ".";
@@ -44,9 +45,6 @@ const get_rules = ({ should_use_babel, language, is_prod_build }) => {
         ],
       },
     },
-    {
-      loader: "eslint-loader",
-    },
   ];
 
   return [
@@ -62,12 +60,12 @@ const get_rules = ({ should_use_babel, language, is_prod_build }) => {
       use: js_module_loader_rules,
       sideEffects: true,
     },
-    {
+    /*{
       // node modules that specifically require transpilation...
       include: /node_modules\/(graphiql|graphql-language-service-.*|codemirror-graphql|codemirror)/,
       test: /\.js$/,
       use: js_module_loader_rules,
-    },
+    },*/
     {
       test: /\.css$/,
       use: [
@@ -145,6 +143,7 @@ function get_plugins({
       IS_CI: JSON.stringify(is_ci),
       LOCAL_IP: JSON.stringify(local_ip),
     }),
+    new ESLintPlugin(),
     new CircularDependencyPlugin({
       exclude: /node_modules/,
       onDetected({ module: webpackModuleRecord, paths, compilation }) {
@@ -194,10 +193,12 @@ function get_optimizations(is_prod_build, bundle_stats) {
       // so not desired in prod builds for deploy puposes
       moduleIds: bundle_stats ? "named" : "size",
       chunkIds: bundle_stats ? "named" : "size",
-      minimizer: [new UglifyJSPlugin({ sourceMap: false })],
+      minimize: true,
+      minimizer: [new TerserPlugin({ sourceMap: false, parallel: true })],
       splitChunks: {
         // default is 5, but that left us with insufficient granularity in chunks and lead to duplication of code between bundles
         maxAsyncRequests: 20,
+        chunks: "all",
       },
     };
   } else {
