@@ -1,10 +1,12 @@
-const _ = require("lodash");
-const { people_years } = require("../constants.js");
-
 import {
   camel_case_headcount_model_names,
   snake_case_headcount_model_names,
 } from "./headcount_model_utils.js";
+
+const _ = require("lodash");
+
+const { people_years } = require("../constants.js");
+
 
 const common_org_and_gov_queries = `
   employee_type_data(dimension: Type = all_dimensions): HeadcountData

@@ -1,6 +1,7 @@
-import _ from "lodash";
 import { readdirSync, readFileSync } from "fs";
 import path from "path";
+
+import _ from "lodash";
 
 const get_templates = () => {
   const templates_path = path.join(__dirname, "../../templates");

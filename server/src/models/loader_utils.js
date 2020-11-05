@@ -1,5 +1,5 @@
-import _ from "lodash";
 import DataLoader from "dataloader";
+import _ from "lodash";
 
 // we need to return matched rows from this loader grouped and ordered by the ids that were matched on
 // BUT the target foreign key attr may be a path to a subdocument's foreign key (so we need depth in our group by), and

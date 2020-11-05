@@ -1,23 +1,23 @@
-import express from "express";
 import body_parser from "body-parser";
 import compression from "compression";
 import cors from "cors";
-import nodemailer from "nodemailer";
+import express from "express";
 import _ from "lodash";
+import nodemailer from "nodemailer";
 
-import { get_transport_config, get_email_config } from "./email_utils";
 
-import {
-  validate_completed_template,
-  make_email_subject_from_completed_template,
-  make_email_body_from_completed_template,
-} from "./template_utils";
 
 import {
   get_db_connection_status,
   connect_db,
   log_email_and_meta_to_db,
 } from "./db_utils";
+import { get_transport_config, get_email_config } from "./email_utils";
+import {
+  validate_completed_template,
+  make_email_subject_from_completed_template,
+  make_email_body_from_completed_template,
+} from "./template_utils";
 
 import { throttle_requests_by_client } from "./throttle_requests_by_client.js";
 

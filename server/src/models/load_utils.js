@@ -1,7 +1,9 @@
-const _ = require("lodash");
 const fs = require("fs");
-const { csvParseRows, csvParse } = require("d3-dsv");
+
 const path = require("path");
+
+const { csvParseRows, csvParse } = require("d3-dsv");
+const _ = require("lodash");
 
 const data_dir_path = `../data/${
   (process.env.USE_TEST_DATA && "test-data/") || ""

@@ -2,16 +2,16 @@ import _ from "lodash";
 import mongoose from "mongoose";
 
 import {
+  create_resource_by_foreignkey_attr_dataloader,
+  create_resource_by_id_attr_dataloader,
+} from "../loader_utils.js";
+import {
   str_type,
   bilingual,
   pkey_type,
   parent_fkey_type,
 } from "../model_utils.js";
 
-import {
-  create_resource_by_foreignkey_attr_dataloader,
-  create_resource_by_id_attr_dataloader,
-} from "../loader_utils.js";
 
 export default function define_core_subjects(model_singleton) {
   const OrgSchema = new mongoose.Schema({

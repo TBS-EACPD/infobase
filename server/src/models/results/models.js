@@ -2,6 +2,10 @@ import _ from "lodash";
 import mongoose from "mongoose";
 
 import {
+  create_resource_by_foreignkey_attr_dataloader,
+  create_resource_by_id_attr_dataloader,
+} from "../loader_utils.js";
+import {
   str_type,
   number_type,
   bilingual,
@@ -12,10 +16,6 @@ import {
 
 import { drr_docs, dp_docs } from "./results_common.js";
 
-import {
-  create_resource_by_foreignkey_attr_dataloader,
-  create_resource_by_id_attr_dataloader,
-} from "../loader_utils.js";
 
 export default function (model_singleton) {
   const ResultSchema = mongoose.Schema({

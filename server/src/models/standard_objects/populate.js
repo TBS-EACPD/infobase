@@ -1,10 +1,11 @@
 import _ from "lodash";
+
+import { public_account_years } from "../constants";
 import {
   get_standard_csv_file_rows,
   create_program_id,
 } from "../load_utils.js";
 
-import { public_account_years } from "../constants";
 
 export default function ({ models }) {
   const csv_prog_records = get_standard_csv_file_rows("program_sobjs.csv");

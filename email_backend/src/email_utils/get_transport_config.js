@@ -1,5 +1,5 @@
-import nodemailer from "nodemailer";
 import { google } from "googleapis";
+import nodemailer from "nodemailer";
 const OAuth2 = google.auth.OAuth2;
 
 const get_prod_auth = async () => {
