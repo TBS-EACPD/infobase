@@ -11,7 +11,6 @@ import {
   bilingual,
 } from "../model_utils.js";
 
-
 export default function (model_singleton) {
   const ServiceStandardSchema = mongoose.Schema({
     standard_id: pkey_type(),

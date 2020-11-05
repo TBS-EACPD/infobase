@@ -16,7 +16,6 @@ import {
 
 import { drr_docs, dp_docs } from "./results_common.js";
 
-
 export default function (model_singleton) {
   const ResultSchema = mongoose.Schema({
     result_id: pkey_type(),
