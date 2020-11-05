@@ -73,9 +73,14 @@ nodemailer.createTransport.mockImplementation((transport_config) => {
 });
 
 // not going to run a db for these end to end tests, mock away attempts to use it
-jest.mock("./db_utils/index.js"); // eslint-disable-line no-undef
-import { connect_db, log_email_and_meta_to_db } from "./db_utils";
-connect_db.mockImplementation(_.noop);
+jest.mock("./db_utils"); // eslint-disable-line no-undef
+import {
+  connect_db,
+  get_db_connection_status,
+  log_email_and_meta_to_db,
+} from "./db_utils";
+connect_db.mockImplementation(() => ({ catch: _.noop }));
+get_db_connection_status.mockImplementation(() => "connected");
 const mock_log_email_and_meta_to_db = log_email_and_meta_to_db.mockImplementation(
   () => ({ catch: _.noop })
 );
