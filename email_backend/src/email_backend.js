@@ -23,7 +23,6 @@ import { throttle_requests_by_client } from "./throttle_requests_by_client.js";
 const get_request_content = (request) =>
   (!_.isEmpty(request.body) && request.body) ||
   (!_.isEmpty(request.query) && request.query);
-
 const log_error_case = (request, error_message) => {
   const request_content = get_request_content(request);
   console.error(
@@ -32,6 +31,15 @@ const log_error_case = (request, error_message) => {
         error_message,
         request_content,
       }),
+      sha: process.env.CURRENT_SHA || "dev, no sha env var set",
+    })
+  );
+};
+const log_success_case = (request) => {
+  const request_content = get_request_content(request);
+  console.error(
+    JSON.stringify({
+      request_content,
       sha: process.env.CURRENT_SHA || "dev, no sha env var set",
     })
   );
@@ -157,6 +165,7 @@ const make_email_backend = (templates) => {
 
           if (mail_sent_successfully) {
             response.send("200");
+            log_success_case(request);
           } else {
             const error_message = `Internal Server Error: mail was unable to send. ${
               _.isUndefined(sent_mail_info)
