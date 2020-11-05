@@ -1,88 +1,24 @@
 {
   "plugins": [
-    "react",
-    "import",
-    "lodash"
+    "react"
   ],
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaVersion": 2017,
-    "ecmaFeatures": {
-      "jsx": true,
-      "experimentalObjectRestSpread": true,
-      "experimentalDecorators": true
-    },
-    "sourceType": "module",
-    "allowImportExportEverywhere": true
-  },
+  "extends": [ "../.eslintrc.json" ],
   "env": {
       "browser": true,
       "commonjs": true,
       "es6": true
   },
   "rules": {
-      "no-use-before-define": ["error", { "functions": true, "classes": true }],
-      "react/jsx-uses-vars": 1,
-      "react/prop-types": [ "off" ],
-      "react/no-string-refs": [ "off" ],
-      "react/display-name": [ "off" ],
-      "react/no-find-dom-node": [ "off" ],
-      "react/no-children-prop": [ "off" ],
-      "lodash/no-double-unwrap": ["error"],
-      "lodash/no-unbound-this": ["error"],
-      "lodash/unwrap": ["error"],
-    "import/order": [
-      "warn", { 
-        "newlines-between": "always-and-inside-groups",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true 
-        },
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "parent",
-          ["sibling", "index"]
-        ],
-        // We can group imports further by adding rules here, the order they're defined in breaks ties when group and position are equal
-        "pathGroups":[
-          {
-            "pattern": "./*.yaml",
-            "group": "index",
-            "position": "after"
-          },
-          {
-            "pattern": "src/components/**/*.js",
-            "group": "internal",
-            "position": "before"
-          },
-          {
-            "pattern": "src/models/**/*.js",
-            "group": "internal",
-            "position": "before"
-
-          },
-          {
-            "pattern": "src/core/**/*.js",
-            "group": "internal",
-            "position": "before"
-          }
-        ]          
-      }
-    ]
+    "react/jsx-uses-vars": 1,
+    "react/prop-types": [ "off" ],
+    "react/no-string-refs": [ "off" ],
+    "react/display-name": [ "off" ],
+    "react/no-find-dom-node": [ "off" ],
+    "react/no-children-prop": [ "off" ]
   },
   "settings": {
     "react": {
       "version": "16"
-    },
-    "import/resolver":{
-      "node": {
-        "moduleDirectory": ["./","node_modules/"]
-      }
-    },
-    "lodash": {
-      "pragma": "_"
     }
   },
   "globals": {

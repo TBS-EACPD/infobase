@@ -1,27 +1,13 @@
 {
   "plugins": [
-    "react",
     "node"
   ],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true,
-      "experimentalObjectRestSpread": true
-    },
-    "ecmaVersion": 2017,
-    "sourceType": "module"
-  },
+  "extends": [ "../.eslintrc.json", "plugin:node/recommended" ],
   "env": {
-      "browser": true,
-      "commonjs": true
+    "node": true
   },
-  "extends": [ "plugin:node/recommended" ],
   "rules": {
-      "node/no-unsupported-features": ["error", {"ignores": ["modules"]}],
-      "react/prop-types" : [ "off" ],
-      "react/no-string-refs" : [ "off" ],
-      "react/display-name" : [ "off" ],
-      "react/no-find-dom-node" : [ "off" ]
+      "node/no-unsupported-features": ["error", {"ignores": ["modules"]}]
   },
   "globals": {
     "_": true,
