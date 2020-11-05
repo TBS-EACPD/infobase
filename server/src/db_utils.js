@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-/* eslint-disable no-console */
-
 function get_connection_str() {
   if (process.env.USE_REMOTE_DB) {
     const {

@@ -39,7 +39,6 @@ nodemailer.createTestAccount.mockImplementation(() =>
 );
 
 nodemailer.createTransport.mockImplementation((transport_config) => {
-  // eslint-disable-next-line no-console
   const alert_to_flaked_test = () =>
     console.log(
       `FLAKY TEST ALERT: was unable to reach ethereal within ${ethereal_timeout_limit}ms, giving up but not failing the test over it.`
