@@ -12,6 +12,7 @@ import {
 } from "./db_utils";
 import { get_transport_config, get_email_config } from "./email_utils";
 import {
+  get_templates,
   validate_completed_template,
   make_email_subject_from_completed_template,
   make_email_body_from_completed_template,
@@ -199,4 +200,24 @@ const make_email_backend = (templates) => {
   return email_backend;
 };
 
-export { make_email_backend };
+const run_email_backend = () => {
+  const templates = get_templates();
+
+  // Start connecting to the db early and let it happen fully async. Attempts to write to the DB
+  // before the connection is ready will buffer until the connection is made
+  connect_db().catch(console.error); // Note: async func, but not awaited
+
+  const email_backend = make_email_backend(templates);
+
+  if (!process.env.IS_PROD_SERVER || process.env.IS_FAKE_PROD_SERVER) {
+    email_backend.set("port", 7331);
+    email_backend.listen(email_backend.get("port"), () => {
+      const port = email_backend.get("port");
+      console.log(`InfoBase email backend running at http://127.0.0.1:${port}`);
+    });
+  }
+
+  return email_backend;
+};
+
+export { make_email_backend, run_email_backend };
