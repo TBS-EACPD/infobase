@@ -55,7 +55,7 @@ export class ShareButton extends React.Component {
       width: "50px",
       height: "50px",
     };
-    const hashtag_replaced_url = _.replace(url, "#", "%23");
+    const encoded_url = encodeURIComponent(url);
 
     return (
       <Fragment>
@@ -88,7 +88,7 @@ export class ShareButton extends React.Component {
           body={
             <Fragment>
               <CommonSocialMediaShareButton
-                complete_url={`https://www.facebook.com/sharer/sharer.php?u=${hashtag_replaced_url}`}
+                complete_url={`https://www.facebook.com/sharer/sharer.php?u=${encoded_url}`}
                 media_icon={
                   <IconFacebook
                     {...common_icon_props}
@@ -97,7 +97,7 @@ export class ShareButton extends React.Component {
                 }
               />
               <CommonSocialMediaShareButton
-                complete_url={`https://twitter.com/intent/tweet?url=${hashtag_replaced_url}`}
+                complete_url={`https://twitter.com/intent/tweet?url=${encoded_url}`}
                 media_icon={
                   <IconTwitter
                     {...common_icon_props}
@@ -106,7 +106,7 @@ export class ShareButton extends React.Component {
                 }
               />
               <CommonSocialMediaShareButton
-                complete_url={`https://www.reddit.com/submit?url=${hashtag_replaced_url}&title=${title}`}
+                complete_url={`https://www.reddit.com/submit?url=${encoded_url}&title=${title}`}
                 media_icon={
                   <IconReddit
                     {...common_icon_props}
@@ -115,7 +115,7 @@ export class ShareButton extends React.Component {
                 }
               />
               <CommonSocialMediaShareButton
-                complete_url={`mailto:?subject=${title}&body=${hashtag_replaced_url}`}
+                complete_url={`mailto:?subject=${title}&body=${encoded_url}`}
                 media_icon={
                   <IconEmail
                     {...common_icon_props}
