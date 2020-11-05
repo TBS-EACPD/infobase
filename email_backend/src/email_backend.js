@@ -28,7 +28,7 @@ const log_error_case = (request, error_message) => {
   console.error(
     JSON.stringify({
       ..._.pickBy({
-        log_message,
+        error_message,
         request_content,
       }),
       sha: process.env.CURRENT_SHA || "dev, no sha env var set",
@@ -85,16 +85,16 @@ const make_email_backend = (templates) => {
   });
 
   // reassert DB connection
-  app.use("/submit_email", (req, res, next) => {
+  email_backend.use("/submit_email", (req, res, next) => {
     if (!_.includes(["connected", "connecting"], get_db_connection_status())) {
       console.warn("Initial MongoDB connection lost, attempting reconnection");
-      connect_db().catch(next);
+      connect_db().catch((err) => next(err));
     }
 
     next();
   });
 
-  email_backend.post("/submit_email", async (request, response) => {
+  email_backend.post("/submit_email", async (request, response, next) => {
     const { template_name, completed_template } = get_request_content(request);
 
     const original_template = templates[template_name];
@@ -172,19 +172,19 @@ const make_email_backend = (templates) => {
           response.status("500").send(error_message);
           log_error_case(request, error_message);
         }
-      }
 
-      // Note: async func but not awaited, free up the function to keep handling requests in cases where the DB
-      // communication becomes a choke point. Also, this all happens post-reponse, so the client isn't waiting on
-      // DB write either
-      // Note: log to DB even if email fails to send
-      log_email_and_meta_to_db(
-        request,
-        template_name,
-        original_template,
-        completed_template,
-        email_config
-      ).catch(next);
+        // Note: async func but not awaited, free up the function to keep handling requests in cases where the DB
+        // communication becomes a choke point. Also, this all happens post-reponse, so the client isn't waiting on
+        // DB write either
+        // Note: log to DB even if email fails to send
+        log_email_and_meta_to_db(
+          request,
+          template_name,
+          original_template,
+          completed_template,
+          email_config
+        ).catch(next);
+      }
 
       next();
     }
@@ -192,7 +192,7 @@ const make_email_backend = (templates) => {
 
   email_backend.use((err, req, res, next) => {
     console.error(err.stack);
-    response.status("500").send("Internal server error");
+    res.status("500").send("Internal server error");
     next(err);
   });
 

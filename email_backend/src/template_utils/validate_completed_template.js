@@ -1,22 +1,5 @@
 import _ from "lodash";
 
-const validate_completed_template = (original_template, completed_template) => {
-  const field_templates = _.omit(original_template, "meta");
-  const completed_fields = _.omit(completed_template, "meta");
-
-  const required_fields_present = verify_required_fields_present(
-    field_templates,
-    completed_fields
-  );
-
-  const values_are_expected_and_match_value_types = verify_values_are_expected_and_match_value_types(
-    field_templates,
-    completed_fields
-  );
-
-  return required_fields_present && values_are_expected_and_match_value_types;
-};
-
 const verify_required_fields_present = (field_templates, completed_fields) =>
   _.chain(field_templates)
     .pickBy(_.property("required"))
@@ -72,6 +55,23 @@ const verify_values_are_expected_and_match_value_types = (
     })
     .every()
     .value();
+
+const validate_completed_template = (original_template, completed_template) => {
+  const field_templates = _.omit(original_template, "meta");
+  const completed_fields = _.omit(completed_template, "meta");
+
+  const required_fields_present = verify_required_fields_present(
+    field_templates,
+    completed_fields
+  );
+
+  const values_are_expected_and_match_value_types = verify_values_are_expected_and_match_value_types(
+    field_templates,
+    completed_fields
+  );
+
+  return required_fields_present && values_are_expected_and_match_value_types;
+};
 
 export {
   validate_completed_template,

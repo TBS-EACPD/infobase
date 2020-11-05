@@ -1,8 +1,4 @@
-import { log_email_and_meta_to_db } from "./log_email_and_meta_to_db.js";
-
-import _ from "lodash";
-
-jest.mock("mongoose");
+jest.mock("mongoose"); // eslint-disable-line no-undef
 import mongoose from "mongoose";
 const actual_mongoose = jest.requireActual("mongoose"); // eslint-disable-line no-undef
 mongoose.Schema.mockImplementation(actual_mongoose.Schema);
@@ -21,6 +17,8 @@ mongoose.model.mockImplementation((name, schema) => {
 
   return model;
 });
+
+import { log_email_and_meta_to_db } from "./log_email_and_meta_to_db.js";
 
 describe("log_email_and_meta_to_db", () => {
   const request = { method: "POST", headers: { referer: "http://localhost" } };
