@@ -1,12 +1,12 @@
-import express from "express";
 import body_parser from "body-parser";
-import expressGraphQL from "express-graphql";
 import compression from "compression";
 import cors from "cors";
+import express from "express";
+import expressGraphQL from "express-graphql";
 import depthLimit from "graphql-depth-limit";
 
-import { create_models, create_schema } from "./models/index.js";
 import { connect_db, get_db_connection_status } from "./db_utils.js";
+import { create_models, create_schema } from "./models/index.js";
 import {
   convert_GET_with_compressed_query_to_POST,
   get_log_object_for_request,

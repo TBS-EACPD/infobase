@@ -1,5 +1,5 @@
-import { create_models, populate_all_models } from "./models/index.js";
 import { connect_db, drop_db } from "./db_utils.js";
+import { create_models, populate_all_models } from "./models/index.js";
 
 // Properly exit on any unhandled promise rejections, for failing-fast in CI
 process.on("unhandledRejection", (unhandledRejectionException) => {

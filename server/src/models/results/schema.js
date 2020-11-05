@@ -1,6 +1,7 @@
 import _ from "lodash";
-import { bilingual_field } from "../schema_utils.js";
+
 import { first_true_promise } from "../general_utils.js";
+import { bilingual_field } from "../schema_utils.js";
 
 import { drr_docs, dp_docs } from "./results_common.js";
 

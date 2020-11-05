@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
 import _ from "lodash";
+import mongoose from "mongoose";
 
 const required_string = { type: String, required: true };
 const meta_schema_def = {

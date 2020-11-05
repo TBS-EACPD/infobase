@@ -1,6 +1,6 @@
-import define_schema from "./schema";
-import populate_models from "./populate";
 import define_models from "./models";
+import populate_models from "./populate";
+import define_schema from "./schema";
 
 export default {
   define_schema,

@@ -1,4 +1,5 @@
 import _ from "lodash";
+
 import { bilingual_field } from "../schema_utils";
 
 const schema = `

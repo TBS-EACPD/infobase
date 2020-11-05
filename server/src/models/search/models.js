@@ -1,4 +1,5 @@
 import _ from "lodash";
+
 import { create_re_matcher } from "./search_utils";
 
 export default function define_core_subjects(model_singleton) {

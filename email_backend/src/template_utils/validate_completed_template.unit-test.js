@@ -1,9 +1,10 @@
+import _ from "lodash";
+
 import {
   validate_completed_template,
   verify_required_fields_present,
   verify_values_are_expected_and_match_value_types,
 } from "./validate_completed_template.js";
-import _ from "lodash";
 
 describe("validate_completed_template", () => {
   const template_test_fields = {

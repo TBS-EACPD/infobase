@@ -1,6 +1,7 @@
+import { encode } from "querystring";
+
 import _ from "lodash";
 
-import { encode } from "querystring";
 import { compressToBase64 } from "lz-string";
 
 import {

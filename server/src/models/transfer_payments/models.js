@@ -1,4 +1,5 @@
 import _ from "lodash";
+
 import { public_account_years } from "../constants";
 
 /* flattens out the years */
