@@ -12,6 +12,9 @@
   },
   "globals": {
     "_": true,
+    "jest": true,
+    "afterAll": true,
+    "beforeAll": true,
     "describe": true,
     "it": true,
     "expect": true,

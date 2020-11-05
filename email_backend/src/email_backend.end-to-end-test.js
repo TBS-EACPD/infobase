@@ -19,9 +19,9 @@ const promise_timeout_race = (
 
 // mocking JUST nodemailer.createTransport, from nodemailer leaving everything else with its original implementation...
 // is there a more direct way to do this?
-jest.mock("nodemailer"); // eslint-disable-line no-undef
+jest.mock("nodemailer");
 import nodemailer from "nodemailer";
-const { ...actual_nodemailer } = jest.requireActual("nodemailer"); // eslint-disable-line no-undef
+const { ...actual_nodemailer } = jest.requireActual("nodemailer");
 
 _.each(nodemailer, (member, identifier) =>
   member.mockImplementation(actual_nodemailer[identifier])
@@ -73,20 +73,23 @@ nodemailer.createTransport.mockImplementation((transport_config) => {
 });
 
 // not going to run a db for these end to end tests, mock away attempts to use it
-jest.mock("./db_utils"); // eslint-disable-line no-undef
+jest.mock("./db_utils");
 import {
   connect_db,
   get_db_connection_status,
   log_email_and_meta_to_db,
 } from "./db_utils";
-connect_db.mockImplementation(() => ({ catch: _.noop }));
+connect_db.mockImplementation(() => Promise.resolve());
 get_db_connection_status.mockImplementation(() => "connected");
 const mock_log_email_and_meta_to_db = log_email_and_meta_to_db.mockImplementation(
-  () => ({ catch: _.noop })
+  () => Promise.resolve()
 );
 
-// eslint-disable-next-line no-unused-vars
-import { email_backend } from "./index.js"; // Server's started as side effect of this import, kind of a GCloud Function thing although I could clean that up
+import { run_email_backend } from "./email_backend.js";
+beforeAll((done) => {
+  run_email_backend();
+  done();
+});
 
 describe("End-to-end tests for email_backend endpoints", () => {
   const prod_test_url =
