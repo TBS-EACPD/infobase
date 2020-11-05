@@ -18,7 +18,7 @@ export default function define_resource_models(model_singleton) {
       try {
         return this.model_name();
       } catch (e) {
-        console.log(e); // eslint-disable-line no-console
+        console.log(e);
       }
     }
     static register(obj) {

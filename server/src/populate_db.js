@@ -11,7 +11,7 @@ process.on("unhandledRejection", (unhandledRejectionException) => {
   await drop_db();
   create_models();
   await populate_all_models();
-  console.log("done"); /* eslint-disable-line no-console */
+  console.log("done");
 
   // TODO: I think a write stream is holding the process open after the above finishes, maybe?
   // For now, just exiting explicitly, but if possible should sort out why the process is held open without the next line

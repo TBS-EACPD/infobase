@@ -5,8 +5,6 @@ import express from "express";
 import _ from "lodash";
 import nodemailer from "nodemailer";
 
-
-
 import {
   get_db_connection_status,
   connect_db,
@@ -27,7 +25,6 @@ const get_request_content = (request) =>
 
 const log_error_case = (request, error_message) => {
   const request_content = get_request_content(request);
-  //eslint-disable-next-line no-console
   console.error(
     JSON.stringify({
       ..._.pickBy({
@@ -147,7 +144,6 @@ const make_email_backend = (templates) => {
             .catch(next);
 
           if (!process.env.IS_PROD_SERVER) {
-            // eslint-disable-next-line no-console
             console.log(
               `Test mail URL: ${nodemailer.getTestMessageUrl(sent_mail_info)}`
             );
@@ -195,7 +191,6 @@ const make_email_backend = (templates) => {
   });
 
   email_backend.use((err, req, res, next) => {
-    // eslint-disable-next-line no-console
     console.error(err.stack);
     response.status("500").send("Internal server error");
     next(err);

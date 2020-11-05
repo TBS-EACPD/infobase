@@ -16,7 +16,6 @@ const email_backend = (() => {
     email_backend.set("port", 7331);
     email_backend.listen(email_backend.get("port"), () => {
       const port = email_backend.get("port");
-      //eslint-disable-next-line no-console
       console.log(`InfoBase email backend running at http://127.0.0.1:${port}`);
     });
   }

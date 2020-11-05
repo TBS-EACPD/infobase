@@ -52,7 +52,6 @@ app.use("/", function (req, res, next) {
       console.log(`Request type: ${req.originalUrl}, ${req.method}`);
     }
 
-    // eslint-disable-next-line no-console
     process.env.USE_REMOTE_DB &&
       console.log(JSON.stringify(get_log_object_for_request(req)));
 
