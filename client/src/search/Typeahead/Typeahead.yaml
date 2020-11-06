@@ -26,3 +26,7 @@ paginate_next:
 filter:
   en: Filter
   fr: Filtrer
+
+close_menu:
+  en: Close menu
+  fr: Fermer le menu
