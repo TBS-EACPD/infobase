@@ -69,7 +69,7 @@ const table_links_by_tag = _.chain(tables)
 //id tag is there for legacy styles
 const Glossary_ = ({ active_key, items_by_letter }) => (
   <div id="#glossary-key">
-    <div className="col-sm-12 col-md-8 col-md-offset-2 font-large">
+    <div className="col-sm-12 col-md-8 offset-md-2 font-large">
       {!window.is_a11y_mode && (
         <div id="glossary_search" className="org_list font-xlarge mrgn-bttm-lg">
           <GlossarySearch />
@@ -87,7 +87,7 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
           }}
         >
           {_.map(items_by_letter, ({ letter }) => (
-            <li key={letter}>
+            <li key={letter} style={{ display: "inline" }}>
               <a
                 aria-label={`${text_maker(
                   "jump_to_letter_glossary_entries"
