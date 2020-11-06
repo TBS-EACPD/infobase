@@ -1,5 +1,4 @@
 export {
-  declare_budget_measures_panel,
   declare_detailed_program_spending_split_panel,
   declare_crso_by_prog_fte_panel,
   declare_crso_by_prog_exp_panel,

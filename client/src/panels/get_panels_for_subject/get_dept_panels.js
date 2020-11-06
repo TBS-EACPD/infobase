@@ -9,7 +9,6 @@ import {
   declare_results_key_concepts_panel,
   declare_late_results_warning_panel,
   declare_late_resources_panel,
-  declare_budget_measures_panel,
 
   // shared dept, crso, program, tag
   declare_profile_panel,
@@ -65,7 +64,6 @@ export const get_dept_panels = (subject) =>
       declare_financial_key_concepts_panel(),
       declare_welcome_mat_panel(),
       declare_tp_by_region_panel(),
-      declare_budget_measures_panel(),
       declare_auth_exp_planned_spending_panel(),
       declare_estimates_in_perspective_panel(),
       declare_in_year_estimates_split_panel(), //turned off until supps A

@@ -16,11 +16,6 @@ module.exports.route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
-    name: "Budget Tracker",
-    route: "budget-measures/budget-measure/overview",
-    test_on: ["eng", "basic-eng"],
-  },
-  {
     name: "Treemap Explorer",
     route: "treemap",
     test_on: ["eng"],

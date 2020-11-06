@@ -1,5 +1,3 @@
-export { declare_budget_measures_panel } from "./budget_measures/budget_measures_panel.js";
-
 export { declare_detailed_program_spending_split_panel } from "./detailed_program_spending_split/detailed_program_spending_split.js";
 
 export {
