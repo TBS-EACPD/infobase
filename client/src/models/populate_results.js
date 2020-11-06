@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import { gql } from "@apollo/client";
 
 import { log_standard_event } from "../core/analytics.js";
 import { get_client } from "../graphql_utils/graphql_utils.js";

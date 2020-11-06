@@ -255,6 +255,7 @@ function create_config({
     optimization: get_optimizations(is_prod_build, bundle_stats),
     devtool: is_prod_build ? false : "inline-source-map",
     resolve: {
+      fallback: { assert: false },
       modules: [std_lib_path.resolve(__dirname, "../"), "node_modules/"],
     },
   };

@@ -1,8 +1,10 @@
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { ApolloClient } from "apollo-client";
-import { createHttpLink } from "apollo-link-http";
+import {
+  createHttpLink,
+  InMemoryCache,
+  ApolloClient,
+  graphql as apollo_connect,
+} from "@apollo/client";
 import { compressToBase64 } from "lz-string";
-import { graphql as apollo_connect } from "react-apollo";
 import string_hash from "string-hash";
 
 const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${window.sha}/graphql`;
