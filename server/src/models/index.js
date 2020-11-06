@@ -1,13 +1,13 @@
-import _ from "lodash";
 import { makeExecutableSchema } from "graphql-tools";
+import _ from "lodash";
+
+import core_subject from "./core_subject";
+import resources from "./finances";
 import model_singleton from "./model_singleton.js";
+import results from "./results";
 import root_schema from "./schema_root.js";
 
 //each sub-module is included here
-import core_subject from "./core_subject";
-import results from "./results";
-import budget_measures from "./budget_measures";
-import resources from "./finances";
 import services from "./services";
 // import pses from './pses';
 // import sobjs from './standard_objects';
@@ -21,7 +21,6 @@ import services from "./services";
 const sub_module_defs = _.compact([
   core_subject,
   results,
-  budget_measures,
   resources,
   !process.env.USE_REMOTE_DB && services, // Dev only ATM
   // pses,
