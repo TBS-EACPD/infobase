@@ -56,6 +56,7 @@ const EnumField = ({
     <label htmlFor={`${field_id}--${enum_key}`}>
       <input
         id={`${field_id}--${enum_key}`}
+        style={{ marginRight: "1rem" }}
         type={form_type}
         checked={_.includes(selected_enums_for_field, enum_key)}
         disabled={disabled}
@@ -220,31 +221,37 @@ class EmailFrontend extends React.Component {
                   <span style={{ color: textRed }}>*</span>
                 )}
               </legend>
-              {_.map(field_info.enum_values, (label_by_lang, key) => (
-                <EnumField
-                  classes={
-                    field_info.style && field_info.style === "horizontal"
-                      ? `col-sm-${_.floor(
-                          12 / _.size(field_info.enum_values)
-                        )} inline`
-                      : ""
-                  }
-                  key={`${key}_${field_info.form_type}`}
-                  form_type={field_info.form_type}
-                  label={label_by_lang[lang]}
-                  enum_key={key}
-                  field_id={get_field_id(field_key)}
-                  selected_enums_for_field={completed_template[field_key]}
-                  disabled={disable_forms}
-                  aria-hidden={disable_forms}
-                  state_update_callback={(selected_enums) =>
-                    this.mergeIntoCompletedTemplateState(
-                      field_key,
-                      selected_enums
-                    )
-                  }
-                />
-              ))}
+              <div
+                className={`${
+                  field_info.style && field_info.style === "horizontal" && "row"
+                }`}
+              >
+                {_.map(field_info.enum_values, (label_by_lang, key) => (
+                  <EnumField
+                    classes={
+                      field_info.style && field_info.style === "horizontal"
+                        ? `col-sm-${_.floor(
+                            12 / _.size(field_info.enum_values)
+                          )} inline`
+                        : ""
+                    }
+                    key={`${key}_${field_info.form_type}`}
+                    form_type={field_info.form_type}
+                    label={label_by_lang[window.lang]}
+                    enum_key={key}
+                    field_id={get_field_id(field_key)}
+                    selected_enums_for_field={completed_template[field_key]}
+                    disabled={disable_forms}
+                    aria-hidden={disable_forms}
+                    state_update_callback={(selected_enums) =>
+                      this.mergeIntoCompletedTemplateState(
+                        field_key,
+                        selected_enums
+                      )
+                    }
+                  />
+                ))}
+              </div>
             </fieldset>
           );
         case "textarea": {
