@@ -96,6 +96,7 @@
     "react-dom": "^16.7.0",
     "react-flip-move": "^2.10.2",
     "react-redux": "^6",
+    "react-resize-detector": "^5.2.0",
     "react-responsive": "^6.1.2",
     "react-router": "^5",
     "react-router-dom": "^5",

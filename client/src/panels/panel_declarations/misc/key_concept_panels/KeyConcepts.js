@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { ButtonToolbar } from "react-bootstrap";
+import ReactResizeDetector from "react-resize-detector";
 import MediaQuery from "react-responsive";
 import { withRouter } from "react-router";
 
@@ -48,7 +49,6 @@ class KeyConcepts_ extends React.Component {
     this.state = {
       key_concepts_out_of_view: false,
       can_pin: _.isBoolean(can_pin) ? can_pin : true,
-      key_concepts_width: null,
     };
   }
 
@@ -64,18 +64,6 @@ class KeyConcepts_ extends React.Component {
           this.setState({ key_concepts_out_of_view: false });
       }
     });
-
-    this.setState({
-      key_concepts_width: this.keyConceptsContainerRef.current.offsetWidth,
-    });
-
-    const key_concepts_observer = new ResizeObserver((entries) => {
-      this.setState({
-        key_concepts_width: this.keyConceptsContainerRef.current.offsetWidth,
-      });
-    });
-
-    key_concepts_observer.observe(this.keyConceptsContainerRef.current);
   }
 
   render() {
@@ -84,7 +72,6 @@ class KeyConcepts_ extends React.Component {
     const {
       key_concepts_out_of_view: key_concepts_out_of_view, //boolean that can be checked for if the container for the key concepts is within view
       can_pin: can_pin,
-      key_concepts_width,
     } = this.state;
 
     const sticky_data = {
@@ -97,48 +84,60 @@ class KeyConcepts_ extends React.Component {
     };
 
     return (
-      <div style={{ position: "relative" }} ref={this.keyConceptsContainerRef}>
-        <MediaQuery maxWidth={breakpoints.maxMediumDevice}>
-          {(matches) => (
-            <div
-              className={classNames(
-                "mrgn-bttm-md",
-                matches && "mrgn-tp-md",
-                key_concepts_out_of_view && can_pin && "sticky"
-              )}
-              style={{
-                width: key_concepts_width,
-              }}
-            >
-              <ButtonToolbar>
-                <AutoAccordion
-                  title={text_maker("some_things_to_keep_in_mind")}
-                  ref={this.accordionRef}
-                  showPin
-                  sticky_data={sticky_data}
+      <ReactResizeDetector handleWidth>
+        {({ width }) => (
+          <div
+            style={{ position: "relative" }}
+            ref={this.keyConceptsContainerRef}
+          >
+            <MediaQuery maxWidth={breakpoints.maxMediumDevice}>
+              {(matches) => (
+                <div
+                  className={classNames(
+                    "mrgn-bttm-md",
+                    matches && "mrgn-tp-md",
+                    key_concepts_out_of_view && can_pin && "sticky"
+                  )}
+                  style={{
+                    width: width,
+                  }}
                 >
-                  <div style={{ paddingLeft: "10px", paddingRight: "10px" }}>
-                    <KeyConceptList
-                      question_answer_pairs={_.map(rendered_q_a_keys, (key) => [
-                        <TM
-                          key={key + "_q"}
-                          k={key + "_q"}
-                          args={{ subject }}
-                        />,
-                        <TM
-                          key={key + "_a"}
-                          k={key + "_a"}
-                          args={{ subject }}
-                        />,
-                      ])}
-                    />
-                  </div>
-                </AutoAccordion>
-              </ButtonToolbar>
-            </div>
-          )}
-        </MediaQuery>
-      </div>
+                  <ButtonToolbar>
+                    <AutoAccordion
+                      title={text_maker("some_things_to_keep_in_mind")}
+                      ref={this.accordionRef}
+                      showPin
+                      sticky_data={sticky_data}
+                    >
+                      <div
+                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
+                      >
+                        <KeyConceptList
+                          question_answer_pairs={_.map(
+                            rendered_q_a_keys,
+                            (key) => [
+                              <TM
+                                key={key + "_q"}
+                                k={key + "_q"}
+                                args={{ subject }}
+                              />,
+                              <TM
+                                key={key + "_a"}
+                                k={key + "_a"}
+                                args={{ subject }}
+                              />,
+                            ]
+                          )}
+                        />
+                      </div>
+                    </AutoAccordion>
+                  </ButtonToolbar>
+                </div>
+              )}
+            </MediaQuery>
+          </div>
+        )}
+      </ReactResizeDetector>
     );
   }
 }
