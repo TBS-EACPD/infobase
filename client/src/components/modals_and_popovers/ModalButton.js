@@ -42,7 +42,7 @@ class ModalButton_ extends React.Component {
     return (
       <Fragment>
         <button
-          className="btn-link"
+          className="btn btn-link"
           onClick={this.toggle_modal}
           aria-label={aria_label}
         >
