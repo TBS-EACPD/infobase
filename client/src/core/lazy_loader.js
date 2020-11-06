@@ -1,8 +1,4 @@
 import { load_footnotes_bundle } from "../models/footnotes/populate_footnotes.js";
-import {
-  api_load_subject_has_measures,
-  api_load_budget_measures,
-} from "../models/populate_budget_measures.js";
 import { load_horizontal_initiative_lookups } from "../models/populate_horizontal_initiative_lookups.js";
 import {
   api_load_results_bundle,
@@ -39,9 +35,6 @@ function ensure_loaded({
   result_docs,
   requires_result_counts,
   requires_granular_result_counts,
-  has_budget_measures,
-  budget_measures,
-  budget_years,
   has_services,
   services,
   footnotes_for: footnotes_subject,
@@ -101,22 +94,6 @@ function ensure_loaded({
       .some()
       .value();
 
-  const should_load_has_budget_measures =
-    has_budget_measures ||
-    _.chain(panel_keys)
-      .map((key) => PanelRegistry.lookup(key, subject_level))
-      .map("requires_has_budget_measures")
-      .some()
-      .value();
-
-  const should_load_budget_measures =
-    budget_measures ||
-    _.chain(panel_keys)
-      .map((key) => PanelRegistry.lookup(key, subject_level))
-      .map("requires_budget_measures")
-      .some()
-      .value();
-
   const should_load_horizontal_initiative_lookups =
     subject &&
     subject.level === "tag" &&
@@ -154,6 +131,7 @@ function ensure_loaded({
         .uniq()
         .compact()
         .value();
+
   const results_prom = should_load_results
     ? api_load_results_bundle(subject, result_docs_to_load)
     : Promise.resolve();
@@ -173,15 +151,6 @@ function ensure_loaded({
 
   const footnotes_prom = footnotes_subject
     ? load_footnotes_bundle(footnotes_subject)
-    : Promise.resolve();
-
-  const has_budget_measures_prom =
-    should_load_has_budget_measures && _.isFunction(subject.set_has_data)
-      ? api_load_subject_has_measures(subject, budget_years)
-      : Promise.resolve();
-
-  const budget_measures_prom = should_load_budget_measures
-    ? api_load_budget_measures(subject, budget_years)
     : Promise.resolve();
 
   const has_services_prom =
@@ -204,8 +173,6 @@ function ensure_loaded({
     has_results_prom,
     granular_result_counts_prom,
     footnotes_prom,
-    has_budget_measures_prom,
-    budget_measures_prom,
     has_services_prom,
     services_prom,
     horizontal_initiative_lookups_prom,

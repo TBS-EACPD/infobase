@@ -1,4 +1,3 @@
-
 //circular dependency hack..
 import { Table } from "../core/TableClass.js";
 import { GlossaryEntry } from "../models/glossary.js";
@@ -224,37 +223,6 @@ const sources = _.mapValues(
             id: "igoc",
             text: tm("igoc_item_name"),
             inline_link: "#igoc",
-          },
-        ];
-      },
-    },
-    BUDGET: {
-      title() {
-        return tm("budget_source_title");
-      },
-      description() {
-        return (
-          <div dangerouslySetInnerHTML={{ __html: tm("budget_source_desc") }} />
-        );
-      },
-      frequency: frequencies.m,
-      open_data: infobase_open_data_page,
-      items() {
-        return [
-          {
-            id: "budget_dept",
-            text: tm("budget_dept_item_name"),
-            inline_link: "#budget-tracker/budget-measure/overview",
-          },
-          {
-            id: "budget_program",
-            text: tm("budget_program_item_name"),
-            inline_link: "#budget-tracker/budget-measure/overview",
-          },
-          {
-            id: "budget_supplemental",
-            text: tm("budget_program_supplemental_name"),
-            inline_link: "#budget-tracker/budget-measure/overview",
           },
         ];
       },

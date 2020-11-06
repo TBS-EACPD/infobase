@@ -39,11 +39,6 @@ const PartitionRoute = retrying_react_lazy(() =>
     /* webpackChunkName: "PartitionRoute" */ "../partition/partition_subapp/PartitionRoute.js"
   )
 );
-const BudgetMeasuresRoute = retrying_react_lazy(() =>
-  import(
-    /* webpackChunkName: "BudgetMeasuresRoute" */ "../partition/budget_measures_subapp/BudgetMeasuresRoute.js"
-  )
-);
 const About = retrying_react_lazy(() =>
   import(/* webpackChunkName: "About" */ "../about/about.js")
 );
@@ -207,14 +202,6 @@ export class App extends React.Component {
                   component={Infographic}
                 />
                 <Route path="/glossary/:active_key?" component={Glossary} />
-                <Redirect
-                  from="/budget-measures/:first_column?/:selected_value?/:budget_year?"
-                  to="/budget-tracker/:first_column?/:selected_value?/:budget_year?"
-                />
-                <Route
-                  path="/budget-tracker/:first_column?/:selected_value?/:budget_year?"
-                  component={BudgetMeasuresRoute}
-                />
                 <Route path="/rpb/:config?" component={ReportBuilder} />
                 <Route path="/about" component={About} />
                 <Route

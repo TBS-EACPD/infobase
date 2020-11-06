@@ -1,4 +1,3 @@
-import { BudgetMeasure } from "./budget_measures.js";
 import {
   Gov,
   Dept,
@@ -22,7 +21,6 @@ const Subject = {
   Tag,
   Result,
   Indicator,
-  BudgetMeasure,
 };
 
 Subject.get_by_guid = function get_by_guid(guid) {

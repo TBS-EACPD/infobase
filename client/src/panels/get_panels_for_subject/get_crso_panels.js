@@ -9,7 +9,6 @@ import {
   declare_results_key_concepts_panel,
   declare_late_results_warning_panel,
   declare_late_resources_panel,
-  declare_budget_measures_panel,
 
   // shared dept, crso, program, tag
   declare_profile_panel,
@@ -46,7 +45,6 @@ export const get_crso_panels = (subject) =>
       declare_dead_crso_warning_panel(),
       declare_financial_key_concepts_panel(),
       declare_welcome_mat_panel(),
-      declare_budget_measures_panel(),
       declare_planned_actual_comparison_panel(),
       declare_crso_by_prog_fte_panel(),
       declare_crso_by_prog_exp_panel(),

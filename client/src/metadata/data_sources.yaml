@@ -47,17 +47,6 @@ igoc_item_name:
   en: Federal Organizations and Interests
   fr: Organisations et intérêts fédéraux
 
-
-budget_source_title:
-  text: Budget
-
-budget_source_desc:
-  transform: [handlebars, markdown]
-  en: |
-    This data includes details on Budget measures and shows how Treasury Board is allocating funds to departments for specific budget measures, and which programs are being funded to deliver each Budget measure.
-  fr: |
-    Cette information inclut des détails sur les mesures budgétaires et montrent comment le Conseil du Trésor affecte les fonds aux ministères pour des mesures budgétaires précises ainsi que les programmes financés pour exécuter chacune des mesures. 
-
 transfer_payments_source_title:
   en: Transfer Payments by recipient region
   fr: Paiements de transfert par région du bénéficiaire
@@ -65,17 +54,3 @@ transfer_payments_source_title:
 transfer_payments_source_desc:
   en: A transfer payment is a grant, contribution or other payment made by the Government for which no goods or services are received. This data shows the ministry, department, the name and location of the recipient, together with the total amount paid.
   fr: Un paiement de transfert est une subvention, une contribution ou un autre paiement effectué par le gouvernement à l'égard duquel il ne reçoit ni produit, ni service en contrepartie. Cette information comprend le portefeuille ministériel, le ministère, nom et le lieu du bénéficiaire, ainsi que le montant total versé. Les annexes mentionnées dans le jeu de données peuvent être trouvées dans la version officielle de l’enregistrement.
-
-budget_dept_item_name:
-  en: Sources and Uses of the Budget Implementation Votes by Department (2018-19)
-  fr: Provenance et utilisation du crédits d’exécution du budget par ministère (2018-2019)
-
-budget_program_item_name:
-  en: Budget Implementation Votes allocations by Program (2018-19)
-  fr: Affectations du vote sur l’exécution du budget par programme (2018-2019)
-
-budget_program_supplemental_name:
-  en: |
-    Supplementary Information Report: 2019-20 Budget Implementation Votes
-  fr: |
-    Complément d'information : Crédits d'exécution du budget 2019-2020

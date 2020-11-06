@@ -7,7 +7,6 @@ import {
   declare_results_key_concepts_panel,
   declare_late_results_warning_panel,
   declare_late_resources_panel,
-  declare_budget_measures_panel,
 
   // shared gov, dept
   declare_tp_by_region_panel,
@@ -44,7 +43,6 @@ export const get_gov_panels = (subject) => ({
     declare_financial_key_concepts_panel(),
     declare_welcome_mat_panel(),
     declare_tp_by_region_panel(),
-    declare_budget_measures_panel(),
     declare_auth_exp_planned_spending_panel(),
     declare_in_year_estimates_split_panel(), //turned off until supps A
     declare_in_year_voted_stat_split_panel(),

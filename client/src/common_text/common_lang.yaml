@@ -1030,17 +1030,6 @@ actual_resources:
   fr: Resources utilisées en {{year}}
 
 
-budget_measure:
-  en: Budget Measure
-  fr: Mesure budgétaire
-budget_measures:
-  en: Budget Measures
-  fr: Mesures budgétaires
-budget_measures_short:
-  en: Measures
-  fr: Mesures
-
-
 build_a_report:
   en: Build your data report
   fr: Créer votre propre rapport de données

@@ -78,15 +78,6 @@ const Home = (props) => {
 
         <section>
           <h3>
-            <a href="#budget-tracker/budget-measure/overview">
-              <TM k="budget_home_title" />
-            </a>
-          </h3>
-          <TM k="budget_home_text" />
-        </section>
-
-        <section>
-          <h3>
             <a href="#resource-explorer/">
               <TM k="explorer_home_title" />
             </a>

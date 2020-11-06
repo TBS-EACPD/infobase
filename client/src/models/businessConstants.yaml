@@ -413,35 +413,3 @@ transfer_payments:
   o:
     en: Other Transfer Payment
     fr: Autre paiement de transfert
-
-
-budget_chapters:
-  grw:
-    en: Growth
-    fr: Croissance
-  prg:
-    en: Progress
-    fr: Progrès
-  adv:
-    en: Advancement
-    fr: Avancement
-  rec:
-    en: Reconciliation
-    fr: Réconciliation
-  oth:
-    en: Other
-    fr: Autre
-
-budget_values:
-  funding:
-    en: Budget Funding
-    fr: Fonds du budget
-  allocated:
-    en: Allocated Funds
-    fr: Fonds affectés
-  withheld:
-    en: Centrally Withheld Funds
-    fr: Fonds retenus centralement
-  remaining:
-    en: Remaining Funds
-    fr: Fonds restants
