@@ -50,23 +50,25 @@ const make_email_backend = (templates) => {
 
   email_backend.use(body_parser.json({ limit: "50mb" }));
   email_backend.use(compression());
-  process.env.IS_PROD_SERVER && email_backend.use(cors());
+  email_backend.use(
+    cors({
+      origin: "*",
+      methods: ["POST", "GET"],
+      allowedHeaders: [
+        "Content-Type",
+        "Authorization",
+        "Content-Length",
+        "X-Requested-With",
+        "template_name",
+        "completed_template",
+      ],
+    })
+  );
   email_backend.enable("trust proxy");
-  email_backend.use((request, response, next) => {
-    response.header("Access-Control-Allow-Origin", "*");
-    response.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-    response.header(
-      "Access-Control-Allow-Headers",
-      "Content-Type, Authorization, Content-Length, X-Requested-With, template_name, completed_template"
-    );
 
-    if (request.method === "OPTIONS") {
-      console.log("Request type: CORS preflight");
-      response.sendStatus(200);
-    } else {
-      console.log(`Request type: ${request.originalUrl}, ${request.method}`);
-      next();
-    }
+  email_backend.use((request, response, next) => {
+    console.log(`Request type: ${request.originalUrl}, ${request.method}`);
+    next();
   });
 
   email_backend.get("/email_template_names", (request, response) =>

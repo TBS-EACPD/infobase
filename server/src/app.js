@@ -24,43 +24,44 @@ const app = express();
 
 app.use(body_parser.json({ limit: "50mb" }));
 app.use(compression());
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    methods: ["POST", "GET"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "Content-Length",
+      "X-Requested-With",
+      "encoded-compressed-query",
+    ],
+  })
+);
 
-app.use("/", function (req, res, next) {
+app.use(function (req, res, next) {
   res.header("cache-control", "public, max-age=31536000");
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization, Content-Length, X-Requested-With, encoded-compressed-query"
-  );
-  if (req.method === "OPTIONS") {
-    console.log("Request type: CORS preflight");
-    res.sendStatus(200);
+
+  // Often want to use GET to leverage http caching, but some of out longer queries are too long for a query parameter
+  // Instead, the client makes a GET with a header containing a compressed and base 64 encoded copy of the query (the query parameter becomes a hash, for cache busting)
+  // In that case, we mutate the request here to recover the query and let the server pretend it received a normal POST
+  if (
+    req.method === "GET" &&
+    !_.isEmpty(req.headers["encoded-compressed-query"])
+  ) {
+    console.log(`Request type: ${req.originalUrl}, GET with compressed query`);
+    convert_GET_with_compressed_query_to_POST(req); // mutates req, changes made persist to subsequent middleware
   } else {
-    // Often want to use GET to leverage http caching, but some of out longer queries are too long for a query parameter
-    // Instead, the client makes a GET with a header containing a compressed and base 64 encoded copy of the query (the query parameter becomes a hash, for cache busting)
-    // In that case, we mutate the request here to recover the query and let the server pretend it received a normal POST
-    if (
-      req.method === "GET" &&
-      !_.isEmpty(req.headers["encoded-compressed-query"])
-    ) {
-      console.log(
-        `Request type: ${req.originalUrl}, GET with compressed query`
-      );
-      convert_GET_with_compressed_query_to_POST(req); // mutates req, changes made persist to subsequent middleware
-    } else {
-      console.log(`Request type: ${req.originalUrl}, ${req.method}`);
-    }
-
-    process.env.USE_REMOTE_DB &&
-      console.log(JSON.stringify(get_log_object_for_request(req)));
-
-    next();
+    console.log(`Request type: ${req.originalUrl}, ${req.method}`);
   }
+
+  process.env.USE_REMOTE_DB &&
+    console.log(JSON.stringify(get_log_object_for_request(req)));
+
+  next();
 });
 
 // reassert DB connection
-app.use("/", (req, res, next) => {
+app.use((req, res, next) => {
   if (!_.includes(["connected", "connecting"], get_db_connection_status())) {
     console.warn("Initial MongoDB connection lost, attempting reconnection");
     connect_db().catch(next);
@@ -70,7 +71,6 @@ app.use("/", (req, res, next) => {
 });
 
 app.use(
-  "/",
   expressGraphQL(() => ({
     graphiql: true,
     schema: schema,
