@@ -28,6 +28,8 @@ export class TypeaheadMenu extends React.Component {
 
     const total_matching_results = queried_results.length;
 
+    let index_key_counter = 0;
+
     if (_.isEmpty(queried_results)) {
       return (
         <ListGroup className="rbt-menu dropdown-menu show">
@@ -67,14 +69,8 @@ export class TypeaheadMenu extends React.Component {
                     aria-label={config_groups[group_index].group_header}
                   >
                     {[
-                      ..._.map(results, (result, res_index) => {
-                        const index =
-                          _.chain(grouped_results)
-                            .toPairs()
-                            .slice(0, group_index)
-                            .map((grouped_result) => _.size(grouped_result))
-                            .sum()
-                            .valueOf() + res_index;
+                      ..._.map(results, (result) => {
+                        const index = index_key_counter++;
                         return (
                           <ListGroupItem
                             key={index}
@@ -92,8 +88,8 @@ export class TypeaheadMenu extends React.Component {
                 ]),
                 <div>
                   <ListGroupItem
-                    key={total_matching_results + 1}
-                    id={`rbt-menu-item-${total_matching_results + 1}`}
+                    key={total_matching_results}
+                    id={`rbt-menu-item-${total_matching_results}`}
                     className="rbt-menu-close-menu-button dropdown-item"
                     onClick={hide_menu}
                   >
