@@ -97,7 +97,7 @@ const make_email_backend = (templates) => {
   email_backend.use("/submit_email", (req, res, next) => {
     if (!_.includes(["connected", "connecting"], get_db_connection_status())) {
       console.warn("Initial MongoDB connection lost, attempting reconnection");
-      connect_db().catch((err) => next(err));
+      connect_db().catch(console.error);
     }
 
     next();
@@ -193,7 +193,7 @@ const make_email_backend = (templates) => {
           original_template,
           completed_template,
           email_config
-        ).catch(next);
+        ).catch(console.error);
       }
 
       next();
