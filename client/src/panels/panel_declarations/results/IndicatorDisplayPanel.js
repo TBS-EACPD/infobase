@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import { gql } from "@apollo/client";
 
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
