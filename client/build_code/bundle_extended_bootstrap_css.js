@@ -19,7 +19,7 @@ function bundle_extended_bootstrap_css(app_dir) {
     },
     optimization: {
       minimize: true,
-      minimizer: [...new CssMinimizerPlugin({ parallel: true })],
+      minimizer: [new CssMinimizerPlugin({ parallel: true })],
       sideEffects: false,
     },
     module: {
