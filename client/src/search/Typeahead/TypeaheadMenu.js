@@ -1,13 +1,10 @@
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 
-import { TM } from "../../components/TextMaker.js";
-
-import { create_text_maker } from "../../models/text.js";
+import { create_text_maker_component } from "../../components";
 
 import text from "./Typeahead.yaml";
 
-const text_maker = create_text_maker(text);
-const TextMaker = (props) => <TM tmf={text_maker} {...props} />;
+const { text_maker, TM } = create_text_maker_component(text);
 
 export class TypeaheadMenu extends React.Component {
   handleWindowClick = (e) => {
@@ -16,6 +13,13 @@ export class TypeaheadMenu extends React.Component {
       hide_menu();
     }
   };
+  componentDidMount() {
+    window.addEventListener("click", this.handleWindowClick);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("click", this.handleWindowClick);
+  }
 
   render() {
     const {
@@ -49,7 +53,7 @@ export class TypeaheadMenu extends React.Component {
                   key={`header-pagination-info`}
                   className="dropdown-header"
                 >
-                  <TextMaker
+                  <TM
                     k="paginate_status"
                     args={{
                       total_matching_results,
@@ -86,14 +90,14 @@ export class TypeaheadMenu extends React.Component {
                     ]}
                   </div>,
                 ]),
-                <div>
+                <div key={`div_${total_matching_results + 1}`}>
                   <ListGroupItem
                     key={total_matching_results}
                     id={`rbt-menu-item-${total_matching_results}`}
                     className="rbt-menu-close-menu-button dropdown-item"
                     onClick={hide_menu}
                   >
-                    Close menu
+                    {text_maker("close_menu")}
                   </ListGroupItem>
                 </div>,
               ];
@@ -102,13 +106,5 @@ export class TypeaheadMenu extends React.Component {
         </ListGroup>
       );
     }
-  }
-
-  componentDidMount() {
-    window.addEventListener("click", this.handleWindowClick);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("click", this.handleWindowClick);
   }
 }
