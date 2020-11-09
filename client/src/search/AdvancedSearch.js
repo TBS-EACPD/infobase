@@ -189,6 +189,10 @@ export class AdvancedSearch extends React.Component {
                 </div>
               </fieldset>
             }
+            is_original_filter={_.isEqual(
+              this.props.initial_configs,
+              this.state
+            )}
           />
         </div>
       </div>
