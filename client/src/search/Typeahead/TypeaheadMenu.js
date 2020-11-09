@@ -17,10 +17,6 @@ export class TypeaheadMenu extends React.Component {
     window.addEventListener("click", this.handleWindowClick);
   }
 
-  componentWillUnmount() {
-    window.removeEventListener("click", this.handleWindowClick);
-  }
-
   render() {
     const {
       search_text,
@@ -106,5 +102,9 @@ export class TypeaheadMenu extends React.Component {
         </ListGroup>
       );
     }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("click", this.handleWindowClick);
   }
 }
