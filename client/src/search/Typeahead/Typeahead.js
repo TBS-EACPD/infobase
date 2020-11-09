@@ -153,8 +153,46 @@ export class Typeahead extends React.Component {
               />
             </span>
           </div>
+          {filter_content && (
+            <div style={{ order: 2 }}>
+              <DropdownMenu
+                dropdown_trigger_txt={
+                  <div
+                    style={{
+                      textAlign: "start",
+                      whiteSpace: "nowrap",
+                      display: "inline-block",
+                    }}
+                  >
+                    <MediaQuery minWidth={breakpoints.minSmallDevice}>
+                      <div
+                        style={{
+                          whiteSpace: "nowrap",
+                          display: "inline-block",
+                          marginRight: "1.5rem",
+                        }}
+                      >
+                        <IconFilter
+                          height="5px"
+                          width="5px"
+                          vertical_align="top"
+                          alternate_color="false"
+                        />
+                      </div>
+                    </MediaQuery>
+                    <span>{text_maker("filter")}</span>
+                  </div>
+                }
+                dropdown_a11y_txt={text_maker("filter")}
+                opened_button_class_name={"btn-ib-light--reversed--with-icon"}
+                closed_button_class_name={"btn-ib-light--with-icon"}
+                dropdown_content_class_name="no-right"
+                dropdown_content={filter_content}
+              />
+            </div>
+          )}
           <input
-            style={{ width: "100%" }}
+            style={{ width: "100%", order: 1 }}
             placeholder={placeholder}
             aria-label={placeholder}
             onChange={update_search_text}
@@ -164,42 +202,6 @@ export class Typeahead extends React.Component {
             onFocus={() => this.setState({ can_show_menu: true })}
             onKeyDown={this.handle_key_down}
           />
-          {filter_content && (
-            <DropdownMenu
-              dropdown_trigger_txt={
-                <div
-                  style={{
-                    textAlign: "start",
-                    whiteSpace: "nowrap",
-                    display: "inline-block",
-                  }}
-                >
-                  <MediaQuery minWidth={breakpoints.minSmallDevice}>
-                    <div
-                      style={{
-                        whiteSpace: "nowrap",
-                        display: "inline-block",
-                        marginRight: "1.5rem",
-                      }}
-                    >
-                      <IconFilter
-                        height="5px"
-                        width="5px"
-                        vertical_align="top"
-                        alternate_color="false"
-                      />
-                    </div>
-                  </MediaQuery>
-                  <span>{text_maker("filter")}</span>
-                </div>
-              }
-              dropdown_a11y_txt={text_maker("filter")}
-              opened_button_class_name={"btn-ib-light--reversed--with-icon"}
-              closed_button_class_name={"btn-ib-light--with-icon"}
-              dropdown_content_class_name="no-right"
-              dropdown_content={filter_content}
-            />
-          )}
         </div>
         {search_text.length >= minLength && can_show_menu && (
           <TypeaheadMenu {...menu_props} />

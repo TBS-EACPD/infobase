@@ -15,7 +15,6 @@ export class DropdownMenu extends React.Component {
   }
   handleWindowClick = (e) => {
     const { isOpen } = this.state;
-    console.log(this.dropdown_ref.current.contains(e.target));
     if (isOpen && !this.dropdown_ref.current.contains(e.target)) {
       this.setState({ isOpen: false });
     }

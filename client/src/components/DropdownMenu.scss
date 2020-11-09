@@ -3,7 +3,8 @@
 .dropdown {
   position: relative;
   display: inline-block;
-  z-index: 2;
+  z-index: 1001;
+  height: 100%
 }
 .dropdown__content {
   display: none;
