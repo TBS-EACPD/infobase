@@ -142,8 +142,6 @@ export class Canada extends React.Component {
   constructor(props) {
     super(props);
 
-    this.prov_select_callback = this.prov_select_callback;
-
     this.state = {
       prov: null,
     };

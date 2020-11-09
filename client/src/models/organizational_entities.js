@@ -201,6 +201,8 @@ const Dept = class Dept extends static_subject_store_with_API_data() {
       } else {
         return "separate_agencies";
       }
+    } else {
+      return undefined;
     }
   }
   get granular_pop_group_key() {
@@ -211,6 +213,8 @@ const Dept = class Dept extends static_subject_store_with_API_data() {
       } else {
         return "cpa_other_portion";
       }
+    } else {
+      return undefined;
     }
   }
 };
