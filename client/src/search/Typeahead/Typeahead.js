@@ -192,6 +192,7 @@ export class Typeahead extends React.Component {
             </div>
           )}
           <input
+            id="rbt-search"
             style={{ width: "100%", order: 1 }}
             placeholder={placeholder}
             aria-label={placeholder}

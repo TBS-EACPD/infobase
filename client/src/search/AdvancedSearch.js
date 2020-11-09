@@ -116,8 +116,9 @@ export class AdvancedSearch extends React.Component {
         );
 
         return (
-          <div key={option_key}>
-            {(!is_a11y_mode || (is_a11y_mode && !has_children_to_display)) && (
+          <div key={option_key} style={{ width: "100%" }}>
+            {(!window.is_a11y_mode ||
+              (window.is_a11y_mode && !has_children_to_display)) && (
               <CheckBox
                 label={option_node.label}
                 active={has_checked_child_option}

@@ -111,8 +111,7 @@ const HomeLayout = (props) => (
               include_tags_hi: true,
               include_tags_hwh: true,
               include_tags_wwh: true,
-            }}
-            invariant_configs={{
+
               include_glossary: true,
               include_tables: true,
             }}
