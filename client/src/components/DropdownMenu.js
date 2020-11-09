@@ -10,14 +10,30 @@ export class DropdownMenu extends React.Component {
     this.state = {
       isOpen: false,
     };
+
+    this.dropdown_ref = React.createRef();
   }
+  handleWindowClick = (e) => {
+    const { isOpen } = this.state;
+    console.log(this.dropdown_ref.current.contains(e.target));
+    if (isOpen && !this.dropdown_ref.current.contains(e.target)) {
+      this.setState({ isOpen: false });
+    }
+  };
+
   componentDidUpdate() {
     const { isOpen } = this.state;
     if (isOpen) {
       this.refs.dropdown_area.focus();
+      window.addEventListener("click", this.handleWindowClick);
+    } else {
+      window.removeEventListener("click", this.handleWindowClick);
     }
   }
-  close_dropdown = () =>
+  toggle_dropdown = (e) => {
+    if (!this.state.isOpen) {
+      e.stopPropagation();
+    }
     this.setState(
       (prev_state) => {
         return { isOpen: !prev_state.isOpen };
@@ -26,6 +42,7 @@ export class DropdownMenu extends React.Component {
         !this.state.isOpen && this.refs.toggle_dropdown_button.focus();
       }
     );
+  };
   render() {
     const {
       dropdown_content,
@@ -43,14 +60,14 @@ export class DropdownMenu extends React.Component {
       : dropdown_trigger_txt;
 
     return (
-      <div className="dropdown">
+      <div className="dropdown" ref={this.dropdown_ref}>
         <button
           className={
             isOpen ? opened_button_class_name : closed_button_class_name
           }
           ref={"toggle_dropdown_button"}
           style={{ marginRight: 5, height: "100%" }}
-          onClick={this.close_dropdown}
+          onClick={this.toggle_dropdown}
           title={button_description}
         >
           {isOpen ? (
@@ -82,11 +99,15 @@ export class DropdownMenu extends React.Component {
           )}
         >
           {dropdown_content}
-          <button onClick={this.close_dropdown}>
+          <button onClick={this.toggle_dropdown}>
             {`${trivial_text_maker("close")} ${aria_label}`}
           </button>
         </div>
       </div>
     );
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("click", this.handleWindowClick);
   }
 }
