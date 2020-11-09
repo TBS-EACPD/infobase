@@ -1,5 +1,8 @@
 import classNames from "classnames";
 
+import { useInView } from "react-intersection-observer";
+import "intersection-observer";
+
 import { trivial_text_maker } from "../models/text.js";
 import "./BackToTop.scss";
 
@@ -16,31 +19,31 @@ export class BackToTop extends React.Component {
     this.page_footer = document.getElementById("wb-info");
   }
 
-  handleScroll = () => {
-    const should_be_shown =
-      window.pageYOffset >
-      this.page_header.offsetTop + this.page_header.offsetHeight;
+  // handleScroll = () => {
+  //   const should_be_shown =
+  //     window.pageYOffset >
+  //     this.page_header.offsetTop + this.page_header.offsetHeight;
 
-    const should_be_caught =
-      window.innerWidth > 600 &&
-      window.pageYOffset + window.innerHeight > this.page_footer.offsetTop + 15;
+  //   const should_be_caught =
+  //     window.innerWidth > 600 &&
+  //     window.pageYOffset + window.innerHeight > this.page_footer.offsetTop + 15;
 
-    this.setState({
-      shown: should_be_shown,
-      caught_by_footer: should_be_caught,
-    });
-  };
+  //   this.setState({
+  //     shown: should_be_shown,
+  //     caught_by_footer: should_be_caught,
+  //   });
+  // };
 
-  componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
+  // componentDidMount() {
+  //   window.addEventListener("scroll", this.handleScroll);
 
-    // Resizing can reposition the page's scroll position without firing a scroll event, so watch for resizes too
-    window.addEventListener("resize", this.handleScroll);
-  }
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-    window.removeEventListener("resize", this.handleScroll);
-  }
+  //   // Resizing can reposition the page's scroll position without firing a scroll event, so watch for resizes too
+  //   window.addEventListener("resize", this.handleScroll);
+  // }
+  // componentWillUnmount() {
+  //   window.removeEventListener("scroll", this.handleScroll);
+  //   window.removeEventListener("resize", this.handleScroll);
+  // }
 
   handleClick() {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -49,6 +52,9 @@ export class BackToTop extends React.Component {
 
   render() {
     const { shown, caught_by_footer } = this.state;
+    const { ref, inView, entry } = useInView({
+      root: this.page_header,
+    });
 
     return (
       <button
@@ -56,7 +62,7 @@ export class BackToTop extends React.Component {
           "btn",
           "btn-ib-primary",
           "back-to-top",
-          shown && "back-to-top--shown",
+          !inView && "back-to-top--shown",
           !caught_by_footer && "back-to-top--fixed",
           caught_by_footer && "back-to-top--caught"
         )}
@@ -68,6 +74,7 @@ export class BackToTop extends React.Component {
         tabIndex="-1"
         onClick={() => this.handleClick()}
       >
+        {console.log("inside rerender")}
         {trivial_text_maker("back_to_top")}
       </button>
     );
