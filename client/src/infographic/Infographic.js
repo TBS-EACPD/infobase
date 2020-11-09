@@ -179,8 +179,7 @@ class InfoGraph_ extends React.Component {
           include_tags_hi: true,
           include_tags_hwh: true,
           include_tags_wwh: true,
-        }}
-        invariant_configs={{
+
           include_glossary: false,
           include_tables: false,
         }}
