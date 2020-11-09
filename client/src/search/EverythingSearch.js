@@ -59,6 +59,7 @@ const EverythingSearch = withRouter(
         include_glossary,
 
         filter_content,
+        is_original_filter,
       } = this.props;
 
       let { onSelect } = this.props;
@@ -111,6 +112,7 @@ const EverythingSearch = withRouter(
           onSelect={onSelect}
           large={!!this.props.large}
           filter_content={filter_content}
+          is_original_filter={is_original_filter}
         />
       );
     }

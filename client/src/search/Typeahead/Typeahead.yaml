@@ -23,9 +23,13 @@ paginate_next:
   fr: |
     Montrer les {{next_page_size}} items suivants
 
-filter:
-  en: Filter
-  fr: Filtrer
+add_filter:
+  en: Add filters
+  fr: Ajouter des filtres
+
+edit_filter:
+  en: Edit Filters
+  fr: Modifier les filtres
 
 close_menu:
   en: Close menu

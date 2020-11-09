@@ -55,7 +55,8 @@ export class Typeahead extends React.Component {
     if (e.keyCode === 13) {
       e.preventDefault();
       this.setState({ can_show_menu: true }, () => {
-        document.getElementById("rbt-menu-item-0").focus();
+        document.getElementById("rbt-menu-item-0") &&
+          document.getElementById("rbt-menu-item-0").focus();
       });
     }
   };
@@ -70,6 +71,7 @@ export class Typeahead extends React.Component {
       pagination_size,
       search_configs,
       onNewQuery,
+      is_original_filter,
     } = this.props;
 
     const { search_text, can_show_menu } = this.state;
@@ -180,10 +182,18 @@ export class Typeahead extends React.Component {
                         />
                       </div>
                     </MediaQuery>
-                    <span>{text_maker("filter")}</span>
+                    <span>
+                      {is_original_filter
+                        ? text_maker("add_filter")
+                        : text_maker("edit_filter")}
+                    </span>
                   </div>
                 }
-                dropdown_a11y_txt={text_maker("filter")}
+                dropdown_a11y_txt={
+                  is_original_filter
+                    ? text_maker("add_filter")
+                    : text_maker("edit_filter")
+                }
                 opened_button_class_name={"btn-ib-light--reversed--with-icon"}
                 closed_button_class_name={"btn-ib-light--with-icon"}
                 dropdown_content_class_name="no-right"

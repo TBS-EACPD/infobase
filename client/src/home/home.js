@@ -112,8 +112,8 @@ const HomeLayout = (props) => (
               include_tags_hwh: true,
               include_tags_wwh: true,
 
-              include_glossary: true,
-              include_tables: true,
+              include_glossary: false,
+              include_tables: false,
             }}
             onNewQuery={(query) => {
               log_standard_event({
