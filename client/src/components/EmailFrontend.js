@@ -298,7 +298,7 @@ class EmailFrontend extends React.Component {
       >
         {loading && (
           <div style={{ height: "50px" }}>
-            <SpinnerWrapper config_name="small_inline" />
+            <SpinnerWrapper config_name="tabbed_content" />
           </div>
         )}
         {!loading && (
