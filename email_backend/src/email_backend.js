@@ -37,7 +37,7 @@ const log_error_case = (request, error_message) => {
 };
 const log_success_case = (request) => {
   const request_content = get_request_content(request);
-  console.error(
+  console.log(
     JSON.stringify({
       request_content,
       sha: process.env.CURRENT_SHA || "dev, no sha env var set",
