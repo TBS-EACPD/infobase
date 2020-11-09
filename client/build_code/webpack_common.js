@@ -60,12 +60,12 @@ const get_rules = ({ should_use_babel, language, is_prod_build }) => {
       use: js_module_loader_rules,
       sideEffects: true,
     },
-    /*{
+    {
       // node modules that specifically require transpilation...
       include: /node_modules\/(graphiql|graphql-language-service-.*|codemirror-graphql|codemirror)/,
       test: /\.js$/,
       use: js_module_loader_rules,
-    },*/
+    },
     {
       test: /\.css$/,
       use: [
