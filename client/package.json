@@ -85,7 +85,7 @@
     "postcss": "^8.1.6",
     "prop-types": "^15.6.2",
     "qrcode-generator": "^1.4.3",
-    "raw-loader": "^4.0.2",
+    "raw-loader": "^0.5.1",
     "react": "^16.8.0",
     "react-addons-shallow-compare": "^15.4.2",
     "react-aria-modal": "^2.12.3",
