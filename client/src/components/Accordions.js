@@ -89,8 +89,9 @@ const StatelessPullDownAccordion = ({
   isExpanded,
   children,
   onToggle,
-  showPin,
-  sticky_data, //sticky data only applies if show pin is true
+  show_pin,
+  can_pin, //these 2 pin only apply
+  pin_pressed, //when show_pin is true
   closeAccordion,
 }) => (
   <div aria-label={title} className="pull-down-accordion">
@@ -102,15 +103,15 @@ const StatelessPullDownAccordion = ({
       >
         {title}
       </button>
-      {showPin && (
+      {show_pin && (
         <button
           style={{ float: "right", marginLeft: "2rem" }}
           onClick={() => {
-            sticky_data.pin_pressed();
-            sticky_data.can_pin && closeAccordion();
+            pin_pressed();
+            can_pin && closeAccordion();
           }}
         >
-          {sticky_data.can_pin ? (
+          {can_pin ? (
             <IconPin
               height="25px"
               width="25px"

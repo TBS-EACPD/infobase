@@ -37,41 +37,50 @@ class KeyConcepts_ extends React.Component {
     super(props);
     this.accordionRef = React.createRef(null);
 
-    let can_pin;
+    let user_enabled_pinning;
     if (has_local_storage) {
       try {
-        can_pin = JSON.parse(localStorage.getItem(`can_pin_key_concepts`));
+        user_enabled_pinning = JSON.parse(
+          localStorage.getItem(`user_enabled_pinning_key_concepts`)
+        );
       } catch {
-        can_pin = null;
+        user_enabled_pinning = true;
       }
     }
 
     this.keyConceptsContainerRef = React.createRef();
 
     this.state = {
-      can_pin: _.isBoolean(can_pin) ? can_pin : true,
+      user_enabled_pinning: _.isBoolean(user_enabled_pinning)
+        ? user_enabled_pinning
+        : true,
     };
   }
+
+  componentDidUpdate(prev_props, prev_state) {
+    localStorage.setItem(
+      "user_enabled_pinning_key_concepts",
+      !prev_state.user_enabled_pinning
+    );
+  }
+
+  pin_pressed = () => {
+    const { user_enabled_pinning } = this.state;
+    this.setState({
+      user_enabled_pinning: !user_enabled_pinning,
+    });
+  };
 
   render() {
     const { rendered_q_a_keys, subject } = this.props;
 
-    const { can_pin: can_pin } = this.state;
-
-    const sticky_data = {
-      can_pin: can_pin,
-      pin_pressed: () =>
-        this.setState((prev_state) => {
-          localStorage.setItem("can_pin_key_concepts", !prev_state.can_pin);
-          return { can_pin: !prev_state.can_pin };
-        }),
-    };
+    const { user_enabled_pinning } = this.state;
 
     return (
       <ReactResizeDetector handleWidth>
         {({ width }) => (
           <InView>
-            {({ inView, ref }) => (
+            {({ inView, ref, entry }) => (
               <div style={{ position: "relative" }} ref={ref}>
                 <MediaQuery maxWidth={breakpoints.maxMediumDevice}>
                   {(matches) => (
@@ -79,7 +88,11 @@ class KeyConcepts_ extends React.Component {
                       className={classNames(
                         "mrgn-bttm-md",
                         matches && "mrgn-tp-md",
-                        !inView && can_pin && "sticky"
+                        !inView &&
+                          user_enabled_pinning &&
+                          entry &&
+                          entry.boundingClientRect.top < 0 &&
+                          "sticky"
                       )}
                       style={{
                         width: width,
@@ -89,8 +102,9 @@ class KeyConcepts_ extends React.Component {
                         <AutoAccordion
                           title={text_maker("some_things_to_keep_in_mind")}
                           ref={this.accordionRef}
-                          showPin
-                          sticky_data={sticky_data}
+                          show_pin
+                          can_pin={user_enabled_pinning}
+                          pin_pressed={this.pin_pressed}
                         >
                           <div
                             style={{
