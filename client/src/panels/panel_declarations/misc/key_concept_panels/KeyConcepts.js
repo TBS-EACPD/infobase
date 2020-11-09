@@ -1,8 +1,10 @@
 import classNames from "classnames";
 import { ButtonToolbar } from "react-bootstrap";
+import { InView } from "react-intersection-observer";
 import ReactResizeDetector from "react-resize-detector";
 import MediaQuery from "react-responsive";
 import { withRouter } from "react-router";
+import "intersection-observer";
 
 import { has_local_storage } from "src/core/feature_detection.js";
 
@@ -47,32 +49,14 @@ class KeyConcepts_ extends React.Component {
     this.keyConceptsContainerRef = React.createRef();
 
     this.state = {
-      key_concepts_out_of_view: false,
       can_pin: _.isBoolean(can_pin) ? can_pin : true,
     };
-  }
-
-  componentDidMount() {
-    window.addEventListener("scroll", () => {
-      const keyConceptsContainerTop = this.keyConceptsContainerRef.current.getBoundingClientRect()
-        .top;
-      if (keyConceptsContainerTop < 0) {
-        !this.state.key_concepts_out_of_view &&
-          this.setState({ key_concepts_out_of_view: true });
-      } else {
-        this.state.key_concepts_out_of_view &&
-          this.setState({ key_concepts_out_of_view: false });
-      }
-    });
   }
 
   render() {
     const { rendered_q_a_keys, subject } = this.props;
 
-    const {
-      key_concepts_out_of_view: key_concepts_out_of_view, //boolean that can be checked for if the container for the key concepts is within view
-      can_pin: can_pin,
-    } = this.state;
+    const { can_pin: can_pin } = this.state;
 
     const sticky_data = {
       can_pin: can_pin,
@@ -86,56 +70,60 @@ class KeyConcepts_ extends React.Component {
     return (
       <ReactResizeDetector handleWidth>
         {({ width }) => (
-          <div
-            style={{ position: "relative" }}
-            ref={this.keyConceptsContainerRef}
-          >
-            <MediaQuery maxWidth={breakpoints.maxMediumDevice}>
-              {(matches) => (
-                <div
-                  className={classNames(
-                    "mrgn-bttm-md",
-                    matches && "mrgn-tp-md",
-                    key_concepts_out_of_view && can_pin && "sticky"
-                  )}
-                  style={{
-                    width: width,
-                  }}
-                >
-                  <ButtonToolbar>
-                    <AutoAccordion
-                      title={text_maker("some_things_to_keep_in_mind")}
-                      ref={this.accordionRef}
-                      showPin
-                      sticky_data={sticky_data}
+          <InView>
+            {({ inView, ref }) => (
+              <div style={{ position: "relative" }} ref={ref}>
+                <MediaQuery maxWidth={breakpoints.maxMediumDevice}>
+                  {(matches) => (
+                    <div
+                      className={classNames(
+                        "mrgn-bttm-md",
+                        matches && "mrgn-tp-md",
+                        !inView && can_pin && "sticky"
+                      )}
+                      style={{
+                        width: width,
+                      }}
                     >
-                      <div
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                      >
-                        <KeyConceptList
-                          question_answer_pairs={_.map(
-                            rendered_q_a_keys,
-                            (key) => [
-                              <TM
-                                key={key + "_q"}
-                                k={key + "_q"}
-                                args={{ subject }}
-                              />,
-                              <TM
-                                key={key + "_a"}
-                                k={key + "_a"}
-                                args={{ subject }}
-                              />,
-                            ]
-                          )}
-                        />
-                      </div>
-                    </AutoAccordion>
-                  </ButtonToolbar>
-                </div>
-              )}
-            </MediaQuery>
-          </div>
+                      <ButtonToolbar>
+                        <AutoAccordion
+                          title={text_maker("some_things_to_keep_in_mind")}
+                          ref={this.accordionRef}
+                          showPin
+                          sticky_data={sticky_data}
+                        >
+                          <div
+                            style={{
+                              paddingLeft: "10px",
+                              paddingRight: "10px",
+                            }}
+                          >
+                            <KeyConceptList
+                              question_answer_pairs={_.map(
+                                rendered_q_a_keys,
+                                (key) => [
+                                  <TM
+                                    key={key + "_q"}
+                                    k={key + "_q"}
+                                    args={{ subject }}
+                                  />,
+                                  <TM
+                                    key={key + "_a"}
+                                    k={key + "_a"}
+                                    args={{ subject }}
+                                  />,
+                                ]
+                              )}
+                            />
+                          </div>
+                        </AutoAccordion>
+                      </ButtonToolbar>
+                    </div>
+                  )}
+                </MediaQuery>
+              </div>
+            )}
+          </InView>
         )}
       </ReactResizeDetector>
     );
