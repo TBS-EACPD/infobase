@@ -228,6 +228,9 @@ function extract_flat_data_from_results_hierarchies(
     indicators = [],
     pi_dr_links = [];
 
+  const parse_non_empty_int = (value) =>
+    _.isEmpty(value) ? null : parseInt(value);
+
   const crawl_hierachy_level = (subject_node) =>
     _.each(subject_node, (subject) => {
       _.each(
@@ -244,20 +247,18 @@ function extract_flat_data_from_results_hierarchies(
           });
 
           _.each(result.indicators, (indicator) => {
-            indicator.target_year = _.isEmpty(indicator.target_year)
-              ? null
-              : parseInt(indicator.target_year);
-            indicator.target_month = _.isEmpty(indicator.target_month)
-              ? null
-              : parseInt(indicator.target_month);
+            const processed_indicator = {
+              ...indicator,
+              // methodologies are markdown, but many contain a line starting with an unescaped # that ISN'T a header, but an actuall number sign
+              // a header in a methodology would be invalid Titan input anyway, so safe to escape all those cases ourselves
+              methodology:
+                indicator.methodology &&
+                indicator.methodology.replace(/^#/g, "\\#"),
+              target_year: parse_non_empty_int(indicator.target_year),
+              target_month: parse_non_empty_int(indicator.target_month),
+            };
 
-            // methodologies are markdown, but many contain a line starting with an unescaped # that ISN'T a header, but an actuall number sign
-            // a header in a methodology would be invalid Titan input anyway, so safe to escape all those cases ourselves
-            indicator.methodology =
-              indicator.methodology &&
-              indicator.methodology.replace(/^#/g, "\\#");
-
-            indicators.push(_.omit(indicator, "__typename"));
+            indicators.push(_.omit(processed_indicator, "__typename"));
           });
         }
       );
