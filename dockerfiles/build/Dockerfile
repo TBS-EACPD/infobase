@@ -25,9 +25,12 @@ ENV PATH $SERVICE_HOME/google-cloud-sdk/bin:$PATH
 USER root
 
 # image specific
-RUN apk add --no-cache \
+RUN apk add --no-cache --virtual .gyp \
+  make \
   openssh \
-  make
+  g++ \
+  && npm install \
+  && apk del .gyp
 
 USER    ${SERVICE_USER}
 WORKDIR ${SERVICE_HOME}
