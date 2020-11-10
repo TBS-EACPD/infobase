@@ -57,7 +57,7 @@ export const declare_personnel_spend_panel = () =>
         const personnel_data = [
           {
             id: "Personnel",
-            data: _.map(panel_args.series[0], (spending_data, year_index) => ({
+            data: _.map(panel_args.series, (spending_data, year_index) => ({
               y: spending_data,
               x: run_template(std_years[year_index]),
             })),
@@ -76,7 +76,7 @@ export const declare_personnel_spend_panel = () =>
               <div position="relative">
                 <GraphOverlay>
                   <WrappedNivoLine
-                    raw_data={panel_args.series[0]}
+                    raw_data={panel_args.series}
                     data={personnel_data}
                     margin={{
                       top: 50,
