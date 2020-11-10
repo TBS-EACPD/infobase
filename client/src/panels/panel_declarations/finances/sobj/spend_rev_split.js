@@ -104,17 +104,20 @@ export const declare_spend_rev_split_panel = () =>
               );
               const last_year_rev =
                 (last_year_spend[22] || 0) + (last_year_spend[21] || 0);
+              const minus_last_year_rev = -last_year_rev;
               const last_year_gross_exp = _.sum(
                 _.map(_.range(1, 13), (i) => last_year_spend[i] || 0)
               );
               if (last_year_rev === 0) {
                 return false;
               }
-              const last_year_net_exp = last_year_gross_exp + last_year_rev;
+              const last_year_net_exp =
+                last_year_gross_exp - minus_last_year_rev;
 
               const text_calculations = {
                 subject,
                 last_year_rev,
+                minus_last_year_rev,
                 last_year_gross_exp,
                 last_year_net_exp,
               };
@@ -138,6 +141,7 @@ export const declare_spend_rev_split_panel = () =>
               const text_calculations = {
                 subject,
                 last_year_rev: rev_split.neg_exp,
+                minus_last_year_rev: -rev_split.neg_exp,
                 last_year_gross_exp: rev_split.gross_exp,
                 last_year_net_exp: rev_split.net_exp,
               };
