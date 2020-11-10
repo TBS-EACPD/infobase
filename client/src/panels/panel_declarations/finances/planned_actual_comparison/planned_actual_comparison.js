@@ -56,8 +56,14 @@ export const declare_planned_actual_comparison_panel = () =>
           actual_ftes: actual_ftes,
           program_count_last_year:
             subject.level === "crso" &&
-            _.filter(spend_q.data, (row) => row["{{pa_last_year}}exp"] != 0)
-              .length,
+            _.chain(spend_q.data)
+              .zip(fte_q.data)
+              .filter(
+                ([spend_row, fte_row]) =>
+                  spend_row["{{pa_last_year}}exp"] !== 0 ||
+                  fte_row["{{pa_last_year}}"] !== 0
+              )
+              .value().length,
         };
 
         return {
