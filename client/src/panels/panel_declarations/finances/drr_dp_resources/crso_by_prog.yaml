@@ -12,8 +12,8 @@ crso_by_prog_fte_title:
 crso_by_prog_exp_or_ftes:
   transform: [handlebars,markdown]
   en: |
-   In **{{planning_year_1}}**, {{gl_tt (pluralize crso_prg_num "program")  "PROG"}}
-   {{#isEqual crso_prg_num 1}}falls{{else}}fall{{/isEqual}} under this {{gt "core_resp"}}
+   In **{{planning_year_1}}**, {{gl_tt (pluralize first_year_program_count "program")  "PROG"}}
+   {{#isEqual first_year_program_count 1}}falls{{else}}fall{{/isEqual}} under this {{gt "core_resp"}}
    {{#if is_fte}}
    with **{{first_year_top_1_name}}** ({{fmt_big_int first_year_top_1_value}} FTEs) being the largest in terms of employment,
    {{#if first_year_top_2_name}} followed by **{{first_year_top_2_name}}** ({{fmt_big_int first_year_top_2_value}} FTEs). {{else}}. {{/if}}
@@ -23,7 +23,7 @@ crso_by_prog_exp_or_ftes:
    {{/if}}
   
   fr: |
-   En **{{planning_year_1}}**, cette responsabilité essentielle compte {{gl_tt (pluralize crso_prg_num "programme") "PROG"}}.
+   En **{{planning_year_1}}**, cette responsabilité essentielle compte {{gl_tt (pluralize first_year_program_count "programme") "PROG"}}.
    {{#if is_fte}}
    Le plus important en termes d'employés étant **{{first_year_top_1_name}}** ({{fmt_big_int first_year_top_1_value}} ETP)
    {{#if first_year_top_2_name}} suivi par **{{first_year_top_2_name}}** ({{fmt_big_int first_year_top_2_value}} ETP). {{else}}. {{/if}}

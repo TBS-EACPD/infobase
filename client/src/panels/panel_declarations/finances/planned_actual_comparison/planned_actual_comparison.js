@@ -10,8 +10,6 @@ import { PlannedActualTable } from "./PlannedActualTable.js";
 
 import text from "./planned_actual_comparison.yaml";
 
-
-
 const { text_maker, TM } = create_text_maker_component(text);
 
 export const declare_planned_actual_comparison_panel = () =>
@@ -56,7 +54,10 @@ export const declare_planned_actual_comparison_panel = () =>
           planned_ftes: planned_ftes,
           actual_spend: actual_spend,
           actual_ftes: actual_ftes,
-          crso_prg_num: subject.level === "crso" && subject.programs.length,
+          program_count_last_year:
+            subject.level === "crso" &&
+            _.filter(spend_q.data, (row) => row["{{pa_last_year}}exp"] != 0)
+              .length,
         };
 
         return {

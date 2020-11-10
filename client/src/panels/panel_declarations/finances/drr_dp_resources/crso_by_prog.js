@@ -27,20 +27,21 @@ const render_resource_type = (is_fte) => ({ calculations, footnotes }) => {
   const { exp_data, fte_data } = panel_args;
 
   //use hacky side-effects to create colors for all programs, so that these colours are consitent accross the fte/$ panel
-  const all_program_names = _.chain(exp_data.programs)
-    .map("label")
-    .concat(_.map(exp_data, "label"))
-    .uniq()
-    .value();
+  const all_program_names = _.chain(exp_data).map("label").uniq().value();
   const colors = infobase_colors();
   _.each(all_program_names, (name) => colors(name));
+
+  const first_year_program_count = _.filter(
+    exp_data,
+    ({ data }) => data[0] != 0
+  ).length;
 
   const text = (
     <TM
       k="crso_by_prog_exp_or_ftes"
       args={{
         subject,
-        crso_prg_num: subject.programs.length,
+        first_year_program_count,
         is_fte: is_fte,
         ...panel_args,
       }}
