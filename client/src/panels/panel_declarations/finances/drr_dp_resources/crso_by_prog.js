@@ -31,10 +31,13 @@ const render_resource_type = (is_fte) => ({ calculations, footnotes }) => {
   const colors = infobase_colors();
   _.each(all_program_names, (name) => colors(name));
 
-  const first_year_program_count = _.filter(
-    exp_data,
-    ({ data }) => data[0] != 0
-  ).length;
+  const first_year_program_count = _.chain(exp_data)
+    .zip(fte_data)
+    .filter(
+      ([{ data: exp_data }, { data: fte_data }]) =>
+        exp_data[0] !== 0 || fte_data[0] !== 0
+    )
+    .value().length;
 
   const text = (
     <TM
