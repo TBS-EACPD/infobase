@@ -88,7 +88,7 @@ gov_in_year_estimates_split_text:
   en: |
     This fiscal year ({{est_in_year}}), a total of **{{fmt_compact1_written tabled_est_in_year}}** in planned budgetary expenditures have been presented in the 
     following {{gl_tt "estimates processes" "EST_PROC"}} and {{gl_tt "adjustments and transfers" "ADJUS"}}:
-    {{#each gov_in_year_estimates_split}}
+    {{#each in_year_estimates_split}}
     * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}** 
     {{/each}}
     
@@ -98,7 +98,7 @@ gov_in_year_estimates_split_text:
   fr: |
    Pour l’exercice courant ({{est_in_year}}), le total de dépenses budgétaires prévues s’élève à 
    **{{fmt_compact1_written gov_tabled_est_in_year}}** dans le(s) {{gl_tt "processus budgétaire(s)" "EST_PROC"}} et {{gl_tt "redressements et virements" "ADJUS"}} suivants:
-   {{#each gov_in_year_estimates_split}}
+   {{#each in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}** 
    {{/each}}
 
