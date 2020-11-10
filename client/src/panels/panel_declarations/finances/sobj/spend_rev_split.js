@@ -31,7 +31,7 @@ function render({ calculations, footnotes, sources }) {
   const series = [last_year_gross_exp, last_year_rev];
   const _ticks = ["gross", "revenues"];
 
-  // if neg_exp is 0, then no point in showing the net bar
+  // if last_year_rev is 0, then no point in showing the net bar
   if (last_year_rev !== 0) {
     series.push(last_year_net_exp);
     _ticks.push("net");
