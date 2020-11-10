@@ -73,7 +73,13 @@ export function get_client() {
         fetchOptions: { method: "GET" },
         fetch: query_length_tolerant_fetch,
       }),
-      cache: new InMemoryCache(),
+      cache: new InMemoryCache({
+        typePolicies: {
+          Root: {
+            keyFields: [],
+          },
+        },
+      }),
       defaultOptions: {
         query: {
           fetchPolicy: "cache-first",
