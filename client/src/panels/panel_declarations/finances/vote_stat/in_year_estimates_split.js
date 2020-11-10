@@ -51,7 +51,7 @@ const estimates_split_render_w_text_key = (text_key) => ({
   const { in_year_estimates_split } = panel_args;
   const estimate_data = _.map(in_year_estimates_split, ([tick, data]) => ({
     label: tick,
-    [tick]: [data],
+    [tick]: data,
   }));
 
   const content = (
