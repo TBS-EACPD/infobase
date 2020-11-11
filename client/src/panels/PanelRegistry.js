@@ -43,7 +43,9 @@ class PanelRegistry {
   }
 
   static panels_for_table(table_id) {
-    return _.filter(panels, ({depends_on}) =>  _.includes(depends_on, table_id));
+    return _.filter(panels, ({ depends_on }) =>
+      _.includes(depends_on, table_id)
+    );
   }
 
   static panels_for_level(level_name) {
@@ -103,6 +105,17 @@ class PanelRegistry {
       return false;
     }
 
+    // TODO: this is something panels should handle themselves. Troublesome that the PanelRegistry
+    // makes this sort of check for dept tables but not CR or program tables. One way or another, this
+    // will go away when we drop tables all together
+    if (
+      this.level === "dept" &&
+      _.some(this.depends_on, (t) => {
+        return !Table.lookup(t).depts[subject.id];
+      })
+    ) {
+      return false;
+    }
     const calc_func = this._inner_calculate;
 
     const panel_args = calc_func.call(this, subject, options);
