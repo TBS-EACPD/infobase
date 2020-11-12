@@ -144,12 +144,22 @@ jobs:
 
       - run: ./scripts/ci_scripts/get_bundle_stats_baseline.sh
 
+      - run: # logging memory usage, build job capable of maxing out the memory available in CircleCI
+          command: |
+            while true; do
+              sleep 5
+              echo "====="
+              ps -eo comm,vsz,rss | sort -k 3 -nr
+              echo "====="
+            done 
+          background: true
+
       - restore_cache:
           keys:
             - prod-build-{{ .Branch }}-{{ .Revision }}
       - run:
           command: | # if the build job starts failing with exit code 137 (running out of memory), add the build_all.sh option -c "half" to cut the concurrency
-            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh -m 256)
+            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh -m 256 -c "half")
       - save_cache:
           paths:
             - client/build
