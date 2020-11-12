@@ -2,17 +2,19 @@
 set -e # will exit if any command has non-zero exit value 
 
 concurrency="full"
-max_old_space_size=512
+max_old_space_size=1024
 
-while getopts ":c:concurrency:m:max_old_space_size:" arg; do
-  case $arg in
+while getopts "c:m:" opt; do
+  case ${opt} in
     c) concurrency=$OPTARG;;
-    concurrency) concurrency=$OPTARG;;
     m) max_old_space_size=$OPTARG;;
-    max_old_space_size) max_old_space_size=$OPTARG;;
   esac
 done
 
+if [[ ! $concurrency =~ ^(full|half|none)$ ]]; then
+  echo "Concurrency options, -c, are full, half, or none"
+  exit 1
+fi
 
 [ -e $BUILD_DIR/InfoBase ] && rm -r $BUILD_DIR/InfoBase # clean up build dir
 
@@ -97,10 +99,6 @@ elif [ $concurrency == "none" ]; then
   npm run a11y_prod_no_watch_en --max_old_space_size=$max_old_space_size 
 
   npm run a11y_prod_no_watch_fr --max_old_space_size=$max_old_space_size
-else
-  echo ""
-  echo "Bad concurrency (c) option. Must be one of full, half, or none"
-  exit 1
 fi
 
 exit
