@@ -1,0 +1,77 @@
+console.log(process.env.NODE_ENV);
+module.exports = {
+  root: true,
+  plugins: ["import", "lodash"],
+  parser: "babel-eslint",
+  parserOptions: {
+    ecmaVersion: 2017,
+    ecmaFeatures: {
+      experimentalObjectRestSpread: true,
+    },
+    sourceType: "module",
+    allowImportExportEverywhere: true,
+  },
+  extends: [
+    "eslint:recommended",
+    "plugin:import/warnings",
+    "plugin:import/errors",
+  ],
+  rules: {
+    "no-debugger": process.env.NODE_ENV === "production" ? ["error"] : ["off"],
+    "no-unused-vars": ["warn", { args: "none" }],
+    "no-use-before-define": ["error", { functions: true, classes: true }],
+    "lodash/no-double-unwrap": ["error"],
+    "lodash/no-unbound-this": ["error"],
+    "lodash/unwrap": ["error"],
+    "import/order": [
+      "warn",
+      {
+        "newlines-between": "always-and-inside-groups",
+        alphabetize: {
+          order: "asc",
+          caseInsensitive: true,
+        },
+        groups: [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          ["sibling", "index"],
+        ],
+        // We can group imports further by adding rules here, the order they're defined in breaks ties when group and position are equal
+        pathGroups: [
+          {
+            pattern: "./*.yaml",
+            group: "index",
+            position: "after",
+          },
+          {
+            pattern: "src/components/**/*.js",
+            group: "internal",
+            position: "before",
+          },
+          {
+            pattern: "src/models/**/*.js",
+            group: "internal",
+            position: "before",
+          },
+          {
+            pattern: "src/core/**/*.js",
+            group: "internal",
+            position: "before",
+          },
+        ],
+      },
+    ],
+  },
+  settings: {
+    "import/resolver": {
+      node: {
+        moduleDirectory: ["./", "node_modules/"],
+      },
+    },
+    lodash: {
+      pragma: "_",
+    },
+  },
+};

@@ -53,6 +53,7 @@ export default class FAQ extends React.Component {
         params: { selected_qa_key },
       },
     } = this.props;
+    debugger;
 
     return (
       <StandardRouteContainer

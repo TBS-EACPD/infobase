@@ -2,7 +2,7 @@
   "plugins": [
     "node"
   ],
-  "extends": [ "../../.eslintrc.json", "plugin:node/recommended" ],
+  "extends": [ "../../.eslintrc.js", "plugin:node/recommended" ],
   "env": {
     "node": true
   },

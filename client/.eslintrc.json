@@ -2,7 +2,7 @@
   "plugins": [
     "react"
   ],
-  "extends": [ "../.eslintrc.json" ],
+  "extends": [ "../.eslintrc.js" ],
   "env": {
       "browser": true,
       "commonjs": true,
