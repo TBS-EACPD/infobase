@@ -148,7 +148,7 @@ jobs:
           keys:
             - prod-build-{{ .Branch }}-{{ .Revision }}
       - run:
-          command: |
+          command: | # if the build job starts failing with exit code 137 (running out of memory), add the build_all.sh option --concurrency="half"
             [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh --max_old_space_size=256)
       - save_cache:
           paths:
