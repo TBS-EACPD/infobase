@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`covid data covid initiative estimates 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "org": null,
+    },
+  },
+}
+`;
