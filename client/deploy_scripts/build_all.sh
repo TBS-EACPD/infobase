@@ -9,16 +9,16 @@ npm run IB_base
 # Run standard and a11y builds in parallel as background processes, store thieir stdout and stderr in temp files and hold on to their pids
 scratch=$(mktemp -d -t captured_build_output.XXXXXXXXXX)
 
-npm run IB_prod_no_watch_en --max_old_space_size=800 > $scratch/ib_prod_en_build_out 2> $scratch/ib_prod_en_build_err &
+npm run IB_prod_no_watch_en --max_old_space_size=600 > $scratch/ib_prod_en_build_out 2> $scratch/ib_prod_en_build_err &
 ib_prod_en_pid=$!
 
-npm run IB_prod_no_watch_fr --max_old_space_size=800 > $scratch/ib_prod_fr_build_out 2> $scratch/ib_prod_fr_build_err &
+npm run IB_prod_no_watch_fr --max_old_space_size=600 > $scratch/ib_prod_fr_build_out 2> $scratch/ib_prod_fr_build_err &
 ib_prod_fr_pid=$!
 
-npm run a11y_prod_no_watch_en --max_old_space_size=800 > $scratch/a11y_prod_en_build_out 2> $scratch/a11y_prod_en_build_err &
+npm run a11y_prod_no_watch_en --max_old_space_size=600 > $scratch/a11y_prod_en_build_out 2> $scratch/a11y_prod_en_build_err &
 a11y_prod_en_pid=$!
 
-npm run a11y_prod_no_watch_fr --max_old_space_size=800 > $scratch/a11y_prod_fr_build_out 2> $scratch/a11y_prod_fr_build_err &
+npm run a11y_prod_no_watch_fr --max_old_space_size=600 > $scratch/a11y_prod_fr_build_out 2> $scratch/a11y_prod_fr_build_err &
 a11y_prod_fr_pid=$!
 
 
