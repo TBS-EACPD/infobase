@@ -8,23 +8,15 @@
   i=0
   echo "\n"
   while [ true ]; do
-    c=`expr ${i} % 9`
-    case ${c} in
-      0) echo "⠋\c" ;;
-      1) echo "⠙\c" ;;
-      2) echo "⠹\c" ;;
-      3) echo "⠸\c" ;;
-      4) echo "⠼\c" ;;
-      5) echo "⠴\c" ;;
-      6) echo "⠦\c" ;;
-      7) echo "⠧\c" ;;
-      8) echo "⠇\c" ;;
-      9) echo "⠏\c" ;;
-    esac
-    i=`expr ${i} + 1`
-    # change the speed of the spinner by altering the 1 below
-    sleep 1
-    echo "\b\c"
+    spinner="⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
+    while :
+    do
+      for i in `seq 0 9`
+      do
+        printf "\b${spinner:$i:1}"
+        sleep 1 # change the speed of the spinner by altering the sleep time
+      done
+    done
   done
 ) 1>&2 &
 
