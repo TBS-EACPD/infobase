@@ -24,17 +24,17 @@ npm run IB_base
 function print_captured_output {
   kill -9 $spinner_pid
 
-  cat $scratch/ib_prod_en_build_out
-  cat $scratch/ib_prod_en_build_err
+  [ -f $scratch/ib_prod_en_build_out ] && cat $scratch/ib_prod_en_build_out
+  [ -f $scratch/ib_prod_en_build_err ] && cat $scratch/ib_prod_en_build_err
 
-  cat $scratch/ib_prod_fr_build_out
-  cat $scratch/ib_prod_fr_build_err
+  [ -f $scratch/ib_prod_fr_build_out ] && cat $scratch/ib_prod_fr_build_out
+  [ -f $scratch/ib_prod_fr_build_err ] && cat $scratch/ib_prod_fr_build_err
 
-  cat $scratch/a11y_prod_en_build_out
-  cat $scratch/a11y_prod_en_build_err
+  [ -f $scratch/a11y_prod_en_build_out ] && cat $scratch/a11y_prod_en_build_out
+  [ -f $scratch/a11y_prod_en_build_err ] && cat $scratch/a11y_prod_en_build_err
 
-  cat $scratch/a11y_prod_fr_build_out
-  cat $scratch/a11y_prod_fr_build_err
+  [ -f $scratch/a11y_prod_fr_build_out ] && cat $scratch/a11y_prod_fr_build_out
+  [ -f $scratch/a11y_prod_fr_build_err ] && cat $scratch/a11y_prod_fr_build_err
 }
 
 
