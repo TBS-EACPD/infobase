@@ -12,6 +12,7 @@ const schema = `
     covid_initiative: CovidInitiative
 
     fiscal_year: String
+    est_doc: String
     vote: Float
     stat: Float
   }

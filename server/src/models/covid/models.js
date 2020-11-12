@@ -20,6 +20,7 @@ export default function (model_singleton) {
     covid_initiative_id: parent_fkey_type(),
 
     fiscal_year: number_type,
+    est_doc: str_type,
     vote: number_type,
     stat: number_type,
   });
