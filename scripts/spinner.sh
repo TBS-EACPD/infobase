@@ -4,21 +4,32 @@
 # Keep track of that PID, you need to use it to kill the spinner when you want it stopped
 
 (
-  # based on https://unix.stackexchange.com/a/512170
   i=0
   echo "\n"
   while [ true ]; do
-    spinner="⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
-    while :
-    do
-      for i in `seq 0 9`
-      do
-        printf "\b${spinner:$i:1}"
-        sleep 1 # change the speed of the spinner by altering the sleep time
-      done
-    done
+    c=`expr ${i} % 9`
+    case ${c} in
+      0) printf "\b⠋" ;;
+      1) printf "\b⠙" ;;
+      2) printf "\b⠹" ;;
+      3) printf "\b⠸" ;;
+      4) printf "\b⠼" ;;
+      5) printf "\b⠴" ;;
+      6) printf "\b⠦" ;;
+      7) printf "\b⠧" ;;
+      8) printf "\b⠇" ;;
+      9) printf "\b⠏" ;;
+    esac
+    i=`expr ${i} + 1`
+    # change the speed of the spinner by altering the 1 below
+    sleep 1
   done
 ) 1>&2 &
+
+function exit_newline {
+  echo ""
+}
+trap exit_newline EXIT
 
 spinner_pid=$!
 
