@@ -116,16 +116,6 @@ jobs:
     steps:
       - checkout:
           path: "~/InfoBase"
-      
-      - run:
-          command: |
-            while true; do
-              sleep 5
-              echo "====="
-              ps -eo comm,vsz,rss | sort -k 3 -nr
-              echo "====="
-            done 
-          background: true
 
       - restore_cache:
           keys:
