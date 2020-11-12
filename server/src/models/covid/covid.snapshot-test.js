@@ -11,6 +11,7 @@ query ($lang: String = "en") {
         }
         
         fiscal_year
+        est_doc
         vote
         stat
       }
