@@ -76,8 +76,6 @@ elif [ $concurrency == "half" ]; then
   npm run IB_prod_no_watch_fr --max_old_space_size=$max_old_space_size > $scratch/ib_prod_fr_build_out 2> $scratch/ib_prod_fr_build_err &
   ib_prod_fr_pid=$!
 
-  spinner_pid=$(sh ../scripts/spinner.sh)
-
   wait $ib_prod_en_pid
   wait $ib_prod_fr_pid
   
