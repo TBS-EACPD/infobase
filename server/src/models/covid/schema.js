@@ -3,15 +3,24 @@ import _ from "lodash";
 import { bilingual_field } from "../schema_utils";
 
 const schema = `
+  extend type Root{
+    covid_initiatives: [CovidInitiative]
+    covid_measures: [CovidMeasure]
+  }
+
   extend type Org{
-    covid_initiative_estimates: [CovidInitiativeEstimates]
+    covid_initiatives: [CovidInitiative]
   }
   
+  type CovidInitiative{
+    id: String
+    name: String
+
+    estimates: [CovidInitiativeEstimates]
+  }
+
   type CovidInitiativeEstimates{
     org_id: String
-
-    covid_initiative_id: String
-    covid_initiative: CovidInitiative
 
     covid_measure_ids: [String]
     covid_measures: [CovidMeasure]
@@ -22,11 +31,6 @@ const schema = `
     stat: Float
   }
 
-  type CovidInitiative{
-    id: String
-    name: String
-  }
-
   type CovidMeasure{
     id: String
     name: String
@@ -34,22 +38,20 @@ const schema = `
 `;
 
 export default function ({ models, loaders }) {
-  const {
-    CovidInitiativeEstimates_org_id_loader,
-    CovidInitiative_loader,
-    CovidMeasure_loader,
-  } = loaders;
+  const { covid_initiatives_by_org_id_loader, covid_measure_loader } = loaders;
 
   const resolvers = {
+    Root: {
+      covid_initiatives: () => models.CovidInitiative.find({}),
+      covid_measures: () => models.CovidMeasure.find({}),
+    },
     Org: {
-      covid_initiative_estimates: ({ org_id }) =>
-        CovidInitiativeEstimates_org_id_loader.load(org_id),
+      covid_initiatives: ({ org_id }) =>
+        covid_initiatives_by_org_id_loader.load(org_id),
     },
     CovidInitiativeEstimates: {
-      covid_initiative: ({ covid_initiative_id }) =>
-        CovidInitiative_loader.load(covid_initiative_id),
       covid_measures: ({ covid_measure_ids }) =>
-        CovidMeasure_loader.loadMany(covid_measure_ids),
+        covid_measure_loader.loadMany(covid_measure_ids),
     },
     CovidInitiative: {
       id: _.property("covid_initiative_id"),

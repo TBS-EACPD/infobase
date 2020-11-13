@@ -18,46 +18,41 @@ export default function (model_singleton) {
     covid_measure_id: pkey_type(),
     ...bilingual("name", { ...str_type, required: true }),
   });
-  const CovidInitiativeSchema = mongoose.Schema({
-    covid_initiative_id: pkey_type(),
-    ...bilingual("name", { ...str_type, required: true }),
-  });
+
   const CovidInitiativeEstimatesSchema = mongoose.Schema({
     org_id: parent_fkey_type(),
-    covid_initiative_id: parent_fkey_type(),
-    covid_measure_ids: [parent_fkey_type()],
 
     fiscal_year: number_type,
     est_doc: str_type,
     vote: number_type,
     stat: number_type,
+
+    covid_measure_ids: [parent_fkey_type()],
+  });
+  const CovidInitiativeSchema = mongoose.Schema({
+    covid_initiative_id: pkey_type(),
+    ...bilingual("name", { ...str_type, required: true }),
+
+    estimates: [CovidInitiativeEstimatesSchema],
   });
 
   model_singleton.define_model("CovidMeasure", CovidMeasureSchema);
   model_singleton.define_model("CovidInitiative", CovidInitiativeSchema);
-  model_singleton.define_model(
-    "CovidInitiativeEstimates",
-    CovidInitiativeEstimatesSchema
-  );
 
-  const {
-    CovidMeasure,
-    CovidInitiative,
-    CovidInitiativeEstimates,
-  } = model_singleton.models;
+  const { CovidMeasure, CovidInitiative } = model_singleton.models;
 
   const loaders = {
-    CovidMeasure_loader: create_resource_by_id_attr_dataloader(
+    covid_measure_loader: create_resource_by_id_attr_dataloader(
       CovidMeasure,
       "covid_measure_id"
     ),
-    CovidInitiative_loader: create_resource_by_id_attr_dataloader(
+    covid_initiative_loader: create_resource_by_id_attr_dataloader(
       CovidInitiative,
       "covid_initiative_id"
     ),
-    CovidInitiativeEstimates_org_id_loader: create_resource_by_foreignkey_attr_dataloader(
-      CovidInitiativeEstimates,
-      "org_id"
+    covid_initiatives_by_org_id_loader: create_resource_by_foreignkey_attr_dataloader(
+      CovidInitiative,
+      "estimates.org_id"
     ),
   };
   _.each(loaders, (val, key) => model_singleton.define_loader(key, val));
