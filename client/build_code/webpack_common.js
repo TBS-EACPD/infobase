@@ -5,6 +5,7 @@ const CircularDependencyPlugin = require("circular-dependency-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const _ = require("lodash");
 const TerserPlugin = require("terser-webpack-plugin");
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const webpack = require("webpack");
 
 const CDN_URL = process.env.CDN_URL || ".";
@@ -194,7 +195,8 @@ function get_optimizations(is_prod_build, bundle_stats) {
       moduleIds: bundle_stats ? "named" : "size",
       chunkIds: bundle_stats ? "named" : "size",
       minimize: true,
-      minimizer: [new TerserPlugin({ parallel: true })],
+      minimizer: [new UglifyJSPlugin({ sourceMap: false })],
+      //minimizer: [new TerserPlugin({ parallel: true })],
       splitChunks: {
         // default is 5, but that left us with insufficient granularity in chunks and lead to duplication of code between bundles
         maxAsyncRequests: 20,
