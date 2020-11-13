@@ -11,7 +11,7 @@ export class BackToTop extends React.Component {
     super(props);
 
     this.state = {
-      shown: false,
+      show_back_to_top: false,
       caught_by_footer: false,
     };
 
@@ -29,17 +29,21 @@ export class BackToTop extends React.Component {
   //     window.pageYOffset + window.innerHeight > this.page_footer.offsetTop + 15;
 
   //   this.setState({
-  //     shown: should_be_shown,
+  //     show_back_to_top: should_be_shown,
   //     caught_by_footer: should_be_caught,
   //   });
   // };
 
-  // componentDidMount() {
-  //   window.addEventListener("scroll", this.handleScroll);
-
-  //   // Resizing can reposition the page's scroll position without firing a scroll event, so watch for resizes too
-  //   window.addEventListener("resize", this.handleScroll);
-  // }
+  componentDidMount() {
+    const observer = new IntersectionObserver((entries, observer) => {
+      if (entries[0].intersectionRatio <= 0) {
+        this.setState({ show_back_to_top: true });
+      } else {
+        this.setState({ show_back_to_top: false });
+      }
+    });
+    observer.observe(this.page_header);
+  }
   // componentWillUnmount() {
   //   window.removeEventListener("scroll", this.handleScroll);
   //   window.removeEventListener("resize", this.handleScroll);
@@ -51,10 +55,8 @@ export class BackToTop extends React.Component {
   }
 
   render() {
-    const { shown, caught_by_footer } = this.state;
-    const { ref, inView, entry } = useInView({
-      root: this.page_header,
-    });
+    const { show_back_to_top, caught_by_footer } = this.state;
+    console.log(show_back_to_top);
 
     return (
       <button
@@ -62,7 +64,7 @@ export class BackToTop extends React.Component {
           "btn",
           "btn-ib-primary",
           "back-to-top",
-          !inView && "back-to-top--shown",
+          show_back_to_top && "back-to-top--shown",
           !caught_by_footer && "back-to-top--fixed",
           caught_by_footer && "back-to-top--caught"
         )}
@@ -74,7 +76,6 @@ export class BackToTop extends React.Component {
         tabIndex="-1"
         onClick={() => this.handleClick()}
       >
-        {console.log("inside rerender")}
         {trivial_text_maker("back_to_top")}
       </button>
     );
