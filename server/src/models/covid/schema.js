@@ -8,6 +8,8 @@ const schema = `
   }
   
   type CovidInitiativeEstimates{
+    org_id: String
+
     covid_initiative_id: String
     covid_initiative: CovidInitiative
 
@@ -40,10 +42,8 @@ export default function ({ models, loaders }) {
 
   const resolvers = {
     Org: {
-      covid_initiative_estimates: (org) =>
-        org.org_id
-          ? CovidInitiativeEstimates_org_id_loader.load(org.org_id)
-          : null,
+      covid_initiative_estimates: ({ org_id }) =>
+        CovidInitiativeEstimates_org_id_loader.load(org_id),
     },
     CovidInitiativeEstimates: {
       covid_initiative: ({ covid_initiative_id }) =>
