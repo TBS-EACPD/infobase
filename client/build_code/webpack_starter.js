@@ -42,7 +42,7 @@ const options_by_app = {
     entry: common_entry.concat(["./src/InfoBase/root.js"]),
     get_output: (language) => ({
       path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
-      filename: `app-a11y-${language}.min.js`,
+      filename: `[name]-app-a11y-${language}.min.js`,
       chunkFilename: `[name].app-ally-${language}${
         prod ? ".[chunkhash]" : ""
       }.min.js`,
@@ -52,7 +52,7 @@ const options_by_app = {
     entry: common_entry.concat(["./src/InfoBase/root.js"]),
     get_output: (language) => ({
       path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
-      filename: `app-${language}.min.js`,
+      filename: `[name]-app-${language}.min.js`,
       chunkFilename: `[name].app-${language}${
         prod ? ".[chunkhash]" : ""
       }.min.js`,
