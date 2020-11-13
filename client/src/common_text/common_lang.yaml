@@ -679,6 +679,19 @@ all_voted_items:
   en: all voted items
   fr: tous les crédits votés
 
+covid_initiative:
+  en: TODO
+  fr: TODO
+covid_initiatives:
+  en: TODO
+  fr: TODO
+covid_measure:
+  en: TODO
+  fr: TODO
+covid_measures:
+  en: TODO
+  fr: TODO
+
 ##################################
 # text for welcome/netflix panel
 ##################################
