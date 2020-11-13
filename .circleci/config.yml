@@ -253,7 +253,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test_end_to_end: # slower but more in-depth than the test job. Wait until these have passed before deploying the client
     docker:
-      - image: eaadtbs/ib-ci-test:v1.1
+      - image: eaadtbs/ib-ci-test:1.2
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
