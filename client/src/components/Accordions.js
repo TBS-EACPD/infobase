@@ -1,6 +1,6 @@
 import { TransitionGroup, Transition } from "react-transition-group";
 
-import { IconChevron, IconPin, IconUnpin } from "../icons/icons.js";
+import { IconChevron } from "../icons/icons.js";
 
 import { trivial_text_maker } from "../models/text.js";
 
@@ -89,10 +89,6 @@ const StatelessPullDownAccordion = ({
   isExpanded,
   children,
   onToggle,
-  show_pin,
-  can_pin, //these 2 pin only apply
-  pin_pressed, //when show_pin is true
-  closeAccordion,
 }) => (
   <div aria-label={title} className="pull-down-accordion">
     <div className="pull-down-accordion-header" style={{ display: "flex" }}>
@@ -103,31 +99,6 @@ const StatelessPullDownAccordion = ({
       >
         {title}
       </button>
-      {show_pin && (
-        <button
-          style={{ float: "right", marginLeft: "2rem" }}
-          onClick={() => {
-            pin_pressed();
-            can_pin && closeAccordion();
-          }}
-        >
-          {can_pin ? (
-            <IconPin
-              height="25px"
-              width="25px"
-              vertical_align="top"
-              alternate_color="false"
-            />
-          ) : (
-            <IconUnpin
-              height="25px"
-              width="25px"
-              vertical_align="top"
-              alternate_color="false"
-            />
-          )}
-        </button>
-      )}
     </div>
     <TransitionGroup component={FirstChild}>
       {isExpanded && (
