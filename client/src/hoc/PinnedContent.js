@@ -7,6 +7,8 @@ import { IconPin, IconUnpin } from "../icons/icons.js";
 
 import { has_local_storage } from "src/core/feature_detection.js";
 
+import "./PinnedContent.scss";
+
 export const PinnedContent = (WrappedComponent, local_storage_name) =>
   class Pinned extends React.Component {
     constructor(props) {
@@ -54,7 +56,7 @@ export const PinnedContent = (WrappedComponent, local_storage_name) =>
             <InView>
               {({ inView, ref, entry }) => (
                 // this div is for the intersection check
-                <div style={{ position: "relative" }} ref={ref}>
+                <div ref={ref}>
                   {/* this div is for sticky styline */}
                   <div
                     className={classNames(
@@ -68,18 +70,12 @@ export const PinnedContent = (WrappedComponent, local_storage_name) =>
                       width: width,
                     }}
                   >
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: "1rem",
-                        right: "1rem",
-                      }}
-                    >
+                    <div style={{ display: "flex" }}>
+                      <div style={{ flexGrow: 1 }}>
+                        <WrappedComponent {...this.props} />
+                      </div>
                       <button
-                        style={{
-                          background: "none",
-                          border: "none",
-                        }}
+                        className="btn btn-pin"
                         onClick={this.pin_pressed}
                       >
                         {user_enabled_pinning ? (
@@ -99,7 +95,6 @@ export const PinnedContent = (WrappedComponent, local_storage_name) =>
                         )}
                       </button>
                     </div>
-                    <WrappedComponent {...this.props} />
                   </div>
                 </div>
               )}
