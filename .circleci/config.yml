@@ -379,9 +379,9 @@ workflows:
       - test_end_to_end:
           requires:
             - build
-      - test_server:
-          requires:
-            - build
+      #- test_server:
+      #    requires:
+      #      - build
       - deploy_data:
           requires:
             - test_server
@@ -392,7 +392,7 @@ workflows:
           <<: *deploy_filter
       - deploy_client:
           requires:
-            - test_end_to_end
+            #- test_end_to_end
             - deploy_server
           <<: *deploy_filter
       - lighthouse:
