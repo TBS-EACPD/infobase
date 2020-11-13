@@ -16,15 +16,16 @@ export const PinnedContent = (WrappedComponent, local_storage_name) =>
           user_enabled_pinning = JSON.parse(
             localStorage.getItem(local_storage_name)
           );
+          user_enabled_pinning = _.isBoolean(user_enabled_pinning)
+            ? user_enabled_pinning
+            : true;
         } catch {
           user_enabled_pinning = true;
         }
       }
 
       this.state = {
-        user_enabled_pinning: _.isBoolean(user_enabled_pinning)
-          ? user_enabled_pinning
-          : true,
+        user_enabled_pinning: user_enabled_pinning,
       };
     }
 
