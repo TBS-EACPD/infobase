@@ -1,7 +1,8 @@
 import classNames from "classnames";
 
-import { useInView } from "react-intersection-observer";
 import "intersection-observer";
+
+import { is_mobile } from "src/core/feature_detection.js";
 
 import { trivial_text_maker } from "../models/text.js";
 import "./BackToTop.scss";
@@ -17,37 +18,31 @@ export class BackToTop extends React.Component {
 
     this.page_header = document.getElementById("ib-site-header-area");
     this.page_footer = document.getElementById("wb-info");
+
+    this.button_ref = React.createRef();
   }
-
-  // handleScroll = () => {
-  //   const should_be_shown =
-  //     window.pageYOffset >
-  //     this.page_header.offsetTop + this.page_header.offsetHeight;
-
-  //   const should_be_caught =
-  //     window.innerWidth > 600 &&
-  //     window.pageYOffset + window.innerHeight > this.page_footer.offsetTop + 15;
-
-  //   this.setState({
-  //     show_back_to_top: should_be_shown,
-  //     caught_by_footer: should_be_caught,
-  //   });
-  // };
 
   componentDidMount() {
-    const observer = new IntersectionObserver((entries, observer) => {
-      if (entries[0].intersectionRatio <= 0) {
-        this.setState({ show_back_to_top: true });
-      } else {
-        this.setState({ show_back_to_top: false });
-      }
+    this.header_observer = new IntersectionObserver((entries, observer) => {
+      this.setState({ show_back_to_top: entries[0].intersectionRatio <= 0 });
     });
-    observer.observe(this.page_header);
+    this.header_observer.observe(this.page_header);
+
+    this.footer_observer = new IntersectionObserver((entries, observer) => {
+      this.setState({
+        caught_by_footer: is_mobile()
+          ? window.innerWidth > 600 &&
+            window.pageYOffset + window.innerHeight >
+              this.page_footer.offsetTop + 15
+          : entries[0].isIntersecting,
+      });
+    });
+    this.footer_observer.observe(this.page_footer);
   }
-  // componentWillUnmount() {
-  //   window.removeEventListener("scroll", this.handleScroll);
-  //   window.removeEventListener("resize", this.handleScroll);
-  // }
+  componentWillUnmount() {
+    this.header_observer.unobserve(this.page_header);
+    this.footer_observer.unobserve(this.page_footer);
+  }
 
   handleClick() {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -56,10 +51,10 @@ export class BackToTop extends React.Component {
 
   render() {
     const { show_back_to_top, caught_by_footer } = this.state;
-    console.log(show_back_to_top);
 
     return (
       <button
+        ref={this.button_ref}
         className={classNames(
           "btn",
           "btn-ib-primary",
