@@ -14,20 +14,20 @@ export default async function ({ models }) {
   const CovidInitiative_records = _.chain(
     get_standard_csv_file_rows("covid_initiatives.csv")
   )
+    .map((row) => new CovidInitiative(row))
+    .value();
+
+  const CovidInitiativeEstimates_records = _.chain(
+    get_standard_csv_file_rows("covid_initative_estimates.csv")
+  )
     .map((row) => {
       const cleaned_row = {
         ...row,
         covid_measure_ids: _.split(row.covid_measure_ids, ","),
       };
 
-      return new CovidInitiative(cleaned_row);
+      return new CovidInitiativeEstimates(cleaned_row);
     })
-    .value();
-
-  const CovidInitiativeEstimates_records = _.chain(
-    get_standard_csv_file_rows("covid_initative_estimates.csv")
-  )
-    .map((row) => new CovidInitiativeEstimates(row))
     .value();
 
   return await Promise.all([
