@@ -9,6 +9,11 @@ query ($lang: String = "en") {
         covid_initiative {
           name
         }
+
+        covid_measure_ids
+        covid_measures {
+          name
+        }
         
         fiscal_year
         est_doc
