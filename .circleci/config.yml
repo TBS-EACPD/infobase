@@ -376,12 +376,12 @@ workflows:
   build_test_deploy:
     jobs:
       - build
-      - test_end_to_end:
-          requires:
-            - build
-      #- test_server:
+      #- test_end_to_end:
       #    requires:
       #      - build
+      - test_server:
+          requires:
+            - build
       - deploy_data:
           requires:
             - test_server
