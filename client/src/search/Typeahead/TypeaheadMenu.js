@@ -1,5 +1,3 @@
-import { ListGroup, ListGroupItem } from "react-bootstrap";
-
 import { create_text_maker_component } from "../../components";
 
 import text from "./Typeahead.yaml";
@@ -34,37 +32,29 @@ class TypeaheadMenu_ extends React.Component {
 
     if (_.isEmpty(queried_results)) {
       return (
-        <ListGroup className="rbt-menu dropdown-menu show" id={menuId}>
-          <ListGroupItem className="dropdown-header">
-            {text_maker("no_matches_found")}
-          </ListGroupItem>
-        </ListGroup>
+        <ul className="rbt-menu dropdown-menu show" id={menuId} role="listbox">
+          <li className="dropdown-header">{text_maker("no_matches_found")}</li>
+        </ul>
       );
     } else {
       return (
-        <ListGroup className="rbt-menu dropdown-menu show" id={menuId}>
+        <ul className="rbt-menu dropdown-menu show" id={menuId} role="listbox">
           {_.chain(queried_results)
             .groupBy("config_group_index")
             .thru((grouped_results) => {
               return [
-                <ListGroupItem
-                  key={`header-pagination-info`}
-                  className="dropdown-header"
-                >
+                <li key={`header-pagination-info`} className="dropdown-header">
                   <TM
                     k="paginate_status"
                     args={{
                       total_matching_results,
                     }}
                   />
-                </ListGroupItem>,
+                </li>,
                 ..._.flatMap(grouped_results, (results, group_index) => [
-                  <ListGroupItem
-                    key={`header-${group_index}`}
-                    className="dropdown-header"
-                  >
+                  <li key={`header-${group_index}`} className="dropdown-header">
                     {config_groups[group_index].group_header}
-                  </ListGroupItem>,
+                  </li>,
                   <div
                     key={`group-${group_index}`}
                     role="group"
@@ -88,18 +78,18 @@ class TypeaheadMenu_ extends React.Component {
                   </div>,
                 ]),
                 <div key={`div_${total_matching_results + 1}`}>
-                  <ListGroupItem
+                  <li
                     key={total_matching_results}
                     className="rbt-menu-close-menu-button dropdown-item"
                     onClick={hide_menu}
                   >
                     {text_maker("close_menu")}
-                  </ListGroupItem>
+                  </li>
                 </div>,
               ];
             })
             .value()}
-        </ListGroup>
+        </ul>
       );
     }
   }
