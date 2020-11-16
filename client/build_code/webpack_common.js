@@ -143,7 +143,7 @@ function get_plugins({
       IS_CI: JSON.stringify(is_ci),
       LOCAL_IP: JSON.stringify(local_ip),
     }),
-    new ESLintPlugin(),
+    new ESLintPlugin(/*{ overrideConfig: { rules: { "no-debugger": false } } }*/),
     new CircularDependencyPlugin({
       exclude: /node_modules/,
       onDetected({ module: webpackModuleRecord, paths, compilation }) {

@@ -28,6 +28,7 @@ const tech_icon_list = _.chain([
 
 export default class About extends React.Component {
   render() {
+    debugger;
     return (
       <StandardRouteContainer
         title={text_maker("about_title")}
