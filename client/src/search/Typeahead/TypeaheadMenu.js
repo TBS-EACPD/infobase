@@ -6,7 +6,7 @@ import text from "./Typeahead.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-export class TypeaheadMenu extends React.Component {
+class TypeaheadMenu_ extends React.Component {
   handleWindowClick = (e) => {
     const { hide_menu, rbtRef } = this.props;
     if (!rbtRef.current.contains(e.target)) {
@@ -24,6 +24,7 @@ export class TypeaheadMenu extends React.Component {
       config_groups,
       on_select_item,
       hide_menu,
+      firstMenuItemRef,
     } = this.props;
 
     const total_matching_results = queried_results.length;
@@ -72,14 +73,14 @@ export class TypeaheadMenu extends React.Component {
                       ..._.map(results, (result) => {
                         const index = index_key_counter++;
                         return (
-                          <ListGroupItem
+                          <button
                             key={index}
-                            id={`rbt-menu-item-${index}`}
-                            className="dropdown-item"
+                            className="dropdown-item list-group-item"
                             onClick={() => on_select_item(result)}
+                            ref={index == 0 && firstMenuItemRef}
                           >
                             {result.menu_content(search_text)}
-                          </ListGroupItem>
+                          </button>
                         );
                       }),
                     ]}
@@ -107,3 +108,7 @@ export class TypeaheadMenu extends React.Component {
     window.removeEventListener("click", this.handleWindowClick);
   }
 }
+
+export const TypeaheadMenu = React.forwardRef((props, ref) => (
+  <TypeaheadMenu_ firstMenuItemRef={ref} {...props} />
+));
