@@ -30,6 +30,7 @@ export class Typeahead extends React.Component {
     super(props);
 
     this.typeaheadRef = React.createRef();
+    this.rbtRef = React.createRef();
   }
 
   on_select_item = (selected) => {
@@ -145,7 +146,7 @@ export class Typeahead extends React.Component {
     };
 
     return (
-      <div className="rbt" style={{ position: "relative" }}>
+      <div className="rbt" style={{ position: "relative" }} ref={this.rbtRef}>
         <div className="search-bar">
           <div className="search-icon-container">
             <span aria-hidden="true">
@@ -215,7 +216,7 @@ export class Typeahead extends React.Component {
           />
         </div>
         {search_text.length >= minLength && can_show_menu && (
-          <TypeaheadMenu {...menu_props} />
+          <TypeaheadMenu {...menu_props} rbtRef={this.rbtRef} />
         )}
       </div>
     );
