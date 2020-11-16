@@ -1,4 +1,4 @@
-import { api_load_covid_measures } from "../models/covid/index.js";
+import { api_load_covid_measures } from "../models/covid/populate_covid_measures.js";
 import { load_footnotes_bundle } from "../models/footnotes/populate_footnotes.js";
 import { load_horizontal_initiative_lookups } from "../models/populate_horizontal_initiative_lookups.js";
 import {
@@ -143,7 +143,7 @@ function ensure_loaded({
     : Promise.resolve();
 
   const covid_measures_prom = covid_measures
-    ? load_horizontal_initiative_lookups()
+    ? api_load_covid_measures()
     : Promise.resolve();
 
   return Promise.all([
