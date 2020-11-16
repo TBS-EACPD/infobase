@@ -1,8 +1,7 @@
+// strange error: "casing of graphiql does not match the underlying filesystem". Disable eslint import on this file
 /* eslint-disable import/no-unresolved  */
 /* eslint-disable import/order  */
 
-import "graphiql/graphiql.css";
-// strange error: "casing of graphiql does not match the underlying filesystem"
 import GraphiQL from "graphiql";
 import fetch from "isomorphic-fetch";
 
@@ -11,6 +10,7 @@ import { log_standard_event } from "../core/analytics.js";
 import { StandardRouteContainer } from "../core/NavComponents.js";
 
 import { get_api_url } from "./graphql_utils.js";
+import "graphiql/graphiql.css";
 
 const defaults = {
   query: `query($lang: String!, $org_id: String){
