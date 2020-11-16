@@ -1,12 +1,14 @@
 import MediaQuery from "react-responsive";
 
-import { DropdownMenu } from "src/components/index.js";
+import {
+  DropdownMenu,
+  create_text_maker_component,
+} from "src/components/index.js";
 
 import { log_standard_event } from "../../core/analytics.js";
 import { breakpoints } from "../../core/breakpoint_defs.js";
 
 import { IconFilter } from "../../icons/icons.js";
-import { create_text_maker } from "../../models/text.js";
 
 import { get_static_url } from "../../request_utils.js";
 
@@ -18,7 +20,7 @@ import text from "./Typeahead.yaml";
 
 import "./Typeahead.scss";
 
-const text_maker = create_text_maker(text);
+const { TM, text_maker } = create_text_maker_component(text);
 
 export class Typeahead extends React.Component {
   state = {
@@ -32,6 +34,8 @@ export class Typeahead extends React.Component {
     this.typeaheadRef = React.createRef();
     this.rbtRef = React.createRef();
     this.firstMenuItemRef = React.createRef();
+
+    this.menuId = _.uniqueId("rbt_menu_id_");
   }
 
   on_select_item = (selected) => {
@@ -67,7 +71,7 @@ export class Typeahead extends React.Component {
   render() {
     const {
       placeholder,
-      minLength,
+      min_length,
       filter_content,
       pagination_size,
       search_configs,
@@ -145,6 +149,19 @@ export class Typeahead extends React.Component {
       hide_menu: this.hide_menu,
     };
 
+    const show_menu = search_text.length >= min_length && can_show_menu;
+
+    const screen_reader_status_text = show_menu ? (
+      <TM
+        k="num_results_showing"
+        args={{
+          num_results: queried_results.length,
+        }}
+      />
+    ) : (
+      <TM k="num_chars_needed" args={{ min_length }} />
+    );
+
     return (
       <div className="rbt" style={{ position: "relative" }} ref={this.rbtRef}>
         <div className="search-bar">
@@ -204,6 +221,11 @@ export class Typeahead extends React.Component {
           )}
           <input
             id="rbt-search"
+            role="combobox"
+            autoComplete="off"
+            aria-autocomplete="list"
+            aria-owns={this.menuId}
+            aria-expanded={show_menu}
             style={{ width: "100%", order: 1 }}
             placeholder={placeholder}
             aria-label={placeholder}
@@ -214,12 +236,21 @@ export class Typeahead extends React.Component {
             onFocus={() => this.setState({ can_show_menu: true })}
             onKeyDown={this.handle_key_down}
           />
+          <div
+            className="sr-only"
+            aria-live="polite"
+            aria-atomic="true"
+            role="status"
+          >
+            {screen_reader_status_text}
+          </div>
         </div>
-        {search_text.length >= minLength && can_show_menu && (
+        {show_menu && (
           <TypeaheadMenu
             {...menu_props}
             rbtRef={this.rbtRef}
             ref={this.firstMenuItemRef}
+            menuId={this.menuId}
           />
         )}
       </div>
@@ -229,6 +260,6 @@ export class Typeahead extends React.Component {
 
 Typeahead.defaultProps = {
   placeholder: text_maker("org_search"),
-  minLength: 3,
+  min_length: 3,
   onNewQuery: _.noop,
 };
