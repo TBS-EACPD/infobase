@@ -1,6 +1,6 @@
-// strange error: "casing of graphiql does not match the underlying filesystem". Disable eslint import on this file
 /* eslint-disable import/no-unresolved  */
 /* eslint-disable import/order  */
+// strange error: "casing of graphiql does not match the underlying filesystem". Disable eslint import on this file
 
 import GraphiQL from "graphiql";
 import fetch from "isomorphic-fetch";
