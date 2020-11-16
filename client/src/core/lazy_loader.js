@@ -1,3 +1,4 @@
+import { api_load_covid_measures } from "../models/covid/index.js";
 import { load_footnotes_bundle } from "../models/footnotes/populate_footnotes.js";
 import { load_horizontal_initiative_lookups } from "../models/populate_horizontal_initiative_lookups.js";
 import {
@@ -36,6 +37,7 @@ function ensure_loaded({
   requires_granular_result_counts,
   has_services,
   services,
+  covid_measures,
   footnotes_for: footnotes_subject,
 }) {
   const table_set = _.chain(table_keys)
@@ -140,6 +142,10 @@ function ensure_loaded({
     ? load_horizontal_initiative_lookups()
     : Promise.resolve();
 
+  const covid_measures_prom = covid_measures
+    ? load_horizontal_initiative_lookups()
+    : Promise.resolve();
+
   return Promise.all([
     load(table_set),
     results_prom,
@@ -150,6 +156,7 @@ function ensure_loaded({
     has_services_prom,
     services_prom,
     horizontal_initiative_lookups_prom,
+    covid_measures_prom,
   ]);
 }
 
