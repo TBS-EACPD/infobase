@@ -21,15 +21,16 @@ class CovidMeasures extends mix().with(
     return trivial_text_maker("covid_measures");
   }
 
-  static create_and_register(id, name) {
-    const inst = new CovidMeasures(id, name);
-    this.register(id, inst);
+  static create_and_register(measure) {
+    const inst = new CovidMeasures(measure);
+    this.register(measure.id, inst);
     return inst;
   }
-  constructor(id, name) {
+  constructor(measure) {
     super();
-    this.id = id;
-    this.name = name;
+    _.assign(this, {
+      ...measure,
+    });
   }
 }
 
