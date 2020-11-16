@@ -8,8 +8,8 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 export class TypeaheadMenu extends React.Component {
   handleWindowClick = (e) => {
-    const { hide_menu } = this.props;
-    if (!document.getElementsByClassName("rbt")[0].contains(e.target)) {
+    const { hide_menu, rbtRef } = this.props;
+    if (!rbtRef.current.contains(e.target)) {
       hide_menu();
     }
   };
@@ -75,7 +75,6 @@ export class TypeaheadMenu extends React.Component {
                           <ListGroupItem
                             key={index}
                             id={`rbt-menu-item-${index}`}
-                            aria-selected
                             className="dropdown-item"
                             onClick={() => on_select_item(result)}
                           >
