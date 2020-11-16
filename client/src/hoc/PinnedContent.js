@@ -3,11 +3,16 @@ import { InView } from "react-intersection-observer";
 import "intersection-observer";
 import ReactResizeDetector from "react-resize-detector";
 
+import { has_local_storage } from "src/core/feature_detection.js";
+import { create_text_maker } from "../models/text.js";
+
 import { IconPin, IconUnpin } from "../icons/icons.js";
 
-import { has_local_storage } from "src/core/feature_detection.js";
-
 import "./PinnedContent.scss";
+
+import text from "./PinnedContent.yaml";
+
+const text_maker = create_text_maker(text);
 
 export class PinnedContent extends React.Component {
   constructor(props) {
@@ -56,7 +61,7 @@ export class PinnedContent extends React.Component {
     const { user_enabled_pinning } = this.state;
     const { children } = this.props;
 
-    return (
+    return !window.is_a11y_mode ? (
       <ReactResizeDetector handleWidth>
         {({ width }) => (
           <InView>
@@ -83,6 +88,9 @@ export class PinnedContent extends React.Component {
                     <button
                       className="btn btn-pin"
                       onClick={this.pin_pressed}
+                      aria-label={text_maker(
+                        user_enabled_pinning ? "unpin" : "pin"
+                      )}
                       style={
                         this.node && {
                           marginTop: window.getComputedStyle(this.node)
@@ -115,6 +123,8 @@ export class PinnedContent extends React.Component {
           </InView>
         )}
       </ReactResizeDetector>
+    ) : (
+      children({ ref: this.handleWrapped })
     );
   }
 }
