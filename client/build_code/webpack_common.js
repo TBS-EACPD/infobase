@@ -174,7 +174,7 @@ function get_plugins({
         baseline: is_ci ? CI_AND_MASTER : stats_baseline,
         compare: !stats_no_compare,
         json: true,
-        outDir: "../..", // this path is relative to the weback output dir (client/build/InfoBase/app usually)
+        outDir: "../../InfoBase", // this path is relative to the weback output dir (client/build/InfoBase/app usually)
       }),
     is_prod_build &&
       new webpack.DefinePlugin({
