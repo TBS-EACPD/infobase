@@ -196,9 +196,8 @@ function get_optimizations(is_prod_build, bundle_stats) {
       minimize: true,
       minimizer: [new TerserPlugin({ parallel: true })],
       splitChunks: {
-        // default is 5, but that left us with insufficient granularity in chunks and lead to duplication of code between bundles
         maxAsyncRequests: 20,
-        chunks: "all",
+        chunks: "async",
       },
     };
   } else {
