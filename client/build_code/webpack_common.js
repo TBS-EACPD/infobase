@@ -1,6 +1,6 @@
 const std_lib_path = require("path");
 
-const { BundleStatsWebpackPlugin } = require("bundle-stats");
+const { BundleStatsWebpackPlugin } = require("bundle-stats-webpack-plugin");
 const CircularDependencyPlugin = require("circular-dependency-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const _ = require("lodash");
@@ -90,7 +90,7 @@ const get_rules = ({ should_use_babel, language, is_prod_build }) => {
     },
     {
       test: /\.csv$/,
-      use: [{ loader: "raw-loader" }],
+      use: [{ loader: "raw-loader", options: { esModule: false } }],
     },
     {
       test: /\.svg$/,

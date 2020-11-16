@@ -34,12 +34,10 @@ const a11y_client = choose("a11y_client");
 const main_client = choose("main_client");
 
 const app = a11y_client || main_client;
-
-const common_entry = ["@babel/polyfill"];
-
+const common_entry = ["@babel/polyfill", "./src/InfoBase/root.js"];
 const options_by_app = {
   a11y_client: {
-    entry: common_entry.concat(["./src/InfoBase/root.js"]),
+    entry: common_entry,
     get_output: (language) => ({
       path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
       filename: `app-a11y-${language}.min.js`,
@@ -49,7 +47,7 @@ const options_by_app = {
     }),
   },
   main_client: {
-    entry: common_entry.concat(["./src/InfoBase/root.js"]),
+    entry: common_entry,
     get_output: (language) => ({
       path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
       filename: `app-${language}.min.js`,
@@ -100,7 +98,7 @@ gitsha(function (err, commit_sha) {
     webpack(config, function (err, stats) {
       console.log(stats.toString({ cached: true, modules: true }));
       if (err || stats.hasErrors()) {
-        console.err(err);
+        console.log(err);
         process.exitCode = 1;
       }
     });
@@ -114,7 +112,7 @@ gitsha(function (err, commit_sha) {
       },
       function (err, stats) {
         if (err) {
-          console.err(err);
+          console.log(err);
         }
         console.log(stats.toString({ cached: true, modules: true }));
       }
