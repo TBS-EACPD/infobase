@@ -1,4 +1,5 @@
-import { CovidInitiatives, CovidMeasures } from "./covid/index.js";
+import { CovidInitiatives } from "./covid/CovidInitiatives.js";
+import { CovidMeasures } from "./covid/CovidMeasures.js";
 import {
   Gov,
   Dept,

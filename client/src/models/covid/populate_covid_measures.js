@@ -19,7 +19,7 @@ const covid_measures_query = gql`
 `;
 
 export function api_load_covid_measures() {
-  if (CovidMeasures.get_all()) {
+  if (!_.isEmpty(CovidMeasures.get_all())) {
     return Promise.resolve();
   }
 
@@ -34,7 +34,7 @@ export function api_load_covid_measures() {
       },
     })
     .then((response) => {
-      const covid_measures = response.data.root.covid_measures;
+      const covid_measures = response.data.root;
 
       const resp_time = Date.now() - time_at_request;
       if (!_.isEmpty(covid_measures)) {
