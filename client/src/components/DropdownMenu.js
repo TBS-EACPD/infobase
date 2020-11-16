@@ -60,7 +60,10 @@ export class DropdownMenu extends React.Component {
       : _.isString(dropdown_trigger_txt) && dropdown_trigger_txt;
 
     return (
-      <div className="dropdown" ref={this.dropdown_ref}>
+      <div
+        className={classNames("dropdown", is_open && "dropdown--is-open")}
+        ref={this.dropdown_ref}
+      >
         <button
           aria-haspopup="true"
           aria-expanded={is_open}
@@ -72,14 +75,7 @@ export class DropdownMenu extends React.Component {
           onClick={this.toggle_dropdown}
           title={button_description}
         >
-          {is_open ? (
-            <div className="close-dropdown">
-              <span className="close-dropdown__x">X</span>
-              <span className="close-dropdown__x">{dropdown_trigger_txt}</span>
-            </div>
-          ) : (
-            <span>{dropdown_trigger_txt}</span>
-          )}
+          {dropdown_trigger_txt}
         </button>
         <div
           tabIndex={0}
@@ -87,8 +83,7 @@ export class DropdownMenu extends React.Component {
           ref={"dropdown_area"}
           className={classNames(
             dropdown_content_class_name,
-            "dropdown__content",
-            is_open && "dropdown__content__is-open"
+            "dropdown__content"
           )}
         >
           {dropdown_content}
