@@ -1,3 +1,4 @@
+import { api_load_covid_initiatives } from "../models/covid/populate_covid_initiatives.js";
 import { api_load_covid_measures } from "../models/covid/populate_covid_measures.js";
 import { load_footnotes_bundle } from "../models/footnotes/populate_footnotes.js";
 import { load_horizontal_initiative_lookups } from "../models/populate_horizontal_initiative_lookups.js";
@@ -38,6 +39,7 @@ function ensure_loaded({
   has_services,
   services,
   covid_measures,
+  covid_initiatives,
   footnotes_for: footnotes_subject,
 }) {
   const table_set = _.chain(table_keys)
@@ -98,6 +100,22 @@ function ensure_loaded({
       .some()
       .value();
 
+  const should_load_covid_initiatives =
+    services ||
+    _.chain(panel_keys)
+      .map((key) => PanelRegistry.lookup(key, subject_level))
+      .map("requires_covid_initiatives")
+      .some()
+      .value();
+
+  const should_load_covid_measures =
+    services ||
+    _.chain(panel_keys)
+      .map((key) => PanelRegistry.lookup(key, subject_level))
+      .map("requires_covid_measures")
+      .some()
+      .value();
+
   const result_docs_to_load = !_.isEmpty(result_docs)
     ? result_docs
     : _.chain(panel_keys)
@@ -142,7 +160,11 @@ function ensure_loaded({
     ? load_horizontal_initiative_lookups()
     : Promise.resolve();
 
-  const covid_measures_prom = covid_measures
+  const covid_initiatives_prom = should_load_covid_initiatives
+    ? api_load_covid_initiatives()
+    : Promise.resolve();
+
+  const covid_measures_prom = should_load_covid_measures
     ? api_load_covid_measures()
     : Promise.resolve();
 
@@ -156,6 +178,7 @@ function ensure_loaded({
     has_services_prom,
     services_prom,
     horizontal_initiative_lookups_prom,
+    covid_initiatives_prom,
     covid_measures_prom,
   ]);
 }
