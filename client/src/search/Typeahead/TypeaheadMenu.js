@@ -51,21 +51,25 @@ class TypeaheadMenu_ extends React.Component {
                     }}
                   />
                 </li>,
-                ..._.flatMap(grouped_results, (results, group_index) => [
-                  <li key={`header-${group_index}`} className="dropdown-header">
-                    {config_groups[group_index].group_header}
-                  </li>,
+                ..._.flatMap(grouped_results, (results, group_index) => (
                   <div
                     key={`group-${group_index}`}
                     role="group"
                     aria-label={config_groups[group_index].group_header}
                   >
+                    <li
+                      key={`header-${group_index}`}
+                      className="dropdown-header"
+                    >
+                      {config_groups[group_index].group_header}
+                    </li>
                     {[
                       ..._.map(results, (result) => {
                         const index = index_key_counter++;
                         return (
                           <button
                             key={index}
+                            role="link"
                             className="dropdown-item list-group-item"
                             onClick={() => on_select_item(result)}
                             ref={index == 0 && firstMenuItemRef}
@@ -75,16 +79,16 @@ class TypeaheadMenu_ extends React.Component {
                         );
                       }),
                     ]}
-                  </div>,
-                ]),
+                  </div>
+                )),
                 <div key={`div_${total_matching_results + 1}`}>
-                  <li
+                  <button
                     key={total_matching_results}
-                    className="rbt-menu-close-menu-button dropdown-item"
+                    className="rbt-menu-close-menu-button dropdown-item list-group-item"
                     onClick={hide_menu}
                   >
                     {text_maker("close_menu")}
-                  </li>
+                  </button>
                 </div>,
               ];
             })
