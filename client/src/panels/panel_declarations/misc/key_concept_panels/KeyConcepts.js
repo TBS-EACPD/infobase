@@ -43,36 +43,51 @@ class KeyConcepts_ extends React.Component {
     return (
       <MediaQuery maxWidth={breakpoints.maxMediumDevice}>
         {(matches) => (
-          <div className={classNames("mrgn-bttm-md", matches && "mrgn-tp-md")}>
-            <ButtonToolbar>
-              <AutoAccordion
-                title={text_maker("some_things_to_keep_in_mind")}
-                ref={this.accordionRef}
-                show_pin
+          <PinnedContent local_storage_name="user_enabled_pinning_key_concepts">
+            {({ ref }) => (
+              <div
+                ref={ref}
+                className={classNames("mrgn-bttm-md", matches && "mrgn-tp-md")}
               >
-                <div
-                  style={{
-                    paddingLeft: "10px",
-                    paddingRight: "10px",
-                  }}
-                >
-                  <KeyConceptList
-                    question_answer_pairs={_.map(rendered_q_a_keys, (key) => [
-                      <TM key={key + "_q"} k={key + "_q"} args={{ subject }} />,
-                      <TM key={key + "_a"} k={key + "_a"} args={{ subject }} />,
-                    ])}
-                  />
-                </div>
-              </AutoAccordion>
-            </ButtonToolbar>
-          </div>
+                <ButtonToolbar>
+                  <AutoAccordion
+                    title={text_maker("some_things_to_keep_in_mind")}
+                    ref={this.accordionRef}
+                    show_pin
+                  >
+                    <div
+                      style={{
+                        paddingLeft: "10px",
+                        paddingRight: "10px",
+                      }}
+                    >
+                      <KeyConceptList
+                        question_answer_pairs={_.map(
+                          rendered_q_a_keys,
+                          (key) => [
+                            <TM
+                              key={key + "_q"}
+                              k={key + "_q"}
+                              args={{ subject }}
+                            />,
+                            <TM
+                              key={key + "_a"}
+                              k={key + "_a"}
+                              args={{ subject }}
+                            />,
+                          ]
+                        )}
+                      />
+                    </div>
+                  </AutoAccordion>
+                </ButtonToolbar>
+              </div>
+            )}
+          </PinnedContent>
         )}
       </MediaQuery>
     );
   }
 }
 
-export const KeyConcepts = PinnedContent(
-  withRouter(KeyConcepts_),
-  "user_enabled_pinning_key_concepts"
-);
+export const KeyConcepts = withRouter(KeyConcepts_);
