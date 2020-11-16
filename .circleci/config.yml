@@ -375,17 +375,17 @@ workflows:
   # One workflow that runs all three job stages (build -> test -> deploy_data/server/client), each stage requiring
   build_test_deploy:
     jobs:
-      - build
+      #- build
       #- test_end_to_end:
       #    requires:
       #      - build
-      - test_server:
-          requires:
-            - build
-      - deploy_data:
-          requires:
-            - test_server
-          <<: *deploy_filter
+      #- test_server:
+      #    requires:
+      #      - build
+      - deploy_data
+      #    requires:
+      #      - test_server
+      #    <<: *deploy_filter
       - deploy_server:
           requires:
             - deploy_data
