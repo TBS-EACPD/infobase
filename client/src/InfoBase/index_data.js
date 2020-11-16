@@ -126,12 +126,12 @@ const index_lang_lookups = {
     `,
   },
   script_url: {
-    en: "[name]-app-en.min.js",
-    fr: "[name]-app-fr.min.js",
+    en: "app-en.min.js",
+    fr: "app-fr.min.js",
   },
   a11y_script_url: {
-    en: "[name]-app-a11y-en.min.js",
-    fr: "[name]-app-a11y-fr.min.js",
+    en: "app-a11y-en.min.js",
+    fr: "app-a11y-fr.min.js",
   },
   other_lang_href: {
     en: "index-fra.html",
