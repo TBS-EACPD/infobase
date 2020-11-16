@@ -34,3 +34,17 @@ edit_filter:
 close_menu:
   en: Close menu
   fr: Fermer le menu
+
+num_chars_needed:
+  transform: [handlebars]
+  en: |
+    {{min_length}} characters are needed to obtain results
+  fr: |
+    TODO
+
+num_results_showing:
+  transform: [handlebars]
+  en: |
+    {{num_results}} results are currently found. Press the Enter key to navigate to the results.
+  fr: |
+    TODO

@@ -25,6 +25,7 @@ class TypeaheadMenu_ extends React.Component {
       on_select_item,
       hide_menu,
       firstMenuItemRef,
+      menuId,
     } = this.props;
 
     const total_matching_results = queried_results.length;
@@ -33,7 +34,7 @@ class TypeaheadMenu_ extends React.Component {
 
     if (_.isEmpty(queried_results)) {
       return (
-        <ListGroup className="rbt-menu dropdown-menu show">
+        <ListGroup className="rbt-menu dropdown-menu show" id={menuId}>
           <ListGroupItem className="dropdown-header">
             {text_maker("no_matches_found")}
           </ListGroupItem>
@@ -41,7 +42,7 @@ class TypeaheadMenu_ extends React.Component {
       );
     } else {
       return (
-        <ListGroup className="rbt-menu dropdown-menu show">
+        <ListGroup className="rbt-menu dropdown-menu show" id={menuId}>
           {_.chain(queried_results)
             .groupBy("config_group_index")
             .thru((grouped_results) => {
@@ -89,7 +90,6 @@ class TypeaheadMenu_ extends React.Component {
                 <div key={`div_${total_matching_results + 1}`}>
                   <ListGroupItem
                     key={total_matching_results}
-                    id={`rbt-menu-item-${total_matching_results}`}
                     className="rbt-menu-close-menu-button dropdown-item"
                     onClick={hide_menu}
                   >
