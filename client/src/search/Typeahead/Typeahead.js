@@ -31,6 +31,7 @@ export class Typeahead extends React.Component {
 
     this.typeaheadRef = React.createRef();
     this.rbtRef = React.createRef();
+    this.firstMenuItemRef = React.createRef();
   }
 
   on_select_item = (selected) => {
@@ -56,8 +57,7 @@ export class Typeahead extends React.Component {
     if (e.keyCode === 13) {
       e.preventDefault();
       this.setState({ can_show_menu: true }, () => {
-        document.getElementById("rbt-menu-item-0") &&
-          document.getElementById("rbt-menu-item-0").focus();
+        this.firstMenuItemRef.current && this.firstMenuItemRef.current.focus();
       });
     }
   };
@@ -216,7 +216,11 @@ export class Typeahead extends React.Component {
           />
         </div>
         {search_text.length >= minLength && can_show_menu && (
-          <TypeaheadMenu {...menu_props} rbtRef={this.rbtRef} />
+          <TypeaheadMenu
+            {...menu_props}
+            rbtRef={this.rbtRef}
+            ref={this.firstMenuItemRef}
+          />
         )}
       </div>
     );
