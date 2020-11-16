@@ -274,7 +274,7 @@ div.label {
   color: $primaryColor !important;
   border-radius: $standardBorderRadius;
 
-  &--with-icon{/* used for the typeahead filter*/
+  &--with-icon{
     @extend .btn-ib-light--reversed;
     border-color: $primaryColor;
     path {
@@ -298,7 +298,7 @@ div.label {
     color: $primaryColor !important;
   }
 
-  &--with-icon{/* used for the typeahead filter*/
+  &--with-icon{
     @extend .btn-ib-light;
     path {
       fill: $backgroundColor !important;
