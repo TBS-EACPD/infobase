@@ -11,6 +11,8 @@ const covid_initiative_query_fragment = `
     name
     
     estimates {
+      id
+      
       org_id
     
       covid_measure_ids
@@ -31,6 +33,7 @@ const get_org_covid_initiative_query = gql`
   query($lang: String! $id: String!) {
     root(lang: $lang) {
       org(org_id: $id) {
+        id
         ${covid_initiative_query_fragment}
       }
     }
@@ -89,10 +92,10 @@ export const api_load_covid_initiatives = (subject) => {
       },
     })
     .then((response) => {
-      const response_data = response_data_accessor(response);
+      const { covid_initiatives } = response_data_accessor(response);
 
       const resp_time = Date.now() - time_at_request;
-      if (!_.isEmpty(response_data)) {
+      if (!_.isEmpty(covid_initiatives)) {
         // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
         log_standard_event({
           SUBAPP: window.location.hash.replace("#", ""),
@@ -107,14 +110,12 @@ export const api_load_covid_initiatives = (subject) => {
         });
       }
 
-      if (!_.isEmpty(response_data)) {
-        _.each(
-          response_data,
-          (initiative_and_estimates) =>
-            CovidInitiatives.lookup(initiative_and_estimates.id) ||
-            CovidInitiatives.create_and_register(initiative_and_estimates)
-        );
-      }
+      _.each(
+        covid_initiatives,
+        (initiative_and_estimates) =>
+          CovidInitiatives.lookup(initiative_and_estimates.id) ||
+          CovidInitiatives.create_and_register(initiative_and_estimates)
+      );
 
       // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
       // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh

@@ -32,7 +32,7 @@ export const api_load_covid_measures = () => {
       },
     })
     .then((response) => {
-      const covid_measures = response.data.root;
+      const covid_measures = response.data.root.covid_measures;
 
       const resp_time = Date.now() - time_at_request;
       if (!_.isEmpty(covid_measures)) {
