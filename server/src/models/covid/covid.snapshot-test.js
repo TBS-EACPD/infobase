@@ -14,6 +14,8 @@ const all_covid_estimates_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
     covid_estimates {
+      id
+
       org_id
 
       fiscal_year
@@ -29,6 +31,8 @@ query ($lang: String = "en") {
   root(lang: $lang) {
     org(org_id: "133") {
       covid_estimates {
+        id
+
         fiscal_year
         est_doc
         vote
@@ -46,6 +50,8 @@ query ($lang: String = "en") {
       name
 
       covid_initiative_estimates {
+        id
+
         org_id
 
         covid_measure_ids
@@ -71,6 +77,8 @@ query ($lang: String = "en") {
         name
 
         covid_initiative_estimates {
+          id
+          
           org_id
 
           covid_measure_ids

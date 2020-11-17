@@ -15,6 +15,8 @@ const schema = `
   }
 
   type CovidEstimates{
+    id: String
+    
     org_id: String
 
     fiscal_year: String
@@ -31,6 +33,8 @@ const schema = `
   }
 
   type CovidInitiativeEstimates{
+    id: String
+
     org_id: String
 
     covid_initiative_id: [String]
@@ -72,11 +76,17 @@ export default function ({ models, loaders }) {
       covid_estimates: ({ org_id }) =>
         covid_estimates_by_org_id_loader.load(org_id),
     },
+    CovidEstimates: {
+      id: ({ org_id, fiscal_year, est_doc }) =>
+        `${org_id}-${fiscal_year}-${est_doc}`,
+    },
     CovidInitiative: {
       id: _.property("covid_initiative_id"),
       name: bilingual_field("name"),
     },
     CovidInitiativeEstimates: {
+      id: ({ org_id, fiscal_year, est_doc, covid_initiative_id }) =>
+        `${org_id}-${fiscal_year}-${est_doc}-${covid_initiative_id}`,
       covid_measures: ({ covid_measure_ids }) => {
         return covid_measure_loader.loadMany(covid_measure_ids);
       },

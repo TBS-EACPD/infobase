@@ -7,6 +7,8 @@ import { CovidEstimates } from "./CovidEstimates.js";
 
 const covid_estimates_query_fragment = `
   covid_estimates {
+    id
+    
     org_id
     
     fiscal_year
@@ -20,6 +22,7 @@ const get_org_covid_estimates_query = gql`
   query($lang: String! $id: String!) {
     root(lang: $lang) {
       org(org_id: $id) {
+        id
         ${covid_estimates_query_fragment}
       }
     }
@@ -78,10 +81,10 @@ export const api_load_covid_estimates = (subject) => {
       },
     })
     .then((response) => {
-      const response_data = response_data_accessor(response);
+      const { covid_estimates } = response_data_accessor(response);
 
       const resp_time = Date.now() - time_at_request;
-      if (!_.isEmpty(response_data)) {
+      if (!_.isEmpty(covid_estimates)) {
         // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
         log_standard_event({
           SUBAPP: window.location.hash.replace("#", ""),
@@ -96,7 +99,7 @@ export const api_load_covid_estimates = (subject) => {
         });
       }
 
-      _.each(response_data, (covid_estimates_row) =>
+      _.each(covid_estimates, (covid_estimates_row) =>
         CovidEstimates.create_and_register(covid_estimates_row)
       );
 

@@ -119,15 +119,27 @@ const covid_estimates_render = function ({ calculations, footnotes, sources }) {
 
 const calculate_functions = {
   gov: (subject, options) => {
-    // TODO
+    const covid_estimates_data = CovidEstimates.get_all();
+
+    if (_.isEmpty(covid_estimates_data)) {
+      return false;
+    }
+
     return {
       subject,
+      covid_estimates_data,
     };
   },
   dept: (subject, options) => {
-    // TODO
+    const covid_estimates_data = CovidEstimates.org_lookup(subject.id);
+
+    if (_.isEmpty(covid_estimates_data)) {
+      return false;
+    }
+
     return {
       subject,
+      covid_estimates_data,
     };
   },
 };
