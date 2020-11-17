@@ -42,6 +42,10 @@ const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
 
 const include_verbose_gap_year_explanation = false;
 
+const calculate_lapse = (auth, exp, is_pct = false) => {
+  const lapse = auth - exp;
+  return is_pct ? lapse / auth || 0 : lapse;
+};
 const get_auth_exp_diff = ([larger_data_point, smaller_data_point]) =>
   Math.abs(larger_data_point.data.y - smaller_data_point.data.y);
 const auth_exp_planned_spending_tooltip = ({ slice }, tooltip_formatter) => {
@@ -235,65 +239,19 @@ class LapseByVotesGraph extends React.Component {
       .value();
 
   render() {
-    const { subject, queried_votes } = this.props;
+    const { subject, queried_votes, additional_info } = this.props;
     const { active_votes } = this.state;
     const filtered_votes = _.reject(
       queried_votes,
       ({ desc }) => !active_votes[desc]
     );
-    const caculate_lapse = (auth, exp, is_pct) => {
-      const lapse = auth - exp;
-      return is_pct ? lapse / auth || 0 : lapse;
-    };
 
-    const get_lapse_data = (is_pct) =>
-      _.map(filtered_votes, (vote_row) => ({
-        id: vote_row.desc,
-        data: _.map(std_years, (yr) => ({
-          x: run_template(yr),
-          y: caculate_lapse(
-            vote_row[`${yr}auth`],
-            vote_row[`${yr}exp`],
-            is_pct
-          ),
-        })),
-      }));
-    const get_lapse_raw_data = (is_pct) =>
-      _.flatMap(filtered_votes, (vote_row) =>
+    const get_lapse_raw_data = (is_pct, votes = filtered_votes) =>
+      _.flatMap(votes, (vote_row) =>
         _.map(std_years, (yr) =>
-          caculate_lapse(vote_row[`${yr}auth`], vote_row[`${yr}exp`], is_pct)
+          calculate_lapse(vote_row[`${yr}auth`], vote_row[`${yr}exp`], is_pct)
         )
       );
-
-    const get_table_data = (is_pct) =>
-      _.map(filtered_votes, (vote_row) => ({
-        id: vote_row.desc,
-        ..._.chain(std_years)
-          .map((yr) => [
-            run_template(yr),
-            caculate_lapse(vote_row[`${yr}auth`], vote_row[`${yr}exp`], is_pct),
-          ])
-          .fromPairs()
-          .value(),
-      }));
-    const get_column_configs = (is_pct) => ({
-      id: {
-        index: 0,
-        header: text_maker("vote"),
-      },
-      ..._.chain(std_years)
-        .map((yr, i) => [
-          run_template(yr),
-          {
-            index: i + 1,
-            header: run_template(yr),
-            is_summable: !is_pct,
-            formatter: is_pct ? "smart_percentage2" : "compact2_written",
-          },
-        ])
-        .fromPairs()
-        .value(),
-    });
 
     const get_lapse_infograph = (is_pct) => {
       const nivo_pct_props = is_pct && {
@@ -340,13 +298,55 @@ class LapseByVotesGraph extends React.Component {
           )}
           <div className={`fcol-md-${subject.is("gov") ? 12 : 8}`}>
             <WrappedNivoLine
-              data={get_lapse_data(is_pct)}
+              data={_.map(filtered_votes, (vote_row) => ({
+                id: vote_row.desc,
+                data: _.map(std_years, (yr) => ({
+                  x: run_template(yr),
+                  y: calculate_lapse(
+                    vote_row[`${yr}auth`],
+                    vote_row[`${yr}exp`],
+                    is_pct
+                  ),
+                })),
+              }))}
               raw_data={get_lapse_raw_data(is_pct)}
               colorBy={(d) => colors(d.id)}
               custom_table={
                 <SmartDisplayTable
-                  column_configs={get_column_configs(is_pct)}
-                  data={get_table_data(is_pct)}
+                  column_configs={{
+                    id: {
+                      index: 0,
+                      header: text_maker("vote"),
+                    },
+                    ..._.chain(std_years)
+                      .map((yr, i) => [
+                        run_template(yr),
+                        {
+                          index: i + 1,
+                          header: run_template(yr),
+                          is_summable: !is_pct,
+                          formatter: is_pct
+                            ? "smart_percentage2"
+                            : "compact2_written",
+                        },
+                      ])
+                      .fromPairs()
+                      .value(),
+                  }}
+                  data={_.map(filtered_votes, (vote_row) => ({
+                    id: vote_row.desc,
+                    ..._.chain(std_years)
+                      .map((yr) => [
+                        run_template(yr),
+                        calculate_lapse(
+                          vote_row[`${yr}auth`],
+                          vote_row[`${yr}exp`],
+                          is_pct
+                        ),
+                      ])
+                      .fromPairs()
+                      .value(),
+                  }))}
                 />
               }
               {...nivo_pct_props}
@@ -355,6 +355,17 @@ class LapseByVotesGraph extends React.Component {
         </div>
       );
     };
+    const lapsed_by_votes_sum = _.sum(get_lapse_raw_data(false, queried_votes));
+    const auth_by_votes_sum = _.reduce(
+      queried_votes,
+      (sum, vote_row) =>
+        _.chain(std_years)
+          .map((yr) => vote_row[`${yr}auth`])
+          .sum()
+          .add(sum)
+          .value(),
+      0
+    );
 
     return (
       <div>
@@ -362,6 +373,21 @@ class LapseByVotesGraph extends React.Component {
           el="h4"
           k={subject.is("gov") ? "aggregated_lapse_by_votes" : "lapse_by_votes"}
           style={{ textAlign: "center" }}
+        />
+        <TM
+          className="medium_panel_text"
+          k={
+            subject.is("gov")
+              ? "gov_lapse_by_votes_text"
+              : "dept_lapse_by_votes_text"
+          }
+          args={{
+            subject,
+            avg_lapsed_by_votes: lapsed_by_votes_sum / std_years.length,
+            num_of_votes: queried_votes.length,
+            avg_lapsed_by_votes_pct: lapsed_by_votes_sum / auth_by_votes_sum,
+            gov_avg_lapsed_by_votes_pct: additional_info.gov_lapse_pct,
+          }}
         />
         <HeightClipper allowReclip={true} clipHeight={200}>
           <TabbedContent
@@ -434,7 +460,11 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
         </div>
       </div>
       <div className="panel-separator" />
-      <LapseByVotesGraph subject={subject} queried_votes={queried_votes} />
+      <LapseByVotesGraph
+        subject={subject}
+        queried_votes={queried_votes}
+        additional_info={additional_info}
+      />
     </InfographicPanel>
   );
 };
@@ -443,6 +473,7 @@ const calculate = function (subject, options) {
   const { orgVoteStatPa, programSpending, orgVoteStatEstimates } = this.tables;
 
   const query_subject = subject.is("gov") ? undefined : subject;
+  const gov_queried_subject = orgVoteStatPa.q();
   const queried_subject = orgVoteStatPa.q(query_subject);
 
   const exp_values = queried_subject.sum(exp_cols, { as_object: false });
@@ -547,6 +578,56 @@ const calculate = function (subject, options) {
       .divide(std_years.length)
       .value();
 
+  const flat_auth_exp_years = _.flatMap(["exp", "auth"], (type) =>
+    _.map(std_years, (yr) => `${yr}${type}`)
+  );
+  const gov_stat_filtered_votes = _.reject(
+    gov_queried_subject.data,
+    ({ votenum }) => votenum === "S"
+  );
+  const gov_aggregated_votes = _.reduce(
+    gov_stat_filtered_votes,
+    (result, vote_row) => ({
+      ..._.chain(flat_auth_exp_years)
+        .map((yr) => [yr, result[yr] + vote_row[yr]])
+        .fromPairs()
+        .value(),
+    }),
+    _.chain(flat_auth_exp_years)
+      .map((yr) => [yr, 0])
+      .fromPairs()
+      .value()
+  );
+  const queried_votes = subject.is("gov")
+    ? [
+        {
+          desc: text_maker("aggregated_lapse_by_votes"),
+          ...gov_aggregated_votes,
+        },
+      ]
+    : _.reject(queried_subject.data, ({ votenum }) => votenum === "S");
+  const gov_auth_sum = _.reduce(
+    gov_stat_filtered_votes,
+    (sum, vote_row) =>
+      _.chain(std_years)
+        .map((yr) => vote_row[`${yr}auth`])
+        .sum()
+        .add(sum)
+        .value(),
+    0
+  );
+
+  const gov_lapse_pct = _.chain(std_years)
+    .map((yr) =>
+      calculate_lapse(
+        gov_aggregated_votes[`${yr}auth`],
+        gov_aggregated_votes[`${yr}exp`]
+      )
+    )
+    .sum()
+    .divide(gov_auth_sum)
+    .value();
+
   const additional_info = {
     five_year_auth_average: get_five_year_auth_average("auth"),
     five_year_exp_average: get_five_year_auth_average("exp"),
@@ -561,33 +642,8 @@ const calculate = function (subject, options) {
     last_year_lapse_amt: unspent_last_year || 0,
     last_year_lapse_pct:
       (unspent_last_year || 0) / auth_values[last_shared_index],
+    gov_lapse_pct,
   };
-
-  const flat_auth_exp_years = _.flatMap(["exp", "auth"], (type) =>
-    _.map(std_years, (yr) => `${yr}${type}`)
-  );
-  const queried_votes = subject.is("gov")
-    ? [
-        {
-          desc: text_maker("aggregated_lapse_by_votes"),
-          ..._.chain(queried_subject.data)
-            .reject(({ votenum }) => votenum === "S")
-            .reduce(
-              (result, vote_row) => ({
-                ..._.chain(flat_auth_exp_years)
-                  .map((yr) => [yr, result[yr] + vote_row[yr]])
-                  .fromPairs()
-                  .value(),
-              }),
-              _.chain(flat_auth_exp_years)
-                .map((yr) => [yr, 0])
-                .fromPairs()
-                .value()
-            )
-            .value(),
-        },
-      ]
-    : _.reject(queried_subject.data, ({ votenum }) => votenum === "S");
 
   return {
     data_series,
