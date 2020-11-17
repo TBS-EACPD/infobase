@@ -10,7 +10,7 @@ class CovidInitiatives extends mix().with(
   staticStoreMixin,
   PluralSingular,
   SubjectMixin
-)() {
+) {
   static get subject_type() {
     return "covid_initiative";
   }
