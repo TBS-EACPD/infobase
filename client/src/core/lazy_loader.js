@@ -161,7 +161,7 @@ function ensure_loaded({
     : Promise.resolve();
 
   const covid_initiatives_prom = should_load_covid_initiatives
-    ? api_load_covid_initiatives()
+    ? api_load_covid_initiatives(subject)
     : Promise.resolve();
 
   const covid_measures_prom = should_load_covid_measures

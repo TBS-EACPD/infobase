@@ -120,11 +120,15 @@ const covid_estimates_render = function ({ calculations, footnotes, sources }) {
 const calculate_functions = {
   gov: (subject, options) => {
     // TODO
-    return true;
+    return {
+      subject,
+    };
   },
   dept: (subject, options) => {
     // TODO
-    return true;
+    return {
+      subject,
+    };
   },
 };
 
