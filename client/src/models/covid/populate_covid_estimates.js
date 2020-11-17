@@ -3,54 +3,43 @@ import gql from "graphql-tag";
 import { log_standard_event } from "../../core/analytics.js";
 import { get_client } from "../../graphql_utils/graphql_utils.js";
 
-import { CovidInitiatives } from "./CovidInitiatives.js";
+import { CovidEstimates } from "./CovidEstimates.js";
 
-const covid_initiative_query_fragment = `
-  covid_initiatives {
-    id
-    name
+const covid_estimates_query_fragment = `
+  covid_estimates {
+    org_id
     
-    estimates {
-      org_id
-    
-      covid_measure_ids
-      covid_measures {
-        id
-        name
-      }
-    
-      fiscal_year
-      est_doc
-      vote
-      stat
-    }
+    fiscal_year
+    est_doc
+    vote
+    stat
   }
 `;
 
-const get_org_covid_initiative_query = gql`
+const get_org_covid_estimates_query = gql`
   query($lang: String! $id: String!) {
     root(lang: $lang) {
       org(org_id: $id) {
-        ${covid_initiative_query_fragment}
+        ${covid_estimates_query_fragment}
       }
     }
   }
 `;
-const get_gov_covid_initiative_query = gql`
+const get_gov_covid_estimates_query = gql`
   query($lang: String!) {
     root(lang: $lang) {
-      ${covid_initiative_query_fragment}
+      ${covid_estimates_query_fragment}
     }	
   }	
 `;
 
-const _subject_ids_with_loaded_initiatives = {};
-export const api_load_covid_initiatives = (subject) => {
+const _subject_ids_with_loaded_estimates = {};
+export const api_load_covid_estimates = (subject) => {
   const level = (subject && subject.level) || "gov";
 
   const { is_loaded, id, query, response_data_accessor } = (() => {
     const subject_is_loaded = ({ level, id }) =>
-      _.get(_subject_ids_with_loaded_initiatives, `${level}.${id}`);
+      _.get(_subject_ids_with_loaded_estimates, `${level}.${id}`);
 
     const all_is_loaded = () => subject_is_loaded({ level: "gov", id: "gov" });
     const dept_is_loaded = (org) => all_is_loaded() || subject_is_loaded(org);
@@ -60,14 +49,14 @@ export const api_load_covid_initiatives = (subject) => {
         return {
           is_loaded: dept_is_loaded(subject),
           id: subject.id,
-          query: get_org_covid_initiative_query,
+          query: get_org_covid_estimates_query,
           response_data_accessor: (response) => response.data.root.org,
         };
       default:
         return {
           is_loaded: all_is_loaded,
           id: "gov",
-          query: get_gov_covid_initiative_query,
+          query: get_gov_covid_estimates_query,
           response_data_accessor: (response) => response.data.root.gov,
         };
     }
@@ -85,7 +74,7 @@ export const api_load_covid_initiatives = (subject) => {
       variables: {
         lang: window.lang,
         id,
-        _query_name: "covid_initiatives",
+        _query_name: "covid_estimates",
       },
     })
     .then((response) => {
@@ -97,29 +86,24 @@ export const api_load_covid_initiatives = (subject) => {
         log_standard_event({
           SUBAPP: window.location.hash.replace("#", ""),
           MISC1: "API_QUERY_SUCCESS",
-          MISC2: `Covid initiatives, took ${resp_time} ms`,
+          MISC2: `Covid estimates, took ${resp_time} ms`,
         });
       } else {
         log_standard_event({
           SUBAPP: window.location.hash.replace("#", ""),
           MISC1: "API_QUERY_UNEXPECTED",
-          MISC2: `Covid initiatives, took ${resp_time} ms`,
+          MISC2: `Covid estimates, took ${resp_time} ms`,
         });
       }
 
-      if (!_.isEmpty(response_data)) {
-        _.each(
-          response_data,
-          (initiative_and_estimates) =>
-            CovidInitiatives.lookup(initiative_and_estimates.id) ||
-            CovidInitiatives.create_and_register(initiative_and_estimates)
-        );
-      }
+      _.each(response_data, (covid_estimates_row) =>
+        CovidEstimates.create_and_register(covid_estimates_row)
+      );
 
       // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
       // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh
       _.setWith(
-        _subject_ids_with_loaded_initiatives,
+        _subject_ids_with_loaded_estimates,
         `${level}.${id}`,
         true,
         Object
@@ -132,7 +116,7 @@ export const api_load_covid_initiatives = (subject) => {
       log_standard_event({
         SUBAPP: window.location.hash.replace("#", ""),
         MISC1: "API_QUERY_FAILURE",
-        MISC2: `Covid initiatives, took ${resp_time} ms - ${error.toString()}`,
+        MISC2: `Covid estimates, took ${resp_time} ms - ${error.toString()}`,
       });
       throw error;
     });

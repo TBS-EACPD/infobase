@@ -1,3 +1,4 @@
+import { CovidEstimates } from "./covid/CovidEstimates.js";
 import { CovidInitiatives } from "./covid/CovidInitiatives.js";
 import { CovidMeasures } from "./covid/CovidMeasures.js";
 import {
@@ -23,6 +24,7 @@ const Subject = {
   Tag,
   Result,
   Indicator,
+  CovidEstimates,
   CovidInitiatives,
   CovidMeasures,
 };
