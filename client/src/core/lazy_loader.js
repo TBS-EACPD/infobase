@@ -101,7 +101,7 @@ function ensure_loaded({
       .value();
 
   const should_load_covid_initiatives =
-    services ||
+    covid_initiatives ||
     _.chain(panel_keys)
       .map((key) => PanelRegistry.lookup(key, subject_level))
       .map("requires_covid_initiatives")
@@ -109,7 +109,7 @@ function ensure_loaded({
       .value();
 
   const should_load_covid_measures =
-    services ||
+    covid_measures ||
     _.chain(panel_keys)
       .map((key) => PanelRegistry.lookup(key, subject_level))
       .map("requires_covid_measures")

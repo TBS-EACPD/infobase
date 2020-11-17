@@ -22,6 +22,7 @@ export {
   declare_vote_stat_split_panel,
   declare_welcome_mat_panel,
   declare_tp_by_region_panel,
+  declare_covid_estimates_panel,
 } from "./finances/index.js";
 
 export {
