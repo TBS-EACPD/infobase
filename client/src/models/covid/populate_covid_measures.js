@@ -3,9 +3,7 @@ import gql from "graphql-tag";
 import { log_standard_event } from "../../core/analytics.js";
 import { get_client } from "../../graphql_utils/graphql_utils.js";
 
-import { Subject } from "../subject.js";
-
-const { CovidMeasures } = Subject;
+import { CovidMeasures } from "./CovidMeasures.js";
 
 const covid_measures_query = gql`
   query($lang: String!) {
@@ -18,7 +16,7 @@ const covid_measures_query = gql`
   }
 `;
 
-export function api_load_covid_measures() {
+export const api_load_covid_measures = () => {
   if (!_.isEmpty(CovidMeasures.get_all())) {
     return Promise.resolve();
   }
@@ -67,4 +65,4 @@ export function api_load_covid_measures() {
       });
       throw error;
     });
-}
+};

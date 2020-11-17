@@ -3,49 +3,50 @@ import gql from "graphql-tag";
 import { log_standard_event } from "../../core/analytics.js";
 import { get_client } from "../../graphql_utils/graphql_utils.js";
 
-import { Subject } from "../subject.js";
+import { CovidInitiatives } from "./CovidInitiatives.js";
 
-const { CovidInitiatives } = Subject;
-
-const covid_initiative_query_fragment = `covid_initiatives {
-  id
-  name
-  
-  estimates {
-    org_id
-  
-    covid_measure_ids
-    covid_measures {
-      id
-      name
+const covid_initiative_query_fragment = `
+  covid_initiatives {
+    id
+    name
+    
+    estimates {
+      org_id
+    
+      covid_measure_ids
+      covid_measures {
+        id
+        name
+      }
+    
+      fiscal_year
+      est_doc
+      vote
+      stat
     }
-  
-    fiscal_year
-    est_doc
-    vote
-    stat
-}`;
+  }
+`;
 
-const org_covid_initiative_query = gql`	
-query($lang: String! $org_id: String!) {	
-  root(lang: $lang) {	
-    org(org_id: $org_id) {	
-      id	
+const get_org_covid_initiative_query = gql`
+  query($lang: String! $org_id: String!) {
+    root(lang: $lang) {
+      org(org_id: $org_id) {
+        id	
+        ${covid_initiative_query_fragment}
+      }
+    }
+  }
+`;
+const get_gov_covid_initiative_query = gql`
+  query($lang: String!) {
+    root(lang: $lang) {
       ${covid_initiative_query_fragment}
     }	
   }	
-}	
-`;
-const gov_covid_initiative_query = gql`	
-query($lang: String!) {	
-  root(lang: $lang) {	
-    ${covid_initiative_query_fragment}
-  }	
-}	
 `;
 
 const _subject_ids_with_loaded_initiatives = {};
-export function api_load_covid_initiatives(subject) {
+export const api_load_covid_initiatives = (subject) => {
   const level = (subject && subject.level) || "gov";
 
   const { is_loaded, id, query, response_data_accessor } = (() => {
@@ -60,14 +61,14 @@ export function api_load_covid_initiatives(subject) {
         return {
           is_loaded: dept_is_loaded(subject),
           id: subject.id,
-          query: org_covid_initiative_query,
+          query: get_org_covid_initiative_query,
           response_data_accessor: (response) => response.data.root.org,
         };
       default:
         return {
-          is_loaded: all_is_loaded(),
+          is_loaded: all_is_loaded,
           id: "gov",
-          query: gov_covid_initiative_query,
+          query: get_gov_covid_initiative_query,
           response_data_accessor: (response) => response.data.root.gov,
         };
     }
@@ -133,4 +134,4 @@ export function api_load_covid_initiatives(subject) {
       });
       throw error;
     });
-}
+};
