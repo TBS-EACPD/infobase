@@ -11,7 +11,7 @@ import {
 
 import text from "./covid_estimates.yaml";
 
-const { CovidInitiatives, CovidMeasures, Dept } = Subject;
+const { CovidEstimates, CovidInitiatives, CovidMeasures, Dept } = Subject;
 
 const { TabbedControls, SpinnerWrapper, SmartDisplayTable } = util_components;
 
@@ -137,7 +137,7 @@ export const declare_covid_estimates_panel = () =>
     panel_key: "covid_estimates_panel",
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
-      requires_covid_initiatives: true,
+      requires_covid_estimates: true,
       footnotes: false,
       source: (subject) => [],
       calculate: calculate_functions[level_name],
