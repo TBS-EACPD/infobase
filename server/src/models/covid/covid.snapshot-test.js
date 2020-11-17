@@ -10,6 +10,34 @@ query ($lang: String = "en") {
   }
 }`;
 
+const all_covid_estimates_query = `
+query ($lang: String = "en") {
+  root(lang: $lang) {
+    covid_estimates {
+      org_id
+
+      fiscal_year
+      est_doc
+      vote
+      stat
+    }
+  }
+}`;
+
+const org_covid_estimates_query = `
+query ($lang: String = "en") {
+  root(lang: $lang) {
+    org(org_id: "133") {
+      covid_estimates {
+        fiscal_year
+        est_doc
+        vote
+        stat
+      }
+    }
+  }
+}`;
+
 const all_covid_initiatives_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
@@ -17,7 +45,7 @@ query ($lang: String = "en") {
       id
       name
 
-      estimates {
+      covid_initiative_estimates {
         org_id
 
         covid_measure_ids
@@ -34,7 +62,6 @@ query ($lang: String = "en") {
     }
   }
 }`;
-
 const org_covid_initiatives_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
@@ -43,7 +70,7 @@ query ($lang: String = "en") {
         id
         name
 
-        estimates {
+        covid_initiative_estimates {
           org_id
 
           covid_measure_ids
@@ -67,11 +94,19 @@ describe("covid data", () => {
     const data = await execQuery(all_covid_measures_query, {});
     return expect(data).toMatchSnapshot();
   });
-  it("All covid initiatives and estimates", async () => {
+  it("All covid estimates", async () => {
+    const data = await execQuery(all_covid_estimates_query, {});
+    return expect(data).toMatchSnapshot();
+  });
+  it("Org covid estimates", async () => {
+    const data = await execQuery(org_covid_estimates_query, {});
+    return expect(data).toMatchSnapshot();
+  });
+  it("All covid initiatives and initiative estimates", async () => {
     const data = await execQuery(all_covid_initiatives_query, {});
     return expect(data).toMatchSnapshot();
   });
-  it("Query org's covid initiatives and estimates", async () => {
+  it("Org covid initiatives and initiative estimates", async () => {
     const data = await execQuery(org_covid_initiatives_query, {});
     return expect(data).toMatchSnapshot();
   });

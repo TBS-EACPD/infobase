@@ -1,5 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`covid data All covid estimates 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "covid_estimates": Array [
+        Object {
+          "est_doc": "ME",
+          "fiscal_year": "2020",
+          "org_id": "133",
+          "stat": 8,
+          "vote": 1107,
+        },
+        Object {
+          "est_doc": "SEA",
+          "fiscal_year": "2020",
+          "org_id": "133",
+          "stat": 0,
+          "vote": 9,
+        },
+        Object {
+          "est_doc": "SEB",
+          "fiscal_year": "2020",
+          "org_id": "133",
+          "stat": 9,
+          "vote": 9,
+        },
+        Object {
+          "est_doc": "ME",
+          "fiscal_year": "2020",
+          "org_id": "326",
+          "stat": 999,
+          "vote": 0,
+        },
+        Object {
+          "est_doc": "SEA",
+          "fiscal_year": "2020",
+          "org_id": "326",
+          "stat": 9,
+          "vote": 99,
+        },
+        Object {
+          "est_doc": "SEA",
+          "fiscal_year": "2020",
+          "org_id": "552",
+          "stat": 99,
+          "vote": 99,
+        },
+        Object {
+          "est_doc": "SEB",
+          "fiscal_year": "2020",
+          "org_id": "552",
+          "stat": 9,
+          "vote": 18,
+        },
+      ],
+    },
+  },
+}
+`;
+
 exports[`covid data All covid initiatives and estimates 1`] = `
 Object {
   "data": Object {
@@ -219,6 +279,225 @@ Object {
 }
 `;
 
+exports[`covid data All covid initiatives and initiative estimates 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "covid_initiatives": Array [
+        Object {
+          "covid_initiative_estimates": Array [
+            Object {
+              "covid_measure_ids": Array [
+                "COV001",
+              ],
+              "covid_measures": Array [
+                Object {
+                  "id": "COV001",
+                  "name": "measure 1",
+                },
+              ],
+              "est_doc": "ME",
+              "fiscal_year": "2020",
+              "org_id": "133",
+              "stat": 0,
+              "vote": 999,
+            },
+            Object {
+              "covid_measure_ids": Array [
+                "COV001",
+              ],
+              "covid_measures": Array [
+                Object {
+                  "id": "COV001",
+                  "name": "measure 1",
+                },
+              ],
+              "est_doc": "SEA",
+              "fiscal_year": "2020",
+              "org_id": "133",
+              "stat": 0,
+              "vote": 9,
+            },
+            Object {
+              "covid_measure_ids": Array [
+                "COV001",
+              ],
+              "covid_measures": Array [
+                Object {
+                  "id": "COV001",
+                  "name": "measure 1",
+                },
+              ],
+              "est_doc": "SEB",
+              "fiscal_year": "2020",
+              "org_id": "133",
+              "stat": 9,
+              "vote": 9,
+            },
+            Object {
+              "covid_measure_ids": Array [
+                "COV001",
+              ],
+              "covid_measures": Array [
+                Object {
+                  "id": "COV001",
+                  "name": "measure 1",
+                },
+              ],
+              "est_doc": "ME",
+              "fiscal_year": "2020",
+              "org_id": "326",
+              "stat": 999,
+              "vote": 0,
+            },
+            Object {
+              "covid_measure_ids": Array [
+                "COV001",
+                "COV002",
+              ],
+              "covid_measures": Array [
+                Object {
+                  "id": "COV001",
+                  "name": "measure 1",
+                },
+                Object {
+                  "id": "COV002",
+                  "name": "measure 2",
+                },
+              ],
+              "est_doc": "SEA",
+              "fiscal_year": "2020",
+              "org_id": "552",
+              "stat": 99,
+              "vote": 99,
+            },
+            Object {
+              "covid_measure_ids": Array [
+                "COV001",
+                "COV002",
+              ],
+              "covid_measures": Array [
+                Object {
+                  "id": "COV001",
+                  "name": "measure 1",
+                },
+                Object {
+                  "id": "COV002",
+                  "name": "measure 2",
+                },
+              ],
+              "est_doc": "SEB",
+              "fiscal_year": "2020",
+              "org_id": "552",
+              "stat": 0,
+              "vote": 9,
+            },
+          ],
+          "id": "1",
+          "name": "Initiative 1",
+        },
+        Object {
+          "covid_initiative_estimates": Array [
+            Object {
+              "covid_measure_ids": Array [
+                "COV002",
+              ],
+              "covid_measures": Array [
+                Object {
+                  "id": "COV002",
+                  "name": "measure 2",
+                },
+              ],
+              "est_doc": "ME",
+              "fiscal_year": "2020",
+              "org_id": "133",
+              "stat": 8,
+              "vote": 99,
+            },
+            Object {
+              "covid_measure_ids": Array [
+                "COV002",
+              ],
+              "covid_measures": Array [
+                Object {
+                  "id": "COV002",
+                  "name": "measure 2",
+                },
+              ],
+              "est_doc": "SEB",
+              "fiscal_year": "2020",
+              "org_id": "552",
+              "stat": 9,
+              "vote": 9,
+            },
+          ],
+          "id": "2",
+          "name": "Initiative 2",
+        },
+        Object {
+          "covid_initiative_estimates": Array [
+            Object {
+              "covid_measure_ids": Array [
+                "COV001",
+                "COV002",
+                "COV003",
+              ],
+              "covid_measures": Array [
+                Object {
+                  "id": "COV001",
+                  "name": "measure 1",
+                },
+                Object {
+                  "id": "COV002",
+                  "name": "measure 2",
+                },
+                Object {
+                  "id": "COV003",
+                  "name": "measure 3",
+                },
+              ],
+              "est_doc": "ME",
+              "fiscal_year": "2020",
+              "org_id": "133",
+              "stat": 0,
+              "vote": 9,
+            },
+            Object {
+              "covid_measure_ids": Array [
+                "COV001",
+                "COV002",
+                "COV003",
+              ],
+              "covid_measures": Array [
+                Object {
+                  "id": "COV001",
+                  "name": "measure 1",
+                },
+                Object {
+                  "id": "COV002",
+                  "name": "measure 2",
+                },
+                Object {
+                  "id": "COV003",
+                  "name": "measure 3",
+                },
+              ],
+              "est_doc": "SEA",
+              "fiscal_year": "2020",
+              "org_id": "326",
+              "stat": 9,
+              "vote": 99,
+            },
+          ],
+          "id": "3",
+          "name": "Initiative 3",
+        },
+      ],
+    },
+  },
+}
+`;
+
 exports[`covid data All covid measures 1`] = `
 Object {
   "data": Object {
@@ -237,6 +516,258 @@ Object {
           "name": "measure 3",
         },
       ],
+    },
+  },
+}
+`;
+
+exports[`covid data Org covid estimates 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "org": Object {
+        "covid_estimates": Array [
+          Object {
+            "est_doc": "ME",
+            "fiscal_year": "2020",
+            "stat": 8,
+            "vote": 1107,
+          },
+          Object {
+            "est_doc": "SEA",
+            "fiscal_year": "2020",
+            "stat": 0,
+            "vote": 9,
+          },
+          Object {
+            "est_doc": "SEB",
+            "fiscal_year": "2020",
+            "stat": 9,
+            "vote": 9,
+          },
+        ],
+      },
+    },
+  },
+}
+`;
+
+exports[`covid data Org covid initiatives and initiative estimates 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "org": Object {
+        "covid_initiatives": Array [
+          Object {
+            "covid_initiative_estimates": Array [
+              Object {
+                "covid_measure_ids": Array [
+                  "COV001",
+                ],
+                "covid_measures": Array [
+                  Object {
+                    "id": "COV001",
+                    "name": "measure 1",
+                  },
+                ],
+                "est_doc": "ME",
+                "fiscal_year": "2020",
+                "org_id": "133",
+                "stat": 0,
+                "vote": 999,
+              },
+              Object {
+                "covid_measure_ids": Array [
+                  "COV001",
+                ],
+                "covid_measures": Array [
+                  Object {
+                    "id": "COV001",
+                    "name": "measure 1",
+                  },
+                ],
+                "est_doc": "SEA",
+                "fiscal_year": "2020",
+                "org_id": "133",
+                "stat": 0,
+                "vote": 9,
+              },
+              Object {
+                "covid_measure_ids": Array [
+                  "COV001",
+                ],
+                "covid_measures": Array [
+                  Object {
+                    "id": "COV001",
+                    "name": "measure 1",
+                  },
+                ],
+                "est_doc": "SEB",
+                "fiscal_year": "2020",
+                "org_id": "133",
+                "stat": 9,
+                "vote": 9,
+              },
+              Object {
+                "covid_measure_ids": Array [
+                  "COV001",
+                ],
+                "covid_measures": Array [
+                  Object {
+                    "id": "COV001",
+                    "name": "measure 1",
+                  },
+                ],
+                "est_doc": "ME",
+                "fiscal_year": "2020",
+                "org_id": "326",
+                "stat": 999,
+                "vote": 0,
+              },
+              Object {
+                "covid_measure_ids": Array [
+                  "COV001",
+                  "COV002",
+                ],
+                "covid_measures": Array [
+                  Object {
+                    "id": "COV001",
+                    "name": "measure 1",
+                  },
+                  Object {
+                    "id": "COV002",
+                    "name": "measure 2",
+                  },
+                ],
+                "est_doc": "SEA",
+                "fiscal_year": "2020",
+                "org_id": "552",
+                "stat": 99,
+                "vote": 99,
+              },
+              Object {
+                "covid_measure_ids": Array [
+                  "COV001",
+                  "COV002",
+                ],
+                "covid_measures": Array [
+                  Object {
+                    "id": "COV001",
+                    "name": "measure 1",
+                  },
+                  Object {
+                    "id": "COV002",
+                    "name": "measure 2",
+                  },
+                ],
+                "est_doc": "SEB",
+                "fiscal_year": "2020",
+                "org_id": "552",
+                "stat": 0,
+                "vote": 9,
+              },
+            ],
+            "id": "1",
+            "name": "Initiative 1",
+          },
+          Object {
+            "covid_initiative_estimates": Array [
+              Object {
+                "covid_measure_ids": Array [
+                  "COV002",
+                ],
+                "covid_measures": Array [
+                  Object {
+                    "id": "COV002",
+                    "name": "measure 2",
+                  },
+                ],
+                "est_doc": "ME",
+                "fiscal_year": "2020",
+                "org_id": "133",
+                "stat": 8,
+                "vote": 99,
+              },
+              Object {
+                "covid_measure_ids": Array [
+                  "COV002",
+                ],
+                "covid_measures": Array [
+                  Object {
+                    "id": "COV002",
+                    "name": "measure 2",
+                  },
+                ],
+                "est_doc": "SEB",
+                "fiscal_year": "2020",
+                "org_id": "552",
+                "stat": 9,
+                "vote": 9,
+              },
+            ],
+            "id": "2",
+            "name": "Initiative 2",
+          },
+          Object {
+            "covid_initiative_estimates": Array [
+              Object {
+                "covid_measure_ids": Array [
+                  "COV001",
+                  "COV002",
+                  "COV003",
+                ],
+                "covid_measures": Array [
+                  Object {
+                    "id": "COV001",
+                    "name": "measure 1",
+                  },
+                  Object {
+                    "id": "COV002",
+                    "name": "measure 2",
+                  },
+                  Object {
+                    "id": "COV003",
+                    "name": "measure 3",
+                  },
+                ],
+                "est_doc": "ME",
+                "fiscal_year": "2020",
+                "org_id": "133",
+                "stat": 0,
+                "vote": 9,
+              },
+              Object {
+                "covid_measure_ids": Array [
+                  "COV001",
+                  "COV002",
+                  "COV003",
+                ],
+                "covid_measures": Array [
+                  Object {
+                    "id": "COV001",
+                    "name": "measure 1",
+                  },
+                  Object {
+                    "id": "COV002",
+                    "name": "measure 2",
+                  },
+                  Object {
+                    "id": "COV003",
+                    "name": "measure 3",
+                  },
+                ],
+                "est_doc": "SEA",
+                "fiscal_year": "2020",
+                "org_id": "326",
+                "stat": 9,
+                "vote": 99,
+              },
+            ],
+            "id": "3",
+            "name": "Initiative 3",
+          },
+        ],
+      },
     },
   },
 }
