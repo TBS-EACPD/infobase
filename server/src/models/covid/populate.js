@@ -1,9 +1,9 @@
-import _ from "lodash";
+import _, { thru } from "lodash";
 
 import { get_standard_csv_file_rows } from "../load_utils.js";
 
 export default async function ({ models }) {
-  const { CovidMeasure, CovidInitiative } = models;
+  const { CovidMeasure, CovidInitiative, CovidEstimates } = models;
 
   const covid_measure_records = _.chain(
     get_standard_csv_file_rows("covid_measures.csv")
@@ -18,6 +18,31 @@ export default async function ({ models }) {
       covid_measure_ids: _.split(row.covid_measure_ids, ","),
     })
   );
+  const covid_estimates_records = _.chain(covid_initative_estimates_rows)
+    .groupBy("org_id")
+    .flatMap((org_group, org_id) =>
+      _.chain(org_group)
+        .groupBy("fiscal_year")
+        .flatMap((year_group, fiscal_year) =>
+          _.chain(year_group)
+            .groupBy("est_doc")
+            .flatMap((doc_group, est_doc) =>
+              _.reduce(
+                doc_group,
+                (roll_up, row) => ({
+                  ...roll_up,
+                  vote: roll_up.vote + +row.vote,
+                  stat: roll_up.stat + +row.stat,
+                }),
+                { org_id, fiscal_year, est_doc, vote: 0, stat: 0 }
+              )
+            )
+            .value()
+        )
+        .value()
+    )
+    .value();
+
   const covid_initiative_records = _.chain(
     get_standard_csv_file_rows("covid_initiatives.csv")
   )
@@ -30,7 +55,7 @@ export default async function ({ models }) {
 
       return new CovidInitiative({
         ...row,
-        estimates: initiative_estimates_rows,
+        covid_initiative_estimates: initiative_estimates_rows,
       });
     })
     .value();
@@ -38,5 +63,6 @@ export default async function ({ models }) {
   return await Promise.all([
     CovidMeasure.insertMany(covid_measure_records),
     CovidInitiative.insertMany(covid_initiative_records),
+    CovidEstimates.insertMany(covid_estimates_records),
   ]);
 }
