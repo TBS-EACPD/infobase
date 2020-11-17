@@ -17,7 +17,7 @@ const schema = `
   type CovidEstimates{
     id: String
     
-    org_id: String
+    org_id: Int
 
     fiscal_year: String
     est_doc: String
@@ -35,7 +35,7 @@ const schema = `
   type CovidInitiativeEstimates{
     id: String
 
-    org_id: String
+    org_id: Int
 
     covid_initiative_id: [String]
     covid_initiative: CovidInitiative

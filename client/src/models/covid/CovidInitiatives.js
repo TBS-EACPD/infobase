@@ -30,10 +30,7 @@ class CovidInitiatives extends mix().with(
     super();
     _.assign(this, {
       ...initiative_and_estimates,
-      org_ids: _.map(
-        initiative_and_estimates.estimates,
-        ({ org_id }) => +org_id
-      ),
+      org_ids: _.map(initiative_and_estimates.estimates, "org_id"),
     });
   }
 }

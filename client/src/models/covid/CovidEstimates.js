@@ -8,10 +8,7 @@ class CovidEstimates extends mix().with(staticStoreMixin) {
   }
   constructor(covid_estimates_row) {
     super();
-    _.assign(this, {
-      ...covid_estimates_row,
-      org_id: +covid_estimates_row.org_id,
-    });
+    _.assign(this, covid_estimates_row);
   }
 
   static org_lookup(org_id) {
