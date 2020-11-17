@@ -28,9 +28,9 @@ const covid_initiative_query_fragment = `
 `;
 
 const get_org_covid_initiative_query = gql`
-  query($lang: String! $org_id: String!) {
+  query($lang: String! $id: String!) {
     root(lang: $lang) {
-      org(org_id: $org_id) {
+      org(org_id: $id) {
         id	
         ${covid_initiative_query_fragment}
       }
@@ -109,8 +109,11 @@ export const api_load_covid_initiatives = (subject) => {
       }
 
       if (!_.isEmpty(response)) {
-        _.each(response, (initiative_and_estimates) =>
-          CovidInitiatives.create_and_register(initiative_and_estimates)
+        _.each(
+          response,
+          (initiative_and_estimates) =>
+            CovidInitiatives.lookup(initiative_and_estimates.id) ||
+            CovidInitiatives.create_and_register(initiative_and_estimates)
         );
       }
 
