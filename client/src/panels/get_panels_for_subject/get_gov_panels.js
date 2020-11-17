@@ -24,6 +24,7 @@ import {
   declare_employee_fol_panel,
   declare_employee_gender_panel,
   declare_results_intro_panel,
+  declare_covid_estimates_panel,
 
   // gov only panels
   declare_simplographic_panel,
@@ -42,6 +43,7 @@ export const get_gov_panels = (subject) => ({
     declare_late_resources_panel(),
     declare_financial_key_concepts_panel(),
     declare_welcome_mat_panel(),
+    declare_covid_estimates_panel(),
     declare_tp_by_region_panel(),
     declare_auth_exp_planned_spending_panel(),
     declare_in_year_estimates_split_panel(), //turned off until supps A

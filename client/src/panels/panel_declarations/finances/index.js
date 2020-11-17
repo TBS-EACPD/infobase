@@ -38,3 +38,5 @@ export {
 } from "./vote_stat/index.js";
 
 export { declare_welcome_mat_panel } from "./welcome_mat/welcome_mat.js";
+
+export { declare_covid_estimates_panel } from "./covid/covid_estimates.js";
