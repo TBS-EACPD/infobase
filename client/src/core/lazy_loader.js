@@ -1,6 +1,8 @@
-import { api_load_covid_estimates } from "../models/covid/populate_covid_estimates.js";
-import { api_load_covid_initiatives } from "../models/covid/populate_covid_initiatives.js";
-import { api_load_covid_measures } from "../models/covid/populate_covid_measures.js";
+import {
+  api_load_covid_estimates,
+  api_load_covid_initiatives,
+  api_load_covid_measures,
+} from "../models/covid/populate.js";
 import { load_footnotes_bundle } from "../models/footnotes/populate_footnotes.js";
 import { load_horizontal_initiative_lookups } from "../models/populate_horizontal_initiative_lookups.js";
 import {
