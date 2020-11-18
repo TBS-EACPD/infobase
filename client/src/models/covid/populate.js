@@ -8,34 +8,32 @@ import { CovidInitiatives } from "./CovidInitiatives.js";
 import { CovidMeasures } from "./CovidMeasures.js";
 
 const covid_estimates_query_fragment = `
-  id
-  
-  org_id
-  
-  fiscal_year
-  est_doc
-  vote
-  stat
+  covid_estimates {
+    id
+    
+    org_id
+    
+    fiscal_year
+    est_doc
+    vote
+    stat
+  }
 `;
 
-const get_org_covid_estimates_query = gql`
+const org_covid_estimates_query = gql`
   query($lang: String! $id: String!) {
     root(lang: $lang) {
       org(org_id: $id) {
         id
-        covid_estimates {
-          ${covid_estimates_query_fragment}
-        }
+        ${covid_estimates_query_fragment}
       }
     }
   }
 `;
-const get_all_covid_estimates_query = gql`
+const all_covid_estimates_query = gql`
   query($lang: String!) {
     root(lang: $lang) {
-      covid_estimates {
-        ${covid_estimates_query_fragment}
-      }
+      ${covid_estimates_query_fragment}
     }	
   }	
 `;
@@ -56,14 +54,14 @@ export const api_load_covid_estimates = (subject) => {
         return {
           is_loaded: dept_is_loaded(subject),
           id: subject.id,
-          query: get_org_covid_estimates_query,
+          query: org_covid_estimates_query,
           response_data_accessor: (response) => response.data.root.org,
         };
       default:
         return {
           is_loaded: all_is_loaded,
           id: "all",
-          query: get_all_covid_estimates_query,
+          query: all_covid_estimates_query,
           response_data_accessor: (response) => response.data.root.gov,
         };
     }
@@ -129,12 +127,83 @@ export const api_load_covid_estimates = (subject) => {
     });
 };
 
+const covid_estimates_gov_summary_query = gql`
+  query($lang: String!) {
+    root(lang: $lang) {
+      gov {
+        covid_estimates_summary {
+          id
+
+          fiscal_year
+          est_doc
+          vote
+          stat
+        }
+      }
+    }
+  }
+`;
+
+export const api_load_covid_estimates_gov_summary = () => {
+  if (!_.isEmpty(CovidEstimates.get_gov_summary())) {
+    return Promise.resolve();
+  }
+
+  const time_at_request = Date.now();
+  const client = get_client();
+  return client
+    .query({
+      query: covid_estimates_gov_summary_query,
+      variables: {
+        lang: window.lang,
+        _query_name: "covid_estimates_gov_summary",
+      },
+    })
+    .then((response) => {
+      const { covid_estimates_summary } = response.data.root.gov;
+
+      const resp_time = Date.now() - time_at_request;
+      if (!_.isEmpty(covid_estimates_summary)) {
+        // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
+        log_standard_event({
+          SUBAPP: window.location.hash.replace("#", ""),
+          MISC1: "API_QUERY_SUCCESS",
+          MISC2: `Covid estimates gov summary, took ${resp_time} ms`,
+        });
+      } else {
+        log_standard_event({
+          SUBAPP: window.location.hash.replace("#", ""),
+          MISC1: "API_QUERY_UNEXPECTED",
+          MISC2: `Covid estimates gov summary, took ${resp_time} ms`,
+        });
+      }
+
+      _.each(covid_estimates_summary, (covid_estimates_summary_rows) =>
+        CovidEstimates.create_and_register({
+          org_id: "gov",
+          ...covid_estimates_summary_rows,
+        })
+      );
+
+      return covid_estimates_summary;
+    })
+    .catch(function (error) {
+      const resp_time = Date.now() - time_at_request;
+      log_standard_event({
+        SUBAPP: window.location.hash.replace("#", ""),
+        MISC1: "API_QUERY_FAILURE",
+        MISC2: `Covid estimates gov summary, took ${resp_time} ms - ${error.toString()}`,
+      });
+      throw error;
+    });
+};
+
 const covid_initiative_query_fragment = `
   covid_initiatives {
     id
     name
     
-    estimates {
+    covid_initiative_estimates {
       id
       
       org_id
@@ -153,7 +222,7 @@ const covid_initiative_query_fragment = `
   }
 `;
 
-const get_org_covid_initiative_query = gql`
+const org_covid_initiative_query = gql`
   query($lang: String! $id: String!) {
     root(lang: $lang) {
       org(org_id: $id) {
@@ -163,7 +232,7 @@ const get_org_covid_initiative_query = gql`
     }
   }
 `;
-const get_gov_covid_initiative_query = gql`
+const gov_covid_initiative_query = gql`
   query($lang: String!) {
     root(lang: $lang) {
       ${covid_initiative_query_fragment}
@@ -187,14 +256,14 @@ export const api_load_covid_initiatives = (subject) => {
         return {
           is_loaded: dept_is_loaded(subject),
           id: subject.id,
-          query: get_org_covid_initiative_query,
+          query: org_covid_initiative_query,
           response_data_accessor: (response) => response.data.root.org,
         };
       default:
         return {
           is_loaded: all_is_loaded,
           id: "gov",
-          query: get_gov_covid_initiative_query,
+          query: gov_covid_initiative_query,
           response_data_accessor: (response) => response.data.root.gov,
         };
     }

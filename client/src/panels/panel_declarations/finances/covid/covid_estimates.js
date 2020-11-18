@@ -45,9 +45,11 @@ class CovidEstimatesPanel extends React.Component {
   render() {
     const { panel_args } = this.props;
 
-    const { subject } = panel_args;
+    const { subject, covid_estimates_data } = panel_args;
 
     const { loading } = this.state;
+
+    console.log(covid_estimates_data);
 
     const inner_content = (
       <Fragment>
@@ -119,7 +121,7 @@ const covid_estimates_render = function ({ calculations, footnotes, sources }) {
 
 const calculate_functions = {
   gov: (subject, options) => {
-    const covid_estimates_data = CovidEstimates.get_all();
+    const covid_estimates_data = CovidEstimates.get_gov_summary();
 
     if (_.isEmpty(covid_estimates_data)) {
       return false;
@@ -149,7 +151,8 @@ export const declare_covid_estimates_panel = () =>
     panel_key: "covid_estimates_panel",
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
-      requires_covid_estimates: true,
+      requires_covid_estimates_gov_summary: level_name === "gov",
+      requires_covid_estimates: level_name === "dept",
       footnotes: false,
       source: (subject) => [],
       calculate: calculate_functions[level_name],
