@@ -14,7 +14,7 @@ export class TreeMap extends React.Component {
     this.state = { org_route: [...props.org_route] };
   }
   render() {
-    return <div ref={(div) => (this.el = div)} />;
+    return <div className="TreeMap__Root" ref={(div) => (this.el = div)} />;
   }
   _update = () => {
     this._imperative_render();

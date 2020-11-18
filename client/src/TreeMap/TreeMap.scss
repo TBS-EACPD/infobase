@@ -14,10 +14,14 @@ $treeMapTooltipColor: $primaryColor;
 .TreeMap__Wrapper {
   background: none;
 }
+.TreeMap__Root {
+  width:100%;
+}
 .TreeMap__TopBar {
   background-color: $treeMapBackgroundColor;
   height: 100%;
   border: 2px solid white;
+  width:100%;
 }
 .TreeMap__Mainviz{
   background-color: $treeMapBackgroundColor;
