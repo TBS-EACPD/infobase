@@ -1,3 +1,5 @@
+import { businessConstants } from "../businessConstants.js";
+import { Dept } from "../organizational_entities.js";
 import { mix, staticStoreMixin } from "../storeMixins.js";
 
 class CovidEstimates extends mix().with(staticStoreMixin) {
@@ -30,6 +32,14 @@ class CovidEstimates extends mix().with(staticStoreMixin) {
       CovidEstimates.get_all(),
       ({ org_id: row_org_id }) => row_org_id === org_id
     );
+  }
+
+  get org() {
+    return Dept.lookup(this.org_id);
+  }
+
+  get doc_name() {
+    return businessConstants.estimates_docs[this.est_doc][window.lang];
   }
 }
 

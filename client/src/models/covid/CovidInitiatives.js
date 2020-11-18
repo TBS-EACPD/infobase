@@ -33,6 +33,13 @@ class CovidInitiatives extends mix().with(
       org_ids: _.map(initiative_and_estimates.estimates, "org_id"),
     });
   }
+
+  static org_lookup(org_id) {
+    return _.filter(
+      CovidInitiatives.get_all(),
+      ({ org_id: row_org_id }) => row_org_id === org_id
+    );
+  }
 }
 
 export { CovidInitiatives };

@@ -62,7 +62,7 @@ export const api_load_covid_estimates = (subject) => {
           is_loaded: all_is_loaded(),
           id: "all",
           query: all_covid_estimates_query,
-          response_data_accessor: (response) => response.data.root.gov,
+          response_data_accessor: (response) => response.data.root,
         };
     }
   })();
@@ -242,13 +242,13 @@ const gov_covid_initiative_query = gql`
 
 const _subject_ids_with_loaded_initiatives = {};
 export const api_load_covid_initiatives = (subject) => {
-  const level = (subject && subject.level) || "gov";
+  const level = (subject && subject.level === "dept") || "all";
 
   const { is_loaded, id, query, response_data_accessor } = (() => {
     const subject_is_loaded = ({ level, id }) =>
       _.get(_subject_ids_with_loaded_initiatives, `${level}.${id}`);
 
-    const all_is_loaded = () => subject_is_loaded({ level: "gov", id: "gov" });
+    const all_is_loaded = () => subject_is_loaded({ level: "all", id: "all" });
     const dept_is_loaded = (org) => all_is_loaded() || subject_is_loaded(org);
 
     switch (level) {
@@ -262,9 +262,9 @@ export const api_load_covid_initiatives = (subject) => {
       default:
         return {
           is_loaded: all_is_loaded(),
-          id: "gov",
+          id: "all",
           query: gov_covid_initiative_query,
-          response_data_accessor: (response) => response.data.root.gov,
+          response_data_accessor: (response) => response.data.root,
         };
     }
   })();

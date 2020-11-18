@@ -11,20 +11,21 @@ import {
   businessConstants,
   WrappedNivoBar,
   StandardLegend,
+  infograph_options_href_template,
 } from "../../shared.js";
 
 import text from "./covid_estimates.yaml";
 
-const { estimates_docs } = businessConstants;
-
 const { CovidEstimates, CovidInitiatives, CovidMeasures, Dept } = Subject;
 
-const { TabbedContent, SpinnerWrapper, SmartDisplayTable } = util_components;
+const {
+  TabbedContent,
+  SpinnerWrapper,
+  SmartDisplayTable,
+  default_dept_name_sort_func,
+} = util_components;
 
 const { text_maker, TM } = create_text_maker_component([text]);
-
-const doc_code_to_doc_name = (doc_code) =>
-  estimates_docs[doc_code][window.lang];
 
 const SummaryTab = ({ panel_args }) => {
   const { covid_estimates_data } = panel_args;
@@ -32,14 +33,18 @@ const SummaryTab = ({ panel_args }) => {
   const colors = infobase_colors();
 
   const graph_data = _.chain(covid_estimates_data)
-    .map(({ est_doc, stat, vote }) => ({
-      est_doc: doc_code_to_doc_name(est_doc),
+    .map(({ doc_name, stat, vote }) => ({
+      doc_name,
       [text_maker("stat_items")]: stat,
       [text_maker("voted")]: vote,
     }))
     .value();
 
-  const graph_keys = _.chain(graph_data).first().omit("est_doc").keys().value();
+  const graph_keys = _.chain(graph_data)
+    .first()
+    .omit("doc_name")
+    .keys()
+    .value();
 
   const legend_items = _.map(graph_keys, (key) => ({
     id: key,
@@ -51,7 +56,7 @@ const SummaryTab = ({ panel_args }) => {
     <WrappedNivoBar
       data={graph_data}
       keys={graph_keys}
-      indexBy="est_doc"
+      indexBy="doc_name"
       colorBy={(d) => colors(d.id)}
       margin={{
         top: 50,
@@ -102,9 +107,93 @@ const SummaryTab = ({ panel_args }) => {
   );
 };
 
-const ByDepartmentTab = ({ panel_args }) => "TODO";
+const ByDepartmentTab = ({ panel_args }) => {
+  const all_dept_estimates = CovidEstimates.get_all();
 
-const ByInitiativeTab = ({ panel_args }) => "TODO";
+  const column_configs = {
+    org: {
+      index: 0,
+      header: text_maker("department"),
+      is_searchable: true,
+      formatter: (org) => (
+        <a
+          href={infograph_options_href_template(org, "financial", {
+            panel_key: "covid_estimates_pane",
+          })}
+        >
+          {org.name}
+        </a>
+      ),
+      raw_formatter: (org) => org.name,
+      sort_func: (org_a, org_b) =>
+        default_dept_name_sort_func(org_a.id, org_b.id),
+    },
+    doc_name: {
+      index: 1,
+      header: text_maker("covid_estimates_estimates_doc"),
+      is_searchable: true,
+    },
+    stat: {
+      index: 2,
+      header: text_maker("stat_items"),
+      is_searchable: false,
+      is_summable: true,
+      formatter: "compact2_written",
+    },
+    vote: {
+      index: 3,
+      header: text_maker("voted"),
+      is_searchable: false,
+      is_summable: true,
+      formatter: "compact2_written",
+    },
+  };
+
+  return (
+    <SmartDisplayTable
+      data={_.map(all_dept_estimates, (row) =>
+        _.pick(row, _.keys(column_configs))
+      )}
+      column_configs={column_configs}
+      table_name={text_maker("covid_estimates_department_tab_label")}
+    />
+  );
+};
+
+const ByInitiativeTab = ({ panel_args }) => {
+  const { subject } = panel_args;
+  const initiatives =
+    subject.level === "dept"
+      ? CovidInitiatives.org_lookup(subject.org_id)
+      : CovidInitiatives.get_all();
+
+  //const column_configs = {
+  //  [indexBy]: {
+  //    index: 0,
+  //    header: table_first_column_name || nivo_common_text_maker("label"),
+  //    is_searchable: true,
+  //  },
+  //  ..._.chain(keys)
+  //    .map((key, idx) => [
+  //      key,
+  //      {
+  //        index: idx + 1,
+  //        header: key,
+  //        formatter: (value) =>
+  //          _.isUndefined(value) ? "" : table_view_format(value),
+  //      },
+  //    ])
+  //    .fromPairs()
+  //    .value(),
+  //};
+  //return (
+  //  <SmartDisplayTable
+  //    data={_.map(initiatives, (row) => _.pick(row, _.keys(column_configs)))}
+  //    table_name={text_maker("covid_estimates_initiative_tab_label")}
+  //  />
+  //);
+  return "TODO";
+};
 
 class TabLoadingWrapper extends React.Component {
   constructor(props) {
@@ -227,10 +316,7 @@ export const declare_covid_estimates_panel = () =>
 
         const est_doc_summary_stats = _.map(
           covid_estimates_data,
-          ({ est_doc, vote, stat }) => [
-            doc_code_to_doc_name(est_doc),
-            vote + stat,
-          ]
+          ({ doc_name, vote, stat }) => [doc_name, vote + stat]
         );
 
         return {
