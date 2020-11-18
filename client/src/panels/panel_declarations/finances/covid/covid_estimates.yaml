@@ -20,7 +20,7 @@ covid_estimates_summary_text:
 covid_estimates_by_doc:
   transform: [handlebars,markdown]
   en: |
-    COVID-19 initiative estimates by document:
+    COVID-19 initiative authorities by document:
     {{#each est_doc_summary_stats}}
     * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}**
     {{/each}}

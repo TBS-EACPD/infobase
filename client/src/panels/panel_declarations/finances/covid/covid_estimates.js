@@ -7,8 +7,6 @@ import {
   InfographicPanel,
   ensure_loaded,
   declare_panel,
-  formats,
-  businessConstants,
   WrappedNivoBar,
   StandardLegend,
   infograph_options_href_template,
@@ -16,7 +14,7 @@ import {
 
 import text from "./covid_estimates.yaml";
 
-const { CovidEstimates, CovidInitiatives, CovidMeasures, Dept } = Subject;
+const { CovidEstimates, CovidInitiatives } = Subject;
 
 const {
   TabbedContent,
@@ -118,7 +116,7 @@ const ByDepartmentTab = ({ panel_args }) => {
       formatter: (org) => (
         <a
           href={infograph_options_href_template(org, "financial", {
-            panel_key: "covid_estimates_pane",
+            panel_key: "covid_estimates_panel",
           })}
         >
           {org.name}
@@ -233,67 +231,61 @@ class TabLoadingWrapper extends React.Component {
   }
 }
 
-const get_gov_tabbed_content_props = (panel_args) => {
+const tab_content_configs = [
+  {
+    key: "summary",
+    label: text_maker("covid_estimates_summary_tab_label"),
+    get_contents: (panel_args) => <SummaryTab panel_args={panel_args} />,
+    levels: ["gov", "dept"],
+  },
+  {
+    key: "department",
+    label: text_maker("covid_estimates_department_tab_label"),
+    get_contents: (panel_args) => (
+      <TabLoadingWrapper
+        ensure_loaded_options={{
+          subject: panel_args.subject,
+          covid_estimates: true,
+        }}
+      >
+        <ByDepartmentTab panel_args={panel_args} />
+      </TabLoadingWrapper>
+    ),
+    levels: ["gov"],
+  },
+  {
+    key: "initiative",
+    label: text_maker("covid_estimates_initiative_tab_label"),
+    get_contents: (panel_args) => (
+      <TabLoadingWrapper
+        ensure_loaded_options={{
+          subject: panel_args.subject,
+          covid_initiatives: true,
+        }}
+      >
+        <ByInitiativeTab panel_args={panel_args} />
+      </TabLoadingWrapper>
+    ),
+    levels: ["gov", "dept"],
+  },
+];
+const get_tabbed_content_props = (panel_args) => {
+  const configs_for_level = _.filter(tab_content_configs, ({ levels }) =>
+    _.includes(levels, panel_args.subject.level)
+  );
+
   return {
-    tab_keys: ["summary", "department", "initiative"],
-    tab_labels: {
-      summary: text_maker("covid_estimates_summary_tab_label"),
-      department: text_maker("covid_estimates_department_tab_label"),
-      initiative: text_maker("covid_estimates_initiative_tab_label"),
-    },
-    tab_pane_contents: {
-      summary: <SummaryTab panel_args={panel_args} />,
-      department: (
-        <TabLoadingWrapper
-          ensure_loaded_options={{
-            subject: panel_args.subject,
-            covid_estimates: true,
-          }}
-        >
-          <ByDepartmentTab panel_args={panel_args} />
-        </TabLoadingWrapper>
-      ),
-      initiative: (
-        <TabLoadingWrapper
-          ensure_loaded_options={{
-            subject: panel_args.subject,
-            covid_initiatives: true,
-          }}
-        >
-          <ByInitiativeTab panel_args={panel_args} />
-        </TabLoadingWrapper>
-      ),
-    },
+    tab_keys: _.map(configs_for_level, "key"),
+    tab_labels: _.chain(configs_for_level)
+      .map(({ key, label }) => [key, label])
+      .fromPairs()
+      .value(),
+    tab_pane_contents: _.chain(configs_for_level)
+      .map(({ key, get_contents }) => [key, get_contents(panel_args)])
+      .fromPairs()
+      .value(),
   };
 };
-
-const get_dept_tabbed_content_props = (panel_args) => {
-  return {
-    tab_keys: ["summary", "initiative"],
-    tab_labels: {
-      summary: text_maker("covid_estimates_summary_tab_label"),
-      initiatives: text_maker("covid_estimates_initiative_tab_label"),
-    },
-    tab_pane_contents: {
-      summary: <SummaryTab panel_args={panel_args} />,
-      initiative: (
-        <TabLoadingWrapper
-          ensure_loaded_options={{
-            subject: panel_args.subject,
-            covid_initiatives: true,
-          }}
-        >
-          <ByInitiativeTab panel_args={panel_args} />
-        </TabLoadingWrapper>
-      ),
-    },
-  };
-};
-
-const get_tabbed_content_props = (panel_args) =>
-  panel_args.subject.level === "gov"
-    ? get_gov_tabbed_content_props(panel_args)
-    : get_dept_tabbed_content_props(panel_args);
 
 export const declare_covid_estimates_panel = () =>
   declare_panel({
