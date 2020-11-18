@@ -7,144 +7,141 @@ import {
   InfographicPanel,
   ensure_loaded,
   declare_panel,
+  formats,
+  businessConstants,
+  WrappedNivoBar,
+  StandardLegend,
 } from "../../shared.js";
 
 import text from "./covid_estimates.yaml";
 
+const { estimates_docs } = businessConstants;
+
 const { CovidEstimates, CovidInitiatives, CovidMeasures, Dept } = Subject;
 
-const { TabbedControls, SpinnerWrapper, SmartDisplayTable } = util_components;
+const { TabbedContent, SpinnerWrapper, SmartDisplayTable } = util_components;
 
 const { text_maker, TM } = create_text_maker_component([text]);
 
-class CovidEstimatesPanel extends React.Component {
-  constructor(props) {
-    super(props);
+const doc_code_to_doc_name = (doc_code) =>
+  estimates_docs[doc_code][window.lang];
 
-    this.state = {
-      loading: false,
-    };
-  }
-  mountAndUpdate() {
-    const { loading } = this.state;
+const SummaryTab = ({ panel_args }) => {
+  const { covid_estimates_data } = panel_args;
 
-    // TODO, wire up to state later to only load measures as needed?
+  const colors = infobase_colors();
 
-    if (loading) {
-      ensure_loaded({
-        covid_measures: true,
-      }).then(() => this.setState({ loading: false }));
-    }
-  }
-  componentDidMount() {
-    this.mountAndUpdate();
-  }
-  componentDidUpdate() {
-    this.mountAndUpdate();
-  }
-  render() {
-    const { panel_args } = this.props;
+  const graph_data = _.chain(covid_estimates_data)
+    .map(({ est_doc, stat, vote }) => ({
+      est_doc: doc_code_to_doc_name(est_doc),
+      [text_maker("stat_items")]: stat,
+      [text_maker("voted")]: vote,
+    }))
+    .value();
 
-    const { subject, covid_estimates_data } = panel_args;
+  const graph_keys = _.chain(graph_data).first().omit("est_doc").keys().value();
 
-    const { loading } = this.state;
+  const legend_items = _.map(graph_keys, (key) => ({
+    id: key,
+    label: key,
+    color: colors(key),
+  }));
 
-    console.log(covid_estimates_data);
-
-    const inner_content = (
-      <Fragment>
-        {loading && (
-          <div
-            style={{
-              position: "relative",
-              height: "80px",
-              marginBottom: "-10px",
-            }}
-          >
-            <SpinnerWrapper config_name={"tabbed_content"} />
-          </div>
-        )}
-        {!loading && "TODO"}
-      </Fragment>
-    );
-
-    return (
-      <Fragment>
-        <div className="frow">
-          <div className="fcol-md-12 fcol-xs-12 medium_panel_text text">
-            <TM
-              k={`${panel_args.subject.level}_covid_estimates_above_tab_text`}
-              args={{
-                subject,
-              }}
-            />
-          </div>
-        </div>
-        <div className="tabbed-content">
-          <TabbedControls
-            tab_callback={(year) =>
-              this.setState({
-                /* TODO */
-              })
-            }
-            tab_options={[
-              {
-                key: "TODO",
-                label: "TODO",
-                is_open: true,
-                is_disabled: false,
-              },
-            ]}
-          />
-          <div className="tabbed-content__pane">{inner_content}</div>
-        </div>
-      </Fragment>
-    );
-  }
-}
-
-const covid_estimates_render = function ({ calculations, footnotes, sources }) {
-  const { panel_args } = calculations;
+  const graph_content = (
+    <WrappedNivoBar
+      data={graph_data}
+      keys={graph_keys}
+      indexBy="est_doc"
+      colorBy={(d) => colors(d.id)}
+      margin={{
+        top: 50,
+        right: 40,
+        bottom: 120,
+        left: 40,
+      }}
+      bttm_axis={{
+        format: (d) => (_.words(d).length > 3 ? d.substring(0, 20) + "..." : d),
+        tickSize: 3,
+        tickRotation: -45,
+        tickPadding: 10,
+      }}
+      graph_height="450px"
+      enableGridX={false}
+      remove_left_axis={true}
+      theme={{
+        axis: {
+          ticks: {
+            text: {
+              fontSize: 12,
+              fill: window.infobase_color_constants.textColor,
+              fontWeight: "550",
+            },
+          },
+        },
+      }}
+    />
+  );
 
   return (
-    <InfographicPanel
-      title={text_maker("covid_estimates_panel_title")}
-      {...{
-        sources,
-        footnotes,
-      }}
-    >
-      <CovidEstimatesPanel panel_args={panel_args} />
-    </InfographicPanel>
+    <div className="frow middle-xs">
+      <div className="fcol-xs-12 fcol-md-6 medium_panel_text">
+        <TM k={"covid_estimates_summary_text"} args={panel_args} />
+        <TM k={"covid_estimates_by_doc"} args={panel_args} />
+      </div>
+      <div className="fcol-xs-12 fcol-md-6">
+        {!window.is_a11y_mode && (
+          <StandardLegend
+            items={legend_items}
+            isHorizontal={true}
+            LegendCheckBoxProps={{ isSolidBox: true }}
+          />
+        )}
+        {graph_content}
+      </div>
+    </div>
   );
 };
 
-const calculate_functions = {
-  gov: (subject, options) => {
-    const covid_estimates_data = CovidEstimates.get_gov_summary();
+class GovDepartmentTab extends React.Component {}
 
-    if (_.isEmpty(covid_estimates_data)) {
-      return false;
-    }
+class GovInitiativesTab extends React.Component {}
 
-    return {
-      subject,
-      covid_estimates_data,
-    };
-  },
-  dept: (subject, options) => {
-    const covid_estimates_data = CovidEstimates.org_lookup(subject.id);
+class DeptInitiativesTab extends React.Component {}
 
-    if (_.isEmpty(covid_estimates_data)) {
-      return false;
-    }
-
-    return {
-      subject,
-      covid_estimates_data,
-    };
-  },
+const get_gov_tabbed_content_props = (panel_args) => {
+  return {
+    tab_keys: ["summary", "department", "initiatives"],
+    tab_labels: {
+      summary: text_maker("covid_estimates_summary_tab_label"),
+      department: text_maker("covid_estimates_department_tab_label"),
+      initiatives: text_maker("covid_estimates_initiative_tab_label"),
+    },
+    tab_pane_contents: {
+      summary: <SummaryTab panel_args={panel_args} />,
+      department: <GovDepartmentTab panel_args={panel_args} />,
+      initiatives: <GovInitiativesTab panel_args={panel_args} />,
+    },
+  };
 };
+
+const get_dept_tabbed_content_props = (panel_args) => {
+  return {
+    tab_keys: ["summary", "initiatives"],
+    tab_labels: {
+      summary: text_maker("covid_estimates_summary_tab_label"),
+      initiatives: text_maker("covid_estimates_initiative_tab_label"),
+    },
+    tab_pane_contents: {
+      summary: <SummaryTab panel_args={panel_args} />,
+      initiatives: <DetpInitiativesTab panel_args={panel_args} />,
+    },
+  };
+};
+
+const get_tabbed_content_props = (panel_args) =>
+  panel_args.subject.level === "gov"
+    ? get_gov_tabbed_content_props(panel_args)
+    : get_dept_tabbed_content_props(panel_args);
 
 export const declare_covid_estimates_panel = () =>
   declare_panel({
@@ -155,7 +152,51 @@ export const declare_covid_estimates_panel = () =>
       requires_covid_estimates: level_name === "dept",
       footnotes: false,
       source: (subject) => [],
-      calculate: calculate_functions[level_name],
-      render: covid_estimates_render,
+      calculate: (subject, options) => {
+        const covid_estimates_data =
+          level_name === "gov"
+            ? CovidEstimates.get_gov_summary()
+            : CovidEstimates.org_lookup(subject.id);
+
+        if (_.isEmpty(covid_estimates_data)) {
+          return false;
+        }
+
+        const est_doc_summary_stats = _.map(
+          covid_estimates_data,
+          ({ est_doc, vote, stat }) => [
+            doc_code_to_doc_name(est_doc),
+            vote + stat,
+          ]
+        );
+
+        return {
+          subject,
+          covid_estimates_data,
+          est_doc_summary_stats,
+        };
+      },
+      render: ({ calculations, footnotes, sources }) => {
+        const { panel_args } = calculations;
+
+        const tabbed_content_props = get_tabbed_content_props(panel_args);
+
+        return (
+          <InfographicPanel
+            title={text_maker("covid_estimates_panel_title")}
+            {...{
+              sources,
+              footnotes,
+            }}
+          >
+            <div className="frow">
+              <div className="fcol-md-12 fcol-xs-12 medium_panel_text text">
+                <TM k="covid_estimates_above_tab_text" args={panel_args} />
+              </div>
+            </div>
+            <TabbedContent {...tabbed_content_props} />
+          </InfographicPanel>
+        );
+      },
     }),
   });
