@@ -273,7 +273,6 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
 
   return (
     <StdPanel
-      containerAlign={subject.has_planned_spending ? "top" : "middle"}
       title={text_maker("auth_exp_planned_spending_title", final_info)}
       {...{ footnotes, sources, glossary_keys }}
     >

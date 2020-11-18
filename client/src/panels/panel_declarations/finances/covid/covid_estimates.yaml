@@ -1,11 +1,35 @@
 covid_estimates_panel_title:
-  en: TODO
+  en: Estimates for COVID-19 Initiatives
   fr: TODO
 
-gov_covid_estimates_above_tab_text:
-  en: TODO
+covid_estimates_above_tab_text:
+  en: |
+    TODO: A short paragraph to contextualize this data
   fr: TODO
 
-dept_covid_estimates_above_tab_text:
-  en: TODO
+covid_estimates_summary_tab_label:
+  en: Summary
+  fr: TODO
+
+covid_estimates_summary_text:
+  transform: [handlebars,markdown]
+  en: |
+    TODO: short paragraph on cumulative COVID-19 related authorities
+  fr: TODO
+
+covid_estimates_by_doc:
+  transform: [handlebars,markdown]
+  en: |
+    COVID-19 initiative estimates by document:
+    {{#each est_doc_summary_stats}}
+    * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}**
+    {{/each}}
+  fr: TODO
+
+covid_estimates_department_tab_label:
+  en: By Departments
+  fr: TODO
+
+covid_estimates_initiative_tab_label:
+  en: By Initiatives
   fr: TODO
