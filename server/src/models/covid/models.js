@@ -10,12 +10,13 @@ import {
   number_type,
   str_type,
   parent_fkey_type,
+  sparse_parent_fkey_type,
   bilingual,
 } from "../model_utils.js";
 
 export default function (model_singleton) {
   const CovidMeasureSchema = mongoose.Schema({
-    covid_measure_id: pkey_type(),
+    measure_id: pkey_type(),
     ...bilingual("name", { ...str_type, required: true }),
   });
 
@@ -37,7 +38,7 @@ export default function (model_singleton) {
     vote: number_type,
     stat: number_type,
 
-    covid_measure_ids: [parent_fkey_type()],
+    covid_measure_ids: [sparse_parent_fkey_type()],
   });
   const CovidInitiativeSchema = mongoose.Schema({
     covid_initiative_id: pkey_type(),
@@ -59,7 +60,7 @@ export default function (model_singleton) {
   const loaders = {
     covid_measure_loader: create_resource_by_id_attr_dataloader(
       CovidMeasure,
-      "covid_measure_id"
+      "measure_id"
     ),
     covid_initiative_loader: create_resource_by_id_attr_dataloader(
       CovidInitiative,

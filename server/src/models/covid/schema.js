@@ -99,11 +99,13 @@ export default function ({ models, loaders }) {
     },
     CovidInitiativeEstimates: {
       covid_measures: ({ covid_measure_ids }) => {
-        return covid_measure_loader.loadMany(covid_measure_ids);
+        return covid_measure_ids
+          ? covid_measure_loader.loadMany(covid_measure_ids)
+          : [];
       },
     },
     CovidMeasure: {
-      id: _.property("covid_measure_id"),
+      id: _.property("measure_id"),
       name: bilingual_field("name"),
     },
   };

@@ -1,4 +1,4 @@
-import _, { thru } from "lodash";
+import _ from "lodash";
 
 import { get_standard_csv_file_rows } from "../load_utils.js";
 
@@ -15,7 +15,11 @@ export default async function ({ models }) {
     get_standard_csv_file_rows("covid_initative_estimates.csv"),
     (row) => ({
       ...row,
-      covid_measure_ids: _.split(row.covid_measure_ids, ","),
+      covid_measure_ids: _.chain(row.covid_measure_ids)
+        .split(",")
+        .map(_.trim)
+        .thru((ids) => (ids.length === 1 && _.isEmpty(ids[0]) ? null : ids))
+        .value(),
     })
   );
   const covid_estimates_records = _.chain(covid_initative_estimates_rows)
