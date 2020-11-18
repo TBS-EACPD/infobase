@@ -59,7 +59,7 @@ export const api_load_covid_estimates = (subject) => {
         };
       default:
         return {
-          is_loaded: all_is_loaded,
+          is_loaded: all_is_loaded(),
           id: "all",
           query: all_covid_estimates_query,
           response_data_accessor: (response) => response.data.root.gov,
@@ -261,7 +261,7 @@ export const api_load_covid_initiatives = (subject) => {
         };
       default:
         return {
-          is_loaded: all_is_loaded,
+          is_loaded: all_is_loaded(),
           id: "gov",
           query: gov_covid_initiative_query,
           response_data_accessor: (response) => response.data.root.gov,

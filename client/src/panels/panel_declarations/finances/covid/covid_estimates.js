@@ -102,38 +102,101 @@ const SummaryTab = ({ panel_args }) => {
   );
 };
 
-class GovDepartmentTab extends React.Component {}
+const ByDepartmentTab = ({ panel_args }) => "TODO";
 
-class GovInitiativesTab extends React.Component {}
+const ByInitiativeTab = ({ panel_args }) => "TODO";
 
-class DeptInitiativesTab extends React.Component {}
+class TabLoadingWrapper extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+    };
+  }
+  componentDidMount() {
+    const { ensure_loaded_options } = this.props;
+
+    ensure_loaded(ensure_loaded_options).then(() =>
+      this.setState({ loading: false })
+    );
+  }
+  render() {
+    const { children } = this.props;
+
+    const { loading } = this.state;
+
+    return (
+      <Fragment>
+        {loading && (
+          <div
+            style={{
+              position: "relative",
+              height: "80px",
+              marginBottom: "-10px",
+            }}
+          >
+            <SpinnerWrapper config_name={"tabbed_content"} />
+          </div>
+        )}
+        {!loading && children}
+      </Fragment>
+    );
+  }
+}
 
 const get_gov_tabbed_content_props = (panel_args) => {
   return {
-    tab_keys: ["summary", "department", "initiatives"],
+    tab_keys: ["summary", "department", "initiative"],
     tab_labels: {
       summary: text_maker("covid_estimates_summary_tab_label"),
       department: text_maker("covid_estimates_department_tab_label"),
-      initiatives: text_maker("covid_estimates_initiative_tab_label"),
+      initiative: text_maker("covid_estimates_initiative_tab_label"),
     },
     tab_pane_contents: {
       summary: <SummaryTab panel_args={panel_args} />,
-      department: <GovDepartmentTab panel_args={panel_args} />,
-      initiatives: <GovInitiativesTab panel_args={panel_args} />,
+      department: (
+        <TabLoadingWrapper
+          ensure_loaded_options={{
+            subject: panel_args.subject,
+            covid_estimates: true,
+          }}
+        >
+          <ByDepartmentTab panel_args={panel_args} />
+        </TabLoadingWrapper>
+      ),
+      initiative: (
+        <TabLoadingWrapper
+          ensure_loaded_options={{
+            subject: panel_args.subject,
+            covid_initiatives: true,
+          }}
+        >
+          <ByInitiativeTab panel_args={panel_args} />
+        </TabLoadingWrapper>
+      ),
     },
   };
 };
 
 const get_dept_tabbed_content_props = (panel_args) => {
   return {
-    tab_keys: ["summary", "initiatives"],
+    tab_keys: ["summary", "initiative"],
     tab_labels: {
       summary: text_maker("covid_estimates_summary_tab_label"),
       initiatives: text_maker("covid_estimates_initiative_tab_label"),
     },
     tab_pane_contents: {
       summary: <SummaryTab panel_args={panel_args} />,
-      initiatives: <DetpInitiativesTab panel_args={panel_args} />,
+      initiative: (
+        <TabLoadingWrapper
+          ensure_loaded_options={{
+            subject: panel_args.subject,
+            covid_initiatives: true,
+          }}
+        >
+          <ByInitiativeTab panel_args={panel_args} />
+        </TabLoadingWrapper>
+      ),
     },
   };
 };
