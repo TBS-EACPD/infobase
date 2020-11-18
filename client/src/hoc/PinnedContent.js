@@ -4,9 +4,9 @@ import "intersection-observer";
 import ReactResizeDetector from "react-resize-detector";
 
 import { has_local_storage } from "src/core/feature_detection.js";
-import { create_text_maker } from "../models/text.js";
 
 import { IconPin, IconUnpin } from "../icons/icons.js";
+import { create_text_maker } from "../models/text.js";
 
 import "./PinnedContent.scss";
 
@@ -57,6 +57,12 @@ export class PinnedContent extends React.Component {
     this.node = node;
   };
 
+  handleKeyDown = (e) => {
+    if (e.key == "Tab") {
+      this.setState({ user_enabled_pinning: false });
+    }
+  };
+
   render() {
     const { user_enabled_pinning } = this.state;
     const { children } = this.props;
@@ -99,6 +105,7 @@ export class PinnedContent extends React.Component {
                             .marginBottom,
                         }
                       }
+                      onKeyDown={this.handleKeyDown}
                     >
                       {user_enabled_pinning ? (
                         <IconPin
