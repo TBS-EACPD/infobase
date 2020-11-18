@@ -207,6 +207,7 @@ export class WrappedNivoLine extends React.Component {
           data={table_data}
           column_configs={column_configs}
           table_name={table_name || text_maker("default_table_name")}
+          unsorted_initial={true}
         />
       );
     };
