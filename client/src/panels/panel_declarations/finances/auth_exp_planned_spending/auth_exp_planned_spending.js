@@ -252,6 +252,17 @@ class LapseByVotesGraph extends React.Component {
           calculate_lapse(vote_row[`${yr}auth`], vote_row[`${yr}exp`], is_pct)
         )
       );
+    const lapsed_by_votes_sum = _.sum(get_lapse_raw_data(false, queried_votes));
+    const auth_by_votes_sum = _.reduce(
+      queried_votes,
+      (sum, vote_row) =>
+        _.chain(std_years)
+          .map((yr) => vote_row[`${yr}auth`])
+          .sum()
+          .add(sum)
+          .value(),
+      0
+    );
 
     const get_lapse_infograph = (is_pct) => {
       const nivo_pct_props = is_pct && {
@@ -262,6 +273,21 @@ class LapseByVotesGraph extends React.Component {
 
       return (
         <div className="frow">
+          <TM
+            className="medium_panel_text"
+            k={
+              subject.is("gov")
+                ? "gov_lapse_by_votes_text"
+                : "dept_lapse_by_votes_text"
+            }
+            args={{
+              subject,
+              avg_lapsed_by_votes: lapsed_by_votes_sum / std_years.length,
+              num_of_votes: queried_votes.length,
+              avg_lapsed_by_votes_pct: lapsed_by_votes_sum / auth_by_votes_sum,
+              gov_avg_lapsed_by_votes_pct: additional_info.gov_lapse_pct,
+            }}
+          />
           {!subject.is("gov") && (
             <div className="fcol-md-4">
               <StandardLegend
@@ -311,8 +337,15 @@ class LapseByVotesGraph extends React.Component {
               }))}
               raw_data={get_lapse_raw_data(is_pct)}
               colorBy={(d) => colors(d.id)}
+              margin={{
+                top: 10,
+                right: 30,
+                bottom: 50,
+                left: 70,
+              }}
               custom_table={
                 <SmartDisplayTable
+                  unsorted_initial={true}
                   column_configs={{
                     id: {
                       index: 0,
@@ -355,17 +388,6 @@ class LapseByVotesGraph extends React.Component {
         </div>
       );
     };
-    const lapsed_by_votes_sum = _.sum(get_lapse_raw_data(false, queried_votes));
-    const auth_by_votes_sum = _.reduce(
-      queried_votes,
-      (sum, vote_row) =>
-        _.chain(std_years)
-          .map((yr) => vote_row[`${yr}auth`])
-          .sum()
-          .add(sum)
-          .value(),
-      0
-    );
 
     return (
       <div>
@@ -373,21 +395,6 @@ class LapseByVotesGraph extends React.Component {
           el="h4"
           k={subject.is("gov") ? "aggregated_lapse_by_votes" : "lapse_by_votes"}
           style={{ textAlign: "center" }}
-        />
-        <TM
-          className="medium_panel_text"
-          k={
-            subject.is("gov")
-              ? "gov_lapse_by_votes_text"
-              : "dept_lapse_by_votes_text"
-          }
-          args={{
-            subject,
-            avg_lapsed_by_votes: lapsed_by_votes_sum / std_years.length,
-            num_of_votes: queried_votes.length,
-            avg_lapsed_by_votes_pct: lapsed_by_votes_sum / auth_by_votes_sum,
-            gov_avg_lapsed_by_votes_pct: additional_info.gov_lapse_pct,
-          }}
         />
         <HeightClipper allowReclip={true} clipHeight={200}>
           <TabbedContent
@@ -634,7 +641,7 @@ const calculate = function (subject, options) {
     has_planned_spending: subject.has_planned_spending,
     last_planned_spending: _.last(planned_spending_values),
     last_planned_year: run_template(_.last(planning_years)),
-    plan_change: _.last(planned_spending_values) - _.last(auth_values),
+    plan_change: _.last(planned_spending_values) - _.last(exp_values),
     last_history_year: run_template(_.last(std_years)),
     gap_year:
       (subject.has_planned_spending && actual_to_planned_gap_year) || null,
