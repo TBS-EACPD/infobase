@@ -27,7 +27,10 @@ import { ensure_loaded } from "../../core/lazy_loader.js";
 import { Table } from "../../core/TableClass.js";
 
 import * as general_utils from "../../general_utils.js";
-import { infograph_href_template } from "../../infographic/infographic_link.js";
+import {
+  infograph_href_template,
+  infograph_options_href_template,
+} from "../../infographic/infographic_link.js";
 import { glossary_href } from "../../link_utils.js";
 import { get_source_links } from "../../metadata/data_sources.js";
 import { businessConstants } from "../../models/businessConstants.js";
@@ -167,6 +170,7 @@ export {
   util_components,
   Format,
   infograph_href_template,
+  infograph_options_href_template,
   glossary_href,
   Results,
   ensure_loaded,

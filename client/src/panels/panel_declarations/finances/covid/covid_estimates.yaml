@@ -27,9 +27,14 @@ covid_estimates_by_doc:
   fr: TODO
 
 covid_estimates_department_tab_label:
-  en: By Departments
+  en: By Department
   fr: TODO
 
 covid_estimates_initiative_tab_label:
-  en: By Initiatives
+  en: By Initiative
+  fr: TODO
+
+
+covid_estimates_estimates_doc:
+  en: Estimates documents
   fr: TODO
