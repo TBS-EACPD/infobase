@@ -1,5 +1,6 @@
 import {
   api_load_covid_estimates,
+  api_load_covid_estimates_gov_summary,
   api_load_covid_initiatives,
   api_load_covid_measures,
 } from "../models/covid/populate.js";
@@ -44,6 +45,7 @@ function ensure_loaded({
   covid_measures,
   covid_initiatives,
   covid_estimates,
+  covid_estimates_gov_summary,
   footnotes_for: footnotes_subject,
 }) {
   const table_set = _.chain(table_keys)
@@ -112,6 +114,14 @@ function ensure_loaded({
       .some()
       .value();
 
+  const should_load_covid_estimates_gov_summary =
+    covid_estimates_gov_summary ||
+    _.chain(panel_keys)
+      .map((key) => PanelRegistry.lookup(key, subject_level))
+      .map("requires_covid_estimates_gov_summary")
+      .some()
+      .value();
+
   const should_load_covid_initiatives =
     covid_initiatives ||
     _.chain(panel_keys)
@@ -176,6 +186,10 @@ function ensure_loaded({
     ? api_load_covid_estimates(subject)
     : Promise.resolve();
 
+  const covid_estimates_gov_summary_prom = should_load_covid_estimates_gov_summary
+    ? api_load_covid_estimates_gov_summary()
+    : Promise.resolve();
+
   const covid_initiatives_prom = should_load_covid_initiatives
     ? api_load_covid_initiatives(subject)
     : Promise.resolve();
@@ -197,6 +211,7 @@ function ensure_loaded({
     covid_initiatives_prom,
     covid_measures_prom,
     covid_estimates_prom,
+    covid_estimates_gov_summary_prom,
   ]);
 }
 

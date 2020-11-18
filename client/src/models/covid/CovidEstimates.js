@@ -11,6 +11,20 @@ class CovidEstimates extends mix().with(staticStoreMixin) {
     _.assign(this, covid_estimates_row);
   }
 
+  static get_gov_summary() {
+    return _.filter(
+      super.get_all(),
+      ({ org_id: row_org_id }) => row_org_id === "gov"
+    );
+  }
+
+  static get_all() {
+    return _.filter(
+      super.get_all(),
+      ({ org_id: row_org_id }) => row_org_id !== "gov"
+    );
+  }
+
   static org_lookup(org_id) {
     return _.filter(
       CovidEstimates.get_all(),
