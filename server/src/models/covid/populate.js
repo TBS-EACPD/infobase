@@ -41,6 +41,30 @@ export default async function ({ models }) {
         )
         .value()
     )
+    .thru((rolled_up_rows) => {
+      const gov_rows = _.chain(rolled_up_rows)
+        .groupBy("fiscal_year")
+        .flatMap((year_group, fiscal_year) =>
+          _.chain(year_group)
+            .groupBy("est_doc")
+            .flatMap((doc_group, est_doc) =>
+              _.reduce(
+                doc_group,
+                (roll_up, row) => ({
+                  ...roll_up,
+                  vote: roll_up.vote + +row.vote,
+                  stat: roll_up.stat + +row.stat,
+                }),
+                { org_id: "gov", fiscal_year, est_doc, vote: 0, stat: 0 }
+              )
+            )
+            .value()
+        )
+        .value();
+
+      return [...rolled_up_rows, ...gov_rows];
+    })
+    .map((rolled_up_row) => new CovidEstimates(rolled_up_row))
     .value();
 
   const covid_initiative_records = _.chain(

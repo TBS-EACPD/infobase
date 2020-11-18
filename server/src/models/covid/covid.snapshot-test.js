@@ -42,6 +42,22 @@ query ($lang: String = "en") {
   }
 }`;
 
+const gov_covid_estimates_summary_query = `
+query ($lang: String = "en") {
+  root(lang: $lang) {
+    gov {
+      covid_estimates_summary {
+        id
+
+        fiscal_year
+        est_doc
+        vote
+        stat
+      }
+    }
+  }
+}`;
+
 const all_covid_initiatives_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
@@ -78,7 +94,7 @@ query ($lang: String = "en") {
 
         covid_initiative_estimates {
           id
-          
+
           org_id
 
           covid_measure_ids
@@ -108,6 +124,10 @@ describe("covid data", () => {
   });
   it("Org covid estimates", async () => {
     const data = await execQuery(org_covid_estimates_query, {});
+    return expect(data).toMatchSnapshot();
+  });
+  it("Gov covid estimates summary", async () => {
+    const data = await execQuery(gov_covid_estimates_summary_query, {});
     return expect(data).toMatchSnapshot();
   });
   it("All covid initiatives and initiative estimates", async () => {

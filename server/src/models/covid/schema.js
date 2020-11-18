@@ -9,6 +9,10 @@ const schema = `
     covid_measures: [CovidMeasure]
   }
 
+  extend type Gov{
+    covid_estimates_summary: [CovidEstimates]
+  }
+
   extend type Org{
     covid_estimates: [CovidEstimates]
     covid_initiatives: [CovidInitiative]
@@ -68,7 +72,12 @@ export default function ({ models, loaders }) {
     Root: {
       covid_initiatives: () => CovidInitiative.find({}),
       covid_measures: () => CovidMeasure.find({}),
-      covid_estimates: () => CovidEstimates.find({}),
+      covid_estimates: () =>
+        CovidEstimates.find({ org_id: { $not: { $eq: "gov" } } }),
+    },
+    Gov: {
+      covid_estimates_summary: () =>
+        covid_estimates_by_org_id_loader.load("gov"),
     },
     Org: {
       covid_initiatives: ({ org_id }) =>

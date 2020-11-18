@@ -319,6 +319,40 @@ Object {
 }
 `;
 
+exports[`covid data Gov covid estimates summary 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "gov": Object {
+        "covid_estimates_summary": Array [
+          Object {
+            "est_doc": "ME",
+            "fiscal_year": "2020",
+            "id": "gov-2020-ME",
+            "stat": 1007,
+            "vote": 1107,
+          },
+          Object {
+            "est_doc": "SEA",
+            "fiscal_year": "2020",
+            "id": "gov-2020-SEA",
+            "stat": 108,
+            "vote": 207,
+          },
+          Object {
+            "est_doc": "SEB",
+            "fiscal_year": "2020",
+            "id": "gov-2020-SEB",
+            "stat": 18,
+            "vote": 27,
+          },
+        ],
+      },
+    },
+  },
+}
+`;
+
 exports[`covid data Org covid estimates 1`] = `
 Object {
   "data": Object {
