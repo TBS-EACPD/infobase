@@ -92,6 +92,18 @@ const ErrorBoundary = withRouter(
         this.catch_stale_client_error_case();
         return null;
       } else {
+        const redirect_to_parent_dept_or_home = (level, subj_id) => {
+          if (level === "program" || level === "crso") {
+            const parent_dept_code = _.split(subj_id, "-")[0];
+            const parent_dept_id = Dept.lookup(parent_dept_code).id;
+            window.location.replace(
+              `#orgs/dept/${parent_dept_id}/infograph/intro`
+            );
+          } else {
+            window.location.replace("#home");
+          }
+          window.location.reload();
+        };
         const current_url = this.props.location.pathname;
         const regex_template =
           "orgs/(gov|dept|program|tag|crso)/(.*)/infograph/(.*)";
@@ -130,13 +142,16 @@ const ErrorBoundary = withRouter(
             });
           } else {
             // subject doesn't exist, redirect to home
-            window.location.replace("#home");
-            window.location.reload();
+            redirect_to_parent_dept_or_home(level, subj_id);
           }
         } else if (infograph_regex_without_panel) {
+          const [
+            full_match_url, //eslint-disable-line no-unused-vars
+            level,
+            subj_id,
+          ] = infograph_regex_without_panel;
           // Without panel part, url will only fail with subject not matching
-          window.location.replace("#home");
-          window.location.reload();
+          redirect_to_parent_dept_or_home(level, subj_id);
         } else {
           return (
             <div
