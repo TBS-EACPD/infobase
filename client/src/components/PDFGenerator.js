@@ -6,7 +6,6 @@ import { get_static_url } from "../request_utils.js";
 import { create_text_maker_component } from "./misc_util_components.js";
 import { SpinnerWrapper } from "./SpinnerWrapper.js";
 
-
 import text from "./PDFGenerator.yaml";
 
 const { text_maker } = create_text_maker_component(text);
@@ -42,7 +41,7 @@ export class PDFGenerator extends React.Component {
   lazy_load_heavy_dependencies() {
     // these node modules are huge and ony needed if/when a user actually goes to download a panel. Lazy loaded to save ~700KiB until needed
     import(
-      /* webpackChunkName: "PDFGenerator_lazy_loaded_dependencies" */ "./PDFGenerator_lazy_loaded_dependencies.side-effects.js"
+      "./PDFGenerator_lazy_loaded_dependencies.side-effects.js"
     ).then((dependencies) => this.setState({ dependencies }));
   }
 

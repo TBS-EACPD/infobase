@@ -26,7 +26,7 @@ const babel = !choose("NO-BABEL");
 const en = !!choose("EN");
 const fr = !!choose("FR");
 const no_watch = !!choose("NO-WATCH");
-const stats = !!choose("STATS");
+const stats = !!choose("STATS") || (prod && is_ci);
 const stats_baseline = !!choose("STATS-BASELINE");
 const stats_no_compare = !!choose("STATS-NO-COMPARE");
 
@@ -42,7 +42,7 @@ const options_by_app = {
       path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
       filename: `app-a11y-${language}.min.js`,
       chunkFilename: `[name].app-ally-${language}${
-        prod ? ".[chunkhash]" : ""
+        prod && !stats ? ".[contenthash]" : ""
       }.min.js`,
     }),
   },
@@ -52,7 +52,7 @@ const options_by_app = {
       path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
       filename: `app-${language}.min.js`,
       chunkFilename: `[name].app-${language}${
-        prod ? ".[chunkhash]" : ""
+        prod && !stats ? ".[contenthash]" : ""
       }.min.js`,
     }),
   },

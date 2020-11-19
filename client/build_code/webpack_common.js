@@ -53,6 +53,7 @@ const get_rules = ({ should_use_babel, language, is_prod_build }) => {
         /\.js$/.test(module_name) && !/\.side-effects\.js$/.test(module_name),
       exclude: /node_modules/,
       use: js_module_loader_rules,
+      sideEffects: false,
     },
     {
       test: /\.side-effects\.js$/,
@@ -189,10 +190,12 @@ function get_plugins({
 function get_optimizations(is_prod_build, bundle_stats) {
   if (is_prod_build) {
     return {
-      // using names as ids required for comparison between builds in stats, but adds weight to output (particularily to entry point),
-      // so not desired in prod builds for deploy puposes
-      moduleIds: bundle_stats ? "named" : "size",
-      chunkIds: bundle_stats ? "named" : "size",
+      ...(bundle_stats && {
+        // using names as ids required for clear bundle stats comparison between builds, but adds weight to output
+        // (particularily to entry point), so not desired in production builds intended for the live site
+        moduleIds: "named",
+        chunkIds: "named",
+      }),
       minimize: true,
       minimizer: [new TerserPlugin({ parallel: true })],
       splitChunks: {
@@ -226,10 +229,7 @@ function create_config({
   new_output.publicPath = `${CDN_URL}/app/`;
 
   // bundle stats only output for standard english build, for comparison consistency
-  const bundle_stats =
-    (produce_stats || (is_prod_build && is_ci)) &&
-    language === "en" &&
-    !a11y_client;
+  const bundle_stats = produce_stats && language === "en" && !a11y_client;
 
   return {
     name: language,
