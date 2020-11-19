@@ -258,7 +258,7 @@ class DetailedHistTPItems extends React.Component {
 
       const nivo_props = {
         ...empty_data_nivo_props,
-        data: detail_expend_data,
+        data: detail_expend_data.reverse(),
         raw_data: raw_data,
         margin: {
           top: 50,

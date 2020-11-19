@@ -324,17 +324,20 @@ class LapseByVotesGraph extends React.Component {
           )}
           <div className={`fcol-md-${subject.is("gov") ? 12 : 8}`}>
             <WrappedNivoLine
-              data={_.map(filtered_votes, (vote_row) => ({
-                id: vote_row.desc,
-                data: _.map(std_years, (yr) => ({
-                  x: run_template(yr),
-                  y: calculate_lapse(
-                    vote_row[`${yr}auth`],
-                    vote_row[`${yr}exp`],
-                    is_pct
-                  ),
-                })),
-              }))}
+              data={_.chain(filtered_votes)
+                .map((vote_row) => ({
+                  id: vote_row.desc,
+                  data: _.map(std_years, (yr) => ({
+                    x: run_template(yr),
+                    y: calculate_lapse(
+                      vote_row[`${yr}auth`],
+                      vote_row[`${yr}exp`],
+                      is_pct
+                    ),
+                  })),
+                }))
+                .reverse()
+                .value()}
               raw_data={get_lapse_raw_data(is_pct)}
               colorBy={(d) => colors(d.id)}
               margin={{
