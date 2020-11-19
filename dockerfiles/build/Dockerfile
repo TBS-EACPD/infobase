@@ -29,7 +29,6 @@ RUN apk add --no-cache --virtual .gyp \
   make \
   openssh \
   g++ \
-  && npm install \
   && apk del .gyp
 
 USER    ${SERVICE_USER}
