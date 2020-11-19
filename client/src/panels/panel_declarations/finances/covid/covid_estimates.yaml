@@ -3,24 +3,25 @@ covid_estimates_panel_title:
   fr: TODO
 
 covid_estimates_above_tab_text:
+  transform: [markdown]
   en: |
-    TODO: A short paragraph to contextualize this data
+    **TODO:** short paragraph or two to contextualize planned budgetary COVID-19 spending in terms of authorities and the estimates process
   fr: TODO
 
 covid_estimates_summary_tab_label:
-  en: Summary
+  en: Overview
   fr: TODO
 
 covid_estimates_summary_text:
   transform: [handlebars,markdown]
   en: |
-    TODO: short paragraph on cumulative COVID-19 related authorities
+    **TODO:** short paragraph on cumulative COVID-19 authorities, what portion of total authorities they represent
   fr: TODO
 
 covid_estimates_by_doc:
   transform: [handlebars,markdown]
   en: |
-    COVID-19 initiative authorities by document:
+    Total COVID-19 initiative authorities by document:
     {{#each est_doc_summary_stats}}
     * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}**
     {{/each}}
@@ -37,4 +38,12 @@ covid_estimates_initiative_tab_label:
 
 covid_estimates_estimates_doc:
   en: Estimates documents
+  fr: TODO
+
+covid_estimates_stat:
+  en: Statuatory COVID-19 authorities
+  fr: TODO
+
+covid_estimates_voted:
+  en: Voted COVID-19 authorities
   fr: TODO

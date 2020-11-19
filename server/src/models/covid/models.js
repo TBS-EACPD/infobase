@@ -44,7 +44,7 @@ export default function (model_singleton) {
     covid_initiative_id: pkey_type(),
     ...bilingual("name", { ...str_type, required: true }),
 
-    covid_initiative_estimates: [CovidInitiativeEstimatesSchema],
+    estimates: [CovidInitiativeEstimatesSchema],
   });
 
   model_singleton.define_model("CovidMeasure", CovidMeasureSchema);
@@ -68,7 +68,7 @@ export default function (model_singleton) {
     ),
     covid_initiatives_by_org_id_loader: create_resource_by_foreignkey_attr_dataloader(
       CovidInitiative,
-      "covid_initiative_estimates.org_id"
+      "estimates.org_id"
     ),
     covid_estimates_by_org_id_loader: create_resource_by_foreignkey_attr_dataloader(
       CovidEstimates,

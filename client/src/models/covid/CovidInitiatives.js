@@ -35,9 +35,8 @@ class CovidInitiatives extends mix().with(
   }
 
   static org_lookup(org_id) {
-    return _.filter(
-      CovidInitiatives.get_all(),
-      ({ org_id: row_org_id }) => row_org_id === org_id
+    return _.filter(CovidInitiatives.get_all(), ({ org_ids }) =>
+      _.includes(org_ids, org_id)
     );
   }
 }

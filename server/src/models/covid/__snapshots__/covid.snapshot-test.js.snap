@@ -73,7 +73,7 @@ Object {
     "root": Object {
       "covid_initiatives": Array [
         Object {
-          "covid_initiative_estimates": Array [
+          "estimates": Array [
             Object {
               "covid_measure_ids": Array [
                 "COV001",
@@ -185,7 +185,7 @@ Object {
           "name": "Initiative 1",
         },
         Object {
-          "covid_initiative_estimates": Array [
+          "estimates": Array [
             Object {
               "covid_measure_ids": Array [
                 "COV002",
@@ -232,7 +232,7 @@ Object {
           "name": "Initiative 2",
         },
         Object {
-          "covid_initiative_estimates": Array [
+          "estimates": Array [
             Object {
               "covid_measure_ids": Array [
                 "COV001",
@@ -393,7 +393,7 @@ Object {
       "org": Object {
         "covid_initiatives": Array [
           Object {
-            "covid_initiative_estimates": Array [
+            "estimates": Array [
               Object {
                 "covid_measure_ids": Array [
                   "COV001",
@@ -505,7 +505,7 @@ Object {
             "name": "Initiative 1",
           },
           Object {
-            "covid_initiative_estimates": Array [
+            "estimates": Array [
               Object {
                 "covid_measure_ids": Array [
                   "COV002",
@@ -552,7 +552,7 @@ Object {
             "name": "Initiative 2",
           },
           Object {
-            "covid_initiative_estimates": Array [
+            "estimates": Array [
               Object {
                 "covid_measure_ids": Array [
                   "COV001",

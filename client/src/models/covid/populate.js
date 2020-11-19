@@ -203,7 +203,7 @@ const covid_initiative_query_fragment = `
     id
     name
     
-    covid_initiative_estimates {
+    estimates {
       id
       
       org_id
