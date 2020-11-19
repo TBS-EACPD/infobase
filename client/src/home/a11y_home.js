@@ -97,7 +97,7 @@ const Home = (props) => {
         <section>
           <h3>
             <a href={"#lab/"}>
-              <TM k="quick_link_infolab" />
+              <TM k="lab_home_title" />
             </a>
           </h3>
           <TM k="lab_home_text" />

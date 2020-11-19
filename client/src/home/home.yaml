@@ -169,17 +169,9 @@ lab_home_text:
 
 ## Featured content titles
 
-quick_link_infolab:
-  en: InfoLab
-  fr: InfoLab
-
 quick_link_people_2019:
   en: March 2019 Employee Headcounts and Demographics
   fr: Effectif et démographie des employés au 31 mars 2019
-
-quick_link_budget_2019:
-  en: Budget 2019
-  fr: Budget 2019
 
 quick_link_main_estimates:
   en: 2020-21 Main Estimates
@@ -220,3 +212,7 @@ quick_link_ftes_by_program:
 quick_link_tp_by_region:
   en: Transfer payments by recipient region
   fr: Paiements de transfert par région du bénéficiaire
+
+quick_link_covid_estimates:
+  en: Estimates by COVID-19 Initiatives
+  fr: TODO
