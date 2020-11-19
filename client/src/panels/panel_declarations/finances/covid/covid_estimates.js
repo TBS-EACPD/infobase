@@ -173,7 +173,7 @@ const get_initative_rows = (subject) => {
       ? CovidInitiatives.get_all()
       : CovidInitiatives.org_lookup(subject.id);
 
-  // TODO: not future safe, ignoring years here
+  // TODO: not future safe, ignoring years here, so would be rolling-up cross-year in 2021-22
   return _.flatMap(initiatives, ({ name, estimates }) =>
     _.chain(estimates)
       .thru((estimates) =>
