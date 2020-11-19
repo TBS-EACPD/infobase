@@ -28,83 +28,47 @@ import {
 
 import "./App.scss";
 
-const Home = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "Home" */ "../home/home.js")
-);
-const A11yHome = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "A11yHome" */ "../home/a11y_home.js")
-);
+const Home = retrying_react_lazy(() => import("../home/home.js"));
+const A11yHome = retrying_react_lazy(() => import("../home/a11y_home.js"));
 const PartitionRoute = retrying_react_lazy(() =>
-  import(
-    /* webpackChunkName: "PartitionRoute" */ "../partition/partition_subapp/PartitionRoute.js"
-  )
+  import("../partition/partition_subapp/PartitionRoute.js")
 );
-const About = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "About" */ "../about/about.js")
-);
+const About = retrying_react_lazy(() => import("../about/about.js"));
 
-const Contact = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "Contact" */ "../contact/contact.js")
-);
-const FAQ = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "FAQ" */ "../FAQ/FAQ.js")
-);
-const MetaData = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "Metadata" */ "../metadata/metadata.js")
-);
+const Contact = retrying_react_lazy(() => import("../contact/contact.js"));
+const FAQ = retrying_react_lazy(() => import("../FAQ/FAQ.js"));
+const MetaData = retrying_react_lazy(() => import("../metadata/metadata.js"));
 const IgocExplorer = retrying_react_lazy(() =>
-  import(
-    /* webpackChunkName: "igoc_explorer" */ "../IgocExplorer/IgocExplorer.js"
-  )
+  import("../IgocExplorer/IgocExplorer.js")
 );
 const TagExplorer = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "TagExplorer" */ "../TagExplorer/TagExplorer.js")
+  import("../TagExplorer/TagExplorer.js")
 );
-const Glossary = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "Glossary" */ "../glossary/glossary.js")
-);
-const ReportBuilder = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "ReportBuilder" */ "../rpb/index.js")
-);
+const Glossary = retrying_react_lazy(() => import("../glossary/glossary.js"));
+const ReportBuilder = retrying_react_lazy(() => import("../rpb/index.js"));
 const Infographic = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "Infographic" */ "../infographic/Infographic.js")
+  import("../infographic/Infographic.js")
 );
 const EstimatesComparison = retrying_react_lazy(() =>
-  import(
-    /* webpackChunkName: "EstimatesComparison" */ "../EstimatesComparison/EstimatesComparison.js"
-  )
+  import("../EstimatesComparison/EstimatesComparison.js")
 );
 const PrivacyStatement = retrying_react_lazy(() =>
-  import(
-    /* webpackChunkName: "PrivacyStatement" */ "../PrivacyStatement/PrivacyStatement.js"
-  )
+  import("../PrivacyStatement/PrivacyStatement.js")
 );
-const TreeMap = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "TreeMap" */ "../TreeMap/TreeMap.js")
-);
-const TextDiff = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "TextDiff" */ "../TextDiff/TextDiff.js")
-);
-const Lab = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "InfoLab" */ "../InfoLab/InfoLab.js")
-);
+const TreeMap = retrying_react_lazy(() => import("../TreeMap/TreeMap.js"));
+const TextDiff = retrying_react_lazy(() => import("../TextDiff/TextDiff.js"));
+const Lab = retrying_react_lazy(() => import("../InfoLab/InfoLab.js"));
 const IsolatedPanel = retrying_react_lazy(() =>
-  import(
-    /* webpackChunkName: "IsolatedPanel" */ "../panels/panel_routes/IsolatedPanel.js"
-  )
+  import("../panels/panel_routes/IsolatedPanel.js")
 );
 const PanelInventory = retrying_react_lazy(() =>
-  import(
-    /* webpackChunkName: "PanelInventory" */ "../panels/panel_routes/PanelInventory.js"
-  )
+  import("../panels/panel_routes/PanelInventory.js")
 );
 const GraphiQL = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "GraphiQL" */ "../graphql_utils/GraphiQL.js")
+  import("../graphql_utils/GraphiQL.js")
 );
 const FootnoteInventory = retrying_react_lazy(() =>
-  import(
-    /* webpackChunkName: "FootnoteInventory" */ "../models/footnotes/FootnoteInventory.js"
-  )
+  import("../models/footnotes/FootnoteInventory.js")
 );
 
 const Survey = retrying_react_lazy(() =>
