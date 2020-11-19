@@ -680,10 +680,10 @@ all_voted_items:
   fr: tous les crédits votés
 
 covid_initiative:
-  en: COVID-19 Initiative
+  en: COVID-19 Estimate Initiative
   fr: TODO
 covid_initiatives:
-  en: COVID-19 Initiatives
+  en: COVID-19 Estimate Initiatives
   fr: TODO
 covid_measure:
   en: TODO
