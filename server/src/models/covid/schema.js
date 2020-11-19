@@ -41,7 +41,7 @@ const schema = `
     id: String
     name: String
 
-    covid_initiative_estimates: [CovidInitiativeEstimates]
+    estimates: [CovidInitiativeEstimates]
   }
 
   type CovidInitiativeEstimates{

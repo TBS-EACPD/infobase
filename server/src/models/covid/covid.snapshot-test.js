@@ -59,7 +59,7 @@ query ($lang: String = "en") {
       id
       name
 
-      covid_initiative_estimates {
+      estimates {
         org_id
 
         covid_measure_ids
@@ -84,7 +84,7 @@ query ($lang: String = "en") {
         id
         name
 
-        covid_initiative_estimates {
+        estimates {
           org_id
 
           covid_measure_ids

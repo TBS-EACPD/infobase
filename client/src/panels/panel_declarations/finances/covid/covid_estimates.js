@@ -10,20 +10,30 @@ import {
   WrappedNivoBar,
   StandardLegend,
   infograph_options_href_template,
+  businessConstants,
 } from "../../shared.js";
 
 import text from "./covid_estimates.yaml";
 
 const { CovidEstimates, CovidInitiatives } = Subject;
 
-const {
-  TabbedContent,
-  SpinnerWrapper,
-  SmartDisplayTable,
-  default_dept_name_sort_func,
-} = util_components;
+const { TabbedContent, SpinnerWrapper, SmartDisplayTable } = util_components;
 
 const { text_maker, TM } = create_text_maker_component([text]);
+
+const get_plain_string = (string) =>
+  _.chain(string).deburr().lowerCase().value();
+const string_sort_func = (a, b) => {
+  const plain_a = get_plain_string(a);
+  const plain_b = get_plain_string(b);
+
+  if (plain_a < plain_b) {
+    return -1;
+  } else if (plain_a > plain_b) {
+    return 1;
+  }
+  return 0;
+};
 
 const SummaryTab = ({ panel_args }) => {
   const { covid_estimates_data } = panel_args;
@@ -33,8 +43,8 @@ const SummaryTab = ({ panel_args }) => {
   const graph_data = _.chain(covid_estimates_data)
     .map(({ doc_name, stat, vote }) => ({
       doc_name,
-      [text_maker("stat_items")]: stat,
-      [text_maker("voted")]: vote,
+      [text_maker("covid_estimates_stat")]: stat,
+      [text_maker("covid_estimates_voted")]: vote,
     }))
     .value();
 
@@ -123,8 +133,7 @@ const ByDepartmentTab = ({ panel_args }) => {
         </a>
       ),
       raw_formatter: (org) => org.name,
-      sort_func: (org_a, org_b) =>
-        default_dept_name_sort_func(org_a.id, org_b.id),
+      sort_func: (org_a, org_b) => string_sort_func(org_a.name, org_b.name),
     },
     doc_name: {
       index: 1,
@@ -133,14 +142,14 @@ const ByDepartmentTab = ({ panel_args }) => {
     },
     stat: {
       index: 2,
-      header: text_maker("stat_items"),
+      header: text_maker("covid_estimates_stat"),
       is_searchable: false,
       is_summable: true,
       formatter: "compact2_written",
     },
     vote: {
       index: 3,
-      header: text_maker("voted"),
+      header: text_maker("covid_estimates_voted"),
       is_searchable: false,
       is_summable: true,
       formatter: "compact2_written",
@@ -158,39 +167,82 @@ const ByDepartmentTab = ({ panel_args }) => {
   );
 };
 
+const get_initative_rows = (subject) => {
+  const initiatives =
+    subject.level === "gov"
+      ? CovidInitiatives.get_all()
+      : CovidInitiatives.org_lookup(subject.id);
+
+  // TODO: not future safe, ignoring years here
+  return _.flatMap(initiatives, ({ name, estimates }) =>
+    _.chain(estimates)
+      .thru((estimates) =>
+        subject.level === "gov"
+          ? estimates
+          : _.filter(estimates, ({ org_id }) => org_id === subject.id)
+      )
+      .groupBy("est_doc")
+      .map((grouped_estimates, est_doc) =>
+        _.reduce(
+          grouped_estimates,
+          (memo, { stat, vote }) => ({
+            ...memo,
+            stat: memo.stat + stat,
+            vote: memo.vote + vote,
+          }),
+          {
+            initiative_name: name,
+            doc_name: businessConstants.estimates_docs[est_doc][window.lang],
+            stat: 0,
+            vote: 0,
+          }
+        )
+      )
+      .value()
+  );
+};
 const ByInitiativeTab = ({ panel_args }) => {
   const { subject } = panel_args;
-  const initiatives =
-    subject.level === "dept"
-      ? CovidInitiatives.org_lookup(subject.org_id)
-      : CovidInitiatives.get_all();
 
-  //const column_configs = {
-  //  [indexBy]: {
-  //    index: 0,
-  //    header: table_first_column_name || nivo_common_text_maker("label"),
-  //    is_searchable: true,
-  //  },
-  //  ..._.chain(keys)
-  //    .map((key, idx) => [
-  //      key,
-  //      {
-  //        index: idx + 1,
-  //        header: key,
-  //        formatter: (value) =>
-  //          _.isUndefined(value) ? "" : table_view_format(value),
-  //      },
-  //    ])
-  //    .fromPairs()
-  //    .value(),
-  //};
-  //return (
-  //  <SmartDisplayTable
-  //    data={_.map(initiatives, (row) => _.pick(row, _.keys(column_configs)))}
-  //    table_name={text_maker("covid_estimates_initiative_tab_label")}
-  //  />
-  //);
-  return "TODO";
+  const initiative_rows = get_initative_rows(subject);
+
+  const column_configs = {
+    initiative_name: {
+      index: 0,
+      header: text_maker("covid_initiative"),
+      is_searchable: true,
+      sort_func: string_sort_func,
+    },
+    doc_name: {
+      index: 1,
+      header: text_maker("covid_estimates_estimates_doc"),
+      is_searchable: true,
+    },
+    stat: {
+      index: 2,
+      header: text_maker("covid_estimates_stat"),
+      is_searchable: false,
+      is_summable: true,
+      formatter: "compact2_written",
+    },
+    vote: {
+      index: 3,
+      header: text_maker("covid_estimates_voted"),
+      is_searchable: false,
+      is_summable: true,
+      formatter: "compact2_written",
+    },
+  };
+
+  return (
+    <SmartDisplayTable
+      data={_.map(initiative_rows, (row) =>
+        _.pick(row, _.keys(column_configs))
+      )}
+      column_configs={column_configs}
+      table_name={text_maker("covid_estimates_initiative_tab_label")}
+    />
+  );
 };
 
 class TabLoadingWrapper extends React.Component {

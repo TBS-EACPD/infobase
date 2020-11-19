@@ -83,7 +83,7 @@ export default async function ({ models }) {
 
       return new CovidInitiative({
         ...row,
-        covid_initiative_estimates: initiative_estimates_rows,
+        estimates: initiative_estimates_rows,
       });
     })
     .value();
