@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { createStore } from "redux";
 
-import { HeaderNotification } from "../components/HeaderNotification";
+import { HeaderNotification } from "../components/HeaderNotification.js";
 import { PageDetails } from "../components/PageDetails.js";
 import { SpinnerWrapper } from "../components/SpinnerWrapper.js";
 import { initialize_analytics } from "../core/analytics.js";
@@ -86,13 +86,9 @@ export class App extends React.Component {
   }
 
   state = {
-    showNotification: false,
-    message: "",
+    show_redirected_msg: sessionStorage.getItem("redirected_msg"),
+    outage_message: null,
     showSurvey: false,
-  };
-
-  hideNotification = () => {
-    this.setState({ showNotification: false });
   };
 
   toggleSurvey = (override = null) => {
@@ -111,8 +107,7 @@ export class App extends React.Component {
           const data = res.data;
           if (data.outage) {
             this.setState({
-              showNotification: true,
-              message: data[window.lang],
+              outage_msg: data[window.lang],
             });
           }
         });
@@ -120,6 +115,7 @@ export class App extends React.Component {
   }
 
   render() {
+    const { outage_msg, showSurvey, show_redirected_msg } = this.state;
     return (
       <div
         tabIndex={-1}
@@ -129,14 +125,29 @@ export class App extends React.Component {
         }`}
       >
         <Provider store={store}>
-          <ErrorBoundary>
+          <ErrorBoundary
+            set_redirect_msg={(msg) =>
+              sessionStorage.setItem("redirected_msg", msg)
+            }
+          >
             <DevFip />
             <InsertRuntimeFooterLinks />
             <EasyAccess />
-            {this.state.showNotification && (
+            {outage_msg && (
               <HeaderNotification
-                text={this.state.message}
-                hideNotification={this.hideNotification}
+                text={outage_msg}
+                hideNotification={() => {
+                  this.setState({ outage_msg: null });
+                }}
+              />
+            )}
+            {show_redirected_msg && (
+              <HeaderNotification
+                text={sessionStorage.getItem("redirected_msg")}
+                hideNotification={() => {
+                  sessionStorage.removeItem("redirected_msg");
+                  this.setState({ show_redirected_msg: false });
+                }}
               />
             )}
             {has_local_storage && <SurveyPopup />}
@@ -234,7 +245,7 @@ export class App extends React.Component {
                 />
               </Switch>
               <PageDetails
-                showSurvey={this.state.showSurvey}
+                showSurvey={showSurvey}
                 toggleSurvey={this.toggleSurvey}
                 non_survey_routes={["/lab", "/contact", "/survey"]}
               />

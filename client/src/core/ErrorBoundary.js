@@ -1,6 +1,7 @@
 import { withRouter } from "react-router";
 
 import { Subject } from "../models/subject.js";
+import { trivial_text_maker } from "../models/text.js";
 import { get_panels_for_subject } from "../panels/get_panels_for_subject";
 import { get_static_url, make_request } from "../request_utils.js";
 
@@ -83,28 +84,37 @@ const ErrorBoundary = withRouter(
       throw this.state.error;
     }
     render() {
+      const { children, set_redirect_msg, location } = this.props;
       const { error, testing_for_stale_client } = this.state;
 
       if (_.isNull(error)) {
-        return this.props.children;
+        return children;
       }
       if (testing_for_stale_client) {
         this.catch_stale_client_error_case();
         return null;
       } else {
         const redirect_to_parent_dept_or_home = (level, subj_id) => {
-          if (level === "program" || level === "crso") {
-            const parent_dept_code = _.split(subj_id, "-")[0];
-            const parent_dept_id = Dept.lookup(parent_dept_code).id;
+          const parent_dept_code = _.split(subj_id, "-")[0];
+          const parent_dept = Dept.lookup(parent_dept_code);
+          if ((level === "program" || level === "crso") && parent_dept) {
+            set_redirect_msg(
+              `The ${trivial_text_maker(
+                level
+              )} you tried to visit is either dead or invalid. We redirected you to its parent department.`
+            );
             window.location.replace(
-              `#orgs/dept/${parent_dept_id}/infograph/intro`
+              `#orgs/dept/${parent_dept.id}/infograph/intro`
             );
           } else {
+            set_redirect_msg(
+              "The organization you tried to visit is invalid. We redirected you to homepage."
+            );
             window.location.replace("#home");
           }
           window.location.reload();
         };
-        const current_url = this.props.location.pathname;
+        const current_url = location.pathname;
         const regex_template =
           "orgs/(gov|dept|program|tag|crso)/(.*)/infograph/(.*)";
 
@@ -130,19 +140,25 @@ const ErrorBoundary = withRouter(
               const bubbles_for_subj = _.keys(panels_for_subj);
               // Everything matches, redirect to its infograph page
               if (_.includes(bubbles_for_subj, data_area)) {
+                set_redirect_msg("The panel part of the link is invalid.");
                 window.location.replace(`#${full_match_url}`);
               } else {
                 /*  This doesn't actually seem to emit error but still check it nonetheless
                     data area doesn't match, redirect to its intro infograph page. */
+                set_redirect_msg(
+                  "You're redirected to intro because the data area is invalid"
+                );
                 window.location.replace(
                   `#${_.replace(full_match_url, data_area, "intro")}`
                 );
               }
               window.location.reload();
+              return;
             });
           } else {
             // subject doesn't exist, redirect to home
             redirect_to_parent_dept_or_home(level, subj_id);
+            return;
           }
         } else if (infograph_regex_without_panel) {
           const [
