@@ -13,16 +13,12 @@ class TypeaheadMenu_ extends React.Component {
 
   handleWindowClick = (e) => {
     const { hide_menu, rbtRef } = this.props;
-    if (
-      !rbtRef.current.contains(e.target) &&
-      !this.rbtMenuRef.current.contains(e.target)
-    ) {
+    if (!rbtRef.current.contains(e.target)) {
       hide_menu();
     }
   };
   componentDidMount() {
     document.body.addEventListener("click", this.handleWindowClick);
-    this.rbtMenuRef = React.createRef();
   }
 
   componentDidUpdate(prev_props) {
@@ -87,12 +83,7 @@ class TypeaheadMenu_ extends React.Component {
       );
     } else {
       return (
-        <ul
-          className="rbt-menu dropdown-menu show"
-          id={menuId}
-          role="listbox"
-          ref={this.rbtMenuRef}
-        >
+        <ul className="rbt-menu dropdown-menu show" id={menuId} role="listbox">
           {_.chain(paginated_results)
             .groupBy("config_group_index")
             .thru((grouped_results) => {
