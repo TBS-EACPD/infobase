@@ -97,6 +97,7 @@ const HomeLayout = (props) => (
           <AdvancedSearch
             everything_search_config={{
               href_template: (item) => smart_href_template(item, "/"),
+
               search_text: home_tm("everything_search_placeholder"),
               large: true,
             }}

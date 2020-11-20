@@ -106,6 +106,10 @@ export class Typeahead extends React.Component {
     // (ie. that get through matches_query) needs to actually match the number of lis ultimately rendered, can't
     // just insert the pagination items when renderMenu is called
     const all_options = [
+      {
+        pagination_placeholder: true,
+        paginate_direction: "previous",
+      },
       ..._.flatMap(search_configs, (search_config, ix) =>
         _.map(search_config.get_data(), (data) => ({
           data,
@@ -122,10 +126,23 @@ export class Typeahead extends React.Component {
           config_group_index: ix,
         }))
       ),
+      {
+        pagination_placeholder: true,
+        paginate_direction: "next",
+      },
     ];
 
     const matches_query = (option) => {
       const { search_text } = this.state;
+      // whether the pagination buttons are genuinely needed will be determined in the typeaheadmenu
+      if (option.pagination_placeholder) {
+        if (option.paginate_direction === "previous") {
+          return true;
+        } else if (option.paginate_direction === "next") {
+          return true;
+        }
+      }
+
       const group_filter =
         config_groups[option.config_group_index].group_filter;
       const query_matches = group_filter(search_text, option.data);

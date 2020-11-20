@@ -5,7 +5,7 @@ no_matches_found:
 paginate_status:
   transform: [handlebars]
   en: |
-    Showing {{total_matching_results}} results
+    Showing results {{page_range_start}} to {{page_range_end}} of {{total_matching_results}}
   fr: |
     Liste des {{total_matching_results}} résultats
 

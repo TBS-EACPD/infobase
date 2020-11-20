@@ -113,6 +113,7 @@ const EverythingSearch = withRouter(
           large={!!this.props.large}
           filter_content={filter_content}
           is_original_filter={is_original_filter}
+          pagination_size={30}
         />
       );
     }
