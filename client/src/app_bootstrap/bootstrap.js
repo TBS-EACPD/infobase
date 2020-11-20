@@ -32,20 +32,16 @@ import orgEmployeeGender from "../tables/orgEmployeeGender.js";
 import orgEmployeeRegion from "../tables/orgEmployeeRegion.js";
 import orgEmployeeType from "../tables/orgEmployeeType.js";
 import orgSobjs from "../tables/orgSobjs.js";
-import orgSobjsQfr from "../tables/orgSobjsQfr.js";
 import orgTransferPayments from "../tables/orgTransferPayments.js";
 import orgTransferPaymentsRegion from "../tables/orgTransferPaymentsRegion.js";
 import orgVoteStatEstimates from "../tables/orgVoteStatEstimates.js";
 import orgVoteStatPa from "../tables/orgVoteStatPa.js";
-import orgVoteStatQfr from "../tables/orgVoteStatQfr.js";
 import programFtes from "../tables/programFtes.js";
 import programSobjs from "../tables/programSobjs.js";
 import programSpending from "../tables/programSpending.js";
 import programVoteStat from "../tables/programVoteStat.js";
 
 const table_defs = [
-  orgVoteStatQfr,
-  orgSobjsQfr,
   orgVoteStatPa,
   orgSobjs,
   programSpending,

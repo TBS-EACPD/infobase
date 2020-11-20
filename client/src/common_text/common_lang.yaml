@@ -196,9 +196,6 @@ authorities:
 item:
   en: Item
   fr: Poste
-qfr_proportion_of_whole:
-  en: Proportion of Total Appropriated Funds Covered by QFRs
-  fr: Proportion des dépenses appropriées représentée dans les RFTs
 planned_spending:
   en: Planned Spending
   fr: Dépenses Prévues
@@ -1078,18 +1075,6 @@ limited_data:
 non_active_program:
   en: non-active program
   fr: programme non actif
-
-temp_qfr_late_depts_note:
-  en: |
-    Totals do not include the following Departments: Canadian Centre for Occupational Health and Safety, International Development Research Centre, Office of the Superintendent of 
-    Financial Institutions, Administrative Tribunals Support Service of Canada, Environment and Climate Change Canada, Security Intelligence Review Committee, 
-    Office of the Communications Security Establishment Commissioner, Canadian Security Intelligence Service and Correctional Service Canada. Updates will be made as these Departments 
-    post their updated Quarterly Financial Reports.
-  fr: |
-    Les totaux ne comprennent pas les ministères suivants : Centre canadien d'hygiène et de sécurité au travail, Bureau du surintendant des institutions financières, Service 
-    canadien d'appui aux tribunaux administratifs, Environnement et Changement climatique Canada, Le Comité de surveillance des activités de renseignement 
-    de sécurité, Bureau du commissaire du Centre de la sécurité des télécommunications, Service canadien du renseignement de sécurité et Service correctionnel Canada. On fera le point 
-    au fur et à mesure que ces organisations publieront la version la plus à jour de leur rapport financier trimestriel.
 
 beta_banner_content:
   en: |
