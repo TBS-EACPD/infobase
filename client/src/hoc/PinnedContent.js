@@ -5,10 +5,9 @@ import ReactResizeDetector from "react-resize-detector";
 
 import { has_local_storage } from "src/core/feature_detection.js";
 
+import { backgroundColor } from "../core/color_defs";
 import { IconPin, IconUnpin } from "../icons/icons.js";
 import { create_text_maker } from "../models/text.js";
-
-import "./PinnedContent.scss";
 
 import text from "./PinnedContent.yaml";
 
@@ -53,10 +52,6 @@ export class PinnedContent extends React.Component {
     });
   };
 
-  handleWrapped = (node) => {
-    this.node = node;
-  };
-
   handleKeyDown = (e) => {
     if (e.key == "Tab") {
       this.setState({ user_enabled_pinning: false });
@@ -87,42 +82,45 @@ export class PinnedContent extends React.Component {
                     width: width,
                   }}
                 >
-                  <div style={{ display: "flex" }}>
-                    <div style={{ flexGrow: 1 }}>
-                      {children({ ref: this.handleWrapped })}
-                    </div>
-                    <button
-                      className="btn btn-pin"
-                      onClick={this.pin_pressed}
-                      aria-label={text_maker(
-                        user_enabled_pinning ? "unpin" : "pin"
-                      )}
-                      style={
-                        this.node && {
-                          marginTop: window.getComputedStyle(this.node)
-                            .marginTop,
-                          marginBottom: window.getComputedStyle(this.node)
-                            .marginBottom,
-                        }
-                      }
-                      onKeyDown={this.handleKeyDown}
+                  <div style={{ position: "relative" }}>
+                    {children}
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "1rem",
+                        right: "1rem",
+                      }}
                     >
-                      {user_enabled_pinning ? (
-                        <IconPin
-                          height="25px"
-                          width="25px"
-                          vertical_align="top"
-                          alternate_color="false"
-                        />
-                      ) : (
-                        <IconUnpin
-                          height="25px"
-                          width="25px"
-                          vertical_align="top"
-                          alternate_color="false"
-                        />
-                      )}
-                    </button>
+                      <button
+                        onClick={this.pin_pressed}
+                        style={{
+                          background: "none",
+                          border: "none",
+                        }}
+                        aria-label={text_maker(
+                          user_enabled_pinning ? "unpin" : "pin"
+                        )}
+                        onKeyDown={this.handleKeyDown}
+                      >
+                        {user_enabled_pinning ? (
+                          <IconPin
+                            height="25px"
+                            width="25px"
+                            vertical_align="top"
+                            color={backgroundColor}
+                            alternate_color="false"
+                          />
+                        ) : (
+                          <IconUnpin
+                            height="25px"
+                            width="25px"
+                            vertical_align="top"
+                            color={backgroundColor}
+                            alternate_color="false"
+                          />
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
