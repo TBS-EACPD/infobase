@@ -1,29 +1,17 @@
-//require("../../panels/spend_by_so_hist"); //we arent showing this stuff.
-
 import { Subject } from "../models/subject";
 
 import {
   trivial_text_maker,
-  run_template,
   year_templates,
   businessConstants,
 } from "./table_common";
 
 import text from "./programSobjs.yaml";
 
-// see [here](../table_definition.html) for description
-// of the table spec
-
 const { Program } = Subject;
 const { sos } = businessConstants;
 
 const { std_years } = year_templates;
-
-// data is tied to public accounts (std_years), but only exists from 2014-15 onwards
-const years = _.filter(
-  std_years,
-  (year) => _.chain(year).thru(run_template).split("-").first().value() >= 2015
-);
 
 export default {
   text,
@@ -79,7 +67,7 @@ export default {
         fr: "Article courant",
       },
     });
-    years.forEach((yr) => {
+    std_years.forEach((yr) => {
       this.add_col({
         type: "big_int",
         nick: yr,
