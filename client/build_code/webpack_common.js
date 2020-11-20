@@ -176,8 +176,8 @@ function get_plugins({
         compare: !stats_no_compare,
         json: true,
         //outDir: "./client/build/InfoBase",
-        outputDir: "..",
-        //outDir: "../..", // this path is relative to the weback output dir (client/build/InfoBase/app usually)
+        //outputDir: "..",
+        outDir: "../..", // this path is relative to the weback output dir (client/build/InfoBase/app usually)
       }),
     is_prod_build &&
       new webpack.DefinePlugin({
