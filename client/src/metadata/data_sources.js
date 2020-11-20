@@ -85,25 +85,6 @@ const sources = _.mapValues(
         return _.map(tables_from_source_key("PA"), table_to_row_item);
       },
     },
-    QFR: {
-      ix: 4,
-      description() {
-        return desc_from_gloss_keys("QFR");
-      },
-      title() {
-        return tm("qfr_title");
-      },
-      frequency: frequencies.q,
-      report_link: {
-        en:
-          "https://www.canada.ca/en/treasury-board-secretariat/services/reporting-government-spending/quarterly-financial-reporting.html",
-        fr:
-          "https://www.canada.ca/fr/secretariat-conseil-tresor/services/etablissement-rapports-depenses/rapports-financiers-trimestriels.html",
-      },
-      items() {
-        return _.map(tables_from_source_key("QFR"), table_to_row_item);
-      },
-    },
     ESTIMATES: {
       ix: 2,
       description() {

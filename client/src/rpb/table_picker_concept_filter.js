@@ -9,7 +9,7 @@ const concept_categories = {
     "SOBJ10",
   ],
   concept_category_people: ["PEOPLE", "FTE", "GENDER", "AGE", "FOL", "GEO"],
-  concept_category_source: ["QFR", "PA", "EST_PROC", "DP", "DRR"],
+  concept_category_source: ["PA", "EST_PROC", "DP", "DRR"],
   concept_category_other: ["ANNUAL", "QUARTERLY", "PROG"],
 };
 
