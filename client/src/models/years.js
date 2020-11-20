@@ -25,6 +25,13 @@ const year_templates = {
     "{{pa_last_year_2}}",
     "{{pa_last_year}}",
   ],
+  tp_by_region_years: [
+    "{{tp_region_last_year_5}}",
+    "{{tp_region_last_year_4}}",
+    "{{tp_region_last_year_3}}",
+    "{{tp_region_last_year_2}}",
+    "{{tp_region_last_year}}",
+  ],
   years_short: [
     "{{pa_last_year_5_short_first}}",
     "{{pa_last_year_4_short_first}}",

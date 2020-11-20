@@ -3,7 +3,7 @@ import { businessConstants, year_templates } from "./table_common.js";
 import text from "./orgTransferPaymentsRegion.yaml";
 
 const { provinces } = businessConstants;
-const { std_years } = year_templates;
+const { tp_by_region_years } = year_templates;
 
 export default {
   text,
@@ -53,7 +53,7 @@ export default {
         fr: "Région géographique",
       },
     });
-    _.each(std_years, (header, ix) => {
+    _.each(tp_by_region_years, (header, ix) => {
       this.add_col({
         type: "big_int",
         nick: header,
@@ -85,7 +85,7 @@ export default {
 
   queries: {
     gov_grouping: () =>
-      _.chain(this.table.horizontal(std_years, false))
+      _.chain(this.table.horizontal(tp_by_region_years, false))
         .map((years, key) => [key].concat(years))
         .sortBy((row) => d3.sum(_.tail(row)))
         .value(),
