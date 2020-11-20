@@ -306,41 +306,6 @@ Object {
 }
 `;
 
-exports[`finance data org vote stat qfr snapshot 1`] = `
-Object {
-  "data": Object {
-    "root": Object {
-      "org": Object {
-        "org_vote_stat_qfr": Array [
-          Object {
-            "in_year_auth": 28638000,
-            "in_year_cumul_exp": 10321000,
-            "in_year_quarter_exp": 3868000,
-            "last_year_auth": 21419000,
-            "last_year_cumul_exp": 7432000,
-            "last_year_quarter_exp": 5871000,
-            "name": "Operating and Program",
-            "vote_num": "1",
-            "vs_type": 1,
-          },
-          Object {
-            "in_year_auth": 1017000,
-            "in_year_cumul_exp": 509000,
-            "in_year_quarter_exp": 254000,
-            "last_year_auth": 631000,
-            "last_year_cumul_exp": 316000,
-            "last_year_quarter_exp": 158000,
-            "name": "Statutory Authorities",
-            "vote_num": "S",
-            "vs_type": 999,
-          },
-        ],
-      },
-    },
-  },
-}
-`;
-
 exports[`finance data program fte snapshot 1`] = `
 Object {
   "data": Object {

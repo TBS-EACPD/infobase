@@ -3,7 +3,6 @@ import { bilingual_field } from "../schema_utils";
 const schema = `
   extend type Org{
     org_vote_stat_pa: [OrgVoteStatPa]
-    org_vote_stat_qfr: [OrgVoteStatQfr]
     org_vote_stat_estimates: [OrgVoteStatEstimates]
     org_transfer_payments: [OrgTransferPayments]
   }
@@ -31,18 +30,6 @@ const schema = `
     pa_last_year_3_exp: Float,
     pa_last_year_2_exp: Float,
     pa_last_year_exp: Float,
-  }
-  type OrgVoteStatQfr{
-    vote_num: String
-    vs_type: Float
-    name: String
-  
-    in_year_auth: Float,
-    in_year_quarter_exp: Float,
-    in_year_cumul_exp: Float,
-    last_year_auth: Float,
-    last_year_quarter_exp: Float,
-    last_year_cumul_exp: Float,
   }
   type OrgVoteStatEstimates{
     vote_num: String
@@ -123,7 +110,6 @@ const schema = `
 export default function ({ models, loaders }) {
   const {
     orgVoteStatPa_loader,
-    OrgVoteStatQfr_loader,
     orgVoteStatEstimates_loader,
     orgTransferPayments_loader,
     programSobjs_loader,
@@ -136,8 +122,6 @@ export default function ({ models, loaders }) {
     Org: {
       org_vote_stat_pa: (org) =>
         org.dept_code ? orgVoteStatPa_loader.load(org.dept_code) : null,
-      org_vote_stat_qfr: (org) =>
-        org.dept_code ? OrgVoteStatQfr_loader.load(org.dept_code) : null,
       org_vote_stat_estimates: (org) =>
         org.dept_code ? orgVoteStatEstimates_loader.load(org.dept_code) : null,
       org_transfer_payments: (org) =>
@@ -150,9 +134,6 @@ export default function ({ models, loaders }) {
       program_fte: (prog) => programFte_loader.load(prog.program_id),
     },
     OrgVoteStatPa: {
-      name: bilingual_field("name"),
-    },
-    OrgVoteStatQfr: {
       name: bilingual_field("name"),
     },
     OrgVoteStatEstimates: {
