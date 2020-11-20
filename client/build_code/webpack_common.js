@@ -169,16 +169,16 @@ function get_plugins({
         }
       },
     }),
-    //bundle_stats &&
-    new BundleStatsWebpackPlugin({
-      // In CI, always save baseline stats if on master, otherwise defer to argument
-      baseline: is_ci ? CI_AND_MASTER : stats_baseline,
-      compare: !stats_no_compare,
-      json: true,
-      outDir: "./client/build/InfoBase",
-      //outputDir: "..",
-      //outDir: "../..", // this path is relative to the weback output dir (client/build/InfoBase/app usually)
-    }),
+    bundle_stats &&
+      new BundleStatsWebpackPlugin({
+        // In CI, always save baseline stats if on master, otherwise defer to argument
+        baseline: is_ci ? CI_AND_MASTER : stats_baseline,
+        compare: !stats_no_compare,
+        json: true,
+        outDir: "./client/build/InfoBase",
+        //outputDir: "..",
+        //outDir: "../..", // this path is relative to the weback output dir (client/build/InfoBase/app usually)
+      }),
     is_prod_build &&
       new webpack.DefinePlugin({
         "process.env": {
