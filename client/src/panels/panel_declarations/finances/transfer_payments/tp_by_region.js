@@ -20,7 +20,7 @@ import {
 
 import text from "./tp_by_region.yaml";
 
-const { std_years } = year_templates;
+const { tp_by_region_years } = year_templates;
 
 const { text_maker, TM } = create_text_maker_component(text);
 const { provinces, le_provinces, de_provinces } = businessConstants;
@@ -125,7 +125,7 @@ const TransferPaymentsByRegionGraph = ({ data }) => (
     graph_args={{
       data,
       color_scale: get_color_scale(data),
-      years: std_years,
+      years: tp_by_region_years,
       formatter: formats.compact2_raw,
     }}
   />
@@ -171,7 +171,7 @@ class TPMap extends React.Component {
       } = calculations;
 
       const transfer_payments_by_prov = transfer_payments_table.prov_code(
-        std_years,
+        tp_by_region_years,
         subject.level === "dept" && subject.id
       );
       const per_capita_by_prov = _.chain(transfer_payments_by_prov)
@@ -195,7 +195,7 @@ class TPMap extends React.Component {
       const format_a11y_data = (data) =>
         _.map(data, (prov_data, prov_code) => ({
           prov: provinces[prov_code].text,
-          ..._.chain(std_years).zip(prov_data).fromPairs().value(),
+          ..._.chain(tp_by_region_years).zip(prov_data).fromPairs().value(),
         }));
 
       const get_column_configs = (is_per_capita) => ({
@@ -204,7 +204,7 @@ class TPMap extends React.Component {
           is_searchable: true,
           header: text_maker("geo_region"),
         },
-        ..._.chain(std_years)
+        ..._.chain(tp_by_region_years)
           .map((yr, idx) => [
             yr,
             {
