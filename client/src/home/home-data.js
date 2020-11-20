@@ -6,6 +6,16 @@ const featured_content_items = _.compact([
     is_new: "true",
   },
   {
+    text_key: "quick_link_spending_by_program",
+    href: "#partition/dept/exp",
+    is_new: "true",
+  },
+  {
+    text_key: "quick_link_ftes_by_program",
+    href: "#partition/dept/fte",
+    is_new: "true",
+  },
+  {
     text_key: "supps_b",
     href: "#compare_estimates",
   },
