@@ -18,19 +18,6 @@ org_vote_stat_pa{
   pa_last_year_2_exp
   pa_last_year_exp
 }`;
-const org_vote_stat_qfr_field = `
-org_vote_stat_qfr{
-  vote_num
-  vs_type
-  name
-
-  in_year_auth
-  in_year_quarter_exp
-  in_year_cumul_exp
-  last_year_auth
-  last_year_quarter_exp
-  last_year_cumul_exp
-}`;
 const org_vote_stat_estimates_field = `
 org_vote_stat_estimates{
   vote_num
@@ -119,14 +106,6 @@ query ($lang: String = "en") {
     }
   }
 }`;
-const org_vote_stat_qfr_query = `
-query ($lang: String = "en") {
-  root(lang: $lang) {
-    org(dept_code: "CPCC") {
-      ${org_vote_stat_qfr_field}
-    }
-  }
-}`;
 const org_vote_stat_estimates_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
@@ -179,10 +158,6 @@ query ($lang: String = "en") {
 describe("finance data", () => {
   it("org vote stat pa snapshot", async () => {
     const data = await execQuery(org_vote_stat_pa_query, {});
-    return expect(data).toMatchSnapshot();
-  });
-  it("org vote stat qfr snapshot", async () => {
-    const data = await execQuery(org_vote_stat_qfr_query, {});
     return expect(data).toMatchSnapshot();
   });
   it("org vote stat estimates snapshot", async () => {

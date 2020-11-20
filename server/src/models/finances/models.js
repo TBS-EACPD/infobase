@@ -28,19 +28,6 @@ export default function (model_singleton) {
     pa_last_year_2_exp: number_type,
     pa_last_year_exp: number_type,
   });
-  const OrgVoteStatQfrSchema = mongoose.Schema({
-    dept_code: parent_fkey_type(),
-    vote_num: str_type,
-    vs_type: number_type,
-    ...bilingual("name", { ...str_type, required: true }),
-
-    in_year_auth: number_type,
-    in_year_quarter_exp: number_type,
-    in_year_cumul_exp: number_type,
-    last_year_auth: number_type,
-    last_year_quarter_exp: number_type,
-    last_year_cumul_exp: number_type,
-  });
   const OrgVoteStatEstimatesSchema = mongoose.Schema({
     dept_code: parent_fkey_type(),
     vote_num: str_type,
@@ -122,7 +109,6 @@ export default function (model_singleton) {
   });
 
   model_singleton.define_model("OrgVoteStatPa", OrgVoteStatPaSchema);
-  model_singleton.define_model("OrgVoteStatQfr", OrgVoteStatQfrSchema);
   model_singleton.define_model(
     "OrgVoteStatEstimates",
     OrgVoteStatEstimatesSchema
@@ -139,7 +125,6 @@ export default function (model_singleton) {
 
   const {
     OrgVoteStatPa,
-    OrgVoteStatQfr,
     OrgVoteStatEstimates,
     OrgTransferPayments,
     ProgramSobjs,
@@ -151,10 +136,6 @@ export default function (model_singleton) {
   const loaders = {
     orgVoteStatPa_loader: create_resource_by_foreignkey_attr_dataloader(
       OrgVoteStatPa,
-      "dept_code"
-    ),
-    OrgVoteStatQfr_loader: create_resource_by_foreignkey_attr_dataloader(
-      OrgVoteStatQfr,
       "dept_code"
     ),
     orgVoteStatEstimates_loader: create_resource_by_foreignkey_attr_dataloader(

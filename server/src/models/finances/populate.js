@@ -8,7 +8,6 @@ import {
 export default async function ({ models }) {
   const {
     OrgVoteStatPa,
-    OrgVoteStatQfr,
     OrgVoteStatEstimates,
     OrgTransferPayments,
     ProgramSobjs,
@@ -21,12 +20,6 @@ export default async function ({ models }) {
     get_standard_csv_file_rows("org_vote_stat_pa.csv")
   )
     .map((obj) => new OrgVoteStatPa(obj))
-    .value();
-
-  const orgVoteStatQfr_records = _.chain(
-    get_standard_csv_file_rows("org_vote_stat_qfr.csv")
-  )
-    .map((obj) => new OrgVoteStatQfr(obj))
     .value();
 
   const orgVoteStatEstimates_records = _.chain(
@@ -83,7 +76,6 @@ export default async function ({ models }) {
 
   return await Promise.all([
     OrgVoteStatPa.insertMany(orgVoteStatPa_records),
-    OrgVoteStatQfr.insertMany(orgVoteStatQfr_records),
     OrgVoteStatEstimates.insertMany(orgVoteStatEstimates_records),
     OrgTransferPayments.insertMany(orgTransferPayments_records),
     ProgramSobjs.insertMany(programSobjs_records),
