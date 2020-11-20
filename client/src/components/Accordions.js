@@ -95,7 +95,7 @@ const StatelessPullDownAccordion = ({
       <button
         aria-label={get_accordion_label(isExpanded)}
         onClick={onToggle}
-        style={{ flexGrow: 1, textAlign: "center" }}
+        style={{ flexGrow: 1, textAlign: "center", paddingRight: "2.5rem" }}
       >
         {title}
       </button>
