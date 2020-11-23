@@ -857,7 +857,6 @@ const IconEmail = (props) => {
   return (
     <_IconWrapper
       {...props}
-      viewbox_width={100}
       viewbox_width={448}
       viewbox_height={512}
       ChildSVG={SVGEmail}

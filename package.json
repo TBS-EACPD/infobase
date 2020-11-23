@@ -25,7 +25,6 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-lodash": "^7.1.0",
     "eslint-plugin-node": "^6.0.0",
-    "eslint-plugin-react": "^7.12.4",
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
     "prettier": "^2.0.5"

@@ -8,7 +8,9 @@
   "parserOptions": {
     "ecmaVersion": 2017,
     "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
+      "experimentalObjectRestSpread": true,
+      "jsx": true,
+      "experimentalDecorators": true
     },
     "sourceType": "module",
     "allowImportExportEverywhere": true
