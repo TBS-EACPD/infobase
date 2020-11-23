@@ -21,7 +21,6 @@ const Home = (props) => {
     match: {
       params: { no_basic_equiv },
     },
-    toggleSurvey,
   } = props;
 
   return (
