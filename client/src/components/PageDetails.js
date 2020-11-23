@@ -49,7 +49,12 @@ const PageDetails = withRouter(
     };
     render() {
       const { showReportProblem } = this.state;
-      const { location, toggleSurvey, showSurvey } = this.props;
+      const {
+        location,
+        toggleSurvey,
+        showSurvey,
+        non_survey_routes,
+      } = this.props;
 
       return (
         <div className="pagedetails frow">
@@ -63,16 +68,6 @@ const PageDetails = withRouter(
               {text_maker("report_a_problem")}
             </button>
           </div>
-
-          {location.pathname === "/contact" ||
-          location.pathname === "/lab" ? null : (
-            <button
-              className="btn btn-ib-primary"
-              onClick={() => toggleSurvey()}
-            >
-              {text_maker("feedback")}
-            </button>
-          )}
           <StatelessModal
             title={text_maker("report_a_problem")}
             show={showReportProblem}
@@ -81,12 +76,22 @@ const PageDetails = withRouter(
               this.setState({ showReportProblem: false })
             }
           />
+
+          {!_.includes(non_survey_routes, location.pathname) && (
+            <button
+              className="btn btn-ib-primary"
+              onClick={() => toggleSurvey()}
+            >
+              {text_maker("feedback")}
+            </button>
+          )}
           <StatelessModal
             title={text_maker("feedback")}
             show={showSurvey}
             body={<EmailFrontend top_border={false} template_name="feedback" />}
             on_close_callback={() => toggleSurvey(false)}
           />
+
           <div className="pagedetails__version-number fcol-md-4 fcol-sm-6">
             <VersionNumber />
           </div>
