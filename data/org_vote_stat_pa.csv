@@ -73,11 +73,11 @@
 "CCRA",1,1,"Operating/Program","Fonctionnement/Programme",3391869712,3167429873,3268071716,3034034552,3589123987,3378439921,3823713925,3692875684,3582433407,3419027688
 "CCRA",5,2,"Capital","Capital",123413805,76291182,128692837,78803100,96310566,74872686,80801558,73594724,84964124,58683080
 "CCRA","S",999,"Children's special allowance payments","Versements d'allocations spéciales pour enfants",214761199,214761199,309173282,309173282,319659267,319659267,333553349,333553349,338745215,338745215
+"CCRA","S",999,"Climate Action Incentive Payment","Distribution des redevances sur les combustibles (paiement de l’incitatif à agir pour le climat) en vertu de l'article 165 de la Loi sur la tarification de la pollution causée par les gaz à effet de serre",,,,,,,,,663758550,663758550
 "CCRA","S",999,"Collection Agency Fees","Honoraires - Agence de recouvrement",,,,,,,124,124,,
 "CCRA","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",447674632,447674632,432793662,432793662,452570731,452570731,440013189,440013189,453144604,453144604
 "CCRA","S",999,"Court Awards","Montants adjugés par une cour",3398465,3398465,1487951,1487951,530013,530013,1186686,1186686,5436202,5436202
 "CCRA","S",999,"Disbursements to provinces under the Softwood Lumber Products Export Charge Act, 2006","Versements aux provinces en vertu de la Loi de 2006 sur les droits d'exportation de produits de bois d'oeuvre",-15118882,-15118882,121481095,121481095,-109802,-109802,,0,,
-"CCRA","S",999,"Distribution of fuel charge (Climate Action Incentive Payment) under section 165 of the Greenhouse Gas Pollution Pricing Act","Distribution des redevances sur les combustibles (paiement de l’incitatif à agir pour le climat) en vertu de l'article 165 de la Loi sur la tarification de la pollution causée par les gaz à effet de serre",,,,,,,,,663758550,663758550
 "CCRA","S",999,"Losses on Foreign Exchange","Pertes d'opérations de change",30243,30243,7081,7081,7139,7139,7916,7916,6859,6859
 "CCRA","S",999,"Payments under the Energy Costs Assistance Measures Act","Paiements en vertu de la Loi sur les mesures d'aide liées au coût de l'énergie",250,250,,,,,,,,
 "CCRA","S",999,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs",27722,27722,,,,,844,843,8,8
