@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 import { get_static_url, make_request } from "../request_utils.js";
 
 import { log_standard_event } from "./analytics.js";
@@ -63,6 +65,8 @@ class ErrorBoundary extends React.Component {
   render() {
     const { children } = this.props;
     const { error, testing_for_stale_client } = this.state;
+    const redirected_msg = sessionStorage.getItem("redirected_msg");
+    console.log(redirected_msg);
 
     if (_.isNull(error)) {
       return children;
@@ -79,24 +83,47 @@ class ErrorBoundary extends React.Component {
             alignItems: "center",
           }}
         >
+          {redirected_msg ? (
+            <Fragment>
+              <span>
+                {
+                  {
+                    en: "Redirecting...",
+                    fr: "TODO",
+                  }[window.lang]
+                }
+              </span>
+              <span style={{ marginTop: 50 }}>
+                {
+                  {
+                    en: "If this page doesn't reload,",
+                    fr: "TODO",
+                  }[window.lang]
+                }
+              </span>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <span>
+                {
+                  {
+                    en: "An error has occured",
+                    fr: "Une erreur est survenue",
+                  }[window.lang]
+                }
+              </span>
+              <img
+                aria-hidden={true}
+                id="error-boundary-icon"
+                src={get_static_url("svg/not-available.svg")}
+                style={{
+                  maxWidth: "100%",
+                  width: "400px",
+                }}
+              />
+            </Fragment>
+          )}
           <NoIndex />
-          <span>
-            {
-              {
-                en: "An error has occured",
-                fr: "Une erreur est survenue",
-              }[window.lang]
-            }
-          </span>
-          <img
-            aria-hidden={true}
-            id="error-boundary-icon"
-            src={get_static_url("svg/not-available.svg")}
-            style={{
-              maxWidth: "100%",
-              width: "400px",
-            }}
-          />
           <span>
             {
               {
