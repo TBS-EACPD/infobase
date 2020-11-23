@@ -25,6 +25,12 @@ const should_reset_local_storage = () =>
   Date.now() - localStorage.getItem(`infobase_survey_popup_deactivated_since`) >
     seconds_in_a_half_year;
 
+const reset_local_storage = () => {
+  localStorage.removeItem("infobase_survey_popup_page_visited");
+  localStorage.removeItem("infobase_survey_popup_deactivated");
+  localStorage.removeItem("infobase_survey_popup_deactivated_since");
+};
+
 const get_state_defaults = () => {
   const default_active = true;
   const default_page_visited = 1;
@@ -75,9 +81,7 @@ export const SurveyPopup = withRouter(
       });
 
       if (should_reset_local_storage()) {
-        localStorage.removeItem("infobase_survey_popup_page_visited");
-        localStorage.removeItem("infobase_survey_popup_deactivated");
-        localStorage.removeItem("infobase_survey_popup_deactivated_since");
+        reset_local_storage();
       }
 
       const { active, page_visited } = get_state_defaults();
@@ -94,25 +98,25 @@ export const SurveyPopup = withRouter(
       };
     }
     handleButtonPress = (button_type) => {
-      if (_.includes(["no"], button_type)) {
-        localStorage.setItem(`infobase_survey_popup_deactivated`, "true");
-        localStorage.setItem(
-          `infobase_survey_popup_deactivated_since`,
-          Date.now()
-        );
-      } else if (_.includes(["later"], button_type)) {
-        this.timeout = setTimeout(() => {
-          this.setState({ show_popup: true, active: true });
-        }, 300000);
-      }
-
       log_standard_event({
         SUBAPP: window.location.hash.replace("#", "") || "start",
         MISC1: "SURVEY_POPUP",
         MISC2: `interaction: ${button_type}`,
       });
 
-      this.setState({ active: false, show_popup: false });
+      if (_.includes(["yes", "no"], button_type)) {
+        localStorage.setItem(`infobase_survey_popup_deactivated`, "true");
+        localStorage.setItem(
+          `infobase_survey_popup_deactivated_since`,
+          Date.now()
+        );
+
+        this.setState({ active: false, show_popup: false });
+      } else if (button_type === "later") {
+        reset_local_storage();
+
+        this.setState({ active: false, show_popup: false });
+      }
     };
     static getDerivedStateFromProps(props) {
       if (props.showSurvey) {
@@ -130,7 +134,6 @@ export const SurveyPopup = withRouter(
     }
     render() {
       const { active, page_visited, show_popup } = this.state;
-      const { toggleSurvey } = this.props;
 
       let should_show =
         !is_survey_campaign_over() &&
@@ -193,8 +196,16 @@ export const SurveyPopup = withRouter(
             </div>
           }
           footer={
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              {full_survey_button}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <a
+                className="link-unstyled btn btn-ib-primary"
+                onClick={() => this.handleButtonPress("yes")}
+                target="_blank"
+                rel="noopener noreferrer"
+                href={"#survey"}
+              >
+                {text_maker(`survey_popup_yes`)}
+              </a>
               {_.map(["later", "no"], (button_type) => (
                 <button
                   key={button_type}
