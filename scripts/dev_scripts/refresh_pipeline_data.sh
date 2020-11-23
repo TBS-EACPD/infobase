@@ -15,6 +15,7 @@ branch_name=$(
 
 cd ../pipeline
 
+git pull origin
 git checkout $branch_name
 git pull origin $branch_name
 
