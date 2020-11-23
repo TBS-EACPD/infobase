@@ -29,15 +29,29 @@ late_results_warning_crso:
   fr: Les données du {{result_doc_name}} de cette responsabilité essentielle ne sont pas encore disponibles. Une mise à jour suivra.
 
 
-late_resources_warning_gov:
+late_actual_resources_warning_gov:
+  en: The latest actual FTE values do not include values from the organizations listed below, as their data is not yet available. Updates will follow.
+  fr: Dépenses planifiées des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.
+late_actual_resources_warning_dept:
+  en: The latest actual FTE values for this organization are not yet available. An update will follow.
+  fr: Les dernières valeurs ETP réelles pour cette organisation ne sont pas encore disponibles. Une mise à jour suivra.
+late_actual_resources_warning_program:
+  en: The latest actual FTE values for this Program are not yet available. An update will follow.
+  fr: Les dernières valeurs ETP réelles pour ce programme ne sont pas encore disponibles. Une mise à jour suivra.
+late_actual_resources_warning_crso:
+  en: The latest actual FTE values for this Core Responsibility are not yet available. An update will follow.
+  fr: Les dernières valeurs ETP réelles pour cette responsabilité essentielle ne sont pas encore disponibles. Une mise à jour suivra.
+
+
+late_planned_resources_warning_gov:
   en: Planned spending and planned FTE data does not include values from the organizations listed below, as their data is not yet available. Updates will follow.
   fr: Dépenses planifiées des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.
-late_resources_warning_dept:
+late_planned_resources_warning_dept:
   en: Planned spending and planned FTE for this organization is not yet available. An update will follow.
   fr: Dépenses planifiées et ETP prévus pour cette organisation ne sont pas encore disponibles. Une mise à jour suivra.
-late_resources_warning_program:
+late_planned_resources_warning_program:
   en: Planned spending and planned FTE for this Program is not yet available. An update will follow.
   fr: Dépenses planifiées et ETP prévus pour ce programme ne sont pas encore disponibles. Une mise à jour suivra.
-late_resources_warning_crso:
+late_planned_resources_warning_crso:
   en: Planned spending and planned FTE for this Core Responsibility is not yet available. An update will follow.
   fr: Dépenses planifiées et ETP prévus pour cette responsabilité essentielle ne sont pas encore disponibles. Une mise à jour suivra.

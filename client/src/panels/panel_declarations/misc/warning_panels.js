@@ -1,4 +1,3 @@
-
 import { Fragment } from "react";
 
 import dynamic_footnote_text from "../../../models/footnotes/dynamic_footnotes.yaml";
@@ -190,16 +189,16 @@ export const declare_late_results_warning_panel = () =>
     },
   });
 
-// Assume that ONLY the most recent DP could possibly have late resources (or at least we only care about a banner for them). DRR resources are decoupled
-// from the document tabling, and it would be extreme (illegal, if results ever graduates from policy to law) for us to not get planned resources from a DP org for a full year.
+// Assume that ONLY the most recent DP could have late resources (or at least we only care about a banner for them)
+// It would be extreme (illegal, if results ever graduates from policy to law) for us to not get planned resources from a DP org for a full year
 const depts_with_late_resources = _.chain(result_docs_in_tabling_order)
   .filter(({ doc_type }) => doc_type === "dp")
   .last()
   .get("late_resources_orgs")
   .value();
-export const declare_late_resources_panel = () =>
+export const declare_late_planned_resources_panel = () =>
   declare_panel({
-    panel_key: "late_resources_warning",
+    panel_key: "late_planned_resources_warning",
     levels: ["gov", "dept", "crso", "program"],
     panel_config_func: (level, panel_key) => {
       switch (level) {
@@ -211,7 +210,7 @@ export const declare_late_resources_panel = () =>
             calculate: () => !_.isEmpty(depts_with_late_resources),
             render: () => (
               <WarningPanel center_text={false}>
-                <TM k={"late_resources_warning_gov"} />
+                <TM k={"late_planned_resources_warning_gov"} />
                 <MultiColumnList
                   list_items={_.map(
                     depts_with_late_resources,
@@ -241,7 +240,7 @@ export const declare_late_resources_panel = () =>
               ),
             render: () => (
               <WarningPanel>
-                <TM k={`late_resources_warning_${level}`} />
+                <TM k={`late_planned_resources_warning_${level}`} />
               </WarningPanel>
             ),
           };
