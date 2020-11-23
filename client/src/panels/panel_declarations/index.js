@@ -46,6 +46,7 @@ export {
   declare_crso_in_gov_panel,
   declare_crso_links_to_other_crso_panel,
   declare_late_results_warning_panel,
+  declare_late_actual_resources_panel,
   declare_late_planned_resources_panel,
   declare_m2m_tag_warning_panel,
   declare_dead_program_warning_panel,

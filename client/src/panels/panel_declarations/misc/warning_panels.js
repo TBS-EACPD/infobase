@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 
+import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "../../../models/footnotes/dynamic_footnotes.js";
 import dynamic_footnote_text from "../../../models/footnotes/dynamic_footnotes.yaml";
 
 import {
@@ -189,16 +190,9 @@ export const declare_late_results_warning_panel = () =>
     },
   });
 
-// Assume that ONLY the most recent DP could have late resources (or at least we only care about a banner for them)
-// It would be extreme (illegal, if results ever graduates from policy to law) for us to not get planned resources from a DP org for a full year
-const depts_with_late_resources = _.chain(result_docs_in_tabling_order)
-  .filter(({ doc_type }) => doc_type === "dp")
-  .last()
-  .get("late_resources_orgs")
-  .value();
-export const declare_late_planned_resources_panel = () =>
+const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
   declare_panel({
-    panel_key: "late_planned_resources_warning",
+    panel_key: `late_${planned_or_actual}_resources_warning`,
     levels: ["gov", "dept", "crso", "program"],
     panel_config_func: (level, panel_key) => {
       switch (level) {
@@ -207,23 +201,19 @@ export const declare_late_planned_resources_panel = () =>
             static: true,
             footnotes: false,
             source: false,
-            calculate: () => !_.isEmpty(depts_with_late_resources),
+            calculate: () => !_.isEmpty(late_orgs),
             render: () => (
-              <WarningPanel center_text={false}>
-                <TM k={"late_planned_resources_warning_gov"} />
+              <WarningPanel center_text={false} banner_class="warning">
+                <TM k={`late_${planned_or_actual}_resources_warning_gov`} />
                 <MultiColumnList
                   list_items={_.map(
-                    depts_with_late_resources,
+                    late_orgs,
                     (org_id) => Dept.lookup(org_id).name
                   )}
                   column_count={
-                    window.lang === "en" && depts_with_late_resources.length > 3
-                      ? 2
-                      : 1
+                    window.lang === "en" && late_orgs.length > 3 ? 2 : 1
                   }
-                  li_class={
-                    depts_with_late_resources.length > 4 ? "font-small" : ""
-                  }
+                  li_class={late_orgs.length > 4 ? "font-small" : ""}
                 />
               </WarningPanel>
             ),
@@ -235,15 +225,39 @@ export const declare_late_planned_resources_panel = () =>
             source: false,
             calculate: (subject) =>
               _.includes(
-                depts_with_late_resources,
+                late_orgs,
                 level === "dept" ? subject.id : subject.dept.id
               ),
             render: () => (
               <WarningPanel>
-                <TM k={`late_planned_resources_warning_${level}`} />
+                <TM
+                  k={`late_${planned_or_actual}_resources_warning_${level}`}
+                />
               </WarningPanel>
             ),
           };
       }
     },
   });
+
+const depts_with_late_actual_resources = _.chain(result_docs_in_tabling_order)
+  .filter(({ doc_type }) => doc_type === "drr")
+  .last()
+  .get("late_resources_orgs")
+  .concat(PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC.late_resources_orgs)
+  .uniq()
+  .value();
+export const declare_late_actual_resources_panel = get_declare_late_resources_panel(
+  "actual",
+  depts_with_late_actual_resources
+);
+
+const depts_with_late_planned_resources = _.chain(result_docs_in_tabling_order)
+  .filter(({ doc_type }) => doc_type === "dp")
+  .last()
+  .get("late_resources_orgs")
+  .value();
+export const declare_late_planned_resources_panel = get_declare_late_resources_panel(
+  "planned",
+  depts_with_late_planned_resources
+);
