@@ -175,12 +175,7 @@ export class App extends React.Component {
                 hideNotification={this.hideNotification}
               />
             )}
-            {has_local_storage && (
-              <SurveyPopup
-                toggleSurvey={this.toggleSurvey}
-                showSurvey={this.state.showSurvey}
-              />
-            )}
+            {has_local_storage && <SurveyPopup />}
             <ReactUnmounter />
             {!window.is_a11y_mode && <TooltipActivator />}
             <Suspense fallback={<SpinnerWrapper config_name={"route"} />}>
