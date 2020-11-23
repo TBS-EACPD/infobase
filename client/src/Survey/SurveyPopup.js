@@ -6,16 +6,15 @@ import {
   create_text_maker_component,
   EmailFrontend,
 } from "../components/index.js";
+import { log_standard_event } from "../core/analytics.js";
 import { IconFeedback } from "../icons/icons.js";
-
-import { log_standard_event } from "./analytics.js";
 
 import text from "./SurveyPopup.yaml";
 
 const { TM, text_maker } = create_text_maker_component(text);
 
 const page_visit_increment = 1;
-const survey_campaign_end_date = new Date(2019, 3, 31).getTime();
+const survey_campaign_end_date = new Date(2021, 1, 1).getTime();
 
 const get_path_root = (path) =>
   _.chain(path).replace(/^\//, "").split("/").first().value();

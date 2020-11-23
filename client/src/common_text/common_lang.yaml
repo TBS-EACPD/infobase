@@ -1060,14 +1060,9 @@ infographic_for:
   en: Infographic for {{subject.name}}
   fr: Infographie pour {{subject.name}}
 
-
 ##################################
 # footer text and links
 ##################################
-survey_link_text:
-  en: Feedback
-  fr: Rétroaction
-
 limited_data:
   en: limited data
   fr: très peu de données
