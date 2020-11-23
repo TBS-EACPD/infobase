@@ -6,6 +6,7 @@ import {
   // shared gov, dept, crso, program
   declare_results_key_concepts_panel,
   declare_late_results_warning_panel,
+  declare_late_actual_resources_panel,
   declare_late_planned_resources_panel,
 
   // shared gov, dept
@@ -40,6 +41,7 @@ import {
 export const get_gov_panels = (subject) => ({
   intro: [declare_simplographic_panel()],
   financial: [
+    declare_late_actual_resources_panel(),
     declare_late_planned_resources_panel(),
     declare_financial_key_concepts_panel(),
     declare_welcome_mat_panel(),

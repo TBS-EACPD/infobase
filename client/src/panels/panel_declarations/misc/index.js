@@ -23,6 +23,7 @@ export {
   declare_dead_crso_warning_panel,
   declare_m2m_tag_warning_panel,
   declare_late_results_warning_panel,
+  declare_late_actual_resources_panel,
   declare_late_planned_resources_panel,
 } from "./warning_panels.js";
 

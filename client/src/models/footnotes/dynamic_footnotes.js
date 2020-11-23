@@ -11,7 +11,7 @@ const text_maker = create_text_maker(text);
 // late DRR resources (FTE only) can happen pre-DRR if the PA tabling is early...
 // list late orgs in this mock results doc object to get the requisite footnotes showing up
 // in the meantime
-const PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE = {
+const PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC = {
   late_resources_orgs: [1],
   doc_type: "drr",
   year: run_template("{{pa_last_year}}"),
@@ -66,7 +66,7 @@ const get_dynamic_footnotes = () => {
       const docs_with_late_orgs = _.chain(result_docs_in_tabling_order)
         .clone() // ...reverse mutates, clone first!
         .reverse()
-        .concat(PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE)
+        .concat(PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC)
         .filter((doc) => doc[late_org_property].length > 0)
         .value();
 
@@ -125,4 +125,4 @@ const get_dynamic_footnotes = () => {
     .value();
 };
 
-export { get_dynamic_footnotes };
+export { get_dynamic_footnotes, PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC };
