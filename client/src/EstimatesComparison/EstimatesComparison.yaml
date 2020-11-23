@@ -8,7 +8,7 @@ diff_view_top_text:
   en: |
     A presentation of the recently tabled {{#if current_doc_is_mains}}Main Estimates{{else}}Supplementary Estimates {{current_sups_letter}}{{/if}} {{est_in_year}} with context from previously tabled estimate documents.
   fr: |
-    Une présentation du budget {{#if current_doc_is_mains}}Budget principal des dépenses{{else}}Budget supplémentaire des dépenses {{current_sups_letter}}{{/if}} {{est_in_year}} récemment déposé avec de l'information contextuelle des budget de dépenses précédents.
+    Une présentation du {{#if current_doc_is_mains}}Budget principal des dépenses{{else}}Budget supplémentaire des dépenses {{current_sups_letter}}{{/if}} {{est_in_year}} récemment déposé avec de l'information contextuelle des budget de dépenses précédents.
 
 general_info:
   en: General Information
