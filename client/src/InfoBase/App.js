@@ -125,11 +125,7 @@ export class App extends React.Component {
         }`}
       >
         <Provider store={store}>
-          <ErrorBoundary
-            set_redirect_msg={(msg) =>
-              sessionStorage.setItem("redirected_msg", msg)
-            }
-          >
+          <ErrorBoundary>
             <DevFip />
             <InsertRuntimeFooterLinks />
             <EasyAccess />

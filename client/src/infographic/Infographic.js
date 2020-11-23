@@ -27,6 +27,7 @@ import text from "./Infographic.yaml";
 const sub_app_name = "infographic_org";
 
 const { text_maker, TM } = create_text_maker_component(text);
+const { Dept, Gov } = Subject;
 
 class AnalyticsSynchronizer extends React.Component {
   render() {
@@ -325,6 +326,15 @@ class InfoGraph_ extends React.Component {
   }
 }
 
+const set_redirect_msg = (msg) => sessionStorage.setItem("redirected_msg", msg);
+const redirect_to_intro = (subject) => {
+  set_redirect_msg(
+    "You're redirected to intro because the data area is invalid"
+  );
+  window.location.replace(infograph_href_template(subject, "intro"));
+  window.location.reload();
+};
+
 const is_fake_infographic = (subject) =>
   !_.isUndefined(subject.is_fake) && subject.is_fake;
 const Infographic = ({
@@ -332,12 +342,62 @@ const Infographic = ({
     params: { level, subject_id, active_bubble_id, options },
   },
 }) => {
+  const is_level_valid = _.chain(Subject).keys().includes(level).value();
+  if (!is_level_valid) {
+    set_redirect_msg(
+      "The level of organization you tried to visit is invalid. We redirected you to homepage."
+    );
+    window.location.replace("#home");
+    window.location.reload();
+  }
   const SubjectModel = Subject[level];
   const subject = SubjectModel.lookup(subject_id);
   const bubble_id = _.find(bubble_defs, { id: active_bubble_id })
     ? active_bubble_id
     : null;
 
+  if (!subject) {
+    const parent_dept_code = _.split(subject_id, "-")[0];
+    const parent_dept = Dept.lookup(parent_dept_code);
+    if ((level === "program" || level === "crso") && parent_dept) {
+      set_redirect_msg(
+        `The ${text_maker(
+          level
+        )} you tried to visit is either dead or invalid. We redirected you to its parent department.`
+      );
+      window.location.replace(`#orgs/dept/${parent_dept.id}/infograph/intro`);
+    } else {
+      set_redirect_msg(
+        "The organization you tried to visit is invalid. We redirected you to homepage."
+      );
+      window.location.replace("#home");
+    }
+    window.location.reload();
+  } else if (!bubble_id) {
+    redirect_to_intro(subject);
+  } else if (options) {
+    (() => {
+      // a bit hacky, but try to parse panel, if it throws error, then redirect
+      try {
+        SafeJSURL.parse(options);
+      } catch (err) {
+        get_panels_for_subject(subject).then((panels_for_subj) => {
+          const bubbles_for_subj = _.keys(panels_for_subj);
+
+          // Everything matches except panel, redirect to its infograph page
+          if (_.includes(bubbles_for_subj, bubble_id)) {
+            set_redirect_msg("The panel part of the link is invalid");
+            window.location.replace(
+              infograph_href_template(subject, bubble_id)
+            );
+            window.location.reload();
+          } else {
+            redirect_to_intro(subject);
+          }
+        });
+      }
+    })();
+  }
   if (is_fake_infographic(subject)) {
     const subject_parent = (() => {
       switch (level) {
@@ -346,7 +406,7 @@ const Infographic = ({
         case "crso":
           return subject.dept;
         default:
-          return Subject.Gov;
+          return Gov;
       }
     })();
     return (
