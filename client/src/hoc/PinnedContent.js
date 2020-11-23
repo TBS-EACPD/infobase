@@ -129,7 +129,7 @@ export class PinnedContent extends React.Component {
         )}
       </ReactResizeDetector>
     ) : (
-      children({ ref: this.handleWrapped })
+      children
     );
   }
 }
