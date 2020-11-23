@@ -85,7 +85,6 @@ function populate_igoc_models({
       ministry_id,
       inst_form_id,
       eval_url_id,
-      dp_url_id,
       website_url_id,
       article1,
       article2,
@@ -94,8 +93,8 @@ function populate_igoc_models({
       other_lang_legal_title,
     ] = row;
 
-    const [eval_url, dp_url, website_url] = _.map(
-      [eval_url_id, dp_url_id, website_url_id],
+    const [eval_url, website_url] = _.map(
+      [eval_url_id, website_url_id],
       (url_key) => url_lookup[url_id(url_key)]
     );
 
@@ -120,7 +119,6 @@ function populate_igoc_models({
       notes,
       _dp_status: +_dp_status,
       eval_url,
-      dp_url,
       website_url,
       le_la: article1 || "",
       du_de_la: article2 || "",

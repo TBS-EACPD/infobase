@@ -52,7 +52,6 @@ query IgocTestQuery ($lang: String!){
       mandate
       description
     
-      dp_url
       eval_url
       website_url
   
