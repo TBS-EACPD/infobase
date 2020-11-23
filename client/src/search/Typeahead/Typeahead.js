@@ -135,6 +135,9 @@ export class Typeahead extends React.Component {
       current_selected_index !== -1
     ) {
       this.menu_item_references[current_selected_index].focus();
+      this.menu_item_references[
+        current_selected_index
+      ].scrollIntoViewIfNeeded();
     }
   }
 
@@ -272,7 +275,7 @@ export class Typeahead extends React.Component {
             aria-autocomplete="list"
             aria-owns={this.menuId}
             aria-expanded={show_menu}
-            style={{ width: "100%", order: 1 }}
+            style={{ width: "100%" }}
             placeholder={placeholder}
             onChange={update_search_text}
             ref={this.typeaheadRef}
@@ -290,50 +293,48 @@ export class Typeahead extends React.Component {
           />
 
           {filter_content && (
-            <div style={{ order: 2 }}>
-              <DropdownMenu
-                dropdown_trigger_txt={
-                  <div
-                    style={{
-                      textAlign: "start",
-                      whiteSpace: "nowrap",
-                      display: "inline-block",
-                    }}
-                  >
-                    <MediaQuery minWidth={breakpoints.minSmallDevice}>
-                      <div
-                        style={{
-                          whiteSpace: "nowrap",
-                          display: "inline-block",
-                          marginRight: "1.5rem",
-                        }}
-                      >
-                        <IconFilter
-                          height="5px"
-                          width="5px"
-                          vertical_align="top"
-                          alternate_color="false"
-                        />
-                      </div>
-                    </MediaQuery>
-                    <span>
-                      {is_original_filter
-                        ? text_maker("add_filter")
-                        : text_maker("edit_filter")}
-                    </span>
-                  </div>
-                }
-                dropdown_a11y_txt={
-                  is_original_filter
-                    ? text_maker("add_filter")
-                    : text_maker("edit_filter")
-                }
-                opened_button_class_name={"btn-ib-light--reversed--with-icon"}
-                closed_button_class_name={"btn-ib-light--with-icon"}
-                dropdown_content_class_name="no-right"
-                dropdown_content={filter_content}
-              />
-            </div>
+            <DropdownMenu
+              dropdown_trigger_txt={
+                <div
+                  style={{
+                    textAlign: "start",
+                    whiteSpace: "nowrap",
+                    display: "inline-block",
+                  }}
+                >
+                  <MediaQuery minWidth={breakpoints.minSmallDevice}>
+                    <div
+                      style={{
+                        whiteSpace: "nowrap",
+                        display: "inline-block",
+                        marginRight: "1.5rem",
+                      }}
+                    >
+                      <IconFilter
+                        height="5px"
+                        width="5px"
+                        vertical_align="top"
+                        alternate_color="false"
+                      />
+                    </div>
+                  </MediaQuery>
+                  <span>
+                    {is_original_filter
+                      ? text_maker("add_filter")
+                      : text_maker("edit_filter")}
+                  </span>
+                </div>
+              }
+              dropdown_a11y_txt={
+                is_original_filter
+                  ? text_maker("add_filter")
+                  : text_maker("edit_filter")
+              }
+              opened_button_class_name={"btn-ib-light--reversed--with-icon"}
+              closed_button_class_name={"btn-ib-light--with-icon"}
+              dropdown_content_class_name="no-right"
+              dropdown_content={filter_content}
+            />
           )}
         </div>
         <Fragment>
@@ -385,17 +386,25 @@ export class Typeahead extends React.Component {
                               />
                             </li>
                             {needs_pagination_up_control && (
-                              <div>
+                              <li
+                                className={`${
+                                  0 === current_selected_index && "active"
+                                }`}
+                                aria-selected={0 === current_selected_index}
+                                ref={(ref) => {
+                                  this.menu_item_references[0] = ref;
+                                }}
+                                onClick={(e) => {
+                                  this.setState((prev_state) => ({
+                                    pagination_index:
+                                      prev_state.pagination_index - 1,
+                                  }));
+                                }}
+                              >
                                 <a
                                   key="rbt-menu-item-0"
                                   id="rbt-menu-item-0"
                                   className="rbt-menu-pagination-option dropdown-item "
-                                  onClick={(e) => {
-                                    this.setState((prev_state) => ({
-                                      pagination_index:
-                                        prev_state.pagination_index - 1,
-                                    }));
-                                  }}
                                 >
                                   <span className="aria-hidden">▲</span>
                                   <br />
@@ -404,7 +413,7 @@ export class Typeahead extends React.Component {
                                     args={{ page_size: pagination_size }}
                                   />
                                 </a>
-                              </div>
+                              </li>
                             )}
 
                             {_.flatMap(
@@ -448,17 +457,31 @@ export class Typeahead extends React.Component {
                               )
                             )}
                             {needs_pagination_down_control && (
-                              <li>
+                              <li
+                                className={`${
+                                  pagination_down_item_index ===
+                                    current_selected_index && "active"
+                                }`}
+                                aria-selected={
+                                  pagination_down_item_index ===
+                                  current_selected_index
+                                }
+                                ref={(ref) => {
+                                  this.menu_item_references[
+                                    pagination_down_item_index
+                                  ] = ref;
+                                }}
+                                onClick={(e) => {
+                                  this.setState((prev_state) => ({
+                                    pagination_index:
+                                      prev_state.pagination_index + 1,
+                                  }));
+                                }}
+                              >
                                 <a
                                   key={`rbt-menu-item-${pagination_down_item_index}`}
                                   id={`rbt-menu-item-${pagination_down_item_index}`}
                                   className="rbt-menu-pagination-option dropdown-item "
-                                  onClick={(e) => {
-                                    this.setState((prev_state) => ({
-                                      pagination_index:
-                                        prev_state.pagination_index + 1,
-                                    }));
-                                  }}
                                 >
                                   <TM
                                     k="paginate_next"
@@ -469,7 +492,25 @@ export class Typeahead extends React.Component {
                                 </a>
                               </li>
                             )}
-                            <li>
+                            <li
+                              className={`${
+                                pagination_down_item_index +
+                                  needs_pagination_down_control ===
+                                  current_selected_index && "active"
+                              }`}
+                              aria-selected={
+                                pagination_down_item_index +
+                                  needs_pagination_down_control ===
+                                current_selected_index
+                              }
+                              ref={(ref) => {
+                                this.menu_item_references[
+                                  pagination_down_item_index +
+                                    needs_pagination_down_control
+                                ] = ref;
+                              }}
+                              onClick={() => this.hide_menu()}
+                            >
                               <a
                                 key={`rbt-menu-item-${
                                   pagination_down_item_index + 1
@@ -478,7 +519,6 @@ export class Typeahead extends React.Component {
                                   pagination_down_item_index + 1
                                 }`}
                                 className="rbt-menu-close-menu-button dropdown-item"
-                                onClick={() => this.hide_menu()}
                               >
                                 {text_maker("close_menu")}
                               </a>
