@@ -16,8 +16,8 @@ import { ErrorBoundary } from "../core/ErrorBoundary.js";
 import { has_local_storage } from "../core/feature_detection.js";
 import { InsertRuntimeFooterLinks } from "../core/InsertRuntimeFooterLinks.js";
 import { ReactUnmounter } from "../core/NavComponents.js";
-import { SurveyPopup } from "../core/SurveyPopup.js";
 import { TooltipActivator } from "../glossary/TooltipActivator.js";
+import { SurveyPopup } from "../Survey/SurveyPopup.js";
 
 import { app_reducer } from "./AppState.js";
 
@@ -105,6 +105,10 @@ const FootnoteInventory = retrying_react_lazy(() =>
   import(
     /* webpackChunkName: "FootnoteInventory" */ "../models/footnotes/FootnoteInventory.js"
   )
+);
+
+const Survey = retrying_react_lazy(() =>
+  import(/* webpackChunkName: "Survey" */ "../Survey/Survey.js")
 );
 
 const store = createStore(app_reducer);
@@ -254,6 +258,7 @@ export class App extends React.Component {
                     component={TreeMap}
                   />
                 )}
+                <Route path="/survey" component={Survey} />
                 {window.is_a11y_mode && (
                   <Route
                     path="/start/:no_basic_equiv?"

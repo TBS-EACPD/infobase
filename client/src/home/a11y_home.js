@@ -105,18 +105,6 @@ const Home = (props) => {
 
         <section>
           <h3>
-            <button
-              className="btn btn-ib-primary"
-              onClick={() => toggleSurvey()}
-            >
-              <TM k="survey_link_text" />
-            </button>
-          </h3>
-          <TM k="survey_home_desc" />
-        </section>
-
-        <section>
-          <h3>
             <TM k="featured_data_title" />
           </h3>
           <ul>
