@@ -1,13 +1,22 @@
-
 import { Gov, Dept, CRSO, Program } from "../organizational_entities.js";
 import { result_docs_in_tabling_order } from "../results.js";
-import { create_text_maker } from "../text.js";
+import { create_text_maker, run_template } from "../text.js";
 import { actual_to_planned_gap_year, fiscal_year_to_year } from "../years.js";
 
 import text from "./dynamic_footnotes.yaml";
 
 const all_subject_classes = [Gov, Dept, CRSO, Program];
 const text_maker = create_text_maker(text);
+
+// late DRR resources (FTE only) can happen pre-DRR if the PA tabling is early...
+// list late orgs in this mock results doc object to get the requisite footnotes showing up
+// in the meantime
+const PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE = {
+  late_resources_orgs: [1],
+  doc_type: "drr",
+  year: run_template("{{pa_last_year}}"),
+  late_results_orgs: [],
+};
 
 const expand_dept_cr_and_programs = (dept) => [
   dept,
@@ -32,11 +41,32 @@ const get_dynamic_footnotes = () => {
   const late_result_or_resource_footnotes = _.flatMap(
     ["results", "resources"],
     (result_or_resource) => {
-      const late_org_property = `late_${result_or_resource}_orgs`;
+      const get_topic_keys_for_doc_type = (doc_type) => {
+        if (result_or_resource === "results") {
+          return [`${_.toUpper(doc_type)}_RESULTS`];
+        } else {
+          if (doc_type === "dp") {
+            return ["PLANNED_EXP", "DP_EXP", "PLANNED_FTE", "DP_FTE"];
+          } else if (doc_type === "drr") {
+            return ["FTE", "DRR_FTE"];
+          }
+        }
+      };
 
+      const get_text_key_for_doc_type_and_level = (doc_type, level) => {
+        const warning_topic =
+          result_or_resource === "results"
+            ? "results"
+            : `${doc_type === "dp" ? "planned" : "actual"}_resources`;
+
+        return `late_${warning_topic}_warning_${level}`;
+      };
+
+      const late_org_property = `late_${result_or_resource}_orgs`;
       const docs_with_late_orgs = _.chain(result_docs_in_tabling_order)
         .clone() // ...reverse mutates, clone first!
         .reverse()
+        .concat(PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE)
         .filter((doc) => doc[late_org_property].length > 0)
         .value();
 
@@ -44,12 +74,9 @@ const get_dynamic_footnotes = () => {
         docs_with_late_orgs,
         ({ [late_org_property]: late_orgs, doc_type, year }) => ({
           subject: Gov,
-          topic_keys:
-            result_or_resource === "resources"
-              ? ["PLANNED_EXP", "DP_EXP"]
-              : [`${_.toUpper(doc_type)}_RESULTS`],
+          topic_keys: get_topic_keys_for_doc_type(doc_type),
           text: `<p>
-            ${text_maker(`late_${result_or_resource}_warning_gov`, {
+            ${text_maker(get_text_key_for_doc_type_and_level(doc_type, "gov"), {
               result_doc_name: text_maker(`${doc_type}_name`, { year }),
             })}
             </p>
@@ -70,20 +97,17 @@ const get_dynamic_footnotes = () => {
           _.chain(late_orgs)
             .map(Dept.lookup)
             .flatMap(expand_dept_cr_and_programs)
-            .map(
-              (subject) =>
-                actual_to_planned_gap_year && {
-                  subject,
-                  topic_keys: [`${_.toUpper(doc_type)}_RESULTS`],
-                  text: text_maker(
-                    `late_${result_or_resource}_warning_${subject.level}`,
-                    {
-                      result_doc_name: text_maker(`${doc_type}_name`, { year }),
-                    }
-                  ),
-                  year1: fiscal_year_to_year(year),
+            .map((subject) => ({
+              subject,
+              topic_keys: get_topic_keys_for_doc_type(doc_type),
+              text: text_maker(
+                get_text_key_for_doc_type_and_level(doc_type, subject.level),
+                {
+                  result_doc_name: text_maker(`${doc_type}_name`, { year }),
                 }
-            )
+              ),
+              year1: fiscal_year_to_year(year),
+            }))
             .value()
         )
         .value();

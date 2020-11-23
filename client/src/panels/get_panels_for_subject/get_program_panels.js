@@ -8,7 +8,7 @@ import {
   // shared gov, dept, crso, program
   declare_results_key_concepts_panel,
   declare_late_results_warning_panel,
-  declare_late_resources_panel,
+  declare_late_planned_resources_panel,
 
   // shared dept, crso, program, tag
   declare_profile_panel,
@@ -45,7 +45,7 @@ export const get_program_panels = (subject) =>
       declare_program_fed_structure_panel(),
     ],
     financial: [
-      declare_late_resources_panel(),
+      declare_late_planned_resources_panel(),
       declare_dead_program_warning_panel(),
       declare_financial_key_concepts_panel(),
       declare_welcome_mat_panel(),
