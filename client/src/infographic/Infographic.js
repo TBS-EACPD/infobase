@@ -376,27 +376,23 @@ const Infographic = ({
   } else if (!bubble_id) {
     redirect_to_intro(subject);
   } else if (options) {
-    (() => {
-      // a bit hacky, but try to parse panel, if it throws error, then redirect
-      try {
-        SafeJSURL.parse(options);
-      } catch (err) {
-        get_panels_for_subject(subject).then((panels_for_subj) => {
-          const bubbles_for_subj = _.keys(panels_for_subj);
+    // a bit hacky, but try to parse panel, if it throws error, then redirect
+    try {
+      SafeJSURL.parse(options);
+    } catch (err) {
+      get_panels_for_subject(subject).then((panels_for_subj) => {
+        const bubbles_for_subj = _.keys(panels_for_subj);
 
-          // Everything matches except panel, redirect to its infograph page
-          if (_.includes(bubbles_for_subj, bubble_id)) {
-            set_redirect_msg("The panel part of the link is invalid");
-            window.location.replace(
-              infograph_href_template(subject, bubble_id)
-            );
-            window.location.reload();
-          } else {
-            redirect_to_intro(subject);
-          }
-        });
-      }
-    })();
+        // Everything matches except panel, redirect to its infograph page
+        if (_.includes(bubbles_for_subj, bubble_id)) {
+          set_redirect_msg("The panel part of the link is invalid");
+          window.location.replace(infograph_href_template(subject, bubble_id));
+          window.location.reload();
+        } else {
+          redirect_to_intro(subject);
+        }
+      });
+    }
   }
   if (is_fake_infographic(subject)) {
     const subject_parent = (() => {
