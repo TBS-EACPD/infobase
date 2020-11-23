@@ -66,7 +66,6 @@ class ErrorBoundary extends React.Component {
     const { children } = this.props;
     const { error, testing_for_stale_client } = this.state;
     const redirected_msg = sessionStorage.getItem("redirected_msg");
-    console.log(redirected_msg);
 
     if (_.isNull(error)) {
       return children;
