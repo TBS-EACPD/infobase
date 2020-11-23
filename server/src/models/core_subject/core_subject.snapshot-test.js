@@ -53,7 +53,6 @@ query IgocTestQuery ($lang: String!){
       description
     
       dp_url
-      qfr_url
       eval_url
       website_url
   
