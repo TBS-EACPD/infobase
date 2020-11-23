@@ -9,7 +9,7 @@ export class Status extends React.Component {
     silenced: false,
     debounced: false,
   };
-  debouncedStateUpdate = _.debounce(() => {
+  debounceStateUpdate = _.debounce(() => {
     const { is_in_focus } = this.props;
     const { debounced } = this.state;
 
@@ -31,7 +31,9 @@ export class Status extends React.Component {
       page_range_start,
       page_range_end,
     } = this.props;
-    const { silenced, debounce } = this.state;
+    const { debounced } = this.state;
+
+    this.debounceStateUpdate();
 
     const result =
       total_matching_results == 1
@@ -44,20 +46,32 @@ export class Status extends React.Component {
       } else if (total_matching_results === 0) {
         return text_maker("no_matches_found");
       } else {
-        return text_maker("num_results_showing", {
-          total_matching_results,
-          result,
-          current_selected,
-          page_range_end,
-          page_range_start,
-        });
+        if (current_selected_index >= 0) {
+          return text_maker("num_results_showing_with_selected", {
+            total_matching_results,
+            result,
+            current_selected,
+            current_selected_index: current_selected_index + 1,
+            page_range_end,
+            page_range_start,
+          });
+        } else {
+          return text_maker("num_results_showing", {
+            total_matching_results,
+            result,
+            current_selected,
+            current_selected_index,
+            page_range_end,
+            page_range_start,
+          });
+        }
       }
     })();
 
     return (
       <div className="sr-only" style={{ position: "absolute" }}>
         <div role="status" aria-atomic="true" aria-live="polite">
-          {!silenced && debounce ? content : ""}
+          {debounced ? content : ""}
         </div>
       </div>
     );

@@ -325,17 +325,20 @@
       }
     }
   
-    & > div > button {
-      padding: 3px 40px;
-      font-size: 1.4em;
-      line-height: 1.8em;
-      cursor: pointer;
-      white-space: normal;
-      color: $linkColor;
+    & > li {	
+      padding: 3px 20px;	
+      font-size: 1.4em;	
+      line-height: 1.8em;	
+      cursor: pointer;	
   
-      &:not(:first-child) {
-        border-top: 1px solid $separatorColor;
-      }
+      &:not(:first-child) {	
+        border-top: 1px solid $separatorColor;	
+      }	
+  
+      & > a {	
+        white-space: normal;	
+        color: $linkColor;	
+      }	
     }
   }
   

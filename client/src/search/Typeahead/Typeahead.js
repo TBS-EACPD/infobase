@@ -1,29 +1,34 @@
+import { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
-import { DropdownMenu } from "src/components/index.js";
+import {
+  DropdownMenu,
+  create_text_maker_component,
+} from "src/components/index.js";
 
 import { log_standard_event } from "../../core/analytics.js";
 import { breakpoints } from "../../core/breakpoint_defs.js";
 
 import { IconFilter } from "../../icons/icons.js";
 
-import { create_text_maker } from "../../models/text.js";
 import { get_static_url } from "../../request_utils.js";
 
 import { InfoBaseHighlighter } from "../search_utils.js";
 
-import { TypeaheadMenu } from "./TypeaheadMenu.js";
+import { Status } from "./Status.js";
 
 import text from "./Typeahead.yaml";
 
 import "./Typeahead.scss";
 
-const text_maker = create_text_maker(text);
+const { text_maker, TM } = create_text_maker_component(text);
 
 export class Typeahead extends React.Component {
   state = {
     search_text: "",
     can_show_menu: false,
+    current_selected_index: -1,
+    pagination_index: 0,
   };
 
   constructor(props) {
@@ -31,17 +36,22 @@ export class Typeahead extends React.Component {
 
     this.typeaheadRef = React.createRef();
     this.rbtRef = React.createRef();
-    this.firstMenuItemRef = React.createRef();
 
     this.menuId = _.uniqueId("rbt_menu_id_");
   }
+
+  menu_item_references = {};
 
   on_select_item = (selected) => {
     const { onSelect } = this.props;
 
     const anything_selected = !_.isEmpty(selected);
     if (anything_selected) {
-      this.setState({ search_text: "" });
+      this.setState({
+        search_text: "",
+        pagination_index: 0,
+        current_selected_index: -1,
+      });
 
       if (_.isFunction(onSelect)) {
         onSelect(selected.data);
@@ -55,16 +65,78 @@ export class Typeahead extends React.Component {
     }
   };
 
-  handle_key_down = (e) => {
-    if (e.keyCode === 13) {
+  handle_up_arrow = (e, show_menu) => {
+    e.preventDefault();
+    const { current_selected_index } = this.state;
+    if (show_menu && current_selected_index !== -1) {
+      this.setState({ current_selected_index: current_selected_index - 1 });
+    }
+  };
+
+  handle_down_arrow = (
+    e,
+    show_menu,
+    paginated_results,
+    needs_pagination_up_control,
+    needs_pagination_down_control
+  ) => {
+    e.preventDefault();
+    const { current_selected_index } = this.state;
+    const num_menu_items =
+      paginated_results.length +
+      needs_pagination_up_control +
+      needs_pagination_down_control;
+    if (show_menu && current_selected_index !== num_menu_items) {
+      this.setState({ current_selected_index: current_selected_index + 1 });
+    }
+  };
+
+  handle_enter_key = (e, show_menu) => {
+    if (show_menu) {
       e.preventDefault();
-      this.setState({ can_show_menu: true }, () => {
-        this.firstMenuItemRef.current && this.firstMenuItemRef.current.focus();
-      });
+      const { current_selected_index } = this.state;
+      current_selected_index >= 0 &&
+        this.menu_item_references[current_selected_index].click();
+    }
+  };
+
+  handle_key_down = (
+    e,
+    show_menu,
+    paginated_results,
+    needs_pagination_up_control,
+    needs_pagination_down_control
+  ) => {
+    switch (e.keyCode) {
+      case 38: //up arrow
+        this.handle_up_arrow(e, show_menu);
+        break;
+      case 40: //down arrow
+        this.handle_down_arrow(
+          e,
+          show_menu,
+          paginated_results,
+          needs_pagination_up_control,
+          needs_pagination_down_control
+        );
+        break;
+      case 13: //enter key
+        this.handle_enter_key(e, show_menu);
+        break;
     }
   };
 
   hide_menu = () => this.setState({ can_show_menu: false });
+
+  componentDidUpdate(prev_props, prev_state) {
+    const { current_selected_index } = this.state;
+    if (
+      current_selected_index !== prev_state.current_selected_index &&
+      current_selected_index !== -1
+    ) {
+      this.menu_item_references[current_selected_index].focus();
+    }
+  }
 
   render() {
     const {
@@ -77,7 +149,12 @@ export class Typeahead extends React.Component {
       is_original_filter,
     } = this.props;
 
-    const { search_text, can_show_menu } = this.state;
+    const {
+      search_text,
+      can_show_menu,
+      pagination_index,
+      current_selected_index,
+    } = this.state;
 
     const debounceOnNewQuery = _.debounce((query) => {
       onNewQuery();
@@ -106,10 +183,6 @@ export class Typeahead extends React.Component {
     // (ie. that get through matches_query) needs to actually match the number of lis ultimately rendered, can't
     // just insert the pagination items when renderMenu is called
     const all_options = [
-      {
-        pagination_placeholder: true,
-        paginate_direction: "previous",
-      },
       ..._.flatMap(search_configs, (search_config, ix) =>
         _.map(search_config.get_data(), (data) => ({
           data,
@@ -126,22 +199,10 @@ export class Typeahead extends React.Component {
           config_group_index: ix,
         }))
       ),
-      {
-        pagination_placeholder: true,
-        paginate_direction: "next",
-      },
     ];
 
     const matches_query = (option) => {
       const { search_text } = this.state;
-      // whether the pagination buttons are genuinely needed will be determined in the typeaheadmenu
-      if (option.pagination_placeholder) {
-        if (option.paginate_direction === "previous") {
-          return true;
-        } else if (option.paginate_direction === "next") {
-          return true;
-        }
-      }
 
       const group_filter =
         config_groups[option.config_group_index].group_filter;
@@ -150,27 +211,48 @@ export class Typeahead extends React.Component {
       return query_matches;
     };
 
-    const queried_results = _.filter(
-      all_options,
-      (res) => matches_query(res) && !_.isUndefined(res.config_group_index)
-    );
-
-    const menu_props = {
-      queried_results,
-      pagination_size,
-      search_text,
-      config_groups,
-      on_select_item: this.on_select_item,
-      hide_menu: this.hide_menu,
-    };
+    const queried_results = _.filter(all_options, (res) => matches_query(res));
 
     const show_menu = search_text.length >= min_length && can_show_menu;
 
-    const screen_reader_status_text = show_menu
-      ? text_maker("num_results_showing", {
-          num_results: queried_results.length,
-        })
-      : text_maker("num_chars_needed", { min_length });
+    const paginate_results = (option, index) => {
+      const page_start = pagination_size * pagination_index;
+      const page_end = page_start + pagination_size;
+      const is_on_displayed_page = !(index < page_start || index >= page_end);
+
+      return is_on_displayed_page;
+    };
+
+    const paginated_results = _.filter(
+      queried_results,
+      (queried_result, index) => paginate_results(queried_result, index)
+    );
+
+    const page_range_start = pagination_index * pagination_size + 1;
+    const page_range_end = page_range_start + paginated_results.length - 1;
+
+    const total_matching_results = queried_results.length;
+
+    const remaining_results =
+      total_matching_results - (pagination_index + 1) * pagination_size;
+    const next_page_size =
+      remaining_results < pagination_size ? remaining_results : pagination_size;
+
+    const needs_pagination_up_control = pagination_index > 0;
+    const needs_pagination_down_control =
+      page_range_end < total_matching_results;
+
+    const status_props = {
+      current_selected:
+        this.menu_item_references[current_selected_index] &&
+        this.menu_item_references[current_selected_index].innerText,
+      current_selected_index,
+      min_length,
+      total_matching_results,
+      page_range_start,
+      page_range_end,
+      query_length: search_text.length,
+    };
 
     return (
       <div className="rbt" style={{ position: "relative" }} ref={this.rbtRef}>
@@ -194,21 +276,19 @@ export class Typeahead extends React.Component {
             placeholder={placeholder}
             onChange={update_search_text}
             ref={this.typeaheadRef}
-            onKeyDown={this.handleKeyDown}
             value={search_text}
             onFocus={() => this.setState({ can_show_menu: true })}
-            onKeyDown={this.handle_key_down}
+            onKeyDown={(e) =>
+              this.handle_key_down(
+                e,
+                show_menu,
+                paginated_results,
+                needs_pagination_up_control,
+                needs_pagination_down_control
+              )
+            }
           />
-          <div
-            className="sr-only"
-            aria-live="polite"
-            aria-atomic="true"
-            role="status"
-            aria-label={screen_reader_status_text}
-            tabIndex="-1"
-          >
-            {search_text}
-          </div>
+
           {filter_content && (
             <div style={{ order: 2 }}>
               <DropdownMenu
@@ -256,14 +336,162 @@ export class Typeahead extends React.Component {
             </div>
           )}
         </div>
-        {show_menu && (
-          <TypeaheadMenu
-            {...menu_props}
-            rbtRef={this.rbtRef}
-            ref={this.firstMenuItemRef}
-            menuId={this.menuId}
-          />
-        )}
+        <Fragment>
+          <Status {...status_props} />
+          {show_menu &&
+            (() => {
+              if (_.isEmpty(paginated_results)) {
+                return (
+                  <ul
+                    className="rbt-menu dropdown-menu show"
+                    id={this.menuId}
+                    role="listbox"
+                  >
+                    <li className="dropdown-header">
+                      {text_maker("no_matches_found")}
+                    </li>
+                  </ul>
+                );
+              } else {
+                return (
+                  <ul
+                    className="rbt-menu dropdown-menu show"
+                    id={this.menuId}
+                    role="listbox"
+                  >
+                    {_.chain(paginated_results)
+                      .groupBy("config_group_index")
+                      .thru((grouped_results) => {
+                        const pagination_down_item_index = needs_pagination_up_control
+                          ? paginated_results.length + 1
+                          : paginated_results.length;
+
+                        let index_key_counter = needs_pagination_up_control
+                          ? 1
+                          : 0;
+                        return (
+                          <Fragment>
+                            <li
+                              key={`header-pagination-info`}
+                              className="dropdown-header"
+                            >
+                              <TM
+                                k="paginate_status"
+                                args={{
+                                  page_range_start,
+                                  page_range_end,
+                                  total_matching_results,
+                                }}
+                              />
+                            </li>
+                            {needs_pagination_up_control && (
+                              <div>
+                                <a
+                                  key="rbt-menu-item-0"
+                                  id="rbt-menu-item-0"
+                                  className="rbt-menu-pagination-option dropdown-item "
+                                  onClick={(e) => {
+                                    this.setState((prev_state) => ({
+                                      pagination_index:
+                                        prev_state.pagination_index - 1,
+                                    }));
+                                  }}
+                                >
+                                  <span className="aria-hidden">▲</span>
+                                  <br />
+                                  <TM
+                                    k="paginate_previous"
+                                    args={{ page_size: pagination_size }}
+                                  />
+                                </a>
+                              </div>
+                            )}
+
+                            {_.flatMap(
+                              grouped_results,
+                              (results, group_index) => (
+                                <Fragment key={`header-${group_index}`}>
+                                  <li className="dropdown-header">
+                                    {config_groups[group_index].group_header}
+                                  </li>
+                                  {_.map(results, (result) => {
+                                    const index = index_key_counter++;
+                                    return (
+                                      <li
+                                        key={`rbt-menu-item-${index}`}
+                                        className={`${
+                                          index === current_selected_index &&
+                                          "active"
+                                        }`}
+                                        aria-selected={
+                                          index === current_selected_index
+                                        }
+                                        ref={(ref) => {
+                                          this.menu_item_references[
+                                            index
+                                          ] = ref;
+                                        }}
+                                        onClick={() =>
+                                          this.on_select_item(result)
+                                        }
+                                      >
+                                        <a
+                                          id={`rbt-menu-item-${index}`}
+                                          className="dropdown-item list-group-ite"
+                                        >
+                                          {result.menu_content(search_text)}
+                                        </a>
+                                      </li>
+                                    );
+                                  })}
+                                </Fragment>
+                              )
+                            )}
+                            {needs_pagination_down_control && (
+                              <li>
+                                <a
+                                  key={`rbt-menu-item-${pagination_down_item_index}`}
+                                  id={`rbt-menu-item-${pagination_down_item_index}`}
+                                  className="rbt-menu-pagination-option dropdown-item "
+                                  onClick={(e) => {
+                                    this.setState((prev_state) => ({
+                                      pagination_index:
+                                        prev_state.pagination_index + 1,
+                                    }));
+                                  }}
+                                >
+                                  <TM
+                                    k="paginate_next"
+                                    args={{ next_page_size: next_page_size }}
+                                  />
+                                  <br />
+                                  <span className="aria-hidden">▼</span>
+                                </a>
+                              </li>
+                            )}
+                            <li>
+                              <a
+                                key={`rbt-menu-item-${
+                                  pagination_down_item_index + 1
+                                }`}
+                                id={`rbt-menu-item-${
+                                  pagination_down_item_index + 1
+                                }`}
+                                className="rbt-menu-close-menu-button dropdown-item"
+                                onClick={() => this.hide_menu()}
+                              >
+                                {text_maker("close_menu")}
+                              </a>
+                            </li>
+                          </Fragment>
+                        );
+                      })
+                      .value()}
+                  </ul>
+                );
+              }
+            })()}
+        </Fragment>
       </div>
     );
   }
