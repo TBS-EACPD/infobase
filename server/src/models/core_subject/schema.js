@@ -46,7 +46,6 @@ const schema = `
     programs: [Program]
     crsos: [Crso]
 
-    dp_url: String
     eval_url: String
     website_url: String
 
@@ -222,8 +221,7 @@ export default function ({ models, loaders, services }) {
       ministers: () => ["TODO"],
       inst_form: () => "TODO",
 
-      dp_url: (org, _args, { lang }) => org[`dp_url_${lang}`],
-      eval_url: (org, _args, { lang }) => org[`dp_url_${lang}`],
+      eval_url: (org, _args, { lang }) => org[`eval_url_${lang}`],
       website_url: (org, _args, { lang }) => org[`dept_website_url_${lang}`],
 
       programs: (org) =>
