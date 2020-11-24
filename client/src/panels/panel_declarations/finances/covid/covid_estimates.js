@@ -489,7 +489,7 @@ export const declare_covid_estimates_panel = () =>
                 />
                 <TM
                   k={"covid_estimates_above_tab_footnote_list"}
-                  className="small-panel-text"
+                  style={{ lineHeight: "normal" }}
                 />
               </div>
             </div>
