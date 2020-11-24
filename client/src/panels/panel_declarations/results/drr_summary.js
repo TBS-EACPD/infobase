@@ -279,7 +279,7 @@ class PercentageViz extends React.Component {
             </div>
           </div>
           <div className="fcol-md-1 fcol-xs-0" />
-          <div className="fcol-md-6 fcol-xs-12 medium_panel_text">
+          <div className="fcol-md-6 fcol-xs-12 medium-panel-text">
             <WrappedNivoPie
               data={graph_data}
               graph_height="300px"
@@ -324,12 +324,12 @@ export const DrrSummary = ({
   return (
     <Fragment>
       <div className="frow middle-xs between-md">
-        <div className="fcol-xs-12 medium_panel_text">
+        <div className="fcol-xs-12 medium-panel-text">
           <TM k="drr_summary_text_intro" args={summary_text_args} />
         </div>
       </div>
       <div className="frow middle-xs between-md">
-        <div className="fcol-md-7 fcol-xs-12 medium_panel_text">
+        <div className="fcol-md-7 fcol-xs-12 medium-panel-text">
           <div style={{ padding: "10px" }}>
             <TM k="result_status_explanation" />
             <table>

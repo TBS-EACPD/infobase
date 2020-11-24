@@ -17,7 +17,7 @@ export default class Contact extends React.Component {
         description={text_maker("contact_us_intro")}
         route_key="_contact"
       >
-        <div className="medium_panel_text text-only-page-root">
+        <div className="medium-panel-text text-only-page-root">
           <TM tmf={text_maker} el="h1" k="contact_us_title" />
           <TM tmf={text_maker} el="div" k="contact_us_intro" />
           <TM tmf={text_maker} el="h2" k="feedback_title" />

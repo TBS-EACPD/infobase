@@ -137,7 +137,7 @@ const IgocExplorer = ({ match }) => {
           <TM k="igoc" />
         </h1>
       </div>
-      <div className="medium_panel_text">
+      <div className="medium-panel-text">
         <div style={{ marginBottom: "1.5em" }}>
           <TM k="about_inventory" />
         </div>

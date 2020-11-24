@@ -35,7 +35,7 @@ export default class About extends React.Component {
         description={text_maker("about_intro_section")}
         route_key="_about"
       >
-        <div className="medium_panel_text text-only-page-root">
+        <div className="medium-panel-text text-only-page-root">
           <TM tmf={text_maker} el="h1" k="about_page_title" />
           <TM tmf={text_maker} el="div" k="about_intro_section" />
           <LabeledTable

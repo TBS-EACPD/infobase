@@ -109,7 +109,7 @@ class HistTPTypes extends React.Component {
     return (
       <div className="frow middle-xs">
         <div className={`fcol-md-${text_split}`}>
-          <div className="medium_panel_text">{text}</div>
+          <div className="medium-panel-text">{text}</div>
         </div>
         <div className={`fcol-md-${12 - text_split}`}>{content}</div>
       </div>

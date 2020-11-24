@@ -130,7 +130,7 @@ export const declare_internal_services_panel = () =>
 
         const to_render = (
           <div>
-            <div className="medium_panel_text" style={{ marginBottom: "15px" }}>
+            <div className="medium-panel-text" style={{ marginBottom: "15px" }}>
               <TM
                 k="internal_service_panel_text"
                 args={{

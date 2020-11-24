@@ -241,7 +241,7 @@ export const declare_spend_by_so_hist_panel = () =>
             title={text_maker("dept_fin_spend_by_so_hist_title")}
             {...{ sources, footnotes }}
           >
-            <div className="medium_panel_text">
+            <div className="medium-panel-text">
               <TM k="dept_fin_spend_by_so_hist_text" args={text_calculations} />
             </div>
             <div>{graph_content}</div>

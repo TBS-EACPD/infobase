@@ -129,7 +129,7 @@ class Panel_ extends React.Component {
 /*
   shorthand for 
     <InfographicPanel>
-      <div className="medium_panel_text">
+      <div className="medium-panel-text">
         {children}
       </div>
     </InfographicPanel>
@@ -137,7 +137,7 @@ class Panel_ extends React.Component {
 export const TextPanel = (props) => {
   const { children } = props;
   const filtered_props = _.omit(props, "children");
-  const new_children = <div className="medium_panel_text">{children}</div>;
+  const new_children = <div className="medium-panel-text">{children}</div>;
   return (
     <InfographicPanel {...filtered_props}>{new_children}</InfographicPanel>
   );
@@ -194,7 +194,7 @@ const StdPanel = ({ children, containerAlign, ...panelProps }) => {
         <div
           className={classNames(
             `fcol-xs-12 fcol-md-${size}`,
-            isText && "medium_panel_text",
+            isText && "medium-panel-text",
             !_.isUndefined(extraClasses) && extraClasses
           )}
           style={isGraph ? { position: "relative" } : null}

@@ -63,7 +63,7 @@ export default class FAQ extends React.Component {
       >
         <TM tmf={text_maker} el="h1" k="faq_page_title" />
         <ScrollToTargetContainer target_id={selected_qa_key}>
-          <div className="medium_panel_text">
+          <div className="medium-panel-text">
             <FAQIndex />
             <FAQTable />
           </div>

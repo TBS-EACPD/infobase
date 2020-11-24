@@ -547,7 +547,7 @@ export const declare_detailed_program_spending_split_panel = () =>
             title={text_maker("detailed_program_spending_split_title")}
             {...{ sources, footnotes: [...footnotes, ...program_footnotes] }}
           >
-            <div className="medium_panel_text">
+            <div className="medium-panel-text">
               <TM
                 k={"dept_historical_program_spending_text"}
                 args={text_calculations}

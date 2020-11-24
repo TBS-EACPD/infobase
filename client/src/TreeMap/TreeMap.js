@@ -60,7 +60,7 @@ function generate_infograph_href(d, data_area) {
 
 const GapYearWarning = () => (
   <div
-    className="alert alert-info alert-no-symbol alert--is-bordered medium_panel_text"
+    className="alert alert-info alert-no-symbol alert--is-bordered medium-panel-text"
     style={{ textAlign: "center" }}
   >
     <TM k="gap_year_warning" args={{ gap_year: actual_to_planned_gap_year }} />

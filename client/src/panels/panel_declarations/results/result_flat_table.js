@@ -292,7 +292,7 @@ class ResultsTable extends React.Component {
 
       return (
         <div>
-          <div className="medium_panel_text">
+          <div className="medium-panel-text">
             <TM
               k="result_flat_table_text"
               args={{

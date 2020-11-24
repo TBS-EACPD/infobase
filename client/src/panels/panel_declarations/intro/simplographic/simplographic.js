@@ -164,7 +164,7 @@ export const declare_simplographic_panel = () =>
 
         return (
           <InfographicPanel title={text_maker("simplographic_title")}>
-            <div className="medium_panel_text">
+            <div className="medium-panel-text">
               <Row
                 top_border
                 img_src="money.svg"
