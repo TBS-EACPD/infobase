@@ -237,7 +237,7 @@ const ByDepartmentTab = ({ panel_args }) => {
   );
 };
 
-const get_initative_rows = (subject) => {
+const get_initiative_rows = (subject) => {
   const initiatives =
     subject.level === "gov"
       ? CovidInitiatives.get_all()
@@ -275,7 +275,7 @@ const get_initative_rows = (subject) => {
 const ByInitiativeTab = ({ panel_args }) => {
   const { subject } = panel_args;
 
-  const initiative_rows = get_initative_rows(subject);
+  const initiative_rows = get_initiative_rows(subject);
 
   const column_configs = {
     initiative_name: {
