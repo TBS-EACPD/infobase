@@ -200,6 +200,7 @@ const ByDepartmentTab = ({ panel_args }) => {
           largest_dept_name: Dept.lookup(largest_dept_id).name,
           largest_dept_auth,
         }}
+        className="medium_panel_text"
       />
       <SmartDisplayTable
         data={_.map(all_dept_estimates, (row) =>
@@ -299,6 +300,7 @@ const ByInitiativeTab = ({ panel_args }) => {
           largest_initiative_name,
           largest_initiative_auth,
         }}
+        className="medium_panel_text"
       />
       <SmartDisplayTable
         data={_.map(initiative_rows, (row) =>
