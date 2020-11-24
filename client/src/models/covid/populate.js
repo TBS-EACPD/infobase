@@ -319,7 +319,7 @@ export const api_load_covid_initiatives = (subject) => {
         Object
       );
 
-      // TODO: as applicable, roll up initative level estimates to populate the CovidEstimates using this same data, update _subject_ids_with_loaded_estimates
+      // TODO: as applicable, roll up initiative level estimates to populate the CovidEstimates using this same data, update _subject_ids_with_loaded_estimates
       // ... hmm, if I get rid of the need to have _subject_ids_with_loaded_estimates in both scopes then I could split these back out in to their own modules
 
       return Promise.resolve();

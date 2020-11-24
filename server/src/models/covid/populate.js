@@ -11,8 +11,8 @@ export default async function ({ models }) {
     .map((row) => new CovidMeasure(row))
     .value();
 
-  const covid_initative_estimates_rows = _.map(
-    get_standard_csv_file_rows("covid_initative_estimates.csv"),
+  const covid_initiative_estimates_rows = _.map(
+    get_standard_csv_file_rows("covid_initiative_estimates.csv"),
     (row) => ({
       ...row,
       covid_measure_ids: _.chain(row.covid_measure_ids)
@@ -22,7 +22,7 @@ export default async function ({ models }) {
         .value(),
     })
   );
-  const covid_estimates_records = _.chain(covid_initative_estimates_rows)
+  const covid_estimates_records = _.chain(covid_initiative_estimates_rows)
     .groupBy("org_id")
     .flatMap((org_group, org_id) =>
       _.chain(org_group)
@@ -76,7 +76,7 @@ export default async function ({ models }) {
   )
     .map((row) => {
       const initiative_estimates_rows = _.filter(
-        covid_initative_estimates_rows,
+        covid_initiative_estimates_rows,
         ({ covid_initiative_id }) =>
           covid_initiative_id === row.covid_initiative_id
       );
