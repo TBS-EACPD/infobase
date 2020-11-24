@@ -29,11 +29,13 @@ covid_estimates_above_tab_text_dept:
 covid_estimates_above_tab_footnote_en:
   handlebars_partial: true
   text: These figures represent {{gl_tt "spending authorities" "AUTH"}} as outlined in the {{gl_tt "Estimates process" "EST_PROC"}} and do not represent {{gl_tt "actual expenditures" "EXP"}}.
-    _Any reallocation of existing authorities to the COVID-19 pandemic response are excluded._
+    Any reallocation of existing authorities to the COVID-19 pandemic response are excluded.
+    Further, these authorities represent only a portion of Canada’s COVID-19 Economic Response Plan, as certain measures do not require approval through the Estimates.
 covid_estimates_above_tab_footnote_fr:
   handlebars_partial: true
   text: Ces chiffres correspondent aux {{gl_tt "autorisations de dépenses" "AUTH"}} énoncées dans le {{gl_tt "processus budgétaire" "EST_PROC"}} et ne sont pas les {{gl_tt "dépenses réelles" "EXP"}}.
-    _Sont exclues toutes les réaffectations d'autorisations existantes à la réponse à la pandémie COVID-19._
+    Sont exclues toutes les réaffectations d'autorisations existantes à la réponse à la pandémie COVID-19.
+    De plus, ces autorisations ne représentent qu’une partie du plan d'intervention économique du Canada pour répondre à la COVID-19, puisque certaines mesures ne requièrent pas d’approbation par le biais d’un budget de dépenses.
 
 
 covid_estimates_summary_tab_label:
