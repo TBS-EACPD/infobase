@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 import { Redirect } from "react-router";
 
 import "./Infographic.scss";
@@ -325,113 +326,129 @@ class InfoGraph_ extends React.Component {
     });
   }
 }
-
-const set_redirect_msg = (msg) => sessionStorage.setItem("redirected_msg", msg);
-const redirect_to_intro = (subject) => {
-  set_redirect_msg(
-    "You're redirected to intro because the data area is invalid"
-  );
-  window.location.replace(infograph_href_template(subject, "intro"));
-  window.location.reload();
-};
-
 const is_fake_infographic = (subject) =>
   !_.isUndefined(subject.is_fake) && subject.is_fake;
-const Infographic = ({
-  match: {
-    params: { level, subject_id, active_bubble_id, options },
-  },
-}) => {
-  const is_level_valid = _.chain(Subject).keys().includes(level).value();
-  if (!is_level_valid) {
-    set_redirect_msg(
-      "The level of organization you tried to visit is invalid. We redirected you to homepage."
-    );
-    window.location.replace("#home");
-    window.location.reload();
-  }
-  const SubjectModel = Subject[level];
-  const subject = SubjectModel.lookup(subject_id);
-  const bubble_id = _.find(bubble_defs, { id: active_bubble_id })
-    ? active_bubble_id
-    : null;
+class _Infographic extends React.Component {
+  render() {
+    const {
+      match: {
+        params: { level, subject_id, active_bubble_id, options },
+      },
+      set_redirect,
+    } = this.props;
 
-  if (!subject) {
-    const parent_dept_code = _.split(subject_id, "-")[0];
-    const parent_dept = Dept.lookup(parent_dept_code);
-    if ((level === "program" || level === "crso") && parent_dept) {
-      set_redirect_msg(
-        `The ${text_maker(
-          level
-        )} you tried to visit is either dead or invalid. We redirected you to its parent department.`
+    const is_level_valid = _.chain(Subject).keys().includes(level).value();
+    if (!is_level_valid) {
+      set_redirect(
+        "home",
+        "The level of organization you tried to visit is invalid. We redirected you to homepage."
       );
-      window.location.replace(`#orgs/dept/${parent_dept.id}/infograph/intro`);
-    } else {
-      set_redirect_msg(
-        "The organization you tried to visit is invalid. We redirected you to homepage."
-      );
-      window.location.replace("#home");
     }
-    window.location.reload();
-  } else if (!bubble_id) {
-    redirect_to_intro(subject);
-  } else if (options) {
-    // a bit hacky, but try to parse panel, if it throws error, then redirect
-    try {
-      SafeJSURL.parse(options);
-    } catch (err) {
-      get_panels_for_subject(subject).then((panels_for_subj) => {
-        const bubbles_for_subj = _.keys(panels_for_subj);
+    const SubjectModel = Subject[level];
+    const subject = SubjectModel.lookup(subject_id);
+    const bubble_id = _.find(bubble_defs, { id: active_bubble_id })
+      ? active_bubble_id
+      : null;
 
-        // Everything matches except panel, redirect to its infograph page
-        if (_.includes(bubbles_for_subj, bubble_id)) {
-          set_redirect_msg("The panel part of the link is invalid");
-          window.location.replace(infograph_href_template(subject, bubble_id));
-          window.location.reload();
-        } else {
-          redirect_to_intro(subject);
-        }
-      });
-    }
-  }
-  if (is_fake_infographic(subject)) {
-    const subject_parent = (() => {
-      switch (level) {
-        case "program":
-          return subject.crso;
-        case "crso":
-          return subject.dept;
-        default:
-          return Gov;
+    if (!subject) {
+      const parent_dept_code = _.split(subject_id, "-")[0];
+      const parent_dept = Dept.lookup(parent_dept_code);
+      if ((level === "program" || level === "crso") && parent_dept) {
+        set_redirect(
+          "orgs/dept/${parent_dept.id}/infograph/intro",
+          `The ${text_maker(
+            level
+          )} you tried to visit is either dead or invalid. We redirected you to its parent department.`
+        );
+      } else {
+        /* eslint-disable no-debugger */
+        //debugger;
+        set_redirect(
+          "home",
+          "The organization you tried to visit is invalid. We redirected you to homepage."
+        );
+        return <Redirect to="/home" />;
       }
-    })();
+    } else if (!bubble_id) {
+      set_redirect(
+        infograph_href_template(subject, "intro"),
+        "You're redirected to intro because the data area is invalid"
+      );
+    } else if (options) {
+      // a bit hacky, but try to parse panel, if it throws error, then redirect
+      try {
+        SafeJSURL.parse(options);
+      } catch (err) {
+        get_panels_for_subject(subject).then((panels_for_subj) => {
+          const bubbles_for_subj = _.keys(panels_for_subj);
+
+          // Everything matches except panel, redirect to its infograph page
+          if (_.includes(bubbles_for_subj, bubble_id)) {
+            set_redirect(
+              infograph_href_template(subject, bubble_id),
+              "The panel part of the link is invalid"
+            );
+          } else {
+            set_redirect(
+              infograph_href_template(subject, "intro"),
+              "You're redirected to intro because the data area is invalid"
+            );
+          }
+        });
+      }
+    }
+    if (is_fake_infographic(subject)) {
+      const subject_parent = (() => {
+        switch (level) {
+          case "program":
+            return subject.crso;
+          case "crso":
+            return subject.dept;
+          default:
+            return Gov;
+        }
+      })();
+      return (
+        <Redirect
+          to={infograph_href_template(subject_parent, bubble_id, "/")}
+        />
+      );
+    }
+
+    const title = text_maker("infographic_for", { subject });
+    const desc_key = {
+      financial: "finance_infograph_desc_meta_attr",
+      people: "ppl_infograph_desc_meta_attr",
+      results: "results_infograph_desc_meta_attr",
+    }[bubble_id];
     return (
-      <Redirect to={infograph_href_template(subject_parent, bubble_id, "/")} />
+      <StandardRouteContainer
+        title={title}
+        breadcrumbs={[title]}
+        description={desc_key && text_maker(desc_key)}
+        route_key={sub_app_name}
+      >
+        <h1 dangerouslySetInnerHTML={{ __html: title }} />
+        <InfoGraph_
+          level={level}
+          subject={subject}
+          active_bubble_id={bubble_id}
+          options={options}
+        />
+      </StandardRouteContainer>
     );
   }
+}
 
-  const title = text_maker("infographic_for", { subject });
-  const desc_key = {
-    financial: "finance_infograph_desc_meta_attr",
-    people: "ppl_infograph_desc_meta_attr",
-    results: "results_infograph_desc_meta_attr",
-  }[bubble_id];
-  return (
-    <StandardRouteContainer
-      title={title}
-      breadcrumbs={[title]}
-      description={desc_key && text_maker(desc_key)}
-      route_key={sub_app_name}
-    >
-      <h1 dangerouslySetInnerHTML={{ __html: title }} />
-      <InfoGraph_
-        level={level}
-        subject={subject}
-        active_bubble_id={bubble_id}
-        options={options}
-      />
-    </StandardRouteContainer>
-  );
-};
-
+const mapDispatchToProps = (dispatch) => ({
+  set_redirect: (redirect_target, redirect_msg) =>
+    dispatch({
+      type: "set_redirect",
+      payload: {
+        redirect_target,
+        redirect_msg,
+      },
+    }),
+});
+const Infographic = connect(undefined, mapDispatchToProps)(_Infographic);
 export { Infographic as default };
