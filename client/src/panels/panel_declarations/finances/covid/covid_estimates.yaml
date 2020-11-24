@@ -38,12 +38,12 @@ covid_estimates_summary_tab_label:
 
 covid_estimates_summary_text_gov:
   transform: [handlebars,markdown]
-  en: This fiscal year, **govt_SupsA_total + govt_SupsB_total** in planned budgetary expenditures have been presented in the Estimates process in response to the COVID-19 pandemic.
+  en: This fiscal year (**year**), **govt_SupsA_total + govt_SupsB_total** in planned budgetary expenditures have been presented in the Estimates process in response to the COVID-19 pandemic.
     These authorities make up **((govt_SupsA_total + govt_SupsB_total)/govt_total_auth_2020-21 )*100%** of the total authorities presented in **year**. 
   fr: TODO
 covid_estimates_summary_text_dept:
   transform: [handlebars,markdown]
-  en: This fiscal year, **current_dept** has **current_dept_SupsA_total_auth + current_dept_SupsB_total_auth** in authorities has been made available through the Estimates process.
+  en: This fiscal year (**year**), **current_dept** has **current_dept_SupsA_total_auth + current_dept_SupsB_total_auth** in authorities, as made available through the Estimates process.
     These authorities make up **((current_dept_SupsA_total_auth + current_dept_SupsB_total_auth)/gov_total_SupsA+B)*100%** of the government’s planned spending in response to the global pandemic. 
   fr: TODO
 
