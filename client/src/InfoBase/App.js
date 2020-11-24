@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { Suspense } from "react";
-import { Provider } from "react-redux";
+import { connect, Provider } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { createStore } from "redux";
 
@@ -77,7 +77,7 @@ const Survey = retrying_react_lazy(() =>
 
 const store = createStore(app_reducer);
 
-export class App extends React.Component {
+class _App extends React.Component {
   constructor() {
     super();
     initialize_analytics();
@@ -116,6 +116,11 @@ export class App extends React.Component {
 
   render() {
     const { outage_msg, showSurvey, show_redirected_msg } = this.state;
+    const { redirect_target, redirect_msg } = this.props;
+    const store_redirect_target = store.getState().redirect_target;
+    if (store_redirect_target) {
+      return <Redirect to={`/${store_redirect_target}`} />;
+    }
     return (
       <div
         tabIndex={-1}
@@ -137,9 +142,9 @@ export class App extends React.Component {
                 }}
               />
             )}
-            {show_redirected_msg && (
+            {redirect_msg && (
               <HeaderNotification
-                text={sessionStorage.getItem("redirected_msg")}
+                text={redirect_msg}
                 hideNotification={() => {
                   sessionStorage.removeItem("redirected_msg");
                   this.setState({ show_redirected_msg: false });
@@ -252,3 +257,10 @@ export class App extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  redirect_target: state.redirect_target,
+  redirect_msg: state.redirect_msg,
+});
+
+export const App = connect(mapStateToProps)(_App);
