@@ -120,7 +120,7 @@ const SummaryTab = ({ panel_args }) => {
 
   return (
     <div className="frow middle-xs">
-      <div className="fcol-xs-12 fcol-md-6 medium_panel_text">
+      <div className="fcol-xs-12 fcol-md-6 medium-panel-text">
         <TM
           k={`covid_estimates_summary_text_${subject.level}`}
           args={{ ...panel_args, ...level_specific_text_args }}
@@ -200,7 +200,7 @@ const ByDepartmentTab = ({ panel_args }) => {
           largest_dept_name: Dept.lookup(largest_dept_id).name,
           largest_dept_auth,
         }}
-        className="medium_panel_text"
+        className="medium-panel-text"
       />
       <SmartDisplayTable
         data={_.map(all_dept_estimates, (row) =>
@@ -300,7 +300,7 @@ const ByInitiativeTab = ({ panel_args }) => {
           largest_initiative_name,
           largest_initiative_auth,
         }}
-        className="medium_panel_text"
+        className="medium-panel-text"
       />
       <SmartDisplayTable
         data={_.map(initiative_rows, (row) =>
@@ -477,10 +477,19 @@ export const declare_covid_estimates_panel = () =>
             }}
           >
             <div className="frow">
-              <div className="fcol-md-12 fcol-xs-12 medium_panel_text text">
+              <div className="fcol-md-12 fcol-xs-12 medium-panel-text text">
                 <TM
                   k={`covid_estimates_above_tab_text_${panel_args.subject.level}`}
                   args={panel_args}
+                />
+                <TM
+                  k={"covid_estimates_above_tab_footnote_title"}
+                  className="bold"
+                  el="span"
+                />
+                <TM
+                  k={"covid_estimates_above_tab_footnote_list"}
+                  className="small-panel-text"
                 />
               </div>
             </div>
