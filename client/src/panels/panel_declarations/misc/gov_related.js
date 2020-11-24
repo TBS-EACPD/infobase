@@ -19,7 +19,7 @@ export const declare_gov_related_info_panel = () =>
       render() {
         return (
           <InfographicPanel title={text_maker("gov_related_info_title")}>
-            <div className="medium_panel_text" style={{ lineHeight: "40px" }}>
+            <div className="medium-panel-text" style={{ lineHeight: "40px" }}>
               <TM tmf={text_maker} k="gov_related_info_text" />
             </div>
           </InfographicPanel>

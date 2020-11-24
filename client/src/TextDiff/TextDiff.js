@@ -66,7 +66,7 @@ const get_subject_from_props = (props) => {
 };
 
 const subject_intro = (subject, num_indicators) => (
-  <div className="medium_panel_text">
+  <div className="medium-panel-text">
     <TM k={"indicator_counts_text"} args={{ num_indicators: num_indicators }} />
   </div>
 );
@@ -478,14 +478,14 @@ export default class TextDiffApp extends React.Component {
       >
         <TM k="diff_title" el="h1" />
         <div
-          className={classNames("medium_panel_text", "text-diff__instructions")}
+          className={classNames("medium-panel-text", "text-diff__instructions")}
         >
           <TM
             k="diff_intro_text"
             args={{ previous_doc_name, current_doc_name }}
           />
         </div>
-        <div className={classNames("medium_panel_text")}>
+        <div className={classNames("medium-panel-text")}>
           <label htmlFor="select_dept">
             <TM k="select_dept" />
           </label>
@@ -503,7 +503,7 @@ export default class TextDiffApp extends React.Component {
             }))}
           />
         </div>
-        <div className={classNames("medium_panel_text")}>
+        <div className={classNames("medium-panel-text")}>
           <label htmlFor="select_cr">
             <TM k="select_cr" />
           </label>
@@ -527,7 +527,7 @@ export default class TextDiffApp extends React.Component {
               .value()}
           />
         </div>
-        <div className={classNames("medium_panel_text")}>
+        <div className={classNames("medium-panel-text")}>
           <label htmlFor="select_program">
             <TM k="select_program" />
           </label>
@@ -555,7 +555,7 @@ export default class TextDiffApp extends React.Component {
           />
         </div>
         <div style={{ padding: "0px 0px 20px 0px" }}>
-          <div className="medium_panel_text">
+          <div className="medium-panel-text">
             <label htmlFor="filter_by_status">
               <TM k="filter_by_status" />
             </label>

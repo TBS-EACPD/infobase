@@ -43,7 +43,7 @@ const DpSummary = ({
   );
   return (
     <Fragment>
-      <div className="fcol-md-12 medium_panel_text">
+      <div className="fcol-md-12 medium-panel-text">
         {late_dept_count > 0 && (
           <LateDepartmentsBanner late_dept_count={late_dept_count} />
         )}

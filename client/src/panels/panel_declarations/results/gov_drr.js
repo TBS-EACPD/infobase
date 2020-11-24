@@ -38,7 +38,7 @@ class GovDRR extends React.Component {
     return (
       <div>
         {late_dept_count > 0 && (
-          <div className="medium_panel_text">
+          <div className="medium-panel-text">
             <LateDepartmentsBanner late_dept_count={late_dept_count} />
           </div>
         )}
@@ -51,7 +51,7 @@ class GovDRR extends React.Component {
         />
         <div className="panel-separator" style={{ marginTop: "0px" }} />
         <div>
-          <div className="medium_panel_text">
+          <div className="medium-panel-text">
             <TM k="gov_drr_summary_org_table_text" />
           </div>
           <HeightClippedGraph clipHeight={330}>

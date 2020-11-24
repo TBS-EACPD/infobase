@@ -197,7 +197,7 @@ export default class EstimatesExplorerComponent extends React.Component {
 
     return (
       <div>
-        <div className="medium_panel_text mrgn-tp-lg">
+        <div className="medium-panel-text mrgn-tp-lg">
           <TM
             k="diff_view_top_text"
             args={{ current_doc_is_mains, current_sups_letter }}
@@ -206,7 +206,7 @@ export default class EstimatesExplorerComponent extends React.Component {
         <h2>
           <TM k="general_info" />
         </h2>
-        <div className="medium_panel_text">
+        <div className="medium-panel-text">
           <TM k="estimates_expl" />
         </div>
         <div
@@ -260,7 +260,7 @@ export default class EstimatesExplorerComponent extends React.Component {
               />
             )}
             {h7y_layout === "org" && (
-              <div className="estimates-checkbox-row medium_panel_text">
+              <div className="estimates-checkbox-row medium-panel-text">
                 <CheckBox
                   label={text_maker("show_inactive_votes")}
                   active={this.state.show_inactive}

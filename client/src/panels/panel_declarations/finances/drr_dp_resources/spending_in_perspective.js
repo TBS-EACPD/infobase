@@ -61,7 +61,7 @@ class SpendInTagPerspective extends React.Component {
           className="lg-grid-panel50"
           style={{ padding: "10px", marginBottom: "auto", marginTop: "auto" }}
         >
-          <div className="medium_panel_text">
+          <div className="medium-panel-text">
             <TM
               k="program_spending_in_tag_perspective_text"
               args={{

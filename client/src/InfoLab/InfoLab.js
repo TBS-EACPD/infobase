@@ -10,7 +10,6 @@ import { get_static_url } from "../request_utils.js";
 
 import lab_text from "./InfoLab.yaml";
 
-
 const { TM } = create_text_maker_component(lab_text);
 const text_maker = create_text_maker(lab_text);
 
@@ -31,7 +30,7 @@ export default class InfoLab extends React.Component {
         beta={true}
       >
         <TM k="lab_title" el="h1" />
-        <div className="medium_panel_text">
+        <div className="medium-panel-text">
           <TM k="lab_intro_text" />
           <button
             style={{ marginBottom: "2rem" }}

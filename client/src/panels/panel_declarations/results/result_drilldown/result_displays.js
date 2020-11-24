@@ -1,6 +1,5 @@
 import { createSelector } from "reselect";
 
-
 import { infograph_href_template } from "../../../../link_utils.js";
 import { Indicator, result_docs } from "../../../../models/results.js";
 import { IndicatorList } from "../result_components.js";
@@ -62,7 +61,7 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
   }
 
   return (
-    <div className="medium_panel_text">
+    <div className="medium-panel-text">
       <TM
         k={text_key}
         args={{

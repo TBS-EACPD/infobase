@@ -1,4 +1,3 @@
-
 import classNames from "classnames";
 import { Fragment } from "react";
 
@@ -25,7 +24,7 @@ const scheme_order = ["GOCO", "WWH", "CCOFOG", "HWH"];
 const tag_root_display = (tag_root) => (
   <div>
     <div>{tag_root.name}</div>
-    <div className="small_panel_text">{tag_root.description}</div>
+    <div className="small-panel-text">{tag_root.description}</div>
   </div>
 );
 

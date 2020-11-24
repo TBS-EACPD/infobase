@@ -481,7 +481,7 @@ class Goco extends React.Component {
     }
     return (
       <Fragment>
-        <div className="medium_panel_text">
+        <div className="medium-panel-text">
           <TM k="goco_intro_text" args={spend_fte_text_data} />
         </div>
         {graph_content}

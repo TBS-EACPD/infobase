@@ -33,7 +33,7 @@ const ResultsIntroPanel = ({
 
   return (
     <div className="frow middle-xs">
-      <div className="fcol-md-7 medium_panel_text">
+      <div className="fcol-md-7 medium-panel-text">
         <TM k="results_intro_text" />
       </div>
       {!window.is_a11y_mode && (
@@ -54,7 +54,7 @@ const ResultsIntroPanel = ({
           </div>
         </div>
       )}
-      <div className="fcol-md-12 medium_panel_text">
+      <div className="fcol-md-12 medium-panel-text">
         {has_current_dp && (
           <TM
             k="dp_summary_text"

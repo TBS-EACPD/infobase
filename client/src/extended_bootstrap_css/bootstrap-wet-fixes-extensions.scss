@@ -225,7 +225,7 @@ div.label {
 
 
 
-.huge_panel_text {
+.huge-panel-text {
   font-size: 1.8em;
   line-height: 2em;
 }
@@ -233,16 +233,16 @@ div.label {
   font-size: 1.4em;
   line-height: 1.6em;
 }
-.medium_panel_text {
+.medium-panel-text {
   font-size: 1.2em;
   line-height: 1.4em;
 }
-.small_panel_text {
+.small-panel-text {
   font-size: 0.8em;
   line-height: normal;
 }
 @media(min-width: $minSmallDevice) {
-  .huge_panel_text {
+  .huge-panel-text {
     font-size: 1.8em;
     line-height: 2.2em;
   }
@@ -250,11 +250,11 @@ div.label {
     font-size: 1.4em;
     line-height: 1.8em;
   }
-  .medium_panel_text {
+  .medium-panel-text {
     font-size: 1.2em;
     line-height: 1.8em;
   }
-  .small_panel_text {
+  .small-panel-text {
     font-size: 0.8em;
     line-height: normal;
   }

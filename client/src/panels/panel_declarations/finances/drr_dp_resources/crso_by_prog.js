@@ -106,7 +106,7 @@ class PlannedProgramResources extends React.Component {
 
     return (
       <div>
-        <div className="medium_panel_text mrgn-bttm-lg">{text}</div>
+        <div className="medium-panel-text mrgn-bttm-lg">{text}</div>
         <div className="frow">
           {!window.is_a11y_mode && (
             <div className="fcol-md-4" style={{ width: "100%" }}>

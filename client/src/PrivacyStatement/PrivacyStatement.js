@@ -15,7 +15,7 @@ export default class PrivacyStatement extends React.Component {
         description={text_maker("privacy_body_text")}
         route_key="_privacy"
       >
-        <div className="medium_panel_text text-only-page-root">
+        <div className="medium-panel-text text-only-page-root">
           <TextMaker
             text_maker_func={text_maker}
             el="div"
