@@ -127,6 +127,12 @@ function get_plugins({
   stats_baseline,
   stats_no_compare,
 }) {
+  console.log(`bundle_stats: ${bundle_stats}`);
+  console.log(`is_ci: ${is_ci}`);
+  console.log(`CI_AND_MASTER: ${CI_AND_MASTER}`);
+  console.log(`stats_baseline: ${stats_baseline}`);
+  console.log(`stats_no_compare: ${stats_no_compare}`);
+
   return _.filter([
     new webpack.DefinePlugin({
       CDN_URL: JSON.stringify(CDN_URL),
