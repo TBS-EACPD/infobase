@@ -4,6 +4,7 @@ export {
   StatelessPullDownAccordion,
   AutoAccordion,
 } from "./Accordions.js";
+export { EmailFrontend } from "./EmailFrontend.js";
 export { HeightClipper } from "./HeightClipper.js";
 export { RadioButtons } from "./RadioButtons.js";
 export { Select } from "./Select.js";

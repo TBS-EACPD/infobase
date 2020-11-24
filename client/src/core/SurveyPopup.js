@@ -1,10 +1,10 @@
-
 import { Fragment } from "react";
 import { withRouter } from "react-router";
 
 import {
   FixedPopover,
   create_text_maker_component,
+  EmailFrontend,
 } from "../components/index.js";
 import { IconFeedback } from "../icons/icons.js";
 
@@ -15,7 +15,8 @@ import text from "./SurveyPopup.yaml";
 const { TM, text_maker } = create_text_maker_component(text);
 
 const page_visit_increment = 1;
-const survey_campaign_end_date = new Date(2020, 3, 31).getTime();
+//TODO Need to set the correct time
+const survey_campaign_end_date = new Date(2022, 3, 31).getTime();
 
 const get_path_root = (path) =>
   _.chain(path).replace(/^\//, "").split("/").first().value();
@@ -133,10 +134,12 @@ export const SurveyPopup = withRouter(
       const { active, page_visited, show_popup } = this.state;
       const { toggleSurvey } = this.props;
 
-      const should_show =
+      let should_show =
         !is_survey_campaign_over() &&
         (page_visited >= 3 || show_popup) &&
         active;
+      // TODO, should be removed before merging
+      should_show = true;
 
       if (should_show) {
         clearTimeout(this.timeout);
@@ -147,6 +150,18 @@ export const SurveyPopup = withRouter(
           MISC2: "displayed",
         });
       }
+      const full_survey_button = (
+        <button
+          className="btn btn-ib-primary"
+          style={{ maxWidth: "180px" }}
+          onClick={() => {
+            this.handleButtonPress("yes");
+            toggleSurvey();
+          }}
+        >
+          {text_maker("take_full_survey")}
+        </button>
+      );
 
       return (
         <FixedPopover
@@ -161,18 +176,29 @@ export const SurveyPopup = withRouter(
               {text_maker("suvey_popup_header")}
             </Fragment>
           }
-          body={<TM k="survey_popup_body" />}
+          body={
+            <div
+              style={{
+                fontSize: "0.9em",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <TM k="survey_popup_body" />
+              {full_survey_button}
+              <TM
+                k="take_simplified_survey_text"
+                style={{ margin: "8px 0px" }}
+              />
+              <EmailFrontend
+                template_name="feedback_simplified"
+                include_privacy={false}
+              />
+            </div>
+          }
           footer={
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <button
-                className="btn btn-ib-primary"
-                onClick={() => {
-                  this.handleButtonPress("yes");
-                  toggleSurvey();
-                }}
-              >
-                {text_maker("survey_popup_yes")}
-              </button>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              {full_survey_button}
               {_.map(["later", "no"], (button_type) => (
                 <button
                   key={button_type}
