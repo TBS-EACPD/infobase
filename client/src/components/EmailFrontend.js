@@ -85,7 +85,7 @@ class EmailFrontend extends React.Component {
     this.state = {
       template_name: props.template_name,
       loading: true,
-      privacy_acknowledged: false,
+      privacy_acknowledged: !props.include_privacy,
       sent_to_backend: false,
       awaiting_backend_response: false,
       backend_response: {},
@@ -153,7 +153,7 @@ class EmailFrontend extends React.Component {
       completed_template,
     } = this.state;
 
-    const { top_border } = this.props;
+    const { top_border, include_privacy } = this.props;
 
     const user_fields = _.omitBy(
       template,
@@ -312,24 +312,26 @@ class EmailFrontend extends React.Component {
                   {get_form_for_user_field(field_info, key)}
                 </div>
               ))}
-              <div className="email-backend-form__privacy-note">
-                <TM k="email_frontend_privacy_note" />
-                <div style={{ textAlign: "center" }}>
-                  <CheckBox
-                    id={"email_frontend_privacy"}
-                    active={privacy_acknowledged}
-                    disabled={disable_forms}
-                    onClick={() =>
-                      this.setState({
-                        privacy_acknowledged: !privacy_acknowledged,
-                      })
-                    }
-                    label={text_maker("email_frontend_privacy_ack")}
-                    label_style={{ fontWeight: "bold" }}
-                    container_style={{ justifyContent: "center" }}
-                  />
+              {include_privacy && (
+                <div className="email-backend-form__privacy-note">
+                  <TM k="email_frontend_privacy_note" />
+                  <div style={{ textAlign: "center" }}>
+                    <CheckBox
+                      id={"email_frontend_privacy"}
+                      active={privacy_acknowledged}
+                      disabled={disable_forms}
+                      onClick={() =>
+                        this.setState({
+                          privacy_acknowledged: !privacy_acknowledged,
+                        })
+                      }
+                      label={text_maker("email_frontend_privacy_ack")}
+                      label_style={{ fontWeight: "bold" }}
+                      container_style={{ justifyContent: "center" }}
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
               {
                 <button
                   className={classNames(
@@ -438,4 +440,5 @@ export { EmailFrontend };
 
 EmailFrontend.defaultProps = {
   top_border: true,
+  include_privacy: true,
 };

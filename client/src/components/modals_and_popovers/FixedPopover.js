@@ -151,7 +151,11 @@ export class FixedPopover extends React.Component {
               {body}
             </Modal.Body>
           )}
-          {footer_content && <Modal.Footer>{footer_content}</Modal.Footer>}
+          {footer_content && (
+            <Modal.Footer style={{ marginTop: 10 }}>
+              {footer_content}
+            </Modal.Footer>
+          )}
         </div>
         <div tabIndex="0" onFocus={this.closeModal} />
       </Modal>

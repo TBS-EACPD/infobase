@@ -6,16 +6,8 @@ survey_popup_body:
   transform: [markdown]
   en: | 
     Please take a few minutes at the end of your visit today to tell us about your experience with GC InfoBase.
-
-    Choosing “Yes, after my visit” will open our survey in a new window. You can return to this window to complete the survey after you have finished browsing GC InfoBase; it will not time out.
-
-    We value your feedback. Thank you!
   fr: |
     À la fin de votre visite aujourd'hui, prenez le temps de nous parler de votre expérience avec InfoBase du GC.
-
-    En sélectionnant "Oui, après ma visite", vous accéderez à une nouvelle fenêtre. Quand vous aurez fini de parcourir InfoBase du GC, vous pourrez revenir à cette fenêtre pour répondre au questionnaire ; il vous restera du temps.
-
-    Vos commentaires nous sont précieux. Merci!
 
 survey_popup_yes:
   transform: [handlebars]
@@ -29,3 +21,11 @@ survey_popup_later:
 survey_popup_no:
   en: No, do not ask again
   fr: Non, ne le demandez plus
+
+take_full_survey:
+  en: Take the full survey
+  fr: TODO
+
+take_simplified_survey_text:
+  en: Or, you can take the short version of the survey below
+  fr: TODO
