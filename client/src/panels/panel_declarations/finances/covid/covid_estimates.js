@@ -36,7 +36,7 @@ const string_sort_func = (a, b) => {
 };
 
 const SummaryTab = ({ panel_args }) => {
-  const { covid_estimates_data } = panel_args;
+  const { covid_estimates_data, subject } = panel_args;
 
   const colors = infobase_colors();
 
@@ -98,7 +98,10 @@ const SummaryTab = ({ panel_args }) => {
   return (
     <div className="frow middle-xs">
       <div className="fcol-xs-12 fcol-md-6 medium_panel_text">
-        <TM k={"covid_estimates_summary_text"} args={panel_args} />
+        <TM
+          k={`covid_estimates_summary_text_${subject.level}`}
+          args={panel_args}
+        />
         <TM k={"covid_estimates_by_doc"} args={panel_args} />
       </div>
       <div className="fcol-xs-12 fcol-md-6">
@@ -384,7 +387,10 @@ export const declare_covid_estimates_panel = () =>
           >
             <div className="frow">
               <div className="fcol-md-12 fcol-xs-12 medium_panel_text text">
-                <TM k="covid_estimates_above_tab_text" args={panel_args} />
+                <TM
+                  k={`covid_estimates_above_tab_text_${panel_args.subject.level}`}
+                  args={panel_args}
+                />
               </div>
             </div>
             <TabbedContent {...tabbed_content_props} />
