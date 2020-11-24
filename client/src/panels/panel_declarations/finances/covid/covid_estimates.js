@@ -17,9 +17,25 @@ import text from "./covid_estimates.yaml";
 
 const { CovidEstimates, CovidInitiatives, Gov, Dept } = Subject;
 
+const { estimates_docs } = businessConstants;
+
 const { TabbedContent, SpinnerWrapper, SmartDisplayTable } = util_components;
 
 const { text_maker, TM } = create_text_maker_component([text]);
+
+const get_est_doc_name = (est_doc) => estimates_docs[est_doc][window.lang];
+const get_est_doc_order = (est_doc) => estimates_docs[est_doc].order;
+const est_doc_sort_func = (est_doc_a, est_doc_b) => {
+  const order_a = get_est_doc_order(est_doc_a);
+  const order_b = get_est_doc_order(est_doc_a);
+
+  if (order_a < order_b) {
+    return -1;
+  } else if (order_a > order_b) {
+    return 1;
+  }
+  return 0;
+};
 
 const get_plain_string = (string) =>
   _.chain(string).deburr().lowerCase().value();
@@ -142,7 +158,11 @@ const SummaryTab = ({ panel_args }) => {
 };
 
 const ByDepartmentTab = ({ panel_args }) => {
-  const all_dept_estimates = CovidEstimates.get_all();
+  // pre-sort by est doc, so presentation consistent when sorting by other col
+  const pre_sorted_dept_estimates = _.sortBy(
+    CovidEstimates.get_all(),
+    ({ est_doc }) => get_est_doc_order(est_doc)
+  );
 
   const column_configs = {
     org: {
@@ -161,10 +181,12 @@ const ByDepartmentTab = ({ panel_args }) => {
       raw_formatter: (org) => org.name,
       sort_func: (org_a, org_b) => string_sort_func(org_a.name, org_b.name),
     },
-    doc_name: {
+    est_doc: {
       index: 1,
       header: text_maker("covid_estimates_estimates_doc"),
       is_searchable: true,
+      formatter: get_est_doc_name,
+      sort_func: est_doc_sort_func,
     },
     stat: {
       index: 2,
@@ -182,7 +204,9 @@ const ByDepartmentTab = ({ panel_args }) => {
     },
   };
 
-  const [largest_dept_id, largest_dept_auth] = _.chain(all_dept_estimates)
+  const [largest_dept_id, largest_dept_auth] = _.chain(
+    pre_sorted_dept_estimates
+  )
     .groupBy("org_id")
     .mapValues((covid_estimates) =>
       _.reduce(covid_estimates, (memo, { vote, stat }) => memo + vote + stat, 0)
@@ -203,7 +227,7 @@ const ByDepartmentTab = ({ panel_args }) => {
         className="medium-panel-text"
       />
       <SmartDisplayTable
-        data={_.map(all_dept_estimates, (row) =>
+        data={_.map(pre_sorted_dept_estimates, (row) =>
           _.pick(row, _.keys(column_configs))
         )}
         column_configs={column_configs}
@@ -238,12 +262,13 @@ const get_initative_rows = (subject) => {
           }),
           {
             initiative_name: name,
-            doc_name: businessConstants.estimates_docs[est_doc][window.lang],
+            est_doc,
             stat: 0,
             vote: 0,
           }
         )
       )
+      .sortBy(({ est_doc }) => get_est_doc_order(est_doc)) // pre-sort by est doc, so presentation consistent when sorting by other col
       .value()
   );
 };
@@ -259,10 +284,12 @@ const ByInitiativeTab = ({ panel_args }) => {
       is_searchable: true,
       sort_func: string_sort_func,
     },
-    doc_name: {
+    est_doc: {
       index: 1,
       header: text_maker("covid_estimates_estimates_doc"),
       is_searchable: true,
+      formatter: get_est_doc_name,
+      sort_func: est_doc_sort_func,
     },
     stat: {
       index: 2,
