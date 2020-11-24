@@ -15,7 +15,7 @@ import {
 
 import text from "./covid_estimates.yaml";
 
-const { CovidEstimates, CovidInitiatives } = Subject;
+const { CovidEstimates, CovidInitiatives, Gov, Dept } = Subject;
 
 const { TabbedContent, SpinnerWrapper, SmartDisplayTable } = util_components;
 
@@ -95,12 +95,35 @@ const SummaryTab = ({ panel_args }) => {
     />
   );
 
+  const level_specific_text_args = (() => {
+    if (subject.level === "gov") {
+      const { gov_covid_auth_in_year, gov_total_auth_in_year } = panel_args;
+      return {
+        covid_auth_pct_of_gov_auth:
+          gov_covid_auth_in_year / gov_total_auth_in_year,
+      };
+    } else {
+      const { gov_total_auth_in_year } = panel_args;
+
+      const dept_covid_auth_in_year = _.reduce(
+        covid_estimates_data,
+        (memo, { stat, vote }) => memo + vote + stat,
+        0
+      );
+
+      return {
+        covid_auth_pct_of_gov_auth:
+          dept_covid_auth_in_year / gov_total_auth_in_year,
+      };
+    }
+  })();
+
   return (
     <div className="frow middle-xs">
       <div className="fcol-xs-12 fcol-md-6 medium_panel_text">
         <TM
           k={`covid_estimates_summary_text_${subject.level}`}
-          args={panel_args}
+          args={{ ...panel_args, ...level_specific_text_args }}
         />
         <TM k={"covid_estimates_by_doc"} args={panel_args} />
       </div>
@@ -159,14 +182,33 @@ const ByDepartmentTab = ({ panel_args }) => {
     },
   };
 
+  const [largest_dept_id, largest_dept_auth] = _.chain(all_dept_estimates)
+    .groupBy("org_id")
+    .mapValues((covid_estimates) =>
+      _.reduce(covid_estimates, (memo, { vote, stat }) => memo + vote + stat, 0)
+    )
+    .toPairs()
+    .sortBy(([org_id, auth_total]) => auth_total)
+    .last()
+    .value();
+
   return (
-    <SmartDisplayTable
-      data={_.map(all_dept_estimates, (row) =>
-        _.pick(row, _.keys(column_configs))
-      )}
-      column_configs={column_configs}
-      table_name={text_maker("covid_estimates_department_tab_label")}
-    />
+    <Fragment>
+      <TM
+        k="covid_estimates_department_tab_text"
+        args={{
+          largest_dept_name: Dept.lookup(largest_dept_id).name,
+          largest_dept_auth,
+        }}
+      />
+      <SmartDisplayTable
+        data={_.map(all_dept_estimates, (row) =>
+          _.pick(row, _.keys(column_configs))
+        )}
+        column_configs={column_configs}
+        table_name={text_maker("covid_estimates_department_tab_label")}
+      />
+    </Fragment>
   );
 };
 
@@ -237,14 +279,35 @@ const ByInitiativeTab = ({ panel_args }) => {
     },
   };
 
+  const [largest_initiative_name, largest_initiative_auth] = _.chain(
+    initiative_rows
+  )
+    .groupBy("initiative_name")
+    .mapValues((row) =>
+      _.reduce(row, (memo, { vote, stat }) => memo + vote + stat, 0)
+    )
+    .toPairs()
+    .sortBy(([initiative_name, auth_total]) => auth_total)
+    .last()
+    .value();
+
   return (
-    <SmartDisplayTable
-      data={_.map(initiative_rows, (row) =>
-        _.pick(row, _.keys(column_configs))
-      )}
-      column_configs={column_configs}
-      table_name={text_maker("covid_estimates_initiative_tab_label")}
-    />
+    <Fragment>
+      <TM
+        k="covid_estimates_initiative_tab_text"
+        args={{
+          largest_initiative_name,
+          largest_initiative_auth,
+        }}
+      />
+      <SmartDisplayTable
+        data={_.map(initiative_rows, (row) =>
+          _.pick(row, _.keys(column_configs))
+        )}
+        column_configs={column_configs}
+        table_name={text_maker("covid_estimates_initiative_tab_label")}
+      />
+    </Fragment>
   );
 };
 
@@ -347,30 +410,56 @@ export const declare_covid_estimates_panel = () =>
     panel_key: "covid_estimates_panel",
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
-      requires_covid_estimates_gov_summary: level_name === "gov",
+      requires_covid_estimates_gov_summary: true,
       requires_covid_estimates: level_name === "dept",
       footnotes: false,
+      depends_on: ["orgVoteStatEstimates"],
       source: (subject) => [],
-      calculate: (subject, options) => {
+      calculate: function (subject, options) {
+        const { orgVoteStatEstimates } = this.tables;
+        const gov_total_auth_in_year = orgVoteStatEstimates
+          .q(Gov)
+          .sum("{{est_in_year}}_estimates");
+
+        const gov_covid_estimates_data = CovidEstimates.get_gov_summary();
+        const gov_covid_auth_in_year = _.reduce(
+          gov_covid_estimates_data,
+          (memo, { vote, stat }) => memo + vote + stat,
+          0
+        );
+
         const covid_estimates_data =
           level_name === "gov"
-            ? CovidEstimates.get_gov_summary()
+            ? gov_covid_estimates_data
             : CovidEstimates.org_lookup(subject.id);
 
         if (_.isEmpty(covid_estimates_data)) {
           return false;
         }
 
-        const est_doc_summary_stats = _.map(
-          covid_estimates_data,
-          ({ doc_name, vote, stat }) => [doc_name, vote + stat]
-        );
-
-        return {
+        const common = {
           subject,
+          gov_total_auth_in_year,
+          gov_covid_auth_in_year,
           covid_estimates_data,
-          est_doc_summary_stats,
+          est_doc_summary_stats: _.map(
+            covid_estimates_data,
+            ({ doc_name, vote, stat }) => [doc_name, vote + stat]
+          ),
         };
+
+        if (level_name === "gov") {
+          return common;
+        } else {
+          const dept_tabled_est_in_year = orgVoteStatEstimates
+            .q(subject)
+            .sum("{{est_in_year}}_estimates");
+
+          return {
+            ...common,
+            dept_tabled_est_in_year,
+          };
+        }
       },
       render: ({ calculations, footnotes, sources }) => {
         const { panel_args } = calculations;
