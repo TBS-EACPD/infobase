@@ -2,26 +2,55 @@ covid_estimates_panel_title:
   en: COVID-19 Estimates Initiatives
   fr: TODO
 
-covid_estimates_above_tab_text:
-  transform: [markdown]
-  en: |
-    **TODO:** short paragraph or two to contextualize planned budgetary COVID-19 spending in terms of authorities and the estimates process
+covid_estimates_above_tab_text_gov:
+  transform: [handlebars,markdown]
+  en: This fiscal year (**year**), the government has authorized **govt_SupsA_total + govt_SupsB_total** billion in authorities to implement the response to the COVID-19 pandemic.
+    The department with the highest COVID-19 related authorities is **largest_dept_by_auth** with **largest_dept_by_auth_SupsA_total + largest_dept_by_auth_SupsA_total** in authorities
+    from Supplementary Estimates A and B. The Estimates initiative with the highest authorities is **largest_initiative_title** with **largest_initiative_Sups A auth + largest_initiative_Sups B auth**
+    in authorities from Supplementary Estimates A and B.
+    </br>
+    {{> "covid_estimates_above_tab_footnote_en"}}
   fr: TODO
+    </br> 
+    {{> "covid_estimates_above_tab_footnote_fr"}}
+covid_estimates_above_tab_text_dept:
+  transform: [handlebars,markdown]
+  en: This fiscal year (**year**), the government has authorized **govt_SupsA_total + govt_SupsB_total** billion spending to implement the response to the COVID-19 pandemic.
+    There is a total of **num_initiatives_overall** Estimates initiatives, **current_dept_num_initiatives** of which **current_dept** is authorized to allocate spending towards.
+    </br>
+    {{> "covid_estimates_above_tab_footnote_en"}}
+  fr: TODO
+    </br>
+    {{> "covid_estimates_above_tab_footnote_fr"}}
+
+covid_estimates_above_tab_footnote_en:
+  handlebars_partial: true
+  text: These figures represent {{gl_tt "spending authorities" "AUTH"}} as outlined in the {{gl_tt "Estimates process" "EST_PROC"}} and do not represent {{gl_tt "actual expenditures" "EXP"}}.
+    _Any reallocation of existing authorities to the COVID-19 pandemic response are excluded._
+covid_estimates_above_tab_footnote_fr:
+  handlebars_partial: true
+  text: TODO
+
 
 covid_estimates_summary_tab_label:
   en: Overview
   fr: TODO
 
-covid_estimates_summary_text:
+covid_estimates_summary_text_gov:
   transform: [handlebars,markdown]
-  en: |
-    **TODO:** short paragraph on cumulative COVID-19 authorities, what portion of total authorities they represent
+  en: This fiscal year, **govt_SupsA_total + govt_SupsB_total** in planned budgetary expenditures have been presented in the Estimates process in response to the COVID-19 pandemic.
+    These authorities make up **((govt_SupsA_total + govt_SupsB_total)/govt_total_auth_2020-21 )*100%** of the total authorities presented in **year**. 
+  fr: TODO
+covid_estimates_summary_text_dept:
+  transform: [handlebars,markdown]
+  en: This fiscal year, **current_dept** has **current_dept_SupsA_total_auth + current_dept_SupsB_total_auth** in authorities has been made available through the Estimates process.
+    These authorities make up **((current_dept_SupsA_total_auth + current_dept_SupsB_total_auth)/gov_total_SupsA+B)*100%** of the government’s planned spending in response to the global pandemic. 
   fr: TODO
 
 covid_estimates_by_doc:
   transform: [handlebars,markdown]
   en: |
-    Total COVID-19 initiative authorities by document:
+    Total COVID-19 authorities by release:
     {{#each est_doc_summary_stats}}
     * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}**
     {{/each}}
