@@ -10,7 +10,10 @@ covid_estimates_above_tab_text_gov:
     in authorities from Supplementary Estimates A and B.
     </br>
     {{> "covid_estimates_above_tab_footnote_en"}}
-  fr: TODO
+  fr: Pour l’exercice en cours (**year**), le gouvernement a autorisé des crédits de **govt_SupsA_total + govt_SupsB_total** milliards de dollars pour la mise en œuvre de mesures en réponse à 
+    la pandémie de COVID-19. Le ministère ayant le plus grand nombre d'autorisations liées à COVID-19 est **largest_dept_by_auth** avec **largest_dept_by_auth_SupsA_total + largest_dept_by_auth_SupsA_total**
+    de crédits inscrits dans les budgets supplémentaires A et B. L'initiative budgétaire disposant des crédits les plus importants est **largest_initiative_title** avec
+    **largest_initiative_Sups A auth + largest_initiative_Sups B auth** de crédits inscrits dans les budgets supplémentaires A et B. 
     </br> 
     {{> "covid_estimates_above_tab_footnote_fr"}}
 covid_estimates_above_tab_text_dept:
@@ -19,7 +22,8 @@ covid_estimates_above_tab_text_dept:
     There is a total of **num_initiatives_overall** Estimates initiatives, **current_dept_num_initiatives** of which **current_dept** is authorized to allocate spending towards.
     </br>
     {{> "covid_estimates_above_tab_footnote_en"}}
-  fr: TODO
+  fr: Pour l’exercice en cours (**year**), le gouvernement a autorisé des dépenses de **govt_SupsA_total + govt_SupsB_total** milliards de dollars pour la mise en œuvre de mesures en
+    réponse à la pandémie de COVID-19. Au total, il y a **num_initiatives_overall** initiatives budgétaires, dont **current_dept_num_initiatives** sont autorisées au titre des dépenses de **current_dept**.
     </br>
     {{> "covid_estimates_above_tab_footnote_fr"}}
 
@@ -29,7 +33,8 @@ covid_estimates_above_tab_footnote_en:
     _Any reallocation of existing authorities to the COVID-19 pandemic response are excluded._
 covid_estimates_above_tab_footnote_fr:
   handlebars_partial: true
-  text: TODO
+  text: Ces chiffres correspondent aux {{gl_tt "autorisations de dépenses" "AUTH"}} énoncées dans le {{gl_tt "processus budgétaire" "EST_PROC"}} et ne sont pas les {{gl_tt "dépenses réelles" "EXP"}}.
+    _Sont exclues toutes les réaffectations d'autorisations existantes à la réponse à la pandémie COVID-19._
 
 
 covid_estimates_summary_tab_label:
@@ -39,13 +44,15 @@ covid_estimates_summary_tab_label:
 covid_estimates_summary_text_gov:
   transform: [handlebars,markdown]
   en: This fiscal year (**year**), **govt_SupsA_total + govt_SupsB_total** in planned budgetary expenditures have been presented in the Estimates process in response to the COVID-19 pandemic.
-    These authorities make up **((govt_SupsA_total + govt_SupsB_total)/govt_total_auth_2020-21 )*100%** of the total authorities presented in **year**. 
-  fr: TODO
+    These authorities make up **((govt_SupsA_total + govt_SupsB_total)/govt_total_auth_2020-21 )\*100%** of the total authorities presented in **year**. 
+  fr: Pour l'exercice en cours (**year**), **govt_SupsA_total + govt_SupsB_total** de dépenses budgétaires prévues ont été inscrits dans le processus budgétaire en réponse à la pandémie de COVID-19.
+    Ces autorisations constituent **((govt_SupsA_total + govt_SupsB_total)/govt_total_auth_2020-21 )\*100%** du total des crédits prévus en **year**. 
 covid_estimates_summary_text_dept:
   transform: [handlebars,markdown]
   en: This fiscal year (**year**), **current_dept** has **current_dept_SupsA_total_auth + current_dept_SupsB_total_auth** in authorities, as made available through the Estimates process.
-    These authorities make up **((current_dept_SupsA_total_auth + current_dept_SupsB_total_auth)/gov_total_SupsA+B)*100%** of the government’s planned spending in response to the global pandemic. 
-  fr: TODO
+    These authorities make up **((current_dept_SupsA_total_auth + current_dept_SupsB_total_auth)/gov_total_SupsA+B)\*100%** of the government’s planned spending in response to the global pandemic. 
+  fr: Pour l’exercice en cours (**year**), **current_dept** dispose de **current_dept_SupsA_total_auth + current_dept_SupsB_total_auth** crédits qui lui ont été accordés dans le cadre du processus budgétaire.
+    Ces autorisations constituent **((current_dept_SupsA_total_auth + current_dept_SupsB_total_auth)/gov_total_SupsA+B)\*100%** du total des crédits prévus en **year**. 
 
 covid_estimates_by_doc:
   transform: [handlebars,markdown]
@@ -54,7 +61,8 @@ covid_estimates_by_doc:
     {{#each est_doc_summary_stats}}
     * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}**
     {{/each}}
-  fr: TODO
+  fr: |
+    Total des autorisations liées à la COVID-19 par octroi de crédits :
 
 covid_estimates_department_tab_label:
   en: By Department
