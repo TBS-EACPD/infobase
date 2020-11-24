@@ -48,9 +48,9 @@ covid_estimates_summary_text_gov:
     Ces autorisations constituent **{{fmt_percentage1 covid_auth_pct_of_gov_auth}}** du total des crédits prévus en **{{est_in_year}}**. 
 covid_estimates_summary_text_dept:
   transform: [handlebars,markdown]
-  en: This fiscal year (**{{est_in_year}}**), **{{subject.name}}** has **{{fmt_compact1_written dept_covid_auth_in_year}}** in authorities, as made available through the Estimates process.
+  en: This fiscal year (**{{est_in_year}}**), **{{subject.name}}** has **{{fmt_compact1_written dept_covid_auth_in_year}}** in authorities, as made available through the Estimates process in response to the COVID-19 pandemic.
     These authorities make up **{{fmt_percentage1 covid_auth_pct_of_gov_auth}}** of the government’s planned spending in response to the global pandemic. 
-  fr: Pour l’exercice en cours (**{{est_in_year}}**), **{{subject.name}}** dispose de **{{fmt_compact1_written dept_covid_auth_in_year}}** crédits qui lui ont été accordés dans le cadre du processus budgétaire.
+  fr: Pour l’exercice en cours (**{{est_in_year}}**), **{{subject.name}}** dispose de **{{fmt_compact1_written dept_covid_auth_in_year}}** crédits qui lui ont été accordés dans le cadre du processus budgétaireen réponse à la pandémie de COVID-19.
     Ces autorisations constituent **{{fmt_percentage1 covid_auth_pct_of_gov_auth}}** du total des crédits prévus en **{{est_in_year}}**. 
 
 covid_estimates_by_doc:
