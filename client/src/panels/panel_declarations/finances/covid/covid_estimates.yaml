@@ -4,27 +4,26 @@ covid_estimates_panel_title:
 
 covid_estimates_above_tab_text_gov:
   transform: [handlebars,markdown]
-  en: This fiscal year (**year**), the government has authorized **govt_SupsA_total + govt_SupsB_total** billion in authorities to implement the response to the COVID-19 pandemic.
-    The department with the highest COVID-19 related authorities is **largest_dept_by_auth** with **largest_dept_by_auth_SupsA_total + largest_dept_by_auth_SupsA_total** in authorities
-    from Supplementary Estimates A and B. The Estimates initiative with the highest authorities is **largest_initiative_title** with **largest_initiative_Sups A auth + largest_initiative_Sups B auth**
-    in authorities from Supplementary Estimates A and B.
-    </br>
+  en: |
+    This fiscal year (**{{est_in_year}}**), the government has authorized **{{fmt_compact1_written gov_covid_auth_in_year}}** billion in authorities to implement the response to the COVID-19 pandemic.
+
     {{> "covid_estimates_above_tab_footnote_en"}}
-  fr: Pour l’exercice en cours (**year**), le gouvernement a autorisé des crédits de **govt_SupsA_total + govt_SupsB_total** milliards de dollars pour la mise en œuvre de mesures en réponse à 
-    la pandémie de COVID-19. Le ministère ayant le plus grand nombre d'autorisations liées à COVID-19 est **largest_dept_by_auth** avec **largest_dept_by_auth_SupsA_total + largest_dept_by_auth_SupsA_total**
-    de crédits inscrits dans les budgets supplémentaires A et B. L'initiative budgétaire disposant des crédits les plus importants est **largest_initiative_title** avec
-    **largest_initiative_Sups A auth + largest_initiative_Sups B auth** de crédits inscrits dans les budgets supplémentaires A et B. 
-    </br> 
+  fr: |
+    Pour l’exercice en cours (**{{est_in_year}}**), le gouvernement a autorisé des crédits de **{{fmt_compact1_written gov_covid_auth_in_year}}** milliards de dollars pour la mise en œuvre de mesures en réponse à 
+    la pandémie de COVID-19.
+
     {{> "covid_estimates_above_tab_footnote_fr"}}
 covid_estimates_above_tab_text_dept:
   transform: [handlebars,markdown]
-  en: This fiscal year (**year**), the government has authorized **govt_SupsA_total + govt_SupsB_total** billion spending to implement the response to the COVID-19 pandemic.
-    There is a total of **num_initiatives_overall** Estimates initiatives, **current_dept_num_initiatives** of which **current_dept** is authorized to allocate spending towards.
-    </br>
+  en: |
+    This fiscal year (**{{est_in_year}}**), the government has authorized **{{fmt_compact1_written gov_covid_auth_in_year}}** billion spending to implement the response to the COVID-19 pandemic.
+    
+
     {{> "covid_estimates_above_tab_footnote_en"}}
-  fr: Pour l’exercice en cours (**year**), le gouvernement a autorisé des dépenses de **govt_SupsA_total + govt_SupsB_total** milliards de dollars pour la mise en œuvre de mesures en
-    réponse à la pandémie de COVID-19. Au total, il y a **num_initiatives_overall** initiatives budgétaires, dont **current_dept_num_initiatives** sont autorisées au titre des dépenses de **current_dept**.
-    </br>
+  fr: |
+    Pour l’exercice en cours (**{{est_in_year}}**), le gouvernement a autorisé des dépenses de **{{fmt_compact1_written gov_covid_auth_in_year}}** milliards de dollars pour la mise en œuvre de mesures en
+    réponse à la pandémie de COVID-19.
+
     {{> "covid_estimates_above_tab_footnote_fr"}}
 
 covid_estimates_above_tab_footnote_en:
@@ -39,20 +38,20 @@ covid_estimates_above_tab_footnote_fr:
 
 covid_estimates_summary_tab_label:
   en: Overview
-  fr: TODO
+  fr: Apperçu
 
 covid_estimates_summary_text_gov:
   transform: [handlebars,markdown]
-  en: This fiscal year (**year**), **govt_SupsA_total + govt_SupsB_total** in planned budgetary expenditures have been presented in the Estimates process in response to the COVID-19 pandemic.
-    These authorities make up **((govt_SupsA_total + govt_SupsB_total)/govt_total_auth_2020-21 )\*100%** of the total authorities presented in **year**. 
-  fr: Pour l'exercice en cours (**year**), **govt_SupsA_total + govt_SupsB_total** de dépenses budgétaires prévues ont été inscrits dans le processus budgétaire en réponse à la pandémie de COVID-19.
-    Ces autorisations constituent **((govt_SupsA_total + govt_SupsB_total)/govt_total_auth_2020-21 )\*100%** du total des crédits prévus en **year**. 
+  en: This fiscal year (**{{est_in_year}}**), **{{fmt_compact1_written gov_covid_auth_in_year}}** in planned budgetary expenditures have been presented in the Estimates process in response to the COVID-19 pandemic.
+    These authorities make up **{{fmt_percentage1 covid_auth_pct_of_gov_auth}}** of the total authorities presented in **{{est_in_year}}**. 
+  fr: Pour l'exercice en cours (**{{est_in_year}}**), **{{fmt_compact1_written gov_covid_auth_in_year}}** de dépenses budgétaires prévues ont été inscrits dans le processus budgétaire en réponse à la pandémie de COVID-19.
+    Ces autorisations constituent **{{fmt_percentage1 covid_auth_pct_of_gov_auth}}** du total des crédits prévus en **{{est_in_year}}**. 
 covid_estimates_summary_text_dept:
   transform: [handlebars,markdown]
-  en: This fiscal year (**year**), **current_dept** has **current_dept_SupsA_total_auth + current_dept_SupsB_total_auth** in authorities, as made available through the Estimates process.
-    These authorities make up **((current_dept_SupsA_total_auth + current_dept_SupsB_total_auth)/gov_total_SupsA+B)\*100%** of the government’s planned spending in response to the global pandemic. 
-  fr: Pour l’exercice en cours (**year**), **current_dept** dispose de **current_dept_SupsA_total_auth + current_dept_SupsB_total_auth** crédits qui lui ont été accordés dans le cadre du processus budgétaire.
-    Ces autorisations constituent **((current_dept_SupsA_total_auth + current_dept_SupsB_total_auth)/gov_total_SupsA+B)\*100%** du total des crédits prévus en **year**. 
+  en: This fiscal year (**{{est_in_year}}**), **{{subject.name}}** has **{{fmt_compact1_written dept_covid_auth_in_year}}** in authorities, as made available through the Estimates process.
+    These authorities make up **{{fmt_percentage1 covid_auth_pct_of_gov_auth}}** of the government’s planned spending in response to the global pandemic. 
+  fr: Pour l’exercice en cours (**{{est_in_year}}**), **{{subject.name}}** dispose de **{{fmt_compact1_written dept_covid_auth_in_year}}** crédits qui lui ont été accordés dans le cadre du processus budgétaire.
+    Ces autorisations constituent **{{fmt_percentage1 covid_auth_pct_of_gov_auth}}** du total des crédits prévus en **{{est_in_year}}**. 
 
 covid_estimates_by_doc:
   transform: [handlebars,markdown]
@@ -64,18 +63,35 @@ covid_estimates_by_doc:
   fr: |
     Total des autorisations liées à la COVID-19 par octroi de crédits :
 
+
 covid_estimates_department_tab_label:
   en: By Department
   fr: TODO
+covid_estimates_department_tab_text:
+  transform: [handlebars,markdown]
+  en: |
+    The department with the largest total COVID-19 related authorities is **{{largest_dept_name}}** with **{{fmt_compact1_written largest_dept_auth}}**
+    in authorities from Supplementary Estimates A and B.
+  fr: |
+    Le ministère ayant le plus grand nombre d'autorisations liées à COVID-19 est **{{largest_dept_name}}** avec **{{fmt_compact1_written largest_dept_auth}}**
+    de crédits inscrits dans les budgets supplémentaires A et B.
+
 
 covid_estimates_initiative_tab_label:
   en: By Estimates Initiative
   fr: TODO
-
+covid_estimates_initiative_tab_text:
+  transform: [handlebars,markdown]
+  en: |
+    The Estimates initiative with the largest total COVID-19 related authorities is **{{largest_initiative_name}}** with **{{fmt_compact1_written largest_initiative_auth}}**
+    in authorities from Supplementary Estimates A and B.
+  fr: |
+    L'initiative budgétaire disposant des crédits les plus grand nombre d'autorisations liées à COVID-19 est **{{largest_initiative_name}}** avec **{{fmt_compact1_written largest_initiative_auth}}**
+    de crédits inscrits dans les budgets supplémentaires A et B.
 
 covid_estimates_estimates_doc:
-  en: Estimates documents
-  fr: TODO
+  en: Estimates Instrument
+  fr: Instrument des dépenses
 
 covid_estimates_stat:
   en: Statutory COVID-19 authorities
