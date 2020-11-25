@@ -138,8 +138,6 @@ export const SurveyPopup = withRouter(
         !is_survey_campaign_over() &&
         (page_visited >= 3 || show_popup) &&
         active;
-      // TODO, should be removed before merging
-      should_show = true;
 
       if (should_show) {
         clearTimeout(this.timeout);
