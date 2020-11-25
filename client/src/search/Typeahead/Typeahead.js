@@ -29,6 +29,7 @@ export class Typeahead extends React.Component {
     can_show_menu: false,
     current_selected_index: -1,
     pagination_index: 0,
+    input_is_in_focus: false,
   };
 
   constructor(props) {
@@ -128,6 +129,12 @@ export class Typeahead extends React.Component {
 
   hide_menu = () => this.setState({ can_show_menu: false });
 
+  handle_window_click = (e) => {
+    if (!this.rbtRef.current.contains(e.target)) {
+      this.hide_menu();
+    }
+  };
+
   componentDidUpdate(prev_props, prev_state) {
     const { current_selected_index } = this.state;
     if (
@@ -139,6 +146,14 @@ export class Typeahead extends React.Component {
         current_selected_index
       ].scrollIntoViewIfNeeded();
     }
+  }
+
+  componentDidMount() {
+    document.body.addEventListener("click", this.handle_window_click);
+  }
+
+  componentWillUnmount() {
+    document.body.removeEventListener("click", this.handle_window_click);
   }
 
   render() {
@@ -157,6 +172,7 @@ export class Typeahead extends React.Component {
       can_show_menu,
       pagination_index,
       current_selected_index,
+      input_is_in_focus,
     } = this.state;
 
     const debounceOnNewQuery = _.debounce((query) => {
@@ -255,6 +271,12 @@ export class Typeahead extends React.Component {
       page_range_start,
       page_range_end,
       query_length: search_text.length,
+      input_is_in_focus,
+      needs_pagination_up_control,
+      needs_pagination_down_control,
+      pagination_size,
+      next_page_size,
+      paginated_results,
     };
 
     return (
@@ -280,7 +302,10 @@ export class Typeahead extends React.Component {
             onChange={update_search_text}
             ref={this.typeaheadRef}
             value={search_text}
-            onFocus={() => this.setState({ can_show_menu: true })}
+            onFocus={() =>
+              this.setState({ can_show_menu: true, input_is_in_focus: true })
+            }
+            onBlur={() => this.setState({ input_is_in_focus: false })}
             onKeyDown={(e) =>
               this.handle_key_down(
                 e,
@@ -475,6 +500,7 @@ export class Typeahead extends React.Component {
                                   this.setState((prev_state) => ({
                                     pagination_index:
                                       prev_state.pagination_index + 1,
+                                    current_selected_index: next_page_size + 1,
                                   }));
                                 }}
                               >
