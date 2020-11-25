@@ -214,5 +214,6 @@ quick_link_tp_by_region:
   fr: Paiements de transfert par région du bénéficiaire
 
 quick_link_covid_estimates:
-  en: Estimates by COVID-19 Initiatives
-  fr: TODO
+  transform: [handlebars]
+  text: |
+    {{gt "covid_initiatives"}}

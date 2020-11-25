@@ -1,6 +1,7 @@
 covid_estimates_panel_title:
-  en: COVID-19 Estimates Initiatives
-  fr: TODO
+  transform: [handlebars]
+  text: |
+    {{gt "covid_initiatives"}}
 
 covid_estimates_above_tab_text_gov:
   transform: [handlebars,markdown]
@@ -64,7 +65,7 @@ covid_estimates_by_doc:
 
 covid_estimates_department_tab_label:
   en: By Department
-  fr: TODO
+  fr: Par Ministère
 covid_estimates_department_tab_text:
   transform: [handlebars,markdown]
   en: |
@@ -77,7 +78,7 @@ covid_estimates_department_tab_text:
 
 covid_estimates_initiative_tab_label:
   en: By Estimates Initiative
-  fr: TODO
+  fr: Par initiative budgétaire
 covid_estimates_initiative_tab_text:
   transform: [handlebars,markdown]
   en: |
@@ -87,14 +88,13 @@ covid_estimates_initiative_tab_text:
     L'initiative budgétaire disposant des crédits les plus grand nombre d'autorisations liées à COVID-19 est **{{largest_initiative_name}}** avec **{{fmt_compact1_written largest_initiative_auth}}**
     de crédits inscrits dans les budgets supplémentaires A et B.
 
+
 covid_estimates_estimates_doc:
   en: Estimates Instrument
   fr: Instrument des dépenses
-
 covid_estimates_stat:
   en: Statutory COVID-19 authorities
-  fr: TODO
-
+  fr: Autorisations législatives COVID-19
 covid_estimates_voted:
   en: Voted COVID-19 authorities
-  fr: TODO
+  fr: Autorisations votées COVID-19

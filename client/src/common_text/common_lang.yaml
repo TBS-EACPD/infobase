@@ -681,16 +681,16 @@ all_voted_items:
 
 covid_initiative:
   en: COVID-19 Estimates Initiative
-  fr: TODO
+  fr: Initiative budgétaire COVID-19
 covid_initiatives:
   en: COVID-19 Estimates Initiatives
-  fr: TODO
+  fr: Initiatives budgétaires COVID-19
 covid_measure:
-  en: TODO
-  fr: TODO
+  en: COVID-19 Measure
+  fr: Mesure COVID-19
 covid_measures:
-  en: TODO
-  fr: TODO
+  en: COVID-19 Measures
+  fr: Mesures COVID-19
 
 ##################################
 # text for welcome/netflix panel
@@ -1056,7 +1056,7 @@ you_are_here:
   fr: Vous êtes ici
 dataset_navigation:
   en: Dataset navigation
-  fr: TODO
+  fr: Navigation dans l'ensemble de données
 
 infographic_for:
   transform: [handlebars]
