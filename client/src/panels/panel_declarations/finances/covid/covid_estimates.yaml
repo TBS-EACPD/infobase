@@ -6,16 +6,16 @@ covid_estimates_panel_title:
 covid_estimates_above_tab_text_gov:
   transform: [handlebars,markdown]
   en: |
-    This fiscal year (**{{est_in_year}}**), the government has authorized **{{fmt_compact1_written gov_covid_auth_in_year}}** billion in authorities to implement the response to the COVID-19 pandemic.
+    This fiscal year (**{{est_in_year}}**), the government has authorized **{{fmt_compact1_written gov_covid_auth_in_year}}** in authorities to implement the response to the COVID-19 pandemic.
   fr: |
-    Pour l’exercice en cours (**{{est_in_year}}**), le gouvernement a autorisé des crédits de **{{fmt_compact1_written gov_covid_auth_in_year}}** milliards de dollars pour la mise en œuvre de 
+    Pour l’exercice en cours (**{{est_in_year}}**), le gouvernement a autorisé des crédits de **{{fmt_compact1_written gov_covid_auth_in_year}}** pour la mise en œuvre de 
     mesures en réponse à la pandémie de COVID-19.
 covid_estimates_above_tab_text_dept:
   transform: [handlebars,markdown]
   en: |
-    This fiscal year (**{{est_in_year}}**), the government has authorized **{{fmt_compact1_written gov_covid_auth_in_year}}** billion spending to implement the response to the COVID-19 pandemic.
+    This fiscal year (**{{est_in_year}}**), the government has authorized **{{fmt_compact1_written gov_covid_auth_in_year}}** spending to implement the response to the COVID-19 pandemic.
   fr: |
-    Pour l’exercice en cours (**{{est_in_year}}**), le gouvernement a autorisé des dépenses de **{{fmt_compact1_written gov_covid_auth_in_year}}** milliards de dollars pour la mise en œuvre de mesures en
+    Pour l’exercice en cours (**{{est_in_year}}**), le gouvernement a autorisé des dépenses de **{{fmt_compact1_written gov_covid_auth_in_year}}** pour la mise en œuvre de mesures en
     réponse à la pandémie de COVID-19.
 
 covid_estimates_above_tab_footnote_title:
