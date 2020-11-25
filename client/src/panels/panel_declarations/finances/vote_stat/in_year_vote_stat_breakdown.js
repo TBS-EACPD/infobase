@@ -208,24 +208,21 @@ const planned_vote_or_stat_calculate = (vs) =>
     const all_rows = _.chain(
       orgVoteStatEstimates.voted_stat(main_col, false, false)[text]
     )
-      .map((d) => _.pick(d, "desc", "dept", main_col))
       .groupBy("dept")
-      .map((dept_items) =>
-        _.reduce(
-          dept_items,
-          (result, item) => {
-            result[item.desc] = result[item.desc]
-              ? {
-                  ...item,
-                  [main_col]: result[item.desc][main_col] + item[main_col],
-                }
-              : item;
-            return result;
-          },
-          {}
-        )
+      .flatMap((dept_group, dept) =>
+        _.chain(dept_group)
+          .groupBy("desc")
+          .map((desc_group, desc) => ({
+            dept,
+            desc,
+            [main_col]: _.reduce(
+              desc_group,
+              (memo, row) => memo + row[main_col],
+              0
+            ),
+          }))
+          .value()
       )
-      .flatMap((items) => _.map(items))
       .sortBy((x) => -x[main_col])
       .value();
 
