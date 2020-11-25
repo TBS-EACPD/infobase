@@ -193,14 +193,14 @@ const ByDepartmentTab = ({ panel_args }) => {
       header: text_maker("covid_estimates_stat"),
       is_searchable: false,
       is_summable: true,
-      formatter: "compact2_written",
+      formatter: "compact2",
     },
     vote: {
       index: 3,
       header: text_maker("covid_estimates_voted"),
       is_searchable: false,
       is_summable: true,
-      formatter: "compact2_written",
+      formatter: "compact2",
     },
   };
 
@@ -296,14 +296,14 @@ const ByInitiativeTab = ({ panel_args }) => {
       header: text_maker("covid_estimates_stat"),
       is_searchable: false,
       is_summable: true,
-      formatter: "compact2_written",
+      formatter: "compact2",
     },
     vote: {
       index: 3,
       header: text_maker("covid_estimates_voted"),
       is_searchable: false,
       is_summable: true,
-      formatter: "compact2_written",
+      formatter: "compact2",
     },
   };
 
