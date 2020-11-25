@@ -65,5 +65,35 @@
       }
     },
     "style": "horizontal"
+  },
+  "sha": {
+    "required": true,
+    "value_type": "string",
+    "form_type": false
+  },
+  "route": {
+    "required": true,
+    "value_type": "string",
+    "form_type": false
+  },
+  "lang": {
+    "required": true,
+    "value_type": "string",
+    "form_type": false
+  },
+  "app_version": {
+    "required": true,
+    "value_type": "string",
+    "form_type": false
+  },
+  "client_id": {
+    "required": true,
+    "value_type": "string",
+    "form_type": false
+  },
+  "additional": {
+    "required": false,
+    "value_type": "json",
+    "form_type": false
   }
 }
