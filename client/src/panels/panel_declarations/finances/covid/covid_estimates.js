@@ -27,7 +27,7 @@ const get_est_doc_name = (est_doc) => estimates_docs[est_doc][window.lang];
 const get_est_doc_order = (est_doc) => estimates_docs[est_doc].order;
 const est_doc_sort_func = (est_doc_a, est_doc_b) => {
   const order_a = get_est_doc_order(est_doc_a);
-  const order_b = get_est_doc_order(est_doc_a);
+  const order_b = get_est_doc_order(est_doc_b);
 
   if (order_a < order_b) {
     return -1;
