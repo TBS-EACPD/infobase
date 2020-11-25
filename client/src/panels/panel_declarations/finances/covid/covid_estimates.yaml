@@ -57,6 +57,9 @@ covid_estimates_by_doc:
     {{/each}}
   fr: |
     Total des autorisations liées à la COVID-19 par octroi de crédits :
+    {{#each est_doc_summary_stats}}
+    * {{ this.[0]}} : **{{fmt_compact1_written this.[1] }}**
+    {{/each}}
 
 
 covid_estimates_department_tab_label:
