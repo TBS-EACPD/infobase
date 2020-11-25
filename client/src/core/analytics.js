@@ -21,13 +21,7 @@ const dimensions = {
 };
 
 let client_id;
-const get_client_id = () => {
-  if (_.isUndefined(client_id)) {
-    throw "Error: Google Analytics has not been initialized";
-  } else {
-    return client_id;
-  }
-};
+const get_client_id = () => client_id;
 
 function initialize_analytics() {
   const is_dev =
