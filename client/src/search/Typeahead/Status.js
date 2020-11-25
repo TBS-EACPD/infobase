@@ -10,10 +10,11 @@ export class Status extends React.Component {
     debounced: false,
   };
   debounceStateUpdate = _.debounce(() => {
-    const { is_in_focus } = this.props;
+    const { input_is_in_focus } = this.props;
     const { debounced } = this.state;
 
-    !debounced && this.setState({ silenced: !is_in_focus, debounced: true });
+    !debounced &&
+      this.setState({ silenced: !input_is_in_focus, debounced: true });
   }, 1400);
   componentDidUpdate(prev_props) {
     if (this.props !== prev_props) {
@@ -30,10 +31,17 @@ export class Status extends React.Component {
       query_length,
       page_range_start,
       page_range_end,
+      needs_pagination_up_control,
+      needs_pagination_down_control,
+      pagination_size,
+      next_page_size,
+      paginated_results,
     } = this.props;
-    const { debounced } = this.state;
+    const { debounced, silenced } = this.state;
 
     this.debounceStateUpdate();
+
+    const num_results_showing = _.size(paginated_results);
 
     const result =
       total_matching_results == 1
@@ -47,11 +55,38 @@ export class Status extends React.Component {
         return text_maker("no_matches_found");
       } else {
         if (current_selected_index >= 0) {
+          if (needs_pagination_up_control && current_selected_index == 0) {
+            return text_maker("paginate_previous", {
+              page_size: pagination_size,
+            });
+          } else if (needs_pagination_down_control) {
+            if (
+              current_selected_index ===
+              num_results_showing + needs_pagination_up_control
+            ) {
+              return text_maker("paginate_next", { next_page_size });
+            } else if (
+              current_selected_index ===
+              num_results_showing + 1 + needs_pagination_up_control
+            ) {
+              return text_maker("close_menu");
+            }
+          } else if (
+            !needs_pagination_down_control &&
+            current_selected_index ===
+              num_results_showing + needs_pagination_up_control
+          ) {
+            return text_maker("close_menu");
+          }
+
           return text_maker("num_results_showing_with_selected", {
             total_matching_results,
             result,
             current_selected,
-            current_selected_index: current_selected_index + 1,
+            current_selected_index:
+              current_selected_index -
+              needs_pagination_up_control +
+              page_range_start,
             page_range_end,
             page_range_start,
           });
@@ -71,7 +106,7 @@ export class Status extends React.Component {
     return (
       <div className="sr-only" style={{ position: "absolute" }}>
         <div role="status" aria-atomic="true" aria-live="polite">
-          {debounced ? content : ""}
+          {!silenced && debounced ? content : ""}
         </div>
       </div>
     );
