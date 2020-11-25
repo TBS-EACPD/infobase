@@ -128,6 +128,7 @@ const SummaryTab = ({ panel_args }) => {
       );
 
       return {
+        dept_covid_auth_in_year,
         covid_auth_pct_of_gov_auth:
           dept_covid_auth_in_year / gov_total_auth_in_year,
       };
