@@ -507,7 +507,7 @@ export const declare_covid_estimates_panel = () =>
             <div className="frow">
               <div className="fcol-md-12 fcol-xs-12 medium-panel-text text">
                 <TM
-                  k={`covid_estimates_above_tab_text_${panel_args.subject.level}`}
+                  k={"covid_estimates_above_tab_text_gov"}
                   args={panel_args}
                 />
                 <TM
