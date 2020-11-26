@@ -23,8 +23,10 @@ const { TabbedContent, SpinnerWrapper, SmartDisplayTable } = util_components;
 
 const { text_maker, TM } = create_text_maker_component([text]);
 
-const get_est_doc_name = (est_doc) => estimates_docs[est_doc][window.lang];
-const get_est_doc_order = (est_doc) => estimates_docs[est_doc].order;
+const get_est_doc_name = (est_doc) =>
+  estimates_docs[est_doc] ? estimates_docs[est_doc][window.lang] : "";
+const get_est_doc_order = (est_doc) =>
+  estimates_docs[est_doc] ? estimates_docs[est_doc].order : 9999;
 const est_doc_sort_func = (est_doc_a, est_doc_b) => {
   const order_a = get_est_doc_order(est_doc_a);
   const order_b = get_est_doc_order(est_doc_b);
@@ -158,6 +160,30 @@ const SummaryTab = ({ panel_args }) => {
   );
 };
 
+const common_column_configs = {
+  est_doc: {
+    index: 1,
+    header: text_maker("covid_estimates_estimates_doc"),
+    is_searchable: true,
+    formatter: get_est_doc_name,
+    raw_formatter: get_est_doc_name,
+    sort_func: est_doc_sort_func,
+  },
+  stat: {
+    index: 2,
+    header: text_maker("covid_estimates_stat"),
+    is_searchable: false,
+    is_summable: true,
+    formatter: "compact2",
+  },
+  vote: {
+    index: 3,
+    header: text_maker("covid_estimates_voted"),
+    is_searchable: false,
+    is_summable: true,
+    formatter: "compact2",
+  },
+};
 const ByDepartmentTab = ({ panel_args }) => {
   // pre-sort by est doc, so presentation consistent when sorting by other col
   const pre_sorted_dept_estimates = _.sortBy(
@@ -182,27 +208,7 @@ const ByDepartmentTab = ({ panel_args }) => {
       raw_formatter: (org) => org.name,
       sort_func: (org_a, org_b) => string_sort_func(org_a.name, org_b.name),
     },
-    est_doc: {
-      index: 1,
-      header: text_maker("covid_estimates_estimates_doc"),
-      is_searchable: true,
-      formatter: get_est_doc_name,
-      sort_func: est_doc_sort_func,
-    },
-    stat: {
-      index: 2,
-      header: text_maker("covid_estimates_stat"),
-      is_searchable: false,
-      is_summable: true,
-      formatter: "compact2",
-    },
-    vote: {
-      index: 3,
-      header: text_maker("covid_estimates_voted"),
-      is_searchable: false,
-      is_summable: true,
-      formatter: "compact2",
-    },
+    ...common_column_configs,
   };
 
   const [largest_dept_id, largest_dept_auth] = _.chain(
@@ -285,27 +291,7 @@ const ByInitiativeTab = ({ panel_args }) => {
       is_searchable: true,
       sort_func: string_sort_func,
     },
-    est_doc: {
-      index: 1,
-      header: text_maker("covid_estimates_estimates_doc"),
-      is_searchable: true,
-      formatter: get_est_doc_name,
-      sort_func: est_doc_sort_func,
-    },
-    stat: {
-      index: 2,
-      header: text_maker("covid_estimates_stat"),
-      is_searchable: false,
-      is_summable: true,
-      formatter: "compact2",
-    },
-    vote: {
-      index: 3,
-      header: text_maker("covid_estimates_voted"),
-      is_searchable: false,
-      is_summable: true,
-      formatter: "compact2",
-    },
+    ...common_column_configs,
   };
 
   const [largest_initiative_name, largest_initiative_auth] = _.chain(
