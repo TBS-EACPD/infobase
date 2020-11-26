@@ -29,7 +29,7 @@ covid_estimates_above_tab_footnote_list:
   fr: |
     * Ces chiffres correspondent aux {{gl_tt "autorisations de dépenses" "AUTH"}} énoncées dans le {{gl_tt "processus budgétaire" "EST_PROC"}} et ne sont pas les {{gl_tt "dépenses réelles" "EXP"}}.
     * Sont exclues toutes les réaffectations d'autorisations existantes à la réponse à la pandémie COVID-19.
-    * De plus, ces autorisations ne représentent qu’une partie du plan d'intervention économique du Canada pour répondre à la COVID-19, puisque certaines mesures ne sont pas présentées aux budget de dépenses.
+    * De plus, ces autorisations ne représentent qu’une partie du plan d'intervention économique du Canada pour répondre à la COVID-19, puisque certaines mesures ne sont pas présentées aux budgets de dépenses.
 
 
 covid_estimates_summary_tab_label:
