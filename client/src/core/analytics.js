@@ -22,10 +22,10 @@ const dimensions = {
 
 let client_id;
 const get_client_id = () => {
-  if (_.isUndefined(client_id)) {
+  if (!initialized || _.isUndefined(client_id)) {
     /* eslint-disable-next-line no-console */
     console.error("Error: Google Analytics has not been initialized");
-    return "";
+    return "uninitialized";
   } else {
     return client_id;
   }
