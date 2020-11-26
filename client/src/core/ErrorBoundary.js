@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 
+import { get_session_storage_w_expiry } from "../general_utils.js";
 import { get_static_url, make_request } from "../request_utils.js";
 
 import { log_standard_event } from "./analytics.js";
@@ -65,7 +66,7 @@ class ErrorBoundary extends React.Component {
   render() {
     const { children } = this.props;
     const { error, testing_for_stale_client } = this.state;
-    const redirected_msg = sessionStorage.getItem("redirected_msg");
+    const redirected_msg = get_session_storage_w_expiry("redirected_msg");
 
     if (_.isNull(error)) {
       return children;

@@ -16,6 +16,7 @@ import { ErrorBoundary } from "../core/ErrorBoundary.js";
 import { has_local_storage } from "../core/feature_detection.js";
 import { InsertRuntimeFooterLinks } from "../core/InsertRuntimeFooterLinks.js";
 import { ReactUnmounter } from "../core/NavComponents.js";
+import { get_session_storage_w_expiry } from "../general_utils.js";
 import { TooltipActivator } from "../glossary/TooltipActivator.js";
 import { SurveyPopup } from "../Survey/SurveyPopup.js";
 
@@ -86,7 +87,7 @@ export class App extends React.Component {
   }
 
   state = {
-    show_redirected_msg: sessionStorage.getItem("redirected_msg"),
+    show_redirected_msg: get_session_storage_w_expiry("redirected_msg"),
     outage_message: null,
     showSurvey: false,
   };
@@ -140,10 +141,10 @@ export class App extends React.Component {
             {show_redirected_msg && (
               <HeaderNotification
                 list_of_text={[
-                  `The link you tried to visit: ${sessionStorage.getItem(
+                  `The link you tried to visit: ${get_session_storage_w_expiry(
                     "pre_redirected_url"
                   )}`,
-                  sessionStorage.getItem("redirected_msg"),
+                  get_session_storage_w_expiry("redirected_msg"),
                 ]}
                 hideNotification={() => {
                   sessionStorage.removeItem("pre_redirected_url");
