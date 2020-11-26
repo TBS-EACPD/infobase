@@ -302,7 +302,7 @@ class EmailFrontend extends React.Component {
         className="email-backend-form"
       >
         {loading && (
-          <div style={{ height: "50px" }}>
+          <div style={{ height: "100px", position: "relative" }}>
             <SpinnerWrapper config_name="tabbed_content" />
           </div>
         )}
