@@ -149,18 +149,6 @@ export const SurveyPopup = withRouter(
           MISC2: "displayed",
         });
       }
-      const full_survey_button = (
-        <button
-          className="btn btn-ib-primary"
-          style={{ maxWidth: "180px" }}
-          onClick={() => {
-            this.handleButtonPress("yes");
-            toggleSurvey();
-          }}
-        >
-          {text_maker("take_full_survey")}
-        </button>
-      );
 
       return (
         <FixedPopover
@@ -176,15 +164,51 @@ export const SurveyPopup = withRouter(
             </Fragment>
           }
           body={
+            <Fragment>
+              <div
+                style={{
+                  fontSize: "0.9em",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <TM k="survey_popup_body" />
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+                <a
+                  className="link-unstyled btn btn-ib-primary"
+                  onClick={() => this.handleButtonPress("yes")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={"#survey"}
+                >
+                  {text_maker(`survey_popup_yes`)}
+                </a>
+                {_.map(["later", "no"], (button_type) => (
+                  <button
+                    key={button_type}
+                    className="btn btn-ib-primary"
+                    onClick={() => this.handleButtonPress(button_type)}
+                  >
+                    {text_maker(`survey_popup_${button_type}`)}
+                  </button>
+                ))}
+              </div>
+            </Fragment>
+          }
+          footer={
             <div
               style={{
                 fontSize: "0.9em",
                 display: "flex",
                 flexDirection: "column",
+                textAlign: "left",
               }}
             >
-              <TM k="survey_popup_body" />
-              {full_survey_button}
+              <TM
+                k="simplified_survey_header"
+                style={{ alignSelf: "center", fontSize: "1.4em" }}
+              />
               <TM
                 k="take_simplified_survey_text"
                 style={{ margin: "8px 0px" }}
@@ -193,28 +217,6 @@ export const SurveyPopup = withRouter(
                 template_name="feedback_simplified"
                 include_privacy={false}
               />
-            </div>
-          }
-          footer={
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <a
-                className="link-unstyled btn btn-ib-primary"
-                onClick={() => this.handleButtonPress("yes")}
-                target="_blank"
-                rel="noopener noreferrer"
-                href={"#survey"}
-              >
-                {text_maker(`survey_popup_yes`)}
-              </a>
-              {_.map(["later", "no"], (button_type) => (
-                <button
-                  key={button_type}
-                  className="btn btn-ib-primary"
-                  onClick={() => this.handleButtonPress(button_type)}
-                >
-                  {text_maker(`survey_popup_${button_type}`)}
-                </button>
-              ))}
             </div>
           }
         />
