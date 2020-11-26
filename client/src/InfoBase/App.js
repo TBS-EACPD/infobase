@@ -131,7 +131,7 @@ export class App extends React.Component {
             <EasyAccess />
             {outage_msg && (
               <HeaderNotification
-                text={outage_msg}
+                list_of_text={[outage_msg]}
                 hideNotification={() => {
                   this.setState({ outage_msg: null });
                 }}
@@ -139,8 +139,14 @@ export class App extends React.Component {
             )}
             {show_redirected_msg && (
               <HeaderNotification
-                text={sessionStorage.getItem("redirected_msg")}
+                list_of_text={[
+                  `The link you tried to visit: ${sessionStorage.getItem(
+                    "pre_redirected_url"
+                  )}`,
+                  sessionStorage.getItem("redirected_msg"),
+                ]}
                 hideNotification={() => {
+                  sessionStorage.removeItem("pre_redirected_url");
                   sessionStorage.removeItem("redirected_msg");
                   this.setState({ show_redirected_msg: false });
                 }}

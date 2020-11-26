@@ -11,16 +11,20 @@ export class HeaderNotification extends React.Component {
   }
 
   render() {
-    const { text, hideNotification } = this.props;
+    const { list_of_text, hideNotification } = this.props;
 
     return (
       <div
         style={{
           transform: !this.state.show ? "translateY(-100%)" : "translateY(0)",
         }}
-        className="ib-header alert alert-warning"
+        className="ib-header alert-warning"
       >
-        <p style={{ marginBottom: "1.2rem" }}>{text}</p>
+        {_.map(list_of_text, (text, i) => (
+          <p key={i} style={{ marginBottom: "1.2rem" }}>
+            {text}
+          </p>
+        ))}
         <button className="btn btn-ib-primary" onClick={hideNotification}>
           {trivial_text_maker("close")}
         </button>
