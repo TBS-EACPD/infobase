@@ -79,7 +79,7 @@ invalid_panel:
   fr: TODO
 invalid_bubble_redirect_intro:
   transform: [handlebars]
-  en: The "{{bubble_id}}" is invalid. We redirected you to About page.
+  en: The "{{bubble_id}}" is invalid. We redirected you to intro page.
   fr: TODO
 
 
