@@ -42,10 +42,10 @@ export const get_crso_panels = (subject) =>
       declare_crso_in_gov_panel(),
     ],
     financial: [
+      declare_financial_key_concepts_panel(),
+      declare_dead_crso_warning_panel(),
       declare_late_actual_resources_panel(),
       declare_late_planned_resources_panel(),
-      declare_dead_crso_warning_panel(),
-      declare_financial_key_concepts_panel(),
       declare_welcome_mat_panel(),
       declare_planned_actual_comparison_panel(),
       declare_crso_by_prog_fte_panel(),
@@ -54,13 +54,17 @@ export const get_crso_panels = (subject) =>
     ],
     results: !subject.is_internal_service &&
       subject.has_data("results_data") && [
+        declare_dead_crso_warning_panel(),
         declare_results_key_concepts_panel(),
+        declare_late_actual_resources_panel(),
+        declare_late_planned_resources_panel(),
         declare_late_results_warning_panel(),
         declare_drr_summary_panel(),
         declare_results_table_panel(),
         declare_explore_results_panel(),
       ],
     related: [
+      declare_dead_crso_warning_panel(),
       declare_crso_links_to_other_crso_panel(),
       declare_tags_of_interest_panel(),
     ],

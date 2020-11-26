@@ -229,7 +229,7 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
                 level === "dept" ? subject.id : subject.dept.id
               ),
             render: () => (
-              <WarningPanel>
+              <WarningPanel banner_class="warning">
                 <TM
                   k={`late_${planned_or_actual}_resources_warning_${level}`}
                 />

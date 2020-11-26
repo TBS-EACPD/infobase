@@ -41,9 +41,9 @@ import {
 export const get_gov_panels = (subject) => ({
   intro: [declare_simplographic_panel()],
   financial: [
+    declare_financial_key_concepts_panel(),
     declare_late_actual_resources_panel(),
     declare_late_planned_resources_panel(),
-    declare_financial_key_concepts_panel(),
     declare_welcome_mat_panel(),
     declare_auth_exp_planned_spending_panel(),
     declare_in_year_estimates_split_panel(),
@@ -69,6 +69,8 @@ export const get_gov_panels = (subject) => ({
   results: [
     declare_results_key_concepts_panel(),
     declare_late_results_warning_panel(),
+    declare_late_actual_resources_panel(),
+    declare_late_planned_resources_panel(),
     declare_results_intro_panel(),
     declare_gov_drr_panel(),
     declare_gov_dp_panel(),
