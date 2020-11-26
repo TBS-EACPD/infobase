@@ -97,12 +97,17 @@ class EmailFrontend extends React.Component {
     get_email_template(this.state.template_name).then((template) => {
       this.setState({ loading: false, template: template });
     });
+
+    // need to track mounted state, to avoid potentially setting state on an unmounted component after the backend response
+    this._is_mounted = true;
+  }
+  componentWillUnmount() {
+    this._is_mounted = false;
   }
   componentDidUpdate() {
     const {
       sent_to_backend,
       awaiting_backend_response,
-      backend_response,
 
       template_name,
       template,
@@ -123,23 +128,23 @@ class EmailFrontend extends React.Component {
       send_completed_email_template(template_name, {
         ...completed_template,
         ...values_for_automatic_fields,
-      }).then((backend_response) =>
-        this.setState({
-          awaiting_backend_response: false,
-          backend_response,
-        })
-      );
+      }).then((backend_response) => {
+        log_standard_event({
+          SUBAPP: window.location.hash.replace("#", "") || "start",
+          MISC1: "EMAIL_FRONTEND",
+          MISC2: `${template_name}: ${backend_response.error_message}`,
+        });
+
+        this._is_mounted &&
+          this.setState({
+            awaiting_backend_response: false,
+            backend_response,
+          });
+      });
 
       this.setState({ sent_to_backend: true });
-    }
-
-    // log server response to submitted completed template
-    if (!awaiting_backend_response && sent_to_backend) {
-      log_standard_event({
-        SUBAPP: window.location.hash.replace("#", "") || "start",
-        MISC1: "EMAIL_FRONTEND",
-        MISC2: `${template_name}: ${backend_response.error_message}`,
-      });
+    } else if (awaiting_backend_response && sent_to_backend) {
+      this.props.on_submitted();
     }
   }
   render() {
@@ -441,4 +446,5 @@ export { EmailFrontend };
 EmailFrontend.defaultProps = {
   top_border: true,
   include_privacy: true,
+  on_submitted: _.noop,
 };

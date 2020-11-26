@@ -104,7 +104,7 @@ export const SurveyPopup = withRouter(
         MISC2: `interaction: ${button_type}`,
       });
 
-      if (_.includes(["yes", "no"], button_type)) {
+      if (_.includes(["yes", "no", "short_survey_submitted"], button_type)) {
         localStorage.setItem(`infobase_survey_popup_deactivated`, "true");
         localStorage.setItem(
           `infobase_survey_popup_deactivated_since`,
@@ -216,6 +216,9 @@ export const SurveyPopup = withRouter(
               <EmailFrontend
                 template_name="feedback_simplified"
                 include_privacy={false}
+                on_submitted={() =>
+                  this.handleButtonPress("short_survey_submitted")
+                }
               />
             </div>
           }
