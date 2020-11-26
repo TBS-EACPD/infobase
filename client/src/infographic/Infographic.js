@@ -387,7 +387,7 @@ const Infographic = ({
 
         // Everything matches except panel, redirect to its infograph page
         if (_.includes(bubbles_for_subj, bubble_id)) {
-          set_redirect_msg("invalid_panel", { options });
+          set_redirect_msg("invalid_panel");
           window.location.replace(infograph_href_template(subject, bubble_id));
           window.location.reload();
         } else {
