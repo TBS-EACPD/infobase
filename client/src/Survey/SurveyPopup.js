@@ -135,7 +135,7 @@ export const SurveyPopup = withRouter(
     render() {
       const { active, page_visited, show_popup } = this.state;
 
-      let should_show =
+      const should_show =
         !is_survey_campaign_over() &&
         (page_visited >= 3 || show_popup) &&
         active;
