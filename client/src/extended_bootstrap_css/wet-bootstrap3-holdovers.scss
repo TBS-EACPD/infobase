@@ -213,10 +213,10 @@ h6, .h6 {
  */
  #wb-bc {
   background-color: #f5f5f5; }
-  #wb-bc ol {
+  #wb-bc .breadcrumb ol {
     border-radius: 0;
     margin-bottom: 0; }
-  #wb-bc li {
+  #wb-bc .breadcrumb li {
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -1,10 +1,12 @@
 import { Fragment } from "react";
 import { withRouter } from "react-router";
 
-import { AlertBanner } from "../components/index.js";
+import { AlertBanner, MultiColumnList } from "../components/index.js";
 import { IconHome } from "../icons/icons.js";
 import { index_lang_lookups } from "../InfoBase/index_data.js";
 
+import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "../models/footnotes/dynamic_footnotes.js";
+import { Subject } from "../models/subject.js";
 import { trivial_text_maker } from "../models/text.js";
 
 import { log_page_view } from "./analytics.js";
@@ -151,6 +153,43 @@ const HeaderBanner = withRouter(
   }
 );
 
+const TemporaryPublicAccountsBanner = () => {
+  const route_filter = (match, history) =>
+    /^\/(start|tag-explorer|partition|treemap|rpb)/.test(match.path);
+
+  const late_orgs =
+    PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC.late_resources_orgs;
+  const banner_content = (
+    <Fragment>
+      {
+        {
+          en:
+            "The latest actual FTE values do not include values from the organizations listed below, as their data is not yet available. Updates will follow.",
+          fr:
+            "Dépenses planifiées des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.",
+        }[window.lang]
+      }
+      <MultiColumnList
+        list_items={_.map(
+          late_orgs,
+          (org_id) => Subject.Dept.lookup(org_id).name
+        )}
+        column_count={window.lang === "en" && late_orgs.length > 3 ? 2 : 1}
+        li_class={late_orgs.length > 4 ? "font-small" : ""}
+      />
+    </Fragment>
+  );
+
+  return (
+    <HeaderBanner
+      route_filter={route_filter}
+      banner_content={banner_content}
+      banner_class="warning"
+      additional_class_names="medium-panel-text"
+    />
+  );
+};
+
 export class StandardRouteContainer extends React.Component {
   componentDidMount() {
     //unless a route's component is sufficiently complicated, it should never unmount/remount a StandardRouteContainer
@@ -175,6 +214,7 @@ export class StandardRouteContainer extends React.Component {
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
         <HeaderBanner route_filter={_.constant(false)} />
+        <TemporaryPublicAccountsBanner />
         {beta && (
           <HeaderBanner
             route_filter={_.constant(true)}
