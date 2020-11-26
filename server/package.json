@@ -36,7 +36,7 @@
     "jest": "^25.1.0",
     "jest-cli": "^25.1.0",
     "kill-port": "^1.5.2",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.6"
   },
   "scripts": {
     "presnapshot_tests": "(export USE_TEST_DATA=1 && babel-node src/populate_db.js)",
