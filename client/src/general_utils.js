@@ -24,6 +24,31 @@ export const make_unique_func = function () {
   };
 };
 
+export const set_session_storage_w_expiry = (key, value, ttl = 5000) => {
+  const now = new Date().getTime();
+  const item = {
+    value: value,
+    expiry: now + ttl,
+  };
+  sessionStorage.setItem(key, JSON.stringify(item));
+};
+export const get_session_storage_w_expiry = (key) => {
+  const itemStr = sessionStorage.getItem(key);
+
+  if (!itemStr) {
+    return null;
+  }
+
+  const item = JSON.parse(itemStr);
+  const now = new Date().getTime();
+
+  if (now > item.expiry) {
+    sessionStorage.removeItem(key);
+    return null;
+  }
+  return item.value;
+};
+
 // <div id='make_unique'></div>
 // consider replacing with _.uniqueId
 export const make_unique = make_unique_func();

@@ -11,7 +11,11 @@ import { log_standard_event } from "../core/analytics.js";
 
 import { ensure_loaded } from "../core/lazy_loader.js";
 import { StandardRouteContainer } from "../core/NavComponents";
-import { shallowEqualObjectsOverKeys, SafeJSURL } from "../general_utils.js";
+import {
+  shallowEqualObjectsOverKeys,
+  SafeJSURL,
+  set_session_storage_w_expiry,
+} from "../general_utils.js";
 import { Subject } from "../models/subject.js";
 
 import { get_panels_for_subject } from "../panels/get_panels_for_subject/index.js";
@@ -334,13 +338,13 @@ const Infographic = ({
   },
 }) => {
   const set_redirect_msg = (msg_key, args) => {
-    sessionStorage.setItem(
+    set_session_storage_w_expiry(
       "pre_redirected_url",
       `#orgs/${level}/${subject_id}/infograph/${active_bubble_id}${
         options ? `/${options}` : ""
       }`
     );
-    sessionStorage.setItem("redirected_msg", text_maker(msg_key, args));
+    set_session_storage_w_expiry("redirected_msg", text_maker(msg_key, args));
   };
   const redirect_to_intro = (subject, bubble_id) => {
     set_redirect_msg("invalid_bubble_redirect_intro", { bubble_id });
