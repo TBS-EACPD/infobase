@@ -61,6 +61,26 @@ infograph_explorer_link:
   en: Advanced search
   fr: Recherche avancée
 
+invalid_level_redirect_home:
+  transform: [handlebars]
+  en: The "{{level}}" is invalid. We redirected you to homepage.
+  fr: TODO
+invalid_subject_redirect_parent_dept:
+  transform: [handlebars]
+  en: The organization "{{subject_id}}" is invalid. We redirected you to its parent department.
+  fr: TODO
+invalid_subject_redirect_home:
+  transform: [handlebars]
+  en: The organization "{{subject_id}}" is invalid. We redirected you to homepage.
+  fr: TODO
+invalid_panel:
+  transform: [handlebars]
+  en: The "{{options}}" is invalid.
+  fr: TODO
+invalid_bubble_redirect_intro:
+  transform: [handlebars]
+  en: The "{{bubble_id}}" is invalid. We redirected you to About page.
+  fr: TODO
 
 
 
