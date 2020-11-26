@@ -184,42 +184,43 @@ export const SurveyPopup = withRouter(
                 >
                   {text_maker(`survey_popup_yes`)}
                 </a>
-                {_.map(["later", "no"], (button_type) => (
-                  <button
-                    key={button_type}
-                    className="btn btn-ib-primary"
-                    onClick={() => this.handleButtonPress(button_type)}
-                  >
-                    {text_maker(`survey_popup_${button_type}`)}
-                  </button>
-                ))}
+              </div>
+              <div
+                className="mrgn-tp-md"
+                style={{
+                  fontSize: "0.9em",
+                  display: "flex",
+                  flexDirection: "column",
+                  textAlign: "left",
+                  borderTop: "1px solid #e5e5e5",
+                }}
+              >
+                <TM
+                  k="simplified_survey_header"
+                  style={{ alignSelf: "center", fontSize: "1.4em" }}
+                />
+                <EmailFrontend
+                  template_name="feedback_simplified"
+                  include_privacy={false}
+                  top_border={false}
+                  on_submitted={() =>
+                    this.handleButtonPress("short_survey_submitted")
+                  }
+                />
               </div>
             </Fragment>
           }
           footer={
-            <div
-              style={{
-                fontSize: "0.9em",
-                display: "flex",
-                flexDirection: "column",
-                textAlign: "left",
-              }}
-            >
-              <TM
-                k="simplified_survey_header"
-                style={{ alignSelf: "center", fontSize: "1.4em" }}
-              />
-              <TM
-                k="take_simplified_survey_text"
-                style={{ margin: "8px 0px" }}
-              />
-              <EmailFrontend
-                template_name="feedback_simplified"
-                include_privacy={false}
-                on_submitted={() =>
-                  this.handleButtonPress("short_survey_submitted")
-                }
-              />
+            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+              {_.map(["later", "no"], (button_type) => (
+                <button
+                  key={button_type}
+                  className="btn btn-ib-primary"
+                  onClick={() => this.handleButtonPress(button_type)}
+                >
+                  {text_maker(`survey_popup_${button_type}`)}
+                </button>
+              ))}
             </div>
           }
         />
