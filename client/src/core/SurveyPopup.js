@@ -15,8 +15,7 @@ import text from "./SurveyPopup.yaml";
 const { TM, text_maker } = create_text_maker_component(text);
 
 const page_visit_increment = 1;
-//TODO Need to set the correct time
-const survey_campaign_end_date = new Date(2022, 3, 31).getTime();
+const survey_campaign_end_date = new Date(2019, 3, 31).getTime();
 
 const get_path_root = (path) =>
   _.chain(path).replace(/^\//, "").split("/").first().value();
