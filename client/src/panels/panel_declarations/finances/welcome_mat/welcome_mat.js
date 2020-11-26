@@ -1034,6 +1034,7 @@ export const declare_welcome_mat_panel = () =>
         case "dept":
           return {
             footnotes,
+            missing_info: "ok",
             depends_on: [
               "orgVoteStatEstimates",
               "orgVoteStatPa",

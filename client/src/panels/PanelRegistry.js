@@ -43,6 +43,9 @@ class PanelRegistry {
   }
 
   static panels_for_table(table_id) {
+    console.log(
+      _.filter(panels, ({ depends_on }) => _.includes(depends_on, table_id))
+    );
     return _.filter(panels, ({ depends_on }) =>
       _.includes(depends_on, table_id)
     );
@@ -110,6 +113,7 @@ class PanelRegistry {
     // will go away when we drop tables all together
     if (
       this.level === "dept" &&
+      this.missing_info !== "ok" &&
       _.some(this.depends_on, (t) => {
         return !Table.lookup(t).depts[subject.id];
       })
