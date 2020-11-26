@@ -46,10 +46,10 @@ export const get_program_panels = (subject) =>
       declare_program_fed_structure_panel(),
     ],
     financial: [
+      declare_financial_key_concepts_panel(),
+      declare_dead_program_warning_panel(),
       declare_late_actual_resources_panel(),
       declare_late_planned_resources_panel(),
-      declare_dead_program_warning_panel(),
-      declare_financial_key_concepts_panel(),
       declare_welcome_mat_panel(),
       declare_vote_stat_split_panel(),
       declare_spend_rev_split_panel(),
@@ -62,11 +62,15 @@ export const get_program_panels = (subject) =>
       subject.has_data("results_data") && [
         declare_results_key_concepts_panel(),
         declare_late_results_warning_panel(),
+        declare_late_actual_resources_panel(),
+        declare_late_planned_resources_panel(),
+        declare_dead_program_warning_panel(),
         declare_drr_summary_panel(),
         declare_results_table_panel(),
         declare_explore_results_panel(),
       ],
     related: [
+      declare_dead_program_warning_panel(),
       declare_related_program_structure_panel(),
       declare_tags_of_interest_panel(),
     ],
