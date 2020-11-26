@@ -75,7 +75,7 @@ invalid_subject_redirect_home:
   fr: TODO
 invalid_panel:
   transform: [handlebars]
-  en: The "{{options}}" is invalid.
+  en: The link to panel is invalid.
   fr: TODO
 invalid_bubble_redirect_intro:
   transform: [handlebars]
