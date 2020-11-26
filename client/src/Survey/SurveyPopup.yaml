@@ -21,22 +21,17 @@ survey_popup_yes:
   transform: [handlebars]
   en: Yes, after my visit
   fr: Oui, après ma visite
-
 survey_popup_later:
   en: Maybe some other time
   fr: Peut-être une autre fois
-
 survey_popup_no:
   en: No, do not ask again
   fr: Non, ne le demandez plus
 
-take_full_survey:
-  en: Take the full survey
-  fr: TODO
 
 simplified_survey_header:
-  en: Short on time?
+  en: In a hurry?
   fr: TODO
 take_simplified_survey_text:
-  en: We'd still like to hear from you! If you can't fill out the full survey, we'd appreciate a quick response to the questions below.
+  en: If you can't fill out the full survey right now, we'd still appreciate it if you could quickly let us know how we are doing below!
   fr: TODO
