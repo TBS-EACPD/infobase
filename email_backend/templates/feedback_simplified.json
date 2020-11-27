@@ -39,7 +39,7 @@
     "form_type": "radio",
     "form_label": {
       "en": "How likely is it that you would recommend GC InfoBase to a friend or colleague? (1=not at all likely and 10=very likely)",
-      "fr": "TODO"
+      "fr": "Quelle est la probabilité que vous recommandiez GC InfoBase à un ami ou à un collègue? (1=pas du tout probable et 10=très probable)"
     },
     "value_type": "enums",
     "enum_values": {
