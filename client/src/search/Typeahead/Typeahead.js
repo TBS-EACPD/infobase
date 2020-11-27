@@ -190,7 +190,11 @@ export class Typeahead extends React.Component {
     const update_search_text = (event) => {
       const text = _.trimStart(event.target.value); //prevent empty searching that will show all results
       debounceOnNewQuery(text);
-      this.setState({ search_text: text });
+      this.setState({
+        search_text: text,
+        pagination_index: 0,
+        current_selected_index: -1,
+      });
     };
 
     const config_groups = _.map(search_configs, (search_config, ix) => ({
@@ -263,8 +267,8 @@ export class Typeahead extends React.Component {
 
     const status_props = {
       current_selected:
-        this.menu_item_references[current_selected_index] &&
-        this.menu_item_references[current_selected_index].innerText,
+        paginated_results[current_selected_index] &&
+        paginated_results[current_selected_index].name,
       current_selected_index,
       min_length,
       total_matching_results,
@@ -301,7 +305,11 @@ export class Typeahead extends React.Component {
             placeholder={placeholder}
             onChange={update_search_text}
             ref={this.typeaheadRef}
-            value={search_text}
+            value={
+              current_selected_index === -1
+                ? search_text
+                : paginated_results[current_selected_index].name
+            }
             onFocus={() =>
               this.setState({ can_show_menu: true, input_is_in_focus: true })
             }
