@@ -1,8 +1,8 @@
 import classNames from "classnames";
-import { withRouter } from "react-router";
 import { InView } from "react-intersection-observer";
 import "intersection-observer";
 import ReactResizeDetector from "react-resize-detector";
+import { withRouter } from "react-router";
 
 import { has_local_storage } from "src/core/feature_detection.js";
 
@@ -23,9 +23,8 @@ export const PinnedContent = withRouter(
         match: {
           params: { options: panel_link },
         },
+        local_storage_name,
       } = props;
-
-      const local_storage_name = props.local_storage_name;
 
       let user_enabled_pinning;
       if (has_local_storage) {
@@ -53,10 +52,10 @@ export const PinnedContent = withRouter(
     pin_pressed = () => {
       const { local_storage_name } = this.props;
       const { user_enabled_pinning } = this.state;
+      localStorage.setItem(local_storage_name, !user_enabled_pinning);
       this.setState({
         user_enabled_pinning: !user_enabled_pinning,
       });
-      localStorage.setItem(local_storage_name, !user_enabled_pinning);
     };
 
     handleKeyDown = (e) => {
