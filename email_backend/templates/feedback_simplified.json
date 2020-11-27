@@ -1,38 +1,6 @@
 {
   "meta": {
-    "subject_template": "Feedback Simplified: [${easily_nav}], [${useful_info}], ${lang}, ${route}, ${sha}, ${client_id}"
-  },
-  "easily_nav": {
-    "required": true,
-    "form_type": "radio",
-    "form_label": {
-      "en": "To what extent did you find GC InfoBase easy to navigate? (1=not at all easy and 5=very easy)",
-      "fr": "Dans quelle mesure la navigation est-elle facile dans l’InfoBase du GC? (1=difficile et 5=très facile)"
-    },
-    "value_type": "enums",
-    "enum_values": {
-      "one": {
-        "en": "1",
-        "fr": "1"
-      },
-      "two": {
-        "en": "2",
-        "fr": "2"
-      },
-      "three": {
-        "en": "3",
-        "fr": "3"
-      },
-      "four": {
-        "en": "4",
-        "fr": "4"
-      },
-      "five": {
-        "en": "5",
-        "fr": "5"
-      }
-    },
-    "style": "horizontal"
+    "subject_template": "Feedback Simplified: [${would_recommend}], [${useful_info}], ${lang}, ${route}, ${sha}, ${client_id}"
   },
   "useful_info": {
     "required": true,
@@ -62,6 +30,58 @@
       "five": {
         "en": "5",
         "fr": "5"
+      }
+    },
+    "style": "horizontal"
+  },
+  "would_recommend": {
+    "required": true,
+    "form_type": "radio",
+    "form_label": {
+      "en": "How likely is it that you would recommend GC InfoBase to a friend or colleague? (1=not at all likely and 10=very likely)",
+      "fr": "TODO"
+    },
+    "value_type": "enums",
+    "enum_values": {
+      "one": {
+        "en": "1",
+        "fr": "1"
+      },
+      "two": {
+        "en": "2",
+        "fr": "2"
+      },
+      "three": {
+        "en": "3",
+        "fr": "3"
+      },
+      "four": {
+        "en": "4",
+        "fr": "4"
+      },
+      "five": {
+        "en": "5",
+        "fr": "5"
+      },
+      "six": {
+        "en": "6",
+        "fr": "6"
+      },
+      "seven": {
+        "en": "7",
+        "fr": "7"
+      },
+      "eight": {
+        "en": "8",
+        "fr": "8"
+      },
+      "nine": {
+        "en": "9",
+        "fr": "9"
+      },
+      "ten": {
+        "en": "10",
+        "fr": "10"
       }
     },
     "style": "horizontal"
