@@ -51,17 +51,10 @@ gov_in_year_voted_stat_split_text:
   transform: [handlebars, markdown]
   en: |
     As of the {{est_in_year}} {{last_estimates}}, 
-<<<<<<< HEAD
-    the government has presented Parliament with {{gl_tt "authorized" "AUTH"}} spendings totaling **{{fmt_compact1_written tabled_est_in_year}}**.
+    the government has presented Parliament with a total of **{{fmt_compact1_written tabled_est_in_year}}** in {{gl_tt "authorized" "AUTH"}} spending.
     
-    Of those {{gl_tt "authorized" "AUTH"}} spendings, **{{fmt_compact1_written stat_est_in_year}}** (or **{{fmt_percentage1 stat_percent_est_in_year}}**) 
+    Of the **{{fmt_compact1_written tabled_est_in_year}}**  in total {{gl_tt "authorized" "AUTH"}} spending available to the government, **{{fmt_compact1_written stat_est_in_year}}** (or **{{fmt_percentage1 stat_percent_est_in_year}}**) 
     will come from {{gl_tt "statutory authorities" "STAT"}} and **{{fmt_compact1_written voted_est_in_year}}** (or **{{fmt_percentage1 voted_percent_est_in_year}}**) 
-=======
-    the government has presented Parliament with a total of **{{fmt_compact1_written gov_tabled_est_in_year}}** in {{gl_tt "authorized" "AUTH"}} spending.
-    
-    Of the **{{fmt_compact1_written gov_stat_est_in_year}}** total {{gl_tt "authorized" "AUTH"}} spending available to the government, **{{fmt_compact1_written gov_stat_est_in_year}}** (or **{{fmt_percentage1 gov_stat_percent_est_in_year}}**) 
-    will come from {{gl_tt "statutory authorities" "STAT"}} and **{{fmt_compact1_written gov_voted_est_in_year}}** (or **{{fmt_percentage1 gov_voted_percent_est_in_year}}**) 
->>>>>>> Text rework; Correcting handlebars to correct location
     will come from {{gl_tt "voted authorities" "VOTED"}}.
 
   fr: |
@@ -70,28 +63,15 @@ gov_in_year_voted_stat_split_text:
 dept_in_year_voted_stat_split_text:
   transform: [handlebars,markdown]
   en: |
-<<<<<<< HEAD
-   Of the **{{subject.name}}**'s **{{fmt_compact1_written tabled_est_in_year_estimates}}** in {{gl_tt "authorized" "AUTH"}} spendings, 
-   **{{fmt_percentage1 stat_percent_est_in_year}}** (or **{{fmt_compact1_written stat_est_in_year}}**) 
-   will be funded from {{gl_tt "statutory authorities" "STAT"}} and **{{fmt_percentage1 voted_percent_est_in_year}}** 
-   (or **{{fmt_compact1_written voted_est_in_year}}**) from {{gl_tt "voted authorities" "VOTED"}}.
-=======
-   Of the **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** in total {{gl_tt "authorized" "AUTH"}} spending available to **{{subject.name}}** from the 
-   {{est_in_year}} {{last_estimates}}, **{{fmt_compact1_written dept_stat_est_in_year}}** (or **{{fmt_percentage1 dept_stat_percent_est_in_year}}**) 
-   will be funded from {{gl_tt "statutory authorities" "STAT"}} and **{{fmt_compact1_written dept_voted_est_in_year}}** 
-   (or **{{fmt_percentage1 dept_voted_percent_est_in_year}}**) from {{gl_tt "voted authorities" "VOTED"}}.
->>>>>>> Text rework; Correcting handlebars to correct location
+   Of the **{{fmt_compact1_written tabled_est_in_year}}** in total {{gl_tt "authorized" "AUTH"}} spending available to **{{subject.name}}** from the 
+   {{est_in_year}} {{last_estimates}}, **{{fmt_compact1_written stat_est_in_year}}** (or **{{fmt_percentage1 stat_percent_est_in_year}}**) 
+   will be funded from {{gl_tt "statutory authorities" "STAT"}} and **{{fmt_compact1_written voted_est_in_year}}** 
+   (or **{{fmt_percentage1 voted_percent_est_in_year}}**) from {{gl_tt "voted authorities" "VOTED"}}.
 
   fr: |
-<<<<<<< HEAD
    Sur les **{{fmt_compact1_written tabled_est_in_year}}** en dépenses budgétaires prévues pour **{{le_dept subject}}**, 
    **{{fmt_compact1_written stat_est_in_year}}** (ou **{{fmt_percentage1 stat_percent_est_in_year}}**) proviendra {{gl_tt "d'autorisations législatives" "STAT"}} et 
    **{{fmt_compact1_written voted_est_in_year}}** (ou **{{fmt_percentage1 voted_percent_est_in_year}}**) {{gl_tt "d'autorisations votées" "VOTED"}}.
-=======
-   TODO 
-   **{{fmt_compact1_written dept_stat_est_in_year}}** (ou **{{fmt_percentage1 dept_stat_percent_est_in_year}}**) proviendra {{gl_tt "d'autorisations législatives" "STAT"}} et 
-   **{{fmt_compact1_written dept_voted_est_in_year}}** (ou **{{fmt_percentage1 dept_voted_percent_est_in_year}}**) {{gl_tt "d'autorisations votées" "VOTED"}}.
->>>>>>> Replace french with TODO if english changed
 
 
 
@@ -113,17 +93,10 @@ gov_in_year_estimates_split_text:
     On {{interim_mains_table_date}}, the {{est_next_year}} {{gl_tt "Interim Estimates" "INTER_EST"}} were tabled in Parliament seeking **{{fmt_compact1_written gov_tabled_est_next_year}}** in {{gl_tt "spending authorities" "AUTH"}} to begin the new fiscal year. This funding supports the government's financial requirements for the first three months of the year.
     {{/if}}
   fr: |
-<<<<<<< HEAD
    Pour l’exercice courant ({{est_in_year}}), le total de dépenses budgétaires prévues s’élève à 
    **{{fmt_compact1_written gov_tabled_est_in_year}}** dans le(s) {{gl_tt "processus budgétaire(s)" "EST_PROC"}} et {{gl_tt "redressements et virements" "ADJUS"}} suivants:
    {{#each in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}** 
-=======
-   TODO
-   
-   {{#each gov_in_year_estimates_split}}
-   * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
->>>>>>> Replace french with TODO if english changed
    {{/each}}
 
    {{#if gov_tabled_est_next_year}}
@@ -133,15 +106,9 @@ gov_in_year_estimates_split_text:
 dept_in_year_estimates_split_text:
   transform: [handlebars,markdown]
   en: |
-<<<<<<< HEAD
-   As of the {{est_in_year}} {{last_estimates}}, **{{subject.name}}**'s {{gl_tt "authorized" "AUTH"}} spendings of **{{fmt_compact1_written tabled_est_in_year_estimates}}** were presented in the 
-   following {{gl_tt "Estimates processes" "EST_PROC"}} and {{gl_tt "adjustments and transfers" "ADJUS"}}: 
-   {{#each in_year_estimates_split}}
-=======
-   As of the {{est_in_year}} {{last_estimates}}, **{{subject.name}}** has been {{gl_tt "authorized" "AUTH"}} to spend a total of **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** through the following documents:
+   As of the {{est_in_year}} {{last_estimates}}, **{{subject.name}}** has been {{gl_tt "authorized" "AUTH"}} to spend a total of **{{fmt_compact1_written tabled_est_in_year}}** through the following documents:
    {{gl_tt "Estimates processes" "EST_PROC"}} and {{gl_tt "adjustments and transfers" "ADJUS"}}: 
    {{#each dept_in_year_estimates_split}}
->>>>>>> Text rework; Correcting handlebars to correct location
    * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
    {{/each}}
 
@@ -149,15 +116,9 @@ dept_in_year_estimates_split_text:
      On {{interim_mains_table_date}}, the {{est_next_year}} {{gl_tt "Interim Estimates" "INTER_EST"}} were tabled in Parliament seeking **{{fmt_compact1_written dept_tabled_est_next_year_estimates}}** in {{gl_tt "spending authorities" "AUTH"}} to begin the new fiscal year. This funding supports the organization's financial requirements for the first three months of the year.
    {{/if}}
   fr: |
-<<<<<<< HEAD
-   En date du {{est_in_year}} {{last_estimates}}, pour **{{le_dept subject}}**, les dépenses autorisées de **{{fmt_compact1_written tabled_est_in_year_estimates}}** figurent 
+   En date du {{est_in_year}} {{last_estimates}}, pour **{{le_dept subject}}**, les dépenses autorisées de **{{fmt_compact1_written tabled_est_in_year}}** figurent 
    dans le(s) {{gl_tt "processus budgétaire(s)" "EST_PROC"}}  et {{gl_tt "redressements et virements" "ADJUS"}} suivants: 
    {{#each in_year_estimates_split}}
-=======
-   TODO
-
-   {{#each dept_in_year_estimates_split}}
->>>>>>> Replace french with TODO if english changed
    * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
    {{/each}}
 
@@ -173,8 +134,8 @@ estimates_perspective_title:
 estimates_perspective_text:
   transform: [handlebars,markdown]
   en: |
-   As of the {{est_in_year}} {{last_estimates}}, **{{subject.name}} ({{subject.abbr}})** has been allocated **{{fmt_compact1_written dept_tabled_est_in_year_estimates}}** in {{gl_tt "authorized" "AUTH"}} spending
-   (or **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year_estimates gov_tabled_est_in_year)}}** of the **{{fmt_compact1_written gov_tabled_est_in_year}}** in government {{gl_tt "authorized" "AUTH"}} spending).
+   As of the {{est_in_year}} {{last_estimates}}, **{{subject.name}} ({{subject.abbr}})** has been allocated **{{fmt_compact1_written dept_tabled_est_in_year}}** in {{gl_tt "authorized" "AUTH"}} spending
+   (or **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year gov_tabled_est_in_year)}}** of the **{{fmt_compact1_written gov_tabled_est_in_year}}** in government {{gl_tt "authorized" "AUTH"}} spending).
 
 
    {{! only to be used near year end when a main estimates for the following year has been tabled}}
