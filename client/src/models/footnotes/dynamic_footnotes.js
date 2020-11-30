@@ -12,7 +12,7 @@ const text_maker = create_text_maker(text);
 // list late orgs in this mock results doc object to get the requisite footnotes showing up
 // in the meantime
 const PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC = {
-  late_resources_orgs: [1],
+  late_resources_orgs: [228, 302, 350],
   doc_type: "drr",
   year: run_template("{{pa_last_year}}"),
   late_results_orgs: [],
