@@ -73,13 +73,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
           };
         }
       })
-      .filter((row) => {
-        if (years === history_ticks) {
-          return row && row.y > 0;
-        } else {
-          return true;
-        }
-      })
+      .dropWhile((row) => row && row.y === 0)
       .value();
   const graph_data = _.chain(series_labels)
     .zip([

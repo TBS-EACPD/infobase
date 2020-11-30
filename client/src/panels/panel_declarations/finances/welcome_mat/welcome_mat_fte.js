@@ -42,7 +42,7 @@ export const format_and_get_fte = (type, subject) => {
 
   const historical_graph_data = _.chain(historical_ftes)
     .map((value, year) => ({ x: year, y: value }))
-    .filter((prepared_row) => prepared_row.y > 0)
+    .dropWhile((row) => row && row.y === 0)
     .value();
 
   const planned_fte_exists = _.some(
