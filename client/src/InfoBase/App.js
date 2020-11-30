@@ -9,7 +9,6 @@ import { HeaderNotification } from "../components/HeaderNotification.js";
 import { PageDetails } from "../components/PageDetails.js";
 import { SpinnerWrapper } from "../components/SpinnerWrapper.js";
 import { initialize_analytics } from "../core/analytics.js";
-
 import { DevFip } from "../core/DevFip.js";
 import { EasyAccess } from "../core/EasyAccess.js";
 import { ErrorBoundary } from "../core/ErrorBoundary.js";
@@ -18,6 +17,7 @@ import { InsertRuntimeFooterLinks } from "../core/InsertRuntimeFooterLinks.js";
 import { ReactUnmounter } from "../core/NavComponents.js";
 import { get_session_storage_w_expiry } from "../general_utils.js";
 import { TooltipActivator } from "../glossary/TooltipActivator.js";
+import { create_text_maker } from "../models/text.js";
 import { SurveyPopup } from "../Survey/SurveyPopup.js";
 
 import { app_reducer } from "./AppState.js";
@@ -28,6 +28,9 @@ import {
 } from "./common_app_component_utils.js";
 
 import "./App.scss";
+import text from "./App.yaml";
+
+const text_maker = create_text_maker(text);
 
 const Home = retrying_react_lazy(() => import("../home/home.js"));
 const A11yHome = retrying_react_lazy(() => import("../home/a11y_home.js"));
@@ -141,9 +144,9 @@ export class App extends React.Component {
             {show_redirected_msg && (
               <HeaderNotification
                 list_of_text={[
-                  `The link you tried to visit: ${get_session_storage_w_expiry(
-                    "pre_redirected_url"
-                  )}`,
+                  text_maker("common_redirect_msg", {
+                    url: get_session_storage_w_expiry("pre_redirected_url"),
+                  }),
                   get_session_storage_w_expiry("redirected_msg"),
                 ]}
                 hideNotification={() => {
