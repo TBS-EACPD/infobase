@@ -37,9 +37,9 @@ covid_estimates_summary_tab_label:
   fr: Apperçu
 covid_estimates_summary_text_gov:
   transform: [handlebars,markdown]
-  en: This fiscal year (**{{est_in_year}}**), **{{fmt_compact1_written gov_covid_auth_in_year}}** in planned budgetary expenditures have been presented in the Estimates process in response to the COVID-19 pandemic.
+  en: This fiscal year (**{{est_in_year}}**), **{{fmt_compact1_written gov_covid_auth_in_year}}** in planned expenditures have been presented in the Estimates process in response to the COVID-19 pandemic.
     These authorities make up **{{fmt_percentage1 covid_auth_pct_of_gov_auth}}** of the total authorities presented in **{{est_in_year}}**. 
-  fr: Pour l'exercice en cours (**{{est_in_year}}**), **{{fmt_compact1_written gov_covid_auth_in_year}}** de dépenses budgétaires prévues ont été inscrits dans le processus budgétaire en réponse à la pandémie de COVID-19.
+  fr: Pour l'exercice en cours (**{{est_in_year}}**), **{{fmt_compact1_written gov_covid_auth_in_year}}** de dépenses prévues ont été inscrits dans le processus budgétaire en réponse à la pandémie de COVID-19.
     Ces autorisations constituent **{{fmt_percentage1 covid_auth_pct_of_gov_auth}}** du total des crédits prévus en **{{est_in_year}}**. 
 covid_estimates_summary_text_dept:
   transform: [handlebars,markdown]
