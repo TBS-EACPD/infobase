@@ -79,10 +79,6 @@ invalid_subject_redirect_parent_dept:
 
     If you believe something is incorrect on our end, we invite you to alert us using the Report a Problem form provided at the bottom of the page. Thank you!
   fr: TODO
-invalid_panel:
-  transform: [handlebars]
-  en: The link to panel is invalid.
-  fr: TODO
 
 
 

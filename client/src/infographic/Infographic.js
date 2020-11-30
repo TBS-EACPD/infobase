@@ -158,7 +158,18 @@ class InfoGraph_ extends React.Component {
       if (this.props.subject !== prevProps.subject) {
         reset_scroll();
       }
-      const options = SafeJSURL.parse(this.props.options);
+      const options = (() => {
+        try {
+          return SafeJSURL.parse(this.props.options);
+        } catch {
+          log_standard_event({
+            SUBAPP: window.location.hash.replace("#", ""),
+            MISC1: "ERROR_IN_JSURL_PARSE",
+            MISC2: this.props.options,
+          });
+          return false;
+        }
+      })();
 
       const linked_to_panel =
         options &&
@@ -364,30 +375,6 @@ const Infographic = ({
       );
     } else {
       set_redirect_msg("invalid_redirect_home", { param: subject_id }, "#home");
-    }
-  } else if (options) {
-    // a bit hacky, but try to parse panel, if it throws error, then redirect
-    try {
-      SafeJSURL.parse(options);
-    } catch (err) {
-      get_panels_for_subject(subject).then((panels_for_subj) => {
-        const bubbles_for_subj = _.keys(panels_for_subj);
-
-        // Everything matches except panel, redirect to its infograph page
-        if (_.includes(bubbles_for_subj, bubble_id)) {
-          set_redirect_msg(
-            "invalid_panel",
-            null,
-            infograph_href_template(subject, bubble_id)
-          );
-        } else {
-          set_redirect_msg(
-            "invalid_bubble_redirect_intro",
-            { active_bubble_id },
-            infograph_href_template(subject, "intro")
-          );
-        }
-      });
     }
   }
   if (is_fake_infographic(subject)) {
