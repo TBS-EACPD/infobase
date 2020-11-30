@@ -61,25 +61,27 @@ infograph_explorer_link:
   en: Advanced search
   fr: Recherche avancée
 
-invalid_level_redirect_home:
+invalid_redirect_home:
   transform: [handlebars]
-  en: The "{{level}}" is invalid. We redirected you to homepage.
+  en: |
+    Your browser was attempting to visit one of our infographics. Unfortunately, we could not recognize "{{param}}" as a valid infographic parameter. You have been redirected to the GC InfoBase home page.
+
+    If you know the subject of the infographic you intended to view (e.g. the organization or program name), please try finding it using our search bar below.
+
+    If you believe something is incorrect on our end, we invite you to alert us using the Report a Problem form provided at the bottom of the page. Thank you!
   fr: TODO
 invalid_subject_redirect_parent_dept:
   transform: [handlebars]
-  en: The organization "{{subject_id}}" is invalid. We redirected you to its parent department.
-  fr: TODO
-invalid_subject_redirect_home:
-  transform: [handlebars]
-  en: The organization "{{subject_id}}" is invalid. We redirected you to homepage.
+  en: |
+    Your browser was attempting to visit one of our infographics. Unfortunately, we could not recognize "{{subject_id}}" as a valid infographic parameter. While "{{subject_id}}" itself couldn't be found, we were able to match the "{{dept_code}}" portion to a valid organization. We have redirected you to the infographic for that organization.
+
+    You were likely following a link intended to take you to an infographic for a core responsibility or program belonging to this organization. You can view and navigate to all of this organization's valid core responsibilities and programs under "Where can I go from here?" below.
+
+    If you believe something is incorrect on our end, we invite you to alert us using the Report a Problem form provided at the bottom of the page. Thank you!
   fr: TODO
 invalid_panel:
   transform: [handlebars]
   en: The link to panel is invalid.
-  fr: TODO
-invalid_bubble_redirect_intro:
-  transform: [handlebars]
-  en: The "{{bubble_id}}" is invalid. We redirected you to intro page.
   fr: TODO
 
 

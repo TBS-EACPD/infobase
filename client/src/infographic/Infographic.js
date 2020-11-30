@@ -337,26 +337,15 @@ const Infographic = ({
     params: { level, subject_id, active_bubble_id, options },
   },
 }) => {
-  const set_redirect_msg = (msg_key, args) => {
-    set_session_storage_w_expiry(
-      "pre_redirected_url",
-      `#orgs/${level}/${subject_id}/infograph/${active_bubble_id}${
-        options ? `/${options}` : ""
-      }`
-    );
+  const set_redirect_msg = (msg_key, args, replaced_route) => {
+    set_session_storage_w_expiry("pre_redirected_url", location.href);
     set_session_storage_w_expiry("redirected_msg", text_maker(msg_key, args));
-  };
-  const redirect_to_intro = (subject, bubble_id) => {
-    set_redirect_msg("invalid_bubble_redirect_intro", { bubble_id });
-    window.location.replace(infograph_href_template(subject, "intro"));
+    window.location.replace(replaced_route);
     window.location.reload();
   };
-
   const is_level_valid = _.chain(Subject).keys().includes(level).value();
   if (!is_level_valid) {
-    set_redirect_msg("invalid_level_redirect_home", { level });
-    window.location.replace("#home");
-    window.location.reload();
+    set_redirect_msg("invalid_redirect_home", { param: level }, "#home");
   }
   const SubjectModel = Subject[level];
   const subject = SubjectModel.lookup(subject_id);
@@ -368,15 +357,14 @@ const Infographic = ({
     const parent_dept_code = _.split(subject_id, "-")[0];
     const parent_dept = Dept.lookup(parent_dept_code);
     if ((level === "program" || level === "crso") && parent_dept) {
-      set_redirect_msg("invalid_subject_redirect_parent_dept", { subject_id });
-      window.location.replace(`#orgs/dept/${parent_dept.id}/infograph/intro`);
+      set_redirect_msg(
+        "invalid_subject_redirect_parent_dept",
+        { subject_id },
+        `#orgs/dept/${parent_dept.id}/infograph/intro`
+      );
     } else {
-      set_redirect_msg("invalid_subject_redirect_home", { subject_id });
-      window.location.replace("#home");
+      set_redirect_msg("invalid_redirect_home", { param: subject_id }, "#home");
     }
-    window.location.reload();
-  } else if (!bubble_id) {
-    redirect_to_intro(subject, active_bubble_id);
   } else if (options) {
     // a bit hacky, but try to parse panel, if it throws error, then redirect
     try {
@@ -387,11 +375,17 @@ const Infographic = ({
 
         // Everything matches except panel, redirect to its infograph page
         if (_.includes(bubbles_for_subj, bubble_id)) {
-          set_redirect_msg("invalid_panel");
-          window.location.replace(infograph_href_template(subject, bubble_id));
-          window.location.reload();
+          set_redirect_msg(
+            "invalid_panel",
+            null,
+            infograph_href_template(subject, bubble_id)
+          );
         } else {
-          redirect_to_intro(subject, active_bubble_id);
+          set_redirect_msg(
+            "invalid_bubble_redirect_intro",
+            { active_bubble_id },
+            infograph_href_template(subject, "intro")
+          );
         }
       });
     }
