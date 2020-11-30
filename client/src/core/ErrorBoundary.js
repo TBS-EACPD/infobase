@@ -1,5 +1,3 @@
-import { Fragment } from "react";
-
 import { get_static_url, make_request } from "../request_utils.js";
 
 import { log_standard_event } from "./analytics.js";
@@ -10,7 +8,7 @@ const NoIndex = () =>
     document.head
   );
 
-class ErrorBoundary extends React.Component {
+export class ErrorBoundary extends React.Component {
   constructor() {
     super();
 
@@ -63,11 +61,10 @@ class ErrorBoundary extends React.Component {
     throw this.state.error;
   }
   render() {
-    const { children } = this.props;
     const { error, testing_for_stale_client } = this.state;
 
     if (_.isNull(error)) {
-      return children;
+      return this.props.children;
     } else if (testing_for_stale_client) {
       this.catch_stale_client_error_case();
       return null;
@@ -81,26 +78,24 @@ class ErrorBoundary extends React.Component {
             alignItems: "center",
           }}
         >
-          <Fragment>
-            <span>
-              {
-                {
-                  en: "An error has occured",
-                  fr: "Une erreur est survenue",
-                }[window.lang]
-              }
-            </span>
-            <img
-              aria-hidden={true}
-              id="error-boundary-icon"
-              src={get_static_url("svg/not-available.svg")}
-              style={{
-                maxWidth: "100%",
-                width: "400px",
-              }}
-            />
-          </Fragment>
           <NoIndex />
+          <span>
+            {
+              {
+                en: "An error has occured",
+                fr: "Une erreur est survenue",
+              }[window.lang]
+            }
+          </span>
+          <img
+            aria-hidden={true}
+            id="error-boundary-icon"
+            src={get_static_url("svg/not-available.svg")}
+            style={{
+              maxWidth: "100%",
+              width: "400px",
+            }}
+          />
           <span>
             {
               {
@@ -129,5 +124,3 @@ class ErrorBoundary extends React.Component {
     }
   }
 }
-
-export { ErrorBoundary };
