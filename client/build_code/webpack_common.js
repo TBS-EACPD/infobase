@@ -214,6 +214,7 @@ function get_optimizations(is_prod_build, produce_stats) {
 }
 
 function create_config({
+  context,
   entry,
   output,
   language,
@@ -238,6 +239,7 @@ function create_config({
   return {
     name: language,
     mode: is_prod_build ? "production" : "development",
+    context,
     entry,
     output: new_output,
     module: {
