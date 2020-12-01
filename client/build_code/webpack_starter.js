@@ -29,7 +29,7 @@ const fr = !!choose("FR");
 const no_watch = !!choose("NO-WATCH");
 const bundle_stats = !!choose("STATS") || is_ci; // In CI, always generate stats
 const stats_baseline = !!choose("STATS-BASELINE") || is_ci_and_master; // In CI, always save baseline stats if on master, otherwise defer to argument
-const stats_no_compare = !!choose("STATS-NO-COMPARE");
+const stats_no_compare = !!choose("STATS-NO-COMPARE") || true;
 
 const a11y_client = choose("a11y_client");
 const main_client = choose("main_client");
