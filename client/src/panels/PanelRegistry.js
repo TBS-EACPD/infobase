@@ -103,34 +103,44 @@ class PanelRegistry {
       .fromPairs()
       .value();
   }
-
-  calculate(subject, options = {}) {
+  get_panel_args(subject, options) {
+    const calc_func = this._inner_calculate;
+    return calc_func.call(this, subject, options);
+  }
+  is_panel_valid_for_subject(subject, options = {}) {
     //delegates to the proper level's calculate function
     if (this.level !== subject.level) {
       return false;
     }
-
     // TODO: this is something panels should handle themselves. Troublesome that the PanelRegistry
     // makes this sort of check for dept tables but not CR or program tables. One way or another, this
     // will go away when we drop tables all together
     if (
       this.level === "dept" &&
       this.missing_info !== "ok" &&
-      _.some(this.depends_on, (t) => {
-        return !Table.lookup(t).depts[subject.id];
-      })
+      _.some(
+        this.depends_on,
+        (t) => Table.lookup(t).depts && !Table.lookup(t).depts[subject.id]
+      )
     ) {
       return false;
     }
-    const calc_func = this._inner_calculate;
-
-    const panel_args = calc_func.call(this, subject, options);
+    const panel_args = this.get_panel_args(subject, options);
     if (panel_args === false) {
       return false;
     }
+    return true;
+  }
 
-    //inner_render API : a panel's inner_render fucntion usually wants access to panel_args and subject.
-    return { subject, panel_args };
+  calculate(subject, options = {}) {
+    if (this.is_panel_valid_for_subject(subject, options)) {
+      const panel_args = this.get_panel_args(subject, options);
+
+      //inner_render API : a panel's inner_render fucntion usually wants access to panel_args and subject.
+      return { subject, panel_args };
+    } else {
+      return false;
+    }
   }
 
   get_source(subject) {

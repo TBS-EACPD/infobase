@@ -1,24 +1,28 @@
 import _ from "lodash";
 import React from "react";
 import { Redirect } from "react-router";
-import "./Infographic.scss";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
+import { SelectAllControl } from "../charts/legends/index.js";
 import {
   create_text_maker_component,
   SpinnerWrapper,
   AdvancedSearch,
+  MultiColumnList,
+  CheckBox,
+  Details,
 } from "../components/index.js";
 import { log_standard_event } from "../core/analytics.js";
-
 import { ensure_loaded } from "../core/lazy_loader.js";
 import { StandardRouteContainer } from "../core/NavComponents";
 import { redirect_with_msg } from "../core/RedirectHeader.js";
+import { Table } from "../core/TableClass.js";
 import { shallowEqualObjectsOverKeys, SafeJSURL } from "../general_utils.js";
 import { Subject } from "../models/subject.js";
 
 import { get_panels_for_subject } from "../panels/get_panels_for_subject/index.js";
+import { PanelRegistry } from "../panels/PanelRegistry.js";
 import { PanelRenderer } from "../panels/PanelRenderer.js";
 
 import { bubble_defs } from "./bubble_definitions.js";
@@ -27,6 +31,7 @@ import { BubbleMenu } from "./BubbleMenu.js";
 import { infograph_href_template } from "./infographic_link.js";
 
 import text from "./Infographic.yaml";
+import "./Infographic.scss";
 
 const sub_app_name = "infographic_org";
 
@@ -69,7 +74,6 @@ class AnalyticsSynchronizer extends React.Component {
     });
   }
 }
-
 function reset_scroll() {
   window.scrollTo(0, 0);
 }
@@ -78,8 +82,7 @@ class InfoGraph_ extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      bubble_menu_loading: true,
-      infographic_loading: true,
+      loading: true,
       subject: props.subject,
       subject_panels_by_bubble_id: {},
       active_bubble_id: props.active_bubble_id,
@@ -93,67 +96,26 @@ class InfoGraph_ extends React.Component {
       ["subject", "active_bubble_id", "level"]
     );
 
-    const should_reload_panel_dependencies =
-      !prevState.bubble_menu_loading && prevState.infographic_loading;
-
     if (should_reload_bubble_menu_dependencies) {
       return {
-        bubble_menu_loading: true,
-        infographic_loading: true,
+        loading: true,
         subject: nextProps.subject,
         subject_panels_by_bubble_id: {},
         active_bubble_id: nextProps.active_bubble_id,
         level: nextProps.level,
-      };
-    } else if (should_reload_panel_dependencies) {
-      const { subject_panels_by_bubble_id, subject } = prevState;
-      const { active_bubble_id } = nextProps;
-
-      const subject_bubble_defs = _.chain(bubble_defs)
-        .filter(({ id }) =>
-          _.chain(subject_panels_by_bubble_id).keys().includes(id).value()
-        )
-        .map((bubble_def) =>
-          _.mapValues(bubble_def, (bubble_option) =>
-            _.isFunction(bubble_option) ? bubble_option(subject) : bubble_option
-          )
-        )
-        .value();
-
-      const active_index = _.findIndex(subject_bubble_defs, {
-        id: active_bubble_id,
-      });
-      const next_bubble = subject_bubble_defs[active_index + 1];
-      const previous_bubble = subject_bubble_defs[active_index - 1];
-
-      const panel_keys = subject_panels_by_bubble_id[active_bubble_id];
-
-      return {
-        subject_bubble_defs,
-        previous_bubble,
-        next_bubble,
-        panel_keys,
-        infographic_loading: true,
       };
     } else {
       return null;
     }
   }
   componentDidMount() {
-    this.loadBubbleMenuDeps(this.props);
+    this.loadBubbleMenuAndGraphDeps(this.props);
   }
   componentDidUpdate(prevProps) {
-    const {
-      bubble_menu_loading,
-      infographic_loading,
-      active_bubble_id,
-      panel_keys,
-    } = this.state;
+    const { loading, active_bubble_id, panel_keys } = this.state;
 
-    if (bubble_menu_loading) {
-      this.loadBubbleMenuDeps(this.props);
-    } else if (infographic_loading) {
-      this.loadGraphDeps({ ...this.state, ...this.props });
+    if (loading) {
+      this.loadBubbleMenuAndGraphDeps({ ...this.state, ...this.props });
     } else if (!_.isNull(active_bubble_id)) {
       if (this.props.subject !== prevProps.subject) {
         reset_scroll();
@@ -176,7 +138,6 @@ class InfoGraph_ extends React.Component {
         options.panel_key &&
         _.includes(panel_keys, options.panel_key) &&
         document.querySelector(`#${options.panel_key}`);
-
       if (linked_to_panel) {
         linked_to_panel.scrollIntoView();
         linked_to_panel.focus();
@@ -187,15 +148,57 @@ class InfoGraph_ extends React.Component {
   render() {
     const { subject, active_bubble_id } = this.props;
     const {
-      bubble_menu_loading,
-      infographic_loading,
+      loading,
       subject_bubble_defs,
       panel_keys,
       previous_bubble,
       next_bubble,
+      panel_filter_by_table,
+      total_number_of_panels,
     } = this.state;
 
-    const loading = bubble_menu_loading || infographic_loading;
+    const show_all_panels_bubble_type = !(
+      active_bubble_id === "financial" || active_bubble_id === "people"
+    );
+    const { number_of_active_panels, panel_renderers } =
+      !loading &&
+      _.reduce(
+        panel_keys,
+        (result, panel_key) => {
+          const panel_obj = PanelRegistry.lookup(panel_key, subject.level);
+          const active_panel_filter_keys = _.chain(panel_filter_by_table)
+            .map((value, key) => value && key)
+            .compact()
+            .value();
+          const filtered_keys = _.intersection(
+            active_panel_filter_keys,
+            panel_obj.depends_on
+          );
+          const valid_panel =
+            show_all_panels_bubble_type || filtered_keys.length > 0;
+          // I think it makes sense, to not include "static" panels (non table data panels) in showing number of active panels
+          // But, always display them
+          if (!panel_obj.static && valid_panel) {
+            result.number_of_active_panels += 1;
+          }
+          if (panel_obj.static || valid_panel) {
+            result.panel_renderers.push(
+              <PanelRenderer
+                panel_key={panel_key}
+                subject={subject}
+                active_bubble_id={active_bubble_id}
+                key={panel_key + subject.guid}
+              />
+            );
+          }
+
+          return result;
+        },
+        {
+          number_of_active_panels: 0,
+          panel_renderers: [],
+        }
+      );
 
     const search_component = (
       <AdvancedSearch
@@ -261,18 +264,87 @@ class InfoGraph_ extends React.Component {
                 : text_maker("a11y_infograph_description")}
             </p>
           )}
-          {!loading &&
-            _.map(panel_keys, (panel_key) => (
-              <PanelRenderer
-                panel_key={panel_key}
-                subject={subject}
-                active_bubble_id={active_bubble_id}
-                key={panel_key + subject.guid}
-              />
-            ))}
+          {!loading && !show_all_panels_bubble_type && (
+            <Details
+              summary_content={
+                <div>
+                  <TM style={{ fontSize: 16 }} k="filter_panels" />{" "}
+                  <TM
+                    className="panel-status-text"
+                    k="panels_status"
+                    args={{
+                      number_of_active_panels,
+                      total_number_of_panels,
+                    }}
+                  />
+                </div>
+              }
+              persist_content={true}
+              content={
+                <div
+                  style={{ maxWidth: "fit-content" }}
+                  className="standard-legend-container"
+                >
+                  <fieldset>
+                    <legend> {text_maker("filter_panels_description")} </legend>
+                    <MultiColumnList
+                      list_items={_.map(
+                        panel_filter_by_table,
+                        (checked, dependency) => (
+                          <CheckBox
+                            id={dependency}
+                            label={Table.lookup(dependency).name}
+                            active={checked}
+                            color={window.infobase_color_constants.primaryColor}
+                            container_style={{ margin: "4px" }}
+                            onClick={(evt) =>
+                              this.setState({
+                                panel_filter_by_table: {
+                                  ...panel_filter_by_table,
+                                  [evt]: !panel_filter_by_table[evt],
+                                },
+                              })
+                            }
+                          />
+                        )
+                      )}
+                      ul_class={"remove-padding"}
+                      li_class={"remove-bullet-points"}
+                    />
+                    <div
+                      style={{
+                        borderTop: `1px dashed ${window.infobase_color_constants.tertiaryColor}`,
+                        padding: "10px 0px 10px 5px",
+                      }}
+                    >
+                      <SelectAllControl
+                        SelectAllOnClick={() =>
+                          this.setState({
+                            panel_filter_by_table: _.mapValues(
+                              panel_filter_by_table,
+                              () => true
+                            ),
+                          })
+                        }
+                        SelectNoneOnClick={() =>
+                          this.setState({
+                            panel_filter_by_table: _.mapValues(
+                              panel_filter_by_table,
+                              () => false
+                            ),
+                          })
+                        }
+                      />
+                    </div>
+                  </fieldset>
+                </div>
+              }
+            />
+          )}
+          {!loading && panel_renderers}
         </div>
         {!_.isEmpty(active_bubble_id) && (
-          <div className="row medium-panel-text">
+          <div className="row medium_panel_text">
             <div className="previous_and_next_bubble_link_row">
               {previous_bubble ? (
                 <a
@@ -306,38 +378,83 @@ class InfoGraph_ extends React.Component {
     );
   }
 
-  loadBubbleMenuDeps({ subject }) {
+  loadBubbleMenuAndGraphDeps({ active_bubble_id, subject, level }) {
     ensure_loaded({
       subject: subject,
       has_results: true,
     }).then(() =>
-      get_panels_for_subject(subject).then((subject_panels_by_bubble_id) =>
-        this.setState({
-          bubble_menu_loading: false,
-          subject_panels_by_bubble_id,
-        })
-      )
-    );
-  }
-  loadGraphDeps({ panel_keys, active_bubble_id, subject, level }) {
-    ensure_loaded({
-      panel_keys,
-      subject_level: level,
-      subject: subject,
-      footnotes_for: subject,
-    }).then(() => {
-      if (
-        shallowEqualObjectsOverKeys(
-          { active_bubble_id, subject, level },
-          this.state,
-          ["subject", "active_bubble_id", "level"]
-        )
-      ) {
-        this.setState({
-          infographic_loading: false,
+      get_panels_for_subject(subject).then((subject_panels_by_bubble_id) => {
+        const panel_keys = subject_panels_by_bubble_id[active_bubble_id];
+
+        ensure_loaded({
+          panel_keys,
+          subject_level: level,
+          subject: subject,
+          footnotes_for: subject,
+        }).then(() => {
+          if (
+            shallowEqualObjectsOverKeys(
+              { active_bubble_id, subject, level },
+              this.state,
+              ["subject", "active_bubble_id", "level"]
+            )
+          ) {
+            const valid_panel_objs = _.chain(panel_keys)
+              .map((key) => {
+                const panel_obj = PanelRegistry.lookup(key, level);
+                return (
+                  panel_obj.is_panel_valid_for_subject(subject) && panel_obj
+                );
+              })
+              .filter()
+              .value();
+
+            const subject_bubble_defs = _.chain(bubble_defs)
+              .filter(({ id }) =>
+                _.chain(subject_panels_by_bubble_id).keys().includes(id).value()
+              )
+              .map((bubble_def) =>
+                _.mapValues(bubble_def, (bubble_option) =>
+                  _.isFunction(bubble_option)
+                    ? bubble_option(subject)
+                    : bubble_option
+                )
+              )
+              .value();
+
+            const active_index = _.findIndex(subject_bubble_defs, {
+              id: active_bubble_id,
+            });
+            const next_bubble = subject_bubble_defs[active_index + 1];
+            const previous_bubble = subject_bubble_defs[active_index - 1];
+
+            this.setState({
+              panel_keys,
+              subject_bubble_defs,
+              previous_bubble,
+              next_bubble,
+              subject_panels_by_bubble_id: subject_panels_by_bubble_id[
+                active_bubble_id
+              ]
+                ? {
+                    ...subject_panels_by_bubble_id,
+                    [active_bubble_id]: _.map(valid_panel_objs, "key"),
+                  }
+                : subject_panels_by_bubble_id,
+              loading: false,
+              panel_filter_by_table: _.chain(valid_panel_objs)
+                .flatMap("depends_on")
+                .uniq()
+                .map((table_id) => [table_id, true])
+                .fromPairs()
+                .value(),
+              total_number_of_panels: _.reject(valid_panel_objs, "static")
+                .length,
+            });
+          }
         });
-      }
-    });
+      })
+    );
   }
 }
 
