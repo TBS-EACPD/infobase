@@ -127,12 +127,6 @@ function get_plugins({
   stats_baseline,
   stats_no_compare,
 }) {
-  console.log(`bundle_stats: ${bundle_stats}`);
-  console.log(`is_ci: ${is_ci}`);
-  console.log(`CI_AND_MASTER: ${CI_AND_MASTER}`);
-  console.log(`stats_baseline: ${stats_baseline}`);
-  console.log(`stats_no_compare: ${stats_no_compare}`);
-
   return _.filter([
     new webpack.DefinePlugin({
       CDN_URL: JSON.stringify(CDN_URL),
@@ -175,16 +169,14 @@ function get_plugins({
         }
       },
     }),
-    //bundle_stats &&
-    new BundleStatsWebpackPlugin({
-      // In CI, always save baseline stats if on master, otherwise defer to argument
-      baseline: is_ci ? CI_AND_MASTER : stats_baseline,
-      compare: !stats_no_compare,
-      json: true,
-      outDir: "./client/build/InfoBase",
-      //outDir: "..",
-      //outDir: "../..", // this path is relative to the weback output dir (client/build/InfoBase/app usually)
-    }),
+    bundle_stats &&
+      new BundleStatsWebpackPlugin({
+        // In CI, always save baseline stats if on master, otherwise defer to argument
+        baseline: is_ci ? CI_AND_MASTER : stats_baseline,
+        compare: !stats_no_compare,
+        json: true,
+        outDir: "..",
+      }),
     is_prod_build &&
       new webpack.DefinePlugin({
         "process.env": {

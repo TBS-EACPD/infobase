@@ -355,13 +355,7 @@ jobs:
       - run: ./scripts/ci_scripts/create_envs.sh
       - run: ./scripts/ci_scripts/authenticate-client-gcloud.sh
       - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH/graphql#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace Replace CI API URL placeholder with branch specific API URL
-      - run: cd .. && ls
-      - run: ls
-      - run: cd ./client && ls
-      - run: cd ./client/build && ls
-      - run: cd ./client/build/InfoBase && ls
-      - run: cd ./client/build/InfoBase/app && ls
-      #- run: cp ./client/$BUILD_DIR/bundle-stats.html ./client/$BUILD_DIR/InfoBase/bundle-stats.html # copy bundle-stats html report in to build dir so it deploys alongside the dev links for easy reference
+      - run: cp ./client/$BUILD_DIR/bundle-stats.html ./client/$BUILD_DIR/InfoBase/bundle-stats.html # copy bundle-stats html report in to build dir so it deploys alongside the dev links for easy reference
       - run: (cd client && ./deploy_scripts/push_to_gcloud_bucket.sh)
       - run: if [[ $CIRCLE_BRANCH = master ]]; then ./scripts/ci_scripts/store_bundle_stats.sh; fi # only saving master stats right now since they're somewhat large files (~1 mb each)
 
