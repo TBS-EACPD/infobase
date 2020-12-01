@@ -85,7 +85,14 @@ const get_rules = ({ should_use_babel, language, is_prod_build }) => {
       use: [
         { loader: "style-loader" }, // creates style nodes from JS strings },
         { loader: "css-loader" }, // translates CSS into CommonJS
-        { loader: "sass-loader" }, // compiles Sass to CSS
+        {
+          loader: "sass-loader",
+          options: {
+            sassOptions: {
+              fiber: false,
+            },
+          },
+        }, // compiles Sass to CSS
       ],
       sideEffects: true,
     },
