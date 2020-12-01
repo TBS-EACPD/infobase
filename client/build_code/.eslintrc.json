@@ -1,5 +1,4 @@
 {
-  "extends": [ "../.eslintrc.json"],
   "globals": {
     "process": true,
     "__dirname": true
