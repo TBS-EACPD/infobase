@@ -4,7 +4,6 @@ import { shallowEqualObjectsOverKeys } from "../general_utils.js";
 
 import { PanelRegistry } from "./PanelRegistry.js";
 
-
 export const panel_context = React.createContext(null);
 
 export const PanelRenderer = withRouter(
