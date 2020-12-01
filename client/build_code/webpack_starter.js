@@ -16,6 +16,7 @@ const is_ci =
   process.env.CI &&
   (typeof process.env.CI !== "string" ||
     process.env.CI.toLowerCase() !== "false");
+const is_ci_and_master = is_ci && process.env.CIRCLE_BRANCH === "master";
 
 function choose(name) {
   return args.indexOf(name) > -1 && name;
@@ -26,8 +27,8 @@ const babel = !choose("NO-BABEL");
 const en = !!choose("EN");
 const fr = !!choose("FR");
 const no_watch = !!choose("NO-WATCH");
-const stats = !!choose("STATS") || (prod && is_ci);
-const stats_baseline = !!choose("STATS-BASELINE");
+const stats = !!choose("STATS") || (prod && is_ci); // In CI, always generate stats
+const stats_baseline = !!choose("STATS-BASELINE") || is_ci_and_master; // In CI, always save baseline stats if on master, otherwise defer to argument
 const stats_no_compare = !!choose("STATS-NO-COMPARE");
 
 const a11y_client = choose("a11y_client");

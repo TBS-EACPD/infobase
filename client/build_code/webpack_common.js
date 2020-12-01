@@ -10,7 +10,6 @@ const webpack = require("webpack");
 const CDN_URL = process.env.CDN_URL || ".";
 const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
 const IS_PROD_RELEASE = process.env.IS_PROD_RELEASE || false;
-const CI_AND_MASTER = process.env.CIRCLE_BRANCH === "master";
 const PREVIOUS_DEPLOY_SHA = process.env.PREVIOUS_DEPLOY_SHA || false;
 
 const get_rules = ({ should_use_babel, language, is_prod_build }) => {
@@ -178,8 +177,7 @@ function get_plugins({
     }),
     bundle_stats &&
       new BundleStatsWebpackPlugin({
-        // In CI, always save baseline stats if on master, otherwise defer to argument
-        baseline: is_ci ? CI_AND_MASTER : stats_baseline,
+        baseline: stats_baseline,
         compare: !stats_no_compare,
         json: true,
         outDir: "..",
