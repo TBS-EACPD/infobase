@@ -19,11 +19,28 @@ const survey_campaign_end_date = new Date(2021, 1, 1).getTime();
 const get_path_root = (path) =>
   _.chain(path).replace(/^\//, "").split("/").first().value();
 
+const seconds_in_five_minutes = 60 * 5;
 const seconds_in_a_half_year = 60 * 60 * 24 * (365 / 2);
-const should_reset_local_storage = () =>
-  localStorage.getItem(`infobase_survey_popup_deactivated`) &&
-  Date.now() - localStorage.getItem(`infobase_survey_popup_deactivated_since`) >
-    seconds_in_a_half_year;
+const should_reset_local_storage = () => {
+  const is_deactivated = localStorage.getItem(
+    `infobase_survey_popup_deactivated`
+  );
+
+  const postponed_since = localStorage.getItem(
+    `infobase_survey_popup_postponed_since`
+  );
+  const stale_postponement =
+    postponed_since && Date.now() - postponed_since > seconds_in_five_minutes;
+
+  const deactivated_since = localStorage.getItem(
+    `infobase_survey_popup_deactivated_since`
+  );
+  const stale_deactivation =
+    deactivated_since &&
+    Date.now() - deactivated_since > seconds_in_a_half_year;
+
+  return is_deactivated && (stale_postponement || stale_deactivation);
+};
 
 const reset_local_storage = () => {
   localStorage.removeItem("infobase_survey_popup_page_visited");
@@ -104,19 +121,20 @@ export const SurveyPopup = withRouter(
         MISC2: `interaction: ${button_type}`,
       });
 
+      localStorage.setItem(`infobase_survey_popup_deactivated`, "true");
       if (_.includes(["yes", "no", "short_survey_submitted"], button_type)) {
-        localStorage.setItem(`infobase_survey_popup_deactivated`, "true");
         localStorage.setItem(
           `infobase_survey_popup_deactivated_since`,
           Date.now()
         );
-
-        this.setState({ active: false, show_popup: false });
       } else if (button_type === "later") {
-        reset_local_storage();
-
-        this.setState({ active: false, show_popup: false });
+        localStorage.setItem(
+          `infobase_survey_popup_postponed_since`,
+          Date.now()
+        );
       }
+
+      this.setState({ active: false, show_popup: false });
     };
     static getDerivedStateFromProps(props) {
       if (props.showSurvey) {
