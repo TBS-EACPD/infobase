@@ -3,11 +3,18 @@
     "node"
   ],
   "extends": [ "../.eslintrc.json", "plugin:node/recommended" ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalDecorators": true
+    },
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
+  },
   "env": {
     "node": true
   },
   "rules": {
-      "node/no-unsupported-features": ["error", {"ignores": ["modules"]}],
+      "node/no-unsupported-features/es-syntax": ["error", {"ignores": ["modules"]}],
       "no-console": 0
   },
   "globals": {
