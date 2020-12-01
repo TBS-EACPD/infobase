@@ -27,7 +27,7 @@ const babel = !choose("NO-BABEL");
 const en = !!choose("EN");
 const fr = !!choose("FR");
 const no_watch = !!choose("NO-WATCH");
-const stats = !!choose("STATS") || (prod && is_ci); // In CI, always generate stats
+const bundle_stats = !!choose("STATS") || (prod && is_ci); // In CI, always generate stats
 const stats_baseline = !!choose("STATS-BASELINE") || is_ci_and_master; // In CI, always save baseline stats if on master, otherwise defer to argument
 const stats_no_compare = !!choose("STATS-NO-COMPARE");
 
@@ -43,7 +43,7 @@ const options_by_app = {
       path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
       filename: `app-a11y-${language}.min.js`,
       chunkFilename: `[name].app-ally-${language}${
-        prod && !stats ? ".[contenthash]" : ""
+        prod && !bundle_stats ? ".[contenthash]" : ""
       }.min.js`,
     }),
   },
@@ -53,7 +53,7 @@ const options_by_app = {
       path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
       filename: `app-${language}.min.js`,
       chunkFilename: `[name].app-${language}${
-        prod && !stats ? ".[contenthash]" : ""
+        prod && !bundle_stats ? ".[contenthash]" : ""
       }.min.js`,
     }),
   },
@@ -69,8 +69,6 @@ console.log(`
   prod: ${prod}, 
   babel: ${babel},
   languages: ${langs},
-  stats: ${stats},
-  stats_baseline: ${stats_baseline}
 `);
 
 gitsha(function (err, commit_sha) {
@@ -89,7 +87,8 @@ gitsha(function (err, commit_sha) {
       local_ip: ip.address(),
       is_ci,
       should_use_babel: babel,
-      produce_stats: stats,
+      // bundle stats only output for standard english build, for comparison consistency
+      produce_stats: bundle_stats && lang === "en" && !a11y_client,
       stats_baseline,
       stats_no_compare,
       entry: app_options.entry,

@@ -129,7 +129,7 @@ function get_plugins({
   commit_sha,
   local_ip,
   is_ci,
-  bundle_stats,
+  produce_stats,
   stats_baseline,
   stats_no_compare,
 }) {
@@ -175,7 +175,7 @@ function get_plugins({
         }
       },
     }),
-    bundle_stats &&
+    produce_stats &&
       new BundleStatsWebpackPlugin({
         baseline: stats_baseline,
         compare: !stats_no_compare,
@@ -192,10 +192,10 @@ function get_plugins({
   ]);
 }
 
-function get_optimizations(is_prod_build, bundle_stats) {
+function get_optimizations(is_prod_build, produce_stats) {
   if (is_prod_build) {
     return {
-      ...(bundle_stats && {
+      ...(produce_stats && {
         // using names as ids required for clear bundle stats comparison between builds, but adds weight to output
         // (particularily to entry point), so not desired in production builds intended for the live site
         moduleIds: "named",
@@ -233,8 +233,7 @@ function create_config({
   }
   new_output.publicPath = `${CDN_URL}/app/`;
 
-  // bundle stats only output for standard english build, for comparison consistency
-  const bundle_stats = produce_stats && language === "en" && !a11y_client;
+  produce_stats && console.log("----outputting stats----");
 
   return {
     name: language,
@@ -252,11 +251,11 @@ function create_config({
       commit_sha,
       local_ip,
       is_ci,
-      bundle_stats,
+      produce_stats,
       stats_baseline,
       stats_no_compare,
     }),
-    optimization: get_optimizations(is_prod_build, bundle_stats),
+    optimization: get_optimizations(is_prod_build, produce_stats),
     devtool: is_prod_build ? false : "inline-source-map",
     resolve: {
       fallback: { assert: false },
