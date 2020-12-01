@@ -234,8 +234,6 @@ function create_config({
   }
   new_output.publicPath = `${CDN_URL}/app/`;
 
-  produce_stats && console.log("----outputting stats----");
-
   return {
     name: language,
     mode: is_prod_build ? "production" : "development",
