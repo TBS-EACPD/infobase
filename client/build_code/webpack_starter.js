@@ -69,6 +69,8 @@ console.log(`
   prod: ${prod}, 
   babel: ${babel},
   languages: ${langs},
+  stats: ${stats},
+  stats_baseline: ${stats_baseline}
 `);
 
 gitsha(function (err, commit_sha) {
