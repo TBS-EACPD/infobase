@@ -27,18 +27,17 @@ const babel = !choose("NO-BABEL");
 const en = !!choose("EN");
 const fr = !!choose("FR");
 const no_watch = !!choose("NO-WATCH");
-const bundle_stats = !!choose("STATS") || (prod && is_ci); // In CI, always generate stats
-const stats_baseline = !!choose("STATS-BASELINE") || is_ci_and_master; // In CI, always save baseline stats if on master, otherwise defer to argument
+const bundle_stats = !!choose("STATS") || true; // In CI, always generate stats
+const stats_baseline = !!choose("STATS-BASELINE") || true; // In CI, always save baseline stats if on master, otherwise defer to argument
 const stats_no_compare = !!choose("STATS-NO-COMPARE");
 
 const a11y_client = choose("a11y_client");
 const main_client = choose("main_client");
 
 const app = a11y_client || main_client;
-const common_entry = ["@babel/polyfill", "./src/InfoBase/root.js"];
+
 const options_by_app = {
   a11y_client: {
-    entry: common_entry,
     get_output: (language) => ({
       path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
       filename: `app-a11y-${language}.min.js`,
@@ -48,7 +47,6 @@ const options_by_app = {
     }),
   },
   main_client: {
-    entry: common_entry,
     get_output: (language) => ({
       path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
       filename: `app-${language}.min.js`,
@@ -80,6 +78,9 @@ gitsha(function (err, commit_sha) {
 
   const config = langs.map((lang) =>
     create_config({
+      context: path.resolve(__dirname, `..`),
+      entry: ["@babel/polyfill", "./src/InfoBase/root.js"],
+      output: app_options.get_output(lang),
       commit_sha,
       language: lang,
       a11y_client,
@@ -91,8 +92,6 @@ gitsha(function (err, commit_sha) {
       produce_stats: bundle_stats && lang === "en" && !a11y_client,
       stats_baseline,
       stats_no_compare,
-      entry: app_options.entry,
-      output: app_options.get_output(lang),
     })
   );
 
