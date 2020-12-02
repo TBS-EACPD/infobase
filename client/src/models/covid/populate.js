@@ -131,6 +131,7 @@ const covid_estimates_gov_summary_query = gql`
   query($lang: String!) {
     root(lang: $lang) {
       gov {
+        id
         covid_estimates_summary {
           id
 
