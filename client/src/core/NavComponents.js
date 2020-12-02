@@ -5,7 +5,7 @@ import { AlertBanner, MultiColumnList } from "../components/index.js";
 import { IconHome } from "../icons/icons.js";
 import { index_lang_lookups } from "../InfoBase/index_data.js";
 
-import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "../models/footnotes/dynamic_footnotes.js";
+import { result_docs_in_tabling_order } from "../models/results.js";
 import { Subject } from "../models/subject.js";
 import { trivial_text_maker } from "../models/text.js";
 
@@ -153,12 +153,16 @@ const HeaderBanner = withRouter(
   }
 );
 
-const TemporaryPublicAccountsBanner = () => {
+const TemporaryLateFTEsBanner = () => {
   const route_filter = (match, history) =>
     /^\/(start|tag-explorer|partition|treemap|rpb)/.test(match.path);
 
-  const late_orgs =
-    PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC.late_resources_orgs;
+  const late_orgs = _.chain(result_docs_in_tabling_order)
+    .filter(({ doc_type }) => doc_type === "drr")
+    .last()
+    .get("late_resources_orgs")
+    .uniq()
+    .value();
   const banner_content = (
     <Fragment>
       {
@@ -181,12 +185,14 @@ const TemporaryPublicAccountsBanner = () => {
   );
 
   return (
-    <HeaderBanner
-      route_filter={route_filter}
-      banner_content={banner_content}
-      banner_class="warning"
-      additional_class_names="medium-panel-text"
-    />
+    late_orgs && (
+      <HeaderBanner
+        route_filter={route_filter}
+        banner_content={banner_content}
+        banner_class="warning"
+        additional_class_names="medium-panel-text"
+      />
+    )
   );
 };
 
@@ -214,7 +220,7 @@ export class StandardRouteContainer extends React.Component {
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
         <HeaderBanner route_filter={_.constant(false)} />
-        <TemporaryPublicAccountsBanner />
+        <TemporaryLateFTEsBanner />
         {beta && (
           <HeaderBanner
             route_filter={_.constant(true)}

@@ -340,8 +340,6 @@ const build_doc_info_objects = (doc_type, docs) =>
         has_resources: !_.isEmpty(resource_years),
         could_have_previous: index > 0,
         ...doc_properties,
-        ...// "DRR resources" are fully decoupled from DRR tabling, come from public accounts. Don't allow late_resources_orgs to be populated on a DRR
-        (is_drr && { late_resources_orgs: [] }),
       };
     })
     .keyBy("doc_key")
