@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-const current_doc_keys_ordered_by_time_period = ["drr18", "dp19", "dp20"];
+const current_doc_keys_ordered_by_time_period = ["drr18", "drr19", "dp20"];
 
 const current_drr_docs = _.filter(
   current_doc_keys_ordered_by_time_period,
@@ -11,6 +11,7 @@ const current_dp_docs = _.filter(
   (key) => /^dp/.test(key)
 );
 
+// Don't change these keys unless you've also updated the results files in data/test-data!
 const snapshot_test_ordered_doc_keys = ["drr17", "dp18", "dp19"];
 
 const snapshot_test_drr_docs = _.filter(snapshot_test_ordered_doc_keys, (key) =>
