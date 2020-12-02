@@ -135,10 +135,10 @@ const HomeLayout = (props) => (
             <CardLeftImage
               tmf={home_tm}
               img_src={get_static_url("svg/DPs.svg")}
-              title_key="quick_link_DP_2021"
-              text_key="dp_home_text"
+              title_key="quick_link_DRR_1920"
+              text_key="drr_home_text"
               link_key="check_home_link"
-              link_href="#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_dp)"
+              link_href="#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_drr)"
             />
           </div>
           <div className="col-content">

@@ -39,6 +39,10 @@ dp_home_text:
   en: The 2020-21 Departmental Plans were tabled on March 10th, 2020. Explore the data to see upcoming departmental priorities
   fr: Les rapports sur les plans ministériels de 2020-2021 ont été déposés le 10 mars 2020. Consultez les données pour voir les priorités ministérielles à venir
 
+drr_home_text:
+  en: TODO
+  fr: TODO
+
 planet_home_title:
   en: Bubble Explorer
   fr: Diagrammes circulaires
@@ -181,9 +185,9 @@ quick_link_DP_2021:
   en: 2020-21 Departmental Plans
   fr: Plans Ministériels de 2020-2021
 
-quick_link_DRR_1819:
-  en: 2018-19 Departmental Results Reports
-  fr: Rapport sur les résultats ministériels de 2018-2019
+quick_link_DRR_1920:
+  en: 2019-20 Departmental Results Reports
+  fr: Rapport sur les résultats ministériels de 2019-2020
 
 quick_link_auth_and_exp:
   en: 2017-18 Authorities and Expenditures
