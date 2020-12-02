@@ -116,3 +116,16 @@ ppl_infograph_desc_meta_attr:
 finance_infograph_desc_meta_attr:
   en: Search historical and planned government spending by different lenses like social and economic spending or by departmental program. Sourced from Public Accounts, and Estimates, you will find financial details from government to department to program.  
   fr: Effectuer des recherches sur les dépenses antérieures et prévues du gouvernement par programme ministériel ou selon diverses optiques, comme les dépenses sociales et économiques. Provenant des Comptes publics et des budgets des dépenses, vous trouverez des renseignements financiers allant du gouvernement au ministère, jusqu’au programme.
+
+filter_panels:
+  en: Panel Filters
+  fr: TODO
+panels_status:
+  transform: [handlebars]
+  en: (showing {{number_of_active_panels}} of {{total_number_of_panels}} panels)
+  fr: TODO
+filter_panels_description:
+  en: |
+    Only show panels with the following datasets:
+  fr: |
+    TODO
