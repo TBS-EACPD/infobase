@@ -11,7 +11,13 @@ of the advanced search for mobile */
       margin-top: 5px;
   }
 }
-
+.remove-bullet-points {
+  list-style-type: none;
+}
+.panel-status-text {
+  color: $tertiaryColor;
+  font-size: 13px;
+}
 .previous_and_next_bubble_link_row {
   display: flex;
   flex-direction: row;
