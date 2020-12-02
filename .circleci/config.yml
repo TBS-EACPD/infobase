@@ -144,6 +144,7 @@ jobs:
 
       #- run: ./scripts/ci_scripts/get_bundle_stats_baseline.sh
       - run: ls ./scripts/ci_scripts
+      - run: mkdir -p ./client/node_modules/.cache/bundle-stats
       - run: cp ./scripts/ci_scripts/baseline.json ./client/node_modules/.cache/bundle-stats/baseline.json
       - run: cat ./client/node_modules/.cache/bundle-stats/baseline.json
 
