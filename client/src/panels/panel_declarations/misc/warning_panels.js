@@ -112,7 +112,7 @@ export const declare_late_results_warning_panel = () =>
       const get_per_doc_late_results_alert = (per_doc_inner_content) => (
         <Fragment>
           {_.map(docs_with_late_orgs, (result_doc, ix) => (
-            <WarningPanel key={ix}>
+            <WarningPanel key={ix} banner_class="warning">
               {per_doc_inner_content(result_doc)}
             </WarningPanel>
           ))}
