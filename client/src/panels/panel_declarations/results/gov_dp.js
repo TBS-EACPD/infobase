@@ -129,7 +129,7 @@ export const declare_gov_dp_panel = () =>
           late_dept_count,
         };
       },
-      footnotes: ["DP_RESULTS"],
+      footnotes: ["DP"],
       source: (subject) => get_source_links(["DP"]),
       render({ calculations, sources, footnotes }) {
         const {
