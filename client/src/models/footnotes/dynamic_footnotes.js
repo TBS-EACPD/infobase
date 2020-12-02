@@ -43,7 +43,7 @@ const get_dynamic_footnotes = () => {
     (result_or_resource) => {
       const get_topic_keys_for_doc_type = (doc_type) => {
         if (result_or_resource === "results") {
-          return [`${_.toUpper(doc_type)}_RESULTS`];
+          return [_.toUpper(doc_type)];
         } else {
           if (doc_type === "dp") {
             return ["PLANNED_EXP", "DP_EXP", "PLANNED_FTE", "DP_FTE"];

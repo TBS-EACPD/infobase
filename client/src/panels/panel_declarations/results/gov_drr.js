@@ -73,7 +73,7 @@ export const declare_gov_drr_panel = () =>
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
       requires_result_counts: true,
-      footnotes: ["RESULTS_COUNTS", "DRR_RESULTS"],
+      footnotes: ["RESULTS_COUNTS", "DRR"],
       source: (subject) => get_source_links(["DRR"]),
 
       calculate() {
