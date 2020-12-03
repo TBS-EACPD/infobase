@@ -1,5 +1,7 @@
 import { createSelector } from "reselect";
 
+import { is_dev } from "src/app_bootstrap/globals.js";
+
 import {
   filter_hierarchy,
   toggleExpandedFlat,
@@ -338,7 +340,7 @@ function get_memoized_funcs(schemes) {
         current_node_ids
       );
 
-      if (!_.isEqual(potential_to_toggle, safe_to_toggle) && window.is_dev) {
+      if (!_.isEqual(potential_to_toggle, safe_to_toggle) && is_dev) {
         // eslint-disable-next-line no-console
         console.warn(
           `Some ids stored in this explorer implemntation's root.userCollapsed and root.userExpanded state do not

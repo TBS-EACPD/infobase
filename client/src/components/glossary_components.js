@@ -1,3 +1,5 @@
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { IconQuestion } from "../icons/icons.js";
 import { glossary_href } from "../link_utils.js";
 import { GlossaryEntry } from "../models/glossary.js";
@@ -10,12 +12,10 @@ const GlossaryTooltipWrapper = ({
   inner_selector,
   children,
 }) =>
-  window.is_a11y_mode ? (
+  is_a11y_mode ? (
     <a
-      href={window.is_a11y_mode ? glossary_href(id) : null}
-      title={
-        window.is_a11y_mode ? trivial_text_maker("glossary_link_title") : null
-      }
+      href={is_a11y_mode ? glossary_href(id) : null}
+      title={is_a11y_mode ? trivial_text_maker("glossary_link_title") : null}
     >
       {children}
     </a>
@@ -48,7 +48,7 @@ export const GlossaryIcon = ({
     arrow_selector={arrow_selector}
     inner_selector={inner_selector}
   >
-    {window.is_a11y_mode ? (
+    {is_a11y_mode ? (
       alternate_text ? (
         alternate_text
       ) : (

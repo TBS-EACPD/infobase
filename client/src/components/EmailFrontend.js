@@ -1,7 +1,10 @@
 import classNames from "classnames";
 import { Fragment } from "react";
 
+import { is_a11y_mode, lang, sha } from "src/app_bootstrap/globals.js";
+
 import { get_client_id, log_standard_event } from "../core/analytics.js";
+
 import { textRed } from "../core/color_defs.js";
 import { has_local_storage } from "../core/feature_detection.js";
 import {
@@ -22,10 +25,10 @@ const { TM, text_maker } = create_text_maker_component(text);
 
 const get_values_for_automatic_fields = (automatic_fields) => {
   const automatic_field_getters = {
-    sha: () => window.sha,
+    sha: () => sha,
     route: () => window.location.hash.replace("#", "") || "start",
-    lang: () => window.lang,
-    app_version: () => (window.is_a11y_mode ? "a11y" : "standard"),
+    lang: () => lang,
+    app_version: () => (is_a11y_mode ? "a11y" : "standard"),
     client_id: () => get_client_id(),
     additional: () => ({}),
   };
@@ -211,7 +214,7 @@ class EmailFrontend extends React.Component {
           return (
             <fieldset style={{ marginBottom: "1rem" }}>
               <legend>
-                {field_info.form_label[window.lang]}
+                {field_info.form_label[lang]}
                 {field_info.required && (
                   <span style={{ color: textRed }}>*</span>
                 )}
@@ -227,7 +230,7 @@ class EmailFrontend extends React.Component {
                   }
                   key={`${key}_${field_info.form_type}`}
                   form_type={field_info.form_type}
-                  label={label_by_lang[window.lang]}
+                  label={label_by_lang[lang]}
                   enum_key={key}
                   field_id={get_field_id(field_key)}
                   selected_enums_for_field={completed_template[field_key]}
@@ -265,7 +268,7 @@ class EmailFrontend extends React.Component {
           return (
             <Fragment>
               <label htmlFor={get_field_id(field_key)}>
-                {field_info.form_label[window.lang]}
+                {field_info.form_label[lang]}
                 {connected_required && (
                   <span style={{ color: textRed }}>*</span>
                 )}
@@ -292,7 +295,7 @@ class EmailFrontend extends React.Component {
           );
         }
         case "error":
-          return <label>{field_info.form_label[window.lang]}</label>;
+          return <label>{field_info.form_label[lang]}</label>;
       }
     };
 

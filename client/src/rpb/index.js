@@ -6,6 +6,8 @@ import { Fragment } from "react";
 import AriaModal from "react-aria-modal";
 import { withRouter } from "react-router";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { SpinnerWrapper, LabeledBox } from "../components/index.js";
 import { log_standard_event } from "../core/analytics.js";
 import { ensure_loaded } from "../core/lazy_loader.js";
@@ -298,7 +300,7 @@ class RPB extends React.Component {
               aria-label={text_maker("rpb_pick_data")}
               className="centerer md-half-width"
             >
-              {window.is_a11y_mode ? (
+              {is_a11y_mode ? (
                 <AccessibleTablePicker
                   onSelect={(id) => this.pickTable(id)}
                   tables={_.reject(Table.get_all(), "reference_table")}
@@ -323,7 +325,7 @@ class RPB extends React.Component {
                 </button>
               )}
             </div>
-            {!window.is_a11y_mode && (
+            {!is_a11y_mode && (
               <AriaModal
                 mounted={this.state.table_picking}
                 onExit={() => {

@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import { Modal } from "react-bootstrap";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { trivial_text_maker } from "../../models/text.js";
 import { CountdownCircle } from "../CountdownCircle.js";
 
@@ -130,7 +132,7 @@ export class FixedPopover extends React.Component {
             ? restore_focus
             : // don't want to restore focus if the window could scroll, since it will (unexpectedly for the user)
               // jump the window back when focus returns. Always restore focus in a11y mode
-              window.is_a11y_mode
+              is_a11y_mode
         }
       >
         <div

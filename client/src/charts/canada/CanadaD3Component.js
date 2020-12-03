@@ -10,6 +10,8 @@
 //  with the array ordered by fiscal year
 //
 
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { businessConstants } from "../../models/businessConstants.js";
 import graphRegistry from "../graphRegistry.js";
 
@@ -114,7 +116,7 @@ export class CanadaD3Component {
       .attr("transform", `translate(${padding},0), scale(${scale})`);
 
     // Unhide map components specific to current language
-    svg.selectAll(`.${window.lang}-only`).styles({
+    svg.selectAll(`.${lang}-only`).styles({
       opacity: "1",
     });
 

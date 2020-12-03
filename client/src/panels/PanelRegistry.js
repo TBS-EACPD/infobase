@@ -1,3 +1,5 @@
+import { is_dev } from "src/app_bootstrap/globals.js";
+
 import { Table } from "../core/TableClass.js";
 import FootNote from "../models/footnotes/footnotes.js";
 import { Subject } from "../models/subject.js";
@@ -24,7 +26,7 @@ class PanelRegistry {
 
   static lookup(key, level) {
     const lookup = create_panel_key(key, level);
-    if (window.is_dev && !panels[lookup]) {
+    if (is_dev && !panels[lookup]) {
       // eslint-disable-next-line no-console
       console.error(`bad panel key - ${lookup} for level ${level}`);
       return null;
@@ -66,7 +68,7 @@ class PanelRegistry {
   }
 
   new_api_warnings() {
-    if (window.is_dev) {
+    if (is_dev) {
       _.each(["layout_def", "text", "title"], (property) => {
         if (this[property]) {
           // eslint-disable-next-line no-console

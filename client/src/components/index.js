@@ -63,7 +63,6 @@ export {
   ExternalLink,
   Year,
   TextAbbrev,
-  lang,
   create_text_maker_component,
   DlItem,
   MultiColumnList,

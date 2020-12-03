@@ -11,6 +11,8 @@ import {
   Details,
 } from "src/components/index.js";
 
+import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { Explorer } from "src/explorer_common/explorer_components.js";
 import { get_root } from "src/explorer_common/hierarchy_tools.js";
 import { infograph_href_template, rpb_link } from "src/link_utils.js";
@@ -252,7 +254,7 @@ export default class EstimatesExplorerComponent extends React.Component {
               placeholder={text_maker("everything_search_placeholder")}
               onChange={(evt) => this.handleQueryChange(evt.target.value)}
             />
-            {window.is_a11y_mode && (
+            {is_a11y_mode && (
               <input
                 type="submit"
                 name="search"
@@ -342,14 +344,14 @@ export default class EstimatesExplorerComponent extends React.Component {
                     : "{{est_in_year}}_estimates",
                 ],
                 dimension: "by_estimates_doc",
-                filter: estimates_docs[doc_code][window.lang],
+                filter: estimates_docs[doc_code][lang],
               }),
             }}
           />
           <br />
           <TM
             k="estimates_source_link"
-            args={{ href: sources.ESTIMATES.open_data[window.lang] }}
+            args={{ href: sources.ESTIMATES.open_data[lang] }}
           />
         </div>
       </div>

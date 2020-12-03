@@ -1,3 +1,5 @@
+import { cdn_url, is_dev } from "src/app_bootstrap/globals.js";
+
 import { log_standard_event } from "../core/analytics.js";
 import { retry_promise } from "../general_utils.js";
 
@@ -6,7 +8,7 @@ const linked_stylesheets_loaded = () => {
   try {
     const linked_style_sheets_have_loaded = _.chain(
       document.head.querySelectorAll(
-        `link[rel='stylesheet'][href^='${window.cdn_url}']`
+        `link[rel='stylesheet'][href^='${cdn_url}']`
       )
     )
       .map(_.identity)
@@ -25,7 +27,7 @@ const linked_stylesheets_loaded = () => {
 // Collecting analytics on this event, hopefully that helps us pin it down eventually. Check GA for recent occurences before deleting any of this code!
 // No decent fix, but reloading page seems to be enough when it happens within the team, so doing that programatically in prod
 const ensure_linked_stylesheets_load = () => {
-  if (!linked_stylesheets_loaded() && !window.is_dev) {
+  if (!linked_stylesheets_loaded() && !is_dev) {
     log_standard_event({
       SUBAPP: window.location.hash.replace("#", ""),
       MISC1: "ERROR_IN_PROD",

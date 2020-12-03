@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { GraphOverlay } from "../../../../components";
 import {
   create_text_maker_component,
@@ -164,7 +166,7 @@ class Goco extends React.Component {
         maxSpending.actual_spending / total_fte_spend.total_spending,
     };
 
-    if (window.is_a11y_mode) {
+    if (is_a11y_mode) {
       graph_content = (
         <Fragment>
           {custom_table}

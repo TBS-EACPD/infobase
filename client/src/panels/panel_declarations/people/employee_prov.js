@@ -1,3 +1,5 @@
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { Canada } from "../../../charts/canada/index.js";
 import {
   formats,
@@ -121,12 +123,12 @@ class ProvPanel extends React.Component {
         <Col size={12} isText>
           <TM k={level + "_employee_prov_text"} args={text_calculations} />
         </Col>
-        {!window.is_a11y_mode && (
+        {!is_a11y_mode && (
           <Col size={12} isGraph>
             <Canada graph_args={panel_args} />
           </Col>
         )}
-        {window.is_a11y_mode && (
+        {is_a11y_mode && (
           <Col size={12} isGraph>
             <SmartDisplayTable
               column_configs={{

@@ -1,3 +1,5 @@
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import {
   declare_panel,
   util_components,
@@ -114,7 +116,7 @@ export const declare_spending_in_tag_perspective_panel = () =>
     panel_config_func: (level, panel_key) => ({
       depends_on: ["programSpending"],
       calculate(subject, options) {
-        if (window.is_a11y_mode) {
+        if (is_a11y_mode) {
           //turn off this panel in a11y mode
           return false;
         }

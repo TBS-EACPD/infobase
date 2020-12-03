@@ -1,3 +1,5 @@
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import {
   WrappedNivoBar,
   year_templates,
@@ -76,7 +78,7 @@ class PlannedProgramResources extends React.Component {
     super(props);
     const program_labels = _.map(props.programs, "label");
     this.state = {
-      active_programs: window.is_a11y_mode
+      active_programs: is_a11y_mode
         ? program_labels
         : _.take(program_labels, 3),
     };
@@ -108,7 +110,7 @@ class PlannedProgramResources extends React.Component {
       <div>
         <div className="medium-panel-text mrgn-bttm-lg">{text}</div>
         <div className="frow">
-          {!window.is_a11y_mode && (
+          {!is_a11y_mode && (
             <div className="fcol-md-4" style={{ width: "100%" }}>
               <StandardLegend
                 items={_.map(programs, ({ label }) => ({

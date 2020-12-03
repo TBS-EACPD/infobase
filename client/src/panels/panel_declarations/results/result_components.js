@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import {
   IconCheck,
   IconAttention,
@@ -159,7 +161,7 @@ const IndicatorDisplay = ({ indicator, show_doc }) => {
               <TM k="methodology" />
             </dt>
             <dd>
-              {window.is_a11y_mode ? (
+              {is_a11y_mode ? (
                 <div
                   dangerouslySetInnerHTML={{
                     __html: sanitized_marked(indicator.methodology),
@@ -316,7 +318,7 @@ const StatusIconTable = ({
             active_list.length === 0 ||
             _.indexOf(active_list, status_key) !== -1,
           count: icon_counts[status_key] || 0,
-          text: !window.is_a11y_mode ? (
+          text: !is_a11y_mode ? (
             <span
               className="link-unstyled"
               tabIndex={-1}

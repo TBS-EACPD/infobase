@@ -1,3 +1,5 @@
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import text2 from "../../../common_text/common_lang.yaml";
 import {
   create_text_maker_component,
@@ -60,13 +62,13 @@ export const declare_employee_last_year_totals_panel = () =>
             {...{ footnotes, sources }}
             allowOverflow={true}
           >
-            <Col size={!window.is_a11y_mode ? 5 : 12} isText>
+            <Col size={!is_a11y_mode ? 5 : 12} isText>
               <TM
                 k="dept_employee_last_year_totals_text"
                 args={text_calculations}
               />
             </Col>
-            {!window.is_a11y_mode && (
+            {!is_a11y_mode && (
               <Col size={7} isGraph>
                 <CircleProportionChart
                   height={200}

@@ -1,3 +1,5 @@
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { GraphOverlay } from "../../../../components";
 import {
   InfographicPanel,
@@ -141,7 +143,7 @@ export const declare_internal_services_panel = () =>
               />
             </div>
             <div className="frow md-middle">
-              {!window.is_a11y_mode && (
+              {!is_a11y_mode && (
                 <div className="fcol-md-3">
                   <StandardLegend
                     items={legend_items}

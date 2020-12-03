@@ -1,5 +1,7 @@
 import classNames from "classnames";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { IconCheckmark } from "../icons/icons.js";
 import "./CheckBox.scss";
 
@@ -25,7 +27,7 @@ export class CheckBox extends React.Component {
       disabled, //greys out checkbox and make it non-clickable if true
     } = this.props;
 
-    if (window.is_a11y_mode) {
+    if (is_a11y_mode) {
       return (
         <div className="checkbox">
           <label>

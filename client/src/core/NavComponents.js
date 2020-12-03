@@ -1,6 +1,8 @@
 import { Fragment } from "react";
 import { withRouter } from "react-router";
 
+import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { AlertBanner } from "../components/index.js";
 import { IconHome } from "../icons/icons.js";
 import { index_lang_lookups } from "../InfoBase/index_data.js";
@@ -34,8 +36,8 @@ class DocumentTitle extends React.Component {
     const { title_str } = this.props;
 
     const title = _.isEmpty(title_str)
-      ? default_title[window.lang]
-      : `${default_title[window.lang]} - ${title_str}`;
+      ? default_title[lang]
+      : `${default_title[lang]} - ${title_str}`;
 
     document.getElementById("document-title").innerHTML = title;
   }
@@ -55,7 +57,7 @@ class DocumentDescription extends React.Component {
     const { description_str } = this.props;
     let desc = description_str;
     if (_.isEmpty(description_str)) {
-      desc = default_description[window.lang];
+      desc = default_description[lang];
     }
     document.getElementById("document-description").content = desc;
   }
@@ -185,10 +187,10 @@ export class StandardRouteContainer extends React.Component {
         )}
         <AnalyticsSynchronizer route_key={route_key} />
         {shouldSyncLang !== false && <LangSynchronizer />}
-        {!window.is_a11y_mode && (
+        {!is_a11y_mode && (
           <A11yLinkSynchronizer non_a11y_route={non_a11y_route} />
         )}
-        {window.is_a11y_mode && <StandardLinkSynchronizer />}
+        {is_a11y_mode && <StandardLinkSynchronizer />}
         <div>{children}</div>
       </div>
     );

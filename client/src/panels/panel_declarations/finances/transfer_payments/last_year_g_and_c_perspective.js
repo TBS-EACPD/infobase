@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import {
   StdPanel,
   Col,
@@ -60,13 +62,13 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
             sources={sources}
             allowOverflow={true}
           >
-            <Col size={!window.is_a11y_mode ? 6 : 12} isText>
+            <Col size={!is_a11y_mode ? 6 : 12} isText>
               <TM
                 k="dept_last_year_g_and_c_perspective_text"
                 args={panel_args}
               />
             </Col>
-            {!window.is_a11y_mode && (
+            {!is_a11y_mode && (
               <Fragment>
                 <Col size={3} isGraph>
                   <CircleProportionChart

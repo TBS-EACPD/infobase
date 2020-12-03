@@ -1,3 +1,5 @@
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { create_text_maker_component, FancyUL, Panel } from "../components";
 import {
   StandardRouteContainer,
@@ -80,7 +82,7 @@ export default class MetaData extends React.Component {
                       className="btn btn-ib-primary"
                       target="_blank"
                       rel="noopener noreferrer"
-                      href={source.open_data[window.lang]}
+                      href={source.open_data[lang]}
                     >
                       <TM k="open_data_link" />
                     </a>

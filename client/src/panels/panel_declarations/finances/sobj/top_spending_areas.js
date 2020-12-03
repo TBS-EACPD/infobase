@@ -1,3 +1,5 @@
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import {
   StdPanel,
   Col,
@@ -58,7 +60,7 @@ const render_w_options = ({ text_key }) => ({
       <Col isText size={5}>
         <TM k={text_key} args={text_calculations} />
       </Col>
-      <Col isGraph={!window.is_a11y_mode} size={7}>
+      <Col isGraph={!is_a11y_mode} size={7}>
         <WrappedNivoPie data={graph_data} graph_height="450px" />
       </Col>
     </StdPanel>

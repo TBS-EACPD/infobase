@@ -1,3 +1,5 @@
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { Subject } from "../../models/subject";
 import * as FORMAT from "../format";
 
@@ -14,7 +16,7 @@ import * as FORMAT from "../format";
 class Queries {
   constructor(table, data, subject) {
     this.table = table;
-    this.lang = window.lang;
+    this.lang = lang;
     this.dept = subject && subject.level === "dept" && subject.id;
     this.subject = subject;
     this.data = data;

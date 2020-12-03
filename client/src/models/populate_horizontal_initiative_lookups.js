@@ -1,3 +1,5 @@
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { get_static_url, make_request } from "../request_utils.js";
 
 import { Subject } from "./subject.js";
@@ -41,6 +43,6 @@ function extend_hi_tags(hi_lookups) {
 }
 
 export const load_horizontal_initiative_lookups = () =>
-  load_csv(`hi_lookups_${window.lang}`).then((hi_lookups) =>
+  load_csv(`hi_lookups_${lang}`).then((hi_lookups) =>
     extend_hi_tags(hi_lookups)
   );

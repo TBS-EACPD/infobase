@@ -1,4 +1,7 @@
 import classNames from "classnames";
+
+import { lang } from "src/app_bootstrap/globals.js";
+
 import "./Details.scss";
 
 export class Details extends React.Component {
@@ -41,7 +44,7 @@ export class Details extends React.Component {
           <span id={label_id}>
             {summary_content}
             <span className="sr-only">
-              {aria_labels[window.lang][isOpen ? "open" : "closed"]}
+              {aria_labels[lang][isOpen ? "open" : "closed"]}
             </span>
           </span>
         </button>

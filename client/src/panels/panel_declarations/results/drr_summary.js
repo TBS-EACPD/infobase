@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import { Fragment } from "react";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { IconArray } from "../../../charts/IconArray.js";
 import {
   StandardLegend,
@@ -201,7 +203,7 @@ class PercentageViz extends React.Component {
 
     const default_selected =
       _.reject(present_ids, (value, key) => key === "future").length > 0 &&
-      !window.is_a11y_mode
+      !is_a11y_mode
         ? _.without(all_ids, "future")
         : all_ids;
 
@@ -253,7 +255,7 @@ class PercentageViz extends React.Component {
               justifyContent: "space-evenly",
             }}
           >
-            {!window.is_a11y_mode && (
+            {!is_a11y_mode && (
               <StandardLegend
                 items={_.chain(all_data)
                   .map(({ label, id }) => ({

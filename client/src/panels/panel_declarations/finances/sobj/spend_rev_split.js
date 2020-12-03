@@ -1,3 +1,5 @@
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import {
   formats,
   create_text_maker_component,
@@ -44,7 +46,7 @@ function render({ calculations, footnotes, sources }) {
   }));
 
   const graph_content = (() => {
-    if (window.is_a11y_mode) {
+    if (is_a11y_mode) {
       return null;
     } else {
       return (

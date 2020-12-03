@@ -1,9 +1,9 @@
-
 import * as clipboard from "clipboard-polyfill";
 import { Fragment } from "react";
 
-import { IconCopy } from "../icons/icons.js";
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
+import { IconCopy } from "../icons/icons.js";
 import { create_text_maker } from "../models/text.js";
 
 import { FixedPopover } from "./modals_and_popovers";
@@ -86,10 +86,10 @@ export class WriteToClipboard extends React.Component {
           }
           dialog_position="left"
           auto_close_time={
-            !window.is_a11y_mode && modal_active && copy_success && 1900
+            !is_a11y_mode && modal_active && copy_success && 1900
           }
-          close_button_in_header={!window.is_a11y_mode}
-          restore_focus={window.is_a11y_mode || keyboard_navigation_detected}
+          close_button_in_header={!is_a11y_mode}
+          restore_focus={is_a11y_mode || keyboard_navigation_detected}
         />
       </Fragment>
     );

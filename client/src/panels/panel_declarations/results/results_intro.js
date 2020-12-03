@@ -1,3 +1,5 @@
+import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { get_static_url } from "../../../request_utils.js";
 import {
   Subject,
@@ -36,7 +38,7 @@ const ResultsIntroPanel = ({
       <div className="fcol-md-7 medium-panel-text">
         <TM k="results_intro_text" />
       </div>
-      {!window.is_a11y_mode && (
+      {!is_a11y_mode && (
         <div className="fcol-md-5">
           <div
             style={{
@@ -45,7 +47,7 @@ const ResultsIntroPanel = ({
           >
             <img
               alt={text_maker("results_intro_img_text")}
-              src={get_static_url(`png/result-taxonomy-${window.lang}.png`)}
+              src={get_static_url(`png/result-taxonomy-${lang}.png`)}
               style={{
                 width: "100%",
                 maxHeight: "500px",
@@ -168,8 +170,8 @@ export const declare_results_intro_panel = () =>
         };
 
         const doc_urls = {
-          dp_url: result_docs[current_dp_key][`doc_url_${window.lang}`],
-          drr_url: result_docs[current_drr_key][`doc_url_${window.lang}`],
+          dp_url: result_docs[current_dp_key][`doc_url_${lang}`],
+          drr_url: result_docs[current_drr_key][`doc_url_${lang}`],
         };
 
         return {

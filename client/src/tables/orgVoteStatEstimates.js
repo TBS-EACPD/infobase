@@ -1,6 +1,8 @@
 // see [here](../table_definition.html) for description
 // of the table spec
 
+import { lang } from "src/app_bootstrap/globals.js";
+
 import * as FORMAT from "../core/format";
 
 import {
@@ -120,7 +122,7 @@ export default {
     if (row[5] in map_helper) {
       row[5] = map_helper[row[5]];
     }
-    row.splice(6, 0, estimates_docs[row[5]][window.lang]);
+    row.splice(6, 0, estimates_docs[row[5]][lang]);
 
     if (this.lang === "en") {
       row.splice(4, 1);

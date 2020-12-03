@@ -1,3 +1,5 @@
+import { lang } from "src/app_bootstrap/globals.js";
+
 import {
   FancyUL,
   ShareButton,
@@ -70,7 +72,7 @@ const ReportDetails = ({
 };
 
 const ReportDatasets = ({ table, subject }) => {
-  const dataset_spans = table.link[window.lang] && [
+  const dataset_spans = table.link[lang] && [
     <span key={"datasets_header"} className="fancy-ul__title">
       <TextMaker text_key="metadata" />
     </span>,
@@ -80,7 +82,7 @@ const ReportDatasets = ({ table, subject }) => {
         target="_blank"
         rel="noopener noreferrer"
         className="btn btn-xs btn-ib-primary btn-responsive-fixed-width"
-        href={table.link[window.lang]}
+        href={table.link[lang]}
       >
         <TextMaker text_key="open_data_link" />
       </a>
@@ -100,7 +102,7 @@ const ReportDatasets = ({ table, subject }) => {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-xs btn-ib-primary btn-responsive-fixed-width"
-              href={all_sources[source].open_data[window.lang]}
+              href={all_sources[source].open_data[lang]}
             >
               <TextMaker text_key="open_data_link" />
             </a>

@@ -1,15 +1,16 @@
 import { withRouter } from "react-router";
 
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { glossary_href } from "../link_utils.js";
 
 import { BaseTypeahead } from "./BaseTypeahead.js";
 import { glossary as glossary_search_config } from "./search_configs.js";
 
-
 const glossary_placeholder = {
   en: "Search for a term used in the InfoBase",
   fr: "Rechercher un terme utilisé dans l’InfoBase",
-}[window.lang];
+}[lang];
 
 const GlossarySearch = withRouter(
   class GlossarySearch extends React.Component {

@@ -5,7 +5,9 @@ import { Provider } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { createStore } from "redux";
 
-import { HeaderNotification } from "../components/HeaderNotification.js";
+import { lang, is_a11y_mode, is_dev } from "src/app_bootstrap/globals.js";
+
+import { HeaderNotification } from "../components/HeaderNotification";
 import { PageDetails } from "../components/PageDetails.js";
 import { SpinnerWrapper } from "../components/SpinnerWrapper.js";
 import { initialize_analytics } from "../core/analytics.js";
@@ -99,14 +101,15 @@ export class App extends React.Component {
   };
 
   componentDidMount() {
-    if (!window.is_dev) {
+    if (!is_dev) {
       axios
         .get("https://storage.googleapis.com/ib-outage-bucket/outage_msg.json")
         .then((res) => {
           const data = res.data;
           if (data.outage) {
             this.setState({
-              outage_msg: data[window.lang],
+              showNotification: true,
+              outage_msg: data[lang],
             });
           }
         });
@@ -119,9 +122,7 @@ export class App extends React.Component {
       <div
         tabIndex={-1}
         id="app-focus-root"
-        className={`app-focus-root--${
-          window.is_a11y_mode ? "a11y" : "standard"
-        }`}
+        className={`app-focus-root--${is_a11y_mode ? "a11y" : "standard"}`}
       >
         <Provider store={store}>
           <ErrorBoundary>
@@ -142,7 +143,7 @@ export class App extends React.Component {
             />
             {has_local_storage && <SurveyPopup />}
             <ReactUnmounter />
-            {!window.is_a11y_mode && <TooltipActivator />}
+            {!is_a11y_mode && <TooltipActivator />}
             <Suspense fallback={<SpinnerWrapper config_name={"route"} />}>
               <Switch>
                 <Route
@@ -209,20 +210,20 @@ export class App extends React.Component {
                   path="/graphiql/:encoded_query?/:encoded_variables?"
                   component={GraphiQL}
                 />
-                {!window.is_a11y_mode && (
+                {!is_a11y_mode && (
                   <Route
                     path="/partition/:perspective?/:data_type?"
                     component={PartitionRoute}
                   />
                 )}
-                {!window.is_a11y_mode && (
+                {!is_a11y_mode && (
                   <Route
                     path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?"
                     component={TreeMap}
                   />
                 )}
                 <Route path="/survey" component={Survey} />
-                {window.is_a11y_mode && (
+                {is_a11y_mode && (
                   <Route
                     path="/start/:no_basic_equiv?"
                     render={() => <A11yHome />}
@@ -230,11 +231,11 @@ export class App extends React.Component {
                 )}
                 <Route
                   path="/start"
-                  render={() => (window.is_a11y_mode ? <A11yHome /> : <Home />)}
+                  render={() => (is_a11y_mode ? <A11yHome /> : <Home />)}
                 />
                 <Route
                   path="/"
-                  render={() => (window.is_a11y_mode ? <A11yHome /> : <Home />)}
+                  render={() => (is_a11y_mode ? <A11yHome /> : <Home />)}
                 />
               </Switch>
               <PageDetails

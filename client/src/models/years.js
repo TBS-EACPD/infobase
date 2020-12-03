@@ -1,3 +1,5 @@
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { run_template } from "./text.js";
 
 const fiscal_year_to_year = (fy_string) =>
@@ -8,7 +10,7 @@ const year_to_fiscal_year = (year) => {
     const second_year = {
       en: year + 1,
       fr: (year + 1).toString().substring(2),
-    }[window.lang];
+    }[lang];
 
     return `${year}-${second_year}`;
   } else {
@@ -86,7 +88,7 @@ const actual_to_planned_gap_year = _.chain(year_templates)
     if (first_planning_year - last_pa_year == 2) {
       const first_year = last_pa_year + 1;
       const second_year =
-        window.lang === "en"
+        lang === "en"
           ? first_planning_year.toString().substring(2)
           : first_planning_year;
 

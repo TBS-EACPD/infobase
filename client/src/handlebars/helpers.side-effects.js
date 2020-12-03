@@ -1,4 +1,6 @@
 /* eslint-disable no-console, no-debugger */
+import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { infograph_href_template, glossary_href } from "../link_utils.js";
 import { GlossaryEntry } from "../models/glossary.js";
 import { Subject } from "../models/subject";
@@ -465,8 +467,8 @@ Handlebars.registerHelper("compare", function (lvalue, rvalue, options) {
 //   current language
 //  ```
 Handlebars.registerHelper("lang", function (context) {
-  if (context && _.has(context, window.lang)) {
-    return context[window.lang];
+  if (context && _.has(context, lang)) {
+    return context[lang];
   } else if (context.text) {
     return context.text;
   } else {
@@ -545,7 +547,7 @@ Handlebars.registerHelper("le_dept_abbr", (context) =>
 // ```
 Handlebars.registerHelper("encodeURI", function (context, options) {
   if (_.has(context, "en") && _.has(context, "fr")) {
-    context = context[window.lang];
+    context = context[lang];
   }
   return encodeURI(context);
 });
@@ -610,7 +612,7 @@ function tooltip_a11y_fallback(display, key) {
 
 Handlebars.registerHelper(
   "gl_tt",
-  window.is_a11y_mode ? tooltip_a11y_fallback : glossary_tooltip
+  is_a11y_mode ? tooltip_a11y_fallback : glossary_tooltip
 );
 
 Handlebars.registerHelper("gl_def", function (key) {
@@ -705,7 +707,7 @@ Handlebars.registerHelper("array_to_grammatical_list", function (options) {
   const and_et = {
     en: "and",
     fr: "et",
-  }[window.lang];
+  }[lang];
 
   const item_array = _.chain(options).values().flatten().value();
 

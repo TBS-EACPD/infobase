@@ -1,3 +1,5 @@
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { formats } from "../core/format.js";
 
 import { businessConstants } from "./businessConstants.js";
@@ -302,19 +304,19 @@ const status_key_to_glossary_key = {
 };
 
 const get_doc_name = (doc_type, year) => {
-  if (doc_type === "dp" && window.lang === "en") {
+  if (doc_type === "dp" && lang === "en") {
     return `${run_template(year)} Departmental Plan`;
   }
-  if (doc_type === "dp" && window.lang === "fr") {
+  if (doc_type === "dp" && lang === "fr") {
     return `plan ministériel de ${run_template(year)}`;
   }
-  if (doc_type === "drr" && window.lang === "en") {
+  if (doc_type === "drr" && lang === "en") {
     return `${run_template(year)} Departmental Results Report`;
   }
-  if (doc_type === "drr" && window.lang === "fr") {
+  if (doc_type === "drr" && lang === "fr") {
     return `rapport sur les résultats ministériels de ${run_template(year)}`;
   }
-  throw "Error: document type should be 'dp' or 'drr' and window.lang should be 'en' or 'fr'";
+  throw "Error: document type should be 'dp' or 'drr' and lang should be 'en' or 'fr'";
 };
 
 const build_doc_info_objects = (doc_type, docs) =>

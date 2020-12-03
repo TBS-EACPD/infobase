@@ -51,6 +51,11 @@
             "pattern": "src/core/**/*.js",
             "group": "internal",
             "position": "before"
+          },
+          {
+            "pattern": "src/app_bootstrap/*.js",
+            "group": "internal",
+            "position": "before"
           }
         ]          
       }

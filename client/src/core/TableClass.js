@@ -1,3 +1,5 @@
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { make_unique_func, make_unique } from "../general_utils.js";
 import { sources as all_sources } from "../metadata/data_sources.js";
 import { mix, staticStoreMixin } from "../models/storeMixins.js";
@@ -79,7 +81,7 @@ class Mapper {
   }
   get lang() {
     //mappers deal with data entry, they need to know about language.
-    return window.lang;
+    return lang;
   }
   map(row) {
     // remap to orgIDs
@@ -121,7 +123,7 @@ export class Table extends mix().with(staticStoreMixin) {
     super();
     const { title: title_def, name: name_def, tags: tags_def } = table_def;
 
-    const name = name_def[window.lang];
+    const name = name_def[lang];
 
     Object.assign(
       this,
@@ -153,7 +155,7 @@ export class Table extends mix().with(staticStoreMixin) {
   init() {
     //start using the table def!
     this.add_cols();
-    this.add_fully_qualified_col_name(window.lang);
+    this.add_fully_qualified_col_name(lang);
 
     if (_.isEmpty(this.dimensions)) {
       this.dimensions = [trivial_dimension];
@@ -213,10 +215,10 @@ export class Table extends mix().with(staticStoreMixin) {
   }
   get links() {
     return this.link
-      ? [this.link[window.lang]]
+      ? [this.link[lang]]
       : _.map(
           this.source,
-          (source_key) => all_sources[source_key].open_data[window.lang]
+          (source_key) => all_sources[source_key].open_data[lang]
         );
   }
   get description() {
@@ -233,7 +235,7 @@ export class Table extends mix().with(staticStoreMixin) {
     return tmf(this.id + "_short");
   }
   get title() {
-    return run_template(this.title_def[window.lang]);
+    return run_template(this.title_def[lang]);
   }
 
   // input should be an array of lowest-level (i.e. exist in table.unique_headers) columns to be included
@@ -270,7 +272,7 @@ export class Table extends mix().with(staticStoreMixin) {
         colspan: colspan_for_col(col),
         level: col.level,
         header_attr: col.parent ? header_to_col(col.parent) : "",
-        display: run_template(col.header[window.lang]),
+        display: run_template(col.header[lang]),
         id_attr: id_for_col(col),
         nick: col.nick || col.wcag,
       }))
@@ -294,7 +296,7 @@ export class Table extends mix().with(staticStoreMixin) {
   }
 
   column_description(col_nick) {
-    return run_template(this.col_from_nick(col_nick).description[window.lang]);
+    return run_template(this.col_from_nick(col_nick).description[lang]);
   }
 
   old_presentation_ready_headers() {
@@ -339,7 +341,7 @@ export class Table extends mix().with(staticStoreMixin) {
   add_col(x) {
     // this === a table obj or null
     if (x && x.nick === "dept") {
-      x.header = { [window.lang]: trivial_text_maker("department") };
+      x.header = { [lang]: trivial_text_maker("department") };
     }
     if (_.isString(x)) {
       x = { header: { en: x, fr: x } };

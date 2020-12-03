@@ -1,5 +1,7 @@
 import classNames from "classnames";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { newIBCategoryColors } from "../../core/color_schemes.js";
 import { formats } from "../../core/format.js";
 import { create_text_maker } from "../../models/text.js";
@@ -174,7 +176,7 @@ export class NivoLineBarToggle extends React.Component {
 
     return (
       <div className="frow">
-        {!window.is_a11y_mode && (
+        {!is_a11y_mode && (
           <div
             className={classNames(
               `fcol-xs-12 fcol-md-${legend_col_full_size}`,

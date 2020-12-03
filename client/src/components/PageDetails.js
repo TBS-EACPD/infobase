@@ -1,5 +1,7 @@
 import { withRouter } from "react-router";
 
+import { sha, previous_sha, build_date } from "src/app_bootstrap/globals.js";
+
 import { IconGitHub } from "../icons/icons.js";
 import { create_text_maker } from "../models/text.js";
 
@@ -15,9 +17,7 @@ import "./PageDetails.scss";
 const text_maker = create_text_maker(text);
 
 const github_link = `https://github.com/TBS-EACPD/infobase/${
-  window.previous_sha
-    ? `compare/${window.previous_sha}...${window.sha}`
-    : `commit/${window.sha}`
+  previous_sha ? `compare/${previous_sha}...${sha}` : `commit/${sha}`
 }`;
 
 class VersionNumber extends React.Component {
@@ -29,12 +29,12 @@ class VersionNumber extends React.Component {
           href={github_link}
           title={text_maker("infobase_version_link_title")}
         >
-          {` ${window.sha} `}
+          {` ${sha} `}
           <IconGitHub inline={true} />
         </ExternalLink>
-        {window.build_date
+        {build_date
           ? ` ${text_maker("infobase_build_date", {
-              build_date: window.build_date,
+              build_date: build_date,
             })}`
           : ""}
       </span>

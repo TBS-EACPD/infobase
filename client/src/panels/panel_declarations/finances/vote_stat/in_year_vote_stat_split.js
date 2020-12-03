@@ -1,3 +1,5 @@
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { StdPanel, Col, WrappedNivoPie, declare_panel } from "../../shared.js";
 
 import { text_maker, TM } from "./vote_stat_text_provider.js";
@@ -28,7 +30,7 @@ const render_w_options = ({ graph_col, text_col, text_key }) => ({
       <Col isText size={text_col}>
         <TM k={text_key} args={text_calculations} />
       </Col>
-      {!window.is_a11y_mode && (
+      {!is_a11y_mode && (
         <Col isGraph size={graph_col}>
           <WrappedNivoPie data={data} />
         </Col>

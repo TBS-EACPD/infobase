@@ -1,3 +1,5 @@
+import { lang } from "src/app_bootstrap/globals.js";
+
 import yaml from "./businessConstants.yaml";
 
 // modifies object by replacing obj with
@@ -8,8 +10,8 @@ const unlangify = (obj) => {
   if (!obj) {
     return;
   }
-  if (obj[window.lang]) {
-    obj.text = obj[window.lang];
+  if (obj[lang]) {
+    obj.text = obj[lang];
     //delete old properties
     delete obj.en;
     delete obj.fr;
@@ -34,7 +36,7 @@ _.each(yaml.months, (obj, ix) => {
 
 //TODO : why are employee ages so awkward?
 const compact_age_groups =
-  window.lang === "en"
+  lang === "en"
     ? [
         "Age 29 and less",
         "Age 30 to 39",
@@ -87,7 +89,7 @@ const emp_age_rev_map = _.chain(emp_age_map)
 const emp_age_stuff = { compact_age_groups, emp_age_map, emp_age_rev_map };
 
 const ex_level_target =
-  window.lang === "en"
+  lang === "en"
     ? ["Executive", "Non-Executive"]
     : ["Cadres supérieurs", "Non-cadres supérieursn"];
 const compact_ex_level_map = {

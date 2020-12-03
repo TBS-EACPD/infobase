@@ -1,3 +1,5 @@
+import { is_dev } from "src/app_bootstrap/globals.js";
+
 import { PanelRegistry } from "../PanelRegistry.js";
 
 const panel_loading_promises = (subject) => {
@@ -35,7 +37,7 @@ export function get_panels_for_subject(subject) {
           .map((key) => {
             const panel_obj = PanelRegistry.lookup(key, subject.level);
 
-            if (!panel_obj && window.is_dev) {
+            if (!panel_obj && is_dev) {
               throw `${key} is not a valid panel`;
             }
 

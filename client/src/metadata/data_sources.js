@@ -1,4 +1,6 @@
 //circular dependency hack..
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { Table } from "../core/TableClass.js";
 import { GlossaryEntry } from "../models/glossary.js";
 import { create_text_maker } from "../models/text.js";
@@ -54,7 +56,7 @@ function table_to_row_item(table) {
         table: table.id,
         mode: "details",
       }),
-    external_link: table.link[window.lang],
+    external_link: table.link[lang],
   };
 }
 
