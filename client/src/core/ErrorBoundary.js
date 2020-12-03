@@ -1,3 +1,5 @@
+import ReactDOM from "react-dom";
+
 import { lang, sha, is_dev } from "src/app_bootstrap/globals.js";
 
 import { get_static_url, make_request } from "../request_utils.js";

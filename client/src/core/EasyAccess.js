@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import ReactDOM from "react-dom";
 
 import { TrivialTM } from "../components/index.js";
 import {

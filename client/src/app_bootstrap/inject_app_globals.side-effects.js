@@ -1,9 +1,7 @@
 /* eslint-disable import/order */
 
 import React from "react";
-import ReactDOM from "react-dom";
 window.React = React;
-window.ReactDOM = ReactDOM;
 
 import _ from "lodash";
 window._ = _;

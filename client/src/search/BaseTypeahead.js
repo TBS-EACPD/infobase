@@ -2,8 +2,8 @@ import "react-bootstrap-typeahead/css/Typeahead.css";
 // Uncomment following line once we've moved to bootstrap4
 // import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
 import "./BaseTypeahead.scss";
-
 import { Typeahead, Menu, MenuItem } from "react-bootstrap-typeahead";
+import ReactDOM from "react-dom";
 
 import { TM } from "../components/TextMaker.js";
 import { log_standard_event } from "../core/analytics.js";
