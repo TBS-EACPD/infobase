@@ -1,3 +1,5 @@
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import {
   trivial_text_maker,
   format,
@@ -7,7 +9,6 @@ import {
 } from "./table_common";
 
 import text from "./orgEmployeeAgeGroup.yaml";
-
 
 const { formats } = format;
 const { age_groups, compact_age_groups, emp_age_map } = businessConstants;

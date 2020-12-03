@@ -10,6 +10,7 @@
 //  with the array ordered by fiscal year
 //
 
+import d3 from "src/app_bootstrap/d3-bundle.js";
 import { lang } from "src/app_bootstrap/globals.js";
 
 import { businessConstants } from "../../models/businessConstants.js";

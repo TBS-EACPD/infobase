@@ -4,6 +4,8 @@ import { Fragment } from "react";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { AlertBanner, GlossaryIcon } from "../components";
 import { Table } from "../core/TableClass.js";
 import { GlossaryEntry } from "../models/glossary.js";

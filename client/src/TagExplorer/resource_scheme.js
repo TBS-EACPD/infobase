@@ -2,6 +2,8 @@ import { createSelector } from "reselect";
 
 import { trivial_text_maker as text_maker } from "src/models/text.js";
 
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 import {
   filter_hierarchy,
@@ -18,9 +20,7 @@ import {
   sanitized_dangerous_inner_html,
 } from "src/general_utils";
 
-
 import { infograph_href_template } from "src/link_utils.js";
-
 
 import { hierarchy_scheme_configs } from "./hierarchy_scheme_configs.js";
 import { related_tags_row } from "./tag_hierarchy_utils.js";

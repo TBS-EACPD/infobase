@@ -1,5 +1,7 @@
 // see [here](../table_definition.html) for description
 // of the table spec
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { trivial_text_maker } from "../models/text.js";
 
 import {
@@ -10,7 +12,6 @@ import {
 } from "./table_common";
 
 import text from "./orgVoteStatPa.yaml";
-
 
 const { std_years } = year_templates;
 const voted_label = trivial_text_maker("voted");

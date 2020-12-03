@@ -1,8 +1,9 @@
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { TextMaker as StandardTextMaker } from "../../../components/index.js";
 import { Table } from "../../../core/TableClass.js";
 import { rpb_link } from "../../../link_utils.js";
 import { Subject } from "../../../models/subject";
-
 
 import { run_template } from "../../../models/text.js";
 import { text_maker } from "../partition_text_provider.js";
@@ -30,7 +31,8 @@ const get_year = (presentation_scheme) => {
   switch (presentation_scheme) {
     case "est_doc_mains":
     case "est_doc_sea":
-    case "est_doc_seb": return "{{est_in_year}}";
+    case "est_doc_seb":
+      return "{{est_in_year}}";
     case "est_type":
     case "vs_type":
     case "org_estimates":

@@ -1,3 +1,4 @@
+import d3 from "src/app_bootstrap/d3-bundle.js";
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
 import { Canada } from "../../../charts/canada/index.js";

@@ -2,6 +2,8 @@ import marked from "marked";
 
 import { is_mobile } from "src/core/feature_detection.js";
 
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { lang, pre_public_accounts } from "src/app_bootstrap/globals.js";
 
 import a11y_lang from "../common_text/a11y_lang.yaml";

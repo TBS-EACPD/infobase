@@ -1,5 +1,7 @@
 import { TransitionGroup, Transition } from "react-transition-group";
 
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { IconChevron } from "../icons/icons.js";
 
 import { trivial_text_maker } from "../models/text.js";

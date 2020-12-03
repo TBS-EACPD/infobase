@@ -1,5 +1,7 @@
 import { is_IE } from "src/core/feature_detection.js";
 
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import * as general_utils from "../../general_utils";
 import { create_text_maker } from "../../models/text.js";
 

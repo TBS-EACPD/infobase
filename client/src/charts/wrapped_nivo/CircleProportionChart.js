@@ -2,6 +2,8 @@ import { ResponsiveBubble } from "@nivo/circle-packing";
 import { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { SmartDisplayTable } from "../../components/index.js";
 import { breakpoints } from "../../core/breakpoint_defs.js";
 import { newIBCategoryColors } from "../../core/color_schemes.js";

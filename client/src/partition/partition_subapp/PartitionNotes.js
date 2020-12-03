@@ -1,3 +1,5 @@
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { AutoAccordion } from "../../components/index.js";
 
 import { text_maker } from "./partition_text_provider.js";

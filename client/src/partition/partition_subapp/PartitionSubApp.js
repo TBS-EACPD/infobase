@@ -1,3 +1,5 @@
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { primaryColor } from "../../core/color_defs.js";
 import { newIBDarkCategoryColors } from "../../core/color_schemes.js";
 import { reactAdapter } from "../../core/reactAdapter";

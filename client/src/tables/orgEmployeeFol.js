@@ -1,3 +1,5 @@
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import {
   trivial_text_maker,
   people_five_year_percentage_formula,
@@ -6,7 +8,6 @@ import {
 } from "./table_common";
 
 import text from "./orgEmployeeFol.yaml";
-
 
 const { fol } = businessConstants;
 const { people_years, people_years_short_second } = year_templates;
