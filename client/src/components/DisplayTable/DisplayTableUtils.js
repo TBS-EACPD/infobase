@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { is_IE } from "src/core/feature_detection.js";
+
 import { IconCopy, IconDownload } from "../../icons/icons.js";
 import { DropdownMenu } from "../DropdownMenu.js";
 import { create_text_maker_component } from "../misc_util_components.js";
@@ -45,7 +47,7 @@ const download_csv = (csv_string, table_name) => {
 };
 export const DisplayTableDownloadCsv = ({ csv_string, table_name }) => (
   <Fragment>
-    {!window.feature_detection.is_IE() && (
+    {!is_IE() && (
       <button
         onClick={() => download_csv(csv_string, table_name)}
         className={"display_table__util-icon"}

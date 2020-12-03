@@ -1,5 +1,7 @@
 import classNames from "classnames";
 
+import { is_mobile } from "src/core/feature_detection.js";
+
 import { create_text_maker } from "../models/text.js";
 
 import { smaller_items_text } from "./data.js";
@@ -238,7 +240,7 @@ export class TreeMap extends React.Component {
         .append("div");
 
       // add class and click handler to all divs with children
-      if (!window.feature_detection.is_mobile()) {
+      if (!is_mobile()) {
         main
           .filter((d) => d.children)
           .classed("TreeMap__Division", true)
@@ -272,7 +274,7 @@ export class TreeMap extends React.Component {
         .attr("class", "TreeMap__Rectangle TreeMap__Rectangle--is-parent")
         .call(rectan);
 
-      if (!window.feature_detection.is_mobile()) {
+      if (!is_mobile()) {
         main
           .append("div")
           .attr("class", (d) =>

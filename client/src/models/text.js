@@ -1,5 +1,7 @@
 import marked from "marked";
 
+import { is_mobile } from "src/core/feature_detection.js";
+
 import { lang, pre_public_accounts } from "src/app_bootstrap/globals.js";
 
 import a11y_lang from "../common_text/a11y_lang.yaml";
@@ -81,7 +83,7 @@ const full_template_global_records = [
 const app_constants = {
   pre_public_accounts: pre_public_accounts,
   lang: lang,
-  is_mobile: window.feature_detection.is_mobile(),
+  is_mobile: is_mobile(),
 };
 
 //turn [{key,en,fr }, ... ] into a big object of { [key]: val of current lang, ... }

@@ -1,3 +1,5 @@
+import { is_mobile } from "src/core/feature_detection.js";
+
 import { infograph_href_template, rpb_link } from "../../../../link_utils.js";
 import { ResultCounts, current_drr_key } from "../../../../models/results.js";
 import { get_static_url } from "../../../../request_utils.js";
@@ -149,9 +151,7 @@ export const declare_simplographic_panel = () =>
                 <div
                   className="h2 mrgn-tp-sm"
                   style={{
-                    textAlign: window.feature_detection.is_mobile()
-                      ? "center"
-                      : "inherit",
+                    textAlign: is_mobile() ? "center" : "inherit",
                   }}
                 >
                   <TM k={props.title_key} />

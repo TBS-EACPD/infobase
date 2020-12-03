@@ -1,5 +1,7 @@
 //https://gist.github.com/guglielmo/16d880a6615da7f502116220cb551498
 
+import { is_mobile } from "src/core/feature_detection.js";
+
 import {
   SpinnerWrapper,
   create_text_maker_component,
@@ -492,7 +494,7 @@ export default class TreeMapper extends React.Component {
     const colorScale = get_color_scale(color_var, get_changes);
 
     let app_height = 800;
-    if (window.feature_detection.is_mobile()) {
+    if (is_mobile()) {
       app_height = Math.ceil(0.8 * screen.height);
     }
     const topbar_height = 55;
@@ -543,10 +545,10 @@ export default class TreeMapper extends React.Component {
                       perspective={perspective}
                       tooltip_render={
                         get_changes
-                          ? window.feature_detection.is_mobile()
+                          ? is_mobile()
                             ? mobile_tooltip_render_changes
                             : std_tooltip_render_changes
-                          : window.feature_detection.is_mobile()
+                          : is_mobile()
                           ? mobile_tooltip_render
                           : std_tooltip_render
                       }

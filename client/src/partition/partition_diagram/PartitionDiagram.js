@@ -1,3 +1,5 @@
+import { is_IE } from "src/core/feature_detection.js";
+
 import * as general_utils from "../../general_utils";
 import { create_text_maker } from "../../models/text.js";
 
@@ -184,10 +186,7 @@ export class PartitionDiagram {
       .each(function (d) {
         let sel = d3.select(this);
 
-        if (
-          (d.data.type === "compressed" && window.feature_detection.is_IE()) ||
-          d.value < 0
-        ) {
+        if ((d.data.type === "compressed" && is_IE()) || d.value < 0) {
           // partition-item__right-ie-fix: IE css for flex box and align-item are inconsistent, need an extra div
           // between the .content div and the .partition-item__title div to (partially) fix vertical alignment
 
@@ -197,7 +196,7 @@ export class PartitionDiagram {
             .classed("partition-item__negative-title-backing", d.value < 0)
             .classed(
               "partition-item__right-ie-fix",
-              d.data.type === "compressed" && window.feature_detection.is_IE()
+              d.data.type === "compressed" && is_IE()
             );
         }
 
