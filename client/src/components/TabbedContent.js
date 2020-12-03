@@ -1,4 +1,7 @@
 import classNames from "classnames";
+
+import { lang } from "src/app_bootstrap/globals.js";
+
 import "./TabbedContent.scss";
 
 export class TabbedControls extends React.Component {
@@ -47,7 +50,7 @@ TabbedControls.defaultProps = {
   disabled_message: {
     en: "Unavailable",
     fr: "Indisponible",
-  }[window.lang],
+  }[lang],
 };
 
 /*props: 

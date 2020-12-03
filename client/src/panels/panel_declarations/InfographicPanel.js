@@ -2,6 +2,8 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import { Fragment } from "react";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import {
   Panel,
   create_text_maker_component,
@@ -67,7 +69,7 @@ class Panel_ extends React.Component {
 
     const header_utils = context && (
       <div style={{ marginLeft: "auto" }}>
-        {context.panel_key && !window.is_a11y_mode && (
+        {context.panel_key && !is_a11y_mode && (
           <LogInteractionEvents
             event_type={"PANEL_PDF_DOWNLOADED"}
             event_details={title}

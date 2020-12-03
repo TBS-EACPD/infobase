@@ -1,3 +1,5 @@
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { businessConstants } from "../businessConstants.js";
 import { Dept } from "../organizational_entities.js";
 import { mix, staticStoreMixin } from "../storeMixins.js";
@@ -39,7 +41,7 @@ class CovidEstimates extends mix().with(staticStoreMixin) {
   }
 
   get doc_name() {
-    return businessConstants.estimates_docs[this.est_doc][window.lang];
+    return businessConstants.estimates_docs[this.est_doc][lang];
   }
 }
 

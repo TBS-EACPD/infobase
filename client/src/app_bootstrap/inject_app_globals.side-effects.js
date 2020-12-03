@@ -1,39 +1,5 @@
 /* eslint-disable import/order */
 /* eslint-disable no-undef */
-if (typeof APPLICATION_LANGUAGE !== "undefined") {
-  window.lang = APPLICATION_LANGUAGE;
-}
-if (typeof IS_A11Y_MODE !== "undefined") {
-  window.is_a11y_mode = IS_A11Y_MODE;
-}
-if (typeof SHA !== "undefined") {
-  window.long_sha = SHA;
-  window.sha = SHA.substr(0, 7);
-}
-if (typeof PREVIOUS_DEPLOY_SHA !== "undefined") {
-  window.previous_sha = PREVIOUS_DEPLOY_SHA.substr(0, 7);
-}
-if (typeof BUILD_DATE !== "undefined") {
-  window.build_date = BUILD_DATE;
-}
-if (typeof PRE_PUBLIC_ACCOUNTS !== "undefined") {
-  window.pre_public_accounts = PRE_PUBLIC_ACCOUNTS;
-}
-if (typeof CDN_URL !== "undefined") {
-  window.cdn_url = CDN_URL;
-}
-if (typeof IS_DEV_LINK !== "undefined") {
-  window.is_dev_link = IS_DEV_LINK;
-}
-if (typeof IS_DEV !== "undefined") {
-  window.is_dev = IS_DEV;
-}
-if (window.is_dev && typeof LOCAL_IP !== "undefined") {
-  window.local_ip = LOCAL_IP;
-}
-if (typeof IS_CI !== "undefined") {
-  window.is_ci = IS_CI;
-}
 /* eslint-enable no-undef */
 
 import React from "react";

@@ -1,3 +1,5 @@
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import {
   Subject,
   formats,
@@ -156,7 +158,7 @@ const planned_vote_or_stat_render = (vs) =>
       ),
     };
 
-    const show_pack = !window.is_a11y_mode;
+    const show_pack = !is_a11y_mode;
     return (
       <StdPanel
         title={text_maker(

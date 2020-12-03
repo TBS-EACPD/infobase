@@ -3,6 +3,8 @@ import * as Diff from "diff";
 import { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { LegendList } from "../charts/legends";
 import {
   Select,
@@ -94,7 +96,7 @@ const process_indicators = (matched_indicators, indicator_status) => {
           indicator_pair[0].name,
           indicator_pair[1].name
         );
-        const methodology_diff = window.is_a11y_mode
+        const methodology_diff = is_a11y_mode
           ? Diff.diffSentences(
               indicator_pair[0].methodology,
               indicator_pair[1].methodology
@@ -190,7 +192,7 @@ const difference_report = (diff, key) => {
     <div className="col-md-6">
       {_.map(diff, (part, iix) => (
         <Fragment key={iix}>
-          {window.is_a11y_mode && part.removed && (
+          {is_a11y_mode && part.removed && (
             <span className="text-diff__text-part--removed">
               {" "}
               [{text_maker("a11y_begin_removed")}]
@@ -202,7 +204,7 @@ const difference_report = (diff, key) => {
           >
             {part.value}
           </span>
-          {window.is_a11y_mode && part.removed && (
+          {is_a11y_mode && part.removed && (
             <span className="text-diff__text-part--removed">
               {" "}
               [{text_maker("a11y_end_removed")}]
@@ -216,7 +218,7 @@ const difference_report = (diff, key) => {
     <div className="col-md-6">
       {_.map(diff, (part, iix) => (
         <Fragment key={iix}>
-          {window.is_a11y_mode && part.added && (
+          {is_a11y_mode && part.added && (
             <span className="text-diff__text-part--added">
               {" "}
               [{text_maker("a11y_begin_added")}]
@@ -228,7 +230,7 @@ const difference_report = (diff, key) => {
           >
             {part.value}
           </span>
-          {window.is_a11y_mode && part.added && (
+          {is_a11y_mode && part.added && (
             <span className="text-diff__text-part--added">
               [{text_maker("a11y_end_added")}]
             </span>

@@ -1,3 +1,5 @@
+import { lang, sha, is_dev } from "src/app_bootstrap/globals.js";
+
 import { get_static_url, make_request } from "../request_utils.js";
 
 import { log_standard_event } from "./analytics.js";
@@ -32,10 +34,9 @@ export class ErrorBoundary extends React.Component {
     // Otherwise, log the error (again, if non-dev) and display error component
     make_request(get_static_url("build_sha", unique_query_param))
       .then((build_sha) => {
-        const local_sha_matches_remote_sha =
-          build_sha.search(`^${window.sha}`) !== -1;
+        const local_sha_matches_remote_sha = build_sha.search(`^${sha}`) !== -1;
 
-        if (!local_sha_matches_remote_sha && !window.is_dev) {
+        if (!local_sha_matches_remote_sha && !is_dev) {
           window.location.reload(true);
         } else {
           this.log_error_and_display_error_page();
@@ -46,7 +47,7 @@ export class ErrorBoundary extends React.Component {
       });
   }
   log_error_and_display_error_page() {
-    if (!window.is_dev) {
+    if (!is_dev) {
       log_standard_event({
         SUBAPP: window.location.hash.replace("#", ""),
         MISC1: "ERROR_IN_PROD",
@@ -84,7 +85,7 @@ export class ErrorBoundary extends React.Component {
               {
                 en: "An error has occured",
                 fr: "Une erreur est survenue",
-              }[window.lang]
+              }[lang]
             }
           </span>
           <img
@@ -101,7 +102,7 @@ export class ErrorBoundary extends React.Component {
               {
                 en: "Please refresh the page, or ",
                 fr: "Veuillez actualiser la page ou ",
-              }[window.lang]
+              }[lang]
             }
             <a
               href="#start"
@@ -115,7 +116,7 @@ export class ErrorBoundary extends React.Component {
                 {
                   en: "return home",
                   fr: "retourner à la page d'accueil.",
-                }[window.lang]
+                }[lang]
               }
             </a>
           </span>

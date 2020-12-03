@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import { createSelector } from "reselect";
 
+import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import {
   DlItem,
   TabbedControls,
@@ -10,6 +12,7 @@ import {
 } from "src/components";
 
 import { Explorer } from "src/explorer_common/explorer_components.js";
+
 import { get_root } from "src/explorer_common/hierarchy_tools.js";
 import { infograph_href_template } from "src/infographic/infographic_link.js";
 
@@ -76,7 +79,7 @@ const get_non_col_content_func = createSelector(_.property("doc"), (doc) => {
           <dl
             className={classNames(
               "dl-horizontal dl-no-bold-dts",
-              window.lang === "fr" || /dp/.test(doc)
+              lang === "fr" || /dp/.test(doc)
                 ? "dl-really-long-terms"
                 : "dl-long-terms"
             )}
@@ -330,7 +333,7 @@ export default class ResultsExplorerDisplay extends React.Component {
                   <span>{text_maker("collapse_all")}</span>
                 </button>
               </div>
-              {window.is_a11y_mode && (
+              {is_a11y_mode && (
                 <input
                   type="submit"
                   name="search"

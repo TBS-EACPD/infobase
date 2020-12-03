@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import {
   Subject,
   util_components,
@@ -24,7 +26,7 @@ const { TabbedContent, SpinnerWrapper, SmartDisplayTable } = util_components;
 const { text_maker, TM } = create_text_maker_component([text]);
 
 const get_est_doc_name = (est_doc) =>
-  estimates_docs[est_doc] ? estimates_docs[est_doc][window.lang] : "";
+  estimates_docs[est_doc] ? estimates_docs[est_doc][lang] : "";
 const get_est_doc_order = (est_doc) =>
   estimates_docs[est_doc] ? estimates_docs[est_doc].order : 9999;
 const est_doc_sort_func = (est_doc_a, est_doc_b) => {
@@ -147,7 +149,7 @@ const SummaryTab = ({ panel_args }) => {
         <TM k={"covid_estimates_by_doc"} args={panel_args} />
       </div>
       <div className="fcol-xs-12 fcol-md-6">
-        {!window.is_a11y_mode && (
+        {!is_a11y_mode && (
           <StandardLegend
             items={legend_items}
             isHorizontal={true}

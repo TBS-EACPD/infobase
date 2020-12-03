@@ -1,3 +1,5 @@
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { GraphOverlay } from "../../../../components";
 import {
   businessConstants,
@@ -229,7 +231,7 @@ export const declare_spend_by_so_hist_panel = () =>
         } = calculations;
 
         const graph_content = (() => {
-          if (window.is_a11y_mode) {
+          if (is_a11y_mode) {
             return get_custom_table(data, _.map(data, "label"));
           } else {
             return <SobjLine data={data} />;

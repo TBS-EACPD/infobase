@@ -1,3 +1,4 @@
+import { sha } from "src/app_bootstrap/globals.js";
 let initialized = false;
 
 //tool to create totally random IDs
@@ -42,7 +43,7 @@ function initialize_analytics() {
     client_id = tracker.get("clientId");
     tracker.set(dimensions.CLIENT_ID, client_id);
     tracker.set(dimensions.DEV, String(is_dev));
-    tracker.set(dimensions.SHA, window.sha);
+    tracker.set(dimensions.SHA, sha);
 
     const originalBuildHitTask = tracker.get("buildHitTask");
     tracker.set("buildHitTask", (model) => {

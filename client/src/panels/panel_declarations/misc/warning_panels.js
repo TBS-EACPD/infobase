@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "../../../models/footnotes/dynamic_footnotes.js";
 import dynamic_footnote_text from "../../../models/footnotes/dynamic_footnotes.yaml";
 
@@ -144,8 +146,7 @@ export const declare_late_results_warning_panel = () =>
                       (org_id) => Dept.lookup(org_id).name
                     )}
                     column_count={
-                      window.lang === "en" &&
-                      result_doc.late_results_orgs.length > 3
+                      lang === "en" && result_doc.late_results_orgs.length > 3
                         ? 2
                         : 1
                     }
@@ -210,9 +211,7 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
                     late_orgs,
                     (org_id) => Dept.lookup(org_id).name
                   )}
-                  column_count={
-                    window.lang === "en" && late_orgs.length > 3 ? 2 : 1
-                  }
+                  column_count={lang === "en" && late_orgs.length > 3 ? 2 : 1}
                   li_class={late_orgs.length > 4 ? "font-small" : ""}
                 />
               </WarningPanel>

@@ -1,5 +1,6 @@
-import { TM } from "./TextMaker.js";
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
+import { TM } from "./TextMaker.js";
 /*props: 
   maxChildrenHeight as an INT of pixels,
   children : JSX (content to be clipped), 
@@ -95,7 +96,7 @@ export class HeightClipper extends React.Component {
 
     const isClipped = exceedsHeight && shouldClip;
 
-    return window.is_a11y_mode ? (
+    return is_a11y_mode ? (
       children
     ) : (
       <div

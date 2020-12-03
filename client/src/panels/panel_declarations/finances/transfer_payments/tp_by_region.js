@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { Canada } from "../../../../charts/canada/index.js";
 import {
   SpinnerWrapper,
@@ -235,10 +237,10 @@ class TPMap extends React.Component {
         >
           <Col size={12} isText>
             <TM k="tp_by_region_text" args={text_args} />
-            {!window.is_a11y_mode && <TM k="tp_by_region_graph_usage" />}
+            {!is_a11y_mode && <TM k="tp_by_region_graph_usage" />}
           </Col>
           <Col size={12} isGraph>
-            {!window.is_a11y_mode && (
+            {!is_a11y_mode && (
               <TabbedContent
                 tab_keys={["transfer_payments", "transfer_payments_per_capita"]}
                 disabled_tabs={_.compact([
@@ -264,7 +266,7 @@ class TPMap extends React.Component {
                 }}
               />
             )}
-            {window.is_a11y_mode && (
+            {is_a11y_mode && (
               <Fragment>
                 <SmartDisplayTable
                   column_configs={get_column_configs(false)}

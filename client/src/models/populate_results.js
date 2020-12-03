@@ -1,5 +1,7 @@
 import { gql } from "@apollo/client";
 
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { log_standard_event } from "../core/analytics.js";
 import { get_client } from "../graphql_utils/graphql_utils.js";
 
@@ -62,7 +64,7 @@ export const subject_has_results = (subject) => {
       return client
         .query({
           query: has_results_query(level, id_key),
-          variables: { lang: window.lang, id: id },
+          variables: { lang: lang, id: id },
           _query_name: "has_results",
         })
         .then((response) => {
@@ -350,7 +352,7 @@ export function api_load_results_bundle(subject, result_docs) {
     .query({
       query,
       variables: {
-        lang: window.lang,
+        lang: lang,
         id,
         _query_name: "results_bundle",
       },
@@ -467,7 +469,7 @@ export function api_load_results_counts(level = "summary") {
       .query({
         query: load_results_counts_query(level),
         variables: {
-          lang: window.lang,
+          lang: lang,
           _query_name: "results_counts",
         },
       })

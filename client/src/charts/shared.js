@@ -1,3 +1,5 @@
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { NA_color } from "../core/color_schemes.js";
 import { formats } from "../core/format.js";
 import { businessConstants } from "../models/businessConstants.js";
@@ -24,7 +26,7 @@ export const get_formatter = (
           return (value) => formats.dollar_raw(value);
         } else {
           return (value) =>
-            window.is_a11y_mode
+            is_a11y_mode
               ? formats.compact2_written_raw(value)
               : formats.compact2_raw(value);
         }
@@ -33,7 +35,7 @@ export const get_formatter = (
           return (value) => formats.dollar(value);
         } else {
           return (value) =>
-            window.is_a11y_mode
+            is_a11y_mode
               ? formats.compact2_written_raw
               : formats.compact2(value);
         }

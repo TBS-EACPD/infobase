@@ -5,15 +5,18 @@ import {
   graphql as apollo_connect,
 } from "@apollo/client";
 import { compressToBase64 } from "lz-string";
+
 import string_hash from "string-hash";
 
-const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${window.sha}/graphql`;
+import { sha, local_ip, is_dev, is_ci } from "src/app_bootstrap/globals.js";
+
+const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${sha}/graphql`;
 
 export const get_api_url = async () => {
-  if (window.is_ci) {
+  if (is_ci) {
     return `hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls`;
-  } else if (window.is_dev) {
-    const local_dev_api_url = `http://${window.local_ip}:1337/graphql`;
+  } else if (is_dev) {
+    const local_dev_api_url = `http://${local_ip}:1337/graphql`;
 
     // Need to be careful if the local IP's changed since the local_ip env var was last set (last time
     // webpack process was restarted), if it has then it will fail as an API URL.
@@ -47,9 +50,7 @@ export const query_length_tolerant_fetch = async (uri, options) => {
 
   const query_string_hash = string_hash(url_encoded_query);
 
-  const short_uri = `${await get_api_url()}?v=${
-    window.sha
-  }&queryHash=${query_string_hash}`;
+  const short_uri = `${await get_api_url()}?v=${sha}&queryHash=${query_string_hash}`;
 
   const new_options = {
     ...options,

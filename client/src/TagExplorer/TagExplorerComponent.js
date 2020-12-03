@@ -1,9 +1,10 @@
 import classNames from "classnames";
 import { Fragment } from "react";
 
-
 import { GlossaryEntry } from "src/models/glossary.js";
 import { run_template } from "src/models/text.js";
+
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
 import {
   SpinnerWrapper,
@@ -179,7 +180,7 @@ export default class TagExplorerComponent extends React.Component {
               placeholder={text_maker("everything_search_placeholder")}
               onChange={(evt) => this.handleQueryChange(evt.target.value)}
             />
-            {window.is_a11y_mode && (
+            {is_a11y_mode && (
               <input
                 type="submit"
                 name="search"

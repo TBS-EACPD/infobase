@@ -2,6 +2,8 @@ import classNames from "classnames";
 import { Fragment } from "react";
 import { createSelector } from "reselect";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { SpinnerWrapper, DlItem, CheckBox } from "../components/index.js";
 import { Explorer } from "../explorer_common/explorer_components.js";
 import { get_root } from "../explorer_common/hierarchy_tools.js";
@@ -278,7 +280,7 @@ class ExplorerForIgoc extends React.Component {
               placeholder={text_maker("igoc_search_text")}
               onChange={(evt) => this.handleQueryChange(evt.target.value)}
             />
-            {window.is_a11y_mode && (
+            {is_a11y_mode && (
               <input
                 type="submit"
                 name="search"

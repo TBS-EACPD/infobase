@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import { Fragment } from "react";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import {
   run_template,
   Table,
@@ -30,10 +32,7 @@ const actual_history_years = _.map(std_years, run_template);
 const { text_maker, TM } = create_text_maker_component(text);
 
 const SpendFormat = ({ amt }) => (
-  <Format
-    type={window.is_a11y_mode ? "compact1_written" : "compact1"}
-    content={amt}
-  />
+  <Format type={is_a11y_mode ? "compact1_written" : "compact1"} content={amt} />
 );
 const FteFormat = ({ amt }) => <Format type="big_int" content={amt} />;
 

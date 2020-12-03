@@ -1,6 +1,7 @@
-
 import classNames from "classnames";
 import { Fragment } from "react";
+
+import { lang } from "src/app_bootstrap/globals.js";
 
 import { IconAttentionTriangle } from "../../../icons/icons.js";
 import { Subject, create_text_maker_component } from "../shared.js";
@@ -95,10 +96,10 @@ const _HierarchyPeek = ({ root }) => (
             <a href={root.href}>
               {root.level === "crso"
                 ? root.is_cr && !root.dead
-                  ? window.lang == "en"
+                  ? lang == "en"
                     ? `Core Responsibility : ${root.name}`
                     : `Responsabilité Essentielle : ${root.name}`
-                  : window.lang == "en"
+                  : lang == "en"
                   ? `Strategic Outcome : ${root.name}`
                   : `Résultat Stratégique : ${root.name}`
                 : root.name}

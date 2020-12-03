@@ -1,5 +1,7 @@
+import { lang } from "src/app_bootstrap/globals.js";
+
 export const app_reducer = (
-  state = { lang: window.lang, is_showing_graph_overlay: true },
+  state = { lang: lang, is_showing_graph_overlay: true },
   { type, payload }
 ) => {
   switch (type) {

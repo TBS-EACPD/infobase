@@ -1,5 +1,7 @@
 import { gql } from "@apollo/client";
 
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
 import {
@@ -81,7 +83,7 @@ const query_api = (id) => {
     .query({
       query,
       variables: {
-        lang: window.lang,
+        lang: lang,
         id,
         _query_name: "results_bundle",
       },

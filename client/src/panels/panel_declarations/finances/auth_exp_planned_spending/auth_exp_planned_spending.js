@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { GraphOverlay } from "../../../../components";
 import FootNote from "../../../../models/footnotes/footnotes";
 import {
@@ -233,7 +235,7 @@ class AuthExpPlannedSpendingGraph extends React.Component {
     return (
       <Fragment>
         <div style={{ padding: "10px 25px 0px 97px" }}>
-          {!window.is_a11y_mode && (
+          {!is_a11y_mode && (
             <StandardLegend
               isHorizontal={true}
               items={legend_items}

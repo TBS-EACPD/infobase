@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { IconDownload } from "../icons/icons.js";
 import { get_static_url } from "../request_utils.js";
 
@@ -122,7 +124,7 @@ export class PDFGenerator extends React.Component {
         this.current_height -= 26;
         pdf.addImage(qrCodeImg, "JPEG", 1, this.current_height);
 
-        const langUrl = window.lang === "en" ? "gcinfobase" : "infobasegc";
+        const langUrl = lang === "en" ? "gcinfobase" : "infobasegc";
         this.current_height += 26;
         pdf.textWithLink(`canada.ca/${langUrl}`, 2.5, this.current_height, {
           url: link,
@@ -133,7 +135,7 @@ export class PDFGenerator extends React.Component {
       this.setState({ generating_pdf: false });
     };
 
-    if (window.is_a11y_mode) {
+    if (is_a11y_mode) {
       setup_pdf_title(pdf, title, width);
       this.current_height += 2;
       const textElements = _.map(

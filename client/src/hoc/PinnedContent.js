@@ -6,6 +6,8 @@ import { withRouter } from "react-router";
 
 import { has_local_storage } from "src/core/feature_detection.js";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { backgroundColor } from "../core/color_defs";
 import { IconPin, IconUnpin } from "../icons/icons.js";
 import { create_text_maker } from "../models/text.js";
@@ -68,7 +70,7 @@ export const PinnedContent = withRouter(
       const { user_enabled_pinning } = this.state;
       const { children } = this.props;
 
-      return !window.is_a11y_mode ? (
+      return !is_a11y_mode ? (
         <ReactResizeDetector handleWidth>
           {({ width }) => (
             <InView>

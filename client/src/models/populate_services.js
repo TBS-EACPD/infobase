@@ -1,5 +1,7 @@
 import { gql } from "@apollo/client";
 
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { log_standard_event } from "../core/analytics.js";
 import { get_client } from "../graphql_utils/graphql_utils.js";
 
@@ -53,7 +55,7 @@ export function api_load_subject_has_services(subject) {
     .query({
       query,
       variables: {
-        lang: window.lang,
+        lang: lang,
         id,
         _query_name: "subject_has_services",
       },
@@ -236,7 +238,7 @@ export function api_load_services(subject) {
     .query({
       query,
       variables: {
-        lang: window.lang,
+        lang: lang,
         id,
         _query_name: "services",
       },

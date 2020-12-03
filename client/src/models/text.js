@@ -1,5 +1,7 @@
 import marked from "marked";
 
+import { lang, pre_public_accounts } from "src/app_bootstrap/globals.js";
+
 import a11y_lang from "../common_text/a11y_lang.yaml";
 import common_lang from "../common_text/common_lang.yaml";
 import estimates_lang from "../common_text/estimates_lang.yaml";
@@ -77,14 +79,14 @@ const full_template_global_records = [
 ];
 
 const app_constants = {
-  pre_public_accounts: window.pre_public_accounts,
-  lang: window.lang,
+  pre_public_accounts: pre_public_accounts,
+  lang: lang,
   is_mobile: window.feature_detection.is_mobile(),
 };
 
 //turn [{key,en,fr }, ... ] into a big object of { [key]: val of current lang, ... }
 const template_globals = _.chain(full_template_global_records)
-  .map(({ key, en, fr }) => [key, window.lang === "en" ? en : fr])
+  .map(({ key, en, fr }) => [key, lang === "en" ? en : fr])
   .fromPairs()
   .extend(app_constants)
   .value();
@@ -155,12 +157,12 @@ const add_text_bundle = (text_bundle) => {
     to_add[key] = text_obj;
 
     //get rid of language specific props
-    text_obj.text = text_obj[window.lang] || text_obj.text;
+    text_obj.text = text_obj[lang] || text_obj.text;
     delete text_obj.en;
     delete text_obj.fr;
 
     if (text_obj.pre_compile === true) {
-      const hbs_content = text_obj[window.lang] || text_obj.text;
+      const hbs_content = text_obj[lang] || text_obj.text;
       text_obj.text = Handlebars.compile(hbs_content);
       text_obj.handlebars_compiled = true;
     }

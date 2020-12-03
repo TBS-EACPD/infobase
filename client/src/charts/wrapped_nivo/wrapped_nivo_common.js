@@ -2,6 +2,8 @@ import classNames from "classnames";
 import { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import {
   create_text_maker_component,
   StatelessModal,
@@ -176,7 +178,7 @@ class InteractiveGraph extends React.Component {
 
     const { graph, table, table_name, other_buttons } = this.props;
 
-    return !window.is_a11y_mode ? (
+    return !is_a11y_mode ? (
       <Fragment>
         <div>
           {/* don't remove this div: btn-ib-array requires a parent to determine its 

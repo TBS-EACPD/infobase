@@ -1,6 +1,7 @@
 //  for properly formating numbers in multiple formats in both English and French
 //  relates to the column type attribute as of the table class
 //  site.scss also establishes the widths for displaying each of the data types
+import { lang } from "src/app_bootstrap/globals.js";
 
 const number_formatter = {
   en: _.map(
@@ -277,9 +278,7 @@ const types_to_format = {
   },
   year_to_fiscal_year: (year) => {
     const year_int = parseInt(year);
-    return `${year_int}-${
-      window.lang === "en" ? year_int - 2000 + 1 : year_int + 1
-    }`;
+    return `${year_int}-${lang === "en" ? year_int - 2000 + 1 : year_int + 1}`;
   },
   fiscal_year_to_year: (fiscal_year) =>
     _.chain(fiscal_year).split("-").head().value(),
@@ -298,7 +297,7 @@ const formatter = (format, val, options) => {
     } else if (_.isNaN(+val) && _.isString(val)) {
       return val;
     } else {
-      return types_to_format[format](val, window.lang, options);
+      return types_to_format[format](val, lang, options);
     }
   }
   return val;

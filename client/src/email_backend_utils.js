@@ -1,8 +1,10 @@
+import { is_dev, local_ip, is_ci } from "src/app_bootstrap/globals.js";
+
 import { log_standard_event } from "./core/analytics.js";
 
 const email_backend_url =
-  window.is_dev && !window.is_ci
-    ? `http://${window.local_ip || "127.0.0.1"}:7331`
+  is_dev && !is_ci
+    ? `http://${local_ip || "127.0.0.1"}:7331`
     : "https://us-central1-report-a-problem-email-244220.cloudfunctions.net/prod-email-backend";
 
 const log_error_to_analytics = (error_message) =>

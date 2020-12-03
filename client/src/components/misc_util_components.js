@@ -19,10 +19,6 @@ const ExternalLink = ({ children, href, title }) => (
   </a>
 );
 
-function lang(obj) {
-  return obj[window.lang] || obj.text || "";
-}
-
 class Format extends React.PureComponent {
   render() {
     const { type, content, style } = this.props;
@@ -86,7 +82,6 @@ export {
   ExternalLink,
   Year,
   TextAbbrev,
-  lang,
   create_text_maker_component,
   DlItem,
   MultiColumnList,

@@ -1,3 +1,5 @@
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { util_components } from "../../shared.js";
 
 const { Format, TM } = util_components;
@@ -33,19 +35,19 @@ export const PlannedActualTable = ({
         </th>
         <td>
           <Format
-            type={window.is_a11y_mode ? "compact1_written" : "compact1"}
+            type={is_a11y_mode ? "compact1_written" : "compact1"}
             content={planned_spend}
           />
         </td>
         <td>
           <Format
-            type={window.is_a11y_mode ? "compact1_written" : "compact1"}
+            type={is_a11y_mode ? "compact1_written" : "compact1"}
             content={actual_spend}
           />
         </td>
         <td>
           <Format
-            type={window.is_a11y_mode ? "compact1_written" : "compact1"}
+            type={is_a11y_mode ? "compact1_written" : "compact1"}
             content={diff_spend}
           />
         </td>

@@ -1,3 +1,5 @@
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { SmartDisplayTable, GraphOverlay } from "../../../../components";
 import {
   WrappedNivoBar,
@@ -101,7 +103,7 @@ class HistoricalProgramBars extends React.Component {
         .value(),
     };
 
-    if (window.is_a11y_mode) {
+    if (is_a11y_mode) {
       return (
         <SmartDisplayTable
           column_configs={column_configs}
@@ -196,7 +198,7 @@ class DetailedProgramSplit extends React.Component {
 
     const { mapping } = _.find(arrangements, { id: selected_program });
 
-    if (window.is_a11y_mode) {
+    if (is_a11y_mode) {
       const a11y_table_data = _.map(
         flat_data,
         ({ so_label, program, value }) => ({

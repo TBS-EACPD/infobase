@@ -1,3 +1,5 @@
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { sanitized_marked } from "../general_utils.js";
 import { get_static_url, make_request } from "../request_utils.js";
 
@@ -18,7 +20,7 @@ function populate_igoc_models({
   urls,
   igoc_rows,
 }) {
-  const is_en = window.lang === "en";
+  const is_en = lang === "en";
 
   //populate ministry models
   _.each(ministries, ([id, name_en, name_fr]) => {
@@ -157,7 +159,7 @@ function populate_igoc_models({
 
 function populate_glossary(lines) {
   let [term_col, def_col, translation_col] = [1, 3, 2];
-  if (window.lang === "fr") {
+  if (lang === "fr") {
     term_col++;
     def_col++;
     translation_col--;
@@ -185,7 +187,7 @@ function populate_glossary(lines) {
 }
 
 function create_tag_branches(program_tag_types) {
-  const l = window.lang === "en";
+  const l = lang === "en";
   _.each(program_tag_types, (row) => {
     Tag.create_new_root({
       id: row[0],
@@ -198,7 +200,7 @@ function create_tag_branches(program_tag_types) {
 
 function populate_program_tags(tag_rows) {
   // assumes the parent tags will be listed first
-  const l = window.lang === "en";
+  const l = lang === "en";
   const [tag_id, parent_id, name_en, name_fr, desc_en, desc_fr] = d3.range(
     0,
     6
@@ -335,7 +337,7 @@ function process_lookups(data) {
 
 export const populate_stores = function () {
   // reminder: the funky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
-  return make_request(get_static_url(`lookups_${window.lang}.json.js`)).then(
+  return make_request(get_static_url(`lookups_${lang}.json.js`)).then(
     (text) => {
       process_lookups(JSON.parse(text));
     }

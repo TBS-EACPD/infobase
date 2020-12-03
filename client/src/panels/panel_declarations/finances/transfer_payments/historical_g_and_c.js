@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { GraphOverlay } from "../../../../components";
 import {
   run_template,
@@ -79,7 +81,7 @@ class HistTPTypes extends React.Component {
 
     const content = (
       <Fragment>
-        {!window.is_a11y_mode && (
+        {!is_a11y_mode && (
           <StandardLegend
             items={legend_items}
             isHorizontal={true}
@@ -213,7 +215,7 @@ class DetailedHistTPItems extends React.Component {
       </div>
     );
 
-    if (window.is_a11y_mode) {
+    if (is_a11y_mode) {
       return (
         <div>
           {title_el}

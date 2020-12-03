@@ -1,6 +1,9 @@
 import classNames from "classnames";
 
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { IconEyeOpen, IconEyeClosed } from "../icons/icons.js";
+
 import "./FilterTable.scss";
 
 export class FilterTable extends React.Component {
@@ -47,7 +50,7 @@ export class FilterTable extends React.Component {
                 {
                   en: `Activate to filter "${item.text}" items from the following presentation.`,
                   fr: `Appuyez pour filtrer les données «${item.text}» de la présentation`,
-                }[window.lang]
+                }[lang]
               }
             >
               <div

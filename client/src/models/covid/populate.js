@@ -1,5 +1,7 @@
 import gql from "graphql-tag";
 
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { log_standard_event } from "../../core/analytics.js";
 import { get_client } from "../../graphql_utils/graphql_utils.js";
 
@@ -77,7 +79,7 @@ export const api_load_covid_estimates = (subject) => {
     .query({
       query,
       variables: {
-        lang: window.lang,
+        lang: lang,
         id,
         _query_name: "covid_estimates",
       },
@@ -156,7 +158,7 @@ export const api_load_covid_estimates_gov_summary = () => {
     .query({
       query: covid_estimates_gov_summary_query,
       variables: {
-        lang: window.lang,
+        lang: lang,
         _query_name: "covid_estimates_gov_summary",
       },
     })
@@ -280,7 +282,7 @@ export const api_load_covid_initiatives = (subject) => {
     .query({
       query,
       variables: {
-        lang: window.lang,
+        lang: lang,
         id,
         _query_name: "covid_initiatives",
       },
@@ -358,7 +360,7 @@ export const api_load_covid_measures = () => {
     .query({
       covid_measures_query,
       variables: {
-        lang: window.lang,
+        lang: lang,
         _query_name: "covid_measures",
       },
     })

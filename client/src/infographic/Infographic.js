@@ -2,6 +2,8 @@ import { Redirect } from "react-router";
 
 import "./Infographic.scss";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import {
   create_text_maker_component,
   SpinnerWrapper,
@@ -224,13 +226,13 @@ class InfoGraph_ extends React.Component {
     return (
       <div>
         <AnalyticsSynchronizer {...this.props} />
-        {window.is_a11y_mode && (
+        {is_a11y_mode && (
           <div>
             <TM k="a11y_search_other_infographs" />
             {search_component}
           </div>
         )}
-        {!window.is_a11y_mode && (
+        {!is_a11y_mode && (
           <div className="row infographic-search-container">
             {search_component}
           </div>
@@ -247,7 +249,7 @@ class InfoGraph_ extends React.Component {
           </div>
         </div>
         <div role="main" aria-label={text_maker("main_infographic_content")}>
-          {window.is_a11y_mode && (
+          {is_a11y_mode && (
             <p
               id="infographic-explanation-focus"
               aria-live="polite"

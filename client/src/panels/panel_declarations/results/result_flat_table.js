@@ -4,6 +4,8 @@ import { ModalButton } from "src/components/index.js";
 
 import { Indicator } from "src/models/results.js";
 
+import { lang } from "src/app_bootstrap/globals.js";
+
 import { businessConstants } from "../../../models/businessConstants.js";
 import {
   util_components,
@@ -150,7 +152,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
             title={text_maker("indicator_display_title")}
             button_text={indicator.name}
             aria_label={`${
-              window.lang === "en" ? "Discover more about" : "Découvrir"
+              lang === "en" ? "Discover more about" : "Découvrir"
             } ${indicator.name}`}
             show_condition={{ name: "indicator", value: ind_map[value].id }}
           >

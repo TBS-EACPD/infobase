@@ -1,7 +1,8 @@
 import marked from "marked";
 
-import faq_csv_string from "../../../data/faq.csv";
+import { lang } from "src/app_bootstrap/globals.js";
 
+import faq_csv_string from "../../../data/faq.csv";
 
 const DISABLED_QUESTIONS = [];
 
@@ -10,8 +11,8 @@ export const faq_data = _.chain(faq_csv_string)
   .map((qa_row) => [
     qa_row.id,
     {
-      q: qa_row[`q_${window.lang}`],
-      a: marked(qa_row[`a_${window.lang}`], { sanitize: false, gfm: true }),
+      q: qa_row[`q_${lang}`],
+      a: marked(qa_row[`a_${lang}`], { sanitize: false, gfm: true }),
     },
   ])
   .fromPairs()

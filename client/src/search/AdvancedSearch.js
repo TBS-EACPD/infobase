@@ -1,3 +1,5 @@
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { CheckBox } from "../components/CheckBox";
 import { Details } from "../components/Details.js";
 
@@ -108,8 +110,7 @@ export class AdvancedSearch extends React.Component {
 
         return (
           <div key={option_key}>
-            {(!window.is_a11y_mode ||
-              (window.is_a11y_mode && !has_children_to_display)) && (
+            {(!is_a11y_mode || (is_a11y_mode && !has_children_to_display)) && (
               <CheckBox
                 label={option_node.label}
                 active={has_checked_child_option}

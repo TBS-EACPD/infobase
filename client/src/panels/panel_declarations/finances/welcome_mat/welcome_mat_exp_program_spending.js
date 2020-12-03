@@ -1,6 +1,8 @@
 import { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import {
   run_template,
   year_templates,
@@ -112,7 +114,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
     enableGridY: false,
     remove_left_axis: true,
     disable_y_axis_zoom: true,
-    disable_table_view: !window.is_a11y_mode,
+    disable_table_view: !is_a11y_mode,
     y_scale_min: _.min(raw_data) * 0.9,
     y_scale_max: _.max(raw_data) * 1.1,
     legends: [

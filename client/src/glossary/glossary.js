@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import {
   create_text_maker_component,
   GlossarySearch,
@@ -70,7 +72,7 @@ const table_links_by_tag = _.chain(tables)
 const Glossary_ = ({ active_key, items_by_letter }) => (
   <div id="#glossary-key">
     <div className="col-sm-12 col-md-8 col-md-offset-2 font-large">
-      {!window.is_a11y_mode && (
+      {!is_a11y_mode && (
         <div id="glossary_search" className="org_list font-xlarge mrgn-bttm-lg">
           <GlossarySearch />
         </div>
@@ -180,7 +182,7 @@ export default class Glossary extends React.Component {
           <TM k="glossary" />
         </h1>
         <ScrollToTargetContainer target_id={active_key}>
-          {!window.is_a11y_mode && (
+          {!is_a11y_mode && (
             <BackToTop focus="#glossary_search > div > div > input" />
           )}
           <Glossary_

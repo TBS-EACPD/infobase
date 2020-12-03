@@ -1,3 +1,5 @@
+import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { index_lang_lookups } from "../InfoBase/index_data.js";
 import { trivial_text_maker } from "../models/text.js";
 
@@ -6,15 +8,15 @@ const footer_link_items = _.compact([
     href: "#privacy",
     text: trivial_text_maker("privacy_title"),
   },
-  !window.is_a11y_mode && {
+  !is_a11y_mode && {
     id: "footer-a11y-link",
-    href: index_lang_lookups.a11y_version_url[window.lang],
-    text: index_lang_lookups.a11y_version_title[window.lang],
+    href: index_lang_lookups.a11y_version_url[lang],
+    text: index_lang_lookups.a11y_version_title[lang],
   },
-  window.is_a11y_mode && {
+  is_a11y_mode && {
     id: "footer-standard-link",
-    href: index_lang_lookups.standard_version_url[window.lang],
-    text: index_lang_lookups.standard_version_title[window.lang],
+    href: index_lang_lookups.standard_version_url[lang],
+    text: index_lang_lookups.standard_version_title[lang],
   },
 ]);
 

@@ -1,3 +1,5 @@
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
 import { formats } from "../../../../core/format.js";
 import {
   StdPanel,
@@ -104,7 +106,7 @@ const estimates_split_render_w_text_key = (text_key) => ({
       <Col isText size={6}>
         <TM k={text_key} args={panel_args} />
       </Col>
-      <Col isGraph={window.is_a11y_mode} size={6}>
+      <Col isGraph={is_a11y_mode} size={6}>
         {content}
       </Col>
     </StdPanel>

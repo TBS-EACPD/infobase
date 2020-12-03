@@ -1,5 +1,7 @@
 import MediaQuery from "react-responsive";
 
+import { lang } from "src/app_bootstrap/globals.js";
+
 import {
   EverythingSearch,
   create_text_maker_component,
@@ -59,7 +61,7 @@ const FeaturedContentItem = ({
       </span>
     )}
     <a
-      href={_.has(href, window.lang) ? href[window.lang] : href}
+      href={_.has(href, lang) ? href[lang] : href}
       target={is_link_out ? "_blank" : "_self"}
       rel={is_link_out ? "noopener noreferrer" : ""}
     >

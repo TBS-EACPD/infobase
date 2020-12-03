@@ -3,6 +3,8 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import redux_promise_middleware from "redux-promise-middleware";
 import { createSelector } from "reselect";
 
+import { is_dev } from "src/app_bootstrap/globals.js";
+
 import { cached_property, bound } from "src/general_utils.js";
 
 import {
@@ -387,7 +389,7 @@ export class AbstractExplorerScheme {
         current_node_ids
       );
 
-      if (!_.isEqual(potential_to_toggle, safe_to_toggle) && window.is_dev) {
+      if (!_.isEqual(potential_to_toggle, safe_to_toggle) && is_dev) {
         // eslint-disable-next-line no-console
         console.warn(
           `Some ids stored in this explorer implemntation's root.userCollapsed and root.userExpanded state do not
