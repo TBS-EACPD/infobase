@@ -2,6 +2,8 @@ import classNames from "classnames";
 import { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
+import { is_IE } from "src/core/feature_detection.js";
+
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
 import {
@@ -26,7 +28,7 @@ const fixed_symbol_shape = ({ x, y, size, fill, borderWidth, borderColor }) => (
   <rect
     x={x}
     y={y}
-    transform={window.feature_detection.is_IE() ? `translate(0 -4)` : ""}
+    transform={is_IE() ? `translate(0 -4)` : ""}
     fill={fill}
     strokeWidth={borderWidth}
     stroke={borderColor}

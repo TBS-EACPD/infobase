@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { is_IE } from "src/core/feature_detection.js";
+
 import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
 
 import { IconDownload } from "../icons/icons.js";
@@ -275,7 +277,7 @@ export class PDFGenerator extends React.Component {
     } = this.props;
 
     return (
-      !window.feature_detection.is_IE() && (
+      !is_IE() && (
         <Fragment>
           {!generating_pdf && (
             <button

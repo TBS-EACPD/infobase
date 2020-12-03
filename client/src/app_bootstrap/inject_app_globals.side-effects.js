@@ -1,6 +1,4 @@
 /* eslint-disable import/order */
-/* eslint-disable no-undef */
-/* eslint-enable no-undef */
 
 import React from "react";
 import ReactDOM from "react-dom";
@@ -16,9 +14,6 @@ window.d3 = d3;
 
 import Handlebars from "handlebars/dist/cjs/handlebars.js";
 window.Handlebars = Handlebars;
-
-import * as feature_detection from "../core/feature_detection.js";
-window.feature_detection = feature_detection;
 
 import * as ib_colors from "../core/color_defs.js";
 window.infobase_color_constants = ib_colors;
