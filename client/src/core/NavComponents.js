@@ -153,6 +153,49 @@ const HeaderBanner = withRouter(
   }
 );
 
+const TemporaryLateResultsBanner = () => {
+  const route_filter = (match, history) => /^\/(start)/.test(match.path);
+
+  const latest_results_doc = _.chain(result_docs_in_tabling_order)
+    .filter(({ doc_type }) => doc_type === "drr")
+    .last()
+    .value();
+
+  if (latest_results_doc.late_results_orgs.length > 0) {
+    const late_orgs = latest_results_doc.late_results_orgs;
+
+    const banner_content = (
+      <Fragment>
+        {
+          {
+            en: `The ${latest_results_doc.year} Departmental Results Report data does not include values from the organizations listed below, as their data is not yet available. Updates will follow.`,
+            fr: `Les données du Rapport sur les résultats ministériels ${latest_results_doc.year} des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.`,
+          }[window.lang]
+        }
+        <MultiColumnList
+          list_items={_.map(
+            late_orgs,
+            (org_id) => Subject.Dept.lookup(org_id).name
+          )}
+          column_count={window.lang === "en" && late_orgs.length > 3 ? 2 : 1}
+          li_class={late_orgs.length > 4 ? "font-small" : ""}
+        />
+      </Fragment>
+    );
+
+    return (
+      late_orgs && (
+        <HeaderBanner
+          route_filter={route_filter}
+          banner_content={banner_content}
+          banner_class="warning"
+          additional_class_names="medium-panel-text"
+        />
+      )
+    );
+  }
+};
+
 const TemporaryLateFTEsBanner = () => {
   const route_filter = (match, history) =>
     /^\/(start|tag-explorer|partition|treemap|rpb)/.test(match.path);
@@ -161,7 +204,6 @@ const TemporaryLateFTEsBanner = () => {
     .filter(({ doc_type }) => doc_type === "drr")
     .last()
     .get("late_resources_orgs")
-    .uniq()
     .value();
   const banner_content = (
     <Fragment>
@@ -220,6 +262,7 @@ export class StandardRouteContainer extends React.Component {
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
         <HeaderBanner route_filter={_.constant(false)} />
+        <TemporaryLateResultsBanner />
         <TemporaryLateFTEsBanner />
         {beta && (
           <HeaderBanner
