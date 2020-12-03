@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 
+import { textLightColor } from "src/core/color_defs.js";
 import { is_IE } from "src/core/feature_detection.js";
 
 import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
@@ -306,6 +307,6 @@ export class PDFGenerator extends React.Component {
   }
 }
 PDFGenerator.defaultProps = {
-  icon_color: window.infobase_color_constants.textLightColor,
+  icon_color: textLightColor,
   icon_alternate_color: false,
 };

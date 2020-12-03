@@ -2,6 +2,8 @@ import { ResponsiveBubble } from "@nivo/circle-packing";
 import { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
+import { textColor } from "src/core/color_defs.js";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
 
 import { SmartDisplayTable } from "../../components/index.js";
@@ -190,7 +192,7 @@ export class CircleProportionChart extends React.Component {
             borderColor="inherit:darker(1.6)"
             borderWidth={0}
             enableLabel={false}
-            labelTextColor={window.infobase_color_constants.textColor}
+            labelTextColor={textColor}
             labelSkipWidth={labelSkipWidth}
             animate={true}
             motionStiffness={90}

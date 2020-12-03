@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import { Fragment } from "react";
 
+import { highlightColor } from "src/core/color_defs.js";
+
 import { lang } from "src/app_bootstrap/globals.js";
 
 import { IconAttentionTriangle } from "../../../icons/icons.js";
@@ -33,7 +35,7 @@ const { Gov } = Subject;
 export const HierarchyDeadElementIcon = () => (
   <IconAttentionTriangle
     title={text_maker("hierarchy_dead_element_icon_alt_text")}
-    color={window.infobase_color_constants.highlightColor}
+    color={highlightColor}
     inline={true}
     alternate_color={false}
   />

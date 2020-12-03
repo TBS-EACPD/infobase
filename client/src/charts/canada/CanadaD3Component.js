@@ -10,6 +10,8 @@
 //  with the array ordered by fiscal year
 //
 
+import { separatorColor } from "src/core/color_defs.js";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
 import { lang } from "src/app_bootstrap/globals.js";
 
@@ -229,7 +231,7 @@ export class CanadaD3Component {
           "border-radius": "5px",
           "text-align": "center",
           "font-size": `${scale * 22}px`,
-          "background-color": window.infobase_color_constants.separatorColor,
+          "background-color": separatorColor,
         });
 
         const prov_name = get_province_display_name(prov_key, scale);

@@ -3,6 +3,14 @@ import * as Diff from "diff";
 import { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
+import {
+  primaryColor,
+  warnDarkColor,
+  successDarkColor,
+  failDarkColor,
+  infoDarkColor,
+} from "src/core/color_defs.js";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
@@ -339,11 +347,11 @@ export default class TextDiffApp extends React.Component {
     const colors = d3
       .scaleOrdinal()
       .range([
-        window.infobase_color_constants.primaryColor,
-        window.infobase_color_constants.warnDarkColor,
-        window.infobase_color_constants.successDarkColor,
-        window.infobase_color_constants.failDarkColor,
-        window.infobase_color_constants.infoDarkColor,
+        primaryColor,
+        warnDarkColor,
+        successDarkColor,
+        failDarkColor,
+        infoDarkColor,
       ]);
 
     this.state = {

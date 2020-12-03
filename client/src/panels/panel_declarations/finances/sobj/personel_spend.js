@@ -1,3 +1,5 @@
+import { primaryColor } from "src/core/color_defs.js";
+
 import { GraphOverlay } from "../../../../components";
 import {
   declare_panel,
@@ -84,7 +86,7 @@ export const declare_personnel_spend_panel = () =>
                       bottom: 50,
                       left: 65,
                     }}
-                    colors={window.infobase_color_constants.primaryColor}
+                    colors={primaryColor}
                   />
                 </GraphOverlay>
               </div>

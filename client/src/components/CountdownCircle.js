@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { buttonPrimaryColor } from "src/core/color_defs.js";
+
 import { is_IE } from "../core/feature_detection.js";
 
 import { Countdown } from "./Countdown.js";
@@ -111,7 +113,7 @@ export class CountdownCircle extends React.Component {
 }
 CountdownCircle.defaultProps = {
   size: "3em",
-  color: window.infobase_color_constants.buttonPrimaryColor,
+  color: buttonPrimaryColor,
   stroke_width: "2px",
   show_numbers: false,
 };

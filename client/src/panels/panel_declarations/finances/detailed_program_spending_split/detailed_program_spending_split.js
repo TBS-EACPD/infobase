@@ -1,3 +1,5 @@
+import { highlightColor, textColor } from "src/core/color_defs.js";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
 import { is_a11y_mode, infobase_colors } from "src/app_bootstrap/globals.js";
 
@@ -287,10 +289,7 @@ class DetailedProgramSplit extends React.Component {
       value: label,
       lineStyle: { strokeWidth: 0 },
       textStyle: {
-        fill:
-          total < 0
-            ? window.infobase_color_constants.highlightColor
-            : window.infobase_color_constants.textColor,
+        fill: total < 0 ? highlightColor : textColor,
         fontSize: "11px",
       },
       legend: formatter(total),

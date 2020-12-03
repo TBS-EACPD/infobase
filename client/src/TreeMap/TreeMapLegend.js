@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { backgroundColor } from "src/core/color_defs.js";
+
 import { formats } from "../core/format.js";
 import { create_text_maker } from "../models/text.js";
 
@@ -114,7 +116,7 @@ export class TreeMapLegend extends React.Component {
                 <g className="mutLegendGroup" transform="translate(0,0)">
                   <rect
                     className="mutLegendBG"
-                    fill={window.infobase_color_constants.backgroundColor}
+                    fill={backgroundColor}
                     stroke="none"
                     width="500"
                     height="50"

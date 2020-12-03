@@ -1,3 +1,9 @@
+import {
+  highlightColor,
+  secondaryColor,
+  textColor,
+} from "src/core/color_defs.js";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
@@ -65,11 +71,7 @@ const estimates_split_render_w_text_key = (text_key) => ({
       isInteractive={false}
       enableLabel={true}
       indexBy="label"
-      colorBy={(d) =>
-        d.data[d.id] < 0
-          ? window.infobase_color_constants.highlightColor
-          : window.infobase_color_constants.secondaryColor
-      }
+      colorBy={(d) => (d.data[d.id] < 0 ? highlightColor : secondaryColor)}
       margin={{
         top: 50,
         right: 40,
@@ -90,7 +92,7 @@ const estimates_split_render_w_text_key = (text_key) => ({
           ticks: {
             text: {
               fontSize: 12,
-              fill: window.infobase_color_constants.textColor,
+              fill: textColor,
               fontWeight: "550",
             },
           },

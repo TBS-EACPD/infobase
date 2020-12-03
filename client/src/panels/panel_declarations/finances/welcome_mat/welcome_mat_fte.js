@@ -1,6 +1,8 @@
 import { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
+import { tertiaryColor } from "src/core/color_defs.js";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
@@ -127,7 +129,7 @@ export const format_and_get_fte = (type, subject) => {
             axis: "x",
             value: gap_year,
             lineStyle: {
-              stroke: window.infobase_color_constants.tertiaryColor,
+              stroke: tertiaryColor,
               strokeWidth: 2,
               strokeDasharray: "3, 3",
             },

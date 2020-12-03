@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { textColor } from "src/core/color_defs.js";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
@@ -206,7 +208,7 @@ class Goco extends React.Component {
         label: (d) => format_value(d),
         label_format: (d) => <tspan y={-3}>{d}</tspan>,
         tooltip: (slice) => (
-          <div style={{ color: window.infobase_color_constants.textColor }}>
+          <div style={{ color: textColor }}>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <tbody>
                 {slice.map((tooltip_item) => (

@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 
+import { backgroundColor } from "src/core/color_defs.js";
 import { is_IE } from "src/core/feature_detection.js";
 
 import { IconCopy, IconDownload } from "../../icons/icons.js";
@@ -18,7 +19,7 @@ export const DisplayTableCopyCsv = ({ csv_string }) => (
     button_class_name={"display_table__util-icon"}
     button_description={text_maker("copy_table_data_desc")}
     IconComponent={IconCopy}
-    icon_color={window.infobase_color_constants.backgroundColor}
+    icon_color={backgroundColor}
   />
 );
 
@@ -54,7 +55,7 @@ export const DisplayTableDownloadCsv = ({ csv_string, table_name }) => (
       >
         <IconDownload
           title={text_maker("download_table_data_desc")}
-          color={window.infobase_color_constants.backgroundColor}
+          color={backgroundColor}
         />
       </button>
     )}

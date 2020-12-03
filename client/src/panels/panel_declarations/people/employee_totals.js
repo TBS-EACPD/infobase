@@ -1,3 +1,5 @@
+import { primaryColor, textColor } from "src/core/color_defs.js";
+
 import {
   formats,
   run_template,
@@ -87,13 +89,13 @@ export const declare_employee_totals_panel = () =>
               <WrappedNivoLine
                 data={data_formatter()}
                 raw_data={series}
-                colors={window.infobase_color_constants.primaryColor}
+                colors={primaryColor}
                 is_money={false}
                 yScale={{ toggle: true }}
                 tooltip={(slice) => (
                   <div
                     style={{
-                      color: window.infobase_color_constants.textColor,
+                      color: textColor,
                     }}
                   >
                     <table

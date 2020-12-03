@@ -1,6 +1,10 @@
 import d3 from "src/app_bootstrap/d3-bundle.js";
 
-import { primaryColor } from "../../core/color_defs.js";
+import {
+  primaryColor,
+  separatorColor,
+  backgroundColor,
+} from "../../core/color_defs.js";
 import { newIBDarkCategoryColors } from "../../core/color_schemes.js";
 import { reactAdapter } from "../../core/reactAdapter";
 import { get_static_url } from "../../request_utils.js";
@@ -138,14 +142,11 @@ export class PartitionSubApp {
       .transition()
       .duration(200)
       .ease(d3.easeLinear)
-      .style("background-color", window.infobase_color_constants.separatorColor)
+      .style("background-color", separatorColor)
       .transition()
       .duration(100)
       .ease(d3.easeLinear)
-      .style(
-        "background-color",
-        window.infobase_color_constants.backgroundColor
-      );
+      .style("background-color", backgroundColor);
 
     this.update();
   };

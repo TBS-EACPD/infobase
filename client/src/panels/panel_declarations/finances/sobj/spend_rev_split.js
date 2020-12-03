@@ -1,3 +1,5 @@
+import { highlightColor, secondaryColor } from "src/core/color_defs.js";
+
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
 import {
@@ -61,9 +63,7 @@ function render({ calculations, footnotes, sources }) {
               <tspan y={-4}>{formats.compact1(d, { raw: true })}</tspan>
             )}
             colorBy={(d) =>
-              d.data[d.id] < 0
-                ? window.infobase_color_constants.highlightColor
-                : window.infobase_color_constants.secondaryColor
+              d.data[d.id] < 0 ? highlightColor : secondaryColor
             }
             enableGridX={false}
           />
