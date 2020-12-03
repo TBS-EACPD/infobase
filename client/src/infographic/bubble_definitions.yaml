@@ -1,7 +1,22 @@
+about_gov_title:
+  en: About Government
+  fr: À propos du gouvernement
+about_dept_title:
+  en: About this organization
+  fr: À propos de cette organisation
+about_crso_title:
+  en: About this Core Responsibility
+  fr: À propos de cette responsabilité essentielle
+about_program_title:
+  en: About this Program
+  fr: À propos de ce programme
+about_tag_title:
+  en: About this tag
+  fr: À propos de cette étiquette
+
 fin_title:
   en: Finances
   fr: Finances
-
 fin_desc:
   en: What we plan on spending, what we can spend, what we have spent
   fr: Ce que nous comptons dépenser, ce que nous pouvons dépenser et ce que nous avons réellement dépensé
@@ -9,107 +24,24 @@ fin_desc:
 people_title:
   en: People
   fr: Personnel
-
 people_desc:
   en: How many people do we employ, and who are they
   fr: Combien de gens travaillent, quel âge ont-ils, où travaillent-ils et qui sont-ils
 
-all_data_description:
-  en: Links to supporting data for these infographics, for further analysis
-  fr: Des liens vers les données qui supportent les infographies pour continuer votre analyse
-
-all_data_dept_title:
-  en: See all data for this organization
-  fr: Voir toutes les données pour de l'organisation
-
-all_data_gov_title:
-  en: See all data for government
-  fr: Voir toutes les données pour le gouvernement
-
-
-about_gov_title:
-  en: About Government
-  fr: À propos du gouvernement
-
-about_tag_title:
-  en: About this tag
-  fr: À propos de cette étiquette
-
-about_dept_title:
-  en: About this organization
-  fr: À propos de cette organisation
-
-about_program_title:
-  en: About this Program
-  fr: À propos de ce programme
-
-about_cr_title:
-  en: About this Core Responsibility
-  fr: À propos de cette responsabilité essentielle
-
-
-planning_title: 
+results_title: 
   en: Results
   fr: Résultats
-
-planning_desc:
-  en : What we have achieved, what we want to achieve, and how we measure achievement
-  fr : Ce que nous avons accompli, ce que nous voulons accomplir et comment nous mesurons nos progrès
+results_desc:
+  en: What we have achieved, what we want to achieve, and how we measure achievement
+  fr: Ce que nous avons accompli, ce que nous voulons accomplir et comment nous mesurons nos progrès
 
 where_can_i_go_title:
   en: Where can I go from here?
-  fr: Où puis-je aller à partir d'ici?
-
+  fr: Où puis-je aller à partir d'ici?]
 where_can_i_go_desc:
   en: Related links for continued exploration
   fr: Des liens connexes pour continuer à explorer
 
-historical:
-  en: Historical
-  fr: Historique
-
-historical_type_desc:
-  en : <strong>Historical data</strong> predates the current fiscal year, {{in_year}}
-  fr : <strong>Les données historiques</strong> sont antérieures à l'exercise en cours, {{in_year}}
-
-people_hist_desc:
-  en : <strong>People Historical data</strong> contains two types of data coverage. The first are snapshots as of March 31st of a given fiscal year, presented for years from {{ppl_last_year_5}} to {{ppl_last_year}}. The second kind of coverage represents calculations based on data from the entire fiscal year, presented for years from {{ppl_last_year_5}} to {{ppl_last_year}}. The type of coverage for each data set is noted in its details section
-  fr : Deux types de couverture s'appliquent aux <strong> données historiques sur les personnes</strong>. Le premier correspond à des instantanés en date du 31 mars d'un exercice financier donné, des années {{ppl_last_year_5}} à {{ppl_last_year}}. Le deuxième type de couverture correspond à des calculs fondés sur les données de l'exercice financier entier, des années {{ppl_last_year_5}} à {{ppl_last_year}}. Le type de couverture de chacun des ensembles de données est inscrit dans la section des détails
-
-in_year_title:
-  en: Current Year
-  fr: Exercice courant
-
-in_year_desc:
-  en : <strong>Current year</strong> data describes information for the current fiscal year ({{est_in_year}}). Data from other fiscal years is presented for comparison purposes
-  fr : Les données pour la période en cours décrivent l'information de <strong>l'exercice courant</strong> ({{est_in_year}}). Les données pour les autres exercices sont présentées à titre de comparaison
-
-
-planned_cov_title:
-  en: Planned
-  fr: Prévue
-
-planned_cov_desc:
-  en : <strong>Planned</strong> data covers the time-fame from {{planning_year_1}} to {{planning_year_3}}
-  fr : Les données sur la <strong>planification</strong> couvrent la période de {{planning_year_1}} à {{planning_year_3}}
-
-meta_title: 
-  en: <strong>Navigate</strong>
-  fr: <strong>Naviguer<strong>
-
-meta_desc:
-  en: <strong>Navigate</strong>
-  fr: <strong>Naviguer<strong>
-
-
-profile_desc:
-  en: <strong> Organizational Profile </strong> lists additional fields about the current organization.
-  fr: <strong> Profile d'organisation </strong> 
-
-intro_title:
-  en: <strong> Overview </strong>
-  fr: <strong> Apperçu </strong>
-
-intro_desc:
-  en: <strong> Overview </strong>
-  fr: <strong> Apperçu </strong>
+all_data_description:
+  en: Links to supporting data for these infographics, for further analysis
+  fr: Des liens vers les données qui supportent les infographies pour continuer votre analyse

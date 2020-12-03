@@ -282,6 +282,9 @@ open_data_link:
 open_data_datasets:
   en: Open Data Datasets
   fr: Données ouvertes
+datasets:
+  en: Datasets
+  fr: Tableaux de donées
 link:
   en: Link
   fr: Lien
