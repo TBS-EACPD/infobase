@@ -1,3 +1,4 @@
+import ReactDOM from "react-dom";
 import { TransitionGroup, Transition } from "react-transition-group";
 
 import { textLightColor } from "src/core/color_defs.js";

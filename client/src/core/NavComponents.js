@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import ReactDOM from "react-dom";
 import { withRouter } from "react-router";
 
 import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";

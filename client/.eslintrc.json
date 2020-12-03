@@ -27,7 +27,6 @@
     "ga": true,
 
     "React": true,
-    "ReactDOM": true,
     "_": true,
     "Handlebars": true
   }

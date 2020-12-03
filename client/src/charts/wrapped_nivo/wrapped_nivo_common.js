@@ -2,7 +2,11 @@ import classNames from "classnames";
 import { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
-import { secondaryColor, backgroundColor } from "src/core/color_defs.js";
+import {
+  secondaryColor,
+  backgroundColor,
+  textColor,
+} from "src/core/color_defs.js";
 import { is_IE } from "src/core/feature_detection.js";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
