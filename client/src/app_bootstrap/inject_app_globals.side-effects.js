@@ -15,9 +15,4 @@ window.Handlebars = Handlebars;
 import * as ib_colors from "../core/color_defs.js";
 window.infobase_color_constants = ib_colors;
 
-import { newIBCategoryColors } from "../core/color_schemes.js";
-import d3 from "src/app_bootstrap/d3-bundle.js";
-window.infobase_colors = (options) =>
-  d3.scaleOrdinal().range(newIBCategoryColors);
-
 window._DEV_HELPERS = {};

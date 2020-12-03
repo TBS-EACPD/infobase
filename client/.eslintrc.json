@@ -28,7 +28,6 @@
 
     "React": true,
     "ReactDOM": true,
-    "infobase_colors": true,
     "_": true,
     "Handlebars": true
   }
