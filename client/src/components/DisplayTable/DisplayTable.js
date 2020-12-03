@@ -1,5 +1,7 @@
 import classNames from "classnames";
 
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { LegendList } from "../../charts/legends/LegendList.js";
 import { DebouncedTextInput } from "../DebouncedTextInput.js";
 import {

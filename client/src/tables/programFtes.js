@@ -1,3 +1,5 @@
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { Subject, trivial_text_maker, m, year_templates } from "./table_common";
 
 import text from "./programFtes.yaml";

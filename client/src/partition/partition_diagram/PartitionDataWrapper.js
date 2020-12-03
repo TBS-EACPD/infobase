@@ -1,3 +1,5 @@
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 export class PartitionDataWrapper {
   constructor(hierarchy, alternate_data_wrapper_node_rules) {
     const distinct_root_identifier = new Date().getTime();

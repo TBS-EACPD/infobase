@@ -1,3 +1,5 @@
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import * as format from "../core/format";
 import { businessConstants } from "../models/businessConstants.js";
 import { Subject } from "../models/subject";

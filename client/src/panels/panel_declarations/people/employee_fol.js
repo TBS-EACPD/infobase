@@ -1,3 +1,5 @@
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import {
   formats,
   run_template,

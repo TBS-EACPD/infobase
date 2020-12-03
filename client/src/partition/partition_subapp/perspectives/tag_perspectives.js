@@ -1,3 +1,5 @@
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { TM, KeyConceptList } from "../../../components/index.js";
 import { Table } from "../../../core/TableClass.js";
 import { Subject } from "../../../models/subject.js";
@@ -9,7 +11,6 @@ import {
   post_traversal_search_string_set,
 } from "./data_hierarchy_utils.js";
 import { PartitionPerspective } from "./PartitionPerspective.js";
-
 
 import {
   get_common_popup_options,

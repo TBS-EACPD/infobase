@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { GraphOverlay } from "../../components";
 import { secondaryColor, tertiaryColor } from "../../core/color_defs.js";
 import { hex_to_rgb } from "../../general_utils.js";

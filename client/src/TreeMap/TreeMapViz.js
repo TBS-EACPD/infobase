@@ -2,6 +2,8 @@ import classNames from "classnames";
 
 import { is_mobile } from "src/core/feature_detection.js";
 
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { create_text_maker } from "../models/text.js";
 
 import { smaller_items_text } from "./data.js";

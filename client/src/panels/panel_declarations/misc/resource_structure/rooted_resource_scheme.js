@@ -1,5 +1,7 @@
 import { createSelector } from "reselect";
 
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 import {
   filter_hierarchy,

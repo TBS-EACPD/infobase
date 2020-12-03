@@ -1,3 +1,5 @@
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { get_resources_for_subject } from "../../../explorer_common/resource_explorer_common.js";
 import {
   Results,
@@ -8,7 +10,6 @@ import {
 } from "../shared.js";
 
 import { text_maker } from "./result_text_provider.js";
-
 
 const {
   Result,

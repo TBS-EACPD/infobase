@@ -1,5 +1,6 @@
 import classNames from "classnames";
 
+import d3 from "src/app_bootstrap/d3-bundle.js";
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
 import { newIBCategoryColors } from "../../core/color_schemes.js";

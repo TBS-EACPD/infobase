@@ -1,3 +1,4 @@
+import d3 from "src/app_bootstrap/d3-bundle.js";
 
 import { sanitized_marked } from "../../general_utils.js";
 import { get_static_url, make_request } from "../../request_utils.js";

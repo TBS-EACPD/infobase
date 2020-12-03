@@ -1,3 +1,5 @@
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import { make_unique } from "../../general_utils.js";
 
 //  Generates all the tables displayed on the page

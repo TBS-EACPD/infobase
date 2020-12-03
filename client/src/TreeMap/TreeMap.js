@@ -2,6 +2,8 @@
 
 import { is_mobile } from "src/core/feature_detection.js";
 
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import {
   SpinnerWrapper,
   create_text_maker_component,
