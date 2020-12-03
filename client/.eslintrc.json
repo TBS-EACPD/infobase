@@ -26,14 +26,6 @@
 
     "ga": true,
 
-    "lang": true,
-    "is_a11y_mode": true,
-    "long_sha": true,
-    "sha": true,
-    "pre_public_accounts": true,
-    "cdn_url": true,
-    "is_dev_link": true,
-    "is_dev_build": true,
     "feature_detection": true,
     "React": true,
     "ReactDOM": true,
