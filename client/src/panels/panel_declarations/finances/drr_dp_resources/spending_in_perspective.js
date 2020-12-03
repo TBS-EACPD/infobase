@@ -1,4 +1,4 @@
-import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+import { is_a11y_mode, infobase_colors } from "src/app_bootstrap/globals.js";
 
 import {
   declare_panel,

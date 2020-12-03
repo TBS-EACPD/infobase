@@ -1,4 +1,7 @@
-/* eslint-disable import/order */
+import { newIBCategoryColors } from "../core/color_schemes.js";
+
+import d3 from "./d3-bundle.js";
+
 /* eslint-disable no-undef */
 const lang =
   typeof APPLICATION_LANGUAGE !== "undefined" && APPLICATION_LANGUAGE;
@@ -16,6 +19,8 @@ const is_dev_link = typeof IS_DEV_LINK !== "undefined" && IS_DEV_LINK;
 const is_dev = typeof IS_DEV !== "undefined" && IS_DEV;
 const local_ip = is_dev && typeof LOCAL_IP !== "undefined" && LOCAL_IP;
 const is_ci = typeof IS_CI !== "undefined" && IS_CI;
+const infobase_colors = (options) =>
+  d3.scaleOrdinal().range(newIBCategoryColors);
 
 export {
   lang,
@@ -30,4 +35,5 @@ export {
   is_dev,
   local_ip,
   is_ci,
+  infobase_colors,
 };

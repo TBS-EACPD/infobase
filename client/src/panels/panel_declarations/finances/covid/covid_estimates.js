@@ -1,6 +1,10 @@
 import { Fragment } from "react";
 
-import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
+import {
+  lang,
+  is_a11y_mode,
+  infobase_colors,
+} from "src/app_bootstrap/globals.js";
 
 import {
   Subject,
