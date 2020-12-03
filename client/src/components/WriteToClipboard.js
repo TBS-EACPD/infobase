@@ -1,6 +1,8 @@
 import * as clipboard from "clipboard-polyfill";
 import { Fragment } from "react";
 
+import { tertiaryColor, textLightColor } from "src/core/color_defs.js";
+
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
 import { IconCopy } from "../icons/icons.js";
@@ -68,7 +70,7 @@ export class WriteToClipboard extends React.Component {
           title={
             <Fragment>
               <IconCopy
-                color={window.infobase_color_constants.tertiaryColor}
+                color={tertiaryColor}
                 alternate_color={false}
                 aria_hide={true}
               />
@@ -98,5 +100,5 @@ export class WriteToClipboard extends React.Component {
 WriteToClipboard.defaultProps = {
   button_description: text_maker("copy_to_clipboard"),
   IconComponent: IconCopy,
-  icon_color: window.infobase_color_constants.textLightColor,
+  icon_color: textLightColor,
 };

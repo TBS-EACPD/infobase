@@ -1,5 +1,7 @@
 import MediaQuery from "react-responsive";
 
+import { highlightColor } from "src/core/color_defs.js";
+
 import { lang } from "src/app_bootstrap/globals.js";
 
 import {
@@ -174,7 +176,7 @@ const HomeLayout = (props) => (
         backgroundImage: `URL(${get_static_url("svg/backbanner.svg")})`,
         paddingTop: "10px",
         paddingBottom: "10px",
-        borderBottom: `5px solid ${window.infobase_color_constants.highlightColor}`,
+        borderBottom: `5px solid ${highlightColor}`,
       }}
     >
       <header className="container">

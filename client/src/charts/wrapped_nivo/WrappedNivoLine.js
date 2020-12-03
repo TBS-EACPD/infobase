@@ -1,6 +1,12 @@
 import { ResponsiveLine } from "@nivo/line";
 import classNames from "classnames";
 
+import {
+  textColor,
+  secondaryColor,
+  backgroundColor,
+} from "src/core/color_defs.js";
+
 import { SmartDisplayTable } from "../../components/index.js";
 import { IconZoomIn, IconZoomOut } from "../../icons/icons.js";
 
@@ -146,14 +152,14 @@ export class WrappedNivoLine extends React.Component {
           {this.state.y_scale_zoomed ? (
             <IconZoomOut
               title={text_maker("zoom_out")}
-              color={window.infobase_color_constants.secondaryColor}
-              alternate_color={window.infobase_color_constants.backgroundColor}
+              color={secondaryColor}
+              alternate_color={backgroundColor}
             />
           ) : (
             <IconZoomIn
               title={text_maker("zoom_in")}
-              color={window.infobase_color_constants.secondaryColor}
-              alternate_color={window.infobase_color_constants.backgroundColor}
+              color={secondaryColor}
+              alternate_color={backgroundColor}
             />
           )}
         </button>
@@ -241,7 +247,7 @@ WrappedNivoLine.defaultProps = {
       <DefaultTooltip tooltip_items={tooltip_items} formatter={formatter} />
     );
   },
-  colors: window.infobase_color_constants.textColor,
+  colors: textColor,
   bttm_axis: {
     tickSize: 7,
     tickPadding: 12,

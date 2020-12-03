@@ -1,5 +1,7 @@
 import classNames from "classnames";
 
+import { backgroundColor, primaryColor } from "src/core/color_defs.js";
+
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
 import { IconCheckmark } from "../icons/icons.js";
@@ -18,7 +20,7 @@ export class CheckBox extends React.Component {
       onClick, //required: id => {}
       label, //required text for checkbox
       active, //required, equivalent of 'checked'
-      color, //defaults to window.infobase_color_constants.primaryColor
+      color, //defaults to primaryColor
       isSolidBox, //defaults to false
       container_style, //style for div, containing checkbox and label
       checkbox_style, //style for checkbox
@@ -63,7 +65,7 @@ export class CheckBox extends React.Component {
           >
             {!isSolidBox && (
               <IconCheckmark
-                color={window.infobase_color_constants.backgroundColor}
+                color={backgroundColor}
                 width={10}
                 height={10}
                 vertical_align={checkmark_vertical_align}
@@ -96,6 +98,6 @@ export class CheckBox extends React.Component {
 }
 CheckBox.defaultProps = {
   isSolidBox: false,
-  color: window.infobase_color_constants.primaryColor,
+  color: primaryColor,
   checkmark_vertical_align: 0.1,
 };

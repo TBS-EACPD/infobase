@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { textLightColor, tertiaryColor } from "src/core/color_defs.js";
+
 import {
   IconShare,
   IconFacebook,
@@ -78,7 +80,7 @@ export class ShareButton extends React.Component {
             <Fragment>
               <IconShare
                 title={text_maker("share")}
-                color={window.infobase_color_constants.tertiaryColor}
+                color={tertiaryColor}
                 alternate_color={false}
               />
               {text_maker("share")}
@@ -134,6 +136,6 @@ export class ShareButton extends React.Component {
 
 ShareButton.defaultProps = {
   button_description: text_maker("share"),
-  icon_color: window.infobase_color_constants.textLightColor,
+  icon_color: textLightColor,
   icon_alternate_color: false,
 };

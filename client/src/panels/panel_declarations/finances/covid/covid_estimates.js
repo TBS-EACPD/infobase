@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { textColor } from "src/core/color_defs.js";
+
 import {
   lang,
   is_a11y_mode,
@@ -110,7 +112,7 @@ const SummaryTab = ({ panel_args }) => {
           ticks: {
             text: {
               fontSize: 12,
-              fill: window.infobase_color_constants.textColor,
+              fill: textColor,
               fontWeight: "550",
             },
           },

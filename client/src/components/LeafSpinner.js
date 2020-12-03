@@ -1,3 +1,5 @@
+import { primaryColor, secondaryColor } from "src/core/color_defs.js";
+
 import leaf_loading_spinner from "../svg/leaf-loading-spinner.svg";
 import "./LeafSpinner.scss";
 
@@ -34,14 +36,8 @@ export const LeafSpinner = ({ config_name }) => {
       },
       svg_modifier: (svg) =>
         svg
-          .replace(
-            `stroke="${window.infobase_color_constants.primaryColor}"`,
-            'stroke="#FFF"'
-          )
-          .replace(
-            `stroke="${window.infobase_color_constants.secondaryColor}"`,
-            'stroke="#FFF"'
-          )
+          .replace(`stroke="${primaryColor}"`, 'stroke="#FFF"')
+          .replace(`stroke="${secondaryColor}"`, 'stroke="#FFF"')
           .replace('fill="#FF0000"', 'fill="#FFF"')
           .replace("faded-background--true", "faded-background--false"),
     },

@@ -1,3 +1,5 @@
+import { textGreen, textRed } from "src/core/color_defs.js";
+
 import { Format, SmartDisplayTable } from "../../../../components";
 import {
   year_templates,
@@ -23,7 +25,7 @@ const dp_cols = [...planning_years, ...special_cols];
 
 const spending_formatter = (value) => (
   <Format
-    style={{ color: window.infobase_color_constants.textGreen }}
+    style={{ color: textGreen }}
     type={"compact2_written"}
     content={value}
   />
@@ -31,7 +33,7 @@ const spending_formatter = (value) => (
 
 const revenue_formatter = (value, custom_color = null) => (
   <Format
-    style={{ color: window.infobase_color_constants.textRed }}
+    style={{ color: textRed }}
     type={"compact2_written"}
     content={value}
   />

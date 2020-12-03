@@ -1,3 +1,5 @@
+import { secondaryColor } from "src/core/color_defs.js";
+
 import { lang } from "src/app_bootstrap/globals.js";
 
 import {
@@ -129,12 +131,12 @@ const ShareReport = () => (
     <ShareButton
       button_class_name={"rpb-heading-utils"}
       url={window.location.href}
-      icon_color={window.infobase_color_constants.secondaryColor}
+      icon_color={secondaryColor}
     />
     <WriteToClipboard
       button_class_name={"rpb-heading-utils"}
       text_to_copy={window.location.href}
-      icon_color={window.infobase_color_constants.secondaryColor}
+      icon_color={secondaryColor}
       IconComponent={IconCopyLink}
     />
   </div>

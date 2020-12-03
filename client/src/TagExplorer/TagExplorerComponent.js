@@ -4,6 +4,8 @@ import { Fragment } from "react";
 import { GlossaryEntry } from "src/models/glossary.js";
 import { run_template } from "src/models/text.js";
 
+import { tertiaryColor, primaryColor } from "src/core/color_defs.js";
+
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
 import {
@@ -287,10 +289,8 @@ export default class TagExplorerComponent extends React.Component {
                 GlossaryEntry.lookup(current_category.id) && (
                   <GlossaryIcon
                     id={current_category.id}
-                    icon_color={window.infobase_color_constants.tertiaryColor}
-                    icon_alt_color={
-                      window.infobase_color_constants.primaryColor
-                    }
+                    icon_color={tertiaryColor}
+                    icon_alt_color={primaryColor}
                   />
                 )}
             </h2>

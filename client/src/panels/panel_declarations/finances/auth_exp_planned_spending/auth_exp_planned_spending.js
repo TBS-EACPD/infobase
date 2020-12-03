@@ -1,5 +1,11 @@
 import { Fragment } from "react";
 
+import {
+  tertiaryColor,
+  textColor,
+  highlightColor,
+} from "src/core/color_defs.js";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
@@ -41,7 +47,7 @@ const auth_exp_planned_spending_tooltip = (graph_slice, tooltip_formatter) => {
   );
 
   return (
-    <div style={{ color: window.infobase_color_constants.textColor }}>
+    <div style={{ color: textColor }}>
       <table className="auth-exp-planned-spend-tooltip">
         <tbody>
           {null_filtered_slice_data.map((tooltip_item) => (
@@ -69,7 +75,7 @@ const auth_exp_planned_spending_tooltip = (graph_slice, tooltip_formatter) => {
               <td>{text_maker("difference")}</td>
               <td
                 style={{
-                  color: window.infobase_color_constants.highlightColor,
+                  color: highlightColor,
                 }}
                 dangerouslySetInnerHTML={{
                   __html: tooltip_formatter(
@@ -224,7 +230,7 @@ class AuthExpPlannedSpendingGraph extends React.Component {
             axis: "x",
             value: gap_year,
             lineStyle: {
-              stroke: window.infobase_color_constants.tertiaryColor,
+              stroke: tertiaryColor,
               strokeWidth: 2,
               strokeDasharray: "3, 3",
             },

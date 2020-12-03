@@ -1,6 +1,8 @@
 import { Fragment } from "react";
 import { withRouter } from "react-router";
 
+import { tertiaryColor } from "src/core/color_defs.js";
+
 import {
   FixedPopover,
   create_text_maker_component,
@@ -177,7 +179,7 @@ export const SurveyPopup = withRouter(
             <Fragment>
               <IconFeedback
                 title={text_maker("suvey_popup_header")}
-                color={window.infobase_color_constants.tertiaryColor}
+                color={tertiaryColor}
                 alternate_color={false}
               />
               {text_maker("suvey_popup_header")}

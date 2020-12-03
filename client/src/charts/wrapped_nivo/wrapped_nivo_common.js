@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
+import { secondaryColor, backgroundColor } from "src/core/color_defs.js";
 import { is_IE } from "src/core/feature_detection.js";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
@@ -61,10 +62,7 @@ const TooltipFactory = ({
   TooltipContentComponent,
   LegendIconComponent = DefaultLegendIcon,
 }) => (
-  <div
-    className={tooltip_container_class}
-    style={{ color: window.infobase_color_constants.textColor }}
-  >
+  <div className={tooltip_container_class} style={{ color: textColor }}>
     <table className="nivo-tooltip">
       <tbody>
         {tooltip_items.map((tooltip_item) => (
@@ -196,10 +194,8 @@ class InteractiveGraph extends React.Component {
             >
               <IconTable
                 title={nivo_common_text_maker("show_table")}
-                color={window.infobase_color_constants.secondaryColor}
-                alternate_color={
-                  window.infobase_color_constants.backgroundColor
-                }
+                color={secondaryColor}
+                alternate_color={backgroundColor}
               />
             </button>
           )}
@@ -253,7 +249,7 @@ const general_default_props = {
       ticks: {
         text: {
           fontSize: 12,
-          fill: window.infobase_color_constants.textColor,
+          fill: textColor,
         },
       },
     },

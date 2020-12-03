@@ -1,5 +1,7 @@
 import classNames from "classnames";
 
+import { secondaryColor, tertiaryColor } from "src/core/color_defs.js";
+
 import { lang } from "src/app_bootstrap/globals.js";
 
 import { IconEyeOpen, IconEyeClosed } from "../icons/icons.js";
@@ -70,13 +72,13 @@ export class FilterTable extends React.Component {
               >
                 {item.active ? (
                   <IconEyeOpen
-                    color={window.infobase_color_constants.secondaryColor}
+                    color={secondaryColor}
                     alternate_color={false}
                     width={"40px"}
                   />
                 ) : (
                   <IconEyeClosed
-                    color={window.infobase_color_constants.tertiaryColor}
+                    color={tertiaryColor}
                     alternate_color={false}
                     width={"40px"}
                   />

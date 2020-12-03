@@ -1,5 +1,8 @@
 import classNames from "classnames";
 import { Fragment } from "react";
+
+import { textColor, tertiaryColor } from "src/core/color_defs.js";
+
 import "./icons.scss";
 
 const svg_default_styles = {
@@ -89,8 +92,8 @@ class _IconWrapper extends React.Component {
   }
 }
 _IconWrapper.defaultProps = {
-  color: window.infobase_color_constants.textColor,
-  alternate_color: window.infobase_color_constants.tertiaryColor,
+  color: textColor,
+  alternate_color: tertiaryColor,
   inline: false,
   aria_hide: false,
 

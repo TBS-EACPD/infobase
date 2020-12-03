@@ -1,5 +1,7 @@
 import { ResponsiveBar } from "@nivo/bar";
 
+import { textColor } from "src/core/color_defs.js";
+
 import { SmartDisplayTable } from "../../components/index.js";
 
 import {
@@ -129,7 +131,7 @@ export class WrappedNivoBar extends React.Component {
           keys={_.union(keys, [""])} //extra key allows negative bar to render (only needed when 1 type of key
           //and the key takes both negative or positive values)
           labelFormat={_.isUndefined(label_format) ? null : label_format}
-          labelTextColor={window.infobase_color_constants.textColor}
+          labelTextColor={textColor}
           tooltip={(d) =>
             tooltip([d], get_formatter(is_money, text_formatter, false))
           }
@@ -242,7 +244,7 @@ export class WrappedNivoHBar extends React.Component {
           legends={fix_legend_symbols(legends)}
           layout="horizontal"
           keys={keys}
-          labelTextColor={window.infobase_color_constants.textColor}
+          labelTextColor={textColor}
           labelFormat={_.isUndefined(label_format) ? null : label_format}
           tooltip={(d) =>
             tooltip([d], get_formatter(is_money, text_formatter, false))

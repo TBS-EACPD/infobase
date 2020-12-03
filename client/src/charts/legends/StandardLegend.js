@@ -1,5 +1,6 @@
-import { LegendList } from "./LegendList.js";
+import { tertiaryColor } from "src/core/color_defs.js";
 
+import { LegendList } from "./LegendList.js";
 import "./StandardLegend.scss";
 
 export const StandardLegend = ({
@@ -34,7 +35,7 @@ export const StandardLegend = ({
       {Controls && (
         <div
           style={{
-            borderTop: `1px dashed ${window.infobase_color_constants.tertiaryColor}`,
+            borderTop: `1px dashed ${tertiaryColor}`,
             padding: "10px 0px 10px 5px",
           }}
         >
