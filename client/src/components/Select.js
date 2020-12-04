@@ -1,3 +1,5 @@
+import React from "react";
+
 //expects options to be of the form [ { id, display } ]
 const Select = ({
   id,

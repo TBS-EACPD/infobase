@@ -1,3 +1,4 @@
+import React from "react";
 import { createSelector } from "reselect";
 
 import { infograph_href_template } from "../../../../link_utils.js";

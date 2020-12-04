@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import React from "react";
 
 import { text_maker } from "../tables/table_common";
 

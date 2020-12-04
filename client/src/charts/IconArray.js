@@ -1,3 +1,5 @@
+import React from "react";
+
 export class IconArray extends React.Component {
   render() {
     const { render_item, items, heightFirst } = this.props;

@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   declare_panel,
   FootNote,

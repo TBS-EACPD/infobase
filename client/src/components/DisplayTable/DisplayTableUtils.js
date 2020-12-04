@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 
 import { backgroundColor } from "src/core/color_defs.js";
 import { is_IE } from "src/core/feature_detection.js";

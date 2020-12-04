@@ -1,3 +1,5 @@
+import React from "react";
+
 import "./LabeledBox.scss";
 
 export class LabeledBox extends React.Component {

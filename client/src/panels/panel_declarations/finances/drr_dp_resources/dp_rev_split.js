@@ -1,3 +1,5 @@
+import React from "react";
+
 import { textGreen, textRed } from "src/core/color_defs.js";
 
 import { Format, SmartDisplayTable } from "../../../../components";

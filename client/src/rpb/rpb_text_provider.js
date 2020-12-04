@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   create_text_maker_component,
   TextMaker as StandardTextMaker,

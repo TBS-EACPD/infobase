@@ -1,6 +1,4 @@
-import "./shared.scss";
-
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 
 import { Canada } from "../../charts/canada/index.js";
 import { FlatTreeMapViz } from "../../charts/flat_treemap/FlatTreeMapViz.js";
@@ -58,6 +56,8 @@ import {
   TextPanel,
   Col,
 } from "./InfographicPanel.js";
+
+import "./shared.scss";
 
 const {
   Format,

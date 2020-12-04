@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import React from "react";
 
 import { backgroundColor, primaryColor } from "src/core/color_defs.js";
 

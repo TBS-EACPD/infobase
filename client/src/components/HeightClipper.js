@@ -1,3 +1,4 @@
+import React from "react";
 import ReactDOM from "react-dom";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";

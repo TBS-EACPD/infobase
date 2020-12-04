@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import React from "react";
 import { Modal } from "react-bootstrap";
 
 import { trivial_text_maker } from "../../models/text.js";

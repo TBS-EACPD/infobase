@@ -1,5 +1,6 @@
 import { ResponsiveLine } from "@nivo/line";
 import classNames from "classnames";
+import React from "react";
 
 import {
   textColor,

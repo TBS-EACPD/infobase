@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   LabeledTable,
   create_text_maker_component,

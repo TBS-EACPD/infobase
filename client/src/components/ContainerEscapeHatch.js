@@ -1,3 +1,4 @@
+import React from "react";
 // Allows child content to use full screen width, escaping from gutters such as the main.container or any other .container elements
 
 // Implemented with JS because any css solutions use 100vw, but actual page widths are usually 100vw - vertical scroll bar width...

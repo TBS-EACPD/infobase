@@ -1,3 +1,5 @@
+import React from "react";
+
 import { cdn_url, is_dev } from "src/app_bootstrap/globals.js";
 
 import { log_standard_event } from "../core/analytics.js";

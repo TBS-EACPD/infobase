@@ -1,3 +1,5 @@
+import React from "react";
+
 import { log_standard_event } from "../core/analytics.js";
 
 export const LogInteractionEvents = ({

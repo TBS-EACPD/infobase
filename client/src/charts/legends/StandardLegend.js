@@ -1,6 +1,9 @@
+import React from "react";
+
 import { tertiaryColor } from "src/core/color_defs.js";
 
 import { LegendList } from "./LegendList.js";
+
 import "./StandardLegend.scss";
 
 export const StandardLegend = ({

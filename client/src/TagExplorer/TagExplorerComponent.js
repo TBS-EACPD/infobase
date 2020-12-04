@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 
 import { GlossaryEntry } from "src/models/glossary.js";
 import { run_template } from "src/models/text.js";

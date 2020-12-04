@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   SmartDisplayTable,
   default_dept_name_sort_func,

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { Suspense } from "react";
+import React, { Suspense } from "react";
 import { Provider } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { createStore } from "redux";

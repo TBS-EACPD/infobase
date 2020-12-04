@@ -1,5 +1,7 @@
 //https://gist.github.com/guglielmo/16d880a6615da7f502116220cb551498
 
+import React from "react";
+
 import { is_mobile } from "src/core/feature_detection.js";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";

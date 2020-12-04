@@ -1,3 +1,5 @@
+import React from "react";
+
 const WellList = ({ elements }) => (
   <div>
     <ul className="list-unstyled">

@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 
 import { IconArrow } from "../icons/icons.js";
 import { create_text_maker } from "../models/text.js";

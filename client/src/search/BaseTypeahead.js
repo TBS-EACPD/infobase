@@ -1,7 +1,4 @@
-import "react-bootstrap-typeahead/css/Typeahead.css";
-// Uncomment following line once we've moved to bootstrap4
-// import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
-import "./BaseTypeahead.scss";
+import React from "react";
 import { Typeahead, Menu, MenuItem } from "react-bootstrap-typeahead";
 import ReactDOM from "react-dom";
 
@@ -13,6 +10,10 @@ import { get_static_url } from "../request_utils.js";
 import { InfoBaseHighlighter } from "./search_utils.js";
 
 import text from "./BaseTypeahead.yaml";
+import "react-bootstrap-typeahead/css/Typeahead.css";
+// Uncomment following line once we've moved to bootstrap4
+// import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
+import "./BaseTypeahead.scss";
 
 const text_maker = create_text_maker(text);
 const TextMaker = (props) => <TM tmf={text_maker} {...props} />;

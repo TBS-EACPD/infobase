@@ -1,3 +1,5 @@
+import React from "react";
+
 import { secondaryColor } from "src/core/color_defs.js";
 
 import { lang } from "src/app_bootstrap/globals.js";

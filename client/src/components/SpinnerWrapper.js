@@ -1,3 +1,5 @@
+import React from "react";
+
 import { Spinner, spinner_configs } from "../core/Spinner.js";
 
 import { LeafSpinner } from "./LeafSpinner.js";

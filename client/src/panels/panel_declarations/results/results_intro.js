@@ -1,3 +1,5 @@
+import React from "react";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
 import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
 

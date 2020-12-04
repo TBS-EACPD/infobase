@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
 import { tertiaryColor } from "src/core/color_defs.js";

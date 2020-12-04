@@ -1,3 +1,5 @@
+import React from "react";
+
 import { TrivialTM } from "../../components/index.js";
 
 export const SelectAllControl = ({ SelectAllOnClick, SelectNoneOnClick }) => (

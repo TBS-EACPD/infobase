@@ -1,6 +1,8 @@
 import { ResponsivePie } from "@nivo/pie";
 import classNames from "classnames";
 
+import React from "react";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
 
 import { Format, SmartDisplayTable } from "../../components/index.js";

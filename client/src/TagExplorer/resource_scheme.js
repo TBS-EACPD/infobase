@@ -1,3 +1,4 @@
+import React from "react";
 import { createSelector } from "reselect";
 
 import { trivial_text_maker as text_maker } from "src/models/text.js";

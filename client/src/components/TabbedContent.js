@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import React from "react";
 
 import { lang } from "src/app_bootstrap/globals.js";
 

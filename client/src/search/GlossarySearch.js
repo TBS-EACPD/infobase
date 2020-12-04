@@ -1,3 +1,4 @@
+import React from "react";
 import { withRouter } from "react-router";
 
 import { lang } from "src/app_bootstrap/globals.js";

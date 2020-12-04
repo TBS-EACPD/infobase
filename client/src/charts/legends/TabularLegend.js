@@ -1,4 +1,7 @@
+import React from "react";
+
 import { CheckBox } from "../../components/index.js";
+
 import "./TabularLegend.scss";
 
 export const TabularLegend = ({

@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   declare_panel,
   create_text_maker,

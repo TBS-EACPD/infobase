@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import React from "react";
 import FlipMove from "react-flip-move";
 import { TransitionGroup } from "react-transition-group";
 import { createSelector } from "reselect";

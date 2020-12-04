@@ -1,3 +1,5 @@
+import React from "react";
+
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
 import { StdPanel, Col, WrappedNivoPie, declare_panel } from "../../shared.js";

@@ -1,3 +1,4 @@
+import React from "react";
 import { withRouter } from "react-router";
 
 import { sha, previous_sha, build_date } from "src/app_bootstrap/globals.js";

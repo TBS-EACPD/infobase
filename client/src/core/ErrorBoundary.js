@@ -1,3 +1,4 @@
+import React from "react";
 import ReactDOM from "react-dom";
 
 import { lang, sha, is_dev } from "src/app_bootstrap/globals.js";

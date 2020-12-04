@@ -1,9 +1,10 @@
 /* eslint-disable import/no-unresolved  */
 /* eslint-disable import/order  */
 // strange error: "casing of graphiql does not match the underlying filesystem". Disable eslint import on this file
+import fetch from "isomorphic-fetch";
+import React from "react";
 
 import GraphiQL from "graphiql";
-import fetch from "isomorphic-fetch";
 
 import { SpinnerWrapper, ContainerEscapeHatch } from "../components/index.js";
 import { log_standard_event } from "../core/analytics.js";

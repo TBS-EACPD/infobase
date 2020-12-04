@@ -1,4 +1,4 @@
-
+import React from "react";
 
 import { SpinnerWrapper } from "../../components/index.js";
 import { ensure_loaded } from "../../core/lazy_loader";

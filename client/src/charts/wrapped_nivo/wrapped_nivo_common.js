@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
 import {
