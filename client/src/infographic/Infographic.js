@@ -17,7 +17,6 @@ import { Subject } from "../models/subject.js";
 import { get_panels_for_subject } from "../panels/get_panels_for_subject/index.js";
 import { PanelRenderer } from "../panels/PanelRenderer.js";
 
-import AccessibleBubbleMenu from "./a11y_bubble_menu.js";
 import { bubble_defs } from "./bubble_definitions.js";
 import { BubbleMenu } from "./BubbleMenu.js";
 
@@ -66,30 +65,18 @@ class AnalyticsSynchronizer extends React.Component {
   }
 }
 
-const get_sorted_bubbles_for_subj = (
-  bubbles_for_subject,
-  subject,
-  active_bubble_id
-) =>
-  _.chain(bubbles_for_subject)
-    .keys()
-    .sortBy((key) => bubble_defs[key].ix)
-    .map((key) => {
-      const bubble = bubble_defs[key];
-      return {
-        href: infograph_href_template(subject, key),
-        id: key,
-        title: bubble.title(subject),
-        description: `
-        <div>${bubble.title(subject)}</div>
-        <p>${bubble.description(subject)}</p>
-      `,
-        a11y_description: `<p>${bubble.description(subject)}</p>`,
-        active: bubble.id === active_bubble_id,
-        svg_content: bubble.svg_content,
-      };
-    })
+const get_sorted_bubbles_for_subj = (bubbles_for_subject, subject) =>
+  _.chain(bubble_defs)
+    .filter(({ id }) =>
+      _.chain(bubbles_for_subject).keys().includes(id).value()
+    )
+    .map((bubble_def) =>
+      _.mapValues(bubble_def, (bubble_option) =>
+        _.isFunction(bubble_option) ? bubble_option(subject) : bubble_option
+      )
+    )
     .value();
+
 const get_panels_for_subj_bubble = (panels_by_bubble, bubble_id) =>
   panels_by_bubble[bubble_id];
 
@@ -178,11 +165,7 @@ class InfoGraph_ extends React.Component {
     // Shortcircuit these to false when bubble menu is loading because the sorted bubbles can't be known yet
     const sorted_bubbles =
       bubble_menu_loading ||
-      get_sorted_bubbles_for_subj(
-        bubbles_for_subject,
-        subject,
-        active_bubble_id
-      );
+      get_sorted_bubbles_for_subj(bubbles_for_subject, subject);
     const panel_keys =
       bubble_menu_loading ||
       get_panels_for_subj_bubble(bubbles_for_subject, active_bubble_id);
@@ -233,12 +216,12 @@ class InfoGraph_ extends React.Component {
         <div>
           <div>
             {loading && <SpinnerWrapper config_name={"route"} />}
-            {!loading &&
-              (window.is_a11y_mode ? (
-                <AccessibleBubbleMenu items={sorted_bubbles} />
-              ) : (
-                <BubbleMenu items={sorted_bubbles} />
-              ))}
+            {!loading && (
+              <BubbleMenu
+                items={sorted_bubbles}
+                active_item_id={active_bubble_id}
+              />
+            )}
           </div>
         </div>
         <div role="main" aria-label={text_maker("main_infographic_content")}>
@@ -360,7 +343,9 @@ const Infographic = ({
 }) => {
   const SubjectModel = Subject[level];
   const subject = SubjectModel.lookup(subject_id);
-  const bubble_id = bubble_defs[active_bubble_id] ? active_bubble_id : null;
+  const bubble_id = _.find(bubble_defs, { id: active_bubble_id })
+    ? active_bubble_id
+    : null;
 
   if (is_fake_infographic(subject)) {
     const subject_parent = (() => {
