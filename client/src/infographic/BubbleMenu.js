@@ -1,25 +1,56 @@
 import classNames from "classnames";
 import "./BubbleMenu.scss";
 
-class BubbleMenu extends React.Component {
-  render() {
+import { TM } from "../components/index.js";
+import { trivial_text_maker } from "../models/text.js";
+
+const BubbleMenu = ({ items, active_item_id }) => {
+  if (window.is_a11y_mode) {
+    return (
+      <nav aria-label={trivial_text_maker("dataset_navigation")}>
+        <ul>
+          {_.map(items, ({ id, title, description, href }) => (
+            <li key={id}>
+              <a
+                onClick={() =>
+                  document
+                    .getElementById("infographic-explanation-focus")
+                    .focus()
+                }
+                href={href}
+              >
+                {title}
+                {id === active_item_id && (
+                  <span>
+                    - <TM k="you_are_here" />
+                  </span>
+                )}
+              </a>
+              <p>{description}</p>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    );
+  } else {
     return (
       <div style={{ position: "relative" }}>
-        <nav ref="main" className="bubble-menu">
-          {_.map(this.props.items, (item) => (
+        <nav className="bubble-menu">
+          {_.map(items, ({ id, title, description, href, svg_content }) => (
             <a
               className={classNames(
                 "centerer bubble-button",
-                item.active && "active"
+                id === active_item_id && "active"
               )}
-              href={item.href}
-              key={item.id}
+              href={href}
+              key={id}
             >
               <div className="bub-item">
-                <strong className="title">{item.title}</strong>
+                <strong className="title">{title}</strong>
                 <div
                   className="bub-svg"
-                  dangerouslySetInnerHTML={{ __html: item.svg_content }}
+                  title={description}
+                  dangerouslySetInnerHTML={{ __html: svg_content }}
                 />
               </div>
             </a>
@@ -28,6 +59,6 @@ class BubbleMenu extends React.Component {
       </div>
     );
   }
-}
+};
 
 export { BubbleMenu };
