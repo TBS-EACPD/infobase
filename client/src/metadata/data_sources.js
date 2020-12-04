@@ -1,8 +1,8 @@
 import React from "react";
 
-//circular dependency hack..
 import { lang } from "src/app_bootstrap/globals.js";
 
+//circular dependency hack..
 import { Table } from "../core/TableClass.js";
 import { GlossaryEntry } from "../models/glossary.js";
 import { create_text_maker } from "../models/text.js";
