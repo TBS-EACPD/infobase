@@ -69,6 +69,7 @@ export class StatelessModal extends React.Component {
     return (
       <Modal
         show={show}
+        size="xl"
         onHide={this.closeModal}
         dialogClassName={classNames(`modal-dialog`, additional_dialog_class)}
       >
