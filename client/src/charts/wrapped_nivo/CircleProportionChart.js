@@ -1,5 +1,6 @@
 import { ResponsiveBubble } from "@nivo/circle-packing";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
+
 import MediaQuery from "react-responsive";
 
 import { textColor } from "src/core/color_defs.js";

@@ -1,3 +1,5 @@
+import React from "react";
+
 import "./IconGrid.scss";
 
 export class IconGrid extends React.Component {

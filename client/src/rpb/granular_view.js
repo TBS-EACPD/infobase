@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   LabeledBox,
   AlertBanner,
@@ -5,7 +7,6 @@ import {
   Details,
   DropdownMenu,
 } from "../components/index.js";
-
 import { Subject } from "../models/subject.js";
 
 import { TextMaker, text_maker } from "./rpb_text_provider.js";

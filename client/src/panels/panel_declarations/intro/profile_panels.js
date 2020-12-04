@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   TextPanel,
   general_utils,
@@ -10,7 +12,6 @@ import {
 } from "../shared.js";
 
 import text from "./profile_panels.yaml";
-
 
 const { text_maker } = create_text_maker_component(text);
 const { sanitized_dangerous_inner_html, generate_href } = general_utils;

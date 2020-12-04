@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import React from "react";
 import "./BubbleMenu.scss";
 
 import { TM } from "../components/index.js";

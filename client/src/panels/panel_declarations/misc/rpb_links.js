@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   TextPanel,
   util_components,
@@ -8,7 +10,6 @@ import {
 } from "../shared.js";
 
 import text from "./rpb_links.yaml";
-
 
 const { WellList } = util_components;
 

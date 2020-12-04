@@ -1,3 +1,5 @@
+import React from "react";
+
 import { HeightClipper } from "../components/index.js";
 import { infograph_href_template } from "../link_utils.js";
 import { trivial_text_maker } from "../models/text.js";

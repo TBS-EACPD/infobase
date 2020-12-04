@@ -1,4 +1,6 @@
 import PropTypes from "prop-types";
+import React from "react";
+
 import "./LabeledTable.scss";
 
 export const LabeledTable = ({ title, TitleComponent, contents }) => (

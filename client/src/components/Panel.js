@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import React from "react";
 
 import { Details } from "./Details.js";
 import { FootnoteList } from "./FootnoteList.js";

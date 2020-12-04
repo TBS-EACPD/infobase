@@ -1,3 +1,5 @@
+import React from "react";
+
 import { highlightColor, textColor } from "src/core/color_defs.js";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";

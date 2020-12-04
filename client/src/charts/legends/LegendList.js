@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import React from "react";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 

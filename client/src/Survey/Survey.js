@@ -1,3 +1,5 @@
+import React from "react";
+
 import { EmailFrontend } from "../components/EmailFrontend.js";
 import { StandardRouteContainer } from "../core/NavComponents.js";
 import { create_text_maker } from "../models/text.js";

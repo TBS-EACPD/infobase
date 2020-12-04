@@ -5,6 +5,7 @@ import {
   graphql as apollo_connect,
 } from "@apollo/client";
 import { compressToBase64 } from "lz-string";
+import React from "react";
 
 import string_hash from "string-hash";
 

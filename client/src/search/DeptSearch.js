@@ -1,3 +1,4 @@
+import React from "react";
 import { withRouter } from "react-router";
 
 import { BaseTypeahead } from "./BaseTypeahead.js";

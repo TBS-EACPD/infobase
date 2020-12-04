@@ -1,3 +1,5 @@
+import React from "react";
+
 import { declare_panel, InfographicPanel } from "../../shared.js";
 
 import { SingleTagResourceExplorer } from "./rooted_resource_scheme.js";

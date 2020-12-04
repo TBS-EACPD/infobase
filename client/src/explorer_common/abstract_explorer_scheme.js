@@ -1,3 +1,4 @@
+import React from "react";
 import { connect, Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import redux_promise_middleware from "redux-promise-middleware";

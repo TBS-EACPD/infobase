@@ -1,3 +1,4 @@
+import React from "react";
 import MediaQuery from "react-responsive";
 
 import { highlightColor } from "src/core/color_defs.js";

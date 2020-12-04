@@ -1,3 +1,4 @@
+import React from "react";
 import { createSelector } from "reselect";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";

@@ -1,4 +1,5 @@
-import "./InfoLab.scss";
+import React from "react";
+
 import {
   create_text_maker_component,
   CardLeftImage,
@@ -9,6 +10,7 @@ import { create_text_maker } from "../models/text.js";
 import { get_static_url } from "../request_utils.js";
 
 import lab_text from "./InfoLab.yaml";
+import "./InfoLab.scss";
 
 const { TM } = create_text_maker_component(lab_text);
 const text_maker = create_text_maker(lab_text);

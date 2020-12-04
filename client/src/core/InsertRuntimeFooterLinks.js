@@ -1,3 +1,5 @@
+import React from "react";
+
 import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
 
 import { index_lang_lookups } from "../InfoBase/index_data.js";

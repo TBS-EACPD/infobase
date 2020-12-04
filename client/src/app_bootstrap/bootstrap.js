@@ -15,6 +15,7 @@ import {
   connectRouter,
 } from "connected-react-router";
 import { default as createHistory } from "history/createHashHistory";
+import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";

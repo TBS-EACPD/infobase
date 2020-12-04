@@ -1,5 +1,7 @@
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import React from "react";
+
 import "./FancyUL.scss";
 
 export const FancyUL = ({ className, title, TitleComponent, children }) => (

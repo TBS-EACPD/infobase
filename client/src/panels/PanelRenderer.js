@@ -1,9 +1,9 @@
+import React from "react";
 import { withRouter } from "react-router";
 
 import { shallowEqualObjectsOverKeys } from "../general_utils.js";
 
 import { PanelRegistry } from "./PanelRegistry.js";
-
 
 export const panel_context = React.createContext(null);
 

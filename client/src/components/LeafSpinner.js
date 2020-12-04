@@ -1,3 +1,5 @@
+import React from "react";
+
 import { primaryColor, secondaryColor } from "src/core/color_defs.js";
 
 import leaf_loading_spinner from "../svg/leaf-loading-spinner.svg";

@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
+
 import { withRouter } from "react-router-dom";
 
 import { SafeJSURL } from "src/general_utils";

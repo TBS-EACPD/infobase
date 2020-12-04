@@ -1,5 +1,7 @@
 import { ResponsiveBar } from "@nivo/bar";
 
+import React from "react";
+
 import { textColor } from "src/core/color_defs.js";
 
 import { SmartDisplayTable } from "../../components/index.js";

@@ -1,4 +1,6 @@
 import classNames from "classnames";
+import React from "react";
+
 import "./AlertBanner.scss";
 
 const banner_classes = ["info", "success", "warning", "danger"];

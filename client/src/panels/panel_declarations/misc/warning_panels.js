@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 
 import { lang } from "src/app_bootstrap/globals.js";
 

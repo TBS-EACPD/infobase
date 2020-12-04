@@ -1,3 +1,5 @@
+import React from "react";
+
 import { TreeMapControls } from "./TreeMapControls.js";
 import "./TreeMap.scss";
 

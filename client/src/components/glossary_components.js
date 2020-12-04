@@ -1,3 +1,5 @@
+import React from "react";
+
 import { backgroundColor, primaryColor } from "src/core/color_defs.js";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";

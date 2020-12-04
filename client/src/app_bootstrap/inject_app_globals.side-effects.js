@@ -1,8 +1,5 @@
 /* eslint-disable import/order */
 
-import React from "react";
-window.React = React;
-
 import _ from "lodash";
 window._ = _;
 import "./lodash-extensions.side-effects.js";

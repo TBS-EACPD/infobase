@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 

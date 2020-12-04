@@ -1,3 +1,5 @@
+import React from "react";
+
 import { trivial_text_maker } from "../models/text.js";
 import "./HeaderNotification.scss";
 

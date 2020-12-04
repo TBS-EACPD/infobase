@@ -1,3 +1,5 @@
+import React from "react";
+
 import { sanitized_dangerous_inner_html } from "../general_utils.js";
 import footnote_topic_text from "../models/footnotes/footnote_topics.yaml";
 

@@ -1,4 +1,7 @@
+import React from "react";
+
 import { TM } from "./TextMaker.js";
+
 import "./CardTopImage.scss";
 
 const CardTopImage = ({

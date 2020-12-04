@@ -1,3 +1,4 @@
+import React from "react";
 import { withRouter } from "react-router";
 
 import { trivial_text_maker } from "../models/text.js";
@@ -14,7 +15,6 @@ import {
   datasets as table_search_config,
   glossary_lite as glossary_lite_search_config,
 } from "./search_configs.js";
-
 
 const get_tag_search_configs = (
   include_tags_goco,

@@ -1,5 +1,5 @@
+import React from "react";
 import { Redirect } from "react-router";
-
 import "./Infographic.scss";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";

@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import * as Diff from "diff";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
 import {

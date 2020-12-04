@@ -1,3 +1,4 @@
+import React from "react";
 import { createSelector } from "reselect";
 
 import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";

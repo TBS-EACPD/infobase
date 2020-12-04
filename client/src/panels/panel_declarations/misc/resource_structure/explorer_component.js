@@ -1,6 +1,6 @@
 import "src/explorer_common/explorer-styles.scss";
 
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 
 import { Explorer } from "src/explorer_common/explorer_components.js";
 import { get_root } from "src/explorer_common/hierarchy_tools.js";
@@ -10,7 +10,6 @@ import {
   TabbedControls,
   run_template,
 } from "src/panels//panel_declarations/shared.js";
-
 
 import { actual_year, planning_year, TM } from "./utils";
 

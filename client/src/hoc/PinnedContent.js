@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import React from "react";
 import { InView } from "react-intersection-observer";
 import "intersection-observer";
 import ReactResizeDetector from "react-resize-detector";

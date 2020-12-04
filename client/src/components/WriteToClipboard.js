@@ -1,5 +1,5 @@
 import * as clipboard from "clipboard-polyfill";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 
 import { tertiaryColor, textLightColor } from "src/core/color_defs.js";
 

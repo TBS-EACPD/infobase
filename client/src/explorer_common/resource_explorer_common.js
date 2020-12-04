@@ -1,3 +1,4 @@
+import React from "react";
 import { createSelector } from "reselect";
 
 import { TrivialTM as TM, Format } from "../components/index.js";

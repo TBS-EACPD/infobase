@@ -1,3 +1,4 @@
+import React from "react";
 import { createSelector } from "reselect";
 
 import FootNote from "src/models/footnotes/footnotes.js";

@@ -1,3 +1,5 @@
+import React from "react";
+
 import "./TrinityItem.scss";
 
 export const TrinityItem = ({ img_url, title, href, onClick }) => (

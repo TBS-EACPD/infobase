@@ -1,3 +1,5 @@
+import React from "react";
+
 import { declare_panel } from "../../shared.js";
 
 import { KeyConcepts } from "./KeyConcepts.js";

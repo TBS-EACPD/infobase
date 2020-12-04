@@ -1,3 +1,5 @@
+import React from "react";
+
 import { is_dev_link } from "src/app_bootstrap/globals.js";
 
 export class DevFip extends React.Component {

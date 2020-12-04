@@ -1,3 +1,5 @@
+import React from "react";
+
 import { is_mobile } from "src/core/feature_detection.js";
 
 import { infograph_href_template, rpb_link } from "../../../../link_utils.js";

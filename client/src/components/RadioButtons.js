@@ -1,4 +1,6 @@
 import classNames from "classnames";
+import React from "react";
+
 import "./RadioButtons.scss";
 
 export const RadioButtons = ({ options, onChange }) => (

@@ -1,3 +1,5 @@
+import React from "react";
+
 //circular dependency hack..
 import { lang } from "src/app_bootstrap/globals.js";
 

@@ -1,3 +1,5 @@
+import React from "react";
+
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
 import { util_components } from "../../shared.js";

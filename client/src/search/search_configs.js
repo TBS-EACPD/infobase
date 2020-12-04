@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 
 import { Table } from "../core/TableClass.js";
 import { GlossaryEntry } from "../models/glossary.js";

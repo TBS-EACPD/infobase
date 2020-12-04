@@ -1,3 +1,5 @@
+import React from "react";
+
 import { IconGrid } from "../components/IconGrid.js";
 import { TM } from "../components/index.js";
 import { LabeledTable } from "../components/LabeledTable.js";

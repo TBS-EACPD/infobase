@@ -1,7 +1,8 @@
+import React from "react";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
 
 import { GraphOverlay } from "../../../components";
-
 import {
   formats,
   run_template,

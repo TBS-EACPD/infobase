@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
+
 import "./Tombstones.scss";
 
 const UnlabeledTombstone = ({ items }) => (

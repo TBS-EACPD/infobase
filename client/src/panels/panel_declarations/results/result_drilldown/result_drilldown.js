@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   util_components,
   InfographicPanel,

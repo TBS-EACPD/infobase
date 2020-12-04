@@ -1,3 +1,5 @@
+import React from "react";
+
 import { primaryColor, textColor } from "src/core/color_defs.js";
 
 import {

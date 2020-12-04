@@ -1,4 +1,5 @@
-import "src/explorer_common/explorer-styles.scss";
+import React from "react";
+
 import { SpinnerWrapper } from "src/components/index.js";
 
 import { ensure_loaded } from "src/core/lazy_loader.js";
@@ -16,6 +17,8 @@ import {
   route_arg_to_year_map,
   planning_year,
 } from "./utils.js";
+
+import "src/explorer_common/explorer-styles.scss";
 
 class ExplorerContainer extends React.Component {
   constructor(props) {
