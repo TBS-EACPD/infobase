@@ -51,6 +51,7 @@ export const declare_vote_stat_split_panel = () =>
 
       calculate(subject, options) {
         const { programVoteStat } = this.tables;
+
         const vote_stat = _.map(
           programVoteStat.programs.get(subject),
           (row) => ({
@@ -58,15 +59,30 @@ export const declare_vote_stat_split_panel = () =>
             value: row["{{pa_last_year}}"],
           })
         );
+
+        // check for either negative voted or statutory values, or 0 for both
+        if (
+          _.every(vote_stat, ({ value }) => value === 0) ||
+          (_.minBy(vote_stat, "value").value < 0 &&
+            _.maxBy(vote_stat, "value").value >= 0)
+        ) {
+          return false;
+        }
+
         const last_year_col = _.last(std_years);
         const last_year_col_obj = programVoteStat.col_from_nick(last_year_col);
+
         const rows = programVoteStat.q(subject).data;
         const {
           [text_maker("voted")]: voted_rows,
           [text_maker("stat")]: stat_rows,
         } = _.groupBy(rows, "vote_stat");
-        const voted_exp = last_year_col_obj.formula(voted_rows);
-        const stat_exp = last_year_col_obj.formula(stat_rows);
+
+        const voted_exp = voted_rows
+          ? last_year_col_obj.formula(voted_rows)
+          : 0;
+        const stat_exp = stat_rows ? last_year_col_obj.formula(stat_rows) : 0;
+
         const total_exp = voted_exp + stat_exp;
         const voted_pct = voted_exp / total_exp;
         const stat_pct = stat_exp / total_exp;
@@ -78,15 +94,6 @@ export const declare_vote_stat_split_panel = () =>
           stat_exp,
           voted_exp,
         };
-
-        // check for either negative voted or statutory values, or 0 for both
-        if (
-          _.every(vote_stat, ({ value }) => value === 0) ||
-          (_.minBy(vote_stat, "value").value < 0 &&
-            _.maxBy(vote_stat, "value").value >= 0)
-        ) {
-          return false;
-        }
 
         return { vote_stat, text_calculations };
       },
