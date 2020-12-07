@@ -1053,7 +1053,7 @@ you_are_here:
   fr: Vous êtes ici
 dataset_navigation:
   en: Dataset navigation
-  fr: Navigation dans l'ensemble de données
+  fr: Navigation dans les ensembles de données
 
 infographic_for:
   transform: [handlebars]
