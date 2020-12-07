@@ -60,7 +60,6 @@ drr_summary_text:
     {{else}}
       In its **{{year}}** {{gl_tt "Departmental Results Report" "DRR"}}, {{subject.name}} sought to achieve **{{fmt_big_int drr_results}}** results.
     {{/if}}
-
     Progress towards meeting these results was measured using **{{fmt_big_int drr_indicators}}** indicators, and a {{gl_tt "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
     based on the measured outcome of the indicator's target.
   fr: |
