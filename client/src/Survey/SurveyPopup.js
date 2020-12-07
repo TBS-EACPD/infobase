@@ -19,8 +19,8 @@ const survey_campaign_end_date = new Date(2021, 1, 1).getTime();
 const get_path_root = (path) =>
   _.chain(path).replace(/^\//, "").split("/").first().value();
 
-const seconds_in_five_minutes = 60 * 5;
-const seconds_in_a_half_year = 60 * 60 * 24 * (365 / 2);
+const miliseconds_in_five_minutes = 60 * 5 * 1000;
+const miliseconds_in_a_half_year = 60 * 60 * 24 * (365 / 2) * 1000;
 const should_reset_local_storage = () => {
   const is_deactivated = localStorage.getItem(
     `infobase_survey_popup_deactivated`
@@ -30,14 +30,15 @@ const should_reset_local_storage = () => {
     `infobase_survey_popup_postponed_since`
   );
   const stale_postponement =
-    postponed_since && Date.now() - postponed_since > seconds_in_five_minutes;
+    postponed_since &&
+    Date.now() - postponed_since > miliseconds_in_five_minutes;
 
   const deactivated_since = localStorage.getItem(
     `infobase_survey_popup_deactivated_since`
   );
   const stale_deactivation =
     deactivated_since &&
-    Date.now() - deactivated_since > seconds_in_a_half_year;
+    Date.now() - deactivated_since > miliseconds_in_a_half_year;
 
   return is_deactivated && (stale_postponement || stale_deactivation);
 };
