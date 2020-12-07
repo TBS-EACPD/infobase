@@ -76,27 +76,51 @@ export const declare_employee_fol_panel = () =>
       render({ calculations, footnotes, sources }) {
         const { panel_args, subject } = calculations;
 
-        const [eng, fr] = panel_args;
-        const eng_fr_only = [eng, fr];
+        const text_groups = (() => {
+          const has_eng_data = _.some(
+            panel_args,
+            ({ label }) => label === fol.eng.text
+          );
+          const has_fr_data = _.some(
+            panel_args,
+            ({ label }) => label === fol.fre.text
+          );
+          const has_eng_fr_data = has_eng_data && has_fr_data;
 
-        const text_calculations = { ...text_calculate(eng_fr_only), subject };
+          if (has_eng_fr_data) {
+            return _.filter(
+              panel_args,
+              ({ label }) => label === fol.eng.text || label === fol.fre.text
+            );
+          } else {
+            const sorted_groups = _.sortBy(panel_args, "five_year_percent");
+            return _.uniq([_.head(sorted_groups), _.last(sorted_groups)]);
+          }
+        })();
 
+        const text_calculations = {
+          ...text_calculate(text_groups),
+          single_type_flag: text_groups.length === 1,
+          subject,
+        };
         const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
-        let required_footnotes;
         const has_suppressed_data = _.some(
           panel_args,
           (graph_arg) => graph_arg.label === fol.sup.text
         );
-        if (has_suppressed_data) {
-          required_footnotes = footnotes;
-        } else {
-          required_footnotes = _.filter(
-            footnotes,
-            (footnote) =>
-              !_.some(footnote.topic_keys, (key) => key === "SUPPRESSED_DATA")
-          );
-        }
+
+        const required_footnotes = (() => {
+          if (has_suppressed_data) {
+            return footnotes;
+          } else {
+            return _.filter(
+              footnotes,
+              (footnote) =>
+                !_.some(footnote.topic_keys, (key) => key === "SUPPRESSED_DATA")
+            );
+          }
+        })();
 
         return (
           <StdPanel
