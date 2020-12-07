@@ -76,30 +76,53 @@ export const declare_employee_gender_panel = () =>
       render({ calculations, footnotes, sources }) {
         const { panel_args, subject } = calculations;
 
-        const [women, men] = panel_args;
-        const women_men_only = [women, men];
+        const text_groups = (() => {
+          const has_male_data = _.some(
+            panel_args,
+            ({ label }) => label === gender.male.text
+          );
+          const has_female_data = _.some(
+            panel_args,
+            ({ label }) => label === gender.female.text
+          );
+          const has_male_female_data = has_male_data && has_female_data;
+
+          if (has_male_female_data) {
+            return _.filter(
+              panel_args,
+              ({ label }) =>
+                label === gender.male.text || label === gender.female.text
+            );
+          } else {
+            const sorted_groups = _.sortBy(panel_args, "five_year_percent");
+            return _.uniq([_.head(sorted_groups), _.last(sorted_groups)]);
+          }
+        })();
 
         const text_calculations = {
-          ...text_calculate(women_men_only),
+          ...text_calculate(text_groups),
+          single_type_flag: text_groups.length === 1,
           subject,
         };
 
         const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
-        let required_footnotes;
         const has_suppressed_data = _.some(
           panel_args,
           (graph_arg) => graph_arg.label === gender.sup.text
         );
-        if (has_suppressed_data) {
-          required_footnotes = footnotes;
-        } else {
-          required_footnotes = _.filter(
-            footnotes,
-            (footnote) =>
-              !_.some(footnote.topic_keys, (key) => key === "SUPPRESSED_DATA")
-          );
-        }
+
+        const required_footnotes = (() => {
+          if (has_suppressed_data) {
+            return footnotes;
+          } else {
+            return _.filter(
+              footnotes,
+              (footnote) =>
+                !_.some(footnote.topic_keys, (key) => key === "SUPPRESSED_DATA")
+            );
+          }
+        })();
 
         return (
           <StdPanel
