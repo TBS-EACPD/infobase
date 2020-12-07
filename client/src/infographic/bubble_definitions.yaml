@@ -14,10 +14,10 @@ about_tag_title:
   en: About this tag
   fr: À propos de cette étiquette
 
-fin_title:
+financial_title:
   en: Finances
   fr: Finances
-fin_desc:
+financial_desc:
   en: What we plan on spending, what we can spend, what we have spent
   fr: Ce que nous comptons dépenser, ce que nous pouvons dépenser et ce que nous avons réellement dépensé
 
@@ -42,6 +42,9 @@ related_desc:
   en: Related links for continued exploration
   fr: Des liens connexes pour continuer à explorer
 
+all_data_title:
+  en: Datasets
+  fr: Tableaux de donées
 all_data_desc:
   en: Links to supporting data for these infographics, for further analysis
   fr: Des liens vers les données qui supportent les infographies pour continuer votre analyse
