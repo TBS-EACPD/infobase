@@ -85,18 +85,18 @@ actual_spending_footnote:
 
 lapse_by_votes:
   en: Lapsed Authorities by Vote
-  fr: TODO
+  fr: Autorisations périmées par crédit
 
 aggregated_lapse_by_votes:
   en: Aggregated Lapsed Authorities by Vote
-  fr: TODO
+  fr: Nombre d'autorisations périmées par crédit
 
 gov_lapse_by_votes_text:
   transform: [handlebars, markdown]
   en: Over the past five years, **{{subject.name}}** lapsed an average of **{{fmt_compact1_written avg_lapsed_by_votes}}**. This corresponds to **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** of the spending authorities granted by Parliament through an appropriation act.
-  fr: TODO
+  fr: Au cours des cinq dernières années, la péremption moyenne du **{{subject.name}}** s'est élevée à **{{fmt_compact1_written avg_lapsed_by_votes}}**. Cela correspond à **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** des autorisations de dépenses accordées par le Parlement par le biais d'une loi de crédit.
 
 dept_lapse_by_votes_text:
   transform: [handlebars, markdown]
   en: Over the past five years, **{{subject.name}}** lapsed an average of **{{fmt_compact1_written avg_lapsed_by_votes}}** from **{{num_of_votes}} votes**. On average, **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** of the spending authorities granted by Parliament to **{{subject.name}}** through an appropriation act have lapsed compared to an average government-wide lapse of **{{fmt_percentage1 gov_avg_lapsed_by_votes_pct}}**.
-  fr: TODO
+  fr: Au cours des cinq dernières années, pour trois crédits votés, la péremption moyenne **{{subject.name}}** s'est élevée à **{{fmt_compact1_written avg_lapsed_by_votes}}**. En moyenne, **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** des autorisations de dépenses accordées par le Parlement par le biais d'une loi de crédit sont devenues périmées, contre **{{fmt_percentage1 gov_avg_lapsed_by_votes_pct}}** en moyenne pour l'ensemble du gouvernement.
