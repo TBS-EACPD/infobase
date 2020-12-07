@@ -9,7 +9,7 @@ const text_maker = create_text_maker(text);
 
 const get_svg_content = (bubble_id) => _.get(svgs, `${bubble_id}.text`);
 
-// any config option can either be a value or a function (which will be passed the contextual infographic subject)
+// any config option, other than id, can either be a value or a function of the infographic subject
 const base_configs = [
   {
     id: "intro",
@@ -23,34 +23,39 @@ const base_configs = [
   },
   {
     id: "financial",
+    title: text_maker("financial_title"),
+    description: text_maker("financial_desc"),
   },
   {
     id: "people",
+    title: text_maker("people_title"),
+    description: text_maker("people_desc"),
   },
   {
     id: "results",
+    title: text_maker("results_title"),
+    description: text_maker("results_desc"),
   },
   {
     id: "related",
+    title: text_maker("related_title"),
+    description: text_maker("related_desc"),
   },
   {
     id: "all_data",
-    title: text_maker("datasets"),
+    title: text_maker("all_data_title"),
+    description: text_maker("all_data_desc"),
   },
 ];
 
-// Webpack error with the rest arg here?
-
 const bubble_defs = _.chain(base_configs)
-  .map(({ id, ...optional }) => [
-    {
-      id,
-      title: _.get(optional, "title", text_maker(`${id}_title`)),
-      description: _.get(optional, "description", text_maker(`${id}_desc`)),
-      href: (subject) => infograph_href_template(subject, id),
-      svg_content: get_svg_content(id),
-    },
-  ])
+  .map(({ id, title, description }) => ({
+    id,
+    title,
+    description,
+    href: (subject) => infograph_href_template(subject, id),
+    svg_content: get_svg_content(id),
+  }))
   .value();
 
 export { bubble_defs };
