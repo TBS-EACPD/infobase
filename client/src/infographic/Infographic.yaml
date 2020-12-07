@@ -69,7 +69,12 @@ invalid_redirect_home:
     If you know the subject of the infographic you intended to view (e.g. the organization or program name), please try finding it using our search bar below.
 
     If you believe something is incorrect on our end, we invite you to alert us using the Report a Problem form provided at the bottom of the page. Thank you!
-  fr: TODO
+  fr: |
+    Votre navigateur a tenté de visiter l'une de nos infographies. Malheureusement, nous n'avons pas pu reconnaître "{{param}}" en tant que paramètre infographique valide. Vous avez été redirigé vers la page d'accueil l'InfoBase du GC.
+
+    Si vous connaissez le sujet de l'infographie en question (p. ex. le nom de l'organisation ou du programme), essayez de le trouver via la barre de recherche ci-dessous.
+
+    Si une erreur s’est produite de notre côté, veuillez nous en informer au moyen du formulaire “Signaler un problème" au bas de la page. Merci!
 invalid_subject_redirect_parent_dept:
   transform: [handlebars]
   en: |
@@ -78,7 +83,12 @@ invalid_subject_redirect_parent_dept:
     You were likely following a link intended to take you to an infographic for a core responsibility or program belonging to this organization. You can view and navigate to all of this organization's valid core responsibilities and programs under "Where can I go from here?" below.
 
     If you believe something is incorrect on our end, we invite you to alert us using the Report a Problem form provided at the bottom of the page. Thank you!
-  fr: TODO
+  fr: |
+    Votre navigateur a tenté de visiter l'une de nos infographies. Malheureusement, nous n'avons pas pu reconnaître "{{subject_id}}" comme un paramètre infographique valide. Bien que le "{subject_id}}" n'ait pas été trouvé, nous avons pu faire correspondre la partie "{{dept_code}}" à une organisation valide. Nous vous avons redirigé vers l'infographie de cette organisation.
+
+    Vous suiviez probablement un lien qui devait vous conduire à une infographie pour une responsabilité essentielle ou un programme de cette organisation. Vous pouvez naviguer vers toutes les responsabilités essentielles et consulter tous les programmes valides de cette organisation sous la rubrique "Où puis-je aller à partir d'ici?”
+
+    Si une erreur s’est produite de notre côté, veuillez nous en informer en utilisant le TODO (Andre didn't finish the translation)
 
 
 
