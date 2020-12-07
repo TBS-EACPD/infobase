@@ -65,21 +65,6 @@ class AnalyticsSynchronizer extends React.Component {
   }
 }
 
-const get_sorted_bubbles_for_subj = (bubbles_for_subject, subject) =>
-  _.chain(bubble_defs)
-    .filter(({ id }) =>
-      _.chain(bubbles_for_subject).keys().includes(id).value()
-    )
-    .map((bubble_def) =>
-      _.mapValues(bubble_def, (bubble_option) =>
-        _.isFunction(bubble_option) ? bubble_option(subject) : bubble_option
-      )
-    )
-    .value();
-
-const get_panels_for_subj_bubble = (panels_by_bubble, bubble_id) =>
-  panels_by_bubble[bubble_id];
-
 function reset_scroll() {
   window.scrollTo(0, 0);
 }
@@ -91,7 +76,7 @@ class InfoGraph_ extends React.Component {
       bubble_menu_loading: true,
       infographic_loading: true,
       subject: props.subject,
-      bubbles_for_subject: {},
+      subject_panels_by_bubble_id: {},
       active_bubble_id: props.active_bubble_id,
       level: props.level,
     };
@@ -108,7 +93,7 @@ class InfoGraph_ extends React.Component {
         bubble_menu_loading: true,
         infographic_loading: true,
         subject: nextProps.subject,
-        bubbles_for_subject: {},
+        subject_panels_by_bubble_id: {},
         active_bubble_id: nextProps.active_bubble_id,
         level: nextProps.level,
       };
@@ -124,7 +109,6 @@ class InfoGraph_ extends React.Component {
       bubble_menu_loading,
       infographic_loading,
       active_bubble_id,
-      bubbles_for_subject,
     } = this.state;
 
     if (bubble_menu_loading) {
@@ -136,9 +120,7 @@ class InfoGraph_ extends React.Component {
         reset_scroll();
       }
       const options = SafeJSURL.parse(this.props.options);
-      const panel_keys =
-        bubble_menu_loading ||
-        get_panels_for_subj_bubble(bubbles_for_subject, active_bubble_id);
+      const panel_keys = this.get_panels_for_active_bubble();
 
       const linked_to_panel =
         options &&
@@ -154,23 +136,13 @@ class InfoGraph_ extends React.Component {
 
   render() {
     const { subject, active_bubble_id } = this.props;
-    const {
-      bubble_menu_loading,
-      infographic_loading,
-      bubbles_for_subject,
-    } = this.state;
+    const { bubble_menu_loading, infographic_loading } = this.state;
 
     const loading = bubble_menu_loading || infographic_loading;
 
-    // Shortcircuit these to false when bubble menu is loading because the sorted bubbles can't be known yet
-    const sorted_bubbles =
-      bubble_menu_loading ||
-      get_sorted_bubbles_for_subj(bubbles_for_subject, subject);
-    const panel_keys =
-      bubble_menu_loading ||
-      get_panels_for_subj_bubble(bubbles_for_subject, active_bubble_id);
-    const { prev, next } =
-      bubble_menu_loading || this.get_previous_and_next_bubbles();
+    const bubble_defs = this.get_bubble_defs_for_subj();
+    const panel_keys = this.get_panels_for_active_bubble();
+    const { prev, next } = this.get_previous_and_next_bubbles();
 
     const search_component = (
       <AdvancedSearch
@@ -218,7 +190,7 @@ class InfoGraph_ extends React.Component {
             {loading && <SpinnerWrapper config_name={"route"} />}
             {!loading && (
               <BubbleMenu
-                items={sorted_bubbles}
+                items={bubble_defs}
                 active_item_id={active_bubble_id}
               />
             )}
@@ -281,15 +253,44 @@ class InfoGraph_ extends React.Component {
     );
   }
 
-  get_previous_and_next_bubbles(bubble_areas) {
-    const { subject, active_bubble_id } = this.props;
-    const { bubbles_for_subject } = this.state;
+  get_panels_for_active_bubble() {
+    const {
+      bubble_menu_loading,
+      subject_panels_by_bubble_id,
+      active_bubble_id,
+    } = this.state;
 
-    const bubbles = get_sorted_bubbles_for_subj(
-      bubbles_for_subject,
-      subject,
-      active_bubble_id
+    return bubble_menu_loading || subject_panels_by_bubble_id[active_bubble_id];
+  }
+
+  get_bubble_defs_for_subj() {
+    const { subject } = this.props;
+    const { bubble_menu_loading, subject_panels_by_bubble_id } = this.state;
+
+    return (
+      bubble_menu_loading ||
+      _.chain(bubble_defs)
+        .filter(({ id }) =>
+          _.chain(subject_panels_by_bubble_id).keys().includes(id).value()
+        )
+        .map((bubble_def) =>
+          _.mapValues(bubble_def, (bubble_option) =>
+            _.isFunction(bubble_option) ? bubble_option(subject) : bubble_option
+          )
+        )
+        .value()
     );
+  }
+
+  get_previous_and_next_bubbles() {
+    const { active_bubble_id } = this.props;
+    const { bubble_menu_loading } = this.state;
+
+    if (bubble_menu_loading) {
+      return false;
+    }
+
+    const bubbles = this.get_bubble_defs_for_subj();
     const active_index = _.findIndex(bubbles, { id: active_bubble_id });
 
     return {
@@ -303,16 +304,21 @@ class InfoGraph_ extends React.Component {
       subject: subject,
       has_results: true,
     }).then(() =>
-      get_panels_for_subject(subject).then((bubbles_for_subject) =>
-        this.setState({ bubble_menu_loading: false, bubbles_for_subject })
+      get_panels_for_subject(subject).then((subject_panels_by_bubble_id) =>
+        this.setState({
+          bubble_menu_loading: false,
+          subject_panels_by_bubble_id,
+        })
       )
     );
   }
-  loadGraphDeps({ bubbles_for_subject, active_bubble_id, subject, level }) {
-    const panel_keys = get_panels_for_subj_bubble(
-      bubbles_for_subject,
-      active_bubble_id
-    );
+  loadGraphDeps({
+    subject_panels_by_bubble_id,
+    active_bubble_id,
+    subject,
+    level,
+  }) {
+    const panel_keys = this.get_panels_for_active_bubble();
     ensure_loaded({
       panel_keys,
       subject_level: level,
