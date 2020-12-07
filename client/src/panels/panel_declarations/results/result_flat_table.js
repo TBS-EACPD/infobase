@@ -82,6 +82,7 @@ const subject_link = (node) => (
       {node.data.name}
     </a>
     <span className="text-nowrap">
+      {" "}
       (
       {text_maker(
         node.data.subject.level === "program"
