@@ -193,21 +193,9 @@ quick_link_auth_and_exp:
   en: 2017-18 Authorities and Expenditures
   fr: Autorisations et dépenses de 2017-2018
 
-quick_link_planned_spending_by_program:
-  en: 2019-20 Planned Spending by Program
-  fr: Dépenses prévues par programme de 2019-2020
-
-quick_link_planned_ftes_by_program:
-  en: 2019-20 Planned Full-Time Equivalents (FTEs) by Program
-  fr: Équivalents temps plein (ETP) prévus par programme de 2019-2020
-
-quick_link_spending_by_program:
-  en: 2019-20 Spending by Program
-  fr: Dépenses par Programme de 2019-2020
-
-quick_link_ftes_by_program:
-  en: 2019-20 Full-Time Equivalents (FTEs) by Program
-  fr: Équivalents temps plein (ETP) par programme de 2019-2020
+quick_link_gov_spending:
+  en: 2019-20 Government Spending
+  fr: dépenses du gouvernement de 2019-2020
 
 quick_link_tp_by_region:
   en: Transfer payments by recipient region
