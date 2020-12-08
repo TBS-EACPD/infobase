@@ -1,8 +1,7 @@
 import {
+  api_load_covid_measures,
   api_load_covid_estimates,
   api_load_covid_estimates_gov_summary,
-  api_load_covid_initiatives,
-  api_load_covid_measures,
 } from "../models/covid/populate.js";
 import { load_footnotes_bundle } from "../models/footnotes/populate_footnotes.js";
 import { load_horizontal_initiative_lookups } from "../models/populate_horizontal_initiative_lookups.js";
@@ -19,20 +18,18 @@ import { PanelRegistry, tables_for_panel } from "../panels/PanelRegistry.js";
 
 import { Table } from "./TableClass.js";
 
-// given an array of tables, returns a promise when they are all loaded.
-function load(table_objs) {
+function load_tables(table_set) {
   return Promise.all(
-    _.chain(table_objs)
-      .reject(_.property("loaded")) //ignore tables that are already loaded
+    _.chain(table_set)
+      .reject(_.property("loaded"))
       .map((table) => table.load())
       .value()
   );
 }
 
 function ensure_loaded({
-  panel_keys,
-  stat_keys,
   table_keys,
+  panel_keys,
   subject_level,
   subject,
   has_results,
@@ -43,7 +40,6 @@ function ensure_loaded({
   has_services,
   services,
   covid_measures,
-  covid_initiatives,
   covid_estimates,
   covid_estimates_gov_summary,
   footnotes_for: footnotes_subject,
@@ -59,30 +55,23 @@ function ensure_loaded({
     .map((table_key) => Table.lookup(table_key))
     .value();
 
-  //results can be required explicitly, or be a dependency of a panel/statistic
+  const panel_set = _.map(panel_keys, (key) =>
+    PanelRegistry.lookup(key, subject_level)
+  );
+
+  const check_for_panel_dependency = (dependency_key) =>
+    _.chain(panel_set).map(dependency_key).some().value();
+
   const should_load_results =
-    results ||
-    _.chain(panel_keys)
-      .map((key) => PanelRegistry.lookup(key, subject_level))
-      .map("requires_results")
-      .some()
-      .value();
+    results || check_for_panel_dependency("requires_results");
 
   const should_load_result_counts =
     requires_result_counts ||
-    _.chain(panel_keys)
-      .map((key) => PanelRegistry.lookup(key, subject_level))
-      .map("requires_result_counts")
-      .some()
-      .value();
+    check_for_panel_dependency("requires_result_counts");
 
   const should_load_granular_result_counts =
     requires_granular_result_counts ||
-    _.chain(panel_keys)
-      .map((key) => PanelRegistry.lookup(key, subject_level))
-      .map("requires_granular_result_counts")
-      .some()
-      .value();
+    check_for_panel_dependency("requires_granular_result_counts");
 
   const should_load_horizontal_initiative_lookups =
     subject &&
@@ -91,63 +80,32 @@ function ensure_loaded({
     _.isUndefined(subject.lookups);
 
   const should_load_has_services =
-    has_services ||
-    _.chain(panel_keys)
-      .map((key) => PanelRegistry.lookup(key, subject_level))
-      .map("requires_has_services")
-      .some()
-      .value();
+    has_services || check_for_panel_dependency("requires_has_services");
 
   const should_load_services =
-    services ||
-    _.chain(panel_keys)
-      .map((key) => PanelRegistry.lookup(key, subject_level))
-      .map("requires_services")
-      .some()
-      .value();
+    services || check_for_panel_dependency("requires_services");
 
   const should_load_covid_estimates =
-    covid_estimates ||
-    _.chain(panel_keys)
-      .map((key) => PanelRegistry.lookup(key, subject_level))
-      .map("requires_covid_estimates")
-      .some()
-      .value();
+    covid_estimates || check_for_panel_dependency("requires_covid_estimates");
 
   const should_load_covid_estimates_gov_summary =
     covid_estimates_gov_summary ||
-    _.chain(panel_keys)
-      .map((key) => PanelRegistry.lookup(key, subject_level))
+    _.chain(panel_set)
       .map("requires_covid_estimates_gov_summary")
       .some()
       .value();
 
-  const should_load_covid_initiatives =
-    covid_initiatives ||
-    _.chain(panel_keys)
-      .map((key) => PanelRegistry.lookup(key, subject_level))
-      .map("requires_covid_initiatives")
-      .some()
-      .value();
-
   const should_load_covid_measures =
-    covid_measures ||
-    _.chain(panel_keys)
-      .map((key) => PanelRegistry.lookup(key, subject_level))
-      .map("requires_covid_measures")
-      .some()
-      .value();
+    covid_measures || check_for_panel_dependency("requires_covid_measures");
 
   const result_docs_to_load = !_.isEmpty(result_docs)
     ? result_docs
-    : _.chain(panel_keys)
-        .map((key) => PanelRegistry.lookup(key, subject_level))
+    : _.chain(panel_set)
         .map("required_result_docs")
         .flatten()
         .uniq()
         .compact()
         .value();
-
   const results_prom = should_load_results
     ? api_load_results_bundle(subject, result_docs_to_load)
     : Promise.resolve();
@@ -190,16 +148,12 @@ function ensure_loaded({
     ? api_load_covid_estimates_gov_summary()
     : Promise.resolve();
 
-  const covid_initiatives_prom = should_load_covid_initiatives
-    ? api_load_covid_initiatives(subject)
-    : Promise.resolve();
-
   const covid_measures_prom = should_load_covid_measures
     ? api_load_covid_measures()
     : Promise.resolve();
 
   return Promise.all([
-    load(table_set),
+    load_tables(table_set),
     results_prom,
     result_counts_prom,
     has_results_prom,
@@ -208,7 +162,6 @@ function ensure_loaded({
     has_services_prom,
     services_prom,
     horizontal_initiative_lookups_prom,
-    covid_initiatives_prom,
     covid_measures_prom,
     covid_estimates_prom,
     covid_estimates_gov_summary_prom,
