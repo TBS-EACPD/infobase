@@ -38,11 +38,11 @@ export default function (model_singleton) {
   const loaders = {
     covid_measure_loader: create_resource_by_id_attr_dataloader(
       CovidMeasure,
-      "measure_id"
+      "covid_measure_id"
     ),
     covid_measures_by_org_id_loader: create_resource_by_foreignkey_attr_dataloader(
       CovidMeasure,
-      "estimates.org_id"
+      "covid_estimates.org_id"
     ),
     covid_estimates_summary_by_org_id_loader: create_resource_by_foreignkey_attr_dataloader(
       CovidEstimatesSummary,
