@@ -41,7 +41,6 @@ function ensure_loaded({
   services,
   covid_measures,
   covid_estimates,
-  covid_estimates_gov_summary,
   footnotes_for: footnotes_subject,
 }) {
   const table_set = _.chain(table_keys)

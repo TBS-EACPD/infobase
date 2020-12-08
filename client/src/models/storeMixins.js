@@ -104,22 +104,22 @@ export const SubjectMixin = (superclass) => {
   };
 };
 
-export const CanHaveAPIData = (superclass) => {
+export const CanHaveServerData = (data_types) => (superclass) => {
   const baseclass = superclass || BaseClass;
   return class SubjectMixin extends baseclass {
     constructor() {
       super();
-      this._has_data = {
-        results_data: null,
-        services_data: null,
-      };
-      this._API_data_types = _.keys(this._has_data);
+      this._API_data_types = data_types;
+      this._has_data = _.chain(data_types)
+        .map((data_type) => [data_type, null])
+        .fromPairs()
+        .value();
     }
     set_has_data(data_type, has_data) {
       if (_.includes(this._API_data_types, data_type)) {
         this._has_data[data_type] = has_data;
       } else {
-        throw `"${data_type}" is not a valid API data type for "has data" checks`;
+        throw `"${data_type}" is not a valid API data type for this subject`;
       }
     }
     has_data(data_type) {
@@ -130,7 +130,7 @@ export const CanHaveAPIData = (superclass) => {
           return this._has_data[data_type];
         }
       } else {
-        throw `"${data_type}" is not a valid API data type for "has data" checks`;
+        throw `"${data_type}" is not a valid API data type for this subject`;
       }
     }
   };

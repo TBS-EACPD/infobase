@@ -21,9 +21,9 @@ import {
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
 } from "../../core/color_schemes.js";
+import { ensure_loaded } from "../../core/ensure_loaded.js";
 import { formats, formatter } from "../../core/format.js";
 
-import { ensure_loaded } from "../../core/lazy_loader.js";
 import { Table } from "../../core/TableClass.js";
 
 import * as general_utils from "../../general_utils.js";

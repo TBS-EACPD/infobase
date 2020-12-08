@@ -1,4 +1,4 @@
-import { ensure_loaded } from "../../core/lazy_loader.js";
+import { ensure_loaded } from "../../core/ensure_loaded.js";
 
 import {
   // shared all
@@ -68,7 +68,7 @@ export const get_dept_panels = (subject) =>
       declare_welcome_mat_panel(),
       declare_auth_exp_planned_spending_panel(),
       declare_in_year_estimates_split_panel(),
-      declare_covid_estimates_panel(),
+      //declare_covid_estimates_panel(),
       declare_in_year_voted_stat_split_panel(),
       declare_estimates_in_perspective_panel(),
       declare_tp_by_region_panel(),
@@ -92,7 +92,7 @@ export const get_dept_panels = (subject) =>
       declare_employee_fol_panel(),
       declare_employee_gender_panel(),
     ],
-    results: subject.has_data("results_data") && [
+    results: subject.has_data("results") && [
       declare_results_key_concepts_panel(),
       declare_late_results_warning_panel(),
       declare_late_actual_resources_panel(),

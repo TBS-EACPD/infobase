@@ -8,7 +8,7 @@ import { withRouter } from "react-router";
 
 import { SpinnerWrapper, LabeledBox } from "../components/index.js";
 import { log_standard_event } from "../core/analytics.js";
-import { ensure_loaded } from "../core/lazy_loader.js";
+import { ensure_loaded } from "../core/ensure_loaded.js";
 import {
   StandardRouteContainer,
   LangSynchronizer,

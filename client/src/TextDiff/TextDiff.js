@@ -10,7 +10,7 @@ import {
   create_text_maker_component,
   SpinnerWrapper,
 } from "../components";
-import { ensure_loaded } from "../core/lazy_loader.js";
+import { ensure_loaded } from "../core/ensure_loaded.js";
 import { StandardRouteContainer } from "../core/NavComponents.js";
 
 import { result_docs } from "../models/results.js";

@@ -9,7 +9,7 @@ import {
 } from "../components/index.js";
 import { log_standard_event } from "../core/analytics.js";
 
-import { ensure_loaded } from "../core/lazy_loader.js";
+import { ensure_loaded } from "../core/ensure_loaded.js";
 import { StandardRouteContainer } from "../core/NavComponents";
 import { shallowEqualObjectsOverKeys, SafeJSURL } from "../general_utils.js";
 import { Subject } from "../models/subject.js";

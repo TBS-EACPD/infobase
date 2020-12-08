@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { createSelector } from "reselect";
 
 import { EverythingSearch, SpinnerWrapper } from "../../components/index.js";
-import { ensure_loaded } from "../../core/lazy_loader.js";
+import { ensure_loaded } from "../../core/ensure_loaded.js";
 import { StandardRouteContainer } from "../../core/NavComponents.js";
 import { Subject } from "../../models/subject.js";
 import { create_text_maker } from "../../models/text.js";

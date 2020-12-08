@@ -2,7 +2,7 @@ import {
   SpinnerWrapper,
   ContainerEscapeHatch,
 } from "../../components/index.js";
-import { ensure_loaded } from "../../core/lazy_loader.js";
+import { ensure_loaded } from "../../core/ensure_loaded.js";
 
 import { StandardRouteContainer } from "../../core/NavComponents.js";
 
@@ -13,7 +13,6 @@ import {
   all_data_types,
   remapped_data_types,
 } from "./perspectives/index.js";
-
 
 export default class PartitionRoute extends React.Component {
   constructor() {

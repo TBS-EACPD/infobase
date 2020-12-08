@@ -4,7 +4,6 @@ import { log_standard_event } from "../../core/analytics.js";
 import { get_client } from "../../graphql_utils/graphql_utils.js";
 
 import { CovidEstimates } from "./CovidEstimates.js";
-import { CovidInitiatives } from "./CovidInitiatives.js";
 import { CovidMeasures } from "./CovidMeasures.js";
 
 const covid_estimates_query_fragment = `

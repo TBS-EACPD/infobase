@@ -1,5 +1,5 @@
 import { SpinnerWrapper } from "../components/index.js";
-import { ensure_loaded } from "../core/lazy_loader.js";
+import { ensure_loaded } from "../core/ensure_loaded.js";
 import { StandardRouteContainer } from "../core/NavComponents";
 
 import { EstimatesExplorer } from "./scheme.js";

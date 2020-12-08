@@ -28,7 +28,7 @@ const _subject_has_results = {}; // This is also populated as a side effect of a
 export const subject_has_results = (subject) => {
   const has_results_is_loaded = (() => {
     try {
-      subject.has_data("results_data");
+      subject.has_data("results");
     } catch (error) {
       return false;
     }
@@ -47,11 +47,11 @@ export const subject_has_results = (subject) => {
       subject.is_internal_service
     ) {
       // opimization for internal services, they never have results
-      subject.set_has_data("results_data", false);
+      subject.set_has_data("results", false);
       return Promise.resolve();
     } else if (!_.isUndefined(_subject_has_results[id])) {
       // case where _subject_has_results was populated by side effect but the subject.has_data status hasn't yet synced
-      subject.set_has_data("results_data", _subject_has_results[id]);
+      subject.set_has_data("results", _subject_has_results[id]);
       return Promise.resolve();
     } else {
       const time_at_request = Date.now();
@@ -85,7 +85,7 @@ export const subject_has_results = (subject) => {
           }
 
           _subject_has_results[id] = has_results;
-          subject.set_has_data("results_data", has_results);
+          subject.set_has_data("results", has_results);
 
           return Promise.resolve();
         })

@@ -1,4 +1,4 @@
-import { ensure_loaded } from "../../core/lazy_loader.js";
+import { ensure_loaded } from "../../core/ensure_loaded.js";
 
 import {
   // shared all
@@ -53,7 +53,7 @@ export const get_crso_panels = (subject) =>
       declare_dp_rev_split_panel(),
     ],
     results: !subject.is_internal_service &&
-      subject.has_data("results_data") && [
+      subject.has_data("results") && [
         declare_dead_crso_warning_panel(),
         declare_results_key_concepts_panel(),
         declare_late_actual_resources_panel(),

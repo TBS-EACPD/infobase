@@ -1,7 +1,5 @@
-
-
 import { SpinnerWrapper } from "../../components/index.js";
-import { ensure_loaded } from "../../core/lazy_loader";
+import { ensure_loaded } from "../../core/ensure_loaded";
 import { StandardRouteContainer } from "../../core/NavComponents.js";
 import { Subject } from "../../models/subject";
 import { create_text_maker } from "../../models/text.js";

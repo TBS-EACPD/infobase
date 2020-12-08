@@ -1,4 +1,4 @@
-import { ensure_loaded } from "../core/lazy_loader.js";
+import { ensure_loaded } from "../core/ensure_loaded.js";
 import { Table } from "../core/TableClass.js";
 
 import { Subject } from "../models/subject.js";
