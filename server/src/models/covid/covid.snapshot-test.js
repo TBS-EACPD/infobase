@@ -6,34 +6,31 @@ query ($lang: String = "en") {
     covid_measures {
       id
       name
-    }
-  }
-}`;
 
-const all_covid_estimates_query = `
-query ($lang: String = "en") {
-  root(lang: $lang) {
-    covid_estimates {
-      org_id
-
-      fiscal_year
-      est_doc
-      vote
-      stat
-    }
-  }
-}`;
-
-const org_covid_estimates_query = `
-query ($lang: String = "en") {
-  root(lang: $lang) {
-    org(org_id: "133") {
       covid_estimates {
+        id
+    
+        org_id
+        org {
+          id
+          name
+        }
+    
         fiscal_year
         est_doc
         vote
         stat
       }
+    }
+  }
+}`;
+
+const specific_covid_measures_query = `
+query ($lang: String = "en", $covid_measure_id: String = "COV001") {
+  root(lang: $lang) {
+    covid_measure(covid_measure_id: $covid_measure_id) {
+      id
+      name
     }
   }
 }`;
@@ -43,30 +40,7 @@ query ($lang: String = "en") {
   root(lang: $lang) {
     gov {
       covid_estimates_summary {
-        fiscal_year
-        est_doc
-        vote
-        stat
-      }
-    }
-  }
-}`;
-
-const all_covid_initiatives_query = `
-query ($lang: String = "en") {
-  root(lang: $lang) {
-    covid_initiatives {
-      id
-      name
-
-      estimates {
-        org_id
-
-        covid_measure_ids
-        covid_measures {
-          id
-          name
-        }
+        id
 
         fiscal_year
         est_doc
@@ -76,23 +50,40 @@ query ($lang: String = "en") {
     }
   }
 }`;
-const org_covid_initiatives_query = `
+
+const org_covid_estimates_summary_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
-    org(org_id: "133") {
-      covid_initiatives {
+    org(org_id:"133") {
+      covid_estimates_summary {
+        id
+
+        fiscal_year
+        est_doc
+        vote
+        stat
+      }
+    }
+  }
+}`;
+
+const org_covid_measures_query = `
+query ($lang: String = "en") {
+  root(lang: $lang) {
+    org(org_id:"133") {
+      covid_measures {
         id
         name
 
-        estimates {
+        covid_estimates {
+          id
+      
           org_id
-
-          covid_measure_ids
-          covid_measures {
+          org {
             id
             name
           }
-
+      
           fiscal_year
           est_doc
           vote
@@ -108,24 +99,20 @@ describe("covid data", () => {
     const data = await execQuery(all_covid_measures_query, {});
     return expect(data).toMatchSnapshot();
   });
-  it("All covid estimates", async () => {
-    const data = await execQuery(all_covid_estimates_query, {});
-    return expect(data).toMatchSnapshot();
-  });
-  it("Org covid estimates", async () => {
-    const data = await execQuery(org_covid_estimates_query, {});
+  it("Specific covid measure", async () => {
+    const data = await execQuery(specific_covid_measures_query, {});
     return expect(data).toMatchSnapshot();
   });
   it("Gov covid estimates summary", async () => {
     const data = await execQuery(gov_covid_estimates_summary_query, {});
     return expect(data).toMatchSnapshot();
   });
-  it("All covid initiatives and initiative estimates", async () => {
-    const data = await execQuery(all_covid_initiatives_query, {});
+  it("Org covid estimates summary", async () => {
+    const data = await execQuery(org_covid_estimates_summary_query, {});
     return expect(data).toMatchSnapshot();
   });
-  it("Org covid initiatives and initiative estimates", async () => {
-    const data = await execQuery(org_covid_initiatives_query, {});
+  it("Org covid measures", async () => {
+    const data = await execQuery(org_covid_measures_query, {});
     return expect(data).toMatchSnapshot();
   });
 });
