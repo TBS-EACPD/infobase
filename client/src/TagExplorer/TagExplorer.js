@@ -3,7 +3,7 @@ import React from "react";
 
 import { SpinnerWrapper } from "src/components/index.js";
 
-import { ensure_loaded } from "src/core/lazy_loader.js";
+import { ensure_loaded } from "src/core/ensure_loaded.js";
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import {

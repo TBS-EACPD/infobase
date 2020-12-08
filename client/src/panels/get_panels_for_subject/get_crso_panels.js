@@ -28,7 +28,7 @@ import {
   declare_crso_by_prog_exp_panel,
 } from "src/panels/panel_declarations/index.js";
 
-import { ensure_loaded } from "src/core/lazy_loader.js";
+import { ensure_loaded } from "src/core/ensure_loaded.js";
 
 // To be safe, ensure all used has_<data> checks are loaded
 export const get_crso_panels = (subject) =>
@@ -53,7 +53,7 @@ export const get_crso_panels = (subject) =>
       declare_dp_rev_split_panel(),
     ],
     results: !subject.is_internal_service &&
-      subject.has_data("results_data") && [
+      subject.has_data("results") && [
         declare_dead_crso_warning_panel(),
         declare_results_key_concepts_panel(),
         declare_late_actual_resources_panel(),

@@ -31,9 +31,8 @@ import {
   infoDarkColor,
 } from "src/core/color_defs.js";
 
+import { ensure_loaded } from "src/core/ensure_loaded.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
-import { ensure_loaded } from "src/core/lazy_loader.js";
 
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 

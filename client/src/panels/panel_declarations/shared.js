@@ -26,8 +26,8 @@ import {
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
 } from "src/core/color_schemes.js";
+import { ensure_loaded } from "src/core/ensure_loaded.js";
 import { formats, formatter } from "src/core/format.js";
-import { ensure_loaded } from "src/core/lazy_loader.js";
 import { Table } from "src/core/TableClass.js";
 
 import { Canada } from "src/charts/canada/index.js";

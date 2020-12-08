@@ -8,7 +8,6 @@ import { lang } from "src/core/injected_build_constants.js";
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import { CovidEstimates } from "./CovidEstimates.js";
-import { CovidInitiatives } from "./CovidInitiatives.js";
 import { CovidMeasures } from "./CovidMeasures.js";
 
 const covid_estimates_query_fragment = `

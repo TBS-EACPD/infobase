@@ -45,7 +45,7 @@ export function api_load_subject_has_services(subject) {
   if (is_loaded) {
     // ensure that subject.has_data matches _subject_has_services, since _subject_has_services hay have been updated via side-effect
     subject.set_has_data(
-      `services_data`,
+      "services",
       _.get(_subject_has_services, `${level}.${id}`)
     );
     return Promise.resolve();
@@ -81,7 +81,7 @@ export function api_load_subject_has_services(subject) {
         });
       }
 
-      subject.set_has_data(`services_data`, response_data[`hasServices`]);
+      subject.set_has_data("services", response_data[`hasServices`]);
 
       // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
       // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh
