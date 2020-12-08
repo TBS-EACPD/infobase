@@ -1,4 +1,4 @@
-"org_id","fiscal_year","est_doc","measure_id","vote","stat"
+"org_id","fiscal_year","est_doc","covid_measure_id","vote","stat"
 1,2020,"SEA","COV064",15000000,62500000
 1,2020,"SEA","COV038",,75000000
 1,2020,"SEA","COV057",,50000000
