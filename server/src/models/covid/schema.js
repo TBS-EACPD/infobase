@@ -68,7 +68,17 @@ export default function ({ models, loaders }) {
     },
     Org: {
       covid_measures: ({ org_id }) =>
-        covid_measures_by_org_id_loader.load(org_id),
+        covid_measures_by_org_id_loader.load(org_id).then((measures) =>
+          _.map(measures, (measure) =>
+            _.assign(measure, {
+              covid_estimates: _.filter(
+                measure.covid_estimates,
+                ({ org_id: estimate_row_org_id }) =>
+                  estimate_row_org_id === org_id
+              ),
+            })
+          )
+        ),
       covid_estimates_summary: ({ org_id }) =>
         covid_estimates_summary_by_org_id_loader.load(org_id),
     },
