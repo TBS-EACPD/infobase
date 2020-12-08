@@ -7,13 +7,18 @@ import {
   staticStoreMixin,
   PluralSingular,
   SubjectMixin,
-  CanHaveAPIData,
+  CanHaveServerData,
 } from "./storeMixins.js";
 
 const static_subject_store = () =>
   mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
-const static_subject_store_with_API_data = () =>
-  mix().with(staticStoreMixin, PluralSingular, SubjectMixin, CanHaveAPIData);
+const static_subject_store_with_server_data = (data_types) =>
+  mix().with(
+    staticStoreMixin,
+    PluralSingular,
+    SubjectMixin,
+    CanHaveServerData(data_types)
+  );
 
 const Gov = {
   constructor: {
@@ -69,7 +74,11 @@ const Ministry = class Ministry extends static_subject_store() {
   }
 };
 
-const Dept = class Dept extends static_subject_store_with_API_data() {
+const Dept = class Dept extends static_subject_store_with_server_data([
+  "results",
+  "services",
+  "covid_measures",
+]) {
   static lookup(org_id) {
     return super.lookup(_.isNaN(+org_id) ? org_id : +org_id);
   }
@@ -221,7 +230,10 @@ const Dept = class Dept extends static_subject_store_with_API_data() {
   }
 };
 
-const CRSO = class CRSO extends static_subject_store_with_API_data() {
+const CRSO = class CRSO extends static_subject_store_with_server_data([
+  "results",
+  "services",
+]) {
   static get subject_type() {
     return "crso";
   }
@@ -276,7 +288,10 @@ const CRSO = class CRSO extends static_subject_store_with_API_data() {
   }
 };
 
-const Program = class Program extends static_subject_store_with_API_data() {
+const Program = class Program extends static_subject_store_with_server_data([
+  "results",
+  "services",
+]) {
   static get subject_type() {
     return "program";
   }

@@ -4,9 +4,8 @@ import { Subject } from "src/models/subject.js";
 
 import { create_text_maker } from "src/models/text.js";
 
-import { ensure_loaded } from "src/core/lazy_loader.js";
+import { ensure_loaded } from "src/core/ensure_loaded.js";
 import { Table } from "src/core/TableClass.js";
-
 
 import treemap_text from "./TreeMap.yaml";
 
