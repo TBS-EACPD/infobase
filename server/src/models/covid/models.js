@@ -27,7 +27,7 @@ export default function (model_singleton) {
     covid_measure_id: pkey_type(),
     ...bilingual("name", { ...str_type, required: true }),
 
-    estimates: [CovidEstimatesSchema],
+    covid_estimates: [CovidEstimatesSchema],
   });
 
   model_singleton.define_model("CovidMeasure", CovidMeasureSchema);
