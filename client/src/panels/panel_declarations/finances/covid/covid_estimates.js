@@ -29,6 +29,8 @@ const { TabbedContent, SpinnerWrapper, SmartDisplayTable } = util_components;
 
 const { text_maker, TM } = create_text_maker_component([text]);
 
+const client = get_client();
+
 const get_est_doc_name = (est_doc) =>
   estimates_docs[est_doc] ? estimates_docs[est_doc][window.lang] : "";
 const get_est_doc_order = (est_doc) =>
@@ -59,8 +61,8 @@ const string_sort_func = (a, b) => {
   return 0;
 };
 
-const SummaryTab = ({ panel_args }) => {
-  const { covid_estimates_summary, subject } = panel_args;
+const SummaryTab = ({ panel_args, data: covid_estimates_summary }) => {
+  const { subject } = panel_args;
 
   const colors = infobase_colors();
 
@@ -119,10 +121,16 @@ const SummaryTab = ({ panel_args }) => {
     />
   );
 
-  const level_specific_text_args = (() => {
+  const additional_text_args = (() => {
+    const est_doc_summary_stats = _.map(
+      covid_estimates_summary,
+      ({ est_doc, vote, stat }) => [get_est_doc_name(est_doc), vote + stat]
+    );
+
     if (subject.level === "gov") {
       const { gov_covid_auth_in_year, gov_total_auth_in_year } = panel_args;
       return {
+        est_doc_summary_stats,
         covid_auth_pct_of_gov_auth:
           gov_covid_auth_in_year / gov_total_auth_in_year,
       };
@@ -136,6 +144,7 @@ const SummaryTab = ({ panel_args }) => {
       );
 
       return {
+        est_doc_summary_stats,
         dept_covid_auth_in_year,
         covid_auth_pct_of_gov_auth:
           dept_covid_auth_in_year / gov_total_auth_in_year,
@@ -148,7 +157,7 @@ const SummaryTab = ({ panel_args }) => {
       <div className="fcol-xs-12 fcol-md-6 medium-panel-text">
         <TM
           k={`covid_estimates_summary_text_${subject.level}`}
-          args={{ ...panel_args, ...level_specific_text_args }}
+          args={{ ...panel_args, ...additional_text_args }}
         />
         <TM k={"covid_estimates_by_doc"} args={panel_args} />
       </div>
@@ -190,7 +199,7 @@ const SummaryTab = ({ panel_args }) => {
 //    formatter: "compact2",
 //  },
 //};
-//const ByDepartmentTab = ({ panel_args }) => {
+//const ByDepartmentTab = () => {
 //  // pre-sort by est doc, so presentation consistent when sorting by other col
 //  const pre_sorted_dept_estimates = _.sortBy(
 //    CovidEstimates.get_all(),
@@ -338,19 +347,29 @@ class TabLoadingWrapper extends React.Component {
     super(props);
     this.state = {
       loading: true,
+      data: null,
     };
   }
   componentDidMount() {
-    const { ensure_loaded_options } = this.props;
+    const { panel_args, get_query_config } = this.props;
 
-    ensure_loaded(ensure_loaded_options).then(() =>
-      this.setState({ loading: false })
+    const {
+      query,
+      variables,
+      response_accessor = _.identity,
+    } = get_query_config(panel_args);
+
+    client.query({ query, variables }).then((query_response) =>
+      this.setState({
+        data: response_accessor(query_response),
+        loading: false,
+      })
     );
   }
   render() {
-    const { children } = this.props;
+    const { panel_args, TabContent } = this.props;
 
-    const { loading } = this.state;
+    const { loading, data } = this.state;
 
     return (
       <Fragment>
@@ -365,7 +384,7 @@ class TabLoadingWrapper extends React.Component {
             <SpinnerWrapper config_name={"tabbed_content"} />
           </div>
         )}
-        {!loading && children}
+        {!loading && <TabContent panel_args={panel_args} data={data} />}
       </Fragment>
     );
   }
@@ -375,7 +394,32 @@ const tab_content_configs = [
   {
     key: "summary",
     label: text_maker("covid_estimates_summary_tab_label"),
-    get_contents: (panel_args) => <SummaryTab panel_args={panel_args} />,
+    get_query_config: (panel_args) => {
+      const { subject } = panel_args;
+      if (subject.level === "dept") {
+        return {
+          query: org_covid_estimates_summary_query,
+          variables: {
+            lang: window.lang,
+            id: subject.id,
+            _query_name: "org_covid_estimates_summary_query",
+          },
+          response_accessor: (response) =>
+            _.get(response, "data.root.org.covid_estimates_summary"),
+        };
+      } else {
+        return {
+          query: gov_covid_estimates_summary_query,
+          variables: {
+            lang: window.lang,
+            _query_name: "gov_covid_estimates_summary_query",
+          },
+          response_accessor: (response) =>
+            _.get(response, "data.root.gov.covid_estimates_summary"),
+        };
+      }
+    },
+    TabContent: SummaryTab,
     levels: ["gov", "dept"],
   },
   //{
@@ -421,7 +465,15 @@ const get_tabbed_content_props = (panel_args) => {
       .fromPairs()
       .value(),
     tab_pane_contents: _.chain(configs_for_level)
-      .map(({ key, get_contents }) => [key, get_contents(panel_args)])
+      .map(({ key, get_query_config, TabContent }) => [
+        key,
+        <TabLoadingWrapper
+          panel_args={panel_args}
+          get_query_config={get_query_config}
+          TabContent={TabContent}
+          key={key}
+        />,
+      ])
       .fromPairs()
       .value(),
   };
@@ -437,12 +489,7 @@ class CovidEstimatesPanel extends React.Component {
     };
   }
   componentDidMount() {
-    const { panel_args } = this.props;
-    const { subject } = panel_args;
-
-    const client = get_client();
-
-    const gov_promise = client
+    client
       .query({
         query: gov_covid_estimates_summary_query,
         variables: {
@@ -450,97 +497,56 @@ class CovidEstimatesPanel extends React.Component {
           _query_name: "gov_covid_estimates_summary_query",
         },
       })
-      .then(
-        ({
-          data: {
-            root: {
-              gov: { covid_estimates_summary },
-            },
-          },
-        }) => {
-          const gov_covid_auth_in_year = _.reduce(
+      .then(({ data: { root: { gov: { covid_estimates_summary } } } }) =>
+        this.setState({
+          gov_covid_auth_in_year: _.reduce(
             covid_estimates_summary,
             (memo, { vote, stat }) => memo + vote + stat,
             0
-          );
-
-          if (subject.level === "dept") {
-            this.setState({ gov_covid_auth_in_year });
-          } else {
-            this.setState({
-              gov_covid_auth_in_year,
-              covid_estimates_summary,
-            });
-          }
-        }
+          ),
+          loading: false,
+        })
       );
-
-    const org_promise =
-      subject.level !== "dept"
-        ? Promise.resolve()
-        : client
-            .query({
-              query: org_covid_estimates_summary_query,
-              variables: {
-                lang: window.lang,
-                id: subject.id,
-                _query_name: "org_covid_estimates_summary_query",
-              },
-            })
-            .then(({ data: { root: { org: { covid_estimates_summary } } } }) =>
-              this.setState({ covid_estimates_summary })
-            );
-
-    Promise.all([gov_promise, org_promise]).then(() =>
-      this.setState({ loading: false })
-    );
   }
   render() {
-    const {
-      loading,
-      gov_covid_auth_in_year,
-      covid_estimates_summary,
-    } = this.state;
+    const { loading, gov_covid_auth_in_year } = this.state;
     const { panel_args } = this.props;
 
     if (loading) {
       return <SpinnerWrapper config_name={"tabbed_content"} />;
-    }
+    } else {
+      const extended_panel_args = {
+        ...panel_args,
+        gov_covid_auth_in_year,
+      };
 
-    const extended_panel_args = {
-      ...panel_args,
-      gov_covid_auth_in_year,
-      covid_estimates_summary,
-      est_doc_summary_stats: _.map(
-        covid_estimates_summary,
-        ({ est_doc, vote, stat }) => [get_est_doc_name(est_doc), vote + stat]
-      ),
-    };
+      const tabbed_content_props = get_tabbed_content_props(
+        extended_panel_args
+      );
 
-    const tabbed_content_props = get_tabbed_content_props(extended_panel_args);
-
-    return (
-      <Fragment>
-        <div className="frow">
-          <div className="fcol-md-12 fcol-xs-12 medium-panel-text text">
-            <TM
-              k={"covid_estimates_above_tab_text_gov"}
-              args={extended_panel_args}
-            />
-            <TM
-              k={"covid_estimates_above_tab_footnote_title"}
-              className="bold"
-              el="span"
-            />
-            <TM
-              k={"covid_estimates_above_tab_footnote_list"}
-              style={{ lineHeight: "normal" }}
-            />
+      return (
+        <Fragment>
+          <div className="frow">
+            <div className="fcol-md-12 fcol-xs-12 medium-panel-text text">
+              <TM
+                k={"covid_estimates_above_tab_text_gov"}
+                args={extended_panel_args}
+              />
+              <TM
+                k={"covid_estimates_above_tab_footnote_title"}
+                className="bold"
+                el="span"
+              />
+              <TM
+                k={"covid_estimates_above_tab_footnote_list"}
+                style={{ lineHeight: "normal" }}
+              />
+            </div>
           </div>
-        </div>
-        <TabbedContent {...tabbed_content_props} />
-      </Fragment>
-    );
+          <TabbedContent {...tabbed_content_props} />
+        </Fragment>
+      );
+    }
   }
 }
 
