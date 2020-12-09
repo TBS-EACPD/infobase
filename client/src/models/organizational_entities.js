@@ -77,7 +77,7 @@ const Ministry = class Ministry extends static_subject_store() {
 const Dept = class Dept extends static_subject_store_with_server_data([
   "results",
   "services",
-  "covid_measures",
+  "covid_response",
 ]) {
   static lookup(org_id) {
     return super.lookup(_.isNaN(+org_id) ? org_id : +org_id);

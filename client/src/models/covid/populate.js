@@ -10,6 +10,42 @@ import { get_client } from "src/graphql_utils/graphql_utils.js";
 import { CovidEstimates } from "./CovidEstimates.js";
 import { CovidMeasures } from "./CovidMeasures.js";
 
+const org_has_covid_data_query = `
+query ($lang: String!, $id: String!) {
+  root(lang: $lang) {
+    org(org_id: $id) {
+      has_covid_data
+    }
+  }
+}`;
+export const api_load_has_covid_response = (subject) => {
+  if (!(subject && subject.level === "dept")) {
+    return Promise.resolve();
+  }
+
+  try {
+    subject.has_data("covid_response");
+  } catch (e) {
+    return get_client()
+      .query({
+        org_has_covid_data_query,
+        variables: {
+          lang: window.lang,
+          id: subject.id,
+          _query_name: "has_covid_response",
+        },
+      })
+      .then((response) =>
+        subject.set_has_data(
+          "covid_repsonse",
+          response.data.root.org.has_covid_data
+        )
+      );
+  }
+
+  return Promise.resolve();
+};
+
 const covid_estimates_query_fragment = `
   covid_estimates {
     id
@@ -43,7 +79,7 @@ const all_covid_estimates_query = gql`
 
 const _subject_ids_with_loaded_estimates = {};
 export const api_load_covid_estimates = (subject) => {
-  const level = subject && subject.level == "dept" ? "dept" : "all";
+  const level = subject && subject.level === "dept" ? "dept" : "all";
 
   const { is_loaded, id, query, response_data_accessor } = (() => {
     const subject_is_loaded = ({ level, id }) =>
