@@ -1,13 +1,13 @@
 import {
   mix,
-  staticStoreMixin,
+  exstensibleStoreMixin,
   PluralSingular,
   SubjectMixin,
 } from "../storeMixins.js";
 import { trivial_text_maker } from "../text.js";
 
 class CovidMeasures extends mix().with(
-  staticStoreMixin,
+  exstensibleStoreMixin,
   PluralSingular,
   SubjectMixin
 ) {
@@ -31,6 +31,19 @@ class CovidMeasures extends mix().with(
     _.assign(this, {
       ...measure,
     });
+  }
+  static extend_with_estimates(measure_id, estimates) {
+    const measure = this.lookup(measure_id);
+    const new_estimates_set =
+      measure && measure.estimates
+        ? _.uniqBy(
+            [...estimates, ...measure.estimates],
+            ({ org_id, fiscal_year, est_doc }) =>
+              `${org_id}-${fiscal_year}-${est_doc}`
+          )
+        : estimates;
+
+    this.extend(measure_id, { estimates: new_estimates_set });
   }
 }
 

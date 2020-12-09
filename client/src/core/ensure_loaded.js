@@ -1,7 +1,7 @@
 import {
-  api_load_covid_measures,
-  api_load_covid_estimates,
   api_load_has_covid_response,
+  api_load_covid_measures,
+  api_load_covid_estimates_by_measure,
 } from "../models/covid/populate.js";
 import { load_footnotes_bundle } from "../models/footnotes/populate_footnotes.js";
 import { load_horizontal_initiative_lookups } from "../models/populate_horizontal_initiative_lookups.js";
@@ -89,11 +89,11 @@ function ensure_loaded({
     has_covid_response ||
     check_for_panel_dependency("requires_has_covid_response");
 
-  const should_load_covid_estimates =
-    covid_estimates || check_for_panel_dependency("requires_covid_estimates");
-
   const should_load_covid_measures =
     covid_measures || check_for_panel_dependency("requires_covid_measures");
+
+  const should_load_covid_estimates =
+    covid_estimates || check_for_panel_dependency("requires_covid_estimates");
 
   const result_docs_to_load = !_.isEmpty(result_docs)
     ? result_docs
@@ -141,12 +141,12 @@ function ensure_loaded({
     ? api_load_has_covid_response(subject)
     : Promise.resolve();
 
-  const covid_estimates_prom = should_load_covid_estimates
-    ? api_load_covid_estimates(subject)
-    : Promise.resolve();
-
   const covid_measures_prom = should_load_covid_measures
     ? api_load_covid_measures()
+    : Promise.resolve();
+
+  const covid_estimates_prom = should_load_covid_estimates
+    ? api_load_covid_estimates_by_measure(subject)
     : Promise.resolve();
 
   return Promise.all([

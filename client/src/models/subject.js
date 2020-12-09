@@ -1,4 +1,3 @@
-import { CovidEstimates } from "./covid/CovidEstimates.js";
 import { CovidMeasures } from "./covid/CovidMeasures.js";
 import {
   Gov,
@@ -23,7 +22,6 @@ const Subject = {
   Tag,
   Result,
   Indicator,
-  CovidEstimates,
   CovidMeasures,
 };
 
