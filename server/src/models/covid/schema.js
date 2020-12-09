@@ -15,6 +15,8 @@ const schema = `
   extend type Org{
     covid_measures: [CovidMeasure]
     covid_estimates_summary: [CovidEstimatesSummary]
+
+    has_covid_data: Boolean
   }
 
   type CovidEstimatesSummary{
@@ -81,6 +83,8 @@ export default function ({ models, loaders }) {
         ),
       covid_estimates_summary: ({ org_id }) =>
         covid_estimates_summary_by_org_id_loader.load(org_id),
+      has_covid_data: ({ org_id }) =>
+        covid_estimates_summary_by_org_id_loader.load(org_id).then(_.some),
     },
     CovidMeasure: {
       id: _.property("covid_measure_id"),

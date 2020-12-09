@@ -8,8 +8,6 @@ query ($lang: String = "en") {
       name
 
       covid_estimates {
-        id
-    
         org_id
         org {
           id
@@ -40,8 +38,6 @@ query ($lang: String = "en") {
   root(lang: $lang) {
     gov {
       covid_estimates_summary {
-        id
-
         fiscal_year
         est_doc
         vote
@@ -54,10 +50,8 @@ query ($lang: String = "en") {
 const org_covid_estimates_summary_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
-    org(org_id:"133") {
+    org(org_id: "133") {
       covid_estimates_summary {
-        id
-
         fiscal_year
         est_doc
         vote
@@ -70,14 +64,12 @@ query ($lang: String = "en") {
 const org_covid_measures_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
-    org(org_id:"133") {
+    org(org_id: "133") {
       covid_measures {
         id
         name
 
         covid_estimates {
-          id
-      
           org_id
           org {
             id
@@ -90,6 +82,18 @@ query ($lang: String = "en") {
           stat
         }
       }
+    }
+  }
+}`;
+
+const org_has_covid_data_query = `
+query ($lang: String = "en") {
+  root(lang: $lang) {
+    has_data: org(org_id: "133") {
+      has_covid_data
+    }
+    does_not_have_Data: org(org_id: "15") {
+      has_covid_data
     }
   }
 }`;
@@ -113,6 +117,10 @@ describe("covid data", () => {
   });
   it("Org covid measures", async () => {
     const data = await execQuery(org_covid_measures_query, {});
+    return expect(data).toMatchSnapshot();
+  });
+  it("Org has covid data", async () => {
+    const data = await execQuery(org_has_covid_data_query, {});
     return expect(data).toMatchSnapshot();
   });
 });
