@@ -66,7 +66,7 @@ const covid_estimates_summary_query_fragment = `
 `;
 export const gov_covid_estimates_summary_query = build_base_query(`
   gov {
-    ${covid_estimates_by_measure_query_fragment}
+    ${covid_estimates_summary_query_fragment}
   }
 `);
 export const org_covid_estimates_summary_query = build_org_query(
