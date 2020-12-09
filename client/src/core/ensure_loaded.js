@@ -5,7 +5,7 @@ import { PanelRegistry, tables_for_panel } from "src/panels/PanelRegistry.js";
 import {
   api_load_covid_measures,
   api_load_covid_estimates,
-  api_load_covid_estimates_gov_summary,
+  api_load_has_covid_response,
 } from "src/models/covid/populate.js";
 import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes.js";
 import { load_horizontal_initiative_lookups } from "src/models/populate_horizontal_initiative_lookups.js";
@@ -44,6 +44,7 @@ function ensure_loaded({
   requires_granular_result_counts,
   has_services,
   services,
+  has_covid_response,
   covid_measures,
   covid_estimates,
   footnotes_for: footnotes_subject,
@@ -89,15 +90,12 @@ function ensure_loaded({
   const should_load_services =
     services || check_for_panel_dependency("requires_services");
 
+  const should_load_has_covid_response =
+    has_covid_response ||
+    check_for_panel_dependency("requires_has_covid_response");
+
   const should_load_covid_estimates =
     covid_estimates || check_for_panel_dependency("requires_covid_estimates");
-
-  const should_load_covid_estimates_gov_summary =
-    covid_estimates_gov_summary ||
-    _.chain(panel_set)
-      .map("requires_covid_estimates_gov_summary")
-      .some()
-      .value();
 
   const should_load_covid_measures =
     covid_measures || check_for_panel_dependency("requires_covid_measures");
@@ -144,12 +142,12 @@ function ensure_loaded({
     ? load_horizontal_initiative_lookups()
     : Promise.resolve();
 
-  const covid_estimates_prom = should_load_covid_estimates
-    ? api_load_covid_estimates(subject)
+  const has_covid_response_prom = should_load_has_covid_response
+    ? api_load_has_covid_response(subject)
     : Promise.resolve();
 
-  const covid_estimates_gov_summary_prom = should_load_covid_estimates_gov_summary
-    ? api_load_covid_estimates_gov_summary()
+  const covid_estimates_prom = should_load_covid_estimates
+    ? api_load_covid_estimates(subject)
     : Promise.resolve();
 
   const covid_measures_prom = should_load_covid_measures
@@ -166,9 +164,9 @@ function ensure_loaded({
     has_services_prom,
     services_prom,
     horizontal_initiative_lookups_prom,
+    has_covid_response_prom,
     covid_measures_prom,
     covid_estimates_prom,
-    covid_estimates_gov_summary_prom,
   ]);
 }
 
