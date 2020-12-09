@@ -450,7 +450,7 @@ class CovidEstimatesPanel extends React.Component {
 
     const gov_promise = client
       .query({
-        gov_covid_estimates_summary_query,
+        query: gov_covid_estimates_summary_query,
         variables: {
           lang: window.lang,
           _query_name: "gov_covid_estimates_summary_query",
@@ -459,7 +459,9 @@ class CovidEstimatesPanel extends React.Component {
       .then(
         ({
           data: {
-            root: { gov: covid_estimates_summary },
+            root: {
+              gov: { covid_estimates_summary },
+            },
           },
         }) => {
           const gov_covid_auth_in_year = _.reduce(
@@ -484,18 +486,18 @@ class CovidEstimatesPanel extends React.Component {
         ? Promise.resolve()
         : client
             .query({
-              org_covid_estimates_summary_query,
+              query: org_covid_estimates_summary_query,
               variables: {
                 lang: window.lang,
                 id: subject.id,
                 _query_name: "org_covid_estimates_summary_query",
               },
             })
-            .then(({ data: { root: { org: covid_estimates_summary } } }) =>
+            .then(({ data: { root: { org: { covid_estimates_summary } } } }) =>
               this.setState({ covid_estimates_summary })
             );
 
-    Promise.all(gov_promise, org_promise).then(() =>
+    Promise.all([gov_promise, org_promise]).then(() =>
       this.setState({ loading: false })
     );
   }
