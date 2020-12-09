@@ -10,7 +10,6 @@ Object {
             Object {
               "est_doc": "ME",
               "fiscal_year": "2020",
-              "id": "5fcfe806f5edde53d72bbc9f",
               "org": Object {
                 "id": "133",
                 "name": "National Defence",
@@ -22,7 +21,6 @@ Object {
             Object {
               "est_doc": "SEA",
               "fiscal_year": "2020",
-              "id": "5fcfe806f5edde53d72bbca0",
               "org": Object {
                 "id": "133",
                 "name": "National Defence",
@@ -34,7 +32,6 @@ Object {
             Object {
               "est_doc": "SEB",
               "fiscal_year": "2020",
-              "id": "5fcfe806f5edde53d72bbca1",
               "org": Object {
                 "id": "133",
                 "name": "National Defence",
@@ -46,7 +43,6 @@ Object {
             Object {
               "est_doc": "ME",
               "fiscal_year": "2020",
-              "id": "5fcfe806f5edde53d72bbca2",
               "org": Object {
                 "id": "326",
                 "name": "Treasury Board of Canada Secretariat",
@@ -58,7 +54,6 @@ Object {
             Object {
               "est_doc": "ME",
               "fiscal_year": "2021",
-              "id": "5fcfe806f5edde53d72bbca3",
               "org": Object {
                 "id": "326",
                 "name": "Treasury Board of Canada Secretariat",
@@ -70,7 +65,6 @@ Object {
             Object {
               "est_doc": "SEB",
               "fiscal_year": "2020",
-              "id": "5fcfe806f5edde53d72bbca4",
               "org": Object {
                 "id": "552",
                 "name": "Polar Knowledge Canada",
@@ -88,7 +82,6 @@ Object {
             Object {
               "est_doc": "ME",
               "fiscal_year": "2020",
-              "id": "5fcfe806f5edde53d72bbca6",
               "org": Object {
                 "id": "133",
                 "name": "National Defence",
@@ -100,7 +93,6 @@ Object {
             Object {
               "est_doc": "SEA",
               "fiscal_year": "2020",
-              "id": "5fcfe806f5edde53d72bbca7",
               "org": Object {
                 "id": "552",
                 "name": "Polar Knowledge Canada",
@@ -112,7 +104,6 @@ Object {
             Object {
               "est_doc": "SEB",
               "fiscal_year": "2020",
-              "id": "5fcfe806f5edde53d72bbca8",
               "org": Object {
                 "id": "552",
                 "name": "Polar Knowledge Canada",
@@ -124,7 +115,6 @@ Object {
             Object {
               "est_doc": "SEC",
               "fiscal_year": "2020",
-              "id": "5fcfe806f5edde53d72bbca9",
               "org": Object {
                 "id": "552",
                 "name": "Polar Knowledge Canada",
@@ -136,7 +126,6 @@ Object {
             Object {
               "est_doc": "SEC",
               "fiscal_year": "2021",
-              "id": "5fcfe806f5edde53d72bbcaa",
               "org": Object {
                 "id": "552",
                 "name": "Polar Knowledge Canada",
@@ -154,7 +143,6 @@ Object {
             Object {
               "est_doc": "ME",
               "fiscal_year": "2020",
-              "id": "5fcfe806f5edde53d72bbcac",
               "org": Object {
                 "id": "133",
                 "name": "National Defence",
@@ -166,7 +154,6 @@ Object {
             Object {
               "est_doc": "ME",
               "fiscal_year": "2021",
-              "id": "5fcfe806f5edde53d72bbcad",
               "org": Object {
                 "id": "133",
                 "name": "National Defence",
@@ -178,7 +165,6 @@ Object {
             Object {
               "est_doc": "SEA",
               "fiscal_year": "2020",
-              "id": "5fcfe806f5edde53d72bbcae",
               "org": Object {
                 "id": "326",
                 "name": "Treasury Board of Canada Secretariat",
@@ -206,42 +192,36 @@ Object {
           Object {
             "est_doc": "ME",
             "fiscal_year": "2020",
-            "id": "5fcfe806f5edde53d72bbcba",
             "stat": 1007,
             "vote": 1107,
           },
           Object {
             "est_doc": "SEA",
             "fiscal_year": "2020",
-            "id": "5fcfe806f5edde53d72bbcbb",
             "stat": 108,
             "vote": 207,
           },
           Object {
             "est_doc": "SEB",
             "fiscal_year": "2020",
-            "id": "5fcfe806f5edde53d72bbcbc",
             "stat": 18,
             "vote": 27,
           },
           Object {
             "est_doc": "SEC",
             "fiscal_year": "2020",
-            "id": "5fcfe806f5edde53d72bbcbd",
             "stat": 9,
             "vote": 0,
           },
           Object {
             "est_doc": "ME",
             "fiscal_year": "2021",
-            "id": "5fcfe806f5edde53d72bbcbe",
             "stat": 999,
             "vote": 9,
           },
           Object {
             "est_doc": "SEC",
             "fiscal_year": "2021",
-            "id": "5fcfe806f5edde53d72bbcbf",
             "stat": 9,
             "vote": 0,
           },
@@ -261,28 +241,24 @@ Object {
           Object {
             "est_doc": "ME",
             "fiscal_year": "2020",
-            "id": "5fcfe806f5edde53d72bbcaf",
             "stat": 8,
             "vote": 1107,
           },
           Object {
             "est_doc": "SEA",
             "fiscal_year": "2020",
-            "id": "5fcfe806f5edde53d72bbcb0",
             "stat": 0,
             "vote": 9,
           },
           Object {
             "est_doc": "SEB",
             "fiscal_year": "2020",
-            "id": "5fcfe806f5edde53d72bbcb1",
             "stat": 9,
             "vote": 9,
           },
           Object {
             "est_doc": "ME",
             "fiscal_year": "2021",
-            "id": "5fcfe806f5edde53d72bbcb2",
             "stat": 0,
             "vote": 9,
           },
@@ -304,7 +280,6 @@ Object {
               Object {
                 "est_doc": "ME",
                 "fiscal_year": "2020",
-                "id": "5fcfe806f5edde53d72bbc9f",
                 "org": Object {
                   "id": "133",
                   "name": "National Defence",
@@ -316,7 +291,6 @@ Object {
               Object {
                 "est_doc": "SEA",
                 "fiscal_year": "2020",
-                "id": "5fcfe806f5edde53d72bbca0",
                 "org": Object {
                   "id": "133",
                   "name": "National Defence",
@@ -328,7 +302,6 @@ Object {
               Object {
                 "est_doc": "SEB",
                 "fiscal_year": "2020",
-                "id": "5fcfe806f5edde53d72bbca1",
                 "org": Object {
                   "id": "133",
                   "name": "National Defence",
@@ -346,7 +319,6 @@ Object {
               Object {
                 "est_doc": "ME",
                 "fiscal_year": "2020",
-                "id": "5fcfe806f5edde53d72bbca6",
                 "org": Object {
                   "id": "133",
                   "name": "National Defence",
@@ -364,7 +336,6 @@ Object {
               Object {
                 "est_doc": "ME",
                 "fiscal_year": "2020",
-                "id": "5fcfe806f5edde53d72bbcac",
                 "org": Object {
                   "id": "133",
                   "name": "National Defence",
@@ -376,7 +347,6 @@ Object {
               Object {
                 "est_doc": "ME",
                 "fiscal_year": "2021",
-                "id": "5fcfe806f5edde53d72bbcad",
                 "org": Object {
                   "id": "133",
                   "name": "National Defence",
@@ -390,6 +360,21 @@ Object {
             "name": "measure 3",
           },
         ],
+      },
+    },
+  },
+}
+`;
+
+exports[`covid data Org has covid data 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "does_not_have_Data": Object {
+        "has_covid_data": false,
+      },
+      "has_data": Object {
+        "has_covid_data": true,
       },
     },
   },
