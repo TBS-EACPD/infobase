@@ -1,5 +1,3 @@
-import { gql } from "@apollo/client";
-
 import _ from "lodash";
 
 import { log_standard_event } from "src/core/analytics.js";
@@ -8,16 +6,14 @@ import { lang } from "src/core/injected_build_constants.js";
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import { CovidMeasures } from "./CovidMeasures.js";
+import {
+  org_has_covid_data_query,
+  org_covid_measure_query,
+  all_covid_measure_query,
+  org_covid_estimates_by_measure_query,
+  all_covid_estimates_by_measure_query,
+} from "./queries.js";
 
-const org_has_covid_data_query = `
-query ($lang: String!, $id: String!) {
-  root(lang: $lang) {
-    org(org_id: $id) {
-      id
-      has_covid_data
-    }
-  }
-}`;
 export const api_load_has_covid_response = (subject) => {
   if (!(subject && subject.level === "dept")) {
     return Promise.resolve();
@@ -46,31 +42,6 @@ export const api_load_has_covid_response = (subject) => {
   return Promise.resolve();
 };
 
-const covid_measure_query_fragment = `
-  covid_measures {
-    id
-    name
-  }
-`;
-
-const org_covid_initiative_query = gql`
-  query($lang: String! $id: String!) {
-    root(lang: $lang) {
-      org(org_id: $id) {
-        id
-        ${covid_measure_query_fragment}
-      }
-    }
-  }
-`;
-const gov_covid_initiative_query = gql`
-  query($lang: String!) {
-    root(lang: $lang) {
-      ${covid_measure_query_fragment}
-    }	
-  }	
-`;
-
 const _subject_ids_with_loaded_measures = {};
 export const api_load_covid_measures = (subject) => {
   const level = (subject && subject.level === "dept") || "all";
@@ -87,14 +58,14 @@ export const api_load_covid_measures = (subject) => {
         return {
           is_loaded: dept_is_loaded(subject),
           id: subject.id,
-          query: org_covid_initiative_query,
+          query: org_covid_measure_query,
           response_data_accessor: (response) => response.data.root.org,
         };
       default:
         return {
           is_loaded: all_is_loaded(),
           id: "all",
-          query: gov_covid_initiative_query,
+          query: all_covid_measure_query,
           response_data_accessor: (response) => response.data.root,
         };
     }
@@ -162,40 +133,6 @@ export const api_load_covid_measures = (subject) => {
       throw error;
     });
 };
-
-const covid_estimates_by_measure_query_fragment = `
-  covid_measures {
-    id
-    name
-  
-    covid_estimates {
-      org_id
-      fiscal_year
-      est_doc
-
-      vote
-      stat
-    }
-  }
-`;
-
-const org_covid_estimates_by_measure_query = gql`
-  query($lang: String! $id: String!) {
-    root(lang: $lang) {
-      org(org_id: $id) {
-        id
-        ${covid_estimates_by_measure_query_fragment}
-      }
-    }
-  }
-`;
-const all_covid_estimates_by_measure_query = gql`
-  query($lang: String!) {
-    root(lang: $lang) {
-      ${covid_estimates_by_measure_query_fragment}
-    }	
-  }	
-`;
 
 const _subject_ids_with_loaded_estimates_by_measure = {};
 export const api_load_covid_estimates_by_measure = (subject) => {
