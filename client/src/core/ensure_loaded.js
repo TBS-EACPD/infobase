@@ -19,18 +19,41 @@ import {
   api_load_services,
 } from "src/models/populate_services.js";
 
+import { get_client } from "src/graphql_utils/graphql_utils.js";
+
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace.js";
 
 import { Table } from "./TableClass.js";
 
-function load_tables(table_set) {
-  return Promise.all(
+const load_tables = (table_set) =>
+  Promise.all(
     _.chain(table_set)
       .reject(_.property("loaded"))
       .map((table) => table.load())
       .value()
   );
-}
+
+// this is a temporary solution to allow panels that make direct API queries for their data to be part of the
+// loading that occurs behind the first infograph-wide spinner. Eventually all panels will register queries for
+// their initial data requirements and will directly receive the result (instead of re-querying for the quick cache-hit
+// post infograph-wide loading)
+const pre_cache_queries = (panel_set, subject) => {
+  const client = get_client();
+  return Promise.all(
+    _.flatMap(panel_set, ({ initial_queries }) =>
+      _.map(initial_queries, (query, name) =>
+        client.query({
+          query,
+          variables: {
+            lang: window.lang,
+            id: subject.id,
+            _query_name: name,
+          },
+        })
+      )
+    )
+  );
+};
 
 function ensure_loaded({
   table_keys,
@@ -156,6 +179,7 @@ function ensure_loaded({
 
   return Promise.all([
     load_tables(table_set),
+    pre_cache_queries(panel_set, subject),
     results_prom,
     result_counts_prom,
     has_results_prom,

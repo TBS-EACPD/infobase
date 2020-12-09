@@ -70,7 +70,7 @@ export const get_dept_panels = (subject) =>
       declare_welcome_mat_panel(),
       declare_auth_exp_planned_spending_panel(),
       declare_in_year_estimates_split_panel(),
-      //declare_covid_estimates_panel(),
+      declare_covid_estimates_panel(),
       declare_in_year_voted_stat_split_panel(),
       declare_estimates_in_perspective_panel(),
       declare_tp_by_region_panel(),
