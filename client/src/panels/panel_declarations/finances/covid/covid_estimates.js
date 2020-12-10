@@ -31,7 +31,12 @@ const { CovidMeasure, Gov, Dept } = Subject;
 
 const { estimates_docs } = businessConstants;
 
-const { TabbedContent, SpinnerWrapper, SmartDisplayTable } = util_components;
+const {
+  TabbedContent,
+  SpinnerWrapper,
+  SmartDisplayTable,
+  AlertBanner,
+} = util_components;
 
 const { text_maker, TM } = create_text_maker_component([text]);
 
@@ -301,9 +306,9 @@ const ByMeasureTab = ({ data: estimates_by_measure }) => {
     pre_sorted_estimates_by_measure
   )
     .groupBy("measure_name")
-    .map((row, measure_name) => [
+    .map((rows, measure_name) => [
       measure_name,
-      _.reduce(row, (memo, { vote, stat }) => memo + vote + stat, 0),
+      _.reduce(rows, (memo, { vote, stat }) => memo + vote + stat, 0),
     ])
     .sortBy(([_measure_name, auth_total]) => auth_total)
     .last()
@@ -581,6 +586,11 @@ export const declare_covid_estimates_panel = () =>
               footnotes,
             }}
           >
+            <AlertBanner banner_class="danger">
+              {
+                "Not real data! Totals are bassed on estimates by covid initiative figures, but the values associated with these measures are not accurate. For development purposes only!"
+              }
+            </AlertBanner>
             <CovidEstimatesPanel panel_args={panel_args} />
           </InfographicPanel>
         );
