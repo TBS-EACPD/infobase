@@ -1,7 +1,7 @@
 covid_estimates_panel_title:
   transform: [handlebars]
   text: |
-    {{gt "covid_measures"}}
+    {{gt "estimates_by_covid_measures"}}
 
 covid_estimates_above_tab_text_gov:
   transform: [handlebars,markdown]
