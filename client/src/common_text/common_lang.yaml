@@ -686,12 +686,6 @@ all_voted_items:
   en: all voted items
   fr: tous les crédits votés
 
-covid_initiative:
-  en: COVID-19 Estimates Initiative
-  fr: Initiative budgétaire COVID-19
-covid_initiatives:
-  en: COVID-19 Estimates Initiatives
-  fr: Initiatives budgétaires COVID-19
 covid_measure:
   en: COVID-19 Measure
   fr: Mesure COVID-19

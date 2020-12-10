@@ -1,7 +1,7 @@
 covid_estimates_panel_title:
   transform: [handlebars]
   text: |
-    {{gt "covid_initiatives"}}
+    {{gt "covid_measures"}}
 
 covid_estimates_above_tab_text_gov:
   transform: [handlebars,markdown]
@@ -75,16 +75,16 @@ covid_estimates_department_tab_text:
     de crédits inscrits dans les budgets supplémentaires A et B.
 
 
-covid_estimates_initiative_tab_label:
-  en: By Estimates Initiative
-  fr: Par initiative budgétaire
-covid_estimates_initiative_tab_text:
+covid_estimates_measure_tab_label:
+  en: By COVID-19 Measure
+  fr: Par mesure COVID-19
+covid_estimates_measure_tab_text:
   transform: [handlebars,markdown]
   en: |
-    The Estimates initiative with the largest total COVID-19 related authorities is **{{largest_initiative_name}}** with **{{fmt_compact1_written largest_initiative_auth}}**
+    The COVID-19 easure with the largest total COVID-19 related authorities is **{{largest_measure_name}}** with **{{fmt_compact1_written largest_measure_auth}}**
     in authorities from Supplementary Estimates A and B.
   fr: |
-    L'initiative budgétaire disposant des crédits les plus grand nombre d'autorisations liées à COVID-19 est **{{largest_initiative_name}}** avec **{{fmt_compact1_written largest_initiative_auth}}**
+    La mesure COVID-19 disposant des crédits les plus grand nombre d'autorisations liées à COVID-19 est **{{largest_measure_name}}** avec **{{fmt_compact1_written largest_measure_auth}}**
     de crédits inscrits dans les budgets supplémentaires A et B.
 
 
