@@ -5,7 +5,7 @@ import { lang } from "src/core/injected_build_constants.js";
 
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 
-import { CovidMeasures } from "./CovidMeasures.js";
+import { CovidMeasure } from "./CovidMeasure.js";
 import {
   org_has_covid_data_query,
   org_covid_measure_query,
@@ -108,8 +108,8 @@ export const api_load_covid_measures = (subject) => {
       _.each(
         covid_measures,
         (covid_measure) =>
-          CovidMeasures.lookup(covid_measure.id) ||
-          CovidMeasures.create_and_register(covid_measure)
+          CovidMeasure.lookup(covid_measure.id) ||
+          CovidMeasure.create_and_register(covid_measure)
       );
 
       // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
@@ -200,14 +200,11 @@ export const api_load_covid_estimates_by_measure = (subject) => {
       _.each(
         covid_estimates_by_measure,
         ({ covid_estimates, ...covid_measure }) => {
-          if (!CovidMeasures.lookup(covid_measure.id)) {
-            CovidMeasures.create_and_register(covid_measure);
+          if (!CovidMeasure.lookup(covid_measure.id)) {
+            CovidMeasure.create_and_register(covid_measure);
           }
 
-          CovidMeasures.extend_with_estimates(
-            covid_measure.id,
-            covid_estimates
-          );
+          CovidMeasure.extend_with_estimates(covid_measure.id, covid_estimates);
         }
       );
 
