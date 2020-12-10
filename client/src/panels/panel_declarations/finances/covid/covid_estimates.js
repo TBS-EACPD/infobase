@@ -159,7 +159,10 @@ const SummaryTab = ({ panel_args, data: covid_estimates_summary }) => {
           k={`covid_estimates_summary_text_${subject.level}`}
           args={{ ...panel_args, ...additional_text_args }}
         />
-        <TM k={"covid_estimates_by_doc"} args={panel_args} />
+        <TM
+          k={"covid_estimates_by_doc"}
+          args={{ ...panel_args, ...additional_text_args }}
+        />
       </div>
       <div className="fcol-xs-12 fcol-md-6">
         {!window.is_a11y_mode && (
