@@ -2,7 +2,7 @@ import _ from "lodash";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.js";
 
-import { CovidMeasures } from "./covid/CovidMeasures.js";
+import { CovidMeasure } from "./covid/CovidMeasure.js";
 import {
   Gov,
   Dept,
@@ -26,7 +26,7 @@ const Subject = {
   Tag,
   Result,
   Indicator,
-  CovidMeasures,
+  CovidMeasure,
 };
 
 Subject.get_by_guid = function get_by_guid(guid) {
