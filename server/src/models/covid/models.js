@@ -26,6 +26,7 @@ export default function (model_singleton) {
   const CovidMeasureSchema = mongoose.Schema({
     covid_measure_id: pkey_type(),
     ...bilingual("name", { ...str_type, required: true }),
+    in_estimates: { type: Boolean },
 
     covid_estimates: [CovidEstimatesSchema],
   });

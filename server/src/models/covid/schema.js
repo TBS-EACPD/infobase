@@ -31,6 +31,7 @@ const schema = `
   type CovidMeasure{
     id: String
     name: String
+    in_estimates: Boolean
 
     covid_estimates: [CovidEstimates]
   }

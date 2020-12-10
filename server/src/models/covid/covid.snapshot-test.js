@@ -6,6 +6,7 @@ query ($lang: String = "en") {
     covid_measures {
       id
       name
+      in_estimates
 
       covid_estimates {
         org_id
@@ -29,6 +30,7 @@ query ($lang: String = "en", $covid_measure_id: String = "COV001") {
     covid_measure(covid_measure_id: $covid_measure_id) {
       id
       name
+      in_estimates
     }
   }
 }`;
@@ -68,6 +70,7 @@ query ($lang: String = "en") {
       covid_measures {
         id
         name
+        in_estimates
 
         covid_estimates {
           org_id

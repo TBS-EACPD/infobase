@@ -75,6 +75,7 @@ Object {
             },
           ],
           "id": "COV001",
+          "in_estimates": true,
           "name": "measure 1",
         },
         Object {
@@ -136,6 +137,7 @@ Object {
             },
           ],
           "id": "COV002",
+          "in_estimates": false,
           "name": "measure 2",
         },
         Object {
@@ -175,6 +177,7 @@ Object {
             },
           ],
           "id": "COV003",
+          "in_estimates": true,
           "name": "measure 3",
         },
       ],
@@ -312,6 +315,7 @@ Object {
               },
             ],
             "id": "COV001",
+            "in_estimates": true,
             "name": "measure 1",
           },
           Object {
@@ -329,6 +333,7 @@ Object {
               },
             ],
             "id": "COV002",
+            "in_estimates": false,
             "name": "measure 2",
           },
           Object {
@@ -357,6 +362,7 @@ Object {
               },
             ],
             "id": "COV003",
+            "in_estimates": true,
             "name": "measure 3",
           },
         ],
@@ -387,6 +393,7 @@ Object {
     "root": Object {
       "covid_measure": Object {
         "id": "COV001",
+        "in_estimates": true,
         "name": "measure 1",
       },
     },
