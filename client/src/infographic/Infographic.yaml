@@ -118,7 +118,7 @@ finance_infograph_desc_meta_attr:
   fr: Effectuer des recherches sur les dépenses antérieures et prévues du gouvernement par programme ministériel ou selon diverses optiques, comme les dépenses sociales et économiques. Provenant des Comptes publics et des budgets des dépenses, vous trouverez des renseignements financiers allant du gouvernement au ministère, jusqu’au programme.
 
 filter_panels:
-  en: Panel Filters
+  en: Filter Panels
   fr: TODO
 panels_status:
   transform: [handlebars]
@@ -126,6 +126,6 @@ panels_status:
   fr: TODO
 filter_panels_description:
   en: |
-    Only show panels with the following datasets:
+    Filter by datasets:
   fr: |
     TODO
