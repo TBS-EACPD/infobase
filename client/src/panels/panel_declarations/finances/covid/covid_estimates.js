@@ -351,42 +351,48 @@ class TabLoadingWrapper extends React.Component {
     };
   }
   componentDidMount() {
-    const { panel_args, get_query_config } = this.props;
+    const { panel_args, load_data } = this.props;
 
-    const {
-      query,
-      variables,
-      response_accessor = _.identity,
-    } = get_query_config(panel_args);
-
-    client.query({ query, variables }).then((query_response) =>
+    load_data(panel_args).then((data) =>
       this.setState({
-        data: response_accessor(query_response),
+        data,
         loading: false,
       })
     );
+
+    //const {
+    //  query,
+    //  variables,
+    //  response_accessor = _.identity,
+    //} = get_query_config(panel_args);
+    //
+    //client.query({ query, variables }).then((query_response) =>
+    //  this.setState({
+    //    data: response_accessor(query_response),
+    //    loading: false,
+    //  })
+    //);
   }
   render() {
     const { panel_args, TabContent } = this.props;
 
     const { loading, data } = this.state;
 
-    return (
-      <Fragment>
-        {loading && (
-          <div
-            style={{
-              position: "relative",
-              height: "80px",
-              marginBottom: "-10px",
-            }}
-          >
-            <SpinnerWrapper config_name={"tabbed_content"} />
-          </div>
-        )}
-        {!loading && <TabContent panel_args={panel_args} data={data} />}
-      </Fragment>
-    );
+    if (loading) {
+      return (
+        <div
+          style={{
+            position: "relative",
+            height: "80px",
+            marginBottom: "-10px",
+          }}
+        >
+          <SpinnerWrapper config_name={"tabbed_content"} />
+        </div>
+      );
+    } else {
+      return <TabContent panel_args={panel_args} data={data} />;
+    }
   }
 }
 
@@ -394,30 +400,35 @@ const tab_content_configs = [
   {
     key: "summary",
     label: text_maker("covid_estimates_summary_tab_label"),
-    get_query_config: (panel_args) => {
+    load_data: (panel_args) => {
       const { subject } = panel_args;
-      if (subject.level === "dept") {
-        return {
-          query: org_covid_estimates_summary_query,
-          variables: {
-            lang: window.lang,
-            id: subject.id,
-            _query_name: "org_covid_estimates_summary_query",
-          },
-          response_accessor: (response) =>
-            _.get(response, "data.root.org.covid_estimates_summary"),
-        };
-      } else {
-        return {
-          query: gov_covid_estimates_summary_query,
-          variables: {
-            lang: window.lang,
-            _query_name: "gov_covid_estimates_summary_query",
-          },
-          response_accessor: (response) =>
-            _.get(response, "data.root.gov.covid_estimates_summary"),
-        };
-      }
+
+      const { query, variables, response_accessor } = (() => {
+        if (subject.level === "dept") {
+          return {
+            query: org_covid_estimates_summary_query,
+            variables: {
+              lang: window.lang,
+              id: subject.id,
+              _query_name: "org_covid_estimates_summary_query",
+            },
+            response_accessor: (response) =>
+              _.get(response, "data.root.org.covid_estimates_summary"),
+          };
+        } else {
+          return {
+            query: gov_covid_estimates_summary_query,
+            variables: {
+              lang: window.lang,
+              _query_name: "gov_covid_estimates_summary_query",
+            },
+            response_accessor: (response) =>
+              _.get(response, "data.root.gov.covid_estimates_summary"),
+          };
+        }
+      })();
+
+      return client.query({ query, variables }).then(response_accessor);
     },
     TabContent: SummaryTab,
     levels: ["gov", "dept"],
@@ -425,31 +436,22 @@ const tab_content_configs = [
   //{
   //  key: "department",
   //  label: text_maker("covid_estimates_department_tab_label"),
-  //  get_contents: (panel_args) => (
-  //    <TabLoadingWrapper
-  //      ensure_loaded_options={{
-  //        subject: panel_args.subject,
-  //        covid_estimates: true,
-  //      }}
-  //    >
-  //      <ByDepartmentTab panel_args={panel_args} />
-  //    </TabLoadingWrapper>
-  //  ),
+  //  load_data: () => ({
+  //    query: all_covid_estimates_by_measure_query,
+  //    variables: {
+  //      lang: window.lang,
+  //      _query_name: "all_covid_estimates_by_measure_query",
+  //    },
+  //    response_accessor: (response) =>
+  //      _.get(response, "data.root.gov.covid_estimates_summary"),
+  //  }),
+  //  TabContent: ByDepartmentTab,
   //  levels: ["gov"],
   //},
   //{
   //  key: "initiative",
   //  label: text_maker("covid_estimates_initiative_tab_label"),
-  //  get_contents: (panel_args) => (
-  //    <TabLoadingWrapper
-  //      ensure_loaded_options={{
-  //        subject: panel_args.subject,
-  //        covid_initiatives: true,
-  //      }}
-  //    >
-  //      <ByInitiativeTab panel_args={panel_args} />
-  //    </TabLoadingWrapper>
-  //  ),
+  //  TabContent: ByInitiativeTab,
   //  levels: ["gov", "dept"],
   //},
 ];
@@ -465,11 +467,11 @@ const get_tabbed_content_props = (panel_args) => {
       .fromPairs()
       .value(),
     tab_pane_contents: _.chain(configs_for_level)
-      .map(({ key, get_query_config, TabContent }) => [
+      .map(({ key, load_data, TabContent }) => [
         key,
         <TabLoadingWrapper
           panel_args={panel_args}
-          get_query_config={get_query_config}
+          load_data={load_data}
           TabContent={TabContent}
           key={key}
         />,
