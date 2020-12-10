@@ -538,34 +538,9 @@ export const declare_covid_estimates_panel = () =>
           return false;
         }
 
-<<<<<<< HEAD
-        const { orgVoteStatEstimates } = this.tables;
-        const gov_total_auth_in_year = orgVoteStatEstimates
-          .q(Gov)
-          .sum("{{est_last_year}}_estimates");
-
-        const common = {
-=======
         return {
->>>>>>> f21fb6867 (Drop comparison of covid estimates to regular InfoBase estimates)
           subject,
         };
-<<<<<<< HEAD
-
-        if (level_name === "gov") {
-          return common;
-        } else {
-          const dept_tabled_est_last_year = orgVoteStatEstimates
-            .q(subject)
-            .sum("{{est_last_year}}_estimates");
-
-          return {
-            ...common,
-            dept_tabled_est_last_year,
-          };
-        }
-=======
->>>>>>> f21fb6867 (Drop comparison of covid estimates to regular InfoBase estimates)
       },
       render: ({ calculations, footnotes, sources }) => {
         const { panel_args } = calculations;
