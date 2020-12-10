@@ -21,7 +21,7 @@ import {
 
 import text from "./covid_estimates.yaml";
 
-const { CovidMeasures, Gov, Dept } = Subject;
+const { CovidMeasure, Gov, Dept } = Subject;
 
 const { estimates_docs } = businessConstants;
 
@@ -200,6 +200,7 @@ const common_column_configs = {
   },
 };
 const ByDepartmentTab = ({ data: estimates_by_covid_measure }) => {
+  // This should be either a getter on CovidMeasure or a common util function somewhere...
   const covid_estimates_by_department = _.chain(estimates_by_covid_measure)
     .flatMap("estimates")
     .groupBy("org_id")
@@ -448,7 +449,7 @@ const tab_content_configs = [
     label: text_maker("covid_estimates_department_tab_label"),
     load_data: ({ subject }) =>
       ensure_loaded({ covid_estimates: true, subject }).then(() =>
-        CovidMeasures.get_all()
+        CovidMeasure.get_all()
       ),
     TabContent: ByDepartmentTab,
     levels: ["gov"],

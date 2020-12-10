@@ -6,7 +6,7 @@ import {
 } from "../storeMixins.js";
 import { trivial_text_maker } from "../text.js";
 
-class CovidMeasures extends mix().with(
+class CovidMeasure extends mix().with(
   exstensibleStoreMixin,
   PluralSingular,
   SubjectMixin
@@ -22,7 +22,7 @@ class CovidMeasures extends mix().with(
   }
 
   static create_and_register(measure) {
-    const inst = new CovidMeasures(measure);
+    const inst = new CovidMeasure(measure);
     this.register(measure.id, inst);
     return inst;
   }
@@ -47,4 +47,4 @@ class CovidMeasures extends mix().with(
   }
 }
 
-export { CovidMeasures };
+export { CovidMeasure };

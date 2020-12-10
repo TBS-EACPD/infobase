@@ -1,4 +1,4 @@
-import { CovidMeasures } from "./covid/CovidMeasures.js";
+import { CovidMeasure } from "./covid/CovidMeasure.js";
 import {
   Gov,
   Dept,
@@ -22,7 +22,7 @@ const Subject = {
   Tag,
   Result,
   Indicator,
-  CovidMeasures,
+  CovidMeasure,
 };
 
 Subject.get_by_guid = function get_by_guid(guid) {
