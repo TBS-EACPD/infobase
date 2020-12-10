@@ -181,90 +181,113 @@ const SummaryTab = ({ panel_args, data: covid_estimates_summary }) => {
   );
 };
 
-//const common_column_configs = {
-//  est_doc: {
-//    index: 1,
-//    header: text_maker("covid_estimates_estimates_doc"),
-//    is_searchable: true,
-//    formatter: get_est_doc_name,
-//    raw_formatter: get_est_doc_name,
-//    sort_func: est_doc_sort_func,
-//  },
-//  stat: {
-//    index: 2,
-//    header: text_maker("covid_estimates_stat"),
-//    is_searchable: false,
-//    is_summable: true,
-//    formatter: "compact2",
-//  },
-//  vote: {
-//    index: 3,
-//    header: text_maker("covid_estimates_voted"),
-//    is_searchable: false,
-//    is_summable: true,
-//    formatter: "compact2",
-//  },
-//};
-//const ByDepartmentTab = () => {
-//  // pre-sort by est doc, so presentation consistent when sorting by other col
-//  const pre_sorted_dept_estimates = _.sortBy(
-//    CovidEstimates.get_all(),
-//    ({ est_doc }) => get_est_doc_order(est_doc)
-//  );
-//
-//  const column_configs = {
-//    org: {
-//      index: 0,
-//      header: text_maker("department"),
-//      is_searchable: true,
-//      formatter: (org) => (
-//        <a
-//          href={infograph_options_href_template(org, "financial", {
-//            panel_key: "covid_estimates_panel",
-//          })}
-//        >
-//          {org.name}
-//        </a>
-//      ),
-//      raw_formatter: (org) => org.name,
-//      sort_func: (org_a, org_b) => string_sort_func(org_a.name, org_b.name),
-//    },
-//    ...common_column_configs,
-//  };
-//
-//  const [largest_dept_id, largest_dept_auth] = _.chain(
-//    pre_sorted_dept_estimates
-//  )
-//    .groupBy("org_id")
-//    .mapValues((covid_estimates) =>
-//      _.reduce(covid_estimates, (memo, { vote, stat }) => memo + vote + stat, 0)
-//    )
-//    .toPairs()
-//    .sortBy(([org_id, auth_total]) => auth_total)
-//    .last()
-//    .value();
-//
-//  return (
-//    <Fragment>
-//      <TM
-//        k="covid_estimates_department_tab_text"
-//        args={{
-//          largest_dept_name: Dept.lookup(largest_dept_id).name,
-//          largest_dept_auth,
-//        }}
-//        className="medium-panel-text"
-//      />
-//      <SmartDisplayTable
-//        data={_.map(pre_sorted_dept_estimates, (row) =>
-//          _.pick(row, _.keys(column_configs))
-//        )}
-//        column_configs={column_configs}
-//        table_name={text_maker("covid_estimates_department_tab_label")}
-//      />
-//    </Fragment>
-//  );
-//};
-//
+const common_column_configs = {
+  est_doc: {
+    index: 1,
+    header: text_maker("covid_estimates_estimates_doc"),
+    is_searchable: true,
+    formatter: get_est_doc_name,
+    raw_formatter: get_est_doc_name,
+    sort_func: est_doc_sort_func,
+  },
+  stat: {
+    index: 2,
+    header: text_maker("covid_estimates_stat"),
+    is_searchable: false,
+    is_summable: true,
+    formatter: "compact2",
+  },
+  vote: {
+    index: 3,
+    header: text_maker("covid_estimates_voted"),
+    is_searchable: false,
+    is_summable: true,
+    formatter: "compact2",
+  },
+};
+const ByDepartmentTab = ({ data: estimates_by_covid_measure }) => {
+  const covid_estimates_by_department = _.chain(estimates_by_covid_measure)
+    .flatMap("estimates")
+    .groupBy("org_id")
+    .flatMap((org_group, org_id) =>
+      _.chain(org_group)
+        .groupBy("est_doc")
+        .flatMap((doc_group, est_doc) => ({
+          org_id,
+          org: Dept.lookup(org_id),
+          est_doc,
+          ..._.reduce(
+            doc_group,
+            (memo, row) => ({
+              stat: memo.stat + row.stat,
+              vote: memo.vote + row.vote,
+            }),
+            { stat: 0, vote: 0 }
+          ),
+        }))
+        .value()
+    )
+    .value();
+
+  // pre-sort by est doc, so presentation consistent when sorting by other col
+  const pre_sorted_dept_estimates = _.sortBy(
+    covid_estimates_by_department,
+    ({ est_doc }) => get_est_doc_order(est_doc)
+  );
+
+  const column_configs = {
+    org: {
+      index: 0,
+      header: text_maker("department"),
+      is_searchable: true,
+      formatter: (org) => (
+        <a
+          href={infograph_options_href_template(org, "financial", {
+            panel_key: "covid_estimates_panel",
+          })}
+        >
+          {org.name}
+        </a>
+      ),
+      raw_formatter: (org) => org.name,
+      sort_func: (org_a, org_b) => string_sort_func(org_a.name, org_b.name),
+    },
+    ...common_column_configs,
+  };
+
+  const [largest_dept_id, largest_dept_auth] = _.chain(
+    pre_sorted_dept_estimates
+  )
+    .groupBy("org_id")
+    .mapValues((covid_estimates) =>
+      _.reduce(covid_estimates, (memo, { vote, stat }) => memo + vote + stat, 0)
+    )
+    .toPairs()
+    .sortBy(([org_id, auth_total]) => auth_total)
+    .last()
+    .value();
+
+  return (
+    <Fragment>
+      <TM
+        k="covid_estimates_department_tab_text"
+        args={{
+          largest_dept_name: Dept.lookup(largest_dept_id).name,
+          largest_dept_auth,
+        }}
+        className="medium-panel-text"
+      />
+      <SmartDisplayTable
+        data={_.map(pre_sorted_dept_estimates, (row) =>
+          _.pick(row, _.keys(column_configs))
+        )}
+        column_configs={column_configs}
+        table_name={text_maker("covid_estimates_department_tab_label")}
+      />
+    </Fragment>
+  );
+};
+
 //const get_initiative_rows = (subject) => {
 //  const initiatives =
 //    subject.level === "gov"
@@ -365,19 +388,6 @@ class TabLoadingWrapper extends React.Component {
         loading: false,
       })
     );
-
-    //const {
-    //  query,
-    //  variables,
-    //  response_accessor = _.identity,
-    //} = get_query_config(panel_args);
-    //
-    //client.query({ query, variables }).then((query_response) =>
-    //  this.setState({
-    //    data: response_accessor(query_response),
-    //    loading: false,
-    //  })
-    //);
   }
   render() {
     const { panel_args, TabContent } = this.props;
@@ -439,21 +449,16 @@ const tab_content_configs = [
     TabContent: SummaryTab,
     levels: ["gov", "dept"],
   },
-  //{
-  //  key: "department",
-  //  label: text_maker("covid_estimates_department_tab_label"),
-  //  load_data: () => ({
-  //    query: all_covid_estimates_by_measure_query,
-  //    variables: {
-  //      lang: window.lang,
-  //      _query_name: "all_covid_estimates_by_measure_query",
-  //    },
-  //    response_accessor: (response) =>
-  //      _.get(response, "data.root.gov.covid_estimates_summary"),
-  //  }),
-  //  TabContent: ByDepartmentTab,
-  //  levels: ["gov"],
-  //},
+  {
+    key: "department",
+    label: text_maker("covid_estimates_department_tab_label"),
+    load_data: ({ subject }) =>
+      ensure_loaded({ covid_estimates: true, subject }).then(() =>
+        CovidMeasures.get_all()
+      ),
+    TabContent: ByDepartmentTab,
+    levels: ["gov"],
+  },
   //{
   //  key: "initiative",
   //  label: text_maker("covid_estimates_initiative_tab_label"),

@@ -35,7 +35,7 @@ export const org_covid_measure_query = build_org_query(
 );
 
 const covid_estimates_by_measure_query_fragment = `
-  covid_measures {
+  covid_estimates_by_measure: covid_measures {
     id
     name
   
