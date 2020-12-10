@@ -349,6 +349,12 @@ const Infographic = ({
   },
 }) => {
   const set_redirect_msg = (msg_key, args, replaced_route) => {
+    log_standard_event({
+      SUBAPP: window.location.hash.replace("#", ""),
+      MISC1: "ERROR_IN_INFOGRAPH",
+      MISC2: window.location.href,
+    });
+
     set_session_storage_w_expiry("pre_redirected_url", location.href);
     set_session_storage_w_expiry("redirected_msg", text_maker(msg_key, args));
     window.location.replace(replaced_route);
