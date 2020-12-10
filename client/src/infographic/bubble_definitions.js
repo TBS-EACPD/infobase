@@ -39,6 +39,11 @@ const base_configs = [
     svg: IconMoney,
   },
   {
+    id: "covid",
+    title: text_maker("covid_title"),
+    description: text_maker("covid_desc"),
+  },
+  {
     id: "people",
     title: text_maker("people_title"),
     description: text_maker("people_desc"),

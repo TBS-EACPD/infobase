@@ -61,6 +61,7 @@ export const get_dept_panels = (subject) =>
   ensure_loaded({
     subject: subject,
     has_results: true,
+    has_covid_response: true,
   }).then(() => ({
     intro: [declare_profile_panel(), declare_portfolio_structure_intro_panel()],
     financial: _.includes(subject.tables, "programSpending") && [
@@ -70,7 +71,6 @@ export const get_dept_panels = (subject) =>
       declare_welcome_mat_panel(),
       declare_auth_exp_planned_spending_panel(),
       declare_in_year_estimates_split_panel(),
-      declare_covid_estimates_panel(),
       declare_in_year_voted_stat_split_panel(),
       declare_estimates_in_perspective_panel(),
       declare_tp_by_region_panel(),
@@ -82,6 +82,9 @@ export const get_dept_panels = (subject) =>
       declare_internal_services_panel(),
       declare_planned_actual_comparison_panel(),
       declare_dp_rev_split_panel(),
+    ],
+    covid: subject.has_data("covid_response") && [
+      declare_covid_estimates_panel(),
     ],
     people: _.includes(subject.tables, "orgEmployeeType") && [
       declare_people_key_concepts_panel(),
