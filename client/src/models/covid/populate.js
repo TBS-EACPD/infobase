@@ -20,7 +20,7 @@ export const api_load_has_covid_response = (subject) => {
   } catch (e) {
     return get_client()
       .query({
-        org_has_covid_data_query,
+        query: org_has_covid_data_query,
         variables: {
           lang: window.lang,
           id: subject.id,
@@ -29,7 +29,7 @@ export const api_load_has_covid_response = (subject) => {
       })
       .then((response) =>
         subject.set_has_data(
-          "covid_repsonse",
+          "covid_response",
           response.data.root.org.has_covid_data
         )
       );
