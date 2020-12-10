@@ -14,6 +14,9 @@ of the advanced search for mobile */
 .remove-bullet-points {
   list-style-type: none;
 }
+.remove-padding {
+  padding-inline-start: 0;
+}
 .panel-status-text {
   color: $tertiaryColor;
   font-size: 13px;
