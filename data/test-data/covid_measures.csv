@@ -1,4 +1,4 @@
-covid_measure_id,name_en,name_fr
-COV001,measure 1,measure 1
-COV002,measure 2,measure 2
-COV003,measure 3,measure 3
+covid_measure_id,name_en,name_fr,in_estimates
+COV001,measure 1,measure 1,1
+COV002,measure 2,measure 2,0
+COV003,measure 3,measure 3,1
