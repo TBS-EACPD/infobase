@@ -221,7 +221,7 @@ const ByDepartmentTab = ({ data: covid_estimates_roll_up }) => {
 
         return (
           <a
-            href={infograph_options_href_template(org, "financial", {
+            href={infograph_options_href_template(org, "covid", {
               panel_key: "covid_estimates_panel",
             })}
           >
