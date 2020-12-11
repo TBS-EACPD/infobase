@@ -1,9 +1,10 @@
 import _ from "lodash";
+import { check } from "prettier";
 
 import { get_standard_csv_file_rows } from "../load_utils.js";
 
 export default async function ({ models }) {
-  const { CovidMeasure, CovidEstimatesSummary } = models;
+  const { HasCovidData, CovidMeasure, CovidEstimatesSummary } = models;
 
   const covid_estimates_rows = _.map(
     get_standard_csv_file_rows("covid_estimates.csv"),
@@ -22,6 +23,16 @@ export default async function ({ models }) {
     get_standard_csv_file_rows("covid_commitments.csv"),
     (row) => ({ ...row, commitment: +row.commitment })
   );
+
+  const has_covid_data_records = _.chain([
+    ...covid_estimates_rows,
+    ...covid_expenditures_rows,
+    ...covid_commitments_rows,
+  ])
+    .map("org_id")
+    .uniq()
+    .map((org_id) => new HasCovidData({ org_id }))
+    .value();
 
   const covid_measure_records = _.map(
     get_standard_csv_file_rows("covid_measures.csv"),
@@ -96,6 +107,7 @@ export default async function ({ models }) {
     .value();
 
   return await Promise.all([
+    HasCovidData.insertMany(has_covid_data_records),
     CovidMeasure.insertMany(covid_measure_records),
     CovidEstimatesSummary.insertMany(coivd_estimates_summary_records),
   ]);

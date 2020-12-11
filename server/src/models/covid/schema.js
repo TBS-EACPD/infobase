@@ -76,8 +76,9 @@ export default function ({ models, loaders }) {
 
   const {
     org_id_loader,
-    covid_measures_by_org_id_loader,
+    has_covid_measure_loader,
     covid_measure_loader,
+    covid_measures_by_org_id_loader,
     covid_estimates_summary_by_org_id_loader,
   } = loaders;
 
@@ -116,7 +117,9 @@ export default function ({ models, loaders }) {
       covid_estimates_summary: ({ org_id }) =>
         covid_estimates_summary_by_org_id_loader.load(org_id),
       has_covid_data: ({ org_id }) =>
-        covid_estimates_summary_by_org_id_loader.load(org_id).then(_.some),
+        has_covid_measure_loader
+          .load(org_id)
+          .then((record) => !_.isUndefined(record)),
     },
     CovidMeasure: {
       id: _.property("covid_measure_id"),

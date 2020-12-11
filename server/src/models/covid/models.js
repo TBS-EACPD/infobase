@@ -14,6 +14,10 @@ import {
 } from "../model_utils.js";
 
 export default function (model_singleton) {
+  const HasCovidDataSchema = mongoose.Schema({
+    org_id: pkey_type(),
+  });
+
   const CovidEstimatesSchema = mongoose.Schema({
     org_id: parent_fkey_type(),
 
@@ -47,12 +51,21 @@ export default function (model_singleton) {
     covid_commitments: [CovidCommitmentSchema],
   });
 
+  model_singleton.define_model("HasCovidData", HasCovidDataSchema);
   model_singleton.define_model("CovidMeasure", CovidMeasureSchema);
   model_singleton.define_model("CovidEstimatesSummary", CovidEstimatesSchema);
 
-  const { CovidMeasure, CovidEstimatesSummary } = model_singleton.models;
+  const {
+    HasCovidData,
+    CovidMeasure,
+    CovidEstimatesSummary,
+  } = model_singleton.models;
 
   const loaders = {
+    has_covid_measure_loader: create_resource_by_id_attr_dataloader(
+      HasCovidData,
+      "org_id"
+    ),
     covid_measure_loader: create_resource_by_id_attr_dataloader(
       CovidMeasure,
       "covid_measure_id"
