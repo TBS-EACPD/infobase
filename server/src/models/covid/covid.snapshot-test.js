@@ -57,29 +57,56 @@ query ($lang: String = "en", $covid_measure_id: String = "COV001") {
   }
 }`;
 
-const gov_covid_estimates_summary_query = `
+const gov_covid_summary_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
     gov {
-      covid_estimates_summary {
-        fiscal_year
-        est_doc
-        vote
-        stat
+      covid_summary {
+        covid_estimates {
+          fiscal_year
+          est_doc
+          vote
+          stat
+        }
+        covid_expenditures {
+          fiscal_year
+          is_budgetary
+          vote
+          stat
+        }
+        covid_commitments{
+          fiscal_year
+          commitment
+        }
       }
     }
   }
 }`;
 
-const org_covid_estimates_summary_query = `
+const org_covid_summary_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
     org(org_id: "133") {
-      covid_estimates_summary {
-        fiscal_year
-        est_doc
-        vote
-        stat
+      org_id
+      name
+
+      covid_summary {
+        covid_estimates {
+          fiscal_year
+          est_doc
+          vote
+          stat
+        }
+        covid_expenditures {
+          fiscal_year
+          is_budgetary
+          vote
+          stat
+        }
+        covid_commitments{
+          fiscal_year
+          commitment
+        }
       }
     }
   }
@@ -139,7 +166,7 @@ query ($lang: String = "en") {
     has_data: org(org_id: "133") {
       has_covid_data
     }
-    does_not_have_Data: org(org_id: "15") {
+    does_not_have_data: org(org_id: "15") {
       has_covid_data
     }
   }
@@ -155,11 +182,11 @@ describe("covid data", () => {
     return expect(data).toMatchSnapshot();
   });
   it("Gov covid estimates summary", async () => {
-    const data = await execQuery(gov_covid_estimates_summary_query, {});
+    const data = await execQuery(gov_covid_summary_query, {});
     return expect(data).toMatchSnapshot();
   });
   it("Org covid estimates summary", async () => {
-    const data = await execQuery(org_covid_estimates_summary_query, {});
+    const data = await execQuery(org_covid_summary_query, {});
     return expect(data).toMatchSnapshot();
   });
   it("Org covid measures", async () => {

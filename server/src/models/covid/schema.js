@@ -2,6 +2,26 @@ import _ from "lodash";
 
 import { bilingual_field } from "../schema_utils";
 
+const estimates_fields = `
+  id: String
+  fiscal_year: String
+  est_doc: String
+  vote: Float
+  stat: Float
+`;
+const expenditures_fields = `
+  id: String
+  fiscal_year: String
+  is_budgetary: Boolean
+  vote: Float
+  stat: Float
+`;
+const commitments_fields = `
+  id: String
+  fiscal_year: String
+  commitment: Float
+`;
+
 const schema = `
   extend type Root{
     covid_measures: [CovidMeasure]
@@ -9,23 +29,14 @@ const schema = `
   }
 
   extend type Gov{
-    covid_estimates_summary: [CovidEstimatesSummary]
+    covid_summary: [CovidSummary]
   }
 
   extend type Org{
     covid_measures: [CovidMeasure]
-    covid_estimates_summary: [CovidEstimatesSummary]
+    covid_summary: [CovidSummary]
 
     has_covid_data: Boolean
-  }
-
-  type CovidEstimatesSummary{
-    id: String
-
-    fiscal_year: String
-    est_doc: String
-    vote: Float
-    stat: Float
   }
 
   type CovidMeasure{
@@ -39,35 +50,39 @@ const schema = `
   }
 
   type CovidEstimates{
-    id: String
-    
     org_id: Int
     org: Org
 
-    fiscal_year: String
-    est_doc: String
-    vote: Float
-    stat: Float
+    ${estimates_fields}
   }
   type CovidExpenditures{
-    id: String
-    
     org_id: Int
     org: Org
 
-    fiscal_year: String
-    is_budgetary: Boolean
-    vote: Float
-    stat: Float
+    ${expenditures_fields}
   }
   type CovidCommitments{
-    id: String
-    
     org_id: Int
     org: Org
 
-    fiscal_year: String
-    commitment: Float
+    ${commitments_fields}
+  }
+
+  type CovidSummary{
+    id: String
+
+    covid_estimates: [CovidEstimatesSummary]
+    covid_expenditures: [CovidExpendituresSummary]
+    covid_commitments: [CovidCommitmentsSummary]
+  }
+  type CovidEstimatesSummary{
+    ${estimates_fields}
+  }
+  type CovidExpendituresSummary{
+    ${expenditures_fields}
+  }
+  type CovidCommitmentsSummary{
+    ${commitments_fields}
   }
 `;
 
@@ -79,7 +94,7 @@ export default function ({ models, loaders }) {
     has_covid_measure_loader,
     covid_measure_loader,
     covid_measures_by_org_id_loader,
-    covid_estimates_summary_by_org_id_loader,
+    covid_summary_by_org_id_loader,
   } = loaders;
 
   const resolvers = {
@@ -89,8 +104,7 @@ export default function ({ models, loaders }) {
         covid_measure_loader.load(covid_measure_id),
     },
     Gov: {
-      covid_estimates_summary: () =>
-        covid_estimates_summary_by_org_id_loader.load("gov"),
+      covid_summary: () => covid_summary_by_org_id_loader.load("gov"),
     },
     Org: {
       covid_measures: ({ org_id: queried_org_id }) =>
@@ -110,12 +124,12 @@ export default function ({ models, loaders }) {
               )
               .value();
 
-            // these objects have non-spreadable properites, assign instead (and clone, out of caution for assign mutating)
+            // these objects have non-spreadable properites (getters, methods, etc.), assign instead (and clone, out of caution for assign mutating)
             return _.chain(measure).cloneDeep().assign(filtered_data).value();
           })
         ),
-      covid_estimates_summary: ({ org_id }) =>
-        covid_estimates_summary_by_org_id_loader.load(org_id),
+      covid_summary: ({ org_id }) =>
+        covid_summary_by_org_id_loader.load(org_id),
       has_covid_data: ({ org_id }) =>
         has_covid_measure_loader
           .load(org_id)

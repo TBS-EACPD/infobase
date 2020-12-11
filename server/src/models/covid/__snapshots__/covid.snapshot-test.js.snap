@@ -106,7 +106,7 @@ Object {
           "covid_expenditures": Array [
             Object {
               "fiscal_year": "2020",
-              "is_budgetary": true,
+              "is_budgetary": false,
               "org": Object {
                 "id": "133",
                 "name": "National Defence",
@@ -139,7 +139,7 @@ Object {
             },
             Object {
               "fiscal_year": "2020",
-              "is_budgetary": true,
+              "is_budgetary": false,
               "org": Object {
                 "id": "552",
                 "name": "Polar Knowledge Canada",
@@ -254,7 +254,7 @@ Object {
           "covid_expenditures": Array [
             Object {
               "fiscal_year": "2020",
-              "is_budgetary": true,
+              "is_budgetary": false,
               "org": Object {
                 "id": "133",
                 "name": "National Defence",
@@ -385,42 +385,76 @@ Object {
   "data": Object {
     "root": Object {
       "gov": Object {
-        "covid_estimates_summary": Array [
+        "covid_summary": Array [
           Object {
-            "est_doc": "ME",
-            "fiscal_year": "2020",
-            "stat": 1007,
-            "vote": 1107,
-          },
-          Object {
-            "est_doc": "SEA",
-            "fiscal_year": "2020",
-            "stat": 108,
-            "vote": 207,
-          },
-          Object {
-            "est_doc": "SEB",
-            "fiscal_year": "2020",
-            "stat": 18,
-            "vote": 27,
-          },
-          Object {
-            "est_doc": "SEC",
-            "fiscal_year": "2020",
-            "stat": 9,
-            "vote": 0,
-          },
-          Object {
-            "est_doc": "ME",
-            "fiscal_year": "2021",
-            "stat": 999,
-            "vote": 9,
-          },
-          Object {
-            "est_doc": "SEC",
-            "fiscal_year": "2021",
-            "stat": 9,
-            "vote": 0,
+            "covid_commitments": Array [
+              Object {
+                "commitment": 28,
+                "fiscal_year": "2020",
+              },
+              Object {
+                "commitment": 8,
+                "fiscal_year": "2021",
+              },
+            ],
+            "covid_estimates": Array [
+              Object {
+                "est_doc": "ME",
+                "fiscal_year": "2020",
+                "stat": 1007,
+                "vote": 1107,
+              },
+              Object {
+                "est_doc": "SEA",
+                "fiscal_year": "2020",
+                "stat": 108,
+                "vote": 207,
+              },
+              Object {
+                "est_doc": "SEB",
+                "fiscal_year": "2020",
+                "stat": 18,
+                "vote": 27,
+              },
+              Object {
+                "est_doc": "SEC",
+                "fiscal_year": "2020",
+                "stat": 9,
+                "vote": 0,
+              },
+              Object {
+                "est_doc": "ME",
+                "fiscal_year": "2021",
+                "stat": 999,
+                "vote": 9,
+              },
+              Object {
+                "est_doc": "SEC",
+                "fiscal_year": "2021",
+                "stat": 9,
+                "vote": 0,
+              },
+            ],
+            "covid_expenditures": Array [
+              Object {
+                "fiscal_year": "2020",
+                "is_budgetary": false,
+                "stat": 6,
+                "vote": 4,
+              },
+              Object {
+                "fiscal_year": "2020",
+                "is_budgetary": true,
+                "stat": 15,
+                "vote": 17,
+              },
+              Object {
+                "fiscal_year": "2021",
+                "is_budgetary": true,
+                "stat": 7,
+                "vote": 7,
+              },
+            ],
           },
         ],
       },
@@ -434,32 +468,58 @@ Object {
   "data": Object {
     "root": Object {
       "org": Object {
-        "covid_estimates_summary": Array [
+        "covid_summary": Array [
           Object {
-            "est_doc": "ME",
-            "fiscal_year": "2020",
-            "stat": 8,
-            "vote": 1107,
-          },
-          Object {
-            "est_doc": "SEA",
-            "fiscal_year": "2020",
-            "stat": 0,
-            "vote": 9,
-          },
-          Object {
-            "est_doc": "SEB",
-            "fiscal_year": "2020",
-            "stat": 9,
-            "vote": 9,
-          },
-          Object {
-            "est_doc": "ME",
-            "fiscal_year": "2021",
-            "stat": 0,
-            "vote": 9,
+            "covid_commitments": Array [
+              Object {
+                "commitment": 6,
+                "fiscal_year": "2020",
+              },
+            ],
+            "covid_estimates": Array [
+              Object {
+                "est_doc": "ME",
+                "fiscal_year": "2020",
+                "stat": 8,
+                "vote": 1107,
+              },
+              Object {
+                "est_doc": "SEA",
+                "fiscal_year": "2020",
+                "stat": 0,
+                "vote": 9,
+              },
+              Object {
+                "est_doc": "SEB",
+                "fiscal_year": "2020",
+                "stat": 9,
+                "vote": 9,
+              },
+              Object {
+                "est_doc": "ME",
+                "fiscal_year": "2021",
+                "stat": 0,
+                "vote": 9,
+              },
+            ],
+            "covid_expenditures": Array [
+              Object {
+                "fiscal_year": "2020",
+                "is_budgetary": false,
+                "stat": 2,
+                "vote": 4,
+              },
+              Object {
+                "fiscal_year": "2020",
+                "is_budgetary": true,
+                "stat": 4,
+                "vote": 2,
+              },
+            ],
           },
         ],
+        "name": "National Defence",
+        "org_id": "133",
       },
     },
   },
@@ -522,7 +582,7 @@ Object {
             "covid_expenditures": Array [
               Object {
                 "fiscal_year": "2020",
-                "is_budgetary": true,
+                "is_budgetary": false,
                 "org": Object {
                   "id": "133",
                   "name": "National Defence",
@@ -575,7 +635,7 @@ Object {
             "covid_expenditures": Array [
               Object {
                 "fiscal_year": "2020",
-                "is_budgetary": true,
+                "is_budgetary": false,
                 "org": Object {
                   "id": "133",
                   "name": "National Defence",
@@ -653,7 +713,7 @@ exports[`covid data Org has covid data 1`] = `
 Object {
   "data": Object {
     "root": Object {
-      "does_not_have_Data": Object {
+      "does_not_have_data": Object {
         "has_covid_data": false,
       },
       "has_data": Object {
