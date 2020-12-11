@@ -63,7 +63,7 @@ export const org_covid_estimates_by_measure_query = build_org_query(
 
 const covid_expenditures_fields = `
   fiscal_year
-  est_doc
+  is_budgetary
   vote
   stat
 `;
