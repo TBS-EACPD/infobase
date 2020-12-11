@@ -58,19 +58,31 @@ export const org_covid_estimates_by_measure_query = build_org_query(
   covid_estimates_by_measure_query_fragment
 );
 
-const covid_estimates_summary_query_fragment = `
-  covid_estimates_summary {
-    fiscal_year
-    est_doc
-    vote
-    stat
+const covid_summary_query_fragment = `
+  covid_summary {
+    covid_estimates {
+      fiscal_year
+      est_doc
+      vote
+      stat
+    }
+    covid_expenditures {
+      fiscal_year
+      is_budgetary
+      vote
+      stat
+    }
+    covid_commitments{
+      fiscal_year
+      commitment
+    }
   }
 `;
-export const gov_covid_estimates_summary_query = build_base_query(`
+export const gov_covid_summary_query = build_base_query(`
   gov {
-    ${covid_estimates_summary_query_fragment}
+    ${covid_summary_query_fragment}
   }
 `);
-export const org_covid_estimates_summary_query = build_org_query(
-  covid_estimates_summary_query_fragment
+export const org_covid_summary_query = build_org_query(
+  covid_summary_query_fragment
 );

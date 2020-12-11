@@ -15,8 +15,8 @@ import {
 } from "src/panels/panel_declarations/shared.js";
 
 import {
-  gov_covid_estimates_summary_query,
-  org_covid_estimates_summary_query,
+  gov_covid_summary_query,
+  org_covid_summary_query,
 } from "src/models/covid/queries.js";
 
 import { textColor } from "src/core/color_defs.js";
@@ -378,24 +378,24 @@ const tab_content_configs = [
       const { query, variables, response_accessor } = (() => {
         if (subject.level === "dept") {
           return {
-            query: org_covid_estimates_summary_query,
+            query: org_covid_summary_query,
             variables: {
               lang: window.lang,
               id: subject.id,
-              _query_name: "org_covid_estimates_summary_query",
+              _query_name: "org_covid_summary_query",
             },
             response_accessor: (response) =>
-              _.get(response, "data.root.org.covid_estimates_summary"),
+              _.get(response, "data.root.org.covid_summary.covid_estimates"),
           };
         } else {
           return {
-            query: gov_covid_estimates_summary_query,
+            query: gov_covid_summary_query,
             variables: {
               lang: window.lang,
-              _query_name: "gov_covid_estimates_summary_query",
+              _query_name: "gov_covid_summary_query",
             },
             response_accessor: (response) =>
-              _.get(response, "data.root.gov.covid_estimates_summary"),
+              _.get(response, "data.root.gov.covid_summary.covid_estimates"),
           };
         }
       })();
@@ -459,27 +459,36 @@ class CovidEstimatesPanel extends React.Component {
     this.state = {
       loading: true,
       gov_covid_auth_in_year: null,
-      covid_estimates_summary: null,
+      covid_summary: null,
     };
   }
   componentDidMount() {
     client
       .query({
-        query: gov_covid_estimates_summary_query,
+        query: gov_covid_summary_query,
         variables: {
           lang: window.lang,
-          _query_name: "gov_covid_estimates_summary_query",
+          _query_name: "gov_covid_summary_query",
         },
       })
-      .then(({ data: { root: { gov: { covid_estimates_summary } } } }) =>
-        this.setState({
-          gov_covid_auth_in_year: _.reduce(
-            covid_estimates_summary,
-            (memo, { vote, stat }) => memo + vote + stat,
-            0
-          ),
-          loading: false,
-        })
+      .then(
+        ({
+          data: {
+            root: {
+              gov: {
+                covid_summary: { covid_estimates },
+              },
+            },
+          },
+        }) =>
+          this.setState({
+            gov_covid_auth_in_year: _.reduce(
+              covid_estimates,
+              (memo, { vote, stat }) => memo + vote + stat,
+              0
+            ),
+            loading: false,
+          })
       );
   }
   render() {
@@ -527,8 +536,8 @@ export const declare_covid_estimates_panel = () =>
     panel_config_func: (level_name, panel_key) => ({
       requires_has_covid_response: level_name === "dept",
       initial_queries: {
-        gov_covid_estimates_summary_query,
-        ...(level_name === "dept" && { org_covid_estimates_summary_query }),
+        gov_covid_summary_query,
+        ...(level_name === "dept" && { org_covid_summary_query }),
       },
       footnotes: ["COVID", "COVID_AUTH"],
       depends_on: [],
