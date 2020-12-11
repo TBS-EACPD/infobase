@@ -71,18 +71,18 @@ class CovidMeasure extends mix().with(
     });
   }
 
-  static extend_with_estimates(measure_id, estimates) {
+  static extend_with_data(measure_id, data_key, data) {
     const measure = this.lookup(measure_id);
-    const new_estimates_set =
-      measure && measure.estimates
+    const extended_data_set =
+      measure && measure[data_key]
         ? _.uniqBy(
-            [...estimates, ...measure.estimates],
+            [...measure[data_key], ...data],
             ({ org_id, fiscal_year, est_doc }) =>
               `${org_id}-${fiscal_year}-${est_doc}`
           )
-        : estimates;
+        : data;
 
-    this.extend(measure_id, { estimates: new_estimates_set });
+    this.extend(measure_id, { [data_key]: extended_data_set });
   }
 
   static get_all_estimates_by_measure = () =>
