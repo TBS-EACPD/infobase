@@ -29,12 +29,12 @@ const schema = `
   }
 
   extend type Gov{
-    covid_summary: [CovidSummary]
+    covid_summary: CovidSummary
   }
 
   extend type Org{
     covid_measures: [CovidMeasure]
-    covid_summary: [CovidSummary]
+    covid_summary: CovidSummary
 
     has_covid_data: Boolean
   }
@@ -104,7 +104,8 @@ export default function ({ models, loaders }) {
         covid_measure_loader.load(covid_measure_id),
     },
     Gov: {
-      covid_summary: () => covid_summary_by_org_id_loader.load("gov"),
+      covid_summary: () =>
+        covid_summary_by_org_id_loader.load("gov").then(_.first),
     },
     Org: {
       covid_measures: ({ org_id: queried_org_id }) =>
@@ -129,7 +130,7 @@ export default function ({ models, loaders }) {
           })
         ),
       covid_summary: ({ org_id }) =>
-        covid_summary_by_org_id_loader.load(org_id),
+        covid_summary_by_org_id_loader.load(org_id).then(_.first),
       has_covid_data: ({ org_id }) =>
         has_covid_measure_loader
           .load(org_id)
