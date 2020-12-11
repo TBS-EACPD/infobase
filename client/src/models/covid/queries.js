@@ -21,11 +21,14 @@ const build_org_query = (inner_fragment) => gql`
 
 export const org_has_covid_data_query = build_org_query("has_covid_data");
 
+const covid_measure_fields = `
+  id
+  name
+  in_estimates
+`;
 const covid_measure_query_fragment = `
   covid_measures {
-    id
-    name
-    in_estimates
+    ${covid_measure_fields}
   }
 `;
 export const all_covid_measure_query = build_base_query(
@@ -35,19 +38,19 @@ export const org_covid_measure_query = build_org_query(
   covid_measure_query_fragment
 );
 
+const covid_estimates_fields = `
+  fiscal_year
+  est_doc
+  vote
+  stat
+`;
 const covid_estimates_by_measure_query_fragment = `
   covid_estimates_by_measure: covid_measures {
-    id
-    name
-    in_estimates
+    ${covid_measure_fields}
   
     covid_estimates {
       org_id
-      fiscal_year
-      est_doc
-
-      vote
-      stat
+      ${covid_estimates_fields}
     }
   }
 `;
@@ -58,23 +61,59 @@ export const org_covid_estimates_by_measure_query = build_org_query(
   covid_estimates_by_measure_query_fragment
 );
 
+const covid_expenditures_fields = `
+  fiscal_year
+  est_doc
+  vote
+  stat
+`;
+const covid_expenditures_by_measure_query_fragment = `
+  covid_expenditures_by_measure: covid_measures {
+    ${covid_measure_fields}
+  
+    covid_expenditures {
+      org_id
+      ${covid_expenditures_fields}
+    }
+  }
+`;
+export const all_covid_expenditures_by_measure_query = build_base_query(
+  covid_expenditures_by_measure_query_fragment
+);
+export const org_covid_expenditures_by_measure_query = build_org_query(
+  covid_expenditures_by_measure_query_fragment
+);
+
+const covid_commitments_fields = `
+  fiscal_year
+  commitment
+`;
+const covid_commitments_by_measure_query_fragment = `
+  covid_commitments_by_measure: covid_measures {
+    ${covid_measure_fields}
+  
+    covid_commitments {
+      ${covid_commitments_fields}
+    }
+  }
+`;
+export const all_covid_commitments_by_measure_query = build_base_query(
+  covid_commitments_by_measure_query_fragment
+);
+export const org_covid_commitments_by_measure_query = build_org_query(
+  covid_commitments_by_measure_query_fragment
+);
+
 const covid_summary_query_fragment = `
   covid_summary {
     covid_estimates {
-      fiscal_year
-      est_doc
-      vote
-      stat
+      ${covid_estimates_fields}
     }
     covid_expenditures {
-      fiscal_year
-      is_budgetary
-      vote
-      stat
+      ${covid_expenditures_fields}
     }
     covid_commitments{
-      fiscal_year
-      commitment
+      ${covid_commitments_fields}
     }
   }
 `;
