@@ -9,6 +9,19 @@ export default async function ({ models }) {
     get_standard_csv_file_rows("covid_estimates.csv"),
     (row) => ({ ...row, vote: +row.vote, stat: +row.stat })
   );
+  const covid_expenditures_rows = _.map(
+    get_standard_csv_file_rows("covid_expenditures.csv"),
+    (row) => ({
+      ...row,
+      is_budgetary: !!row.is_budgetary,
+      vote: +row.vote,
+      stat: +row.stat,
+    })
+  );
+  const covid_commitments_rows = _.map(
+    get_standard_csv_file_rows("covid_commitments.csv"),
+    (row) => ({ ...row, commitment: +row.commitment })
+  );
 
   const covid_measure_records = _.map(
     get_standard_csv_file_rows("covid_measures.csv"),
@@ -17,6 +30,14 @@ export default async function ({ models }) {
         ...row,
         covid_estimates: _.filter(
           covid_estimates_rows,
+          ({ covid_measure_id }) => covid_measure_id === row.covid_measure_id
+        ),
+        covid_expenditures: _.filter(
+          covid_expenditures_rows,
+          ({ covid_measure_id }) => covid_measure_id === row.covid_measure_id
+        ),
+        covid_commitments: _.filter(
+          covid_commitments_rows,
           ({ covid_measure_id }) => covid_measure_id === row.covid_measure_id
         ),
       })

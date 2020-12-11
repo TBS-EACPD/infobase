@@ -34,6 +34,8 @@ const schema = `
     in_estimates: Boolean
 
     covid_estimates: [CovidEstimates]
+    covid_expenditures: [CovidExpenditures]
+    covid_commitments: [CovidCommitments]
   }
 
   type CovidEstimates{
@@ -46,6 +48,26 @@ const schema = `
     est_doc: String
     vote: Float
     stat: Float
+  }
+  type CovidExpenditures{
+    id: String
+    
+    org_id: Int
+    org: Org
+
+    fiscal_year: String
+    is_budgetary: Boolean
+    vote: Float
+    stat: Float
+  }
+  type CovidCommitments{
+    id: String
+    
+    org_id: Int
+    org: Org
+
+    fiscal_year: String
+    commitment: Float
   }
 `;
 
@@ -70,17 +92,26 @@ export default function ({ models, loaders }) {
         covid_estimates_summary_by_org_id_loader.load("gov"),
     },
     Org: {
-      covid_measures: ({ org_id }) =>
-        covid_measures_by_org_id_loader.load(org_id).then((measures) =>
-          _.map(measures, (measure) =>
-            _.assign(measure, {
-              covid_estimates: _.filter(
-                measure.covid_estimates,
-                ({ org_id: estimate_row_org_id }) =>
-                  estimate_row_org_id === org_id
-              ),
-            })
-          )
+      covid_measures: ({ org_id: queried_org_id }) =>
+        covid_measures_by_org_id_loader.load(queried_org_id).then((measures) =>
+          _.map(measures, (measure) => {
+            const filtered_data = _.chain(measure)
+              .pick([
+                "covid_estimates",
+                "covid_expenditures",
+                "covid_commitments",
+              ])
+              .mapValues((rows) =>
+                _.filter(
+                  rows,
+                  ({ org_id: row_org_id }) => row_org_id === queried_org_id
+                )
+              )
+              .value();
+
+            // these objects have non-spreadable properites, assign instead (and clone, out of caution for assign mutating)
+            return _.chain(measure).cloneDeep().assign(filtered_data).value();
+          })
         ),
       covid_estimates_summary: ({ org_id }) =>
         covid_estimates_summary_by_org_id_loader.load(org_id),
@@ -92,6 +123,12 @@ export default function ({ models, loaders }) {
       name: bilingual_field("name"),
     },
     CovidEstimates: {
+      org: ({ org_id }) => org_id_loader.load(org_id),
+    },
+    CovidExpenditures: {
+      org: ({ org_id }) => org_id_loader.load(org_id),
+    },
+    CovidCommitments: {
       org: ({ org_id }) => org_id_loader.load(org_id),
     },
   };

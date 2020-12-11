@@ -1,4 +1,4 @@
-"org_id","fiscal_year","covid_measure_id","budgetary","vote","stat"
+"org_id","fiscal_year","covid_measure_id","is_budgetary","vote","stat"
 133,2020,COV001,0,1,0
 133,2020,COV001,1,2,1
 133,2020,COV002,0,3,2

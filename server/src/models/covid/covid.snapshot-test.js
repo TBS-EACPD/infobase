@@ -20,6 +20,28 @@ query ($lang: String = "en") {
         vote
         stat
       }
+      covid_expenditures {
+        org_id
+        org {
+          id
+          name
+        }
+    
+        fiscal_year
+        is_budgetary
+        vote
+        stat
+      }
+      covid_commitments{
+        org_id
+        org {
+          id
+          name
+        }
+    
+        fiscal_year
+        commitment
+      }
     }
   }
 }`;
@@ -83,6 +105,28 @@ query ($lang: String = "en") {
           est_doc
           vote
           stat
+        }
+        covid_expenditures {
+          org_id
+          org {
+            id
+            name
+          }
+      
+          fiscal_year
+          is_budgetary
+          vote
+          stat
+        }
+        covid_commitments{
+          org_id
+          org {
+            id
+            name
+          }
+      
+          fiscal_year
+          commitment
         }
       }
     }
