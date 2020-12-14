@@ -78,4 +78,9 @@ export {
   declare_gov_dp_panel,
 } from "./results/index.js";
 
-export { declare_covid_estimates_panel } from "./covid/index.js";
+export {
+  declare_covid_overview_panel,
+  declare_covid_estimates_panel,
+  declare_covid_expenditures_panel,
+  declare_covid_measures_panel,
+} from "./covid/index.js";

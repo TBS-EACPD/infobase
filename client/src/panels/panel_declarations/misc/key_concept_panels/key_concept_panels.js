@@ -103,8 +103,8 @@ export const declare_tagging_key_concepts_panel = () =>
 
 export const declare_covid_key_concepts_panel = () =>
   declare_panel({
-    panel_key: "tagging_key_concepts",
-    levels: ["tag"],
+    panel_key: "covid_key_concepts",
+    levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       ...common_panel_config,
       render: curried_render({
