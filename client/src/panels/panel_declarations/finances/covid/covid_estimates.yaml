@@ -81,7 +81,7 @@ covid_estimates_measure_tab_label:
 covid_estimates_measure_tab_text:
   transform: [handlebars,markdown]
   en: |
-    The COVID-19 easure with the largest total COVID-19 related authorities is **{{largest_measure_name}}** with **{{fmt_compact1_written largest_measure_auth}}**
+    The COVID-19 measure with the largest total COVID-19 related authorities is **{{largest_measure_name}}** with **{{fmt_compact1_written largest_measure_auth}}**
     in authorities from Supplementary Estimates A and B.
   fr: |
     La mesure COVID-19 disposant des crédits les plus grand nombre d'autorisations liées à COVID-19 est **{{largest_measure_name}}** avec **{{fmt_compact1_written largest_measure_auth}}**
