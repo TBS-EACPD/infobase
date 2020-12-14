@@ -42,8 +42,8 @@ const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
 
 const include_verbose_gap_year_explanation = false;
 
-const calculate_lapse = (auth, exp, is_pct = false) => {
-  const lapse = auth - exp;
+const calculate_lapse = (auth, exp, unlapsed, is_pct = false) => {
+  const lapse = auth - exp - unlapsed;
   return is_pct ? lapse / auth || 0 : lapse;
 };
 const get_auth_exp_diff = ([larger_data_point, smaller_data_point]) =>
@@ -249,7 +249,12 @@ class LapseByVotesGraph extends React.Component {
     const get_lapse_raw_data = (is_pct, votes = filtered_votes) =>
       _.flatMap(votes, (vote_row) =>
         _.map(std_years, (yr) =>
-          calculate_lapse(vote_row[`${yr}auth`], vote_row[`${yr}exp`], is_pct)
+          calculate_lapse(
+            vote_row[`${yr}auth`],
+            vote_row[`${yr}exp`],
+            vote_row[`${yr}unlapsed`],
+            is_pct
+          )
         )
       );
     const lapsed_by_votes_sum = _.sum(get_lapse_raw_data(false, queried_votes));
@@ -332,6 +337,7 @@ class LapseByVotesGraph extends React.Component {
                     y: calculate_lapse(
                       vote_row[`${yr}auth`],
                       vote_row[`${yr}exp`],
+                      vote_row[`${yr}unlapsed`],
                       is_pct
                     ),
                   })),
@@ -377,6 +383,7 @@ class LapseByVotesGraph extends React.Component {
                         calculate_lapse(
                           vote_row[`${yr}auth`],
                           vote_row[`${yr}exp`],
+                          vote_row[`${yr}unlapsed`],
                           is_pct
                         ),
                       ])
@@ -588,7 +595,7 @@ const calculate = function (subject, options) {
       .divide(std_years.length)
       .value();
 
-  const flat_auth_exp_years = _.flatMap(["exp", "auth"], (type) =>
+  const flat_auth_exp_years = _.flatMap(["exp", "auth", "unlapsed"], (type) =>
     _.map(std_years, (yr) => `${yr}${type}`)
   );
   const gov_stat_filtered_votes = _.reject(
@@ -631,7 +638,8 @@ const calculate = function (subject, options) {
     .map((yr) =>
       calculate_lapse(
         gov_aggregated_votes[`${yr}auth`],
-        gov_aggregated_votes[`${yr}exp`]
+        gov_aggregated_votes[`${yr}exp`],
+        gov_aggregated_votes[`${yr}unlapsed`]
       )
     )
     .sum()

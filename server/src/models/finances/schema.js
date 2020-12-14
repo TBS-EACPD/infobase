@@ -30,6 +30,12 @@ const schema = `
     pa_last_year_3_exp: Float,
     pa_last_year_2_exp: Float,
     pa_last_year_exp: Float,
+
+    pa_last_year_5_unlapsed: Float,
+    pa_last_year_4_unlapsed: Float,
+    pa_last_year_3_unlapsed: Float,
+    pa_last_year_2_unlapsed: Float,
+    pa_last_year_unlapsed: Float,
   }
   type OrgVoteStatEstimates{
     vote_num: String
