@@ -27,6 +27,12 @@ export default function (model_singleton) {
     pa_last_year_3_exp: number_type,
     pa_last_year_2_exp: number_type,
     pa_last_year_exp: number_type,
+
+    pa_last_year_5_unlapsed: number_type,
+    pa_last_year_4_unlapsed: number_type,
+    pa_last_year_3_unlapsed: number_type,
+    pa_last_year_2_unlapsed: number_type,
+    pa_last_year_unlapsed: number_type,
   });
   const OrgVoteStatEstimatesSchema = mongoose.Schema({
     dept_code: parent_fkey_type(),

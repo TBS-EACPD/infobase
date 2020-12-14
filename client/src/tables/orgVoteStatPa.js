@@ -136,6 +136,18 @@ export default {
               "Correspondent aux dépenses effectuées aux termes de autorisations disponibles cette année-là.",
           },
         },
+        {
+          type: "big_int",
+          nick: header + "unlapsed",
+          header: {
+            en: "TODO",
+            fr: "TODO",
+          },
+          description: {
+            en: "TODO",
+            fr: "TODO",
+          },
+        },
       ]);
     });
   },

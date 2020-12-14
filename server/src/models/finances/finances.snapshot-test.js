@@ -17,6 +17,13 @@ org_vote_stat_pa{
   pa_last_year_3_exp
   pa_last_year_2_exp
   pa_last_year_exp
+
+  pa_last_year_5_unlapsed
+  pa_last_year_4_unlapsed
+  pa_last_year_3_unlapsed
+  pa_last_year_2_unlapsed
+  pa_last_year_unlapsed
+
 }`;
 const org_vote_stat_estimates_field = `
 org_vote_stat_estimates{
