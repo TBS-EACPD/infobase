@@ -16,6 +16,7 @@ import { PinnedContent } from "src/hoc/PinnedContent.js";
 import "./KeyConcepts.scss";
 
 import common_lang from "./common_questions.yaml";
+import covid_lang from "./covid_questions.yaml";
 import fin_lang from "./financial_questions.yaml";
 import ppl_lang from "./people_questions.yaml";
 import results_lang from "./results_questions.yaml";
@@ -33,6 +34,7 @@ const { text_maker, TM } = create_text_maker_component([
   ppl_lang,
   results_lang,
   tag_lang,
+  covid_lang,
 ]);
 
 class KeyConcepts_ extends React.Component {

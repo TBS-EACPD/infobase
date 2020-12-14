@@ -55,6 +55,7 @@ export {
   declare_tags_of_interest_panel,
   declare_tag_progs_by_dept_panel,
   declare_related_tags_panel,
+  declare_covid_key_concepts_panel,
 } from "./misc/index.js";
 
 export {

@@ -100,3 +100,16 @@ export const declare_tagging_key_concepts_panel = () =>
       }),
     }),
   });
+
+export const declare_covid_key_concepts_panel = () =>
+  declare_panel({
+    panel_key: "tagging_key_concepts",
+    levels: ["tag"],
+    panel_config_func: (level, panel_key) => ({
+      ...common_panel_config,
+      render: curried_render({
+        q_a_keys: ["covid_questions_todo"],
+        omit_name_item: true,
+      }),
+    }),
+  });

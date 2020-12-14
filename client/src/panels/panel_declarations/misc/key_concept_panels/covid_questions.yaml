@@ -1,0 +1,13 @@
+covid_questions_todo_q:
+  en: TODO - lotso f important things to clarify about this data
+  fr: TODO
+
+covid_questions_todo_a:
+  transform: [markdown]
+  en: |
+    E.g.
+    - Expenditure update cycle (monthly? quarterly?)
+    - How this differs from other estimate/expenditure data in the InfoBase (contains bud and non-bud, expenditures are not final till after close of year)
+    - Adjustments? Should explain that they're happening, since expenditures are non-final. Might see the cummulative spending go DOWN after a data refresh 
+    - What sort of other COVID spending might not be included here (not sure if there is any? something to confirm with FIN)
+  fr: TODO
