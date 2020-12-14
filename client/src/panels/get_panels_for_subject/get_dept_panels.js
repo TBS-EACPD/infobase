@@ -42,6 +42,7 @@ import {
   declare_employee_gender_panel,
   declare_results_intro_panel,
   declare_covid_estimates_panel,
+  declare_covid_key_concepts_panel,
 
   // dept only panels
   declare_portfolio_structure_intro_panel,
@@ -84,6 +85,7 @@ export const get_dept_panels = (subject) =>
       declare_dp_rev_split_panel(),
     ],
     covid: subject.has_data("covid_response") && [
+      declare_covid_key_concepts_panel(),
       declare_covid_estimates_panel(),
     ],
     people: _.includes(subject.tables, "orgEmployeeType") && [
