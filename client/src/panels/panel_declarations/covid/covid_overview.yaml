@@ -1,3 +1,14 @@
 covid_overview_panel_title:
   en: TODO Overview
   fr: TODO
+
+covid_overview_panel_text_gov:
+  en: |
+    TODO high level comparison of estimates vs current expenditures + commitments.
+    ... might be necessary to identify and split out expenditures on non-estimates based 
+    measures, if those don't end up excluded (splitting those out will need to happen server side)
+  fr: TODO
+
+covid_overview_panel_text_dept:
+  en: TODO
+  fr: TODO
