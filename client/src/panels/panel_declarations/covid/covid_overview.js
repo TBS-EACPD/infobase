@@ -27,19 +27,6 @@ const { estimates_docs } = businessConstants;
 // Copied from covid_estimates.js, TODO centralize these estimates utils somewhere
 const get_est_doc_name = (est_doc) =>
   estimates_docs[est_doc] ? estimates_docs[est_doc][window.lang] : "";
-const get_est_doc_order = (est_doc) =>
-  estimates_docs[est_doc] ? estimates_docs[est_doc].order : 9999;
-const est_doc_sort_func = (est_doc_a, est_doc_b) => {
-  const order_a = get_est_doc_order(est_doc_a);
-  const order_b = get_est_doc_order(est_doc_b);
-
-  if (order_a < order_b) {
-    return -1;
-  } else if (order_a > order_b) {
-    return 1;
-  }
-  return 0;
-};
 
 const get_query = (level) =>
   ({
@@ -58,8 +45,6 @@ const CovidOverviewGraph = ({
   const colors = window.infobase_colors();
 
   const index_key = "index";
-
-  debugger; //eslint-disable-line
 
   const graph_data = [
     {
