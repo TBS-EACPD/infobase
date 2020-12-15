@@ -142,7 +142,7 @@ jobs:
             - scripts/common_node_scripts/node_modules
           key: client-dependencies-{{ checksum "client/package-lock.json" }}
 
-      - run: ./scripts/ci_scripts/get_bundle_stats_baseline.sh
+      #- run: ./scripts/ci_scripts/get_bundle_stats_baseline.sh
 
       - run: # logging memory usage, build job capable of maxing out the memory available in CircleCI
           command: |
