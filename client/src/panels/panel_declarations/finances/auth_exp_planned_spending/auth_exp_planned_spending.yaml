@@ -88,13 +88,13 @@ lapse_by_votes:
   fr: Autorisations périmées par crédit
 
 aggregated_lapse_by_votes:
-  en: Aggregated Lapsed Authorities by Vote
-  fr: Nombre d'autorisations périmées par crédit
+  en: Aggregated Lapsed Authorities
+  fr: Autorisations Périmées Agrégées
 
 gov_lapse_by_votes_text:
   transform: [handlebars, markdown]
-  en: Over the past five years, **{{subject.name}}** {{gl_tt "lapsed" "LAPSE"}} an average of **{{fmt_compact1_written avg_lapsed_by_votes}}**. This corresponds to **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** of the spending authorities granted by Parliament through an appropriation act.
-  fr: Au cours des cinq dernières années, la {{gl_tt "péremption" "LAPSE"}} moyenne du **{{subject.name}}** s'est élevée à **{{fmt_compact1_written avg_lapsed_by_votes}}**. Cela correspond à **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** des autorisations de dépenses accordées par le Parlement par le biais d'une loi de crédit.
+  en: Over the past five years, the government {{gl_tt "lapsed" "LAPSE"}} an average of **{{fmt_compact1_written avg_lapsed_by_votes}}**. This corresponds to **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** of the spending authorities granted by Parliament through an appropriation act.
+  fr: Au cours des cinq dernières années, la {{gl_tt "péremption" "LAPSE"}} moyenne du gouvernement s'est élevée à **{{fmt_compact1_written avg_lapsed_by_votes}}**. Cela correspond à **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** des autorisations de dépenses accordées par le Parlement par le biais d'une loi de crédit.
 
 dept_lapse_by_votes_text:
   transform: [handlebars, markdown]
