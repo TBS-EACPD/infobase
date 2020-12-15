@@ -229,7 +229,9 @@ class LapseByVotesGraph extends React.Component {
     super(props);
 
     this.state = {
-      active_votes: this.get_active_votes(() => true),
+      active_votes: this.get_active_votes(
+        ({ votenum }) => votenum === 1 || votenum === 5 || votenum === 10
+      ),
     };
   }
   get_active_votes = (func) =>
@@ -279,7 +281,7 @@ class LapseByVotesGraph extends React.Component {
       return (
         <div className="frow">
           <TM
-            className="medium_panel_text"
+            className="medium-panel-text"
             k={
               subject.is("gov")
                 ? "gov_lapse_by_votes_text"
@@ -449,7 +451,7 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
       <div className="frow">
         <div className="fcol-md-4">
           <TM
-            className="medium_panel_text"
+            className="medium-panel-text"
             k={`${subject.level}_auth_exp_planned_spending_body`}
             args={final_info}
           />
