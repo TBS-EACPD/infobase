@@ -233,11 +233,11 @@ class LapseByVotesGraph extends React.Component {
 
     this.state = {
       active_votes: this.get_active_votes(
-        ({ votenum }) =>
+        ({ votestattype }) =>
           props.subject.level === "gov" ||
-          votenum === 1 ||
-          votenum === 5 ||
-          votenum === 10
+          votestattype === 1 ||
+          votestattype === 2 ||
+          votestattype === 3
       ),
     };
   }
