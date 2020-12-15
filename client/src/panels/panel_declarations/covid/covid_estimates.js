@@ -75,21 +75,19 @@ const string_sort_func = (a, b) => {
 const SummaryTab = ({ panel_args, data: covid_estimates_summary }) => {
   const { subject } = panel_args;
 
-  const colors = infobase_colors();
+  const colors = window.infobase_colors();
+
+  const index_key = "doc_name";
 
   const graph_data = _.chain(covid_estimates_summary)
     .map(({ est_doc, stat, vote }) => ({
-      doc_name: get_est_doc_name(est_doc),
+      [index_key]: get_est_doc_name(est_doc),
       [text_maker("covid_estimates_stat")]: stat,
       [text_maker("covid_estimates_voted")]: vote,
     }))
     .value();
 
-  const graph_keys = _.chain(graph_data)
-    .first()
-    .omit("doc_name")
-    .keys()
-    .value();
+  const graph_keys = _.chain(graph_data).first().omit(index_key).keys().value();
 
   const legend_items = _.map(graph_keys, (key) => ({
     id: key,
@@ -101,7 +99,7 @@ const SummaryTab = ({ panel_args, data: covid_estimates_summary }) => {
     <WrappedNivoBar
       data={graph_data}
       keys={graph_keys}
-      indexBy="doc_name"
+      indexBy={index_key}
       colors={(d) => colors(d.id)}
       margin={{
         top: 50,

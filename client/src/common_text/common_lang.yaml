@@ -695,6 +695,9 @@ covid_measures:
 estimates_by_covid_measures:
   en: COVID-19 Spending Authorities found in the Estimates
   fr: TODO
+covid_commitments:
+  en: Commitments
+  fr: Engagements
 
 ##################################
 # text for welcome/netflix panel
