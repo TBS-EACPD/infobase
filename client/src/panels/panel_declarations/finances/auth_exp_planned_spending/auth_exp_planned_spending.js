@@ -39,6 +39,9 @@ const colors = scaleOrdinal().range(newIBCategoryColors);
 
 const auth_cols = _.map(std_years, (yr) => `${yr}auth`);
 const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
+const flat_auth_exp_years = _.flatMap(["exp", "auth", "unlapsed"], (type) =>
+  _.map(std_years, (yr) => `${yr}${type}`)
+);
 
 const include_verbose_gap_year_explanation = false;
 
@@ -230,7 +233,11 @@ class LapseByVotesGraph extends React.Component {
 
     this.state = {
       active_votes: this.get_active_votes(
-        ({ votenum }) => votenum === 1 || votenum === 5 || votenum === 10
+        ({ votenum }) =>
+          props.subject.level === "gov" ||
+          votenum === 1 ||
+          votenum === 5 ||
+          votenum === 10
       ),
     };
   }
@@ -260,16 +267,32 @@ class LapseByVotesGraph extends React.Component {
         )
       );
     const lapsed_by_votes_sum = _.sum(get_lapse_raw_data(false, queried_votes));
-    const auth_by_votes_sum = _.reduce(
-      queried_votes,
-      (sum, vote_row) =>
-        _.chain(std_years)
-          .map((yr) => vote_row[`${yr}auth`])
-          .sum()
-          .add(sum)
-          .value(),
-      0
-    );
+    const avg_lapsed_by_votes_pct = _.chain(queried_votes)
+      .reduce(
+        (result, vote_row) => ({
+          ..._.chain(flat_auth_exp_years)
+            .map((yr) => [yr, result[yr] + vote_row[yr]])
+            .fromPairs()
+            .value(),
+        }),
+        _.chain(flat_auth_exp_years)
+          .map((yr) => [yr, 0])
+          .fromPairs()
+          .value()
+      )
+      .thru((vote) =>
+        _.map(
+          std_years,
+          (yr) =>
+            calculate_lapse(
+              vote[`${yr}auth`],
+              vote[`${yr}exp`],
+              vote[`${yr}unlapsed`]
+            ) / vote[`${yr}auth`]
+        )
+      )
+      .mean()
+      .value();
 
     const get_lapse_infograph = (is_pct) => {
       const nivo_pct_props = is_pct && {
@@ -291,8 +314,9 @@ class LapseByVotesGraph extends React.Component {
               subject,
               avg_lapsed_by_votes: lapsed_by_votes_sum / std_years.length,
               num_of_votes: queried_votes.length,
-              avg_lapsed_by_votes_pct: lapsed_by_votes_sum / auth_by_votes_sum,
-              gov_avg_lapsed_by_votes_pct: additional_info.gov_lapse_pct,
+              avg_lapsed_by_votes_pct,
+              gov_avg_lapsed_by_votes_pct:
+                additional_info.gov_avg_lapsed_by_votes_pct,
             }}
           />
           {!subject.is("gov") && (
@@ -597,9 +621,6 @@ const calculate = function (subject, options) {
       .divide(std_years.length)
       .value();
 
-  const flat_auth_exp_years = _.flatMap(["exp", "auth", "unlapsed"], (type) =>
-    _.map(std_years, (yr) => `${yr}${type}`)
-  );
   const gov_stat_filtered_votes = _.reject(
     gov_queried_subject.data,
     ({ votenum }) => votenum === "S"
@@ -625,27 +646,17 @@ const calculate = function (subject, options) {
         },
       ]
     : _.reject(queried_subject.data, ({ votenum }) => votenum === "S");
-  const gov_auth_sum = _.reduce(
-    gov_stat_filtered_votes,
-    (sum, vote_row) =>
-      _.chain(std_years)
-        .map((yr) => vote_row[`${yr}auth`])
-        .sum()
-        .add(sum)
-        .value(),
-    0
-  );
 
-  const gov_lapse_pct = _.chain(std_years)
-    .map((yr) =>
-      calculate_lapse(
-        gov_aggregated_votes[`${yr}auth`],
-        gov_aggregated_votes[`${yr}exp`],
-        gov_aggregated_votes[`${yr}unlapsed`]
-      )
+  const gov_avg_lapsed_by_votes_pct = _.chain(std_years)
+    .map(
+      (yr) =>
+        calculate_lapse(
+          gov_aggregated_votes[`${yr}auth`],
+          gov_aggregated_votes[`${yr}exp`],
+          gov_aggregated_votes[`${yr}unlapsed`]
+        ) / gov_aggregated_votes[`${yr}auth`]
     )
-    .sum()
-    .divide(gov_auth_sum)
+    .mean()
     .value();
 
   const additional_info = {
@@ -662,7 +673,7 @@ const calculate = function (subject, options) {
     last_year_lapse_amt: unspent_last_year || 0,
     last_year_lapse_pct:
       (unspent_last_year || 0) / auth_values[last_shared_index],
-    gov_lapse_pct,
+    gov_avg_lapsed_by_votes_pct,
   };
 
   return {
