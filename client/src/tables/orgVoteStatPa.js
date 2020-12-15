@@ -139,14 +139,7 @@ export default {
         {
           type: "big_int",
           nick: header + "unlapsed",
-          header: {
-            en: "TODO",
-            fr: "TODO",
-          },
-          description: {
-            en: "TODO",
-            fr: "TODO",
-          },
+          hidden: true,
         },
       ]);
     });
