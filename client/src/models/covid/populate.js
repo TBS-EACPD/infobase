@@ -38,7 +38,7 @@ export const api_load_has_covid_response = (subject) => {
       .then((response) =>
         subject.set_has_data(
           "covid_response",
-          response.data.root.org.has_covid_data
+          response.data.root.org.has_covid_data || false
         )
       );
   }
