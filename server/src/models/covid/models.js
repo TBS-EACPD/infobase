@@ -28,10 +28,6 @@ const covid_expenditures_fields = {
 const covid_commitments = { fiscal_year: number_type, commitment: number_type };
 
 export default function (model_singleton) {
-  const HasCovidDataSchema = mongoose.Schema({
-    org_id: pkey_type(),
-  });
-
   const CovidEstimatesSchema = mongoose.Schema({
     org_id: parent_fkey_type(),
 
@@ -66,16 +62,23 @@ export default function (model_singleton) {
     covid_commitments: [covid_commitments],
   });
 
-  model_singleton.define_model("HasCovidData", HasCovidDataSchema);
+  const HasCovidDataSchema = mongoose.Schema({
+    subject_id: pkey_type(),
+    has_estimates: { type: Boolean },
+    has_expenditures: { type: Boolean },
+    has_commitments: { type: Boolean },
+  });
+
   model_singleton.define_model("CovidMeasure", CovidMeasureSchema);
   model_singleton.define_model("CovidSummary", CovidSummarySchema);
+  model_singleton.define_model("HasCovidData", HasCovidDataSchema);
 
   const { HasCovidData, CovidMeasure, CovidSummary } = model_singleton.models;
 
   const loaders = {
-    has_covid_measure_loader: create_resource_by_id_attr_dataloader(
+    has_covid_data_loader: create_resource_by_id_attr_dataloader(
       HasCovidData,
-      "org_id"
+      "subject_id"
     ),
     covid_measure_loader: create_resource_by_id_attr_dataloader(
       CovidMeasure,
