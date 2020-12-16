@@ -48,7 +48,7 @@ const CovidOverviewGraph = ({
 
   const graph_data = [
     {
-      [index_key]: "TODO: authorized spending",
+      [index_key]: text_maker("estimates"),
       ..._.chain(covid_estimates)
         .map(({ est_doc, vote, stat }) => [
           get_est_doc_name(est_doc),
@@ -58,7 +58,7 @@ const CovidOverviewGraph = ({
         .value(),
     },
     {
-      [index_key]: "TODO: actual and committed spending",
+      [index_key]: text_maker("spending"),
       [text_maker("expenditures")]: _.reduce(
         covid_expenditures,
         (memo, { vote, stat }) => memo + vote + stat,
@@ -85,46 +85,47 @@ const CovidOverviewGraph = ({
   }));
 
   return (
-    <Fragment>
-      <StandardLegend
-        items={legend_items}
-        isHorizontal={true}
-        LegendCheckBoxProps={{ isSolidBox: true }}
-      />
-      <WrappedNivoBar
-        data={graph_data}
-        keys={graph_keys}
-        indexBy={index_key}
-        colorBy={(d) => colors(d.id)}
-        margin={{
-          top: 50,
-          right: 40,
-          bottom: 120,
-          left: 40,
-        }}
-        bttm_axis={{
-          format: (d) =>
-            _.words(d).length > 3 ? d.substring(0, 20) + "..." : d,
-          tickSize: 3,
-          tickRotation: -45,
-          tickPadding: 10,
-        }}
-        graph_height="450px"
-        enableGridX={false}
-        remove_left_axis={true}
-        theme={{
-          axis: {
-            ticks: {
-              text: {
-                fontSize: 12,
-                fill: window.infobase_color_constants.textColor,
-                fontWeight: "550",
+    <div className="frow">
+      <div className="fcol-md-3" style={{ alignSelf: "center" }}>
+        <StandardLegend
+          items={legend_items}
+          isHorizontal={false}
+          LegendCheckBoxProps={{ isSolidBox: true }}
+        />
+      </div>
+      <div className="fcol-md-9">
+        <WrappedNivoBar
+          data={graph_data}
+          keys={graph_keys}
+          indexBy={index_key}
+          colorBy={(d) => colors(d.id)}
+          margin={{
+            top: 50,
+            right: 80,
+            bottom: 90,
+            left: 80,
+          }}
+          bttm_axis={{
+            tickSize: 3,
+            tickRotation: -45,
+            tickPadding: 10,
+          }}
+          enableGridX={false}
+          remove_left_axis={false}
+          theme={{
+            axis: {
+              ticks: {
+                text: {
+                  fontSize: 12,
+                  fill: window.infobase_color_constants.textColor,
+                  fontWeight: "550",
+                },
               },
             },
-          },
-        }}
-      />
-    </Fragment>
+          }}
+        />
+      </div>
+    </div>
   );
 };
 
@@ -178,13 +179,13 @@ class CovidOverviewPanel extends React.Component {
             footnotes,
           }}
         >
-          <Col isText size={6}>
+          <Col isText size={12}>
             <TM
               k={`covid_overview_panel_text_${subject.level}`}
               args={get_text_args(subject, covid_summary)}
             />
           </Col>
-          <Col isGraph={!window.is_a11y_mode} size={6}>
+          <Col isGraph={!window.is_a11y_mode} size={12}>
             <CovidOverviewGraph covid_summary={covid_summary} />
           </Col>
         </StdPanel>
