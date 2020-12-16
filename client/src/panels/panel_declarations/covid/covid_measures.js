@@ -2,7 +2,10 @@ import {
   create_text_maker_component,
   InfographicPanel,
   declare_panel,
+  Subject,
 } from "../shared.js";
+
+const { CovidMeasure } = Subject;
 
 import text from "./covid_measures.yaml";
 
@@ -16,7 +19,7 @@ export const declare_covid_measures_panel = () =>
       requires_covid_measures: true,
       footnotes: false,
       source: (subject) => [],
-      calculate: _.constant(false),
+      calculate: _.constant(false), //level_name === "dept" ? subject.has_data("covid_response") : true
       render: ({ calculations, footnotes, sources }) => {
         return (
           <InfographicPanel

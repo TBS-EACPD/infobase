@@ -215,7 +215,10 @@ export const declare_covid_estimates_panel = () =>
       depends_on: [],
       source: (subject) => [],
       calculate: function (subject, options) {
-        if (level_name === "dept" && !subject.has_data("covid_response")) {
+        if (
+          level_name === "dept" &&
+          !subject.has_data("covid_response")?.has_estimates
+        ) {
           return false;
         }
 

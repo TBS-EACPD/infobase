@@ -1,5 +1,3 @@
-import { Fragment } from "react";
-
 import { get_client } from "../../../graphql_utils/graphql_utils.js";
 import {
   gov_covid_summary_query,
@@ -157,11 +155,18 @@ class CovidOverviewPanel extends React.Component {
           _query_name: query_name,
         },
       })
-      .then(({ data: { root: { [level]: { covid_summary } } } }) =>
-        this.setState({
-          covid_summary,
-          loading: false,
-        })
+      .then(
+        ({
+          data: {
+            root: {
+              [level === "dept" ? "org" : "gov"]: { covid_summary },
+            },
+          },
+        }) =>
+          this.setState({
+            covid_summary,
+            loading: false,
+          })
       );
   }
   render() {
@@ -202,7 +207,7 @@ export const declare_covid_overview_panel = () =>
       initial_queries: get_query(level_name),
       footnotes: false,
       source: (subject) => [],
-      calculate: _.constant(false),
+      calculate: _.constant(false), // level_name === "dept" ? subject.has_data("covid_response") : true
       render: ({
         calculations: { subject, panel_args },
         footnotes,
