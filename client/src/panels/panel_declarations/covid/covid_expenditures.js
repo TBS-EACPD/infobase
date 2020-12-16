@@ -207,13 +207,10 @@ export const declare_covid_expenditures_panel = () =>
       }[level_name],
       footnotes: false,
       source: (subject) => [],
-      calculate: function (subject, options) {
-        if (level_name === "dept" && !subject.has_data("covid_response")) {
-          return false;
-        }
-
-        return { subject };
-      },
+      calculate: (subject, options) =>
+        level_name === "dept"
+          ? subject.has_data("covid_response")?.has_expenditures
+          : true,
       render: ({ calculations, footnotes, sources }) => {
         const { panel_args } = calculations;
         return (
