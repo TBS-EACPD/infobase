@@ -8,6 +8,12 @@ query ($lang: String = "en") {
       name
       in_estimates
 
+      has_covid_data {
+        has_estimates
+        has_expenditures
+        has_commitments
+      }
+
       covid_estimates {
         org_id
         org {
@@ -53,6 +59,12 @@ query ($lang: String = "en", $covid_measure_id: String = "COV001") {
       id
       name
       in_estimates
+
+      has_covid_data {
+        has_estimates
+        has_expenditures
+        has_commitments
+      }
     }
   }
 }`;
@@ -121,6 +133,12 @@ query ($lang: String = "en") {
         name
         in_estimates
 
+        has_covid_data {
+          has_estimates
+          has_expenditures
+          has_commitments
+        }
+
         covid_estimates {
           org_id
           org {
@@ -164,10 +182,25 @@ const org_has_covid_data_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
     has_data: org(org_id: "133") {
-      has_covid_data
+      has_covid_data {
+        has_estimates
+        has_expenditures
+        has_commitments
+      }
     }
     does_not_have_data: org(org_id: "15") {
-      has_covid_data
+      has_covid_data {
+        has_estimates
+        has_expenditures
+        has_commitments
+      }
+    }
+    only_has_estimates: org(org_id: "1") {
+      has_covid_data {
+        has_estimates
+        has_expenditures
+        has_commitments
+      }
     }
   }
 }`;

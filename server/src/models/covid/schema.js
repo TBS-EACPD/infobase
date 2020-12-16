@@ -33,20 +33,26 @@ const schema = `
   }
 
   extend type Org{
-    covid_measures: [CovidMeasure]
+    has_covid_data: HasCovidData
     covid_summary: CovidSummary
-
-    has_covid_data: Boolean
+    covid_measures: [CovidMeasure]
   }
 
   type CovidMeasure{
     id: String
     name: String
     in_estimates: Boolean
+    has_covid_data: HasCovidData
 
     covid_estimates: [CovidEstimates]
     covid_expenditures: [CovidExpenditures]
     covid_commitments: [CovidCommitments]
+  }
+
+  type HasCovidData{
+    has_estimates: Boolean
+    has_expenditures: Boolean
+    has_commitments: Boolean
   }
 
   type CovidEstimates{
@@ -91,7 +97,7 @@ export default function ({ models, loaders }) {
 
   const {
     org_id_loader,
-    has_covid_measure_loader,
+    has_covid_data_loader,
     covid_measure_loader,
     covid_measures_by_org_id_loader,
     covid_summary_by_org_id_loader,
@@ -108,6 +114,9 @@ export default function ({ models, loaders }) {
         covid_summary_by_org_id_loader.load("gov").then(_.first),
     },
     Org: {
+      has_covid_data: ({ org_id }) => has_covid_data_loader.load(org_id),
+      covid_summary: ({ org_id }) =>
+        covid_summary_by_org_id_loader.load(org_id).then(_.first),
       covid_measures: ({ org_id: queried_org_id }) =>
         covid_measures_by_org_id_loader.load(queried_org_id).then((measures) =>
           _.map(measures, (measure) => {
@@ -129,16 +138,12 @@ export default function ({ models, loaders }) {
             return _.chain(measure).cloneDeep().assign(filtered_data).value();
           })
         ),
-      covid_summary: ({ org_id }) =>
-        covid_summary_by_org_id_loader.load(org_id).then(_.first),
-      has_covid_data: ({ org_id }) =>
-        has_covid_measure_loader
-          .load(org_id)
-          .then((record) => !_.isUndefined(record)),
     },
     CovidMeasure: {
       id: _.property("covid_measure_id"),
       name: bilingual_field("name"),
+      has_covid_data: ({ covid_measure_id }) =>
+        has_covid_data_loader.load(covid_measure_id),
     },
     CovidEstimates: {
       org: ({ org_id }) => org_id_loader.load(org_id),

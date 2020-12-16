@@ -160,6 +160,11 @@ Object {
               "vote": 0,
             },
           ],
+          "has_covid_data": Object {
+            "has_commitments": true,
+            "has_estimates": true,
+            "has_expenditures": true,
+          },
           "id": "COV001",
           "in_estimates": true,
           "name": "measure 1",
@@ -250,6 +255,14 @@ Object {
               "stat": 9,
               "vote": 0,
             },
+            Object {
+              "est_doc": "SEC",
+              "fiscal_year": "2020",
+              "org": null,
+              "org_id": 1,
+              "stat": 9,
+              "vote": 0,
+            },
           ],
           "covid_expenditures": Array [
             Object {
@@ -286,6 +299,11 @@ Object {
               "vote": 7,
             },
           ],
+          "has_covid_data": Object {
+            "has_commitments": true,
+            "has_estimates": true,
+            "has_expenditures": true,
+          },
           "id": "COV002",
           "in_estimates": false,
           "name": "measure 2",
@@ -370,6 +388,11 @@ Object {
               "vote": 5,
             },
           ],
+          "has_covid_data": Object {
+            "has_commitments": true,
+            "has_estimates": true,
+            "has_expenditures": true,
+          },
           "id": "COV003",
           "in_estimates": true,
           "name": "measure 3",
@@ -418,7 +441,7 @@ Object {
             Object {
               "est_doc": "SEC",
               "fiscal_year": "2020",
-              "stat": 9,
+              "stat": 18,
               "vote": 0,
             },
             Object {
@@ -599,6 +622,11 @@ Object {
                 "vote": 2,
               },
             ],
+            "has_covid_data": Object {
+              "has_commitments": true,
+              "has_estimates": true,
+              "has_expenditures": true,
+            },
             "id": "COV001",
             "in_estimates": true,
             "name": "measure 1",
@@ -641,6 +669,11 @@ Object {
                 "vote": 3,
               },
             ],
+            "has_covid_data": Object {
+              "has_commitments": true,
+              "has_estimates": true,
+              "has_expenditures": true,
+            },
             "id": "COV002",
             "in_estimates": false,
             "name": "measure 2",
@@ -694,6 +727,11 @@ Object {
                 "vote": 0,
               },
             ],
+            "has_covid_data": Object {
+              "has_commitments": true,
+              "has_estimates": true,
+              "has_expenditures": true,
+            },
             "id": "COV003",
             "in_estimates": true,
             "name": "measure 3",
@@ -710,11 +748,16 @@ Object {
   "data": Object {
     "root": Object {
       "does_not_have_data": Object {
-        "has_covid_data": false,
+        "has_covid_data": null,
       },
       "has_data": Object {
-        "has_covid_data": true,
+        "has_covid_data": Object {
+          "has_commitments": true,
+          "has_estimates": true,
+          "has_expenditures": true,
+        },
       },
+      "only_has_estimates": null,
     },
   },
 }
@@ -725,6 +768,11 @@ Object {
   "data": Object {
     "root": Object {
       "covid_measure": Object {
+        "has_covid_data": Object {
+          "has_commitments": true,
+          "has_estimates": true,
+          "has_expenditures": true,
+        },
         "id": "COV001",
         "in_estimates": true,
         "name": "measure 1",

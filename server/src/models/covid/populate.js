@@ -23,18 +23,11 @@ export default async function ({ models }) {
     (row) => ({ ...row, commitment: +row.commitment })
   );
 
-  const orgs_with_covid_data = _.chain([
+  const all_rows = [
     ...covid_estimates_rows,
     ...covid_expenditures_rows,
     ...covid_commitments_rows,
-  ])
-    .map("org_id")
-    .uniq()
-    .value();
-  const has_covid_data_records = _.map(
-    orgs_with_covid_data,
-    (org_id) => new HasCovidData({ org_id })
-  );
+  ];
 
   const covid_measure_records = _.map(
     get_standard_csv_file_rows("covid_measures.csv"),
@@ -56,7 +49,9 @@ export default async function ({ models }) {
       })
   );
 
-  const coivd_summary_records = _.chain(orgs_with_covid_data)
+  const coivd_summary_records = _.chain(all_rows)
+    .map("org_id")
+    .uniq()
     .map((org_id) => ({
       org_id,
       covid_estimates: _.chain(covid_estimates_rows)
@@ -175,6 +170,30 @@ export default async function ({ models }) {
       },
     ])
     .value();
+
+  const has_covid_data_records = _.flatMap(
+    ["org_id", "covid_measure_id"],
+    (subject_id_key) =>
+      _.chain(all_rows)
+        .map(subject_id_key)
+        .uniq()
+        .map((subject_id) => {
+          const has_data_type = _.chain({
+            estimates: covid_estimates_rows,
+            expenditures: covid_expenditures_rows,
+            commitments: covid_commitments_rows,
+          })
+            .map((rows, data_type) => [
+              `has_${data_type}`,
+              _.some(rows, (row) => row[subject_id_key] === subject_id),
+            ])
+            .fromPairs()
+            .value();
+
+          return new HasCovidData({ subject_id, ...has_data_type });
+        })
+        .value()
+  );
 
   return await Promise.all([
     HasCovidData.insertMany(has_covid_data_records),
