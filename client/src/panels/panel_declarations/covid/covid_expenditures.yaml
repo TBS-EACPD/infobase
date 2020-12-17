@@ -1,3 +1,34 @@
 covid_expenditures_panel_title:
-  en: TODO Expenditures
+  en: COVID Expenditures
   fr: TODO
+budgetary:
+  en: Budgetary
+  fr: TODO
+non_budgetary:
+  en: Non budgetary
+  fr: TODO
+covid_expenditures_stat:
+  en: Statutory COVID-19 expenditures
+  fr: TODO
+covid_expenditures_voted:
+  en: Voted COVID-19 expenditures
+  fr: TODO
+covid_expenditures_summary_text_gov:
+  transform: [handlebars,markdown]
+  en: This fiscal year (**{{est_in_year}}**), **{{fmt_compact1_written gov_covid_expenditures_in_year}}** in expenditures have been presented in the TODO process in response to the COVID-19 pandemic.
+    These expenditures make up **{{fmt_percentage1 covid_auth_pct_of_gov_auth}}** of the total expenditures presented in **{{est_in_year}}**. 
+  fr: TODO
+covid_expenditures_summary_text_dept:
+  transform: [handlebars,markdown]
+  en: This fiscal year (**{{est_in_year}}**), **{{subject.name}}** has **{{fmt_compact1_written dept_covid_auth_in_year}}** in authorities, as made available through the Estimates process in response to the COVID-19 pandemic.
+    These authorities make up **{{fmt_percentage1 covid_auth_pct_of_gov_auth}}** of the government’s planned spending in response to the global pandemic. 
+  fr: TODO
+covid_expenditures_by_index_key:
+  transform: [handlebars,markdown]
+  en: |
+    Total COVID-19 expenditures by release:
+    {{#each index_summary_stats}}
+    * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}**
+    {{/each}}
+  fr: |
+    TODO
