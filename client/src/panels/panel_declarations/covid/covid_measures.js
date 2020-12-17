@@ -16,7 +16,7 @@ export const declare_covid_measures_panel = () =>
       requires_covid_measures: true,
       footnotes: false,
       source: (subject) => [],
-      calculate: _.constant(true),
+      calculate: _.constant(false),
       render: ({ calculations, footnotes, sources }) => {
         return (
           <InfographicPanel
