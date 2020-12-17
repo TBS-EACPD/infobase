@@ -23,9 +23,8 @@ import {
   ByMeasureTab,
 } from "./covid_tab_contents.js";
 
-const { CovidMeasure, Dept } = Subject;
-
-import text from "./covid_estimates.yaml";
+import text2 from "./covid_common_lang.yaml";
+import text1 from "./covid_estimates.yaml";
 
 const {
   TabbedContent,
@@ -34,7 +33,7 @@ const {
   TabLoadingWrapper,
 } = util_components;
 
-const { text_maker, TM } = create_text_maker_component([text]);
+const { text_maker, TM } = create_text_maker_component([text1, text2]);
 
 const client = get_client();
 
@@ -42,7 +41,7 @@ const tab_content_configs = [
   {
     key: "summary",
     levels: ["gov", "dept"],
-    label: text_maker("covid_estimates_summary_tab_label"),
+    label: text_maker("summary_tab_label"),
     load_data: (panel_args) => {
       const { subject } = panel_args;
 
@@ -78,7 +77,7 @@ const tab_content_configs = [
   {
     key: "department",
     levels: ["gov"],
-    label: text_maker("covid_estimates_department_tab_label"),
+    label: text_maker("by_department_tab_label"),
     load_data: ({ subject }) =>
       ensure_loaded({ covid_estimates: true, subject }).then(() =>
         CovidMeasure.get_all_estimates_by_org()

@@ -16,14 +16,80 @@ import {
 
 import { SummaryTab } from "./covid_tab_contents.js";
 
-import text from "./covid_expenditures.yaml";
+import text2 from "./covid_common_lang.yaml";
+import text1 from "./covid_expenditures.yaml";
 
 const { CovidMeasure, Gov } = Subject;
 
-const { text_maker, TM } = create_text_maker_component([text]);
+const { text_maker, TM } = create_text_maker_component([text1, text2]);
 const { TabbedContent, SpinnerWrapper, TabLoadingWrapper } = util_components;
 
 const client = get_client();
+
+const tab_content_configs = [
+  {
+    key: "summary",
+    levels: ["gov", "dept"],
+    label: text_maker("summary_tab_label"),
+    load_data: (panel_args) => {
+      const { subject } = panel_args;
+
+      const { query, variables, response_accessor } = (() => {
+        if (subject.level === "dept") {
+          return {
+            query: org_covid_summary_query,
+            variables: {
+              lang: window.lang,
+              id: subject.id,
+              _query_name: "org_covid_summary_query",
+            },
+            response_accessor: (response) =>
+              _.get(response, "data.root.org.covid_summary.covid_expenditures"),
+          };
+        } else {
+          return {
+            query: gov_covid_summary_query,
+            variables: {
+              lang: window.lang,
+              _query_name: "gov_covid_summary_query",
+            },
+            response_accessor: (response) =>
+              _.get(response, "data.root.gov.covid_summary.covid_expenditures"),
+          };
+        }
+      })();
+
+      return client.query({ query, variables }).then(response_accessor);
+    },
+    TabContent: SummaryTab,
+  },
+];
+
+const get_tabbed_content_props = (panel_args) => {
+  const configs_for_level = _.filter(tab_content_configs, ({ levels }) =>
+    _.includes(levels, panel_args.subject.level)
+  );
+
+  return {
+    tab_keys: _.map(configs_for_level, "key"),
+    tab_labels: _.chain(configs_for_level)
+      .map(({ key, label }) => [key, label])
+      .fromPairs()
+      .value(),
+    tab_pane_contents: _.chain(configs_for_level)
+      .map(({ key, load_data, TabContent }) => [
+        key,
+        <TabLoadingWrapper
+          panel_args={panel_args}
+          load_data={load_data}
+          TabContent={TabContent}
+          key={key}
+        />,
+      ])
+      .fromPairs()
+      .value(),
+  };
+};
 
 class CovidExpendituresPanel extends React.Component {
   constructor(props) {
@@ -74,62 +140,15 @@ class CovidExpendituresPanel extends React.Component {
         data_type: "expenditures",
         gov_covid_expenditures_in_year,
       };
+      const tabbed_content_props = get_tabbed_content_props(
+        extended_panel_args
+      );
 
       return (
         <Fragment>
           <div className="frow">
             <div className="fcol-md-12 fcol-xs-12 medium-panel-text text">
-              <TabbedContent
-                tab_keys={["summary"]}
-                tab_labels={{ summary: "Overview" }}
-                tab_pane_contents={{
-                  summary: (
-                    <TabLoadingWrapper
-                      panel_args={extended_panel_args}
-                      load_data={(panel_args) => {
-                        const { subject } = panel_args;
-                        console.log();
-
-                        const { query, variables, response_accessor } = (() => {
-                          if (subject.level === "dept") {
-                            return {
-                              query: org_covid_summary_query,
-                              variables: {
-                                lang: window.lang,
-                                id: subject.id,
-                                _query_name: "org_covid_summary_query",
-                              },
-                              response_accessor: (response) =>
-                                _.get(
-                                  response,
-                                  "data.root.orgs.covid_summary.covid_expenditures"
-                                ),
-                            };
-                          } else {
-                            return {
-                              query: gov_covid_summary_query,
-                              variables: {
-                                lang: window.lang,
-                                _query_name: "gov_covid_summary_query",
-                              },
-                              response_accessor: (response) =>
-                                _.get(
-                                  response,
-                                  "data.root.gov.covid_summary.covid_expenditures"
-                                ),
-                            };
-                          }
-                        })();
-
-                        return client
-                          .query({ query, variables })
-                          .then(response_accessor);
-                      }}
-                      TabContent={SummaryTab}
-                    />
-                  ),
-                }}
-              />
+              <TabbedContent {...tabbed_content_props} />
             </div>
           </div>
         </Fragment>
