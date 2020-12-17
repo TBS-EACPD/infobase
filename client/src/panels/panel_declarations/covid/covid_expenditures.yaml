@@ -20,7 +20,7 @@ covid_expenditures_summary_text_gov:
   fr: TODO
 covid_expenditures_summary_text_dept:
   transform: [handlebars,markdown]
-  en: This fiscal year (**{{est_in_year}}**), **{{subject.name}}** has **{{fmt_compact1_written dept_covid_auth_in_year}}** in authorities, as made available through the Estimates process in response to the COVID-19 pandemic.
+  en: This fiscal year (**{{est_in_year}}**), **{{subject.name}}** has **{{fmt_compact1_written dept_covid_data_in_year}}** in authorities, as made available through the Estimates process in response to the COVID-19 pandemic.
     These authorities make up **{{fmt_percentage1 covid_auth_pct_of_gov_auth}}** of the government’s planned spending in response to the global pandemic. 
   fr: TODO
 covid_expenditures_by_index_key:

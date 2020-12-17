@@ -38,7 +38,7 @@ covid_estimates_summary_text_gov:
   fr: TODO
 covid_estimates_summary_text_dept:
   transform: [handlebars,markdown]
-  en: So far this fiscal year (**{{est_last_year}}**), **{{subject.name}}** has **{{fmt_compact1_written dept_covid_auth_in_year}}** in authorities available for its response to the COVID-19 pandemic, as presented through the Estimates process.
+  en: So far this fiscal year (**{{est_last_year}}**), **{{subject.name}}** has **{{fmt_compact1_written dept_covid_data_in_year}}** in authorities available for its response to the COVID-19 pandemic, as presented through the Estimates process.
   fr: TODO
 
 
