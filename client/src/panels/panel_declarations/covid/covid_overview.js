@@ -202,7 +202,7 @@ export const declare_covid_overview_panel = () =>
       initial_queries: get_query(level_name),
       footnotes: false,
       source: (subject) => [],
-      calculate: _.constant(true),
+      calculate: _.constant(false),
       render: ({
         calculations: { subject, panel_args },
         footnotes,
