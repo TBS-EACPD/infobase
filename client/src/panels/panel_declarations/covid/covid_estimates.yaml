@@ -3,11 +3,23 @@ covid_estimates_panel_title:
   text: |
     {{gt "estimates_by_covid_measures"}}
 
+covid_estimates_above_tab_text_gov:
+  transform: [handlebars,markdown]
+  en: |
+    This fiscal year (**{{est_in_year}}**), the government has authorized **{{fmt_compact1_written gov_covid_estimates_in_year}}** in authorities to implement the response to the COVID-19 pandemic.
+  fr: |
+    Pour l’exercice en cours (**{{est_in_year}}**), le gouvernement a autorisé des crédits de **{{fmt_compact1_written gov_covid_estimates_in_year}}** pour la mise en œuvre de 
+    mesures en réponse à la pandémie de COVID-19.
+covid_estimates_above_tab_text_dept:
+  transform: [handlebars,markdown]
+  en: TODO, currently both dept and gov use the gov text
+  fr: TODO
+
 covid_estimates_above_tab_footnote_title:
   en: |
     Important:
   fr: |
-    Important :
+    Important:
 covid_estimates_above_tab_footnote_list:
   transform: [handlebars,markdown]
   en: |
@@ -25,7 +37,7 @@ covid_estimates_summary_tab_label:
   fr: Apperçu
 covid_estimates_summary_text_gov:
   transform: [handlebars,markdown]
-  en: So far this fiscal year (**{{est_last_year}}**), **{{fmt_compact1_written gov_covid_auth_in_year}}** in authorities have been presented through the Estimates process in response to the COVID-19 pandemic.
+  en: So far this fiscal year (**{{est_last_year}}**), **{{fmt_compact1_written gov_covid_estimates_in_year}}** in authorities have been presented through the Estimates process in response to the COVID-19 pandemic.
   fr: TODO
 covid_estimates_summary_text_dept:
   transform: [handlebars,markdown]
@@ -33,16 +45,16 @@ covid_estimates_summary_text_dept:
   fr: TODO
 
 
-covid_estimates_by_doc:
+covid_estimates_by_index_key:
   transform: [handlebars,markdown]
   en: |
     Total COVID-19 authorities by release:
-    {{#each est_doc_summary_stats}}
+    {{#each index_summary_stats}}
     * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}**
     {{/each}}
   fr: |
     Total des autorisations liées à la COVID-19 par octroi de crédits :
-    {{#each est_doc_summary_stats}}
+    {{#each index_summary_stats}}
     * {{ this.[0]}} : **{{fmt_compact1_written this.[1] }}**
     {{/each}}
 
