@@ -63,10 +63,6 @@ covid_estimates_department_tab_text:
     Le ministère ayant le plus grand nombre d'autorisations liées à COVID-19 est **{{largest_dept_name}}** avec **{{fmt_compact1_written largest_dept_auth}}**
     de crédits inscrits dans les budgets supplémentaires A et B.
 
-
-covid_estimates_measure_tab_label:
-  en: By COVID-19 Measure
-  fr: Par mesure COVID-19
 covid_estimates_measure_tab_text:
   transform: [handlebars,markdown]
   en: |

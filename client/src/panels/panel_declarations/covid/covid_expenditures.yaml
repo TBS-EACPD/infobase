@@ -1,5 +1,5 @@
 covid_expenditures_panel_title:
-  en: COVID Expenditures
+  en: Expenditures by COVID-19 Measures
   fr: TODO
 budgetary:
   en: Budgetary
@@ -12,6 +12,16 @@ covid_expenditures_stat:
   fr: TODO
 covid_expenditures_voted:
   en: Voted COVID-19 expenditures
+  fr: TODO
+covid_expenditures_above_tab_text_gov:
+  transform: [handlebars,markdown]
+  en: |
+    This fiscal year (**{{est_in_year}}**), the government has spent **{{fmt_compact1_written gov_covid_expenditures_in_year}}** in expenditures to implement the response to the COVID-19 pandemic.
+  fr: |
+    TODO
+covid_expenditures_above_tab_text_dept:
+  transform: [handlebars,markdown]
+  en: TODO, currently both dept and gov use the gov text
   fr: TODO
 covid_expenditures_summary_text_gov:
   transform: [handlebars,markdown]
@@ -37,4 +47,11 @@ covid_expenditures_department_tab_text:
   en: |
     The department with the largest total COVID-19 related expenditures is **{{largest_dept_name}}** with **{{fmt_compact1_written largest_dept_auth}}**.
   fr: |
-    Le ministère ayant le plus grand nombre d'autorisations liées à COVID-19 est **{{largest_dept_name}}** avec **{{fmt_compact1_written largest_dept_auth}}**.
+    TODO
+covid_expenditures_measure_tab_text:
+  transform: [handlebars,markdown]
+  en: |
+    The COVID-19 measure with the largest total COVID-19 related expenditures is **{{largest_measure_name}}** with **{{fmt_compact1_written largest_measure_auth}}**
+  fr: |
+    TODO
+

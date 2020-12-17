@@ -18,7 +18,7 @@ import {
 import {
   SummaryTab,
   ByDepartmentTab,
-  //ByMeasureTab,
+  ByMeasureTab,
 } from "./covid_tab_contents.js";
 
 import text2 from "./covid_common_lang.yaml";
@@ -78,18 +78,18 @@ const tab_content_configs = [
       ),
     TabContent: ByDepartmentTab,
   },
-  /*{
+  {
     key: "measure",
     levels: ["gov", "dept"],
-    label: text_maker("covid_estimates_measure_tab_label"),
+    label: text_maker("by_measure_tab_label"),
     load_data: ({ subject }) =>
-      ensure_loaded({ covid_estimates: true, subject }).then(() =>
+      ensure_loaded({ covid_expenditures: true, subject }).then(() =>
         subject.level === "gov"
-          ? CovidMeasure.gov_estimates_by_measure()
-          : CovidMeasure.org_lookup_estimates_by_measure(subject.id)
+          ? CovidMeasure.gov_data_by_measure("expenditures", "is_budgetary")
+          : CovidMeasure.org_lookup_data_by_measure("expenditures", subject.id)
       ),
     TabContent: ByMeasureTab,
-  },*/
+  },
 ];
 
 const get_tabbed_content_props = (panel_args) => {
@@ -175,9 +175,13 @@ class CovidExpendituresPanel extends React.Component {
         <Fragment>
           <div className="frow">
             <div className="fcol-md-12 fcol-xs-12 medium-panel-text text">
-              <TabbedContent {...tabbed_content_props} />
+              <TM
+                k={"covid_expenditures_above_tab_text_gov"}
+                args={extended_panel_args}
+              />
             </div>
           </div>
+          <TabbedContent {...tabbed_content_props} />
         </Fragment>
       );
     }

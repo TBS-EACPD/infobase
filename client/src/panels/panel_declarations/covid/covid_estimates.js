@@ -87,12 +87,12 @@ const tab_content_configs = [
   {
     key: "measure",
     levels: ["gov", "dept"],
-    label: text_maker("covid_estimates_measure_tab_label"),
+    label: text_maker("by_measure_tab_label"),
     load_data: ({ subject }) =>
       ensure_loaded({ covid_estimates: true, subject }).then(() =>
         subject.level === "gov"
-          ? CovidMeasure.gov_estimates_by_measure()
-          : CovidMeasure.org_lookup_estimates_by_measure(subject.id)
+          ? CovidMeasure.gov_data_by_measure("estimates", "est_doc")
+          : CovidMeasure.org_lookup_data_by_measure("estimates", subject.id)
       ),
     TabContent: ByMeasureTab,
   },
