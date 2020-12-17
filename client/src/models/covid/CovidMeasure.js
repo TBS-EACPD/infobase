@@ -70,7 +70,7 @@ class CovidMeasure extends mix().with(
       ...measure,
     });
   }
-
+  // TODO to look into
   static extend_with_data(measure_id, data_key, data) {
     const measure = this.lookup(measure_id);
     const extended_data_set =
@@ -87,15 +87,15 @@ class CovidMeasure extends mix().with(
 
   static get_all_data_by_measure = (data_type) =>
     flatten_data_rows(this.get_all(), data_type);
-  static org_lookup_estimates_by_measure = (org_id) =>
+  static org_lookup_data_by_measure = (data_type, org_id) =>
     _.filter(
-      this.get_all_data_by_measure("estimates"),
+      this.get_all_data_by_measure(data_type),
       ({ org_id: row_org_id }) => row_org_id === org_id
     );
-  static gov_estimates_by_measure = () =>
+  static gov_data_by_measure = (data_type, group_key) =>
     roll_up_data_by_property(
-      this.get_all_data_by_measure("estimates"),
-      "est_doc",
+      this.get_all_data_by_measure(data_type),
+      group_key,
       "measure_id"
     );
 
@@ -105,9 +105,10 @@ class CovidMeasure extends mix().with(
       group_key,
       "org_id"
     );
+  // Not used anywheres. Should be removed?
   static org_lookup_estimates_by_org = (org_id) =>
     roll_up_data_by_property(
-      this.org_lookup_estimates_by_measure(org_id),
+      this.org_lookup_data_by_measure("estimates", org_id),
       "est_doc",
       "org_id"
     );

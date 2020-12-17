@@ -227,7 +227,7 @@ const SummaryTab = ({ panel_args, data }) => {
 const ByDepartmentTab = ({ panel_args, data }) => {
   const { data_type } = panel_args;
   const { panel_key } = data_types_constants[data_type];
-  // pre-sort by est doc, so presentation consistent when sorting by other col
+  // pre-sort by key, so presentation consistent when sorting by other col
   const pre_sorted_dept_data = _.sortBy(data, ({ est_doc }) =>
     get_est_doc_order(est_doc)
   );
@@ -291,15 +291,18 @@ const ByDepartmentTab = ({ panel_args, data }) => {
   );
 };
 
-const ByMeasureTab = ({ data: estimates_by_measure, panel_args }) => {
+const ByMeasureTab = ({ data, panel_args }) => {
   const { data_type } = panel_args;
-  // pre-sort by est doc, so presentation consistent when sorting by other col
-  const pre_sorted_estimates_by_measure = _.chain(estimates_by_measure)
+  const { index_key } = data_types_constants[data_type];
+  // pre-sort by key, so presentation consistent when sorting by other col
+  const pre_sorted_data = _.chain(data)
     .map((row) => ({
       ...row,
       measure_name: CovidMeasure.lookup(row.measure_id).name,
     }))
-    .sortBy(estimates_by_measure, ({ est_doc }) => get_est_doc_order(est_doc))
+    .sortBy(data, (row) =>
+      data_type === "estimates" ? get_est_doc_order(row[index_key]) : index_key
+    )
     .reverse()
     .value();
 
@@ -313,15 +316,13 @@ const ByMeasureTab = ({ data: estimates_by_measure, panel_args }) => {
     ...get_common_column_configs(data_type),
   };
 
-  const [largest_measure_name, largest_measure_auth] = _.chain(
-    pre_sorted_estimates_by_measure
-  )
+  const [largest_measure_name, largest_measure_auth] = _.chain(pre_sorted_data)
     .groupBy("measure_name")
     .map((rows, measure_name) => [
       measure_name,
       _.reduce(rows, (memo, { vote, stat }) => memo + vote + stat, 0),
     ])
-    .sortBy(([_measure_name, auth_total]) => auth_total)
+    .sortBy(([_measure_name, total]) => total)
     .last()
     .value();
 
@@ -336,11 +337,11 @@ const ByMeasureTab = ({ data: estimates_by_measure, panel_args }) => {
         className="medium-panel-text"
       />
       <SmartDisplayTable
-        data={_.map(pre_sorted_estimates_by_measure, (row) =>
+        data={_.map(pre_sorted_data, (row) =>
           _.pick(row, _.keys(column_configs))
         )}
         column_configs={column_configs}
-        table_name={text_maker("covid_estimates_measure_tab_label")}
+        table_name={text_maker("by_measure_tab_label")}
       />
     </Fragment>
   );
