@@ -10,6 +10,7 @@ import {
   businessConstants,
 } from "../shared.js";
 
+import common_covid_text from "./covid_common_lang.yaml";
 import estimates_text from "./covid_estimates.yaml";
 import expenditures_text from "./covid_expenditures.yaml";
 
@@ -18,6 +19,7 @@ const { estimates_docs } = businessConstants;
 const { SmartDisplayTable } = util_components;
 
 const { text_maker, TM } = create_text_maker_component([
+  common_covid_text,
   estimates_text,
   expenditures_text,
 ]);
@@ -267,7 +269,7 @@ const ByDepartmentTab = ({ data: covid_estimates_roll_up }) => {
           _.pick(row, _.keys(column_configs))
         )}
         column_configs={column_configs}
-        table_name={text_maker("covid_estimates_department_tab_label")}
+        table_name={text_maker("by_department_tab_label")}
       />
     </Fragment>
   );

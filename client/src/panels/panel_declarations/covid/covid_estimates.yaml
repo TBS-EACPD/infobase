@@ -32,9 +32,6 @@ covid_estimates_above_tab_footnote_list:
     * De plus, ces autorisations ne représentent qu’une partie du plan d'intervention économique du Canada pour répondre à la COVID-19, puisque certaines mesures ne sont pas présentées aux budgets de dépenses.
 
 
-covid_estimates_summary_tab_label:
-  en: Overview
-  fr: Apperçu
 covid_estimates_summary_text_gov:
   transform: [handlebars,markdown]
   en: So far this fiscal year (**{{est_last_year}}**), **{{fmt_compact1_written gov_covid_estimates_in_year}}** in authorities have been presented through the Estimates process in response to the COVID-19 pandemic.
@@ -57,11 +54,6 @@ covid_estimates_by_index_key:
     {{#each index_summary_stats}}
     * {{ this.[0]}} : **{{fmt_compact1_written this.[1] }}**
     {{/each}}
-
-
-covid_estimates_department_tab_label:
-  en: By Department
-  fr: Par Ministère
 covid_estimates_department_tab_text:
   transform: [handlebars,markdown]
   en: |
