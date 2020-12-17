@@ -12,9 +12,14 @@ import {
   declare_panel,
   util_components,
   Subject,
+  ensure_loaded,
 } from "../shared.js";
 
-import { SummaryTab } from "./covid_tab_contents.js";
+import {
+  SummaryTab,
+  ByDepartmentTab,
+  //ByMeasureTab,
+} from "./covid_tab_contents.js";
 
 import text2 from "./covid_common_lang.yaml";
 import text1 from "./covid_expenditures.yaml";
@@ -63,6 +68,28 @@ const tab_content_configs = [
     },
     TabContent: SummaryTab,
   },
+  {
+    key: "department",
+    levels: ["gov"],
+    label: text_maker("by_department_tab_label"),
+    load_data: ({ subject }) =>
+      ensure_loaded({ covid_expenditures: true, subject }).then(() =>
+        CovidMeasure.get_all_data_by_org("expenditures", "is_budgetary")
+      ),
+    TabContent: ByDepartmentTab,
+  },
+  /*{
+    key: "measure",
+    levels: ["gov", "dept"],
+    label: text_maker("covid_estimates_measure_tab_label"),
+    load_data: ({ subject }) =>
+      ensure_loaded({ covid_estimates: true, subject }).then(() =>
+        subject.level === "gov"
+          ? CovidMeasure.gov_estimates_by_measure()
+          : CovidMeasure.org_lookup_estimates_by_measure(subject.id)
+      ),
+    TabContent: ByMeasureTab,
+  },*/
 ];
 
 const get_tabbed_content_props = (panel_args) => {

@@ -32,3 +32,9 @@ covid_expenditures_by_index_key:
     {{/each}}
   fr: |
     TODO
+covid_expenditures_department_tab_text:
+  transform: [handlebars,markdown]
+  en: |
+    The department with the largest total COVID-19 related expenditures is **{{largest_dept_name}}** with **{{fmt_compact1_written largest_dept_auth}}**.
+  fr: |
+    Le ministère ayant le plus grand nombre d'autorisations liées à COVID-19 est **{{largest_dept_name}}** avec **{{fmt_compact1_written largest_dept_auth}}**.

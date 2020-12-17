@@ -25,15 +25,27 @@ const { text_maker, TM } = create_text_maker_component([
 ]);
 const colors = window.infobase_colors();
 
-const get_budgetary_name = (is_budgetary) =>
-  is_budgetary ? text_maker("budgetary") : text_maker("non_budgetary");
+const get_budgetary_name = (is_budgetary) => {
+  if (_.isString(is_budgetary)) {
+    return _.lowerCase(is_budgetary) === "true"
+      ? text_maker("budgetary")
+      : text_maker("non_budgetary");
+  } else {
+    return is_budgetary ? text_maker("budgetary") : text_maker("non_budgetary");
+  }
+};
 const get_est_doc_name = (est_doc) =>
   estimates_docs[est_doc] ? estimates_docs[est_doc][window.lang] : "";
 const data_types_constants = {
-  estimates: { index_key: "est_doc", get_index_name: get_est_doc_name },
+  estimates: {
+    index_key: "est_doc",
+    get_index_name: get_est_doc_name,
+    panel_key: "covid_estimates_panel",
+  },
   expenditures: {
     index_key: "is_budgetary",
     get_index_name: get_budgetary_name,
+    panel_key: "covid_expenditures_panel",
   },
 };
 
@@ -65,29 +77,34 @@ const string_sort_func = (a, b) => {
   return 0;
 };
 
-const common_column_configs = {
-  est_doc: {
-    index: 1,
-    header: text_maker("covid_estimates_estimates_doc"),
-    is_searchable: true,
-    formatter: get_est_doc_name,
-    raw_formatter: get_est_doc_name,
-    sort_func: est_doc_sort_func,
-  },
-  stat: {
-    index: 2,
-    header: text_maker("covid_estimates_stat"),
-    is_searchable: false,
-    is_summable: true,
-    formatter: "compact2",
-  },
-  vote: {
-    index: 3,
-    header: text_maker("covid_estimates_voted"),
-    is_searchable: false,
-    is_summable: true,
-    formatter: "compact2",
-  },
+const get_common_column_configs = (data_type) => {
+  const { index_key, get_index_name } = data_types_constants[data_type];
+  return {
+    [index_key]: {
+      index: 1,
+      header: text_maker(
+        data_type === "estimates" ? `covid_estimates_doc` : "budgetary"
+      ),
+      is_searchable: true,
+      formatter: get_index_name,
+      raw_formatter: get_index_name,
+      sort_func: data_type === "estimates" ? est_doc_sort_func : undefined,
+    },
+    stat: {
+      index: 2,
+      header: text_maker(`covid_${data_type}_stat`),
+      is_searchable: false,
+      is_summable: true,
+      formatter: "compact2",
+    },
+    vote: {
+      index: 3,
+      header: text_maker(`covid_${data_type}_voted`),
+      is_searchable: false,
+      is_summable: true,
+      formatter: "compact2",
+    },
+  };
 };
 
 const SummaryTab = ({ panel_args, data }) => {
@@ -207,11 +224,12 @@ const SummaryTab = ({ panel_args, data }) => {
   );
 };
 
-const ByDepartmentTab = ({ data: covid_estimates_roll_up }) => {
+const ByDepartmentTab = ({ panel_args, data }) => {
+  const { data_type } = panel_args;
+  const { panel_key } = data_types_constants[data_type];
   // pre-sort by est doc, so presentation consistent when sorting by other col
-  const pre_sorted_dept_estimates = _.sortBy(
-    covid_estimates_roll_up,
-    ({ est_doc }) => get_est_doc_order(est_doc)
+  const pre_sorted_dept_data = _.sortBy(data, ({ est_doc }) =>
+    get_est_doc_order(est_doc)
   );
 
   const column_configs = {
@@ -225,7 +243,7 @@ const ByDepartmentTab = ({ data: covid_estimates_roll_up }) => {
         return (
           <a
             href={infograph_options_href_template(org, "covid", {
-              panel_key: "covid_estimates_panel",
+              panel_key,
             })}
           >
             {org.name}
@@ -239,25 +257,23 @@ const ByDepartmentTab = ({ data: covid_estimates_roll_up }) => {
         return string_sort_func(org_a.name, org_b.name);
       },
     },
-    ...common_column_configs,
+    ...get_common_column_configs(data_type),
   };
 
-  const [largest_dept_id, largest_dept_auth] = _.chain(
-    pre_sorted_dept_estimates
-  )
+  const [largest_dept_id, largest_dept_auth] = _.chain(pre_sorted_dept_data)
     .groupBy("org_id")
-    .mapValues((covid_estimates) =>
-      _.reduce(covid_estimates, (memo, { vote, stat }) => memo + vote + stat, 0)
+    .mapValues((data) =>
+      _.reduce(data, (memo, { vote, stat }) => memo + vote + stat, 0)
     )
     .toPairs()
-    .sortBy(([org_id, auth_total]) => auth_total)
+    .sortBy(([org_id, total]) => total)
     .last()
     .value();
 
   return (
     <Fragment>
       <TM
-        k="covid_estimates_department_tab_text"
+        k={`covid_${data_type}_department_tab_text`}
         args={{
           largest_dept_name: Dept.lookup(largest_dept_id).name,
           largest_dept_auth,
@@ -265,7 +281,7 @@ const ByDepartmentTab = ({ data: covid_estimates_roll_up }) => {
         className="medium-panel-text"
       />
       <SmartDisplayTable
-        data={_.map(pre_sorted_dept_estimates, (row) =>
+        data={_.map(pre_sorted_dept_data, (row) =>
           _.pick(row, _.keys(column_configs))
         )}
         column_configs={column_configs}
@@ -275,7 +291,8 @@ const ByDepartmentTab = ({ data: covid_estimates_roll_up }) => {
   );
 };
 
-const ByMeasureTab = ({ data: estimates_by_measure }) => {
+const ByMeasureTab = ({ data: estimates_by_measure, panel_args }) => {
+  const { data_type } = panel_args;
   // pre-sort by est doc, so presentation consistent when sorting by other col
   const pre_sorted_estimates_by_measure = _.chain(estimates_by_measure)
     .map((row) => ({
@@ -293,7 +310,7 @@ const ByMeasureTab = ({ data: estimates_by_measure }) => {
       is_searchable: true,
       sort_func: (name) => string_sort_func(name),
     },
-    ...common_column_configs,
+    ...get_common_column_configs(data_type),
   };
 
   const [largest_measure_name, largest_measure_auth] = _.chain(

@@ -80,7 +80,7 @@ const tab_content_configs = [
     label: text_maker("by_department_tab_label"),
     load_data: ({ subject }) =>
       ensure_loaded({ covid_estimates: true, subject }).then(() =>
-        CovidMeasure.get_all_estimates_by_org()
+        CovidMeasure.get_all_data_by_org("estimates", "est_doc")
       ),
     TabContent: ByDepartmentTab,
   },
