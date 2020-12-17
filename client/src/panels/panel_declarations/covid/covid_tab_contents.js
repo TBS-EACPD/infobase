@@ -329,7 +329,7 @@ const ByMeasureTab = ({ data, panel_args }) => {
   return (
     <Fragment>
       <TM
-        k="covid_estimates_measure_tab_text"
+        k={`covid_${data_type}_measure_tab_text`}
         args={{
           largest_measure_name,
           largest_measure_auth,
