@@ -8,6 +8,8 @@ import {
   InfographicPanel,
   ensure_loaded,
   declare_panel,
+  StandardLegend,
+  WrappedNivoBar,
 } from "src/panels/panel_declarations/shared.js";
 
 import {
@@ -18,10 +20,10 @@ import {
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import {
-  SummaryTab,
   ByDepartmentTab,
   ByMeasureTab,
   AboveTabFootnoteList,
+  get_est_doc_name,
 } from "./covid_common_components.js";
 
 import text2 from "./covid_common_lang.yaml";
@@ -37,6 +39,123 @@ const {
 const { text_maker, TM } = create_text_maker_component([text1, text2]);
 
 const client = get_client();
+
+const colors = window.infobase_colors();
+
+const SummaryTab = ({ panel_args, data }) => {
+  const { subject } = panel_args;
+
+  const graph_index_key = "index_key";
+
+  const graph_data = _.chain(data)
+    .map((row) => ({
+      [graph_index_key]: get_est_doc_name(row.est_doc),
+      [text_maker(`covid_estimates_stat`)]: row.stat,
+      [text_maker(`covid_estimates_voted`)]: row.vote,
+    }))
+    .value();
+
+  const graph_keys = _.chain(graph_data)
+    .first()
+    .omit(graph_index_key)
+    .keys()
+    .value();
+
+  const legend_items = _.map(graph_keys, (key) => ({
+    id: key,
+    label: key,
+    color: colors(key),
+  }));
+
+  const graph_content = (
+    <WrappedNivoBar
+      data={graph_data}
+      keys={graph_keys}
+      indexBy={graph_index_key}
+      colorBy={(d) => colors(d.id)}
+      margin={{
+        top: 50,
+        right: 40,
+        bottom: 120,
+        left: 40,
+      }}
+      bttm_axis={{
+        format: (d) => (_.words(d).length > 3 ? d.substring(0, 20) + "..." : d),
+        tickSize: 3,
+        tickRotation: -45,
+        tickPadding: 10,
+      }}
+      graph_height="450px"
+      enableGridX={false}
+      remove_left_axis={true}
+      theme={{
+        axis: {
+          ticks: {
+            text: {
+              fontSize: 12,
+              fill: window.infobase_color_constants.textColor,
+              fontWeight: "550",
+            },
+          },
+        },
+      }}
+    />
+  );
+
+  const additional_text_args = (() => {
+    const index_summary_stats = _.map(data, (row) => [
+      get_est_doc_name(row.est_doc),
+      row.vote + row.stat,
+    ]);
+
+    if (subject.level === "gov") {
+      return {
+        index_summary_stats,
+        covid_auth_pct_of_gov_auth:
+          panel_args[`gov_covid_estimates_in_year`] /
+          panel_args[`gov_total_estimates_in_year`],
+      };
+    } else {
+      const dept_covid_data_in_year = _.reduce(
+        data,
+        (memo, { stat, vote }) => memo + vote + stat,
+        0
+      );
+
+      return {
+        index_summary_stats,
+        dept_covid_data_in_year,
+        covid_auth_pct_of_gov_auth:
+          dept_covid_data_in_year / panel_args[`gov_total_estimates_in_year`],
+      };
+    }
+  })();
+
+  return (
+    <div className="frow middle-xs">
+      <div className="fcol-xs-12 fcol-md-6 medium-panel-text">
+        <TM
+          k={`covid_estimates_summary_text_${subject.level}`}
+          args={{ ...panel_args, ...additional_text_args }}
+        />
+        <TM
+          k={`covid_estimates_by_index_key`}
+          args={{ ...panel_args, ...additional_text_args }}
+        />
+      </div>
+      <div className="fcol-xs-12 fcol-md-6">
+        {!window.is_a11y_mode && (
+          <StandardLegend
+            items={legend_items}
+            isHorizontal={true}
+            LegendCheckBoxProps={{ isSolidBox: true }}
+          />
+        )}
+        {graph_content}
+      </div>
+    </div>
+  );
+};
 
 const tab_content_configs = [
   {
@@ -183,15 +302,9 @@ class CovidEstimatesPanel extends React.Component {
         <Fragment>
           <div className="frow">
             <div className="fcol-md-12 fcol-xs-12 medium-panel-text text">
-              <TM
-                k={"covid_estimates_above_tab_footnote_title"}
-                className="bold"
-                el="span"
-              />
-              <TM
-                k={"covid_estimates_above_tab_footnote_list"}
-                style={{ lineHeight: "normal" }}
-              />
+              <AboveTabFootnoteList>
+                <TM k="covid_estimates_above_tab_footnote_list" />
+              </AboveTabFootnoteList>
             </div>
           </div>
           <TabbedContent {...tabbed_content_props} />
