@@ -212,7 +212,7 @@ export const declare_covid_expenditures_panel = () =>
           ? subject.has_data("covid_response")?.has_expenditures
           : true,
       render: ({ calculations, footnotes, sources }) => {
-        const { panel_args } = calculations;
+        const { panel_args, subject } = calculations;
         return (
           <InfographicPanel
             title={text_maker("covid_expenditures_panel_title")}
@@ -226,7 +226,7 @@ export const declare_covid_expenditures_panel = () =>
                 "Not real data! Faked based on the already fake dev-purposes covid estimates. Scale and distribution of values does not reflect what is expected in the real expendture data. For development purposes only!"
               }
             </AlertBanner>
-            <CovidExpendituresPanel panel_args={panel_args} />
+            <CovidExpendituresPanel panel_args={{ ...panel_args, subject }} />
           </InfographicPanel>
         );
       },
