@@ -5,7 +5,7 @@ budgetary:
   en: Budgetary
   fr: TODO
 non_budgetary:
-  en: Non budgetary
+  en: Non-budgetary
   fr: TODO
 covid_expenditures_stat:
   en: Statutory COVID-19 expenditures
@@ -13,44 +13,39 @@ covid_expenditures_stat:
 covid_expenditures_voted:
   en: Voted COVID-19 expenditures
   fr: TODO
+
 covid_expenditures_above_tab_text_gov:
   transform: [handlebars,markdown]
-  en: |
-    This fiscal year (**{{est_in_year}}**), the government has spent **{{fmt_compact1_written gov_covid_expenditures_in_year}}** in expenditures to implement the response to the COVID-19 pandemic.
+  en: As of **date**, the government has spent **{{fmt_compact1_written gov_covid_expenditures_in_year}}** in **{{est_in_year}}** towards implementing the response to the COVID-19 pandemic.
   fr: |
     TODO
 covid_expenditures_above_tab_text_dept:
   transform: [handlebars,markdown]
-  en: TODO, currently both dept and gov use the gov text
+  en: As of **date**, **{{subject.name}}** has spent **{{fmt_compact1_written gov_covid_expenditures_in_year}}** in **{{est_in_year}}** towards implementing the response to the COVID-19 pandemic.
   fr: TODO
+
 covid_expenditures_summary_text_gov:
   transform: [handlebars,markdown]
-  en: This fiscal year (**{{est_in_year}}**), **{{fmt_compact1_written gov_covid_expenditures_in_year}}** in expenditures have been presented in the TODO process in response to the COVID-19 pandemic.
-    These expenditures make up **{{fmt_percentage1 covid_auth_pct_of_gov_auth}}** of the total expenditures presented in **{{est_in_year}}**. 
+  en: TODO
   fr: TODO
 covid_expenditures_summary_text_dept:
   transform: [handlebars,markdown]
-  en: This fiscal year (**{{est_in_year}}**), **{{subject.name}}** has **{{fmt_compact1_written dept_covid_data_in_year}}** in authorities, as made available through the Estimates process in response to the COVID-19 pandemic.
-    These authorities make up **{{fmt_percentage1 covid_auth_pct_of_gov_auth}}** of the government’s planned spending in response to the global pandemic. 
+  en: TODO
   fr: TODO
 covid_expenditures_by_index_key:
-  transform: [handlebars,markdown]
-  en: |
-    Total COVID-19 expenditures by release:
-    {{#each index_summary_stats}}
-    * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}**
-    {{/each}}
-  fr: |
-    TODO
+  en: TODO
+  fr: TODO
+
 covid_expenditures_department_tab_text:
   transform: [handlebars,markdown]
   en: |
-    The department with the largest total COVID-19 related expenditures is **{{largest_dept_name}}** with **{{fmt_compact1_written largest_dept_auth}}**.
+    As of **date**, the department with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_dept_name}}** with **{{fmt_compact1_written largest_dept_auth}}**.
   fr: |
     TODO
+
 covid_expenditures_measure_tab_text:
   transform: [handlebars,markdown]
   en: |
-    The COVID-19 measure with the largest total COVID-19 related expenditures is **{{largest_measure_name}}** with **{{fmt_compact1_written largest_measure_auth}}**.
+    As of **date**, the COVID-19 measure with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_measure_name}}** with **{{fmt_compact1_written largest_measure_auth}}**.
   fr: |
     TODO
