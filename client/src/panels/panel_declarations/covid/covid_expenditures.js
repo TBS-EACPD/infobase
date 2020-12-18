@@ -28,14 +28,12 @@ import text1 from "./covid_expenditures.yaml";
 const { CovidMeasure } = Subject;
 
 const { text_maker, TM } = create_text_maker_component([text1, text2]);
-const { TabbedContent, SpinnerWrapper, AlertBanner } = util_components;
+const { TabbedContent, SpinnerWrapper, Format, AlertBanner } = util_components;
 
 const client = get_client();
 
 const SummaryTab = ({ panel_args, data }) => {
   const { subject } = panel_args;
-
-  const graph_content = "TODO... a visualization? A table? Undecided...";
 
   const additional_text_args = (() => {
     if (subject.level === "gov") {
@@ -51,6 +49,27 @@ const SummaryTab = ({ panel_args, data }) => {
     }
   })();
 
+  const format_type = window.is_a11y_mode ? "compact1_written" : "compact1";
+
+  const table_data = _.chain(data)
+    .groupBy("is_budgetary")
+    .map((rows, is_bud_string) => [
+      is_bud_string === "true" ? "bud" : "non_bud",
+      _.chain(rows)
+        .reduce(
+          (memo, row) => ({
+            vote: memo.vote + row.vote,
+            stat: memo.stat + row.stat,
+            total: memo.total + row.vote + row.stat,
+          }),
+          { vote: 0, stat: 0, total: 0 }
+        )
+
+        .value(),
+    ])
+    .fromPairs()
+    .value();
+
   return (
     <Fragment>
       <TM
@@ -58,7 +77,85 @@ const SummaryTab = ({ panel_args, data }) => {
         args={{ ...panel_args, ...additional_text_args }}
         className="medium-panel-text"
       />
-      {graph_content}
+      <table className="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th scope="col">
+              <TM k="covid_expenditures_stat" />
+            </th>
+            <th scope="col">
+              <TM k="covid_expenditures_voted" />
+            </th>
+            <th scope="col">
+              <TM k="total" />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">
+              <TM k="budgetary" />
+            </th>
+            <td>
+              <Format type={format_type} content={table_data.bud?.stat || 0} />
+            </td>
+            <td>
+              <Format type={format_type} content={table_data.bud?.vote || 0} />
+            </td>
+            <td>
+              <Format type={format_type} content={table_data.bud?.total || 0} />
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <TM k="non_budgetary" />
+            </th>
+            <td>
+              <Format
+                type={format_type}
+                content={table_data.non_bud?.stat || 0}
+              />
+            </td>
+            <td>
+              <Format
+                type={format_type}
+                content={table_data.non_bud?.vote || 0}
+              />
+            </td>
+            <td>
+              <Format
+                type={format_type}
+                content={table_data.non_bud?.total || 0}
+              />
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <TM k="total" />
+            </th>
+            <td>
+              <Format
+                type={format_type}
+                content={table_data.bud?.stat + table_data.non_bud?.stat || 0}
+              />
+            </td>
+            <td>
+              <Format
+                type={format_type}
+                content={table_data.bud?.vote + table_data.non_bud?.vote || 0}
+              />
+            </td>
+            <td>
+              <Format
+                type={format_type}
+                content={table_data.bud?.total + table_data.non_bud?.total || 0}
+                className="bold"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </Fragment>
   );
 };
