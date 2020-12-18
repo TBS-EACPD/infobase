@@ -3,8 +3,6 @@ import { Fragment } from "react";
 import {
   Subject,
   util_components,
-  WrappedNivoBar,
-  StandardLegend,
   infograph_options_href_template,
   create_text_maker_component,
   businessConstants,
@@ -23,7 +21,6 @@ const { text_maker, TM } = create_text_maker_component([
   estimates_text,
   expenditures_text,
 ]);
-const colors = window.infobase_colors();
 
 const get_budgetary_name = (is_budgetary) => {
   if (_.isString(is_budgetary)) {
@@ -49,6 +46,7 @@ const data_types_constants = {
   },
 };
 
+// TODO these est doc utils and get_est_doc_name should move to somewhere central, maybe in models
 const get_est_doc_order = (est_doc) =>
   estimates_docs[est_doc] ? estimates_docs[est_doc].order : 9999;
 const est_doc_sort_func = (est_doc_a, est_doc_b) => {
@@ -105,123 +103,6 @@ const get_common_column_configs = (data_type) => {
       formatter: "compact2",
     },
   };
-};
-
-const SummaryTab = ({ panel_args, data }) => {
-  const { subject, data_type } = panel_args;
-  const { index_key, get_index_name } = data_types_constants[data_type];
-
-  const graph_index_key = "index_key";
-
-  const graph_data = _.chain(data)
-    .map((row) => ({
-      [graph_index_key]: get_index_name(row[index_key]),
-      [text_maker(`covid_${data_type}_stat`)]: row.stat,
-      [text_maker(`covid_${data_type}_voted`)]: row.vote,
-    }))
-    .value();
-
-  const graph_keys = _.chain(graph_data)
-    .first()
-    .omit(graph_index_key)
-    .keys()
-    .value();
-
-  const legend_items = _.map(graph_keys, (key) => ({
-    id: key,
-    label: key,
-    color: colors(key),
-  }));
-
-  const graph_content = (
-    <WrappedNivoBar
-      data={graph_data}
-      keys={graph_keys}
-      indexBy={graph_index_key}
-      colorBy={(d) => colors(d.id)}
-      margin={{
-        top: 50,
-        right: 40,
-        bottom: 120,
-        left: 40,
-      }}
-      bttm_axis={{
-        format: (d) => (_.words(d).length > 3 ? d.substring(0, 20) + "..." : d),
-        tickSize: 3,
-        tickRotation: -45,
-        tickPadding: 10,
-      }}
-      graph_height="450px"
-      enableGridX={false}
-      remove_left_axis={true}
-      theme={{
-        axis: {
-          ticks: {
-            text: {
-              fontSize: 12,
-              fill: window.infobase_color_constants.textColor,
-              fontWeight: "550",
-            },
-          },
-        },
-      }}
-    />
-  );
-
-  const additional_text_args = (() => {
-    const index_summary_stats = _.map(data, (row) => [
-      get_index_name(row[index_key]),
-      row.vote + row.stat,
-    ]);
-
-    if (subject.level === "gov") {
-      return {
-        index_summary_stats,
-        covid_auth_pct_of_gov_auth:
-          panel_args[`gov_covid_${data_type}_in_year`] /
-          panel_args[`gov_total_${data_type}_in_year`],
-      };
-    } else {
-      const dept_covid_data_in_year = _.reduce(
-        data,
-        (memo, { stat, vote }) => memo + vote + stat,
-        0
-      );
-
-      return {
-        index_summary_stats,
-        dept_covid_data_in_year,
-        covid_auth_pct_of_gov_auth:
-          dept_covid_data_in_year /
-          panel_args[`gov_total_${data_type}_in_year`],
-      };
-    }
-  })();
-
-  return (
-    <div className="frow middle-xs">
-      <div className="fcol-xs-12 fcol-md-6 medium-panel-text">
-        <TM
-          k={`covid_${data_type}_summary_text_${subject.level}`}
-          args={{ ...panel_args, ...additional_text_args }}
-        />
-        <TM
-          k={`covid_${data_type}_by_index_key`}
-          args={{ ...panel_args, ...additional_text_args }}
-        />
-      </div>
-      <div className="fcol-xs-12 fcol-md-6">
-        {!window.is_a11y_mode && (
-          <StandardLegend
-            items={legend_items}
-            isHorizontal={true}
-            LegendCheckBoxProps={{ isSolidBox: true }}
-          />
-        )}
-        {graph_content}
-      </div>
-    </div>
-  );
 };
 
 const ByDepartmentTab = ({ panel_args, data }) => {
@@ -347,11 +228,16 @@ const ByMeasureTab = ({ data, panel_args }) => {
   );
 };
 
-const AboveTabFootnoteList = ({ list_text_key }) => (
+const AboveTabFootnoteList = ({ children }) => (
   <Fragment>
     <TM k={"covid_above_tab_footnote_title"} className="bold" el="span" />
-    <TM k={list_text_key} style={{ lineHeight: "normal" }} />
+    <div style={{ lineHeight: "normal" }}>{children}</div>
   </Fragment>
 );
 
-export { SummaryTab, ByDepartmentTab, ByMeasureTab, AboveTabFootnoteList };
+export {
+  get_est_doc_name,
+  ByDepartmentTab,
+  ByMeasureTab,
+  AboveTabFootnoteList,
+};

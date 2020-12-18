@@ -16,7 +16,6 @@ import {
 } from "../shared.js";
 
 import {
-  SummaryTab,
   ByDepartmentTab,
   ByMeasureTab,
   AboveTabFootnoteList,
@@ -36,6 +35,12 @@ const {
 } = util_components;
 
 const client = get_client();
+
+const SummaryTab = ({ panel_args, data }) => {
+  const { subject, data_type } = panel_args;
+
+  return <div className="frow middle-xs">{"TODO"}</div>;
+};
 
 const tab_content_configs = [
   {
@@ -186,7 +191,9 @@ class CovidExpendituresPanel extends React.Component {
                 k={`covid_expenditures_above_tab_text_${level}`}
                 args={extended_panel_args}
               />
-              <AboveTabFootnoteList list_text_key="covid_estimates_above_tab_footnote_list" />
+              <AboveTabFootnoteList>
+                <TM k="covid_estimates_above_tab_footnote_list" />
+              </AboveTabFootnoteList>
             </div>
           </div>
           <TabbedContent {...tabbed_content_props} />
@@ -202,9 +209,9 @@ export const declare_covid_expenditures_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
       initial_queries: {
-        gov: { gov_covid_summary_query },
-        dept: { org_covid_summary_query },
-      }[level_name],
+        gov_covid_summary_query,
+        ...(level_name === "dept" && { org_covid_summary_query }),
+      },
       footnotes: false,
       source: (subject) => [],
       calculate: (subject, options) =>
