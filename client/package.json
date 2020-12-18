@@ -25,7 +25,7 @@
     "axios": "^0.19.2",
     "babel-loader": "^8.1.0",
     "bootstrap": "^3.4.1",
-    "bundle-stats-webpack-plugin": "^2.4.0-beta.6",
+    "bundle-stats-webpack-plugin": "^2.4.0-beta.7",
     "circular-dependency-plugin": "^5.2.2",
     "classnames": "^2.2.6",
     "clipboard-polyfill": "^2.8.1",
