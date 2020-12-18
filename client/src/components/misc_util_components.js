@@ -24,11 +24,12 @@ const ExternalLink = ({ children, href, title }) => (
 
 class Format extends React.PureComponent {
   render() {
-    const { type, content, style } = this.props;
+    const { type, content, style, className } = this.props;
 
     return (
       <span
         style={style}
+        className={className}
         dangerouslySetInnerHTML={{ __html: formats[type](content) }}
       />
     );
