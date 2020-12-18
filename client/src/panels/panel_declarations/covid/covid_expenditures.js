@@ -33,8 +33,6 @@ const { TabbedContent, SpinnerWrapper, AlertBanner } = util_components;
 const client = get_client();
 
 const SummaryTab = ({ panel_args, data }) => {
-  const { subject, data_type } = panel_args;
-
   return <div className="frow middle-xs">{"TODO"}</div>;
 };
 
@@ -139,7 +137,6 @@ class CovidExpendituresPanel extends React.Component {
   render() {
     const { loading, gov_covid_expenditures_in_year } = this.state;
     const { panel_args } = this.props;
-    const { level } = panel_args.subject;
 
     if (loading) {
       return <SpinnerWrapper config_name={"tabbed_content"} />;
@@ -156,16 +153,10 @@ class CovidExpendituresPanel extends React.Component {
 
       return (
         <Fragment>
-          <div className="frow">
-            <div className="fcol-md-12 fcol-xs-12 medium-panel-text text">
-              <TM
-                k={`covid_expenditures_above_tab_text_${level}`}
-                args={extended_panel_args}
-              />
-              <AboveTabFootnoteList>
-                <TM k="covid_estimates_above_tab_footnote_list" />
-              </AboveTabFootnoteList>
-            </div>
+          <div className="medium-panel-text text">
+            <AboveTabFootnoteList>
+              <TM k="covid_estimates_above_tab_footnote_list" />
+            </AboveTabFootnoteList>
           </div>
           <TabbedContent {...tabbed_content_props} />
         </Fragment>
