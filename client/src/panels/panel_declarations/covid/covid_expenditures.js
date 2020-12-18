@@ -16,10 +16,11 @@ import {
 } from "../shared.js";
 
 import {
+  AboveTabFootnoteList,
   ByDepartmentTab,
   ByMeasureTab,
-  AboveTabFootnoteList,
-} from "./covid_common_components.js";
+} from "./covid_common_tabs.js";
+import { get_tabbed_content_props } from "./covid_common_utils.js";
 
 import text2 from "./covid_common_lang.yaml";
 import text1 from "./covid_expenditures.yaml";
@@ -27,12 +28,7 @@ import text1 from "./covid_expenditures.yaml";
 const { CovidMeasure } = Subject;
 
 const { text_maker, TM } = create_text_maker_component([text1, text2]);
-const {
-  TabbedContent,
-  SpinnerWrapper,
-  TabLoadingWrapper,
-  AlertBanner,
-} = util_components;
+const { TabbedContent, SpinnerWrapper, AlertBanner } = util_components;
 
 const client = get_client();
 
@@ -103,32 +99,6 @@ const tab_content_configs = [
   },
 ];
 
-const get_tabbed_content_props = (panel_args) => {
-  const configs_for_level = _.filter(tab_content_configs, ({ levels }) =>
-    _.includes(levels, panel_args.subject.level)
-  );
-
-  return {
-    tab_keys: _.map(configs_for_level, "key"),
-    tab_labels: _.chain(configs_for_level)
-      .map(({ key, label }) => [key, label])
-      .fromPairs()
-      .value(),
-    tab_pane_contents: _.chain(configs_for_level)
-      .map(({ key, load_data, TabContent }) => [
-        key,
-        <TabLoadingWrapper
-          panel_args={panel_args}
-          load_data={load_data}
-          TabContent={TabContent}
-          key={key}
-        />,
-      ])
-      .fromPairs()
-      .value(),
-  };
-};
-
 class CovidExpendituresPanel extends React.Component {
   constructor(props) {
     super(props);
@@ -180,6 +150,7 @@ class CovidExpendituresPanel extends React.Component {
         gov_covid_expenditures_in_year,
       };
       const tabbed_content_props = get_tabbed_content_props(
+        tab_content_configs,
         extended_panel_args
       );
 

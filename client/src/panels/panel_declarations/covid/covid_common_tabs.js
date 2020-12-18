@@ -5,15 +5,19 @@ import {
   util_components,
   infograph_options_href_template,
   create_text_maker_component,
-  businessConstants,
 } from "../shared.js";
+
+import {
+  get_est_doc_name,
+  get_est_doc_order,
+  est_doc_sort_func,
+} from "./covid_common_utils.js";
 
 import common_covid_text from "./covid_common_lang.yaml";
 import estimates_text from "./covid_estimates.yaml";
 import expenditures_text from "./covid_expenditures.yaml";
 
 const { CovidMeasure, Dept } = Subject;
-const { estimates_docs } = businessConstants;
 const { SmartDisplayTable } = util_components;
 
 const { text_maker, TM } = create_text_maker_component([
@@ -21,6 +25,13 @@ const { text_maker, TM } = create_text_maker_component([
   estimates_text,
   expenditures_text,
 ]);
+
+const AboveTabFootnoteList = ({ children }) => (
+  <Fragment>
+    <TM k={"covid_above_tab_footnote_title"} className="bold" el="span" />
+    <div style={{ lineHeight: "normal" }}>{children}</div>
+  </Fragment>
+);
 
 const get_budgetary_name = (is_budgetary) => {
   if (_.isString(is_budgetary)) {
@@ -31,8 +42,7 @@ const get_budgetary_name = (is_budgetary) => {
     return is_budgetary ? text_maker("budgetary") : text_maker("non_budgetary");
   }
 };
-const get_est_doc_name = (est_doc) =>
-  estimates_docs[est_doc] ? estimates_docs[est_doc][window.lang] : "";
+
 const data_types_constants = {
   estimates: {
     index_key: "est_doc",
@@ -44,21 +54,6 @@ const data_types_constants = {
     get_index_name: get_budgetary_name,
     panel_key: "covid_expenditures_panel",
   },
-};
-
-// TODO these est doc utils and get_est_doc_name should move to somewhere central, maybe in models
-const get_est_doc_order = (est_doc) =>
-  estimates_docs[est_doc] ? estimates_docs[est_doc].order : 9999;
-const est_doc_sort_func = (est_doc_a, est_doc_b) => {
-  const order_a = get_est_doc_order(est_doc_a);
-  const order_b = get_est_doc_order(est_doc_b);
-
-  if (order_a < order_b) {
-    return -1;
-  } else if (order_a > order_b) {
-    return 1;
-  }
-  return 0;
 };
 
 const get_plain_string = (string) =>
@@ -228,16 +223,4 @@ const ByMeasureTab = ({ data, panel_args }) => {
   );
 };
 
-const AboveTabFootnoteList = ({ children }) => (
-  <Fragment>
-    <TM k={"covid_above_tab_footnote_title"} className="bold" el="span" />
-    <div style={{ lineHeight: "normal" }}>{children}</div>
-  </Fragment>
-);
-
-export {
-  get_est_doc_name,
-  ByDepartmentTab,
-  ByMeasureTab,
-  AboveTabFootnoteList,
-};
+export { AboveTabFootnoteList, ByDepartmentTab, ByMeasureTab };

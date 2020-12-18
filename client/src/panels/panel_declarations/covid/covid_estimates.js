@@ -20,21 +20,21 @@ import {
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import {
+  AboveTabFootnoteList,
   ByDepartmentTab,
   ByMeasureTab,
-  AboveTabFootnoteList,
+} from "./covid_common_tabs.js";
+import {
+  get_tabbed_content_props,
   get_est_doc_name,
-} from "./covid_common_components.js";
+} from "./covid_common_utils.js";
 
 import text2 from "./covid_common_lang.yaml";
 import text1 from "./covid_estimates.yaml";
 
-const {
-  TabbedContent,
-  SpinnerWrapper,
-  AlertBanner,
-  TabLoadingWrapper,
-} = util_components;
+const { CovidMeasure } = Subject;
+
+const { TabbedContent, SpinnerWrapper, AlertBanner } = util_components;
 
 const { text_maker, TM } = create_text_maker_component([text1, text2]);
 
@@ -217,31 +217,6 @@ const tab_content_configs = [
     TabContent: ByMeasureTab,
   },
 ];
-const get_tabbed_content_props = (panel_args) => {
-  const configs_for_level = _.filter(tab_content_configs, ({ levels }) =>
-    _.includes(levels, panel_args.subject.level)
-  );
-
-  return {
-    tab_keys: _.map(configs_for_level, "key"),
-    tab_labels: _.chain(configs_for_level)
-      .map(({ key, label }) => [key, label])
-      .fromPairs()
-      .value(),
-    tab_pane_contents: _.chain(configs_for_level)
-      .map(({ key, load_data, TabContent }) => [
-        key,
-        <TabLoadingWrapper
-          panel_args={panel_args}
-          load_data={load_data}
-          TabContent={TabContent}
-          key={key}
-        />,
-      ])
-      .fromPairs()
-      .value(),
-  };
-};
 
 class CovidEstimatesPanel extends React.Component {
   constructor(props) {
@@ -295,6 +270,7 @@ class CovidEstimatesPanel extends React.Component {
       };
 
       const tabbed_content_props = get_tabbed_content_props(
+        tab_content_configs,
         extended_panel_args
       );
 
