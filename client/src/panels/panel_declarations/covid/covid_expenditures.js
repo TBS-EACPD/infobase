@@ -176,7 +176,7 @@ class CovidExpendituresPanel extends React.Component {
           <div className="frow">
             <div className="fcol-md-12 fcol-xs-12 medium-panel-text text">
               <TM
-                k={"covid_expenditures_above_tab_text_gov"}
+                k={`covid_expenditures_above_tab_text_${panel_args.subject.level}`}
                 args={extended_panel_args}
               />
             </div>
