@@ -178,7 +178,7 @@ function get_plugins({
     produce_stats &&
       new BundleStatsWebpackPlugin({
         baseline: stats_baseline,
-        compare: !stats_no_compare && false, //TODO need bundle stats to fix bug
+        compare: !stats_no_compare,
         json: true,
         outDir: "..",
       }),
