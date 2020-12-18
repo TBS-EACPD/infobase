@@ -111,12 +111,12 @@ const SummaryTab = ({ panel_args, data }) => {
     if (subject.level === "gov") {
       return {
         index_summary_stats,
-        covid_auth_pct_of_gov_auth:
+        covid_est_pct_of_all_est:
           panel_args[`gov_covid_estimates_in_year`] /
           panel_args[`gov_total_estimates_in_year`],
       };
     } else {
-      const dept_covid_data_in_year = _.reduce(
+      const dept_covid_estimates_in_year = _.reduce(
         data,
         (memo, { stat, vote }) => memo + vote + stat,
         0
@@ -124,9 +124,7 @@ const SummaryTab = ({ panel_args, data }) => {
 
       return {
         index_summary_stats,
-        dept_covid_data_in_year,
-        covid_auth_pct_of_gov_auth:
-          dept_covid_data_in_year / panel_args[`gov_total_estimates_in_year`],
+        dept_covid_estimates_in_year,
       };
     }
   })();
@@ -139,7 +137,7 @@ const SummaryTab = ({ panel_args, data }) => {
           args={{ ...panel_args, ...additional_text_args }}
         />
         <TM
-          k={`covid_estimates_by_index_key`}
+          k={"covid_estimates_by_index_key"}
           args={{ ...panel_args, ...additional_text_args }}
         />
       </div>
@@ -276,12 +274,10 @@ class CovidEstimatesPanel extends React.Component {
 
       return (
         <Fragment>
-          <div className="frow">
-            <div className="fcol-md-12 fcol-xs-12 medium-panel-text text">
-              <AboveTabFootnoteList>
-                <TM k="covid_estimates_above_tab_footnote_list" />
-              </AboveTabFootnoteList>
-            </div>
+          <div className="medium-panel-text text">
+            <AboveTabFootnoteList>
+              <TM k="covid_estimates_above_tab_footnote_list" />
+            </AboveTabFootnoteList>
           </div>
           <TabbedContent {...tabbed_content_props} />
         </Fragment>
