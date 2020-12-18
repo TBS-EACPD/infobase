@@ -347,4 +347,11 @@ const ByMeasureTab = ({ data, panel_args }) => {
   );
 };
 
-export { SummaryTab, ByDepartmentTab, ByMeasureTab };
+const AboveTabFootnoteList = ({ list_text_key }) => (
+  <Fragment>
+    <TM k={"covid_above_tab_footnote_title"} className="bold" el="span" />
+    <TM k={list_text_key} style={{ lineHeight: "normal" }} />
+  </Fragment>
+);
+
+export { SummaryTab, ByDepartmentTab, ByMeasureTab, AboveTabFootnoteList };

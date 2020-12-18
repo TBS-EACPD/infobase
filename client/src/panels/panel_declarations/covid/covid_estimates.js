@@ -21,7 +21,8 @@ import {
   SummaryTab,
   ByDepartmentTab,
   ByMeasureTab,
-} from "./covid_tab_contents.js";
+  AboveTabFootnoteList,
+} from "./covid_common_components.js";
 
 import text2 from "./covid_common_lang.yaml";
 import text1 from "./covid_estimates.yaml";
