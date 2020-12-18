@@ -102,10 +102,12 @@ const get_common_column_configs = (data_type) => {
 
 const ByDepartmentTab = ({ panel_args, data }) => {
   const { data_type } = panel_args;
-  const { panel_key } = data_types_constants[data_type];
+  const { panel_key, index_key } = data_types_constants[data_type];
   // pre-sort by key, so presentation consistent when sorting by other col
-  const pre_sorted_dept_data = _.sortBy(data, ({ est_doc }) =>
-    get_est_doc_order(est_doc)
+  const pre_sorted_dept_data = _.sortBy(data, (row) =>
+    data_type === "estimates"
+      ? get_est_doc_order(row[index_key])
+      : row[index_key]
   );
 
   const column_configs = {
@@ -177,7 +179,9 @@ const ByMeasureTab = ({ data, panel_args }) => {
       measure_name: CovidMeasure.lookup(row.measure_id).name,
     }))
     .sortBy(data, (row) =>
-      data_type === "estimates" ? get_est_doc_order(row[index_key]) : index_key
+      data_type === "estimates"
+        ? get_est_doc_order(row[index_key])
+        : row[index_key]
     )
     .reverse()
     .value();
