@@ -7,3 +7,9 @@ by_department_tab_label:
 by_measure_tab_label:
   en: By COVID-19 Measure
   fr: Par mesure COVID-19
+
+covid_above_tab_footnote_title:
+  en: |
+    Important:
+  fr: |
+    Important:

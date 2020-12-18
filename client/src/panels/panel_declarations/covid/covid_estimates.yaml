@@ -15,11 +15,6 @@ covid_estimates_above_tab_text_dept:
   en: TODO, currently both dept and gov use the gov text
   fr: TODO
 
-covid_estimates_above_tab_footnote_title:
-  en: |
-    Important:
-  fr: |
-    Important:
 covid_estimates_above_tab_footnote_list:
   transform: [handlebars,markdown]
   en: |
