@@ -18,19 +18,19 @@ covid_estimates_above_tab_footnote_list:
   transform: [handlebars,markdown]
   en: |
     * TODO gather up short list of most important notes on this data
-    * Need to be very clear on how if differs (and can't really be compared to) other InfoBase expenditures and estimates
+    * E.g. need to be very clear on how it differs from other InfoBase finance data (and why it's apples and oranges with other InfoBase expenditures and estimates)
   fr: |
     * TODO
 
 covid_expenditures_summary_text_gov:
   transform: [handlebars,markdown]
-  en: As of **date**, the government has spent **{{fmt_compact1_written gov_covid_expenditures_in_year}}** in **{{est_in_year}}** towards implementing the response to the COVID-19 pandemic.
+  en: As of **date**, the government has spent **{{fmt_compact1_written gov_covid_expenditures_in_year}}** in **{{est_in_year}}** towards implementing its response to the COVID-19 pandemic.
   fr: TODO
 covid_expenditures_summary_text_dept:
   transform: [handlebars,markdown]
   en: |
-    As of **date**, **{{subject.name}}** has spent **{{fmt_compact1_written dept_covid_data_in_year}}** in **{{est_in_year}}** towards implementing the response to the COVID-19 pandemic.
-    This represents **{{fmt_percentage1 (divide dept_covid_data_in_year gov_covid_expenditures_in_year)}}** of the government's total COVID-19 response of **{{fmt_compact1_written gov_covid_expenditures_in_year}}**
+    As of **date**, **{{subject.name}}** has spent **{{fmt_compact1_written dept_covid_expenditures_in_year}}** in **{{est_in_year}}** towards implementing the government's response to the COVID-19 pandemic.
+    This represents **{{fmt_percentage1 (divide dept_covid_expenditures_in_year gov_covid_expenditures_in_year)}}** of the government's total COVID-19 response spending of **{{fmt_compact1_written gov_covid_expenditures_in_year}}**
   fr: |
     TODO
 

@@ -33,7 +33,34 @@ const { TabbedContent, SpinnerWrapper, AlertBanner } = util_components;
 const client = get_client();
 
 const SummaryTab = ({ panel_args, data }) => {
-  return <div className="frow middle-xs">{"TODO"}</div>;
+  const { subject } = panel_args;
+
+  const graph_content = "TODO... a visualization? A table? Undecided...";
+
+  const additional_text_args = (() => {
+    if (subject.level === "gov") {
+      return {};
+    } else {
+      const dept_covid_expenditures_in_year = _.reduce(
+        data,
+        (memo, { vote, stat }) => memo + vote + stat,
+        0
+      );
+
+      return { dept_covid_expenditures_in_year };
+    }
+  })();
+
+  return (
+    <Fragment>
+      <TM
+        k={`covid_expenditures_summary_text_${subject.level}`}
+        args={{ ...panel_args, ...additional_text_args }}
+        className="medium-panel-text"
+      />
+      {graph_content}
+    </Fragment>
+  );
 };
 
 const tab_content_configs = [
