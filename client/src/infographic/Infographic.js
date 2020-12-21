@@ -171,14 +171,14 @@ class InfoGraph_ extends React.Component {
             active_panel_filter_keys,
             panel_obj.depends_on
           );
-          const valid_panel =
+          const is_panel_valid =
             show_all_panels_bubble_type || filtered_keys.length > 0;
           // I think it makes sense, to not include "static" panels (non table data panels) in showing number of active panels
           // But, always display them
-          if (!panel_obj.static && valid_panel) {
+          if (!panel_obj.static && is_panel_valid) {
             result.number_of_active_panels += 1;
           }
-          if (panel_obj.static || valid_panel) {
+          if (panel_obj.static || is_panel_valid) {
             result.panel_renderers.push(
               <PanelRenderer
                 panel_key={panel_key}
@@ -380,8 +380,8 @@ class InfoGraph_ extends React.Component {
       subject: subject,
       has_results: true,
     }).then(() =>
-      get_panels_for_subject(subject).then((subject_panels_by_bubble_id) => {
-        const panel_keys = subject_panels_by_bubble_id[active_bubble_id];
+      get_panels_for_subject(subject).then((panel_keys_by_bubble_id) => {
+        const panel_keys = panel_keys_by_bubble_id[active_bubble_id];
 
         ensure_loaded({
           panel_keys,
@@ -405,10 +405,21 @@ class InfoGraph_ extends React.Component {
               })
               .filter()
               .value();
+            const valid_subject_panels_by_bubble_id = panel_keys_by_bubble_id[
+              active_bubble_id
+            ]
+              ? {
+                  ...panel_keys_by_bubble_id,
+                  [active_bubble_id]: _.map(valid_panel_objs, "key"),
+                }
+              : panel_keys_by_bubble_id;
 
             const subject_bubble_defs = _.chain(bubble_defs)
               .filter(({ id }) =>
-                _.chain(subject_panels_by_bubble_id).keys().includes(id).value()
+                _.chain(valid_subject_panels_by_bubble_id)
+                  .keys()
+                  .includes(id)
+                  .value()
               )
               .map((bubble_def) =>
                 _.mapValues(bubble_def, (bubble_option) =>
@@ -426,19 +437,12 @@ class InfoGraph_ extends React.Component {
             const previous_bubble = subject_bubble_defs[active_index - 1];
 
             this.setState({
-              panel_keys,
+              panel_keys: valid_subject_panels_by_bubble_id[active_bubble_id],
               subject_bubble_defs,
               previous_bubble,
               next_bubble,
-              subject_panels_by_bubble_id: subject_panels_by_bubble_id[
-                active_bubble_id
-              ]
-                ? {
-                    ...subject_panels_by_bubble_id,
-                    [active_bubble_id]: _.map(valid_panel_objs, "key"),
-                  }
-                : subject_panels_by_bubble_id,
               loading: false,
+              subject_panels_by_bubble_id: valid_subject_panels_by_bubble_id,
               panel_filter_by_table: _.chain(valid_panel_objs)
                 .flatMap("depends_on")
                 .uniq()
