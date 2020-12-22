@@ -40,7 +40,7 @@ const base_configs = [
   },
   {
     id: "covid",
-    title: text_maker("covid_title"),
+    title: text_maker("covid_response"),
     description: text_maker("covid_desc"),
   },
   {

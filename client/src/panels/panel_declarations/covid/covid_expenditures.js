@@ -316,7 +316,7 @@ export const declare_covid_expenditures_panel = () =>
           >
             <AlertBanner banner_class="danger">
               {
-                "Not real data! Faked based on the already fake dev-purposes covid estimates. Scale and distribution of values does not reflect what is expected in the real expendture data. For development purposes only!"
+                "Not real data! Fake data based on the already fake dev-purposes covid estimates. Scale and distribution of values does not reflect what is expected in the real expendture data. For development purposes only!"
               }
             </AlertBanner>
             <CovidExpendituresPanel panel_args={{ ...panel_args, subject }} />
