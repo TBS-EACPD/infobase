@@ -7,9 +7,8 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import d3 from "src/core/d3-bundle.js";
 
-import { AlertBanner, GlossaryIcon } from "../components";
+import { AlertBanner, TagCloud } from "../components";
 import { Table } from "../core/TableClass.js";
-import { GlossaryEntry } from "../models/glossary.js";
 
 import { TextMaker, text_maker } from "./rpb_text_provider.js";
 import {
@@ -124,6 +123,7 @@ class TablePicker extends React.Component {
       .map(({ id }) => ({
         id,
         active: _.includes(active_concepts, id),
+        label: text_maker(id),
       }))
       .sortBy("topic")
       .value();
@@ -295,28 +295,10 @@ class TaggedItemCloud extends React.Component {
                 </div>
               </div>
               <div className="labeled-box-content labeled-box-large">
-                <ul className="tag-cloud-main">
-                  {_.map(tags_by_category[cat], ({ id, active }) => (
-                    <li
-                      key={id}
-                      className={classNames(active && "active")}
-                      onClick={() => onSelectTag(id)}
-                    >
-                      <button role="checkbox" aria-checked={!!active}>
-                        <TextMaker text_key={id} />
-                      </button>
-                      {GlossaryEntry.lookup(id) && (
-                        <span className="tag-button-helper" tabIndex="0">
-                          <GlossaryIcon
-                            id={id}
-                            inner_selector={"TablePicker__tooltip-inner"}
-                            arrow_selector={"TablePicker__tooltip-arrow"}
-                          />
-                        </span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
+                <TagCloud
+                  tags={tags_by_category[cat]}
+                  onSelectTag={onSelectTag}
+                />
               </div>
             </div>
           ))}
