@@ -204,4 +204,4 @@ quick_link_tp_by_region:
 quick_link_covid_estimates:
   transform: [handlebars]
   text: |
-    {{gt "estimates_by_covid_measures"}}
+    {{gt "covid_response"}}

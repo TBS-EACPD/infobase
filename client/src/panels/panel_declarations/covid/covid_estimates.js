@@ -325,7 +325,7 @@ export const declare_covid_estimates_panel = () =>
           >
             <AlertBanner banner_class="danger">
               {
-                "Not real data! Totals are bassed on estimates by covid initiative figures, but the values associated with these measures are not accurate. For development purposes only!"
+                "Not real data! Totals are based on estimates by covid initiative figures, but the values associated with these measures are not accurate. For development purposes only!"
               }
             </AlertBanner>
             <CovidEstimatesPanel panel_args={panel_args} />
