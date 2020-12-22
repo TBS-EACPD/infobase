@@ -4,20 +4,15 @@ import { Redirect } from "react-router";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { SelectAllControl } from "../charts/legends/index.js";
 import {
   create_text_maker_component,
   SpinnerWrapper,
   AdvancedSearch,
-  MultiColumnList,
-  CheckBox,
-  Details,
 } from "../components/index.js";
 import { log_standard_event } from "../core/analytics.js";
 import { ensure_loaded } from "../core/lazy_loader.js";
 import { StandardRouteContainer } from "../core/NavComponents";
 import { redirect_with_msg } from "../core/RedirectHeader.js";
-import { Table } from "../core/TableClass.js";
 import { shallowEqualObjectsOverKeys, SafeJSURL } from "../general_utils.js";
 import { Subject } from "../models/subject.js";
 
@@ -29,6 +24,8 @@ import { bubble_defs } from "./bubble_definitions.js";
 import { BubbleMenu } from "./BubbleMenu.js";
 
 import { infograph_href_template } from "./infographic_link.js";
+
+import InfographicFilter from "./InfographicFilter.js";
 
 import text from "./Infographic.yaml";
 import "./Infographic.scss";
@@ -265,79 +262,12 @@ class InfoGraph_ extends React.Component {
             </p>
           )}
           {!loading && !show_all_panels_bubble_type && (
-            <Details
-              summary_content={
-                <div>
-                  <TM style={{ fontSize: 16 }} k="filter_panels" />{" "}
-                  <TM
-                    className="panel-status-text"
-                    k="panels_status"
-                    args={{
-                      number_of_active_panels,
-                      total_number_of_panels,
-                    }}
-                  />
-                </div>
-              }
-              persist_content={true}
-              content={
-                <div
-                  style={{ maxWidth: "fit-content" }}
-                  className="standard-legend-container"
-                >
-                  <fieldset>
-                    <legend> {text_maker("filter_panels_description")} </legend>
-                    <MultiColumnList
-                      list_items={_.map(
-                        panel_filter_by_table,
-                        (checked, dependency) => (
-                          <CheckBox
-                            id={dependency}
-                            label={Table.lookup(dependency).name}
-                            active={checked}
-                            color={window.infobase_color_constants.primaryColor}
-                            container_style={{ margin: "4px" }}
-                            onClick={(evt) =>
-                              this.setState({
-                                panel_filter_by_table: {
-                                  ...panel_filter_by_table,
-                                  [evt]: !panel_filter_by_table[evt],
-                                },
-                              })
-                            }
-                          />
-                        )
-                      )}
-                      ul_class={"remove-padding"}
-                      li_class={"remove-bullet-points"}
-                    />
-                    <div
-                      style={{
-                        borderTop: `1px dashed ${window.infobase_color_constants.tertiaryColor}`,
-                        padding: "10px 0px 10px 5px",
-                      }}
-                    >
-                      <SelectAllControl
-                        SelectAllOnClick={() =>
-                          this.setState({
-                            panel_filter_by_table: _.mapValues(
-                              panel_filter_by_table,
-                              () => true
-                            ),
-                          })
-                        }
-                        SelectNoneOnClick={() =>
-                          this.setState({
-                            panel_filter_by_table: _.mapValues(
-                              panel_filter_by_table,
-                              () => false
-                            ),
-                          })
-                        }
-                      />
-                    </div>
-                  </fieldset>
-                </div>
+            <InfographicFilter
+              number_of_active_panels={number_of_active_panels}
+              total_number_of_panels={total_number_of_panels}
+              panel_filter_by_table={panel_filter_by_table}
+              set_panel_filter_by_table={(panel_filter_by_table) =>
+                this.setState({ panel_filter_by_table })
               }
             />
           )}
