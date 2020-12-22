@@ -8,7 +8,7 @@ import {
 } from "../components/index.js";
 import { Table } from "../core/TableClass.js";
 
-import text from "./Infographic.yaml";
+import text from "./InfographicFilter.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
