@@ -98,6 +98,7 @@ const StatelessPullDownAccordion = ({
         style={{ flexGrow: 1, textAlign: "center", paddingRight: "2.5rem" }}
       >
         {title}
+        {""}
       </button>
     </div>
     <TransitionGroup component={FirstChild}>
