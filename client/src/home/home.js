@@ -115,6 +115,11 @@ const HomeLayout = (props) => (
           title={<TM k="home_finance_title" />}
         />
         <TrinityItem
+          href="#orgs/gov/gov/infograph/covid"
+          img_url={get_static_url("svg/covid.svg")}
+          title={<TM k="covid_response" />}
+        />
+        <TrinityItem
           href="#orgs/gov/gov/infograph/people"
           svg={
             <IconPeople width="100%" color="#FFFFFF" alternate_color={false} />

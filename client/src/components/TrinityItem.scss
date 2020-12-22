@@ -19,8 +19,8 @@ $smallMargin: 10px;
   }
 
   @media(min-width: $minExtraSmallDevice) {
-    flex-basis: 30%;
-    max-width: 30%;
+    flex-basis: 23%;
+    max-width: 23%;
   }
 
   @media(max-width: $maxExtraSmallDevice) {
@@ -34,7 +34,7 @@ $smallMargin: 10px;
 }
 
 .TrinityItem__Title {
-  font-size: 1.75em;
+  font-size: 1.45em;
   padding-top: 8px;
   margin-top: auto;
   margin-bottom: auto;
