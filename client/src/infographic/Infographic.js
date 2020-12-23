@@ -157,6 +157,8 @@ class InfoGraph_ extends React.Component {
     const show_all_panels_bubble_type = !(
       active_bubble_id === "financial" || active_bubble_id === "people"
     );
+    const is_panel_filter_empty = _.filter(panel_filter_by_table).length === 0;
+
     const { number_of_active_panels, panel_renderers } =
       !loading &&
       _.reduce(
@@ -171,9 +173,13 @@ class InfoGraph_ extends React.Component {
             active_panel_filter_keys,
             panel_obj.depends_on
           );
+          // Show the panel regardless of filter status if it's neither financial or people. Also if there is no panel filter applied.
           const is_panel_valid =
-            show_all_panels_bubble_type || filtered_keys.length > 0;
-          // I think it makes sense, to not include "static" panels (non table data panels) in showing number of active panels
+            show_all_panels_bubble_type ||
+            is_panel_filter_empty ||
+            filtered_keys.length > 0;
+
+          // I think it makes sense to not include "static" panels (non table data panels) in showing number of active panels
           // But, always display them
           if (!panel_obj.static && is_panel_valid) {
             result.number_of_active_panels += 1;
@@ -379,7 +385,7 @@ class InfoGraph_ extends React.Component {
               panel_filter_by_table: _.chain(valid_panel_objs)
                 .flatMap("depends_on")
                 .uniq()
-                .map((table_id) => [table_id, true])
+                .map((table_id) => [table_id, false])
                 .fromPairs()
                 .value(),
               total_number_of_panels: _.reject(valid_panel_objs, "static")
