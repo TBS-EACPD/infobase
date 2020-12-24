@@ -45,6 +45,12 @@ $smallMargin: 10px;
   @media(min-width: $minExtraSmallDevice) {
     width: 100%; /* IE fix */
   }
+  @media(max-width: $maxMediumDevice) {
+    font-size: 1.15em;
+  }
+  @media(max-width: $minSmallDevice) {
+    font-size: 0.79em;
+  }
 }
 
 .TrinityItem__Img {
