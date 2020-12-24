@@ -71,7 +71,8 @@ const get_state_defaults = () => {
   };
 };
 
-const is_survey_campaign_over = () => Date.now() > survey_campaign_end_date;
+const is_survey_campaign_over = () =>
+  Date.now() > survey_campaign_end_date || window.is_dev || window.is_dev_link;
 
 export const SurveyPopup = withRouter(
   class _SurveyPopup extends React.Component {
