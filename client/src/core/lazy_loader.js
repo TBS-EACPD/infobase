@@ -1,3 +1,5 @@
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import {
   api_load_covid_estimates,
   api_load_covid_estimates_gov_summary,

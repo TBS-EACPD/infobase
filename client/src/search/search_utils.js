@@ -1,5 +1,7 @@
 import React from "react";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { escapeRegExp } from "../general_utils.js";
 
 const query_to_regexps_func = (query) => {

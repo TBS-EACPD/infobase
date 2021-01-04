@@ -1,5 +1,7 @@
 import React from "react";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { HeightClipper } from "../components/index.js";
 import { infograph_href_template } from "../link_utils.js";
 import { trivial_text_maker } from "../models/text.js";

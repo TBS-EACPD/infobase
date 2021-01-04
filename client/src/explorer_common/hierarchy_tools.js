@@ -1,6 +1,7 @@
 //public methods do not mutate their input hierarchies (or nodes)
 //they return hierarchy with consistent children/parent links
 //private methods have no such guarantee
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
 function get_root(flat_nodes) {
   return _.find(flat_nodes, ({ parent_id }) => _.isEmpty(parent_id));

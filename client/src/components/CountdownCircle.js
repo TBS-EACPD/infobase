@@ -2,6 +2,8 @@ import React, { Fragment } from "react";
 
 import { buttonPrimaryColor } from "src/core/color_defs.js";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { is_IE } from "../core/feature_detection.js";
 
 import { Countdown } from "./Countdown.js";

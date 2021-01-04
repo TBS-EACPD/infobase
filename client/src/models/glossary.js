@@ -1,3 +1,5 @@
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { sanitized_marked } from "../general_utils.js";
 
 import { mix, staticStoreMixin } from "./storeMixins.js";

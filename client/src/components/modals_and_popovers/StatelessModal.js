@@ -2,6 +2,8 @@ import classNames from "classnames";
 import React from "react";
 import { Modal } from "react-bootstrap";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { trivial_text_maker } from "../../models/text.js";
 import "./bootstrap_modal_exstension.scss";
 

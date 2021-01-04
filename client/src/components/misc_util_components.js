@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 
-import { formats } from "../core/format.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
+import { formats } from "../core/format.js";
 import { text_abbrev } from "../general_utils.js";
 import {
   run_template,

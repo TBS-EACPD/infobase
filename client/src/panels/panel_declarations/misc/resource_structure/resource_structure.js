@@ -1,5 +1,7 @@
 import React from "react";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { declare_panel, InfographicPanel } from "../../shared.js";
 
 import { SingleTagResourceExplorer } from "./rooted_resource_scheme.js";

@@ -1,3 +1,5 @@
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import * as color_defs from "./color_defs.js";
 
 const newIBCategoryColors = [

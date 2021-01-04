@@ -1,3 +1,5 @@
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { Gov, Dept, CRSO, Program } from "../organizational_entities.js";
 import { result_docs_in_tabling_order } from "../results.js";
 import { create_text_maker, run_template } from "../text.js";

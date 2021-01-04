@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import { createSelector } from "reselect";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { SpinnerWrapper, DlItem, CheckBox } from "../components/index.js";
 import { Explorer } from "../explorer_common/explorer_components.js";

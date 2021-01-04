@@ -5,6 +5,7 @@ import redux_promise_middleware from "redux-promise-middleware";
 import { createSelector } from "reselect";
 
 import { is_dev } from "src/app_bootstrap/globals.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { cached_property, bound } from "src/general_utils.js";
 

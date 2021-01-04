@@ -1,3 +1,5 @@
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { completeAssign } from "../general_utils.js";
 
 class BaseClass {}

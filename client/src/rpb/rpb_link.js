@@ -1,3 +1,5 @@
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { SafeJSURL } from "../general_utils.js";
 import { Subject } from "../models/subject.js";
 

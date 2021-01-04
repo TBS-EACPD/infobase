@@ -1,5 +1,7 @@
 import React from "react";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import {
   TextPanel,
   util_components,

@@ -1,3 +1,5 @@
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 const featured_content_items = _.compact([
   {
     text_key: "quick_link_covid_estimates",

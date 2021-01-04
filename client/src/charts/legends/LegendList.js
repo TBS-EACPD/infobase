@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React from "react";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { CheckBox } from "../../components/CheckBox.js";
 

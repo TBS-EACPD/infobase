@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import "./AlertBanner.scss";
 
 const banner_classes = ["info", "success", "warning", "danger"];

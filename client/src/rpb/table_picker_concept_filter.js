@@ -1,3 +1,5 @@
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 const concept_categories = {
   concept_category_money: [
     "AUTH",

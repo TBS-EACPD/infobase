@@ -1,9 +1,12 @@
 import classNames from "classnames";
 import React from "react";
-import "./BubbleMenu.scss";
+
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { TM } from "../components/index.js";
 import { trivial_text_maker } from "../models/text.js";
+
+import "./BubbleMenu.scss";
 
 const BubbleMenu = ({ items, active_item_id }) => {
   if (window.is_a11y_mode) {

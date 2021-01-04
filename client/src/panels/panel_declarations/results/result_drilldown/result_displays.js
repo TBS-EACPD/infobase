@@ -1,6 +1,8 @@
 import React from "react";
 import { createSelector } from "reselect";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { infograph_href_template } from "../../../../link_utils.js";
 import { Indicator, result_docs } from "../../../../models/results.js";
 import { IndicatorList } from "../result_components.js";

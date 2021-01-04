@@ -1,3 +1,5 @@
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { Subject, trivial_text_maker, year_templates } from "./table_common.js";
 
 import text from "./programVoteStat.yaml";

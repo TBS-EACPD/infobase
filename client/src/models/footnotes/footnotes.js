@@ -1,3 +1,5 @@
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { mix, staticStoreMixin } from "../storeMixins.js";
 
 const footnotes_by_id = {};

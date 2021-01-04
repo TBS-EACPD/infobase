@@ -3,6 +3,8 @@ import { withRouter } from "react-router";
 
 import { tertiaryColor } from "src/core/color_defs.js";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import {
   FixedPopover,
   create_text_maker_component,

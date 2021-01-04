@@ -1,3 +1,5 @@
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import {
   trivial_text_maker,
   businessConstants,
@@ -8,7 +10,6 @@ import text from "./orgSobjs.yaml";
 
 // see [here](../table_definition.html) for description
 // of the table spec
-
 
 const { sos } = businessConstants;
 const { std_years } = year_templates;

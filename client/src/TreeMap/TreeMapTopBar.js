@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { IconArrow } from "../icons/icons.js";
 import { create_text_maker } from "../models/text.js";
 

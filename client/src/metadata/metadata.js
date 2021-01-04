@@ -1,6 +1,7 @@
 import React from "react";
 
 import { lang } from "src/app_bootstrap/globals.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { create_text_maker_component, FancyUL, Panel } from "../components";
 import {

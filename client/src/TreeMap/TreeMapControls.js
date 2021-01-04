@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import React, { Fragment } from "react";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { run_template, create_text_maker } from "../models/text.js";
 
 import treemap_text from "./TreeMap.yaml";

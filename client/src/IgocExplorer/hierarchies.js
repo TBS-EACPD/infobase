@@ -1,5 +1,7 @@
 import d3 from "src/app_bootstrap/d3-bundle.js";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { convert_d3_hierarchy_to_explorer_hierarchy } from "../explorer_common/hierarchy_tools.js";
 import { businessConstants } from "../models/businessConstants.js";
 import { Subject } from "../models/subject.js";

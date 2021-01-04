@@ -1,6 +1,8 @@
 import React from "react";
 import Tooltip from "tooltip.js";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { get_glossary_item_tooltip_html } from "../models/glossary.js";
 
 // Patch over Tooltip's _scheduleShow and _scheduleHide to not use setTimeout with a 0 second delay

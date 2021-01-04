@@ -1,3 +1,5 @@
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { create_text_maker } from "../models/text.js";
 
 import { infograph_href_template } from "./infographic_link.js";

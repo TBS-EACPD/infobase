@@ -1,5 +1,7 @@
 import React from "react";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 export class IconArray extends React.Component {
   render() {
     const { render_item, items, heightFirst } = this.props;

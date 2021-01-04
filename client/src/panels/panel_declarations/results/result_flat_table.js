@@ -5,6 +5,7 @@ import { ModalButton } from "src/components/index.js";
 import { Indicator } from "src/models/results.js";
 
 import { lang } from "src/app_bootstrap/globals.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { businessConstants } from "../../../models/businessConstants.js";
 import {
