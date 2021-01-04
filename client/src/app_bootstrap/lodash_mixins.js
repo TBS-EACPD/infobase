@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 const funcs = {
   //This is something that should have been built in, it simply applies a function to your
   // It can be used as _.pipe(obj, func), which is uselessly equivalent to func(obj),
@@ -30,3 +32,5 @@ const funcs = {
 };
 
 _.mixin(funcs);
+
+export default _;

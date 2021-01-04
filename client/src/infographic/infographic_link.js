@@ -1,3 +1,5 @@
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { SafeJSURL } from "../general_utils.js";
 
 const infograph_href_template = (subj, data_area, first_character = "#") =>

@@ -1,4 +1,7 @@
 import ReactDOM from "react-dom";
+
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 class ReactContentRenderer {
   constructor() {
     this.nodes = [];

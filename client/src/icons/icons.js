@@ -3,6 +3,8 @@ import React, { Fragment } from "react";
 
 import { textColor, tertiaryColor } from "src/core/color_defs.js";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import "./icons.scss";
 
 const svg_default_styles = {

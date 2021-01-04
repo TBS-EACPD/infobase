@@ -1,4 +1,5 @@
 import { sha } from "src/app_bootstrap/globals.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 let initialized = false;
 
 //tool to create totally random IDs

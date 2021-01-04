@@ -13,6 +13,7 @@ import {
 } from "src/components/index.js";
 
 import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { Explorer } from "src/explorer_common/explorer_components.js";
 import { get_root } from "src/explorer_common/hierarchy_tools.js";

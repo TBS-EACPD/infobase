@@ -8,6 +8,8 @@ import {
   backgroundColor,
 } from "src/core/color_defs.js";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { SmartDisplayTable } from "../../components/index.js";
 import { IconZoomIn, IconZoomOut } from "../../icons/icons.js";
 

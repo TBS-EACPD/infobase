@@ -2,6 +2,7 @@ import { createSelector } from "reselect";
 
 import { ensure_loaded } from "src/core/lazy_loader.js";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 import { filter_hierarchy } from "src/explorer_common/hierarchy_tools.js";

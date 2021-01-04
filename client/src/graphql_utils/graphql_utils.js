@@ -10,6 +10,7 @@ import React from "react";
 import string_hash from "string-hash";
 
 import { sha, local_ip, is_dev, is_ci } from "src/app_bootstrap/globals.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
 const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${sha}/graphql`;
 

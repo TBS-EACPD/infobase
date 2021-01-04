@@ -1,5 +1,6 @@
-import { ensure_loaded } from "../../core/lazy_loader.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
+import { ensure_loaded } from "../../core/lazy_loader.js";
 import {
   // shared all
   declare_welcome_mat_panel,

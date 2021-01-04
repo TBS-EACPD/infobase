@@ -2,6 +2,7 @@
 //  relates to the column type attribute as of the table class
 //  site.scss also establishes the widths for displaying each of the data types
 import { lang } from "src/app_bootstrap/globals.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
 const number_formatter = {
   en: _.map(

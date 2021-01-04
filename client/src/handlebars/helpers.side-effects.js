@@ -1,5 +1,6 @@
 /* eslint-disable no-console, no-debugger */
 import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { infograph_href_template, glossary_href } from "../link_utils.js";
 import { GlossaryEntry } from "../models/glossary.js";

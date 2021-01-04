@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { Canada } from "../../charts/canada/index.js";
 import { FlatTreeMapViz } from "../../charts/flat_treemap/FlatTreeMapViz.js";
 import { StandardLegend, SelectAllControl } from "../../charts/legends";

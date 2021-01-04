@@ -5,6 +5,8 @@ import { tertiaryColor, textLightColor } from "src/core/color_defs.js";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { IconCopy } from "../icons/icons.js";
 import { create_text_maker } from "../models/text.js";
 

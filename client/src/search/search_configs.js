@@ -1,8 +1,9 @@
 import React, { Fragment } from "react";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { Table } from "../core/TableClass.js";
 import { GlossaryEntry } from "../models/glossary.js";
-
 import { Subject } from "../models/subject.js";
 import { trivial_text_maker } from "../models/text.js";
 

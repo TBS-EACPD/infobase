@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 
-import { Details } from "./Details.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
+import { Details } from "./Details.js";
 import "../common_css/grid-system.scss";
 
 const KeyConceptList = ({ question_answer_pairs, compact = true }) => (

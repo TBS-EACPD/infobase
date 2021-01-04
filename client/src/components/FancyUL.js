@@ -2,6 +2,8 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import "./FancyUL.scss";
 
 export const FancyUL = ({ className, title, TitleComponent, children }) => (

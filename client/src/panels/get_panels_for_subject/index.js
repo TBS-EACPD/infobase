@@ -1,4 +1,5 @@
 import { is_dev } from "src/app_bootstrap/globals.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { PanelRegistry } from "../PanelRegistry.js";
 

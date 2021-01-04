@@ -2,6 +2,8 @@ import React from "react";
 
 import { primaryColor, textColor } from "src/core/color_defs.js";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import {
   formats,
   run_template,

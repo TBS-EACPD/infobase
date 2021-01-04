@@ -1,6 +1,8 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import {
   create_text_maker_component,
   AlertBanner,

@@ -1,5 +1,7 @@
 import React from "react";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { get_resources_for_subject } from "../explorer_common/resource_explorer_common.js";
 import { sanitized_dangerous_inner_html } from "../general_utils.js";
 import { Subject } from "../models/subject.js";

@@ -1,5 +1,7 @@
 import React from "react";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import {
   util_components,
   InfographicPanel,
@@ -8,9 +10,8 @@ import {
   declare_panel,
 } from "../../shared.js";
 
-const { SpinnerWrapper } = util_components;
-
 import { text_maker } from "../result_text_provider.js";
+
 import {
   ResultCounts,
   GranularResultCounts,
@@ -19,6 +20,8 @@ import {
 } from "../results_common.js";
 
 import ResultsExplorer from "./results_scheme.js";
+
+const { SpinnerWrapper } = util_components;
 
 class SingleSubjResultsContainer extends React.Component {
   constructor(props) {

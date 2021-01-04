@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import "./LabeledTable.scss";
 
 export const LabeledTable = ({ title, TitleComponent, contents }) => (

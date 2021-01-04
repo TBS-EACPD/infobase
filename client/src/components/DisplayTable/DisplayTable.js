@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React from "react";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { LegendList } from "../../charts/legends/LegendList.js";
 import { DebouncedTextInput } from "../DebouncedTextInput.js";

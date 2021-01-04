@@ -2,6 +2,8 @@ import DOMPurify from "dompurify";
 import JSURL from "jsurl";
 import marked from "marked";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 export const sanitized_marked = (markdown) =>
   DOMPurify.sanitize(marked(markdown, { sanitize: false, gfm: true }));
 

@@ -1,3 +1,5 @@
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 export class PartitionPerspective {
   constructor(args) {
     const required_args = {

@@ -4,6 +4,7 @@ import React from "react";
 import { secondaryColor, tertiaryColor } from "src/core/color_defs.js";
 
 import { lang } from "src/app_bootstrap/globals.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { IconEyeOpen, IconEyeClosed } from "../icons/icons.js";
 

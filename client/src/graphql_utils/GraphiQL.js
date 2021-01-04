@@ -6,6 +6,8 @@ import React from "react";
 
 import GraphiQL from "graphiql";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { SpinnerWrapper, ContainerEscapeHatch } from "../components/index.js";
 import { log_standard_event } from "../core/analytics.js";
 import { StandardRouteContainer } from "../core/NavComponents.js";

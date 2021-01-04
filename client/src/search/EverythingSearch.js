@@ -1,6 +1,8 @@
 import React from "react";
 import { withRouter } from "react-router";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { trivial_text_maker } from "../models/text.js";
 
 import { BaseTypeahead } from "./BaseTypeahead.js";

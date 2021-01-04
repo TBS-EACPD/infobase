@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { Details } from "./Details.js";
 import { FootnoteList } from "./FootnoteList.js";
 import { GlossaryItem } from "./glossary_components.js";

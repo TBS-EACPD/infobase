@@ -2,6 +2,8 @@ import React from "react";
 
 import { primaryColor } from "src/core/color_defs.js";
 
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { GraphOverlay } from "../../../../components";
 import {
   declare_panel,

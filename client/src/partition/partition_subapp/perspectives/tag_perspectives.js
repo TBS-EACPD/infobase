@@ -1,6 +1,7 @@
 import React from "react";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";
+import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { TM, KeyConceptList } from "../../../components/index.js";
 import { Table } from "../../../core/TableClass.js";
