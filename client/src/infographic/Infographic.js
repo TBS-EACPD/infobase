@@ -359,10 +359,11 @@ const Infographic = ({
     set_session_storage_w_expiry("redirected_msg", text_maker(msg_key, args));
     window.location.replace(replaced_route);
     window.location.reload();
+    return null;
   };
   const is_level_valid = _.chain(Subject).keys().includes(level).value();
   if (!is_level_valid) {
-    set_redirect_msg("invalid_redirect_home", { param: level }, "#home");
+    return set_redirect_msg("invalid_redirect_home", { param: level }, "#home");
   }
   const SubjectModel = Subject[level];
   const subject = SubjectModel.lookup(subject_id);
@@ -374,13 +375,17 @@ const Infographic = ({
     const parent_dept_code = _.split(subject_id, "-")[0];
     const parent_dept = Dept.lookup(parent_dept_code);
     if ((level === "program" || level === "crso") && parent_dept) {
-      set_redirect_msg(
+      return set_redirect_msg(
         "invalid_subject_redirect_parent_dept",
-        { subject_id },
+        { subject_id, parent_dept_code },
         `#orgs/dept/${parent_dept.id}/infograph/intro`
       );
     } else {
-      set_redirect_msg("invalid_redirect_home", { param: subject_id }, "#home");
+      return set_redirect_msg(
+        "invalid_redirect_home",
+        { param: subject_id },
+        "#home"
+      );
     }
   }
   if (is_fake_infographic(subject)) {
