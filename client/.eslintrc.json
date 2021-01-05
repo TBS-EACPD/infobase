@@ -25,8 +25,6 @@
     "window": true,
 
     "ga": true,
-
-    "_": true,
     "Handlebars": true
   }
 }
