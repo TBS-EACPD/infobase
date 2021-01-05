@@ -21,7 +21,7 @@
     "@babel/node": "^7",
     "@babel/plugin-transform-modules-commonjs": "^7.3.1",
     "@babel/preset-env": "^7.3.1",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "babel-core": "^7.0.0-bridge.0",
     "common-node-scripts": "file:../scripts/common_node_scripts",
     "jest": "^25.1.0",
