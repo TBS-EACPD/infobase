@@ -89,7 +89,7 @@ export class PDFGenerator extends React.Component {
 
     const setup_pdf_title = (pdf, title, width) => {
       if (title) {
-        pdf.setFontStyle("bold");
+        pdf.setFont("helvetica", "bold");
         pdf.setLineWidth(1);
         pdf.text(2, 10, title);
         pdf.line(0, 12, width, 12, "F");
@@ -105,7 +105,7 @@ export class PDFGenerator extends React.Component {
         pdf.addImage(footerImg, "png", 174.5, this.current_height);
 
         this.current_height += 11;
-        pdf.setFontStyle("normal");
+        pdf.setFont("helvetica", "normal");
         pdf.setFontSize(10);
         pdf.text(
           `${text_maker("pdf_retrieved_date")} ${date_fmt}`,
