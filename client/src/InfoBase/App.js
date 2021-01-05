@@ -15,9 +15,8 @@ import { ErrorBoundary } from "../core/ErrorBoundary.js";
 import { has_local_storage } from "../core/feature_detection.js";
 import { InsertRuntimeFooterLinks } from "../core/InsertRuntimeFooterLinks.js";
 import { ReactUnmounter } from "../core/NavComponents.js";
-import { get_session_storage_w_expiry } from "../general_utils.js";
+import { RedirectHeader } from "../core/RedirectHeader.js";
 import { TooltipActivator } from "../glossary/TooltipActivator.js";
-import { create_text_maker } from "../models/text.js";
 import { SurveyPopup } from "../Survey/SurveyPopup.js";
 
 import { app_reducer } from "./AppState.js";
@@ -28,9 +27,6 @@ import {
 } from "./common_app_component_utils.js";
 
 import "./App.scss";
-import text from "./App.yaml";
-
-const text_maker = create_text_maker(text);
 
 const Home = retrying_react_lazy(() => import("../home/home.js"));
 const A11yHome = retrying_react_lazy(() => import("../home/a11y_home.js"));
@@ -90,7 +86,6 @@ export class App extends React.Component {
   }
 
   state = {
-    show_redirected_msg: get_session_storage_w_expiry("redirected_msg"),
     outage_message: null,
     showSurvey: false,
   };
@@ -119,7 +114,7 @@ export class App extends React.Component {
   }
 
   render() {
-    const { outage_msg, showSurvey, show_redirected_msg } = this.state;
+    const { outage_msg, showSurvey } = this.state;
     return (
       <div
         tabIndex={-1}
@@ -141,21 +136,10 @@ export class App extends React.Component {
                 }}
               />
             )}
-            {show_redirected_msg && (
-              <HeaderNotification
-                list_of_text={[
-                  text_maker("common_redirect_msg", {
-                    url: get_session_storage_w_expiry("pre_redirected_url"),
-                  }),
-                  get_session_storage_w_expiry("redirected_msg"),
-                ]}
-                hideNotification={() => {
-                  sessionStorage.removeItem("pre_redirected_url");
-                  sessionStorage.removeItem("redirected_msg");
-                  this.setState({ show_redirected_msg: false });
-                }}
-              />
-            )}
+            <RedirectHeader
+              redirect_msg_key="redirected_msg"
+              url_before_redirect_key="pre_redirected_url"
+            />
             {has_local_storage && <SurveyPopup />}
             <ReactUnmounter />
             {!window.is_a11y_mode && <TooltipActivator />}

@@ -1,4 +1,0 @@
-common_redirect_msg:
-  transform: [handlebars]
-  en: You were redirected while trying to visit {{url}}
-  fr: Vous avez été redirigé en tentant de visiter le site {{url}}
