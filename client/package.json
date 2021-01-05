@@ -22,7 +22,7 @@
     "@nivo/line": "^0.52.1",
     "@nivo/pie": "^0.52.1",
     "@nivo/stream": "^0.52.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-loader": "^8.1.0",
     "bootstrap": "^3.4.1",
     "bundle-stats-webpack-plugin": "^2.4.0-beta.7",
