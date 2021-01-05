@@ -11,6 +11,7 @@ import { log_standard_event } from "../core/analytics.js";
 
 import { ensure_loaded } from "../core/lazy_loader.js";
 import { StandardRouteContainer } from "../core/NavComponents";
+import { redirect_with_msg } from "../core/RedirectHeader.js";
 import {
   shallowEqualObjectsOverKeys,
   SafeJSURL,
@@ -363,7 +364,10 @@ const Infographic = ({
   };
   const is_level_valid = _.chain(Subject).keys().includes(level).value();
   if (!is_level_valid) {
-    return set_redirect_msg("invalid_redirect_home", { param: level }, "#home");
+    return redirect_with_msg(
+      text_maker("invalid_redirect_home", { param: level }),
+      "#home"
+    );
   }
   const SubjectModel = Subject[level];
   const subject = SubjectModel.lookup(subject_id);
@@ -375,15 +379,16 @@ const Infographic = ({
     const parent_dept_code = _.split(subject_id, "-")[0];
     const parent_dept = Dept.lookup(parent_dept_code);
     if ((level === "program" || level === "crso") && parent_dept) {
-      return set_redirect_msg(
-        "invalid_subject_redirect_parent_dept",
-        { subject_id, parent_dept_code },
+      return redirect_with_msg(
+        text_maker("invalid_subject_redirect_parent_dept", {
+          subject_id,
+          parent_dept_code,
+        }),
         `#orgs/dept/${parent_dept.id}/infograph/intro`
       );
     } else {
-      return set_redirect_msg(
-        "invalid_redirect_home",
-        { param: subject_id },
+      return redirect_with_msg(
+        text_maker("invalid_redirect_home", { param: subject_id }),
         "#home"
       );
     }

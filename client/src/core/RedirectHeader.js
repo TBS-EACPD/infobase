@@ -1,9 +1,34 @@
 import { trivial_text_maker } from "src/models/text.js";
 
 import { HeaderNotification } from "../components/HeaderNotification.js";
-import { get_session_storage_w_expiry } from "../general_utils.js";
 
-export class RedirectHeader extends React.Component {
+import {
+  get_session_storage_w_expiry,
+  set_session_storage_w_expiry,
+} from "../general_utils.js";
+
+import { log_standard_event } from "./analytics.js";
+
+const redirect_with_msg = (
+  msg,
+  replaced_route,
+  redirect_msg_key = "redirected_msg",
+  url_before_redirect_key = "pre_redirected_url"
+) => {
+  log_standard_event({
+    SUBAPP: window.location.hash.replace("#", ""),
+    MISC1: "REDIRECTED_MSG",
+    MISC2: window.location.href,
+  });
+
+  set_session_storage_w_expiry(url_before_redirect_key, location.href);
+  set_session_storage_w_expiry(redirect_msg_key, msg);
+  window.location.replace(replaced_route);
+  window.location.reload();
+  return null;
+};
+
+class RedirectHeader extends React.Component {
   constructor(props) {
     super(props);
 
@@ -33,3 +58,4 @@ export class RedirectHeader extends React.Component {
     );
   }
 }
+export { RedirectHeader, redirect_with_msg };
