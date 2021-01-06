@@ -84,11 +84,13 @@ actual_spending_footnote:
   fr: 'Par « dépenses réelles », on entend ici la valeur des {{gl_tt "dépenses budgétaires" "BUD_EXP"}}'
 
 lapse_by_votes:
-  en: Lapsed Authorities by Vote
+  transform: [handlebars]
+  en: Lapsed Authorities by Vote ({{lapse_unit}})
   fr: Autorisations périmées par crédit
 
 aggregated_lapse_by_votes:
-  en: Aggregated Lapsed Authorities
+  transform: [handlebars]
+  en: Aggregated Lapsed Authorities ({{lapse_unit}})
   fr: Autorisations Périmées Agrégées
 
 gov_lapse_by_votes_text:
