@@ -282,15 +282,15 @@ class LapseByVotesGraph extends React.Component {
           .value()
       )
       .thru((vote) =>
-        _.map(
-          std_years,
-          (yr) =>
+        _.map(std_years, (yr) => {
+          const lapse_pct =
             calculate_lapse(
               vote[`${yr}auth`],
               vote[`${yr}exp`],
               vote[`${yr}unlapsed`]
-            ) / vote[`${yr}auth`]
-        )
+            ) / vote[`${yr}auth`];
+          return _.isNaN(lapse_pct) ? 0 : lapse_pct;
+        })
       )
       .mean()
       .value();
