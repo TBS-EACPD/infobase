@@ -20,9 +20,7 @@ const { people_years } = year_templates;
 const { ex_levels } = businessConstants;
 
 const calculate_funcs_by_level = {
-  gov: function (gov) {
-    const { orgEmployeeExLvl } = this.tables;
-
+  gov: (gov, orgEmployeeExLvl) => {
     const gov_five_year_total_head_count = _.chain(
       orgEmployeeExLvl.q().gov_grouping()
     )
@@ -30,39 +28,43 @@ const calculate_funcs_by_level = {
       .reduce((sum, val) => sum + val, 0)
       .value();
 
-    return _.chain(ex_levels)
-      .values()
-      .map((ex_level) => {
-        const ex_level_name = ex_level.text;
-        const yearly_values = people_years.map(
-          (year) => orgEmployeeExLvl.horizontal(year, false)[ex_level_name]
-        );
-        return {
-          label: ex_level_name,
-          data: yearly_values,
-          five_year_percent:
-            yearly_values.reduce(function (sum, val) {
-              return sum + val;
-            }, 0) / gov_five_year_total_head_count,
-          active: ex_level_name !== "Non-EX",
-        };
-      })
-      .sortBy((d) => d.label)
-      .value();
+    return {
+      series: _.chain(ex_levels)
+        .values()
+        .map((ex_level) => {
+          const ex_level_name = ex_level.text;
+          const yearly_values = people_years.map(
+            (year) => orgEmployeeExLvl.horizontal(year, false)[ex_level_name]
+          );
+          return {
+            label: ex_level_name,
+            data: yearly_values,
+            five_year_percent:
+              yearly_values.reduce(function (sum, val) {
+                return sum + val;
+              }, 0) / gov_five_year_total_head_count,
+            active: ex_level_name !== "Non-EX",
+          };
+        })
+        .sortBy((d) => d.label)
+        .value(),
+    };
   },
   dept: function (dept) {
     const { orgEmployeeExLvl } = this.tables;
     const ex_level_data = orgEmployeeExLvl.q(dept).data;
-    return _.chain(ex_level_data)
-      .map((row) => ({
-        label: row.ex_lvl,
-        data: people_years.map((year) => row[year]),
-        five_year_percent: row.five_year_percent,
-        active: row.ex_lvl !== "Non-EX" || ex_level_data.length < 2,
-      }))
-      .filter((d) => d3.sum(d.data) !== 0)
-      .sortBy((d) => d.label)
-      .value();
+    return {
+      series: _.chain(ex_level_data)
+        .map((row) => ({
+          label: row.ex_lvl,
+          data: people_years.map((year) => row[year]),
+          five_year_percent: row.five_year_percent,
+          active: row.ex_lvl !== "Non-EX" || ex_level_data.length < 2,
+        }))
+        .filter((d) => d3.sum(d.data) !== 0)
+        .sortBy((d) => d.label)
+        .value(),
+    };
   },
 };
 
@@ -72,22 +74,42 @@ export const declare_employee_executive_level_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgEmployeeExLvl"],
-      calculate: calculate_funcs_by_level[level],
+      calculate: function (subject) {
+        const { orgEmployeeExLvl } = this.tables;
 
+        const panel_args = calculate_funcs_by_level[level](
+          subject,
+          orgEmployeeExLvl
+        );
+
+        const has_non_ex_only = _.chain(panel_args.series)
+          .filter(({ label }) => label !== "Non-EX")
+          .isEmpty()
+          .value();
+
+        if (has_non_ex_only) {
+          return false;
+        } else {
+          return panel_args;
+        }
+      },
       render({ calculations, footnotes, sources }) {
-        const { panel_args, subject } = calculations;
+        const {
+          panel_args: { series },
+          subject,
+        } = calculations;
 
-        const data_without_nonex = _.initial(panel_args);
+        const data_without_nonex = _.initial(series);
         const ex_data_is_empty = _.isEmpty(data_without_nonex);
 
         const text_calculations = (() => {
           if (ex_data_is_empty) {
-            console.log(panel_args);
-            const pre_text_calculations = text_calculate(panel_args);
+            console.log(series);
+            const pre_text_calculations = text_calculate(series);
             return {
               ...pre_text_calculations,
               subject,
-              avg_num_non_ex: _.mean(panel_args[0].data),
+              avg_num_non_ex: _.mean(series[0].data),
             };
           } else {
             const sum_exec = _.reduce(
@@ -111,7 +133,7 @@ export const declare_employee_executive_level_panel = () =>
 
             const avg_num_employees =
               _.reduce(
-                panel_args,
+                series,
                 (result, ex_lvl) => result + _.sum(ex_lvl.data),
                 0
               ) /
@@ -154,7 +176,7 @@ export const declare_employee_executive_level_panel = () =>
                     formatter: formats.big_int_raw,
                   },
                   initial_graph_mode: "bar_stacked",
-                  data: panel_args,
+                  data: series,
                 }}
               />
             </Col>
