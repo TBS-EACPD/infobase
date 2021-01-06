@@ -232,6 +232,7 @@ class LapseByVotesGraph extends React.Component {
     super(props);
 
     this.state = {
+      is_showing_lapse_pct: false,
       active_votes: this.get_active_votes(
         ({ votestattype }) =>
           props.subject.level === "gov" ||
@@ -249,7 +250,7 @@ class LapseByVotesGraph extends React.Component {
 
   render() {
     const { subject, queried_votes, additional_info } = this.props;
-    const { active_votes } = this.state;
+    const { active_votes, is_showing_lapse_pct } = this.state;
     const filtered_votes = _.reject(
       queried_votes,
       ({ desc }) => !active_votes[desc]
@@ -294,157 +295,156 @@ class LapseByVotesGraph extends React.Component {
       .mean()
       .value();
 
-    const get_lapse_infograph = (is_pct) => {
-      const nivo_pct_props = is_pct && {
-        is_money: false,
-        left_axis: { format: formats.smart_percentage2_raw },
-        text_formatter: formats.smart_percentage2,
-      };
+    const nivo_pct_props = is_showing_lapse_pct && {
+      is_money: false,
+      left_axis: { format: formats.smart_percentage2_raw },
+      text_formatter: formats.smart_percentage2,
+    };
 
-      return (
-        <div className="frow">
-          <TM
-            className="medium-panel-text"
-            k={
-              subject.is("gov")
-                ? "gov_lapse_by_votes_text"
-                : "dept_lapse_by_votes_text"
-            }
-            args={{
-              subject,
-              avg_lapsed_by_votes: lapsed_by_votes_sum / std_years.length,
-              num_of_votes: queried_votes.length,
-              avg_lapsed_by_votes_pct,
-              gov_avg_lapsed_by_votes_pct:
-                additional_info.gov_avg_lapsed_by_votes_pct,
-            }}
-          />
-          {!subject.is("gov") && (
-            <div className="fcol-md-4">
-              <StandardLegend
-                items={_.map(queried_votes, ({ desc }) => ({
-                  id: desc,
-                  label: desc,
-                  active: active_votes[desc],
-                  color: colors(desc),
-                }))}
-                onClick={(vote_desc) =>
-                  this.setState({
-                    active_votes: {
-                      ...active_votes,
-                      [vote_desc]: !active_votes[vote_desc],
-                    },
-                  })
-                }
-                Controls={
-                  <SelectAllControl
-                    SelectAllOnClick={() =>
-                      this.setState({
-                        active_votes: this.get_active_votes(() => true),
-                      })
-                    }
-                    SelectNoneOnClick={() =>
-                      this.setState({
-                        active_votes: this.get_active_votes(() => false),
-                      })
-                    }
-                  />
-                }
-              />
-            </div>
-          )}
-          <div className={`fcol-md-${subject.is("gov") ? 12 : 8}`}>
-            <WrappedNivoLine
-              data={_.chain(filtered_votes)
-                .map((vote_row) => ({
-                  id: vote_row.desc,
-                  data: _.map(std_years, (yr) => ({
-                    x: run_template(yr),
-                    y: calculate_lapse(
-                      vote_row[`${yr}auth`],
-                      vote_row[`${yr}exp`],
-                      vote_row[`${yr}unlapsed`],
-                      is_pct
-                    ),
-                  })),
-                }))
-                .reverse()
-                .value()}
-              raw_data={get_lapse_raw_data(is_pct)}
-              colorBy={(d) => colors(d.id)}
-              margin={{
-                top: 10,
-                right: 30,
-                bottom: 50,
-                left: 70,
-              }}
-              custom_table={
-                <SmartDisplayTable
-                  unsorted_initial={true}
-                  column_configs={{
-                    id: {
-                      index: 0,
-                      header: text_maker("vote"),
-                    },
-                    ..._.chain(std_years)
-                      .map((yr, i) => [
-                        run_template(yr),
-                        {
-                          index: i + 1,
-                          header: run_template(yr),
-                          is_summable: !is_pct,
-                          formatter: is_pct
-                            ? "smart_percentage2"
-                            : "compact2_written",
-                        },
-                      ])
-                      .fromPairs()
-                      .value(),
-                  }}
-                  data={_.map(filtered_votes, (vote_row) => ({
-                    id: vote_row.desc,
-                    ..._.chain(std_years)
-                      .map((yr) => [
-                        run_template(yr),
-                        calculate_lapse(
-                          vote_row[`${yr}auth`],
-                          vote_row[`${yr}exp`],
-                          vote_row[`${yr}unlapsed`],
-                          is_pct
-                        ),
-                      ])
-                      .fromPairs()
-                      .value(),
-                  }))}
-                />
+    const lapse_infograph = (
+      <div style={{ padding: "5px" }} className="frow">
+        <TM
+          className="medium-panel-text"
+          k={
+            subject.is("gov")
+              ? "gov_lapse_by_votes_text"
+              : "dept_lapse_by_votes_text"
+          }
+          args={{
+            subject,
+            avg_lapsed_by_votes: lapsed_by_votes_sum / std_years.length,
+            num_of_votes: queried_votes.length,
+            avg_lapsed_by_votes_pct,
+            gov_avg_lapsed_by_votes_pct:
+              additional_info.gov_avg_lapsed_by_votes_pct,
+          }}
+        />
+        {!subject.is("gov") && (
+          <div className="fcol-md-4">
+            <StandardLegend
+              items={_.map(queried_votes, ({ desc }) => ({
+                id: desc,
+                label: desc,
+                active: active_votes[desc],
+                color: colors(desc),
+              }))}
+              onClick={(vote_desc) =>
+                this.setState({
+                  active_votes: {
+                    ...active_votes,
+                    [vote_desc]: !active_votes[vote_desc],
+                  },
+                })
               }
-              {...nivo_pct_props}
+              Controls={[
+                <SelectAllControl
+                  key="SelectAllControl"
+                  SelectAllOnClick={() =>
+                    this.setState({
+                      active_votes: this.get_active_votes(() => true),
+                    })
+                  }
+                  SelectNoneOnClick={() =>
+                    this.setState({
+                      active_votes: this.get_active_votes(() => false),
+                    })
+                  }
+                />,
+                <button
+                  key="LapseToggleControl"
+                  onClick={() =>
+                    this.setState({
+                      is_showing_lapse_pct: !is_showing_lapse_pct,
+                    })
+                  }
+                  className="btn-ib-primary"
+                >
+                  Show lapsed authority in {is_showing_lapse_pct ? "$" : "%"}
+                </button>,
+              ]}
             />
           </div>
+        )}
+        <div className={`fcol-md-${subject.is("gov") ? 12 : 8}`}>
+          <WrappedNivoLine
+            data={_.chain(filtered_votes)
+              .map((vote_row) => ({
+                id: vote_row.desc,
+                data: _.map(std_years, (yr) => ({
+                  x: run_template(yr),
+                  y: calculate_lapse(
+                    vote_row[`${yr}auth`],
+                    vote_row[`${yr}exp`],
+                    vote_row[`${yr}unlapsed`],
+                    is_showing_lapse_pct
+                  ),
+                })),
+              }))
+              .reverse()
+              .value()}
+            raw_data={get_lapse_raw_data(is_showing_lapse_pct)}
+            colorBy={(d) => colors(d.id)}
+            margin={{
+              top: 10,
+              right: 30,
+              bottom: 50,
+              left: 70,
+            }}
+            custom_table={
+              <SmartDisplayTable
+                unsorted_initial={true}
+                column_configs={{
+                  id: {
+                    index: 0,
+                    header: text_maker("vote"),
+                  },
+                  ..._.chain(std_years)
+                    .map((yr, i) => [
+                      run_template(yr),
+                      {
+                        index: i + 1,
+                        header: run_template(yr),
+                        is_summable: !is_showing_lapse_pct,
+                        formatter: is_showing_lapse_pct
+                          ? "smart_percentage2"
+                          : "compact2_written",
+                      },
+                    ])
+                    .fromPairs()
+                    .value(),
+                }}
+                data={_.map(filtered_votes, (vote_row) => ({
+                  id: vote_row.desc,
+                  ..._.chain(std_years)
+                    .map((yr) => [
+                      run_template(yr),
+                      calculate_lapse(
+                        vote_row[`${yr}auth`],
+                        vote_row[`${yr}exp`],
+                        vote_row[`${yr}unlapsed`],
+                        is_showing_lapse_pct
+                      ),
+                    ])
+                    .fromPairs()
+                    .value(),
+                }))}
+              />
+            }
+            {...nivo_pct_props}
+          />
         </div>
-      );
-    };
+      </div>
+    );
 
     return (
       <div>
         <TM
           el="h4"
           k={subject.is("gov") ? "aggregated_lapse_by_votes" : "lapse_by_votes"}
+          args={{ lapse_unit: is_showing_lapse_pct ? "%" : "$" }}
           style={{ textAlign: "center" }}
         />
-        <HeightClipper allowReclip={true} clipHeight={200}>
-          <TabbedContent
-            tab_keys={["lapse_dollar", "lapse_pct"]}
-            tab_labels={{
-              lapse_dollar: `${text_maker("lapse_by_votes")} ($)`,
-              lapse_pct: `${text_maker("lapse_by_votes")} (%)`,
-            }}
-            tab_pane_contents={{
-              lapse_dollar: get_lapse_infograph(false),
-              lapse_pct: get_lapse_infograph(true),
-            }}
-          />
-        </HeightClipper>
+        <HeightClipper clipHeight={200}>{lapse_infograph}</HeightClipper>
       </div>
     );
   }

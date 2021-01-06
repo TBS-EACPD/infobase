@@ -166,12 +166,13 @@ class HistoricalProgramBars extends React.Component {
                     selected: toggle_list(selected, id),
                   });
               }}
-              Controls={
+              Controls={[
                 <SelectAllControl
+                  key="SelectAllControl"
                   SelectAllOnClick={() => this.setState({ selected: all_keys })}
                   SelectNoneOnClick={() => this.setState({ selected: [] })}
-                />
-              }
+                />,
+              ]}
             />
           </div>
           <div className="col-12 col-lg-8">
