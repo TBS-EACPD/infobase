@@ -33,3 +33,14 @@ dept_employee_executive_level_text:
    {{#if bottom_group}}
      Le niveau **{{fmt_big_int bottom_group}}** formait le plus petit contingent, avec une moyenne de **{{fmt_percentage1 bottom_group_avg_pct}}** du numbre total de cadres de direction.
    {{/if}}
+
+all_non_executive_employee_text:
+  transform: [handlebars,markdown]
+  en: |
+    From **{{fmt_big_int first_active_year}}** to **{{fmt_big_int last_active_year}}**, an average of **{{fmt_big_int avg_num_non_ex}}** **{{subject.name}}** employees occupied a position at the Non-EX level.
+
+    Over this period, all employees were at Non-EX level.
+  fr: |
+    De **{{fmt_big_int first_active_year}}** à **{{fmt_big_int last_active_year}}**, en moyenne, **{{fmt_big_int avg_num_non_ex}}** employés **{{subject.name}}** occupaient un poste de non-direction.
+
+    TODO
