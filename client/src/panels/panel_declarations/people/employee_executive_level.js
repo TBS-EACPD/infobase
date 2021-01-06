@@ -52,12 +52,13 @@ const calculate_funcs_by_level = {
   },
   dept: function (dept) {
     const { orgEmployeeExLvl } = this.tables;
-    return _.chain(orgEmployeeExLvl.q(dept).data)
+    const ex_level_data = orgEmployeeExLvl.q(dept).data;
+    return _.chain(ex_level_data)
       .map((row) => ({
         label: row.ex_lvl,
         data: people_years.map((year) => row[year]),
         five_year_percent: row.five_year_percent,
-        active: row.ex_lvl !== "Non-EX",
+        active: row.ex_lvl !== "Non-EX" || ex_level_data.length < 2,
       }))
       .filter((d) => d3.sum(d.data) !== 0)
       .sortBy((d) => d.label)
@@ -77,41 +78,53 @@ export const declare_employee_executive_level_panel = () =>
         const { panel_args, subject } = calculations;
 
         const data_without_nonex = _.initial(panel_args);
+        const ex_data_is_empty = _.isEmpty(data_without_nonex);
 
-        const sum_exec = _.reduce(
-          data_without_nonex,
-          (result, ex_lvl) => result + _.sum(ex_lvl.data),
-          0
-        );
+        const text_calculations = (() => {
+          if (ex_data_is_empty) {
+            console.log(panel_args);
+            const pre_text_calculations = text_calculate(panel_args);
+            return {
+              ...pre_text_calculations,
+              subject,
+              avg_num_non_ex: _.mean(panel_args[0].data),
+            };
+          } else {
+            const sum_exec = _.reduce(
+              data_without_nonex,
+              (result, ex_lvl) => result + _.sum(ex_lvl.data),
+              0
+            );
 
-        const pre_text_calculations = text_calculate(
-          data_without_nonex,
-          sum_exec
-        );
+            const pre_text_calculations = text_calculate(
+              data_without_nonex,
+              sum_exec
+            );
 
-        const {
-          first_active_year_index,
-          last_active_year_index,
-        } = pre_text_calculations;
+            const {
+              first_active_year_index,
+              last_active_year_index,
+            } = pre_text_calculations;
 
-        const avg_num_execs =
-          sum_exec / (last_active_year_index - first_active_year_index + 1);
+            const avg_num_execs =
+              sum_exec / (last_active_year_index - first_active_year_index + 1);
 
-        const avg_num_employees =
-          _.reduce(
-            panel_args,
-            (result, ex_lvl) => result + _.sum(ex_lvl.data),
-            0
-          ) /
-          (last_active_year_index - first_active_year_index + 1);
-        const avg_pct_execs = avg_num_execs / avg_num_employees;
-
-        const text_calculations = {
-          ...pre_text_calculations,
-          avg_num_execs,
-          avg_pct_execs,
-          subject,
-        };
+            const avg_num_employees =
+              _.reduce(
+                panel_args,
+                (result, ex_lvl) => result + _.sum(ex_lvl.data),
+                0
+              ) /
+              (last_active_year_index - first_active_year_index + 1);
+            const avg_pct_execs = avg_num_execs / avg_num_employees;
+            return {
+              ...pre_text_calculations,
+              avg_num_execs,
+              avg_pct_execs,
+              subject,
+            };
+          }
+        })();
 
         const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
@@ -122,7 +135,11 @@ export const declare_employee_executive_level_panel = () =>
           >
             <Col size={12} isText>
               <TM
-                k={level + "_employee_executive_level_text"}
+                k={
+                  ex_data_is_empty
+                    ? "all_non_executive_employee_text"
+                    : `${level}_employee_executive_level_text`
+                }
                 args={text_calculations}
               />
             </Col>
