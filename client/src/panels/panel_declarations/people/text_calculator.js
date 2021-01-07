@@ -1,7 +1,7 @@
 import { run_template, year_templates } from "../shared.js";
 const { people_years } = year_templates;
 
-export const text_calculate = (all_data, custom_group_pop = null) => {
+export const text_calculate = (all_data, alternate_five_year_total = false) => {
   const [first_active_year_index, last_active_year_index] = _.chain(all_data)
     .map("data")
     .thru((data_by_group) => _.zip(...data_by_group))
@@ -19,48 +19,27 @@ export const text_calculate = (all_data, custom_group_pop = null) => {
     `${people_years[last_active_year_index]}`
   );
 
-  const top_group_avg_pct = _.chain(all_data)
-    .map((group) =>
-      !custom_group_pop
-        ? group.five_year_percent
-        : _.sum(group.data) / custom_group_pop
-    )
-    .max()
-    .value();
-  const top_group = _.chain(all_data)
-    .find((group) =>
-      !custom_group_pop
-        ? group.five_year_percent === top_group_avg_pct
-        : _.sum(group.data) / custom_group_pop === top_group_avg_pct
-    )
-    .get("label")
+  const group_avg_shares = _.chain(all_data)
+    .map(({ label, five_year_percent, data }) => [
+      label,
+      !alternate_five_year_total
+        ? five_year_percent
+        : _.sum(data) / alternate_five_year_total,
+    ])
+    .sortBy(([_label, group_avg_share]) => group_avg_share)
     .value();
 
-  const bottom_group_avg_pct = _.chain(all_data)
-    .map((group) =>
-      !custom_group_pop
-        ? group.five_year_percent
-        : _.sum(group.data) / custom_group_pop
-    )
-    .min()
-    .value();
-  const bottom_group = _.chain(all_data)
-    .find((group) =>
-      !custom_group_pop
-        ? group.five_year_percent === bottom_group_avg_pct
-        : _.sum(group.data) / custom_group_pop === bottom_group_avg_pct
-    )
-    .get("label")
-    .value();
+  const [top_avg_group, top_avg_group_share] = _.last(group_avg_shares);
+  const [bottom_avg_group, bottom_avg_group_share] = _.first(group_avg_shares);
 
   return {
     first_active_year_index,
     last_active_year_index,
     first_active_year,
     last_active_year,
-    top_group_avg_pct,
-    top_group,
-    bottom_group_avg_pct,
-    bottom_group,
+    top_avg_group,
+    top_avg_group_share,
+    bottom_avg_group,
+    bottom_avg_group_share,
   };
 };

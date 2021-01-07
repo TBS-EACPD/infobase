@@ -110,7 +110,7 @@ class ProvPanel extends React.Component {
     const text_calculations = {
       ...pre_text_calculations,
       subject,
-      top_group: provinces[pre_text_calculations.top_group].text,
+      top_avg_group: provinces[pre_text_calculations.top_avg_group].text,
     };
 
     return (

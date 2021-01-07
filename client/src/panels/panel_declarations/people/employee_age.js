@@ -135,7 +135,7 @@ export const declare_employee_age_panel = () =>
           ...common_text_calculations,
           ..._.chain(["top", "bottom"])
             .map((key_prefix) => {
-              const key = `${key_prefix}_group`;
+              const key = `${key_prefix}_avg_group`;
               return [
                 key,
                 window.lang === "en"
