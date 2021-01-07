@@ -194,7 +194,6 @@ class InfoGraph_ extends React.Component {
               />
             );
           }
-
           return result;
         },
         {
