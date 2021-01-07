@@ -51,7 +51,6 @@ export const get_gov_panels = (subject) => ({
     declare_welcome_mat_panel(),
     declare_auth_exp_planned_spending_panel(),
     declare_in_year_estimates_split_panel(),
-    declare_covid_estimates_panel(),
     declare_in_year_voted_stat_split_panel(),
     declare_in_year_stat_breakdown_panel(),
     declare_in_year_voted_breakdown_panel(),
