@@ -89,6 +89,8 @@ class PanelRegistry {
     const full_key = create_panel_key(def.key, def.level);
     Object.assign(this, default_args, to_assign, { full_key });
     this.constructor.register_instance(this);
+
+    this.get_panel_args = _.memoize(this.get_panel_args);
   }
 
   get tables() {
