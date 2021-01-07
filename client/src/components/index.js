@@ -51,7 +51,6 @@ export {
   ModalButton,
 } from "./modals_and_popovers/index.js";
 export {
-  DisplayTable,
   SmartDisplayTable,
   default_subject_name_sort_func,
   default_dept_name_sort_func,
