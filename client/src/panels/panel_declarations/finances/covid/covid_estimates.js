@@ -21,7 +21,7 @@ import {
 
 import text from "./covid_estimates.yaml";
 
-const { CovidMeasure, Gov, Dept } = Subject;
+const { CovidMeasure, Dept } = Subject;
 
 const { estimates_docs } = businessConstants;
 
@@ -133,15 +133,8 @@ const SummaryTab = ({ panel_args, data: covid_estimates_summary }) => {
     );
 
     if (subject.level === "gov") {
-      const { gov_covid_auth_in_year, gov_total_auth_in_year } = panel_args;
-      return {
-        est_doc_summary_stats,
-        covid_auth_pct_of_gov_auth:
-          gov_covid_auth_in_year / gov_total_auth_in_year,
-      };
+      return { est_doc_summary_stats };
     } else {
-      const { gov_total_auth_in_year } = panel_args;
-
       const dept_covid_auth_in_year = _.reduce(
         covid_estimates_summary,
         (memo, { stat, vote }) => memo + vote + stat,
@@ -151,8 +144,6 @@ const SummaryTab = ({ panel_args, data: covid_estimates_summary }) => {
       return {
         est_doc_summary_stats,
         dept_covid_auth_in_year,
-        covid_auth_pct_of_gov_auth:
-          dept_covid_auth_in_year / gov_total_auth_in_year,
       };
     }
   })();
@@ -534,35 +525,16 @@ export const declare_covid_estimates_panel = () =>
         ...(level_name === "dept" && { org_covid_estimates_summary_query }),
       },
       footnotes: false,
-      depends_on: ["orgVoteStatEstimates"],
+      depends_on: [],
       source: (subject) => [],
       calculate: function (subject, options) {
         if (level_name === "dept" && !subject.has_data("covid_response")) {
           return false;
         }
 
-        const { orgVoteStatEstimates } = this.tables;
-        const gov_total_auth_in_year = orgVoteStatEstimates
-          .q(Gov)
-          .sum("{{est_in_year}}_estimates");
-
-        const common = {
+        return {
           subject,
-          gov_total_auth_in_year,
         };
-
-        if (level_name === "gov") {
-          return common;
-        } else {
-          const dept_tabled_est_in_year = orgVoteStatEstimates
-            .q(subject)
-            .sum("{{est_in_year}}_estimates");
-
-          return {
-            ...common,
-            dept_tabled_est_in_year,
-          };
-        }
       },
       render: ({ calculations, footnotes, sources }) => {
         const { panel_args } = calculations;
