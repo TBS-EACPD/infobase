@@ -512,10 +512,6 @@ class CovidEstimatesPanel extends React.Component {
           <div className="frow">
             <div className="fcol-md-12 fcol-xs-12 medium-panel-text text">
               <TM
-                k={"covid_estimates_above_tab_text_gov"}
-                args={extended_panel_args}
-              />
-              <TM
                 k={"covid_estimates_above_tab_footnote_title"}
                 className="bold"
                 el="span"
