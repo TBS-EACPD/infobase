@@ -61,7 +61,6 @@ const get_custom_table = (data, active_sobjs) => {
   };
   return (
     <SmartDisplayTable
-      unsorted_initial={true}
       data={custom_table_data}
       column_configs={column_configs}
     />

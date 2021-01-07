@@ -392,7 +392,6 @@ class LapseByVotesGraph extends React.Component {
             }}
             custom_table={
               <SmartDisplayTable
-                unsorted_initial={true}
                 column_configs={{
                   id: {
                     index: 0,
