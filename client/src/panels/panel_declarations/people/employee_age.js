@@ -14,7 +14,7 @@ import {
   NivoLineBarToggle,
 } from "../shared.js";
 
-import { text_calculate } from "./text_calculator.js";
+import { calculate_common_text_args } from "./calculate_common_text_args.js";
 
 import text from "./employee_age.yaml";
 
@@ -129,18 +129,18 @@ export const declare_employee_age_panel = () =>
         const gov_avgage_last_year_5 = _.first(avg_age[0].data);
         const gov_avgage_last_year = _.last(avg_age[0].data);
 
-        const common_text_calculations = text_calculate(age_group);
+        const common_text_args = calculate_common_text_args(age_group);
 
         const text_calculations = {
-          ...common_text_calculations,
+          ...common_text_args,
           ..._.chain(["top", "bottom"])
             .map((key_prefix) => {
               const key = `${key_prefix}_avg_group`;
               return [
                 key,
                 window.lang === "en"
-                  ? common_text_calculations[key]?.replace("Age ", "")
-                  : common_text_calculations[key],
+                  ? common_text_args[key]?.replace("Age ", "")
+                  : common_text_args[key],
               ];
             })
             .fromPairs()
