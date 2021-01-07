@@ -129,8 +129,22 @@ export const declare_employee_age_panel = () =>
         const gov_avgage_last_year_5 = _.first(avg_age[0].data);
         const gov_avgage_last_year = _.last(avg_age[0].data);
 
+        const common_text_calculations = text_calculate(age_group);
+
         const text_calculations = {
-          ...text_calculate(age_group),
+          ...common_text_calculations,
+          ..._.chain(["top", "bottom"])
+            .map((key_prefix) => {
+              const key = `${key_prefix}_group`;
+              return [
+                key,
+                window.lang === "en"
+                  ? common_text_calculations[key]?.replace("Age ", "")
+                  : common_text_calculations[key],
+              ];
+            })
+            .fromPairs()
+            .value(),
           dept_avg_first_active_year,
           dept_avg_last_active_year,
           gov_avgage_last_year_5,
