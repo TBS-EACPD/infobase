@@ -311,26 +311,22 @@ export const declare_covid_estimates_panel = () =>
           subject,
         };
       },
-      render: ({ calculations, footnotes, sources }) => {
-        const { panel_args } = calculations;
-
-        return (
-          <InfographicPanel
-            allowOverflow={true}
-            title={text_maker("covid_estimates_panel_title")}
-            {...{
-              sources,
-              footnotes,
-            }}
-          >
-            <AlertBanner banner_class="danger">
-              {
-                "Not real data! Totals are based on estimates by covid initiative figures, but the values associated with these measures are not accurate. For development purposes only!"
-              }
-            </AlertBanner>
-            <CovidEstimatesPanel panel_args={panel_args} />
-          </InfographicPanel>
-        );
-      },
+      render: ({ calculations: { panel_args }, footnotes, sources }) => (
+        <InfographicPanel
+          allowOverflow={true}
+          title={text_maker("covid_estimates_panel_title")}
+          {...{
+            sources,
+            footnotes,
+          }}
+        >
+          <AlertBanner banner_class="danger">
+            {
+              "Not real data! Totals are based on estimates by covid initiative figures, but the values associated with these measures are not accurate. For development purposes only!"
+            }
+          </AlertBanner>
+          <CovidEstimatesPanel panel_args={panel_args} />
+        </InfographicPanel>
+      ),
     }),
   });
