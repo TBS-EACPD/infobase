@@ -27,7 +27,7 @@ import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import text from "./covid_estimates.yaml";
 
-const { CovidMeasure, Gov, Dept } = Subject;
+const { CovidMeasure, Dept } = Subject;
 
 const { estimates_docs } = businessConstants;
 
@@ -139,15 +139,8 @@ const SummaryTab = ({ panel_args, data: covid_estimates_summary }) => {
     );
 
     if (subject.level === "gov") {
-      const { gov_covid_auth_in_year, gov_total_auth_in_year } = panel_args;
-      return {
-        est_doc_summary_stats,
-        covid_auth_pct_of_gov_auth:
-          gov_covid_auth_in_year / gov_total_auth_in_year,
-      };
+      return { est_doc_summary_stats };
     } else {
-      const { gov_total_auth_in_year } = panel_args;
-
       const dept_covid_auth_in_year = _.reduce(
         covid_estimates_summary,
         (memo, { stat, vote }) => memo + vote + stat,
@@ -157,8 +150,6 @@ const SummaryTab = ({ panel_args, data: covid_estimates_summary }) => {
       return {
         est_doc_summary_stats,
         dept_covid_auth_in_year,
-        covid_auth_pct_of_gov_auth:
-          dept_covid_auth_in_year / gov_total_auth_in_year,
       };
     }
   })();
@@ -540,22 +531,26 @@ export const declare_covid_estimates_panel = () =>
         ...(level_name === "dept" && { org_covid_estimates_summary_query }),
       },
       footnotes: ["COVID", "COVID_AUTH"],
-      depends_on: ["orgVoteStatEstimates"],
+      depends_on: [],
       source: (subject) => [],
       calculate: function (subject, options) {
         if (level_name === "dept" && !subject.has_data("covid_response")) {
           return false;
         }
 
+<<<<<<< HEAD
         const { orgVoteStatEstimates } = this.tables;
         const gov_total_auth_in_year = orgVoteStatEstimates
           .q(Gov)
           .sum("{{est_last_year}}_estimates");
 
         const common = {
+=======
+        return {
+>>>>>>> f21fb6867 (Drop comparison of covid estimates to regular InfoBase estimates)
           subject,
-          gov_total_auth_in_year,
         };
+<<<<<<< HEAD
 
         if (level_name === "gov") {
           return common;
@@ -569,6 +564,8 @@ export const declare_covid_estimates_panel = () =>
             dept_tabled_est_last_year,
           };
         }
+=======
+>>>>>>> f21fb6867 (Drop comparison of covid estimates to regular InfoBase estimates)
       },
       render: ({ calculations, footnotes, sources }) => {
         const { panel_args } = calculations;
