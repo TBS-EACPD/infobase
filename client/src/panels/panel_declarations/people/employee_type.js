@@ -10,7 +10,7 @@ import {
   NivoLineBarToggle,
 } from "../shared.js";
 
-import { text_calculate } from "./text_calculator.js";
+import { calculate_common_text_args } from "./calculate_common_text_args.js";
 
 import text from "./employee_type.yaml";
 
@@ -82,33 +82,29 @@ export const declare_employee_type_panel = () =>
 
         const student_data = student && student.data;
 
-        const pre_text_calculations = text_calculate(panel_args);
+        const common_text_args = calculate_common_text_args(panel_args);
 
         const sum_emp_first_active_year = _.chain(panel_args)
-          .map(
-            (type) => type.data[pre_text_calculations.first_active_year_index]
-          )
+          .map((type) => type.data[common_text_args.first_active_year_index])
           .sum()
           .value();
 
         const sum_emp_last_active_year = _.chain(panel_args)
-          .map(
-            (type) => type.data[pre_text_calculations.last_active_year_index]
-          )
+          .map((type) => type.data[common_text_args.last_active_year_index])
           .sum()
           .value();
 
         const student_first_active_year_pct = student_data
-          ? student_data[pre_text_calculations.first_active_year_index] /
+          ? student_data[common_text_args.first_active_year_index] /
             sum_emp_first_active_year
           : 0;
         const student_last_active_year_pct = student_data
-          ? student_data[pre_text_calculations.last_active_year_index] /
+          ? student_data[common_text_args.last_active_year_index] /
             sum_emp_last_active_year
           : 0;
 
         const text_calculations = {
-          ...pre_text_calculations,
+          ...common_text_args,
           student_first_active_year_pct,
           student_last_active_year_pct,
           subject,

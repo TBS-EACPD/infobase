@@ -10,7 +10,7 @@ import {
   NivoLineBarToggle,
 } from "../shared.js";
 
-import { text_calculate } from "./text_calculator.js";
+import { calculate_common_text_args } from "./calculate_common_text_args.js";
 
 import text from "./employee_executive_level.yaml";
 
@@ -97,7 +97,7 @@ export const declare_employee_executive_level_panel = () =>
         const text_calculations = (() => {
           if (has_non_ex_only) {
             return {
-              ...text_calculate(series),
+              ...calculate_common_text_args(series),
               subject,
               avg_num_non_ex: _.chain(series)
                 .first(({ label }) => label === "Non-EX")
@@ -116,7 +116,7 @@ export const declare_employee_executive_level_panel = () =>
               0
             );
 
-            const standard_text_calculations = text_calculate(
+            const common_text_args = calculate_common_text_args(
               ex_only_series,
               sum_exec
             );
@@ -124,7 +124,7 @@ export const declare_employee_executive_level_panel = () =>
             const {
               first_active_year_index,
               last_active_year_index,
-            } = standard_text_calculations;
+            } = common_text_args;
 
             const avg_num_employees =
               _.reduce(
@@ -139,7 +139,7 @@ export const declare_employee_executive_level_panel = () =>
             const avg_pct_execs = avg_num_execs / avg_num_employees;
 
             return {
-              ...standard_text_calculations,
+              ...common_text_args,
               subject,
               avg_num_execs,
               avg_pct_execs,

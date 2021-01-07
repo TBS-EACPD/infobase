@@ -11,7 +11,7 @@ import {
   util_components,
 } from "../shared.js";
 
-import { text_calculate } from "./text_calculator.js";
+import { calculate_common_text_args } from "./calculate_common_text_args.js";
 
 import text from "./employee_prov.yaml";
 
@@ -105,12 +105,12 @@ class ProvPanel extends React.Component {
         _.sum(region.data) / duration / (_.sum(employees_by_year) / duration),
     }));
 
-    const pre_text_calculations = text_calculate(formatted_data);
+    const common_text_args = calculate_common_text_args(formatted_data);
 
     const text_calculations = {
-      ...pre_text_calculations,
+      ...common_text_args,
       subject,
-      top_avg_group: provinces[pre_text_calculations.top_avg_group].text,
+      top_avg_group: provinces[common_text_args.top_avg_group].text,
     };
 
     return (

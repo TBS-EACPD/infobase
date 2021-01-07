@@ -1,7 +1,10 @@
 import { run_template, year_templates } from "../shared.js";
 const { people_years } = year_templates;
 
-export const text_calculate = (all_data, alternate_five_year_total = false) => {
+export const calculate_common_text_args = (
+  all_data,
+  alternate_five_year_total = false
+) => {
   const [first_active_year_index, last_active_year_index] = _.chain(all_data)
     .map("data")
     .thru((data_by_group) => _.zip(...data_by_group))

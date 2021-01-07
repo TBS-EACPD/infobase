@@ -10,7 +10,7 @@ import {
   NivoLineBarToggle,
 } from "../shared.js";
 
-import { text_calculate } from "./text_calculator.js";
+import { calculate_common_text_args } from "./calculate_common_text_args.js";
 
 import text from "./employee_gender.yaml";
 
@@ -100,7 +100,7 @@ export const declare_employee_gender_panel = () =>
         })();
 
         const text_calculations = {
-          ...text_calculate(text_groups),
+          ...calculate_common_text_args(text_groups),
           single_type_flag: text_groups.length === 1,
           subject,
         };
