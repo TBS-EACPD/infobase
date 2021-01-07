@@ -6,15 +6,17 @@ dept_employee_last_year_totals_title:
 dept_employee_last_year_totals_text:
   transform: [handlebars,markdown]
   en: |
-    In **{{ppl_last_year}}**, **{{fmt_big_int dept_emp_value}}**  {{gl_tt "people" "HEAD"}} were employed by **{{subject.name}} ({{subject.abbr}})**,
-    representing **{{fmt_smart_percentage1 dept_emp_pct}}** of the total {{gl_tt "Federal Public Service" "FPS"}} population.
+    In **{{ppl_last_year}}**, **{{fmt_big_int dept_emp_value}}** {{gl_tt "people" "HEAD"}} were employed by
+    **{{subject.name}}**{{#if subject.abbr}}**({{subject.abbr}})**{{/if}}, representing **{{fmt_smart_percentage1 dept_emp_pct}}**
+    of the total {{gl_tt "Federal Public Service" "FPS"}} population.
   fr: |
-    En **{{ppl_last_year}}**, **{{fmt_big_int dept_emp_value}}** {{gl_tt "personnes" "HEAD"}}  étaient à l’emploi **{{subject.name}} ({{subject.abbr}})**,
-    soit **{{fmt_smart_percentage1 dept_emp_pct}}** du personnel de la {{gl_tt "fonction publique fédérale" "FPS"}}.
+    En **{{ppl_last_year}}**, **{{fmt_big_int dept_emp_value}}** {{gl_tt "personnes" "HEAD"}}  étaient à l’emploi
+    **{{subject.name}}**{{#if subject.abbr}}**({{subject.abbr}})**{{/if}}, soit **{{fmt_smart_percentage1 dept_emp_pct}}**
+    du personnel de la {{gl_tt "fonction publique fédérale" "FPS"}}.
 
 dept_headcount:
   transform: [handlebars]
   en: |
-    {{subject.abbr}} headcount
+    {{#if subject.abbr}}({{subject.abbr}}) headcount{{else}}Headcount{{/if}} 
   fr: |
-    Effectif {{{de_dept_abbr subject}}}
+    Effectif {{#if subject.abbr}}{{{de_dept_abbr subject}}}{{/if}} 
