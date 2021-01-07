@@ -280,7 +280,7 @@ class InfoGraph_ extends React.Component {
           {!loading && panel_renderers}
         </div>
         {!_.isEmpty(active_bubble_id) && (
-          <div className="row medium_panel_text">
+          <div className="row medium-panel-text">
             <div className="previous_and_next_bubble_link_row">
               {previous_bubble ? (
                 <a

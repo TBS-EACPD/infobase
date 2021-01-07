@@ -29,11 +29,7 @@ export const TagCloud = ({ tags, onSelectTag }) => {
           </button>
           {GlossaryEntry.lookup(id) && (
             <span className="tag-button-helper" tabIndex="0">
-              <GlossaryIcon
-                id={id}
-                inner_selector={"TablePicker__tooltip-inner"}
-                arrow_selector={"TablePicker__tooltip-arrow"}
-              />
+              <GlossaryIcon id={id} />
             </span>
           )}
         </li>
