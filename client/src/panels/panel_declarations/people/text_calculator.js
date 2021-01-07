@@ -2,19 +2,15 @@ import { run_template, year_templates } from "../shared.js";
 const { people_years } = year_templates;
 
 export const text_calculate = (all_data, custom_group_pop = null) => {
-  const group_data = _.map(all_data, (group) => group.data);
-  const group_data_by_year = _.zip(...group_data);
-  const group_data_sums_by_year = _.map(group_data_by_year, (year_group) =>
-    _.sum(year_group)
-  );
-  const first_active_year_index = _.findIndex(
-    group_data_by_year,
-    (year_group) => year_group !== 0
-  );
-  const last_active_year_index = _.findLastIndex(
-    group_data_sums_by_year,
-    (year_group) => year_group !== 0
-  );
+  const [first_active_year_index, last_active_year_index] = _.chain(all_data)
+    .map("data")
+    .thru((data_by_group) => _.zip(...data_by_group))
+    .map(_.sum)
+    .thru((totals_by_year) => [
+      _.findIndex(totals_by_year, (total) => total !== 0),
+      _.findLastIndex(totals_by_year, (total) => total !== 0),
+    ])
+    .value();
 
   const first_active_year = run_template(
     `${people_years[first_active_year_index]}`
