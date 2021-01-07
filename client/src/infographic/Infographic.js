@@ -18,14 +18,13 @@ import { Subject } from "../models/subject.js";
 
 import { get_panels_for_subject } from "../panels/get_panels_for_subject/index.js";
 import { PanelRegistry } from "../panels/PanelRegistry.js";
-import { PanelRenderer } from "../panels/PanelRenderer.js";
 
 import { bubble_defs } from "./bubble_definitions.js";
 import { BubbleMenu } from "./BubbleMenu.js";
 
 import { infograph_href_template } from "./infographic_link.js";
 
-import InfographicFilter from "./InfographicFilter.js";
+import InfographicPanelRenderer from "./InfographicPanelRenderer.js";
 
 import text from "./Infographic.yaml";
 import "./Infographic.scss";
@@ -154,54 +153,6 @@ class InfoGraph_ extends React.Component {
       total_number_of_panels,
     } = this.state;
 
-    const show_all_panels_bubble_type = !(
-      active_bubble_id === "financial" || active_bubble_id === "people"
-    );
-    const is_panel_filter_empty = _.filter(panel_filter_by_table).length === 0;
-
-    const { number_of_active_panels, panel_renderers } =
-      !loading &&
-      _.reduce(
-        panel_keys,
-        (result, panel_key) => {
-          const panel_obj = PanelRegistry.lookup(panel_key, subject.level);
-          const active_panel_filter_keys = _.chain(panel_filter_by_table)
-            .map((value, key) => value && key)
-            .compact()
-            .value();
-          const filtered_keys = _.intersection(
-            active_panel_filter_keys,
-            panel_obj.depends_on
-          );
-          // Show the panel regardless of filter status if it's neither financial or people. Also if there is no panel filter applied.
-          const is_panel_valid =
-            show_all_panels_bubble_type ||
-            is_panel_filter_empty ||
-            filtered_keys.length > 0;
-
-          // I think it makes sense to not include "static" panels (non table data panels) in showing number of active panels
-          // But, always display them
-          if (!panel_obj.static && is_panel_valid) {
-            result.number_of_active_panels += 1;
-          }
-          if (panel_obj.static || is_panel_valid) {
-            result.panel_renderers.push(
-              <PanelRenderer
-                panel_key={panel_key}
-                subject={subject}
-                active_bubble_id={active_bubble_id}
-                key={panel_key + subject.guid}
-              />
-            );
-          }
-          return result;
-        },
-        {
-          number_of_active_panels: 0,
-          panel_renderers: [],
-        }
-      );
-
     const search_component = (
       <AdvancedSearch
         everything_search_config={{
@@ -266,9 +217,11 @@ class InfoGraph_ extends React.Component {
                 : text_maker("a11y_infograph_description")}
             </p>
           )}
-          {!loading && !show_all_panels_bubble_type && (
-            <InfographicFilter
-              number_of_active_panels={number_of_active_panels}
+          {!loading && (
+            <InfographicPanelRenderer
+              subject={subject}
+              panel_keys={panel_keys}
+              active_bubble_id={active_bubble_id}
               total_number_of_panels={total_number_of_panels}
               panel_filter_by_table={panel_filter_by_table}
               set_panel_filter_by_table={(panel_filter_by_table) =>
@@ -276,7 +229,6 @@ class InfoGraph_ extends React.Component {
               }
             />
           )}
-          {!loading && panel_renderers}
         </div>
         {!_.isEmpty(active_bubble_id) && (
           <div className="row medium-panel-text">
