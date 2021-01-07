@@ -12,11 +12,7 @@ import { log_standard_event } from "../core/analytics.js";
 import { ensure_loaded } from "../core/lazy_loader.js";
 import { StandardRouteContainer } from "../core/NavComponents";
 import { redirect_with_msg } from "../core/RedirectHeader.js";
-import {
-  shallowEqualObjectsOverKeys,
-  SafeJSURL,
-  set_session_storage_w_expiry,
-} from "../general_utils.js";
+import { shallowEqualObjectsOverKeys, SafeJSURL } from "../general_utils.js";
 import { Subject } from "../models/subject.js";
 
 import { get_panels_for_subject } from "../panels/get_panels_for_subject/index.js";
@@ -349,19 +345,6 @@ const Infographic = ({
     params: { level, subject_id, active_bubble_id, options },
   },
 }) => {
-  const set_redirect_msg = (msg_key, args, replaced_route) => {
-    log_standard_event({
-      SUBAPP: window.location.hash.replace("#", ""),
-      MISC1: "ERROR_IN_INFOGRAPH",
-      MISC2: window.location.href,
-    });
-
-    set_session_storage_w_expiry("pre_redirected_url", location.href);
-    set_session_storage_w_expiry("redirected_msg", text_maker(msg_key, args));
-    window.location.replace(replaced_route);
-    window.location.reload();
-    return null;
-  };
   const is_level_valid = _.chain(Subject).keys().includes(level).value();
   if (!is_level_valid) {
     return redirect_with_msg(
