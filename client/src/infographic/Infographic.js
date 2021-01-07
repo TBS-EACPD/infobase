@@ -295,9 +295,7 @@ class InfoGraph_ extends React.Component {
               })
               .filter()
               .value();
-            const valid_subject_panels_by_bubble_id = panel_keys_by_bubble_id[
-              active_bubble_id
-            ]
+            const valid_subject_panels_by_bubble_id = panel_keys
               ? {
                   ...panel_keys_by_bubble_id,
                   [active_bubble_id]: _.map(valid_panel_objs, "key"),
