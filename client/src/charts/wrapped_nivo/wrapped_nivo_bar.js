@@ -47,7 +47,6 @@ const bar_table = (
     <SmartDisplayTable
       data={_.map(data, (row) => _.pick(row, [indexBy, ...keys]))}
       column_configs={column_configs}
-      unsorted_initial={true}
       table_name={table_name || nivo_common_text_maker("default_table_name")}
     />
   );

@@ -135,7 +135,6 @@ const planned_vote_or_stat_render = (vs) =>
           <SmartDisplayTable
             data={data_with_complement_amt}
             column_configs={column_configs}
-            unsorted_initial={true}
           />
         </Col>
         {show_pack && (

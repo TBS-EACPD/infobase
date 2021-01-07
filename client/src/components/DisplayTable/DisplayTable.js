@@ -84,7 +84,7 @@ const get_default_state_from_props = (props) => {
   - 1st column cannot be toggled off by user
   - Total row color is set to $textLightColor, see total_color
 */
-export class DisplayTable extends React.Component {
+class DisplayTable extends React.Component {
   constructor(props) {
     super(props);
 
@@ -658,3 +658,6 @@ export class SmartDisplayTable extends React.Component {
     );
   }
 }
+SmartDisplayTable.defaultProps = {
+  unsorted_initial: true,
+};

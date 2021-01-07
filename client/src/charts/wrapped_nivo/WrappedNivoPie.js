@@ -102,7 +102,6 @@ export class WrappedNivoPie extends React.Component {
       <SmartDisplayTable
         data={table_data}
         column_configs={column_configs}
-        unsorted_initial={true}
         table_name={table_name || nivo_common_text_maker("default_table_name")}
       />
     );
