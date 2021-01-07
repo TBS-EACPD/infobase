@@ -37,10 +37,7 @@ export const text_calculate = (all_data, custom_group_pop = null) => {
         ? group.five_year_percent === top_group_avg_pct
         : _.sum(group.data) / custom_group_pop === top_group_avg_pct
     )
-    .thru(
-      (group) =>
-        group && (lang === "en" ? group.label.replace("Age ", "") : group.label)
-    )
+    .get("label")
     .value();
 
   const bottom_group_avg_pct = _.chain(all_data)
@@ -57,10 +54,7 @@ export const text_calculate = (all_data, custom_group_pop = null) => {
         ? group.five_year_percent === bottom_group_avg_pct
         : _.sum(group.data) / custom_group_pop === bottom_group_avg_pct
     )
-    .thru(
-      (group) =>
-        group && (lang === "en" ? group.label.replace("Age ", "") : group.label)
-    )
+    .get("label")
     .value();
 
   return {
