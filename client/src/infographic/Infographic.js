@@ -151,16 +151,13 @@ class InfoGraph_ extends React.Component {
       previous_bubble,
       next_bubble,
       panel_filter_by_table,
-      panel_filter_by_footnotes,
       total_number_of_panels,
     } = this.state;
 
     const show_all_panels_bubble_type = !(
       active_bubble_id === "financial" || active_bubble_id === "people"
     );
-    const is_panel_filter_empty =
-      _.filter(panel_filter_by_table).length === 0 &&
-      _.filter(panel_filter_by_footnotes).length === 0;
+    const is_panel_filter_empty = _.filter(panel_filter_by_table).length === 0;
 
     const { number_of_active_panels, panel_renderers } =
       !loading &&
@@ -168,35 +165,19 @@ class InfoGraph_ extends React.Component {
         panel_keys,
         (result, panel_key) => {
           const panel_obj = PanelRegistry.lookup(panel_key, subject.level);
-          const active_panel_table_filter_keys = _.chain(panel_filter_by_table)
+          const active_panel_filter_keys = _.chain(panel_filter_by_table)
             .map((value, key) => value && key)
             .compact()
             .value();
-          const active_panel_footnotes_filter_keys = _.chain(
-            panel_filter_by_footnotes
-          )
-            .map((value, key) => value && key)
-            .compact()
-            .value();
-
-          const table_filtered_keys = _.intersection(
-            active_panel_table_filter_keys,
+          const filtered_keys = _.intersection(
+            active_panel_filter_keys,
             panel_obj.depends_on
           );
-          const footnotes_filtered_keys = _.intersection(
-            active_panel_footnotes_filter_keys,
-            _.chain(panel_obj.get_footnotes(subject))
-              .flatMap("topic_keys")
-              .uniq()
-              .value()
-          );
-
           // Show the panel regardless of filter status if it's neither financial or people. Also if there is no panel filter applied.
           const is_panel_valid =
             show_all_panels_bubble_type ||
             is_panel_filter_empty ||
-            table_filtered_keys.length > 0 ||
-            footnotes_filtered_keys.length > 0;
+            filtered_keys.length > 0;
 
           // I think it makes sense to not include "static" panels (non table data panels) in showing number of active panels
           // But, always display them
@@ -293,10 +274,6 @@ class InfoGraph_ extends React.Component {
               panel_filter_by_table={panel_filter_by_table}
               set_panel_filter_by_table={(panel_filter_by_table) =>
                 this.setState({ panel_filter_by_table })
-              }
-              panel_filter_by_footnotes={panel_filter_by_footnotes}
-              set_panel_filter_by_footnotes={(panel_filter_by_footnotes) =>
-                this.setState({ panel_filter_by_footnotes })
               }
             />
           )}
@@ -409,15 +386,6 @@ class InfoGraph_ extends React.Component {
                 .flatMap("depends_on")
                 .uniq()
                 .map((table_id) => [table_id, false])
-                .fromPairs()
-                .value(),
-              panel_filter_by_footnotes: _.chain(valid_panel_objs)
-                .map((panel) => panel.get_footnotes(subject))
-                .flatMap((footnotes_for_panel) =>
-                  _.flatMap(footnotes_for_panel, "topic_keys")
-                )
-                .uniq()
-                .map((footnote_topic_key) => [footnote_topic_key, false])
                 .fromPairs()
                 .value(),
               total_number_of_panels: _.reject(valid_panel_objs, "static")
