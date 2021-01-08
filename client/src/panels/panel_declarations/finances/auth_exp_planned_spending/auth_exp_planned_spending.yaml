@@ -88,6 +88,10 @@ lapse_by_votes:
   en: Lapsed Authorities by Vote ({{lapse_unit}})
   fr: Autorisations périmées par crédit
 
+show_lapsed_authorities_in:
+  en: Show lapsed authorities in
+  fr: Afficher Autorisations périmées en
+
 aggregated_lapse_by_votes:
   transform: [handlebars]
   en: Aggregated Lapsed Authorities ({{lapse_unit}})

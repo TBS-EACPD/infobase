@@ -194,7 +194,14 @@ class InteractiveGraph extends React.Component {
 
     return !is_a11y_mode ? (
       <Fragment>
-        <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            position: "relative",
+            minHeight: "28px",
+          }}
+        >
           {/* don't remove this div: btn-ib-array requires a parent to determine its 
           position as a child which allows for the pseudo-classes :first-child
           and :last-child to be added to the required buttons*/}
