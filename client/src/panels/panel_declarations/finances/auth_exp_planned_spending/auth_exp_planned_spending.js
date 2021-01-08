@@ -301,6 +301,20 @@ class LapseByVotesGraph extends React.Component {
       text_formatter: formats.smart_percentage2,
     };
 
+    const lapse_toggle_control = (
+      <button
+        key="LapseToggleControl"
+        onClick={() =>
+          this.setState({
+            is_showing_lapse_pct: !is_showing_lapse_pct,
+          })
+        }
+        className="btn-ib-primary"
+      >
+        {text_maker("show_lapsed_authorities_in")}{" "}
+        {is_showing_lapse_pct ? "$" : "%"}
+      </button>
+    );
     const lapse_infograph = (
       <div style={{ padding: "5px" }} className="frow">
         <TM
@@ -320,7 +334,7 @@ class LapseByVotesGraph extends React.Component {
           }}
         />
         {!subject.is("gov") && (
-          <div className="fcol-md-4">
+          <div className="fcol-md-3">
             <StandardLegend
               items={_.map(queried_votes, ({ desc }) => ({
                 id: desc,
@@ -350,22 +364,11 @@ class LapseByVotesGraph extends React.Component {
                     })
                   }
                 />,
-                <button
-                  key="LapseToggleControl"
-                  onClick={() =>
-                    this.setState({
-                      is_showing_lapse_pct: !is_showing_lapse_pct,
-                    })
-                  }
-                  className="btn-ib-primary"
-                >
-                  Show lapsed authority in {is_showing_lapse_pct ? "$" : "%"}
-                </button>,
               ]}
             />
           </div>
         )}
-        <div className={`fcol-md-${subject.is("gov") ? 12 : 8}`}>
+        <div className={`fcol-md-${subject.is("gov") ? 12 : 9}`}>
           <WrappedNivoLine
             data={_.chain(filtered_votes)
               .map((vote_row) => ({
@@ -384,6 +387,7 @@ class LapseByVotesGraph extends React.Component {
               .value()}
             raw_data={get_lapse_raw_data(is_showing_lapse_pct)}
             colorBy={(d) => colors(d.id)}
+            center_button={lapse_toggle_control}
             margin={{
               top: 10,
               right: 30,

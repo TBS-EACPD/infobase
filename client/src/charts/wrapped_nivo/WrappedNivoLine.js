@@ -84,6 +84,7 @@ export class WrappedNivoLine extends React.Component {
       motionStiffness,
       custom_table,
       enablePoints,
+      center_button,
       lineWidth,
     } = this.props;
 
@@ -303,6 +304,7 @@ export class WrappedNivoLine extends React.Component {
         graph={graph}
         table={table}
         other_buttons={[zoom_button]}
+        center_button={center_button}
         table_name={table_name}
       />
     );
