@@ -90,7 +90,7 @@ lapse_by_votes:
 
 show_lapsed_authorities_in:
   en: Show lapsed authorities in
-  fr: Afficher Autorisations périmées en
+  fr: Afficher les autorisations périmées en $
 
 aggregated_lapse_by_votes:
   transform: [handlebars]
