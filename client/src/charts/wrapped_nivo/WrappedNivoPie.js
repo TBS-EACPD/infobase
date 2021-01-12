@@ -99,7 +99,7 @@ export class WrappedNivoPie extends React.Component {
     };
 
     const table = !disable_table_view && (
-      <SmartDisplayTable
+      <DisplayTable
         data={table_data}
         column_configs={column_configs}
         table_name={table_name || nivo_common_text_maker("default_table_name")}

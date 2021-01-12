@@ -143,7 +143,7 @@ class ProvPanel extends React.Component {
         )}
         {is_a11y_mode && (
           <Col size={12} isGraph>
-            <SmartDisplayTable
+            <DisplayTable
               column_configs={{
                 label: {
                   index: 0,

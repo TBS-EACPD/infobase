@@ -235,10 +235,7 @@ class LapseByVotesGraph extends React.Component {
       is_showing_lapse_pct: false,
       active_votes: this.get_active_votes(
         ({ votestattype }) =>
-          props.subject.level === "gov" ||
-          votestattype === 1 ||
-          votestattype === 2 ||
-          votestattype === 3
+          props.subject.level === "gov" || _.includes([1, 2, 3], votestattype)
       ),
     };
   }
@@ -319,36 +316,26 @@ class LapseByVotesGraph extends React.Component {
           }}
         />
         <div
-          style={{ marginBottom: "10px" }}
-          className="fcol-md-12 medium-panel-text"
+          className="fcol-md-12"
+          style={{ marginBottom: "10px", textAlign: "center" }}
         >
-          <div>
-            <input
-              style={{ margin: "10px" }}
-              type="radio"
-              name="lapse_unit"
-              id="lapse_by_dollar"
-              value="lapse_by_dollar"
-              defaultChecked
-              onClick={() => this.setState({ is_showing_lapse_pct: false })}
-            />
-            <label htmlFor="lapse_by_dollar">
-              {text_maker("show_lapsed_authorities_in")} $
-            </label>
-          </div>
-          <div>
-            <input
-              style={{ margin: "10px" }}
-              type="radio"
-              name="lapse_unit"
-              id="lapse_by_pct"
-              value="lapse_by_pct"
-              onClick={() => this.setState({ is_showing_lapse_pct: true })}
-            />
-            <label htmlFor="lapse_by_pct">
-              {text_maker("show_lapsed_authorities_in")} %
-            </label>
-          </div>
+          <RadioButtons
+            options={[
+              {
+                id: "lapse_by_dollar",
+                active: !is_showing_lapse_pct,
+                display: `${text_maker("show_lapsed_authorities_in")} $`,
+              },
+              {
+                id: "lapse_by_pct",
+                active: is_showing_lapse_pct,
+                display: `${text_maker("show_lapsed_authorities_in")} %`,
+              },
+            ]}
+            onChange={(id) =>
+              this.setState({ is_showing_lapse_pct: id === "lapse_by_pct" })
+            }
+          />
         </div>
 
         {!subject.is("gov") && (
@@ -412,7 +399,7 @@ class LapseByVotesGraph extends React.Component {
               left: 70,
             }}
             custom_table={
-              <SmartDisplayTable
+              <DisplayTable
                 column_configs={{
                   id: {
                     index: 0,

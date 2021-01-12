@@ -60,10 +60,7 @@ const get_custom_table = (data, active_sobjs) => {
       .value(),
   };
   return (
-    <SmartDisplayTable
-      data={custom_table_data}
-      column_configs={column_configs}
-    />
+    <DisplayTable data={custom_table_data} column_configs={column_configs} />
   );
 };
 

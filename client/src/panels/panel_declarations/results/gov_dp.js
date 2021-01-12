@@ -60,7 +60,7 @@ const DpSummary = ({
         />
       </div>
       <HeightClippedGraph clipHeight={330}>
-        <SmartDisplayTable
+        <DisplayTable
           table_name={"Government DP"}
           data={rows_of_counts_by_dept}
           column_configs={column_configs}

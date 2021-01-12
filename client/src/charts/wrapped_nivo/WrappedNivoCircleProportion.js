@@ -234,7 +234,7 @@ export class WrappedNivoCircleProportion extends React.Component {
       { label: child_name, value: child_value },
     ];
     const table = !disable_table_view && (
-      <SmartDisplayTable
+      <DisplayTable
         table_name={table_name || text_maker("default_table_name")}
         column_configs={column_configs}
         data={table_data}

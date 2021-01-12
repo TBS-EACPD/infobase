@@ -6,7 +6,7 @@ import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
 import {
-  SmartDisplayTable,
+  DisplayTable,
   default_dept_name_sort_func,
 } from "src/components/index.js";
 
@@ -59,7 +59,7 @@ class GovDRR extends React.Component {
             <TM k="gov_drr_summary_org_table_text" />
           </div>
           <HeightClippedGraph clipHeight={330}>
-            <SmartDisplayTable
+            <DisplayTable
               table_name={"Government DRR"}
               data={rows_of_counts_by_dept}
               column_configs={column_configs}

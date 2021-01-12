@@ -223,7 +223,7 @@ class DetailedHistTPItems extends React.Component {
       return (
         <div>
           {title_el}
-          <SmartDisplayTable
+          <DisplayTable
             data={_.map(rows, (record) => ({
               label: record.tp,
               ..._.chain(std_years)
@@ -268,7 +268,7 @@ class DetailedHistTPItems extends React.Component {
         },
         colors: (d) => color_scale(d.id),
         custom_table: (
-          <SmartDisplayTable
+          <DisplayTable
             data={custom_table_data}
             column_configs={column_configs}
           />

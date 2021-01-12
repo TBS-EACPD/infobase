@@ -231,7 +231,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
     status: ind.indicator.status_key,
   }));
   return (
-    <SmartDisplayTable
+    <DisplayTable
       table_name={text_maker("result_flat_table_title", {
         year: current_drr_year,
       })}
