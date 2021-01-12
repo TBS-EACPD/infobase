@@ -300,21 +300,6 @@ class LapseByVotesGraph extends React.Component {
       left_axis: { format: formats.smart_percentage2_raw },
       text_formatter: formats.smart_percentage2,
     };
-
-    const lapse_toggle_control = (
-      <button
-        key="LapseToggleControl"
-        onClick={() =>
-          this.setState({
-            is_showing_lapse_pct: !is_showing_lapse_pct,
-          })
-        }
-        className="btn-ib-primary"
-      >
-        {text_maker("show_lapsed_authorities_in")}{" "}
-        {is_showing_lapse_pct ? "$" : "%"}
-      </button>
-    );
     const lapse_infograph = (
       <div style={{ padding: "5px" }} className="frow">
         <TM
@@ -333,6 +318,39 @@ class LapseByVotesGraph extends React.Component {
               additional_info.gov_avg_lapsed_by_votes_pct,
           }}
         />
+        <div
+          style={{ marginBottom: "10px" }}
+          className="fcol-md-12 medium-panel-text"
+        >
+          <div>
+            <input
+              style={{ margin: "10px" }}
+              type="radio"
+              name="lapse_unit"
+              id="lapse_by_dollar"
+              value="lapse_by_dollar"
+              defaultChecked
+              onClick={() => this.setState({ is_showing_lapse_pct: false })}
+            />
+            <label htmlFor="lapse_by_dollar">
+              {text_maker("show_lapsed_authorities_in")} $
+            </label>
+          </div>
+          <div>
+            <input
+              style={{ margin: "10px" }}
+              type="radio"
+              name="lapse_unit"
+              id="lapse_by_pct"
+              value="lapse_by_pct"
+              onClick={() => this.setState({ is_showing_lapse_pct: true })}
+            />
+            <label htmlFor="lapse_by_pct">
+              {text_maker("show_lapsed_authorities_in")} %
+            </label>
+          </div>
+        </div>
+
         {!subject.is("gov") && (
           <div className="fcol-md-3">
             <StandardLegend
@@ -387,7 +405,6 @@ class LapseByVotesGraph extends React.Component {
               .value()}
             raw_data={get_lapse_raw_data(is_showing_lapse_pct)}
             colorBy={(d) => colors(d.id)}
-            center_button={lapse_toggle_control}
             margin={{
               top: 10,
               right: 30,
