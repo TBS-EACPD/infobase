@@ -23,7 +23,6 @@ org_vote_stat_pa{
   pa_last_year_3_unlapsed
   pa_last_year_2_unlapsed
   pa_last_year_unlapsed
-
 }`;
 const org_vote_stat_estimates_field = `
 org_vote_stat_estimates{
