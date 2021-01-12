@@ -40,6 +40,7 @@ export const declare_dead_program_warning_panel = () =>
     panel_key: "dead_program_warning",
     levels: ["program"],
     panel_config_func: (level, panel_key) => ({
+      static: true,
       footnotes: false,
       calculate: _.property("is_dead"),
       render() {
@@ -57,6 +58,7 @@ export const declare_dead_crso_warning_panel = () =>
     panel_key: "dead_crso_warning",
     levels: ["crso"],
     panel_config_func: (level, panel_key) => ({
+      static: true,
       footnotes: false,
       calculate: _.property("is_dead"),
       render() {
@@ -74,6 +76,7 @@ export const declare_m2m_tag_warning_panel = () =>
     panel_key: "m2m_warning",
     levels: ["tag"],
     panel_config_func: (level, panel_key) => ({
+      static: true,
       footnotes: false,
       calculate(subject) {
         return subject.is_m2m;

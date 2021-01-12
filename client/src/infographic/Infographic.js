@@ -102,13 +102,26 @@ class InfoGraph_ extends React.Component {
     }
   }
   componentDidMount() {
-    this.loadBubbleMenuAndGraphDeps(this.props);
+    this.loadBubbleMenuDeps(this.props.subject).then(
+      (panel_keys_by_bubble_id) =>
+        this.loadGraphDeps({
+          panel_keys_by_bubble_id,
+          ...this.state,
+          ...this.props,
+        })
+    );
   }
   componentDidUpdate(prevProps) {
     const { loading, active_bubble_id, panel_keys } = this.state;
-
     if (loading) {
-      this.loadBubbleMenuAndGraphDeps({ ...this.state, ...this.props });
+      this.loadBubbleMenuDeps(this.props.subject).then(
+        (panel_keys_by_bubble_id) =>
+          this.loadGraphDeps({
+            panel_keys_by_bubble_id,
+            ...this.state,
+            ...this.props,
+          })
+      );
     } else if (!_.isNull(active_bubble_id)) {
       if (this.props.subject !== prevProps.subject) {
         reset_scroll();
@@ -261,86 +274,82 @@ class InfoGraph_ extends React.Component {
       </div>
     );
   }
-
-  loadBubbleMenuAndGraphDeps({ active_bubble_id, subject, level }) {
-    ensure_loaded({
+  loadBubbleMenuDeps(subject) {
+    return ensure_loaded({
       subject: subject,
       has_results: true,
-    }).then(() =>
-      get_panels_for_subject(subject).then((panel_keys_by_bubble_id) => {
-        const panel_keys = panel_keys_by_bubble_id[active_bubble_id];
+    }).then(() => get_panels_for_subject(subject));
+  }
 
-        ensure_loaded({
-          panel_keys,
-          subject_level: level,
-          subject: subject,
-          footnotes_for: subject,
-        }).then(() => {
-          if (
-            shallowEqualObjectsOverKeys(
-              { active_bubble_id, subject, level },
-              this.state,
-              ["subject", "active_bubble_id", "level"]
+  loadGraphDeps({ panel_keys_by_bubble_id, active_bubble_id, subject, level }) {
+    const panel_keys = panel_keys_by_bubble_id[active_bubble_id];
+
+    ensure_loaded({
+      panel_keys,
+      subject_level: level,
+      subject: subject,
+      footnotes_for: subject,
+    }).then(() => {
+      if (
+        shallowEqualObjectsOverKeys(
+          { active_bubble_id, subject, level },
+          this.state,
+          ["subject", "active_bubble_id", "level"]
+        )
+      ) {
+        const valid_panel_objs = _.chain(panel_keys)
+          .map((key) => {
+            const panel_obj = PanelRegistry.lookup(key, level);
+            return panel_obj.is_panel_valid_for_subject(subject) && panel_obj;
+          })
+          .filter()
+          .value();
+        const valid_subject_panels_by_bubble_id = panel_keys
+          ? {
+              ...panel_keys_by_bubble_id,
+              [active_bubble_id]: _.map(valid_panel_objs, "key"),
+            }
+          : panel_keys_by_bubble_id;
+
+        const subject_bubble_defs = _.chain(bubble_defs)
+          .filter(({ id }) =>
+            _.chain(valid_subject_panels_by_bubble_id)
+              .keys()
+              .includes(id)
+              .value()
+          )
+          .map((bubble_def) =>
+            _.mapValues(bubble_def, (bubble_option) =>
+              _.isFunction(bubble_option)
+                ? bubble_option(subject)
+                : bubble_option
             )
-          ) {
-            const valid_panel_objs = _.chain(panel_keys)
-              .map((key) => {
-                const panel_obj = PanelRegistry.lookup(key, level);
-                return (
-                  panel_obj.is_panel_valid_for_subject(subject) && panel_obj
-                );
-              })
-              .filter()
-              .value();
-            const valid_subject_panels_by_bubble_id = panel_keys
-              ? {
-                  ...panel_keys_by_bubble_id,
-                  [active_bubble_id]: _.map(valid_panel_objs, "key"),
-                }
-              : panel_keys_by_bubble_id;
+          )
+          .value();
 
-            const subject_bubble_defs = _.chain(bubble_defs)
-              .filter(({ id }) =>
-                _.chain(valid_subject_panels_by_bubble_id)
-                  .keys()
-                  .includes(id)
-                  .value()
-              )
-              .map((bubble_def) =>
-                _.mapValues(bubble_def, (bubble_option) =>
-                  _.isFunction(bubble_option)
-                    ? bubble_option(subject)
-                    : bubble_option
-                )
-              )
-              .value();
-
-            const active_index = _.findIndex(subject_bubble_defs, {
-              id: active_bubble_id,
-            });
-            const next_bubble = subject_bubble_defs[active_index + 1];
-            const previous_bubble = subject_bubble_defs[active_index - 1];
-
-            this.setState({
-              panel_keys: valid_subject_panels_by_bubble_id[active_bubble_id],
-              subject_bubble_defs,
-              previous_bubble,
-              next_bubble,
-              loading: false,
-              subject_panels_by_bubble_id: valid_subject_panels_by_bubble_id,
-              panel_filter_by_table: _.chain(valid_panel_objs)
-                .flatMap("depends_on")
-                .uniq()
-                .map((table_id) => [table_id, false])
-                .fromPairs()
-                .value(),
-              total_number_of_panels: _.reject(valid_panel_objs, "static")
-                .length,
-            });
-          }
+        const active_index = _.findIndex(subject_bubble_defs, {
+          id: active_bubble_id,
         });
-      })
-    );
+        const next_bubble = subject_bubble_defs[active_index + 1];
+        const previous_bubble = subject_bubble_defs[active_index - 1];
+
+        this.setState({
+          panel_keys: valid_subject_panels_by_bubble_id[active_bubble_id],
+          subject_bubble_defs,
+          previous_bubble,
+          next_bubble,
+          loading: false,
+          subject_panels_by_bubble_id: valid_subject_panels_by_bubble_id,
+          panel_filter_by_table: _.chain(valid_panel_objs)
+            .flatMap("depends_on")
+            .uniq()
+            .map((table_id) => [table_id, false])
+            .fromPairs()
+            .value(),
+          total_number_of_panels: _.reject(valid_panel_objs, "static").length,
+        });
+      }
+    });
   }
 }
 
