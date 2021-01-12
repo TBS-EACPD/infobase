@@ -235,7 +235,8 @@ class LapseByVotesGraph extends React.Component {
       is_showing_lapse_pct: false,
       active_votes: this.get_active_votes(
         ({ votestattype }) =>
-          props.subject.level === "gov" || _.includes([1, 2, 3], votestattype)
+          props.subject.level === "gov" ||
+          _.includes([1, 2, 3, 5], votestattype)
       ),
     };
   }
@@ -509,12 +510,16 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
           />
         </div>
       </div>
-      <div className="panel-separator" />
-      <LapseByVotesGraph
-        subject={subject}
-        queried_votes={queried_votes}
-        additional_info={additional_info}
-      />
+      {!_.isEmpty(queried_votes) && (
+        <Fragment>
+          <div className="panel-separator" />
+          <LapseByVotesGraph
+            subject={subject}
+            queried_votes={queried_votes}
+            additional_info={additional_info}
+          />
+        </Fragment>
+      )}
     </InfographicPanel>
   );
 };
