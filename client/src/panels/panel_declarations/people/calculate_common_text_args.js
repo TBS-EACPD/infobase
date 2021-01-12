@@ -1,4 +1,7 @@
+import _ from "src/app_bootstrap/lodash_mixins.js";
+
 import { run_template, year_templates } from "../shared.js";
+
 const { people_years } = year_templates;
 
 export const calculate_common_text_args = (
