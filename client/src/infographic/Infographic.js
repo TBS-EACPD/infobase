@@ -370,6 +370,7 @@ const Infographic = ({
       "#home"
     );
   }
+
   const SubjectModel = Subject[level];
   const subject = SubjectModel.lookup(subject_id);
   const bubble_id = _.find(bubble_defs, { id: active_bubble_id })
@@ -377,24 +378,24 @@ const Infographic = ({
     : null;
 
   if (!subject) {
-    const parent_dept_code = _.split(subject_id, "-")[0];
-    const parent_dept = Dept.lookup(parent_dept_code);
-    if ((level === "program" || level === "crso") && parent_dept) {
-      return redirect_with_msg(
-        text_maker("invalid_subject_redirect_parent_dept", {
-          subject_id,
-          parent_dept_code,
-        }),
-        `#orgs/dept/${parent_dept.id}/infograph/intro`
-      );
-    } else {
-      return redirect_with_msg(
-        text_maker("invalid_redirect_home", { param: subject_id }),
-        "#home"
-      );
+    if (level === "program" || level === "crso") {
+      const potential_parent_dept_code = _.split(subject_id, "-")[0];
+      const parent_dept = Dept.lookup(potential_parent_dept_code);
+      if (parent_dept) {
+        return redirect_with_msg(
+          text_maker("invalid_subject_redirect_parent_dept", {
+            subject_id,
+            potential_parent_dept_code,
+          }),
+          `#orgs/dept/${parent_dept.id}/infograph/intro`
+        );
+      }
     }
-  }
-  if (is_fake_infographic(subject)) {
+    return redirect_with_msg(
+      text_maker("invalid_redirect_home", { param: subject_id }),
+      "#home"
+    );
+  } else if (is_fake_infographic(subject)) {
     const subject_parent = (() => {
       switch (level) {
         case "program":
