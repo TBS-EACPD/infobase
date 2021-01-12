@@ -110,5 +110,11 @@ gov_lapse_by_votes_text:
 
 dept_lapse_by_votes_text:
   transform: [handlebars, markdown]
-  en: Over the past five years, **{{subject.name}}** {{gl_tt "lapsed" "LAPSE"}} an average of **{{fmt_compact1_written avg_lapsed_by_votes}}** from **{{num_of_votes}} votes**. On average, **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** of the spending authorities granted by Parliament to **{{subject.name}}** through an appropriation act have lapsed compared to an average government-wide lapse of **{{fmt_percentage1 gov_avg_lapsed_by_votes_pct}}**.
-  fr: Au cours des cinq dernières années, pour trois **{{num_of_votes}} votés**, la {{gl_tt "péremption" "LAPSE"}} moyenne **{{subject.name}}** s'est élevée à **{{fmt_compact1_written avg_lapsed_by_votes}}**. En moyenne, **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** des autorisations de dépenses accordées par le Parlement par le biais d'une loi de crédit sont devenues périmées, contre **{{fmt_percentage1 gov_avg_lapsed_by_votes_pct}}** en moyenne pour l'ensemble du gouvernement.
+  en: | 
+    Over the past five years, **{{subject.name}}** {{gl_tt "lapsed" "LAPSE"}} an average of **{{fmt_compact1_written avg_lapsed_by_votes}}** from **{{num_of_votes}} votes**. On average, **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** of the spending authorities granted by Parliament to **{{subject.name}}** through an appropriation act have lapsed compared to an average government-wide lapse of **{{fmt_percentage1 gov_avg_lapsed_by_votes_pct}}**.
+
+    Lapsing funds is a normal and expected part of any budgetary process.
+  fr: |
+    Au cours des cinq dernières années, pour trois **{{num_of_votes}} votés**, la {{gl_tt "péremption" "LAPSE"}} moyenne **{{subject.name}}** s'est élevée à **{{fmt_compact1_written avg_lapsed_by_votes}}**. En moyenne, **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** des autorisations de dépenses accordées par le Parlement par le biais d'une loi de crédit sont devenues périmées, contre **{{fmt_percentage1 gov_avg_lapsed_by_votes_pct}}** en moyenne pour l'ensemble du gouvernement.
+
+    Dans tout processus budgétaire, il est normal que les fonds ne soient pas tous dépensés.
