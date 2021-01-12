@@ -1,16 +1,4 @@
 "dept_code","vote_num","vs_type","name_en","name_fr","pa_last_year_5_auth","pa_last_year_5_exp","pa_last_year_5_unlapsed","pa_last_year_4_auth","pa_last_year_4_exp","pa_last_year_4_unlapsed","pa_last_year_3_auth","pa_last_year_3_exp","pa_last_year_3_unlapsed","pa_last_year_2_auth","pa_last_year_2_exp","pa_last_year_2_unlapsed","pa_last_year_auth","pa_last_year_exp","pa_last_year_unlapsed"
-"CBSA",1,1,"Operating/Program","Fonctionnement/Programme",1512906266,1449717812,39351236,1559660142,1421329862,122503987,1757949134.00,1500393332.00,159557676,2051119813,1811958474.00,138252429,1939596099,1746415721,185884855
-"CBSA",5,2,"Capital","Capital",251430453,159136387,25758753,194757418,105128994,86893790,296525673.00,108227899.00,59932379,264388567,134439896.00,72923802,244895934,124738637,102619308
-"CBSA",10,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,,,,,,,,,,928920,0,0
-"CBSA",15,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,,,,,,,,,,500000,0,0
-"CBSA",20,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,,,,,,,,,,21798880,0,0
-"CBSA",25,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,,,,,,,,,,2120113,0,0
-"CBSA",30,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,,,,,,,,,,28032443,0,0
-"CBSA",35,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,,,,,,,,,,1550000,0,0
-"CBSA","S",999,"Collection Agency Fees","Honoraires - Agence de recouvrement",,,,67,67,,,,,,,,,,
-"CBSA","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",186800563,186800563,0,171549821,171549821,,159697622.00,159697621.30,,208412008,208412008.00,,192589704,192589704,
-"CBSA","S",999,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs",8742,8742,0,15355,15355,,45504.00,45504.21,,5147,5147.00,,12578,12578,
-"CBSA","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",656087,629727,26360,1016181,926789,89392,120069.00,70985.07,49084,171243,122158.00,1,664624,583367,81257
 "CPCC",1,1,"Operating/Program","Fonctionnement/Programme",1264603,1264603,0,19215842,15363078,0,22086483.00,20769053.00,0,26972600,23700220.00,0,32794357,29434302,0
 "CPCC",3,1,"Operating/Program","Fonctionnement/Programme",9476139,7896157,0,,,,,,,,,,,,
 "CPCC",7,2,"Capital","Capital",0,0,0,,,,,,,,,,,,

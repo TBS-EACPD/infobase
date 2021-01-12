@@ -166,15 +166,15 @@ class SobjLine extends React.Component {
                   active_sobjs: toggle_list(active_sobjs, id),
                 });
             }}
-            Controls={[
+            Controls={
               <SelectAllControl
                 key="SelectAllControl"
                 SelectAllOnClick={() =>
                   this.setState({ active_sobjs: all_labels })
                 }
                 SelectNoneOnClick={() => this.setState({ active_sobjs: [] })}
-              />,
-            ]}
+              />
+            }
           />
         </div>
         <div

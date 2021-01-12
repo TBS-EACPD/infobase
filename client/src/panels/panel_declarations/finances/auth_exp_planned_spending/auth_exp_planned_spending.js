@@ -355,7 +355,7 @@ class LapseByVotesGraph extends React.Component {
                   },
                 })
               }
-              Controls={[
+              Controls={
                 <SelectAllControl
                   key="SelectAllControl"
                   SelectAllOnClick={() =>
@@ -368,8 +368,8 @@ class LapseByVotesGraph extends React.Component {
                       active_votes: this.get_active_votes(() => false),
                     })
                   }
-                />,
-              ]}
+                />
+              }
             />
           </div>
         )}

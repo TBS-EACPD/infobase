@@ -205,7 +205,7 @@ export class NivoLineBarToggle extends React.Component {
                   });
               }}
               Controls={
-                !disable_toggle && [
+                !disable_toggle && (
                   <button
                     key="ToggleGraphControl"
                     className="btn-ib-primary"
@@ -223,8 +223,8 @@ export class NivoLineBarToggle extends React.Component {
                     }}
                   >
                     {text_maker("toggle_graph")}
-                  </button>,
-                ]
+                  </button>
+                )
               }
             />
           </div>
