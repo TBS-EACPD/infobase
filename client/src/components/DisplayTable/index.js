@@ -1,4 +1,4 @@
-export { SmartDisplayTable } from "./DisplayTable.js";
+export { DisplayTable } from "./DisplayTable.js";
 export {
   DisplayTableCopyCsv,
   DisplayTableColumnToggle,

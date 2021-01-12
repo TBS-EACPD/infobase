@@ -203,7 +203,7 @@ export class WrappedNivoLine extends React.Component {
           .value(),
       };
       return (
-        <SmartDisplayTable
+        <DisplayTable
           data={table_data}
           column_configs={column_configs}
           table_name={table_name || text_maker("default_table_name")}

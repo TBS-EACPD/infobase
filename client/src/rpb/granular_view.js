@@ -4,7 +4,7 @@ import React from "react";
 import {
   LabeledBox,
   AlertBanner,
-  SmartDisplayTable,
+  DisplayTable,
   Details,
   DropdownMenu,
 } from "src/components/index.js";
@@ -185,7 +185,7 @@ class GranularView extends React.Component {
     };
 
     return (
-      <SmartDisplayTable
+      <DisplayTable
         data={table_data}
         column_configs={column_configs}
         util_components={display_table_custom_util}

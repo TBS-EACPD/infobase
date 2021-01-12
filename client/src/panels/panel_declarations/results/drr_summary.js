@@ -140,7 +140,7 @@ const StatusGrid = (props) => {
       real_count,
     }));
     return (
-      <SmartDisplayTable
+      <DisplayTable
         data={a11y_data}
         column_configs={{
           label: {
