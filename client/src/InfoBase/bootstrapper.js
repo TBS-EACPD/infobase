@@ -69,20 +69,16 @@ const load_fonts = () =>
     },
   });
 
-function bootstrap(App, app_reducer, done) {
+function bootstrapper(App, app_reducer, done) {
   load_fonts();
 
   populate_stores().then(() => {
     _.each(table_defs, (table_def) => Table.create_and_register(table_def));
 
-    // Create a history of your choosing (we're using a browser history in this case)
     const history = createHistory({ hashType: "noslash" });
 
-    // Build the middleware for intercepting and dispatching navigation actions
     const middleware = routerMiddleware(history);
 
-    // Add the reducer to your store on the `router` key
-    // Also apply our middleware for navigating
     const store = createStore(
       combineReducers({
         app: app_reducer,
@@ -91,8 +87,6 @@ function bootstrap(App, app_reducer, done) {
       applyMiddleware(middleware)
     );
 
-    // Now you can dispatch navigation actions from anywhere!
-    // store.dispatch(push('/foo'))
     done();
 
     ReactDOM.render(
@@ -107,4 +101,4 @@ function bootstrap(App, app_reducer, done) {
   });
 }
 
-export { bootstrap };
+export { bootstrapper };
