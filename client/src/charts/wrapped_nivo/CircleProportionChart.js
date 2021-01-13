@@ -6,7 +6,7 @@ import MediaQuery from "react-responsive";
 
 import { textColor } from "src/core/color_defs.js";
 
-import d3 from "src/app_bootstrap/d3-bundle.js";
+import d3 from "src/core/d3-bundle.js";
 
 import { SmartDisplayTable } from "../../components/index.js";
 import { breakpoints } from "../../core/breakpoint_defs.js";

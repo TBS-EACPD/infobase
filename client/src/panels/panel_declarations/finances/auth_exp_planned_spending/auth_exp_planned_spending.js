@@ -7,9 +7,9 @@ import {
   highlightColor,
 } from "src/core/color_defs.js";
 
+import d3 from "src/core/d3-bundle.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import d3 from "src/app_bootstrap/d3-bundle.js";
 
 import { GraphOverlay } from "../../../../components";
 import FootNote from "../../../../models/footnotes/footnotes";

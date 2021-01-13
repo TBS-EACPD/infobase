@@ -4,7 +4,7 @@ import { TransitionGroup, Transition } from "react-transition-group";
 
 import { textLightColor } from "src/core/color_defs.js";
 
-import d3 from "src/app_bootstrap/d3-bundle.js";
+import d3 from "src/core/d3-bundle.js";
 
 import { IconChevron } from "../icons/icons.js";
 

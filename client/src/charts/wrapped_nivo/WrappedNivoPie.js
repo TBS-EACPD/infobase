@@ -4,7 +4,7 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import d3 from "src/app_bootstrap/d3-bundle.js";
+import d3 from "src/core/d3-bundle.js";
 
 import { Format, SmartDisplayTable } from "../../components/index.js";
 import { newIBCategoryColors } from "../../core/color_schemes.js";

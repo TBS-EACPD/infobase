@@ -1,11 +1,11 @@
 import _ from "lodash";
 import marked from "marked";
 
+import d3 from "src/core/d3-bundle.js";
 import { is_mobile } from "src/core/feature_detection.js";
 
 import { lang } from "src/core/injected_build_constants.js";
 
-import d3 from "src/app_bootstrap/d3-bundle.js";
 
 import a11y_lang from "../common_text/a11y_lang.yaml";
 import common_lang from "../common_text/common_lang.yaml";
