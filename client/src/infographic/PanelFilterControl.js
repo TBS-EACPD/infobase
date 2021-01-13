@@ -13,12 +13,45 @@ import text from "./PanelFilterControl.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
+const get_default_table_tag_state = ({ panel_keys, subject }) =>
+  _.chain(panel_keys)
+    .flatMap(
+      (panel_key) => PanelRegistry.lookup(panel_key, subject.level)?.depends_on
+    )
+    .uniq()
+    .map((table_id) => [table_id, true])
+    .fromPairs()
+    .value();
+
 export default class PanelFilterControl extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      table_tags: this.get_default_table_tag_state(),
+      table_tags: get_default_table_tag_state(props),
     };
+  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const potentially_new_table_tag_state = get_default_table_tag_state(
+      nextProps
+    );
+
+    const next_table_ids = _.keys(potentially_new_table_tag_state);
+    const prev_table_ids = _.keys(prevState.table_tags);
+    const table_set_has_changed =
+      next_table_ids.length !== prev_table_ids.length ||
+      _.some(
+        next_table_ids,
+        (table_id) => !_.includes(prev_table_ids, table_id)
+      );
+
+    if (table_set_has_changed) {
+      return {
+        table_tags: potentially_new_table_tag_state,
+      };
+    } else {
+      return null;
+    }
   }
   shouldComponentUpdate(nextProps, nextState) {
     return this.state.table_tags !== nextState.table_tags;
@@ -81,16 +114,6 @@ export default class PanelFilterControl extends React.Component {
       />
     );
   }
-  get_default_table_tag_state = () =>
-    _.chain(this.props.panel_keys)
-      .flatMap(
-        (panel_key) =>
-          PanelRegistry.lookup(panel_key, this.props.subject.level)?.depends_on
-      )
-      .uniq()
-      .map((table_id) => [table_id, true])
-      .fromPairs()
-      .value();
   onSelect = (table_id) => {
     const { table_tags } = this.state;
 
