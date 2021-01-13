@@ -112,5 +112,30 @@ export default class PanelFilterControl extends React.Component {
       table_tags: _.mapValues(table_tags, _.constant(false)),
     });
   };
-  panel_filter_factory = () => _.identity; //todo
+  panel_filter_factory = () => {
+    const { table_tags } = this.state;
+    const { subject } = this.props;
+
+    const active_table_ids = _.chain(table_tags)
+      .pickBy(_.identity)
+      .keys()
+      .value();
+
+    if (active_table_ids.length === _.size(table_tags)) {
+      return _.identity;
+    }
+
+    return (panel_keys) =>
+      _.filter(
+        panel_keys,
+        (panel_key) =>
+          _.chain(panel_key)
+            .thru(
+              (panel_key) =>
+                PanelRegistry.lookup(panel_key, subject.level).depends_on
+            )
+            .intersection(active_table_ids)
+            .value().length > 0
+      );
+  };
 }
