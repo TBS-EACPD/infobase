@@ -1,9 +1,9 @@
 import classNames from "classnames";
+import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
 import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "lodash";
 
 import {
   DlItem,

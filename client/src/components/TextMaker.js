@@ -1,6 +1,6 @@
+import _ from "lodash";
 import React from "react";
 
-import _ from "lodash";
 
 import { trivial_text_maker } from "../models/text.js";
 

@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import _ from "lodash";
 import React from "react";
 
 import {
@@ -13,7 +14,6 @@ import {
 } from "src/components/index.js";
 
 import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "lodash";
 
 import { Explorer } from "src/explorer_common/explorer_components.js";
 import { get_root } from "src/explorer_common/hierarchy_tools.js";

@@ -1,8 +1,8 @@
+import _ from "lodash";
 import React from "react";
 import { Typeahead, Menu, MenuItem } from "react-bootstrap-typeahead";
 import ReactDOM from "react-dom";
 
-import _ from "lodash";
 
 import { TM } from "../components/TextMaker.js";
 import { log_standard_event } from "../core/analytics.js";

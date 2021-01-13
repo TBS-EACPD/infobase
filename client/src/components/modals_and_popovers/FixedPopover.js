@@ -1,9 +1,9 @@
 import classNames from "classnames";
+import _ from "lodash";
 import React from "react";
 import { Modal } from "react-bootstrap";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "lodash";
 
 import { trivial_text_maker } from "../../models/text.js";
 import { CountdownCircle } from "../CountdownCircle.js";

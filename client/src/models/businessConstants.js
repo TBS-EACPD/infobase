@@ -1,5 +1,6 @@
-import { lang } from "src/app_bootstrap/globals.js";
 import _ from "lodash";
+
+import { lang } from "src/app_bootstrap/globals.js";
 
 import yaml from "./businessConstants.yaml";
 

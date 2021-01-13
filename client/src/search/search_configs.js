@@ -1,6 +1,6 @@
+import _ from "lodash";
 import React, { Fragment } from "react";
 
-import _ from "lodash";
 
 import { Table } from "../core/TableClass.js";
 import { GlossaryEntry } from "../models/glossary.js";

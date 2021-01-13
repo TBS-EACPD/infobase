@@ -1,7 +1,7 @@
 import classNames from "classnames";
+import _ from "lodash";
 import React from "react";
 
-import _ from "lodash";
 
 import { text_maker } from "../tables/table_common";
 class DebouncedTextInput extends React.Component {

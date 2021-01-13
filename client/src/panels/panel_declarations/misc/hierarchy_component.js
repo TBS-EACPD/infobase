@@ -1,10 +1,10 @@
 import classNames from "classnames";
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { highlightColor } from "src/core/color_defs.js";
 
 import { lang } from "src/app_bootstrap/globals.js";
-import _ from "lodash";
 
 import { IconAttentionTriangle } from "../../../icons/icons.js";
 import { Subject, create_text_maker_component } from "../shared.js";

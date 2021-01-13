@@ -1,5 +1,6 @@
-import { is_dev } from "src/app_bootstrap/globals.js";
 import _ from "lodash";
+
+import { is_dev } from "src/app_bootstrap/globals.js";
 
 import { PanelRegistry } from "../PanelRegistry.js";
 

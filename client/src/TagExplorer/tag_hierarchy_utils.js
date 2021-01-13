@@ -1,6 +1,6 @@
+import _ from "lodash";
 import React from "react";
 
-import _ from "lodash";
 
 import { HeightClipper } from "../components/index.js";
 import { infograph_href_template } from "../link_utils.js";

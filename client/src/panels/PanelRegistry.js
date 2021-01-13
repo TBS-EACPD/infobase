@@ -1,5 +1,6 @@
-import { is_dev } from "src/app_bootstrap/globals.js";
 import _ from "lodash";
+
+import { is_dev } from "src/app_bootstrap/globals.js";
 
 import { Table } from "../core/TableClass.js";
 import FootNote from "../models/footnotes/footnotes.js";

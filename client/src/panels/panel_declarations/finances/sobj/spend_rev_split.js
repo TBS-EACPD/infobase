@@ -1,9 +1,9 @@
+import _ from "lodash";
 import React from "react";
 
 import { highlightColor, secondaryColor } from "src/core/color_defs.js";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "lodash";
 
 import {
   formats,

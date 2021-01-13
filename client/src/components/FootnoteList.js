@@ -1,6 +1,6 @@
+import _ from "lodash";
 import React from "react";
 
-import _ from "lodash";
 
 import { sanitized_dangerous_inner_html } from "../general_utils.js";
 import footnote_topic_text from "../models/footnotes/footnote_topics.yaml";

@@ -1,6 +1,6 @@
+import _ from "lodash";
 import React from "react";
 
-import _ from "lodash";
 
 import { IconGrid } from "../components/IconGrid.js";
 import { TM } from "../components/index.js";

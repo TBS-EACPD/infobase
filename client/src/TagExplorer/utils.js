@@ -1,6 +1,7 @@
+import _ from "lodash";
+
 import { year_templates } from "src/models/years.js";
 
-import _ from "lodash";
 
 import { create_text_maker_component } from "src/components";
 

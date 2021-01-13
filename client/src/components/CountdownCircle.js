@@ -1,8 +1,8 @@
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { buttonPrimaryColor } from "src/core/color_defs.js";
 
-import _ from "lodash";
 
 import { is_IE } from "../core/feature_detection.js";
 

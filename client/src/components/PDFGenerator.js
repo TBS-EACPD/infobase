@@ -1,10 +1,10 @@
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { textLightColor } from "src/core/color_defs.js";
 import { is_IE } from "src/core/feature_detection.js";
 
 import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "lodash";
 
 import { IconDownload } from "../icons/icons.js";
 import { get_static_url } from "../request_utils.js";

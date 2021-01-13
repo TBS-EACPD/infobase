@@ -1,8 +1,8 @@
+import _ from "lodash";
 import React from "react";
 
 import { textGreen, textRed } from "src/core/color_defs.js";
 
-import _ from "lodash";
 
 import { Format, SmartDisplayTable } from "../../../../components";
 import {

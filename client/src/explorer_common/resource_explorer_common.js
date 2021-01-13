@@ -1,7 +1,7 @@
+import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
-import _ from "lodash";
 
 import { TrivialTM as TM, Format } from "../components/index.js";
 import { Table } from "../core/TableClass.js";
