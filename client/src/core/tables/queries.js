@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { lang } from "src/app_bootstrap/globals.js";
+import { lang } from "src/core/injected_build_constants.js";
 
 import { Subject } from "../../models/subject";
 import * as FORMAT from "../format";

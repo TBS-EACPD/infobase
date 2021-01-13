@@ -4,8 +4,9 @@ import React from "react";
 import { highlightColor, textColor } from "src/core/color_defs.js";
 import { infobase_colors } from "src/core/color_schemes.js";
 
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
-import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
 import { SmartDisplayTable, GraphOverlay } from "src/components";
 import { toggle_list } from "src/general_utils.js";

@@ -1,7 +1,6 @@
 import _ from "lodash";
 
-import { lang } from "src/app_bootstrap/globals.js";
-
+import { lang } from "src/core/injected_build_constants.js";
 
 import { formats } from "../core/format.js";
 

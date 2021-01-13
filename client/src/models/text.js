@@ -3,8 +3,9 @@ import marked from "marked";
 
 import { is_mobile } from "src/core/feature_detection.js";
 
+import { lang } from "src/core/injected_build_constants.js";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
-import { lang, pre_public_accounts } from "src/app_bootstrap/globals.js";
 
 import a11y_lang from "../common_text/a11y_lang.yaml";
 import common_lang from "../common_text/common_lang.yaml";
@@ -17,14 +18,8 @@ import template_globals_file from "../common_text/template_globals.csv";
 
 /* 
   TODO: some parts of this still feel hacky 
-    * table_common requiring this to check for pre_public_accounts
-      * A lot of stuff in lookups.yaml is non-constant over time. 
-      * It may be of interest for other modules to query what period we're in, for instance
-      * Under the current model, they would be forced to awkwardly go here and look into template_globals
-    * Some of this logic should be done at compile time,
-        so that modules can opt to use their own templates in special cases
-  
-  
+    * Some of this logic should be done at compile time, so that modules can opt to use their own templates in special cases
+
   There are two core structures here, 
   one is the default set of text that will get passed to every template. 
   This is a key/val store with strings as values.
@@ -35,7 +30,6 @@ import template_globals_file from "../common_text/template_globals.csv";
   * These are stored as key/val pairs, but the pairs are object, with the string (or compiled template function) stored on the text property
   * They are often defined with en/fr pairs in yaml, but we always map the correct language to the text property
   * this part makes use of the first part to pass the default template arguments 
-
 */
 
 const global_bundles = [
@@ -83,7 +77,6 @@ const full_template_global_records = [
 ];
 
 const app_constants = {
-  pre_public_accounts: pre_public_accounts,
   lang: lang,
   is_mobile: is_mobile(),
 };
@@ -283,10 +276,4 @@ window._DEV_HELPERS.template_store = template_store;
 window._DEV_HELPERS.template_globlals = template_globals;
 window._DEV_HELPERS.create_text_maker = create_text_maker;
 
-export {
-  template_globals, //this is currently only exposed to table_common because it wants the pre_public_accounts variable.
-  run_template,
-  template_store,
-  create_text_maker,
-  trivial_text_maker,
-};
+export { run_template, template_store, create_text_maker, trivial_text_maker };

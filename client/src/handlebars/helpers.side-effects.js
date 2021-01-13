@@ -1,7 +1,7 @@
 /* eslint-disable no-console, no-debugger */
 import _ from "lodash";
 
-import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { infograph_href_template, glossary_href } from "../link_utils.js";
 import { GlossaryEntry } from "../models/glossary.js";

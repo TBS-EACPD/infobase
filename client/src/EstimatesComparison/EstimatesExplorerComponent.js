@@ -13,7 +13,7 @@ import {
   Details,
 } from "src/components/index.js";
 
-import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { Explorer } from "src/explorer_common/explorer_components.js";
 import { get_root } from "src/explorer_common/hierarchy_tools.js";

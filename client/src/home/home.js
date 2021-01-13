@@ -4,7 +4,7 @@ import MediaQuery from "react-responsive";
 
 import { highlightColor } from "src/core/color_defs.js";
 
-import { lang } from "src/app_bootstrap/globals.js";
+import { lang } from "src/core/injected_build_constants.js";
 
 import {
   EverythingSearch,
