@@ -1,9 +1,12 @@
 import _ from "lodash";
 import React from "react";
 
-import { is_a11y_mode, infobase_colors } from "src/app_bootstrap/globals.js";
+import { infobase_colors } from "src/core/color_schemes.js";
 
-import { GraphOverlay } from "../../../../components";
+import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+
+import { GraphOverlay } from "src/components";
+
 import {
   InfographicPanel,
   Subject,
