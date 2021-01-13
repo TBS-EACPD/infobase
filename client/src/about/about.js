@@ -75,8 +75,6 @@ export default class About extends React.Component {
           <TM tmf={text_maker} el="div" k="behind_scenes_sub_text_1" />
           <TM tmf={text_maker} el="h3" k="behind_scenes_sub_title_2" />
           <TM tmf={text_maker} el="div" k="behind_scenes_sub_text_2" />
-          <TM tmf={text_maker} el="h3" k="behind_scenes_sub_title_3" />
-          <TM tmf={text_maker} el="div" k="behind_scenes_sub_text_3" />
           <TM tmf={text_maker} el="h2" k="feedback_title" />
           <TM tmf={text_maker} el="div" k="feedback_text" />
         </div>

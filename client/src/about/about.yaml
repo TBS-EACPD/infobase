@@ -10,8 +10,9 @@ principle_1_name:
   en: Authoritative
   fr: Source fiable, faisant autorité
 
+#TODO
 principle_1_desc:
-  en: Mirroring documents such as the Public Accounts, Estimates, and Departmental Plans in real-time, the data you find here will match what you find in public reports as they are tabled.
+  en: Mirroring documents such as the Public Accounts, Estimates, and Departmental Plans in a timely manner. The data you find here will match what you find in public reports as they are tabled.
   fr: L’information correspond en temps réel aux données des documents déposés au Parlement, tels que les comptes publics, les budgets des dépenses et les plans ministériels.
 
 principle_2_name:
@@ -27,26 +28,25 @@ principle_3_name:
   fr: Information objective, axée sur les données
 
 principle_3_desc:
-  en: The data is allowed to tell its own story, the GC InfoBase does not editorialize in its reporting. Government organizations may submit footnotes for added contextual information, but data receives a consistent presentation within each level of reporting.
-  fr: L’Infobase du GC n’interprète rien et ne donne pas d’opinion. Les données parlent d’elles-mêmes. Les organisations gouvernementales peuvent soumettre des renseignements contextuels au moyen de notes de bas de page, mais les données sont présentées de la même façon à chaque palier redditionnel.
+  en: GC InfoBase does not editorialize; the user is presented with straightforward visualizations of the relevant data in order to guide the user’s interpretation.  Government organizations may submit footnotes for added contextual information for cases requiring more nuanced explanations, but data receives a consistent presentation within each level of reporting.
+  fr: L’Infobase du GC s’en tient aux faits; l'utilisateur a accès à de simples visualisations des données pertinentes pour en faciliter l'interprétation.  Les organisations gouvernementales peuvent ajouter des renseignements contextuels au moyen de notes de bas de page lorsqu’une explication plus nuancée s’impose, mais les données sont présentées de la même façon à chaque niveau redditionnel.
 
 principle_4_name:
   en: User-driven
   fr: Information adaptée aux besoins des utilisateurs
 
 principle_4_desc:
-  en: Employing open sources technologies; the GC InfoBase is always evolving and adapting to meet user needs and offer a better experience.
+  en: Employing open sources technologies; GC InfoBase is always evolving and adapting to meet user needs and offer a better experience.
   fr: Usage de technologies à libre accès; l’InfoBase du GC évolue sans cesse, s’adapte aux besoins des utilisateurs et leur offre une meilleure expérience.
-
-
+#TODO
 about_intro_section:
   transform: [handlebars, markdown]
-  en: The GC InfoBase is an interactive data-visualization tool, transforming complex federal data into simple visual stories for Canadians.
+  en: GC InfoBase is an interactive data-visualization tool, transforming complex federal data into simple visual stories for Canadians.
 
-    Since its creation in 2013, the GC InfoBase has been recognized as the authoritative source of Government expenditure information by the
+    Since its creation in 2013, GC InfoBase has been recognized as the authoritative source of Government expenditure information by the
     {{ext_link "Parliamentary Budget Officer (PBO)" "http://www.pbo-dpb.gc.ca/web/default/files/Documents/Reports/2016/Mains 2016-17/Main Estimates 2016-17_EN.pdf"}} and was identified as a
     public sector innovation by the Organisation for Economic Co-operation and Development (OECD)
-    {{ext_link "Observatory of Public Sector Innovation (OPSI)" "https://www.oecd.org/governance/observatory-public-sector-innovation/innovations/"}}. The tool contains years’ worth of
+    {{ext_link "Observatory of Public Sector Innovation (OPSI)" "https://www.oecd.org/governance/observatory-public-sector-innovation/innovations/"}}. The tool contains five years of the latest
     federal government data, bringing together information previously scattered across over 500 government reports.
   fr: L’InfoBase du GC est un outil interactif de visualisation de données, qui traduit en termes simples l’information complexe du gouvernement fédéral au profit des Canadiens.
 
@@ -62,18 +62,18 @@ our_story_title:
   fr: Notre histoire
 
 our_story_sub_title_1:
-  en: How did the GC InfoBase begin?
+  en: How did GC InfoBase begin?
   fr: Comment l’InfoBase du GC a vu le jour?
-
+#TODO
 our_story_sub_text_1:
   transform: [handlebars, markdown]
   en: |
-    The GC InfoBase was developed in response to {{ext_link "a Parliamentary request" "http://www.ourcommons.ca/DocumentViewer/en/41-1/OGGO/report-7/page-144"}} for better access to 
-    information on government finances. Its ongoing development seeks to meet a public demand for simpler government reporting.
+    GC InfoBase was developed in response to {{ext_link "a Parliamentary request" "http://www.ourcommons.ca/DocumentViewer/en/41-1/OGGO/report-7/page-144"}} for better access to 
+    information on government finances. Its ongoing development seeks to meet a public demand for more simple government reporting.
 
 
-    The GC InfoBase was launched in April 2013 under the name Expenditure Database. As it grew to incorporate new data (such as people management and results data), the name was changed 
-    to reflect the broader content coverage.
+    GC InfoBase was launched in April 2013 under the name Expenditure Database. As it grew to incorporate new data (such as people management and results data), the name was changed 
+    to reflect the expansion in content.
   fr: |
     L’InfoBase du GC a été élaborée à la {{ext_link "demande du Parlement" "http://www.noscommunes.ca/DocumentViewer/fr/41-1/OGGO/rapport-7/page-144"}} d’améliorer l’accès à l’information 
     sur les finances publiques. On cherche aussi à répondre aux souhaits du grand public de simplifier la reddition de compte gouvernementale.
@@ -90,7 +90,7 @@ our_story_sub_title_2:
 
 our_story_sub_text_2:
   en: |
-    We are a small, multi-disciplinary team of policy analysts, economists, data scientists, and developers housed in the Expenditure Management Sector of the Treasury Board of Canada Secretariat. Our mandate is experimenting with innovative solutions for analyzing and presenting complex government data, seeking to make it accessible for everyone. Our efforts have brought us national and international recognition for our data management skills and ability to transform complex concepts into clear and understandable stories. We love data!
+    We are a small, multi-disciplinary team of policy analysts, economists, data scientists, and web developers housed in the Expenditure Management Sector of the Treasury Board of Canada Secretariat. Our mandate is experimenting with innovative solutions for analyzing and presenting complex government data, seeking to make it accessible for everyone. Our efforts have brought us national and international recognition for our data management skills and ability to transform complex concepts into clear and understandable stories. We love data!
   fr: |
     Nous sommes une petite équipe multidisciplinaire du Secteur de la gestion des dépenses, du Secrétariat du Conseil du Trésor du Canada, composée d’analystes des politiques, d’économistes, de scientifiques des données et de développeurs. Notre mandat consiste à mettre à l’essai des solutions novatrices pour l’analyse et la présentation de données complexes sur la gestion gouvernementale afin de les rendre accessibles à tout le monde. Grâce à nos efforts, nos compétences en gestion des données et notre capacité à transformer des concepts complexes en textes clairs et compréhensibles sont réputés à l’échelle nationale et internationale. Bref, nous sommes des passionnés des données!
 
@@ -107,53 +107,63 @@ our_data_sub_text_1:
   en: |
     We rely on several governmental publications (i.e. Public Accounts, Estimates, Departmental Plans and Quarterly Financial Reports). A full listing can be found on our 
     [Datasets page](#metadata).
+
+    GC InfoBase rolls up these various datasets in order to provide the user with a clear picture of government-wide spending, and the effectiveness of the various government initiatives being funded. Users can easily drill down to get a similar picture for each individual department, and even for specific programs.
   fr: |
     Nous comptons sur plusieurs publications gouvernementales (p. ex. les Comptes publics, les budgets des dépenses, les plans ministériels et les rapports financiers trimestriels). 
     Vous trouverez la liste complète dans la [page sur les données](#metadata).
+
+    L'InfoBase du GC regroupe ces différents ensembles de données pour donner à l'utilisateur une image claire des dépenses gouvernementales et de l'efficacité des différentes initiatives financées par le gouvernement. Grâce au menu déroulant, l'utilisateur peut facilement obtenir une image similaire pour chacun des ministères ou même pour un programme précis.
 
 our_data_sub_title_2:
   en: What is our added value?
   fr: Quelle est la valeur ajoutée?
 
 our_data_sub_text_2:
+  transform: [handlebars, markdown]
   en: |
-    We bring data together from over 500 government reports. In doing so, we apply our data management expertise to align data across multiple years, accounting for government 
+    We bring data together from over 500 government reports. In doing so, we apply our data management expertise to align data the most recent five years’ worth of expenditure data, accounting for government 
     organizational changes (such as a name change or the creation of a new spending mechanism), allowing for the discovery and presentation of previously obscure trends. 
 
 
-    We are obsessed with data quality (you can ask our stakeholders!) and we believe it starts at the time of the collection. We put in place mechanisms to drive the quality, 
-    accuracy and reliability of all data in the tool.
+    The GC InfoBase team is obsessed with data quality and we believe it starts before the time of the collection. To this end, we have designed and implemented technology
+    to help capture this critical data from government departments, and we have mechanisms in place to drive the quality, accuracy and reliability of all of our data.
 
 
-    We know a number doesn’t always tell the full story! This is where GC InfoBase helps users by presenting contextual information alongside the data. We work with government 
+    We know a number doesn’t always tell the full story, which is why GC InfoBase helps users by presenting contextual information alongside the data. We work with government 
     organizations to explain interesting data such as a spending spike, a decline, or the status of a particular result.
+
+
+    While the majority of the data in GC Infobase is available to users on the Government of Canada’s {{ext_link "Open Data" "https://open.canada.ca/en/open-data"}} portal, GC InfoBase represents the only attempt to integrate these datasets in an effort to provide a unified reference for parliamentarians, public servants and the Canadian public. To this end, GC InfoBase is constantly evolving with additions of new data sources, visualizations, and explanatory information. If you have data, insights, or ideas, <a href="#contact">contact us</a>!
   fr: |
-    Nous rassemblons des données tirées de plus de 500 rapports gouvernementaux. Notre expertise consiste en un alignement des données sur plusieurs années qui prend en compte 
+    Nous rassemblons des données tirées de plus de 500 rapports gouvernementaux. Notre expertise consiste en un alignement des données des cinq dernières années sur les dépenses prenant en compte 
     les changements organisationnels, tels qu’un changement de nom ou la création d’un nouveau mécanisme de dépenses. Cela permet de découvrir et de faire la présentation de tendances 
     autrefois obscures.
 
 
-    Selon les intervenants, nous sommes obsédés par qualité des données et, à notre avis, cela commence dès la collecte. Nous mettons en place des mécanismes qui favoriseront 
-    la qualité, l’exactitude et la fiabilité de toutes les données comprises dans l’outil.
+    L'équipe de l'InfoBase du GC est obsédée par la qualité des données et, à notre avis, cela commence avant le début de la collecte. À cette fin, nous avons développé une technologie qui permet de saisir
+    les données essentielles des ministères et avons mis en place des mécanismes pour assurer la qualité, l'exactitude et la fiabilité de toutes nos données. 
 
 
-    Les chiffres ne disent pas tout! L’InfoBase du GC s’avère utile aux utilisateurs en présentant de l’information contextuelle avec les données. On s’efforce, de concert avec les 
-    organisations gouvernementales, à expliquer des données intéressantes, telles qu’une hausse ou une baisse des dépenses, ou l’état d’un résultat escompté.
+    Nous savons qu'un chiffre ne dit pas toujours tout, c'est pourquoi l'InfoBase du GC vient en aide aux utilisateurs en leur présentant en complément des renseignements contextuels. 
+    Nous collaborons avec les organisations gouvernementales pour expliquer des données intéressantes telles qu'une hausse ou une baisse des dépenses, ou encore la situation concernant un résultat précis.
+
+    Alors que la majorité des données de l'InfoBase du GC sont accessibles aux utilisateurs sur le Portail de {{ext_link "données ouvertes" "https://ouvert.canada.ca/fr/donnees-ouvertes"}} du gouvernement du Canada, l'InfoBase du GC est la seule tentative d'intégration de ces ensembles de données dans un référentiel unique destiné aux parlementaires, aux fonctionnaires et à la population canadienne. À cette fin, l'InfoBase du GC est évolue constamment avec l'ajout de nouvelles sources de données, de visualisations et d’explications. <a href="#contact">Communiquez avec nous</a> si vous avez des données, des réflexions ou des idées à partager!
 
 behind_scenes_title:
   en: Behind the Scenes
   fr: Derrière la scène
 
 behind_scenes_sub_title_1:
-  en: What technologies are used in the GC InfoBase?
+  en: What technologies are used in GC InfoBase?
   fr: Quelles sont les technologies utilisées dans l’InfoBase du GC?
 
 behind_scenes_sub_text_1:
   transform: [handlebars]
   en: |
-    The GC InfoBase is a single-page web application, built in-house and from scratch. It was developed using open-source libraries and standards (such as React, Bootstrap, webpack, Sass, and GraphQL).
+    GC InfoBase is a single-page web application, built in-house and from scratch. It was developed using open-source libraries and standards (such as React, Bootstrap, webpack, Sass, and GraphQL).
     The team keeps the iteration time between prototypes and production short. Having built it from the ground-up gives us the flexibility to experiment 
-    with new ways of displaying information and allows the GC InfoBase to be constantly evolving, meeting user’s growing needs and expectations.
+    with new ways of displaying information and allows GC InfoBase to be constantly evolving, meeting user’s growing needs and expectations.
   fr: |
     L’InfoBase du GC est une application Web-maison d’une seule page montée de toutes pièces. Elle a été développée à l’aide de normes et de bibliothèques logicielles en libre accès 
     (comme React, Bootstrap, webpack, Sass, et GraphQL). L’équipe maintient un court délai d’itération entre les prototypes et la production. Comme la page est montée de toutes 
@@ -161,28 +171,10 @@ behind_scenes_sub_text_1:
     croissants des utilisateurs.
 
 behind_scenes_sub_title_2:
-  en: Who inspires us?
-  fr: Quelle est notre source d’inspiration?
-
-behind_scenes_sub_text_2:
-  transform: [handlebars, markdown]
-  en: |
-    We draw inspiration from work done across the globe, in both the public and private sectors. Our [Government at a Glance diagram](#partition/dept/exp) was inspired by the excellent 
-    work of the {{ext_link "USAFacts.org" "https://usafacts.org/visualizations/the-big-picture/"}} team. Our minimal page header and footer were inspired by our colleagues at the 
-    {{ext_link "Canadian Digital Service" "https://digital.canada.ca"}}. We are regularly inspired to push our data visualizations even further by the D3 community at large, and through 
-    resources like the {{ext_link "D3 gallery" "https://github.com/d3/d3/wiki/Gallery"}}.
-  fr: |
-    Notre source d’inspiration est le travail effectué à l’échelle mondiale, tant dans le secteur public que privé. Pour le
-    [diagramme Panorama de l'administration publique](#partition/dept/exp), nous sommes inspirés par l’excellent travail accompli par l’équipe 
-    {{ext_link "USAFacts.org" "https://usafacts.org/visualizations/the-big-picture/"}}. L’inspiration pour la taille minimale de l’en-tête et du bas de page nous vient de nos collègues à 
-    {{ext_link "Service numérique canadien" "https://numerique.canada.ca/"}}. Enfin, nous sommes régulièrement inspirés par la grande collectivité D3 qui nous incite à peaufiner encore 
-    davantage les visualisations de données, au moyen de ressources comme la {{ext_link "galerie D3" "https://github.com/d3/d3/wiki/Gallery"}}.
-
-behind_scenes_sub_title_3:
   en: License / Credits
   fr: Licence / Crédits
 
-behind_scenes_sub_text_3:
+behind_scenes_sub_text_2:
   transform: [handlebars, markdown]
   en: |
     You can find the GC InfoBase source code {{ext_link "on GitHub" "https://github.com/TBS-EACPD/infobase"}}.
@@ -220,7 +212,16 @@ feedback_title:
 feedback_text:
   transform: [handlebars, markdown]
   en: |
-    Please visit the <a href="#contact">Contact Us</a> page for more information.
+    We are always looking for ideas and suggestions to help us improve the current version of GC InfoBase. If you would like to share some ideas or comments regarding your experience with the tool,
+    please take a few minutes to complete our online survey. The feedback you provide will be used to improve the current version of GC InfoBase and prioritize new features.
 
+    Better yet, if you are passionate about data, and looking for an exciting challenge, come work with us! We regularly post opportunities with our team on the Treasury Board Secretariat's {{ext_link "website" "https://www.canada.ca/en/treasury-board-secretariat/corporate/job-opportunities.html"}}.
+
+    For feedback or questions on GC InfoBase, please send an email to gcinfobasefeedback-infobasedugcretroaction@tbs-sct.gc.ca.
   fr: |
-    S'il vous plaît visitez la page <a href="#contact">Contactez-Nous</a> pour plus de renseignement.
+    Nous sommes constamment à la recherche d’idées et de suggestions pour améliorer la version actuelle de l’InfoBase. Le cas échéant, veuillez prendre quelques minutes pour remplir notre sondage en ligne.
+    En répondant aux quelques questions qui suivent, vous nous aiderez à améliorer l’InfoBase du GC et à fixer l’ordre de priorité pour les nouvelles caractéristiques.
+
+    Mieux encore, si vous êtes passionné par les données et que vous cherchez un défi stimulant, venez travailler avec nous! Nous publions régulièrement les possibilités d’emploi au sein de notre équipe sur le {{ext_link "site Web" "https://www.canada.ca/fr/secretariat-conseil-tresor/organisation/possibilites-emploi.html"}} du Secrétariat du Conseil du Trésor. 
+
+    Pour toute rétroaction ou question sur l'InfoBase du GC, veuillez envoyer un courriel à gcinfobasefeedback-infobasedugcretroaction@tbs-sct.gc.ca.
