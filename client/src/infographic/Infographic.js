@@ -17,14 +17,14 @@ import { shallowEqualObjectsOverKeys, SafeJSURL } from "../general_utils.js";
 import { Subject } from "../models/subject.js";
 
 import { get_panels_for_subject } from "../panels/get_panels_for_subject/index.js";
-import { PanelRegistry } from "../panels/PanelRegistry.js";
+import { PanelRenderer } from "../panels/PanelRenderer.js";
 
 import { bubble_defs } from "./bubble_definitions.js";
 import { BubbleMenu } from "./BubbleMenu.js";
 
 import { infograph_href_template } from "./infographic_link.js";
 
-import InfographicPanelRenderer from "./InfographicPanelRenderer.js";
+import PanelFilterControl from "./PanelFilterControl.js";
 
 import text from "./Infographic.yaml";
 import "./Infographic.scss";
@@ -80,55 +80,44 @@ class InfoGraph_ extends React.Component {
     this.state = {
       loading: true,
       subject: props.subject,
-      subject_panels_by_bubble_id: {},
       active_bubble_id: props.active_bubble_id,
       level: props.level,
+      subject_panels_by_bubble_id: {},
+      panel_filter: _.identity,
     };
   }
   static getDerivedStateFromProps(nextProps, prevState) {
-    const should_reload_bubble_menu_dependencies = !shallowEqualObjectsOverKeys(
-      nextProps,
-      prevState,
-      ["subject", "active_bubble_id", "level"]
-    );
+    const should_reload = !shallowEqualObjectsOverKeys(nextProps, prevState, [
+      "subject",
+      "active_bubble_id",
+      "level",
+    ]);
 
-    if (should_reload_bubble_menu_dependencies) {
+    if (should_reload) {
       return {
         loading: true,
         subject: nextProps.subject,
-        subject_panels_by_bubble_id: {},
         active_bubble_id: nextProps.active_bubble_id,
         level: nextProps.level,
+        subject_panels_by_bubble_id: {},
       };
     } else {
       return null;
     }
   }
   componentDidMount() {
-    this.loadBubbleMenuDeps(this.props.subject).then(
-      (panel_keys_by_bubble_id) =>
-        this.loadGraphDeps({
-          panel_keys_by_bubble_id,
-          ...this.state,
-          ...this.props,
-        })
-    );
+    this.load({ ...this.state, ...this.props });
   }
   componentDidUpdate(prevProps) {
     const { loading, active_bubble_id, panel_keys } = this.state;
+
     if (loading) {
-      this.loadBubbleMenuDeps(this.props.subject).then(
-        (panel_keys_by_bubble_id) =>
-          this.loadGraphDeps({
-            panel_keys_by_bubble_id,
-            ...this.state,
-            ...this.props,
-          })
-      );
+      this.load({ ...this.state, ...this.props });
     } else if (!_.isNull(active_bubble_id)) {
       if (this.props.subject !== prevProps.subject) {
         reset_scroll();
       }
+
       const options = (() => {
         try {
           return SafeJSURL.parse(this.props.options);
@@ -153,7 +142,6 @@ class InfoGraph_ extends React.Component {
       }
     }
   }
-
   render() {
     const { subject, active_bubble_id } = this.props;
     const {
@@ -162,9 +150,10 @@ class InfoGraph_ extends React.Component {
       panel_keys,
       previous_bubble,
       next_bubble,
-      panel_filter_by_table,
-      total_number_of_panels,
+      panel_filter,
     } = this.state;
+
+    const filtered_panel_keys = panel_filter(panel_keys);
 
     const search_component = (
       <AdvancedSearch
@@ -230,18 +219,28 @@ class InfoGraph_ extends React.Component {
                 : text_maker("a11y_infograph_description")}
             </p>
           )}
-          {!loading && (
-            <InfographicPanelRenderer
-              subject={subject}
-              panel_keys={panel_keys}
-              active_bubble_id={active_bubble_id}
-              total_number_of_panels={total_number_of_panels}
-              panel_filter_by_table={panel_filter_by_table}
-              set_panel_filter_by_table={(panel_filter_by_table) =>
-                this.setState({ panel_filter_by_table })
-              }
-            />
-          )}
+          {!loading &&
+            _.find(subject_bubble_defs, {
+              id: active_bubble_id,
+              enable_panel_filter: true,
+            }) && (
+              <PanelFilterControl
+                subject={subject}
+                panel_keys={panel_keys}
+                set_panel_filter={(panel_filter) =>
+                  this.setState({ panel_filter })
+                }
+              />
+            )}
+          {!loading &&
+            _.map(filtered_panel_keys, (panel_key) => (
+              <PanelRenderer
+                panel_key={panel_key}
+                subject={subject}
+                active_bubble_id={active_bubble_id}
+                key={panel_key + subject.guid}
+              />
+            ))}
         </div>
         {!_.isEmpty(active_bubble_id) && (
           <div className="row medium-panel-text">
@@ -277,49 +276,12 @@ class InfoGraph_ extends React.Component {
       </div>
     );
   }
-  loadBubbleMenuDeps(subject) {
-    return ensure_loaded({
-      subject: subject,
-      has_results: true,
-    }).then(() => get_panels_for_subject(subject));
-  }
-
-  loadGraphDeps({ panel_keys_by_bubble_id, active_bubble_id, subject, level }) {
-    const panel_keys = panel_keys_by_bubble_id[active_bubble_id];
-
-    ensure_loaded({
-      panel_keys,
-      subject_level: level,
-      subject: subject,
-      footnotes_for: subject,
-    }).then(() => {
-      if (
-        shallowEqualObjectsOverKeys(
-          { active_bubble_id, subject, level },
-          this.state,
-          ["subject", "active_bubble_id", "level"]
-        )
-      ) {
-        const valid_panel_objs = _.chain(panel_keys)
-          .map((key) => {
-            const panel_obj = PanelRegistry.lookup(key, level);
-            return panel_obj.is_panel_valid_for_subject(subject) && panel_obj;
-          })
-          .filter()
-          .value();
-        const valid_subject_panels_by_bubble_id = panel_keys
-          ? {
-              ...panel_keys_by_bubble_id,
-              [active_bubble_id]: _.map(valid_panel_objs, "key"),
-            }
-          : panel_keys_by_bubble_id;
-
+  load({ subject, level, active_bubble_id }) {
+    return get_panels_for_subject(subject).then(
+      (subject_panels_by_bubble_id) => {
         const subject_bubble_defs = _.chain(bubble_defs)
           .filter(({ id }) =>
-            _.chain(valid_subject_panels_by_bubble_id)
-              .keys()
-              .includes(id)
-              .value()
+            _.chain(subject_panels_by_bubble_id).keys().includes(id).value()
           )
           .map((bubble_def) =>
             _.mapValues(bubble_def, (bubble_option) =>
@@ -330,29 +292,44 @@ class InfoGraph_ extends React.Component {
           )
           .value();
 
-        const active_index = _.findIndex(subject_bubble_defs, {
-          id: active_bubble_id,
-        });
-        const next_bubble = subject_bubble_defs[active_index + 1];
-        const previous_bubble = subject_bubble_defs[active_index - 1];
-
-        this.setState({
-          panel_keys: valid_subject_panels_by_bubble_id[active_bubble_id],
-          subject_bubble_defs,
-          previous_bubble,
-          next_bubble,
+        const common_new_state = {
           loading: false,
-          subject_panels_by_bubble_id: valid_subject_panels_by_bubble_id,
-          panel_filter_by_table: _.chain(valid_panel_objs)
-            .flatMap("depends_on")
-            .uniq()
-            .map((table_id) => [table_id, false])
-            .fromPairs()
-            .value(),
-          total_number_of_panels: _.reject(valid_panel_objs, "static").length,
-        });
+          subject_panels_by_bubble_id,
+          subject_bubble_defs,
+        };
+
+        if (!_.has(subject_panels_by_bubble_id, active_bubble_id)) {
+          this.setState({
+            ...common_new_state,
+            next_bubble: null,
+            previous_bubble: null,
+            panel_keys: null,
+          });
+        } else {
+          const panel_keys = subject_panels_by_bubble_id[active_bubble_id];
+
+          return ensure_loaded({
+            panel_keys,
+            subject_level: level,
+            subject: subject,
+            footnotes_for: subject,
+          }).then(() => {
+            const active_index = _.findIndex(subject_bubble_defs, {
+              id: active_bubble_id,
+            });
+            const next_bubble = subject_bubble_defs[active_index + 1];
+            const previous_bubble = subject_bubble_defs[active_index - 1];
+
+            this.setState({
+              ...common_new_state,
+              next_bubble,
+              previous_bubble,
+              panel_keys,
+            });
+          });
+        }
       }
-    });
+    );
   }
 }
 

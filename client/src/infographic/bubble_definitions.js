@@ -27,11 +27,13 @@ const base_configs = [
     id: "financial",
     title: text_maker("financial_title"),
     description: text_maker("financial_desc"),
+    enable_panel_filter: true,
   },
   {
     id: "people",
     title: text_maker("people_title"),
     description: text_maker("people_desc"),
+    enable_panel_filter: true,
   },
   {
     id: "results",
