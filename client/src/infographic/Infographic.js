@@ -15,6 +15,7 @@ import { shallowEqualObjectsOverKeys, SafeJSURL } from "../general_utils.js";
 import { Subject } from "../models/subject.js";
 
 import { get_panels_for_subject } from "../panels/get_panels_for_subject/index.js";
+import { PanelRegistry } from "../panels/PanelRegistry.js";
 import { PanelRenderer } from "../panels/PanelRenderer.js";
 
 import { bubble_defs } from "./bubble_definitions.js";
@@ -106,7 +107,7 @@ class InfoGraph_ extends React.Component {
     this.load({ ...this.state, ...this.props });
   }
   componentDidUpdate(prevProps) {
-    const { loading, active_bubble_id, panel_keys } = this.state;
+    const { loading, active_bubble_id, valid_panel_keys } = this.state;
 
     if (loading) {
       this.load({ ...this.state, ...this.props });
@@ -131,7 +132,7 @@ class InfoGraph_ extends React.Component {
       const linked_to_panel =
         options &&
         options.panel_key &&
-        _.includes(panel_keys, options.panel_key) &&
+        _.includes(valid_panel_keys, options.panel_key) &&
         document.querySelector(`#${options.panel_key}`);
       if (linked_to_panel) {
         linked_to_panel.scrollIntoView();
@@ -144,13 +145,13 @@ class InfoGraph_ extends React.Component {
     const {
       loading,
       subject_bubble_defs,
-      panel_keys,
+      valid_panel_keys,
       previous_bubble,
       next_bubble,
       panel_filter,
     } = this.state;
 
-    const filtered_panel_keys = panel_filter(panel_keys);
+    const filtered_panel_keys = panel_filter(valid_panel_keys);
 
     const search_component = (
       <AdvancedSearch
@@ -223,7 +224,7 @@ class InfoGraph_ extends React.Component {
             }) && (
               <PanelFilterControl
                 subject={subject}
-                panel_keys={panel_keys}
+                panel_keys={valid_panel_keys}
                 set_panel_filter={(panel_filter) =>
                   this.setState({ panel_filter })
                 }
@@ -300,13 +301,14 @@ class InfoGraph_ extends React.Component {
             ...common_new_state,
             next_bubble: null,
             previous_bubble: null,
-            panel_keys: null,
+            valid_panel_keys: null,
           });
         } else {
-          const panel_keys = subject_panels_by_bubble_id[active_bubble_id];
+          const potential_panel_keys =
+            subject_panels_by_bubble_id[active_bubble_id];
 
           return ensure_loaded({
-            panel_keys,
+            panel_keys: potential_panel_keys,
             subject_level: level,
             subject: subject,
             footnotes_for: subject,
@@ -317,11 +319,20 @@ class InfoGraph_ extends React.Component {
             const next_bubble = subject_bubble_defs[active_index + 1];
             const previous_bubble = subject_bubble_defs[active_index - 1];
 
+            const valid_panel_keys = _.filter(
+              potential_panel_keys,
+              (panel_key) =>
+                PanelRegistry.lookup(
+                  panel_key,
+                  level
+                ).is_panel_valid_for_subject(subject)
+            );
+
             this.setState({
               ...common_new_state,
               next_bubble,
               previous_bubble,
-              panel_keys,
+              valid_panel_keys,
             });
           });
         }
