@@ -125,4 +125,4 @@ export const LoadingHoc = ({
     options: variables ? { variables } : {},
   })(InnerLoadingHoc({ Component, data_to_props }));
 
-window._DEV_HELPERS.query_api = (query) => client.query({ query });
+window.__DEV.query_api = (query) => client.query({ query });

@@ -229,4 +229,4 @@ const layout_types = { full: "full", half: "half" };
 
 export { PanelRegistry, layout_types, panels_with_key, tables_for_panel };
 
-window._DEV_HELPERS.PanelRegistry = PanelRegistry;
+window.__DEV.PanelRegistry = PanelRegistry;

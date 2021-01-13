@@ -46,9 +46,9 @@ show_orgs_without_data:
 displayed_orgs_count:
   transform: [handlebars, markdown]
   en: |
-    {{gt "inst_form_corp_int_filter"}} shown: **{{rawfmt_big_int org_count}}**
+    {{gt "inst_form_corp_int_filter"}} shown: **{{fmt_big_int_raw org_count}}**
   fr: |
-    {{gt "inst_form_corp_int_filter"}} affichés: **{{rawfmt_big_int org_count}}** 
+    {{gt "inst_form_corp_int_filter"}} affichés: **{{fmt_big_int_raw org_count}}** 
 
 by_pop_group:
   en: By population group

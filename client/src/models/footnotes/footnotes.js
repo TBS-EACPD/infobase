@@ -55,4 +55,4 @@ export default class FootNote extends mix().with(staticStoreMixin) {
   }
 }
 
-window._DEV_HELPERS.footnotes = FootNote;
+window.__DEV.footnotes = FootNote;

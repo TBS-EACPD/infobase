@@ -313,34 +313,20 @@ const list_formatter = (formats, vals) =>
       : formatter(formats, value)
   );
 
-// setup all the Handlebars formatter functions based on the available formats
-const formats = {};
-_.each(_.toPairs(types_to_format), (key_formatter) => {
-  const key = key_formatter[0];
-
-  formats[key] = (val, options) => {
-    if (!_.isObject(options)) {
-      options = {};
-    }
-    return formatter(key, val, options);
-  };
-
-  formats[key + "_raw"] = (val, options) => {
-    if (!_.isObject(options)) {
-      options = {};
-    }
-    options.raw = true;
-    return formatter(key, val, options);
-  };
-
-  Handlebars.registerHelper(
-    "fmt_" + key,
-    (amount) => new Handlebars.SafeString(formats[key](amount))
-  );
-  Handlebars.registerHelper(
-    "rawfmt_" + key,
-    (amount) => new Handlebars.SafeString(formats[key + "_raw"](amount))
-  );
-});
+const formats = _.chain(types_to_format)
+  .keys()
+  .flatMap((formatter_key) => [
+    [
+      formatter_key,
+      (val, options = {}) => formatter(formatter_key, val, options),
+    ],
+    [
+      `${formatter_key}_raw`,
+      (val, options = {}) =>
+        formatter(formatter_key, val, { ...options, raw: true }),
+    ],
+  ])
+  .fromPairs()
+  .value();
 
 export { formatter, list_formatter, formats };

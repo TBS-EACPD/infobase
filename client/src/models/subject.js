@@ -47,6 +47,6 @@ _.each(Subject, (subject_item, key) => {
   }
 });
 
-window._DEV_HELPERS.Subject = Subject;
+window.__DEV.Subject = Subject;
 
 export { Subject };
