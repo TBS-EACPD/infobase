@@ -1,5 +1,7 @@
 import _ from "lodash";
 
+import d3 from "src/app_bootstrap/d3-bundle.js";
+
 import * as color_defs from "./color_defs.js";
 
 const newIBCategoryColors = [
@@ -58,6 +60,9 @@ const sequentialPurples = [
 // this is here instead of in color_defs.js because it's a data-dependent color
 const NA_color = _.last(newIBCategoryColors); // color_defs.tertiaryColor
 
+const infobase_colors = (options) =>
+  d3.scaleOrdinal().range(newIBCategoryColors);
+
 export {
   newIBCategoryColors,
   newIBLightCategoryColors,
@@ -67,4 +72,5 @@ export {
   sequentialGreens,
   sequentialPurples,
   NA_color,
+  infobase_colors,
 };

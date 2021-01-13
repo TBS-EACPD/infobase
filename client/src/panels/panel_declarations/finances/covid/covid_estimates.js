@@ -2,12 +2,9 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { textColor } from "src/core/color_defs.js";
+import { infobase_colors } from "src/core/color_schemes.js";
 
-import {
-  lang,
-  is_a11y_mode,
-  infobase_colors,
-} from "src/app_bootstrap/globals.js";
+import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
 
 import {
   Subject,
