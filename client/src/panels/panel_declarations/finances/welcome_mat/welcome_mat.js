@@ -1060,11 +1060,9 @@ export const declare_welcome_mat_panel = () =>
                 if (estimates_amt) {
                   return {
                     type: "estimates",
-                    calcs: Object.assign(
-                      {},
-                      calcs,
-                      ...{ spend_plan_1: estimates_amt }
-                    ),
+                    calcs: Object.assign({}, calcs, {
+                      spend_plan_1: estimates_amt,
+                    }),
                   };
                 } else {
                   return false;
@@ -1073,15 +1071,11 @@ export const declare_welcome_mat_panel = () =>
 
               if (!subject.dp_status) {
                 //for non-dp orgs, we refer to estimate authorities. Must use orgVoteStatEstimates to get amounts
-                const proper_calcs = Object.assign(
-                  {},
-                  calcs,
-                  ...{
-                    spend_plan_1: orgVoteStatEstimates
-                      .q(subject)
-                      .sum("{{est_in_year}}_estimates"),
-                  }
-                );
+                const proper_calcs = Object.assign({}, calcs, {
+                  spend_plan_1: orgVoteStatEstimates
+                    .q(subject)
+                    .sum("{{est_in_year}}_estimates"),
+                });
                 return {
                   type: "hist_estimates",
                   calcs: proper_calcs,
