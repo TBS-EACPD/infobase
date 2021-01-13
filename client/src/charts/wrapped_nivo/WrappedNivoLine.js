@@ -1,5 +1,6 @@
 import { ResponsiveLine } from "@nivo/line";
 import classNames from "classnames";
+import _ from "lodash";
 import React from "react";
 
 import {
@@ -7,8 +8,6 @@ import {
   secondaryColor,
   backgroundColor,
 } from "src/core/color_defs.js";
-
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { SmartDisplayTable } from "../../components/index.js";
 import { IconZoomIn, IconZoomOut } from "../../icons/icons.js";

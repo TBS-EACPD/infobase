@@ -1,11 +1,11 @@
 import "../components/LabeledBox.scss";
 import classNames from "classnames";
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { AlertBanner, GlossaryIcon } from "../components";
 import { Table } from "../core/TableClass.js";
@@ -111,7 +111,7 @@ class TablePicker extends React.Component {
           .map((concept_id) =>
             _.chain(linkage).filter({ concept_id }).map("table_id").value()
           )
-          .pipe((groups) => _.intersection.apply(null, groups))
+          .thru((groups) => _.intersection.apply(null, groups))
           .map((id) => _.find(tables, { id }))
           .compact()
           .value();

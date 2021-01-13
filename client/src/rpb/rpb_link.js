@@ -1,11 +1,11 @@
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { SafeJSURL } from "../general_utils.js";
 import { Subject } from "../models/subject.js";
 
 const rpb_link = (naive_state, first_character = "#") =>
   _.chain(naive_state)
-    .pipe((obj) => {
+    .thru((obj) => {
       const { table, subject, columns } = obj;
 
       return {
@@ -26,8 +26,8 @@ const rpb_link = (naive_state, first_character = "#") =>
         ) ||
         (key === "broken_url" && value) // need to store broken_url in route state while true so it isn't lost, fine to drop it once it has been cleared (becomes false) to keep the URL clean
     )
-    .pipe((obj) => SafeJSURL.stringify(obj))
-    .pipe(
+    .thru((obj) => SafeJSURL.stringify(obj))
+    .thru(
       (jsurl_representation) => `${first_character}rpb/${jsurl_representation}`
     )
     .value();

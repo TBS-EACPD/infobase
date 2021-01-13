@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { Table } from "../core/TableClass.js";
 import { GlossaryEntry } from "../models/glossary.js";
@@ -267,7 +267,7 @@ const datasets = {
           .compact()
           .map("title")
           .compact()
-          .pipe((titles) => titles.join(" "))
+          .thru((titles) => titles.join(" "))
           .value(),
         table: t,
       }))

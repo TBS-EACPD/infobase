@@ -1,5 +1,5 @@
 import { is_dev } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { Table } from "../core/TableClass.js";
 import FootNote from "../models/footnotes/footnotes.js";

@@ -2,7 +2,7 @@ import classNames from "classnames";
 import React, { Fragment } from "react";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import {
   run_template,
@@ -1060,7 +1060,11 @@ export const declare_welcome_mat_panel = () =>
                 if (estimates_amt) {
                   return {
                     type: "estimates",
-                    calcs: _.immutate(calcs, { spend_plan_1: estimates_amt }),
+                    calcs: Object.assign(
+                      {},
+                      calcs,
+                      ...{ spend_plan_1: estimates_amt }
+                    ),
                   };
                 } else {
                   return false;
@@ -1069,11 +1073,15 @@ export const declare_welcome_mat_panel = () =>
 
               if (!subject.dp_status) {
                 //for non-dp orgs, we refer to estimate authorities. Must use orgVoteStatEstimates to get amounts
-                const proper_calcs = _.immutate(calcs, {
-                  spend_plan_1: orgVoteStatEstimates
-                    .q(subject)
-                    .sum("{{est_in_year}}_estimates"),
-                });
+                const proper_calcs = Object.assign(
+                  {},
+                  calcs,
+                  ...{
+                    spend_plan_1: orgVoteStatEstimates
+                      .q(subject)
+                      .sum("{{est_in_year}}_estimates"),
+                  }
+                );
                 return {
                   type: "hist_estimates",
                   calcs: proper_calcs,

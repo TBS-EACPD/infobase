@@ -2,7 +2,7 @@ import React from "react";
 
 import { is_mobile } from "src/core/feature_detection.js";
 
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { infograph_href_template, rpb_link } from "../../../../link_utils.js";
 import { ResultCounts, current_drr_key } from "../../../../models/results.js";

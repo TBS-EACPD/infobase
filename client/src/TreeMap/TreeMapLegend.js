@@ -1,8 +1,7 @@
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { backgroundColor } from "src/core/color_defs.js";
-
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { formats } from "../core/format.js";
 import { create_text_maker } from "../models/text.js";

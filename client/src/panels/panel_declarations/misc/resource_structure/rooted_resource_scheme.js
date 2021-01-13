@@ -2,7 +2,7 @@ import React from "react";
 import { createSelector } from "reselect";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 import {
@@ -144,7 +144,7 @@ function create_rooted_resource_hierarchy({ year, root_subject }) {
     unfiltered_flat_nodes,
     (node) =>
       _.get(node, "data.subject.level") === "program" &&
-      _.nonEmpty(_.get(node, "data.resources")),
+      !_.isEmpty(_.get(node, "data.resources")),
     { markSearchResults: false, leaves_only: false }
   );
 

@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import { createSelector } from "reselect";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { SpinnerWrapper, DlItem, CheckBox } from "../components/index.js";
 import { Explorer } from "../explorer_common/explorer_components.js";
@@ -50,13 +50,13 @@ const SubjectFields = ({ subject, grouping }) => (
           <DlItem term={<TM k="end_yr" />} def={subject.end_yr} />
         </Fragment>
       )}
-      {_.nonEmpty(subject.ministers) && (
+      {!_.isEmpty(subject.ministers) && (
         <DlItem
           term={<TM k="padded_minister_span" />}
           def={_.map(subject.ministers, "name").join(", ")}
         />
       )}
-      {_.nonEmpty(subject.mandate) && (
+      {!_.isEmpty(subject.mandate) && (
         <DlItem
           term={<TM k="mandate" />}
           def={
@@ -68,7 +68,7 @@ const SubjectFields = ({ subject, grouping }) => (
           }
         />
       )}
-      {_.nonEmpty(subject.notes) && (
+      {!_.isEmpty(subject.notes) && (
         <DlItem term={<TM k="notes" />} def={subject.notes} />
       )}
     </dl>

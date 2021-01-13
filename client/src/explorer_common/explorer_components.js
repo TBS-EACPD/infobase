@@ -1,10 +1,9 @@
 import classNames from "classnames";
+import _ from "lodash";
 import React from "react";
 import FlipMove from "react-flip-move";
 import { TransitionGroup } from "react-transition-group";
 import { createSelector } from "reselect";
-
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import {
   FirstChild,

@@ -5,7 +5,7 @@ import MediaQuery from "react-responsive";
 import { withRouter } from "react-router";
 import "intersection-observer";
 
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { PinnedContent } from "../../../../hoc/PinnedContent";
 import { util_components, breakpoints } from "../../shared.js";

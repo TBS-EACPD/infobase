@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { withRouter } from "react-router";
 
 import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { AlertBanner } from "../components/index.js";
 import { IconHome } from "../icons/icons.js";

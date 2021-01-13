@@ -1,8 +1,7 @@
 import DOMPurify from "dompurify";
 import JSURL from "jsurl";
+import _ from "lodash";
 import marked from "marked";
-
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
 export const sanitized_marked = (markdown) =>
   DOMPurify.sanitize(marked(markdown, { sanitize: false, gfm: true }));
@@ -206,3 +205,9 @@ export function bound(elementDescriptor) {
   ];
   return elementDescriptor;
 }
+
+//this is ideal for a list of id's in a piece of state that are often toggled
+// toggle_list([1,2,3],1) => [2,3]
+// toggle_list([1,2,3],4) => [1,2,3,4]
+export const toggle_list = (arr, el) =>
+  _.includes(arr, el) ? _.without(arr, el) : arr.concat([el]);

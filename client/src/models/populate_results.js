@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 import { lang } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { log_standard_event } from "../core/analytics.js";
 import { get_client } from "../graphql_utils/graphql_utils.js";
@@ -405,7 +405,7 @@ export function api_load_results_bundle(subject, result_docs) {
 
           // can't tell us if subject has no results for any doc, just if it has any for current doc, so only update the _subject_has_results entry if positive
           _subject_has_results[id] =
-            _.nonEmpty(results) || _subject_has_results[id]; // side effect
+            !_.isEmpty(results) || _subject_has_results[id]; // side effect
         }
       );
 

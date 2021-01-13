@@ -1,13 +1,15 @@
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { ModalButton } from "src/components/index.js";
 
+import { businessConstants } from "src/models/businessConstants.js";
 import { Indicator } from "src/models/results.js";
 
 import { lang } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
-import { businessConstants } from "../../../models/businessConstants.js";
+import { toggle_list } from "src/general_utils.js";
+
 import {
   util_components,
   InfographicPanel,
@@ -215,7 +217,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
       return new Date(target_year, target_month);
     } else if (_.isNumber(target_year)) {
       return target_year;
-    } else if (_.nonEmpty(target_year)) {
+    } else if (!_.isEmpty(target_year)) {
       return text_maker(target_year);
     } else {
       return text_maker("unspecified");
@@ -289,7 +291,7 @@ class ResultsTable extends React.Component {
       );
       const toggle_status_status_key = (status_key) =>
         this.setState({
-          status_active_list: _.toggle_list(status_active_list, status_key),
+          status_active_list: toggle_list(status_active_list, status_key),
         });
       const clear_status_filter = () =>
         this.setState({ status_active_list: [] });

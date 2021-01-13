@@ -1,7 +1,7 @@
 //public methods do not mutate their input hierarchies (or nodes)
 //they return hierarchy with consistent children/parent links
 //private methods have no such guarantee
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 function get_root(flat_nodes) {
   return _.find(flat_nodes, ({ parent_id }) => _.isEmpty(parent_id));
@@ -275,7 +275,7 @@ function simplify_hierarchy(flat_nodes, is_simple_parent, bottom_layer_filter) {
 
 function _sort_hierarchy(node, children_transform) {
   const new_children = _.chain(node.children)
-    .pipe(children_transform)
+    .thru(children_transform)
     .map((child) => _sort_hierarchy(child, children_transform))
     .value();
 

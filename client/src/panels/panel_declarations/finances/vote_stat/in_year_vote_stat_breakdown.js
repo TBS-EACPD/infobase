@@ -2,7 +2,7 @@ import React from "react";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import {
   Subject,
@@ -242,7 +242,10 @@ const planned_vote_or_stat_calculate = (vs) =>
     ret.data.push({
       desc: text_maker(`all_other_${vs}_items`),
       others: true,
-      [main_col]: d3.sum(_.tail(all_rows, 10), (d) => d[main_col]),
+      [main_col]: d3.sum(
+        _.takeRight(all_rows, all_rows.length - 10),
+        (d) => d[main_col]
+      ),
     });
     const voted_stat_est_in_year =
       orgVoteStatEstimates.voted_stat(main_col, subject, true)[text] || 0;

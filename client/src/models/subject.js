@@ -1,4 +1,4 @@
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { CovidEstimates } from "./covid/CovidEstimates.js";
 import { CovidInitiatives } from "./covid/CovidInitiatives.js";

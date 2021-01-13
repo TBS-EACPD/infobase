@@ -1,4 +1,4 @@
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { trivial_text_maker } from "../models/text.js";
 
@@ -173,7 +173,7 @@ const Dept = class Dept extends static_subject_store_with_API_data() {
   }
   get is_dead() {
     return (
-      _.nonEmpty(this.end_yr) || this.status !== trivial_text_maker("active")
+      !_.isEmpty(this.end_yr) || this.status !== trivial_text_maker("active")
     );
   }
   /*
@@ -365,7 +365,7 @@ const InstForm = class InstForm extends static_subject_store() {
   static parent_forms() {
     return _.filter(
       this.get_all(),
-      (obj) => obj.parent_form && _.nonEmpty(obj.children_forms)
+      (obj) => obj.parent_form && !_.isEmpty(obj.children_forms)
     );
   }
   static leaf_forms() {

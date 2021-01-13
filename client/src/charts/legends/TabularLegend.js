@@ -1,6 +1,5 @@
+import _ from "lodash";
 import React from "react";
-
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { CheckBox } from "../../components/index.js";
 import "./TabularLegend.scss";

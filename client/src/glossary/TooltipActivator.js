@@ -1,7 +1,6 @@
+import _ from "lodash";
 import React from "react";
 import Tooltip from "tooltip.js";
-
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { get_glossary_item_tooltip_html } from "../models/glossary.js";
 

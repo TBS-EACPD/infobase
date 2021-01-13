@@ -3,7 +3,7 @@ import React from "react";
 import { createSelector } from "reselect";
 
 import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import {
   DlItem,
@@ -66,7 +66,7 @@ const get_non_col_content_func = createSelector(_.property("doc"), (doc) => {
           }
         />
       ),
-      _.nonEmpty(subject.old_name) && (
+      !_.isEmpty(subject.old_name) && (
         <DlItem
           key={3}
           term={<TM k="previously_named" />}
@@ -77,7 +77,7 @@ const get_non_col_content_func = createSelector(_.property("doc"), (doc) => {
 
     return (
       <div>
-        {_.nonEmpty(detail_items) && (
+        {!_.isEmpty(detail_items) && (
           <dl
             className={classNames(
               "dl-horizontal dl-no-bold-dts",

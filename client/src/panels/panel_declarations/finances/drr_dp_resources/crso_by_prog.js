@@ -1,8 +1,10 @@
+import _ from "lodash";
 import React from "react";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";
 import { is_a11y_mode, infobase_colors } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
+
+import { toggle_list } from "src/general_utils.js";
 
 import {
   WrappedNivoBar,
@@ -128,7 +130,7 @@ class PlannedProgramResources extends React.Component {
                     active_programs.length === 1 && active_programs.includes(id)
                   ) &&
                     this.setState({
-                      active_programs: _.toggle_list(active_programs, id),
+                      active_programs: toggle_list(active_programs, id),
                     });
                 }}
               />

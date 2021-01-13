@@ -5,7 +5,7 @@ import { SpinnerWrapper } from "src/components/index.js";
 import { ensure_loaded } from "src/core/lazy_loader.js";
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import {
   hierarchy_scheme_configs,

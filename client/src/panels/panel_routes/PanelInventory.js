@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { createSelector } from "reselect";
 
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { EverythingSearch, SpinnerWrapper } from "../../components/index.js";
 import { ensure_loaded } from "../../core/lazy_loader.js";

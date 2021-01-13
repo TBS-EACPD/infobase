@@ -14,7 +14,7 @@ import {
   routerMiddleware,
   connectRouter,
 } from "connected-react-router";
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 import { default as createHistory } from "history/createHashHistory";
 import React from "react";
 import ReactDOM from "react-dom";

@@ -1,9 +1,11 @@
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { is_a11y_mode, infobase_colors } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
-import { GraphOverlay } from "../../../../components";
+import { GraphOverlay } from "src/components";
+import { toggle_list } from "src/general_utils.js";
+
 import {
   run_template,
   declare_panel,
@@ -91,7 +93,7 @@ class HistTPTypes extends React.Component {
                 !!filtered_series[tp_type_name(id)] &&
                 _.size(filtered_series) === 1
               ) &&
-              this.setState({ active_types: _.toggle_list(active_types, id) })
+              this.setState({ active_types: toggle_list(active_types, id) })
             }
           />
         )}
@@ -315,7 +317,7 @@ class DetailedHistTPItems extends React.Component {
               onClick={(id) =>
                 !(active_indices.length == 1 && active_indices.includes(id)) &&
                 this.setState({
-                  active_indices: _.toggle_list(active_indices, id),
+                  active_indices: toggle_list(active_indices, id),
                 })
               }
               Controls={

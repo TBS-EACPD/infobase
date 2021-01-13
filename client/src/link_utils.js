@@ -1,4 +1,4 @@
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { Table } from "./core/TableClass.js";
 import { infograph_href_template } from "./infographic/infographic_link.js";
