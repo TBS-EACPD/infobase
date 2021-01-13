@@ -1,10 +1,10 @@
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { textColor } from "src/core/color_defs.js";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "lodash";
 
 import { GraphOverlay } from "../../../../components";
 import {

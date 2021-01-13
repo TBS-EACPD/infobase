@@ -1,7 +1,7 @@
+import _ from "lodash";
 import React from "react";
 
 import { cdn_url, is_dev } from "src/app_bootstrap/globals.js";
-import _ from "lodash";
 
 import { log_standard_event } from "../core/analytics.js";
 import { retry_promise } from "../general_utils.js";

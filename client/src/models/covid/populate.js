@@ -1,7 +1,8 @@
 import gql from "graphql-tag";
 
-import { lang } from "src/app_bootstrap/globals.js";
 import _ from "lodash";
+
+import { lang } from "src/app_bootstrap/globals.js";
 
 import { log_standard_event } from "../../core/analytics.js";
 import { get_client } from "../../graphql_utils/graphql_utils.js";

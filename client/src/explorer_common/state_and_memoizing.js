@@ -1,7 +1,7 @@
+import _ from "lodash";
 import { createSelector } from "reselect";
 
 import { is_dev } from "src/app_bootstrap/globals.js";
-import _ from "lodash";
 
 import {
   filter_hierarchy,

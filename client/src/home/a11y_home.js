@@ -1,7 +1,7 @@
+import _ from "lodash";
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-import _ from "lodash";
 
 import {
   create_text_maker_component,

@@ -1,7 +1,7 @@
 import classNames from "classnames";
+import _ from "lodash";
 import React from "react";
 
-import _ from "lodash";
 
 import { Details } from "./Details.js";
 import { FootnoteList } from "./FootnoteList.js";

@@ -1,9 +1,10 @@
 // see [here](../table_definition.html) for description
 // of the table spec
 
+import _ from "lodash";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
 import { lang } from "src/app_bootstrap/globals.js";
-import _ from "lodash";
 
 import * as FORMAT from "../core/format";
 

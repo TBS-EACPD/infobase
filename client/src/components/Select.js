@@ -1,6 +1,6 @@
+import _ from "lodash";
 import React from "react";
 
-import _ from "lodash";
 
 //expects options to be of the form [ { id, display } ]
 const Select = ({

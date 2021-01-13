@@ -1,5 +1,6 @@
-import { lang } from "src/app_bootstrap/globals.js";
 import _ from "lodash";
+
+import { lang } from "src/app_bootstrap/globals.js";
 
 import { businessConstants } from "../businessConstants.js";
 import { Dept } from "../organizational_entities.js";

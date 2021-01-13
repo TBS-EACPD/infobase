@@ -1,8 +1,8 @@
 import classNames from "classnames";
+import _ from "lodash";
 import React from "react";
 import { Modal } from "react-bootstrap";
 
-import _ from "lodash";
 
 import { trivial_text_maker } from "../../models/text.js";
 import "./bootstrap_modal_exstension.scss";

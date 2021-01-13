@@ -1,5 +1,6 @@
-import d3 from "src/app_bootstrap/d3-bundle.js";
 import _ from "lodash";
+
+import d3 from "src/app_bootstrap/d3-bundle.js";
 
 import { Subject } from "../../models/subject.js";
 import * as text_maker from "../../models/text.js";

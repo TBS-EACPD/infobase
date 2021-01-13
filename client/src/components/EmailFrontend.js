@@ -1,8 +1,8 @@
 import classNames from "classnames";
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { is_a11y_mode, lang, sha } from "src/app_bootstrap/globals.js";
-import _ from "lodash";
 
 import { get_client_id, log_standard_event } from "../core/analytics.js";
 

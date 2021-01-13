@@ -1,6 +1,6 @@
+import _ from "lodash";
 import React, { Fragment } from "react";
 
-import _ from "lodash";
 
 import "./Tombstones.scss";
 

@@ -1,6 +1,6 @@
+import _ from "lodash";
 import React from "react";
 
-import _ from "lodash";
 
 import { Spinner, spinner_configs } from "../core/Spinner.js";
 

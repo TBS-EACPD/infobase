@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import _ from "lodash";
 import React from "react";
 import { InView } from "react-intersection-observer";
 import "intersection-observer";
@@ -8,7 +9,6 @@ import { withRouter } from "react-router";
 import { has_local_storage } from "src/core/feature_detection.js";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "lodash";
 
 import { backgroundColor } from "../core/color_defs";
 import { IconPin, IconUnpin } from "../icons/icons.js";

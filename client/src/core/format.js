@@ -1,8 +1,9 @@
 //  for properly formating numbers in multiple formats in both English and French
 //  relates to the column type attribute as of the table class
 //  site.scss also establishes the widths for displaying each of the data types
-import { lang } from "src/app_bootstrap/globals.js";
 import _ from "lodash";
+
+import { lang } from "src/app_bootstrap/globals.js";
 
 const number_formatter = {
   en: _.map(

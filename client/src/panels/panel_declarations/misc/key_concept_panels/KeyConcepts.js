@@ -1,11 +1,10 @@
 import classNames from "classnames";
+import _ from "lodash";
 import React from "react";
 import { ButtonToolbar } from "react-bootstrap";
 import MediaQuery from "react-responsive";
 import { withRouter } from "react-router";
 import "intersection-observer";
-
-import _ from "lodash";
 
 import { PinnedContent } from "../../../../hoc/PinnedContent";
 import { util_components, breakpoints } from "../../shared.js";

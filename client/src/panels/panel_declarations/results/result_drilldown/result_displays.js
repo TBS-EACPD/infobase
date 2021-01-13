@@ -1,7 +1,7 @@
+import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
-import _ from "lodash";
 
 import { infograph_href_template } from "../../../../link_utils.js";
 import { Indicator, result_docs } from "../../../../models/results.js";

@@ -1,6 +1,6 @@
+import _ from "lodash";
 import React, { Fragment } from "react";
 
-import _ from "lodash";
 
 import { Canada } from "../../charts/canada/index.js";
 import { FlatTreeMapViz } from "../../charts/flat_treemap/FlatTreeMapViz.js";

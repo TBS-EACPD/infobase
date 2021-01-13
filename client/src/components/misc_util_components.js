@@ -1,6 +1,6 @@
+import _ from "lodash";
 import React, { Fragment } from "react";
 
-import _ from "lodash";
 
 import { formats } from "../core/format.js";
 import { text_abbrev } from "../general_utils.js";

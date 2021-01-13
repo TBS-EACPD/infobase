@@ -1,8 +1,8 @@
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { lang } from "src/app_bootstrap/globals.js";
 
-import _ from "lodash";
 
 import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "../../../models/footnotes/dynamic_footnotes.js";
 import dynamic_footnote_text from "../../../models/footnotes/dynamic_footnotes.yaml";

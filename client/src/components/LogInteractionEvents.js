@@ -1,6 +1,6 @@
+import _ from "lodash";
 import React from "react";
 
-import _ from "lodash";
 
 import { log_standard_event } from "../core/analytics.js";
 

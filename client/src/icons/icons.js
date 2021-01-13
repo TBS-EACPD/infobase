@@ -1,9 +1,9 @@
 import classNames from "classnames";
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { textColor, tertiaryColor } from "src/core/color_defs.js";
 
-import _ from "lodash";
 
 import "./icons.scss";
 

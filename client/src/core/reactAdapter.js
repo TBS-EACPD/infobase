@@ -1,6 +1,6 @@
+import _ from "lodash";
 import ReactDOM from "react-dom";
 
-import _ from "lodash";
 
 class ReactContentRenderer {
   constructor() {

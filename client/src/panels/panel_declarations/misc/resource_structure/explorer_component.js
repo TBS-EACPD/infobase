@@ -1,8 +1,8 @@
 import "src/explorer_common/explorer-styles.scss";
 
+import _ from "lodash";
 import React, { Fragment } from "react";
 
-import _ from "lodash";
 
 import { Explorer } from "src/explorer_common/explorer_components.js";
 import { get_root } from "src/explorer_common/hierarchy_tools.js";

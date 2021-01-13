@@ -1,6 +1,6 @@
+import _ from "lodash";
 import React, { Fragment } from "react";
 
-import _ from "lodash";
 
 import { Details } from "./Details.js";
 import "../common_css/grid-system.scss";

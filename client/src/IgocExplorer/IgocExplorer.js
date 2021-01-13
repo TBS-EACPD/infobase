@@ -1,7 +1,7 @@
+import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
-import _ from "lodash";
 
 import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 

@@ -1,9 +1,9 @@
 import classNames from "classnames";
+import _ from "lodash";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "lodash";
 
 import {
   Panel,
