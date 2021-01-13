@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import d3 from "src/app_bootstrap/d3-bundle.js";
+import d3 from "src/core/d3-bundle.js";
 
 import { AutoAccordion } from "../../components/index.js";
 

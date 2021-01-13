@@ -2,7 +2,7 @@
 // of the table spec
 import _ from "lodash";
 
-import d3 from "src/app_bootstrap/d3-bundle.js";
+import d3 from "src/core/d3-bundle.js";
 
 import { trivial_text_maker } from "../models/text.js";
 

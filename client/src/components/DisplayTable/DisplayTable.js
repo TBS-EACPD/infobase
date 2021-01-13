@@ -2,7 +2,7 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import d3 from "src/app_bootstrap/d3-bundle.js";
+import d3 from "src/core/d3-bundle.js";
 
 import { LegendList } from "src/charts/legends/LegendList.js";
 import { toggle_list } from "src/general_utils.js";

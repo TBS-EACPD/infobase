@@ -2,9 +2,8 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
+import d3 from "src/core/d3-bundle.js";
 import { is_mobile } from "src/core/feature_detection.js";
-
-import d3 from "src/app_bootstrap/d3-bundle.js";
 
 import { create_text_maker } from "../models/text.js";
 

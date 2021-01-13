@@ -1,9 +1,9 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import d3 from "src/core/d3-bundle.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import d3 from "src/app_bootstrap/d3-bundle.js";
 
 import { Canada } from "../../../../charts/canada/index.js";
 import {

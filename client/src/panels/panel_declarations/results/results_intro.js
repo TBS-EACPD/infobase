@@ -1,9 +1,9 @@
 import _ from "lodash";
 import React from "react";
 
+import d3 from "src/core/d3-bundle.js";
 import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import d3 from "src/app_bootstrap/d3-bundle.js";
 
 import { get_static_url } from "../../../request_utils.js";
 import {

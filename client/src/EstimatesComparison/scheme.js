@@ -6,9 +6,9 @@ import FootNote from "src/models/footnotes/footnotes.js";
 import { GlossaryEntry } from "src/models/glossary.js";
 import { Subject } from "src/models/subject.js";
 
+import d3 from "src/core/d3-bundle.js";
 import { Table } from "src/core/TableClass.js";
 
-import d3 from "src/app_bootstrap/d3-bundle.js";
 
 import { Format } from "src/components/";
 

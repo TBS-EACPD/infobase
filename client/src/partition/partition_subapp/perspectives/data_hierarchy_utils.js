@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import d3 from "src/app_bootstrap/d3-bundle.js";
+import d3 from "src/core/d3-bundle.js";
 
 import { Table } from "../../../core/TableClass.js";
 import { GlossaryEntry } from "../../../models/glossary";
