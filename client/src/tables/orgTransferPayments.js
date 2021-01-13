@@ -1,6 +1,6 @@
 // see [here](../table_definition.html) for description
 // of the table spec
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import {
   trivial_text_maker,

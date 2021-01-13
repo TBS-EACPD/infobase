@@ -1,5 +1,6 @@
+import _ from "lodash";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
 export class PartitionDataWrapper {
   constructor(hierarchy, alternate_data_wrapper_node_rules) {
@@ -81,7 +82,10 @@ export class PartitionDataWrapper {
         to_be_compressed = [];
       } else {
         to_be_shown = _.take(node.children, node.how_many_to_show);
-        to_be_compressed = _.tail(node.children, node.how_many_to_show);
+        to_be_compressed = _.takeRight(
+          node.children,
+          node.children.length - node.how_many_to_show
+        );
       }
     }
     if (to_be_compressed.length > 0) {

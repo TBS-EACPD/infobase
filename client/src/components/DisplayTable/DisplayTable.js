@@ -1,10 +1,12 @@
 import classNames from "classnames";
+import _ from "lodash";
 import React from "react";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
-import { LegendList } from "../../charts/legends/LegendList.js";
+import { LegendList } from "src/charts/legends/LegendList.js";
+import { toggle_list } from "src/general_utils.js";
+
 import { DebouncedTextInput } from "../DebouncedTextInput.js";
 import {
   create_text_maker_component,
@@ -164,7 +166,7 @@ export class DisplayTable extends React.Component {
       .thru((unsorted_array) => {
         if (_.has(col_configs_with_defaults, sort_by)) {
           return col_configs_with_defaults[sort_by].sort_func
-            ? _.sortWith(unsorted_array, (a, b) =>
+            ? _.map(unsorted_array).sort((a, b) =>
                 col_configs_with_defaults[sort_by].sort_func(
                   a[sort_by],
                   b[sort_by]
@@ -246,7 +248,7 @@ export class DisplayTable extends React.Component {
               onClick={(clicked_key) => {
                 col_configs_with_defaults[clicked_key].visibility_toggleable &&
                   this.setState({
-                    visible_col_keys: _.toggle_list(
+                    visible_col_keys: toggle_list(
                       visible_col_keys,
                       clicked_key
                     ),

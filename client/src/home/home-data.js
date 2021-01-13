@@ -1,4 +1,4 @@
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 const featured_content_items = _.compact([
   {

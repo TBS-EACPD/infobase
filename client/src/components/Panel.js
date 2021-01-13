@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { Details } from "./Details.js";
 import { FootnoteList } from "./FootnoteList.js";
@@ -109,17 +109,17 @@ export class Panel extends React.Component {
           <div className="panel-body">
             {children}
             <div className="mrgn-tp-md" />
-            {_.nonEmpty(sources) && (
+            {!_.isEmpty(sources) && (
               <div>
                 <PanelSource links={sources} />
               </div>
             )}
-            {_.nonEmpty(glossary_keys) && (
+            {!_.isEmpty(glossary_keys) && (
               <div className="mrgn-tp-md">
                 <PanelGlossary keys={glossary_keys} />
               </div>
             )}
-            {_.nonEmpty(footnotes) && (
+            {!_.isEmpty(footnotes) && (
               <div className="mrgn-tp-md">
                 <Details
                   summary_content={<TM k="footnotes" />}

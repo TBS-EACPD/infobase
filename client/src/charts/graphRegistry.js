@@ -3,8 +3,9 @@
 // Initializes old graph classes with a common set of D3 dispatchers and some properties such as their available width and height, then
 // stores all currently rendered graphs in a registry so that a single onResize event can be used to trigger all of their re-renders
 // (updating their available width and height properties first)
+import _ from "lodash";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
 class GraphRegistry {
   constructor() {

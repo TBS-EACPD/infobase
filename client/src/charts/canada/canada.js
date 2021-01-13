@@ -1,10 +1,9 @@
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import ReactDOM from "react-dom";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";
-
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { GraphOverlay } from "../../components";
 import { secondaryColor, tertiaryColor } from "../../core/color_defs.js";

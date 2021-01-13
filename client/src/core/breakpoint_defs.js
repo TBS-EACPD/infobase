@@ -1,4 +1,4 @@
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 // Media breakpoint constants for use in the infobase. Should be kept in sync with _common-variables.scss
 // These are global variables throughout the infobase. Modify with caution and keep in sync with ../common_css/_common-variables.scss!

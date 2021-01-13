@@ -1,6 +1,6 @@
 import { year_templates } from "src/models/years.js";
 
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { create_text_maker_component } from "src/components";
 

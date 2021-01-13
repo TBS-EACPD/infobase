@@ -1,15 +1,19 @@
 import classNames from "classnames";
 
+import _ from "lodash";
 import React from "react";
+
+import { create_text_maker } from "src/models/text.js";
+
+import { newIBCategoryColors } from "src/core/color_schemes.js";
+
+import { formats } from "src/core/format.js";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
 
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import { toggle_list } from "src/general_utils.js";
 
-import { newIBCategoryColors } from "../../core/color_schemes.js";
-import { formats } from "../../core/format.js";
-import { create_text_maker } from "../../models/text.js";
 import { StandardLegend } from "../legends";
 
 import { WrappedNivoBar } from "././wrapped_nivo_bar.js";
@@ -200,7 +204,7 @@ export class NivoLineBarToggle extends React.Component {
               onClick={(label) => {
                 !(selected.length === 1 && selected.includes(label)) &&
                   this.setState({
-                    selected: _.toggle_list(selected, label),
+                    selected: toggle_list(selected, label),
                   });
               }}
               Controls={

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import "./LabeledTable.scss";
 

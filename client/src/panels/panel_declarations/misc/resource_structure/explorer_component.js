@@ -2,7 +2,7 @@ import "src/explorer_common/explorer-styles.scss";
 
 import React, { Fragment } from "react";
 
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { Explorer } from "src/explorer_common/explorer_components.js";
 import { get_root } from "src/explorer_common/hierarchy_tools.js";

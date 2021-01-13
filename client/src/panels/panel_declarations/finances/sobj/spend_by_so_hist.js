@@ -1,10 +1,12 @@
+import _ from "lodash";
 import React from "react";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
-import { GraphOverlay } from "../../../../components";
+import { GraphOverlay } from "src/components";
+import { toggle_list } from "src/general_utils.js";
+
 import {
   businessConstants,
   year_templates,
@@ -161,7 +163,7 @@ class SobjLine extends React.Component {
                 spending_data.map((o) => o.id).includes(id)
               ) &&
                 this.setState({
-                  active_sobjs: _.toggle_list(active_sobjs, id),
+                  active_sobjs: toggle_list(active_sobjs, id),
                 });
             }}
             Controls={

@@ -1,7 +1,7 @@
 import React from "react";
 import { createSelector } from "reselect";
 
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { TrivialTM as TM, Format } from "../components/index.js";
 import { Table } from "../core/TableClass.js";

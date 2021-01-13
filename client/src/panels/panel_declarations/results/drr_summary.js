@@ -1,10 +1,13 @@
 import classNames from "classnames";
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
-import { IconArray } from "../../../charts/IconArray.js";
+import { IconArray } from "src/charts/IconArray.js";
+
+import { toggle_list } from "src/general_utils.js";
+
 import {
   StandardLegend,
   InfographicPanel,
@@ -269,7 +272,7 @@ class PercentageViz extends React.Component {
                 onClick={(id) => {
                   !(selected.length === 1 && selected.includes(id)) &&
                     this.setState({
-                      selected: _.toggle_list(selected, id),
+                      selected: toggle_list(selected, id),
                     });
                 }}
               />

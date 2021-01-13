@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 import { connect, Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
@@ -5,7 +6,6 @@ import redux_promise_middleware from "redux-promise-middleware";
 import { createSelector } from "reselect";
 
 import { is_dev } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { cached_property, bound } from "src/general_utils.js";
 
@@ -340,7 +340,7 @@ export class AbstractExplorerScheme {
       [get_fully_filtered_hierarchy, get_sort_func],
       (filtered_hierarchy, sort_func) => {
         return _.chain(filtered_hierarchy)
-          .pipe((h7y) => sort_hierarchy(h7y, sort_func))
+          .thru((h7y) => sort_hierarchy(h7y, sort_func))
           .sortBy(negative_search_relevance_func) //search results always take precedence
           .value();
       }

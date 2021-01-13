@@ -1,4 +1,4 @@
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { trivial_text_maker } from "../models/text.js";
 
@@ -64,7 +64,7 @@ const Tag = class Tag extends extensible_subject_store() {
         return trivial_text_maker("goco");
       }
     } else {
-      if (_.nonEmpty(this.programs) && _.isEmpty(this.children_tags)) {
+      if (!_.isEmpty(this.programs) && _.isEmpty(this.children_tags)) {
         return trivial_text_maker("tag");
       } else {
         return trivial_text_maker("tag_category");
@@ -79,7 +79,7 @@ const Tag = class Tag extends extensible_subject_store() {
         return trivial_text_maker("gocos");
       }
     } else {
-      if (_.nonEmpty(this.programs) && _.isEmpty(this.children_tags)) {
+      if (!_.isEmpty(this.programs) && _.isEmpty(this.children_tags)) {
         return trivial_text_maker("tag") + "(s)";
       } else {
         return trivial_text_maker("tag_categories");
@@ -90,7 +90,7 @@ const Tag = class Tag extends extensible_subject_store() {
     return this.programs.length;
   }
   get is_lowest_level_tag() {
-    return _.nonEmpty(this.programs);
+    return !_.isEmpty(this.programs);
   }
   get has_planned_spending() {
     return (

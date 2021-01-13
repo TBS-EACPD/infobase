@@ -1,12 +1,13 @@
+import _ from "lodash";
 import { createSelector } from "reselect";
 
 import { ensure_loaded } from "src/core/lazy_loader.js";
 
-import _ from "src/app_bootstrap/lodash_mixins.js";
-
 import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 import { filter_hierarchy } from "src/explorer_common/hierarchy_tools.js";
-import { cached_property, bound } from "src/general_utils.js";
+
+import { toggle_list, cached_property, bound } from "src/general_utils.js";
+
 import { Indicator } from "src/models/results";
 import { Subject } from "src/models/subject";
 
@@ -36,7 +37,7 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
       case "status_click":
         return {
           ...state,
-          status_key_whitelist: _.toggle_list(
+          status_key_whitelist: toggle_list(
             state.status_key_whitelist,
             payload
           ),
@@ -145,7 +146,7 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
       status_key_whitelist,
       subject: get_subject(state),
       icon_counts: get_icon_counts(state),
-      is_status_filter_enabled: _.nonEmpty(status_key_whitelist),
+      is_status_filter_enabled: !_.isEmpty(status_key_whitelist),
     };
   }
 

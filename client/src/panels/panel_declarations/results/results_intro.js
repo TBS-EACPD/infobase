@@ -2,7 +2,7 @@ import React from "react";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";
 import { lang, is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { get_static_url } from "../../../request_utils.js";
 import {

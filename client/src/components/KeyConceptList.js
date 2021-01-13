@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { Details } from "./Details.js";
 import "../common_css/grid-system.scss";

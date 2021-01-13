@@ -1,7 +1,7 @@
+import _ from "lodash";
 import React from "react";
 
 import { lang } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
 //circular dependency hack..
 import { Table } from "../core/TableClass.js";

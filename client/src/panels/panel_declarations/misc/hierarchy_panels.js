@@ -1,6 +1,6 @@
 import React from "react";
 
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import {
   util_components,
@@ -33,7 +33,7 @@ export const declare_portfolio_structure_intro_panel = () =>
       footnotes: false,
 
       calculate(subject) {
-        return _.nonEmpty(subject.ministry);
+        return !_.isEmpty(subject.ministry);
       },
 
       render({ calculations }) {

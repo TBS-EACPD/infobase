@@ -1,6 +1,6 @@
 import React from "react";
 
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import {
   TextPanel,
@@ -200,7 +200,7 @@ export const declare_description_panel = () =>
     levels: ["tag"],
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
-      calculate: (subject) => _.nonEmpty(subject.description),
+      calculate: (subject) => !_.isEmpty(subject.description),
       render({ calculations }) {
         const { subject } = calculations;
 

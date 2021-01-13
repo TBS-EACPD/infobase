@@ -1,6 +1,6 @@
 import { lang } from "src/app_bootstrap/globals.js";
 
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { formats } from "../core/format.js";
 
@@ -190,7 +190,7 @@ class Indicator {
       return `${months[target_month].text} ${target_year}`;
     } else if (_.isNumber(target_year)) {
       return target_year;
-    } else if (_.nonEmpty(target_year)) {
+    } else if (!_.isEmpty(target_year)) {
       return trivial_text_maker(target_year);
     } else {
       return trivial_text_maker("unspecified");

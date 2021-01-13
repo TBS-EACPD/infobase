@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 //data and state stuff
@@ -7,7 +8,6 @@ import AriaModal from "react-aria-modal";
 import { withRouter } from "react-router";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { SpinnerWrapper, LabeledBox } from "../components/index.js";
 import { log_standard_event } from "../core/analytics.js";
@@ -77,8 +77,8 @@ const url_state_selector = (str) => {
     } else {
       try {
         return _.chain(str)
-          .pipe((str) => SafeJSURL.parse(str))
-          .pipe((naive) => naive_to_real_state(naive))
+          .thru((str) => SafeJSURL.parse(str))
+          .thru((naive) => naive_to_real_state(naive))
           .value();
       } catch (e) {
         log_standard_event({

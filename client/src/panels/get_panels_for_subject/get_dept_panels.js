@@ -1,4 +1,4 @@
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { ensure_loaded } from "../../core/lazy_loader.js";
 import {
@@ -103,9 +103,9 @@ export const get_dept_panels = (subject) =>
       declare_results_table_panel(),
       declare_explore_results_panel(),
     ],
-    related: _.nonEmpty(subject.programs) && [
+    related: !_.isEmpty(subject.programs) && [
       declare_portfolio_structure_related_panel(),
       declare_tags_of_interest_panel(),
     ],
-    all_data: _.nonEmpty(subject.tables) && [declare_links_to_rpb_panel()],
+    all_data: !_.isEmpty(subject.tables) && [declare_links_to_rpb_panel()],
   }));

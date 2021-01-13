@@ -1,4 +1,5 @@
 import { ResponsiveBubble } from "@nivo/circle-packing";
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import MediaQuery from "react-responsive";
@@ -6,8 +7,6 @@ import MediaQuery from "react-responsive";
 import { textColor } from "src/core/color_defs.js";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";
-
-import _ from "src/app_bootstrap/lodash_mixins.js";
 
 import { SmartDisplayTable } from "../../components/index.js";
 import { breakpoints } from "../../core/breakpoint_defs.js";

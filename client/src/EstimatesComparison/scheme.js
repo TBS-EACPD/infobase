@@ -8,7 +8,7 @@ import { Subject } from "src/models/subject.js";
 import { Table } from "src/core/TableClass.js";
 
 import d3 from "src/app_bootstrap/d3-bundle.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import { Format } from "src/components/";
 
@@ -130,7 +130,7 @@ const key_for_table_row = (row) => `${row.dept}-${row.votenum}-${row.desc}`;
 
 const get_keys_in_sups = (include_stat) =>
   _.chain(Table.lookup("orgVoteStatEstimates").data)
-    .pipe(
+    .thru(
       include_stat
         ? _.identity
         : (rows) => _.reject(rows, { votestattype: 999 })
@@ -160,12 +160,12 @@ function get_data_by_org(include_stat) {
   const keys_in_sups = get_keys_in_sups(include_stat);
 
   const data = _.chain(Table.lookup("orgVoteStatEstimates").data)
-    .pipe(
+    .thru(
       include_stat
         ? _.identity
         : (rows) => _.reject(rows, { votestattype: 999 })
     )
-    .pipe(reduce_by_current_doc_dim)
+    .thru(reduce_by_current_doc_dim)
     .groupBy("dept")
     .toPairs()
     .map(([org_id, rows]) => {
@@ -258,7 +258,7 @@ const strip_stat_marker = (str) =>
   str.indexOf("(S) ") > -1 ? str.split("(S) ")[1] : str;
 const get_category_children = (rows) =>
   _.chain(rows)
-    .pipe(reduce_by_current_doc_dim)
+    .thru(reduce_by_current_doc_dim)
     .map((new_row) => {
       const { votenum, desc, dept } = new_row;
       const current_value = new_row.current_value || 0;

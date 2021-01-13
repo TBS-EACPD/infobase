@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 
 import { is_a11y_mode } from "src/app_bootstrap/globals.js";
-import _ from "src/app_bootstrap/lodash_mixins.js";
+import _ from "lodash";
 
 import {
   IconCheck,
@@ -370,7 +370,7 @@ const StatusIconTable = ({
 
 const InlineStatusIconList = ({ indicators }) => {
   return _.chain(indicators)
-    .filter((ind) => _.nonEmpty(ind.status_key))
+    .filter((ind) => !_.isEmpty(ind.status_key))
     .groupBy("status_key")
     .map((group, status_key) => ({ status_key, count: group.length }))
     .sortBy(({ status_key }) => _.indexOf(ordered_status_keys, status_key))
@@ -404,7 +404,7 @@ function indicators_period_span_str(indicators) {
     .uniq()
     .reject((num) => !_.isNumber(num)) //filter out 'other', 'ongoing' and blanks
     .sortBy() //sort by year (no arg needed)
-    .pipe((nums) => {
+    .thru((nums) => {
       if (nums.length > 1) {
         return `${_.first(nums)} - ${_.last(nums)}`;
       } else if (nums.length === 1) {
