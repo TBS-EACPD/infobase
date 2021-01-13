@@ -2,7 +2,7 @@ import React from "react";
 
 import { backgroundColor, primaryColor } from "src/core/color_defs.js";
 
-import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { IconQuestion } from "../icons/icons.js";
 import { glossary_href } from "../link_utils.js";

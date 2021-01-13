@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { lang } from "src/app_bootstrap/globals.js";
+import { lang } from "src/core/injected_build_constants.js";
 
 //circular dependency hack..
 import { Table } from "../core/TableClass.js";

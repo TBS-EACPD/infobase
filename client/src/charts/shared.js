@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { NA_color } from "../core/color_schemes.js";
 import { formats } from "../core/format.js";

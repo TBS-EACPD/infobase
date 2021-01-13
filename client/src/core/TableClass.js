@@ -1,7 +1,8 @@
 import _ from "lodash";
 
+import { lang } from "src/core/injected_build_constants.js";
+
 import d3 from "src/app_bootstrap/d3-bundle.js";
-import { lang } from "src/app_bootstrap/globals.js";
 
 import { make_unique_func, make_unique } from "../general_utils.js";
 import { sources as all_sources } from "../metadata/data_sources.js";

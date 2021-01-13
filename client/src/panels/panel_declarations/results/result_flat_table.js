@@ -6,7 +6,7 @@ import { ModalButton } from "src/components/index.js";
 import { businessConstants } from "src/models/businessConstants.js";
 import { Indicator } from "src/models/results.js";
 
-import { lang } from "src/app_bootstrap/globals.js";
+import { lang } from "src/core/injected_build_constants.js";
 
 import { toggle_list } from "src/general_utils.js";
 

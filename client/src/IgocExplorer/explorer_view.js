@@ -3,7 +3,7 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import { createSelector } from "reselect";
 
-import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { SpinnerWrapper, DlItem, CheckBox } from "../components/index.js";
 import { Explorer } from "../explorer_common/explorer_components.js";

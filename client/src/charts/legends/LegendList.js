@@ -2,7 +2,7 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { CheckBox } from "../../components/CheckBox.js";
 

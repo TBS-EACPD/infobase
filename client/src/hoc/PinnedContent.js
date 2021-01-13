@@ -8,7 +8,7 @@ import { withRouter } from "react-router";
 
 import { has_local_storage } from "src/core/feature_detection.js";
 
-import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { backgroundColor } from "../core/color_defs";
 import { IconPin, IconUnpin } from "../icons/icons.js";

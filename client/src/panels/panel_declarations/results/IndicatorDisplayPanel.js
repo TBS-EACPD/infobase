@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 import _ from "lodash";
 import React from "react";
 
-import { lang } from "src/app_bootstrap/globals.js";
+import { lang } from "src/core/injected_build_constants.js";
 
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 

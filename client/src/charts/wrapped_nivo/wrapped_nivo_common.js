@@ -4,21 +4,22 @@ import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
 import {
+  create_text_maker_component,
+  StatelessModal,
+} from "src/components/index.js";
+
+import { breakpoints } from "src/core/breakpoint_defs.js";
+import {
   secondaryColor,
   backgroundColor,
   textColor,
 } from "src/core/color_defs.js";
 import { is_IE } from "src/core/feature_detection.js";
+import { formats } from "src/core/format.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { is_a11y_mode } from "src/app_bootstrap/globals.js";
+import { IconTable } from "src/icons/icons.js";
 
-import {
-  create_text_maker_component,
-  StatelessModal,
-} from "../../components/index.js";
-import { breakpoints } from "../../core/breakpoint_defs.js";
-import { formats } from "../../core/format.js";
-import { IconTable } from "../../icons/icons.js";
 import { get_formatter, infobase_colors_smart } from "../shared.js";
 
 import graph_text from "./wrapped_nivo_common.yaml";

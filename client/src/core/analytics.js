@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { sha } from "src/app_bootstrap/globals.js";
+import { sha } from "src/core/injected_build_constants.js";
 let initialized = false;
 
 //tool to create totally random IDs
