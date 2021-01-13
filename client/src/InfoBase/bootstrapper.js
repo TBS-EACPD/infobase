@@ -2,12 +2,10 @@
 import "dom4";
 import "whatwg-fetch";
 
-import "./inject_app_globals.side-effects.js";
-
-// Extend Handlebars global with additional helpers
-import "../handlebars/helpers.side-effects.js";
-
 import "../common_css/common_css_index.side-effects.js";
+
+import "./inject_app_globals.side-effects.js";
+import "../handlebars/initialize_handlebars.side-effects.js";
 
 import {
   ConnectedRouter,
@@ -70,6 +68,8 @@ const load_fonts = () =>
   });
 
 function bootstrapper(App, app_reducer, done) {
+  window.__DEV._ = _;
+
   load_fonts();
 
   populate_stores().then(() => {

@@ -206,6 +206,6 @@ const businessConstants = {
   NA_values,
 };
 
-window._DEV_HELPERS.businessConstants = businessConstants;
+window.__DEV.businessConstants = businessConstants;
 
 export { businessConstants };

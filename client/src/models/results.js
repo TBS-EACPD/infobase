@@ -434,7 +434,7 @@ export {
   current_dp_key,
 };
 
-Object.assign(window._DEV_HELPERS, {
+Object.assign(window.__DEV, {
   Result,
   Indicator,
   PI_DR_Links,

@@ -217,6 +217,6 @@ function ensure_loaded({
   ]);
 }
 
-window._DEV_HELPERS.ensure_loaded = ensure_loaded;
+window.__DEV.ensure_loaded = ensure_loaded;
 
 export { ensure_loaded };

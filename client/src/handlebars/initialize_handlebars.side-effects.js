@@ -1,6 +1,6 @@
-/* eslint-disable no-console, no-debugger */
 import _ from "lodash";
 
+import { formats } from "src/core/format.js";
 import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { infograph_href_template, glossary_href } from "../link_utils.js";
@@ -8,6 +8,13 @@ import { GlossaryEntry } from "../models/glossary.js";
 import { Subject } from "../models/subject";
 
 import { trivial_text_maker, run_template } from "../models/text.js";
+
+_.each(formats, (format, key) => {
+  Handlebars.registerHelper(
+    "fmt_" + key,
+    (amount) => new Handlebars.SafeString(format(amount))
+  );
+});
 
 const change_map = {
   past: {
@@ -555,6 +562,7 @@ Handlebars.registerHelper("encodeURI", function (context, options) {
 });
 
 Handlebars.registerHelper("debug", function (optionalValue) {
+  // eslint-disable no-console
   console.log("Current Context");
   console.log("====================");
   console.log(this);
@@ -567,7 +575,7 @@ Handlebars.registerHelper("debug", function (optionalValue) {
 });
 
 Handlebars.registerHelper("halt", function () {
-  debugger;
+  debugger; // eslint-disable-line no-debugger
 });
 
 Handlebars.registerHelper("callFunction", function (obj, func, options) {

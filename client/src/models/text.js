@@ -6,7 +6,6 @@ import { is_mobile } from "src/core/feature_detection.js";
 
 import { lang } from "src/core/injected_build_constants.js";
 
-
 import a11y_lang from "../common_text/a11y_lang.yaml";
 import common_lang from "../common_text/common_lang.yaml";
 import estimates_lang from "../common_text/estimates_lang.yaml";
@@ -270,10 +269,10 @@ const create_text_maker = (bundles) => {
 
 const trivial_text_maker = _create_text_maker(combined_global_bundle);
 
-window._DEV_HELPERS.trivial_text_maker = trivial_text_maker;
-window._DEV_HELPERS.run_template = run_template;
-window._DEV_HELPERS.template_store = template_store;
-window._DEV_HELPERS.template_globlals = template_globals;
-window._DEV_HELPERS.create_text_maker = create_text_maker;
+window.__DEV.trivial_text_maker = trivial_text_maker;
+window.__DEV.run_template = run_template;
+window.__DEV.template_store = template_store;
+window.__DEV.template_globlals = template_globals;
+window.__DEV.create_text_maker = create_text_maker;
 
 export { run_template, template_store, create_text_maker, trivial_text_maker };
