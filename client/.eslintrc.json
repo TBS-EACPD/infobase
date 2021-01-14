@@ -23,8 +23,6 @@
   },
   "globals": {
     "window": true,
-
-    "ga": true,
-    "Handlebars": true
+    "ga": true
   }
 }

@@ -1,3 +1,4 @@
+import Handlebars from "handlebars/dist/cjs/handlebars.js";
 import _ from "lodash";
 
 import { formats } from "src/core/format.js";
