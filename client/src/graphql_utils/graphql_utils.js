@@ -10,6 +10,7 @@ import React from "react";
 
 import string_hash from "string-hash";
 
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.js";
 import {
   sha,
   local_ip,
@@ -125,4 +126,6 @@ export const LoadingHoc = ({
     options: variables ? { variables } : {},
   })(InnerLoadingHoc({ Component, data_to_props }));
 
-window.__DEV.query_api = (query) => client.query({ query });
+assign_to_dev_helper_namespace({
+  query_api: (query) => client.query({ query }),
+});

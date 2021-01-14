@@ -1,5 +1,7 @@
 import _ from "lodash";
 
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.js";
+
 import { mix, staticStoreMixin } from "../storeMixins.js";
 
 const footnotes_by_id = {};
@@ -55,4 +57,4 @@ export default class FootNote extends mix().with(staticStoreMixin) {
   }
 }
 
-window.__DEV.footnotes = FootNote;
+assign_to_dev_helper_namespace({ FootNote });

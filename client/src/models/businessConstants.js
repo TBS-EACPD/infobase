@@ -1,5 +1,6 @@
 import _ from "lodash";
 
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.js";
 import { lang } from "src/core/injected_build_constants.js";
 
 import yaml from "./businessConstants.yaml";
@@ -206,6 +207,6 @@ const businessConstants = {
   NA_values,
 };
 
-window.__DEV.businessConstants = businessConstants;
+assign_to_dev_helper_namespace({ businessConstants });
 
 export { businessConstants };

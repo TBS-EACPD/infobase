@@ -2,9 +2,9 @@ import Handlebars from "handlebars/dist/cjs/handlebars.js";
 import _ from "lodash";
 import marked from "marked";
 
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.js";
 import d3 from "src/core/d3-bundle.js";
 import { is_mobile } from "src/core/feature_detection.js";
-
 import { lang } from "src/core/injected_build_constants.js";
 
 import a11y_lang from "../common_text/a11y_lang.yaml";
@@ -269,10 +269,14 @@ const create_text_maker = (bundles) => {
 
 const trivial_text_maker = _create_text_maker(combined_global_bundle);
 
-window.__DEV.trivial_text_maker = trivial_text_maker;
-window.__DEV.run_template = run_template;
-window.__DEV.template_store = template_store;
-window.__DEV.template_globlals = template_globals;
-window.__DEV.create_text_maker = create_text_maker;
+assign_to_dev_helper_namespace({
+  text: {
+    trivial_text_maker,
+    run_template,
+    template_store,
+    template_globals,
+    create_text_maker,
+  },
+});
 
 export { run_template, template_store, create_text_maker, trivial_text_maker };
