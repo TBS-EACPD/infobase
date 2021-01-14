@@ -10,10 +10,9 @@ principle_1_name:
   en: Authoritative
   fr: Source fiable, faisant autorité
 
-#TODO
 principle_1_desc:
   en: Mirroring documents such as the Public Accounts, Estimates, and Departmental Plans in a timely manner. The data you find here will match what you find in public reports as they are tabled.
-  fr: L’information correspond en temps réel aux données des documents déposés au Parlement, tels que les comptes publics, les budgets des dépenses et les plans ministériels.
+  fr: L'InfoBase du GC reflète en temps opportun des documents, tels que les comptes publics, les budgets des dépenses et les plans ministériel. Vous y trouverez des données qui correspondent à celles des rapports publics au fur et à mesure de leur dépôt.
 
 principle_2_name:
   en: Balanced and Comprehensive
@@ -38,7 +37,7 @@ principle_4_name:
 principle_4_desc:
   en: Employing open sources technologies; GC InfoBase is always evolving and adapting to meet user needs and offer a better experience.
   fr: Usage de technologies à libre accès; l’InfoBase du GC évolue sans cesse, s’adapte aux besoins des utilisateurs et leur offre une meilleure expérience.
-#TODO
+
 about_intro_section:
   transform: [handlebars, markdown]
   en: GC InfoBase is an interactive data-visualization tool, transforming complex federal data into simple visual stories for Canadians.
@@ -54,7 +53,7 @@ about_intro_section:
     {{ext_link "directeur parlementaire du budget (DPB)" "http://www.pbo-dpb.gc.ca/web/default/files/Documents/Reports/2016/Mains 2016-17/Main Estimates 2016-17_FR.pdf"}} comme étant
     la source d’information faisant autorité en matière de dépenses gouvernementales et est considérée comme une innovation dans le secteur public par
     {{ext_link "l’Observatoire sur l’innovation dans le secteur public (OISP)" "https://www.oecd.org/governance/observatory-public-sector-innovation/innovations/ "}} de l’Organisation de
-    coopération et de développement économiques (OCDE). L’outil contient plusieurs années de renseignements gouvernementaux, auparavant éparpillés dans plus de 500 rapports à l’échelle de
+    coopération et de développement économiques (OCDE). Cet outil contient cinq années de renseignements gouvernementaux, auparavant éparpillés dans plus de 500 rapports à l’échelle de
     la fonction publique fédérale.
     
 our_story_title:
@@ -64,7 +63,7 @@ our_story_title:
 our_story_sub_title_1:
   en: How did GC InfoBase begin?
   fr: Comment l’InfoBase du GC a vu le jour?
-#TODO
+
 our_story_sub_text_1:
   transform: [handlebars, markdown]
   en: |
@@ -79,8 +78,8 @@ our_story_sub_text_1:
     sur les finances publiques. On cherche aussi à répondre aux souhaits du grand public de simplifier la reddition de compte gouvernementale.
 
 
-    L’InfoBase du GC a été inaugurée en avril 2013 sous le nom de « Base de données des dépenses ». Le nom a changé au cours de sa croissance pour refléter l’intégration de nouvelles données 
-    (p. ex. les données sur les résultats et la gestion des personnes) et l’élargissement du contenu.
+    L’InfoBase du GC a été inaugurée en avril 2013 sous le nom de « Base de données des dépenses ». Au fil de sa croissance, elle a intégré de nouvelles données (telles que celles relatives
+    à la gestion des personnes et aux résultats) et son nom a été modifié pour refléter l'expansion de son contenu.
 
 our_story_sub_title_2:
   en: |
