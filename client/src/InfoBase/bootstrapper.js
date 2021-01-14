@@ -67,8 +67,6 @@ const load_fonts = () =>
   });
 
 function bootstrapper(App, app_reducer, done) {
-  window.__DEV._ = _;
-
   load_fonts();
 
   populate_stores().then(() => {
