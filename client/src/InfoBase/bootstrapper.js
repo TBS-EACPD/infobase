@@ -4,8 +4,7 @@ import "whatwg-fetch";
 
 import "../common_css/common_css_index.side-effects.js";
 
-import "./inject_app_globals.side-effects.js";
-import "../handlebars/initialize_handlebars.side-effects.js";
+import "../handlebars/register_helpers.side-effects.js";
 
 import {
   ConnectedRouter,

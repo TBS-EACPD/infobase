@@ -1,3 +1,4 @@
+import Handlebars from "handlebars/dist/cjs/handlebars.js";
 import _ from "lodash";
 import marked from "marked";
 
@@ -121,7 +122,6 @@ const run_template = function (s, extra_args = {}) {
 //above this point is the first part: default template arguments
 //below is the second part: templates
 
-Handlebars._partials = {};
 const template_store = {};
 
 /*@param text_bundle 
