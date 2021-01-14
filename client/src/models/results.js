@@ -1,8 +1,8 @@
 import _ from "lodash";
 
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.js";
+import { formats } from "src/core/format.js";
 import { lang } from "src/core/injected_build_constants.js";
-
-import { formats } from "../core/format.js";
 
 import { businessConstants } from "./businessConstants.js";
 import { Program, CRSO } from "./organizational_entities.js";
@@ -434,10 +434,12 @@ export {
   current_dp_key,
 };
 
-Object.assign(window.__DEV, {
-  Result,
-  Indicator,
-  PI_DR_Links,
-  ResultCounts,
-  GranularResultCounts,
+assign_to_dev_helper_namespace({
+  results_subjects: {
+    Result,
+    Indicator,
+    PI_DR_Links,
+    ResultCounts,
+    GranularResultCounts,
+  },
 });

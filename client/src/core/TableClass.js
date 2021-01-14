@@ -1,8 +1,5 @@
 import _ from "lodash";
 
-import d3 from "src/core/d3-bundle.js";
-import { lang } from "src/core/injected_build_constants.js";
-
 import { make_unique_func, make_unique } from "../general_utils.js";
 import { sources as all_sources } from "../metadata/data_sources.js";
 import { mix, staticStoreMixin } from "../models/storeMixins.js";
@@ -13,6 +10,10 @@ import {
   create_text_maker,
 } from "../models/text.js";
 import { get_static_url, make_request } from "../request_utils.js";
+
+import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace.js";
+import d3 from "./d3-bundle.js";
+import { lang } from "./injected_build_constants.js";
 
 import {
   attach_dimensions,
@@ -492,4 +493,4 @@ export class Table extends mix().with(staticStoreMixin) {
   }
 }
 
-window.__DEV.Table = Table;
+assign_to_dev_helper_namespace({ Table });

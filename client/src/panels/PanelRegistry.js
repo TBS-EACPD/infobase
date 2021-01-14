@@ -1,8 +1,9 @@
 import _ from "lodash";
 
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.js";
 import { is_dev } from "src/core/injected_build_constants.js";
+import { Table } from "src/core/TableClass.js";
 
-import { Table } from "../core/TableClass.js";
 import FootNote from "../models/footnotes/footnotes.js";
 import { Subject } from "../models/subject.js";
 
@@ -229,4 +230,4 @@ const layout_types = { full: "full", half: "half" };
 
 export { PanelRegistry, layout_types, panels_with_key, tables_for_panel };
 
-window.__DEV.PanelRegistry = PanelRegistry;
+assign_to_dev_helper_namespace({ PanelRegistry });

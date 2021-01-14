@@ -19,6 +19,8 @@ import {
 } from "../models/populate_services.js";
 import { PanelRegistry, tables_for_panel } from "../panels/PanelRegistry.js";
 
+import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace.js";
+
 import { Table } from "./TableClass.js";
 
 // given an array of tables, returns a promise when they are all loaded.
@@ -217,6 +219,6 @@ function ensure_loaded({
   ]);
 }
 
-window.__DEV.ensure_loaded = ensure_loaded;
+assign_to_dev_helper_namespace({ ensure_loaded });
 
 export { ensure_loaded };
