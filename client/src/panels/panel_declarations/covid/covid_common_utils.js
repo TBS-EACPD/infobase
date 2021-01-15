@@ -46,9 +46,24 @@ const get_tabbed_content_props = (tab_content_configs, panel_args) => {
   };
 };
 
+const get_plain_string = (string) =>
+  _.chain(string).deburr().lowerCase().value();
+const string_sort_func = (a, b) => {
+  const plain_a = get_plain_string(a);
+  const plain_b = get_plain_string(b);
+
+  if (plain_a < plain_b) {
+    return -1;
+  } else if (plain_a > plain_b) {
+    return 1;
+  }
+  return 0;
+};
+
 export {
   get_est_doc_name,
   get_est_doc_order,
   est_doc_sort_func,
   get_tabbed_content_props,
+  string_sort_func,
 };
