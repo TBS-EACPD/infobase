@@ -253,7 +253,7 @@ const ByDepartmentTab = ({ panel_args, data }) => {
   );
 };
 
-const ByMeasureTab = ({ data, panel_args }) => {
+const ByMeasureTab = ({ panel_args, data }) => {
   // pre-sort by key, so presentation consistent when sorting by other col
   const pre_sorted_data = _.chain(data)
     .map((row) => ({

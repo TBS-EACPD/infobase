@@ -41,7 +41,10 @@ const client = get_client();
 
 const panel_key = "covid_expenditures_panel";
 
-const SummaryTab = ({ panel_args, data }) => {
+const SummaryTab = ({
+  panel_args,
+  data: { covid_expenditures, covid_funding },
+}) => {
   const { subject } = panel_args;
 
   const additional_text_args = (() => {
@@ -49,7 +52,7 @@ const SummaryTab = ({ panel_args, data }) => {
       return {};
     } else {
       const dept_covid_expenditures_in_year = _.reduce(
-        data,
+        covid_expenditures,
         (memo, { vote, stat }) => memo + vote + stat,
         0
       );
@@ -89,7 +92,10 @@ const common_column_configs = {
   },
 };
 
-const ByDepartmentTab = ({ panel_args, data }) => {
+const ByDepartmentTab = ({
+  panel_args,
+  data: { covid_expenditures, covid_funding },
+}) => {
   // pre-sort by key, so presentation consistent when sorting by other col
   const column_configs = {
     org_id: {
@@ -119,7 +125,7 @@ const ByDepartmentTab = ({ panel_args, data }) => {
     ...common_column_configs,
   };
 
-  const [largest_dept_id, largest_dept_auth] = _.chain(data)
+  const [largest_dept_id, largest_dept_exp] = _.chain(covid_expenditures)
     .groupBy("org_id")
     .mapValues((data) =>
       _.reduce(data, (memo, { vote, stat }) => memo + vote + stat, 0)
@@ -135,12 +141,14 @@ const ByDepartmentTab = ({ panel_args, data }) => {
         k={"covid_expenditures_department_tab_text"}
         args={{
           largest_dept_name: Dept.lookup(largest_dept_id).name,
-          largest_dept_auth,
+          largest_dept_exp,
         }}
         className="medium-panel-text"
       />
       <SmartDisplayTable
-        data={_.map(data, (row) => _.pick(row, _.keys(column_configs)))}
+        data={_.map(covid_expenditures, (row) =>
+          _.pick(row, _.keys(column_configs))
+        )}
         column_configs={column_configs}
         table_name={text_maker("by_department_tab_label")}
       />
@@ -148,9 +156,12 @@ const ByDepartmentTab = ({ panel_args, data }) => {
   );
 };
 
-const ByMeasureTab = ({ data, panel_args }) => {
+const ByMeasureTab = ({
+  panel_args,
+  data: { covid_expenditures, covid_funding },
+}) => {
   // pre-sort by key, so presentation consistent when sorting by other col
-  const data_with_measure_names = _.chain(data)
+  const data_with_measure_names = _.chain(covid_expenditures)
     .map((row) => ({
       ...row,
       measure_name: CovidMeasure.lookup(row.measure_id).name,
@@ -167,7 +178,7 @@ const ByMeasureTab = ({ data, panel_args }) => {
     ...common_column_configs,
   };
 
-  const [largest_measure_name, largest_measure_auth] = _.chain(
+  const [largest_measure_name, largest_measure_exp] = _.chain(
     data_with_measure_names
   )
     .groupBy("measure_name")
@@ -185,7 +196,7 @@ const ByMeasureTab = ({ data, panel_args }) => {
         k={"covid_expenditures_measure_tab_text"}
         args={{
           largest_measure_name,
-          largest_measure_auth,
+          largest_measure_exp,
         }}
         className="medium-panel-text"
       />
@@ -218,7 +229,7 @@ const tab_content_configs = [
               _query_name: "org_covid_summary_query",
             },
             response_accessor: (response) =>
-              _.get(response, "data.root.org.covid_summary.covid_expenditures"),
+              _.get(response, "data.root.org.covid_summary"),
           };
         } else {
           return {
@@ -228,7 +239,7 @@ const tab_content_configs = [
               _query_name: "gov_covid_summary_query",
             },
             response_accessor: (response) =>
-              _.get(response, "data.root.gov.covid_summary.covid_expenditures"),
+              _.get(response, "data.root.gov.covid_summary"),
           };
         }
       })();
@@ -242,8 +253,18 @@ const tab_content_configs = [
     levels: ["gov"],
     label: text_maker("by_department_tab_label"),
     load_data: ({ subject }) =>
-      ensure_loaded({ covid_expenditures: true, subject }).then(() =>
-        CovidMeasure.get_all_data_by_org("expenditures")
+      ensure_loaded({
+        covid_expenditures: true,
+        covid_funding: true,
+        subject,
+      }).then(() =>
+        _.chain(["expenditures", "funding"])
+          .map((data_type) => [
+            `covid_${data_type}`,
+            CovidMeasure.get_all_data_by_org(data_type),
+          ])
+          .fromPairs()
+          .value()
       ),
     TabContent: ByDepartmentTab,
   },
@@ -252,10 +273,20 @@ const tab_content_configs = [
     levels: ["gov", "dept"],
     label: text_maker("by_measure_tab_label"),
     load_data: ({ subject }) =>
-      ensure_loaded({ covid_expenditures: true, subject }).then(() =>
-        subject.level === "gov"
-          ? CovidMeasure.gov_data_by_measure("expenditures")
-          : CovidMeasure.org_lookup_data_by_measure("expenditures", subject.id)
+      ensure_loaded({
+        covid_expenditures: true,
+        covid_funding: true,
+        subject,
+      }).then(() =>
+        _.chain(["expenditures", "funding"])
+          .map((data_type) => [
+            `covid_${data_type}`,
+            subject.level === "gov"
+              ? CovidMeasure.gov_data_by_measure(data_type)
+              : CovidMeasure.org_lookup_data_by_measure(data_type, subject.id),
+          ])
+          .fromPairs()
+          .value()
       ),
     TabContent: ByMeasureTab,
   },
@@ -282,7 +313,7 @@ class CovidExpendituresPanel extends React.Component {
           data: {
             root: {
               gov: {
-                covid_summary: { covid_expenditures },
+                covid_summary: { covid_expenditures, covid_funding },
               },
             },
           },
@@ -293,13 +324,18 @@ class CovidExpendituresPanel extends React.Component {
               (memo, { vote, stat }) => memo + vote + stat,
               0
             ),
+            gov_covid_funding_in_year: covid_funding.funding,
             loading: false,
           });
         }
       );
   }
   render() {
-    const { loading, gov_covid_expenditures_in_year } = this.state;
+    const {
+      loading,
+      gov_covid_expenditures_in_year,
+      gov_covid_funding_in_year,
+    } = this.state;
     const { panel_args } = this.props;
 
     if (loading) {
@@ -308,6 +344,7 @@ class CovidExpendituresPanel extends React.Component {
       const extended_panel_args = {
         ...panel_args,
         gov_covid_expenditures_in_year,
+        gov_covid_funding_in_year,
       };
       const tabbed_content_props = get_tabbed_content_props(
         tab_content_configs,
@@ -341,7 +378,7 @@ export const declare_covid_expenditures_panel = () =>
       source: (subject) => [],
       calculate: (subject, options) =>
         level_name === "dept"
-          ? subject.has_data("covid_response")?.has_expenditures
+          ? subject.has_data("covid_response")?.has_expenditures // TODO ugh, does this need to be || has_funding? Does this panel have to handle all three cases of either or and both?
           : true,
       render: ({ calculations, footnotes, sources }) => {
         const { panel_args, subject } = calculations;
