@@ -80,5 +80,5 @@ budgetary_expenditures:
 
 actual_spending_footnote:
   transform: [handlebars]
-  en: 'Here, "actual spending" refers to {{gl_tt "budgetary expenditure" "BUD_EXP"}}. values'
+  en: 'Here, "actual spending" refers to {{gl_tt "budgetary expenditure" "BUD_EXP"}} values'
   fr: TODO
