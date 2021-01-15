@@ -80,15 +80,22 @@ const SummaryTab = ({
 };
 
 const common_column_configs = {
-  stat: {
+  funding: {
     index: 1,
+    header: text_maker("covid_funding"),
+    is_searchable: false,
+    is_summable: true,
+    formatter: "compact2",
+  },
+  stat: {
+    index: 2,
     header: text_maker("covid_expenditures_stat"),
     is_searchable: false,
     is_summable: true,
     formatter: "compact2",
   },
   vote: {
-    index: 2,
+    index: 3,
     header: text_maker("covid_expenditures_voted"),
     is_searchable: false,
     is_summable: true,
@@ -96,11 +103,31 @@ const common_column_configs = {
   },
 };
 
+const zip_expenditures_and_funding_rows = (index_key, exp_rows, funding_rows) =>
+  _.chain([...exp_rows, ...funding_rows])
+    .map(index_key)
+    .uniq()
+    .map((index_value) => {
+      const index = { [index_key]: index_value };
+
+      const { vote, stat } = _.find(exp_rows, index) || { vote: 0, stat: 0 };
+
+      const { funding } = _.find(funding_rows, index) || { funding: 0 };
+
+      return { ...index, vote, stat, funding };
+    })
+    .value();
+
 const ByDepartmentTab = ({
   panel_args,
   data: { covid_expenditures, covid_funding },
 }) => {
-  // pre-sort by key, so presentation consistent when sorting by other col
+  const rows = zip_expenditures_and_funding_rows(
+    "org_id",
+    covid_expenditures,
+    covid_funding
+  );
+
   const column_configs = {
     org_id: {
       index: 0,
@@ -151,9 +178,7 @@ const ByDepartmentTab = ({
         className="medium-panel-text"
       />
       <SmartDisplayTable
-        data={_.map(covid_expenditures, (row) =>
-          _.pick(row, _.keys(column_configs))
-        )}
+        data={rows}
         column_configs={column_configs}
         table_name={text_maker("by_department_tab_label")}
       />
@@ -165,11 +190,16 @@ const ByMeasureTab = ({
   panel_args,
   data: { covid_expenditures, covid_funding },
 }) => {
-  // pre-sort by key, so presentation consistent when sorting by other col
-  const data_with_measure_names = _.chain(covid_expenditures)
-    .map((row) => ({
+  const rows_with_measure_names = _.chain(
+    zip_expenditures_and_funding_rows(
+      "measure_id",
+      covid_expenditures,
+      covid_funding
+    )
+  )
+    .map(({ measure_id, ...row }) => ({
       ...row,
-      measure_name: CovidMeasure.lookup(row.measure_id).name,
+      measure_name: CovidMeasure.lookup(measure_id).name,
     }))
     .value();
 
@@ -184,7 +214,7 @@ const ByMeasureTab = ({
   };
 
   const [largest_measure_name, largest_measure_exp] = _.chain(
-    data_with_measure_names
+    rows_with_measure_names
   )
     .groupBy("measure_name")
     .map((rows, measure_name) => [
@@ -207,9 +237,7 @@ const ByMeasureTab = ({
         className="medium-panel-text"
       />
       <SmartDisplayTable
-        data={_.map(data_with_measure_names, (row) =>
-          _.pick(row, _.keys(column_configs))
-        )}
+        data={rows_with_measure_names}
         column_configs={column_configs}
         table_name={text_maker("by_measure_tab_label")}
       />
