@@ -21,6 +21,11 @@ const commitments_fields = `
   fiscal_year: String
   commitment: Float
 `;
+const funding_fields = `
+  id: String
+  fiscal_year: String
+  funding: Float
+`;
 
 const schema = `
   extend type Root{
@@ -47,12 +52,14 @@ const schema = `
     covid_estimates: [CovidEstimates]
     covid_expenditures: [CovidExpenditures]
     covid_commitments: [CovidCommitments]
+    covid_funding: [CovidFunding]
   }
 
   type HasCovidData{
     has_estimates: Boolean
     has_expenditures: Boolean
     has_commitments: Boolean
+    has_funding: Boolean
   }
 
   type CovidEstimates{
@@ -73,6 +80,12 @@ const schema = `
 
     ${commitments_fields}
   }
+  type CovidFunding{
+    org_id: Int
+    org: Org
+
+    ${funding_fields}
+  }
 
   type CovidSummary{
     id: String
@@ -80,6 +93,7 @@ const schema = `
     covid_estimates: [CovidEstimatesSummary]
     covid_expenditures: [CovidExpendituresSummary]
     covid_commitments: [CovidCommitmentsSummary]
+    covid_funding: [CovidFundingSummary]
   }
   type CovidEstimatesSummary{
     ${estimates_fields}
@@ -89,6 +103,9 @@ const schema = `
   }
   type CovidCommitmentsSummary{
     ${commitments_fields}
+  }
+  type CovidFundingSummary{
+    ${funding_fields}
   }
 `;
 
@@ -125,6 +142,7 @@ export default function ({ models, loaders }) {
                 "covid_estimates",
                 "covid_expenditures",
                 "covid_commitments",
+                "covid_funding",
               ])
               .mapValues((rows) =>
                 _.filter(
@@ -152,6 +170,9 @@ export default function ({ models, loaders }) {
       org: ({ org_id }) => org_id_loader.load(org_id),
     },
     CovidCommitments: {
+      org: ({ org_id }) => org_id_loader.load(org_id),
+    },
+    CovidFunding: {
       org: ({ org_id }) => org_id_loader.load(org_id),
     },
   };

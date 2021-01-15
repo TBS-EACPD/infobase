@@ -22,11 +22,16 @@ export default async function ({ models }) {
     get_standard_csv_file_rows("covid_commitments.csv"),
     (row) => ({ ...row, commitment: +row.commitment })
   );
+  const covid_funding_rows = _.map(
+    get_standard_csv_file_rows("covid_funding.csv"),
+    (row) => ({ ...row, funding: +row.funding })
+  );
 
   const all_rows = [
     ...covid_estimates_rows,
     ...covid_expenditures_rows,
     ...covid_commitments_rows,
+    ...covid_funding_rows,
   ];
 
   const covid_measure_records = _.map(
@@ -44,6 +49,10 @@ export default async function ({ models }) {
         ),
         covid_commitments: _.filter(
           covid_commitments_rows,
+          ({ covid_measure_id }) => covid_measure_id === row.covid_measure_id
+        ),
+        covid_funding: _.filter(
+          covid_funding_rows,
           ({ covid_measure_id }) => covid_measure_id === row.covid_measure_id
         ),
       })
@@ -108,6 +117,18 @@ export default async function ({ models }) {
           ),
         }))
         .value(),
+      covid_funding: _.chain(covid_funding_rows)
+        .filter(({ org_id: row_org_id }) => row_org_id === org_id)
+        .groupBy("fiscal_year")
+        .map((year_rows, fiscal_year) => ({
+          fiscal_year,
+          funding: _.reduce(
+            year_rows,
+            (memo, { funding }) => memo + funding,
+            0
+          ),
+        }))
+        .value(),
     }))
     .thru((org_summary_rows) => [
       ...org_summary_rows,
@@ -167,6 +188,18 @@ export default async function ({ models }) {
             ),
           }))
           .value(),
+        covid_funding: _.chain(org_summary_rows)
+          .flatMap("covid_funding")
+          .groupBy("fiscal_year")
+          .map((year_rows, fiscal_year) => ({
+            fiscal_year,
+            funding: _.reduce(
+              year_rows,
+              (memo, { funding }) => memo + funding,
+              0
+            ),
+          }))
+          .value(),
       },
     ])
     .value();
@@ -182,6 +215,7 @@ export default async function ({ models }) {
             estimates: covid_estimates_rows,
             expenditures: covid_expenditures_rows,
             commitments: covid_commitments_rows,
+            funding: covid_funding_rows,
           })
             .map((rows, data_type) => [
               `has_${data_type}`,

@@ -160,10 +160,58 @@ Object {
               "vote": 0,
             },
           ],
+          "covid_funding": Array [
+            Object {
+              "fiscal_year": "2020",
+              "funding": 1,
+              "org": Object {
+                "id": "133",
+                "name": "National Defence",
+              },
+              "org_id": 133,
+            },
+            Object {
+              "fiscal_year": "2020",
+              "funding": 4,
+              "org": Object {
+                "id": "133",
+                "name": "National Defence",
+              },
+              "org_id": 133,
+            },
+            Object {
+              "fiscal_year": "2020",
+              "funding": 10,
+              "org": Object {
+                "id": "326",
+                "name": "Treasury Board of Canada Secretariat",
+              },
+              "org_id": 326,
+            },
+            Object {
+              "fiscal_year": "2020",
+              "funding": 4,
+              "org": Object {
+                "id": "552",
+                "name": "Polar Knowledge Canada",
+              },
+              "org_id": 552,
+            },
+            Object {
+              "fiscal_year": "2020",
+              "funding": 6,
+              "org": Object {
+                "id": "552",
+                "name": "Polar Knowledge Canada",
+              },
+              "org_id": 552,
+            },
+          ],
           "has_covid_data": Object {
             "has_commitments": true,
             "has_estimates": true,
             "has_expenditures": true,
+            "has_funding": true,
           },
           "id": "COV001",
           "in_estimates": true,
@@ -299,10 +347,40 @@ Object {
               "vote": 7,
             },
           ],
+          "covid_funding": Array [
+            Object {
+              "fiscal_year": "2020",
+              "funding": 8,
+              "org": Object {
+                "id": "133",
+                "name": "National Defence",
+              },
+              "org_id": 133,
+            },
+            Object {
+              "fiscal_year": "2020",
+              "funding": 12,
+              "org": Object {
+                "id": "552",
+                "name": "Polar Knowledge Canada",
+              },
+              "org_id": 552,
+            },
+            Object {
+              "fiscal_year": "2021",
+              "funding": 16,
+              "org": Object {
+                "id": "552",
+                "name": "Polar Knowledge Canada",
+              },
+              "org_id": 552,
+            },
+          ],
           "has_covid_data": Object {
             "has_commitments": true,
             "has_estimates": true,
             "has_expenditures": true,
+            "has_funding": true,
           },
           "id": "COV002",
           "in_estimates": false,
@@ -388,10 +466,31 @@ Object {
               "vote": 5,
             },
           ],
+          "covid_funding": Array [
+            Object {
+              "fiscal_year": "2020",
+              "funding": 3,
+              "org": Object {
+                "id": "133",
+                "name": "National Defence",
+              },
+              "org_id": 133,
+            },
+            Object {
+              "fiscal_year": "2020",
+              "funding": 99,
+              "org": Object {
+                "id": "326",
+                "name": "Treasury Board of Canada Secretariat",
+              },
+              "org_id": 326,
+            },
+          ],
           "has_covid_data": Object {
             "has_commitments": true,
             "has_estimates": true,
             "has_expenditures": true,
+            "has_funding": true,
           },
           "id": "COV003",
           "in_estimates": true,
@@ -477,6 +576,16 @@ Object {
               "vote": 7,
             },
           ],
+          "covid_funding": Array [
+            Object {
+              "fiscal_year": "2020",
+              "funding": 147,
+            },
+            Object {
+              "fiscal_year": "2021",
+              "funding": 16,
+            },
+          ],
         },
       },
     },
@@ -534,6 +643,12 @@ Object {
               "is_budgetary": true,
               "stat": 4,
               "vote": 2,
+            },
+          ],
+          "covid_funding": Array [
+            Object {
+              "fiscal_year": "2020",
+              "funding": 16,
             },
           ],
         },
@@ -622,10 +737,31 @@ Object {
                 "vote": 2,
               },
             ],
+            "covid_funding": Array [
+              Object {
+                "fiscal_year": "2020",
+                "funding": 1,
+                "org": Object {
+                  "id": "133",
+                  "name": "National Defence",
+                },
+                "org_id": 133,
+              },
+              Object {
+                "fiscal_year": "2020",
+                "funding": 4,
+                "org": Object {
+                  "id": "133",
+                  "name": "National Defence",
+                },
+                "org_id": 133,
+              },
+            ],
             "has_covid_data": Object {
               "has_commitments": true,
               "has_estimates": true,
               "has_expenditures": true,
+              "has_funding": true,
             },
             "id": "COV001",
             "in_estimates": true,
@@ -669,10 +805,22 @@ Object {
                 "vote": 3,
               },
             ],
+            "covid_funding": Array [
+              Object {
+                "fiscal_year": "2020",
+                "funding": 8,
+                "org": Object {
+                  "id": "133",
+                  "name": "National Defence",
+                },
+                "org_id": 133,
+              },
+            ],
             "has_covid_data": Object {
               "has_commitments": true,
               "has_estimates": true,
               "has_expenditures": true,
+              "has_funding": true,
             },
             "id": "COV002",
             "in_estimates": false,
@@ -727,10 +875,22 @@ Object {
                 "vote": 0,
               },
             ],
+            "covid_funding": Array [
+              Object {
+                "fiscal_year": "2020",
+                "funding": 3,
+                "org": Object {
+                  "id": "133",
+                  "name": "National Defence",
+                },
+                "org_id": 133,
+              },
+            ],
             "has_covid_data": Object {
               "has_commitments": true,
               "has_estimates": true,
               "has_expenditures": true,
+              "has_funding": true,
             },
             "id": "COV003",
             "in_estimates": true,
@@ -755,6 +915,7 @@ Object {
           "has_commitments": true,
           "has_estimates": true,
           "has_expenditures": true,
+          "has_funding": true,
         },
       },
       "only_has_estimates": null,
@@ -772,6 +933,7 @@ Object {
           "has_commitments": true,
           "has_estimates": true,
           "has_expenditures": true,
+          "has_funding": true,
         },
         "id": "COV001",
         "in_estimates": true,
