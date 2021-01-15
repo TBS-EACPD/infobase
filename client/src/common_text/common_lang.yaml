@@ -8,6 +8,9 @@ new:
 filter_data:
   en: Filter Data
   fr: Filtrer les données
+survey:
+  en: Open the survey
+  fr: Ouvrir le sondage
 notapplicable:
   en: Not Applicable
   fr: Sans objet

@@ -28,6 +28,8 @@ const tech_icon_list = _.chain([
 
 export default class About extends React.Component {
   render() {
+    const { toggleSurvey } = this.props;
+
     return (
       <StandardRouteContainer
         title={text_maker("about_title")}
@@ -76,7 +78,15 @@ export default class About extends React.Component {
           <TM tmf={text_maker} el="h3" k="behind_scenes_sub_title_2" />
           <TM tmf={text_maker} el="div" k="behind_scenes_sub_text_2" />
           <TM tmf={text_maker} el="h2" k="feedback_title" />
-          <TM tmf={text_maker} el="div" k="feedback_text" />
+          <TM tmf={text_maker} el="div" k="feedback_text_1" />
+          <button
+            style={{ marginBottom: "10px" }}
+            onClick={() => toggleSurvey()}
+            className="btn btn-ib-primary"
+          >
+            {text_maker("survey")}
+          </button>
+          <TM tmf={text_maker} el="div" k="feedback_text_2" />
         </div>
       </StandardRouteContainer>
     );
