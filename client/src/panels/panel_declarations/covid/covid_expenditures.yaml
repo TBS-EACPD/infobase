@@ -1,18 +1,6 @@
 covid_expenditures_panel_title:
   en: Expenditures by COVID-19 Measure
   fr: TODO
-budgetary:
-  en: Budgetary
-  fr: TODO
-non_budgetary:
-  en: Non-budgetary
-  fr: TODO
-covid_expenditures_stat:
-  en: Statutory COVID-19 expenditures
-  fr: TODO
-covid_expenditures_voted:
-  en: Voted COVID-19 expenditures
-  fr: TODO  
 
 covid_estimates_above_tab_footnote_list:
   transform: [handlebars,markdown]
@@ -52,3 +40,13 @@ covid_expenditures_measure_tab_text:
     As of **{{last_refreshed_date}}**, the COVID-19 measure with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_measure_name}}** with **{{fmt_compact1_written largest_measure_exp}}**.
   fr: |
     TODO
+
+covid_expenditures_stat:
+  en: Statutory COVID-19 expenditures
+  fr: TODO
+covid_expenditures_voted:
+  en: Voted COVID-19 expenditures
+  fr: TODO
+covid_funding:
+  en: COVID-19 funding
+  fr: TODO
