@@ -40,6 +40,7 @@ const {
 const client = get_client();
 
 const panel_key = "covid_expenditures_panel";
+const last_refreshed_date = "date"; // TODO, would rather not hard code this here, but where else where it live?
 
 const SummaryTab = ({
   panel_args,
@@ -57,7 +58,10 @@ const SummaryTab = ({
         0
       );
 
-      return { dept_covid_expenditures_in_year };
+      return {
+        dept_covid_expenditures_in_year,
+        dept_covid_funding_in_year: _.first(covid_funding).funding,
+      };
     }
   })();
 
@@ -324,7 +328,7 @@ class CovidExpendituresPanel extends React.Component {
               (memo, { vote, stat }) => memo + vote + stat,
               0
             ),
-            gov_covid_funding_in_year: covid_funding.funding,
+            gov_covid_funding_in_year: _.first(covid_funding).funding,
             loading: false,
           });
         }
@@ -343,6 +347,7 @@ class CovidExpendituresPanel extends React.Component {
     } else {
       const extended_panel_args = {
         ...panel_args,
+        last_refreshed_date,
         gov_covid_expenditures_in_year,
         gov_covid_funding_in_year,
       };

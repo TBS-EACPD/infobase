@@ -24,13 +24,17 @@ covid_estimates_above_tab_footnote_list:
 
 covid_expenditures_summary_text_gov:
   transform: [handlebars,markdown]
-  en: As of **date**, the government has spent **{{fmt_compact1_written gov_covid_expenditures_in_year}}** in **{{est_in_year}}** towards implementing its response to the COVID-19 pandemic.
+  en: |
+    As of **{{last_refreshed_date}}**, the government has identified **{{fmt_compact1_written gov_covid_funding_in_year}}** in total funding for use towards implementing its response to the COVID-19 pandemic in **{{est_in_year}}**.
+    Of this total, **{{fmt_compact1_written gov_covid_expenditures_in_year}}** (**{{fmt_percentage1 (divide gov_covid_expenditures_in_year gov_covid_funding_in_year)}}**) has been spent so far.
   fr: TODO
 covid_expenditures_summary_text_dept:
   transform: [handlebars,markdown]
   en: |
-    As of **date**, **{{subject.name}}** has spent **{{fmt_compact1_written dept_covid_expenditures_in_year}}** in **{{est_in_year}}** towards implementing the government's response to the COVID-19 pandemic.
-    This represents **{{fmt_percentage1 (divide dept_covid_expenditures_in_year gov_covid_expenditures_in_year)}}** of the government's total COVID-19 response spending of **{{fmt_compact1_written gov_covid_expenditures_in_year}}**
+    As of **{{last_refreshed_date}}**, **{{subject.name}}** has recieved **{{fmt_compact1_written dept_covid_funding_in_year}}** in total funding for use towards implementing the government's response to the COVID-19 pandemic in **{{est_in_year}}**.
+    Of this total, **{{fmt_compact1_written dept_covid_expenditures_in_year}}** (**{{fmt_percentage1 (divide dept_covid_expenditures_in_year dept_covid_funding_in_year)}}**) has been spent so far.
+
+    **{{subject.name}}'s** funding amount represents **{{fmt_percentage1 (divide dept_covid_funding_in_year gov_covid_funding_in_year)}}** of the government's total COVID-19 response funding, while its spent portion represents **{{fmt_percentage1 (divide dept_covid_expenditures_in_year gov_covid_expenditures_in_year)}}** of the government's total COVID-19 response spending.
   fr: |
     TODO
 
@@ -38,13 +42,13 @@ covid_expenditures_summary_text_dept:
 covid_expenditures_department_tab_text:
   transform: [handlebars,markdown]
   en: |
-    As of **date**, the department with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_dept_name}}** with **{{fmt_compact1_written largest_dept_exp}}**.
+    As of **{{last_refreshed_date}}**, the department with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_dept_name}}** with **{{fmt_compact1_written largest_dept_exp}}**.
   fr: |
     TODO
 
 covid_expenditures_measure_tab_text:
   transform: [handlebars,markdown]
   en: |
-    As of **date**, the COVID-19 measure with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_measure_name}}** with **{{fmt_compact1_written largest_measure_exp}}**.
+    As of **{{last_refreshed_date}}**, the COVID-19 measure with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_measure_name}}** with **{{fmt_compact1_written largest_measure_exp}}**.
   fr: |
     TODO
