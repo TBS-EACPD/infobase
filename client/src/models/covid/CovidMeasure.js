@@ -16,15 +16,21 @@ const flatten_data_rows = (measures, data_type) =>
     }))
   );
 
-const row_group_reducer = (group) =>
-  _.reduce(
-    group,
-    (memo, row) => ({
-      stat: memo.stat + row.stat,
-      vote: memo.vote + row.vote,
-    }),
-    { stat: 0, vote: 0 }
+const summable_data_keys = ["stat", "vote", "funding"];
+const row_group_reducer = (group) => {
+  const keys_to_sum_over = _.chain(group)
+    .first()
+    .keys()
+    .intersection(summable_data_keys)
+    .value();
+
+  return _.reduce(group, (memo, row) =>
+    _.chain(keys_to_sum_over)
+      .map((key) => [key, _.get(memo, key, 0) + _.get(row, key, 0)])
+      .fromPairs()
+      .value()
   );
+};
 const roll_up_data_by_property = (
   data_by_measure,
   roll_up_property,
