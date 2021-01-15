@@ -144,6 +144,7 @@ const ByDepartmentTab = ({
       <TM
         k={"covid_expenditures_department_tab_text"}
         args={{
+          ...panel_args,
           largest_dept_name: Dept.lookup(largest_dept_id).name,
           largest_dept_exp,
         }}
@@ -199,6 +200,7 @@ const ByMeasureTab = ({
       <TM
         k={"covid_expenditures_measure_tab_text"}
         args={{
+          ...panel_args,
           largest_measure_name,
           largest_measure_exp,
         }}
