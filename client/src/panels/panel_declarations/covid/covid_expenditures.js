@@ -1,10 +1,13 @@
 import { Fragment } from "react";
 
-import { get_client } from "../../../graphql_utils/graphql_utils.js";
 import {
   gov_covid_summary_query,
   org_covid_summary_query,
-} from "../../../models/covid/queries.js";
+} from "src/models/covid/queries.js";
+
+import { get_client } from "src/graphql_utils/graphql_utils.js";
+
+import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
 import {
   create_text_maker_component,
@@ -15,22 +18,28 @@ import {
   ensure_loaded,
 } from "../shared.js";
 
+import { AboveTabFootnoteList } from "./covid_common_components.js";
 import {
-  AboveTabFootnoteList,
-  ByDepartmentTab,
-  ByMeasureTab,
-} from "./covid_common_tabs.js";
-import { get_tabbed_content_props } from "./covid_common_utils.js";
+  get_tabbed_content_props,
+  string_sort_func,
+} from "./covid_common_utils.js";
 
 import text2 from "./covid_common_lang.yaml";
 import text1 from "./covid_expenditures.yaml";
 
-const { CovidMeasure } = Subject;
+const { CovidMeasure, Dept } = Subject;
 
 const { text_maker, TM } = create_text_maker_component([text1, text2]);
-const { TabbedContent, SpinnerWrapper, Format, AlertBanner } = util_components;
+const {
+  TabbedContent,
+  SpinnerWrapper,
+  AlertBanner,
+  SmartDisplayTable,
+} = util_components;
 
 const client = get_client();
+
+const panel_key = "covid_expenditures_panel";
 
 const SummaryTab = ({ panel_args, data }) => {
   const { subject } = panel_args;
@@ -49,27 +58,6 @@ const SummaryTab = ({ panel_args, data }) => {
     }
   })();
 
-  const format_type = window.is_a11y_mode ? "compact1_written" : "compact1";
-
-  const table_data = _.chain(data)
-    .groupBy("is_budgetary")
-    .map((rows, is_bud_string) => [
-      is_bud_string === "true" ? "bud" : "non_bud",
-      _.chain(rows)
-        .reduce(
-          (memo, row) => ({
-            vote: memo.vote + row.vote,
-            stat: memo.stat + row.stat,
-            total: memo.total + row.vote + row.stat,
-          }),
-          { vote: 0, stat: 0, total: 0 }
-        )
-
-        .value(),
-    ])
-    .fromPairs()
-    .value();
-
   return (
     <Fragment>
       <TM
@@ -77,85 +65,137 @@ const SummaryTab = ({ panel_args, data }) => {
         args={{ ...panel_args, ...additional_text_args }}
         className="medium-panel-text"
       />
-      <table className="table">
-        <thead>
-          <tr>
-            <th></th>
-            <th scope="col">
-              <TM k="covid_expenditures_stat" />
-            </th>
-            <th scope="col">
-              <TM k="covid_expenditures_voted" />
-            </th>
-            <th scope="col">
-              <TM k="total" />
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">
-              <TM k="budgetary" />
-            </th>
-            <td>
-              <Format type={format_type} content={table_data.bud?.stat || 0} />
-            </td>
-            <td>
-              <Format type={format_type} content={table_data.bud?.vote || 0} />
-            </td>
-            <td>
-              <Format type={format_type} content={table_data.bud?.total || 0} />
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <TM k="non_budgetary" />
-            </th>
-            <td>
-              <Format
-                type={format_type}
-                content={table_data.non_bud?.stat || 0}
-              />
-            </td>
-            <td>
-              <Format
-                type={format_type}
-                content={table_data.non_bud?.vote || 0}
-              />
-            </td>
-            <td>
-              <Format
-                type={format_type}
-                content={table_data.non_bud?.total || 0}
-              />
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <TM k="total" />
-            </th>
-            <td>
-              <Format
-                type={format_type}
-                content={table_data.bud?.stat + table_data.non_bud?.stat || 0}
-              />
-            </td>
-            <td>
-              <Format
-                type={format_type}
-                content={table_data.bud?.vote + table_data.non_bud?.vote || 0}
-              />
-            </td>
-            <td>
-              <Format
-                type={format_type}
-                content={table_data.bud?.total + table_data.non_bud?.total || 0}
-                className="bold"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      {
+        "TODO rethink visualization, table not necessary with bud/non-bud dropped, but what's next will need to wait on FIN cash values being implemented"
+      }
+    </Fragment>
+  );
+};
+
+const common_column_configs = {
+  stat: {
+    index: 1,
+    header: text_maker("covid_expenditures_stat"),
+    is_searchable: false,
+    is_summable: true,
+    formatter: "compact2",
+  },
+  vote: {
+    index: 2,
+    header: text_maker("covid_expenditures_voted"),
+    is_searchable: false,
+    is_summable: true,
+    formatter: "compact2",
+  },
+};
+
+const ByDepartmentTab = ({ panel_args, data }) => {
+  // pre-sort by key, so presentation consistent when sorting by other col
+  const column_configs = {
+    org_id: {
+      index: 0,
+      header: text_maker("department"),
+      is_searchable: true,
+      formatter: (org_id) => {
+        const org = Dept.lookup(org_id);
+
+        return (
+          <a
+            href={infograph_options_href_template(org, "covid", {
+              panel_key,
+            })}
+          >
+            {org.name}
+          </a>
+        );
+      },
+      raw_formatter: (org_id) => Dept.lookup(org_id).name,
+      sort_func: (org_id_a, org_id_b) => {
+        const org_a = Dept.lookup(org_id_a);
+        const org_b = Dept.lookup(org_id_b);
+        return string_sort_func(org_a.name, org_b.name);
+      },
+    },
+    ...common_column_configs,
+  };
+
+  const [largest_dept_id, largest_dept_auth] = _.chain(data)
+    .groupBy("org_id")
+    .mapValues((data) =>
+      _.reduce(data, (memo, { vote, stat }) => memo + vote + stat, 0)
+    )
+    .toPairs()
+    .sortBy(([org_id, total]) => total)
+    .last()
+    .value();
+
+  return (
+    <Fragment>
+      <TM
+        k={"covid_expenditures_department_tab_text"}
+        args={{
+          largest_dept_name: Dept.lookup(largest_dept_id).name,
+          largest_dept_auth,
+        }}
+        className="medium-panel-text"
+      />
+      <SmartDisplayTable
+        data={_.map(data, (row) => _.pick(row, _.keys(column_configs)))}
+        column_configs={column_configs}
+        table_name={text_maker("by_department_tab_label")}
+      />
+    </Fragment>
+  );
+};
+
+const ByMeasureTab = ({ data, panel_args }) => {
+  // pre-sort by key, so presentation consistent when sorting by other col
+  const data_with_measure_names = _.chain(data)
+    .map((row) => ({
+      ...row,
+      measure_name: CovidMeasure.lookup(row.measure_id).name,
+    }))
+    .value();
+
+  const column_configs = {
+    measure_name: {
+      index: 0,
+      header: text_maker("covid_measure"),
+      is_searchable: true,
+      sort_func: (name) => string_sort_func(name),
+    },
+    ...common_column_configs,
+  };
+
+  const [largest_measure_name, largest_measure_auth] = _.chain(
+    data_with_measure_names
+  )
+    .groupBy("measure_name")
+    .map((rows, measure_name) => [
+      measure_name,
+      _.reduce(rows, (memo, { vote, stat }) => memo + vote + stat, 0),
+    ])
+    .sortBy(([_measure_name, total]) => total)
+    .last()
+    .value();
+
+  return (
+    <Fragment>
+      <TM
+        k={"covid_expenditures_measure_tab_text"}
+        args={{
+          largest_measure_name,
+          largest_measure_auth,
+        }}
+        className="medium-panel-text"
+      />
+      <SmartDisplayTable
+        data={_.map(data_with_measure_names, (row) =>
+          _.pick(row, _.keys(column_configs))
+        )}
+        column_configs={column_configs}
+        table_name={text_maker("by_measure_tab_label")}
+      />
     </Fragment>
   );
 };
@@ -203,7 +243,7 @@ const tab_content_configs = [
     label: text_maker("by_department_tab_label"),
     load_data: ({ subject }) =>
       ensure_loaded({ covid_expenditures: true, subject }).then(() =>
-        CovidMeasure.get_all_data_by_org("expenditures", "is_budgetary")
+        CovidMeasure.get_all_data_by_org("expenditures")
       ),
     TabContent: ByDepartmentTab,
   },
@@ -214,7 +254,7 @@ const tab_content_configs = [
     load_data: ({ subject }) =>
       ensure_loaded({ covid_expenditures: true, subject }).then(() =>
         subject.level === "gov"
-          ? CovidMeasure.gov_data_by_measure("expenditures", "is_budgetary")
+          ? CovidMeasure.gov_data_by_measure("expenditures")
           : CovidMeasure.org_lookup_data_by_measure("expenditures", subject.id)
       ),
     TabContent: ByMeasureTab,
@@ -267,7 +307,6 @@ class CovidExpendituresPanel extends React.Component {
     } else {
       const extended_panel_args = {
         ...panel_args,
-        data_type: "expenditures",
         gov_covid_expenditures_in_year,
       };
       const tabbed_content_props = get_tabbed_content_props(
@@ -291,7 +330,7 @@ class CovidExpendituresPanel extends React.Component {
 
 export const declare_covid_expenditures_panel = () =>
   declare_panel({
-    panel_key: "covid_expenditures_panel",
+    panel_key,
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
       initial_queries: {
@@ -316,7 +355,7 @@ export const declare_covid_expenditures_panel = () =>
           >
             <AlertBanner banner_class="danger">
               {
-                "Real data, but not final. Some reconciliation still pending. For development purposes only!"
+                "Not real data! Fake data based on the already fake dev-purposes covid estimates. Scale and distribution of values does not reflect what is expected in the real expendture data. For development purposes only!"
               }
             </AlertBanner>
             <CovidExpendituresPanel panel_args={{ ...panel_args, subject }} />

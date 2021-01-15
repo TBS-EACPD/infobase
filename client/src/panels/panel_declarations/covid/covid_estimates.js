@@ -18,29 +18,36 @@ import {
 } from "src/models/covid/queries.js";
 
 import { get_client } from "src/graphql_utils/graphql_utils.js";
+import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
-import {
-  AboveTabFootnoteList,
-  ByDepartmentTab,
-  ByMeasureTab,
-} from "./covid_common_tabs.js";
+import { AboveTabFootnoteList } from "./covid_common_components.js";
 import {
   get_tabbed_content_props,
   get_est_doc_name,
+  est_doc_sort_func,
+  get_est_doc_order,
+  string_sort_func,
 } from "./covid_common_utils.js";
 
 import text2 from "./covid_common_lang.yaml";
 import text1 from "./covid_estimates.yaml";
 
-const { CovidMeasure } = Subject;
+const { CovidMeasure, Dept } = Subject;
 
-const { TabbedContent, SpinnerWrapper, AlertBanner } = util_components;
+const {
+  TabbedContent,
+  SpinnerWrapper,
+  AlertBanner,
+  SmartDisplayTable,
+} = util_components;
 
 const { text_maker, TM } = create_text_maker_component([text1, text2]);
 
 const client = get_client();
 
 const colors = window.infobase_colors();
+
+const panel_key = "covid_estimates_panel";
 
 const SummaryTab = ({ panel_args, data }) => {
   const { subject } = panel_args;
@@ -155,6 +162,149 @@ const SummaryTab = ({ panel_args, data }) => {
   );
 };
 
+const index_key = "est_doc";
+const common_column_configs = {
+  [index_key]: {
+    index: 1,
+    header: text_maker("covid_estimates_doc"),
+    is_searchable: true,
+    formatter: get_est_doc_name,
+    raw_formatter: get_est_doc_name,
+    sort_func: est_doc_sort_func,
+  },
+  stat: {
+    index: 2,
+    header: text_maker(`covid_estimates_stat`),
+    is_searchable: false,
+    is_summable: true,
+    formatter: "compact2",
+  },
+  vote: {
+    index: 3,
+    header: text_maker(`covid_estimates_voted`),
+    is_searchable: false,
+    is_summable: true,
+    formatter: "compact2",
+  },
+};
+
+const ByDepartmentTab = ({ panel_args, data }) => {
+  // pre-sort by key, so presentation consistent when sorting by other col
+  const pre_sorted_dept_data = _.sortBy(data, (row) =>
+    get_est_doc_order(row[index_key])
+  );
+
+  const column_configs = {
+    org_id: {
+      index: 0,
+      header: text_maker("department"),
+      is_searchable: true,
+      formatter: (org_id) => {
+        const org = Dept.lookup(org_id);
+
+        return (
+          <a
+            href={infograph_options_href_template(org, "covid", {
+              panel_key,
+            })}
+          >
+            {org.name}
+          </a>
+        );
+      },
+      raw_formatter: (org_id) => Dept.lookup(org_id).name,
+      sort_func: (org_id_a, org_id_b) => {
+        const org_a = Dept.lookup(org_id_a);
+        const org_b = Dept.lookup(org_id_b);
+        return string_sort_func(org_a.name, org_b.name);
+      },
+    },
+    ...common_column_configs,
+  };
+
+  const [largest_dept_id, largest_dept_auth] = _.chain(pre_sorted_dept_data)
+    .groupBy("org_id")
+    .mapValues((data) =>
+      _.reduce(data, (memo, { vote, stat }) => memo + vote + stat, 0)
+    )
+    .toPairs()
+    .sortBy(([org_id, total]) => total)
+    .last()
+    .value();
+
+  return (
+    <Fragment>
+      <TM
+        k={"covid_estimates_department_tab_text"}
+        args={{
+          largest_dept_name: Dept.lookup(largest_dept_id).name,
+          largest_dept_auth,
+        }}
+        className="medium-panel-text"
+      />
+      <SmartDisplayTable
+        data={_.map(pre_sorted_dept_data, (row) =>
+          _.pick(row, _.keys(column_configs))
+        )}
+        column_configs={column_configs}
+        table_name={text_maker("by_department_tab_label")}
+      />
+    </Fragment>
+  );
+};
+
+const ByMeasureTab = ({ data, panel_args }) => {
+  // pre-sort by key, so presentation consistent when sorting by other col
+  const pre_sorted_data = _.chain(data)
+    .map((row) => ({
+      ...row,
+      measure_name: CovidMeasure.lookup(row.measure_id).name,
+    }))
+    .sortBy(data, (row) => get_est_doc_order(row[index_key]))
+    .reverse()
+    .value();
+
+  const column_configs = {
+    measure_name: {
+      index: 0,
+      header: text_maker("covid_measure"),
+      is_searchable: true,
+      sort_func: (name) => string_sort_func(name),
+    },
+    ...common_column_configs,
+  };
+
+  const [largest_measure_name, largest_measure_auth] = _.chain(pre_sorted_data)
+    .groupBy("measure_name")
+    .map((rows, measure_name) => [
+      measure_name,
+      _.reduce(rows, (memo, { vote, stat }) => memo + vote + stat, 0),
+    ])
+    .sortBy(([_measure_name, total]) => total)
+    .last()
+    .value();
+
+  return (
+    <Fragment>
+      <TM
+        k={"covid_estimates_measure_tab_text"}
+        args={{
+          largest_measure_name,
+          largest_measure_auth,
+        }}
+        className="medium-panel-text"
+      />
+      <SmartDisplayTable
+        data={_.map(pre_sorted_data, (row) =>
+          _.pick(row, _.keys(column_configs))
+        )}
+        column_configs={column_configs}
+        table_name={text_maker("by_measure_tab_label")}
+      />
+    </Fragment>
+  );
+};
+
 const tab_content_configs = [
   {
     key: "summary",
@@ -263,7 +413,6 @@ class CovidEstimatesPanel extends React.Component {
     } else {
       const extended_panel_args = {
         ...panel_args,
-        data_type: "estimates",
         gov_covid_estimates_in_year,
       };
 
@@ -288,7 +437,7 @@ class CovidEstimatesPanel extends React.Component {
 
 export const declare_covid_estimates_panel = () =>
   declare_panel({
-    panel_key: "covid_estimates_panel",
+    panel_key,
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
       requires_has_covid_response: level_name === "dept",
@@ -322,7 +471,7 @@ export const declare_covid_estimates_panel = () =>
         >
           <AlertBanner banner_class="danger">
             {
-              "Not real data! Totals are based on estimates by covid initiative figures, but the values associated with these measures are not accurate. For development purposes only!"
+              "Real data, but not final. Some reconciliation still pending. For development purposes only!"
             }
           </AlertBanner>
           <CovidEstimatesPanel panel_args={panel_args} />
