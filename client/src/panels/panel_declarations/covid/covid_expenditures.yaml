@@ -38,13 +38,13 @@ covid_expenditures_summary_text_dept:
 covid_expenditures_department_tab_text:
   transform: [handlebars,markdown]
   en: |
-    As of **date**, the department with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_dept_name}}** with **{{fmt_compact1_written largest_dept_auth}}**.
+    As of **date**, the department with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_dept_name}}** with **{{fmt_compact1_written largest_dept_exp}}**.
   fr: |
     TODO
 
 covid_expenditures_measure_tab_text:
   transform: [handlebars,markdown]
   en: |
-    As of **date**, the COVID-19 measure with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_measure_name}}** with **{{fmt_compact1_written largest_measure_auth}}**.
+    As of **date**, the COVID-19 measure with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_measure_name}}** with **{{fmt_compact1_written largest_measure_exp}}**.
   fr: |
     TODO
