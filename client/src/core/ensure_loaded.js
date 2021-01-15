@@ -8,6 +8,7 @@ import {
   api_load_covid_estimates_by_measure,
   api_load_covid_expenditures_by_measure,
   api_load_covid_commitments_by_measure,
+  api_load_covid_funding_by_measure,
 } from "src/models/covid/populate.js";
 import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes.js";
 import { load_horizontal_initiative_lookups } from "src/models/populate_horizontal_initiative_lookups.js";
@@ -74,6 +75,7 @@ function ensure_loaded({
   covid_estimates,
   covid_expenditures,
   covid_commitments,
+  covid_funding,
   footnotes_for: footnotes_subject,
 }) {
   const table_set = _.chain(table_keys)
@@ -134,6 +136,9 @@ function ensure_loaded({
   const should_load_covid_commitments =
     covid_commitments ||
     check_for_panel_dependency("requires_covid_commitments");
+
+  const should_load_covid_funding =
+    covid_funding || check_for_panel_dependency("requires_covid_funding");
 
   const result_docs_to_load = !_.isEmpty(result_docs)
     ? result_docs
@@ -197,6 +202,10 @@ function ensure_loaded({
     ? api_load_covid_commitments_by_measure(subject)
     : Promise.resolve();
 
+  const covid_fudning_prom = should_load_covid_funding
+    ? api_load_covid_funding_by_measure(subject)
+    : Promise.resolve();
+
   return Promise.all([
     load_tables(table_set),
     pre_cache_queries(panel_set, subject),
@@ -213,6 +222,7 @@ function ensure_loaded({
     covid_estimates_prom,
     covid_expenditures_prom,
     covid_commitments_prom,
+    covid_fudning_prom,
   ]);
 }
 
