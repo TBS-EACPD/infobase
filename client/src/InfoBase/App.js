@@ -167,7 +167,10 @@ export class App extends React.Component {
                 />
                 <Route path="/glossary/:active_key?" component={Glossary} />
                 <Route path="/rpb/:config?" component={ReportBuilder} />
-                <Route path="/about" component={About} />
+                <Route
+                  path="/about"
+                  render={() => <About toggleSurvey={this.toggleSurvey} />}
+                />
                 <Route
                   path="/contact"
                   render={() => <Contact toggleSurvey={this.toggleSurvey} />}

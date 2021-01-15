@@ -208,19 +208,22 @@ feedback_title:
   en: We want to hear from you!
   fr: La parole est à vous!
 
-feedback_text:
+feedback_text_1:
   transform: [handlebars, markdown]
   en: |
     We are always looking for ideas and suggestions to help us improve the current version of GC InfoBase. If you would like to share some ideas or comments regarding your experience with the tool,
     please take a few minutes to complete our online survey. The feedback you provide will be used to improve the current version of GC InfoBase and prioritize new features.
-
-    Better yet, if you are passionate about data, and looking for an exciting challenge, come work with us! We regularly post opportunities with our team on the Treasury Board Secretariat's {{ext_link "website" "https://www.canada.ca/en/treasury-board-secretariat/corporate/job-opportunities.html"}}.
-
-    For feedback or questions on GC InfoBase, please send an email to gcinfobasefeedback-infobasedugcretroaction@tbs-sct.gc.ca.
   fr: |
     Nous sommes constamment à la recherche d’idées et de suggestions pour améliorer la version actuelle de l’InfoBase. Le cas échéant, veuillez prendre quelques minutes pour remplir notre sondage en ligne.
     En répondant aux quelques questions qui suivent, vous nous aiderez à améliorer l’InfoBase du GC et à fixer l’ordre de priorité pour les nouvelles caractéristiques.
 
+feedback_text_2:
+  transform: [handlebars, markdown]
+  en: |
+    Better yet, if you are passionate about data, and looking for an exciting challenge, come work with us! We regularly post opportunities with our team on the Treasury Board Secretariat's {{ext_link "website" "https://www.canada.ca/en/treasury-board-secretariat/corporate/job-opportunities.html"}}.
+
+    For feedback or questions on GC InfoBase, please send an email to gcinfobasefeedback-infobasedugcretroaction@tbs-sct.gc.ca.
+  fr: |
     Mieux encore, si vous êtes passionné par les données et que vous cherchez un défi stimulant, venez travailler avec nous! Nous publions régulièrement les possibilités d’emploi au sein de notre équipe sur le {{ext_link "site Web" "https://www.canada.ca/fr/secretariat-conseil-tresor/organisation/possibilites-emploi.html"}} du Secrétariat du Conseil du Trésor. 
 
     Pour toute rétroaction ou question sur l'InfoBase du GC, veuillez envoyer un courriel à gcinfobasefeedback-infobasedugcretroaction@tbs-sct.gc.ca.
