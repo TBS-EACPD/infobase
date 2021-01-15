@@ -90,7 +90,7 @@ class CovidMeasure extends mix().with(
       ...measure,
     });
   }
-  // TODO to look into
+
   static extend_with_data(measure_id, data_key, data) {
     const measure = this.lookup(measure_id);
     const extended_data_set =

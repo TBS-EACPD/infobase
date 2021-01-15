@@ -103,6 +103,7 @@ const covid_commitments_by_measure_query_fragment = `
     ${covid_measure_fields}
   
     covid_commitments {
+      org_id
       ${covid_commitments_fields}
     }
   }
@@ -123,6 +124,7 @@ const covid_funding_by_measure_query_fragment = `
     ${covid_measure_fields}
   
     covid_funding {
+      org_id
       ${covid_funding_fields}
     }
   }
