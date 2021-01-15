@@ -16,30 +16,44 @@ const flatten_data_rows = (measures, data_type) =>
     }))
   );
 
-const roll_up_data_by_property = (data_by_measure, group_key, property_name) =>
+const row_group_reducer = (group) =>
+  _.reduce(
+    group,
+    (memo, row) => ({
+      stat: memo.stat + row.stat,
+      vote: memo.vote + row.vote,
+    }),
+    { stat: 0, vote: 0 }
+  );
+const roll_up_data_by_property = (
+  data_by_measure,
+  roll_up_property,
+  sub_group_property = null
+) =>
   _.chain(data_by_measure)
-    .groupBy(property_name)
-    .flatMap((grouped_rows, group_value) =>
-      _.chain(grouped_rows)
+    .groupBy(roll_up_property)
+    .flatMap((roll_up_group, roll_up_value) =>
+      _.chain(roll_up_group)
         .groupBy("fiscal_year")
-        .flatMap((year_group, fiscal_year) =>
-          _.chain(year_group)
-            .groupBy(group_key)
-            .flatMap((group, key) => ({
-              [property_name]: group_value,
-              [group_key]: key,
+        .flatMap((year_group, fiscal_year) => {
+          if (sub_group_property) {
+            return _.chain(year_group)
+              .groupBy(sub_group_property)
+              .flatMap((sub_group, sub_group_value) => ({
+                [roll_up_property]: roll_up_value,
+                [sub_group_property]: sub_group_value,
+                fiscal_year,
+                ...row_group_reducer(sub_group),
+              }))
+              .value();
+          } else {
+            return {
+              [roll_up_property]: roll_up_value,
               fiscal_year,
-              ..._.reduce(
-                group,
-                (memo, row) => ({
-                  stat: memo.stat + row.stat,
-                  vote: memo.vote + row.vote,
-                }),
-                { stat: 0, vote: 0 }
-              ),
-            }))
-            .value()
-        )
+              ...row_group_reducer(year_group),
+            };
+          }
+        })
         .value()
     )
     .value();
@@ -87,30 +101,25 @@ class CovidMeasure extends mix().with(
 
   static get_all_data_by_measure = (data_type) =>
     flatten_data_rows(this.get_all(), data_type);
+
   static org_lookup_data_by_measure = (data_type, org_id) =>
     _.filter(
       this.get_all_data_by_measure(data_type),
       ({ org_id: row_org_id }) => row_org_id === org_id
     );
-  static gov_data_by_measure = (data_type, group_key) =>
+
+  static gov_data_by_measure = (data_type, grouping_key = null) =>
     roll_up_data_by_property(
       this.get_all_data_by_measure(data_type),
-      group_key,
-      "measure_id"
+      "measure_id",
+      grouping_key
     );
 
-  static get_all_data_by_org = (data_type, group_key) =>
+  static get_all_data_by_org = (data_type, grouping_key = null) =>
     roll_up_data_by_property(
       this.get_all_data_by_measure(data_type),
-      group_key,
-      "org_id"
-    );
-  // Not used anywheres. Should be removed?
-  static org_lookup_estimates_by_org = (org_id) =>
-    roll_up_data_by_property(
-      this.org_lookup_data_by_measure("estimates", org_id),
-      "est_doc",
-      "org_id"
+      "org_id",
+      grouping_key
     );
 }
 
