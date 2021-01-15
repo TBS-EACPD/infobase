@@ -237,6 +237,7 @@ const ByDepartmentTab = ({ panel_args, data }) => {
       <TM
         k={"covid_estimates_department_tab_text"}
         args={{
+          ...panel_args,
           largest_dept_name: Dept.lookup(largest_dept_id).name,
           largest_dept_auth,
         }}
@@ -289,6 +290,7 @@ const ByMeasureTab = ({ panel_args, data }) => {
       <TM
         k={"covid_estimates_measure_tab_text"}
         args={{
+          ...panel_args,
           largest_measure_name,
           largest_measure_auth,
         }}
