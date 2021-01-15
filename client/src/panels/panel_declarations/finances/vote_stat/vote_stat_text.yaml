@@ -58,7 +58,10 @@ gov_in_year_voted_stat_split_text:
     will come from {{gl_tt "voted authorities" "VOTED"}}.
 
   fr: |
-    TODO
+    En date du {{last_estimates}} {{est_in_year}}, le gouvernement a soumis au Parlement un total de **{{fmt_compact1_written tabled_est_in_year}}** de dépenses {{gl_tt "autorisées" "AUTH"}}.
+    
+    Sur les **{{fmt_compact1_written tabled_est_in_year}}** de dépenses {{gl_tt "autorisées" "AUTH"}} à la disposition du gouvernement, **{{fmt_compact1_written stat_est_in_year}}** (ou **{{fmt_percentage1 stat_percent_est_in_year}}**)
+    proviendront {{gl_tt "d'autorisations législatives" "STAT"}} et **{{fmt_compact1_written voted_est_in_year}}** (ou **{{fmt_percentage1 voted_percent_est_in_year}}**) {{gl_tt "d'autorisations votées" "VOTED"}}.
 
 dept_in_year_voted_stat_split_text:
   transform: [handlebars,markdown]
@@ -69,7 +72,10 @@ dept_in_year_voted_stat_split_text:
    (or **{{fmt_percentage1 voted_percent_est_in_year}}**) from {{gl_tt "voted authorities" "VOTED"}}.
 
   fr: |
-    TODO
+    Sur les **{{fmt_compact1_written tabled_est_in_year}}** de dépenses totales {{gl_tt "autorisées" "AUTH"}} pour **{{subject.name}}** dans le
+    {{last_estimates}} {{est_in_year}}, **{{fmt_compact1_written stat_est_in_year}}** (ou **{{fmt_percentage1 stat_percent_est_in_year}}**)
+    seront financés par des {{gl_tt "crédits législatifs" "STAT"}} et **{{fmt_compact1_written voted_est_in_year}}** 
+    (ou **{{fmt_percentage1 voted_percent_est_in_year}}**) par des {{gl_tt "crédits votés" "VOTED"}}.
 
 
 in_year_estimates_split_title:
@@ -166,5 +172,5 @@ gov_estimates:
 
 auth_footnote:
   transform: [handlebars]
-  en: 'Here, "authorized spending" refers to "{{gl_tt "authority" "AUTH"}}" values'
-  fr: TODO
+  en: 'Here, "authorized spending" refers to {{gl_tt "authority" "AUTH"}} values'
+  fr: 'Par « dépenses autorisées », on entend ici la valeur des {{gl_tt "autorisations" "AUTH"}}'
