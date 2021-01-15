@@ -120,6 +120,17 @@ export default function ({ models, loaders }) {
     covid_summary_by_org_id_loader,
   } = loaders;
 
+  const has_covid_data_resolver = (subject_id) =>
+    has_covid_data_loader.load(subject_id).then(
+      (has_covid_data) =>
+        has_covid_data || {
+          has_estimates: false,
+          has_expenditures: false,
+          has_commitments: false,
+          has_funding: false,
+        }
+    );
+
   const resolvers = {
     Root: {
       covid_measures: () => CovidMeasure.find({}),
@@ -131,7 +142,7 @@ export default function ({ models, loaders }) {
         covid_summary_by_org_id_loader.load("gov").then(_.first),
     },
     Org: {
-      has_covid_data: ({ org_id }) => has_covid_data_loader.load(org_id),
+      has_covid_data: ({ org_id }) => has_covid_data_resolver(org_id),
       covid_summary: ({ org_id }) =>
         covid_summary_by_org_id_loader.load(org_id).then(_.first),
       covid_measures: ({ org_id: queried_org_id }) =>
@@ -161,7 +172,7 @@ export default function ({ models, loaders }) {
       id: _.property("covid_measure_id"),
       name: bilingual_field("name"),
       has_covid_data: ({ covid_measure_id }) =>
-        has_covid_data_loader.load(covid_measure_id),
+        has_covid_data_resolver(covid_measure_id),
     },
     CovidEstimates: {
       org: ({ org_id }) => org_id_loader.load(org_id),

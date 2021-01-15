@@ -306,7 +306,10 @@ Object {
             Object {
               "est_doc": "SEC",
               "fiscal_year": "2020",
-              "org": null,
+              "org": Object {
+                "id": "1",
+                "name": "Agriculture and Agri-Food Canada",
+              },
               "org_id": 1,
               "stat": 9,
               "vote": 0,
@@ -908,7 +911,12 @@ Object {
   "data": Object {
     "root": Object {
       "does_not_have_data": Object {
-        "has_covid_data": null,
+        "has_covid_data": Object {
+          "has_commitments": false,
+          "has_estimates": false,
+          "has_expenditures": false,
+          "has_funding": false,
+        },
       },
       "has_data": Object {
         "has_covid_data": Object {
@@ -918,7 +926,14 @@ Object {
           "has_funding": true,
         },
       },
-      "only_has_estimates": null,
+      "only_has_estimates": Object {
+        "has_covid_data": Object {
+          "has_commitments": false,
+          "has_estimates": true,
+          "has_expenditures": false,
+          "has_funding": false,
+        },
+      },
     },
   },
 }
