@@ -16,6 +16,7 @@ import {
   util_components,
   Subject,
   ensure_loaded,
+  formats,
 } from "../shared.js";
 
 import { AboveTabFootnoteList } from "./covid_common_components.js";
@@ -85,7 +86,7 @@ const common_column_configs = {
     header: text_maker("covid_funding"),
     is_searchable: false,
     is_summable: true,
-    formatter: "compact2",
+    formatter: (value) => (value ? formats.compact2_raw(value) : "—"),
   },
   stat: {
     index: 2,
