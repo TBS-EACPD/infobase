@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
