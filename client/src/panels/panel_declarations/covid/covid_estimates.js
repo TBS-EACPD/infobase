@@ -25,7 +25,6 @@ import {
   get_tabbed_content_props,
   wrap_with_vote_stat_controls,
   get_est_doc_name,
-  est_doc_sort_func,
   get_est_doc_order,
   string_sort_func,
 } from "./covid_common_utils.js";
@@ -59,7 +58,7 @@ const SummaryTab = ({ args: panel_args, data }) => {
     .map((row) => ({
       [graph_index_key]: get_est_doc_name(row.est_doc),
       [text_maker(`covid_estimates_stat`)]: row.stat,
-      [text_maker(`covid_estimates_voted`)]: row.vote,
+      [text_maker(`covid_estimates_vote`)]: row.vote,
     }))
     .value();
 
@@ -163,38 +162,92 @@ const SummaryTab = ({ args: panel_args, data }) => {
   );
 };
 
-const index_key = "est_doc";
-const common_column_configs = {
-  [index_key]: {
+const vs_type_ordering = { vote: 1, stat: 2, both: 3 };
+const get_vs_type_name = (vs_type) =>
+  _.includes(["vote", "stat"], vs_type)
+    ? text_maker(`covid_estimates_${vs_type}`)
+    : "";
+
+const get_common_column_configs = (show_vote_stat, est_docs) => ({
+  vs_type: {
     index: 1,
-    header: text_maker("covid_estimates_doc"),
+    header: text_maker(`vote_or_stat`),
     is_searchable: true,
-    formatter: get_est_doc_name,
-    raw_formatter: get_est_doc_name,
-    sort_func: est_doc_sort_func,
+    is_summable: false,
+    formatter: get_vs_type_name,
+    raw_formatter: get_vs_type_name,
+    sort_func: (type_a, type_b) => {
+      const order_a = vs_type_ordering[type_a];
+      const order_b = vs_type_ordering[type_b];
+
+      if (order_a < order_b) {
+        return -1;
+      } else if (order_a > order_b) {
+        return 1;
+      }
+      return 0;
+    },
+    initial_visible: show_vote_stat,
   },
-  vote: {
-    index: 2,
-    header: text_maker(`covid_estimates_voted`),
+  ..._.chain(est_docs)
+    .sortBy(get_est_doc_order)
+    .map((est_doc, ix) => [
+      est_doc,
+      {
+        index: 2 + ix,
+        header: get_est_doc_name(est_doc),
+        is_searchable: false,
+        is_summable: true,
+        formatter: "compact2",
+      },
+    ])
+    .fromPairs()
+    .value(),
+  total: {
+    index: 1 + est_docs.length,
+    header: text_maker("total"),
     is_searchable: false,
     is_summable: true,
     formatter: "compact2",
+    initial_visible: est_docs.length > 1,
   },
-  stat: {
-    index: 3,
-    header: text_maker(`covid_estimates_stat`),
-    is_searchable: false,
-    is_summable: true,
-    formatter: "compact2",
-  },
-};
+});
 
 const ByDepartmentTab = wrap_with_vote_stat_controls(
   ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
-    // pre-sort by key, so presentation consistent when sorting by other col
-    const pre_sorted_dept_data = _.sortBy(data, (row) =>
-      get_est_doc_order(row[index_key])
-    );
+    const est_docs = _.chain(data).map("est_doc").uniq().value();
+
+    const pre_sorted_dept_data = _.chain(data)
+      .flatMap(({ vote, stat, ...row_base }) => {
+        if (show_vote_stat) {
+          return [
+            { ...row_base, vs_type: "vote", value: vote },
+            { ...row_base, vs_type: "stat", value: stat },
+          ];
+        } else {
+          return [{ ...row_base, vs_type: "both", value: vote + stat }];
+        }
+      })
+      .groupBy("org_id")
+      .flatMap((rows, org_id) =>
+        _.chain(rows)
+          .groupBy("vs_type")
+          .flatMap((vs_group, vs_type) => ({
+            org_id,
+            vs_type,
+            ..._.chain(est_docs)
+              .map((est_doc) => [
+                est_doc,
+                _.chain(vs_group).find({ est_doc }).get("value", 0).value(),
+              ])
+              .fromPairs()
+              .value(),
+            total: _.reduce(vs_group, (memo, { value }) => memo + value, 0),
+          }))
+          .value()
+      )
+      .sortBy(({ vs_type }) => vs_type_ordering[vs_type]) // pre-sort by secondary index, for consistency
+      .value();
 
     const column_configs = {
       org_id: {
@@ -221,10 +274,10 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
           return string_sort_func(org_a.name, org_b.name);
         },
       },
-      ...common_column_configs,
+      ...get_common_column_configs(show_vote_stat, est_docs),
     };
 
-    const [largest_dept_id, largest_dept_auth] = _.chain(pre_sorted_dept_data)
+    const [largest_dept_id, largest_dept_auth] = _.chain(data)
       .groupBy("org_id")
       .mapValues((data) =>
         _.reduce(data, (memo, { vote, stat }) => memo + vote + stat, 0)
@@ -252,6 +305,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
           )}
           column_configs={column_configs}
           table_name={text_maker("by_department_tab_label")}
+          disable_column_select={true}
         />
       </Fragment>
     );
@@ -266,7 +320,6 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
         ...row,
         measure_name: CovidMeasure.lookup(row.measure_id).name,
       }))
-      .sortBy(data, (row) => get_est_doc_order(row[index_key]))
       .reverse()
       .value();
 
@@ -277,7 +330,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
         is_searchable: true,
         sort_func: (name_a, name_b) => string_sort_func(name_a, name_b),
       },
-      ...common_column_configs,
+      ...get_common_column_configs(), //TODO
     };
 
     const [largest_measure_name, largest_measure_auth] = _.chain(
@@ -310,6 +363,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
           )}
           column_configs={column_configs}
           table_name={text_maker("by_measure_tab_label")}
+          disable_column_select={true}
         />
       </Fragment>
     );

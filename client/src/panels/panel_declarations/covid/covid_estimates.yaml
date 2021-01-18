@@ -60,9 +60,13 @@ covid_estimates_measure_tab_text:
 covid_estimates_doc:
   en: Estimates Instrument
   fr: Instrument des dépenses
+
+vote_or_stat:
+  en: Vote/Stat
+  fr: TODO
 covid_estimates_stat:
-  en: Statutory COVID-19 Authorities
-  fr: Autorisations législatives COVID-19
-covid_estimates_voted:
-  en: Voted COVID-19 Authorities
-  fr: Autorisations votées COVID-19
+  en: Statutory Authorities
+  fr: Autorisations législatives
+covid_estimates_vote:
+  en: Voted Authorities
+  fr: Autorisations votées
