@@ -279,9 +279,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
 
     const [largest_dept_id, largest_dept_auth] = _.chain(data)
       .groupBy("org_id")
-      .mapValues((data) =>
-        _.reduce(data, (memo, { vote, stat }) => memo + vote + stat, 0)
-      )
+      .mapValues((data) => _.reduce(data, (memo, { total }) => memo + total, 0))
       .toPairs()
       .sortBy(([org_id, total]) => total)
       .last()
@@ -314,13 +312,38 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
 
 const ByMeasureTab = wrap_with_vote_stat_controls(
   ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
-    // pre-sort by key, so presentation consistent when sorting by other col
+    const est_docs = _.chain(data).map("est_doc").uniq().value();
+
     const pre_sorted_data = _.chain(data)
-      .map((row) => ({
-        ...row,
-        measure_name: CovidMeasure.lookup(row.measure_id).name,
-      }))
-      .reverse()
+      .flatMap(({ vote, stat, ...row_base }) => {
+        if (show_vote_stat) {
+          return [
+            { ...row_base, vs_type: "vote", value: vote },
+            { ...row_base, vs_type: "stat", value: stat },
+          ];
+        } else {
+          return [{ ...row_base, vs_type: "both", value: vote + stat }];
+        }
+      })
+      .groupBy("measure_id")
+      .flatMap((rows, measure_id) =>
+        _.chain(rows)
+          .groupBy("vs_type")
+          .flatMap((vs_group, vs_type) => ({
+            measure_name: CovidMeasure.lookup(measure_id).name,
+            vs_type,
+            ..._.chain(est_docs)
+              .map((est_doc) => [
+                est_doc,
+                _.chain(vs_group).find({ est_doc }).get("value", 0).value(),
+              ])
+              .fromPairs()
+              .value(),
+            total: _.reduce(vs_group, (memo, { value }) => memo + value, 0),
+          }))
+          .value()
+      )
+      .sortBy(({ vs_type }) => vs_type_ordering[vs_type]) // pre-sort by secondary index, for consistency
       .value();
 
     const column_configs = {
@@ -330,7 +353,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
         is_searchable: true,
         sort_func: (name_a, name_b) => string_sort_func(name_a, name_b),
       },
-      ...get_common_column_configs(), //TODO
+      ...get_common_column_configs(show_vote_stat, est_docs),
     };
 
     const [largest_measure_name, largest_measure_auth] = _.chain(
@@ -339,7 +362,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
       .groupBy("measure_name")
       .map((rows, measure_name) => [
         measure_name,
-        _.reduce(rows, (memo, { vote, stat }) => memo + vote + stat, 0),
+        _.reduce(rows, (memo, { total }) => memo + total, 0),
       ])
       .sortBy(([_measure_name, total]) => total)
       .last()
