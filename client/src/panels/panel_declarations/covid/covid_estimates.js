@@ -270,7 +270,7 @@ const ByMeasureTab = ({ args: panel_args, data }) => {
       index: 0,
       header: text_maker("covid_measure"),
       is_searchable: true,
-      sort_func: (name) => string_sort_func(name),
+      sort_func: (name_a, name_b) => string_sort_func(name_a, name_b),
     },
     ...common_column_configs,
   };
