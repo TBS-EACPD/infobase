@@ -17,6 +17,7 @@ import {
   Subject,
   ensure_loaded,
   formats,
+  WrappedNivoPie,
 } from "../shared.js";
 
 import { AboveTabFootnoteList } from "./covid_common_components.js";
@@ -66,18 +67,39 @@ const SummaryTab = ({
       };
     }
   })();
+  const text_args = {
+    ...panel_args,
+    ...additional_text_args,
+  };
+
+  const expenditure_amount =
+    text_args[`${subject.level}_covid_expenditures_in_year`];
+  const remaining_amount =
+    text_args[`${subject.level}_covid_funding_in_year`] - expenditure_amount;
+  const pie_data = [
+    {
+      label: "TODO spent",
+      value: expenditure_amount,
+    },
+    {
+      label: "TODO remaining",
+      value: remaining_amount,
+    },
+  ];
 
   return (
-    <Fragment>
-      <TM
-        k={`covid_expenditures_summary_text_${subject.level}`}
-        args={{ ...panel_args, ...additional_text_args }}
-        className="medium-panel-text"
-      />
-      {
-        "TODO rethink visualization, table not necessary with bud/non-bud dropped, but what's next will need to wait on FIN cash values being implemented"
-      }
-    </Fragment>
+    <div className="frow middle-xs">
+      <div className="fcol-xs-12 fcol-md-6">
+        <TM
+          k={`covid_expenditures_summary_text_${subject.level}`}
+          args={text_args}
+          className="medium-panel-text"
+        />
+      </div>
+      <div className="fcol-xs-12 fcol-md-6">
+        <WrappedNivoPie data={pie_data} />
+      </div>
+    </div>
   );
 };
 
