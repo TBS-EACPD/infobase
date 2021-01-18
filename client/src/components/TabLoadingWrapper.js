@@ -9,9 +9,9 @@ class TabLoadingWrapper extends React.Component {
     };
   }
   componentDidMount() {
-    const { panel_args, load_data } = this.props;
+    const { args, load_data } = this.props;
 
-    load_data(panel_args).then((data) =>
+    load_data(args).then((data) =>
       this.setState({
         data,
         loading: false,
@@ -19,7 +19,7 @@ class TabLoadingWrapper extends React.Component {
     );
   }
   render() {
-    const { panel_args, TabContent } = this.props;
+    const { args, TabContent } = this.props;
 
     const { loading, data } = this.state;
 
@@ -36,7 +36,7 @@ class TabLoadingWrapper extends React.Component {
         </div>
       );
     } else {
-      return <TabContent panel_args={panel_args} data={data} />;
+      return <TabContent args={args} data={data} />;
     }
   }
 }
