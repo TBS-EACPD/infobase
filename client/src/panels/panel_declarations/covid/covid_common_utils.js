@@ -1,5 +1,7 @@
 import { util_components, businessConstants } from "../shared.js";
 
+import { ToggleVoteStatProvider } from "./covid_common_components.js";
+
 const { estimates_docs } = businessConstants;
 const { TabLoadingWrapper } = util_components;
 
@@ -28,6 +30,10 @@ const get_tabbed_content_props = (tab_content_configs, panel_args) => {
       .value(),
   };
 };
+
+const wrap_with_vote_stat_controls = (Component) => (props) => (
+  <ToggleVoteStatProvider Inner={Component} inner_props={props} />
+);
 
 // TODO these est doc utils should move to somewhere central, maybe in models
 const get_est_doc_name = (est_doc) =>
@@ -62,6 +68,7 @@ const string_sort_func = (a, b) => {
 
 export {
   get_tabbed_content_props,
+  wrap_with_vote_stat_controls,
   get_est_doc_name,
   get_est_doc_order,
   est_doc_sort_func,
