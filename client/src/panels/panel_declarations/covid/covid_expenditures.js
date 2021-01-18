@@ -114,17 +114,17 @@ const get_common_column_configs = (show_vote_stat) => ({
     formatter: (value) =>
       _.isNumber(value) ? formats.compact2_raw(value) : value,
   },
-  stat: {
+  vote: {
     index: 2,
-    header: text_maker(`covid_expenditures_stat`),
+    header: text_maker(`covid_expenditures_voted`),
     is_searchable: false,
     is_summable: true,
     formatter: "compact2",
     initial_visible: show_vote_stat,
   },
-  vote: {
+  stat: {
     index: 3,
-    header: text_maker(`covid_expenditures_voted`),
+    header: text_maker(`covid_expenditures_stat`),
     is_searchable: false,
     is_summable: true,
     formatter: "compact2",
