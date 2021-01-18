@@ -23,6 +23,7 @@ import { infograph_options_href_template } from "src/infographic/infographic_lin
 import { AboveTabFootnoteList } from "./covid_common_components.js";
 import {
   get_tabbed_content_props,
+  wrap_with_vote_stat_controls,
   get_est_doc_name,
   est_doc_sort_func,
   get_est_doc_order,
@@ -49,7 +50,7 @@ const colors = window.infobase_colors();
 
 const panel_key = "covid_estimates_panel";
 
-const SummaryTab = ({ panel_args, data }) => {
+const SummaryTab = ({ args: panel_args, data }) => {
   const { subject } = panel_args;
 
   const graph_index_key = "index_key";
@@ -188,124 +189,132 @@ const common_column_configs = {
   },
 };
 
-const ByDepartmentTab = ({ panel_args, data }) => {
-  // pre-sort by key, so presentation consistent when sorting by other col
-  const pre_sorted_dept_data = _.sortBy(data, (row) =>
-    get_est_doc_order(row[index_key])
-  );
+const ByDepartmentTab = wrap_with_vote_stat_controls(
+  ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
+    // pre-sort by key, so presentation consistent when sorting by other col
+    const pre_sorted_dept_data = _.sortBy(data, (row) =>
+      get_est_doc_order(row[index_key])
+    );
 
-  const column_configs = {
-    org_id: {
-      index: 0,
-      header: text_maker("department"),
-      is_searchable: true,
-      formatter: (org_id) => {
-        const org = Dept.lookup(org_id);
+    const column_configs = {
+      org_id: {
+        index: 0,
+        header: text_maker("department"),
+        is_searchable: true,
+        formatter: (org_id) => {
+          const org = Dept.lookup(org_id);
 
-        return (
-          <a
-            href={infograph_options_href_template(org, "covid", {
-              panel_key,
-            })}
-          >
-            {org.name}
-          </a>
-        );
+          return (
+            <a
+              href={infograph_options_href_template(org, "covid", {
+                panel_key,
+              })}
+            >
+              {org.name}
+            </a>
+          );
+        },
+        raw_formatter: (org_id) => Dept.lookup(org_id).name,
+        sort_func: (org_id_a, org_id_b) => {
+          const org_a = Dept.lookup(org_id_a);
+          const org_b = Dept.lookup(org_id_b);
+          return string_sort_func(org_a.name, org_b.name);
+        },
       },
-      raw_formatter: (org_id) => Dept.lookup(org_id).name,
-      sort_func: (org_id_a, org_id_b) => {
-        const org_a = Dept.lookup(org_id_a);
-        const org_b = Dept.lookup(org_id_b);
-        return string_sort_func(org_a.name, org_b.name);
-      },
-    },
-    ...common_column_configs,
-  };
+      ...common_column_configs,
+    };
 
-  const [largest_dept_id, largest_dept_auth] = _.chain(pre_sorted_dept_data)
-    .groupBy("org_id")
-    .mapValues((data) =>
-      _.reduce(data, (memo, { vote, stat }) => memo + vote + stat, 0)
+    const [largest_dept_id, largest_dept_auth] = _.chain(pre_sorted_dept_data)
+      .groupBy("org_id")
+      .mapValues((data) =>
+        _.reduce(data, (memo, { vote, stat }) => memo + vote + stat, 0)
+      )
+      .toPairs()
+      .sortBy(([org_id, total]) => total)
+      .last()
+      .value();
+
+    return (
+      <Fragment>
+        <TM
+          k={"covid_estimates_department_tab_text"}
+          args={{
+            ...panel_args,
+            largest_dept_name: Dept.lookup(largest_dept_id).name,
+            largest_dept_auth,
+          }}
+          className="medium-panel-text"
+        />
+        <ToggleVoteStat />
+        <SmartDisplayTable
+          data={_.map(pre_sorted_dept_data, (row) =>
+            _.pick(row, _.keys(column_configs))
+          )}
+          column_configs={column_configs}
+          table_name={text_maker("by_department_tab_label")}
+        />
+      </Fragment>
+    );
+  }
+);
+
+const ByMeasureTab = wrap_with_vote_stat_controls(
+  ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
+    // pre-sort by key, so presentation consistent when sorting by other col
+    const pre_sorted_data = _.chain(data)
+      .map((row) => ({
+        ...row,
+        measure_name: CovidMeasure.lookup(row.measure_id).name,
+      }))
+      .sortBy(data, (row) => get_est_doc_order(row[index_key]))
+      .reverse()
+      .value();
+
+    const column_configs = {
+      measure_name: {
+        index: 0,
+        header: text_maker("covid_measure"),
+        is_searchable: true,
+        sort_func: (name) => string_sort_func(name),
+      },
+      ...common_column_configs,
+    };
+
+    const [largest_measure_name, largest_measure_auth] = _.chain(
+      pre_sorted_data
     )
-    .toPairs()
-    .sortBy(([org_id, total]) => total)
-    .last()
-    .value();
+      .groupBy("measure_name")
+      .map((rows, measure_name) => [
+        measure_name,
+        _.reduce(rows, (memo, { vote, stat }) => memo + vote + stat, 0),
+      ])
+      .sortBy(([_measure_name, total]) => total)
+      .last()
+      .value();
 
-  return (
-    <Fragment>
-      <TM
-        k={"covid_estimates_department_tab_text"}
-        args={{
-          ...panel_args,
-          largest_dept_name: Dept.lookup(largest_dept_id).name,
-          largest_dept_auth,
-        }}
-        className="medium-panel-text"
-      />
-      <SmartDisplayTable
-        data={_.map(pre_sorted_dept_data, (row) =>
-          _.pick(row, _.keys(column_configs))
-        )}
-        column_configs={column_configs}
-        table_name={text_maker("by_department_tab_label")}
-      />
-    </Fragment>
-  );
-};
-
-const ByMeasureTab = ({ panel_args, data }) => {
-  // pre-sort by key, so presentation consistent when sorting by other col
-  const pre_sorted_data = _.chain(data)
-    .map((row) => ({
-      ...row,
-      measure_name: CovidMeasure.lookup(row.measure_id).name,
-    }))
-    .sortBy(data, (row) => get_est_doc_order(row[index_key]))
-    .reverse()
-    .value();
-
-  const column_configs = {
-    measure_name: {
-      index: 0,
-      header: text_maker("covid_measure"),
-      is_searchable: true,
-      sort_func: (name) => string_sort_func(name),
-    },
-    ...common_column_configs,
-  };
-
-  const [largest_measure_name, largest_measure_auth] = _.chain(pre_sorted_data)
-    .groupBy("measure_name")
-    .map((rows, measure_name) => [
-      measure_name,
-      _.reduce(rows, (memo, { vote, stat }) => memo + vote + stat, 0),
-    ])
-    .sortBy(([_measure_name, total]) => total)
-    .last()
-    .value();
-
-  return (
-    <Fragment>
-      <TM
-        k={"covid_estimates_measure_tab_text"}
-        args={{
-          ...panel_args,
-          largest_measure_name,
-          largest_measure_auth,
-        }}
-        className="medium-panel-text"
-      />
-      <SmartDisplayTable
-        data={_.map(pre_sorted_data, (row) =>
-          _.pick(row, _.keys(column_configs))
-        )}
-        column_configs={column_configs}
-        table_name={text_maker("by_measure_tab_label")}
-      />
-    </Fragment>
-  );
-};
+    return (
+      <Fragment>
+        <TM
+          k={"covid_estimates_measure_tab_text"}
+          args={{
+            ...panel_args,
+            largest_measure_name,
+            largest_measure_auth,
+          }}
+          className="medium-panel-text"
+        />
+        <ToggleVoteStat />
+        <SmartDisplayTable
+          data={_.map(pre_sorted_data, (row) =>
+            _.pick(row, _.keys(column_configs))
+          )}
+          column_configs={column_configs}
+          table_name={text_maker("by_measure_tab_label")}
+        />
+      </Fragment>
+    );
+  }
+);
 
 const tab_content_configs = [
   {
