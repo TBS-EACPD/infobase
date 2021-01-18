@@ -108,6 +108,7 @@ export class DisplayTable extends React.Component {
       }
       */,
       util_components,
+      disable_column_select,
     } = this.props;
     const { sort_by, descending, searches, visible_col_keys } = this.state;
 
@@ -221,8 +222,9 @@ export class DisplayTable extends React.Component {
       .value();
 
     const hide_column_select =
-      _.size(all_ordered_col_keys) <= 2 &&
-      _.every(col_configs_with_defaults, "initial_visible");
+      disable_column_select ||
+      (_.size(all_ordered_col_keys) <= 2 &&
+        _.every(col_configs_with_defaults, "initial_visible"));
     const util_components_default = {
       copyCsvUtil: (
         <DisplayTableCopyCsv key="copyCsvUtil" csv_string={csv_string} />

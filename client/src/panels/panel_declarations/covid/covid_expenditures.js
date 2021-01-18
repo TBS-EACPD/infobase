@@ -23,7 +23,6 @@ import { AboveTabFootnoteList } from "./covid_common_components.js";
 import {
   get_tabbed_content_props,
   string_sort_func,
-  wrap_with_vote_stat_controls,
 } from "./covid_common_utils.js";
 
 import text2 from "./covid_common_lang.yaml";
@@ -81,30 +80,6 @@ const SummaryTab = ({
   );
 };
 
-const common_column_configs = {
-  funding: {
-    index: 1,
-    header: text_maker("covid_funding"),
-    is_searchable: false,
-    is_summable: true,
-    formatter: (value) => (value ? formats.compact2_raw(value) : "—"),
-  },
-  stat: {
-    index: 2,
-    header: text_maker("covid_expenditures_stat"),
-    is_searchable: false,
-    is_summable: true,
-    formatter: "compact2",
-  },
-  vote: {
-    index: 3,
-    header: text_maker("covid_expenditures_voted"),
-    is_searchable: false,
-    is_summable: true,
-    formatter: "compact2",
-  },
-};
-
 const zip_expenditures_and_funding_rows = (index_key, exp_rows, funding_rows) =>
   _.chain([...exp_rows, ...funding_rows])
     .map(index_key)
@@ -114,148 +89,189 @@ const zip_expenditures_and_funding_rows = (index_key, exp_rows, funding_rows) =>
 
       const { vote, stat } = _.find(exp_rows, index) || { vote: 0, stat: 0 };
 
-      const { funding } = _.find(funding_rows, index) || { funding: 0 };
+      const { funding } = _.find(funding_rows, index) || { funding: "—" };
 
-      return { ...index, vote, stat, funding };
+      return {
+        ...index,
+        funding,
+        vote,
+        stat,
+        total_exp: vote + stat,
+        funding_used: _.isNumber(funding)
+          ? 1 - (funding - (vote + stat)) / funding
+          : funding,
+      };
     })
     .value();
 
-const ByDepartmentTab = wrap_with_vote_stat_controls(
-  ({
-    show_vote_stat,
-    ToggleVoteStat,
-    args: panel_args,
-    data: { covid_expenditures, covid_funding },
-  }) => {
-    const rows = zip_expenditures_and_funding_rows(
-      "org_id",
+const common_column_configs = {
+  funding: {
+    index: 1,
+    header: text_maker("covid_funding"),
+    is_searchable: false,
+    is_summable: true,
+    formatter: (value) =>
+      _.isNumber(value) ? formats.compact2_raw(value) : value,
+  },
+  stat: {
+    index: 2,
+    header: text_maker(`covid_expenditures_stat`),
+    is_searchable: false,
+    is_summable: true,
+    formatter: "compact2",
+    initial_visible: false,
+  },
+  vote: {
+    index: 3,
+    header: text_maker(`covid_expenditures_voted`),
+    is_searchable: false,
+    is_summable: true,
+    formatter: "compact2",
+    initial_visible: false,
+  },
+  total_exp: {
+    index: 4,
+    header: text_maker(`covid_expenditures`),
+    is_searchable: false,
+    is_summable: true,
+    formatter: "compact2",
+  },
+  funding_used: {
+    index: 5,
+    header: text_maker(`covid_funding_used`),
+    is_searchable: false,
+    is_summable: false,
+    formatter: (value) =>
+      _.isNumber(value) ? formats.percentage2_raw(value) : value,
+  },
+};
+
+const ByDepartmentTab = ({
+  args: panel_args,
+  data: { covid_expenditures, covid_funding },
+}) => {
+  const rows = zip_expenditures_and_funding_rows(
+    "org_id",
+    covid_expenditures,
+    covid_funding
+  );
+
+  const column_configs = {
+    org_id: {
+      index: 0,
+      header: text_maker("department"),
+      is_searchable: true,
+      formatter: (org_id) => {
+        const org = Dept.lookup(org_id);
+
+        return (
+          <a
+            href={infograph_options_href_template(org, "covid", {
+              panel_key,
+            })}
+          >
+            {org.name}
+          </a>
+        );
+      },
+      raw_formatter: (org_id) => Dept.lookup(org_id).name,
+      sort_func: (org_id_a, org_id_b) => {
+        const org_a = Dept.lookup(org_id_a);
+        const org_b = Dept.lookup(org_id_b);
+        return string_sort_func(org_a.name, org_b.name);
+      },
+    },
+    ...common_column_configs,
+  };
+
+  const [largest_dept_id, largest_dept_exp] = _.chain(covid_expenditures)
+    .groupBy("org_id")
+    .mapValues((data) =>
+      _.reduce(data, (memo, { vote, stat }) => memo + vote + stat, 0)
+    )
+    .toPairs()
+    .sortBy(([org_id, total]) => total)
+    .last()
+    .value();
+
+  return (
+    <Fragment>
+      <TM
+        k={"covid_expenditures_department_tab_text"}
+        args={{
+          ...panel_args,
+          largest_dept_name: Dept.lookup(largest_dept_id).name,
+          largest_dept_exp,
+        }}
+        className="medium-panel-text"
+      />
+      <SmartDisplayTable
+        data={rows}
+        column_configs={column_configs}
+        table_name={text_maker("by_department_tab_label")}
+      />
+    </Fragment>
+  );
+};
+
+const ByMeasureTab = ({
+  args: panel_args,
+  data: { covid_expenditures, covid_funding },
+}) => {
+  const rows_with_measure_names = _.chain(
+    zip_expenditures_and_funding_rows(
+      "measure_id",
       covid_expenditures,
       covid_funding
-    );
-
-    const column_configs = {
-      org_id: {
-        index: 0,
-        header: text_maker("department"),
-        is_searchable: true,
-        formatter: (org_id) => {
-          const org = Dept.lookup(org_id);
-
-          return (
-            <a
-              href={infograph_options_href_template(org, "covid", {
-                panel_key,
-              })}
-            >
-              {org.name}
-            </a>
-          );
-        },
-        raw_formatter: (org_id) => Dept.lookup(org_id).name,
-        sort_func: (org_id_a, org_id_b) => {
-          const org_a = Dept.lookup(org_id_a);
-          const org_b = Dept.lookup(org_id_b);
-          return string_sort_func(org_a.name, org_b.name);
-        },
-      },
-      ...common_column_configs,
-    };
-
-    const [largest_dept_id, largest_dept_exp] = _.chain(covid_expenditures)
-      .groupBy("org_id")
-      .mapValues((data) =>
-        _.reduce(data, (memo, { vote, stat }) => memo + vote + stat, 0)
-      )
-      .toPairs()
-      .sortBy(([org_id, total]) => total)
-      .last()
-      .value();
-
-    return (
-      <Fragment>
-        <TM
-          k={"covid_expenditures_department_tab_text"}
-          args={{
-            ...panel_args,
-            largest_dept_name: Dept.lookup(largest_dept_id).name,
-            largest_dept_exp,
-          }}
-          className="medium-panel-text"
-        />
-        <ToggleVoteStat />
-        <SmartDisplayTable
-          data={rows}
-          column_configs={column_configs}
-          table_name={text_maker("by_department_tab_label")}
-        />
-      </Fragment>
-    );
-  }
-);
-
-const ByMeasureTab = wrap_with_vote_stat_controls(
-  ({
-    show_vote_stat,
-    ToggleVoteStat,
-    args: panel_args,
-    data: { covid_expenditures, covid_funding },
-  }) => {
-    const rows_with_measure_names = _.chain(
-      zip_expenditures_and_funding_rows(
-        "measure_id",
-        covid_expenditures,
-        covid_funding
-      )
     )
-      .map(({ measure_id, ...row }) => ({
-        ...row,
-        measure_name: CovidMeasure.lookup(measure_id).name,
-      }))
-      .value();
+  )
+    .map(({ measure_id, ...row }) => ({
+      ...row,
+      measure_name: CovidMeasure.lookup(measure_id).name,
+    }))
+    .value();
 
-    const column_configs = {
-      measure_name: {
-        index: 0,
-        header: text_maker("covid_measure"),
-        is_searchable: true,
-        sort_func: (name) => string_sort_func(name),
-      },
-      ...common_column_configs,
-    };
+  const column_configs = {
+    measure_name: {
+      index: 0,
+      header: text_maker("covid_measure"),
+      is_searchable: true,
+      sort_func: (name) => string_sort_func(name),
+    },
+    ...common_column_configs,
+  };
 
-    const [largest_measure_name, largest_measure_exp] = _.chain(
-      rows_with_measure_names
-    )
-      .groupBy("measure_name")
-      .map((rows, measure_name) => [
-        measure_name,
-        _.reduce(rows, (memo, { vote, stat }) => memo + vote + stat, 0),
-      ])
-      .sortBy(([_measure_name, total]) => total)
-      .last()
-      .value();
+  const [largest_measure_name, largest_measure_exp] = _.chain(
+    rows_with_measure_names
+  )
+    .groupBy("measure_name")
+    .map((rows, measure_name) => [
+      measure_name,
+      _.reduce(rows, (memo, { vote, stat }) => memo + vote + stat, 0),
+    ])
+    .sortBy(([_measure_name, total]) => total)
+    .last()
+    .value();
 
-    return (
-      <Fragment>
-        <TM
-          k={"covid_expenditures_measure_tab_text"}
-          args={{
-            ...panel_args,
-            largest_measure_name,
-            largest_measure_exp,
-          }}
-          className="medium-panel-text"
-        />
-        <ToggleVoteStat />
-        <SmartDisplayTable
-          data={rows_with_measure_names}
-          column_configs={column_configs}
-          table_name={text_maker("by_measure_tab_label")}
-        />
-      </Fragment>
-    );
-  }
-);
+  return (
+    <Fragment>
+      <TM
+        k={"covid_expenditures_measure_tab_text"}
+        args={{
+          ...panel_args,
+          largest_measure_name,
+          largest_measure_exp,
+        }}
+        className="medium-panel-text"
+      />
+      <SmartDisplayTable
+        data={rows_with_measure_names}
+        column_configs={column_configs}
+        table_name={text_maker("by_measure_tab_label")}
+      />
+    </Fragment>
+  );
+};
 
 const tab_content_configs = [
   {
