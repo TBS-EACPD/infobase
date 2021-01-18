@@ -246,6 +246,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
           }))
           .value()
       )
+      .filter("total")
       .sortBy(({ vs_type }) => vs_type_ordering[vs_type]) // pre-sort by secondary index, for consistency
       .value();
 
@@ -343,6 +344,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
           }))
           .value()
       )
+      .filter("total")
       .sortBy(({ vs_type }) => vs_type_ordering[vs_type]) // pre-sort by secondary index, for consistency
       .value();
 
