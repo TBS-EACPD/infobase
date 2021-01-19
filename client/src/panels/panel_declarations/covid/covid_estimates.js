@@ -280,7 +280,9 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
 
     const [largest_dept_id, largest_dept_auth] = _.chain(data)
       .groupBy("org_id")
-      .mapValues((data) => _.reduce(data, (memo, { total }) => memo + total, 0))
+      .mapValues((data) =>
+        _.reduce(data, (memo, { vote, stat }) => memo + vote + stat, 0)
+      )
       .toPairs()
       .sortBy(([org_id, total]) => total)
       .last()
