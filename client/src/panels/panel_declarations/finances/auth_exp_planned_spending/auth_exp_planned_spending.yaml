@@ -94,7 +94,7 @@ show_lapsed_authorities_in:
 
 aggregated_lapse_by_votes:
   transform: [handlebars]
-  en: Aggregated Lapsed Authorities ({{lapse_unit}})
+  en: Aggregated Lapsed Authorities {{#if lapse_unit}}({{lapse_unit}}){{/if}}
   fr: Autorisations Périmées Agrégées
 
 gov_lapse_by_votes_text:
