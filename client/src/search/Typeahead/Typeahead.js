@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+import _ from "lodash";
+import { React, Fragment } from "react";
 import MediaQuery from "react-responsive";
 
 import {
@@ -18,7 +19,6 @@ import { InfoBaseHighlighter } from "../search_utils.js";
 import { Status } from "./Status.js";
 
 import text from "./Typeahead.yaml";
-
 import "./Typeahead.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);

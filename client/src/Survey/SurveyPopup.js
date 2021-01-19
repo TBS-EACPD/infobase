@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import { withRouter } from "react-router";
 
 import { tertiaryColor } from "src/core/color_defs.js";
+import { is_dev, is_dev_link } from "src/core/injected_build_constants.js";
 
 import {
   FixedPopover,
@@ -75,7 +76,7 @@ const get_state_defaults = () => {
 };
 
 const is_survey_campaign_over = () =>
-  Date.now() > survey_campaign_end_date || window.is_dev || window.is_dev_link;
+  Date.now() > survey_campaign_end_date || is_dev || is_dev_link;
 
 export const SurveyPopup = withRouter(
   class _SurveyPopup extends React.Component {

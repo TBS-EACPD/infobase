@@ -1,10 +1,8 @@
 import _ from "lodash";
-import React, { Fragment } from "react";
+import React from "react";
 import { Redirect } from "react-router";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
-import { Typeahead } from "src/search/Typeahead";
 
 import {
   create_text_maker_component,
@@ -195,7 +193,7 @@ class InfoGraph_ extends React.Component {
             {search_component}
           </div>
         )}
-        {!window.is_a11y_mode && (
+        {!is_a11y_mode && (
           <div className="row infographic-search-container">
             {search_component}
           </div>

@@ -2,7 +2,6 @@ import _ from "lodash";
 import React from "react";
 import { withRouter } from "react-router";
 
-
 import { trivial_text_maker } from "../models/text.js";
 
 import {
