@@ -1,9 +1,12 @@
-import { Fragment } from "react";
+import _ from "lodash";
+import React, { Fragment } from "react";
 
 import {
   gov_covid_summary_query,
   org_covid_summary_query,
 } from "src/models/covid/queries.js";
+
+import { lang } from "src/core/injected_build_constants.js";
 
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 
@@ -322,7 +325,7 @@ const tab_content_configs = [
           return {
             query: org_covid_summary_query,
             variables: {
-              lang: window.lang,
+              lang: lang,
               id: subject.id,
               _query_name: "org_covid_summary_query",
             },
@@ -333,7 +336,7 @@ const tab_content_configs = [
           return {
             query: gov_covid_summary_query,
             variables: {
-              lang: window.lang,
+              lang: lang,
               _query_name: "gov_covid_summary_query",
             },
             response_accessor: (response) =>
@@ -402,7 +405,7 @@ class CovidExpendituresPanel extends React.Component {
       .query({
         query: gov_covid_summary_query,
         variables: {
-          lang: window.lang,
+          lang: lang,
           _query_name: "gov_covid_summary_query",
         },
       })

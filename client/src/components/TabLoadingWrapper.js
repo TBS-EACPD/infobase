@@ -1,3 +1,5 @@
+import React from "react";
+
 import { SpinnerWrapper } from "./SpinnerWrapper.js";
 
 class TabLoadingWrapper extends React.Component {

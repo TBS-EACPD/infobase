@@ -1,15 +1,15 @@
+import _ from "lodash";
+import React from "react";
+
 import {
   create_text_maker_component,
   InfographicPanel,
   declare_panel,
-  Subject,
 } from "../shared.js";
-
-const { CovidMeasure } = Subject;
 
 import text from "./covid_measures.yaml";
 
-const { text_maker, TM } = create_text_maker_component([text]);
+const { text_maker } = create_text_maker_component([text]);
 
 export const declare_covid_measures_panel = () =>
   declare_panel({

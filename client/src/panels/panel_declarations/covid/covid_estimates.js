@@ -17,7 +17,13 @@ import {
   org_covid_summary_query,
 } from "src/models/covid/queries.js";
 
+import { textColor } from "src/core/color_defs.js";
+import { infobase_colors } from "src/core/color_schemes.js";
+
+import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
+
 import { get_client } from "src/graphql_utils/graphql_utils.js";
+
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
 import { AboveTabFootnoteList } from "./covid_common_components.js";
@@ -45,7 +51,7 @@ const { text_maker, TM } = create_text_maker_component([text1, text2]);
 
 const client = get_client();
 
-const colors = window.infobase_colors();
+const colors = infobase_colors();
 
 const panel_key = "covid_estimates_panel";
 
@@ -100,7 +106,7 @@ const SummaryTab = ({ args: panel_args, data }) => {
           ticks: {
             text: {
               fontSize: 12,
-              fill: window.infobase_color_constants.textColor,
+              fill: textColor,
               fontWeight: "550",
             },
           },
@@ -149,7 +155,7 @@ const SummaryTab = ({ args: panel_args, data }) => {
         />
       </div>
       <div className="fcol-xs-12 fcol-md-6">
-        {!window.is_a11y_mode && (
+        {!is_a11y_mode && (
           <StandardLegend
             items={legend_items}
             isHorizontal={true}
@@ -410,7 +416,7 @@ const tab_content_configs = [
           return {
             query: org_covid_summary_query,
             variables: {
-              lang: window.lang,
+              lang: lang,
               id: subject.id,
               _query_name: "org_covid_summary_query",
             },
@@ -421,7 +427,7 @@ const tab_content_configs = [
           return {
             query: gov_covid_summary_query,
             variables: {
-              lang: window.lang,
+              lang: lang,
               _query_name: "gov_covid_summary_query",
             },
             response_accessor: (response) =>
@@ -472,7 +478,7 @@ class CovidEstimatesPanel extends React.Component {
       .query({
         query: gov_covid_summary_query,
         variables: {
-          lang: window.lang,
+          lang: lang,
           _query_name: "gov_covid_summary_query",
         },
       })
