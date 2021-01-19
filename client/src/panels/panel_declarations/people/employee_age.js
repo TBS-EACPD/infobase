@@ -2,6 +2,7 @@ import _ from "lodash";
 import React from "react";
 
 import d3 from "src/core/d3-bundle.js";
+import { lang } from "src/core/injected_build_constants.js";
 
 import { GraphOverlay } from "../../../components";
 import {
@@ -142,7 +143,7 @@ export const declare_employee_age_panel = () =>
               const key = `${key_prefix}_avg_group`;
               return [
                 key,
-                window.lang === "en"
+                lang === "en"
                   ? common_text_args[key]?.replace("Age ", "")
                   : common_text_args[key],
               ];

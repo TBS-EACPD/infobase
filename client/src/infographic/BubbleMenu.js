@@ -2,6 +2,7 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { TM } from "../components/index.js";
 import { trivial_text_maker } from "../models/text.js";
@@ -9,7 +10,7 @@ import { trivial_text_maker } from "../models/text.js";
 import "./BubbleMenu.scss";
 
 const BubbleMenu = ({ items, active_item_id }) => {
-  if (window.is_a11y_mode) {
+  if (is_a11y_mode) {
     return (
       <nav aria-label={trivial_text_maker("dataset_navigation")}>
         <ul>

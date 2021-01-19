@@ -171,11 +171,11 @@ fte_will_be_1__new:
 fte_was:
   transform: [handlebars]
   en: |
-    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int was}}</div>
     <div class="mat-grid__inner-panel mat-grid__inner-panel--small">FTEs were employed</div>
-  fr: |
     <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int was}}</div>
+  fr: |
     <div class="mat-grid__inner-panel mat-grid__inner-panel--small">ETP étaient employés</div>
+    <div class="mat-grid__inner-panel mat-grid__inner-panel--large">{{fmt_big_int was}}</div>
 spending_change_was:
   transform: [handlebars]
   en:  |

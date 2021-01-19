@@ -321,11 +321,11 @@ const WelcomeMat = (props) => {
           has_fte && [
             <Pane key="a" size={20}>
               <MobileOrA11YContent children={years_ago} />
-              <PaneItem textSize="medium">
-                <FteFormat amt={oldest_hist_fte_data.value} />
-              </PaneItem>
               <PaneItem textSize="small">
                 <TM k="ftes_were_employed" />
+              </PaneItem>
+              <PaneItem textSize="medium">
+                <FteFormat amt={oldest_hist_fte_data.value} />
               </PaneItem>
             </Pane>,
 
@@ -707,11 +707,11 @@ const WelcomeMat = (props) => {
             !latest_equals_oldest_hist && (
               <Pane key="a" size={15}>
                 <MobileOrA11YContent children={years_ago} />
-                <PaneItem textSize="medium">
-                  <FteFormat amt={oldest_hist_fte_data.value} />
-                </PaneItem>
                 <PaneItem textSize="small">
                   <TM k="ftes_were_employed" />
+                </PaneItem>
+                <PaneItem textSize="medium">
+                  <FteFormat amt={oldest_hist_fte_data.value} />
                 </PaneItem>
               </Pane>
             ),
@@ -734,11 +734,11 @@ const WelcomeMat = (props) => {
             latest_equals_oldest_hist && (
               <Pane key="b2" size={30}>
                 <MobileOrA11YContent children={latest_hist_year_text} />
-                <PaneItem textSize="medium">
-                  <FteFormat amt={fte_latest_year} />
-                </PaneItem>
                 <PaneItem textSize="small">
                   <TM k="ftes_were_employed" />
+                </PaneItem>
+                <PaneItem textSize="medium">
+                  <FteFormat amt={fte_latest_year} />
                 </PaneItem>
               </Pane>
             ),
