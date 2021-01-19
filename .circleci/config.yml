@@ -9,6 +9,12 @@ deploy_filter: &deploy_filter
     branches:
       ignore:
         - /__.*/
+archive_filter: &archive_filter 
+  filters:
+    branches:
+      ignore:
+        - /__.*/
+        - /archived__.*/
 
 
 version: 2
@@ -399,3 +405,4 @@ workflows:
       - lighthouse:
           requires:
             - deploy_client
+          <<: *archive_filter
