@@ -1,3 +1,8 @@
+import _ from "lodash";
+import React from "react";
+
+import { lang } from "src/core/injected_build_constants.js";
+
 import { util_components, businessConstants } from "../shared.js";
 
 import { ToggleVoteStatProvider } from "./covid_common_components.js";
@@ -37,7 +42,7 @@ const wrap_with_vote_stat_controls = (Component) => (props) => (
 
 // TODO these est doc utils should move to somewhere central, maybe in models
 const get_est_doc_name = (est_doc) =>
-  estimates_docs[est_doc] ? estimates_docs[est_doc][window.lang] : "";
+  estimates_docs[est_doc] ? estimates_docs[est_doc][lang] : "";
 const get_est_doc_order = (est_doc) =>
   estimates_docs[est_doc] ? estimates_docs[est_doc].order : 9999;
 const est_doc_sort_func = (est_doc_a, est_doc_b) => {

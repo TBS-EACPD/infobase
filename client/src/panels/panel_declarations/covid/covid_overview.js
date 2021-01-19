@@ -1,8 +1,16 @@
-import { get_client } from "../../../graphql_utils/graphql_utils.js";
+import _ from "lodash";
+import React from "react";
+
 import {
   gov_covid_summary_query,
   org_covid_summary_query,
-} from "../../../models/covid/queries.js";
+} from "src/models/covid/queries.js";
+
+import { textColor } from "src/core/color_defs.js";
+import { infobase_colors } from "src/core/color_schemes.js";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import {
   create_text_maker_component,
@@ -24,7 +32,7 @@ const { estimates_docs } = businessConstants;
 
 // Copied from covid_estimates.js, TODO centralize these estimates utils somewhere
 const get_est_doc_name = (est_doc) =>
-  estimates_docs[est_doc] ? estimates_docs[est_doc][window.lang] : "";
+  estimates_docs[est_doc] ? estimates_docs[est_doc][lang] : "";
 
 const get_query = (level) =>
   ({
@@ -32,15 +40,10 @@ const get_query = (level) =>
     dept: { org_covid_summary_query },
   }[level]);
 
-const get_text_args = (subject, covid_summary) => {
-  // TODO
-  return {};
-};
-
 const CovidOverviewGraph = ({
   covid_summary: { covid_estimates, covid_expenditures, covid_commitments },
 }) => {
-  const colors = window.infobase_colors();
+  const colors = infobase_colors();
 
   const index_key = "index";
 
@@ -115,7 +118,7 @@ const CovidOverviewGraph = ({
               ticks: {
                 text: {
                   fontSize: 12,
-                  fill: window.infobase_color_constants.textColor,
+                  fill: textColor,
                   fontWeight: "550",
                 },
               },
@@ -150,7 +153,7 @@ class CovidOverviewPanel extends React.Component {
       .query({
         query,
         variables: {
-          lang: window.lang,
+          lang,
           ...(level === "dept" && { id }),
           _query_name: query_name,
         },
@@ -187,10 +190,10 @@ class CovidOverviewPanel extends React.Component {
           <Col isText size={12}>
             <TM
               k={`covid_overview_panel_text_${subject.level}`}
-              args={get_text_args(subject, covid_summary)}
+              args={panel_args}
             />
           </Col>
-          <Col isGraph={!window.is_a11y_mode} size={12}>
+          <Col isGraph={!is_a11y_mode} size={12}>
             <CovidOverviewGraph covid_summary={covid_summary} />
           </Col>
         </StdPanel>

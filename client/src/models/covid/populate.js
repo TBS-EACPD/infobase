@@ -32,7 +32,7 @@ export const api_load_has_covid_response = (subject) => {
       .query({
         query: org_has_covid_data_query,
         variables: {
-          lang: window.lang,
+          lang: lang,
           id: subject.id,
           _query_name: "has_covid_response",
         },
@@ -286,7 +286,7 @@ export const api_load_covid_expenditures_by_measure = (subject) => {
     .query({
       query,
       variables: {
-        lang: window.lang,
+        lang: lang,
         id,
         _query_name: "covid_expenditures_by_measure",
       },
@@ -395,7 +395,7 @@ export const api_load_covid_commitments_by_measure = (subject) => {
     .query({
       query,
       variables: {
-        lang: window.lang,
+        lang: lang,
         id,
         _query_name: "covid_commitments_by_measure",
       },
@@ -502,7 +502,7 @@ export const api_load_covid_funding_by_measure = (subject) => {
     .query({
       query,
       variables: {
-        lang: window.lang,
+        lang: lang,
         id,
         _query_name: "covid_funding_by_measure",
       },

@@ -25,7 +25,7 @@ import {
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace.js";
-
+import { lang } from "./injected_build_constants.js";
 import { Table } from "./TableClass.js";
 
 const load_tables = (table_set) =>
@@ -48,7 +48,7 @@ const pre_cache_queries = (panel_set, subject) => {
         client.query({
           query,
           variables: {
-            lang: window.lang,
+            lang: lang,
             id: subject.id,
             _query_name: name,
           },
