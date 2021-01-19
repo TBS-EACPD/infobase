@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { React, Fragment } from "react";
+import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
 import {
