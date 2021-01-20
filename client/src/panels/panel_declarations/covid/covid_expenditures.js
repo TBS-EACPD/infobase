@@ -81,11 +81,11 @@ const SummaryTab = ({
     text_args[`${subject.level}_covid_funding_in_year`] - expenditure_amount;
   const pie_data = [
     {
-      label: "TODO spent",
+      label: text_maker("covid_spent_funding"),
       value: expenditure_amount,
     },
     {
-      label: "TODO remaining",
+      label: text_maker("covid_remaining_funding"),
       value: remaining_amount,
     },
   ];
