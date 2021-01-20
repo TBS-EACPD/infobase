@@ -44,6 +44,12 @@ covid_expenditures_measure_tab_text:
 covid_funding:
   en: Funding
   fr: TODO
+covid_spent_funding:
+  en: Used Funding
+  fr: TODO
+covid_remaining_funding:
+  en: Remaining Funding
+  fr: TODO
 covid_expenditures_stat:
   en: Statutory Expenditures
   fr: TODO
