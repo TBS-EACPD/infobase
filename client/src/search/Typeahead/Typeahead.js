@@ -305,11 +305,7 @@ export class Typeahead extends React.Component {
             placeholder={placeholder}
             onChange={update_search_text}
             ref={this.typeaheadRef}
-            value={
-              current_selected_index === -1
-                ? search_text
-                : paginated_results[current_selected_index].name
-            }
+            value={search_text}
             onFocus={() =>
               this.setState({ can_show_menu: true, input_is_in_focus: true })
             }
