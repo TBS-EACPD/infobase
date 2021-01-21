@@ -30,12 +30,12 @@ covid_estimates_by_index_key:
   en: |
     Total COVID-19 authorities by release:
     {{#each index_summary_stats}}
-    * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}**
+    * {{gl_tt this.[0] this.[1]}}: **{{fmt_compact1_written this.[2]}}**
     {{/each}}
   fr: |
     Total des autorisations liées à la COVID-19 par octroi de crédits :
     {{#each index_summary_stats}}
-    * {{ this.[0]}} : **{{fmt_compact1_written this.[1] }}**
+    * {{gl_tt this.[0] this.[1]}} : **{{fmt_compact1_written this.[2]}}**
     {{/each}}
 
 covid_estimates_department_tab_text:

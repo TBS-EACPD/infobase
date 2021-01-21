@@ -32,6 +32,7 @@ import {
   wrap_with_vote_stat_controls,
   get_est_doc_name,
   get_est_doc_order,
+  get_est_doc_glossary_key,
   string_sort_func,
 } from "./covid_common_utils.js";
 
@@ -118,6 +119,7 @@ const SummaryTab = ({ args: panel_args, data }) => {
   const additional_text_args = (() => {
     const index_summary_stats = _.map(data, (row) => [
       get_est_doc_name(row.est_doc),
+      get_est_doc_glossary_key(row.est_doc),
       row.vote + row.stat,
     ]);
 
