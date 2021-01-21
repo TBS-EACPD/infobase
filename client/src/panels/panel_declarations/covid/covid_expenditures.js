@@ -230,6 +230,10 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
       .last()
       .value();
 
+    const largest_dept_funding = _.find(covid_funding, {
+      org_id: largest_dept_id,
+    }).funding;
+
     return (
       <Fragment>
         <TM
@@ -238,6 +242,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
             ...panel_args,
             largest_dept_name: Dept.lookup(largest_dept_id).name,
             largest_dept_exp,
+            largest_dept_funding,
           }}
           className="medium-panel-text"
         />
@@ -283,15 +288,26 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
       ...get_common_column_configs(show_vote_stat),
     };
 
-    const [largest_measure_name, largest_measure_exp] = _.chain(
-      rows_with_measure_names
-    )
+    const [
+      largest_measure_name,
+      { exp: largest_measure_exp, funding: largest_measure_funding },
+    ] = _.chain(rows_with_measure_names)
       .groupBy("measure_name")
       .map((rows, measure_name) => [
         measure_name,
-        _.reduce(rows, (memo, { vote, stat }) => memo + vote + stat, 0),
+        _.reduce(
+          rows,
+          ({ exp, funding }, { vote, stat, funding: row_funding }) => ({
+            exp: exp + vote + stat,
+            funding: funding + row_funding,
+          }),
+          {
+            exp: 0,
+            funding: 0,
+          }
+        ),
       ])
-      .sortBy(([_measure_name, total]) => total)
+      .sortBy(([_measure_name, { exp }]) => exp)
       .last()
       .value();
 
@@ -303,6 +319,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
             ...panel_args,
             largest_measure_name,
             largest_measure_exp,
+            largest_measure_funding,
           }}
           className="medium-panel-text"
         />
