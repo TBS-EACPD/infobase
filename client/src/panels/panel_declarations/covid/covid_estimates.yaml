@@ -28,12 +28,12 @@ covid_estimates_summary_text_dept:
 covid_estimates_by_index_key:
   transform: [handlebars,markdown]
   en: |
-    Total COVID-19 authorities by release:
+    Total COVID-19 authorities by {{gl_tt "release" "EST_DOC"}}:
     {{#each index_summary_stats}}
     * {{gl_tt this.[0] this.[1]}}: **{{fmt_compact1_written this.[2]}}**
     {{/each}}
   fr: |
-    Total des autorisations liées à la COVID-19 par octroi de crédits :
+    Total des autorisations liées à la COVID-19 par {{gl_tt "source" "EST_DOC"}} :
     {{#each index_summary_stats}}
     * {{gl_tt this.[0] this.[1]}} : **{{fmt_compact1_written this.[2]}}**
     {{/each}}
