@@ -45,8 +45,12 @@ const {
 
 const client = get_client();
 
+// TODO, would rather not hard code this here, but where else could it live?
+const last_refreshed_date = { en: "December 31, 2020", fr: "31 décembre 2020" }[
+  lang
+];
+
 const panel_key = "covid_expenditures_panel";
-const last_refreshed_date = "date"; // TODO, would rather not hard code this here, but where else where it live?
 
 const SummaryTab = ({
   args: panel_args,

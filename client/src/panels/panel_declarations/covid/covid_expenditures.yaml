@@ -5,7 +5,8 @@ covid_expenditures_panel_title:
 covid_estimates_above_tab_footnote_list:
   transform: [handlebars,markdown]
   en: |
-    * TODO gather up short list of most important notes on this data
+    * Funding amounts refer to the expected 2020-21 cash value of each measure
+    * TODO gather up short list of important notes on this data
     * E.g. need to be very clear on how it differs from other InfoBase finance data (and why it's apples and oranges with other InfoBase expenditures and estimates)
   fr: |
     * TODO
@@ -19,7 +20,7 @@ covid_expenditures_summary_text_gov:
 covid_expenditures_summary_text_dept:
   transform: [handlebars,markdown]
   en: |
-    As of **{{last_refreshed_date}}**, **{{subject.name}}** has recieved **{{fmt_compact1_written dept_covid_funding_in_year}}** in total funding for use towards implementing the government's response to the COVID-19 pandemic in **{{est_in_year}}**.
+    As of **{{last_refreshed_date}}**, **{{subject.name}}** has received **{{fmt_compact1_written dept_covid_funding_in_year}}** in total funding for use towards implementing the government's response to the COVID-19 pandemic in **{{est_in_year}}**.
     Of this total, **{{fmt_compact1_written dept_covid_expenditures_in_year}}** (**{{fmt_percentage1 (divide dept_covid_expenditures_in_year dept_covid_funding_in_year)}}**) has been spent so far.
 
     **{{subject.name}}'s** funding amount represents **{{fmt_percentage1 (divide dept_covid_funding_in_year gov_covid_funding_in_year)}}** of the government's total COVID-19 response funding, while its spent portion represents **{{fmt_percentage1 (divide dept_covid_expenditures_in_year gov_covid_expenditures_in_year)}}** of the government's total COVID-19 response spending.
