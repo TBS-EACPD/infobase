@@ -56,6 +56,17 @@ const est_doc_sort_func = (est_doc_a, est_doc_b) => {
   }
   return 0;
 };
+const get_est_doc_glossary_key = (est_doc) =>
+  ({
+    MAINS: "MAINS",
+    MYA: "MYA",
+    VA: "VOTED",
+    SA: "ADJUS",
+    SEA: "SUPPSA",
+    SEB: "SUPPSB",
+    SEC: "SUPPSC",
+    IE: "INTER_EST",
+  }[est_doc]);
 
 const get_plain_string = (string) =>
   _.chain(string).deburr().lowerCase().value();
@@ -77,5 +88,6 @@ export {
   get_est_doc_name,
   get_est_doc_order,
   est_doc_sort_func,
+  get_est_doc_glossary_key,
   string_sort_func,
 };
