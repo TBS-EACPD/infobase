@@ -3,7 +3,7 @@ import { declare_panel } from "../../shared.js";
 import { KeyConcepts } from "./KeyConcepts.js";
 
 const common_panel_config = {
-  static: true,
+  is_static: true,
   footnotes: false,
   source: false,
   calculate: _.constant(true),

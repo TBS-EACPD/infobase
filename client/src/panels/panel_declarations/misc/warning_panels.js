@@ -40,7 +40,7 @@ export const declare_dead_program_warning_panel = () =>
     panel_key: "dead_program_warning",
     levels: ["program"],
     panel_config_func: (level, panel_key) => ({
-      static: true,
+      is_static: true,
       footnotes: false,
       calculate: _.property("is_dead"),
       render() {
@@ -58,7 +58,7 @@ export const declare_dead_crso_warning_panel = () =>
     panel_key: "dead_crso_warning",
     levels: ["crso"],
     panel_config_func: (level, panel_key) => ({
-      static: true,
+      is_static: true,
       footnotes: false,
       calculate: _.property("is_dead"),
       render() {
@@ -76,7 +76,7 @@ export const declare_m2m_tag_warning_panel = () =>
     panel_key: "m2m_warning",
     levels: ["tag"],
     panel_config_func: (level, panel_key) => ({
-      static: true,
+      is_static: true,
       footnotes: false,
       calculate(subject) {
         return subject.is_m2m;
@@ -125,7 +125,7 @@ export const declare_late_results_warning_panel = () =>
       switch (level) {
         case "gov":
           return {
-            static: true,
+            is_static: true,
             footnotes: false,
             source: false,
             calculate: () => !_.isEmpty(docs_with_late_orgs),
@@ -166,7 +166,7 @@ export const declare_late_results_warning_panel = () =>
           };
         default:
           return {
-            static: true,
+            is_static: true,
             footnotes: false,
             source: false,
             calculate: (subject) =>
@@ -201,7 +201,7 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
       switch (level) {
         case "gov":
           return {
-            static: true,
+            is_static: true,
             footnotes: false,
             source: false,
             calculate: () => !_.isEmpty(late_orgs),
@@ -223,7 +223,7 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
           };
         default:
           return {
-            static: true,
+            is_static: true,
             footnotes: false,
             source: false,
             calculate: (subject) =>
