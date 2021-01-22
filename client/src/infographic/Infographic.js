@@ -80,7 +80,6 @@ class InfoGraph_ extends React.Component {
       subject: props.subject,
       active_bubble_id: props.active_bubble_id,
       level: props.level,
-      subject_panels_by_bubble_id: {},
       panel_filter: _.identity,
     };
   }
@@ -97,7 +96,6 @@ class InfoGraph_ extends React.Component {
         subject: nextProps.subject,
         active_bubble_id: nextProps.active_bubble_id,
         level: nextProps.level,
-        subject_panels_by_bubble_id: {},
       };
     } else {
       return null;
@@ -292,7 +290,6 @@ class InfoGraph_ extends React.Component {
 
         const common_new_state = {
           loading: false,
-          subject_panels_by_bubble_id,
           subject_bubble_defs,
         };
 
