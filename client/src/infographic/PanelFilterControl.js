@@ -19,7 +19,7 @@ const get_default_table_tag_state = ({ panel_keys, subject }) =>
       (panel_key) => PanelRegistry.lookup(panel_key, subject.level)?.depends_on
     )
     .uniq()
-    .map((table_id) => [table_id, true])
+    .map((table_id) => [table_id, false])
     .fromPairs()
     .value();
 
@@ -152,7 +152,10 @@ export default class PanelFilterControl extends React.Component {
       .keys()
       .value();
 
-    if (active_table_ids.length === _.size(table_tags)) {
+    if (
+      _.isEmpty(active_table_ids) ||
+      active_table_ids.length === _.size(table_tags)
+    ) {
       return _.identity;
     }
 
