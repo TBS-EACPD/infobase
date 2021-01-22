@@ -60,7 +60,7 @@ export default class PanelFilterControl extends React.Component {
     this.props.set_panel_filter(this.panel_filter_factory());
   }
   render() {
-    const { panel_keys } = this.props;
+    const { panel_keys, subject } = this.props;
     const { table_tags } = this.state;
 
     const panel_filter = this.panel_filter_factory();
@@ -74,6 +74,13 @@ export default class PanelFilterControl extends React.Component {
       .sortBy("label")
       .value();
 
+    const static_panel_count = _.chain(panel_keys)
+      .map(
+        (panel_key) => PanelRegistry.lookup(panel_key, subject.level).is_static
+      )
+      .compact()
+      .value().length;
+
     return (
       <Details
         summary_content={
@@ -83,8 +90,9 @@ export default class PanelFilterControl extends React.Component {
               className="panel-status-text"
               k="panels_status"
               args={{
-                total_number_of_panels: panel_keys.length,
-                number_of_active_panels: panel_filter(panel_keys).length,
+                total_number_of_panels: panel_keys.length - static_panel_count,
+                number_of_active_panels:
+                  panel_filter(panel_keys).length - static_panel_count,
               }}
             />
           </div>
@@ -149,16 +157,12 @@ export default class PanelFilterControl extends React.Component {
     }
 
     return (panel_keys) =>
-      _.filter(
-        panel_keys,
-        (panel_key) =>
-          _.chain(panel_key)
-            .thru(
-              (panel_key) =>
-                PanelRegistry.lookup(panel_key, subject.level).depends_on
-            )
-            .intersection(active_table_ids)
-            .value().length > 0
-      );
+      _.filter(panel_keys, (panel_key) => {
+        const panel = PanelRegistry.lookup(panel_key, subject.level);
+        return (
+          panel.is_static ||
+          _.intersection(panel.depends_on, active_table_ids).length > 0
+        );
+      });
   };
 }
