@@ -42,7 +42,7 @@ const options_by_app = {
       path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
       filename: `app-a11y-${language}.min.js`,
       chunkFilename: `[name].app-ally-${language}${
-        prod && !bundle_stats ? ".[contenthash]" : ""
+        prod ? ".[contenthash]" : ""
       }.min.js`,
     }),
   },
@@ -51,7 +51,7 @@ const options_by_app = {
       path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
       filename: `app-${language}.min.js`,
       chunkFilename: `[name].app-${language}${
-        prod && !bundle_stats ? ".[contenthash]" : ""
+        prod ? ".[contenthash]" : ""
       }.min.js`,
     }),
   },
