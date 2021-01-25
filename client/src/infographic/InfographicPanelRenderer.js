@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+import _ from "lodash";
+import React, { Fragment } from "react";
 
 import { SelectAllControl } from "../charts/legends/index.js";
 
@@ -8,6 +9,7 @@ import {
   LabeledBox,
   TagCloud,
 } from "../components/index.js";
+import { tertiaryColor } from "../core/color_defs.js";
 import { Table } from "../core/TableClass.js";
 import { PanelRegistry } from "../panels/PanelRegistry.js";
 import { PanelRenderer } from "../panels/PanelRenderer.js";
@@ -111,7 +113,7 @@ export default class InfographicPanelRenderer extends React.Component {
                     />
                     <div
                       style={{
-                        borderTop: `1px dashed ${window.infobase_color_constants.tertiaryColor}`,
+                        borderTop: `1px dashed ${tertiaryColor}`,
                         padding: "10px 0px 10px 5px",
                       }}
                     >

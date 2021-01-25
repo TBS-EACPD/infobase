@@ -1,5 +1,8 @@
 import classNames from "classnames";
+import _ from "lodash";
+import React from "react";
 
+import { backgroundColor } from "../core/color_defs.js";
 import { IconCheckmark } from "../icons/icons.js";
 import { GlossaryEntry } from "../models/glossary.js";
 
@@ -19,7 +22,7 @@ export const TagCloud = ({ tags, onSelectTag }) => {
           <button role="checkbox" aria-checked={!!active}>
             {active && (
               <IconCheckmark
-                color={window.infobase_color_constants.backgroundColor}
+                color={backgroundColor}
                 width={10}
                 height={10}
                 vertical_align={0.1}
