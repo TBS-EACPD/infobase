@@ -7,7 +7,7 @@ gov_employee_prov_text:
    * The National Capital Region (NCR) includes employees working in both Ottawa (Ontario) and Gatineau (Quebec).
    
    
-   {{#unless is_a11y_mode}}* Hover over or tap a province or territory in the map below to see the number of **Federal Public Service** employees working in that region over the last five snapshots. You can also use time slider at the bottom to change the year. Note that the scale may change to accommodate the data displayed. {{/unless}}
+   {{#unless is_a11y_mode}}* Hover over or tap a province or territory in the map below to see the number of **Federal Public Service** employees working in that region over the last five snapshots. Note that the scale may change to accommodate the data displayed. {{/unless}}
    
 
   fr: |
@@ -17,7 +17,7 @@ gov_employee_prov_text:
    * La région de la capitale nationale (RCN) inclut à la fois les employés qui travaillent à Ottawa (Ontario) et ceux qui travaillent à Gatineau (Québec).
    
    
-   {{#unless is_a11y_mode}}*  Cliquez ou pointez avec votre curseur sur une province ou territoire figurant à la carte ci dessous pour voir le nombre d’employés de la **fonction publique fédérale** travaillant dans cette région au moment des cinq derniers aperçus. TODO. Prière de retenir que l’échelle peut varier en fonction des données affichées. {{/unless}}
+   {{#unless is_a11y_mode}}*  Cliquez ou pointez avec votre curseur sur une province ou territoire figurant à la carte ci dessous pour voir le nombre d’employés de la **fonction publique fédérale** travaillant dans cette région au moment des cinq derniers aperçus. Prière de retenir que l’échelle peut varier en fonction des données affichées. {{/unless}}
     
 employee_prov_title: 
   transform: [handlebars]
@@ -34,7 +34,7 @@ dept_employee_prov_text:
    * The **National Capital Region (NCR)** includes employees working in both Ottawa (Ontario) and Gatineau (Quebec).
    
 
-   {{#unless is_a11y_mode}}* Hover over or tap a province or territory in the map below to see the number of **{{subject.name}}** employees working in that region over the last five snapshots. You can also use time slider at the bottom to change the year. Note that the scale may change to accommodate the data displayed. {{/unless}}
+   {{#unless is_a11y_mode}}* Hover over or tap a province or territory in the map below to see the number of **{{subject.name}}** employees working in that region over the last five snapshots. Note that the scale may change to accommodate the data displayed. {{/unless}}
    
 
   fr: |
@@ -44,4 +44,4 @@ dept_employee_prov_text:
    * La **région de la capitale nationale (RCN)** inclut à la fois les employés qui travaillent à Ottawa (Ontario) et ceux qui travaillent à Gatineau (Québec).
    
    
-   {{#unless is_a11y_mode}}* Cliquez ou pointez avec votre curseur sur une province ou territoire figurant à la carte ci dessous pour voir le nombre d’employés **{{de_dept dept}}** travaillant dans cette région au moment des cinq derniers aperçus. TODO. Prière de retenir que l’échelle peut varier en fonction des données affichées. {{/unless}}
+   {{#unless is_a11y_mode}}* Cliquez ou pointez avec votre curseur sur une province ou territoire figurant à la carte ci dessous pour voir le nombre d’employés **{{de_dept dept}}** travaillant dans cette région au moment des cinq derniers aperçus. Prière de retenir que l’échelle peut varier en fonction des données affichées. {{/unless}}

@@ -25,8 +25,8 @@ tp_by_region_text:
     {{/if}}
 
 tp_by_region_graph_usage:
-  en: Hover over or tap a province or territory in the map below to see the total transfer payments over the last five years. You can also use time slider at the bottom to change the year. Note that the scale may change to accommodate the data displayed.
-  fr: Survolez ou tapez sur une province ou un territoire dans la carte ci-dessous pour voir le total des paiements de transfert au cours des cinq dernières années. TODO Vous remarquerez que l'échelle peut changer selon les données affichées.
+  en: Hover over or tap a province or territory in the map below to see the total transfer payments over the last five years. Note that the scale may change to accommodate the data displayed.
+  fr: Survolez ou tapez sur une province ou un territoire dans la carte ci-dessous pour voir le total des paiements de transfert au cours des cinq dernières années. Vous remarquerez que l'échelle peut changer selon les données affichées.
 
 transfer_payments:
   en: Transfer Payments
