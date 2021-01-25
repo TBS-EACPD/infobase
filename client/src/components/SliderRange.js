@@ -1,3 +1,8 @@
+import _ from "lodash";
+import React from "react";
+
+import { backgroundColor } from "src/core/color_defs.js";
+
 import "./SliderRange.scss";
 import { IconArrowDown } from "../icons/icons.js";
 
@@ -54,7 +59,7 @@ export class SliderRange extends React.Component {
           {_.map(slider_data, (d, idx) => (
             <span
               style={{
-                color: window.infobase_color_constants.backgroundColor,
+                color: backgroundColor,
                 opacity: 0.9,
               }}
             >
