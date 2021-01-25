@@ -193,22 +193,6 @@ export class Canada extends React.Component {
     );
     return (
       <div className="frow no-container">
-        {years.length > 1 && (
-          <div
-            className="fcol-md-12"
-            style={{ marginBottom: "10px", textAlign: "center" }}
-          >
-            <Select
-              selected={selected_year_index}
-              options={_.map(years, (year, index) => ({
-                id: index,
-                display: run_template(year),
-              }))}
-              onSelect={this.year_select_callbback}
-              title={text_maker("select_year")}
-            />
-          </div>
-        )}
         <div className="fcol-md-3">
           <StandardLegend
             title={text_maker("legend")}
@@ -233,6 +217,26 @@ export class Canada extends React.Component {
           </div>
         </div>
         <div className="fcol-md-9" style={{ position: "relative" }}>
+          {years.length > 1 && (
+            <div
+              style={{
+                width: "100%",
+                marginBottom: "10px",
+                textAlign: "center",
+              }}
+            >
+              <Select
+                selected={selected_year_index}
+                options={_.map(years, (year, index) => ({
+                  id: index,
+                  display: run_template(year),
+                }))}
+                onSelect={this.year_select_callbback}
+                title={text_maker("select_year")}
+                className={"bold"}
+              />
+            </div>
+          )}
           <GraphOverlay>
             <CanadaGraph
               graph_args={graph_args}
