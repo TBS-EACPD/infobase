@@ -3,17 +3,20 @@ import React, { Fragment } from "react";
 
 import ReactDOM from "react-dom";
 
+import { businessConstants } from "src/models/businessConstants.js";
+
+import { run_template } from "src/models/text.js";
+
+import { secondaryColor, tertiaryColor } from "src/core/color_defs.js";
 import d3 from "src/core/d3-bundle.js";
 
 import {
   GraphOverlay,
   create_text_maker_component,
   SliderRange,
-} from "../../components";
-import { secondaryColor, tertiaryColor } from "../../core/color_defs.js";
-import { hex_to_rgb } from "../../general_utils.js";
-import { businessConstants } from "../../models/businessConstants.js";
-import { run_template } from "../../models/text.js";
+} from "src/components";
+import { hex_to_rgb } from "src/general_utils.js";
+
 import { StandardLegend } from "../legends";
 import { WrappedNivoHBar } from "../wrapped_nivo/index.js";
 
