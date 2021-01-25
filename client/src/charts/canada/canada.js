@@ -11,9 +11,9 @@ import { secondaryColor, tertiaryColor } from "src/core/color_defs.js";
 import d3 from "src/core/d3-bundle.js";
 
 import {
-  GraphOverlay,
   create_text_maker_component,
-  SliderRange,
+  GraphOverlay,
+  Select,
 } from "src/components";
 import { hex_to_rgb } from "src/general_utils.js";
 
@@ -24,7 +24,7 @@ import { CanadaD3Component } from "./CanadaD3Component.js";
 
 import text from "./canada.yaml";
 
-const { text_maker, TM } = create_text_maker_component(text);
+const { text_maker } = create_text_maker_component(text);
 
 const { provinces } = businessConstants;
 
@@ -172,13 +172,13 @@ export class Canada extends React.Component {
     }
   };
 
+  year_select_callbback = (year_index) =>
+    this.setState({ selected_year_index: year_index });
+
   render() {
     const { prov, selected_year_index } = this.state;
     const { graph_args } = this.props;
     const { data, color_scale, years, formatter } = graph_args;
-
-    const get_year = (year_index) => run_template(years[year_index]);
-
     const legend_items = _.map(
       color_scale.ticks(5).reverse(),
       (tick, idx, ticks) => ({
@@ -193,16 +193,22 @@ export class Canada extends React.Component {
     );
     return (
       <div className="frow no-container">
-        <div
-          className="fcol-md-12"
-          style={{ marginBottom: "10px", textAlign: "center" }}
-        >
-          <TM
-            el="h2"
-            k="showing_year_data"
-            args={{ selected_year: get_year(selected_year_index) }}
-          />
-        </div>
+        {years.length > 1 && (
+          <div
+            className="fcol-md-12"
+            style={{ marginBottom: "10px", textAlign: "center" }}
+          >
+            <Select
+              selected={selected_year_index}
+              options={_.map(years, (year, index) => ({
+                id: index,
+                display: run_template(year),
+              }))}
+              onSelect={this.year_select_callbback}
+              title={text_maker("select_year")}
+            />
+          </div>
+        )}
         <div className="fcol-md-3">
           <StandardLegend
             title={text_maker("legend")}
@@ -235,16 +241,6 @@ export class Canada extends React.Component {
               prov_select_callback={this.prov_select_callback}
             />
           </GraphOverlay>
-        </div>
-        <div className="fcol-md-12 slider-container">
-          <SliderRange
-            slider_data={years}
-            value_formatter={get_year}
-            slider_callback={(value) =>
-              this.setState({ selected_year_index: value })
-            }
-            selected_data_index={selected_year_index}
-          />
         </div>
       </div>
     );
