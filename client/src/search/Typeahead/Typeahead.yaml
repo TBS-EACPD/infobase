@@ -53,13 +53,13 @@ num_chars_needed:
 num_results_showing:
   transform: [handlebars]
   en: |
-    {{total_matching_results}} {{result}} found. Showing results {{page_range_start}} to {{page_range_end}} of {{total_matching_results}}.
+    {{total_matching_results}} {{result}} found. Showing results {{page_range_start}} to {{page_range_end}} of {{total_matching_results}}. Use up and down arrow keys to navigate.
   fr: |
     TODO
 
 num_results_showing_with_selected:
   transform: [handlebars]
   en: |
-    {{total_matching_results}} {{result}} found. Showing results {{page_range_start}} to {{page_range_end}} of {{total_matching_results}}. {{current_selected}}. {{current_selected_index}} of {{total_matching_results}} results.
+    {{current_selected}}. {{current_selected_index}} of {{total_matching_results}} results. Showing results {{page_range_start}} to {{page_range_end}} of {{total_matching_results}}.
   fr: |
     TODO
