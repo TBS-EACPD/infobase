@@ -72,7 +72,12 @@ export class DropdownMenu extends React.Component {
             is_open ? opened_button_class_name : closed_button_class_name
           }
           ref={"toggle_dropdown_button"}
-          style={{ marginRight: 5, height: "100%" }}
+          style={{
+            marginRight: 5,
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+          }}
           onClick={this.toggle_dropdown}
           title={button_description}
         >
