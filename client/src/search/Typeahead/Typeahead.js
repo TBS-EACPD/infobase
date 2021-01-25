@@ -194,6 +194,7 @@ export class Typeahead extends React.Component {
       const text = _.trimStart(event.target.value); //prevent empty searching that will show all results
       debounceOnNewQuery(text);
       this.setState({
+        can_show_menu: true,
         search_text: text,
         pagination_index: 0,
         current_selected_index: -1,
