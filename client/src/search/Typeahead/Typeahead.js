@@ -96,8 +96,11 @@ export class Typeahead extends React.Component {
     if (show_menu) {
       e.preventDefault();
       const { current_selected_index } = this.state;
-      current_selected_index >= 0 &&
+      if (current_selected_index === -1) {
+        this.setState({ current_selected_index: 0 });
+      } else {
         this.menu_item_references[current_selected_index].click();
+      }
     }
   };
 
