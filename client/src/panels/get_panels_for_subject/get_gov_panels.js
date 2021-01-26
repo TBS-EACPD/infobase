@@ -1,3 +1,4 @@
+import { services_feature_flag } from "../../core/injected_build_constants.js";
 import {
   // shared all
   declare_welcome_mat_panel,
@@ -81,7 +82,7 @@ export const get_gov_panels = (subject) => ({
     declare_employee_fol_panel(),
     declare_employee_gender_panel(),
   ],
-  services: [
+  services: services_feature_flag && [
     declare_services_types_panel(),
     declare_services_digital_status_panel(),
     declare_services_id_methods_panel(),
