@@ -1,5 +1,10 @@
-import "./services.scss";
-import text from "./services.yaml";
+import _ from "lodash";
+import React from "react";
+
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import Gauge from "../../../charts/gauge.js";
+import { DisplayTable } from "../../../components";
 import { Service } from "../../../models/services.js";
 
 import {
@@ -7,8 +12,9 @@ import {
   InfographicPanel,
   declare_panel,
 } from "../shared.js";
-import Gauge from "../../../charts/gauge.js";
-import { DisplayTable } from "../../../components";
+
+import text from "./services.yaml";
+import "./services.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -47,7 +53,7 @@ const ServicesStandardsPanel = ({ panel_args }) => {
     <div className={"col-container"}>
       <div className="services-standards-gauge-container fcol-md-6 p-20">
         <TM className="double-pie-text" k="has_standards_text" el="h4" />
-        {window.is_a11y_mode ? (
+        {is_a11y_mode ? (
           <DisplayTable
             data={[
               {
@@ -89,7 +95,7 @@ const ServicesStandardsPanel = ({ panel_args }) => {
       </div>
       <div className="services-standards-gauge-container fcol-md-6 p-20">
         <TM className="double-pie-text" k="target_met_text" el="h4" />
-        {window.is_a11y_mode ? (
+        {is_a11y_mode ? (
           <DisplayTable
             column_configs={{
               ...common_column_configs,

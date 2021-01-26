@@ -1,5 +1,13 @@
-import { trivial_text_maker } from "../shared.js";
+import React from "react";
+
+import {
+  successDarkColor,
+  highlightDark,
+  warnDarkColor,
+} from "src/core/color_defs.js";
+
 import { IconX, IconCheck, IconNotApplicable } from "../../../icons/icons.js";
+import { trivial_text_maker } from "../shared.js";
 
 const digital_status_keys = [
   "account_reg_digital",
@@ -25,7 +33,7 @@ const available_icons = {
   yes: (
     <IconCheck
       title={trivial_text_maker("yes")}
-      color={window.infobase_color_constants.successDarkColor}
+      color={successDarkColor}
       width={30}
       alternate_color={false}
     />
@@ -33,7 +41,7 @@ const available_icons = {
   no: (
     <IconX
       title={trivial_text_maker("no")}
-      color={window.infobase_color_constants.highlightDark}
+      color={highlightDark}
       width={30}
       alternate_color={false}
     />
@@ -41,7 +49,7 @@ const available_icons = {
   not_applicable: (
     <IconNotApplicable
       title={trivial_text_maker("not_applicable")}
-      color={window.infobase_color_constants.warnDarkColor}
+      color={warnDarkColor}
       width={30}
       alternate_color={false}
     />

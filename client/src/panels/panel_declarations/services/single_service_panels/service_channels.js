@@ -1,11 +1,17 @@
-import text from "../services.yaml";
-import { delivery_channels_keys } from "../shared.js";
+import _ from "lodash";
+import React from "react";
+
+import { infobase_colors } from "src/core/color_schemes.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { WrappedNivoHBar } from "../../../../charts/wrapped_nivo";
 import {
   create_text_maker_component,
   Panel,
   DisplayTable,
 } from "../../../../components";
-import { WrappedNivoHBar } from "../../../../charts/wrapped_nivo";
+import text from "../services.yaml";
+import { delivery_channels_keys } from "../shared.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -43,13 +49,13 @@ export class ServiceChannels extends React.Component {
       <Panel title={text_maker("single_service_channels_title")}>
         <TM
           k="service_channels_text"
-          className="medium_panel_text"
+          className="medium-panel-text"
           args={{
             max_channel_key: max_channel_key ? text_maker(max_channel_key) : "",
             max_value: max_value,
           }}
         />
-        {window.is_a11y_mode ? (
+        {is_a11y_mode ? (
           <DisplayTable
             data={_.map(filtered_keys, (key) => ({
               label: text_maker(key),

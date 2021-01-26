@@ -1,7 +1,14 @@
-import text from "./services.yaml";
-import { Subject } from "../../../models/subject.js";
-import { Service } from "../../../models/services.js";
+import _ from "lodash";
+import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
+
+import d3 from "src/core/d3-bundle.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { DisplayTable } from "../../../components";
+import { Service } from "../../../models/services.js";
+import { Subject } from "../../../models/subject.js";
+
 import {
   create_text_maker_component,
   InfographicPanel,
@@ -12,8 +19,8 @@ import {
   newIBLightCategoryColors,
   infograph_href_template,
 } from "../shared.js";
-import { DisplayTable } from "../../../components";
-import { Fragment } from "react";
+
+import text from "./services.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 const Dept = Subject.Dept;
@@ -76,7 +83,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
   ) : (
     <div>
       <TM
-        className="medium_panel_text"
+        className="medium-panel-text"
         k={
           is_gov
             ? "top10_gov_website_visits_text"
@@ -88,7 +95,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
           num_of_services: data.length,
         }}
       />
-      {window.is_a11y_mode ? (
+      {is_a11y_mode ? (
         table_content
       ) : (
         <Fragment>
