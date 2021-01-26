@@ -10,7 +10,10 @@ import {
   IconClipboard,
 } from "src/icons/icons.js";
 
-import { lang } from "../core/injected_build_constants.js";
+import {
+  lang,
+  services_feature_flag,
+} from "../core/injected_build_constants.js";
 import { create_text_maker } from "../models/text.js";
 
 import { infograph_href_template } from "./infographic_link.js";
@@ -46,7 +49,7 @@ const base_configs = [
     enable_panel_filter: true,
     svg: IconEmployee,
   },
-  {
+  services_feature_flag && {
     id: "services",
     title: _.constant(text.services_title[lang]),
     description: _.constant(text.services_desc[lang]),
