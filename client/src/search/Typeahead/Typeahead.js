@@ -24,14 +24,6 @@ import "./Typeahead.scss";
 const { text_maker, TM } = create_text_maker_component(text);
 
 export class Typeahead extends React.Component {
-  state = {
-    search_text: "",
-    can_show_menu: false,
-    current_selected_index: -1,
-    pagination_index: 0,
-    input_is_in_focus: false,
-  };
-
   constructor(props) {
     super(props);
 
@@ -39,6 +31,14 @@ export class Typeahead extends React.Component {
     this.rbtRef = React.createRef();
 
     this.menuId = _.uniqueId("rbt_menu_id_");
+
+    this.state = {
+      search_text: "",
+      can_show_menu: false,
+      current_selected_index: -1,
+      pagination_index: 0,
+      input_is_in_focus: false,
+    };
   }
 
   menu_item_references = {};
@@ -48,21 +48,20 @@ export class Typeahead extends React.Component {
 
     const anything_selected = !_.isEmpty(selected);
     if (anything_selected) {
-      this.setState({
-        search_text: "",
-        pagination_index: 0,
-        current_selected_index: -1,
-      });
-
-      if (_.isFunction(onSelect)) {
-        onSelect(selected.data);
-      }
-
       log_standard_event({
         SUBAPP: window.location.hash.replace("#", ""),
         MISC1: `TYPEAHEAD_SEARCH_SELECT`,
         MISC2: `selected: ${selected.name}`,
       });
+
+      this.setState({
+        search_text: "",
+        pagination_index: 0,
+        current_selected_index: -1,
+      });
+      if (_.isFunction(onSelect)) {
+        onSelect(selected.data);
+      }
     }
   };
 
@@ -167,7 +166,7 @@ export class Typeahead extends React.Component {
       pagination_size,
       search_configs,
       onNewQuery,
-      is_original_filter,
+      is_filter_modified,
     } = this.props;
 
     const {
@@ -352,14 +351,14 @@ export class Typeahead extends React.Component {
                     </div>
                   </MediaQuery>
                   <span>
-                    {is_original_filter
+                    {is_filter_modified
                       ? text_maker("add_filter")
                       : text_maker("edit_filter")}
                   </span>
                 </div>
               }
               dropdown_a11y_txt={
-                is_original_filter
+                is_filter_modified
                   ? text_maker("add_filter")
                   : text_maker("edit_filter")
               }
@@ -437,7 +436,7 @@ export class Typeahead extends React.Component {
                                 <a
                                   key="rbt-menu-item-0"
                                   id="rbt-menu-item-0"
-                                  className="rbt-menu-pagination-option dropdown-item "
+                                  className="rbt-menu-center dropdown-item "
                                 >
                                   <span className="aria-hidden">▲</span>
                                   <br />
@@ -515,7 +514,7 @@ export class Typeahead extends React.Component {
                                 <a
                                   key={`rbt-menu-item-${pagination_down_item_index}`}
                                   id={`rbt-menu-item-${pagination_down_item_index}`}
-                                  className="rbt-menu-pagination-option dropdown-item "
+                                  className="rbt-menu-center dropdown-item "
                                 >
                                   <TM
                                     k="paginate_next"
@@ -552,7 +551,7 @@ export class Typeahead extends React.Component {
                                 id={`rbt-menu-item-${
                                   pagination_down_item_index + 1
                                 }`}
-                                className="rbt-menu-close-menu-button dropdown-item"
+                                className="rbt-menu-center dropdown-item"
                               >
                                 {text_maker("close_menu")}
                               </a>

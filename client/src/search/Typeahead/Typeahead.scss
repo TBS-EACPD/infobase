@@ -24,352 +24,352 @@
 //The following classes are taken from react-bootstrap-typeahead css
 
 .rbt {
-    outline: none;
-  }
+  outline: none;
+}
   
-  .rbt-menu {
-    margin-bottom: 2px;
+.rbt-menu {
+  margin-bottom: 2px;
+}
+
+.rbt-menu > li a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rbt-menu > li a:focus {
+  outline: none;
+}
+
+.rbt-menu-center {
+  text-align: center !important;
+}
+
+.rbt .rbt-input-main::-ms-clear {
+  display: none;
+}
+
+.rbt-input-multi {
+  cursor: text;
+  overflow: hidden;
+  position: relative;
+  height: auto;
+}
+
+.rbt-input-multi.focus {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  border-color: #66afe9;
+  outline: 0;
+}
+
+.rbt-input-multi.form-control[disabled] {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
+.rbt-input-multi input::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+.rbt-input-multi input:-ms-input-placeholder {
+  color: #999;
+}
+
+.rbt-input-multi input::-webkit-input-placeholder {
+  color: #999;
+}
+
+.rbt-input-multi .rbt-input-wrapper {
+  margin-bottom: -4px;
+  margin-top: -1px;
+  overflow: hidden;
+}
+
+.rbt-input-multi .rbt-input-main {
+  height: 20px;
+  margin: 1px 0 4px;
+}
+
+.rbt-input-multi .rbt-input-hint-container {
+  display: inline-block;
+}
+
+.rbt-input-multi.input-lg .rbt-input-main, .rbt-input-multi.form-control-lg .rbt-input-main {
+  height: 24px;
+}
+
+.rbt-input-multi.input-sm .rbt-input-main, .rbt-input-multi.form-control-sm .rbt-input-main {
+  height: 18px;
+}
+
+.rbt-close {
+  z-index: 1;
+}
+
+.rbt-close-lg {
+  font-size: 24px;
+}
+
+.rbt-token {
+  background-color: #e7f4ff;
+  border: 0;
+  border-radius: 2px;
+  color: #1f8dd6;
+  display: inline-block;
+  line-height: 1em;
+  margin: 0 3px 3px 0;
+  padding: 4px 7px;
+  position: relative;
+}
+
+.rbt-token-disabled {
+  background-color: #ddd;
+  color: #888;
+  pointer-events: none;
+}
+
+.rbt-token-removeable {
+  cursor: pointer;
+  padding-right: 21px;
+}
+
+.rbt-token-active {
+  background-color: #1f8dd6;
+  color: #fff;
+  outline: none;
+  text-decoration: none;
+}
+
+.rbt-token .rbt-token-remove-button {
+  bottom: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: normal;
+  opacity: 1;
+  outline: none;
+  padding: 3px 7px;
+  position: absolute;
+  right: 0;
+  text-shadow: none;
+  top: -2px;
+}
+
+.rbt-loader {
+  -webkit-animation: loader-animation 600ms infinite linear;
+  -o-animation: loader-animation 600ms infinite linear;
+  animation: loader-animation 600ms infinite linear;
+  border: 1px solid #d5d5d5;
+  border-radius: 50%;
+  border-top-color: #1f8dd6;
+  display: block;
+  height: 16px;
+  width: 16px;
+}
+
+.rbt-loader-lg {
+  height: 20px;
+  width: 20px;
+}
+
+.rbt-aux {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  pointer-events: none;
+  /* Don't block clicks on the input */
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 34px;
+}
+
+.rbt-aux-lg {
+  width: 46px;
+}
+
+.rbt-aux .rbt-close {
+  margin-top: -4px;
+  pointer-events: auto;
+  /* Override pointer-events: none; above */
+}
+
+.has-aux .rbt-input {
+  padding-right: 34px;
+}
+
+.rbt-highlight-text {
+  background-color: inherit;
+  color: inherit;
+  font-weight: bold;
+  padding: 0;
+}
+
+/* Input Groups */
+.input-group > .rbt {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.input-group > .rbt .rbt-input-hint-container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.input-group > .rbt .rbt-input-hint {
+  z-index: 5;
+}
+
+.input-group > .rbt .rbt-aux {
+  z-index: 5;
+}
+
+.input-group > .rbt:not(:first-child) .form-control {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.input-group > .rbt:not(:last-child) .form-control {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Validation States */
+.has-error .rbt-input-multi.focus {
+  border-color: #843534;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+}
+
+.has-warning .rbt-input-multi.focus {
+  border-color: #66512c;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
+}
+
+.has-success .rbt-input-multi.focus {
+  border-color: #2b542c;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
+}
+
+@keyframes loader-animation {
+  to {
+    transform: rotate(1turn);
   }
-  
-  .rbt-menu > li a {
-    overflow: hidden;
-    text-overflow: ellipsis;
+}
+
+@-webkit-keyframes loader-animation {
+  to {
+    -webkit-transform: rotate(1turn);
   }
-  
-  .rbt-menu > li a:focus {
-    outline: none;
+}
+
+//The following was taken from the before BaseTypeahead
+
+.rbt-input-hint-container > .form-control {
+  width: 100%;
+  @media(max-width:$maxMediumDevice){
+      font-size: 14px;
   }
-  
-  .rbt-menu-close-menu-button, .rbt-menu-pagination-option {
-    text-align: center !important;
-  }
-  
-  .rbt .rbt-input-main::-ms-clear {
-    display: none;
-  }
-  
-  .rbt-input-multi {
-    cursor: text;
-    overflow: hidden;
-    position: relative;
-    height: auto;
-  }
-  
-  .rbt-input-multi.focus {
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-    border-color: #66afe9;
-    outline: 0;
-  }
-  
-  .rbt-input-multi.form-control[disabled] {
-    background-color: #e9ecef;
-    opacity: 1;
-  }
-  
-  .rbt-input-multi input::-moz-placeholder {
-    color: #999;
-    opacity: 1;
-  }
-  
-  .rbt-input-multi input:-ms-input-placeholder {
-    color: #999;
-  }
-  
-  .rbt-input-multi input::-webkit-input-placeholder {
-    color: #999;
-  }
-  
-  .rbt-input-multi .rbt-input-wrapper {
-    margin-bottom: -4px;
-    margin-top: -1px;
-    overflow: hidden;
-  }
-  
-  .rbt-input-multi .rbt-input-main {
-    height: 20px;
-    margin: 1px 0 4px;
-  }
-  
-  .rbt-input-multi .rbt-input-hint-container {
-    display: inline-block;
-  }
-  
-  .rbt-input-multi.input-lg .rbt-input-main, .rbt-input-multi.form-control-lg .rbt-input-main {
-    height: 24px;
-  }
-  
-  .rbt-input-multi.input-sm .rbt-input-main, .rbt-input-multi.form-control-sm .rbt-input-main {
-    height: 18px;
-  }
-  
-  .rbt-close {
-    z-index: 1;
-  }
-  
-  .rbt-close-lg {
-    font-size: 24px;
-  }
-  
-  .rbt-token {
-    background-color: #e7f4ff;
-    border: 0;
-    border-radius: 2px;
-    color: #1f8dd6;
-    display: inline-block;
-    line-height: 1em;
-    margin: 0 3px 3px 0;
-    padding: 4px 7px;
-    position: relative;
-  }
-  
-  .rbt-token-disabled {
-    background-color: #ddd;
-    color: #888;
-    pointer-events: none;
-  }
-  
-  .rbt-token-removeable {
-    cursor: pointer;
-    padding-right: 21px;
-  }
-  
-  .rbt-token-active {
-    background-color: #1f8dd6;
-    color: #fff;
-    outline: none;
-    text-decoration: none;
-  }
-  
-  .rbt-token .rbt-token-remove-button {
-    bottom: 0;
-    color: inherit;
-    font-size: inherit;
-    font-weight: normal;
-    opacity: 1;
-    outline: none;
-    padding: 3px 7px;
-    position: absolute;
-    right: 0;
-    text-shadow: none;
-    top: -2px;
-  }
-  
-  .rbt-loader {
-    -webkit-animation: loader-animation 600ms infinite linear;
-    -o-animation: loader-animation 600ms infinite linear;
-    animation: loader-animation 600ms infinite linear;
-    border: 1px solid #d5d5d5;
-    border-radius: 50%;
-    border-top-color: #1f8dd6;
-    display: block;
-    height: 16px;
-    width: 16px;
-  }
-  
-  .rbt-loader-lg {
-    height: 20px;
-    width: 20px;
-  }
-  
-  .rbt-aux {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    align-items: center;
-    bottom: 0;
-    justify-content: center;
-    pointer-events: none;
-    /* Don't block clicks on the input */
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 34px;
-  }
-  
-  .rbt-aux-lg {
-    width: 46px;
-  }
-  
-  .rbt-aux .rbt-close {
-    margin-top: -4px;
-    pointer-events: auto;
-    /* Override pointer-events: none; above */
-  }
-  
-  .has-aux .rbt-input {
-    padding-right: 34px;
-  }
-  
-  .rbt-highlight-text {
-    background-color: inherit;
-    color: inherit;
-    font-weight: bold;
-    padding: 0;
-  }
-  
-  /* Input Groups */
-  .input-group > .rbt {
-    -webkit-box-flex: 1;
-    -moz-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-  }
-  
-  .input-group > .rbt .rbt-input-hint-container {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-  }
-  
-  .input-group > .rbt .rbt-input-hint {
-    z-index: 5;
-  }
-  
-  .input-group > .rbt .rbt-aux {
-    z-index: 5;
-  }
-  
-  .input-group > .rbt:not(:first-child) .form-control {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-  
-  .input-group > .rbt:not(:last-child) .form-control {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-  
-  /* Validation States */
-  .has-error .rbt-input-multi.focus {
-    border-color: #843534;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
-    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
-  }
-  
-  .has-warning .rbt-input-multi.focus {
-    border-color: #66512c;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
-    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
-  }
-  
-  .has-success .rbt-input-multi.focus {
-    border-color: #2b542c;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
-    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
-  }
-  
-  @keyframes loader-animation {
-    to {
-      transform: rotate(1turn);
+}
+
+
+.rbt-input-hint {
+  visibility: hidden;
+}
+
+.rbt-menu {
+  width: 100%;
+  margin-top: 12px;
+  padding: 8px 0;
+  background-color: $backgroundColor;
+  border: 1px solid $separatorColor;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: $standardBorderRadius;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  max-height: 400px;
+  overflow-y: auto;
+  max-width: 100vw;
+  // list-style-type: none;
+
+  & > .dropdown-header, & > div > .dropdown-header {
+    margin-top: 0px;
+    padding: 0px 20px 3px 10px;
+    font-size: 1.8em;
+    line-height: 1.8em;
+    white-space: normal;
+    border-bottom: 1px solid $separatorColor;
+    &:not(:first-child) {
+      border-top: 1px solid $separatorColor;
     }
-  }
-  
-  @-webkit-keyframes loader-animation {
-    to {
-      -webkit-transform: rotate(1turn);
+
+    &:hover {
+      background-color: $backgroundColor;
+      color: #777;
     }
   }
 
-  //The following was taken from the before BaseTypeahead
+  & > li {	
+    padding: 3px 20px;	
+    font-size: 1.4em;	
+    line-height: 1.8em;	
+    cursor: pointer;	
 
-  .rbt-input-hint-container > .form-control {
-    width: 100%;
-    @media(max-width:$maxMediumDevice){
-        font-size: 14px;
-    }
-  }
-  
-  
-  .rbt-input-hint {
-    visibility: hidden;
-  }
-  
-  .rbt-menu {
-    width: 100%;
-    margin-top: 12px;
-    padding: 8px 0;
-    background-color: $backgroundColor;
-    border: 1px solid $separatorColor;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: $standardBorderRadius;
-    box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    max-height: 400px;
-    overflow-y: auto;
-    max-width: 100vw;
-    // list-style-type: none;
-  
-    & > .dropdown-header, & > div > .dropdown-header {
-      margin-top: 0px;
-      padding: 0px 20px 3px 10px;
-      font-size: 1.8em;
-      line-height: 1.8em;
-      white-space: normal;
-      border-bottom: 1px solid $separatorColor;
-      &:not(:first-child) {
-        border-top: 1px solid $separatorColor;
-      }
+    &:not(:first-child) {	
+      border-top: 1px solid $separatorColor;	
+    }	
 
-      &:hover {
-        background-color: $backgroundColor;
-        color: #777;
-      }
-    }
-  
-    & > li {	
-      padding: 3px 20px;	
-      font-size: 1.4em;	
-      line-height: 1.8em;	
-      cursor: pointer;	
-  
-      &:not(:first-child) {	
-        border-top: 1px solid $separatorColor;	
-      }	
-  
-      & > a {	
-        white-space: normal;	
-        color: $linkColor;	
-      }	
-    }
+    & > a {	
+      white-space: normal;	
+      color: $linkColor;	
+    }	
   }
-  
-  .rbt-menu.dropdown-menu > li.active,
-  .rbt-menu.dropdown-menu > li.active > a,
-  .rbt-menu.dropdown-menu > li:focus:not(.dropdown-header),
-  .rbt-menu.dropdown-menu > li:hover:not(.dropdown-header),
-  .rbt-menu.dropdown-menu > li > a:focus,
-  .rbt-menu.dropdown-menu > li > a:hover {
-    &:not(.disabled){
-      background-color: lighten($tertiaryColor, 30%);
-      color: $linkFocusColor;
-      text-decoration: underline;
-    }
+}
+
+.rbt-menu.dropdown-menu > li.active,
+.rbt-menu.dropdown-menu > li.active > a,
+.rbt-menu.dropdown-menu > li:focus:not(.dropdown-header),
+.rbt-menu.dropdown-menu > li:hover:not(.dropdown-header),
+.rbt-menu.dropdown-menu > li > a:focus,
+.rbt-menu.dropdown-menu > li > a:hover {
+  &:not(.disabled){
+    background-color: lighten($tertiaryColor, 30%);
+    color: $linkFocusColor;
+    text-decoration: underline;
   }
-  
-  .rbt-input-hint-container > .search-icon-container {
-    position: absolute; 
-    height: 100%; 
-    right: 8px; 
-    top: 0px; 
-    display: flex; 
-    align-items: center;
-  }
-  
-  .search-grayed-out-hint {
-    opacity: 0.8;
-  }
-  
-  input::-ms-clear {
-    display: none;
-    width: 0;
-    height: 0;
-  }
+}
+
+.rbt-input-hint-container > .search-icon-container {
+  position: absolute; 
+  height: 100%; 
+  right: 8px; 
+  top: 0px; 
+  display: flex; 
+  align-items: center;
+}
+
+.search-grayed-out-hint {
+  opacity: 0.8;
+}
+
+input::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}

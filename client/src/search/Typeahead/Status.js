@@ -51,7 +51,7 @@ export class Status extends React.Component {
         ? text_maker("result_single")
         : text_maker("result_multiple");
 
-    const content = (() => {
+    const text_content = (() => {
       if (query_length < min_length) {
         return text_maker("num_chars_needed", { min_length });
       } else if (total_matching_results === 0) {
@@ -109,7 +109,7 @@ export class Status extends React.Component {
     return (
       <div className="sr-only" style={{ position: "absolute" }}>
         <div role="status" aria-atomic="true" aria-live="polite">
-          {!silenced && debounced ? content : ""}
+          {!silenced && debounced ? text_content : ""}
         </div>
       </div>
     );

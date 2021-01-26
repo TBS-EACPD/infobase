@@ -101,21 +101,6 @@ const HomeLayout = (props) => (
               search_text: home_tm("everything_search_placeholder"),
               large: true,
             }}
-            initial_configs={{
-              include_orgs_normal_data: true,
-              include_orgs_limited_data: true,
-
-              include_crsos: true,
-              include_programs: true,
-
-              include_tags_goco: true,
-              include_tags_hi: true,
-              include_tags_hwh: true,
-              include_tags_wwh: true,
-
-              include_glossary: false,
-              include_tables: false,
-            }}
             onNewQuery={(query) => {
               log_standard_event({
                 SUBAPP: "home",

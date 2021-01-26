@@ -75,6 +75,7 @@ export class AdvancedSearch extends React.Component {
     const optional_configs = this.state;
 
     const {
+      initial_configs,
       everything_search_config,
       invariant_configs,
       onNewQuery,
@@ -188,13 +189,27 @@ export class AdvancedSearch extends React.Component {
                 </div>
               </fieldset>
             }
-            is_original_filter={_.isEqual(
-              this.props.initial_configs,
-              this.state
-            )}
+            is_filter_modified={_.isEqual(initial_configs, this.state)}
           />
         </div>
       </div>
     );
   }
 }
+AdvancedSearch.defaultProps = {
+  initial_configs: {
+    include_orgs_normal_data: true,
+    include_orgs_limited_data: true,
+
+    include_crsos: true,
+    include_programs: true,
+
+    include_tags_goco: true,
+    include_tags_hi: true,
+    include_tags_hwh: true,
+    include_tags_wwh: true,
+
+    include_glossary: false,
+    include_tables: false,
+  },
+};
