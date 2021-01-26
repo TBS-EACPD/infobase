@@ -254,7 +254,7 @@ const sources = _.mapValues(
             id: "service",
             text: tm("service_inventory"),
             external_link:
-              window.lang === "en"
+              lang === "en"
                 ? "https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c"
                 : "https://ouvert.canada.ca/data/fr/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c",
           },

@@ -1,5 +1,9 @@
-import "./gauge.scss";
+import React from "react";
+
 import { Format } from "../components";
+import { successDarkColor } from "../core/color_defs.js";
+
+import "./gauge.scss";
 
 export default class Gauge extends React.Component {
   render() {
@@ -34,5 +38,5 @@ export default class Gauge extends React.Component {
 }
 Gauge.defaultProps = {
   show_pct: true,
-  color: window.infobase_color_constants.successDarkColor,
+  color: successDarkColor,
 };

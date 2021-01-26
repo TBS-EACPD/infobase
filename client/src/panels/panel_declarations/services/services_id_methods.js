@@ -1,6 +1,13 @@
-import "./services.scss";
-import text from "./services.yaml";
+import _ from "lodash";
+import React from "react";
+
+import d3 from "src/core/d3-bundle.js";
+
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { DisplayTable } from "../../../components";
 import { Service } from "../../../models/services.js";
+
 import {
   create_text_maker_component,
   InfographicPanel,
@@ -8,7 +15,9 @@ import {
   WrappedNivoPie,
   newIBCategoryColors,
 } from "../shared.js";
-import { DisplayTable } from "../../../components";
+
+import text from "./services.yaml";
+import "./services.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -93,7 +102,7 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
     <div className={"col-container"}>
       <div className="fcol-md-6 p-20">
         <TM className="double-pie-text" k="sin_sub_title" el="h4" />
-        {window.is_a11y_mode ? (
+        {is_a11y_mode ? (
           <DisplayTable data={sin_data} column_configs={column_configs} />
         ) : (
           <WrappedNivoPie
@@ -108,7 +117,7 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
       </div>
       <div className="fcol-md-6 p-20">
         <TM className="double-pie-text" k="cra_sub_title" el="h4" />
-        {window.is_a11y_mode ? (
+        {is_a11y_mode ? (
           <DisplayTable data={cra_data} column_configs={column_configs} />
         ) : (
           <WrappedNivoPie

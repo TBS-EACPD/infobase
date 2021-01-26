@@ -167,7 +167,7 @@ export class DisplayTable extends React.Component {
         if (_.has(col_configs_with_defaults, sort_by)) {
           const sorting_config = col_configs_with_defaults[sort_by];
           return sorting_config.sort_func
-            ? _.sortWith(unsorted_array, (a, b) =>
+            ? _.map(unsorted_array).sort((a, b) =>
                 sorting_config.sort_func(a[sort_by], b[sort_by])
               )
             : _.sortBy(unsorted_array, (row) =>

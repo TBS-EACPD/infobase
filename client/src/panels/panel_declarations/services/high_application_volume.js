@@ -1,16 +1,23 @@
-import text from "./services.yaml";
+import _ from "lodash";
+import React from "react";
+
+import { DisplayTable } from "../../../components";
 import { Service } from "../../../models/services.js";
+
 import { Subject } from "../../../models/subject.js";
-import { delivery_channels_keys } from "./shared.js";
+
 import {
   create_text_maker_component,
   InfographicPanel,
   declare_panel,
   HeightClippedGraph,
 } from "../shared.js";
-import { DisplayTable } from "../../../components";
-const { Dept } = Subject;
 
+import { delivery_channels_keys } from "./shared.js";
+
+import text from "./services.yaml";
+
+const { Dept } = Subject;
 const { text_maker, TM } = create_text_maker_component(text);
 
 const HighApplicationVolumePanel = ({ panel_args }) => {
@@ -57,7 +64,7 @@ const HighApplicationVolumePanel = ({ panel_args }) => {
   return (
     <HeightClippedGraph clipHeight={600}>
       <TM
-        className="medium_panel_text"
+        className="medium-panel-text"
         k="high_application_volume_text"
         args={{
           num_of_high_volume_depts: data.length,

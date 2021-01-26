@@ -1,16 +1,18 @@
-import text from "../services.yaml";
-import FootNote from "../../../../models/footnotes/footnotes.js";
+import _ from "lodash";
+import React, { Fragment } from "react";
+
 import {
   create_text_maker_component,
   Panel,
   DisplayTable,
 } from "../../../../components";
+import FootNote from "../../../../models/footnotes/footnotes.js";
+import text from "../services.yaml";
 import {
   digital_status_keys,
   available_icons,
   available_keys,
 } from "../shared.js";
-import { Fragment } from "react";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -54,7 +56,7 @@ export class ServiceDigitalStatus extends React.Component {
 
     return (
       <Panel title={text_maker("digital_status")} footnotes={footnote}>
-        <TM className="medium_panel_text" k="overview_digital_status_title" />
+        <TM className="medium-panel-text" k="overview_digital_status_title" />
         <DisplayTable
           unsorted_initial={true}
           data={_.map(digital_status_keys, (key) => ({

@@ -1,7 +1,13 @@
-import text from "./services.yaml";
+import _ from "lodash";
+import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
+
+import d3 from "src/core/d3-bundle.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { DisplayTable } from "../../../components";
 import { Service } from "../../../models/services.js";
-import { delivery_channels_keys } from "./shared.js";
+
 import {
   create_text_maker_component,
   InfographicPanel,
@@ -11,8 +17,10 @@ import {
   formatter,
   newIBLightCategoryColors,
 } from "../shared.js";
-import { DisplayTable } from "../../../components";
-import { Fragment } from "react";
+
+import { delivery_channels_keys } from "./shared.js";
+
+import text from "./services.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -53,7 +61,7 @@ const Top10ServicesApplicationVolumePanel = ({ panel_args }) => {
   return (
     <div>
       <TM
-        className="medium_panel_text"
+        className="medium-panel-text"
         k="top10_services_volume_text"
         args={{
           highest_service_name: Service.lookup(_.last(data).id).name,
@@ -61,7 +69,7 @@ const Top10ServicesApplicationVolumePanel = ({ panel_args }) => {
           num_of_services: data.length,
         }}
       />
-      {window.is_a11y_mode ? (
+      {is_a11y_mode ? (
         table_content
       ) : (
         <Fragment>
