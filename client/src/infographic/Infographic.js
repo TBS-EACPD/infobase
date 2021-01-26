@@ -166,21 +166,6 @@ class InfoGraph_ extends React.Component {
           search_text: text_maker("subject_search_placeholder"),
           large: true,
         }}
-        initial_configs={{
-          include_orgs_normal_data: true,
-          include_orgs_limited_data: true,
-
-          include_crsos: true,
-          include_programs: true,
-
-          include_tags_goco: true,
-          include_tags_hi: true,
-          include_tags_hwh: true,
-          include_tags_wwh: true,
-
-          include_glossary: false,
-          include_tables: false,
-        }}
       />
     );
 

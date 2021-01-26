@@ -401,16 +401,16 @@ li.list-group-item {
 }
 
 .list-group-item.disabled {
-  background-color: #fff !important;
+  background-color: $backgroundColor !important;
   cursor: not-allowed;
 
   :hover {
-    background-color: #fff !important;
+    background-color: $backgroundColor !important;
     cursor: not-allowed;
   }
 
   :focus {
-    background-color: #fff !important;
+    background-color: $backgroundColor !important;
     cursor: not-allowed;
   }
 }
