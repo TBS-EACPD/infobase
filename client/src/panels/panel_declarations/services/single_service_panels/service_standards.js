@@ -1,18 +1,23 @@
-import { Fragment } from "react";
-import text from "../services.yaml";
-import FootNote from "../../../../models/footnotes/footnotes.js";
+import _ from "lodash";
+import React, { Fragment } from "react";
+
+import d3 from "src/core/d3-bundle.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
 import {
   create_text_maker_component,
   Panel,
   DisplayTable,
   FilterTable,
 } from "../../../../components";
-import { newIBCategoryColors } from "../../shared.js";
 import {
   IconAttention,
   IconCheck,
   IconNotApplicable,
 } from "../../../../icons/icons.js";
+import FootNote from "../../../../models/footnotes/footnotes.js";
+import { newIBCategoryColors } from "../../shared.js";
+import text from "../services.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -157,7 +162,7 @@ export class ServiceStandards extends React.Component {
         index: 4,
         header: text_maker("status"),
         formatter: (value) =>
-          window.is_a11y_mode ? text_maker(value) : status_icons[value],
+          is_a11y_mode ? text_maker(value) : status_icons[value],
       },
       count: {
         index: 5,
@@ -194,8 +199,8 @@ export class ServiceStandards extends React.Component {
       >
         {!_.isEmpty(data) ? (
           <Fragment>
-            <TM className="medium_panel_text" k="service_standards_text" />
-            {!window.is_a11y_mode && (
+            <TM className="medium-panel-text" k="service_standards_text" />
+            {!is_a11y_mode && (
               <FilterTable
                 items={_.map(standard_statuses, (status_key) => ({
                   key: status_key,
@@ -203,7 +208,7 @@ export class ServiceStandards extends React.Component {
                   active:
                     active_statuses.length === standard_statuses.length ||
                     _.indexOf(active_statuses, status_key) !== -1,
-                  text: !window.is_a11y_mode ? (
+                  text: !is_a11y_mode ? (
                     <span
                       className="link-unstyled"
                       tabIndex={0}
@@ -233,7 +238,7 @@ export class ServiceStandards extends React.Component {
             />
           </Fragment>
         ) : (
-          <TM className="medium_panel_text" k="no_service_standards_text" />
+          <TM className="medium-panel-text" k="no_service_standards_text" />
         )}
       </Panel>
     );

@@ -1,7 +1,11 @@
-import text from "./services.yaml";
-import { Service } from "../../../models/services.js";
-import { delivery_channels_keys } from "./shared.js";
+import _ from "lodash";
+import React from "react";
+
+import { infobase_colors } from "src/core/color_schemes.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
 import { StandardLegend, SelectAllControl } from "../../../charts/legends";
+import { Service } from "../../../models/services.js";
 
 import {
   create_text_maker_component,
@@ -12,6 +16,10 @@ import {
   HeightClippedGraph,
   util_components,
 } from "../shared.js";
+
+import { delivery_channels_keys } from "./shared.js";
+
+import text from "./services.yaml";
 
 const { DisplayTable } = util_components;
 const { text_maker, TM } = create_text_maker_component(text);
@@ -120,7 +128,7 @@ class ServicesChannelsPanel extends React.Component {
     return (
       <div>
         <TM
-          className="medium_panel_text"
+          className="medium-panel-text"
           k={
             subject.level === "program"
               ? "services_channels_program_text"
@@ -138,7 +146,7 @@ class ServicesChannelsPanel extends React.Component {
                 : text_maker("applications"),
           }}
         />
-        {window.is_a11y_mode ? (
+        {is_a11y_mode ? (
           <DisplayTable
             data={_.map(services, ({ name, service_report }) => ({
               name: name,
@@ -159,7 +167,7 @@ class ServicesChannelsPanel extends React.Component {
                 marginTop: "50px",
               }}
             >
-              <TM className="medium_panel_text" k="services_channels_title" />
+              <TM className="medium-panel-text" k="services_channels_title" />
             </div>
             <div className="fcol-md-4">
               <StandardLegend
@@ -235,7 +243,7 @@ class ServicesChannelsPanel extends React.Component {
             </div>
           </div>
         )}
-        {window.is_a11y_mode ? (
+        {is_a11y_mode ? (
           <DisplayTable
             data={channel_pct_data}
             column_configs={{
@@ -256,7 +264,7 @@ class ServicesChannelsPanel extends React.Component {
               <div style={{ textAlign: "center" }}>
                 <TM
                   style={{ fontWeight: 700 }}
-                  className="medium_panel_text"
+                  className="medium-panel-text"
                   k="services_channels_title"
                 />
               </div>

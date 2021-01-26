@@ -1,4 +1,8 @@
-import text from "./services.yaml";
+import _ from "lodash";
+import React from "react";
+
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
 import { Service } from "../../../models/services.js";
 
 import {
@@ -8,6 +12,8 @@ import {
   WrappedNivoPie,
   util_components,
 } from "../shared.js";
+
+import text from "./services.yaml";
 
 const { DisplayTable } = util_components;
 const { text_maker, TM } = create_text_maker_component(text);
@@ -35,7 +41,7 @@ const ServicesTypesPanel = ({ panel_args }) => {
           max_type_count: max_type.value,
           num_of_services: services.length,
         }}
-        className="medium_panel_text"
+        className="medium-panel-text"
         k={
           subject.level === "program"
             ? "services_types_prog_desc"

@@ -1,20 +1,26 @@
-import "../services.scss";
-import text from "../services.yaml";
+import _ from "lodash";
+import React, { Fragment } from "react";
+
+import { backgroundColor } from "src/core/color_defs.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import Gauge from "../../../../charts/gauge.js";
 import {
   create_text_maker_component,
   FancyUL,
   DisplayTable,
 } from "../../../../components";
+import { infograph_href_template } from "../../../../link_utils.js";
 import { Subject } from "../../../../models/subject.js";
+import { TextPanel, formatter } from "../../shared.js";
+import text from "../services.yaml";
 import {
   available_icons,
   available_keys,
   delivery_channels_keys,
 } from "../shared";
-import { infograph_href_template } from "../../../../link_utils.js";
-import Gauge from "../../../../charts/gauge.js";
-import { Fragment } from "react";
-import { TextPanel, formatter } from "../../shared.js";
+
+import "../services.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -76,12 +82,11 @@ export class ServiceOverview extends React.Component {
                     flexDirection: "column",
                     alignItems: "center",
                     paddingBottom: "10px",
-                    backgroundColor:
-                      window.infobase_color_constants.backgroundColor,
+                    backgroundColor: backgroundColor,
                   }}
                   className="service-overview-rect"
                 >
-                  {window.is_a11y_mode ? (
+                  {is_a11y_mode ? (
                     <DisplayTable
                       util_components={{
                         copyCsvUtil: null,

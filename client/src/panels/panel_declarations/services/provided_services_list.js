@@ -1,5 +1,9 @@
-import text from "./services.yaml";
+import _ from "lodash";
+import React from "react";
+
+import { FancyUL } from "../../../components";
 import { Service } from "../../../models/services.js";
+
 import {
   create_text_maker_component,
   InfographicPanel,
@@ -7,7 +11,7 @@ import {
   HeightClippedGraph,
 } from "../shared.js";
 
-import { FancyUL } from "../../../components";
+import text from "./services.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -42,7 +46,7 @@ class ProvidedServicesListPanel extends React.Component {
               ? "list_of_provided_services_prog_desc"
               : "list_of_provided_services_desc"
           }
-          className="medium_panel_text"
+          className="medium-panel-text"
           args={{
             subject_name: subject.name,
             num_of_services: services.length,

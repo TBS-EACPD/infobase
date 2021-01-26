@@ -1,5 +1,15 @@
-import text from "./services.yaml";
-import { Fragment } from "react";
+import _ from "lodash";
+import React, { Fragment } from "react";
+
+import {
+  secondaryColor,
+  highlightOrangeColor,
+  separatorColor,
+} from "src/core/color_defs.js";
+import d3 from "src/core/d3-bundle.js";
+
+import { is_a11y_mode, lang } from "src/core/injected_build_constants.js";
+
 import { Service } from "../../../models/services.js";
 
 import {
@@ -10,7 +20,10 @@ import {
   StandardLegend,
   util_components,
 } from "../shared.js";
+
 import { digital_status_keys } from "./shared.js";
+
+import text from "./services.yaml";
 
 const { DisplayTable } = util_components;
 const { text_maker, TM } = create_text_maker_component(text);
@@ -20,11 +33,7 @@ const not_applicable = text_maker("not_applicable");
 
 const colors = d3
   .scaleOrdinal()
-  .range([
-    window.infobase_color_constants.secondaryColor,
-    window.infobase_color_constants.highlightOrangeColor,
-    window.infobase_color_constants.separatorColor,
-  ]);
+  .range([secondaryColor, highlightOrangeColor, separatorColor]);
 
 const ServicesDigitalStatusPanel = ({ panel_args }) => {
   const { services, subject } = panel_args;
@@ -70,7 +79,7 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
   return (
     <div>
       <TM
-        className="medium_panel_text"
+        className="medium-panel-text"
         k={
           most_digital_component.key === least_digital_component.key
             ? "service_digital_status_most_and_least_same_text"
@@ -91,7 +100,7 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
             least_digital_component[can_online] / services.length,
         }}
       />
-      {window.is_a11y_mode ? (
+      {is_a11y_mode ? (
         <DisplayTable
           data={data}
           column_configs={{
@@ -151,7 +160,7 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
                   </g>
                 ),
             }}
-            {...nivo_lang_props[window.lang]}
+            {...nivo_lang_props[lang]}
           />
         </Fragment>
       )}

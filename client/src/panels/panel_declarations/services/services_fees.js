@@ -1,6 +1,9 @@
-import text from "./services.yaml";
-import { Service } from "../../../models/services.js";
+import _ from "lodash";
+import React from "react";
 
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { Service } from "../../../models/services.js";
 import {
   create_text_maker_component,
   InfographicPanel,
@@ -8,6 +11,8 @@ import {
   WrappedNivoPie,
   util_components,
 } from "../shared.js";
+
+import text from "./services.yaml";
 
 const { DisplayTable } = util_components;
 const { text_maker, TM } = create_text_maker_component(text);
@@ -40,9 +45,9 @@ const ServicesFeesPanel = ({ panel_args }) => {
           services_count: services.length,
           charge_fees_count: service_charges_fees.true || 0,
         }}
-        className="medium_panel_text"
+        className="medium-panel-text"
       />
-      {window.is_a11y_mode ? (
+      {is_a11y_mode ? (
         <DisplayTable
           data={data}
           column_configs={{
