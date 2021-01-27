@@ -1,3 +1,5 @@
+import { sum } from "d3-array";
+import { csvParseRows } from "d3-dsv";
 import _ from "lodash";
 
 import { make_unique_func, make_unique } from "../general_utils.js";
@@ -12,7 +14,6 @@ import {
 import { get_static_url, make_request } from "../request_utils.js";
 
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace.js";
-import d3 from "./d3-bundle.js";
 import { lang } from "./injected_build_constants.js";
 
 import {
@@ -192,7 +193,7 @@ export class Table extends mix().with(staticStoreMixin) {
             if (_.isEmpty(to_sum) || _.every(to_sum, _.isUndefined)) {
               return null;
             }
-            return d3.sum(to_sum);
+            return sum(to_sum);
           }
           return data;
         };
@@ -395,7 +396,7 @@ export class Table extends mix().with(staticStoreMixin) {
   populate_with_data(data) {
     data = _.trim(data);
     const row_transf = this.get_row_func();
-    const parsed_data = d3.csvParseRows(data);
+    const parsed_data = csvParseRows(data);
 
     data = _.chain(parsed_data)
       .tail()

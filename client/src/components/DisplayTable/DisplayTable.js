@@ -1,8 +1,7 @@
 import classNames from "classnames";
+import { csvFormatRows } from "d3-dsv";
 import _ from "lodash";
 import React from "react";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { LegendList } from "src/charts/legends/LegendList.js";
 import { toggle_list } from "src/general_utils.js";
@@ -218,7 +217,7 @@ export class DisplayTable extends React.Component {
           )
         )
       )
-      .thru((csv_data) => d3.csvFormatRows(csv_data))
+      .thru((csv_data) => csvFormatRows(csv_data))
       .value();
 
     const hide_column_select =

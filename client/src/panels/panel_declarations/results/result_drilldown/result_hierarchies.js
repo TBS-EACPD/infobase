@@ -1,6 +1,5 @@
+import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
-
-import d3 from "src/core/d3-bundle.js";
 
 import {
   filter_hierarchy,
@@ -59,7 +58,7 @@ export function create_full_results_hierarchy({
       data: {},
     };
   }
-  const d3_hierarchy = d3.hierarchy(root, (node) => {
+  const d3_hierarchy = hierarchy(root, (node) => {
     if (!_.isEmpty(node.children)) {
       return node.children; //if children is already defined, use it.
     }

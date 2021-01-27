@@ -1,12 +1,12 @@
+import { sum } from "d3-array";
+import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
 import { highlightColor, textColor } from "src/core/color_defs.js";
 import { infobase_colors } from "src/core/color_schemes.js";
 
-import d3 from "src/core/d3-bundle.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 
 import { SmartDisplayTable, GraphOverlay } from "src/components";
 import { toggle_list } from "src/general_utils.js";
@@ -65,9 +65,9 @@ class HistoricalProgramBars extends React.Component {
     const ticks = std_years.map((yr) => run_template(yr));
     const { selected } = this.state;
 
-    const colors = d3
-      .scaleOrdinal()
-      .range(_.concat(newIBLightCategoryColors, newIBDarkCategoryColors));
+    const colors = scaleOrdinal().range(
+      _.concat(newIBLightCategoryColors, newIBDarkCategoryColors)
+    );
     const all_keys = _.map(data, "id");
 
     const custom_table_data = _.chain(data)
@@ -445,7 +445,7 @@ export const declare_detailed_program_spending_split_panel = () =>
           .toPairs()
           .map(([so_num, group]) => ({
             so_num: +so_num,
-            sum: d3.sum(group, _.property("value")),
+            sum: sum(group, _.property("value")),
           }))
           .sortBy("sum")
           .reverse()
@@ -472,7 +472,7 @@ export const declare_detailed_program_spending_split_panel = () =>
             active: false,
           }))
           .filter(({ data }) => _.some(data))
-          .sortBy((x) => -d3.sum(x.data))
+          .sortBy((x) => -sum(x.data))
           .value();
 
         const in_year_prog_count = _.filter(

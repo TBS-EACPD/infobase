@@ -1,7 +1,7 @@
+import { sum } from "d3-array";
+import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 import React from "react";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { TextMaker as StandardTextMaker } from "../../../components/index.js";
 import { Table } from "../../../core/TableClass.js";
@@ -381,7 +381,7 @@ const estimates_post_traversal_rule_set = (
       node.children,
       (d) => d.value !== false && d.value !== 0
     );
-    node[data_type] = node.value = d3.sum(node.children, (d) => d.value);
+    node[data_type] = node.value = sum(node.children, (d) => d.value);
     if (node.data.is("dept")) {
       node.data.rpb_link = rpb_link(default_rpb_link_options);
     }
@@ -391,21 +391,20 @@ const estimates_post_traversal_rule_set = (
 const create_estimates_hierarchy = function (data_type, presentation_scheme) {
   set_year_by_presentation_scheme(presentation_scheme);
 
-  return d3
-    .hierarchy(Subject.gov, (node) => {
-      if (presentation_scheme === "est_type") {
-        return est_type_node_rules(node);
-      } else if (presentation_scheme === "vs_type") {
-        return vs_type_node_rules(node);
-      } else if (presentation_scheme === "org_estimates") {
-        return org_estimates_node_rules(node);
-      } else if (presentation_scheme.startsWith("est_doc_")) {
-        const est_doc_code = presentation_scheme
-          .replace("est_doc_", "")
-          .toUpperCase();
-        return specific_est_doc_node_rules(node, est_doc_code);
-      }
-    })
+  return hierarchy(Subject.gov, (node) => {
+    if (presentation_scheme === "est_type") {
+      return est_type_node_rules(node);
+    } else if (presentation_scheme === "vs_type") {
+      return vs_type_node_rules(node);
+    } else if (presentation_scheme === "org_estimates") {
+      return org_estimates_node_rules(node);
+    } else if (presentation_scheme.startsWith("est_doc_")) {
+      const est_doc_code = presentation_scheme
+        .replace("est_doc_", "")
+        .toUpperCase();
+      return specific_est_doc_node_rules(node, est_doc_code);
+    }
+  })
     .eachAfter((node) => {
       estimates_post_traversal_rule_set(node, data_type, presentation_scheme);
       post_traversal_search_string_set(node);

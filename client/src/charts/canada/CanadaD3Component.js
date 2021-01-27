@@ -10,13 +10,12 @@
 //  with the array ordered by fiscal year
 //
 
+import { select } from "d3-selection";
 import _ from "lodash";
 
 import { separatorColor } from "src/core/color_defs.js";
 
-import d3 from "src/core/d3-bundle.js";
 import { lang } from "src/core/injected_build_constants.js";
-
 
 import { businessConstants } from "../../models/businessConstants.js";
 import graphRegistry from "../graphRegistry.js";
@@ -68,7 +67,7 @@ export class CanadaD3Component {
   constructor(container, options) {
     options.alternative_svg = canada_svg_text;
 
-    graphRegistry.setup_graph_instance(this, d3.select(container), options);
+    graphRegistry.setup_graph_instance(this, select(container), options);
   }
 
   render(options) {
@@ -174,9 +173,9 @@ export class CanadaD3Component {
     svg
       .selectAll(".province")
       .each(function (d) {
-        var that = d3.select(this);
+        var that = select(this);
         var prov_key = that.attr("id").split("-")[1];
-        d3.select(this).datum(prov_key);
+        select(this).datum(prov_key);
       })
       .styles({
         fill: get_color,
@@ -217,7 +216,7 @@ export class CanadaD3Component {
       .on("blur", dispatch_mouseLeave)
       .each(function (prov_key, i) {
         const label = svg.selectAll("g.label").filter(function () {
-          return d3.select(this).attr("id") === `ca-${prov_key}--label`;
+          return select(this).attr("id") === `ca-${prov_key}--label`;
         });
 
         const coords = label
@@ -226,7 +225,7 @@ export class CanadaD3Component {
           .replace(",", " ")
           .split(" ");
 
-        d3.select(this).styles({
+        select(this).styles({
           left: `${padding + scale * coords[0]}px`,
           top: `${scale * coords[1]}px`,
           padding: "5px",
@@ -239,18 +238,15 @@ export class CanadaD3Component {
 
         const prov_name = get_province_display_name(prov_key, scale);
 
-        d3.select(this)
-          .append("p")
-          .style("margin-bottom", "0px")
-          .html(prov_name);
+        select(this).append("p").style("margin-bottom", "0px").html(prov_name);
 
-        d3.select(this)
+        select(this)
           .append("p")
           .attr("class", "label-value")
           .style("margin-bottom", "0px");
       });
     html.selectAll("p.label-value").each(function (prov_key, i) {
-      d3.select(this).html(formatter(selected_year_data[prov_key] || 0));
+      select(this).html(formatter(selected_year_data[prov_key] || 0));
     });
 
     // Hide optional map components based on data availability

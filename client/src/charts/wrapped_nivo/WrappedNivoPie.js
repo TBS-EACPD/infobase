@@ -1,10 +1,8 @@
 import { ResponsivePie } from "@nivo/pie";
 import classNames from "classnames";
-
+import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { Format, SmartDisplayTable } from "../../components/index.js";
 import { newIBCategoryColors } from "../../core/color_schemes.js";
@@ -41,7 +39,7 @@ export class WrappedNivoPie extends React.Component {
     } = this.props;
 
     const color_scale = infobase_colors_smart(
-      d3.scaleOrdinal().range(colors || newIBCategoryColors)
+      scaleOrdinal().range(colors || newIBCategoryColors)
     );
     const color_func = colorBy || ((d) => color_scale(d.label));
 

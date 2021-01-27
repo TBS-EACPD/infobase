@@ -1,11 +1,10 @@
+import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { textColor } from "src/core/color_defs.js";
 
-import d3 from "src/core/d3-bundle.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 
 import { GraphOverlay } from "../../../../components";
 import {
@@ -52,7 +51,7 @@ class Goco extends React.Component {
 
     let graph_content;
 
-    const colors = d3.scaleOrdinal().range(newIBCategoryColors);
+    const colors = scaleOrdinal().range(newIBCategoryColors);
 
     const total_fte_spend = _.reduce(
       Tag.gocos_by_spendarea,

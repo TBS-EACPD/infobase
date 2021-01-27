@@ -1,6 +1,6 @@
+import { sum } from "d3-array";
+import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { Subject } from "../../../models/subject.js";
 import { text_maker } from "../partition_text_provider.js";
@@ -69,21 +69,20 @@ const org_info_post_traversal_rule_set = (node, data_type) => {
       node.children,
       (d) => d.value !== false && d.value !== 0
     );
-    node[data_type] = node.value = d3.sum(node.children, (d) => d.value);
+    node[data_type] = node.value = sum(node.children, (d) => d.value);
   }
 };
 
 const create_org_info_ministry_hierarchy = function (data_type) {
-  return d3
-    .hierarchy(Subject.gov, (node) => {
-      if (node.is("gov")) {
-        return Subject.Ministry.get_all();
-      } else if (node.is("ministry")) {
-        return orgs_to_inst_form_nodes(node.orgs);
-      } else if (node.is("inst_form")) {
-        return node.orgs;
-      }
-    })
+  return hierarchy(Subject.gov, (node) => {
+    if (node.is("gov")) {
+      return Subject.Ministry.get_all();
+    } else if (node.is("ministry")) {
+      return orgs_to_inst_form_nodes(node.orgs);
+    } else if (node.is("inst_form")) {
+      return node.orgs;
+    }
+  })
     .eachAfter((node) => {
       org_info_post_traversal_rule_set(node, data_type);
       post_traversal_search_string_set(node);
@@ -101,23 +100,22 @@ const create_org_info_inst_form_hierarchy = function (
   data_type,
   grandparent_inst_form_group
 ) {
-  return d3
-    .hierarchy(Subject.gov, (node) => {
-      if (node.is("gov")) {
-        const orgs = _.chain(Subject.Ministry.get_all())
-          .map((ministry) => ministry.orgs)
-          .flatten()
-          .filter(
-            (org) =>
-              org.inst_form.parent_form.parent_form.id ===
-              grandparent_inst_form_group
-          )
-          .value();
-        return orgs_to_inst_form_nodes(orgs);
-      } else if (node.is("inst_form")) {
-        return node.orgs;
-      }
-    })
+  return hierarchy(Subject.gov, (node) => {
+    if (node.is("gov")) {
+      const orgs = _.chain(Subject.Ministry.get_all())
+        .map((ministry) => ministry.orgs)
+        .flatten()
+        .filter(
+          (org) =>
+            org.inst_form.parent_form.parent_form.id ===
+            grandparent_inst_form_group
+        )
+        .value();
+      return orgs_to_inst_form_nodes(orgs);
+    } else if (node.is("inst_form")) {
+      return node.orgs;
+    }
+  })
     .eachAfter((node) => {
       org_info_post_traversal_rule_set(node, data_type);
       post_traversal_search_string_set(node);

@@ -3,9 +3,8 @@
 // Initializes old graph classes with a common set of D3 dispatchers and some properties such as their available width and height, then
 // stores all currently rendered graphs in a registry so that a single onResize event can be used to trigger all of their re-renders
 // (updating their available width and height properties first)
+import { dispatch } from "d3-dispatch";
 import _ from "lodash";
-
-import d3 from "src/core/d3-bundle.js";
 
 class GraphRegistry {
   constructor() {
@@ -93,7 +92,7 @@ class GraphRegistry {
 
     instance.html = container;
 
-    instance.dispatch = options.dispatch = d3.dispatch.apply(
+    instance.dispatch = options.dispatch = dispatch.apply(
       this,
       base_dispatch_events.concat(options.events || [])
     );

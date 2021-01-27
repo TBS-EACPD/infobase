@@ -1,3 +1,4 @@
+import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
@@ -7,9 +8,7 @@ import {
   highlightColor,
 } from "src/core/color_defs.js";
 
-import d3 from "src/core/d3-bundle.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 
 import { GraphOverlay } from "../../../../components";
 import FootNote from "../../../../models/footnotes/footnotes";
@@ -107,7 +106,7 @@ class AuthExpPlannedSpendingGraph extends React.Component {
     const { data_series, gap_year } = this.props;
     const { active_series } = this.state;
 
-    const colors = d3.scaleOrdinal().range(newIBCategoryColors);
+    const colors = scaleOrdinal().range(newIBCategoryColors);
     const has_multiple_active_series =
       _.chain(active_series).values().compact().value().length > 1;
 

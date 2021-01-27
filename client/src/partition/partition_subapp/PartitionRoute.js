@@ -1,8 +1,7 @@
+import { select } from "d3-selection";
 import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
-
-import d3 from "src/core/d3-bundle.js";
 
 import {
   SpinnerWrapper,
@@ -66,7 +65,7 @@ export default class PartitionRoute extends React.Component {
   componentDidUpdate() {
     // Should only happen once, when the table dependencies finish loading and the spinner has been killed
     const { perspective, data_type } = this.getValidatedRouteParams(this.props);
-    this.container = d3.select(ReactDOM.findDOMNode(this.refs.container));
+    this.container = select(ReactDOM.findDOMNode(this.refs.container));
     this.partition = new PartitionSubApp(
       this.container,
       this.all_perspectives,

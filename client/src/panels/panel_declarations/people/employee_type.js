@@ -1,7 +1,6 @@
+import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
-
-import d3 from "src/core/d3-bundle.js";
 
 import {
   formats,
@@ -45,7 +44,7 @@ const calculate_funcs_by_level = {
           active: true,
         };
       })
-      .sortBy((d) => -d3.sum(d.data))
+      .sortBy((d) => -sum(d.data))
       .value();
   },
   dept: function (dept) {
@@ -57,8 +56,8 @@ const calculate_funcs_by_level = {
         five_year_percent: row.five_year_percent,
         active: true,
       }))
-      .filter((d) => d3.sum(d.data) !== 0)
-      .sortBy((d) => -d3.sum(d.data))
+      .filter((d) => sum(d.data) !== 0)
+      .sortBy((d) => -sum(d.data))
       .value();
   },
 };

@@ -1,12 +1,11 @@
+import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
 import { tertiaryColor } from "src/core/color_defs.js";
 
-import d3 from "src/core/d3-bundle.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 
 import {
   run_template,
@@ -43,7 +42,7 @@ const calculate = (type, subject) => {
 };
 
 export const format_and_get_exp_program_spending = (type, subject) => {
-  const colors = d3.scaleOrdinal().range(newIBCategoryColors);
+  const colors = scaleOrdinal().range(newIBCategoryColors);
   const { exp, progSpending } = calculate(type, subject);
   const raw_data = _.concat(exp, progSpending);
 

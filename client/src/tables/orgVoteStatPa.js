@@ -1,8 +1,5 @@
-// see [here](../table_definition.html) for description
-// of the table spec
+import { sum } from "d3-array";
 import _ from "lodash";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { trivial_text_maker } from "../models/text.js";
 
@@ -28,7 +25,7 @@ const vote_stat_query = function (vote_or_stat, cut_off) {
     .map(_.clone)
     .flatten()
     .sortBy(function (d) {
-      d.total = d3.sum(
+      d.total = sum(
         _.map(std_years, function (year) {
           return d[year + "auth"];
         })

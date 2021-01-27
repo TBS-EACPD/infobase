@@ -1,8 +1,7 @@
+import { csvParseRows } from "d3-dsv";
 import _ from "lodash";
 
-import d3 from "src/core/d3-bundle.js";
 import { lang } from "src/core/injected_build_constants.js";
-
 
 import { get_static_url, make_request } from "../request_utils.js";
 
@@ -11,7 +10,7 @@ import { Subject } from "./subject.js";
 const { Tag } = Subject;
 
 const parse_csv_string = (csv_string) =>
-  _.tail(d3.csvParseRows(_.trim(csv_string)));
+  _.tail(csvParseRows(_.trim(csv_string)));
 
 const load_csv = (csv_name) =>
   make_request(get_static_url(`csv/${csv_name}.csv`)).then((csv_string) =>

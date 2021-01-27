@@ -1,5 +1,6 @@
 import classNames from "classnames";
 
+import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
@@ -7,11 +8,9 @@ import { create_text_maker } from "src/models/text.js";
 
 import { newIBCategoryColors } from "src/core/color_schemes.js";
 
-import d3 from "src/core/d3-bundle.js";
 import { formats } from "src/core/format.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 
 import { toggle_list } from "src/general_utils.js";
 
@@ -256,6 +255,6 @@ NivoLineBarToggle.defaultProps = {
   legend_class: false,
   graph_col_class: false,
   get_colors: () =>
-    infobase_colors_smart(d3.scaleOrdinal().range(newIBCategoryColors)),
+    infobase_colors_smart(scaleOrdinal().range(newIBCategoryColors)),
   initial_graph_mode: "bar_stacked",
 };

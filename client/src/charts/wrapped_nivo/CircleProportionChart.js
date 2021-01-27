@@ -1,12 +1,11 @@
 import { ResponsiveBubble } from "@nivo/circle-packing";
+import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
 import MediaQuery from "react-responsive";
 
 import { textColor } from "src/core/color_defs.js";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { SmartDisplayTable } from "../../components/index.js";
 import { breakpoints } from "../../core/breakpoint_defs.js";
@@ -111,7 +110,7 @@ export class CircleProportionChart extends React.Component {
       table_name,
     } = this.props;
 
-    const color_scale = d3.scaleOrdinal().range(newIBCategoryColors);
+    const color_scale = scaleOrdinal().range(newIBCategoryColors);
     const value_formatter = get_formatter(is_money, formatter, true, false);
 
     const graph_data = {

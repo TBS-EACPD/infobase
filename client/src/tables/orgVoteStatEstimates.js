@@ -1,11 +1,7 @@
-// see [here](../table_definition.html) for description
-// of the table spec
-
+import { sum } from "d3-array";
 import _ from "lodash";
 
-import d3 from "src/core/d3-bundle.js";
 import { lang } from "src/core/injected_build_constants.js";
-
 
 import * as FORMAT from "../core/format";
 
@@ -172,7 +168,7 @@ export default {
           if (filter) {
             est_lines = _.filter(est_lines, filter);
           }
-          est_amnt = d3.sum(_.map(est_lines, col));
+          est_amnt = sum(_.map(est_lines, col));
           if (add_percentage) {
             return [est_doc, est_amnt, est_amnt / total];
           } else {

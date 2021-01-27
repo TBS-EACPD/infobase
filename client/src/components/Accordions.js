@@ -1,10 +1,10 @@
+import { easeLinear } from "d3-ease";
+import { select } from "d3-selection";
 import React from "react";
 import ReactDOM from "react-dom";
 import { TransitionGroup, Transition } from "react-transition-group";
 
 import { textLightColor } from "src/core/color_defs.js";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { IconChevron } from "../icons/icons.js";
 
@@ -32,11 +32,11 @@ class AccordionEnterExit extends React.Component {
     const node = ReactDOM.findDOMNode(component);
     const initialHeight = node.offsetHeight;
 
-    d3.select(node)
+    select(node)
       .style("opacity", 1)
       .style("max-height", initialHeight + "px")
       .transition()
-      .ease(d3.easeLinear)
+      .ease(easeLinear)
       .duration(this.props.collapseDuration)
       .style("opacity", 1e-6)
       .style("max-height", "1px");
@@ -44,16 +44,16 @@ class AccordionEnterExit extends React.Component {
   onEntering = (component) => {
     const node = ReactDOM.findDOMNode(component);
 
-    d3.select(node)
+    select(node)
       .style("max-height", "0px")
       .style("opacity", 1e-6)
       .transition()
-      .ease(d3.easeLinear)
+      .ease(easeLinear)
       .duration(this.props.expandDuration)
       .style("max-height", this.props.maxHeight || defaultMaxHeight)
       .style("opacity", "1")
       .on("end", function () {
-        d3.select(node).style("max-height", "none");
+        select(node).style("max-height", "none");
       });
   };
   render() {

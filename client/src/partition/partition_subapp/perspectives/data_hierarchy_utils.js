@@ -1,6 +1,5 @@
+import { sum } from "d3-array";
 import _ from "lodash";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { Table } from "../../../core/TableClass.js";
 import { GlossaryEntry } from "../../../models/glossary";
@@ -42,9 +41,9 @@ const post_traversal_value_set = function (node, data_type) {
       node.children,
       (d) => d.value !== false && d.value !== 0
     );
-    node.exp = d3.sum(node.children, (d) => d.exp);
-    node.fte = d3.sum(node.children, (d) => d.fte);
-    node.value = d3.sum(node.children, (d) => d.value);
+    node.exp = sum(node.children, (d) => d.exp);
+    node.fte = sum(node.children, (d) => d.fte);
+    node.value = sum(node.children, (d) => d.value);
   }
 };
 

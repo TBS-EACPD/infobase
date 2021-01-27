@@ -1,6 +1,5 @@
+import { sum } from "d3-array";
 import _ from "lodash";
-
-import d3 from "src/core/d3-bundle.js";
 
 import {
   trivial_text_maker,
@@ -98,7 +97,7 @@ export default {
           return [key].concat(years);
         })
         .sortBy(function (row) {
-          return d3.sum(_.tail(row));
+          return sum(_.tail(row));
         })
         .value();
     },
@@ -114,7 +113,7 @@ export default {
       return _.map(compact_age_groups, function (age_group) {
         var summed = _.map(people_years, function (year) {
           if (groups[age_group]) {
-            return d3.sum(groups[age_group], function (row) {
+            return sum(groups[age_group], function (row) {
               return row[year];
             });
           } else {
@@ -128,7 +127,7 @@ export default {
       var fm1 = formats["big_int"];
       var fm2 = formats.percentage;
       var column = _.map(this.data, year);
-      var dept_total = d3.sum(column);
+      var dept_total = sum(column);
       var groups = this.high_level_age_split();
       // delete missing rows
       //delete groups[undefined]
@@ -137,7 +136,7 @@ export default {
       var mapfunc = function (key) {
         var relevant_group = groups[key];
         var mini_column = _.map(relevant_group, year);
-        var group_total = d3.sum(mini_column);
+        var group_total = sum(mini_column);
         return [key, fm1(group_total), fm2(group_total / dept_total)];
       };
       return _.map(compact_age_groups, mapfunc);

@@ -1,9 +1,10 @@
+import { sum } from "d3-array";
+import { scaleOrdinal } from "d3-scale";
+import { select } from "d3-selection";
 import _ from "lodash";
 import React from "react";
 
-import d3 from "src/core/d3-bundle.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 
 import {
   Subject,
@@ -64,7 +65,7 @@ const node_render = (vs) =>
 
 const tooltip_render = (vs) =>
   function (d) {
-    const sel = d3.select(this);
+    const sel = select(this);
     sel.attrs({
       className: "link-unstyled",
       tabIndex: "0",
@@ -84,7 +85,7 @@ const tooltip_render = (vs) =>
     });
   };
 
-const d3_scale = d3.scaleOrdinal(newIBLightCategoryColors);
+const d3_scale = scaleOrdinal(newIBLightCategoryColors);
 const color_scale = (vs) =>
   function (d) {
     return d3_scale(text_func(vs, d, ""));
@@ -98,7 +99,7 @@ const planned_vote_or_stat_render = (vs) =>
     const { data, voted_stat_est_in_year } = panel_args;
 
     const top_10_rows = _.take(data, 10);
-    const total_amt = d3.sum(data, _.property(main_col));
+    const total_amt = sum(data, _.property(main_col));
 
     const subj_map = _.chain(top_10_rows)
       .map((obj) => [obj.dept, infograph_href_template(Dept.lookup(obj.dept))])
@@ -243,7 +244,7 @@ const planned_vote_or_stat_calculate = (vs) =>
     ret.data.push({
       desc: text_maker(`all_other_${vs}_items`),
       others: true,
-      [main_col]: d3.sum(
+      [main_col]: sum(
         _.takeRight(all_rows, all_rows.length - 10),
         (d) => d[main_col]
       ),

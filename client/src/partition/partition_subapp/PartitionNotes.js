@@ -1,7 +1,6 @@
+import { select } from "d3-selection";
 import React from "react";
 import ReactDOM from "react-dom";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { AutoAccordion } from "../../components/index.js";
 
@@ -12,9 +11,7 @@ export class PartitionNotes extends React.Component {
     super();
   }
   componentDidMount() {
-    const autoAccordion = d3.select(
-      ReactDOM.findDOMNode(this.refs.autoAccordion)
-    );
+    const autoAccordion = select(ReactDOM.findDOMNode(this.refs.autoAccordion));
     autoAccordion.select(".pull-down-accordion-header").node().click();
   }
   render() {

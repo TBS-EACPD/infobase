@@ -1,8 +1,7 @@
+import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 import {
@@ -37,7 +36,7 @@ function create_rooted_resource_hierarchy({ year, root_subject }) {
     },
   };
 
-  const d3_hierarchy = d3.hierarchy(root, (node) => {
+  const d3_hierarchy = hierarchy(root, (node) => {
     const {
       id: parent_id,
       data: { subject },

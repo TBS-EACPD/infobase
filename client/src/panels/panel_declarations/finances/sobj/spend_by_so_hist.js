@@ -1,9 +1,9 @@
+import { sum } from "d3-array";
+import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
-import d3 from "src/core/d3-bundle.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 
 import { GraphOverlay } from "src/components";
 import { toggle_list } from "src/general_utils.js";
@@ -71,9 +71,9 @@ class SobjLine extends React.Component {
     this.state = {
       active_sobjs: [_.first(props.data).label],
     };
-    this.colors = d3
-      .scaleOrdinal()
-      .range(_.concat(newIBLightCategoryColors, newIBDarkCategoryColors));
+    this.colors = scaleOrdinal().range(
+      _.concat(newIBLightCategoryColors, newIBDarkCategoryColors)
+    );
   }
   render() {
     const { data } = this.props;
@@ -206,7 +206,7 @@ export const declare_spend_by_so_hist_panel = () =>
               (year) => orgSobjs.so_num(year, subject)[sobj.so_num]
             ),
           }))
-          .filter((d) => d3.sum(d.data))
+          .filter((d) => sum(d.data))
           .value();
 
         const avg_data = _.map(

@@ -1,6 +1,5 @@
+import { sum } from "d3-array";
 import _ from "lodash";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { Subject, trivial_text_maker, m, year_templates } from "./table_common";
 
@@ -197,7 +196,7 @@ export default {
           );
         })
         .sortBy(function (x) {
-          return -d3.sum(_.tail(x));
+          return -sum(_.tail(x));
         })
         .value();
     },
