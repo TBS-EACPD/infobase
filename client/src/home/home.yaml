@@ -148,13 +148,13 @@ home_desc_meta_attr:
   en: The best place to find answers about the federal government like how much is being spent, employee demographics and government results. We use visuals to make complex data a simple story. 
   fr: Meilleur endroit pour trouver des réponses sur le gouvernement fédéral, comme le montant des dépenses, le profil démographique des employés et les résultats obtenus. Nous utilisons des graphiques pour faire un récit simple de données complexes. 
 
-lab_home_title:
-  en: InfoLab
-  fr: InfoLab
+home_diff_title:
+  en: Indicator text comparisons
+  fr: Comparaison de texte des indicateurs
 
-lab_home_text:
-  en: Beta versions of tools and data toys
-  fr: Outils de version « beta » et jouets de données amusants
+home_diff_text:
+  en: Compare text portions of indicators between the most recent two departmental plans
+  fr: Comparer entre elles des portions de texte d’indicateurs dans les deux plans ministériels les plus récents
 
 ## Featured content titles
 

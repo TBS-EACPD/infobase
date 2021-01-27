@@ -26,7 +26,6 @@ import {
   IconHierarchy,
   IconTag,
   IconReport,
-  IconLab,
   IconFinancesAlt,
   IconEmployeesAlt,
   IconClipboardAlt,
@@ -326,11 +325,11 @@ const SubAppLayout = (props) => (
             <CardTopImage
               tmf={home_tm}
               svg={
-                <IconLab width="100%" color="#2C70C9" alternate_color={false} />
+                <IconDPs width="100%" color="#2C70C9" alternate_color={false} />
               }
-              title_key="lab_home_title"
-              text_key="lab_home_text"
-              link_href="#lab"
+              title_key="home_diff_title"
+              text_key="home_diff_text"
+              link_href="#diff"
             />
           </div>
         </div>
