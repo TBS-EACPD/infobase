@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { scaleOrdinal } from "d3-scale";
 import * as Diff from "diff";
 import _ from "lodash";
 import React, { Fragment } from "react";
@@ -12,9 +13,7 @@ import {
   infoDarkColor,
 } from "src/core/color_defs.js";
 
-import d3 from "src/core/d3-bundle.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 
 import { LegendList } from "../charts/legends";
 import {
@@ -346,15 +345,13 @@ const indicator_report = (processed_indicator) => (
 export default class TextDiffApp extends React.Component {
   constructor(props) {
     super(props);
-    const colors = d3
-      .scaleOrdinal()
-      .range([
-        primaryColor,
-        warnDarkColor,
-        successDarkColor,
-        failDarkColor,
-        infoDarkColor,
-      ]);
+    const colors = scaleOrdinal().range([
+      primaryColor,
+      warnDarkColor,
+      successDarkColor,
+      failDarkColor,
+      infoDarkColor,
+    ]);
 
     this.state = {
       first_load: true,

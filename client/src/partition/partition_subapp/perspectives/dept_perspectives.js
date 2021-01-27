@@ -1,6 +1,5 @@
+import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { Subject } from "../../../models/subject.js";
 import { text_maker } from "../partition_text_provider.js";
@@ -21,26 +20,25 @@ import {
 // Would like to change the use of dept in this perspective to "ministry", but the use of dept is grandparented in to the route itself...
 
 const create_ministry_hierarchy = function (data_type, skip_crsos = true) {
-  return d3
-    .hierarchy(Subject.gov, (node) => {
-      if (node.is("gov")) {
-        return Subject.Ministry.get_all();
-      } else if (node.is("ministry")) {
-        return node.orgs;
-      } else if (node.is("dept")) {
-        if (skip_crsos) {
-          return _.reduce(
-            node.crsos,
-            (memo, crso) => memo.concat(crso.programs),
-            []
-          );
-        } else {
-          return node.crsos;
-        }
-      } else if (!skip_crsos && node.is("crso")) {
-        return node.programs;
+  return hierarchy(Subject.gov, (node) => {
+    if (node.is("gov")) {
+      return Subject.Ministry.get_all();
+    } else if (node.is("ministry")) {
+      return node.orgs;
+    } else if (node.is("dept")) {
+      if (skip_crsos) {
+        return _.reduce(
+          node.crsos,
+          (memo, crso) => memo.concat(crso.programs),
+          []
+        );
+      } else {
+        return node.crsos;
       }
-    })
+    } else if (!skip_crsos && node.is("crso")) {
+      return node.programs;
+    }
+  })
     .eachAfter((node) => {
       post_traversal_value_set(node, data_type);
       post_traversal_search_string_set(node);
