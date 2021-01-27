@@ -1,7 +1,6 @@
+import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 import React from "react";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { TM, KeyConceptList } from "../../../components/index.js";
 import { Table } from "../../../core/TableClass.js";
@@ -22,25 +21,29 @@ import {
 } from "./perspective_utils.js";
 
 const create_tag_hierarchy = function (tag_scheme, data_type) {
-  const hierarchy = d3
-    .hierarchy(Subject.Tag.tag_roots[tag_scheme], (node) => {
+  const hierarchy_instance = hierarchy(
+    Subject.Tag.tag_roots[tag_scheme],
+    (node) => {
       if (node.is("tag")) {
         return node.children_tags.length > 0
           ? node.children_tags
           : node.programs;
       }
-    })
+    }
+  )
     .eachAfter((node) => {
       post_traversal_value_set(node, data_type);
       post_traversal_search_string_set(node);
     })
     .sort(absolute_value_sort);
-  hierarchy.exp = Table.lookup("programSpending")
+  hierarchy_instance.exp = Table.lookup("programSpending")
     .q()
     .sum("{{pa_last_year}}exp");
-  hierarchy.fte = Table.lookup("programFtes").q().sum("{{pa_last_year}}");
-  hierarchy.value = hierarchy[data_type];
-  return hierarchy;
+  hierarchy_instance.fte = Table.lookup("programFtes")
+    .q()
+    .sum("{{pa_last_year}}");
+  hierarchy_instance.value = hierarchy_instance[data_type];
+  return hierarchy_instance;
 };
 
 const tag_data_wrapper_node_rules = (node) => {
