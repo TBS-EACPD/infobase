@@ -24,7 +24,6 @@ import {
   IconPartition,
   IconCompareEstimates,
   IconHierarchy,
-  IconTreemap,
   IconTag,
   IconReport,
   IconLab,
@@ -297,21 +296,6 @@ const SubAppLayout = (props) => (
           </div>
         </div>
         <div className="row">
-          <div className="col-12 col-lg-3 col-md-6 linkcard">
-            <CardTopImage
-              tmf={home_tm}
-              svg={
-                <IconTreemap
-                  width="100%"
-                  color="#2C70C9"
-                  alternate_color={false}
-                />
-              }
-              title_key="treemap_home_title"
-              text_key="treemap_home_text"
-              link_href="#treemap"
-            />
-          </div>
           <div className="col-12 col-lg-3 col-md-6 linkcard">
             <CardTopImage
               tmf={home_tm}
