@@ -80,11 +80,15 @@ const get_default_state_from_props = ({
   active_bubble_id,
   level,
 }) => ({
-  loading: true,
-  panel_filter: _.identity,
   subject,
   active_bubble_id,
   level,
+  loading: true,
+  panel_filter: _.identity,
+  subject_bubble_defs: null,
+  valid_panel_keys: null,
+  previous_bubble: null,
+  next_bubble: null,
 });
 class InfoGraph_ extends React.Component {
   constructor(props) {
