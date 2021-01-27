@@ -1,13 +1,19 @@
-import { SelectAllControl } from "../charts/legends/index.js";
+import _ from "lodash";
+import React from "react";
 
 import {
   create_text_maker_component,
   Details,
   LabeledBox,
   TagCloud,
-} from "../components/index.js";
-import { Table } from "../core/TableClass.js";
-import { PanelRegistry } from "../panels/PanelRegistry.js";
+} from "src/components/index.js";
+
+import { tertiaryColor } from "src/core/color_defs.js";
+import { Table } from "src/core/TableClass.js";
+
+import { SelectAllControl } from "src/charts/legends/index.js";
+
+import { PanelRegistry } from "src/panels/PanelRegistry.js";
 
 import text from "./PanelFilterControl.yaml";
 
@@ -106,7 +112,7 @@ export default class PanelFilterControl extends React.Component {
                 <TagCloud tags={tags} onSelectTag={this.onSelect} />
                 <div
                   style={{
-                    borderTop: `1px dashed ${window.infobase_color_constants.tertiaryColor}`,
+                    borderTop: `1px dashed ${tertiaryColor}`,
                     padding: "10px 0px 10px 5px",
                   }}
                 >
