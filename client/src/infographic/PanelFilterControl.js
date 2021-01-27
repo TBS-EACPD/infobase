@@ -52,6 +52,12 @@ export default class PanelFilterControl extends React.Component {
       );
 
     if (table_set_has_changed) {
+      // HEADS UP: this case isn't currently reached, as the current Infographic lifecycle
+      // unmounts this component in the intermediate loading state, which premepts a single
+      // instance from ever receiving a different set of table tags...
+      // Handling it out of caution anyway, should be safe through any Infographic refactors that
+      // don't directly involve this component
+
       return {
         table_tags: potentially_new_table_tag_state,
       };
