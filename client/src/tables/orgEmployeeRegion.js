@@ -1,6 +1,5 @@
+import { sum } from "d3-array";
 import _ from "lodash";
-
-import d3 from "src/core/d3-bundle.js";
 
 import {
   trivial_text_maker,
@@ -119,7 +118,7 @@ export default {
           return [key].concat(years);
         })
         .sortBy(function (row) {
-          return d3.sum(_.tail(row));
+          return sum(_.tail(row));
         })
         .value();
     },
@@ -132,7 +131,7 @@ export default {
         ncr = this.lang === "en" ? "NCR" : "RCN",
         non_ncr = "Non-" + ncr,
         abroad = lk.abroad.text,
-        dept_total = d3.sum(this.data, function (d) {
+        dept_total = sum(this.data, function (d) {
           return d[year];
         });
       var groups = _.groupBy(
@@ -151,7 +150,7 @@ export default {
       return _.map([ncr, non_ncr, abroad], function (key) {
         var relevant_group = groups[key];
         var sub_column = _.map(relevant_group, year);
-        var group_total = d3.sum(sub_column);
+        var group_total = sum(sub_column);
         if (format) {
           return [key, fm1(group_total), fm2(group_total / dept_total)];
         } else {

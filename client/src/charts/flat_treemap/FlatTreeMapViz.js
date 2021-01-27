@@ -1,7 +1,6 @@
+import { hierarchy, treemap, treemapSquarify } from "d3-hierarchy";
+import { select } from "d3-selection";
 import React from "react";
-
-import d3 from "src/core/d3-bundle.js";
-
 import "./FlatTreeMap.scss";
 
 export class FlatTreeMapViz extends React.Component {
@@ -50,12 +49,12 @@ export class FlatTreeMapViz extends React.Component {
         >
     </div>`;
 
-    const root = d3.hierarchy(data);
+    const root = hierarchy(data);
 
-    const treemap = d3.treemap();
-    treemap.size([width, height]).tile(d3.treemapSquarify.ratio(2));
+    const treemap_instance = treemap();
+    treemap_instance.size([width, height]).tile(treemapSquarify.ratio(2));
 
-    treemap(
+    treemap_instance(
       root
         .sum(function (d) {
           return d[value_string];
@@ -87,7 +86,7 @@ export class FlatTreeMapViz extends React.Component {
       }));
     }
 
-    const html_root = d3.select(el).select("div");
+    const html_root = select(el).select("div");
 
     const items = html_root
       .selectAll("div")

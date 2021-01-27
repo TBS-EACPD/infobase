@@ -1,9 +1,9 @@
+import { csvParse } from "d3-dsv";
 import Handlebars from "handlebars/dist/cjs/handlebars.js";
 import _ from "lodash";
 import marked from "marked";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.js";
-import d3 from "src/core/d3-bundle.js";
 import { is_mobile } from "src/core/feature_detection.js";
 import { lang } from "src/core/injected_build_constants.js";
 
@@ -43,7 +43,7 @@ const global_bundles = [
 ];
 
 //this will look like { key, en, fr }
-const template_globals_parsed = d3.csvParse(template_globals_file);
+const template_globals_parsed = csvParse(template_globals_file);
 
 const additionnal_globals = _.chain(template_globals_parsed)
   .filter(({ key }) => key.match(/year?.?.$/))

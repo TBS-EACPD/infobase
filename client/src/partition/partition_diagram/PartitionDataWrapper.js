@@ -1,6 +1,6 @@
+import { sum } from "d3-array";
+import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
-
-import d3 from "src/core/d3-bundle.js";
 
 export class PartitionDataWrapper {
   constructor(hierarchy, alternate_data_wrapper_node_rules) {
@@ -89,7 +89,7 @@ export class PartitionDataWrapper {
       }
     }
     if (to_be_compressed.length > 0) {
-      new_compressed_child = Object.assign(d3.hierarchy({}), {
+      new_compressed_child = Object.assign(hierarchy({}), {
         height: node.height - 1,
         depth: node.depth + 1,
         id_ancestry:
@@ -102,8 +102,8 @@ export class PartitionDataWrapper {
           node.id_ancestry,
         open: true,
         parent: node,
-        value: d3.sum(to_be_compressed, (x) => x.value),
-        __value__: d3.sum(to_be_compressed, (x) => x.value),
+        value: sum(to_be_compressed, (x) => x.value),
+        __value__: sum(to_be_compressed, (x) => x.value),
         data: {
           id: _.map(to_be_compressed, (x) => x.data.id) + "compressed",
           name: "+",
@@ -195,10 +195,7 @@ export class PartitionDataWrapper {
       this.is_placeholder(node) &&
       !_.isUndefined(node.data.hidden_children)
     ) {
-      node.value = d3.sum(
-        node.data.hidden_children,
-        (child) => child.__value__
-      );
+      node.value = sum(node.data.hidden_children, (child) => child.__value__);
     }
   }
   unmagnify(node) {

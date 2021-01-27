@@ -1,6 +1,5 @@
+import { nest } from "d3-collection";
 import _ from "lodash";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { Subject } from "../../models/subject.js";
 import * as text_maker from "../../models/text.js";
@@ -10,7 +9,7 @@ const { Gov } = Subject;
 // This module exists to  provides a common interface for querying
 // the data associated with each table
 //  [make_horizontal_func](#make_horizontal_func) - this uses
-//      the d3.nest functionality to group data
+//      the d3's nest functionality to group data
 
 //for memoizing purposes
 function func_key(col, include_dept, rollup) {
@@ -38,7 +37,7 @@ const make_horizontal_func = function (func, table) {
 
   const f = function (col, include_dept, rollup) {
     //
-    //  all this is heavily based on [d3.nest](https://github.com/mbostock/d3/wiki/Arrays#d3_nest)
+    //  all this is heavily based on [d3's nest](https://github.com/mbostock/d3/wiki/Arrays#d3_nest)
     //  see here for [examples](http://bl.ocks.org/phoebebright/raw/3176159/)
     //  before trying to understand this function
     //
@@ -92,7 +91,7 @@ const make_horizontal_func = function (func, table) {
       include_dept = false;
     }
 
-    let nest = d3.nest().key(
+    let nest_instance = nest().key(
       func({
         table,
         //col:_.isArray(col) ? col[0] : col
@@ -138,10 +137,10 @@ const make_horizontal_func = function (func, table) {
 
     if (include_dept) {
       // add a sub-key function to break out departments
-      nest.key(_.property("dept"));
+      nest_instance.key(_.property("dept"));
     }
     if (rollup) {
-      nest = nest.rollup(function (leaves) {
+      nest_instance = nest_instance.rollup(function (leaves) {
         if (_.isArray(col)) {
           return _.map(col, function (_col, i) {
             return col_obj[i].formula(leaves);
@@ -152,8 +151,8 @@ const make_horizontal_func = function (func, table) {
       });
     }
 
-    //return { entry: nest.entries(data), map: nest.map(data) };
-    return nest.object(data);
+    //return { entry: nest_instance.entries(data), map: nest_instance.map(data) };
+    return nest_instance.object(data);
   };
 
   // for optimization purposes, use the underscore

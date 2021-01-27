@@ -1,6 +1,6 @@
+import { sum } from "d3-array";
+import { nest } from "d3-collection";
 import _ from "lodash";
-
-import d3 from "src/core/d3-bundle.js";
 
 import * as format from "../core/format";
 import { businessConstants } from "../models/businessConstants.js";
@@ -17,8 +17,7 @@ const sobj_dimension = (options) => (row) => row.sobj_name;
 const lapse_item_dimension = (options) => (row) => row.lapse_item;
 
 function major_vote_stat(options) {
-  var by_type_and_desc = d3
-    .nest()
+  var by_type_and_desc = nest()
     .key(function (d) {
       return d.votestattype;
     })
@@ -61,8 +60,7 @@ function major_vote_stat(options) {
 }
 
 const major_vote_big_stat = (col_to_sum) => (options) => {
-  var by_type_and_desc = d3
-    .nest()
+  var by_type_and_desc = nest()
     .key(function (d) {
       return d.votestattype;
     })
@@ -170,14 +168,14 @@ function people_five_year_percentage_formula(
             total_totals[i] = total_totals[i] + d[year] || d[year];
           }
         });
-        sum = d3.sum(row, function (d) {
+        sum = sum(row, function (d) {
           return d[year];
         });
         cat_totals[i] = cat_totals[i] + sum || sum;
       });
       // now divide the category totals by the total totals
       // and produce the average
-      calculated = d3.sum(cat_totals) / d3.sum(total_totals);
+      calculated = sum(cat_totals) / sum(total_totals);
     } else if (_.isArray(row) && row.length === 1) {
       // scenario 5
       calculated = row[0].five_year_percent;
@@ -238,7 +236,7 @@ const collapse_by_so = function (programs, table, filter) {
     .map((key_value) => ({
       label: key_value[0],
       so_num: key_value[1][0].so_num,
-      value: d3.sum(key_value[1], (d) => d["{{pa_last_year}}"]),
+      value: sum(key_value[1], (d) => d["{{pa_last_year}}"]),
     }))
     .filter(filter || (() => true))
     .sortBy((d) => -d.value)

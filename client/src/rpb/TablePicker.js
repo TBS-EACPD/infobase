@@ -1,11 +1,10 @@
 import "../components/LabeledBox.scss";
 import classNames from "classnames";
+import { select } from "d3-selection";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { AlertBanner, TagCloud } from "../components";
 import { Table } from "../core/TableClass.js";
@@ -168,7 +167,7 @@ class TablePicker extends React.Component {
   fadeOutAndSelectTable = (table_id) => {
     this.setState({ exiting: true });
     const initialHeight = this.refs.main.offsetHeight;
-    d3.select(this.refs.main)
+    select(this.refs.main)
       .style("max-height", initialHeight + "px")
       .style("opacity", 1)
       .transition()

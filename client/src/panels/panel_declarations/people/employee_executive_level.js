@@ -1,7 +1,6 @@
+import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
-
-import d3 from "src/core/d3-bundle.js";
 
 import {
   formats,
@@ -29,7 +28,7 @@ const calculate_funcs_by_level = {
     const gov_five_year_total_head_count = _.chain(
       orgEmployeeExLvl.q().gov_grouping()
     )
-      .map((row) => d3.sum(_.drop(row)))
+      .map((row) => sum(_.drop(row)))
       .reduce((sum, val) => sum + val, 0)
       .value();
 
@@ -75,7 +74,7 @@ const calculate_funcs_by_level = {
           five_year_percent: row.five_year_percent,
           active: has_non_ex_only || row.ex_lvl !== "Non-EX",
         }))
-        .filter((d) => d3.sum(d.data) !== 0)
+        .filter((d) => sum(d.data) !== 0)
         .sortBy((d) => d.label)
         .value(),
     };

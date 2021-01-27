@@ -1,9 +1,8 @@
+import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
-import d3 from "src/core/d3-bundle.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 
 import {
   StdPanel,
@@ -36,7 +35,7 @@ const common_cal = (programs, programSobjs) => {
     top_3_sos.length > cut_off_index - 1
       ? {
           label: text_maker("other_s"),
-          value: d3.sum(
+          value: sum(
             _.takeRight(rows_by_so, rows_by_so.length - cut_off_index),
             _.property("value")
           ),

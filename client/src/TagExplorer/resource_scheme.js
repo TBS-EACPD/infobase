@@ -1,10 +1,9 @@
+import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
 import { trivial_text_maker as text_maker } from "src/models/text.js";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 import {
@@ -39,7 +38,7 @@ function create_resource_hierarchy({ hierarchy_scheme, year }) {
     data: {},
   };
 
-  const d3_hierarchy = d3.hierarchy(root, (node) => {
+  const d3_hierarchy = hierarchy(root, (node) => {
     if (!_.isEmpty(node.children)) {
       return node.children; //shortcut: if children is already defined, use it.
     }

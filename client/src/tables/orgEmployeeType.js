@@ -1,6 +1,5 @@
+import { sum } from "d3-array";
 import _ from "lodash";
-
-import d3 from "src/core/d3-bundle.js";
 
 import {
   trivial_text_maker,
@@ -111,7 +110,7 @@ export default {
           return [key].concat(years);
         })
         .sortBy(function (row) {
-          return d3.sum(_.tail(row));
+          return sum(_.tail(row));
         })
         .value();
     },

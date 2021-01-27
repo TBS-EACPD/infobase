@@ -1,3 +1,4 @@
+import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
@@ -7,9 +8,7 @@ import {
   textColor,
 } from "src/core/color_defs.js";
 
-import d3 from "src/core/d3-bundle.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 
 import { formats } from "../../../../core/format.js";
 import {
@@ -38,7 +37,7 @@ const estimates_split_calculate = function (subject) {
       (est_doc_lines) => estimates_docs[est_doc_lines[1][0].est_doc_code].order
     )
     .map((est_doc_lines) => {
-      const est_amnt = d3.sum(_.map(est_doc_lines[1], est_in_year_col));
+      const est_amnt = sum(_.map(est_doc_lines[1], est_in_year_col));
       return [est_doc_lines[0], est_amnt];
     })
     .filter((row) => row[1] !== 0)

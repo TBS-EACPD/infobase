@@ -1,3 +1,4 @@
+import { select } from "d3-selection";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
@@ -8,7 +9,6 @@ import { businessConstants } from "src/models/businessConstants.js";
 import { run_template } from "src/models/text.js";
 
 import { secondaryColor, tertiaryColor } from "src/core/color_defs.js";
-import d3 from "src/core/d3-bundle.js";
 
 import {
   create_text_maker_component,
@@ -124,7 +124,7 @@ class CanadaGraph extends React.PureComponent {
     } = this.props;
     const { color_scale, years, formatter } = graph_args;
 
-    const graph_area_sel = d3.select(
+    const graph_area_sel = select(
       ReactDOM.findDOMNode(this.graph_area.current)
     );
 

@@ -1,3 +1,5 @@
+import { csvParseRows } from "d3-dsv";
+import { scaleLinear } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
@@ -7,7 +9,6 @@ import {
   SmartDisplayTable,
 } from "src/components/index.js";
 
-import d3 from "src/core/d3-bundle.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { Canada } from "src/charts/canada/index.js";
@@ -37,7 +38,7 @@ const load_population_data = () =>
   ).then((csv_string) =>
     _.chain(csv_string)
       .trim()
-      .thru(d3.csvParseRows)
+      .thru(csvParseRows)
       .tail()
       .map(([prov_code, ...values]) => [prov_code, _.map(values, _.toInteger)])
       .fromPairs()
@@ -123,7 +124,7 @@ const get_color_scale = (data) =>
     .values()
     .max()
     .thru((last_year_max) =>
-      d3.scaleLinear().domain([0, last_year_max]).range([0.2, 1])
+      scaleLinear().domain([0, last_year_max]).range([0.2, 1])
     )
     .value();
 const TransferPaymentsByRegionGraph = ({ data, alt_totals_by_year }) => (

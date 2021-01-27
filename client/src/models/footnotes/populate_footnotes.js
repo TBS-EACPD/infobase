@@ -1,8 +1,7 @@
+import { csvParse } from "d3-dsv";
 import _ from "lodash";
 
-import d3 from "src/core/d3-bundle.js";
 import { lang } from "src/core/injected_build_constants.js";
-
 
 import { sanitized_marked } from "../../general_utils.js";
 import { get_static_url, make_request } from "../../request_utils.js";
@@ -20,7 +19,7 @@ const footnote_topic_keys = _.keys(footnote_topic_text);
 let _loaded_dept_or_tag_codes = {};
 
 function populate_footnotes_info(csv_str) {
-  const rows = _.map(d3.csvParse(_.trim(csv_str)), (row) =>
+  const rows = _.map(csvParse(_.trim(csv_str)), (row) =>
     _.mapValues(row, (item) => _.trim(item))
   );
 

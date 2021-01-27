@@ -1,9 +1,8 @@
+import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
-import d3 from "src/core/d3-bundle.js";
 import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
-
 
 import { get_static_url } from "../../../request_utils.js";
 import {
@@ -114,7 +113,7 @@ export const declare_results_intro_panel = () =>
                 subject: Dept.lookup(row.id),
                 counts: row,
               }))
-              .map((obj) => ({ ...obj, total: d3.sum(_.values(obj.counts)) }))
+              .map((obj) => ({ ...obj, total: sum(_.values(obj.counts)) }))
               .value();
             const depts_with_dps = _.sumBy(counts_by_dept, (dept) =>
               dept.counts[`${current_dp_key}_results`] > 0 ? 1 : 0

@@ -1,11 +1,10 @@
+import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
 import { infobase_colors } from "src/core/color_schemes.js";
 
-import d3 from "src/core/d3-bundle.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 
 import { toggle_list } from "src/general_utils.js";
 
@@ -72,7 +71,7 @@ const render_resource_type = (is_fte) => ({ calculations, footnotes }) => {
       <PlannedProgramResources
         programs={_.sortBy(
           is_fte ? fte_data : exp_data,
-          ({ data }) => -d3.sum(data)
+          ({ data }) => -sum(data)
         )}
         colors={colors}
         text={text}

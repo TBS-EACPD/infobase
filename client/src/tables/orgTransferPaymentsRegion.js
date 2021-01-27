@@ -1,6 +1,5 @@
+import { sum } from "d3-array";
 import _ from "lodash";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { businessConstants, year_templates } from "./table_common.js";
 
@@ -91,7 +90,7 @@ export default {
     gov_grouping: () =>
       _.chain(this.table.horizontal(tp_by_region_years, false))
         .map((years, key) => [key].concat(years))
-        .sortBy((row) => d3.sum(_.tail(row)))
+        .sortBy((row) => sum(_.tail(row)))
         .value(),
   },
 

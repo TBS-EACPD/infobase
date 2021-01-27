@@ -1,6 +1,5 @@
+import { select } from "d3-selection";
 import _ from "lodash";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { make_unique } from "../../general_utils.js";
 
@@ -148,7 +147,7 @@ const base_class = "infobase-table";
 function d3_build_table(options) {
   // if a node isn't provided then create a new one
   options.node = options.node || document.createElement("div");
-  var table = d3.select(options.node).append("div").append("table");
+  var table = select(options.node).append("div").append("table");
 
   var data_key_func =
     options.key_func ||
@@ -190,7 +189,7 @@ function d3_build_table(options) {
       return d.val;
     })
     .each(function (d) {
-      if (d.css) d3.select(this).style(d.css);
+      if (d.css) select(this).style(d.css);
     })
     .attr("id", function (d) {
       return d.id;
@@ -239,13 +238,13 @@ function d3_build_table(options) {
       return d.__table_opts__["class"];
     })
     .each(function (d) {
-      if (d.__table_opts__.css) d3.select(this).style(d.__table_opts__.css);
+      if (d.__table_opts__.css) select(this).style(d.__table_opts__.css);
     });
 
   if (options.stripe) {
     new_rows.each(function (d, i) {
       if (i % 2 === 1) {
-        d3.select(this).classed("odd", true);
+        select(this).classed("odd", true);
       }
     });
   }

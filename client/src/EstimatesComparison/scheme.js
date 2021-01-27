@@ -1,3 +1,4 @@
+import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
@@ -6,9 +7,7 @@ import FootNote from "src/models/footnotes/footnotes.js";
 import { GlossaryEntry } from "src/models/glossary.js";
 import { Subject } from "src/models/subject.js";
 
-import d3 from "src/core/d3-bundle.js";
 import { Table } from "src/core/TableClass.js";
-
 
 import { Format } from "src/components/";
 
@@ -250,7 +249,7 @@ function get_data_by_org(include_stat) {
     children: data,
   };
 
-  const d3_h7y = d3.hierarchy(root, _.property("children"));
+  const d3_h7y = hierarchy(root, _.property("children"));
   return convert_d3_hierarchy_to_explorer_hierarchy(d3_h7y);
 }
 
@@ -383,7 +382,7 @@ function get_data_by_item_types() {
     children: vote_stat,
   };
 
-  const d3_h7y = d3.hierarchy(root, _.property("children"));
+  const d3_h7y = hierarchy(root, _.property("children"));
   return convert_d3_hierarchy_to_explorer_hierarchy(d3_h7y);
 }
 

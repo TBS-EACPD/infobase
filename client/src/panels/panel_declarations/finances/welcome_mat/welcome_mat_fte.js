@@ -1,12 +1,11 @@
+import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
 import { tertiaryColor } from "src/core/color_defs.js";
 
-import d3 from "src/core/d3-bundle.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 
 import {
   run_template,
@@ -21,7 +20,7 @@ import {
 const { std_years, planning_years } = year_templates;
 
 export const format_and_get_fte = (type, subject) => {
-  const colors = d3.scaleOrdinal().range(newIBCategoryColors);
+  const colors = scaleOrdinal().range(newIBCategoryColors);
 
   const gap_year =
     (subject.has_planned_spending && actual_to_planned_gap_year) || null;

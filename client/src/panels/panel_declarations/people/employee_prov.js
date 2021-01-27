@@ -1,9 +1,9 @@
+import { sum } from "d3-array";
+import { scaleLinear } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
-import d3 from "src/core/d3-bundle.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 
 import { Canada } from "../../../charts/canada/index.js";
 import {
@@ -33,7 +33,7 @@ const { provinces } = businessConstants;
 
 const prepare_data_for_a11y_table = (data) => {
   const all_year_headcount_total = _.chain(data)
-    .map((row) => d3.sum(_.values(row)))
+    .map((row) => sum(_.values(row)))
     .reduce((sum, value) => sum + value, 0)
     .value();
   const table_data = _.chain(provinces)
@@ -46,7 +46,7 @@ const prepare_data_for_a11y_table = (data) => {
         .fromPairs()
         .value();
       const five_year_avg_share =
-        d3.sum(yearly_headcounts) / all_year_headcount_total;
+        sum(yearly_headcounts) / all_year_headcount_total;
       return (
         five_year_avg_share !== 0 && {
           label: province.label,
@@ -169,8 +169,8 @@ class ProvPanel extends React.Component {
 }
 
 const calculate_common = (data) => {
-  const max = d3.max(d3.values(_.last(data)));
-  const color_scale = d3.scaleLinear().domain([0, max]).range([0.2, 1]);
+  const max = _.chain(data).last().values().max().value();
+  const color_scale = scaleLinear().domain([0, max]).range([0.2, 1]);
 
   return {
     data,

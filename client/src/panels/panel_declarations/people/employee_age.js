@@ -1,7 +1,7 @@
+import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
-import d3 from "src/core/d3-bundle.js";
 import { lang } from "src/core/injected_build_constants.js";
 
 import { GraphOverlay } from "../../../components";
@@ -44,7 +44,7 @@ const calculate_funcs_by_level = {
     const gov_five_year_total_head_count = _.chain(
       orgEmployeeAgeGroup.q().gov_grouping()
     )
-      .map((row) => d3.sum(_.drop(row)))
+      .map((row) => sum(_.drop(row)))
       .reduce((sum, val) => sum + val, 0)
       .value();
 
@@ -79,17 +79,17 @@ const calculate_funcs_by_level = {
         data: people_years.map((year) => row[year]),
         active: true,
       }))
-      .filter((d) => d3.sum(d.data) !== 0)
+      .filter((d) => sum(d.data) !== 0)
       .concat({
         label: text_maker("fps"),
         data: people_years.map((year) => orgEmployeeAvgAge.GOC[0][year]),
         active: true,
       })
-      .sortBy((d) => -d3.sum(d.data))
+      .sortBy((d) => -sum(d.data))
       .value();
 
     const dept_five_year_total_head_count = _.chain(series)
-      .map((row) => d3.sum(_.drop(row)))
+      .map((row) => sum(_.drop(row)))
       .reduce((sum, val) => sum + val, 0)
       .value();
 
@@ -100,11 +100,11 @@ const calculate_funcs_by_level = {
         return {
           label,
           data,
-          five_year_percent: d3.sum(data) / dept_five_year_total_head_count,
+          five_year_percent: sum(data) / dept_five_year_total_head_count,
           active: true,
         };
       })
-      .filter((d) => d3.sum(d.data) !== 0)
+      .filter((d) => sum(d.data) !== 0)
       .value();
 
     return {

@@ -1,9 +1,11 @@
 //https://gist.github.com/guglielmo/16d880a6615da7f502116220cb551498
 
+import { interpolateRgbBasis } from "d3-interpolate";
+import { scaleSequential } from "d3-scale";
+import { select } from "d3-selection";
 import _ from "lodash";
 import React from "react";
 
-import d3 from "src/core/d3-bundle.js";
 import { is_mobile } from "src/core/feature_detection.js";
 
 import {
@@ -142,18 +144,18 @@ const raw_fte_limit = 1000;
 
 // need this slightly tricky formulation because we only want to use part of the scale
 // (darkest colours are too dark for good contrast with the text)
-const blue_scale = d3
-  .scaleSequential(d3.interpolateRgbBasis(sequentialBlues.slice(0, 4)))
-  .clamp(true);
-const red_scale = d3
-  .scaleSequential(d3.interpolateRgbBasis(sequentialReds.slice(0, 4)))
-  .clamp(true);
-const green_scale = d3
-  .scaleSequential(d3.interpolateRgbBasis(sequentialGreens.slice(0, 4)))
-  .clamp(true);
-const purple_scale = d3
-  .scaleSequential(d3.interpolateRgbBasis(sequentialPurples.slice(0, 3)))
-  .clamp(true);
+const blue_scale = scaleSequential(
+  interpolateRgbBasis(sequentialBlues.slice(0, 4))
+).clamp(true);
+const red_scale = scaleSequential(
+  interpolateRgbBasis(sequentialReds.slice(0, 4))
+).clamp(true);
+const green_scale = scaleSequential(
+  interpolateRgbBasis(sequentialGreens.slice(0, 4))
+).clamp(true);
+const purple_scale = scaleSequential(
+  interpolateRgbBasis(sequentialPurples.slice(0, 3))
+).clamp(true);
 
 // spending % of parent -- 30% is enough for the colour to be maxed out
 function standard_color_scale(node) {
@@ -361,9 +363,9 @@ function mobile_tooltip_render(tooltip_sel) {
         `
     ${generate_infograph_href(d)}`;
       if (
-        d3
-          .select(this.parentNode)
-          .classed("TreeMapNode__ContentBoxContainer--has-children")
+        select(this.parentNode).classed(
+          "TreeMapNode__ContentBoxContainer--has-children"
+        )
       ) {
         tooltip_html =
           tooltip_html +
@@ -378,7 +380,7 @@ function mobile_tooltip_render(tooltip_sel) {
     })
     .select("button")
     .on("click", function (d) {
-      d3.select(d).transition();
+      select(d).transition();
     });
 }
 
@@ -400,9 +402,9 @@ function mobile_tooltip_render_changes(tooltip_sel) {
         `
     ${generate_infograph_href(d)}`;
       if (
-        d3
-          .select(this.parentNode)
-          .classed("TreeMapNode__ContentBoxContainer--has-children")
+        select(this.parentNode).classed(
+          "TreeMapNode__ContentBoxContainer--has-children"
+        )
       ) {
         tooltip_html =
           tooltip_html +
@@ -417,7 +419,7 @@ function mobile_tooltip_render_changes(tooltip_sel) {
     })
     .select("button")
     .on("click", function (d) {
-      d3.select(d).transition();
+      select(d).transition();
     });
 }
 
