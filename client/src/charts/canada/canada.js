@@ -38,7 +38,7 @@ class CanadaGraphBarLegend extends React.Component {
     super();
   }
   render() {
-    const { prov, data, years, formatter } = this.props;
+    const { prov, alt_totals_by_year, data, years, formatter } = this.props;
 
     const province_graph_title = (prov) =>
       text_maker("five_year_history", {
@@ -48,7 +48,9 @@ class CanadaGraphBarLegend extends React.Component {
     const graph_data = _.chain(data)
       .map((data, ix) => ({
         year: run_template(years[ix]),
-        value: prov ? data[prov] : _.chain(data).values().sum().value(),
+        value: prov
+          ? data[prov]
+          : alt_totals_by_year?.[ix] || _.chain(data).values().sum().value(),
       }))
       .reverse()
       .value();
@@ -178,7 +180,13 @@ export class Canada extends React.Component {
   render() {
     const { prov, selected_year_index } = this.state;
     const { graph_args } = this.props;
-    const { data, color_scale, years, formatter } = graph_args;
+    const {
+      data,
+      alt_totals_by_year,
+      color_scale,
+      years,
+      formatter,
+    } = graph_args;
     const legend_items = _.map(
       color_scale.ticks(5).reverse(),
       (tick, idx, ticks) => ({
@@ -211,6 +219,7 @@ export class Canada extends React.Component {
             <CanadaGraphBarLegend
               prov={prov}
               data={data}
+              alt_totals_by_year={alt_totals_by_year}
               years={years}
               formatter={formatter}
             />

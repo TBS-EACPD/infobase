@@ -1,17 +1,18 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import d3 from "src/core/d3-bundle.js";
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
-
-import { Canada } from "../../../../charts/canada/index.js";
 import {
   SpinnerWrapper,
   TabbedContent,
   SmartDisplayTable,
-} from "../../../../components/index.js";
-import { get_static_url, make_request } from "../../../../request_utils.js";
+} from "src/components/index.js";
+
+import d3 from "src/core/d3-bundle.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { Canada } from "src/charts/canada/index.js";
+import { get_static_url, make_request } from "src/request_utils.js";
+
 import {
   formats,
   run_template,
@@ -125,10 +126,11 @@ const get_color_scale = (data) =>
       d3.scaleLinear().domain([0, last_year_max]).range([0.2, 1])
     )
     .value();
-const TransferPaymentsByRegionGraph = ({ data }) => (
+const TransferPaymentsByRegionGraph = ({ data, alt_totals_by_year }) => (
   <Canada
     graph_args={{
       data,
+      alt_totals_by_year,
       color_scale: get_color_scale(data),
       years: tp_by_region_years,
       formatter: formats.compact2_raw,
@@ -179,6 +181,7 @@ class TPMap extends React.Component {
         tp_by_region_years,
         subject.level === "dept" && subject.id
       );
+
       const per_capita_by_prov = _.chain(transfer_payments_by_prov)
         .omitBy((values, prov_code) =>
           _.isUndefined(population_data[prov_code])
@@ -192,11 +195,33 @@ class TPMap extends React.Component {
             .value()
         )
         .value();
+      const per_capita_totals = _.chain([
+        transfer_payments_by_prov,
+        population_data,
+      ])
+        .map((data_by_prov_and_year) =>
+          _.reduce(
+            data_by_prov_and_year,
+            (memo, prov_data_by_year) =>
+              _.zipWith(memo, prov_data_by_year, _.add),
+            _.chain(data_by_prov_and_year).first().map(0).value()
+          )
+        )
+        .thru(([total_transfer_payments_by_year, total_population_by_year]) =>
+          _.zipWith(
+            total_transfer_payments_by_year,
+            total_population_by_year,
+            (total_transfer_payment, total_population) =>
+              total_transfer_payment / total_population
+          )
+        )
+        .value();
 
       const transfer_payment_data = group_prov_data_by_year(
         transfer_payments_by_prov
       );
       const per_capita_data = group_prov_data_by_year(per_capita_by_prov);
+
       const format_a11y_data = (data) =>
         _.map(data, (prov_data, prov_code) => ({
           prov: provinces[prov_code].text,
@@ -264,7 +289,10 @@ class TPMap extends React.Component {
                     />
                   ),
                   transfer_payments_per_capita: (
-                    <TransferPaymentsByRegionGraph data={per_capita_data} />
+                    <TransferPaymentsByRegionGraph
+                      data={per_capita_data}
+                      alt_totals_by_year={per_capita_totals}
+                    />
                   ),
                 }}
               />
