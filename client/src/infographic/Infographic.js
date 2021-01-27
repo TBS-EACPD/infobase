@@ -75,16 +75,21 @@ function reset_scroll() {
   window.scrollTo(0, 0);
 }
 
+const get_default_state_from_props = ({
+  subject,
+  active_bubble_id,
+  level,
+}) => ({
+  loading: true,
+  panel_filter: _.identity,
+  subject,
+  active_bubble_id,
+  level,
+});
 class InfoGraph_ extends React.Component {
   constructor(props) {
     super();
-    this.state = {
-      loading: true,
-      subject: props.subject,
-      active_bubble_id: props.active_bubble_id,
-      level: props.level,
-      panel_filter: _.identity,
-    };
+    this.state = get_default_state_from_props(props);
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     const should_reload = !shallowEqualObjectsOverKeys(nextProps, prevState, [
@@ -94,12 +99,7 @@ class InfoGraph_ extends React.Component {
     ]);
 
     if (should_reload) {
-      return {
-        loading: true,
-        subject: nextProps.subject,
-        active_bubble_id: nextProps.active_bubble_id,
-        level: nextProps.level,
-      };
+      return get_default_state_from_props(nextProps);
     } else {
       return null;
     }
