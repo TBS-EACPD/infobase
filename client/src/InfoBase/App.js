@@ -64,7 +64,6 @@ const PrivacyStatement = retrying_react_lazy(() =>
   import("src/PrivacyStatement/PrivacyStatement.js")
 );
 const TextDiff = retrying_react_lazy(() => import("../TextDiff/TextDiff.js"));
-const Lab = retrying_react_lazy(() => import("../InfoLab/InfoLab.js"));
 const IsolatedPanel = retrying_react_lazy(() =>
   import("src/panels/panel_routes/IsolatedPanel.js")
 );
@@ -197,10 +196,6 @@ export class App extends React.Component {
                 <Route
                   path="/diff/:org_id?/:crso_id?/:program_id?"
                   component={TextDiff}
-                />
-                <Route
-                  path="/lab"
-                  render={() => <Lab toggleSurvey={this.toggleSurvey} />}
                 />
                 <Route
                   path="/panel/:level?/:subject_id?/:panel_key?"
