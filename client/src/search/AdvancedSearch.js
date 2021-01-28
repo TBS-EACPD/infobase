@@ -88,14 +88,14 @@ const AdvancedSearch = withRouter(
     constructor(props) {
       super(props);
 
-      this.state = { ...props.initial_configs };
+      this.state = { ...props.options_initial_configs };
     }
     render() {
       const optional_configs = this.state;
 
       const {
-        disable_filter,
-        initial_configs,
+        disable_options,
+        options_initial_configs,
         reject_dead_orgs,
         href_template,
         onNewQuery,
@@ -126,7 +126,7 @@ const AdvancedSearch = withRouter(
 
         include_glossary,
         include_tables,
-      } = initial_configs;
+      } = options_initial_configs;
 
       const orgs_to_include =
         include_orgs_normal_data && include_orgs_limited_data
@@ -241,8 +241,8 @@ const AdvancedSearch = withRouter(
               }
               search_configs={search_configs}
               onSelect={onSelect}
-              filter_content={
-                !disable_filter && (
+              options_content={
+                !disable_options && (
                   <fieldset>
                     <legend>
                       {text_maker("advanced_search_description")}:
@@ -256,7 +256,6 @@ const AdvancedSearch = withRouter(
                   </fieldset>
                 )
               }
-              is_filter_modified={_.isEqual(initial_configs, this.state)}
               pagination_size={30}
             />
           </div>
@@ -269,9 +268,9 @@ AdvancedSearch.defaultProps = {
   href_template: (item) => smart_href_template(item, "/"),
   include_gov: true,
   reject_dead_orgs: true,
-  disable_filter: false,
+  disable_options: false,
 
-  initial_configs: {
+  options_initial_configs: {
     include_orgs_normal_data: true,
     include_orgs_limited_data: true,
 
