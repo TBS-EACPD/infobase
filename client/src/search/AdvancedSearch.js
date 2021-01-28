@@ -1,10 +1,13 @@
 import _ from "lodash";
 import React from "react";
+import MediaQuery from "react-responsive";
 import { withRouter } from "react-router";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { CheckBox } from "../components/CheckBox";
+import { CheckBox, DropdownMenu } from "../components/index.js";
+import { breakpoints } from "../core/breakpoint_defs.js";
+import { IconGear } from "../icons/icons.js";
 
 import { smart_href_template } from "../link_utils.js";
 import { create_text_maker } from "../models/text.js";
@@ -94,7 +97,6 @@ const AdvancedSearch = withRouter(
       const optional_configs = this.state;
 
       const {
-        disable_options,
         reject_dead_orgs,
         href_template,
         onNewQuery,
@@ -240,21 +242,55 @@ const AdvancedSearch = withRouter(
               }
               search_configs={search_configs}
               onSelect={onSelect}
-              options_content={
-                !disable_options && (
-                  <fieldset>
-                    <legend>
-                      {text_maker("advanced_search_description")}:
-                    </legend>
-                    <div className="advanced-search-options">
-                      {_.map(
-                        complete_option_hierarchy,
-                        option_node_to_component
-                      )}
+              utility_buttons={[
+                <DropdownMenu
+                  key="AdvancedSearchDropdownMenu"
+                  dropdown_trigger_txt={
+                    <div
+                      style={{
+                        textAlign: "start",
+                        whiteSpace: "nowrap",
+                        display: "inline-block",
+                      }}
+                    >
+                      <MediaQuery minWidth={breakpoints.minSmallDevice}>
+                        <div
+                          style={{
+                            whiteSpace: "nowrap",
+                            display: "inline-block",
+                            marginRight: "2.5rem",
+                          }}
+                        >
+                          <IconGear
+                            height="1px"
+                            width="1px"
+                            vertical_align="1.5rem"
+                            alternate_color="false"
+                          />
+                        </div>
+                      </MediaQuery>
+                      <span>{text_maker("options")}</span>
                     </div>
-                  </fieldset>
-                )
-              }
+                  }
+                  dropdown_a11y_txt={text_maker("search_options")}
+                  opened_button_class_name={"btn-ib-light--reversed--with-icon"}
+                  closed_button_class_name={"btn-ib-light--with-icon"}
+                  dropdown_content_class_name="no-right"
+                  dropdown_content={
+                    <fieldset>
+                      <legend>
+                        {text_maker("advanced_search_description")}:
+                      </legend>
+                      <div className="advanced-search-options">
+                        {_.map(
+                          complete_option_hierarchy,
+                          option_node_to_component
+                        )}
+                      </div>
+                    </fieldset>
+                  }
+                />,
+              ]}
               pagination_size={30}
             />
           </div>
@@ -267,7 +303,6 @@ AdvancedSearch.defaultProps = {
   href_template: (item) => smart_href_template(item, "/"),
   include_gov: true,
   reject_dead_orgs: true,
-  disable_options: false,
 
   options_initial_configs: {
     include_orgs_normal_data: true,
