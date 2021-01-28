@@ -158,29 +158,18 @@ class InfoGraph_ extends React.Component {
 
     const filtered_panel_keys = panel_filter(valid_panel_keys);
 
-    const search_component = (
-      <AdvancedSearch
-        everything_search_config={{
-          href_template: (subj) =>
-            infograph_href_template(subj, active_bubble_id, "/"),
-          search_text: text_maker("subject_search_placeholder"),
-          large: true,
-        }}
-      />
-    );
-
     return (
       <div>
         <AnalyticsSynchronizer {...this.props} />
         {is_a11y_mode && (
           <div>
             <TM k="a11y_search_other_infographs" />
-            {search_component}
+            <AdvancedSearch />
           </div>
         )}
         {!is_a11y_mode && (
           <div className="row infographic-search-container">
-            {search_component}
+            <AdvancedSearch />
           </div>
         )}
         <div>

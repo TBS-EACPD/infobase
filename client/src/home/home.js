@@ -17,7 +17,6 @@ import {
 import { log_standard_event } from "../core/analytics.js";
 
 import { StandardRouteContainer } from "../core/NavComponents.js";
-import { smart_href_template } from "../link_utils.js";
 import { get_static_url } from "../request_utils.js";
 import { AdvancedSearch } from "../search/index.js";
 
@@ -95,12 +94,6 @@ const HomeLayout = (props) => (
         </div>
         <div className="search-box">
           <AdvancedSearch
-            everything_search_config={{
-              href_template: (item) => smart_href_template(item, "/"),
-
-              search_text: home_tm("everything_search_placeholder"),
-              large: true,
-            }}
             onNewQuery={(query) => {
               log_standard_event({
                 SUBAPP: "home",
@@ -109,7 +102,6 @@ const HomeLayout = (props) => (
                 MISC2: query,
               });
             }}
-            include_gov={false}
           />
         </div>
       </header>
