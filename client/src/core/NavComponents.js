@@ -168,7 +168,6 @@ export class StandardRouteContainer extends React.Component {
       children,
       shouldSyncLang,
       non_a11y_route,
-      beta,
     } = this.props;
 
     return (
@@ -177,14 +176,6 @@ export class StandardRouteContainer extends React.Component {
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
         <HeaderBanner route_filter={_.constant(false)} />
-        {beta && (
-          <HeaderBanner
-            route_filter={_.constant(true)}
-            banner_content={trivial_text_maker("beta_banner_content")}
-            banner_class="info"
-            additional_class_names="beta-banner"
-          />
-        )}
         <AnalyticsSynchronizer route_key={route_key} />
         {shouldSyncLang !== false && <LangSynchronizer />}
         {!is_a11y_mode && (

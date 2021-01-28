@@ -1119,12 +1119,6 @@ non_active_program:
   en: non-active program
   fr: programme non actif
 
-beta_banner_content:
-  en: |
-    You're visiting a "beta" version of GC InfoBase. This is a work in progress and changes are being made on a regular basis. Your experience may vary depending on the device and/or the browser used
-  fr: |
-    Vous visitez une version « beta » d'InfoBase du GC. Ces travaux sont en cours et des changements sont apportés régulièrement. Votre expérience peut varier selon l'appareil ou le navigateur utilisé.
-
 SOBJ1: 
     text: Personnel
 SOBJ2:
