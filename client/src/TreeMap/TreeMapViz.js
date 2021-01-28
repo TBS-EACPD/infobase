@@ -1,8 +1,12 @@
 import classNames from "classnames";
+import { hierarchy, treemap, treemapSquarify } from "d3-hierarchy";
+import { scaleLinear } from "d3-scale";
+import { select, selectAll, event } from "d3-selection";
 import _ from "lodash";
 import React from "react";
 
-import d3 from "src/core/d3-bundle.js";
+import "d3-selection-multi";
+
 import { is_mobile } from "src/core/feature_detection.js";
 
 import { create_text_maker } from "../models/text.js";
@@ -84,7 +88,7 @@ export class TreeMap extends React.Component {
     </div>`;
     }
 
-    const html_root = d3.select(el).select("div");
+    const html_root = select(el).select("div");
 
     // the actual treemap div
     const viz_root = html_root.select(".viz-root");
@@ -93,12 +97,11 @@ export class TreeMap extends React.Component {
     let height = viz_height;
 
     // sets x and y scale to determine size of visible boxes
-    const x = d3.scaleLinear().domain([0, width]).range([0, width]);
-    const y = d3.scaleLinear().domain([0, height]).range([0, height]);
+    const x = scaleLinear().domain([0, width]).range([0, width]);
+    const y = scaleLinear().domain([0, height]).range([0, height]);
 
-    const treemap = d3
-      .treemap()
-      .tile(d3.treemapSquarify.ratio(1))
+    const treemap_instance = treemap()
+      .tile(treemapSquarify.ratio(1))
       .round(true)
       .size([width, height]);
 
@@ -121,7 +124,7 @@ export class TreeMap extends React.Component {
       }
     }
 
-    const root = d3.hierarchy(data_root);
+    const root = hierarchy(data_root);
 
     // set up the node values to be the size, and adjust for cases where the size != sum of children's sizes
     // this avoids having to call d3's sum()
@@ -142,7 +145,7 @@ export class TreeMap extends React.Component {
       d.value = d.data.value2;
     });
 
-    treemap(
+    treemap_instance(
       root.sort((a, b) => {
         if (a.data.name === smaller_items_text) {
           return 9999999;
@@ -183,7 +186,7 @@ export class TreeMap extends React.Component {
 
         // Remove all tooltips when transitioning
         // TODO: will this actually work? this is never set
-        d3.select(this).select(".TM_TooltipContainer").remove();
+        select(this).select(".TM_TooltipContainer").remove();
 
         const zoomed_group = display(d);
         const main_trans = main_group.transition().duration(650);
@@ -253,7 +256,7 @@ export class TreeMap extends React.Component {
             transition(d);
           })
           .on("keydown", (d) => {
-            if (d3.event.keyCode != 13) {
+            if (event.keyCode != 13) {
               return;
             }
             this.state.org_route.push(d.data.name);
@@ -289,11 +292,10 @@ export class TreeMap extends React.Component {
           )
           .attr("tabindex", "0")
           .on("mouseenter focus", function (d) {
-            d3.select(this).selectAll(".TM_TooltipContainer").remove();
+            select(this).selectAll(".TM_TooltipContainer").remove();
             setTimeout(() => {
-              d3.selectAll(".TM_TooltipContainer").remove();
-              var tool = d3
-                .select(this)
+              selectAll(".TM_TooltipContainer").remove();
+              var tool = select(this)
                 .append("div")
                 .attr("class", "TM_TooltipContainer")
                 .style("opacity", 0);
@@ -302,7 +304,7 @@ export class TreeMap extends React.Component {
             }, 300);
           })
           .on("mouseleave", function (d) {
-            d3.select(this).selectAll(".TM_TooltipContainer").remove();
+            select(this).selectAll(".TM_TooltipContainer").remove();
           })
           .call(treemap_node_content_container);
       } else {
@@ -318,8 +320,8 @@ export class TreeMap extends React.Component {
           )
           .on("click", function (d) {
             if (d.toolTipped) {
-              d3.selectAll(".TM_TooltipContainer").remove();
-              d3.selectAll().classed(
+              selectAll(".TM_TooltipContainer").remove();
+              selectAll().classed(
                 "TreeMapNode__ContentBoxContainer--tapped",
                 false
               );
@@ -331,19 +333,18 @@ export class TreeMap extends React.Component {
                 transition(d);
               }
             } else {
-              d3.selectAll(".TM_TooltipContainer").remove();
-              d3.selectAll(".TreeMapNode__ContentBoxContainer")
+              selectAll(".TM_TooltipContainer").remove();
+              selectAll(".TreeMapNode__ContentBoxContainer")
                 .classed("TreeMapNode__ContentBoxContainer--tapped", false)
                 .each(function (d) {
                   d.toolTipped = false;
                 });
-              d3.select(this).classed(
+              select(this).classed(
                 "TreeMapNode__ContentBoxContainer--tapped",
                 true
               );
               setTimeout(() => {
-                var tool = d3
-                  .select(this)
+                var tool = select(this)
                   .append("div")
                   .attr("class", "TM_TooltipContainer")
                   .style("opacity", 0);
