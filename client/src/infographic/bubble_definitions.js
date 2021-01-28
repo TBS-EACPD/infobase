@@ -74,6 +74,11 @@ const base_configs = [
     Icon: IconClipboard,
   },
   {
+    id: "results",
+    title: text_maker("results_title"),
+    description: text_maker("results_desc"),
+  },
+  {
     id: "related",
     title: text_maker("related_title"),
     description: text_maker("related_desc"),
