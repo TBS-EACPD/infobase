@@ -911,10 +911,6 @@ everything_search_placeholder:
   en:  Search for organizations, programs or keywords
   fr:  Recherche des organisations, programmes ou mot-clés
 
-subject_search_placeholder:
-  en: Search for a department, a program or a tag
-  fr: Recherche d'une organisation, d'un programme ou d'une étiquette
-
 active:
   en: Active
   fr: Active

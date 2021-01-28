@@ -7,7 +7,13 @@ import { Subject } from "./models/subject.js";
 import { rpb_link } from "./rpb/rpb_link.js";
 
 const { Gov, Dept, CRSO, Program, Tag } = Subject;
-const subject_classes_with_infographics = [Gov, Dept, CRSO, Program, Tag];
+const subject_classes_with_infographics = [
+  Gov.constructor,
+  Dept,
+  CRSO,
+  Program,
+  Tag,
+];
 
 const glossary_href = (subject_or_id, first_character = "#") => {
   const id = _.isString(subject_or_id) ? subject_or_id : subject_or_id.id;

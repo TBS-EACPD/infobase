@@ -8,7 +8,7 @@ import { ensure_loaded } from "../../core/lazy_loader.js";
 import { StandardRouteContainer } from "../../core/NavComponents.js";
 import { Subject } from "../../models/subject.js";
 import { create_text_maker } from "../../models/text.js";
-import { EverythingSearch } from "../../search/index.js";
+import { AdvancedSearch } from "../../search/index.js";
 import { get_panels_for_subject } from "../get_panels_for_subject/index.js";
 import { PanelRegistry } from "../PanelRegistry.js";
 import { PanelRenderer } from "../PanelRenderer.js";
@@ -242,7 +242,7 @@ export default class panelInventory extends React.Component {
         <div>
           <h1>{tm("panel_inventory")}</h1>
           <div className="mrgn-bttm-lg">
-            <EverythingSearch
+            <AdvancedSearch
               placeholder="See this panel with another subject"
               reject_dead_orgs={false}
               href_template={(subj) => url_template(subj, panel)}
