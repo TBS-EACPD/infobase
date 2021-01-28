@@ -34,7 +34,7 @@
   padding: 12px 16px;
 }
 .close-dropdown {
-  &:hover, &:hover .close-dropdown__x {
+  &:hover, &:hover {
     color: $tertiaryColor;
   }
 }
