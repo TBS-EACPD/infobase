@@ -93,7 +93,7 @@ export class DropdownMenu extends React.Component {
           )}
         >
           {dropdown_content}
-          <button onClick={this.toggle_dropdown}>
+          <button className="btn-ib-primary" onClick={this.toggle_dropdown}>
             {`${trivial_text_maker("close")} ${aria_label}`}
           </button>
         </div>
