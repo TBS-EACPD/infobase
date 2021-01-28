@@ -242,7 +242,7 @@ export class App extends React.Component {
               <PageDetails
                 showSurvey={showSurvey}
                 toggleSurvey={this.toggleSurvey}
-                non_survey_routes={["/lab", "/contact", "/survey"]}
+                non_survey_routes={["/contact", "/survey"]}
               />
             </Suspense>
           </ErrorBoundary>
