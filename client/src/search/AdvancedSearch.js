@@ -98,6 +98,7 @@ const AdvancedSearch = withRouter(
 
       const {
         reject_dead_orgs,
+        include_options,
         href_template,
         onNewQuery,
         include_gov,
@@ -243,53 +244,57 @@ const AdvancedSearch = withRouter(
               search_configs={search_configs}
               onSelect={onSelect}
               utility_buttons={[
-                <DropdownMenu
-                  key="AdvancedSearchDropdownMenu"
-                  dropdown_trigger_txt={
-                    <div
-                      style={{
-                        textAlign: "start",
-                        whiteSpace: "nowrap",
-                        display: "inline-block",
-                      }}
-                    >
-                      <MediaQuery minWidth={breakpoints.minSmallDevice}>
-                        <div
-                          style={{
-                            whiteSpace: "nowrap",
-                            display: "inline-block",
-                            marginRight: "2.5rem",
-                          }}
-                        >
-                          <IconGear
-                            height="1px"
-                            width="1px"
-                            vertical_align="1.5rem"
-                            alternate_color="false"
-                          />
-                        </div>
-                      </MediaQuery>
-                      <span>{text_maker("options")}</span>
-                    </div>
-                  }
-                  dropdown_a11y_txt={text_maker("search_options")}
-                  opened_button_class_name={"btn-ib-light--reversed--with-icon"}
-                  closed_button_class_name={"btn-ib-light--with-icon"}
-                  dropdown_content_class_name="no-right"
-                  dropdown_content={
-                    <fieldset>
-                      <legend>
-                        {text_maker("advanced_search_description")}:
-                      </legend>
-                      <div className="advanced-search-options">
-                        {_.map(
-                          complete_option_hierarchy,
-                          option_node_to_component
-                        )}
+                include_options && (
+                  <DropdownMenu
+                    key="AdvancedSearchDropdownMenu"
+                    dropdown_trigger_txt={
+                      <div
+                        style={{
+                          textAlign: "start",
+                          whiteSpace: "nowrap",
+                          display: "inline-block",
+                        }}
+                      >
+                        <MediaQuery minWidth={breakpoints.minSmallDevice}>
+                          <div
+                            style={{
+                              whiteSpace: "nowrap",
+                              display: "inline-block",
+                              marginRight: "2.5rem",
+                            }}
+                          >
+                            <IconGear
+                              height="1px"
+                              width="1px"
+                              vertical_align="1.5rem"
+                              alternate_color="false"
+                            />
+                          </div>
+                        </MediaQuery>
+                        <span>{text_maker("options")}</span>
                       </div>
-                    </fieldset>
-                  }
-                />,
+                    }
+                    dropdown_a11y_txt={text_maker("search_options")}
+                    opened_button_class_name={
+                      "btn-ib-light--reversed--with-icon"
+                    }
+                    closed_button_class_name={"btn-ib-light--with-icon"}
+                    dropdown_content_class_name="no-right"
+                    dropdown_content={
+                      <fieldset>
+                        <legend>
+                          {text_maker("advanced_search_description")}:
+                        </legend>
+                        <div className="advanced-search-options">
+                          {_.map(
+                            complete_option_hierarchy,
+                            option_node_to_component
+                          )}
+                        </div>
+                      </fieldset>
+                    }
+                  />
+                ),
               ]}
               pagination_size={30}
             />
@@ -302,6 +307,7 @@ const AdvancedSearch = withRouter(
 AdvancedSearch.defaultProps = {
   href_template: (item) => smart_href_template(item, "/"),
   include_gov: true,
+  include_options: true,
   reject_dead_orgs: true,
 
   options_initial_configs: {
