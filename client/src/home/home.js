@@ -166,7 +166,7 @@ const HomeLayout = (props) => (
         />
       </div>
       <div className="row featured-home-cols">
-        <div className="col-12 featured-home-cols__primary">
+        <div className="col-12 col-lg-6 featured-home-cols__primary">
           <h2>
             <TM k="featured_data_title" />
           </h2>
