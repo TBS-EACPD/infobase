@@ -95,7 +95,6 @@ const AdvancedSearch = withRouter(
 
       const {
         disable_options,
-        options_initial_configs,
         reject_dead_orgs,
         href_template,
         onNewQuery,
@@ -126,7 +125,7 @@ const AdvancedSearch = withRouter(
 
         include_glossary,
         include_tables,
-      } = options_initial_configs;
+      } = optional_configs;
 
       const orgs_to_include =
         include_orgs_normal_data && include_orgs_limited_data
