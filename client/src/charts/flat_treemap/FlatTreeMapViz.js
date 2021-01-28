@@ -1,5 +1,6 @@
 import { hierarchy, treemap, treemapSquarify } from "d3-hierarchy";
 import { select } from "d3-selection";
+import "d3-selection-multi";
 import React from "react";
 import "./FlatTreeMap.scss";
 
