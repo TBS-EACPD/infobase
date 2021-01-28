@@ -5,7 +5,6 @@ import MediaQuery from "react-responsive";
 import {
   create_text_maker_component,
   CardTopImage,
-  CardLeftImage,
   ContainerEscapeHatch,
   TrinityItem,
 } from "src/components/index.js";
@@ -167,40 +166,7 @@ const HomeLayout = (props) => (
         />
       </div>
       <div className="row featured-home-cols">
-        <div className="col-12 col-lg-7 featured-home-cols__additional">
-          <div className="col-content">
-            <CardLeftImage
-              tmf={home_tm}
-              svg={
-                <IconResultsReport
-                  width="100%"
-                  color="#FFFFFF"
-                  alternate_color={false}
-                />
-              }
-              title_key="quick_link_DP_2022"
-              text_key="dp_home_text"
-              link_key="check_home_link"
-              link_href="#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_dp)"
-            />
-          </div>
-          <div className="col-content">
-            <CardLeftImage
-              tmf={home_tm}
-              svg={
-                <IconCompareEstimates
-                  width="100%"
-                  color="#FFFFFF"
-                  alternate_color={false}
-                />
-              }
-              title_key="estimates_comp_home_title"
-              text_key="estimates_comp_home_text"
-              link_href="#compare_estimates"
-            />
-          </div>
-        </div>
-        <div className="col-12 col-lg-5 featured-home-cols__primary">
+        <div className="col-12 featured-home-cols__primary">
           <h2>
             <TM k="featured_data_title" />
           </h2>
@@ -251,15 +217,15 @@ const SubAppLayout = (props) => (
             <CardTopImage
               tmf={home_tm}
               svg={
-                <IconCompareEstimates
+                <IconStructure
                   width="100%"
                   color="#2C70C9"
                   alternate_color={false}
                 />
               }
-              title_key="estimates_comp_home_title"
-              text_key="estimates_comp_home_text"
-              link_href="#compare_estimates"
+              title_key="igoc_home_title"
+              text_key="igoc_home_desc"
+              link_href="#igoc"
             />
           </div>
           <div className="col-12 col-lg-3 col-md-6 linkcard">
@@ -272,13 +238,11 @@ const SubAppLayout = (props) => (
                   alternate_color={false}
                 />
               }
-              title_key="igoc_home_title"
-              text_key="igoc_home_desc"
-              link_href="#igoc"
+              title_key="estimates_comp_home_title"
+              text_key="estimates_comp_home_text_supps"
+              link_href="#compare_estimates"
             />
           </div>
-        </div>
-        <div className="row">
           <div className="col-12 col-lg-3 col-md-6 linkcard">
             <CardTopImage
               tmf={home_tm}
@@ -290,7 +254,9 @@ const SubAppLayout = (props) => (
               link_href="#tag-explorer"
             />
           </div>
-          <div className="col-12 col-lg-3 col-md-6 linkcard">
+        </div>
+        <div className="row">
+          <div className="col-lg-3 col-md-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               svg={
