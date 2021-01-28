@@ -33,10 +33,6 @@ const featured_content_items = _.compact([
     text_key: "quick_link_tp_by_region",
     href: "#orgs/gov/gov/infograph/financial/.-.-(panel_key.-.-'tp_by_region)",
   },
-  {
-    text_key: "igoc",
-    href: "#igoc",
-  },
 ]);
 
 export { featured_content_items };

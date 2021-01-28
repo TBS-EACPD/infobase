@@ -47,81 +47,11 @@ $smallMargin: 10px;
   font-size: 20px;
 }
 
-
-.featured-home-cols {
-  @media(min-width: $minLargeDevice) {
-    justify-content: space-around; 
-  }
-  @media(max-width: $maxLargeDevice) {
-    flex-direction: column-reverse; 
-  }
-}
-.featured-home-cols__primary {
-  @media(max-width: $maxMediumDevice){
-    margin-bottom: $smallMargin;
-  }
-
-  & > h2:first-child {
-    margin-top: 0px;
-    @media(max-width: $maxExtraSmallDevice) {
-      margin-top: $smallMargin;
-    }
-  }
-  & > h2:not(:first-child) {
-    margin-top: $largeMargin/2;
-    @media(max-width: $maxExtraSmallDevice) {
-      margin-top: $smallMargin;
-    }
-  }
-}
-.featured-home-cols__additional{
-  & > .col-content {
-    color: $textColor !important;
-    background-color: $secondaryColor;
-    border-radius: $standardBorderRadius;
-    margin-bottom: $largeMargin;
-    height: auto;
-    width: 100%;  
-
-    @media(min-width: $minExtraLargeDevice) {
-      width: 95%;
-    }  
-
-    & > a:hover > .left-img-card, & > a:focus > .left-img-card {
-      border-radius: $standardBorderRadius;
-      background-color: lighten( $secondaryColor, 10% )
-    }
-  }
-}
-
-.col-content.misc-col-content {
-  color: $textColor !important;
-  background-color: $tertiaryColor;
-  border-radius: $standardBorderRadius;
-}
-
-li.list-group-item--home {
-  background-color: lighten($tertiaryColor, 37%);
-}
-.list-group-item--home:hover:not(.active),
-.list-group-item--home:focus:not(.active) {
-  color: $textColor;
-  background-color: $backgroundColor;
-}
-.list-group-item--home.active a {
-  color: lighten($tertiaryColor, 37%);
-}
-
-.badge.badge--is-new {
-  background-color: $highlightColor; 
-  color: $textLightColor;
-  font-size: 16px;
-}
 .search-box {
   margin-bottom: 10px;
 }
 
-.flag {
+.flag-line {
   transform: translate(0, -10%);
   margin: 0;
 
@@ -130,27 +60,107 @@ li.list-group-item--home {
   }
 }
 
-.home-trinity-container {
-  margin-top: $largeMargin;
-  margin-bottom: $largeMargin;
-  @media(max-width: $maxMediumDevice) {
-    margin-top: $smallMargin;
-    margin-bottom: $smallMargin;
-  }
-
-  justify-content: space-between;
-  
-  @media(max-width: $maxMediumDevice) {
-    flex-direction: column;
-  }
-}
-
 .home-bg {
   background-color: $primaryColor;
   position: relative;
 }
 
-.xtralinks {
+
+.home-featured-row {
+  margin-top: $largeMargin;
+  margin-bottom: $largeMargin;
+  @media(max-width: $maxMediumDevice){
+    margin-top: $smallMargin;
+    margin-bottom: $smallMargin;
+  }
+}
+
+.gov-infographic-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.gov-infographic-link-item {
+  @include unstyled-link;
+  background-color: darken( $tertiaryColor, 10% );
+  border-radius: $standardBorderRadius;
+  margin-bottom: $smallMargin;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  &:hover, &:focus {
+    background-color: $tertiaryColor;
+  }
+
+  @media(min-width: $minExtraSmallDevice) {
+    flex-basis: 40%;
+    max-width: 40%;
+  }
+  @media(max-width: $maxExtraSmallDevice) {
+    flex-flow: row-reverse;
+    justify-content: space-around;
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}
+.gov-infographic-link-item__title {
+  font-size: 1.75em;
+  padding-top: 8px;
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: center;
+  text-transform: uppercase;
+  color: $textLightColor;
+
+  @media(min-width: $minExtraSmallDevice) {
+    width: 100%; /* IE fix */
+  }
+}
+.gov-infographic-link-item__icon {
+  width: 40%;
+  height: 100%;
+  margin-bottom: $smallMargin;
+
+  @media(max-width: $maxExtraSmallDevice) {
+    width: 5em;
+    height: 5em;
+    margin: $smallMargin;
+  }
+
+  & > img {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
+.featured-content-list.list-group > .list-group-item {
+  background-color: lighten($tertiaryColor, 37%);
+
+  &:hover:not(.active), &:focus:not(.active) {
+    color: $textColor;
+    background-color: $backgroundColor;
+  }
+
+  &.active a {
+    color: lighten($tertiaryColor, 37%);
+  }
+}
+
+.badge.badge--is-new {
+  background-color: $highlightColor; 
+  color: $textLightColor;
+  font-size: 16px;
+}
+
+
+.subapp-linkcards {
   padding-top: $largeMargin;
   @media(max-width: $maxSmallDevice){
     padding-top: $smallMargin;
@@ -160,8 +170,6 @@ li.list-group-item--home {
     justify-content: space-around;
   }
 }
-
-.linkcard {
+.subapp-linkcard {
   flex-basis: 100%;
 }
-
