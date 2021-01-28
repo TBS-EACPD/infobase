@@ -2,13 +2,6 @@ import _ from "lodash";
 import React from "react";
 import MediaQuery from "react-responsive";
 
-import {
-  create_text_maker_component,
-  CardTopImage,
-  ContainerEscapeHatch,
-  TrinityItem,
-} from "src/components/index.js";
-
 import { highlightColor } from "src/core/color_defs.js";
 
 import {
@@ -33,8 +26,13 @@ import {
 } from "src/icons/icons.js";
 
 import { get_static_url } from "src/request_utils.js";
-
 import { EverythingSearch } from "src/search/EverythingSearch.js";
+
+import {
+  create_text_maker_component,
+  CardTopImage,
+  ContainerEscapeHatch,
+} from "../components/index.js";
 
 import { featured_content_items } from "./home-data.js";
 
@@ -67,23 +65,6 @@ export default class Home extends React.Component {
   }
 }
 
-const FeaturedContentItem = ({ text_key, href, is_link_out, is_new }) => (
-  <li className="list-group-item list-group-item--home d-flex justify-content-between">
-    <a
-      href={_.has(href, lang) ? href[lang] : href}
-      target={is_link_out ? "_blank" : "_self"}
-      rel={is_link_out ? "noopener noreferrer" : ""}
-    >
-      <TM k={text_key} />
-    </a>
-    {is_new && (
-      <span className="badge badge--is-new">
-        <TM k={"new"} />
-      </span>
-    )}
-  </li>
-);
-
 const HomeLayout = (props) => (
   <div className="home-root">
     <div
@@ -99,84 +80,57 @@ const HomeLayout = (props) => (
         <h2 style={{ marginTop: 0 }}>
           <TM k="home_sub_title" />
         </h2>
-        <div className="flag">
+        <div className="flagline">
           <IconFlagLine width="100%" color="#FFFFFF" alternate_color={false} />
         </div>
-        <div className="search-box">
+        <div className="home-search-box">
           <EverythingSearch />
         </div>
       </header>
     </div>
 
     <div className="container">
-      <div className="home-trinity-container row" style={{ padding: "0 15px" }}>
-        <TrinityItem
-          href="#orgs/gov/gov/infograph/financial"
-          svg={
-            <IconFinancesAlt
-              width="100%"
-              color="#FFFFFF"
-              alternate_color={false}
-            />
-          }
-          title={<TM k="home_finance_title" />}
-        />
-        <TrinityItem
-          href="#orgs/gov/gov/infograph/covid"
-          img_url={get_static_url("svg/covid.svg")}
-          title={<TM k="covid" />}
-          svg={
-            <IconHelpAlt width="100%" color="#FFFFFF" alternate_color={false} />
-          }
-        />
-        <TrinityItem
-          href="#orgs/gov/gov/infograph/people"
-          svg={
-            <IconEmployeesAlt
-              width="100%"
-              color="#FFFFFF"
-              alternate_color={false}
-            />
-          }
-          title={<TM k="home_ppl_title" />}
-        />
-        {services_feature_flag && (
-          <TrinityItem
-            href="#orgs/gov/gov/infograph/services"
+      <div className="row home-featured-row">
+        <div className="col-lg-7 gov-infographic-links">
+          <GovInfographicLinkItem
+            href="#orgs/gov/gov/infograph/financial"
             svg={
-              <IconServicesHome
+              <IconExpend
                 width="100%"
                 color="#FFFFFF"
                 alternate_color={false}
               />
             }
-            title={<TM k="home_services_title" />}
+            title={<TM k="home_finance_title" />}
           />
-        )}
-        <TrinityItem
-          href="#orgs/gov/gov/infograph/results"
-          svg={
-            <IconClipboardAlt
-              width="100%"
-              color="#FFFFFF"
-              alternate_color={false}
-            />
-          }
-          title={<TM k="home_results_title" />}
-        />
-      </div>
-      <div className="row featured-home-cols">
-        <div className="col-12 col-lg-6 featured-home-cols__primary">
+          <GovInfographicLinkItem
+            href="#orgs/gov/gov/infograph/people"
+            svg={
+              <IconPeople
+                width="100%"
+                color="#FFFFFF"
+                alternate_color={false}
+              />
+            }
+            title={<TM k="home_ppl_title" />}
+          />
+          <GovInfographicLinkItem
+            href="#orgs/gov/gov/infograph/results"
+            svg={
+              <IconResults
+                width="100%"
+                color="#FFFFFF"
+                alternate_color={false}
+              />
+            }
+            title={<TM k="home_results_title" />}
+          />
+        </div>
+        <div className="col-lg-5 featured-home-col">
           <h2>
             <TM k="featured_data_title" />
           </h2>
-          <div>
-            <ul className="list-group list-group--quick-links">
-              {_.map(props.featured_content_items, (item) => (
-                <FeaturedContentItem key={item.text_key} {...item} />
-              ))}
-            </ul>
-          </div>
+          <FeaturedContent items={props.featured_content_items} />
         </div>
       </div>
     </div>
@@ -208,12 +162,40 @@ const HomeLayout = (props) => (
   </div>
 );
 
+const GovInfographicLinkItem = ({ svg, title, href, onClick }) => (
+  <a href={href} className="gov-infographic-link-item" onClick={onClick}>
+    <div className="gov-infographic-link-item__title">{title}</div>
+    <div className="gov-infographic-link-item__icon">{svg}</div>
+  </a>
+);
+
+const FeaturedContent = ({ items }) => (
+  <ul className="featured-content-list list-group">
+    {_.map(items, ({ text_key, href, is_link_out, is_new }) => (
+      <li className="list-group-item" key={text_key}>
+        <a
+          href={_.has(href, lang) ? href[lang] : href}
+          target={is_link_out ? "_blank" : "_self"}
+          rel={is_link_out ? "noopener noreferrer" : ""}
+        >
+          <TM k={text_key} />
+        </a>
+        {is_new && (
+          <span className="badge badge--is-new">
+            <TM k={"new"} />
+          </span>
+        )}
+      </li>
+    ))}
+  </ul>
+);
+
 const SubAppLayout = (props) => (
   <div className="home-root">
     <div className="container">
-      <div className="xtralinks">
+      <div className="subapp-linkcards">
         <div className="row">
-          <div className="col-12 col-lg-3 col-md-6 linkcard">
+          <div className="col-lg-3 col-md-6 subapp-linkcard">
             <CardTopImage
               tmf={home_tm}
               svg={
@@ -228,7 +210,7 @@ const SubAppLayout = (props) => (
               link_href="#igoc"
             />
           </div>
-          <div className="col-12 col-lg-3 col-md-6 linkcard">
+          <div className="col-lg-3 col-md-6 subapp-linkcard">
             <CardTopImage
               tmf={home_tm}
               svg={
@@ -243,7 +225,7 @@ const SubAppLayout = (props) => (
               link_href="#compare_estimates"
             />
           </div>
-          <div className="col-12 col-lg-3 col-md-6 linkcard">
+          <div className="col-12 col-lg-3 col-md-6 subapp-linkcard">
             <CardTopImage
               tmf={home_tm}
               svg={
@@ -256,7 +238,7 @@ const SubAppLayout = (props) => (
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-3 col-md-6 linkcard">
+          <div className="col-lg-3 col-md-6 subapp-linkcard">
             <CardTopImage
               tmf={home_tm}
               svg={
@@ -271,7 +253,7 @@ const SubAppLayout = (props) => (
               link_href="#rpb"
             />
           </div>
-          <div className="col-12 col-lg-3 col-md-6 linkcard">
+          <div className="col-12 col-lg-3 col-md-6 subapp-linkcard">
             <CardTopImage
               tmf={home_tm}
               svg={
