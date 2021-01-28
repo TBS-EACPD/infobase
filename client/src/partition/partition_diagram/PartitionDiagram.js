@@ -1,8 +1,10 @@
+import { sum } from "d3-array";
+import { color } from "d3-color";
+import { scaleLinear } from "d3-scale";
+import { select } from "d3-selection";
 import _ from "lodash";
 
-import d3 from "src/core/d3-bundle.js";
 import { is_IE } from "src/core/feature_detection.js";
-
 
 import * as general_utils from "../../general_utils";
 import { create_text_maker } from "../../models/text.js";
@@ -114,13 +116,12 @@ export class PartitionDiagram {
       horizontal0_padding +
       side_padding);
 
-    const yscale = d3
-      .scaleLinear()
+    const yscale = scaleLinear()
       .domain([0, this.data.root.value])
       .range([0, height]);
 
     const cycle_colors = (i) => {
-      return d3.color(this.colors[i % this.colors.length]);
+      return color(this.colors[i % this.colors.length]);
     };
 
     _.each(this.data.root.children, (node, i) => {
@@ -177,7 +178,7 @@ export class PartitionDiagram {
       )
       .style("height", "")
       .each(function (d) {
-        d3.select(this)
+        select(this)
           .select("div.partition-item__title")
           .classed("right", d.data.type === "compressed")
           .html(html_func);
@@ -188,7 +189,7 @@ export class PartitionDiagram {
       .enter()
       .append("div")
       .each(function (d) {
-        let sel = d3.select(this);
+        let sel = select(this);
 
         if ((d.data.type === "compressed" && is_IE()) || d.value < 0) {
           // partition-item__right-ie-fix: IE css for flex box and align-item are inconsistent, need an extra div
@@ -255,7 +256,7 @@ export class PartitionDiagram {
         return d.rendered_height + "px";
       })
       .each((d) => {
-        const item_node = d3.select(d.DOM);
+        const item_node = select(d.DOM);
         const title = item_node.select(".partition-item__title").node();
 
         const text_is_bigger_then_item =
@@ -307,7 +308,7 @@ export class PartitionDiagram {
       })
       .each(function (d) {
         const level = d.depth;
-        const title = d3.select(d.DOM).select(".partition-item__title").node();
+        const title = select(d.DOM).select(".partition-item__title").node();
         const current_top = vertical_placement_counters[level];
         const parent_top = d.parent ? d.parent.top : 0;
         const diff = (title.offsetHeight - d.DOM.offsetHeight) / 2;
@@ -356,7 +357,7 @@ export class PartitionDiagram {
       .classed("partition-svg-link", true)
       .merge(link_polygons)
       .each(function (d) {
-        d.source.polygon_links.set(d.target, d3.select(this));
+        d.source.polygon_links.set(d.target, select(this));
       });
 
     this.html
@@ -368,7 +369,7 @@ export class PartitionDiagram {
       })
       .on("start", (d) => {
         if (d.children) {
-          d.height_of_all_children = d3.sum(
+          d.height_of_all_children = sum(
             d.children,
             (child) => child.scaled_height || 0
           );
@@ -446,8 +447,8 @@ export class PartitionDiagram {
       .classed("root-polygon", (d) => d.source.parent === null)
       .style("fill", target.color)
       .attr("points", function (d) {
-        if (d3.select(this).attr("points")) {
-          return d3.select(this).attr("points");
+        if (select(this).attr("points")) {
+          return select(this).attr("points");
         } else if (d.source.parent === null) {
           return `${tl} ${bl} ${[bl[0], bl[1] + 0.1]} ${[
             left_side_padding,
@@ -591,8 +592,8 @@ export class PartitionDiagram {
       return;
     }
     this.fade();
-    d3.select(d.DOM).node().focus();
-    const content = d3.select(d.DOM);
+    select(d.DOM).node().focus();
+    const content = select(d.DOM);
     const popup_html = this.popup_template(d);
     let arrow_at_top;
     let pop_up_top;
@@ -637,8 +638,8 @@ export class PartitionDiagram {
     this.pop_up = d;
   }
   remove_pop_up() {
-    d3.select(this.pop_up.DOM).select(".partition-popup").remove();
-    d3.select(this.pop_up.DOM).node().focus();
+    select(this.pop_up.DOM).select(".partition-popup").remove();
+    select(this.pop_up.DOM).node().focus();
     this.fade();
     this.unfade();
     this.svg
@@ -647,15 +648,15 @@ export class PartitionDiagram {
     this.pop_up = false;
   }
   keydown_dispatch = () => {
-    if (d3.event.keyCode === 13) {
+    if (event.keyCode === 13) {
       this.click_dispatch();
     }
   };
   click_dispatch = () => {
     // hold a reference to the current target
-    const target = d3.select(d3.event.target);
+    const target = select(event.target);
     // get a reference to the content
-    let content = d3.event.target.closest(".partition-item");
+    let content = event.target.closest(".partition-item");
     if (_.isNull(content)) {
       if (target.classed("unmagnify-all")) {
         this.unmagnify_all();
@@ -664,30 +665,27 @@ export class PartitionDiagram {
         this.remove_pop_up();
       }
       // we're done with this event, ensure no further propogation
-      d3.event.stopImmediatePropagation();
-      d3.event.preventDefault();
+      event.stopImmediatePropagation();
+      event.preventDefault();
       return;
     }
     if (
       this.pop_up &&
-      !this.html
-        .node()
-        .querySelector(".partition-popup")
-        .contains(d3.event.target)
+      !this.html.node().querySelector(".partition-popup").contains(event.target)
     ) {
       this.remove_pop_up();
-      d3.event.stopImmediatePropagation();
-      d3.event.preventDefault();
+      event.stopImmediatePropagation();
+      event.preventDefault();
       return;
     }
-    content = d3.select(content);
+    content = select(content);
     const d = content.datum();
     if (d.DOM.className.includes("faded")) {
       if (this.pop_up) {
         this.remove_pop_up();
       }
-      d3.event.stopImmediatePropagation();
-      d3.event.preventDefault();
+      event.stopImmediatePropagation();
+      event.preventDefault();
       return;
     }
     if (
@@ -704,8 +702,8 @@ export class PartitionDiagram {
         this.magnify(d);
       }
       this.render();
-      d3.event.stopImmediatePropagation();
-      d3.event.preventDefault();
+      event.stopImmediatePropagation();
+      event.preventDefault();
       return;
     }
 
@@ -723,8 +721,8 @@ export class PartitionDiagram {
     } else if (d !== this.data.root && d !== this.pop_up) {
       this.add_pop_up(d);
     }
-    d3.event.stopImmediatePropagation();
-    d3.event.preventDefault();
+    event.stopImmediatePropagation();
+    event.preventDefault();
   };
   unmagnify_all() {
     if (this.pop_up) {

@@ -1,8 +1,7 @@
+import { easeLinear, easePoly } from "d3-ease";
 import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
-
-import d3 from "src/core/d3-bundle.js";
 
 import {
   primaryColor,
@@ -84,9 +83,9 @@ export class PartitionSubApp {
     this.container.select("input.search").on("keydown", () => {
       // Prevent enter key from submitting input form
       // (listening on the submit event seems less consistent than this approach)
-      if (d3.event.which == 13) {
-        d3.event.stopPropagation();
-        d3.event.preventDefault();
+      if (event.which == 13) {
+        event.stopPropagation();
+        event.preventDefault();
       }
     });
     this.container.select("input.search").on("keyup", this.search_handler);
@@ -103,7 +102,7 @@ export class PartitionSubApp {
     this.container
       .select(".partition-controls--control > .partition-info-icon")
       .on("keydown", () => {
-        if (d3.event.which == 13) {
+        if (event.which == 13) {
           this.add_intro_popup();
         }
       });
@@ -111,7 +110,7 @@ export class PartitionSubApp {
     this.update();
   }
   change_data_type = () => {
-    this.current_data_type = d3.event.target.value;
+    this.current_data_type = event.target.value;
 
     const current_perspective_options = _.chain(this.all_perspectives)
       .filter((perspective) => perspective.data_type === this.current_data_type)
@@ -145,17 +144,17 @@ export class PartitionSubApp {
     presentation_scheme_dropdown
       .transition()
       .duration(200)
-      .ease(d3.easeLinear)
+      .ease(easeLinear)
       .style("background-color", separatorColor)
       .transition()
       .duration(100)
-      .ease(d3.easeLinear)
+      .ease(easeLinear)
       .style("background-color", backgroundColor);
 
     this.update();
   };
   change_perspective = () => {
-    this.current_perspective_id = d3.event.target.value;
+    this.current_perspective_id = event.target.value;
     this.update();
   };
   update() {
@@ -225,7 +224,7 @@ export class PartitionSubApp {
       partition_control_search_block
         .transition()
         .duration(300)
-        .ease(d3.easeLinear)
+        .ease(easeLinear)
         .style("opacity", "1")
         .style(
           "height",
@@ -251,7 +250,7 @@ export class PartitionSubApp {
       partition_control_search_block
         .transition()
         .duration(300)
-        .ease(d3.easeLinear)
+        .ease(easeLinear)
         .style("opacity", "0")
         .style("height", "0px");
     }
@@ -303,9 +302,9 @@ export class PartitionSubApp {
   }
   // Deals with event details and debouncing
   search_handler = () => {
-    d3.event.stopImmediatePropagation();
-    d3.event.preventDefault();
-    const query = d3.event.target.value.toLowerCase();
+    event.stopImmediatePropagation();
+    event.preventDefault();
+    const query = event.target.value.toLowerCase();
     this.search_matching = [] || this.search_matching;
 
     this.debounced_search =
@@ -321,12 +320,12 @@ export class PartitionSubApp {
       }, this.search_debounce_time / 2);
 
     if (
-      d3.event.keyCode === 9 ||
-      d3.event.keyCode === 13 ||
-      d3.event.keyCode === 37 ||
-      d3.event.keyCode === 38 ||
-      d3.event.keyCode === 39 ||
-      d3.event.keyCode === 40
+      event.keyCode === 9 ||
+      event.keyCode === 13 ||
+      event.keyCode === 37 ||
+      event.keyCode === 38 ||
+      event.keyCode === 39 ||
+      event.keyCode === 40
     ) {
       // Bail on enter, tab, and arrow keys. Note: this DOESN'T bail already debounced searches
       return;
@@ -392,7 +391,7 @@ export class PartitionSubApp {
       diagram_note_div
         .style("height", this.offsetHeight + "px")
         .transition()
-        .ease(d3.easePoly)
+        .ease(easePoly)
         .duration(600)
         .style("height", "0px")
         .style("opacity", 0);
