@@ -187,6 +187,10 @@ b, strong, .heavy-weight {
   color: $textColor;
 }
 
+.search-grayed-out-hint {
+  opacity: 0.8;
+}
+
 // alternate to bootstrap badges
 .tag-badge {
   padding: 0.3em.6em;

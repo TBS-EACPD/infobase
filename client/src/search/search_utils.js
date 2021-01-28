@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-
 import { escapeRegExp } from "../general_utils.js";
 
 const query_to_regexps_func = (query) => {

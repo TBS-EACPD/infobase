@@ -278,8 +278,8 @@ div.label {
     @extend .btn-ib-light--reversed;
     border-color: $primaryColor;
     path {
-      fill: $primaryColor !important;
-      stroke: $primaryColor !important;
+      fill: $primaryColor;
+      stroke: $primaryColor;
     }
   }
 }
@@ -301,8 +301,8 @@ div.label {
   &--with-icon{
     @extend .btn-ib-light;
     path {
-      fill: $backgroundColor !important;
-      stroke: $backgroundColor !important;
+      fill: $backgroundColor;
+      stroke: $backgroundColor;
     }
 
     &:focus,
@@ -310,8 +310,8 @@ div.label {
     &:hover {
       border-color: $primaryColor;;
       path {
-      fill: $primaryColor !important;
-      stroke: $primaryColor !important;
+      fill: $primaryColor;
+      stroke: $primaryColor;
     }
     }
   }
@@ -398,21 +398,6 @@ li.list-group-item {
 }
 .list-group-item.active a {
   color: lighten($tertiaryColor, 30%);
-}
-
-.list-group-item.disabled {
-  background-color: $backgroundColor !important;
-  cursor: not-allowed;
-
-  :hover {
-    background-color: $backgroundColor !important;
-    cursor: not-allowed;
-  }
-
-  :focus {
-    background-color: $backgroundColor !important;
-    cursor: not-allowed;
-  }
 }
 
 /* for table striped header */
