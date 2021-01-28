@@ -11,6 +11,7 @@
 //
 
 import { select } from "d3-selection";
+import "d3-selection-multi";
 import _ from "lodash";
 
 import { separatorColor } from "src/core/color_defs.js";
