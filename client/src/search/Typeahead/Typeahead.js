@@ -205,9 +205,6 @@ export class Typeahead extends React.Component {
       group_filter: search_config.filter,
     }));
 
-    // Options includes placeholders for pagination items, because the number of results passed to renderMenu
-    // (ie. that get through matches_query) needs to actually match the number of lis ultimately rendered, can't
-    // just insert the pagination items when renderMenu is called
     const all_options = [
       ..._.flatMap(search_configs, (search_config, ix) =>
         _.map(search_config.get_data(), (data) => ({
