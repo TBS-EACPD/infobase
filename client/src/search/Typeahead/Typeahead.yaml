@@ -22,13 +22,6 @@ paginate_next:
     Show next {{next_page_size}} items
   fr: |
     Montrer les {{next_page_size}} items suivants
-options:
-  en: Options
-  fr: TODO
-
-search_options:
-  en: Search options
-  fr: TODO
 
 close_menu:
   en: Close menu

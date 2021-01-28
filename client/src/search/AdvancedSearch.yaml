@@ -1,6 +1,14 @@
 advaced_search_title:
   en: Search Filters
   fr: Filtres de recherche
+  
+options:
+  en: Options
+  fr: TODO
+
+search_options:
+  en: Search options
+  fr: TODO
 
 advanced_search_description:
   en: Choose categories to include in search results

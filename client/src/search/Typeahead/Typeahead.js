@@ -1,16 +1,9 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
-import MediaQuery from "react-responsive";
 
-import {
-  DropdownMenu,
-  create_text_maker_component,
-} from "src/components/index.js";
+import { create_text_maker_component } from "src/components/index.js";
 
 import { log_standard_event } from "../../core/analytics.js";
-import { breakpoints } from "../../core/breakpoint_defs.js";
-
-import { IconGear } from "../../icons/icons.js";
 
 import { get_static_url } from "../../request_utils.js";
 
@@ -162,10 +155,10 @@ export class Typeahead extends React.Component {
     const {
       placeholder,
       min_length,
-      options_content,
       pagination_size,
       search_configs,
       onNewQuery,
+      utility_buttons,
     } = this.props;
 
     const {
@@ -319,43 +312,10 @@ export class Typeahead extends React.Component {
               )
             }
           />
-
-          {options_content && (
-            <DropdownMenu
-              dropdown_trigger_txt={
-                <div
-                  style={{
-                    textAlign: "start",
-                    whiteSpace: "nowrap",
-                    display: "inline-block",
-                  }}
-                >
-                  <MediaQuery minWidth={breakpoints.minSmallDevice}>
-                    <div
-                      style={{
-                        whiteSpace: "nowrap",
-                        display: "inline-block",
-                        marginRight: "2.5rem",
-                      }}
-                    >
-                      <IconGear
-                        height="1px"
-                        width="1px"
-                        vertical_align="1.5rem"
-                        alternate_color="false"
-                      />
-                    </div>
-                  </MediaQuery>
-                  <span>{text_maker("options")}</span>
-                </div>
-              }
-              dropdown_a11y_txt={text_maker("search_options")}
-              opened_button_class_name={"btn-ib-light--reversed--with-icon"}
-              closed_button_class_name={"btn-ib-light--with-icon"}
-              dropdown_content_class_name="no-right"
-              dropdown_content={options_content}
-            />
-          )}
+          {
+            _.map(utility_buttons)
+            //TODO
+          }
         </div>
         <Fragment>
           <Status {...status_props} />
