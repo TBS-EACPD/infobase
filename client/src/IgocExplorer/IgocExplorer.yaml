@@ -2,10 +2,8 @@ about_inventory:
   transform: [handlebars,markdown]
   en: |
     The {{ext_link (gt "igoc") "http://www.tbs-sct.gc.ca/hgw-cgf/finances/rgs-erdg/cc-se/index-eng.asp"}} provides a comprehensive listing of federal organizations and interests, which can be grouped by various categories (e.g. by portfolio).
-    To see how federal organizations and interests relate across different tagging schemes, check out our [Government at a Glance](#partition/org_info_by_ministry/org_info) diagram.
 
     * {{ext_link "See a detailed overview of federal organizations and interests" "http://www.tbs-sct.gc.ca/hgw-cgf/finances/rgs-erdg/cc-se/institution/forms-formulaires-eng.asp"}}
-    * [Explore organizations by the size of their {{pa_last_year}} expenditures](#partition/dept/exp)
 
     **List of Corporate Holdings:**
     * {{ext_link "Crown Corporation Corporate Holdings" "http://www.tbs-sct.gc.ca/hgw-cgf/finances/rgs-erdg/cc-se/crown-etat/holdings-portefeuille-eng.asp"}}
@@ -13,10 +11,8 @@ about_inventory:
 
   fr: |
     Le {{ext_link (gt "igoc") "http://www.tbs-sct.gc.ca/hgw-cgf/finances/rgs-erdg/cc-se/index-fra.asp"}} dresse la liste complète des organisations fédérales et des sociétés dans lesquelles le Canada détient des intérêts, que l'on peut regrouper en diverses catégories (p. ex. par portefeuille).
-    Pour voir comment elles sont distribuées selon différents mécanismes d’étiquetage, veuillez consulter notre diagramme [« Panorama de l'administration publique »](#partition/org_info_by_ministry/org_info).
 
     * {{ext_link "Obtenir un aperçu des organisations et intérêts fédéraux" "http://www.tbs-sct.gc.ca/hgw-cgf/finances/rgs-erdg/cc-se/institution/forms-formulaires-fra.asp"}}
-    * [Explorer les organisations selon le total de leurs dépenses pour {{pa_last_year}}](#partition/dept/exp)
     
     **Liste des sociétés de portefeuille:**
     *	{{ ext_link "Portefeuille des sociétés d'État" "http://www.tbs-sct.gc.ca/hgw-cgf/finances/rgs-erdg/cc-se/crown-etat/holdings-portefeuille-fra.asp"}}

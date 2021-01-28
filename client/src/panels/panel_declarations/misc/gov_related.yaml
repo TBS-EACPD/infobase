@@ -13,7 +13,6 @@ gov_related_info_text:
     * To view a wider scope of organizations, including interests of the federal government, go to our **[{{gt "igoc"}}](#igoc)**.
     * For further analysis, visit our **[datasets](#metadata)** section where you will find links to all data sources that suppports GC InfoBase, organized in customizable reports.
     * Visit our **[ad hoc reports](#rpb)** section to create your own exportable report, with the ability to sort and filter the data
-    {{#unless is_a11y_mode}}* To see how government resources flow across different tagging schemes check out the **[government at a glance](#partition/dept/exp)** flow chart{{/unless}}
 
   fr: |
     InfoBase du GC présente des renseignements sur les dépenses, la gestion des personnes et le rendement (résultats) à plusieurs niveaux, d'un niveau pangouvernemental au niveau organisationnel ou de Programmes, et parmi un certain nombre de catégories de Programmes ou mots-clés "étiquette".  
@@ -24,4 +23,3 @@ gov_related_info_text:
     * Pour voir une portée plus élargie des organisations, y compris les intérêts ministériels du gouvernement fédéral, veuillez consulter notre **[{{gt "igoc"}}](#igoc)**.
     * Consulter notre section de **[données](#metadata)** pour plus d'informations concernant les données supportant InfoBase du GC, organisée dans des rapports personnalisables.
     * Veuillez visiter notre section de **[rapports ad hoc](#rpb)** pour créer votre propre rapport exportable, avec la possibilité de trier et de filtrer les données
-    {{#unless is_a11y_mode}}* Pour voir comment les ressources gouvernementales sont distribuées d'un mécanisme d'étiquetage à l'autre consulter notre **[organigramme](#partition/dept/exp)**{{/unless}}

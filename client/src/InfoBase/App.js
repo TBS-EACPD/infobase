@@ -38,11 +38,7 @@ import "./App.scss";
 
 const Home = retrying_react_lazy(() => import("src/home/home.js"));
 const A11yHome = retrying_react_lazy(() => import("src/home/a11y_home.js"));
-const PartitionRoute = retrying_react_lazy(() =>
-  import("src/partition/partition_subapp/PartitionRoute.js")
-);
 const About = retrying_react_lazy(() => import("src/about/about.tsx"));
-
 const Contact = retrying_react_lazy(() => import("src/contact/contact.tsx"));
 const FAQ = retrying_react_lazy(() => import("src/FAQ/FAQ.js"));
 const MetaData = retrying_react_lazy(() => import("src/metadata/metadata.js"));
@@ -63,7 +59,7 @@ const EstimatesComparison = retrying_react_lazy(() =>
 const PrivacyStatement = retrying_react_lazy(() =>
   import("src/PrivacyStatement/PrivacyStatement.js")
 );
-const TextDiff = retrying_react_lazy(() => import("../TextDiff/TextDiff.js"));
+const TextDiff = retrying_react_lazy(() => import("src/TextDiff/TextDiff.js"));
 const IsolatedPanel = retrying_react_lazy(() =>
   import("src/panels/panel_routes/IsolatedPanel.js")
 );
@@ -217,12 +213,6 @@ export class App extends React.Component {
                   path="/graphiql/:encoded_query?/:encoded_variables?"
                   component={GraphiQL}
                 />
-                {!is_a11y_mode && (
-                  <Route
-                    path="/partition/:perspective?/:data_type?"
-                    component={PartitionRoute}
-                  />
-                )}
                 <Route path="/survey" component={Survey} />
                 {is_a11y_mode && (
                   <Route

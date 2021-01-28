@@ -21,7 +21,6 @@ import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import {
   IconResultsReport,
-  IconPartition,
   IconCompareEstimates,
   IconHierarchy,
   IconTag,
@@ -248,21 +247,6 @@ const SubAppLayout = (props) => (
     <div className="container">
       <div className="xtralinks">
         <div className="row">
-          <div className="col-12 col-lg-3 col-md-6 linkcard">
-            <CardTopImage
-              tmf={home_tm}
-              svg={
-                <IconPartition
-                  width="100%"
-                  color="#2C70C9"
-                  alternate_color={false}
-                />
-              }
-              title_key="partition_home_title"
-              text_key="partition_home_text"
-              link_href="#partition"
-            />
-          </div>
           <div className="col-12 col-lg-3 col-md-6 linkcard">
             <CardTopImage
               tmf={home_tm}

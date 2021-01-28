@@ -30,15 +30,6 @@ subapps_text:
   en: Additional tools and sub-applications to explore the data through different lenses
   fr: Outils et sous-applications supplémentaires en permettant explorer les données selon diverses optiques
 
-partition_home_title:
-  en: The Government at a Glance
-  fr: Panorama de l'administration publique
-
-partition_home_text:
-  en: See how government resources flow across different tagging schemes
-  fr: Voir comment les ressources gouvernementales sont distribuées d'un mécanisme à l'autre
-
-
 dp_home_text:
   en: The 2021-22 Departmental Plans were tabled on February 26th, 2021. Explore the data to see upcoming departmental priorities
   fr: Les rapports sur les plans ministériels de 2020-2021 ont été déposés le 25 février 2021. Consultez les données pour voir les priorités ministérielles à venir
