@@ -489,7 +489,6 @@ export default class TextDiffApp extends React.Component {
           current_doc_name,
         })}
         route_key="_diff"
-        beta={true}
       >
         <TM k="diff_title" el="h1" />
         <div
