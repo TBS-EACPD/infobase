@@ -10,7 +10,7 @@ import {
 import { log_standard_event } from "../../core/analytics.js";
 import { breakpoints } from "../../core/breakpoint_defs.js";
 
-import { IconFilter } from "../../icons/icons.js";
+import { IconGear } from "../../icons/icons.js";
 
 import { get_static_url } from "../../request_utils.js";
 
@@ -162,11 +162,10 @@ export class Typeahead extends React.Component {
     const {
       placeholder,
       min_length,
-      filter_content,
+      options_content,
       pagination_size,
       search_configs,
       onNewQuery,
-      is_filter_modified,
     } = this.props;
 
     const {
@@ -321,7 +320,7 @@ export class Typeahead extends React.Component {
             }
           />
 
-          {filter_content && (
+          {options_content && (
             <DropdownMenu
               dropdown_trigger_txt={
                 <div
@@ -336,33 +335,25 @@ export class Typeahead extends React.Component {
                       style={{
                         whiteSpace: "nowrap",
                         display: "inline-block",
-                        marginRight: "1.5rem",
+                        marginRight: "2.5rem",
                       }}
                     >
-                      <IconFilter
-                        height="5px"
-                        width="5px"
-                        vertical_align="top"
+                      <IconGear
+                        height="1px"
+                        width="1px"
+                        vertical_align="1.5rem"
                         alternate_color="false"
                       />
                     </div>
                   </MediaQuery>
-                  <span>
-                    {is_filter_modified
-                      ? text_maker("add_filter")
-                      : text_maker("edit_filter")}
-                  </span>
+                  <span>{text_maker("options")}</span>
                 </div>
               }
-              dropdown_a11y_txt={
-                is_filter_modified
-                  ? text_maker("add_filter")
-                  : text_maker("edit_filter")
-              }
+              dropdown_a11y_txt={text_maker("search_options")}
               opened_button_class_name={"btn-ib-light--reversed--with-icon"}
               closed_button_class_name={"btn-ib-light--with-icon"}
               dropdown_content_class_name="no-right"
-              dropdown_content={filter_content}
+              dropdown_content={options_content}
             />
           )}
         </div>
