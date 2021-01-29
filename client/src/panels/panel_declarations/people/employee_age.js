@@ -4,8 +4,6 @@ import React from "react";
 
 import { lang } from "src/core/injected_build_constants.js";
 
-import { lang } from "src/core/injected_build_constants.js";
-
 import { GraphOverlay } from "../../../components";
 import {
   formats,
