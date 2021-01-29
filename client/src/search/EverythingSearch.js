@@ -259,23 +259,23 @@ const EverythingSearch = withRouter(
                           display: "inline-block",
                         }}
                       >
+                        <div
+                          style={{
+                            whiteSpace: "nowrap",
+                            display: "inline-block",
+                            marginRight: "21px",
+                          }}
+                        >
+                          <IconGear
+                            height="1px"
+                            width="1px"
+                            vertical_align="14px"
+                            alternate_color="false"
+                          />
+                        </div>
                         <MediaQuery minWidth={breakpoints.minSmallDevice}>
-                          <div
-                            style={{
-                              whiteSpace: "nowrap",
-                              display: "inline-block",
-                              marginRight: "2.5rem",
-                            }}
-                          >
-                            <IconGear
-                              height="1px"
-                              width="1px"
-                              vertical_align="1.5rem"
-                              alternate_color="false"
-                            />
-                          </div>
+                          <span>{text_maker("options")}</span>
                         </MediaQuery>
-                        <span>{text_maker("options")}</span>
                       </div>
                     }
                     dropdown_a11y_txt={text_maker("search_options")}

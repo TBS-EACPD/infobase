@@ -3,11 +3,11 @@ options:
   fr: TODO
 
 search_options:
-  en: Search options
+  en: search options
   fr: TODO
 
 everything_search_description:
-  en: Choose what to include in search results
+  en: Choose what to search for
   fr: Choisissez les éléments à rechercher
 
 include_orgs_normal_data_label:
