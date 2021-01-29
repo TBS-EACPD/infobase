@@ -1,0 +1,18 @@
+@import  "../common_css/common-variables";;
+
+.search__glossary-title {
+  font-size: 14px;
+  line-height: 1.8em;
+  padding: 5px 0px;
+}
+
+.search__glossary-text {
+  font-size: 12px;
+  line-height: 1;
+  padding: 0px 20px 20px 20px;
+  color: $textColor;
+}
+
+.search-grayed-out-hint {
+  opacity: 0.8;
+}
