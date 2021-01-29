@@ -17,6 +17,6 @@ dept_employee_last_year_totals_text:
 dept_headcount:
   transform: [handlebars]
   en: |
-    {{#if subject.abbr}}({{subject.abbr}}) headcount{{else}}Headcount{{/if}} 
+    {{#if subject.abbr}}{{subject.abbr}} headcount{{else}}Headcount{{/if}} 
   fr: |
     Effectif {{#if subject.abbr}}{{{de_dept_abbr subject}}}{{/if}} 
