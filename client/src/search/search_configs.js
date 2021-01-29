@@ -12,6 +12,8 @@ import {
   InfoBaseHighlighter,
 } from "./search_utils.js";
 
+import "./search_configs.scss";
+
 const { Dept, Gov, Program, Tag, CRSO } = Subject;
 
 const get_re_matcher = (accessors, reg_exps) => (obj) =>
