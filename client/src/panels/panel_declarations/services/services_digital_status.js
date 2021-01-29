@@ -1,3 +1,4 @@
+import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
@@ -6,7 +7,6 @@ import {
   highlightOrangeColor,
   separatorColor,
 } from "src/core/color_defs.js";
-import d3 from "src/core/d3-bundle.js";
 
 import { is_a11y_mode, lang } from "src/core/injected_build_constants.js";
 
@@ -31,9 +31,11 @@ const can_online = text_maker("can_online");
 const cannot_online = text_maker("cannot_online");
 const not_applicable = text_maker("not_applicable");
 
-const colors = d3
-  .scaleOrdinal()
-  .range([secondaryColor, highlightOrangeColor, separatorColor]);
+const colors = scaleOrdinal().range([
+  secondaryColor,
+  highlightOrangeColor,
+  separatorColor,
+]);
 
 const ServicesDigitalStatusPanel = ({ panel_args }) => {
   const { services, subject } = panel_args;

@@ -1,7 +1,6 @@
+import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
-
-import d3 from "src/core/d3-bundle.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
@@ -23,8 +22,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesIdMethodsPanel = ({ panel_args }) => {
   const services = panel_args.services;
-  const colors = d3
-    .scaleOrdinal()
+  const colors = scaleOrdinal()
     .domain(["uses_identifier", "does_not_identifier", "na"])
     .range(_.take(newIBCategoryColors, 3));
   const get_id_method_count = (method) =>
