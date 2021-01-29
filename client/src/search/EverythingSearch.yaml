@@ -1,7 +1,3 @@
-advaced_search_title:
-  en: Search Filters
-  fr: Filtres de recherche
-  
 options:
   en: Options
   fr: TODO
@@ -10,9 +6,9 @@ search_options:
   en: Search options
   fr: TODO
 
-advanced_search_description:
-  en: Choose categories to include in search results
-  fr: Choisissez les catégories à rechercher
+everything_search_description:
+  en: Choose what to include in search results
+  fr: Choisissez les éléments à rechercher
 
 include_orgs_normal_data_label:
   en: Organizations with full data

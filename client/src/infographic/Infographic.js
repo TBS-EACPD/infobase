@@ -18,7 +18,7 @@ import { Subject } from "../models/subject.js";
 import { get_panels_for_subject } from "../panels/get_panels_for_subject/index.js";
 import { PanelRegistry } from "../panels/PanelRegistry.js";
 import { PanelRenderer } from "../panels/PanelRenderer.js";
-import { AdvancedSearch } from "../search/index.js";
+import { EverythingSearch } from "../search/index.js";
 
 import { bubble_defs } from "./bubble_definitions.js";
 import { BubbleMenu } from "./BubbleMenu.js";
@@ -164,12 +164,12 @@ class InfoGraph_ extends React.Component {
         {is_a11y_mode && (
           <div>
             <TM k="a11y_search_other_infographs" />
-            <AdvancedSearch />
+            <EverythingSearch />
           </div>
         )}
         {!is_a11y_mode && (
           <div className="row infographic-search-container">
-            <AdvancedSearch />
+            <EverythingSearch />
           </div>
         )}
         <div>

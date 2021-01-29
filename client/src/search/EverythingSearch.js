@@ -25,8 +25,9 @@ import {
 } from "./search_configs.js";
 import { Typeahead } from "./Typeahead/Typeahead.js";
 
-import text from "./AdvancedSearch.yaml";
-import "./AdvancedSearch.scss";
+import text from "./EverythingSearch.yaml";
+import "./EverythingSearch.scss";
+
 const text_maker = create_text_maker(text);
 
 const get_tag_search_configs = (
@@ -86,8 +87,8 @@ const complete_option_hierarchy = {
   },
 };
 
-const AdvancedSearch = withRouter(
-  class AdvancedSearch extends React.Component {
+const EverythingSearch = withRouter(
+  class EverythingSearch extends React.Component {
     constructor(props) {
       super(props);
 
@@ -95,25 +96,6 @@ const AdvancedSearch = withRouter(
     }
     render() {
       const optional_configs = this.state;
-
-      const {
-        reject_dead_orgs,
-        include_options,
-        href_template,
-        onNewQuery,
-        include_gov,
-        placeholder,
-        history,
-      } = this.props;
-
-      let { onSelect } = this.props;
-
-      if (!onSelect && href_template) {
-        onSelect = (item) => {
-          history.push(href_template(item));
-        };
-      }
-
       const {
         include_orgs_normal_data,
         include_orgs_limited_data,
@@ -129,6 +111,24 @@ const AdvancedSearch = withRouter(
         include_glossary,
         include_tables,
       } = optional_configs;
+
+      const {
+        reject_dead_orgs,
+        hide_utility_buttons,
+        href_template,
+        onNewQuery,
+        include_gov,
+        placeholder,
+        history,
+      } = this.props;
+
+      let { onSelect } = this.props;
+
+      if (!onSelect && href_template) {
+        onSelect = (item) => {
+          history.push(href_template(item));
+        };
+      }
 
       const orgs_to_include =
         include_orgs_normal_data && include_orgs_limited_data
@@ -185,7 +185,7 @@ const AdvancedSearch = withRouter(
                   onClick={() =>
                     this.setState(
                       _.chain(option_node.child_options)
-                        .map((child_node, child_key) => [
+                        .map((_child_node, child_key) => [
                           child_key,
                           !has_checked_child_option,
                         ])
@@ -232,6 +232,10 @@ const AdvancedSearch = withRouter(
           }
         }
       };
+      const option_checkboxes = _.map(
+        complete_option_hierarchy,
+        option_node_to_component
+      );
 
       return (
         <div>
@@ -243,10 +247,10 @@ const AdvancedSearch = withRouter(
               }
               search_configs={search_configs}
               onSelect={onSelect}
-              utility_buttons={[
-                include_options && (
+              utility_buttons={
+                !hide_utility_buttons && [
                   <DropdownMenu
-                    key="AdvancedSearchDropdownMenu"
+                    key="EverythingSearchDropdownMenu"
                     dropdown_trigger_txt={
                       <div
                         style={{
@@ -283,19 +287,16 @@ const AdvancedSearch = withRouter(
                     dropdown_content={
                       <fieldset>
                         <legend>
-                          {text_maker("advanced_search_description")}:
+                          {text_maker("everything_search_description")}:
                         </legend>
-                        <div className="advanced-search-options">
-                          {_.map(
-                            complete_option_hierarchy,
-                            option_node_to_component
-                          )}
+                        <div className="everything-search-options">
+                          {option_checkboxes}
                         </div>
                       </fieldset>
                     }
-                  />
-                ),
-              ]}
+                  />,
+                ]
+              }
               pagination_size={30}
             />
           </div>
@@ -304,11 +305,11 @@ const AdvancedSearch = withRouter(
     }
   }
 );
-AdvancedSearch.defaultProps = {
+EverythingSearch.defaultProps = {
   href_template: (item) => smart_href_template(item, "/"),
   include_gov: true,
-  include_options: true,
   reject_dead_orgs: true,
+  hide_utility_buttons: false,
 
   options_initial_configs: {
     include_orgs_normal_data: true,
@@ -326,4 +327,4 @@ AdvancedSearch.defaultProps = {
     include_tables: false,
   },
 };
-export { AdvancedSearch };
+export { EverythingSearch };

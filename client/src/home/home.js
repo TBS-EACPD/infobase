@@ -18,7 +18,7 @@ import { log_standard_event } from "../core/analytics.js";
 
 import { StandardRouteContainer } from "../core/NavComponents.js";
 import { get_static_url } from "../request_utils.js";
-import { AdvancedSearch } from "../search/index.js";
+import { EverythingSearch } from "../search/index.js";
 
 import { featured_content_items } from "./home-data.js";
 
@@ -87,7 +87,7 @@ const HomeLayout = (props) => (
           <img aria-hidden="true" src={get_static_url("svg/flagline.svg")} />
         </div>
         <div className="search-box">
-          <AdvancedSearch
+          <EverythingSearch
             onNewQuery={(query) => {
               log_standard_event({
                 SUBAPP: "home",
