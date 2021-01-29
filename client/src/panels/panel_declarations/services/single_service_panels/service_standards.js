@@ -1,7 +1,7 @@
+import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import d3 from "src/core/d3-bundle.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import {
@@ -22,8 +22,7 @@ import text from "../services.yaml";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const standard_statuses = ["met", "not_met", "no_data"];
-const color_scale = d3
-  .scaleOrdinal()
+const color_scale = scaleOrdinal()
   .domain(standard_statuses)
   .range(_.take(newIBCategoryColors, 2));
 
