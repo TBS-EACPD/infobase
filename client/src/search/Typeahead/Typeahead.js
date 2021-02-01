@@ -287,7 +287,6 @@ export class Typeahead extends React.Component {
             </span>
           </div>
           <input
-            id="rbt-search"
             role="combobox"
             autoComplete="off"
             aria-autocomplete="list"
@@ -323,11 +322,7 @@ export class Typeahead extends React.Component {
             (() => {
               if (_.isEmpty(paginated_results)) {
                 return (
-                  <ul
-                    className="rbt-menu dropdown-menu show"
-                    id={this.menuId}
-                    role="listbox"
-                  >
+                  <ul className="rbt-menu dropdown-menu show" role="listbox">
                     <li className="dropdown-header">
                       {text_maker("no_matches_found")}
                     </li>
@@ -335,11 +330,7 @@ export class Typeahead extends React.Component {
                 );
               } else {
                 return (
-                  <ul
-                    className="rbt-menu dropdown-menu show"
-                    id={this.menuId}
-                    role="listbox"
-                  >
+                  <ul className="rbt-menu dropdown-menu show" role="listbox">
                     {_.chain(paginated_results)
                       .groupBy("config_group_index")
                       .thru((grouped_results) => {
@@ -352,10 +343,7 @@ export class Typeahead extends React.Component {
                           : 0;
                         return (
                           <Fragment>
-                            <li
-                              key={`header-pagination-info`}
-                              className="dropdown-header"
-                            >
+                            <li className="dropdown-header">
                               <TM
                                 k="paginate_status"
                                 args={{
@@ -381,11 +369,7 @@ export class Typeahead extends React.Component {
                                   }));
                                 }}
                               >
-                                <a
-                                  key="rbt-menu-item-0"
-                                  id="rbt-menu-item-0"
-                                  className="rbt-menu-center dropdown-item "
-                                >
+                                <a className="rbt-menu-center dropdown-item ">
                                   <span className="aria-hidden">▲</span>
                                   <br />
                                   <TM
@@ -407,7 +391,7 @@ export class Typeahead extends React.Component {
                                     const index = index_key_counter++;
                                     return (
                                       <li
-                                        key={`rbt-menu-item-${index}`}
+                                        key={`result-${index}`}
                                         className={`${
                                           index === current_selected_index &&
                                           "active"
@@ -424,10 +408,7 @@ export class Typeahead extends React.Component {
                                           this.on_select_item(result)
                                         }
                                       >
-                                        <a
-                                          id={`rbt-menu-item-${index}`}
-                                          className="dropdown-item list-group-ite"
-                                        >
+                                        <a className="dropdown-item list-group-ite">
                                           {result.menu_content(search_text)}
                                         </a>
                                       </li>
@@ -459,11 +440,7 @@ export class Typeahead extends React.Component {
                                   }));
                                 }}
                               >
-                                <a
-                                  key={`rbt-menu-item-${pagination_down_item_index}`}
-                                  id={`rbt-menu-item-${pagination_down_item_index}`}
-                                  className="rbt-menu-center dropdown-item "
-                                >
+                                <a className="rbt-menu-center dropdown-item ">
                                   <TM
                                     k="paginate_next"
                                     args={{ next_page_size: next_page_size }}
@@ -492,15 +469,7 @@ export class Typeahead extends React.Component {
                               }}
                               onClick={() => this.hide_menu()}
                             >
-                              <a
-                                key={`rbt-menu-item-${
-                                  pagination_down_item_index + 1
-                                }`}
-                                id={`rbt-menu-item-${
-                                  pagination_down_item_index + 1
-                                }`}
-                                className="rbt-menu-center dropdown-item"
-                              >
+                              <a className="rbt-menu-center dropdown-item">
                                 {text_maker("close_menu")}
                               </a>
                             </li>
