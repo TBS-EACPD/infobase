@@ -47,7 +47,7 @@ describe("validate_completed_template", () => {
       form_type: "radio",
       form_label: {
         en: "Did you find what you were looking for on GC InfoBase?",
-        fr: "Avez-vous trouvé ce que vous cherchiez dans l’InfoBase du GC?",
+        fr: "Avez-vous trouvé ce que vous cherchiez dans InfoBase du GC?",
       },
     },
     issue: {

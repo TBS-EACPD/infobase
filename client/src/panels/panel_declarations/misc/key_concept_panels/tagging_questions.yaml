@@ -25,8 +25,8 @@ what_is_prog_tagging_a:
     L’« étiquetage de Programmes » consiste à attribuer certaines « étiquettes » (ou « champs d’intérêt ») aux programmes du gouvernement en fonction de leurs attributs. Par exemple, si un programme gouvernemental est offert au moyen de subventions, on lui attribuera l’étiquette « subvention », comme à tous les autres programmes gouvernementaux offerts de la même façon. 
 
 what_tags_are_available_q:
-  en: What are the types of tags available in the InfoBase?
-  fr: Quels sont les types d’étiquettes offertes dans l’InfoBase?
+  en: What are the types of tags available in GC InfoBase?
+  fr: Quels sont les types d’étiquettes offertes dans InfoBase du GC?
 
 
 what_tags_are_available_a:

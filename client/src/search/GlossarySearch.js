@@ -9,8 +9,8 @@ import { BaseTypeahead } from "./BaseTypeahead.js";
 import { glossary as glossary_search_config } from "./search_configs.js";
 
 const glossary_placeholder = {
-  en: "Search for a term used in the InfoBase",
-  fr: "Rechercher un terme utilisé dans l’InfoBase",
+  en: "Search for a term used in GC InfoBase",
+  fr: "Rechercher un terme utilisé dans InfoBase du GC",
 }[lang];
 
 const GlossarySearch = withRouter(

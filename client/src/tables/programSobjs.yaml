@@ -13,8 +13,8 @@ programSobjs:
 
    **Notes:**
    * Data for Program expenditures by Standard Object are not available for the Canadian Security Intelligence Service and the Communication Security Establishment. As such, totals for all Program expenditures found in this table **will not** match total government spending.    
-   * Where data on Program expenditures by Standard Object are available, totals at the Program and organization presented in the InfoBase will correspond to information published in the {{pa_last_year}} Public Accounts of Canada. 
-   * To ensure comparability over time, Program names and structures used in the InfoBase are sourced from the Public Accounts of Canada and may differ from an organization Departmental Plan.
+   * Where data on Program expenditures by Standard Object are available, totals at the Program and organization presented in GC InfoBase will correspond to information published in the {{pa_last_year}} Public Accounts of Canada. 
+   * To ensure comparability over time, Program names and structures used in GC InfoBase are sourced from the Public Accounts of Canada and may differ from an organization Departmental Plan.
 
 
    In cases where machinery of government changes (such as merging or eliminating organizations) have occurred, the data has not been adjusted.
@@ -27,8 +27,8 @@ programSobjs:
    **Remarques:**
 
    * Les données pour les dépenses de programme par article courant ne sont pas disponibles pour le Service Canadien du renseignement de sécurité et le Centre de la sécurité des télécommunications. À ce titre, les totaux de toutes les dépenses de programmes qui se trouvent dans ce tableau ne correspondront pas aux dépenses gouvernementales totales.
-   * Lorsque les données pour les dépenses de programme par article courant sont disponibles, les totaux des dépenses de programmes et d’organisations publiés dans l'InfoBase correspondent à l'information publiée dans les Comptes publics du Canada {{pa_last_year}}.
-   * Pour assurer la comparabilité au fil du temps, la composition et le nom des programmes présentés dans l'InfoBase correspondent à ceux utilisés dans les Comptes Publics du Canada et pourraient différer du plan ministériel d’une organisation.
+   * Lorsque les données pour les dépenses de programme par article courant sont disponibles, les totaux des dépenses de programmes et d’organisations publiés dans InfoBase du GC correspondent à l'information publiée dans les Comptes publics du Canada {{pa_last_year}}.
+   * Pour assurer la comparabilité au fil du temps, la composition et le nom des programmes présentés dans InfoBase du GC correspondent à ceux utilisés dans les Comptes Publics du Canada et pourraient différer du plan ministériel d’une organisation.
 
 
    Dans le cas où des changements dans l’appareil

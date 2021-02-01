@@ -1,8 +1,8 @@
 different_org_names_q:
   en: |
-    Why does the InfoBase sometimes use different names for the same organization? 
+    Why does GC InfoBase sometimes use different names for the same organization? 
   fr: |
-    Pourquoi une seule organisation a parfois deux noms dans l’InfoBase ?
+    Pourquoi une seule organisation a parfois deux noms dans InfoBase du GC ?
 different_org_names_a:
   transform: [handlebars, markdown]
   en: |
@@ -10,13 +10,13 @@ different_org_names_a:
 
     In some cases, an organization may be referred to by two different names—an applied title and a legal title. The applied title is used in communications material and is therefore the name that most people associate with the organization. An organization’s legal title is the name that appears in its enabling legislation (act), proclamation, order in council, or other instrument used to create a federal organization.
 
-    Applied and legal titles are not always different. When there is a difference, the GC InfoBase favours the applied title over the legal title so as to better service the public. Note that some of the data sources for the GC InfoBase, such as Main Estimates and Public Accounts, are always presented by legal title in their original publication.
+    Applied and legal titles are not always different. When there is a difference, GC InfoBase favours the applied title over the legal title so as to better service the public. Note that some of the data sources for GC InfoBase, such as Main Estimates and Public Accounts, are always presented by legal title in their original publication.
   fr: |
     {{#isEqual subject.applied_title subject.legal_title}}{{else}}**{{subject.applied_title}} / {{subject.legal_title}}**{{/isEqual}}
 
     Dans certains cas, une organisation peut être désignée par deux noms différents : un titre d'usage et un titre légal. Le titre d'usage est utilisé dans les documents de communication et est donc le nom que la plupart des gens associent à l'organisation. Le titre légal d'une organisation est le nom qui apparaît dans sa loi d'habilitation (loi), sa proclamation, son décret ou tout autre instrument utilisé pour créer une organisation fédérale.
 
-    Les titres légaux et les titres d'application ne sont pas toujours différents. Lorsqu'il y a une différence, l'InfoBase du GC privilégie le titre appliqué par rapport au titre légal afin de mieux servir le public. Notez que certaines des sources de données de l'InfoBase GC, telles que le Budget principal des dépenses et les Comptes publics, sont toujours présentées par titre légal dans leur publication originale.
+    Les titres légaux et les titres d'application ne sont pas toujours différents. Lorsqu'il y a une différence, InfoBase du GC privilégie le titre appliqué par rapport au titre légal afin de mieux servir le public. Notez que certaines des sources de données de InfoBase GC, telles que le Budget principal des dépenses et les Comptes publics, sont toujours présentées par titre légal dans leur publication originale.
 
 what_are_SOut_q:
   en: What are Strategic Outcomes?

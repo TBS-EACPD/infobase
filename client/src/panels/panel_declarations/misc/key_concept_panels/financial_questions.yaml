@@ -136,45 +136,45 @@ what_is_so_a:
     
 
 what_is_fy_q:
-  en: Why does a year seem to span over two in the InfoBase (e.g. 2017-18)?
-  fr: Pourquoi une année semble s’étendre sur deux dans l’InfoBase (p. ex. 2017-2018)?
+  en: Why does a year seem to span over two in GC InfoBase (e.g. 2017-18)?
+  fr: Pourquoi une année semble s’étendre sur deux dans InfoBase du GC (p. ex. 2017-2018)?
 
 what_is_fy_a:
   transform: [handlebars,markdown]
   en: |
-    The Government of Canada fiscal year runs from April 1 to March 31 of the following year. So for the fiscal year beginning April 1, 2017 and ending March 31, 2018, the InfoBase would label the year as 2017-18.
+    The Government of Canada fiscal year runs from April 1 to March 31 of the following year. So for the fiscal year beginning April 1, 2017 and ending March 31, 2018, GC InfoBase would label the year as 2017-18.
   fr: |
-    L’exercice du Gouvernement du Canada s'étend du 1er avril au 31 mars. Ainsi, pour l’exercice commençant le 1er avril 2017 et se terminant le 31 mars 2018, l’InfoBase va présenter l’année comme 2017-2018.
+    L’exercice du Gouvernement du Canada s'étend du 1er avril au 31 mars. Ainsi, pour l’exercice commençant le 1er avril 2017 et se terminant le 31 mars 2018, InfoBase du GC va présenter l’année comme 2017-2018.
 
 
   
 why_cant_i_see_prov_spend_q:
   en: |
-    If the InfoBase provides information on government spending, why can't I find information on how much my province or territory spends?
+    If GC InfoBase provides information on government spending, why can't I find information on how much my province or territory spends?
   fr: |
-    Si l'InfoBase fournit des renseignements sur les dépenses du gouvernement, pourquoi ne puis-je trouver des renseignements sur les dépenses d'une province ou d'un territoire en particulier?
+    Si InfoBase du GC fournit des renseignements sur les dépenses du gouvernement, pourquoi ne puis-je trouver des renseignements sur les dépenses d'une province ou d'un territoire en particulier?
 
 why_cant_i_see_prov_spend_a:
   transform:  [handlebars, markdown]
   en: |
-    The InfoBase contains information on all organizations that receive approporations from the Parliament of Canada, so it does not include spending from other levels of government. For ease of use, the term "government" and "government spending" in the InfoBase encompasses spending by three independent arms of Canada's government system--the judiciary, the legislature, and the executive--unless otherwise specified.
+    GC InfoBase contains information on all organizations that receive approporations from the Parliament of Canada, so it does not include spending from other levels of government. For ease of use, the term "government" and "government spending" in GC InfoBase encompasses spending by three independent arms of Canada's government system--the judiciary, the legislature, and the executive--unless otherwise specified.
   fr: |
-    L'InfoBase contient des renseignements sur toutes les organisations qui reçoivent des crédits du Parlement du Canada. Donc, il ne contient pas les dépenses d'autres ordres du gouvernement. À des fins de convivialité, le terme "gouvernement" et "dépenses du gouvernement" dans l'InfoBase englobe les dépenses des trois pouvoirs indépendant du système gouvernemental du gouvernement du Canada, soit les pouvoirs exécutives, législatives et judiciaires, sauf indication contraire.
+    InfoBase du GC contient des renseignements sur toutes les organisations qui reçoivent des crédits du Parlement du Canada. Donc, il ne contient pas les dépenses d'autres ordres du gouvernement. À des fins de convivialité, le terme "gouvernement" et "dépenses du gouvernement" dans InfoBase du GC englobe les dépenses des trois pouvoirs indépendant du système gouvernemental du gouvernement du Canada, soit les pouvoirs exécutives, législatives et judiciaires, sauf indication contraire.
 
 what_spending_is_included_q:
   en: |
-    What types of spending are included in the InfoBase?
+    What types of spending are included in GC InfoBase?
   fr: |
-    Quels types de dépenses sont inclus dans l'InfoBase?
+    Quels types de dépenses sont inclus dans InfoBase du GC?
 
 what_spending_is_included_a:
   en: |
-    The InfoBase contains information on planned and actual budgetary expenditures. Budgetary expenditures consist of the cost of servicing the public debt; operating and capital
+    GC InfoBase contains information on planned and actual budgetary expenditures. Budgetary expenditures consist of the cost of servicing the public debt; operating and capital
     expenditures; transfer payments to other levels of government, organizations or individuals; and payments to Crown corporations. Budgetary expenditures are expenditures made in
     accordance with specific votes, statutory appropriations or other authorities. Non-budgetary expenditures – or loans, investments
     and advances – are outlays that represent changes in the composition of the Government’s financial assets, and are not included.
   fr: |
-    L'InfoBase contient des renseignements sur les dépenses budgétaires prévues et réelles. Les dépenses budgétaires comprennent les dépenses liées au service de la dette publique,
+    InfoBase du GC contient des renseignements sur les dépenses budgétaires prévues et réelles. Les dépenses budgétaires comprennent les dépenses liées au service de la dette publique,
     les dépenses de fonctionnement et en capital, les paiements de transfert versés à d'autres ordres de gouvernement, à des organisations ou à des personnes, ainsi que les paiements
     versés à des sociétés d'État. Les dépenses budgétaires faites conformément à des crédits précis ou à d’autres autorisations figurant aux budgets des dépenses, ou encore à des
     crédits législatifs ou à d'autres autorisations figurant dans diverses lois et ailleurs. Les dépenses non budgétaires, ou les prêts, placements et avances, sont des dépenses qui correspondent à des modifications de la valeur des actifs

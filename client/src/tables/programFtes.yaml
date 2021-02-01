@@ -26,8 +26,8 @@ programFtes:
     The counts include employees working in organizations in Schedules I, IV, and V of the _Financial Administration Act_. 
     No adjustments are made to account for hours of work.
    * **Program can only be aligned with one of the 16 Go vernment of Canada Activities**. However a {{gl_tt "strategic outcome" "SO"}} and a {{gl_tt "core responsibility" "CR"}} can contribute to more than one activity.
-   * For the purposes of the InfoBase, {{gl_tt "Internal Service" "INT_SERVICES"}} is presented as one area of government spending.
-   * To ensure comparability over time, Program names and structures used in the InfoBase are sourced from the Public Accounts of Canada and may differ from an organization's Departmental Results Report and Departmental Plan.
+   * For the purposes of GC InfoBase, {{gl_tt "Internal Service" "INT_SERVICES"}} is presented as one area of government spending.
+   * To ensure comparability over time, Program names and structures used in GC InfoBase are sourced from the Public Accounts of Canada and may differ from an organization's Departmental Results Report and Departmental Plan.
 
 
    All figures presented reflect information previously published in the 
@@ -50,8 +50,8 @@ programFtes:
     Aucun rajustement n’est effectué pour tenir compte des heures de travail.
 
     * Un programme ne peut correspondre qu'à l'un des 16 secteurs d'activités du gouvernement du Canada. Toutefois un {{gl_tt "résultat stratégique" "SO"}} et une {{gl_tt "responsabilité essentielle" "CR"}} peuvent contribuer à plus d'une activité.
-    * Pour l'InfoBase, les {{gl_tt "services internes" "INT_SERVICES"}} sont présentés en tant qu'un secteur des dépenses du gouvernement.
-    * Pour assurer la comparabilité au fil du temps, la composition et le nom des programmes présentés dans l'InfoBase correspondent à ceux utilisés dans les Comptes Publics du Canada et pourraient différer du rapport sur les résultats ministériel et du plan ministériel d’une organisation.
+    * Pour InfoBase du GC, les {{gl_tt "services internes" "INT_SERVICES"}} sont présentés en tant qu'un secteur des dépenses du gouvernement.
+    * Pour assurer la comparabilité au fil du temps, la composition et le nom des programmes présentés dans InfoBase du GC correspondent à ceux utilisés dans les Comptes Publics du Canada et pourraient différer du rapport sur les résultats ministériel et du plan ministériel d’une organisation.
 
 
     Toutes les données présentées correspondent à l’information qui a été publiée dans les rapports sur les résultats ministériels de {{pa_last_year_5}} à {{pa_last_year}} et dans les plans ministériels {{planning_year_1}}, quoique les totaux pourraient 

@@ -824,8 +824,8 @@ MtoM_tag_warning_reporting_level_q:
   en: Reporting is only done at the Program level not by tags
   fr: Le rapport est fait uniquement au niveau du Programme et non par étiquettes
 MtoM_tag_warning_reporting_level_a:
-  en: Tags provide an easy way to search information and get a sense of how government resources are being allocated across key areas. However, it is important to keep in mind that funding associated with tags presented in the InfoBase represents the maximum amount that may have or will be spent on that particular tag, and that there is a risk of double counting if you try to combine tags.  This is because federal organizations only report how much they have spent, or plan to spend, on a particular Program not on a particular tag.
-  fr: Les étiquettes constituent un moyen facile de rechercher des renseignements et d’avoir une idée de la façon dont les ressources gouvernementales sont attribuées dans des secteurs clés. Cependant, il est important de garder à l’esprit que le financement associé aux étiquettes présentées dans l’InfoBase est un montant maximal qui a peut‑être été dépensé ou qui le sera. Il existe un risque de double comptage si vous tentez de combiner des étiquettes, car les organismes fédéraux déclarent seulement le montant qu’ils ont dépensé ou prévoient dépenser pour un programme donné et non pour une étiquette donnée.
+  en: Tags provide an easy way to search information and get a sense of how government resources are being allocated across key areas. However, it is important to keep in mind that funding associated with tags presented in GC InfoBase represents the maximum amount that may have or will be spent on that particular tag, and that there is a risk of double counting if you try to combine tags.  This is because federal organizations only report how much they have spent, or plan to spend, on a particular Program not on a particular tag.
+  fr: Les étiquettes constituent un moyen facile de rechercher des renseignements et d’avoir une idée de la façon dont les ressources gouvernementales sont attribuées dans des secteurs clés. Cependant, il est important de garder à l’esprit que le financement associé aux étiquettes présentées dans GC InfoBase est un montant maximal qui a peut‑être été dépensé ou qui le sera. Il existe un risque de double comptage si vous tentez de combiner des étiquettes, car les organismes fédéraux déclarent seulement le montant qu’ils ont dépensé ou prévoient dépenser pour un programme donné et non pour une étiquette donnée.
 
 MtoM_tag_warning_resource_splitting_q:
   en: Splitting program resources by its tags isn’t possible
@@ -838,8 +838,8 @@ MtoM_tag_warning_double_counting_q:
   en: Double counting will occur
   fr: La double comptabilisation se produira
 MtoM_tag_warning_double_counting_a:
-  en: Where the risk of double counting exists, the InfoBase will clearly list all relevant tags assigned to a program. More specifically, when you explore a particular program you will find under the description a section named "programs under this tag are also associated with the following tags" which will list all the tags this specific program is also linked to.
-  fr: S’il y a risque de double comptabilisation, l’InfoBase dressera clairement la liste des étiquettes attribuées au programme. Plus précisément, lorsque vous explorez un programme, vous trouverez la description dans la section intitulée « Les programmes sous cette étiquette figurent également sous les étiquettes suivantes » où sont énumérées toutes les étiquettes auxquelles le programme est également associé.
+  en: Where the risk of double counting exists, GC InfoBase will clearly list all relevant tags assigned to a program. More specifically, when you explore a particular program you will find under the description a section named "programs under this tag are also associated with the following tags" which will list all the tags this specific program is also linked to.
+  fr: S’il y a risque de double comptabilisation, InfoBase du GC dressera clairement la liste des étiquettes attribuées au programme. Plus précisément, lorsque vous explorez un programme, vous trouverez la description dans la section intitulée « Les programmes sous cette étiquette figurent également sous les étiquettes suivantes » où sont énumérées toutes les étiquettes auxquelles le programme est également associé.
 
 MtoM_tag_warning:
   transform: [handlebars]
@@ -850,7 +850,7 @@ MtoM_tag_warning:
            Reporting is only done at the Program level not by tags
         </div>
         <div class="lg-grid-panel70 key_concept_def"> 
-          Tags provide an easy way to search information and get a sense of how government resources are being allocated across key areas. However, it is important to keep in mind that funding associated with tags presented in the InfoBase represents the maximum amount that may have or will be spent on that particular tag, and that there is a risk of double counting if you try to combine tags.  This is because federal organizations only report how much they have spent, or plan to spend, on a particular program not on a particular tag. 
+          Tags provide an easy way to search information and get a sense of how government resources are being allocated across key areas. However, it is important to keep in mind that funding associated with tags presented in GC InfoBase represents the maximum amount that may have or will be spent on that particular tag, and that there is a risk of double counting if you try to combine tags.  This is because federal organizations only report how much they have spent, or plan to spend, on a particular program not on a particular tag. 
         </div>
       </div>
       <div class="grid-row">
@@ -866,7 +866,7 @@ MtoM_tag_warning:
           Double counting will occur
         </div>
         <div class="lg-grid-panel70 key_concept_def"> 
-           Where the risk of double counting exists, the InfoBase will clearly list all relevant tags assigned to a program. More specifically, when you explore a particular program you will find under the description a section named "programs under this tag are also associated with the following tags" which will list all the tags this specific program is also linked to.
+           Where the risk of double counting exists, GC InfoBase will clearly list all relevant tags assigned to a program. More specifically, when you explore a particular program you will find under the description a section named "programs under this tag are also associated with the following tags" which will list all the tags this specific program is also linked to.
         </div>
       </div>
     </div>
@@ -877,7 +877,7 @@ MtoM_tag_warning:
            Le rapport est fait uniquement au niveau du Programme et non par étiquettes
         </div>
         <div class="lg-grid-panel70 key_concept_def"> 
-           Les étiquettes constituent un moyen facile de rechercher des renseignements et d’avoir une idée de la façon dont les ressources gouvernementales sont attribuées dans des secteurs clés. Cependant, il est important de garder à l’esprit que le financement associé aux étiquettes présentées dans l’InfoBase est un montant maximal qui a peut‑être été dépensé ou qui le sera. Il existe un risque de double comptage si vous tentez de combiner des étiquettes, car les organismes fédéraux déclarent seulement le montant qu’ils ont dépensé ou prévoient dépenser pour un programme donné et non pour une étiquette donnée.  
+           Les étiquettes constituent un moyen facile de rechercher des renseignements et d’avoir une idée de la façon dont les ressources gouvernementales sont attribuées dans des secteurs clés. Cependant, il est important de garder à l’esprit que le financement associé aux étiquettes présentées dans InfoBase du GC est un montant maximal qui a peut‑être été dépensé ou qui le sera. Il existe un risque de double comptage si vous tentez de combiner des étiquettes, car les organismes fédéraux déclarent seulement le montant qu’ils ont dépensé ou prévoient dépenser pour un programme donné et non pour une étiquette donnée.  
         </div>
       </div>
       <div class="grid-row">
@@ -893,7 +893,7 @@ MtoM_tag_warning:
           La double comptabilisation se produira
         </div>
         <div class="lg-grid-panel70 key_concept_def"> 
-            S’il y a risque de double comptabilisation, l’InfoBase dressera clairement la liste des étiquettes attribuées au programme. Plus précisément, lorsque vous explorez un programme, vous trouverez la description dans la section intitulée « Les programmes sous cette étiquette figurent également sous les étiquettes suivantes » où sont énumérées toutes les étiquettes auxquelles le programme est également associé.
+            S’il y a risque de double comptabilisation, InfoBase du GC dressera clairement la liste des étiquettes attribuées au programme. Plus précisément, lorsque vous explorez un programme, vous trouverez la description dans la section intitulée « Les programmes sous cette étiquette figurent également sous les étiquettes suivantes » où sont énumérées toutes les étiquettes auxquelles le programme est également associé.
         </div>
       </div>
     </div>
@@ -1085,7 +1085,7 @@ beta_banner_content:
   en: |
     You're visiting a "beta" version of GC InfoBase. This is a work in progress and changes are being made on a regular basis. Your experience may vary depending on the device and/or the browser used
   fr: |
-    Vous visitez une version « beta » de l'InfoBase du GC. Ces travaux sont en cours et des changements sont apportés régulièrement. Votre expérience peut varier selon l'appareil ou le navigateur utilisé.
+    Vous visitez une version « beta » d'InfoBase du GC. Ces travaux sont en cours et des changements sont apportés régulièrement. Votre expérience peut varier selon l'appareil ou le navigateur utilisé.
 
 SOBJ1: 
     text: Personnel

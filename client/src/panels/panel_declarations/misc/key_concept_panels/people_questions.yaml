@@ -10,19 +10,19 @@ who_is_fps_a:
 
 
 what_ppl_are_included_q:
-  en: Which employees are included in the InfoBase?
-  fr: Quels employés sont inclus dans l’InfoBase? 
+  en: Which employees are included in GC InfoBase?
+  fr: Quels employés sont inclus dans InfoBase du GC?
 what_ppl_are_included_a:
   transform: [handlebars, markdown]
   en: |
     Active (i.e. employees who are not on leave without pay) full-time and part-time employees of all employment tenures (Indeterminate, Term, Casual and Student), Governor-in-Council appointees, deputy ministers, and federal judges.
   fr: |
-    L’InfoBase inclut des renseignements sur les employés actifs (les employés qui ne sont pas en congé non payé) à plein temps et à temps partiel, quelle que soit la période d’emploi (nommés pour une période indéterminée, nommés pour une période déterminée, occasionnels et étudiants), les personnes nommées par le gouverneur en conseil, les sous-ministres et les juges fédéraux.
+    InfoBase du GC inclut des renseignements sur les employés actifs (les employés qui ne sont pas en congé non payé) à plein temps et à temps partiel, quelle que soit la période d’emploi (nommés pour une période indéterminée, nommés pour une période déterminée, occasionnels et étudiants), les personnes nommées par le gouverneur en conseil, les sous-ministres et les juges fédéraux.
 
 
 what_ppl_arent_included_q:
-  en: Which employees are NOT included in the InfoBase?
-  fr: Quel employés ne sont PAS inclus dans l’InfoBase?
+  en: Which employees are NOT included in GC InfoBase?
+  fr: Quel employés ne sont PAS inclus dans InfoBase du GC?
 what_ppl_arent_included_a:
   transform: [handlebars, markdown]
   en: |
@@ -54,7 +54,7 @@ where_is_data_q:
 where_is_data_a:
   transform: [handlebars, markdown]
   en: |
-    Each people management dataset in the InfoBase has a corresponding dataset available through the Open Data portal. These corresponding Open Data datasets contain quarterly snapshots from March 2008 onward. Open Data links are available from the InfoBase {{metadata_source_link "Datasets" "RPS"}} page.
+    Each people management dataset in GC InfoBase has a corresponding dataset available through the Open Data portal. These corresponding Open Data datasets contain quarterly snapshots from March 2008 onward. Open Data links are available from GC InfoBase {{metadata_source_link "Datasets" "RPS"}} page.
   fr: |
-    Chaque ensemble de données sur la gestion des personnes dans l'InfoBase correspond à un ensemble de données disponibles sur le Portail des données ouvertes. Ces ensembles de données ouvertes inclus également des aperçus trimestriels débutant en mars 2008*. Vous trouverez des liens vers les sites de données ouvertes dans la page « {{metadata_source_link "Données" "RPS"}} » de l’InfoBase.
+    Chaque ensemble de données sur la gestion des personnes dans InfoBase du GC correspond à un ensemble de données disponibles sur le Portail des données ouvertes. Ces ensembles de données ouvertes inclus également des aperçus trimestriels débutant en mars 2008*. Vous trouverez des liens vers les sites de données ouvertes dans la page « {{metadata_source_link "Données" "RPS"}} » de InfoBase du GC.
 

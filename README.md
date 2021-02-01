@@ -4,16 +4,17 @@
 
 *(Le Français suit)*
 
-# InfoBase Mono-Repo
+# GC InfoBase Mono-Repo
 
-The GC InfoBase is an interactive data-visualization tool, transforming complex federal data into simple visual stories for Canadians. Since its creation in 2013, the GC InfoBase has been recognized as the authoritative source of Government expenditure information by the Parliamentary Budget Officer (PBO) and was identified as a public sector innovation by the Organisation for Economic Co-operation and Development (OECD) Observatory of Public Sector Innovation (OPSI). The tool contains years’ worth of federal government data, bringing together information previously scattered across over 500 government reports.
+GC InfoBase is an interactive data-visualization tool, transforming complex federal data into simple visual stories for Canadians. Since 
+its creation in 2013, GC InfoBase has been recognized as the authoritative source of Government expenditure information by the Parliamentary Budget Officer (PBO) and was identified as a public sector innovation by the Organisation for Economic Co-operation and Development (OECD) Observatory of Public Sector Innovation (OPSI). The tool contains years’ worth of federal government data, bringing together information previously scattered across over 500 government reports.
 
 The live site can be found [here](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html), where our [about page](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html#about) contains further details on who we are and what we do.
 
 This repository contains the following projects: 
-  1) the InfoBase single page application ([/client](https://github.com/TBS-EACPD/InfoBase/blob/master/client))
-  2) the InfoBase data API ([/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server)) [![Test coverage status badge](https://storage.googleapis.com/all-test-coverage/master-server-coverage-badge.svg)](https://storage.googleapis.com/all-test-coverage/master-server-coverage.txt)
-  2) the InfoBase email backend ([/email_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend)) [![Test coverage status badge](https://storage.googleapis.com/all-test-coverage/master-email_backend-coverage-badge.svg)](https://storage.googleapis.com/all-test-coverage/master-email_backend-coverage.txt)
+  1) GC InfoBase single page application ([/client](https://github.com/TBS-EACPD/InfoBase/blob/master/client))
+  2) GC InfoBase data API ([/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server)) [![Test coverage status badge](https://storage.googleapis.com/all-test-coverage/master-server-coverage-badge.svg)](https://storage.googleapis.com/all-test-coverage/master-server-coverage.txt)
+  2) GC InfoBase email backend ([/email_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend)) [![Test coverage status badge](https://storage.googleapis.com/all-test-coverage/master-email_backend-coverage-badge.svg)](https://storage.googleapis.com/all-test-coverage/master-email_backend-coverage.txt)
   
 See the README.md files in those respective directories for more details on each project.
 
@@ -25,9 +26,9 @@ The Canada wordmark and related graphics associated with this distribution are p
 
 All data in `data/` is released under the terms of the [Open Government Licence – Canada](https://open.canada.ca/en/open-government-licence-canada). See the [Datasets](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html#metadata) page for links to the individual open data pages for each dataset.
 
-# « Mono-Dépôt » de l'InfoBase du GC
+# « Mono-Dépôt » de InfoBase du GC
 
-L’InfoBase du GC est un outil interactif de visualisation de données, qui traduit en termes simples l’information complexe du gouvernement fédéral au profit des Canadiens. Depuis sa création en 2013, l’InfoBase du GC a été reconnue par le directeur parlementaire du budget (DPB) comme étant la source d’information faisant autorité en matière de dépenses gouvernementales et est considérée comme une innovation dans le secteur public par l’Observatoire sur l’innovation dans le secteur public (OISP) de l’Organisation de coopération et de développement économiques (OCDE). L’outil contient plusieurs années de renseignements gouvernementaux, auparavant éparpillés dans plus de 500 rapports à l’échelle de la fonction publique fédérale.
+InfoBase du GC est un outil interactif de visualisation de données, qui traduit en termes simples l’information complexe du gouvernement fédéral au profit des Canadiens. Depuis sa création en 2013, InfoBase du GC a été reconnue par le directeur parlementaire du budget (DPB) comme étant la source d’information faisant autorité en matière de dépenses gouvernementales et est considérée comme une innovation dans le secteur public par l’Observatoire sur l’innovation dans le secteur public (OISP) de l’Organisation de coopération et de développement économiques (OCDE). L’outil contient plusieurs années de renseignements gouvernementaux, auparavant éparpillés dans plus de 500 rapports à l’échelle de la fonction publique fédérale.
 
 Le site en direct est [ici](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-fra.html). Notre page [Qui sommes-nous](http://localhost:8080/build/InfoBase/index-fra.html#about) contient les details supplémentaires sur le sujet de nous-mêmes.
 
