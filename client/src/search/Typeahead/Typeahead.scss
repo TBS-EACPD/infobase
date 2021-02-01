@@ -1,6 +1,10 @@
-@import "../../common_css/common-variables";
+@import "src/common_css/common-variables";
 
-.search-bar {
+.typeahead {
+  outline: none;
+}
+
+.typeahead__search-bar {
     display: flex;
     border: 2px $tertiaryColor solid;
     border-radius: 1rem;
@@ -8,7 +12,7 @@
     padding: 0 1rem;
     background: $backgroundColor;
 
-    input {
+    & > input {
         font-size: 18px;
         border: 0;
         outline: none;
@@ -19,13 +23,83 @@
           height: 0;
         }
     }
-
-    > .search-icon-container {
-        display: flex; 
-        align-items: center;
-    }
+}
+.typeahead__icon-container {
+  display: flex; 
+  align-items: center;
 }
 
+.typeahead__dropdown {
+  position: absolute;
+  z-index: 9001;
+  width: 100%;
+  max-width: 100vw;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 2px;
+  margin-top: 12px;
+  padding: 8px 0;
+  background-color: $backgroundColor;
+  border: 1px solid $separatorColor;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: $standardBorderRadius;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.typeahead__header {
+  margin-top: 0px;
+  padding: 0px 20px 3px 10px;
+  font-size: 1.8em;
+  line-height: 1.8em;
+  white-space: normal;
+  border-bottom: 1px solid $separatorColor;
+  color: #777;
+
+  &:not(:first-child) {
+    border-top: 1px solid $separatorColor;
+  }
+}
+
+.typeahead__item {	
+  padding: 3px 20px;	
+  font-size: 1.4em;	
+  line-height: 1.8em;	
+  cursor: pointer;	
+
+  &:not(:first-child) {	
+    border-top: 1px solid $separatorColor;	
+  }	
+
+  // TODO ugh, descendant selectors and not-anchor a's, clean this up more
+  & a {
+    display: block;
+    padding: 3px 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;	
+    color: $linkColor;
+    &:focus {
+      outline: none;
+    }	
+  }
+
+    &--active,
+    &--active a,
+    &:focus,
+    &:hover,
+    & a:focus,
+    & a:hover {
+    &:not(.disabled){
+      background-color: lighten($tertiaryColor, 30%);
+      color: $linkFocusColor;
+      text-decoration: underline;
+    }
+  }
+}
+
+.typeahead__control {
+  text-align: center;
+}
 
 // utility classes not directly used by the Typeahead component, but by consumers, because
 // consumers are responsible for defining the contents of typeahead results... currently...
@@ -49,85 +123,4 @@
   line-height: 1;
   padding: 0px 20px 20px 20px;
   color: $textColor;
-}
-
-
-//The following classes are taken from react-bootstrap-typeahead css
-
-.rbt {
-  outline: none;
-}
-
-.rbt-menu {
-  margin-bottom: 2px;
-  width: 100%;
-  margin-top: 12px;
-  padding: 8px 0;
-  background-color: $backgroundColor;
-  border: 1px solid $separatorColor;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: $standardBorderRadius;
-  box-shadow: 0 5px 10px rgba(0,0,0,.2);
-  max-height: 400px;
-  overflow-y: auto;
-  max-width: 100vw;
-  // list-style-type: none;
-
-  & > .dropdown-header, & > div > .dropdown-header {
-    margin-top: 0px;
-    padding: 0px 20px 3px 10px;
-    font-size: 1.8em;
-    line-height: 1.8em;
-    white-space: normal;
-    border-bottom: 1px solid $separatorColor;
-    &:not(:first-child) {
-      border-top: 1px solid $separatorColor;
-    }
-
-    &:hover {
-      background-color: $backgroundColor;
-      color: #777;
-    }
-  }
-
-  & > li {	
-    padding: 3px 20px;	
-    font-size: 1.4em;	
-    line-height: 1.8em;	
-    cursor: pointer;	
-
-    &:not(:first-child) {	
-      border-top: 1px solid $separatorColor;	
-    }	
-
-    & > a {	
-      white-space: normal;	
-      color: $linkColor;	
-    }	
-  }
-}
-.rbt-menu > li a {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.rbt-menu > li a:focus {
-  outline: none;
-}
-
-.rbt-menu-center {
-  text-align: center !important;
-}
-
-.rbt-menu.dropdown-menu > li.active,
-.rbt-menu.dropdown-menu > li.active > a,
-.rbt-menu.dropdown-menu > li:focus:not(.dropdown-header),
-.rbt-menu.dropdown-menu > li:hover:not(.dropdown-header),
-.rbt-menu.dropdown-menu > li > a:focus,
-.rbt-menu.dropdown-menu > li > a:hover {
-  &:not(.disabled){
-    background-color: lighten($tertiaryColor, 30%);
-    color: $linkFocusColor;
-    text-decoration: underline;
-  }
 }

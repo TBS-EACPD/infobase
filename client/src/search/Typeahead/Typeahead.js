@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
@@ -276,9 +277,13 @@ export class Typeahead extends React.Component {
     };
 
     return (
-      <div className="rbt" style={{ position: "relative" }} ref={this.rbtRef}>
-        <div className="search-bar">
-          <div className="search-icon-container">
+      <div
+        className="typeahead"
+        style={{ position: "relative" }}
+        ref={this.rbtRef}
+      >
+        <div className="typeahead__search-bar">
+          <div className="typeahead__icon-container">
             <span aria-hidden="true">
               <img
                 src={`${get_static_url("svg/search.svg")}`}
@@ -315,13 +320,9 @@ export class Typeahead extends React.Component {
         </div>
         <Status {...status_props} />
         {show_menu && (
-          <ul
-            className="rbt-menu dropdown-menu show"
-            role="listbox"
-            id={this.menuId}
-          >
+          <ul className="typeahead__dropdown" role="listbox" id={this.menuId}>
             {_.isEmpty(paginated_results) && (
-              <li className="dropdown-header">
+              <li className="typeahead__header">
                 {text_maker("no_matches_found")}
               </li>
             )}
@@ -336,7 +337,7 @@ export class Typeahead extends React.Component {
                   let index_key_counter = needs_pagination_up_control ? 1 : 0;
                   return (
                     <Fragment>
-                      <li className="dropdown-header">
+                      <li className="typeahead__header">
                         <TM
                           k="paginate_status"
                           args={{
@@ -348,9 +349,11 @@ export class Typeahead extends React.Component {
                       </li>
                       {needs_pagination_up_control && (
                         <li
-                          className={`${
-                            0 === current_selected_index && "active"
-                          }`}
+                          className={classNames(
+                            "typeahead__item",
+                            0 === current_selected_index &&
+                              "typeahead__item--active"
+                          )}
                           aria-selected={0 === current_selected_index}
                           ref={(ref) => {
                             this.menu_item_references[0] = ref;
@@ -361,7 +364,7 @@ export class Typeahead extends React.Component {
                             }));
                           }}
                         >
-                          <a className="rbt-menu-center dropdown-item">
+                          <a className="typeahead__control">
                             <span className="aria-hidden">▲</span>
                             <br />
                             <TM
@@ -374,7 +377,7 @@ export class Typeahead extends React.Component {
 
                       {_.flatMap(grouped_results, (results, group_index) => (
                         <Fragment key={`header-${group_index}`}>
-                          <li className="dropdown-header">
+                          <li className="typeahead__header">
                             {config_groups[group_index].group_header}
                           </li>
                           {_.map(results, (result) => {
@@ -382,18 +385,18 @@ export class Typeahead extends React.Component {
                             return (
                               <li
                                 key={`result-${index}`}
-                                className={`${
-                                  index === current_selected_index && "active"
-                                }`}
+                                className={classNames(
+                                  "typeahead__item",
+                                  index === current_selected_index &&
+                                    "typeahead__item--active"
+                                )}
                                 aria-selected={index === current_selected_index}
                                 ref={(ref) => {
                                   this.menu_item_references[index] = ref;
                                 }}
                                 onClick={() => this.on_select_item(result)}
                               >
-                                <a className="dropdown-item list-group-ite">
-                                  {result.menu_content(search_text)}
-                                </a>
+                                <a>{result.menu_content(search_text)}</a>
                               </li>
                             );
                           })}
@@ -401,10 +404,12 @@ export class Typeahead extends React.Component {
                       ))}
                       {needs_pagination_down_control && (
                         <li
-                          className={`${
+                          className={classNames(
+                            "typeahead__item",
                             pagination_down_item_index ===
-                              current_selected_index && "active"
-                          }`}
+                              current_selected_index &&
+                              "typeahead__item--active"
+                          )}
                           aria-selected={
                             pagination_down_item_index ===
                             current_selected_index
@@ -421,7 +426,7 @@ export class Typeahead extends React.Component {
                             }));
                           }}
                         >
-                          <a className="rbt-menu-center dropdown-item ">
+                          <a className="typeahead__control">
                             <TM
                               k="paginate_next"
                               args={{ next_page_size: next_page_size }}
@@ -432,11 +437,12 @@ export class Typeahead extends React.Component {
                         </li>
                       )}
                       <li
-                        className={`${
+                        className={classNames(
+                          "typeahead__item",
                           pagination_down_item_index +
                             needs_pagination_down_control ===
-                            current_selected_index && "active"
-                        }`}
+                            current_selected_index && "typeahead__item--active"
+                        )}
                         aria-selected={
                           pagination_down_item_index +
                             needs_pagination_down_control ===
@@ -450,7 +456,7 @@ export class Typeahead extends React.Component {
                         }}
                         onClick={() => this.hide_menu()}
                       >
-                        <a className="rbt-menu-center dropdown-item">
+                        <a className="typeahead__control">
                           {text_maker("close_menu")}
                         </a>
                       </li>
