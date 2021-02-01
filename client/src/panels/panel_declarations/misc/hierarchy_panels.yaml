@@ -33,14 +33,14 @@ crso_in_gov_title:
 hierarchy_dead_element_icon_alt_text:
   transform: [handlebars]
   en:  |
-    This item is either 1) an organization for which the InfoBase has no data, or 2) a Strategic Outcome or program that has ended or merged into a new one between {{pa_last_year_5}} and {{planning_year_1}}.
+    This item is either 1) an organization for which GC InfoBase has no data, or 2) a Strategic Outcome or program that has ended or merged into a new one between {{pa_last_year_5}} and {{planning_year_1}}.
   fr: |
-    Cet article est soit 1) une organisation pour lesquels l'InfoBase n'a pas de données, ou 2) un résultat stratégique ou programme qui a pris fin ou qui ont fusionné entre {{pa_last_year_5}} et {{planning_year_1}}
+    Cet article est soit 1) une organisation pour lesquels InfoBase du GC n'a pas de données, ou 2) un résultat stratégique ou programme qui a pris fin ou qui ont fusionné entre {{pa_last_year_5}} et {{planning_year_1}}
 hierarchy_contains_elements_with_limited_data:
   en:  |
-    : Corresponds to organizations for which the InfoBase has no data.
+    : Corresponds to organizations for which GC InfoBase has no data.
   fr: |
-    : Corresponds aux organisations pour lesquels l'InfoBase n'a pas de données.
+    : Corresponds aux organisations pour lesquels InfoBase du GC n'a pas de données.
 hierarchy_contains_dead_elements:
   transform: [handlebars]
   en:  |

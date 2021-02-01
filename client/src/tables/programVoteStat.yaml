@@ -13,15 +13,15 @@ programVoteStat:
 
    * Data for Program expenditures by authority type is not available for the Canadian Security Intelligence Service and the Communications Security Establishment. As such, totals for all Program expenditures found in this table will not match total government spending.
 
-   * Where data on Program expenditures by authority type are available, totals at the Program and organization level presented in the InfoBase will correspond to information published in the Public Accounts of Canada. 
+   * Where data on Program expenditures by authority type are available, totals at the Program and organization level presented in GC InfoBase will correspond to information published in the Public Accounts of Canada. 
 
-   * To ensure comparability over time, Program names and structures used in the InfoBase are sourced from the Public Accounts of Canada which may differ from an organization’s Departmental Plan.
+   * To ensure comparability over time, Program names and structures used in GC InfoBase are sourced from the Public Accounts of Canada which may differ from an organization’s Departmental Plan.
  
   fr: |
    {{{gt "programVoteStat_short"}}}
 
    * Les données sur les dépenses de programme par type d’autorisation ne sont pas disponibles pour le Service Canadien du renseignement de sécurité et le Centre de la sécurité des télécommunications. Par conséquent, dans le présent tableau, les totaux de toutes les dépenses de programme ne correspondront pas aux dépenses gouvernementales totales. 
 
-   * Lorsque les données sur les dépenses de programme par type d’autorisation sont disponibles, les totaux au niveau des programmes et de l’organisation figurant à l’InfoBase correspondront à l'information publiée dans les Comptes publics du Canada. 
+   * Lorsque les données sur les dépenses de programme par type d’autorisation sont disponibles, les totaux au niveau des programmes et de l’organisation figurant à InfoBase du GC correspondront à l'information publiée dans les Comptes publics du Canada. 
 
-   * Pour assurer la comparabilité au fil du temps, le nom et la structure des programmes figurant à l’InfoBase proviennent des Comptes publics du Canada qui peuvent différer du plan ministériel de l’organisation.
+   * Pour assurer la comparabilité au fil du temps, le nom et la structure des programmes figurant à InfoBase du GC proviennent des Comptes publics du Canada qui peuvent différer du plan ministériel de l’organisation.

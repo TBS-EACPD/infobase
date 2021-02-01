@@ -116,15 +116,15 @@ glossary_home_title:
   fr: Glossaire
 
 glossary_home_desc:
-  en: Search a list of definitions for terms used in the InfoBase
-  fr: Liste interrogeable des définitions pour les termes employés dans l'InfoBase
+  en: Search a list of definitions for terms used in GC InfoBase
+  fr: Liste interrogeable des définitions pour les termes employés dans InfoBase du GC
 
 metadata_home_title:
   en: Datasets
   fr: Données
 
 metadata_home_desc: 
-  en: Find information on, and external links to, the InfoBase's data sources
+  en: Find information on, and external links to, GC InfoBase's data sources
   fr: Voir le complément d'information sur les données et sur les liens vers des sites de données ouvertes
 
 whats_new:

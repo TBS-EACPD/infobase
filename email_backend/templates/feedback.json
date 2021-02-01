@@ -9,7 +9,7 @@
       "form_type": "radio",
       "form_label": {
         "en": "Did you find what you were looking for on GC InfoBase?",
-        "fr": "Avez-vous trouvé ce que vous cherchiez dans l’InfoBase du GC?"
+        "fr": "Avez-vous trouvé ce que vous cherchiez dans InfoBase du GC?"
       },
       "value_type": "enums",
       "enum_values": {
@@ -43,7 +43,7 @@
       "form_type": "radio",
       "form_label": {
         "en": "To what extent did you find GC InfoBase easy to navigate? (1=not at all easy and 5=very easy)",
-        "fr": "Dans quelle mesure la navigation est-elle facile dans l’InfoBase du GC? (1=difficile et 5=très facile)"
+        "fr": "Dans quelle mesure la navigation est-elle facile dans InfoBase du GC? (1=difficile et 5=très facile)"
       },
       "value_type": "enums",
       "enum_values": {
@@ -86,7 +86,7 @@
       "form_type": "radio",
       "form_label": {
         "en": "To what extent did you find the spending information on GC InfoBase useful? (1=not at all useful and 5=very useful)",
-        "fr": "Dans quelle mesure avez-vous trouvé les renseignements financiers utiles dans l’InfoBase du GC? (1=inutile et 5=très utile)"
+        "fr": "Dans quelle mesure avez-vous trouvé les renseignements financiers utiles dans InfoBase du GC? (1=inutile et 5=très utile)"
       },
       "value_type": "enums",
       "enum_values": {
@@ -183,7 +183,7 @@
       "form_type": "radio",
       "form_label": {
         "en": "On which device did you access GC InfoBase?",
-        "fr": "Sur quel appareil avez-vous accédé à l’InfoBase du GC?"
+        "fr": "Sur quel appareil avez-vous accédé à InfoBase du GC?"
       },
       "value_type": "enums",
       "enum_values": {
@@ -225,7 +225,7 @@
       "form_type": "radio",
       "form_label": {
         "en": "How familiar are you with the type of information presented on GC InfoBase (i.e. federal spending, people management and results data)?",
-        "fr": "Dans quelle mesure connaissez-vous le type de renseignements présentés dans l’InfoBase du GC (c.-à-d. les données du gouvernement fédéral sur les dépenses, la gestion des personnes et les résultats)?"
+        "fr": "Dans quelle mesure connaissez-vous le type de renseignements présentés dans InfoBase du GC (c.-à-d. les données du gouvernement fédéral sur les dépenses, la gestion des personnes et les résultats)?"
       },
       "value_type": "enums",
       "enum_values": {
@@ -255,7 +255,7 @@
       "form_type": "textarea",
       "form_label": {
         "en": "We are always looking for ways to improve GC InfoBase! Please provide any other details about your experience.",
-        "fr": "Nous cherchons des moyens d’améliorer l’InfoBase du GC! Pourriez-vous nous donner d'autres détails sur votre expérience."
+        "fr": "Nous cherchons des moyens d’améliorer InfoBase du GC! Pourriez-vous nous donner d'autres détails sur votre expérience."
       }
     },
 

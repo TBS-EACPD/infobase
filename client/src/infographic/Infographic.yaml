@@ -42,7 +42,7 @@ planning_intro_text:
    {{#if dept}}{{else}}
    **Notes:** 
    * [Full-Time Equivalents (FTEs)]{{gl "FTE"}} differ from the [Employee Headcounts]{{gl "HEAD"}} presented in previous panels.
-   * For the purposes of the InfoBase, [Internal Services]{{gl "INT_SERVICES"}} and [Crown Corporations]{{gl "CROWN_SA"}} are being presented as [areas of government spending]{{gl "SA"}}.
+   * For the purposes of GC InfoBase, [Internal Services]{{gl "INT_SERVICES"}} and [Crown Corporations]{{gl "CROWN_SA"}} are being presented as [areas of government spending]{{gl "SA"}}.
    {{/if}}
   fr: |
    En plus de publier les données historiques et de l’exercice courant, le gouvernement du Canada publie de l’information sur les dépenses prévues et sur la gestion 
@@ -54,7 +54,7 @@ planning_intro_text:
    {{#if dept}}{{else}}
    **Remarques:**
    * Les [équivalents temps plein (ETP) prévus]{{gl "PLANNED_FTE"}} diffèrent des [nombres d’employés]{{gl "HEAD"}} présentés dans les précédents panneaux. 
-   * Pour l’InfoBase, les [services internes]{{gl "INT_SERVICES"}} et les [sociétés d’États]{{gl "CROWN_SA"}} sont présentés comme en tant que [secteur de dépenses du gouvernement]{{gl "SA"}}. 
+   * Pour InfoBase du GC, les [services internes]{{gl "INT_SERVICES"}} et les [sociétés d’États]{{gl "CROWN_SA"}} sont présentés comme en tant que [secteur de dépenses du gouvernement]{{gl "SA"}}. 
    {{/if}}
 
 infograph_explorer_link:
@@ -64,13 +64,13 @@ infograph_explorer_link:
 invalid_redirect_home:
   transform: [handlebars]
   en: |
-    Your browser was attempting to visit one of our infographics. Unfortunately, we could not recognize "{{param}}" as a valid infographic parameter. You have been redirected to the GC InfoBase home page.
+    Your browser was attempting to visit one of our infographics. Unfortunately, we could not recognize "{{param}}" as a valid infographic parameter. You have been redirected to GC InfoBase home page.
 
     If you know the subject of the infographic you intended to view (e.g. the organization or program name), please try finding it using our search bar below.
 
     If you believe something is incorrect on our end, we invite you to alert us using the Report a Problem form provided at the bottom of the page. Thank you!
   fr: |
-    Votre navigateur a tenté de visiter l'une de nos infographies. Malheureusement, nous n'avons pas pu reconnaître "{{param}}" en tant que paramètre infographique valide. Vous avez été redirigé vers la page d'accueil l'InfoBase du GC.
+    Votre navigateur a tenté de visiter l'une de nos infographies. Malheureusement, nous n'avons pas pu reconnaître "{{param}}" en tant que paramètre infographique valide. Vous avez été redirigé vers la page d'accueil InfoBase du GC.
 
     Si vous connaissez le sujet de l'infographie en question (p. ex. le nom de l'organisation ou du programme), essayez de le trouver via la barre de recherche ci-dessous.
 

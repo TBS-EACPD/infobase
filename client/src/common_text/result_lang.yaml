@@ -85,7 +85,7 @@ targets_to_achieve_other:
 dept_did_not_provide_results:
   transform: [handlebars,markdown]
   en: Results data was not provided by the organization for inclusion in the GC InfoBase
-  fr: Les données sur les résultats n'ont pas été fournies par l'organisation et ne figurent donc pas à l'InfoBase du GC
+  fr: Les données sur les résultats n'ont pas été fournies par l'organisation et ne figurent donc pas à InfoBase du GC
 
 
 indicator_to_sub_association:

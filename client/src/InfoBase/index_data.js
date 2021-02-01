@@ -28,7 +28,7 @@ const index_lang_lookups = {
   },
   page_title: {
     en: "GC InfoBase",
-    fr: "L'InfoBase du GC",
+    fr: "InfoBase du GC",
   },
   logo_link: {
     en: "https://www.canada.ca/en.html",

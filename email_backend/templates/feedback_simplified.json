@@ -7,7 +7,7 @@
     "form_type": "radio",
     "form_label": {
       "en": "To what extent did you find the spending information on GC InfoBase useful? (1=not at all useful and 5=very useful)",
-      "fr": "Dans quelle mesure avez-vous trouvé les renseignements financiers utiles dans l’InfoBase du GC? (1=inutile et 5=très utile)"
+      "fr": "Dans quelle mesure avez-vous trouvé les renseignements financiers utiles dans InfoBase du GC? (1=inutile et 5=très utile)"
     },
     "value_type": "enums",
     "enum_values": {

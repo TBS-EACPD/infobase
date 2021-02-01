@@ -15,7 +15,7 @@ orgTransferPayments:
    {{{gt "orgTransferPayments_short"}}}
    
    
-   For analytical purposes, the InfoBase presents year-to-year
+   For analytical purposes, GC InfoBase presents year-to-year
    comparisons of transfer payments. In some cases, such comparisons
    may not be appropriate, due to changes in the nature of transfer payments 
    over time and users should therefore exercise caution before drawing conclusions regarding 
@@ -30,7 +30,7 @@ orgTransferPayments:
   fr: |
    {{{gt "orgTransferPayments_short"}}}
 
-   Aux fins d’analyse, l’InfoBase présente la comparaison des paiements de transfert d’une année à l’autre. Dans certains cas, il se peut que ces comparaisons ne soient pas pertinentes en raison des changements apportés 
+   Aux fins d’analyse, InfoBase du GC présente la comparaison des paiements de transfert d’une année à l’autre. Dans certains cas, il se peut que ces comparaisons ne soient pas pertinentes en raison des changements apportés 
    à la nature du paiement de transfert au fil des ans. Les utilisateurs doivent donc faire preuve de prudence avant de tirer des conclusions sur l’importance des changements d’une année 
    à l’autre apportés aux paiements de transfert.
 
