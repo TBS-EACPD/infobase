@@ -11,7 +11,6 @@ import { toggle_list } from "src/general_utils.js";
 import {
   StandardLegend,
   InfographicPanel,
-  businessConstants,
   get_source_links,
   Results,
   declare_panel,
@@ -33,7 +32,6 @@ import {
 
 import "./drr_summary.scss";
 
-const { result_simple_statuses } = businessConstants;
 const { SmartDisplayTable } = util_components;
 const { current_drr_key, result_docs } = Results;
 
@@ -131,7 +129,7 @@ const StatusGrid = (props) => {
     .map(({ status_key }) => ({
       className: grid_colors[status_key],
       id: status_key,
-      label: result_simple_statuses[status_key].text,
+      label: text_maker(status_key),
       order: icon_order[status_key],
     }))
     .sortBy("order")
@@ -139,7 +137,7 @@ const StatusGrid = (props) => {
 
   if (is_a11y_mode) {
     const a11y_data = _.map(data, ({ status_key, real_count }) => ({
-      label: result_simple_statuses[status_key].text,
+      label: text_maker(status_key),
       real_count,
     }));
     return (

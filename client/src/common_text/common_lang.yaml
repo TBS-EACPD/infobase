@@ -431,9 +431,18 @@ see_the_infographic:
 available:
   en: Available
   fr: Disponible
+met:
+  en: Met
+  fr: Atteint
+not_met:
+  en: Not met
+  fr: Non atteint
 not_available:
   en: Not Available
   fr: Non disponible
+future:
+  en: Result to be achieved
+  fr: Résultat à atteindre
 financial_data:
   en: Financial Data
   fr: Données financières
