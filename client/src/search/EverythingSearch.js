@@ -163,7 +163,7 @@ const EverythingSearch = withRouter(
       ]);
     };
     onSelect = (item) => {
-      const { onSelect, href_template } = this.props;
+      const { onSelect, href_template, history } = this.props;
 
       if (_.isFunction(onSelect)) {
         onSelect(item);
