@@ -1,12 +1,12 @@
 filter_panels:
   en: Filter Panels
-  fr: TODO
+  fr: Panneaux filtres
 panels_status:
   transform: [handlebars]
   en: (showing {{number_of_active_panels}} of {{total_number_of_panels}} panels)
-  fr: TODO
+  fr: (montrant {{number_of_active_panels}} des {{total_number_of_panels}} panneaux)
 filter_panels_description:
   en: |
     Filter by datasets:
   fr: |
-    TODO
+    Filtrer par ensembles de données :
