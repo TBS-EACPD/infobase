@@ -61,13 +61,13 @@ In production, we use a MongoDB Atlas hosted database. This has little relevance
 ### Google Cloud Function
 The production environment for the express/GraphQL server is a Google Cloud Function. This hasn't affected much in the code, although a few optimizations and decisions were made with a serverless environment in mind. We currently transpile with a traget of Node 8 because that is what GCFs run.
 
-L'interface de programmation d'applications (API) de InfoBase du GC
+L'interface de programmation d'applications (API) d'InfoBase du GC
 ========
 
-Une interface de programmation d'applications GraphQL pour les données de InfoBase du GC.
+Une interface de programmation d'applications GraphQL pour les données d'InfoBase du GC.
 
 ## Table des matières
-- [L'interface de programmation d'applications (API) de InfoBase du GC](#linterface-de-programmation-dapplications-api-de-linfobase)
+- [L'interface de programmation d'applications (API) d'InfoBase du GC](#linterface-de-programmation-dapplications-api-de-linfobase)
   - [Commencer](#commencer)
     - [Lancer le serveur de l'API](#lancer-le-serveur-de-lapi)
   - [Tests](#tests-1)

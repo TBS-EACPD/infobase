@@ -26,7 +26,7 @@ The Canada wordmark and related graphics associated with this distribution are p
 
 All data in `data/` is released under the terms of the [Open Government Licence – Canada](https://open.canada.ca/en/open-government-licence-canada). See the [Datasets](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html#metadata) page for links to the individual open data pages for each dataset.
 
-# « Mono-Dépôt » de InfoBase du GC
+# « Mono-Dépôt » d'InfoBase du GC
 
 InfoBase du GC est un outil interactif de visualisation de données, qui traduit en termes simples l’information complexe du gouvernement fédéral au profit des Canadiens. Depuis sa création en 2013, InfoBase du GC a été reconnue par le directeur parlementaire du budget (DPB) comme étant la source d’information faisant autorité en matière de dépenses gouvernementales et est considérée comme une innovation dans le secteur public par l’Observatoire sur l’innovation dans le secteur public (OISP) de l’Organisation de coopération et de développement économiques (OCDE). L’outil contient plusieurs années de renseignements gouvernementaux, auparavant éparpillés dans plus de 500 rapports à l’échelle de la fonction publique fédérale.
 

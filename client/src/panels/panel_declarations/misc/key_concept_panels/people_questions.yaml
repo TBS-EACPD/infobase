@@ -56,5 +56,5 @@ where_is_data_a:
   en: |
     Each people management dataset in GC InfoBase has a corresponding dataset available through the Open Data portal. These corresponding Open Data datasets contain quarterly snapshots from March 2008 onward. Open Data links are available from GC InfoBase {{metadata_source_link "Datasets" "RPS"}} page.
   fr: |
-    Chaque ensemble de données sur la gestion des personnes dans InfoBase du GC correspond à un ensemble de données disponibles sur le Portail des données ouvertes. Ces ensembles de données ouvertes inclus également des aperçus trimestriels débutant en mars 2008*. Vous trouverez des liens vers les sites de données ouvertes dans la page « {{metadata_source_link "Données" "RPS"}} » de InfoBase du GC.
+    Chaque ensemble de données sur la gestion des personnes dans InfoBase du GC correspond à un ensemble de données disponibles sur le Portail des données ouvertes. Ces ensembles de données ouvertes inclus également des aperçus trimestriels débutant en mars 2008*. Vous trouverez des liens vers les sites de données ouvertes dans la page « {{metadata_source_link "Données" "RPS"}} » d'InfoBase du GC.
 
