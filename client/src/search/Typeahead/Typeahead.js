@@ -22,9 +22,9 @@ export class Typeahead extends React.Component {
     super(props);
 
     this.typeaheadRef = React.createRef();
-    this.rbtRef = React.createRef();
+    this.ref = React.createRef();
 
-    this.menuId = _.uniqueId("rbt_menu_id_");
+    this.menuId = _.uniqueId("typeahead-");
 
     this.state = {
       search_text: "",
@@ -126,7 +126,7 @@ export class Typeahead extends React.Component {
   hide_menu = () => this.setState({ can_show_menu: false });
 
   handle_window_click = (e) => {
-    if (!this.rbtRef.current.contains(e.target)) {
+    if (!this.ref.current.contains(e.target)) {
       this.hide_menu();
     }
   };
@@ -280,7 +280,7 @@ export class Typeahead extends React.Component {
       <div
         className="typeahead"
         style={{ position: "relative" }}
-        ref={this.rbtRef}
+        ref={this.ref}
       >
         <div className="typeahead__search-bar">
           <div className="typeahead__icon-container">
