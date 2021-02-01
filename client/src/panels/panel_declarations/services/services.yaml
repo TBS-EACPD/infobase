@@ -375,12 +375,6 @@ gauge_standards_met_text:
     **{{fmt_percentage1 standards_met_pct}}** of standards' targets were met
   fr: |
     **{{fmt_percentage1 standards_met_pct}}** des cibles normalisées ont été atteintes
-met:
-  en: Met
-  fr: Atteint
-not_met:
-  en: Not met
-  fr: Non atteint
 # Types
 service_types:
   en: Service Types

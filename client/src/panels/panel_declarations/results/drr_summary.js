@@ -7,7 +7,6 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 
 import { SmartDisplayTable } from "src/components/index.js";
 
-import { businessConstants } from "src/models/businessConstants.js";
 import * as Results from "src/models/results.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
@@ -33,7 +32,6 @@ import {
 
 import "./drr_summary.scss";
 
-const { result_simple_statuses } = businessConstants;
 const { current_drr_key, result_docs } = Results;
 
 const current_drr_year = result_docs[current_drr_key].year;
@@ -130,7 +128,7 @@ const StatusGrid = (props) => {
     .map(({ status_key }) => ({
       className: grid_colors[status_key],
       id: status_key,
-      label: result_simple_statuses[status_key].text,
+      label: text_maker(status_key),
       order: icon_order[status_key],
     }))
     .sortBy("order")
@@ -138,7 +136,7 @@ const StatusGrid = (props) => {
 
   if (is_a11y_mode) {
     const a11y_data = _.map(data, ({ status_key, real_count }) => ({
-      label: result_simple_statuses[status_key].text,
+      label: text_maker(status_key),
       real_count,
     }));
     return (

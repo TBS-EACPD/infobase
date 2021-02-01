@@ -24,7 +24,6 @@ import {
   status_key_to_glossary_key,
   ordered_status_keys,
   result_statuses,
-  result_simple_statuses,
   indicator_text_functions,
   get_result_doc_keys,
   result_docs,
@@ -252,7 +251,7 @@ const result_status_icon_components = (status, width) => {
     met: (
       <IconCheck
         key="met"
-        title={result_simple_statuses.met.text}
+        title={text_maker("met")}
         color={result_color_scale("met")}
         width={width}
         svg_style={{ verticalAlign: "0em" }}
@@ -263,7 +262,7 @@ const result_status_icon_components = (status, width) => {
     not_met: (
       <IconAttention
         key="not_met"
-        title={result_simple_statuses.not_met.text}
+        title={text_maker("not_met")}
         color={result_color_scale("not_met")}
         width={width}
         svg_style={{ verticalAlign: "0em" }}
@@ -274,7 +273,7 @@ const result_status_icon_components = (status, width) => {
     not_available: (
       <IconNotApplicable
         key="not_available"
-        title={result_simple_statuses.not_available.text}
+        title={text_maker("not_available")}
         color={result_color_scale("not_available")}
         width={width}
         svg_style={{ verticalAlign: "0em" }}
@@ -285,7 +284,7 @@ const result_status_icon_components = (status, width) => {
     future: (
       <IconClock
         key="future"
-        title={result_simple_statuses.future.text}
+        title={text_maker("future")}
         color={result_color_scale("future")}
         width={width}
         svg_style={{ verticalAlign: "0em" }}
@@ -333,7 +332,7 @@ const StatusIconTable = ({
               data-toggle="tooltip"
               data-ibtt-glossary-key={status_key_to_glossary_key[status_key]}
             >
-              {result_simple_statuses[status_key].text}
+              {text_maker(status_key)}
             </span>
           ),
           aria_text: result_simple_statuses[status_key].text,
@@ -356,7 +355,7 @@ const StatusIconTable = ({
                 data-toggle="tooltip"
                 data-ibtt-glossary-key={status_key_to_glossary_key[status_key]}
               >
-                {result_simple_statuses[status_key].text}
+                {text_maker(status_key)}
               </span>
             </th>
           ))}
