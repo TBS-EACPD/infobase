@@ -66,7 +66,7 @@ class InfoBaseHighlighter extends React.Component {
           ix % 2 === 0 ? (
             <span key={ix}>{sub_string}</span>
           ) : (
-            <mark key={ix} className="rbt-highlight-text">
+            <mark key={ix} className="typeahead__highlighted">
               {sub_string}
             </mark>
           )

@@ -311,177 +311,155 @@ export class Typeahead extends React.Component {
               )
             }
           />
-          {
-            _.map(utility_buttons)
-            //TODO
-          }
+          {utility_buttons}
         </div>
-        <Fragment>
-          <Status {...status_props} />
-          {show_menu &&
-            (() => {
-              if (_.isEmpty(paginated_results)) {
-                return (
-                  <ul className="rbt-menu dropdown-menu show" role="listbox">
-                    <li className="dropdown-header">
-                      {text_maker("no_matches_found")}
-                    </li>
-                  </ul>
-                );
-              } else {
-                return (
-                  <ul className="rbt-menu dropdown-menu show" role="listbox">
-                    {_.chain(paginated_results)
-                      .groupBy("config_group_index")
-                      .thru((grouped_results) => {
-                        const pagination_down_item_index = needs_pagination_up_control
-                          ? paginated_results.length + 1
-                          : paginated_results.length;
+        <Status {...status_props} />
+        {show_menu && (
+          <ul
+            className="rbt-menu dropdown-menu show"
+            role="listbox"
+            id={this.menuId}
+          >
+            {_.isEmpty(paginated_results) && (
+              <li className="dropdown-header">
+                {text_maker("no_matches_found")}
+              </li>
+            )}
+            {!_.isEmpty(paginated_results) &&
+              _.chain(paginated_results)
+                .groupBy("config_group_index")
+                .thru((grouped_results) => {
+                  const pagination_down_item_index = needs_pagination_up_control
+                    ? paginated_results.length + 1
+                    : paginated_results.length;
 
-                        let index_key_counter = needs_pagination_up_control
-                          ? 1
-                          : 0;
-                        return (
-                          <Fragment>
-                            <li className="dropdown-header">
-                              <TM
-                                k="paginate_status"
-                                args={{
-                                  page_range_start,
-                                  page_range_end,
-                                  total_matching_results,
-                                }}
-                              />
-                            </li>
-                            {needs_pagination_up_control && (
+                  let index_key_counter = needs_pagination_up_control ? 1 : 0;
+                  return (
+                    <Fragment>
+                      <li className="dropdown-header">
+                        <TM
+                          k="paginate_status"
+                          args={{
+                            page_range_start,
+                            page_range_end,
+                            total_matching_results,
+                          }}
+                        />
+                      </li>
+                      {needs_pagination_up_control && (
+                        <li
+                          className={`${
+                            0 === current_selected_index && "active"
+                          }`}
+                          aria-selected={0 === current_selected_index}
+                          ref={(ref) => {
+                            this.menu_item_references[0] = ref;
+                          }}
+                          onClick={(e) => {
+                            this.setState((prev_state) => ({
+                              pagination_index: prev_state.pagination_index - 1,
+                            }));
+                          }}
+                        >
+                          <a className="rbt-menu-center dropdown-item">
+                            <span className="aria-hidden">▲</span>
+                            <br />
+                            <TM
+                              k="paginate_previous"
+                              args={{ page_size: pagination_size }}
+                            />
+                          </a>
+                        </li>
+                      )}
+
+                      {_.flatMap(grouped_results, (results, group_index) => (
+                        <Fragment key={`header-${group_index}`}>
+                          <li className="dropdown-header">
+                            {config_groups[group_index].group_header}
+                          </li>
+                          {_.map(results, (result) => {
+                            const index = index_key_counter++;
+                            return (
                               <li
+                                key={`result-${index}`}
                                 className={`${
-                                  0 === current_selected_index && "active"
+                                  index === current_selected_index && "active"
                                 }`}
-                                aria-selected={0 === current_selected_index}
+                                aria-selected={index === current_selected_index}
                                 ref={(ref) => {
-                                  this.menu_item_references[0] = ref;
+                                  this.menu_item_references[index] = ref;
                                 }}
-                                onClick={(e) => {
-                                  this.setState((prev_state) => ({
-                                    pagination_index:
-                                      prev_state.pagination_index - 1,
-                                  }));
-                                }}
+                                onClick={() => this.on_select_item(result)}
                               >
-                                <a className="rbt-menu-center dropdown-item ">
-                                  <span className="aria-hidden">▲</span>
-                                  <br />
-                                  <TM
-                                    k="paginate_previous"
-                                    args={{ page_size: pagination_size }}
-                                  />
+                                <a className="dropdown-item list-group-ite">
+                                  {result.menu_content(search_text)}
                                 </a>
                               </li>
-                            )}
-
-                            {_.flatMap(
-                              grouped_results,
-                              (results, group_index) => (
-                                <Fragment key={`header-${group_index}`}>
-                                  <li className="dropdown-header">
-                                    {config_groups[group_index].group_header}
-                                  </li>
-                                  {_.map(results, (result) => {
-                                    const index = index_key_counter++;
-                                    return (
-                                      <li
-                                        key={`result-${index}`}
-                                        className={`${
-                                          index === current_selected_index &&
-                                          "active"
-                                        }`}
-                                        aria-selected={
-                                          index === current_selected_index
-                                        }
-                                        ref={(ref) => {
-                                          this.menu_item_references[
-                                            index
-                                          ] = ref;
-                                        }}
-                                        onClick={() =>
-                                          this.on_select_item(result)
-                                        }
-                                      >
-                                        <a className="dropdown-item list-group-ite">
-                                          {result.menu_content(search_text)}
-                                        </a>
-                                      </li>
-                                    );
-                                  })}
-                                </Fragment>
-                              )
-                            )}
-                            {needs_pagination_down_control && (
-                              <li
-                                className={`${
-                                  pagination_down_item_index ===
-                                    current_selected_index && "active"
-                                }`}
-                                aria-selected={
-                                  pagination_down_item_index ===
-                                  current_selected_index
-                                }
-                                ref={(ref) => {
-                                  this.menu_item_references[
-                                    pagination_down_item_index
-                                  ] = ref;
-                                }}
-                                onClick={(e) => {
-                                  this.setState((prev_state) => ({
-                                    pagination_index:
-                                      prev_state.pagination_index + 1,
-                                    current_selected_index: next_page_size + 1,
-                                  }));
-                                }}
-                              >
-                                <a className="rbt-menu-center dropdown-item ">
-                                  <TM
-                                    k="paginate_next"
-                                    args={{ next_page_size: next_page_size }}
-                                  />
-                                  <br />
-                                  <span className="aria-hidden">▼</span>
-                                </a>
-                              </li>
-                            )}
-                            <li
-                              className={`${
-                                pagination_down_item_index +
-                                  needs_pagination_down_control ===
-                                  current_selected_index && "active"
-                              }`}
-                              aria-selected={
-                                pagination_down_item_index +
-                                  needs_pagination_down_control ===
-                                current_selected_index
-                              }
-                              ref={(ref) => {
-                                this.menu_item_references[
-                                  pagination_down_item_index +
-                                    needs_pagination_down_control
-                                ] = ref;
-                              }}
-                              onClick={() => this.hide_menu()}
-                            >
-                              <a className="rbt-menu-center dropdown-item">
-                                {text_maker("close_menu")}
-                              </a>
-                            </li>
-                          </Fragment>
-                        );
-                      })
-                      .value()}
-                  </ul>
-                );
-              }
-            })()}
-        </Fragment>
+                            );
+                          })}
+                        </Fragment>
+                      ))}
+                      {needs_pagination_down_control && (
+                        <li
+                          className={`${
+                            pagination_down_item_index ===
+                              current_selected_index && "active"
+                          }`}
+                          aria-selected={
+                            pagination_down_item_index ===
+                            current_selected_index
+                          }
+                          ref={(ref) => {
+                            this.menu_item_references[
+                              pagination_down_item_index
+                            ] = ref;
+                          }}
+                          onClick={(e) => {
+                            this.setState((prev_state) => ({
+                              pagination_index: prev_state.pagination_index + 1,
+                              current_selected_index: next_page_size + 1,
+                            }));
+                          }}
+                        >
+                          <a className="rbt-menu-center dropdown-item ">
+                            <TM
+                              k="paginate_next"
+                              args={{ next_page_size: next_page_size }}
+                            />
+                            <br />
+                            <span className="aria-hidden">▼</span>
+                          </a>
+                        </li>
+                      )}
+                      <li
+                        className={`${
+                          pagination_down_item_index +
+                            needs_pagination_down_control ===
+                            current_selected_index && "active"
+                        }`}
+                        aria-selected={
+                          pagination_down_item_index +
+                            needs_pagination_down_control ===
+                          current_selected_index
+                        }
+                        ref={(ref) => {
+                          this.menu_item_references[
+                            pagination_down_item_index +
+                              needs_pagination_down_control
+                          ] = ref;
+                        }}
+                        onClick={() => this.hide_menu()}
+                      >
+                        <a className="rbt-menu-center dropdown-item">
+                          {text_maker("close_menu")}
+                        </a>
+                      </li>
+                    </Fragment>
+                  );
+                })
+                .value()}
+          </ul>
+        )}
       </div>
     );
   }
