@@ -123,16 +123,16 @@ privacy_body_text:
       * ils permettent à un site Web de reconnaître un visiteur qui a déjà accédé au site;
       * ils suivent le contenu affiché sur un site, ce qui aide les administrateurs de sites Web à s'assurer que les visiteurs trouvent ce qu'ils recherchent.
     
-    Le site Web InfoBase du GC utilise sur son site Web des marqueurs numériques temporaires et permanents. Pendant votre visite en ligne, votre navigateur échange des données avec le serveur Web de InfoBase du GC. Les marqueurs numériques utilisés ne permettent pas au site Web de InfoBase du GC d'identifier les personnes et ne contiennent pas de renseignements personnels.
+    Le site Web InfoBase du GC utilise sur son site Web des marqueurs numériques temporaires et permanents. Pendant votre visite en ligne, votre navigateur échange des données avec le serveur Web d'InfoBase du GC. Les marqueurs numériques utilisés ne permettent pas au site Web d'InfoBase du GC d'identifier les personnes et ne contiennent pas de renseignements personnels.
     
-    Vous pouvez ajuster les paramètres de votre navigateur pour rejeter les marqueurs numériques, y compris les cookies, si vous le souhaitez. Toutefois, cela peut affecter votre capacité d'interagir avec le site Web de InfoBase du GC.
+    Vous pouvez ajuster les paramètres de votre navigateur pour rejeter les marqueurs numériques, y compris les cookies, si vous le souhaitez. Toutefois, cela peut affecter votre capacité d'interagir avec le site Web d'InfoBase du GC.
  
 
     #### Web analytique
     
-    Le Web analytique est la collecte, l'analyse, la mesure et la communication de données sur l’achalandage et l'utilisation du Web afin de comprendre les besoins des utilisateurs et d'optimiser leur expérience. L'information contenue dans les marqueurs numériques peut être utilisée conjointement avec les détails des demandes faites par votre navigateur aux serveurs InfoBase du GC pour classer et suivre vos interactions en ligne avec le site Web de InfoBase du GC.
+    Le Web analytique est la collecte, l'analyse, la mesure et la communication de données sur l’achalandage et l'utilisation du Web afin de comprendre les besoins des utilisateurs et d'optimiser leur expérience. L'information contenue dans les marqueurs numériques peut être utilisée conjointement avec les détails des demandes faites par votre navigateur aux serveurs InfoBase du GC pour classer et suivre vos interactions en ligne avec le site Web d'InfoBase du GC.
 
-    InfoBase du GC utilise _Google Analytics_ et l'analyse des fichiers journaux pour guider les améliorations apportées au site Web de InfoBase du GC. Par exemple, lorsque votre ordinateur demande une page Web, voici les types de renseignements qui peuvent être recueillis et utilisés pour le Web analytique :
+    InfoBase du GC utilise _Google Analytics_ et l'analyse des fichiers journaux pour guider les améliorations apportées au site Web d'InfoBase du GC. Par exemple, lorsque votre ordinateur demande une page Web, voici les types de renseignements qui peuvent être recueillis et utilisés pour le Web analytique :
       * le jeton anonyme basé sur l'adresse IP d'origine
       * la date et l'heure de la demande
       * le type de navigateur utilisé
@@ -148,7 +148,7 @@ privacy_body_text:
 
     ### Protéger la sécurité des sites Web du gouvernement du Canada
 
-    Les logiciels sont utilisés pour surveiller l’achalandage sur le réseau et pour identifier toute tentative non autorisée de télécharger ou de modifier des renseignements, ou de causer d'autres dommages. Lorsque vous visitez le site Web de InfoBase du GC, ces logiciels reçoivent automatiquement les données fournies par votre navigateur et les stockent temporairement (p. ex. Internet Explorer, Mozilla Firefox) dans nos journaux de serveur Web. Voici certains des renseignements recueillis automatiquement par notre serveur lorsque vous naviguez sur notre site Web :
+    Les logiciels sont utilisés pour surveiller l’achalandage sur le réseau et pour identifier toute tentative non autorisée de télécharger ou de modifier des renseignements, ou de causer d'autres dommages. Lorsque vous visitez le site Web d'InfoBase du GC, ces logiciels reçoivent automatiquement les données fournies par votre navigateur et les stockent temporairement (p. ex. Internet Explorer, Mozilla Firefox) dans nos journaux de serveur Web. Voici certains des renseignements recueillis automatiquement par notre serveur lorsque vous naviguez sur notre site Web :
       * emplacement du réseau et adresse IP (protocole Internet) de l'ordinateur que vous avez utilisé pour contacter notre site Web;
       * nom du domaine que vous avez utilisé pour accéder à Internet (.com, .org, .net, .ca, etc.);
       * type de navigateur que vous avez utilisé;

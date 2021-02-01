@@ -5,7 +5,7 @@
 GC InfoBase
 ========
 
-Client-side code and content for the GC InfoBase. / Code et contenu pour le côté client de InfoBase du GC.
+Client-side code and content for the GC InfoBase. / Code et contenu pour le côté client d'InfoBase du GC.
 
 *(Le Français suit)*
 
@@ -65,7 +65,7 @@ InfoBase du GC
 - [InfoBase du GC](#infobase-du-gc)
   - [Commencer](#commencer)
     - [Première installation](#premi%c3%a8re-installation)
-    - [Lancez la compilation de InfoBase du GC](#lancez-la-compilation-de-gc-infobase)
+    - [Lancez la compilation d'InfoBase du GC](#lancez-la-compilation-de-gc-infobase)
     - [Visitez une copie locale](#visitez-une-copie-locale)
   - [Tests](#tests-1)
     - [Tests de navigateur](#tests-de-navigateur)
@@ -78,8 +78,8 @@ InfoBase du GC
 2. Démarrez un commande d'exécution et naviguez au chemin d’accès ou vous voulez placer le projet, p. ex. `cd ~/Documents`
 3. `git clone https://github.com/TBS-EACPD/InfoBase.git`
 
-### Lancez la compilation de InfoBase du GC
-0. Avec un commande d'exécution, naviguez au chemin d’accès au répertoire de InfoBase du GC, p. ex. `cd ~/Documents/infobase/client`
+### Lancez la compilation d'InfoBase du GC
+0. Avec un commande d'exécution, naviguez au chemin d’accès au répertoire d'InfoBase du GC, p. ex. `cd ~/Documents/infobase/client`
 1. `npm ci` pour télécharger les modules node.
 2. `npm run IB_base_watch` pour recueillir et empaqueter les fichiers statiques (les fichiers csv, svg, et css élargies de bootstrap). Ce processus peut être laissé en cours d'exécution pour détecter les changements.
 3. `npm run IB_q` pour empaqueter le code source (La commande `IB_q` compile rapidement mais vous auriez besoin d'un navigateur qui soutient ES6) ou `npm run IB_dev` (appliquer les « correctifs » pour résoudre les problèmes de soutien pour les navigateurs mobiles/IE11/safari)\*

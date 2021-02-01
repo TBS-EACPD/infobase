@@ -4,7 +4,7 @@ about_page_title:
 
 principles_title: 
   en: GC InfoBase Principles
-  fr: Principes de InfoBase du GC
+  fr: Principes d'InfoBase du GC
 
 principle_1_name:
   en: Authoritative
@@ -140,14 +140,14 @@ our_data_sub_text_2:
     autrefois obscures.
 
 
-    L'équipe de InfoBase du GC est obsédée par la qualité des données et, à notre avis, cela commence avant le début de la collecte. À cette fin, nous avons développé une technologie qui permet de saisir
+    L'équipe d'InfoBase du GC est obsédée par la qualité des données et, à notre avis, cela commence avant le début de la collecte. À cette fin, nous avons développé une technologie qui permet de saisir
     les données essentielles des ministères et avons mis en place des mécanismes pour assurer la qualité, l'exactitude et la fiabilité de toutes nos données. 
 
 
     Nous savons qu'un chiffre ne dit pas toujours tout, c'est pourquoi InfoBase du GC vient en aide aux utilisateurs en leur présentant en complément des renseignements contextuels. 
     Nous collaborons avec les organisations gouvernementales pour expliquer des données intéressantes telles qu'une hausse ou une baisse des dépenses, ou encore la situation concernant un résultat précis.
 
-    Alors que la majorité des données de InfoBase du GC sont accessibles aux utilisateurs sur le Portail de {{ext_link "données ouvertes" "https://ouvert.canada.ca/fr/donnees-ouvertes"}} du gouvernement du Canada, InfoBase du GC est la seule tentative d'intégration de ces ensembles de données dans un référentiel unique destiné aux parlementaires, aux fonctionnaires et à la population canadienne. À cette fin, InfoBase du GC est évolue constamment avec l'ajout de nouvelles sources de données, de visualisations et d’explications. <a href="#contact">Communiquez avec nous</a> si vous avez des données, des réflexions ou des idées à partager!
+    Alors que la majorité des données d'InfoBase du GC sont accessibles aux utilisateurs sur le Portail de {{ext_link "données ouvertes" "https://ouvert.canada.ca/fr/donnees-ouvertes"}} du gouvernement du Canada, InfoBase du GC est la seule tentative d'intégration de ces ensembles de données dans un référentiel unique destiné aux parlementaires, aux fonctionnaires et à la population canadienne. À cette fin, InfoBase du GC est évolue constamment avec l'ajout de nouvelles sources de données, de visualisations et d’explications. <a href="#contact">Communiquez avec nous</a> si vous avez des données, des réflexions ou des idées à partager!
 
 behind_scenes_title:
   en: Behind the Scenes
@@ -214,7 +214,7 @@ feedback_text_1:
     We are always looking for ideas and suggestions to help us improve the current version of GC InfoBase. If you would like to share some ideas or comments regarding your experience with the tool,
     please take a few minutes to complete our online survey. The feedback you provide will be used to improve the current version of GC InfoBase and prioritize new features.
   fr: |
-    Nous sommes constamment à la recherche d’idées et de suggestions pour améliorer la version actuelle de InfoBase du GC. Le cas échéant, veuillez prendre quelques minutes pour remplir notre sondage en ligne.
+    Nous sommes constamment à la recherche d’idées et de suggestions pour améliorer la version actuelle d'InfoBase du GC. Le cas échéant, veuillez prendre quelques minutes pour remplir notre sondage en ligne.
     En répondant aux quelques questions qui suivent, vous nous aiderez à améliorer InfoBase du GC et à fixer l’ordre de priorité pour les nouvelles caractéristiques.
 
 feedback_text_2:
