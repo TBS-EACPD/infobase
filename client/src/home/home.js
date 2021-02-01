@@ -18,7 +18,7 @@ import { log_standard_event } from "../core/analytics.js";
 
 import { StandardRouteContainer } from "../core/NavComponents.js";
 import { get_static_url } from "../request_utils.js";
-import { EverythingSearch } from "../search/index.js";
+import { EverythingSearch } from "../search/EverythingSearch.js";
 
 import { featured_content_items } from "./home-data.js";
 

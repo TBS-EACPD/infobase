@@ -18,7 +18,7 @@ import { Subject } from "../models/subject.js";
 import { get_panels_for_subject } from "../panels/get_panels_for_subject/index.js";
 import { PanelRegistry } from "../panels/PanelRegistry.js";
 import { PanelRenderer } from "../panels/PanelRenderer.js";
-import { EverythingSearch } from "../search/index.js";
+import { EverythingSearch } from "../search/EverythingSearch.js";
 
 import { bubble_defs } from "./bubble_definitions.js";
 import { BubbleMenu } from "./BubbleMenu.js";
