@@ -12,6 +12,12 @@
         font-size: 18px;
         border: 0;
         outline: none;
+
+        &::-ms-clear {
+          display: none;
+          width: 0;
+          height: 0;
+        }
     }
 
     > .search-icon-container {
@@ -21,17 +27,35 @@
 }
 
 
-//The following classes are taken from react-bootstrap-typeahead css
-
-.rbt {
-  outline: none;
+// utility classes not directly used by the Typeahead component, but by consumers, because
+// consumers are responsible for defining the contents of typeahead results... currently...
+// (moving that responsibility more in to Typeahead itself is a possible TODO)
+.typeahead__grayed-out-result {
+  opacity: 0.8;
 }
-
-.rbt-highlight-text {
+.typeahead__highlighted {
   background-color: inherit;
   color: inherit;
   font-weight: bold;
   padding: 0;
+}
+.typeahead__result-title {
+  font-size: 14px;
+  line-height: 1.8em;
+  padding: 5px 0px;
+}
+.typeahead__result-body {
+  font-size: 12px;
+  line-height: 1;
+  padding: 0px 20px 20px 20px;
+  color: $textColor;
+}
+
+
+//The following classes are taken from react-bootstrap-typeahead css
+
+.rbt {
+  outline: none;
 }
 
 .rbt-menu {
@@ -106,19 +130,4 @@
     color: $linkFocusColor;
     text-decoration: underline;
   }
-}
-
-.rbt-input-hint-container > .search-icon-container {
-  position: absolute; 
-  height: 100%; 
-  right: 8px; 
-  top: 0px; 
-  display: flex; 
-  align-items: center;
-}
-
-input::-ms-clear {
-  display: none;
-  width: 0;
-  height: 0;
 }

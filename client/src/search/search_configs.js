@@ -12,8 +12,6 @@ import {
   InfoBaseHighlighter,
 } from "./search_utils.js";
 
-import "./search_configs.scss";
-
 const { Dept, Gov, Program, Tag, CRSO } = Subject;
 
 const get_re_matcher = (accessors, reg_exps) => (obj) =>
@@ -57,7 +55,7 @@ const org_attributes_to_match = [
   "pas_code",
 ];
 const LimitedDataDisplay = (search, name) => (
-  <span className="search-grayed-out-hint">
+  <span className="typeahead__grayed-out-hint">
     <InfoBaseHighlighter
       search={search}
       content={`${name} (${trivial_text_maker("limited_data")})`}
@@ -166,13 +164,13 @@ const glossary = {
   menu_content_function: (glossaryItem, search) => (
     <Fragment>
       <div
-        className="search__glossary-title"
+        className="typeahead__result-title"
         dangerouslySetInnerHTML={{
           __html: highlight_search_match(search, glossaryItem.title),
         }}
       />
       <div
-        className="search__glossary-text"
+        className="typeahead__result-body"
         dangerouslySetInnerHTML={{
           __html: highlight_search_match(search, glossaryItem.definition),
         }}
@@ -317,7 +315,7 @@ const programs = {
     } else {
       if (program.is_dead) {
         return (
-          <span className="search-grayed-out-hint">
+          <span className="typeahead__grayed-out-result">
             <InfoBaseHighlighter
               search={search}
               content={`${name} (${trivial_text_maker("non_active_program")})`}
