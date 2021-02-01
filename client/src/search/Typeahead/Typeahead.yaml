@@ -38,14 +38,15 @@ result_multiple:
 num_chars_needed:
   transform: [handlebars]
   en: |
-    Type  in {{min_length}} characters or more for results
+    Type in {{min_length}} characters or more for results
   fr: |
     TODO
 
 num_results_showing:
   transform: [handlebars]
   en: |
-    {{total_matching_results}} {{result}} found. Showing results {{page_range_start}} to {{page_range_end}} of {{total_matching_results}}. Use up and down arrow keys to navigate.
+    {{total_matching_results}} {{result}} found. Showing results {{page_range_start}} to {{page_range_end}} of {{total_matching_results}}.
+    Use the up and down arrow keys to navigate the results and the enter key to make a selection. Continue typing to change your search
   fr: |
     TODO
 
