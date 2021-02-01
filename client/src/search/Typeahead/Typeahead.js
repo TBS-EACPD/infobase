@@ -281,11 +281,7 @@ export class Typeahead extends React.Component {
       : paginated_results.length;
 
     return (
-      <div
-        className="typeahead"
-        style={{ position: "relative" }}
-        ref={this.ref}
-      >
+      <div className="typeahead" ref={this.ref}>
         <div className="typeahead__search-bar">
           <div className="typeahead__icon-container">
             <span aria-hidden="true">
@@ -301,7 +297,6 @@ export class Typeahead extends React.Component {
             aria-autocomplete="list"
             aria-owns={this.menuId}
             aria-expanded={show_menu}
-            style={{ width: "100%" }}
             placeholder={placeholder}
             onChange={update_search_text}
             ref={this.typeaheadRef}
