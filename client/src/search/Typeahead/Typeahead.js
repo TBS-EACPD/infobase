@@ -276,6 +276,10 @@ export class Typeahead extends React.Component {
       paginated_results,
     };
 
+    const pagination_down_item_index = needs_pagination_up_control
+      ? paginated_results.length + 1
+      : paginated_results.length;
+
     return (
       <div
         className="typeahead"
@@ -326,55 +330,51 @@ export class Typeahead extends React.Component {
                 {text_maker("no_matches_found")}
               </li>
             )}
-            {!_.isEmpty(paginated_results) &&
-              _.chain(paginated_results)
-                .groupBy("config_group_index")
-                .thru((grouped_results) => {
-                  const pagination_down_item_index = needs_pagination_up_control
-                    ? paginated_results.length + 1
-                    : paginated_results.length;
-
-                  let index_key_counter = needs_pagination_up_control ? 1 : 0;
-                  return (
-                    <Fragment>
-                      <li className="typeahead__header">
-                        <TM
-                          k="paginate_status"
-                          args={{
-                            page_range_start,
-                            page_range_end,
-                            total_matching_results,
-                          }}
-                        />
-                      </li>
-                      {needs_pagination_up_control && (
-                        <li
-                          className={classNames(
-                            "typeahead__item",
-                            0 === current_selected_index &&
-                              "typeahead__item--active"
-                          )}
-                          aria-selected={0 === current_selected_index}
-                          ref={(ref) => {
-                            this.menu_item_references[0] = ref;
-                          }}
-                          onClick={(e) => {
-                            this.setState((prev_state) => ({
-                              pagination_index: prev_state.pagination_index - 1,
-                            }));
-                          }}
-                        >
-                          <a className="typeahead__control">
-                            <span className="aria-hidden">▲</span>
-                            <br />
-                            <TM
-                              k="paginate_previous"
-                              args={{ page_size: pagination_size }}
-                            />
-                          </a>
-                        </li>
-                      )}
-                      {_.flatMap(grouped_results, (results, group_index) => (
+            {!_.isEmpty(paginated_results) && (
+              <Fragment>
+                <li className="typeahead__header">
+                  <TM
+                    k="paginate_status"
+                    args={{
+                      page_range_start,
+                      page_range_end,
+                      total_matching_results,
+                    }}
+                  />
+                </li>
+                {needs_pagination_up_control && (
+                  <li
+                    className={classNames(
+                      "typeahead__item",
+                      0 === current_selected_index && "typeahead__item--active"
+                    )}
+                    aria-selected={0 === current_selected_index}
+                    ref={(ref) => {
+                      this.menu_item_references[0] = ref;
+                    }}
+                    onClick={(e) => {
+                      this.setState((prev_state) => ({
+                        pagination_index: prev_state.pagination_index - 1,
+                      }));
+                    }}
+                  >
+                    <a className="typeahead__control">
+                      <span className="aria-hidden">▲</span>
+                      <br />
+                      <TM
+                        k="paginate_previous"
+                        args={{ page_size: pagination_size }}
+                      />
+                    </a>
+                  </li>
+                )}
+                {_.chain(paginated_results)
+                  .groupBy("config_group_index")
+                  .thru((grouped_results) => {
+                    let index_key_counter = needs_pagination_up_control ? 1 : 0;
+                    return _.flatMap(
+                      grouped_results,
+                      (results, group_index) => (
                         <Fragment key={`header-${group_index}`}>
                           <li className="typeahead__header">
                             {config_groups[group_index].group_header}
@@ -402,69 +402,67 @@ export class Typeahead extends React.Component {
                             );
                           })}
                         </Fragment>
-                      ))}
-                      {needs_pagination_down_control && (
-                        <li
-                          className={classNames(
-                            "typeahead__item",
-                            pagination_down_item_index ===
-                              current_selected_index &&
-                              "typeahead__item--active"
-                          )}
-                          aria-selected={
-                            pagination_down_item_index ===
-                            current_selected_index
-                          }
-                          ref={(ref) => {
-                            this.menu_item_references[
-                              pagination_down_item_index
-                            ] = ref;
-                          }}
-                          onClick={(e) => {
-                            this.setState((prev_state) => ({
-                              pagination_index: prev_state.pagination_index + 1,
-                              current_selected_index: next_page_size + 1,
-                            }));
-                          }}
-                        >
-                          <a className="typeahead__control">
-                            <TM
-                              k="paginate_next"
-                              args={{ next_page_size: next_page_size }}
-                            />
-                            <br />
-                            <span className="aria-hidden">▼</span>
-                          </a>
-                        </li>
-                      )}
-                      <li
-                        className={classNames(
-                          "typeahead__item",
-                          pagination_down_item_index +
-                            needs_pagination_down_control ===
-                            current_selected_index && "typeahead__item--active"
-                        )}
-                        aria-selected={
-                          pagination_down_item_index +
-                            needs_pagination_down_control ===
-                          current_selected_index
-                        }
-                        ref={(ref) => {
-                          this.menu_item_references[
-                            pagination_down_item_index +
-                              needs_pagination_down_control
-                          ] = ref;
-                        }}
-                        onClick={() => this.hide_menu()}
-                      >
-                        <a className="typeahead__control">
-                          {text_maker("close_menu")}
-                        </a>
-                      </li>
-                    </Fragment>
-                  );
-                })
-                .value()}
+                      )
+                    );
+                  })
+                  .value()}
+                {needs_pagination_down_control && (
+                  <li
+                    className={classNames(
+                      "typeahead__item",
+                      pagination_down_item_index === current_selected_index &&
+                        "typeahead__item--active"
+                    )}
+                    aria-selected={
+                      pagination_down_item_index === current_selected_index
+                    }
+                    ref={(ref) => {
+                      this.menu_item_references[
+                        pagination_down_item_index
+                      ] = ref;
+                    }}
+                    onClick={(e) => {
+                      this.setState((prev_state) => ({
+                        pagination_index: prev_state.pagination_index + 1,
+                        current_selected_index: next_page_size + 1,
+                      }));
+                    }}
+                  >
+                    <a className="typeahead__control">
+                      <TM
+                        k="paginate_next"
+                        args={{ next_page_size: next_page_size }}
+                      />
+                      <br />
+                      <span className="aria-hidden">▼</span>
+                    </a>
+                  </li>
+                )}
+                <li
+                  className={classNames(
+                    "typeahead__item",
+                    pagination_down_item_index +
+                      needs_pagination_down_control ===
+                      current_selected_index && "typeahead__item--active"
+                  )}
+                  aria-selected={
+                    pagination_down_item_index +
+                      needs_pagination_down_control ===
+                    current_selected_index
+                  }
+                  ref={(ref) => {
+                    this.menu_item_references[
+                      pagination_down_item_index + needs_pagination_down_control
+                    ] = ref;
+                  }}
+                  onClick={() => this.hide_menu()}
+                >
+                  <a className="typeahead__control">
+                    {text_maker("close_menu")}
+                  </a>
+                </li>
+              </Fragment>
+            )}
           </ul>
         )}
       </div>
