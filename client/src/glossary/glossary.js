@@ -11,7 +11,8 @@ import {
 import { Table } from "../core/TableClass.js";
 import { GlossaryEntry } from "../models/glossary.js";
 import { rpb_link } from "../rpb/rpb_link.js";
-import { GlossarySearch } from "../search/index.js";
+
+import { GlossarySearch } from "./GlossarySearch.js";
 
 import glossary_text from "./glossary.yaml";
 import "./glossary.scss";
