@@ -317,20 +317,6 @@ result_statuses:
     en: Result to be achieved in the future
     fr: Résultat à atteindre dans le future
 
-result_simple_statuses:
-  met:
-    en: Met
-    fr: Atteint
-  not_met:
-    en: Not met
-    fr: Non atteint
-  not_available:
-    en: Not available
-    fr: Non disponible
-  future:
-    en: Result to be achieved
-    fr: Résultat à atteindre
-
 months:
   0:
     text: ""

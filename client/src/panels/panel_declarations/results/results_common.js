@@ -26,7 +26,7 @@ const {
   current_dp_key,
 } = Results;
 
-const { result_statuses, result_simple_statuses } = businessConstants;
+const { result_statuses } = businessConstants;
 
 const link_to_results_infograph = (subject) =>
   infograph_href_template(subject, "results");
@@ -230,7 +230,6 @@ export {
   isDeptWithoutResults,
   row_to_drr_status_counts,
   result_statuses,
-  result_simple_statuses,
   indicator_text_functions,
   result_color_scale,
   filter_and_genericize_doc_counts,
