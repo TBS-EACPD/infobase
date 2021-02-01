@@ -1,10 +1,12 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { Table } from "../core/TableClass.js";
-import { GlossaryEntry } from "../models/glossary.js";
-import { Subject } from "../models/subject.js";
-import { trivial_text_maker } from "../models/text.js";
+import { GlossaryEntry } from "src/models/glossary.js";
+import { Subject } from "src/models/subject.js";
+import { trivial_text_maker } from "src/models/text.js";
+
+import { textColor } from "src/core/color_defs.js";
+import { Table } from "src/core/TableClass.js";
 
 import {
   query_to_reg_exps,
@@ -55,7 +57,7 @@ const org_attributes_to_match = [
   "pas_code",
 ];
 const LimitedDataDisplay = (search, name) => (
-  <span className="typeahead__grayed-out-hint">
+  <span className="typeahead__grayed-out">
     <InfoBaseHighlighter
       search={search}
       content={`${name} (${trivial_text_maker("limited_data")})`}
@@ -164,13 +166,22 @@ const glossary = {
   menu_content_function: (glossaryItem, search) => (
     <Fragment>
       <div
-        className="typeahead__result-title"
+        style={{
+          fontSize: "14px",
+          lineHeight: "1.8em",
+          padding: "5px 0px",
+        }}
         dangerouslySetInnerHTML={{
           __html: highlight_search_match(search, glossaryItem.title),
         }}
       />
       <div
-        className="typeahead__result-body"
+        style={{
+          fontSize: "12px",
+          lineHeight: 1,
+          padding: "0px 20px 20px 20px",
+          color: textColor,
+        }}
         dangerouslySetInnerHTML={{
           __html: highlight_search_match(search, glossaryItem.definition),
         }}
@@ -315,7 +326,7 @@ const programs = {
     } else {
       if (program.is_dead) {
         return (
-          <span className="typeahead__grayed-out-result">
+          <span className="typeahead__grayed-out">
             <InfoBaseHighlighter
               search={search}
               content={`${name} (${trivial_text_maker("non_active_program")})`}

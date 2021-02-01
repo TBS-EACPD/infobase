@@ -4,9 +4,9 @@ import React, { Fragment } from "react";
 
 import { create_text_maker_component } from "src/components/index.js";
 
-import { log_standard_event } from "../../core/analytics.js";
+import { log_standard_event } from "src/core/analytics.js";
 
-import { get_static_url } from "../../request_utils.js";
+import { get_static_url } from "src/request_utils.js";
 
 import { InfoBaseHighlighter } from "../search_utils.js";
 
@@ -374,7 +374,6 @@ export class Typeahead extends React.Component {
                           </a>
                         </li>
                       )}
-
                       {_.flatMap(grouped_results, (results, group_index) => (
                         <Fragment key={`header-${group_index}`}>
                           <li className="typeahead__header">
@@ -396,7 +395,9 @@ export class Typeahead extends React.Component {
                                 }}
                                 onClick={() => this.on_select_item(result)}
                               >
-                                <a>{result.menu_content(search_text)}</a>
+                                <a className="typeahead__match">
+                                  {result.menu_content(search_text)}
+                                </a>
                               </li>
                             );
                           })}
