@@ -70,31 +70,24 @@
     border-top: 1px solid $separatorColor;	
   }	
 
-  // TODO ugh, descendant selectors and not-anchor a's, clean this up more
-  & a {
-    display: block;
-    padding: 3px 20px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;	
-    color: $linkColor;
-    &:focus {
-      outline: none;
-    }	
-  }
-
-    &--active,
-    &--active a,
-    &:focus,
-    &:hover,
-    & a:focus,
-    & a:hover {
-    &:not(.disabled){
+  &--active,
+  &--active,
+  &:focus,
+  &:hover {
       background-color: lighten($tertiaryColor, 30%);
       color: $linkFocusColor;
       text-decoration: underline;
-    }
   }
+}
+
+.typeahead__match,
+.typeahead__control {
+  display: block;
+  padding: 3px 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;	
+  color: $linkColor;
 }
 
 .typeahead__control {
@@ -102,25 +95,14 @@
 }
 
 // utility classes not directly used by the Typeahead component, but by consumers, because
-// consumers are responsible for defining the contents of typeahead results... currently...
+// consumers are responsible for defining the contents of typeahead matches... currently...
 // (moving that responsibility more in to Typeahead itself is a possible TODO)
-.typeahead__grayed-out-result {
+.typeahead__grayed-out {
   opacity: 0.8;
 }
-.typeahead__highlighted {
+.typeahead__highlight {
   background-color: inherit;
   color: inherit;
   font-weight: bold;
   padding: 0;
-}
-.typeahead__result-title {
-  font-size: 14px;
-  line-height: 1.8em;
-  padding: 5px 0px;
-}
-.typeahead__result-body {
-  font-size: 12px;
-  line-height: 1;
-  padding: 0px 20px 20px 20px;
-  color: $textColor;
 }
