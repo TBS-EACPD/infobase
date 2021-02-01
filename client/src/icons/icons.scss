@@ -8,6 +8,8 @@ svg.icon-svg {
     font-size: inherit;
     overflow: visible;
   }
+
+  pointer-events: none;
 }
 
 .icon-stroke:not(.icon-fill){
