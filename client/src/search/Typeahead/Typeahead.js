@@ -304,29 +304,6 @@ export class Typeahead extends React.Component {
                     </a>
                   </li>
                 )}
-                <li
-                  className={classNames(
-                    "typeahead__item",
-                    pagination_down_item_index +
-                      needs_pagination_down_control ===
-                      current_selected_index && "typeahead__item--active"
-                  )}
-                  aria-selected={
-                    pagination_down_item_index +
-                      needs_pagination_down_control ===
-                    current_selected_index
-                  }
-                  ref={(ref) => {
-                    this.menu_item_references[
-                      pagination_down_item_index + needs_pagination_down_control
-                    ] = ref;
-                  }}
-                  onClick={this.hide_menu}
-                >
-                  <a className="typeahead__control">
-                    {text_maker("close_menu")}
-                  </a>
-                </li>
               </Fragment>
             )}
           </ul>
@@ -364,7 +341,7 @@ export class Typeahead extends React.Component {
   handle_up_arrow = (e, show_menu) => {
     e.preventDefault();
     const { current_selected_index } = this.state;
-    if (show_menu && current_selected_index !== -1) {
+    if (show_menu && current_selected_index > -1) {
       this.setState({ current_selected_index: current_selected_index - 1 });
     }
   };
@@ -381,7 +358,7 @@ export class Typeahead extends React.Component {
       paginated_results.length +
       needs_pagination_up_control +
       needs_pagination_down_control;
-    if (show_menu && current_selected_index !== num_menu_items) {
+    if (show_menu && current_selected_index < num_menu_items - 1) {
       this.setState({ current_selected_index: current_selected_index + 1 });
     }
   };
