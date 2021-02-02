@@ -1,5 +1,6 @@
 import { easeLinear } from "d3-ease";
 import { select } from "d3-selection";
+import "d3-transition";
 import React from "react";
 import ReactDOM from "react-dom";
 import { TransitionGroup, Transition } from "react-transition-group";

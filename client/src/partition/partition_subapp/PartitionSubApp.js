@@ -1,4 +1,5 @@
 import { easeLinear, easePoly } from "d3-ease";
+import "d3-transition";
 import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";

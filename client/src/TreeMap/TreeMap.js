@@ -3,6 +3,7 @@
 import { interpolateRgbBasis } from "d3-interpolate";
 import { scaleSequential } from "d3-scale";
 import { select } from "d3-selection";
+import "d3-transition";
 import _ from "lodash";
 import React from "react";
 

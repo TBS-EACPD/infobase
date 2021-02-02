@@ -2,10 +2,10 @@ import classNames from "classnames";
 import { hierarchy, treemap, treemapSquarify } from "d3-hierarchy";
 import { scaleLinear } from "d3-scale";
 import { select, selectAll, event } from "d3-selection";
+import "d3-transition";
+import "d3-selection-multi";
 import _ from "lodash";
 import React from "react";
-
-import "d3-selection-multi";
 
 import { is_mobile } from "src/core/feature_detection.js";
 

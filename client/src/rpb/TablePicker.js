@@ -1,6 +1,7 @@
 import "../components/LabeledBox.scss";
 import classNames from "classnames";
 import { select } from "d3-selection";
+import "d3-transition";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
