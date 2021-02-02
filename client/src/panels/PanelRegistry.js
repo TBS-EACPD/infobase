@@ -170,7 +170,7 @@ class PanelRegistry {
     }
   }
 
-  get footnote_concept_keys() {
+  calculate_footnote_concept_keys() {
     if (this.footnotes_concept_keys === false) {
       return [];
     } else if (_.isArray(this.footnotes_concept_keys)) {
@@ -200,11 +200,12 @@ class PanelRegistry {
     const { subject } = calculations;
     const render_func = this._inner_render;
     const footnotes = _.chain(
-      FootNote.get_for_subject(subject, this.footnote_concepts)
+      FootNote.get_for_subject(subject, this.calculate_footnote_concept_keys())
     )
       .uniqBy("text") //some footnotes are duplicated to support different topics, years, orgs, etc.
       .compact()
       .value();
+
     const glossary_keys = this.get_glossary_keys();
     const sources = this.get_source(subject);
 
