@@ -2,23 +2,21 @@ import _ from "lodash";
 import React from "react";
 import MediaQuery from "react-responsive";
 
-import { highlightColor } from "src/core/color_defs.js";
-
-import { lang } from "src/core/injected_build_constants.js";
-
 import {
   create_text_maker_component,
   CardTopImage,
   CardLeftImage,
   ContainerEscapeHatch,
   TrinityItem,
-} from "../components/index.js";
+} from "src/components/index.js";
 
-import { log_standard_event } from "../core/analytics.js";
+import { highlightColor } from "src/core/color_defs.js";
+import { lang } from "src/core/injected_build_constants.js";
+import { StandardRouteContainer } from "src/core/NavComponents.js";
 
-import { StandardRouteContainer } from "../core/NavComponents.js";
-import { get_static_url } from "../request_utils.js";
-import { EverythingSearch } from "../search/EverythingSearch.js";
+import { get_static_url } from "src/request_utils.js";
+
+import { EverythingSearch } from "src/search/EverythingSearch.js";
 
 import { featured_content_items } from "./home-data.js";
 
@@ -87,16 +85,7 @@ const HomeLayout = (props) => (
           <img aria-hidden="true" src={get_static_url("svg/flagline.svg")} />
         </div>
         <div className="search-box">
-          <EverythingSearch
-            onNewQuery={(query) => {
-              log_standard_event({
-                SUBAPP: "home",
-                SUBJECT_GUID: null,
-                MISC1: "home_search",
-                MISC2: query,
-              });
-            }}
-          />
+          <EverythingSearch />
         </div>
       </header>
     </div>

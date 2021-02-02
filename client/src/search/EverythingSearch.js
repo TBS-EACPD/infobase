@@ -176,7 +176,7 @@ const EverythingSearch = withRouter(
         placeholder,
         hide_utility_buttons,
         pagination_size,
-        onNewQuery,
+        on_query,
       } = this.props;
 
       const search_options = this.state;
@@ -272,8 +272,8 @@ const EverythingSearch = withRouter(
                 ]
               }
               pagination_size={pagination_size}
-              onNewQuery={onNewQuery}
-              onSelect={this.onSelect}
+              on_query={on_query}
+              on_select={this.onSelect}
             />
           </div>
         </div>
