@@ -22,10 +22,10 @@ const GlossarySearch = withRouter(
         <Typeahead
           placeholder={glossary_placeholder}
           search_configs={[glossary_search_config]}
-          onSelect={({ id }) =>
+          on_select={({ id }) =>
             history.push(glossary_href(id).replace("#", "/"))
           }
-          minLength={2}
+          min_length={2}
         />
       );
     }

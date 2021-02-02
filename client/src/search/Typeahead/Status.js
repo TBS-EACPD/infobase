@@ -13,11 +13,11 @@ export class Status extends React.Component {
     debounced: false,
   };
   debounceStateUpdate = _.debounce(() => {
-    const { input_is_in_focus } = this.props;
+    const { input_has_focus } = this.props;
     const { debounced } = this.state;
 
     !debounced &&
-      this.setState({ silenced: !input_is_in_focus, debounced: true });
+      this.setState({ silenced: !input_has_focus, debounced: true });
   }, 1400);
   componentDidUpdate(prev_props) {
     if (this.props !== prev_props) {
