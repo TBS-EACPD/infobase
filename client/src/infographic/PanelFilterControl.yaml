@@ -5,8 +5,13 @@ panels_status:
   transform: [handlebars]
   en: (showing {{number_of_active_panels}} of {{total_number_of_panels}} panels)
   fr: (montrant {{number_of_active_panels}} des {{total_number_of_panels}} panneaux)
-filter_panels_description:
+filter_by_datasets:
   en: |
     Filter by datasets:
   fr: |
     Filtrer par ensembles de données :
+filter_by_footnotes:
+  en: |
+    Filter by footnotes:
+  fr: |
+    TODO

@@ -112,7 +112,7 @@ export default class PanelFilterControl extends React.Component {
         persist_content={true}
         content={
           <LabeledBox
-            label={text_maker("filter_panels_description")}
+            label={text_maker("filter_by_datasets")}
             children={
               <div>
                 <TagCloud tags={tags} onSelectTag={this.onSelect} />
