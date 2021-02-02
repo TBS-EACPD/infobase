@@ -90,12 +90,12 @@ lapse_by_votes:
 
 show_lapsed_authorities_in:
   en: Show lapsed authorities in
-  fr: Afficher les autorisations périmées en $
+  fr: Afficher les autorisations périmées en
 
 aggregated_lapse_by_votes:
   transform: [handlebars]
-  en: Aggregated Lapsed Authorities {{#if lapse_unit}}({{lapse_unit}}){{/if}}
-  fr: Autorisations Périmées Agrégées
+  en: Voted Lapsed Authorities {{#if lapse_unit}}({{lapse_unit}}){{/if}}
+  fr: Autorisations Périmées Votées
 
 gov_lapse_by_votes_text:
   transform: [handlebars, markdown]
