@@ -27,14 +27,6 @@ close_menu:
   en: Close menu
   fr: Fermer le menu
 
-result_single:
-  en: result was
-  fr: TODO
-
-result_multiple:
-  en: results were
-  fr: TODO
-
 num_chars_needed:
   transform: [handlebars]
   en: |
@@ -45,14 +37,15 @@ num_chars_needed:
 total_and_current_page_size:
   transform: [handlebars]
   en: |
-    {{total_matching_results}} {{result}} found. Showing results {{page_range_start}} to {{page_range_end}} of {{total_matching_results}}.
-    Use the up and down arrow keys to navigate the results and the enter key to make a selection. Continue typing to change your search
+    {{total_matching_results}} matches. Showing results {{page_range_start}} to {{page_range_end}} of {{total_matching_results}}.
+    Use the up and down arrow keys to navigate the results and the enter key to make a selection. Continue typing to change your search.
   fr: |
     TODO
 
 selected_result_and_current_page_size:
   transform: [handlebars]
   en: |
-    {{current_selected}}. {{current_selected_index}} of {{total_matching_results}} results. Showing results {{page_range_start}} to {{page_range_end}} of {{total_matching_results}}.
+    {{current_selected_name}}. {{current_selected_number}} of {{total_matching_results}} results. Showing results {{page_range_start}} to {{page_range_end}} of {{total_matching_results}}.
+    Use the enter key to make a selection. Continue typing to change your search.
   fr: |
     TODO
