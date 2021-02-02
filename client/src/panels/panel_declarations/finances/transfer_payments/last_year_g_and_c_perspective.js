@@ -18,7 +18,7 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
     levels: ["dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgTransferPayments", "programSpending"],
-      footnotes: ["SOBJ10"],
+      footnotes_concept_keys: ["SOBJ10"],
       calculate(subject, options) {
         const { orgTransferPayments, programSpending } = this.tables;
 

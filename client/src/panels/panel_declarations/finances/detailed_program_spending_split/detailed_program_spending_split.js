@@ -419,7 +419,7 @@ export const declare_detailed_program_spending_split_panel = () =>
     panel_config_func: (level, panel_key) => ({
       depends_on: ["programSobjs", "programSpending"],
 
-      footnotes: footnote_topics,
+      footnotes_concept_keys: footnote_topics,
       calculate(subject, options) {
         const { programSobjs, programSpending } = this.tables;
 

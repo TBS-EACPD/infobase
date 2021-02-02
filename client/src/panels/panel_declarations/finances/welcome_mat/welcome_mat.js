@@ -1005,7 +1005,13 @@ const common_program_crso_calculate = function (subject) {
   return { type, calcs };
 };
 
-const footnotes = ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"];
+const footnotes_concept_keys = [
+  "MACHINERY",
+  "PLANNED_EXP",
+  "FTE",
+  "PLANNED_FTE",
+  "EXP",
+];
 const depends_on = ["programSpending", "programFtes"];
 export const declare_welcome_mat_panel = () =>
   declare_panel({
@@ -1015,7 +1021,7 @@ export const declare_welcome_mat_panel = () =>
       switch (level) {
         case "gov":
           return {
-            footnotes,
+            footnotes_concept_keys,
             depends_on,
             calculate(subject) {
               const { programSpending, programFtes } = this.tables;
@@ -1033,7 +1039,7 @@ export const declare_welcome_mat_panel = () =>
           };
         case "dept":
           return {
-            footnotes,
+            footnotes_concept_keys,
             missing_info: "ok",
             depends_on: [
               "orgVoteStatEstimates",
@@ -1099,7 +1105,7 @@ export const declare_welcome_mat_panel = () =>
           };
         case "program":
           return {
-            footnotes,
+            footnotes_concept_keys,
             depends_on,
             glossary_keys: ["FTE"],
             calculate: common_program_crso_calculate,
@@ -1107,7 +1113,7 @@ export const declare_welcome_mat_panel = () =>
           };
         case "crso":
           return {
-            footnotes,
+            footnotes_concept_keys,
             depends_on,
             glossary_keys: ["FTE"],
             calculate: common_program_crso_calculate,

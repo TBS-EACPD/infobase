@@ -514,7 +514,7 @@ export const declare_gocographic_panel = () =>
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["programSpending", "programFtes"],
-      footnotes: ["GOCO"],
+      footnotes_concept_keys: ["GOCO"],
       glossary_keys: ["GOCO"],
       render,
     }),

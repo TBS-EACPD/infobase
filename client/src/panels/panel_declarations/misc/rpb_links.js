@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-
 import {
   TextPanel,
   util_components,
@@ -40,7 +39,6 @@ export const declare_links_to_rpb_panel = () =>
       switch (level) {
         case "gov":
           return {
-            footnotes: false,
             calculate: _.constant(true),
 
             render({ calculations }) {
@@ -78,8 +76,6 @@ export const declare_links_to_rpb_panel = () =>
           };
         case "dept":
           return {
-            footnotes: false,
-
             calculate(subject) {
               return !_.chain(subject.tables).compact().isEmpty().value();
             },

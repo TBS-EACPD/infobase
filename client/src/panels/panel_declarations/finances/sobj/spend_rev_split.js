@@ -99,7 +99,7 @@ export const declare_spend_rev_split_panel = () =>
         case "dept":
           return {
             depends_on: ["orgSobjs"],
-            footnotes: ["SOBJ_REV"],
+            footnotes_concept_keys: ["SOBJ_REV"],
             calculate(subject, options) {
               const { orgSobjs } = this.tables;
               const last_year_spend = orgSobjs.so_num(

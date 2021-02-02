@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-
 import {
   TextPanel,
   general_utils,
@@ -199,7 +198,6 @@ export const declare_description_panel = () =>
     panel_key: "description",
     levels: ["tag"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: false,
       calculate: (subject) => !_.isEmpty(subject.description),
       render({ calculations }) {
         const { subject } = calculations;

@@ -17,6 +17,7 @@ import {
 import { IconCopyLink } from "../../icons/icons.js";
 import { infograph_options_href_template } from "../../infographic/infographic_link.js";
 
+import { PanelRegistry } from "../../panels/PanelRegistry.js";
 import { panel_context } from "../PanelRenderer.js";
 
 import text from "./InfographicPanel.yaml";
@@ -40,6 +41,8 @@ class Panel_ extends React.Component {
     } = this.props;
 
     const subject = context && context.subject;
+    const { panel_key, active_bubble_id, no_permalink } = context;
+    PanelRegistry.lookup(panel_key, subject.level).set_footnotes(footnotes);
 
     const file_name_context = subject
       ? subject.level === "dept"
@@ -49,13 +52,13 @@ class Panel_ extends React.Component {
     const file_name = `${file_name_context}_${title}.pdf`;
     const panel_link =
       context &&
-      infograph_options_href_template(subject, context.active_bubble_id, {
-        panel_key: context.panel_key,
+      infograph_options_href_template(subject, active_bubble_id, {
+        panel_key,
       }) &&
       window.location.href.replace(
         window.location.hash,
-        infograph_options_href_template(subject, context.active_bubble_id, {
-          panel_key: context.panel_key,
+        infograph_options_href_template(subject, active_bubble_id, {
+          panel_key,
         })
       );
 
@@ -70,14 +73,14 @@ class Panel_ extends React.Component {
 
     const header_utils = context && (
       <div style={{ marginLeft: "auto" }}>
-        {context.panel_key && !is_a11y_mode && (
+        {panel_key && !is_a11y_mode && (
           <LogInteractionEvents
             event_type={"PANEL_PDF_DOWNLOADED"}
             event_details={title}
             style={{ display: "inline" }}
           >
             <PDFGenerator
-              target_id={context.panel_key}
+              target_id={panel_key}
               file_name={file_name}
               title={title}
               link={panel_link}
@@ -99,7 +102,7 @@ class Panel_ extends React.Component {
             />
           </LogInteractionEvents>
         )}
-        {!context.no_permalink && panel_link && (
+        {!no_permalink && panel_link && (
           <LogInteractionEvents
             event_type={"PANEL_LINK_COPIED"}
             event_details={title}

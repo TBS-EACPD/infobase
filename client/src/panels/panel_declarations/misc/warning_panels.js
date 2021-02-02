@@ -44,7 +44,6 @@ export const declare_dead_program_warning_panel = () =>
     levels: ["program"],
     panel_config_func: (level, panel_key) => ({
       is_static: true,
-      footnotes: false,
       calculate: _.property("is_dead"),
       render() {
         return (
@@ -62,7 +61,6 @@ export const declare_dead_crso_warning_panel = () =>
     levels: ["crso"],
     panel_config_func: (level, panel_key) => ({
       is_static: true,
-      footnotes: false,
       calculate: _.property("is_dead"),
       render() {
         return (
@@ -80,7 +78,6 @@ export const declare_m2m_tag_warning_panel = () =>
     levels: ["tag"],
     panel_config_func: (level, panel_key) => ({
       is_static: true,
-      footnotes: false,
       calculate(subject) {
         return subject.is_m2m;
       },
@@ -129,7 +126,6 @@ export const declare_late_results_warning_panel = () =>
         case "gov":
           return {
             is_static: true,
-            footnotes: false,
             source: false,
             calculate: () => !_.isEmpty(docs_with_late_orgs),
             render() {
@@ -169,7 +165,6 @@ export const declare_late_results_warning_panel = () =>
         default:
           return {
             is_static: true,
-            footnotes: false,
             source: false,
             calculate: (subject) =>
               _.chain(docs_with_late_orgs)
@@ -204,7 +199,6 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
         case "gov":
           return {
             is_static: true,
-            footnotes: false,
             source: false,
             calculate: () => !_.isEmpty(late_orgs),
             render: () => (
@@ -224,7 +218,6 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
         default:
           return {
             is_static: true,
-            footnotes: false,
             source: false,
             calculate: (subject) =>
               _.includes(

@@ -3,7 +3,6 @@ import React from "react";
 
 import { is_mobile } from "src/core/feature_detection.js";
 
-
 import { infograph_href_template, rpb_link } from "../../../../link_utils.js";
 import { ResultCounts, current_drr_key } from "../../../../models/results.js";
 import { get_static_url } from "../../../../request_utils.js";
@@ -27,7 +26,6 @@ export const declare_simplographic_panel = () =>
     panel_key: "simplographic",
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: false,
       requires_result_counts: true,
 
       depends_on: ["orgVoteStatPa", "orgEmployeeRegion"],

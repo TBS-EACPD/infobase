@@ -80,7 +80,7 @@ export const declare_top_spending_areas_panel = () =>
     levels: ["program"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["programSobjs"],
-      footnotes: ["SOBJ"],
+      footnotes_concept_keys: ["SOBJ"],
       calculate(subject, options) {
         if (_.isEmpty(this.tables.programSobjs.programs.get(subject))) {
           return false;

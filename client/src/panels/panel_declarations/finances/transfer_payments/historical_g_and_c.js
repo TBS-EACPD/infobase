@@ -410,7 +410,7 @@ export const declare_historical_g_and_c_panel = () =>
           return {
             depends_on: ["orgTransferPayments"],
             key: "historical_g_and_c",
-            footnotes: ["SOBJ10"],
+            footnotes_concept_keys: ["SOBJ10"],
             calculate(dept) {
               const { orgTransferPayments } = this.tables;
 

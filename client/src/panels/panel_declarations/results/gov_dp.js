@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-
 import {
   default_dept_name_sort_func,
   SmartDisplayTable,
@@ -131,7 +130,7 @@ export const declare_gov_dp_panel = () =>
           late_dept_count,
         };
       },
-      footnotes: ["DP"],
+      footnotes_concept_keys: ["DP"],
       source: (subject) => get_source_links(["DP"]),
       render({ calculations, sources, footnotes }) {
         const {

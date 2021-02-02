@@ -3,7 +3,6 @@ import React from "react";
 
 import { textGreen, textRed } from "src/core/color_defs.js";
 
-
 import { Format, SmartDisplayTable } from "../../../../components";
 import {
   year_templates,
@@ -50,7 +49,7 @@ export const declare_dp_rev_split_panel = () =>
     panel_config_func: (level, panel_key) => ({
       depends_on: ["programSpending"],
       machinery_footnotes: false,
-      footnotes: ["PLANNED_GROSS", "PLANNED_EXP", "PLANNED_FTE"],
+      footnotes_concept_keys: ["PLANNED_GROSS", "PLANNED_EXP", "PLANNED_FTE"],
       glossary_keys: ["SPA"],
       source: (subject) => get_source_links(["DP"]),
       calculate(subject) {

@@ -194,7 +194,7 @@ export const declare_spend_by_so_hist_panel = () =>
     levels: ["dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgSobjs"],
-      footnotes: ["SOBJ", "EXP"],
+      footnotes_concept_keys: ["SOBJ", "EXP"],
       calculate(subject) {
         const { orgSobjs } = this.tables;
 

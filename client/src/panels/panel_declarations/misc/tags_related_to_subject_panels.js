@@ -2,7 +2,6 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-
 import {
   Subject,
   TextPanel,
@@ -77,7 +76,6 @@ export const declare_tags_of_interest_panel = () =>
     panel_key: "tags_of_interest",
     levels: ["dept", "crso", "program"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: false,
       calculate(subject) {
         const tags_by_root = get_related_tag_list_args(subject);
         if (subject.dp_status === false || _.isEmpty(tags_by_root)) {
@@ -107,7 +105,6 @@ export const declare_tag_progs_by_dept_panel = () =>
     panel_key: "tag_progs_by_dept",
     levels: ["tag"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: false,
       calculate: _.constant(true),
 
       render({ calculations }) {
@@ -161,8 +158,6 @@ export const declare_related_tags_panel = () =>
     panel_key: "related_tags",
     levels: ["tag"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: false,
-
       calculate(subject) {
         const related_tags_by_type_with_counts = _.chain(subject.programs)
           .map((prog) => prog.tags)

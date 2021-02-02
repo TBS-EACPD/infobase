@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-
 import {
   util_components,
   TextPanel,
@@ -30,8 +29,6 @@ export const declare_portfolio_structure_intro_panel = () =>
     panel_key: "portfolio_structure_intro",
     levels: ["dept"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: false,
-
       calculate(subject) {
         return !_.isEmpty(subject.ministry);
       },
@@ -60,8 +57,6 @@ export const declare_portfolio_structure_related_panel = () =>
     panel_key: "portfolio_structure_related",
     levels: ["dept"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: false,
-
       calculate(subject) {
         return !_.isEmpty(subject.programs);
       },
@@ -89,7 +84,6 @@ export const declare_program_fed_structure_panel = () =>
     panel_key: "program_fed_structure",
     levels: ["program"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: false,
       calculate: _.constant(true),
       render({ calculations }) {
         const { subject } = calculations;
@@ -120,7 +114,6 @@ export const declare_related_program_structure_panel = () =>
     panel_key: "related_program_structure",
     levels: ["program"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: false,
       calculate: _.constant(true),
 
       render({ calculations }) {
@@ -152,7 +145,6 @@ export const declare_tag_fed_structure_panel = () =>
     panel_key: "tag_fed_structure",
     levels: ["tag"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: false,
       calculate: _.constant(true),
 
       render({ calculations }) {
@@ -181,7 +173,6 @@ export const declare_sibling_tags_panel = () =>
     panel_key: "sibling_tags",
     levels: ["tag"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: false,
       calculate: _.constant(true),
 
       render({ calculations }) {
@@ -210,7 +201,6 @@ export const declare_crso_in_gov_panel = () =>
     panel_key: "crso_in_gov",
     levels: ["crso"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: false,
       calculate: _.constant(true),
 
       render({ calculations }) {
@@ -236,7 +226,6 @@ export const declare_crso_links_to_other_crso_panel = () =>
     panel_key: "crso_links_to_other_crso",
     levels: ["crso"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: false,
       calculate: _.constant(true),
 
       render({ calculations }) {

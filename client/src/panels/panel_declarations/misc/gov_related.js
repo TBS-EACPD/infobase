@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-
 import {
   declare_panel,
   create_text_maker,
@@ -18,7 +17,6 @@ export const declare_gov_related_info_panel = () =>
     panel_key: "gov_related_info",
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: false,
       calculate: _.constant(true),
       render() {
         return (

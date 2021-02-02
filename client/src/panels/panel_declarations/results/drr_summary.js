@@ -394,7 +394,7 @@ export const declare_drr_summary_panel = () =>
     panel_config_func: (level, panel_key) => ({
       requires_result_counts: level === "dept",
       requires_granular_result_counts: level !== "dept",
-      footnotes: ["RESULTS_COUNTS", "RESULTS"],
+      footnotes_concept_keys: ["RESULTS_COUNTS", "RESULTS"],
       source: (subject) => get_source_links(["DRR"]),
       calculate(subject) {
         const verbose_counts = (() => {

@@ -51,7 +51,7 @@ export const declare_vote_stat_split_panel = () =>
     levels: ["program"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["programVoteStat"],
-      footnotes: ["VOTED", "STAT"],
+      footnotes_concept_keys: ["VOTED", "STAT"],
       glossary_keys: ["AUTH"],
 
       calculate(subject, options) {

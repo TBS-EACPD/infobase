@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-
 import {
   SmartDisplayTable,
   default_dept_name_sort_func,
@@ -77,7 +76,7 @@ export const declare_gov_drr_panel = () =>
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
       requires_result_counts: true,
-      footnotes: ["RESULTS_COUNTS", "DRR"],
+      footnotes_concept_keys: ["RESULTS_COUNTS", "DRR"],
       source: (subject) => get_source_links(["DRR"]),
 
       calculate() {

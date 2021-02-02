@@ -212,7 +212,7 @@ export const declare_crso_by_prog_fte_panel = () =>
     panel_key: "crso_by_prog_fte",
     levels: ["crso"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: ["PLANNED_EXP"],
+      footnotes_concept_keys: ["PLANNED_EXP"],
       depends_on: ["programSpending", "programFtes"],
       calculate: get_calculate_func(true),
       render: render_resource_type(true),
@@ -223,7 +223,7 @@ export const declare_crso_by_prog_exp_panel = () =>
     panel_key: "crso_by_prog_exp",
     levels: ["crso"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: ["PLANNED_EXP"],
+      footnotes_concept_keys: ["PLANNED_EXP"],
       depends_on: ["programSpending", "programFtes"],
       calculate: get_calculate_func(false),
       render: render_resource_type(false),

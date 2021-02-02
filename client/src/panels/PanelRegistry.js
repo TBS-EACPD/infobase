@@ -171,10 +171,10 @@ class PanelRegistry {
   }
 
   get footnote_concept_keys() {
-    if (this.footnotes === false) {
+    if (this.footnotes_concept_keys === false) {
       return [];
-    } else if (_.isArray(this.footnotes)) {
-      return _.chain(this.footnotes)
+    } else if (_.isArray(this.footnotes_concept_keys)) {
+      return _.chain(this.footnotes_concept_keys)
         .concat(this.machinery_footnotes ? ["MACHINERY"] : [])
         .uniqBy()
         .value();
@@ -192,22 +192,19 @@ class PanelRegistry {
   get_glossary_keys() {
     return this.glossary_keys || [];
   }
-
-  get_footnotes(subject) {
-    //array of footnote strings
-
-    const footnote_concepts = this.footnote_concept_keys;
-
-    return _.chain(FootNote.get_for_subject(subject, footnote_concepts))
-      .uniqBy("text") //some footnotes are duplicated to support different topics, years, orgs, etc.
-      .compact()
-      .value();
+  set_footnotes(footnotes) {
+    this.footnotes = footnotes;
   }
 
   render(calculations, options = {}) {
     const { subject } = calculations;
     const render_func = this._inner_render;
-    const footnotes = this.get_footnotes(subject);
+    const footnotes = _.chain(
+      FootNote.get_for_subject(subject, this.footnote_concepts)
+    )
+      .uniqBy("text") //some footnotes are duplicated to support different topics, years, orgs, etc.
+      .compact()
+      .value();
     const glossary_keys = this.get_glossary_keys();
     const sources = this.get_source(subject);
 

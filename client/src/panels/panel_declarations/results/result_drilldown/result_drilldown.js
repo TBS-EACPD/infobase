@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-
 import {
   util_components,
   InfographicPanel,
@@ -74,7 +73,7 @@ export const declare_explore_results_panel = () =>
     panel_key: "explore_results",
     levels: ["dept", "crso", "program"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: ["RESULTS", "DRR", "DP"],
+      footnotes_concept_keys: ["RESULTS", "DRR", "DP"],
       depends_on: ["programSpending", "programFtes"],
       source: (subject) => get_source_links(["DP", "DRR"]),
       requires_result_counts: level === "dept",
