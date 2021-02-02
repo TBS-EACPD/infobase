@@ -68,18 +68,7 @@ export class Status extends React.Component {
               num_results_showing + needs_pagination_up_control
             ) {
               return text_maker("paginate_next", { next_page_size });
-            } else if (
-              current_selected_index ===
-              num_results_showing + 1 + needs_pagination_up_control
-            ) {
-              return text_maker("close_menu");
             }
-          } else if (
-            !needs_pagination_down_control &&
-            current_selected_index ===
-              num_results_showing + needs_pagination_up_control
-          ) {
-            return text_maker("close_menu");
           }
 
           return text_maker("num_results_showing_with_selected", {
