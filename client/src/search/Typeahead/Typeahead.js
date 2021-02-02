@@ -10,7 +10,7 @@ import { get_static_url } from "src/request_utils.js";
 
 import { InfoBaseHighlighter } from "../search_utils.js";
 
-import { Status } from "./Status.js";
+import { TypeaheadA11yStatus } from "./TypeaheadA11yStatus.js";
 
 import text from "./Typeahead.yaml";
 import "./Typeahead.scss";
@@ -85,7 +85,6 @@ export class Typeahead extends React.Component {
         ? total_matching_results - (pagination_index + 1) * pagination_size
         : 0;
 
-    const current_page_size = _.size(results_on_page);
     const next_page_size =
       remaining_results < pagination_size ? remaining_results : pagination_size;
 
@@ -94,18 +93,13 @@ export class Typeahead extends React.Component {
       page_range_end < total_matching_results;
 
     const status_props = {
-      may_show_menu,
-      current_selected:
-        results_on_page[current_selected_index] &&
-        results_on_page[current_selected_index].name,
+      current_selected_name: results_on_page[current_selected_index]?.name,
       current_selected_index,
-      min_length,
-      query_length: query_value.length,
       pagination_size,
       total_matching_results,
       page_range_start,
       page_range_end,
-      current_page_size,
+      current_page_size: _.size(results_on_page),
       next_page_size,
       needs_pagination_up_control,
       needs_pagination_down_control,
@@ -132,6 +126,7 @@ export class Typeahead extends React.Component {
             aria-autocomplete="list"
             aria-owns={this.menuId}
             aria-expanded={show_menu}
+            aria-label={text_maker("num_chars_needed", { min_length })}
             placeholder={placeholder}
             value={query_value}
             onFocus={this.handle_input_focus}
@@ -148,7 +143,7 @@ export class Typeahead extends React.Component {
           />
           {utility_buttons}
         </div>
-        <Status {...status_props} />
+        {show_menu && <TypeaheadA11yStatus {...status_props} />}
         {show_menu && (
           <ul className="typeahead__dropdown" role="listbox" id={this.menuId}>
             {_.isEmpty(results_on_page) && (
