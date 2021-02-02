@@ -23,6 +23,10 @@ paginate_next:
   fr: |
     Montrer les {{next_page_size}} items suivants
 
+close_menu:
+  en: Close menu
+  fr: Fermer le menu
+
 result_single:
   en: result was
   fr: TODO
