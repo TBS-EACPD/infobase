@@ -54,7 +54,6 @@ export class Typeahead extends React.Component {
       placeholder,
       min_length,
       pagination_size,
-      search_configs,
       utility_buttons,
     } = this.props;
 
@@ -65,64 +64,24 @@ export class Typeahead extends React.Component {
       input_has_focus,
     } = this.state;
 
-    const config_groups = _.map(search_configs, (search_config, ix) => ({
-      group_header: search_config.header_function(),
-      group_filter: search_config.filter,
-    }));
+    const is_query_of_min_length = query_value.length >= min_length;
 
-    const all_options = [
-      ..._.flatMap(search_configs, (search_config, ix) =>
-        _.map(search_config.get_data(), (data) => ({
-          data,
-          name: search_config.name_function(data),
-          menu_content: (search) =>
-            _.isFunction(search_config.menu_content_function) ? (
-              search_config.menu_content_function(data, search)
-            ) : (
-              <InfoBaseHighlighter
-                search={search}
-                content={search_config.name_function(data)}
-              />
-            ),
-          config_group_index: ix,
-        }))
-      ),
-    ];
+    const show_menu = is_query_of_min_length && input_has_focus;
 
-    const matches_query = (option) => {
-      const { query_value } = this.state;
+    const matching_results = is_query_of_min_length
+      ? this.get_all_matching_results()
+      : [];
+    const total_matching_results = matching_results.length;
 
-      const group_filter =
-        config_groups[option.config_group_index].group_filter;
-      const query_matches = group_filter(query_value, option.data);
-
-      return query_matches;
-    };
-
-    const queried_results = _.filter(all_options, (res) => matches_query(res));
-
-    const show_menu = input_has_focus && query_value.length >= min_length;
-
-    const paginate_results = (option, index) => {
-      const page_start = pagination_size * pagination_index;
-      const page_end = page_start + pagination_size;
-      const is_on_displayed_page = !(index < page_start || index >= page_end);
-
-      return is_on_displayed_page;
-    };
-
-    const paginated_results = _.filter(
-      queried_results,
-      (queried_result, index) => paginate_results(queried_result, index)
-    );
+    const paginated_results = this.paginate_results(matching_results);
 
     const page_range_start = pagination_index * pagination_size + 1;
     const page_range_end = page_range_start + paginated_results.length - 1;
 
-    const total_matching_results = queried_results.length;
-
     const remaining_results =
       total_matching_results - (pagination_index + 1) * pagination_size;
+
+    const current_page_size = _.size(paginated_results);
     const next_page_size =
       remaining_results < pagination_size ? remaining_results : pagination_size;
 
@@ -136,16 +95,15 @@ export class Typeahead extends React.Component {
         paginated_results[current_selected_index].name,
       current_selected_index,
       min_length,
+      query_length: query_value.length,
+      pagination_size,
       total_matching_results,
       page_range_start,
       page_range_end,
-      query_length: query_value.length,
-      input_has_focus,
+      current_page_size,
+      next_page_size,
       needs_pagination_up_control,
       needs_pagination_down_control,
-      pagination_size,
-      next_page_size,
-      paginated_results,
     };
 
     const pagination_down_item_index = needs_pagination_up_control
@@ -241,7 +199,7 @@ export class Typeahead extends React.Component {
                       (results, group_index) => (
                         <Fragment key={`header-${group_index}`}>
                           <li className="typeahead__header">
-                            {config_groups[group_index].group_header}
+                            {this.config_groups[group_index].group_header}
                           </li>
                           {_.map(results, (result) => {
                             const index = index_key_counter++;
@@ -261,7 +219,7 @@ export class Typeahead extends React.Component {
                                   this.handle_result_selection(result)
                                 }
                               >
-                                <a className="typeahead__match">
+                                <a className="typeahead__result">
                                   {result.menu_content(query_value)}
                                 </a>
                               </li>
@@ -311,6 +269,62 @@ export class Typeahead extends React.Component {
       </div>
     );
   }
+
+  get_config_groups = _.memoize((search_configs) =>
+    _.map(search_configs, (search_config, ix) => ({
+      group_header: search_config.header_function(),
+      group_filter: search_config.filter,
+    }))
+  );
+  get config_groups() {
+    return this.get_config_groups(this.props.search_configs);
+  }
+
+  get_all_options = _.memoize((search_configs) =>
+    _.flatMap(search_configs, (search_config, ix) =>
+      _.map(search_config.get_data(), (data) => ({
+        data,
+        name: search_config.name_function(data),
+        menu_content: (search) =>
+          _.isFunction(search_config.menu_content_function) ? (
+            search_config.menu_content_function(data, search)
+          ) : (
+            <InfoBaseHighlighter
+              search={search}
+              content={search_config.name_function(data)}
+            />
+          ),
+        config_group_index: ix,
+      }))
+    )
+  );
+  get all_options() {
+    return this.get_all_options(this.props.search_configs);
+  }
+
+  matches_query = (option) => {
+    const { query_value } = this.state;
+
+    const { config_group_index, data } = option;
+
+    const group_filter = this.config_groups[config_group_index]?.group_filter;
+
+    return group_filter(query_value, data);
+  };
+  get_all_matching_results = () =>
+    _.filter(this.all_options, this.matches_query);
+
+  paginate_results = (matching_results) =>
+    _.filter(matching_results, (_result, index) => {
+      const { pagination_size } = this.props;
+      const { pagination_index } = this.state;
+
+      const page_start = pagination_size * pagination_index;
+      const page_end = page_start + pagination_size;
+      const is_on_displayed_page = !(index < page_start || index >= page_end);
+
+      return is_on_displayed_page;
+    });
 
   handle_result_selection = (selected) => {
     const { on_select } = this.props;

@@ -29,22 +29,20 @@ export class Status extends React.Component {
     const {
       current_selected,
       current_selected_index,
-      total_matching_results,
       min_length,
       query_length,
+      pagination_size,
+      total_matching_results,
       page_range_start,
       page_range_end,
+      current_page_size,
+      next_page_size,
       needs_pagination_up_control,
       needs_pagination_down_control,
-      pagination_size,
-      next_page_size,
-      paginated_results,
     } = this.props;
     const { debounced, silenced } = this.state;
 
     this.debounceStateUpdate();
-
-    const num_results_showing = _.size(paginated_results);
 
     const result =
       total_matching_results == 1
@@ -65,13 +63,13 @@ export class Status extends React.Component {
           } else if (needs_pagination_down_control) {
             if (
               current_selected_index ===
-              num_results_showing + needs_pagination_up_control
+              current_page_size + needs_pagination_up_control
             ) {
               return text_maker("paginate_next", { next_page_size });
             }
           }
 
-          return text_maker("num_results_showing_with_selected", {
+          return text_maker("selected_result_and_current_page_size", {
             total_matching_results,
             result,
             current_selected,
@@ -83,7 +81,7 @@ export class Status extends React.Component {
             page_range_start,
           });
         } else {
-          return text_maker("num_results_showing", {
+          return text_maker("total_and_current_page_size", {
             total_matching_results,
             result,
             current_selected,
