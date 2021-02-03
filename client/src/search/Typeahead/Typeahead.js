@@ -41,11 +41,15 @@ export class Typeahead extends React.Component {
     this.debounced_on_query.cancel();
   }
   componentDidUpdate(prevProps, prevState) {
-    const { pagination_size } = this.props;
+    const { search_configs, pagination_size } = this.props;
+    const { search_configs: prev_search_configs } = prevProps;
     const { query_value } = this.state;
     const { query_value: prev_query_value } = prevState;
 
-    if (query_value !== prev_query_value) {
+    if (
+      query_value !== prev_query_value ||
+      search_configs !== prev_search_configs
+    ) {
       const matching_results_by_page = !this.show_menu
         ? []
         : _.chain(this.all_options)
