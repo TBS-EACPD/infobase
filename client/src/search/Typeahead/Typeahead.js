@@ -27,22 +27,11 @@ export class Typeahead extends React.Component {
 
     this.state = {
       query_value: "",
-      pagination_index: 0,
-      current_selected_index: -1,
       may_show_menu: false,
+      pagination_index: 0,
+      selected_index: -1,
+      matching_results_by_page: [],
     };
-  }
-  componentDidUpdate(prev_props, prev_state) {
-    const { current_selected_index } = this.state;
-    if (
-      current_selected_index !== prev_state.current_selected_index &&
-      current_selected_index !== -1
-    ) {
-      this.active_item?.scrollIntoView({
-        behaviour: "auto",
-        block: "nearest",
-      });
-    }
   }
   componentDidMount() {
     document.body.addEventListener("click", this.handle_window_click);
@@ -50,6 +39,38 @@ export class Typeahead extends React.Component {
   componentWillUnmount() {
     document.body.removeEventListener("click", this.handle_window_click);
     this.debounced_on_query.cancel();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    const { pagination_size } = this.props;
+    const { query_value } = this.state;
+    const { query_value: prev_query_value } = prevState;
+
+    if (query_value !== prev_query_value) {
+      const matching_results_by_page = !this.show_menu
+        ? []
+        : _.chain(this.all_options)
+            .filter((option) => {
+              const { config_group_index, data } = option;
+
+              const group_filter = this.config_groups[config_group_index]
+                ?.group_filter;
+
+              return group_filter(query_value, data);
+            })
+            .chunk(pagination_size)
+            .value();
+
+      this.setState({
+        matching_results_by_page,
+        pagination_index: 0,
+        selected_index: -1,
+      });
+    } else {
+      this.active_item?.scrollIntoView({
+        behaviour: "auto",
+        block: "nearest",
+      });
+    }
   }
   render() {
     const {
@@ -59,55 +80,19 @@ export class Typeahead extends React.Component {
       utility_buttons,
     } = this.props;
 
+    const { query_value, selected_index } = this.state;
+
+    const derived_menu_state = this.derived_menu_state;
     const {
-      query_value,
-      pagination_index,
-      current_selected_index,
-      may_show_menu,
-    } = this.state;
-
-    const is_query_of_min_length = query_value.length >= min_length;
-
-    const show_menu = is_query_of_min_length && may_show_menu;
-
-    const matching_results = is_query_of_min_length
-      ? this.get_all_matching_results()
-      : [];
-    const total_matching_results = matching_results.length;
-
-    const results_on_page = this.get_results_on_page(matching_results);
-
-    const page_range_start = pagination_index * pagination_size + 1;
-    const page_range_end = page_range_start + results_on_page.length - 1;
-
-    const remaining_results =
-      (pagination_index + 1) * pagination_size < total_matching_results
-        ? total_matching_results - (pagination_index + 1) * pagination_size
-        : 0;
-
-    const next_page_size =
-      remaining_results < pagination_size ? remaining_results : pagination_size;
-
-    const needs_pagination_up_control = pagination_index > 0;
-    const needs_pagination_down_control =
-      page_range_end < total_matching_results;
-
-    const status_props = {
-      current_selected_name: results_on_page[current_selected_index]?.name,
-      current_selected_index,
-      pagination_size,
+      results_on_page,
       total_matching_results,
       page_range_start,
       page_range_end,
-      current_page_size: _.size(results_on_page),
       next_page_size,
       needs_pagination_up_control,
       needs_pagination_down_control,
-    };
-
-    const pagination_down_item_index = needs_pagination_up_control
-      ? results_on_page.length + 1
-      : results_on_page.length;
+      pagination_down_item_index,
+    } = derived_menu_state;
 
     return (
       <div ref={this.typeahead_ref} className="typeahead">
@@ -125,26 +110,22 @@ export class Typeahead extends React.Component {
             autoComplete="off"
             aria-autocomplete="list"
             aria-owns={this.menuId}
-            aria-expanded={show_menu}
+            aria-expanded={this.show_menu}
             aria-label={text_maker("num_chars_needed", { min_length })}
             placeholder={placeholder}
             value={query_value}
             onFocus={this.handle_input_focus}
             onChange={this.handle_input_change}
-            onKeyDown={(e) =>
-              this.handle_key_down(
-                e,
-                show_menu,
-                results_on_page,
-                needs_pagination_up_control,
-                needs_pagination_down_control
-              )
-            }
+            onKeyDown={this.handle_key_down}
           />
           {utility_buttons}
         </div>
-        {show_menu && <TypeaheadA11yStatus {...status_props} />}
-        {show_menu && (
+        {this.show_menu && (
+          <TypeaheadA11yStatus
+            {...{ ...this.props, ...this.state, ...this.derived_menu_state }}
+          />
+        )}
+        {this.show_menu && (
           <ul className="typeahead__dropdown" role="listbox" id={this.menuId}>
             {_.isEmpty(results_on_page) && (
               <li className="typeahead__header">
@@ -157,9 +138,9 @@ export class Typeahead extends React.Component {
                   <li
                     className={classNames(
                       "typeahead__item",
-                      0 === current_selected_index && "typeahead__item--active"
+                      0 === selected_index && "typeahead__item--active"
                     )}
-                    aria-selected={0 === current_selected_index}
+                    aria-selected={0 === selected_index}
                     onClick={(e) => {
                       e.preventDefault();
                       this.setState((prev_state) => ({
@@ -205,10 +186,10 @@ export class Typeahead extends React.Component {
                                 key={`result-${index}`}
                                 className={classNames(
                                   "typeahead__item",
-                                  index === current_selected_index &&
+                                  index === selected_index &&
                                     "typeahead__item--active"
                                 )}
-                                aria-selected={index === current_selected_index}
+                                aria-selected={index === selected_index}
                                 onClick={() =>
                                   this.handle_result_selection(result)
                                 }
@@ -228,16 +209,16 @@ export class Typeahead extends React.Component {
                   <li
                     className={classNames(
                       "typeahead__item",
-                      pagination_down_item_index === current_selected_index &&
+                      pagination_down_item_index === selected_index &&
                         "typeahead__item--active"
                     )}
                     aria-selected={
-                      pagination_down_item_index === current_selected_index
+                      pagination_down_item_index === selected_index
                     }
                     onClick={() => {
                       this.setState((prev_state) => ({
                         pagination_index: prev_state.pagination_index + 1,
-                        current_selected_index: next_page_size + 1,
+                        selected_index: next_page_size + 1,
                       }));
                     }}
                   >
@@ -257,6 +238,13 @@ export class Typeahead extends React.Component {
         )}
       </div>
     );
+  }
+
+  get show_menu() {
+    const { min_length } = this.props;
+    const { may_show_menu, query_value } = this.state;
+
+    return may_show_menu && query_value.length >= min_length;
   }
 
   get active_item() {
@@ -295,29 +283,44 @@ export class Typeahead extends React.Component {
     return this.get_all_options(this.props.search_configs);
   }
 
-  matches_query = (option) => {
-    const { query_value } = this.state;
+  get derived_menu_state() {
+    const { pagination_size } = this.props;
+    const { pagination_index, matching_results_by_page } = this.state;
 
-    const { config_group_index, data } = option;
+    const total_matching_results = _.flatten(matching_results_by_page).length;
 
-    const group_filter = this.config_groups[config_group_index]?.group_filter;
+    const results_on_page = matching_results_by_page[pagination_index] || [];
 
-    return group_filter(query_value, data);
-  };
-  get_all_matching_results = () =>
-    _.filter(this.all_options, this.matches_query);
+    const page_range_start = pagination_index * pagination_size + 1;
+    const page_range_end = page_range_start + results_on_page.length - 1;
 
-  get_results_on_page = (matching_results) =>
-    _.filter(matching_results, (_result, index) => {
-      const { pagination_size } = this.props;
-      const { pagination_index } = this.state;
+    const remaining_results =
+      (pagination_index + 1) * pagination_size < total_matching_results
+        ? total_matching_results - (pagination_index + 1) * pagination_size
+        : 0;
 
-      const page_start = pagination_size * pagination_index;
-      const page_end = page_start + pagination_size;
-      const is_on_displayed_page = !(index < page_start || index >= page_end);
+    const next_page_size =
+      remaining_results < pagination_size ? remaining_results : pagination_size;
 
-      return is_on_displayed_page;
-    });
+    const needs_pagination_up_control = pagination_index > 0;
+    const needs_pagination_down_control =
+      page_range_end < total_matching_results;
+
+    const pagination_down_item_index = needs_pagination_up_control
+      ? results_on_page.length + 1
+      : results_on_page.length;
+
+    return {
+      results_on_page,
+      total_matching_results,
+      page_range_start,
+      page_range_end,
+      next_page_size,
+      needs_pagination_up_control,
+      needs_pagination_down_control,
+      pagination_down_item_index,
+    };
+  }
 
   handle_window_click = (e) => {
     if (!this.typeahead_ref.current.contains(e.target)) {
@@ -327,87 +330,79 @@ export class Typeahead extends React.Component {
 
   handle_input_focus = () => this.setState({ may_show_menu: true });
 
-  debounced_on_query = _.debounce((query) => {
-    this.props.on_query();
+  debounced_on_query = _.debounce((query_value) => {
+    this.props.on_query(query_value);
 
     log_standard_event({
       SUBAPP: window.location.hash.replace("#", ""),
       MISC1: `TYPEAHEAD_SEARCH_QUERY`,
-      MISC2: `query: ${query}, search_configs: ${_.map(
+      MISC2: `query: ${query_value}, search_configs: ${_.map(
         this.props.search_configs,
         "config_name"
       )}`,
     });
-  }, 500);
+  }, 400);
   handle_input_change = (event) => {
-    const trimmed_input_value = _.trimStart(event.target.value); //prevent empty searching that will show all results
+    const trimmed_input_value = _.trimStart(event.target.value);
 
     this.debounced_on_query(trimmed_input_value);
 
     this.setState({
       query_value: trimmed_input_value,
-      pagination_index: 0,
-      current_selected_index: -1,
     });
   };
 
-  handle_up_arrow = (e, show_menu) => {
+  handle_up_arrow = (e) => {
     e.preventDefault();
-    const { current_selected_index } = this.state;
-    if (show_menu && current_selected_index > -1) {
-      this.setState({ current_selected_index: current_selected_index - 1 });
+    const { selected_index } = this.state;
+    if (this.show_menu && selected_index > -1) {
+      this.setState({ selected_index: selected_index - 1 });
     }
   };
-  handle_down_arrow = (
-    e,
-    show_menu,
-    results_on_page,
-    needs_pagination_up_control,
-    needs_pagination_down_control
-  ) => {
+  handle_down_arrow = (e) => {
     e.preventDefault();
-    const { current_selected_index } = this.state;
+    const {
+      selected_index,
+      pagination_index,
+      matching_results_by_page,
+    } = this.state;
+
+    const {
+      needs_pagination_up_control,
+      needs_pagination_down_control,
+    } = this.derived_menu_state;
+
     const num_menu_items =
-      results_on_page.length +
+      matching_results_by_page[pagination_index].length +
       needs_pagination_up_control +
       needs_pagination_down_control;
-    if (show_menu && current_selected_index < num_menu_items - 1) {
-      this.setState({ current_selected_index: current_selected_index + 1 });
+
+    if (this.show_menu && selected_index < num_menu_items - 1) {
+      this.setState({ selected_index: selected_index + 1 });
     }
   };
-  handle_enter_key = (e, show_menu) => {
-    if (show_menu) {
+  handle_enter_key = (e) => {
+    const { selected_index } = this.state;
+    if (this.show_menu) {
       e.preventDefault();
-      const { current_selected_index } = this.state;
-      if (current_selected_index === -1) {
-        this.setState({ current_selected_index: 0 });
+
+      if (selected_index === -1) {
+        this.setState({ selected_index: 0 });
       } else {
         this.active_item?.click();
       }
     }
   };
-  handle_key_down = (
-    e,
-    show_menu,
-    results_on_page,
-    needs_pagination_up_control,
-    needs_pagination_down_control
-  ) => {
+  handle_key_down = (e) => {
     switch (e.keyCode) {
       case 38: //up arrow
-        this.handle_up_arrow(e, show_menu);
+        this.handle_up_arrow(e);
         break;
       case 40: //down arrow
-        this.handle_down_arrow(
-          e,
-          show_menu,
-          results_on_page,
-          needs_pagination_up_control,
-          needs_pagination_down_control
-        );
+        this.handle_down_arrow(e);
         break;
       case 13: //enter key
-        this.handle_enter_key(e, show_menu);
+        this.handle_enter_key(e);
         break;
     }
   };
@@ -427,7 +422,7 @@ export class Typeahead extends React.Component {
       this.setState({
         query_value: "",
         pagination_index: 0,
-        current_selected_index: -1,
+        selected_index: -1,
       });
       if (_.isFunction(on_select)) {
         on_select(selected.data);
