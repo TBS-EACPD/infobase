@@ -41,7 +41,7 @@ export class Typeahead extends React.Component {
     this.debounced_on_query.cancel();
   }
   componentDidUpdate(prevProps, prevState) {
-    const { search_configs, pagination_size } = this.props;
+    const { search_configs, page_size } = this.props;
     const { search_configs: prev_search_configs } = prevProps;
     const { query_value } = this.state;
     const { query_value: prev_query_value } = prevState;
@@ -61,7 +61,7 @@ export class Typeahead extends React.Component {
 
               return group_filter(query_value, data);
             })
-            .chunk(pagination_size)
+            .chunk(page_size)
             .value();
 
       this.setState({
@@ -88,12 +88,7 @@ export class Typeahead extends React.Component {
     }
   }
   render() {
-    const {
-      placeholder,
-      min_length,
-      pagination_size,
-      utility_buttons,
-    } = this.props;
+    const { placeholder, min_length, page_size, utility_buttons } = this.props;
 
     const { query_value, selection_cursor } = this.state;
 
@@ -106,7 +101,7 @@ export class Typeahead extends React.Component {
       next_page_size,
       needs_pagination_up_control,
       needs_pagination_down_control,
-      pagination_down_item_index,
+      total_menu_items,
     } = derived_menu_state;
 
     return (
@@ -173,7 +168,7 @@ export class Typeahead extends React.Component {
                       <br />
                       <TM
                         k="paginate_previous"
-                        args={{ page_size: pagination_size }}
+                        args={{ page_size: page_size }}
                       />
                     </a>
                   </li>
@@ -219,12 +214,10 @@ export class Typeahead extends React.Component {
                   <li
                     className={classNames(
                       "typeahead__item",
-                      pagination_down_item_index === selection_cursor &&
+                      total_menu_items - 1 === selection_cursor &&
                         "typeahead__item--active"
                     )}
-                    aria-selected={
-                      pagination_down_item_index === selection_cursor
-                    }
+                    aria-selected={total_menu_items - 1 === selection_cursor}
                     onClick={this.handle_paginate_down}
                   >
                     <a className="typeahead__control">
@@ -289,36 +282,37 @@ export class Typeahead extends React.Component {
   }
 
   get derived_menu_state() {
-    const { pagination_size } = this.props;
+    const { page_size } = this.props;
     const { pagination_cursor, matching_results_by_page } = this.state;
 
     const total_matching_results = _.flatten(matching_results_by_page).length;
 
     const results_on_page = matching_results_by_page[pagination_cursor] || [];
 
-    const page_range_start = pagination_cursor * pagination_size + 1;
+    const page_range_start = pagination_cursor * page_size + 1;
     const page_range_end = page_range_start + results_on_page.length - 1;
 
     const remaining_results =
-      (pagination_cursor + 1) * pagination_size < total_matching_results
-        ? total_matching_results - (pagination_cursor + 1) * pagination_size
+      (pagination_cursor + 1) * page_size < total_matching_results
+        ? total_matching_results - (pagination_cursor + 1) * page_size
         : 0;
 
     const next_page_size =
-      remaining_results < pagination_size ? remaining_results : pagination_size;
+      remaining_results < page_size ? remaining_results : page_size;
 
     const needs_pagination_up_control = pagination_cursor > 0;
     const needs_pagination_down_control =
       page_range_end < total_matching_results;
 
-    const pagination_down_item_index = needs_pagination_up_control
-      ? results_on_page.length + 1
-      : results_on_page.length;
-
-    const total_menu_items =
-      results_on_page.length +
-      needs_pagination_up_control +
-      needs_pagination_down_control;
+    const total_menu_items = (() => {
+      if (needs_pagination_up_control && needs_pagination_down_control) {
+        return results_on_page.length + 2;
+      } else if (needs_pagination_up_control || needs_pagination_down_control) {
+        return results_on_page.length + 1;
+      } else {
+        return results_on_page.length;
+      }
+    })();
 
     return {
       results_on_page,
@@ -328,7 +322,6 @@ export class Typeahead extends React.Component {
       next_page_size,
       needs_pagination_up_control,
       needs_pagination_down_control,
-      pagination_down_item_index,
       total_menu_items,
     };
   }
@@ -473,7 +466,7 @@ export class Typeahead extends React.Component {
 Typeahead.defaultProps = {
   placeholder: text_maker("org_search"),
   min_length: 3,
-  pagination_size: 30,
+  page_size: 30,
   on_query: _.noop,
   on_select: _.noop,
 };

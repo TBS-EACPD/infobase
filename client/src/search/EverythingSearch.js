@@ -175,7 +175,7 @@ const EverythingSearch = withRouter(
       const {
         placeholder,
         hide_utility_buttons,
-        pagination_size,
+        page_size,
         on_query,
       } = this.props;
 
@@ -271,7 +271,7 @@ const EverythingSearch = withRouter(
                   />,
                 ]
               }
-              pagination_size={pagination_size}
+              page_size={page_size}
               on_query={on_query}
               on_select={this.onSelect}
             />
@@ -285,7 +285,7 @@ EverythingSearch.defaultProps = {
   placeholder: text_maker("everything_search_placeholder"),
   href_template: (item) => smart_href_template(item, "/"),
   hide_utility_buttons: false,
-  pagination_size: 30,
+  page_size: 30,
 
   reject_gov: false,
   reject_dead_orgs: true,
