@@ -149,6 +149,16 @@ export class Typeahead extends React.Component {
             )}
             {!_.isEmpty(results_on_page) && (
               <Fragment>
+                <li className="typeahead__header">
+                  <TM
+                    k="paginate_status"
+                    args={{
+                      page_range_start,
+                      page_range_end,
+                      total_matching_results,
+                    }}
+                  />
+                </li>
                 {needs_pagination_up_control && (
                   <li
                     className={classNames(
@@ -168,16 +178,6 @@ export class Typeahead extends React.Component {
                     </a>
                   </li>
                 )}
-                <li className="typeahead__header">
-                  <TM
-                    k="paginate_status"
-                    args={{
-                      page_range_start,
-                      page_range_end,
-                      total_matching_results,
-                    }}
-                  />
-                </li>
                 {_.chain(results_on_page)
                   .groupBy("config_group_index")
                   .thru((grouped_results) => {
@@ -468,6 +468,7 @@ export class Typeahead extends React.Component {
 Typeahead.defaultProps = {
   placeholder: text_maker("org_search"),
   min_length: 3,
+  pagination_size: 30,
   on_query: _.noop,
   on_select: _.noop,
 };
