@@ -7,13 +7,13 @@ import text from "./Typeahead.yaml";
 const text_maker = create_text_maker(text);
 
 export const TypeaheadA11yStatus = ({
-  current_selected_name,
-  current_selected_index,
+  selected_index,
   pagination_size,
+
+  results_on_page,
   total_matching_results,
   page_range_start,
   page_range_end,
-  current_page_size,
   next_page_size,
   needs_pagination_up_control,
   needs_pagination_down_control,
@@ -24,15 +24,15 @@ export const TypeaheadA11yStatus = ({
         if (total_matching_results === 0) {
           return text_maker("no_matches_found");
         } else {
-          if (current_selected_index >= 0) {
-            if (needs_pagination_up_control && current_selected_index == 0) {
+          if (selected_index >= 0) {
+            if (needs_pagination_up_control && selected_index == 0) {
               return text_maker("paginate_previous", {
                 page_size: pagination_size,
               });
             } else if (needs_pagination_down_control) {
               if (
-                current_selected_index ===
-                current_page_size + needs_pagination_up_control
+                selected_index ===
+                results_on_page.length + needs_pagination_up_control
               ) {
                 return text_maker("paginate_next", { next_page_size });
               }
@@ -40,11 +40,9 @@ export const TypeaheadA11yStatus = ({
 
             return text_maker("selected_result_and_current_page_size", {
               total_matching_results,
-              current_selected_name,
+              selected_name: results_on_page[selected_index]?.name,
               current_selected_number:
-                current_selected_index -
-                needs_pagination_up_control +
-                page_range_start,
+                selected_index - needs_pagination_up_control + page_range_start,
               page_range_start,
               page_range_end,
             });
