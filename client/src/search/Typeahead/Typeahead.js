@@ -116,11 +116,10 @@ export class Typeahead extends React.Component {
             </span>
           </div>
           <input
-            role="combobox"
             autoComplete="off"
-            aria-autocomplete="list"
+            role="combobox"
+            aria-autocomplete="none"
             aria-owns={this.menuId}
-            aria-expanded={this.show_menu}
             aria-label={text_maker("num_chars_needed", { min_length })}
             placeholder={placeholder}
             value={query_value}
@@ -136,7 +135,12 @@ export class Typeahead extends React.Component {
           />
         )}
         {this.show_menu && (
-          <ul className="typeahead__dropdown" role="listbox" id={this.menuId}>
+          <ul
+            className="typeahead__dropdown"
+            role="listbox"
+            id={this.menuId}
+            aria-expanded={this.show_menu}
+          >
             {_.isEmpty(results_on_page) && (
               <li className="typeahead__header">
                 {text_maker("no_matches_found")}
