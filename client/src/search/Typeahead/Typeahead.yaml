@@ -45,7 +45,7 @@ total_and_current_page_size:
 selected_result_and_current_page_size:
   transform: [handlebars]
   en: |
-    {{selected_name}}. {{selected_position}} of {{total_matching_results}} results.
+    {{selected_name}} ({{selected_position}} of {{total_matching_results}})
     Use the enter key to make a selection. Continue typing to change your search.
   fr: |
     TODO
