@@ -130,7 +130,7 @@ export default class PanelFilterControl extends React.Component {
     this.props.set_panel_filter(this.panel_filter_factory());
   }
   render() {
-    const { panel_keys, subject } = this.props;
+    const { panel_keys, subject, is_included_filter } = this.props;
     const { table_tags, footnote_tags } = this.state;
 
     const panel_filter = this.panel_filter_factory();
@@ -198,8 +198,12 @@ export default class PanelFilterControl extends React.Component {
         persist_content={true}
         content={
           <div>
-            <PanelFilterControlTag {...tag_props.datasets} />
-            <PanelFilterControlTag {...tag_props.footnotes} />
+            {is_included_filter.datasets && (
+              <PanelFilterControlTag {...tag_props.datasets} />
+            )}
+            {is_included_filter.footnotes && (
+              <PanelFilterControlTag {...tag_props.footnotes} />
+            )}
           </div>
         }
       />
@@ -242,3 +246,9 @@ export default class PanelFilterControl extends React.Component {
       });
   };
 }
+PanelFilterControl.defaultProps = {
+  is_included_filter: {
+    datasets: true,
+    footnotes: true,
+  },
+};
