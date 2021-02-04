@@ -31,7 +31,7 @@ covid_expenditures_summary_text_dept:
 covid_expenditures_department_tab_text:
   transform: [handlebars,markdown]
   en: |
-    As of **{{last_refreshed_date}}**, the department with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_dept_name}}**, with **{{fmt_compact1_written largest_dept_exp}}** spent of their available **{{fmt_compact1_written largest_dept_funding}}** funding.
+    As of **{{last_refreshed_date}}**, the organization with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_dept_name}}**, with **{{fmt_compact1_written largest_dept_exp}}** spent of their available **{{fmt_compact1_written largest_dept_funding}}** funding.
   fr: |
     TODO
 

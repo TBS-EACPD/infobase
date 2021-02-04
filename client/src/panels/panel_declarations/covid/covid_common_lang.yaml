@@ -2,8 +2,8 @@ summary_tab_label:
   en: Overview
   fr: Apperçu
 by_department_tab_label:
-  en: By Department
-  fr: Par Ministère
+  en: By Organization
+  fr: Par organisation
 by_measure_tab_label:
   en: By COVID-19 Measure
   fr: Par mesure COVID-19

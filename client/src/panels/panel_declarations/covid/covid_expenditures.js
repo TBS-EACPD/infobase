@@ -195,7 +195,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
     const column_configs = {
       org_id: {
         index: 0,
-        header: text_maker("department"),
+        header: text_maker("org"),
         is_searchable: true,
         formatter: (org_id) => {
           const org = Dept.lookup(org_id);
