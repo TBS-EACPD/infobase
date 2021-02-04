@@ -123,7 +123,7 @@ export const TypeaheadA11yStatus = ({
   })();
 
   return (
-    <div className="sr-only" style={{ position: "absolute" }}>
+    <div className="sr-only">
       <div role="status" aria-atomic="true" aria-live="polite">
         {status_content}
       </div>

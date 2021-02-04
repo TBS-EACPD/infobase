@@ -274,6 +274,9 @@ const EverythingSearch = withRouter(
               page_size={page_size}
               on_query={on_query}
               on_select={this.onSelect}
+              additional_a11y_description={text_maker(
+                "everything_search_additional_a11y_description"
+              )}
             />
           </div>
         </div>
