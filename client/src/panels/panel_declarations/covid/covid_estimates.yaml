@@ -58,8 +58,8 @@ covid_estimates_doc:
   fr: Instrument des dépenses
 
 vote_or_stat:
-  en: Vote/Stat
-  fr: TODO
+  en: Authority Type
+  fr: Type d'autorisation
 covid_estimates_stat:
   en: Statutory Authorities
   fr: Autorisations législatives
