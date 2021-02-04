@@ -88,7 +88,10 @@ export const TypeaheadA11yStatus = ({
         return text_maker("paginate_next", { next_page_size });
       }
 
-      const selected_name = results_on_page[selection_cursor].name;
+      const selected_name =
+        results_on_page[
+          needs_pagination_up_control ? selection_cursor - 1 : selection_cursor
+        ].name;
 
       const selected_position = (() => {
         const base_position = page_range_start + selection_cursor;
