@@ -23,7 +23,7 @@ function choose(name) {
 }
 
 const prod = !!choose("PROD");
-const babel = !choose("NO-BABEL");
+const target_ie11 = !!choose("TARGET-IE11");
 const en = !!choose("EN");
 const fr = !!choose("FR");
 const no_watch = !!choose("NO-WATCH");
@@ -36,10 +36,13 @@ const main_client = choose("main_client");
 
 const app = a11y_client || main_client;
 
+const common_output_options = {
+  path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
+};
 const options_by_app = {
   a11y_client: {
     get_output: (language) => ({
-      path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
+      ...common_output_options,
       filename: `app-a11y-${language}.min.js`,
       chunkFilename: `[name].app-ally-${language}${
         prod ? ".[contenthash]" : ""
@@ -48,7 +51,7 @@ const options_by_app = {
   },
   main_client: {
     get_output: (language) => ({
-      path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
+      ...common_output_options,
       filename: `app-${language}.min.js`,
       chunkFilename: `[name].app-${language}${
         prod ? ".[contenthash]" : ""
@@ -65,7 +68,7 @@ const langs = _.chain([en && "en", fr && "fr"])
 console.log(`
   app: ${app},
   prod: ${prod}, 
-  babel: ${babel},
+  target: ${target_ie11 ? "IE11" : "Modern browsers"},
   languages: ${langs},
 `);
 
@@ -88,7 +91,7 @@ gitsha(function (err, commit_sha) {
       is_prod_build: prod,
       local_ip: ip.address(),
       is_ci,
-      should_use_babel: babel,
+      target_ie11,
       // bundle stats only output for standard english build, for comparison consistency
       produce_stats: bundle_stats && lang === "en" && !a11y_client,
       stats_baseline,
@@ -98,7 +101,7 @@ gitsha(function (err, commit_sha) {
 
   if (no_watch) {
     webpack(config, function (err, stats) {
-      console.log(stats.toString({ cached: true, modules: true }));
+      console.log(stats && stats.toString({ cached: true, modules: true }));
       if (err || stats.hasErrors()) {
         console.log(err);
         process.exitCode = 1;

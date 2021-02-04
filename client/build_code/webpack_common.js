@@ -12,7 +12,7 @@ const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
 const IS_PROD_RELEASE = process.env.IS_PROD_RELEASE || false;
 const PREVIOUS_DEPLOY_SHA = process.env.PREVIOUS_DEPLOY_SHA || false;
 
-const get_rules = ({ should_use_babel, language, is_prod_build }) => {
+const get_rules = ({ target_ie11, language, is_prod_build }) => {
   const js_module_loader_rules = [
     {
       loader: "babel-loader",
@@ -34,9 +34,7 @@ const get_rules = ({ should_use_babel, language, is_prod_build }) => {
             {
               useBuiltIns: false,
               modules: false,
-              targets: should_use_babel
-                ? ["Safari 7", "ie 11"]
-                : ["last 2 Chrome versions"],
+              targets: target_ie11 ? "IE 11" : "last 2 Chrome versions",
               forceAllTransforms: is_prod_build, // need to forceAllTransforms when uglifying
             },
           ],
@@ -82,16 +80,17 @@ const get_rules = ({ should_use_babel, language, is_prod_build }) => {
     {
       test: /\.scss$/,
       use: [
-        { loader: "style-loader" }, // creates style nodes from JS strings },
+        { loader: "style-loader" }, // creates style nodes from JS strings
         { loader: "css-loader" }, // translates CSS into CommonJS
         {
+          // compiles Sass to CSS
           loader: "sass-loader",
           options: {
             sassOptions: {
               fiber: false,
             },
           },
-        }, // compiles Sass to CSS
+        },
       ],
       sideEffects: true,
     },
@@ -224,7 +223,7 @@ function create_config({
   is_prod_build,
   local_ip,
   is_ci,
-  should_use_babel,
+  target_ie11,
   produce_stats,
   stats_baseline,
   stats_no_compare,
@@ -238,12 +237,13 @@ function create_config({
   return {
     name: language,
     mode: is_prod_build ? "production" : "development",
+    target: _.compact(["web", target_ie11 && "es5"]),
     context,
     target,
     entry,
     output: new_output,
     module: {
-      rules: get_rules({ should_use_babel, language, is_prod_build }),
+      rules: get_rules({ target_ie11, language, is_prod_build }),
       noParse: /\.csv$/,
     },
     plugins: get_plugins({
