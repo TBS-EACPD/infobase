@@ -81,7 +81,6 @@ gitsha(function (err, commit_sha) {
 
   const config = langs.map((lang) =>
     create_config({
-      target: ["web", "es5"],
       context: path.resolve(__dirname, `..`),
       entry: ["@babel/polyfill", "./src/InfoBase/root.js"],
       output: app_options.get_output(lang),
