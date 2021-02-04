@@ -3,10 +3,15 @@ import React from "react";
 
 import { is_mobile } from "src/core/feature_detection.js";
 
+import {
+  IconMoney,
+  IconEmployee,
+  IconTree,
+  IconClipboard,
+} from "src/icons/icons";
 
 import { infograph_href_template, rpb_link } from "../../../../link_utils.js";
 import { ResultCounts, current_drr_key } from "../../../../models/results.js";
-import { get_static_url } from "../../../../request_utils.js";
 import {
   Subject,
   declare_panel,
@@ -134,18 +139,11 @@ export const declare_simplographic_panel = () =>
                 className="lg-grid-panel20"
                 style={{ flexDirection: "column", justifyContent: "center" }}
               >
-                <div className="inner-grid">
-                  <img
-                    role="presentation"
-                    aria-hidden={true}
-                    src={get_static_url(`svg/${props.img_src}`)}
-                    width="150"
-                    height="150"
-                    style={{
-                      alignSelf: "center",
-                      maxWidth: "100%",
-                    }}
-                  />
+                <div
+                  className="inner-grid"
+                  style={{ display: "flex", alignItems: "center" }}
+                >
+                  {props.svg}
                 </div>
               </div>
               <section
@@ -171,22 +169,22 @@ export const declare_simplographic_panel = () =>
             <div className="medium-panel-text">
               <Row
                 top_border
-                img_src="money.svg"
+                svg={<IconMoney width="15rem" />}
                 title_key="simplographic_spending_title"
                 text_key="simplographic_spending_text"
               />
               <Row
-                img_src="employees.svg"
+                svg={<IconEmployee width="15rem" />}
                 title_key="simplographic_people_title"
                 text_key="simplographic_people_text"
               />
               <Row
-                img_src="graph.svg"
+                svg={<IconTree width="15rem" />}
                 title_key="simplographic_struct_title"
                 text_key="simplographic_struct_text"
               />
               <Row
-                img_src="check.svg"
+                svg={<IconClipboard width="15rem" color="#2C70C9" />}
                 title_key="simplographic_results_title"
                 text_key="simplographic_results_text"
               />
