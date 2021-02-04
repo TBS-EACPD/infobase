@@ -141,7 +141,7 @@ function people_five_year_percentage_formula(
     var cats;
     var mono_cat;
     var all_cat_lines;
-    var sum;
+    var row_sum;
     // row can be one row or an array of rows
     if (row.length === table.data.length) {
       // scenario 1
@@ -168,10 +168,10 @@ function people_five_year_percentage_formula(
             total_totals[i] = total_totals[i] + d[year] || d[year];
           }
         });
-        sum = sum(row, function (d) {
+        row_sum = sum(row, function (d) {
           return d[year];
         });
-        cat_totals[i] = cat_totals[i] + sum || sum;
+        cat_totals[i] = cat_totals[i] + row_sum || row_sum;
       });
       // now divide the category totals by the total totals
       // and produce the average
