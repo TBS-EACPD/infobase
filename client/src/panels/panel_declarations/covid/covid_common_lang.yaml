@@ -15,5 +15,6 @@ covid_above_tab_footnote_title:
     Important:
 
 show_vote_stat_split:
-  en: Show voted and statutory amount breakout
+  transform: [handlebars]
+  en: Show {{gl_tt "voted" "VOTED"}} and {{gl_tt "statutory" "STAT"}} amount breakout
   fr: TODO

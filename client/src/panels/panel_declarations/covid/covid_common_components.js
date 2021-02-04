@@ -6,7 +6,7 @@ import { create_text_maker_component } from "../shared.js";
 
 import common_covid_text from "./covid_common_lang.yaml";
 
-const { text_maker, TM } = create_text_maker_component(common_covid_text);
+const { TM } = create_text_maker_component(common_covid_text);
 
 const AboveTabFootnoteList = ({ children }) => (
   <Fragment>
@@ -32,7 +32,7 @@ class ToggleVoteStatProvider extends React.Component {
       <CheckBox
         active={show_vote_stat}
         onClick={this.toggle_show_vote_stat}
-        label={text_maker("show_vote_stat_split")}
+        label={<TM k="show_vote_stat_split" />}
         container_style={{ justifyContent: "flex-end", marginBottom: "-15px" }}
       />
     );
