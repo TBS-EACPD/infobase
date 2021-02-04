@@ -239,16 +239,18 @@ class LapseByVotesGraph extends React.Component {
 
     this.state = {
       is_showing_lapse_pct: false,
-      active_votes: this.get_active_votes(
-        ({ votestattype }) =>
-          props.subject.level === "gov" ||
-          _.includes([1, 2, 3, 5], votestattype)
+      active_votes: this.get_active_votes(({ votestattype }) =>
+        //(props.subject.level === "gov") || //TODO
+        _.includes([1, 2, 3, 5], votestattype)
       ),
     };
   }
   get_active_votes = (func) =>
     _.chain(this.props.queried_votes)
-      .map((vote_row) => [vote_row.desc, func(vote_row)])
+      .map((vote_row) => {
+        console.log(vote_row);
+        return [vote_row.desc, func(vote_row)];
+      })
       .fromPairs()
       .value();
 
@@ -345,7 +347,7 @@ class LapseByVotesGraph extends React.Component {
           />
         </div>
 
-        {!subject.is("gov") && (
+        {true /* TODO */ && (
           <div className="fcol-md-3">
             <StandardLegend
               items={_.map(queried_votes, ({ desc }) => ({
@@ -380,7 +382,7 @@ class LapseByVotesGraph extends React.Component {
             />
           </div>
         )}
-        <div className={`fcol-md-${subject.is("gov") ? 12 : 9}`}>
+        <div className={`fcol-md-${subject.is("gov") ? 9 : 9}` /* TODO */}>
           <WrappedNivoLine
             data={_.chain(filtered_votes)
               .map((vote_row) => ({
@@ -682,7 +684,7 @@ const calculate = function (subject, options) {
     gov_queried_subject.data,
     ({ votenum }) => votenum === "S"
   );
-  const gov_aggregated_votes = _.reduce(
+  /*const gov_aggregated_votes = _.reduce(
     gov_stat_filtered_votes,
     (result, vote_row) => ({
       ..._.chain(flat_auth_exp_years)
@@ -694,14 +696,40 @@ const calculate = function (subject, options) {
       .map((yr) => [yr, 0])
       .fromPairs()
       .value()
-  );
-  const queried_votes = subject.is("gov")
-    ? [
-        {
-          desc: text_maker("aggregated_lapse_by_votes"),
-          ...gov_aggregated_votes,
+  );*/
+  const gov_aggregated_votes = _.chain(gov_stat_filtered_votes)
+    .reduce(
+      (result, vote_row) => ({
+        ...result,
+        [vote_row.votestattype]: {
+          ...result[vote_row.votestattype],
+          ..._.chain(flat_auth_exp_years)
+            .map((yr) => [yr, result[vote_row.votestattype][yr] + vote_row[yr]])
+            .fromPairs()
+            .value(),
         },
-      ]
+      }),
+      _.chain(gov_stat_filtered_votes)
+        .map(({ desc, votestattype }) => [
+          votestattype,
+          {
+            desc: _.split(desc, "-")[0], //TODO
+            ..._.chain(flat_auth_exp_years)
+              .map((yr) => [yr, 0])
+              .fromPairs()
+              .value(),
+          },
+        ])
+        .fromPairs()
+        .value()
+    )
+    .map((aggregated_sum, votestattype) => ({
+      votestattype: _.toInteger(votestattype),
+      ...aggregated_sum,
+    }))
+    .value();
+  const queried_votes = subject.is("gov")
+    ? gov_aggregated_votes
     : _.reject(queried_subject.data, ({ votenum }) => votenum === "S");
 
   const gov_avg_lapsed_by_votes_pct = _.chain(std_years)
