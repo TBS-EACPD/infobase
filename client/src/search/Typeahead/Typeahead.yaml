@@ -27,25 +27,23 @@ close_menu:
   en: Close menu
   fr: Fermer le menu
 
-num_chars_needed:
+typeahead_usage:
   transform: [handlebars]
   en: |
-    Type in {{min_length}} characters or more for results
+    Type in {{min_length}} or more characters for results. Use the up and down arrow keys to navigate the results and the enter key to make a selection.
   fr: |
     TODO
 
-total_and_current_page_size:
-  transform: [handlebars]
-  en: |
-    {{total_matching_results}} matches. Showing results {{page_range_start}} to {{page_range_end}} of {{total_matching_results}}.
-    Use the up and down arrow keys to navigate the results and the enter key to make a selection. Continue typing to change your search.
-  fr: |
-    TODO
-
-selected_result_and_current_page_size:
+selected_result:
   transform: [handlebars]
   en: |
     {{selected_name}} ({{selected_position}} of {{total_matching_results}})
-    Use the enter key to make a selection. Continue typing to change your search.
+  fr: |
+    TODO
+
+menu_with_results_status:
+  transform: [handlebars]
+  en: |
+    {{total_matching_results}} matches. Showing results {{page_range_start}} to {{page_range_end}} of {{total_matching_results}}.
   fr: |
     TODO

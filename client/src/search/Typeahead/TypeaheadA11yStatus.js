@@ -49,15 +49,13 @@ export const TypeaheadA11yStatus = ({
               }
             })();
 
-            return text_maker("selected_result_and_current_page_size", {
+            return text_maker("selected_result", {
               total_matching_results,
-              page_range_start,
-              page_range_end,
               selected_name,
               selected_position,
             });
           } else {
-            return text_maker("total_and_current_page_size", {
+            return text_maker("menu_with_results_status", {
               total_matching_results,
               page_range_start,
               page_range_end,

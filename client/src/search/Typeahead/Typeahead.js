@@ -23,7 +23,7 @@ export class Typeahead extends React.Component {
 
     this.typeahead_ref = React.createRef();
 
-    this.menuId = _.uniqueId("typeahead-");
+    this.menu_id = _.uniqueId("typeahead-");
 
     this.state = {
       query_value: "",
@@ -116,18 +116,21 @@ export class Typeahead extends React.Component {
             </span>
           </div>
           <input
-            autoComplete="off"
-            role="combobox"
-            aria-autocomplete="none"
-            aria-owns={this.menuId}
-            aria-label={text_maker("num_chars_needed", { min_length })}
             placeholder={placeholder}
+            autoComplete="off"
             value={query_value}
             onFocus={this.handle_input_focus}
             onChange={this.handle_input_change}
             onKeyDown={this.handle_key_down}
+            role="combobox"
+            aria-autocomplete="none"
+            aria-owns={this.menu_id}
+            aria-describedby={`${this.menu_id}-hint`}
           />
           {utility_buttons}
+        </div>
+        <div id={`${this.menu_id}-hint`} className="sr-only" tabIndex={-1}>
+          {text_maker("typeahead_usage", { min_length })}
         </div>
         {this.show_menu && (
           <TypeaheadA11yStatus
@@ -138,7 +141,7 @@ export class Typeahead extends React.Component {
           <ul
             className="typeahead__dropdown"
             role="listbox"
-            id={this.menuId}
+            id={this.menu_id}
             aria-expanded={this.show_menu}
           >
             {_.isEmpty(results_on_page) && (
@@ -164,8 +167,8 @@ export class Typeahead extends React.Component {
                       "typeahead__item",
                       0 === selection_cursor && "typeahead__item--active"
                     )}
-                    aria-selected={0 === selection_cursor}
                     onClick={this.handle_paginate_up}
+                    role="button"
                   >
                     <a className="typeahead__control">
                       <span className="aria-hidden">▲</span>
@@ -198,10 +201,11 @@ export class Typeahead extends React.Component {
                                   index === selection_cursor &&
                                     "typeahead__item--active"
                                 )}
-                                aria-selected={index === selection_cursor}
                                 onClick={() =>
                                   this.handle_result_selection(result)
                                 }
+                                role="option"
+                                aria-selected={index === selection_cursor}
                               >
                                 <a className="typeahead__result">
                                   {result.menu_content(query_value)}
@@ -221,8 +225,8 @@ export class Typeahead extends React.Component {
                       total_menu_items - 1 === selection_cursor &&
                         "typeahead__item--active"
                     )}
-                    aria-selected={total_menu_items - 1 === selection_cursor}
                     onClick={this.handle_paginate_down}
+                    role="button"
                   >
                     <a className="typeahead__control">
                       <TM
