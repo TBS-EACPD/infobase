@@ -940,6 +940,469 @@ const IconGear = (props) => {
   );
 };
 
+const IconPartitionIcon = (props) => {
+  const SVGPartitionIcon = () => (
+    <Fragment>
+      <path
+        id="path4491"
+        className="icon-partition-1"
+        d="M111.1644,216.8344V76.6461L4,7V150.517l104.2484,67.5977,2.916-1.28"
+      />
+      <rect
+        className="icon-partition-2"
+        x="111.1644"
+        y="77.1582"
+        width="117.3706"
+        height="141.0845"
+      />
+      <polygon
+        className="icon-partition-3"
+        points="327.602 208.947 232.44 176.333 231.607 77.158 328.008 109.656 327.602 208.947"
+      />
+      <polygon
+        className="icon-partition-3"
+        points="326.274 267.533 231.607 218.243 231.607 180.686 326.274 229.976 326.274 267.533"
+      />
+      <polygon
+        className="icon-partition-2"
+        points="330.968 110.424 447 110.424 446.595 209.075 330.563 209.075 330.968 110.424"
+      />
+      <rect
+        className="icon-partition-2"
+        x="328.4131"
+        y="229.8479"
+        width="118.1815"
+        height="37.5568"
+      />
+      <path
+        id="path4491-2"
+        data-name="path4491"
+        className="icon-partition-1"
+        d="M111.5588,330.9921V242.1258L4,157.65v90.9764l104.6427,83.1774,2.9161-.8116"
+      />
+      <rect
+        className="icon-partition-2"
+        x="111.5588"
+        y="242.4504"
+        width="117.3706"
+        height="89.4344"
+      />
+      <polygon
+        className="icon-partition-3"
+        points="327.208 341.887 232.44 300.948 232.002 242.45 327.602 287.691 327.208 341.887"
+      />
+      <polygon
+        className="icon-partition-3"
+        points="327.627 391 232.002 331.885 231.607 303.707 327.233 362.822 327.627 391"
+      />
+      <polygon
+        className="icon-partition-2"
+        points="330.563 288.178 446.595 288.178 446.2 341.968 330.168 341.968 330.563 288.178"
+      />
+      <polygon
+        className="icon-partition-2"
+        points="330.278 362.741 446.285 362.741 446.509 390.924 330.503 390.924 330.278 362.741"
+      />
+    </Fragment>
+  );
+
+  return (
+    <_IconWrapper
+      {...props}
+      viewbox_width={450}
+      viewbox_height={395}
+      ChildSVG={SVGPartitionIcon}
+    />
+  );
+};
+
+const IconCompareEstimates = (props) => {
+  const SVGCompareEstimates = () => (
+    <Fragment>
+      <path
+        d="M75.9462,510.5352H524.0538A37.1365,37.1365,0,0,1,561.19,547.6718V561.19a0,0,0,0,1,0,0H38.81a0,0,0,0,1,0,0V547.6718A37.1365,37.1365,0,0,1,75.9462,510.5352Z"
+        fill="#2C70C9"
+      />
+      <rect
+        x="286.8086"
+        y="38.8097"
+        width="26.3829"
+        height="468.5596"
+        rx="7.4442"
+        ry="7.4442"
+        fill="#2C70C9"
+      />
+      <path
+        d="M268.5881,81.4007c-18.9979-1.527-31.9656,4.2623-40.4607,10.1152-9.3347,6.4313-11.647,11.8217-30.86,33.5638-15.86,17.9473-23.7893,26.9209-32.2314,33.5638-10.5857,8.33-27.6369,17.8848-53.4905,18.3911"
+        fill="none"
+        stroke="#2C70C9"
+        strokeLinecap="round"
+        strokeMiterlimit="10"
+        strokeWidth="20"
+      />
+      <g>
+        <line
+          x1="112.0983"
+          y1="202.6913"
+          x2="46.2155"
+          y2="328.3843"
+          fill="none"
+          stroke="#2C70C9"
+          strokeLinecap="round"
+          strokeMiterlimit="10"
+          strokeWidth="18"
+        />
+        <line
+          x1="177.5793"
+          y1="328.3843"
+          x2="112.0983"
+          y2="202.6913"
+          fill="none"
+          stroke="#2C70C9"
+          strokeLinecap="round"
+          strokeMiterlimit="10"
+          strokeWidth="18"
+        />
+      </g>
+      <path
+        d="M331.4119,81.4007c18.9979-1.527,31.9656,4.2623,40.4607,10.1152,9.3347,6.4313,11.647,11.8217,30.86,33.5638,15.8595,17.9473,23.7893,26.9209,32.2314,33.5638,10.5857,8.33,27.6369,17.8848,53.4905,18.3911"
+        fill="none"
+        stroke="#2C70C9"
+        strokeLinecap="round"
+        strokeMiterlimit="10"
+        strokeWidth="20"
+      />
+      <g>
+        <line
+          x1="487.9017"
+          y1="202.6913"
+          x2="553.7845"
+          y2="328.3843"
+          fill="none"
+          stroke="#2C70C9"
+          strokeLinecap="round"
+          strokeMiterlimit="10"
+          strokeWidth="18"
+        />
+        <line
+          x1="422.4207"
+          y1="328.3843"
+          x2="487.9017"
+          y2="202.6913"
+          fill="none"
+          stroke="#2C70C9"
+          strokeLinecap="round"
+          strokeMiterlimit="10"
+          strokeWidth="18"
+        />
+      </g>
+      <path
+        d="M25.6255,344.83c0,53.6208,38.6252,97.089,86.272,97.089s86.2719-43.4682,86.2719-97.089Zm123.8662,52.9349H73.6v-8.7809h75.8921Z"
+        fill="#2C70C9"
+      />
+      <path
+        d="M401.8306,344.83c0,53.6208,38.6253,97.089,86.2719,97.089s86.272-43.4682,86.272-97.089Zm124.6325,52.8166H493.1687v34.9151H483.74V397.6462H450.4456v-8.8393H483.74v-34.62h9.4285v34.62h33.2944Z"
+        fill="#2C70C9"
+      />
+    </Fragment>
+  );
+
+  return (
+    <_IconWrapper
+      {...props}
+      viewbox_width={600}
+      ChildSVG={SVGCompareEstimates}
+    />
+  );
+};
+
+const IconStructure = (props) => {
+  const SVGStructure = () => (
+    <Fragment>
+      <rect
+        x="233.69"
+        y="103"
+        width="132.62"
+        height="116"
+        rx="17.75"
+        ry="17.75"
+        fill="none"
+        stroke="#2C70C9"
+        strokeMiterlimit="50"
+        strokeWidth="20"
+      />
+      <rect
+        x="233.69"
+        y="381"
+        width="132.62"
+        height="116"
+        rx="17.75"
+        ry="17.75"
+        fill="none"
+        stroke="#2C70C9"
+        strokeMiterlimit="50"
+        strokeWidth="20"
+      />
+      <rect
+        x="415.38"
+        y="381"
+        width="132.63"
+        height="116"
+        rx="17.75"
+        ry="17.75"
+        fill="none"
+        stroke="#2C70C9"
+        strokeMiterlimit="50"
+        strokeWidth="20"
+      />
+      <rect
+        x="52"
+        y="381"
+        width="132.63"
+        height="116"
+        rx="17.75"
+        ry="17.75"
+        fill="none"
+        stroke="#2C70C9"
+        strokeMiterlimit="50"
+        strokeWidth="20"
+      />
+      <line
+        x1="300"
+        y1="228"
+        x2="300"
+        y2="381"
+        fill="none"
+        stroke="#2C70C9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="20"
+      />
+      <line
+        x1="118"
+        y1="292"
+        x2="482"
+        y2="292"
+        fill="none"
+        stroke="#2C70C9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="20"
+      />
+      <line
+        x1="482"
+        y1="292"
+        x2="482"
+        y2="381"
+        fill="none"
+        stroke="#2C70C9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="20"
+      />
+      <line
+        x1="118"
+        y1="377"
+        x2="118"
+        y2="293"
+        fill="none"
+        stroke="#2C70C9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="20"
+      />
+    </Fragment>
+  );
+
+  return (
+    <_IconWrapper {...props} viewbox_width={600} ChildSVG={SVGStructure} />
+  );
+};
+
+const IconTreemap = (props) => {
+  const SVGTreemap = () => (
+    <Fragment>
+      <g>
+        <path
+          className="treemap-1"
+          d="M526.5,76.5V532H69.1V76.5H526.5 M526.5,52.5H69.1c-13.3,0-24,10.7-24,24V532c0,13.3,10.7,24,24,24h457.5
+		c13.3,0,24-10.7,24-24V76.5C550.5,63.2,539.8,52.5,526.5,52.5L526.5,52.5z"
+        />
+      </g>
+      <rect
+        x="332.7"
+        y="100.3"
+        className="treemap-2"
+        width="171.3"
+        height="204.9"
+      />
+      <rect
+        x="91.2"
+        y="100.3"
+        className="treemap-2"
+        width="216"
+        height="409.7"
+      />
+      <rect
+        x="332.7"
+        y="329.8"
+        className="treemap-2"
+        width="171.3"
+        height="107.1"
+      />
+      <rect
+        x="332.7"
+        y="462.7"
+        className="treemap-2"
+        width="83"
+        height="47.3"
+      />
+      <rect
+        x="440.3"
+        y="462.7"
+        className="treemap-2"
+        width="63.7"
+        height="47.3"
+      />
+    </Fragment>
+  );
+
+  return <_IconWrapper {...props} viewbox_width={600} ChildSVG={SVGTreemap} />;
+};
+const IconExplorer = (props) => {
+  const SVGExplorer = () => (
+    <Fragment>
+      <polygon
+        points="81.14 269.12 93.11 286.18 293.87 119.9 81.14 269.12"
+        fill="none"
+      />
+      <path
+        d="M434.47,167h0a12.38,12.38,0,0,0-.08-5.38,13.83,13.83,0,0,0-2.2-4.91,13.37,13.37,0,0,0-8-5.51,11.09,11.09,0,0,0-2.33-.26,9.22,9.22,0,0,0-5.34,1.64,10.15,10.15,0,0,0-4,9,14.14,14.14,0,0,0,8.38,12,10.16,10.16,0,0,0,9.86-.69A9.43,9.43,0,0,0,434.47,167Z"
+        fill="none"
+      />
+      <path
+        d="M205,491a23.67,23.67,0,0,1-5-.54,25,25,0,0,1-15.15-10.14l-113-161.12-25.7,21.28a17.81,17.81,0,0,0-2.35,25L176.38,525.59a17.8,17.8,0,0,0,25,2.35L432.12,336.81l-213.86,150A23.15,23.15,0,0,1,205,491Z"
+        fill="#2C70C9"
+      />
+      <path
+        d="M482.86,109.1,342,70.4a23.33,23.33,0,0,0-23.64,1.78L65.66,249.44a23.33,23.33,0,0,0-9.62,16,24.94,24.94,0,0,0,4.38,17.7l13.37,19.07,113,161.12A25,25,0,0,0,202,473.44a23.67,23.67,0,0,0,5,.54,23.15,23.15,0,0,0,13.28-4.15l213.86-150L473,292.57a23.55,23.55,0,0,0,9.67-22l11.56-145.34A15.5,15.5,0,0,0,482.86,109.1ZM207,448.58,93.11,286.18l-12-17.06L293.87,119.9l33-23.14,4.94-3.47.81.46,136,37.37-9.06,114-2.11,26.62.2,1.05Z"
+        fill="#2C70C9"
+      />
+      <path
+        d="M442.89,121.59c8.28-9.5,19.83-18.53,33.66-25.64,35-18,71.35-16.9,81.26,2.39s-10.41,49.48-45.37,67.45-71.35,16.9-81.26-2.39c-2.84-5.53-3.19-12-1.43-18.75"
+        fill="none"
+        stroke="#2C70C9"
+        strokeMiterlimit="10"
+        strokeWidth="14"
+      />
+      <path
+        d="M420.8,149.47A21.79,21.79,0,1,1,399,171.26a21.81,21.81,0,0,1,21.78-21.79m0-10a31.79,31.79,0,1,0,31.78,31.79,31.78,31.78,0,0,0-31.78-31.79Z"
+        fill="#2C70C9"
+      />
+    </Fragment>
+  );
+
+  return <_IconWrapper {...props} viewbox_width={600} ChildSVG={SVGExplorer} />;
+};
+const IconBuilder = (props) => {
+  const SVGBuilder = () => (
+    <Fragment>
+      <g>
+        <polygon
+          points="454.37 138.13 414.7 95.13 414.91 138.36 454.37 138.13"
+          fill="none"
+        />
+        <path
+          d="M403.7,161.1h-.07a11.35,11.35,0,0,1-11.34-11.28L392,89.1H141.17a1.61,1.61,0,0,0-1.61,1.62V509.28a1.61,1.61,0,0,0,1.61,1.62H458.83a1.61,1.61,0,0,0,1.61-1.62V160.78Z"
+          fill="none"
+        />
+        <path
+          d="M421.55,60.75H141.17a30,30,0,0,0-30,30V509.28a30,30,0,0,0,30,30H458.83a30,30,0,0,0,30-30V133.63Zm32.82,77.38-39.46.23-.21-43.23Zm4.46,372.77H141.17a1.61,1.61,0,0,1-1.61-1.62V90.72a1.61,1.61,0,0,1,1.61-1.62H392l.3,60.72a11.35,11.35,0,0,0,11.34,11.28h.07l56.74-.32v348.5A1.61,1.61,0,0,1,458.83,510.9Z"
+          fill="#2C70C9"
+        />
+      </g>
+      <rect
+        x="180.5"
+        y="239.5"
+        width="230"
+        height="44"
+        rx="12.51"
+        ry="12.51"
+        fill="#2C70C9"
+        stroke="#2C70C9"
+        strokeLinecap="round"
+        strokeMiterlimit="50"
+        strokeWidth="5"
+      />
+      <rect
+        x="180.5"
+        y="302.5"
+        width="182"
+        height="44"
+        rx="11.13"
+        ry="11.13"
+        fill="#2C70C9"
+        stroke="#2C70C9"
+        strokeLinecap="round"
+        strokeMiterlimit="50"
+        strokeWidth="5"
+      />
+      <rect
+        x="180.5"
+        y="365.5"
+        width="141"
+        height="44"
+        rx="9.8"
+        ry="9.8"
+        fill="#2C70C9"
+        stroke="#2C70C9"
+        strokeLinecap="round"
+        strokeMiterlimit="50"
+        strokeWidth="5"
+      />
+      <rect
+        x="180.5"
+        y="428.5"
+        width="201"
+        height="44"
+        rx="11.7"
+        ry="11.7"
+        fill="#2C70C9"
+        stroke="#2C70C9"
+        strokeLinecap="round"
+        strokeMiterlimit="50"
+        strokeWidth="5"
+      />
+    </Fragment>
+  );
+
+  return <_IconWrapper {...props} viewbox_width={600} ChildSVG={SVGBuilder} />;
+};
+const IconLab = (props) => {
+  const SVGLab = () => (
+    <Fragment>
+      <path
+        className="lab-1"
+        d="M169.7,49.7l-1,91.3l0,0l68.6,167.2H34.5l67.6-167.2l0,0V49.7h-1.7c-7.1,0-12.8-5.8-12.8-12.8v-1.6
+		c0-7.1,5.8-12.8,12.8-12.8h71c7.1,0,12.8,5.8,12.8,12.8v1.6c0,7.1-5.8,12.8-12.8,12.8H169.7z"
+      />
+      <line className="lab-2" x1="92.3" y1="165.3" x2="178.8" y2="165.3" />
+      <circle className="lab-2" cx="108.5" cy="234.7" r="8.1" />
+      <circle className="lab-2" cx="145.9" cy="197.3" r="5.1" />
+      <circle className="lab-2" cx="164.2" cy="257.7" r="8" />
+    </Fragment>
+  );
+
+  return (
+    <_IconWrapper
+      {...props}
+      viewbox_width={270}
+      viewbox_height={335}
+      ChildSVG={SVGLab}
+    />
+  );
+};
+
 const IconMoney = (props) => {
   const SVGMoney = () => (
     <Fragment>
@@ -1265,6 +1728,13 @@ export {
   IconPin,
   IconUnpin,
   IconGear,
+  IconPartitionIcon,
+  IconCompareEstimates,
+  IconStructure,
+  IconTreemap,
+  IconExplorer,
+  IconBuilder,
+  IconLab,
   IconMoney,
   IconEmployee,
   IconTree,

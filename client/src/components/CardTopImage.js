@@ -5,7 +5,7 @@ import { TM } from "./TextMaker.js";
 import "./CardTopImage.scss";
 
 const CardTopImage = ({
-  img_src,
+  svg,
   title_key,
   text_key,
   link_key,
@@ -21,11 +21,7 @@ const CardTopImage = ({
     rel={link_open_in_new_tab ? "noopener noreferrer" : ""}
   >
     <div className="top-img-card">
-      {img_src && (
-        <div className="top-img-card__top">
-          <img aria-hidden="true" src={img_src} className="top-img-card__img" />
-        </div>
-      )}
+      {svg && <div className="top-img-card__top">{svg}</div>}
       <div className="top-img-card__bottom">
         <div className="top-img-card__title">
           <TM k={title_key} tmf={tmf} args={text_args} />

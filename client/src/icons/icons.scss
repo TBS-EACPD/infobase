@@ -18,3 +18,54 @@ svg.icon-svg {
 .icon-fill:not(.icon-stroke){
   stroke: none;
 }
+
+
+.icon-partition-1,
+.icon-partition-3 {
+	fill: none;
+}
+
+.icon-partition-1,
+.icon-partition-2,
+.icon-partition-3 {
+	stroke: #2c70c9;
+	stroke-width: 7px;
+}
+
+.icon-partition-1,
+.icon-partition-2 {
+	stroke-miterlimit: 10;
+}
+
+.icon-partition-2 {
+	fill: #2c70c9;
+}
+
+.icon-partition-3 {
+	stroke-linejoin: round;
+}
+
+.treemap-1{
+  fill:#2C70C9;
+}
+.treemap-2{
+  fill:none;stroke:#2C70C9;stroke-width:15;stroke-miterlimit:10;
+}
+
+.lab-1 {
+	fill: none;
+	stroke: #2C70C9;
+	stroke-width: 15;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-miterlimit: 10;
+}
+
+.lab-2 {
+	fill: none;
+	stroke: #2C70C9;
+	stroke-width: 7;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-miterlimit: 10;
+}
