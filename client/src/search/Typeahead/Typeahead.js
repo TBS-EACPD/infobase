@@ -88,7 +88,13 @@ export class Typeahead extends React.Component {
     }
   }
   render() {
-    const { placeholder, min_length, page_size, utility_buttons } = this.props;
+    const {
+      placeholder,
+      additional_a11y_description,
+      min_length,
+      page_size,
+      utility_buttons,
+    } = this.props;
 
     const { query_value, selection_cursor } = this.state;
 
@@ -129,8 +135,9 @@ export class Typeahead extends React.Component {
           />
           {utility_buttons}
         </div>
-        <div id={`${this.menu_id}-hint`} className="sr-only" tabIndex={-1}>
+        <div id={`${this.menu_id}-hint`} className="sr-only" aria-hidden={true}>
           {text_maker("typeahead_usage", { min_length })}
+          {additional_a11y_description}
         </div>
         {this.show_menu && (
           <TypeaheadA11yStatus

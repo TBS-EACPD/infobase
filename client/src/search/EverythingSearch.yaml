@@ -25,3 +25,7 @@ crso_and_prog_label:
 other_options_label:
   en: Other Search Options
   fr: Autres options de recherche
+
+everything_search_additional_a11y_description:
+  en: Selecting a result will take you to the corresponding infographic.
+  fr: TODO
