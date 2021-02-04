@@ -41,9 +41,9 @@ covid_estimates_by_index_key:
 covid_estimates_department_tab_text:
   transform: [handlebars,markdown]
   en: |
-    The department with the largest total COVID-19 related authorities is currently **{{largest_dept_name}}** with **{{fmt_compact1_written largest_dept_auth}}**.
+    The organization with the largest total COVID-19 related authorities is currently **{{largest_dept_name}}** with **{{fmt_compact1_written largest_dept_auth}}**.
   fr: |
-    Le ministère ayant le plus grand nombre d'autorisations liées à COVID-19 est actuellement **{{largest_dept_name}}** avec **{{fmt_compact1_written largest_dept_auth}}**.
+    L'organisation ayant le plus grand plus grand nombre d'autorisations liées à COVID-19 est actuellement **{{largest_dept_name}}** avec **{{fmt_compact1_written largest_dept_auth}}**.
 
 covid_estimates_measure_tab_text:
   transform: [handlebars,markdown]
