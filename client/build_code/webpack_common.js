@@ -214,7 +214,6 @@ function get_optimizations(is_prod_build, produce_stats) {
 
 function create_config({
   context,
-  target,
   entry,
   output,
   language,
@@ -239,7 +238,6 @@ function create_config({
     mode: is_prod_build ? "production" : "development",
     target: _.compact(["web", target_ie11 && "es5"]),
     context,
-    target,
     entry,
     output: new_output,
     module: {
