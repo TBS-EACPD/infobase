@@ -23,7 +23,10 @@ import {
   WrappedNivoPie,
 } from "../shared.js";
 
-import { AboveTabFootnoteList } from "./covid_common_components.js";
+import {
+  AboveTabFootnoteList,
+  CellTooltip,
+} from "./covid_common_components.js";
 import {
   get_tabbed_content_props,
   wrap_with_vote_stat_controls,
@@ -153,8 +156,23 @@ const get_common_column_configs = (show_vote_stat) => ({
     header: text_maker("covid_funding"),
     is_searchable: false,
     is_summable: true,
-    formatter: (value) =>
-      !_.isNull(value) ? formats.compact2_raw(value) : "—",
+    raw_formatter: (value) => value || 0,
+    formatter: (value) => {
+      if (_.isNull(value)) {
+        return (
+          <span>
+            {"—"}
+            <CellTooltip
+              tooltip_text={text_maker(
+                "covid_expenditures_no_funding_explanation"
+              )}
+            />
+          </span>
+        );
+      } else {
+        return formats.compact2_raw(value);
+      }
+    },
   },
   vote: {
     index: 2,
@@ -185,8 +203,25 @@ const get_common_column_configs = (show_vote_stat) => ({
     header: text_maker(`covid_funding_used`),
     is_searchable: false,
     is_summable: false,
-    formatter: (value) =>
-      !_.isNull(value) ? formats.percentage2_raw(value) : "—",
+    raw_formatter: (value) => value || 0,
+    formatter: (value) => {
+      if (_.isNull(value)) {
+        return "—";
+      } else {
+        return (
+          <span>
+            {formats.percentage2_raw(value)}
+            {value > 1 && (
+              <CellTooltip
+                tooltip_text={text_maker(
+                  "covid_expenditures_surpassing_funding_explanation"
+                )}
+              />
+            )}
+          </span>
+        );
+      }
+    },
   },
 });
 

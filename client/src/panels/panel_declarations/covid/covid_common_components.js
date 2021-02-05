@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 
 import { CheckBox } from "src/components";
+import { IconQuestion } from "src/icons/icons.js";
 
 import { create_text_maker_component } from "../shared.js";
 
@@ -41,4 +42,18 @@ class ToggleVoteStatProvider extends React.Component {
   }
 }
 
-export { AboveTabFootnoteList, ToggleVoteStatProvider };
+const CellTooltip = ({ tooltip_text }) => (
+  <span
+    className="link-unstyled"
+    tabIndex={-1}
+    aria-hidden="true"
+    data-toggle="tooltip"
+    data-ibtt-html="true"
+    data-ibtt-container="body"
+    data-ibtt-text={tooltip_text}
+  >
+    <IconQuestion width={"1.2em"} vertical_align={"0em"} />
+  </span>
+);
+
+export { AboveTabFootnoteList, ToggleVoteStatProvider, CellTooltip };
