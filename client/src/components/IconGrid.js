@@ -1,6 +1,5 @@
 import _ from "lodash";
-import React from "react";
-
+import React, { Fragment } from "react";
 
 import "./IconGrid.scss";
 
@@ -15,7 +14,7 @@ export class IconGrid extends React.Component {
               <img src={icon.src} key={icon.src} />
             </a>
           ) : (
-            <img className="svg-inline" src={icon.src} key={icon.src} />
+            <Fragment key={icon.svg}>{icon.svg}</Fragment>
           )
         )}
       </div>
