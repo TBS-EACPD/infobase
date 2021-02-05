@@ -11,6 +11,9 @@ import {
   IconExplorer,
   IconBuilder,
   IconLab,
+  IconExpend,
+  IconPeople,
+  IconResults,
 } from "src/icons/icons";
 
 import {
@@ -105,17 +108,27 @@ const HomeLayout = (props) => (
       <div className="home-trinity-container frow">
         <TrinityItem
           href="#orgs/gov/gov/infograph/financial"
-          img_url={get_static_url("svg/expend.svg")}
+          svg={
+            <IconExpend width="13rem" color="#FFFFFF" alternate_color={false} />
+          }
           title={<TM k="home_finance_title" />}
         />
         <TrinityItem
           href="#orgs/gov/gov/infograph/people"
-          img_url={get_static_url("svg/people.svg")}
+          svg={
+            <IconPeople width="13rem" color="#FFFFFF" alternate_color={false} />
+          }
           title={<TM k="home_ppl_title" />}
         />
         <TrinityItem
           href="#orgs/gov/gov/infograph/results"
-          img_url={get_static_url("svg/results.svg")}
+          svg={
+            <IconResults
+              width="13rem"
+              color="#FFFFFF"
+              alternate_color={false}
+            />
+          }
           title={<TM k="home_results_title" />}
         />
       </div>
