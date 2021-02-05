@@ -443,7 +443,7 @@ class LapseByVotesGraph extends React.Component {
       <div>
         <TM
           el="h4"
-          k={subject.is("gov") ? "aggregated_lapse_by_votes" : "lapse_by_votes"}
+          k={subject.is("gov") ? "lapse_by_vote_type" : "lapse_by_votes"}
           args={{ lapse_unit: is_showing_lapse_pct ? "%" : "$" }}
           style={{ textAlign: "center" }}
         />
