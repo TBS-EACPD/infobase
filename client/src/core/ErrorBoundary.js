@@ -2,6 +2,8 @@ import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
 
+import { IconNotAvailable } from "src/icons/icons";
+
 import { lang, sha, is_dev } from "src/core/injected_build_constants.js";
 
 import { get_static_url, make_request } from "../request_utils.js";
@@ -92,14 +94,11 @@ export class ErrorBoundary extends React.Component {
               }[lang]
             }
           </span>
-          <img
-            aria-hidden={true}
-            id="error-boundary-icon"
-            src={get_static_url("svg/not-available.svg")}
-            style={{
-              maxWidth: "100%",
-              width: "400px",
-            }}
+          <IconNotAvailable
+            color="#8c949e"
+            width="400"
+            max_width="100%"
+            alternate_color={false}
           />
           <span>
             {

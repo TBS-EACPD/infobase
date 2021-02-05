@@ -29,6 +29,7 @@ class _IconWrapper extends React.Component {
       rotation,
       title,
       width,
+      max_width,
       height, // if falsey will assume square using width
       vertical_align,
       inline,
@@ -49,6 +50,7 @@ class _IconWrapper extends React.Component {
         width,
         height: height || width,
         verticalAlign: vertical_align,
+        maxWidth: max_width,
       }),
     };
 
@@ -1778,8 +1780,8 @@ const IconFlagLine = (props) => {
           x2="525.9126"
           y2="40.5"
           fill="none"
-          stroke-miterlimit="10"
-          stroke-width="2.42"
+          strokeMiterlimit="10"
+          strokeWidth="2.42"
         />
         <line
           x1="614.1473"
@@ -1787,8 +1789,8 @@ const IconFlagLine = (props) => {
           x2="1139.8403"
           y2="40.5"
           fill="none"
-          stroke-miterlimit="10"
-          stroke-width="2.42"
+          strokeMiterlimit="10"
+          strokeWidth="2.42"
         />
       </g>
     </Fragment>
@@ -1801,6 +1803,36 @@ const IconFlagLine = (props) => {
       viewbox_height={81}
       ChildSVG={SVGFlagLine}
     />
+  );
+};
+
+const IconNotAvailable = (props) => {
+  const SVGNotAvailable = () => (
+    <Fragment>
+      <path
+        d="M250,68.2c100.4,0,181.7,81.4,181.7,181.8c0,100.4-81.4,181.7-181.8,181.7S68.2,350.4,68.2,250
+	c0-48.2,19.1-94.4,53.2-128.5C155.5,87.3,201.8,68.1,250,68.2 M250,37.2C132.5,37.2,37.2,132.5,37.2,250S132.5,462.8,250,462.8
+	S462.8,367.5,462.8,250S367.5,37.2,250,37.2z"
+      />
+      <g>
+        <path
+          d="M249.1,324.5c-13.1,0.1-23.6,10.8-23.5,23.9c0.1,13.1,10.8,23.6,23.9,23.5c13-0.1,23.5-10.7,23.5-23.7
+		C272.9,335.1,262.2,324.4,249.1,324.5z"
+        />
+        <path
+          d="M235.7,302.2c-1.7,0-3.2-1.3-3.4-3.1l-0.5-6.1c-2.4-19,4.8-39.8,24.8-61c18-18.7,28-32.4,28-48.3
+		c0-18-12.8-30-37.9-30.3c-13,0-27.2,3.4-37.2,9c-1.6,0.9-3.7,0.3-4.6-1.3c-0.1-0.1-0.1-0.2-0.1-0.3l-6.9-15.9
+		c-0.7-1.6-0.1-3.4,1.4-4.3c13.5-7.6,34.7-12.6,54.6-12.6c45.9,0,66.7,25,66.7,51.8c0,24-15.2,41.2-34.4,61.3
+    c-17.6,18.3-24,33.8-22.8,51.8l0.3,5.6c0.1,1.9-1.4,3.4-3.2,3.5c-0.1,0-0.1,0-0.2,0L235.7,302.2z"
+          strokeWidth={10}
+          strokeMiterlimit={10}
+        />
+      </g>
+    </Fragment>
+  );
+
+  return (
+    <_IconWrapper {...props} viewbox_width={500} ChildSVG={SVGNotAvailable} />
   );
 };
 
@@ -1857,4 +1889,5 @@ export {
   IconPeople,
   IconResults,
   IconFlagLine,
+  IconNotAvailable,
 };
