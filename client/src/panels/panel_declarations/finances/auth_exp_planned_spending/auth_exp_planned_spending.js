@@ -637,19 +637,6 @@ const calculate = function (subject, options) {
     gov_queried_subject.data,
     ({ votenum }) => votenum === "S"
   );
-  /*const gov_aggregated_votes = _.reduce(
-    gov_stat_filtered_votes,
-    (result, vote_row) => ({
-      ..._.chain(flat_auth_exp_years)
-        .map((yr) => [yr, result[yr] + vote_row[yr]])
-        .fromPairs()
-        .value(),
-    }),
-    _.chain(flat_auth_exp_years)
-      .map((yr) => [yr, 0])
-      .fromPairs()
-      .value()
-  );*/
   const gov_aggregated_votes = _.chain(gov_stat_filtered_votes)
     .reduce(
       (result, vote_row) => ({
@@ -685,14 +672,30 @@ const calculate = function (subject, options) {
     ? gov_aggregated_votes
     : _.reject(queried_subject.data, ({ votenum }) => votenum === "S");
 
-  const gov_avg_lapsed_by_votes_pct = _.chain(std_years)
-    .map(
-      (yr) =>
-        calculate_lapse(
-          gov_aggregated_votes[`${yr}auth`],
-          gov_aggregated_votes[`${yr}exp`],
-          gov_aggregated_votes[`${yr}unlapsed`]
-        ) / gov_aggregated_votes[`${yr}auth`]
+  // Sum up all votes by year, take lapse percentage for each year, then take the average
+  const gov_avg_lapsed_by_votes_pct = _.chain(gov_aggregated_votes)
+    .reduce(
+      (result, vote_row) => ({
+        ..._.chain(flat_auth_exp_years)
+          .map((yr) => [yr, result[yr] + vote_row[yr]])
+          .fromPairs()
+          .value(),
+      }),
+      _.chain(flat_auth_exp_years)
+        .map((yr) => [yr, 0])
+        .fromPairs()
+        .value()
+    )
+    .thru((gov_aggregated_lapse_by_year) =>
+      _.map(
+        std_years,
+        (yr) =>
+          calculate_lapse(
+            gov_aggregated_lapse_by_year[`${yr}auth`],
+            gov_aggregated_lapse_by_year[`${yr}exp`],
+            gov_aggregated_lapse_by_year[`${yr}unlapsed`]
+          ) / gov_aggregated_lapse_by_year[`${yr}auth`]
+      )
     )
     .mean()
     .value();
