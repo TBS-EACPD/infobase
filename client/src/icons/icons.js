@@ -1809,6 +1809,7 @@ const IconFlagLine = (props) => {
 const IconNotAvailable = (props) => {
   const SVGNotAvailable = () => (
     <Fragment>
+      <div id="error-boundary-icon" />
       <path
         d="M250,68.2c100.4,0,181.7,81.4,181.7,181.8c0,100.4-81.4,181.7-181.8,181.7S68.2,350.4,68.2,250
 	c0-48.2,19.1-94.4,53.2-128.5C155.5,87.3,201.8,68.1,250,68.2 M250,37.2C132.5,37.2,37.2,132.5,37.2,250S132.5,462.8,250,462.8
