@@ -58,58 +58,69 @@ const SummaryTab = ({
 }) => {
   const { subject } = panel_args;
 
-  const additional_text_args = (() => {
-    if (subject.level === "gov") {
-      return {};
-    } else {
-      const dept_covid_expenditures_in_year = _.reduce(
+  const has_expenditures = !_.isEmpty(covid_expenditures);
+  const has_funding = !_.isEmpty(covid_funding);
+
+  const covid_expenditures_in_year = has_expenditures
+    ? _.reduce(
         covid_expenditures,
         (memo, { vote, stat }) => memo + vote + stat,
         0
-      );
+      )
+    : 0;
+  const covid_funding_in_year = has_funding
+    ? _.first(covid_funding).funding
+    : 0;
 
-      return {
-        dept_covid_expenditures_in_year,
-        dept_covid_funding_in_year: _.first(covid_funding).funding,
-      };
-    }
-  })();
   const text_args = {
     ...panel_args,
-    ...additional_text_args,
+    ...(subject.level === "dept" && {
+      dept_covid_expenditures_in_year: covid_expenditures_in_year,
+      dept_covid_funding_in_year: covid_funding_in_year,
+    }),
   };
 
-  const expenditure_amount =
-    text_args[`${subject.level}_covid_expenditures_in_year`];
-  const remaining_amount =
-    text_args[`${subject.level}_covid_funding_in_year`] - expenditure_amount;
-  const pie_data = [
-    {
-      id: "funding",
-      label: text_maker("covid_spent_funding"),
-      value: expenditure_amount,
-    },
-    {
-      id: "remaining",
-      label: text_maker("covid_remaining_funding"),
-      value: remaining_amount,
-    },
-  ];
+  if (has_funding) {
+    const pie_data = [
+      {
+        id: "spent",
+        label: text_maker("covid_spent_funding"),
+        value: covid_expenditures_in_year,
+      },
+      {
+        id: "remaining",
+        label: text_maker("covid_remaining_funding"),
+        value: covid_funding_in_year - covid_expenditures_in_year,
+      },
+    ];
 
-  return (
-    <div className="frow middle-xs">
-      <div className="fcol-xs-12 fcol-md-6">
+    return (
+      <div className="frow middle-xs">
+        <div className="fcol-xs-12 fcol-md-6">
+          <TM
+            k={`covid_expenditures_summary_text_${subject.level}`}
+            args={text_args}
+            className="medium-panel-text"
+          />
+        </div>
+        <div className="fcol-xs-12 fcol-md-6">
+          <WrappedNivoPie data={pie_data} />
+        </div>
+      </div>
+    );
+  } else if (has_expenditures) {
+    return (
+      <div className="frow middle-xs">
         <TM
-          k={`covid_expenditures_summary_text_${subject.level}`}
+          k={`covid_expenditures_summary_text_${subject.level}_exp_only`}
           args={text_args}
           className="medium-panel-text"
         />
       </div>
-      <div className="fcol-xs-12 fcol-md-6">
-        <WrappedNivoPie data={pie_data} />
-      </div>
-    </div>
-  );
+    );
+  } else {
+    throw `${panel_key} panel tried to render for ${subject.name}, but the subject has neither expenditures or funding! Shouldn't happen, check the panel's calculate condition.`;
+  }
 };
 
 const zip_expenditures_and_funding_rows = (index_key, exp_rows, funding_rows) =>
@@ -448,7 +459,7 @@ class CovidExpendituresPanel extends React.Component {
               (memo, { vote, stat }) => memo + vote + stat,
               0
             ),
-            gov_covid_funding_in_year: _.first(covid_funding).funding,
+            gov_covid_funding_in_year: _.first(covid_funding)?.funding || 0,
             loading: false,
           });
         }
@@ -501,10 +512,16 @@ export const declare_covid_expenditures_panel = () =>
       },
       footnotes: false,
       source: (subject) => [],
-      calculate: (subject, options) =>
-        level_name === "dept"
-          ? subject.has_data("covid_response")?.has_expenditures // TODO ugh, does this need to be || has_funding? Does this panel have to handle all three cases of either or and both?
-          : true,
+      calculate: (subject, options) => {
+        if (level_name === "gov") {
+          return true;
+        } else {
+          const { has_expenditures, has_funding } = subject.has_data(
+            "covid_response"
+          ) || { has_expenditures: false, has_funding: false };
+          return has_expenditures || has_funding;
+        }
+      },
       render: ({ calculations, footnotes, sources }) => {
         const { panel_args, subject } = calculations;
         return (
