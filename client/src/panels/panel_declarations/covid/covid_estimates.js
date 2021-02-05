@@ -575,7 +575,7 @@ export const declare_covid_estimates_panel = () =>
         >
           <AlertBanner banner_class="danger">
             {
-              "Real (but non-final) data for supps A and B. Supps C values are totally fake. For development purposes only!"
+              "Real (but non-final) data for supps A and B. Supps C values are faked (by repeatings supps B values). For development purposes only!"
             }
           </AlertBanner>
           <CovidEstimatesPanel panel_args={panel_args} />
