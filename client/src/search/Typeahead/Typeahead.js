@@ -374,6 +374,15 @@ export class Typeahead extends React.Component {
     ]);
   }
 
+  /*
+    TODO currently using a circular counter to represent the selection cursor in state, pushing off and 
+    scattering the work of combining that with other state (such as needs_pagination_up_control etc) to
+    translate the counter in to useful information...
+    Maybe easier to write, but worse for maintenance. Should claw all that scattered logic back and make 
+    this a state machine providing directly useful values.
+    i.e. default_selection_cursor = "input", all of the logic for what's next after "input" lives in 
+    these getters, and they either return a meaningful string or the actual index of an item from results_on_page
+  */
   default_selection_cursor = -1;
   get previous_selection_cursor() {
     const { selection_cursor } = this.state;
