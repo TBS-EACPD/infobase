@@ -137,7 +137,13 @@ export class Typeahead extends React.Component {
         </div>
         <div id={`${this.menu_id}-hint`} className="sr-only" aria-hidden={true}>
           {text_maker("typeahead_usage", { min_length })}
-          {additional_a11y_description}
+          {additional_a11y_description && (
+            <Fragment>
+              {/* br ensures typeahead_usage text and additional_a11y_description don't run together */}
+              <br />
+              {additional_a11y_description}
+            </Fragment>
+          )}
         </div>
         {this.show_menu && (
           <TypeaheadA11yStatus
