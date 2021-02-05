@@ -325,7 +325,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
     return (
       <Fragment>
         <TM
-          k={"covid_expenditures_measure_tab_text"}
+          k={`covid_expenditures_measure_tab_text_${panel_args.subject.level}`}
           args={{
             ...panel_args,
             largest_measure_name,
