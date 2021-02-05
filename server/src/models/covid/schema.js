@@ -63,25 +63,25 @@ const schema = `
   }
 
   type CovidEstimates{
-    org_id: Int
+    org_id: String
     org: Org
 
     ${estimates_fields}
   }
   type CovidExpenditures{
-    org_id: Int
+    org_id: String
     org: Org
 
     ${expenditures_fields}
   }
   type CovidCommitments{
-    org_id: Int
+    org_id: String
     org: Org
 
     ${commitments_fields}
   }
   type CovidFunding{
-    org_id: Int
+    org_id: String
     org: Org
 
     ${funding_fields}
