@@ -159,9 +159,7 @@ class AuthExpPlannedSpendingGraph extends React.Component {
 
     const should_mark_gap_year =
       gap_year &&
-      active_series.budgetary_expenditures &&
-      !active_series.stat_authorities &&
-      !active_series.voted_authorities && // authorities always span the gap year, so don't mark it when displaying them
+      active_series.budgetary_expenditures && // authorities always span the gap year, so don't mark it when displaying them
       active_series.planned_spending;
 
     const nivo_props = {
@@ -178,12 +176,7 @@ class AuthExpPlannedSpendingGraph extends React.Component {
         left: 100,
       },
       table_ordered_column_keys: _.map(
-        [
-          "voted_authorities",
-          "stat_authorities",
-          "budgetary_expenditures",
-          "planned_spending",
-        ],
+        ["authorities", "budgetary_expenditures", "planned_spending"],
         (key) => text_maker(key)
       ),
       ...(should_mark_gap_year && {
@@ -247,10 +240,7 @@ class LapseByVotesGraph extends React.Component {
   }
   get_active_votes = (func) =>
     _.chain(this.props.queried_votes)
-      .map((vote_row) => {
-        console.log(vote_row);
-        return [vote_row.desc, func(vote_row)];
-      })
+      .map((vote_row) => [vote_row.desc, func(vote_row)])
       .fromPairs()
       .value();
 
@@ -547,49 +537,17 @@ const calculate = function (subject, options) {
     (est_year) => !_.includes(history_years_written, run_template(est_year))
   );
 
-  const historical_stat_auth_values = queried_subject.sum(auth_cols, {
-    as_object: false,
-    filter: (row) => row.votenum === "S",
-  });
-  const historical_voted_auth_values = queried_subject.sum(auth_cols, {
-    as_object: false,
-    filter: (row) => row.votenum !== "S",
-  });
-  const estimates_query = orgVoteStatEstimates.q(query_subject);
-  const future_stat_auth_values = _.map(
-    future_auth_year_templates,
-    (future_auth_year_template) =>
-      estimates_query.sum(`${future_auth_year_template}_estimates`, {
-        as_object: false,
-        filter: (row) => row.votenum === "S",
-      })
-  );
-  const future_voted_auth_values = _.map(
-    future_auth_year_templates,
-    (future_auth_year_template) =>
-      estimates_query.sum(`${future_auth_year_template}_estimates`, {
-        as_object: false,
-        filter: (row) => row.votenum !== "S",
-      })
-  );
-
   const historical_auth_values = queried_subject.sum(auth_cols, {
     as_object: false,
   });
   const future_auth_values = _.map(
     future_auth_year_templates,
     (future_auth_year_template) =>
-      estimates_query.sum(`${future_auth_year_template}_estimates`, {
-        as_object: false,
-      })
-  );
-  const auth_stat_values = _.concat(
-    historical_stat_auth_values,
-    future_stat_auth_values
-  );
-  const auth_voted_values = _.concat(
-    historical_voted_auth_values,
-    future_voted_auth_values
+      orgVoteStatEstimates
+        .q(query_subject)
+        .sum(`${future_auth_year_template}_estimates`, {
+          as_object: false,
+        })
   );
 
   const auth_values = _.concat(historical_auth_values, future_auth_values);
@@ -605,14 +563,9 @@ const calculate = function (subject, options) {
       untrimmed_values: exp_values,
     },
     {
-      key: "stat_authorities",
+      key: "authorities",
       untrimmed_year_templates: _.concat(std_years, future_auth_year_templates),
-      untrimmed_values: auth_stat_values,
-    },
-    {
-      key: "voted_authorities",
-      untrimmed_year_templates: _.concat(std_years, future_auth_year_templates),
-      untrimmed_values: auth_voted_values,
+      untrimmed_values: auth_values,
     },
     subject.has_planned_spending && {
       key: "planned_spending",
