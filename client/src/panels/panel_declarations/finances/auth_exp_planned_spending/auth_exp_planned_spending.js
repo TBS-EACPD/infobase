@@ -233,7 +233,6 @@ class LapseByVotesGraph extends React.Component {
     this.state = {
       is_showing_lapse_pct: false,
       active_votes: this.get_active_votes(({ votestattype }) =>
-        //(props.subject.level === "gov") || //TODO
         _.includes([1, 2, 3, 5], votestattype)
       ),
     };
@@ -337,42 +336,40 @@ class LapseByVotesGraph extends React.Component {
           />
         </div>
 
-        {true /* TODO */ && (
-          <div className="fcol-md-3">
-            <StandardLegend
-              items={_.map(queried_votes, ({ desc }) => ({
-                id: desc,
-                label: desc,
-                active: active_votes[desc],
-                color: colors(desc),
-              }))}
-              onClick={(vote_desc) =>
-                this.setState({
-                  active_votes: {
-                    ...active_votes,
-                    [vote_desc]: !active_votes[vote_desc],
-                  },
-                })
-              }
-              Controls={
-                <SelectAllControl
-                  key="SelectAllControl"
-                  SelectAllOnClick={() =>
-                    this.setState({
-                      active_votes: this.get_active_votes(() => true),
-                    })
-                  }
-                  SelectNoneOnClick={() =>
-                    this.setState({
-                      active_votes: this.get_active_votes(() => false),
-                    })
-                  }
-                />
-              }
-            />
-          </div>
-        )}
-        <div className={`fcol-md-${subject.is("gov") ? 9 : 9}` /* TODO */}>
+        <div className="fcol-md-3">
+          <StandardLegend
+            items={_.map(queried_votes, ({ desc }) => ({
+              id: desc,
+              label: desc,
+              active: active_votes[desc],
+              color: colors(desc),
+            }))}
+            onClick={(vote_desc) =>
+              this.setState({
+                active_votes: {
+                  ...active_votes,
+                  [vote_desc]: !active_votes[vote_desc],
+                },
+              })
+            }
+            Controls={
+              <SelectAllControl
+                key="SelectAllControl"
+                SelectAllOnClick={() =>
+                  this.setState({
+                    active_votes: this.get_active_votes(() => true),
+                  })
+                }
+                SelectNoneOnClick={() =>
+                  this.setState({
+                    active_votes: this.get_active_votes(() => false),
+                  })
+                }
+              />
+            }
+          />
+        </div>
+        <div className="fcol-md-9">
           <WrappedNivoLine
             data={_.chain(filtered_votes)
               .map((vote_row) => ({
@@ -650,10 +647,10 @@ const calculate = function (subject, options) {
         },
       }),
       _.chain(gov_stat_filtered_votes)
-        .map(({ desc, votestattype }) => [
+        .map(({ votestattype }) => [
           votestattype,
           {
-            desc: _.split(desc, "-")[0], //TODO
+            desc: text_maker(`vstype${votestattype}`),
             ..._.chain(flat_auth_exp_years)
               .map((yr) => [yr, 0])
               .fromPairs()
