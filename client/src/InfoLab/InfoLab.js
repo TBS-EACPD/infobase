@@ -49,7 +49,7 @@ export default class InfoLab extends React.Component {
                 tmf={text_maker}
                 svg={
                   <IconDPs
-                    width="14rem"
+                    width="100%"
                     color="#FFFFFF"
                     alternate_color={false}
                   />
@@ -67,7 +67,7 @@ export default class InfoLab extends React.Component {
                 tmf={text_maker}
                 svg={
                   <IconTime
-                    width="14rem"
+                    width="100%"
                     color="#FFFFFF"
                     alternate_color={false}
                   />

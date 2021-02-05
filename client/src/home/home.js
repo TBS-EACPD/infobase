@@ -14,6 +14,7 @@ import {
   IconExpend,
   IconPeople,
   IconResults,
+  IconFlagLine,
 } from "src/icons/icons";
 
 import {
@@ -96,7 +97,7 @@ const HomeLayout = (props) => (
           <TM k="home_sub_title" />
         </h2>
         <div className="flag">
-          <img aria-hidden="true" src={get_static_url("svg/flagline.svg")} />
+          <IconFlagLine width="100%" color="#FFFFFF" alternate_color={false} />
         </div>
         <div className="search-box">
           <EverythingSearch />
@@ -109,25 +110,21 @@ const HomeLayout = (props) => (
         <TrinityItem
           href="#orgs/gov/gov/infograph/financial"
           svg={
-            <IconExpend width="13rem" color="#FFFFFF" alternate_color={false} />
+            <IconExpend width="100%" color="#FFFFFF" alternate_color={false} />
           }
           title={<TM k="home_finance_title" />}
         />
         <TrinityItem
           href="#orgs/gov/gov/infograph/people"
           svg={
-            <IconPeople width="13rem" color="#FFFFFF" alternate_color={false} />
+            <IconPeople width="100%" color="#FFFFFF" alternate_color={false} />
           }
           title={<TM k="home_ppl_title" />}
         />
         <TrinityItem
           href="#orgs/gov/gov/infograph/results"
           svg={
-            <IconResults
-              width="13rem"
-              color="#FFFFFF"
-              alternate_color={false}
-            />
+            <IconResults width="100%" color="#FFFFFF" alternate_color={false} />
           }
           title={<TM k="home_results_title" />}
         />
@@ -138,11 +135,7 @@ const HomeLayout = (props) => (
             <CardLeftImage
               tmf={home_tm}
               svg={
-                <IconDPs
-                  width="16.5rem"
-                  color="#FFFFFF"
-                  alternate_color={false}
-                />
+                <IconDPs width="100%" color="#FFFFFF" alternate_color={false} />
               }
               title_key="quick_link_DRR_1920"
               text_key="drr_home_text"
@@ -155,7 +148,7 @@ const HomeLayout = (props) => (
               tmf={home_tm}
               svg={
                 <IconCompareEstimates
-                  width="17rem"
+                  width="100%"
                   color="#FFFFFF"
                   alternate_color={false}
                 />
@@ -218,7 +211,7 @@ const SubAppLayout = (props) => (
               tmf={home_tm}
               svg={
                 <IconPartitionIcon
-                  width="12rem"
+                  width="100%"
                   color="#2C70C9"
                   alternate_color={false}
                 />
@@ -233,7 +226,7 @@ const SubAppLayout = (props) => (
               tmf={home_tm}
               svg={
                 <IconCompareEstimates
-                  width="11rem"
+                  width="100%"
                   color="#2C70C9"
                   alternate_color={false}
                 />
@@ -248,7 +241,7 @@ const SubAppLayout = (props) => (
               tmf={home_tm}
               svg={
                 <IconStructure
-                  width="11rem"
+                  width="100%"
                   color="#2C70C9"
                   alternate_color={false}
                 />
@@ -265,7 +258,7 @@ const SubAppLayout = (props) => (
               tmf={home_tm}
               svg={
                 <IconTreemap
-                  width="11rem"
+                  width="100%"
                   color="#2C70C9"
                   alternate_color={false}
                 />
@@ -280,7 +273,7 @@ const SubAppLayout = (props) => (
               tmf={home_tm}
               svg={
                 <IconExplorer
-                  width="11rem"
+                  width="100%"
                   color="#2C70C9"
                   alternate_color={false}
                 />
@@ -295,7 +288,7 @@ const SubAppLayout = (props) => (
               tmf={home_tm}
               svg={
                 <IconBuilder
-                  width="11rem"
+                  width="100%"
                   color="#2C70C9"
                   alternate_color={false}
                 />
@@ -309,11 +302,7 @@ const SubAppLayout = (props) => (
             <CardTopImage
               tmf={home_tm}
               svg={
-                <IconLab
-                  width="11rem"
-                  color="#2C70C9"
-                  alternate_color={false}
-                />
+                <IconLab width="100%" color="#2C70C9" alternate_color={false} />
               }
               title_key="lab_home_title"
               text_key="lab_home_text"
