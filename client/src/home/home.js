@@ -3,6 +3,7 @@ import React from "react";
 import MediaQuery from "react-responsive";
 
 import {
+  IconDPs,
   IconPartitionIcon,
   IconCompareEstimates,
   IconStructure,
@@ -123,7 +124,13 @@ const HomeLayout = (props) => (
           <div className="col-content">
             <CardLeftImage
               tmf={home_tm}
-              img_src={get_static_url("svg/DPs.svg")}
+              svg={
+                <IconDPs
+                  width="16.5rem"
+                  color="#FFFFFF"
+                  alternate_color={false}
+                />
+              }
               title_key="quick_link_DRR_1920"
               text_key="drr_home_text"
               link_key="check_home_link"
