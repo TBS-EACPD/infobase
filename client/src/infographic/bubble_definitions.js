@@ -2,14 +2,15 @@ import _ from "lodash";
 
 import { create_text_maker } from "../models/text.js";
 
+import svgs from "./bubble_svgs.js";
+
 import { infograph_href_template } from "./infographic_link.js";
 
 import text from "./bubble_definitions.yaml";
-import svgs from "./bubble_svgs.yaml"; // TODO: use icon componenets instead (some of these are already icon components, some not)
 
 const text_maker = create_text_maker(text);
 
-const get_svg_content = (bubble_id) => _.get(svgs, `${bubble_id}.text`);
+const get_svg_content = (bubble_id) => _.get(svgs, bubble_id);
 
 // any config option, other than id, can either be a value or a function of the infographic subject
 const base_configs = [

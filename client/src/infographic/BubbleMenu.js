@@ -52,11 +52,20 @@ const BubbleMenu = ({ items, active_item_id }) => {
             >
               <div className="bub-item">
                 <strong className="title">{title}</strong>
-                <div
-                  className="bub-svg"
-                  title={description}
-                  dangerouslySetInnerHTML={{ __html: svg_content }}
-                />
+                <div className="bub-svg" title={description}>
+                  {(() => {
+                    const SVG = (svg_content && svg_content.svg) || null;
+                    return (
+                      SVG && (
+                        <SVG
+                          alternate_color={false}
+                          width="100%"
+                          direct_render
+                        />
+                      )
+                    );
+                  })()}
+                </div>
               </div>
             </a>
           ))}
