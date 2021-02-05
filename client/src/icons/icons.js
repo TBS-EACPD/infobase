@@ -1553,11 +1553,11 @@ const IconTime = (props) => {
     <Fragment>
       <path
         d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
-        strokeWidth="0.05rem"
+        strokeWidth="0.01rem"
       />
       <path
         d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"
-        strokeWidth="0.05rem"
+        strokeWidth="0.01rem"
       />
     </Fragment>
   );
@@ -1767,6 +1767,43 @@ const IconResults = (props) => {
   );
 };
 
+const IconFlagLine = (props) => {
+  const SVGFlagLine = () => (
+    <Fragment>
+      <path d="M583.105,52.495l1.06,3-10.67-1.76c-1.31-.3-2.23-.3-2.26.66l.44,11.16h-3.22l.44-11.12c0-1.1-.92-1.07-3.07-.67l-9.87,1.73,1.28-3c.44-1.13.55-1.9-.44-2.67l-11.69-8.69,2.16-1.15c.62-.43.65-.9.33-1.86l-2.2-6.5,5.63,1.1c1.57.33,2,0,2.41-.8l1.57-2.94,5.55,5.73c1,1.06,2.38.37,1.94-1.17l-2.66-12,4.12,2.16c.66.37,1.36.47,1.76-.23l-.07.17,4.42-8.2,4.38,7.9c.55.83,1,.76,1.86.36l3.77-1.7-2.45,11c-.51,2.16.84,2.8,2.3,1.33l5.34-5.19,1.43,3c.47.9,1.2.77,2.15.6l5.56-1.06-1.87,6.39v.14c-.22.83-.66,1.53.36,1.93l2,.9-11.44,8.82C582.265,50.925,582.665,51.265,583.105,52.495Z" />
+      <g>
+        <line
+          x1="0.2197"
+          y1="40.5"
+          x2="525.9126"
+          y2="40.5"
+          fill="none"
+          stroke-miterlimit="10"
+          stroke-width="2.42"
+        />
+        <line
+          x1="614.1473"
+          y1="40.5"
+          x2="1139.8403"
+          y2="40.5"
+          fill="none"
+          stroke-miterlimit="10"
+          stroke-width="2.42"
+        />
+      </g>
+    </Fragment>
+  );
+
+  return (
+    <_IconWrapper
+      {...props}
+      viewbox_width={1140}
+      viewbox_height={81}
+      ChildSVG={SVGFlagLine}
+    />
+  );
+};
+
 export {
   IconHome,
   IconFeedback,
@@ -1819,4 +1856,5 @@ export {
   IconExpend,
   IconPeople,
   IconResults,
+  IconFlagLine,
 };
