@@ -121,7 +121,7 @@ const zip_expenditures_and_funding_rows = (index_key, exp_rows, funding_rows) =>
 
       const { vote, stat } = _.find(exp_rows, index) || { vote: 0, stat: 0 };
 
-      const { funding } = _.find(funding_rows, index) || { funding: "—" };
+      const { funding } = _.find(funding_rows, index) || { funding: null };
 
       return {
         ...index,
@@ -129,9 +129,9 @@ const zip_expenditures_and_funding_rows = (index_key, exp_rows, funding_rows) =>
         vote,
         stat,
         total_exp: vote + stat,
-        funding_used: _.isNumber(funding)
+        funding_used: !_.isNull(funding)
           ? 1 - (funding - (vote + stat)) / funding
-          : funding,
+          : null,
       };
     })
     .value();
@@ -143,7 +143,7 @@ const get_common_column_configs = (show_vote_stat) => ({
     is_searchable: false,
     is_summable: true,
     formatter: (value) =>
-      _.isNumber(value) ? formats.compact2_raw(value) : value,
+      !_.isNull(value) ? formats.compact2_raw(value) : "—",
   },
   vote: {
     index: 2,
@@ -175,7 +175,7 @@ const get_common_column_configs = (show_vote_stat) => ({
     is_searchable: false,
     is_summable: false,
     formatter: (value) =>
-      _.isNumber(value) ? formats.percentage2_raw(value) : value,
+      !_.isNull(value) ? formats.percentage2_raw(value) : "—",
   },
 });
 
