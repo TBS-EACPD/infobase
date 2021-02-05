@@ -205,12 +205,6 @@ approp_by_auth:
 authorities:
   en: Authorities
   fr: Autorisations
-stat_authorities:
-  en: Statutory Authorities
-  fr: TODO
-voted_authorities:
-  en: Voted Authorities
-  fr: TODO
 item:
   en: Item
   fr: Poste
