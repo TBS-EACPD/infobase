@@ -5,7 +5,7 @@ import { TM } from "./TextMaker.js";
 import "./CardLeftImage.scss";
 
 const CardLeftImage = ({
-  img_src,
+  svg,
   title_key,
   text_key,
   button_text_key,
@@ -15,15 +15,7 @@ const CardLeftImage = ({
 }) => (
   <a className="link-unstyled" href={link_href}>
     <div className="left-img-card">
-      {img_src && (
-        <div className="left-img-card__left">
-          <img
-            aria-hidden="true"
-            src={img_src}
-            className="left-img-card__img"
-          />
-        </div>
-      )}
+      {svg && <div className="left-img-card__left">{svg}</div>}
       <div className="left-img-card__right-container">
         <div className="left-img-card__right">
           <div className="left-img-card__title">

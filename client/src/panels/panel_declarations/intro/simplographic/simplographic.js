@@ -6,7 +6,7 @@ import { is_mobile } from "src/core/feature_detection.js";
 import {
   IconMoney,
   IconEmployee,
-  IconTree,
+  IconStructure,
   IconClipboard,
 } from "src/icons/icons";
 
@@ -169,22 +169,46 @@ export const declare_simplographic_panel = () =>
             <div className="medium-panel-text">
               <Row
                 top_border
-                svg={<IconMoney width="15rem" />}
+                svg={
+                  <IconMoney
+                    width="15rem"
+                    color="#2C70C9"
+                    alternate_color={false}
+                  />
+                }
                 title_key="simplographic_spending_title"
                 text_key="simplographic_spending_text"
               />
               <Row
-                svg={<IconEmployee width="15rem" />}
+                svg={
+                  <IconEmployee
+                    width="15rem"
+                    color="#2C70C9"
+                    alternate_color={false}
+                  />
+                }
                 title_key="simplographic_people_title"
                 text_key="simplographic_people_text"
               />
               <Row
-                svg={<IconTree width="15rem" />}
+                svg={
+                  <IconStructure
+                    width="15rem"
+                    color="#2C70C9"
+                    alternate_color={false}
+                  />
+                }
                 title_key="simplographic_struct_title"
                 text_key="simplographic_struct_text"
               />
               <Row
-                svg={<IconClipboard width="15rem" color="#2C70C9" />}
+                svg={
+                  <IconClipboard
+                    width="15rem"
+                    color="#2C70C9"
+                    alternate_color={false}
+                  />
+                }
                 title_key="simplographic_results_title"
                 text_key="simplographic_results_text"
               />
