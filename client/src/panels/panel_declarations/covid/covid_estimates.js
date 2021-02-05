@@ -61,7 +61,11 @@ const SummaryTab = ({ args: panel_args, data }) => {
 
   const graph_index_key = "index_key";
 
-  const graph_data = _.chain(data)
+  const sorted_data = _.sortBy(data, ({ est_doc }) =>
+    get_est_doc_order(est_doc)
+  );
+
+  const graph_data = _.chain(sorted_data)
     .map((row) => ({
       [graph_index_key]: get_est_doc_name(row.est_doc),
       [text_maker(`covid_estimates_stat`)]: row.stat,
@@ -117,7 +121,7 @@ const SummaryTab = ({ args: panel_args, data }) => {
   );
 
   const additional_text_args = (() => {
-    const index_summary_stats = _.map(data, (row) => [
+    const index_summary_stats = _.map(sorted_data, (row) => [
       get_est_doc_name(row.est_doc),
       get_est_doc_glossary_key(row.est_doc),
       row.vote + row.stat,
@@ -132,7 +136,7 @@ const SummaryTab = ({ args: panel_args, data }) => {
       };
     } else {
       const dept_covid_estimates_in_year = _.reduce(
-        data,
+        sorted_data,
         (memo, { stat, vote }) => memo + vote + stat,
         0
       );
