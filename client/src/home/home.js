@@ -237,7 +237,7 @@ const SubAppLayout = (props) => (
           <div className="fcol-md-3 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              svg={<IconBuilder width="11rem" />}
+              svg={<IconBuilder width="11rem" alternate_color={false} />}
               title_key="home_build_a_report"
               text_key="report_builder_home_desc"
               link_href="#rpb"
