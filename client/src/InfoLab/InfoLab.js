@@ -1,5 +1,6 @@
 import React from "react";
 
+import { IconDPs, IconTime } from "src/icons/icons";
 import {
   create_text_maker_component,
   CardLeftImage,
@@ -7,7 +8,7 @@ import {
 import { StandardRouteContainer } from "../core/NavComponents.js";
 import { create_text_maker } from "../models/text.js";
 
-import { get_static_url } from "../request_utils.js";
+
 
 import lab_text from "./InfoLab.yaml";
 import "./InfoLab.scss";
@@ -47,7 +48,13 @@ export default class InfoLab extends React.Component {
             <div className="lab-content">
               <CardLeftImage
                 tmf={text_maker}
-                img_src={get_static_url("svg/DPs.svg")}
+                svg={
+                  <IconDPs
+                    width="14rem"
+                    color="#FFFFFF"
+                    alternate_color={false}
+                  />
+                }
                 title_key="text_diff_lab_title"
                 text_key="text_diff_lab_text"
                 link_key="link_text"
@@ -59,7 +66,13 @@ export default class InfoLab extends React.Component {
             <div className="lab-content">
               <CardLeftImage
                 tmf={text_maker}
-                img_src={get_static_url("svg/time.svg")}
+                svg={
+                  <IconTime
+                    width="14rem"
+                    color="#FFFFFF"
+                    alternate_color={false}
+                  />
+                }
                 title_key="coming_soon_title"
                 text_key="coming_soon_text"
               />

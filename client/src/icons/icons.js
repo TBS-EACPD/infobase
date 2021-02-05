@@ -940,6 +940,52 @@ const IconGear = (props) => {
   );
 };
 
+const IconDPs = (props) => {
+  const SVGDPs = () => (
+    <Fragment>
+      <g>
+        <path
+          className="icon-dp-1"
+          d="M526.5,76.5V532H69.1V76.5H526.5 M526.5,52.5H69.1c-13.3,0-24,10.7-24,24V532c0,13.3,10.7,24,24,24h457.5
+		c13.3,0,24-10.7,24-24V76.5C550.5,63.2,539.8,52.5,526.5,52.5L526.5,52.5z"
+        />
+      </g>
+      <rect
+        x="98.9"
+        y="107"
+        className="icon-dp-2"
+        width="336.3"
+        height="47.3"
+      />
+      <rect
+        x="99.7"
+        y="181"
+        className="icon-dp-2"
+        width="228.3"
+        height="47.3"
+      />
+      <rect
+        x="99.7"
+        y="255"
+        className="icon-dp-2"
+        width="167.3"
+        height="47.3"
+      />
+      <polyline
+        className="icon-dp-2"
+        points="282.2,376.3 99.7,376.3 99.7,329 304.2,329 "
+      />
+      <circle className="icon-dp-3" cx="392.7" cy="395.6" r="111.3" />
+      <path
+        className="icon-dp-4"
+        d="M345.4,395c22.9,37.2,22.9,37.2,22.9,37.2l84.3-62.2"
+      />
+    </Fragment>
+  );
+
+  return <_IconWrapper {...props} viewbox_width={600} ChildSVG={SVGDPs} />;
+};
+
 const IconPartitionIcon = (props) => {
   const SVGPartitionIcon = () => (
     <Fragment>
@@ -1502,6 +1548,23 @@ const IconClipboard = (props) => {
   );
 };
 
+const IconTime = (props) => {
+  const SVGTime = () => (
+    <Fragment>
+      <path
+        d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+        strokeWidth="0.05rem"
+      />
+      <path
+        d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"
+        strokeWidth="0.05rem"
+      />
+    </Fragment>
+  );
+
+  return <_IconWrapper {...props} viewbox_width={24} ChildSVG={SVGTime} />;
+};
+
 export {
   IconHome,
   IconFeedback,
@@ -1539,6 +1602,7 @@ export {
   IconPin,
   IconUnpin,
   IconGear,
+  IconDPs,
   IconPartitionIcon,
   IconCompareEstimates,
   IconStructure,
@@ -1549,4 +1613,5 @@ export {
   IconMoney,
   IconEmployee,
   IconClipboard,
+  IconTime,
 };
