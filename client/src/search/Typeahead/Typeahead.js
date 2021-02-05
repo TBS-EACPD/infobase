@@ -195,41 +195,52 @@ export class Typeahead extends React.Component {
                 )}
                 {_.chain(results_on_page)
                   .groupBy("config_group_index")
-                  .thru((grouped_results) => {
-                    let index_key_counter = needs_pagination_up_control ? 1 : 0;
-                    return _.flatMap(
-                      grouped_results,
-                      (results, group_index) => (
-                        <Fragment key={`header-${group_index}`}>
-                          <li className="typeahead__header">
+                  .flatMap((results, group_index) =>
+                    _.map(results, (result, index) => ({
+                      is_first_in_group: index === 0,
+                      group_index,
+                      result,
+                    }))
+                  )
+                  .flatMap(
+                    (
+                      { is_first_in_group, group_index, result },
+                      result_index
+                    ) => {
+                      const adjusted_result_index = needs_pagination_up_control
+                        ? result_index + 1
+                        : result_index;
+
+                      return [
+                        is_first_in_group && (
+                          <li
+                            className="typeahead__header"
+                            key={`group-${group_index}`}
+                          >
                             {this.config_groups[group_index].group_header}
                           </li>
-                          {_.map(results, (result) => {
-                            const index = index_key_counter++;
-                            return (
-                              <li
-                                key={`result-${index}`}
-                                className={classNames(
-                                  "typeahead__item",
-                                  index === selection_cursor &&
-                                    "typeahead__item--active"
-                                )}
-                                onClick={() =>
-                                  this.handle_result_selection(result)
-                                }
-                                role="option"
-                                aria-selected={index === selection_cursor}
-                              >
-                                <a className="typeahead__result">
-                                  {result.menu_content(query_value)}
-                                </a>
-                              </li>
-                            );
-                          })}
-                        </Fragment>
-                      )
-                    );
-                  })
+                        ),
+                        <li
+                          key={`result-${adjusted_result_index}`}
+                          className={classNames(
+                            "typeahead__item",
+                            adjusted_result_index === selection_cursor &&
+                              "typeahead__item--active"
+                          )}
+                          onClick={() => this.handle_result_selection(result)}
+                          role="option"
+                          aria-selected={
+                            adjusted_result_index === selection_cursor
+                          }
+                        >
+                          <a className="typeahead__result">
+                            {result.menu_content(query_value)}
+                          </a>
+                        </li>,
+                      ];
+                    }
+                  )
+                  .compact()
                   .value()}
                 {needs_pagination_down_control && (
                   <li
