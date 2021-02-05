@@ -133,7 +133,13 @@ const HomeLayout = (props) => (
           <div className="col-content">
             <CardLeftImage
               tmf={home_tm}
-              img_src={get_static_url("svg/compare-estimates-white.svg")}
+              svg={
+                <IconCompareEstimates
+                  width="17rem"
+                  color="#FFFFFF"
+                  alternate_color={false}
+                />
+              }
               title_key="estimates_comp_home_title"
               text_key="estimates_comp_home_text_supps"
               link_href="#compare_estimates"
@@ -190,7 +196,13 @@ const SubAppLayout = (props) => (
           <div className="fcol-md-3 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              svg={<IconPartitionIcon width="12rem" />}
+              svg={
+                <IconPartitionIcon
+                  width="12rem"
+                  color="#2C70C9"
+                  alternate_color={false}
+                />
+              }
               title_key="partition_home_title"
               text_key="partition_home_text"
               link_href="#partition"
@@ -199,7 +211,13 @@ const SubAppLayout = (props) => (
           <div className="fcol-md-3 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              svg={<IconCompareEstimates width="11rem" />}
+              svg={
+                <IconCompareEstimates
+                  width="11rem"
+                  color="#2C70C9"
+                  alternate_color={false}
+                />
+              }
               title_key="estimates_comp_home_title"
               text_key="estimates_comp_home_text_supps"
               link_href="#compare_estimates"
@@ -208,7 +226,13 @@ const SubAppLayout = (props) => (
           <div className="fcol-md-3 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              svg={<IconStructure width="11rem" />}
+              svg={
+                <IconStructure
+                  width="11rem"
+                  color="#2C70C9"
+                  alternate_color={false}
+                />
+              }
               title_key="igoc_home_title"
               text_key="igoc_home_desc"
               link_href="#igoc"
@@ -219,7 +243,13 @@ const SubAppLayout = (props) => (
           <div className="fcol-md-3 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              svg={<IconTreemap width="11rem" />}
+              svg={
+                <IconTreemap
+                  width="11rem"
+                  color="#2C70C9"
+                  alternate_color={false}
+                />
+              }
               title_key="treemap_home_title"
               text_key="treemap_home_text"
               link_href="#treemap"
@@ -228,7 +258,13 @@ const SubAppLayout = (props) => (
           <div className="fcol-md-3 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              svg={<IconExplorer width="11rem" />}
+              svg={
+                <IconExplorer
+                  width="11rem"
+                  color="#2C70C9"
+                  alternate_color={false}
+                />
+              }
               title_key="explorer_home_title"
               text_key="explorer_home_text"
               link_href="#tag-explorer"
@@ -237,7 +273,13 @@ const SubAppLayout = (props) => (
           <div className="fcol-md-3 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              svg={<IconBuilder width="11rem" alternate_color={false} />}
+              svg={
+                <IconBuilder
+                  width="11rem"
+                  color="#2C70C9"
+                  alternate_color={false}
+                />
+              }
               title_key="home_build_a_report"
               text_key="report_builder_home_desc"
               link_href="#rpb"
@@ -246,7 +288,13 @@ const SubAppLayout = (props) => (
           <div className="fcol-md-3 fcol-sm-6 linkcard">
             <CardTopImage
               tmf={home_tm}
-              svg={<IconLab width="11rem" />}
+              svg={
+                <IconLab
+                  width="11rem"
+                  color="#2C70C9"
+                  alternate_color={false}
+                />
+              }
               title_key="lab_home_title"
               text_key="lab_home_text"
               link_href="#lab"
