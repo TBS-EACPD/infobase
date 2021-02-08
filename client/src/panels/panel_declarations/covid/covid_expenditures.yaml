@@ -5,9 +5,8 @@ covid_expenditures_panel_title:
 covid_estimates_above_tab_footnote_list:
   transform: [handlebars,markdown]
   en: |
-    * Funding amounts refer to the expected 2020-21 cash value of each measure
-    * TODO gather up short list of important notes on this data
-    * E.g. need to be very clear on how it differs from other InfoBase finance data (and why it's apples and oranges with other InfoBase expenditures and estimates)
+    * Funding amounts refer to the expected 2020-21 cash value of each measure 
+    * See the "{{gt "some_things_to_keep_in_mind"}}" section above for more details and additional caveats
   fr: |
     * TODO
 
