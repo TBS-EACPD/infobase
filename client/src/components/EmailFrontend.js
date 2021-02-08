@@ -162,7 +162,7 @@ class EmailFrontend extends React.Component {
       completed_template,
     } = this.state;
 
-    const { top_border, include_privacy } = this.props;
+    const { include_privacy } = this.props;
 
     const user_fields = _.omitBy(
       template,
@@ -448,7 +448,6 @@ class EmailFrontend extends React.Component {
 export { EmailFrontend };
 
 EmailFrontend.defaultProps = {
-  top_border: true,
   include_privacy: true,
   on_submitted: _.noop,
 };
