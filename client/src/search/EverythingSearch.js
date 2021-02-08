@@ -185,27 +185,25 @@ const EverythingSearch = withRouter(
       );
 
       return (
-        <div>
-          <div className="col-md-12">
-            <Typeahead
-              placeholder={placeholder}
-              search_configs={this.get_search_configs()}
-              utility_buttons={
-                !hide_utility_buttons && [
-                  <SearchOptions
-                    key="SearchOptions"
-                    option_checkboxes={option_checkboxes}
-                  />,
-                ]
-              }
-              page_size={page_size}
-              on_query={on_query}
-              on_select={this.onSelect}
-              additional_a11y_description={text_maker(
-                "everything_search_additional_a11y_description"
-              )}
-            />
-          </div>
+        <div className="col-md-12">
+          <Typeahead
+            placeholder={placeholder}
+            search_configs={this.get_search_configs()}
+            utility_buttons={
+              !hide_utility_buttons && [
+                <SearchOptions
+                  key="SearchOptions"
+                  option_checkboxes={option_checkboxes}
+                />,
+              ]
+            }
+            page_size={page_size}
+            on_query={on_query}
+            on_select={this.onSelect}
+            additional_a11y_description={text_maker(
+              "everything_search_additional_a11y_description"
+            )}
+          />
         </div>
       );
     }
