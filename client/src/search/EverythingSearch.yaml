@@ -1,10 +1,10 @@
 options:
   en: Options
-  fr: TODO
+  fr: Options
 
 search_options:
   en: search options
-  fr: TODO
+  fr: options de recherche
 
 everything_search_description:
   en: Choose what to search for
