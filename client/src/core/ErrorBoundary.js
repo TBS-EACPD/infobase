@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 
 import { lang, sha, is_dev } from "src/core/injected_build_constants.js";
 
-import { IconQuestion } from "src/icons/icons";
+import { IconNotAvailable } from "src/icons/icons";
 
 import { get_static_url, make_request } from "../request_utils.js";
 
@@ -94,7 +94,7 @@ export class ErrorBoundary extends React.Component {
               }[lang]
             }
           </span>
-          <IconQuestion
+          <IconNotAvailable
             color="#8c949e"
             width="400"
             max_width="100%"
