@@ -17,16 +17,16 @@ covid_questions_financial_q:
 covid_questions_financial_a:
   transform: [markdown]
   en: |
-    The financial data presented on GC InfoBase is typically based on Volume II of the Public Accounts of Canada and expenditure data presented
+    The financial data presented on GC InfoBase is typically based on Volume II of the Public Accounts of Canada plus expenditure data presented
     following the tabling of the Public Accounts of Canada. Due to the COVID-19 global pandemic, the following exceptions have been made for this
     COVID-19 Response section of GC InfoBase:
     * It includes expenditure data that not yet be published elsewhere, to better provide a more up to date Government of Canada wide view
     * Although expenditures from the Employment Insurance Operating Account are not included in Volume II of the Public Accounts, and therefore are not
-    included elsewhere on GC InfoBase, these amounts have been included here
+    included elsewhere on GC InfoBase, these amounts have been included here as they are an important factor in the government's response to COVID-19
   fr: TODO
 
 covid_questions_funding_value_q:
-  en: What are "funding" amounts, where do they come from?
+  en: What are "funding" amounts? Where do they come from?
   fr: TODO
 covid_questions_funding_value_a:
   transform: [markdown]
