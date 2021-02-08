@@ -1,6 +1,6 @@
 import React from "react";
 
-import { IconDPs, IconTime } from "src/icons/icons";
+import { IconDPs, IconClock } from "src/icons/icons";
 
 import {
   create_text_maker_component,
@@ -66,7 +66,7 @@ export default class InfoLab extends React.Component {
               <CardLeftImage
                 tmf={text_maker}
                 svg={
-                  <IconTime
+                  <IconClock
                     width="100%"
                     color="#FFFFFF"
                     alternate_color={false}

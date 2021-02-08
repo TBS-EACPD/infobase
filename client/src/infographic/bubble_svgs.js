@@ -1,17 +1,17 @@
 import {
-  IconInfoBubble,
+  IconAbout,
   IconRelatedBubble,
-  IconAllDataBubble,
+  IconDataset,
   IconMoney,
   IconEmployee,
-  IconResultsBubble,
+  IconClipboard,
 } from "src/icons/icons";
 
 export default {
-  all_data: { svg: IconAllDataBubble },
+  all_data: { svg: IconDataset },
   related: { svg: IconRelatedBubble },
   people: { svg: IconEmployee },
   financial: { svg: IconMoney },
-  intro: { svg: IconInfoBubble },
-  results: { svg: IconResultsBubble },
+  intro: { svg: IconAbout },
+  results: { svg: IconClipboard },
 };

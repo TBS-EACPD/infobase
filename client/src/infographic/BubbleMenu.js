@@ -59,7 +59,7 @@ const BubbleMenu = ({ items, active_item_id }) => {
                       SVG && (
                         <SVG
                           alternate_color={false}
-                          width="100%"
+                          width="90%"
                           direct_render
                         />
                       )

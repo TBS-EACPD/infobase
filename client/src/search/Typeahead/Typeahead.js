@@ -6,7 +6,7 @@ import { create_text_maker_component } from "src/components/index.js";
 
 import { log_standard_event } from "src/core/analytics.js";
 
-import { get_static_url } from "src/request_utils.js";
+import { IconSearch } from "src/icons/icons";
 
 import { InfoBaseHighlighter } from "../search_utils.js";
 
@@ -115,9 +115,10 @@ export class Typeahead extends React.Component {
         <div className="typeahead__search-bar">
           <div className="typeahead__icon-container">
             <span aria-hidden="true">
-              <img
-                src={`${get_static_url("svg/search.svg")}`}
-                style={{ width: "30px", height: "30px" }}
+              <IconSearch
+                width="30px"
+                color="#2C70C9"
+                alternate_color={false}
               />
             </span>
           </div>
