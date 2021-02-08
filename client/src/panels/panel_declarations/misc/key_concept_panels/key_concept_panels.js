@@ -110,6 +110,7 @@ export const declare_covid_key_concepts_panel = () =>
       render: curried_render({
         q_a_keys: [
           "covid_questions_up_to_date",
+          "covid_questions_financial",
           "covid_questions_funding_value",
         ],
         omit_name_item: true,
