@@ -943,42 +943,58 @@ const IconGear = (props) => {
 const IconDPs = (props) => {
   const SVGDPs = () => (
     <Fragment>
-      <g>
-        <path
-          className="icon-dp-1"
-          d="M526.5,76.5V532H69.1V76.5H526.5 M526.5,52.5H69.1c-13.3,0-24,10.7-24,24V532c0,13.3,10.7,24,24,24h457.5
+      <path
+        d="M526.5,76.5V532H69.1V76.5H526.5 M526.5,52.5H69.1c-13.3,0-24,10.7-24,24V532c0,13.3,10.7,24,24,24h457.5
 		c13.3,0,24-10.7,24-24V76.5C550.5,63.2,539.8,52.5,526.5,52.5L526.5,52.5z"
-        />
-      </g>
+      />
       <rect
         x="98.9"
         y="107"
-        className="icon-dp-2"
+        className="icon-stroke"
         width="336.3"
         height="47.3"
+        strokeWidth="15px"
+        strokeMiterlimit="10px"
       />
       <rect
         x="99.7"
         y="181"
-        className="icon-dp-2"
+        className="icon-stroke"
         width="228.3"
         height="47.3"
+        strokeWidth="15px"
+        strokeMiterlimit="10px"
       />
       <rect
         x="99.7"
         y="255"
-        className="icon-dp-2"
+        className="icon-stroke"
         width="167.3"
         height="47.3"
+        strokeWidth="15px"
+        strokeMiterlimit="10px"
       />
       <polyline
-        className="icon-dp-2"
+        className="icon-stroke"
         points="282.2,376.3 99.7,376.3 99.7,329 304.2,329 "
+        strokeWidth="15px"
+        strokeMiterlimit="10px"
       />
-      <circle className="icon-dp-3" cx="392.7" cy="395.6" r="111.3" />
+      <circle
+        className="icon-stroke"
+        cx="392.7"
+        cy="395.6"
+        r="111.3"
+        strokeWidth="20px"
+        strokeMiterlimit="10px"
+      />
       <path
-        className="icon-dp-4"
+        className="icon-stroke"
         d="M345.4,395c22.9,37.2,22.9,37.2,22.9,37.2l84.3-62.2"
+        strokeWidth="27px"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit="10px"
       />
     </Fragment>
   );
@@ -991,8 +1007,10 @@ const IconPartition = (props) => {
     <Fragment>
       <path
         id="path4491"
-        className="icon-partition-1"
+        className="icon-stroke"
         d="M111.1644,216.8344V76.6461L4,7V150.517l104.2484,67.5977,2.916-1.28"
+        strokeWidth="7px"
+        strokeMiterlimit="10px"
       />
       <rect
         className="icon-partition-2"
@@ -1000,18 +1018,26 @@ const IconPartition = (props) => {
         y="77.1582"
         width="117.3706"
         height="141.0845"
+        strokeWidth="7px"
+        strokeMiterlimit="10px"
       />
       <polygon
-        className="icon-partition-3"
+        className="icon-stroke"
         points="327.602 208.947 232.44 176.333 231.607 77.158 328.008 109.656 327.602 208.947"
+        strokeWidth="7px"
+        strokeLinejoin="round"
       />
       <polygon
-        className="icon-partition-3"
+        className="icon-stroke"
         points="326.274 267.533 231.607 218.243 231.607 180.686 326.274 229.976 326.274 267.533"
+        strokeWidth="7px"
+        strokeLinejoin="round"
       />
       <polygon
         className="icon-partition-2"
         points="330.968 110.424 447 110.424 446.595 209.075 330.563 209.075 330.968 110.424"
+        strokeWidth="7px"
+        strokeMiterlimit="10px"
       />
       <rect
         className="icon-partition-2"
@@ -1019,12 +1045,16 @@ const IconPartition = (props) => {
         y="229.8479"
         width="118.1815"
         height="37.5568"
+        strokeWidth="7px"
+        strokeMiterlimit="10px"
       />
       <path
         id="path4491-2"
         data-name="path4491"
-        className="icon-partition-1"
+        className="icon-stroke"
         d="M111.5588,330.9921V242.1258L4,157.65v90.9764l104.6427,83.1774,2.9161-.8116"
+        strokeWidth="7px"
+        strokeMiterlimit="10px"
       />
       <rect
         className="icon-partition-2"
@@ -1032,22 +1062,32 @@ const IconPartition = (props) => {
         y="242.4504"
         width="117.3706"
         height="89.4344"
+        strokeWidth="7px"
+        strokeMiterlimit="10px"
       />
       <polygon
-        className="icon-partition-3"
+        className="icon-stroke"
         points="327.208 341.887 232.44 300.948 232.002 242.45 327.602 287.691 327.208 341.887"
+        strokeWidth="7px"
+        strokeLinejoin="round"
       />
       <polygon
-        className="icon-partition-3"
+        className="icon-stroke"
         points="327.627 391 232.002 331.885 231.607 303.707 327.233 362.822 327.627 391"
+        strokeWidth="7px"
+        strokeLinejoin="round"
       />
       <polygon
         className="icon-partition-2"
         points="330.563 288.178 446.595 288.178 446.2 341.968 330.168 341.968 330.563 288.178"
+        strokeWidth="7px"
+        strokeMiterlimit="10px"
       />
       <polygon
         className="icon-partition-2"
         points="330.278 362.741 446.285 362.741 446.509 390.924 330.503 390.924 330.278 362.741"
+        strokeWidth="7px"
+        strokeMiterlimit="10px"
       />
     </Fragment>
   );
@@ -1246,7 +1286,6 @@ const IconTreemap = (props) => {
     <Fragment>
       <g>
         <path
-          className="treemap-1"
           d="M526.5,76.5V532H69.1V76.5H526.5 M526.5,52.5H69.1c-13.3,0-24,10.7-24,24V532c0,13.3,10.7,24,24,24h457.5
           c13.3,0,24-10.7,24-24V76.5C550.5,63.2,539.8,52.5,526.5,52.5L526.5,52.5z"
         />
@@ -1254,37 +1293,47 @@ const IconTreemap = (props) => {
       <rect
         x="332.7"
         y="100.3"
-        className="treemap-2"
+        className="icon-stroke"
         width="171.3"
         height="204.9"
+        strokeWidth="15px"
+        strokeMiterlimit="10px"
       />
       <rect
         x="91.2"
         y="100.3"
-        className="treemap-2"
+        className="icon-stroke"
         width="216"
         height="409.7"
+        strokeWidth="15px"
+        strokeMiterlimit="10px"
       />
       <rect
         x="332.7"
         y="329.8"
-        className="treemap-2"
+        className="icon-stroke"
         width="171.3"
         height="107.1"
+        strokeWidth="15px"
+        strokeMiterlimit="10px"
       />
       <rect
         x="332.7"
         y="462.7"
-        className="treemap-2"
+        className="icon-stroke"
         width="83"
         height="47.3"
+        strokeWidth="15px"
+        strokeMiterlimit="10px"
       />
       <rect
         x="440.3"
         y="462.7"
-        className="treemap-2"
+        className="icon-stroke"
         width="63.7"
         height="47.3"
+        strokeWidth="15px"
+        strokeMiterlimit="10px"
       />
     </Fragment>
   );
@@ -1375,14 +1424,55 @@ const IconLab = (props) => {
   const SVGLab = () => (
     <Fragment>
       <path
-        className="lab-1"
+        className="icon-stroke"
         d="M169.7,49.7l-1,91.3l0,0l68.6,167.2H34.5l67.6-167.2l0,0V49.7h-1.7c-7.1,0-12.8-5.8-12.8-12.8v-1.6
-		c0-7.1,5.8-12.8,12.8-12.8h71c7.1,0,12.8,5.8,12.8,12.8v1.6c0,7.1-5.8,12.8-12.8,12.8H169.7z"
+    c0-7.1,5.8-12.8,12.8-12.8h71c7.1,0,12.8,5.8,12.8,12.8v1.6c0,7.1-5.8,12.8-12.8,12.8H169.7z"
+        strokeWidth="15px"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit="10px"
       />
-      <line className="lab-2" x1="92.3" y1="165.3" x2="178.8" y2="165.3" />
-      <circle className="lab-2" cx="108.5" cy="234.7" r="8.1" />
-      <circle className="lab-2" cx="145.9" cy="197.3" r="5.1" />
-      <circle className="lab-2" cx="164.2" cy="257.7" r="8" />
+      <line
+        className="icon-stroke"
+        x1="92.3"
+        y1="165.3"
+        x2="178.8"
+        y2="165.3"
+        strokeWidth="7px"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit="10px"
+      />
+      <circle
+        className="icon-stroke"
+        cx="108.5"
+        cy="234.7"
+        r="8.1"
+        strokeWidth="7px"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit="10px"
+      />
+      <circle
+        className="icon-stroke"
+        cx="145.9"
+        cy="197.3"
+        r="5.1"
+        strokeWidth="7px"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit="10px"
+      />
+      <circle
+        className="icon-stroke"
+        cx="164.2"
+        cy="257.7"
+        r="8"
+        strokeWidth="7px"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit="10px"
+      />
     </Fragment>
   );
 
