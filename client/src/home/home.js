@@ -3,6 +3,18 @@ import React from "react";
 import MediaQuery from "react-responsive";
 
 import {
+  create_text_maker_component,
+  CardTopImage,
+  CardLeftImage,
+  ContainerEscapeHatch,
+  TrinityItem,
+} from "src/components/index.js";
+
+import { highlightColor } from "src/core/color_defs.js";
+import { lang } from "src/core/injected_build_constants.js";
+import { StandardRouteContainer } from "src/core/NavComponents.js";
+
+import {
   IconDPs,
   IconPartitionIcon,
   IconCompareEstimates,
@@ -16,18 +28,6 @@ import {
   IconResults,
   IconFlagLine,
 } from "src/icons/icons";
-
-import {
-  create_text_maker_component,
-  CardTopImage,
-  CardLeftImage,
-  ContainerEscapeHatch,
-  TrinityItem,
-} from "src/components/index.js";
-
-import { highlightColor } from "src/core/color_defs.js";
-import { lang } from "src/core/injected_build_constants.js";
-import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import { get_static_url } from "src/request_utils.js";
 
