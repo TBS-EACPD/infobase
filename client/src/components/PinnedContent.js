@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 import { InView } from "react-intersection-observer";
@@ -10,7 +9,6 @@ import { create_text_maker } from "src/models/text.js";
 
 import { backgroundColor } from "src/core/color_defs.js";
 import { has_local_storage } from "src/core/feature_detection.js";
-
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { IconPin, IconUnpin } from "src/icons/icons.js";
@@ -31,46 +29,49 @@ export const PinnedContent = withRouter(
         local_storage_name,
       } = props;
 
-      let user_enabled_pinning;
-      if (has_local_storage) {
-        try {
-          user_enabled_pinning = JSON.parse(
-            localStorage.getItem(local_storage_name)
-          );
-          user_enabled_pinning = _.isBoolean(user_enabled_pinning)
-            ? user_enabled_pinning
-            : true;
-        } catch {
-          user_enabled_pinning = true;
+      const user_has_enabled_pinning = (() => {
+        if (panel_link) {
+          // TODO hack for a specific gotcha from infographics, where we want to disable the pinned content there when directly linking to a panel,
+          // because the pinned content otherwise hides the linked panel title/is confusing... should be handled somewhere else though, not a PinnedContent concern
+          return false;
+        } else if (has_local_storage && local_storage_name) {
+          try {
+            const storage_value = JSON.parse(
+              localStorage.getItem(local_storage_name)
+            );
+            return _.isBoolean(storage_value) ? storage_value : true;
+          } catch {
+            return true;
+          }
         }
-      }
-
-      if (panel_link) {
-        user_enabled_pinning = false;
-      }
+      })();
 
       this.state = {
-        user_enabled_pinning: user_enabled_pinning,
+        user_has_enabled_pinning,
       };
     }
 
     pin_pressed = () => {
       const { local_storage_name } = this.props;
-      const { user_enabled_pinning } = this.state;
-      localStorage.setItem(local_storage_name, !user_enabled_pinning);
+      const { user_has_enabled_pinning } = this.state;
+
+      has_local_storage &&
+        local_storage_name &&
+        localStorage.setItem(local_storage_name, !user_has_enabled_pinning);
+
       this.setState({
-        user_enabled_pinning: !user_enabled_pinning,
+        user_has_enabled_pinning: !user_has_enabled_pinning,
       });
     };
 
     handleKeyDown = (e) => {
-      if (e.key == "Tab") {
-        this.setState({ user_enabled_pinning: false });
+      if (e.key === "Tab") {
+        this.setState({ user_has_enabled_pinning: false });
       }
     };
 
     render() {
-      const { user_enabled_pinning } = this.state;
+      const { user_has_enabled_pinning } = this.state;
       const { children } = this.props;
 
       return !is_a11y_mode ? (
@@ -82,15 +83,16 @@ export const PinnedContent = withRouter(
                 <div ref={ref}>
                   {/* this div is for sticky styline */}
                   <div
-                    className={classNames(
-                      !inView &&
-                        user_enabled_pinning &&
-                        entry &&
-                        entry.boundingClientRect.top < 0 &&
-                        "sticky"
-                    )}
                     style={{
                       width: width,
+                      ...(user_has_enabled_pinning &&
+                        !inView &&
+                        entry &&
+                        entry.boundingClientRect.top < 0 && {
+                          position: "fixed",
+                          top: 0,
+                          zIndex: 9001,
+                        }),
                     }}
                   >
                     <div style={{ position: "relative" }}>
@@ -109,11 +111,11 @@ export const PinnedContent = withRouter(
                             border: "none",
                           }}
                           aria-label={text_maker(
-                            user_enabled_pinning ? "unpin" : "pin"
+                            user_has_enabled_pinning ? "unpin" : "pin"
                           )}
                           onKeyDown={this.handleKeyDown}
                         >
-                          {user_enabled_pinning ? (
+                          {user_has_enabled_pinning ? (
                             <IconPin
                               height="25px"
                               width="25px"

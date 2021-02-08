@@ -1,5 +1,8 @@
+import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
+import { ButtonToolbar } from "react-bootstrap";
+import MediaQuery from "react-responsive";
 
 import { PanelRegistry, layout_types } from "src/panels/PanelRegistry.js";
 
@@ -72,6 +75,8 @@ const {
   create_text_maker_component,
   SpinnerWrapper,
   DlItem,
+  PinnedContent,
+  AutoAccordion,
 } = util_components;
 
 const declare_panel = ({ panel_key, levels, panel_config_func }) => {
@@ -159,6 +164,32 @@ const HeightClippedGraph = ({ clipHeight, children }) => {
   );
 };
 
+const SomeThingsToKeepInMind = ({ children }) => (
+  <MediaQuery maxWidth={breakpoints.maxMediumDevice}>
+    {(matches) => (
+      <PinnedContent local_storage_name={"user_enabled_pinning_key_concepts"}>
+        <div className={classNames("mrgn-bttm-md", matches && "mrgn-tp-md")}>
+          <ButtonToolbar style={{ margin: 0 }}>
+            <AutoAccordion
+              title={trivial_text_maker("some_things_to_keep_in_mind")}
+              show_pin
+            >
+              <div
+                style={{
+                  paddingLeft: "10px",
+                  paddingRight: "10px",
+                }}
+              >
+                {children}
+              </div>
+            </AutoAccordion>
+          </ButtonToolbar>
+        </div>
+      </PinnedContent>
+    )}
+  </MediaQuery>
+);
+
 export {
   // re-exports
   Table,
@@ -219,4 +250,5 @@ export {
   // shared panel components
   HeightClippedGraph,
   TspanLineWrapper,
+  SomeThingsToKeepInMind,
 };
