@@ -16,7 +16,7 @@ import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import {
   IconDPs,
-  IconPartitionIcon,
+  IconPartition,
   IconCompareEstimates,
   IconStructure,
   IconTreemap,
@@ -210,7 +210,7 @@ const SubAppLayout = (props) => (
             <CardTopImage
               tmf={home_tm}
               svg={
-                <IconPartitionIcon
+                <IconPartition
                   width="100%"
                   color="#2C70C9"
                   alternate_color={false}
