@@ -3,7 +3,6 @@ export {
   declare_results_key_concepts_panel,
   declare_people_key_concepts_panel,
   declare_tagging_key_concepts_panel,
-  declare_covid_key_concepts_panel,
 } from "./key_concept_panels/key_concept_panels.js";
 
 export { declare_gov_related_info_panel } from "./gov_related.js";
