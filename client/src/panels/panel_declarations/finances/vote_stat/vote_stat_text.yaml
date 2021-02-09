@@ -97,7 +97,7 @@ gov_in_year_estimates_split_text:
     {{/if}}
   fr: |
    Pour l’exercice courant ({{est_in_year}}), le total de dépenses budgétaires prévues s’élève à 
-   **{{fmt_compact1_written gov_tabled_est_in_year}}** dans le(s) {{gl_tt "processus budgétaire(s)" "EST_PROC"}} et {{gl_tt "redressements et virements" "ADJUS"}} suivants:
+   **{{fmt_compact1_written tabled_est_in_year}}** dans le(s) {{gl_tt "processus budgétaire(s)" "EST_PROC"}} et {{gl_tt "redressements et virements" "ADJUS"}} suivants:
    {{#each in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1_written this.[1] }}** 
    {{/each}}
