@@ -475,8 +475,8 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
       title={text_maker("auth_exp_planned_spending_title", final_info)}
       {...{ footnotes, sources, glossary_keys }}
     >
-      <div className="frow">
-        <div className="fcol-md-4">
+      <div className="frow middle-xs">
+        <div className="fcol-xs-12 fcol-md-4">
           <TM
             className="medium-panel-text"
             k={`${subject.level}_auth_exp_planned_spending_body`}
@@ -498,7 +498,7 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
             </div>
           )}
         </div>
-        <div className="fcol-md-8">
+        <div className="fcol-xs-12 fcol-md-8">
           <AuthExpPlannedSpendingGraph
             data_series={data_series}
             gap_year={additional_info.gap_year}
