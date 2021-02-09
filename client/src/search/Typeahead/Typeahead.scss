@@ -46,6 +46,7 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: $standardBorderRadius;
   box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  list-style-type: none;
 }
 
 .typeahead__header {
@@ -56,10 +57,7 @@
   white-space: normal;
   border-bottom: 1px solid $separatorColor;
   color: #777;
-
-  &:not(:first-child) {
-    border-top: 1px solid $separatorColor;
-  }
+  border-top: 1px solid $separatorColor;
 }
 
 .typeahead__item {	
@@ -69,9 +67,7 @@
   cursor: pointer;	
   display: block;
 
-  &:not(:first-child) {	
-    border-top: 1px solid $separatorColor;	
-  }	
+  border-top: 1px solid $separatorColor;	
 
   &--active,
   &--active,
