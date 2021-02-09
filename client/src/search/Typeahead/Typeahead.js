@@ -2,6 +2,13 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import {
+  AutoSizer,
+  List,
+  CellMeasurer,
+  CellMeasurerCache,
+} from "react-virtualized";
+
 import { create_text_maker_component } from "src/components/index.js";
 
 import { log_standard_event } from "src/core/analytics.js";
@@ -17,11 +24,16 @@ import "./Typeahead.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
+const cache = new CellMeasurerCache({
+  fixedWidth: true,
+});
+
 export class Typeahead extends React.Component {
   constructor(props) {
     super(props);
 
     this.typeahead_ref = React.createRef();
+    this.list_ref = React.createRef();
 
     this.menu_id = _.uniqueId("typeahead-");
 
@@ -31,6 +43,7 @@ export class Typeahead extends React.Component {
       matching_results_by_page: [],
       pagination_cursor: this.default_pagination_cursor,
       selection_cursor: this.default_selection_cursor,
+      list_height: 400,
     };
   }
   componentDidMount() {
@@ -86,6 +99,23 @@ export class Typeahead extends React.Component {
           });
       }
     }
+
+    if (this.list_ref.current) {
+      if (prevState.pagination_cursor !== this.state.pagination_cursor) {
+        cache.clearAll();
+        this.list_ref.current.recomputeRowHeights();
+      }
+
+      this.list_ref.current.Grid.measureAllCells();
+      const list_height = this.list_ref.current.Grid.getTotalRowsHeight();
+      if (list_height !== this.state.list_height) {
+        if (list_height < 400) {
+          this.setState({ list_height: list_height });
+        } else if (this.state.list_height < 400) {
+          this.setState({ list_height: 400 });
+        }
+      }
+    }
   }
   render() {
     const {
@@ -96,7 +126,7 @@ export class Typeahead extends React.Component {
       utility_buttons,
     } = this.props;
 
-    const { query_value, selection_cursor } = this.state;
+    const { query_value, selection_cursor, list_height } = this.state;
 
     const derived_menu_state = this.derived_menu_state;
     const {
@@ -109,6 +139,91 @@ export class Typeahead extends React.Component {
       needs_pagination_down_control,
       total_menu_items,
     } = derived_menu_state;
+
+    const list_items = _.compact([
+      <li key="header" className="typeahead__header">
+        <TM
+          k="paginate_status"
+          args={{
+            page_range_start,
+            page_range_end,
+            total_matching_results,
+          }}
+        />
+      </li>,
+      needs_pagination_up_control && (
+        <li
+          className={classNames(
+            "typeahead__item",
+            0 === selection_cursor && "typeahead__item--active"
+          )}
+          onClick={this.handle_paginate_up}
+          role="button"
+        >
+          <a className="typeahead__control">
+            <span className="aria-hidden">▲</span>
+            <br />
+            <TM k="paginate_previous" args={{ page_size: page_size }} />
+          </a>
+        </li>
+      ),
+      ..._.chain(results_on_page)
+        .groupBy("config_group_index")
+        .flatMap((results, group_index) =>
+          _.map(results, (result, index) => ({
+            is_first_in_group: index === 0,
+            group_index,
+            result,
+          }))
+        )
+        .flatMap(({ is_first_in_group, group_index, result }, result_index) => {
+          const adjusted_result_index = needs_pagination_up_control
+            ? result_index + 1
+            : result_index;
+
+          return [
+            is_first_in_group && (
+              <li className="typeahead__header" key={`group-${group_index}`}>
+                {this.config_groups[group_index].group_header}
+              </li>
+            ),
+            <li
+              key={`result-${adjusted_result_index}`}
+              className={classNames(
+                "typeahead__item",
+                adjusted_result_index === selection_cursor &&
+                  "typeahead__item--active"
+              )}
+              onClick={() => this.handle_result_selection(result)}
+              role="option"
+              aria-selected={adjusted_result_index === selection_cursor}
+            >
+              <a className="typeahead__result">
+                {result.menu_content(query_value)}
+              </a>
+            </li>,
+          ];
+        })
+        .compact()
+        .value(),
+      needs_pagination_down_control && (
+        <li
+          className={classNames(
+            "typeahead__item",
+            total_menu_items - 1 === selection_cursor &&
+              "typeahead__item--active"
+          )}
+          onClick={this.handle_paginate_down}
+          role="button"
+        >
+          <a className="typeahead__control">
+            <TM k="paginate_next" args={{ next_page_size: next_page_size }} />
+            <br />
+            <span className="aria-hidden">▼</span>
+          </a>
+        </li>
+      ),
+    ]);
 
     return (
       <div ref={this.typeahead_ref} className="typeahead">
@@ -151,120 +266,42 @@ export class Typeahead extends React.Component {
           />
         )}
         {this.show_menu && (
-          <ul
-            className="typeahead__dropdown"
-            role="listbox"
-            id={this.menu_id}
-            aria-expanded={this.show_menu}
-          >
-            {_.isEmpty(results_on_page) && (
-              <li className="typeahead__header">
-                {text_maker("no_matches_found")}
-              </li>
-            )}
-            {!_.isEmpty(results_on_page) && (
-              <Fragment>
-                <li className="typeahead__header">
-                  <TM
-                    k="paginate_status"
-                    args={{
-                      page_range_start,
-                      page_range_end,
-                      total_matching_results,
-                    }}
-                  />
-                </li>
-                {needs_pagination_up_control && (
-                  <li
-                    className={classNames(
-                      "typeahead__item",
-                      0 === selection_cursor && "typeahead__item--active"
-                    )}
-                    onClick={this.handle_paginate_up}
-                    role="button"
+          <AutoSizer>
+            {({ width }) => (
+              <List
+                className="typeahead__dropdown"
+                role="listbox"
+                id={this.menu_id}
+                aria-expanded={this.show_menu}
+                height={list_height}
+                width={width}
+                ref={this.list_ref}
+                deferredMeasurementCache={cache}
+                rowHeight={cache.rowHeight}
+                rowCount={_.size(list_items)}
+                rowRenderer={({ index, isScrolling, key, parent, style }) => (
+                  <CellMeasurer
+                    cache={cache}
+                    columnIndex={0}
+                    key={key}
+                    parent={parent}
+                    rowIndex={index}
                   >
-                    <a className="typeahead__control">
-                      <span className="aria-hidden">▲</span>
-                      <br />
-                      <TM
-                        k="paginate_previous"
-                        args={{ page_size: page_size }}
-                      />
-                    </a>
-                  </li>
-                )}
-                {_.chain(results_on_page)
-                  .groupBy("config_group_index")
-                  .flatMap((results, group_index) =>
-                    _.map(results, (result, index) => ({
-                      is_first_in_group: index === 0,
-                      group_index,
-                      result,
-                    }))
-                  )
-                  .flatMap(
-                    (
-                      { is_first_in_group, group_index, result },
-                      result_index
-                    ) => {
-                      const adjusted_result_index = needs_pagination_up_control
-                        ? result_index + 1
-                        : result_index;
-
-                      return [
-                        is_first_in_group && (
-                          <li
-                            className="typeahead__header"
-                            key={`group-${group_index}`}
-                          >
-                            {this.config_groups[group_index].group_header}
+                    {({ measure, registerChild }) => (
+                      <div ref={registerChild} style={style}>
+                        {_.isEmpty(results_on_page) && (
+                          <li className="typeahead__header">
+                            {text_maker("no_matches_found")}
                           </li>
-                        ),
-                        <li
-                          key={`result-${adjusted_result_index}`}
-                          className={classNames(
-                            "typeahead__item",
-                            adjusted_result_index === selection_cursor &&
-                              "typeahead__item--active"
-                          )}
-                          onClick={() => this.handle_result_selection(result)}
-                          role="option"
-                          aria-selected={
-                            adjusted_result_index === selection_cursor
-                          }
-                        >
-                          <a className="typeahead__result">
-                            {result.menu_content(query_value)}
-                          </a>
-                        </li>,
-                      ];
-                    }
-                  )
-                  .compact()
-                  .value()}
-                {needs_pagination_down_control && (
-                  <li
-                    className={classNames(
-                      "typeahead__item",
-                      total_menu_items - 1 === selection_cursor &&
-                        "typeahead__item--active"
+                        )}
+                        {!_.isEmpty(results_on_page) && list_items[index]}
+                      </div>
                     )}
-                    onClick={this.handle_paginate_down}
-                    role="button"
-                  >
-                    <a className="typeahead__control">
-                      <TM
-                        k="paginate_next"
-                        args={{ next_page_size: next_page_size }}
-                      />
-                      <br />
-                      <span className="aria-hidden">▼</span>
-                    </a>
-                  </li>
+                  </CellMeasurer>
                 )}
-              </Fragment>
+              />
             )}
-          </ul>
+          </AutoSizer>
         )}
       </div>
     );
