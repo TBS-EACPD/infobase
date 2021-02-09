@@ -150,6 +150,8 @@ export class Typeahead extends React.Component {
             aria-autocomplete="none"
             aria-owns={this.menu_id}
             aria-describedby={`${this.menu_id}-hint`}
+            aria-label={placeholder}
+            aria-expanded={this.show_menu}
           />
           {utility_buttons}
         </div>

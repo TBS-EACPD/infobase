@@ -68,6 +68,10 @@ historical_g_and_c_detailed_title:
   en:  Details of expenditures by Transfer Payments ({{pa_last_year_5}} to {{pa_last_year}})
   fr:  Détails des dépenses par paiements de transfert ({{pa_last_year_5}} à {{pa_last_year}})
 
+historical_g_and_c_select:
+  en: Select payment type
+  fr: Sélectionnez le type de paiement
+
 
 dept_historical_g_and_c_text:
   transform: [handlebars,markdown]

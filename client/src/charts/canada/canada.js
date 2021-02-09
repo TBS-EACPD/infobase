@@ -232,8 +232,11 @@ export class Canada extends React.Component {
                 width: "100%",
                 marginBottom: "10px",
                 textAlign: "center",
+                display: "flex",
+                flexDirection: "column",
               }}
             >
+              <label>{text_maker("select_year")}</label>
               <Select
                 selected={selected_year_index}
                 options={_.map(years, (year, index) => ({
@@ -243,6 +246,7 @@ export class Canada extends React.Component {
                 onSelect={this.year_select_callbback}
                 title={text_maker("select_year")}
                 className={"bold"}
+                style={{ maxWidth: "fit-content", alignSelf: "center" }}
               />
             </div>
           )}

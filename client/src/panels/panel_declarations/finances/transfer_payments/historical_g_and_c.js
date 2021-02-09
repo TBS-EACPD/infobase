@@ -293,24 +293,35 @@ class DetailedHistTPItems extends React.Component {
           }}
         >
           {title_el}
-          <select
-            style={{ margin: "2rem 0" }}
-            className="form-control"
-            onChange={(evt) => {
-              //reset colour scale for new items
-              this.color_scale = infobase_colors();
-              this.setState({
-                active_type: evt.target.value,
-                active_indices: [0],
-              });
+          <div
+            className="medium-panel-text"
+            style={{
+              margin: "2rem 0",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            {_.map(order_type_id, (type_id) => (
-              <option value={type_id} key={type_id}>
-                {tp_type_name(type_id)}
-              </option>
-            ))}
-          </select>
+            {text_maker("historical_g_and_c_select")}
+            <select
+              aria-label={text_maker("historical_g_and_c_select")}
+              className="form-control"
+              onChange={(evt) => {
+                //reset colour scale for new items
+                this.color_scale = infobase_colors();
+                this.setState({
+                  active_type: evt.target.value,
+                  active_indices: [0],
+                });
+              }}
+            >
+              {_.map(order_type_id, (type_id) => (
+                <option value={type_id} key={type_id}>
+                  {tp_type_name(type_id)}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
         <div className="frow">
           <div className="fcol-md-4">

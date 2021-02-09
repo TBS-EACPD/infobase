@@ -184,7 +184,7 @@ export class CircleProportionChart extends React.Component {
 
     const graph = (
       <Fragment>
-        <div style={{ height: height }}>
+        <div style={{ height: height }} aria-hidden={true}>
           <ResponsiveBubble
             root={graph_data}
             identity="name"
