@@ -6,7 +6,7 @@ import { create_text_maker_component } from "src/components/index.js";
 
 import { log_standard_event } from "src/core/analytics.js";
 
-import { IconSearch } from "src/icons/icons";
+import { IconSearch } from "src/icons/icons.js";
 
 import { InfoBaseHighlighter } from "../search_utils.js";
 

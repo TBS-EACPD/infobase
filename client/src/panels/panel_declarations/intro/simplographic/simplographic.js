@@ -8,7 +8,7 @@ import {
   IconEmployee,
   IconStructure,
   IconClipboard,
-} from "src/icons/icons";
+} from "src/icons/icons.js";
 
 import { infograph_href_template, rpb_link } from "../../../../link_utils.js";
 import { ResultCounts, current_drr_key } from "../../../../models/results.js";

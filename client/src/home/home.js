@@ -27,7 +27,7 @@ import {
   IconPeople,
   IconResults,
   IconFlagLine,
-} from "src/icons/icons";
+} from "src/icons/icons.js";
 
 import { get_static_url } from "src/request_utils.js";
 
