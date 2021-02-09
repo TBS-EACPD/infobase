@@ -11,7 +11,7 @@ import {
   IconSass,
   IconGraphQL,
   IconBaselineCloud,
-} from "src/icons/icons";
+} from "src/icons/icons.js";
 
 import { IconGrid } from "../components/IconGrid.js";
 import { TM } from "../components/index.js";

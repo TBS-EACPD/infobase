@@ -1,6 +1,6 @@
 import React from "react";
 
-import { IconDPs, IconClock } from "src/icons/icons";
+import { IconDPs, IconClock } from "src/icons/icons.js";
 
 import {
   create_text_maker_component,

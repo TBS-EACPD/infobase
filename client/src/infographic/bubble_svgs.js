@@ -5,7 +5,7 @@ import {
   IconMoney,
   IconEmployee,
   IconClipboard,
-} from "src/icons/icons";
+} from "src/icons/icons.js";
 
 export default {
   all_data: { svg: IconDataset },
