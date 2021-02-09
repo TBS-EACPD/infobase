@@ -94,7 +94,7 @@ jobs:
   a11y_test_axe:
     working_directory: "~/InfoBase"
     docker:
-      - image: markhobson/node-chrome:latest
+      - image: selenium/node-chrome:latest
         <<: *dockerhub_auth
     steps:
       - checkout:
