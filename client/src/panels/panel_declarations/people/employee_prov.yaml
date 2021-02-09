@@ -44,4 +44,4 @@ dept_employee_prov_text:
    * La **région de la capitale nationale (RCN)** inclut à la fois les employés qui travaillent à Ottawa (Ontario) et ceux qui travaillent à Gatineau (Québec).
    
    
-   {{#unless is_a11y_mode}}* Cliquez ou pointez avec votre curseur sur une province ou territoire figurant à la carte ci dessous pour voir le nombre d’employés **{{de_dept dept}}** travaillant dans cette région au moment des cinq derniers aperçus. Prière de retenir que l’échelle peut varier en fonction des données affichées. {{/unless}}
+   {{#unless is_a11y_mode}}* Cliquez ou pointez avec votre curseur sur une province ou territoire figurant à la carte ci dessous pour voir le nombre d’employés **{{de_dept subject}}** travaillant dans cette région au moment des cinq derniers aperçus. Prière de retenir que l’échelle peut varier en fonction des données affichées. {{/unless}}

@@ -88,7 +88,7 @@ module.exports.route_load_tests_config = [
   {
     name: "Infographic - Dept - People",
     route: "orgs/dept/326/infograph/people",
-    test_on: ["eng", "basic-eng"],
+    test_on: ["eng", "fra", "basic-eng"],
   },
   {
     name: "Infographic - Dept - Results",
