@@ -463,10 +463,10 @@ export class Typeahead extends React.Component {
 
       const active_item = this.active_item;
 
-      if (_.isUndefined(active_item)) {
-        this.setState({ selection_cursor: this.default_selection_cursor + 1 });
-      } else {
+      if (!_.isNull(active_item)) {
         active_item.click();
+      } else if (!_.isEmpty(this.state.matching_results_by_page)) {
+        this.setState({ selection_cursor: this.default_selection_cursor + 1 });
       }
     }
   };
