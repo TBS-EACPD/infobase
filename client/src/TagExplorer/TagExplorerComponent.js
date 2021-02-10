@@ -61,14 +61,17 @@ function render_non_col_content({ node }) {
   return (
     <div>
       {!_.isEmpty(extended_defs) && (
-        <dl className="dl-horizontal">
+        <dl className="row">
           {_.map(
             extended_defs,
             ({ term, def }, ix) =>
               !_.isEmpty(def) && (
                 <Fragment key={ix}>
-                  <dt>{term}</dt>
-                  <dd>{def}</dd>
+                  <hr
+                    style={{ width: "100%", marginTop: 0, marginLeft: "15px" }}
+                  />
+                  <dt className="col-md-3">{term}</dt>
+                  <dd className="col-md-9">{def}</dd>
                 </Fragment>
               )
           )}
