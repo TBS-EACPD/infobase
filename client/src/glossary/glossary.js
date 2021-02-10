@@ -81,7 +81,7 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
         style={{ textAlign: "center" }}
       >
         <ul
-          className="list-inline glossary-letter-list"
+          className="list-inline d-flex flex-wrap justify-content-center"
           style={{
             display: "inline",
             margin: "0px",
