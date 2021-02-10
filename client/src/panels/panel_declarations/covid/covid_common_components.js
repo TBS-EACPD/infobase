@@ -5,14 +5,24 @@ import { IconQuestion } from "src/icons/icons.js";
 
 import { create_text_maker_component } from "../shared.js";
 
+import { get_covid_key_concepts_link } from "./covid_key_concepts.js";
+
 import common_covid_text from "./covid_common_lang.yaml";
 
 const { TM } = create_text_maker_component(common_covid_text);
 
-const AboveTabFootnoteList = ({ children }) => (
+const AboveTabFootnoteList = ({ children, subject }) => (
   <Fragment>
     <TM k={"covid_above_tab_footnote_title"} className="bold" el="span" />
-    <div style={{ lineHeight: "normal" }}>{children}</div>
+    <div style={{ lineHeight: "normal" }}>
+      {children}
+      <TM
+        k={"covid_above_tab_footnote_key_concept_link"}
+        args={{
+          covid_key_concepts_link: get_covid_key_concepts_link(subject),
+        }}
+      />
+    </div>
   </Fragment>
 );
 
