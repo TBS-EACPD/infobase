@@ -303,16 +303,18 @@ h6, .h6 {
 // DO NOT USE THE CLASSES BELOW
 // THESE ARE FOR LEGACY SUPPORT OF BOOTSTRAP 3 CLASSES USED IN THE INDEX.HTML FILE
 
-.col-xs-4 {
-  -ms-flex: 0 0 33.333333%;
-  flex: 0 0 33.333333%;
-  max-width: 33.333333%;
-}
+@media (max-width: $maxMediumDevice) {
+  .col-xs-4 {
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
 
-.col-xs-8 {
-  -ms-flex: 0 0 66.666667%;
-  flex: 0 0 66.666667%;
-  max-width: 66.666667%;
+  .col-xs-8 {
+    -ms-flex: 0 0 66.666667%;
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+  }
 }
 
 #wb-bc > .container > .row {
