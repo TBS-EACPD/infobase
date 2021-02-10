@@ -1,5 +1,11 @@
 set -e 
 
+npm set prefix ~/.npm
+PATH="$HOME/.npm/bin:$PATH"
+PATH="./node_modules/.bin:$PATH"
+
+npm install @axe-core/cli -g
+
 axe $CDN_BASE_URL/$CIRCLE_BRANCH/index-eng.html#start --disable color-contrast --exit
 axe $CDN_BASE_URL/$CIRCLE_BRANCH/index-eng.html#compare_estimates --disable color-contrast --exit
 axe $CDN_BASE_URL/$CIRCLE_BRANCH/index-eng.html#igoc --disable color-contrast --exit
