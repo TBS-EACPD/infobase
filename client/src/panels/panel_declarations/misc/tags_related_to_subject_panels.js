@@ -2,7 +2,6 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-
 import {
   Subject,
   TextPanel,
