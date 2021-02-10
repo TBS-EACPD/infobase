@@ -38,7 +38,7 @@
     Only needed on larger screens. 
   */
   .panel-body {
-    padding: 1rem;
+    padding: 10px;
 
     @media (min-width:$minLargeDevice){
       content: none!important;

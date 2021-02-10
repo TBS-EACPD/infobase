@@ -51,11 +51,11 @@ const EnumField = ({
   disabled,
   state_update_callback,
 }) => (
-  <div className={`${form_type}`}>
+  <div className={form_type}>
     <label htmlFor={`${field_id}--${enum_key}`}>
       <input
         id={`${field_id}--${enum_key}`}
-        style={{ marginRight: "1rem" }}
+        style={{ marginRight: "10px" }}
         type={form_type}
         checked={_.includes(selected_enums_for_field, enum_key)}
         disabled={disabled}
