@@ -1,9 +1,5 @@
 import _ from "lodash";
 import React from "react";
-import { withRouter } from "react-router";
-
-import { SafeJSURL } from "src/general_utils.js";
-import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
 import {
   util_components,
@@ -31,12 +27,8 @@ export const declare_covid_key_concepts_panel = () =>
       footnotes: false,
       source: false,
       calculate: _.constant(true),
-      render: withRouter(({ match: { params: { options } } }) => (
-        <SomeThingsToKeepInMind
-          is_initially_expanded={
-            panel_key === SafeJSURL.parse(options)?.panel_key
-          }
-        >
+      render: () => (
+        <SomeThingsToKeepInMind>
           <KeyConceptList
             question_answer_pairs={[
               [
@@ -54,9 +46,14 @@ export const declare_covid_key_concepts_panel = () =>
             ]}
           />
         </SomeThingsToKeepInMind>
-      )),
+      ),
     }),
   });
 
-export const get_covid_key_concepts_link = (subject) =>
-  infograph_options_href_template(subject, "covid", { panel_key });
+export const scroll_to_covid_key_concepts = () => {
+  const covid_key_concept_panel = document.querySelector(`#${panel_key}`);
+  if (!_.isNull(covid_key_concept_panel)) {
+    window.scrollTo(0, covid_key_concept_panel.offsetTop);
+    covid_key_concept_panel.focus();
+  }
+};

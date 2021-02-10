@@ -5,7 +5,7 @@ import { IconQuestion } from "src/icons/icons.js";
 
 import { create_text_maker_component } from "../shared.js";
 
-import { get_covid_key_concepts_link } from "./covid_key_concepts.js";
+import { scroll_to_covid_key_concepts } from "./covid_key_concepts.js";
 
 import common_covid_text from "./covid_common_lang.yaml";
 
@@ -16,12 +16,9 @@ const AboveTabFootnoteList = ({ children, subject }) => (
     <TM k={"covid_above_tab_footnote_title"} className="bold" el="span" />
     <div style={{ lineHeight: "normal" }}>
       {children}
-      <TM
-        k={"covid_above_tab_footnote_key_concept_link"}
-        args={{
-          covid_key_concepts_link: get_covid_key_concepts_link(subject),
-        }}
-      />
+      <a className={"link-styled"} onClick={scroll_to_covid_key_concepts}>
+        <TM k={"covid_above_tab_footnote_key_concept_link"} />
+      </a>
     </div>
   </Fragment>
 );
