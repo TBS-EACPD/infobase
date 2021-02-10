@@ -26,10 +26,8 @@ import {
   declare_employee_gender_panel,
   declare_results_intro_panel,
   declare_covid_key_concepts_panel,
-  declare_covid_overview_panel,
   declare_covid_estimates_panel,
   declare_covid_expenditures_panel,
-  declare_covid_measures_panel,
 
   // gov only panels
   declare_simplographic_panel,
@@ -61,10 +59,8 @@ export const get_gov_panels = (subject) => ({
   ],
   covid: [
     declare_covid_key_concepts_panel(),
-    declare_covid_overview_panel(),
     declare_covid_expenditures_panel(),
     declare_covid_estimates_panel(),
-    declare_covid_measures_panel(),
   ],
   people: [
     declare_people_key_concepts_panel(),
