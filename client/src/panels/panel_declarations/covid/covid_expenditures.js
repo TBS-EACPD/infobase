@@ -32,7 +32,6 @@ import {
   wrap_with_vote_stat_controls,
   string_sort_func,
 } from "./covid_common_utils.js";
-import { get_covid_key_concepts_link } from "./covid_key_concepts.js";
 
 import text2 from "./covid_common_lang.yaml";
 import text1 from "./covid_expenditures.yaml";
@@ -526,15 +525,8 @@ class CovidExpendituresPanel extends React.Component {
       return (
         <Fragment>
           <div className="medium-panel-text text">
-            <AboveTabFootnoteList>
-              <TM
-                k="covid_estimates_above_tab_footnote_list"
-                args={{
-                  covid_key_concepts_link: get_covid_key_concepts_link(
-                    panel_args.subject
-                  ),
-                }}
-              />
+            <AboveTabFootnoteList subject={panel_args.subject}>
+              <TM k="covid_estimates_above_tab_footnote_list" />
             </AboveTabFootnoteList>
           </div>
           <TabbedContent {...tabbed_content_props} />
