@@ -221,11 +221,10 @@ class EmailFrontend extends React.Component {
                 )}
               </legend>
               <div
-                className={`${
-                  field_info.style &&
-                  field_info.style === "horizontal" &&
-                  "d-flex justify-content-between"
-                }`}
+                className={classNames({
+                  "d-flex justify-content-between":
+                    field_info.style && field_info.style === "horizontal",
+                })}
               >
                 {_.map(field_info.enum_values, (label_by_lang, key) => {
                   return (
