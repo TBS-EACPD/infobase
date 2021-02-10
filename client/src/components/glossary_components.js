@@ -63,7 +63,7 @@ export const GlossaryIcon = ({
         color={icon_color ? icon_color : backgroundColor}
         width={"1.2em"}
         alternate_color={icon_alt_color ? icon_alt_color : primaryColor}
-        vertical_align={"-0.3em"}
+        svg_style={{ verticalAlign: "-0.3em" }}
       />
     )}
   </GlossaryTooltipWrapper>

@@ -29,9 +29,8 @@ class _IconWrapper extends React.Component {
       rotation,
       title,
       width,
-      max_width,
+      svg_style,
       height, // if falsey will assume square using width
-      vertical_align,
       inline,
       aria_hide, // for icons that are displayed next to text that repeats what the icon represents
 
@@ -46,11 +45,10 @@ class _IconWrapper extends React.Component {
     const svg_styles = {
       ...(!inline && svg_default_styles),
       ...(inline && inline_svg_default_styles),
+      ...svg_style,
       ..._.pickBy({
         width,
         height: height || width,
-        verticalAlign: vertical_align,
-        maxWidth: max_width,
       }),
     };
 

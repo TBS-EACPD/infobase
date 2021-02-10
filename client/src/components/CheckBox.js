@@ -69,7 +69,7 @@ export class CheckBox extends React.Component {
                 color={backgroundColor}
                 width={10}
                 height={10}
-                vertical_align={checkmark_vertical_align}
+                svg_style={{ verticalAlign: checkmark_vertical_align }}
               />
             )}
           </span>

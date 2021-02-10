@@ -25,7 +25,7 @@ export const TagCloud = ({ tags, onSelectTag }) => {
                 color={backgroundColor}
                 width={10}
                 height={10}
-                vertical_align={0.1}
+                svg_style={{ verticalAlign: "0.1px" }}
               />
             )}
             <span style={{ marginLeft: "5px" }}>{label}</span>
