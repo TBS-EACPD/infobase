@@ -2,6 +2,8 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
+import { primaryColor, backgroundColor } from "src/core/color_defs.js";
+
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { TM } from "../components/index.js";
@@ -60,7 +62,12 @@ const BubbleMenu = ({ items, active_item_id }) => {
                         <SVG
                           alternate_color={false}
                           width="90%"
-                          direct_render
+                          heigth="100%"
+                          color={
+                            id === active_item_id
+                              ? backgroundColor
+                              : primaryColor
+                          }
                         />
                       )
                     );

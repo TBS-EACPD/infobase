@@ -34,7 +34,6 @@ class _IconWrapper extends React.Component {
       vertical_align,
       inline,
       aria_hide, // for icons that are displayed next to text that repeats what the icon represents
-      direct_render, //skip <g>
 
       // internal props
       ChildSVG,
@@ -84,17 +83,13 @@ class _IconWrapper extends React.Component {
             }}
           />
         )}
-        {direct_render ? (
+        <g
+          id={icon_instance_id}
+          style={!alternate_color ? { fill: color, stroke: color } : {}}
+          transform={rotation ? `rotate(${rotation} 250 250)` : ""}
+        >
           <ChildSVG />
-        ) : (
-          <g
-            id={icon_instance_id}
-            style={!alternate_color ? { fill: color, stroke: color } : {}}
-            transform={rotation ? `rotate(${rotation} 250 250)` : ""}
-          >
-            <ChildSVG />
-          </g>
-        )}
+        </g>
       </svg>
     );
   }

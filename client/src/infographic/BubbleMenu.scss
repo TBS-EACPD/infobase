@@ -22,11 +22,6 @@
     transform: scale(1.03);
     color: $textLightColor;
     background-color: $primaryColor;
-
-    & > .bub-item > .bub-svg > svg {
-      fill: $backgroundColor;
-      stroke: $backgroundColor;
-    }
   }
 }
 
@@ -48,13 +43,6 @@
   width: 80%; 
   height: 70%;
   background-size: 100%;
-
-  & > svg {
-    width: 100%;
-    height: 90%;
-    fill: $primaryColor;
-    stroke: $primaryColor;
-  }
 }
 
 @media (min-width: $minMediumDevice){
