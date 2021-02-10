@@ -99,7 +99,6 @@ jobs:
     steps:
       - checkout:
           path: "~/InfoBase"
-      - run: npm install @axe-core/cli -g --unsafe-perm=true --allow-root
       - run: ./scripts/ci_scripts/axe_core_tests.sh
 
   lighthouse:
