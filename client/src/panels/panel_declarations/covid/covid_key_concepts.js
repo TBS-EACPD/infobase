@@ -1,6 +1,8 @@
 import _ from "lodash";
 import React from "react";
 
+import { infograph_options_href_template } from "src/infographic/infographic_link.js";
+
 import {
   util_components,
   SomeThingsToKeepInMind,
@@ -16,9 +18,11 @@ const { TM } = create_text_maker_component(text);
 // TODO lots of dates and stuff hardcoded in covid_key_concept text,
 // do not want that since some of it will be changing as often as monthly...
 
+const panel_key = "covid_key_concepts";
+
 export const declare_covid_key_concepts_panel = () =>
   declare_panel({
-    panel_key: "covid_key_concepts",
+    panel_key,
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       is_static: true,
@@ -47,3 +51,6 @@ export const declare_covid_key_concepts_panel = () =>
       ),
     }),
   });
+
+export const get_covid_key_concepts_link = (subject) =>
+  infograph_options_href_template(subject, "covid", { panel_key });
