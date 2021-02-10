@@ -1,6 +1,8 @@
 import _ from "lodash";
 import React from "react";
+import { withRouter } from "react-router";
 
+import { SafeJSURL } from "src/general_utils.js";
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
 import {
@@ -29,8 +31,12 @@ export const declare_covid_key_concepts_panel = () =>
       footnotes: false,
       source: false,
       calculate: _.constant(true),
-      render: () => (
-        <SomeThingsToKeepInMind>
+      render: withRouter(({ match: { params: { options } } }) => (
+        <SomeThingsToKeepInMind
+          is_initially_expanded={
+            panel_key === SafeJSURL.parse(options)?.panel_key
+          }
+        >
           <KeyConceptList
             question_answer_pairs={[
               [
@@ -48,7 +54,7 @@ export const declare_covid_key_concepts_panel = () =>
             ]}
           />
         </SomeThingsToKeepInMind>
-      ),
+      )),
     }),
   });
 

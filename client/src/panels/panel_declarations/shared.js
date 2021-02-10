@@ -164,7 +164,7 @@ const HeightClippedGraph = ({ clipHeight, children }) => {
   );
 };
 
-const SomeThingsToKeepInMind = ({ children }) => (
+const SomeThingsToKeepInMind = ({ children, is_initially_expanded }) => (
   <MediaQuery maxWidth={breakpoints.maxMediumDevice}>
     {(matches) => (
       <PinnedContent local_storage_name={"user_enabled_pinning_key_concepts"}>
@@ -172,7 +172,7 @@ const SomeThingsToKeepInMind = ({ children }) => (
           <ButtonToolbar style={{ margin: 0 }}>
             <AutoAccordion
               title={trivial_text_maker("some_things_to_keep_in_mind")}
-              show_pin
+              isInitiallyExpanded={is_initially_expanded}
             >
               <div
                 style={{
