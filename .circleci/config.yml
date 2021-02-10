@@ -94,7 +94,7 @@ jobs:
   a11y_test_axe:
     working_directory: "~/InfoBase"
     docker:
-      - image: eaadtbs/ib-ci-test:1.2
+      - image: eaadtbs/ib-ci-test:1.3
         <<: *dockerhub_auth
     steps:
       - checkout:
