@@ -11,7 +11,9 @@ const text_maker = create_text_maker([treemap_text]);
 
 const top_level_title = `${text_maker("government_stats")}`;
 
-const BreadcrumbArrow = <IconArrow vertical_align="0.1em" inline="true" />;
+const BreadcrumbArrow = (
+  <IconArrow svg_style={{ verticalAlign: "0.1em" }} inline="true" />
+);
 
 export class TreeMapTopbar extends React.Component {
   constructor() {

@@ -116,7 +116,7 @@ export const PinnedContent = withRouter(
                             <IconPin
                               height="25px"
                               width="25px"
-                              vertical_align="top"
+                              svg_style={{ verticalAlign: "Top" }}
                               color={backgroundColor}
                               alternate_color="false"
                             />
@@ -124,7 +124,7 @@ export const PinnedContent = withRouter(
                             <IconUnpin
                               height="25px"
                               width="25px"
-                              vertical_align="top"
+                              svg_style={{ verticalAlign: "Top" }}
                               color={backgroundColor}
                               alternate_color="false"
                             />

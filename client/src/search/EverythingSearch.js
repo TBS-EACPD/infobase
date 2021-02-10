@@ -85,7 +85,7 @@ const SearchOptions = ({ option_checkboxes }) => (
           <IconGear
             height="1px"
             width="1px"
-            vertical_align="14px"
+            svg_style={{ verticalAlign: "14px" }}
             alternate_color="false"
           />
         </div>

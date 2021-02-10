@@ -249,7 +249,7 @@ const result_status_icon_components = (status, width) => {
         title={result_simple_statuses.met.text}
         color={result_color_scale("met")}
         width={width}
-        vertical_align={"0em"}
+        svg_style={{ verticalAlign: "0em" }}
         alternate_color={false}
         inline={false}
       />
@@ -260,7 +260,7 @@ const result_status_icon_components = (status, width) => {
         title={result_simple_statuses.not_met.text}
         color={result_color_scale("not_met")}
         width={width}
-        vertical_align={"0em"}
+        svg_style={{ verticalAlign: "0em" }}
         alternate_color={false}
         inline={false}
       />
@@ -271,7 +271,7 @@ const result_status_icon_components = (status, width) => {
         title={result_simple_statuses.not_available.text}
         color={result_color_scale("not_available")}
         width={width}
-        vertical_align={"0em"}
+        svg_style={{ verticalAlign: "0em" }}
         alternate_color={false}
         inline={false}
       />
@@ -282,7 +282,7 @@ const result_status_icon_components = (status, width) => {
         title={result_simple_statuses.future.text}
         color={result_color_scale("future")}
         width={width}
-        vertical_align={"0em"}
+        svg_style={{ verticalAlign: "0em" }}
         alternate_color={false}
         inline={false}
       />

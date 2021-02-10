@@ -97,7 +97,7 @@ export class ErrorBoundary extends React.Component {
           <IconNotAvailable
             color="#8c949e"
             width="400px"
-            max_width="100%"
+            svg_style={{ maxWidth: "100%" }}
             alternate_color={false}
           />
           <span>
