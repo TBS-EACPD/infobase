@@ -314,3 +314,17 @@ h6, .h6 {
   flex: 0 0 66.666667%;
   max-width: 66.666667%;
 }
+
+#wb-bc > .container > .row {
+  justify-content: space-between;
+}
+
+#wb-bc > .container > .row > div {
+  max-width: 50%;
+  flex: 0 0 50%;
+}
+
+#breadcrumb-trail, #easy-access {
+  max-width: 100%;
+  flex: 0 0 100%;
+}
