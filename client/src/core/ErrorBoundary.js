@@ -96,7 +96,7 @@ export class ErrorBoundary extends React.Component {
           </span>
           <IconNotAvailable
             color="#8c949e"
-            width="400"
+            width="400px"
             max_width="100%"
             alternate_color={false}
           />

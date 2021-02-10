@@ -63,7 +63,7 @@ class _IconWrapper extends React.Component {
         className={classNames("icon-svg", inline && "icon-svg--inline")}
         style={svg_styles}
         viewBox={`0 0 ${viewbox_width} ${viewbox_height || viewbox_width}`}
-        aria-hidden={aria_hide}
+        aria-hidden={aria_hide || !title}
       >
         <title>{title}</title>
         {alternate_color && (

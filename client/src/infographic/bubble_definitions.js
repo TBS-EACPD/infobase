@@ -1,8 +1,15 @@
 import _ from "lodash";
 
-import { create_text_maker } from "../models/text.js";
+import {
+  IconAbout,
+  IconRelatedBubble,
+  IconDataset,
+  IconMoney,
+  IconEmployee,
+  IconClipboard,
+} from "src/icons/icons.js";
 
-import svgs from "./bubble_svgs.js";
+import { create_text_maker } from "../models/text.js";
 
 import { infograph_href_template } from "./infographic_link.js";
 
@@ -10,14 +17,13 @@ import text from "./bubble_definitions.yaml";
 
 const text_maker = create_text_maker(text);
 
-const get_svg_content = (bubble_id) => _.get(svgs, bubble_id);
-
 // any config option, other than id, can either be a value or a function of the infographic subject
 const base_configs = [
   {
     id: "intro",
     title: (subject) => text_maker(`about_${subject.level}_title`),
     description: "Introduction",
+    svg_content: { svg: IconAbout },
   },
   {
     id: "structure",
@@ -29,34 +35,38 @@ const base_configs = [
     title: text_maker("financial_title"),
     description: text_maker("financial_desc"),
     enable_panel_filter: true,
+    svg_content: { svg: IconMoney },
   },
   {
     id: "people",
     title: text_maker("people_title"),
     description: text_maker("people_desc"),
     enable_panel_filter: true,
+    svg_content: { svg: IconEmployee },
   },
   {
     id: "results",
     title: text_maker("results_title"),
     description: text_maker("results_desc"),
+    svg_content: { svg: IconClipboard },
   },
   {
     id: "related",
     title: text_maker("related_title"),
     description: text_maker("related_desc"),
+    svg_content: { svg: IconRelatedBubble },
   },
   {
     id: "all_data",
     title: text_maker("all_data_title"),
     description: text_maker("all_data_desc"),
+    svg_content: { svg: IconDataset },
   },
 ];
 
 const bubble_defs = _.map(base_configs, (base) => ({
   ...base,
   href: (subject) => infograph_href_template(subject, base.id),
-  svg_content: get_svg_content(base.id),
 }));
 
 export { bubble_defs };
