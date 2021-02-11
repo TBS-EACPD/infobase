@@ -48,7 +48,7 @@ const calculate_funcs_by_level = {
       .reduce((sum, val) => sum + val, 0)
       .value();
 
-    const age_group = age_groups.map((age_range) => {
+    const age_group = _.map(age_groups, ({ text: age_range }) => {
       const yearly_values = people_years.map(
         (year) => orgEmployeeAgeGroup.horizontal(year, false)[age_range]
       );
