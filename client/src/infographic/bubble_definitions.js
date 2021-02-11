@@ -23,7 +23,7 @@ const base_configs = [
     id: "intro",
     title: (subject) => text_maker(`about_${subject.level}_title`),
     description: "Introduction",
-    svg_content: { svg: IconAbout },
+    svg: IconAbout,
   },
   {
     id: "structure",
@@ -35,32 +35,32 @@ const base_configs = [
     title: text_maker("financial_title"),
     description: text_maker("financial_desc"),
     enable_panel_filter: true,
-    svg_content: { svg: IconMoney },
+    svg: IconMoney,
   },
   {
     id: "people",
     title: text_maker("people_title"),
     description: text_maker("people_desc"),
     enable_panel_filter: true,
-    svg_content: { svg: IconEmployee },
+    svg: IconEmployee,
   },
   {
     id: "results",
     title: text_maker("results_title"),
     description: text_maker("results_desc"),
-    svg_content: { svg: IconClipboard },
+    svg: IconClipboard,
   },
   {
     id: "related",
     title: text_maker("related_title"),
     description: text_maker("related_desc"),
-    svg_content: { svg: IconRelatedBubble },
+    svg: IconRelatedBubble,
   },
   {
     id: "all_data",
     title: text_maker("all_data_title"),
     description: text_maker("all_data_desc"),
-    svg_content: { svg: IconDataset },
+    svg: IconDataset,
   },
 ];
 

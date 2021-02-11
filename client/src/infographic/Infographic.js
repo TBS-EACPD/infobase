@@ -261,7 +261,8 @@ class InfoGraph_ extends React.Component {
           )
           .map((bubble_def) =>
             _.mapValues(bubble_def, (bubble_option) =>
-              _.isFunction(bubble_option)
+              _.isFunction(bubble_option) &&
+              !React.isValidElement(bubble_option(subject))
                 ? bubble_option(subject)
                 : bubble_option
             )
