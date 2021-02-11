@@ -21,14 +21,20 @@ Client-side code and content for the GC InfoBase. / Code et contenu pour le côt
 
 ## Getting Started
 
+### Pre-requisite:
+- node@12.14.1 (`npm install -g n && n 12.14.1`)
+- npm@6.4.1 (`npm install -g npm@6.4.1`)
+- Git
+
 ### First time setup
 1. Have npm, node, and git installed
 2. Open a terminal and go to the directory where you want to store the project, e.g. `cd ~/Documents` 
 3. `git clone https://github.com/TBS-EACPD/InfoBase.git`
+4. In the root directory `./InfoBase`, run `npm install && cd client && npm install && cd ../server && npm install && cd ../email_backend && npm install && cd ..`
 
 ### Building GC InfoBase
 0. Go to the client directory of your GC InfoBase repo in a terminal, e.g. `cd ~/Documents/infobase/client`
-1. `npm install` to get node modules
+1. `npm ci` to get node modules (skip if node modules are upto date)
 2. `npm run IB_base_watch` to gather and bundle static files (csv's, svg's, extended bootstrap css). Can be left running to watch for changes
 3. `npm run IB_q` to webpack the source code (`IB_q` builds quickly, requires a browser with ES6 support) or `npm run IB_dev` (transpiles and polyfills for testing in IE11/safari/mobile)\*
 
