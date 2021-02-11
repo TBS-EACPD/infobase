@@ -71,7 +71,6 @@ const calculate_funcs_by_level = {
   dept: function (dept) {
     const { orgEmployeeAgeGroup } = this.tables;
     const { orgEmployeeAvgAge } = this.tables;
-    const series = orgEmployeeAgeGroup.q(dept).high_level_rows();
 
     const avg_age = _.chain(orgEmployeeAvgAge.q(dept).data)
       .map((row) => ({
@@ -88,22 +87,13 @@ const calculate_funcs_by_level = {
       .sortBy((d) => -sum(d.data))
       .value();
 
-    const dept_five_year_total_head_count = _.chain(series)
-      .map((row) => sum(_.drop(row)))
-      .reduce((sum, val) => sum + val, 0)
-      .value();
-
-    const age_group = _.chain(series)
-      .map((row) => {
-        const label = _.head(row);
-        const data = _.drop(row);
-        return {
-          label,
-          data,
-          five_year_percent: sum(data) / dept_five_year_total_head_count,
-          active: true,
-        };
-      })
+    const age_group = _.chain(orgEmployeeAgeGroup.q(dept).data)
+      .map((row) => ({
+        label: row.age,
+        data: people_years.map((year) => row[year]),
+        five_year_percent: row.five_year_percent,
+        active: true,
+      }))
       .filter((d) => sum(d.data) !== 0)
       .value();
 
