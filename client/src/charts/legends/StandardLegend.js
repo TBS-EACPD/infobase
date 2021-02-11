@@ -24,7 +24,14 @@ export const StandardLegend = ({
       {title && (
         <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">{title}</p>
       )}
-      <div style={{ overflowX: "hidden" }}>
+      {/* have to hard code max height since overflow on IE is bugged */}
+      <div
+        style={{
+          overflowX: "hidden",
+          maxHeight: "351px",
+          msOverflowStyle: "-ms-autohiding-scrollbar",
+        }}
+      >
         <LegendList
           {...{
             items,
