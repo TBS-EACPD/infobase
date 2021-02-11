@@ -3,7 +3,6 @@ import _ from "lodash";
 
 import {
   trivial_text_maker,
-  format,
   people_five_year_percentage_formula,
   businessConstants,
   year_templates,
@@ -11,8 +10,7 @@ import {
 
 import text from "./orgEmployeeAgeGroup.yaml";
 
-const { formats } = format;
-const { age_groups, compact_age_groups, emp_age_map } = businessConstants;
+const { age_groups } = businessConstants;
 const { people_years, people_years_short_second } = year_templates;
 
 export default {
@@ -20,7 +18,7 @@ export default {
   id: "orgEmployeeAgeGroup",
   legacy_id: "table11",
   source: ["RPS"],
-  tags: ["PEOPLE", "FPS", "AGE", "ANNUAL"],
+  tags: ["PEOPLE", "FPS", "AGE", "ANNUAL", "SUPPRESSED_DATA"],
 
   link: {
     en:
@@ -101,61 +99,11 @@ export default {
         })
         .value();
     },
-    high_level_age_split: function () {
-      // breakdown the data into 4 individual groups, each of which will need to have it's
-      // own seavgperate total calculated
-      return _.groupBy(this.data, function (x) {
-        return emp_age_map[x.age];
-      });
-    },
-    high_level_rows: function () {
-      var groups = this.high_level_age_split();
-      return _.map(compact_age_groups, function (age_group) {
-        var summed = _.map(people_years, function (year) {
-          if (groups[age_group]) {
-            return sum(groups[age_group], function (row) {
-              return row[year];
-            });
-          } else {
-            return 0;
-          }
-        });
-        return [age_group].concat(summed);
-      });
-    },
-    high_level_rows_with_percentage: function (year) {
-      var fm1 = formats["big_int"];
-      var fm2 = formats.percentage;
-      var column = _.map(this.data, year);
-      var dept_total = sum(column);
-      var groups = this.high_level_age_split();
-      // delete missing rows
-      //delete groups[undefined]
-      // use the keys you've alrady defined and iterate over them in the order
-      // of your choice -- impose an order on the unordered groups objects
-      var mapfunc = function (key) {
-        var relevant_group = groups[key];
-        var mini_column = _.map(relevant_group, year);
-        var group_total = sum(mini_column);
-        return [key, fm1(group_total), fm2(group_total / dept_total)];
-      };
-      return _.map(compact_age_groups, mapfunc);
-    },
   },
 
   dimensions: [
     {
-      title_key: "age_group_condensed",
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        return function (row) {
-          return emp_age_map[row.age];
-        };
-      },
-    },
-    {
-      title_key: "age_group",
+      title_key: "horizontal",
       include_in_report_builder: true,
 
       filter_func: function (options) {

@@ -37,41 +37,6 @@ _.each(yaml.months, (obj, ix) => {
   obj.ix = ix;
 });
 
-//TODO : why are employee ages so awkward?
-const compact_age_groups =
-  lang === "en"
-    ? [
-        "Age 29 and less",
-        "Age 30 to 39",
-        "Age 40 to 49",
-        "Age 50 to 59",
-        "Age 60 and over",
-        "Not Available",
-      ]
-    : [
-        "29 ans et moins",
-        "30 à 39 ans",
-        "40 à 49 ans",
-        "50 à 59 ans",
-        "60 ans et plus",
-        "Non disponible",
-      ];
-const emp_age_map = {
-  "< 20": compact_age_groups[0],
-  "20-24": compact_age_groups[0],
-  "25-29": compact_age_groups[0],
-  "30-34": compact_age_groups[1],
-  "35-39": compact_age_groups[1],
-  "40-44": compact_age_groups[2],
-  "45-49": compact_age_groups[2],
-  "50-54": compact_age_groups[3],
-  "55-59": compact_age_groups[3],
-  "60-64": compact_age_groups[4],
-  "65+": compact_age_groups[4],
-  "N.A.": compact_age_groups[5],
-  "N.D.": compact_age_groups[5],
-};
-
 const NA_values = [
   "Not Available",
   "Non disponible",
@@ -81,15 +46,6 @@ const NA_values = [
   "n/a",
   "Non-EX",
 ];
-
-const emp_age_rev_map = _.chain(emp_age_map)
-  .toPairs()
-  .groupBy(([key, val]) => val)
-  .map((val, key) => [key, _.map(val, 0)])
-  .fromPairs()
-  .value();
-
-const emp_age_stuff = { compact_age_groups, emp_age_map, emp_age_rev_map };
 
 const ex_level_target =
   lang === "en"
@@ -201,7 +157,6 @@ const estimates_docs = {
 
 const businessConstants = {
   ...yaml,
-  ...emp_age_stuff,
   ...ex_level_stuff,
   estimates_docs,
   NA_values,

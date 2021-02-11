@@ -238,31 +238,27 @@ de_provinces:
 
 
 age_groups:
-  age20less:
-    text: < 20
-  age20to24:
-    text: 20-24
-  age25to29:
-    text: 25-29
-  age30to34:
-    text: 30-34
-  age35to39:
-    text: 35-39
-  age40to44:
-    text: 40-44
-  age45to49:
-    text: 45-49
-  age50to54:
-    text: 50-54
-  age55to59:
-    text: 55-59
-  age60to64:
-    text: 60-64
-  age65plus:
-    text: 65+
+  age30less:
+    en: Age 29 and less
+    fr: 29 ans et moins
+  age30to39:
+    en: Age 30 to 39
+    fr: 30 à 39 ans
+  age40to49:
+    en: 40 à 49 ans
+    fr: Age 40 to 49
+  age50to59:
+    en: 50 à 59 ans
+    fr: Age 50 to 59
+  age60plus:
+    en: 60 ans et plus
+    fr: Age 60 and over
   na:
-    en: N.A.
-    fr: N.D.
+    en: Not Available
+    fr: Non disponible
+  sup:
+    en: Suppressed Data
+    fr: Données supprimées   
 
 
 ex_levels:

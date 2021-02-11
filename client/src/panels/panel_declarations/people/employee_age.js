@@ -26,7 +26,7 @@ import text from "./employee_age.yaml";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const { people_years } = year_templates;
-const { compact_age_groups } = businessConstants;
+const { age_groups } = businessConstants;
 
 const calculate_funcs_by_level = {
   gov: function (gov) {
@@ -48,7 +48,7 @@ const calculate_funcs_by_level = {
       .reduce((sum, val) => sum + val, 0)
       .value();
 
-    const age_group = compact_age_groups.map((age_range) => {
+    const age_group = age_groups.map((age_range) => {
       const yearly_values = people_years.map(
         (year) => orgEmployeeAgeGroup.horizontal(year, false)[age_range]
       );
@@ -185,10 +185,26 @@ export const declare_employee_age_panel = () =>
           formatter: formats.decimal2,
         };
 
+        const has_suppressed_data = _.some(
+          panel_args.age_group,
+          (data) => data.label === age_groups.sup.text
+        );
+        const required_footnotes = (() => {
+          if (has_suppressed_data) {
+            return footnotes;
+          } else {
+            return _.filter(
+              footnotes,
+              (footnote) =>
+                !_.some(footnote.topic_keys, (key) => key === "SUPPRESSED_DATA")
+            );
+          }
+        })();
+
         return (
           <StdPanel
             title={text_maker("employee_age_title")}
-            {...{ footnotes, sources }}
+            {...{ footnotes: required_footnotes, sources }}
           >
             <Col size={12} isText>
               <TM k={level + "_employee_age_text"} args={text_calculations} />
