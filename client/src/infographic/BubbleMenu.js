@@ -43,7 +43,7 @@ const BubbleMenu = ({ items, active_item_id }) => {
     return (
       <div style={{ position: "relative" }}>
         <nav className="bubble-menu">
-          {_.map(items, ({ id, title, description, href, svg_content }) => (
+          {_.map(items, ({ id, title, description, href, svg }) => (
             <a
               className={classNames(
                 "centerer bubble-button",
@@ -56,7 +56,7 @@ const BubbleMenu = ({ items, active_item_id }) => {
                 <strong className="title">{title}</strong>
                 <div className="bub-svg" title={description}>
                   {(() => {
-                    const SVG = (svg_content && svg_content.svg) || null;
+                    const SVG = svg;
                     return (
                       SVG && (
                         <SVG
