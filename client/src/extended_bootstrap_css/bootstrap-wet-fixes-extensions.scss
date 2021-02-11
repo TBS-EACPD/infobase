@@ -519,14 +519,7 @@ background-color: $backgroundColor;
   background: $backgroundColor;
   border-color: $failDarkColor; }
 
-
-/* extending bootstrap well which does not look good in regular GoC background */
-.well.dark-well {
-background-color: lighten($tertiaryColor, 40%);
-border: 1px solid $separatorColor;
-}
-
-.well {
+.card {
   -webkit-box-shadow: none;
   box-shadow: none;
   border: none; 
@@ -551,7 +544,7 @@ ol.breadcrumb > li:last-child > :last-child {
 }
 
 // Misc. styles from flat redesign
-.well-sm {
+.card-sm {
   background-color: $secondaryColor;
   text-align: center;
   border-color: $secondaryColor;

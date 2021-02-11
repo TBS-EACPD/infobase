@@ -120,7 +120,7 @@ export class DisplayTable extends React.Component {
           <td style={{ padding: 0 }} colSpan={_.size(visible_col_keys)}>
             <div
               style={{ borderRadius: 0, margin: 0 }}
-              className="well large_panel_text no-data-msg"
+              className="card large_panel_text no-data-msg"
             >
               {text_maker("no_data")}
             </div>
@@ -371,7 +371,7 @@ export class DisplayTable extends React.Component {
               </tr>
             )}
           </thead>
-          {_.isEmpty(sorted_filtered_data) ? (
+          {_.isEmpty(visible_ordered_col_keys) ? (
             <NoDataMessage />
           ) : (
             <tbody>
