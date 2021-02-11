@@ -28,7 +28,7 @@ Client-side code and content for the GC InfoBase. / Code et contenu pour le côt
 
 ### Building GC InfoBase
 0. Go to the client directory of your GC InfoBase repo in a terminal, e.g. `cd ~/Documents/infobase/client`
-1. `npm ci` to get node modules
+1. `npm install` to get node modules
 2. `npm run IB_base_watch` to gather and bundle static files (csv's, svg's, extended bootstrap css). Can be left running to watch for changes
 3. `npm run IB_q` to webpack the source code (`IB_q` builds quickly, requires a browser with ES6 support) or `npm run IB_dev` (transpiles and polyfills for testing in IE11/safari/mobile)\*
 
