@@ -92,7 +92,10 @@ export class TreeMapLegend extends React.Component {
     const { perspective, legend_cols, legend_measure_text } = this.props;
     return (
       <Fragment>
-        <div className="frow" style={{ marginLeft: "0px", marginRight: "0px" }}>
+        <div
+          className="frow"
+          style={{ marginLeft: "0px", marginRight: "0px", width: "100%" }}
+        >
           <div className="fcol-sm-5">
             <div
               className="frow"
