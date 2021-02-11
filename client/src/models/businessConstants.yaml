@@ -245,14 +245,14 @@ age_groups:
     en: Age 30 to 39
     fr: 30 à 39 ans
   age40to49:
-    en: 40 à 49 ans
-    fr: Age 40 to 49
+    en: Age 40 to 49
+    fr: 40 à 49 ans
   age50to59:
-    en: 50 à 59 ans
-    fr: Age 50 to 59
+    en: Age 50 to 59
+    fr: 50 à 59 ans
   age60plus:
-    en: 60 ans et plus
-    fr: Age 60 and over
+    en: Age 60 and over
+    fr: 60 ans et plus
   na:
     en: Not Available
     fr: Non disponible
