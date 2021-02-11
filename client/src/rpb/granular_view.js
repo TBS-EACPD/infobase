@@ -87,16 +87,29 @@ class GranularView extends React.Component {
         initial_visible: false,
       },
       ..._.chain(cols)
-        .map(({ nick, type, fully_qualified_name }, idx) => [
-          nick,
-          {
-            index: idx + 2,
-            header: fully_qualified_name,
-            is_searchable: !is_matched_undefined(non_dept_key_cols, nick),
-            is_summable: !is_matched_undefined(data_columns, nick),
-            formatter: type,
-          },
-        ])
+        .map(
+          (
+            {
+              nick,
+              type,
+              fully_qualified_name,
+              is_searchable = true,
+              is_summable = true,
+            },
+            idx
+          ) => [
+            nick,
+            {
+              index: idx + 2,
+              header: fully_qualified_name,
+              is_searchable:
+                is_searchable && !is_matched_undefined(non_dept_key_cols, nick),
+              is_summable:
+                is_summable && !is_matched_undefined(data_columns, nick),
+              formatter: type,
+            },
+          ]
+        )
         .fromPairs()
         .value(),
     };

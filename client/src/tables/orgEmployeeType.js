@@ -83,6 +83,7 @@ export default {
         "employee_type",
         people_years
       ),
+      is_summable: false,
     });
   },
 
