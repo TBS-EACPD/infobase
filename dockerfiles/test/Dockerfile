@@ -37,7 +37,8 @@ RUN CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RE
     unzip -qq /tmp/chromedriver_linux64.zip -d /opt/chromedriver-$CHROMEDRIVER_VERSION && \
     rm /tmp/chromedriver_linux64.zip && \
     chmod +x /opt/chromedriver-$CHROMEDRIVER_VERSION/chromedriver && \
-    ln -fs /opt/chromedriver-$CHROMEDRIVER_VERSION/chromedriver /usr/local/bin/chromedriver
+    ln -fs /opt/chromedriver-$CHROMEDRIVER_VERSION/chromedriver /usr/local/bin/chromedriver && \
+    export PATH=$PATH:/opt/WebDriver/bin >> ~/.profile
 
 # create default mongodb data directory and give the $USER access
 RUN mkdir -p /data/db && chown -R ${SERVICE_USER} /data/db
