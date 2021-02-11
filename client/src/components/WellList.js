@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-
 const WellList = ({ elements }) => (
   <div>
     <ul className="list-unstyled">
@@ -9,7 +8,7 @@ const WellList = ({ elements }) => (
         .map(({ display, href, children }, index) =>
           _.isEmpty(children) ? null : (
             <li key={index} style={{ padding: "0px 20px" }}>
-              <div className="well well-sm mrgn-bttm-0">
+              <div className="card card-sm mrgn-bttm-0">
                 {href ? (
                   <a href={href} style={{ color: "white" }}>
                     {display}
@@ -18,7 +17,10 @@ const WellList = ({ elements }) => (
                   <span style={{ color: "white" }}>{display}</span>
                 )}
               </div>
-              <ul className="list-group list-group--withheader">
+              <ul
+                className="list-group list-group--withheader"
+                style={{ marginBottom: "20px" }}
+              >
                 {_.map(children, ({ display, href }, ix) => (
                   <li key={ix} className="list-group-item">
                     {href ? (
