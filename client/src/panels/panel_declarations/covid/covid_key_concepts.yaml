@@ -4,7 +4,7 @@ covid_questions_up_to_date_q:
 covid_questions_up_to_date_a:
   transform: [markdown]
   en: |
-    This data is current up to and including December 2020. More recent, or more detailed, data may be available directly from individual federal
+    This data is current up to and including December 2020. More recent or more detailed data may be available directly from individual federal
     organizations (departments, agencies, and Crown corporations). Updates are ongoing and will be reflected on GC InfoBase monthly. Finalized values
     for 2020-21 will be available in 2021-22.
   fr: TODO
