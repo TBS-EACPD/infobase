@@ -77,6 +77,7 @@ export default {
         fr: trivial_text_maker("five_year_percent_description"),
       },
       formula: people_five_year_percentage_formula("fol", people_years),
+      is_summable: false,
     });
   },
 
