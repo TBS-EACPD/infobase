@@ -6,7 +6,7 @@ import { TrivialTM } from "src/components/index.js";
 import { trivial_text_maker } from "src/models/text.js";
 
 import {
-  IconAbout,
+  IconInfo,
   IconGlossary,
   IconDataset,
   IconQuestion,
@@ -46,7 +46,7 @@ const EasyAccess_ = () => (
       </span>
     </a>
     <a href="#about" className="link-unstyled nav-item">
-      <IconAbout
+      <IconInfo
         title={trivial_text_maker("about_title")}
         inline={true}
         aria_hide={true}

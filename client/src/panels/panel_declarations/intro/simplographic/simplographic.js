@@ -13,9 +13,9 @@ import { ResultCounts, current_drr_key } from "src/models/results.js";
 import { is_mobile } from "src/core/feature_detection.js";
 
 import {
-  IconMoney,
-  IconEmployee,
-  IconStructure,
+  IconFinances,
+  IconEmployees,
+  IconHierarchy,
   IconClipboard,
 } from "src/icons/icons.js";
 
@@ -172,7 +172,7 @@ export const declare_simplographic_panel = () =>
               <Row
                 top_border
                 svg={
-                  <IconMoney
+                  <IconFinances
                     width="15rem"
                     color="#2C70C9"
                     alternate_color={false}
@@ -183,7 +183,7 @@ export const declare_simplographic_panel = () =>
               />
               <Row
                 svg={
-                  <IconEmployee
+                  <IconEmployees
                     width="15rem"
                     color="#2C70C9"
                     alternate_color={false}
@@ -194,7 +194,7 @@ export const declare_simplographic_panel = () =>
               />
               <Row
                 svg={
-                  <IconStructure
+                  <IconHierarchy
                     width="15rem"
                     color="#2C70C9"
                     alternate_color={false}

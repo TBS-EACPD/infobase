@@ -4,12 +4,13 @@ import React from "react";
 import { create_text_maker } from "src/models/text.js";
 
 import {
-  IconAbout,
+  IconInfo,
   IconRelatedBubble,
   IconDataset,
-  IconMoney,
-  IconEmployee,
+  IconFinances,
+  IconEmployees,
   IconClipboard,
+  IconTag,
 } from "src/icons/icons.js";
 
 
@@ -25,33 +26,33 @@ const base_configs = [
     id: "intro",
     title: (subject) => text_maker(`about_${subject.level}_title`),
     description: "Introduction",
-    Icon: IconAbout,
+    Icon: IconInfo,
   },
   {
     id: "structure",
     title: text_maker("tagged_programs"),
     description: "",
-    Icon: IconAbout, //TODO
+    Icon: IconTag,
   },
   {
     id: "financial",
     title: text_maker("financial_title"),
     description: text_maker("financial_desc"),
     enable_panel_filter: true,
-    Icon: IconMoney,
+    Icon: IconFinances,
   },
   {
     id: "covid",
     title: text_maker("covid_response"),
     description: text_maker("covid_desc"),
-    Icon: IconAbout, //TODO
+    Icon: IconInfo, //TODO
   },
   {
     id: "people",
     title: text_maker("people_title"),
     description: text_maker("people_desc"),
     enable_panel_filter: true,
-    Icon: IconEmployee,
+    Icon: IconEmployees,
   },
   {
     id: "results",
