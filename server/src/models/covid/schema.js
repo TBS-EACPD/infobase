@@ -60,7 +60,6 @@ const schema = `
     has_estimates: Boolean
     has_expenditures: Boolean
     has_commitments: Boolean
-    has_funding: Boolean
   }
 
   type CovidEstimates{
@@ -118,7 +117,6 @@ export default function ({ models, loaders }) {
           has_estimates: false,
           has_expenditures: false,
           has_commitments: false,
-          has_funding: false,
         }
     );
 

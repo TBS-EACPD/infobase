@@ -16,7 +16,6 @@ query ($lang: String = "en") {
         has_estimates
         has_expenditures
         has_commitments
-        has_funding
       }
 
       covid_estimates {
@@ -73,7 +72,6 @@ query ($lang: String = "en", $covid_measure_id: String = "COV001") {
         has_estimates
         has_expenditures
         has_commitments
-        has_funding
       }
     }
   }
@@ -151,7 +149,6 @@ query ($lang: String = "en") {
           has_estimates
           has_expenditures
           has_commitments
-          has_funding
         }
 
         covid_estimates {
@@ -201,7 +198,6 @@ query ($lang: String = "en") {
         has_estimates
         has_expenditures
         has_commitments
-        has_funding
       }
     }
     does_not_have_data: org(org_id: "15") {
@@ -209,7 +205,6 @@ query ($lang: String = "en") {
         has_estimates
         has_expenditures
         has_commitments
-        has_funding
       }
     }
     only_has_estimates: org(org_id: "1") {
@@ -217,7 +212,6 @@ query ($lang: String = "en") {
         has_estimates
         has_expenditures
         has_commitments
-        has_funding
       }
     }
   }
