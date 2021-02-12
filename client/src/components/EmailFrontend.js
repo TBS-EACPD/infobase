@@ -88,6 +88,7 @@ class EmailFrontend extends React.Component {
 
     this.state = {
       template_name: props.template_name,
+      run_on_submitted: true,
       loading: true,
       privacy_acknowledged: !props.include_privacy,
       sent_to_backend: false,
@@ -116,6 +117,7 @@ class EmailFrontend extends React.Component {
       template_name,
       template,
       completed_template,
+      run_on_submitted,
     } = this.state;
 
     // complete automatic fields and send completed tempalte to backend after submit button is clicked
@@ -145,10 +147,14 @@ class EmailFrontend extends React.Component {
             backend_response,
           });
       });
-
       this.setState({ sent_to_backend: true });
-    } else if (awaiting_backend_response && sent_to_backend) {
+    } else if (
+      awaiting_backend_response &&
+      sent_to_backend &&
+      run_on_submitted
+    ) {
       this.props.on_submitted();
+      this.setState({ run_on_submitted: false });
     }
   }
   render() {
@@ -416,6 +422,7 @@ class EmailFrontend extends React.Component {
 
                           this.setState({
                             ...this.state,
+                            run_on_submitted: true,
                             sent_to_backend: false,
                             awaiting_backend_response: false,
                             backend_response: {},
