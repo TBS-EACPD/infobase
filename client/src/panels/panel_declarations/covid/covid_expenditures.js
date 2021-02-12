@@ -258,38 +258,18 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
 const tab_content_configs = [
   {
     key: "summary",
-    levels: ["gov", "dept"],
+    levels: ["gov"],
     label: text_maker("summary_tab_label"),
-    load_data: (panel_args) => {
-      const { subject } = panel_args;
-
-      const { query, variables, response_accessor } = (() => {
-        if (subject.level === "dept") {
-          return {
-            query: org_covid_summary_query,
-            variables: {
-              lang: lang,
-              id: subject.id,
-              _query_name: "org_covid_summary_query",
-            },
-            response_accessor: (response) =>
-              _.get(response, "data.root.org.covid_summary"),
-          };
-        } else {
-          return {
-            query: gov_covid_summary_query,
-            variables: {
-              lang: lang,
-              _query_name: "gov_covid_summary_query",
-            },
-            response_accessor: (response) =>
-              _.get(response, "data.root.gov.covid_summary"),
-          };
-        }
-      })();
-
-      return client.query({ query, variables }).then(response_accessor);
-    },
+    load_data: (panel_args) =>
+      client
+        .query({
+          query: gov_covid_summary_query,
+          variables: {
+            lang: lang,
+            _query_name: "gov_covid_summary_query",
+          },
+        })
+        .then((response) => _.get(response, "data.root.gov.covid_summary")),
     TabContent: SummaryTab,
   },
   {
@@ -375,10 +355,11 @@ class CovidExpendituresPanel extends React.Component {
         last_refreshed_date,
         gov_covid_expenditures_in_year,
       };
-      const tabbed_content_props = get_tabbed_content_props(
-        tab_content_configs,
-        extended_panel_args
-      );
+      const {
+        tab_keys,
+        tab_labels,
+        tab_pane_contents,
+      } = get_tabbed_content_props(tab_content_configs, extended_panel_args);
 
       return (
         <Fragment>
@@ -387,7 +368,15 @@ class CovidExpendituresPanel extends React.Component {
               <TM k="covid_estimates_above_tab_footnote_list" />
             </AboveTabFootnoteList>
           </div>
-          <TabbedContent {...tabbed_content_props} />
+          {tab_keys.length === 1 && (
+            <Fragment>
+              <div className="panel-separator" />
+              {tab_pane_contents?.[tab_keys[0]]}
+            </Fragment>
+          )}
+          {tab_keys.length > 1 && (
+            <TabbedContent {...{ tab_keys, tab_labels, tab_pane_contents }} />
+          )}
         </Fragment>
       );
     }
