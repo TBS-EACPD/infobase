@@ -7,6 +7,10 @@ query ($lang: String = "en") {
       id
       name
       in_estimates
+      covid_funding {
+        fiscal_year
+        funding
+      }
 
       has_covid_data {
         has_estimates
@@ -49,16 +53,6 @@ query ($lang: String = "en") {
         fiscal_year
         commitment
       }
-      covid_funding {
-        org_id
-        org {
-          id
-          name
-        }
-    
-        fiscal_year
-        funding
-      }
     }
   }
 }`;
@@ -70,6 +64,10 @@ query ($lang: String = "en", $covid_measure_id: String = "COV001") {
       id
       name
       in_estimates
+      covid_funding {
+        fiscal_year
+        funding
+      }
 
       has_covid_data {
         has_estimates
@@ -102,10 +100,6 @@ query ($lang: String = "en") {
           fiscal_year
           commitment
         }
-        covid_funding {
-          fiscal_year
-          funding
-        }
       }
     }
   }
@@ -135,10 +129,6 @@ query ($lang: String = "en") {
           fiscal_year
           commitment
         }
-        covid_funding {
-          fiscal_year
-          funding
-        }
       }
     }
   }
@@ -152,6 +142,10 @@ query ($lang: String = "en") {
         id
         name
         in_estimates
+        covid_funding {
+          fiscal_year
+          funding
+        }
 
         has_covid_data {
           has_estimates
@@ -193,16 +187,6 @@ query ($lang: String = "en") {
       
           fiscal_year
           commitment
-        }
-        covid_funding {
-          org_id
-          org {
-            id
-            name
-          }
-      
-          fiscal_year
-          funding
         }
       }
     }
