@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-const WellList = ({ elements }) => (
+const CardList = ({ elements }) => (
   <div>
     <ul className="list-unstyled">
       {_.chain(elements)
@@ -39,4 +39,4 @@ const WellList = ({ elements }) => (
   </div>
 );
 
-export { WellList };
+export { CardList };
