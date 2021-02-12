@@ -50,36 +50,15 @@ const last_refreshed_date = { en: "December 31, 2020", fr: "31 décembre 2020" }
 
 const panel_key = "covid_expenditures_panel";
 
-const SummaryTab = ({ args: panel_args, data: { covid_expenditures } }) => {
-  const { subject } = panel_args;
-
-  const has_expenditures = !_.isEmpty(covid_expenditures);
-
-  const covid_expenditures_in_year = has_expenditures
-    ? _.reduce(
-        covid_expenditures,
-        (memo, { vote, stat }) => memo + vote + stat,
-        0
-      )
-    : 0;
-
-  const text_args = {
-    ...panel_args,
-    ...(subject.level === "dept" && {
-      dept_covid_expenditures_in_year: covid_expenditures_in_year,
-    }),
-  };
-
-  return (
-    <div className="frow middle-xs">
-      <TM
-        k={`covid_expenditures_summary_text_${subject.level}`}
-        args={text_args}
-        className="medium-panel-text"
-      />
-    </div>
-  );
-};
+const SummaryTab = ({ args: panel_args, data: { covid_expenditures } }) => (
+  <div className="frow middle-xs">
+    <TM
+      k={`covid_expenditures_overview_tab_text`}
+      args={panel_args}
+      className="medium-panel-text"
+    />
+  </div>
+);
 
 const get_expenditures_by_index = (exp_data, index_key) =>
   _.chain(exp_data)
@@ -232,15 +211,25 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
       .last()
       .value();
 
+    const subject_level = panel_args.subject.level;
+    const text_args = {
+      ...panel_args,
+      largest_measure_name,
+      largest_measure_exp,
+      ...(subject_level === "dept" && {
+        dept_covid_expenditures_in_year: _.reduce(
+          covid_expenditures,
+          (memo, { vote, stat }) => memo + vote + stat,
+          0
+        ),
+      }),
+    };
     return (
       <Fragment>
+        {subject_level === "dept"}
         <TM
-          k={`covid_expenditures_measure_tab_text_${panel_args.subject.level}`}
-          args={{
-            ...panel_args,
-            largest_measure_name,
-            largest_measure_exp,
-          }}
+          k={`covid_expenditures_measure_tab_text_${subject_level}`}
+          args={text_args}
           className="medium-panel-text"
         />
         <ToggleVoteStat />
