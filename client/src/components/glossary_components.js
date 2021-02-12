@@ -1,20 +1,15 @@
 import React from "react";
 
-import Tippy from "@tippyjs/react";
-
 import { backgroundColor, primaryColor } from "src/core/color_defs.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { IconQuestion } from "../icons/icons.js";
 import { glossary_href } from "../link_utils.js";
-import {
-  GlossaryEntry,
-  get_glossary_item_tooltip_html,
-} from "../models/glossary.js";
+import { GlossaryEntry } from "../models/glossary.js";
 import { trivial_text_maker } from "../models/text.js";
 
-const GlossaryTooltipWrapper = ({ id, children }) =>
+const GlossaryTooltipWrapper = ({ id, children, no_bottom_border }) =>
   is_a11y_mode ? (
     <a
       href={is_a11y_mode ? glossary_href(id) : null}
@@ -23,19 +18,15 @@ const GlossaryTooltipWrapper = ({ id, children }) =>
       {children}
     </a>
   ) : (
-    <Tippy
-      content={
-        <span
-          dangerouslySetInnerHTML={{
-            __html: get_glossary_item_tooltip_html(id),
-          }}
-        />
-      }
-      interactive
-      duration={0}
+    <span
+      className="nowrap glossary-tippy-link"
+      style={no_bottom_border && { borderBottom: "none" }}
+      tabIndex="0"
+      data-ibtt-glossary-key={id}
+      data-toggle="tooltip"
     >
-      <span className="nowrap glossary-tippy-link">{children}</span>
-    </Tippy>
+      {children}
+    </span>
   );
 
 export const GlossaryIcon = ({
@@ -46,12 +37,7 @@ export const GlossaryIcon = ({
   icon_color,
   icon_alt_color,
 }) => (
-  <GlossaryTooltipWrapper
-    no_bottom_border={true}
-    id={id}
-    arrow_selector={arrow_selector}
-    inner_selector={inner_selector}
-  >
+  <GlossaryTooltipWrapper no_bottom_border={true} id={id}>
     {is_a11y_mode ? (
       alternate_text ? (
         alternate_text
@@ -69,18 +55,8 @@ export const GlossaryIcon = ({
   </GlossaryTooltipWrapper>
 );
 
-export const GlossaryItem = ({
-  id,
-  alternate_text,
-  item_class,
-  arrow_selector,
-  inner_selector,
-}) => (
-  <GlossaryTooltipWrapper
-    id={id}
-    arrow_selector={arrow_selector}
-    inner_selector={inner_selector}
-  >
+export const GlossaryItem = ({ id, alternate_text, item_class }) => (
+  <GlossaryTooltipWrapper id={id}>
     <span className={item_class}>
       {alternate_text ? alternate_text : GlossaryEntry.lookup(id).title}
     </span>

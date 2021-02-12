@@ -42,7 +42,6 @@ hr {
   font-size: 12px !important;
 
   &[data-placement=bottom]{
-    margin-top: 7px;
 
     & > .tippy-arrow {
       top: -6px;
@@ -84,6 +83,7 @@ hr {
   padding: 1px 20px;
   border-radius: $standardBorderRadius;
   padding-top: 10px;
+  line-height: 1.4375 !important;
 
   @media (min-width:$minLargeDevice){
     max-width: 600px !important;
