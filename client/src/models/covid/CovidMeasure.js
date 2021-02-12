@@ -16,7 +16,7 @@ const flatten_data_rows = (measures, data_type) =>
     }))
   );
 
-const summable_data_keys = ["stat", "vote", "funding"];
+const summable_data_keys = ["stat", "vote"];
 const row_group_reducer = (group) => {
   const keys_to_sum_over = _.chain(group)
     .first()
