@@ -59,6 +59,7 @@ const create_spend_type_hierarchy = function () {
         ),
         _mock_model(sos["10"].text, sos["10"].text, "type_of_spending"),
         _mock_model(sos["11"].text, sos["11"].text, "type_of_spending"),
+        _mock_model(sos["12"].text, sos["12"].text, "type_of_spending"),
         _mock_model("revenues", text_maker("revenues"), "type_of_spending"),
       ];
     } else if (node.is("type_of_spending")) {
@@ -87,7 +88,8 @@ const create_spend_type_hierarchy = function () {
         capital_spending: [sos["8"], sos["9"]],
         [sos["10"].text]: [sos["10"]],
         [sos["11"].text]: [sos["11"]],
-        revenues: [sos["21"], sos["22"]],
+        [sos["12"].text]: [sos["12"]],
+        revenues: [sos["20"], sos["21"], sos["22"]],
       }[node.id];
       return _.map(children, _mock_model);
     } else if (node.is("so")) {
