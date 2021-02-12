@@ -226,9 +226,9 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
       .groupBy("measure_name")
       .map((rows, measure_name) => [
         measure_name,
-        _.reduce(rows, ({ exp }, { vote, stat }) => exp + vote + stat, 0),
+        _.reduce(rows, (memo, { total_exp }) => memo + total_exp, 0),
       ])
-      .sortBy(([_measure_name, { exp }]) => exp)
+      .sortBy(([_measure_name, exp]) => exp)
       .last()
       .value();
 
