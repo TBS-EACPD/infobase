@@ -50,11 +50,6 @@ export default function (model_singleton) {
 
     ...covid_commitments_fields,
   });
-  const CovidFundingSchema = mongoose.Schema({
-    org_id: parent_fkey_type(),
-
-    ...covid_funding_fields,
-  });
 
   const CovidMeasureSchema = mongoose.Schema({
     covid_measure_id: pkey_type(),
@@ -64,7 +59,7 @@ export default function (model_singleton) {
     covid_estimates: [CovidEstimatesSchema],
     covid_expenditures: [CovidExpenditureSchema],
     covid_commitments: [CovidCommitmentSchema],
-    covid_funding: [CovidFundingSchema],
+    covid_funding: [covid_funding_fields],
   });
 
   const CovidSummarySchema = mongoose.Schema({
@@ -73,7 +68,6 @@ export default function (model_singleton) {
     covid_estimates: [covid_estimates_fields],
     covid_expenditures: [covid_expenditures_fields],
     covid_commitments: [covid_commitments_fields],
-    covid_funding: [covid_funding_fields],
   });
 
   const HasCovidDataSchema = mongoose.Schema({
@@ -81,7 +75,7 @@ export default function (model_singleton) {
     has_estimates: { type: Boolean },
     has_expenditures: { type: Boolean },
     has_commitments: { type: Boolean },
-    has_funding: { type: Boolean },
+    has_funding: { type: Boolean }, // Always false for orgs. Sometimes true for measures. Both share this schema ATM
   });
 
   model_singleton.define_model("CovidMeasure", CovidMeasureSchema);
