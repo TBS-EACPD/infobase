@@ -326,8 +326,6 @@ const StatusIconTable = ({
               aria-hidden="true"
               data-toggle="tooltip"
               data-ibtt-glossary-key={status_key_to_glossary_key[status_key]}
-              data-ibtt-html="true"
-              data-ibtt-container="body"
             >
               {result_simple_statuses[status_key].text}
             </span>

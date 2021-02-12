@@ -26,7 +26,7 @@ const compiled_definitions = _.memoize((glossary_id) =>
   sanitized_marked(GlossaryEntry.lookup(glossary_id)._def_text)
 );
 
-const glossary_display = (item) => `<div>
+const glossary_display = (item) => `<div aria-live="polite">
   <div class="h6 medium-weight"> ${trivial_text_maker("definition")} : ${
   item.title
 } </div>
