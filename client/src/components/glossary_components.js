@@ -1,21 +1,20 @@
 import React from "react";
 
+import Tippy from "@tippyjs/react";
+
 import { backgroundColor, primaryColor } from "src/core/color_defs.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { IconQuestion } from "../icons/icons.js";
 import { glossary_href } from "../link_utils.js";
-import { GlossaryEntry } from "../models/glossary.js";
+import {
+  GlossaryEntry,
+  get_glossary_item_tooltip_html,
+} from "../models/glossary.js";
 import { trivial_text_maker } from "../models/text.js";
 
-const GlossaryTooltipWrapper = ({
-  no_bottom_border,
-  id,
-  arrow_selector,
-  inner_selector,
-  children,
-}) =>
+const GlossaryTooltipWrapper = ({ id, children }) =>
   is_a11y_mode ? (
     <a
       href={is_a11y_mode ? glossary_href(id) : null}
@@ -24,18 +23,19 @@ const GlossaryTooltipWrapper = ({
       {children}
     </a>
   ) : (
-    <span
-      className="nowrap glossary-tooltip-link"
-      style={no_bottom_border && { borderBottom: "none" }}
-      tabIndex="0"
-      data-ibtt-glossary-key={id}
-      data-toggle="tooltip"
-      data-ibtt-html="true"
-      data-ibtt-arrowselector={arrow_selector ? arrow_selector : null}
-      data-ibtt-innerselector={inner_selector ? inner_selector : null}
+    <Tippy
+      content={
+        <span
+          dangerouslySetInnerHTML={{
+            __html: get_glossary_item_tooltip_html(id),
+          }}
+        />
+      }
+      interactive
+      duration={0}
     >
-      {children}
-    </span>
+      <span className="nowrap glossary-tippy-link">{children}</span>
+    </Tippy>
   );
 
 export const GlossaryIcon = ({
