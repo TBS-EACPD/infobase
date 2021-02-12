@@ -126,6 +126,7 @@ export class Typeahead extends React.Component {
             placeholder={placeholder}
             autoComplete="off"
             value={query_value}
+            onFocus={this.handle_input_focus}
             onChange={this.handle_input_change}
             onKeyDown={this.handle_key_down}
             role="combobox"
@@ -410,6 +411,8 @@ export class Typeahead extends React.Component {
       this.setState({ may_show_menu: false });
     }
   };
+
+  handle_input_focus = () => this.setState({ may_show_menu: true });
 
   debounced_on_query = _.debounce((query_value) => {
     this.props.on_query(query_value);
