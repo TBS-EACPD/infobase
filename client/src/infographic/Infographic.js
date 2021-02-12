@@ -26,7 +26,7 @@ import { shallowEqualObjectsOverKeys, SafeJSURL } from "src/general_utils.js";
 
 import { EverythingSearch } from "src/search/EverythingSearch.js";
 
-import { bubble_defs } from "./bubble_definitions.js";
+import { get_bubble_defs } from "./bubble_definitions.js";
 import { BubbleMenu } from "./BubbleMenu.js";
 
 import { infograph_href_template } from "./infographic_link.js";
@@ -265,19 +265,11 @@ class InfoGraph_ extends React.Component {
   load({ subject, level, active_bubble_id }) {
     return get_panels_for_subject(subject).then(
       (subject_panels_by_bubble_id) => {
-        const subject_bubble_defs = _.chain(bubble_defs)
-          .filter(({ id }) =>
+        const subject_bubble_defs = _.filter(
+          get_bubble_defs(subject),
+          ({ id }) =>
             _.chain(subject_panels_by_bubble_id).keys().includes(id).value()
-          )
-          .map((bubble_def) =>
-            _.mapValues(bubble_def, (bubble_option) =>
-              _.isFunction(bubble_option) &&
-              !React.isValidElement(bubble_option(subject))
-                ? bubble_option(subject)
-                : bubble_option
-            )
-          )
-          .value();
+        );
 
         const common_new_state = {
           loading: false,
@@ -348,7 +340,7 @@ const Infographic = ({
 
   const SubjectModel = Subject[level];
   const subject = SubjectModel.lookup(subject_id);
-  const bubble_id = _.find(bubble_defs, { id: active_bubble_id })
+  const bubble_id = _.find(get_bubble_defs(subject), { id: active_bubble_id })
     ? active_bubble_id
     : null;
 
