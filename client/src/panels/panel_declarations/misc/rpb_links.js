@@ -12,7 +12,7 @@ import {
 
 import text from "./rpb_links.yaml";
 
-const { WellList } = util_components;
+const { CardList } = util_components;
 
 const { text_maker, TM } = create_text_maker_component([text]);
 
@@ -70,7 +70,7 @@ export const declare_links_to_rpb_panel = () =>
               return (
                 <TextPanel title={text_maker("links_to_rpb_title")}>
                   <TM k="links_to_rpb_text" />
-                  <WellList elements={list_args} />
+                  <CardList elements={list_args} />
                 </TextPanel>
               );
             },
@@ -113,7 +113,7 @@ export const declare_links_to_rpb_panel = () =>
               return (
                 <TextPanel title={text_maker("links_to_rpb_title")}>
                   <TM k="links_to_rpb_text" />
-                  <WellList elements={list_args} />
+                  <CardList elements={list_args} />
                 </TextPanel>
               );
             },

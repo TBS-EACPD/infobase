@@ -36,7 +36,7 @@ export { CountdownCircle } from "./CountdownCircle.js";
 export { Countdown } from "./Countdown.js";
 export { LogInteractionEvents } from "./LogInteractionEvents.js";
 export { GlossaryIcon, GlossaryItem } from "./glossary_components.js";
-export { WellList } from "./WellList.js";
+export { CardList } from "./CardList.js";
 export { LabeledTable } from "./LabeledTable.js";
 export { FootnoteList } from "./FootnoteList.js";
 export { AlertBanner } from "./AlertBanner.js";

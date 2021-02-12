@@ -18,7 +18,7 @@ import text from "./tags_related_to_subject_panels.yaml";
 
 const { text_maker, TM } = create_text_maker_component([text, hierarchy_text]);
 const { Dept, Tag, Program } = Subject;
-const { HeightClipper, WellList } = util_components;
+const { HeightClipper, CardList } = util_components;
 
 const scheme_order = ["GOCO", "WWH", "CCOFOG", "HWH"];
 
@@ -94,7 +94,7 @@ export const declare_tags_of_interest_panel = () =>
               k={`${subject.level}_is_tagged_with_following`}
               args={{ subject }}
             />
-            <WellList elements={tags_by_root} />
+            <CardList elements={tags_by_root} />
           </TextPanel>
         );
       },
@@ -139,7 +139,7 @@ export const declare_tag_progs_by_dept_panel = () =>
           <TextPanel title={text_maker("tag_progs_by_dept_title")}>
             <div className="col-md-10 col-md-offset-1">
               <HeightClipper clipHeight={250} allowReclip={true}>
-                <WellList elements={list_args} />
+                <CardList elements={list_args} />
                 {_.some(subject.programs, "is_dead") && (
                   <Fragment>
                     <HierarchyDeadElementIcon />
@@ -219,7 +219,7 @@ export const declare_related_tags_panel = () =>
           <TextPanel title={text_maker("related_tags_title")}>
             <div className="col-md-10 col-md-offset-1">
               <HeightClipper clipHeight={350} allowReclip={true}>
-                <WellList elements={list_args} />
+                <CardList elements={list_args} />
               </HeightClipper>
             </div>
             <div className="clearfix" />
