@@ -19,14 +19,9 @@ import {
   util_components,
   Subject,
   ensure_loaded,
-  formats,
-  WrappedNivoPie,
 } from "../shared.js";
 
-import {
-  AboveTabFootnoteList,
-  CellTooltip,
-} from "./covid_common_components.js";
+import { AboveTabFootnoteList } from "./covid_common_components.js";
 import {
   get_tabbed_content_props,
   wrap_with_vote_stat_controls,
@@ -55,14 +50,10 @@ const last_refreshed_date = { en: "December 31, 2020", fr: "31 décembre 2020" }
 
 const panel_key = "covid_expenditures_panel";
 
-const SummaryTab = ({
-  args: panel_args,
-  data: { covid_expenditures, covid_funding },
-}) => {
+const SummaryTab = ({ args: panel_args, data: { covid_expenditures } }) => {
   const { subject } = panel_args;
 
   const has_expenditures = !_.isEmpty(covid_expenditures);
-  const has_funding = !_.isEmpty(covid_funding);
 
   const covid_expenditures_in_year = has_expenditures
     ? _.reduce(
@@ -71,109 +62,42 @@ const SummaryTab = ({
         0
       )
     : 0;
-  const covid_funding_in_year = has_funding
-    ? _.first(covid_funding).funding
-    : 0;
 
   const text_args = {
     ...panel_args,
     ...(subject.level === "dept" && {
       dept_covid_expenditures_in_year: covid_expenditures_in_year,
-      dept_covid_funding_in_year: covid_funding_in_year,
     }),
   };
 
-  if (has_funding) {
-    const pie_data = [
-      {
-        id: "spent",
-        label: text_maker("covid_spent_funding"),
-        value: covid_expenditures_in_year,
-      },
-      {
-        id: "remaining",
-        label: text_maker("covid_remaining_funding"),
-        value: covid_funding_in_year - covid_expenditures_in_year,
-      },
-    ];
-
-    return (
-      <div className="frow middle-xs">
-        <div className="fcol-xs-12 fcol-md-6">
-          <TM
-            k={`covid_expenditures_summary_text_${subject.level}`}
-            args={text_args}
-            className="medium-panel-text"
-          />
-        </div>
-        <div className="fcol-xs-12 fcol-md-6">
-          <WrappedNivoPie data={pie_data} />
-        </div>
-      </div>
-    );
-  } else if (has_expenditures) {
-    return (
-      <div className="frow middle-xs">
-        <TM
-          k={`covid_expenditures_summary_text_${subject.level}_exp_only`}
-          args={text_args}
-          className="medium-panel-text"
-        />
-      </div>
-    );
-  } else {
-    throw `${panel_key} panel tried to render for ${subject.name}, but the subject has neither expenditures or funding! Shouldn't happen, check the panel's calculate condition.`;
-  }
+  return (
+    <div className="frow middle-xs">
+      <TM
+        k={`covid_expenditures_summary_text_${subject.level}_exp_only`}
+        args={text_args}
+        className="medium-panel-text"
+      />
+    </div>
+  );
 };
 
-const zip_expenditures_and_funding_rows = (index_key, exp_rows, funding_rows) =>
-  _.chain([...exp_rows, ...funding_rows])
+const get_expenditures_by_index = (exp_data, index_key) =>
+  _.chain(exp_data)
     .map(index_key)
     .uniq()
     .map((index_value) => {
       const index = { [index_key]: index_value };
-
-      const { vote, stat } = _.find(exp_rows, index) || { vote: 0, stat: 0 };
-
-      const { funding } = _.find(funding_rows, index) || { funding: null };
-
+      const { vote, stat } = _.find(exp_data, index) || { vote: 0, stat: 0 };
       return {
         ...index,
-        funding,
         vote,
         stat,
         total_exp: vote + stat,
-        funding_used: !_.isNull(funding)
-          ? 1 - (funding - (vote + stat)) / funding
-          : null,
       };
     })
     .value();
 
 const get_common_column_configs = (show_vote_stat) => ({
-  funding: {
-    index: 1,
-    header: text_maker("covid_funding"),
-    is_searchable: false,
-    is_summable: true,
-    raw_formatter: (value) => value || 0,
-    formatter: (value) => {
-      if (_.isNull(value)) {
-        return (
-          <span>
-            {"—"}
-            <CellTooltip
-              tooltip_text={text_maker(
-                "covid_expenditures_no_funding_explanation"
-              )}
-            />
-          </span>
-        );
-      } else {
-        return formats.compact2_raw(value);
-      }
-    },
-  },
   vote: {
     index: 2,
     header: text_maker(`covid_expenditures_voted`),
@@ -198,31 +122,6 @@ const get_common_column_configs = (show_vote_stat) => ({
     formatter: "compact2",
     initial_visible: !show_vote_stat,
   },
-  funding_used: {
-    index: 5,
-    header: text_maker(`covid_funding_used`),
-    is_searchable: false,
-    is_summable: false,
-    raw_formatter: (value) => value || 0,
-    formatter: (value) => {
-      if (_.isNull(value)) {
-        return "—";
-      } else {
-        return (
-          <span>
-            {formats.percentage2_raw(value)}
-            {value > 1 && (
-              <CellTooltip
-                tooltip_text={text_maker(
-                  "covid_expenditures_surpassing_funding_explanation"
-                )}
-              />
-            )}
-          </span>
-        );
-      }
-    },
-  },
 });
 
 const ByDepartmentTab = wrap_with_vote_stat_controls(
@@ -230,13 +129,9 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
     show_vote_stat,
     ToggleVoteStat,
     args: panel_args,
-    data: { covid_expenditures, covid_funding },
+    data: { covid_expenditures },
   }) => {
-    const rows = zip_expenditures_and_funding_rows(
-      "org_id",
-      covid_expenditures,
-      covid_funding
-    );
+    const rows = get_expenditures_by_index(covid_expenditures, "org_id");
 
     const column_configs = {
       org_id: {
@@ -276,10 +171,6 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
       .last()
       .value();
 
-    const largest_dept_funding = _.find(covid_funding, {
-      org_id: largest_dept_id,
-    }).funding;
-
     return (
       <Fragment>
         <TM
@@ -288,7 +179,6 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
             ...panel_args,
             largest_dept_name: Dept.lookup(largest_dept_id).name,
             largest_dept_exp,
-            largest_dept_funding,
           }}
           className="medium-panel-text"
         />
@@ -309,14 +199,10 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
     show_vote_stat,
     ToggleVoteStat,
     args: panel_args,
-    data: { covid_expenditures, covid_funding },
+    data: { covid_expenditures },
   }) => {
     const rows_with_measure_names = _.chain(
-      zip_expenditures_and_funding_rows(
-        "measure_id",
-        covid_expenditures,
-        covid_funding
-      )
+      get_expenditures_by_index(covid_expenditures, "measure_id")
     )
       .map(({ measure_id, ...row }) => ({
         ...row,
@@ -334,24 +220,13 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
       ...get_common_column_configs(show_vote_stat),
     };
 
-    const [
-      largest_measure_name,
-      { exp: largest_measure_exp, funding: largest_measure_funding },
-    ] = _.chain(rows_with_measure_names)
+    const [largest_measure_name, largest_measure_exp] = _.chain(
+      rows_with_measure_names
+    )
       .groupBy("measure_name")
       .map((rows, measure_name) => [
         measure_name,
-        _.reduce(
-          rows,
-          ({ exp, funding }, { vote, stat, funding: row_funding }) => ({
-            exp: exp + vote + stat,
-            funding: funding + row_funding,
-          }),
-          {
-            exp: 0,
-            funding: 0,
-          }
-        ),
+        _.reduce(rows, ({ exp }, { vote, stat }) => exp + vote + stat, 0),
       ])
       .sortBy(([_measure_name, { exp }]) => exp)
       .last()
@@ -365,7 +240,6 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
             ...panel_args,
             largest_measure_name,
             largest_measure_exp,
-            largest_measure_funding,
           }}
           className="medium-panel-text"
         />
@@ -425,17 +299,10 @@ const tab_content_configs = [
     load_data: ({ subject }) =>
       ensure_loaded({
         covid_expenditures: true,
-        covid_funding: true,
         subject,
-      }).then(() =>
-        _.chain(["expenditures", "funding"])
-          .map((data_type) => [
-            `covid_${data_type}`,
-            CovidMeasure.get_all_data_by_org(data_type),
-          ])
-          .fromPairs()
-          .value()
-      ),
+      }).then(() => ({
+        covid_expenditures: CovidMeasure.get_all_data_by_org("expenditures"),
+      })),
     TabContent: ByDepartmentTab,
   },
   {
@@ -445,19 +312,16 @@ const tab_content_configs = [
     load_data: ({ subject }) =>
       ensure_loaded({
         covid_expenditures: true,
-        covid_funding: true,
         subject,
-      }).then(() =>
-        _.chain(["expenditures", "funding"])
-          .map((data_type) => [
-            `covid_${data_type}`,
-            subject.level === "gov"
-              ? CovidMeasure.gov_data_by_measure(data_type)
-              : CovidMeasure.org_lookup_data_by_measure(data_type, subject.id),
-          ])
-          .fromPairs()
-          .value()
-      ),
+      }).then(() => ({
+        covid_expenditures:
+          subject.level === "gov"
+            ? CovidMeasure.gov_data_by_measure("expenditures")
+            : CovidMeasure.org_lookup_data_by_measure(
+                "expenditures",
+                subject.id
+              ),
+      })),
     TabContent: ByMeasureTab,
   },
 ];
@@ -483,7 +347,7 @@ class CovidExpendituresPanel extends React.Component {
           data: {
             root: {
               gov: {
-                covid_summary: { covid_expenditures, covid_funding },
+                covid_summary: { covid_expenditures },
               },
             },
           },
@@ -494,18 +358,13 @@ class CovidExpendituresPanel extends React.Component {
               (memo, { vote, stat }) => memo + vote + stat,
               0
             ),
-            gov_covid_funding_in_year: _.first(covid_funding)?.funding || 0,
             loading: false,
           });
         }
       );
   }
   render() {
-    const {
-      loading,
-      gov_covid_expenditures_in_year,
-      gov_covid_funding_in_year,
-    } = this.state;
+    const { loading, gov_covid_expenditures_in_year } = this.state;
     const { panel_args } = this.props;
 
     if (loading) {
@@ -515,7 +374,6 @@ class CovidExpendituresPanel extends React.Component {
         ...panel_args,
         last_refreshed_date,
         gov_covid_expenditures_in_year,
-        gov_covid_funding_in_year,
       };
       const tabbed_content_props = get_tabbed_content_props(
         tab_content_configs,
@@ -551,10 +409,7 @@ export const declare_covid_expenditures_panel = () =>
         if (level_name === "gov") {
           return true;
         } else {
-          const { has_expenditures, has_funding } = subject.has_data(
-            "covid_response"
-          ) || { has_expenditures: false, has_funding: false };
-          return has_expenditures || has_funding;
+          return subject.has_data("covid_response")?.has_expenditures;
         }
       },
       render: ({ calculations, footnotes, sources }) => {
