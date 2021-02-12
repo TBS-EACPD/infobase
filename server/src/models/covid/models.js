@@ -75,7 +75,6 @@ export default function (model_singleton) {
     has_estimates: { type: Boolean },
     has_expenditures: { type: Boolean },
     has_commitments: { type: Boolean },
-    has_funding: { type: Boolean }, // Always false for orgs. Sometimes true for measures. Both share this schema ATM
   });
 
   model_singleton.define_model("CovidMeasure", CovidMeasureSchema);

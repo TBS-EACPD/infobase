@@ -173,16 +173,14 @@ export default async function ({ models }) {
   const has_covid_data_records = _.flatMap(
     ["org_id", "covid_measure_id"],
     (subject_id_key) =>
-      _.chain([...all_rows_with_org_data, ...covid_funding_rows])
+      _.chain(all_rows_with_org_data)
         .map(subject_id_key)
         .uniq()
-        .compact() // covid_funding_rows don't have org_id, compact to drop the resulting undefiend
         .map((subject_id) => {
           const has_data_type = _.chain({
             estimates: covid_estimates_rows,
             expenditures: covid_expenditures_rows,
             commitments: covid_commitments_rows,
-            funding: covid_funding_rows,
           })
             .map((rows, data_type) => [
               `has_${data_type}`,
