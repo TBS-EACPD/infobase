@@ -1,6 +1,5 @@
 import React from "react";
 
-
 import {
   create_text_maker_component,
   CardLeftImage,
@@ -10,7 +9,7 @@ import { create_text_maker } from "src/models/text.js";
 
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
-import { IconDPs, IconClock } from "src/icons/icons.js";
+import { IconResultsReport, IconClock } from "src/icons/icons.js";
 
 import lab_text from "./InfoLab.yaml";
 import "./InfoLab.scss";
@@ -51,7 +50,7 @@ export default class InfoLab extends React.Component {
               <CardLeftImage
                 tmf={text_maker}
                 svg={
-                  <IconDPs
+                  <IconResultsReport
                     width="100%"
                     color="#FFFFFF"
                     alternate_color={false}

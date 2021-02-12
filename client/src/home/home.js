@@ -15,17 +15,17 @@ import { lang } from "src/core/injected_build_constants.js";
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import {
-  IconDPs,
+  IconResultsReport,
   IconPartition,
   IconCompareEstimates,
-  IconStructure,
+  IconHierarchy,
   IconTreemap,
-  IconExplorer,
-  IconBuilder,
+  IconTag,
+  IconReport,
   IconLab,
-  IconExpend,
-  IconPeople,
-  IconResults,
+  IconFinancesAlt,
+  IconEmployeesAlt,
+  IconClipboardAlt,
   IconFlagLine,
 } from "src/icons/icons.js";
 
@@ -110,7 +110,11 @@ const HomeLayout = (props) => (
         <TrinityItem
           href="#orgs/gov/gov/infograph/financial"
           svg={
-            <IconExpend width="100%" color="#FFFFFF" alternate_color={false} />
+            <IconFinancesAlt
+              width="100%"
+              color="#FFFFFF"
+              alternate_color={false}
+            />
           }
           title={<TM k="home_finance_title" />}
         />
@@ -122,14 +126,22 @@ const HomeLayout = (props) => (
         <TrinityItem
           href="#orgs/gov/gov/infograph/people"
           svg={
-            <IconPeople width="100%" color="#FFFFFF" alternate_color={false} />
+            <IconEmployeesAlt
+              width="100%"
+              color="#FFFFFF"
+              alternate_color={false}
+            />
           }
           title={<TM k="home_ppl_title" />}
         />
         <TrinityItem
           href="#orgs/gov/gov/infograph/results"
           svg={
-            <IconResults width="100%" color="#FFFFFF" alternate_color={false} />
+            <IconClipboardAlt
+              width="100%"
+              color="#FFFFFF"
+              alternate_color={false}
+            />
           }
           title={<TM k="home_results_title" />}
         />
@@ -140,7 +152,11 @@ const HomeLayout = (props) => (
             <CardLeftImage
               tmf={home_tm}
               svg={
-                <IconDPs width="100%" color="#FFFFFF" alternate_color={false} />
+                <IconResultsReport
+                  width="100%"
+                  color="#FFFFFF"
+                  alternate_color={false}
+                />
               }
               title_key="quick_link_DP_2022"
               text_key="dp_home_text"
@@ -245,7 +261,7 @@ const SubAppLayout = (props) => (
             <CardTopImage
               tmf={home_tm}
               svg={
-                <IconStructure
+                <IconHierarchy
                   width="100%"
                   color="#2C70C9"
                   alternate_color={false}
@@ -277,11 +293,7 @@ const SubAppLayout = (props) => (
             <CardTopImage
               tmf={home_tm}
               svg={
-                <IconExplorer
-                  width="100%"
-                  color="#2C70C9"
-                  alternate_color={false}
-                />
+                <IconTag width="100%" color="#2C70C9" alternate_color={false} />
               }
               title_key="explorer_home_title"
               text_key="explorer_home_text"
@@ -292,7 +304,7 @@ const SubAppLayout = (props) => (
             <CardTopImage
               tmf={home_tm}
               svg={
-                <IconBuilder
+                <IconReport
                   width="100%"
                   color="#2C70C9"
                   alternate_color={false}
