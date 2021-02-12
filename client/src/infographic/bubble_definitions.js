@@ -11,6 +11,7 @@ import {
   IconEmployees,
   IconClipboard,
   IconTag,
+  IconHelp,
 } from "src/icons/icons.js";
 
 
@@ -45,7 +46,7 @@ const base_configs = [
     id: "covid",
     title: text_maker("covid_response"),
     description: text_maker("covid_desc"),
-    Icon: IconInfo, //TODO
+    Icon: IconHelp,
   },
   {
     id: "people",

@@ -26,6 +26,7 @@ import {
   IconFinancesAlt,
   IconEmployeesAlt,
   IconClipboardAlt,
+  IconHelpAlt,
   IconFlagLine,
 } from "src/icons/icons.js";
 
@@ -122,6 +123,9 @@ const HomeLayout = (props) => (
           href="#orgs/gov/gov/infograph/covid"
           img_url={get_static_url("svg/covid.svg")}
           title={<TM k="covid_response" />}
+          svg={
+            <IconHelpAlt width="100%" color="#FFFFFF" alternate_color={false} />
+          }
         />
         <TrinityItem
           href="#orgs/gov/gov/infograph/people"
