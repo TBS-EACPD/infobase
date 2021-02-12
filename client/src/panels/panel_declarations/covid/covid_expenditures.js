@@ -73,7 +73,7 @@ const SummaryTab = ({ args: panel_args, data: { covid_expenditures } }) => {
   return (
     <div className="frow middle-xs">
       <TM
-        k={`covid_expenditures_summary_text_${subject.level}_exp_only`}
+        k={`covid_expenditures_summary_text_${subject.level}`}
         args={text_args}
         className="medium-panel-text"
       />
