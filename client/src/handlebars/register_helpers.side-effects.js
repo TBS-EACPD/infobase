@@ -1,11 +1,16 @@
+import React from "react";
 import Handlebars from "handlebars/dist/cjs/handlebars.js";
 import _ from "lodash";
+import Tippy from "@tippyjs/react";
 
 import { formats } from "src/core/format.js";
 import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { infograph_href_template, glossary_href } from "../link_utils.js";
-import { GlossaryEntry } from "../models/glossary.js";
+import {
+  GlossaryEntry,
+  get_glossary_item_tooltip_html,
+} from "../models/glossary.js";
 import { Subject } from "../models/subject";
 
 import { trivial_text_maker, run_template } from "../models/text.js";
@@ -608,7 +613,12 @@ Handlebars.registerHelper("gl", function glossary_link(key) {
 //produces a link with glossary tooltip
 function glossary_tooltip(display, key) {
   return new Handlebars.SafeString(
-    `<span class="nowrap glossary-tooltip-link" tabindex="0" data-ibtt-glossary-key="${key}" data-toggle="tooltip" data-ibtt-html="true" data-ibtt-container="body">${display}</span>`
+    (
+      <Tippy content={get_glossary_item_tooltip_html(key)} placement="button">
+        <span>{display}</span>
+      </Tippy>
+      // `<span class="nowrap glossary-tooltip-link" tabindex="0" data-ibtt-glossary-key="${key}" data-toggle="tooltip" data-ibtt-html="true" data-ibtt-container="body">${display}</span>`
+    )
   );
 }
 

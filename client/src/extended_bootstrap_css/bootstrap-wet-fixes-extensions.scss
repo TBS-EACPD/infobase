@@ -23,38 +23,67 @@ hr {
   border-color: $separatorColor;
 }
 
-/* tooltips */
-.tooltip {
-  opacity: 1;
+/* tippys */
+.tippy-arrow {
+  width: 12px;
+  height: 6px;
+  color: $tooltipColor;
+}
 
-  &[x-placement=bottom]{
+.tippy-arrow::before {
+  content: "";
+  position: absolute;
+  border-color: transparent;
+  border-style: solid;
+}
+
+.tippy-box {
+  opacity: 1;
+  font-size: 12px !important;
+
+  &[data-placement=bottom]{
     margin-top: 7px;
 
-    & > .tooltip-arrow {
+    & > .tippy-arrow {
       top: -6px;
       border-width: 0px 6px 6px 6px;
       border-bottom-color: rgba($tooltipColor, 1);
     }
+
+    & > .tippy-arrow::before {
+      left: 0;
+      border-width: 0 8px 8px;
+      border-bottom-color: initial;
+      transform-origin: center bottom;
+    }
   }
 
-  &[x-placement=top] {
+  &[data-placement=top] {
     top: -5px !important;
 
-    & > .tooltip-arrow {
+    & > .tippy-arrow {
       bottom: -6px;
       border-width: 6px 6px 0px 6px;
       border-top-color: rgba($tooltipColor, 1);
     }
+
+    & > .tippy-arrow::before {
+      left: 0;
+      border-width: 8px 8px 0;
+      border-top-color: initial;
+      transform-origin: center top;
+    }
   }
 }
 
-.tooltip-inner {
+.tippy-content {
   color: $textLightColor;
   background-color: rgba($tooltipColor, 1);
   text-align: left !important;
   border: none;
   padding: 1px 20px;
   border-radius: $standardBorderRadius;
+  padding-top: 10px;
 
   @media (min-width:$minLargeDevice){
     max-width: 600px !important;
@@ -64,7 +93,7 @@ hr {
   @media (max-width:$maxMediumDevice){ max-width: 90vw !important }
 }
 
-.tooltip-inner a {
+.tippy-content a {
   color: $textLightColor;
   text-decoration: none;
 }
@@ -74,8 +103,8 @@ hr {
   visibility: visible; 
 }
 
-.glossary-tooltip-link,
-.glossary-tooltip-link:visited {
+.glossary-tippy-link,
+.glossary-tippy-link:visited {
   text-decoration: none;
   border-bottom: 1px dotted $textColor;
   transition: width 2s;
