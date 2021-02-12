@@ -27,38 +27,28 @@ export default async function ({ models }) {
     (row) => ({ ...row, funding: +row.funding })
   );
 
-  const all_rows = [
+  const covid_measure_records = _.map(
+    get_standard_csv_file_rows("covid_measures.csv"),
+    (row) => {
+      const filter_by_row_id = ({ covid_measure_id }) =>
+        covid_measure_id === row.covid_measure_id;
+
+      return new CovidMeasure({
+        ...row,
+        covid_estimates: _.filter(covid_estimates_rows, filter_by_row_id),
+        covid_expenditures: _.filter(covid_expenditures_rows, filter_by_row_id),
+        covid_commitments: _.filter(covid_commitments_rows, filter_by_row_id),
+        covid_funding: _.filter(covid_funding_rows, filter_by_row_id),
+      });
+    }
+  );
+
+  const all_rows_with_org_data = [
     ...covid_estimates_rows,
     ...covid_expenditures_rows,
     ...covid_commitments_rows,
-    ...covid_funding_rows,
   ];
-
-  const covid_measure_records = _.map(
-    get_standard_csv_file_rows("covid_measures.csv"),
-    (row) =>
-      new CovidMeasure({
-        ...row,
-        covid_estimates: _.filter(
-          covid_estimates_rows,
-          ({ covid_measure_id }) => covid_measure_id === row.covid_measure_id
-        ),
-        covid_expenditures: _.filter(
-          covid_expenditures_rows,
-          ({ covid_measure_id }) => covid_measure_id === row.covid_measure_id
-        ),
-        covid_commitments: _.filter(
-          covid_commitments_rows,
-          ({ covid_measure_id }) => covid_measure_id === row.covid_measure_id
-        ),
-        covid_funding: _.filter(
-          covid_funding_rows,
-          ({ covid_measure_id }) => covid_measure_id === row.covid_measure_id
-        ),
-      })
-  );
-
-  const coivd_summary_records = _.chain(all_rows)
+  const covid_summary_records = _.chain(all_rows_with_org_data)
     .map("org_id")
     .uniq()
     .map((org_id) => ({
@@ -113,18 +103,6 @@ export default async function ({ models }) {
           commitment: _.reduce(
             year_rows,
             (memo, { commitment }) => memo + commitment,
-            0
-          ),
-        }))
-        .value(),
-      covid_funding: _.chain(covid_funding_rows)
-        .filter(({ org_id: row_org_id }) => row_org_id === org_id)
-        .groupBy("fiscal_year")
-        .map((year_rows, fiscal_year) => ({
-          fiscal_year,
-          funding: _.reduce(
-            year_rows,
-            (memo, { funding }) => memo + funding,
             0
           ),
         }))
@@ -188,18 +166,6 @@ export default async function ({ models }) {
             ),
           }))
           .value(),
-        covid_funding: _.chain(org_summary_rows)
-          .flatMap("covid_funding")
-          .groupBy("fiscal_year")
-          .map((year_rows, fiscal_year) => ({
-            fiscal_year,
-            funding: _.reduce(
-              year_rows,
-              (memo, { funding }) => memo + funding,
-              0
-            ),
-          }))
-          .value(),
       },
     ])
     .value();
@@ -207,9 +173,10 @@ export default async function ({ models }) {
   const has_covid_data_records = _.flatMap(
     ["org_id", "covid_measure_id"],
     (subject_id_key) =>
-      _.chain(all_rows)
+      _.chain([...all_rows_with_org_data, ...covid_funding_rows])
         .map(subject_id_key)
         .uniq()
+        .compact() // covid_funding_rows don't have org_id, compact to drop the resulting undefiend
         .map((subject_id) => {
           const has_data_type = _.chain({
             estimates: covid_estimates_rows,
@@ -232,6 +199,6 @@ export default async function ({ models }) {
   return await Promise.all([
     HasCovidData.insertMany(has_covid_data_records),
     CovidMeasure.insertMany(covid_measure_records),
-    CovidSummary.insertMany(coivd_summary_records),
+    CovidSummary.insertMany(covid_summary_records),
   ]);
 }
