@@ -24,7 +24,6 @@ import {
 } from "./covid_common_components.js";
 import {
   get_tabbed_content_props,
-  wrap_with_vote_stat_controls,
   string_sort_func,
 } from "./covid_common_utils.js";
 
@@ -86,146 +85,119 @@ const SummaryTab = ({ args: panel_args }) => {
   );
 };
 
-const ByMeasureTab = wrap_with_vote_stat_controls(
-  ({
-    show_vote_stat,
-    ToggleVoteStat,
-    args: panel_args,
-    data: { covid_expenditures },
-  }) => {
-    const rows = _.chain(CovidMeasure.get_all())
-      .map(({ id: measure_id, name: measure_name, covid_funding }) => {
-        const funding = _.first(covid_funding)?.funding || null;
+const ByMeasureTab = ({ args: panel_args, data: { covid_expenditures } }) => {
+  const rows = _.chain(CovidMeasure.get_all())
+    .map(({ id: measure_id, name: measure_name, covid_funding }) => {
+      const funding = _.first(covid_funding)?.funding || null;
 
-        const { vote, stat } = _.find(covid_expenditures, { measure_id }) || {
-          vote: 0,
-          stat: 0,
-        };
+      const { vote, stat } = _.find(covid_expenditures, { measure_id }) || {
+        vote: 0,
+        stat: 0,
+      };
 
-        return {
-          measure_name,
-          funding,
-          vote,
-          stat,
-          total_exp: vote + stat,
-          funding_used: !_.isNull(funding)
-            ? 1 - (funding - (vote + stat)) / funding
-            : null,
-        };
-      })
-      .filter(({ funding, vote, stat }) => funding || vote || stat)
-      .value();
+      return {
+        measure_name,
+        funding,
+        total_exp: vote + stat,
+        funding_used: !_.isNull(funding)
+          ? 1 - (funding - (vote + stat)) / funding
+          : null,
+      };
+    })
+    .filter(({ funding, total_exp }) => funding || total_exp)
+    .value();
 
-    const column_configs = {
-      measure_name: {
-        index: 0,
-        header: text_maker("covid_measure"),
-        is_searchable: true,
-        sort_func: (name_a, name_b) => string_sort_func(name_a, name_b),
+  const column_configs = {
+    measure_name: {
+      index: 0,
+      header: text_maker("covid_measure"),
+      is_searchable: true,
+      sort_func: (name_a, name_b) => string_sort_func(name_a, name_b),
+    },
+    funding: {
+      index: 1,
+      header: text_maker("covid_funding"),
+      is_searchable: false,
+      is_summable: true,
+      raw_formatter: (value) => value || 0,
+      formatter: (value) => {
+        if (_.isNull(value)) {
+          return (
+            <span>
+              {"—"}
+              <CellTooltip
+                tooltip_text={text_maker(
+                  "covid_funding_no_funding_explanation"
+                )}
+              />
+            </span>
+          );
+        } else {
+          return formats.compact2_raw(value);
+        }
       },
-      funding: {
-        index: 1,
-        header: text_maker("covid_funding"),
-        is_searchable: false,
-        is_summable: true,
-        raw_formatter: (value) => value || 0,
-        formatter: (value) => {
-          if (_.isNull(value)) {
-            return (
-              <span>
-                {"—"}
+    },
+    total_exp: {
+      index: 4,
+      header: text_maker(`covid_expenditures`),
+      is_searchable: false,
+      is_summable: true,
+      formatter: "compact2",
+    },
+    funding_used: {
+      index: 5,
+      header: text_maker(`covid_funding_used`),
+      is_searchable: false,
+      is_summable: false,
+      raw_formatter: (value) => value || 0,
+      formatter: (value) => {
+        if (_.isNull(value)) {
+          return "—";
+        } else {
+          return (
+            <span>
+              {formats.percentage2_raw(value)}
+              {value > 1 && (
                 <CellTooltip
                   tooltip_text={text_maker(
-                    "covid_funding_no_funding_explanation"
+                    "covid_funding_surpassing_funding_explanation"
                   )}
                 />
-              </span>
-            );
-          } else {
-            return formats.compact2_raw(value);
-          }
-        },
+              )}
+            </span>
+          );
+        }
       },
-      vote: {
-        index: 2,
-        header: text_maker(`covid_expenditures_voted`),
-        is_searchable: false,
-        is_summable: true,
-        formatter: "compact2",
-        initial_visible: show_vote_stat,
-      },
-      stat: {
-        index: 3,
-        header: text_maker(`covid_expenditures_stat`),
-        is_searchable: false,
-        is_summable: true,
-        formatter: "compact2",
-        initial_visible: show_vote_stat,
-      },
-      total_exp: {
-        index: 4,
-        header: text_maker(`covid_expenditures`),
-        is_searchable: false,
-        is_summable: true,
-        formatter: "compact2",
-        initial_visible: !show_vote_stat,
-      },
-      funding_used: {
-        index: 5,
-        header: text_maker(`covid_funding_used`),
-        is_searchable: false,
-        is_summable: false,
-        raw_formatter: (value) => value || 0,
-        formatter: (value) => {
-          if (_.isNull(value)) {
-            return "—";
-          } else {
-            return (
-              <span>
-                {formats.percentage2_raw(value)}
-                {value > 1 && (
-                  <CellTooltip
-                    tooltip_text={text_maker(
-                      "covid_funding_surpassing_funding_explanation"
-                    )}
-                  />
-                )}
-              </span>
-            );
-          }
-        },
-      },
-    };
+    },
+  };
 
-    const {
-      measure_name: largest_measure_name,
-      funding: largest_measure_funding,
-      total_exp: largest_measure_exp,
-    } = _.chain(rows).filter("funding").sortBy("funding").last().value();
+  const {
+    measure_name: largest_measure_name,
+    funding: largest_measure_funding,
+    total_exp: largest_measure_exp,
+  } = _.chain(rows).filter("funding").sortBy("funding").last().value();
 
-    return (
-      <Fragment>
-        <TM
-          k={`covid_funding_measure_tab_text`}
-          args={{
-            ...panel_args,
-            largest_measure_name,
-            largest_measure_funding,
-            largest_measure_exp,
-          }}
-          className="medium-panel-text"
-        />
-        <ToggleVoteStat />
-        <SmartDisplayTable
-          data={rows}
-          column_configs={column_configs}
-          table_name={text_maker("by_measure_tab_label")}
-          disable_column_select={true}
-        />
-      </Fragment>
-    );
-  }
-);
+  return (
+    <Fragment>
+      <TM
+        k={`covid_funding_measure_tab_text`}
+        args={{
+          ...panel_args,
+          largest_measure_name,
+          largest_measure_funding,
+          largest_measure_exp,
+        }}
+        className="medium-panel-text"
+      />
+      <SmartDisplayTable
+        data={rows}
+        column_configs={column_configs}
+        table_name={text_maker("by_measure_tab_label")}
+        disable_column_select={true}
+      />
+    </Fragment>
+  );
+};
 
 const tab_content_configs = [
   {
