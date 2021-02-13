@@ -139,6 +139,7 @@ const covid_summary_query_fragment = `
 `;
 export const gov_covid_summary_query = build_base_query(`
   gov {
+    id
     ${covid_summary_query_fragment}
   }
 `);
