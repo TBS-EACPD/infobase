@@ -101,26 +101,19 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
     show_vote_stat,
     ToggleVoteStat,
     args: panel_args,
-    data: { covid_funding, covid_expenditures },
+    data: { covid_expenditures },
   }) => {
-    const rows_with_measure_names = _.chain([
-      ...covid_expenditures,
-      ...covid_funding,
-    ])
-      .map("measure_id")
-      .uniq()
-      .map((index_value) => {
-        const index = { ["measure_id"]: index_value };
+    const rows = _.chain(CovidMeasure.get_all())
+      .map(({ id: measure_id, name: measure_name, covid_funding }) => {
+        const funding = _.first(covid_funding)?.funding || null;
 
-        const { vote, stat } = _.find(covid_expenditures, index) || {
+        const { vote, stat } = _.find(covid_expenditures, { measure_id }) || {
           vote: 0,
           stat: 0,
         };
 
-        const { funding } = _.find(covid_funding, index) || { funding: null };
-
         return {
-          ...index,
+          measure_name,
           funding,
           vote,
           stat,
@@ -130,10 +123,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
             : null,
         };
       })
-      .map(({ measure_id, ...row }) => ({
-        ...row,
-        measure_name: CovidMeasure.lookup(measure_id).name,
-      }))
+      .filter(({ funding, vote, stat }) => funding || vote || stat)
       .value();
 
     const column_configs = {
@@ -217,28 +207,11 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
       },
     };
 
-    const [
-      largest_measure_name,
-      { funding: largest_measure_funding, exp: largest_measure_exp },
-    ] = _.chain(rows_with_measure_names)
-      .groupBy("measure_name")
-      .map((rows, measure_name) => [
-        measure_name,
-        _.reduce(
-          rows,
-          ({ funding, exp }, { funding: row_funding, vote, stat }) => ({
-            funding: funding + row_funding,
-            exp: exp + vote + stat,
-          }),
-          {
-            funding: 0,
-            exp: 0,
-          }
-        ),
-      ])
-      .sortBy(([_measure_name, { funding }]) => funding)
-      .last()
-      .value();
+    const {
+      measure_name: largest_measure_name,
+      funding: largest_measure_funding,
+      total_exp: largest_measure_exp,
+    } = _.chain(rows).filter("funding").sortBy("funding").last().value();
 
     return (
       <Fragment>
@@ -254,7 +227,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
         />
         <ToggleVoteStat />
         <SmartDisplayTable
-          data={rows_with_measure_names}
+          data={rows}
           column_configs={column_configs}
           table_name={text_maker("by_measure_tab_label")}
           disable_column_select={true}
