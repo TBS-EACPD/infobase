@@ -23,23 +23,22 @@ const commitments_fields = `
 `;
 
 const schema = `
-  extend type Root{
+  extend type Root {
     covid_measures: [CovidMeasure]
     covid_measure(covid_measure_id: String!): CovidMeasure
   }
 
-  extend type Gov{
+  extend type Gov {
     covid_summary: CovidSummary
-    covid_funding: [CovidFunding]
   }
 
-  extend type Org{
+  extend type Org {
     has_covid_data: HasCovidData
     covid_summary: CovidSummary
     covid_measures: [CovidMeasure]
   }
 
-  type CovidMeasure{
+  type CovidMeasure {
     id: String
     name: String
     in_estimates: Boolean
@@ -51,51 +50,53 @@ const schema = `
     covid_expenditures: [CovidExpenditures]
     covid_commitments: [CovidCommitments]
   }
-  type CovidFunding{
+  type CovidFunding {
     id: String
     fiscal_year: String
     funding: Float
   }
 
-  type HasCovidData{
+  type HasCovidData {
     has_estimates: Boolean
     has_expenditures: Boolean
     has_commitments: Boolean
   }
 
-  type CovidEstimates{
+  type CovidEstimates {
     org_id: String
     org: Org
 
     ${estimates_fields}
   }
-  type CovidExpenditures{
+  type CovidExpenditures {
     org_id: String
     org: Org
 
     ${expenditures_fields}
   }
-  type CovidCommitments{
+  type CovidCommitments {
     org_id: String
     org: Org
 
     ${commitments_fields}
   }
 
-  type CovidSummary{
+  type CovidSummary {
     id: String
+
+    covid_funding: [CovidFunding]
 
     covid_estimates: [CovidEstimatesSummary]
     covid_expenditures: [CovidExpendituresSummary]
     covid_commitments: [CovidCommitmentsSummary]
   }
-  type CovidEstimatesSummary{
+  type CovidEstimatesSummary {
     ${estimates_fields}
   }
-  type CovidExpendituresSummary{
+  type CovidExpendituresSummary {
     ${expenditures_fields}
   }
-  type CovidCommitmentsSummary{
+  type CovidCommitmentsSummary {
     ${commitments_fields}
   }
 `;
@@ -130,11 +131,6 @@ export default function ({ models, loaders }) {
     Gov: {
       covid_summary: () =>
         covid_summary_by_org_id_loader.load("gov").then(_.first),
-      covid_funding: () =>
-        covid_summary_by_org_id_loader
-          .load("gov")
-          .then(_.first)
-          .then(({ covid_funding }) => covid_funding),
     },
     Org: {
       has_covid_data: ({ org_id }) => has_covid_data_resolver(org_id),

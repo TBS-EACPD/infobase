@@ -55,17 +55,17 @@ export default function (model_singleton) {
     covid_measure_id: pkey_type(),
     ...bilingual("name", { ...str_type, required: true }),
     in_estimates: { type: Boolean },
+    covid_funding: [covid_funding_fields],
 
     covid_estimates: [CovidEstimatesSchema],
     covid_expenditures: [CovidExpenditureSchema],
     covid_commitments: [CovidCommitmentSchema],
-    covid_funding: [covid_funding_fields],
   });
 
   const CovidSummarySchema = mongoose.Schema({
     org_id: pkey_type(),
 
-    covid_funding: [covid_funding_fields], // outlier, applies to gov level summary only, TODO make that less akward
+    covid_funding: [covid_funding_fields], // outlier here, only has data in the gov summary, empty at the dept level
 
     covid_estimates: [covid_estimates_fields],
     covid_expenditures: [covid_expenditures_fields],

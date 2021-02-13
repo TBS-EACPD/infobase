@@ -107,6 +107,7 @@ export default async function ({ models }) {
           ),
         }))
         .value(),
+      covid_funding: null,
     }))
     .thru((org_summary_rows) => [
       ...org_summary_rows,
