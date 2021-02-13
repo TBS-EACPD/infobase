@@ -1,72 +1,39 @@
-covid_expenditures_panel_title:
-  en: Expenditures by COVID-19 Measure
+covid_funding_panel_title:
+  en: Funding by COVID-19 Measure
   fr: TODO
 
-covid_estimates_above_tab_footnote_list:
+covid_funding_above_tab_footnote_list:
   transform: [handlebars,markdown]
   en: |
-    * The measures reported on here are limited to those presented in the Estimates, based on the Fall Economic Statement 2020 (FES)
     * Funding amounts refer to the expected 2020-21 cash value of each measure 
+    * The measures reported on here are limited to those presented in the Estimates, based on the Fall Economic Statement 2020 (FES)
     * More recent or more detailed data may be available directly from individual federal organizations. Updates are ongoing and will
     be reflected on GC InfoBase monthly. Finalized values for 2020-21 will be available in 2021-22
   fr: |
     * TODO
 
-covid_expenditures_summary_text_gov:
+covid_funding_summary_text:
   transform: [handlebars,markdown]
   en: |
-    As of **{{last_refreshed_date}}**, the government has identified **{{fmt_compact1_written gov_covid_funding_in_year}}** in total funding for use towards implementing its response to the COVID-19 pandemic in **{{est_in_year}}**.
-    Of this total funding potential, **{{fmt_compact1_written gov_covid_expenditures_in_year}}** (**{{fmt_percentage1 (divide gov_covid_expenditures_in_year gov_covid_funding_in_year)}}**) has been spent so far.
+    As of **{{last_refreshed_date}}**, the government has identified **{{fmt_compact1_written covid_funding_in_year}}** in total
+    funding for use towards implementing its response to the COVID-19 pandemic in **{{est_in_year}}**. Of this total funding potential,
+    **{{fmt_compact1_written covid_expenditures_in_year}}** (**{{fmt_percentage1 (divide covid_expenditures_in_year covid_funding_in_year)}}**)
+    has been spent so far.
   fr: TODO
 
-covid_expenditures_summary_text_dept:
+covid_funding_measure_tab_text:
   transform: [handlebars,markdown]
   en: |
-    As of **{{last_refreshed_date}}**, **{{fmt_compact1_written dept_covid_funding_in_year}}** total funding has been identified for use by **{{subject.name}}** towards implementing the government's response to the COVID-19 pandemic in **{{est_in_year}}**.
-    Of this, **{{fmt_compact1_written dept_covid_expenditures_in_year}}** (**{{fmt_percentage1 (divide dept_covid_expenditures_in_year dept_covid_funding_in_year)}}**) has been spent so far.
-
-    **{{subject.name}}'s** funding amount represents **{{fmt_percentage1 (divide dept_covid_funding_in_year gov_covid_funding_in_year)}}** of the government's total COVID-19 response funding, while its spent portion represents **{{fmt_percentage1 (divide dept_covid_expenditures_in_year gov_covid_expenditures_in_year)}}** of the government's total COVID-19 response spending.
-  fr: |
-    TODO
-covid_expenditures_summary_text_dept_exp_only:
-  transform: [handlebars,markdown]
-  en: |
-    As of **{{last_refreshed_date}}**, **{{subject.name}}** has spent **{{fmt_compact1_written dept_covid_expenditures_in_year}}** towards implementing the government's response to the COVID-19 pandemic in **{{est_in_year}}**.
-
-    {{gt "covid_expenditures_no_funding_explanation"}}
+    As of **{{last_refreshed_date}}**, the COVID-19 measure with the most funding in **{{est_in_year}}** is **{{largest_measure_name}}** with 
+    **{{fmt_compact1_written largest_measure_funding}}**. Of this total funding potential, **{{fmt_compact1_written largest_measure_exp}}**
+    (**{{fmt_percentage1 (divide largest_measure_exp largest_measure_funding)}}**) has been spent so far.
   fr: |
     TODO
 
-
-covid_expenditures_department_tab_text:
-  transform: [handlebars,markdown]
-  en: |
-    As of **{{last_refreshed_date}}**, the organization with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_dept_name}}**, with **{{fmt_compact1_written largest_dept_exp}}** spent of their total funding potential of **{{fmt_compact1_written largest_dept_funding}}**.
-  fr: |
-    TODO
-
-covid_expenditures_measure_tab_text_gov:
-  transform: [handlebars,markdown]
-  en: |
-    As of **{{last_refreshed_date}}**, the COVID-19 measure with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_measure_name}}**, with **{{fmt_compact1_written largest_measure_exp}}** spent of its total funding potential of **{{fmt_compact1_written largest_measure_funding}}**.
-  fr: |
-    TODO
-covid_expenditures_measure_tab_text_dept:
-  transform: [handlebars,markdown]
-  en: |
-    As of **{{last_refreshed_date}}**, **{{subject.name}}**'s COVID-19 measure with the largest COVID-19 related expenditure in **{{est_in_year}}** is **{{largest_measure_name}}**, with **{{fmt_compact1_written largest_measure_exp}}**
-    spent{{#if largest_measure_funding}} of its total funding potential of **{{fmt_compact1_written largest_measure_funding}}**.{{else}}.{{/if}}
-
-    {{#if largest_measure_funding}}{{else}}
-    {{gt "covid_expenditures_no_funding_explanation"}}
-    {{/if}}
-  fr: |
-    TODO
-
-covid_expenditures_no_funding_explanation:
+covid_funding_no_funding_explanation:
   en: TODO, short explaination of how expenditures can exist without funding
   fr:
-covid_expenditures_surpassing_funding_explanation:
+covid_funding_surpassing_funding_explanation:
   en: TODO, short explaination of how expenditures can surpass funding
   fr:
 
@@ -78,15 +45,6 @@ covid_spent_funding:
   fr: TODO
 covid_remaining_funding:
   en: Remaining Funding
-  fr: TODO
-covid_expenditures_stat:
-  en: Statutory Expenditures
-  fr: TODO
-covid_expenditures_voted:
-  en: Voted Expenditures
-  fr: TODO
-covid_expenditures:
-  en: Expenditures
   fr: TODO
 covid_funding_used:
   en: Funding Used (%)

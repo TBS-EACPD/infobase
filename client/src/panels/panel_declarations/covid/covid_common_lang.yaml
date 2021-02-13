@@ -22,3 +22,13 @@ show_vote_stat_split:
   transform: [handlebars]
   en: Show {{gl_tt "voted" "VOTED"}} and {{gl_tt "statutory" "STAT"}} amount breakout
   fr: TODO
+
+covid_expenditures_stat:
+  en: Statutory Expenditures
+  fr: TODO
+covid_expenditures_voted:
+  en: Voted Expenditures
+  fr: TODO
+covid_expenditures:
+  en: Expenditures
+  fr: TODO
