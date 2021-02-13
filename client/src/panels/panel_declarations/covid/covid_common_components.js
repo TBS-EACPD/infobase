@@ -59,7 +59,7 @@ const CellTooltip = ({ tooltip_text }) => (
     data-ibtt-container="body"
     data-ibtt-text={tooltip_text}
   >
-    <IconQuestion width={"1.2em"} vertical_align={"0em"} />
+    <IconQuestion width={"1.2em"} svg_style={{ verticalAlign: "0em" }} />
   </span>
 );
 
