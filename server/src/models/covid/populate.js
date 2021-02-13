@@ -166,6 +166,17 @@ export default async function ({ models }) {
             ),
           }))
           .value(),
+        covid_funding: _.chain(covid_funding_rows)
+          .groupBy("fiscal_year")
+          .map((year_rows, fiscal_year) => ({
+            fiscal_year,
+            funding: _.reduce(
+              year_rows,
+              (memo, { funding }) => memo + funding,
+              0
+            ),
+          }))
+          .value(),
       },
     ])
     .value();

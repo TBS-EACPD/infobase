@@ -30,6 +30,7 @@ const schema = `
 
   extend type Gov{
     covid_summary: CovidSummary
+    covid_funding: [CovidFunding]
   }
 
   extend type Org{
@@ -129,6 +130,11 @@ export default function ({ models, loaders }) {
     Gov: {
       covid_summary: () =>
         covid_summary_by_org_id_loader.load("gov").then(_.first),
+      covid_funding: () =>
+        covid_summary_by_org_id_loader
+          .load("gov")
+          .then(_.first)
+          .then(({ covid_funding }) => covid_funding),
     },
     Org: {
       has_covid_data: ({ org_id }) => has_covid_data_resolver(org_id),
