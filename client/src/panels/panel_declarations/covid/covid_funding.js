@@ -50,10 +50,7 @@ const last_refreshed_date = { en: "December 31, 2020", fr: "31 décembre 2020" }
 
 const panel_key = "covid_funding_panel";
 
-const SummaryTab = ({
-  args: panel_args,
-  data: { covid_expenditures, covid_funding },
-}) => {
+const SummaryTab = ({ args: panel_args }) => {
   const { covid_funding_in_year, covid_expenditures_in_year } = panel_args;
 
   const pie_data = [
@@ -283,7 +280,8 @@ class CovidFundingPanel extends React.Component {
           data: {
             root: {
               gov: {
-                covid_summary: { covid_expenditures, covid_funding },
+                covid_summary: { covid_expenditures },
+                covid_funding,
               },
             },
           },
